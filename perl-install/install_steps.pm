@@ -30,7 +30,6 @@ sub new($$) {
 sub chooseLanguage($) {
     $o->{default}->{lang}
 }
-
 sub selectInstallOrUpgrade($) {
     $o->{default}->{isUpgrade} || 0;
 }
@@ -59,7 +58,8 @@ sub choosePackages($$$) {
 }
 
 sub beforeInstallPackages($) {
-    $o->{method}->prepareMedia($o->{fstab});
+
+    $o->{method}->prepareMedia($o->{prefix}, $o->{fstab}) unless $::testing;
 
     foreach (qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm)) {
 	mkdir "$o->{prefix}/$_", 0755;
@@ -70,12 +70,13 @@ sub beforeInstallPackages($) {
 	open F, "> $o->{prefix}/etc/hosts" or die "Failed to create etc/hosts: $!";
 	print F "127.0.0.1		localhost localhost.localdomain\n";
     }
+
+    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
     my $toInstall = [ grep { $_->{selected} } values %$packages ];
-    pkgs::init_db($o->{prefix}, $o->{isUpgrade});
     pkgs::install($o->{prefix}, $o->{method}, $toInstall, $o->{isUpgrade}, 0);
 }
 
@@ -83,7 +84,7 @@ sub afterInstallPackages($) {
     my ($o) = @_;
 
     unless ($o->{isUpgrade}) {
-        keyboard::write($o->{prefix}, $o->{keymap});
+        keyboard::write($o->{prefix}, $o->{keyboard});
         lang::write($o->{prefix});
     }
     #  why not? 
@@ -122,8 +123,26 @@ sub finishNetworking($) {
 sub timeConfig {}
 sub servicesConfig {}
 
+sub setRootPassword($) {
+    my ($o) = @_;
+    my $p = $o->{prefix};
+    my $pw = $o->{default}->{rootPassword};
+    $pw = crypt_($pw);
+
+    my $f = "$p/etc/passwd";
+    my @lines = cat_($f, "failed to open file $f");
+
+    local *F;
+    open F, "> $f" or die "failed to write file $f: $!\n";
+    foreach (@lines) {
+	s/^root:.*?:/root:$pw:/;
+	print F $_;
+    }
+}
+
 sub addUser($) {
     my ($o) = @_;
+    my %u = %{$o->{default}->{user}};
     my $p = $o->{prefix};
 
     my $new_uid;
@@ -136,49 +155,30 @@ sub addUser($) {
     #for ($new_gid = 500; member($new_gid, @gids); $new_gid++) {}
     for ($new_gid = 500; getgrgid($new_gid); $new_gid++) {}
 
-    my $homedir = "$p/home/$o->{user}->{name}";
+    my $homedir = "$p/home/$u{name}";
 
-    my $pw = crypt_($o->{user}->{password});
+    my $pw = crypt_($u{password});
 
-    $::testing and return;
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
-    print F "$o->{user}->{name}:$pw:$new_uid:$new_gid:$o->{user}->{realname}:/home/$o->{user}->{name}:$o->{user}->{shell}\n";
+    print F "$u{name}:$pw:$new_uid:$new_gid:$u{realname}:/home/$u{name}:$u{shell}\n";
 	    
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
-    print F "$o->{user}->{name}::$new_gid:\n";
+    print F "$u{name}::$new_gid:\n";
 
     eval { commands::cp("-f", "$p/etc/skel", $homedir) }; $@ and log::l("copying of skel failed: $@"), mkdir($homedir, 0750);
     commands::chown_("-r", "$new_uid.$new_gid", $homedir);
 }
 
 sub createBootdisk($) {
-    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{mkbootdisk} || $o->{default}->{mkbootdisk};
+    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->{default}->{mkbootdisk};
 }
 
 sub setupBootloader($) {
     my ($o) = @_;
     my $versionString = versionString();
-    log::l("installed kernel version $versionString");    
-    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader} || $o->{default}->{bootloader});
+    lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{default}->{bootloader});
 }
-
-sub setRootPassword($) {
-    my ($o) = @_;
-    my $p = $o->{prefix};
-    my $pw = $o->{rootPassword};
-    $pw = crypt_($pw);
-
-    my @lines = cat_("$p/etc/passwd", 'die');
-    $::testing and return;
-    local *F;
-    open F, "> $p/etc/passwd" or die "can't write in passwd: $!\n";
-    foreach (@lines) {
-	s/^root:.*?:/root:$pw:/;
-	print F $_;
-    }
-}
-
 
 sub setupXfree {
     my ($o) = @_;

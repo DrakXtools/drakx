@@ -210,7 +210,7 @@ sub load($;$$) {
     load_raw($name, $type, $minor);
 }
 
-sub unload($) { run_program::run("/bin/rmmod", $_[0]); }
+sub unload($) { run_program::run("rmmod", $_[0]); }
 
 sub load_raw($$$@) {
     my ($name, $type, $minor, @options) = @_;

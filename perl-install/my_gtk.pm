@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(ask_warn ask_yesorno ask_from_entry ask_from_list create_yesorno createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkshow gtkdestroy) ],
+    all => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_adjustment gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkshow gtkdestroy) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -26,12 +26,16 @@ sub new {
     $o->{window} = $o->_create_window($title);
     $o;
 }
-sub main($) {
-    my $o = shift;
-    $o->{window}->show;
-    Gtk->main;
+sub main($;$) {
+    my ($o, $f) = @_;
+    $o->show;
+    do { Gtk->main } while ($o->{retval} && $f && !&$f());
     $o->destroy;
     $o->{retval}
+}
+sub show($) {
+    my ($o) = @_;
+    $o->{window}->show;
 }
 sub destroy($) { 
     my ($o) = @_;
@@ -114,12 +118,12 @@ sub gtkadd($@) {
 # these functions return a widget
 ################################################################################
 
-sub create_yesorno($) {
-    my ($w) = @_;
+sub create_okcancel($;$$) {
+    my ($w, $ok, $cancel) = @_;
 
     gtkadd(create_hbox(),
-	  gtksignal_connect($w->{ok} = new Gtk::Button("Ok"), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
-	  gtksignal_connect(new Gtk::Button("Cancel"), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit }),
+	  gtksignal_connect($w->{ok} = new Gtk::Button($ok || "Ok"), "clicked" => sub { $w->{retval} = 1; Gtk->main_quit }),
+	  gtksignal_connect(new Gtk::Button($cancel || "Cancel"), "clicked" => sub { $w->{retval} = 0; Gtk->main_quit }),
 	 );
 }
 
@@ -210,7 +214,8 @@ sub _create_window($$) {
 ################################################################################
 
 sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w); }
-sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_yesorno(@_, "Is it ok?"); main($w); }
+sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, "Yes", "No"); main($w); }
+sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, "Is it ok?", "Ok", "Cancel"); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
 sub ask_from_list  { my $w = my_gtk->new(shift @_); $w->_ask_from_list(pop @_, @_); main($w); }
 
@@ -254,12 +259,13 @@ sub _ask_warn($@) {
     $w->grab_focus();
 }
 
-sub _ask_yesorno($@) {
+sub _ask_okcancel($@) {
     my ($o, @msgs) = @_;
+    my ($ok, $cancel) = splice @msgs, -2;
 
     gtkadd($o->{window},
 	   gtkpack(create_box_with_title($o, @msgs),
-		   create_yesorno($o),
+		   create_okcancel($o, $ok, $cancel),
 		 )
 	 );
     $o->{ok}->grab_focus();

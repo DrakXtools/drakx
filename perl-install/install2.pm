@@ -14,7 +14,7 @@ use net;
 use keyboard;
 use fs;
 use fsedit;
-use install_steps;
+use install_steps_graphical;
 use install_methods;
 use modules;
 use partition_table qw(:types);
@@ -154,7 +154,7 @@ sub partitionDisks {
 	    fs::format_part($_) if $_->{mntpoint} && isExt2($_) || isSwap($_);
 	}
     }
-    fs::mount_all($o->{fstab}, $o->{prefix});
+    fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
 }
 
 sub findInstallFiles {
@@ -165,8 +165,6 @@ sub findInstallFiles {
 sub choosePackages { $o->choosePackages($o->{packages}, $o->{comps}); }
 
 sub doInstallStep {
-    $testing and return 0;
-
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;
@@ -209,9 +207,10 @@ sub main {
     spawnSync();
     eval { spawnShell() };
 
-    $o->{prefix} = "/mnt";
+    $o->{prefix} = $testing ? "/tmp/test-perl-install" : "/mnt";
+    mkdir $o->{prefix}, 0755;
     $o->{method} = install_methods->new('cdrom');
-    $o = install_steps->new($o);
+    $o = install_steps_graphical->new($o);
 
     $o->{lang} = $o->chooseLanguage;
 
@@ -229,7 +228,7 @@ sub main {
     modules::read_conf("/tmp/conf.modules");
 
     #  make sure we don't pick up any gunk from the outside world 
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/mnt/sbin:/mnt/bin:/mnt/usr/sbin:/mnt/usr/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
     $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};

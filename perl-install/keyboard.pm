@@ -5,6 +5,7 @@ use strict;
 use vars qw($KMAP_MAGIC %defaultKeyboards %loadKeymap);
 
 use common qw(:system :file);
+use run_program;
 use log;
 
 
@@ -93,15 +94,7 @@ sub write($$) {
     open F, ">$prefix/etc/sysconfig/keyboard" or die "failed to create keyboard configuration: $!";
     print F "KEYTABLE=$keymap\n" or die "failed to write keyboard configuration: $!";
 
-    # write default keymap 
-    if (fork) {
-	wait;
-	$? == 0 or die "dumpkeys failed";
-    } else  {
-	chroot $prefix;
-	CORE::system("/usr/bin/dumpkeys > /etc/sysconfig/console/default.kmap 2>/dev/null");
-	exit($?);
-    }
+    run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or die "dumpkeys failed";
 }
 
 sub read($) {

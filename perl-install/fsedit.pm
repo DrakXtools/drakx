@@ -155,27 +155,28 @@ sub removeFromList($$$) {
 sub allocatePartitions($$) {
     my ($hds, $to_add) = @_;
     my %free_sectors = map { $_->{device} => [1, $_->{totalsectors} ] } @$hds; # first sector is always occupied by the MBR
-    my $remove = sub { removeFromList($_->{start}, $_->{start} + $_->{size}, $free_sectors{$_->{rootDevice}}) };
+    my $remove = sub { removeFromList($_[0]->{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors{$_[0]->{rootDevice}}) };
     my $success = 0;
 
-    foreach (get_fstab(@$hds)) { &$remove(); }
+    foreach (get_fstab(@$hds)) { &$remove($_); }
 
     FSTAB: foreach (@$to_add) {
+	my %e = %$_;
 	foreach my $hd (@$hds) {
 	    my $v = $free_sectors{$hd->{device}};
 	    for (my $i = 0; $i < @$v; $i += 2) {
 		my $size = $v->[$i + 1] - $v->[$i];
-		$_->{size} > $size and next;
-		$_->{start} = $v->[$i];
-		$_->{rootDevice} = $hd->{device};
-		partition_table::adjustStartAndEnd($hd, $_);
-		&$remove();
-		partition_table::add($hd, $_);
+		$e{size} > $size and next;
+		$e{start} = $v->[$i];
+		$e{rootDevice} = $hd->{device};
+		partition_table::adjustStartAndEnd($hd, \%e);
+		&$remove(\%e);
+		partition_table::add($hd, \%e);
 		$success++;
 		next FSTAB;
 	    }
 	}
-	log::ld("can't allocate partition $_->{mntpoint} of size $_->{size}, not enough room");
+	log::ld("can't allocate partition $e{mntpoint} of size $e{size}, not enough room");
     }
     $success;
 }
