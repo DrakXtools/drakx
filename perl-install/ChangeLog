@@ -1,3 +1,54 @@
+2001/03/07  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: not use common anymore, uses gtkpng, cosmetic chages
+
+2001/03/07  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm, bootloader.pm: fixed support for other kernel for
+	bootloader entries.
+	automatically add 2.2 entries for kernel22 (manage hack-kernel too).
+
+	* Xconfigurator.pm: remove 32 bit depth for S3 Trio3D card.
+
+	* pkgs.pm: added support for killing all child process of a transaction,
+	necessary to be
+	able to umount cdrom and eject it correctly.
+
+2001/03/07  Pixel  <pixel@mandrakesoft.com>
+
+	* share/fonts.tar.bz2: use gb16fs instead of gb16st
+
+	* modules.pm (add_alias): remove the alias block-major-11 as it's
+	overriding the
+	default alias to sr_mod, and is uneeded with scsi_hostadapter being
+	added
+	to /etc/modules.conf
+
+	* share/rpmsrate: lower heartbeat
+	lower Mesa's rate
+
+	* install2.pm (main): save $@ in $err so that it's not modified before
+	being used
+
+	* share/locales.tar.bz2: remove ending '/' in symlinks not pleasing
+	packdrake
+
+	* standalone/drakboot: make it please perl2fcalls
+
+2001/03/07  sbenedict
+
+	* bootloader.pm, Xconfigurator.pm: * perl-install/Xconfigurator.pm - force
+	XF4 for PPC in recommended mode
+	* perl-install/bootloader.pm - rework get_of_dev to work in live install
+
+	* install_steps_interactive.pm, any.pm, partition_table_mac.pm: *
+	perl-install/any.pm - change in partition_table_mac'xxx syntax
+	* perl-install/install_steps_interactive.pm - change in
+	partition_table_mac'xxx syntax
+	
+	* perl-install/partition_table_mac.pm - change in
+	partition_table_mac'xxx syntax
+
 2001/03/07  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/fr.po: Fixed French typos reported by tester
