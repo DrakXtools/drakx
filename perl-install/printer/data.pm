@@ -5,8 +5,14 @@ use common;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv);
+@EXPORT = qw(%spoolers %spooler_inv %shortspooler_inv
+	     $kernelversion $usbprintermodule);
 
+
+our $kernelversion = `uname -r 2>/dev/null`;
+$kernelversion =~ s/^(\s*)(\d+\.\d+)(\..*)$/$2/;
+
+our $usbprintermodule = ($kernelversion eq '2.6' ? "usblp" : "printer");
 
 our %spoolers = ('pdq' => {
                           'help' => "/usr/bin/pdq -h -P %s 2>&1 |",

@@ -2242,7 +2242,7 @@ sub configure_hpoj {
 	    if ($bus ne "hpjd") {
 		if (!$libusb) {
 		    # Start ptal-mlcd daemon for locally connected devices
-		    # (kernel mode with "printer" module for USB).
+		    # (kernel mode with "printer"/"usblp" module for USB).
 		    run_program::rooted($::prefix, 
 					"ptal-mlcd", "$bus:probe",
 					"-device", 
@@ -2253,9 +2253,9 @@ sub configure_hpoj {
 		    #  4xxx)
 		    my $usbdev = usbdevice($_->{val});
 		    if (defined($usbdev)) {
-			# Unload kernel module "printer"
+			# Unload kernel module "printer"/"usblp"
 			if (modules::get_probeall("usb-interface")) {
-			    eval(modules::unload("printer"));
+			    eval(modules::unload($usbprintermodule));
 			    $printermoduleunloaded = 1;
 			}
 			# Start ptal-mlcd
@@ -2312,7 +2312,8 @@ sub configure_hpoj {
 		    }
 		    close F;
 		}
-		$printermoduleunloaded && eval(modules::load("printer"));
+		$printermoduleunloaded &&
+		    eval(modules::load($usbprintermodule));
 	    }
 	    last if $device_ok;
 	}
