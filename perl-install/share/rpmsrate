@@ -197,6 +197,7 @@ NETWORKING_FILE_TRANSFER
 
 NETWORKING_FILE_TRANSFER_SERVER
   4 proftpd
+  3 proftpd-anonymous
   2 wu-ftpd anonftp
 
 NETWORKING_LDAP_SERVER
@@ -597,6 +598,8 @@ SYSTEM
   5 at MAKEDEV eject ldetect devfsd harddrake
     locales iputils urpmi cpio msec tmpwatch gnupg
 
+  5 lshw OpenIPMI dmidecode
+
   5 HIGH_SECURITY libsafe kernel-secure-2.4.22.6mdk kernel-secure-2.4.22.7mdk kernel-secure lads
   5 BIGMEM kernel-enterprise-2.4.22.6mdk kernel-enterprise-2.4.22.7mdk kernel-enterprise
   5 SMP kernel-smp-2.4.22.6mdk kernel-smp-2.4.22.7mdk kernel-smp
@@ -653,15 +656,9 @@ INSTALL
   5 pptp-adsl dhcpcd dhcpxd dhcp-client isdn4net isdn-light isdn4k-utils ibod rp-pppoe pump wireless-tools speedtouch
     ppp nfs-utils-clients libiw26 wireless-tools speedtouch eagle ppp-pppoe ppp-pppoatm
     autologin ntp cups-drivers samba-server ncpfs hpoj ucd-snmp libptal0
-    libhpojip0 libsnmp0 xojpanel libsane-hpoj1 usbutils
     shorewall iptables printer-utils samba-client
-    xpp printer-testpages nmap scli net-tools
-    ipchains 
-    cups gimpprint
-    foomatic-db-engine foomatic-filters foomatic-db
-    nc sndconfig 
-    ImageMagick ghostscript printer-filters mpage a2ps ppdfilt libppd1 gpr groff libgimpprint1 numlock curl
-    sane-backends sane-frontends xsane xsane-gimp mtools mtoolsfm
+    ipchains nc sndconfig curl
+    mtools mtoolsfm numlock usbutils
     hotplug ypbind speedtouch_mgmt
     tmdns zcip acpi acpid
   4 XFree86-SVGA XFree86-server XFree86-Mach64 XFree86-FBDev
@@ -669,3 +666,11 @@ INSTALL
   3 XFree86-S3 XFree86-S3V XFree86-VGA16
   2 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
   1 XFree86-3DLabs
+
+PRINTER
+  5 xpp printer-testpages nmap scli net-tools cups gimpprint foomatic-db-engine 
+    foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
+    a2ps ppdfilt libppd gpr groff libgimpprint
+    sane-backends sane-frontends xsane xsane-gimp 
+    libhpojip libsnmp xojpanel libsane-hpoj
+   
