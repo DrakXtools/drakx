@@ -234,6 +234,7 @@ ifdown eth0
   step_3:
 
     network::configureNetwork2($in, $prefix, $netc, $intf);
+    my $network_configured = 1;
 
     if ($netconnect::need_restart_network && $::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
 							  _("The network needs to be restarted"), 1))) {
@@ -258,7 +259,7 @@ environnement to avoid hostname changing problem."));
 
   step_5:
 
-    network::configureNetwork2($in, $prefix, $netc, $intf);
+    $network_configured or network::configureNetwork2($in, $prefix, $netc, $intf);
 
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
 	output "$prefix$connect_prog",
