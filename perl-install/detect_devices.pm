@@ -59,8 +59,7 @@ sub cdroms__faking_ide_scsi {
 }
 sub zips__faking_ide_scsi {
     my @l = raw_zips();
-    return @l if $::isStandalone;
-    if (my @l_ide = grep { $_->{interface_type} eq 'ide' } @l) {
+    if (my @l_ide = grep { $_->{interface_type} eq 'ide' && $::isInstall } @l) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
@@ -160,18 +159,18 @@ sub getSCSI() {
 	my ($id) = /^Host:.*?Id: (\d+)/ or return &$err();
 	$_ = <F>; my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/ or return &$err();
 	$_ = <F>; my ($type) = /^\s*Type:\s*(.*)/ or &$err();
-	my $device;
+	my $dev = { info => "$vendor $model", id => $id, bus => 0 };
 	if ($type =~ /Direct-Access/) {
-	    $device = "sd" . chr($driveNum++ + ord('a'));
-	    $type = isFloppyOrHD($device);
+	    $dev->{device} = "sd" . chr($driveNum++ + ord('a'));
+	    $dev->{media_type} = isZipDrive($dev) ? 'hd' : isFloppyOrHD($dev->{device});
 	} elsif ($type =~ /Sequential-Access/) {
-	    $device = "st" . $tapeNum++;
-	    $type = 'tape';
+	    $dev->{device} = "st" . $tapeNum++;
+	    $dev->{media_type} = 'tape';
 	} elsif ($type =~ /(CD-ROM|WORM)/) {
-	    $device = "scd" . $cdromNum++;
-	    $type = 'cdrom';
+	    $dev->{device} = "scd" . $cdromNum++;
+	    $dev->{media_type} = 'cdrom';
 	}
-	$device and push @drives, { device => $device, media_type => $type, info => "$vendor $model", id => $id, bus => 0 };
+	push @drives, $dev if $dev->{device};
     }
     get_sys_cdrom_info(@drives);
     @drives;
