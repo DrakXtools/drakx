@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 use common;
 use log;
+use install_any;
 
 #- key: lang name (locale name for some (~5) special cases needing
 #-      extra distinctions)
@@ -489,6 +490,25 @@ sub l2pango_font {
     my $charset = l2charset($lang) or log::l("no charset found for lang $lang!"), return;
     my $font = charset2pango_font($charset);
     log::l("charset: $charset ; font: $font");
+
+    if (common::usingRamdisk()) {
+	if ($charsets{$charset}[0] !~ /lat|koi|UniCyr/) {
+	    install_any::remove_bigseldom_used();
+	    my @generic_fontfiles = qw(/usr/X11R6/lib/X11/fonts/12x13mdk.pcf.gz /usr/X11R6/lib/X11/fonts/18x18mdk.pcf.gz);
+	    #- need to unlink first because the files actually exist (and are void); they must exist
+	    #- because if not, when gtk starts, pango will recompute its cache file and exclude them
+	    unlink($_), install_any::getAndSaveFile($_) foreach @generic_fontfiles;
+	}
+
+	my %pango_modules = (arabic => 'ar|fa|ur', hangul => 'ko', hebrew => 'he|yi', indic => 'hi|bn|ta|te|mr', thai => 'th');
+	foreach my $module (keys %pango_modules) {
+	    next if $lang !~ /$pango_modules{$module}/;
+	    install_any::remove_bigseldom_used();
+	    my ($pango_modules_dir) = glob('/usr/lib/pango/*/modules');
+	    install_any::getAndSaveFile("$pango_modules_dir/pango-$module-xft.so");
+	}
+    }
+    
     return $font;
 }
 

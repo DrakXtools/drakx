@@ -41,7 +41,13 @@ rm -f $STAGE2TMP/usr/X11R6/bin/XF86_{VGA16,3DLabs,TGA,S3}
 rm -f `ls --sort=size $STAGE2TMP/lib/modules.cz-* | perl -ne 'print if $i++'`
 rm -f $STAGE2TMP/usr/bin/{pv*,vg*,lv*} $STAGE2TMP/lib/liblvm*
 rm -f $STAGE2TMP/usr/bin/{resize_reiserfs,fsck.jfs}
-rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{12x13mdk,18x18mdk}.pcf*
+#- we can't simply remove those files, because when pango will start,
+#- if it doesn't see them it will recompute the fonts.cache-1 :/
+>$STAGE2TMP/usr/X11R6/lib/X11/fonts/12x13mdk.pcf.gz
+>$STAGE2TMP/usr/X11R6/lib/X11/fonts/18x18mdk.pcf.gz
+touch $STAGE2TMP/usr/X11R6/lib/X11/fonts/fonts.cache-1
+rm -f $STAGE2TMP/usr/*/pango/*/modules/pango-{arabic,hangul,hebrew,indic,thai}-xft.so
+
 rm -rf $STAGE2TMP{/usr/bin/brltty,/etc/brltty,/lib/brltty}
 rm -rf $STAGE2TMP/usr/share/locale_special
 
