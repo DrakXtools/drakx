@@ -210,7 +210,7 @@ The other solution is to not allow DrakX to modify the partition table.
 (the error is %s)
 
 Do you agree to lose all the partitions?
-  ", $hd->{device}, formatError($err)))) {
+", $hd->{device}, formatError($err)))) {
 		    partition_table::raw::zero_MBR($hd);
 		} else {
 		    #- using it readonly
