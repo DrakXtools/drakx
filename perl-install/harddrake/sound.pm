@@ -180,7 +180,7 @@ sub switch {
 							 val => _("Help"), disabled => sub { },
 							 clicked => sub {  
 								$in->ask_warn(_("Switching between ALSA and OSS help"),
-										    _("OSS (Open Source Sound) was the firt sound API. It's an OS independant sound API (it's availlable on most unices systems) but it's a very basic and limited API.
+										    _("OSS (Open Sound System) was the firt sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
 What's more, OSS drivers all reinvent the wheel.
 
 ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
