@@ -1,3 +1,61 @@
+2002/01/29  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/hd_gtk.pm: look diskdrake.rc in another directory
+
+	* install_steps.pm: move the various bootloader::add_append's in
+	setupBootloaderBefore
+
+2002/01/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: do the few new translations
+
+	* standalone.pm: try to reflect hierarchy for */*.pm
+
+2002/01/28  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/no.po, share/po/fi.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/de.po,
+	share/po/sk.po, crypto.pm, share/po/tr.po, share/po/eu.po,
+	printerdrake.pm, standalone/draknet, share/po/vi.po, share/po/ko.po,
+	share/po/uk.po, share/po/nl.po, share/po/bs.po, share/po/ja.po,
+	standalone/drakbackup, share/po/wa.po, share/po/sv.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/hu.po, share/po/af.po,
+	share/po/id.po: Corrected various English typos
+
+2002/01/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: fix typo
+
+	* partition_table.pm: warn if partitions have been renumbered due to a
+	partition being added or removed
+
+	* diskdrake/interactive.pm: don't warn_if_renumbered during install
+	warn if partitions have been renumbered due to a partition being added
+	or removed
+
+2002/01/28  siegel
+
+	* share/po/de.po: new german version
+
+2002/01/28  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Replaced "sleep" commands by a subroutine which waits
+	exactly until CUPS is ready.
+	CUPS >= 1.1.12 needs to "know" all devices, let CUPS restart if a device
+	is not "known" to it.
+
+	* printer.pm: Removed debug helper line.
+	Replaced "sleep" commands by a subroutine which waits exactly until CUPS
+	is ready.
+	CUPS >= 1.1.12 needs to "know" all devices, let CUPS restart if a device
+	is not "known" to it.
+
+2002/01/28  tvignaud
+
+	* share/po/br.po: update brezhoneg translations
+
+	* share/po/fr.po: more french translations
+
 2002/01/28  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* share/po/zh_CN.po, share/po/no.po, share/po/fi.po, share/po/DrakX.pot,
