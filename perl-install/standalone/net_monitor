@@ -85,6 +85,8 @@ my ($width, $height) = (300, 150);
 
 my $left_border = 50;
 my $grid_interval = 30;
+my $arrow_space = 6;
+my $arrow_size = 5;
 
 my $use_same_scale = 1;
 
@@ -515,7 +517,6 @@ sub draw_monitor {
 	$step++;
     }
 
-    my $switch = 1;
     my $gcl = Gtk2::Gdk::GC->new($darea->{$intf}->window);
     $gcl->set_foreground($darea->{$intf}->style->white);
     $gcl->set_line_attributes(1, 'on-off-dash', 'not-last', 'round');
@@ -529,6 +530,23 @@ sub draw_monitor {
         $pix_maxt = scale_tranmistted(@{$o->{stack_t}}[@{$o->{stack_t}}-1]);
     }
 
+    my $x_l = $arrow_size + 1;
+    my $y_l;
+
+    #- "transmitted" arrow
+    $y_l = max($arrow_space, min($pix_maxt, $pix_maxr - 2*$arrow_size - $arrow_space));
+    $pixmap->draw_line($gct, $x_l, 0, $x_l, $y_l);
+    $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $y_l);
+    $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $y_l);
+    $pixmap->draw_polygon($gct, 1, $x_l-$arrow_size, $y_l, $x_l+$arrow_size, $y_l, $x_l, $y_l+$arrow_size);
+
+    #- "received" arrow
+    $y_l = min($height - $arrow_space, max($pix_maxr, $y_l + 2*$arrow_size + $arrow_space));
+    $pixmap->draw_line($gcr, $x_l, $height, $x_l, $y_l);
+    $pixmap->draw_line($gcr, $x_l-1, $height, $x_l-1, $y_l);
+    $pixmap->draw_line($gcr, $x_l+1, $height, $x_l+1, $y_l);
+    $pixmap->draw_polygon($gcr, 1, $x_l-$arrow_size, $y_l, $x_l+$arrow_size, $y_l, $x_l, $y_l-$arrow_size);
+
     for (my $i = $grid_interval; $i <= $height - $grid_interval; $i += $grid_interval) {
 	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
@@ -539,25 +557,6 @@ sub draw_monitor {
 	    $text = formatXiB($i/$echt);
 	    $gc2 = $gct;
         }
-
-	if ($i > $pix_maxt && $switch) {
-            my $x_l = 5;
-            my $y_l;
-
-            $y_l = $i-$grid_interval/2;
-            $pixmap->draw_line($gct, $x_l, 0, $x_l, $y_l);
-            $pixmap->draw_line($gct, $x_l-1, 0, $x_l-1, $y_l);
-            $pixmap->draw_line($gct, $x_l+1, 0, $x_l+1, $y_l);
-            $pixmap->draw_polygon($gct, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l+5);
-
-            $y_l = $i+$grid_interval/2;
-            $pixmap->draw_line($gcr, $x_l, $height, $x_l, $y_l);
-            $pixmap->draw_line($gcr, $x_l-1, $height, $x_l-1, $y_l);
-            $pixmap->draw_line($gcr, $x_l+1, $height, $x_l+1, $y_l);
-            $pixmap->draw_polygon($gcr, 1, $x_l-5, $y_l, $x_l+5, $y_l, $x_l, $y_l-5);
-
-            undef $switch;
-	}
         $pixmap->draw_layout($gc2, 45-string_width($darea->{$intf}, $text), $i-5, $darea->{$intf}->create_pango_layout($text));
     }
     $darea->{$intf}->queue_draw;
