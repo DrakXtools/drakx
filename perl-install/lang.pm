@@ -266,18 +266,37 @@ sub write {
 	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_INSTALL_LANG => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
-	if ($c && $c->[0] && $c->[1]) {	    
-	    add2hash $h, { SYSFONT => $c->[0], UNIMAP => $c->[1], SYSFONTACM => $c->[2] };
-
+	if ($c) {
 	    my $p = "$prefix/usr/lib/kbd";
-	    eval {
-		commands::cp("-f",
-		     "$p/consolefonts/$c->[0].psf.gz",
-		     glob_("$p/consoletrans/$c->[1]*"),
-		     glob_("$p/consoletrans/$c->[2]*"),
-		     "$prefix/etc/sysconfig/console");
-	    };
-	    $@ and log::l("missing console $c->[0], $c->[1], $c->[2]");
+	    add2hash $h, { CHARSET => $c };
+	    if ($c->[0]) {
+		add2hash $h, { SYSFONT => $c->[0] };
+		eval {
+		    commands::cp("-f",
+			"$p/consolefonts/$c->[0].psf.gz",
+			"$prefix/etc/sysconfig/console");
+		};
+		$@ and log::l("missing console font $c->[0]");
+	    }
+	    if ($c->[1]) {
+		add2hash $h, { UNIMAP => $c->[1] };
+		eval {
+		    commands::cp("-f",
+			glob_("$p/consoletrans/$c->[1]*"),
+			"$prefix/etc/sysconfig/console");
+		};
+		$@ and log::l("missing console unimap file $c->[1]");
+	    }
+	    if ($c->[2]) {
+		add2hash $h, { SYSFONTACM => $c->[2] };
+		eval {
+		    commands::cp("-f",
+			glob_("$p/consoletrans/$c->[2]*"),
+			"$prefix/etc/sysconfig/console");
+		};
+		$@ and log::l("missing console acm file $c->[2]");
+	    }
+
 	}
 	add2hash $h, $xim{$lang};
     }

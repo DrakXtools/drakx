@@ -1,3 +1,11 @@
+2000-06-21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: changed the way console font data is written; not all
+	of the [0], [1], [2] values must defined, so three cases must be used.
+	Also added a variable $CHARSET for /etc/sysconfig/i18n; it can then
+	be used by console-tools to load the proper compose table
+
+
 2000-06-20  François Pons  <fpons@mandrakesoft.com>
 
 	* c/sbus.c: added some functions for silo.c integration.
