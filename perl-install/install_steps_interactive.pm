@@ -1332,7 +1332,7 @@ For information on fixes which are available for this release of Mandrake Linux,
 consult the Errata available from:
 
 
-http://www.linux-mandrake.com/en/82errata.php3
+http://www.linux-mandrake.com/en/90errata.php3
 
 
 Information on configuring your system is available in the post
