@@ -96,8 +96,8 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                         ),
                                             ),
                                 0, gtkadd(gtkset_layout(Gtk2::HButtonBox->new, 'end'),
-                                          gtksignal_connect(Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { ugtk2->exit(0) }),
-                                          $button_reset = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-revert-to-saved'), clicked => sub {
+                                          gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit(0) }),
+                                          $button_reset = gtksignal_connect(Gtk2::Button->new(N("Reset")), clicked => sub {
                                               $its_reset = 1;
                                               $timer = Glib::Timeout->add(120, \&update_time);
                                               Repaint($drawing_area, 1);
@@ -106,7 +106,7 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                               $button_reset->set_sensitive(0);
                                               $its_reset = 0;
                                           }),
-                                          gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'), 
+                                          gtksignal_connect(Gtk2::Button->new(N("Ok")), 
                                                                        clicked => sub {
 									   if ($check_ntp->get_active) {
 									       my $choosed_serv = $combo_ntpserver->entry->get_text();
