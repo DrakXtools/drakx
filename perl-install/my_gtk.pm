@@ -255,7 +255,6 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    
     my $nb_lines = map { split "\n" } @_;
     $o->{box} = new Gtk::VBox(0,0);
     if (@_ <= 2 && $nb_lines > 4) {
@@ -265,14 +264,14 @@ sub create_box_with_title($@) {
 	$scroll->set_usize(400, min(250, $nb_lines * ($font->ascent + $font->descent) + 7));
 	gtkpack__($o->{box}, $scroll);
     } else {
-	gtkpack($o->{box},
-	       (map {
-		   my $w = ref $_ ? $_ : new Gtk::Label($_);
-		   $w->set_name("Title");
-		   $w;
-	       } map { ref $_ ? $_ : warp_text($_) } @_),
-	       new Gtk::HSeparator,
-	      );
+	gtkpack__($o->{box},
+		  (map {
+		      my $w = ref $_ ? $_ : new Gtk::Label($_);
+		      $w->set_name("Title");
+		      $w;
+		  } map { ref $_ ? $_ : warp_text($_) } @_),
+		  new Gtk::HSeparator,
+		 );
     }
 }
 
