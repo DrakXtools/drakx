@@ -152,6 +152,8 @@ sub setupBootloader {
     #- somewhere should bootloader really installed ?
     $::isStandalone and my $_w = $in->wait_message(N("Please wait"), N("Bootloader installation in progress"));
 
+    eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
+
     bootloader::install($b, $fstab, $hds);
 }
 
