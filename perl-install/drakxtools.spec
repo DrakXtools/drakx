@@ -241,7 +241,10 @@ done
 	* don't restart harddrake on install
 	* skip hw classes without configurator (which'll have a
 	  configurator after porting updfstab)
-
+  o service :
+	* only do the job at startup
+	* add "please wait" message
+	* really don't cry when no previous config
 
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
