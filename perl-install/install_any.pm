@@ -344,15 +344,19 @@ sub setDefaultPackages {
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
     unless ($clean) {
-	if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
+	if ($::auto_install && ($o->{compssUsersChoice} || {})->{ALL}) {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
 	}
 	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
 	    #- by default, choose:
-	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-	    $o->{lang} eq 'eu_ES' and $o->{compssUsersChoice}{KDE} = 0;
-	    $o->{compssUsersChoice}{$_} = 1 
-	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+	    if ($o->{meta_class} eq 'server') {
+		$o->{compssUsersChoice}{$_} = 1 foreach 'X', 'MONITORING', 'NETWORKING_REMOTE_ACCESS_SERVER';
+	    } else {
+		$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+		$o->{lang} eq 'eu_ES' and $o->{compssUsersChoice}{KDE} = 0;
+		$o->{compssUsersChoice}{$_} = 1
+		  foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+	    }
 	}
     }
     $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
