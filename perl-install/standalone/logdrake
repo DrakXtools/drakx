@@ -211,7 +211,7 @@ gtkadd($window,
 		!$::isExplain ? (1, gtkadd(new Gtk::Frame(_("Content of the file")),
 					 createScrolledWindow($log_text)
 					)) : (1, $log_text),
-		if_(!$::isExplain, 0, gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
+		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
 			   if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => \&alert_config)),
 			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
 			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
@@ -226,7 +226,7 @@ $window->realize;
 $window->show_all();
 search() if ($::isFile);
 #Gtk->main_iteration while Gtk->events_pending;
-#$::isEmbedded and kill 'USR2', $::CCPID;
+$::isEmbedded and kill 'USR2', $::CCPID;
 Gtk->main;
 
 sub quit {
@@ -516,6 +516,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.12  2002/02/20 10:50:37  damien
+# cosmetic change, mcc compliance
+#
 # Revision 1.11  2002/02/05 11:26:29  damien
 # wizard updated
 #
