@@ -927,7 +927,6 @@ sub new {
 		$draw1->modify_font(Gtk2::Pango::FontDescription->from_string(N("utopia 25")));
 		$draw1->signal_connect(realize => sub { set_back_pixbuf($draw1, $pixbuf_up) });
 		$draw1->signal_connect(expose_event => sub {
-					   my $height = $pixbuf_up->get_height;
                             my $layout = $draw1->create_pango_layout($::Wizard_title);
                             $draw1->window->draw_layout($draw1->style->white_gc, 40, 62, $layout);
 				       });
