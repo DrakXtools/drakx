@@ -35,12 +35,12 @@ sub set_config_file {
 	} else {
 	    $_ = '' if /^[^#]/;
 	}
-    } "/etc/shorewall/$file";
+    } "$::prefix/etc/shorewall/$file";
 }
 
 sub get_config_file {
     my ($file) = @_;
-    map { [ split ' ' ] } grep { !/^#/ } cat_("/etc/shorewall/$file");
+    map { [ split ' ' ] } grep { !/^#/ } cat_("$::prefix/etc/shorewall/$file");
 }
 
 sub default_interfaces {
