@@ -38,8 +38,14 @@ sub new {
 	    $password = '-drakx@';
 	}
 
-	my $ftp = Net::FTP->new(network::resolv($host), %options) or die '';
-	$ftp->login($login, $password) or die '';
+	my $ftp;
+	while (1) {
+	    $ftp = Net::FTP->new(network::resolv($host), %options) or die;
+	    $ftp && $ftp->login($login, $password) and last;
+
+	    log::l("login failed, sleeping before trying again");
+	    sleep 10;
+	}
 	$ftp->binary;
 	$ftp->cwd($prefix);
 
