@@ -33,6 +33,11 @@ $asked_medium = $boot_medium;
 
 our $global_ftp_prefix;
 
+sub drakx_version() { 
+    $::move ? sprintf "DrakX-move v%s", cat_('/usr/bin/stage2/move.pm') =~ /move\.pm,v (\S+ \S+ \S+)/
+	    : sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat__(getFile("install/stage2/VERSION"))))[2,3];
+}
+
 #-######################################################################################
 #- Media change variables&functions
 #-######################################################################################
@@ -297,7 +302,7 @@ sub spawnShell() {
     open STDERR, ">&F" or goto cant_spawn;
     close F;
 
-    print any::drakx_version(), "\n";
+    print drakx_version(), "\n";
 
     c::setsid();
 
