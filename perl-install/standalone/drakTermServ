@@ -1,0 +1,1288 @@
+#!/usr/bin/perl 
+#
+# Copyright (C) 2001 by MandrakeSoft (sbenedict@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+# first pass at an interactive tool to help setup/maintain the Mandrake 
+# Terminal Server implementation
+#
+#	Requires: etherboot, mkinitrd-net, terminal-server, dhcpd-server
+#			clusternfs, tftpserver
+#
+#	Tasks:
+#		1) creation/management of boot images (kernel+initrd, etherboot enabled)
+#			mkinitrd-net is the command line interface for this
+#		2) create/modify /etc/dhcpd.conf for diskless clients
+#		3) create/modify /etc/exports for clusternfs export of "/"
+#		4) add/remove entries in /etc/shadow$$CLIENTS$$ to allow user access
+#		5) per client XF86Config-4, using /etc/XF86Config-4$$IP-ADDRESS$$
+#		6) other per client customizations (modules.conf, keyboard, mouse)
+#		7) enable/modify /etc/xinetd.d/tftp for etherboot
+#		8) create etherboot floppies for client machines
+#
+#	Thanks to the fine work of the folks involved in ltsp.org, and 
+#	Michael Brown <mbrown@fensystems.co.uk>
+#
+
+use Gtk;
+use lib qw(/usr/lib/libDrakX );
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
+use interactive;
+use my_gtk qw(:helpers :wrappers);
+use common;
+use run_program;
+
+#use strict;
+use Config;
+use POSIX;
+
+#turn off su for now - just testing - need to run as root or sudo
+my $in = 'interactive'->vnew('su');
+
+my @buff;	#- used o display status info
+
+my $central_widget;
+my $window1;
+my $windows;
+my $status_box;
+my $main_box;
+
+my $nfs_subnet;
+my $nfs_mask;
+
+my $in = 'interactive'->vnew;
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+
+if ("@ARGV" =~ /--help|-h/) {
+    print q(Mandrake Terminal Server Configurator
+--enable         : enable MTS
+--disable        : disable MTS
+--start          : start MTS
+--stop           : stop MTS
+--adduser        : add an existing system user to MTS (requires username)
+--deluser        : delete an existing system user from MTS (requires username)
+--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)
+--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)
+);
+    exit(0);
+}
+
+if ("@ARGV" =~ /--enable/) {
+	my $cmd_line = 1;
+	enable_ts($cmd_line);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--disable/) {
+	my $cmd_line = 1;
+	disable_ts($cmd_line);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--start/) {
+	my $cmd_line = 1;
+	start_ts($cmd_line);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--stop/) {
+	my $cmd_line = 1;
+	stop_ts($cmd_line);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--adduser/) {
+	die "$0 $ARGV[0] requires a username...\n" if $#ARGV<1;
+	my $cmd_line = 1;
+	adduser($cmd_line, $ARGV[1]);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--deluser/) {
+	die "$0 $ARGV[0] requires a username...\n" if $#ARGV<1;
+	my $cmd_line = 1;
+	deluser($cmd_line, $ARGV[1]);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--addclient/) {
+	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image...\n" if $#ARGV<4;
+	my $cmd_line = 1;
+	addclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4]);
+	exit(0);	
+}
+
+if ("@ARGV" =~ /--delclient/) {
+	die "$0 $ARGV[0] requires hostname...\n" if $#ARGV<1;
+	my $cmd_line = 1;
+	delclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3]);
+	exit(0);	
+}
+	
+interactive_mode() if $#ARGV<1;
+
+sub cursor_wait {
+	# turn the cursor to a watch
+	$window1->window->set_cursor( new Gtk::Gdk::Cursor( 150 ) );	
+	Gtk->main_iteration while Gtk->events_pending;
+}
+
+sub cursor_norm {
+	# restore normal cursor
+	$window1->window->set_cursor( new Gtk::Gdk::Cursor( 68 ) );
+	Gtk->main_iteration while Gtk->events_pending;
+}
+
+sub display_error {
+    my ($message) = @_;
+    my $label;
+    my $error_box;
+    ${$central_widget}->destroy();
+    gtkpack($status_box,
+	    $error_box = gtkpack_(new Gtk::VBox(0,0),
+		  1, new Gtk::Label($message),
+				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							      sub { ${$central_widget}->destroy(); create_fontsel() }),
+					    ),
+				  )
+	    );
+    $central_widget = \$error_box;
+}
+
+sub interactive_mode {
+    my $font_sel;
+#    $interactive = 1;
+    init Gtk;
+    $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
+    $window1->set_position(1);
+    $window1->set_title(_("Mandrake Terminal Server Configuration"));
+    $window1->set_border_width(5);
+    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("ic82-network-40");    
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakTS.620x57");
+
+    gtkadd($window1,
+	   gtkpack_(new Gtk::VBox(0,2),
+		    if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
+		    1, gtkpack_(new Gtk::HBox(0,2),
+			     1, gtkpack_(new Gtk::VBox(0,2),
+					1, gtkpack ($status_box = new Gtk::VBox(0,5),
+						$main_box = new Gtk::VBox(0,10),
+					),
+					1, gtkpack_(new Gtk::HBox(0,2),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							       gtksignal_connect(new Gtk::Button(_("Enable Server")), clicked 	=>
+									 sub { ${$central_widget}->destroy(); 
+									 	$windows = 1;
+									 	cursor_wait(); 
+									 	enable_ts();
+									 	cursor_norm();
+									 }),
+							       gtksignal_connect(new Gtk::Button(_("Disable Server")), clicked => 
+									 sub { ${$central_widget}->destroy(); 
+									 	cursor_wait();
+									 	disable_ts();
+									 	cursor_norm(); 
+									 }),
+							      ),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							       gtksignal_connect(new Gtk::Button(_("Start Server")), clicked =>
+								sub {  ${$central_widget}->destroy(); 
+									$windows = 0; 
+									cursor_wait();	
+									start_ts();
+									cursor_norm();
+								}),
+							       gtksignal_connect(new Gtk::Button(_("Stop Server")), clicked 	=>
+								 sub { ${$central_widget}->destroy(); 
+								 	cursor_wait();
+								 	stop_ts();
+								 	cursor_norm();
+								 }),
+							      ),
+							 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							       gtksignal_connect(new Gtk::Button(_("Etherboot Floppy/ISO")), clicked 	=>
+									 sub { ${$central_widget}->destroy(); $windows = 1; make_boot();}),
+							       gtksignal_connect(new Gtk::Button(_("Net Boot Images")), clicked => 
+									 sub { ${$central_widget}->destroy(); make_nbi() }),
+							      ),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							       gtksignal_connect(new Gtk::Button(_("Add/Del Users")), clicked =>
+								 sub {  ${$central_widget}->destroy(); $windows = 0; maintain_users();}),
+							       gtksignal_connect(new Gtk::Button(_("Add/Del Clients")), clicked 	=>
+								 sub { ${$central_widget}->destroy(); maintain_clients()}),
+							      ),     
+						     1, new Gtk::HBox(0,2),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
+										 sub { ${$central_widget}->destroy(); help() }),
+							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
+										     $::isEmbedded and kill USR1, $::CCPID;
+										     Gtk->main_quit() }),
+							      ),
+						    ),
+					),
+			     ),
+		    ),
+	   );
+    $central_widget = \$main_box;
+    $window1->show_all;
+    $window1->realize;
+    $window1->show_all();    
+
+    Gtk->main_iteration while Gtk->events_pending;
+    $::isEmbedded and kill USR2, $::CCPID;
+    Gtk->main;
+    Gtk->exit(0);
+}
+
+sub about {
+    my $text = new Gtk::Text(undef, undef);
+    my $about_box;
+    gtkpack($status_box,
+	    $about_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "
+ Copyright (C) 2002 by MandrakeSoft 
+	Stew Benedict sbenedict\@mandrakesoft.com
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2, or (at your option)
+ any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+ Thanks:
+	- LTSP Project http://www.ltsp.org
+	- Michael Brown <mbrown\@fensystems.co.uk>
+
+"),
+			   0, new Gtk::VScrollbar($text->vadj),
+			   ),
+				  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					    gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							      sub { ${$central_widget}->destroy(); create_fontsel() }),
+					    ),
+				  )
+	    );
+    $central_widget = \$about_box;
+    $status_box->show_all();
+}
+
+sub help {
+    my $text = new Gtk::Text(undef, undef);
+    my $help_box;
+    gtkpack($status_box,
+	    $help_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "drakTermServ Overview
+			   
+        - Create Etherboot Enabled Boot Images:
+        		To boot a kernel via etherboot, a special kernel/initrdrd image must be created.
+        		mkinitrd-net does much of this work and drakTermServ is just a graphical interface
+        		to help manage/customize these images.
+
+        - Maintain /etc/dhcpd.conf:
+        		To net boot clients, each client needs a dhcpd.conf entry, assigning an IP address
+        		and net boot images to the machine. drakTermServ helps create/remove these entries.
+
+        		A typical dhcpd.conf stanza to support a diskless client looks like:
+        		
+				host curly {
+					hardware ethernet        00:20:af:2f:f7:9d;
+					fixed-address              192.168.192.3;
+					filename                      \"i386/boot/boot-3c509.2.4.18-6mdk.nbi\";
+				}
+			
+			While you can use a pool of IP addresses, rather than setup a specific entry for
+			a client machine, using a fixed address scheme facilitates using the functionality
+			of client-specific configuration files that ClusterNFS provides.
+			
+			Note: You must stop/start the server after adding or changing clients/
+			
+        - Maintain /etc/exports:
+        		Clusternfs allows export of the root filesystem to diskless clients. drakTermServ
+        		sets up the correct entry to allow anonymous access to the root filesystem from
+        		diskless clients.
+
+        		A typical exports entry for clusternfs is:
+        		
+        		/                  (ro,all_squash)
+        		
+        - Maintain /etc/shadow\$\$CLIENT\$\$:
+        		For users to be able to log into the system from a diskless client, their entry in
+        		/etc/shadow needs to be duplicated in /etc/shadow\$\$CLIENTS\$\$. drakTermServ helps
+        		in this respect by adding or removing system users from this file.
+
+        - Per client /etc/X11XF86Config-4\$\$IP-ADDRESS\$\$:
+        		Through clusternfs, each diskless client can have it's own unique configuration files
+        		on the root filesystem of the server. In the future drakTermServ will help create these
+        		files.
+
+        - Per client system configuration files:
+        		Through clusternfs, each diskless client cand have it's own unique configuration files
+        		on the root filesystem of the server. In the future, drakTermServ can help create files
+        		such as /etc/modules.conf, /etc/sysconfig/mouse, /etc/sysconfig/keyboard on a per-client
+        		basis.
+
+        - /etc/xinetd.d/tftp:
+        		drakTermServ will configure this file to work in conjunction with the images created by
+        		mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up the boot image to each
+        		diskless client.
+
+        		A typical tftp configuration file looks like:
+        		
+        		service tftp
+        		(
+                        disable         = no
+                        socket_type  = dgram
+                        protocol        = udp
+                        wait             = yes
+                        user             = root
+                        server          = /usr/sbin/in.tftpd
+                        server_args  = -s /var/lib/tftpboot
+        		}
+        		
+        		The changes here from the default installation are changing the disable flag to
+        		'no' and changing the directory path to /var/lib/tftpboot, where mkinitrd-net
+        		puts it's images.
+
+        - Create etherboot floppies/CDs:
+        		The diskless client machines need either ROM images on the NIC, or a boot floppy
+        		or CD to initate the boot sequence.  drakTermServ will help generate these images,
+        		based on the NIC in the client machine.
+        		
+        		A basic example of creating a boot floppy for a 3Com 3c509 manually:
+        		
+        		cat /usr/lib/etherboot/boot1a.bin /\
+        			/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0
+ 
+
+"),
+			   0, new Gtk::VScrollbar($text->vadj),
+			   ),
+				 0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					   gtksignal_connect(new Gtk::Button(_("OK")), clicked => 
+							     sub { ${$central_widget}->destroy(); }),
+					   ),
+				 )
+	    );
+    $central_widget = \$help_box;
+    $status_box->show_all();
+}
+
+sub make_boot {
+	#- make a boot image on floppy or iso from etherboot images
+	my $boot_box;
+	my $rom_path = "/usr/lib/etherboot";
+	my @nics = all("/usr/lib/etherboot/lzrom");
+	my $list_nics = new Gtk::List();
+	my $nic;
+	
+	foreach (@nics) {
+		my $t = $_;
+		$list_nics->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+		select => sub { $nic = $t; })));
+	}
+	$list_nics->set_selection_mode('single');
+    
+	gtkpack($status_box,
+		$boot_box = gtkpack_(new Gtk::VBox(0,10),
+			0, gtkadd(new Gtk::HBox(0,10),
+				new Gtk::HBox(0,5),
+				createScrolledWindow($list_nics),
+				gtkadd(new Gtk::VBox(1,10),
+					new Gtk::HBox(0,20),
+					gtksignal_connect(new Gtk::Button(_("Boot Floppy")), clicked => 
+						sub {write_eb_image($nic, $rom_path, "floppy"); }),
+					gtksignal_connect(new Gtk::Button(_("Boot ISO")), clicked => 
+						sub {write_eb_image($nic, $rom_path, "iso"); }),
+					new Gtk::HBox(0,20),
+				),
+				new Gtk::HBox(0,5),
+			),
+		),
+	);
+	
+	$central_widget = \$boot_box;
+	$boot_box->show_all();
+}
+
+sub make_nbi {
+	my $nbi_box;
+	my @kernels = grep(/vmlinuz/, all("/boot"));
+	my $kernel;
+	my $nic;
+	
+	#- just a static list for the moment
+	#- method in mknbi-net is much better
+	my @nics = ("3c509", "3c59x", "3c90x", "8139cp", "8139too", "acenic", "airo",
+		"aironet4500_card","bcm5700", "dgrs", "dl2k", "dmfe", "e100",
+		"e1000", "eepro100", "epic100", "fealnx", "hamachi", "hp100",
+		"hysdn", "natsemi", "natsemi_old", "ne", "ne2k-pci", "ns83820",
+		"pcnet32", "prism2_pci", "prism2_plx", "rcpci", "sis900",
+		"starfire", "sundance", "sungem", "sunhme", "tlan", "tulip-old",
+		"via-rhine", "winbond-840", "xircom_cb", "xircom_tulip_cb", "yellowfin");
+	
+	#- kernel/module info in tree view
+	my $tree_kernels = new Gtk::Tree();
+	
+	foreach (@kernels){
+		my $t = $_;
+		my $t_kernel= new_with_label Gtk::TreeItem($t);
+		gtksignal_connect($t_kernel, select => sub { $kernel = $t;
+								$nic = ''; });
+		$tree_kernels->append($t_kernel);
+		
+		my $k_detail = new Gtk::Tree();
+		$t_kernel->set_subtree($k_detail);
+		
+		foreach (@nics) {
+			my $m = $_;
+			my $k_det_nic = new_with_label Gtk::TreeItem($m);
+			gtksignal_connect($k_det_nic, select => sub { $nic = $m;
+								$kernel = $t; });
+			$k_detail->append($k_det_nic);
+			$k_det_nic->show();
+		}		
+	}	
+
+	# existing nbi images in list
+	my $list_nbis = new Gtk::List();
+	my @nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+	my $nbi;
+	
+	foreach (@nbis) {
+		my $t = $_;
+		$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+				select => sub { $nbi = $t; })));
+	}
+	$list_nbis->set_selection_mode('single');		
+				
+	gtkpack($status_box,
+		$nbi_box = gtkpack_(new Gtk::VBox(1,10),
+			0, gtkadd(new Gtk::HBox(0,10),
+				createScrolledWindow($tree_kernels),
+				gtkadd(new Gtk::VBox(1,10),
+					gtksignal_connect(new Gtk::Button(_("Build Whole Kernel -->")), clicked => 
+						sub { if ($kernel) { 
+								$in->ask_warn('',_("This will take a few minutes."));
+								cursor_wait();
+								system("/usr/bin/mknbi-set -k /boot/$kernel");
+								$list_nbis->clear_items();
+								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+								foreach (@nbis) {
+									my $t = $_;
+									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+									select => sub { $nbi = $t; })));
+								}
+								cursor_norm(); 
+							} else {
+								$in->ask_warn('',_("No kernel selected!")) if !($kernel); 
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("Build Single NIC -->")), clicked => 
+						sub { if ($nic) {
+								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
+								$list_nbis->clear_items();
+								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+								foreach (@nbis) {
+									my $t = $_;
+									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+									select => sub { $nbi = $t; })));
+								} 
+							} else {
+								$in->ask_warn('',_("No nic selected!"));
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("Build All Kernels -->")), clicked => 
+						sub { $in->ask_warn('',_("This will take a few minutes."));
+							cursor_wait();
+							system("/usr/bin/mknbi-set");
+							$list_nbis->clear_items();
+							@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+							foreach (@nbis) {
+								my $t = $_;
+								$list_nbis->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), 
+								select => sub { $nbi = $t; })));
+							}
+							cursor_norm(); 
+						}),
+					new Gtk::HBox(1,1),
+					gtksignal_connect(new Gtk::Button(_("<-- Delete")), clicked => 
+						sub { my $nbi = "/var/lib/tftpboot/" . $nbi;
+							my $result = unlink("$nbi") || warn("Can't delete $nbi...");
+							if ($result eq 1) {
+								$list_nbis->remove_items($list_nbis->selection);
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("Delete All NBIs")), clicked => 
+						sub { cursor_wait(); 
+							foreach (grep(/\.nbi/, all("/var/lib/tftpboot"))) {
+								my $nbi = "/var/lib/tftpboot/" . $_;
+								my $result = unlink("$nbi") || warn("Can't delete $nbi...");
+								#- wanted to walk through these and delete
+								#- but can't figure out how to get the item from
+								#- the label :(
+							}
+							$list_nbis->clear_items();
+							cursor_norm();
+						}),	
+					new Gtk::HBox(1,1),
+				),
+				createScrolledWindow($list_nbis),
+			),),
+	);
+	
+	$central_widget = \$nbi_box;
+	$nbi_box->show_all();
+}
+
+sub maintain_users {
+	#- copy users from /etc/shadow to /etc/shadow$$CLIENT$$ to allow ts login
+	my $user_box;
+	my @sys_users = cat_("/etc/shadow");
+	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	
+	#- use /homes to filter system daemons
+	my @homes = all("/home");
+	
+	my $list_sys_users = new Gtk::List();
+	my $sys_user;
+	
+	foreach (@sys_users) {		
+		my ($s_label, $dummy) = split(/:/, $_, 2);
+		if (grep(/$s_label/, @homes)) {
+			$list_sys_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($s_label), 
+				select => sub { $sys_user = $s_label; })));
+		}
+	}
+	$list_sys_users->set_selection_mode('single');
+  
+	my $list_ts_users =  new Gtk::List();
+	my $ts_user;
+	
+	foreach (@ts_users) {
+		my ($t_label, $dummy) = split(/:/, $_, 2);
+		my @system_entry = grep(/$t_label/, @sys_users); 
+		$t_label = $t_label . " !!!" if ($_ ne $system_entry[0]);
+		$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t_label), 
+		select => sub { $ts_user = $t_label; })));
+	}
+	$list_ts_users->set_selection_mode('single');
+	
+	gtkpack($status_box,
+		$user_box = gtkpack_(new Gtk::VBox(0,10),
+			0, gtkadd(new Gtk::Label( "!!! Indicates the password in the system database is different than\n the one in the Terminal Server database.\nDelete/re-add the user to the Terminal Server to enable login." )),
+			0, gtkadd(new Gtk::HBox(0,20),
+				createScrolledWindow($list_sys_users),
+				gtkadd(new Gtk::VBox(1,10),
+					new Gtk::HBox(0,10),
+					gtksignal_connect(new Gtk::Button(_("Add User -->")), clicked => 
+						sub { my $result = adduser(0, $sys_user);
+							if ($result eq 0) { 
+								$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk::ListItem($sys_user), 
+								select => sub { $ts_user = $sys_user;
+								$list_ts_users->show(); })));
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("<-- Del User")), clicked => 
+						sub { deluser(0, $ts_user);
+							$list_ts_users->remove_items($list_ts_users->selection);
+						}),
+					new Gtk::HBox(0,10),
+				),
+				createScrolledWindow($list_ts_users),
+			),),
+	);
+	
+	$central_widget = \$user_box;
+	$user_box->show_all();
+}
+
+sub maintain_clients {
+	#- add client machines to Terminal Server config
+	my $client_box;
+	my %clients = read_dhcpd_conf();
+	my $client;
+	
+	#- client info in tree view
+	my $tree_clients = new Gtk::Tree();
+	foreach my $key(keys(%clients)){
+		my $t = $key;
+		my $t_client= new_with_label Gtk::TreeItem($t);
+		gtksignal_connect($t_client, select => sub { $client = $t; });
+		$tree_clients->append($t_client);
+		
+		my $c_detail = new Gtk::Tree();
+		$t_client->set_subtree($c_detail);
+		
+		my $c_det_hw = new_with_label Gtk::TreeItem($clients{$key}->{hardware});
+		$c_detail->append($c_det_hw);
+		$c_det_hw->show();
+
+		my $c_det_ip = new_with_label Gtk::TreeItem($clients{$key}->{address});
+		$c_detail->append($c_det_ip);
+		$c_det_ip->show();
+		
+		my $c_det_nbi = new_with_label Gtk::TreeItem($clients{$key}->{filename});
+		$c_detail->append($c_det_nbi);
+		$c_det_nbi->show();		
+	}
+	$tree_clients->set_selection_mode('single');
+
+	#- entry boxes for client data entry
+	my $label_host = new Gtk::Label("Client Name:");
+	$label_host->set_justify(left);
+	my $entry_host = new Gtk::Entry(20);
+	my $label_mac = new Gtk::Label("MAC Address:");
+	$label_mac->set_justify(left);
+	my $entry_mac = new Gtk::Entry(20);
+	my $label_ip = new Gtk::Label("IP Address:");
+	$label_ip->set_justify(left);
+	my $entry_ip = new Gtk::Entry(20);
+	my $label_nbi = new Gtk::Label("Kernel Netboot Image:");
+	$label_nbi->set_justify(left);
+	my $entry_nbi = new Gtk::Combo();
+
+	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
+	$entry_nbi->set_popdown_strings(@images);
+	$entry_nbi->set_value_in_list(1, 0);
+			 
+	gtkpack($status_box,
+		my $client_box = gtkpack_(new Gtk::VBox(1,10),
+			0, gtkadd(new Gtk::HBox(0,10),
+				gtkadd(new Gtk::VBox(0,5),
+					gtkadd($label_host), gtkadd($entry_host),
+					gtkadd($label_mac), gtkadd($entry_mac),
+					gtkadd($label_ip), gtkadd($entry_ip),
+					gtkadd($label_nbi), gtkadd($entry_nbi),
+				),
+				gtkadd(new Gtk::VBox(1,10),
+					new Gtk::HBox(1,1),
+					gtksignal_connect(new Gtk::Button(_("Add Client -->")), clicked => 
+						sub { my $hostname = $entry_host->get_text();
+							my $mac = $entry_mac->get_text();
+							my $ip = $entry_ip->get_text();
+							my $nbi = $entry_nbi->entry->get_text(); 
+							if ( $hostname ne '' && $mac ne '' && $ip ne '' && $nbi ne '') {
+	
+								my $result = addclient(0, $hostname, $mac, $ip, $nbi);
+								
+								if ( $result eq 0 ) {
+									my $t_client= new_with_label Gtk::TreeItem($hostname);
+									gtksignal_connect($t_client, select => sub { $client = $hostname; });
+									$tree_clients->append($t_client);
+		
+									my $c_detail = new Gtk::Tree();
+									$t_client->set_subtree($c_detail);
+		
+									my $c_det_hw = new_with_label Gtk::TreeItem($mac);
+									$c_detail->append($c_det_hw);
+									$c_det_hw->show();
+								
+									my $c_det_ip = new_with_label Gtk::TreeItem($ip);
+									$c_detail->append($c_det_ip);
+									$c_det_ip->show();
+		
+									my $c_det_nbi = new_with_label Gtk::TreeItem($nbi);
+									$c_detail->append($c_det_nbi);
+									$c_det_nbi->show();
+									$t_client->show();
+								}		
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("<-- Del Client")), clicked => 
+						sub { my $result = delclient(0, $client);
+							if ( $result eq 0 ) {
+								$tree_clients->remove_items($tree_clients->selection);
+							}
+						}),
+					gtksignal_connect(new Gtk::Button(_("dhcpd Config...")), clicked => 
+						sub { ${$central_widget}->destroy(); dhcpd_config(); }),
+					new Gtk::HBox(1,1),
+				),
+				createScrolledWindow($tree_clients),
+			),),
+	);
+	
+	$central_widget = \$client_box;
+	$client_box->show_all();
+}
+
+sub dhcpd_config {
+	#- do main dhcp server config
+	my $dhcpd_box;
+	my @netmask = ();
+	my @broadcast = ();
+	my @netconfig = ();
+	my @ifconfig = ();
+	my @ifvalues = ();
+	my @resolve = ();
+	my @nserve = ();
+	my %netconfig;
+	my @subnet = ();
+	my @nservers = ();
+						
+	#- entry boxes for data entry
+	my $box_subnet = new Gtk::HBox(0,0);
+	my $label_subnet = new Gtk::Label("Subnet:");
+	$label_subnet->set_justify(right);
+	my $entry_subnet = new Gtk::Entry(20);	
+	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
+	$box_subnet->pack_end($label_subnet, 0, 0, 10);
+	
+	my $box_netmask = new Gtk::HBox(0,0);
+	my $label_netmask = new Gtk::Label("Netmask:");
+	$label_netmask->set_justify(left);
+	my $entry_netmask = new Gtk::Entry(20);
+	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
+	$box_netmask->pack_end($label_netmask, 0, 0, 10);
+	
+	my $box_routers = new Gtk::HBox(0,0);
+	my $label_routers = new Gtk::Label("Routers:");
+	$label_routers->set_justify(left);
+	my $entry_routers = new Gtk::Entry(20);
+	$box_routers->pack_end($entry_routers, 0, 0, 10);
+	$box_routers->pack_end($label_routers, 0, 0, 10);
+	
+	my $box_subnet_mask = new Gtk::HBox(0,0);
+	my $label_subnet_mask = new Gtk::Label("Subnet Mask:");
+	$label_subnet_mask->set_justify(left);
+	my $entry_subnet_mask = new Gtk::Entry();
+	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 10);
+	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 10);
+	
+	my $box_broadcast = new Gtk::HBox(0,0);
+	my $label_broadcast = new Gtk::Label("Broadcast Address:");
+	$label_broadcast->set_justify(left);
+	my $entry_broadcast = new Gtk::Entry(20);
+	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
+	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
+	
+	my $box_domain = new Gtk::HBox(0,0);
+	my $label_domain = new Gtk::Label("Domain Name:");
+	$label_domain->set_justify(left);
+	my $entry_domain = new Gtk::Entry(20);
+	$box_domain->pack_end($entry_domain, 0, 0, 10);
+	$box_domain->pack_end($label_domain, 0, 0, 10);
+	
+	my $box_name_servers = new Gtk::HBox(0,0);
+	my $box_name_servers_entry = new Gtk::VBox(0,0);
+	my $label_name_servers = new Gtk::Label("Name Servers:");
+	$label_name_servers->set_justify(left);
+	my $entry_name_server1 = new Gtk::Entry();
+	my $entry_name_server2 = new Gtk::Entry();
+	my $entry_name_server3 = new Gtk::Entry();
+	$box_name_servers_entry->pack_start($entry_name_server1, 0, 0, 0);
+	$box_name_servers_entry->pack_start($entry_name_server2, 0, 0, 0);
+	$box_name_servers_entry->pack_start($entry_name_server3, 0, 0, 0);
+	$box_name_servers->pack_end($box_name_servers_entry, 0, 0, 10);
+	$box_name_servers->pack_end($label_name_servers, 0, 0, 10);
+
+	#- grab some default entries from the running system
+	
+	if ( -e "/etc/sysconfig/network") {
+		%netconfig = getVarsFromSh("/etc/sysconfig/network");
+		$entry_domain->set_text($netconfig{DOMAINNAME});
+	}
+	
+	if ( -e "/etc/sysconfig/network-scripts/ifcfg-eth0") {
+		%netconfig = getVarsFromSh("/etc/sysconfig/network-scripts/ifcfg-eth0");
+		$entry_netmask->set_text($netconfig{NETMASK});
+		$entry_subnet_mask->set_text($netconfig{NETMASK});
+		
+	}
+	
+	@ifconfig = grep(/inet/, `/sbin/ifconfig eth0`);
+	@ifvalues = split(/[: \t]+/, $ifconfig[0]);
+	$entry_broadcast->set_text($ifvalues[5]);
+	
+	@broadcast = split(/\./, $ifvalues[5]);
+	@netmask = split(/\./, $netconfig{NETMASK});
+	
+	foreach (0..3) {
+		#- wasn't evaluating the & as expected
+		my $val1= $broadcast[$_] + 0;
+		my $val2 = $netmask[$_] + 0;
+		$subnet[$_] = $val1 & $val2;
+	}
+	
+	$entry_subnet->set_text(join(".", @subnet));
+		
+	my @route = grep(/^0.0.0.0/, `/sbin/route -n`);
+	@ifvalues = split(/[ \t]+/, $route[0]);
+	$entry_routers->set_text($ifvalues[1]);
+	
+	@resolve = cat_("/etc/resolv.conf");
+	my $i = 1;
+	chop(@resolve);
+	
+	foreach (@resolve) {
+		@ifvalues = split(/ /, $_);
+		if (($ifvalues[0] =~ /nameserver/) && ($i lt 4)){
+			$nservers[$i] = $ifvalues[1]; $i++;
+		}
+	}
+	
+	$entry_name_server1->set_text($nservers[1]);
+	$entry_name_server2->set_text($nservers[2]);
+	$entry_name_server3->set_text($nservers[3]);
+	
+	gtkpack($status_box, 
+		$dhcpd_box = gtkpack_(new Gtk::HBox(1,10),
+			0, gtkadd((new Gtk::VBox),
+				gtkadd($box_subnet),
+				gtkadd($box_netmask),
+				gtkadd($box_routers),
+				gtkadd($box_subnet_mask),
+				gtkadd($box_broadcast),
+				gtkadd($box_domain),
+				gtkadd($box_name_servers),
+			),
+			0, gtkadd(new Gtk::VBox(0,0),
+				new Gtk::Label("dhcpd Server Configuration\n\n
+					Most of these values were extracted
+					from your running system.  You can
+					modify as needed."),
+				gtksignal_connect(new Gtk::Button(_("Write Config")), clicked => 
+						sub { write_dhcpd_config(
+							$entry_subnet->get_text(),
+							$entry_netmask->get_text(),
+							$entry_routers->get_text(),
+							$entry_subnet_mask->get_text(),
+							$entry_broadcast->get_text(),
+							$entry_domain->get_text(),
+							$entry_name_server1->get_text(),
+							$entry_name_server2->get_text(),
+							$entry_name_server3->get_text()						
+						);}),
+				new Gtk::HBox(0,10),
+			),
+		),
+	);	
+
+	$central_widget = \$dhcpd_box;
+	$dhcpd_box->show_all();	
+}
+
+sub write_dhcpd_config {
+	my( $subnet, $netmask, $routers, $subnet_mask, $broadcast, $domain, $ns1, $ns2, $ns3) = @_;
+
+	$nfs_subnet = $subnet;
+	$nfs_mask = $subnet_mask;
+	
+	open(FHANDLE, "> /etc/dhcpd.conf");
+	print FHANDLE "#dhcpd.conf - generated by drakTermServ\n\n";
+	print FHANDLE "ddns-update-style none;\n\n";
+	print FHANDLE "# Long leases (48 hours)\ndefault-lease-time 172800;\nmax-lease-time 172800;\n\n";
+	print FHANDLE "# Include Etherboot definitions and defaults\ninclude \"/etc/dhcpd.conf.etherboot.include\";\n\n";
+	print FHANDLE "# Network-specific section\n\n";
+	
+	print FHANDLE "subnet $subnet netmask $netmask {\n";
+	print FHANDLE "\toption routers $routers;\n" if $routers;
+	print FHANDLE "\toption subnet-mask $subnet_mask;\n" if $subnet_mask;
+	print FHANDLE "\toption broadcast-address $broadcast;\n" if $broadcast;
+	print FHANDLE "\toption domain-name \"$domain\";\n" if $domain;
+	
+	my $ns_string = "\toption domain-name-servers " . $ns1 if $ns1;
+	$ns_string = $ns_string . ", " . $ns2 if $ns2;
+	$ns_string = $ns_string . ", " . $ns3 if $ns3;
+	$ns_string = $ns_string . ";\n" if $ns_string;
+	print FHANDLE $ns_string if $ns_string;
+
+	print FHANDLE "}\n\n";
+	
+	print FHANDLE "# Include client machine configurations\ninclude \"/etc/dhcpd.conf.etherboot.clients\";\n";
+	close FHANDLE	
+}
+
+sub write_eb_image {
+	#- write a bootable etherboot CD image or floppy
+	my ($nic, $rom_path, $type) = @_;	 	
+	if ($type eq 'floppy') {
+		my $in = interactive->vnew;
+		if ( -e "/dev/fd0" ) {
+			my $result = $in->ask_okcancel(_("Please insert floppy disk:"));
+			return if !($result);
+			$result = system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /dev/fd0") if $result;
+			if ($result) {
+				$in->ask_warn('',_("Couldn't access the floppy!"))
+			} else { 
+				$in->ask_warn('',_("Floppy can be removed now"))
+			}
+		} else {
+			$in->ask_warn('',_("No floppy drive available!"));
+		}
+	} else {
+		mkdir_p("/tmp/eb");
+		system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /tmp/eb/eb.img");
+		system("dd if=/dev/zero of=/tmp/eb/eb.img bs=512 seek=72 count=2808");
+		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
+		rm_rf("/tmp/eb");
+		if ( -e "/tmp/eb.iso" ) {
+			$in->ask_warn('',_("Etherboot ISO image is /tmp/$nic.iso"))
+		} else { 
+			$in->ask_warn('',_("Something went wrong!"))
+		}		
+	}
+}
+
+sub enable_ts {
+	#- setup default config files for terminal server
+
+	my $cmd_line = @_;
+
+	@buff = ();
+	$buff[0] = "Enabling Terminal Server...\n\n";
+	$buff[1] = "\tChecking default /etc/dhcpd.conf...\n";
+	my @my_conf = cat_("/etc/dhcpd.conf");
+	if ($my_conf[0] !~ /drakTermServ/) {
+		if ($cmd_line eq 1) {
+			print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
+			return;
+		} else {
+			$in->ask_warn('',_("Need to create /etc/dhcpd.conf first!"));
+			#$central_widget->destroy;
+			dhcpd_config();
+			return;		
+		}
+	}
+	my $buff_index = toggle_chkconfig("on", "dhcpd", 2);
+	$buff[$buff_index] = "\tSetting up default /etc/exports...\n";
+	cp_af("/etc/exports", "/etc/exports.mdkTS");
+	open(FHANDLE, "> /etc/exports");
+	print FHANDLE "#/etc/exports - generated by drakTermServ\n\n";
+	print FHANDLE "/\t(ro,all_squash)\n";
+	print FHANDLE "/home\t$nfs_subnet/$nfs_mask(rw,root_squash)\n";
+	close FHANDLE;
+	$buff_index = toggle_chkconfig("on", "clusternfs", $buff_index+1);
+	$buff_index = toggle_chkconfig("on", "tftp", $buff_index);	
+	$buff_index = service_change("xinetd", "restart", $buff_index);
+	$buff[$buff_index] = "\n\tDone!";	
+	
+	if ($cmd_line == 1){
+		print "@buff\n";
+		return;
+	}
+
+    show_status(@buff);
+}
+
+sub disable_ts {
+	#- restore pre-terminal server configs 
+	my $cmd_line = @_;
+
+	@buff = ();
+	$buff[0] = "Disabling Terminal Server...\n\n";
+	$buff[1] = "\tRestoring original /etc/dhcpd.conf...\n";
+	cp_af("/etc/dhcpd.conf.mdkTS", "/etc/dhcpd.conf");
+	my $buff_index = toggle_chkconfig("off", "dhcpd", 2);
+	$buff[$buff_index] = "\tRestoring default /etc/exports...\n";
+	cp_af("/etc/exports.mdkTS", "/etc/exports");
+	$buff_index = toggle_chkconfig("off", "clusternfs", $buff_index+1);
+	$buff_index = toggle_chkconfig("off", "tftp", $buff_index);
+	$buff_index = service_change("xinetd", "restart", $buff_index);
+	$buff[$buff_index] = "\n\tDone!";	
+	
+	if ($cmd_line == 1){
+		print "@buff\n";
+		return;
+	}
+	
+	show_status(@buff);	
+}
+
+sub toggle_chkconfig {
+	#- change service config
+	my ($state, $service, $buff_index) = @_;
+	system("/sbin/chkconfig $service $state");
+	$buff[$buff_index] = "\tTurning $service $state...\n";
+	$buff_index++;
+	$buff_index;
+}
+
+sub service_change {
+	my ($service, $command, $buff_index) = @_;
+	system("/sbin/service $service $command > /tmp/drakTSservice.status 2>&1");
+	open(STATUS, "/tmp/drakTSservice.status");
+	while(<STATUS>) {
+		my ($phrase, $result) = split(':',$_);
+		$result = "[ OK ]" if ($result =~ /OK/);
+		$result = "[ FAIL ]" if ($result =~ /FAIL/);
+		$buff[$buff_index] = "\t$phrase:\t\t\t" . $result . "\n";
+		$buff_index++;
+	}
+	close STATUS;
+	unlink "/tmp/drakTSservice.status" or warn("Can't delete /tmp/drakTSservice.status\n");
+	$buff_index;		
+}
+	
+sub start_ts {
+	#- start the terminal server
+	my $cmd_line = @_;
+	
+	@buff = ();
+	$buff[0] = "Starting Terminal Server...\n\n";
+	my $buff_index = service_change("dhcpd", "start", 2);
+	$buff_index = service_change("clusternfs", "start", $buff_index);
+	$buff[$buff_index] = "\n\tDone!";	
+	
+	if ($cmd_line == 1){
+		print "@buff\n";
+		return;
+	}
+
+	show_status(@buff);
+}
+
+sub stop_ts {
+	#- stop the terminal server
+	my $cmd_line = @_;
+
+	@buff = ();
+	$buff[0] = "Stopping Terminal Server...\n\n";
+	my $buff_index = service_change("dhcpd", "stop", 2);
+	$buff_index = service_change("clusternfs", "stop", $buff_index);
+	$buff[$buff_index] = "\n\tDone!";	
+	
+	if ($cmd_line == 1){
+		print "@buff\n";
+		return;
+	}
+
+	show_status(@buff);
+
+}
+
+sub show_status {
+	#- just a generic routine to display an array of text in the GUI screen
+	my @buff = @_;
+	
+	my $text = new Gtk::Text(undef, undef);
+	my $status_t_box;
+	gtkpack($status_box,
+	    $status_t_box = gtkpack_(new Gtk::VBox(0,10),
+	       1, gtkpack_(new Gtk::HBox(0,0),
+			   1, gtktext_insert(gtkset_editable($text, 1), "@buff"),
+			),
+			),
+	);
+			   
+	$central_widget = \$status_t_box;		   
+	$status_box->show_all();	
+}
+
+sub adduser {
+	my ($cmd_line, $username) = @_;
+	my @active_users = cat_("/etc/shadow");
+	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my $is_user = grep(/$username/, @active_users);
+	my $add_fail = 0;
+	my $in_already;
+	
+	if ($is_user) {
+		my @shadow_entry = grep(/$username/, @active_users);
+		my $is_ts_user = grep(/$username/, @ts_users);
+		if ($is_ts_user) {
+			my @ts_shadow = grep(/$username/, @ts_users);
+			if ($shadow_entry[0] eq $ts_shadow[0]) {
+				$in_already = 1;
+			} else {
+				#in but password changed
+				print "$username passwd bad in Terminal Server - rewriting...\n";
+				deluser($cmd_line, $username);				
+				adduser($cmd_line, $username);				
+			}
+		} else {
+			# new ts user
+			open(FHANDLE, ">> /etc/shadow\$\$CLIENT\$\$");
+			print FHANDLE "$shadow_entry[0]" or $add_fail = 1; 
+			close FHANDLE;
+			$in_already = 0;
+		}
+	}	
+		
+	if ($cmd_line == 1){
+		print "$username is not a user..\n" if !($is_user);
+		print "$username is already a Terminal Server user\n" if $in_already;
+		if ($add_fail== 1 || $in_already || !$is_user) {
+			print "Addition of $username to Terminal Server failed!\n";
+		} else {		
+			print "$username added to Terminal Server\n";	
+		}
+		return;
+	} else {
+		$in_already;
+	}	
+}
+
+sub deluser {
+	# del a user from the shadow$$CLIENT$$ file
+	my ($cmd_line, $username) = @_;
+	my $i;
+	my $user;
+	my $user_deleted;
+		
+	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
+	my $is_ts_user = grep(/$username/, @ts_users);
+	
+	if ($is_ts_user) {
+		$i = 0;
+		foreach $user (@ts_users) {
+			if ($user =~ /$username/) {
+				splice (@ts_users, $i, 1);
+				$user_deleted = 1;
+				break;
+			}
+			$i++;
+		}			
+		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
+		foreach $user (@ts_users) {
+			print FHANDLE "$user";
+		} 
+		close FHANDLE;
+	}
+	
+	if ($cmd_line == 1){
+		if ($user_deleted) {
+			print "Deleted $username...\n";
+		} else {
+			print "$username not found...\n";
+		}
+		return;
+	}	
+}
+
+sub addclient {
+	#- add a new client entry after checking for dups
+	my ($cmd_line, $hostname, $mac, $ip, $nbi) = @_;
+
+	my $host_in_use = 0;
+	my $mac_in_use = 0;
+	my $ip_in_use = 0;
+	my $client;
+			
+	my %ts_clients = read_dhcpd_conf();
+
+	foreach $client(keys(%ts_clients)){
+		$host_in_use = 1 if ($hostname eq $client);
+		$mac_in_use = 1 if ($mac eq $ts_clients{$client}->{hardware});
+		$ip_in_use = 1 if ($ip eq $ts_clients{$client}->{address});
+	}
+	
+	if ($cmd_line == 1){
+		print "$hostname already in use\n" if $host_in_use;
+		print "$mac already in use\n" if $mac_in_use;
+		print "$ip already in use\n" if $ip_in_use;
+		if ($host_in_use || $mac_in_use || $ip_in_use) {
+			return;
+		}
+	}
+
+	if (!$host_in_use && !$mac_in_use && !$ip_in_use) {
+		$ts_clients{$hostname}->{hardware} = $mac;
+		$ts_clients{$hostname}->{address} = $ip;
+		$ts_clients{$hostname}->{filename} = $nbi;
+
+		my $clients = "/etc/dhcpd.conf.etherboot.clients";
+		open(CLIENT, ">> $clients") || warn ("Can't open $clients!");
+		print_client_entry("CLIENT", $hostname, %ts_clients);
+		close CLIENT;	
+		0;
+	} 
+}
+	
+sub delclient {
+	#- find a client and delete the entry in dhcpd.conf
+	my ($cmd_line, $hostname) = @_;
+	my $client;
+	my $host_found;
+	
+	my %ts_clients = read_dhcpd_conf();
+	
+	foreach $client(keys(%ts_clients)){
+		if ($hostname eq $client) {
+			$host_found = 1;
+			delete $ts_clients{$client};
+			write_dhcpd_conf(%ts_clients);
+			return 0;			
+		}
+	}
+		
+	if ($cmd_line == 1){
+		print "$hostname not found...\n" if (!$host_found);
+		return;
+	}	
+}
+
+sub print_client_entry {
+	#- print a client entry, in proper format
+	my ($handle, $client, %ts_clients) = @_;
+
+	print $handle "host $client {\n";
+	print $handle "\thardware ethernet\t$ts_clients{$client}->{hardware};\n";
+	print $handle "\tfixed-address\t\t$ts_clients{$client}->{address};\n";
+	print $handle "\tfilename\t\t\"$ts_clients{$client}->{filename}\";\n";
+	print $handle "}\n";
+}
+
+sub write_dhcpd_conf {
+	my %ts_clients = @_;
+	my $clients = "/etc/dhcpd.conf.etherboot.clients";
+	my $key;
+	
+	open(CLIENT, "> $clients") || warn ("Can't open $clients!");
+	foreach $key(keys(%ts_clients)){
+		print_client_entry("CLIENT", $key, %ts_clients);
+	}
+	close CLIENT	
+}
+
+sub read_dhcpd_conf {
+	my $clients = "/etc/dhcpd.conf.etherboot.clients";
+	my %ts_clients;
+	my $hostname;
+	
+	#- read and parse current client entries
+	open(CLIENTS, $clients) || warn("Can't open $clients\n"); 
+	while(<CLIENTS>) {
+		my ($name, $val, $val2) = split(' ',$_);
+		$val = $val2 if ($name =~ /hardware/);
+		$val =~ s/[;"]//g;
+		if ($name !~ /}/) {
+			if ($name =~ /host/) {
+				$hostname = $val;
+			} else {
+				$name = "address" if ($name =~ /fixed-address/);
+				$ts_clients{$hostname}->{$name} = $val;
+			}
+		}	
+	}
+	close CLIENTS;
+	%ts_clients;	
+}
