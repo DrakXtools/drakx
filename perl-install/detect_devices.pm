@@ -126,17 +126,17 @@ sub getIDE() {
 
 sub getCompaqSmartArray() {
     my @idi;
-    my $f;
 
-    my $dir = "/proc/driver/array"; #- kernel 2.4 places it here
-    $dir = "/proc/array" if !-d $dir; #- kernel 2.2
+    foreach ('array/ida', 'cciss/cciss') {
+	my $prefix = "/proc/driver/$_"; #- kernel 2.4 places it here
+	$prefix = "/proc/$_" if !-e "${prefix}0"; #- kernel 2.2
 
-    -e "$dir/ida0" or return;
-
-    for (my $i = 0; -r ($f = "$dir/ida$i"); $i++) {
-	foreach (cat_($f)) {
-	    if (m|^\s*(ida/.*?):|) {
-		push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
+	my ($name) = m|/(.*)|;
+	for (my $i = 0; -r ($f = "${prefix}$i"); $i++) {
+	    foreach (cat_($f)) {
+		if (m|^\s*($name/.*?):|) {
+		    push @idi, { device => $1, info => "Compaq RAID logical disk", type => 'hd' };
+		}
 	    }
 	}
     }
