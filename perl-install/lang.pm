@@ -163,9 +163,9 @@ my %charsets = (
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
-  "koi8-r"     => [ "koi8-8x16",	"koi8r",	"trivial.trans",
+  "koi8-r"     => [ "koi8-8x16",	"koi8-r",	"trivial.trans",
 	std("koi8-r") ],
-  "koi8-u"     => [ "koi8u_8x16",	"koi8r",	"trivial.trans",
+  "koi8-u"     => [ "koi8u_8x16",	"koi8-r",	"trivial.trans",
 	std("koi8-u") ],
   "cp1251"     => [ "iso05.f16",	"iso05",	"iso05_to_cp1251.trans",
 	std2("microsoft-cp1251",100) ],
