@@ -633,7 +633,7 @@ sub summary_prompt {
 	$e->{widget} = Gtk2::Label->new;
 	$e->{widget}->set_property(wrap => 1);
 	$e->{widget}->set_size_request($::windowwidth * 0.65, -1);
-	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 20), '', $e->{widget}),
+	push @table, [], [ gtkpack__(Gtk2::HBox->new(0, 30), '', $e->{widget}),
 			   gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub { 
 						 $w->{rwindow}->hide;
 						 $e->{clicked}(); 
