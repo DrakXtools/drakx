@@ -617,9 +617,6 @@ sub del_intf() {
                              post => sub {
                                  !$::testing and eval {
                                      system("ifdown $intf2delete");
-                                     modules::mergein_conf('/etc/modules.conf');
-                                     modules::remove_alias($intf2delete);
-                                     modules::write_conf();
                                      rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete");
                                  };
                                  $faillure = $@;
