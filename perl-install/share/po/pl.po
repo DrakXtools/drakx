@@ -1,18 +1,21 @@
+# translation of DrakX-pl.po to polski
 # translation of pl.po to Polish
 # Polish translation file
 # Paweł Jabłoński <pj@linux-mandrake.com>, 2001,2002.
 # Arkadiusz Lipiec <arkadiusz.lipiec@gazeta.pl>, 2002-2004.
+# Tomasz Bednarski <bednarski@skrzynka.pl>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pl\n"
+"Project-Id-Version: DrakX-pl\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2004-10-25 19:37+0200\n"
-"Last-Translator: Arkadiusz Lipiec <arkadiusz.lipiec@gazeta.pl>\n"
-"Language-Team: Polish <pl@li.org>\n"
+"PO-Revision-Date: 28/03/2005 09:34\n"
+"Last-Translator: Tomasz Bednarski <bednarski@skrzynka.pl>\n"
+"Language-Team: polski\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
 
 #: ../move/move.pm:292
 #, c-format
@@ -28,8 +31,8 @@ msgid ""
 "We advise you to unplug all other USB storage devices while doing this "
 "operation."
 msgstr ""
-"Za chwilę zostanie sformatowane urządzenie USB \"%s\". To spowoduje "
-"usunięcie danych znajdujących się na nim.\n"
+"Za chwilę zostanie sformatowane urządzenie USB \"%s\". Spowoduje tousunięcie "
+"danych znajdujących się na nim.\n"
 "Upewnij się, że wybrane urządzenie jest, tym które ma zostać sformatowane.\n"
 "Zalecane jest wyjęcie wszystkich innych nośników pamięci USB podczas "
 "wykonywania tej operacji."
@@ -46,7 +49,7 @@ msgid ""
 "unplug it, remove write protection, and then plug it again."
 msgstr ""
 "Wygląda na to, że klucz USB posiada zabezpieczenie przed zapisem.\n"
-"Wyjmij go, wyłącz zabezpieczenie a następnie wetknij ponownie."
+"Wyjmij go, wyłącz zabezpieczenie, a następnie włóż klucz ponownie."
 
 #: ../move/move.pm:452
 #, c-format
@@ -73,7 +76,7 @@ msgstr ""
 "\n"
 "\n"
 "Kliknij przycisk aby uruchomić ponownie komputer, wyłącz klucz, usuń\n"
-"zabezpieczenie przed zapisem oraz wetknij go ponownie.\n"
+"zabezpieczenie przed zapisem oraz włóż go ponownie.\n"
 "Następnie należy ponownie uruchomić Mandrake Move."
 
 #: ../move/move.pm:468 help.pm:409 install_steps_interactive.pm:1317
@@ -96,9 +99,9 @@ msgid ""
 "Operating System."
 msgstr ""
 "Twój klucz USB nie zawiera żadnych prawidłowych partycji Windows (FAT).\n"
-"Trzeba posiadać jakąś aby kontynuować (paza tym, jest to bardziej\n"
+"Trzeba posiadać jakąś aby kontynuować (poza tym, jest to bardziej\n"
 "standardowe. Będzie można przenosić i odwoływać się do plików\n"
-"z komputerów pracujących pod kontrolą Windows). Wetknij klucz USB\n"
+"z komputerów pracujących pod kontrolą Windows). Włóż klucz USB\n"
 "zawierający zamiast tego partycję Windows.\n"
 "\n"
 "\n"
@@ -121,12 +124,12 @@ msgid ""
 "able to use Mandrake Move as a normal live Mandrake\n"
 "Operating System."
 msgstr ""
-"Nie wykryto żadnego klucza USB na twoim systemie. Jeśli\n"
-"teraz wetkniesz klucz USB, Mandrake Move będzie posiadać\n"
+"W twoim systemie nie wykryto żadnego klucza USB. Jeśli\n"
+"teraz włożysz klucz USB, Mandrake Move będzie posiadać\n"
 "możliwość przezroczystego zapisu danych w twoim katalogu\n"
 "domowym oraz całą konfigurację systemu, które będą używane\n"
 "podczas uruchomienia tego lub innego komputera.\n"
-"Uwaga: jeśli wetkniesz klucz w tej chwili, poczekaj kilka\n"
+"Uwaga: jeśli włożysz klucz w tej chwili, poczekaj kilka\n"
 "sekund zanim zostanie on ponownie wykryty.\n"
 "\n"
 "\n"
@@ -158,7 +161,8 @@ msgstr "Proszę czekać, ustawianie plików konfiguracyjnych dla klucza USB..."
 #, c-format
 msgid "Enter your user information, password will be used for screensaver"
 msgstr ""
-"Podaj swoje informacje o użytkowniku, hasło zostanie użyte przy wygaszaczu"
+"Podaj swoje informacje o użytkowniku. Hasło zostanie użyte przy wygaszaczu "
+"ekranu."
 
 #: ../move/move.pm:556
 #, c-format
@@ -236,7 +240,7 @@ msgid ""
 "An error occurred, but I do not know how to handle it nicely.\n"
 "Continue at your own risk."
 msgstr ""
-"Wystąpił jakiś błąd. Nie można poprawnie go obsłużyć\n"
+"Wystąpił jakiś błąd. Nie można poprawnie go obsłużyć.\n"
 "Kontynuuj na własną odpowiedzialność."
 
 #: ../move/move.pm:660 install_steps_interactive.pm:38
@@ -269,14 +273,14 @@ msgstr ""
 "%s\n"
 "\n"
 "Może być to spowodowane uszkodzonymi plikami konfiguracyjnymi\n"
-"systemu w kluczu USB, w tym przypadku usunięcie ich\n"
+"systemu zapisanymi na kluczu USB. W tym przypadku usunięcie ich\n"
 "a następnie ponowne uruchomienie Mandrake Move może naprawić\n"
 "sytuację. Aby to zrobić, kliknij odpowiedni przycisk.\n"
 "\n"
 "\n"
-"Można także ponownie uruchomić i usunąć klucz USB, lub\n"
-"też zbadać jego zawartość pod innym systemem, lub nawet\n"
-"rzucić okiem na pliki dziennika na konsoli #3 i #4 aby\n"
+"Można także ponownie uruchomić i usunąć klucz USB lub\n"
+"też zbadać jego zawartość pod innym systemem lub nawet\n"
+"zajrzeć do plików dziennika na konsoli #3 i #4, aby\n"
 "spróbować określić co się wydarzyło."
 
 #: ../move/move.pm:681
@@ -297,7 +301,7 @@ msgstr "Można uruchomić tylko bez obsługi CDROM"
 #: ../move/tree/mdk_totem:71
 #, c-format
 msgid "Kill those programs"
-msgstr "Zabij te programy"
+msgstr "Zakończ te programy"
 
 #: ../move/tree/mdk_totem:72
 #, c-format
@@ -309,7 +313,7 @@ msgstr "Bez obsługi CD-ROM"
 #: diskdrake/interactive.pm:1083
 #, c-format
 msgid "Read carefully!"
-msgstr "Czytaj uważnie!"
+msgstr "Przeczytaj uważnie!"
 
 #: ../move/tree/mdk_totem:77
 #, c-format
@@ -317,7 +321,7 @@ msgid ""
 "You can not use another CDROM when the following programs are running: \n"
 "%s"
 msgstr ""
-"Nie można używać innego napędu CDROM gdy są uruchomione poniższe programy:\n"
+"Nie można używać innego napędu CDROM, gdy są uruchomione poniższe programy:\n"
 "%s"
 
 #: ../move/tree/mdk_totem:101
@@ -412,7 +416,7 @@ msgstr "Konfiguracja Xorg"
 #: Xconfig/card.pm:351
 #, c-format
 msgid "Which configuration of Xorg do you want to have?"
-msgstr "Którą konfigurację Xorg chcesz używać?"
+msgstr "Której konfiguracji Xorg chcesz używać?"
 
 #: Xconfig/card.pm:384
 #, c-format
@@ -502,7 +506,7 @@ msgstr "Opcje"
 #: Xconfig/main.pm:168
 #, c-format
 msgid "Your Xorg configuration file is broken, we will ignore it."
-msgstr ""
+msgstr "Plik konfiguracyjny Xorg jest uszkodzony i zostanie zignorowany."
 
 #: Xconfig/main.pm:186
 #, c-format
@@ -696,7 +700,7 @@ msgstr "Opuszczanie w ciągu %d sekund(y)"
 #: Xconfig/test.pm:129
 #, c-format
 msgid "Is this the correct setting?"
-msgstr "Czy to jest prawidłowe ustawienie?"
+msgstr "Czy to ustawienie jest prawidłowe ?"
 
 #: Xconfig/various.pm:29
 #, c-format
@@ -765,9 +769,9 @@ msgid ""
 "(Xorg) upon booting.\n"
 "Would you like Xorg to start when you reboot?"
 msgstr ""
-"Można skonfigurować komputer, aby automatycznie po uruchomieniu startowały X-"
-"y.\n"
-"Czy chcesz, by X Window był uruchamiany po uruchomieniu komputera?"
+"Można skonfigurować komputer, aby automatycznie uruchamiał się interfejs "
+"graficzny (Xorg).\n"
+"Czy chcesz, by Xorg był uruchamiany po uruchomieniu komputera?"
 
 #: Xconfig/various.pm:87
 #, c-format
@@ -782,7 +786,7 @@ msgid ""
 "Do you have this feature?"
 msgstr ""
 "Wygląda na to, że karta graficzna posiada złącze TV-OUT.\n"
-"Można je skonfigurować do współpracy z użyciem bufora ramek.\n"
+"Można je skonfigurować do pracy z użyciem bufora ramek.\n"
 "\n"
 "Aby używać tej funkcji należy podłączyć kartę graficzną do\n"
 "telewizora przed uruchomieniem komputera.\n"
@@ -800,7 +804,7 @@ msgstr "W jakim systemie pracuje Twój telewizor?"
 msgid ""
 "_:weird aspect ratio\n"
 "other"
-msgstr ""
+msgstr "inne"
 
 #: any.pm:140 harddrake/sound.pm:191 install_any.pm:652 interactive.pm:462
 #: standalone/drakconnect:167 standalone/drakconnect:613 standalone/draksec:68
@@ -825,6 +829,12 @@ msgid ""
 "\n"
 "Assign a new Volume ID?"
 msgstr ""
+"LILO chce przypisać nowy identyfikator dla napędu %s. Jednakże zmiana\n"
+"identyfikatora napędu dysku rozruchowego dla Windows NT, 2000 lub XP może "
+"spowodować poważny błąd Windows.\n"
+"Ostrzeżenie to nie dotyczy dysków z systemem Windows 95, 98 lub NT.\n"
+"\n"
+"Przypisać nowy identyfikator napędu?"
 
 #: any.pm:162
 #, c-format
@@ -843,7 +853,7 @@ msgid ""
 "At your next boot you should see the bootloader prompt."
 msgstr ""
 "Może zachodzić potrzeba zmiany urządzenia rozruchowego Open\n"
-"Firmware aby włączyć program rozruchowy (ang. bootloader). Jeśli\n"
+"Firmware, aby włączyć program rozruchowy (ang. bootloader). Jeśli\n"
 "nie wyświetla się ekran powitalny w trakcie ponownego\n"
 "uruchamiania, należy przytrzymać Command-Option-O-F w trakcie\n"
 "uruchamiania i wpisać:\n"
@@ -1124,7 +1134,7 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Posiadasz następujące pozycje.\n"
+"W menu startowym znajdują się następujące pozycje.\n"
 "Można dodać następne lub zmienić istniejące."
 
 #: any.pm:592
@@ -1304,7 +1314,7 @@ msgstr "Kraj / Region"
 #: any.pm:787
 #, c-format
 msgid "Please choose your country."
-msgstr "Wybierz swój kraj."
+msgstr "Wybierz swój kraj"
 
 #: any.pm:789
 #, c-format
@@ -1350,7 +1360,7 @@ msgstr ""
 "Czy chcesz zezwolić użytkownikom na eksport niektórych katalogów w ich "
 "katalogu domowym?\n"
 "Udostępnienie tej opcji pozwoli użytkownikom na kliknięcie przycisku"
-"\"Współdziel\" w konquerorze i nautilusie.\n"
+"\"Współdziel\" w Konquerorze i Nautilusie.\n"
 "\n"
 "\"Własne\" pozwoli na ustawienia indywidualne dla każdego użytkownika.\n"
 
@@ -1360,8 +1370,8 @@ msgid ""
 "NFS: the traditional Unix file sharing system, with less support on Mac and "
 "Windows."
 msgstr ""
-"NFS: tradycyjny współdzielony system plików Uniksa, z mniejszym wsparciem "
-"dla Maka i Windowsa."
+"NFS: tradycyjny system współdzielenia plików Uniksa, z mniejszym wsparciem "
+"dla systemów Mac i Windows."
 
 #: any.pm:933
 #, c-format
@@ -1369,8 +1379,8 @@ msgid ""
 "SMB: a file sharing system used by Windows, Mac OS X and many modern Linux "
 "systems."
 msgstr ""
-"SMB: współdzielony system plików używany przez Windows, Mac OS X oraz wiele "
-"nowoczesnych systemów linuksowych."
+"SMB: system współdzielenia plików używany przez systemy Windows, Mac OS X "
+"oraz wiele nowoczesnych systemów linuksowych."
 
 #: any.pm:941
 #, c-format
@@ -1421,7 +1431,7 @@ msgstr "NIS"
 #: authentication.pm:19
 #, c-format
 msgid "Smart Card"
-msgstr ""
+msgstr "Smart Card"
 
 #: authentication.pm:20 authentication.pm:148
 #, c-format
@@ -1504,7 +1514,8 @@ msgstr "Active Directory z SFU"
 msgid ""
 "Kerberos is a secure system for providing network authentication services."
 msgstr ""
-"Kerberos to system bezpieczeństwa dla usług uwierzytelniania sieciowego."
+"Kerberos to bezpieczny system świadczenia dla usług uwierzytelniania "
+"sieciowego."
 
 #: authentication.pm:56
 #, c-format
@@ -1625,13 +1636,14 @@ msgstr ""
 "serwer.\n"
 "Będzie potrzebna także nazwa użytkownika/hasło administratora domeny aby "
 "przyłączyć komputer do domeny Windows(TM).\n"
-"Jeśli sieć jeszcze nie jest włączona, Instalator spróbuje dołączyć komputer "
+"Jeśli sieć jeszcze nie jest włączona, instalator spróbuje dołączyć komputer "
 "do domeny po kroku konfiguracji sieci.\n"
 "Jeśli ta instalacja nie powiedzie się z różnych powodów i uwierzytelnianie "
 "Windows PDC nie działa, uruchom 'smbpasswd -j DOMENA -U UŻYTKOWNIK%%HASŁO' "
-"wykorzystując swoją domenę Windows(tm), i nazwę administratora/hasło, po "
+"wykorzystując swoją domenę Windows(tm) i nazwę administratora/hasło po "
 "uruchomieniu systemu.\n"
-"Polecenie 'wbinfo -t' przetestuje czy uwierzytelnianie jest w porządku."
+"Polecenie 'wbinfo -t' sprawdzi czy uwierzytelnianie przebiega w bezpieczny "
+"sposób."
 
 #: authentication.pm:144
 #, c-format
@@ -1656,17 +1668,17 @@ msgstr "Użycie ldmap do przechowywania UID/SID "
 #: authentication.pm:152
 #, c-format
 msgid "Default Idmap "
-msgstr "Domyślny ldap "
+msgstr "Domyślny ldmap "
 
 #: authentication.pm:165
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password and network authentication methods"
-msgstr "Ustaw hasło roota i metody uwierzytelniania sieciowego"
+msgstr "Ustaw hasło administratora (root) i metody uwierzytelniania sieciowego"
 
 #: authentication.pm:166
-#, fuzzy, c-format
+#, c-format
 msgid "Set administrator (root) password"
-msgstr "Hasło roota"
+msgstr "Konfiguracja hasła administratora (root)"
 
 #: authentication.pm:167 standalone/drakvpn:1125
 #, c-format
@@ -1709,10 +1721,10 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
-"Witamy w programie wybierajacym system operacyjny!\n"
+"Witamy w programie wybierającym system operacyjny!\n"
 "\n"
-"Wybierz system operacyjny z listy powyzej lub\n"
-"poczekaj na domyslne uruchomienie.\n"
+"Wybierz system operacyjny z listy powyżej lub\n"
+"poczekaj na uruchomienie domyślnego systemu.\n"
 "\n"
 
 #: bootloader.pm:815
@@ -1925,9 +1937,9 @@ msgid ""
 "points, select \"New\"."
 msgstr ""
 "WebDAV jest protokołem umożliwiającym montowanie katalogu serwera www\n"
-"lokalnie, oraz traktowany on jest jak lokalny system plików\n"
+"lokalnie i korzystanie z niego jak z lokalnego systemu plików\n"
 "(zakładając, że serwer webowy jest skonfigurowany jako serwer WebDAV).\n"
-"Jeśli chcesz dodać punkty montowania WebDAV, wybierz \"Nowy\"."
+"Jeśli chcesz dodać punkty montowania WebDAV wybierz opcję \"Nowy\"."
 
 #: diskdrake/dav.pm:25
 #, c-format
@@ -1989,7 +2001,7 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"Jeżeli masz zamiar używać aboot pamiętaj, by zostawić,\n"
+"Jeżeli masz zamiar używać aboot pamiętaj, by zostawić\n"
 "wolne miejsce na początku dysku - wystarczy 2048 sektorów."
 
 #: diskdrake/hd_gtk.pm:155 help.pm:530
@@ -2147,6 +2159,10 @@ msgid ""
 "Otherwise no entry for mount point %s will be written in fstab.\n"
 "Quit anyway?"
 msgstr ""
+"Należy sformatować partycję %s.\n"
+"W przeciwnym wypadku informacja o punkie montowania %s nie zostanie zapisana "
+"w pliku fstab.\n"
+"Czy wyjść mimo to?"
 
 #: diskdrake/interactive.pm:282
 #, c-format
@@ -2415,7 +2431,7 @@ msgstr "Wszystkie dane na tej partycji powinny zostać zarchiwizowane"
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
-"Po zmianie rozmiaru partycji %s, wszystkie dane na niej zostaną utracone"
+"Po zmianie rozmiaru partycji %s wszystkie dane na niej zostaną utracone"
 
 #: diskdrake/interactive.pm:743
 #, c-format
@@ -2559,7 +2575,7 @@ msgstr ""
 #: diskdrake/interactive.pm:1124
 #, c-format
 msgid "Moving files to the new partition"
-msgstr "Przenoszenie plików do nowej partycji"
+msgstr "Przenoszenie plików na nową partycję"
 
 #: diskdrake/interactive.pm:1128
 #, c-format
@@ -2579,7 +2595,7 @@ msgstr "partycja %s nazywa się teraz %s"
 #: diskdrake/interactive.pm:1147
 #, c-format
 msgid "Partitions have been renumbered: "
-msgstr ""
+msgstr "Numery partycji zostały przypisane od nowa:"
 
 #: diskdrake/interactive.pm:1167 diskdrake/interactive.pm:1226
 #, c-format
@@ -2947,7 +2963,7 @@ msgid ""
 msgstr ""
 "Bez interpretowania bitów set-user-identifier oraz set-group-identifier\n"
 "(To wygląda na bezpieczne ustawienie, lecz w rzeczywistości jest raczej\n"
-"niebezpieczne w przypadku zainstalowania pakietu ksuidperl(1).)"
+"niebezpieczne w przypadku zainstalowania pakietu suidperl(1).)"
 
 #: fs/mount_options.pm:128
 #, c-format
@@ -2974,7 +2990,7 @@ msgstr ""
 "montującego użytkownika jest zapisana do pliku mtab, tak więc nie może\n"
 "on odmontować ponownie systemu plików. Ta opcja określa ustawienie opcji\n"
 "\"noexec\", \"nosuid\" oraz \"nodev\" (chyba że zostanie ono pominięte\n"
-"przez inne opcje, w wierszu opcji user,exec,dev,suid)."
+"przez inne opcje w wierszu opcji user, exec, dev, suid)."
 
 #: fs/mount_options.pm:142
 #, c-format
@@ -3163,7 +3179,7 @@ msgstr "Karta dźwiękowa"
 #: harddrake/data.pm:166
 #, c-format
 msgid "Webcam"
-msgstr "Webkamera"
+msgstr "Kamera internetowa"
 
 #: harddrake/data.pm:180
 #, c-format
@@ -3560,7 +3576,7 @@ msgstr ""
 "automatycznie wykrywa poprawne parametry.\n"
 "Jeśli karta została wykryta niepoprawnie, można wymusić w tym miejscu "
 "poprawne typy tunera i karty. Wystarczy wybrać parametry swojej karty TV,"
-"jeśli są one wymagane"
+"jeśli są one wymagane."
 
 #: harddrake/v4l.pm:312
 #, c-format
@@ -3606,9 +3622,9 @@ msgid ""
 "button will reboot your computer."
 msgstr ""
 "Przed kontynuowaniem, należy przeczytać uważnie warunki licencji dotyczącej "
-"całej dystrybucji Linuksa Mandrake. Jeśli zgadzasz się\n"
+"całej dystrybucji Mandrakelinux. Jeśli zgadzasz się\n"
 "z wszystkimi warunkami w niej zawartymi, zaznacz opcję \"%s\".\n"
-"Jeśli nie, kliknij na przycisk \"%s\" w celu ponownego uruchomienia\n"
+"Jeśli nie kliknij na przycisk \"%s\" w celu ponownego uruchomienia\n"
 "komputera."
 
 #: help.pm:14 install_steps_gtk.pm:552 install_steps_interactive.pm:92
@@ -3659,9 +3675,8 @@ msgid ""
 msgstr ""
 "GNU/Linux jest systemem wielodostępnym, co oznacza że każdy użytkownik\n"
 "posiada własne ustawienia, własne pliki, może pracować równocześnie\n"
-"z innymi użytkownikami na tym samym komputerze itd. Można zajrzeć do\n"
-"\"Podręcznika użytkownika\" aby uzyskać na ten temat więcej informacji.\n"
-"Jednak w przeciwieństwie do użytkownika \"root\", będącym administratorem\n"
+"z innymi użytkownikami na tym samym komputerze itd. Jednak, \n"
+"w przeciwieństwie do użytkownika \"root\", będącym administratorem,\n"
 "użytkownicy tutaj dodani nie będą mieli możliwości zmiany czegokolwiek\n"
 "ponad swoje własne ustawienia, co chroni przed niezamierzonymi lub\n"
 "złośliwymi zmianami mogącymi wpływać na działanie całego systemu.\n"
@@ -3864,8 +3879,8 @@ msgstr ""
 "\n"
 "Pakiety są podzielone na grupy tematyczne. Dostępne są cztery wstępnie\n"
 "zdefiniowane kategorie instalacji. Można mieszać i dopasowywać aplikacje\n"
-"z różnych pojemników, tak więc na przykład instalacja \"Stacja robocza\"\n"
-"może wciąż zawierać aplikacje z sekcji \"Serwer\".\n"
+"z różnych sekcji, tak więc na przykład instalacja \"Stacja robocza\"\n"
+"może także zawierać aplikacje z sekcji \"Serwer\".\n"
 "\n"
 " * \"%s\": jeśli komputer będzie pracował jako stacja\n"
 "robocza, należy wybrać jedną lub więcej związanych z tą sekcją grup.\n"
@@ -4064,8 +4079,8 @@ msgid ""
 "manual is similar to the one used during installation."
 msgstr ""
 "\"%s\": kliknięcie przycisku \"%s\" spowoduje otwarcie\n"
-"druida konfiguracji drukarki. Skonsultuj się z odpowiednim rozdziałem\n"
-"podręcznika aby znaleźć więcej informacji na temat sposobu konfiguracji\n"
+"druida konfiguracji drukarki. Przeczytaj odpowiedni rozdział\n"
+"podręcznika, aby uzyskać więcej informacji na temat sposobu konfiguracji\n"
 "nowej drukarki. Interfejs wykorzystywany w tym miejscu jest podobny\n"
 "do interfejsu używanego w czasie instalacji. "
 
@@ -4647,7 +4662,7 @@ msgstr ""
 "Kliknij \"%s\", jeśli już można przystąpić do formatowania partycji.\n"
 "\n"
 "Kliknij \"%s\", jeśli chcesz wybrać inne partycje dla nowej instalacji\n"
-"Linuksa Mandrake.\n"
+"Mandrakelinux.\n"
 "\n"
 "Kliknij \"%s\" jeśli chcesz wybrać sprawdzanie niektórych partycji\n"
 "w poszukiwaniu uszkodzonych sektorów na dysku."
@@ -4676,7 +4691,7 @@ msgid ""
 "will appear: review the selection, and press \"%s\" to retrieve and install\n"
 "the selected package(s), or \"%s\" to abort."
 msgstr ""
-"Podczas instalacji Linuksa Mandrake, być może niektóre pakiety\n"
+"Podczas instalacji Mandrakelinux, być może niektóre pakiety\n"
 "zostały zaktualizowane od wydania początkowego. Niektóre błędy mogą\n"
 "zostać naprawione, zaś problemy z bezpieczeństwem rozwiązane. Aby\n"
 "skorzystać z możliwości aktualizacji, dobrze jest pobrać część danych\n"
@@ -4923,7 +4938,7 @@ msgid ""
 "disk or partition is called \"C:\")."
 msgstr ""
 "Na dysku wykryto więcej niż jedną partycję Windows. Wybierz, którą\n"
-"z nich chcesz zmniejszyć w celu zainstalowania Linuksa Mandrake\n"
+"z nich chcesz zmniejszyć w celu zainstalowania systemu Mandrakelinux\n"
 "\n"
 "Każda partycja jest określana za pomocą informacji: \"Nazwa linuksowa\",\n"
 "\"Nazwa Windows\" i \"Rozmiar\".\n"
@@ -5776,9 +5791,9 @@ msgid "Insert the CD"
 msgstr "Włóż płytę CD"
 
 #: install_any.pm:445
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to mount CD-ROM"
-msgstr "Nie można rozdzielić procesów: %s"
+msgstr "Nie można zamontować CD-ROM-u"
 
 #: install_any.pm:468
 #, c-format
@@ -5809,9 +5824,9 @@ msgstr ""
 "Włóż płytę opisaną \"%s\" do kieszeni napędu i naciśnij Ok."
 
 #: install_any.pm:652
-#, fuzzy, c-format
+#, c-format
 msgid "Copying in progress"
-msgstr "Wykrywanie w toku"
+msgstr "Kopiowanie w toku"
 
 #. -PO: keep the double empty lines between sections, this is formatted a la LaTeX
 #: install_any.pm:783
@@ -5857,14 +5872,14 @@ msgid "Error reading file %s"
 msgstr "Błąd odczytu pliku %s"
 
 #: install_any.pm:1425
-#, fuzzy, c-format
+#, c-format
 msgid "The following disk(s) were renamed:"
-msgstr "- usunięto %s\n"
+msgstr "Zmieniono nazwy następujących dysków: "
 
 #: install_any.pm:1427
 #, c-format
 msgid "%s (previously named as %s)"
-msgstr ""
+msgstr "%s (wcześniejsza nazwa: %s)"
 
 #: install_any.pm:1465
 #, c-format
@@ -5891,17 +5906,17 @@ msgid "NFS"
 msgstr "NFS"
 
 #: install_any.pm:1532
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose a media"
-msgstr "Proszę wybrać"
+msgstr "Proszę wybrać nośnik"
 
 #: install_any.pm:1564
-#, fuzzy, c-format
+#, c-format
 msgid "Bad media %s"
-msgstr "dodany nośnik %s"
+msgstr "Nieprawidłowy nośnik %s"
 
 #: install_any.pm:1576
-#, fuzzy, c-format
+#, c-format
 msgid "File already exists. Overwrite it?"
 msgstr "Plik już istnieje. Nadpisać?"
 
@@ -6011,7 +6026,7 @@ msgstr ""
 #: install_interactive.pm:139
 #, c-format
 msgid "Which partition do you want to resize?"
-msgstr "Którą partycję chcesz zmniejszyć?"
+msgstr "Rozmiar której partycji chcesz zmienić?"
 
 #: install_interactive.pm:153
 #, c-format
@@ -6113,7 +6128,7 @@ msgstr ""
 #: install_interactive.pm:232
 #, c-format
 msgid "Use fdisk"
-msgstr "Użyj fdiska"
+msgstr "Użyj programu fdisk"
 
 #: install_interactive.pm:235
 #, c-format
@@ -6398,7 +6413,7 @@ msgid ""
 "may be applicable to you, check your local laws."
 msgstr ""
 "Ostrzeżenie: Wolnodostępne oprogramowanie może niekoniecznie być\n"
-"wolne od patentów, i niektóre programy mogą być chronione patentami\n"
+"wolne od patentów i niektóre programy mogą być chronione patentami\n"
 "w Twoim kraju. Na przykład dołączone dekodery MP3 mogą wymagać licencji\n"
 "na dalsze używanie (zajrzyj na stronę http://www.mp3licensing.com\n"
 "aby uzyskać więcej szczegółów). Jeśli nie masz pewności czy\n"
@@ -6655,9 +6670,9 @@ msgid "Show automatically selected packages"
 msgstr "Pokaż automatycznie wybrane pakiety"
 
 #: install_steps_gtk.pm:390
-#, fuzzy, c-format
+#, c-format
 msgid "Load/Save selection"
-msgstr "Zapis zaznaczenia"
+msgstr "Wczytanie/Zapis zaznaczenia"
 
 #: install_steps_gtk.pm:391
 #, c-format
@@ -6727,7 +6742,7 @@ msgstr ""
 "\n"
 "Włóż płytę opisaną \"%s\" do kieszeni napędu i naciśnij Ok.\n"
 "Jeśli jej nie posiadasz, naciśnij Anuluj, by pominąć instalację pakietów z "
-"niej."
+"tej płyty."
 
 #: install_steps_gtk.pm:571 install_steps_interactive.pm:746
 #, c-format
@@ -6768,11 +6783,15 @@ msgid ""
 "It will then continue from the hard drive and the packages will remain "
 "available once the system is fully installed."
 msgstr ""
+"Istnieje możliwość skopiowania przed instalacją zawartości płyt CD na dysk "
+"twardy.\n"
+"Instalacja będzie kontynuowana z dysku twardego a skopiowane pakiety będą "
+"dostępne po zakończeniu instalacji."
 
 #: install_steps_gtk.pm:686
 #, c-format
 msgid "Copy whole CDs"
-msgstr ""
+msgstr "Skopiuj wszystkie płyty CD"
 
 #: install_steps_interactive.pm:85
 #, c-format
@@ -6782,7 +6801,7 @@ msgstr "Umowa licencyjna"
 #: install_steps_interactive.pm:89
 #, c-format
 msgid "Release Notes"
-msgstr "Uwagi o wydaniu"
+msgstr "Informacje na temat wydania"
 
 #: install_steps_interactive.pm:119
 #, c-format
@@ -6802,7 +6821,7 @@ msgstr "Instalacja/Uaktualnienie"
 #: install_steps_interactive.pm:152
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Czy to instalacja, czy uaktualnienie?"
+msgstr "Czy to instalacja czy uaktualnienie?"
 
 #: install_steps_interactive.pm:158
 #, c-format
@@ -6885,18 +6904,21 @@ msgid ""
 "No free space for 1MB bootstrap! Install will continue, but to boot your "
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
-"Brak wolnej przestrzeni na 1MB bootstrap. Instalacja będzie kontynuowana,\n"
-"lecz należy utworzyć partycję bootstrap."
+"Brak wolnej przestrzeni na 1MB bootstrap! Instalacja będzie kontynuowana,\n"
+"lecz aby uruchomić system, należy utworzyć partycję bootstrap za pomocą "
+"programu DiskDrake."
 
 #: install_steps_interactive.pm:317
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You'll need to create a PPC PReP Boot bootstrap! Install will continue, but "
 "to boot your system, you'll need to create the bootstrap partition in "
 "DiskDrake"
 msgstr ""
-"Brak wolnej przestrzeni na 1MB bootstrap. Instalacja będzie kontynuowana,\n"
-"lecz należy utworzyć partycję bootstrap."
+"Konieczne jest utworzenie bootstrap PPC PReP. Instalacja będzie "
+"kontynuowana,\n"
+"lecz aby uruchomić system, należy utworzyć partycję bootstrap w programie "
+"DiskDrake."
 
 #: install_steps_interactive.pm:353
 #, c-format
@@ -6955,13 +6977,13 @@ msgid ""
 msgstr "Zbyt mało miejsca na instalację lub uaktualnienie (%d > %d)"
 
 #: install_steps_interactive.pm:495
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose load or save package selection.\n"
 "The format is the same as auto_install generated files."
 msgstr ""
-"Wybierz odczyt lub zapis listy wybranych pakietów\n"
-"na dyskietkę. Format jest identyczny z dyskiem automatycznej\n"
+"Wybierz odczyt lub zapis listy wybranych pakietów.\n"
+"Format jest identyczny z dyskiem automatycznej\n"
 "instalacji."
 
 #: install_steps_interactive.pm:497
@@ -6976,9 +6998,9 @@ msgid "Save"
 msgstr "Zapisz"
 
 #: install_steps_interactive.pm:505
-#, fuzzy, c-format
+#, c-format
 msgid "Bad file"
-msgstr "Odczyt pliku"
+msgstr "Nieprawidłowy plik"
 
 #: install_steps_interactive.pm:581
 #, c-format
@@ -7220,18 +7242,17 @@ msgid "Preparing bootloader..."
 msgstr "Przygotowywanie programu rozruchowego..."
 
 #: install_steps_interactive.pm:1227
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You appear to have an OldWorld or Unknown machine, the yaboot bootloader "
 "will not work for you. The install will continue, but you'll need to use "
 "BootX or some other means to boot your machine. The kernel argument for the "
 "root fs is: root=%s"
 msgstr ""
-"Prawdopodobnie posiadasz przestarzały (OldWorld)\n"
-"lub też nieznany (Unknown) komputer. Program rozruchowy\n"
-"yaboot nie będzie współpracował. Instalacja będzie\n"
-"kontynuowana lecz trzeba będzie używać programu BootX\n"
-"aby uruchomić komputer"
+"Prawdopodobnie posiadasz przestarzały (OldWorld)lub też nieznany (Unknown) "
+"komputer. Program rozruchowyyaboot nie będzie działał. Instalacja będzie "
+"kontynuowana lecz konieczne jest użycie programu BootX, aby uruchomić "
+"komputer. Argument jądra dla głównego systemu plików \"/\": root=%s"
 
 #: install_steps_interactive.pm:1233
 #, c-format
@@ -7672,18 +7693,18 @@ msgid ""
 msgstr "Dvoraka (Esperanto)"
 
 #: keyboard.pm:214
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (French)"
-msgstr "Dvoraka (norweski)"
+msgstr "Dvoraka (francuski)"
 
 #: keyboard.pm:216
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (UK)"
-msgstr "Dvoraka (US)"
+msgstr "Dvoraka (UK)"
 
 #: keyboard.pm:217
 #, c-format
@@ -7693,11 +7714,11 @@ msgid ""
 msgstr "Dvoraka (norweski)"
 
 #: keyboard.pm:219
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Dvorak (Polish)"
-msgstr "Dvoraka (szwedzki)"
+msgstr "Dvoraka (polski)"
 
 #: keyboard.pm:220
 #, c-format
@@ -7854,18 +7875,18 @@ msgid ""
 msgstr "koreański"
 
 #: keyboard.pm:254
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Kurdish (arabic script)"
-msgstr "arabski"
+msgstr "kurdyjski (arabski sktypt)"
 
 #: keyboard.pm:255
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Kyrgyz"
-msgstr "Klawiatura kirgizka"
+msgstr "kirgizki"
 
 #: keyboard.pm:256
 #, c-format
@@ -8120,11 +8141,11 @@ msgid ""
 msgstr "tajski"
 
 #: keyboard.pm:306
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Thai (TIS-820)"
-msgstr "tajski"
+msgstr "tajski (TIS-820)"
 
 #: keyboard.pm:308
 #, fuzzy, c-format
@@ -8159,14 +8180,14 @@ msgstr "niemiecki"
 msgid ""
 "_: keyboard\n"
 "Turkish (traditional \"F\" model)"
-msgstr "turecki"
+msgstr "turecki (tradycyjny model \"F\")"
 
 #: keyboard.pm:317
 #, c-format
 msgid ""
 "_: keyboard\n"
 "Turkish (modern \"Q\" model)"
-msgstr "turecki (nowy)"
+msgstr "turecki (nowoczesny model \"Q\")"
 
 #: keyboard.pm:319
 #, c-format
@@ -8176,11 +8197,11 @@ msgid ""
 msgstr "ukraiński"
 
 #: keyboard.pm:322
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "_: keyboard\n"
 "Urdu keyboard"
-msgstr "Oriya"
+msgstr "klawiatura Urdu"
 
 #: keyboard.pm:324
 #, c-format
@@ -8311,7 +8332,7 @@ msgid ""
 "During installation, you will need to use the Right Control\n"
 "key to switch between the different keyboard layouts."
 msgstr ""
-"To ustawienie zostanie zaktywowane po instalacji.\n"
+"To ustawienie zostanie aktywowane po instalacji.\n"
 "W czasie instalacji, będzie potrzebne skorzystanie\n"
 "z prawego klawisza Control w celu przełączania się pomiędzy\n"
 "różnymi układami klawiatur."
@@ -9513,24 +9534,24 @@ msgid "See hardware info"
 msgstr "Wyświetl informacje o sprzęcie"
 
 #: modules/interactive.pm:82
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for USB controller"
-msgstr "Instalacja sterownika do karty %s %s"
+msgstr "Instalacja sterownika kontrolera USB"
 
 #: modules/interactive.pm:83
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for firewire controller %s"
-msgstr "Instalacja sterownika do karty %s %s"
+msgstr "Instalacja sterownika kontrolera firewire %s"
 
 #: modules/interactive.pm:84
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for hard drive controller %s"
-msgstr "Instalacja sterownika do karty %s %s"
+msgstr "Instalacja sterownika kontrolera dysku twartego %s"
 
 #: modules/interactive.pm:85
-#, fuzzy, c-format
+#, c-format
 msgid "Installing driver for ethernet controller %s"
-msgstr "Instalacja sterownika do karty %s %s"
+msgstr "Instalacja sterownika kontrolera ethernet %s"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
@@ -9813,9 +9834,9 @@ msgid "Any PS/2 & USB mice"
 msgstr "Dowolna mysz PS/2 i USB"
 
 #: mouse.pm:89
-#, fuzzy, c-format
+#, c-format
 msgid "Microsoft Xbox Controller S"
-msgstr "Microsoft Explorer"
+msgstr "Kontroler S Microsoft Xbox"
 
 #: mouse.pm:89 mouse.pm:359 mouse.pm:368 mouse.pm:420
 #, c-format
@@ -9941,7 +9962,7 @@ msgstr "Serwer telnet"
 #: network/drakfirewall.pm:48
 #, c-format
 msgid "Windows Files Sharing (SMB)"
-msgstr ""
+msgstr "Windowsowy system współdzielenia plików (SMB)"
 
 #: network/drakfirewall.pm:54
 #, c-format
@@ -10187,7 +10208,7 @@ msgstr "PPP przez ATM (PPPoA)"
 #: network/netconnect.pm:165
 #, c-format
 msgid "DSL over CAPI"
-msgstr ""
+msgstr "DSL przez CAPI"
 
 #: network/netconnect.pm:169
 #, c-format
@@ -10402,14 +10423,14 @@ msgid "Account Password"
 msgstr "Hasło:"
 
 #: network/netconnect.pm:325
-#, fuzzy, c-format
+#, c-format
 msgid "Cable: account options"
-msgstr "Połączenie wdzwaniane: opcje konta"
+msgstr "Kablówka: opcje konta"
 
 #: network/netconnect.pm:328
 #, c-format
 msgid "Use BPALogin (needed for Telstra)"
-msgstr ""
+msgstr "Użycie BPALogin (niezbędne w Telstra)"
 
 #: network/netconnect.pm:362 network/netconnect.pm:715
 #: network/netconnect.pm:920
@@ -10483,6 +10504,9 @@ msgid ""
 "capabilities than the free driver (like sending faxes). Which driver do you "
 "want to use?"
 msgstr ""
+"Istnieje sterownik CAPI dla tego modemu. Sterownik CAPI może posiadać "
+"większe możliwości niż otwarty sterownik (np. wysyłanie faksów). Którego "
+"sterownika chcesz użyć?"
 
 #: network/netconnect.pm:461 standalone/drakconnect:116 standalone/drakups:247
 #: standalone/harddrake2:131
@@ -10721,7 +10745,7 @@ msgstr "Ręcznie załaduj sterownik"
 #: network/netconnect.pm:922
 #, c-format
 msgid "Use a Windows driver (with ndiswrapper)"
-msgstr ""
+msgstr "Użycie sterownika dla systemu Windows (z wykorzystaniem ndiswrapper)"
 
 #: network/netconnect.pm:940
 #, c-format
@@ -10812,24 +10836,24 @@ msgid "DHCP client"
 msgstr "Klient DHCP"
 
 #: network/netconnect.pm:1041 standalone/drakconnect:389
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP timeout (in seconds)"
-msgstr "Limit czasu bezczynności (w sek.)"
+msgstr "Limit czasu bezczynności DHCP (w sek.)"
 
 #: network/netconnect.pm:1042 standalone/drakconnect:392
-#, fuzzy, c-format
+#, c-format
 msgid "Get DNS servers from DHCP"
-msgstr "Numer IP serwera DNS"
+msgstr "Pobierz z serwera DHCP numer IP serwera DNS"
 
 #: network/netconnect.pm:1043
 #, c-format
 msgid "Get YP servers from DHCP"
-msgstr ""
+msgstr "Pobierz z serwera DHCP adres IP serwera YP "
 
 #: network/netconnect.pm:1044
 #, c-format
 msgid "Get NTPD servers from DHCP"
-msgstr ""
+msgstr "Pobierz z serwera DHCP adres IP serwera NTPD"
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -10838,9 +10862,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "Adres IP powinien być w formacie typu 192.168.1.1"
 
 #: network/netconnect.pm:1057 standalone/drakconnect:686
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask should be in format 255.255.224.0"
-msgstr "Adres IP bramy powinien być w formacie typu 1.2.3.4"
+msgstr "Maska sieci powinna mieć następujący format 255.255.224.0"
 
 #: network/netconnect.pm:1041
 #, c-format
@@ -10854,19 +10878,19 @@ msgid "%s already in use\n"
 msgstr "%s jest już w użyciu\n"
 
 #: network/netconnect.pm:1067
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an ndiswrapper driver"
-msgstr "Wybieranie odpowiedniego sterownika"
+msgstr "Wybieranie sterownika ndiswrapper"
 
 #: network/netconnect.pm:1068 network/netconnect.pm:1075
-#, fuzzy, c-format
+#, c-format
 msgid "Install a new driver"
-msgstr "Ręcznie załaduj sterownik"
+msgstr "Instalacja nowego sterownika"
 
 #: network/netconnect.pm:1068
-#, fuzzy, c-format
+#, c-format
 msgid "Use already installed driver (%s)"
-msgstr "Identyfikator ssh zainstalowany"
+msgstr "Wykorzystaj aktualnie zainstalowany sterownik (%s)"
 
 #: network/netconnect.pm:1072 printer/printerdrake.pm:3644
 #, c-format
@@ -10876,7 +10900,7 @@ msgstr "Nie można zainstalować pakietu %s!"
 #: network/netconnect.pm:1076
 #, c-format
 msgid "Please select the Windows driver (.inf file)"
-msgstr ""
+msgstr "Wybierz sterownik dla systemu Windows (plik .inf)"
 
 #: network/netconnect.pm:1126 network/netconnect.pm:1155
 #, c-format
@@ -10916,7 +10940,7 @@ msgstr "Stopa bitowa (w b/s)"
 #: network/netconnect.pm:1141
 #, c-format
 msgid "Use Wi-Fi Protected Access (WPA)"
-msgstr ""
+msgstr "Użycie protokołu Wi-Fi Protected Access (WPA)"
 
 #: network/netconnect.pm:1168
 #, c-format
@@ -11169,9 +11193,9 @@ msgid "Configuration is complete, do you want to apply settings?"
 msgstr "Konfiguracja została zakończona, czy chcesz zastosować ustawienia?"
 
 #: network/netconnect.pm:1336
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to allow users to start the connection?"
-msgstr "Czy chcesz łączyć się Internetem przy uruchamianiu komputera?"
+msgstr "Czy użytkownicy będą mieli prawo uruchomienia połączenia?"
 
 #: network/netconnect.pm:1345
 #, c-format
@@ -11601,24 +11625,24 @@ msgid ", USB printer"
 msgstr ", drukarka USB"
 
 #: printer/main.pm:364
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on a parallel port"
-msgstr "Drukarka podłączona do portu równoległego #%s"
+msgstr ", drukarka HP podłączona do portu równoległego"
 
 #: printer/main.pm:366
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on USB"
-msgstr ", drukarka USB"
+msgstr ", drukarka HP podłączona do portu USB"
 
 #: printer/main.pm:368
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer on HP JetDirect"
-msgstr ",wielofunkcyjne urządzenie podłączone do HP JetDirect"
+msgstr ", wielofunkcyjne urządzenie HP podłączone do HP JetDirect"
 
 #: printer/main.pm:370
-#, fuzzy, c-format
+#, c-format
 msgid ", HP printer"
-msgstr ", drukarka USB"
+msgstr ", drukarka HP"
 
 #: printer/main.pm:376
 #, c-format
@@ -11692,24 +11716,24 @@ msgid "USB printer"
 msgstr "Drukarka USB"
 
 #: printer/main.pm:432
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on a parallel port"
-msgstr "Drukarka podłączona do portu równoległego #%s"
+msgstr "Drukarka HP podłączona do portu równoległego "
 
 #: printer/main.pm:434
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on USB"
-msgstr "Nie znaleziono drukarki!"
+msgstr "Drukarka HP podłączona do portu USB"
 
 #: printer/main.pm:436
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer on HP JetDirect"
-msgstr ",wielofunkcyjne urządzenie podłączone do HP JetDirect"
+msgstr "Drukarka HP podłączona do HP JetDirect"
 
 #: printer/main.pm:438
-#, fuzzy, c-format
+#, c-format
 msgid "HP printer"
-msgstr "Drukarka"
+msgstr "Drukarka HP"
 
 #: printer/main.pm:444
 #, c-format
@@ -12215,12 +12239,12 @@ msgstr ""
 #: printer/printerdrake.pm:623
 #, c-format
 msgid "Modify timeout for network printer auto-detection"
-msgstr ""
+msgstr "Modyfikacja limitu czasu dla auto-detekcji drukarki sieciowej"
 
 #: printer/printerdrake.pm:629
 #, c-format
 msgid "Enter the timeout for network printer auto-detection (in msec) here. "
-msgstr ""
+msgstr "Wprowadź limit czasu dla auto-detekcji drukarki sieciowej (w msek)."
 
 #: printer/printerdrake.pm:631
 #, c-format
@@ -12229,11 +12253,14 @@ msgid ""
 "network printers will be, but the scan can take longer then, especially if "
 "there are many machines with local firewalls in the network. "
 msgstr ""
+"Im dłuższy limit czasu tym proces wykrywania drukarek sieciowych będzie "
+"bardziej dokładny, ale skanowanie może potrwać dłużej, w szczególności "
+"jeżeli w sieci działa wiele komputerów z lokalnymi zaporami sieciowymi."
 
 #: printer/printerdrake.pm:635
-#, fuzzy, c-format
+#, c-format
 msgid "The timeout must be a positive integer number!"
-msgstr "Przesunięcie musi być nieujemną liczbą całkowitą!"
+msgstr "Limit czasu musi być nieujemną liczbą całkowitą!"
 
 #: printer/printerdrake.pm:673
 #, c-format
@@ -12600,9 +12627,9 @@ msgid "Auto-detect printers connected to machines running Microsoft Windows"
 msgstr "Automatycznie wykryj drukarki podłączone do komputerów z MS Windows"
 
 #: printer/printerdrake.pm:1108
-#, fuzzy, c-format
+#, c-format
 msgid "No auto-detection"
-msgstr "Automatyczne wykrywanie"
+msgstr "Bez automatycznego wykrywania"
 
 #: printer/printerdrake.pm:1173
 #, c-format
@@ -13183,6 +13210,10 @@ msgid ""
 "inkjets, scanning on multi-function devices, and memory card access on "
 "printers with card readers. "
 msgstr ""
+"Wiele drukarek HP posiada dodatkowe funkcje, informacje serwisowe (kontrola "
+"poziomu atramentu, czyszczenie dysz, wyrównywanie głowicy ...) na niezbyt "
+"starych drukarkach atramentowych, skanowanie w urządzeniach wielofunkcyjnych "
+"i czytniki kart w drukarkach umożliwiające dostęp do kart."
 
 #: printer/printerdrake.pm:2106
 #, c-format
@@ -13190,6 +13221,8 @@ msgid ""
 "To access these extra functions on your HP printer, it must be set up with "
 "the appropriate software: "
 msgstr ""
+"Aby uzyskać dostęp do tych dodatkowych funkcji drukarek HP muszą one zostać "
+"skonfigurowane z użyciem odpowiedniego oprogramowania: "
 
 #: printer/printerdrake.pm:2107
 #, c-format
@@ -13198,6 +13231,9 @@ msgid ""
 "easy-to-use graphical application \"Toolbox\" and four-edge full-bleed on "
 "newer PhotoSmart models "
 msgstr ""
+"Za pomocą nowszego HPLIP, który umożliwia obsługę drukarki za pomocą łatwej "
+"w obsłudze graficznego programu \"Toolbox\" i narzędzia dołączone do "
+"nowszych modeli PhotoSmart "
 
 #: printer/printerdrake.pm:2108
 #, c-format
@@ -13205,25 +13241,27 @@ msgid ""
 "or with the older HPOJ which allows only scanner and memory card access, but "
 "could help you in case of failure of HPLIP. "
 msgstr ""
+"lub za pomocą starszego HPOJ, który umożliwia dostęp do skanerów i kart "
+"pamięci, ale może być przydatny w przypadku niepowodzenia z HPLIP."
 
 #: printer/printerdrake.pm:2110
 #, c-format
 msgid "What is your choice (choose \"None\" for non-HP printers)? "
-msgstr ""
+msgstr "Jak jest twój wybór (wybierz \"Żaden\" dla drukarek innych niż HP)?"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2112
 #: printer/printerdrake.pm:2138 printer/printerdrake.pm:2144
 #: printer/printerdrake.pm:2170
-#, fuzzy, c-format
+#, c-format
 msgid "HPLIP"
-msgstr "PL_IP"
+msgstr "HPLIP"
 
 #: printer/printerdrake.pm:2111 printer/printerdrake.pm:2114
 #: printer/printerdrake.pm:2270 printer/printerdrake.pm:2276
 #: printer/printerdrake.pm:2287
 #, c-format
 msgid "HPOJ"
-msgstr ""
+msgstr "HPOJ"
 
 #: printer/printerdrake.pm:2119
 #, c-format
@@ -13247,15 +13285,14 @@ msgid "Only printing will be possible on the %s."
 msgstr "Na %s będzie możliwe tylko drukowanie."
 
 #: printer/printerdrake.pm:2160
-#, fuzzy, c-format
+#, c-format
 msgid "Could not remove your old HPOJ configuration file %s for your %s! "
-msgstr ""
-"Nie można utworzyć katalogu konfiguracji \"%s\" w katalogu użytkownika: %s\n"
+msgstr "Nie można usuną starego pliku konfiguracyjnego HPOJ \"%s\" dla %s!"
 
 #: printer/printerdrake.pm:2162
 #, c-format
 msgid "Please remove the file manually and restart HPOJ."
-msgstr ""
+msgstr "Usuń plik ręcznie i uruchom ponownie HPOJ."
 
 #: printer/printerdrake.pm:2170 printer/printerdrake.pm:2287
 #, c-format
@@ -13263,9 +13300,9 @@ msgid "Checking device and configuring %s..."
 msgstr "Sprawdzanie urządzenia i konfigurowanie %s..."
 
 #: printer/printerdrake.pm:2189
-#, fuzzy, c-format
+#, c-format
 msgid "Which printer do you want to set up with HPLIP?"
-msgstr "Na który sektor chcesz przenieść ?"
+msgstr "Którą drukarkę skonfigurować za pomocą HPLIP?"
 
 #: printer/printerdrake.pm:2218 printer/printerdrake.pm:2331
 #, c-format
@@ -13278,9 +13315,9 @@ msgid "Scanning on the %s will not be possible."
 msgstr "Skanowanie na %s nie będzie możliwe."
 
 #: printer/printerdrake.pm:2246
-#, fuzzy, c-format
+#, c-format
 msgid "Using and Maintaining your %s"
-msgstr "Wysyłanie i przesyłanie listem artykułu \"%s\""
+msgstr "Korzystanie i obsługa \"%s\""
 
 #: printer/printerdrake.pm:2371
 #, c-format
@@ -13303,9 +13340,9 @@ msgid "Photo memory card access on your HP multi-function device"
 msgstr "Dostęp do karty pamięci urządzenia wielofunkcyjnego HP"
 
 #: printer/printerdrake.pm:2421
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring device..."
-msgstr "Konfiguracja..."
+msgstr "Konfiguracja urządzenia..."
 
 #: printer/printerdrake.pm:2455
 #, c-format
@@ -13345,6 +13382,9 @@ msgid ""
 "printer unaccessible from Windows clients. Do you really want to use this "
 "name?"
 msgstr ""
+"Nazwa drukarki \"%s\" jest dłuższa niż 12 znaków, co może spowodować, że "
+"będzie ona niedostępna dla klientów Windows. Czy na pewno chcesz wykorzystać "
+"tą nazwę?"
 
 #: printer/printerdrake.pm:2700
 #, c-format
@@ -13929,9 +13969,9 @@ msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Drukowanie/Dostęp do kart foto na \"%s\""
 
 #: printer/printerdrake.pm:3798
-#, fuzzy, c-format
+#, c-format
 msgid "Using/Maintaining the printer \"%s\""
-msgstr "Drukowanie na drukarce \"%s\""
+msgstr "Korzystanie.obsługa drukarki \"%s\""
 
 #: printer/printerdrake.pm:3799
 #, c-format
@@ -13950,6 +13990,9 @@ msgid ""
 "features of your printer are supported.\n"
 "\n"
 msgstr ""
+"Drukarka %s jest skonfigurowana z wykorzystaniem sterownika HPLIP firmy HP. "
+"Dzięki temu obsługiwanych jest wiele ze specjalnych funkcji tej drukarki.\n"
+"\n"
 
 #: printer/printerdrake.pm:3830
 #, c-format
@@ -13957,6 +14000,9 @@ msgid ""
 "The scanner in your printer can be used with the usual SANE software, for "
 "example Kooka or XSane (Both in the Multimedia/Graphics menu). "
 msgstr ""
+"Skaner wbudowany w drukarkę może być używany ze zwykłym oprogramowaniem "
+"SANE, np. Kooka lub XSane (oba programy znajdują się w menu Multimedia/"
+"Grafika)."
 
 #: printer/printerdrake.pm:3831
 #, c-format
@@ -13965,6 +14011,9 @@ msgid ""
 "your scanner on the network.\n"
 "\n"
 msgstr ""
+"Uruchom Scannerdrake (Sprzęt/Skanery w Centrum Sterowania Mandrakelinux), "
+"aby udostępnić skaner w sieci.\n"
+"\n"
 
 #: printer/printerdrake.pm:3835
 #, c-format
@@ -13972,6 +14021,8 @@ msgid ""
 "The memory card readers in your printer can be accessed like a usual USB "
 "mass storage device. "
 msgstr ""
+"Z czytnika kart pamięci w twojej drukarce można korzystać tak jak ze "
+"zwykłego urządzenia USB do przechowywania danych."
 
 #: printer/printerdrake.pm:3836
 #, c-format
@@ -13980,6 +14031,8 @@ msgid ""
 "your desktop.\n"
 "\n"
 msgstr ""
+"Po włożeniu karty na pulpicie powinna się pojawić ikona twardego dysku.\n"
+"\n"
 
 #: printer/printerdrake.pm:3838
 #, c-format
@@ -13988,6 +14041,10 @@ msgid ""
 "Toolbox (Menu: System/Monitoring/HP Printer Toolbox) clicking the \"Access "
 "Photo Cards...\" button on the \"Functions\" tab. "
 msgstr ""
+"Z czytników kart pamięci w twojej drukarce można korzystać za pomocą "
+"programy Printer Toolbox firmy HP (Menu: System/Monitorowanie/HP Printer "
+"Toolbox). W tym celu należy wybrać opcję  \"Access Photo Cards...\" w panelu "
+"\"Functions\"."
 
 #: printer/printerdrake.pm:3839
 #, c-format
@@ -13996,6 +14053,9 @@ msgid ""
 "card reader is usually faster.\n"
 "\n"
 msgstr ""
+"Zauważ, że ten proces jest bardzo powolny. Odczyt obrazów z aparatu lub "
+"czytnika kart USB jest zazwyczaj szybszy.\n"
+"\n"
 
 #: printer/printerdrake.pm:3842
 #, c-format
@@ -14004,26 +14064,29 @@ msgid ""
 "lot of status monitoring and maintenance functions for your %s:\n"
 "\n"
 msgstr ""
+"HP Printer Toolbox (Menu: System/Monitorowanie/HP Printer Toolbox) zawiera "
+"wiele funkcji monitorowania statusu oraz obsługi drukarki %s:\n"
+"\n"
 
 #: printer/printerdrake.pm:3843
 #, c-format
 msgid " - Ink level/status info\n"
-msgstr ""
+msgstr " - Informacja o poziomie atramentu/statusie\n"
 
 #: printer/printerdrake.pm:3844
 #, c-format
 msgid " - Ink nozzle cleaning\n"
-msgstr ""
+msgstr " - Czyszczenie dysz\n"
 
 #: printer/printerdrake.pm:3845
-#, fuzzy, c-format
+#, c-format
 msgid " - Print head alignment\n"
-msgstr "Poziome wyrównanie"
+msgstr " - Wyrównanie główicy drukującej\n"
 
 #: printer/printerdrake.pm:3846
-#, fuzzy, c-format
+#, c-format
 msgid " - Color calibration\n"
-msgstr "Konfiguracja kolorów"
+msgstr " - Kalibracja kolorów\n"
 
 #: printer/printerdrake.pm:3861
 #, c-format
@@ -15908,7 +15971,7 @@ msgstr "<b>Czym jest Mandrakelinux?</b>"
 #: share/advertising/01.pl:15
 #, c-format
 msgid "Welcome to <b>Mandrakelinux</b>!"
-msgstr "Witaj w systemie <b>Mandrakelinux</b>!"
+msgstr "Witamy w systemie <b>Mandrakelinux</b>!"
 
 #: share/advertising/01.pl:17
 #, c-format
@@ -15936,7 +15999,7 @@ msgstr ""
 #: share/advertising/02.pl:13
 #, c-format
 msgid "<b>Open Source</b>"
-msgstr "<b>Open Source</b>"
+msgstr "<b>Otwarte Oprogramowanie</b>"
 
 #: share/advertising/02.pl:15
 #, c-format
@@ -15953,7 +16016,8 @@ msgid ""
 msgstr ""
 "Mandrakelinux został wydany na zasadzie Open Source. To oznacza, że to nowe "
 "wydanie jest wynikiem <b>współpracy</b> pomiędzy <b>zespołem programistów "
-"Mandrakesoft</b> oraz <b>światową społecznością</b> Mandrakelinux."
+"Mandrakesoft</b> oraz <b>światową społecznością</b> współpracownikół "
+"Mandrakelinux."
 
 #: share/advertising/02.pl:19
 #, c-format
@@ -15962,7 +16026,7 @@ msgid ""
 "of this latest release."
 msgstr ""
 "Chcielibyśmy <b>podziękować</b> każdemu kto brał udział w tworzeniu tego "
-"najnowszego wydania."
+"najświeższego wydania."
 
 #: share/advertising/03.pl:13
 #, c-format
@@ -15976,7 +16040,7 @@ msgid ""
 "Mandrakelinux tools are licensed under the <b>General Public License</b>."
 msgstr ""
 "Większość oprogramowania załączonego w dystrybucji oraz wszystkie narzędzia "
-"Mandrakelinux jest licencjonowana na zasadach <b>Ogólnej Licencji "
+"Mandrakelinux jest licencjonowana na zasadach <b>Powszechnej Licencji "
 "Publicznej</b> (GPL)."
 
 #: share/advertising/03.pl:17
@@ -16042,7 +16106,7 @@ msgid ""
 "version that Mandrakesoft wants to keep <b>available to everyone</b>."
 msgstr ""
 "Właśnie instalujesz <b>Mandrakelinux Download</b>. Ta wersja jest wersją "
-"darmową, którą Mandrakesoft chce utrzymać jako <b>dostępną dla wszystkich</"
+"bezpłatną, którą Mandrakesoft chce utrzymać jako <b>dostępną dla wszystkich</"
 "b>."
 
 #: share/advertising/05.pl:17
@@ -16052,15 +16116,15 @@ msgid ""
 "source. Therefore, you will not find in the Download version:"
 msgstr ""
 "Wersja Download <b>nie może zawierać</b> całego oprogramowania, które nie "
-"jest Open Source. Tak więc w wersji Download nie znajdziesz:"
+"jest Otwartym Oprogramowaniem. Tak więc w wersji Download nie znajdziesz:"
 
 #: share/advertising/05.pl:18
 #, c-format
 msgid ""
 "\t* <b>Proprietary drivers</b> (such as drivers for NVIDIA®, ATI™, etc.)."
 msgstr ""
-"\t* <b>Sterowników z zamkniętym kodem</b> (takich jak sterowniki do NVIDIA®, "
-"ATI™, itd.)."
+"\t* <b>Sterowników z zamkniętym kodem źródłowym</b> (takich jak sterowniki "
+"do NVIDIA®, ATI™, itd.)."
 
 #: share/advertising/05.pl:19
 #, c-format
@@ -16083,7 +16147,7 @@ msgstr ""
 #: share/advertising/06.pl:13
 #, c-format
 msgid "<b>Discovery, Your First Linux Desktop</b>"
-msgstr "<b>Discovery, Twoja Pierwsza Dystrybucja Linuksowa</b>"
+msgstr "<b>Discovery,Twój Pierwszy Linux</b>"
 
 #: share/advertising/06.pl:15
 #, c-format
@@ -16099,15 +16163,15 @@ msgid ""
 "with a single application per task."
 msgstr ""
 "Discovery to <b>najłatwiejsza</b> i <b>najbardziej przyjazna</b> dla "
-"użytkownika dystrybucja Linuksa. Zawiera ręcznie wyselekcjonowane "
-"<b>najlepsze oprogramowanie</b> dla biura, korzystaniu z multimediów i "
-"korzystaniu z Internetu. Jej menu jest zorientowane zadaniowo, do realizacji "
-"każdego z zadań przeznaczona jest osobna aplikacja."
+"użytkownika dystrybucja Linuksa. Zawiera starannie wyselekcjonowane, "
+"<b>najlepsze oprogramowanie</b> do zastosowań biurowych, korzystaniu z "
+"multimediów i Internetu. Jej menu jest zorientowane zadaniowo, a do "
+"realizacji każdego z zadań przeznaczona jest osobna aplikacja."
 
 #: share/advertising/07.pl:13
 #, c-format
 msgid "<b>PowerPack, The Ultimate Linux Desktop</b>"
-msgstr "<b>PowerPack, Potężny Pulpit Linuksa</b>"
+msgstr "<b>PowerPack, Potężny System Linuksowy</b>"
 
 #: share/advertising/07.pl:15
 #, c-format
@@ -16123,12 +16187,12 @@ msgid ""
 msgstr ""
 "PowerPack jest <b>głównym produktem Linuksowym</b> firmy Mandrakesoft. "
 "PowerPack zawiera <b>tysiące aplikacji</b> - wszystko od najbardziej "
-"popularnych aplikacji do najbardziej technicznych."
+"popularnych aplikacji do tych najbardziej zaawansowanych."
 
 #: share/advertising/08.pl:13
 #, c-format
 msgid "<b>PowerPack+, The Linux Solution for Desktops and Servers</b>"
-msgstr "<b>PowerPack+, Edycja Linuksa na Pulpity i Serwery</b>"
+msgstr "<b>PowerPack+, Linuksowe rozwiązanie na biurka i serwery</b>"
 
 #: share/advertising/08.pl:15
 #, c-format
@@ -16143,10 +16207,10 @@ msgid ""
 "applications</b> and a comprehensive selection of world-class <b>server "
 "applications</b>."
 msgstr ""
-"PowerPack+ jest <b>wielofunkcyjną edycją Linuksa</b> dla małych i średnich "
-"<b>sieci</b>. PowerPack+ zwiększa wartość standardowej wersji PowerPack "
-"poprzez dodanie wydajnego zbioru <b>aplikacji nabiurkowych<b> oraz "
-"<b>aplikacji serwerowych</b> klasy światowej."
+"PowerPack+ jest <b>kompletnym rozwiązaniem Linuksowym</b> dla małych i "
+"średnich <b>sieci</b>. PowerPack+ zawiera tysiące <b>programów do zastosowań "
+"biurkowych</b> i szeroki wachlarz <b>aplikacji serwerowych</b> światowej "
+"klasy."
 
 #: share/advertising/09.pl:13
 #, c-format
@@ -16170,17 +16234,17 @@ msgstr "Produktami Mandrakelinux są:"
 #: share/advertising/09.pl:18
 #, c-format
 msgid "\t* <b>Discovery</b>, Your First Linux Desktop."
-msgstr "\t* <b>Discovery</b>, Twoja Pierwsza Dystrybucja Linuksa."
+msgstr "\t* <b>Discovery</b>, Twój Pierwszy Linux"
 
 #: share/advertising/09.pl:19
 #, c-format
 msgid "\t* <b>PowerPack</b>, The Ultimate Linux Desktop."
-msgstr "\t* <b>PowerPack</b>, Potężna Dystrybucja Linuksowa."
+msgstr "\t* <b>PowerPack</b>, Potężny System Linuksowy"
 
 #: share/advertising/09.pl:20
 #, c-format
 msgid "\t* <b>PowerPack+</b>, The Linux Solution for Desktops and Servers."
-msgstr "\t* <b>PowerPack+</b>, Edycja Linuksa na biurka i serwery."
+msgstr "\t* <b>PowerPack+</b>,  Linuksowe rozwiązanie na biurka i serwery"
 
 #: share/advertising/09.pl:21
 #, c-format
@@ -16203,8 +16267,7 @@ msgid ""
 "<b>on any computer</b> and without any need to actually install it:"
 msgstr ""
 "Mandrakesoft storzył dwa produkty umożliwiające używanie dystrybucji "
-"Mandrakelinux <b>na dowolnym komputerze</b> oraz bez potrzeby jej "
-"instalowania."
+"Mandrakelinux <b>na dowolnym komputerze</b> bez potrzeby jej instalowania."
 
 #: share/advertising/10.pl:16
 #, c-format
@@ -16235,24 +16298,29 @@ msgid ""
 "Below are the Mandrakesoft products designed to meet the <b>professional "
 "needs</b>:"
 msgstr ""
-"Poniżej wymienione są produkty Mandrakesoft zaprojektowane aby spełniać "
-"<b>potrzeby profesjonalne</b>:"
+"Poniżej wymienione są produkty Mandrakesoft zaprojektowane z myślą<b>o "
+"zastosowaniach profesjonalnych</b>:"
 
 #: share/advertising/11.pl:16
 #, c-format
 msgid "\t* <b>Corporate Desktop</b>, The Mandrakelinux Desktop for Businesses."
-msgstr "\t* <b>Corporate Desktop</b>, Edycja Mandrakelinux dla biznesu."
+msgstr ""
+"\t* <b>Corporate Desktop</b>, Biurkowa edycja Mandrakelinux do zastosowań "
+"biznesowych."
 
 #: share/advertising/11.pl:17
 #, c-format
 msgid "\t* <b>Corporate Server</b>, The Mandrakelinux Server Solution."
-msgstr "\t* <b>Corporate Server</b>, Edycja serwerowa Mandrakelinux."
+msgstr ""
+"\t* <b>Corporate Server</b>, Serwerowa edycja Mandrakelinux do zastosowań "
+"biznesowych."
 
 #: share/advertising/11.pl:18
 #, c-format
 msgid "\t* <b>Multi-Network Firewall</b>, The Mandrakelinux Security Solution."
 msgstr ""
-"\t* <b>Multi-Network Firewall</b>, Edycja bezpieczeństwa Mandrakelinux."
+"\t* <b>Multi-Network Firewall</b>, Edycja Mandrakelinux do zastosowań w "
+"zakresie bezpieczeństwa."
 
 #: share/advertising/12.pl:13
 #, c-format
@@ -16274,8 +16342,8 @@ msgid ""
 "KDE will make your <b>first steps</b> with Linux so <b>easy</b> that you "
 "will not ever think of running another operating system!"
 msgstr ""
-"KDE uczyni twoje <b>pierwsz kroki</b> w Linuksie tak <b>łatwymi</b>, że "
-"nigdy więcej nie pomyślisz o innym systemie operacyjnym."
+"Dzięki KDE <b>pierwsz kroki</b> w Linuksie będą tak <b>łatwe</b>, że nigdy "
+"więcej nie pomyślisz o innym systemie operacyjnym."
 
 #: share/advertising/12.pl:19
 #, c-format
@@ -16284,7 +16352,8 @@ msgid ""
 "Konqueror, the web browser and Kontact, the personal information manager."
 msgstr ""
 "KDE zawiera także wiele <b>dobrze zintegrowanych aplikacji</b> takich jak "
-"Konqueror, przeglądarka webowa oraz Kontact, menedżer informacji osobistych."
+"Konqueror - przeglądarka internetowa oraz Kontact - menedżer informacji "
+"osobistej."
 
 #: share/advertising/13-a.pl:13 share/advertising/13-b.pl:13
 #, c-format
@@ -16297,8 +16366,8 @@ msgid ""
 "With PowerPack, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandrakesoft has chosen <b>KDE</b> as the default one."
 msgstr ""
-"Dzięki PowerPack, masz wybór <b>środowiska graficznego</b>, firma "
-"Mandrakesoft wybrała <b>KDE</b> jako środowisko domyślne."
+"W PowerPacku możesz wybrać <b>środowisko graficzne</b>. Firma Mandrakesoft "
+"wybrała <b>KDE</b> jako środowisko domyślne."
 
 #: share/advertising/13-a.pl:17 share/advertising/13-b.pl:17
 #, c-format
@@ -16316,7 +16385,7 @@ msgid ""
 "But we advise you to try all available ones (including <b>GNOME</b>, "
 "<b>IceWM</b>, etc.) and pick your favorite."
 msgstr ""
-"Zalecane jest wypróbowanie wszystkich dostępnych środowisk (włączając "
+"Jednak zalecane jest wypróbowanie wszystkich dostępnych środowisk (włączając "
 "<b>GNOME</b>, <b>IceWM</b>, itd.) oraz wybranie ulubionego."
 
 #: share/advertising/13-b.pl:15
@@ -16325,8 +16394,8 @@ msgid ""
 "With PowerPack+, you will have the choice of the <b>graphical desktop "
 "environment</b>. Mandrakesoft has chosen <b>KDE</b> as the default one."
 msgstr ""
-"Dzięki PowerPack+ masz wybór <b>środowiska graficznego</b>, firma "
-"Mandrakesoft wybrała <b>KDE</b> jako środowisko domyślne."
+"W PowerPacku+ możesz wybrać <b>środowisko graficzne</b>. Firma Mandrakesoft "
+"wybrała <b>KDE</b> jako środowisko domyślne."
 
 #: share/advertising/14.pl:13
 #, c-format
@@ -16336,7 +16405,7 @@ msgstr "<b>OpenOffice.org</b>"
 #: share/advertising/14.pl:15
 #, c-format
 msgid "With Discovery, you will discover <b>OpenOffice.org</b>."
-msgstr "Dzięki Discovery, możesz odkryć <b>OpenOffice.org</b>."
+msgstr "Dzięki Discovery możesz poznać <b>OpenOffice.org</b>."
 
 #: share/advertising/14.pl:17
 #, c-format
@@ -16344,8 +16413,8 @@ msgid ""
 "It is a <b>full-featured office suite</b> that includes word processor, "
 "spreadsheet, presentation and drawing applications."
 msgstr ""
-"To jest <b>wielofunkcyjny zestaw biurowy</b> zawierający procesor tekstu, "
-"arkusz kalkulacyjny, aplikację do prezentacji oraz rysowania."
+"To jest <b>kompletny pakiet biurowy</b> zawierający procesor tekstu, arkusz "
+"kalkulacyjny, aplikację do prezentacji oraz tworzenia rysunków."
 
 #: share/advertising/14.pl:19
 #, c-format
@@ -16377,9 +16446,8 @@ msgid ""
 "an <b>address book</b>, a <b>calendar</b>, plus a tool for taking <b>notes</"
 "b>!"
 msgstr ""
-"To nie tylko wielofunkcyjny <b>klient email</b>, Kontact zawiera także "
-"<b>książkę adresową</b>, <b>kalendarz</b> oraz narzędzie do <b>tworzenia "
-"notatek</b>!"
+"To nie tylko kompletny <b>klient email</b>. Kontact zawiera także <b>książkę "
+"adresową</b>, <b>kalendarz</b> oraz narzędzie do <b>tworzenia notatek</b>!"
 
 #: share/advertising/15.pl:19
 #, c-format
@@ -16387,7 +16455,7 @@ msgid ""
 "It is the easiest way to communicate with your contacts and to organize your "
 "time."
 msgstr ""
-"To jest najłatwiejszy sposób do skomunikowania się ze swoimi znajomymi oraz "
+"Jest to najłatwiejszy sposób do skomunikowania się ze swoimi znajomymi oraz "
 "zorganizowania swojego czasu."
 
 #: share/advertising/16.pl:13
@@ -16430,9 +16498,7 @@ msgstr "<b>Korzystanie z funkcji multimedialnych</b>"
 #: share/advertising/17.pl:15
 #, c-format
 msgid "Discovery will also make <b>multimedia</b> very easy for you:"
-msgstr ""
-"Discovery także udostępnia <b>funkcje multimedialne</b> w łatwy dla ciebie "
-"sposób."
+msgstr "Dzięki Discovery <b>korzystanie z multimediów</b> jest bardzo łatwe."
 
 #: share/advertising/17.pl:16
 #, c-format
@@ -16461,7 +16527,7 @@ msgid ""
 "In the Mandrakelinux menu you will find <b>easy-to-use</b> applications for "
 "<b>all of your tasks</b>:"
 msgstr ""
-"W menu Linuksa Mandrake znajdziesz <b>łatwe w użyciu</b> aplikacje do "
+"W menu systemu Mandrakelinux znajdziesz <b>łatwe w użyciu</b> aplikacje do "
 "<b>wielu swoich zadań</b>:"
 
 #: share/advertising/18.pl:16
@@ -16502,7 +16568,7 @@ msgstr ""
 #: share/advertising/18.pl:21
 #, c-format
 msgid "\t* Edit and create images with the <b>GIMP</b>."
-msgstr "\t* Edycja obrazów i zdjęć przy użyciu aplikacji <b>Gimp</b>"
+msgstr "\t* Edytuj obrazy i zdjęcia przy użyciu aplikacji <b>Gimp</b>"
 
 #: share/advertising/19.pl:13
 #, c-format
@@ -16514,8 +16580,8 @@ msgstr "<b>Środowiska programistyczne</b>"
 msgid ""
 "PowerPack gives you the best tools to <b>develop</b> your own applications."
 msgstr ""
-"PowerPack daje ci najlepsze narzędzia do <b>tworzenia</b> swoich własnych "
-"aplikacji."
+"PowerPack zawiera najlepsze narzędzia do <b>tworzenia</b> swoich własnych "
+"programów."
 
 #: share/advertising/19.pl:17
 #, c-format
@@ -16652,8 +16718,8 @@ msgid ""
 "<b>groupware server</b> which will, thanks to the client <b>Kontact</b>, "
 "allow you to:"
 msgstr ""
-"PowerPack+ daje ci dostęp do <b>Kolaba</b>, wielofunkcyjnego <b>serwera "
-"pracy grupowej</b>, który dzięki klientowi <b>Kontact</b> umożliwi ci:"
+"PowerPack+ daje ci dostęp do <b>Kolaba</b>, kompletnego <b>serwera pracy "
+"grupowej</b>, który dzięki klientowi <b>Kontact</b> umożliwi ci:"
 
 #: share/advertising/23.pl:16
 #, c-format
@@ -16680,8 +16746,8 @@ msgstr "<b>Serwery</b>"
 msgid ""
 "Empower your business network with <b>premier server solutions</b> including:"
 msgstr ""
-"Wzmocnij swoją sieć biznesową przy użyciu <b>głównego rozwiązania "
-"serwerowego</b> zawierającego:"
+"Wzmocnij swoją sieć biznesową przy użyciu <b>wiodących rozwiązań "
+"serwerowych</b> wśród, których znajduje się:"
 
 #: share/advertising/24.pl:16
 #, c-format
@@ -16692,7 +16758,7 @@ msgstr "\t* <b>Samba</b>: Usługi plików i wydruku dla klientów MS Windows"
 #: share/advertising/24.pl:17
 #, c-format
 msgid "\t* <b>Apache</b>: The most widely used web server."
-msgstr "\t* <b>Apache</b>: najbardziej znany i używany serwer webowy"
+msgstr "\t* <b>Apache</b>: najbardziej popularny serwer WWW"
 
 #: share/advertising/24.pl:18
 #, c-format
@@ -16709,16 +16775,14 @@ msgid ""
 "\t* <b>CVS</b>: Concurrent Versions System, the dominant open source network-"
 "transparent version control system."
 msgstr ""
-"\t* <b>CVS</b>: Concurrent Versions System, dominujący system kontroli "
-"wersji przezroczysty dla sieci"
+"\t* <b>CVS</b>: Concurrent Versions System, wiodący system kontroli wersji "
+"przezroczysty dla sieci"
 
 #: share/advertising/24.pl:20
 #, c-format
 msgid ""
 "\t* <b>ProFTPD</b>: The highly configurable GPL-licensed FTP server software."
-msgstr ""
-"\t* <b>ProFTPD</b>: wysoce konfigurowalne oprogramowanie serwer FTP na "
-"licencji GPL"
+msgstr "\t* <b>ProFTPD</b>: wysoce konfigurowalny serwer FTP na licencji GPL"
 
 #: share/advertising/24.pl:21
 #, c-format
@@ -16741,8 +16805,8 @@ msgid ""
 "Mandrakelinux-specific utilities designed to simplify the configuration of "
 "your computer."
 msgstr ""
-"<b>Centrum Sterowania Mandrakelinux</b> jest zbiorem narzędzi specyficznych "
-"dla Mandrake upraszczających konfigurację komputera."
+"<b>Centrum Sterowania Mandrakelinux</b> jest zbiorem autorskich narzędzi "
+"Mandrakelinux ułatwiających konfigurację komputera."
 
 #: share/advertising/25.pl:17
 #, c-format
@@ -16810,12 +16874,12 @@ msgstr ""
 #: share/advertising/27.pl:21
 #, c-format
 msgid "Stop by today at <b>store.mandrakesoft.com</b>!"
-msgstr "Zatrzymaj się pod adresem <b>store.mandrakesoft.com</b>"
+msgstr "Zatrzymaj się pod adresem <b>www.mandrakestore.pl</b>"
 
 #: share/advertising/28.pl:13
 #, c-format
 msgid "<b>Mandrakeclub</b>"
-msgstr "<b>Mandrakeclub</b>"
+msgstr "<b>Klub Mandrake</b>"
 
 #: share/advertising/28.pl:15
 #, c-format
@@ -16823,7 +16887,7 @@ msgid ""
 "<b>Mandrakeclub</b> is the <b>perfect companion</b> to your Mandrakelinux "
 "product.."
 msgstr ""
-"<b>Mandrakeclub</b> jest <b>doskonałym dodatkiem</b> do twojego produktu "
+"<b>Klub Mandrake</b> jest <b>doskonałym dodatkiem</b> do twojego produktu "
 "Mandrakelinux."
 
 #: share/advertising/28.pl:17
@@ -16831,8 +16895,8 @@ msgstr ""
 msgid ""
 "Take advantage of <b>valuable benefits</b> by joining Mandrakeclub, such as:"
 msgstr ""
-"Skorzystaj z <b>wartościowych ofert</b> poprzez dołączenie do Mandrakeclub, "
-"są to m.in.:"
+"Skorzystaj z <b>wartościowych korzyści</b> poprzez dołączenie do Klub "
+"Mandrake, są to m.in.:"
 
 #: share/advertising/28.pl:18
 #, c-format
@@ -16918,7 +16982,6 @@ msgid ""
 "\t* Management of <b>all your Mandrakelinux systems</b> with one account."
 msgstr ""
 "\t* Zarządzanie <b>całym systemem Mandrakelinux</b> z użyciem jednego konta."
-"\t* Management of <b>all your Mandrakelinux systems</b> with one account."
 
 #: share/advertising/30.pl:13
 #, c-format
@@ -16931,9 +16994,8 @@ msgid ""
 "Do you require <b>assistance?</b> Meet Mandrakesoft's technical experts on "
 "<b>our technical support platform</b> www.mandrakeexpert.com."
 msgstr ""
-"Czy potrzebujesz <b>pomocy?</b>. Nasi eksperci techniczni Mandrakesoft "
-"<b>naszej platformy wsparcia technicznego</b> udzielą pomocy: www."
-"mandrakeexpert.com."
+"Potrzebujesz <b>pomocy?</b>. Nasi eksperci techniczni Mandrakesoft <b>naszej "
+"platformy wsparcia technicznego</b> udzielą pomocy: www.mandrakeexpert.com."
 
 #: share/advertising/30.pl:17
 #, c-format
@@ -16951,7 +17013,7 @@ msgid ""
 "purchase support incidents at <b>store.mandrakesoft.com</b>."
 msgstr ""
 "W przypadku dowolnego pytania związanego z dystrybucją Mandrakelinux, masz "
-"możliwość zakupu zdarzeń wsparcia pod adresem <b>store.mandrakesoft.com</b>."
+"możliwość zakupu zdarzeń wsparcia pod adresem <b>www.mandrakestore.pl</b>."
 
 #: share/compssUsers.pl:25
 #, c-format
@@ -16973,7 +17035,7 @@ msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
-"Programy biuroweL procesory tekstu (kword, abiword), arkusze kalkulacyjne "
+"Programy biurowe: procesory tekstu (kword, abiword), arkusze kalkulacyjne "
 "(kspread, gnumeric), przedlądarki pdf, itd."
 
 #: share/compssUsers.pl:33
@@ -17053,7 +17115,7 @@ msgstr "Dokumentacja"
 #: share/compssUsers.pl:70 share/compssUsers.pl:170
 #, c-format
 msgid "Books and Howto's on Linux and Free Software"
-msgstr "Książki i dokumenty HOWTO o Linuksie i Wolnym Oprogramowaniu"
+msgstr "Książki i dokumenty HOWTO o Linuksie i Otwartym Oprogramowaniu"
 
 #: share/compssUsers.pl:74 share/compssUsers.pl:173
 #, c-format
@@ -17282,7 +17344,8 @@ msgstr ""
 "\n"
 "Ten program jest rozpowszechniony w nadziei, że będzie użyteczny lecz\n"
 "BEZ ŻADNEJ GWARANCJI, nawet bez domniemanej gwarancji wynikającej z NABYCIA\n"
-"lub ODPOWIADANIA KONKRETNEMU CELOWI. Zajrzyj do Ogólnej Licencji Publicznej\n"
+"lub ODPOWIADANIA KONKRETNEMU CELOWI. Zajrzyj do Powszechnej Licencji "
+"Publicznej\n"
 "GNU, aby uzyskać więcej szczegółów.\n"
 "\n"
 "Kopia licencji GNU General Public License powinna być dostarczona razem\n"
@@ -17515,10 +17578,9 @@ msgstr ""
 "testing] [-v|--version] "
 
 #: standalone/XFdrake:61
-#, fuzzy, c-format
+#, c-format
 msgid "You need to reboot for changes to take effect"
-msgstr ""
-"Należy wylogować się a następnie zalogować ponownie aby zmiany odniosły efekt"
+msgstr "Należy ponownie uruchomić komputer, aby zmiany odniosły efekt"
 
 #: standalone/XFdrake:92
 #, c-format
@@ -17608,7 +17670,7 @@ msgstr "Obrazki"
 #: standalone/drakTermServ:271
 #, c-format
 msgid "Clients/Users"
-msgstr ""
+msgstr "Klienty/Użytkownicy"
 
 #: standalone/drakTermServ:289 standalone/drakbug:47
 #, c-format
@@ -18063,7 +18125,7 @@ msgstr "Domyślna wersja jądra"
 #: standalone/drakTermServ:715
 #, c-format
 msgid "Create PXE images."
-msgstr ""
+msgstr "Tworzenie obrazów PXE."
 
 #: standalone/drakTermServ:745
 #, c-format
@@ -18098,7 +18160,7 @@ msgstr "<-- Usuń"
 #: standalone/drakTermServ:779
 #, c-format
 msgid "No image selected!"
-msgstr "Nie wybrano żadnego zdjęcia !"
+msgstr "Nie wybrano obrazu!"
 
 #: standalone/drakTermServ:782
 #, c-format
@@ -18161,11 +18223,13 @@ msgid "Allow Thin Clients"
 msgstr "Zezwolenie na cienkie klienty"
 
 #: standalone/drakTermServ:1022
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Sync client X keyboard\n"
 " settings with server."
-msgstr "Synchronizacja ustawień klawiatury X klienta z serwerem"
+msgstr ""
+"Synchronizacja ustawień\n"
+"klawiatury X klienta z serwerem."
 
 #: standalone/drakTermServ:1023
 #, c-format
@@ -19217,7 +19281,7 @@ msgstr "dowolne"
 #: standalone/drakbackup:2075
 #, c-format
 msgid "January"
-msgstr "Stycze"
+msgstr "Styczeń"
 
 #: standalone/drakbackup:2075
 #, c-format
@@ -19232,7 +19296,7 @@ msgstr "Marzec"
 #: standalone/drakbackup:2076
 #, c-format
 msgid "April"
-msgstr "Kwiecie"
+msgstr "Kwiecień"
 
 #: standalone/drakbackup:2076
 #, c-format
@@ -19252,7 +19316,7 @@ msgstr "Lipiec"
 #: standalone/drakbackup:2076
 #, c-format
 msgid "August"
-msgstr "Sierpie"
+msgstr "Sierpień"
 
 #: standalone/drakbackup:2076
 #, c-format
@@ -19272,7 +19336,7 @@ msgstr "Listopad"
 #: standalone/drakbackup:2077
 #, c-format
 msgid "December"
-msgstr "Grudzie"
+msgstr "Grudzień"
 
 #: standalone/drakbackup:2080
 #, c-format
@@ -19292,7 +19356,7 @@ msgstr "Wtorek"
 #: standalone/drakbackup:2081
 #, c-format
 msgid "Wednesday"
-msgstr "roda"
+msgstr "Środa"
 
 #: standalone/drakbackup:2081
 #, c-format
@@ -19302,7 +19366,7 @@ msgstr "Czwartek"
 #: standalone/drakbackup:2081
 #, c-format
 msgid "Friday"
-msgstr "Pitek"
+msgstr "Piątek"
 
 #: standalone/drakbackup:2081
 #, c-format
@@ -19342,7 +19406,7 @@ msgstr "Dzień"
 #: standalone/drakbackup:2140
 #, c-format
 msgid "Month"
-msgstr "Miesic"
+msgstr "Miesiąc"
 
 #: standalone/drakbackup:2144
 #, c-format
@@ -19364,6 +19428,8 @@ msgstr "Upewnij się że demon cron jest dołączony do zainstalowanych usług."
 msgid ""
 "If your machine is not on all the time, you might want to install anacron."
 msgstr ""
+"Jeżeli komputer nie jest włączony przez cały czas być może zechcesz "
+"zainstalować program anacron."
 
 #: standalone/drakbackup:2158
 #, c-format
@@ -19819,7 +19885,7 @@ msgstr "Odtwórz inne"
 #: standalone/drakbackup:3107
 #, c-format
 msgid "Select path to restore (instead of /)"
-msgstr "wybierz ścieżkę do odtworzenia (zamiast /)"
+msgstr "Wybierz ścieżkę do odtworzenia (zamiast /)"
 
 #: standalone/drakbackup:3111 standalone/drakbackup:3393
 #, c-format
@@ -20325,16 +20391,16 @@ msgstr "Druidy konfiguracji"
 #: standalone/drakbug:81
 #, c-format
 msgid "Select Mandrakesoft Tool:"
-msgstr ""
+msgstr "Wybierz narzędzie Mandrakesoft:"
 
 #: standalone/drakbug:82
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "or Application Name\n"
 "(or Full Path):"
 msgstr ""
-"Nazwa aplikacji\n"
-"lub pełna ścieżka:"
+"lub nazwę aplikacji\n"
+"(lub pełna ścieżka):"
 
 #: standalone/drakbug:85
 #, c-format
@@ -20352,7 +20418,7 @@ msgid "Kernel:"
 msgstr "Jądro:"
 
 #: standalone/drakbug:100
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To submit a bug report, click on the report button.  \n"
 "This will open a web browser window on %s where you'll find a form to fill "
@@ -20361,10 +20427,11 @@ msgid ""
 "version, and /proc/cpuinfo."
 msgstr ""
 "Aby zgłosić raport o błędach, należy kliknąć przycisk raportu.\n"
-"Otwarte zostanie okno przeglądarki na stronie %s\n"
+"Zostanie otwarte okno przeglądarki na stronie %s\n"
 " gdzie można znaleźć formularz do wypełnienia. Informacje wyświetlone "
 "powyżej\n"
-"zostaną przesłane do tego serwera."
+"zostaną przesłane do tego serwera. Do raportu warto załączyć dane wyjściowe "
+"z lspci, wersję jądra i plik /proc/cpuinfo."
 
 #: standalone/drakbug:106
 #, c-format
@@ -20769,9 +20836,9 @@ msgstr ""
 "asystenta \"%s\" z Centrum Sterowania Mandrakelinux"
 
 #: standalone/drakconnect:974 standalone/net_applet:51
-#, fuzzy, c-format
+#, c-format
 msgid "Set up a new network interface (LAN, ISDN, ADSL, ...)"
-msgstr "Usuń interfejs sieciowy"
+msgstr "Konfiguracja nowego interfejsu sieciowego (LAN, ISDN, ADSL, ...)"
 
 #: standalone/drakconnect:981
 #, c-format
@@ -20972,22 +21039,22 @@ msgstr ""
 #: standalone/drakfont:182
 #, c-format
 msgid "Search installed fonts"
-msgstr "Wyszukaj zainstalowane czcionki"
+msgstr "Wyszukaj zainstalowane fonty"
 
 #: standalone/drakfont:184
 #, c-format
 msgid "Unselect fonts installed"
-msgstr "Odznacz czcionki zainstalowane"
+msgstr "Odznacz zainstalowane fonty"
 
 #: standalone/drakfont:207
 #, c-format
 msgid "parse all fonts"
-msgstr "przetwórz wszystkie czcionki"
+msgstr "przetwórz wszystkie fonty"
 
 #: standalone/drakfont:209
 #, c-format
 msgid "No fonts found"
-msgstr "Nie znaleziono czcionek"
+msgstr "Nie znaleziono fontów"
 
 #: standalone/drakfont:217 standalone/drakfont:257 standalone/drakfont:324
 #: standalone/drakfont:357 standalone/drakfont:365 standalone/drakfont:391
@@ -20999,37 +21066,37 @@ msgstr "gotowe"
 #: standalone/drakfont:222
 #, c-format
 msgid "Could not find any font in your mounted partitions"
-msgstr "Nie można znaleźć żadnej czcionki na zamontowanych partycjach"
+msgstr "Nie można znaleźć żadnej fontu na zamontowanych partycjach"
 
 #: standalone/drakfont:255
 #, c-format
 msgid "Reselect correct fonts"
-msgstr "Ponownie wybierz poprawne czcionki"
+msgstr "Ponownie wybierz poprawne fonty"
 
 #: standalone/drakfont:258
 #, c-format
 msgid "Could not find any font.\n"
-msgstr "Nie można znaleźć żadnej czcionki.\n"
+msgstr "Nie można znaleźć żadnego fontu.\n"
 
 #: standalone/drakfont:268
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr "Wyszukaj czcionki na zainstalowanej liście"
+msgstr "Wyszukaj fonty na zainstalowanej liście"
 
 #: standalone/drakfont:293
 #, c-format
 msgid "%s fonts conversion"
-msgstr "Konwersja czcionek %s"
+msgstr "Konwersja fontów %s"
 
 #: standalone/drakfont:322
 #, c-format
 msgid "Fonts copy"
-msgstr "Kopiowanie czcionek"
+msgstr "Kopiowanie fontów"
 
 #: standalone/drakfont:325
 #, c-format
 msgid "True Type fonts installation"
-msgstr "Instalacja czcionek True Type"
+msgstr "Instalacja fontów True Type"
 
 #: standalone/drakfont:332
 #, c-format
@@ -21064,7 +21131,7 @@ msgstr "Uruchom ponownie XFS"
 #: standalone/drakfont:407 standalone/drakfont:417
 #, c-format
 msgid "Suppress Fonts Files"
-msgstr "Usuń pliki czcionek"
+msgstr "Usuń pliki fontów "
 
 #: standalone/drakfont:419
 #, c-format
@@ -21080,11 +21147,11 @@ msgid ""
 "-You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Przed instalacją jakichkolwiek czcionek, upewnij się że masz prawa do "
-"używania i zainstalowania ich w systemie.\n"
+"Przed instalacją jakichkolwiek fontów, upewnij się że masz prawa do używania "
+"i zainstalowania ich w systemie.\n"
 "\n"
-"- Można zainstalować czcionki w zwykły sposób. W rzadkich przypadkach, "
-"błędne czcionki mogą zawiesić serwer X."
+"- Można zainstalować fonty w zwykły sposób. W rzadkich przypadkach, błędne "
+"fonty mogą zawiesić serwer X."
 
 #: standalone/drakfont:476 standalone/drakfont:485
 #, c-format
@@ -21094,7 +21161,7 @@ msgstr "DrakFont"
 #: standalone/drakfont:486
 #, c-format
 msgid "Font List"
-msgstr "Lista czcionek"
+msgstr "Lista fontów"
 
 #: standalone/drakfont:492
 #, c-format
@@ -21202,7 +21269,7 @@ msgstr ""
 #: standalone/drakfont:557
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Wybierz aplikacje obsługujące czcionki :"
+msgstr "Wybierz aplikacje obsługujące fonty :"
 
 #: standalone/drakfont:558
 #, c-format
@@ -21213,11 +21280,11 @@ msgid ""
 "You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Przed instalacją jakichkolwiek czcionek, upewnij się że masz prawa do "
-"używania i zainstalowania ich w systemie.\n"
+"Przed instalacją jakichkolwiek fontów, upewnij się że masz prawa do używania "
+"i zainstalowania ich w systemie.\n"
 "\n"
-"Można zainstalować czcionki w zwykły sposób. W rzadkich przypadkach, błędne "
-"czcionki mogą zawiesić serwer X."
+"Można zainstalować fonty w zwykły sposób. W rzadkich przypadkach, błędne "
+"fonty mogą zawiesić serwer X."
 
 #: standalone/drakfont:568
 #, c-format
@@ -21242,7 +21309,7 @@ msgstr "Typowe drukarki"
 #: standalone/drakfont:587
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "Wybierz plik czcionki lub katalog oraz kliknij \"Dodaj\""
+msgstr "Wybierz plik fontu lub katalog oraz kliknij \"Dodaj\""
 
 #: standalone/drakfont:588
 #, c-format
@@ -21252,17 +21319,17 @@ msgstr "Wybór plików"
 #: standalone/drakfont:604
 #, c-format
 msgid "You've not selected any font"
-msgstr "Nie wybrano żadnej czcionki"
+msgstr "Nie wybrano żadnego fontu"
 
 #: standalone/drakfont:657
 #, c-format
 msgid "Import fonts"
-msgstr "Importowanie czcionek"
+msgstr "Importowanie fontów"
 
 #: standalone/drakfont:662
 #, c-format
 msgid "Install fonts"
-msgstr "Instalacja czcionek"
+msgstr "Instalacja fontów"
 
 #: standalone/drakfont:697
 #, c-format
@@ -21292,7 +21359,7 @@ msgstr "Usuń listę"
 #: standalone/drakfont:755 standalone/drakfont:774
 #, c-format
 msgid "Importing fonts"
-msgstr "Importowanie czcionek"
+msgstr "Importowanie fontów"
 
 #: standalone/drakfont:759 standalone/drakfont:779
 #, c-format
@@ -21302,12 +21369,12 @@ msgstr "Testy początkowe"
 #: standalone/drakfont:760
 #, c-format
 msgid "Copy fonts on your system"
-msgstr "Skopiuj czcionki do systemu"
+msgstr "Skopiuj fonty do systemu"
 
 #: standalone/drakfont:761
 #, c-format
 msgid "Install & convert Fonts"
-msgstr "Zainstaluj i skonwertuj czcionki"
+msgstr "Zainstaluj i skonwertuj fonty"
 
 #: standalone/drakfont:762
 #, c-format
@@ -21317,7 +21384,7 @@ msgstr "Konfiguracja poinstalacyjna"
 #: standalone/drakfont:780
 #, c-format
 msgid "Remove fonts on your system"
-msgstr "Usuń czcionki z systemu"
+msgstr "Usuń fonty z systemu"
 
 #: standalone/drakfont:781
 #, c-format
@@ -23023,7 +23090,7 @@ msgstr "zwykłe połączenie"
 #: standalone/drakvpn:382 standalone/drakvpn:423 standalone/drakvpn:510
 #, c-format
 msgid "Exists!"
-msgstr "Istnieje !"
+msgstr "Istnieje!"
 
 #: standalone/drakvpn:383 standalone/drakvpn:424
 #, c-format
@@ -23967,7 +24034,7 @@ msgstr "Nazwa klucza prywatnego"
 #: standalone/drakvpn:1087
 #, c-format
 msgid "Peers certfile"
-msgstr "Peers certfile"
+msgstr "Plik certyfikatu zdalnych końcówek"
 
 #: standalone/drakvpn:1088
 #, c-format
@@ -23977,7 +24044,7 @@ msgstr "Nazwa zdalnego certyfikatu"
 #: standalone/drakvpn:1089
 #, c-format
 msgid "Verify cert"
-msgstr "Verify cert"
+msgstr "Weryfikacja certyfikatu"
 
 #: standalone/drakvpn:1091
 #, c-format
@@ -24801,9 +24868,9 @@ msgstr ""
 
 #. -PO: here, "size" is the size of the ram chip (eg: 128Mo, 256Mo, ...)
 #: standalone/harddrake2:104
-#, fuzzy, c-format
+#, c-format
 msgid "Installed size"
-msgstr "Instalacja pakietów"
+msgstr "Rozmiar zainstalowanych pakietów"
 
 #: standalone/harddrake2:104
 #, c-format
@@ -24811,9 +24878,9 @@ msgid "Installed size of the memory bank"
 msgstr ""
 
 #: standalone/harddrake2:105
-#, fuzzy, c-format
+#, c-format
 msgid "Enabled Size"
-msgstr "Włączone"
+msgstr "Włączony rozmiar"
 
 #: standalone/harddrake2:105
 #, c-format
@@ -24821,9 +24888,9 @@ msgid "Enabled size of the memory bank"
 msgstr ""
 
 #: standalone/harddrake2:106
-#, fuzzy, c-format
+#, c-format
 msgid "type of the memory device"
-msgstr "Nazwa zdalnego certyfikatu"
+msgstr "Rodzaj pamięci"
 
 #: standalone/harddrake2:107
 #, c-format
@@ -24831,9 +24898,9 @@ msgid "Speed"
 msgstr "Szybkość"
 
 #: standalone/harddrake2:107
-#, c-format
+#, fuzzy, c-format
 msgid "Speed of the memory bank"
-msgstr ""
+msgstr "Szybkość kanału pamięci"
 
 #: standalone/harddrake2:108
 #, fuzzy, c-format
@@ -24978,7 +25045,7 @@ msgstr ""
 #: standalone/harddrake2:188
 #, c-format
 msgid "/_Upload the hardware list"
-msgstr ""
+msgstr "Wczytaj listę sprzętu"
 
 #: standalone/harddrake2:188 standalone/printerdrake:140
 #, c-format
@@ -25021,7 +25088,7 @@ msgstr "Informacje o Harddrake"
 
 #. -PO: Do not alter the <span ..> and </span> tags
 #: standalone/harddrake2:221
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is HardDrake, a %s hardware configuration tool.\n"
 "<span foreground=\"royalblue3\">Version:</span> %s\n"
@@ -25029,7 +25096,7 @@ msgid ""
 "tvignaud@mandrakesoft.com&gt;\n"
 "\n"
 msgstr ""
-"To jest Harddrake, narzędzie konfiguracji sprzętu Mandrakelinux.\n"
+"To jest Harddrake, narzędzie konfiguracji sprzętu %s.\n"
 "<span foreground=\"royalblue3\">Wersja:</span> %s\n"
 "<span foreground=\"royalblue3\">Autor:</span> Thierry Vignaud &lt;"
 "tvignaud@mandrakesoft.com&gt;\n"
@@ -25103,7 +25170,7 @@ msgstr "DVD"
 #: standalone/harddrake2:525
 #, c-format
 msgid "Upload the hardware list"
-msgstr ""
+msgstr "Wczytaj listę sprzętu"
 
 #: standalone/harddrake2:530
 #, c-format
@@ -25477,9 +25544,9 @@ msgid "Configure Network"
 msgstr "Konfiguracja sieci"
 
 #: standalone/net_applet:69
-#, fuzzy, c-format
+#, c-format
 msgid "Watched interface"
-msgstr "interfejsy"
+msgstr "Monitorowane interfejsy"
 
 #: standalone/net_applet:78
 #, c-format
@@ -25498,9 +25565,9 @@ msgid "Get Online Help"
 msgstr "Pomoc przez Internet"
 
 #: standalone/net_applet:177
-#, fuzzy, c-format
+#, c-format
 msgid "Interactive intrusion detection"
-msgstr "System wykrywania włamań NetRanger"
+msgstr "Interaktywny system wykrywania włamań"
 
 #: standalone/net_applet:181
 #, c-format
@@ -25510,42 +25577,42 @@ msgstr "Uruchamiaj przy starcie"
 #: standalone/net_applet:230
 #, c-format
 msgid "A port scanning attack has been attempted by %s."
-msgstr ""
+msgstr "Atak skanowania portów został przeprowadzony przez %s."
 
 #: standalone/net_applet:231
-#, fuzzy, c-format
+#, c-format
 msgid "The %s service has been attacked by %s."
-msgstr "Zdarzenie zostało zmienione."
+msgstr "Usługa %s została zaatakowana przez %s."
 
 #: standalone/net_applet:232
 #, c-format
 msgid "A password cracking attack has been attempted by %s."
-msgstr ""
+msgstr "Atak na hasła został przeprowadzony przez %s."
 
 #: standalone/net_applet:240
-#, fuzzy, c-format
+#, c-format
 msgid "Active Firewall: intrusion detected"
-msgstr "Wykryto konfigurację zapory ogniowej!"
+msgstr "Active Firewall: wykryto działanie intruza"
 
 #: standalone/net_applet:251
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to blacklist the attacker?"
-msgstr "Czy na pewno chcesz zakończyć grę?"
+msgstr "Czy chcesz wpisać intruza na czarną listę?"
 
 #: standalone/net_applet:265
 #, c-format
 msgid "Always blacklist (do not ask again)"
-msgstr ""
+msgstr "Zawsze wpisuj na czarną listę (nie pytaj ponownie)"
 
 #: standalone/net_applet:268
-#, fuzzy, c-format
+#, c-format
 msgid "Attack details"
-msgstr "Bez szczegółów"
+msgstr "Szczegóły ataku"
 
 #: standalone/net_applet:272
-#, fuzzy, c-format
+#, c-format
 msgid "Attack time: %s"
-msgstr "Operacja: %s"
+msgstr "Czas ataku: %s"
 
 #: standalone/net_applet:273
 #, c-format
@@ -25553,9 +25620,9 @@ msgid "Network interface: %s"
 msgstr "Interfejs sieciowy: %s"
 
 #: standalone/net_applet:274
-#, fuzzy, c-format
+#, c-format
 msgid "Attack type: %s"
-msgstr "Typ dostępu: %s\n"
+msgstr "Typ ataku: %s"
 
 #: standalone/net_applet:275
 #, c-format
@@ -25563,29 +25630,29 @@ msgid "Protocol: %s"
 msgstr "Protokół: %s"
 
 #: standalone/net_applet:276
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker IP address: %s"
-msgstr "Adres IP komputera:"
+msgstr "Adres IP intruza: %s"
 
 #: standalone/net_applet:277
-#, fuzzy, c-format
+#, c-format
 msgid "Attacker hostname: %s"
-msgstr "Nie można uzyskać nazwy komputera: %s\n"
+msgstr "Nazwa komputera intruza: %s"
 
 #: standalone/net_applet:278
-#, fuzzy, c-format
+#, c-format
 msgid "Service attacked: %s"
-msgstr "\tNazwa serwera: %s\n"
+msgstr "Zaatakowana usługa: %s"
 
 #: standalone/net_applet:279
-#, fuzzy, c-format
+#, c-format
 msgid "Port attacked: %s"
-msgstr "Port: %s"
+msgstr "Zaatakowany port: %s"
 
 #: standalone/net_applet:280
 #, c-format
 msgid "Type of ICMP attack: %s"
-msgstr ""
+msgstr "Rodzaj ataku ICMP: %s"
 
 #: standalone/net_monitor:61 standalone/net_monitor:66
 #, c-format
@@ -25865,9 +25932,9 @@ msgstr "Autorzy: "
 
 #. -PO: here %s is the version number
 #: standalone/printerdrake:570
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management %s"
-msgstr "Zarządzanie drukarkami \n"
+msgstr "Zarządzanie drukarkami %s"
 
 #: standalone/scannerdrake:51
 #, c-format
@@ -25951,12 +26018,12 @@ msgstr "Port: %s"
 #: standalone/scannerdrake:138 standalone/scannerdrake:141
 #, c-format
 msgid " (UNSUPPORTED)"
-msgstr ""
+msgstr " (NIEOBSŁUGIWANY)"
 
 #: standalone/scannerdrake:144
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not supported under Linux."
-msgstr "%s nie jest obsługiwany przez tą wersję %s."
+msgstr "%s nie jest obsługiwany przez Linuksa."
 
 #: standalone/scannerdrake:171 standalone/scannerdrake:185
 #, c-format
@@ -26098,14 +26165,14 @@ msgid "Searching for scanners..."
 msgstr "Wyszukiwanie skanerów ..."
 
 #: standalone/scannerdrake:383
-#, fuzzy, c-format
+#, c-format
 msgid "Setting up kernel modules..."
-msgstr "Ustawianie informacji o użytkowniku..."
+msgstr "Konfiguracja modułół jądra..."
 
 #: standalone/scannerdrake:390 standalone/scannerdrake:397
 #, c-format
 msgid "Attention!"
-msgstr "Uwaga !"
+msgstr "Uwaga!"
 
 #: standalone/scannerdrake:391
 #, c-format
@@ -26115,6 +26182,10 @@ msgid ""
 "Manual adjustments are required. Please edit the configuration file /etc/"
 "sane.d/%s.conf. "
 msgstr ""
+"W pełni atumatyczna konifugracja %s jest niemożliwa.\n"
+"\n"
+"Konieczne jest ręczne dostosowanie konfiguracji. Wyedytuj plik "
+"konfiguracyjny /etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:392 standalone/scannerdrake:401
 #, c-format
@@ -26122,14 +26193,15 @@ msgid ""
 "More info in the driver's manual page. Run the command \"man sane-%s\" to "
 "read it."
 msgstr ""
+"Więcej informacji na temat sterownika znajduje się w podręczniku man. "
+"Uruchom polecenie \"man sane-%s\", aby je przeczytać."
 
 #: standalone/scannerdrake:394 standalone/scannerdrake:403
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After that you may scan documents using \"XSane\" or \"Kooka\" from "
 "Multimedia/Graphics in the applications menu."
 msgstr ""
-"Urządzenie %s zostało skonfigurowane.\n"
 "Można skanować dokumenty przy użyciu programu \"XSane\" lub \"Kooka\"' z "
 "menu Multimedia/Grafika menu programów."
 
@@ -26139,6 +26211,8 @@ msgid ""
 "Your %s has been configured, but it is possible that additional manual "
 "adjustments are needed to get it to work. "
 msgstr ""
+"Konfiguracja %s została zakończona, ale być może konieczne będzie "
+"wprowadzenie dodatkowych, ręcznych modyfikacji, aby go uruchomić."
 
 #: standalone/scannerdrake:399
 #, c-format
@@ -26146,11 +26220,13 @@ msgid ""
 "If it does not appear in the list of configured scanners in the main window "
 "of Scannerdrake or if it does not work correctly, "
 msgstr ""
+"Jeżeli nie widnieje na liście skonfigurowanych skanerów w głównym oknie "
+"programu Scannerdrake  lub nie działa poprawnie,"
 
 #: standalone/scannerdrake:400
-#, fuzzy, c-format
+#, c-format
 msgid "edit the configuration file /etc/sane.d/%s.conf. "
-msgstr "Włącz konfigurację ToS"
+msgstr "wyedytuj plik konfiguracyjny /etc/sane.d/%s.conf. "
 
 #: standalone/scannerdrake:406
 #, c-format
@@ -26427,9 +26503,9 @@ msgid "Install system"
 msgstr "Instalacja pakietów"
 
 #: steps.pm:25
-#, fuzzy, c-format
+#, c-format
 msgid "Administrator password"
-msgstr "Hasło roota"
+msgstr "Hasło administratora"
 
 #: steps.pm:26
 #, c-format
@@ -26472,29 +26548,29 @@ msgid "Is this correct?"
 msgstr "Działa prawidłowo?"
 
 #: ugtk2.pm:960
-#, fuzzy, c-format
+#, c-format
 msgid "No file chosen"
-msgstr "okno wyboru pliku"
+msgstr "Nie wybrano pliku"
 
 #: ugtk2.pm:962
-#, fuzzy, c-format
+#, c-format
 msgid "You have chosen a file, not a directory"
-msgstr "Należy podać plik, nie katalog.\n"
+msgstr "Należy podać plik, a nie katalog."
 
 #: ugtk2.pm:964
-#, fuzzy, c-format
+#, c-format
 msgid "You have chosen a directory, not a file"
-msgstr "Nazwa \"/\" może dotyczyć tylko katalogu, nie klucza"
+msgstr "Należy podać katalog, a nie plik."
 
 #: ugtk2.pm:966
-#, fuzzy, c-format
+#, c-format
 msgid "No such directory"
-msgstr "To nie katalog"
+msgstr "Taki katalog nie istnieje"
 
 #: ugtk2.pm:966
 #, c-format
 msgid "No such file"
-msgstr "Brak podanego pliku"
+msgstr "Taki plik nie istnieje"
 
 #: ugtk2.pm:1045
 #, c-format
@@ -26524,6 +26600,16 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Instalacja zakończyła się niepowodzeniem"
+
+#~ msgid "The Mandrakelinux 10.1 products are:"
+#~ msgstr "Produktami Mandrakelinux 10.1 są:"
+
+#~ msgid ""
+#~ "\t* <b>Mandrakelinux 10.1 for x86-64</b>, The Mandrakelinux solution for "
+#~ "making the most of your 64-bit processor."
+#~ msgstr ""
+#~ "\t* <b>Mandrakelinux 10.1 dla x86-64</b>, edycja Mandrakelinux dla "
+#~ "procesorów 64-ro bitowych."
 
 #, fuzzy
 #~ msgid "MandrakeSoft Wizards"
