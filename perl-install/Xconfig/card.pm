@@ -45,13 +45,17 @@ sub from_raw_X {
 sub to_raw_X {
     my ($card, $raw_X) = @_;
 
-    #- Specific ATI fglrx driver default options
-    if ($card->{Driver} eq 'fglrx') {
-	# $default_ATI_fglrx_config need to be move in proprietary ?
-	$card->{raw_LINES} ||= default_ATI_fglrx_config();
+    my @cards = ($card, @{$card->{cards} || []});
+
+    foreach (@cards) {
+	#- Specific ATI fglrx driver default options
+	if ($_->{Driver} eq 'fglrx') {
+	    # $default_ATI_fglrx_config need to be move in proprietary ?
+	    $_->{raw_LINES} ||= default_ATI_fglrx_config();
+	}
     }
 
-    $raw_X->set_devices($card, @{$card->{cards} || []});
+    $raw_X->set_devices(@cards);
 
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
