@@ -289,7 +289,7 @@ sub suggest {
     add2hash_($lilo, arch() =~ /sparc/ ?
 	{
 	 entries => [],
-	 timeout => 5,
+	 timeout => 10,
 	 use_partition => 0, #- we should almost always have a whole disk partition.
 	 root          => "/dev/$root",
 	 partition     => $partition || 1,
@@ -309,7 +309,7 @@ sub suggest {
 	{
 	 bootUnsafe => $unsafe,
 	 entries => [],
-	 timeout => $onmbr && 5,
+	 timeout => $onmbr && 10,
 	   if_(arch() !~ /ia64/,
 	 lba32 => 1,
 	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
