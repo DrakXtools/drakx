@@ -1449,15 +1449,17 @@ sub install($$$;$$) {
 		$retry_package = shift @transToInstall;
 		$retry_count = 3;
 	    } else {
-		if ($retry_count) {
-		    log::l("retrying installing package $retry_package->[$FILE] alone in a transaction");
-		    --$retry_count;
-		} else {
-		    if (!packageFlagInstalled($retry_package) && $retry_package->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry_package)})) {
+		if (!packageFlagInstalled($retry_package) && $retry_package->[$MEDIUM]{selected} && !exists($ignoreBadPkg{packageName($retry_package)})) {
+		    if ($retry_count) {
+			log::l("retrying installing package $retry_package->[$FILE] alone in a transaction");
+			--$retry_count;
+		    } else {
 			log::l("bad package $retry_package->[$FILE] unable to be installed");
 			packageSetFlagSelected($retry_package, 0);
 			cdie ("error installing package list: $retry_package->[$FILE]");
 		    }
+		}
+		if (packageFlagInstalled($retry_package) || ! packageFlagSelected($retry_package)) {
 		    packageFreeHeader($retry_package);
 		    $retry_package = shift @transToInstall;
 		    $retry_count = 3;
