@@ -1059,7 +1059,9 @@ sub configurePrinter {
     my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::getinfo($o->{prefix})) };
 
-    $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
+    $printer->{PAPERSIZE} = (($o->{lang} =~ /^en_US/) || 
+                             ($o->{lang} =~ /^en_CA/) || 
+                             ($o->{lang} =~ /^fr_CA/)) ? 'Letter' : 'A4';
     printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
 }
