@@ -831,7 +831,6 @@ sub setupBootloaderBefore {
     bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds},
                         vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
                         quiet => $o->{meta_class} ne 'server');
-    bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
     $o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
 }

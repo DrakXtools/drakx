@@ -751,21 +751,6 @@ sub method_choices {
     } method_choices_raw();
 }
 
-sub suggest_floppy {
-    my ($bootloader) = @_;
-
-    my $floppy = detect_devices::floppy() or return;
-    $floppy eq 'fd0' or log::l("suggest_floppy: not adding $floppy"), return;
-
-    add_entry($bootloader,
-      {
-       type => 'other',
-       kernel_or_dev => '/dev/fd0',
-       label => 'floppy',
-       unsafe => 1
-      });
-}
-
 sub keytable {
     my ($f) = @_;
     $f or return;
