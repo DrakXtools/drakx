@@ -3,7 +3,10 @@ include ../../Makefile.config
 PMSFILES = $(wildcard $(PMS:%=../../%))
 PMSCFILES = $(PMSFILES:%=%_.c)
 
-POFILES = $(shell ls *.po)
+# temporarly don't include ar.po,br.po,cy.po,ga.po,is.po,ro.po,sl.po
+# (too low translation percentage)
+POFILES = $(shell ls *.po|grep -v '\(ar.po\|cy.po\|ga.po\|is.po\|ro.po\|sl.po\)')
+
 MOFILES = $(POFILES:%.po=%.mo)
 LANGS = $(POFILES:%.po=%)
 
