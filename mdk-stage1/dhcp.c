@@ -257,7 +257,7 @@ static void init_vendor_codes(struct bootp_request * breq) {
 
 static char gen_hwaddr[16];
 
-static int prepare_request(struct bootp_request * breq, int sock, char * device, time_t startTime)
+static int prepare_request(struct bootp_request * breq, int sock, char * device)
 {
 	struct ifreq req;
 	
@@ -307,8 +307,7 @@ static int get_vendor_code(struct bootp_request * bresp, unsigned char option, v
 }
 
 
-int
-currticks (void)
+static int currticks(void)
 {
 	struct timeval tv;
 	long csecs;
@@ -328,8 +327,7 @@ currticks (void)
 #define	TICKS_PER_SEC 18
 #define MAX_ARP_RETRIES	4
 
-void
-rfc951_sleep (int exp)
+static void rfc951_sleep(int exp)
 {
 	static long seed = 0;
 	long q;
@@ -496,7 +494,6 @@ enum return_type perform_dhcp(struct interface_info * intf)
 	struct bootp_request breq, bresp;
 	unsigned char messageType;
 	unsigned int lease;
-	time_t startTime = time(NULL);
 	short aShort;
 	int num_options;
 	char requested_options[50];
@@ -517,7 +514,7 @@ enum return_type perform_dhcp(struct interface_info * intf)
 		return RETURN_ERROR;
 	}
 
-	if (prepare_request(&breq, s, intf->device, startTime) != 0) {
+	if (prepare_request(&breq, s, intf->device) != 0) {
 		close(s);
 		return RETURN_ERROR;
 	}
