@@ -66,7 +66,7 @@ sub umount {
 }
 
 sub mkdir_ { 
-    my $rec; $_[0] eq '-p' and $rec = shift;
+    my ($rec) = getopts(\@_, qw(p));
 
     my $mkdir; $mkdir = sub {
 	my $root = dirname $_[0];
@@ -94,26 +94,19 @@ sub mknod {
 }
 
 sub ln {
-    my ($force, $soft, $i);
+    my ($force, $soft) = getopts(\@_, qw(fs));
+    @_ >= 1 or die "usage: ln [-s] [-f] <source> [<dest>]\n";
 
-    while ($i = shift) {
-	if ($i eq '-f') { $force = 1; }
-	elsif ($i eq '-s') { $soft = 1; }
-	elsif ($i eq '-fs' || $i eq '-sf') { $force = $soft = 1; }
-	else { last }
-    }
-
-    my $source = $i or die "usage: ln [-s] [-f] <source> [<dest>]\n";
-    my $dest = shift || basename($source);
+    my ($source, $dest) = @_;
+    $dest ||= basename($source);
 
     $force and unlink $dest;
-
 
     ($soft ? symlink($source, $dest) : link($source, $dest)) or die "ln failed: $!\n";
 }
 
 sub rm { 
-    my $rec; $_[0] eq '-r' and $rec = shift;
+    my ($rec, undef) = getopts(\@_, qw(rf));
     
     my $rm; $rm = sub {
 	foreach (@_) {
@@ -137,7 +130,7 @@ sub chmod_ {
 }
 
 sub chown_ {
-    my $rec; $_[0] eq '-r' and $rec = shift;
+    my ($rec, undef) = getopts(\@_, qw(r));
     local $_ = shift or die "usage: chown [-r] name[.group] <files>\n";
 
     my ($name, $group) = (split('\.'), $_);
@@ -247,26 +240,25 @@ sub cp {
 }
 
 sub ps {
-
     @_ and die "usage: ps\n";
     my ($pid, $cpu, $cmd);
     my ($uptime) = split ' ', first(cat_("/proc/uptime"));
     my $hertz = 100;
 
-    format STDOUT_TOP =
+    open PS, ">&STDOUT";
+    format PS_TOP =
   PID   CMD
 .
-    format =
+    format PS =
 @>>>>  @>>> @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 $pid, $cpu, $cmd
 .
-
     foreach $pid (sort {$a <=> $b} grep { /\d+/ } all('/proc')) {
 	 my @l = split(' ', cat_("/proc/$pid/stat"));
 	 $cpu = sprintf "%2.1f", max(0, min(99, ($l[13] + $l[14]) * 100 / $hertz / ($uptime - $l[21] / $hertz)));
 	 (($cmd) = cat_("/proc/$pid/cmdline")) =~ s/\0/ /g;
 	 $cmd ||= (split ' ', (cat_("/proc/$pid/stat"))[0])[1];
-	 write;
+	 write PS;
     }
 }
 
@@ -397,11 +389,11 @@ sub insmod {
 }
 
 sub route {
-    @ARGV and die "usage: route\nsorry, no modification handled\n";
+    @_ == 0 or die "usage: route\nsorry, no modification handled\n";
     my ($titles, @l) = cat_("/proc/net/route");
     my @titles = split ' ', $titles;
     my %l;
-    local *ROUTE = *STDOUT;
+    open ROUTE, ">&STDOUT";
     format ROUTE_TOP =
 Destination    Gateway        Mask           Iface
 .
@@ -416,5 +408,39 @@ $l{Destination}, $l{Gateway}, $l{Mask}, $l{Iface}
 	$l{Destination} = 'default' if $l{Destination} eq "0.0.0.0";
 	$l{Gateway}     = '*'       if $l{Gateway}     eq "0.0.0.0";
 	write ROUTE;
+    }
+}
+
+sub df {
+    my ($h) = getopts(\@_, qw(h));
+    my ($dev, $size, $free, $used, $use, $mntpoint);
+    open DF, ">&STDOUT";
+    format DF_TOP =
+Filesystem          Size      Used    Avail     Use  Mounted on
+.
+    format DF =
+@<<<<<<<<<<<<<<<< @>>>>>>> @>>>>>>> @>>>>>>> @>>>>>% @<<<<<<<<<<<<<<<<<<<<<<<<<
+$dev, $size, $used, $free, $use, $mntpoint
+.
+    my %h;
+    foreach (cat_("/proc/mounts"), cat_("/etc/mtab")) {
+	($dev, $mntpoint) = split;
+	$h{$dev} = $mntpoint;
+    }
+    foreach $dev (sort keys %h) {
+	$mntpoint = $h{$dev};
+	my $buf = ' ' x 20000;
+	syscall_('statfs', $mntpoint, $buf) or next;
+	(undef, undef, $size, $free) = unpack "l7", $buf;
+	$size or next;
+
+	$use = int (100 * ($size - $free) / $size);
+	$used = $size - $free;
+	if ($h) {
+	    $used = int ($used / 1024) . "M";
+	    $size = int ($size / 1024) . "M";
+	    $free = int ($free / 1024) . "M";
+	}
+	write DF if $size;
     }
 }

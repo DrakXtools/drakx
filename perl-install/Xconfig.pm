@@ -18,7 +18,8 @@ sub keymap_translate {
 
 sub getinfo {
     my $o = {};
-    getinfoFromXF86Config($o);
+#    getinfoFromXF86Config($o);
+    getinfoFromDDC($o);
     getinfoFromSysconfig($o);
     $o->{mouse}{emulate3buttons} = 1;
 
@@ -87,4 +88,18 @@ sub getinfoFromSysconfig {
 	$keyboard{KEYTABLE} or last;
 	$o->{keyboard}{xkb_keymap} ||= keymap_translate($keyboard{KEYTABLE});
     }
+    $o;
+}
+
+sub getinfoFromDDC {
+    my $o = shift || {};
+    my $O = $o->{monitor} ||= {};
+    return $o if $O->{hsyncrange} && $O->{vsyncrange} && $O->{modelines};
+    my ($h, $v, @l) = `ddcxinfo`;
+    $? == 0 or return $o;
+    chop $h; chop $v;
+    $O->{hsyncrange} ||= $h;
+    $O->{vsyncrange} ||= $v;
+    $O->{modelines} ||= join '', @l;
+    $o;
 }

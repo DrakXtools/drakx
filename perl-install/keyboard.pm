@@ -119,7 +119,7 @@ sub setup($) {
 
     if (my $file = install_any::install_cpio("/usr/share/keymaps", "$o->[1].kmap")) {
 	log::l("loading keymap $o->[1]");
-	load(cat_($file));
+	load(cat_($file)) if -e $file;
     }
     if (my $file = install_any::install_cpio("/usr/share/xmodmap", "xmodmap.$o->[2]")) {
 	eval { run_program::run('xmodmap', $file) } unless $::testing;

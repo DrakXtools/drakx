@@ -163,16 +163,14 @@ sub mouseConfig($) {
 sub configureNetwork($) {
     my ($o) = @_;
     my $etc = "$o->{prefix}/etc";
-#
-#    rc = checkNetConfig(&$o->{intf}, &$o->{netc}, &$o->{intfFinal},
-#			 &$o->{netcFinal}, &$o->{driversLoaded}, $o->{direction});
+
     network::write_conf("$etc/sysconfig/network", $o->{netc});
     network::write_resolv_conf("$etc/resolv.conf", $o->{netc});
     network::write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$o->{intf}};
     network::add2hosts("$etc/hosts", $o->{netc}{HOSTNAME}, map { $_->{IPADDR} } @{$o->{intf}});
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
-    #-res_init();		# reinit the resolver so DNS changes take affect     
+    #-res_init();		#- reinit the resolver so DNS changes take affect     
 }
 
 #------------------------------------------------------------------------------
@@ -180,7 +178,9 @@ sub timeConfig {
     my ($o, $f) = @_;
     my $t = $o->{timezone};
 
-    setVarsInSh($f, { 
+    eval { commands::cp("-f", "/usr/share/zoneinfo/$t->{timezone}", "/etc/localtime") };
+    $@ and log::l("installing /etc/localtime failed");
+    setVarsInSh($f, {
 	ZONE => $t->{timezone},
 	GMT  => bool2text($t->{GMT}),
 	ARC  => "false",

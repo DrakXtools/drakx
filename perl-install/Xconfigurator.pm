@@ -192,6 +192,7 @@ sub monitorConfiguration(;$) {
     add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), [keys %monitors]) }) unless $monitor->{type};
     add2hash($monitor, $monitors{$monitor->{type}});
     add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown" });
+
     $monitor;
 }
 
@@ -502,6 +503,8 @@ sub write_XF86Config {
 
     #- Write monitor section.     
     $O = $o->{monitor};
+    $O->{modelines} ||= $o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text;
+
     print F $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);
     print F qq(    VendorName "$O->{vendor}"\n);
@@ -514,10 +517,8 @@ sub write_XF86Config {
     print F qq(    VertRefresh $O->{vsyncrange}\n);
     print F "\n";
     print F $monitorsection_text4;
-    print F ($o->{card}{type} eq "TG 96" ? 
-	     $modelines_text_Trident_TG_96xx :
-	     $modelines_text);
-    print F "EndSection\n\n\n";
+    print F $O->{modelines} || ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
+    print F "\nEndSection\n\n\n";
 
     #- Write Device section.     
     $O = $o->{card};

@@ -458,7 +458,7 @@ sub addUser($) {
 	},
         complete => sub {
 	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,3);
-	    (length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
+	    #(length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
 	    return 0;

@@ -138,6 +138,6 @@ sub install_cpio {
 
     eval { commands::rm "-r", $dir };
     mkdir $dir, 0755;
-    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -i $name");
+    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
     "$dir/$name";
 }

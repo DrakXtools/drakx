@@ -576,8 +576,8 @@ sub main {
     #-the main cycle
     my $clicked = 0;
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
-	$o->enteringStep($o->{step});
 	$o->{steps}{$o->{step}}{entered}++;
+	$o->enteringStep($o->{step});
 	eval { 
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};

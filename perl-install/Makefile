@@ -9,7 +9,7 @@ BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
-LOCALFILES  = $(PERL) mouseconfig
+LOCALFILES  = $(PERL) mouseconfig ddcxinfo
 DIRS        = po pci_probing
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
@@ -178,7 +178,7 @@ stage2:
 	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_SVGA
 	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap; do \
 		name=`basename $$i` ; \
-		(cd $(STAGE2TMP)/$$i ; find * | cpio --quiet -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; rm -rf $$name) \
+		(cd $(STAGE2TMP)/$$i ; find * | cpio -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; cd .. ; rm -rf $$name) \
 	done
 	$(SUDO) cp -a $(STAGE2TMP)/* /mnt/stage2
 	$(SUDO) rm -rf $(STAGE2TMP)
