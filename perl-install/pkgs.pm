@@ -913,7 +913,15 @@ sub install($$$;$$) {
 		    }
 		    --$nb; #- make sure the package is not taken into account as its medium is not selected.
 		}
-	    } while (scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
+	    } while ($nb > 0 && scalar(@transToInstall) == 0); #- avoid null transaction, it a nop that cost a bit.
+	}
+
+	#- added to exit typically after last media unselected.
+	if ($nb == 0 && scalar(@transToInstall) == 0) {
+	    cleanHeaders($prefix);
+
+	    loopback::save_boot($loop_boot);
+	    return;
 	}
 
 	#- extract headers for parent as they are used by callback.
@@ -1001,7 +1009,7 @@ sub install($$$;$$) {
 	c::headerFree(delete $_->{header}) foreach @transToInstall;
 	cleanHeaders($prefix);
 
-	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
+	if (my @badpkgs = grep { !packageFlagInstalled($_) && $_->{medium}{selected} } @transToInstall) {
 	    foreach (@badpkgs) {
 		log::l("bad package $_->{file}");
 		packageSetFlagSelected($_, 0);

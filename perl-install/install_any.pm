@@ -486,7 +486,7 @@ sub setupFB {
     my ($o, $vga) = @_;
 
     #- install needed packages for frame buffer.
-    $o->installPackages(qw(kernel-fb XFree86-FBDev));
+    $o->pkg_install(qw(kernel-fb XFree86-FBDev));
 
     $vga ||= 785; #- assume at least 640x480x16.
 

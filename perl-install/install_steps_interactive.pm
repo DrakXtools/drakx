@@ -654,7 +654,7 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 sub addUser {
     my ($o, $clicked) = @_;
     my $u = $o->{user} ||= {};
-    if ($::beginner || $o->{security} < 1) {
+    if ($o->{security} < 1) {
 	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default", icon => 'automagic' });
 	$o->{users} ||= [ $u ];
     }
@@ -663,7 +663,7 @@ sub addUser {
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if (($o->{security} >= 2 && !$::beginner || $clicked)) {
+    if (($o->{security} >= 1 || $clicked)) {
 	$u->{icon} = translate($u->{icon});
 	if ($o->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],

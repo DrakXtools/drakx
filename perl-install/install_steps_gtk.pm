@@ -317,7 +317,7 @@ _("If you wish to install less than this size,
 select the percentage of packages that you want to install.
 
 A low percentage will install only the most important packages;
-a percentage of 100% will install all selected packages.") : 
+a percentage of 100%% will install all selected packages.") : 
 _("You have space on your disk for only %d%% of these packages.
 
 If you wish to install less than this,
