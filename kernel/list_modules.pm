@@ -3,7 +3,7 @@ package list_modules;
 use MDK::Common;
 
 our @ISA = qw(Exporter);
-our @EXPORT = qw(load_dependencies dependencies_closure category2modules module2category sub_categories);
+our @EXPORT = qw(load_dependencies dependencies_closure category2modules module2category sub_categories kernel_is_26 module_extension);
 
 # the categories have 2 purposes
 # - choosing modules to include on stage1's (cf update_kernel and mdk-stage1/pci-resource/update-pci-ids.pl)
@@ -218,10 +218,11 @@ sub dependencies_closure {
 sub category2modules {
     map {
 	my ($t1, $t2s) = m|(.*)/(.*)|;
-	map { 
+	my @sub = $t2s eq '*' ? keys %{$l{$t1}} : split('\|', $t2s);
+	map {
 	    my $l = $l{$t1}{$_} or die "bad category $t1/$_\n" . backtrace();
 	    @$l;
-	} $t2s eq '*' ? keys %{$l{$t1}} : split('\|', $t2s);
+	} @sub;
     } split(' ', $_[0]);
 }
 
@@ -240,5 +241,9 @@ sub sub_categories {
     my ($t1) = @_;
     keys %{$l{$t1}};
 }
+
+sub kernel_is_26 { $_[0] =~ /^2\.6/ }
+
+sub module_extension { kernel_is_26($_[0]) ? 'ko' : 'o' }
 
 1;
