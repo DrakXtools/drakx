@@ -877,13 +877,9 @@ sub rpmDbOpenForInstall() {
 
     #- there is a bug in rpm 4.2 where all operations for accessing rpmdb files are not
     #- always done using prefix, we need to setup a symlink in /var/lib/rpm for that ...
-    unless (-e "/var/lib/rpm") {
-	#- check if at some time a /var/lib directory has been made.
-	if (-d "/var/lib") {
-	    symlinkf "$::prefix/var/lib/rpm", "/var/lib/rpm";
-	} else {
-	    symlinkf "$::prefix/var/lib", "/var/lib";
-	}
+    if (! -d '/var/lib/rpm') {
+	mkdir_p('/var/lib');
+	symlinkf "$::prefix/var/lib/rpm", "/var/lib/rpm";
     }
 
     my $db = URPM::DB::open($::prefix, 1);
