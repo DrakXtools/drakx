@@ -336,6 +336,21 @@ sub proxy_configure {
     setExportedVarsInCsh("$::prefix/etc/profile.d/proxy.csh", $u, qw(http_proxy ftp_proxy));
     chmod 0755, "$::prefix/etc/profile.d/proxy.csh";
 
+    #- KDE proxy settings
+    my $kde_config_file = "$::prefix/usr/share/config/kioslaverc";
+    update_gnomekderc($kde_config_file,
+                      undef,
+                      PersistentProxyConnection => "false"
+                  );
+    update_gnomekderc($kde_config_file,
+                      "Proxy Settings",
+                      AuthMode => 0,
+                      ProxyType => ($u->{http_proxy} || $u->{ftp_proxy}) ? 4 : 0,
+                      ftpProxy => "ftp_proxy",
+                      httpProxy => "http_proxy",
+                      httpsProxy => "http_proxy"
+                  );
+
     #- Gnome proxy settings
     if (-d "$::prefix/etc/gconf/2/") {
         my $defaults_dir = "/etc/gconf/gconf.xml.local-defaults";
