@@ -1,3 +1,193 @@
+2004/08/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_probe_info) net_cnx_up is obsolete, pptp info is
+	available in
+	ppp config files
+	(adsl_conf_backend) don't write net cnx scripts, internet service
+	should be dead
+	remove useless assignment (already done in adsl_protocol step)
+	fix pppoe with sagem (write ETH=`/usr/sbin/eaglectrl -i` instead of
+	ETH=sagem)
+
+2004/08/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: changed a keyboard name
+
+2004/08/16  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/card.pm: replace freeDriver with freedriver (stage2 para are
+	lower cased)
+	fix pixel sucks
+	replace freeDriver with freedriver (stage2 para are lower cased)
+
+	* install2.pm: replace freeDriver with freedriver (stage2 para are lower
+	cased)
+	modules::load doesn't accept options anymore, use
+	modules::load_with_options() (bugzilla #10778)
+	replace freeDriver with freedriver (stage2 para are lower cased)
+
+	* bootloader.pm: help debugging detectloader
+
+	* install_any.pm: better URLPREFIX parsing regexp (handle URLPREFIX =
+	"http://leia")
+	replace freeDriver with freedriver (stage2 para are lower cased)
+	replace freeDriver with freedriver (stage2 para are lower cased)
+
+	* share/compssUsers.pl: field is {default_selected}, not {selected}
+
+	* modules.pm: add load_with_options()
+
+	* network/netconnect.pm: don't configure firewall after configuring
+	network during install
+	(in summary you can configure firewall directly)
+
+2004/08/15  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: beta rush
+
+2004/08/15  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	indexhtml/po/da.po soft/mdkhtmlbrowser/po/da.po
+	soft/mdkonline/po/da.po soft/menudrake/po/da.po
+	soft/rpmdrake/po/da.po soft/urpmi/po/da.po
+	soft/userdrake2/po/da.po soft/wizard_perl/po/da.po
+	gi/perl-install/share/po/da.po
+
+2004/08/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/vi.po: updated Vietnamese file
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/it.po, share/po/help-it.pot: updated Italian file
+
+2004/08/14  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/help_xml2pm.pl: zh_CN -> zh_cn to fit CVS module
+
+2004/08/14  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 591
+	Generate auto
+
+2004/08/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ky.po, share/po/ms.po, share/po/id.po, share/po/mk.po,
+	share/po/fur.po, share/po/th.po, share/po/is.po, share/po/sl.po,
+	share/po/hi.po, share/po/zh_TW.po, share/po/hr.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/ga.po, share/po/be.po, share/po/mn.po,
+	share/po/am.po, share/po/ko.po, share/po/sr.po, share/po/he.po,
+	share/po/lt.po, share/po/eo.po, share/po/lv.po, share/po/el.po: fixed
+	special "<control>" entries;
+	included translations for various standard menu entries (File, Edit,
+	Help,...)
+
+	* share/po/ta.po: small fix
+	fixed special "<control>" entries;
+	included translations for various standard menu entries (File, Edit,
+	Help,...)
+
+	* share/po/nb.po, share/po/uz.po, share/po/uz@Latn.po: fixed shortcut
+	entries ("<control>...")
+
+	* share/po/tg.po: fixed shortcut entries ("<control>...")
+	fixed special "<control>" entries;
+	included translations for various standard menu entries (File, Edit,
+	Help,...)
+
+	* share/po/bn.po: fixed special "<control>" entries;
+	included translations for various standard menu entries (File, Edit,
+	Help,...)
+	updated Bengali file
+
+2004/08/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: misc cleanups
+	make perl_checker happy
+	perl_checker fix
+	(drakboot --splash) add enable_framebuffer to allow to choose a video
+	mode if boot isn't graphical
+
+	* any.pm: add and use bootloader::set_append_netprofile() and
+	bootloader::get_append_netprofile()
+	remove old linuxconf profile code
+	(setupBootloader__entries) allow to choose net profile in advanced mode
+
+	* bootloader.pm: add and use bootloader::set_append_netprofile() and
+	bootloader::get_append_netprofile()
+	remove old linuxconf profile code
+	add remove_append_dict
+
+2004/08/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: changed arabic font to roya.ttf (from
+	fonts-ttf-arabic-farsi) which
+	also cover Farsi (fa).
+	updated Nimbus Sans L to cooker version, and edited it to add
+	the two missing letters needed to full latin and cyrillic coverage
+	(the two letters were latin schwa (for Azeri) and cyrillic che
+	with descender (for Tajik))
+
+	* lang.pm: enabled Turkmen and Tatar; prepared various other languages
+	(waiting for
+	lang-*.png pixmap).
+	updated the kde-i18n list with the newly available languages
+
+2004/08/13  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: 
+	  - bootloader::remove_append_dict() is not useful,
+	bootloader::set_append() can do the same
+	  - don't modify anything before "Ok" is clicked
+	  - set_append with $netprofile eq '' will remove parameter PROFILE=xxx,
+	which is what we want
+
+	* any.pm: perl_checker compliance
+	  - bootloader::remove_append_dict() is not useful,
+	bootloader::set_append() can do the same
+	  - don't modify anything before "Ok" is clicked
+	  - set_append with $netprofile eq '' will remove parameter PROFILE=xxx,
+	which is what we want
+
+	* install_steps_gtk.pm: perl_checker compliance
+	  - don't use compssUsers anymore, use compssUsers.pl
+	  - code to display compssUsers choices is now in compssUsers.pl
+	  - {compssUsers} is now a list instead of a hash, and so drop
+	{compssUsersSorted}
+	  - rename {compssUsersChoice} to {rpmsrate_flags_chosen} (better name)
+	  - i18n_compssUsers is no more needed, add share/compssUsers.pl* to
+	ALLPMS
+
+	* share/compssUsers.pl, Makefile.config, share/compssUsers, pkgs.pm,
+	install2.pm, share/po/Makefile, install_steps.pm,
+	share/po/i18n_compssUsers, install_any.pm, Makefile,
+	install_steps_interactive.pm: 
+	  - don't use compssUsers anymore, use compssUsers.pl
+	  - code to display compssUsers choices is now in compssUsers.pl
+	  - {compssUsers} is now a list instead of a hash, and so drop
+	{compssUsersSorted}
+	  - rename {compssUsersChoice} to {rpmsrate_flags_chosen} (better name)
+	  - i18n_compssUsers is no more needed, add share/compssUsers.pl* to
+	ALLPMS
+
+2004/08/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: One further step towards the ftp supplementary media
+
+2004/08/13  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/cy.po: update
+	update
+
+	* any.pm (set_autologin) parameters are optionnal, writing empty variables
+	in
+	kdmrc and the like means disabled autologin
+
+	* share/po/fr.po: update
+
+	* standalone/drakboot (updateAutologin) clean any::set_autologin() call
+
 2004/08/13  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/advertising/dis-06.pl, share/advertising/dis-05.png,
@@ -35202,7 +35392,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.945 2004/08/12 05:41:23 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.946 2004/08/13 09:11:21 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
