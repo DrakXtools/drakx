@@ -285,8 +285,12 @@ sub getNextStep {
     find { !$o->{steps}{$_}{done} && $o->{steps}{$_}{reachable} } @{$o->{orderedSteps}};
 }
 
+sub dont_run_directly_stage2() {
+    readlink("/usr/bin/runinstall2") eq "runinstall2.sh";
+}
+
 sub spawnShell() {
-    return if $::o->{localInstall} || $::testing;
+    return if $::o->{localInstall} || $::testing || dont_run_directly_stage2();
 
     if (my $shellpid = fork()) {
         output('/var/run/drakx_shell.pid', $shellpid);
