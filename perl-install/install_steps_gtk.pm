@@ -138,6 +138,7 @@ sub new($$) {
     install_gtk::create_logo_window($o);
     install_gtk::create_steps_window($o);
 
+    $ugtk2::grab = 1;
     $ugtk2::force_center_at_pos = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
@@ -190,8 +191,6 @@ sub selectMouse {
       $old{type}   eq $mouse->{type}   && 
       $old{name}   eq $mouse->{name}   &&
       $old{device} eq $mouse->{device} && !$force and return;
-
-    local $ugtk2::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
 
     while (1) {
 	my $x_protocol_changed = mouse::change_mouse_live($mouse, \%old);
@@ -592,7 +591,6 @@ sub installPackages {
 
 	#- if not using a cdrom medium, always abort.
 	if ($method eq 'cdrom' && !$::oem) {
-	    local $ugtk2::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
 	    my $time = time();
