@@ -206,7 +206,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate'];
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
-	-e "$prefix/usr/share/speedtouch/mgmt.o" and return 1;
+	-e "$prefix/usr/share/speedtouch/mgmt.o" and goto end_firmware;
 	
       firmware:
 	
@@ -229,6 +229,7 @@ Download it at:
 and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'));
 	
 	-e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
+      end_firmware:
     }
     
     if ($adsl_type eq 'eci') {
