@@ -13,6 +13,7 @@ use devices;
 #-#####################################################################################
 my @themes_vga16 = qw(blue blackwhite savane);
 my @themes_desktop = qw(mdk-Desktop DarkMarble marble3d blueHeart);
+my @themes_firewall = qw(mdk-Firewall);
 my @themes = qw(mdk DarkMarble marble3d blueHeart);
 
 my (@background1, @background2);
@@ -36,6 +37,7 @@ sub load_rc {
 sub default_theme {
     my ($o) = @_;
     @themes = @themes_desktop if $o->{meta_class} eq 'desktop';
+    @themes = @themes_firewall if $o->{meta_class} eq 'firewall';
     @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
     install_theme($o, $o->{theme} || $themes[0]);
 }
@@ -140,7 +142,7 @@ sub create_steps_window {
 									   $_[0]) or die;
 			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 							 $pixmap, 0, 0,
-							 ($darea->allocation->[2]-$PIX_W)/2,
+							 ($darea->allocation->[2]-$PIX_W)/2 + ($o->{meta_class} eq 'firewall' ? 3 : 0),
 							 ($darea->allocation->[3]-$PIX_H)/2,
 							 $PIX_W , $PIX_H );
 			};
@@ -150,7 +152,7 @@ sub create_steps_window {
 			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
 			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
 			};
-			$darea->set_usize($PIX_W,$PIX_H);
+			$darea->set_usize($PIX_W+($o->{meta_class} eq 'firewall' ? 3 : 0),$PIX_H);
 			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
 			if ($step->{reachable}) {
@@ -189,6 +191,7 @@ sub create_logo_window {
     $w->{rwindow}->set_name("logo");
     $w->show;
     my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.xpm" : "logo-mandrake.xpm";
+    $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.xpm";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
     if (-r $file) {
 	my $ww = $w->{window};
