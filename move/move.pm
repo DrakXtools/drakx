@@ -106,6 +106,8 @@ sub init {
     mkdir "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
 
+    touch '/etc/mtab';  #- prevents from creating a link to the RO volume thus failing substInFile from fs::umount
+
     #- these files need be writable but we need a sensible first contents
     system("cp /image/etc/$_ /etc") foreach qw(passwd passwd- group sudoers fstab);
 
@@ -146,7 +148,7 @@ sub init {
     #- or O_RDWR -> in that case, they should be handled in the
     #- OVERWRITE section of data/etcfiles)
     foreach (chomp_(cat_('/image/move/all-etcfiles'))) {
-        -f or symlinkf_short("/image/$_", $_);
+        -f or symlinkf_short("/image$_", $_);
     }
 
     #- free up stage1 memory
