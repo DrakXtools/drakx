@@ -364,7 +364,7 @@ sub _create_dialog {
     my $dialog = Gtk2::Dialog->new;
     $dialog->set_title($title);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->set_size_request($o_options->{height} || -1, $o_options->{height} || -1);
+    $dialog->set_size_request($o_options->{width} || -1, $o_options->{height} || -1);
     $dialog->set_modal(1);
     $dialog->set_transient_for($o_options->{transient}) if $o_options->{transient};
     $dialog;
