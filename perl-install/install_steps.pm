@@ -2,7 +2,7 @@ package install_steps;
 
 use diagnostics;
 use strict;
-use vars qw(@filesToSaveForUpgrade);
+use vars qw($minAvailableSize @filesToSaveForUpgrade);
 
 #-######################################################################################
 #- misc imports
@@ -24,6 +24,7 @@ use network;
 use any;
 use fs;
 
+$minAvailableSize = 5 * sqr(1024);
 @filesToSaveForUpgrade = qw(
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules
 );
@@ -221,10 +222,15 @@ sub selectPackagesToUpgrade {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
 
-    return if $o->{isUpgrade};
+    #- now for upgrade, package that must be upgraded are
+    #- selected first, after is used the same scheme as install.
 
-    my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
-    
+    #- make sure we kept some space left for available else the system may
+    #- not be able to start (xfs at least).
+    my $available = install_any::getAvailableSpace($o) - $minAvailableSize;
+    my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
+    $available < $availableCorrected or $available = $availableCorrected;
+
     foreach (values %{$packages->[0]}) {
 	pkgs::packageSetFlagSkip($_, 0);
 	pkgs::packageSetFlagUnskip($_, 0);
@@ -905,6 +911,13 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
+}
+
+#------------------------------------------------------------------------------
+sub hasNetwork {
+    my ($o) = @_;
+
+    $o->{intf} && $o->{netc}{NETWORKING} ne 'false' || $o->{modem};
 }
 
 #------------------------------------------------------------------------------

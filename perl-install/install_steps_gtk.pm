@@ -471,6 +471,14 @@ sub choosePackagesTree {
 		return $o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
 	    } elsif (pkgs::packageFlagInstalled($p)) {
 		return $o->ask_warn('', _("You can't unselect this package. It is already installed"));
+	    } elsif (pkgs::packageFlagUpgrade($p)) {
+		if ($::expert) {
+		    if (pkgs::packageFlagSelected($p)) {
+			$o->ask_yesorno('', _("This package must be upgraded\nAre you sure you want to deselect it?")) or return;
+		    }
+		} else {
+		    return $o->ask_warn('', _("You can't unselect this package. It must be upgraded"));
+		}
 	    }
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {

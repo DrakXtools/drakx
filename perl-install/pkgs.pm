@@ -2,7 +2,7 @@ package pkgs;
 
 use diagnostics;
 use strict;
-use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP);
+use vars qw(*LOG %compssListDesc @skip_list %by_lang @preferred $limitMinTrans $PKGS_SELECTED $PKGS_FORCE $PKGS_INSTALLED $PKGS_BASE $PKGS_SKIP $PKGS_UNSKIP $PKGS_UPGRADE);
 
 use common qw(:common :file :functional);
 use install_any;
@@ -94,6 +94,7 @@ $PKGS_INSTALLED = 0x02000000;
 $PKGS_BASE      = 0x04000000;
 $PKGS_SKIP      = 0x08000000;
 $PKGS_UNSKIP    = 0x10000000;
+$PKGS_UPGRADE   = 0x20000000;
 
 #- basic methods for extracting informations about packages.
 #- to save memory, (name, version, release) are no more stored, they
@@ -116,6 +117,7 @@ sub packageFlagInstalled { my ($pkg) = @_; $pkg->{flags} & $PKGS_INSTALLED }
 sub packageFlagBase      { my ($pkg) = @_; $pkg->{flags} & $PKGS_BASE }
 sub packageFlagSkip      { my ($pkg) = @_; $pkg->{flags} & $PKGS_SKIP }
 sub packageFlagUnskip    { my ($pkg) = @_; $pkg->{flags} & $PKGS_UNSKIP }
+sub packageFlagUpgrade   { my ($pkg) = @_; $pkg->{flags} & $PKGS_UPGRADE }
 
 sub packageSetFlagSelected  { my ($pkg, $v) = @_; $pkg->{flags} &= ~$PKGS_SELECTED; $pkg->{flags} |= $v & $PKGS_SELECTED; }
 
@@ -124,6 +126,7 @@ sub packageSetFlagInstalled { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_I
 sub packageSetFlagBase      { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_BASE)      : ($pkg->{flags} &= ~$PKGS_BASE); }
 sub packageSetFlagSkip      { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_SKIP)      : ($pkg->{flags} &= ~$PKGS_SKIP); }
 sub packageSetFlagUnskip    { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_UNSKIP)    : ($pkg->{flags} &= ~$PKGS_UNSKIP); }
+sub packageSetFlagUpgrade   { my ($pkg, $v) = @_; $v ? ($pkg->{flags} |= $PKGS_UPGRADE)   : ($pkg->{flags} &= ~$PKGS_UPGRADE); }
 
 sub packageProvides { my ($pkg) = @_; @{$pkg->{provides} || []} }
 
@@ -309,7 +312,20 @@ sub setPackageSelection($$$) {
 
 sub unselectAllPackages($) {
     my ($packages) = @_;
-    packageFlagBase($_) or packageSetFlagSelected($_, 0) foreach values %{$packages->[0]};
+    foreach (values %{$packages->[0]}) {
+	unless (packageFlagBase($_) || packageFlagUpgrade($_)) {
+	    packageSetFlagSelected($_, 0);
+	}
+    }
+}
+sub unselectAllPackagesIncludingUpgradable($) {
+    my ($packages, $removeUpgradeFlag) = @_;
+    foreach (values %{$packages->[0]}) {
+	unless (packageFlagBase($_)) {
+	    packageSetFlagSelected($_, 0);
+	    packageSetFlagUpgrade($_, 0);
+	}
+    }
 }
 
 sub skipSetWithProvides {
@@ -650,7 +666,7 @@ sub versionCompare($$) {
     }
 }
 
-sub selectPackagesToUpgrade($$$;$$) { #- TODO
+sub selectPackagesToUpgrade($$$;$$) {
     my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
 
     log::l("reading /usr/lib/rpm/rpmrc");
@@ -799,6 +815,14 @@ sub selectPackagesToUpgrade($$$;$$) { #- TODO
 	    my @obsoletes = map { /^\*(.*)/ ? ($1) : () } @$list;
 	    map { selectPackage($packages, $p) if c::rpmdbNameTraverse($db, $_) > 0 } @obsoletes;
 	}
+    }
+
+    #- keep a track of packages that are been selected for being upgraded,
+    #- these packages should not be unselected.
+    foreach (values %{$packages->[0]}) {
+	my $p = $_;
+
+	packageSetFlagUpgrade($p, 1) if packageFlagSelected($p);
     }
 
     #- clean false value on toRemove.

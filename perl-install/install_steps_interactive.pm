@@ -123,7 +123,7 @@ You will be allowed to make powerfull but dangerous things here."),
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
 					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
 
-    if ($::corporate || $::beginner || $o->{isUpgrade}) {
+    if ($::corporate || $::beginner) {
 	delete $o->{installClass};
     } else {
 	my %c = (
@@ -274,28 +274,28 @@ sub choosePackages {
     my $individual = $::expert;
 
     require pkgs;
-    unless ($o->{isUpgrade}) {
-	my $min_size = pkgs::selectedSize($packages);
 
-	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
+    my $min_size = pkgs::selectedSize($packages);
+    $min_size < $available or die _("Your system has not enough space left for installation or upgrade");
 
-	my $min_mark = $::beginner ? 25 : 1;
-	my @l = values %{$packages->[0]};
-	my @flags = map { pkgs::packageFlagSelected($_) } @l;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
-	my $max_size = pkgs::selectedSize($packages);
-	mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
+    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
+
+    my $min_mark = $::beginner ? 25 : 1;
+    my @l = values %{$packages->[0]};
+    my @flags = map { pkgs::packageFlagSelected($_) } @l;
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+    my $max_size = pkgs::selectedSize($packages);
+    mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
 #-	  if (!$::beginner && $max_size > $available) {
 #-	      $o->ask_okcancel('', 
 #-_("You need %dMB for a full install of the groups you selected.
 #-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 #-	  }
-	my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $available, $individual) or goto &choosePackages;
+    my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $available, $individual) or goto &choosePackages;
 
-	($o->{packages_}{ind}) = 
-	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
-    }
+    ($o->{packages_}{ind}) = 
+      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     $o->choosePackagesTree($packages, $compss) if $individual;
 }
 
@@ -522,7 +522,7 @@ sub installCrypto {
     my ($o) = @_;
     my $u = $o->{crypto} ||= {};
     
-    $::expert or return;
+    $::expert and $o->hasNetwork or return;
 
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
 _("You have now the possibility to download software aimed for encryption.

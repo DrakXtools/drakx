@@ -277,7 +277,8 @@ sub setPackages($) {
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
     } else {
-	pkgs::unselectAllPackages($o->{packages});
+	#- remove upgrade flag with selection one.
+	pkgs::unselectAllPackagesIncludingUpgradable($o->{packages});
     }
 }
 

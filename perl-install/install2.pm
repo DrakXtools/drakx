@@ -345,24 +345,24 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 sub choosePackages {
     require pkgs;
-    $o->setPackages if $_[1] == 1;
-    $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    if ($_[1] > 1 || !$o->{isUpgrade} || $::expert) {
-	if ($_[1] == 1) { 
-	    $o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
-#	    $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
-	}
-	$o->choosePackages($o->{packages}, $o->{compss}, 
-			   $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
-	my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
-	pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
+    if ($_[1] == 1) {
+	$o->setPackages;
+	$o->selectPackagesToUpgrade($o) if $o->{isUpgrade};
 
-	#- check pre-condition where base backage has to be selected.
-	pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
-
-	#- check if there are package that need installation.
-	$o->{steps}{doInstallStep}{done} = 0 if $o->{steps}{doInstallStep}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
+	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
+	# $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better
     }
+
+    $o->choosePackages($o->{packages}, $o->{compss}, 
+		       $o->{compssUsers}, $o->{compssUsersSorted}, $_[1] == 1);
+    my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
+    pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
+
+    #- check pre-condition where base backage has to be selected.
+    pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
+
+    #- check if there are package that need installation.
+    $o->{steps}{doInstallStep}{done} = 0 if $o->{steps}{doInstallStep}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
 }
 
 #------------------------------------------------------------------------------
