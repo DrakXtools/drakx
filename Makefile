@@ -89,7 +89,7 @@ upload:
 	$(MAKE) clean
 
 #	# done before make install to increment ChangeLog version
-#	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
+	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
 
@@ -105,7 +105,7 @@ upload:
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
-	for i in $(FRELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
+	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
 	echo
 
 upload_sparc:
