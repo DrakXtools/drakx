@@ -1,3 +1,57 @@
+2000/12/29  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (addUser): typo fix
+
+	* ftp.pm (getFile): recall getFile after rewindGetFile
+
+2000/12/28  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: now /usr/lib/X11 is a relative symlink to please mirrors and
+	jako
+
+2000/12/26  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* keyboard.pm: Add the very ghost option REMOVE_MOD_META_L.
+
+2000/12/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/sl.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated Lithuanian file
+
+2000/12/22  dam's  <damien@mandrakesoft.com>
+
+	* install_steps.pm, install_steps_interactive.pm: corrected admin user
+	setting for firewall install.
+
+2000/12/22  François Pons  <fpons@mandrakesoft.com>
+
+	* modules.pm: fixed load_multi on live.
+	added back all removed module with the new great mdk-stage1 of gégé.
+
+2000/12/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: make them work with kernel-2.4 by disabling non existent
+	modules
+
+2000/12/22  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm, install2.pm: commit symlink /tmp/image /tmp/rhimage
+
+2000/12/21  Pixel  <pixel@mandrakesoft.com>
+
+	* ChangeLog: New snapshot uploaded
+
 2000/12/21  dam's  <damien@mandrakesoft.com>
 
 	* install2.pm: firewall : automatic class set when firewall (beginner=0)
