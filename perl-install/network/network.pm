@@ -326,7 +326,7 @@ Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
     my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
-    my $onboot = $intf->{ONBOOT} !~ /no/;
+    my $onboot = $intf->{ONBOOT} ? $intf->{ONBOOT} =~ /yes/ : bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::pcmcia_probe()));
     my $needhostname = $intf->{NEEDHOSTNAME} !~ /no/; 
     my $hotplug = $::isStandalone && !$intf->{MII_NOT_SUPPORTED} or 1;
     my $track_network_id = $::isStandalone && $intf->{HWADDR} or detect_devices::isLaptop();
