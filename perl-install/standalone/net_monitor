@@ -25,6 +25,7 @@ use standalone;
 use my_gtk qw(:helpers :wrappers);
 use Data::Dumper;
 use common qw(:common :file :functional :system);
+use strict;
 
 my $default_intf;
 init Gtk;
@@ -48,8 +49,8 @@ gtkadd($window1,
 			    0, gtkpack_(new Gtk::VBox(0,5),
 					1, gtkadd(gtkset_shadow_type(new Gtk::Frame("Statistics"), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
-				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
 				      gtkpack__(new Gtk::HBox(0,0), _("Sending Speed : "), my $label_st = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
 							   )
 						 ),
 					0, my $button_connect = new Gtk::Button("connect"),
@@ -64,34 +65,37 @@ $window1->show_all();
 $window1->set_policy (1, 1, 1);
 update();
 my ($labelr, $labelt);
-my $time_tag = Gtk->timeout_add(1000, sub {
-				    get_val();
-				    foreach(@interfaces) {
-					my $intf = $_;
-					my $recv = $monitor->{$intf}{val}->[0];
-					my $transmit = $monitor->{$intf}{val}->[8];
-					my $refr = $monitor->{$intf}{referencer};
-					my $reft = $monitor->{$intf}{referencet};
-					$monitor->{sr} += $recv - $refr;
-					$monitor->{st} += $transmit - $reft;
-					push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
-					shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 300;
-					$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
-					$monitor->{$intf}{referencer} = $recv;
-					push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
-					shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 300;
-					$monitor->{$intf}{referencet} = $transmit;
-					$labelt->set(formatXiB($transmit - $monitor->{$intf}{initialt}));
-					draw_monitor($monitor->{$intf});
-				    }
-				    $label_sr->set(formatXiB($monitor->{sr}) . "/s");
-				    $label_st->set(formatXiB($monitor->{st}) . "/s");
-				    $monitor->{$_} = 0 foreach ('sr', 'st');
-				    1;
-				});
+my $time_tag = Gtk->timeout_add(1000, \&rescan);
 my $time_tag2 = Gtk->timeout_add(5000, \&update);
+rescan();
 Gtk->main;
 Gtk->exit(0);
+
+sub rescan {
+    get_val();
+    foreach(@interfaces) {
+	my $intf = $_;
+	my $recv = $monitor->{$intf}{val}->[0];
+	my $transmit = $monitor->{$intf}{val}->[8];
+	my $refr = $monitor->{$intf}{referencer};
+	my $reft = $monitor->{$intf}{referencet};
+	$monitor->{sr} += $recv - $refr;
+	$monitor->{st} += $transmit - $reft;
+	push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
+	shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 250;
+	$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
+	$monitor->{$intf}{referencer} = $recv;
+	push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
+	shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 250;
+	$monitor->{$intf}{referencet} = $transmit;
+	$labelt->set(formatXiB($transmit - $monitor->{$intf}{initialt}));
+	draw_monitor($monitor->{$intf});
+    }
+    $label_sr->set(formatXiB($monitor->{sr}) . "/s");
+    $label_st->set(formatXiB($monitor->{st}) . "/s");
+    $monitor->{$_} = 0 foreach ('sr', 'st');
+    1;
+}
 
 sub get_val {
     my @ret;
@@ -155,26 +159,46 @@ sub draw_monitor {
     foreach (@{$o->{stack_t}}) {
 	$maxt = $_ if $_>$maxt;
     }
-    $ech = $maxr + $maxt;
+    my $ech = $maxr + $maxt;
     $ech == 0 and $ech = 1;
-    my $step=0;
-    my $color = my_gtk::gtkcolor(65535, 65535, 655);
-
-    my $gc = new Gtk::Gdk::GC($o->{darea}->window);
-    $gc->set_foreground($color); #$color
-
-#$o->{darea}->get_style->copy();
-#    print "\n##\n" . Data::Dumper->Dump([$gc],['$gc']) . "\n##\n";
-#    $o->{darea}->set_style ($style);
+    my $colorr = my_gtk::gtkcolor(50400, 655, 20000);
+    my $gcr = new Gtk::Gdk::GC($o->{darea}->window);
+    $gcr->set_foreground($colorr);
+    my $colort = my_gtk::gtkcolor(55400, 65400, 655);
+    my $gct = new Gtk::Gdk::GC($o->{darea}->window);
+    $gct->set_foreground($colort);
+    my $step=50;
     foreach (@{$o->{stack_t}}) {
-	$o->{pixmap_db}->draw_rectangle($gc, 1, $step, 0, 1, $_*150/$ech);
+	$o->{pixmap_db}->draw_rectangle($gct, 1, $step, 0, 1, $_*150/$ech);
 	$step++;
     }
-    $step=0;
+    $step=50;
     foreach (@{$o->{stack_r}}) {
-	$o->{pixmap_db}->draw_rectangle($gc, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
+	$o->{pixmap_db}->draw_rectangle($gcr, 1, $step, 151-$_*150/$ech, 1, $_*150/$ech);
 	$step++;
+    }
+    my $gcl = new Gtk::Gdk::GC($o->{darea}->window);
+    $gcl->set_foreground($o->{darea}->window->get_colormap->color_white());
+    $gcl->set_line_attributes (1, 'on-off-dash', 'not-last', 'round');
+    my $style= new Gtk::Style;
+    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-medium-r-normal-*-12-*-75-75-p-*-iso8859-*,*-r-*"));
+    for (my $i = 30;$i<=120;$i+=30) {
+	$o->{pixmap_db}->draw_line($gcl, 50, $i, 300, $i);
+	my ($gc2, $text);
+	my $dif1 = abs(150-@{$o->{stack_r}}[@{$o->{stack_r}}-1]*150/$ech - $i);
+	my $dif2 = abs(@{$o->{stack_t}}[@{$o->{stack_t}}-1]*150/$ech - $i);
+	if ($dif1 < $dif2) {
+	    $text = formatXiB((150-$i)*$ech/150);
+	    $gc2=$gcr;
+	} else {
+	    $text = formatXiB($i*$ech/150);
+	    $gc2=$gct;
+	}
+#	    $text = formatXiB((150-$i)*$ech/150);
+#	    $gc2 = $o->{darea}->style->white_gc;
+
+	my $w = $style->font->string_width($text);
+	$o->{pixmap_db}->draw_string($style->font, $gc2, 45-$w, $i+5, ($text) );
     }
     $o->{darea}->draw(undef);
 }
-
