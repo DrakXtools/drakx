@@ -13,7 +13,7 @@ sub getFile {
 
     my ($host, $port, $path) = $ENV{URLPREFIX} =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
     $host = network::resolv($host);
-    $path .= "/" . install_any::relGetFile($_[0]);
+    $path .= "/$_[0]";
 
     $sock->close if $sock;
     $sock = IO::Socket::INET->new(PeerAddr => $host,

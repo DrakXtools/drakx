@@ -29,7 +29,7 @@ sub partitionWizard {
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
-    if (fsedit::free_space(@$hds) > $min_linux and !$readonly) {
+    if (fsedit::free_space(grep { partition_table::can_raw_add($_) } @$hds) > $min_linux and !$readonly) {
 	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($hds, $o->{partitions}); 1 } ]
     } else { 
 	push @wizlog, _("Not enough free space to allocate new partitions");

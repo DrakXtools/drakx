@@ -443,7 +443,7 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected) = @_;
+    my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $fhdlist) = @_;
 
     #- if the medium already exist, use it.
     $packages->[2]{$medium} and return;
@@ -463,7 +463,7 @@ sub psUsingHdlist {
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
-    install_any::getAndSaveFile($hdlist, $newf) or die "no $hdlist found";
+    install_any::getAndSaveFile($fhdlist || $hdlist, $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
 
     #- extract filename from archive, this take advantage of verifying
@@ -1021,9 +1021,10 @@ sub install($$$;$$) {
     log::l("\tdone");
 
     my $callbackOpen = sub {
-	my $f = packageFile($packages{$_[0]});
-	print LOG "$f\n";
-	my $fd = install_any::getFile($f);
+	my $p = $packages{$_[0]};
+	my $f = packageFile($p);
+	print LOG "$f $p->{medium}{descr}\n";
+	my $fd = install_any::getFile($f, $p->{medium}{descr});
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
@@ -1081,7 +1082,7 @@ sub install($$$;$$) {
 	#- reset file descriptor open for main process but
 	#- make sure error trying to change from hdlist are
 	#- trown from main process too.
-	install_any::getFile(packageFile($transToInstall[0]));
+	install_any::getFile(packageFile($transToInstall[0]), $transToInstall[0]{medium}{descr});
 	#- and make sure there are no staling open file descriptor too!
 	install_any::getFile('XXX');
 

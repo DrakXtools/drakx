@@ -112,32 +112,38 @@ sub errorOpeningFile($) {
     return;
 }
 sub getFile {
-    local $^W = 0;
-    if ($::o->{method} && $::o->{method} eq "ftp") {
-	require ftp;
-	*install_any::getFile = sub { ftp::getFile($_[0]) or errorOpeningFile($_[0]) };
-    } elsif ($::o->{method} && $::o->{method} eq "http") {
-	require http;
-	*install_any::getFile = sub { http::getFile($_[0]) or errorOpeningFile($_[0]) };
-    } else {
-	*install_any::getFile = sub {
+    my ($f, $method) = @_;
+    my $rel = install_any::relGetFile($f);
+    log::l("getFile $f ($method) relGetFile $rel");
+    do {
+	if ($method =~ /crypto/i) {
+	    require crypto;
+	    log::l("crypto::getFile $f");
+	    crypto::getFile($f);
+	} elsif ($method eq "ftp") {
+	    require ftp;
+	    ftp::getFile($rel);
+	} elsif ($method eq "http") {
+	    require http;
+	    http::getFile($rel);
+	} else {
 	    #- try to open the file, but examine if it is present in the repository, this allow
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
-	    log::l("getFile /tmp/rhimage/" . relGetFile($_[0]));
-	    open GETFILE, "/tmp/rhimage/" . relGetFile($_[0]) or
-	      $postinstall_rpms and open GETFILE, "$postinstall_rpms/$_[0]" or return errorOpeningFile($_[0]);
+	    my $f2 = "$postinstall_rpms/$f";
+	    $f2 = "/tmp/rhimage/$rel" unless -e $f2;
+	    log::l("local getFile $f2");
+	    open GETFILE, $f2;
 	    *GETFILE;
-	};
-    }
-    goto &getFile;
+	}
+    } or errorOpeningFile($f);
 }
 sub getAndSaveFile {
     my ($file, $local) = @_;
     log::l("getAndSaveFile $file $local");
     local *F; open F, ">$local" or return;
     local $/ = \ (16 * 1024);
-    my $f = getFile($file) or return;
+    my $f = ref($file) ? $file : getFile($file) or return;
     local $_;
     while (<$f>) { syswrite F, $_ }
     1;
@@ -621,10 +627,10 @@ sub suggest_mount_points {
 	next if $uniq && fsedit::mntpoint2part($mnt, \@parts);
 	$part->{mntpoint} = $mnt;
 
-	# try to find other mount points via fstab
+	#- try to find other mount points via fstab
 	fs::get_mntpoints_from_fstab(\@parts, $d) if $mnt eq '/';
     }
-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
+#-    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
 
     $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @parts;
 }

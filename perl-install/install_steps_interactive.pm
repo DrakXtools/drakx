@@ -17,13 +17,13 @@ use install_steps;
 use install_interactive;
 use install_any;
 use detect_devices;
+use netconnect;
 use run_program;
 use commands;
 use devices;
 use fsedit;
 use network;
 use raid;
-use netconnect;
 use mouse;
 use modules;
 use lang;
@@ -517,7 +517,7 @@ such as ``mybox.mylab.myco.com''."),
     #- (dam's)
     if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
 			_("Do you want to configure a ISDN connection for your system?"), 0)) {
-        Netconnect::detect_isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
+#        netconnect::detect_isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
     }
 }
 
@@ -657,8 +657,7 @@ USA")) || return;
     my %h; $h{$_} = 1 foreach @{$u->{packages} || []};
     $o->ask_many_from_list_ref('', _("Please choose the packages you want to install."), 
 			       \@packages, [ map { \$h{$_} } @packages ]) or return;
-    $u->{packages} = [ grep { $h{$_} } @packages ];
-    install_steps::installCrypto($o);
+    $o->pkg_install(@{$u->{packages} = [ grep { $h{$_} } @packages ]});
 
     #- stop interface using ppp only.
     $o->downNetwork('pppOnly');

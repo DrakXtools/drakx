@@ -630,8 +630,12 @@ sub next_start($$) {
     $next ? $next->{start} : $hd->{totalsectors};
 }
 
-
-sub raw_add($$) {
+sub can_raw_add {
+    my ($hd) = @_;
+    $_->{size} || $_->{type} or return foreach @{$hd->{primary}{raw}};
+    1;
+}
+sub raw_add {
     my ($raw, $part) = @_;
 
     foreach (@$raw) {

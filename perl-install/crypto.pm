@@ -34,6 +34,7 @@ sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile($$) {
     my ($file, $host) = @_;
+    $host ||= $crypto::host;
     log::l("getting crypto file $file on directory " . dir($host) . " with login $mirrors{$host}[2]");
     my ($ftp, $retr) = ftp::new($host, dir($host),
 				$mirrors{$host}[2] ? $mirrors{$host}[2] : (),
@@ -44,16 +45,16 @@ sub getFile($$) {
     $$retr ||= $ftp->retr($file);
 }
 
-sub getDepslist($) { getFile("depslist-crypto", $_[0]) or die "unable to get depslist-crypto" }
-sub getHdlist($) { getFile("hdlist-crypto.cz2", $_[0]) or die "unable to get hdlist-crypto.cz2" }
+sub getDepslist { getFile("depslist-crypto", $_[0]) or die "unable to get depslist-crypto" }
 
-#sub packages($) { ftp($_[0])->ls }
-sub getPackages($) {
+sub getPackages {
     my ($prefix, $packages, $mirror) = @_;
+
+    $crypto::host = $mirror;
 
     #- extract hdlist of crypto, then depslist.
     require pkgs;
-    pkgs::psUsingHdlist($prefix, '', $packages, getHdlist($mirror), "hdlistCrypto.cz2", "Crypto", '', "Crytographic site", 1) and
+    pkgs::psUsingHdlist($prefix, '', $packages, "hdlist-crypto.cz2", "crypto.cz2", "Crypto", "Cryptographic site", 1, getFile("hdlist-crypto.cz2", $mirror)) and
 	pkgs::getOtherDeps($packages, getDepslist($mirror));
 
     #- produce an output suitable for visualization.

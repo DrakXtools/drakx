@@ -613,20 +613,6 @@ sub installCrypto {
     $o->upNetwork;
     require crypto;
     my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
-
-    my $oldGetFile = \&install_any::getFile;
-    local *install_any::getFile = sub {
-	my ($rpmfile) = @_;
-	if ($rpmfile =~ /^(.*)-[^-]*-[^-]*$/ && member($1, @crypto_packages)) {
-	    log::l("crypto::getFile $rpmfile");
-	    crypto::getFile($rpmfile, $u->{mirror});
-	} else {
-	    #- use previous getFile typically if non cryptographic packages
-	    #- have been selected by dependancies.
-	    log::l("normal getFile $rpmfile");
-	    &$oldGetFile($rpmfile);
-	}
-    };
     $o->pkg_install(@{$u->{packages}});
 }
 
