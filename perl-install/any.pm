@@ -297,7 +297,7 @@ sub setupBootloader__entries {
 	    );
 	} else {
 	    @l = ( 
-{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies_dev() ], not_edit => !$::expert },
+{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies() ], not_edit => !$::expert },
 	    );
 	}
 	if (arch() !~ /ppc/) {
