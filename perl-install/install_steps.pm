@@ -696,6 +696,8 @@ sub addUser {
 	
 	$_->{uid} = $u; $uids{$u} = 1;
 	$_->{gid} = $g; $gids{$g} = 1;
+
+	push @{$_->{groups} ||= []}, 'usb' if $o->{security} <= 3;
     }
 
     any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
