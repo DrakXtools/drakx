@@ -3,27 +3,52 @@
 use XML::Parser;
 use MDK::Common;
 
-@ARGV == 1 or die "usage: help_xml2pm <drakx-help.xml>\n";
+my $help;
+my $dir = "doc/manual/literal/drakx";
+my @langs = grep { /^..$/ } all($dir);
 
-my $p = new XML::Parser(Style => 'Tree');
-my $tree = $p->parsefile($ARGV[0]);
-my $help = {};
+my %helps = map {
+    my $lang = $_;
+    my $p = new XML::Parser(Style => 'Tree');
+    my $tree = $p->parsefile("$dir/$lang/drakx-help.xml");
 
-# rewrite2 fills in $help
-rewrite2(rewrite1(@$tree));
+    $lang => rewrite2(rewrite1(@$tree), $lang);
+} @langs;
 
-print 
-q{package help;
+my $base = delete $helps{en} || die;
+save_help($base);
+
+foreach my $lang (keys %helps) {
+    local *F;
+    open F, "> help-$lang.po";
+    print F "\n";
+    foreach my $id (keys %{$helps{$lang}}) {
+	$base->{$id} or die "$lang:$id doesn't exist in english\n";
+	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE cvs.mandrakesoft.com:/cooker doc/manual/literal/drakx/$lang/drakx-help.xml\n);
+	print F qq(msgid ""\n");
+	print F join(qq(\\n"\n"), split "\n", $base->{$id});
+	print F qq("\nmsgstr ""\n");
+	print F join(qq(\\n"\n"), split "\n", $helps{$lang}{$id});
+	print F qq("\n\n);
+    }
+}
+
+
+sub save_help {
+    my ($help) = @_;
+    local *F;
+    open F, "| LC_ALL=fr iconv -f utf8 -t ascii//TRANSLIT > ../../help.pm";
+    print F q{package help;
 use common;
 %steps = (
 empty => '',
 };
-print qq(
+    print F qq(
 $_ => 
 __("$help->{$_}"),
 ) foreach sort keys %$help;
-print ");\n";
-
+    print F ");\n";
+}
 
 # i don't like the default tree format given by XML::Parser,
 # rewrite it in my own tree format
@@ -46,7 +71,7 @@ sub rewrite1 {
 	    push @l, rewrite1($tag, $tree);
 	}
     }
-    { attr => $attr, tag => $tag, children => \@l };
+    { attr => $attr, tag => lc $tag, children => \@l };
 }
 
 # return the list of nodes named $tag
@@ -62,16 +87,22 @@ sub find {
 }
 
 sub rewrite2 {
+    my ($tree, $lang) = @_;
+    my $i18ned_open_quote  = $ {{ fr => "«", de => "â€ž"}}{$lang};
+    my $i18ned_close_quote = $ {{ fr => "»", de => "â€œ"}}{$lang};
+
+    # rewrite2_ fills in $help
+    $help = {};
+    rewrite2_($tree);
+    $help;
+}
+
+sub rewrite2_ {
     my ($tree) = @_;
     ref($tree) or return $tree;
 
-    if ($tree->{tag} eq 'screen') {
-	'';
-    }
-
-
     my $text = do {
-	my @l = map { rewrite2($_) } @{$tree->{children}};
+	my @l = map { rewrite2_($_) } @{$tree->{children}};
 	my $text;
 	foreach (grep { !/^\s*$/ } @l) {
 	    s/^ // if $text =~ /\s$/;
@@ -88,8 +119,10 @@ sub rewrite2 {
 	$text =~ s/^( ?\n)+//;
 	$text =~ s/\s+$//;
 	qq(\n$text\n);
-    } elsif (member($tree->{tag}, 'quote', 'citetitle')) {
-	qq(``$text'');
+    } elsif (member($tree->{tag}, 'quote', 'citetitle', 'foreignphrase')) {
+	($i18ned_open_quote || "``") . $text . ($i18ned_close_quote || "''");
+    } elsif ($tree->{tag} eq 'guilabel') {
+	($i18ned_open_quote || "\\\"") . $text . ($i18ned_close_quote || "\\\"");
     } elsif ($tree->{tag} eq 'command') {
 	qq(\\"$text\\");
     } elsif ($tree->{tag} eq 'userinput') {
@@ -106,10 +139,10 @@ sub rewrite2 {
 	$text =~ s/^/' ' . ($cnt++ ? '  ' : '* ')/emg;
 	"\n$text\n";
 
-    } elsif (member($tree->{tag}, 'guibutton', 'guimenu', 'guilabel',
+    } elsif (member($tree->{tag}, 'guibutton', 'guimenu', 
                     'emphasis', 'acronym', 'keycap', 'ulink', 'tip', 'note',
 		    'primary', 'indexterm', 'application', 'keycombo', 
-		    'literal', 'superscript',
+		    'literal', 'superscript', 'xref',
 		   )) {
 	# ignored tags
 	$text;
@@ -120,7 +153,7 @@ sub rewrite2 {
 	$text =~ s/^\s+//;
 
 	my @footnotes = map { 
-	    my $s = rewrite2({ %$_, tag => 'para' });
+	    my $s = rewrite2_({ %$_, tag => 'para' });
 	    $s =~ s/^\s+//;
 	    "(*) $s";
 	} find('footnote', $tree);
@@ -135,6 +168,8 @@ sub rewrite2 {
 
 sub aerate {
     my ($s) = @_;
-    my $s2 = join("\n\n", map { join("\n", warp_text($_)) } split "\n", $s);
+    #- the warp_text column is adjusted so that xgettext do not wrap text around
+    #- which cause msgmerge to add a lot of fuzzy
+    my $s2 = join("\n\n", map { join("\n", warp_text($_, 75)) } split "\n", $s);
     $s2;
 }

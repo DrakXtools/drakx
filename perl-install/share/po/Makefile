@@ -10,11 +10,12 @@ LANGS = $(POFILES:%.po=%)
 LOCALEDIR=$(DATADIR)/locale
 
 
-all: $(MOFILES)
+all: help $(MOFILES)
 
 help:
-	wget -q -O drakx-help.xml "http://www.mandrakelinux.com/cgi-bin/cvsweb.cgi/~checkout~/doc/manual/literal/drakx/en/drakx-help.xml?rev=1&content-type=text/plain"
-	./help_xml2pm.pl drakx-help.xml | LC_ALL=fr iconv -f utf8 -t ascii//TRANSLIT > ../../help.pm
+	cvs co doc/manual/{entities,literal/drakx}
+	rm -rf doc/CVS
+	./help_xml2pm.pl
 
 %.mo: %.po
 	msgfmt -o $@ $<
@@ -24,7 +25,7 @@ $(PMSCFILES): %_.c: %
 
 $(POFILES): DrakX.pot
 	cp -f $@ $@t
-	msgmerge $@t $< > $@
+	if [ -e help-$@ ]; then msgmerge -C help-$@ $@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
 DrakX.pot: $(PMSFILES)
@@ -40,7 +41,7 @@ install:
 	done
 
 clean:
-	rm -f drakx-help.xml empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
+	rm -rf drakx-help.xml doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t) $(PMSCFILES)
 
 check:
 	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
