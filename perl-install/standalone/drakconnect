@@ -216,9 +216,9 @@ sub manage {
                                              ok_clicked => sub {
                                                  if ($apply_button->get_property('sensitive')) {
                                                      save($netc, $netcnx, $intf, $gui, $apply_button);
-                                                     $window->destroy;
-                                                     Gtk2->main_quit;
-                                                 }
+						 }
+						 $window->destroy;
+						 Gtk2->main_quit;
                                              },
                                             },
                                             undef, undef, '',
@@ -256,7 +256,7 @@ sub build_notebook {
     gtkpack_($gui->{sheet}{'Tcp/ip'} = Gtk2::VBox->new(0,0),
 	     if_($interface =~ /eth/, 
 		 0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
-								changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK} },
+								changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}; $apply->() },
 							       ),
 		),
 	     1, gtkpack(Gtk2::HBox->new(0,0),
@@ -363,10 +363,10 @@ sub build_notebook {
 				  ),
 			 ),
 		     ));
-    $dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply });
-    $dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply });
-    $speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply });
-    $speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply });
+    $dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'auto'; $apply->() });
+    $dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{dialing_mode_radio} = 'static'; $apply->() });
+    $speed_radio[0]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '64'; $apply->() });
+    $speed_radio[1]->signal_connect('toggled' => sub { $gui->{cnx}{speed_radio} = '128'; $apply->() });
     $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
     
     #- account box
