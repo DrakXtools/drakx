@@ -216,7 +216,7 @@ $window1->{window}->add(
                                                                                  sensitive_buttons(0);
                                                                                  local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                                  eval { # For wizcancel
-                                                                                     configureNetworkNet($in, $netc, $intf, @all_cards);
+                                                                                     configureNetworkNet($in, $netc, $intf, map { $_[0] } @all_cards);
                                                                                      $button_apply->set_sensitive(1);
                                                                                      update();
                                                                                  };
