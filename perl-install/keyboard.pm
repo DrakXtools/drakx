@@ -395,7 +395,7 @@ sub keyboard2full_xkb {
 	$XkbLayout eq 'br' ? 'abnt2' : 'pc105';
 
     $XkbLayout ? {
-	XkbLayout => $XkbLayout, 
+	XkbLayout => join(',', if_($keyboard->{GRP_TOGGLE}, 'us'), $XkbLayout),
 	XkbModel => $XkbModel,
 	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : '',
 	XkbCompat => $keyboard->{GRP_TOGGLE} ? "group_led" : '',
