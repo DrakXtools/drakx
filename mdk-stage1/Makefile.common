@@ -49,7 +49,8 @@ DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I. -I$(top_dir)/bzlib
 GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
 INCLUDES = $($(L)_INCLUDES)
 
-LDFLAGS_STAGE1 = $($(L)_LDFLAGS_STAGE1)
+GLIBC_LDFLAGS = -static
+LDFLAGS = $($(L)_LDFLAGS)
 
 STAGE1_LIBC = $($(L)_LIBC)
 

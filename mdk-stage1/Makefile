@@ -134,22 +134,6 @@ NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
 
 STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1_ALLSRC))
 
-
-ifeq (i386, $(ARCH))
-LDFLAGS_INIT = -static -nostdlib /usr/lib/crt1.o
-else
-ifeq (x86_64, $(ARCH))
-LDFLAGS_INIT = -static -nostdlib /usr/$(LIB)/crt1.o
-else
-ifeq (ia64, $(ARCH))
-LDFLAGS_INIT = -static
-else
-LDFLAGS_INIT = -nostdlib
-endif
-endif
-endif
-
-
 BINS = init init-stage2 stage1-full
 
 ifndef MOVE
@@ -192,23 +176,23 @@ dirs:
 	done
 
 init: $(INITOBJS)
-	$(CC) $(LDFLAGS_INIT) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 init-stage2: $(INITOBJS-STAGE2)
-	$(CC) $(LDFLAGS_INIT) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 
@@ -247,7 +231,7 @@ tar-mkinitrd_helper: clean
 	rm -rf mkinitrd_helper-subdir
 
 rescue-gui: rescue-gui.o frontend-common.o $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
+	$(DIET) $(CC) $(LDFLAGS) -o $@ $^
 	$(STRIPCMD) $@
 
 
