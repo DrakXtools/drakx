@@ -406,20 +406,21 @@ sub list_countries {
 our @locales = qw(af_ZA am_ET an_ES ar_AE ar_BH ar_DZ ar_EG ar_IN ar_IQ ar_JO ar_KW ar_LB ar_LY ar_MA ar_OM ar_QA ar_SA ar_SD ar_SY ar_TN ar_YE az_AZ be_BY bg_BG bn_BD bn_IN br_FR bs_BA ca_ES cs_CZ cy_GB da_DK de_AT de_BE de_CH de_DE de_LU el_GR en_AU en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NZ en_PH en_SG en_US en_ZA en_ZW es_AR es_BO es_CL es_CO es_CR es_DO es_EC es_ES es_GT es_HN es_MX es_NI es_PA es_PE es_PR es_PY es_SV es_US es_UY es_VE et_EE eu_ES fa_IR fi_FI fo_FO fr_BE fr_CA fr_CH fr_FR fr_LU ga_IE gd_GB gl_ES gv_GB he_IL hi_IN hr_HR hu_HU hy_AM id_ID is_IS it_CH it_IT iw_IL ja_JP ka_GE kl_GL ko_KR kw_GB lo_LA lt_LT lv_LV mi_NZ mk_MK ml_IN mn_MN mr_IN ms_MY mt_MT nl_BE nl_NL nn_NO no_NO oc_FR pl_PL pt_BR pt_PT ro_RO ru_RU ru_UA se_NO sk_SK sl_SI sq_AL sr_YU st_ZA sv_FI sv_SE ta_IN te_IN tg_TJ th_TH ti_ER ti_ET tl_PH tr_TR tt_RU uk_UA ur_PK uz_UZ vi_VN wa_BE xh_ZA yi_US zh_CN zh_HK zh_SG zh_TW zu_ZA eo_XX ph_PH en_BE as_IN kn_IN);
 
 sub standard_locale {
-    my ($lang, $country, $utf8) = @_;
+    my ($lang, $country, $prefer_lang) = @_;
   retry:
-    member("${lang}_${country}", @locales) and return "${lang}_${country}".($utf8 ? '.UTF-8' : '');
+    member("${lang}_${country}", @locales) and return "${lang}_${country}";
+    $prefer_lang && member($lang, @locales) and return $lang;
     length($lang) > 2 and $lang =~ s/^(..).*/$1/, goto retry;
 }
     
 sub getlocale_for_lang {
     my ($lang, $country, $o_utf8) = @_;
-    standard_locale($lang, $country, $o_utf8) || l2locale($lang).($o_utf8 ? '.UTF-8' : '');
+    (standard_locale($lang, $country, 'prefer_lang') || l2locale($lang)) . ($o_utf8 ? '.UTF-8' : '');
 }
 
 sub getlocale_for_country {
     my ($lang, $country, $o_utf8) = @_;
-    standard_locale($lang, $country, $o_utf8) || c2locale($country).($o_utf8 ? '.UTF-8' : '');
+    (standard_locale($lang, $country, '') || c2locale($country)) . ($o_utf8 ? '.UTF-8' : '');
 }
 
 sub getLANGUAGE {
@@ -843,10 +844,11 @@ sub pack_langs {
 
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
-    my $locale;
-    if (member($locale_lang, list_langs())) {
+    my $locale = {};
+    my $locale_lang_no_encoding = $locale_lang =~ /(.*)\./ ? $1 : $locale_lang;
+    if (member($locale_lang_no_encoding, list_langs())) {
 	#- special lang's such as en_US pt_BR
-	$locale->{lang} = $locale_lang;
+	$locale->{lang} = $locale_lang_no_encoding;
     } else {
 	($locale->{lang}) = $locale_lang =~ /^(..)/;
     }
