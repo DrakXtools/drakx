@@ -180,7 +180,6 @@ sub getinfoFromDDC() {
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
     my $detailed_timings = $monitor->{detailed_timings} || [];
     foreach (grep { !$_->{bad_ratio} } @$detailed_timings) {
-	my $res = join('x', $_->{horizontal_active}, $_->{horizontal_active});
 	my $ratio = $_->{horizontal_active} / $_->{vertical_active};
 
 	if (abs($ratio - 4 / 3) < 0.01) {
