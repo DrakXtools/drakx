@@ -134,7 +134,7 @@ If some of these measures lead to problems for you, turn this option off, but th
 		         },
 			 # List the hosts
 			 [ { val => \$choice, format => \&translate,
-			     sort => 0, separator => "#####",
+			     sort => 0, separator => "####",
 			     tree_expanded => 1,
 			     quit_if_double_click => 1,
 			     allow_empty_list => 1,
@@ -198,7 +198,6 @@ If some of these measures lead to problems for you, turn this option off, but th
 			}
 			push (@menu, N("IP address of host/network:"));
 			# Show the dialog
-			print "##### |@menu|$hostchoice|\n";
 			my $address;
 			my $oldaddress = 
 			    ($buttonclicked eq "edit" ?
