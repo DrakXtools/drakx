@@ -1,3 +1,113 @@
+2004/07/20  Pixel  <pixel at mandrakesoft.com>
+
+	* share/list: adapt to file renaming
+
+	* bootloader.pm: remove debugging code
+
+2004/07/20  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: clean code
+
+2004/07/19  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: use run_program, try to handle default interface
+	better
+	disable the connect button if up interface is found (there is
+	currently no reliable way to find the gateway interface)
+	code factorization, do not use system() but fork() and exec() since we
+	don't
+	want to wait the command to return
+	perl_checker compliance
+	use ifup/ifdown to connect/disconnect
+	no need to be root to monitor connection
+
+	* network/netconnect.pm: use hotplug blacklist for adsl connections too
+
+	* network/network.pm: do not write wireless encryption key if empty
+
+	* network/tools.pm: make the tcp ping actually work
+
+2004/07/19  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps.pm: don't bootloader::suggest_floppy
+
+	* bootloader.pm: don't bootloader::suggest_floppy
+	don't unset prompt when timeout is undefined (and don't care when
+	timeout is 0)
+
+	* pkgs.pm: perl_checker compliance
+	add multimedia kernel in analyse_kernel_name
+
+	* tools/hd_grub.cgi, docs/README, rescue/rescue-doc,
+	rescue/tree/etc/issue, rescue/lsparts, docs/HACKING,
+	mdk-stage1/doc/README: replace "Mandrake Linux" with "Mandrakelinux"
+
+	* standalone/bootloader-config: also add long name when adding add short
+	name
+
+2004/07/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-56mdk
+	fix changelog
+	merge changelog from the real update
+
+	* share/po/br.po: update
+
+	* standalone/net_monitor: unsensitive buttons immediatly once ifup/isdown
+	has completed
+
+2004/07/19  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: modify nss_path one to sub
+	config winbind for AD
+
+	* network/smb.pm: Add function write_smb_ads_conf
+
+2004/07/18  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: save the previous bootloader config file (bugzilla
+	#10072)
+
+2004/07/17  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* pam.net_monitor, drakxtools.spec, apps.net_monitor, Makefile: remove
+	historical consolehelper files (pam.d and console.apps)
+
+2004/07/16  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm: use a tcp ping in check_link_beat if not root
+
+	* wizards.pm: do not ask to install already installed packages, prefer to
+	install
+	uninstalled packages (misc)
+
+	* install_steps_gtk.pm: fix predicted time when there is an error
+	installing packages
+
+2004/07/15  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: add a border spacing of 5 pixel (fix #10299,
+	from Fabrice Facorat)
+
+	* drakxtools.spec: 10-54mdk
+
+2004/07/15  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: change_pt_type() must return a boolean value
+
+	* standalone/bootloader-config: make_boot_splash is no good since the same
+	initrd is used with or without vga=,
+	so call add_boot_splash directly
+
+	* bootloader.pm: make_boot_splash is no good since the same initrd is used
+	with or without vga=,
+	so call add_boot_splash directly
+	alt_xxx instead of old_xxx for bootloader labels (as suggested by
+	Svetoslav Slavtchev on cooker)
+
+	* diskdrake/interactive.pm: encryption key length can now be lower than
+	20, allowing >= 6
+
 2004/07/14  Olivier Blin <oblin at mandrakesoft.com>
 
 	* install_steps_interactive.pm: to_bool is what I was looking for, thanks
@@ -32755,7 +32865,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.931 2004/07/09 01:37:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.932 2004/07/15 02:21:22 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
