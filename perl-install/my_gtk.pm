@@ -101,12 +101,12 @@ sub new {
 	flush();
 	$::Plug->add($o->{window});
     }
-    $::CCPID and kill 'USR2', $::CCPID;
     $o;
 }
 sub main {
     my ($o, $completed, $canceled) = @_;
     gtkset_mousecursor_normal();
+    $::CCPID and kill 'USR2', $::CCPID;
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $b = MDK::Common::Func::before_leaving { Gtk->timeout_remove($timeout) };
     $o->show;
