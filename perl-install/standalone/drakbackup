@@ -1541,8 +1541,8 @@ sub system_state {
         $backup_user and $system_state .= _("\n- Users Files:\n");
         $backup_user and $system_state .= _("\t\t$_\n") foreach @user_list;
         @list_other and $system_state .= _("\n- Other Files:\n"); 
-        @list_other and $system_state .= _("\t\t$_\n") foreach @list_other;
-        $system_state .= _("\n- Path to save backups: $save_path\n");
+        @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
+        $system_state .= _("\n- Path to save backups: %s\n", $save_path);
 	$system_state .= _("\n- Options:\n");
 	$backup_sys or $system_state .= _("\tDo not include System Files\n");
 	if ($comp_mode) { $system_state .= _("\tBackups use tar and bzip2\n "); }
@@ -1690,7 +1690,7 @@ sub restore_aff_result {
 	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
 				   1, new Gtk::VBox(0,10),
 				   0, _("         All your selectionned data have been          "),
-				   0, _("          Successfuly Restored on $restore_path       "),
+				   0, _("          Successfuly Restored on %s       ", $restore_path),
 				   1, new Gtk::VBox(0,10),
 				   ),
 	    );
