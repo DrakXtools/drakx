@@ -1069,7 +1069,7 @@ notation (for example, 1.2.3.4).")),
                     },
                     complete => sub {
                         if ($in->do_pkgs->ensure_is_installed_if_available('ndiswrapper', '/usr/sbin/ndiswrapper')) {
-                            $in->ask_warn(N("Error"), N("Could not install the %s package!"));
+                            $in->ask_warn(N("Error"), N("Could not install the %s package!", 'ndiswrapper'));
                             return 1;
                         }
                         if ($ndiswrapper_driver eq N("Install a new driver")) {
