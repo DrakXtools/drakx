@@ -334,7 +334,7 @@ void unmount_filesystems(void)
 #ifdef MANDRAKE_MOVE
 	fd = open("/dev/cdrom", O_RDONLY|O_NONBLOCK, 0);
         if (fd > 0) {
-		printf("ejecting cdrom\n");
+		printf("ejecting cdrom...\n");
                 ioctl(fd, CDROMEJECT, 0);
                 close(fd);
         }
