@@ -9,8 +9,6 @@ use fs;
 
 sub main {
     my ($in, $all_hds, $raw_hd) = @_;
-
-    $raw_hd = fsedit::mntpoint2part("/mnt/cdrom", [ fsedit::get_really_all_fstab($all_hds) ]);
     my %actions = my @actions = actions();
     my $action;
     while ($action ne 'Done') {
