@@ -387,27 +387,28 @@ Consoles 1,3,4,7 may also contain interesting information";
 	}
     }
 
-    my $hasttf;
-    my $dest = "/usr/X11R6/lib/X11/fonts/drakfont";
-    foreach my $d (map { $_->{mntpoint} } grep { isFat($_) } @{$o->{fstab}}) {
-	foreach my $D (map { "$d/$_" } grep { m|^win|i } all("$o->{prefix}$d")) {
-	    $D .= "/fonts";
-	    -d "$o->{prefix}$D" or next;
-	    log::l("found win font dir $D");
-	    if (!$hasttf) {
-		$hasttf = $o->ask_okcancel('', 
-_("Some true type fonts from windows have been found on your computer.
-Do you want to use them? Be sure you have the right to use them under Linux."), 1) or goto nottf;
-		mkdir "$o->{prefix}$dest", 0755;
-	    }
-	    /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
-	}
-    }
-  nottf:
-    if ($hasttf) {
-	run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir");
-	run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);
-    }
+#-    my $hasttf;
+#-    my $dest = "/usr/X11R6/lib/X11/fonts/drakfont";
+#-    foreach my $d (map { $_->{mntpoint} } grep { isFat($_) } @{$o->{fstab}}) {
+#-	  foreach my $D (map { "$d/$_" } grep { m|^win|i } all("$o->{prefix}$d")) {
+#-	      $D .= "/fonts";
+#-	      -d "$o->{prefix}$D" or next;
+#-	      log::l("found win font dir $D");
+#-	      if (!$hasttf) {
+#-		  $hasttf = $o->ask_okcancel('', 
+#-_("Some true type fonts from windows have been found on your computer.
+#-Do you want to use them? Be sure you have the right to use them under Linux."), 1) or goto nottf;
+#-		  mkdir "$o->{prefix}$dest", 0755;
+#-	      }
+#-	      /(.*)\.ttf/i and symlink "$D/$_", "$o->{prefix}$dest/$1.ttf" foreach grep { /\.ttf/i } all("$o->{prefix}$D");
+#-	  }
+#-    }
+#-  nottf:
+#-    if ($hasttf) {
+#-	  run_program::rooted($o->{prefix}, "ttmkfdir", "-d", $dest, "-o", "$dest/fonts.dir");
+#-	  run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);
+#-    }
+
     foreach (install_any::list_skels()) {
 	my $found;
 	substInFile {
