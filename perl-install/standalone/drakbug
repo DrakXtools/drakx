@@ -34,7 +34,7 @@ my $in = 'interactive'->vnew;
 my $bugzilla_url = "https://drakbug.mandrakesoft.com";
 my $version = "0.9.0";
 my $prog;
-my $incident=1;
+my $incident=0;
 
 sub usage {
     print STDERR _("drakbug version %s
@@ -130,11 +130,15 @@ my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
 $hbx->pack_start($Close_Button,0,0,0);
-my $options = "mdkwizard=1";
-$options.="";
 
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard?"."$options") });
+$Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
+						$options.="incident=1" if $incident;
+						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
+						$options.="?package=$p" ;
+						$options.="?kernel=$k";
+						$options.="?mdkrelease=$r";
+						connect_bugzilla("$bugzilla_url/wizard?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -176,16 +180,17 @@ sub get_package {
 
 sub parse_release {
     my ($rel) = cat_('/etc/mandrake-release') =~ /release\s(\S+\s\(.*\))/;
-    
+    $rel;
 }
+
 sub connect_bugzilla {
     my($url) = @_;
     my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
-    sleep(2);
+    sleep(3);
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER} ;
     my @browser = qw (mozilla konqueror galeon);
     foreach (@browser) {
-	if (-e "/usr/bin/$_") { print "execing $_ : $url\n "; exec $_,$url } 
+	if (-e "/usr/bin/$_") { standalone::explanations("Contacting $url with $_\n "); exec $_,$url } 
     }
     $in->ask_warn('', _("No browser available! Please install one"));
 }
