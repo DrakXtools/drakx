@@ -80,7 +80,7 @@ get_needed_files: $(DIRS)
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 #	cp -f $(LOCALFILES2) $(DEST)/usr/bin
-	ln -s /usr/X11R6/lib/X11 $(DEST)/usr/lib/X11
+	ln -s ../X11R6/lib/X11 $(DEST)/usr/lib/X11
 ifeq (sparc,$(ARCH))
 	cp -a /usr/X11R6/lib/X11/xkb $(DEST)/usr/X11R6/lib/X11
 	rm -f $(DEST)/usr/X11R6/lib/X11/xkb/compiled
