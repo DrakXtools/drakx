@@ -1,3 +1,40 @@
+2001/03/09  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: added gtkradio
+
+	* standalone/draknet: changed graphical layout, expert mode
+
+2001/03/09  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (read_rpmsrate): handle the special case of packages requiring
+	locales-*,
+	adding the flag LOCALES"*" for them
+
+	* install_steps_interactive.pm (choosePackages): moved the log to
+	install2::choosePackages (to have it in
+	auto_installs too)
+
+	* install_any.pm (setPackages): set compssUsersChoice LOCALES"*"
+
+	* install2.pm (choosePackages): log groups choosen
+
+	* share/rpmsrate: a hell lot of modifications, mostly cleanup of
+	DEVELOPEMENT
+	  - chineese packages
+	  - move Aurora's to AURORA (DrakX take care of Aurora)
+
+	* install_steps_gtk.pm (remove_advertising): created
+
+2001/03/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/init.c: workaround kernel-2.4 bug with /dev/log
+
+2001/03/08  Pixel  <pixel@mandrakesoft.com>
+
+	* verify_c: fix the regexp
+
+	* detect_devices.pm (floppies): load module "floppy" before probing
+
 2001/03/08  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: applied if__
