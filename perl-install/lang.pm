@@ -1134,7 +1134,7 @@ sub configure_kdeglobals {
     update_gnomekderc($kdeglobals, Locale => (
     	      Charset => $kde_charset,
     	      Country => lc($locale->{country}),
-    	      Language => $lang,
+    	      Language => getLANGUAGE($locale->{lang}, $locale->{country}, $locale->{utf8}),
     	  ));
 
     if ($prev_kde_charset ne $kde_charset) {
