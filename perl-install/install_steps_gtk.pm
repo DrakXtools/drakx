@@ -161,7 +161,7 @@ sub selectInstallClass1 {
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(_("Please choose one of the following classes of installation:")),
 		   (my @radios = gtkradio($def, @$l)),
-		   gtkadd(create_hbox(),
+		   gtkadd(create_vbox(),
 			  map { my $v = $_; 
 				my $b = new Gtk::Button(translate($_));
 				$focused = $b if $_ eq $def2;
