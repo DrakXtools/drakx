@@ -1,3 +1,130 @@
+2004/09/10  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot (enable_framebuffer) do not kill the whole wizard
+	when embedded
+
+	* standalone/drakconnect (configure_net) use network::test to test
+	internet connection
+
+	* network/test.pm: fix stupid things
+	fix indentation and CVS Id
+	(update_status) handle decimal ping time with comma instead of dot
+
+2004/09/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po: updated Italian file
+
+2004/09/10  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_gtk.pm: do not display release notes anymore (since it
+	hides advertising...)
+
+	* install_steps_interactive.pm: add button "Release Notes" in the
+	acceptLicense dialog box
+
+	* c/stuff.xs.pl, xf86misc/main.xs, Newt/Newt.xs,
+	resize_fat/c_rewritten.xs: prototypes are dangerous
+
+	* interactive/gtk.pm: for ask_warn with big text, create a bigger window
+	introduce {more_buttons} to allow the "Release Notes" button. ugly, but
+	it works :-(
+
+	* rescue/list: /bin/loadkeys is no more
+
+	* install2.pm: log the {meta_class}
+
+	* ugtk2.pm: create_box_with_title():
+	  - introduce the ugly $o->{box_allow_grow}
+	  - cleanup the usage
+
+2004/09/10  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Remove (temporarily, do we hope) the code that re-reads
+	all hdlists when the
+	user has added supplementary media. It doesn't work for now, when the
+	main
+	media is networked and the supplementary media a superset of the main
+	media.
+
+2004/09/10  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: autoconfigure mice on bootstrapping
+
+	* harddrake/autoconf.pm: cleanups
+	autoconfigure mice on bootstrapping
+
+	* drakxtools.spec: typo fix in 10.1-1mdk's changelog
+	10.1-1mdk
+
+	* share/po/br.po: update
+
+	* standalone/service_harddrake: cleanups
+	perl_checker cleanups
+	autoconfigure mice on bootstrapping
+
+2004/09/09  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: 
+	  - choose the good kernel for the box
+	  - add recognition of i586-up-1GB
+
+	* c/smp-dmi.c: max() is not defined, inline it
+
+	* install_any.pm: BIGMEM now means >4GB
+
+	* detect_devices.pm: add is_i586() based on "cpu family", hopefully it
+	works for detecting K6 and C3
+
+2004/09/09  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/compssUsers.pl: Fix typo in section title
+
+	* install_steps_interactive.pm: minor fix in last patch
+	Re-read all hdlists in reverse order when there are supplementary media.
+	Don't unselect every single media when doing an installation from iso
+	images.
+
+	* pkgs.pm, install_any.pm: Re-read all hdlists in reverse order when there
+	are supplementary media.
+	Don't unselect every single media when doing an installation from iso
+	images.
+
+2004/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.27mdk
+	10.1-0.26mdk
+
+	* any.pm (selectCountry) do not default to per locale default IM.  IM was
+	either setup by drakx or by localedrake.  If the field does not
+	exists, this means the user *decided* to not have an IM.
+	(selectCountry) do not overwrite current IM (why does this only failed
+	with miniChinput???)
+
+	* standalone/localedrake: really reset IM on language switch
+	remove debug message
+	only default to per locale default IM when switching between locales
+
+	* lang.pm (write) fix ENC setting too (like thai IM, it got broken when
+	analyse_locale_name and the like were added it seems)
+	fix thai IM that was broken for ages (but it was disabled in 10.0
+	anyway so ...)
+	fix ENC and locale specific stuff even when IM is disabled (because of
+	thai)
+	simplify ENC setting
+	  - sanitize some variable names
+	  - add/update comments
+	(write) make it a little more readable
+	(write) kill unused variable
+	add a comment about font settings for installer
+	Singapore is en_SG not zh_SG !!!
+	(read) fix chinput identification
+	fix XIM_MODIFIER field for xcin and chinput IM
+
+2004/09/09  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Syn with Arabeyes CVS before a translation that should
+	hopefully happen soon...
+
 2004/09/09  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/rpmsrate: Up kpilot
@@ -38514,7 +38641,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.963 2004/09/09 10:17:19 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.964 2004/09/09 10:18:18 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
