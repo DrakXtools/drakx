@@ -246,8 +246,7 @@ sub selectMouse {
     any::setup_thiskind($o, 'usb', !$::expert, 0, $o->{pcmcia}) if $o->{mouse}{device} eq "usbmouse";
     eval { 
 	devices::make("usbmouse");
-	modules::load("usbmouse");
-	modules::load("mousedev");
+	modules::load($_) foreach qw(hid mousedev usbmouse);
     } if $o->{mouse}{device} eq "usbmouse";
 
     $o->SUPER::selectMouse;

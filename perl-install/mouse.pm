@@ -261,13 +261,13 @@ sub detect() {
 	if (modules::get_alias("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
-		eval { modules::load("usbmouse"); modules::load("mousedev"); };
+		eval { modules::load($_) foreach qw(hid mousedev usbmouse) };
 		if (!$@ && detect_devices::tryOpen("usbmouse")) {
 		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic");
 		    $auxmouse and $mouse->{auxmouse} = $auxmouse; #- for laptop, we kept the PS/2 as secondary (symbolic).
 		    return $mouse;
 		}
-		eval { modules::unload("mousedev"); modules::unload("usbmouse"); };
+		eval { modules::unload($_) foreach qw(usbmouse mousedev hid) };
 	    }
 	}
 	$auxmouse;
