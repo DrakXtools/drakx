@@ -238,7 +238,7 @@ sub configureNetwork {
     #- get current configuration of network device.
     require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
-    installStepsCall($o, $auto, 'configureNetwork', $ent_number == 1, $clicked);
+    installStepsCall($o, $auto, 'configureNetwork');
 }
 #------------------------------------------------------------------------------
 sub installUpdates {
