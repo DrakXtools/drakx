@@ -992,7 +992,7 @@ sub remove {
 	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
 	pkgs::unselectPackage($do->{o}->{packages}, $p) if $p;
 	$p;
-    }
+    } @l;
     run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', @l);
 }
 
@@ -1003,7 +1003,7 @@ sub remove_nodeps {
 	my $p = pkgs::packageByName($do->{o}->{packages}, $_);
 	pkgs::packageSetFlagSelected($p, 0) if $p;
 	$p;
-    }
+    } @l;
     run_program::rooted($do->{o}->{prefix}, 'rpm', '-e', '--nodeps', @l);
 }
 ################################################################################
