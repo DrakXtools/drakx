@@ -311,7 +311,7 @@ sub put_font_dir_real {
     my ($subdir, $command, $progress, $title) = @_;
     system("cd $drakfont_dir/$subdir && $fccache && $command");
     interactive_progress($pbar2, $progress, $title);
-    return "$chkfontpath -a $drakfont_dir/$subdir";
+    return "$chkfontpath -a $drakfont_dir/$subdir; rm -f /usr/X11R6/lib/X11/fonts/fonts.cache-1";
 }
 
 sub put_font_dir() {
