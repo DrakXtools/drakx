@@ -561,17 +561,17 @@ sub make_menuentry {
     } elsif ($connect =~ m!^file:(.+)$!) {
 	$connection = _(", printing to %s", $1);
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
-	$connection = _("on LPD server \"%s\", printer \"%s\"", $2, $1);
+	$connection = _(" on LPD server \"%s\", printer \"%s\"", $2, $1);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
 	$connection = _(", TCP/IP host \"%s\", port %s", $1, $2);
     } elsif (($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
-	$connection = _("on Windows server \"%s\", share \"%s\"", $1, $2);
+	$connection = _(" on SMB/Windows server \"%s\", share \"%s\"", $1, $2);
     } elsif (($connect =~ m!^ncp://([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^ncp://.*/([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^ncp://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
-	$connection = _("on Novell server \"%s\", printer \"%s\"", $1, $2);
+	$connection = _(" on Novell server \"%s\", printer \"%s\"", $1, $2);
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = _(", using command %s", $1);
     } else {
