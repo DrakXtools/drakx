@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 19mdk
+Release: 20mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-20mdk
+- drakbackup: use preferred conf file read/write method (stew)
+- drakconnect: hide dns settings by default when using dhcp
+- drakupdate_fstab (pixel):
+  o fix device removal
+  o log calls
+- printerdrake: fix HPOJ configuration when manually setting up a
+  device (till)
+
 * Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-19mdk
 - fix doble ISDN detection (#6535)
 - drakconnect: fix modem symlink (#7967)
