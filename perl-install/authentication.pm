@@ -121,7 +121,7 @@ sub pam_module_from_path {
     $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
 }
 sub pam_module_to_path { 
-    "/lib/security/$_[0].so";
+    "$_[0].so";
 }
 sub pam_format_line {
     my ($type, $control, $module, @para) = @_;
@@ -146,8 +146,8 @@ sub set_raw_pam_authentication {
 	my $added_pre_line = '';
 	if ($module = pam_module_from_path($module)) {
 	    if ($module eq 'pam_unix' && member($type, 'auth', 'account')) {
-		#- ensure use_first_pass option is there
-		$_ = pam_format_line($type, 'sufficient', $module, uniq(@para, 'use_first_pass'));
+		#- remove likeauth, nullok and use_first_pass
+		$_ = pam_format_line($type, 'sufficient', $module, grep { !member($_, qw(likeauth nullok use_first_pass)) } @para);
 		if ($control eq 'required') {
 		    #- ensure a pam_deny line is there
 		    ($control, $module, @para) = ('required', 'pam_deny');
@@ -189,8 +189,8 @@ sub set_pam_authentication {
     my $before_first = {};
     foreach (@authentication_kinds) {
 	my $module = 'pam_' . $_;
-	$before_deny->{auth}{$module} = [];
-	$before_deny->{account}{$module} = [];
+	$before_deny->{auth}{$module} = [ 'likeauth', 'nullok', 'use_first_pass' ];
+	$before_deny->{account}{$module} = [ 'use_first_pass' ];
 	$before_deny->{password}{$module} = [] if $_ eq 'ldap';
 	$before_first->{session}{pam_mkhomedir} = [ 'skel=/etc/skel/', 'umask=0022' ] if $_ eq 'winbind';
     }
