@@ -523,7 +523,7 @@ sub ask_browse_tree_info_given_widgets {
 	&$update_size;
     };
     
-    my $display_info = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
+    $common->{display_info} = sub { gtktext_insert($w->{info}, $common->{get_info}($curr)); 0 };
     my $children = sub { map { ($w->{tree}->node_get_pixtext($_, 0))[0] } gtkctree_children($_[0]) };
     my $toggle = sub {
 	if (ref $curr && ! $_[0]) {
@@ -557,7 +557,7 @@ sub ask_browse_tree_info_given_widgets {
 	if ($_[1]->row->is_leaf) {
 	    ($curr) = $w->{tree}->node_get_pixtext($_[1], 0);
 	    $parent = $_[1]->row->parent;
-	    $idle = Gtk->timeout_add(100, $display_info);
+	    $idle = Gtk->timeout_add(100, $common->{display_info});
 	} else {
 	    $curr = $_[1];
 	}
