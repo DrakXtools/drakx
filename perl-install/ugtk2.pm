@@ -884,9 +884,7 @@ sub new {
 	} else {
 	    $o->{window} = $o->{rwindow};
 	}
-	$o->{rwindow}->set_position('center_always') if 
-	  $force_center || $o->{force_center} || 
-	    @interactive::objects && $::isStandalone && !$o->{transient}; #- no need to center when set_transient is used
+	$o->{rwindow}->set_position('center_always') if $force_center || $o->{force_center};
 	$o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
 	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} =~ /Gtk2::Window/;
 
@@ -957,7 +955,6 @@ sub show($) {
 sub destroy($) {
     my ($o) = @_;
     $o->{rwindow}->destroy if !$o->{destroyed};
-    @interactive::objects = grep { $o != $_ } @interactive::objects;
     gtkset_mousecursor_wait();
     flush();
 }
@@ -988,7 +985,11 @@ sub _create_window {
     $w->set_name("Title");
     $w->set_title($title);
 
-    $w->signal_connect(expose_event => \&_XSetInputFocus) if $force_focus;
+    if ($force_focus) {
+	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
+	$w->signal_connect(expose_event => \&_XSetInputFocus);
+	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
+    }
     $w->signal_connect(delete_event => sub { 
 	if ($::isWizard) {
 	    $w->destroy; 
@@ -1027,7 +1028,7 @@ sub _create_window {
 
 sub _XSetInputFocus {
     my ($w) = @_;
-    if (!@interactive::objects || $interactive::objects[-1]{rwindow} == $w) {
+    if ($ugtk2::current_window == $w) {
 	$w->window->XSetInputFocus;
     } else {
 	log::l("not XSetInputFocus since already done and not on top");

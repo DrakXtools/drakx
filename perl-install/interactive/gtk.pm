@@ -751,8 +751,8 @@ sub wait_message_endW {
 
 sub kill {
     my ($_o) = @_;
-    $_->destroy foreach $::WizardTable ? $::WizardTable->get_children : (), @tempory::objects, @interactive::objects;
-    @tempory::objects = @interactive::objects = ();
+    $_->destroy foreach $::WizardTable ? $::WizardTable->get_children : (), @tempory::objects;
+    @tempory::objects = ();
 }
 
 sub ok {
