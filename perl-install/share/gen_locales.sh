@@ -5,7 +5,7 @@ tar xfj ../locales-skeleton.tar.bz2
 
 # locale utf-8
 for i in LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME LC_MESSAGES/SYS_LC_MESSAGES ; do
-    install -D -m 644 /usr/share/locale/UTF-8/$i usr/share/locale/UTF-8/$i
+    install -D -m 644 /usr/share/locale/UTF-8/$i usr/share/locale/en_US.UTF-8/$i
 done
 
 perl -I../.. ../gen_locales.pl || exit 1
