@@ -116,7 +116,7 @@ sub write {
 		    (map
 		     { map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto }
 		      ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
-		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', 'tcp', join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
+		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', $_, join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
 		   );
     set_config_file('masq', 
 		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]: (),
