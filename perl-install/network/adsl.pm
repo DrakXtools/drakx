@@ -307,7 +307,7 @@ TYPE=$kind
     
     # set aliases:
     if (exists $modems{$adsl_device}{aliases}) {
-        modules::add_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
+        modules::set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
         $::isStandalone and modules::write_conf();
     }
 

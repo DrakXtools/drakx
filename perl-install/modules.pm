@@ -87,7 +87,7 @@ sub load {
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @l;
 
     if ($network_module) {
-	add_alias($_, $network_module) foreach difference2([ detect_devices::getNet() ], \@network_devices);
+	set_alias($_, $network_module) foreach difference2([ detect_devices::getNet() ], \@network_devices);
     }
     when_load($_, @{$options{$_}}) foreach @l;
 }
@@ -173,13 +173,12 @@ sub set_options {
     log::l(qq(set option "$new_option" for module "$name"));
     $conf{$name}{options} = $new_option;
 }
-sub add_alias { 
+sub set_alias { 
     my ($alias, $module) = @_;
     $module =~ /ignore/ and return;
     /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $module and return $_ foreach keys %conf;
     log::l("adding alias $alias to $module");
     $conf{$alias}{alias} = $module;
-    $conf{$module}{above} = 'snd-pcm-oss' if $module =~ /^snd-/;
     $alias;
 }
 sub add_probeall {
@@ -225,6 +224,15 @@ sub remove_module {
     log::l("removing module $name");
     delete $conf{$name};
     0;
+}
+
+sub set_sound_slot {
+    my ($alias, $module) = @_;
+    if (my $old = $conf{$alias}{alias}) {
+	$conf{$old} and delete $conf{$old}{above};
+    }
+    set_alias($alias, $module);
+    $conf{$module}{above} = 'snd-pcm-oss' if $module =~ /^snd-/;
 }
 
 sub read_conf {
@@ -396,11 +404,11 @@ sub when_load {
 	} elsif ($category eq 'bus/usb') {
 	    add_probeall('usb-interface', $name);
 	} elsif ($category eq 'bus/firewire') {
-	    add_alias('ieee1394-controller', $name);
+	    set_alias('ieee1394-controller', $name);
 	} elsif ($category =~ /sound/) {
             my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
             $sound_alias ||= 'sound-slot-0';
-            add_alias($sound_alias, $name);
+            set_sound_slot($sound_alias, $name);
         }
     }
 }

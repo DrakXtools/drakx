@@ -441,7 +441,7 @@ sub getSerialModem {
     my @devs = pcmcia_probe();
     foreach my $modem (@modems) {
         #- add an alias for macserial on PPC
-        modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
+        modules::set_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
         foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
     }
     @modems;

@@ -87,7 +87,7 @@ sub get_eth_cards_names {
     
     foreach my $card (@all_cards) {
 	modules::remove_alias($card->[1]);
-	modules::add_alias($card->[0], $card->[1]);
+	modules::set_alias($card->[0], $card->[1]);
     }
 
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
@@ -134,7 +134,7 @@ sub conf_network_card_backend {
 sub configure_eth_aliases() {
     foreach (detect_devices::getNet()) {
         my $driver = c::getNetDriver($_) or next;
-        modules::add_alias($_, $driver);
+        modules::set_alias($_, $driver);
     }
 }
 

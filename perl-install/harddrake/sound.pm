@@ -154,8 +154,8 @@ sub do_switch {
         rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
         unload($old_driver);    # run_program("/sbin/modprobe -r $driver"); # just in case ...
     }
-    modules::remove_module($old_driver); # completed by the next add_alias()
-    modules::add_alias("sound-slot-$index", $new_driver);
+    modules::remove_module($old_driver);
+    modules::set_sound_slot("sound-slot-$index", $new_driver);
     modules::write_conf();
     if ($new_driver =~ /^snd-/) {   # new driver is an alsa one
         $in->do_pkgs->ensure_is_installed('alsa-utils', '/usr/sbin/alsactl');
@@ -307,7 +307,7 @@ sub configure_sound_slots() {
         my $default_driver = modules::get_alias("sound-slot-$::i");
         if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
             $altered ||= $default_driver;
-            modules::add_alias("sound-slot-$::i", $_->{driver});
+            modules::set_sound_slot("sound-slot-$::i", $_->{driver});
         }
     } detect_devices::getSoundDevices();
     modules::write_conf() if $altered && $::isStandalone;
