@@ -33,7 +33,7 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakautoinst [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
 $::direct = /-direct/;
-
+$::direct = 1; #DEBUG
 
 my $in = 'interactive'->vnew('su', 'default');
 
@@ -70,7 +70,7 @@ for (my $f = $st->{first}; $f; $f = $st->{$f}{next}) {
 $in->ask_from(_("Automatic Steps Configuration"),
 	      _("Please choose for each step whether it will replay like your install, or it will be manual"),
 	      \@choices
-	     ) or quit_global($in, 0);
+	     );# or quit_global($in, 0);
 
 ${$_->[1]} eq _('manual') and push @manual_steps, $_->[0] foreach @all_steps;
 
@@ -84,9 +84,139 @@ $in->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or qui
     common::sync();
 }
 fs::mount($dev, $mountdir, 'vfat', 0);
-
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
+my $o_old = $o;
+if (ref($in) =~ /gtk/) {
+    require Gtk;
+    init Gtk;
+    require my_gtk;
+    import my_gtk qw(:helpers :wrappers);
+
+    my %tree;
+    $struct_gui{$_} = 'General' foreach qw(lang isUpgrade autoExitInstall timezone default_packages mkbootdisk);
+    $struct_gui{$_} = 'Security' foreach qw(crypto security);
+    $struct_gui{$_} = 'Harddrive' foreach qw(partitions manualFstab useSupermount partitioning);
+    $struct_gui{$_} = 'Network' foreach qw(intf netc netcnx);
+    $struct_gui{$_} = 'Users' foreach qw(superuser users authentication);
+    $struct_gui{$_} = 'Hardware' foreach qw(keyboard mouse X printer wacom nomouseprobe);
+
+    %pixmap = ( lang => 'language',
+		isUpgrade => '',
+		security => 'security',
+		autoExitInstall => '',
+		timezone => '',
+		default_packages => '',
+		partitions => 'harddrive',
+		manualFstab => 'partition',
+		useSupermount => '',
+		partitioning => 'partition',
+		intf => 'network',
+		netc => 'network',
+		netcnx => 'network',
+		superuser => 'user',
+		users => 'user',
+		authentication => '',
+		keyboard => 'keyboard',
+		mouse => 'mouse',
+		X => 'X',
+		printer => 'printer',
+		wacom => '',
+	      );
+
+    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [$_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_\}") ] foreach (keys %$o);
+
+
+    my $W = my_gtk->new(_('$o edition'));
+    my @box_to_hide;
+    my $nb_pages=0;
+    my $notebook = new Gtk::Notebook;
+    $notebook->set_show_border(0);
+    $notebook->set_show_tabs(0);
+    $notebook->append_page(gtkpack_(gtkset_border_width(new Gtk::VBox(0,0), 10),
+				    1, new Gtk::VBox(0,0),
+				    0, gtkpack_(new Gtk::HBox(0,0),
+						1, new Gtk::VBox(0,0),
+						0, gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched-in'),
+							  new Gtk::Pixmap(gtkcreate_png('mdk_logo'))),
+						1, new Gtk::VBox(0,0),
+					       ),
+				    0, _("\nWelcome.\n\nThe parameters of the auto-install are available in the sections on the left"),
+				    1, new Gtk::VBox(0,0),
+				   ), undef);
+    $notebook->show_all;
+    $notebook->set_page(0);
+
+    gtkadd($W->{window},
+	   gtkpack_(new Gtk::VBox(0,5),
+	   1, gtkpack_(new Gtk::HBox(0,0),
+		    0, gtkadd(gtkset_usize(gtkset_shadow_type(new Gtk::Frame, 'in'), 130, 470),
+			    gtkpack_(new Gtk::VBox(0,0),
+				     map {
+					 my $box = new Gtk::VBox(0,0);
+					 push @box_to_hide, $box;
+					 $box->{vis} = 0;
+					 my @button_to_hide;
+					 0, gtksignal_connect(new Gtk::Button(_("$_")), clicked => sub {
+								if($box->{vis}) { $box->hide(); $box->{vis} = 0; $notebook->set_page(0); }
+								else {
+								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
+								    $box->show; $box->{vis} = 1;
+								    $box->{active_function} and $box->{active_function}->();
+								}
+							    }), 1, gtkpack__($box,
+							  map {
+							      my $button = gtkset_relief(new Gtk::ToggleButton(), 'none');
+							      push @button_to_hide, $button;
+							      my $gru = $_->[0];
+							      $notebook->append_page(gtkshow($_->[2]), undef);
+							      $nb_pages++;
+							      my $local_page = $nb_pages;
+							      my $function = sub { $notebook->set_page($local_page) };
+							      gtksignal_connect($button, toggled => sub {
+										    $button->get_active() and $function->()
+										});
+							      my $b;
+							      if ($_->[1] ne "") { $b = new Gtk::Pixmap(gtkcreate_png($_->[1]))} else { $b = ()};
+							      gtksignal_connect(gtkadd($button,
+										       gtkpack__(new Gtk::VBox(0,3),
+												 $b,
+												 _($_->[0]),
+												)
+										      ), released => sub {
+											  $button->get_active() or $button->set_active(1),return;
+											  $_->set_active(0) foreach @button_to_hide;
+											  $button->set_active(1);
+											  $box->{active_function} = $function;
+											  $function->();
+										      })
+									    } @{$tree{$_}}
+									   )
+							} keys(%tree)
+				    )
+			   ),
+		    1, $notebook,
+		   ),
+	    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'end'), 5),
+		      gtksignal_connect(new Gtk::Button(_("Accept")), clicked => sub { Gtk->main_quit;  }),
+		      gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { $o = $o_old; Gtk->main_quit; quit_global($in, 0) }),
+		     )
+	   )
+	  );
+    $_->hide foreach @box_to_hide;
+#    $W->{window}->show_all;
+#      gtkadd($W->{window},
+#  	   gtkpack_($W->create_box_with_title(_("Edit variables")),
+#  		    1, my $notebook = create_notebook( map { $_, h2widget($o->{$_}, "\$o->\{$_\}") } keys %$o ),
+#  		    0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel),
+#  		   ),
+#  	  );
+#    $notebook->set_tab_pos('left');
+#    $::isEmbedded and Gtk->main_iteration while Gtk->events_pending;
+    $::isEmbedded and kill (12, $::CCPID);
+    $W->main;
+#    $W->destroy();
+}
 
 my $str = join('',
 "#!/usr/bin/perl -cw
@@ -108,7 +238,6 @@ output($cfgfile, $str);
 
 fs::umount($mountdir);
 
-
 $in->ask_okcancel(_("Congratulations!"), 
 _("The floppy has been successfully generated.
 You may now replay your installation."));
@@ -123,8 +252,112 @@ sub quit_global {
 }
 
 
+sub h2widget {
+    my ($k, $label) = @_;
+    my $w;
+    if(ref($k) =~ /HASH/) {
+	my $vb;
+	my @widget_list;
+	my $i = -1;
+	my @list_keys = keys(%{$k});
+	if (ref(${$k}{$list_keys[0]}) =~ /HASH/) {
+	    $i++;
+	    my ($button_add, $button_remove);
+	    $w = gtkpack_(new Gtk::VBox(0,0),
+			  1, createScrolledWindow(gtkpack__($vb = new Gtk::VBox(0,10),
+							    $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
+					map {
+					    my $e;
+					    $e = h2widget(${$k}{$_}, "$label\{$_\}");
+					    [ "$_ : ", $e ] } @list_keys
+									    ),
+						       )
+					     ),
+			  control_buttons(${$k}{$list_keys[0]},
+					  sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
+						my @widget_list = @{$widget_list2};
+			my $field = $in->ask_from_entry(_("Auto Install"), ("Enter the name of the new field you want to add")) or return undef;
+						$field eq '' and return undef;
+						gtkpack__($vb,
+							  $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
+										      [ "$field : ", h2widget($ref_local_k, "$label\{$field\}")])
+							 );
+						@{$widget_list2} = @widget_list;
+					    },
+					  $vb, \$i, \@widget_list)
+			 );
+	} else {
+	    $w = gtkpack__(create_packtable({ col_spacings => 10, row_spacings => 3 },
+					    map {
+						my $e;
+						my $t = ${$k}{$_}; $e = new Gtk::Entry;
+						$e->{value} = "$label\{$_\}";
+						my $tag = Gtk->timeout_add(1000, sub {
+									       $e->set_text($t);
+									       0;
+									   });
+						gtksignal_connect($e, changed => sub {
+								      my $exe = $e->{value} . "='" . $e->get_text() . "'";
+#								      print "EXEC : $exe\n ";
+								      eval "$exe";
+								  });
+						[ "$_ : ", $e ] } @list_keys
+					   ),
+			  )
+	}
+    } elsif(ref($k) =~ /ARRAY/) {
+	my $vb;
+	my @widget_list;
+	my $i = -1;
+	$w = gtkpack_(new Gtk::VBox(0,0),
+		      1, createScrolledWindow(
+					      gtkpack__($vb = new Gtk::VBox(0,5),
+							map { $i++; $widget_list[$i] = h2widget($_, "$label\[$i\]") } @{$k},
+						       )
+					     ),
+		      control_buttons(@{$k}[0],
+				      sub { my ($vb, $widget_list2, $ref_local_k, $i) = @_;
+					    my @widget_list = @{$widget_list2};
+					    gtkpack__($vb, $widget_list[$i] = h2widget($ref_local_k, "$label\[$i\]"));
+					    @{$widget_list2} = @widget_list;
+					},
+				      $vb, \$i, \@widget_list)
+		     );
+    } else {
+	$w = new Gtk::Label($k);
+    }
+    return $w;
+}
+
+sub control_buttons {
+    my ($ref_local_k, $local_gui, $vb, $j, $widget_list2) = @_;
+    my @widget_list = @{$widget_list2};
+    my $i = ${$j};
+    my (%local_k) = %{$ref_local_k};
+    my ($button_add, $button_remove);
+    0, gtkadd(gtkset_border_width(gtkset_layout(new Gtk::HButtonBox, 'spread'), 5),
+	      gtksignal_connect($button_add = new Gtk::Button(_("Add an item")), clicked => sub {
+				    $local_k{$_} = undef foreach keys %local_k;
+				    $i++;
+				    $local_gui->($vb, \@widget_list, \%local_k, $i) or $i--, return;
+				    $i>=0 and $button_remove->set_sensitive(1);
+				}
+			       ),
+	      gtksignal_connect($button_remove = new Gtk::Button(_("Remove the last item")), clicked => sub {
+				    $i>=0 or return;
+				    $widget_list[$i]->destroy();
+				    $i--;
+				    $i>=0 or $button_remove->set_sensitive(0);
+				}
+			       )
+	     )
+}
+
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.8  2001/10/25 02:18:24  damien
+#- The new drakautoinst is coming. P|-|34R
+#-
 #- Revision 1.7  2001/09/18 17:35:50  gc
 #- have "manual" and "replay" translated
 #-
