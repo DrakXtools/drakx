@@ -8,7 +8,7 @@ License: GPL
 Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
 Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.02.22.1-2mdk, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk, font-tools
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.03.04.1-1mdk, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.4-14mdk, font-tools
 Conflicts: drakconf < 9.1-3mdk 
 BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
@@ -291,9 +291,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Mon Mar  3 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-14mdk
+* Tue Mar  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-14mdk
+- drakperm: fix #1776
 - localedrake: don't categorize langs, for better looking (since
-  most people will have very few of them)
+  most people will have very few of them) (gc)
 
 * Mon Mar  3 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-13mdk
 - drakboot: fix #2091, #2480
