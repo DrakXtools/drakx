@@ -173,7 +173,7 @@ sub test_connected {
     local $|=1;
     my ($cmd) = @_;
 
-    if (!defined $current_connection_status) { $current_connection_status = -1; }
+    if (!defined $current_connection_status) { $current_connection_status = -1 }
 
     if ($cmd == 0) {
         if (defined $kid_pipe_connect) {
