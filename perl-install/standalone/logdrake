@@ -42,7 +42,7 @@ foreach (@ARGV) {
     /^--alert$/ and do { alert_config(); quit() };
 }
 
-my $isTail = 1 if $isFile;
+my $isTail = $isFile ? 1 : 0;
 $| = 1 if $isTail;
 my $h = chomp_(`hostname -s`);
 
@@ -79,7 +79,7 @@ my @menu_items = (
 		  { path => N("/_Help"), item_type => '<LastBranch>' },
 		  { path => N("/Help/_About...") } 
 		 );
-my $_menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
+my $_menubar = $::isEmbedded ? create_factory_menu($my_win->{rwindow}, @menu_items) : undef;
 ######### menus end
 
 
@@ -237,7 +237,7 @@ sub parse_file {
 
   if ($cal_mode) {
       my (undef, $month, $day) = $cal->get_date;
-      $ey = $months[$month]."\\s{1,2}$day\\s.*$ey.*\n";
+      $ey = $months[$month] . "\\s{1,2}$day\\s.*$ey.*\n";
   }
 
   my @all = catMaybeCompressed($file);
@@ -257,11 +257,11 @@ sub parse_file {
   my $i = 0;
   my $test;
   if ($en && !$ey) {
-      $test = sub { !/$en/ };
+      $test = sub { $_[0] !~ /$en/ };
   } elsif ($ey && !$en) {
-      $test = sub { /$ey/ };
+      $test = sub { $_[0] =~ /$ey/ };
   } else {
-      $test = sub { /$ey/ && !/$en/ };
+      $test = sub { $_[0] =~ /$ey/ && $_[0] !~ /$en/ };
   }
 
   foreach (@all) {
@@ -271,7 +271,7 @@ sub parse_file {
        $win_pb->window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
       }
       
-      logcolorize($_) if $test->();
+      logcolorize($_) if $test->($_);
   }
   $win_pb->destroy if !$::isEmbedded || !$isExplain;
 
@@ -279,7 +279,7 @@ sub parse_file {
       close $F;
       open $F, $file or die "E: $!";
       local $_;
-      while (<$F>) {}; #to prevent to output the file twice..
+      while (<$F>) {} #to prevent to output the file twice..
 #      $log_text->set_point($log_text->get_length());
       $timer ||= Glib::Timeout->add(1000, sub {
                                        logcolorize($_) while <$F>;
