@@ -279,12 +279,12 @@ sub WriteConfig() {
 	close $CONFIG;
 }
 
-sub StartRoam {
+sub StartRoam() {
 	system("killall wlandetect; $WLanDetect -d -t $ScanInterval &");
 	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
 
-sub StopRoam {
+sub StopRoam() {
 	system("killall wlandetect");
 	Glib::Timeout->add(1000, \&UpdateRoaming);
 }
