@@ -869,8 +869,13 @@ sub configurePrinter {
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($printer, $o, $ask_multiple_printer,
 		       sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
-    
-    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'));
+
+    if (!is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'))) {
+	$o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') ;
+
+	#- call update-menus at the end of these package installation, as some menu entries may have been added.
+	run_program::rooted($o->{prefix}, "update-menus");
+    }
 }
 
 #------------------------------------------------------------------------------
