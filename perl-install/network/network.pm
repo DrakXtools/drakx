@@ -422,10 +422,10 @@ sub configureNetwork2 {
     if (!$::testing) {
         $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
         write_conf("$etc/sysconfig/network", $netc);
-        unless ($netc->{DHCP}) {
-            write_resolv_conf("$etc/resolv.conf", $netc);
-            #- write in install root too so that updates and suppl media can be added
-            write_resolv_conf("/etc/resolv.conf", $netc) if $::isInstall;
+        write_resolv_conf("$etc/resolv.conf", $netc) unless $netc->{DHCP};
+        if ($::isInstall && ! -e "/etc/resolv.conf") {
+            #- symlink resolv.conf in install root too so that updates and suppl media can be added
+            symlink "$etc/resolv.conf", "/etc/resolv.conf";
         }
         write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $::prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
         add2hosts("$etc/hosts", $netc->{HOSTNAME}, "127.0.0.1") if $netc->{HOSTNAME};
