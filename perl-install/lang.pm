@@ -206,7 +206,9 @@ sub set {
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
-	$ENV{LINGUAS}   = $languages{$lang}[3];
+#- apparently autoconf/automake doesn't like LINGUAS having a list of values
+#-	$ENV{LINGUAS}   = $languages{$lang}[3];
+	$ENV{RPM_INSTALL_LANG} = $languages{$lang}[3];
 
 	local $_ = $languages{$lang}[1];
 	s/iso-8859-1$/iso-8859-15/;
@@ -220,6 +222,7 @@ sub set {
 	delete $ENV{LANG};
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAS};
+	delete $ENV{RPM_INSTALL_LANG};
     }
 }
 
@@ -231,7 +234,7 @@ sub write {
 
     my $h = { LC_ALL => $lang };
     if (my $l = $languages{$lang}) {
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[2], LINGUAS => $l->[3] };
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[2], RPM_LANG_INSTALL => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c && $c->[0] && $c->[1]) {	    
