@@ -320,7 +320,7 @@ sub convert_fonts {
     $o_generate_pfb = $o_generate_pfb ? "-b" : "";
     foreach my $fontname (@$fonts) {
         system("cd $drakfont_dir/tmp/tmp && $converter $o_generate_pfb $fontname");
-        interactive_progress($pbar2, 0.50 / @$fontname, N("%s fonts conversion", $font_type));
+        interactive_progress($pbar2, 0.50 / @$fonts, N("%s fonts conversion", $font_type));
     }
 }
 
