@@ -1,3 +1,58 @@
+2002/07/19  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - check if speedtouch_mgmt exist before installing it
+
+2002/07/19  François Pons  <fpons@mandrakesoft.com>
+
+	* any.pm: revert changes so that DrakX work again.
+
+	* install_any.pm: select default_packages directly during setPackages.
+
+	* install_steps_interactive.pm: make sure unselectMostPackages is called
+	(so that changes in default_packages
+	are taken into account... but is may be any changes here ?).
+
+2002/07/19  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm: 
+	  - fix good_default_monitor (must not be 1600x1200!)
+	  - add r128 & radeon in XF4 drivers list
+	fix default_monitors to adapt new MonitorsDB
+
+	* mouse.pm (devfssymlinkf): use devfs_device instead of device when
+	available
+
+	* partition_table.pm: handling devfs names for cdrom/hds on ide/scsi
+	(needs testing)
+
+	* any.pm (devfssymlinkf): try devices::to_devfs when devfs_device is not
+	provided
+	(devfssymlinkf): use devfs_device instead of device when available
+
+	* detect_devices.pm: help perl_checker
+	handling devfs names for cdrom/hds on ide/scsi (needs testing)
+
+	* devices.pm: add functions to_devfs and from_devfs. These only work for
+	devices entries
+	which can go devfs -> normal and normal -> devfs
+
+	* interactive_gtk.pm: reduce "Use of uninitialized value" in a heavy used
+	place
+	(useful when debugging)
+
+	* Xconfig.pm: read monitor's VendorName & ModelName
+	(readCardsDB): add handling BAD_FB_RESTORE & BAD_FB_RESTORE_XF3
+
+	* Xconfigurator.pm: 
+	  - reorganize monitor tree
+	  - merge XF3 & XF4 server/module choosing
+	  - replace {eide} by {EISA_ID} (=> {monitor} cleanup)
+	  - ensure a few "Cancel" are more better handled
+	  - ensure the default monitor in the monitor tree is the last chosen
+	one
+	partly cleanup monitor re-configuration (work in progress)
+
 2002/07/19  Christian Belisle  <cbelisle@mandrakesoft.com>
 
 	* any.pm: 
