@@ -1377,7 +1377,6 @@ sub ask_browse_tree_info_given_widgets {
 	    $w->{tree}->toggle_expansion($w->{tree_model}->get_path($curr));
 	} else {
 	    if (ref $curr) {
-		my @_a = $children->($curr);
 		my @l = $common->{grep_allowed_to_toggle}($children->($curr)) or return;
 		my @unsel = $common->{grep_unselected}(@l);
 		my @p = @unsel ?
