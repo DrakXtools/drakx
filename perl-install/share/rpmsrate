@@ -512,8 +512,10 @@ SYSTEM
   5 USB hotplug
 
   5 HW"nForce.*(?:Audio|Network)" 
-     NVIDIA_nforce-2.4.19-16mdk
-     BIGMEM NVIDIA_nforce-2.4.19-16mdk-enterprise
+     NVIDIA_nforce
+     SMP NVIDIA_nforce-smp
+     HIGH_SECURITY NVIDIA_nforce-secure
+     BIGMEM NVIDIA_nforce-enterprise
 
   4 ftp-client-krb5 hexedit strace sudo grub procmail hdparm coreutils-doc
 
