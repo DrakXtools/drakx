@@ -1,3 +1,587 @@
+2001/10/29  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: code correction
+
+2001/10/29  gbeauchesne
+
+	* rescue/list.ia64: 
+	  - Add xfs_repair and efibootmgr
+
+2001/10/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* fs.pm, loopback.pm, fsedit.pm, bootloader.pm: revert back to /initrd
+
+	* modules.pm: here too
+	CDCEther looks good, I add it
+
+2001/10/29  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/pcmcia_config.patch: adapt for new pcmcia-cs
+
+2001/10/29  sdupont
+
+	* standalone/drakfont: Copyright (C)
+	correction of warning & code cleaning.
+	the end.... i think...
+	updated
+	uninstall interface & progress bar
+	uninstall interface : lists & progress bar
+	new progress bar update
+	todo: second list
+
+2001/10/28  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: cleaning
+
+2001/10/27  daouda
+
+	* devices.pm, my_gtk.pm, Xconfig.pm: return value at end of module
+
+	* share/rpmsrate: 
+	  - increase icewm weight.
+
+2001/10/26  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakautoinst, standalone/drakfont: progress bar hack
+
+2001/10/26  Pixel  <pixel@mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_config.patch: was duplicated in gi/tools
+
+	* partition_table_gpt.pm, partition_table_raw.pm: no adjust start and end
+	on GPT
+
+2001/10/26  sdupont
+
+	* standalone/drakfont: updated.
+	search correct progress bar mode implementation.
+	updated
+	fix some bugs & interface progress implementation.
+	TODO:
+	progress before backend.
+		search if directory already exist before custom install.
+
+2001/10/25  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakautoinst: simple variables handled, code compression.
+	The new and shiny drakautoinst is coming. P|-|34R
+	The new drakautoinst is coming. P|-|34R
+
+	* pixmaps/mdk_logo.png: additional logo
+
+	* standalone/drakfont: code correction
+
+2001/10/25  sdupont
+
+	* standalone/drakfont: merge differents versions.
+	file sector, list of fonts for advanced install...
+	applications choice, license widget, help widget.
+
+2001/10/24  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: updated
+	updated
+	updated, lot of bugs.
+	updated
+
+	* my_gtk.pm: added set_editable
+
+2001/10/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/lsparts, mdk-stage1/rescue-gui.c, mdk-stage1/frontend.h,
+	mdk-stage1/.cvsignore, rescue/install_bootloader,
+	rescue/tree/etc/rc.sysinit, rescue/Makefile,
+	mdk-stage1/stdio-frontend.c, rescue/guessmounts, mdk-stage1/Makefile,
+	rescue/tree/etc/issue, rescue/make_rescue_img,
+	mdk-stage1/newt-frontend.c: 
+	  - add a GUI to the rescue
+	  - provide guessmounts with better efficiency and output, go to
+	console, and reboot
+	  - provide install_bootloader which runs lilo from /mnt if it seems
+	safe
+	  - add lsparts to rescue, which prints partitions with detected types
+
+2001/10/24  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: replace /initrd with /lib/initrd
+	(hds): in case of GPT, allow ext2 to be replaced by any kind of
+	partitions (esp. EFI)
+
+	* partition_table.pm, partition_table_gpt.pm, partition_table_bsd.pm,
+	partition_table_raw.pm: add methods first_usable_sector and
+	last_usable_sector
+
+	* fs.pm, loopback.pm, bootloader.pm: replace /initrd with /lib/initrd
+
+2001/10/24  sdupont
+
+	* standalone/drakfont: scroll
+	`
+	import_status & progress.
+	gi update.
+
+2001/10/23  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* services.pm: tagged as translatable some left out strigns
+
+2001/10/23  sdupont
+
+	* standalone/drakfont: gi update
+	doc and progress bar.
+	gui: install from directory
+	gui supported.
+
+2001/10/23  yduret
+
+	* share/po/fr.po: fixed fohtes grammar
+
+2001/10/22  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm: speedtouch config : added usa vpi vci
+
+2001/10/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/modules.c: oops forgot to umount after "updatemodules"...
+
+2001/10/22  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/tree/etc/profile: fix PATH (have /mnt/bin /mnt/usr/bin ...)
+
+2001/10/21  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Fixed connection device setting for "oki4w" driver.
+
+2001/10/19  gbeauchesne
+
+	* partition_table_gpt.pm: 
+	  - Use /dev/random through devices::make() instead of /dev/urandom
+	  - Localize file descriptor
+	  - Capitalize error message if no /dev/random found
+
+	* partition_table.pm: 
+	  - s/Win98 FAT32/FAT32/
+	  - s/Partition that contains an EFI file system/EFI (FAT-12/16/32)/
+	  - Add "FAT32" to @important_types for IA-64 & /boot/efi
+
+2001/10/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stdio-frontend.c: small fix
+
+2001/10/19  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm: OOize can_raw_add
+
+	* partition_table.pm: handle empty $hd->{primary}{raw} (happens with no
+	partitions on ia64)
+	  - raw_add, can_raw_add moved to partition_table_raw
+	  - using raw_removed
+
+	* partition_table_dos.pm: better handling of CHS overflow (mainly for non
+	cylinder-boundary aligned part (like ia64))
+
+	* partition_table_raw.pm (adjustEnd): in case the end is totalsectors,
+	don't adjust since totalsectors / cylinder_size may not be an integer
+	(zero_MBR): defaults to GPT on ia64
+	(raw_add, can_raw_add, raw_removed): created, can now be overloaded in
+	partition_table_*.pm's
+	(get_geometry): keep the total_sectors as given by c::total_sectors,
+	don't try to recompute it based on nb_cylinders (for hds where
+	total_sectors is not a multiple of nb_cylinders)
+
+	* common.pm: cleanup
+
+	* partition_table_gpt.pm: fix ending is last sector, not next one
+	add TODO for partition entry guid
+	  - writing partition table now works
+	  - creating a new partition table now works (except GUIDs generation)
+
+2001/10/18  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm: corrected GET_FL and co
+
+2001/10/18  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/XFdrake: fix ia64 glitches with /usr/X11R6/lib/X11/Cards (now
+	use rgb.txt instead).
+
+2001/10/18  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_gpt.pm: 
+	  - add checksum verif on partition entries
+	  - detect the type of partition since the partition table types seem
+	quite poor
+	read part of GPT partition table working
+
+	* fsedit.pm: 
+	  - add checksum verif on partition entries
+	  - detect the type of partition since the partition table types seem
+	quite poor
+
+	* partition_table.pm: read part of GPT partition table working
+	shorter GPT name
+
+	* detect_devices.pm: safer modprobe ide-floppy
+
+2001/10/18  sdupont
+
+	* standalone/drakfont: change Fontmap ghostscript file.
+	drakfont support now .gsf fonts
+	end of backend......
+	update
+
+2001/10/17  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draksec: typo
+
+2001/10/17  sdupont
+
+	* standalone/drakfont: implementation of type1 fonts removing.
+	ghostscript, xfs and staroffice tested and supported.
+
+2001/10/16  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draksec: correct bad level display
+
+	* standalone/interactive_http/Makefile: makes rpmlint happy
+
+2001/10/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: print checks
+
+	* rescue/tree/etc/rc.sysinit: better phrasing
+
+2001/10/16  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* rescue/devices.pl, mdk-stage1/pci-resource/update-pci-ids.pl,
+	rescue/list.ppc: typo in update kernel by /me
+	fine-tune sanity_check for ppc
+	move /dev/nvram from list.ppc to devices.pl
+
+2001/10/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+2001/10/15  yduret
+
+	* scanner.pm: wonderful perl forgotten
+
+2001/10/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: have "other.img" drivers also
+	supported
+
+2001/10/12  sdupont
+
+	* standalone/drakfont: support all installations, and support xfs,
+	ghostcript, staroffice.
+	todo aplli: openoffice, gimp, abiword, netscape & other browsers...
+	todo or to see: --strong  ttmkfdir -c ???
+	emd of backend..
+
+2001/10/11  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: multiple card configuration bug corrected.
+	allelluia.
+
+	* network/tools.pm: aded use c
+
+	* standalone/drakfont: code review
+
+2001/10/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* interactive_stdio.pm, install_steps_stdio.pm: stdio mode works again
+
+2001/10/11  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: ensure postInstallNonRooted is done *before* ejecting cdrom
+
+2001/10/11  sdupont
+
+	* docs/drakfont/drakfont.log, docs/drakfont/drakfont.pdf,
+	docs/drakfont/drakfont.dvi: clean directory..
+
+	* docs/drakfont/drakfont.aux, docs/drakfont/dia_srcs/drakfont.dia,
+	docs/drakfont/dia_srcs/drakfont_uninstall.dia,
+	docs/drakfont/dia_srcs/drakfont_install.dia: delete all bads files...
+
+	* standalone/drakfont: improved....
+	improved && implement remove fonts for xfs
+	improved
+	improved
+	optimisation
+	correction of option install --replace
+	dialog of install options
+	correction of install option.
+
+	* docs/drakfont/drakfont.jpg, docs/drakfont/drakfont_install.jpg,
+	docs/drakfont/drakfont_uninstall.jpg, docs/drakfont/mandrake.ps: jpg &
+	ps with -kb option
+	clean...2
+
+2001/10/10  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakfont: typo
+	improved options handling
+
+	* standalone/net_monitor: ergo and features improvments, pipe handling
+	correction
+
+	* network/tools.pm: updated
+
+2001/10/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm, share/locales-skeleton.tar.bz2: enabled Maltese language
+
+2001/10/10  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: normalize the default type entry ("entry")
+
+	* interactive_gtk.pm: fix typo (on clicked_may_quit)
+
+2001/10/10  sdupont
+
+	* standalone/drakfont: option replace for "install from" &
+	windows_import...
+	update install dir
+	better for --install
+	new version of drakfont. in perl langage.
+
+	* docs/drakfont/drakfont.jpg, docs/drakfont/drakfont.aux,
+	docs/drakfont/drakfont.log, docs/drakfont/drakfont.pdf,
+	docs/drakfont/drakfont.tex, docs/drakfont/Makefile,
+	docs/drakfont/drakfont_install.jpg, docs/drakfont/drakfont.dvi,
+	docs/drakfont/drakfont_uninstall.jpg, docs/drakfont/mandrake.ps: docs
+	drakfont
+
+2001/10/10  yduret
+
+	* standalone/scannerdrake: first apparition on earth..
+
+	* Makefile.config: added scannerdrake
+
+2001/10/09  dam's  <damien@mandrakesoft.com>
+
+	* network/tools.pm: removed trash
+	connection test is now in background, corrects the interface freeze
+	problem
+
+	* pixmaps/net_u.png: new pixmap for draknet/net_monitor
+
+	* standalone/net_monitor, standalone/draknet: connection test is now in
+	background, corrects the interface freeze problem
+
+2001/10/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+2001/10/09  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: fix detecting read-only drives (like memory-sticks)
+
+	* partition_table.pm: make perl_checker happy
+
+	* partition_table_raw.pm: fix detecting read-only drives (like
+	memory-sticks)
+	make perl_checker happy
+
+	* modules.pm, detect_devices.pm, install2.pm: ensure floppies() takes care
+	of usb-storage if possible, so that patch on usb floppy works
+
+2001/10/09  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm, keyboard.pm, Xconfigurator.pm: move to Linux
+	keycodes on PPC, add additional Apple modelines
+
+	* install_steps_interactive.pm: re-enable PPC bootloader setup
+
+2001/10/08  dam's  <damien@mandrakesoft.com>
+
+	* c/stuff.xs.pm: added FL_GET and FL_SET
+
+2001/10/08  François Pons  <fpons@mandrakesoft.com>
+
+	* modules.pm: keep isp and gdth module for hd.img (as well as all.rdz) as
+	they have been
+	removed from the skip list for stage1.
+
+	* rescue/tree/etc/oem: added silly modification to avoid using more than 7
+	partition for DAC960 (/home
+	and /var are not created in the current state).
+
+2001/10/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: ia64
+
+	* mdk-stage1/Makefile: 8.1 -> cooker
+
+2001/10/08  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm, partition_table.pm: yet a few other ataraid cases
+
+2001/10/06  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* partition_table_raw.pm, partition_table.pm: updates to accomodate IBM
+	PPC systems with DOS partition table
+
+2001/10/05  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: added (missing) creation of
+	/hd/boot/grub/device.map (needed for
+	CompactSmartArray).
+
+2001/10/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: kdegames : 2 -> 4
+
+2001/10/04  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fix (work around) parted problem when it refuse to
+	use all disk space for
+	partition.
+	added another psacct log file in touch.
+	fixed typo on scalar reference for psacct bug.
+	updated with 8.1 OEM ProSuite.
+
+	* tools/oem-prepare: updated with 8.1 OEM ProSuite.
+
+2001/10/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+2001/10/04  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_dos.pm: is little-endian, so use "V" instead of "I"
+
+2001/10/03  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: synced with oem script.
+	removed 3D games not installed by default.
+
+	* rescue/tree/etc/oem: fixed typo in produced patch.
+	added extension to pro suite CD (added kernel-enterprise to possibly
+	installable
+	and install kernel22).
+	removed 3D games not installed by default.
+	added missing xmms-arts.
+	allow halting.
+
+2001/10/03  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: yet another ataraid support patch
+
+2001/10/02  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix previous hack.
+	added hack to do "/sbin/depmod -a" for NVIDIA driver.
+
+2001/10/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/probing.c: new pci-ids.h
+
+	* mdk-stage1/usb-resource/update-usb-ids.pl: better look
+
+	* share/po/fr.po: small fix
+
+	* standalone/drakgw: don't call pkgs_install when no package needs to be
+	installed
+
+2001/10/02  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm: bloody ataraid detection
+
+	* devices.pm: ataraid devices support
+
+2001/10/01  François Pons  <fpons@mandrakesoft.com>
+
+	* share/rpmsrate: fixed bad format for BOOKS used in DEVELOPMENT.
+
+	* rescue/tree/etc/oem: added CHARSET support, removed kernel22 and
+	kernel-enterprise from list of
+	package installable in oem mode, added possibility to set language on
+	/etc/oem
+	script invocation.
+
+	* install_steps_interactive.pm: avoid chooseCD on oem install.
+
+	* install_steps_gtk.pm: avoid asking for changing CD on oem install.
+
+	* install_any.pm: use $boot_medium for default medium in oem install,
+	avoid using kernel22 or
+	kernel-enterprise in oem install (space available is too tight on CD oem
+	version).
+
+	* tools/oem-prepare: synced with oem script.
+
+2001/10/01  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: reword it so that it reflects
+	what's in the marfiles
+
+2001/10/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bg.po: updated Bulgarian file
+
+2001/09/29  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
+
+	* docs/README: New adress where to find the kernel BOOT
+
+2001/09/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+2001/09/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/drvinst: don't install usb keyboard drivers more than once
+	try to fix usb keyboards
+
+2001/09/27  kjx
+
+	* share/po/zh_CN.po: translating
+
+2001/09/26  gbeauchesne
+
+	* install_any.pm: 
+	  - Suggest /boot/efi on IA-64 for the first VFAT partition found,
+	instead
+	of /mnt/windows
+
+	* bootloader.pm: 
+	  - bootloader.pm (suggest): don't search for dos (or windows) boot
+	partition
+	on IA-64 since ELILO can only boot Linux.
+	  - bootloader.pm (write_lilo_conf): don't cry if we don't have
+	/boot/boot.b
+	  or boot/message on IA-64.
+
+	* rescue/list.ia64: 
+	  - Add file list for "rescue" disk
+
+	* share/list.ia64, partition_table.pm: 
+	  - partition_table.pm: Add XFS suggestion for IA-64
+	  - share/list.ia64: misc updates and additions wrt. XFS, ReiserFS
+
+2001/09/25  baudens
+
+	* share/po/fr.po: s/Linux Mandrake/Mandrake Linux/
+	Remove totally crazy translation.
+	Translators, please use your brain!
+
+2001/09/25  gbeauchesne
+
+	* partition_table.pm: 
+	  - Add ReiserFS and Ext3fs entries for IA-64
+
+2001/09/25  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm (naughtyServers): cleanup comments
+
+2001/09/25  warly
+
+	* share/rpmsrate: put gtk-themes _and_ sawfish-themes to 4 so that it is
+	installed for newbie and drakfirsttime does not fail.
+	put gtk-themes to 4 so that it is installed for newbie and drakfirsttime
+	does not fail.
+
 2001/09/25  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_interactive.pm: allow non ejectable medium to allow all
