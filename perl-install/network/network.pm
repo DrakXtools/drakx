@@ -231,7 +231,7 @@ sub dnsServers {
 
 sub findIntf {
     my ($intf, $device) = @_;
-    $intf->{$device}{DEVICE} = $device;
+    $intf->{$device}{DEVICE} = undef;
     $intf->{$device};
 }
 
@@ -338,10 +338,12 @@ sub read_all_conf {
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf());
     foreach (all("$::prefix/etc/sysconfig/network-scripts")) {
-	if (/^ifcfg-([A-Za-z0-9.:]+)$/ && $1 ne 'lo') {
-	    my $intf = findIntf($intf, $1);
+	my ($device) = /^ifcfg-([A-Za-z0-9.:]+)$/;
+	if ($device && $device ne 'lo') {
+	    my $intf = findIntf($intf, $device);
 	    add2hash($intf, { getVarsFromSh("$::prefix/etc/sysconfig/network-scripts/$_") });
-            $intf->{WIRELESS_ENC_KEY} = network::tools::get_wep_key_from_iwconfig($intf->{WIRELESS_ENC_KEY});
+	    $intf->{DEVICE} ||= $device;
+	    $intf->{WIRELESS_ENC_KEY} = network::tools::get_wep_key_from_iwconfig($intf->{WIRELESS_ENC_KEY});
 	}
     }
     $netcnx->{type} or probe_netcnx_type($::prefix, $netc, $intf, $netcnx);
