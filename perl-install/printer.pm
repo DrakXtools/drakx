@@ -2569,6 +2569,12 @@ sub makeopenofficeprinterentry {
     my $default = "0";
     if ($queue eq $printer->{DEFAULT}) {
 	$default = "1";
+	# "DefaultPrinter=0" for the "Generic Printer"
+	$configfile = removeentry("Generic Printer", "DefaultPrinter=",
+				  $configfile);
+	$configfile = addentry("Generic Printer", 
+			       "DefaultPrinter=0",
+			       $configfile);	
     }
     $configfile = addentry($queue, 
 			   "DefaultPrinter=$default",
