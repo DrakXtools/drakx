@@ -549,7 +549,7 @@ sub chooseGroups {
 			     help => translate($o->{compssUsers}{$_}{descr}),
 			     val => \$val{$_},
 			     type => 'bool',
-			     icon2f => sub {
+			     icon => do {
 				 my $f = "/usr/share/icons/" . ($o->{compssUsers}{$_}{icons} || 'default');
 				 -e "$f.png" or $f .= "_section";
 				 -e "$f.png" or $f = '/usr/share/icons/default_section';
