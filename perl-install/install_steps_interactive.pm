@@ -919,9 +919,12 @@ sub summary {
 		require pkgs;
 		my $p = pkgs::packageByName($o->{packages}, 'cups');
 		$p && $p->flag_installed ? N("Remote CUPS server") : N("No printer");
+	    } elsif (defined($o->{printer}{configured}{$o->{printer}{DEFAULT}})  &&
+		     (my $p = find { $_ && ($_->{make} || $_->{model}) }
+		      $o->{printer}{configured}{$o->{printer}{DEFAULT}}{queuedata})) {
+		"$p->{make} $p->{model}";
 	    } elsif (my $p = find { $_ && ($_->{make} || $_->{model}) }
-		     $o->{printer}{currentqueue},
-		     map { $_->{queuedata} } ($o->{printer}{configured}{$o->{printer}{DEFAULT}}, values %{$o->{printer}{configured}})) {
+		      map { $_->{queuedata} } (values %{$o->{printer}{configured}})) {
 		"$p->{make} $p->{model}";
 	    } else {
 		N("Remote CUPS server"); #- fall back in case of something wrong.
