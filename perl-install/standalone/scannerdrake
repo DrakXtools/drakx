@@ -37,7 +37,7 @@ for (@ARGV) {
 }
 
 $in = 'interactive'->vnew('su', 'default');
-#$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
 if ($::Manual) {manual(); quit();}
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 @f = scanner::findScannerUsbport();
@@ -103,6 +103,10 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.8  2002/03/09 00:58:36  yduret
+# uncomment line that checks if sane rpm is installed or not (thx gc).
+# i sux,
+#
 # Revision 1.7  2002/02/18 17:32:42  yduret
 # HP OfficeJet support
 #
