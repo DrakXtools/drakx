@@ -65,7 +65,7 @@ sub getinfoFromXF86Config {
     $X ||= {};
 
     #- don't keep the preference on upgrades??
-    $card->{prefer_xf3} = readlink("$::prefix/etc/X11/X") =~ /XF86_/ if $::isStandalone;
+    $X->{card}{prefer_xf3} = readlink("$::prefix/etc/X11/X") =~ /XF86_/ if $::isStandalone;
 
     my (%keyboard, %mouse, %wacom, %card, %monitor);
     my (%c, $depth);
