@@ -306,8 +306,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
-				      #- hack for Matrox driver where there are undefined reference if no DRI!
-				      if_($card->{identifier} !~ /Matrox.* G[245][05]0/ && (!$card->{prefer_xf3} || $::expert), 
+				      if_(!$card->{prefer_xf3} || $::expert, 
 					  { text => _("XFree %s", $xf4_ver),
 					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
