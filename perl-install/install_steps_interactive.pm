@@ -267,6 +267,7 @@ sub choosePackages {
 	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::selectedSize($packages);
 
+	$o->chooseCD($packages);
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
 	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
@@ -317,6 +318,20 @@ sub chooseGroups {
     }
 }
 
+sub chooseCD {
+    my ($o, $packages) = @_;
+
+    #- get default values according to method, always skip empty medium
+    #- which is the default (or current) CD which is always available...
+    map { $packages->[2]{$_}{selected} = $o->{method} ne 'cdrom' } grep { $_ } keys %{$packages->[2]};
+
+    $o->ask_many_from_list_ref('',
+			       _("Choose other CD to install"),
+			       [ map { $packages->[2]{$_}{descr} || _("Cd-Rom #%s", $_) } grep { $_ } keys %{$packages->[2]} ],
+			       [ map { \$packages->[2]{$_}{selected} } grep { $_ } keys %{$packages->[2]} ]
+			      ) or goto &chooseCD unless $::beginner;
+}
+
 #------------------------------------------------------------------------------
 sub installPackages {
     my ($o, $packages) = @_;
@@ -360,13 +375,10 @@ sub configureNetwork($) {
 			     [ @l ]) || "Do not";
     } else {
 	$_ = $::beginner ? "Do not" :
-	  $o->ask_from_list_([ _("Network Configuration") ],
-			     _("Do you want to configure networking for your system?"),
-			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]);
+	  ($o->ask_yesorno([ _("Network Configuration") ],
+			   _("Do you want to configure Local LAN networking for your system?"), 0) ? "Local LAN" : "Do not");
     }
-    if (/^Dialup/) {
-	$o->pppConfig;
-    } elsif (/^Do not/) {
+    if (/^Do not/) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif (!/^Keep/) {
 	$o->setup_thiskind('net', !$::expert, 1);
@@ -391,6 +403,12 @@ sub configureNetwork($) {
 	  $o->configureNetworkNet($o->{netc}, $last ||= {}, @l) or return;
     }
     install_steps::configureNetwork($o);
+
+    #- added ppp configuration after ethernet one.
+    if ($o->ask_yesorno([ _("Modem Configuration") ],
+			_("Do you want to configure Dialup with modem networking for your system?"), 0)) {
+	$o->pppConfig;
+    }
 }
 
 sub configureNetworkIntf {
@@ -697,7 +715,6 @@ failures. Would you like to create a bootdisk for your system?"),
 #------------------------------------------------------------------------------
 sub setupLILO {
     my ($o, $more) = @_;
-
     any::setupBootloader($o, $o->{bootloader}, $o->{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more);
 
     eval { $o->SUPER::setupBootloader };

@@ -38,7 +38,7 @@ sub setup_local($$$) {
     return if !$in->ask_from_entries_refH(_("Local Printer Device"),
 					  _("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
-_("Printer Device:") => {val => \$printer->{DEVICE}, list => \@port } ],
+_("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
 					 );
 
     #- select right DBENTRY according to device selected.
@@ -261,8 +261,8 @@ You can add some more or change the existing ones."),
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue and how is the printer connected?"), [
-_("Name of queue:") => { val => \$printer->{QUEUE} },
-_("Spool directory:") => { val => \$printer->{SPOOLDIR} },
+_("Name of queue") => { val => \$printer->{QUEUE} },
+_("Spool directory") => { val => \$printer->{SPOOLDIR} },
 _("Printer Connection") => { val => \$printer->{str_type}, not_edit => 1, list => [ keys %printer::printer_type ] },
 										      ],
 					   changed => sub {

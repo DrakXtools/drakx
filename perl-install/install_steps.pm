@@ -2,6 +2,7 @@ package install_steps;
 
 use diagnostics;
 use strict;
+use vars qw(@filesToSaveForUpgrade);
 
 #-######################################################################################
 #- misc imports
@@ -23,7 +24,7 @@ use network;
 use any;
 use fs;
 
-my @filesToSaveForUpgrade = qw(
+@filesToSaveForUpgrade = qw(
 /etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules
 );
 
@@ -209,6 +210,7 @@ sub beforeInstallPackages {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
+
     require pkgs;
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
@@ -344,13 +346,11 @@ GridHeight=70
     }
 
     #- move some file after an upgrade that may be seriously annoying.
+    #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
 	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::move_desktop_file($o->{prefix});
-    }
 
-    #- rename saved files to .mdkgiorig.
-    if ($o->{isUpgrade}) {
 	foreach (@filesToSaveForUpgrade) {
 	    if (-e "$o->{prefix}$_.mdkgisave") {
 		unlink "$o->{prefix}$_.mdkgiorig"; rename "$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_.mdkgiorig";
@@ -461,7 +461,7 @@ sub installCrypto {
 #	     }
 #	 }
     }
-    pkgs::install($o->{prefix}, $o->{isUpgrade}, [ values %$packages ]);
+    pkgs::install($o->{prefix}, $o->{isUpgrade}, [ values %$packages ]); #- TODO
 }
 
 #------------------------------------------------------------------------------

@@ -366,7 +366,7 @@ sub doInstallStep {
 
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
-    $o->afterInstallPackages;    
+    $o->afterInstallPackages;
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
@@ -639,7 +639,7 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
-    modules::load("af_packet");
+    eval { modules::load("af_packet") };
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle
@@ -670,6 +670,7 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
+    install_any::clean_postinstall_rpms();
     install_any::ejectCdrom();
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});

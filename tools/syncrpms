@@ -130,7 +130,7 @@ sub sync_rpms {
 	    } elsif (version_compare($source->{$_}{version}, $target->{$_}{version}) != 0 ||
 		     version_compare($source->{$_}{release}, $target->{$_}{release}) != 0) {
 		if ($flag->{verbose}) {
-		    print STDERR "keeping more up-to-date version $target->{$_}{dir}/$source->{$_}{file} against $source->{$_}{dir}/$source->{$_}{file}, check your repository !\n";
+		    print STDERR "keeping more up-to-date version $target->{$_}{dir}/$target->{$_}{file} against $source->{$_}{dir}/$source->{$_}{file}, check your repository !\n";
 		}
 	    } #- say nothing if source is equal to target.
 	}

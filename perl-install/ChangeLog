@@ -1,3 +1,18 @@
+2000-03-30  François Pons  <fpons@mandrakesoft.com>
+
+	* install2pm: added eval around loading af_packet and postinstall
+	copy of RPMS.
+	* devices.pm: added /dev/kdb for SPARC.
+	* install_any.pm: modified multi CD management, postinstall copy
+	of RPMS.
+	* install_steps_gtk.pm: added support for Xsun server for SPARC.
+	* install_steps_interactive.pm: added multi CD dialog box for
+	selecting CD available. Serialized ethernet configuration and ppp
+	configuration.
+	* pkgs.pm: added check for infinite recursion for bad depslist.
+	* printer.pm: better test for reparse of printerdb.
+	* Xconfigurator.pm: added support for Xsun server for SPARC.
+
 2000-03-30  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (choosePackagesTree): enhance tree selection

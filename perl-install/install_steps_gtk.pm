@@ -177,7 +177,9 @@ sub new($$) {
 		my $ok = 1;
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
-		    exec $_[0], "-dpms","-s" ,"240", "-allowMouseOpenFail", "-xf86config", $f or exit 1;
+		    exec $_[0], (arch() =~ /^sparc/ ? () : ("-kb")), "-dpms","-s" ,"240",
+		      ($_[0] =~ /Xsun/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
+		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
 		}
 		foreach (1..60) {
 		    sleep 1;
@@ -194,29 +196,33 @@ sub new($$) {
 		add2hash($card, Xconfigurator::cardName2card($card->{type})) if $card && $card->{type};
 		@servers = $card->{server} || "TGA";
 		#-@servers = qw(SVGA 3DLabs TGA) 
+	    } elsif (arch() =~ /^sparc/) {
+		local $_ = cat_("/proc/fb");
+		if (/Mach64/) { @servers = qw(Mach64) }
+		else { @servers = qw(Xsun24) }
 	    }
-	    @servers = qw(Mach64) if arch() =~ /^sparc/;
 	    @servers = qw(PPCDummy) if arch() eq "ppc";
 
 	    foreach (@servers) {
 		log::l("Trying with server $_");
 		my $dir = "/usr/X11R6/bin";
+		my $prog = /Xsun/ ? $_ : "XF86_$_";
 		unless (-x "$dir/XF86_$_") {
-		    unlink $_ foreach glob_("$dir/XF86_*");
-		    local *F; open F, ">$dir/XF86_$_" or die "failed to write server: $!";
+		    unlink $_ foreach glob_("$dir/X*");
+		    local *F; open F, ">$dir/$prog" or die "failed to write server: $!";
 		    local $/ = \ (16 * 1024);
-		    my $f = install_any::getFile("$dir/XF86_$_") or next;
+		    my $f = install_any::getFile("$dir/$prog") or next;
 		    syswrite F, $_ foreach <$f>;
-		    chmod 0755, "$dir/XF86_$_";
+		    chmod 0755, "$dir/$prog";
 		}
 		if (/FB/) {
 		    !$o->{vga16} && $o->{allowFB} or next;
 
-		    $o->{allowFB} = &$launchX("XF86_$_") #- keep in mind FB is used.
+		    $o->{allowFB} = &$launchX($prog) #- keep in mind FB is used.
 		      and goto OK;
 		} else {
 		    $o->{vga16} = 1 if /VGA16/;
-		    &$launchX("XF86_$_") and goto OK;
+		    &$launchX($prog) and goto OK;
 		}
 	    }
 	    return undef;
@@ -800,7 +806,12 @@ sub init_sizes() {
 sub createXconf($$$) {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
+    devices::make("/dev/kdb") if arch() =~ /^sparc/; #- used by Xsun style server.
     symlinkf($mouse_dev, "/dev/mouse");
+
+    #- needed for imlib to start on 8-bit depth visual.
+    symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
+    symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
     my $wacom;
     if ($wacom_dev) {

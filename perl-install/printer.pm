@@ -328,7 +328,7 @@ sub getinfo($) {
 sub read_printer_db(;$) {
     my $dbpath = $prefix . ($_[0] || $PRINTER_DB_FILE);
 
-    %thedb and return;
+    scalar(keys %thedb) > 3 and return; #- try reparse if using only ppa, POSTSCRIPT, TEXT.
 
     my %available_devices; #- keep only available devices in our database.
     local *AVAIL; open AVAIL, ($::testing ? "$prefix" : "chroot $prefix ") . "/usr/bin/gs --help |";

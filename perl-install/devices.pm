@@ -112,6 +112,7 @@ sub make($) {
 		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
 		   "mem"     => [ c::S_IFCHR(), 1,  1 ],
 		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
+		   "kbd"     => [ c::S_IFCHR(), 11, 0 ],
 		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
 		   "random"  => [ c::S_IFCHR(), 1,  8 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],

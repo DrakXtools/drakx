@@ -332,7 +332,7 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  "-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && "-4"), 
+	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($::xf4 && "-4")) : ()),
 	  ":9" or c::_exit(0);
     }
 

@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use Config;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $current_medium $asked_medium %refused_media);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @needToCopy);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -28,14 +28,27 @@ use detect_devices;
 use fs;
 use log;
 
+#- package that have to be copied for proper installation (just to avoid changing cdrom)
+#- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
+@needToCopy = qw(
+XFree86 dhcpcd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
+);
 
 #-######################################################################################
 #- Media change variables&functions
 #-######################################################################################
-$current_medium = '';
-$asked_medium = '';
-%refused_media = ();
-sub useMedium($) { $asked_medium eq $_[0] or log::l("selecting new medium $_[0]"); $asked_medium = $_[0] }
+my $postinstall_rpms = '';
+my $current_medium = '';
+my $asked_medium = '';
+my %refused_media = ();
+sub useMedium($) {
+    #- before ejecting the first CD, there are some files to copy!
+    #- does nothing if the function has already been called.
+    $_[0] and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+
+    $asked_medium eq $_[0] or log::l("selecting new medium $_[0]");
+    $asked_medium = $_[0];
+}
 sub changeMedium($$) {
     my ($method, $medium) = @_;
     log::l("change to medium $medium for method $method (refused by default)");
@@ -48,23 +61,23 @@ sub relGetFile($) {
     my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|depslist.*|hdlist.*)$/ ? "base/": "RPMS$asked_medium/";
     "Mandrake/$dir$_";
 }
-sub errorOpeningFile($;$) {
-    my ($file, $absent) = @_;
+sub errorOpeningFile($) {
+    my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
-    $current_medium eq $asked_medium && !$absent and return; #- nothing to do in such case.
+    $current_medium eq $asked_medium and return; #- nothing to do in such case.
     $refused_media{$asked_medium} and return; #- refused forever...
 
     my $max = 32; #- always refuse after $max tries.
     if ($::o->{method} eq "cdrom") {
-	cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
+	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| or return;
 	my $cdrom = $1;
-	ejectCdrom();
+	ejectCdrom($cdrom);
 	while ($max > 0 && changeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    eval { fs::mount($cdrom, "/tmp/rhimage", "iso9660", 'readonly') };
 	    my $getFile = getFile($file); $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
-	    ejectCdrom();
+	    ejectCdrom($cdrom);
 	    --$max;
 	}
     } else {
@@ -95,7 +108,7 @@ sub getFile {
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
 	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or
-	      return errorOpeningFile($_[0], !(-e "/tmp/rhimage/" . relGetFile($_[0])));
+	      $postinstall_rpms and open getFile, "$postinstall_rpms/$_[0]" or return errorOpeningFile($_[0]);
 	    *getFile;
 	};
     }
@@ -106,6 +119,40 @@ sub rewindGetFile() {
 	require ftp;
 	ftp::rewindGetFile(); #- make sure to reopen connection.
     }
+}
+
+#-######################################################################################
+#- Post installation RPMS from cdrom only, functions
+#-######################################################################################
+sub setup_postinstall_rpms($$) {
+    my ($prefix, $packages) = @_;
+
+    $postinstall_rpms and return;
+    $postinstall_rpms = "$prefix/usr/postinstall-rpm";
+
+    log::l("postinstall rpms directory set to $postinstall_rpms");
+    commands::mkdir_('-p', $postinstall_rpms);
+
+    require pkgs;
+
+    #- compute closure of unselected package that may be copied.
+    my %toCopy;
+    foreach (@needToCopy) {
+	my $pkg = pkgs::packageByName($packages, $_);
+	pkgs::selectPackage($packages, $pkg, 0, \%toCopy);
+    }
+
+    my @toCopy; push @toCopy, map { pkgs::packageByName($packages, $_) } keys %toCopy;
+
+    #- extract headers of package, this is necessary for getting
+    #- the complete filename of each package.
+    #- copy the package files in the postinstall RPMS directory.
+    #- last arg is default medium '' known as the CD#1.
+    pkgs::extractHeaders($prefix, \@toCopy, $packages->[2]{''});
+    commands::cp((map { "/tmp/rhimage/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
+}
+sub clean_postinstall_rpms() {
+    $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
 }
 
 #-######################################################################################
@@ -423,13 +470,15 @@ sub hdInstallPath() {
     $part->{mntpoint} . first(readlink("/tmp/rhimage") =~ m|^/tmp/hdimage/(.*)|);
 }
 
-sub unlockCdrom() {
-    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
-    eval { ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
+sub unlockCdrom(;$) {
+    my ($cdrom) = @_;
+    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    eval { $cdrom and ioctl detect_devices::tryOpen($1), c::CDROM_LOCKDOOR(), 0 };
 }
-sub ejectCdrom() {
-    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage| or return;
-    my $f = eval { detect_devices::tryOpen($1) } or return;
+sub ejectCdrom(;$) {
+    my ($cdrom) = @_;
+    $cdrom or cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| and $cdrom = $1;
+    my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
     getFile("XXX"); #- close still opened filehandle
     eval { fs::umount("/tmp/rhimage") };
     ioctl $f, c::CDROMEJECT(), 1;
@@ -541,8 +590,11 @@ sub pkg_install {
     my ($o, $name) = @_;
     require pkgs;
     require install_steps;
+    print "trying to pkg_install $name\n";
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $name) || die "$name rpm not found");
+    print "trying to pkg_install $name : done selection\n";
     install_steps::installPackages($o, $o->{packages});
+    print "trying to pkg_install $name : done installed\n";
 }
 
 sub fsck_option() {
@@ -552,7 +604,6 @@ sub fsck_option() {
 
 sub install_urpmi {
     my ($prefix, $method, $mediums) = @_;
-
     {
 	local *F = getFile("depslist");
 	output("$prefix/var/lib/urpmi/depslist", <F>);
