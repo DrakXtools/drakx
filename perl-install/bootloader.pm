@@ -643,11 +643,10 @@ wait for default boot.
 	    }
 	}
     }
-    foreach ('secure', 'enterprise', 'smp') {
-	if (get_label("linux-$_", $bootloader)) {
-	    $bootloader->{default} ||= "linux-$_";
-	    last;
-	}
+
+    my @preferred = map { "linux-$_" } 'p3-smp-64GB', 'secure', 'enterprise', 'smp', 'i686-up-4GB';
+    if (my $preferred = find { get_label($_, $bootloader) } @preferred) {
+	$bootloader->{default} ||= $preferred;
     }
     $bootloader->{default} ||= "linux";
     $bootloader->{method} ||= first(method_choices($fstab, $bootloader));
