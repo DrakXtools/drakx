@@ -1071,7 +1071,7 @@ notation (for example, 1.2.3.4).")),
                         if ($in->do_pkgs->ensure_is_installed_if_available('ndiswrapper', '/usr/sbin/ndiswrapper')) {
                             $in->ask_warn(N("Error"), N("Could not install the %s package!"));
                             return 1;
-                        };
+                        }
                         if ($ndiswrapper_driver eq N("Install a new driver")) {
                             if ($ndiswrapper_inf_file = $in->ask_file(N("Please select the Windows driver (.inf file)"), "/mnt/cdrom")) {
                                     return system("ndiswrapper -i $ndiswrapper_inf_file");
