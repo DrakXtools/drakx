@@ -24,6 +24,9 @@ This disk may also contain some update or new modules for installed kernels.
 Those modules must be placed in directory <kernel-version>. They must be
 gzipped if the installed kernel modules are gzipped.
 
+You may need to specify the "category" so that new modules are used correctly.
+For example, a scsi module should be put in category disk/scsi so that it is
+put in scsi_hostadapter and initrd.
 
 
 Here's a typical scenario:
@@ -61,6 +64,8 @@ msdos
 ppa
 # ISA network card needing options
 ne io=0x300 irq=7
+# New module [list_modules: disk/scsi]
+a320raid
 [root@obiwan mnt]# (cd floppy/2.6.8.1-20mdk ; find -type f)
 ./kernel/fs/msdos/msdos.ko.gz
 ./kernel/drivers/scsi/ppa.ko.gz

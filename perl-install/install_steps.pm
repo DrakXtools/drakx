@@ -625,6 +625,22 @@ sub updateModulesFromFloppy {
 	run_program::run("cd /floppy/$kernel_version ; find -type f | cpio -pdu $::prefix/lib/modules/$kernel_version");
 	run_program::rooted($::prefix, 'depmod', '-a', '-F', "/boot/System.map-$kernel_version", $kernel_version);
     }
+
+    my $category;
+    foreach (cat_('/floppy/to_load')) {
+	chomp;
+	if (/^#/) {
+	    ($category) = $1 if /\[list_modules: (.*?)\]/;
+	} elsif ($category) {
+	    log::l("adding $_ to $category\n");
+	    my $r = \%list_modules::l;
+	    $r = $r->{$_} foreach split('/', $category);
+	    push @$r, $_;
+
+	    $category = '';
+	}
+    }
+
     fs::umount("/floppy");
 }
 
