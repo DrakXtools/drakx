@@ -20,7 +20,7 @@ local $_ = join '', @ARGV;
 
 sub pci_probe {
     my @l;
-    foreach (`/usr/bin/lspcidrake`) {
+    foreach (`/usr/bin/lspcidrake -v`) {
 	push @l, do {
 	    if (/^(\S+)\s*: (.+) \[([^\]]+)/) {
 		{ driver => $1,  description => $2, type => $3 };
@@ -64,6 +64,9 @@ foreach $card (pci_probe()) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.6  2002/09/10 10:07:23  gc
+#- drvinst <param> is broken when we don't -v
+#-
 #- Revision 1.5  2001/09/27 16:00:05  gc
 #- don't install usb keyboard drivers more than once
 #-
