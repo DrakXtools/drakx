@@ -5,7 +5,7 @@
 use Config;
 use MDK::Common;
 Config->import;
-my ($arch) = $Config{archname} =~ /(.*)-/;
+my ($arch) = $Config{archname} =~ /(.*?)-/;
 
 ($img, $type) = @ARGV;
 
@@ -67,6 +67,7 @@ foreach (@kernels) {
     if ($img =~ /rdz$/) {
 	initrd($mnt, "$img-$_");
     } else {
+	print STDERR "calling boot_img_$arch\n";
 	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*"));
 	rename("$img-$main", "$img");
     }
