@@ -313,7 +313,7 @@ sub create_box_with_title {
 	chomp(my $text = join("\n", @_));
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
 	$scroll->set_size_request(400, $o->{box_size});
-	gtkpack($box, $scroll);
+	gtkpack_($box, 0, $scroll);
     } else {
 	my $a = !$::no_separator;
 	undef $::no_separator;
