@@ -119,7 +119,7 @@ sub packageMedium { my ($packages, $p) = @_; $p or die "invalid package from\n" 
 #sub packageHeader     { $_[0] && $_[0]->[$HEADER] }
 #sub packageFreeHeader { $_[0] && c::headerFree(delete $_[0]->[$HEADER]) }
 
-sub packageSelectedOrInstalled { $_[0] && ($_[0]->flag_selected || $_[0]->flag_installed) }
+#sub packageSelectedOrInstalled { $_[0] && ($_[0]->flag_selected || $_[0]->flag_installed) }
 
 #sub packageId {
 #    my ($packages, $pkg) = @_;
@@ -425,8 +425,6 @@ sub psUsingHdlists {
 
     #- add additional fields used by DrakX.
     @{$packages}{qw(count mediums)} = (0, {});
-    $packages->{rpmdb} = URPM::DB::open($prefix);
-    $packages->{rpmdb} ||= new URPM;
 
     #- parse hdlists file.
     my $medium = 1;
@@ -888,7 +886,7 @@ sub computeGroupSize {
 }
 
 
-sub init_db {
+sub openInstallLog {
     my ($prefix) = @_;
 
     my $f = "$prefix/root/drakx/install.log";
@@ -899,10 +897,15 @@ sub init_db {
 #-    c::rpmSetVeryVerbose();
 }
 
-sub rebuild_db_open_for_traversal {
-    my ($packages, $prefix) = @_;
+sub closeInstallLog {
+    log::l("closing install.log file");
+    close LOG;
+}
 
-    unless (exists $packages->{rebuild_db}) {
+sub rpmDbOpen {
+    my ($prefix, $rebuild_needed) = @_;
+
+    if ($rebuild_needed) {
 	if (my $pid = fork()) {
 	    waitpid $pid, 0;
 	    ($? & 0xff00) and die "rebuilding of rpm database failed";
@@ -915,16 +918,20 @@ sub rebuild_db_open_for_traversal {
 
 	    c::_exit(0);
 	}
-	$packages->{rebuild_db} = undef;
     }
 
-    my $db = URPM::DB::open($prefix) or die "unable to open $prefix/var/lib/rpm/Packages";
-    log::l("opened rpm database for examining existing packages");
+    my $db;
+    if ($db = URPM::DB::open($prefix)) {
+	log::l("opened rpm database for examining existing packages");
+    } else {
+	log::l("unable to open rpm database, using empty rpm db emulation");
+	$db = new URPM;
+    }
 
     $db;
 }
 
-sub clean_old_rpm_db {
+sub cleanOldRpmDb {
     my ($prefix) = @_;
     my $failed;
 
@@ -945,25 +952,23 @@ sub clean_old_rpm_db {
     }
 }
 
-sub done_db {
-    log::l("closing install.log file");
-    close LOG;
-}
-
 sub selectPackagesAlreadyInstalled {
     my ($packages, $prefix) = @_;
 
-    #- avoid rebuilding the database if such case.
-    $packages->{rebuild_db} = "oem does not need rebuilding the rpm db";
-    my $db = rebuild_db_open_for_traversal($packages, $prefix);
-
-    $packages->compute_installed_flags($db);
-    log::l("done selecting packages to upgrade");
+    $packages->compute_installed_flags($packages->{rpmdb});
 }
 
-#OBSOLETED TODO
-sub selectPackagesToUpgrade($$$;$$) {
-    return;
+sub selectPackagesToUpgrade {
+    my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
+
+    my $state = $packages->{state} ||= {};
+    $state->{selected} = {};
+    $state->{requested} = {};
+
+    $packages->resolve_packages_to_upgrade($packages->{rpmdb}, $state, requested => undef);
+    $packages->resolve_requested($packages->{rpmdb}, $state, callback_choices => \&packageCallbackChoices);
+}
+#    return;
 #    my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
 #    local $_; #- else perl complains on the map { ... } grep { ... } @...;
 #
@@ -1260,7 +1265,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 #    foreach my $p (values %{$packages->{names}}) {
 #	packageSetFlagUpgrade($p, 1) if packageFlagSelected($p);
 #    }
-}
+#}
 
 sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kernel-smp|kernel-linus|kernel-linus2.2|hackkernel|kernel-enterprise)$/ }
 
@@ -1321,7 +1326,7 @@ sub install($$$;$$) {
     log::l("pkgs::install the following: ", join(" ", map { $_->name } values %packages));
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
-    init_db($prefix);
+    openInstallLog($prefix);
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -1504,7 +1509,7 @@ sub install($$$;$$) {
 	cleanHeaders($prefix);
     } while ($nb > 0 && !$pkgs::cancel_install);
 
-    done_db();
+    closeInstallLog();
 
     cleanHeaders($prefix);
 
