@@ -98,14 +98,17 @@ sub setupBootloader {
     my $automatic = !$::expert && $more < 1;
     my $semi_auto = !$::expert && arch() !~ /ia64/;
     my $ask_per_entries = $::expert || $more > 1;
-    $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
-    if ((grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) ||
-	(grep { $_->{device} =~ /^hd[fghi]/ } @$hds) && (grep { $_->{device} =~ /^hd[abcd]/ } @$hds)
-       ) {
+    my $prev_boot = $b->{boot};
+    my $mixed_kind_of_disks = 
+      (grep { $_->{device} =~ /^sd/ } @$hds) && (grep { $_->{device} =~ /^hd/ } @$hds) ||
+      (grep { $_->{device} =~ /^hd[fghi]/ } @$hds) && (grep { $_->{device} =~ /^hd[abcd]/ } @$hds);
+
+    if ($mixed_kind_of_disks) {
 	$automatic = $semi_auto = 0;
 	#- full expert questions when there is 2 kind of disks
 	#- it would need a semi_auto asking on which drive the bios boots...
     }
+    $automatic = 0 if arch() =~ /ppc/; #- no auto for PPC yet
 	
     if ($automatic) {
 	#- automatic
@@ -224,6 +227,21 @@ sub setupBootloader {
 		@{$all_hds->{special}} = grep { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special}};
 	    }
 	}
+    }
+
+    #- remove bios mapping if the user changed the boot device
+    delete $b->{bios} if $b->{boot} ne $prev_boot;
+
+    if ($mixed_kind_of_disks && 
+#	$b->{boot} !~ /$hds->[0]{device}/ && #- not the first disk
+	$b->{boot} =~ /\d$/ && #- on a partition
+	is_empty_hash_ref($b->{bios}) #- some bios mapping already there
+       ) {
+	my $hd = $in->ask_from_listf('', _("You decided to install the bootloader on a partition.
+This implies you already have a bootloader on the hard drive you boot (eg: System Commander).
+
+On which drive are you booting?"), \&partition_table::description, $hds) or goto &setupBootloader;
+	$b->{first_hd_device} = "/dev/$hd->{device}";
     }
 
     $ask_per_entries or return 1;
