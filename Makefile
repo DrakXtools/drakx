@@ -69,7 +69,7 @@ upload:
 upload_only:
 	function upload() { rel=`echo $$1 | sed 's!$(ROOTDEST)/!!'`; rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$rel; } ;\
 	upload $(STAGE2_LIVE) '' ;\
-	upload $(MEDIA_INFO_DEST) 'compssUsers*' ;\
+	upload $(MEDIA_INFO_DEST) 'compssUsers.pl*' ;\
 	upload $(MEDIA_INFO_DEST) rpmsrate ;\
 	upload $(STAGE2_DEST) '*_stage2.bz2' ;\
 	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
