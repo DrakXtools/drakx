@@ -188,7 +188,7 @@ Do you agree to lose all the partitions?
 	    if (my $type = fs::type::type_subpart_from_magic($_)) {
                 if ($type->{fs_type}) {
                     #- keep {pt_type}
-		    $_->{fs_type} = $fs_type;
+		    $_->{fs_type} = $type->{fs_type};
                 } else {
                     put_in_hash($_, $type); 
                 }
