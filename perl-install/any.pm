@@ -667,7 +667,7 @@ sub selectLanguage {
 
     if ($::isInstall) {
 	my $langs = $o_langs_ || {};
-	my $using_images = $in->isa('interactive::gtk') && listlength(cat_('/proc/fb'));
+	my $using_images = $in->isa('interactive::gtk') && !$in->{vga16};
 
 	#- to create the default value, use the first location for that value :/
 	$lang = first(lang::l2location($lang))."|$lang";
