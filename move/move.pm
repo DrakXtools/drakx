@@ -18,7 +18,7 @@ my $key_disabled;
 my ($using_existing_user_config, $using_existing_host_config);
 my $key_sysconf = '/home/.sysconf';
 my $virtual_key_part;
-my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed';
+my $key_mountopts = 'umask=077,uid=501,gid=501,shortname=mixed,nobadchars';
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
