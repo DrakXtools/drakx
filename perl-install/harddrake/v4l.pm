@@ -49,7 +49,7 @@ my %tuners_lst =
      30 => "Temic|PAL* auto + FM (4009 FN5)",
      31 => "SHARP|NTSC_JP (2U5JF5540)",
      32 => "Samsung|PAL TCPM9091PD27",
-     33 => "MT2032|universal",
+     33 => "MT20xx universal",
      34 => "Temic|PAL_BG (4106 FH5)",
      35 => "Temic|PAL_DK/SECAM_L (4012 FY5)",
      36 => "Temic|NTSC (4136 FY5)",
@@ -58,7 +58,10 @@ my %tuners_lst =
      39 => "LG|NTSC (newer TAPC series)",
      40 => "HITACHI V7-J180AT",
      41 => "Philips|PAL_MK (FI1216 MK)",
-     42 => "Philips|1236D ATSC/NTSC daul in"
+     42 => "Philips|1236D ATSC/NTSC daul in",
+     43 => "Philips|NTSC MK3 (FM1236MK3 or FM1236/F)",
+     44 => "Philips|4 in 1 (ATI TV Wonder Pro/Conexant)",
+     45 => "Microtune|4049 FM5",
 
      );
 
