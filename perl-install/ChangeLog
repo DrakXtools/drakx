@@ -1,3 +1,51 @@
+2001/02/26  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm: if wizard, show the button
+
+	* netconnect.pm: corrected wizard mode.
+
+2001/02/26  Pixel  <pixel@mandrakesoft.com>
+
+	* common.pm (if_): fix for use in scalar context
+
+	* install_steps_interactive.pm (summary): translate mouse description
+
+2001/02/25  dam's  <damien@mandrakesoft.com>
+
+	* share/logo-mandrake-Firewall.xpm, share/logo-mandrake.xpm: changed logo.
+
+	* netconnect.pm: profile handling.
+	profile handling
+	corrected wizard.
+
+	* standalone/draknet: profile handling.
+	profile handling
+
+	* install_steps_interactive.pm: updated
+
+2001/02/25  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (main): move the load_deps before all the loadO's
+
+	* install_any.pm (g_auto_install): have formatMountPartitions graphical if
+	$graphical
+
+	* install_steps_interactive.pm (generateAutoInstFloppy): use "timeout 1"
+	for replay
+
+	* interactive_gtk.pm (ask_from_entries_refW): ensure "advanced" lists
+	center the chosen value
+
+2001/02/24  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, install2.pm: move writing to config files from
+	install2::selectKeyboard to install_steps
+
+	* share/list, Makefile, tools/i386/mkreiserfs: for now, have mkreiserfs in
+	the CVS since the current cooker version is too recent
+
+	* commands.pm (more): handle 'q' to quit
+
 2001/02/24  Pixel  <pixel@mandrakesoft.com>
 
 	* c/Makefile (stuff): fix the fix's fix :'-(
