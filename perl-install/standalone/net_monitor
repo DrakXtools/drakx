@@ -149,15 +149,16 @@ my $during_connection;
 my $first;
 
 sub bg_command_as_root {
-    fork() or exec { 'consolehelper' } @_ or die N("consolehelper missing");
+    my $name = shift;
+    run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @_);
 }
 
 sub start_connection() {
-    bg_command_as_root('/sbin/ifup', $default_intf);
+    $default_intf and bg_command_as_root('/sbin/ifup', $default_intf);
 }
 
 sub stop_connection() {
-    bg_command_as_root('/sbin/ifdown', $default_intf);
+    $default_intf and bg_command_as_root('/sbin/ifdown', $default_intf);
 }
 
 sub connection() {
@@ -448,7 +449,7 @@ sub update() {
 		$statusbar->push(1, $isconnected == 1 ? N("Connected") : N("Not connected"));
 	    }
             $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
-	    $button_connect->set_sensitive(scalar(@interfaces));
+	    $button_connect->set_sensitive($default_intf || scalar(@interfaces));
 	}
     if (!(-e $network::tools::connect_file && -e $network::tools::disconnect_file)) {
 	$button_connect->set_sensitive(0);
