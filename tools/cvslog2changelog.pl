@@ -71,7 +71,10 @@ BEGIN {
 	      'uid553'  => 'Pixel  <pixel@mandrakesoft.com>',
 	      'tvignaud' => 'Thierry Vignaud  <tvignaud@mandrakesoft.com>',
 	      'sbenedict'=>'Stew Benedict  <sbenedict@mandrakesoft.com>',
-	      'tkamppeter' => 'Till Kamppeter <till@mandrakesoft.com>',
-	      'yduret' => 'Yves Duret <yduret@mandrakesoft.com>'
+	      'tkamppeter' => 'Till Kamppeter  <till@mandrakesoft.com>',
+	      'yduret' => 'Yves Duret  <yduret@mandrakesoft.com>',
+	      'daouda' => 'Daouda Lo  <daouda@mandrakesoft.com>',
+	      'dchaumette' => 'Damien Chaumette  <dchaumette@mandrakesoft.com>',
+	      'cbelisle' => 'Christian Belisle  <cbelisle@mandrakesoft.com>',
 	     );
 }
