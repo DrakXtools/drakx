@@ -189,38 +189,16 @@ sub join_lines {
 
 sub set_alternative {
     my ($command, $executable) = @_;
-    local *F;
-    # Read the list of executables for the given command to find the number
-    # of the desired executable
-    open F, ($::testing ? $::prefix : "chroot $::prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /bin/echo | update-alternatives --config $command \" |" or
-	    die "Could not run \"update-alternatives\"!";
-    my $choice = 0;
-    while (my $line = <F>) {
-	chomp $line;
-	if ($line =~ m/^[\* ][\+ ]\s*([0-9]+)\s+(\S+)\s*$/) { # list entry?
-	    if ($2 eq $executable) {
-		$choice = $1;
-		last;
-	    }
-	}
-    }
-    close F;
-    # If the executable was found, assign the command to it
-    if ($choice > 0) {
-	system(($::testing ? $::prefix : "chroot $::prefix/ ") .
-	       "/bin/sh -c \"/bin/echo $choice | update-alternatives --config $command > /dev/null 2>&1\"");
-    }
-    return 1;
-}    
 
-sub files_exist {
-    my @files = @_;
-    foreach my $file (@files) {
-	   return 0 unless -f "$::prefix$file"
-    }
-    return 1;
+    #- check the existance of $executable as an alternative for $command
+    #- (is this needed???)
+    run_program::rooted_get_stdout($::prefix, 'update-alternatives', '--display', $command) =~ /^\Q$executable /m or return;
+
+    #- this doesn't handle relative symlink, but neither does update-alternatives ;p
+    symlinkf $executable, "$::prefix/etc/alternatives/$command";
 }
+
+sub files_exist { and_(map { -f "$::prefix$_" } @_) }
 
 sub set_permissions {
     my ($file, $perms, $owner, $group) = @_;
