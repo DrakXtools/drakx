@@ -51,7 +51,7 @@ static void error_message_net(void)  /* reduce code size */
 }
 
 
-int configure_net_device(struct interface_info * intf)
+static int configure_net_device(struct interface_info * intf)
 {
 	struct ifreq req;
 	struct rtentry route;

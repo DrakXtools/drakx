@@ -46,7 +46,6 @@ struct interface_info {
 /* these are to be used only by dhcp.c */
 
 char * guess_netmask(char * ip_addr);
-int configure_net_device(struct interface_info * intf);
 
 extern char * hostname;
 extern char * domain;
