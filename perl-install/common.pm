@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
+    common     => [ qw(__ may_apply even odd arch better_arch compat_arch min max sqr sum and_ or_ if_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref next_val_in_array) ],
     functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ cat__ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInShMode setVarsInCsh substInFile availableMemory availableRamMB removeXiBSuffix template2file template2userfile update_userkderc list_skels formatTime formatTimeRaw unix2dos setVirtual isCdNotEjectable) ],
@@ -135,6 +135,8 @@ sub expand_symlinks {
     }
     $f;
 }
+
+sub may_apply { $_[0] ? $_[0]->($_[1]) : (@_ > 2 ? $_[2] : $_[1]) }
 
 sub if_($@) {
     my $b = shift;
