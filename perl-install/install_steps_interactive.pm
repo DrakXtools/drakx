@@ -1006,6 +1006,9 @@ sub summary {
 	    local $::expert = $::expert;
 	    require network::netconnect;
 	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
+	    #- in case netcnx type is not updated.
+	    require network::network;
+	    network::network::probe_netcnx_type($o->{prefix}, $o->{netc}, $->{intf}, $o->{netcnx});
 	},
     };
 
