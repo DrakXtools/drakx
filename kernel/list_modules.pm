@@ -102,7 +102,7 @@ our %l = (
     usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd) ],
     firewire => [ qw(ohci1394) ],
     pcmcia => [
-      if_(arch() !~ /^sparc/, qw(tcic i82365 i82092 yenta_socket)), # cb_enabler
+      if_(arch() !~ /^sparc/, qw(i82365 i82092 pd6729 tcic yenta_socket)), # cb_enabler
     ],
     usb_keyboard => [ qw(usbkbd keybdev) ],
    #serial_cs
