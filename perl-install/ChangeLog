@@ -1,3 +1,111 @@
+2005/03/09  mareklaane
+
+	* share/po/et.po: Translation fixes.
+
+2005/03/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/stage1.h: expert mode is dead
+
+	* mdk-stage1/disk.c: fix message
+	move partition stuff in partition.c and common disk stuff in tools.c
+
+	* mdk-stage1/thirdparty.h, mdk-stage1/thirdparty.c: initial import (allow
+	to load thirdparty modules from disks)
+
+	* mdk-stage1/Makefile: don't forget to link with third_party stuff
+	move partition stuff in partition.c and common disk stuff in tools.c
+
+	* network/netconnect.pm, network/network.pm, network/ethernet.pm,
+	standalone/drakconnect: write selected dhcp client in ifcfg files
+
+	* mdk-stage1/probing.c: do ask for modules here, it is already done when
+	needed
+	wait for mass storage devices to be detected
+	add log message when looking for scsi adapters
+
+	* mdk-stage1/partition.c, mdk-stage1/tools.h, mdk-stage1/partition.h: move
+	partition stuff in partition.c and common disk stuff in tools.c
+
+	* mdk-stage1/stage1.c: expert mode is dead
+	do not ask for third party modules here, it's available from main menu
+	allow to use new third party stuff from main menu
+	probe usb devices before trying to use third party modules
+
+	* mdk-stage1/tools.c: expert mode is dead
+	move partition stuff in partition.c and common disk stuff in tools.c
+
+2005/03/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* Makefile: updated list of too low languages
+
+	* share/po/sl.po: updated Slovenian file
+
+2005/03/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+
+	* network/netconnect.pm: better looking text
+
+	* Makefile: ga translation level has been leveraged up
+
+	* network/ethernet.pm (get_eth_cards) update comments
+	(get_eth_cards) do not overwrite driver name with sysfs one when we
+	already got it from ethtool, thus fixing bogus names registered though
+	pci layer in kernel (#14163)
+
+	* drakxtools.spec: 10.2-3mdk
+
+2005/03/09  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: rc1 logo
+
+2005/03/08  Funda Wang <fundawang at linux.net.cn>
+
+	* share/rpmsrate: removed obsolete IMEs for zh_TW
+
+2005/03/08  Olivier Blin <oblin at mandrakesoft.com>
+
+	* drakxtools.spec: use full path for net_applet icon in menu entry
+	(#14346)
+
+	* network/network.pm (wpa_supplicant_configure) scan hidden ssid
+
+2005/03/08  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: choose a 4/3 resolution by default
+	xbox support (by Stew)
+
+	* bootloader.pm: please perl_checker differently
+
+	* Makefile: Vera is now in xorg
+
+2005/03/08  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Disable progress bar when copying rpms from CDs. (The
+	change CD dialog
+	clashes with it)
+
+2005/03/08  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* mouse.pm: mousedrake, detectloader support for XBox
+
+	* bootloader.pm: perl_checker - bad /me
+	mousedrake, detectloader support for XBox
+
+2005/03/08  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* interactive.pm, standalone.pm, ugtk2.pm: log program exiting
+
+	* security/msec.pm (load_values) fix getting value when it's defined but 0
+	(#14364)
+	(get_function_value) fix getting value when it's 0 (#14364)
+
+	* drakxtools.spec: fix 10.2-2mdk's changelog
+	10.2-2mdk
+
+	* share/rpmsrate: install scim-input-pad for japanese users
+
 2005/03/08  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/network.pm (wpa_supplicant_configure) scan hidden ssid
@@ -46311,7 +46419,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1012 2005/03/06 13:16:05 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1013 2005/03/08 10:50:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
