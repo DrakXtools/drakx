@@ -1423,13 +1423,13 @@ sub start_internet {
     init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
     $::isStandalone or modules::load_category($o->{modules_conf}, 'network/main|gigabit|usb');
-    run_program::rooted($::prefix, $network::tools::connect_file);
+    connect_backend($o->{netc});
 }
 
 sub stop_internet {
     my ($o) = @_;
     init_globals($o);
-    run_program::rooted($::prefix, $network::tools::disconnect_file);
+    disconnect_backend($o->{netc});
 }
 
 1;
