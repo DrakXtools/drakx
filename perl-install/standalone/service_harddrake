@@ -71,5 +71,5 @@ foreach (@harddrake::data::tree) {
 
 # output new hw config
 log::explanations("created file $last_boot_config");
-Storable::store \%config, $last_boot_config;
+Storable::store(\%config, $last_boot_config);
 $in->exit(0);
