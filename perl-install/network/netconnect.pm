@@ -235,11 +235,7 @@ ifdown eth0
 	undef $netc->{NET_DEVICE};
     }
 
-    write_initscript();
-    $::isStandalone && member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and ask_connect_now();
-
-  step_3:
-
+    my $success = 1;
     network::configureNetwork2($in, $prefix, $netc, $intf);
     my $network_configured = 1;
 
@@ -247,15 +243,22 @@ ifdown eth0
 							  _("The network needs to be restarted"), 1))) {
 #-	run_program::rooted($prefix, "/etc/rc.d/init.d/network stop");
 	if (!run_program::rooted($prefix, "/etc/rc.d/init.d/network restart")) {
-	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0) or return;
+	    $success = 0;
+	    $in->ask_okcancel(_("Network Configuration"), _("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
 	}
     }
 
-    my $m = _("Congratulations, the network and internet configuration is finished.
+    write_initscript();
+    $::isStandalone && member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and $success = ask_connect_now();
+
+  step_3:
+
+    my $m = $success ? _("Congratulations, the network and internet configuration is finished.
 
 The configuration will now be applied to your system.\n") . if_($::isStandalone && $in->isa('interactive_gtk'),
 _("After that is done, we recommend you to restart your X
-environnement to avoid hostname changing problem."));
+environnement to avoid hostname changing problem.")) : _("Problems occur during configuration.
+Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration");
     if ($::isWizard) {
 	$::Wizard_no_previous=1;
 	$::Wizard_finished=1;

@@ -61,7 +61,7 @@ Try to reconfigure your connection.");
 	$::isInstall and disconnect_backend();
     }
     undef $::Wizard_no_previous;
-    1;
+    $up;
 }
 
 sub connect_backend { run_program::rooted($prefix, "$connect_prog &") }
