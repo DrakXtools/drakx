@@ -97,7 +97,7 @@ sub ask_info2 {
 		   if__($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
 		   if__($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
 		   if__($cnx->{login}, { label => _("Account Login (user name)"), val => \$cnx->{login} }),
-		   if__($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd} }),
+		   if__($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd}, hidden => 1 }),
 		  ]
 		 ) or return;
     if ($netc->{vpivci}) {
