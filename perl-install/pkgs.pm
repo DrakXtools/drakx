@@ -673,7 +673,7 @@ sub read_rpmsrate {
 
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
 		    if (@m3 == 1 && $m3[0] eq 'INSTALL') {
-			push @{$packages->{needToCopy} ||= []}, $_;
+			$rate > 1 and push @{$packages->{needToCopy} ||= []}, $_;
 			next; #- don't need to put INSTALL flag for a package.
 		    }
 		    if (packageRate($p)) {
