@@ -143,7 +143,7 @@ mar_create_file(char *dest_file, char **files)
 
 	/* ok, buffer is ready, let's write it on-disk */
 	{
-		gzFile f = gzopen(dest_file, "wb");
+		gzFile f = gzopen(dest_file, "wb9");
 		if (!f)
 		{
 			perror(dest_file);
