@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/types.h>
-#include <zlib.h>
+#include <bzlib.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -200,18 +200,20 @@ int ramdisk_possible(void)
 
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 {
-	gzFile st2;
+	BZFILE * st2;
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
 	int ram_fd;
 	char buffer[4096];
-	int gz_errnum;
+	int z_errnum;
 	char * wait_msg = "Loading program into memory...";
 	int bytes_read = 0;
+	int actually;
+	int seems_ok = 0;
 
-	st2 = gzdopen(ramdisk_fd, "r");
+	st2 = BZ2_bzdopen(ramdisk_fd, "r");
 
 	if (!st2) {
-		log_message("Opening compressed ramdisk: %s", gzerror(st2, &gz_errnum));
+		log_message("Opening compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
 		error_message("Could not open compressed ramdisk file.");
 		return RETURN_ERROR;
 	}
@@ -225,24 +227,26 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	
 	init_progression(wait_msg, size);
 
-	while (!gzeof(st2)) {
-		int actually = gzread(st2, buffer, sizeof(buffer));
-		if (actually != sizeof(buffer) && !gzeof(st2)) {
-			log_message("Reading compressed ramdisk: %s", gzerror(st2, &gz_errnum));
-			remove_wait_message();
-			return RETURN_ERROR;
-		}
+	while ((actually = BZ2_bzread(st2, buffer, sizeof(buffer))) > 0) {
+		seems_ok = 1;
 		if (write(ram_fd, buffer, actually) != actually) {
-			log_perror("Writing ramdisk");
+			log_perror("writing ramdisk");
 			remove_wait_message();
 			return RETURN_ERROR;
 		}
 		update_progression((int)((bytes_read += actually) / RAMDISK_COMPRESSION_RATIO));
 	}
 
+	if (!seems_ok) {
+		log_message("reading compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
+		remove_wait_message();
+		error_message("Could not uncompress second stage ramdisk.");
+		return RETURN_ERROR;
+	}
+
 	end_progression();
 
-	gzclose(st2); /* opened by gzdopen, but also closes the associated fd */
+	BZ2_bzclose(st2); /* opened by gzdopen, but also closes the associated fd */
 	close(ram_fd);
 
 	if (IS_RESCUE)
@@ -262,7 +266,7 @@ char * get_ramdisk_realname(void)
 	char img_name[500];
 	char * stg2_name = get_param_valued("special_stage2");
 	char * begin_img = RAMDISK_LOCATION;
-	char * end_img = "_stage2.gz";
+	char * end_img = "_stage2.bz2";
 
 	if (!stg2_name)
 		stg2_name = "mdkinst";

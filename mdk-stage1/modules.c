@@ -19,7 +19,12 @@
  */
 
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdio.h>
 #include "insmod-busybox/insmod.h"
 #include "stage1.h"
 #include "log.h"
@@ -31,7 +36,6 @@
 static struct module_deps_elem * modules_deps = NULL;
 
 static char * archive_name = "/modules/modules.mar";
-static struct mar_stream s = { 0, NULL, NULL };
 static int disable_modules = 0;
 
 
@@ -46,7 +50,7 @@ static int insmod_archived_file(const char * mod_name, char * options)
 
 	strncpy(module_name, mod_name, sizeof(module_name));
 	strcat(module_name, ".o");
-	i = mar_extract_file(&s, module_name, "/tmp/");
+	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
 		log_message("file-not-found-in-archive %s", module_name);
 		return -1;
@@ -155,7 +159,7 @@ static int load_modules_dependencies(void)
 
 void init_modules_insmoding(void)
 {
-	if (load_modules_dependencies() || mar_open_file(archive_name, &s)) {
+	if (load_modules_dependencies()) {
 		log_message("warning, error initing modules stuff, modules loading disabled");
 		disable_modules = 1;
 	}
@@ -321,7 +325,7 @@ enum return_type ask_insmod(enum driver_type type)
 
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
-	results = ask_from_list(msg, mar_list_contents(&s), &choice);
+	results = ask_from_list(msg, mar_list_contents(archive_name), &choice);
 
 	if (results == RETURN_OK) {
 		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */

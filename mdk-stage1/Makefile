@@ -68,12 +68,10 @@ endif
 endif
 
 
-GLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a
-DIETLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod-DIET.a mar/libmar-DIET.a
+GLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod.a mar/libmar.a bzlib/libbzlib.a
+DIETLIBC_STAGE1_OWN_LIBS = insmod-busybox/libinsmod-DIET.a mar/libmar-DIET.a bzlib/libbzlib-DIET.a
 STAGE1_OWN_LIBS = $($(L)_STAGE1_OWN_LIBS)
 
-
-STAGE1_OTHER_LIBS = /usr/lib/libz.a
 
 STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 
@@ -118,7 +116,7 @@ endif
 BINS = init stage1-cdrom stage1-disk stage1-network stage1-full
 
 
-DIRS = dietlibc mar insmod-busybox pci-resource
+DIRS = dietlibc mar insmod-busybox pci-resource bzlib
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif
@@ -141,19 +139,19 @@ init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
 	$(STRIPCMD) $@
 
-stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(STAGE1_OWN_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
+stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(MEDIAS_FRONTEND_LINK) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-network: $(STAGE1OBJS-NETWORK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK)
+stage1-network: $(STAGE1OBJS-NETWORK) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK)
 	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-full: $(STAGE1OBJS) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_OTHER_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
+stage1-full: $(STAGE1OBJS) $(GLIBC_STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
 	$(CC) $(GLIBC_LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
