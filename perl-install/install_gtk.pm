@@ -252,6 +252,9 @@ sub createXconf {
     symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
     symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
 
+    #- remove "error opening security policy file" warning
+    symlink("/tmp/stage2/etc/X11", "/etc/X11");
+
 if ($Driver) {
      output($file, sprintf(<<'END', $mouse_type, $Driver, $Driver eq 'fbdev' ? '"default"' : '"800x600" "640x480"'));
 
