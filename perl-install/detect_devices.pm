@@ -417,6 +417,18 @@ $usbtable_addons = <<'EOF';
 # add here lines conforming the usbtable format (0xXXXX\t0xXXXX\t"\w+"\t".*")
 EOF
 
+sub install_addons {
+    my ($prefix) = @_;
+
+    if (-d $prefix) {
+	foreach ([ 'pcitable.d', $pcitable_addons ], [ 'usbtable.d', $usbtable_addons ]) {
+	    my ($dir, $str) = @$_;
+	    -d "$prefix/$dir" && $str =~ /^[^#]/m and
+	      output "$prefix/$dir/95drakx.lst", $str;
+	}
+    }
+}
+
 sub add_addons {
     my ($addons, @l) = @_;
 
