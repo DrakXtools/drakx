@@ -380,7 +380,7 @@ BROADCAST=$lan_address.255
 ONBOOT=yes
 ),
                 if_($conf && $conf->{MII_NOT_SUPPORTED},
-                    "MII_NOT_SUPPORTED=$conf->{MII_NOT_SUPPORTED}")
+                    "MII_NOT_SUPPORTED=$conf->{MII_NOT_SUPPORTED}\n")
 ));
 }
 
