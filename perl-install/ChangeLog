@@ -1,3 +1,66 @@
+2001/01/30  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: new draknet. unstable
+
+	* netconnect.pm: updated
+	debugged network card configuration after pixelisation.
+
+2001/01/30  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stdio-frontend.c, mdk-stage1/newt-frontend.c: prevent from
+	trying to set progressbar to more than 100% (rescue is more compressed
+	than drakx)
+
+	* share/rpmsrate: add ldetect to config stuff I want to have on all
+	installs (lspcidrake)
+
+2001/01/30  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm, netconnect.pm, install_interactive.pm:
+	adapt format functions given to ask_from_listf. $_ is no more set
+
+	* mouse.pm (detect): replace commands::modprobe by modules::load as it
+	should (or??)
+
+	* perl2etags: adapt to new etags (emacs 21) format
+
+	* raid.pm (make): replace commands::modprobe by modules::load as it should
+	(or??)
+
+	* perl2fcalls (@exclude_calls): add Eth as dam's use it quite a lot in his
+	regexps
+
+	* share/locales.tar.bz2: misc/LC_NUMERIC tells to use "," as number
+	separator instead of ".".
+	The sheer result is:
+	"0.6" * 10  gives 0
+	"0,6" * 10  gives 6
+	
+	So i have overwritten misc/LC_NUMERIC with
+	/usr/share/locale/en/LC_NUMERIC and
+	it works nicely now :)
+
+2001/01/29  dam's  <damien@mandrakesoft.com>
+
+	* standalone/drakboot: corrected typo
+
+2001/01/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: 
+	  - deprecate "hdreiser.img" since we have room for "reiserfs.o" in
+	"hd.img"
+	  - following deprecation of "other.img", reintegrate big modules in
+	relevant boot disks
+
+2001/01/29  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm, share/po/et.po: updated Estonian file
+
+2001/01/29  Pixel  <pixel@mandrakesoft.com>
+
+	* detect_devices.pm (getCompaqSmartArray): /proc/array/ida0 can contain
+	more than one ida/c0d0p*
+
 2001/01/28  dam's  <damien@mandrakesoft.com>
 
 	* share/help.xpm, network.pm, ChangeLog, netconnect.pm: updated
