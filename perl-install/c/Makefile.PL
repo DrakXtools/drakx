@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 
 my $libs = '-L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc';
-$libs .= ' -lrpm -ldb1 -lz' if $ENV{C_RPM};
+$libs .= ' -lrpm -lrpmio -ldb1 -lz' if $ENV{C_RPM};
 
 WriteMakefile(
     'NAME'	=> 'stuff',
