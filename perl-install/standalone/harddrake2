@@ -103,7 +103,7 @@ my @menu_items =
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
        sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
-     [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } }, undef, '<CheckItem>' ],
+     [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } }, undef, '<Item>' ],
      [ $menus{help}.N("/_Fields description"), undef, sub {
            if ($current_device) {
                create_dialog(N("Harddrake help"), 
@@ -113,15 +113,15 @@ my @menu_items =
                create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
            }
        },
-       undef, '<CheckItem>'
+       undef, '<Item>'
      ],
-     [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<CheckItem>' ],
+     [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<Item>' ],
      [ $menus{help}.N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
                          N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
 Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::version) .
                          formatAlaTeX($::license));
-       }, undef, '<CheckItem>'
+       }, undef, '<Item>'
      ]
     );
 
@@ -179,8 +179,8 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                             ),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
-                                                         gtksignal_connect(Gtk2::Button->new($menus{options}), 'event' => popup_menu($opt_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new($menus{help}), 'event' => popup_menu($help_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("Options")), 'event' => popup_menu($opt_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new(N("help")), 'event' => popup_menu($help_menu), $menubar),
                                                          gtksignal_connect(Gtk2::Button->new(N("Quit")),
                                                                            'clicked' => \&quit_global),
                                                          ),
@@ -349,8 +349,10 @@ sub show_hide {
 
 
 sub strip_first_underscore {
-    join '', map { s/([^_]*)_(.*)/$1$2/; $_ } @_;
+    join '', map { s/_//; $_ } @_;
 }
+
+sub strip_first_slash { print "PROCESS \"$_\" => "; s!/!!; print "\"$_\"\n"; $_ }
 
 sub rename_field {
     my ($dev, $field, $new_field) = @_;
