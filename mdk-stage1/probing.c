@@ -163,17 +163,13 @@ static void probe_that_type(enum driver_type type)
 					log_message("PCI: device %x %x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
-						/* insmod takes time, let's use the wait message */
-						wait_message("Installing driver for SCSI adapter:\n \n%s", pcidb[i].name);
-						garb = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
-						remove_wait_message();
-						warning_insmod_failed(garb);
+						stg1_info_message("About to load driver for SCSI adapter:\n \n%s", pcidb[i].name);
+						warning_insmod_failed(my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL));
 					}
 #endif
 #ifndef DISABLE_NETWORK
 					if (type == NETWORK_DEVICES) {
-						/* insmod is quick, let's use the info message */
-						stg1_info_message("Detected network device:\n \n%s", pcidb[i].name);
+						stg1_info_message("About to load driver for network device:\n \n%s", pcidb[i].name);
 						prepare_intf_descr(pcidb[i].name);
 						warning_insmod_failed(my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL));
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */
