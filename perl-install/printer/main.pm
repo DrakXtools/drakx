@@ -2051,7 +2051,7 @@ sub autodetectionentry_for_uri {
 		return $p;
 	    }
 	} else {
-	    my $model = $1 if $ptaldevice =~ /^usb:(.*)$/;
+	    my $model = $2 if $ptaldevice =~ /^(usb|par):(.*)$/;
 	    $model =~ s/_/ /g;
 	    foreach my $p (@autodetected) {
 		next if !$p->{val}{MODEL} ||
