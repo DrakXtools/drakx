@@ -154,8 +154,7 @@ sub create_steps_window {
     $w->{rwindow}->set_title('skip');
 
     $steps{$_} ||= gtkcreate_pixbuf("steps_$_") foreach qw(on off);
-    my $category = sub { gtkset_markup(Gtk2::Label->new,
-				       $o->{doc} ? $_[0] : '<span foreground="gray81">' . $_[0] . '</span>') };
+    my $category = sub { gtkset_name(Gtk2::Label->new($_[0]), 'Step-categories') };
 
     gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = $category->(N("System installation")), '');
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
