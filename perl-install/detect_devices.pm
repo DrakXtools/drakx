@@ -196,7 +196,7 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableUsb { index($_[0]{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0 }
+sub isRemovableUsb { index($_[0]{usb_media_type}, 'Mass Storage|') == 0 && usb2removable($_[0]) }
 sub isFloppyUsb { $_[0]{usb_driver} eq 'Removable:floppy' }
 sub isRemovableDrive { 
     my ($e) = @_;
@@ -725,24 +725,32 @@ sub usb_description2removable {
     local ($_) = @_;
     return 'camera' if /\bcamera\b/i;
     return 'memory_card' if /\bmemory\s?stick\b/i || /\bcompact\s?flash\b/i || /\bsmart\s?media\b/i;
+    return 'memory_card' if /DiskOnKey/i || /IBM-DMDM/i;
+    return 'zip' if /\bzip\s?(100|250|750)/i;
+    return 'floppy' if /\bLS-?120\b/i;
     return;
+}
+
+sub usb2removable {
+    my ($e) = @_;
+    $e->{usb_driver} or return;
+
+    if ($e->{usb_driver} =~ /Removable:(.*)/) {
+	return $1;
+    } elsif (my $name = usb_description2removable($e->{usb_description})) {
+	return $name;
+    }
+    undef;
 }
 
 sub suggest_mount_point {
     my ($e) = @_;
 
-    if (isRemovableUsb($e)) {
-	if ($e->{usb_driver} =~ /Removable:(.*)/) {
-	    return $1;
-	} elsif (my $name = usb_description2removable($e->{usb_description})) {
-	    return $name;
-	} else {
-	    return 'removable';
-	}
-    }
-
     my $name = $e->{media_type};
     if (member($name, 'hd', 'fd')) {
+	if (exists $e->{usb_driver}) {
+	    return usb2removable($e) || 'removable';
+	}
 	if (isZipDrive($e)) {
 	    $name = 'zip';
 	} elsif ($name eq 'fd') {
