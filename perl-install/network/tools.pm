@@ -248,10 +248,10 @@ sub get_default_gateway_interface {
     `$::prefix/sbin/ip route show` =~ /^default.*\s+dev\s+(\S+)/m && $1 ||
     $netc->{GATEWAYDEV} ||
     $netc->{GATEWAY} && find_matching_interface($intf, $netc->{GATEWAY}) ||
-    find { get_interface_type($intf->{$_}) eq 'adsl' } @intfs ||
-    find { get_interface_type($intf->{$_}) eq 'isdn' && text2bool($intf->{$_}{DIAL_ON_IFUP}) } @intfs ||
-    find { get_interface_type($intf->{$_}) eq 'modem' } @intfs ||
-    find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs;
+    (find { get_interface_type($intf->{$_}) eq 'adsl' } @intfs) ||
+    (find { get_interface_type($intf->{$_}) eq 'isdn' && text2bool($intf->{$_}{DIAL_ON_IFUP}) } @intfs) ||
+    (find { get_interface_type($intf->{$_}) eq 'modem' } @intfs) ||
+    (find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs);
 }
 
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
