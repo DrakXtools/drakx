@@ -395,7 +395,8 @@ sub ask_from_real {
 sub ask_browse_tree_info {
     my ($o, $title, $message, $common) = @_;
     $common->{interactive_help} ||= $common->{interactive_help_id} && sub { $o->interactive_help_get_id($common->{interactive_help_id}) };
-    add2hash_($common, { ok => N("Ok"), cancel => N("Cancel") });
+    add2hash_($common, { ok => $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok"), 
+			 cancel => $::isWizard ? N("<- Previous") : N("Cancel") });
     add2hash_($common, { title => $title, message => $message });
     add2hash_($common, { grep_allowed_to_toggle      => sub { @_ },
 			 grep_unselected             => sub { grep { $common->{node_state}($_) eq 'unselected' } @_ },
