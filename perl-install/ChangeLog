@@ -1,3 +1,160 @@
+2003/08/18  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2003/08/18  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - fix up/down interface detection
+	  - do not wipe out IP and NETMASK when "No ip" is filled in
+	  - fix typo
+
+2003/08/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/id.po, share/po/cs.po, share/po/nb.po, share/po/uz@Cyrl.po,
+	share/po/uz.po: updated Czech, Indonesian, Norwegian and Uzbek files
+
+	* standalone/drakTermServ: splitted too big text into smaller chunks for
+	translators
+
+2003/08/18  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: progess -> progress typo
+
+2003/08/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: typo fix
+	(configure_lan) fix crash on interface enabling/disabling
+	(get_intf_status) factorize translations and use upcase initale
+	better message when no ip (aka interface down or broken)
+
+	* network/netconnect.pm, network/isdn.pm, network/modem.pm: fix some
+	previous callback in drakconnect wizard mode
+
+	* standalone/drakfloppy: perl_checker fixes
+	sort modules and directories in treeview
+	  - fix long-standing broken mkbootdisk call bug
+	  - btw fix the passing of mkinirtd arguments to mkbootdisk
+	  - save the modules list on exit and restore it on load
+	  - simplify modules list managment btw
+	  - consolidate some code in get_file_size()
+	try to be more user friendly:
+	  - if no error, display a success message, then exit
+	  - on error, instead of displaying the raw exit code that has no
+	meaning for
+	the end user, display in red the log message of mkbootdisk
+	  - remove insane expert button and so called expert frame
+	make testing mode usefull for debugging drakfloppy
+
+	* .perl_checker: 
+	  - we do not use anymore perl-GTK
+	  - let be able to parse ugtk2
+
+	* standalone/harddrake2: display the right information when no selected
+	device
+	use new create_dialog api to get better modal dialogs
+
+	* ugtk2.pm (_create_dialog, create_dialog) let support the same api as
+	new() and
+	threat transient option
+	(info_dialog) introduce another dialog helper
+	kill buggy and no more used gtkbuttonset()
+
+2003/08/17  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: allow hostname change in mcc
+	perl_checker
+
+2003/08/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+	updated Farsi and Hungarian files
+
+	* share/po/sk.po, share/po/es.po: updated Hungarian file
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/fa.po: updated Farsi and Hungarian files
+
+2003/08/17  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/08/16  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+	updated Bulgarian, Estonian, Basque, Hungarian, Albanian, Uzbek and
+	Chinese
+
+	* share/po/et.po, share/po/bg.po, share/po/sq.po, share/po/zh_CN.po,
+	share/po/eu.po, share/po/uz@Cyrl.po, share/po/uz.po: updated Bulgarian,
+	Estonian, Basque, Hungarian, Albanian, Uzbek and Chinese
+
+2003/08/15  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sq.po, share/po/lv.po, share/po/hu.po, share/po/eo.po,
+	share/po/cs.po, share/po/uz@Cyrl.po, share/po/sr@Latn.po,
+	share/po/uz.po, share/po/af.po, share/po/ga.po, share/po/id.po,
+	share/po/tg.po, share/po/sl.po, share/po/da.po, share/po/th.po,
+	share/po/hr.po, share/po/uk.po, share/po/ko.po, share/po/mt.po,
+	share/po/lt.po, share/po/bs.po, share/po/wa.po, share/po/sr.po,
+	share/po/nl.po, share/po/de.po, share/po/fi.po, share/po/ro.po,
+	share/po/he.po, share/po/tr.po, share/po/bg.po, share/po/fr.po,
+	share/po/zh_TW.po, share/po/DrakX.pot, share/po/es.po, share/po/cy.po,
+	share/po/it.po, share/po/pt.po, share/po/zh_CN.po, share/po/pt_BR.po,
+	share/po/sv.po, share/po/ru.po, share/po/is.po, share/po/ja.po,
+	share/po/be.po, share/po/ta.po, share/po/fa.po, share/po/el.po,
+	share/po/vi.po, share/po/et.po, share/po/sk.po, share/po/pl.po,
+	share/po/ar.po, share/po/ca.po, share/po/nb.po, share/po/eu.po,
+	share/po/gl.po, share/po/az.po: updated pot file
+
+2003/08/14  keld
+
+	* share/po/da.po: update
+	gi/perl-install/share/po/da.po
+	updates
+	soft/drakcronat/po/da.po soft/rpmdrake/po/da.po
+	soft/urpmi/po/da.po gi/perl-install/share/po/da.po
+	Updates
+	po/po/da.po gi/perl-install/share/po/da.po
+
+2003/08/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bg.po, share/po/nb.po: updated Bulgarian and Norwegian files
+	updated Turkish file
+
+	* share/po/sq.po, share/po/lv.po, share/po/hu.po, share/po/eo.po,
+	share/po/cs.po, share/po/uz@Cyrl.po, share/po/sr@Latn.po,
+	share/po/uz.po, share/po/af.po, share/po/ga.po, share/po/id.po,
+	share/po/tg.po, share/po/sl.po, share/po/da.po, share/po/th.po,
+	share/po/hr.po, share/po/uk.po, share/po/ko.po, share/po/mt.po,
+	share/po/lt.po, share/po/bs.po, share/po/wa.po, share/po/sr.po,
+	share/po/de.po, share/po/fi.po, share/po/ro.po, share/po/he.po,
+	share/po/tr.po, share/po/fr.po, share/po/zh_TW.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/cy.po, share/po/it.po, share/po/pt.po,
+	share/po/zh_CN.po, share/po/pt_BR.po, share/po/sv.po, share/po/ru.po,
+	share/po/is.po, share/po/ja.po, share/po/be.po, share/po/ta.po,
+	share/po/fa.po, share/po/el.po, share/po/vi.po, share/po/et.po,
+	share/po/sk.po, share/po/pl.po, share/po/ar.po, share/po/ca.po,
+	share/po/eu.po, share/po/gl.po, share/po/az.po: updated Turkish file
+
+	* share/po/nl.po: updated Dutch file
+	updated Turkish file
+
+2003/08/14  Pixel  <pixel at mandrakesoft.com>
+
+	* c/stuff.xs.pl: in floppy_info(), check ioctl success and use
+	FDPOLLDRVSTAT (copied from kudzu code)
+
+2003/08/14  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: start user definable crontab entry - sorry
+	translators, new strings :(
+
 2003/08/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po, share/po/eu.po,
@@ -18719,7 +18876,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.817 2003/08/07 01:00:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.818 2003/08/14 02:41:01 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
