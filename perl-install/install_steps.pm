@@ -139,7 +139,7 @@ sub selectInstallClass {
 
     if ($o->{partitioning}{use_existing_root} || $o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
-	my $p = fsedit::get_root_($o->{fstab}) || first(install_any::find_root_parts($o->{fstab}, $o->{prefix})) or die;
+	my $p = fsedit::get_root_($o->{fstab}) || (first(install_any::find_root_parts($o->{fstab}, $o->{prefix})) || die)->{part};
 	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
     } 
 }
