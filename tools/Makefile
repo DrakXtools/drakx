@@ -7,7 +7,7 @@ CFLAGS      = -Wall
 
 .PHONY: clean install $(DIRS)
 
-all: $(BASE)/depslist $(BASE)/hdlists $(DIRS) xhost+ install
+all: $(BASE)/depslist $(DIRS) xhost+ install
 
 $(DIRS):
 	make -C $@
@@ -24,10 +24,12 @@ xhost+: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
-$(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist_cz2
+$(BASE)/depslist: $(BASE)/hdlist.cz2
 	gendepslist2 -o $@ `cat $< | perl -pe 's|(.*)|'$(BASE)'/$$1|' `
 
-$(BASE)/hdlists $(BASE)/hdlist_cz2: $(RPMS)
+$(BASE)/hdlist.cz2: $(BASE)/hdlists
+
+$(BASE)/hdlists: $(RPMS)
 	genhdlists --noclean --distrib $(ROOTDEST)
 
 clean: 

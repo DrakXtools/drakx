@@ -185,8 +185,6 @@ sub setPackages($) {
 
 	pkgs::getDeps($o->{packages});
 
-	push @{$o->{base}}, @{delete($o->{"base_" . arch()}) || []};
-
 	$o->{compss} = pkgs::readCompss($o->{packages});
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $o->{compss});
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
@@ -195,12 +193,7 @@ sub setPackages($) {
 	push @l, "kapm" if $o->{pcmcia};
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { $o->{packages}{$_} } @l;
 
-	grep { !pkgs::packageByName($o->{packages}, $_) && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
-
-	foreach (@{$o->{base}}) {
-	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing base package $_"), next;
-	    pkgs::selectPackage($o->{packages}, $p, 1);
-	}
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
@@ -486,7 +479,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);

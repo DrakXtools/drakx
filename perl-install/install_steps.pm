@@ -17,6 +17,7 @@ use raid;
 use keyboard;
 use log;
 use fsedit;
+use loopback;
 use commands;
 use network;
 use any;
@@ -157,7 +158,9 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} or next;
 
 	unless ($_->{toFormat} = $_->{notFormatted} || $o->{partitioning}{autoformat}) {
-	    my $t = fsedit::typeOfPart($_->{device});
+	    my $t = isLoopback($_) ? 
+	      eval { fsedit::typeOfPart($o->{prefix} . loopback::file($_)) } :
+	      fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} = $_->{mntpoint} eq "/" ||
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
 	      (isFat({ type => $t }) ? !isFat($_) : $t != $_->{type});
@@ -655,8 +658,10 @@ sub setupBootloader($) {
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
-        lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab});
-        lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab});
+        eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
+	my $err = $@;
+        eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
+	die if $err;
     }
 }
 

@@ -213,7 +213,9 @@ sub choosePartitionsToFormat($$) {
     log::l("preparing to format $_->{mntpoint}") foreach grep { $_->{toFormat} } @l;
 
     my %label;
-    $label{$_} = (isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}) . "   ($_->{device})" foreach @l;
+    $label{$_} = sprintf("%s   (%s)", 
+			 isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}, 
+			 isLoopback($_) ? loopback::file($_) : $_->{device}) foreach @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { $label{$_} } @l ],

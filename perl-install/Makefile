@@ -56,7 +56,10 @@ install_pms: $(DIRS)
 get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	perl -pe "s/ARCH/$(ARCH)/g" share/list > /tmp/list
-#	perl -pi -e 's/00503/5.660/g' /tmp/list
+
+#	perl -pi -e 's/00503/6.0/g' /tmp/list
+#	see also /usr/lib/perl5/5.00503/ARCH-linux/Data/Dumper.pm
+
 	cat `../tools/specific_arch share/list` >> /tmp/list
 	find auto -follow -name "*.so" >> /tmp/list
 

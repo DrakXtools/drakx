@@ -6,7 +6,7 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :file);
+use common qw(:common :system :file :functional);
 use partition_table qw(:types);
 use commands;
 use fs;
@@ -79,17 +79,19 @@ sub inspect {
 
     if ($part->{isMounted}) {
 	$dir = ($prefix || '') . $part->{mntpoint};
+    } elsif ($part->{notFormatted} && !$part->{isFormatted}) {
+	$dir = '';
     } else {
 	mkdir $dir, 0700;
 	fs::mount($part->{device}, $dir, type2fs($part->{type}), 'rdonly');
     }
-    my $h = bless \$dir, "loopback::inspect";
-    common::add_f4before_leaving(sub {  
-	unless ($part->{isMounted}) {
+    my $h = before_leaving {
+	if (!$part->{isMounted} && $dir) {
 	    fs::umount($dir);
 	    unlink($dir)
 	}
-    }, $h, 'DESTROY');
+    };
+    $h->{dir} = $dir;
     $h;
 }
 
@@ -97,18 +99,31 @@ sub getFree {
     my ($dir, $part) = @_;
     my ($freespace);
 
-    if ($part->{isFormatted} || !$part->{notFormatted}) {
-	$freespace = $part->{size};
-    } else {
+    if ($dir) {
 	my $buf = ' ' x 20000;
 	syscall_('statfs', $dir, $buf) or return;
 	my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
 	$_ *= $blocksize / 512 foreach $free;
 	
 	$freespace = $free;
+    } else {
+	$freespace = $part->{size};
     }
+
     $freespace - sum map { $_->{size} } @{$part->{loopback} || []};
 }
+
+#- returns the size of the loopback file if it already exists
+#- returns -1 is the loopback file can't be used
+sub verifFile {
+    my ($dir, $file, $part) = @_;
+    -e "$dir$file" and return -s "$dir$file";
+
+    $_->{loopback_file} eq $file and return -1 foreach @{$part->{loopback} || []};
+
+    undef;
+}
+
 
 1;
 

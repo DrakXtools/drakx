@@ -135,16 +135,12 @@ sub format_part {
 sub formatMount_part {
     my ($part, $raid, $fstab, $prefix, $callback) = @_;
 
-    log::l("formatMount_part: $part->{mntpoint}\n");
-
     if (isLoopback($part)) {
 	formatMount_part($part->{device}, $raid, $fstab, $prefix, $callback);
     }
     if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
 	formatMount_part($p, $raid, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
     }
-
-    log::l("formatMount_part: $part->{mntpoint} really\n");
 
     if ($part->{toFormat}) {
 	$callback->($part) if $callback;
