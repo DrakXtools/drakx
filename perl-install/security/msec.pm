@@ -244,13 +244,12 @@ sub get_default_checks {
     my @checks = ();
 
     my $check_file = "$::prefix/var/lib/msec/security.conf";
-    my @ignore_list = qw(MAIL_USER);
 
     if (-e $check_file) {
         open F, $check_file;
         while (<F>) {
             ($check, undef) = split(/=/, $_);
-            push @checks, $check if (!(member($check, @ignore_list)))
+            push @checks, $check if (!(member($check, qw(MAIL_USER))))
         }
         close F;
     }
