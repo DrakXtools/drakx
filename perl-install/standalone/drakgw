@@ -13,8 +13,6 @@
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-$drakgw_version = "0.9.0";
-
 use lib qw(/usr/lib/libDrakX);
 
 use common qw(:system :file);
@@ -25,6 +23,7 @@ use c;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--expert]\n";
+/-v/ and die "version: $Id$";
 
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
@@ -32,12 +31,83 @@ $::isStandalone = 1;
 my $in = vnew interactive('su');
 
 
+my $drakgw_setup = "/etc/sysconfig/inet_sharing";
+
+sub start_daemons()
+{
+    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
+    grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+    (system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
+    (system("/etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
+    (system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
+    (system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
+    (system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
+    (system("/sbin/chkconfig --level 345 dhcpd on") == 0) or die "Could not chkconfig dhcpd";
+    
+    local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
+    print DRAKGW_SETUP "INET_SHARING=enabled\n";
+    close DRAKGW_SETUP;
+    1;
+}
+
+
+sub stop_daemons()
+{
+    grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
+    grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
+    (system("/sbin/chkconfig --level 345 named off") == 0) or die "Could not chkconfig named";
+    (system("/sbin/chkconfig --level 345 dhcpd off") == 0) or die "Could not chkconfig dhcpd";
+    
+    local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
+    print DRAKGW_SETUP "INET_SHARING=disabled\n";
+    close DRAKGW_SETUP;
+    1;
+}
+
+
+#- **********************************
+#- * 0nd step: verify if we are already set up
+
+if (-f $drakgw_setup)
+{
+    open DRAKGW_SETUP, "$drakgw_setup" or die "Can't open $drakgw_setup";
+    my @drakgw_setup_content = <DRAKGW_SETUP>;
+    close DRAKGW_SETUP;
+
+    if (grep(/enabled/, @drakgw_setup_content))
+    {
+	my $r = $in->ask_from_list(_("Internet Connection Sharing currently enabled"),
+				   _("The setup of Internet connection sharing has already been done.\n".
+				     "It's currently enabled.\n\n".
+				     "What would you like to do?"),
+				   [ "disable", "reconfigure", "dismiss" ]);
+	($r eq "disable") and stop_daemons() and $in->exit(0);
+	($r eq "dismiss") and $in->exit(0);
+    }
+    elsif (grep(/disabled/, @drakgw_setup_content))
+    {
+	my $r = $in->ask_from_list(_("Internet Connection Sharing currently disabled"),
+				   _("The setup of Internet connection sharing has already been done.\n".
+				     "It's currently disabled.\n\n".
+				     "What would you like to do?"),
+				   [ "enable", "reconfigure", "dismiss" ]);
+	($r eq "enable") and start_daemons() and $in->exit(0);
+	($r eq "dismiss") and $in->exit(0);
+    }
+    else
+    {
+	$in->ask_warn("Unrecognized config file", _("Config file content could not be interpreted."));
+	$in->exit(-1);
+    }
+}
+
+
+
 #- **********************************
 #- * 1st step: detect/setup
 
 $in->ask_okcancel(_("Internet Connection Sharing"),
-		  _("Your computer can be configured so that its Internet connection shall be shared ".
-		    "with other computers.\n".
+		  _("Your computer can be configured to share its Internet connection.\n\n".
 		    "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).\n\n".
 		    "Would you like to setup the Internet Connection Sharing?"), 1) or $in->exit(0);
 
@@ -86,8 +156,8 @@ my @all_cards = map { "Interface $_ (using module $aliased_devices{$_})" } (keys
 my $interface;
 if ($#all_cards == -1)
 {
-    $in->ask_warn(_("No NIC on your system!"), 
-		  _("No ethernet network adapter is currently configured on your\n".
+    $in->ask_warn(_("No network adapter on your system!"), 
+		  _("No ethernet network adapter is currently configured on your ".
 		    "system. Please run the hardware configuration tool."));
     $in->exit(0);
 }
@@ -101,8 +171,8 @@ elsif ($#all_cards == 0)
 else
 {
     $interface = $in->ask_from_list(_("Choose the network interface"),
-				    _("Here are the configured network adapters on your system; please\n".
-				      "choose which one to use to setup your Local Area Network."),
+				    _("Please choose what network adapter will be connected to your\n".
+				      "Local Area Network."),
 				    \@all_cards,
 				    );
     defined $interface or $in->exit(0);
@@ -115,7 +185,7 @@ my $device = $1;
 
 my $lan_address = "192.168.0.0";
 $::expert and ($lan_address = $in->ask_from_entry(_("Local Area Network specification"),
-						  _("You may now decide which class C network will be your LAN.\n"),
+						  _("You may now decide which class C network to use.\n"),
 						  _("Network:"), $lan_address,
 						 ) or $in->exit(0));
 ($lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/) or die "Invalid network.\n";
@@ -154,7 +224,7 @@ $in->ask_okcancel(_("Internet Connection Sharing - setup of $device"),
 #- **********************************
 #- * 2nd step: configure
 
-my $wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting daemons..."));
+my $wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting servers..."));
 
 #- setup the /etc/sysconfig/network-script/ script
 
@@ -205,11 +275,11 @@ print RCFIREWALL <<EOF;
 #       RealAudio WILL function but in TCP mode.  This can cause a reduction
 #       in sound quality
 #
-#/sbin/modprobe ip_masq_raudio
+/sbin/modprobe ip_masq_raudio
 
 # Supports the masquerading of IRC DCC file transfers
 #
-#/sbin/modprobe ip_masq_irc
+/sbin/modprobe ip_masq_irc
 
 
 # Supports the masquerading of Quake and QuakeWorld by default.  This modules is
@@ -223,16 +293,16 @@ print RCFIREWALL <<EOF;
 #/sbin/modprobe ip_masq_quake
 #
 #Quake I/II/III / QuakeWorld (ports 26000, 27000, 27910, 27960)
-#/sbin/modprobe ip_masq_quake 26000,27000,27910,27960
+/sbin/modprobe ip_masq_quake 26000,27000,27910,27960
 
 
 # Supports the masquerading of the CuSeeme video conferencing software
 #
-#/sbin/modprobe ip_masq_cuseeme
+/sbin/modprobe ip_masq_cuseeme
 
 #Supports the masquerading of the VDO-live video conferencing software
 #
-#/sbin/modprobe ip_masq_vdolive
+/sbin/modprobe ip_masq_vdolive
 
 
 #CRITICAL:  Enable IP forwarding since it is disabled by default since
@@ -331,6 +401,9 @@ close DHCPDCONF;
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
 my $conf_linuxconf = "/etc/conf.linuxconf";
+-f $conf_linuxconf or system("urpmi --auto linuxconf");
+-f $conf_linuxconf or ($in->ask_warn('', _("Could not install linuxconf RPM with urpmi.")) and $in->exit(0));
+
 open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
 my @conf_linuxconf_content = <CONF_LINUXCONF>;
 close CONF_LINUXCONF;
@@ -354,26 +427,23 @@ $f = "/var/named/named.local";
 
 #- start the daemons
 
-(system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
-(system("/etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
-grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
-(system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
-(system("/sbin/chkconfig --level 345 dhcpd on") == 0) or die "Could not chkconfig dhcpd";
-grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
-(system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
-(system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
+start_daemons();
 
+
+#- bye-bye message
 
 undef $wait_configuring;
+
+-f "/etc/sysconfig/ipchains" and $in->ask_warn(_("Firewalling configuration detected.!"),
+					       _("Warning! An existing firewalling configuration has been detected.\n".
+						 "It will probably override forwarding and masquerading configuration, please fix."));
+
 $in->ask_warn(_("Everything configured!"), 
 	      _("Everything has been configured.\n".
-		"You may now connect computers on your Local Area Network,\n".
-		"using automatic DHCP network configuration."));
+		"You may now share Internet connection with other computers on your Local Area Network, ".
+		"using automatic network configuration (DHCP)."));
 
 
 $in->exit(0);
 
 
- 
-# 0.9.0 Thu Aug 17 15:03:40 2000
-#   - first version
