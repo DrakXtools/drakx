@@ -403,8 +403,8 @@ sub getSerialModem {
     foreach my $port (map { "ttyS$_" } (0..7)) {
 	next if $mouse->{device} =~ /$port/;
      my $device = "/dev/$port";
-	next unless -e $device && hasModem($device);
-     $serialprobe{$device}->{device} = $device;
+	next if !-e $device || !hasModem($device);
+     $serialprobe{$device}{device} = $device;
      push @modems, $serialprobe{$device};
     }
     my @devs = pcmcia_probe();
@@ -430,7 +430,7 @@ sub getSagem() {
 # generate from the following from eci driver sources:
 # perl -e 'while (<>) { print qq("$1$2",\n"$3$4",\n) if /\b([a-z\d]*)\s*([a-z\d]*)\s*([a-z\d]*)\s*([a-z\d]*)$/ }' <modems.db|sort|uniq
 sub getECI() {
-    my @ids =(
+    my @ids = (
               "05090801",
               "05472131",
               "06590915",
