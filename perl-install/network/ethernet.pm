@@ -11,7 +11,6 @@ use network::tools;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(conf_network_card_backend);
 
 sub write_ether_conf {
     my ($in, $modules_conf, $netcnx, $netc, $intf) = @_;
@@ -85,42 +84,6 @@ sub get_eth_cards_names {
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
 }
 
-
-#- conf_network_card_backend : configure the specified network interface
-# WARNING: you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1)
-#          or load_category_backend before calling this function.
-#- input
-#-  $netc
-#-  $intf
-#-  $type : type of interface, must be given if $interface is : string : "static" or "dhcp"
-#-  $interface : set this interface and return it in a proper form.
-#-  $ipadr : facultative, ip address of the interface : string
-#-  $netadr : facultative, netaddress of the interface : string
-#- when $interface is given, informations are written in $intf and $netc.
-#- $intf output: $device is the result of
-#-  $intf->{$device}->{DEVICE} : which device is concerned : $device is the result of $interface =~ /(eth[0-9]+)/; my $device = $1;;
-#-  $intf->{$device}->{BOOTPROTO} : $type
-#-  $intf->{$device}->{NETMASK} : '255.255.255.0'
-#-  $intf->{$device}->{NETWORK} : $netadr
-#-  $intf->{$device}->{ONBOOT} : "yes"
-#- $netc output:
-#-  $netc->{NET_DEVICE} : this is used to indicate that this eth card is used to connect to internet : $device
-#- output:
-#-  $device : returned passed interface name
-sub conf_network_card_backend {
-    my ($netc, $intf, $type, $interface, $o_ipadr, $o_netadr) = @_;
-    #-type =static or dhcp
-
-    $interface =~ /eth[0-9]+/ or die("the interface is not an ethx");
-    
-    # FIXME: this is wrong regarding some wireless interfaces or/and if user play if ifname(1):
-    $netc->{$_} = $interface foreach qw(NET_DEVICE NET_INTERFACE); #- one consider that there is only ONE Internet connection device..
-    
-    @{$intf->{$interface}}{qw(DEVICE BOOTPROTO NETMASK NETWORK ONBOOT)} = ($interface, $type, '255.255.255.0', $o_netadr, 'yes');
-    
-    $intf->{$interface}{IPADDR} = $o_ipadr if $o_ipadr;
-    $interface;
-}
 
 # automatic net aliases configuration
 sub configure_eth_aliases {
