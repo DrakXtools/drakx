@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-05-10 19:25+0200\n"
+"POT-Creation-Date: 2000-05-11 22:37+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -1238,6 +1238,7 @@ msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
 msgstr ""
 "Du trenger et virkelig filsystem (ext2, reiserfs) for dette "
 "monteringspunktet\n"
+"monteringspunktet\n"
 
 #: ../../fsedit.pm_.c:355
 #, c-format
@@ -2307,12 +2308,20 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../../install_steps.pm_.c:380
+#: ../../install_steps.pm_.c:318
+msgid ""
+"Some important packages didn't get installed properly.\n"
+"Either your cdrom drive or your cdrom is defective.\n"
+"Check the cdrom on an installed computer using \"rpm -qpl "
+"Mandrake/RPMS/*.rpm\"\n"
+msgstr ""
+
+#: ../../install_steps.pm_.c:385
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:732
+#: ../../install_steps.pm_.c:737
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -2563,10 +2572,11 @@ msgid "You can't unselect this package. It must be upgraded"
 msgstr "Du kan ikke fjerne denne pakken. Den må oppgraderes"
 
 #: ../../install_steps_gtk.pm_.c:489
-#, fuzzy
 msgid ""
 "You can't select this package as there is not enough space left to install it"
-msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
+msgstr ""
+"Du kan ikke velge denne pakken da det ikke er igjen nok plass til å "
+"installere denne"
 
 #: ../../install_steps_gtk.pm_.c:492
 msgid "The following packages are going to be installed/removed"
@@ -3388,9 +3398,13 @@ msgstr ""
 "Ønsker du å prøve XFree 4.0?"
 
 #: ../../install_steps_interactive.pm_.c:1015
-#: ../../install_steps_interactive.pm_.c:1166
+#: ../../install_steps_interactive.pm_.c:1167
 msgid "Try to find PCI devices?"
 msgstr "Prøve å finne PCI-enheter?"
+
+#: ../../install_steps_interactive.pm_.c:1034
+msgid "Do you want to generate an auto install floppy for linux replication?"
+msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:1036
 #, c-format
@@ -3401,7 +3415,7 @@ msgstr "Sett inn en tom diskett i stasjon %s"
 msgid "Creating auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
 
-#: ../../install_steps_interactive.pm_.c:1067
+#: ../../install_steps_interactive.pm_.c:1068
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -3411,7 +3425,7 @@ msgstr ""
 "\n"
 "Ønsker du virkelig å avslutte nå?"
 
-#: ../../install_steps_interactive.pm_.c:1074
+#: ../../install_steps_interactive.pm_.c:1075
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -3433,26 +3447,26 @@ msgstr ""
 "Informasjon om konfigurering av systemet ditt finnes i post\n"
 "install-kapittelet i Official Linux Mandrake User's Guide."
 
-#: ../../install_steps_interactive.pm_.c:1083
+#: ../../install_steps_interactive.pm_.c:1084
 msgid "Shutting down"
 msgstr "Stenger av"
 
-#: ../../install_steps_interactive.pm_.c:1095
+#: ../../install_steps_interactive.pm_.c:1096
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Installerer driver for %s kort %s"
 
-#: ../../install_steps_interactive.pm_.c:1096
+#: ../../install_steps_interactive.pm_.c:1097
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../../install_steps_interactive.pm_.c:1106
+#: ../../install_steps_interactive.pm_.c:1107
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Hvilken %s driver skal jeg prøve?"
 
-#: ../../install_steps_interactive.pm_.c:1114
+#: ../../install_steps_interactive.pm_.c:1115
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -3471,20 +3485,20 @@ msgstr ""
 "burde\n"
 "ikke forårsake noen skader."
 
-#: ../../install_steps_interactive.pm_.c:1119
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Autoprobe"
 msgstr "Automatisk sondering"
 
-#: ../../install_steps_interactive.pm_.c:1119
+#: ../../install_steps_interactive.pm_.c:1120
 msgid "Specify options"
 msgstr "Spesifiser opsjoner"
 
-#: ../../install_steps_interactive.pm_.c:1123
+#: ../../install_steps_interactive.pm_.c:1124
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Du kan nå gi dens opsjoner til modul %s."
 
-#: ../../install_steps_interactive.pm_.c:1129
+#: ../../install_steps_interactive.pm_.c:1130
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -3495,11 +3509,11 @@ msgstr ""
 "Opsjonene er i format ``name=value name2=value2 ...''.\n"
 "F.eks., ``io=0x300 irq=7''"
 
-#: ../../install_steps_interactive.pm_.c:1132
+#: ../../install_steps_interactive.pm_.c:1133
 msgid "Module options:"
 msgstr "Modulopsjoner:"
 
-#: ../../install_steps_interactive.pm_.c:1142
+#: ../../install_steps_interactive.pm_.c:1143
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -3508,51 +3522,51 @@ msgstr ""
 "Lasting av modul %s feilet.\n"
 "Ønsker du å prøve igjen med andre parametere?"
 
-#: ../../install_steps_interactive.pm_.c:1155
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Try to find PCMCIA cards?"
 msgstr "Prøve å finne PCMCIA kort?"
 
-#: ../../install_steps_interactive.pm_.c:1156
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "Configuring PCMCIA cards..."
 msgstr "Konfigurerer PCMCIA kort..."
 
-#: ../../install_steps_interactive.pm_.c:1156
+#: ../../install_steps_interactive.pm_.c:1157
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:1175
+#: ../../install_steps_interactive.pm_.c:1176
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1177
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1178
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:458 ../../printerdrake.pm_.c:124
 msgid "No"
 msgstr "Nei"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1180 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:458
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../install_steps_interactive.pm_.c:1180
+#: ../../install_steps_interactive.pm_.c:1181
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
-#: ../../install_steps_interactive.pm_.c:1196
+#: ../../install_steps_interactive.pm_.c:1197
 msgid "Bringing up the network"
 msgstr "Henter opp nettverket"
 
-#: ../../install_steps_interactive.pm_.c:1201
+#: ../../install_steps_interactive.pm_.c:1202
 msgid "Bringing down the network"
 msgstr "Tar ned nettverket"
 
@@ -3868,7 +3882,7 @@ msgstr "Den markerte inngangen vil bli startet automatisk om %d sekunder."
 
 #: ../../lilo.pm_.c:439
 msgid "not enough room in /boot"
-msgstr ""
+msgstr "ikke nok plass i /boot"
 
 #. -PO: "Desktop" and "Start Menu" are the name of the directories found in c:\windows
 #: ../../lilo.pm_.c:518
@@ -4088,17 +4102,10 @@ msgstr "bra"
 msgid "interesting"
 msgstr "interessant"
 
-#: ../../pkgs.pm_.c:28 ../../pkgs.pm_.c:29
+#: ../../pkgs.pm_.c:28 ../../pkgs.pm_.c:29 ../../pkgs.pm_.c:30
+#: ../../pkgs.pm_.c:31
 msgid "maybe"
 msgstr "kanskje"
-
-#: ../../pkgs.pm_.c:30
-msgid "useless"
-msgstr "ubrukbar"
-
-#: ../../pkgs.pm_.c:31
-msgid "garbage"
-msgstr "søppel"
 
 #: ../../pkgs.pm_.c:33
 msgid "i18n (important)"
@@ -4977,6 +4984,12 @@ msgstr "Finner tillatelser"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
+
+#~ msgid "useless"
+#~ msgstr "ubrukbar"
+
+#~ msgid "garbage"
+#~ msgstr "søppel"
 
 #~ msgid ""
 #~ "Some true type fonts from windows have been found on your computer.\n"
