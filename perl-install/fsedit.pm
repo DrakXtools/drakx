@@ -38,7 +38,7 @@ use fs;
 );
 foreach (values %suggestions) {
     if (arch() =~ /ia64/) {
-	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, type => 0xb, ratio => 1, maxsize => 150 << 11 }, @$_);
+	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, type => 0xef, ratio => 1, maxsize => 150 << 11 }, @$_);
     }
 }
 
