@@ -1,5 +1,23 @@
 #!/usr/bin/perl -w
 
+# Theme editor
+
+# Copyright (C) 1999 damien@mandrakesoft.com
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
 use Gtk;
 use lib qw(/usr/lib/libDrakX);
 use my_gtk qw(:helpers :wrappers);
@@ -7,9 +25,19 @@ use common;
 
 init Gtk;
 
+if ("@ARGV" =~ /-h/) {
+    print q(DrakX theme editor by dam's.
+
+Options :
+    -f specify the input theme file. Default is themes-mdk.rc
+    -o specify the output file. Default is input file.
+    -h print this help.
+)
+}
 my ($file) = "@ARGV" =~ /-f (.+)/;
+my ($file2) = "@ARGV" =~ /-o (.+)/;
 $file ||= "themes-mdk.rc";
-print "+++++++ $file\n";
+$file2 ||= $file;
 my $window1 = new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_title(_("Theme editor"));
@@ -34,8 +62,8 @@ foreach (cat_($file)) {
 	$do_style = 1;
     }
     if(/(\w+)\[(\w+)\]\s*=\s*\{\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*\}/) {
-#	print " - $_ - \n" foreach ($1, $2, $3, $4, $5);
-	print " ++ $style \n";
+	my ($a1, $a2) = ($1, $2);
+	my $style2 = $style;
 	if ($do_style) {
 	    $cpt == 0 and gtkpack__($vb, $hb = new Gtk::HBox(0,5));
 	    $cpt++;
@@ -57,7 +85,7 @@ foreach (cat_($file)) {
 			   0, gtksignal_connect(gtkset_relief(my $b = new Gtk::Button(), 'none'), clicked => sub {
 						    $c = change_color($c);
 						    $gc->set_foreground($c);
-						    $color{$style}{$1}{$2} = $c;
+						    $color{$style2}{$a1}{$a2} = $c;
 						    $_[0]->draw(undef);
 						})
 			  )
@@ -80,9 +108,28 @@ Gtk->main;
 Gtk->exit(0);
 
 sub doit {
-    require Data::Dumper;
-    print " --------------- \n " . Data::Dumper->Dump([%color],['color']) . "\n";
+    system("rm $file2");
+    foreach (cat_($file)) {
+	my $output;
+	chomp;
+	if(/style "(.*)"/) {
+	    $style = $1;
+	    $do_style = 1;
+	}
+	if(/(\w+)\[(\w+)\]\s*=\s*\{\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*\}/) {
+	    #	print " - $_ - \n" foreach ($1, $2, $3, $4, $5);
+	    my ($a1, $a2) = ($1, $2);
+	    my $c = $color{$style}{$1}{$2};
+	    $output = $1 . "[" . $2 . "] = { " .
+	      round($c->red()/65535*100)/100 . ", " . round($c->green()/65535*100)/100 . ", " . round($c->blue()/65535*100)/100 . " }";
+	}
+	/\{/ and $ref++;
+	if (/\}/) { $ref--; $ref == 0 and undef $style }
+	$output ||= $_;
+	system("echo '$output' >> $file2");
+    }
 }
+
 sub change_color {
     my ($color) = @_;
     my $window = new Gtk::Window -toplevel;
