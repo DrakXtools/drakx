@@ -6,6 +6,7 @@ use any;
 use detect_devices;
 use common qw(:file);
 use vars qw(@ISA @EXPORT);
+use globals qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);

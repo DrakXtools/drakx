@@ -7,6 +7,7 @@ use detect_devices;
 use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
+use globals qw($in $prefix $install);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig modem_detect_backend);

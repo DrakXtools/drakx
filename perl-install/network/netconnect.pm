@@ -18,16 +18,16 @@ use commands;
 #require Data::Dumper;
 
 use network::tools;
+use globals qw($in $prefix $install);
 
 $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
 $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
 $connect_prog = "/etc/sysconfig/network-scripts/net_cnx_pg";
 
-sub init { ($prefix, $in, $install) = @_ }
-
 #- intro is called only in standalone.
 sub intro {
-    ($prefix, my $netcnx, $in, $install) = @_;
+    (my $prefix, my $netcnx, my $in, my $install) = @_;
+    globals::init(in => $in, prefix => $prefix, install => $install);
     my ($netc, $mouse, $intf) = ({}, {}, {});
     my $text;
     my $connected;
@@ -85,7 +85,8 @@ sub detect {
 }
 
 sub main {
-    ($prefix, my $netcnx, my $netc, my $mouse, $in, my $intf, $install, my $first_time, my $direct_fr) = @_;
+    (my $prefix, my $netcnx, my $netc, my $mouse, my $in, my $intf, my $install, my $first_time, my $direct_fr) = @_;
+    globals::init(in => $in, prefix => $prefix, install => $install);
     $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($netcnx, $netc); # REDONDANCE with intro. FIXME
