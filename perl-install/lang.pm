@@ -540,7 +540,7 @@ my %gtkqt_im =
            },
    'x-unikey' => {
                   GTK_IM_MODULE => 'xim',
-                  XMODIFIERS => '@im:unikey'
+                  XMODIFIERS => '@im=unikey'
                  },
 );
 
