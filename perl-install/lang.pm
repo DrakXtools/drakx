@@ -46,7 +46,7 @@ our %langs = (
 'eu' =>    [ 'Euskara (Basque)',    'Euskara',           'eu_ES', '1    ', 'iso-8859-15' ],
 'fa' =>    [ 'Farsi (Iranian)',     'AA Farsi',          'fa_IR', ' 2   ', 'utf_ar' ],
 'fi' =>    [ 'Finnish (Suomi)',     'Suomi',             'fi_FI', '1    ', 'iso-8859-15' ],
-#'fo' =>   [ 'Faroese',             'Foroyskt',          'fo_FO', '1    ', 'iso-8859-1' ],
+'fo' =>    [ 'Faroese',             'Foroyskt',          'fo_FO', '1    ', 'iso-8859-1' ],
 'fr' =>    [ 'French',              'Francais',          'fr_FR', '1 345', 'iso-8859-15' ],
 'ga' =>    [ 'Gaelic (Irish)',      'Gaeilge',           'ga_IE', '1    ', 'iso-8859-15', 'ga:en_IE:en_GB:en' ],
 #'gd' =>   [ 'Gaelic (Scottish)',   'Gaidhlig',          'gb_GB', '1    ', 'utf_lat8',    'gd:en_GB:en' ],
@@ -59,7 +59,8 @@ our %langs = (
 'hr' =>    [ 'Croatian',            'Hrvatski',          'hr_HR', '1    ', 'iso-8859-2' ],
 'hu' =>    [ 'Hungarian',           'Magyar',            'hu_HU', '1    ', 'iso-8859-2' ],
 'hy' =>    [ 'Armenian',            'ZZ Armenian',       'hy_AM', ' 2   ', 'utf_hy' ],
-#'ia' =>   [ 'Interlingua',         'Interlingua',       'ia_XX', '1   5', 'utf8' ],
+# locale not done yet
+'ia' =>    [ 'Interlingua',         'Interlingua',       'ia_XX', '1   5', 'utf8' ],
 'id' =>    [ 'Indonesian',          'Bahasa Indonesia',  'id_ID', ' 2   ', 'iso-8859-1' ],
 'is' =>    [ 'Icelandic',           'Islenska',          'is_IS', '1    ', 'iso-8859-1' ],
 'it' =>    [ 'Italian',             'Italiano',          'it_IT', '1    ', 'iso-8859-15' ],
@@ -69,7 +70,8 @@ our %langs = (
 #-'kl' =>  [ 'Greenlandic (inuit)', 'ZZ Inuit',          'kl_GL', '    5', 'iso-8859-1' ],
 'kn' =>    [ 'Kannada',             'ZZ Kannada',        'kn_IN', ' 2   ', 'utf_kn' ],
 'ko' =>    [ 'Korean',              'ZZ Korea',          'ko_KR', ' 2   ', 'ksc5601' ],
-#-'ku' =>  [ 'Kurdish',             'Kurdi',             'ku_TR', ' 2   ', 'iso-8859-9' ],
+# locale not done yet
+'ku' =>    [ 'Kurdish',             'Kurdi',             'ku_TR', ' 2   ', 'iso-8859-9' ],
 #-'kw' =>  [ 'Cornish',             'Kernewek',          'kw_GB', '1    ', 'utf_lat8',    'kw:en_GB:en' ],
 # no li_NL locale yet; using nl_NL instead and defning LANGUAGE
 'li' =>    [ 'Limbourgish',         'Limburgs',          'nl_NL', '1    ', 'iso-8859-15' ],
@@ -84,10 +86,12 @@ our %langs = (
 'ms' =>    [ 'Malay',               'Bahasa Melayu',     'ms_MY', ' 2   ', 'iso-8859-1' ],
 'mt' =>    [ 'Maltese',             'Maltin',            'mt_MT', '1 3  ', 'unicode' ],
 'nb' =>    [ 'Norwegian Bokmaal',   'Norsk, Bokmal',     'no_NO', '1    ', 'iso-8859-1',  'nb:no' ],
-#-'ne' =>  [ 'Nepali',              'ZZ Nepali',         'ne_IN', ' 2   ', 'unicode' ],
+'nds' =>   [ 'Low Saxon',           'Platduutsch',       'nds_DE','1    ', 'iso-8859-1' ],
+# locale?
+'ne' =>    [ 'Nepali',              'ZZ Nepali',         'ne_IN', ' 2   ', 'unicode' ],
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
-#-'oc' =>  [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
+'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
 #-'ph' =>  [ 'Pilipino',            'Pilipino',          'ph_PH', ' 2   ', 'iso-8859-1',  'ph:tl' ],
 'pl' =>    [ 'Polish',              'Polski',            'pl_PL', '1    ', 'iso-8859-2' ],
 'pt' =>    [ 'Portuguese',          'Portugues',         'pt_PT', '1 3  ', 'iso-8859-15', 'pt_PT:pt:pt_BR' ],
@@ -118,8 +122,10 @@ our %langs = (
 've' =>    [ 'Venda',               'Venda',             'en_ZA', '  3  ', 'iso-8859-1', 've:ven:en_ZA' ],
 'vi' =>    [ 'Vietnamese',          'Tieng Viet',        'vi_VN', ' 2   ', 'utf_vi' ],
 'wa' =>    [ 'Walon',               'Walon',             'wa_BE', '1    ', 'iso-8859-15', 'wa:fr_BE:fr' ],
+#- locale not done yet
+'wen' =>   [ 'Sorbian',             'XX Sorbian',        'wen_XX','1    ', 'iso-8859-1' ],
 'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
-#-'yi' =>  [ 'Yiddish',             'AA Yidish',         'yi_US', '1   5', 'utf_he' ],
+'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1   5', 'utf_he' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
 'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
@@ -628,7 +634,7 @@ sub get_kde_lang {
 
     #- get it using 
     #- echo C $(rpm -qp --qf "%{name}\n" /RPMS/kde-i18n-*  | sed 's/kde-i18n-//')
-    my @valid_kde_langs = qw(C af ar az bg bs ca cs da de el en_GB eo es et eu fa fi fr he hr hu is it ja ko lt lv mk mt nb nl nn pl pt pt_BR ro ru se sk sl sr sv ta th tr uk vi xh zh_CN zh_TW zu);
+    my @valid_kde_langs = qw(C af ar az be bg br bs ca cs cy da de el en_GB eo es et eu fa fi fo fr ga gl he hr hu id is it ja ko ku lo lt lv mi mk mn mt nb nl nn nso oc pl pt pt_BR ro ru se sk sl sr ss sv ta th tr uk uz ven vi wa wen xh zh_CN zh_TW zu);
     my %valid_kde_langs; @valid_kde_langs{@valid_kde_langs} = ();
 
     my $valid_lang = sub {
