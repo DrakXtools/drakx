@@ -417,6 +417,10 @@ if (check_for_xserver()) {
 }
 
 sub all_user_list() {
+	if ($nonroot_user) {
+		@user_list_all = $ENV{USER};
+		return;
+	}
     my $passwdfile = "/etc/passwd";
     my $user;
     my $uid;
@@ -1919,7 +1923,7 @@ sub advanced_what_other() {
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => sub { filedialog() }),
 				gtksignal_connect(Gtk2::Button->new(N("Remove Selected")), clicked => sub { 
-					$list_model->remove($file_iter); 
+					$list_model->remove($file_iter) if $file_iter; 
 					my $iindex = 0; 
 					foreach (@list_other) {
 						if ($list_other[$iindex] eq $other_file) {
@@ -2782,8 +2786,7 @@ sub wizard_step3() {
 }
 
 sub wizard_step2() {
-    my $box2;    
-    
+    my $box2;    	
     gtkpack($advanced_box,
 		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
@@ -2791,7 +2794,7 @@ sub wizard_step2() {
 				1, new Gtk2::VBox(0, 5),
 				0, N("Please choose where you want to backup"),
 				0, gtkpack_(new Gtk2::HBox(0, 15),	      
-					0, my $check_wizard_hd = new Gtk2::CheckButton(N("on Hard Drive")),
+					0, my $check_wizard_hd = new Gtk2::CheckButton(N("On Hard Drive")),
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
@@ -2800,8 +2803,8 @@ sub wizard_step2() {
 						to_normal();
 					}), $where_hd),
 				),
-				0, gtkpack_(new Gtk2::HBox(0, 15),	      
-					0, my $check_wizard_net = new Gtk2::CheckButton(N("across Network")),
+				0, gtkpack_(new Gtk2::HBox(0, 15),
+					0, my $check_wizard_net = new Gtk2::CheckButton(N("Across Network")),
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
@@ -2811,19 +2814,23 @@ sub wizard_step2() {
 					}), $where_net),
 				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
- 					0, my $check_wizard_cd = new Gtk2::CheckButton(N("on CDROM")),
+ 					0, my $check_wizard_cd = new Gtk2::CheckButton(N("On CDROM")),
  					1, new Gtk2::VBox(0, 5),	
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
  						destroy_widget();
+						to_ok();
  						advanced_where_cd(\&wizard_step2);
+						to_normal();
  					}), $where_cd),
  				),
  				0, gtkpack_(new Gtk2::HBox(0, 15),	      
- 					0, my $check_wizard_tape = new Gtk2::CheckButton(N("on Tape Device")),
+ 					0, my $check_wizard_tape = new Gtk2::CheckButton(N("On Tape Device")),
  					1, new Gtk2::VBox(0, 5),
  					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
  						destroy_widget();
+						to_ok();
  						advanced_where_tape(\&wizard_step2);
+						to_normal();
  					}), $where_tape),
  				),
 				1, new Gtk2::VBox(0, 5),
@@ -2831,47 +2838,58 @@ sub wizard_step2() {
 			1, new Gtk2::VBox(0, 5),
 		),
 	);
-    foreach ([$check_wizard_hd, \$where_hd], 
-	     [$check_wizard_cd, \$where_cd], 
-	     [$check_wizard_tape, \$where_tape],
-	     [$check_wizard_net, \$where_net]) {
-			my $ref = $_->[1];
-			gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
-				$$ref = $$ref ? 0 : 1;
-				$where_hd = 1;
-				if (!$where_hd && !$where_cd && !$where_net) {  
-					$next_widget = \&message_noselect_box
-				} else { 
-					$next_widget = \&wizard_step3 
-				}
-				destroy_widget();
-				wizard_step2();
-			})
-	}
-    if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, \&message_noselect_box) }
+	gtksignal_connect(gtkset_active($check_wizard_cd, $where_cd), toggled => sub {
+		invbool \$where_cd; 
+		if ($where_cd) { $where_tape = 0; $where_net = 0 };
+		refresh_wizard_step2();
+	});
+	gtksignal_connect(gtkset_active($check_wizard_net, $where_net), toggled => sub {
+		invbool \$where_net;
+		if ($where_net) { $where_tape = 0; $where_cd = 0 };
+		refresh_wizard_step2();
+	});
+	gtksignal_connect(gtkset_active($check_wizard_tape, $where_tape), toggled => sub {
+		invbool \$where_tape;
+		if ($where_tape) { $where_cd = 0; $where_net = 0 };
+		refresh_wizard_step2();
+	});
+	gtksignal_connect(gtkset_active($check_wizard_hd, $where_hd), toggled => sub {
+		refresh_wizard_step2();
+	});
+	if (!$where_hd && !$where_cd && !$where_net) { fonction_env(\$box2, \&wizard_step2, \&wizard, \&message_noselect_box) }
     else { fonction_env(\$box2, \&wizard_step2, \&wizard, \&wizard_step3) }
     button_box_wizard();
     $up_box->show_all;
 }
 
+sub refresh_wizard_step2() {
+	$where_hd = 1;
+	if (!$where_hd && !$where_cd && !$where_net) {  
+		$next_widget = \&message_noselect_box
+	} else { 
+		$next_widget = \&wizard_step3 
+	}
+	destroy_widget();
+	wizard_step2();
+}
+
 sub wizard()   {
 	my $box2;    
-    
+    my $user_string = N("Backup Users");
+	$user_string .= N(" (Default is all users)") if !$nonroot_user;
+	
 	gtkpack($advanced_box,
 		$box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),
 				0, N("Please choose what you want to backup"),
-				0, my $check_wizard_sys = new Gtk2::CheckButton(N("Backup system")),
-				0, my $check_wizard_user = new Gtk2::CheckButton(N("Backup Users")),
-				0, gtkpack_(new Gtk2::HBox(0, 15),
-					1, new Gtk2::VBox(0, 5),	
-					0, gtksignal_connect(Gtk2::Button->new(N("Select user manually")), clicked => sub {
-						destroy_widget();
-						advanced_what_user(\&wizard);
-					}),
-				),
+				0, my $check_wizard_sys = new Gtk2::CheckButton(N("Backup System")),
+				0, my $check_wizard_user = new Gtk2::CheckButton($user_string),
+				0, gtksignal_connect(Gtk2::Button->new(N("Select user manually")), clicked => sub {
+					destroy_widget();
+					advanced_what_user(\&wizard);
+				}),
 				1, new Gtk2::VBox(0, 5),	
 			),
 			1, new Gtk2::VBox(0, 5),	
@@ -2882,10 +2900,16 @@ sub wizard()   {
 		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
 			$$ref = $$ref ? 0 : 1;
 			if ($backup_sys || $backup_user && @user_list) { 
-				$next_widget = \&wizard_step2 
+				$next_widget = \&wizard_step2; 
 			} else { 
-				$next_widget = \&message_noselect_what_box }
-			})
+				$next_widget = \&message_noselect_what_box; 
+			}
+			if ($backup_user) {
+				@user_list = @user_list_all;
+			} else {
+				@user_list = ();
+			}
+		})
 	}
     if ($backup_sys || $backup_user && @user_list) { fonction_env(\$box2, \&wizard, \&interactive_mode_box, \&wizard_step2) } 
     else { fonction_env(\$box2, \&wizard, \&interactive_mode_box, \&message_noselect_what_box) } 
