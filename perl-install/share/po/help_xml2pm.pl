@@ -33,9 +33,10 @@ my $base = delete $helps{en} || die;
 save_help($base);
 
 foreach my $lang (keys %helps) {
+    (my $rlang = $lang) =~ s/_(.*)/_\U$1/;
     print "Now transforming: $lang\n";
-    my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
-    open(my $F, ">:encoding($charset)", "help-$lang.pot");
+    my ($charset) = cat_("$rlang.po") =~ /charset=([^\\]+)/ or die "missing charset in $rlang.po\n";
+    open(my $F, ">:encoding($charset)", "help-$rlang.pot");
     print $F <<EOF;
 msgid ""
 msgstr ""
@@ -233,6 +234,7 @@ sub rewrite2_ {
 		    'keycombo', 'note', 'sect1', 'sect2',
 		    'superscript', 'systemitem', 
 		    'tip', 'ulink', 'xref', 'varlistentry', 'variablelist', 'term',
+		    'phrase', 'hardware',
 		   )) {
 	# ignored tags
 	$text;
