@@ -361,14 +361,13 @@ sub setPackages {
 	}
 	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
 	    #- by default, choose:
-	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG';
+	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
 	    $o->{compssUsersChoice}{$_} = 1 
 	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 	}
 	$o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
 	$o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
 	$o->{compssUsersChoice}{SYSTEM} = 1;
-	$o->{compssUsersChoice}{X} = 1 if $o->{interactive};
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
 	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
