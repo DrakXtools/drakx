@@ -26,7 +26,7 @@ init Gtk;
 use POSIX;
 use Locale::GetText;
 
-my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps";
+my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps/";
 setlocale (LC_ALL, "");
 Locale::GetText::textdomain ("c'est ton boot !");
 
