@@ -103,18 +103,22 @@ sub raw {
 	    $ok;
 	}
     } else {
+	sub die_exit {
+	    log::l($_[0]);
+	    c::_exit(128);
+	}
 	if ($stderr && $stderr eq 'STDERR') {
 	} elsif ($stderr) {
 	    $stderr_mode =~ s/2//;
-	    open STDERR, "$stderr_mode $stderr" or die "run_program can't output in $stderr (mode `$stderr_mode')";
+	    open STDERR, "$stderr_mode $stderr" or die_exit("run_program can't output in $stderr (mode `$stderr_mode')");
 	} elsif ($::isInstall) {
-	    open STDERR, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
+	    open STDERR, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die_exit("run_program can't log, give me access to /tmp/ddebug.log");
 	}
 	if ($stdout && $stdout eq 'STDOUT') {
 	} elsif ($stdout) {
-	    open STDOUT, "$stdout_mode $stdout" or die "run_program can't output in $stdout (mode `$stdout_mode')";
+	    open STDOUT, "$stdout_mode $stdout" or die_exit("run_program can't output in $stdout (mode `$stdout_mode')");
 	} elsif ($::isInstall) {
-	    open STDOUT, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
+	    open STDOUT, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die_exit("run_program can't log, give me access to /tmp/ddebug.log");
 	}
 
 	$root and chroot $root;
@@ -126,8 +130,7 @@ sub raw {
 	    exec $name, @args;
 	};
 	if (!$ok) {
-	    log::l("exec of $real_name failed: $!");
-	    c::_exit(128);
+	    die_exit("exec of $real_name failed: $!");
 	}
     }
 
