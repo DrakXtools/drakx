@@ -9,7 +9,6 @@ use strict;
 use MDK::Common::System;
 use common;
 use partition_table qw(:types);
-use commands;
 use fs;
 use fsedit;
 use log;
@@ -49,11 +48,11 @@ sub carryRootCreateSymlink {
 
     my $mntpoint = "$prefix$part->{mntpoint}";
     unless (-e $mntpoint) {
-	eval { commands::mkdir_("-p", dirname($mntpoint)) };
+	eval { mkdir_p(dirname($mntpoint)) };
 	#- do non-relative link for install, should be changed to relative link before rebooting
 	symlink "/initrd/loopfs", $mntpoint;
 
-	commands::mkdir_("-p", "/initrd/loopfs/lnx4win/boot");
+	mkdir_p("/initrd/loopfs/lnx4win/boot");
 	symlink "/initrd/loopfs/lnx4win/boot", "$prefix/boot";
     }
     #- indicate kernel to keep initrd
@@ -73,7 +72,7 @@ sub create {
     my $f = $part->{device} = "$prefix$part->{loopback_device}{mntpoint}$part->{loopback_file}";
     return if -e $f;
 
-    eval { commands::mkdir_("-p", dirname($f)) };
+    eval { mkdir_p(dirname($f)) };
 
     log::l("creating loopback file $f ($part->{size} sectors)");
 
@@ -117,8 +116,8 @@ sub save_boot {
     $loop_boot or return;
 
     my @files = glob_("$prefix/boot/*");
-    commands::cp("-f", @files, $loop_boot) if @files;
-    commands::rm("-rf", "$prefix/boot");
+    cp_af(@files, $loop_boot) if @files;
+    rm_rf("$prefix/boot");
     symlink $loop_boot, "$prefix/boot";
 }
 

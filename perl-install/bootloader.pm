@@ -14,7 +14,6 @@ use any;
 use fsedit;
 use devices;
 use loopback;
-use commands;
 use detect_devices;
 use partition_table_raw;
 use run_program;
@@ -875,8 +874,8 @@ sub loadlin_cmd {
     my ($prefix, $lilo) = @_;
     my $e = get_label("linux", $lilo) || first(grep { $_->{type} eq "image" } @{$lilo->{entries}});
 
-    commands::cp("$prefix$e->{kernel_or_dev}", "$prefix/boot/vmlinuz") unless -e "$prefix/boot/vmlinuz";
-    commands::cp("$prefix$e->{initrd}", "$prefix/boot/initrd.img") unless -e "$prefix/boot/initrd.img";
+    cp_af("$prefix$e->{kernel_or_dev}", "$prefix/boot/vmlinuz") unless -e "$prefix/boot/vmlinuz";
+    cp_af("$prefix$e->{initrd}", "$prefix/boot/initrd.img") unless -e "$prefix/boot/initrd.img";
 
     $e->{label}, sprintf"%s %s initrd=%s root=%s $e->{append}", 
       lnx4win_file($lilo, "/loadlin.exe", "/boot/vmlinuz", "/boot/initrd.img"),

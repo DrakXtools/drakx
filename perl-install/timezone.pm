@@ -5,7 +5,6 @@ use strict;
 use vars qw($ntp_servers);
 
 use common;
-use commands;
 use log;
 
 
@@ -52,7 +51,7 @@ sub write {
 
     ntp_server($prefix, $t->{ntp});
 
-    eval { commands::cp("-f", "$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
+    eval { cp_af("$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
     setVarsInSh("$prefix/etc/sysconfig/clock", {
 	ZONE => $t->{timezone},

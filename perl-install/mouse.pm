@@ -11,7 +11,6 @@ use modules;
 use detect_devices;
 use run_program;
 use devices;
-use commands;
 use modules;
 use any;
 use log;

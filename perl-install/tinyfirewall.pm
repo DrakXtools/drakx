@@ -1,7 +1,6 @@
 package tinyfirewall;
 use diagnostics;
 use strict;
-use commands;
 use run_program;
 use network::netconnect;
 use network;
@@ -74,7 +73,7 @@ my %settings;
 my $config_file = "/etc/Bastille/bastille-firewall.cfg";
 my $default_config_file = "/usr/share/Bastille/bastille-firewall.cfg"; # set this later
 sub ReadConfig {
-    -e $config_file or commands::cp($default_config_file, $config_file);
+    -e $config_file or cp_af($default_config_file, $config_file);
     add2hash(\%settings, { getVarsFromSh("$config_file") });
 }
 sub SaveConfig {
@@ -156,7 +155,7 @@ sub DoInterface {
 	$in->exit(0);
 	return;
 	$_[0] or $in->exit(0);
-	commands::cp("-f", $config_file, $config_file . ".orig");
+	cp_af($config_file, $config_file . ".orig");
 	substInFile {
 	    if(/^(.+)\s*\=/) {
 		$a=$settings{$1};

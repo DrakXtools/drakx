@@ -6,7 +6,6 @@ use strict;
 
 use common;
 use detect_devices;
-use commands;
 use modules;
 use network;
 use log;

@@ -6,7 +6,6 @@ package printer;
 
 
 use common;
-use commands;
 use run_program;
 
 #-if we are in an DrakX config

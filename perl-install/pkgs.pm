@@ -7,7 +7,6 @@ use vars qw(*LOG %preferred $limitMinTrans %compssListDesc);
 use MDK::Common::System;
 use common;
 use install_any;
-use commands;
 use run_program;
 use detect_devices;
 use log;
@@ -126,7 +125,7 @@ sub packageId {
 
 sub cleanHeaders {
     my ($prefix) = @_;
-    commands::rm("-rf", "$prefix/tmp/headers") if -e "$prefix/tmp/headers";
+    rm_rf("$prefix/tmp/headers") if -e "$prefix/tmp/headers";
 }
 
 #- get all headers from an hdlist file.
@@ -831,7 +830,7 @@ sub rebuild_db_open_for_traversal {
 	} else {
 	    log::l("rebuilding rpm database");
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
-	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), commands::rm("-rf", $rebuilddb_dir);
+	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
 	    c::rpmdbRebuild($prefix) or log::l("rebuilding of rpm database failed: ". c::rpmErrorString()), c::_exit(2);
 
@@ -862,7 +861,7 @@ sub clean_old_rpm_db {
                     providesindex.rpm requiredby.rpm triggerindex.rpm)) {
 	    -e "$prefix/var/lib/rpm/$_" or next;
 	    log::l("removing old rpm file $_");
-	    commands::rm("-f", "$prefix/var/lib/rpm/$_");
+	    rm_rf("$prefix/var/lib/rpm/$_");
 	}
     }
 }

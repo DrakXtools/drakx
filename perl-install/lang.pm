@@ -7,7 +7,6 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common;
-use commands;
 use log;
 
 #-######################################################################################
@@ -329,7 +328,7 @@ sub set {
 	if (!-e "$ENV{SHARE_PATH}/locale/$lang" && common::usingRamdisk()) {
 	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
-	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
+	    eval { rm_rf("$ENV{SHARE_PATH}/locale") };
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
@@ -424,27 +423,21 @@ sub write {
 	    if ($c->[0]) {
 		add2hash $h, { SYSFONT => $c->[0] };
 		eval {
-		    commands::cp("-f",
-			"$p/consolefonts/$c->[0].psf.gz",
-			"$prefix/etc/sysconfig/console/consolefonts");
+		    cp_af("$p/consolefonts/$c->[0].psf.gz", "$prefix/etc/sysconfig/console/consolefonts");
 		};
 		$@ and log::l("missing console font $c->[0]");
 	    }
 	    if ($c->[1]) {
 		add2hash $h, { UNIMAP => $c->[1] };
 		eval {
-		    commands::cp("-f",
-			glob_("$p/consoletrans/$c->[1]*"),
-			"$prefix/etc/sysconfig/console/consoletrans");
+		    cp_af(glob_("$p/consoletrans/$c->[1]*"), "$prefix/etc/sysconfig/console/consoletrans");
 		};
 		$@ and log::l("missing console unimap file $c->[1]");
 	    }
 	    if ($c->[2]) {
 		add2hash $h, { SYSFONTACM => $c->[2] };
 		eval {
-		    commands::cp("-f",
-			glob_("$p/consoletrans/$c->[2]*"),
-			"$prefix/etc/sysconfig/console/consoletrans");
+		    cp_af(glob_("$p/consoletrans/$c->[2]*"), "$prefix/etc/sysconfig/console/consoletrans");
 		};
 		$@ and log::l("missing console acm file $c->[2]");
 	    }
@@ -471,8 +464,8 @@ sub load_mo {
 
 	if ($::isInstall && common::usingRamdisk()) {
 	    # cleanup
-	    eval { commands::rm("-r", $localedir) };
-	    eval { commands::mkdir_("-p", dirname("$localedir/$_/$suffix")) };
+	    eval { rm_rf($localedir) };
+	    eval { mkdir_p(dirname("$localedir/$_/$suffix")) };
 	    install_any::getAndSaveFile ("$localedir/$_/$suffix");
 
 	    -s $f and return $_;

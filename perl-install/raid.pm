@@ -10,7 +10,6 @@ use common;
 use partition_table qw(:types);
 use run_program;
 use devices;
-use commands;
 use modules;
 use fs;
 
@@ -158,7 +157,7 @@ sub prepare_prefixed {
     my ($raids, $prefix) = @_;
     $raids or return;
 
-    eval { commands::cp("-f", "/etc/raidtab", "$prefix/etc/raidtab") };
+    eval { cp_af("/etc/raidtab", "$prefix/etc/raidtab") };
     foreach (grep {$_} @$raids) {
 	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
     }

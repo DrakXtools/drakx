@@ -168,11 +168,10 @@ sub setup_postinstall_rpms($$) {
     $postinstall_rpms = "$prefix/usr/postinstall-rpm";
 
     require pkgs;
-    require commands;
 
     log::l("postinstall rpms directory set to $postinstall_rpms");
     clean_postinstall_rpms(); #- make sure in case of previous upgrade problem.
-    commands::mkdir_('-p', $postinstall_rpms);
+    mkdir_p($postinstall_rpms);
 
     #- compute closure of unselected package that may be copied,
     #- don't complain if package does not exists as it may happen
@@ -191,15 +190,14 @@ sub setup_postinstall_rpms($$) {
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
     pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{1});
-    commands::cp((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
+    cp_af((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 
     log::l("copying Auto Install Floppy");
     getAndSaveInstallFloppy($::o, "$postinstall_rpms/auto_install.img");
 }
 
 sub clean_postinstall_rpms() {
-    require commands;
-    $postinstall_rpms and -d $postinstall_rpms and commands::rm('-rf', $postinstall_rpms);
+    $postinstall_rpms and -d $postinstall_rpms and rm_rf($postinstall_rpms);
 }
 
 
@@ -698,8 +696,7 @@ sub getAndSaveInstallFloppy {
     my ($o, $where) = @_;
     if ($postinstall_rpms && -d $postinstall_rpms && -r "$postinstall_rpms/auto_install.img") {
 	log::l("getAndSaveInstallFloppy: using file saved as $postinstall_rpms/auto_install.img");
-	require commands;
-	commands::cp("-f", "$postinstall_rpms/auto_install.img", $where);
+	cp_af("$postinstall_rpms/auto_install.img", $where);
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
@@ -722,10 +719,9 @@ sub getAndSaveAutoInstallFloppy {
 	getAndSaveInstallFloppy($o, $imagefile) or return;
         devices::make($_) foreach qw(/dev/loop6 /dev/ram);
 
-	require commands;
         run_program::run("losetup", "/dev/loop6", $imagefile);
         fs::mount("/dev/loop6", $mountdir, "romfs", 'readonly');
-        commands::cp("-f", $mountdir, $workdir);
+        cp_af($mountdir, $workdir);
         fs::umount($mountdir);
         run_program::run("losetup", "-d", "/dev/loop6");
 
@@ -744,9 +740,10 @@ sub getAndSaveAutoInstallFloppy {
         fs::mount("/dev/ram", $mountdir, 'romfs', 0);
         run_program::run("silo", "-r", $mountdir, "-F", "-i", "/fd.b", "-b", "/second.b", "-C", "/silo.conf");
         fs::umount($mountdir);
+	require commands;
         commands::dd("if=/dev/ram", "of=$where", "bs=1440", "count=1024");
 
-        commands::rm("-rf", $workdir, $mountdir, $imagefile);
+        rm_rf($workdir, $mountdir, $imagefile);
     } else {
 	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
 	my $mountdir = "$o->{prefix}/tmp/aif-mount"; -d $mountdir or mkdir $mountdir, 0755;

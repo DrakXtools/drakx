@@ -12,7 +12,6 @@ use steps;
 use common;
 use install_any qw(:all);
 use install_steps;
-use commands;
 use lang;
 use keyboard;
 use mouse;
@@ -584,14 +583,14 @@ sub main {
     #- make sure failed upgrade will not hurt too much.
     install_steps::cleanIfFailedUpgrade($o);
 
-    -e "$o->{prefix}/usr/sbin/urpmi.update" or eval { commands::rm("-rf", "$o->{prefix}/var/lib/urpmi") };
+    -e "$o->{prefix}/usr/sbin/urpmi.update" or eval { rm_rf("$o->{prefix}/var/lib/urpmi") };
 
     #- mainly for auto_install's
     run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
     run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- have the really bleeding edge ddebug.log
-    eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
+    eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root") };
 
     #- ala pixel? :-) [fpons]
     common::sync(); common::sync();

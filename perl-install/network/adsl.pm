@@ -1,7 +1,6 @@
 package network::adsl;
 
 use common;
-use commands;
 use run_program;
 use network::tools;
 use network::ethernet;
@@ -91,7 +90,7 @@ sub adsl_conf {
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type) = @_;
 
-    commands::mkdir_("-p", "$prefix/etc/ppp");
+    mkdir_p("$prefix/etc/ppp");
     output("$prefix/etc/ppp/options",
 'lock
 noipdefault

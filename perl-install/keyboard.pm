@@ -10,7 +10,6 @@ use strict;
 use common;
 use detect_devices;
 use run_program;
-use commands;
 use log;
 use c;
 

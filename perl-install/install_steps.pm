@@ -49,7 +49,7 @@ sub leavingStep {
     log::l("step `$step' finished");
 
     if (-d "$o->{prefix}/root") {
-	eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
+	eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root") };
 	output(install_any::auto_inst_file(), install_any::g_auto_install());
     }
 
@@ -289,7 +289,7 @@ sub beforeInstallPackages {
 	foreach (@filesToSaveForUpgrade) {
 	    unlink "$o->{prefix}/$_.mdkgisave";
 	    if (-e "$o->{prefix}/$_") {
-		eval { commands::cp("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
+		eval { cp_af("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
 	    }
 	}
     }
@@ -345,7 +345,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 	#- important files and restore them after.
 	foreach (@{$o->{toSave} || []}) {
 	    if (-e "$o->{prefix}/$_") {
-		eval { commands::cp("-f", "$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
+		eval { cp_af("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
 	    }
 	}
 	pkgs::remove($o->{prefix}, $o->{toRemove});
@@ -422,8 +422,8 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
-	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk",
-			    "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
+	eval { cp_af("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk",
+		     "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
     }
 
     my $msec = "$o->{prefix}/etc/security/msec";
@@ -514,7 +514,7 @@ sub copyKernelFromFloppy {
     return if $::testing || !$o->{blank};
 
     fs::mount($o->{blank}, "/floppy", "vfat", 0);
-    eval { commands::cp("-f", "/floppy/vmlinuz", "$o->{prefix}/boot/vmlinuz-default") };
+    eval { cp_af("/floppy/vmlinuz", "$o->{prefix}/boot/vmlinuz-default") };
     if ($@) {
 	log::l("copying of /floppy/vmlinuz from blank modified disk failed: $@");
     }
@@ -539,7 +539,7 @@ sub updateModulesFromFloppy {
 		my $qsext = quotemeta $sext;
 		foreach my $target (@dest_files) {
 		    $target =~ /$qsfile/ or next;
-		    eval { commands::cp("-f", $s, $target) };
+		    eval { cp_af($s, $target) };
 		    if ($@) {
 			log::l("updating module $target by $s failed: $@");
 		    } else {
@@ -676,7 +676,7 @@ sub addUser {
     foreach my $u (@$users) {
 	if (! -d "$p$u->{home}") {
 	    my $mode = $o->{security} < 2 ? 0755 : 0750;
-	    eval { commands::cp("-f", "$p/etc/skel", "$p$u->{home}") };
+	    eval { cp_af("$p/etc/skel", "$p$u->{home}") };
 	    if ($@) {
 		log::l("copying of skel failed: $@"); mkdir("$p$u->{home}", $mode); 
 	    } else {
@@ -818,8 +818,7 @@ sub configureXBefore {
     my $xkb = $o->{X}{keyboard}{xkb_keymap} || keyboard::keyboard2xkb($o->{keyboard});
     $xkb = '' if !($xkb && $xkb =~ /([^(]*)/ && -e "$o->{prefix}/usr/X11R6/lib/X11/xkb/symbols/$1");
     if (!$xkb && (my $f = keyboard::xmodmap_file($o->{keyboard}))) {
-	require commands;
-	commands::cp("-f", $f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
+	cp_af($f, "$o->{prefix}/etc/X11/xinit/Xmodmap");	
 	$xkb = '';
     }
     {

@@ -7,7 +7,6 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common;
-use commands;
 use detect_devices;
 use partition_table qw(:types);
 use fsedit;
@@ -39,7 +38,7 @@ sub facesnames {
 sub addKdmIcon {
     my ($prefix, $user, $icon) = @_;
     my $dest = "$prefix/usr/share/faces/$user.png";
-    eval { commands::cp("-f", facesdir($prefix) . $icon . ".png", $dest) } if $icon;
+    eval { cp_af(facesdir($prefix) . $icon . ".png", $dest) } if $icon;
 }
 
 sub allocUsers {
@@ -509,7 +508,7 @@ END
     }
 
     #- install kppprc file according to used configuration.
-    commands::mkdir_("-p", "$prefix/usr/share/config");
+    mkdir_p("$prefix/usr/share/config");
     local *KPPPRC;
     open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
     #chmod 0600, "$prefix/usr/share/config/kppprc";

@@ -11,7 +11,6 @@ use partition_table qw(:types);
 use run_program;
 use swap;
 use detect_devices;
-use commands;
 use modules;
 use fsedit;
 use loopback;
@@ -556,7 +555,7 @@ sub mount {
     my ($dev, $where, $fs, $rdonly) = @_;
     log::l("mounting $dev on $where as type $fs");
 
-    -d $where or commands::mkdir_('-p', $where);
+    -d $where or mkdir_p($where);
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 

@@ -91,19 +91,7 @@ sub umount {
 
 sub mkdir_ {
     my ($rec) = getopts(\@_, qw(p));
-
-    my $mkdir; $mkdir = sub {
-	my $root = dirname $_[0];
-	if (-e $root) {
-	    -d $root or die "mkdir: error creating directory $_[0]: $root is a file and i won't delete it\n";
-	} else {
-	    $rec or die "mkdir: $root does not exist (try option -p)\n";
-	    &$mkdir($root);
-	}
-	$rec and -d $_[0] and return;
-	mkdir $_[0], 0755 or die "mkdir: error creating directory $_: $!\n";
-    };
-    &$mkdir($_) foreach @_;
+    mkdir_p($_) foreach @_;
 }
 
 
@@ -406,7 +394,7 @@ sub unpack_ {
 
 	print "$filename\n";
 	my $dir = dirname($filename);
-	-d $dir or mkdir_('-p', $dir);
+	-d $dir or mkdir_p($dir);
 
 	local *G;
 	open G, "> $filename" or die "can't write file $filename: $!\n";

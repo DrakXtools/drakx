@@ -13,7 +13,6 @@ use modules;
 use any;
 use mouse;
 use network;
-use commands;
 
 use network::tools;
 use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
@@ -409,7 +408,7 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
 	  );
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf";
     my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
-    commands::cp("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a);
+    cp_af("$prefix/etc/sysconfig/network-scripts/draknet_conf", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf";
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $a;
     foreach ( ["$prefix$connect_file", "up"],
@@ -423,7 +422,7 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
 	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
 	    ) {
 	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
-	-e ($_->[0]) and commands::cp("-f", $_->[0], $file) and chmod 0755, $file;
+	-e ($_->[0]) and cp_af($_->[0], $file) and chmod 0755, $file;
     }
 }
 
@@ -434,7 +433,7 @@ sub set_profile {
     my $f = "$prefix/etc/sysconfig/network-scripts/draknet_conf";
     -e ($f . "." . $profile) or return;
     $netcnx->{PROFILE}=$profile;
-    commands::cp("-f", $f . "." . $profile, $f);
+    cp_af($f . "." . $profile, $f);
     foreach ( ["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
 	      ["$prefix$connect_prog", "prog"],
@@ -446,7 +445,7 @@ sub set_profile {
 	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
 	    ) {
 	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
-	-e ($c) and commands::cp("-f", $c, $_->[0]);
+	-e ($c) and cp_af($c, $_->[0]);
     }
 }
 
@@ -454,8 +453,8 @@ sub del_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
-    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
+    rm_rf("$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
+    rm_rf(glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
 }
 
 sub add_profile {
@@ -464,7 +463,7 @@ sub add_profile {
     $profile eq "default" and return;
     my $cmd1 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
     my $cmd2 = "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile;
-    commands::cp("-f", $cmd1, $cmd2);
+    cp_af($cmd1, $cmd2);
 }
 
 sub get_profiles {
