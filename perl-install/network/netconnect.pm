@@ -841,9 +841,10 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    lan_alrd_cfg =>
                    {
                     name => N("WARNING: this device has been previously configured to connect to the Internet.
-Simply accept to keep this device configured.
-Modifying the fields below will override this configuration."),
+Modifying the fields below will override this configuration.
+Do you really want to reconfigure this device ?"),
                     type => "yesorno",
+                    default => "no",
                     post => sub {
                         my ($res) = @_;
                         return $res ? "lan_protocol" : "alrd_end";
