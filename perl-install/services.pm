@@ -191,7 +191,7 @@ sub ask_standalone_gtk {
 
     my $W = ugtk2->new(N("Services"));
     my ($x, $y, $w_popup);
-    my $nopop = sub { $w_popup and $w_popup->destroy };
+    my $nopop = sub { $w_popup and $w_popup->destroy; undef $w_popup };
     my $display = sub { $nopop->(); $_[0] and gtkshow(gtkadd($w_popup = Gtk2::Window->new('popup'),
         				       gtksignal_connect(gtkadd(Gtk2::EventBox->new,
         				           gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
