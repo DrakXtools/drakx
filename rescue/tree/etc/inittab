@@ -4,7 +4,7 @@ id:3:initdefault:
 
 si::sysinit:/etc/rc.sysinit
 re:6:wait:/etc/rc.reboot
-ca:12345:ctrlaltdel:/sbin/init 6
+ca:12345:ctrlaltdel:/sbin/fakeshutdown
 
 1:12345:respawn:/bin/bash --login
 2:23:respawn:/sbin/mingetty tty2
