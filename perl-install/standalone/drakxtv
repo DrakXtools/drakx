@@ -31,41 +31,31 @@ sub scan4channels {
     my $in = shift;
     my ($i, $ftable_id, $norm, $check);
 
-    my %freqtables = (
-		      _("USA (bcast)") => 0, _("USA (cable)") => 1, _("USA (cable-hrc)") => 2, _("Canada (cable)") => 15,
-		      _("Japan (bcast)") => 3, _("Japan (cable)") => 4, _("China (bcast)") => 12,
-		      _("West Europe") => 5, _("East Europe") => 6, _("Italy") => 7, _("Ireland") => 10, _("France") => 11,
-		      _("Newzealand") => 8, _("Australia") => 9,				 
-		      _("Southafrica") => 13,
-		      _("Argentina") => 14,
-		      _("All") => -1
-		      );
+#    my %freqtables = map {$i=$_;$i =~ s/ (.*)/-\1/;_($_) => $i} (...)
+#   this table must be checked on each xawtv release :
+    my %freqtables = 
+	   (_("USA (bcast)") => "us-bcast", _("USA (cable)") => "us-cable", _("USA (cable-hrc)") => "us-cable-hrc", _("Canada (cable)") => "canada-cable",
+	_("Japan (bcast)") => "japan-bcast", _("Japan (cable)") => "japan-cable", _("China (bcast)") => "china-bcast",
+	_("West Europe") => "europe-west", _("East Europe") => "europe-east", _("Italy") => "italy", _("Ireland") => "ireland", _("France") => "france",
+	_("Newzealand") => "newzealand", _("Australia") => "australia",
+	_("South Africa") => "southafrica",
+	_("Argentina") => "argentina",
+	_("All") => -1);
 
-    my %tv_norms = ("SECAM" => 2,
-		    "PAL" => 0,
-		    "NTSC" => 1,
-		    "PAL" => 0,
-		    "NTSC" => 1,
-		    "SECAM" => 2,
-		    "PAL-NC" => 3,
-		    "PAL-M" => 4,
-		    "PAL-N" => 5,
-		    "NTSC-JP" => 6,
-#		     "AUTO" => 7
-		    );
-
-
-
-    $in->ask_from("TVdrake",
-			   _("Please,\ntype in your tv norm and country"),
+    $in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
 			   [
-			    { label => _("TV norm :"), val => \$norm, list => [keys %tv_norms], not_edit => 1, type => 'combo'},
+			    { label => _("TV norm :"), val => \$norm, list => ["NTSC", "NTSC-JP","PAL", "PAL-M", "PAL-N", "PAL-NC", "SECAM"], not_edit => 1, type => 'combo'},
 			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], not_edit => 1, sort => 1},
 			    ],
 			   complete => sub { 
 				  my $wait = $in->wait_message('Please wait',
-							       _("Scanning for TV channels in progress ..."));
-				  $ftable_id = "france -a " if ($freqtables{$ftable_id} eq -1);
+										 _("Scanning for TV channels in progress ..."));
+
+#                     france is a bogus table provided to scantv which will
+#                     ignore it as "All" is selected because of -a
+				  $ftable_id = $freqtables{$ftable_id};
+				  $ftable_id = "france -a " if ($ftable_id eq -1);
+
 				  system( (( -x "/usr/X11R6/bin/xvt") ?
 					   "xvt -title '"._("Scanning for TV channels")." ...' -e " : "")
 					  . "scantv -n $norm -f $ftable_id -o ~/.xawtv");
