@@ -19,15 +19,20 @@ sub _conf_files() {
 ################################################################################
 # I/O ##########################################################################
 ################################################################################
-sub read {
+sub read_and_prepare_write {
     my ($class) = @_;
     my $file = find { -f $_ } _conf_files();
     my $raw_X = $class->new(Xconfig::parse::read_XF86Config($file));
+    my $before = $raw_X->prepare_write;
 
     if (my ($Keyboard) = $raw_X->get_InputDevices('Keyboard')) {
 	$Keyboard->{Driver}{val} = 'keyboard';
     }
-    $raw_X;
+    $raw_X, $before;
+}
+sub read {
+    my ($class) = @_;
+    first(read_and_prepare_write($class));
 }
 sub write {
     my ($raw_X, $o_file) = @_;

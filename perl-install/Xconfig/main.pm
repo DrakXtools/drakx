@@ -16,8 +16,7 @@ use any;
 sub configure_monitor {
     my ($in) = @_;
 
-    my $raw_X = Xconfig::xfree->read;
-    my $before = $raw_X->prepare_write;
+    my ($raw_X, $before) = Xconfig::xfree->read_and_prepare_write;
     Xconfig::monitor::configure($in, $raw_X, int($raw_X->get_devices)) or return;
     if ($raw_X->prepare_write ne $before) {
 	$raw_X->write;
@@ -30,12 +29,11 @@ sub configure_monitor {
 sub configure_resolution {
     my ($in) = @_;
 
-    my $raw_X = Xconfig::xfree->read;
+    my ($raw_X, $before) = Xconfig::xfree->read_and_prepare_write;
     my $X = { 
 	card => Xconfig::card::from_raw_X($raw_X),
 	monitors => [ $raw_X->get_monitors ],
     };
-    my $before = $raw_X->prepare_write;
     $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitors}) or return;
     if ($raw_X->prepare_write ne $before) {
 	&write($raw_X, $X);
