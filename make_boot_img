@@ -105,7 +105,7 @@ sub initrd {
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
-    if ($type eq "network" || $type eq "usb" || $type eq "all" || $type eq "other" || $type eq "blank") {
+    if (member($type, qw(network usb all other blank))) {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
 	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
 	_ "$sudo mknod $mnt/dev/ppp c 108 0";
@@ -121,8 +121,10 @@ sub initrd {
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
     $modz = "kernel/all.modules$I/$ext";
-    _ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" if $type !~ /blank/;
-    _ "$sudo cp -f $modz/modules.dep $mnt/modules/";
+    if ($type !~ /blank/) {
+	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" ;
+	_ "$sudo cp -f $modz/modules.dep $mnt/modules/";
+    }
     _ "$sudo umount $mnt";
 
 
