@@ -1,3 +1,38 @@
+2001/01/17  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm, install_any.pm: fixes with /tmp/rhimage and
+	/tmp/image.
+
+	* pkgs.pm: update to use new header file format in hdlist (added arch) but
+	depslist has not it...
+
+	* install2.pm: fixes with /tmp/rhimage and /tmp/image
+
+2001/01/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bg.po: updated bulgarian file
+
+2001/01/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/url.c: use strrchr instead of doing it by hand
+
+	* mdk-stage1/insmod-busybox/busybox.h,
+	mdk-stage1/insmod-busybox/utility.c, mdk-stage1/insmod-busybox/insmod.c:
+	
+	  - replace remaining perror's with log_perror's
+	  - little code cleanup
+
+	* mdk-stage1/stage1-data/stage1.tar.bz2,
+	mdk-stage1/stage1-data/stage1-with-sash.tar.bz2: add /dev/fd0
+
+	* mdk-stage1/stage1.c, mdk-stage1/modules.h, mdk-stage1/tools.c,
+	mdk-stage1/tools.h, mdk-stage1/disk.c, mdk-stage1/modules.c: 
+	  - add load of third party modules in Expert mode (PS rulz)
+
+2001/01/12  siegel
+
+	* share/po/de.po: updates
+
 2001/01/12  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_interactive.pm: fixed addUser for invocation of
