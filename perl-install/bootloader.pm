@@ -1112,11 +1112,6 @@ sub install_grub {
     }
 }
 
-sub lnx4win_file { 
-    my $bootloader = shift;
-    map { local $_ = $_; s,/,\\,g; "$bootloader->{boot_drive}:\\lnx4win$_" } @_;
-}
-
 sub install {
     my ($bootloader, $hds) = @_;
 
