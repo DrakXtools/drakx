@@ -31,7 +31,7 @@ CFLAGS += -Wall
 #	$(CROSS)strip -x -R .comment -R .note $@
 
 dietlibc.a: $(SYSCALLOBJ) $(LIBOBJ) __longjmp.o longjmp.o setjmp.o \
-start.o unified.o mmap.o mount.o
+start.o unified.o mmap.o
 	$(CROSS)ar cru dietlibc.a $^
 
 libdietc.so: dietlibc.a

@@ -10,8 +10,8 @@ __unified_syscall:
 	movl	0x10(%esp),%ebx
 	movl	0x14(%esp),%ecx
 	movl	0x18(%esp),%edx
-	movl	0x1c(%esp),%edi
-	movl	0x20(%esp),%esi
+	movl	0x1c(%esp),%esi
+	movl	0x20(%esp),%edi
 	int	$0x80
 	cmp	$-124,%eax
 	jbe	.Lnoerror
