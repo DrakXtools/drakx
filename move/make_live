@@ -64,6 +64,7 @@ print "Making live in $::prefix directory.\n";
     output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
     installPackages();
     system("chroot $::prefix ldconfig");
+    touch "$::prefix/etc/menu/enable_simplified");
     system("chroot $::prefix update-menus");
     system("chroot $::prefix fc-cache");  #- generate cache in all directories mentioned in config file
     system("chroot $::prefix kbuildsycoca --global");
