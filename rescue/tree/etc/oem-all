@@ -314,7 +314,7 @@ if ($options{free_size} && $options{free_fs}) {
     } else {
 	$free = ($home || $var || $root) + 1;
     }
-    push @commands, sprintf "mkpart %s %s %s %s", $options{free_primary} ? 'primary' : 'logical', $options{free_fs} =~ /fat/ ? 'fat' : $options{free_fs}, correct_start_end($options{free_primary} ? \$free_point : \$point, $hd_size);
+    push @commands, sprintf "mkpart %s %s %s %s", $options{free_primary} ? 'primary' : 'logical', $options{free_fs}, correct_start_end($options{free_primary} ? \$free_point : \$point, $hd_size);
 }
 system("parted", "-s", "/dev/$hd", @commands) == 0 or die "unable to partition the disk $hd";
 
