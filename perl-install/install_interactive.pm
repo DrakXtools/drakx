@@ -165,7 +165,7 @@ When sure, press Ok.")) or return;
 	    } ];
     }
 
-    if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
+    if (!$readonly && $o->isa('interactive_gtk')) { #- diskdrake only available in gtk for now
 	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 

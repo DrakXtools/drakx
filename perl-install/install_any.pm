@@ -946,7 +946,7 @@ sub remove_bigseldom_used {
     log::l("remove_bigseldom_used");
     $::testing and return;
     unlink glob_("/usr/share/gtk/themes/$_*") foreach qw(DarkMarble marble3d);
-    if (ref($::o) =~ /gtk/) {
+    if ($::o->isa('interactive_gtk')) {
 	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
 	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
     } else {

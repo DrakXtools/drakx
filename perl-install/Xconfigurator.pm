@@ -804,7 +804,7 @@ sub chooseResolutionsGtk($$;$) {
 }
 
 sub chooseResolutions($$;$) {
-    goto &chooseResolutionsGtk if ref($in) =~ /gtk/;
+    goto &chooseResolutionsGtk if $in->isa('interactive_gtk');
 
     my ($card, $chosen_depth, $chosen_w) = @_;
 

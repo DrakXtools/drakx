@@ -365,7 +365,7 @@ Continue at your own risk!"));
 			            \&partition_table_raw::description, \@l) or die "setstep exitInstall\n";
         }
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
-    } elsif ($::expert && ref($o) =~ /gtk/) {
+    } elsif ($::expert && $o->isa('interactive_gtk')) {
         install_interactive::partition_with_diskdrake($o, $o->{hds});
     } else {
         install_interactive::partitionWizard($o);

@@ -171,7 +171,7 @@ ifdown eth0
 
     my $pre_func = sub {
 	$::Wizard_no_previous=1;
-	if (ref($in) =~ /gtk/) {
+	if ($in->isa('interactive_gtk')) {
 	    $::Wizard_splash=1;
 	    require my_gtk;
 	    my_gtk->import(qw(:wrappers));
