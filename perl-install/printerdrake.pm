@@ -199,7 +199,7 @@ wish to access and any applicable user name and password."),
 
 	$printer->{RESOLUTION} = @res ? $res[0] || "Default" : "Default";
 	$printer->{CRLF} = $db_entry{DESCR} =~ /HP/;
-	$printer->{BITSPERPIXEL} = @list_col ? $depth_to_col{$printer->{BITSPERPIXEL}} || $depth_to_col{$col[0]} : "Default";
+	$printer->{BITSPERPIXEL} = @list_col ? $depth_to_col{$printer->{BITSPERPIXEL}} || $col[0] : "Default";
 
 	$in->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$printer->{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
