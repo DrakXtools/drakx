@@ -1,3 +1,117 @@
+2004/03/15  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakgw: add ppp+ and ippp+ at the interfaces list
+
+	* network/shorewall.pm: add ppp+ and ippp+ in the interfaces list
+
+2004/03/15  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/03/15  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: do not list anymore wireless cards in LAN
+	connection, only in wireless
+	connections
+	fix ADSL modems not listed unless one try to manually pick a network
+	card (#8611): prevent module::interactive from offering to pick a
+	module when there's no network cards
+
+	* network/ethernet.pm (mapIntfToDevice) do not try to match a physical
+	device when SIOCETHTOOL ioctl is not supported
+
+	* standalone/drakclock: make the ntpdate after stopping the ntpd
+	(manu@agat.net, #8141)
+
+	* network/network.pm (write_interface_conf) fix missing quotes around
+	wireless encryption key (#8887)
+
+	* standalone/drakconnect (configure_net) fix spacing around DNS/domainname
+	settings table
+	(configure_net) write back domain name and dns servers
+	(configure_net) fix domainname reading
+	(configure_net) fix crash on internet access dialog closing
+	(configure_net) update connection status in background (#7800)
+	add --old option in order to see old interface
+
+2004/03/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: updated Farsi file
+
+	* share/po/cy.po, share/po/nn.po, share/po/ca.po: updated Welsh and
+	Nynorsk files
+
+2004/03/14  tbacklund
+
+	* share/po/fi.po: fully translated, was 10 fuzzy, 1 untranslated
+
+2004/03/14  tsdgeos
+
+	* share/po/ca.po: updating
+
+2004/03/14  yrahal
+
+	* share/po/ar.po: Weekly Arabeyes' Arabic translation.
+
+2004/03/13  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated translation
+
+2004/03/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: updated Farsi file
+
+	* share/po/cy.po: Updated Welsh file
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/uz.po, share/po/uz@Latn.po: updated Uzbek files
+
+2004/03/13  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Let printerdrake install "scanner-gui" instead
+	of "xsane" when it sets up an HP multi-function device.
+	"MandrakeSoft" -> "Mandrakesoft", "Mandrake" -> "Mandrakelinux".
+
+	* standalone/scannerdrake: Let scannerdrake install "scanner-gui" instead
+	of "xsane", so that scanning GUI actually used can be determined by the
+	system environment.
+	"MandrakeSoft" -> "Mandrakesoft", "Mandrake" -> "Mandrakelinux".
+
+	* standalone/printerdrake: "MandrakeSoft" -> "Mandrakesoft", "Mandrake" ->
+	"Mandrakelinux".
+
+2004/03/12  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Update for PowerPackPlus
+
+2004/03/12  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated
+
+2004/03/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+	* lang.pm: small correction
+	improved previous change
+
+	* share/po/ms.po, share/po/id.po, share/po/gl.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/nn.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/mn.po, share/po/ko.po, share/po/sr.po,
+	share/po/lt.po, share/po/he.po, share/po/ca.po, share/po/ar.po,
+	share/po/ltg.po, share/po/uz.po, share/po/is.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/ta.po, share/po/sq.po, share/po/sr@Latn.po,
+	share/po/eu.po, share/po/es.po, share/po/eo.po, share/po/bg.po,
+	share/po/el.po, share/po/lv.po, share/po/hu.po, share/po/uz@Latn.po:
+	merged some strings from mcc
+
+2004/03/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: eagle was renamed as eagle-usb
+
 2004/03/12  fwang
 
 	* share/po/zh_CN.po: Updated Simplified Chinese translation
@@ -28989,7 +29103,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.908 2004/03/12 08:52:37 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.909 2004/03/12 16:40:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
