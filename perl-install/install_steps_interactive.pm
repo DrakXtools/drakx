@@ -433,7 +433,7 @@ sub choosePackages {
     $min_size < $availableC or die _("Your system has not enough space left for installation or upgrade (%d > %d)", $min_size, $availableC);
 
     my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
-    my $def_mark = 50;
+    my $def_mark = 59; #- 59 is for packages that need gl hw acceleration.
 
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $def_mark, 0, $o->{installClass});
@@ -449,7 +449,7 @@ sub choosePackages {
 	
 	if ($::beginner) {
 	    if ($o->{isUpgrade}) {
-		$min_size; #- already selected size with at least 80 for compssList level.
+		min($def_size, $max);
 	    } else {
 		my (@l);
 		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
