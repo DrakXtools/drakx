@@ -72,10 +72,10 @@ unless ($::isEmbedded) {
     ######### menus end
 }
 
-my $user_combo = new Gtk2::OptionMenu;
+my $user_combo = Gtk2::OptionMenu->new;
 $user_combo->set_popdown_strings(list_users());
 $user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
-my $desktop_combo = new Gtk2::OptionMenu;
+my $desktop_combo = Gtk2::OptionMenu->new;
 $desktop_combo->set_popdown_strings(split(' ', `/usr/sbin/chksession -l`));
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
 
@@ -122,7 +122,7 @@ if (!$no_bootsplash) {
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
 
-my $_thm_button = new Gtk2::Button(N("Install themes"));
+my $_thm_button = Gtk2::Button->new(N("Install themes"));
 my $_B_create = gtksignal_connect(Gtk2::Button->new(N("Create new theme")), clicked => sub { system('/usr/sbin/draksplash ') });
 my $keep_logo = 1;
 			  
@@ -133,27 +133,27 @@ $no_bootsplash == 0
 my ($x_box, $splash_box);
 
 gtkadd($window,
-       gtkpack_(new Gtk2::VBox(0,0),
+       gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
-                 (1, gtkpack(gtkset_border_width(new Gtk2::VBox(0, 5), 5),
-                             gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use graphical boot")), $splash_mode), 
+                 (1, gtkpack(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
+                             gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode), 
                                                clicked => sub {
                                                    $splash_box->set_sensitive(!$splash_mode);
                                                    $splash_mode = !$splash_mode;
                                                }),
                              gtkpack__(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
-                                       gtkpack__(new Gtk2::VBox(0, 5),
+                                       gtkpack__(Gtk2::VBox->new(0, 5),
                                                  N("\nTheme"),
                                                  $combo{boot},
                                                  gtksignal_connect(Gtk2::CheckButton->new(N("Display theme\nunder console")), clicked => sub { invbool(\$keep_logo) }),
                                                 ),
                                        Gtk2::VSeparator->new,
-                                       gtkpack__(new Gtk2::VBox(0, 5),
+                                       gtkpack__(Gtk2::VBox->new(0, 5),
                                                  $boot_pic))
                             ),
                  )
                  :
-                 (1, gtkpack__(new Gtk2::VBox(0, 5),
+                 (1, gtkpack__(Gtk2::VBox->new(0, 5),
                                gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Launch the graphical environment when your system starts")),
                                                                $x_mode),
                                                  clicked => sub {
