@@ -843,7 +843,7 @@ sub exitInstall { install_any::unlockCdrom }
 sub hasNetwork {
     my ($o) = @_;
 
-    $o->{intf} && $o->{netc}{NETWORKING} ne 'false' || $o->{netcnx}{modem};
+    $o->{intf} && $o->{netc}{NETWORKING} ne 'no' || $o->{netcnx}{modem};
 }
 
 #------------------------------------------------------------------------------
@@ -855,7 +855,7 @@ sub upNetwork {
     }
 
     modules::write_conf($o->{prefix});
-    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'no') {
 	network::up_it($o->{prefix}, $o->{intf});
     } elsif (!$pppAvoided && $o->{netcnx}{modem} && !$o->{netcnx}{modem}{isUp}) {
 	eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
@@ -873,7 +873,7 @@ sub downNetwork {
     my ($o, $pppOnly) = @_;
 
     modules::write_conf($o->{prefix});
-    if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+    if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'no') {
 	network::down_it($o->{prefix}, $o->{intf});
     } elsif ($o->{netcnx}{modem} && $o->{netcnx}{modem}{isUp}) {
 	run_program::rooted($o->{prefix}, "ifdown", "ppp0");

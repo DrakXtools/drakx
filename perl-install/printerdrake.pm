@@ -361,6 +361,7 @@ You can add some more or change the existing ones."),
 	#- switch according to what is being installed: cups, lpr or other.
 	for ($printer->{mode}) {
 	    /CUPS/ && do { &$install('cups-drivers') unless $::testing;
+			   my $w = $in->wait_message(_("CUPS starting"), _("Reading CUPS drivers database..."));
 			   printer::poll_ppd_base(); last };
 	    /lpr/  && do { &$install('rhs-printfilters') unless $::testing;
 			   printer::read_printer_db(); last };
