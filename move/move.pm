@@ -38,7 +38,8 @@ sub init {
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
     #- to be able to adduser, one need to have /etc/passwd and /etc/group writable
-    system("cp /image/etc/{passwd,group} /etc");
+    #- sudoers must a file, not a symlink
+    system("cp /image/etc/{passwd,group,sudoers} /etc");
 
     #- free up stage1 memory
     fs::umount($_) foreach qw(/stage1/proc /stage1);
@@ -102,7 +103,13 @@ Continue at your own risk."), formatError($@) ]) if $@;
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");
-	exec 'su', 'mdk', 'startkde';
+
+	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home) = getpwnam('mdk');
+	$( = $) = "$gid $gid";
+	$< = $> = $uid;
+	$ENV{LOGNAME} = $ENV{USER} = 'mdk';
+	$ENV{HOME} = $home;
+	exec 'startkde';
     } else {
 	exec 'xwait' or c::_exit(0);
     }
