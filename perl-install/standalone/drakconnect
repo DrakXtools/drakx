@@ -555,11 +555,11 @@ sub build_notebook {
     if ($intf->{pages}{Information}) {
 	my ($info) = $gui->{description} ? 
 	  find { $_->{description} eq $gui->{description} } detect_devices::probeall : network::ethernet::mapIntfToDevice($interface_kind);
-	if (is_empty_hash_ref($info) and my @intfs = grep { $interface_kind eq $_->[0] } @all_cards) {
-            my $driver;
-            if ($#intfs == 0 and $driver = $intfs[0][1] and my @cards = grep { $_->{driver} eq $driver } detect_devices::probeall()) {
-                $info = $cards[0] if $#cards == 0;
-            }
+	my @intfs = grep { $interface_kind eq $_->[0] } @all_cards;
+	if (is_empty_hash_ref($info) && @intfs == 1) {
+	    my $driver = $intfs[0][1];
+	    my @cards = grep { $_->{driver} eq $driver } detect_devices::probeall();
+	    @cards == 1 and $info = $cards[0];
 	}
 	
 	gtkpack(gtkset_border_width($gui->{sheet}{Information} = Gtk2::VBox->new(0,10), 5),
