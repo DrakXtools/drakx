@@ -860,8 +860,10 @@ Allowing this will permit users to simply click on \"Share\" in konqueror and na
 	    if ($l{$_}) {
 		$in->do_pkgs->ensure_is_installed($pkg, $file) or return;
 		services::start($service);
+		services::start_service_on_boot($service);
 	    } elsif (-e $file) {
 		services::stop($service);
+		services::do_not_start_service_on_boot($service);
 	    }
 	}
     }
