@@ -425,6 +425,10 @@ sub getNet() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
 #}
 
+sub getUPS() {
+    grep { $_->{description} =~ /Ellipse UPS/ } usb_probe()
+}
+
 $pcitable_addons = <<'EOF';
 # add here lines conforming the pcitable format (0xXXXX\t0xXXXX\t"\w+"\t".*")
 EOF
