@@ -394,6 +394,14 @@ sub add2notebook {
 }
 
 
+sub tree_set_icon {
+    my ($node, $label, $icon) = @_;
+    my $hbox = new Gtk::HBox(0,0);
+    gtkpack__(1, $hbox, gtkshow(gtkpng($icon)), gtkshow(new Gtk::Label($label)));
+    gtkadd($node, gtkshow($hbox));
+}
+
+
 sub ctree_set_icon {
     my ($tree, $node, $icon_pixmap, $icon_mask) = @_;
 
