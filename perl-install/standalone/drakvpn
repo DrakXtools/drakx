@@ -318,7 +318,7 @@ You can now :\n
   - commit the changes
 
 What would you like to do ?\n", $ipsec_conf),
-		[ N_("display"), N_("add"), N_("edit"), N_("remove"), N_("commit") ]) or goto step_configuration;
+		[ N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 my $existing_section = "";
 
@@ -326,7 +326,8 @@ my $existing_section = "";
 
 step_display_ipsec_conf:
 
-if ($d eq "display $ipsec_conf" || $d eq "display") {
+# BUG: how can $d be "display $ipsec_conf":
+if ($d eq "display $ipsec_conf" || $d eq "Display") {
 	my $ipsec_exists = 0;
 	foreach my $key (keys %$ipsec) {
 		$ipsec_exists = 1 if  $ipsec->{$key};
@@ -346,7 +347,7 @@ You'll have to go back and choose 'add'.\n", $ipsec_conf));
 
 #- add ---------------------
 
-} elsif ($d eq "add") {
+} elsif ($d eq "Add") {
 
 step_add_section:
 
@@ -566,7 +567,7 @@ or change the name of the section.\n"));
 
 #- edit ---------------------
 
-} elsif ($d eq "edit") {
+} elsif ($d eq "Edit") {
 
 step_edit_ipsec_conf:
 $in->ask_from(N("Edit section"),
@@ -661,7 +662,7 @@ goto step_configure_ipsec_conf;
 
 #- remove ---------------------
 
-} elsif ($d eq "remove") {
+} elsif ($d eq "Remove") {
 $in->ask_from(N("Remove section"),
 N("Your %s file has several or sections or connections.\n
 You can choose here below the one you want to remove
@@ -676,7 +677,7 @@ and then click on next.\n", $ipsec_conf),
 
 #- continue and write  ---------------------
 
-} elsif ($d eq "commit") {
+} elsif ($d eq "Commit") {
 		log::l("[drakvpn] Modify the $ipsec_conf file");
 		network::ipsec::write_ipsec_conf($ipsec_conf, $ipsec,$kernel_version);
 	}
@@ -700,14 +701,14 @@ You can now :
   - edit \t\t\t (modify parameters of an existing section)
   - remove \t\t (remove an existing section)
   - commit \t\t (writes the changes to the real file)"),
-		[ N_("display"), N_("add"), N_("edit"), N_("remove"), N_("commit") ]) or goto step_configuration;
+		[ N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 
 #- display $racoon_conf -------------------------
 
 step_display_racoon_conf:
 
-if ($d eq "display") {
+if ($d eq "Display") {
 
 	my $racoon_exists = 0;
 	foreach my $key (keys %$racoon) {
@@ -728,7 +729,7 @@ You'll have to go back and choose configure.\n", $racoon_conf));
 
 #- add $racoon_conf ------------------------------
 
-} elsif ($d eq "add") {
+} elsif ($d eq "Add") {
 
 step_add_section_racoon:
 
@@ -863,7 +864,7 @@ goto step_configure_racoon_conf;
 
 #- edit $racoon_conf -----------------------------
 
-} elsif ($d eq "edit") {
+} elsif ($d eq "Edit") {
 $in->ask_from(N("Edit section"),
 N("Your %s file has several sections or connections.
 
@@ -940,7 +941,7 @@ goto step_configure_racoon_conf;
 
 #- remove $racoon_conf ---------------------------
 
-} elsif ($d eq "remove") {
+} elsif ($d eq "Remove") {
 $in->ask_from(N("Remove section"),
 N("Your %s file has several or sections or connections.\n
 You can choose here below the one you want to remove
@@ -954,7 +955,7 @@ network::ipsec::remove_section_racoon_conf($choice,$racoon,$number);
 	goto step_configure_racoon_conf;
 
 #- write $racoon_conf and continue ---------------
-} elsif ($d eq "commit") {
+} elsif ($d eq "Commit") {
 	log::l("[drakvpn] Modify the $racoon_conf file");
 	network::ipsec::write_racoon_conf($racoon_conf, $racoon);
 } 
