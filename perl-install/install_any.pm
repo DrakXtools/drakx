@@ -365,7 +365,13 @@ sub setPackages {
 	    detect_devices::matching_desc('Voodoo [35]') ||
 	    detect_devices::matching_desc('Voodoo Banshee') ||
 	    detect_devices::matching_desc('8281[05].* CGC') ||
-	    detect_devices::matching_desc('Rage 128');
+	    detect_devices::matching_desc('Rage 128') ||
+	    detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
+	    detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
+	    detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
+	    detect_devices::matching_desc('[nN]Vidia.*GeForce') || #- GeForce cards
+	    detect_devices::matching_desc('[nN]Vidia.*NV1[15]') ||
+	    detect_devices::matching_desc('[nN]Vidia.*Quadro');
 
 
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
