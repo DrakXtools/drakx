@@ -335,7 +335,7 @@ sub isPartOfRAID { defined $_[0]{raid} }
 sub isPartOfLoopback { defined $_[0]{loopback} }
 sub isRAID { $_[0]{device} =~ /^md/ }
 sub isUBD { $_[0]{device} =~ /^ubd/ } #- should be always true during an $::uml_install
-sub isLVM { $_[0]{VG_name} }
+sub isLVM { $_[0]{VG_name} || $_[0]{lv_name} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isMounted { $_[0]{isMounted} }
 sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
