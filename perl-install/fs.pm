@@ -702,7 +702,7 @@ sub mount {
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die \N("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
-    } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
+    } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', 'devfs', @fs_modules)) {
 	$where =~ s|/$||;
 
 	my $flag = c::MS_MGC_VAL();
