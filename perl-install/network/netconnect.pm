@@ -432,6 +432,7 @@ killall pppd
                         $modem ||= $netcnx->{$netcnx->{type}};
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
+                        $modem->{Gateway} ||= $l{Gateway};
                         $modem->{connection} ||= $l{Name};
                         $modem->{domain} ||= $l{Domain};
                         ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
@@ -449,6 +450,7 @@ killall pppd
                         #my $secret = network::tools::read_secret_backend();
                         #my @cnx_list = map { $_->{server} } @$secret;
                         $modem->{$_} ||= '' foreach qw(connection phone login passwd auth domain dns1 dns2);
+                          
                     },
                     name => N("Dialup: account options"), 
                     data => sub {
@@ -508,7 +510,7 @@ killall pppd
                     data => sub {
                         [
                          { label => N("Gateway"), type => "list", val => \$modem->{auto_gateway}, list => [ N("Automatic"), N("Manual") ] },
-                         { label => N("Gateway IP address"), val => \$modem->{dns1}, 
+                         { label => N("Gateway IP address"), val => \$modem->{Gateway}, 
                            disabled => sub { $modem->{auto_gateway} eq N("Automatic") } },
                         ];
                         },
