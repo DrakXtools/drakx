@@ -476,10 +476,10 @@ sub testFinalConfig($;$$) {
             1;
 	});
 
-        my $background = "/usr/share/pixmaps/mdk/mandrake-logo.xpm";
+        my $background = "/usr/share/icons/mandrake-logo.xpm";
         my $qiv = "/usr/bin/qiv";
-        -r "$prefix/$background" && -x "$prefix/$qiv" and
-            system(($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv -y $background");
+        -r "} . $prefix . q{/$background" && -x "} . $prefix . q{/$qiv" and
+            system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
 
 	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
