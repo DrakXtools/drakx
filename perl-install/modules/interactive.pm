@@ -7,9 +7,9 @@ sub config_window {
     require modules;
     modules::mergein_conf('/etc/modules.conf');
     my %conf = modules::get_parameters($data->{driver});
-    require modparm;
+    require modules::parameters;
     my @l;
-    foreach (modparm::parameters($data->{driver})) {
+    foreach (modules::parameters::parameters($data->{driver})) {
 	   my ($name, $format, $description) = @$_;
 	   push @l, { label => $name, help => "$description\n[$format]", val => \$conf{$name} };
     }

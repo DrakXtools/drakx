@@ -714,8 +714,8 @@ sub load_category__prompt {
     my $module_descr = $available_modules{$module};
 
     my $options;
-    require modparm;
-    my @parameters = modparm::parameters($module);
+    require modules::parameters;
+    my @parameters = modules::parameters::parameters($module);
     if (@parameters && $in->ask_from_list_('',
 N("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
