@@ -428,6 +428,7 @@ sub part_possible_actions {
         N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && $::expert',
     );
     my ($actions_names) = list2kv(@l);
+    my $_all_hds = $all_hds; #- help perl_checker know the $all_hds *is* used in the macro below
     my %macros = (
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
