@@ -219,12 +219,12 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 			options++;
 		}
 
-		log_message("updatemodules: (%s) (%s)", module, options);
+		log_message("third party: auto-loading module (%s) (%s)", module, options);
 		while (entry && *entry) {
 			if (!strncmp(*entry, module, strlen(module)) && (*entry)[strlen(module)] == '.') {
 				sprintf(final_name, "%s/%s", modules_location, *entry);
 				if (insmod_local_file(final_name, options)) {
-					log_message("\t%s (floppy): failed", *entry);
+					log_message("\t%s (third party media): failed", *entry);
 					stg1_error_message("Insmod %s (floppy) failed.", *entry);
 				}
 				break;
@@ -296,7 +296,7 @@ void thirdparty_load_modules(void)
 	} else {
 		if (IS_AUTOMATIC)
 			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
-		log_message("No \"to_load\" file, prompting for modules");
+		log_message("third party: no \"to_load\" file, prompting for modules");
 		results = thirdparty_prompt_modules(modules_location, modules_list);
 	}
 	umount(THIRDPARTY_MOUNT_LOCATION);
