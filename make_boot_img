@@ -324,9 +324,9 @@ To Build a Bootable CD-ROM, try:
 	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
 
 	output("$dir/boot.msg", "
-Welcome to Linux-Mandrake 7.1
+Welcome to Mandrake Linux 7.1
 
-Press <Enter> to install or upgrade a system 7mLinux-Mandrake7m
+Press <Enter> to install or upgrade a system 7mMandrake Linux7m
 ");
 
 	output("$dir/silo.conf", "

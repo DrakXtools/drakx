@@ -883,7 +883,7 @@ sub install_loadlin {
 
     output "/initrd/loopfs/lnx4win/linux.bat", unix2dos(
 '@echo off
-echo Linux Mandrake
+echo Mandrake Linux
 smartdrv /C
 ' . "$cmd\n");
 

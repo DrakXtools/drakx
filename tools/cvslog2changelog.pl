@@ -61,7 +61,7 @@ BEGIN {
 	      'fpons'   => 'François Pons  <fpons@mandrakesoft.com>',
 	      'pablo'   => 'Pablo Saratxaga <pablo@mandrakesoft.com>',
 	      'damien'  => 'dam\'s  <damien@mandrakesoft.com>',
-	      'install' => 'DrakX <install@linux-mandrake.com>',
+	      'install' => 'DrakX <install@mandrakesoft.com>',
 	      'prigaux' => 'Pixel  <pixel@mandrakesoft.com>',
 	      'flepied' => 'Frederic Lepied  <flepied@mandrakesoft.com>',
 	      'chmouel' => 'Chmouel Boudjnah  <chmouel@mandrakesoft.com>',

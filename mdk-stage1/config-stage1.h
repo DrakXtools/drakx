@@ -21,7 +21,7 @@
 /* If we have more than that amount of memory (in Mbytes), we assume we can load the second stage as a ramdisk */
 #define MEM_LIMIT_RAMDISK 52
 
-#define DISTRIB_NAME "Linux-Mandrake"
+#define DISTRIB_NAME "Mandrake Linux"
 
 #define RAMDISK_COMPRESSION_RATIO 1.95
 
