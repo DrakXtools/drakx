@@ -90,8 +90,8 @@ sub ask_info2 {
 		  ]
 		 ) or return;
     if ($netc->{vpivci}) {
-	foreach (['Netherlands', 8.48], ['France', 8.35], ['Belgium', 8.35], ['Italy', 8.35], ['UK', 0.38]) {
-	    $netc->{vpivci} eq $_->[0] and $netc->{vpivci} = $_->[1] ;
+	foreach (['Netherlands', '8_48'], ['France', '8_35'], ['Belgium', '8_35'], ['Italy', '8_35'], ['UK', '0_38']) {
+	    $netc->{vpivci} eq $_->[0] and $netc->{vpivci} = $_->[1];
 	}
     }
     1;

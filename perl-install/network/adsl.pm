@@ -109,7 +109,7 @@ defaultroute
     }
 
     if ($adsl_type eq 'speedtouch') {
-	$netc->{vpivci} =~ /(\d+)\.(\d+)/;
+	$netc->{vpivci} =~ /(\d+)_(\d+)/;
 	output("$prefix/etc/ppp/peers/adsl", 
 qq{noauth
 noipdefault
@@ -124,7 +124,6 @@ holdoff 4
 maxfail 25
 persist
 usepeerdns
-$USERLINE
 defaultroute
 user "$adsl->{login}"
 });
@@ -137,7 +136,7 @@ user "$adsl->{login}"
 						      ['ppp-compress-26', 'ppp_deflate']);
 	$::isStandalone and modules::write_conf($prefix);
 	$in->ask_warn('', _('You need the alcatel microcode.
-Downlaod it at
+Download it at
 http://www.alcatel.com/consumer/dsl/dvrreg_lx.htm
 and copy the mgmt.o in /usr/share/speedtouch'))
     }
