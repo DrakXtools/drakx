@@ -9,16 +9,18 @@ function f() {
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
 f "scsi disk" ; SCSI_DRIVERS=$v
-f "net network" ; NETWORK_DRIVERS=$v
+f "net" ; NETWORK_DRIVERS=$v
 f "scsi cdrom" ; CD_DRIVERS=$v
-f "pcmcia network" ; PCMCIA_DRIVERS=$v
+f "pcmcia net_raw cdrom_raw scsi_raw disk_raw" ; PCMCIA_DRIVERS=$v
+f "pcmcia net cdrom scsi disk" ; ALL_DRIVERS=$v
 
 [ $ARCH == "i386" ] && FSMODULES="vfat.o fat.o"
 
 NETWORK_MODULES="$FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
 HD_MODULES="     $FSMODULES $SCSI_DRIVERS loop.o isofs.o"
-PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS af_packet.o isofs.o scsi_mod.o sr_mod.o sd_mod.o cdrom.o ide-cd.o ide-mod.o ide-probe.o ide-disk.o serial.o"
+PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS"
+ALL_MODULES="    $FSMODULES $ALL_DRIVERS"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
@@ -45,6 +47,7 @@ rm -rf modules ; install -d modules
     ls $CDROM_MODULES   | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
     ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
     ls $PCMCIA_MODULES  | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
+    ls $ALL_MODULES     | cpio --quiet -H crc -o | gzip -9 > all_modules.cgz
 [ "$ARCH" == "i386" ] && {
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
 }

@@ -30,7 +30,7 @@ arch() =~ /^sparc/ ? (
   "3c90x" => "3Com 3c90x (Cyclone/Hurricane/Tornado)",
   "at1700" => "Allied Telesis AT1700",
   "ac3200" => "Ansel Communication AC3200",
-  "acenic" => "AceNIC Gigabit Ethernet",
+#BIG  "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "82596" => "Apricot 82596",
 #  "atp" => "ATP", # builtin the kernel
@@ -82,10 +82,10 @@ arch() =~ /^sparc/ ? (
   "sb1000" => "sb1000",
   "sbni" => "sbni",
   "sis900" => "sis900",
-  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
+#BIG  "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
   "3c59x" => "3com 3c59x (Vortex)",
-  "de4x5" => "Digital 425,434,435,450,500",
+#BIG  "de4x5" => "Digital 425,434,435,450,500",
   "rtl8139" => "RealTek RTL8129/8139",
 }],
 [ 'net_raw', {
@@ -153,15 +153,15 @@ arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
-  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
+#unused  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-IV Controller", # not there anymore?
   "megaraid" => "AMI MegaRAID",
   "aacraid" => "AACxxx Raid Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
   "ips" => "IBM ServeRAID controller",
-	 "eata" => "EATA SCSI PM2x24/PM3224",
-	 "eata_pio" => "EATA PIO Adapters",
-	 "eata_dma" => "EATA DMA Adapters",
+#unused	 "eata" => "EATA SCSI PM2x24/PM3224",
+#unused	 "eata_pio" => "EATA PIO Adapters",
+#unused	 "eata_dma" => "EATA DMA Adapters",
   "ppa" => "Iomega PPA3 (parallel port Zip)",
   "imm" => "Iomega Zip (new driver)",
 ),
@@ -237,7 +237,7 @@ arch() !~ /^sparc/ ? (
   "3c589_cs" => "3c589_cs",
   "parport_cs" => "parport_cs", 
   "3c575_cb" => "3c575_cb",
-  "apa1480_cb" => "apa1480_cb",
+#unused  "apa1480_cb" => "apa1480_cb",
   "cb_enabler" => "cb_enabler",
   "epic_cb" => "epic_cb",
   "iflash2+_mtd" => "iflash2+_mtd",
