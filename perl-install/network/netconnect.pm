@@ -89,7 +89,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, @adsl_devices);
+      my ($adsl_type, $adsl_device, @adsl_devices);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -144,6 +144,14 @@ sub get_subwizard {
               modules::add_alias($card->[0], $card->[1]);
           }
       };
+      
+      my %adsl_devices = (
+                          speedtouch => N("Alcatel speedtouch USB modem"),
+                          sagem => N("Sagem USB modem"),
+                          bewan_usb => N("Bewan USB modem"),
+                          bewan_pci => N("Bewan PCI modem"),
+                         );
+
     
       # main wizard:
       my $wiz;
@@ -509,18 +517,25 @@ killall pppd
                         get_subwizard($wiz, 'adsl');
                         $lan_detect->();
                         detect($netc->{autodetect}, 'adsl');
+                        # FIXME: we still need to detect bewan modems
                         @adsl_devices = @cards;
-                        push @adsl_devices, N("Alcatel speedtouch USB modem") if $netc->{autodetect}{adsl}{speedtouch};
-                        push @adsl_devices, N("Sagem USB modem") if $netc->{autodetect}{adsl}{sagem};
-                        # we still need to detect those:
-                        N("Eagle USB modem");
-                        N("Bewan USB modem");
-                        N("Bewan PCI modem");
+                        push @adsl_devices, $adsl_devices{speedtouch}  if $netc->{autodetect}{adsl}{speedtouch};
+                        push @adsl_devices, $adsl_devices{sagem} if $netc->{autodetect}{adsl}{sagem};
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
                     data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
                                list => \@adsl_devices, } ],
-                    next => "adsl_protocol",
+                    post => sub {
+                        my %packages = (
+                                        'eci'        => 'eciadsl',
+                                        'sagem'      => 'adiusbadsl',
+                                        'speedtouch' => 'speedtouch',
+                                       );
+                        my $adsl_device = find { $adsl_devices{$_} eq $ntf_name } keys %adsl_devices;
+                        print "package: $ntf_name => $adsl_device => $packages{$adsl_device}\n";
+                        $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
+                        return 'adsl_protocol';
+                    },
                    },
 
 
