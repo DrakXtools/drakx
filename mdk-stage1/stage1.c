@@ -238,9 +238,6 @@ static void handle_pcmcia(void)
 	log_message("cardmgr rc: %d", cardmgr_call());
 	remove_wait_message();
 
-	if (IS_EXPERT)
-		thirdparty_load_modules();
-
         add_to_env("PCMCIA", pcmcia_adapter);
 }
 #endif
