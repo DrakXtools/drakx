@@ -284,7 +284,7 @@ sub reallyChooseGroups {
 }
 
 sub choosePackagesTree {
-    my ($o, $packages, $limit_to_medium) = @_;
+    my ($o, $packages, $o_limit_to_medium) = @_;
 
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
@@ -304,7 +304,7 @@ sub choosePackagesTree {
 			    build_tree => sub {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
-				    foreach (sort map { $_->name } grep { !$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium }
+				    foreach (sort map { $_->name } grep { !$o_limit_to_medium || pkgs::packageMedium($packages, $_) == $o_limit_to_medium }
 					     @{$packages->{depslist}}) {
 					$add_node->($_, undef);
 				    }
@@ -314,7 +314,7 @@ sub choosePackagesTree {
 					#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
 					$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
 					foreach my $p (@{$packages->{depslist}}) {
-					    !$limit_to_medium || pkgs::packageMedium($packages, $p) == $limit_to_medium or next;
+					    !$o_limit_to_medium || pkgs::packageMedium($packages, $p) == $o_limit_to_medium or next;
 					    my @flags = $p->rflags;
 					    next if !($p->rate && any { any { !/^!/ && $fl{$_} } split('\|\|') } @flags);
 					    $p->rate >= 3 ?
@@ -423,7 +423,7 @@ sub choosePackagesTree {
 				     ],
 			    state => {
 				      auto_deps => 1,
-				      flat      => $limit_to_medium,
+				      flat      => $o_limit_to_medium,
 				     },
 			  };
 

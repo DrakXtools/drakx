@@ -1142,11 +1142,11 @@ sub install {
 }
 
 sub ensure_is_installed {
-    my ($do, $pkg, $file, $auto) = @_;
+    my ($do, $pkg, $file, $b_auto) = @_;
 
     if (! -e "$::prefix$file") {
 	$do->{o}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
-	  or return if !$auto;
+	  or return if !$b_auto;
 	$do->{o}->do_pkgs->install($pkg);
     }
     if (! -e "$::prefix$file") {
@@ -1157,9 +1157,9 @@ sub ensure_is_installed {
 }
 
 sub check_kernel_module_packages {
-    my ($do, $base_name, $ext_name) = @_;
+    my ($do, $base_name, $o_ext_name) = @_;
 
-    if (!$ext_name || pkgs::packageByName($do->{o}{packages}, $ext_name)) {
+    if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
 	my @rpms;
 	foreach my $p (@{$do->{o}{packages}{depslist}}) {
 	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))?$/
@@ -1170,7 +1170,7 @@ sub check_kernel_module_packages {
 	    log::l("found kernel module packages $name");
 	    push @rpms, $name;
 	}
-	@rpms > 0 and return [ @rpms, if_($ext_name, $ext_name) ];
+	@rpms > 0 and return [ @rpms, if_($o_ext_name, $o_ext_name) ];
     }
     return undef;
 }

@@ -10,17 +10,15 @@ use Xconfig::xfree4;
 use log;
 
 
-#- files are optional
 sub read {
-    my ($class, $xfree3_file, $xfree4_file) = @_;
-    bless { xfree3 => eval { Xconfig::xfree3->read($xfree3_file) } || [], 
-	    xfree4 => eval { Xconfig::xfree4->read($xfree4_file) } || [] }, $class;
+    my ($class, $o_xfree3_file, $o_xfree4_file) = @_;
+    bless { xfree3 => eval { Xconfig::xfree3->read($o_xfree3_file) } || [], 
+	    xfree4 => eval { Xconfig::xfree4->read($o_xfree4_file) } || [] }, $class;
 }
-#- files are optional
 sub write {
-    my ($both, $xfree3_file, $xfree4_file) = @_;
-    $both->{xfree3} ? $both->{xfree3}->write($xfree3_file) : unlink($xfree3_file);
-    $both->{xfree4} ? $both->{xfree4}->write($xfree4_file) : unlink($xfree4_file);
+    my ($both, $o_xfree3_file, $o_xfree4_file) = @_;
+    $both->{xfree3} ? $both->{xfree3}->write($o_xfree3_file) : unlink($o_xfree3_file);
+    $both->{xfree4} ? $both->{xfree4}->write($o_xfree4_file) : unlink($o_xfree4_file);
 }
 
 sub empty_config {

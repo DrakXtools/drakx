@@ -102,11 +102,11 @@ sub new_device_sections {
 }
 
 sub is_fbdev {
-    my ($raw_X, $Screen) = @_;
+    my ($raw_X, $o_Screen) = @_;
 
-    my $Screen_ = $Screen || $raw_X->get_default_screen or return;
+    my $Screen = $o_Screen || $raw_X->get_default_screen or return;
 
-    val($Screen_->{Server}) eq 'FBDev';
+    val($Screen->{Server}) eq 'FBDev';
 }
 
 sub set_Option {}

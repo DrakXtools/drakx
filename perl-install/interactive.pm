@@ -84,8 +84,8 @@ sub new($) {
 }
 
 sub vnew {
-    my ($_type, $su, $icon) = @_;
-    $su = $su eq "su";
+    my ($_type, $o_su, $o_icon) = @_;
+    my $su = $o_su eq "su";
     if ($ENV{INTERACTIVE_HTTP}) {
 	require interactive::http;
 	return interactive::http->new;
@@ -100,7 +100,7 @@ sub vnew {
 	eval { require interactive::gtk };
 	if (!$@) {
 	    my $o = interactive::gtk->new;
-	    if ($icon && $icon ne 'default' && !$::isWizard) { $o->{icon} = $icon } else { undef $o->{icon} }
+	    if ($o_icon && $o_icon ne 'default' && !$::isWizard) { $o->{icon} = $o_icon } else { undef $o->{icon} }
 	    return $o;
 	}
     }
@@ -127,12 +127,12 @@ sub ask_warn {
     ask_warn_($o, { title => $title, messages => $message });
 }
 sub ask_yesorno {
-    my ($o, $title, $message, $def) = @_;
-    ask_yesorno_($o, { title => $title, messages => $message }, $def);
+    my ($o, $title, $message, $b_def) = @_;
+    ask_yesorno_($o, { title => $title, messages => $message }, $b_def);
 }
 sub ask_okcancel {
-    my ($o, $title, $message, $def) = @_;
-    ask_okcancel_($o, { title => $title, messages => $message }, $def);
+    my ($o, $title, $message, $b_def) = @_;
+    ask_okcancel_($o, { title => $title, messages => $message }, $b_def);
 }
 
 sub ask_warn_ {
@@ -141,26 +141,26 @@ sub ask_warn_ {
 }
 
 sub ask_yesorno_ {
-    my ($o, $common, $def) = @_;
+    my ($o, $common, $b_def) = @_;
     $common->{cancel} = '';
-    ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Yes"), N_("No") ], $def ? "Yes" : "No") eq "Yes";
+    ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Yes"), N_("No") ], $b_def ? "Yes" : "No") eq "Yes";
 }
 
 sub ask_okcancel_ {
-    my ($o, $common, $def) = @_;
+    my ($o, $common, $b_def) = @_;
 
     if ($::isWizard) {
 	$::no_separator = 1;
-	$common->{focus_cancel} = !$def;
+	$common->{focus_cancel} = !$b_def;
     	ask_from_no_check($o, $common, []);
     } else {
-	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Ok"), N_("Cancel") ], $def ? "Ok" : "Cancel") eq "Ok";
+	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ N_("Ok"), N_("Cancel") ], $b_def ? "Ok" : "Cancel") eq "Ok";
     }
 }
 
 sub ask_file {
-    my ($o, $title, $dir) = @_;
-    $o->ask_fileW($title, $dir);
+    my ($o, $title, $o_dir) = @_;
+    $o->ask_fileW($title, $o_dir);
 }
 sub ask_fileW {
     my ($o, $title, $_dir) = @_;
@@ -168,22 +168,22 @@ sub ask_fileW {
 }
 
 sub ask_from_list {
-    my ($o, $title, $message, $l, $def) = @_;
-    ask_from_listf($o, $title, $message, undef, $l, $def);
+    my ($o, $title, $message, $l, $o_def) = @_;
+    ask_from_listf($o, $title, $message, undef, $l, $o_def);
 }
 
 sub ask_from_list_ {
-    my ($o, $title, $message, $l, $def) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $def);
+    my ($o, $title, $message, $l, $o_def) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($_[0]) }, $l, $o_def);
 }
 
 sub ask_from_listf_ {
-    my ($o, $title, $message, $f, $l, $def) = @_;
-    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $def);
+    my ($o, $title, $message, $f, $l, $o_def) = @_;
+    ask_from_listf($o, $title, $message, sub { translate($f->(@_)) }, $l, $o_def);
 }
 sub ask_from_listf {
-    my ($o, $title, $message, $f, $l, $def) = @_;
-    ask_from_listf_raw($o, { title => $title, messages => $message }, $f, $l, $def);
+    my ($o, $title, $message, $f, $l, $o_def) = @_;
+    ask_from_listf_raw($o, { title => $title, messages => $message }, $f, $l, $o_def);
 }
 sub ask_from_listf_raw {
     my ($_o, $_common, $_f, $l, $_def) = @_;
@@ -382,11 +382,13 @@ sub ask_from_no_check {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
     $common->{cancel} = '' if !defined wantarray();
-    $o->ask_fromW($common, partition { !$_->{advanced} } @$l);
+    my ($l1, $l2) = partition { !$_->{advanced} } @$l;
+    $o->ask_fromW($common, $l1, $l2);
 }
 sub ask_from_real {
     my ($o, $common, $l) = @_;
-    my $v = $o->ask_fromW($common, partition { !$_->{advanced} } @$l);
+    my ($l1, $l2) = partition { !$_->{advanced} } @$l;
+    my $v = $o->ask_fromW($common, $l1, $l2);
     %$common = ();
     $v;
 }
@@ -431,10 +433,10 @@ sub ask_browse_tree_info_refW { #- default definition, do not use with too many 
 }
 
 sub wait_message {
-    my ($o, $title, $message, $temp) = @_;
+    my ($o, $title, $message, $b_temp) = @_;
 
     my $w = $o->wait_messageW($title, [ N("Please wait"), deref($message) ]);
-    push @tempory::objects, $w if $temp;
+    push @tempory::objects, $w if $b_temp;
     my $b = before_leaving { $o->wait_message_endW($w) };
 
     #- enable access through set

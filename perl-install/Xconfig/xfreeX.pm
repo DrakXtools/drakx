@@ -15,14 +15,14 @@ sub empty_config {
 }
 
 sub read {
-    my ($class, $file) = @_;
-    $file ||= ($::prefix || '') . (bless {}, $class)->config_file;
+    my ($class, $o_file) = @_;
+    my $file = $o_file || ($::prefix || '') . (bless {}, $class)->config_file;
     my $raw_X = Xconfig::parse::read_XF86Config($file);
     bless $raw_X, $class;
 }
 sub write {
-    my ($raw_X, $file) = @_;
-    $file ||= ($::prefix || '') . $raw_X->config_file;
+    my ($raw_X, $o_file) = @_;
+    my $file = $o_file || ($::prefix || '') . $raw_X->config_file;
     rename $file, "$file.old";
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
@@ -167,8 +167,8 @@ sub set_load_module {
 }
 
 sub get_resolution {
-    my ($raw_X, $Screen) = @_;
-    $Screen ||= $raw_X->get_default_screen or return {};
+    my ($raw_X, $o_Screen) = @_;
+    my $Screen = $o_Screen || $raw_X->get_default_screen or return {};
 
     my $depth = val($Screen->{DefaultColorDepth});
     my $Display = find { !$depth || val($_->{l}{Depth}) eq $depth } @{$Screen->{Display} || []} or return {};
@@ -177,9 +177,9 @@ sub get_resolution {
 }
 
 sub set_resolution {
-    my ($raw_X, $resolution, $Screen_) = @_;
+    my ($raw_X, $resolution, $o_Screen_) = @_;
     
-    foreach my $Screen ($Screen_ ? $Screen_ : $raw_X->get_screens) {
+    foreach my $Screen ($o_Screen_ ? $o_Screen_ : $raw_X->get_screens) {
 	$Screen ||= $raw_X->get_default_screen or internal_error('no screen');
 
 	$Screen->{DefaultColorDepth} = { val => $resolution->{Depth} };
