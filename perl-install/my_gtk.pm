@@ -364,7 +364,7 @@ sub gtkctree_children {
     @l;
 }
 
-my @icon_paths = ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps");
+my @icon_paths = ($ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/icons", "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps");
 
 sub add_icon_path { @icon_paths = uniq(@icon_paths, @_) }
 
