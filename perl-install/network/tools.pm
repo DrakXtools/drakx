@@ -203,7 +203,7 @@ sub is_dynamic_host {
 
 sub convert_wep_key_for_iwconfig {
     #- 5 or 13 characters, consider the key as ASCII and prepend "s:"
-    #- else consider the key as hexadecimal, do not strip dashes 
+    #- else consider the key as hexadecimal, do not strip dashes
     #- always quote the key as string
     my ($key) = @_;
     member(length($key), (5, 13)) ? "s:$key" : $key;
@@ -217,6 +217,15 @@ sub get_wep_key_from_iwconfig {
     $key;
 }
 
+sub convert_key_for_wpa_supplicant {
+    my ($key) = @_;
+    if ($key =~ /^([[:xdigit:]]{4}[\:-])+[[:xdigit:]]{2,}$/) {
+        $key =~ s/[\:-]//g;
+        return lc($key);
+    } else {
+        return qq("$key");
+    }
+}
 
 #- returns interface whose IP address matchs given IP address, according to its network mask
 sub find_matching_interface {

@@ -1132,6 +1132,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS}, advanced => 1 },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE}, advanced => 1 },
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
+                             { text => N("Use Wi-Fi Protected Access (WPA)"), val => \$ethntf->{WIRELESS_USE_WPA}, type => "bool" },
                             ];
                     },
                     complete => sub {
@@ -1197,6 +1198,7 @@ See iwpriv(8) man page for further information."),
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
                         $module =~ /^prism2_/ and network::network::wlan_ng_configure($in, $ethntf, $module);
+                        network::network::wpa_supplicant_configure($in, $ethntf);
                         return "static_hostname";
                     },
                    },

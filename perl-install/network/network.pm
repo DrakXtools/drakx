@@ -521,6 +521,23 @@ sub wlan_ng_configure {
     services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
 }
 
+sub wpa_supplicant_configure {
+    my ($in, $ethntf) = @_;
+    require services;
+    if (delete $ethntf->{WIRELESS_USE_WPA}) {
+        $in->do_pkgs->install('wpa_supplicant');
+        wpa_supplicant_add_network({
+            ssid => qq("$ethntf->{WIRELESS_ESSID}"),
+            psk => network::tools::convert_key_for_wpa_supplicant($ethntf->{WIRELESS_ENC_KEY}),
+        });
+        services::start_service_on_boot("tmdns");
+        services::restart('wpa_supplicant');
+    } else {
+        services::stop("tmdns");
+        services::do_not_start_service_on_boot("tmdns");
+    }
+}
+
 sub wpa_supplicant_add_network {
     my ($new_network) = @_;
     my $wpa_supplicant_conf = "$::prefix/etc/wpa_supplicant.conf";
@@ -529,12 +546,12 @@ sub wpa_supplicant_add_network {
     foreach (cat_($wpa_supplicant_conf)) {
         if (%network) {
             #- in a "network = {}" block
-            if (/^\s*(\w+)\s*=\s*(.*?)(\s*#.*)?$/) {
+            if (/^\s*(\w+)=(.*?)(\s*#.*)?$/) {
                 push @{$network{entries}}, { key => $1, value => $2, comment => $3 };
                 $1 eq 'ssid' and $network{ssid} = $2;
             } elsif (/^·*\}/) {
                 #- end of network block, write it
-                $s .= "network = { $network{comment}\n";
+                $s .= "network={$network{comment}\n";
                 my $update = $network{ssid} eq $new_network->{ssid};
                 foreach (@{$network{entries}}) {
                     my $key = $_->{key};
@@ -545,14 +562,14 @@ sub wpa_supplicant_add_network {
                         $_->{value} = delete $new_network->{$key};
                     }
                     if ($key) {
-                        $s .= "    $key = $_->{value}$_->{comment}\n";
+                        $s .= "    $key=$_->{value}$_->{comment}\n";
                     } else {
                         $s .= " $_->{comment}\n";
                     }
                 }
                 if ($update) {
                     while (my ($key, $value) = each(%$new_network)) {
-                        $s .= "    $key = $value\n";
+                        $s .= "    $key=$value\n";
                     }
                 }
                 $s .= "}\n";
@@ -563,7 +580,7 @@ sub wpa_supplicant_add_network {
                 push @{$network{entries}}, { comment => $_ };
             }
         } else {
-            if (/^\s*network\s*=\s*\{(.*)/) {
+            if (/^\s*network={(.*)/) {
                 #- beginning of a new network block
                 $network{comment} = $1;
             } else {
@@ -574,13 +591,13 @@ sub wpa_supplicant_add_network {
     }
     if ($new_network) {
         #- network wasn't found, write it
-        $s .= "\nnetwork = {\n";
+        $s .= "\nnetwork={\n";
         #- write ssid first
         if (my $ssid = delete $new_network->{ssid}) {
-            $s .= "    ssid = $ssid\n";
+            $s .= "    ssid=$ssid\n";
         }
         while (my ($key, $value) = each(%$new_network)) {
-            $s .= "    $key = $value\n";
+            $s .= "    $key=$value\n";
         }
         $s .= "}\n";
     }
