@@ -337,19 +337,22 @@ sub proxy_configure {
     chmod 0755, "$::prefix/etc/profile.d/proxy.csh";
 
     #- KDE proxy settings
-    my $kde_config_file = "$::prefix/usr/share/config/kioslaverc";
-    update_gnomekderc($kde_config_file,
-                      undef,
-                      PersistentProxyConnection => "false"
+    my $kde_config_dir = "$::prefix/usr/share/config";
+    my $kde_config_file = "$kde_config_dir/kioslaverc";
+    if (-d $kde_config_dir) {
+        update_gnomekderc($kde_config_file,
+                          undef,
+                          PersistentProxyConnection => "false"
+                      );
+        update_gnomekderc($kde_config_file,
+                          "Proxy Settings",
+                          AuthMode => 0,
+                          ProxyType => $u->{http_proxy} || $u->{ftp_proxy} ? 4 : 0,
+                          ftpProxy => "ftp_proxy",
+                          httpProxy => "http_proxy",
+                          httpsProxy => "http_proxy"
                   );
-    update_gnomekderc($kde_config_file,
-                      "Proxy Settings",
-                      AuthMode => 0,
-                      ProxyType => $u->{http_proxy} || $u->{ftp_proxy} ? 4 : 0,
-                      ftpProxy => "ftp_proxy",
-                      httpProxy => "http_proxy",
-                      httpsProxy => "http_proxy"
-                  );
+    }
 
     #- Gnome proxy settings
     if (-d "$::prefix/etc/gconf/2/") {
