@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 21mdk
+Release: 23mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -262,8 +262,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Thu Aug 29 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-21mdk
+* Thu Aug 29 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-23mdk
 - drakupdate_fstab first appearance
+
+* Wed Aug 28 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-22mdk
+- harddrake: don't display the menu bar in embedded mode, but a "quit"
+  button 
+  (titi still have to learn how to commit (bis))
+
+* Tue Aug 27 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-21mdk
+- drakconnect fixes (damien)
+  (titi still have to learn how to commit (bis))
 
 * Fri Aug 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-20mdk
 - draksound: display right message ("no alternative") when no
