@@ -46,7 +46,7 @@ my $in = 'interactive'->vnew('su', 'X');
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
-my $f = "/usr/X11R6/lib/X11/Cards";
+my $f = "/usr/X11R6/lib/X11/rgb.txt"; #- this one is on all platform (instead of Cards ?)
 $in->do_pkgs->install('XFree86', 'XFree86-75dpi-fonts') if !-e $f;
 -e $f or die "install XFree86 first!\n";
 
