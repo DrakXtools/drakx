@@ -576,7 +576,7 @@ sub loadkeys {
     $h || @_ != 1 and die "usage: loadkeys <keyboard>\n";
 
     require keyboard;
-    keyboard::setup({ KEYBOARD => $_[0]});
+    keyboard::setup({ KEYBOARD => $_[0] });
 }
 
 sub sync { common::sync() }
