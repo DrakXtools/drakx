@@ -36,9 +36,7 @@ sub new {
 sub configureNetwork {
     my ($o) = @_;
     modules::load_thiskind('net', $o->{pcmcia});
-#-    install_steps::configureNetwork($o);
-    $o->{netcnx}||={};
-    netconnect::net_connect($o->{prefix}, $o->{netcnx}, $o->{netc}, $o->{modem}, $o->{mouse},  $o, $o->{pcmcia}, $o->{intf}, 1);
+    netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{pcmcia}, $o->{intf}, 1);
 }
 
 sub enteringStep($$$) {

@@ -838,7 +838,7 @@ sub exitInstall { install_any::unlockCdrom }
 sub hasNetwork {
     my ($o) = @_;
 
-    $o->{intf} && $o->{netc}{NETWORKING} ne 'false' || $o->{modem};
+    $o->{intf} && $o->{netc}{NETWORKING} ne 'false' || $o->{netcnx}{modem};
 }
 
 #------------------------------------------------------------------------------
@@ -852,11 +852,11 @@ sub upNetwork {
     modules::write_conf($o->{prefix});
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::up_it($o->{prefix}, $o->{intf});
-    } elsif (!$pppAvoided && $o->{modem} && !$o->{modem}{isUp}) {
+    } elsif (!$pppAvoided && $o->{netcnx}{modem} && !$o->{netcnx}{modem}{isUp}) {
 	eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
 	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	run_program::rooted($o->{prefix}, "ifup", "ppp0");
-	$o->{modem}{isUp} = 1;
+	$o->{netcnx}{modem}{isUp} = 1;
     } else {
 	$::testing or return;
     }
@@ -870,11 +870,11 @@ sub downNetwork {
     modules::write_conf($o->{prefix});
     if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::down_it($o->{prefix}, $o->{intf});
-    } elsif ($o->{modem} && $o->{modem}{isUp}) {
+    } elsif ($o->{netcnx}{modem} && $o->{netcnx}{modem}{isUp}) {
 	run_program::rooted($o->{prefix}, "ifdown", "ppp0");
 	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
 	eval { modules::unload($_) foreach qw(ppp_deflate bsd_comp ppp serial) };
-	$o->{modem}{isUp} = 0;
+	$o->{netcnx}{modem}{isUp} = 0;
     } else {
 	$::testing or return;
     }

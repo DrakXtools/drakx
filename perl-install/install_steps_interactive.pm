@@ -464,8 +464,7 @@ sub afterInstallPackages($) {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o, $first_time) = @_;
-    $o->{netcnx}||={};
-    netconnect::net_connect($o->{prefix}, $o->{netcnx}, $o->{netc}, $o->{modem}, $o->{mouse},  $o, $o->{pcmcia}, $o->{intf}, $first_time);
+    netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse},  $o, $o->{pcmcia}, $o->{intf}, $first_time);
 }
 
 #-configureNetworkIntf moved to network
