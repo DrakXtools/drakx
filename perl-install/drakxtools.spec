@@ -288,7 +288,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Fri Dec 13 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.4mdk
+* Thu Dec 19 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.4mdk
 - gtk+2 snapshot
 
 * Wed Dec 04 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.3mdk
