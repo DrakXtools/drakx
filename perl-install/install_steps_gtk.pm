@@ -412,11 +412,22 @@ sub choosePackagesTree {
     };
     $add_nodes->($flat);
 
+    my $update_size = sub {
+	my $size = pkgs::selectedSize($packages);
+	$w_size->set(_("Total size: %d / %d MB", 
+		       pkgs::correctSize($size / sqr(1024)),
+		       install_any::getAvailableSpace($o) / sqr(1024)));
+    };
+
     my %toolbar = my @toolbar = 
       (
-       ftout =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
-       ftin  =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
-       reload=>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
+       floppy =>  [ _("Load/Save on floppy") , sub { $o->loadSavePackagesOnFloppy($packages);
+						     my $w = $o->wait_message(_("Package selection"),
+									      _("Updating package selection"));
+						     $add_nodes->($flat); &$update_size; } ],
+       ftout  =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
+       ftin   =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+       reload =>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
       );
     $toolbar->set_button_relief("none");
     foreach (grep_index { $::i % 2 == 0 } @toolbar) {
@@ -444,12 +455,6 @@ sub choosePackagesTree {
 	0;
     };
 
-    my $update_size = sub {
-	my $size = pkgs::selectedSize($packages);
-	$w_size->set(_("Total size: %d / %d MB", 
-		       pkgs::correctSize($size / sqr(1024)),
-		       install_any::getAvailableSpace($o) / sqr(1024)));
-    };
     my $select = sub {
 	my %l;
 	my $isSelection = !pkgs::packageFlagSelected($_[0]);
