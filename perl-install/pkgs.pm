@@ -881,7 +881,7 @@ sub installTransactionClosure {
 	keys %closure >= $limitMinTrans and last;
     }
 
-    map { delete $id2pkg->{$_} } grep { $id2pkg->{$_} } keys %closure;
+    map { delete $id2pkg->{$_} } grep { $id2pkg->{$_} } sort { $a <=> $b } keys %closure;
 }
 
 sub installCallback {
@@ -996,7 +996,7 @@ sub install($$$;$$) {
 			  foreach @transToInstall;
 		    }
 
-		    #$trans->order or die "error ordering package list: " . c::rpmErrorString();
+		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
