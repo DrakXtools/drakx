@@ -205,56 +205,6 @@ sub selectMouse {
     } 
 }
 
-#------------------------------------------------------------------------------
-sub chooseSizeToInstall {
-    my ($o, $packages, $min_size, $def_size, $max_size_, $availableC, $individual) = @_;
-    my $max_size = min($max_size_, $availableC);
-    my $enough = $max_size == $max_size_;
-    my $percentage = int 100 * $max_size / $max_size_;
-
-    #- don't ask anything if the difference between min and max is too small
-    log::l("chooseSizeToInstall: min_size=$min_size, def_size=$def_size, max_size=$max_size_, available=$availableC");
-    return $max_size if $min_size && $max_size / $min_size < 1.05;
-
-    log::l("choosing size to install between $min_size and $max_size");
-    my $w = my_gtk->new('');
-    my $adj = create_adjustment(int(100 * $def_size / $max_size_), $min_size * 100 / $max_size_, $percentage);
-    my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 20, 0);
-    my $val;
-
-    require pkgs;
-    gtkadd($w->{window},
-	  gtkpack(new Gtk::VBox(0,20),
-		  _("The total size for the groups you have selected is approximately %d MB.\n", pkgs::correctSize($max_size_ / sqr(1024))) .
-		  ($enough ?
-_("If you wish to install less than this size,
-select the percentage of packages that you want to install.
-
-A low percentage will install only the most important packages;
-a percentage of 100%% will install all selected packages.") : 
-_("You have space on your disk for only %d%% of these packages.
-
-If you wish to install less than this,
-select the percentage of packages that you want to install.
-A low percentage will install only the most important packages;
-a percentage of %d%% will install as many packages as possible.", $percentage, $percentage))
-. ($individual ? "\n\n" . _("You will be able to choose them more specifically in the next step.") : ''),
-		 create_packtable({},
-				  [ _("Percentage of packages to install") . '  ', $spin, "%", my $mb = new Gtk::Label ],
-				  [ undef, new Gtk::HScrollbar($adj) ],
-			       ),
-		 create_okcancel($w)
-		)
-	 );
-    $spin->signal_connect(changed => my $changed = sub { 
-	$val = $spin->get_value_as_int / 100 * $max_size_;
-	$mb->set(sprintf("(%dMB)", pkgs::correctSize($val / sqr(1024)))); 
-    }); &$changed();
-    $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
-    $spin->grab_focus();
-    $w->main and $val + 1; #- add a single byte (hack?) to make selection of 0 bytes ok.
-}
-
 sub reallyChooseGroups {
     my ($o, $size_to_display, $individual, $val) = @_;
 
