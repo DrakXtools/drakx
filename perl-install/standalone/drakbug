@@ -66,9 +66,9 @@ my $kernel_release = chomp_(`uname -r`);
 
 my $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
                              [ new Gtk2::Label(N("Application:")), my $comb_app = gtkset_size_request(Gtk2::Combo->new, 270, -1) ],
-                             [ new Gtk2::Label(N("Package: ")), my $package = new Gtk2::Entry("...") ], # complain on gtk-perl@ml
-                             [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new($kernel_release), 0) ],
-                             [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new(mandrake_release()), 0) ]
+                             [ new Gtk2::Label(N("Package: ")), my $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+                             [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ],
+                             [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new_with_text(mandrake_release()), 0) ]
                              );
 $comb_app->set_popdown_strings("", sort(@generic_tool));
 
