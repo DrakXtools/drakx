@@ -12,6 +12,7 @@ use commands;
 use detect_devices;
 use fsedit;
 use run_program;
+use log;
 
 #-PO: names (tie, curly...) have corresponding icons for kdm
 my @users_male = (__("tie"), __("default"), __("curly")); #- don't change the names, files correspond to them
@@ -49,6 +50,28 @@ sub addUsers {
     }
     run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");
     addKdmIcon($prefix, 'root', 'hat', 'force');
+}
+
+sub crypt {
+    my ($password, $md5) = @_;
+    $md5 ?
+      c::crypt_md5($password, salt(8)) :
+         crypt    ($password, salt(2));
+}
+sub enableShadow {
+    my ($prefix) = @_;
+    run_program::rooted($prefix, "pwconv")  or log::l("pwconv failed");
+    run_program::rooted($prefix, "grpconv") or log::l("grpconv failed");
+}
+sub enableMD5Shadow {
+    my ($prefix, $shadow, $md5) = @_;
+    substInFile {
+	if (/^password.*pam_pwdb.so/) {
+	    s/\s*shadow//; s/\s*md5//;
+	    s/$/ shadow/ if $shadow;
+	    s/$/ md5/ if $md5;
+	}
+    } grep { -r $_ } map { "$prefix/etc/pam.d/$_" } qw(login rlogin passwd);
 }
 
 sub setupBootloader {
@@ -212,5 +235,24 @@ sub setAutologin {
   substInFile { s/^(\Q$t1\E|\Q$t2\E).*\n//; $_ .= "$t1\t$user\n$t2\t$wm\n" if eof && $user } $f;
   # (dam's) : a patch for gdm is being done.
 }
+
+
+sub writeandclean_ldsoconf {
+    my ($prefix) = @_;
+    my $file = "$prefix/etc/ld.so.conf";
+
+    log::l("before: ", cat_($file));
+    output $file,
+      grep { !m|^(/usr)?/lib$| } #- no need to have /lib and /usr/lib in ld.so.conf
+	uniq cat_($file), "/usr/X11R6/lib\n";
+    log::l("after: ", cat_($file));
+}
+
+sub shells {
+    my ($prefix) = @_;
+    grep { -x "$prefix$_" } map { chomp; $_ } cat_("$prefix/etc/shells");
+}
+
+
 
 1;

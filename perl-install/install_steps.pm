@@ -9,6 +9,7 @@ use vars qw(@filesToSaveForUpgrade);
 #-######################################################################################
 use common qw(:file :system :common :functional);
 use install_any qw(:all);
+use install_interactive;
 use partition_table qw(:types);
 use detect_devices;
 use modules;
@@ -134,7 +135,7 @@ sub doPartitionDisksBefore {
     eval { fs::umount_all($o->{fstab}, $o->{prefix}) } if $o->{fstab} && !$::testing;
 
     $o->{raid} ||= {};
-    install_any::getHds($o);
+    install_interactive::getHds($o);
 }
 
 #------------------------------------------------------------------------------
@@ -223,7 +224,7 @@ sub setPackages {
 }
 sub selectPackagesToUpgrade {
     my ($o) = @_;
-    install_any::selectPackagesToUpgrade($o);
+    pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
 }
 
 sub choosePackages {
@@ -269,7 +270,7 @@ sub beforeInstallPackages {
     }
 
     #- some packages need such files for proper installation.
-    install_any::write_ldsoconf($o->{prefix});
+    any::writeandclean_ldsoconf($o->{prefix});
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
 
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");
@@ -391,8 +392,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     }
 
     #- update language and icons for KDE.
-    log::l("updating language for kde");
-    install_any::kdelang_postinstall($o->{prefix});
+    update_userkderc($o->{prefix}, 'Locale', Language => "");
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 
@@ -431,7 +431,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 #-	  run_program::rooted($o->{prefix}, "chkfontpath", "--add", $dest);
 #-    }
 
-    foreach (install_any::list_skels()) {
+    foreach (list_skels($o->{prefix}, '.kde/share/config/kfmrc')) {
 	my $found;
 	substInFile {
 	    $found ||= /KFM Misc Defaults/;
@@ -440,14 +440,14 @@ Consoles 1,3,4,7 may also contain interesting information";
 GridWidth=85
 GridHeight=70
 " if eof && !$found;
-	} "$o->{prefix}$_/.kde/share/config/kfmrc" 
+	} $_ 
     }
 
     #- move some file after an upgrade that may be seriously annoying.
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
 	log::l("moving previous desktop files that have been updated to Trash of each user");
-	install_any::move_desktop_file($o->{prefix});
+	install_any::kdemove_desktop_file($o->{prefix});
 
 	foreach (@filesToSaveForUpgrade) {
 	    if (-e "$o->{prefix}$_.mdkgisave") {
@@ -675,7 +675,7 @@ sub setRootPassword($) {
     my $p = $o->{prefix};
     my $u = $o->{superuser} ||= {};
 
-    $u->{pw} ||= $u->{password} && install_any::crypt($u->{password});
+    $u->{pw} ||= $u->{password} && any::crypt($u->{password}, $o->{authentication}{md5});
 
     my @lines = cat_(my $f = "$p/etc/passwd") or log::l("missing passwd file"), return;
 
@@ -716,7 +716,7 @@ sub addUser($) {
 
 	    $_->{uid} = $u; $uids{$u} = 1;
 	    $_->{gid} = $g; $gids{$g} = 1;
-	    $_->{pw} ||= $_->{password} && install_any::crypt($_->{password});
+	    $_->{pw} ||= $_->{password} && any::crypt($_->{password}, $o->{authentication}{md5});
 	    $_->{shell} ||= "/bin/bash";
 	    $done{$_->{name}} = 1;
 	}

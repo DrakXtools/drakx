@@ -211,16 +211,7 @@ my %charsets = (
 
 sub list { sort { $a cmp $b } keys %languages }
 sub lang2text { $languages{$_[0]} && $languages{$_[0]}[0] }
-sub text2lang { 
-    my ($t) = @_;
-    foreach (keys %languages) {
-	lc($languages{$_}[0]) eq lc($t) and return $_;
-    }
-    die "unknown language $t";
-}
-
-sub lang2charset {  
-    $languages{$_[0]} }
+sub lang2charset { $languages{$_[0]} && $languages{$_[0]}[1] }
 
 sub set { 
     my ($lang) = @_;

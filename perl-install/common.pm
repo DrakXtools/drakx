@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
     common     => [ qw(__ even odd arch better_arch compat_arch min max sqr sum and_ or_ sign product bool invbool listlength bool2text bool2yesno text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX formatLines deref) ],
     functional => [ qw(fold_left compose mapgrep map_index grep_index find_index map_each grep_each list2kv map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie combine) ],
     file       => [ qw(dirname basename touch all glob_ cat_ output symlinkf chop_ mode typeFromMagic expand_symlinks) ],
-    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file formatTime unix2dos setVirtual) ],
+    system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ salt getVarsFromSh setVarsInSh setVarsInCsh substInFile availableRam availableMemory removeXiBSuffix template2file template2userfile update_userkderc list_skels formatTime unix2dos setVirtual) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE %compat_arch) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -325,6 +325,20 @@ sub salt($) {
 sub makedev { ($_[0] << 8) | $_[1] }
 sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
+sub list_passwd() {
+    my (@l, @e);
+    setpwent();
+    while (@e = getpwent()) { push @l, [ @e ] }
+    endpwent();
+    @l;
+}
+sub list_home() {
+    map { $_->[7] } grep { $_->[2] >= 500 } list_passwd();
+}
+sub list_skels { 
+    my ($prefix, $suffix) = @_;
+    map { "$prefix$_$suffix" } '/etc/skel', '/root', list_home() }
+
 sub translate {
     my ($s) = @_;
     my ($lang) = $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
@@ -428,14 +442,42 @@ sub setVarsInCsh {
     $l->{$_} and print F "setenv $_ $l->{$_}\n" foreach @fields;
 }
 
-sub template2file($$%) {
-    my ($inputfile, $outputfile, %toreplace) = @_;
-    local *OUT; local *IN;
+sub template2file {
+    my ($in, $out, %toreplace) = @_;
+    output $out, map { s/@@@(.*?)@@@/$toreplace{$1}/g; $_ } cat_($in);
+}
+sub template2userfile {
+    my ($prefix, $in, $out_rel, $force, %toreplace) = @_;
 
-    open IN, $inputfile  or die "Can't open $inputfile $!";
-    open OUT, ">$outputfile" or die "Can't open $outputfile $!";
+    foreach (list_skels($prefix, $out_rel)) {
+	-d dirname($_) or !-e $_ or $force or next;
 
-    map { s/@@@(.*?)@@@/$toreplace{$1}/g; print OUT; } <IN>;
+	template2file($in, $_, %toreplace);
+	m|/home/(.+?)/| and chown(getpwnam($1), getgrnam($1), $_);
+    }
+}
+sub update_userkderc {
+    my ($prefix, $category, %subst) = @_;
+
+    foreach my $file (list_skels($prefix, '.kderc')) {
+	output $file,
+	  (map {
+	      my $l = $_;
+	      s/^\s*//;
+	      if (my $i = /^\[$category\]/i ... /^\[/) {
+		  if ($i =~ /E/) { #- for last line of category
+		      $l = join('', values %subst) . $l;
+		      %subst = ();
+		  } elsif (/^(\w*?)=/) {
+		      if (my $e = delete $subst{lc($1)}) {
+			  $l = "$1=$e\n";
+		      }
+		  }
+	      }
+	      $l;
+	  } cat_($file)),
+	  (%subst && "[$category]\n", values %subst); #- if category has not been found above.
+    }
 }
 
 sub substInFile(&@) {
@@ -556,6 +598,8 @@ sub df {
     (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
     map { $_ * ($blocksize / 1024) } $size, $free;
 }
+
+
 
 #-######################################################################################
 #- Wonderful perl :(

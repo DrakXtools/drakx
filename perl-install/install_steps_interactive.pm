@@ -14,6 +14,7 @@ use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use partition_table_raw;
 use install_steps;
+use install_interactive;
 use install_any;
 use detect_devices;
 use run_program;
@@ -22,6 +23,7 @@ use devices;
 use fsedit;
 use network;
 use raid;
+use Netconnect;
 use mouse;
 use modules;
 use lang;
@@ -214,7 +216,7 @@ sub ask_mntpoint_s {
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
     my ($o) = @_;
-    my %solutions = install_any::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    my %solutions = install_interactive::partitionWizard($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
     my $level = $::beginner ? 2 : -9999;
@@ -741,7 +743,7 @@ sub addUser {
     $u->{password2} ||= $u->{password} ||= "";
     $u->{shell} ||= "/bin/bash";
     my @fields = qw(realname name password password2);
-    my @shells = install_any::shells($o);
+    my @shells = map { chomp; $_ } cat_("$o->{prefix}/etc/shells");
 
     if (($o->{security} >= 1 || $clicked)) {
 	$u->{icon} = translate($u->{icon});
@@ -755,7 +757,7 @@ sub addUser {
          _("Password") => {val => \$u->{password}, hidden => 1},
          _("Password (again)") => {val => \$u->{password2}, hidden => 1},
 	   ), $::beginner ? () : (
-         _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
+         _("Shell") => {val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
 	   ), $o->{security} > 3 || $::beginner ? () : (
 	 _("Icon") => {val => \$u->{icon}, list => [ map { translate($_) } @any::users ], not_edit => 1 },
 	   ),

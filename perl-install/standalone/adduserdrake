@@ -72,7 +72,7 @@ sub addusers {
     my @u = map { $_->{name} } my @users = @_;
 
     foreach (@users) {
-	$_->{pw} = $isMD5 ? c::crypt_md5($_->{password}, salt(8)) : crypt($_->{password}, salt(2));
+	$_->{pw} = any::crypt($_->{password}, $isMD5);
 	$_->{shell} ||= "/bin/bash";
     }
 

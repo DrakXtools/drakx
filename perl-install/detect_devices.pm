@@ -189,8 +189,10 @@ sub hasEthernet() { hasNetDevice("eth0"); }
 sub hasTokenRing() { hasNetDevice("tr0"); }
 sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
-# probe_type true means detect the type of hardware, this is unsafe for pci! (bug in kernel&hardware)
+# pci_probing::main::probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
 # get_pcmcia_devices provides field "device", used in network.pm
+# => probeall with $probe_type is unsafe
+# => matching_type is unsafe
 sub probeall {
     my ($probe_type, $pcic) = @_;
     require pci_probing::main;
@@ -243,7 +245,7 @@ sub hasUltra66 {
 #    #- disable hasUltra66 (now included in kernel)
 #    return;
 
-    my @l = map { $_->{verbatim} } matching_desc('(HPT|Ultra66)') or return;
+    my @l = map { $_->{verbatim} } matching_desc('HPT|Ultra66') or return;
     
     my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x",
       @l == 2 ?

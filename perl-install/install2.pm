@@ -159,7 +159,6 @@ $o = $::o = {
 #-		    { mntpoint => "swap",  size =>  64 << 11, type => 0x82 },
 #-		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 },
 #-	     ],
-    shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en_US',
     isUpgrade    => 0,
@@ -281,7 +280,7 @@ sub selectInstallClass {
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
         $o->setPackages(\@install_classes);
-        $o->selectPackagesToUpgrade() if $o->{isUpgrade};
+        $o->selectPackagesToUpgrade if $o->{isUpgrade};
     }
     if ($o->{isUpgrade}) {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ } 
@@ -295,7 +294,7 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
-    return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
+    return $o->searchAndMount4Upgrade if $o->{isUpgrade};
 
     $o->{steps}{formatPartitions}{done} = 0;
     $o->doPartitionDisksBefore;
@@ -340,7 +339,7 @@ sub choosePackages {
     #- for the first time, select package to upgrade.
     #- TOCHECK this may not be the best place for that as package are selected at some other point.
     if ($_[1] == 1) {
-	$o->selectPackagesToUpgrade($o) if $o->{isUpgrade};
+	$o->selectPackagesToUpgrade if $o->{isUpgrade};
 
 	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
 	# $o->{compssUsersChoice}{KDE} = 0 if $o->{lang} =~ /ja|el|ko|th|vi|zh/; #- gnome handles much this fonts much better

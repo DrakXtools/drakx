@@ -311,9 +311,8 @@ my @drivers_fields = qw(text type);
 %drivers = ();
 
 foreach (@drivers_by_category) {
-    my @l = @$_;
-    my $l = pop @l;
-    foreach (keys %$l) { $drivers{$_} = [ $l->{$_}, @l ]; }
+    my ($text, $l) = @$_;
+    foreach (keys %$l) { $drivers{$_} = [ $l->{$_}, $type ]; }
 }
 while (my ($k, $v) = each %drivers) {
     my %l; @l{@drivers_fields} = @$v;
