@@ -1,3 +1,72 @@
+2005/02/07  mareklaane
+
+	* share/po/et.po: More translation fixes.
+
+2005/02/07  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/mount_options.pm: ensure some options are not set for
+	directories_needed_to_boot (bugzilla #13433)
+
+	* pkgs.pm: fix setting @hdlists when deselectionAllowed is false
+
+2005/02/06  mareklaane
+
+	* share/po/et.po: More translation fixes.
+	More translation fixes.
+	Fixed translations.
+
+2005/02/06  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Adapted printerdrake to new printer drivers
+	packages.
+
+	* printer/data.pm: Added "hplip-hpijs-ppds" to be installed when
+	printerdrake is started.
+	Adapted printerdrake to new printer drivers packages.
+
+2005/02/05  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2005/02/05  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm, network/tools.pm: basic ndiswrapper support
+
+	* network/network.pm: remove useless message
+
+2005/02/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: changed LANGUAGE value for languages that will need renaming
+	in the future (ph->fil, ltg->LTG)
+
+2005/02/05  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: \w can match non-ascii characters, so expanding it (bugzilla
+	#13432). It would be better to remove accents, but i don't know how to
+	do it easily
+
+2005/02/05  Warly  <warly at mandrakesoft.com>
+
+	* install_any.pm: fix copy_rpms_on_disks
+
+2005/02/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: gnome proxy support in drakproxy
+
+	* network/netconnect.pm: handle bpalogin service
+	perl_checker fixes
+
+	* drakxtools.spec: 10.2-0.19mdk
+
+2005/02/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Better version to install urpmi with copied RPMs
+	Make install_urpmi work when having copied every RPM on disk
+
+2005/02/04  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 10.2 logo
+
 2005/02/04  Olivier Blin <oblin at mandrakesoft.com>
 
 	* network/netconnect.pm: handle bpalogin service
@@ -44281,7 +44350,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1005 2005/02/02 18:46:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1006 2005/02/04 18:17:51 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
