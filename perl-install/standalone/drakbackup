@@ -212,23 +212,33 @@ sub interactive_mode {
     my ($pix_l_map, $pix_l_mask) = gtkcreate_png("pixmaps/backup_left.png");
     my ($pix_r_map, $pix_r_mask) = gtkcreate_png("pixmaps/backup_bot.png");
 
+    my $box2 = new Gtk::VBox( 0, 10 );
+
+    my $radio1 = new Gtk::RadioButton( "Backup Wizard");
+    $box2->add( $radio1);
+    $radio1->set_active(1);
+    my $radio2 = new Gtk::RadioButton( "Backup Advanced", $radio1);
+    $box2->add( $radio2);
+    my $radio3 = new Gtk::RadioButton( "Build Backup now", $radio1);
+    $box2->add( $radio3);
+
     gtkadd($window1,
 	   gtkpack(new Gtk::VBox(0,0),
 		    gtkpack(new Gtk::VBox(0,0),
 			    new Gtk::Pixmap($pix_u_map, $pix_u_mask),
 			    gtkpack_(new Gtk::HBox(0,0),
 				     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
-				     1, gtkpack($up_box = new Gtk::VBox(0,5),#gtkset_usize($up_box = new Gtk::VBox(0,5),321, 230),
+				     1, gtkpack($up_box = new Gtk::VBox(0,5),
 						$box = gtkpack(new Gtk::VBox(0,0),
 							       _("Please choose the method to configure your system backup."),
 							       gtkpack(new Gtk::HBox(0,20),
 								       gtkpack(new Gtk::VBox(0,10),
 									       new Gtk::HBox(0,15),
-									       my $adv_c_button = new Gtk::RadioButton (_("Advanced")),
-#									       my $wiz_h_button = new Gtk::RadioButton _("Wizard"), $adv_c_button,
+									       $box2,
 									       new Gtk::HBox(0,5),
 									       ),
 								       ),
+							       _("Drakbackup allow you to build a backup of your system. With Drakbackup \n you will be able to save your backups on your Hard-disk or on CD, across the network\n with mandrake-online or other place, it accept ftp, sftp, scp, rsync, nfs. "),
 							       ),
 						),
 				     ),
