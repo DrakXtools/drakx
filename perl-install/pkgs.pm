@@ -491,11 +491,13 @@ sub psUsingHdlist {
     if ($m->{ignored}) {
 	log::l("ignoring packages in $hdlist");
     } else {
+	my $nb_suppl_pkg_skipped = 0;
 	my $callback = sub {
 	    my (undef, $p) = @_;
 	    our %uniq_pkg_seen;
 	    if ($uniq_pkg_seen{$p->fullname}++) {
 		log::l("skipping " . scalar $p->fullname);
+		++$nb_suppl_pkg_skipped;
 		return 0;
 	    } else {
 		return 1;
@@ -515,7 +517,7 @@ sub psUsingHdlist {
 					 unlink $newf;
 					 $o_fhdlist or unlink $newsf;
 					 die "fatal: nothing read in hdlist or synthesis for $fakemedium" };
-	log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist");
+	log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist, $nb_suppl_pkg_skipped skipped");
     }
     $m;
 }
