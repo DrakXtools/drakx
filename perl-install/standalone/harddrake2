@@ -283,12 +283,12 @@ $tree->get_selection->signal_connect('changed' => sub {
                        $current_device->{$_}) . "\n\n", if_($_ eq 'driver' && $current_device->{$_} =~ /^unknown|^Bad:/, { foreground => 'indian red' }) ]
                    ])
             } sort keys %$current_device;
+            my %groups = map { if_(ref $groups{$_}, %{$groups{$_}}) } 'generic', $current_class;
             my ($grouped, $ungrouped) = partition {
                 my $field = $_;
-                member($field, map { @$_ } map { values %$_ } @groups{$current_class, 'generic'});
+                member($field, map { @$_ } values %groups);
             } keys %device_fields;
             my @formated;
-            my %groups = map { if_(ref $groups{$_}, %{$groups{$_}}) } $current_class, 'generic';
             foreach my $group (sort { $a eq N("Connection") } keys %groups) {
                 my @fields = @{$groups{$group}};
                 # have we at least a member in that group?
