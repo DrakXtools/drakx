@@ -2,7 +2,6 @@ package authentication; # $Id$
 
 use common;
 use any;
-use Data::Dumper;
 use Net::DNS;
 
 sub kinds() { 
@@ -62,17 +61,13 @@ sub ask_parameters {
 		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
     } elsif ($kind eq 'AD') {
-	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
-	#$authentication->{AD_server} ||= 'kerberos.' . $authentication->{AD_domain};
-	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
-	$authentication->{AD_users_idmap} ||= 'ou=idmap,' . domain_to_ldap_domain($authentication->{AD_domain});
-
-	find_srv_name($domain);
-	foreach (@data) {
-		print $_."\n";
-	}
-
 	
+	$authentication->{AD_domain} ||= $netc->{DOMAINNAME};
+	$authentication->{AD_users_db} ||= 'cn=users,' . domain_to_ldap_domain($authentication->{AD_domain});
+
+	find_srv_name($authentication->{AD_domain});
+	$authentication->{AD_server} ||= $data[0] if @data;
+
 	my %sub_kinds = my @sub_kinds = (
 	    simple => N("simple"), 
 	    tls => N("TLS"),
@@ -87,7 +82,7 @@ sub ask_parameters {
 		     N("Authentication Active Directory"),
 		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
 		     #{ label => N("Server"), val => \$authentication->{AD_server} },
-		       { label => N("Server"), type => 'bool', val => \@data },
+		       { label => N("Server"), type => 'combo', val => \$authentication->{AD_server}, list => \@data , not_edit => 0 },
 		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
 		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
@@ -522,19 +517,13 @@ sub krb5_conf_update {
 
 sub find_srv_name {
 
-	my $domain = $_;
-	print "$domain\n";
-	print "coin coin \n";
-	print "pwet pwet \n";
+	my ($domain) = @_;
 	my $res   = Net::DNS::Resolver->new;
-	#my $query = $res->query("_ldap._tcp.".$domain, "srv");
-	my $query = $res->query("_ldap._tcp.support.mandrakesoft.com", "srv");
-
-#print Data::Dumper::Dumper($query);
-foreach ($query->answer) {
-	my $srv = ($query->answer)[$_];
-	#print $_->target."\n";
-	push (@data,$_->target);
+	my $dom = "_ldap._tcp.".$domain;
+	my $query = $res->query("$dom", "srv");
+	foreach ($query->answer) {
+		my $srv = ($query->answer)[$_];
+		push (@data,$_->target);
 	}
 	return @data;
 }
