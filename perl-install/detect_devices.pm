@@ -102,7 +102,26 @@ sub get_sys_cdrom_info {
     }
 }
 
-sub get_usb_storage_info {
+sub get_usb_storage_info_26 {
+    my (@l) = @_;
+
+    my @entries = glob_("/sys/bus/usb/devices/*:*") or return;
+
+    my @informed;
+    foreach my $scsi (@l) {
+	my $usb_dir = find { -d "$_/host$scsi->{host}" } @entries or next;
+	$usb_dir =~ s/:[^:]*$//;
+	if (-e "$usb_dir/idVendor") {
+	    add2hash($scsi, { usb_vendor => hex(chomp_(cat_("$usb_dir/idVendor"))), usb_id => hex(chomp_(cat_("$usb_dir/idProduct"))) });
+	    push @informed, $scsi;
+	} else {
+	    log::l("weird in get_usb_storage_info_26 for host $scsi->{host}, usb_dir $usb_dir");
+	}
+    }
+    @informed;
+}
+
+sub get_usb_storage_info_24 {
     my (@l) = @_;
 
     my %usbs = map {
@@ -128,7 +147,13 @@ sub get_usb_storage_info {
 	add2hash($choices[0], $usbs{$host});
 	push @informed, $choices[0];
     }
-    @informed or return;
+    @informed;
+}
+
+sub get_usb_storage_info {
+    my (@l) = @_;
+
+    my @informed = c::kernel_version() =~ /^\Q2.6/ ? get_usb_storage_info_26(@l) : get_usb_storage_info_24(@l) or return;
 
     foreach my $usb (usb_probe()) {
 	if (my $e = find { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @informed) {
