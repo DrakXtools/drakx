@@ -225,9 +225,11 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} or next;
 	
 	add2hash_($_, { toFormat => $_->{notFormatted} });
+        $_->{toFormatUnsure} = member($_->{mntpoint}, '/', '/usr');
+
 	if (!$_->{toFormat}) {
 	    my $t = fsedit::typeOfPart($_->{device});
-	    $_->{toFormatUnsure} = member($_->{mntpoint}, '/', '/usr') ||
+	    $_->{toFormatUnsure} ||=
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
 	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
 	}

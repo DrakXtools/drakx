@@ -386,7 +386,7 @@ sub choosePartitionsToFormat {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { !$_->{isMounted} && !$_->{isFormatted} && $_->{mntpoint} && (!isSwap($_) || $::expert) &&
+    my @l = grep { !$_->{isMounted} && $_->{mntpoint} && (!isSwap($_) || $::expert) &&
 		    (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
@@ -412,7 +412,10 @@ sub choosePartitionsToFormat {
         })) } @l ]
     ) or die 'already displayed';
     #- ok now we can really set toFormat
-    $_->{toFormat} = delete $_->{toFormatTmp} foreach @l;
+    foreach (@l) {
+	$_->{toFormat} = delete $_->{toFormatTmp};
+	$_->{isFormatted} = 0;
+    }
 }
 
 
