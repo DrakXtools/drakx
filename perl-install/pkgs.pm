@@ -1193,9 +1193,8 @@ sub selected_leaves {
     \@leaves;
 }
 
-
-sub naughtyServers {
-    my ($packages) = @_;
+sub naughtyServers_list {
+    my ($quiet) = @_;
 
     my @_old_81 = qw(
 freeswan
@@ -1203,12 +1202,23 @@ freeswan
     my @_old_82 = qw(
 vnc-server
 postgresql-server
-mon
 );
 
     my @_old_92 = qw(
-finger-server imap leafnode postfix ypbind ftp-server-krb5 telnet-server-krb5
-bind ibod samba-swat tftp-server
+postfix ypbind bind ibod
+);
+
+    my @_removed_92 = qw(
+mcserv
+samba
+lpr
+);
+
+    my @_moved_to_contrib_92 = qw(
+boa
+LPRng
+wu-ftpd
+am-utils
 );
 
     my @new_80 = qw(
@@ -1227,14 +1237,12 @@ lpr
 ntp
 openssh-server
 pidentd
-postfix
 proftpd
 rwall
 rwho
 squid
 webmin
 wu-ftpd
-ypbind
 );
 
     my @new_81 = qw(
@@ -1248,9 +1256,7 @@ ypserv
 
     my @new_82 = qw(
 LPRng
-bind
 httpd-naat
-ibod
 inn
 netatalk
 nfs-utils
@@ -1263,28 +1269,33 @@ ucd-snmp
     my @new_92 = qw(
 DansGuardian
 FreeWnn
+MySQL-Max
 clusternfs
 gkrellm-server
-iplog
-krb5-server
 lisa
 mon
 net-snmp
 openldap-servers
 samba-server
+saned
+vsftpd
 );
 
-    my @_not_warned = qw(
+    my @not_warned = qw(
 nfs-utils-clients
 portmap
 ); # X server
 
-    my @naughtyServers = (@new_80, @new_81, @new_82, @new_92);
+    (@new_80, @new_81, @new_82, @new_92, if_(!$quiet, @not_warned));
+}
+
+sub naughtyServers {
+    my ($packages) = @_;
 
     grep {
 	my $p = packageByName($packages, $_);
 	$p && $p->flag_selected;
-    } @naughtyServers;
+    } naughtyServers_list('quiet');
 }
 
 sub hashtree2list {
