@@ -393,7 +393,7 @@ configureNetworkNoModemFound =>
  __("No modem has been detected. Please select the serial port on which it is plugged.
 
 
-For information, the first serial port (called \"COM1\" under Mircrosoft
+For information, the first serial port (called \"COM1\" under Microsoft
 Windows) is called \"ttyS0\" under Linux."),
 
 configureNetworkDNS => 
