@@ -55,12 +55,12 @@ my $l_mode = isAutologin();
 my %auto_mode = get_autologin("");
 my $inmain = 0;
 my $lilogrub = `detectloader -q`;
-$lilogrub =~ s/GRUB\n/GRUB (GNU GRand Unified Bootloader)/;
+chomp $lilogrub;
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
 $window->set_title(_("Boot Style Configuration") );
-$window->border_width(10);
+$window->border_width(2);
 $window->realize;
 
 # drakX mode
