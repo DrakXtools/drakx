@@ -410,6 +410,7 @@ my %charset2kde_charset = (
 #- for special cases not handled magically
 my %lang2country = (
   ar => 'eg',
+  be => 'by',
   bs => 'bh',
   cs => 'cz',
   da => 'dk',
@@ -420,8 +421,7 @@ my %lang2country = (
   ms => 'my',
   nn => 'no',
   sl => 'si',
-  sp => 'yu',
-  sr => 'yu',
+  sp => 'sr',
   sv => 'se',
 );
 
@@ -458,7 +458,9 @@ sub lang2country {
     };
 
     my $country;
-    $country ||= $valid_country->($lang2country{$lang});
+    if ($country ||= $lang2country{$lang}) {
+	return $valid_country->($country) ? $country : 'C';
+    }
     $country ||= $valid_country->(lc($1)) if $lang =~ /([A-Z]+)/;
     $country ||= $valid_country->(lc($1)) if lang2LANGUAGE($lang) =~ /([A-Z]+)/;
     $country ||= $valid_country->(substr($lang, 0, 2));
