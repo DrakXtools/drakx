@@ -51,7 +51,7 @@ my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
-my $shorewall = network::shorewall::read($in,'silent');
+my $shorewall = network::shorewall::read($in, 'silent');
 
 my $in = 'interactive'->vnew('su');
 $::Wizard_title = N("Internet Connection Sharing");
@@ -120,7 +120,7 @@ begin:
 #- **********************************
 #- * 0th step: verify if we are already set up
 
-if ($shorewall && (-f "/etc/shorewall/masq")) {
+if ($shorewall && -f "/etc/shorewall/masq") {
     $::Wizard_no_previous = 1;
 
     if (!$shorewall->{disabled}) {
@@ -136,7 +136,7 @@ What would you like to do?"),
 		stop_daemons();
 	    }
 	    foreach ($dhcpd_conf, $masq_file) {
-		if ( -f $_ ) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable"};
+		if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" };
 	    }
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
@@ -280,8 +280,8 @@ Do you want an automatic re-configuration?
 You can do it manually but you need to know what you're doing.", $device),
 		  [ { label => N("Automatic reconfiguration"), val => \$auto, list => [ N("Yes"), N("No (experts only)") ] },
 		    { val => N("Show current interface configuration"), clicked =>
-		      sub { $in-> ask_okcancel(N("Current interface configuration"),
-					  N("Current configuration of `%s':
+		      sub { $in->ask_okcancel(N("Current interface configuration"),
+					      N("Current configuration of `%s':
 
 Network: %s
 IP address: %s

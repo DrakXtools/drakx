@@ -32,7 +32,7 @@ foreach (@ARGV) {
     /^--update-usbtable$/ and do { scanner::updateScannerDBfromUsbtable(); exit() };
     /^--update-sane=(.*)$/ and do { scanner::updateScannerDBfromSane($1); exit() };
     /^--manual$/ and $::Manual=1;
-    /^--dynamic=(.*)$/ and do { dynamic($1); exit() };
+    /^--dynamic=(.*)$/ and do { dynamic(); exit() };
 }
 
 my $in = 'interactive'->vnew('su');

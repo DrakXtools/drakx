@@ -80,7 +80,7 @@ do {
 	common::sync();
     };
     $again = $@; #- grrr... $@ is localized in code block :-(
-} while ($again);
+} while $again;
 fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));

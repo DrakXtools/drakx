@@ -325,7 +325,7 @@ sub convert_ttf_fonts {
 
 sub move_fonts {
     my ($src_dir, $dest_dir, @extensions) = @_;
-    my @fonts = map { s@.*/@@; $_ } map { glob("$src_dir/*.$_") } @extensions;
+    my @fonts = map { s!.*/!!; $_ } map { glob("$src_dir/*.$_") } @extensions;
     system("cd $src_dir && mv @fonts $dest_dir") if @fonts;
 }
 
