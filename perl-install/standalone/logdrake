@@ -297,7 +297,7 @@ sub parse_file {
       local $_;
       while (<F>) {}; #to prevent to output the file twice..
       $log_text->set_point($log_text->get_length());
-      my $timer = Gtk->timeout_add(1000, \&input_callback);
+      my $timer = Gtk2->timeout_add(1000, \&input_callback);
   }     
 }
 
