@@ -21,6 +21,7 @@ foreach (@ARGV) {
 package pkgs_interactive;
 
 use run_program;
+use common;
 
 
 sub interactive::do_pkgs {
@@ -51,10 +52,11 @@ sub install {
 }
 
 sub ensure_is_installed {
-    my ($o, $pkg, $file) = @_;
+    my ($o, $pkg, $file, $auto) = @_;
 
     if (! -e $file) {
-	$o->{in}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) or return;
+	$o->{in}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	  or return if !$auto;
 	$o->{in}->do_pkgs->install($pkg);
     }
     if (! -e $file) {
@@ -73,6 +75,13 @@ sub what_provides {
 sub is_installed {
     my ($o, @l) = @_;
     run_program::run('rpm', '>', '/dev/null', '-q', @l);
+}
+
+sub are_installed {
+    my ($o, @l) = @_;
+    my @l2;
+    run_program::run('rpm', '>', \@l2, '-q', '--qf', "%{name}\n", @l);
+    intersection(\@l, [ map { chomp_($_) } @l2 ]);
 }
 
 sub remove {

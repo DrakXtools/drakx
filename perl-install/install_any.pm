@@ -1173,6 +1173,21 @@ sub install {
     $do->{o}->pkg_install(@l);
 }
 
+sub ensure_is_installed {
+    my ($do, $pkg, $file, $auto) = @_;
+
+    if (! -e $file) {
+	$do->{o}->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	  or return if !$auto;
+	$do->{o}->do_pkgs->install($pkg);
+    }
+    if (! -e $file) {
+	$do->{o}->ask_warn('', _("Mandatory package %s is missing", $pkg));
+	return;
+    }
+    1;
+}
+
 sub what_provides {
     my ($do, $name) = @_;
     map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
@@ -1185,6 +1200,14 @@ sub is_installed {
 	$p && $p->flag_selected or return;
     }
     1;
+}
+
+sub are_installed {
+    my ($do, @l) = @_;
+    grep {
+	my $p = pkgs::packageByName($do->{o}{packages}, $_);
+	$p && $p->flag_selected;
+    } @l;
 }
 
 sub remove {
