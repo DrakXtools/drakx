@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.18mdk
+Release: 0.19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.19mdk
+- add icons to most tools' windows
+- drakboot: do not crash if default autologin or default desktop
+  doesn't exist (blino)
+- drakupdate_fstab: do not use supermount by default for removable
+  devices (blino)
+- localedrake:
+  o enable SCIM for Amharic language
+  o fix missing banner title
+- net_applet: tell when internet connection is not configured (blino)
+- printerdrake: misc enhancements (till)
+- service_harddrake: ad modules to conf files if a tv card is detected (blino)
+
 * Tue Aug 31 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.18mdk
 - drakclock (warly):
   o check if the ntpdate command succeed or not
