@@ -383,7 +383,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o display descriptions rather than raw function names
 - drakTermserv: fix entry filling
 - logdrake: fix crash when called from net_monitor
-- net_monitor: switch from gtk+-1.2.x to gtk+-2.2.x
+- net_monitor: switch from gtk+-1.2.x to gtk+-2.2.x (fix #3998 btw)
 - sanitize guis, especially button layouts:
   o use std layout (ButtonBoxes) for buttons everywhere
   o use stock items everywhere
