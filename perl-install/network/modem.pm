@@ -21,17 +21,17 @@ sub configure {
     foreach (cat_("/usr/share/config/kppprc")) {
 	/^DNS=(.*)$/ and ($modem->{dns1}, $modem->{dns2}) = split(',', $1);
     }
+    foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
+	/.*ATDT(\d*).*/ and $modem->{phone} = $1;
+    }
+    foreach (cat_("/etc/sysconfig/network-scripts/ifcfg-ppp0")) {
+	/NAME=(['"]?)(.*)\1/ and $modem->{login} = $2;
+    }
     my $secret = network::tools::read_secret_backend();
     foreach (@$secret) {
 	$modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
     }
 
-    foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
-	if (/.*ATDT(\d*).*/) {
-	    $modem->{phone} = $1;
-	    last;
-	}
-    }
     ppp_choose($in, $netc, $modem, $mouse) or return;
     write_cnx_script($netc, "modem",
 q(
