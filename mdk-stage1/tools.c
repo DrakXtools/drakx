@@ -263,7 +263,6 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	}
 
 	st2 = BZ2_bzdopen(ramdisk_fd, "r");
-	BZ2_bzerror(st2, &z_errnum);
 
 	if (!st2) {
 		log_message("Opening compressed ramdisk: %s", BZ2_bzerror(st2, &z_errnum));
