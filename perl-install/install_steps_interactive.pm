@@ -98,8 +98,9 @@ least read and write in that language; and possibly more (various
 fonts, spell checkers, various programs translated etc. that
 varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo();
     } else {
-	$o->ask_warn('', _("The characters of your language can't be displayed in console,
-so the messages will be displayed in english during installation")) if $ENV{LANGUAGE} eq 'C';
+	#- don't use _( ) for this, as it is never translated
+	$o->ask_warn('', "The characters of your language can't be displayed in console,
+so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
     
     unless ($o->{useless_thing_accepted}) {
