@@ -217,7 +217,10 @@ sub isdn_detect {
     if ($isdn->{id}) {
   	log::l("found isdn card : $isdn->{description}; vendor : $isdn->{vendor}; id : $isdn->{id}; driver : $isdn->{driver}\n");
 	$isdn->{description} =~ s/\|/ -- /;
-	if ($isdn->{type} eq '') {
+	
+	defined $isdn->{type} and my $new = $in->ask_yesorno(N("ISDN Configuration"), N("Do you want to start a new configuration ?"), 1);
+	
+	if ($isdn->{type} eq '' || $new) {
 	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
