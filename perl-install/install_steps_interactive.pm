@@ -838,7 +838,7 @@ You can add some more or change the existing ones."),
 	if ($c eq "Add") {
 	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
-	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"), [ __("Linux"), __("Other OS (SunOS...)") ]) eq "Linux") {
+	    if ($o->ask_from_list_('', _("Which type of entry do you want to add?"), [ __("Linux"), __("Other OS (SunOS...)") ]) eq "Linux") {
 		$e = { type => 'image' };
 		$prefix = "linux";
 	    } else {
