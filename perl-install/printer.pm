@@ -488,7 +488,7 @@ sub getIPsInLocalNetworks {
     my @addresses;
     # Now ping all broadcast addresses and additionally "nmblookup" the
     # networks (to find Windows servers which do not answer to ping)
-    for my $bcast (@local_bcasts) {
+    foreach my $bcast (@local_bcasts) {
 	local *F;
 	open F, ($::testing ? "" : "chroot $prefix/ ") . 
 	    "/bin/sh -c \"export LC_ALL=C; ping -w 1 -b -n $bcast | cut -f 4 -d ' ' | sed s/:// | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' | uniq | sort\" |" 
@@ -571,7 +571,7 @@ sub whatNetPrinter {
 	    # SMB/Windows
 	    if ($port eq "139") {
 		my @shares = getSMBPrinterShares($ip);
-		for my $share (@shares) {
+		foreach my $share (@shares) {
 		    push @res, { port => "smb://$host/$share->{name}",
 				 val => { CLASS => 'PRINTER',
 					  MODEL => N("Unknown Model"),
@@ -635,7 +635,7 @@ sub add_spooler_to_security_level {
 
 sub files_exist {
     my @files = @_;
-    for my $file (@files) {
+    foreach my $file (@files) {
 	   return 0 if (! -f "$prefix$file"),
     }
     return 1;
@@ -2317,7 +2317,7 @@ sub configurestaroffice {
     if (0 && ($printer->{SPOOLER} eq "cups") && 
 	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
-	for my $listentry (@printerlist) {
+	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
@@ -2341,7 +2341,7 @@ sub configurestaroffice {
 	}
     }
     # Update local printer queues
-    for my $queue (keys(%{$printer->{configured}})) {
+    foreach my $queue (keys(%{$printer->{configured}})) {
 	# Check if we have a PPD file
 	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
 	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
@@ -2390,7 +2390,7 @@ sub configureopenoffice {
     if (0 && ($printer->{SPOOLER} eq "cups") && 
 	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
-	for my $listentry (@printerlist) {
+	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
@@ -2414,7 +2414,7 @@ sub configureopenoffice {
 	}
     }
     # Update local printer queues
-    for my $queue (keys(%{$printer->{configured}})) {
+    foreach my $queue (keys(%{$printer->{configured}})) {
 	# Check if we have a PPD file
 	if (! -r "$prefix/etc/foomatic/$queue.ppd") {
 	    if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
@@ -2463,7 +2463,7 @@ sub addcupsremotetostaroffice {
     if (($printer->{SPOOLER} eq "cups") && 
 	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
-	for my $listentry (@printerlist) {
+	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
 	    next if $q ne $queue;
@@ -2513,7 +2513,7 @@ sub addcupsremotetoopenoffice {
     if (($printer->{SPOOLER} eq "cups") && 
 	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
 	my @printerlist = getcupsremotequeues();
-	for my $listentry (@printerlist) {
+	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
 	    next if $q ne $queue;
@@ -2593,7 +2593,7 @@ sub removelocalprintersfromstaroffice {
     # Load Star Office printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Remove the printer entries
-    for my $queue (keys(%{$printer->{configured}})) {
+    foreach my $queue (keys(%{$printer->{configured}})) {
 	$configfilecontent = 
 	    removestarofficeprinterentry($printer, $queue, $configprefix,
 					 $configfilecontent);
@@ -2612,7 +2612,7 @@ sub removelocalprintersfromopenoffice {
     # Load OpenOffice.org printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Remove the printer entries
-    for my $queue (keys(%{$printer->{configured}})) {
+    foreach my $queue (keys(%{$printer->{configured}})) {
 	$configfilecontent = 
 	    removeopenofficeprinterentry($printer, $queue, $configprefix,
 					 $configfilecontent);
@@ -2957,11 +2957,11 @@ sub configuregimp {
     my @configfilenames = findgimpconfigfiles();
     return 1 if $#configfilenames < 0;
     # There is no system-wide config file, treat every user's config file
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
 	my $configfilecontent = readgimpconfigfile($configfilename);
 	# Update local printer queues
-	for my $queue (keys(%{$printer->{configured}})) {
+	foreach my $queue (keys(%{$printer->{configured}})) {
 	    # Check if we have a PPD file
 	    if (! -r "$prefix/etc/foomatic/$queue.ppd") {
 		if (-r "$prefix/etc/cups/ppd/$queue.ppd") {
@@ -3021,7 +3021,7 @@ sub addcupsremotetogimp {
     my $ppdfile = "";
     if (($printer->{SPOOLER} eq "cups") && 
 	((-x "$prefix/usr/bin/curl") || (-x "$prefix/usr/bin/wget"))) {
-	for my $listentry (@printerlist) {
+	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
 	    next if $q ne $queue;
@@ -3053,7 +3053,7 @@ sub addcupsremotetogimp {
 	return 1;
     }
     # There is no system-wide config file, treat every user's config file
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
 	my $configfilecontent = readgimpconfigfile($configfilename);
 	# Add the printer entry
@@ -3078,7 +3078,7 @@ sub removeprinterfromgimp {
     my @configfilenames = findgimpconfigfiles();
     return 1 if $#configfilenames < 0;
     # There is no system-wide config file, treat every user's config file
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
 	my $configfilecontent = readgimpconfigfile($configfilename);
 	# Remove the printer entry
@@ -3096,11 +3096,11 @@ sub removelocalprintersfromgimp {
     my @configfilenames = findgimpconfigfiles();
     return 1 if $#configfilenames < 0;
     # There is no system-wide config file, treat every user's config file
-    for my $configfilename (@configfilenames) {
+    foreach my $configfilename (@configfilenames) {
 	# Load GIMP's printer config file
 	my $configfilecontent = readgimpconfigfile($configfilename);
 	# Remove the printer entries
-	for my $queue (keys(%{$printer->{configured}})) {
+	foreach my $queue (keys(%{$printer->{configured}})) {
 	    $configfilecontent = 
 		removegimpprinter($queue, $configfilecontent);
 	}
@@ -3186,7 +3186,7 @@ sub findgimpconfigfiles {
 	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
 	    my ($username, $uid, $gid, $homedir) = ($1, $2, $3, $4);
 	    if ((($uid == 0) || ($uid >= 500)) && ($username ne "nobody")) {
-		for my $file (@configfilenames) {
+		foreach my $file (@configfilenames) {
 		    my $dir = "$homedir/$file";
 		    $dir =~ s:/[^/]*$::;
 		    next if (-f $dir) && (! -d $dir);

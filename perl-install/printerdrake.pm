@@ -192,7 +192,7 @@ sub first_time_dialog {
 	push (@printerlist, N("There are no printers found which are directly connected to your machine"));
     } else {
 	$localprinterspresent = 1;
-	for my $printer (@autodetected) {
+	foreach my $printer (@autodetected) {
 	    my $entry = $printer->{val}{DESCRIPTION};
 	    if ($entry) { push (@printerlist, "  -  $entry\n") }
 	}
@@ -413,7 +413,7 @@ sub setup_local_autoscan {
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = ($#autodetected > 0);
-	for my $p (@autodetected) {
+	foreach my $p (@autodetected) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
@@ -449,10 +449,10 @@ sub setup_local_autoscan {
 	}
 	if ($::expert) {
 	    @port = detect_devices::whatPrinterPort();
-	    for my $q (@port) {
+	    foreach my $q (@port) {
 		if (@str) {
 		    my $alreadyfound = 0;
-		    for my $p (@autodetected) {
+		    foreach my $p (@autodetected) {
 			if ($p->{port} eq $q) {
 			    $alreadyfound = 1;
 			    last;
@@ -514,7 +514,7 @@ sub setup_local_autoscan {
 	# Non-HP or HP print-only device (HPOJ not used)
 	$device = $printer->{currentqueue}{connect};
 	$device =~ s/^file://;
-	for my $p (keys %{$menuentries}) {
+	foreach my $p (keys %{$menuentries}) {
 	    if ($device eq $menuentries->{$p}) {
 		$menuchoice = $p;
 		last;
@@ -527,7 +527,7 @@ sub setup_local_autoscan {
 	$ptaldevice =~ s!^ptal:/mlc:!!;
 	if ($ptaldevice =~ /^par:(\d+)$/) {
 	    $device = "/dev/lp$1";
-	    for my $p (keys %{$menuentries}) {
+	    foreach my $p (keys %{$menuentries}) {
 		if ($device eq $menuentries->{$p}) {
 		    $menuchoice = $p;
 		    last;
@@ -537,7 +537,7 @@ sub setup_local_autoscan {
 	    my $make = lc($printer->{currentqueue}{make});
 	    my $model = lc($printer->{currentqueue}{model});
 	    $device = "";
-	    for my $p (keys %{$menuentries}) {
+	    foreach my $p (keys %{$menuentries}) {
 		my $menumakemodel = lc($p);
 		if (($menumakemodel =~ /$make/) && 
 		    ($menumakemodel =~ /$model/)) {
@@ -551,7 +551,7 @@ sub setup_local_autoscan {
 	($printer->{currentqueue}{connect} =~ m!^(socket|smb):/!)) {
 	# Ethernet-(TCP/Socket)-connected printer or printer on Windows server
 	$device = $printer->{currentqueue}{connect};
-	for my $p (keys %{$menuentries}) {
+	foreach my $p (keys %{$menuentries}) {
 	    if ($device eq $menuentries->{$p}) {
 		$menuchoice = $p;
 		last;
@@ -807,7 +807,7 @@ sub setup_smb {
 	}
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = net_smb_detect();
-	for my $p (@autodetected) {
+	foreach my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!;
 	    my $server = $1;
@@ -1047,7 +1047,7 @@ sub setup_socket {
 	$autodetect = 1;
 	my $w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
 	@autodetected = net_detect();
-	for my $p (@autodetected) {
+	foreach my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^socket://([^:]+):(\d+)$!;
 	    my $host = $1;
@@ -1467,7 +1467,7 @@ sub setup_common {
 	# If there is more than one matching database entry, the longest match
 	# counts.
 	my $matchlength = 0;
-	for my $entry (keys %printer::thedb) {
+	foreach my $entry (keys %printer::thedb) {
 	    my $dbmakemodel;
 	    if ($::expert) {
 		$entry =~ m/^(.*)\|[^\|]*$/;
@@ -1640,7 +1640,7 @@ sub get_db_entry {
     } else {
 	if (($::expert) && ($printer->{DBENTRY} !~ /(recommended)/)) {
 	    my ($make, $model) = $printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
-	    for my $key (keys %printer::thedb) {
+	    foreach my $key (keys %printer::thedb) {
 		if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
 		    $printer->{DBENTRY} = $key;
 		}
@@ -3635,8 +3635,8 @@ What do you want to modify on this printer?",
 	$printer->{complete} = 0;
     }
     # Clean up the $printer data structure for auto-install log
-    for my $queue (keys %{$printer->{configured}}) {
-	for my $item (keys %{$printer->{configured}{$queue}}) {
+    foreach my $queue (keys %{$printer->{configured}}) {
+	foreach my $item (keys %{$printer->{configured}{$queue}}) {
 	    if ($item ne "queuedata") {
 		delete($printer->{configured}{$queue}{$item});
 	    }
