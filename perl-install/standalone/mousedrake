@@ -20,6 +20,8 @@ $::testing = /-testing/;
 
 my $in = 'interactive'->vnew('su', 'mouse');
 
+modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+
 undef $::Plug;
 begin:
 my $mouse = mouse::read();
@@ -49,7 +51,6 @@ if (!$mouse || !$::auto) {
     $mouse = $mouse_chosen if !($mouse->{type} eq $mouse_chosen->{type} && $mouse->{name} eq $mouse_chosen->{name});
 
     if ($mouse->{device} eq "usbmouse") {
-	modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
 	modules::load_category('bus/usb') or die 'no usb bus found\n';
 	modules::load(qw(hid mousedev usbmouse));
     }
@@ -64,7 +65,7 @@ if (!$mouse || !$::auto) {
 					  ) || goto begin if $mouse->{type} eq 'serial';
 }
 
-mouse::write_conf($mouse, 1);
+mouse::write_conf($in, $mouse, 1);
 system('service', 'gpm', 'restart') if -e '/var/lock/subsys/gpm';
 
 $::isEmbedded ? kill('USR1', $::CCPID) : $in->exit(0);
