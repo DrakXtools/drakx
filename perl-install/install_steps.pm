@@ -369,8 +369,8 @@ sub beforeInstallPackages {
     my @should_not_be_dirs = qw(/usr/X11R6/lib/X11/xkb /usr/share/locale/zh_TW/LC_TIME /usr/include/GL);
     my @should_be_dirs = qw(/etc/X11/xkb);
     my @to_remove = (
-		     (grep { !-l $f && -d $f          } map { "$::prefix$_" } @should_not_be_dirs),
-		     (grep { -l $f || !-d $f && -e $f } map { "$::prefix$_" } @should_be_dirs),
+		     (grep { !-l $_ && -d $_          } map { "$::prefix$_" } @should_not_be_dirs),
+		     (grep { -l $_ || !-d $_ && -e $_ } map { "$::prefix$_" } @should_be_dirs),
 		    );
     rm_rf(@to_remove);
 
