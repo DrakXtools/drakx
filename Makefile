@@ -14,7 +14,6 @@ clean:
 
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
-#	./make_boot_img $@ $(@:gi_%.img=%)
 	./make_boot_img $@ $(@:gi_%.img=%)
 
 $(BINS):
