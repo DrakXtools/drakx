@@ -619,7 +619,7 @@ sub do_expect {
 			$in->ask_warn(N("Information"), N("This may take a moment to generate the keys."));
 			gtkset_mousecursor_wait();
 			#- not using a passphrase for the moment
-			system("ssh-keygen -P '' -t dsa -f $backup_key");
+			system("ssh-keygen", "-P", "''", "-t", "dsa", "-f", $backup_key);
 			gtkset_mousecursor_normal();
 		}
 		
@@ -673,12 +673,12 @@ sub ssh_client() {
 		$interactive and progress($pbar, $plabel, 0.5, "File Transfer...");
 		$interactive and $stext->set_text($_);
 		$log_buff .= $command . "\n\n";
-        local *TMP;
-		open TMP, "$command 2>&1 |";
-		while ($value = <TMP>) {
+		my $TMP;
+		open $TMP, "$command 2>&1 |";
+		while ($value = <$TMP>) {
 			$log_buff .= $value;
 		}
-		close TMP;
+		close $TMP;
 		$log_buff .= "\n";
 		$interactive and progress($pbar, $plabel, 0.5, "Done...");
 		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progress"));
@@ -791,16 +791,16 @@ sub spawn_progress {
 	$log_buff .= $command . "\n\n";
 	
 	standalone::explanations("Running $command");
-	local *TMP;
-	open TMP, "$command 2>&1 |";
-	while ($value = <TMP>) {
+	my $TMP;
+	open $TMP, "$command 2>&1 |";
+	while ($value = <$TMP>) {
 		$log_buff .= $value;
 		if ($interactive) {
 			$stext->set_text($value);
 			gtkflush();
 		}			
 	}
-	close TMP;
+	close $TMP;
 	$interactive and Glib::Source->remove($timer);
 }
 
@@ -2596,10 +2596,8 @@ sub restore_state() {
 
 sub select_most_recent_selected_of {
     my ($user_name) = @_;
-    my @list_tmp2;
-	local $_;
     my @tmp = sort @user_list_to_restore2;
-    foreach (grep { /$user_name/ } sort @tmp) { push @list_tmp2 , $_ }
+    my @list_tmp2 = grep { /$user_name/ } sort @tmp;
     return pop @list_tmp2;
 }
 
@@ -2721,13 +2719,13 @@ sub show_backup_details {
 	log::explanations("Running $command1");
 	$archive_file_detail = `$command1 2>&1` . "\n\n";
 	log::explanations("Running $command2");
-	local *TMP;
-	open TMP, "$command2 2>&1 |";
-	while ($value = <TMP>) {
+	my $TMP;
+	open $TMP, "$command2 2>&1 |";
+	while ($value = <$TMP>) {
 		#- drop the permissions display for the sake of readability	
 		$archive_file_detail .= substr($value, 11);
 	}
-	close TMP;	
+	close $TMP;
 
     my $text = new Gtk2::TextView;
     my $advanced_box_archive;
