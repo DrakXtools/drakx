@@ -20,8 +20,6 @@ msec - Perl functions to handle msec configuration files
     
     my $msec = new security::msec;
     
-    my $secure_level = $msec->get_secure_level;
-    
     my (%options, %defaults);
     
     my @functions = $msec->get_functions();
@@ -65,13 +63,13 @@ use MDK::Common;
 
 my $check_file = "$::prefix/etc/security/msec/security.conf";
 
-my @sec_levels = ("Dangerous",  "Poor", "Standard", "High",  "Higher", "Paranoid");
-my %sec_levels = ("Dangerous" => 0,  "Poor" => 1, "Standard" => 2, "High" => 3,  "Higher" => 4, "Paranoid" => 5);
 
 
 # ***********************************************
 #              PRIVATE FUNCTIONS
 # ***********************************************
+
+my $num_level;
 
 sub get_default {
     my ($option, $category) = @_;
@@ -80,8 +78,8 @@ sub get_default {
     my $num_level = 0;
 
     if ($category eq "functions") {
-        my $word_level = get_secure_level();
-	   $num_level = $sec_levels{$word_level};
+        require security::level;
+        $num_level = security::level::get() unless $num_level;
         $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
     elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf" }
@@ -140,32 +138,6 @@ sub get_value {
 #               SPECIFIC OPTIONS
 # ***********************************************
 
-# get_secure_level() - Get the secure level
-
-# duplicated with some drakx code
-
-sub get_secure_level {
-    shift;
-    my $num_level = 2;
-
-    $num_level = cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
-                cat_("$::prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
-                ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL};
-		# || $ENV{SECURE_LEVEL};
-
-    return $sec_levels[$num_level];
-}
-
-sub get_seclevel_list {
-    qw(Standard High Higher Paranoid);
-}
-
-sub set_secure_level {
-    my $word_level = $_[1];
-
-    my $run_level = $sec_levels{$word_level};
-    system "/usr/sbin/msec", $run_level ? $run_level : 3;
-}
 
 # ***********************************************
 #         FUNCTIONS (level.local) RELATED
@@ -259,7 +231,7 @@ sub get_default_checks {
         local $_;
         while (<F>) {
             ($check, undef) = split(/=/, $_);
-            push @checks, $check if !(member($check, qw(MAIL_USER)))
+            push @checks, $check unless member($check, qw(MAIL_USER))
         }
         close F;
     }

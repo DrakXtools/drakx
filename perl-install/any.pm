@@ -1131,13 +1131,6 @@ sub ask_window_manager_to_logout {
     1;
 }
 
-sub get_secure_level {
-    cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
-    cat_("$::prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
-      ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL}  || #- 8.2 msec
-	$ENV{SECURE_LEVEL};
-}
-
 sub alloc_raw_device {
     my ($prefix, $device) = @_;
     my $used = 0;

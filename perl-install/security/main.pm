@@ -7,6 +7,7 @@ use common;
 use my_gtk qw(:helpers :wrappers :ask);
 use run_program;
 
+use security::level;
 use security::msec;
 
 # factorize this with rpmdrake and harddrake2
@@ -51,10 +52,10 @@ Security Administrator:
 
 sub basic_seclevel_option {
 	my ($seclevel_entry, $msec) = @_;
-	my @sec_levels = $msec->get_seclevel_list();
-	my $current_level = $msec->get_secure_level();
+	my @sec_levels = security::level::get_common_list();
+	my $current_level = security::level::get_string();
 
-	push(@sec_levels, $current_level) if $current_level eq "Dangerous" || $current_level eq "Poor";
+	push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
 
 	$$seclevel_entry->entry->set_editable(0);
 	$$seclevel_entry->set_popdown_strings(@sec_levels);
@@ -182,10 +183,10 @@ sub draksec_main {
 
 		  standalone::explanations("Configuring msec");
 
-		  if ($seclevel_value ne $msec->get_secure_level()) {
+		  if ($seclevel_value ne security::level::get_string()) {
 		      $w = wait_msg(N("Please wait, setting security level..."));
 		      standalone::explanations("Setting security level");
-		      $msec->set_secure_level($seclevel_value);
+		      security::level::set($seclevel_value);
 		      remove_wait_msg($w);
 		  }
 
@@ -213,7 +214,7 @@ sub draksec_main {
 			   }
 		  }
 		  standalone::explanations("Applying msec changes");
-		  run_program::run($::prefix, "/usr/sbin/msec");
+		  run_program::rooted($::prefix, "/usr/sbin/msec");
 
 		  remove_wait_msg($w);
 
