@@ -123,8 +123,10 @@ our @tree =
       string => N("Videocard"),
       icon => "video.png",
       configurator => "$sbindir/XFdrake",
+      configurator_auto => "$sbindir/XFdrake --auto",
       detector =>  sub { f(grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ /DISPLAY_VGA/ } @devices) },
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {
