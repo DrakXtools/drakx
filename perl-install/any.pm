@@ -747,6 +747,7 @@ sub report_bug {
       header("dmidecode"), `$ENV{LD_LOADER} dmidecode`,
       header("fdisk"), arch() =~ /ppc/ ? `$ENV{LD_LOADER} pdisk -l` : `$ENV{LD_LOADER} fdisk -l`,
       header("scsi"), cat_("/proc/scsi/scsi"),
+      header("/sys/bus/scsi/devices"), `ls -l /sys/bus/scsi/devices`,
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
       header("pcmcia: stab"), cat_("$prefix/var/lib/pcmcia/stab") || cat_("$prefix/var/run/stab"),
