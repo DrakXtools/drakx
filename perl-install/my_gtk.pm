@@ -1,4 +1,4 @@
-#-########################################################################
+ #-########################################################################
 #- Pixel's implementation of Perl-GTK  :-)  [DDX]
 #-########################################################################
 package my_gtk; # $Id$
@@ -39,7 +39,10 @@ sub new {
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
-    push @interactive::objects, $o unless $opts{no_interactive_objects};
+    foreach (@interactive::objects) {
+	$_->{rwindow}->set_modal(0);
+    }
+    push @interactive::objects, $o if !$opts{no_interactive_objects};
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
 
@@ -469,7 +472,7 @@ sub _create_window($$) {
 
     $w->set_title($title);
 
-    $w->signal_connect(expose_event => sub { eval { $w->window->XSetInputFocus } }) if $my_gtk::force_focus || $o->{force_focus};
+    $w->signal_connect(expose_event => sub { eval { $interactive::objects[-1]{rwindow} == $w and $w->window->XSetInputFocus } }) if $my_gtk::force_focus || $o->{force_focus};
     $w->signal_connect(delete_event => sub { $w->destroy; die 'wizcancel' });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
