@@ -37,7 +37,10 @@ sub handle_etcfiles {
         m|^# (\S+)| and $mode = $1;
         m|^/| && member($mode, @allowed_modes) and do {
             $mode eq 'READ' && !-e $_ and symlinkf_short("/image$_", $_);
-            $mode eq 'OVERWRITE' and system("cp /image$_ $_");  #- need copy contents
+            if ($mode eq 'OVERWRITE') {
+                mkdir_p(dirname($_));
+                system("cp /image$_ $_");  #- need copy contents
+            }
             $mode eq 'DIR' and mkdir_p $_;
         }
     }
