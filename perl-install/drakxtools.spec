@@ -1,13 +1,13 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 30mdk
+Release: 31mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
-Conflicts: drakconf < 0.96-10mdk
+Conflicts: drakconf < 0.96-10mdk 
 BuildRequires:        gcc
 BuildRequires:        gettext
 BuildRequires:        gtk+-devel
@@ -22,8 +22,8 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
-Obsoletes: Xconfigurator mouseconfig kbdconfig printtool 
-Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
+Obsoletes: Xconfigurator mouseconfig kbdconfig printtool drakfloppy
+Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool drakfloppy
 
 %package http
 Summary: The drakxtools via http
@@ -270,6 +270,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Sep  3 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-31mdk
+- obsoletes/provides drakfloppy
+
 * Tue Sep  3 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-30mdk
 - ugtk:
 	o better fix for glib warning that don't make drakx feel mad
