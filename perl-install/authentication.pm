@@ -146,6 +146,36 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
     1;
 }
 
+sub ask_root_password_and_authentication {
+    my ($in, $netc, $superuser, $authentication, $meta_class, $security) = @_;
+
+    my $kind = to_kind($authentication);
+
+    $in->ask_from_({
+	 title => N("Set root password and network authentication methods"), 
+	 messages => N("Set root password"),
+	 advanced_messages => kind2description(),
+	 interactive_help_id => "setRootPassword",
+	 cancel => ($security <= 2 ? 
+		    #-PO: keep this short or else the buttons will not fit in the window
+		    N("No password") : ''),
+	 focus_first => 1,
+	 callbacks => { 
+	     complete => sub {
+		 $superuser->{password} eq $superuser->{password2} or $in->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,0;
+		 length $superuser->{password} < 2 * $security
+		   and $in->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $security)), return 1,0;
+		 return 0;
+        } } }, [
+{ label => N("Password"), val => \$superuser->{password},  hidden => 1 },
+{ label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
+{ label => N("Authentication"), val => \$kind, type => 'list', list => [ authentication::kinds($meta_class) ], format => \&authentication::kind2name, advanced => 1 },
+        ]) or delete $superuser->{password};
+
+    ask_parameters($in, $netc, $authentication, $kind) or goto &ask_root_password_and_authentication;
+}
+
+
 sub get() {
     my $system_auth = cat_("/etc/pam.d/system-auth");
     { md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/ };
@@ -577,6 +607,48 @@ sub query_srv_names {
     my $res = Net::DNS::Resolver->new;
     my $query = $res->query("_ldap._tcp.$domain", 'srv') or return;
     map { $_->target } $query->answer;
+}
+
+sub user_crypted_passwd {
+    my ($u, $isMD5) = @_;
+    $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
+}
+
+sub set_root_passwd {
+    my ($superuser, $authentication) = @_;
+    $superuser->{name} = 'root';
+    write_passwd_user($superuser, $authentication->{md5});    
+    delete $superuser->{name};
+}
+
+sub write_passwd_user {
+    my ($u, $isMD5) = @_;
+
+    $u->{pw} = user_crypted_passwd($u, $isMD5);      
+    $u->{shell} ||= '/bin/bash';
+
+    substInFile {
+	my $l = unpack_passwd($_);
+	if ($l->{name} eq $u->{name}) {
+	    add2hash_($u, $l);
+	    $_ = pack_passwd($u);
+	    $u = {};
+	}
+	if (eof && $u->{name}) {
+	    $_ .= pack_passwd($u);
+	}
+    } "$::prefix/etc/passwd";
+}
+
+my @etc_pass_fields = qw(name pw uid gid realname home shell);
+sub unpack_passwd {
+    my ($l) = @_;
+    my %l; @l{@etc_pass_fields} = split ':', chomp_($l);
+    \%l;
+}
+sub pack_passwd {
+    my ($l) = @_;
+    join(':', @$l{@etc_pass_fields}) . "\n";
 }
 
 1;

@@ -71,9 +71,10 @@ sub create_user {
 		run_program::rooted($::prefix, 'groupadd', '-g', $gid, $u->{name});
 	    }
 	}
+	require authentication;
 	run_program::rooted($::prefix, 
 			    'adduser', 
-			    '-p', user_crypted_passwd($u, $isMD5),
+			    '-p', authentication::user_crypted_passwd($u, $isMD5),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
 			    $u->{name});
     }
@@ -470,17 +471,6 @@ You can create additional entries or change the existing ones."), [ {
     }
 }
 
-my @etc_pass_fields = qw(name pw uid gid realname home shell);
-sub unpack_passwd {
-    my ($l) = @_;
-    my %l; @l{@etc_pass_fields} = split ':', chomp_($l);
-    \%l;
-}
-sub pack_passwd {
-    my ($l) = @_;
-    join(':', @$l{@etc_pass_fields}) . "\n";
-}
-
 sub get_autologin() {
     my %desktop = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     my $desktop = $desktop{DESKTOP} || 'KDE';
@@ -824,37 +814,6 @@ sub selectCountry {
 		  ]) or return;
 
     $locale->{country} = $other || !@best ? $ext_country : $country;
-}
-
-sub user_crypted_passwd {
-    my ($u, $isMD5) = @_;
-    $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
-}
-
-sub set_root_passwd {
-    my ($superuser, $authentication) = @_;
-    $superuser->{name} = 'root';
-    write_passwd_user($superuser, $authentication->{md5});    
-    delete $superuser->{name};
-}
-
-sub write_passwd_user {
-    my ($u, $isMD5) = @_;
-
-    $u->{pw} = user_crypted_passwd($u, $isMD5);      
-    $u->{shell} ||= '/bin/bash';
-
-    substInFile {
-	my $l = unpack_passwd($_);
-	if ($l->{name} eq $u->{name}) {
-	    add2hash_($u, $l);
-	    $_ = pack_passwd($u);
-	    $u = {};
-	}
-	if (eof && $u->{name}) {
-	    $_ .= pack_passwd($u);
-	}
-    } "$::prefix/etc/passwd";
 }
 
 sub set_login_serial_console {

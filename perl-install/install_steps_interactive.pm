@@ -1200,30 +1200,7 @@ sub setRootPassword {
 
     if ($o->{security} >= 1 || $clicked) {
 	require authentication;
-        my $authentication_kind = authentication::to_kind($o->{authentication} ||= {});
-
-	$o->ask_from_({
-	 title => N("Set root password and network authentication methods"), 
-	 messages => N("Set root password"),
-	 advanced_messages => authentication::kind2description(),
-	 interactive_help_id => "setRootPassword",
-	 cancel => ($o->{security} <= 2 ? 
-		    #-PO: keep this short or else the buttons will not fit in the window
-		    N("No password") : ''),
-	 focus_first => 1,
-	 callbacks => { 
-	     complete => sub {
-		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ N("The passwords do not match"), N("Please try again") ]), return 1,0;
-		 length $sup->{password} < 2 * $o->{security}
-		   and $o->ask_warn('', N("This password is too short (it must be at least %d characters long)", 2 * $o->{security})), return 1,0;
-		 return 0;
-        } } }, [
-{ label => N("Password"), val => \$sup->{password},  hidden => 1 },
-{ label => N("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$authentication_kind, type => 'list', list => [ authentication::kinds($o->{meta_class}) ], format => \&authentication::kind2name, advanced => 1 },
-        ]) or delete $sup->{password};
-
-	authentication::ask_parameters($o, $o->{netc}, $o->{authentication}, $authentication_kind) or goto &setRootPassword;
+	authentication::ask_root_password_and_authentication($o, $o->{netc}, $sup, $o->{authentication} ||= {}, $o->{meta_class}, $o->{security});
     }
     install_steps::setRootPassword($o);
 }
