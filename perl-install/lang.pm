@@ -339,6 +339,12 @@ sub langs {
     grep { $l->{$_} } keys %$l;
 }
 
+sub langsLANGUAGE {
+    my ($l) = @_;
+    my @l = $l->{all} ? list() : langs($l);
+    uniq(map { split ':', $languages{$_}[3] } @l);
+}
+
 sub pack_langs { 
     my ($l) = @_; 
     $l->{all} ? 'all' : join ':', uniq(map { $languages{$_}[3] } langs($l));
