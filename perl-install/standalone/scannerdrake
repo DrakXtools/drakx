@@ -41,6 +41,7 @@ foreach (@ARGV) {
     /^--dynamic=(.*)$/ and do { dynamic(); exit() };
 }
 
+$ugtk2::wm_icon = "scannerdrake";
 my $in = 'interactive'->vnew('su');
 if (!files_exist(qw(/usr/bin/scanimage
 		    /etc/sane.d/dll.conf)) ||

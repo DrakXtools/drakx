@@ -28,6 +28,7 @@ Usage:
 my ($opt, $idlabel) = @ARGV;
 @ARGV == 2 && ($opt eq '--id' || $opt eq '--doc' || $opt eq '--help') or usage();
 
+$ugtk2::wm_icon = "help";
 my $in = interactive->vnew;
 my ($instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 

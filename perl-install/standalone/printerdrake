@@ -47,6 +47,7 @@ local $_ = join '', @ARGV;
 
 my $printer;
 
+$ugtk2::wm_icon = "printerdrake";
 my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
 
