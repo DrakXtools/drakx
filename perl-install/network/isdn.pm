@@ -245,7 +245,7 @@ sub isdn_detect {
 }
 
 sub isdn_detect_backend {
-    my ($isdn) = @_;
+    my ($isdn) = { };
     if (my ($c) = modules::probe_category('network/isdn')) {
 	$isdn = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
@@ -257,6 +257,7 @@ sub isdn_detect_backend {
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
     }
+    $isdn;
 }
 
 sub isdn_get_list() {

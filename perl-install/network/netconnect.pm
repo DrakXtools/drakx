@@ -16,10 +16,8 @@ my %conf;
 
 sub detect {
     my ($auto_detect) = @_;
-    my $isdn = {};
     require network::isdn;
-    network::isdn::isdn_detect_backend($isdn);
-    $auto_detect->{isdn}{$_} = $isdn->{$_} foreach qw(description vendor id driver card_type type);
+    $auto_detect->{isdn} = network::isdn::isdn_detect_backend();
     $auto_detect->{isdn}{description} =~ s/.*\|//;
 
     modules::load_category('network/main|gigabit|usb');
