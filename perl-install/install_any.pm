@@ -548,24 +548,18 @@ sub setupFB {
     1;
 }
 
-sub hdInstallPath() {
-    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
-    my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
-    $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
-}
-
 sub install_urpmi {
     my ($prefix, $method, $packages, $mediums) = @_;
 
     #- rare case where urpmi cannot be installed (no hd install path).
-    $method eq 'disk' && !hdInstallPath() and return;
+    $method eq 'disk' && !any::hdInstallPath() and return;
 
     my @cfg;
     foreach (sort { $a->{medium} <=> $b->{medium} } values %$mediums) {
 	my $name = $_->{fakemedium};
 	if ($_->{ignored} || $_->{selected}) {
 	    my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
-					   disk => "file:/" . hdInstallPath(),
+					   disk => "file:/" . any::hdInstallPath(),
 					   ftp => $ENV{URLPREFIX},
 					   http => $ENV{URLPREFIX},
 					   cdrom => "removable://mnt/cdrom" }}{$method} ||
