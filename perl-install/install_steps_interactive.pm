@@ -747,26 +747,32 @@ Do you want to install the updates ?")),
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);
 
-    require crypto;
-    eval {
-	my @mirrors = do { my $_w = $o->wait_message('',
-						    N("Contacting Mandrake Linux web site to get the list of available mirrors..."));
-			   crypto::mirrors() };
-	#- if no mirror have been found, use current time zone and propose among available.
-	$u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
-	$u->{mirror} = $o->ask_from_treelistf('', 
-					      N("Choose a mirror from which to get the packages"), 
-					      '|',
-					      \&crypto::mirror2text,
-					      \@mirrors,
-					      $u->{mirror});
-    };
-    return if $@ || !$u->{mirror};
+    #- update medium available and working.
+    my $update_medium;
+    do {
+	require crypto;
+	eval {
+	    my @mirrors = do {
+		my $_w = $o->wait_message('', N("Contacting Mandrake Linux web site to get the list of available mirrors..."));
+		crypto::mirrors() };
+	    #- if no mirror have been found, use current time zone and propose among available.
+	    $u->{mirror} ||= crypto::bestMirror($o->{timezone}{timezone});
+	    $u->{mirror} = $o->ask_from_treelistf('', 
+						  N("Choose a mirror from which to get the packages"), 
+						  '|',
+						  \&crypto::mirror2text,
+						  \@mirrors,
+						  $u->{mirror});
+	};
+	return if $@;
 
-    my $update_medium = do {
-	my $_w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
-	crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
-    };
+	eval {
+	    if ($u->{mirror}) {
+		my $_w = $o->wait_message('', N("Contacting the mirror to get the list of available packages..."));
+		$update_medium = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
+	    }
+	};
+    } while $@;
 
     if ($update_medium) {
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
