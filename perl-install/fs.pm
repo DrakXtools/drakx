@@ -597,7 +597,7 @@ sub mount {
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
     if (member($fs, 'smb', 'smbfs', 'nfs') && $::isStandalone) {
-	system('mount', $dev, $where, '-o', $options) == 0 or die _("mount failed");
+	system('mount', '-t', $fs, $dev, $where, '-o', $options) == 0 or die _("mount failed");
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
