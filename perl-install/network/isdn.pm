@@ -4,6 +4,8 @@ use network::isdn_consts;
 use common;
 use any;
 use modules;
+use pkgs;
+use run_program;
 use log;
 use network::tools;
 use vars qw(@ISA @EXPORT);
@@ -53,8 +55,8 @@ We recommand the light configuration.
 				   ) or return;
     my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn4net', 'isdn-light');
     if (!$::isStandalone) {
-	my $p = packageByName($in->{packages}, $rmpackage);
-	$p && packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
+	my $p = pkgs::packageByName($in->{packages}, $rmpackage);
+	$p && pkgs::packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
     }
     run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
     $install->($instpackage, 'isdn4k-utils');
