@@ -316,6 +316,20 @@ sub unselectPackage($$;$) {
 	if (packageFlagSelected($provided)) {
 	    $otherOnly or packageSetFlagSelected($provided, 0);
 	    $otherOnly and $otherOnly->{packageName($provided)} = 1;
+	    foreach (packageDepsId($provided)) {
+		if (/\|/) {
+		    #- this package use a choice of other package, so we have to check
+		    #- if our package is not included in the choice, if this is the
+		    #- case, if must be checked one of the other package are selected.
+		    my $unselect_alone = 0;
+		    foreach (split '\|') {
+			my $dep = packageById($packages, $_);
+			$dep == $pkg and $unselect_alone |= 1;
+			packageFlagBase($dep) || packageFlagSelected($dep) and $unselect_alone |= 2;
+		    }
+		    $unselect_alone == 3 and return;
+		}
+	    }
 	}
 	foreach (map { split '\|' } packageDepsId($provided)) {
 	    my $dep = packageById($packages, $_);
@@ -587,6 +601,7 @@ sub getProvides($) {
     #- needed by a large number of package.
 
     foreach my $pkg (@{$packages->[1]}) {
+	packageFlagBase($pkg) and next;
 	map { my $provided = $packages->[1][$_] or die "invalid package index $_";
 	      packageFlagBase($provided) or push @{$provided->{provides} ||= []}, $pkg;
 	  } map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($pkg);
@@ -846,7 +861,7 @@ sub selectPackagesToUpgrade($$$;$$) {
 	unless ($skipThis) {
 	    my $cumulSize;
 
-	    selectPackage($packages, $p) unless packageFlagSelected($p);
+	    selectPackage($packages, $p);
 
 	    #- keep in mind installed files which are not being updated. doing this costs in
 	    #- execution time but use less memory, else hash all installed files and unhash
