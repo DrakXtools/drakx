@@ -18,10 +18,10 @@
 # - find a good way to drop the access point and resume roaming
 # - make 'key' column wider by default
 
-use Gtk2 '-init';
-use Gtk2::SimpleList;
-use Glib qw(TRUE FALSE);
 use lib qw(/usr/lib/libDrakX);
+require ugtk2;
+ugtk2->import(qw(:wrappers :create));
+use Gtk2::SimpleList;
 use common;
 require_root_capability();
 
@@ -41,186 +41,95 @@ my $DHClient = '/sbin/dhclient';
 # initialize variables
 my $ScanInterval = 60; # tell deamon to search for new nets every x seconds
 
-# initialize main window
-$MainWindow = Gtk2::Window->new;
-$MainWindow->set_title('Drakroam');
-$MainWindow->set_border_width(2);
-$MainWindow->signal_connect(delete_event => sub {
-	Gtk2->main_quit;
-});
 
-# add main box; everything goes in here
-$MainBox = Gtk2::VBox->new(0);
-$MainWindow->add($MainBox);
-
-# add status box and frame
-$StatusBox = Gtk2::VBox->new(0);
-$StatusFrame = Gtk2::Frame->new("Status");
-$StatusFrame->set_border_width(2);
-$StatusFrame->add($StatusBox);
-$MainBox->pack_start($StatusFrame, 0, 0, 0);
-
-# add status labels in three columns
-$StatusLabels = Gtk2::HBox->new(0,0);
-$StatusBox->pack_start($StatusLabels, 0, 0, 0);
-$StatusColumnA = Gtk2::VBox->new(0);
-$StatusColumnB = Gtk2::VBox->new(0);
-$StatusColumnC = Gtk2::VBox->new(0);
-$StatusLabels->pack_start($StatusColumnA, 0, 0, 10);
-$StatusLabels->pack_start($StatusColumnB, 0, 0, 10);
-$StatusLabels->pack_start($StatusColumnC, 0, 0, 10);
-$StatusLabelA = Gtk2::Label->new;
-$StatusLabelB = Gtk2::Label->new;
-$StatusLabelC = Gtk2::Label->new;
-$StatusColumnA->pack_start($StatusLabelA, 0, 0, 0);
-$StatusColumnB->pack_start($StatusLabelB, 0, 0, 0);
-$StatusColumnC->pack_start($StatusLabelC, 0, 0, 0);
-
-# add disconnect and refresh buttons
-$StatusControls = Gtk2::HBox->new(1,0);
-$DisconnectButton = Gtk2::Button->new("Disconnect");
-$StatusControls->pack_start($DisconnectButton, 0, 0, 0);
-$DisconnectButton->signal_connect(clicked => sub { &Disconnect });
-$RefreshButton = Gtk2::Button->new("Refresh");
-$StatusControls->pack_start($RefreshButton, 0, 0, 0);
-$RefreshButton->signal_connect(clicked => sub { &UpdateStatus });
-$StatusBox->pack_start($StatusControls, 0, 0, 0);
-
-# add roaming box and frame
-$RoamBox = Gtk2::HBox->new(1,0);
-$RoamFrame = Gtk2::Frame->new("Roaming");
-$RoamFrame->set_border_width(2);
-$RoamFrame->add($RoamBox);
-$MainBox->pack_start($RoamFrame, 0, 0, 0);
-
-# add roam status and controls
-$RoamControls = Gtk2::VBox->new(0);
-$RoamStatus = Gtk2::Label->new("Roaming: off");
-$RoamControls->pack_start($RoamStatus, 0, 0, 0);
-$RoamStartStop = Gtk2::HBox->new(0);
-$StartButton = Gtk2::Button->new("Start");
-$StartButton->signal_connect(clicked => sub { &StartRoam });
-$RoamStartStop->pack_start($StartButton, 0, 0, 0);
-$StopButton = Gtk2::Button->new("Stop");
-$RoamStartStop->pack_start($StopButton, 0, 0, 0);
-$StopButton->signal_connect(clicked => sub { &StopRoam });
-$RoamControls->pack_start($RoamStartStop, 0, 0, 0);
-$RoamBox->pack_start($RoamControls, 0, 0, 0);
-
-# add scan controls
-$ScanControl = Gtk2::VBox->new(0);
-$ScanDialogue = Gtk2::HBox->new(0);
-$ScanLabel = Gtk2::Label->new("Scan interval (sec): ");
-$ScanControl->pack_start($ScanLabel, 0, 0, 0);
-$ScanEntry = Gtk2::Entry->new;
+my $ScanEntry = Gtk2::Entry->new;
 $ScanEntry->set_width_chars(4);
-$ScanDialogue->pack_start($ScanEntry, 0, 0, 0);
 $ScanEntry->set_text($ScanInterval);
-$ScanSetButton = Gtk2::Button->new("Set");
-$ScanSetButton->signal_connect(clicked => sub { &SetInterval });
-$ScanDialogue->pack_start($ScanSetButton, 0, 0, 0);
-$ScanControl->pack_start($ScanDialogue, 0, 0, 0);
-$RoamBox->pack_start($ScanControl, 0, 0, 0);
 
-# add known network box
-$KnownBox = Gtk2::VBox->new(0);
-$KnownFrame = Gtk2::Frame->new("Known Networks (Drag up/down or edit)");
-$KnownFrame->set_border_width(2);
-$KnownFrame->add($KnownBox);
-$MainBox->pack_start($KnownFrame, 0, 0, 0);
-
-# make list and scroll box for known networks
-$KnownList = Gtk2::SimpleList->new(
-	"ESSID" => "text",
-	"Mode" => "text",
-	"Channel" => "int",
-	"Key" => "text",
-	"DHCP" => "bool"
-);
+my $KnownList = Gtk2::SimpleList->new(
+                                      "ESSID" => "text",
+                                      "Mode" => "text",
+                                      "Channel" => "int",
+                                      "Key" => "text",
+                                      "DHCP" => "bool"
+                                     );
 $KnownList->get_selection->set_mode('single');
 $KnownList->set_reorderable(1);
 $KnownList->set_column_editable(1, TRUE); # allow to change mode
 $KnownList->set_column_editable(2, TRUE); # allow to change channel
 $KnownList->set_column_editable(3, TRUE); # allow to change key
-#$KnownBox->pack_start($KnownList, 0, 0, 0);
-$KnownScroll = Gtk2::ScrolledWindow->new;
-$KnownScroll->set_policy('automatic', 'automatic');
-$KnownScroll->add($KnownList);
-$KnownBox->pack_start($KnownScroll, 0, 0, 0);
 
-# add controls for known networks
-$KnownControls = Gtk2::HBox->new(1);
-$RemoveNetButton = Gtk2::Button->new("Remove");
-$KnownControls->pack_start($RemoveNetButton, 0, 0, 0);
-$RemoveNetButton->signal_connect(clicked => sub {
-	my @selected = $KnownList->get_selected_indices;
-	splice @{$KnownList->{data}}, "@selected", 1;
-});
-$ConnectButton = Gtk2::Button->new("Connect");
-$KnownControls->pack_start($ConnectButton, 0, 0, 0);
-$ConnectButton->signal_connect(clicked => sub {
-	my @selected = $KnownList->get_selected_indices;
-	&ConnectNow(@selected);
-});
-$SaveConfigButton = Gtk2::Button->new("Save");
-$KnownControls->pack_start($SaveConfigButton, 0, 0, 0);
-$SaveConfigButton->signal_connect(clicked => sub { &WriteConfig });
-$KnownBox->pack_start($KnownControls, 0, 0, 0);
-
-# add available networks box
-$AvailableBox = Gtk2::VBox->new(0);
-$AvailableFrame = Gtk2::Frame->new("Available Networks");
-$AvailableFrame->set_border_width(2);
-$AvailableFrame->add($AvailableBox);
-$MainBox->pack_start($AvailableFrame, 0, 0, 0);
-
-# make list and scroll box for available networks
-$AvailableList = Gtk2::SimpleList->new(
-	"ESSID" => "text",
-	"Type" => "text",
-	"Encryption" => "text",
-	"Signal (%)" => "int"
-);
+my $AvailableList = Gtk2::SimpleList->new(
+                                          "ESSID" => "text",
+                                          "Type" => "text",
+                                          "Encryption" => "text",
+                                          "Signal (%)" => "int"
+                                         );
 $AvailableList->get_selection->set_mode('single');
-#$AvailableBox->pack_start($AvailableList, 0, 0, 0);
-$AvailableScroll = Gtk2::ScrolledWindow->new;
-$AvailableScroll->set_policy('automatic', 'automatic');
-$AvailableScroll->add($AvailableList);
-$AvailableBox->pack_start($AvailableScroll, 0, 0, 0);
 
-# add controls for available networks
-$AvailableControls = Gtk2::HBox->new(1);
-$AddNetButton = Gtk2::Button->new("Add");
-$AvailableControls->pack_start($AddNetButton, 0, 0, 0);
-$AddNetButton->signal_connect(clicked => sub { 
-	my @selected = $KnownList->get_selected_indices;
-	my $essid = $AvailableList->{data}[@selected][0];
-	my $mode;
-	my $channel;
-	my $key;
-	my $dhcp = 1; # assume dhcp for new networks
-	&AddNet($essid, $mode, $channel, $key, $dhcp);
-});
-$UpdateAvailableButton = Gtk2::Button->new("Rescan");
-$AvailableControls->pack_start($UpdateAvailableButton, 0, 0, 0);
-$UpdateAvailableButton->signal_connect(clicked => sub { &UpdateAvailable });
-$AvailableBox->pack_start($AvailableControls, 0, 0, 0);
+my $NetLabel = Gtk2::Label->new;
+my $IpLabel = Gtk2::Label->new;
+my $GwLabel = Gtk2::Label->new;
+my $ModeLabel = Gtk2::Label->new;
+my $WepLabel = Gtk2::Label->new;
+my $SignalLabel = Gtk2::Label->new;
 
-# add master controls
-$MasterBox = Gtk2::HBox->new(1);
-$HelpButton = Gtk2::Button->new("Help");
-$MasterBox->pack_start($HelpButton, 0, 0, 0);
-$HelpButton->signal_connect(clicked => sub { &Dialog($HelpFile) });
-$AboutButton = Gtk2::Button->new("About");
-$MasterBox->pack_start($AboutButton, 0, 0, 0);
-$AboutButton->signal_connect(clicked => sub { &Dialog($AboutFile) });
-$CloseButton = Gtk2::Button->new("Save and close");
-$MasterBox->pack_start($CloseButton, 0, 0, 0);
-$CloseButton->signal_connect(clicked => sub {
-	&WriteConfig;
-	Gtk2->main_quit;
-});
-$MainBox->pack_start($MasterBox, 0, 0, 0);
+my $w = ugtk2->new('Drakroam');
+gtkadd(gtkset_border_width($w->{window}, 2),
+       gtkpack_(Gtk2::VBox->new,
+                0, gtkadd(gtkset_border_width(Gtk2::Frame->new("Status"), 2),
+                          gtkpack(Gtk2::VBox->new,
+                                  create_packtable({ col_spacings => 5, row_spacings => 5, homogenous => 1 },
+                                                   [ $NetLabel, $IpLabel, $GwLabel ],
+                                                   [ $ModeLabel, $WepLabel, $SignalLabel ],
+                                                  ),
+                                  gtkpack(create_hbox(),
+                                          gtksignal_connect(Gtk2::Button->new("Disconnect"), clicked => sub { &Disconnect }),
+                                          gtksignal_connect(Gtk2::Button->new("Refresh"), clicked => sub { &UpdateStatus })))),
+                0, gtkadd(gtkset_border_width(Gtk2::Frame->new("Roaming"), 2),
+                          gtkpack(create_hbox(),
+                                  gtkpack(Gtk2::VBox->new,
+                                          my $RoamStatus = Gtk2::Label->new("Roaming: off"),
+                                          gtkpack(create_hbox(),
+						  gtksignal_connect(Gtk2::Button->new("Start"), clicked => sub { &StartRoam }),
+						  gtksignal_connect(Gtk2::Button->new("Stop"), clicked => sub { &StopRoam }))),
+                                  gtkpack(Gtk2::VBox->new,
+                                          Gtk2::Label->new("Scan interval (sec): "),
+                                          gtkpack(Gtk2::HBox->new,
+                                                  $ScanEntry,
+                                                  gtksignal_connect(Gtk2::Button->new("Set"), clicked => sub { &SetInterval }))))),
+                1, gtkadd(gtkset_border_width(Gtk2::Frame->new("Known Networks (Drag up/down or edit)"), 2),
+                          gtkpack_(Gtk2::VBox->new,
+                                   1, create_scrolled_window($KnownList),
+                                   0, gtkpack(create_hbox(),
+					      gtksignal_connect(Gtk2::Button->new("Remove"), clicked => sub {
+								    my @selected = $KnownList->get_selected_indices;
+								    splice @{$KnownList->{data}}, "@selected", 1;
+								}),
+					      gtksignal_connect(Gtk2::Button->new("Connect"), clicked => sub {
+								    my @selected = $KnownList->get_selected_indices;
+								    &ConnectNow(@selected);
+								}),
+					      gtksignal_connect(Gtk2::Button->new("Save"), clicked => sub { &WriteConfig })))),
+                1, gtkadd(gtkset_border_width(Gtk2::Frame->new("Available Networks"), 2),
+                          gtkpack_(Gtk2::VBox->new,
+                                   1, create_scrolled_window($AvailableList),
+                                   0, gtkpack(create_hbox(),
+					      gtksignal_connect(Gtk2::Button->new("Add"), clicked => sub {
+								    my @selected = $KnownList->get_selected_indices;
+								    my ($mode, $channel, $key);
+								    my $essid = $AvailableList->{data}[@selected][0];
+								    my $dhcp = 1; # assume dhcp for new networks
+								    &AddNet($essid, $mode, $channel, $key, $dhcp);
+								}),
+					      gtksignal_connect(Gtk2::Button->new("Rescan"), clicked => sub { &UpdateAvailable })))),
+                0, gtkpack(create_hbox(),
+                           gtksignal_connect(Gtk2::Button->new("Help"), clicked => sub { &Dialog($HelpFile) }),
+                           gtksignal_connect(Gtk2::Button->new("About"), clicked => sub { &Dialog($AboutFile) }),
+                           gtksignal_connect(Gtk2::Button->new("Save and close"), clicked => sub {
+                                                 &WriteConfig;
+                                                 Gtk2->main_quit;
+                                             }))));
 
 # fill the GUI
 &ReadConfig;
@@ -267,9 +176,12 @@ sub UpdateStatus {
 		else { $CurrentGW = "---.---.---.---" }
 	}
 	close $ROUTE;
-	$StatusLabelA->set_text("Net: $CurrentNet\nMode: $CurrentMode");
-	$StatusLabelB->set_text("IP: $CurrentIP\nEncryption: $CurrentWEP");
-	$StatusLabelC->set_text("Gateway: $CurrentGW\nSignal: $CurrentSignal");
+	$NetLabel->set_text("Net: $CurrentNet");
+        $ModeLabel->set_text("Mode: $CurrentMode");
+	$IpLabel->set_text("IP: $CurrentIP");
+	$WepLabel->set_text("Encryption: $CurrentWEP");
+	$GwLabel->set_text("Gateway: $CurrentGW");
+	$SignalLabel->set_text("Signal: $CurrentSignal");
 }
 
 sub UpdateAvailable {
@@ -428,5 +340,5 @@ $AboutWindow->show_all;
 
 # start GUI
 print "Stating GUI\n";
-$MainWindow->show_all;
-Gtk2->main;
+
+$w->main;
