@@ -48,11 +48,11 @@ sub pre_func {
     if ($::isStandalone) {
 	$::Wizard_splash = 1;
 	require ugtk2;
-	ugtk2->import(qw(:wrappers));
+	ugtk2->import(qw(:wrappers :helpers));
 	my $W = ugtk2->new(N("Network Configuration Wizard"));
 	gtkadd($W->{window},
 	       gtkpack_(new Gtk2::VBox(0, 0),
-			1, write_on_pixmap(gtkcreate_img("drakconnect_step"),
+			1, write_on_pixmap(gtkcreate_img("drakconnect_step"), #BUG: write_on_pixmap is in my_gtk only, not in ugtk2 !!!
 					   20,200,
 					   N("We are now going to configure the %s connection.", translate($text)),
 					  ),
