@@ -357,7 +357,7 @@ sub ask_fromW {
     my $total_size = 0;
     my $tooltips = Gtk2::Tooltips->new;
     my $ok_clicked = sub { 
-	$mainw->{ok}->get_property('sensitive') or return;
+	!$mainw->{ok} || $mainw->{ok}->get_property('sensitive') or return;
 	$mainw->{retval} = 1;
 	Gtk2->main_quit;
     };
