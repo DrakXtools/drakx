@@ -105,7 +105,7 @@ our %l = (
         # 3w-xxxx drives ATA-RAID, 3w-9xxx and arcmsr drive SATA-RAID
         qw(a320raid),
         qw(3w-9xxx 3w-xxxx aacraid arcmsr cciss cpqfc cpqarray DAC960 dpt_i2o gdth i2o_block ipr it821x it8212),
-        qw(iteraid megaraid megaraid_mbox mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
+        qw(iteraid megaraid megaraid_mbox megaraid_sas mptscsih qla2100 qla2200 qla2300 qla2322 qla4xxx qla6312 qla6322 pdc-ultra),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
