@@ -80,10 +80,10 @@ unless ($::isEmbedded) {
 }
 $window1->{rwindow}->set_border_width(10);
 
-my $combo1 = Gtk2::OptionMenu->new;
-$combo1->set_popdown_strings(network::netconnect::get_profiles());
+my $profile_combo = Gtk2::OptionMenu->new;
+$profile_combo->set_popdown_strings(network::netconnect::get_profiles());
 my $old_profile = $netcnx->{PROFILE};
-$combo1->entry->set_text($netcnx->{PROFILE} || "default");
+$profile_combo->entry->set_text($netcnx->{PROFILE} || "default");
 my $button_del = Gtk2::Button->new(N("Del profile..."));
 $button_del->signal_connect(clicked => sub {
 				my $dialog = _create_dialog(N("Delete profile"));
@@ -104,8 +104,9 @@ $button_del->signal_connect(clicked => sub {
 				$dialog->show_all;
 				$dialog->run;
 				$dialog->destroy;
-				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $combo1->entry->get_text ? $combo1->entry->get_text : "default");
-				$combo1->set_popdown_strings(network::netconnect::get_profiles());
+				$profile_combo->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $profile_combo->entry->get_text ?
+                                                    $profile_combo->entry->get_text : "default");
+				$profile_combo->set_popdown_strings(network::netconnect::get_profiles());
 				apply();
 			    });
 $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
@@ -128,8 +129,9 @@ $button_new->signal_connect(clicked => sub {
 				$dialog->show_all;
 				$dialog->run;
 				$dialog->destroy;
-				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
-				$combo1->set_popdown_strings(network::netconnect::get_profiles());
+				$profile_combo->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ?
+                                                    $netcnx->{PROFILE} : "default");
+				$profile_combo->set_popdown_strings(network::netconnect::get_profiles());
 			    });
 
 my $hostname = chomp_(`hostname`);
@@ -180,7 +182,7 @@ $window1->{window}->add(
                                  if_($activate_profile,
                                      0, gtkpack_(Gtk2::HBox->new(0,0),
                                                  0, Gtk2::Label->new(N("Profile: ")),
-                                                 0, $combo1,
+                                                 0, $profile_combo,
                                                  0, $button_del,
                                                  0, $button_new,
                                                 ),
@@ -269,10 +271,10 @@ $window1->{window}->add(
                         );
 
 
-$combo1->signal_connect(realize => sub {
-                            $combo1->entry->signal_connect(changed => sub {
+$profile_combo->signal_connect(realize => sub {
+                            $profile_combo->entry->signal_connect(changed => sub {
                                                                #connected() and disconnect_backend();
-                                                               network::netconnect::set_profile($netcnx, $combo1->entry->get_text);
+                                                               network::netconnect::set_profile($netcnx, $profile_combo->entry->get_text);
                                                                network::netconnect::load_conf($netcnx, $netc, $intf);
                                                                $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
                                                                update();
@@ -298,7 +300,7 @@ $SIG{CHLD} = sub {
     @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
     network::netconnect::load_conf($netcnx, $netc, $intf);
     network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
-    $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($combo1->entry->get_text || "default"));
+    $profile_combo->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($profile_combo->entry->get_text || "default"));
     update();
 };
 
