@@ -1253,10 +1253,8 @@ sub install_grub {
 
     if (!$::testing) {
 	log::l("Installing boot loader...");
-	symlink "$::prefix/boot", "/boot";
 	my $error;
-	run_program::run("sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
-	unlink "/boot";
+	run_program::rooted($::prefix, "sh", '/boot/grub/install.sh', "2>", \$error) or die "grub failed: $error";
     }
 }
 sub when_config_changed_grub {
