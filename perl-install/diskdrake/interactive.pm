@@ -761,7 +761,12 @@ sub Format {
 sub Mount {
     my ($in, $hd, $part) = @_;
     write_partitions($in, $hd) or return;
-    fs::mount_part($part);
+    my $w;
+    fs::mount_part($part, sub {
+        	my ($msg) = @_;
+        	$w ||= $in->wait_message('', $msg);
+        	$w->set($msg);
+    });
 }
 sub Add2RAID {
     my ($in, $_hd, $part, $all_hds) = @_;
@@ -866,7 +871,7 @@ sub Loopback {
 sub Options {
     my ($in, $hd, $part, $all_hds) = @_;
 
-    my @simple_options = qw(user noauto supermount);
+    my @simple_options = qw(user noauto supermount username= password=);
 
     my (undef, $user_implies) = fs::mount_options();
     my ($options, $unknown) = fs::mount_options_unpack($part);
@@ -877,7 +882,7 @@ sub Options {
 		  '',
 		  [ 
 		   (map { 
-			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, 
+			 { label => $_, text => scalar warp_text(formatAlaTeX($help{$_})), val => \$options->{$_}, hidden => scalar(/password/),
 			   advanced => !$part->{rootDevice} && !member($_, @simple_options), if_(!/=$/, type => 'bool'), }
 		     } keys %$options),
 		    { label => N("Various"), val => \$unknown, advanced => 1 },
@@ -1054,10 +1059,12 @@ sub format_ {
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     $part->{isFormatted} = 0; #- force format;
-    my $_w = $in->wait_message(N("Formatting"), 
-			      isLoopback($part) ? N("Formatting loopback file %s", $part->{loopback_file}) :
-			                          N("Formatting partition %s", $part->{device}));
-    fs::format_part($all_hds->{raids}, $part);
+    my $w;
+    fs::format_part($all_hds->{raids}, sub {
+        	my ($msg) = @_;
+        	$w ||= $in->wait_message('', $msg);
+        	$w->set($msg);
+    });
     1;
 }
 
@@ -1198,7 +1205,10 @@ sub format_raw_hd_info {
 	my $type = substr(type2name($raw_hd->{type}), 0, 40); # limit the length
 	$info .= N("Type: ") . $type . "\n";
     }
-    $info .= N("Options: %s", $raw_hd->{options}) if $raw_hd->{options};
+    if (my $s = $raw_hd->{options}) {
+	$s =~ s/password=([^\s,]*)/'password=' . ('x' x length($1))/e;
+	$info .= N("Options: %s", $s);
+    }
     $info;
 }
 

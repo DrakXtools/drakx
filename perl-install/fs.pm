@@ -605,13 +605,16 @@ sub real_format_part {
     $part->{isFormatted} = 1;
 }
 sub format_part {
-    my ($raids, $part, $prefix) = @_;
+    my ($raids, $part, $prefix, $wait_message) = @_;
     if (isRAID($part)) {
+	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	require raid;
 	raid::format_part($raids, $part);
     } elsif (isLoopback($part)) {
+	$wait_message->(N("Creating and formatting file %s", $part->{loopback_file})) if $wait_message;
 	loopback::format_part($part, $prefix);
     } else {
+	$wait_message->(N("Formatting partition %s", $part->{device})) if $wait_message;
 	real_format_part($part);
     }
 }
@@ -628,27 +631,26 @@ sub set_loop {
 }
 
 sub formatMount_part {
-    my ($part, $raids, $fstab, $prefix, $callback) = @_;
+    my ($part, $raids, $fstab, $prefix, $wait_message) = @_;
 
     if (isLoopback($part)) {
-	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $callback);
+	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $wait_message);
     }
     if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
-	formatMount_part($p, $raids, $fstab, $prefix, $callback) unless loopback::carryRootLoopback($part);
+	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) unless loopback::carryRootLoopback($part);
     }
     if ($part->{encrypt_key}) {
 	set_loop($part);
     }
     if ($part->{toFormat}) {
-	$callback->($part) if $callback;
-	format_part($raids, $part, $prefix);
+	format_part($raids, $part, $prefix, $wait_message);
     }
-    mount_part($part, $prefix);
+    mount_part($part, $prefix, 0, $wait_message);
 }
 
 sub formatMount_all {
-    my ($raids, $fstab, $prefix, $callback) = @_;
-    formatMount_part($_, $raids, $fstab, $prefix, $callback) 
+    my ($raids, $fstab, $prefix, $wait_message) = @_;
+    formatMount_part($_, $raids, $fstab, $prefix, $wait_message) 
       foreach sort { isLoopback($a) ? 1 : isSwap($a) ? -1 : 0 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
@@ -664,7 +666,7 @@ sub formatMount_all {
 }
 
 sub mount {
-    my ($dev, $where, $fs, $rdonly, $options) = @_;
+    my ($dev, $where, $fs, $rdonly, $options, $wait_message) = @_;
     log::l("mounting $dev on $where as type $fs, options $options");
 
     -d $where or mkdir_p($where);
@@ -674,6 +676,7 @@ sub mount {
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
     if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone) {
+	$wait_message->(N("Mounting partition %s", $dev)) if $wait_message;
 	system('mount', '-t', $fs, $dev, $where, if_($options, '-o', $options)) == 0 or die N("mounting partition %s in directory %s failed", $dev, $where);
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
@@ -691,6 +694,7 @@ sub mount {
 	    # if $where =~ m|/(boot)?$|;
 	    $mount_opt = 'notail'; #- notail in any case
 	} elsif ($fs eq 'jfs' && !$rdonly) {
+	    $wait_message->(N("Checking %s", $dev)) if $wait_message;
 	    #- needed if the system is dirty otherwise mounting read-write simply fails
 	    run_program::raw({ timeout => 60 * 60 }, "fsck.jfs", $dev) or do {
 		my $err = $?;
@@ -698,6 +702,7 @@ sub mount {
 	    };
 	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
 	    if (!$rdonly) {
+		$wait_message->(N("Checking %s", $dev)) if $wait_message;
 		foreach ('-a', '-y') {
 		    run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
 		    my $err = $?;
@@ -721,6 +726,7 @@ sub mount {
 	    eval { modules::load('isofs') };
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
+	$wait_message->(N("Mounting partition %s", $dev)) if $wait_message;
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
     } else {
 	log::l("skipping mounting $fs partition");
@@ -742,7 +748,7 @@ sub umount {
 }
 
 sub mount_part {
-    my ($part, $prefix, $rdonly) = @_;
+    my ($part, $prefix, $rdonly, $wait_message) = @_;
 
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
@@ -767,6 +773,7 @@ sub mount_part {
 
     unless ($::testing) {
 	if (isSwap($part)) {
+	    $wait_message->(N("Enabling swap partition %s", $part->{device})) if $wait_message;
 	    swap::swapon($part->{device});
 	} else {
 	    $part->{mntpoint} or die "missing mount point for partition $part->{device}";
@@ -778,7 +785,7 @@ sub mount_part {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || $part->{device};
-	    mount($dev, $mntpoint, type2fs($part), $rdonly, $part->{options});
+	    mount($dev, $mntpoint, type2fs($part), $rdonly, $part->{options}, $wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
     }

@@ -332,11 +332,9 @@ sub formatMountPartitions {
     my $w;
     catch_cdie {
         fs::formatMount_all($o->{all_hds}{raids}, $o->{fstab}, $o->{prefix}, sub {
-        	my ($part) = @_;
-        	$w ||= $o->wait_message('', N("Formatting partitions"));
-        	$w->set(isLoopback($part) ?
-        		N("Creating and formatting file %s", $part->{loopback_file}) :
-        		N("Formatting partition %s", $part->{device}));
+        	my ($msg) = @_;
+        	$w ||= $o->wait_message('', $msg);
+        	$w->set($msg);
         });
     } sub { 
 	$@ =~ /fsck failed on (\S+)/ or return;
