@@ -95,7 +95,6 @@ upload:
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
 	upload misc packdrake.pm ;\
-	upload misc rpm2header ;\
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
