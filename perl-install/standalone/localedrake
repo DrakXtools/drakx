@@ -34,9 +34,6 @@ if (defined $klang) {
 my $locale = lang::read($>);
 my $in = 'interactive'->vnew;
 
-sub select_language() {
-    $locale->{lang} = any::selectLanguage($in, $locale->{lang});
-}
 sub select_country() {
     any::selectCountry($in, $locale);  
 }
@@ -45,7 +42,7 @@ eval {
     local $::isWizard = 1;
     local $::Wizard_no_previous = 1;
   language:
-    select_language() or goto the_end;
+    $locale->{lang} = any::selectLanguage($in, $locale->{lang}) or goto the_end;
     undef $::Wizard_no_previous;
     select_country() or goto language;
 };
