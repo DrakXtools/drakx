@@ -686,7 +686,7 @@ sub selectLanguage {
 	my @langs = map { my $l = $_; uniq_ { $_->[0] } map { [ ($::move ? $l : "$_|$l"), $_, $l ] } lang::l2location($l) } lang::list_langs();
 	#- since gtk version will use images (function image2f) we need to sort differently
 	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
-	@langs = map { $_->[0] } sort { $a->[1] cmp $b->[1] || $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
+	@langs = map { $_->[0] } sort { $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
 
 	add2hash($common, { cancel => '',
 			    advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
