@@ -1595,7 +1595,7 @@ sub setup_common {
 		if ($mfg = $printer::main::thedb{$entry}{devidmake}) {
 		    $mfg =~ s/Hewlett[-\s_]Packard/HP/;
 		    $mfg =~ s/HEWLETT[-\s_]PACKARD/HP/;    
-		    if ($mfg ne $automake) {
+		    if (uc($mfg) ne uc($automake)) {
 			$matched = 0;
 		    }
 		}
@@ -1754,7 +1754,7 @@ sub get_db_entry {
 		$printer->{DBENTRY} = "$make|$model";
 	    }
 	    $printer->{OLD_CHOICE} = $printer->{DBENTRY};
-	} elsif ($printer->{SPOOLER} eq "cups" && $::expert &&
+	} elsif ($printer->{SPOOLER} eq "cups" &&
 		 $printer->{configured}{$queue}{queuedata}{ppd}) {
 	    # Do we have a native CUPS driver or a PostScript PPD file?
 	    $printer->{DBENTRY} = printer::main::get_descr_from_ppd($printer) || $printer->{DBENTRY};

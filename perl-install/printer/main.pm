@@ -506,7 +506,7 @@ sub read_printer_db(;$) {
     }
 
     #- Load CUPS driver database if CUPS is used as spooler
-    if ($spooler && $spooler eq "cups" && $::expert) {
+    if ($spooler && $spooler eq "cups") {
         poll_ppd_base();
     }
 
@@ -1497,7 +1497,29 @@ sub get_descr_from_ppd {
     my $descr = ($ppd{NickName} || $ppd{ShortNickName} || $ppd{ModelName});
     my $make = $ppd{Manufacturer};
     my $lang = $ppd{LanguageVersion};
-    return ppd_entry_str($make, $descr, $lang);
+    my $entry = ppd_entry_str($make, $descr, $lang);
+    if (!$::expert) {
+	# Remove driver from printer list entry when in recommended mode
+	$entry =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+    }
+    return $entry;
+}
+
+sub ppd_devid_data {
+    my ($ppd) = @_;
+    $ppd = "$::prefix/usr/share/cups/model/$ppd";
+    my @content;
+    if ($ppd =~ /\.gz$/i) {
+	@content = cat_("$::prefix/bin/zcat $ppd |") or return ("", "");
+    } else {
+	@content = cat_($ppd) or return ("", "");
+    }
+    my ($devidmake, $devidmodel);
+    ($_ =~ /^\*Manufacturer:\s*\"(.*)\"\s*$/ and $devidmake = $1) 
+	foreach @content;
+    ($_ =~ /^\*Product:\s*\"\(?(.*?)\)?\"\s*$/ and $devidmodel = $1) 
+	foreach @content;
+    return ($devidmake, $devidmodel);
 }
 
 sub poll_ppd_base {
@@ -1520,12 +1542,44 @@ sub poll_ppd_base {
 	    if ($ppd eq "raw") { next }
 	    $ppd && $mf && $descr and do {
 		my $key = ppd_entry_str($mf, $descr, $lang);
-		$key =~ /^[^\|]\|([^\|])\|([^\|])\|/;
+		$key =~ /^[^\|]+\|([^\|]+)\|(.*)$/;
 		my ($model, $driver) = ($1, $2);
+		$driver =~ s/\s+$//;
+		if (!$::expert) {
+		    # Remove driver from printer list entry when in
+		    # recommended mode
+		    my $simplekey = $key;
+		    $simplekey =~ s/^([^\|]+\|[^\|]+)\|.*$/$1/;
+		    # Only replace the printer entry when it uses a
+		    # "Foomatic + Postscript" driver
+		    next if (defined($thedb{$key}) &&
+			     ($thedb{$key}{driver} !~ /PostScript/i));
+		    $key = $simplekey;
+		    # Remove the old entry
+		    delete $thedb{$key};
+		} elsif (defined
+			 $thedb{"$mf|$model|PostScript (recommended)"} &&
+			 ($driver =~ /PostScript/i)) {
+		    # Expert mode: "Foomatic + Postscript" driver is
+		    # recommended and this is a PostScript PPD? Make
+		    # this PPD the recommended one
+		    for (keys 
+		         %{$thedb{"$mf|$model|PostScript (recommended)"}}) {
+			$thedb{"$mf|$model|PostScript"}{$_} =
+			  $thedb{"$mf|$model|PostScript (recommended)"}{$_};
+		    }
+		    delete
+			$thedb{"$mf|$model|PostScript (recommended)"};
+		    $key .= " (recommended)";
+		}
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{make} = $mf;
 		$thedb{$key}{model} = $model;
 		$thedb{$key}{driver} = $driver;
+		# Get auto-detection data
+		#my ($devidmake, $devidmodel) = ppd_devid_data($ppd);
+		#$thedb{$key}{devidmake} = $devidmake;
+		#$thedb{$key}{devidmodel} = $devidmodel;
 	    }
 	}
 	close PPDS;
@@ -1623,8 +1677,7 @@ sub configure_queue($) {
 	$useUSB ||= (($_->{queuedata}{connect} =~ /usb/i) || 
 	    ($_->{DeviceURI} =~ /usb/i));
     }
-    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect} =~ 
-	/usb/i);
+    $useUSB ||= ($printer->{currentqueue}{connect} =~ /usb/i);
     if ($useUSB) {
 	my $f = "$::prefix/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
