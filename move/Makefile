@@ -110,6 +110,7 @@ iso: un_live_tree_boot install live_tree_boot
 	find /tmp/iso/isolinux -type f -printf '%p 100\n' > /tmp/iso.sort ; echo '/tmp/iso/live_tree_boot.clp 5' >> /tmp/iso.sort
 	mkisofs -r -J -hide-rr-moved -nobak -cache-inodes -V 'Mandrake Move' -b isolinux/isolinux.bin -c isolinux/boot.cat -sort /tmp/iso.sort -no-emul-boot -boot-load-size 4 -boot-info-table -o $(ISO) /tmp/iso
 	mv /tmp/iso/*.clp /tmp
+	mkcd --addmd5 $(ISO)
 #	cdrecord -v -eject dev=0,0,0 blank=fast gracetime=2 speed=99 $(ISO)
 #	ftp://a:a@leia//BIG/mdkmove.iso
 
