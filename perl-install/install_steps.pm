@@ -177,6 +177,8 @@ sub selectInstallClass {
 sub doPartitionDisksBefore {
     my ($o) = @_;
     eval { 
+	eval { fs::umount("$o->{prefix}/sys") };
+	eval { fs::umount("$o->{prefix}/proc/bus/usb") };
 	eval { fs::umount("$o->{prefix}/proc") };
 	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
 	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
