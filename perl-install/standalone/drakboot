@@ -204,11 +204,11 @@ gtkadd($window,
                                      cancel_clicked => sub { ugtk2->exit(0) },
                                      ok_clicked => sub {
                                          Xconfig::various::runlevel($x_mode ? 5 : 3);
-					 if ($splash_working) {
-					     $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, $splash_mode, $keep_logo);
-					 } else {
-					     updateAutologin();
-					 }
+                                         if ($splash_working) {
+                                             $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, $splash_mode, $keep_logo);
+                                         } else {
+                                             updateAutologin();
+                                         }
                                          ugtk2->exit(0);
                                      }
                                     },
