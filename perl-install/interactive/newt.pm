@@ -32,11 +32,11 @@ sub exit() { end(); exit($_[1]) }
 END { end() }
 
 sub myTextbox {
-    my $allow_scroll = shift;
+    my ($allow_scroll, $free_height, @messages) = @_;
 
     my $width = $width - 9;
-    my @l = map { /(.{1,$width})/g } map { split "\n" } @_;
-    my $h = min($height - 13, int @l);
+    my @l = warp_text(join("\n", @messages), $width);
+    my $h = min($free_height - 13, int @l);
     my $flag = 1 << 6; 
     if ($h < @l) {
 	if ($allow_scroll) {
@@ -47,7 +47,7 @@ sub myTextbox {
 	}
     }
     my $mess = Newt::Component::Textbox(1, 0, my $w = max(map { length } @l) + 1, $h, $flag);
-    $mess->TextboxSetText(join("\n", @_));
+    $mess->TextboxSetText(join("\n", @l));
     $mess, $w + 1, $h;
 }
 
@@ -62,7 +62,16 @@ sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
 
-    if ((any { $_->{type} ne 'button' } @$l) || @$l < 5) {
+    if (@$l == 1 && $l->[0]{list} && @{$l->[0]{list}} == 2) {
+	#- special ugly case, esp. for license agreement
+	my $e = $l->[0];
+	my $ok_disabled = $common->{callbacks} && delete $common->{callbacks}{ok_disabled};
+	($common->{ok}, $common->{cancel}) = map { may_apply($e->{format}, $_) } @{$e->{list}};
+	do {
+	    ${$e->{val}} = ask_fromW_real($o, $common, [], $l2) ? $common->{ok} : $common->{cancel};
+	} while $ok_disabled && $ok_disabled->();
+	1;
+    } elsif ((any { $_->{type} ne 'button' } @$l) || @$l < 5) {
 	&ask_fromW_real;
     } else {
 	my $r;
@@ -86,7 +95,7 @@ sub ask_fromW_real {
     my $old_focus = -2;
 
     #-the widgets
-    my (@widgets, $total_size);
+    my (@widgets, $total_size, $has_scroll);
 
     my $set_all = sub {
 	$ignore = 1;
@@ -127,9 +136,10 @@ sub ask_fromW_real {
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h, $wi) = (@$l == 1 && $height > 30 ? 10 : 5, 20);
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
+	    $has_scroll = 1;
 	    $size = min(int @{$e->{list}}, $h);
 
-	    $w = Newt::Component::Listbox(-1, -1, $h, $scroll); #- NEWT_FLAG_SCROLL	    
+	    $w = Newt::Component::Listbox(-1, -1, $size, $scroll); #- NEWT_FLAG_SCROLL	    
 	    foreach (@{$e->{list}}) {
 		my $t = simplify_string(may_apply($e->{format}, $_));
 		$w->ListboxAddEntry($t, $_);
@@ -177,6 +187,7 @@ sub ask_fromW_real {
 	#- big list window will not switch to scrollbar mode) :-(
 	if (@$l > 3 && $total_size > $height) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
+	    $has_scroll = 1;
 
 	    my $scroll = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10); # 9=NEWT_COLORSET_CHECKBOX, 10=NEWT_COLORSET_ACTCHECKBOX
 	    my $subf = $scroll->Form('', 0);
@@ -188,18 +199,16 @@ sub ask_fromW_real {
 	}
     };
 
-    my ($b1, $b2) = map { simplify_string($_) }
-      (exists $common->{ok} ? 
-       ($common->{ok}, $common->{cancel}) :
-       ($::isWizard ? N("Next") : N("Ok"), $common->{cancel} || ($::isWizard ? N("<- Previous") : N("Cancel"))));
-    #- b1 is always displayed, so giving it some label :-(
-    $b1 ||= $::isWizard ? N("Next") : N("Ok");
-    my @b2 = if_($b2, $b2);
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($::isWizard ? (@b2, $b1) : ($b1, @b2));
-    ($ok, $cancel) = ($cancel, $ok) if $::isWizard;
+    my ($ok, $cancel) = ($common->{ok}, $common->{cancel});
+    $cancel = $::isWizard ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
+    $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
+
+    my ($b1, $b2) = map { simplify_string($_) } $::isWizard ? (if_($cancel, $cancel), $ok) : ($ok, if_($cancel, $cancel));
+    my ($buttonbar, @buttons) = Newt::Grid::ButtonBar(grep { $_ } $b1, $b2);
+    my ($ok_button, $cancel_button) = @buttons > 1 && $::isWizard ? ($buttons[1], $buttons[0]) : @buttons;
 
     my $form = Newt::Component::Form(\undef, '', 0);
-    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@widgets == 0, @{$common->{messages}})), $listg, $buttons);
+    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(!$has_scroll, $height - $total_size, @{$common->{messages}})), $listg, $buttonbar);
     $window->GridWrappedWindow($common->{title} || '');
     $form->FormAddGrid($window, 1);
 
@@ -215,10 +224,16 @@ sub ask_fromW_real {
 	!$error;
     };
 
-    my ($canceled);
+    my ($blocked, $canceled);
     do {
 	my $r = $form->RunForm;
-	$canceled = $cancel && $$r == $$cancel;
+
+	$canceled = $cancel_button && $$r == $$cancel_button;
+
+	$blocked = 
+	  $$r == $$ok_button && 
+	    $common->{callbacks}{ok_disabled} && 
+	      do { $get_all->(); $common->{callbacks}{ok_disabled}() };
 
 	if (my $button = find { $$r == ${$_->{w}} } @widgets) {
 	    $get_all->();
@@ -227,7 +242,7 @@ sub ask_fromW_real {
 	    Newt::PopWindow();
 	    return $v || &ask_fromW;
 	}
-    } until $check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'});
+    } until !$blocked && $check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'});
 
     $form->FormDestroy;
     Newt::PopWindow();
@@ -237,7 +252,7 @@ sub ask_fromW_real {
 
 sub waitbox {
     my ($title, $messages) = @_;
-    my ($t, $w, $h) = myTextbox(1, @$messages);
+    my ($t, $w, $h) = myTextbox(1, $height, @$messages);
     my $f = Newt::Component::Form(\undef, '', 0);
     Newt::CenteredWindow($w, $h, $title);
     $f->FormAddComponent($t);
