@@ -293,7 +293,7 @@ sub beforeInstallPackages {
     }
 
     #- some packages need such files for proper installation.
-    $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    install_any::write_fstab($o);
 
     require network;
     network::add2hosts("$o->{prefix}/etc/hosts", "localhost.localdomain", "127.0.0.1");

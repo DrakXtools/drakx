@@ -880,4 +880,10 @@ sub disable_user_view {
     substInFile { s/^Browser=.*/Browser=0/ } "$prefix/etc/X11/gdm/gdm.conf";
 }
 
+sub write_fstab {
+    my ($o) = @_;
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount}, lang::fs_options($o->{lang}));
+}
+
+
 1;

@@ -335,9 +335,12 @@ sub df {
 }
 
 #- do some stuff before calling write_fstab
-sub write($$$$) {
-    my ($prefix, $fstab, $manualFstab, $useSupermount) = @_;
+sub write {
+    my ($prefix, $fstab, $manualFstab, $useSupermount, $options) = @_;
     $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
+
+    use Data::Dumper;
+    print Dumper $options;
 
     unless ($::live) {
 	log::l("resetting /etc/mtab");
@@ -370,20 +373,25 @@ sub write($$$$) {
 	     [ "/mnt/zip$i", "/mnt/zip$i", "supermount", "fs=vfat,dev=/dev/zip$i", 0, 0 ] :
 	     [ "/dev/zip$i", "/mnt/zip$i", "auto", "user,noauto,nosuid,exec,nodev", 0, 0 ];
        } detect_devices::zips()));
-    write_fstab($fstab, $prefix, @to_add);
+    write_fstab($fstab, $prefix, $options, @to_add);
 }
 
 sub write_fstab($;$$) {
-    my ($fstab, $prefix, @to_add) = @_;
+    my ($fstab, $prefix, $options, @to_add) = @_;
     $prefix ||= '';
+
+    my $format_options = sub { 
+	my ($default, @l) = @_;
+	join(',', $default, map { "$_=$options->{$_}" } grep { $options->{$_} } @l);
+    };
 
     unshift @to_add, map {
 	my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
 	$options = $_->{options} || $options;
 	
 	isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
-	isFat($_) and $options = $_->{options} || "user,exec,umask=0";
+	isNfs($_) and $dir = '', $options = $_->{options} || $format_options->('ro,nosuid,rsize=8192,wsize=8192', 'iocharset');
+	isFat($_) and $options = $_->{options} || $format_options->("user,exec,umask=0", 'codepage', 'iocharset');
 	
 	isReiserfs($_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
 	

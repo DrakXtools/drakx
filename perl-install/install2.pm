@@ -321,7 +321,7 @@ sub configureX {
     my ($clicked) = @_;
 
     #- done here and also at the end of install2.pm, just in case...
-    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    install_any::write_fstab($o);
     modules::write_conf($o->{prefix});
 
     require pkgs;
@@ -581,7 +581,7 @@ sub main {
     install_any::ejectCdrom();
     install_any::remove_advertising($o);
 
-    $::live or fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    install_any::write_fstab($o);
     modules::write_conf($o->{prefix});
 
     #- to ensure linuxconf doesn't cry against those files being in the future
