@@ -220,7 +220,12 @@ If you don't want to use the auto detection, deselect the checkbox.
                     post => sub {
                         load_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         get_subwizard($wiz, 'adsl') if $connections{$cnx_type} eq 'adsl';
-                        return $type = $netcnx->{type} = $connections{$cnx_type};
+                        $type = $netcnx->{type} = $connections{$cnx_type};
+                        if ($type eq 'cable') {
+                            $auto_ip = 1;
+                            return "lan";
+                        }
+                        return $type;
                     },
                    },
 
