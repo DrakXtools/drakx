@@ -51,7 +51,7 @@ sub make($) {
     if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	$major = 8;
-	$minor = ord($1) - ord('a') + ($2 || 0);
+	$minor = 16 * (ord($1) - ord('a')) + ($2 || 0);
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	($major, $minor) = 
@@ -61,7 +61,7 @@ sub make($) {
 		   'g' => [34,0], 'h' => [34,64],
 	       }}{$1} or die "unknown device $_" };
 	$minor += $2 || 0;
-    } elsif (/^ram(.)/) {
+    } elsif (/^ram(.*)/) {
 	$type = c::S_IFBLK();
 	$major = 1;
 	$minor = $1 eq '' ? 1 : $1;
@@ -70,11 +70,11 @@ sub make($) {
         $type = c::S_IFBLK();
 	$major = 48 + $1;
 	$minor = 8 * $2 + $4;
-    } elsif (m|ida/c(\d+)d(\d+)(p(\d+))|) {
+    } elsif (m|ida/c(\d+)d(\d+)(p(\d+))?|) {
 	# Compaq Smart Array "ida/c0d0{p1}"
 	$type = c::S_IFBLK();
 	$major = 72 + $1;
-	$minor = 16 * $2 + $4;
+	$minor = 16 * $2 + ($4 || 0);
     } else {
 	($type, $major, $minor) = 
 	    @{ $ {{"aztcd"   => [ c::S_IFBLK(), 29, 0 ],
@@ -107,4 +107,3 @@ sub make($) {
 
     $file;
 }
-
