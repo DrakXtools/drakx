@@ -376,7 +376,7 @@ sub _create_dialog {
     gtknew('Dialog', title => $title, 
 	   position_policy => 'center-on-parent', # center-on-parent does not work
 	   modal => 1,
-	   if_(!$::isInstall, icon => wm_icon()),
+	   if_(!$::isInstall, icon_no_error => wm_icon()),
 	   %$options, allow_unknown_options => 1,
        );
 }
@@ -841,7 +841,7 @@ sub new {
 	    title => $title, 
 	    position_policy => $force_center ? 'center_always' : 'center-on-parent',
 	    modal => $grab || $o->{grab} || $o->{modal},
-	    if_(!$::isInstall, icon => wm_icon()),
+	    if_(!$::isInstall, icon_no_error => wm_icon()),
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
 	);
 
@@ -860,7 +860,7 @@ sub new {
 	    if ($::isEmbedded) {
 		$::Plug = $::WizardWindow = gtknew('Plug',
 					       socket_id => $::XID,
-					       icon => wm_icon(),
+					       icon_no_error => wm_icon(),
 					       child => $::WizardTable,
 					       title => $title || '',
 					   );
@@ -869,7 +869,7 @@ sub new {
 		$::WizardWindow = _create_window(
 		    title => $title,
 		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
-		    if_(!$::isInstall, icon => wm_icon()),
+		    if_(!$::isInstall, icon_no_error => wm_icon()),
 		    if_(!$::isInstall && !$::isStandalone, position_policy => 'center_always'),
 		);
 	    
