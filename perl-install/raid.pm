@@ -133,10 +133,6 @@ sub verify {
     }
 }
 
-sub prepare_prefixed {
-    my ($_raids) = @_;
-}
-
 sub inactivate_and_dirty {
     my ($part) = @_;
     run_program::run('mdadm', '--stop', devices::make($part->{device}));
