@@ -10,6 +10,7 @@ print '
 
 #include <ctype.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <syslog.h>
 #include <fcntl.h>
@@ -32,6 +33,7 @@ print '
 #include <linux/blkpg.h>
 #include <net/if.h>
 #include <net/route.h>
+#include <netinet/in.h>
 
 /* for is_ext3 */
 #include <ext2fs/ext2_fs.h>
@@ -434,6 +436,34 @@ addDefaultRoute(gateway)
     RETVAL = !ioctl(s, SIOCADDRT, &route);
   OUTPUT:
   RETVAL
+
+
+char*
+get_hw_address(const char* ifname)
+  CODE:
+    int s;
+    struct ifreq ifr;
+    unsigned char *a;
+    char *res;
+    s = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    if (s < 0) {
+        perror("socket");
+        RETVAL = NULL;
+        return;
+    }
+    strncpy((char*) &ifr.ifr_name, ifname, IFNAMSIZ);
+    if (ioctl(s, SIOCGIFHWADDR, &ifr) < 0) {
+        perror("ioctl(SIOCGIFHWADDR)");
+        RETVAL = NULL;
+        return;
+    }
+    a = ifr.ifr_hwaddr.sa_data;
+    asprintf(&res, "%02x:%02x:%02x:%02x:%02x:%02x", a[0],a[1],a[2],a[3],a[4],a[5]);
+    RETVAL= res;
+  OUTPUT:
+  RETVAL
+
+
 
 char *
 kernel_version()
