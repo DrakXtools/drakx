@@ -191,7 +191,7 @@ sub list_fontpath() {
 
 sub chk_empty_xfs_path() {
     foreach my $tmp_path (@installed_fonts_path) {
-        if (!(any { if_(!(/^fonts/ || /^type/), $_) } all($tmp_path))) {
+        if (every { /^fonts/ || /^type/ } all($tmp_path))) {
             system("chkfontpath -r $tmp_path ")
               or print "PERL::system command failed during chkfontpath\n";
         }
@@ -286,7 +286,7 @@ sub search_dir_font_uninstall {
     my ($fn)  = @_;
     my @font_list_tmp;
     if (-d $fn) {
-        @font_list_tmp = map { if_(is_a_font($_), $_) } all($fn);
+        @font_list_tmp = grep { is_a_font($_) } all($fn);
     } else {
         push @font_list_tmp, $fn if is_a_font($fn);
     }
