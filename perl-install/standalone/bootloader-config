@@ -26,14 +26,14 @@ my %options = (
 	      );
 
 GetOptions(%options) or die <<'EOF';
-usage: Releve --action add-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>) [--label <...>] [--no-short-name] [--initrd-options <options>]
-       Releve --action remove-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>)
+usage: bootloader-config --action add-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>) [--label <...>] [--no-short-name] [--initrd-options <options>]
+       bootloader-config --action remove-kernel (--image <vmlinuz> | --kernel-version <2.6.xxx>)
 
-       Releve --action add-entry (--image <image> | --chainload <device>) --label <...>
-       Releve --action remove-entry (--image <image> | --chainload <device> | --label <...>)
+       bootloader-config --action add-entry (--image <image> | --chainload <device>) --label <...>
+       bootloader-config --action remove-entry (--image <image> | --chainload <device> | --label <...>)
 
-       Releve --action update-splash
-       Releve --action remove-splash
+       bootloader-config --action update-splash
+       bootloader-config --action remove-splash
 EOF
 
 my @known_actions = qw(add-kernel remove-kernel update-splash remove-splash detectloader add-entry remove-entry);
