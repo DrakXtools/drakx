@@ -371,6 +371,7 @@ sub setPackages {
 
 	#- ask whether there are supplementary media
 	SUPPL: {
+	    my $prev_asked_medium = $asked_medium;
 	    if ($suppl_method && !$o->{isUpgrade}
 	        && (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
 			[ N_("None"), N_("CD-ROM"), N_("Network (http)") ], 'None')
@@ -409,8 +410,8 @@ sub setPackages {
 			    "/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
 			);
 			if ($supplmedium) {
-			    log::l("read suppl hdlist");
-			    $supplmedium->{prefix} = "removable://mnt/cdrom"; #- pour install_urpmi
+			    log::l("read suppl hdlist on cdrom");
+			    $supplmedium->{prefix} = "removable://mnt/cdrom"; #- for install_urpmi
 			    $supplmedium->{selected} = 1;
 			    $supplmedium->{method} = 'cdrom';
 			} else {
@@ -426,6 +427,7 @@ sub setPackages {
 			log::l($@) if $@;
 			$o->ask_warn('', N("Can't find hdlist file on this mirror"));
 			$suppl_method = '';
+			useMedium($prev_asked_medium);
 			last SUPPL;
 		    }
 		    my $tmphdlistfile = pkgs::urpmidir($o->{prefix})."/hdlist$medium_name.cz";
@@ -446,8 +448,10 @@ sub setPackages {
 		    );
 		    unlink $tmphdlistfile;
 		    if ($supplmedium) {
-			log::l("read suppl hdlist");
+			log::l("read suppl hdlist (via $suppl_method)");
+			$supplmedium->{prefix} = $url; #- for install_urpmi
 			$supplmedium->{selected} = 1;
+			$supplmedium->{method} = $suppl_method;
 		    } else {
 			log::l("no suppl hdlist");
 		    }
@@ -455,6 +459,7 @@ sub setPackages {
 	    } else {
 		$suppl_method = '';
 	    }
+	    useMedium($prev_asked_medium); #- back to main medium
 	}
 
 	#- open rpm db according to right mode needed.
