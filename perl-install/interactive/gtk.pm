@@ -396,7 +396,7 @@ sub ask_fromW {
 	} elsif ($e->{type} eq 'bool') {
 	    $w = Gtk2::CheckButton->new($e->{text});
 	    $w->signal_connect(clicked => $changed);
-	    $set = sub { $w->set_active($_[0] ? 1 : 0) };
+	    $set = sub { $w->set_active($_[0]) };
 	    $get = sub { $w->get_active };
 	    $width = length $e->{text};
 	} elsif ($e->{type} eq 'label') {
