@@ -24,7 +24,7 @@ our %l = (
         qw(depca dgrs dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 olympic pcnet32 plip rcpci), #old_tulip 
-        qw(sb1000 sis900 sk98lin smc-ultra smc9194 starfire tlan tmspci tulip via-rhine), #sktr 
+        qw(sb1000 sis900 sk98lin smc-ultra smc9194 starfire tg3 tlan tmspci tulip via-rhine), #sktr 
         qw(wd winbond-840 yellowfin ns83820),
 
 	qw(iph5526), #- fibre channel
@@ -44,7 +44,7 @@ our %l = (
       qw(pegasus kaweth usbnet catc CDCEther),
     ],
     isdn => [
-      qw(hisax hysdn b1pci t1pci c4),
+      qw(b1pci c4 hisax hisax_fcpcipnp hysdn t1pci tpam),
     ],
   },
 
@@ -113,10 +113,10 @@ our %l = (
       if_(arch() !~ /^sparc/,
         qw(audigy cmpci cs46xx cs4281 emu10k1 es1370 es1371 esssolo1 i810_audio maestro maestro3),
         qw(nm256_audio pas16 rme96xx sonicvibes trident via82cxxx_audio ymfpci),
-        qw(snd-als100 snd-als4000 snd-azt2320 snd-cmi8330 snd-cmipci snd-cs46xx snd-dt0197h),
+        qw(snd-ali5451 snd-als100 snd-als4000 snd-azt2320 snd-cmi8330 snd-cmipci snd-cs46xx snd-dt0197h),
 	   qw(snd-cs4281 snd-emu10k1),
-	   qw(snd-ens1370 snd-ens1371 snd-es18xx snd-es96 snd-es1938 snd-es1968 snd-es1688),
-        qw(snd-fm801 snd-ice1712 snd-intel8x0 snd-korg1212 snd-maestro3),
+	   qw(snd-ens1370 snd-ens1371 snd-es18xx snd-es968 snd-es1938 snd-es1968 snd-es1688),
+        qw(snd-fm801 snd-hdsp snd-ice1712 snd-intel8x0 snd-korg1212 snd-maestro3),
 	   qw(snd-nm256 snd-rme96 snd-rme32 snd-opl3sa2 snd-sb16 nd-sgalaxy snd-sonicvibes),
         qw(snd-trident snd-usb-audio snd-via686 snd-via8233 snd-wavefront snd-ymfpci),
       ),
