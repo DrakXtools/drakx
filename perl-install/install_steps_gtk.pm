@@ -269,11 +269,7 @@ When sure, press Ok."))) {
 sub doPartitionDisksLnx4winDev {
     my ($o, $l) = @_;
     return if $::beginner;
-
-    my ($dev) = $o->ask_from_list('', _("Which partition do you want to use to put Linux4Win?"),
-				  [ map { sprintf "%s (%s) [%dMB]", $_->{device_windobe}, $_->{device}, $_->{size} >> 11 } @$l ]
-				 ) =~ /\((\S+)\)/;
-    $_->{device} eq $dev and return $_ foreach @$l;
+    $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, @$l);
 }
 
 sub doPartitionDisksLnx4winSize {
@@ -761,48 +757,42 @@ sub create_steps_window {
     $w->{rwindow} = $w->{window} = new Gtk::Window;
     $w->{rwindow}->set_uposition(0, 0);
     $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
-    $w->{rwindow}->set_name("Steps");
+    $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_events('button_press_mask');
     $w->show;
-
-    my @steps_icons_names = map { "$ENV{SHARE_PATH}/step-$_.xpm" } qw(green orange red);
-    my @steps_icons_names_on = map { "$ENV{SHARE_PATH}/step-$_-on.xpm" } qw(green orange red);
-    my @steps_icons_names_click = map { "$ENV{SHARE_PATH}/step-$_-click.xpm" } qw(green orange red);
 
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
 		    (map {; 1, $_ } map {
-		        my $style = Gtk::Widget->get_default_style;
 			my $step_name = $_;
 			my $step = $o->{steps}{$_};
-			my $w = new Gtk::Label(translate($step->{text}));
 			my $darea = new Gtk::DrawingArea;
 			my $draw_pix = sub {
-			  my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm(
-									 $darea->window,
-									 $style->bg('normal'),
-									 $_[1]
-									) or die;
-			  $darea->window->draw_pixmap (
-						       $darea->style->fg_gc('normal'), #area->style->fg_gc[GTK_WIDGET_STATE(area)],
-						       $pixmap,
-						       0, 0,
-						       ($darea->allocation->[2]-$PIX_W)/2,#(area->allocation.width-LARG_PIX)/2,
-						       ($darea->allocation->[3]-$PIX_H)/2,
-						       $PIX_W , $PIX_H );#LARG_PIX, HAUT_PIX);
+			    my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm($darea->window,
+									   $darea->style->bg('normal')
+									   $_[1]) or die;
+			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
+							 $pixmap, 0, 0,
+							 ($darea->allocation->[2]-$PIX_W)/2,
+							 ($darea->allocation->[3]-$PIX_H)/2,
+							 $PIX_W , $PIX_H );
 			};
 
+			my $f = sub { 
+			    my ($type) = @_;
+			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
+			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
+			};
 			$darea->set_usize($PIX_W,$PIX_H);
 			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
-			$darea->signal_connect(expose_event => $draw_pix, my $name= $steps_icons_names[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
+			$darea->signal_connect(expose_event => $draw_pix, $f->(''));
 			if ($step->{reachable}) {
-			  $darea->signal_connect(enter_notify_event => $draw_pix, my $name_on = $steps_icons_names_on[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
-			  $darea->signal_connect(leave_notify_event => $draw_pix, $name);
-			  $darea->signal_connect(button_press_event => $draw_pix, $steps_icons_names_click[$step->{done} ? 0 : $step->{entered} ? 1 : 2]);
-			  $darea->signal_connect(button_release_event => sub { $draw_pix, $name_on; die "setstep $step_name\n" });
+			    $darea->signal_connect(enter_notify_event => $draw_pix, $f->('-on'));
+			    $darea->signal_connect(leave_notify_event => $draw_pix, $f->(''));
+			    $darea->signal_connect(button_press_event => $draw_pix, $f->('-click'));
+			    $darea->signal_connect(button_release_event => sub { die "setstep $step_name\n" });
 			}
-			gtkpack_(my $b = new Gtk::HBox(0,5), 0, $darea, 0, $w);
-			$b;
+			gtkpack_(new Gtk::HBox(0,5), 0, $darea, 0, new Gtk::Label(translate($step->{text})));
 		    } grep {
 			!eval $o->{steps}{$_}{hidden};
 		    } @{$o->{orderedSteps}}),
