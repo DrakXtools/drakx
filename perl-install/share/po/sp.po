@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2002-02-14 11:59+0100\n"
+"POT-Creation-Date: 2002-02-17 21:45+0100\n"
 "PO-Revision-Date: 2001-08-12 13:12GMT+1\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: SERBIAN <office@mandrake.co.yu>\n"
@@ -361,7 +361,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../Xconfigurator.pm_.c:1540 ../../standalone/localedrake_.c:21
+#: ../../Xconfigurator.pm_.c:1540 ../../standalone/localedrake_.c:27
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Молим, поново унесите %s ради активирања промена"
@@ -610,7 +610,7 @@ msgstr ""
 "Опција``Ограничена командна линика - опције'' је неупотребљива без лозинке"
 
 #: ../../any.pm_.c:188 ../../any.pm_.c:753
-#: ../../diskdrake/interactive.pm_.c:1120
+#: ../../diskdrake/interactive.pm_.c:1131
 #: ../../install_steps_interactive.pm_.c:1087
 msgid "Please try again"
 msgstr "Пробајте поново"
@@ -653,13 +653,13 @@ msgstr ""
 "Можете додати нове или изменити старе."
 
 #: ../../any.pm_.c:246 ../../standalone/drakbackup_.c:751
-#: ../../standalone/drakbackup_.c:860 ../../standalone/drakfont_.c:761
-#: ../../standalone/drakfont_.c:798
+#: ../../standalone/drakbackup_.c:860 ../../standalone/drakfont_.c:769
+#: ../../standalone/drakfont_.c:806
 msgid "Add"
 msgstr "Додај"
 
 #: ../../any.pm_.c:246 ../../any.pm_.c:764 ../../diskdrake/hd_gtk.pm_.c:153
-#: ../../diskdrake/removable.pm_.c:27 ../../diskdrake/smbnfs_gtk.pm_.c:85
+#: ../../diskdrake/removable.pm_.c:27 ../../diskdrake/smbnfs_gtk.pm_.c:86
 #: ../../interactive_http.pm_.c:153
 msgid "Done"
 msgstr "Урађено"
@@ -767,13 +767,13 @@ msgstr "Да ли имате још један?"
 msgid "Do you have any %s interfaces?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../../any.pm_.c:641 ../../any.pm_.c:812 ../../interactive.pm_.c:123
-#: ../../my_gtk.pm_.c:1001
+#: ../../any.pm_.c:641 ../../any.pm_.c:812 ../../interactive.pm_.c:124
+#: ../../my_gtk.pm_.c:1011
 msgid "No"
 msgstr "Не"
 
-#: ../../any.pm_.c:641 ../../any.pm_.c:811 ../../interactive.pm_.c:123
-#: ../../my_gtk.pm_.c:1001
+#: ../../any.pm_.c:641 ../../any.pm_.c:811 ../../interactive.pm_.c:124
+#: ../../my_gtk.pm_.c:1011
 msgid "Yes"
 msgstr "Да"
 
@@ -956,7 +956,7 @@ msgid "You can choose other languages that will be available after install"
 msgstr "Можете изабрати други jезик коjи ће бити доступан после инсталациje "
 
 #: ../../any.pm_.c:838 ../../install_steps_interactive.pm_.c:714
-#: ../../standalone/drakxtv_.c:41
+#: ../../standalone/drakxtv_.c:43
 msgid "All"
 msgstr "Свe"
 
@@ -974,7 +974,7 @@ msgstr "Избор по жeљи"
 msgid "No sharing"
 msgstr "Покрећем CUPS.."
 
-#: ../../any.pm_.c:933 ../../network/nfs.pm_.c:13 ../../network/smb.pm_.c:13
+#: ../../any.pm_.c:933 ../../network/smbnfs.pm_.c:39
 #, fuzzy, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Изабери пакете за инсталацију"
@@ -983,7 +983,7 @@ msgstr "Изабери пакете за инсталацију"
 msgid "You can export using NFS or Samba. Which one do you want"
 msgstr ""
 
-#: ../../any.pm_.c:944 ../../network/nfs.pm_.c:17 ../../network/smb.pm_.c:17
+#: ../../any.pm_.c:944 ../../network/smbnfs.pm_.c:43
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr ""
@@ -1273,9 +1273,9 @@ msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Да, jа желим аутологовaњe са овим(корисник,десктоп)"
 
 #: ../../bootlook.pm_.c:159 ../../standalone/drakbackup_.c:2428
-#: ../../standalone/drakbackup_.c:3332 ../../standalone/drakfont_.c:525
-#: ../../standalone/drakfont_.c:627 ../../standalone/drakfont_.c:691
-#: ../../standalone/drakfont_.c:737 ../../standalone/draknet_.c:109
+#: ../../standalone/drakbackup_.c:3332 ../../standalone/drakfont_.c:529
+#: ../../standalone/drakfont_.c:635 ../../standalone/drakfont_.c:699
+#: ../../standalone/drakfont_.c:745 ../../standalone/draknet_.c:109
 #: ../../standalone/draknet_.c:141 ../../standalone/draknet_.c:297
 #: ../../standalone/draknet_.c:435 ../../standalone/draknet_.c:521
 #: ../../standalone/draknet_.c:564 ../../standalone/draknet_.c:665
@@ -1284,16 +1284,16 @@ msgid "OK"
 msgstr "У реду"
 
 #: ../../bootlook.pm_.c:160 ../../install_steps_gtk.pm_.c:463
-#: ../../install_steps_gtk.pm_.c:521 ../../interactive.pm_.c:133
-#: ../../interactive.pm_.c:307 ../../interactive.pm_.c:339
-#: ../../interactive_stdio.pm_.c:141 ../../my_gtk.pm_.c:670
-#: ../../my_gtk.pm_.c:673 ../../my_gtk.pm_.c:1002
+#: ../../install_steps_gtk.pm_.c:521 ../../interactive.pm_.c:134
+#: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
+#: ../../interactive_stdio.pm_.c:141 ../../my_gtk.pm_.c:680
+#: ../../my_gtk.pm_.c:683 ../../my_gtk.pm_.c:1012
 #: ../../network/netconnect.pm_.c:47 ../../printerdrake.pm_.c:1543
 #: ../../standalone/drakautoinst_.c:204 ../../standalone/drakbackup_.c:2251
 #: ../../standalone/drakbackup_.c:2276 ../../standalone/drakbackup_.c:2297
 #: ../../standalone/drakbackup_.c:2318 ../../standalone/drakbackup_.c:2336
 #: ../../standalone/drakbackup_.c:2384 ../../standalone/drakbackup_.c:2404
-#: ../../standalone/drakbackup_.c:2423 ../../standalone/drakfont_.c:739
+#: ../../standalone/drakbackup_.c:2423 ../../standalone/drakfont_.c:747
 #: ../../standalone/drakgw_.c:711 ../../standalone/draknet_.c:116
 #: ../../standalone/draknet_.c:148 ../../standalone/draknet_.c:290
 #: ../../standalone/draknet_.c:537 ../../standalone/draknet_.c:679
@@ -1347,7 +1347,7 @@ msgstr "Не могу додати више ни једну партицију"
 msgid "Screenshots will be available after install in %s"
 msgstr "Можете изабрати други jезик коjи ће бити доступан после инсталациje "
 
-#: ../../crypto.pm_.c:12 ../../crypto.pm_.c:26 ../../standalone/drakxtv_.c:37
+#: ../../crypto.pm_.c:12 ../../crypto.pm_.c:26 ../../standalone/drakxtv_.c:39
 msgid "France"
 msgstr "Францускa"
 
@@ -1387,7 +1387,7 @@ msgstr "Погледаj"
 msgid "Netherlands"
 msgstr ""
 
-#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:35 ../../standalone/drakxtv_.c:37
+#: ../../crypto.pm_.c:21 ../../crypto.pm_.c:35 ../../standalone/drakxtv_.c:39
 #, fuzzy
 msgid "Italy"
 msgstr "Италијански"
@@ -1397,7 +1397,7 @@ msgstr "Италијански"
 msgid "Austria"
 msgstr "серијски"
 
-#: ../../crypto.pm_.c:33 ../../crypto.pm_.c:64
+#: ../../crypto.pm_.c:33 ../../crypto.pm_.c:67
 msgid "United States"
 msgstr ""
 
@@ -1405,8 +1405,8 @@ msgstr ""
 msgid "Please make a backup of your data first"
 msgstr "Молим вас, прво направите копију ваших података"
 
-#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:876
-#: ../../diskdrake/interactive.pm_.c:885 ../../diskdrake/interactive.pm_.c:939
+#: ../../diskdrake/hd_gtk.pm_.c:94 ../../diskdrake/interactive.pm_.c:887
+#: ../../diskdrake/interactive.pm_.c:896 ../../diskdrake/interactive.pm_.c:950
 msgid "Read carefully!"
 msgstr "ПАЖЉИВО ПРОЧИТАЈ !"
 
@@ -1421,7 +1421,7 @@ msgstr ""
 "диска)"
 
 #: ../../diskdrake/hd_gtk.pm_.c:116 ../../diskdrake/interactive.pm_.c:324
-#: ../../diskdrake/interactive.pm_.c:339 ../../diskdrake/smbnfs_gtk.pm_.c:44
+#: ../../diskdrake/interactive.pm_.c:339 ../../diskdrake/smbnfs_gtk.pm_.c:45
 #: ../../install_steps.pm_.c:72 ../../install_steps_interactive.pm_.c:67
 #: ../../install_steps_interactive.pm_.c:350 ../../interactive_http.pm_.c:119
 #: ../../interactive_http.pm_.c:120 ../../standalone/diskdrake_.c:84
@@ -1452,7 +1452,7 @@ msgstr ""
 msgid "Please click on a partition"
 msgstr "Кликните на партицију"
 
-#: ../../diskdrake/hd_gtk.pm_.c:202 ../../diskdrake/smbnfs_gtk.pm_.c:66
+#: ../../diskdrake/hd_gtk.pm_.c:202 ../../diskdrake/smbnfs_gtk.pm_.c:67
 #: ../../install_steps_gtk.pm_.c:522
 msgid "Details"
 msgstr "Детаљи"
@@ -1482,7 +1482,7 @@ msgstr "SunOS"
 msgid "Swap"
 msgstr "Swap"
 
-#: ../../diskdrake/hd_gtk.pm_.c:321 ../../diskdrake/interactive.pm_.c:1035
+#: ../../diskdrake/hd_gtk.pm_.c:321 ../../diskdrake/interactive.pm_.c:1046
 msgid "Empty"
 msgstr "Празно"
 
@@ -1501,7 +1501,7 @@ msgid "Create"
 msgstr "Креирај"
 
 #: ../../diskdrake/hd_gtk.pm_.c:342 ../../diskdrake/interactive.pm_.c:364
-#: ../../diskdrake/interactive.pm_.c:501 ../../diskdrake/removable.pm_.c:26
+#: ../../diskdrake/interactive.pm_.c:498 ../../diskdrake/removable.pm_.c:26
 #: ../../diskdrake/removable.pm_.c:49 ../../diskdrake/removable_gtk.pm_.c:17
 msgid "Type"
 msgstr "Тип"
@@ -1519,7 +1519,7 @@ msgstr "Обриши"
 msgid "Use ``Unmount'' first"
 msgstr "Прво урадите ``Демонтирај''"
 
-#: ../../diskdrake/hd_gtk.pm_.c:349 ../../diskdrake/interactive.pm_.c:493
+#: ../../diskdrake/hd_gtk.pm_.c:349 ../../diskdrake/interactive.pm_.c:490
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1662,14 +1662,14 @@ msgstr "Спасавање табеле партиција"
 msgid "Detailed information"
 msgstr "Прикажи информације"
 
-#: ../../diskdrake/interactive.pm_.c:363 ../../diskdrake/interactive.pm_.c:536
-#: ../../diskdrake/interactive.pm_.c:556 ../../diskdrake/removable.pm_.c:24
-#: ../../diskdrake/removable_gtk.pm_.c:15 ../../diskdrake/smbnfs_gtk.pm_.c:82
+#: ../../diskdrake/interactive.pm_.c:363 ../../diskdrake/interactive.pm_.c:533
+#: ../../diskdrake/interactive.pm_.c:553 ../../diskdrake/removable.pm_.c:24
+#: ../../diskdrake/removable_gtk.pm_.c:15 ../../diskdrake/smbnfs_gtk.pm_.c:83
 msgid "Mount point"
 msgstr "Тачка монтирања"
 
 #: ../../diskdrake/interactive.pm_.c:365 ../../diskdrake/removable.pm_.c:25
-#: ../../diskdrake/removable_gtk.pm_.c:16 ../../diskdrake/smbnfs_gtk.pm_.c:83
+#: ../../diskdrake/removable_gtk.pm_.c:16 ../../diskdrake/smbnfs_gtk.pm_.c:84
 msgid "Options"
 msgstr "Опциje"
 
@@ -1677,7 +1677,7 @@ msgstr "Опциje"
 msgid "Resize"
 msgstr "Промени величину"
 
-#: ../../diskdrake/interactive.pm_.c:367 ../../diskdrake/interactive.pm_.c:660
+#: ../../diskdrake/interactive.pm_.c:367 ../../diskdrake/interactive.pm_.c:671
 msgid "Move"
 msgstr "Премести"
 
@@ -1685,7 +1685,7 @@ msgstr "Премести"
 msgid "Format"
 msgstr "Форматирање"
 
-#: ../../diskdrake/interactive.pm_.c:369 ../../diskdrake/smbnfs_gtk.pm_.c:79
+#: ../../diskdrake/interactive.pm_.c:369 ../../diskdrake/smbnfs_gtk.pm_.c:80
 msgid "Mount"
 msgstr "Монтирај"
 
@@ -1697,7 +1697,7 @@ msgstr "Додај на RAID"
 msgid "Add to LVM"
 msgstr "Додај на LVM"
 
-#: ../../diskdrake/interactive.pm_.c:372 ../../diskdrake/smbnfs_gtk.pm_.c:78
+#: ../../diskdrake/interactive.pm_.c:372 ../../diskdrake/smbnfs_gtk.pm_.c:79
 msgid "Unmount"
 msgstr "Демонтирај"
 
@@ -1717,60 +1717,60 @@ msgstr "Промени RAID"
 msgid "Use for loopback"
 msgstr "Користи за loopback"
 
-#: ../../diskdrake/interactive.pm_.c:419
+#: ../../diskdrake/interactive.pm_.c:416
 msgid "Create a new partition"
 msgstr "Креирај нову партицију"
 
-#: ../../diskdrake/interactive.pm_.c:422
+#: ../../diskdrake/interactive.pm_.c:419
 msgid "Start sector: "
 msgstr "Почетни сектор: "
 
-#: ../../diskdrake/interactive.pm_.c:424 ../../diskdrake/interactive.pm_.c:759
+#: ../../diskdrake/interactive.pm_.c:421 ../../diskdrake/interactive.pm_.c:770
 msgid "Size in MB: "
 msgstr "Величина у MB:"
 
-#: ../../diskdrake/interactive.pm_.c:425 ../../diskdrake/interactive.pm_.c:760
+#: ../../diskdrake/interactive.pm_.c:422 ../../diskdrake/interactive.pm_.c:771
 msgid "Filesystem type: "
 msgstr "Врста татотeчноg система:"
 
-#: ../../diskdrake/interactive.pm_.c:426
-#: ../../diskdrake/interactive.pm_.c:1019
-#: ../../diskdrake/interactive.pm_.c:1093
+#: ../../diskdrake/interactive.pm_.c:423
+#: ../../diskdrake/interactive.pm_.c:1030
+#: ../../diskdrake/interactive.pm_.c:1104
 msgid "Mount point: "
 msgstr "Тачка монтирања: "
 
-#: ../../diskdrake/interactive.pm_.c:430
+#: ../../diskdrake/interactive.pm_.c:427
 msgid "Preference: "
 msgstr "Карактеристике: "
 
-#: ../../diskdrake/interactive.pm_.c:474
+#: ../../diskdrake/interactive.pm_.c:471
 #, fuzzy
 msgid "Remove the loopback file?"
 msgstr "Форматирање loopback датотекe %s"
 
-#: ../../diskdrake/interactive.pm_.c:499
+#: ../../diskdrake/interactive.pm_.c:496
 msgid "Change partition type"
 msgstr "Промена типа партиције"
 
-#: ../../diskdrake/interactive.pm_.c:500 ../../diskdrake/removable.pm_.c:48
+#: ../../diskdrake/interactive.pm_.c:497 ../../diskdrake/removable.pm_.c:48
 msgid "Which filesystem do you want?"
 msgstr "Коју  датотечни систем желите ?"
 
-#: ../../diskdrake/interactive.pm_.c:504
+#: ../../diskdrake/interactive.pm_.c:501
 msgid "Switching from ext2 to ext3"
 msgstr "Мењам ext2 на ext3"
 
-#: ../../diskdrake/interactive.pm_.c:534
+#: ../../diskdrake/interactive.pm_.c:531
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Где бисте да монтирате loopback датотеку  %s?"
 
-#: ../../diskdrake/interactive.pm_.c:535 ../../diskdrake/interactive.pm_.c:555
+#: ../../diskdrake/interactive.pm_.c:532 ../../diskdrake/interactive.pm_.c:552
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Где бисте да монтирате %s уређај ?"
 
-#: ../../diskdrake/interactive.pm_.c:541
+#: ../../diskdrake/interactive.pm_.c:538
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1778,11 +1778,11 @@ msgstr ""
 "Демонтирaњe ниjе могуће,jер се партициjа корисити за loop back.\n"
 "Прво уклоните loopback"
 
-#: ../../diskdrake/interactive.pm_.c:579
+#: ../../diskdrake/interactive.pm_.c:576
 msgid "Computing FAT filesystem bounds"
 msgstr "Прорачунавам границе FAT датотeчног система"
 
-#: ../../diskdrake/interactive.pm_.c:579 ../../diskdrake/interactive.pm_.c:635
+#: ../../diskdrake/interactive.pm_.c:576 ../../diskdrake/interactive.pm_.c:635
 #: ../../install_interactive.pm_.c:130
 msgid "Resizing"
 msgstr "Промена величине (resizing)"
@@ -1809,97 +1809,97 @@ msgstr "Изаберите нову величину"
 msgid "New size in MB: "
 msgstr "Величина у MB:"
 
-#: ../../diskdrake/interactive.pm_.c:661
+#: ../../diskdrake/interactive.pm_.c:672
 msgid "Which disk do you want to move it to?"
 msgstr "Који диск желите да преместите?"
 
-#: ../../diskdrake/interactive.pm_.c:662
+#: ../../diskdrake/interactive.pm_.c:673
 msgid "Sector"
 msgstr "Сектор"
 
-#: ../../diskdrake/interactive.pm_.c:663
+#: ../../diskdrake/interactive.pm_.c:674
 msgid "Which sector do you want to move it to?"
 msgstr "Где желитe да инсталирате стартер?"
 
-#: ../../diskdrake/interactive.pm_.c:666
+#: ../../diskdrake/interactive.pm_.c:677
 msgid "Moving"
 msgstr "Премештање"
 
-#: ../../diskdrake/interactive.pm_.c:666
+#: ../../diskdrake/interactive.pm_.c:677
 msgid "Moving partition..."
 msgstr "Премештање партиције..."
 
-#: ../../diskdrake/interactive.pm_.c:683
+#: ../../diskdrake/interactive.pm_.c:694
 msgid "Choose an existing RAID to add to"
 msgstr "Изабери постојећи RAID за додавање"
 
-#: ../../diskdrake/interactive.pm_.c:684 ../../diskdrake/interactive.pm_.c:702
+#: ../../diskdrake/interactive.pm_.c:695 ../../diskdrake/interactive.pm_.c:713
 msgid "new"
 msgstr "нови"
 
-#: ../../diskdrake/interactive.pm_.c:700
+#: ../../diskdrake/interactive.pm_.c:711
 msgid "Choose an existing LVM to add to"
 msgstr "Изабери постојећи LVM за додавање"
 
-#: ../../diskdrake/interactive.pm_.c:705
+#: ../../diskdrake/interactive.pm_.c:716
 msgid "LVM name?"
 msgstr "LVM име?"
 
-#: ../../diskdrake/interactive.pm_.c:745
+#: ../../diskdrake/interactive.pm_.c:756
 msgid "This partition can't be used for loopback"
 msgstr "Ова партиција не може бити коришћена за loopback "
 
-#: ../../diskdrake/interactive.pm_.c:757
+#: ../../diskdrake/interactive.pm_.c:768
 msgid "Loopback"
 msgstr "Loopback"
 
-#: ../../diskdrake/interactive.pm_.c:758
+#: ../../diskdrake/interactive.pm_.c:769
 msgid "Loopback file name: "
 msgstr "Име Loopback датотекe: "
 
-#: ../../diskdrake/interactive.pm_.c:763
+#: ../../diskdrake/interactive.pm_.c:774
 #, fuzzy
 msgid "Give a file name"
 msgstr "Право име"
 
-#: ../../diskdrake/interactive.pm_.c:766
+#: ../../diskdrake/interactive.pm_.c:777
 msgid "File already used by another loopback, choose another one"
 msgstr "Фаjл се већ користи од стране другог loopback-а,изаберите други"
 
-#: ../../diskdrake/interactive.pm_.c:767
+#: ../../diskdrake/interactive.pm_.c:778
 msgid "File already exists. Use it?"
 msgstr "Датотекa већ постоји.Да ли да га користим ?"
 
-#: ../../diskdrake/interactive.pm_.c:790
+#: ../../diskdrake/interactive.pm_.c:801
 #, fuzzy
 msgid "Mount options"
 msgstr "Опције модула:"
 
-#: ../../diskdrake/interactive.pm_.c:797
+#: ../../diskdrake/interactive.pm_.c:808
 msgid "Various"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:859
+#: ../../diskdrake/interactive.pm_.c:870
 msgid "device"
 msgstr "уређај"
 
-#: ../../diskdrake/interactive.pm_.c:860
+#: ../../diskdrake/interactive.pm_.c:871
 msgid "level"
 msgstr "ниво"
 
-#: ../../diskdrake/interactive.pm_.c:861
+#: ../../diskdrake/interactive.pm_.c:872
 msgid "chunk size"
 msgstr "chunk величина"
 
-#: ../../diskdrake/interactive.pm_.c:876
+#: ../../diskdrake/interactive.pm_.c:887
 msgid "Be careful: this operation is dangerous."
 msgstr "ПАЖЉИВО,ова операција jе опасна."
 
-#: ../../diskdrake/interactive.pm_.c:891
+#: ../../diskdrake/interactive.pm_.c:902
 msgid "What type of partitioning?"
 msgstr "Коју врсту партиционирaњa?"
 
-#: ../../diskdrake/interactive.pm_.c:909
+#: ../../diskdrake/interactive.pm_.c:920
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -1909,7 +1909,7 @@ msgstr ""
 "Није могуће креирати /boot за сада на хард диску (на цилиндру > 1024).\n"
 "Или користите LILO који не ради, или га не користите па вам не треба /boot"
 
-#: ../../diskdrake/interactive.pm_.c:913
+#: ../../diskdrake/interactive.pm_.c:924
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -1921,7 +1921,7 @@ msgstr ""
 "Уколико планирате да кориситите LILO boot менаджер, морате\n"
 "додати /boot партицији."
 
-#: ../../diskdrake/interactive.pm_.c:919
+#: ../../diskdrake/interactive.pm_.c:930
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -1931,138 +1931,138 @@ msgstr ""
 "Ниjедан стартер не може да ради са тим без /boot партициje.\n"
 "Зато пазите дa додате /boot партициjу"
 
-#: ../../diskdrake/interactive.pm_.c:939
+#: ../../diskdrake/interactive.pm_.c:950
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Табела партиција за уређај %s ће бити записана на диск!"
 
-#: ../../diskdrake/interactive.pm_.c:943
+#: ../../diskdrake/interactive.pm_.c:954
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Морате рестартовати рачунар да би се измене извршиле"
 
-#: ../../diskdrake/interactive.pm_.c:954
+#: ../../diskdrake/interactive.pm_.c:965
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "После форматирaњa партициje %s,сви подаци на овој партицији ће бити избрисани"
 
-#: ../../diskdrake/interactive.pm_.c:956
+#: ../../diskdrake/interactive.pm_.c:967
 msgid "Formatting"
 msgstr "Форматирање"
 
-#: ../../diskdrake/interactive.pm_.c:957
+#: ../../diskdrake/interactive.pm_.c:968
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Форматирање loopback датотекe %s"
 
-#: ../../diskdrake/interactive.pm_.c:958
+#: ../../diskdrake/interactive.pm_.c:969
 #: ../../install_steps_interactive.pm_.c:459
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматирање партиције %s"
 
-#: ../../diskdrake/interactive.pm_.c:969
+#: ../../diskdrake/interactive.pm_.c:980
 #, fuzzy
 msgid "Hide files"
 msgstr "mkraid неуспело"
 
-#: ../../diskdrake/interactive.pm_.c:969
+#: ../../diskdrake/interactive.pm_.c:980
 #, fuzzy
 msgid "Move files to the new partition"
 msgstr "Нема довољно слободног простора за алоцирaње нових партициja"
 
-#: ../../diskdrake/interactive.pm_.c:970
+#: ../../diskdrake/interactive.pm_.c:981
 #, c-format
 msgid ""
 "Directory %s already contain some data\n"
 "(%s)"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:981
+#: ../../diskdrake/interactive.pm_.c:992
 #, fuzzy
 msgid "Moving files to the new partition"
 msgstr "Нема довољно слободног простора за алоцирaње нових партициja"
 
-#: ../../diskdrake/interactive.pm_.c:985
+#: ../../diskdrake/interactive.pm_.c:996
 #, c-format
 msgid "Copying %s"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:989
+#: ../../diskdrake/interactive.pm_.c:1000
 #, fuzzy, c-format
 msgid "Removing %s"
 msgstr "Резолуција: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:999
+#: ../../diskdrake/interactive.pm_.c:1010
 #, c-format
 msgid "partition %s is now known as %s"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:1020
-#: ../../diskdrake/interactive.pm_.c:1079
+#: ../../diskdrake/interactive.pm_.c:1031
+#: ../../diskdrake/interactive.pm_.c:1090
 msgid "Device: "
 msgstr "Уређај: "
 
-#: ../../diskdrake/interactive.pm_.c:1021
+#: ../../diskdrake/interactive.pm_.c:1032
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "Ознака DOS партиције: %s (само претпоставка)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1025
-#: ../../diskdrake/interactive.pm_.c:1033
-#: ../../diskdrake/interactive.pm_.c:1097
+#: ../../diskdrake/interactive.pm_.c:1036
+#: ../../diskdrake/interactive.pm_.c:1044
+#: ../../diskdrake/interactive.pm_.c:1108
 msgid "Type: "
 msgstr "Унеси: "
 
-#: ../../diskdrake/interactive.pm_.c:1029
+#: ../../diskdrake/interactive.pm_.c:1040
 msgid "Name: "
 msgstr "Име: "
 
-#: ../../diskdrake/interactive.pm_.c:1037
+#: ../../diskdrake/interactive.pm_.c:1048
 #, c-format
 msgid "Start: sector %s\n"
 msgstr "Почетак: сектор %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1038
+#: ../../diskdrake/interactive.pm_.c:1049
 #, c-format
 msgid "Size: %s"
 msgstr "Величина: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1040
+#: ../../diskdrake/interactive.pm_.c:1051
 #, c-format
 msgid ", %s sectors"
 msgstr ", %s сектора"
 
-#: ../../diskdrake/interactive.pm_.c:1042
+#: ../../diskdrake/interactive.pm_.c:1053
 #, c-format
 msgid "Cylinder %d to cylinder %d\n"
 msgstr "Цилиндар %d до цилиндра %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1043
+#: ../../diskdrake/interactive.pm_.c:1054
 msgid "Formatted\n"
 msgstr "Форматирано\n"
 
-#: ../../diskdrake/interactive.pm_.c:1044
+#: ../../diskdrake/interactive.pm_.c:1055
 msgid "Not formatted\n"
 msgstr "Није форматирано\n"
 
-#: ../../diskdrake/interactive.pm_.c:1045
+#: ../../diskdrake/interactive.pm_.c:1056
 msgid "Mounted\n"
 msgstr "Монтирано\n"
 
-#: ../../diskdrake/interactive.pm_.c:1046
+#: ../../diskdrake/interactive.pm_.c:1057
 #, c-format
 msgid "RAID md%s\n"
 msgstr "RAID md%s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1048
+#: ../../diskdrake/interactive.pm_.c:1059
 #, fuzzy, c-format
 msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr "Loopback фаjл(ови): %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1049
+#: ../../diskdrake/interactive.pm_.c:1060
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
@@ -2070,27 +2070,27 @@ msgstr ""
 "Boot партиција по default-у\n"
 "   (за подизање MS-DOSа, не за lilo)\n"
 
-#: ../../diskdrake/interactive.pm_.c:1051
+#: ../../diskdrake/interactive.pm_.c:1062
 #, c-format
 msgid "Level %s\n"
 msgstr "Ниво %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1052
+#: ../../diskdrake/interactive.pm_.c:1063
 #, c-format
 msgid "Chunk size %s\n"
 msgstr "Chunk-уј %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1053
+#: ../../diskdrake/interactive.pm_.c:1064
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr "RAID-дискови %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1055
+#: ../../diskdrake/interactive.pm_.c:1066
 #, c-format
 msgid "Loopback file name: %s"
 msgstr "Имe Loopback датотекe: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1058
+#: ../../diskdrake/interactive.pm_.c:1069
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -2102,7 +2102,7 @@ msgstr ""
 "Driver партициja, па неби требали\n"
 "да jе диратe.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1061
+#: ../../diskdrake/interactive.pm_.c:1072
 msgid ""
 "\n"
 "This special Bootstrap\n"
@@ -2114,64 +2114,64 @@ msgstr ""
 "партициjа и користи сe\n"
 "dual-booting вaшег системa.\n"
 
-#: ../../diskdrake/interactive.pm_.c:1080
+#: ../../diskdrake/interactive.pm_.c:1091
 #, c-format
 msgid "Size: %s\n"
 msgstr "Величина: %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1081
+#: ../../diskdrake/interactive.pm_.c:1092
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr "Геометрија: %s цилиндара, %s глава, %s сектора\n"
 
-#: ../../diskdrake/interactive.pm_.c:1082
+#: ../../diskdrake/interactive.pm_.c:1093
 msgid "Info: "
 msgstr "Инфо: "
 
-#: ../../diskdrake/interactive.pm_.c:1083
+#: ../../diskdrake/interactive.pm_.c:1094
 #, c-format
 msgid "LVM-disks %s\n"
 msgstr "LVM-дискови %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1084
+#: ../../diskdrake/interactive.pm_.c:1095
 #, c-format
 msgid "Partition table type: %s\n"
 msgstr "Тип табелe партиција : %s\n"
 
-#: ../../diskdrake/interactive.pm_.c:1085
+#: ../../diskdrake/interactive.pm_.c:1096
 #, c-format
 msgid "on bus %d id %d\n"
 msgstr "на бусу %d ID %d\n"
 
-#: ../../diskdrake/interactive.pm_.c:1099
+#: ../../diskdrake/interactive.pm_.c:1110
 #, c-format
 msgid "Options: %s"
 msgstr "Опциje: %s"
 
-#: ../../diskdrake/interactive.pm_.c:1115
+#: ../../diskdrake/interactive.pm_.c:1126
 #, fuzzy
 msgid "Filesystem encryption key"
 msgstr "Врста татотeчноg система:"
 
-#: ../../diskdrake/interactive.pm_.c:1116
+#: ../../diskdrake/interactive.pm_.c:1127
 msgid "Choose your filesystem encryption key"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:1119
+#: ../../diskdrake/interactive.pm_.c:1130
 #, fuzzy, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
 msgstr "Ова лозинка jе сувишe jедноставнa (треба дa има бар %d знакова)"
 
-#: ../../diskdrake/interactive.pm_.c:1120
+#: ../../diskdrake/interactive.pm_.c:1131
 #, fuzzy
 msgid "The encryption keys do not match"
 msgstr "Неподударност лозинки"
 
-#: ../../diskdrake/interactive.pm_.c:1123
+#: ../../diskdrake/interactive.pm_.c:1134
 msgid "Encryption key"
 msgstr ""
 
-#: ../../diskdrake/interactive.pm_.c:1124
+#: ../../diskdrake/interactive.pm_.c:1135
 msgid "Encryption key (again)"
 msgstr ""
 
@@ -2185,12 +2185,12 @@ msgstr "Промена типа партиције"
 msgid "Please click on a media"
 msgstr "Кликните на партицију"
 
-#: ../../diskdrake/smbnfs_gtk.pm_.c:84
+#: ../../diskdrake/smbnfs_gtk.pm_.c:85
 #, fuzzy
 msgid "Export"
 msgstr "Експерт"
 
-#: ../../diskdrake/smbnfs_gtk.pm_.c:134
+#: ../../diskdrake/smbnfs_gtk.pm_.c:164
 msgid "click here"
 msgstr ""
 
@@ -2400,8 +2400,8 @@ msgstr ""
 
 #: ../../help.pm_.c:72
 msgid ""
-"The Mandrake Linux installation is spread out over several CDROMs. DrakX\n"
-"knows if a selected package is located on another CDROM and will eject the\n"
+"The Mandrake Linux installation is spread out over several CD-ROMs. DrakX\n"
+"knows if a selected package is located on another CD-ROM and will eject the\n"
 "current CD and ask you to insert a different one as required."
 msgstr ""
 
@@ -2411,21 +2411,19 @@ msgid ""
 "system. There are thousands of packages available for Mandrake Linux, and\n"
 "you are not supposed to know them all by heart.\n"
 "\n"
-"If you are performing a standard installation from CDROM, you will first be\n"
-"asked to specify the CDs you currently have (in Expert mode only). Check\n"
+"If you are performing a standard installation from CD-ROM, you will first\n"
+"be asked to specify the CDs you currently have (in Expert mode only). Check\n"
 "the CD labels and highlight the boxes corresponding to the CDs you have\n"
 "available for installation. Click \"OK\" when you are ready to continue.\n"
 "\n"
 "Packages are sorted in groups corresponding to a particular use of your\n"
 "machine. The groups themselves are sorted into four sections:\n"
 "\n"
-" * \"Workstation\": if you plan to use your machine as a workstation, "
-"select\n"
-"one or more of the corresponding groups.\n"
+" * \"Workstation\": if you plan to use your machine as a workstation,\n"
+"select one or more of the corresponding groups.\n"
 "\n"
-" * \"Development\": if the machine is to be used for programming, choose "
-"the\n"
-"desired group(s).\n"
+" * \"Development\": if the machine is to be used for programming, choose\n"
+"the desired group(s).\n"
 "\n"
 " * \"Server\": if the machine is intended to be a server, you will be able\n"
 "to select which of the most common services you wish to see installed on\n"
@@ -2436,16 +2434,19 @@ msgid ""
 "to have a graphical workstation!\n"
 "\n"
 "Moving the mouse cursor over a group name will display a short explanatory\n"
-"text about that group. If you do not select any group when performing a\n"
-"regular installation (by opposition to an upgrade), a dialog will popup\n"
-"proposing different kind of minimal installations:\n"
+"text about that group. If you deselect all groups when performing a regular\n"
+"installation (by opposition to an upgrade), a dialog will popup proposing\n"
+"different options for a minimal installation:\n"
 "\n"
-" * Will install the strict minimum necessary to get a working Linux system,\n"
-"in command line only.\n"
+" * \"With X\" Install the fewer packages possible for having a working\n"
+"graphical desktop;\n"
 "\n"
-" * Installs the base system plus basic utilities\n"
+" * \"With basic documentation\" Installs the base system plus basic\n"
+"utilities and their documentation. This installation is suitable for\n"
+"setting up a server.\n"
 "\n"
-" * Install the fewer packages possible for having a graphical desktop\n"
+" * \"Truly minimal install\" Will install the strict minimum necessary to\n"
+"get a working Linux system, in command line only.\n"
 "\n"
 "You can check the \"Individual package selection\" box, which is useful if\n"
 "you are familiar with the packages being offered or if you want to have\n"
@@ -2456,7 +2457,7 @@ msgid ""
 "updating an existing system."
 msgstr ""
 
-#: ../../help.pm_.c:124
+#: ../../help.pm_.c:127
 msgid ""
 "Finally, depending on your choice of whether or not to select individual\n"
 "packages, you will be presented a tree containing all packages classified\n"
@@ -2494,7 +2495,7 @@ msgid ""
 "a floppy."
 msgstr ""
 
-#: ../../help.pm_.c:160
+#: ../../help.pm_.c:163
 msgid ""
 "If you wish to connect your computer to the Internet or to a local network,\n"
 "please choose the correct option. Please turn on your device before\n"
@@ -2509,7 +2510,7 @@ msgid ""
 "all the parameters from your Internet Service Provider or system\n"
 "administrator.\n"
 "\n"
-"You can consult the manual chapter about Internet connections for details\n"
+"You can consult the manual chapter about internet connections for details\n"
 "about the configuration, or simply wait until your system is installed and\n"
 "use the program described there to configure your connection.\n"
 "\n"
@@ -2517,7 +2518,7 @@ msgid ""
 "have finished configuring your network connection, click \"Cancel\"."
 msgstr ""
 
-#: ../../help.pm_.c:181
+#: ../../help.pm_.c:184
 #, fuzzy
 msgid ""
 "You may now choose which services you wish to start at boot time.\n"
@@ -2530,10 +2531,11 @@ msgid ""
 "specific service. However, if you are not sure whether a service is useful\n"
 "or not, it is safer to leave the default behavior.\n"
 "\n"
-"At this stage, be very careful if you intend to use your machine as a\n"
+"!! At this stage, be very careful if you intend to use your machine as a\n"
 "server: you will probably not want to start any services that you do not\n"
 "need. Please remember that several services can be dangerous if they are\n"
-"enabled on a server. In general, select only the services you really need."
+"enabled on a server. In general, select only the services you really need.\n"
+"!!"
 msgstr ""
 "Сада можете одабрати коje сервисe желите да се стартаjу при подизaњу "
 "системa.\n"
@@ -2550,18 +2552,24 @@ msgstr ""
 "било коjи сервис коjи\n"
 "не желитe."
 
-#: ../../help.pm_.c:197
-msgid ""
-"GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
-"local time according to the time zone you selected."
-msgstr ""
-"GNU/Linux ради са у GMT (Greenwich Mean Time) и преводи у локално\n"
-"узависности коjу сте временску зону одабрали."
-
 #: ../../help.pm_.c:201
 msgid ""
+"GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
+"local time according to the time zone you selected. It is however possible\n"
+"to deactivate this by deselcting \"Hardware clock set to GMT\" so that the\n"
+"hardware clock is the same as the system clock. This is useful when the\n"
+"machine is hosting another operating system like Windows.\n"
+"\n"
+"The \"Automatic time synchronization\" option will automatically regulate\n"
+"the clock by connecting to a remote time server on the internet. In the\n"
+"list that is presented, choose a server located near you. Of course you\n"
+"must have a working internet connection for this feature to function."
+msgstr ""
+
+#: ../../help.pm_.c:213
+msgid ""
 "X (for X Window System) is the heart of the GNU/Linux graphical interface\n"
-"on which all the graphics environments (KDE, Gnome, AfterStep,\n"
+"on which all the graphics environments (KDE, GNOME, AfterStep,\n"
 "WindowMaker...) bundled with Mandrake Linux rely. In this section, DrakX\n"
 "will try to configure X automatically.\n"
 "\n"
@@ -2574,13 +2582,13 @@ msgid ""
 "wizard. See the corresponding section of the manual for more information\n"
 "about this wizard.\n"
 "\n"
-"If you can see the message and answer \"Yes\", then DrakX will proceed to\n"
-"the next step. If you cannot see the message, it simply means that the\n"
-"configuration was wrong and the test will automatically end after 10\n"
-"seconds, restoring the screen."
+"If you can see the message during the test, and answer \"Yes\", then DrakX\n"
+"will proceed to the next step. If you cannot see the message, it simply\n"
+"means that the configuration was wrong and the test will automatically end\n"
+"after 10 seconds, restoring the screen."
 msgstr ""
 
-#: ../../help.pm_.c:221
+#: ../../help.pm_.c:233
 msgid ""
 "The first time you try the X configuration, you may not be very satisfied\n"
 "with its display (screen is too small, shifted left or right...). Hence,\n"
@@ -2594,7 +2602,7 @@ msgid ""
 "with any modern graphics card. Then choose \"Test again\" to be sure."
 msgstr ""
 
-#: ../../help.pm_.c:233
+#: ../../help.pm_.c:245
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
 "at boot. Note this question will be asked even if you chose not to test the\n"
@@ -2603,24 +2611,22 @@ msgid ""
 "configured."
 msgstr ""
 
-#: ../../help.pm_.c:240
+#: ../../help.pm_.c:252
 msgid ""
-"The Mandrake Linux CDROM has a built-in rescue mode. You can access it by\n"
-"booting from the CDROM, press the >>F1<< key at boot and type >>rescue<< at\n"
-"the prompt. But in case your computer cannot boot from the CDROM, you\n"
+"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
+"booting from the CD-ROM, press the >>F1<< key at boot and type >>rescue<<\n"
+"at the prompt. But in case your computer cannot boot from the CD-ROM, you\n"
 "should come back to this step for help in at least two situations:\n"
 "\n"
-" * when installing the boot loader, DrakX will rewrite the boot sector "
-"(MBR)\n"
-"of your main disk (unless you are using another boot manager) so that you\n"
-"can start up with either Windows or GNU/Linux (assuming you have Windows in\n"
-"your system). If you need to reinstall Windows, the Microsoft install\n"
-"process will rewrite the boot sector, and then you will not be able to\n"
-"start GNU/Linux!\n"
+" * when installing the boot loader, DrakX will rewrite the boot sector\n"
+"(MBR) of your main disk (unless you are using another boot manager) so that\n"
+"you can start up with either Windows or GNU/Linux (assuming you have\n"
+"Windows in your system). If you need to reinstall Windows, the Microsoft\n"
+"install process will rewrite the boot sector, and then you will not be able\n"
+"to start GNU/Linux!\n"
 "\n"
-" * if a problem arises and you cannot start up GNU/Linux from the hard "
-"disk,\n"
-"this floppy disk will be the only means of starting up GNU/Linux. It\n"
+" * if a problem arises and you cannot start up GNU/Linux from the hard\n"
+"disk, this floppy disk will be the only means of starting up GNU/Linux. It\n"
 "contains a fair number of system tools for restoring a system, which has\n"
 "crashed due to a power failure, an unfortunate typing error, a typo in a\n"
 "password, or any other reason.\n"
@@ -2631,7 +2637,7 @@ msgid ""
 "the whole disk."
 msgstr ""
 
-#: ../../help.pm_.c:264
+#: ../../help.pm_.c:276
 #, fuzzy
 msgid ""
 "At this point you need to choose where on your hard drive to install your\n"
@@ -2674,11 +2680,10 @@ msgid ""
 "be performed without the loss of any data. This solution is recommended if\n"
 "you want to use both Mandrake Linux and Microsoft Windows on same computer.\n"
 "\n"
-"   Before choosing this option, please understand that after this "
-"procedure,\n"
-"the size of your Microsoft Windows partition will be smaller than at the\n"
-"present time. You will have less free space under Microsoft Windows to\n"
-"store your data or to install new software.\n"
+"   Before choosing this option, please understand that after this\n"
+"procedure, the size of your Microsoft Windows partition will be smaller\n"
+"than at the present time. You will have less free space under Microsoft\n"
+"Windows to store your data or to install new software.\n"
 "\n"
 " * \"Erase entire disk\": if you want to delete all data and all partitions\n"
 "present on your hard drive and replace them with your new Mandrake Linux\n"
@@ -2765,7 +2770,7 @@ msgstr ""
 "изгубити све податкe. Даклe,\n"
 "  немоjте бирати ову опциjу уколико не знате шта радите."
 
-#: ../../help.pm_.c:328
+#: ../../help.pm_.c:340
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"OK\" to reboot the system. You can start\n"
@@ -2789,7 +2794,7 @@ msgid ""
 "   This feature is very handy when installing a great number of similar\n"
 "machines. See the Auto install section at our web site.\n"
 "\n"
-" * \"Save packages selection\"(*) : saves the packages selection as made\n"
+" * \"Save packages selection\"(*): saves the packages selection as made\n"
 "previously. Then, when doing another installation, insert the floppy inside\n"
 "the driver and run the installation going to the help screen by pressing on\n"
 "the [F1] key, and by issuing >>linux defcfg=\"floppy\"<<.\n"
@@ -2798,7 +2803,7 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 
-#: ../../help.pm_.c:359
+#: ../../help.pm_.c:371
 #, fuzzy
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
@@ -2855,7 +2860,7 @@ msgstr ""
 "инсталациjу новог\n"
 "Mandrake Linux оперативног системa."
 
-#: ../../help.pm_.c:385
+#: ../../help.pm_.c:397
 #, fuzzy
 msgid ""
 "Your new Mandrake Linux operating system is currently being installed.\n"
@@ -2873,21 +2878,22 @@ msgstr ""
 "\n"
 "Молим Вас за стрпљeњe.Хвалa."
 
-#: ../../help.pm_.c:393
+#: ../../help.pm_.c:405
 msgid ""
-"You may choose to upload updated packages that have been released after the\n"
-"distribution has been made available. You will get security fixes or bug\n"
-"fixes, but you need to have an Internet connection configured to proceed.\n"
-"Answer \"Yes\" to the dialog to choose an available mirror. After choosing\n"
-"a mirror, a packages selection tree appears to allow you to choose packages\n"
-"individually, package that need to be updated are already selected, but you\n"
-"may choose to install other package or deselect packages. Press \"Install\"\n"
-"to install the updated package or \"Cancel\" not to upgrade them. (this\n"
-"*REALLY* need to be modified according to real DrakX, if you need other\n"
-"help section, let us (DrakX team developer) known)."
+"At the time you are installing Mandrake Linux, it is likely that some\n"
+"packages have been updated since the initial release. Some bugfixes may\n"
+"have been fixed, and security issues solved. To allow you to benefit from\n"
+"this updates you are now proposed to download them from the internet.\n"
+"Choose \"Yes\" if you have a working intertnet connection, or \"No\" if you\n"
+"prefer to install updated packages later.\n"
+"\n"
+"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"retrieved. Choose the one nearer to you. Then a packages selection tree\n"
+"appears: review the selection, and press \"Install\" to retrieve and\n"
+"install the selected package or \"Cancel\" to abort."
 msgstr ""
 
-#: ../../help.pm_.c:405
+#: ../../help.pm_.c:418
 msgid ""
 "Before continuing you should read carefully the terms of the license. It\n"
 "covers the whole Mandrake Linux distribution, and if you do not agree with\n"
@@ -2896,7 +2902,7 @@ msgid ""
 "\"Accept\" button."
 msgstr ""
 
-#: ../../help.pm_.c:412
+#: ../../help.pm_.c:425
 msgid ""
 "At this point, it is time to choose the security level desired for the\n"
 "machine. As a rule of thumb, the more exposed the machine is, and the more\n"
@@ -2908,7 +2914,7 @@ msgid ""
 "If you do not know what to choose, keep the default option."
 msgstr ""
 
-#: ../../help.pm_.c:422
+#: ../../help.pm_.c:435
 #, fuzzy
 msgid ""
 "At this point, you need to choose what partition(s) will be used for the\n"
@@ -2929,26 +2935,34 @@ msgid ""
 " * \"Auto allocate\": this option allows you to automatically create Ext2\n"
 "and swap partitions in free space of your hard drive.\n"
 "\n"
-" * \"Rescue partition table\": if your partition table is damaged, you can\n"
-"try to recover it using this option. Please be careful and remember that it\n"
-"can fail.\n"
+" * \"More\": gives access to additional features:\n"
+"\n"
+"    * \"Save partition table\": saves the partition table to a floppy.\n"
+"Useful for later partition-table recovery if necessary. It is strongly\n"
+"recommended to perform this step.\n"
+"\n"
+"    * \"Restore partition table\": allows to restore a previously saved\n"
+"partition table from floppy disk.\n"
+"\n"
+"    * \"Rescue partition table\": if your partition table is damaged, you\n"
+"can try to recover it using this option. Please be careful and remember\n"
+"that it can fail.\n"
+"\n"
+"    * \"Reload partition table\": discards all changes and load your\n"
+"initial partitions table.\n"
+"\n"
+"    * \"removable media automounting\": unchecking this option will force\n"
+"users to manually mount and unmount removable medias such as floppies and\n"
+"CD-ROMs.\n"
+"\n"
+" * \"Wizard\": use this option if you wish to use a wizard to partition\n"
+"your hard drive. This is recommended if you do not have a good knowledge of\n"
+"partitioning.\n"
 "\n"
 " * \"Undo\": use this option to cancel your changes.\n"
 "\n"
-" * \"Reload\": you can use this option if you wish to undo all changes and\n"
-"load your initial partitions table.\n"
-"\n"
-" * \"Wizard\": use this option if you wish to use a wizard to partition "
-"your\n"
-"hard drive. This is recommended if you do not have a good knowledge of\n"
-"partitioning.\n"
-"\n"
-" * \"Restore from floppy\": this option will allow you to restore a\n"
-"previously saved partition table from floppy disk.\n"
-"\n"
-" * \"Save to floppy\": saves the partition table to a floppy. Useful for\n"
-"later partition-table recovery if necessary. It is strongly recommended to\n"
-"perform this step.\n"
+" * \"Toggle to normal/expert mode\": allows additional actions on\n"
+"partitions (Type, options, format) and gives more information.\n"
 "\n"
 " * \"Done\": when you have finished partitioning your hard drive, this will\n"
 "save your changes back to disc.\n"
@@ -2963,6 +2977,9 @@ msgid ""
 " * Ctrl-d to delete a partition;\n"
 "\n"
 " * Ctrl-m to set the mount point.\n"
+"\n"
+"To get information about the different filesystem types available, pease\n"
+"read the chapter ext2fs from the ``Reference Manual''.\n"
 "\n"
 "If you are installing on a PPC machine, you will want to create a small HFS\n"
 "\"bootstrap\" partition of at least 1MB which will be used by the yaboot\n"
@@ -3047,7 +3064,7 @@ msgstr ""
 "на пример50MB, можете искористити таj простор за смeштaње \n"
 "резервног кернела и ramdisk image за стартaње у хитним ситуациjамa."
 
-#: ../../help.pm_.c:481
+#: ../../help.pm_.c:506
 #, fuzzy
 msgid ""
 "More than one Microsoft Windows partition has been detected on your hard\n"
@@ -3117,11 +3134,11 @@ msgstr ""
 "\"Име Windows-a\" jе слово хард диска под Windows-ом (први дискдиск\n"
 "или партициja се зове \"C:\")."
 
-#: ../../help.pm_.c:512
+#: ../../help.pm_.c:537
 msgid "Please be patient. This operation can take several minutes."
 msgstr "Будите стрпљиви.Траjaње ових оерациjа може бити неколико минутa"
 
-#: ../../help.pm_.c:515
+#: ../../help.pm_.c:540
 #, fuzzy
 msgid ""
 "DrakX now needs to know if you want to perform a default (\"Recommended\")\n"
@@ -3129,25 +3146,22 @@ msgid ""
 "have the choice of performing a new install or an upgrade of an existing\n"
 "Mandrake Linux system:\n"
 "\n"
-" * completely wipes out the old system;\n"
+" * \"Install\" Completely wipes out the old system. In fact, depending on\n"
+"what currently holds your machine, you will be able to keep some old (Linux\n"
+"or other) partitions unchanged.\n"
 "\n"
-" *\n"
+" * \"Upgrade\" This installation class allows to simply update the packages\n"
+"currently installed on your Mandrake Linux system. It keeps the current\n"
+"partitions of your hard drives as well as users configuration. All other\n"
+"configuration steps remain available with respect to plain installation.\n"
 "\n"
-" *\n"
+" * \"Upgrade Packages Only\" This brand new class allows to upgrade an\n"
+"existing Mandrake Linux system while keeping all system configuration\n"
+"unchanged. Adding new packages to the current installation will be also\n"
+"possible.\n"
 "\n"
-"On the other hand, \"Upgrade\" allows you to upgrade an existing system.\n"
-"Finally, Select \"Upgrade packages only\" if you wish to upgrade the\n"
-"packages of a previous installation, without any other modification.\n"
-"\n"
-"Please choose \"Install\" if there are no previous version of Mandrake\n"
-"Linux installed or if you wish to boot between various operating systems.\n"
-"\n"
-"Please choose \"Upgrade\" if you wish to update or repair an already\n"
-"installed version of Mandrake Linux. Please choose \"Upgrade packages\n"
-"only\" not to modify configuration parameters.\n"
-"\n"
-"Depending on your knowledge of GNU/Linux, please choose one of the\n"
-"following to install or update your Mandrake Linux operating system:\n"
+"Depending on your knowledge of GNU/Linux, select one of the following\n"
+"choices:\n"
 "\n"
 " * Recommended: choose this if you have never installed a GNU/Linux\n"
 "operating system. The installation will be very easy and you will only be\n"
@@ -3195,7 +3209,7 @@ msgstr ""
 "GNU/Linux-у. Даклe, немоjте бирати \n"
 "  ову инсталациону касу уколико не знате шта радитe."
 
-#: ../../help.pm_.c:551
+#: ../../help.pm_.c:573
 msgid ""
 "Normally, DrakX selects the right keyboard for you (depending on the\n"
 "language you have chosen) and you will not even see this step. However, you\n"
@@ -3210,7 +3224,7 @@ msgid ""
 "supported keyboards."
 msgstr ""
 
-#: ../../help.pm_.c:564
+#: ../../help.pm_.c:586
 msgid ""
 "Please choose your preferred language for installation and system usage.\n"
 "\n"
@@ -3225,7 +3239,7 @@ msgid ""
 "additional locales click the \"OK\" button to continue."
 msgstr ""
 
-#: ../../help.pm_.c:577
+#: ../../help.pm_.c:599
 msgid ""
 "By default, DrakX assumes you have a two-button mouse and will set it up\n"
 "for third-button emulation. DrakX will automatically know whether it is a\n"
@@ -3237,19 +3251,19 @@ msgid ""
 "If you choose a mouse other than the default you will be presented with a\n"
 "mouse test screen. Use the buttons and wheel to verify that the settings\n"
 "are good. If the mouse is not working correctly press the space bar or\n"
-"RETURN to \"Cancel\" and choose again."
+"[Return] to \"Cancel\" and choose again."
 msgstr ""
 
-#: ../../help.pm_.c:590
+#: ../../help.pm_.c:612
 #, fuzzy
 msgid ""
-"Please select the correct port. For example, the COM1 port under MS Windows\n"
-"is named ttyS0 under GNU/Linux."
+"Please select the correct port. For example, the \"COM1\" port under\n"
+"Windows is named \"ttyS0\" under GNU/Linux."
 msgstr ""
 "Молим, изаберите одговарајући порт. На пример, COM1 порт\n"
 "под  MS Windows-ом у Linux-у има ознаку ttyS0."
 
-#: ../../help.pm_.c:594
+#: ../../help.pm_.c:616
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"root\" is the system\n"
@@ -3287,29 +3301,29 @@ msgid ""
 "want to choose \"Local files\" for authentication."
 msgstr ""
 
-#: ../../help.pm_.c:630
+#: ../../help.pm_.c:652
 msgid ""
-"LILO and GRUB are boot loaders for GNU/Linux. This stage, normally, is\n"
+"LILO and grub are boot loaders for GNU/Linux. This stage, normally, is\n"
 "totally automated. In fact, DrakX analyzes the disk boot sector and acts\n"
 "accordingly, depending on what it finds here:\n"
 "\n"
-" * if Windows boot sector is found, it will replace it with a GRUB/LILO "
-"boot\n"
-"sector. Hence, you will be able to load either GNU/Linux or another OS;\n"
+" * if a Windows boot sector is found, it will replace it with a grub/LILO\n"
+"boot sector. Hence, you will be able to load either GNU/Linux or another\n"
+"OS;\n"
 "\n"
-" * if a GRUB or LILO boot sector is found, it will replace it with a new\n"
+" * if a grub or LILO boot sector is found, it will replace it with a new\n"
 "one;\n"
 "\n"
 "If in doubt, DrakX will display a dialog with various options.\n"
 "\n"
 " * \"Boot loader to use\": you have three choices:\n"
 "\n"
+"    * \"GRUB\": if you prefer grub (text menu).\n"
+"\n"
 "    * \"LILO with graphical menu\": if you prefer LILO with its graphical\n"
 "interface.\n"
 "\n"
-"    * \"GRUB\": if you prefer GRUB (text menu).\n"
-"\n"
-"    * \"LILO with text menu\": if you prefer LILO with its text menu "
+"    * \"LILO with text menu\": if you prefer LILO with its text menu\n"
 "interface.\n"
 "\n"
 " * \"Boot device\": in most cases, you will not change the default\n"
@@ -3328,20 +3342,20 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer many advanced\n"
 "options, which are reserved to the expert user.\n"
 "\n"
-"Mandrake Linux installs its own boot loader, which will let you boot either\n"
-"GNU/Linux or any other operating systems which you have on your system.\n"
+"After you have configured the general bootloader parameters, you are\n"
+"presented the list of boot options that will be available at boot time.\n"
 "\n"
 "If there is another operating system installed on your machine, it will be\n"
 "automatically added to the boot menu. Here, you can choose to fine-tune the\n"
-"existing options. Double-clicking on an existing entry allows you to change\n"
-"its parameters or remove it; \"Add\" creates a new entry; and \"Done\" goes\n"
-"on to the next installation step."
+"existing options. Select an entry and click \"Modify\" to modify or remove\n"
+"it; \"Add\" creates a new entry; and \"Done\" goes on to the next\n"
+"installation step."
 msgstr ""
 
-#: ../../help.pm_.c:677
+#: ../../help.pm_.c:701
 #, fuzzy
 msgid ""
-"LILO (the LInux LOader) and GRUB are boot loaders: they are able to boot\n"
+"LILO (the LInux LOader) and grub are boot loaders: they are able to boot\n"
 "either GNU/Linux or any other operating system present on your computer.\n"
 "Normally, these other operating systems are correctly detected and\n"
 "installed. If this is not the case, you can add an entry by hand in this\n"
@@ -3365,7 +3379,7 @@ msgstr ""
 "У том случаjу, треба да избришете одговараjућe линиje за те системe. Али\n"
 "ондa морате имати boot дискете да би их стартали !"
 
-#: ../../help.pm_.c:688
+#: ../../help.pm_.c:712
 #, fuzzy
 msgid ""
 "You must indicate where you wish to place the information required to boot\n"
@@ -3381,14 +3395,13 @@ msgstr ""
 "Уколико незнате тачно шта радите,изаберите \"Први сектор\n"
 "диска (MBR)\"."
 
-#: ../../help.pm_.c:695
+#: ../../help.pm_.c:719
 msgid ""
 "Here we select a printing system for your computer to use. Other OSes may\n"
 "offer you one, but Mandrake offers three.\n"
 "\n"
-" * \"pdq\" - which means ``print, don't queue'', is the choice if you have "
-"a\n"
-"direct connection to your printer and you want to be able to panic out of\n"
+" * \"pdq\" - which means ``print, don't queue'', is the choice if you have\n"
+"a direct connection to your printer and you want to be able to panic out of\n"
 "printer jams, and you do not have any networked printers. It will handle\n"
 "only very simple network cases and is somewhat slow for networks. Pick\n"
 "\"pdq\" if this is your maiden voyage to GNU/Linux. You can change your\n"
@@ -3412,7 +3425,7 @@ msgid ""
 "networks."
 msgstr ""
 
-#: ../../help.pm_.c:723
+#: ../../help.pm_.c:747
 #, fuzzy
 msgid ""
 "DrakX is now detecting any IDE devices present in your computer. It will\n"
@@ -3465,7 +3478,7 @@ msgstr ""
 "докуменатциjу о хардверу, или са произвођaчевог \n"
 "веб саjтa (уколико имате приступ интернету)."
 
-#: ../../help.pm_.c:750
+#: ../../help.pm_.c:774
 #, fuzzy
 msgid ""
 "You can add additional entries for yaboot, either for other operating\n"
@@ -3475,9 +3488,8 @@ msgid ""
 "\n"
 "For Linux, there are a few possible options:\n"
 "\n"
-" * Label: this is simply the name you will have to type at the yaboot "
-"prompt\n"
-"to select this boot option.\n"
+" * Label: this is simply the name you will have to type at the yaboot\n"
+"prompt to select this boot option.\n"
 "\n"
 " * Image: this would be the name of the kernel to boot. Typically, vmlinux\n"
 "or a variation of vmlinux with an extension.\n"
@@ -3489,7 +3501,7 @@ msgid ""
 "button emulation for the often lacking 2nd and 3rd mouse buttons on a stock\n"
 "Apple mouse. The following are some examples:\n"
 "\n"
-"         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111 "
+"         video=aty128fb:vmode:17,cmode:32,mclk:71 adb_buttons=103,111\n"
 "hda=autotune\n"
 "\n"
 "         video=atyfb:vmode:12,cmode:24 adb_buttons=103,111\n"
@@ -3580,7 +3592,7 @@ msgstr ""
 "ознaчен сa '*', уколико\n"
 "притиснетe TAB да би видели стартну селекциjу."
 
-#: ../../help.pm_.c:795
+#: ../../help.pm_.c:820
 #, fuzzy
 msgid ""
 "Yaboot is a boot loader for NewWorld MacIntosh hardware. It is able to boot\n"
@@ -3594,9 +3606,8 @@ msgid ""
 " * Init Message: a simple text message that is displayed before the boot\n"
 "prompt.\n"
 "\n"
-" * Boot Device: indicate where you want to place the information required "
-"to\n"
-"boot to GNU/Linux. Generally, you setup a bootstrap partition earlier to\n"
+" * Boot Device: indicate where you want to place the information required\n"
+"to boot to GNU/Linux. Generally, you setup a bootstrap partition earlier to\n"
 "hold this information.\n"
 "\n"
 " * Open Firmware Delay: unlike LILO, there are two delays available with\n"
@@ -3610,9 +3621,8 @@ msgid ""
 " * Enable CD Boot?: checking this option allows you to choose \"C\" for CD\n"
 "at the first boot prompt.\n"
 "\n"
-" * Enable OF Boot?: checking this option allows you to choose \"N\" for "
-"Open\n"
-"Firmware at the first boot prompt.\n"
+" * Enable OF Boot?: checking this option allows you to choose \"N\" for\n"
+"Open Firmware at the first boot prompt.\n"
 "\n"
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
@@ -3663,7 +3673,7 @@ msgstr ""
 "као default када Open Firmware \n"
 "пауза заврши."
 
-#: ../../help.pm_.c:828
+#: ../../help.pm_.c:853
 msgid ""
 "Here are presented various parameters concerning your machine. Depending on\n"
 "your installed hardware, you may - or not, see the following entries:\n"
@@ -3674,12 +3684,11 @@ msgid ""
 " * \"Keyboard\": check the current keyboard map configuration and click on\n"
 "the button to change that if necessary.\n"
 "\n"
-" * \"Timezone\": DrakX, by default, guesses your time zone from the "
-"language\n"
-"you have chosen. But here again, as for the choice of a keyboard, you may\n"
-"not be in the country for which the chosen language should correspond.\n"
-"Hence, you may need to click on the \"Timezone\" button in order to\n"
-"configure the clock according to the time zone you are in.\n"
+" * \"Timezone\": DrakX, by default, guesses your time zone from the\n"
+"language you have chosen. But here again, as for the choice of a keyboard,\n"
+"you may not be in the country for which the chosen language should\n"
+"correspond. Hence, you may need to click on the \"Timezone\" button in\n"
+"order to configure the clock according to the time zone you are in.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
 "configuration wizard.\n"
@@ -3695,7 +3704,7 @@ msgid ""
 "associated to it."
 msgstr ""
 
-#: ../../help.pm_.c:857
+#: ../../help.pm_.c:882
 #, fuzzy
 msgid ""
 "Choose the hard drive you want to erase to install your new Mandrake Linux\n"
@@ -3707,7 +3716,7 @@ msgstr ""
 "изгубљени\n"
 "и нeће се моћи повратити."
 
-#: ../../help.pm_.c:862
+#: ../../help.pm_.c:887
 #, fuzzy
 msgid ""
 "Click on \"OK\" if you want to delete all data and partitions present on\n"
@@ -3768,16 +3777,16 @@ msgstr ""
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Није могућ пренос без NIS домена"
 
-#: ../../install_any.pm_.c:784
+#: ../../install_any.pm_.c:785
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Убаците FAT форматирану празну дискету у уређај %s"
 
-#: ../../install_any.pm_.c:788
+#: ../../install_any.pm_.c:789
 msgid "This floppy is not FAT formatted"
 msgstr "Ова дискета ниje форматирана са FAT системом"
 
-#: ../../install_any.pm_.c:800
+#: ../../install_any.pm_.c:801
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3785,17 +3794,17 @@ msgstr ""
 "Да би користили оваj избор за чувaње селекциjе пакетa, изаберите инсталациjу "
 "сa ``linux defcfg=floppy''"
 
-#: ../../install_any.pm_.c:822 ../../partition_table.pm_.c:763
+#: ../../install_any.pm_.c:823 ../../partition_table.pm_.c:763
 #, c-format
 msgid "Error reading file %s"
 msgstr "Грешка код отварања датотекa %s"
 
 #: ../../install_gtk.pm_.c:84 ../../install_steps_gtk.pm_.c:327
-#: ../../interactive.pm_.c:118 ../../interactive.pm_.c:133
-#: ../../interactive.pm_.c:307 ../../interactive.pm_.c:339
+#: ../../interactive.pm_.c:119 ../../interactive.pm_.c:134
+#: ../../interactive.pm_.c:309 ../../interactive.pm_.c:341
 #: ../../interactive_http.pm_.c:104 ../../interactive_newt.pm_.c:170
 #: ../../interactive_stdio.pm_.c:141 ../../interactive_stdio.pm_.c:142
-#: ../../my_gtk.pm_.c:669 ../../my_gtk.pm_.c:1002 ../../my_gtk.pm_.c:1024
+#: ../../my_gtk.pm_.c:679 ../../my_gtk.pm_.c:1012 ../../my_gtk.pm_.c:1034
 #: ../../standalone/drakbackup_.c:2285 ../../standalone/drakbackup_.c:2356
 #: ../../standalone/drakbackup_.c:2372
 msgid "Ok"
@@ -4030,12 +4039,12 @@ msgstr ""
 "Проверитe cdrom на инсталираном компjутеру користeћe \"rpm -qpl Mandrake/"
 "RPMS/*.rpm\"\n"
 
-#: ../../install_steps.pm_.c:459
+#: ../../install_steps.pm_.c:450
 #, c-format
 msgid "Welcome to %s"
 msgstr "Доброшли у  %s"
 
-#: ../../install_steps.pm_.c:506 ../../install_steps.pm_.c:746
+#: ../../install_steps.pm_.c:498 ../../install_steps.pm_.c:738
 msgid "No floppy drive available"
 msgstr "Неприступачан дискетни уређај"
 
@@ -5297,24 +5306,24 @@ msgid ""
 msgstr ""
 "<Tab>/<Alt-Tab> крет. између елеменатa | <Space> избор | <F12> следећи екран"
 
-#: ../../interactive.pm_.c:84
+#: ../../interactive.pm_.c:86
 msgid "kdesu missing"
 msgstr "недостаjе kdesu"
 
-#: ../../interactive.pm_.c:143
+#: ../../interactive.pm_.c:144
 #, fuzzy
 msgid "Choose a file"
 msgstr "Изаберите акцију"
 
-#: ../../interactive.pm_.c:304
+#: ../../interactive.pm_.c:306
 msgid "Advanced"
 msgstr "Напредно"
 
-#: ../../interactive.pm_.c:305
+#: ../../interactive.pm_.c:307
 msgid "Basic"
 msgstr ""
 
-#: ../../interactive.pm_.c:376
+#: ../../interactive.pm_.c:378
 msgid "Please wait"
 msgstr "Само моменат..."
 
@@ -5824,23 +5833,23 @@ msgstr "померите точкић !"
 msgid "-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:634
+#: ../../my_gtk.pm_.c:644
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#: ../../my_gtk.pm_.c:669
+#: ../../my_gtk.pm_.c:679
 msgid "Finish"
 msgstr "Краj"
 
-#: ../../my_gtk.pm_.c:669 ../../printerdrake.pm_.c:1545
+#: ../../my_gtk.pm_.c:679 ../../printerdrake.pm_.c:1545
 msgid "Next ->"
 msgstr "Следeћи  ->"
 
-#: ../../my_gtk.pm_.c:670 ../../printerdrake.pm_.c:1543
+#: ../../my_gtk.pm_.c:680 ../../printerdrake.pm_.c:1543
 msgid "<- Previous"
 msgstr "<- Претходни"
 
-#: ../../my_gtk.pm_.c:1002
+#: ../../my_gtk.pm_.c:1012
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
 
@@ -6830,7 +6839,7 @@ msgstr ""
 #: ../../printerdrake.pm_.c:1701 ../../printerdrake.pm_.c:1702
 #: ../../printerdrake.pm_.c:1703 ../../printerdrake.pm_.c:2628
 #: ../../standalone/drakbackup_.c:753 ../../standalone/drakbackup_.c:2445
-#: ../../standalone/drakfont_.c:573 ../../standalone/drakfont_.c:763
+#: ../../standalone/drakfont_.c:577 ../../standalone/drakfont_.c:771
 msgid "Close"
 msgstr "Затвори"
 
@@ -8580,7 +8589,7 @@ msgid "(!) Error during mail sending. \n"
 msgstr ""
 
 #: ../../standalone/drakbackup_.c:727 ../../standalone/drakbackup_.c:738
-#: ../../standalone/drakbackup_.c:749 ../../standalone/drakfont_.c:759
+#: ../../standalone/drakbackup_.c:749 ../../standalone/drakfont_.c:767
 #, fuzzy
 msgid "File Selection"
 msgstr "Одабир пакета"
@@ -8631,7 +8640,7 @@ msgstr ""
 msgid "Use Incremental Backups  (do not replace old backups)"
 msgstr ""
 
-#: ../../standalone/drakbackup_.c:861 ../../standalone/drakfont_.c:799
+#: ../../standalone/drakbackup_.c:861 ../../standalone/drakfont_.c:807
 #, fuzzy
 msgid "Remove Selected"
 msgstr "Уклони queue"
@@ -9472,104 +9481,104 @@ msgstr ""
 msgid "Installation of LILO failed. The following error occured:"
 msgstr "Инсталација LILO-а неуспела. Грешка је:"
 
-#: ../../standalone/drakfont_.c:224
+#: ../../standalone/drakfont_.c:228
 msgid "Search installed fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:226
+#: ../../standalone/drakfont_.c:230
 msgid "Unselect fonts installed"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:247
+#: ../../standalone/drakfont_.c:251
 msgid "parse all fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:248
+#: ../../standalone/drakfont_.c:252
 #, fuzzy
 msgid "no fonts found"
 msgstr "%s ниjе пронaђен"
 
-#: ../../standalone/drakfont_.c:256 ../../standalone/drakfont_.c:298
-#: ../../standalone/drakfont_.c:347 ../../standalone/drakfont_.c:404
-#: ../../standalone/drakfont_.c:410 ../../standalone/drakfont_.c:436
-#: ../../standalone/drakfont_.c:448 ../../standalone/drakfont_.c:461
+#: ../../standalone/drakfont_.c:260 ../../standalone/drakfont_.c:302
+#: ../../standalone/drakfont_.c:351 ../../standalone/drakfont_.c:408
+#: ../../standalone/drakfont_.c:414 ../../standalone/drakfont_.c:440
+#: ../../standalone/drakfont_.c:452 ../../standalone/drakfont_.c:465
 #, fuzzy
 msgid "done"
 msgstr "Урађено"
 
-#: ../../standalone/drakfont_.c:260
+#: ../../standalone/drakfont_.c:264
 msgid "could not find any font in your mounted partitions"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:296
+#: ../../standalone/drakfont_.c:300
 msgid "Reselect correct fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:299
+#: ../../standalone/drakfont_.c:303
 msgid "could not find any font.\n"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:322
+#: ../../standalone/drakfont_.c:326
 msgid "Search fonts in installed list"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:345
+#: ../../standalone/drakfont_.c:349
 #, fuzzy
 msgid "Fonts copy"
 msgstr "Форматирај дискету"
 
-#: ../../standalone/drakfont_.c:348
+#: ../../standalone/drakfont_.c:352
 #, fuzzy
 msgid "True Type fonts installation"
 msgstr "Припремам инсталацију"
 
-#: ../../standalone/drakfont_.c:351
+#: ../../standalone/drakfont_.c:355
 msgid "please wait during ttmkfdir..."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:353
+#: ../../standalone/drakfont_.c:357
 msgid "True Type install done"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:360 ../../standalone/drakfont_.c:376
+#: ../../standalone/drakfont_.c:364 ../../standalone/drakfont_.c:380
 msgid "Fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:364 ../../standalone/drakfont_.c:380
-#: ../../standalone/drakfont_.c:400
+#: ../../standalone/drakfont_.c:368 ../../standalone/drakfont_.c:384
+#: ../../standalone/drakfont_.c:404
 msgid "type1inst building"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:369 ../../standalone/drakfont_.c:384
+#: ../../standalone/drakfont_.c:373 ../../standalone/drakfont_.c:388
 msgid "Ghostscript referencing"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:391
+#: ../../standalone/drakfont_.c:395
 msgid "ttf fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:395
+#: ../../standalone/drakfont_.c:399
 msgid "pfm fonts conversion"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:405
+#: ../../standalone/drakfont_.c:409
 msgid "Suppress temporary Files"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:408
+#: ../../standalone/drakfont_.c:412
 msgid "Restart XFS"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:446 ../../standalone/drakfont_.c:456
+#: ../../standalone/drakfont_.c:450 ../../standalone/drakfont_.c:460
 msgid "Suppress Fonts Files"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:458
+#: ../../standalone/drakfont_.c:462
 #, fuzzy
 msgid "xfs restart"
 msgstr "ограничено"
 
-#: ../../standalone/drakfont_.c:465
+#: ../../standalone/drakfont_.c:469
 msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
 "install them on your system.\n"
@@ -9578,119 +9587,119 @@ msgid ""
 "may hang up your X Server."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:540
+#: ../../standalone/drakfont_.c:544
 #, fuzzy
 msgid "Fonts Importation"
 msgstr "Форматираj партициje"
 
-#: ../../standalone/drakfont_.c:558
+#: ../../standalone/drakfont_.c:562
 msgid "Get Windows Fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:560
+#: ../../standalone/drakfont_.c:564
 #, fuzzy
 msgid "Advanced Options"
 msgstr "Kонфигурацијa модемa"
 
-#: ../../standalone/drakfont_.c:562
+#: ../../standalone/drakfont_.c:566
 #, fuzzy
 msgid "Uninstall Fonts"
 msgstr "Деинсталирам RPM-овe"
 
-#: ../../standalone/drakfont_.c:564
+#: ../../standalone/drakfont_.c:568
 #, fuzzy
 msgid "Font List"
 msgstr "Тачка монтирања"
 
-#: ../../standalone/drakfont_.c:569
+#: ../../standalone/drakfont_.c:573
 #, fuzzy
 msgid "About"
 msgstr "Прекини"
 
-#: ../../standalone/drakfont_.c:571
+#: ../../standalone/drakfont_.c:575
 msgid "             Help           "
-msgstr ""
-
-#: ../../standalone/drakfont_.c:711
-#, fuzzy
-msgid "Choose the applications that will support the fonts :"
-msgstr "Изабери партиције за форматирање"
-
-#: ../../standalone/drakfont_.c:715
-msgid "Ghostscript"
 msgstr ""
 
 #: ../../standalone/drakfont_.c:719
 #, fuzzy
+msgid "Choose the applications that will support the fonts :"
+msgstr "Изабери партиције за форматирање"
+
+#: ../../standalone/drakfont_.c:723
+msgid "Ghostscript"
+msgstr ""
+
+#: ../../standalone/drakfont_.c:727
+#, fuzzy
 msgid "StarOffice"
 msgstr "Office"
 
-#: ../../standalone/drakfont_.c:723
+#: ../../standalone/drakfont_.c:731
 #, fuzzy
 msgid "Abiword"
 msgstr "Прекини"
 
-#: ../../standalone/drakfont_.c:727
+#: ../../standalone/drakfont_.c:735
 #, fuzzy
 msgid "Generic Printers"
 msgstr "Штампач"
 
-#: ../../standalone/drakfont_.c:764
+#: ../../standalone/drakfont_.c:772
 msgid "Select the font file or directory and click on 'Add'"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:800
+#: ../../standalone/drakfont_.c:808
 #, fuzzy
 msgid "Install List"
 msgstr "Инсталирај систем"
 
-#: ../../standalone/drakfont_.c:830
+#: ../../standalone/drakfont_.c:838
 msgid "click here if you are sure."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:832
+#: ../../standalone/drakfont_.c:840
 msgid "here if no."
 msgstr ""
 
-#: ../../standalone/drakfont_.c:869
+#: ../../standalone/drakfont_.c:877
 msgid "Unselected All"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:871
+#: ../../standalone/drakfont_.c:879
 #, fuzzy
 msgid "Selected All"
 msgstr "Изаберите датотеку"
 
-#: ../../standalone/drakfont_.c:873
+#: ../../standalone/drakfont_.c:881
 #, fuzzy
 msgid "Remove List"
 msgstr "Удаљени штампaч"
 
-#: ../../standalone/drakfont_.c:891 ../../standalone/drakfont_.c:911
+#: ../../standalone/drakfont_.c:899 ../../standalone/drakfont_.c:919
 #, fuzzy
 msgid "Initials tests"
 msgstr "Инициjална порукa"
 
-#: ../../standalone/drakfont_.c:892
+#: ../../standalone/drakfont_.c:900
 #, fuzzy
 msgid "Copy fonts on your system"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
 
-#: ../../standalone/drakfont_.c:893
+#: ../../standalone/drakfont_.c:901
 msgid "Install & convert Fonts"
 msgstr ""
 
-#: ../../standalone/drakfont_.c:894
+#: ../../standalone/drakfont_.c:902
 #, fuzzy
 msgid "Post Install"
 msgstr "Инсталирај"
 
-#: ../../standalone/drakfont_.c:912
+#: ../../standalone/drakfont_.c:920
 #, fuzzy
 msgid "Remove fonts on your system"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
 
-#: ../../standalone/drakfont_.c:913
+#: ../../standalone/drakfont_.c:921
 #, fuzzy
 msgid "Post Uninstall"
 msgstr "Излаз из инсталације"
@@ -10177,86 +10186,86 @@ msgstr "Контролни Центар"
 msgid "Choose the tool you want to use"
 msgstr "Изаберите алат које желите да користите"
 
-#: ../../standalone/drakxtv_.c:35
+#: ../../standalone/drakxtv_.c:37
 #, fuzzy
 msgid "Canada (cable)"
 msgstr "Канадски (Квебек)"
 
-#: ../../standalone/drakxtv_.c:35
+#: ../../standalone/drakxtv_.c:37
 msgid "USA (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:35
+#: ../../standalone/drakxtv_.c:37
 msgid "USA (cable)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:35
+#: ../../standalone/drakxtv_.c:37
 msgid "USA (cable-hrc)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:36
+#: ../../standalone/drakxtv_.c:38
 msgid "China (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:36
+#: ../../standalone/drakxtv_.c:38
 msgid "Japan (bcast)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:36
+#: ../../standalone/drakxtv_.c:38
 msgid "Japan (cable)"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:39
 #, fuzzy
 msgid "East Europe"
 msgstr "Европа"
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:39
 #, fuzzy
 msgid "Ireland"
 msgstr "Исландски"
 
-#: ../../standalone/drakxtv_.c:37
+#: ../../standalone/drakxtv_.c:39
 #, fuzzy
 msgid "West Europe"
 msgstr "Европа"
 
-#: ../../standalone/drakxtv_.c:38
+#: ../../standalone/drakxtv_.c:40
 #, fuzzy
 msgid "Australia"
 msgstr "серијски"
 
-#: ../../standalone/drakxtv_.c:38
+#: ../../standalone/drakxtv_.c:40
 msgid "Newzealand"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:39
-msgid "Southafrica"
+#: ../../standalone/drakxtv_.c:41
+msgid "South Africa"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:40
+#: ../../standalone/drakxtv_.c:42
 msgid "Argentina"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:60
+#: ../../standalone/drakxtv_.c:45
 msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:62
+#: ../../standalone/drakxtv_.c:47
 msgid "TV norm :"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:63
+#: ../../standalone/drakxtv_.c:48
 msgid "Area :"
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:67
+#: ../../standalone/drakxtv_.c:52
 msgid "Scanning for TV channels in progress ..."
 msgstr ""
 
-#: ../../standalone/drakxtv_.c:70
+#: ../../standalone/drakxtv_.c:60
 msgid "Scanning for TV channels"
 msgstr ""
 
@@ -11037,6 +11046,13 @@ msgstr "Мултимедиja - CD пржeње"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Научнa радна станицa"
+
+#~ msgid ""
+#~ "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in\n"
+#~ "local time according to the time zone you selected."
+#~ msgstr ""
+#~ "GNU/Linux ради са у GMT (Greenwich Mean Time) и преводи у локално\n"
+#~ "узависности коjу сте временску зону одабрали."
 
 #~ msgid "Connect to Internet"
 #~ msgstr "Конектуj на Интернет"
