@@ -2,7 +2,7 @@ package partition_table_mac; # $Id$
 
 use diagnostics;
 #use strict;   - fixed other PPC code to comply, but program bails on empty partition table - sbenedict
-use vars qw(@ISA);
+use vars qw(@ISA $freepart_device $bootstrap_part $freepart_start $freepart_size $macos_part);
 
 @ISA = qw(partition_table_raw);
 
@@ -138,23 +138,23 @@ sub read($$) {
                     $h{pName} =~ /swap/i ? ($h{type} = 0x82) : ($h{type} = 0x83);
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
                 	#- need to locate a 1MB partition to setup a bootstrap on
-                	if (defined $partition_table_mac::freepart_start && $partition_table_mac::freepart_size >= 1) {
+                	if (defined $freepart_start && $freepart_size >= 1) {
                 		#- already found a suitable partition
                 	} else {
-                		$partition_table_mac::freepart_start = $h{start};
-                		$partition_table_mac::freepart_size = $h{size}/2048;
-                		$partition_table_mac::freepart_device = $hd;
-                		log::l("free apple partition found on drive /dev/$partition_table_mac::freepart_device->{device}, block $partition_table_mac::freepart_start, size $partition_table_mac::freepart_size");
+                		$freepart_start = $h{start};
+                		$freepart_size = $h{size}/2048;
+                		$freepart_device = $hd;
+                		log::l("free apple partition found on drive /dev/$freepart_device->{device}, block $freepart_start, size $freepart_size");
                 	}
                     next;
 					#$h{type} = 0x0;
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
                  	$h{type} = 0x402;
-                 	if (defined $partition_table_mac::macos_part) {		
+                 	if (defined $macos_part) {		
                  		#- swag at identifying MacOS - 1st HFS partition
                  	} else {	
-                 		$partition_table_mac::macos_part = "/dev/" . $hd->{device} . ($i+1);
-                 		log::l("found MacOS at partition $partition_table_mac::macos_part");
+                 		$macos_part = "/dev/" . $hd->{device} . ($i+1);
+                 		log::l("found MacOS at partition $macos_part");
                  	}
                 } elsif ($h{pType} =~ /^Apple_Partition_Map/i) {
                  	$h{type} = 0x401;
@@ -162,12 +162,12 @@ sub read($$) {
                 } elsif ($h{pType} =~ /^Apple_Bootstrap/i) {
                  	$h{type} = 0x401;
                  	$h{isBoot} = 1;
-                 	if (defined $partition_table_mac::bootstrap_part) {
+                 	if (defined $bootstrap_part) {
                  		#found a bootstrap already - use it, but log the find
                  		log::l("found another apple bootstrap at partition /dev/$hd->{device}" . ($i+1));
                  	} else {
-                 		$partition_table_mac::bootstrap_part = "/dev/" . $hd->{device} . ($i+1);
-                 		log::l("found apple bootstrap at partition $partition_table_mac::bootstrap_part");
+                 		$bootstrap_part = "/dev/" . $hd->{device} . ($i+1);
+                 		log::l("found apple bootstrap at partition $bootstrap_part");
                  	}
                 } else {
                  	$h{type} = 0x401;
