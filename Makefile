@@ -10,7 +10,7 @@ dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
 
 images:
-	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img boot.iso
+	DISTRIB_DESCR=$(DISTRIB_DESCR) ./make_boot_img
 
 tar: clean
 	rpm -qa > needed_rpms.lst
