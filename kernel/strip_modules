@@ -71,12 +71,12 @@ function strip_module(object,
 		# t static label/procedures
 		if ($1 ~ /[bdrt]/)
 			to_strip[$2] = "";
+		else if ($2 ~ /R __ksymtab_/)
+			keep_symbol[substr($2, 11)] = "";
+		else if ($0 ~ /R __module_parm_/)
+			keep_symbol[substr($2, 15)] = "";
 		else if ($1 != "?")
 			keep_symbol[$2] = "";
-		else if ($0 ~ /\? __ksymtab_/)
-			keep_symbol[substr($2, 11)] = "";
-		else if ($0 ~ /\? __module_parm_/)
-			keep_symbol[substr($2, 15)] = "";
 		if ($2 ~ /__module/)
 			new_module_format = 1;
 	}
