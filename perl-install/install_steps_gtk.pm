@@ -238,7 +238,7 @@ sub reallyChooseGroups {
 			  $w_size,
 			  if_($individual, do {
 			      my $check = Gtk2::CheckButton->new(N("Individual package selection"));
-			      $check->set_active($$individual);
+			      $check->set_active($$individual ? 1 : 0);
 			      $check->signal_connect(clicked => sub { $$individual = $check->get_active });
 			      $check;
 			  }),
