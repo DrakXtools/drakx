@@ -202,7 +202,7 @@ To use alsa, one can either use:
                                [
                                 { 
                                     label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
-                                    help => join("\n\n", map { "\"$_\": " . $des{$_} } @$alternative),
+                                    help => join("\n\n", map { qq("$_": ) . $des{$_} } @$alternative),
                                     allow_empty_list => 1,
                                 },
                                 {

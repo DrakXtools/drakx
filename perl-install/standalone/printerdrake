@@ -58,7 +58,7 @@ $us->{VERSION} = '0.1';
 my $window_splash;
 if (0 && !$::isInstall && !$::isEmbedded) {
     $window_splash = Gtk2::Window->new('popup');
-    $window_splash->signal_connect(delete_event => \&quit_global);
+#BUG    $window_splash->signal_connect(delete_event => \&quit_global);
     $window_splash->set_title(N("Printerdrake") . $us->{VERSION});
     $window_splash->set_position('center_always');
     $window_splash->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'etched_out'),
@@ -79,8 +79,8 @@ if (0 && !$::isInstall && !$::isEmbedded) {
 # Check whether Foomatic is installed and install it if necessary
 #printer::printerdrake::install_foomatic($in);
 
-my $_w = $in->wait_message(N("Printerdrake"),
-			   N("Reading data of installed printers..."));
+my $w = $in->wait_message(N("Printerdrake"),
+                          N("Reading data of installed printers..."));
 
 # Get what was installed before
 eval { $printer = printer::main::getinfo('') };
@@ -102,12 +102,12 @@ $commandline =~ /-pdq/ and
     $printer->{SPOOLER} = 'pdq'  and printer::main::read_configured_queues($printer);
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
-undef $_w;
+undef $w;
 
 if ($::isInstall) {
     # Interactive main window for installation
     printer::printerdrake::main($printer, $in, 1);
-    exit;
+    exit();
 }
 
 # Do not let printerdrake ask for the spooler
@@ -122,7 +122,7 @@ my $error = 0;
 my $GetValue = -65533;
 my $stringsearch = '';
 
-sub HelpSystem { exec("drakhelp --id printerdrake") unless fork() };
+sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() };
 
 $us->{wnd} = ugtk2->new(N("Mandrake Linux Printer Management Tool") . " " . $us->{VERSION});
 gtkset_size_request($us->{wnd}{rwindow}, 660, 460);
@@ -254,7 +254,7 @@ local $::isEmbedded = 0;
 Gtk2->main;
 ugtk2->exit;
 
-sub GrayDelEdit {
+sub GrayDelEdit() {
     foreach ($tbdefault, $tbedit, $tbdel, $buttorcheck{default}, $buttorcheck{edit}, $buttorcheck{delete}) { defined $_ and $_->set_sensitive(0) };
 }
 
@@ -263,8 +263,7 @@ sub TreeUnselect {
     $treev->get_selection->unselect_all;
     GrayDelEdit()
 }
-sub NotebookSwitch { 
-    my $page = $nb->get_current_page;
+sub NotebookSwitch() { 
     TreeUnselect($localtree);
     TreeUnselect($remotetree);
     #set_selection_on_first();
@@ -277,7 +276,6 @@ sub RefreshLocalPrintersFull {
     $ltree_model->clear;
     my @LocalReal;
     LOOP: foreach my $p (@printers) {
-	my $connect = $printer->{configured}{$p}{queuedata}{connect};
 	# Apply string search to all fields, not only the printer name
 	my $connect = printer::main::connectionstr($printer->{configured}{$p}{queuedata}{connect});
 	my $model = $printer->{configured}{$p}{queuedata}{make} . ' ' .
@@ -340,7 +338,7 @@ sub Refresh {
     set_selection($selection);
 }
 
-sub AddPrinter {
+sub AddPrinter() {
     deactivate_mainwindow();
     if (printer::printerdrake::add_printer($printer, $in)) {
 	Refresh($stringsearch);
@@ -351,7 +349,7 @@ sub AddPrinter {
     activate_mainwindow();
 }
 
-sub SetAsDefault {
+sub SetAsDefault() {
     deactivate_mainwindow();
     my $queue = get_selection();
     printer::printerdrake::default_printer($printer, $in, $queue);
@@ -359,7 +357,7 @@ sub SetAsDefault {
     activate_mainwindow();
 }
 
-sub Edit {
+sub Edit() {
     deactivate_mainwindow();
     my $queue = get_selection();
     printer::printerdrake::edit_printer($printer, $in, undef, $queue);
@@ -372,7 +370,7 @@ sub Edit {
     activate_mainwindow();
 }
 
-sub Delete {
+sub Delete() {
     deactivate_mainwindow();
     my $queue = get_selection();
     if (printer::printerdrake::remove_printer($printer, $in, $queue)) {
@@ -384,25 +382,25 @@ sub Delete {
     activate_mainwindow();
 }
 
-sub ConfigCUPS {
+sub ConfigCUPS() {
     deactivate_mainwindow();
     printer::printerdrake::config_cups($printer, $in);
     Refresh($stringsearch);
     activate_mainwindow();
 }
 
-sub deactivate_mainwindow {
+sub deactivate_mainwindow() {
     $us->{wnd}{rwindow}->set_sensitive(0);
     gtkset_mousecursor_wait();
     $error = 0;
 }
 
-sub activate_mainwindow {
+sub activate_mainwindow() {
     $us->{wnd}{rwindow}->set_sensitive(1);
     gtkset_mousecursor_normal();
 }
 
-sub set_selection_on_first {
+sub set_selection_on_first() {
     # On which page are we currently
     my $page = $nb->get_current_page;
     my ($tree, $model);
@@ -450,7 +448,7 @@ sub set_selection {
     set_selection_on_first();
 }
 
-sub get_selection {
+sub get_selection() {
     my $queue;
     my $page = $nb->get_current_page;
     if ($page <= 0) {
@@ -499,7 +497,7 @@ sub CreateTree {
 }
 
 sub NewDialog {
-    my ($title, $no_button) = @_;
+    my ($title, $o_no_button) = @_;
     my $dialog = gtkset_border_width(Gtk2::Dialog->new, 10);
     $dialog->set_transient_for($us->{wnd}{rwindow});
     $dialog->set_position('center-on-parent');
@@ -507,11 +505,11 @@ sub NewDialog {
     $dialog->action_area->pack_start(gtkadd(Gtk2::HButtonBox->new,
                                             gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { $dialog->destroy })
                                             ),
-                                     0,0,0) unless $no_button;
+                                     0,0,0) unless $o_no_button;
     gtkset_modal($dialog, 1);
 }
 
-sub About {
+sub About() {
     my $window_about = NewDialog(N("Printerdrake"));
     my $tree_model = Gtk2::TreeStore->new("Glib::String", "Glib::String", "Glib::String");
     my $list = Gtk2::TreeView->new_with_model($tree_model);
@@ -530,7 +528,7 @@ sub About {
     $window_about->show_all;
 }
 
-sub QuitGlobal {
+sub QuitGlobal() {
     gtkset_mousecursor_normal();
     Gtk2->main_quit;
 }
