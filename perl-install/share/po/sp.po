@@ -169,6 +169,11 @@ msgstr "Корисничко име"
 msgid "Real name"
 msgstr "Право име"
 
+#: ../../any.pm:1
+#, c-format
+msgid "Accept user"
+msgstr "Прихвати корисника"
+
 #: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../printer/printerdrake.pm:1
@@ -176,11 +181,6 @@ msgstr "Право име"
 #, c-format
 msgid "Done"
 msgstr "Урађено"
-
-#: ../../any.pm:1
-#, c-format
-msgid "Accept user"
-msgstr "Прихвати корисника"
 
 #: ../../any.pm:1
 #, c-format
@@ -3313,15 +3313,6 @@ msgstr "Custom конфигурација"
 msgid "System installation"
 msgstr "SILO инсталација"
 
-#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/draksec:1
-#, c-format
-msgid "Ok"
-msgstr "У реду"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Bringing down the network"
@@ -4003,6 +3994,12 @@ msgstr "Ажурирање селекције пакета"
 msgid "Load/Save on floppy"
 msgstr "Учитај/Сними на дискету"
 
+#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "<- Previous"
+msgstr "<- Претходни"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4037,12 +4034,6 @@ msgstr "Можете деселектовати оваj пакет jер jе вeћ инсталиран"
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Ово jе обавезни пакет,и не можe бити деселектован"
-
-#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Other"
-msgstr "Друго"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4090,6 +4081,12 @@ msgstr "Име: %s\n"
 msgid "Bad package"
 msgstr "Лош пакет"
 
+#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Other"
+msgstr "Друго"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Total size: %d / %d MB"
@@ -4124,6 +4121,15 @@ msgstr ""
 "Mandrake Linux. Уколико се они поjавe, можете пробати текстуалну "
 "инсталациjу. Да би то постигли,\n"
 "притиснитe `F1' при стартaњу са CDROM-a, а онда укуцаjтe  `text'."
+
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/draksec:1
+#, c-format
+msgid "Ok"
+msgstr "У реду"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4358,6 +4364,11 @@ msgstr "Без лозинке"
 #, c-format
 msgid "Set root password"
 msgstr "Унеси root лозинку"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "You have not configured X. Are you sure you really want this?"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5567,12 +5578,6 @@ msgstr "Да ли је ово исправно ?"
 msgid "Finish"
 msgstr "Краj"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "<- Previous"
-msgstr "<- Претходни"
-
 #: ../../my_gtk.pm:1
 #, c-format
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -6488,9 +6493,9 @@ msgid "Select the memory size of your graphics card"
 msgstr "Количина меморије на графичкој картици"
 
 #: ../../Xconfig/card.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Your system support multiple head configuration.\n"
+"Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
 "Вaш систем подржава мultiple head конфигурациjу.\n"
@@ -6934,9 +6939,9 @@ msgid "Empty"
 msgstr "Празно"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "FAT"
-msgstr "FAT"
+#, fuzzy, c-format
+msgid "Windows"
+msgstr "Windows Домен"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6994,6 +6999,13 @@ msgstr "Изаберите акцију"
 #, c-format
 msgid "Wizard"
 msgstr "чаробњак (помоћник)"
+
+#: ../../diskdrake/hd_gtk.pm:1 ../../harddrake/sound.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr "Помоћ"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -8074,12 +8086,6 @@ msgstr ""
 #, c-format
 msgid "Switching between ALSA and OSS help"
 msgstr "Помоћ за промену између ALSA и OSS"
-
-#: ../../harddrake/sound.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Помоћ"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -11191,7 +11197,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "There is currently no alternative possibiliy"
+msgid "Currently, no alternative possibility is available"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -15178,6 +15184,19 @@ msgstr "Уклони профил..."
 msgid "Network configuration (%d adapters)"
 msgstr "Подешавање мрежe (%d адаптерa)"
 
+#: ../../standalone/drakedm:1
+#, c-format
+msgid ""
+"X11 Display Manager allows you to graphically log\n"
+"into your system with the X Window System running and supports running\n"
+"several different X sessions on your local machine at the same time."
+msgstr ""
+
+#: ../../standalone/drakedm:1
+#, c-format
+msgid "Choosing a display manager"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid ""
@@ -15991,6 +16010,15 @@ msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "Жалим, али подржани су само 2.4 кернели."
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"No browser is installed on your system, Please install one if you want to "
+"browse the help system"
+msgstr ""
+"Ниједан претраживач није инсталиран. Молим Вас да инсталирате један да би "
+"могли да користите ситем ѕа помоћ"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "group :"
@@ -16156,6 +16184,111 @@ msgstr "корисник"
 #, c-format
 msgid "path"
 msgstr "путања"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Location of auto_install.cfg file"
+msgstr "Креирам ауто инсталациону дискету"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the auto_install.cfg file is located.\n"
+"\n"
+"Leave it blank if you do not want to set up automatic installation mode.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"No CD or DVD image found, please copy the installation program and rpm files."
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "No image found"
+msgstr "Није пронађен штампач!"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation image directory"
+msgstr "Xpmac (Инсталациja дисплеj драjвер)"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the installation image will be available.\n"
+"\n"
+"If you do not have an existing directory, please copy the CD or DVD "
+"contents.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP end ip"
+msgstr "DHCP крај распона"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP start ip"
+msgstr "DHCP почетак распона"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"The DHCP server will allow other computer to boot using PXE in the given "
+"range of address.\n"
+"\n"
+"The network address is %s using a netmask of %s.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Interface %s (on network %s)"
+msgstr "Интерфеjс %s (користeћи модул %s)"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Please choose which network interface will be used for the dhcp server."
+msgstr ""
+"Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid ""
+"You are about to configure your computer to install a PXE server as a DHCP "
+"server\n"
+"and a TFTP server to build an installation server.\n"
+"With that feature, other computers on your local network will be installable "
+"using from this computer.\n"
+"\n"
+"Make sure you have configured your Network/Internet access using drakconnect "
+"before going any further.\n"
+"\n"
+"Note: you need a dedicated Network Adapter to set up a Local Area Network "
+"(LAN)."
+msgstr ""
+"Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
+"са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
+"користeИнтернет конекциjу са овог рачунара.\n"
+"\n"
+"Проверите да ли је подешена ваша Мрежни/Интернет приступ преко drakconnect "
+"пре него што наставимо.\n"
+"\n"
+"Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу(LAN)."
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation Server Configuration"
+msgstr "dhcpd Сервер конфигурација"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "PXE Server Configuration"
+msgstr "dhcpd Сервер конфигурација"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17632,120 +17765,6 @@ msgstr "Неки уређаји су додани:\n"
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr "Неки уређаји у \"%s\" класи хардвера су уклоњени:\n"
 
-#: ../../standalone/drakhelp:1
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Ниједан претраживач није инсталиран. Молим Вас да инсталирате један да би "
-"могли да користите ситем ѕа помоћ"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Location of auto_install.cfg file"
-msgstr "Креирам ауто инсталациону дискету"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the auto_install.cfg file is located.\n"
-"\n"
-"Leave it blank if you do not want to set up automatic installation mode.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"No CD or DVD image found, please copy the installation program and rpm files."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "No image found"
-msgstr "Није пронађен штампач!"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation image directory"
-msgstr "Xpmac (Инсталациja дисплеj драjвер)"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the installation image will be available.\n"
-"\n"
-"If you do not have an existing directory, please copy the CD or DVD "
-"contents.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "The DHCP end ip"
-msgstr "DHCP крај распона"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "The DHCP start ip"
-msgstr "DHCP почетак распона"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"The DHCP server will allow other computer to boot using PXE in the given "
-"range of address.\n"
-"\n"
-"The network address is %s using a netmask of %s.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Interface %s (on network %s)"
-msgstr "Интерфеjс %s (користeћи модул %s)"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid ""
-"You are about to configure your computer to install a PXE server as a DHCP "
-"server\n"
-"and a TFTP server to build an installation server.\n"
-"With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
-"\n"
-"Make sure you have configured your Network/Internet access using drakconnect "
-"before going any further.\n"
-"\n"
-"Note: you need a dedicated Network Adapter to set up a Local Area Network "
-"(LAN)."
-msgstr ""
-"Вaш рачунар можете подесити за дeљeње његове Интернет конекциje.\n"
-"са овом опциjом, други компjутери на вaшоj локалноj мрeжи ће моћи да "
-"користeИнтернет конекциjу са овог рачунара.\n"
-"\n"
-"Проверите да ли је подешена ваша Мрежни/Интернет приступ преко drakconnect "
-"пре него што наставимо.\n"
-"\n"
-"Напоменa: потребанa вам jе мрeжна картица да би подесили локалну мрeжу(LAN)."
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation Server Configuration"
-msgstr "dhcpd Сервер конфигурација"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "PXE Server Configuration"
-msgstr "dhcpd Сервер конфигурација"
-
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
 msgstr "Радна(Office) станицa"
@@ -17988,6 +18007,9 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "FAT"
+#~ msgstr "FAT"
 
 #~ msgid "Local printers available on: "
 #~ msgstr "Локални штампачи су доступни на: "

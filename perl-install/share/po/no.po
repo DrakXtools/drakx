@@ -165,6 +165,11 @@ msgstr "Brukernavn"
 msgid "Real name"
 msgstr "Virkelig navn"
 
+#: ../../any.pm:1
+#, c-format
+msgid "Accept user"
+msgstr "Godta bruker"
+
 #: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #: ../../interactive/http.pm:1 ../../printer/printerdrake.pm:1
@@ -172,11 +177,6 @@ msgstr "Virkelig navn"
 #, c-format
 msgid "Done"
 msgstr "Ferdig"
-
-#: ../../any.pm:1
-#, c-format
-msgid "Accept user"
-msgstr "Godta bruker"
 
 #: ../../any.pm:1
 #, c-format
@@ -2738,15 +2738,6 @@ msgstr "Internett-konfigurasjon"
 msgid "System installation"
 msgstr "SILO-installasjon"
 
-#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
-#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
-#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
-#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/draksec:1
-#, c-format
-msgid "Ok"
-msgstr "Ok"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Bringing down the network"
@@ -3425,6 +3416,12 @@ msgstr "Oppdaterer pakkevalg"
 msgid "Load/Save on floppy"
 msgstr "Lagre på/hente fra diskett"
 
+#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "<- Previous"
+msgstr "<- Forrige"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3459,12 +3456,6 @@ msgstr "Du kan ikke fjerne denne pakken, den er allerede installert"
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
-
-#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
-#: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Other"
-msgstr "Andre"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -3514,6 +3505,12 @@ msgstr "Navn: %s\n"
 msgid "Bad package"
 msgstr "Dårlig pakke"
 
+#: ../../install_steps_gtk.pm:1 ../../mouse.pm:1 ../../services.pm:1
+#: ../../diskdrake/hd_gtk.pm:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Other"
+msgstr "Andre"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Total size: %d / %d MB"
@@ -3547,6 +3544,15 @@ msgstr ""
 "ved installering av Mandrake Linux. Hvis dette skjer kan du prøve tekst- "
 "installering\n"
 "i stedet. Trykk `F1' ved oppstart av CD-ROM, skriv så `text'."
+
+#: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/draksec:1
+#, c-format
+msgid "Ok"
+msgstr "Ok"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3770,6 +3776,11 @@ msgstr "Intet passord"
 #, c-format
 msgid "Set root password"
 msgstr "Sett root-passord"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "You have not configured X. Are you sure you really want this?"
+msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4979,12 +4990,6 @@ msgstr "Er dette riktig?"
 msgid "Finish"
 msgstr "Avslutt"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "<- Previous"
-msgstr "<- Forrige"
-
 #: ../../my_gtk.pm:1
 #, fuzzy, c-format
 msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -5824,9 +5829,9 @@ msgid "Select the memory size of your graphics card"
 msgstr "Velg minnestørrelsen til grafikk-kortet ditt"
 
 #: ../../Xconfig/card.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Your system support multiple head configuration.\n"
+"Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
 "Systemet ditt støtter konfigurasjon for flere hoder.\n"
@@ -6267,9 +6272,9 @@ msgid "Empty"
 msgstr "Tom"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "FAT"
-msgstr "FAT"
+#, fuzzy, c-format
+msgid "Windows"
+msgstr "NIS-domene"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6327,6 +6332,13 @@ msgstr "Velg handling"
 #, c-format
 msgid "Wizard"
 msgstr "Wizard"
+
+#: ../../diskdrake/hd_gtk.pm:1 ../../harddrake/sound.pm:1
+#: ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1
+#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
+#, c-format
+msgid "Help"
+msgstr "Hjelp"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -7373,12 +7385,6 @@ msgstr ""
 #, c-format
 msgid "Switching between ALSA and OSS help"
 msgstr "Endrer mellom ALSA og OSS hjelp"
-
-#: ../../harddrake/sound.pm:1 ../../standalone/drakTermServ:1
-#: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Help"
-msgstr "Hjelp"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10330,7 +10336,7 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "There is currently no alternative possibiliy"
+msgid "Currently, no alternative possibility is available"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -13874,6 +13880,19 @@ msgstr "Slett profil..."
 msgid "Network configuration (%d adapters)"
 msgstr "Nettverkskonfigurasjon (%d adaptere"
 
+#: ../../standalone/drakedm:1
+#, c-format
+msgid ""
+"X11 Display Manager allows you to graphically log\n"
+"into your system with the X Window System running and supports running\n"
+"several different X sessions on your local machine at the same time."
+msgstr ""
+
+#: ../../standalone/drakedm:1
+#, c-format
+msgid "Choosing a display manager"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid ""
@@ -14623,6 +14642,13 @@ msgstr "Deling av Internett tilkobling er slått på"
 msgid "Sorry, we support only 2.4 kernels."
 msgstr ""
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+"No browser is installed on your system, Please install one if you want to "
+"browse the help system"
+msgstr ""
+
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
 msgid "group :"
@@ -14782,6 +14808,111 @@ msgstr "Brukernavn"
 #, c-format
 msgid "path"
 msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Location of auto_install.cfg file"
+msgstr "Oppretter diskett for autoinstallasjon"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the auto_install.cfg file is located.\n"
+"\n"
+"Leave it blank if you do not want to set up automatic installation mode.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"No CD or DVD image found, please copy the installation program and rpm files."
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "No image found"
+msgstr "Ingen lokal skriver funnet!\n"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation image directory"
+msgstr "Xpmac (installasjons skjermdriver)"
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"Please indicate where the installation image will be available.\n"
+"\n"
+"If you do not have an existing directory, please copy the CD or DVD "
+"contents.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid "The DHCP end ip"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid "The DHCP start ip"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid ""
+"The DHCP server will allow other computer to boot using PXE in the given "
+"range of address.\n"
+"\n"
+"The network address is %s using a netmask of %s.\n"
+"\n"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Interface %s (on network %s)"
+msgstr "Grensesnitt %s (bruker modul %s)"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Please choose which network interface will be used for the dhcp server."
+msgstr ""
+"Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
+"mot Internett"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid ""
+"You are about to configure your computer to install a PXE server as a DHCP "
+"server\n"
+"and a TFTP server to build an installation server.\n"
+"With that feature, other computers on your local network will be installable "
+"using from this computer.\n"
+"\n"
+"Make sure you have configured your Network/Internet access using drakconnect "
+"before going any further.\n"
+"\n"
+"Note: you need a dedicated Network Adapter to set up a Local Area Network "
+"(LAN)."
+msgstr ""
+"Du er i ferd med å konfigurere maskinen din til å dele Internett-"
+"tilkobling.\n"
+"Andre maskiner i nettverket ditt vil da kunne bruke denne maskinens "
+"Internett tilkobling.\n"
+"\n"
+"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
+"nettverk (LAN)."
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "Installation Server Configuration"
+msgstr "LAN-konfigurasjon"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "PXE Server Configuration"
+msgstr "LAN-konfigurasjon"
 
 #: ../../standalone/draksec:1
 #, fuzzy, c-format
@@ -16164,118 +16295,6 @@ msgstr ""
 msgid "Some devices in the \"%s\" hardware class were removed:\n"
 msgstr ""
 
-#: ../../standalone/drakhelp:1
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Location of auto_install.cfg file"
-msgstr "Oppretter diskett for autoinstallasjon"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the auto_install.cfg file is located.\n"
-"\n"
-"Leave it blank if you do not want to set up automatic installation mode.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"No CD or DVD image found, please copy the installation program and rpm files."
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "No image found"
-msgstr "Ingen lokal skriver funnet!\n"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation image directory"
-msgstr "Xpmac (installasjons skjermdriver)"
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"Please indicate where the installation image will be available.\n"
-"\n"
-"If you do not have an existing directory, please copy the CD or DVD "
-"contents.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "The DHCP end ip"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "The DHCP start ip"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid ""
-"The DHCP server will allow other computer to boot using PXE in the given "
-"range of address.\n"
-"\n"
-"The network address is %s using a netmask of %s.\n"
-"\n"
-msgstr ""
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Interface %s (on network %s)"
-msgstr "Grensesnitt %s (bruker modul %s)"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Vennligst velg hvilket nettverksadapter du ønsker å bruke til å koble opp\n"
-"mot Internett"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid ""
-"You are about to configure your computer to install a PXE server as a DHCP "
-"server\n"
-"and a TFTP server to build an installation server.\n"
-"With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
-"\n"
-"Make sure you have configured your Network/Internet access using drakconnect "
-"before going any further.\n"
-"\n"
-"Note: you need a dedicated Network Adapter to set up a Local Area Network "
-"(LAN)."
-msgstr ""
-"Du er i ferd med å konfigurere maskinen din til å dele Internett-"
-"tilkobling.\n"
-"Andre maskiner i nettverket ditt vil da kunne bruke denne maskinens "
-"Internett tilkobling.\n"
-"\n"
-"Merk: du trenger et dedikert nettverksadapter for å sette opp et lokalt "
-"nettverk (LAN)."
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "Installation Server Configuration"
-msgstr "LAN-konfigurasjon"
-
-#: ../../standalone/drakpxe:1
-#, fuzzy, c-format
-msgid "PXE Server Configuration"
-msgstr "LAN-konfigurasjon"
-
 #: ../../share/compssUsers:999
 msgid "Office Workstation"
 msgstr "Kontor og arbeidsmaskin"
@@ -16518,6 +16537,9 @@ msgstr "Personlig finans"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "FAT"
+#~ msgstr "FAT"
 
 #, fuzzy
 #~ msgid "Local printers available on: "
