@@ -184,7 +184,7 @@ What would you like to do?"),
 #- * 1st step: detect/setup
 step_ask_confirm:
 
-undef $::Wizard_no_previous;
+$::Wizard_no_previous = 1;
     
 $direct or $in->ask_okcancel(N("Internet Connection Sharing"),
 N("You are about to configure your computer to share its Internet connection.
@@ -197,6 +197,8 @@ Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN).
 
 
 step_detectsetup:
+
+undef $::Wizard_no_previous;
 
 my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
 
