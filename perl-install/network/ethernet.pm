@@ -53,12 +53,16 @@ sub get_eth_cards() {
     my $saved_driver;
     return map {
         my $interface = $_;
+        my $description;
         my $a = c::getNetDriver($interface) || modules::get_alias($interface);
-        my $b = find { $_->{device} eq $interface } @devs;
-        $a ||= $b->{driver};
+        if (my $b = find { $_->{device} eq $interface } @devs) { # PCMCIA case
+            $a = $b->{driver};
+            $description = $b->{description};
+        } else {
+            ($description) = (mapIntfToDevice($interface))[0]->{description};
+        }
         $a and $saved_driver = $a; # handle multiple cards managed by the same driver
-        my ($device) = mapIntfToDevice($interface);
-        [ $interface, $saved_driver, if_($device, $device->{description}) ]
+        [ $interface, $saved_driver, if_($description, $description) ]
     } @all_cards;
 }
 
@@ -72,6 +76,7 @@ sub get_eth_cards_names {
 
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
 }
+
 
 #- conf_network_card_backend : configure the network cards and return the list of them, or configure one specified interface : WARNING, you have to setup the ethernet cards, by calling load_category($in, 'network/main|gigabit|usb', !$::expert, 1) or load_category_backend before calling this function. Basically, you call this function in 2 times.
 #- input
