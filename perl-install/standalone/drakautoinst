@@ -41,7 +41,7 @@ my $in = 'interactive'->vnew('su', 'default');
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
-my $imagefile = "/root/replay_install.img";
+my $imagefile = "/root/drakx/replay_install.img";
 -f $imagefile or $in->ask_okcancel(_("Error!"), 
 				   _("I can't find needed image file `%s'.", $imagefile), 1), quit_global($in, 0);
 
@@ -360,6 +360,11 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.17  2002/01/29 22:38:31  gc
+#- move /root/* files (ddebug.log, install.log, report.bug,
+#- auto_inst.cfg.pl, replay_install.img) to /root/drakx/,
+#- and also save stage1.log there
+#-
 #- Revision 1.16  2002/01/18 20:22:20  gc
 #- - write the 'common' part of the 'explanations' stuff,
 #-   with nice help from Pixel for the tough Perl part

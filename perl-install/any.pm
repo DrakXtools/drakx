@@ -376,7 +376,7 @@ sub rotate_log {
 }
 sub rotate_logs {
     my ($prefix) = @_;
-    rotate_log("$prefix/root/$_") foreach qw(ddebug.log install.log);
+    rotate_log("$prefix/root/drakx/$_") foreach qw(ddebug.log install.log);
 }
 
 sub writeandclean_ldsoconf {
@@ -891,17 +891,18 @@ sub report_bug {
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
-      header("pcmcia: stab"), cat_('/var/run/stab'), cat_('/var/lib/pcmcia/stab'),
+      header("pcmcia: stab"), cat_('/var/lib/pcmcia/stab') || cat_('/var/run/stab'),
       header("usb"), cat_("/proc/bus/usb/devices"),
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),
       header("ddcxinfos"), ddcxinfos(),
-      header("stage1.log"), cat_("/tmp/stage1.log"),
-      header("ddebug.log"), cat_("/tmp/ddebug.log"),
-      header("install.log"), cat_("$prefix/root/install.log"),
+      header("stage1.log"), cat_("/tmp/stage1.log") || cat_("$prefix/root/drakx/stage1.log"),
+      header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$prefix/root/drakx/ddebug.log"),
+      header("install.log"), cat_("$prefix/root/drakx/install.log"),
       header("fstab"), cat_("$prefix/etc/fstab"),
       header("modules.conf"), cat_("$prefix/etc/modules.conf"),
+      header("/etc/modules"), cat_("$prefix/etc/modules"),
       map_index { even($::i) ? header($_) : $_ } @other;
 }
 

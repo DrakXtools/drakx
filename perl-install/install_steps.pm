@@ -49,7 +49,7 @@ sub leavingStep {
     log::l("step `$step' finished");
 
     if (-d "$o->{prefix}/root") {
-	eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root") };
+	eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root/drakx") };
 	output(install_any::auto_inst_file(), install_any::g_auto_install());
     }
 
@@ -382,7 +382,7 @@ sub afterInstallPackages($) {
     die _("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
-") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/install.log");
+") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
 
     if (arch() !~ /^sparc/) { #- TODO restore it as may be needed for sparc
 	-x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
@@ -939,8 +939,15 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub exitInstall { 
     my ($o) = @_;
-    eval { output "$o->{prefix}/root/report.bug", install_any::report_bug($o->{prefix}) };
-    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/replay_install.img");
+    eval { output "$o->{prefix}/root/drakx/report.bug", install_any::report_bug($o->{prefix}) };
+    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img" );
+    eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
+mostly log files (very useful if you ever report a bug!).
+
+Beware that some Mandrake tools rely on the contents of some
+of these files... so remove any file from here at your own
+risk!
+" };
     install_any::unlockCdrom;
     install_any::log_sizes($o);
 }

@@ -167,11 +167,11 @@ not interesting.
   before graphical install really begins)
 - /tmp/ddebug.log: (nearly the) same as latter alt-F3 part
 - /tmp/syslog: same as alt-F4
-- /mnt/root/ddebug.log: at the end of each step, DrakX tries to backup
-  /tmp/ddebug.log to /mnt/root. Available only after mounting of /.
-- /mnt/root/install.log: the log of the installation (or upgrade) of the rpms
+- /mnt/root/drakx/ddebug.log: at the end of each step, DrakX tries to backup
+  /tmp/ddebug.log to /mnt/root/drakx. Available only after mounting of /.
+- /mnt/root/drakx/install.log: the log of the installation (or upgrade) of the rpms
 (just like rpm's /mnt/tmp/(install|upgrade).log)
-- /mnt/root/auto_inst.cfg.pl: a kickstart file generated at the end of each
+- /mnt/root/drakx/auto_inst.cfg.pl: a kickstart file generated at the end of each
 step. Can be used in 2 ways: kickstart install or ``defcfg'' install. Hopefully
 you know about kickstart. ``defcfg'' is a way to customize the default values in
 install. For example, French can be the default language with a qwerty keyboard,

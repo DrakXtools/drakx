@@ -183,7 +183,7 @@ sub formatPartitions {
 	etc/sysconfig/network-scripts etc/sysconfig/console/consolefonts 
 	etc/sysconfig/console/consoletrans
 	home mnt tmp var var/tmp var/lib var/lib/rpm var/lib/urpmi);
-    mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp);
+    mkdir "$o->{prefix}/$_", 0700 foreach qw(root root/tmp root/drakx);
 
     common::screenshot_dir__and_move();
 
@@ -626,8 +626,8 @@ sub main {
 
     -e "$o->{prefix}/usr/sbin/urpmi.update" or eval { rm_rf("$o->{prefix}/var/lib/urpmi") };
 
-    #- have the really bleeding edge ddebug.log
-    eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root") };
+    #- copy latest log files
+    eval { cp_af("/tmp/$_", "$o->{prefix}/root/drakx") foreach qw(ddebug.log stage1.log) };
 
     #- ala pixel? :-) [fpons]
     common::sync(); common::sync();
