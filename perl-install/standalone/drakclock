@@ -146,7 +146,7 @@ if (-e $ntpfile && -e $ntpdlock) {
     $ntp = timezone::ntp_server();
     $ntp and ntp_widget_state(1);
     foreach my $s (@$servers) {
-	$s =~ /\Q$ntp/ and $fullntp = $s;
+	$s =~ /^\Q$ntp / and $fullntp = $s;
 	$fullntp and last
     }
     $fullntp |= $ntp;
