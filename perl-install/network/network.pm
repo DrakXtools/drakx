@@ -68,7 +68,7 @@ sub write_conf {
     my ($file, $netc) = @_;
 
     if ($netc->{HOSTNAME}) {
-	$netc->{HOSTNAME} =~ /^[^\.]\.(.*)$/;
+	$netc->{HOSTNAME} =~ /\.(.*)$/;
 	$1 and $netc->{DOMAINNAME} = $1;
     }
     ($netc->{DOMAINNAME}) ||= 'localdomain';
@@ -301,6 +301,7 @@ notation (for example, 1.2.3.4).");
     my $pump = $intf->{BOOTPROTO} =~ /^(dhcp|bootp)$/;
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
+    my $onboot = 1;
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
@@ -309,6 +310,7 @@ notation (for example, 1.2.3.4).");
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
 	           { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
+	           { label => _("Started at boot"), val => \$onboot, type => "bool" },
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
@@ -347,6 +349,7 @@ notation (for example, 1.2.3.4).");
 	         	 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
 	         }
     	    );
+    $intf->{ONBOOT} = bool2yesno($onboot);
 }
 
 sub configureNetworkNet {
