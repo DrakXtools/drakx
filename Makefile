@@ -34,13 +34,13 @@ install_only:
 	cd $(IMAGES_DEST); md5sum *.{img,iso}* > MD5SUM
 
     ifeq (i386,$(ARCH))
-	rm -rf $(GENERIC_INSTALL_DEST)/isolinux
-	cp -af isolinux $(GENERIC_INSTALL_DEST)
+	rm -rf $(ROOTDEST)/isolinux
+	cp -af isolinux $(ROOTDEST)
     endif
 
     ifeq (x86_64,$(ARCH))
-	rm -rf $(GENERIC_INSTALL_DEST)/isolinux
-	cp -af isolinux $(GENERIC_INSTALL_DEST)
+	rm -rf $(ROOTDEST)/isolinux
+	cp -af isolinux $(ROOTDEST)
     endif
 
 	make -C perl-install full_stage2
@@ -82,7 +82,7 @@ upload_only:
 	upload $(IMAGES_DEST) '*.img*' ;\
 	upload $(IMAGES_DEST) '*.iso*' ;\
 	upload $(IMAGES_DEST)/alternatives '' ;\
-	upload $(GENERIC_INSTALL_DEST)/isolinux '' ;\
+	upload $(ROOTDEST)/isolinux '' ;\
 	echo
 
 isolinux-graphic.bmp.parameters: isolinux-graphic.bmp isolinux
