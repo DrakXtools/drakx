@@ -27,7 +27,7 @@ our %l = (
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet),
         qw(pcnet32 plip prism2_plx rcpci),
         qw(sb1000 sis900 skfp smc-ultra smc9194 starfire),
-        qw(tc35815 tlan tulip typhoon via-rhine),
+        qw(tc35815 tlan tulip typhoon uli526x via-rhine),
         qw(wd winbond-840 forcedeth),
         qw(sungem sunhme), # drivers for ultrasparc, but compiled in ix86 kernels...
       ),
