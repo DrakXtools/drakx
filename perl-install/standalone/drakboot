@@ -168,10 +168,8 @@ $thm_button->signal_connect('clicked',
                                 #lilo installation
                                 if (-f $themes{path}.$combo{lilo}->entry->get_text() . $themes{lilo}{file}) {
                                     use MDK::Common::File;
-                                    log::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
                                     cp_af($lilomsg, "/boot/message-graphic.old");
                                     #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-                                    log::explanations(N("Copy %s to %s", $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file},$lilomsg)); 
                                     cp_af($themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file}, $lilomsg);
                                     #can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
                                 } else {
@@ -179,7 +177,7 @@ $thm_button->signal_connect('clicked',
                                     $in->ask_warn(N("Error"), N("Lilo message not found"));
                                 }
                                 #bootsplash install
-                                if (-f $themes{path} . $combo{boot}->entry->get_text() . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
+                                if ($::testing || -f $themes{path} . $combo{boot}->entry->get_text() . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
                                     my $bootsplash_cont = "# -*- Mode: shell-script -*-
 # Specify here if you want add the splash logo to initrd when
 # generating an initrd. You can specify :
@@ -206,23 +204,22 @@ THEME=" . $combo{boot}->entry->get_text() . "
 LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                                     if (-f $boot_conf_file) {
                                         eval { output($boot_conf_file, $bootsplash_cont) };
-                                        $@ and $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash.")) or log::explanations(N("Write %s",$boot_conf_file));
+                                        $@ && $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash."));
                                     } else {
                                         $in->ask_warn(N("Error"), N("Can't write /etc/sysconfig/bootsplash\nFile not found."));
                                         $error = 1;
                                     }
                                 } else {
                                     $in->ask_warn("Error", "BootSplash screen not found");
+                                    return;
                                 }
                                 #here is mkinitrd time
-                                if (!$error) {
+                                if (!$error && !$::testing) {
                                     foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')) {
                                         if (system("mkinitrd -f /boot/initrd-$_.img $_")) {
                                             $in->ask_warn(N("Error"),
                                                           N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                                             $error = 1;
-                                        } else { 
-                                            log::explanations(N("Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'.", $_,$_));
                                         }
                                     }
                                 }
@@ -231,8 +228,6 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
                                                   N("Can't relaunch LiLo!
 Launch \"lilo\" as root in command line to complete LiLo theme installation."));
                                     $error = 1;
-                                } else {
-                                    log::explanations(N("Relaunch 'lilo'"));
                                 }
                                 $in->ask_warn($error ? N("Error") : N("Notice"),
                                               $error ? N("Theme installation failed!") : N("LiLo and Bootsplash themes installation successfull"));
@@ -322,7 +317,7 @@ sub lilo_choice {
     my ($all_hds) = fsedit::get_hds();
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     fs::merge_info_from_fstab($fstab);
- 
+
     $::expert=1;
     
   ask:
