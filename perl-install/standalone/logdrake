@@ -27,8 +27,6 @@ use interactive;
 use standalone;
 use any;
 use Config;
-init Gtk;
-Gtk->set_locale;
 use my_gtk qw(:helpers :wrappers);
 
 use MDK::Common;
@@ -53,6 +51,12 @@ sub translate {
 $::isInstall and die "Not supported during install.\n";
 
 my $in = 'interactive'->vnew('su', 'default');
+$::isGtk = $in->isa('interactive_gtk');
+exit unless ($::isGtk);
+
+init Gtk;
+Gtk->set_locale;
+
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 if ($::isEmbedded) {
@@ -121,6 +125,11 @@ my $b = Gtk::Gdk::Font->fontset_load(_("-misc-fixed-bold-r-*-*-*-100-*-*-*-*-*-*
 #$cyan     = "\033[36m";
 #$white    = "\033[37m";
 #$darkgray = "\033[30m";
+#$col_norm =             "\033[00m";
+#$col_background =       "\033[07m";
+#$col_brighten =         "\033[01m";
+#$col_underline =        "\033[04m";
+#$col_blink =            "\033[05m";
 
 my $white    = my_gtk::gtkcolor(50400, 655, 20000);
 my $black    = my_gtk::gtkcolor(0, 0, 0);
@@ -345,8 +354,6 @@ sub log_output {
 
 
 sub save {
-    #$file_dialog = new Gtk::FileSelection(_("Save as.."));
-    #$file_dialog->show();
     $yy= $in->ask_file(_("Save as.."),"/root") or return;
     output($yy,$log_text->get_chars(0,$log_text->get_length()));
 }
@@ -402,6 +409,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.2  2001/12/18 17:31:48  yduret
+# fix console mode : exit now
+#
 # Revision 1.1  2001/12/13 15:47:23  yduret
 # moving from soft/control-center to here, since there will be a console based version
 #
