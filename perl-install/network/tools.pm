@@ -2,6 +2,7 @@ package network::tools;
 
 use common;
 use run_program;
+use c;
 use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
