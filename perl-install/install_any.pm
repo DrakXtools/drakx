@@ -337,7 +337,6 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
-    push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
     push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
     push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
     push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
@@ -363,6 +362,7 @@ sub setDefaultPackages {
     $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
     $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
     $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
+    $o->{compssUsersChoice}{USB} = 1 if modules::get_alias("usb-interface");
     $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
     $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
