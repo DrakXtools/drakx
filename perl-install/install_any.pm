@@ -901,12 +901,14 @@ sub getAndSaveAutoInstallFloppies {
 		    s/\bautomatic=method:disk/$param/;
 		} "$mountdir/menu.lst";
 	    } elsif (-e "$mountdir/syslinux.cfg") {
+		#- make room first
+		unlink "$mountdir/help.msg", "$mountdir/boot.msg";
+
 		substInFile { 
 		    s/timeout.*/$replay ? 'timeout 1' : ''/e;
 		    s/^(\s*append)/$1 $param/ 
 		} "$mountdir/syslinux.cfg";
 
-		unlink "$mountdir/help.msg";
 		output "$mountdir/boot.msg", $replay ? '' : "\n0c" .
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost,
