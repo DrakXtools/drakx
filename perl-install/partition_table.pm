@@ -16,8 +16,8 @@ use partition_table_raw;
 use log;
 
 
-@important_types = ('Linux native', arch() =~ /i.86/ ? 'ReiserFS' : (), 'Linux swap', 'Win98 FAT32');
-@important_types2 = ('Linux RAID');
+@important_types = ('Linux native', 'Linux swap', if_(arch() =~ /i.86/, 'ReiserFS', 'DOS FAT16', 'Win98 FAT32'));
+@important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
 
@@ -194,8 +194,7 @@ my %fs2type = reverse %type2fs;
 1;
 
 sub important_types { 
-    my @l = $::expert ? sort values %types :
-      (@important_types, if_($::expert, @important_types2));
+    my @l = (@important_types, if_($::expert, @important_types2, sort values %types));
     difference2(\@l, \@bad_types);
 }
 
