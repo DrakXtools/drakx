@@ -17,7 +17,19 @@ use common;
 #- > $in->ask_okcancel('title', 'question');
 #- > $in->exit;
 
-#- ask_from_entries takes:
+#- ask_from_ takes global options ($common):
+#-  title                => window title
+#-  messages             => message displayed in the upper part of the window
+#-  advanced_messages    => message displayed when "Advanced" is pressed
+#-  ok                   => force the name of the "Ok"/"Next" button
+#-  cancel               => force the name of the "Cancel"/"Previous" button
+#-  advanced_label       => force the name of the "Advanced" button
+#-  advanced_label_close => force the name of the "Basic" button
+#-  focus_cancel         => force focus on the "Cancel" button
+#-  focus_first          => force focus on the first entry
+#-  callbacks            => functions called when something happen: complete canceled advanced changed focus_out ok_disabled
+
+#- ask_from_ takes a list of entries with fields:
 #-  val      => reference to the value
 #-  label    => description
 #-  icon     => icon to put before the description
