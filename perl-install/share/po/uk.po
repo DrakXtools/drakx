@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-16 13:34+0200\n"
-"PO-Revision-Date: 2000-09-07 17:26+09:00\n"
+"POT-Creation-Date: 2000-11-11 21:39+0100\n"
+"PO-Revision-Date: 2000-10-20 17:47+09:00\n"
 "Last-Translator: Dmytro Koval'ov <kov@tokyo.email.ne.jp>\n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
@@ -33,22 +33,22 @@ msgstr "X сервер"
 #: ../../Xconfigurator.pm_.c:217 ../../Xconfigurator.pm_.c:223
 #, c-format
 msgid "XFree %s"
-msgstr "XFree %s"
+msgstr "XFree86 %s"
 
 #: ../../Xconfigurator.pm_.c:220
-#, fuzzy
 msgid "Which configuration of XFree do you want to have?"
-msgstr "Який тип Ви хочете додати?"
+msgstr "Яку конф╕гурац╕ю XFree Ви хочете мати?"
 
 #: ../../Xconfigurator.pm_.c:232
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your card can have 3D hardware acceleration support but only with XFree %s.\n"
 "Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
-"Ваша в╕деоплата може користуватися апаратним 3D прискоренням граф╕ки\n"
-"але т╕льки з сервером XFree %s.\n"
-"Чи хочете Ви користуватися XFree 3.3 зам╕сть XFree 4.0?"
+"Ваша в╕деоплата може користуватися апаратним прискоренням\n"
+"трьохвим╕рно╖ граф╕ки але т╕льки з сервером XFree %s. Ваша в╕деоплата\n"
+"п╕дтриму╓ться сервером XFree %s, у якому Ви можливо матимете кращий\n"
+"супров╕д для двохвим╕рно╖ граф╕ки."
 
 #: ../../Xconfigurator.pm_.c:234 ../../Xconfigurator.pm_.c:257
 #, c-format
@@ -58,9 +58,9 @@ msgstr ""
 "але т╕льки з сервером XFree %s."
 
 #: ../../Xconfigurator.pm_.c:236 ../../Xconfigurator.pm_.c:259
-#, fuzzy, c-format
+#, c-format
 msgid "XFree %s with 3D hardware acceleration"
-msgstr "Чи хочете Ви користуватися апаратним 3D прискоренням граф╕ки?"
+msgstr "XFree %s з апаратним прискоренням трьохвим╕рно╖ граф╕ки"
 
 #: ../../Xconfigurator.pm_.c:245
 #, c-format
@@ -69,6 +69,10 @@ msgid ""
 "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.\n"
 "Your card is supported by XFree %s which may have a better support in 2D."
 msgstr ""
+"Ця в╕деоплата ма╓ п╕дтримку апаратного прискорення трьохвим╕рно╖\n"
+"граф╕ки, але т╕льки для XFree %s, В╤ДМ╤ТЬТЕ, ЩО ЦЕ ЕКСПЕРИМЕНТАЛЬНИЙ\n"
+"РЕЖИМ, ЯКИЙ МОЖЕ ПРИВЕСТИ ДО ЗАВИСАННЯ ВАШОГО КОМП'ЮТЕРА. Ваша плата\n"
+"п╕дтриму╓ться XFree %s, який ма╓ кращу п╕дтримку двовим╕рно╖ граф╕ки."
 
 #: ../../Xconfigurator.pm_.c:248
 #, c-format
@@ -76,34 +80,38 @@ msgid ""
 "Your card can have 3D hardware acceleration support with XFree %s,\n"
 "NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER."
 msgstr ""
+"Ця в╕деоплата ма╓ п╕дтримку апаратного прискорення трьохвим╕рно╖\n"
+"граф╕ки, але т╕льки для XFree %s, В╤ДМ╤ТЬТЕ, ЩО ЦЕ ЕКСПЕРИМЕНТАЛЬНИЙ\n"
+"РЕЖИМ, ЯКИЙ МОЖЕ ПРИВЕСТИ ДО ЗАВИСАННЯ ВАШОГО КОМП'ЮТЕРА."
 
 #: ../../Xconfigurator.pm_.c:250
 #, c-format
 msgid "XFree %s with EXPERIMENTAL 3D hardware acceleration"
 msgstr ""
+"XFree %s з ЕКСПЕРИМЕНТАЛЬНОЮ п╕дтримкою апаратного прискорення трьохвим╕рно╖ "
+"граф╕ки"
 
 #: ../../Xconfigurator.pm_.c:265
-#, fuzzy
 msgid "XFree configuration"
-msgstr "Конф╕╜урац╕я прокс╕"
+msgstr "Конф╕╜урац╕я XFree"
 
-#: ../../Xconfigurator.pm_.c:301
+#: ../../Xconfigurator.pm_.c:303
 msgid "Select the memory size of your graphic card"
 msgstr "Вибер╕ть розм╕р пам'ят╕ Вашо╖ граф╕чно╖ плати"
 
-#: ../../Xconfigurator.pm_.c:345
+#: ../../Xconfigurator.pm_.c:347
 msgid "Choose options for server"
 msgstr "Вибер╕ть параметри для сервера"
 
-#: ../../Xconfigurator.pm_.c:356
+#: ../../Xconfigurator.pm_.c:358
 msgid "Choose a monitor"
 msgstr "Вибер╕ть тип мон╕тору"
 
-#: ../../Xconfigurator.pm_.c:356
+#: ../../Xconfigurator.pm_.c:358
 msgid "Monitor"
 msgstr "Мон╕тор"
 
-#: ../../Xconfigurator.pm_.c:359
+#: ../../Xconfigurator.pm_.c:361
 msgid ""
 "The two critical parameters are the vertical refresh rate, which is the "
 "rate\n"
@@ -127,40 +135,41 @@ msgstr ""
 "Якщо Ви ма╓те сумн╕ви щодо характеристик свого мон╕тора вибер╕ть певно\n"
 "г╕рший мон╕тор."
 
-#: ../../Xconfigurator.pm_.c:366
+#: ../../Xconfigurator.pm_.c:368
 msgid "Horizontal refresh rate"
 msgstr "Частота горизонтально╖ розгортки"
 
-#: ../../Xconfigurator.pm_.c:366
+#: ../../Xconfigurator.pm_.c:368
 msgid "Vertical refresh rate"
 msgstr "Частота вертикально╖ розгортки"
 
-#: ../../Xconfigurator.pm_.c:405
+#: ../../Xconfigurator.pm_.c:407
 msgid "Monitor not configured"
 msgstr "Мон╕тор не сконф╕╜урований"
 
-#: ../../Xconfigurator.pm_.c:408
+#: ../../Xconfigurator.pm_.c:410
 msgid "Graphic card not configured yet"
 msgstr "В╕део плата ще не сконф╕╜урована"
 
-#: ../../Xconfigurator.pm_.c:411
+#: ../../Xconfigurator.pm_.c:413
 msgid "Resolutions not chosen yet"
 msgstr "Ви ще не вибрали розд╕льну здатн╕сть"
 
-#: ../../Xconfigurator.pm_.c:427
+#: ../../Xconfigurator.pm_.c:429
 msgid "Do you want to test the configuration?"
 msgstr "Чи Ви хочете випробувати нову конф╕╜урац╕ю?"
 
-#: ../../Xconfigurator.pm_.c:431
-#, fuzzy
+#: ../../Xconfigurator.pm_.c:433
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr "Увага!  Тестування ц╕╓╖ граф╕чно╖ плати небезпечне."
+msgstr ""
+"Увага!  Тестування ц╕╓╖ граф╕чно╖ плати може призвести до зависання\n"
+"Вашого комп'ютера."
 
-#: ../../Xconfigurator.pm_.c:434
+#: ../../Xconfigurator.pm_.c:436
 msgid "Test of the configuration"
 msgstr "Тестування конф╕╜урац╕╖"
 
-#: ../../Xconfigurator.pm_.c:473
+#: ../../Xconfigurator.pm_.c:475
 msgid ""
 "\n"
 "try to change some parameters"
@@ -168,169 +177,173 @@ msgstr ""
 "\n"
 "попробуйте зм╕нити деяк╕ характеристики"
 
-#: ../../Xconfigurator.pm_.c:473
+#: ../../Xconfigurator.pm_.c:475
 msgid "An error has occurred:"
 msgstr "Сталася помилка:"
 
-#: ../../Xconfigurator.pm_.c:495
+#: ../../Xconfigurator.pm_.c:497
 #, c-format
 msgid "Leaving in %d seconds"
 msgstr "Виходжу через %d секунд"
 
-#: ../../Xconfigurator.pm_.c:505
+#: ../../Xconfigurator.pm_.c:507
 msgid "Is this the correct setting?"
 msgstr "Це в╕рн╕ установки?"
 
-#: ../../Xconfigurator.pm_.c:513
+#: ../../Xconfigurator.pm_.c:515
 msgid "An error has occurred, try to change some parameters"
 msgstr "Сталася помилка, попробуйте зм╕нити деяк╕ характеристики"
 
-#: ../../Xconfigurator.pm_.c:550 ../../printerdrake.pm_.c:276
+#: ../../Xconfigurator.pm_.c:552 ../../printerdrake.pm_.c:276
 msgid "Resolution"
 msgstr "Розд╕льна здатн╕сть"
 
-#: ../../Xconfigurator.pm_.c:585
+#: ../../Xconfigurator.pm_.c:587
 msgid "Choose the resolution and the color depth"
 msgstr "Вибер╕ть розд╕льну здатн╕сть та к╕льк╕сть кольор╕в"
 
-#: ../../Xconfigurator.pm_.c:587
+#: ../../Xconfigurator.pm_.c:589
 #, c-format
 msgid "Graphic card: %s"
 msgstr "В╕део плата: %s"
 
-#: ../../Xconfigurator.pm_.c:588
+#: ../../Xconfigurator.pm_.c:590
 #, c-format
 msgid "XFree86 server: %s"
 msgstr "Сервер XFree86: %s"
 
-#: ../../Xconfigurator.pm_.c:597
+#: ../../Xconfigurator.pm_.c:599
 msgid "Show all"
 msgstr "Показати все"
 
-#: ../../Xconfigurator.pm_.c:621
+#: ../../Xconfigurator.pm_.c:623
 msgid "Resolutions"
 msgstr "Розд╕льн╕ здатност╕"
 
-#: ../../Xconfigurator.pm_.c:1019
+#: ../../Xconfigurator.pm_.c:1021
 #, c-format
 msgid "Keyboard layout: %s\n"
 msgstr "Розкладка клав╕атури: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1020
+#: ../../Xconfigurator.pm_.c:1022
 #, c-format
 msgid "Mouse type: %s\n"
 msgstr "Тип миш╕: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1021
+#: ../../Xconfigurator.pm_.c:1023
 #, c-format
 msgid "Mouse device: %s\n"
 msgstr "Спец╕альний пристр╕й миш╕: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1022
+#: ../../Xconfigurator.pm_.c:1024
 #, c-format
 msgid "Monitor: %s\n"
 msgstr "Мон╕тор: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1023
+#: ../../Xconfigurator.pm_.c:1025
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Горизонтальна синхрон╕зац╕я мон╕тора: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1024
+#: ../../Xconfigurator.pm_.c:1026
 #, c-format
 msgid "Monitor VertRefresh: %s\n"
 msgstr "Частота вертикально╖ розгортки мон╕тора: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1025
+#: ../../Xconfigurator.pm_.c:1027
 #, c-format
 msgid "Graphic card: %s\n"
 msgstr "В╕део плата: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1026
+#: ../../Xconfigurator.pm_.c:1028
 #, c-format
 msgid "Graphic memory: %s kB\n"
 msgstr "В╕део пам'я╕ть: %sкб\n"
 
-#: ../../Xconfigurator.pm_.c:1028
-#, fuzzy, c-format
+#: ../../Xconfigurator.pm_.c:1030
+#, c-format
 msgid "Color depth: %s\n"
-msgstr "Опц╕╖ глибини кольору"
-
-#: ../../Xconfigurator.pm_.c:1029
-#, fuzzy, c-format
-msgid "Resolution: %s\n"
-msgstr "Розд╕льн╕ здатност╕"
+msgstr "Глибина кольору: %s\n"
 
 #: ../../Xconfigurator.pm_.c:1031
+#, c-format
+msgid "Resolution: %s\n"
+msgstr "Розд╕льна здатн╕сть: %s\n"
+
+#: ../../Xconfigurator.pm_.c:1033
 #, c-format
 msgid "XFree86 server: %s\n"
 msgstr "X сервер: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1032
-#, fuzzy, c-format
+#: ../../Xconfigurator.pm_.c:1034
+#, c-format
 msgid "XFree86 driver: %s\n"
-msgstr "X сервер: %s\n"
+msgstr "XFree86 драйвер: %s\n"
 
-#: ../../Xconfigurator.pm_.c:1051
+#: ../../Xconfigurator.pm_.c:1053
 msgid "Preparing X-Window configuration"
 msgstr "П╕дготовка конф╕гурац╕╖ X-Window"
 
-#: ../../Xconfigurator.pm_.c:1065
+#: ../../Xconfigurator.pm_.c:1067
 msgid "Change Monitor"
 msgstr "Зм╕н╕ть мон╕тор"
 
-#: ../../Xconfigurator.pm_.c:1066
+#: ../../Xconfigurator.pm_.c:1068
 msgid "Change Graphic card"
 msgstr "Зм╕н╕ть в╕део плату"
 
-#: ../../Xconfigurator.pm_.c:1067
+#: ../../Xconfigurator.pm_.c:1069
 msgid "Change Server options"
 msgstr "Зм╕н╕ть параметри сервера"
 
-#: ../../Xconfigurator.pm_.c:1068
+#: ../../Xconfigurator.pm_.c:1070
 msgid "Change Resolution"
 msgstr "Зм╕н╕ть розд╕льну здатн╕сть"
 
-#: ../../Xconfigurator.pm_.c:1069
+#: ../../Xconfigurator.pm_.c:1071
 msgid "Show information"
 msgstr "Показ ╕нформац╕╖"
 
-#: ../../Xconfigurator.pm_.c:1070
+#: ../../Xconfigurator.pm_.c:1072
 msgid "Test again"
 msgstr "Ще один тест"
 
-#: ../../Xconfigurator.pm_.c:1071 ../../standalone/rpmdrake_.c:46
+#: ../../Xconfigurator.pm_.c:1073 ../../standalone/rpmdrake_.c:46
 msgid "Quit"
 msgstr "Вих╕д"
 
-#: ../../Xconfigurator.pm_.c:1075 ../../standalone/drakboot_.c:40
+#: ../../Xconfigurator.pm_.c:1077 ../../standalone/drakboot_.c:40
 msgid "What do you want to do?"
 msgstr "Як Ви хочете насто╖ти свою систему"
 
-#: ../../Xconfigurator.pm_.c:1082
-#, fuzzy, c-format
+#: ../../Xconfigurator.pm_.c:1084
+#, c-format
 msgid ""
 "Keep the changes?\n"
 "Current configuration is:\n"
 "\n"
 "%s"
-msgstr "Використовувати ╕снуючу конф╕гурац╕ю IP"
+msgstr ""
+"Зберегти зм╕ни?\n"
+"╤снуюча конф╕гурац╕я:\n"
+"\n"
+"%s"
 
-#: ../../Xconfigurator.pm_.c:1103
+#: ../../Xconfigurator.pm_.c:1105
 #, c-format
 msgid "Please relog into %s to activate the changes"
 msgstr "Заре╓струйтеся, будь-ласка, ще раз у %s щоб привести у д╕ю зм╕ни"
 
-#: ../../Xconfigurator.pm_.c:1123
+#: ../../Xconfigurator.pm_.c:1125
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr ""
 "Будь-ласка, вийд╕ть ╕з системи ╕ пот╕м скористуйтеся Ctrl-Alt-BackSpace"
 
-#: ../../Xconfigurator.pm_.c:1126
+#: ../../Xconfigurator.pm_.c:1128
 msgid "X at startup"
 msgstr "Стартувати X автоматично"
 
-#: ../../Xconfigurator.pm_.c:1127
+#: ../../Xconfigurator.pm_.c:1129
 msgid ""
 "I can set up your computer to automatically start X upon booting.\n"
 "Would you like X to start when you reboot?"
@@ -339,11 +352,11 @@ msgstr ""
 "п╕сля завантаження системи.\n"
 "Чи Ви хочете, щоб X стартував автоматично?"
 
-#: ../../Xconfigurator.pm_.c:1151
+#: ../../Xconfigurator.pm_.c:1153
 msgid "Autologin"
 msgstr "Авторе╓страц╕я"
 
-#: ../../Xconfigurator.pm_.c:1152
+#: ../../Xconfigurator.pm_.c:1154
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -352,14 +365,13 @@ msgstr ""
 "п╕сля завантаження системи.\n"
 "Якщо  Ви не хочете скористуватися ц╕╓ю можлив╕стю, клацн╕ть на \"В╕дм╕нити\"."
 
-#: ../../Xconfigurator.pm_.c:1154
+#: ../../Xconfigurator.pm_.c:1156
 msgid "Choose the default user:"
 msgstr "Вибер╕ть стандартного користувача:"
 
-#: ../../Xconfigurator.pm_.c:1155
-#, fuzzy
+#: ../../Xconfigurator.pm_.c:1157
 msgid "Choose the window manager to run:"
-msgstr "Вибер╕ть засоби, якими Ви хочете користуватися"
+msgstr "Вибер╕ть менеджер в╕кон, яким Ви хочете користуватися"
 
 #: ../../Xconfigurator_consts.pm_.c:6
 msgid "256 colors (8 bits)"
@@ -461,105 +473,114 @@ msgstr "Мон╕тор, що може працювати з режимами до 1600x1200 at 70 Hz"
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr "Мон╕тор, що може працювати з режимами до 1600x1200 at 76 Hz"
 
-#: ../../any.pm_.c:91 ../../any.pm_.c:121
+#: ../../any.pm_.c:91 ../../any.pm_.c:121 ../../any_new.pm_.c:91
+#: ../../any_new.pm_.c:121
 msgid "First sector of boot partition"
 msgstr "Перший сектор системного п╕дрозд╕лу (boot partition)"
 
 #: ../../any.pm_.c:91 ../../any.pm_.c:121 ../../any.pm_.c:150
+#: ../../any_new.pm_.c:91 ../../any_new.pm_.c:121 ../../any_new.pm_.c:150
 msgid "First sector of drive (MBR)"
 msgstr "Перший сектор диску (MBR)"
 
-#: ../../any.pm_.c:95
+#: ../../any.pm_.c:95 ../../any_new.pm_.c:95
 msgid "SILO Installation"
 msgstr "Установка SILO"
 
-#: ../../any.pm_.c:96 ../../any.pm_.c:102
+#: ../../any.pm_.c:96 ../../any.pm_.c:102 ../../any_new.pm_.c:96
+#: ../../any_new.pm_.c:102
 msgid "Where do you want to install the bootloader?"
 msgstr "Де Ви хочете встановити стартовий блок?"
 
-#: ../../any.pm_.c:101
+#: ../../any.pm_.c:101 ../../any_new.pm_.c:101
 msgid "LILO/grub Installation"
 msgstr "Установка LILO/grub"
 
-#: ../../any.pm_.c:111 ../../install_steps_interactive.pm_.c:732
+#: ../../any.pm_.c:111 ../../any_new.pm_.c:111
+#: ../../install_steps_interactive.pm_.c:736
 msgid "None"
 msgstr "Н╕чого"
 
-#: ../../any.pm_.c:111
+#: ../../any.pm_.c:111 ../../any_new.pm_.c:111
 msgid "Which bootloader(s) do you want to use?"
 msgstr "Який завантажувач Ви хочете використовувати?"
 
-#: ../../any.pm_.c:125
+#: ../../any.pm_.c:125 ../../any_new.pm_.c:125
 msgid "Bootloader installation"
 msgstr "Установка завантажувача"
 
-#: ../../any.pm_.c:127
+#: ../../any.pm_.c:127 ../../any_new.pm_.c:127
 msgid "Boot device"
 msgstr "Пристр╕й завантаження"
 
-#: ../../any.pm_.c:128
+#: ../../any.pm_.c:128 ../../any_new.pm_.c:128
 msgid "LBA (doesn't work on old BIOSes)"
 msgstr "LBA (не працю╓ ╕з старими BIOS'ами)"
 
-#: ../../any.pm_.c:129
+#: ../../any.pm_.c:129 ../../any_new.pm_.c:129
 msgid "Compact"
 msgstr "Компактний"
 
-#: ../../any.pm_.c:129
+#: ../../any.pm_.c:129 ../../any_new.pm_.c:129
 msgid "compact"
 msgstr "компактний"
 
-#: ../../any.pm_.c:130 ../../any.pm_.c:199
+#: ../../any.pm_.c:130 ../../any.pm_.c:199 ../../any_new.pm_.c:130
+#: ../../any_new.pm_.c:199
 msgid "Video mode"
 msgstr "В╕део режим"
 
-#: ../../any.pm_.c:132
+#: ../../any.pm_.c:132 ../../any_new.pm_.c:132
 msgid "Delay before booting default image"
 msgstr "Пауза перед завантаженням основно╖ системи"
 
-#: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
-#: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
-#: ../../standalone/adduserdrake_.c:42
+#: ../../any.pm_.c:134 ../../any_new.pm_.c:134
+#: ../../install_steps_interactive.pm_.c:764
+#: ../../install_steps_interactive.pm_.c:815 ../../netconnect.pm_.c:560
+#: ../../netconnect_new.pm_.c:686 ../../printerdrake.pm_.c:94
+#: ../../printerdrake.pm_.c:128 ../../standalone/adduserdrake_.c:42
 msgid "Password"
 msgstr "Пароль"
 
-#: ../../any.pm_.c:135 ../../install_steps_interactive.pm_.c:761
-#: ../../install_steps_interactive.pm_.c:812
+#: ../../any.pm_.c:135 ../../any_new.pm_.c:135
+#: ../../install_steps_interactive.pm_.c:765
+#: ../../install_steps_interactive.pm_.c:816
 #: ../../standalone/adduserdrake_.c:43
 msgid "Password (again)"
 msgstr "Пароль (ще раз)"
 
-#: ../../any.pm_.c:136
+#: ../../any.pm_.c:136 ../../any_new.pm_.c:136
 msgid "Restrict command line options"
 msgstr "Обмежити опц╕╖ командного рядка"
 
-#: ../../any.pm_.c:136
+#: ../../any.pm_.c:136 ../../any_new.pm_.c:136
 msgid "restrict"
 msgstr "обмежити"
 
-#: ../../any.pm_.c:142
+#: ../../any.pm_.c:142 ../../any_new.pm_.c:142
 msgid "Bootloader main options"
 msgstr "Основн╕ опц╕╖ завантажувача"
 
-#: ../../any.pm_.c:145
+#: ../../any.pm_.c:145 ../../any_new.pm_.c:145
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr "Опц╕я ``Обмежити опц╕╖ командного рядка'' не ма╓ сенсу без пароля"
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:770
-#: ../../install_steps_interactive.pm_.c:825
+#: ../../any.pm_.c:146 ../../any_new.pm_.c:146
+#: ../../install_steps_interactive.pm_.c:774
+#: ../../install_steps_interactive.pm_.c:829
 #: ../../standalone/adduserdrake_.c:56
 msgid "Please try again"
 msgstr "Будь-ласка, спробуйте ще раз"
 
-#: ../../any.pm_.c:146 ../../install_steps_interactive.pm_.c:770
-#: ../../install_steps_interactive.pm_.c:825
+#: ../../any.pm_.c:146 ../../any_new.pm_.c:146
+#: ../../install_steps_interactive.pm_.c:774
+#: ../../install_steps_interactive.pm_.c:829
 #: ../../standalone/adduserdrake_.c:56
 msgid "The passwords do not match"
 msgstr "Парол╕ р╕зн╕"
 
-#: ../../any.pm_.c:157
+#: ../../any.pm_.c:157 ../../any_new.pm_.c:157
 msgid ""
 "Here are the different entries.\n"
 "You can add some more or change the existing ones."
@@ -567,139 +588,143 @@ msgstr ""
 "Тут наведен╕ р╕зноман╕тн╕ пункти.\n"
 "Ви можете або додати ще деяк╕, або зм╕нити т╕, що вже ╕снують."
 
-#: ../../any.pm_.c:165 ../../printerdrake.pm_.c:352
+#: ../../any.pm_.c:165 ../../any_new.pm_.c:165 ../../printerdrake.pm_.c:352
 #: ../../standalone/rpmdrake_.c:302
 msgid "Add"
 msgstr "Додати"
 
-#: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
-#: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
+#: ../../any.pm_.c:165 ../../any_new.pm_.c:165 ../../diskdrake.pm_.c:46
+#: ../../install_steps_interactive.pm_.c:809 ../../netconnect.pm_.c:842
+#: ../../netconnect_new.pm_.c:984 ../../printerdrake.pm_.c:352
+#: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Зак╕нчено"
 
-#: ../../any.pm_.c:174
+#: ../../any.pm_.c:174 ../../any_new.pm_.c:174
 msgid "Which type of entry do you want to add?"
 msgstr "Який тип Ви хочете додати?"
 
-#: ../../any.pm_.c:175
+#: ../../any.pm_.c:175 ../../any_new.pm_.c:175
 msgid "Linux"
 msgstr "Л╕накс"
 
-#: ../../any.pm_.c:175
+#: ../../any.pm_.c:175 ../../any_new.pm_.c:175
 msgid "Other OS (SunOS...)"
 msgstr "╤нш╕ системи (SunOS...)"
 
-#: ../../any.pm_.c:175
+#: ../../any.pm_.c:175 ../../any_new.pm_.c:175
 msgid "Other OS (windows...)"
 msgstr "╤нш╕ системи (windows...)"
 
-#: ../../any.pm_.c:196
+#: ../../any.pm_.c:196 ../../any_new.pm_.c:196
 msgid "Image"
 msgstr "Образ"
 
-#: ../../any.pm_.c:197 ../../any.pm_.c:206
+#: ../../any.pm_.c:197 ../../any.pm_.c:206 ../../any_new.pm_.c:197
+#: ../../any_new.pm_.c:206
 msgid "Root"
 msgstr "Root"
 
-#: ../../any.pm_.c:198
+#: ../../any.pm_.c:198 ../../any_new.pm_.c:198
 msgid "Append"
 msgstr "При╓днати"
 
-#: ../../any.pm_.c:200
+#: ../../any.pm_.c:200 ../../any_new.pm_.c:200
 msgid "Initrd"
 msgstr "Initrd"
 
-#: ../../any.pm_.c:201
+#: ../../any.pm_.c:201 ../../any_new.pm_.c:201
 msgid "Read-write"
 msgstr "Запис/читання"
 
-#: ../../any.pm_.c:208
+#: ../../any.pm_.c:208 ../../any_new.pm_.c:208
 msgid "Table"
 msgstr "Таблиця"
 
-#: ../../any.pm_.c:209
+#: ../../any.pm_.c:209 ../../any_new.pm_.c:209
 msgid "Unsafe"
 msgstr "Небезпечно"
 
-#: ../../any.pm_.c:215
+#: ../../any.pm_.c:215 ../../any_new.pm_.c:215
 msgid "Label"
 msgstr "Етикетка"
 
-#: ../../any.pm_.c:217
+#: ../../any.pm_.c:217 ../../any_new.pm_.c:217
 msgid "Default"
 msgstr "Основна"
 
-#: ../../any.pm_.c:220 ../../install_gtk.pm_.c:82
-#: ../../install_steps_interactive.pm_.c:758 ../../interactive.pm_.c:76
+#: ../../any.pm_.c:220 ../../any_new.pm_.c:220 ../../install_gtk.pm_.c:82
+#: ../../install_steps_interactive.pm_.c:762 ../../interactive.pm_.c:76
 #: ../../interactive.pm_.c:86 ../../interactive.pm_.c:250
 #: ../../interactive_newt.pm_.c:51 ../../interactive_newt.pm_.c:99
 #: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:243
-#: ../../my_gtk.pm_.c:486 ../../my_gtk.pm_.c:661 ../../printerdrake.pm_.c:398
-#: ../../printerdrake.pm_.c:418
+#: ../../my_gtk.pm_.c:486 ../../my_gtk.pm_.c:661 ../../printerdrake.pm_.c:444
+#: ../../printerdrake.pm_.c:464
 msgid "Ok"
 msgstr "Гаразд"
 
-#: ../../any.pm_.c:220
+#: ../../any.pm_.c:220 ../../any_new.pm_.c:220
 msgid "Remove entry"
 msgstr "Стерти пункт"
 
-#: ../../any.pm_.c:223
+#: ../../any.pm_.c:223 ../../any_new.pm_.c:223
 msgid "Empty label not allowed"
 msgstr "Не дозволяються пуст╕ етикетки"
 
-#: ../../any.pm_.c:224
+#: ../../any.pm_.c:224 ../../any_new.pm_.c:224
 msgid "This label is already used"
 msgstr "Ця етикетка вже використову╓ться"
 
-#: ../../any.pm_.c:500
+#: ../../any.pm_.c:500 ../../any_new.pm_.c:492
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Знайден╕ ╕нтерфейси %s %s"
 
-#: ../../any.pm_.c:501
+#: ../../any.pm_.c:501 ../../any_new.pm_.c:493
 msgid "Do you have another one?"
 msgstr "Чи Ви ма╓те ╕нш╕?"
 
-#: ../../any.pm_.c:502
+#: ../../any.pm_.c:502 ../../any_new.pm_.c:494
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Чи Ви ма╓те будь-як╕ %s ╕нтерфейси?"
 
-#: ../../any.pm_.c:504 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:90 ../../netconnect.pm_.c:465
+#: ../../any.pm_.c:504 ../../any_new.pm_.c:496 ../../interactive.pm_.c:81
+#: ../../my_gtk.pm_.c:485 ../../netconnect.pm_.c:90 ../../netconnect.pm_.c:470
+#: ../../netconnect_new.pm_.c:148 ../../netconnect_new.pm_.c:509
 #: ../../printerdrake.pm_.c:233
 msgid "No"
 msgstr "Н╕"
 
-#: ../../any.pm_.c:504 ../../interactive.pm_.c:81 ../../my_gtk.pm_.c:485
-#: ../../netconnect.pm_.c:88 ../../netconnect.pm_.c:463
+#: ../../any.pm_.c:504 ../../any_new.pm_.c:496 ../../interactive.pm_.c:81
+#: ../../my_gtk.pm_.c:485 ../../netconnect.pm_.c:88 ../../netconnect.pm_.c:468
+#: ../../netconnect_new.pm_.c:146 ../../netconnect_new.pm_.c:507
 msgid "Yes"
 msgstr "Так"
 
-#: ../../any.pm_.c:505
+#: ../../any.pm_.c:505 ../../any_new.pm_.c:497
 msgid "See hardware info"
 msgstr "Перегляньте ╕нформац╕ю про апаратне забезпечення"
 
 #. -PO: the first %s is the card type (scsi, network, sound,...)
 #. -PO: the second is the vendor+model name
-#: ../../any.pm_.c:522
+#: ../../any.pm_.c:522 ../../any_new.pm_.c:533
 #, c-format
 msgid "Installing driver for %s card %s"
 msgstr "Встановлюю драйвер для %s плати %s"
 
-#: ../../any.pm_.c:523
+#: ../../any.pm_.c:523 ../../any_new.pm_.c:534
 #, c-format
 msgid "(module %s)"
 msgstr "(модуль %s)"
 
 #. -PO: the %s is the driver type (scsi, network, sound,...)
-#: ../../any.pm_.c:534
+#: ../../any.pm_.c:534 ../../any_new.pm_.c:545
 #, c-format
 msgid "Which %s driver should I try?"
 msgstr "Який драйвер %s мен╕ спробувати?"
 
-#: ../../any.pm_.c:542
+#: ../../any.pm_.c:542 ../../any_new.pm_.c:553
 #, c-format
 msgid ""
 "In some cases, the %s driver needs to have extra information to work\n"
@@ -717,20 +742,20 @@ msgstr ""
 "випробовування може привести до зависання комп'ютера, але не повинно\n"
 "н╕як зашкодити йому."
 
-#: ../../any.pm_.c:547
+#: ../../any.pm_.c:547 ../../any_new.pm_.c:558
 msgid "Autoprobe"
 msgstr "Автотест"
 
-#: ../../any.pm_.c:547
+#: ../../any.pm_.c:547 ../../any_new.pm_.c:558
 msgid "Specify options"
 msgstr "Вкаж╕ть опц╕╖"
 
-#: ../../any.pm_.c:551
+#: ../../any.pm_.c:551 ../../any_new.pm_.c:562
 #, c-format
 msgid "You may now provide its options to module %s."
 msgstr "Тепер Ви можете надати його опц╕╖ для модуля %s."
 
-#: ../../any.pm_.c:557
+#: ../../any.pm_.c:557 ../../any_new.pm_.c:568
 #, c-format
 msgid ""
 "You may now provide its options to module %s.\n"
@@ -741,11 +766,11 @@ msgstr ""
 "Опц╕╖ мають формат ``назва=величина назва2=величина2 ...''.\n"
 "Наприклад, ``io=0x300 irq=7''"
 
-#: ../../any.pm_.c:560
+#: ../../any.pm_.c:560 ../../any_new.pm_.c:571
 msgid "Module options:"
 msgstr "Опц╕╖ модуля:"
 
-#: ../../any.pm_.c:570
+#: ../../any.pm_.c:570 ../../any_new.pm_.c:581
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -768,12 +793,12 @@ msgid ""
 "wait %d seconds for default boot.\n"
 "\n"
 msgstr ""
-"Ласкаво просимо до %s - перемикача операц╕йних систем!\n"
+"Laskavo prosymo do %s - peremykacha operaciynih system!\n"
 "\n"
-"Щоб перечислити можлив╕ системи натисн╕ть <TAB>.\n"
+"Shchob perechislyty mozhlyvi systemy natysnit' <TAB>.\n"
 "\n"
-"Щоб стартувати одну з них, надрукуйте ╖╖ назву ╕ натисн╕ть <ENTER> або\n"
-"почекайте %d секунд поки почне вантажитися перша з них.\n"
+"Shchob startubaty odnu z ynh, nadrukujte ii nazvu i natysnit' <ENTER> abo\n"
+"pochekajte %d sekund poki pochne vantazhytysja persha z inh.\n"
 "\n"
 
 # NOTE: this message will be displayed by grub at boot time; that is
@@ -788,23 +813,57 @@ msgstr ""
 msgid "Welcome to GRUB the operating system chooser!"
 msgstr "Laskavo prosymo do prohramy vyboru operacijnoyi systemy GRUB!"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../bootloader.pm_.c:597
 #, c-format
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
-msgstr "Для вибору п╕дсв╕ченого пункту користуйтеся клав╕шами %c та %c."
+msgstr "Dlja vyboru pidsvichenogo punktu korystujtesja klavishamy %c ta %c."
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../bootloader.pm_.c:598
 msgid "Press enter to boot the selected OS, 'e' to edit the"
-msgstr "Натисн╕ть enter щоб завантажити вибрану систему, 'e' щоб редагувати"
+msgstr ""
+"Natysnit' enter shchob zavantazhyty vibranu systemu, 'e' shchob redaguvaty"
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../bootloader.pm_.c:599
 msgid "commands before booting, or 'c' for a command-line."
-msgstr "команди перед завантаженням, та 'c' для переходу в командний режим."
+msgstr ""
+"komandy pered zavantazhennjam, ta 'c' dlja perehodu v komandnyj rezhim."
 
+# NOTE: this message will be displayed by grub at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+#
+# The lines must fit on screen, aka length < 80
+# and only one line per string for the GRUB messages
+#
 #: ../../bootloader.pm_.c:600
 #, c-format
 msgid "The highlighted entry will be booted automatically in %d seconds."
-msgstr "П╕дсв╕чена система завантажиться автоматично через %d секунд."
+msgstr "Pidsvichena systema zavantazhyt'sja avtomatichno cherez %d sekund."
 
 #: ../../bootloader.pm_.c:604
 msgid "not enough room in /boot"
@@ -822,18 +881,18 @@ msgstr "Стартове меню"
 #: ../../common.pm_.c:610
 #, c-format
 msgid "%d minutes"
-msgstr ""
+msgstr "%d хвилин"
 
 #: ../../common.pm_.c:612
 msgid "1 minute"
-msgstr ""
+msgstr "1 хвилина"
 
 #: ../../common.pm_.c:614
 #, c-format
 msgid "%d seconds"
 msgstr "%d секунд"
 
-#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:419
+#: ../../diskdrake.pm_.c:21 ../../diskdrake.pm_.c:427
 msgid "Create"
 msgstr "Створити"
 
@@ -841,7 +900,7 @@ msgstr "Створити"
 msgid "Unmount"
 msgstr "Розмонтувати"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:421
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:429
 msgid "Delete"
 msgstr "Стерти"
 
@@ -849,16 +908,16 @@ msgstr "Стерти"
 msgid "Format"
 msgstr "Форматувати"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:602
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:610
 msgid "Resize"
 msgstr "Зм╕нити розм╕р"
 
-#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:419
-#: ../../diskdrake.pm_.c:472
+#: ../../diskdrake.pm_.c:23 ../../diskdrake.pm_.c:427
+#: ../../diskdrake.pm_.c:480
 msgid "Type"
 msgstr "Тип"
 
-#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:492
+#: ../../diskdrake.pm_.c:24 ../../diskdrake.pm_.c:500
 msgid "Mount point"
 msgstr "Точка монтування"
 
@@ -884,7 +943,7 @@ msgstr "Записати в файл"
 
 #: ../../diskdrake.pm_.c:43
 msgid "Wizard"
-msgstr ""
+msgstr "Пом╕чник"
 
 #: ../../diskdrake.pm_.c:44
 msgid "Restore from floppy"
@@ -997,8 +1056,8 @@ msgid "Please make a backup of your data first"
 msgstr "Будь-ласка, створ╕ть спочатку резерну коп╕ю Ваших даних"
 
 #: ../../diskdrake.pm_.c:149 ../../diskdrake.pm_.c:166
-#: ../../diskdrake.pm_.c:175 ../../diskdrake.pm_.c:524
-#: ../../diskdrake.pm_.c:546
+#: ../../diskdrake.pm_.c:175 ../../diskdrake.pm_.c:532
+#: ../../diskdrake.pm_.c:554
 msgid "Read carefully!"
 msgstr "Читайте уважно!"
 
@@ -1022,7 +1081,7 @@ msgstr "Обережно: ця операц╕я небезпечна."
 msgid "Error"
 msgstr "Помилка"
 
-#: ../../diskdrake.pm_.c:227 ../../diskdrake.pm_.c:694
+#: ../../diskdrake.pm_.c:227 ../../diskdrake.pm_.c:708
 msgid "Mount point: "
 msgstr "Точка монтування: "
 
@@ -1133,35 +1192,35 @@ msgstr "Тип таблиц╕ п╕дрозд╕л╕в: %s\n"
 msgid "on bus %d id %d\n"
 msgstr "на шин╕ %d id %d\n"
 
-#: ../../diskdrake.pm_.c:287
+#: ../../diskdrake.pm_.c:290
 msgid "Mount"
 msgstr "Монтувати"
 
-#: ../../diskdrake.pm_.c:288
+#: ../../diskdrake.pm_.c:292
 msgid "Active"
 msgstr "Активна"
 
-#: ../../diskdrake.pm_.c:289
+#: ../../diskdrake.pm_.c:294
 msgid "Add to RAID"
 msgstr "Додати до RAID"
 
-#: ../../diskdrake.pm_.c:290
+#: ../../diskdrake.pm_.c:296
 msgid "Remove from RAID"
 msgstr "Видалити з RAID"
 
-#: ../../diskdrake.pm_.c:291
+#: ../../diskdrake.pm_.c:298
 msgid "Modify RAID"
 msgstr "Зм╕нити RAID"
 
-#: ../../diskdrake.pm_.c:292
+#: ../../diskdrake.pm_.c:300
 msgid "Use for loopback"
 msgstr "Використовувати для зворотнього монтування"
 
-#: ../../diskdrake.pm_.c:299
+#: ../../diskdrake.pm_.c:307
 msgid "Choose action"
 msgstr "Вибер╕ть д╕ю"
 
-#: ../../diskdrake.pm_.c:392
+#: ../../diskdrake.pm_.c:400
 msgid ""
 "Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
 "1024).\n"
@@ -1173,7 +1232,7 @@ msgstr ""
 "Або Ви будете користуватися LILO ╕ в╕н не буде працювати, або Ви не\n"
 "будете користуватися LILO, тод╕ Вам не потр╕бна директор╕я /boot"
 
-#: ../../diskdrake.pm_.c:396
+#: ../../diskdrake.pm_.c:404
 msgid ""
 "The partition you've selected to add as root (/) is physically located "
 "beyond\n"
@@ -1185,7 +1244,7 @@ msgstr ""
 "цього Ви не ма╓те вид╕леного п╕дрозд╕лу п╕д директор╕ю /boot.  Якщо ви\n"
 "плану╓те використовувати LILO, не забудьте додати п╕дрозд╕л для /boot"
 
-#: ../../diskdrake.pm_.c:402
+#: ../../diskdrake.pm_.c:410
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
@@ -1195,16 +1254,16 @@ msgstr ""
 "Завантажувач╕ не мжоуть працювати з такими п╕дрозд╕лами без п╕дрозд╕лу\n"
 "/boot. Тож, будь-ласка, не забудьте додати п╕дрозд╕л /boot."
 
-#: ../../diskdrake.pm_.c:419 ../../diskdrake.pm_.c:421
+#: ../../diskdrake.pm_.c:427 ../../diskdrake.pm_.c:429
 #, c-format
 msgid "Use ``%s'' instead"
 msgstr "Зам╕сть цього скористайтеся ``%s''"
 
-#: ../../diskdrake.pm_.c:424
+#: ../../diskdrake.pm_.c:432
 msgid "Use ``Unmount'' first"
 msgstr "Спочатку скористуйтеся ``Розмонтувати''"
 
-#: ../../diskdrake.pm_.c:425 ../../diskdrake.pm_.c:467
+#: ../../diskdrake.pm_.c:433 ../../diskdrake.pm_.c:475
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
@@ -1212,42 +1271,41 @@ msgstr ""
 "П╕сля зм╕ни типу п╕дрозд╕лу диску %s, вс╕ дан╕ на цьому п╕дрозд╕л╕ \n"
 "будуть втрачен╕"
 
-#: ../../diskdrake.pm_.c:437
+#: ../../diskdrake.pm_.c:445
 msgid "Continue anyway?"
 msgstr "Все-таки продовжувати?"
 
-#: ../../diskdrake.pm_.c:442
+#: ../../diskdrake.pm_.c:450
 msgid "Quit without saving"
 msgstr "Вийти без запису"
 
-#: ../../diskdrake.pm_.c:442
+#: ../../diskdrake.pm_.c:450
 msgid "Quit without writing the partition table?"
 msgstr "Вийти без запису таблиц╕ п╕дрозд╕л╕в?"
 
-#: ../../diskdrake.pm_.c:470
+#: ../../diskdrake.pm_.c:478
 msgid "Change partition type"
 msgstr "Зм╕нити тип п╕дрозд╕лу"
 
-#: ../../diskdrake.pm_.c:471
-#, fuzzy
+#: ../../diskdrake.pm_.c:479
 msgid "Which filesystem do you want?"
-msgstr "Яку мову Ви вибира╓те?"
+msgstr "Яку файлову систему Ви вибира╓те?"
 
-#: ../../diskdrake.pm_.c:474 ../../diskdrake.pm_.c:726
+#: ../../diskdrake.pm_.c:482 ../../diskdrake.pm_.c:740
 msgid "You can't use ReiserFS for partitions smaller than 32MB"
 msgstr "ReiserFS не можна користуватися на п╕дрозд╕лах розм╕ром менше 32Мб."
 
-#: ../../diskdrake.pm_.c:490
+#: ../../diskdrake.pm_.c:498
 #, c-format
 msgid "Where do you want to mount loopback file %s?"
 msgstr "Де Ви хочете змонтувати файл зворонього монтування %s?"
 
-#: ../../diskdrake.pm_.c:491
+#: ../../diskdrake.pm_.c:499
 #, c-format
 msgid "Where do you want to mount device %s?"
 msgstr "Де Ви хочете змонтувати пристр╕й %s?"
 
-#: ../../diskdrake.pm_.c:496
+#: ../../diskdrake.pm_.c:504
 msgid ""
 "Can't unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
@@ -1256,151 +1314,151 @@ msgstr ""
 "використову╓ться для зворотнього монтування. Спочатку в╕дм╕н╕ть\n"
 "зворотн╓ монтування."
 
-#: ../../diskdrake.pm_.c:515
+#: ../../diskdrake.pm_.c:523
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
 msgstr ""
 "П╕сля форматування п╕дрозд╕лу %s, вс╕ дан╕ на цьому п╕дрозд╕л╕ \n"
 "будуть втрачен╕"
 
-#: ../../diskdrake.pm_.c:517
+#: ../../diskdrake.pm_.c:525
 msgid "Formatting"
 msgstr "Форматування"
 
-#: ../../diskdrake.pm_.c:518
+#: ../../diskdrake.pm_.c:526
 #, c-format
 msgid "Formatting loopback file %s"
 msgstr "Форматування файлу зворотнього монтування %s"
 
-#: ../../diskdrake.pm_.c:519 ../../install_steps_interactive.pm_.c:402
+#: ../../diskdrake.pm_.c:527 ../../install_steps_interactive.pm_.c:402
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматування п╕дрозд╕лу %s"
 
-#: ../../diskdrake.pm_.c:524
+#: ../../diskdrake.pm_.c:532
 msgid "After formatting all partitions,"
 msgstr "П╕сля форматування вс╕х п╕дрозд╕л╕в,"
 
-#: ../../diskdrake.pm_.c:524
+#: ../../diskdrake.pm_.c:532
 msgid "all data on these partitions will be lost"
 msgstr "вс╕ дан╕ на цих п╕дрозд╕лах буде втрачено"
 
-#: ../../diskdrake.pm_.c:530
+#: ../../diskdrake.pm_.c:538
 msgid "Move"
 msgstr "Перем╕стити"
 
-#: ../../diskdrake.pm_.c:531
+#: ../../diskdrake.pm_.c:539
 msgid "Which disk do you want to move it to?"
 msgstr "На який диск Ви хочете перем╕ститися?"
 
-#: ../../diskdrake.pm_.c:532
+#: ../../diskdrake.pm_.c:540
 msgid "Sector"
 msgstr "Сектор"
 
-#: ../../diskdrake.pm_.c:533
+#: ../../diskdrake.pm_.c:541
 msgid "Which sector do you want to move it to?"
 msgstr "На який сектор перем╕ститися?"
 
-#: ../../diskdrake.pm_.c:536
+#: ../../diskdrake.pm_.c:544
 msgid "Moving"
 msgstr "Перем╕щення"
 
-#: ../../diskdrake.pm_.c:536
+#: ../../diskdrake.pm_.c:544
 msgid "Moving partition..."
 msgstr "Перем╕щаю п╕дрозд╕л..."
 
-#: ../../diskdrake.pm_.c:546
+#: ../../diskdrake.pm_.c:554
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "Таблиця п╕дрозд╕л╕в диску %s буде записано на диск"
 
-#: ../../diskdrake.pm_.c:548
+#: ../../diskdrake.pm_.c:556
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Щоб зм╕ни почали д╕яти Вам сл╕д перевантажити комп'ютер"
 
-#: ../../diskdrake.pm_.c:569
+#: ../../diskdrake.pm_.c:577
 msgid "Computing FAT filesystem bounds"
 msgstr "Обчислюю меж╕ п╕дрозд╕лу FAT"
 
-#: ../../diskdrake.pm_.c:569 ../../diskdrake.pm_.c:629
+#: ../../diskdrake.pm_.c:577 ../../diskdrake.pm_.c:637
 #: ../../install_interactive.pm_.c:107
 msgid "Resizing"
 msgstr "Зм╕нюю розм╕р"
 
-#: ../../diskdrake.pm_.c:592
+#: ../../diskdrake.pm_.c:600
 #, fuzzy
 msgid "This partition is not resizeable"
 msgstr "Розм╕р якого п╕дрозд╕лу Ви хочете зм╕нити?"
 
-#: ../../diskdrake.pm_.c:597
+#: ../../diskdrake.pm_.c:605
 msgid "All data on this partition should be backed-up"
 msgstr "Потр╕бно зберегти вс╕ дан╕ на цьому п╕дрозд╕л╕"
 
-#: ../../diskdrake.pm_.c:599
+#: ../../diskdrake.pm_.c:607
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
 "П╕сля зм╕ни розм╕ру п╕дрозд╕лу %s, вс╕ дан╕ на цьому п╕дрозд╕л╕ будуть\n"
 "втрачен╕"
 
-#: ../../diskdrake.pm_.c:609
+#: ../../diskdrake.pm_.c:617
 msgid "Choose the new size"
 msgstr "Вибер╕ть новий розм╕р"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../diskdrake.pm_.c:617 ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
 #: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Мб"
 
-#: ../../diskdrake.pm_.c:666
+#: ../../diskdrake.pm_.c:674
 msgid "Create a new partition"
 msgstr "Створити новий розд╕л"
 
-#: ../../diskdrake.pm_.c:686
+#: ../../diskdrake.pm_.c:700
 msgid "Start sector: "
 msgstr "Початок (сектор): "
 
-#: ../../diskdrake.pm_.c:690 ../../diskdrake.pm_.c:765
+#: ../../diskdrake.pm_.c:704 ../../diskdrake.pm_.c:779
 msgid "Size in MB: "
 msgstr "Розм╕р (Мб): "
 
-#: ../../diskdrake.pm_.c:693 ../../diskdrake.pm_.c:768
+#: ../../diskdrake.pm_.c:707 ../../diskdrake.pm_.c:782
 msgid "Filesystem type: "
 msgstr "Тип п╕дрозд╕лу: "
 
-#: ../../diskdrake.pm_.c:696
+#: ../../diskdrake.pm_.c:710
 msgid "Preference: "
 msgstr "Установки: "
 
-#: ../../diskdrake.pm_.c:744
+#: ../../diskdrake.pm_.c:758
 msgid "This partition can't be used for loopback"
 msgstr "Цей п╕дрозд╕л не може використовуватися для зворотнього монтування"
 
-#: ../../diskdrake.pm_.c:754
+#: ../../diskdrake.pm_.c:768
 msgid "Loopback"
 msgstr "Зворотн╓ монтування"
 
-#: ../../diskdrake.pm_.c:764
+#: ../../diskdrake.pm_.c:778
 msgid "Loopback file name: "
 msgstr "Назва файлу зворотнього монтування: "
 
-#: ../../diskdrake.pm_.c:790
+#: ../../diskdrake.pm_.c:804
 msgid "File already used by another loopback, choose another one"
 msgstr ""
 "╤нший пристр╕й зворотнього монтування вже користу╓ться цим\n"
 "файлом. Вибер╕ть ╕нший."
 
-#: ../../diskdrake.pm_.c:791
+#: ../../diskdrake.pm_.c:805
 msgid "File already exists. Use it?"
 msgstr "Файл вже ╕сну╓. Користуватися ним?"
 
-#: ../../diskdrake.pm_.c:813 ../../diskdrake.pm_.c:829
+#: ../../diskdrake.pm_.c:827 ../../diskdrake.pm_.c:843
 msgid "Select file"
 msgstr "Вибер╕ть файл"
 
-#: ../../diskdrake.pm_.c:822
+#: ../../diskdrake.pm_.c:836
 msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
@@ -1408,11 +1466,11 @@ msgstr ""
 "Авар╕йна таблиця п╕дрозд╕л╕в ма╓ ╕нший розм╕р\n"
 "Продовжувати?"
 
-#: ../../diskdrake.pm_.c:830
+#: ../../diskdrake.pm_.c:844
 msgid "Warning"
 msgstr "Попередження"
 
-#: ../../diskdrake.pm_.c:831
+#: ../../diskdrake.pm_.c:845
 msgid ""
 "Insert a floppy in drive\n"
 "All data on this floppy will be lost"
@@ -1420,27 +1478,27 @@ msgstr ""
 "Вставте дискету в дисков╕д\n"
 "Вс╕ дан╕ на ц╕й дискет╕ будуть втрачен╕"
 
-#: ../../diskdrake.pm_.c:842
+#: ../../diskdrake.pm_.c:856
 msgid "Trying to rescue partition table"
 msgstr "Пробую в╕дновити таблицю п╕дрозд╕л╕в"
 
-#: ../../diskdrake.pm_.c:853
+#: ../../diskdrake.pm_.c:867
 msgid "device"
 msgstr "пристр╕й"
 
-#: ../../diskdrake.pm_.c:854
+#: ../../diskdrake.pm_.c:868
 msgid "level"
 msgstr "р╕вень"
 
-#: ../../diskdrake.pm_.c:855
+#: ../../diskdrake.pm_.c:869
 msgid "chunk size"
 msgstr "розм╕р д╕лянки"
 
-#: ../../diskdrake.pm_.c:867
+#: ../../diskdrake.pm_.c:881
 msgid "Choose an existing RAID to add to"
 msgstr "Вибер╕ть ╕снуючий RAID, до якого додати"
 
-#: ../../diskdrake.pm_.c:868
+#: ../../diskdrake.pm_.c:882
 msgid "new"
 msgstr "новий"
 
@@ -1479,7 +1537,7 @@ msgstr "Кругов╕ точки монтування %s\n"
 
 #: ../../fsedit.pm_.c:258
 msgid "This directory should remain within the root filesystem"
-msgstr ""
+msgstr "Цей каталог ма╓ знаходитись на коренев╕й файлов╕й систем╕"
 
 #: ../../fsedit.pm_.c:259
 msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
@@ -1505,14 +1563,14 @@ msgid "You don't have any partitions!"
 msgstr "У Вас нема╓ жодного п╕дрозд╕лу!"
 
 #: ../../help.pm_.c:9
-#, fuzzy
 msgid ""
 "Please choose your preferred language for installation and system usage."
 msgstr ""
-"Вибер╕ть мову, яку Ви будете вживати при встановленн╕ системи та при\n"
-"користуванн╕ системою"
+"Вибер╕ть основну мову, яку Ви будете вживати при встановленн╕ системи\n"
+"та при користуванн╕ системою"
 
 #: ../../help.pm_.c:12
+#, fuzzy
 msgid ""
 "You need to accept the terms of the above license to continue installation.\n"
 "\n"
@@ -1524,6 +1582,16 @@ msgid ""
 "end without modifying your current\n"
 "configuration."
 msgstr ""
+"Ви ма╓те погодитись з умовами л╕ценз╕╖, подано╖ вище для того, щоб\n"
+"продовжувати установку.\n"
+"\n"
+"Будь-ласка, клацн╕ть мишкою на Погоджуюсь, якщо Ви погоджу╓тесь з умовами "
+"л╕ценз╕╖.\n"
+"\n"
+"\n"
+"Будь-ласка, клацн╕ть  мишкою на Не погоджуюсь, якщо  Ви погоджу╓тесь з\n"
+"умовами  л╕ценз╕╖.  Установка  припиниться  без зм╕ни  Вашо╖  поточно╖\n"
+"конф╕гурац╕╖."
 
 #: ../../help.pm_.c:22
 msgid "Choose the layout corresponding to your keyboard from the list above"
@@ -1536,8 +1604,13 @@ msgid ""
 "chose\n"
 "them in list above. If you want select all, you just need to select \"All\"."
 msgstr ""
+"Якщо Ви хочете, щоб у Ваш╕й систем╕ п╕сля установки були присутн╕ми\n"
+"╕нш╕ мови (кр╕м то╖, яку Ви вже вибрали на початку установки),\n"
+"вибер╕ть ╖х, будь-ласка, з поданого списку. Якщо Ви хочете вибрати вс╕\n"
+"мови, Ви можете просто вибрати пункт \"Вс╕\"."
 
 #: ../../help.pm_.c:30
+#, fuzzy
 msgid ""
 "Please choose \"Install\" if there are no previous version of "
 "Linux-Mandrake\n"
@@ -1575,6 +1648,42 @@ msgid ""
 "knowledge in GNU/Linux. So, don't choose\n"
 "\t  this installation class unless you know what you are doing."
 msgstr ""
+"Вибер╕ть, будь-ласка, \"Установка\", якщо Ви не ма╓те попередньо╖ верс╕╖\n"
+"Мандрейк Л╕накса встановленого на Вашому комп'ютер╕ або якщо Ви хочете\n"
+"мати к╕лька операц╕йних систем.\n"
+"\n"
+"Якщо Ви хочете поновити вже встановлену верс╕ю Мандрейк Л╕накса на\n"
+"сво╓му комп'ютер╕, вибер╕ть, будь-ласка, \"Поновлення\".\n"
+"\n"
+"В залежност╕ в╕д Вашого р╕вня знань системи GNU/Linux Ви можете\n"
+"вибрати один ╕з наступних р╕вн╕в складност╕ установки чи поновлення\n"
+"Вашо╖ системи Мандрейк Л╕накс:\n"
+"\n"
+"        * Рекомендований: Вибирайте цей пункт, якщо Ви н╕коли в житт╕\n"
+"        не встановлювали операц╕йно╖ системи GNU/Linux. Установка буде дуже\n"
+"        проста, ╕ Вам доведеться дати в╕дпов╕дь т╕льки на к╕лька запитань.\n"
+"\n"
+"        * Спец╕альний: Якщо Ви достатньою м╕рою знайом╕ з операц╕йною\n"
+"        системою GNU/Linux, можете вибрати основний режим використання "
+"Вашо╖\n"
+"        системи (робоча станц╕я, сервер, розробка). Вам потр╕бно буде\n"
+"        в╕дпов╕сти на б╕льше запитань, н╕ж при установц╕ типу\n"
+"        \"Рекомендований\", тобто Вам потр╕бно знати, як працю╓ Gnu/Linux, "
+"щоб\n"
+"        вибрати цей клас установки.\n"
+"        \n"
+"        * Експерт: якщо Ви ма╓те глибок╕ знання системи GNU/Linux,\n"
+"        можете вибрати цей клас установки. Так само, як ╕ в клас╕\n"
+"        \"Спец╕альний\", в╕д Вас буде вимагатися вибрати основний тип\n"
+"        використання ц╕╓╖ системи (робоча станц╕я, сервер, розробка). "
+"Будьте\n"
+"        дуже уважними вибираючи цей клас установки. Ви зможете виконати\n"
+"        ун╕кальну установку системи. В╕дпов╕д╕ на запитання можуть бути "
+"дуже\n"
+"        важкими, якщо Ви не волод╕╓те глибокими знаннями системи\n"
+"        GNU/Linux. Отже, не вибирайте цей клас установки, якщо Ви не певн╕, "
+"що\n"
+"        це саме те, що Вам потр╕бно. "
 
 #: ../../help.pm_.c:56
 msgid ""
@@ -1594,6 +1703,7 @@ msgid ""
 msgstr ""
 "Вибер╕ть:\n"
 "\n"
+"\n"
 "  - Спец╕альний: Якщо Ви знайом╕ з Л╕наксом, Ви зможете встановити\n"
 "    р╕вень використання встановлених пакет╕в так╕, як звичайний, розробник\n"
 "    та сервер. Вибер╕ть \"Звичайний\", для звичайного використання системи,\n"
@@ -1603,14 +1713,15 @@ msgstr ""
 "    якщо Ви хочете встановити сервер загального призначення (для\n"
 "    електронно╖ пошти, принт-сервер...).\n"
 "\n"
-"\n"
 "  - Експерт: Якщо Ви в╕льно почува╓те в середовищ╕ GNU/Linux ╕ хочете\n"
 "    встановити систему, так як Вам хочеться - цей спос╕б устновки для\n"
 "    Вас. Ви зможете встановити опц╕ю використання Вашо╖ системи, як\n"
-"    \"Спец╕альне\""
+"    \"Спец╕альне\"\n"
+"\n"
+"    Але, ьудь-ласка, НЕ ВИБИРАЙТЕ ОСТАНН╤Й РЕЖИМ, КР╤М ТОГО ВИПАДКУ,\n"
+"    ЯКЩО ВИ СПРАВД╤ РОЗУМ╤╢ТЕСЬ НА ТОМУ, ЩО ВИ РОБИТЕ.  "
 
 #: ../../help.pm_.c:68
-#, fuzzy
 msgid ""
 "You must now define your machine usage. Choices are:\n"
 "\n"
@@ -1636,7 +1747,7 @@ msgstr ""
 "Р╕зн╕ вар╕анти для користування Вашою системою (якщо Ви вибрали клас\n"
 "установки \"Спец╕альний\" або \"Експерт\") так╕:\n"
 "\n"
-"  - Звичайна: вибер╕ть це, якщо ви збира╓тесь використовувати Вашу\n"
+"  - Робоча станц╕я: вибер╕ть це, якщо ви збира╓тесь використовувати Вашу\n"
 "    машину в остновному для щоденно╖ роботи (оф╕сна робота, обробка\n"
 "    граф╕ки тощо). Не чекайте, що будуть встановлен╕ як╕-небудь\n"
 "    комп╕лятори, програми розробки, тощо.\n"
@@ -1651,10 +1762,9 @@ msgstr ""
 "    встановлю╓те Mandrake Л╕накс, як сервер. Або як файл сервер (NFS або\n"
 "    SMB), сервер принтера (типу Юн╕кс lp або типу Windows SMB принтера),\n"
 "    як сервер аутентикац╕╖ (NIS), сервер бази даних, тощо. Отже, не\n"
-"    чекайте, що як╕сь примочки (типу KDE, GNOME...) будуть встановлен╕.\n"
+"    чекайте, що як╕сь примочки (типу KDE, GNOME...) будуть встановлен╕."
 
 #: ../../help.pm_.c:84
-#, fuzzy
 msgid ""
 "DrakX will attempt to look for PCI SCSI adapter(s). If DrakX\n"
 "finds an SCSI adapter and knows which driver to use, it will be "
@@ -1702,12 +1812,14 @@ msgstr ""
 "опц╕╖. Звично це працю╓ нормально.\n"
 "\n"
 "Якщо це не спрацю╓, Вам сл╕д вказати потр╕бн╕ опц╕╖ для\n"
-"драйвера. Перегляньте \"Пос╕бник по установц╕\" щоб мати уяву про те, як\n"
-"д╕знатися про потр╕бн╕ параметри з Windows (якщо Ви ма╓те цю систему\n"
-"на сво╓му комп'ютер╕), з документац╕╖ по апаратному забезпеченню або з\n"
-"домашньо╖ стор╕нки виробника апаратури."
+"драйвера. Перегляньте \"Пос╕бник по установц╕\" (Розд╕л 3, п╕дрозд╕л\n"
+"\"Знаходження ╕нформац╕╖ про Вашу апаратуру\"), з документац╕╖ по\n"
+"апаратному забезпеченню або з домашньо╖ стор╕нки виробника апаратури\n"
+"або д╕знайтеся потр╕бн╕ параметри з Windows (якщо Ви ма╓те цю систему\n"
+"на сво╓му комп'ютер╕)."
 
 #: ../../help.pm_.c:108
+#, fuzzy
 msgid ""
 "At this point, you need to choose where to install your\n"
 "Linux-Mandrake operating system on your hard drive. If it is empty or if an\n"
@@ -1777,8 +1889,68 @@ msgid ""
 "lose all your data very easily. So,\n"
 "\t  don't choose this solution unless you know what you are doing."
 msgstr ""
+"Тепер Ви ма╓те вибрати де саме Ви б хот╕ли встановити свою систему\n"
+"Мандрейк Л╕накс на жорсткому диску.  Якщо диск пустий, або якщо в╕н\n"
+"повн╕стю зайнятий ╕ншою операц╕йною системою, Вам потр╕бно буде\n"
+"перерозпод╕лити диск. Фактично, перерозпод╕л жорсткого диску означа╓,\n"
+"що диск буде розд╕лено на лог╕чн╕ п╕дрозд╕ли, для того, щоб створити\n"
+"прост╕р для установки Мандрейк Л╕накса.\n"
+"\n"
+"Через те, що насл╕дки в╕д перерозпод╕лу диску звичайно незворотн╕, ця\n"
+"операц╕я може бути хвилюючою для недосв╕дченого користувача.\n"
+"\n"
+"Цей пом╕чник спрощу╓ процес. Перш, н╕ж починати перерозпод╕л диску,\n"
+"проконсультуйтесь з пос╕бником користувача.\n"
+"\n"
+"Вам потр╕бно буде, як м╕н╕мум два п╕дрозд╕ли. Один -- для операц╕йно╖\n"
+"системи ╕ ╕нший для в╕ртуально╖ пам`ят╕, яка часто зветься областю\n"
+"своп╕н╜у.\n"
+"\n"
+"\n"
+"Якщо п╕дрозд╕ли вже було визначено (в╕д попередньо╖ установки або за\n"
+"допомогою ╕ншо╖ програми розпод╕лу диск╕в), Вам потр╕бно буде вибрати\n"
+"ц╕ п╕дрозд╕ли для увстановлення операц╕йно╖ системи Л╕накс на цих\n"
+"п╕дрозд╕лах.\n"
+"\n"
+"Якщо так╕ п╕дрозд╕ли ще не були визначен╕, Вам потр╕бно буде ╖х\n"
+"створити. Для цього Ви можете скористуватися пом╕чником, який Ви\n"
+"бачите вгор╕. В залежност╕ в╕д конф╕╜угац╕╖ Вашого жорсткого диску, Ви\n"
+"можете мати к╕лька р╕зних вар╕ант╕в конф╕╜урац╕╖.\n"
+"\n"
+"* Користуватися ╕снуючими п╕дрозд╕лами: пом╕чник виявив один або\n"
+"б╕льше п╕дрозд╕л╕в Л╕накса на Вашому жорсткому диску. Якщо Ви хочете\n"
+"зберегти ц╕ п╕дрозд╕ли, вибер╕ть цей пункт.\n"
+"\n"
+"\n"
+"* Стерти весь диск: якщо Ви хочете стерти вс╕ дан╕ на вс╕х п╕дрозд╕лах\n"
+"Вашого жорсткого диску ╕ зам╕нити ╖х новою системою Мандрейк Л╕накс,\n"
+"можете вибрати цю опц╕ю. Будьте уважн╕, бо вибравши цей\n"
+"режим, Ви вже не зможете повернутись назад.\n"
+"\n"
+"* Скористуватись в╕льним простором на п╕дрозд╕л╕ операц╕йно╖ системи\n"
+"Windows: якщо на комп'ютер╕ встановлена операц╕йна система Microsoft\n"
+"Windows ╕ вона займа╓ весь прост╕р на Вашому жорсткому диску, Ви\n"
+"повинн╕ створити в╕льний прост╕р на диску для Л╕накса. Це можна\n"
+"зробити, стерши повн╕стю всю систему Windows (див. \"Стерти весь диск\"\n"
+"або режим установки \"Кксперт\") або зм╕нивши розм╕р п╕дрозд╕лу, який\n"
+"зайнятий Windows. Зм╕на розм╕ру п╕дрозд╕лу може бути зроблена без\n"
+"втрати даних. Цей спос╕б установки рекоменду╓ться, якщо Ви хочете мати\n"
+"обидв╕ системи, ╕ Microsoft Windows, ╕ Мандрейк Л╕накс встановлен╕ на\n"
+"сво╓му комп'ютер╕.\n"
+"\n"
+"Перш, н╕ж вибирати цей режим, зрозум╕йте, що у цьому випадку розм╕р\n"
+"п╕дрозд╕лу для Microsoft Windows буде меншим, н╕ж зараз. Це означа╓,\n"
+"що Ви будете мати менше в╕льного простору при робот╕ в Microsoft\n"
+"Windows для запису Ваших даних та програм.\n"
+"\n"
+"* Експертний режим: якщо Ви хочете вручну перерозпод╕лити прост╕р на\n"
+"Вашому жорсткому диску, Ви можете вибрати цей режим. Однак будьте\n"
+"обережними перш, н╕ж вибирати цей режим. Це -- потужний, але дуже\n"
+"небезпечний режим. Ви можете втратити вс╕ дан╕ дуже просто. Отже, не\n"
+"вибирайте цей режим, якщо добре не розум╕╓те, що саме Ви робите."
 
 #: ../../help.pm_.c:160
+#, fuzzy
 msgid ""
 "At this point, you need to choose what\n"
 "partition(s) to use to install your new Linux-Mandrake system. If "
@@ -1852,6 +2024,63 @@ msgid ""
 "\n"
 "           * Ctrl-m to set the mount point"
 msgstr ""
+"Зараз Вам потр╕бно вибрати, як╕ п╕дрозд╕ли використовувати для Вашо╖\n"
+"ново╖ системи Л╕накс Мандрейк. Якщо ц╕ п╕дрозд╕ли вже були визначен╕\n"
+"(в╕д попередньо╖ установки системи типу GNU/Linux чи визначен╕ ╕ншою\n"
+"програмою розпод╕лу диску), Ви можете скористатися вже готовими\n"
+"п╕дрозд╕лами. ╤накше, п╕дрозд╕ли на жорсткому диску мають бути\n"
+"визначеними перш, н╕ж переходити до установки.\n"
+"\n"
+"Для створення п╕дрозд╕л╕в Ви спершу ма╓те вибрати жорсткий диск. Ви\n"
+"можете вибрати диск клацнувши на \"hda\" (якщо мова йде про перший диск\n"
+"типи IDE), або на \"hdb\" (для другого диску в систем╕ типу IDE), або на\n"
+"\"sda\", якщо Ви будете встановлювати систему на першому диску типу SCSI\n"
+"╕ так дал╕.\n"
+"\n"
+"Щоб розпод╕лити диск на розд╕ли, Ви можете скористатися цими пунктами меню:\n"
+"\n"
+"* Очистити все: цей пункт стира╓ вс╕ п╕дрозд╕ли на вибраному жорсткому "
+"диску.\n"
+"\n"
+"* Розпод╕лити автоматично: цей пункт меню допоможе Вам автоматично\n"
+"створити п╕дрозд╕л типу Ext2 та swap на в╕льному простор╕ диску.\n"
+"\n"
+"* В╕дновити таблицю п╕дрозд╕л╕в: якщо таблиця п╕дрозд╕л╕в Вашого диску\n"
+"з╕псована, Ви можете спершу спробувати в╕дновити ╖╖ скористувавшись\n"
+"цим пунктом. Будь-ласка, будьте-обережними, ╕ пам'ятайте, що цей пункт\n"
+"не завжди спрацьову╓.\n"
+"\n"
+"* Повернутись: Можете скористуватись цим, щоб в╕дмовитись в╕д зм╕н,\n"
+"внесених вами.\n"
+"\n"
+"* Перезавантажити: Можете скористуватись цим, щоб в╕дмовитись в╕д зм╕н,\n"
+"внесених вами ╕ перепрочитати ори╜╕нальну таблицю п╕дрозд╕л╕в.\n"
+"\n"
+"\n"
+"* Пом╕чник: Якщо Ви хочете скористатись пом╕чником для розпод╕лу\n"
+"диску. Рекомендований режим, якщо Ви не ма╓те глибоких знань про\n"
+"розпод╕л диску. \n"
+"\n"
+"* В╕дновити з гнучкого диску: Якщо Ви записали попередньо свою таблицю\n"
+"п╕дрозд╕л╕в на гнучкий диск. Зараз Ви можете в╕дновити цю таблицю з\n"
+"гнучкого диску.\n"
+"\n"
+"* Записати на гнучкий диск: Якщо Ви хочете записати зараз таблицю\n"
+"п╕дрозд╕л╕в на гнучкий диск для того, щоб ╖╖ пот╕м можна було\n"
+"в╕дновити з дискети. Дуже рекоменду╓мо скористуватися цим режимом. \n"
+"\n"
+"* Готово: П╕сля того, як Ви вже зак╕нчили з перерозпод╕лом Вашого\n"
+"жорсткого диску, скористайтесь цим пунктом, щоб записати зм╕ни на\n"
+"диск. \n"
+"\n"
+"Коли певний п╕дрозд╕л вибрано, можете скористуватись:\n"
+"\n"
+"        * Ctrl-c щоб створити новий п╕дрозд╕л (якщо вибрано пустий "
+"п╕дрозд╕л)\n"
+"\n"
+"        * Ctrl-d щоб стерти п╕дрозд╕л\n"
+"\n"
+"        * Ctrl-m щоб визначити точку монтування"
 
 #: ../../help.pm_.c:218
 msgid ""
@@ -1896,6 +2125,40 @@ msgid ""
 "With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means "
 "\"secondary hard drive\", etc..."
 msgstr ""
+"Вище перел╕чен╕ вже ╕снуюч╕ п╕дрозд╕ли, знайден╕ на Вашому жорсткому\n"
+"диску. Ви можете притримуватись конф╕╜урац╕╖, встановлено╖\n"
+"пом╕чником. Ця конф╕╜урац╕я п╕дходить для б╕льшост╕ випадк╕в\n"
+"використання системи. Якщо Ви вир╕шите зм╕нити цю конф╕╜урац╕ю, як\n"
+"м╕н╕мум Ви ма╓те визначити кореневу файлову систему (/). Не вид╕ляйте\n"
+"для цього занадто малий п╕дрозд╕л, бо ╕накше Ви не зможете встановити\n"
+"все потр╕бне програмне забезпечення. Якщо Ви бажа╓те зберегти вс╕ сво╖\n"
+"дан╕ на окремому п╕дрозд╕л╕, Вам потр╕бно буде також вибрати п╕дрозд╕л\n"
+"для \"/home\" (т╕льки в тому випадку, якщо Ви ма╓те б╕льше одного\n"
+"п╕дрозд╕ла для Л╕накса). \n"
+"\n"
+"Для дов╕дки: кожен п╕дрозд╕л поданий в такому вигляд╕: \"Назва\",\n"
+"\"Об'╓м\".\n"
+"\n"
+"Назва розшифрову╓ться так: \"тип жорсткого диску\", \"номер жорсткого\n"
+"диску\", \"номер п╕дрозд╕лу на диску\", (Наприклад: \"hda1\").\n"
+"\n"
+"\"Тип жорсткого диску\" - це \"hd\", якщо Ви ма╓те диск типу IDE, ╕ \"sd\",\n"
+"якщо Ви ма╓те жорсткий диск типу SCSI.\n"
+"\n"
+"\"Номер жорского диску\" - це завжди л╕тера п╕сля \"hd\" чи \"sd\". Для\n"
+"диск╕в типу IDE це:\n"
+"\n"
+"    * \"a\" - головний диск (master) на першому контролер╕ IDE,\n"
+"\n"
+"    * \"b\" - вторинний (slave) диск на першому контролер╕ IDE,\n"
+"\n"
+"    * \"c\" - головний диск на другому  контролер╕ IDE,\n"
+"\n"
+"    * \"d\" - вторинний диск на другому  контролер╕ IDE.\n"
+"\n"
+"Для SCSI диск╕в \"a\" означа╓ \"головний диск\", \"b\" - другорядний диск, "
+"╕\n"
+"т.д. ..."
 
 #: ../../help.pm_.c:252
 msgid ""
@@ -1904,6 +2167,9 @@ msgid ""
 "lost\n"
 "and will not be recoverable."
 msgstr ""
+"Вибер╕ть жорсткий диск, який Ви хочете переформатувати щоб встановити\n"
+"новий п╕дрозд╕л для Мандрейк Л╕накса. Будьте уважн╕, оск╕льки вс╕ дан╕\n"
+"будуть знищен╕, ╕ в╕дновити ╖х буде неможливо."
 
 #: ../../help.pm_.c:257
 msgid ""
@@ -1918,6 +2184,11 @@ msgid ""
 "Click on \"Cancel\" to cancel this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
+"Клацн╕ть на кнопц╕ \"Гаразд\", якщо Ви хочете стерти вс╕ дан╕ та\n"
+"п╕дрозд╕ли на цьому жорсткому диску. Будьте уважн╕: п╕сля того, як Ви\n"
+"натиснете на \"Гаразд\" Ви не зможете в╕дновити жодн╕ дан╕ чи\n"
+"п╕дрозд╕ли, як╕ маються на цьому диску, включаючи також ╕ дан╕\n"
+"В╕ндовс."
 
 #: ../../help.pm_.c:267
 msgid ""
@@ -1960,10 +2231,42 @@ msgid ""
 "disk\n"
 "or partition is called \"C:\")."
 msgstr ""
+"На Вашому диску знайдено б╕льше одного п╕дрозд╕ла, що належать\n"
+"операц╕йн╕й систем╕ В╕ндовс. Вибер╕ть, будь-ласка, один з них, розм╕р\n"
+"якого би Ви хот╕ли зм╕нити, для того щоб встановити операц╕йну систему\n"
+"Мандрейк Л╕накс.\n"
+"\n"
+"Для дов╕дки - кожен п╕дрозд╕л подано в такому вигляд╕: \"Назва в\n"
+"Л╕накс╕\", \"Назва у В╕ндовс\", \"Розм╕р\".\n"
+"\n"
+"\"Назва в Л╕накс╕\" закодована таким чином: \"тип жорсткого диску\",\n"
+"\"номер жорсткого диску\", \"номер п╕дрозд╕лу на диску\", (Наприклад:\n"
+"\"hda1\").\n"
+"\n"
+"Тип жорсткого диску\" - це \"hd\", якщо Ви ма╓те диск типу IDE, ╕ \"sd\",\n"
+"якщо Ви ма╓те жорсткий диск типу SCSI.\n"
+"\n"
+"\"Номер жорского диску\" - це завжди л╕тера п╕сля \"hd\" чи \"sd\". Для\n"
+"диск╕в типу IDE це:\n"
+"\n"
+"    * \"a\" - головний диск (master) на першому контролер╕ IDE,\n"
+"\n"
+"    * \"b\" - вторинний (slave) диск на першому контролер╕ IDE,\n"
+"\n"
+"    * \"c\" - головний диск на другому  контролер╕ IDE,\n"
+"\n"
+"    * \"d\" - вторинний диск на другому  контролер╕ IDE.\n"
+"\n"
+"Для SCSI диск╕в \"a\" означа╓ \"головний диск\", \"b\" - другорядний диск, "
+"╕\n"
+"т.д. ...\n"
+"\n"
+"\"Назва у В╕ндовс\" - це л╕тера Вашого жорсткого диску, як Ви ╖╖ бачите\n"
+"при робот╕ у В╕ндовс (перший диск чи п╕дрозд╕л назива╓ться \"C:\")."
 
 #: ../../help.pm_.c:300
 msgid "Please be patient. This operation can take several minutes."
-msgstr ""
+msgstr "Потерп╕ть будь-ласка. Це може зайняти к╕лька хвилин."
 
 #: ../../help.pm_.c:303
 msgid ""
@@ -1998,9 +2301,32 @@ msgid ""
 "new\n"
 "Linux-Mandrake operating system."
 msgstr ""
+"Будь-який з нових визначених п╕дрозд╕л╕в ма╓ бути в╕дформатований для "
+"використання (форматування означа╓ створення файлово╖ системи).\n"
+"\n"
+"\n"
+"Зараз Ви, можливо, захочете в╕дформатувати деяк╕ з уже ╕снуючих\n"
+"п╕дрозд╕л╕в для того, щоб стерти дан╕, як╕ на них записан╕. Якщо Ви\n"
+"хочете це зробити, вибер╕ть також п╕дрозд╕ли, як╕ Ви хочете\n"
+"в╕дформатувати.\n"
+"\n"
+"\n"
+"Зауважте, однак, що не обов'язково форматувати вс╕ п╕дрозд╕ли, як╕\n"
+"╕снували ран╕ше. Ви ма╓те в╕дформатувати п╕дрозд╕ли, як╕ м╕стять\n"
+"операц╕йну систему (так╕, як \"/\", \"/usr\" чи \"/var\"), але Ви не ма╓те\n"
+"форматувати т╕ розд╕ли, як╕ м╕стять дан╕, як╕ Ви б хот╕ли зберегти\n"
+"(типово це п╕дрозд╕л \"/home\").\n"
+"\n"
+"Будьте уважн╕ з вибором п╕дрозд╕л╕в. П╕сля форматування вс╕ дан╕ на\n"
+"п╕дрозд╕лах будуть стерт╕ ╕ Ви не зможете в╕дновити н╕чого з них.\n"
+"\n"
+"Клацн╕ть на \"Гаразд\" коли Ви готов╕ приступити до форматування\n"
+"п╕дрозд╕л╕в.\n"
+"\n"
+"Клацн╕ть на \"В╕дм╕нити\", якщо Ви хочете вибрати ╕нш╕ п╕дрозд╕ли для\n"
+"того, щоб встановити нову систему Мандрейк Л╕накс."
 
 #: ../../help.pm_.c:329
-#, fuzzy
 msgid ""
 "You may now select the group of packages you wish to\n"
 "install or upgrade.\n"
@@ -2047,9 +2373,24 @@ msgid ""
 "silently\n"
 "unselect several other packages which depend on it."
 msgstr ""
+"Зараз Ви ╕ндив╕дуально можете вибрати пакети, як╕ Ви бажали б\n"
+"встановити.\n"
+"\n"
+"\n"
+"Ви можете розгорнути чи згорнути дерево пакет╕в, якщо клацнете на\n"
+"параметрах в л╕вому кутку в╕кна з пакетами.\n"
+"\n"
+"\n"
+"Якщо Ви хочете в╕дсортувати пакети в алфав╕тному порядку, клацн╕ть на\n"
+"п╕ктограмц╕ \"Перемикнути сортування по групам/без груп\".\n"
+"\n"
+"\n"
+"Якщо Ви хочете позбутися попереджень про невиконання вза╓мозалежностей\n"
+"пакет╕в, клацн╕ть на \"Автоматичн╕ залежност╕\". Зауважте однак, що коли\n"
+"Ви виберете цей режим, при в╕дм╕н╕ вибору якогось пакету мовчки може\n"
+"знятися в╕дм╕на також ╕з пакет╕в, в╕д яких в╕н залежить."
 
 #: ../../help.pm_.c:358
-#, fuzzy
 msgid ""
 "If you have all the CDs in the list above, click Ok. If you have\n"
 "none of those CDs, click Cancel. If only some CDs are missing, unselect "
@@ -2057,11 +2398,12 @@ msgid ""
 "then click Ok."
 msgstr ""
 "Якщо Ви ма╓те вс╕ компакт-диски з поданих вище, натисн╕ть на \"Гаразд\".\n"
-"Якщо Ви не ма╓те жодного з поданих вище, натисн╕ть на \"В╕дм╕нити\".\n"
-"Якщо т╕льки деяких компакт-диск╕в не вистача╓, в╕дм╕н╕ть ╖х виб╕р, ╕ "
-"натисн╕ть \"Гаразд\" п╕сля цього."
+"Якщо Ви не ма╓те жодного, натисн╕ть на \"В╕дм╕нити\".  Якщо т╕льки\n"
+"деяких компакт-диск╕в не вистача╓, в╕дм╕н╕ть ╖х виб╕р, ╕ натисн╕ть\n"
+"\"Гаразд\" п╕сля цього."
 
 #: ../../help.pm_.c:363
+#, fuzzy
 msgid ""
 "Your new Linux-Mandrake operating system is currently being\n"
 "installed. This operation should take a few minutes (it depends on size you\n"
@@ -2070,6 +2412,12 @@ msgid ""
 "\n"
 "Please be patient."
 msgstr ""
+"Ваша нова система Мандрейк Л╕накс встановлю╓ться в даний момент. Ця\n"
+"операц╕я може зайняти певний час, який залежить в╕д розм╕ру пакет╕в,\n"
+"як╕ Ви вибрали для установки та в╕д швидкост╕ Вашого комп'ютера.\n"
+"\n"
+"\n"
+"Потерп╕ть, будь-ласка."
 
 #: ../../help.pm_.c:371
 msgid ""
@@ -2077,9 +2425,11 @@ msgid ""
 "if settings are good. If not, you can click on \"Cancel\" to choose another\n"
 "driver."
 msgstr ""
+"Тепер Ви можете випробувати Вашу мишку. Спробуйте покористуватися\n"
+"клав╕шами та кол╕щатком щоб перев╕рити в╕рн╕сть установок. Якщо щось\n"
+"не в порядку, клацн╕ть на \"В╕дм╕нити\" щоб вибрати ╕нший драйвер."
 
 #: ../../help.pm_.c:376
-#, fuzzy
 msgid ""
 "Please select the correct port. For example, the COM1\n"
 "port under MS Windows is named ttyS0 under GNU/Linux."
@@ -2104,8 +2454,20 @@ msgid ""
 "have\n"
 "finished to configure your network connection, choose \"Done\"."
 msgstr ""
+"Якщо Ви хочете п╕дключити св╕й комп'ютера до ╤нтернету або до\n"
+"локально╖ мереж╕, вибер╕ть, будь-ласка, в╕дпов╕дну установку. Перш,\n"
+"н╕ж вибирати ту чи ╕ншу установку, вв╕мкн╕ть, будь-ласка, сам пристр╕й\n"
+"для того, щоб DrakX м╕г визначити його автоматично.\n"
+"\n"
+"Якщо Ви не ма╓те н╕ з'╓днання з ╤нтернетом, н╕ з локальною мережею, "
+"вибрер╕ть установку \"Заборонити мережу\".\n"
+"\n"
+"Якщо Ви захочете встановити конф╕╜урац╕ю мереж╕ п╕зн╕ше п╕сля того, як\n"
+"установка системи зак╕нчена, або якщо Ви вже зак╕нчили конф╕╜урац╕ю\n"
+"мереж╕, натисн╕ть \"Зак╕нчено\"."
 
 #: ../../help.pm_.c:393
+#, fuzzy
 msgid ""
 "No modem has been detected. Please select the serial port on which it is "
 "plugged.\n"
@@ -2114,6 +2476,11 @@ msgid ""
 "For information, the first serial port (called \"COM1\" under Microsoft\n"
 "Windows) is called \"ttyS0\" under Linux."
 msgstr ""
+"Не знайдено модема. Вкаж╕ть, будь-ласка, посл╕довний порт, до якого\n"
+"його п╕дключено. \n"
+"\n"
+"Для дов╕дки: перший посл╕довний порт (який зветься \"COM1\" в систем╕\n"
+"Microsoft Windows) ма╓ назву \"ttyS0\" в Л╕накс╕."
 
 #: ../../help.pm_.c:400
 msgid ""
@@ -2125,16 +2492,23 @@ msgid ""
 "Service\n"
 "Provider at connection time."
 msgstr ""
+"Ви можете тепер ввести потр╕бн╕ параметри для дозвону до ╤нтернет\n"
+"провайдера. Якщо Ви не зна╓те, чи не певн╕ в тому, як╕ саме параметри\n"
+"треба вводити, Ви зможете отримати ╖х в╕д провайдера. Якщо Ви не\n"
+"введете тут назву сервера DNS (сервера ╕мен), його назва може бути\n"
+"отримана в╕д самого сервера п╕д час п╕дключення до ╤нтернету."
 
 #: ../../help.pm_.c:407
 msgid ""
 "If your modem is an external modem, please turn on it now to let DrakX "
 "detect it automatically."
 msgstr ""
+"Якщо Ви ма╓те зовн╕шн╕й модем, вмикн╕ть його зараз, будь-ласка, для\n"
+"того щоб DrakX м╕г розп╕знати його автоматично."
 
 #: ../../help.pm_.c:410
 msgid "Please turn on your modem and choose the correct one."
-msgstr ""
+msgstr "Вмикн╕ть, будь-ласка, св╕й модем та вибер╕ть його тип."
 
 #: ../../help.pm_.c:413
 msgid ""
@@ -2146,20 +2520,23 @@ msgid ""
 "obtained\n"
 "from your Internet Service Provider at connection time."
 msgstr ""
+"Якщо Ви не впевнен╕, що ╕нформац╕я подана вище коректна, або Ви не\n"
+"впевнен╕, що саме треба вводити тут, Ви зможете отримати потр╕бну\n"
+"╕нформац╕ю в╕д свого провайдера ╤нтернет-послуг. Якщо Ви не введете\n"
+"тут назву сервера DNS (сервера ╕мен), його назва може бути отримана\n"
+"в╕д самого сервера п╕д час п╕дключення до ╤нтернету."
 
 #: ../../help.pm_.c:420
-#, fuzzy
 msgid ""
 "You may now enter your host name if needed. If you\n"
 "don't know or are not sure what to enter, the correct informations can be\n"
 "obtained from your Internet Service Provider."
 msgstr ""
-"Тепер Ви можете ввести параметри для з'╓днання по модему. Якщо Ви\n"
+"Тепер Ви можете ввести назву хоста, якщо потр╕бно. Якщо Ви\n"
 "сумн╕ва╓тесь, що тут треба вводити, ця ╕нформац╕я може бути отримана\n"
 "в╕д вашого ╤нтернет-провайдера."
 
 #: ../../help.pm_.c:425
-#, fuzzy
 msgid ""
 "You may now configure your network device.\n"
 "\n"
@@ -2177,37 +2554,38 @@ msgid ""
 "    \"IP address\". If you don't know or are not sure if you need to select "
 "this option, ask your network administrator."
 msgstr ""
-"Введ╕ть:\n"
+"Тепер Ви можете настроо╖ти пристр╕й мереж╕.\n"
 "\n"
-"  - IP адресу: якщо Ви не зна╓те яка вона, запитайте у Вашого\n"
-"адм╕н╕стратора мереж╕ або ╕нтернет-провайдера.\n"
+"  * IP-адреса: якщо Ви не зна╓те яка вона, запитайте у Вашого\n"
+"адм╕н╕стратора мереж╕ або ╕нтернет-провайдера. Ви не повинн╕ вводити\n"
+"IP-адресу, якщо Ви виберете параметр \"Автоматичний виб╕р IP\".\n"
 "\n"
 "\n"
-"  - Маску мереж╕: в загальному випадку \"255.255.255.0\" ╓ непоганим\n"
+"  * Маска мереж╕: в загальному випадку \"255.255.255.0\" ╓ непоганим\n"
 "вибором. Якщо Ви сумн╕ва╓тесь, спитайте у адм╕н╕стратора мереж╕ або\n"
 "╕нтернет-провайдера.\n"
 "\n"
 "\n"
-"  - Автоматичний виб╕р IP: Вибер╕ть цей пункт, якщо Ваша мережа\n"
+"  * Автоматичний виб╕р IP: Вибер╕ть цей пункт, якщо Ваша мережа\n"
 "використову╓ протокол DHCP або BOOTP. Якщо цей пункт вибрано, Вам не\n"
 "потр╕бно записувати н╕чого в пол╕ \"IP адреса\". Якщо Ви сумн╕ва╓тесь,\n"
-"спитайте у адм╕н╕стратора мереж╕ або ╕нтернет-провайдера.\n"
+"спитайте у адм╕н╕стратора мереж╕."
 
 #: ../../help.pm_.c:437
-#, fuzzy
 msgid ""
 "You may now enter your host name if needed. If you\n"
 "don't know or are not sure what to enter, ask your network administrator."
 msgstr ""
-"Вибер╕ть \"Використовувати NIS\", якщо у Ваш╕й мереж╕ NIS\n"
-"використову╓ться. Якщо Ви не зна╓те, спитайте у свого адм╕н╕стратора\n"
-"мереж╕."
+"Якщо потр╕бно Ви можете ввести тут назву системи. Якщо Ви не зна╓те,\n"
+"спитайте у свого адм╕н╕стратора мереж╕."
 
 #: ../../help.pm_.c:441
 msgid ""
 "You may now enter your host name if needed. If you\n"
 "don't know or are not sure what to enter, leave blank."
 msgstr ""
+"Тут Ви можете ввести назву хоста. Якщо Ви не зна╓те, чи не впевнен╕,\n"
+"що тут треба вводити, залиште це поле пустим. "
 
 #: ../../help.pm_.c:445
 msgid ""
@@ -2228,7 +2606,6 @@ msgstr ""
 "про це у Вашого адс╕н╕стратора мереж╕, або у ╤нтернет-провайдера."
 
 #: ../../help.pm_.c:453
-#, fuzzy
 msgid ""
 "You can install cryptographic package if your internet connection has been\n"
 "set up correctly. First choose a mirror where you wish to download packages "
@@ -2249,10 +2626,9 @@ msgstr ""
 
 #: ../../help.pm_.c:462
 msgid "You can now select your timezone according to where you live."
-msgstr ""
+msgstr "В╕дпов╕дно до м╕сця де Ви живете, Ви можете встановити часовий пояс."
 
 #: ../../help.pm_.c:465
-#, fuzzy
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Manage\n"
 "Time) and translates it in local time according to the time zone you have\n"
@@ -2261,16 +2637,14 @@ msgid ""
 "\n"
 "If you use Microsoft Windows on this computer, choose \"No\"."
 msgstr ""
-"В залежност╕ в╕д того де Ви живете, Ви можете тепер вибрати часовий\n"
-"пояс.\n"
-"\n"
-"\n"
 "GNU/Л╕накс обробля╓ час в╕дносно до часу по ╫р╕нв╕чу (GMT або\n"
 "\"Greenwich Mean Time\") ╕ переводить його в м╕сцевий час у\n"
-"в╕дпов╕дност╕ до часового поясу, в якому Ви знаходитесь."
+"в╕дпов╕дност╕ до часового поясу, в якому Ви знаходитесь.\n"
+"\n"
+"Якщо Ви користу╓тесь системою Microsoft Windows на цьому ж комп'ютер╕,\n"
+"вибер╕ть \"Н╕\"."
 
 #: ../../help.pm_.c:473
-#, fuzzy
 msgid ""
 "You may now choose which services you want to start at boot time.\n"
 "\n"
@@ -2287,19 +2661,26 @@ msgid ""
 "In general, select only the services that you really need."
 msgstr ""
 "Ви можете вибрати як╕ серв╕си будуть запускатися автоматично при\n"
-"старт╕ системи. Коли Ваша мишка насува╓ться на один ╕з пункт╕в,\n"
-"невеличка кулька ╕з п╕дсказкою з'явиться, яка опису╓ функц╕╖ даного\n"
-"серв╕су.\n"
+"старт╕ системи. \n"
+"\n"
+"Коли Ваша мишка насува╓ться на один ╕з пункт╕в, невеличка кулька ╕з\n"
+"п╕дсказкою з'явиться, яка опису╓ функц╕╖ даного серв╕су.\n"
 "\n"
 "Будьте особливо уважними, якщо Ви збира╓тесь використовувати цю\n"
 "систему як сервер: напевне не потр╕бно стартувати н╕як╕ серв╕си, як╕\n"
-"не будуть використовуватися."
+"не будуть використовуватися. Пам'ятайте, будь-ласка, що деяк╕ вмикнен╕\n"
+"серв╕си можуть бути небезпечними на сервер╕.\n"
+"Як загальне правило, вибирайте т╕льки т╕ серв╕си, як╕ Вам справд╕ \n"
+"необх╕дн╕."
 
 #: ../../help.pm_.c:486
 msgid ""
 "You can configure a local printer (connected to your computer) or remote\n"
 "printer (accessible via a Unix, Netware or Microsoft Windows network)."
 msgstr ""
+"Ви можете встановити локальний принтер (який безпосередньо з'╓днаний з\n"
+"Вашим комп'ютером) або в╕ддалений принтер (який доступний через мережу\n"
+"Unix, Netware чи Microsoft Windows)."
 
 #: ../../help.pm_.c:490
 msgid ""
@@ -2319,6 +2700,18 @@ msgid ""
 "\n"
 "If you don't have printer, click on \"None\"."
 msgstr ""
+"Якщо Ви збира╓тесь користуватися принтерами з Вашого комп'ютера, Ви\n"
+"можете вибрати систему друку м╕ж CUPS чи LPR.\n"
+"\n"
+"CUPS - це нова, потужна та гнучка система друку для систем, що\n"
+"працюють з Юн╕ксом (CUPS означа╓ Сп╕льна Система Друку для Юн╕ксу -\n"
+"Common Unix Printing System). Це - стандартна система друку для\n"
+"Мандрейк Л╕наксу.\n"
+"\n"
+"LPR - це стара система друку, яка використовувалася в попередн╕х\n"
+"верс╕ях Мандрейк Л╕накса.\n"
+"\n"
+"Якщо Вам не потр╕бно встановлювати принтер, клацн╕ть на \"Н╕чого\"."
 
 #: ../../help.pm_.c:505
 msgid ""
@@ -2338,8 +2731,21 @@ msgid ""
 "machine\n"
 "(or on Unix machine using SMB protocol), select \"SMB/Windows 95/98/NT\"."
 msgstr ""
+"GNU/Linux може працювати з багатьма типами принтер╕в. Кожен з цих\n"
+"тип╕в вимага╓ окремо╖ установки.\n"
+"\n"
+"Якщо принтер ф╕зично п╕дключений до Вашого комп'ютера, вибер╕ть \"Локальний "
+"принтер\".\n"
+"\n"
+"Якщо Ви хочете друкувати на принтер╕, який п╕д'╓днаний через мережу до\n"
+"╕ншого комп'ютера з системою Юн╕кс, вибер╕ть \"В╕ддалений принтер\".\n"
+"\n"
+"Якщо Ви хочете друкувати на принтер╕, який п╕дключений до комп'ютера з\n"
+"системоюMicrosoft Windows (або на машин╕ з Юн╕ксом, яка користу╓ться\n"
+"протоколом SMB), вибер╕ть \"SMB/Windows 95/98/NT\"."
 
 #: ../../help.pm_.c:521
+#, fuzzy
 msgid ""
 "Please turn on your printer before continuing to let DrakX detect it.\n"
 "\n"
@@ -2364,6 +2770,27 @@ msgid ""
 "     printer location, put it here (you are free to write what\n"
 "     you want, for example \"2nd floor\").\n"
 msgstr ""
+"Перш, н╕ж продовжувати вмикн╕ть, будь-ласка, принтер щоб дати\n"
+"можлив╕сть DrakX в╕рно визначити його тип.\n"
+"\n"
+"Ви ма╓те ввести деяку ╕нформац╕ю тут.\n"
+"\n"
+"\n"
+"  * Назва принтера: програма друку користу╓ться назвою \"lp\", коли не\n"
+"    встановлен╕ ╕нш╕ назви. Отже, Ви повинн╕ мати принтер з назвою \"lp\" в\n"
+"    сво╖й систем╕. Якщо Ви ма╓те т╕льки один принтер, Ви можете мати\n"
+"    к╕лька р╕зних назв (псевд) для нього. ╤мена т╕льки потр╕бно буде\n"
+"    розд╕лити м╕ж собою символом каналу (\"|\"). Отже, якщо Ви в╕дда╓те\n"
+"    перевагу як╕йсь б╕льш осмислен╕й назв╕, Ви ма╓те вказати ╖╖ першою,\n"
+"    тобто: \"М╕й принтер|lp\".\n"
+"\n"
+"  * Опис: це необов'зкове поле, але корисно його використовувати, якщо\n"
+"    Ви ма╓те к╕лька принтер╕в п╕д'╓днаних до комп'ютера, або якщо Ви\n"
+"    хочете дозволити доступ ╕ншим комп'ютерам до цього принтера.\n"
+"\n"
+"  * Розташування: якщо Ви хочете вказати, де ф╕зично знаходиться Ваш\n"
+"    принтер, запиш╕ть це тут (можете записувати тут, що завгодно у в╕льн╕й\n"
+"    форм╕. Наприклад, \"2й поверх\".\n"
 
 #: ../../help.pm_.c:542
 msgid ""
@@ -2398,6 +2825,32 @@ msgid ""
 "     If you want to acces a printer located on NetWare network, select "
 "\"NetWare\".\n"
 msgstr ""
+"Вам потр╕бно ввести деяк╕ дан╕ тут.\n"
+"\n"
+"  * Назва черги друку: програма друку користу╓ться назвою \"lp\", коли не\n"
+"    встановлен╕ ╕нш╕ назви. Отже, Ви повинн╕ мати принтер з назвою \"lp\" в\n"
+"    сво╖й систем╕. Якщо Ви ма╓те т╕льки один принтер, Ви можете мати\n"
+"    к╕лька р╕зних назв (псевд) для нього. ╤мена т╕льки потр╕бно буде\n"
+"    розд╕лити м╕ж собою символом каналу (\"|\"). Отже, якщо Ви в╕дда╓те\n"
+"    перевагу як╕йсь б╕льш осмислен╕й назв╕, Ви ма╓те вказати ╖╖ першою,\n"
+"    тобто: \"М╕й принтер|lp\".\n"
+"\n"
+"  * Каталог черги друку: в цьому каталоз╕ будуть тимчасово збер╕гатися\n"
+"    роботи, передан╕ на друк. Не зм╕нюйте стандартне значення цього\n"
+"    параметру, якщо Ви не впевнен╕ в сво╖х д╕ях. \n"
+"\n"
+"  * З'╓днання з принтером: якщо принтер ф╕зично з'╓днаний з\n"
+"    комп'ютером, вибер╕ть \"Локальний принтер\". \n"
+"    Якщо Ви хочете друкувати на принтер╕, який п╕д'╓днаний через\n"
+"    мережу до ╕ншого комп'ютера з системою Юн╕кс, вибер╕ть \"В╕ддалений\n"
+"    принтер\".\n"
+"\n"
+"    Якщо Ви хочете друкувати на принтер╕, який п╕дключений до комп'ютера з\n"
+"    системою Microsoft Windows (або на машин╕ з Юн╕ксом, яка користу╓ться\n"
+"    протоколом SMB), вибер╕ть \"SMB/Windows 95/98/NT\".\n"
+"\n"
+"    Якщо Ви хочете користуватися принтером, який п╕д'╓днаний до мереж╕\n"
+"    NetWare, вибер╕ть \"NetWare\".\n"
 
 #: ../../help.pm_.c:567
 msgid ""
@@ -2410,12 +2863,20 @@ msgid ""
 "one is called \"/dev/lp0\" under GNU/Linux and \"LPT1\" under Microsoft "
 "Windows."
 msgstr ""
+"Не вдалося в╕дшукати Ваш принтер. Будь-ласка, введ╕ть пристр╕й, до\n"
+"якого в╕н п╕дключений.\n"
+"\n"
+"\n"
+"Для дов╕дки: б╕льш╕сть принтер╕в п╕дключаються до паралельного порту. \n"
+"\n"
+"В╕н зветься \"/dev/lp0\" в Л╕накс╕ ╕ \"LPT1\" в Microsoft Windows."
 
 #: ../../help.pm_.c:575
 msgid "You must now select your printer in the above list."
-msgstr ""
+msgstr "Ви ма╓те вибрати св╕й принтер у списку поданому вище."
 
 #: ../../help.pm_.c:578
+#, fuzzy
 msgid ""
 "Please select the right options according to your printer.\n"
 "Please see its documentation if you don't know what choose here.\n"
@@ -2424,9 +2885,15 @@ msgid ""
 "You will be able to test your configuration in next step and you will be "
 "able to modify it if it doesn't work as you want."
 msgstr ""
+"Будь-ласка, вибер╕ть потр╕бн╕ параметри для Вашого\n"
+"принтера. Зверн╕ться до документац╕╖, якщо Ви не зна╓те в╕рних\n"
+"значень.\n"
+"\n"
+"\n"
+"На наступному кроц╕ Ви зможете випробувати цю конф╕╜урац╕ю ╕ виправити\n"
+"╖╖ якщо щось не спрацю╓ так, як Ви передбачали."
 
 #: ../../help.pm_.c:585
-#, fuzzy
 msgid ""
 "You can now enter the root password for your Linux-Mandrake system.\n"
 "The password must be entered twice to verify that both password entries are "
@@ -2449,8 +2916,8 @@ msgid ""
 "to\n"
 "remember it without too much effort."
 msgstr ""
-"Тепер Вам потр╕бно дв╕ч╕ ввести пароль для користувача \"root\" для\n"
-"Вашо╖ системи Mandrake Л╕накс. Пароль потр╕бно вводити дв╕ч╕, щоб\n"
+"Тепер Вам потр╕бно ввести пароль для користувача \"root\" для Вашо╖\n"
+"системи Mandrake Л╕накс. Пароль потр╕бно вводити дв╕ч╕, щоб\n"
 "переконатися, що в╕н був введений обидва рази один ╕ той же\n"
 "\n"
 "\n"
@@ -2458,11 +2925,16 @@ msgstr ""
 "зм╕нювати системну конф╕гурац╕ю. Тому вибирайте цей пароль дуже\n"
 "дбайливо! Неавторизоване користування Вашою системою може бути\n"
 "надзвичайно небезпечним для ц╕л╕сност╕ системи та даних у н╕й, а\n"
-"також для ╕нших систем до не╖ п╕дключених. Пароль повинен складатися\n"
-"╕з сум╕ш╕ алфав╕тно-цифрових символ╕в ╕ бути не менше, н╕ж 8 символ╕в\n"
-"завдовжки. Його *н╕коли* не можна н╕де записувати. Не вибирайте\n"
-"занадто довгий пароль або занадто складний: Вам треба його\n"
-"пам'ятати."
+"також для ╕нших систем до не╖ п╕дключених. \n"
+"\n"
+"\n"
+"Пароль повинен складатися ╕з сум╕ш╕ алфав╕тно-цифрових символ╕в ╕ бути\n"
+"не менше, н╕ж 8 символ╕в завдовжки. Його н╕коли не можна н╕де\n"
+"записувати.\n"
+"\n"
+"\n"
+"Не вибирайте занадто довгий пароль або занадто складний: Вам треба\n"
+"його пам'ятати."
 
 #: ../../help.pm_.c:603
 msgid ""
@@ -2525,11 +2997,15 @@ msgstr ""
 "адм╕н╕страц╕╖."
 
 #: ../../help.pm_.c:630
+#, fuzzy
 msgid ""
 "Creating a boot disk is strongly recommended. If you can't\n"
 "boot your computer, it's the only way to rescue your system without\n"
 "reinstalling it."
 msgstr ""
+"Створення диску для завантаження наст╕йливо рекоменду╓ться. Якщо Ви не\n"
+"зможете завантажити св╕й комп'ютер -- це ╓диний шлях врятувати Вашу\n"
+"систему без перевстановлення вс╕╓╖ операц╕йно╖ системи."
 
 #: ../../help.pm_.c:635
 msgid ""
@@ -2582,7 +3058,6 @@ msgstr ""
 "дискета, щоб завантажити ц╕ системи!"
 
 #: ../../help.pm_.c:659
-#, fuzzy
 msgid ""
 "LILO and grub main options are:\n"
 "  - Boot device: Sets the name of the device (e.g. a hard disk\n"
@@ -2606,12 +3081,12 @@ msgid ""
 msgstr ""
 "Основн╕ параметри для LILO та grub:\n"
 "  - Пристр╕й завантажування: Встановлю╓ назву пристрою (наприклад,\n"
-"розд╕л жорсткого диску), який м╕стить завантажувальний сектор. Якщо Ви\n"
-"напевне не зна╓те, що треба зробити ╕накше, вкаж╕ть \"/dev/hda\" тут.\n"
+"п╕дрозд╕л жорсткого диску), який м╕стить завантажувальний сектор. Якщо\n"
+"Ви напевне не зна╓те, що треба зробити ╕накше, вкаж╕ть \"/dev/hda\" тут.\n"
 "\n"
 "\n"
 "  - Пауза перед завантаженням основно╖ системи: Визнача╓ час у\n"
-"одиницях р╕вних одн╕й десят╕й секунди, який система буде чекати перш,\n"
+"одиницях, р╕вних одн╕й десят╕й секунди, який система буде чекати перш,\n"
 "н╕ж почати завантаження основно╖ системи, вказано╖ в конф╕гурац╕╖. Це\n"
 "можна використовувати и тих випадках, коли система зразу ж приступа╓\n"
 "до завантаження системи п╕сля ╕н╕ц╕ал╕зац╕╖ клав╕атури. Програма\n"
@@ -2621,7 +3096,9 @@ msgstr ""
 "\n"
 "  - В╕део режим: Вказу╓ в╕део режим VGA, який потр╕бно вмикнути при\n"
 "завантаженн╕ системи. Може мати так╕ значення:\n"
+"\n"
 "    * нормальний: встановлю╓ звичайний текстовий режим 80x25.\n"
+"\n"
 "    * <число>: встановлю╓ в╕дпов╕дний текстовий режим."
 
 #: ../../help.pm_.c:680
@@ -2722,7 +3199,6 @@ msgstr ""
 "\"Так\". ╤накше - вибер╕ть \"Н╕\"."
 
 #: ../../help.pm_.c:726
-#, fuzzy
 msgid ""
 "You can now select some miscellaneous options for your system.\n"
 "\n"
@@ -2765,31 +3241,39 @@ msgid ""
 msgstr ""
 "Тепер Ви можете вибрати деяк╕ р╕знопланов╕ опц╕╖ для сво╓╖ системи.\n"
 "\n"
-"  - Користуватися оптим╕зац╕╓ю жорсткого диску: Ця опц╕я може\n"
+"  * Користуватися оптим╕зац╕╓ю жорсткого диску: Ця опц╕я може\n"
 "покращити швидк╕сть роботи диску, але вона - т╕льки для досв╕дчених\n"
 "користувач╕в. Ви можете знищити св╕й диск, якщо будете користуватися\n"
 "нею некоректно. В ядр╕ ╕сну╓ св╕й чорний список диск╕в та контролер╕в,\n"
 "як╕ працюють некоректно, але якщо Ви хочете позбутися непри╓мних\n"
 "сюрприз╕в, не користуйтеся цим.\n"
 "\n"
-"  - Вибрати р╕вень безпеки: Ви можете вибрати р╕вень безпеки для сво╓╖\n"
+"  * Вибрати р╕вень безпеки: Ви можете вибрати р╕вень безпеки для сво╓╖\n"
 "системи. За ╕нформац╕╓ю зверн╕ться до кер╕вництва. В двох словах: якщо\n"
-"Ви не розум╕╓те про що йдеться, вибер╕ть \"Середн╕й\".\n"
+"Ви не розум╕╓те про що йдеться, не зм╕нюйте стандартне значення.\n"
 "\n"
-"  - Точний розм╕р пам'ят╕, якщо потр╕бно: На жаль в сьогодн╕шньому\n"
+"\n"
+"  * Точний розм╕р пам'ят╕, якщо потр╕бно: На жаль в сьогодн╕шньому\n"
 "св╕т╕ PC не ╕сну╓ стандартного способу д╕знатися з BIOS про точний\n"
-"об'╓м пам'ят╕ в систем╕. В деяких випадках GNU/Л╕накс не в змоз╕ в╕рно\n"
-"визначити всю встановлено в систем╕ пам'ять (на деяких системах). Якщо\n"
-"це трапилось у Вашому випадку, вкаж╕ть в╕рних об'╓м\n"
-"пам'ят╕. В╕дм╕тьте: р╕зниця у 2-4 Мб - це нормальна р╕ч.\n"
+"об'╓м пам'ят╕ в систем╕. Як насл╕док цього, в деяких випадках\n"
+"GNU/Л╕накс не в змоз╕ в╕рно визначити всю встановлено в систем╕\n"
+"пам'ять (на деяких системах). Якщо це трапилось у Вашому випадку,\n"
+"вкаж╕ть в╕рних об'╓м пам'ят╕. В╕дм╕тьте: р╕зниця у 2-4 Мб - це\n"
+"нормальна р╕ч.\n"
 "\n"
-"  - Автоматичне монтування зм╕нних нос╕╖в: Якщо Вам подоба╓ться щоб\n"
+"\n"
+"  * Автоматичне монтування зм╕нних нос╕╖в: Якщо Вам подоба╓ться щоб\n"
 "зм╕нн╕ нос╕╖ (типу CDROM, дискет, ZIP) монтувалися автоматично зам╕сть\n"
 "того, щоб Вам вручно друкувати команди \"mount\" та \"umount\", вибер╕ть\n"
 "цей пункт.\n"
 "\n"
 "\n"
-"  - Дозволити NumLock при старт╕: Якщо Ви хочете, щоб Ваш NumLock\n"
+"  * Стирати \"/tmp\" при кожному старт╕: Якщо Ви хочете, щоб вс╕ файли\n"
+"та п╕дкаталоги у каталоз╕ \"/tmp\" стиралися автоматично при кожному\n"
+"завантаженн╕ системи, вибер╕ть цей параметр.\n"
+"\n"
+"\n"
+"  * Дозволити NumLock при старт╕: Якщо Ви хочете, щоб Ваш NumLock\n"
 "автоматично вмикався при старт╕, вибер╕ть цей пункт (В╕дм╕тьте, що\n"
 "NumLock все одно не буде вмикатися в X)."
 
@@ -2863,8 +3347,8 @@ msgstr "Настро╖ти серв╕си"
 msgid "Configure printer"
 msgstr "Настро╖ти принтер"
 
-#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:758
-#: ../../install_steps_interactive.pm_.c:759
+#: ../../install2.pm_.c:55 ../../install_steps_interactive.pm_.c:762
+#: ../../install_steps_interactive.pm_.c:763
 msgid "Set root password"
 msgstr "Встановити пароль root'а"
 
@@ -2892,23 +3376,21 @@ msgstr "Авто установочна дискета"
 msgid "Exit install"
 msgstr "Вийти з установки"
 
-#: ../../install_any.pm_.c:575
+#: ../../install_any.pm_.c:578
 msgid "Error reading file $f"
 msgstr "Помилка при читанн╕ файла $f"
 
 #: ../../install_gtk.pm_.c:426
-#, fuzzy
 msgid "Please test the mouse"
-msgstr "Який тип миш╕ ви ма╓те?"
+msgstr "Випробуйте мишку, будь-ласка"
 
 #: ../../install_gtk.pm_.c:427
-#, fuzzy
 msgid "To activate the mouse,"
-msgstr "Який тип миш╕ ви ма╓те?"
+msgstr "Щоб актив╕зувати мишку, "
 
 #: ../../install_gtk.pm_.c:428
 msgid "MOVE YOUR WHEEL!"
-msgstr ""
+msgstr "ПОСУНЬТЕ КОЛ╤ЩАТКО!"
 
 #: ../../install_interactive.pm_.c:23
 #, c-format
@@ -2916,6 +3398,10 @@ msgid ""
 "Some hardware on your computer needs ``proprietary'' drivers to work.\n"
 "You can find some information about them at: %s"
 msgstr ""
+"Деяк╕ з апаратних засоб╕в на Вашому комп'ютер╕ вимагають драйвер╕в\n"
+"ф╕рм-виготовлювач╕в для того, щоб працювати в╕рно. \n"
+"\n"
+"Ви можете знайти потр╕бну ╕нформац╕ю про них на: %s"
 
 #: ../../install_interactive.pm_.c:41
 msgid ""
@@ -2963,7 +3449,6 @@ msgid "Use the Windows partition for loopback"
 msgstr "Використовувати п╕дрозд╕л Windows для зворотнього монтування"
 
 #: ../../install_interactive.pm_.c:90
-#, fuzzy
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Який п╕дрозд╕л Ви хочете використати для Linux4Win?"
 
@@ -2991,7 +3476,7 @@ msgstr "Розм╕р якого п╕дрозд╕лу Ви хочете зм╕нити?"
 msgid "Computing Windows filesystem bounds"
 msgstr "Обчислюю меж╕ п╕дрозд╕лу Windows"
 
-#: ../../install_interactive.pm_.c:109
+#: ../../install_interactive.pm_.c:110
 #, c-format
 msgid ""
 "The FAT resizer is unable to handle your partition, \n"
@@ -3000,14 +3485,14 @@ msgstr ""
 "Програма зм╕ни розм╕ру п╕дрозд╕лу FAT не може працювати з Вашим\n"
 "п╕дрозд╕лом, при робот╕ сталася така помилка: %s"
 
-#: ../../install_interactive.pm_.c:112
-#, fuzzy
+#: ../../install_interactive.pm_.c:113
 msgid "Your Windows partition is too fragmented, please run ``defrag'' first"
 msgstr ""
-"П╕дрозд╕л з windows на Вашому комп'ютер╕ занадто\n"
-"фра╜ментований. Виконайте де-фра╜ментац╕ю спочатку."
+"П╕дрозд╕л з Windows на Вашому комп'ютер╕ занадто\n"
+"фра╜ментований. Виконайте де-фра╜ментац╕ю \n"
+"спочатку (команда ``defarg'')."
 
-#: ../../install_interactive.pm_.c:113
+#: ../../install_interactive.pm_.c:114
 msgid ""
 "WARNING!\n"
 "\n"
@@ -3026,21 +3511,21 @@ msgstr ""
 "defrag) на цьому п╕дрозд╕л╕ та зробити резервну коп╕ю Ваших даних.\n"
 "Коли все це зроблено - натисн╕ть Гаразд."
 
-#: ../../install_interactive.pm_.c:122
+#: ../../install_interactive.pm_.c:123
 msgid "Which size do you want to keep for windows on"
 msgstr "Який розм╕р Ви хочете залишити для Windows?"
 
-#: ../../install_interactive.pm_.c:123
+#: ../../install_interactive.pm_.c:124
 #, c-format
 msgid "partition %s"
 msgstr "п╕дрозд╕л %s"
 
-#: ../../install_interactive.pm_.c:129
+#: ../../install_interactive.pm_.c:130
 #, c-format
 msgid "FAT resizing failed: %s"
 msgstr "Автоматична зм╕на розм╕ру FAT не спрацювала: %s"
 
-#: ../../install_interactive.pm_.c:144
+#: ../../install_interactive.pm_.c:145
 msgid ""
 "There is no FAT partitions to resize or to use as loopback (or not enough "
 "space left)"
@@ -3048,37 +3533,36 @@ msgstr ""
 "Нема╓ п╕дрозд╕лу FAT для зм╕ни розм╕ру або для використання як пристр╕й "
 "зворотнього монтування (або не вистача╓ в╕льного простору)"
 
-#: ../../install_interactive.pm_.c:150
+#: ../../install_interactive.pm_.c:151
 msgid "Erase entire disk"
-msgstr ""
+msgstr "Стерти весь диск"
 
-#: ../../install_interactive.pm_.c:150
+#: ../../install_interactive.pm_.c:151
 msgid "Remove Windows(TM)"
 msgstr "Стерти Windows(TM)"
 
-#: ../../install_interactive.pm_.c:153
+#: ../../install_interactive.pm_.c:154
 msgid "You have more than one hard drive, which one do you install linux on?"
 msgstr "У Вас б╕льше одного диску. На який з них Ви хочете встановити Л╕накс?"
 
-#: ../../install_interactive.pm_.c:156
-#, fuzzy, c-format
+#: ../../install_interactive.pm_.c:157
+#, c-format
 msgid "ALL existing partitions and their data will be lost on drive %s"
-msgstr "Вс╕ ╕снуюч╕ п╕дрозд╕ли та вс╕ дан╕ на диску %s будуть втрачен╕"
+msgstr "ВС╤ ╕снуюч╕ п╕дрозд╕ли та вс╕ дан╕ на диску %s будуть втрачен╕"
 
-#: ../../install_interactive.pm_.c:164
-#, fuzzy
+#: ../../install_interactive.pm_.c:165
 msgid "Expert mode"
-msgstr "Зовн╕шн╕й модем"
+msgstr "Експертний режим"
 
-#: ../../install_interactive.pm_.c:164
+#: ../../install_interactive.pm_.c:165
 msgid "Use diskdrake"
 msgstr "Використовувати diskdrake"
 
-#: ../../install_interactive.pm_.c:168
+#: ../../install_interactive.pm_.c:169
 msgid "Use fdisk"
 msgstr "Використовувати fdisk"
 
-#: ../../install_interactive.pm_.c:171
+#: ../../install_interactive.pm_.c:172
 #, c-format
 msgid ""
 "You can now partition %s.\n"
@@ -3087,30 +3571,29 @@ msgstr ""
 "Тепер Ви можете розбити на п╕дрозд╕ли Ваш диск %s.\n"
 "П╕сля того, як Ви зак╕нчите не забудьте виконати команду `w'"
 
-#: ../../install_interactive.pm_.c:195
+#: ../../install_interactive.pm_.c:196
 #, fuzzy
 msgid "You don't have enough free space on your Windows partition"
 msgstr "Використовувати в╕льний прост╕р на п╕дрозд╕л╕ Windows"
 
-#: ../../install_interactive.pm_.c:210
-#, fuzzy
+#: ../../install_interactive.pm_.c:211
 msgid "I can't find any room for installing"
-msgstr "Не можу додати жодного п╕дрозд╕лу"
+msgstr "Не можу знайти в╕льного простору для установки"
 
-#: ../../install_interactive.pm_.c:213
+#: ../../install_interactive.pm_.c:214
 msgid "The DrakX Partitioning wizard found the following solutions:"
 msgstr "Пом╕чник розбивки на п╕дрозд╕ли DrakX знайшов так╕ можлив╕ р╕шення:"
 
-#: ../../install_interactive.pm_.c:218
+#: ../../install_interactive.pm_.c:219
 #, c-format
 msgid "Partitioning failed: %s"
 msgstr "Розбиття на  п╕дрозд╕ли невдале: %s"
 
-#: ../../install_interactive.pm_.c:233
+#: ../../install_interactive.pm_.c:234
 msgid "Bringing up the network"
 msgstr "Вмикаю мережу"
 
-#: ../../install_interactive.pm_.c:238
+#: ../../install_interactive.pm_.c:239
 msgid "Bringing down the network"
 msgstr "Вимикаю мережу"
 
@@ -3122,12 +3605,12 @@ msgstr ""
 "Сталася помилка, але я не знаю, як з нею поводитися.\n"
 "Продовжуйте на св╕й власний ризик."
 
-#: ../../install_steps.pm_.c:196
+#: ../../install_steps.pm_.c:202
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Подв╕йн╕ точки монтування %s"
 
-#: ../../install_steps.pm_.c:375
+#: ../../install_steps.pm_.c:385
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -3138,12 +3621,12 @@ msgstr ""
 "компакт-диск або прив╕д дефектн╕.  Перев╕рте компакт диск на\n"
 "встановленому комп'ютер╕ командою \"rpm -qpl \" \"Mandrake/RPMS/*.rpm\" \n"
 
-#: ../../install_steps.pm_.c:450
+#: ../../install_steps.pm_.c:458
 #, c-format
 msgid "Welcome to %s"
 msgstr "Ласкаво просимо до %s"
 
-#: ../../install_steps.pm_.c:662
+#: ../../install_steps.pm_.c:670
 msgid "No floppy drive available"
 msgstr "Нема╓ привода дискети"
 
@@ -3223,7 +3706,7 @@ msgid "There was an error ordering packages:"
 msgstr "Сталася помилка п╕д час сортування пакет╕в: "
 
 #: ../../install_steps_graphical.pm_.c:577
-#: ../../install_steps_interactive.pm_.c:999
+#: ../../install_steps_interactive.pm_.c:1003
 msgid "Use existing configuration for X11?"
 msgstr "Використовувати вже ╕снуючу конф╕гурац╕ю для X?"
 
@@ -3328,14 +3811,12 @@ msgid ""
 msgstr "Вибрати цей пакет неможливо. Для його установки не вистача╓ м╕сця."
 
 #: ../../install_steps_gtk.pm_.c:386
-#, fuzzy
 msgid "The following packages are going to be installed"
-msgstr "Ц╕ пакети будуть де╕нстальованими"
+msgstr "Ц╕ пакети будуть встановленими"
 
 #: ../../install_steps_gtk.pm_.c:387
-#, fuzzy
 msgid "The following packages are going to be removed"
-msgstr "Ц╕ пакети будуть ╕нстальованими/де╕нстальованими"
+msgstr "Ц╕ пакети будуть де╕нстальованими"
 
 #: ../../install_steps_gtk.pm_.c:397
 msgid "You can't select/unselect this package"
@@ -3410,9 +3891,8 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
-#, fuzzy
 msgid "Accept"
-msgstr "Прийняти користувача"
+msgstr "Прийняти"
 
 #: ../../install_steps_gtk.pm_.c:559
 #, c-format
@@ -3432,9 +3912,8 @@ msgstr ""
 "встановлювати з цього диску."
 
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
-#, fuzzy
 msgid "Refuse"
-msgstr "Зм╕нити розм╕р"
+msgstr "В╕дкинути"
 
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
@@ -3592,7 +4071,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm_.c:173
 #: ../../install_steps_interactive.pm_.c:520
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 #: ../../install_steps_interactive.pm_.c:181
 #: ../../install_steps_interactive.pm_.c:227
@@ -3604,12 +4083,10 @@ msgid "Which installation class do you want?"
 msgstr "Який клас установки Ви вибира╓те?"
 
 #: ../../install_steps_interactive.pm_.c:183
-#, fuzzy
 msgid "Install/Update"
 msgstr "Встановити/Поновити"
 
 #: ../../install_steps_interactive.pm_.c:183
-#, fuzzy
 msgid "Is this an install or an update?"
 msgstr "Це установка чи поновлення?"
 
@@ -3642,14 +4119,12 @@ msgstr ""
 "паролями?\", Ви д╕йсно готов╕ до такого роду запитань?"
 
 #: ../../install_steps_interactive.pm_.c:216
-#, fuzzy
 msgid "Update"
 msgstr "Поновлення"
 
 #: ../../install_steps_interactive.pm_.c:222
-#, fuzzy
 msgid "Workstation"
-msgstr "╤нформац╕я"
+msgstr "Робоча станц╕я"
 
 #: ../../install_steps_interactive.pm_.c:223
 msgid "Development"
@@ -3660,7 +4135,6 @@ msgid "Server"
 msgstr "Сервер"
 
 #: ../../install_steps_interactive.pm_.c:228
-#, fuzzy
 msgid "What is your system used for?"
 msgstr "Для чого використову╓ться Ваша система?"
 
@@ -3698,14 +4172,14 @@ msgstr "нема╓ п╕дрозд╕л╕в"
 
 #: ../../install_steps_interactive.pm_.c:291
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Сканування п╕дрозд╕л╕в для знаходження точок монтування"
 
 #: ../../install_steps_interactive.pm_.c:299
 msgid "Choose the mount points"
 msgstr "Вибер╕ть точки монтування"
 
 #: ../../install_steps_interactive.pm_.c:316
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I can try to go on blanking bad partitions (ALL DATA will be lost!).\n"
@@ -3714,9 +4188,12 @@ msgid ""
 "\n"
 "Do you agree to loose all the partitions?\n"
 msgstr ""
-"Не можу прочитати таблицю п╕дрозд╕л╕в, вона занадто з╕псована для\n"
-"мене :(\n"
-"Я спробую стерти з╕псован╕ п╕дрозд╕ли  ╕ ВС╤ ДАН╤ будуть втрачен╕ (%s)"
+"Не можу прочитати таблицю п╕дрозд╕л╕в, вона занадто з╕псована для мене\n"
+":( Я спробую стерти з╕псован╕ п╕дрозд╕ли ╕ ВС╤ ДАН╤ будуть\n"
+"втрачен╕. Проблем╕ можна також запоб╕гти, якщо заборонити DrakX\n"
+"зм╕нювати таблицю п╕дрозд╕л╕в. (помилка: %s)\n"
+"\n"
+"Ви погоджу╓тесь втратити вс╕ п╕дрозд╕ли?\n"
 
 #: ../../install_steps_interactive.pm_.c:329
 msgid ""
@@ -3772,12 +4249,12 @@ msgid "Finding packages to upgrade"
 msgstr "Шукаю пакети для поновлення"
 
 #: ../../install_steps_interactive.pm_.c:433
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system has not enough space left for installation or upgrade (%d > %d)"
 msgstr ""
 "У Ваш╕й систем╕ не залишилось достатньо в╕льного м╕сця для установки\n"
-"чи поновлення."
+"чи поновлення (%d > %d )"
 
 #: ../../install_steps_interactive.pm_.c:449
 #, c-format
@@ -3795,14 +4272,12 @@ msgid "Recommended (%dMB)"
 msgstr "Рекомендований (%dМб)"
 
 #: ../../install_steps_interactive.pm_.c:455
-#, fuzzy
 msgid "Custom"
 msgstr "Спец╕альний"
 
 #: ../../install_steps_interactive.pm_.c:462
-#, fuzzy
 msgid "Select the size you want to install"
-msgstr "Вибер╕ть розм╕р, як╕ Ви хочете встановити"
+msgstr "Вибер╕ть розм╕р, який Ви хочете встановити"
 
 #: ../../install_steps_interactive.pm_.c:508
 msgid "Package Group Selection"
@@ -3908,94 +4383,93 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:668
+#: ../../install_steps_interactive.pm_.c:669
 msgid "Choose a mirror from which to get the packages"
 msgstr "Вибер╕ть сервер, з якого звантажити пакети"
 
-#: ../../install_steps_interactive.pm_.c:676
+#: ../../install_steps_interactive.pm_.c:680
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Зв'язуюсь з сервером щоб прочитати список наявних пакет╕в"
 
-#: ../../install_steps_interactive.pm_.c:679
+#: ../../install_steps_interactive.pm_.c:683
 msgid "Please choose the packages you want to install."
 msgstr "Вибер╕ть пакети, як╕ Ви хочете встановити"
 
-#: ../../install_steps_interactive.pm_.c:691
+#: ../../install_steps_interactive.pm_.c:695
 msgid "Which is your timezone?"
 msgstr "В як╕й часов╕й смуз╕ Ви знаходитесь?"
 
-#: ../../install_steps_interactive.pm_.c:693
+#: ../../install_steps_interactive.pm_.c:697
 msgid "Is your hardware clock set to GMT?"
 msgstr "Чи Ваш годинник встановлений по GMT (час по ╫р╕нв╕чу)?"
 
-#: ../../install_steps_interactive.pm_.c:731
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:735
 msgid "Which printing system do you want to use?"
-msgstr "Розм╕р якого п╕дрозд╕лу Ви хочете зм╕нити?"
+msgstr "Яку систему друку Ви хочете використовувати?"
 
-#: ../../install_steps_interactive.pm_.c:758
+#: ../../install_steps_interactive.pm_.c:762
 msgid "No password"
 msgstr "Без паролю"
 
-#: ../../install_steps_interactive.pm_.c:763
+#: ../../install_steps_interactive.pm_.c:767
 msgid "Use shadow file"
 msgstr "Використовувати т╕ньов╕ парол╕"
 
-#: ../../install_steps_interactive.pm_.c:763
+#: ../../install_steps_interactive.pm_.c:767
 msgid "shadow"
 msgstr "т╕ньов╕"
 
-#: ../../install_steps_interactive.pm_.c:764
+#: ../../install_steps_interactive.pm_.c:768
 msgid "MD5"
 msgstr "MD5"
 
-#: ../../install_steps_interactive.pm_.c:764
+#: ../../install_steps_interactive.pm_.c:768
 msgid "Use MD5 passwords"
 msgstr "Використовувати MD5 парол╕"
 
-#: ../../install_steps_interactive.pm_.c:766
+#: ../../install_steps_interactive.pm_.c:770
 msgid "Use NIS"
 msgstr "Користуватися NIS"
 
-#: ../../install_steps_interactive.pm_.c:766
+#: ../../install_steps_interactive.pm_.c:770
 msgid "yellow pages"
 msgstr "жовт╕ стор╕нки"
 
-#: ../../install_steps_interactive.pm_.c:772
+#: ../../install_steps_interactive.pm_.c:776
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr ""
 "Цей пароль занадто простий (в╕н повинен бути хоча б %d л╕тер завдовжки)"
 
-#: ../../install_steps_interactive.pm_.c:779
+#: ../../install_steps_interactive.pm_.c:783
 msgid "Authentification NIS"
 msgstr "NIS автентикац╕я"
 
-#: ../../install_steps_interactive.pm_.c:780
+#: ../../install_steps_interactive.pm_.c:784
 msgid "NIS Domain"
 msgstr "Домен NIS"
 
-#: ../../install_steps_interactive.pm_.c:780
+#: ../../install_steps_interactive.pm_.c:784
 msgid "NIS Server"
 msgstr "Сервер NIS"
 
-#: ../../install_steps_interactive.pm_.c:805
+#: ../../install_steps_interactive.pm_.c:809
 #: ../../standalone/adduserdrake_.c:36
 msgid "Accept user"
 msgstr "Прийняти користувача"
 
-#: ../../install_steps_interactive.pm_.c:805
+#: ../../install_steps_interactive.pm_.c:809
 #: ../../standalone/adduserdrake_.c:36
 msgid "Add user"
 msgstr "Додати користувача"
 
-#: ../../install_steps_interactive.pm_.c:806
+#: ../../install_steps_interactive.pm_.c:810
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid "(already added %s)"
 msgstr "(вже створений %s)"
 
-#: ../../install_steps_interactive.pm_.c:806
+#: ../../install_steps_interactive.pm_.c:810
 #: ../../standalone/adduserdrake_.c:37
 #, c-format
 msgid ""
@@ -4005,37 +4479,37 @@ msgstr ""
 "Введ╕ть користувача\n"
 "%s"
 
-#: ../../install_steps_interactive.pm_.c:808
+#: ../../install_steps_interactive.pm_.c:812
 #: ../../standalone/adduserdrake_.c:39
 msgid "Real name"
 msgstr "Повне ╕м'я"
 
-#: ../../install_steps_interactive.pm_.c:809 ../../printerdrake.pm_.c:93
+#: ../../install_steps_interactive.pm_.c:813 ../../printerdrake.pm_.c:93
 #: ../../printerdrake.pm_.c:127 ../../standalone/adduserdrake_.c:40
 msgid "User name"
 msgstr "╤м'я користувача"
 
-#: ../../install_steps_interactive.pm_.c:814
+#: ../../install_steps_interactive.pm_.c:818
 #: ../../standalone/adduserdrake_.c:45
 msgid "Shell"
 msgstr "Командна оболонка"
 
-#: ../../install_steps_interactive.pm_.c:816
+#: ../../install_steps_interactive.pm_.c:820
 #: ../../standalone/adduserdrake_.c:47
 msgid "Icon"
 msgstr "П╕ктограма"
 
-#: ../../install_steps_interactive.pm_.c:826
+#: ../../install_steps_interactive.pm_.c:830
 #: ../../standalone/adduserdrake_.c:57
 msgid "This password is too simple"
 msgstr "Пароль занадто простий"
 
-#: ../../install_steps_interactive.pm_.c:827
+#: ../../install_steps_interactive.pm_.c:831
 #: ../../standalone/adduserdrake_.c:58
 msgid "Please give a user name"
 msgstr "Дайте, будь-ласка, ╕м'я користувача"
 
-#: ../../install_steps_interactive.pm_.c:828
+#: ../../install_steps_interactive.pm_.c:832
 #: ../../standalone/adduserdrake_.c:59
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
@@ -4043,12 +4517,12 @@ msgstr ""
 "╤м'я користувача повинно складатися т╕льки з малих латинських л╕тер,\n"
 "чисел, `-' та `_'"
 
-#: ../../install_steps_interactive.pm_.c:829
+#: ../../install_steps_interactive.pm_.c:833
 #: ../../standalone/adduserdrake_.c:60
 msgid "This user name is already added"
 msgstr "Це ╕м'я вже зайняте"
 
-#: ../../install_steps_interactive.pm_.c:853
+#: ../../install_steps_interactive.pm_.c:857
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4077,19 +4551,19 @@ msgstr ""
 "Якщо Ви бажа╓те створити авар╕йний диск для сво╓╖ системи вставте\n"
 "дискету в перший дисков╕д ╕ натисн╕ть \"Гаразд\"."
 
-#: ../../install_steps_interactive.pm_.c:869
+#: ../../install_steps_interactive.pm_.c:873
 msgid "First floppy drive"
 msgstr "Перша дискета"
 
-#: ../../install_steps_interactive.pm_.c:870
+#: ../../install_steps_interactive.pm_.c:874
 msgid "Second floppy drive"
 msgstr "Другий прив╕д дискети"
 
-#: ../../install_steps_interactive.pm_.c:871
+#: ../../install_steps_interactive.pm_.c:875
 msgid "Skip"
 msgstr "Пропустити"
 
-#: ../../install_steps_interactive.pm_.c:876
+#: ../../install_steps_interactive.pm_.c:880
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -4112,34 +4586,34 @@ msgstr ""
 "набагато прост╕шим. Чи бажа╓те Ви створити авар╕йний диск для сво╓╖\n"
 "системи?"
 
-#: ../../install_steps_interactive.pm_.c:885
+#: ../../install_steps_interactive.pm_.c:889
 msgid "Sorry, no floppy drive available"
 msgstr "Перепрошую, нема╓ приводу дискети"
 
-#: ../../install_steps_interactive.pm_.c:888
+#: ../../install_steps_interactive.pm_.c:892
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 "Вибер╕ть прив╕д дискети, який Ви хочете використовувати для створення\n"
 "авар╕йно╖ дискети"
 
-#: ../../install_steps_interactive.pm_.c:894
+#: ../../install_steps_interactive.pm_.c:898
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Вставте дискету в дисков╕д %s"
 
-#: ../../install_steps_interactive.pm_.c:897
+#: ../../install_steps_interactive.pm_.c:901
 msgid "Creating bootdisk"
 msgstr "Створюю дискету для завантаження"
 
-#: ../../install_steps_interactive.pm_.c:904
+#: ../../install_steps_interactive.pm_.c:908
 msgid "Preparing bootloader"
 msgstr "Встановлюю завантажувальний блок"
 
-#: ../../install_steps_interactive.pm_.c:913
+#: ../../install_steps_interactive.pm_.c:917
 msgid "Do you want to use aboot?"
 msgstr "Чи Ви хочете використовувати aboot?"
 
-#: ../../install_steps_interactive.pm_.c:916
+#: ../../install_steps_interactive.pm_.c:920
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -4147,80 +4621,80 @@ msgstr ""
 "Помилка при встановленн╕ aboot,\n"
 "попробувати встановити силою, нав╕ть якщо це розрушить перший п╕дрозд╕л?"
 
-#: ../../install_steps_interactive.pm_.c:925
+#: ../../install_steps_interactive.pm_.c:929
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Установка завантажувача неусп╕шна. Сталася помилка:"
 
-#: ../../install_steps_interactive.pm_.c:939 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:943 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "Зломщики! Ласкаво просимо!"
 
-#: ../../install_steps_interactive.pm_.c:940 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:944 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "Дуже низький"
 
-#: ../../install_steps_interactive.pm_.c:941 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:945 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "Низький"
 
-#: ../../install_steps_interactive.pm_.c:942 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:946 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "Середн╕й"
 
-#: ../../install_steps_interactive.pm_.c:943 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:947 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "Високий"
 
-#: ../../install_steps_interactive.pm_.c:944 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:948 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Парано╕дальний"
 
-#: ../../install_steps_interactive.pm_.c:958
+#: ../../install_steps_interactive.pm_.c:962
 msgid "Miscellaneous questions"
 msgstr "Р╕зн╕ запитання"
 
-#: ../../install_steps_interactive.pm_.c:959
+#: ../../install_steps_interactive.pm_.c:963
 msgid "(may cause data corruption)"
 msgstr "(може визвати втрату даних)"
 
-#: ../../install_steps_interactive.pm_.c:959
+#: ../../install_steps_interactive.pm_.c:963
 msgid "Use hard drive optimisations?"
 msgstr "Користуватися оптим╕зац╕╓ю диску?"
 
-#: ../../install_steps_interactive.pm_.c:960 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:964 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "Вибер╕ть р╕вень захисту"
 
-#: ../../install_steps_interactive.pm_.c:961
+#: ../../install_steps_interactive.pm_.c:965
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
 msgstr "Точний об'╓м пам'ят╕ (RAM). Знайдено %d Мб"
 
-#: ../../install_steps_interactive.pm_.c:963
+#: ../../install_steps_interactive.pm_.c:967
 msgid "Removable media automounting"
 msgstr "Монтування зм╕нних диск╕в"
 
-#: ../../install_steps_interactive.pm_.c:965
+#: ../../install_steps_interactive.pm_.c:969
 msgid "Clean /tmp at each boot"
 msgstr "Очищати /tmp при кожному перевантаженн╕"
 
-#: ../../install_steps_interactive.pm_.c:968
+#: ../../install_steps_interactive.pm_.c:972
 msgid "Enable multi profiles"
 msgstr "Дозволити багатопроф╕льн╕сть"
 
-#: ../../install_steps_interactive.pm_.c:970
+#: ../../install_steps_interactive.pm_.c:974
 msgid "Enable num lock at startup"
 msgstr "Дозволити numlock при старт╕"
 
-#: ../../install_steps_interactive.pm_.c:973
+#: ../../install_steps_interactive.pm_.c:977
 msgid "Give the ram size in MB"
 msgstr "Давати розм╕р пам'ят╕ в Мб"
 
-#: ../../install_steps_interactive.pm_.c:975
+#: ../../install_steps_interactive.pm_.c:979
 msgid "Can't use supermount in high security level"
 msgstr "При високому р╕вн╕ безпеки не можу користуватися supermount"
 
-#: ../../install_steps_interactive.pm_.c:977
+#: ../../install_steps_interactive.pm_.c:981
 msgid ""
 "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
 "If you want to be root, you have to login as a user and then use \"su\".\n"
@@ -4237,7 +4711,7 @@ msgstr ""
 "\n"
 "Ви попереджен╕."
 
-#: ../../install_steps_interactive.pm_.c:982
+#: ../../install_steps_interactive.pm_.c:986
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
@@ -4246,23 +4720,23 @@ msgstr ""
 "того, що багато як╕ клав╕ш╕ будуть друкувати цифри зам╕сть\n"
 "л╕тер. (так, наприклад, при натисканн╕ `p' Ви отрима╓те `6')"
 
-#: ../../install_steps_interactive.pm_.c:1028
+#: ../../install_steps_interactive.pm_.c:1032
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 "Чи хочете Ви створити авто-установочну дискету для багаторазових установок "
 "системи?"
 
-#: ../../install_steps_interactive.pm_.c:1030
+#: ../../install_steps_interactive.pm_.c:1034
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Вставте чисту дискету в дисков╕д %s"
 
-#: ../../install_steps_interactive.pm_.c:1045
-#: ../../install_steps_interactive.pm_.c:1075
+#: ../../install_steps_interactive.pm_.c:1049
+#: ../../install_steps_interactive.pm_.c:1079
 msgid "Creating auto install floppy"
 msgstr "Створення автоустановочно╖ дискети"
 
-#: ../../install_steps_interactive.pm_.c:1100
+#: ../../install_steps_interactive.pm_.c:1104
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -4272,7 +4746,7 @@ msgstr ""
 "\n"
 "Ви д╕йсно хочете припинити зараз?"
 
-#: ../../install_steps_interactive.pm_.c:1109
+#: ../../install_steps_interactive.pm_.c:1113
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -4335,10 +4809,10 @@ msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ваш виб╕р? (рекомендований %s, введ╕ть `none' для н╕якого) "
 
 #: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
-msgid "Czech"
-msgstr "Чеська"
+msgid "Czech (QWERTZ)"
+msgstr "Чеська (QWERTZ)"
 
-#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:138
 msgid "German"
 msgstr "Н╕мецька"
 
@@ -4346,19 +4820,19 @@ msgstr "Н╕мецька"
 msgid "Dvorak"
 msgstr "Дворака"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:144
 msgid "Spanish"
 msgstr "╤спанська"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:145
 msgid "Finnish"
 msgstr "Ф╕нська"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:146
 msgid "French"
 msgstr "Французька"
 
-#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:166
 msgid "Norwegian"
 msgstr "Норвезька"
 
@@ -4366,15 +4840,15 @@ msgstr "Норвезька"
 msgid "Polish"
 msgstr "Польська"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:171
 msgid "Russian"
 msgstr "Рос╕йська"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:182
 msgid "UK keyboard"
 msgstr "Британська клав╕атура"
 
-#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:183
 msgid "US keyboard"
 msgstr "Клав╕атура США"
 
@@ -4422,151 +4896,167 @@ msgstr "Швейцарська (н╕мецька розкладка)"
 msgid "Swiss (French layout)"
 msgstr "Швейцарська (французька розкладка)"
 
+#: ../../keyboard.pm_.c:136
+msgid "Czech (QWERTY)"
+msgstr "Чеська (QWERTY)"
+
 #: ../../keyboard.pm_.c:137
+msgid "Czech (Programmers)"
+msgstr ""
+
+#: ../../keyboard.pm_.c:139
 msgid "German (no dead keys)"
 msgstr "Н╕мецька (без мертвих клав╕ш)"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:140
 msgid "Danish"
 msgstr "Датська"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:141
 msgid "Dvorak (US)"
 msgstr "Дворака (США)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:142
 msgid "Dvorak (Norwegian)"
 msgstr "Дворака (Норвезька)"
 
-#: ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:143
 msgid "Estonian"
 msgstr "Естонська"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:147
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Грузинська (рос╕йська розкладка)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:148
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Грузинська (латинська розкладка)"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:149
 msgid "Greek"
 msgstr "Грецька"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:150
 msgid "Hungarian"
 msgstr "Угорська"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:151
 msgid "Croatian"
 msgstr "Хорватська"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:152
 msgid "Israeli"
 msgstr "╤зра╖льська"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:153
 msgid "Israeli (Phonetic)"
 msgstr "╤зра╖льська (фонетична)"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:154
 msgid "Iranian"
 msgstr "╤ранська"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:155
 msgid "Icelandic"
 msgstr "╤сландська"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:156
 msgid "Italian"
 msgstr "╤тал╕йська"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:157
 msgid "Japanese 106 keys"
 msgstr "Японська 106 клав╕ш"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Latin American"
 msgstr "Латино-американська"
 
-#: ../../keyboard.pm_.c:158
+#: ../../keyboard.pm_.c:160
 msgid "Dutch"
 msgstr "Датська"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (old)"
 msgstr "Литовська AZERTY (стара)"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian AZERTY (new)"
 msgstr "Литовська AZERTY (нова)"
 
-#: ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:164
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Литовська \"цифровий ряд\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Литовська \"фонетична\" QWERTY"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Polish (qwerty layout)"
 msgstr "Польська (розкладка qwerty)"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Polish (qwertz layout)"
 msgstr "Польська (розкладка qwertz)"
 
-#: ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:169
 msgid "Portuguese"
 msgstr "Португальська"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Canadian (Quebec)"
 msgstr "Канадська (Квебек)"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Russian (Yawerty)"
 msgstr "Рос╕йська (ЯВЕРТИ)"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Swedish"
 msgstr "Шведська"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Slovenian"
 msgstr "Словенська"
 
-#: ../../keyboard.pm_.c:173
-msgid "Slovakian"
-msgstr "Словацька"
+#: ../../keyboard.pm_.c:175
+msgid "Slovakian (QWERTZ)"
+msgstr "Словацька (QWERTZ)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
+msgid "Slovakian (QWERTY)"
+msgstr "Словацька (QWERTY)"
+
+#: ../../keyboard.pm_.c:177
+msgid "Slovakian (Programmers)"
+msgstr ""
+
+#: ../../keyboard.pm_.c:178
 msgid "Thai keyboard"
 msgstr "Тайська клав╕атура"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:179
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Турецька (традиц╕йна \"F\" модель)"
 
-#: ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:180
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Турецька (традиц╕йна \"Q\" модель)"
 
-#: ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:181
 msgid "Ukrainian"
 msgstr "Укра╖нська"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:184
 msgid "US keyboard (international)"
 msgstr "Клав╕атура США (м╕жнародна)"
 
-#: ../../keyboard.pm_.c:181
+#: ../../keyboard.pm_.c:185
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "В'╓тнамська \"цифровий ряд\" QWERTY"
 
-#: ../../keyboard.pm_.c:182
+#: ../../keyboard.pm_.c:186
 msgid "Yugoslavian (latin layout)"
 msgstr "Югославська (латинська розкладка)"
 
@@ -4576,15 +5066,16 @@ msgstr "Миша Sun"
 
 #: ../../mouse.pm_.c:31
 msgid "Standard"
-msgstr ""
+msgstr "Стандартний"
 
 #: ../../mouse.pm_.c:32
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
 
-#: ../../mouse.pm_.c:33 ../../mouse.pm_.c:51
-msgid "Microsoft IntelliMouse"
-msgstr "Microsoft IntelliMouse"
+#: ../../mouse.pm_.c:33
+#, fuzzy
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Generic Mouse"
 
 #: ../../mouse.pm_.c:34
 msgid "GlidePoint"
@@ -4607,21 +5098,24 @@ msgid "Generic"
 msgstr "Загальне"
 
 #: ../../mouse.pm_.c:44
-#, fuzzy
 msgid "Wheel"
-msgstr "р╕вень"
+msgstr "Кол╕щатко"
 
 #: ../../mouse.pm_.c:47
 msgid "serial"
-msgstr "serial"
+msgstr "посл╕довний"
 
 #: ../../mouse.pm_.c:49
 msgid "Generic 2 Button Mouse"
-msgstr ""
+msgstr "Звичайна 2х кнопочна мишка"
 
 #: ../../mouse.pm_.c:50
 msgid "Generic 3 Button Mouse"
-msgstr ""
+msgstr "Звичайна 3х кнопочна мишка"
+
+#: ../../mouse.pm_.c:51
+msgid "Microsoft IntelliMouse"
+msgstr "Microsoft IntelliMouse"
 
 #: ../../mouse.pm_.c:52
 msgid "Logitech MouseMan"
@@ -4633,7 +5127,7 @@ msgstr "Mouse Systems"
 
 #: ../../mouse.pm_.c:55
 msgid "Logitech CC Series"
-msgstr "Logitech CC Series"
+msgstr "Типу Logitech CC"
 
 #: ../../mouse.pm_.c:56
 msgid "Logitech MouseMan+/FirstMouse+"
@@ -4641,7 +5135,7 @@ msgstr "Logitech MouseMan+/FirstMouse+"
 
 #: ../../mouse.pm_.c:58
 msgid "MM Series"
-msgstr "MM Series"
+msgstr "Типу MM"
 
 #: ../../mouse.pm_.c:59
 msgid "MM HitTablet"
@@ -4658,15 +5152,16 @@ msgstr "Без мишки"
 
 #: ../../mouse.pm_.c:66
 msgid "2 buttons"
-msgstr ""
+msgstr "Двох кнопочна"
 
 #: ../../mouse.pm_.c:67
 msgid "3 buttons"
-msgstr ""
+msgstr "Трьох кнопочна"
 
 #: ../../mouse.pm_.c:70
+#, fuzzy
 msgid "none"
-msgstr "н╕чого"
+msgstr "Н╕чого"
 
 #: ../../mouse.pm_.c:72
 msgid "No mouse"
@@ -4674,44 +5169,46 @@ msgstr "Без мишки"
 
 #: ../../my_gtk.pm_.c:243
 msgid "Next ->"
-msgstr ""
+msgstr "Дал╕ ->"
 
 #: ../../my_gtk.pm_.c:486
 msgid "Is this correct?"
 msgstr "Все в╕рно?"
 
-#: ../../netconnect.pm_.c:93
+#: ../../netconnect.pm_.c:93 ../../netconnect_new.pm_.c:151
 msgid "Internet configuration"
 msgstr "Конф╕гурац╕я ╕нтернету"
 
-#: ../../netconnect.pm_.c:94
+#: ../../netconnect.pm_.c:94 ../../netconnect_new.pm_.c:152
+#, fuzzy
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Чи Ви хочете спробувати п╕дключитися до ╕нтернету зараз?"
 
-#: ../../netconnect.pm_.c:101
+#: ../../netconnect.pm_.c:101 ../../netconnect_new.pm_.c:159
 #, fuzzy
 msgid "Testing your connection..."
-msgstr "Настро╖ти з'╓днання з ╕нтернетом"
+msgstr "Який тип з'╓днання ISDN Ви ма╓те?"
 
-#: ../../netconnect.pm_.c:106
+#: ../../netconnect.pm_.c:106 ../../netconnect_new.pm_.c:164
 #, fuzzy
 msgid "The system is now connected to Internet."
 msgstr "Не  встановлювати з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:107
-#, fuzzy
+#: ../../netconnect.pm_.c:107 ../../netconnect_new.pm_.c:165
 msgid ""
 "The system doesn't seem to be connected to internet.\n"
 "Try to reconfigure your connection."
-msgstr "З'╓днатися з ╕нтернетом"
+msgstr ""
 
 #: ../../netconnect.pm_.c:141 ../../netconnect.pm_.c:213
 #: ../../netconnect.pm_.c:232 ../../netconnect.pm_.c:244
-#: ../../netconnect.pm_.c:256
+#: ../../netconnect.pm_.c:256 ../../netconnect_new.pm_.c:226
+#: ../../netconnect_new.pm_.c:300 ../../netconnect_new.pm_.c:319
+#: ../../netconnect_new.pm_.c:331 ../../netconnect_new.pm_.c:343
 msgid "ISDN Configuration"
 msgstr "Конф╕╜урац╕я ISDN"
 
-#: ../../netconnect.pm_.c:141
+#: ../../netconnect.pm_.c:141 ../../netconnect_new.pm_.c:226
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
@@ -4719,118 +5216,116 @@ msgstr ""
 "Вибер╕ть свого провайдера.\n"
 "Якщо його нема╓ в списку, вибер╕ть ╤нший"
 
-#: ../../netconnect.pm_.c:158
-#, fuzzy
+#: ../../netconnect.pm_.c:158 ../../netconnect_new.pm_.c:245
 msgid "Connection Configuration"
-msgstr "Конф╕гурац╕я ╕нтернету"
+msgstr "Конф╕гурац╕я з'╓днання"
 
-#: ../../netconnect.pm_.c:159
+#: ../../netconnect.pm_.c:159 ../../netconnect_new.pm_.c:246
 msgid "Please fill or check the field below"
 msgstr "Будь-ласка заповн╕ть або вибер╕ть поле внизу"
 
-#: ../../netconnect.pm_.c:161
+#: ../../netconnect.pm_.c:161 ../../netconnect_new.pm_.c:248
 msgid "Card IRQ"
 msgstr "Перепин картки"
 
-#: ../../netconnect.pm_.c:162
+#: ../../netconnect.pm_.c:162 ../../netconnect_new.pm_.c:249
 msgid "Card mem (DMA)"
 msgstr "Пам'ять картки (DMA)"
 
-#: ../../netconnect.pm_.c:163
+#: ../../netconnect.pm_.c:163 ../../netconnect_new.pm_.c:250
 msgid "Card IO"
 msgstr "В/В картки"
 
-#: ../../netconnect.pm_.c:164
+#: ../../netconnect.pm_.c:164 ../../netconnect_new.pm_.c:251
 msgid "Card IO_0"
 msgstr "В/В_0 картки"
 
-#: ../../netconnect.pm_.c:165
+#: ../../netconnect.pm_.c:165 ../../netconnect_new.pm_.c:252
 msgid "Card IO_1"
 msgstr "В/В_1 картки"
 
-#: ../../netconnect.pm_.c:166
+#: ../../netconnect.pm_.c:166 ../../netconnect_new.pm_.c:253
+#, fuzzy
 msgid "Your personal phone number"
 msgstr "Ваш особистий номер телефону"
 
-#: ../../netconnect.pm_.c:168
+#: ../../netconnect.pm_.c:168 ../../netconnect_new.pm_.c:255
 msgid "Provider name (ex provider.net)"
 msgstr "Назва провайдера (тобто provider.net)"
 
-#: ../../netconnect.pm_.c:169
+#: ../../netconnect.pm_.c:169 ../../netconnect_new.pm_.c:256
 msgid "Provider phone number"
 msgstr "Номер телефону провайдера"
 
-#: ../../netconnect.pm_.c:170
+#: ../../netconnect.pm_.c:170 ../../netconnect_new.pm_.c:257
 msgid "Provider dns 1"
 msgstr "1й DNS провайдера"
 
-#: ../../netconnect.pm_.c:171
+#: ../../netconnect.pm_.c:171 ../../netconnect_new.pm_.c:258
 msgid "Provider dns 2"
 msgstr "2й DNS провайдера"
 
-#: ../../netconnect.pm_.c:172
+#: ../../netconnect.pm_.c:172 ../../netconnect_new.pm_.c:259
 msgid "Dialing mode"
 msgstr "Режим зв'язку через модем"
 
-#: ../../netconnect.pm_.c:174
-#, fuzzy
+#: ../../netconnect.pm_.c:174 ../../netconnect_new.pm_.c:261
 msgid "Account Login (user name)"
-msgstr "Рахунок користувача"
+msgstr "Рахунок користувача (╕м'я користувача)"
 
-#: ../../netconnect.pm_.c:175
+#: ../../netconnect.pm_.c:175 ../../netconnect_new.pm_.c:262
 msgid "Account Password"
 msgstr "Пароль у провайдера"
 
-#: ../../netconnect.pm_.c:176
+#: ../../netconnect.pm_.c:176 ../../netconnect_new.pm_.c:263
 msgid "Confirm Password"
 msgstr "П╕дтвердження пароля"
 
-#: ../../netconnect.pm_.c:208
+#: ../../netconnect.pm_.c:208 ../../netconnect_new.pm_.c:295
 msgid "Europe"
 msgstr "╢вропа"
 
-#: ../../netconnect.pm_.c:208
+#: ../../netconnect.pm_.c:208 ../../netconnect_new.pm_.c:295
 msgid "Europe (EDSS1)"
 msgstr "╢вропа (EDSS1)"
 
-#: ../../netconnect.pm_.c:210
-#, fuzzy
+#: ../../netconnect.pm_.c:210 ../../netconnect_new.pm_.c:297
 msgid "Rest of the world"
-msgstr "Тестування конф╕╜урац╕╖"
+msgstr "Весь ╕нший св╕т"
 
-#: ../../netconnect.pm_.c:210
+#: ../../netconnect.pm_.c:210 ../../netconnect_new.pm_.c:297
 msgid "Rest of the world - no D-Channel (leased lines)"
 msgstr "Весь ╕нший св╕т - без D-каналу (вид╕лен╕ л╕н╕╖)"
 
-#: ../../netconnect.pm_.c:214
+#: ../../netconnect.pm_.c:214 ../../netconnect_new.pm_.c:301
 msgid "Which protocol do you want to use ?"
 msgstr "Який протокол Ви хочете використовувати?"
 
-#: ../../netconnect.pm_.c:224
+#: ../../netconnect.pm_.c:224 ../../netconnect_new.pm_.c:311
 msgid "ISA / PCMCIA"
 msgstr "ISA / PCMCIA"
 
-#: ../../netconnect.pm_.c:226
+#: ../../netconnect.pm_.c:226 ../../netconnect_new.pm_.c:313
 msgid "PCI"
 msgstr "PCI"
 
-#: ../../netconnect.pm_.c:228
+#: ../../netconnect.pm_.c:228 ../../netconnect_new.pm_.c:315
 msgid "I don't know"
 msgstr "Не знаю"
 
-#: ../../netconnect.pm_.c:233
+#: ../../netconnect.pm_.c:233 ../../netconnect_new.pm_.c:320
 msgid "What kind of card do you have?"
 msgstr "Який тип картки Ви ма╓те"
 
-#: ../../netconnect.pm_.c:239
+#: ../../netconnect.pm_.c:239 ../../netconnect_new.pm_.c:326
 msgid "Continue"
 msgstr "Продовжувати"
 
-#: ../../netconnect.pm_.c:241
+#: ../../netconnect.pm_.c:241 ../../netconnect_new.pm_.c:328
 msgid "Abort"
 msgstr "В╕дм╕нити"
 
-#: ../../netconnect.pm_.c:245
+#: ../../netconnect.pm_.c:245 ../../netconnect_new.pm_.c:332
 msgid ""
 "\n"
 "If you have an ISA card, the values on the next screen should be right.\n"
@@ -4843,15 +5338,15 @@ msgstr ""
 "\n"
 "Якщо Ви ма╓те плату PCMCIA, Ви повинн╕ знати IRQ та IO Вашо╖ плати.\n"
 
-#: ../../netconnect.pm_.c:257
+#: ../../netconnect.pm_.c:257 ../../netconnect_new.pm_.c:344
 msgid "Which is your ISDN card ?"
 msgstr "Яка Ваша ISDN плата?"
 
-#: ../../netconnect.pm_.c:281
+#: ../../netconnect.pm_.c:282
 msgid "I have found an ISDN Card:\n"
 msgstr "Знайдена плата ISDN:\n"
 
-#: ../../netconnect.pm_.c:287
+#: ../../netconnect.pm_.c:288 ../../netconnect_new.pm_.c:367
 msgid ""
 "I have detected an ISDN PCI Card, but I don't know the type. Please select "
 "one PCI card on the next screen."
@@ -4859,295 +5354,303 @@ msgstr ""
 "Знайдена ISDN PCI плата, але нев╕домого типу. Вибер╕ть, будь-ласка, одну з "
 "плат PCI на наступному екран╕."
 
-#: ../../netconnect.pm_.c:299
+#: ../../netconnect.pm_.c:300 ../../netconnect_new.pm_.c:379
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Не знайдено плати ISDN PCI. Вибер╕ть одну ╕з плат у наступному в╕кн╕."
 
-#: ../../netconnect.pm_.c:331
-#, fuzzy
+#: ../../netconnect.pm_.c:336 ../../netconnect_new.pm_.c:412
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
 "I cannot set up this connection type."
 msgstr ""
-"У Ваш╕й систем╕ нема╓ сконф╕╜урованого адаптера мереж╕ ethernet. "
-"Скористайтесь, будь-ласка, конф╕гурац╕╓ю апаратних засоб╕в."
+"У Ваш╕й систем╕ нема╓ сконф╕╜урованого адаптера мереж╕ ethernet. Не\n"
+"можна встановити з'╓днання цього типу."
 
-#: ../../netconnect.pm_.c:335 ../../standalone/drakgw_.c:222
+#: ../../netconnect.pm_.c:340 ../../netconnect_new.pm_.c:417
+#: ../../standalone/drakgw_.c:222
 msgid "Choose the network interface"
 msgstr "Вибер╕ть ╕нтерфейс мереж╕"
 
-#: ../../netconnect.pm_.c:336
+#: ../../netconnect.pm_.c:341 ../../netconnect_new.pm_.c:418
 #, fuzzy
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet"
-msgstr "Вибер╕ть до якого посл╕довного порту при╓днано мишу?"
+msgstr ""
+"Вибер╕ть яку плату мереж╕ Ви хочете використати для з'╓днання з\n"
+"╤нтернетом"
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
-#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:356 ../../netconnect.pm_.c:635
+#: ../../netconnect.pm_.c:766 ../../netconnect_new.pm_.c:425
+#: ../../netconnect_new.pm_.c:777 ../../netconnect_new.pm_.c:908
+#: ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "╤нтерфейс мереж╕"
 
-#: ../../netconnect.pm_.c:352
+#: ../../netconnect.pm_.c:357 ../../netconnect_new.pm_.c:426
 msgid ""
 "\n"
 "Do you agree?"
 msgstr ""
 
-#: ../../netconnect.pm_.c:352
+#: ../../netconnect.pm_.c:357 ../../netconnect_new.pm_.c:426
 #, fuzzy
 msgid "I'm about to restart the network device:\n"
-msgstr "Чи Ви хочете випробувати нову конф╕╜урац╕ю?"
+msgstr "Зараз буде перезапущений пристр╕й мереж╕ $device. Ви погоджу╓тесь?"
 
-#: ../../netconnect.pm_.c:468
+#: ../../netconnect.pm_.c:473 ../../netconnect_new.pm_.c:512
 msgid "ADSL configuration"
 msgstr "Конф╕╜урац╕я ADSL"
 
-#: ../../netconnect.pm_.c:469
+#: ../../netconnect.pm_.c:474 ../../netconnect_new.pm_.c:513
 msgid "Do you want to start your connection at boot?"
 msgstr "Чи Ви хочете в╕дкривати з'╓днання при завантаженн╕ системи?"
 
-#: ../../netconnect.pm_.c:536
+#: ../../netconnect.pm_.c:541 ../../netconnect_new.pm_.c:672
 msgid "Try to find a modem?"
 msgstr "Спробувати в╕дшукати модем?"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:551 ../../netconnect_new.pm_.c:677
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Вибер╕ть до якого посл╕довного порта п╕дключений Ваш модем?"
 
-#: ../../netconnect.pm_.c:551
+#: ../../netconnect.pm_.c:556 ../../netconnect_new.pm_.c:682
 msgid "Dialup options"
 msgstr "Параметри зв'язку по модему"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:557 ../../netconnect_new.pm_.c:683
 msgid "Connection name"
 msgstr "Назва зв'язку"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:558 ../../netconnect_new.pm_.c:684
 msgid "Phone number"
 msgstr "Номер телефону"
 
-#: ../../netconnect.pm_.c:554
+#: ../../netconnect.pm_.c:559 ../../netconnect_new.pm_.c:685
 msgid "Login ID"
 msgstr "ID користувача"
 
-#: ../../netconnect.pm_.c:556
+#: ../../netconnect.pm_.c:561 ../../netconnect_new.pm_.c:687
 msgid "Authentication"
 msgstr "Автентикац╕я"
 
-#: ../../netconnect.pm_.c:556
+#: ../../netconnect.pm_.c:561 ../../netconnect_new.pm_.c:687
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:556
+#: ../../netconnect.pm_.c:561 ../../netconnect_new.pm_.c:687
 msgid "Script-based"
 msgstr "За допомогою скрипта"
 
-#: ../../netconnect.pm_.c:556
+#: ../../netconnect.pm_.c:561 ../../netconnect_new.pm_.c:687
 msgid "Terminal-based"
 msgstr "Через терм╕нал"
 
-#: ../../netconnect.pm_.c:557
+#: ../../netconnect.pm_.c:562 ../../netconnect_new.pm_.c:688
 msgid "Domain name"
 msgstr "Назва домену"
 
-#: ../../netconnect.pm_.c:559
+#: ../../netconnect.pm_.c:564 ../../netconnect_new.pm_.c:690
 msgid "First DNS Server"
 msgstr "Перший сервер DNS"
 
-#: ../../netconnect.pm_.c:560
+#: ../../netconnect.pm_.c:565 ../../netconnect_new.pm_.c:691
 msgid "Second DNS Server"
 msgstr "Другий сервер DNS"
 
-#: ../../netconnect.pm_.c:589
+#: ../../netconnect.pm_.c:594 ../../netconnect_new.pm_.c:736
 #, fuzzy
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
-msgstr "З'╓днатися з ╕нтернетом"
+msgstr "З'╓днатися з ╕нтернетом/Настро╖ти локальну мережу"
 
-#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
+#: ../../netconnect.pm_.c:594 ../../netconnect.pm_.c:598
+#: ../../netconnect_new.pm_.c:736 ../../netconnect_new.pm_.c:740
 #, fuzzy
 msgid ""
 "\n"
 "You can reconfigure your connection."
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:589
+#: ../../netconnect.pm_.c:594 ../../netconnect_new.pm_.c:736
 #, fuzzy
 msgid "You are not currently connected to Internet."
 msgstr "Не  встановлювати з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:593
+#: ../../netconnect.pm_.c:598 ../../netconnect_new.pm_.c:740
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
 msgstr ""
 
-#: ../../netconnect.pm_.c:593
+#: ../../netconnect.pm_.c:598 ../../netconnect_new.pm_.c:740
 #, fuzzy
 msgid "You are currently connected to internet."
 msgstr "Не  встановлювати з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:602 ../../netconnect_new.pm_.c:744
 #, fuzzy
 msgid "Connect to Internet"
 msgstr "Зв'язатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:599
+#: ../../netconnect.pm_.c:604 ../../netconnect_new.pm_.c:746
 #, fuzzy
 msgid "Disconnect from Internet"
 msgstr "В╕д'╓днатися в╕д ╕нтернету"
 
-#: ../../netconnect.pm_.c:601
+#: ../../netconnect.pm_.c:606 ../../netconnect_new.pm_.c:748
 #, fuzzy
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:604
+#: ../../netconnect.pm_.c:609 ../../netconnect_new.pm_.c:751
 msgid "Internet connection & configuration"
 msgstr "З'╓днання з ╕нтернетом ╕ конф╕гурац╕я"
 
-#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
+#: ../../netconnect.pm_.c:636 ../../netconnect.pm_.c:767
+#: ../../netconnect_new.pm_.c:778 ../../netconnect_new.pm_.c:909
 msgid ""
 "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
 msgstr ""
+"Зараз буде перезапущений пристр╕й мереж╕ $netc->{NET_DEVICE}. Ви "
+"погоджу╓тесь?"
 
-#: ../../netconnect.pm_.c:648
+#: ../../netconnect.pm_.c:653 ../../netconnect_new.pm_.c:795
 #, fuzzy
 msgid "Configure a normal modem connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:673 ../../netconnect_new.pm_.c:815
 #, fuzzy
 msgid "Configure an ISDN connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:673
+#: ../../netconnect.pm_.c:678 ../../netconnect_new.pm_.c:820
 msgid "Internal ISDN card"
 msgstr "Внутр╕шня плата ISDN"
 
-#: ../../netconnect.pm_.c:675
-#, fuzzy
+#: ../../netconnect.pm_.c:680 ../../netconnect_new.pm_.c:822
 msgid "External ISDN modem"
-msgstr "Зовн╕шн╕й модем"
+msgstr "Зовн╕шн╕й модем ISDN"
 
-#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
-#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
-#: ../../netconnect.pm_.c:793
+#: ../../netconnect.pm_.c:683 ../../netconnect.pm_.c:717
+#: ../../netconnect.pm_.c:729 ../../netconnect.pm_.c:753
+#: ../../netconnect.pm_.c:798 ../../netconnect_new.pm_.c:825
+#: ../../netconnect_new.pm_.c:859 ../../netconnect_new.pm_.c:871
+#: ../../netconnect_new.pm_.c:895 ../../netconnect_new.pm_.c:940
 msgid "Connect to the Internet"
 msgstr "З'╓днатися з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:679
+#: ../../netconnect.pm_.c:684 ../../netconnect_new.pm_.c:826
 msgid "What kind is your ISDN connection?"
 msgstr "Який тип з'╓днання ISDN Ви ма╓те?"
 
-#: ../../netconnect.pm_.c:698
+#: ../../netconnect.pm_.c:703 ../../netconnect_new.pm_.c:845
 #, fuzzy
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:707
+#: ../../netconnect.pm_.c:712 ../../netconnect_new.pm_.c:854
 msgid "France"
 msgstr "Франц╕я"
 
-#: ../../netconnect.pm_.c:709
+#: ../../netconnect.pm_.c:714 ../../netconnect_new.pm_.c:856
 msgid "Other countries"
 msgstr "╤нш╕ кра╖ни"
 
-#: ../../netconnect.pm_.c:713
-#, fuzzy
+#: ../../netconnect.pm_.c:718 ../../netconnect_new.pm_.c:860
 msgid "In which country are you located ?"
 msgstr "В як╕й кра╖н╕ Ви знаходитесь?"
 
-#: ../../netconnect.pm_.c:719
-#, fuzzy
+#: ../../netconnect.pm_.c:724 ../../netconnect_new.pm_.c:866
 msgid "Alcatel modem"
-msgstr "Зовн╕шн╕й модем"
+msgstr "Модем Alcatel"
 
-#: ../../netconnect.pm_.c:721
-#, fuzzy
+#: ../../netconnect.pm_.c:726 ../../netconnect_new.pm_.c:868
 msgid "ECI modem"
-msgstr "Зовн╕шн╕й модем"
+msgstr "Модем ECI"
 
-#: ../../netconnect.pm_.c:725
-#, fuzzy
+#: ../../netconnect.pm_.c:730 ../../netconnect_new.pm_.c:872
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
-msgstr ""
-"Якщо Ваш модем adls типу alctel, вибер╕ть pptp alcatel. Якщо н╕ - pppoe."
+msgstr "Якщо Ваш модем adls типу Alctel, вибер╕ть  Alcatel. Якщо н╕ - ECI."
 
-#: ../../netconnect.pm_.c:743
+#: ../../netconnect.pm_.c:748 ../../netconnect_new.pm_.c:890
 msgid "use pppoe"
-msgstr ""
+msgstr "вживати pppoe"
 
-#: ../../netconnect.pm_.c:745
+#: ../../netconnect.pm_.c:750 ../../netconnect_new.pm_.c:892
 msgid "don't use pppoe"
-msgstr ""
+msgstr "не вживати pppoe"
 
-#: ../../netconnect.pm_.c:749
+#: ../../netconnect.pm_.c:754 ../../netconnect_new.pm_.c:896
+#, fuzzy
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
 "If you don't know, choose 'use pppoe'"
 msgstr ""
+"Найб╕льш поширений спос╕б з'╓днання через adsl - це за допомогою dhcp\n"
+"+ pppoe. Однак, деяк╕ з'╓днання користуються т╕льки dhcp.\n"
+"Якщо Ви не зна╓те напевне вибер╕ть \"вживати pppoe\"."
 
-#: ../../netconnect.pm_.c:772
+#: ../../netconnect.pm_.c:777 ../../netconnect_new.pm_.c:919
 #, fuzzy
 msgid "Configure a cable connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:794
-#, fuzzy
+#: ../../netconnect.pm_.c:799 ../../netconnect_new.pm_.c:941
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
-msgstr "Який протокол Ви хочете використовувати?"
+msgstr ""
+"Який dhcp кл╕╓нт Ви хочете використовувати?\n"
+"Стандартний кл╕╓нт - dhcpd"
 
-#: ../../netconnect.pm_.c:807
+#: ../../netconnect.pm_.c:812 ../../netconnect_new.pm_.c:954
 #, fuzzy
 msgid "Disable Internet Connection"
 msgstr "Настро╖ти з'╓днання з ╕нтернетом"
 
-#: ../../netconnect.pm_.c:818
-#, fuzzy
+#: ../../netconnect.pm_.c:823 ../../netconnect_new.pm_.c:965
 msgid "Configure local network"
-msgstr "Настро╖ти мережу"
+msgstr "Настро╖ти локальну мережу"
 
-#: ../../netconnect.pm_.c:822
+#: ../../netconnect.pm_.c:827 ../../netconnect_new.pm_.c:969
 #, fuzzy
 msgid "Network configuration"
 msgstr "Конф╕гурац╕я мереж╕"
 
-#: ../../netconnect.pm_.c:823
+#: ../../netconnect.pm_.c:828 ../../netconnect_new.pm_.c:970
 #, fuzzy
 msgid "Do you want to restart the network"
 msgstr "Чи Ви хочете випробувати нову конф╕╜урац╕ю?"
 
-#: ../../netconnect.pm_.c:831
-#, fuzzy
+#: ../../netconnect.pm_.c:836 ../../netconnect_new.pm_.c:978
 msgid "Disable networking"
-msgstr "Настро╖ти мережу"
+msgstr "Заборонити мережу"
 
-#: ../../netconnect.pm_.c:841
+#: ../../netconnect.pm_.c:846 ../../netconnect_new.pm_.c:988
 #, fuzzy
 msgid "Configure the Internet connection / Configure local Network"
-msgstr "З'╓днатися з ╕нтернетом"
+msgstr "З'╓днатися з ╕нтернетом/Настро╖ти локальну мережу"
 
-#: ../../netconnect.pm_.c:842
-#, fuzzy
+#: ../../netconnect.pm_.c:847 ../../netconnect_new.pm_.c:989
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
-msgstr "Локальна мережа вже встановлена. Чи Ви хочете:"
+msgstr ""
+"Локальна мережа вже встановлена. \n"
+"Чи Ви хочете:"
 
-#: ../../netconnect.pm_.c:843
+#: ../../netconnect.pm_.c:848 ../../netconnect_new.pm_.c:990
 msgid "How do you want to connect to the Internet?"
 msgstr "Як Ви хочете з'╓днатися з ╕нтернетом?"
 
-#: ../../netconnect.pm_.c:865
+#: ../../netconnect.pm_.c:870 ../../netconnect_new.pm_.c:1012
 msgid "Network Configuration"
 msgstr "Конф╕гурац╕я мереж╕"
 
-#: ../../netconnect.pm_.c:866
+#: ../../netconnect.pm_.c:871 ../../netconnect_new.pm_.c:1013
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -5156,6 +5659,13 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?\n"
 msgstr ""
+"Тепер п╕сля того, як параметри Вашого з'╓днання з ╤нтернетом\n"
+"встановлен╕, Ви можете скоф╕╜урувати св╕й комп'ютер таким чином, щоб\n"
+"в╕н дозволяв сп╕льне використання свого з'╓днання до\n"
+"╤нтернету. Прим╕тка: Вам для цього потр╕бно мати плату мереж╕, щоб\n"
+"настро╖ти локальну мережу (LAN).\n"
+"\n"
+"Чи хочете Ви настро╖ти сп╕льне використання з'╓днання з ╤нтернетом?\n"
 
 #: ../../network.pm_.c:253
 msgid "no network card found"
@@ -5171,16 +5681,11 @@ msgid ""
 "Some DHCP servers require the hostname to work.\n"
 "Your host name should be a fully-qualified host name,\n"
 "such as ``mybox.mylab.myco.com''."
-msgstr ""
-"Введ╕ть, будь-ласка, назву Вашого хоста, якщо Ви ╖╖ зна╓те. Деяк╕\n"
-"сервери DHCP вимагають присутност╕ назви хоста для сво╓╖ роботи. Назва\n"
-"хоста повинна бути повн╕стю квал╕ф╕кованою назвою хоста, такою, як,\n"
-"наприклад, ``mybox.mylab.myco.com''."
+msgstr "з"
 
 #: ../../network.pm_.c:278 ../../network.pm_.c:345
-#, fuzzy
 msgid "Host name"
-msgstr "╤м'я хоста:"
+msgstr "Назва хоста"
 
 #: ../../network.pm_.c:297
 msgid ""
@@ -5189,6 +5694,10 @@ msgid ""
 "Simply press OK to keep this device configured.\n"
 "Modifying the fields below will override this configuration."
 msgstr ""
+"УВАГА: Цей пристр╕й було попередньо настро╓но для з'╓днання з ╤нтернетом.\n"
+"\n"
+"Просто натисн╕ть \"Гаразд\" щоб зберегти конф╕╜урац╕ю пристрою.\n"
+"Зм╕на пол╕в нижче приведе до зм╕ни конф╕╜урац╕╖ пристрою."
 
 #: ../../network.pm_.c:302
 msgid ""
@@ -5210,20 +5719,19 @@ msgid "Automatic IP"
 msgstr "Автоматична конф╕гурац╕я IP"
 
 #: ../../network.pm_.c:314
-#, fuzzy
 msgid "IP address"
-msgstr "IP адреса:"
+msgstr "IP-адреса"
 
 #: ../../network.pm_.c:314
-#, fuzzy
 msgid "Netmask"
-msgstr "Маска мереж╕:"
+msgstr "Маска мереж╕"
 
 #: ../../network.pm_.c:315
 msgid "(bootp/dhcp)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network.pm_.c:321 ../../printerdrake.pm_.c:98
+#: ../../printerdrake.pm_.c:420
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP адреса ма╓ бути у формат╕ 1.2.3.4"
 
@@ -5240,19 +5748,16 @@ msgstr ""
 "Ви також можете ввести IP адресу шлюза якщо Ви такий ма╓те."
 
 #: ../../network.pm_.c:346
-#, fuzzy
 msgid "DNS server"
-msgstr "Сервер DNS:"
+msgstr "Сервер DNS"
 
 #: ../../network.pm_.c:347
-#, fuzzy
 msgid "Gateway"
-msgstr "Шлюз:"
+msgstr "Шлюз"
 
 #: ../../network.pm_.c:348
-#, fuzzy
 msgid "Gateway device"
-msgstr "Шлюзовий пристр╕й:"
+msgstr "Шлюзовий пристр╕й"
 
 #: ../../network.pm_.c:358
 msgid "Proxies configuration"
@@ -5353,24 +5858,20 @@ msgid "Local printer"
 msgstr "Локальний принтер"
 
 #: ../../printer.pm_.c:20
-#, fuzzy
 msgid "Remote printer"
-msgstr "Опц╕╖ в╕ддаленого принтера"
+msgstr "В╕ддалений принтер"
 
-#: ../../printer.pm_.c:21
-#, fuzzy
+#: ../../printer.pm_.c:21 ../../printerdrake.pm_.c:410
 msgid "Remote CUPS server"
-msgstr "В╕ддалена назва принтера"
+msgstr "В╕ддалений сервер CUPS"
 
 #: ../../printer.pm_.c:22
-#, fuzzy
 msgid "Remote lpd server"
-msgstr "В╕ддалений lpd"
+msgstr "В╕ддалений сервер lpd"
 
 #: ../../printer.pm_.c:23
-#, fuzzy
 msgid "Network printer (socket)"
-msgstr "╤нтерфейс мереж╕"
+msgstr "Принтер в мереж╕ (сокет)"
 
 #: ../../printer.pm_.c:24
 msgid "SMB/Windows 95/98/NT"
@@ -5382,9 +5883,8 @@ msgstr "NetWare"
 
 #: ../../printer.pm_.c:26 ../../printerdrake.pm_.c:154
 #: ../../printerdrake.pm_.c:156
-#, fuzzy
 msgid "Printer Device URI"
-msgstr "Пристр╕й принтера: "
+msgstr "URI пристрою принтера"
 
 #: ../../printerdrake.pm_.c:19
 msgid "Detecting devices..."
@@ -5494,29 +5994,28 @@ msgid "Print Queue Name"
 msgstr "Назва принтера"
 
 #: ../../printerdrake.pm_.c:138
-#, fuzzy
 msgid "Socket Printer Options"
-msgstr "Опц╕╖ локального принтера"
+msgstr "Параметри принтера в мереж╕"
 
 #: ../../printerdrake.pm_.c:139
 msgid ""
 "To print to a socket printer, you need to provide the\n"
 "hostname of the printer and optionally the port number."
 msgstr ""
+"Щоб друкувати на принтер╕ в мереж╕, Вам потр╕бно надати\n"
+"назву хоста принтера, та можливо номер порта."
 
 #: ../../printerdrake.pm_.c:141
-#, fuzzy
 msgid "Printer Hostname"
-msgstr "Опц╕╖ принтера"
+msgstr "Назва хоста принтера"
 
-#: ../../printerdrake.pm_.c:142
-#, fuzzy
+#: ../../printerdrake.pm_.c:142 ../../printerdrake.pm_.c:417
 msgid "Port"
-msgstr "Дуже низький"
+msgstr "Порт"
 
 #: ../../printerdrake.pm_.c:155
 msgid "You can specify directly the URI to access the printer with CUPS."
-msgstr ""
+msgstr "Ви прямо можете вказати URI щоб мати доступ до принтера через CUPS."
 
 #: ../../printerdrake.pm_.c:188 ../../printerdrake.pm_.c:240
 msgid "What type of printer do you have?"
@@ -5642,27 +6141,25 @@ msgstr ""
 "Ви можете або додати ще деяк╕, або зм╕нити т╕, що вже ╕снують."
 
 #: ../../printerdrake.pm_.c:365
-#, fuzzy
 msgid "CUPS starting"
-msgstr "Наближене обчислення"
+msgstr "Старту╓ CUPS"
 
 #: ../../printerdrake.pm_.c:365
 msgid "Reading CUPS drivers database..."
-msgstr ""
+msgstr "Читаю базу даних драйвер╕в CUPS..."
 
-#: ../../printerdrake.pm_.c:379 ../../printerdrake.pm_.c:398
-#: ../../printerdrake.pm_.c:411 ../../printerdrake.pm_.c:418
+#: ../../printerdrake.pm_.c:379 ../../printerdrake.pm_.c:444
+#: ../../printerdrake.pm_.c:457 ../../printerdrake.pm_.c:464
 msgid "Select Printer Connection"
 msgstr "Вибер╕ть з'╓днання принтера"
 
-#: ../../printerdrake.pm_.c:380 ../../printerdrake.pm_.c:412
+#: ../../printerdrake.pm_.c:380 ../../printerdrake.pm_.c:458
 msgid "How is the printer connected?"
 msgstr "Як принтер з'╓днаний"
 
 #: ../../printerdrake.pm_.c:387
-#, fuzzy
 msgid "Select Remote Printer Connection"
-msgstr "Вибер╕ть з'╓днання принтера"
+msgstr "Вибер╕ть з'╓днання в╕ддаленого принтера"
 
 #: ../../printerdrake.pm_.c:388
 msgid ""
@@ -5670,40 +6167,61 @@ msgid ""
 "any printer here; printers will be automatically detected.\n"
 "In case of doubt, select \"Remote CUPS server\"."
 msgstr ""
+"Для в╕ддаленого сервера CUPS Вам не потр╕бно конф╕╜урувати принтер╕в,\n"
+"вс╕ принтери будуть автоматично визначен╕. Якщо Ви сумн╕ва╓тесь,\n"
+"вибер╕ть \"В╕ддалений сервер CUPS\"."
 
-#: ../../printerdrake.pm_.c:399 ../../printerdrake.pm_.c:418
+#: ../../printerdrake.pm_.c:411
+#, fuzzy
+msgid ""
+"With a remote CUPS server, you do not have to configure\n"
+"any printer here; printers will be automatically detected\n"
+"unless you have a server on a different network; in the\n"
+"latter case, you have to give the CUPS server IP address\n"
+"and optionally the port number."
+msgstr ""
+"Для в╕ддаленого сервера CUPS Вам не потр╕бно конф╕╜урувати принтер╕в,\n"
+"вс╕ принтери будуть автоматично визначен╕. Якщо Ви сумн╕ва╓тесь,\n"
+"вибер╕ть \"В╕ддалений сервер CUPS\"."
+
+#: ../../printerdrake.pm_.c:416
+#, fuzzy
+msgid "CUPS server IP"
+msgstr "IP адреса SMB сервера"
+
+#: ../../printerdrake.pm_.c:424
+msgid "Port number should be numeric"
+msgstr ""
+
+#: ../../printerdrake.pm_.c:445 ../../printerdrake.pm_.c:464
 msgid "Remove queue"
 msgstr "Видалити принтер"
 
-#: ../../printerdrake.pm_.c:400
-#, fuzzy
+#: ../../printerdrake.pm_.c:446
 msgid ""
 "Every printer need a name (for example lp).\n"
 "Other parameters such as the description of the printer or its location\n"
 "can be defined. What name should be used for this printer and\n"
 "how is the printer connected?"
 msgstr ""
-"Кожнен принтер повинен мати чергу (на яку посилаються роботи друку) та\n"
-"назву (часто lp) та директор╕ю для спул╕н╜у, яка з ним зв'язана. Яку\n"
-"назву та директор╕ю Ви хочете використати для цього принтера та як цей\n"
-"принтер п╕дключений?"
+"Кожнен принтер повинен мати назву (наприклад lp). Можуть бути\n"
+"визначен╕ також ╕нш╕ параметри, так╕, як опис принтера та його\n"
+"розташування. Яку назву та директор╕ю Ви хочете використати для цього\n"
+"принтера та як цей принтер п╕дключений?"
 
-#: ../../printerdrake.pm_.c:404
-#, fuzzy
+#: ../../printerdrake.pm_.c:450
 msgid "Name of printer"
-msgstr "Локальний принтер"
+msgstr "Назва принтера"
 
-#: ../../printerdrake.pm_.c:405
-#, fuzzy
+#: ../../printerdrake.pm_.c:451
 msgid "Description"
-msgstr "Вкаж╕ть опц╕╖"
+msgstr "Опис"
 
-#: ../../printerdrake.pm_.c:406
-#, fuzzy
+#: ../../printerdrake.pm_.c:452
 msgid "Location"
-msgstr "╤нформац╕я"
+msgstr "Розташування"
 
-#: ../../printerdrake.pm_.c:419
+#: ../../printerdrake.pm_.c:465
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
@@ -5715,15 +6233,15 @@ msgstr ""
 "назву та директор╕ю Ви хочете використати для цього принтера та як цей\n"
 "принтер п╕дключений?"
 
-#: ../../printerdrake.pm_.c:422
+#: ../../printerdrake.pm_.c:468
 msgid "Name of queue"
 msgstr "Назва черги принтера"
 
-#: ../../printerdrake.pm_.c:423
+#: ../../printerdrake.pm_.c:469
 msgid "Spool directory"
 msgstr "Директор╕я спул╕н╜у"
 
-#: ../../printerdrake.pm_.c:424
+#: ../../printerdrake.pm_.c:470
 msgid "Printer Connection"
 msgstr "З'╓днання принтера"
 
@@ -6070,6 +6588,7 @@ msgid "Internet Connection Sharing"
 msgstr "Сп╕льне використанн з'╓днання з ╕нтернетом"
 
 #: ../../standalone/drakgw_.c:152
+#, fuzzy
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
@@ -6078,6 +6597,13 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?"
 msgstr ""
+"Тепер п╕сля того, як параметри Вашого з'╓днання з ╤нтернетом\n"
+"встановлен╕, Ви можете скоф╕╜урувати св╕й комп'ютер таким чином, щоб\n"
+"в╕н дозволяв сп╕льне використання свого з'╓днання до\n"
+"╤нтернету. Прим╕тка: Вам для цього потр╕бно мати плату мереж╕, щоб\n"
+"настро╖ти локальну мережу (LAN).\n"
+"\n"
+"Чи хочете Ви настро╖ти сп╕льне використання з'╓днання з ╤нтернетом?\n"
 
 #: ../../standalone/drakgw_.c:177
 #, fuzzy
@@ -6089,16 +6615,15 @@ msgid "No network adapter on your system!"
 msgstr "У Ваш╕й систем╕ нема╓ адаптера мереж╕!"
 
 #: ../../standalone/drakgw_.c:211
-#, fuzzy
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
 msgstr ""
-"У Ваш╕й систем╕ нема╓ сконф╕╜урованого адаптера мереж╕ ethernet. "
-"Скористайтесь, будь-ласка, конф╕гурац╕╓ю апаратних засоб╕в."
+"У Ваш╕й систем╕ нема╓ сконф╕╜урованого адаптера мереж╕\n"
+"ethernet. Скористайтесь, будь-ласка, програмою для конф╕гурац╕╖\n"
+"апаратних засоб╕в."
 
 #: ../../standalone/drakgw_.c:218
-#, fuzzy
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
@@ -6113,7 +6638,6 @@ msgstr ""
 "Встановити локальну мережу з цим адаптером?"
 
 #: ../../standalone/drakgw_.c:223
-#, fuzzy
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
@@ -6122,29 +6646,28 @@ msgstr ""
 "мереж╕."
 
 #: ../../standalone/drakgw_.c:233
-#, fuzzy
 msgid ""
 "Warning, the network adapter is already configured.\n"
 "Would you like to reconfigure?"
 msgstr ""
-"У Ваш╕й систем╕ нема╓ сконф╕╜урованого адаптера мереж╕ ethernet. "
-"Скористайтесь, будь-ласка, конф╕гурац╕╓ю апаратних засоб╕в."
+"Увага: плату мереж╕ вже сконф╕╜уровано.\n"
+"Ви хочете зм╕нити конф╕╜урац╕ю?"
 
 #: ../../standalone/drakgw_.c:258
 msgid "Potential LAN address conflict found in current config of $_!\n"
 msgstr "В дан╕й конф╕гурац╕╖ $_ знайдено потенц╕йний конфл╕кт адреси мереж╕!\n"
 
 #: ../../standalone/drakgw_.c:268
-#, fuzzy
 msgid "Firewalling configuration detected!"
 msgstr "Знайдено конф╕╜урац╕ю firewall!"
 
 #: ../../standalone/drakgw_.c:269
-#, fuzzy
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
 "need some manual fix after installation. Proceed?"
-msgstr "Увага! Знайдена ╕снуюча конф╕╜урац╕я firewall.\n"
+msgstr ""
+"Увага! Знайдена ╕снуюча конф╕╜урац╕я firewall. Можливо Вам потр╕бно\n"
+"буде виконати деяк╕ зм╕ни п╕сля установки. Продовжувати?  "
 
 #: ../../standalone/drakgw_.c:282
 msgid "Configuring scripts, installing software, starting servers..."
@@ -6512,12 +7035,13 @@ msgstr ""
 msgid "Databases"
 msgstr ""
 
-msgid "Internet"
-msgstr "╤нтернет"
-
 #, fuzzy
+msgid "Internet"
+msgstr "ц╕каво"
+
+# ../../share/compssUsers
 msgid "Multimedia - Graphics"
-msgstr "Мультимед╕а"
+msgstr ""
 
 # ../../share/compssUsers
 msgid "editors, shells, file tools, terminals"
@@ -6531,8 +7055,9 @@ msgstr "Розробник"
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
 msgstr ""
 
+# ../../share/compssUsers
 msgid "Multimedia"
-msgstr "Мультимед╕а"
+msgstr ""
 
 #, fuzzy
 msgid "Office"
@@ -6574,13 +7099,13 @@ msgstr ""
 msgid "Programs to manage your finance, such as gnucash"
 msgstr ""
 
-#, fuzzy
+# ../../share/compssUsers
 msgid "Gnome"
-msgstr "н╕чого"
+msgstr ""
 
 #, fuzzy
 msgid "Internet Tools"
-msgstr "╤нтернет"
+msgstr "Конф╕гурац╕я ╕нтернету"
 
 #, fuzzy
 msgid "Documentation"
@@ -6594,9 +7119,9 @@ msgstr ""
 msgid "Utilities"
 msgstr ""
 
-#, fuzzy
+# ../../share/compssUsers
 msgid "Multimedia - Sound"
-msgstr "Мультимед╕а"
+msgstr ""
 
 # ../../share/compssUsers
 msgid "Amusement programs: arcade, boards, strategy, etc"
@@ -6640,9 +7165,9 @@ msgstr ""
 msgid "Development C/C++"
 msgstr "Розробник"
 
-#, fuzzy
+# ../../share/compssUsers
 msgid "Multimedia - Video"
-msgstr "Мультимед╕а"
+msgstr ""
 
 # ../../share/compssUsers
 msgid "Graphics programs such as The Gimp"
@@ -6662,9 +7187,9 @@ msgstr ""
 msgid "More Graphical Desktops (Gnome, IceWM)"
 msgstr ""
 
-#, fuzzy
+# ../../share/compssUsers
 msgid "Multimedia - CD Burning"
-msgstr "Мультимед╕а"
+msgstr ""
 
 # ../../share/compssUsers
 msgid "Archiving, emulators, monitoring"
@@ -6692,6 +7217,327 @@ msgstr ""
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr ""
 
+#~ msgid "Czech"
+#~ msgstr "Чеська"
+
+#~ msgid "Slovakian"
+#~ msgstr "Словацька"
+
+#~ msgid ""
+#~ " Introduction\n"
+#~ "\n"
+#~ "The operating system and the different components available in the "
+#~ "Linux-Mandrake distribution \n"
+#~ "shall be called the \"Software Products\" hereafter. The Software Products "
+#~ "include, but are not \n"
+#~ "restricted to, the set of programs, methods, rules and documentation related "
+#~ "to the operating \n"
+#~ "system and the different components of the Linux-Mandrake distribution.\n"
+#~ "\n"
+#~ "\n"
+#~ "1. License Agreement\n"
+#~ "\n"
+#~ "Please read carefully this document. This document is a license agreement "
+#~ "between you and  \n"
+#~ "MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France, which applies to "
+#~ "the Software Products.\n"
+#~ "By installing, duplicating or using the Software Products in any manner, you "
+#~ "explicitly \n"
+#~ "accept and fully agree to conform to the terms and conditions of this "
+#~ "License. \n"
+#~ "If you disagree with any portion of the License, you are not allowed to "
+#~ "install, duplicate or use \n"
+#~ "the Software Products. \n"
+#~ "Any attempt to install, duplicate or use the Software Products in a manner "
+#~ "which does not comply \n"
+#~ "with the terms and conditions of this License is void and will terminate "
+#~ "your rights under this \n"
+#~ "License. Upon termination of the License,  you must immediately destroy all "
+#~ "copies of the \n"
+#~ "Software Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "2. The GPL License and Related Licenses\n"
+#~ "\n"
+#~ "The Software Products consist of components created by different persons or "
+#~ "entities.  Most \n"
+#~ "of these components are governed under the terms and conditions of the GNU "
+#~ "General Public \n"
+#~ "Licence, hereafter called \"GPL\", or of similar licenses. Most of these "
+#~ "licenses allow you to use, \n"
+#~ "duplicate, adapt or redistribute the components which they cover. Please "
+#~ "read carefully the terms \n"
+#~ "and conditions of the license agreement for each component before using any "
+#~ "component. Any question \n"
+#~ "on a component license should be addressed to the component author and not "
+#~ "to MandrakeSoft.\n"
+#~ "The programs developed by MandrakeSoft S.A. are governed by the GPL License. "
+#~ "Documentation written \n"
+#~ "by MandrakeSoft S.A. is governed by a specific license. Please refer to the "
+#~ "documentation for \n"
+#~ "further details.\n"
+#~ "Some versions of the Software Products may contain components which are not "
+#~ "governed by the GPL \n"
+#~ "License or similar agreements. Each such component is then governed by the "
+#~ "terms and conditions \n"
+#~ "of its own specific license. Please read carefully and comply with such "
+#~ "specific licenses before \n"
+#~ "you install, use or redistribute the said components. Such licenses will in "
+#~ "general prevent the \n"
+#~ "transfer,  duplication (except for backup purposes), redistribution, reverse "
+#~ "engineering, \n"
+#~ "de-assembly, \n"
+#~ "de-compilation or modification of the component. Any breach of agreement "
+#~ "will immediately terminate \n"
+#~ "your rights under the specific license. Unless the specific license terms "
+#~ "grant you such rights, \n"
+#~ "you usually cannot install the programs on more than one system, or adapt it "
+#~ "to be used on a \n"
+#~ "network. \n"
+#~ "In doubt, please contact directly the distributor or editor of the "
+#~ "component. Transfer to third \n"
+#~ "parties or copying of such components including the documentation is usually "
+#~ "forbidden.\n"
+#~ "\n"
+#~ "\n"
+#~ "3. Intellectual Property Rights\n"
+#~ "\n"
+#~ "All rights to the components of the Software Products belong to their "
+#~ "respective authors and are \n"
+#~ "protected by intellectual property and copyright laws applicable to software "
+#~ "programs.\n"
+#~ "MandrakeSoft S.A. reserves its rights to modify or adapt the Software "
+#~ "Products, as a whole or in \n"
+#~ "parts,\n"
+#~ "by all means and for all purposes.\n"
+#~ "\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of "
+#~ "MandrakeSoft S.A.  All rights \n"
+#~ "are \n"
+#~ "reserved. The duplication is forbidden without prior written consent by "
+#~ "MandrakeSoft S.A.\n"
+#~ "\n"
+#~ "\n"
+#~ "4. Limited Warranty\n"
+#~ "\n"
+#~ "The Software Products and attached documentation are provided \"as is\", "
+#~ "with no warranty, to the \n"
+#~ "extent permitted by law. Should the Software Products be defective, "
+#~ "MandrakeSoft S.A. will at its \n"
+#~ "own will either replace the Software Products, or reimburse the paid fee.\n"
+#~ "This limited warranty is void if you fail to comply to the recommendations, "
+#~ "instructions and \n"
+#~ "conditions \n"
+#~ "of use listed in the documentation or license agreements of the Software "
+#~ "Products.\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. will in no circumstances "
+#~ "be liable for any \n"
+#~ "special, \n"
+#~ "incidental, direct or indirect damages whatsoever (including without "
+#~ "limitation damages for loss of \n"
+#~ "business, interruption of business, financial loss, legal fees and penalties "
+#~ "resulting from a court \n"
+#~ "judgement, or any other consequential loss) arising out of  the use or "
+#~ "inability to use the \n"
+#~ "Software \n"
+#~ "Products, even if MandrakeSoft S.A. has been advised of the possibility or "
+#~ "occurance of such \n"
+#~ "damages.\n"
+#~ "\n"
+#~ "LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME "
+#~ "COUNTRIES\n"
+#~ "\n"
+#~ "To the extent permitted by law, MandrakeSoft S.A. or its distributors will, "
+#~ "in no circumstances, be \n"
+#~ "liable for any special, incidental, direct or indirect damages whatsoever "
+#~ "(including without \n"
+#~ "limitation \n"
+#~ "damages for loss of business, interruption of business, financial loss, "
+#~ "legal fees and penalties \n"
+#~ "resulting from a court judgement, or any other consequential loss) arising "
+#~ "out of the possession \n"
+#~ "and \n"
+#~ "use of software components or arising out of  downloading software "
+#~ "components from one of \n"
+#~ "Linux-Mandrake \n"
+#~ "sites  which are prohibited or restricted in some countries by local laws. "
+#~ "This limited liability \n"
+#~ "applies to, but is not restricted to, the strong cryptography components "
+#~ "included in the Software \n"
+#~ "Products.\n"
+#~ "\n"
+#~ "\n"
+#~ "5. Governing Laws \n"
+#~ "\n"
+#~ "If any portion of this agreement is held void, illegal or inapplicable by a "
+#~ "court judgement, this \n"
+#~ "portion is excluded from this contract. You remain bound by the other "
+#~ "applicable sections of the \n"
+#~ "agreement.\n"
+#~ "The terms and conditions of this License are governed by the Laws of "
+#~ "France.\n"
+#~ "All disputes on the terms of this license will preferably be settled out of "
+#~ "court. As a last \n"
+#~ "resort, \n"
+#~ "the dispute will be referred to the appropriate Courts of Law of Paris - "
+#~ "France.\n"
+#~ "For any question on this document, please contact MandrakeSoft S.A.,  \n"
+#~ "42, rue d'Aboukir, 75002 Paris - France\n"
+#~ msgstr ""
+#~ "Вступ\n"
+#~ "\n"
+#~ "Операц╕йна система та р╕зноман╕тн╕ складов╕ компоненти в дистрибутив╕\n"
+#~ "Мандрейк Л╕накса дал╕ будуть зватися \"Програмн╕ продукти \". Програмн╕\n"
+#~ "продукти включають але не обмежуються наборами програм, метод╕в,\n"
+#~ "правил та документац╕╓ю, як╕ мають в╕дношення до операц╕йно╖ системи\n"
+#~ "та р╕зних складових частин дистрибутива Мандрейк Л╕накс.\n"
+#~ "\n"
+#~ "1. Л╕ценз╕йна згода\n"
+#~ "\n"
+#~ "Прочитайте, будь-ласка, уважно цей документ. Цей документ - згода про\n"
+#~ "л╕цензування м╕ж Вами та компан╕╓ю MandrakeSoft S.A., 42, rue\n"
+#~ "d'Aboukir, 75002 Paris - France, яка застосову╓ться до Програмних\n"
+#~ "продукт╕в. Встановлюючи, дублюючи чи використовуючи Програмн╕ продукти\n"
+#~ "будь-яким чином Ви тим самим явним чином прийма╓те та повн╕стю\n"
+#~ "погоджу╓тесь притримуватись умов дано╖ Л╕ценз╕╖. Якщо Ви не\n"
+#~ "погоджу╓тесь з будь-яким положенням ц╕╓╖ Л╕ценз╕╖, Вам не дозволя╓ться\n"
+#~ "встановлювати, дублювати чи використовувати Програмн╕\n"
+#~ "продукти. Будь-яка спроба встановити, дублювати чи використати\n"
+#~ "Програмн╕ продукти чином, який не передбачений умовами ц╕╓╖ Л╕ценз╕╖\n"
+#~ "веде до втрати прав щодо ц╕╓╖ Л╕ценз╕╖. При припиненн╕ Л╕ценз╕╖ Ви\n"
+#~ "повинн╕ в╕дразу-ж знищити вс╕ коп╕╖ Програмного продукту.\n"
+#~ "\n"
+#~ "2. Л╕ценз╕я GPL та ╕нш╕ под╕бн╕ л╕ценз╕╖\n"
+#~ "\n"
+#~ "Програмн╕ продукти складаються з компонент╕в, як╕ розроблен╕ р╕зними\n"
+#~ "особами чи орган╕зац╕ями. Б╕льш╕сть цих складових частин регулюються\n"
+#~ "терм╕нами та умовами Загально╖ Публ╕чно╖ Л╕ценз╕╖ GNU (GNU General\n"
+#~ "Public Licence), яка дал╕ в цьому текст╕ зветься \"GPL\", або ╕ншими\n"
+#~ "под╕бними л╕ценз╕ями. Б╕льш╕сть з цих л╕ценз╕й дозволяють\n"
+#~ "використання, дублювання, прийняття та перерозповсюдження складових\n"
+#~ "частин, як╕ вони регулюють. Будь-ласка, ознайомтесь уважно з терм╕нами\n"
+#~ "та умовами л╕ценз╕йних умов для кожно╖ складово╖ частини перш, н╕ж\n"
+#~ "використовувати будь-яку з частин. Будь-як╕ запитання стосовно\n"
+#~ "л╕ценз╕╖ на окрему складову частину мають адресуватися автору ц╕╓╖\n"
+#~ "складово╖ частини, а не до MandrakeSoft. Програми, розроблен╕\n"
+#~ "MandrakeSoft S.A. керуються л╕ценз╕╓ю GPL. Документац╕я, розроблена\n"
+#~ "MandrakeSoft S.A. керу╓ться спец╕альною л╕ценз╕╓ю. Зверн╕ться,\n"
+#~ "будь-ласка, до документац╕╖ за додатковими подробицями. Деяк╕ верс╕╖\n"
+#~ "програмних продукт╕в можуть м╕стити складов╕, як╕ не керуються\n"
+#~ "Л╕ценз╕╓ю GPL чи под╕бними угодами. Кожна така складова частина\n"
+#~ "керу╓ться терм╕нами та умовами сво╓╖ специф╕чно╖ л╕ценз╕╖. Будь-ласка,\n"
+#~ "уважно прочитайте та дотримуйтесь умов тако╖ специф╕чно╖ угоди перш,\n"
+#~ "н╕ж установлювати, використовувати чи перерозповсюджувати так╕\n"
+#~ "компоненти. Загалом так╕ л╕ценз╕╖ будуть заперечувати право переносу,\n"
+#~ "дублювання (кр╕м як з метою створення резервно╖ коп╕╖),\n"
+#~ "перерозповсюдження, зворотню ╕нженер╕ю, де-асемблювання, де-комп╕ляц╕ю\n"
+#~ "чи зм╕ну такого компонента. Будь-яке порушення умов л╕ценз╕╖ позбавля╓\n"
+#~ "Вас прав за умовами л╕ценз╕╖. Кр╕м випадк╕в, спец╕ально вказаних\n"
+#~ "умовами л╕ценз╕╖, Вам не дозволя╓ться встановлювати програми на\n"
+#~ "б╕льше, н╕ж одн╕й систем╕, або встановлювати ╖╖ для використання в\n"
+#~ "мереж╕. Якщо Ви сумн╕ва╓тесь щодо терм╕н╕в, будь-ласка, зверн╕ться\n"
+#~ "безпосередньо до дистрибютора чи редактора компоненти. Перен╕с до\n"
+#~ "трет╕х парт╕й чи коп╕ювання таких компонент, з документац╕╓ю включно\n"
+#~ "звичайно заборонено.\n"
+#~ "\n"
+#~ "3. Права ╕нтелектуально╖ власност╕\n"
+#~ "\n"
+#~ "Вс╕ права на складов╕ компоненти Програмних продукт╕в належать\n"
+#~ "в╕дпов╕дним авторам ╕ захищен╕ законами про ╕нтелектуальну власн╕сть\n"
+#~ "та права на коп╕ювання, як╕ мають застосування до програмного\n"
+#~ "забезпечення. MandrakeSoft S.A. залиша╓ за собою право зм╕нювати чи\n"
+#~ "адаптувати Програмн╕ продукти як в ц╕лому, так ╕ окремими частинами з\n"
+#~ "будь-якою метою ╕ для будь-яких ц╕лей. \"Mandrake\", \"Linux-Mandrake\" та\n"
+#~ "в╕дпов╕дн╕ логотипи ╓ торг╕вельними марками MandarakeSoft\n"
+#~ "S.A. Дублювання заборонено без попередньо╖ письмово╖ угоди з\n"
+#~ "MandrakeSoft S.A.\n"
+#~ "\n"
+#~ "4. Обмежена в╕дпов╕дальн╕сть\n"
+#~ "\n"
+#~ "Програмн╕ продукти та додана документац╕я надаються на умовах \"як ╓\",\n"
+#~ "без гарант╕й, обмежуючись в╕дпов╕дними законами. У випадку, коли\n"
+#~ "Програмн╕ продукти виявляться дефектними, MandrakeSoft S.A. власним\n"
+#~ "коштом або зам╕нить Програмн╕ продукти, або в╕дшкоду╓ ╖х варт╕сть. Ця\n"
+#~ "обмежена в╕дпов╕дальн╕сть переста╓ д╕яти в раз╕, коли Ви не\n"
+#~ "дотриму╓тесь рекомендац╕й, ╕нструкц╕й чи умов використання перел╕чених\n"
+#~ "в документац╕╖ та умов╕ л╕цензування Програмних продукт╕в. В межах,\n"
+#~ "як╕ дозволя╓ законодавство, MandrakeSoft S.A. н╕ за яких умов не\n"
+#~ "прийма╓ на себе в╕дпов╕дальност╕ за спец╕альн╕, випадков╕, прям╕ чи\n"
+#~ "опосередкован╕ втрати (включаючи втрату б╕знесу, перерви б╕знесу,\n"
+#~ "ф╕нансов╕ втрати, судов╕ витрати та штрафи, як╕ ╓ результатами\n"
+#~ "будь-яких судових розгляд╕в, чи будь-як╕ втрати, що в╕д них походять),\n"
+#~ "як╕ викликан╕ використанням чи неможлив╕стю використання Програмних\n"
+#~ "продукт╕в, нав╕ть якщо MandrakeSoft S.A. був попередньо пов╕домлений\n"
+#~ "про можлив╕сть таких втрат.\n"
+#~ "\n"
+#~ "ОБМЕЖЕНА В╤ДПОВ╤ДОАЛЬН╤СТЬ ЗВ'ЯЗАНА З ВОЛОД╤ННЯМ ЧИ ВИКОРИСТАННЯМ\n"
+#~ "ЗАБОРОНЕНОГО ПРОГРАМНОГО ЗАБЕЗПЕЧЕННЯ В ДЕЯКИХ КРА╥НАХ\n"
+#~ "\n"
+#~ "В межах, як╕ дозволя╓ законодавство, MandrakeSoft S.A. чи його\n"
+#~ "дистрибютори н╕ за яких умов не прийма╓ на себе в╕дпов╕дальност╕ за\n"
+#~ "спец╕альн╕, випадков╕, прям╕ чи опосередкован╕ втрати (включаючи\n"
+#~ "втрату б╕знесу, перерви б╕знесу, ф╕нансов╕ втрати, судов╕ витрати та\n"
+#~ "штрафи, як╕ ╓ результатами будь-яких судових розгляд╕в, чи будь-як╕\n"
+#~ "втрати, що в╕д них походять), як╕ викликан╕ волод╕нням та вкористанням\n"
+#~ "програмних складових частин, чи викликан╕ завантаженням програмних\n"
+#~ "компонент з одного з сайт╕в Linux-Mandrake, як╕ заборонен╕ чи обмежен╕\n"
+#~ "в використанн╕ в деяких кра╖нах м╕сцевим законодавством. Це обмежена\n"
+#~ "в╕дпов╕дальн╕сть застосову╓ться але не обмежу╓ться сильними\n"
+#~ "криптограф╕чними системами, як╕ включен╕ в склад Програмних\n"
+#~ "продукт╕в.\n"
+#~ "\n"
+#~ "5. Законодавство\n"
+#~ "\n"
+#~ "Якщо будь-який розд╕л ц╕╓╖ угоди признаний нед╕йсним, таким, що не\n"
+#~ "в╕дпов╕да╓ законодавству чи нев╕дпов╕дним щодо судово╖ постанови, цей\n"
+#~ "розд╕л угоди видаля╓ться з даного контракту. Ви залиша╓тесь зв'язаними\n"
+#~ "╕ншими секц╕ями ц╕╓╖ угоди, як╕ ще мають застосування. Терм╕ни та\n"
+#~ "умови ц╕╓╖ Л╕ценз╕╖ керуються Законодавством Франц╕╖. Вс╕ сп╕рн╕\n"
+#~ "питання щодо терм╕н╕в та умов ц╕╓╖ л╕ценз╕╖ будуть розв'язуватися по\n"
+#~ "можливост╕ поза межами судових установ. В крайн╕х випадках сп╕рн╕\n"
+#~ "питання будуть вир╕шуватися в╕дпов╕дним Законним Судом Парижа -\n"
+#~ "Франц╕я.  \n"
+#~ "З будь-якими питаннями щодо цього документа звертайтеся, будь-ласка,\n"
+#~ "до MandrakeSoft S.A., 42, rue d'Aboukir, 75002 Paris - France\n"
+
+#~ msgid ""
+#~ "Time (secs) of inactivity after which\n"
+#~ "it hangs up. (leave blank to disable it)"
+#~ msgstr ""
+#~ "Час (в сек) неактивност╕, п╕сля яко╖\n"
+#~ "в╕ша╓ться трубка. (залиште пустим щоб \n"
+#~ "заборонити цей режим)"
+
+#~ msgid "Germany"
+#~ msgstr "Н╕меччина"
+
+#~ msgid "Germany (1TR6)"
+#~ msgstr "Н╕меччина (1TR6)"
+
+#~ msgid "What do you wish to do?"
+#~ msgstr "Що Ви хочете зробити?"
+
+#~ msgid "Connect to internet with a normal modem"
+#~ msgstr "З'╓днання з ╕нтернетом через звичайний модем"
+
+#~ msgid "Connect to internet using ISDN"
+#~ msgstr "З'╓днання з ╕нтернетом через ISDN"
+
+#~ msgid "Connect to internet using DSL (or ADSL)"
+#~ msgstr "З'╓днання з ╕нтернетом через DSL (або ADSL)"
+
+#~ msgid "Connect to internet using Cable"
+#~ msgstr "З'╓днання з ╕нтернетом через кабельне з'╓днання"
+
+#~ msgid "Reconfigure local network"
+#~ msgstr "Створити нову конф╕гурац╕ю локально╖ мереж╕"
+
+#~ msgid ""
+#~ "Your computer can be configured to share its Internet connection.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ваш комп'ютер можна настро╖ти для сп╕льного користування з'╓днанням з "
+#~ "╕нтернетом.\n"
+
 #~ msgid "Could not install ipchains RPM with urpmi."
 #~ msgstr "Не можу встановити RPM для ipchains за допомогою urpmi."
 
@@ -6707,58 +7553,18 @@ msgstr ""
 #~ msgid "Could not install caching-nameserver RPM with urpmi."
 #~ msgstr "Не можу встановити RPM для cahing-nameserver за допомогою urpmi."
 
-#, fuzzy
-#~ msgid "Reconfigure local network"
-#~ msgstr "Створити нову конф╕гурац╕ю мереж╕"
-
-#~ msgid ""
-#~ "Your computer can be configured to share its Internet connection.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Ваш комп'ютер можна настро╖ти для сп╕льного користування з'╓днанням з "
-#~ "╕нтернетом.\n"
-
 #~ msgid "Everything has been configured.\n"
 #~ msgstr "Все було сконф╕╜уровано.\n"
 
-#, fuzzy
-#~ msgid "Connect to Internet with a normal modem"
-#~ msgstr "З'╓днання з ╕нтернетом через звичайний модем"
-
-#, fuzzy
-#~ msgid "Connect to Internet using ISDN"
-#~ msgstr "З'╓днання з ╕нтернетом через ISDN"
-
-#, fuzzy
-#~ msgid "Connect to Internet using DSL (or ADSL)"
-#~ msgstr "З'╓днання з ╕нтернетом через DSL (або ADSL)"
-
-#, fuzzy
-#~ msgid "Connect to Internet using Cable"
-#~ msgstr "З'╓днання з ╕нтернетом через кабельне з'╓днання"
-
-#, fuzzy
-#~ msgid "Germany"
-#~ msgstr "Н╕мецька"
-
-#~ msgid "Germany (1TR6)"
-#~ msgstr "Н╕меччина (1TR6)"
-
-#~ msgid "What do you wish to do?"
-#~ msgstr "Що Ви хочете зробити?"
-
-#, fuzzy
 #~ msgid "Install/Rescue"
-#~ msgstr "Установка"
+#~ msgstr "Установка/В╕дновлення"
 
-#, fuzzy
 #~ msgid "Rescue"
-#~ msgstr "Зм╕нити розм╕р"
+#~ msgstr "В╕дновлення"
 
 #~ msgid "Which partition type do you want?"
 #~ msgstr "Який тип п╕дрозд╕лу Ви хочете встановити?"
 
-#, fuzzy
 #~ msgid ""
 #~ "Choose \"Install\" if there are no previous versions of GNU/Linux\n"
 #~ "installed, or if you wish to use multiple distributions or versions.\n"
@@ -6785,10 +7591,9 @@ msgstr ""
 #~ "Якщо ран╕ше не було встановлено жодно╖ системи з GNU/Л╕наксом або якщо\n"
 #~ "Ви хочете мати к╕лька р╕зних верс╕й Л╕накса вибер╕ть \"Установка\".\n"
 #~ "\n"
-#~ "Якщо Ви хочете поновити ран╕ше встановлен╕ верс╕╖ Mandrake Л╕накса: \n"
-#~ "5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios),\n"
-#~ "Gold 2000, 7.0 (Air) вибер╕ть\"Поновлення\"\n"
 #~ "\n"
+#~ "Вибер╕ть \"В╕дновлення\" якщо Ви хочете в╕дновити верс╕ю Мандрейк\n"
+#~ "Л╕накса, яка була вже встановлена.\n"
 #~ "\n"
 #~ "Вибер╕ть:\n"
 #~ "\n"
@@ -7071,9 +7876,8 @@ msgstr ""
 #~ msgid "Forget the changes?"
 #~ msgstr "В╕дмовитися в╕д зм╕н?"
 
-#, fuzzy
 #~ msgid "Cable connection"
-#~ msgstr "З'╓днання принтера"
+#~ msgstr "Кабельне з'╓днання"
 
 #~ msgid "Host name:"
 #~ msgstr "╤м'я хоста:"
@@ -7132,9 +7936,6 @@ msgstr ""
 #~ msgid "Apple USB Mouse (3+ Buttons)"
 #~ msgstr "Мишка USB Apple (з трьома або б╕льше клав╕шами)"
 
-#~ msgid "Generic Mouse"
-#~ msgstr "Generic Mouse"
-
 #~ msgid "ASCII MieMouse"
 #~ msgstr "ASCII MieMouse"
 
@@ -7180,14 +7981,15 @@ msgstr ""
 #~ msgid "Kensington Thinking Mouse (serial)"
 #~ msgstr "Kensington Thinking Mouse (посл╕довний порт)"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please choose which network adapter do you want to use to connect to "
 #~ "internet.\n"
 #~ "If you don't know, choose eth0.\n"
 #~ msgstr ""
 #~ "Вибер╕ть, будь-ласка, який адаптер мереж╕ буде п╕дключено до локально╖\n"
-#~ "мереж╕."
+#~ "мереж╕.\n"
+#~ "Z\n"
+#~ "Якщо не зна╓те, вибер╕ть eth0.\n"
 
 #~ msgid "nfs mount failed"
 #~ msgstr "не можу змонтувати NFS"
@@ -7657,3 +8459,83 @@ msgstr ""
 
 #~ msgid "What usage do you want?"
 #~ msgstr "Яке використання Ви вибира╓те?"
+
+#~ msgid "Logitech MouseMan/FirstMouse (ps/2)"
+#~ msgstr "Logitech MouseMan/FirstMouse (ps/2)"
+
+#~ msgid "Microsoft IntelliMouse (serial)"
+#~ msgstr "Microsoft IntelliMouse (serial)"
+
+#~ msgid "Logitech MouseMan/FirstMouse (serial)"
+#~ msgstr "Logitech MouseMan/FirstMouse (serial)"
+
+#, fuzzy
+#~ msgid "Configure my card"
+#~ msgstr "Настро╖ти X"
+
+#, fuzzy
+#~ msgid "pptp alcatel"
+#~ msgstr "Автоматично розпод╕лити"
+
+#, fuzzy
+#~ msgid "Small(%dMB)"
+#~ msgstr "(%dМб)"
+
+#, fuzzy
+#~ msgid "Do you want to configure a ISDN connection for your system?"
+#~ msgstr "Чи Ви хочете настро╖ти мережу системи?"
+
+#, fuzzy
+#~ msgid "Autologin at startup"
+#~ msgstr "Стартувати X автоматично"
+
+#, fuzzy
+#~ msgid "Autologin - Choose default user"
+#~ msgstr "Вибер╕ть новий розм╕р"
+
+# NOTE: this message will be displayed by lilo at boot time; that is
+# using the BIOS font; that means cp437 charset on 99.99% of PC computers
+# out there. It is then suggested that for non latin languages an ascii
+# transliteration be used; or maybe the english text be used; as it is best
+# When possible cp437 accentuated letters can be used too.
+#
+#, fuzzy
+#~ msgid ""
+#~ "Welcome to LILO the operating system chooser!\n"
+#~ "\n"
+#~ "To list the possible choices, press <TAB>.\n"
+#~ "\n"
+#~ "To load one of them, write its name and press <ENTER> or wait %d seconds for "
+#~ "default boot.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Laskavo prosymo do peremykach operacijnykh system LILO!\n"
+#~ "\n"
+#~ "Shchob perechyslyty mozhlyvi systemy natysnit' <TAB>.\n"
+#~ "\n"
+#~ "Shchob startuvaty odnu z nykh, nadrukujte yiyi nazvu i natysnit' <ENTER> "
+#~ "abo\n"
+#~ "pochekajte %d sekund poky pochne vantazhytysya persha z nykh.\n"
+#~ "\n"
+
+# NOTE: this message will be displayed by SILO at boot time; that is
+# only the ascii charset will be available
+# so use only 7bit for this message
+#
+#, fuzzy
+#~ msgid ""
+#~ "Welcome to SILO the operating system chooser!\n"
+#~ "\n"
+#~ "To list the possible choices, press <TAB>.\n"
+#~ "\n"
+#~ "To load one of them, write its name and press <ENTER> or\n"
+#~ "wait %d seconds for default boot.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Ласкаво просимо до SILO - перемикач операц╕йних систем!\n"
+#~ "\n"
+#~ "Щоб перечислити можлив╕ системи натисн╕ть <TAB>.\n"
+#~ "\n"
+#~ "Щоб стартувати одну з них, надрукуйте ╖╖ назву ╕ натисн╕ть <ENTER> або\n"
+#~ "почекайте %d секунд поки почне вантажитися перша з них.\n"
+#~ "\n"
