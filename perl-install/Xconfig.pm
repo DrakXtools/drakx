@@ -7,17 +7,16 @@ use any;
 use common;
 use mouse;
 use devices;
+use keyboard;
 use Xconfigurator;
 
-# otherwise uses the rule substr($keymap, 0, 2)
-my %keymap_translate = (
-    cf => "ca_enhanced",
-    uk => "gb",
-);
 
-
-sub keymap_translate {
-    $keymap_translate{$_[0]} || substr($_[0], 0, 2);
+sub keyboard_from_kmap {
+    my ($loadkey) = @_;
+    foreach (keyboard::keyboards()) {
+	keyboard::keyboard2kmap($_) eq $loadkey and return keyboard::keyboard2xkb($_);
+    }
+    '';
 }
 
 
@@ -167,7 +166,7 @@ sub getinfoFromXF86Config {
     delete $mouse{auxmouse} unless $mouse{auxmouse}{XMOUSETYPE}; #- only take care of a true mouse.
 
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
-    add2hash($o->{keyboard} ||= {}, \%keyboard);
+    put_in_hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
     @{$o->{wacom} || []} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
@@ -182,7 +181,7 @@ sub getinfoFromSysconfig {
     add2hash($o->{mouse} ||= {}, { getVarsFromSh("$prefix/etc/sysconfig/mouse") });
 
     if (my %keyboard = getVarsFromSh "$prefix/etc/sysconfig/keyboard") {
-	$o->{keyboard}{xkb_keymap} ||= keymap_translate($keyboard{KEYTABLE}) if $keyboard{KEYTABLE};
+	$o->{keyboard}{xkb_keymap} ||= keyboard_from_kmap($keyboard{KEYTABLE}) if $keyboard{KEYTABLE};
     }
     $o;
 }
