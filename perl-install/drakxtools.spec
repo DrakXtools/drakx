@@ -294,6 +294,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 - drakconnect is no more supporting profiles. (francois)
 - drakconnect support for sagem Fast 800 used by free.fr (francois)
+- drakconnect support for ltmodem. (francois)
  
 * Thu Feb 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-10mdk
 - harddrake service: 
