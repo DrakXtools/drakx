@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2001-2002 by MandrakeSoft
 #                            DUPONT Sebastien
-#                            dchaumette@mandrakesoft.com
+#                            Damien Chaumette <dchaumette@mandrakesoft.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -192,15 +192,8 @@ sub list_fontpath() {
 }
 
 sub chk_empty_xfs_path() {
-    my @temp3;
     foreach my $tmp_path (@installed_fonts_path) {
-        @temp3 = ();
-        foreach my $temp2 (all($tmp_path)) {
-            if (!($temp2 =~ /^fonts/ || $temp2 =~ /^type/)) {
-                push @temp3, $temp2;
-            }
-        }
-        if (!(@temp3)) {
+        if (!(any { if_(!(/^fonts/ || /^type/), $_) } all($tmp_path))) {
             system("chkfontpath -r $tmp_path ")
               or print "PERL::system command failed during chkfontpath\n";
         }
@@ -230,14 +223,12 @@ sub search_windows_font() {
         my @list_fonts_winnt = all("$win_dir/winnt/fonts");
         my $nb_dir           = @list_fonts_win + @list_fonts_winnt;
         foreach ([ \@list_fonts_win, "windows" ],
-            [ \@list_fonts_winnt, "winnt" ])
-        {
+                 [ \@list_fonts_winnt, "winnt" ]) {
             foreach my $i (@{ $_->[0] }) {
                 if ($interactive) {
                     if ($nb_dir) {
                         progress($pbar, 0.25 / $nb_dir, N("parse all fonts"));
-                    }
-                    else {
+                    } else {
                         display_error(N("no fonts found"));
                         return 0;
                     }
@@ -297,18 +288,11 @@ sub search_dir_font_uninstall {
     my ($fn)  = @_;
     my @font_list_tmp;
     if (-d $fn) {
-        foreach my $i (all($fn)) {
-            push @font_list_tmp, $i if is_a_font($i);
-        }
-    }
-    else {
+        @font_list_tmp = map { if_(is_a_font($_), $_) } all($fn);
+    } else {
         push @font_list_tmp, $fn if is_a_font($fn);
     }
-    foreach my $i (@installed_fonts_full_path) {
-        foreach my $j (@font_list_tmp) {
-            push @font_list, $i if $i =~ /$j/;
-        }
-    }
+    @font_list = uniq(@font_list, @installed_fonts_full_path);
     print "Fonts to uninstal: " . $_ . "\n" foreach @font_list;
 }
 
@@ -332,8 +316,24 @@ sub dir_created() {
     -e $drakfont_dir . "/tmp/tmp"   or mkdir_p($drakfont_dir . "/tmp/tmp");
 }
 
+
+sub convert_fonts {
+    my ($fonts, $converter, $font_type, $o_generate_pfb) = @_;
+    $o_generate_pfb = $o_generate_pfb ? "-b" : "";
+    foreach my $fontname (@$fonts) {
+        system("cd $drakfont_dir/tmp/tmp && $converter $o_generate_pfb $fontname");
+        $interactive and progress($pbar2, 0.50 / @$fontname, N("%s fonts conversion", $font_type));
+    }
+}
+
+sub convert_ttf_fonts {
+    my ($fonts, $o_generate_pfb) = @_;
+    convert_fonts($fonts, $o_generate_pfb, "TTF", $ttf2pt1);
+}
+
+
+
 sub put_font_dir() {
-    my @tmpl;
     -e "/usr/share/ghostscript" or do { $gs = 0; print "ghostscript is not installed on your system...\n" };
     if (@font_list) {
         dir_created();
@@ -344,12 +344,12 @@ sub put_font_dir() {
         $interactive and progress($pbar1, 0.01, N("done"));
         $interactive and progress($pbar2, 0.10, N("True Type fonts installation"));
         glob("$drakfont_dir/tmp/tmp/*.TTF") 
-	  and system('cd ' . $drakfont_dir . '/tmp/tmp ; for foo in *.TTF; do mv $foo `basename $foo .TTF`.ttf; done');
+          and system('cd ' . $drakfont_dir . '/tmp/tmp ; for foo in *.TTF; do mv $foo `basename $foo .TTF`.ttf; done');
         system('cd ' . $drakfont_dir . '/tmp/tmp  && cp *.ttf ../../ttf');
         $interactive and progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
 
         my $ttfdir = $drakfont_dir . "/ttf";
-	# mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
+        # mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
         #`$mkttfdir $ttfdir`;
        	system("cd $ttfdir && $fccache && $ttmkfdir -u > fonts.dir");
         $interactive and progress($pbar2, 0.10, N("True Type install done"));
@@ -357,15 +357,12 @@ sub put_font_dir() {
 
         if ($so && $gs) {
             my @glob_drak = glob("$drakfont_dir/tmp/tmp/*.ttf");
-            foreach my $fontname (@glob_drak) {
-                system("cd $drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
-                $interactive and progress($pbar2, 0.50 / @glob_drak, N("Fonts conversion"));
-            }
+            convert_ttf_fonts(\@glob_drak, 1);
             system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm *.afm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             $interactive and progress($pbar2, 0.10, N("type1inst building"));
             -e "$drakfont_dir/tmp/Type1/Fontmap" 
-	      and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
+              and system("cd $drakfont_dir/tmp/Type1 && cat Fontmap >> `rpm -ql ghostscript | grep Fontmap.GS` ");
             system("cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
             system("cd $type1dir && $fccache && $type1inst");
@@ -374,10 +371,7 @@ sub put_font_dir() {
         }
 
         if (!$so && $gs) {
-            foreach my $fontname (@tmpl = glob("$/drakfont_dir/tmp/tmp/*.ttf")) {
-                system("cd $/drakfont_dir/tmp/tmp && $ttf2pt1 -b $fontname");
-                $interactive and progress($pbar2, 0.50 / @tmpl, N("Fonts conversion"));
-            }
+            convert_ttf_fonts([ glob("$/drakfont_dir/tmp/tmp/*.ttf") ], 1);
             system("cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             $interactive and progress($pbar2, 0.1, N("type1inst building"));
@@ -390,16 +384,8 @@ sub put_font_dir() {
         }
 
         if ($so && !$gs) {
-            foreach my $fontname (@tmpl = glob("$drakfont_dir/tmp/tmp/*.ttf"))
-            {
-                system("cd $drakfont_dir/tmp/tmp && $ttf2pt1 $fontname");
-                $interactive and progress($pbar2, 0.25 / @tmpl, N("ttf fonts conversion"));
-            }
-            foreach my $fontname (@tmpl = glob("$drakfont_dir/tmp/tmp/*.pfm"))
-            {
-                system("cd $drakfont_dir/tmp/tmp && $pfm2afm $fontname");
-                $interactive and progress($pbar2, 0.25 / @tmpl, N("pfm fonts conversion"));
-            }
+            convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ]);
+            convert_fonts([ glob("$drakfont_dir/tmp/tmp/*.pfm") ], $pfm2afm, "PFM");
             system("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
             my $type1dir = $drakfont_dir . "/Type1";
@@ -448,17 +434,15 @@ sub remove_fonts() {
         local $_ = $i;
         if (/.pfb$/ || /.gsf$/ || /.pfm$/ || /.pfa$/) {
             system("mv $_ $drakfont_dir/remove ");
-        }
-        else {
+        } else {
 	    if (/.ttf$/) {
 		rm_rf($_);
 		# rebuild of the fonts.dir and fc-cache files
        		system("cd `dirname $_` && $fccache && $ttmkfdir -u > fonts.dir");
-	    }
-            else { rm_rf($i) }
+	    } else { rm_rf($i) }
         }
-        $i =~ s/\/\w*\.\w*//gi;
-	grep { $i } @list_dir or push @list_dir, $i;
+        $i =~ s!/\w*\.\w*!!gi;
+        grep { $i } @list_dir or push @list_dir, $i;
         $interactive and progress($pbar1, 1 / @font_list, N("Suppress Fonts Files"));
     }
     $interactive and progress($pbar1, 0.01, N("done"));
@@ -466,8 +450,7 @@ sub remove_fonts() {
     foreach my $i (@list_dir) {
         if (listlength all($i) < 3) {
             system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
-        }
-        else {
+        } else {
             system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
         }
         $interactive and progress($pbar2, 1 / @list_dir, N("Suppress Fonts Files"));
@@ -783,7 +766,7 @@ sub list_to_remove() {
     #my @files_path = grep(!/fonts/, all($current_path)); garbage ?
     gtkflush();
     my ($tree, @tux) = $left_list->get_selection->get_selected_rows(); #- get tree & paths
-    push @uninstall, $tree->get($tree->get_iter($_), 0) foreach @tux;
+    push @uninstall, map { $tree->get($tree->get_iter($_), 0) } @tux;
     #push @uninstall, $current_path . "/" . $files_path[$_] foreach @number_to_remove; garbage ?
     $$central_widget->destroy();
     show_list_to_remove();
