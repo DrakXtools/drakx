@@ -1030,8 +1030,39 @@ sub config_libsafe {
     text2bool($t{LIBSAFE});
 }
 
+sub choose_security_options {
+    my ($in, $security, $libsafe, $email, $options) = @_;
+    my $expert_file = "/etc/security/msec/expert_mode";
+		      
+    my @shown_options = ();
+    my $key = "";
+    my $i=0;
+		        
+    my $expert_section = cat_($expert_file);
+
+    if ($expert_section == 0) { $title = _("DrakSec - Network Advanced Options"); }
+    elsif ($expert_section == 1) { $title = _("DrakSec - User Advanced Options"); }
+    elsif ($expert_section == 2) { $title = _("DrakSec - Server Advanced Options"); }
+
+    for $key (keys %$options) {
+       $shown_options[$i]->{label} = "$key - $options->{$key}{label}";
+       $shown_options[$i]->{val} = $options->{$key}{val};
+       $shown_options[$i]->{list} = $options->{$key}{list};
+       $i++;
+    }
+
+    $in->ask_from(
+         $title,
+         _("Choose advanced security options\n\n"),
+         [
+            @shown_options
+         ]
+    );
+}
+
 sub choose_security_level {
     my ($in, $security, $libsafe) = @_;
+    my $expert_file = "/etc/security/msec/expert_mode";
 
     my %l = (
       0 => _("Welcome To Crackers"),
@@ -1056,18 +1087,25 @@ connections from many clients. Note: if your machine is only a client on the Int
     delete @l{0,1};
     delete $l{5} if !$::expert;
 
-    $in->ask_from('', _("Please choose the desired security level.") . "\n\n" .
-		  join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } keys %l),
-		  [
-		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
-		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
-		       { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
-			 _("A library which defends against buffer overflow and format string attacks.") }
-		      ),
-		   { label => _("Security user (login or email)"), val => $email,  }
-		  ]
-		 );
-}
+    $in->ask_from(
+            ("DrakSec Basic Options"),
+            ("Please choose the desired security level") . "\n\n" .
+            join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } keys %l),
+            [
+              { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
+                if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
+                { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
+                  _("A library which defends against buffer overflow and format string attacks.") } ),
+                { label => _("Security user (login or email)"), val => $email, },
+                { clicked_may_quit => sub { open(EXPERT, '>'.$expert_file); print EXPERT "0"; close EXPERT; },
+                  val => _("NETWORK-RELATED SECURITY OPTIONS") },
+                { clicked_may_quit => sub { open(EXPERT, '>'.$expert_file); print EXPERT "1"; close EXPERT; },
+                  val => _("USER-RELATED SECURITY OPTIONS") },
+                { clicked_may_quit => sub { open(EXPERT, '>'.$expert_file); print EXPERT "2"; close EXPERT; },
+                  val => _("SERVER-RELATED SECURITY OPTIONS") }
+            ],
+    );
+													 }
 
 sub running_window_manager {
     my @window_managers = (
