@@ -162,6 +162,7 @@ NETWORKING_IRC
 
 NETWORKING_FIREWALLING_SERVER
   5 iproute2 routed iptables ipchains
+  4 prelude
   1 portsentry 
 
 NETWORKING_MAIL
@@ -229,7 +230,7 @@ NETWORKING_FILE
 NETWORKING_FILE_SERVER 
   5 nfs-utils
   4 samba arkeia-server-shareware
-  3 squid squidGard
+  3 squid squidGuard
 
 NETWORKING_WWW
   5 lynx
@@ -472,8 +473,9 @@ SYSTEM
 
   4 sndconfig ftp ftp-client-krb5 gpm hexedit strace lvm
 
-  3 bc
+  3 bc libsafe
   2 kernel-utils sane acpid adns audiofile freeswan awesfx fbset sudo
+  2 X xsane
   1 fdutils genromfs mailcap pinfo
 
   BOOKS 
