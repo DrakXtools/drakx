@@ -403,7 +403,6 @@ sub addUser {
     return if $o->{isUpgrade} && !$_[0];
 
     $o->addUser($_[0]);
-    install_any::setAuthentication($o);
 }
 
 #------------------------------------------------------------------------------
