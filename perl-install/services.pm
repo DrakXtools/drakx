@@ -341,6 +341,10 @@ sub start_not_running_service ($) {
     # Exit silently if the service is not installed
     return 1 if !(-x "$::prefix/etc/rc.d/init.d/$service");
     run_program::rooted($::prefix, "/etc/rc.d/init.d/$service", "status");
+    if (($? >> 8) != 0) {
+	run_program::rooted($::prefix,
+			    "/etc/rc.d/init.d/$service", "start");
+    }
     return (($? >> 8) != 0) ? 0 : 1;
 }
 
