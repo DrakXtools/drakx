@@ -153,4 +153,4 @@ full_stage2:
 
 stage2:
 	$(MAKE) install_pms
-#	$(ROOTDEST)/misc/make_mdkinst_stage2 $(DEST) $(ROOTDEST)/Mandrake/base/mdkinst_stage2
+	$(ROOTDEST)/misc/make_mdkinst_stage2 $(DEST) $(ROOTDEST)/Mandrake/base/mdkinst_stage2

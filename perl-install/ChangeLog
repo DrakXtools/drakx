@@ -1,3 +1,47 @@
+2001/02/02  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm, standalone/draknet, netconnect.pm, my_gtk.pm,
+	standalone/diskdrake: recoded wizard mode
+	corrected some stuff.
+	trying not to break draknet for cooker snapshot
+
+2001/02/02  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (monitorConfiguration): better default for DDC probe
+	fails and
+	auto_install and not provided any info about the monitor
+
+	* install_any.pm (setPackages): in auto_installs, default to all groups
+	chosen, unless
+	compssUsersChoice exist. Won't change anything unless compssListLevel is
+	used of course
+
+	* share/locales.tar.bz2: yet another LC_NUMERIC, seems like the previous i
+	chose was glibc-2.1 :-(
+	this one en_US and seems all right!
+
+	* Xconfigurator_consts.pm: add low_default_monitor for default of
+	auto_installs
+
+	* Makefile, partition_table.pm, pkgs.pm, partition_table_raw.pm,
+	diskdrake.pm: using the new formatXiB
+
+	* install_steps.pm (configureXBefore): set XKB_IN_USE=no if !$has_xkb in
+	/etc/sysconfig/i18n
+
+	* common.pm (formatXiB): created, format a number in human readable format
+
+	* mdk-stage1/disk.c (try_with_device): bloody guillaume changed
+	/tmp/hdimage to /tmp/disk without even
+	telling, changing it back as i don't see any good reason for the move.
+
+2001/02/01  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: new draknet snapshot. Still unuseable
+
+	* interactive_gtk.pm, netconnect.pm, my_gtk.pm: updated embedded mode in
+	install.
+
 2001/01/31  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet: corected translation and conflict.

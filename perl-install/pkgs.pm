@@ -704,7 +704,7 @@ sub setSelectedFromCompssList {
 	#- at this point the package can safely be selected.
 	selectPackage($packages, $p);
     }
-    log::l("setSelectedFromCompssList: reached size %s, up to indice $min_level (less than %s)", formatXiB($nb), formatXiB($max_size));
+    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
     $min_level;
 }
 
