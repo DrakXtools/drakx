@@ -6075,7 +6075,7 @@ msgstr "липсва kdesu"
 #: install_steps_gtk.pm:337
 #, c-format
 msgid "due to unsatisfied %s"
-msgstr ""
+msgstr "поради неопределен %s"
 
 #: install_steps_gtk.pm:338
 #, c-format
@@ -10270,7 +10270,15 @@ msgstr "Timeout на връзката (в сек)"
 msgid "Get DNS servers from DHCP"
 msgstr "DNS сървър IP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -16133,11 +16141,6 @@ msgstr "Контролен център на Mandrakelinux"
 msgid "Wizards to configure server"
 msgstr "ННеуспешна настройка на принтер \"%s\"!"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Контролен център на Mandrakelinux"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -18894,11 +18897,6 @@ msgstr "Не е инсталиран"
 msgid "Package not installed"
 msgstr "Пакета не е инсталиран"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "Няма налична програма за преглед! Моля изберете една"
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -19063,16 +19061,6 @@ msgstr "Автоматичен IP адрес"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, fuzzy, c-format
@@ -20147,15 +20135,6 @@ msgid ""
 "%s cannot be displayed \n"
 ". No Help entry of this type\n"
 msgstr ""
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Нямате инсталиран браузър, инсталирайте поне един, за да разглеждате "
-"помощната система"
 
 #: standalone/drakperm:22
 #, c-format
@@ -23025,7 +23004,6 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, c-format
 msgid "Account:"
@@ -24403,6 +24381,32 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Инсталацията провалена"
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Контролен център на Mandrakelinux"
+
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Няма налична програма за преглед! Моля изберете една"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Нямате инсталиран браузър, инсталирайте поне един, за да разглеждате "
+#~ "помощната система"
+
+#, fuzzy
+#~ msgid "Get YP server from DHCP"
+#~ msgstr "DNS сървър IP"
+
+#, fuzzy
+#~ msgid "Get NTPD server from DHCP"
+#~ msgstr "DNS сървър IP"
+
+#, fuzzy
+#~ msgid "Upload the system configuration"
+#~ msgstr "Обновяване настройките на менюто"
 
 #~ msgid "Checking device and configuring HPOJ..."
 #~ msgstr "Проверка на устройство и конфигурация за HPOJ..."

@@ -9306,7 +9306,15 @@ msgstr ""
 msgid "Get DNS servers from DHCP"
 msgstr "ቀዳሚ ተጠሪ ይጠቀም"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -11092,7 +11100,7 @@ msgstr "መረጃ"
 #: printer/printerdrake.pm:1449 printer/printerdrake.pm:2025
 #, fuzzy, c-format
 msgid "Detected model: %s %s"
-msgstr "<b>ሞዴል</b>፦ %1<br>"
+msgstr "<b>ሞዴል</b>፦ %s<br>"
 
 #: printer/printerdrake.pm:1531 printer/printerdrake.pm:1785
 #, fuzzy, c-format
@@ -14826,11 +14834,6 @@ msgstr "<b>የMandrakelinux ባለሞያ</b>"
 msgid "Wizards to configure server"
 msgstr "የባሕር-መዝገብ እሴት '%s' ወደ '%s' እንደገና መሰየም አልተቻለም።"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "<b>የMandrakelinux ባለሞያ</b>"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -15677,7 +15680,7 @@ msgstr ""
 #: standalone/drakTermServ:1696
 #, fuzzy, c-format
 msgid "%s is not a user..\n"
-msgstr "ፋይሉ '%1' አይነበብም"
+msgstr "ፋይሉ '%s' አይነበብም"
 
 #: standalone/drakTermServ:1697
 #, c-format
@@ -17541,11 +17544,6 @@ msgstr "አልተገኘም"
 msgid "Package not installed"
 msgstr "ማንበብ አልቻለም፦ "
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr ""
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -17708,16 +17706,6 @@ msgstr ""
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, fuzzy, c-format
@@ -18752,13 +18740,6 @@ msgid ""
 ". No Help entry of this type\n"
 msgstr ""
 
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-
 #: standalone/drakperm:22
 #, c-format
 msgid "System settings"
@@ -19456,7 +19437,7 @@ msgstr ""
 #: standalone/drakups:129
 #, fuzzy, c-format
 msgid "Manufacturer / Model:"
-msgstr "<b>ሞዴል</b>፦ %1<br>"
+msgstr "<b>ሞዴል</b>፦ %s<br>"
 
 #: standalone/drakups:140
 #, c-format
@@ -21230,7 +21211,7 @@ msgstr "የዐምድ ብዛት"
 #: standalone/harddrake2:85
 #, fuzzy, c-format
 msgid "Model stepping"
-msgstr "<b>ሞዴል</b>፦ %1<br>"
+msgstr "<b>ሞዴል</b>፦ %s<br>"
 
 #: standalone/harddrake2:85
 #, c-format
@@ -21587,21 +21568,20 @@ msgstr "ዲቪዲ"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, fuzzy, c-format
 msgid "Account:"
 msgstr "ስለ"
 
 #: standalone/harddrake2:531
-#, fuzzy, c-format
+#, c-format
 msgid "Password:"
 msgstr "ሚስጢራዊ ቃል"
 
 #: standalone/harddrake2:532
-#, fuzzy, c-format
+#, c-format
 msgid "Hostname:"
-msgstr "የእንግዳ ተቀባይ ስም"
+msgstr "የእንግዳ ተቀባይ ስም፦"
 
 #: standalone/keyboarddrake:29
 #, c-format
@@ -22394,7 +22374,7 @@ msgstr " ("
 #: standalone/scannerdrake:133
 #, fuzzy, c-format
 msgid "Detected model: %s"
-msgstr "<b>ሞዴል</b>፦ %1<br>"
+msgstr "<b>ሞዴል</b>፦ %s<br>"
 
 #: standalone/scannerdrake:136
 #, fuzzy, c-format
@@ -22939,14 +22919,6 @@ msgstr ""
 msgid "Installation failed"
 msgstr "%s አልተገኘም"
 
-#, fuzzy
-#~ msgid "Active Firewall : intrusion detected"
-#~ msgstr "ተስተካክሎ የተቀመጠውን ባዕድ መነሻ ጥቀስ"
-
-#, fuzzy
-#~ msgid "Do you want to blacklist the attacker ?"
-#~ msgstr "ይህንን ሁኔታ መጠቀም ይፈልጋሉ?"
-
 #~ msgid "Load/Save on floppy"
 #~ msgstr "በፍሎፒ ላይ ጫን/አስቀምጥ"
 
@@ -22962,61 +22934,10 @@ msgstr "%s አልተገኘም"
 #~ msgid "Loading from floppy"
 #~ msgstr "ከፍሎፒ በመጫን ላይ ነው"
 
-#, fuzzy
-#~ msgid "Installing HPLIP package..."
-#~ msgstr "ጥቅሎችን በመትከል ላይ..."
-
-#, fuzzy
-#~ msgid "multi-function device on parallel port #%s"
-#~ msgstr "መረጃ በ%s መጠቀሚያ ፕሮግራም ላይ"
-
-#, fuzzy
-#~ msgid "multi-function device on a parallel port"
-#~ msgstr "መረጃ በ%s መጠቀሚያ ፕሮግራም ላይ"
-
-#, fuzzy
-#~ msgid "printing to %s"
-#~ msgstr "፣ ወደ %s በማተም ላይ"
-
-#, fuzzy
-#~ msgid "using command %s"
-#~ msgstr "፣ የ%s ትዕዛዝን በመጠቀም"
-
 #~ msgid ""
 #~ "_: keyboard\n"
 #~ "Bengali"
 #~ msgstr "ቤንጋሊ"
 
-#, fuzzy
-#~ msgid "Application:"
-#~ msgstr "መጠቀሚያ ፕሮግራሙ"
-
 #~ msgid "Summary: "
 #~ msgstr "ማጠቃለያ፦"
-
-#, fuzzy
-#~ msgid "YOUR TEXT HERE"
-#~ msgstr "ያልተደገፈ ጽሁፉ/uri፦ "
-
-#, fuzzy
-#~ msgid "Submit kernel version"
-#~ msgstr "የስሕተቱን ጉዳይ አቅርብ"
-
-#, fuzzy
-#~ msgid "Submit cpuinfo"
-#~ msgstr "ጥያቄዎትን ውሰዱ"
-
-#, fuzzy
-#~ msgid "Submit lspci"
-#~ msgstr "ጥያቄዎትን ውሰዱ"
-
-#~ msgid "NOT FOUND"
-#~ msgstr "አልተገኘም"
-
-#, fuzzy
-#~ msgid "connecting to %s..."
-#~ msgstr "CD ወደ"
-
-#, fuzzy
-#~ msgid "Please enter a package name."
-#~ msgstr "የአዲስ ማውጫን ስም አስገባ"

@@ -10546,7 +10546,15 @@ msgstr "Konneksie tydlimiet (in sekondes)"
 msgid "Get DNS servers from DHCP"
 msgstr "Die DNS-bediener se IP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -16786,11 +16794,6 @@ msgstr "<b>Mandrakestore</b>"
 msgid "Wizards to configure server"
 msgstr "Probleme met die konfigurasie van drukker \" %s\"!"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "<b>Mandrakestore</b>"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -19919,11 +19922,6 @@ msgstr "Nie geïnstalleeer"
 msgid "Package not installed"
 msgstr "Pakket is nie geïnstalleer nie"
 
-#: standalone/drakbug:191
-#, c-format
-msgid "No browser available! Please install one"
-msgstr "Geen blaaier beskikbaar! Installeer asseblief een"
-
 #: standalone/drakclock:29
 #, c-format
 msgid "DrakClock"
@@ -20092,16 +20090,6 @@ msgstr "staties"
 #: standalone/drakconnect:360
 #, c-format
 msgid "DHCP"
-msgstr ""
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
 msgstr ""
 
 #: standalone/drakconnect:470
@@ -21269,15 +21257,6 @@ msgid ""
 msgstr ""
 "Kan nie %s vertoon nie \n"
 " Geen Hulp inskrywing van hierdie tipe nie\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Geen blaaier is op u rekenaar geïnstalleer. Installeer asseblief een indien "
-"u die hulp-stelsel wil deurblaai"
 
 #: standalone/drakperm:22
 #, c-format
@@ -24648,7 +24627,6 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
 #, c-format
 msgid "Account:"
@@ -26051,16 +26029,18 @@ msgstr ""
 msgid "Installation failed"
 msgstr "Installasie het gefaal!"
 
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Geen blaaier beskikbaar! Installeer asseblief een"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Geen blaaier is op u rekenaar geïnstalleer. Installeer asseblief een "
+#~ "indien u die hulp-stelsel wil deurblaai"
+
 #~ msgid "Checking device and configuring HPOJ..."
 #~ msgstr "Bekyk die toestel en konfigureer HPOJ ..."
-
-#, fuzzy
-#~ msgid "Active Firewall : intrusion detected"
-#~ msgstr "Vuurmuurkonfigurasie gevind!"
-
-#, fuzzy
-#~ msgid "Do you want to blacklist the attacker ?"
-#~ msgstr "Wil Taai-sleutels aktiveer?"
 
 #~ msgid ""
 #~ "Insert a floppy in drive\n"
@@ -26176,14 +26156,6 @@ msgstr "Installasie het gefaal!"
 #~ msgid "Loading printer configuration... Please wait"
 #~ msgstr "Laai tans die drukkerkonfigurasie.... Net 'n oomblik asb"
 
-#, fuzzy
-#~ msgid "The "
-#~ msgstr "Temas"
-
-#, fuzzy
-#~ msgid "%s (was %s)"
-#~ msgstr "%s (Poort %s)"
-
 #~ msgid "Root password"
 #~ msgstr "Kies 'root' se wagwoord"
 
@@ -26226,34 +26198,6 @@ msgstr "Installasie het gefaal!"
 #~ "<span foreground=\"royalblue3\">Skrywer</span> Thierry Vignaud &lt;"
 #~ "tvignaud@mandrakesoft.com&gt;\n"
 #~ "\n"
-
-#, fuzzy
-#~ msgid "Morrocco"
-#~ msgstr "Marokko"
-
-#, fuzzy
-#~ msgid "Server Information:"
-#~ msgstr "Inligting"
-
-#, fuzzy
-#~ msgid "Use SSL connection"
-#~ msgstr "ADSL-konneksie"
-
-#, fuzzy
-#~ msgid "User Base:"
-#~ msgstr "Gebruiker"
-
-#, fuzzy
-#~ msgid "Base:"
-#~ msgstr "Naam:"
-
-#, fuzzy
-#~ msgid "Scope:"
-#~ msgstr "Stop"
-
-#, fuzzy
-#~ msgid "Bind Server:"
-#~ msgstr "Bediener:"
 
 #~ msgid "OK"
 #~ msgstr "OK"
@@ -26365,10 +26309,6 @@ msgstr "Installasie het gefaal!"
 #~ msgid "Dvorak (US)"
 #~ msgstr "Dvorak (VSA)"
 
-#, fuzzy
-#~ msgid "Dvorak (Esperanto)"
-#~ msgstr "Dvorak (Norweegs)"
-
 #~ msgid "Dvorak (Norwegian)"
 #~ msgstr "Dvorak (Norweegs)"
 
@@ -26431,10 +26371,6 @@ msgstr "Installasie het gefaal!"
 
 #~ msgid "Korean keyboard"
 #~ msgstr "Koreaanse sleutelbord"
-
-#, fuzzy
-#~ msgid "Kyrgyz keyboard"
-#~ msgstr "VK sleutelbord"
 
 #~ msgid "Latin American"
 #~ msgstr "Latyns-Amerikaans"
@@ -26562,26 +26498,12 @@ msgstr "Installasie het gefaal!"
 #~ msgid "No devices found"
 #~ msgstr "Geen toestelle gevind nie"
 
-#, fuzzy
-#~ msgid "Could not install necessary packages, %s cannot be started!"
-#~ msgstr "Kon nie die pakkette wat Scannerdrake benodig installeer nie."
-
 #~ msgid ""
 #~ "You do not have any configured Internet connection.\n"
 #~ "Please run \"Internet access\" in control center."
 #~ msgstr ""
 #~ "U het nie 'n Internetkonneksie nie.\n"
 #~ "Loods asseblief \"Internet access\" in die \"control center\"."
-
-#, fuzzy
-#~ msgid ""
-#~ "Welcome to the UPS configuration utility.\n"
-#~ "\n"
-#~ "Here, you'll be add a new UPS to your system.\n"
-#~ msgstr ""
-#~ "Welkom by die e-pos konfigurasie-program.\n"
-#~ "\n"
-#~ "Hier kan u die waarskuwing-stelsel opstel\n"
 
 #~ msgid "Enable multiple profiles"
 #~ msgstr "Gebruik multiprofiele"
