@@ -51,7 +51,7 @@ defaultroute
     if ($isdn->{driver} eq "capidrv") {
         setup_capi_conf(get_capi_card($isdn));
         services::start_service_on_boot("capi4linux");
-        services::restart("capi4linux");
+        services::start("capi4linux");
     } else {
         services::stop("capi4linux");
         services::do_not_start_service_on_boot("capi4linux");
@@ -73,6 +73,9 @@ sub setup_capi_conf {
     if ($capi_card->{firmware} && ! -f "$::prefix/usr/lib/isdn/$capi_card->{firmware}") {
         $in->do_pkgs->install("$capi_card->{driver}-firmware");
     }
+
+    #- stop capi4linux before new config is written so that it can unload the driver
+    services::stop("capi4linux");
 
     my $capi_conf;
     my $firmware = $capi_card->{firmware} || '-';

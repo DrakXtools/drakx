@@ -368,7 +368,7 @@ METRIC=$metric
         services::stop("isdn4linux");
         services::do_not_start_service_on_boot("isdn4linux");
         services::start_service_on_boot("capi4linux");
-        services::restart("capi4linux");
+        services::start("capi4linux");
 
         #- install and run drdsl for dsl connections, once capi driver is loaded
         $in->do_pkgs->ensure_is_installed_if_available("drdsl", "/usr/sbin/drdsl");
