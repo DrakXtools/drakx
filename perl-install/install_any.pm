@@ -97,23 +97,24 @@ sub getAvailableSpace {
 sub setPackages {
     my ($o) = @_;
 
-    my $useHdlist = $o->{method} !~ /nfs|hd/;
-    eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
-           $o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
+    unless ($o->{package}) {
+	my $useHdlist = $o->{method} !~ /nfs|hd/;
+	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
+	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
-    pkgs::getDeps($o->{packages});
+	pkgs::getDeps($o->{packages});
+	
+	$o->{compss}     = pkgs::readCompss    ($o->{packages});
+	$o->{compssList} = pkgs::readCompssList($o->{packages});
+	push @{$o->{base}}, "kernel-smp" if smp::detect();
 
-    $o->{compss}     = pkgs::readCompss    ($o->{packages});
-    $o->{compssList} = pkgs::readCompssList($o->{packages});
-    push @{$o->{base}}, "kernel-smp" if smp::detect();
-
-    do {
-	my $p = $o->{packages}{$_} or log::l(), next;
-	pkgs::select($o->{packages}, $p, 1);
-    } foreach @{$o->{base}};
-
+	do {
+	    my $p = $o->{packages}{$_} or log::l(), next;
+	    pkgs::select($o->{packages}, $p, 1);
+	} foreach @{$o->{base}};
+    }	
+    
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
-
     pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages}, getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang});
 }
 

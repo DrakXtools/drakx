@@ -118,7 +118,7 @@ sub ask_from_entries_refW {
 		   create_packtable({}, @entry_list),
 		   $w->create_okcancel));
     
-
+    $entries[0]->grab_focus();
     $w->main();
 }
 

@@ -247,7 +247,7 @@ $o = $::o = {
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
     mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
-    packages   => [ qw() ],
+#    packages   => [ qw() ],
     partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
 #    partitions => [
 #		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
@@ -295,8 +295,8 @@ $o = $::o = {
                  SMBPASSWD => "passowrd",
                  SMBWORKGROUP => "AS3",
                },
-    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
+#    superuser => { password => 'a', shell => '/bin/bash', realname => 'God' },
+#    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
     
 #    keyboard => 'de',
 #    display => "192.168.1.9:0",
@@ -364,7 +364,9 @@ sub selectInstallClass {
     $o->selectInstallClass(@install_classes);
 
     $::expert = $o->{installClass} eq "expert";
-    
+    addToBeDone {
+    install_any::setPackages($o); #update package list
+    }  'formatPartitions';
 }
 
 #------------------------------------------------------------------------------
