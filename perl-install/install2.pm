@@ -512,8 +512,8 @@ sub main {
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
 	    redo MAIN;
 	}
-	$o->leavingStep($o->{step});
 	$o->{steps}{$o->{step}}{done} = 1;
+	$o->leavingStep($o->{step});
 
 	last if $o->{step} eq 'exitInstall';
     }
