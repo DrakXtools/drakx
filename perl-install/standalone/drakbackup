@@ -39,6 +39,11 @@
 #           cvs if version control of /etc directory
 #           cdrecord & mkisofs
 #           
+#  cdrw: /sys/dev/cdrom/info   
+#        /scsi/host0/bus0/target4/lun0   #   
+#  tar --use-compress-prog=bzip2 xf foo.tar.bz2   
+
+
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -322,15 +327,26 @@ sub return_path {
 }
 
 sub build_backup_files {
+
+#tar --use-compress-prog=bzip2 xf foo.tar.bz2
+
     -d  $save_path or mkdir_p($save_path);
     my $path_name;
+    my $tar_cmd;
+    my $tar_ext;
     my @list_other_;
+    if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
+    else { $tar_cmd = "tar cvz "; $tar_ext = "tar.gz"}
+    if ( $option_replace ) { 
+	$comp_mode and system("cd $save_path && rm -f *.tar.gz");  
+	$comp_mode or  system("cd $save_path && rm -f *.tar.bz2");  
+    }
     if ($where_hd) {
 	print "backup_sys @sys_files\n";
-	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
+	$backup_sys and system("$tar_cmd -f $save_path/backup_sys.$tar_ext @sys_files");
 	print "backup_other @list_other\n";
 	if (@list_other) {
-	    system("tar cvfz $save_path/backup_other.tar.gz @list_other");
+	    system("$tar_cmd -f $save_path/backup_other.$tar_ext @list_other");
 	    foreach (@list_other) {
 		push @list_other_, $_ . "\n";
 	    }
@@ -340,8 +356,8 @@ sub build_backup_files {
 	    foreach (@user_list) {
 		$path_name = return_path($_);
 		print "path of user: $path_name\n";
-		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
-		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
+		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$_.$tar_ext $path_name");
+		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.$tar_ext $path_name");
 	    }
 	}
     }
@@ -372,8 +388,8 @@ sub interactive_mode {
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
 
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and bzip2 "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gzip"),   }
 	
     if ($cfg_file_exist) { 
 	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
@@ -532,8 +548,8 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
        ['user', _('Users'), 0],
        ['net_u', _('Other'), 0],
        ['net', _('Network'), 0],
-       ['cdrom', _('CDROM\nDVDROM'), 0],
-       ['hd', _('Hard Drive\n NFS'), 0],
+       ['cdrom', _("CDROM\nDVDROM"), 0],
+       ['hd', _("Hard Drive\n NFS"), 0],
       );
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
@@ -766,7 +782,7 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
 						      ),
 					  0, new Gtk::HSeparator,
 					  0, gtkpack_(new Gtk::VBox(0,10),
-			      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( else use tar and gunzip, very slow)") ),
+			      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( very slow)") ),
 						      0, my $check_replace = new Gtk::CheckButton( _(" Replace (no update backup files)")),
 						      0, my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")),
 						      ),
@@ -1265,8 +1281,8 @@ sub after_adv {
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
     
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and bzip2 "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gzip"),   }
     
     if ($cfg_file_exist) { 
 	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
@@ -1425,3 +1441,63 @@ Drakbacup allow to restore the system (etc, var files)
     $up_box->show_all();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# sub build_backup_files {
+#     -d  $save_path or mkdir_p($save_path);
+#     my $path_name;
+#     my @list_other_;
+#     if ($where_hd) {
+# 	print "backup_sys @sys_files\n";
+# 	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
+# 	print "backup_other @list_other\n";
+# 	if (@list_other) {
+# 	    system("tar cvfz $save_path/backup_other.tar.gz @list_other");
+# 	    foreach (@list_other) {
+# 		push @list_other_, $_ . "\n";
+# 	    }
+# 	    output_p( $save_path . '/list_other', @list_other_);    
+# 	}
+# 	if ($backup_user) {
+# 	    foreach (@user_list) {
+# 		$path_name = return_path($_);
+# 		print "path of user: $path_name\n";
+# 		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
+# 		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
+# 	    }
+# 	}
+#     }
+#     if ($where_net) {
+	
+#     }
+#     if ($where_cd) {
+	
+#     }
+# }
