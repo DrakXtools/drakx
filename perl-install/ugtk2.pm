@@ -270,12 +270,12 @@ sub create_scrolled_window {
     my $w = Gtk2::ScrolledWindow->new(undef, undef);
     $policy ||= [ 'automatic', 'automatic' ];
     $w->set_policy(@{$policy});
-    if (member(ref $W, qw(Gtk2::CList Gtk2::CTree Gtk2::Text Gtk2::TreeView Gtk2::TextView))) {
+    if (member(ref $W, qw(Gtk2::CList Gtk2::CTree Gtk2::Layout Gtk2::Text Gtk2::TextView Gtk2::TreeView))) {
 	$w->add($W)
     } else {
 	$w->add_with_viewport($W);
-	$viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
     }
+    $viewport_shadow and gtkset_shadow_type($w->child, $viewport_shadow);
     $W->can('set_focus_vadjustment') and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     $w
