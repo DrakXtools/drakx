@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 0.21mdk
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-1mdk
+- drakconnect: fix writing modules aliases (fix broken speedtouch)
+- drakbackup: use Gnome icon order (stew)
+
 * Thu Feb 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-0.21mdk
 - drakboot: fix theme displaying under console (Olivier Blin)
 - drakconnect: since no PCMCIA cards support link status notification,
