@@ -1013,6 +1013,7 @@ sub wizard_welcome {
     my $autodetectlocal = 0;
     my $autodetectnetwork = 0;
     my $autodetectsmb = 0;
+    my $configlpd = 0;
     # If networking is configured, start it, but do not ask the user to
     # configure networking.
     my $havelocalnetworks;
@@ -1030,7 +1031,12 @@ sub wizard_welcome {
 	$autodetectlocal = 1 if $printer->{AUTODETECTLOCAL};
 	$autodetectnetwork = 1 if $printer->{AUTODETECTNETWORK};
 	$autodetectsmb = 1 if $printer->{AUTODETECTSMB};
+	$configlpd = 1 if $printer->{CONFIGLPD};
     }
+    my $oldautodetectlocal = $autodetectlocal;
+    my $oldautodetectnetwork = $autodetectnetwork;
+    my $oldautodetectsmb = $autodetectsmb;
+    my $oldconfiglpd = $configlpd;
     if ($in) {
 	eval {
 	    if ($printer->{expert}) {
@@ -1083,7 +1089,49 @@ This wizard will help you to install your printer(s) connected to this computer.
 
 If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now."))) },
+ Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now."))),
+                       callbacks => {
+			   changed => sub {
+			       if ($oldautodetectlocal ne
+				   $autodetectlocal) {
+				   if ($autodetectlocal) {
+				       $configlpd = 0;
+				       $oldconfiglpd = 0;
+				   }
+				   $oldautodetectlocal = $autodetectlocal;
+			       }
+			       if ($oldautodetectnetwork ne
+				   $autodetectnetwork) {
+				   if ($autodetectnetwork) {
+				       $configlpd = 0;
+				       $oldconfiglpd = 0;
+				   }
+				   $oldautodetectnetwork =
+				       $autodetectnetwork;
+			       }
+			       if ($oldautodetectsmb ne
+				   $autodetectsmb) {
+				   if ($autodetectsmb) {
+				       $configlpd = 0;
+				       $oldconfiglpd = 0;
+				   }
+				   $oldautodetectsmb = $autodetectsmb;
+			       }
+			       if ($oldconfiglpd ne $configlpd) {
+				   if ($configlpd) {
+				       $autodetectlocal = 0;
+				       $autodetectnetwork = 0;
+				       $autodetectsmb = 0;
+				       $oldautodetectlocal = 0;
+				       $oldautodetectnetwork = 0;
+				       $oldautodetectsmb = 0;
+				   }
+				   $oldconfiglpd = $configlpd;
+			       }
+			       return 0;
+			   }
+		       }
+                      },
 		     [
 		      { text => N("Auto-detect printers connected to this machine"), type => 'bool',
 			val => \$autodetectlocal },
@@ -1092,11 +1140,16 @@ If you have printer(s) connected to this machine, Please plug it/them in on this
 			val => \$autodetectnetwork },
 			   if_($printer->{SPOOLER} ne "pdq",
 		      { text => N("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
-			val => \$autodetectsmb })),
+			val => \$autodetectsmb },
+		      { text => N("Printer on remote lpd server")
+			    . " (" . N("No auto-detection") . ")",
+		        type => 'bool',
+			val => \$configlpd })),
 		      ]);
 		$printer->{AUTODETECTLOCAL} = $autodetectlocal ? 1 : undef;
 		$printer->{AUTODETECTNETWORK} = $autodetectnetwork ? 1 : undef;
 		$printer->{AUTODETECTSMB} = $autodetectsmb && $printer->{SPOOLER} ne "pdq" ? 1 : undef;
+		$printer->{CONFIGLPD} = $configlpd ? 1 : undef;
 		$printer->{TIMEOUT} = 4000;
 	    }
 	};
@@ -1452,6 +1505,7 @@ complete => sub {
     if (defined($modelinfo) &&
 	$modelinfo->{MANUFACTURER} ne "" &&
 	$modelinfo->{MODEL} ne "") {
+	local $::isWizard = 0;
         $in->ask_warn(N("Information"), N("Detected model: %s %s",
                             $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
         $auto_hpoj = 1;
@@ -1789,6 +1843,7 @@ sub setup_socket {
     my @menuentrieslist;
     my $menuchoice = "";
     my $oldmenuchoice = "";
+    my $detectedprinterchosen = 0;
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	my $_w = $in->wait_message(N("Printer auto-detection"), N("Scanning network..."));
@@ -1812,6 +1867,7 @@ sub setup_socket {
 	    if ($host eq $remotehost &&
 		$host eq $remotehost) {
 		$menuchoice = $menustr;
+		$detectedprinterchosen = 1;
 	    }
 	}
 	@menuentrieslist = sort { 
@@ -1840,6 +1896,7 @@ sub setup_socket {
 	    if ($menuentries->{$menuentrieslist[0]} =~ m!^socket://([^:]+):(\d+)$!) {
              $remotehost = $1;
              $remoteport = $2;
+	     $detectedprinterchosen = 1;
          }
 	}
 	$oldmenuchoice = $menuchoice;
@@ -1866,11 +1923,17 @@ sub setup_socket {
 		 changed => sub {
 		     return 0 if !$autodetect;
 		     if ($oldmenuchoice ne $menuchoice) {
-                   if ($menuentries->{$menuchoice} =~ m!^socket://([^:]+):(\d+)$!) {
-                       $remotehost = $1;
-                       $remoteport = $2;
-                   }
-                   $oldmenuchoice = $menuchoice;
+			 if ($menuentries->{$menuchoice} =~
+			     m!^socket://([^:]+):(\d+)$!) {
+			     $remotehost = $1;
+			     $remoteport = $2;
+			     $detectedprinterchosen = 1;
+			 } else {
+			     $detectedprinterchosen = 0;
+			 }
+			 $oldmenuchoice = $menuchoice;
+		     } else {
+			 $detectedprinterchosen = 0;
 		     }
 		     return 0;
 		 }
@@ -1912,6 +1975,12 @@ sub setup_socket {
     if (defined($modelinfo) &&
 	$modelinfo->{MANUFACTURER} ne "" &&
 	$modelinfo->{MODEL} ne "") {
+	if (!$detectedprinterchosen) {
+	    local $::isWizard = 0;
+	    $in->ask_warn(N("Information"), N("Detected model: %s %s",
+					      $modelinfo->{MANUFACTURER},
+					      $modelinfo->{MODEL}));
+	}
         $auto_hpoj = 1;
     } else {
 	$auto_hpoj = 0;
@@ -2032,6 +2101,7 @@ complete => sub {
         if (defined($modelinfo) &&
             $modelinfo->{MANUFACTURER} ne "" &&
 	    $modelinfo->{MODEL} ne "") {
+	    local $::isWizard = 0;
             $in->ask_warn(N("Information"), N("Detected model: %s %s",
                                 $modelinfo->{MANUFACTURER},
 				$modelinfo->{MODEL}));
@@ -3440,14 +3510,14 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		    if $printer->{ARGS}[$i]{name} ne 'PageRegion';
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
-		$choicelists[$i] = [($printer->{ARGS}[$i]{comment_true} ||
-				     $printer->{ARGS}[$i]{name} || "Yes"),
-				    ($printer->{ARGS}[$i]{comment_false} ||
-				     $printer->{ARGS}[$i]{name_false} ||
-				     "No")];
+		$choicelists[$i] =
+		    [(unhexify($printer->{ARGS}[$i]{comment_true}) ||
+		      unhexify($printer->{ARGS}[$i]{name}) || "Yes"),
+		     (unhexify($printer->{ARGS}[$i]{comment_false}) ||
+		      unhexify($printer->{ARGS}[$i]{name_false}) || "No")];
 		$shortchoicelists[$i] = [];
 		my $numdefault = 
-		    ($optshortdefault =~ m!^\s*(true|on|yes|1)\s*$! ? 
+		    ($optshortdefault =~ m!^\s*(true|on|yes|1)\s*$!i ? 
 		     "1" : "0");
 		$userinputs[$i] = $choicelists[$i][1-$numdefault];
 		push(@widgets,
@@ -3617,7 +3687,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 					$res2 = 0;
 					$oldres2 = 0;
 				 }
-				 $old_options{standard} = $options{standard};
+				 $old_options{$opt} = $options{$opt};
 			  }
 		   }
 		   return 0;
@@ -4647,6 +4717,7 @@ sub init {
     $printer->{AUTODETECTLOCAL} = 1;
     $printer->{AUTODETECTNETWORK} = 0;
     $printer->{AUTODETECTSMB} = 0;
+    $printer->{CONFIGLPD} = 0;
     
     # Mark this part as done, it should not be done a second time.
     if ($::isInstall) {
@@ -4909,7 +4980,13 @@ sub add_printer {
 	    # eval to catch wizard cancel. The wizard stuff 
 	    # should be in a separate function with steps. see 
 	    # drakgw.
-	    $printer->{expert} or $printer->{TYPE} = "LOCAL";
+	    $printer->{expert} or do {
+		if ($printer->{CONFIGLPD}) { 
+		    $printer->{TYPE} = "LPD";
+		} else {
+		    $printer->{TYPE} = "LOCAL";
+		}
+	    };
 	  step_1:
 	    !$printer->{expert} or choose_printer_type($printer, $in, $upNetwork) or
 		goto step_0;
@@ -4983,6 +5060,13 @@ sub add_printer {
 	# Print queue setup without wizard (for installation)
 	$printer->{expert} or $printer->{TYPE} = "LOCAL";
 	wizard_welcome($printer, $in, $upNetwork) or return 0;
+	    $printer->{expert} or do {
+		if ($printer->{CONFIGLPD}) { 
+		    $printer->{TYPE} = "LPD";
+		} else {
+		    $printer->{TYPE} = "LOCAL";
+		}
+	    };
 	!$printer->{expert} or choose_printer_type($printer, $in, $upNetwork) or return 0;
 	setup_printer_connection($printer, $in, $upNetwork) or return 0;
 	get_db_entry($printer, $in);
@@ -5270,7 +5354,7 @@ sub final_cleanup {
 	}
 	delete($printer->{configured}{$queue}{queuedata}{menuentry});
     }
-    foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB noninteractive expert))
+    foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB CONFIGLPD noninteractive expert))
     { delete $printer->{$_} };
 }
 
