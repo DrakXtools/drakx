@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.6mdk
+Release: 0.7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,6 +312,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.7mdk
+- drakboot: more work on grub conf reread
+- drakedm: fix crash on service restart
+- drakfont: fix crash when trying to remove empty font list
+
 * Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.6mdk
 - autoinstall: (pixel)
   o fix regarding LVMs
@@ -320,8 +325,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakboot: reread grub config file if grub is the current boot loader
   (#3965)
 - diskdrake: fix for nfs mount points (pixel)
-- drakgw: reread current network conf (florin)
-- i18n fixes
+- drakgw: reread current network conf (florin) (#468)
+- i18n fixes (#3647 and co)
 - mousedrake: add mouse test in non-embedded mode (#2049) (gc)
 
 * Tue May 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.5mdk
