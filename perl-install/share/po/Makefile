@@ -24,7 +24,7 @@ $(PMSCFILES): %_.c: %
 	./fake_c.pl $< > $@
 
 $(POFILES): DrakX.pot
-	cp -f $@ $@t
+	perl -ne 'print unless /^#.*\Qdrakx-help.xml/ .. /^$/' $@ > $@t
 	if [ -e help-$@ ]; then msgmerge -C help-$@ $@t $< > $@; else msgmerge $@t $< > $@; fi
 	rm $@t
 
