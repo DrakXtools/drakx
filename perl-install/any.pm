@@ -13,6 +13,7 @@ use fsedit;
 use fs;
 use lang;
 use run_program;
+use devices;
 use modules;
 use log;
 use c;
