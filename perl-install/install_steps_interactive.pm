@@ -173,7 +173,7 @@ sub selectInstallClass {
 sub selectMouse {
     my ($o, $force) = @_;
 
-    $force ||= $o->{mouse}{unsafe} || 1;
+    $force ||= $o->{mouse}{unsafe};
 
     if ($force) {
 	my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
