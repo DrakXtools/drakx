@@ -145,3 +145,9 @@ substInFile {
 
 #- we're not using sysv init, we need to replace these
 unlink "$::prefix/sbin/$_" foreach qw(halt reboot);
+
+#- provide a way for speedtouch users of free version to escape
+if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
+    symlink '/etc/mgmt.o', "$::prefix/usr/share/speedtouch/mgmt.o";
+}
+
