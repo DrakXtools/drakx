@@ -658,11 +658,6 @@ sub setupBootloaderBefore {
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
 			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'Aurora') || {}) && $vga);
-	if ($o->{miscellaneous}{profiles}) {
-	    my $e = bootloader::get_label("linux", $o->{bootloader});
-	    push @{$o->{bootloader}{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };
-	    $e->{append} .= " prof=Home";
-	}
         bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3;
 	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
     }
@@ -736,7 +731,7 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       $o->{X}{skiptest} = 1;
-      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub { $o->pkg_install(@_) });
+      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, sub { $o->pkg_install(@_) });
     }
     $o->configureXAfter;
 }
@@ -760,23 +755,20 @@ sub miscellaneousBefore {
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
-    $o->{miscellaneous}{CLEAN_TMP} ||= $s{CLEAN_TMP} if exists $s{CLEAN_TMP};
     $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
 
     $ENV{SECURE_LEVEL} = $o->{security};
     add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
-    cat_("/proc/cmdline") =~ /mem=(\S+)/;
-    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
+    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia} });
 }
 sub miscellaneous {
     my ($o) = @_;
 
     local $_ = $o->{bootloader}{perImageAppend};
 
-    $o->{miscellaneous}{memsize} ||= availableRamMB() . 'M' if $o->{lnx4win};
-    if (my $ramsize = $o->{miscellaneous}{memsize} and !/mem=/) {
-	$_ .= " mem=$ramsize";
+    if ($o->{lnx4win} and !/mem=/) {
+	$_ .= ' mem=' . availableRamMB() . 'M';
     }
     if (my @l = detect_devices::IDEburners() and !/ide-scsi/) {
 	$_ .= " " . join(" ", (map { "$_->{device}=ide-scsi" } @l), 
