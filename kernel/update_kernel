@@ -90,3 +90,5 @@ for i in $ALL_KERNELS/*; do
 	) || exit 1
 done
 cp -f all.modules/$main/modules.description .
+
+./check_mar.pl
