@@ -861,7 +861,7 @@ sub setupBootloaderBefore {
     }
 }
 
-sub setupBootloader($) {
+sub setupBootloader {
     my ($o) = @_;
     return if $::g_auto_install;
 

@@ -850,6 +850,7 @@ sub summary {
 { label => N("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => N("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
+{ label => N("Bootloader"), val => \$o->{bootloader}, clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) }, format => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" } },
     (map {
 { label => N("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
@@ -1057,7 +1058,7 @@ sub setupBootloaderBefore {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    my ($o, $more) = @_;
+    my ($o) = @_;
     if (arch() =~ /ppc/) {
 	my $machtype = detect_devices::get_mac_generation();
 	if ($machtype !~ /NewWorld/) {
@@ -1074,23 +1075,21 @@ N("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
+	any::setupBootloader_simple($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) or return;
 
 	{
 	    my $_w = $o->wait_message('', N("Installing bootloader"));
 	    eval { $o->SUPER::setupBootloader };
 	}
 	if (my $err = $@) {
-	    $err =~ /failed$/ or die;
-	    $o->ask_warn('', 
-			 [ N("Installation of bootloader failed. The following error occured:"),
-			   grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
-	    unlink "$o->{prefix}/tmp/.error";
+	    $err =~ s/^\w+ failed// or die;
+            $err = formatError($err);
+            while ($err =~ s/^Warning:.*//m) {}
+	    $o->ask_warn('', [ N("Installation of bootloader failed. The following error occured:"), $err ]);
 	    die "already displayed";
 	} elsif (arch() =~ /ppc/) {
 	    my $of_boot = cat_("$o->{prefix}/tmp/of_boot_dev") || die "Can't open $o->{prefix}/tmp/of_boot_dev";
 	    chop($of_boot);
-	    unlink "$o->{prefix}/tmp/.error";
 	    $o->ask_warn('', N("You may need to change your Open Firmware boot-device to\n enable the bootloader.  If you don't see the bootloader prompt at\n reboot, hold down Command-Option-O-F at reboot and enter:\n setenv boot-device %s,\\\\:tbxi\n Then type: shut-down\nAt your next boot you should see the bootloader prompt.", $of_boot));
 	}
     }
