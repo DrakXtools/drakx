@@ -740,6 +740,7 @@ sub default_packages {
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     my $dmi_System = detect_devices::dmidecode_category('System');
     my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
+    my $dmi_Base_Board = detect_devices::dmidecode_category('Base Board');
     if ($dmi_System->{Manufacturer} =~ /Dell Computer/ && $dmi_System->{'Product Name'} =~ /Inspiron|Latitude/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('i8k');
         push @l, "i8kutils";
@@ -749,7 +750,7 @@ sub default_packages {
         push @l, "toshutils";
     }
     if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/
-          || $dmi_BIOS->{'Base Board'}{Manufacturer} =~ /^ACER/ && $dmi_BIOS->{'Base Board'}{'Product Name'} =~ /TravelMate 610/) {
+          || $dmi_Base_Board->{Manufacturer} =~ /^ACER/ && $dmi_Base_Board->{'Product Name'} =~ /TravelMate 610/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 
