@@ -1,3 +1,255 @@
+2002/09/03  baudens
+
+	* share/advertising/09-server.pl, share/advertising/02-community.pl,
+	share/advertising/04-multimedia.pl, share/advertising/07-desktop.pl,
+	share/advertising/14-mdkexpert.pl, share/advertising/03-internet.pl,
+	share/advertising/13-mdkcampus.pl, share/advertising/12-mdkstore.pl,
+	share/advertising/11-mdkstore.pl, share/advertising/05-games.pl: Use
+	official marketing ads
+
+	* share/advertising/list: Add MandrakeClub screen in list
+
+	* share/po/fr.po: Use MandrakeSoft marketing ads
+	Begin to use Mandrake's marketing ads
+
+	* share/advertising/17-mdkclub.pl, share/advertising/17-mdkclub.png: Add
+	MDKclub screen and text
+
+2002/09/03  dam's  <dams@idm.fr>
+
+	* ugtk.pm: added create_pixbutton
+
+	* my_gtk.pm: better icon association
+	added create_pixbutton
+	added add_icon_path for control-center
+
+	* pixmaps/stock_cancel.xpm, pixmaps/stock_right.xpm, pixmaps/stock_ok.xpm,
+	pixmaps/stock_exit.xpm, pixmaps/stock_left.xpm: re-adding with -kb
+	removing for re-adding with -kb
+	icons for ok/cancel/back/previou/next icons
+
+2002/09/03  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  -  obsoletes/provides drakfloppy
+
+	* my_gtk.pm: 
+	  - better size of wizard for printerdrake
+
+2002/09/03  fcrozat
+
+	* share/rpmsrate: mdk-eazel-engine is now in gtk-engines
+
+2002/09/03  François Pons  <fpons@mandrakesoft.com>
+
+	* install_gtk.pm: fixed old Xconf style because it doesn't work anymore on
+	i845 with newer format.
+
+	* mouse.pm: add a sleep and second try for usb mouse.
+	added log when no usb interface is found, rare enough now.
+
+	* ugtk.pm: fixed previous fix;
+	try to avoid clashes with install.
+
+	* modules.pm: make modules.pm patchable (avoid my ...)
+	updated log of add_probeall to be correct.
+
+	* my_gtk.pm: fixed damien (aka pitchounette) sucking, this is not this way
+	pitchounette you
+	will lost your current name as pitchounette :-)
+
+	* install_steps_interactive.pm: fixed too higher percentage.
+
+2002/09/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* drakxtools.spec: meumeu
+	meuh
+
+	* ugtk.pm: try to get rid of BEGIN but still be able to start up the
+	install :-)
+	have the possibility in gtktext_insert to provide font/color
+	information as well
+	meuh gtk init
+	gtkcreate_png was too stupid to allow subdirectories for images,
+	fix it
+
+	* my_gtk.pm: try to get rid of BEGIN but still be able to start up the
+	install :-)
+
+2002/09/03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pl.po: updated Polish file
+
+	* share/po/cs.po: updated po file
+
+	* share/po/zh_CN.po: updated Chinese file
+
+	* lang.pm: Changed Turkish console font
+
+	* share/po/Makefile: enabled ro.po
+
+2002/09/03  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/list.i386: add gpart (per Giuseppe Ghibò request)
+
+	* my_gtk.pm: remove the use of Ok/Cancel/Exit icons (per ergonomy team
+	request)
+
+2002/09/03  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Fix empty subnet in /etc/exports /home entry.
+
+2002/09/03  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* share/po/fr.po: remove double translation
+
+	* ugtk.pm: 
+	  - create_pix_text, gtkicons_labels_widget: remove text color argument,
+	default to black
+	  - remove last debugging prints
+	  - ugtk :
+	o create_pix_text:
+	    * remove
+	    * kill uni colored background
+	    * api change:
+	      + background argument => background list
+	      + remove bold argument
+	    * render all text (normal, highlighted, selected) on specified
+	      background in one pass
+	  o gtkicons_labels_widget():
+	    * explain/comment
+	    * move all drawing logic in &$draw
+	    * create buffer area, text pics only one time
+	    * add a pixbuf for highlighted item
+	    * render highlighted icon by making it more transparent
+	    * recalculate drawing buffer only on state change
+	  - mcc :
+	    * move all drawing logic in &$draw
+	    * create buffer area, text pics only one time
+	    * render highlighted icon by making it more transparent
+	    * recalculate drawing buffer only on state change
+
+	* drakxtools.spec: 30mdk
+
+2002/09/02  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm, network/ethernet.pm: 
+	  - fix previous behavior in Expert mode... (100% lazy loop free this
+	time)
+
+	* network/netconnect.pm: 
+	  - network restart previous bug fixed
+
+2002/09/02  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/po/fr.po: corrected a gramatical error
+
+2002/09/02  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: restore auto build of synthesis file (for updates).
+
+	* ugtk.pm: fixed titi suckings.
+
+	* install_steps_interactive.pm: make sure upgrade is done instead.
+
+2002/09/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/id.po, share/advertising/14-mdkexpert.pl, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/no.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/advertising/03-internet.pl, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/advertising/05-games.pl, share/po/sp.po, share/po/cy.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po,
+	share/advertising/12-mdkstore.pl, share/advertising/09-server.pl,
+	share/advertising/04-multimedia.pl, share/po/bs.po, share/po/ro.po,
+	share/advertising/13-mdkcampus.pl, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/lv.po, share/po/cs.po,
+	share/po/bg.po, share/po/el.po, share/po/hu.po: try to fix broken
+	english in advertisements and not break po's
+
+2002/09/02  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/advertising/12-mdkstore.pl,
+	share/advertising/15-mdkexpert-corporate.pl: small fix
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/bg.po, share/po/el.po: updated
+	pot file
+
+	* share/advertising/14-mdkexpert.pl: fixed typo
+	small fix
+
+	* share/po/hu.po: updated Hungarian file
+	updated pot file
+
+	* help.pm: Fixed typo
+
+	* share/po/zh_TW.po: updated Chinese file
+	updated pot file
+
+	* share/po/pl.po, share/po/cs.po: updated pot file
+	updated Czech and Polish files
+
+2002/09/02  Till Kamppeter  <till@mandrakesoft.com>
+
+	* share/rpmsrate: Updated for the new printerdrake.
+
+2002/09/02  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: use new ln icons
+
+	* ugtk.pm: gtkicons_labels_widget(): check binary exists
+
+	* drakxtools.spec, Makefile.drakxtools: 29mdk: add harddrake icons
+
+	* standalone/icons/harddrake2/harddrake.png,
+	standalone/icons/harddrake2/joystick.png,
+	standalone/icons/harddrake2/usb.png, standalone/icons/harddrake2/tv.png,
+	standalone/icons/harddrake2/floppy.png,
+	standalone/icons/harddrake2/scsi_hd.png,
+	standalone/icons/harddrake2/modem.png,
+	standalone/icons/harddrake2/keyboard.png,
+	standalone/icons/harddrake2/unknown.png,
+	standalone/icons/harddrake2/harddisk.png,
+	standalone/icons/harddrake2/cd.png, standalone/icons/harddrake2/cpu.png,
+	standalone/icons/harddrake2/ide_hd.png,
+	standalone/icons/harddrake2/scanner.png,
+	standalone/icons/harddrake2/hw_mouse.png,
+	standalone/icons/harddrake2/isdn.png,
+	standalone/icons/harddrake2/hw_printer.png,
+	standalone/icons/harddrake2/memory.png,
+	standalone/icons/harddrake2/webcam.png,
+	standalone/icons/harddrake2/video.png,
+	standalone/icons/harddrake2/tape.png,
+	standalone/icons/harddrake2/sound.png,
+	standalone/icons/harddrake2/scsi.png,
+	standalone/icons/harddrake2/hw_network.png: add new icons
+	remove old icons
+	add new ln icons
+
+	* standalone/icons/harddrake2/menu/harddrake-menu48.png,
+	standalone/icons/harddrake2/cable.png,
+	standalone/icons/harddrake2/menu/harddrake-menu16.png,
+	standalone/icons/harddrake2/menu/harddrake-menu32.png,
+	standalone/icons/harddrake2/multimedia.png,
+	standalone/icons/harddrake2/K7.png: add new ln icons
+
 2002/09/02  Frederic Lepied  <flepied@mandrakesoft.com>
 
 	* share/po/fr.po: corrected a gramatical error
@@ -1678,7 +1930,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.734 2002/09/02 16:30:56 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.735 2002/09/02 16:50:45 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
