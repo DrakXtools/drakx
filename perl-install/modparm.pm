@@ -14,7 +14,7 @@ sub parameters {
   my ($module) = @_;
 
   my $modinfo = '/sbin/modinfo';
-  -x $modinfo or {
+  if (-x $modinfo) {
 	 $modinfo = '/usr/bin/modinfo';
 	 -x $modinfo or die _('modinfo is not available');
   }
