@@ -37,10 +37,6 @@ use Gtk2::Gdk::Keysyms;
 use modules;
 use c;
 
-# Do not embed in mcc as the GTK2 main window is too big and the menues
-# do not work in embedded mode
-local $::isEmbedded = 0;
-
 my $pixdir = '/usr/share/libDrakX/pixmaps/';
 
 local $_ = join '', @ARGV;
