@@ -298,6 +298,7 @@ sub select_packages {
 
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
+    $o->{compssUsersChoice}{SERVER} = 0;
 
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
@@ -306,7 +307,6 @@ sub select_packages {
     }
 
     pkgs::setSelectedFromCompssList($o->{packages}, $o->{compssUsersChoice}, 2, 0);
-    pkgs::setSelectedFromCompssList($o->{packages}, { map { $_ => 1 } map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}} }, 2, 0);
 
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers drakprofile draksync irda-utils numlock raidtools reiserfs-utils
