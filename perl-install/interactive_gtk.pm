@@ -38,7 +38,7 @@ sub create_boxradio {
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $boxradio = gtkpack2__(new Gtk::VBox(0, 0),
-			      my @radios = gtkradio(@l, ''));
+			      my @radios = gtkradio('', @l));
     $boxradio->show;
     my $tips = new Gtk::Tooltips;
     mapn {
