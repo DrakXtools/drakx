@@ -1042,7 +1042,7 @@ sub during_install__l2charset {
     return if member($lang, @during_install__lang_having_their_LC_CTYPE);
 
     my ($c) = l2charset($lang) or die "bad lang $lang\n";
-    $c = 'UTF-8' if member($c, 'tis620', 'C');
+    $c = 'UTF-8' if member($c, 'tis620', 'C', 'unicode');
     $c = 'UTF-8' if $c =~ /koi8-/;
     $c = 'UTF-8' if $c =~ /iso-8859/;
     $c = 'UTF-8' if $c =~ /cp125/;
