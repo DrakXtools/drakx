@@ -367,7 +367,7 @@ newtEntry(initialValue,width,flag)
         int flag;
 	CODE:
 	{
-		char *result;
+		const char *result;
 		RETVAL = newtEntry(-1, -1, initialValue,width,&result,flag);
 	}
 	OUTPUT:
