@@ -470,7 +470,7 @@ sub ejectCdrom(;$) {
 	#- umount BEFORE opening the cdrom device otherwise the umount will
 	#- D state if the cdrom is already removed
 	eval { fs::umount("/tmp/image") };
-	if ($@) { log::l("files still open: ", readlink($_)) foreach glob_("/proc/self/fd/*") }
+	if ($@) { log::l("files still open: ", readlink($_)) foreach map { glob_("$_/fd/*") } glob_("/proc/*") }
 	eval { ioctl detect_devices::tryOpen($cdrom), c::CDROMEJECT(), 1 };	
     }
 }
