@@ -321,7 +321,7 @@ sub loadkeys_files {
 		@l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
 	    }
 	} else {
-	    $err->("unknown loadkeys keytable $_") if $err;
+	    $err->("invalid loadkeys keytable $_") if $err;
 	}
     }
     @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
