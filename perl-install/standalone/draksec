@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+#*****************************************************************************
+#
+# Copyright (c) 2002 Christian Belisle (cbelisle@mandrakesoft.com)
+#
+# This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License version 2, as
+#  published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+#*****************************************************************************
+
+"@ARGV" =~ /-h/ and do {
+	    printf STDERR "Usage: draksec [OPTION]...
+	      --debug         print debugging information
+";
+			     exit 0;
+		     };
+
+use lib qw(/usr/lib/libDrakX);
+
+use strict;
+use vars qw($MODE %options $XID $CCPID);
+
+use security::main;
+
+$MODE = 'basic';
+$0 =~ '/draksec-firewall$' and $MODE = 'firewall';
+$0 =~ '/draksec-perms$' and $MODE = 'perms';
+
+/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
+
+$::isStandalone = 1;
+Gtk->init;
+
+draksec_main();
+
+myexit 0;
