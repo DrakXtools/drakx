@@ -709,7 +709,6 @@ sub install_spooler {
 	if ($printer->{SPOOLER} eq "cups") {
 	    $in->do_pkgs->install(('cups', 'xpp', 'qtcups', 'kups',
 		       ($::expert ? 'cups-drivers' : ())));
-	    if ($::expert) {$in->do_pkgs->install('cups-drivers');}
 	    # Start daemon
 	    printer::start_service("cups");
 	    sleep 1;
