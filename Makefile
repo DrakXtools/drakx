@@ -13,6 +13,10 @@ ifeq (ppc,$(ARCH))
 BOOT_IMG = 
 RELEASE_BOOT_IMG = all.img
 endif
+ifeq (ia64,$(ARCH))
+BOOT_IMG =
+RELEASE_BOOT_IMG = all.img
+endif
 BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 FRELEASE_BOOT_IMG = $(BOOT_IMG:%=images/%)

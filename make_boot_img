@@ -72,7 +72,7 @@ sub initrd {
     my $tar = "$instdir/stage1-data/stage1.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ ? ($type eq "all" ? 12000 : 12000) : ($type eq "all" ? 4000 : 2000));
+    _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($arch =~ /ia64/ ? ($type eq "all" ? 16386 : 16384) : ($type eq "all" ? 4000 : 2000));
     _ "$mke2fs $tmp";
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
@@ -89,7 +89,7 @@ sub initrd {
     }
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
-    if ($ftype eq "pcmcia" && $arch !~ /ppc/) {
+    if ($ftype eq "pcmcia" && $arch !~ /ppc/ && $arch !~ /ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
     }
@@ -218,7 +218,7 @@ sub boot_img_ia64 {
     my ($mnt, $img, $kernel) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$img bs=1k count=12000";
+    _ "dd if=/dev/zero of=$img bs=1k count=16384";
     _ "mkdosfs $img";
     _ "$sudo mount -t vfat $img $mnt -o loop,umask=000";
     _ "$sudo cp -f $kernel $mnt/vmlinux";
