@@ -49,6 +49,8 @@ check_pms_encoding:
 
 check: check_pms_encoding
 	perl -I. -Mlang -e 'lang::check'
+
+check2:
 	perl -I. -Mkeyboard -e 'keyboard::check'
 
 localcopy: clean
