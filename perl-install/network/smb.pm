@@ -12,7 +12,7 @@ our @ISA = 'network::smbnfs';
 
 sub to_fstab_entry {
     my ($class, $e) = @_;
-    $class->to_fstab_entry_raw($e, 'nfs');
+    $class->to_fstab_entry_raw($e, 'smbfs');
 }
 sub from_dev { 
     my ($class, $dev) = @_;
