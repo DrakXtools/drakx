@@ -69,7 +69,11 @@ sub configure_auto_install {
 
     my $monitors_db = monitors_db();
     foreach my $monitor (@$monitors) {
-	configure_automatic($monitor, $monitors_db) or put_in_hash($monitor, { HorizSync => '31.5-35.1', VertRefresh => '50-61' });
+	if (!configure_automatic($monitor, $monitors_db)) {
+	    good_default_monitor() =~ /(.*)\|(.*)/ or internal_error("bad good_default_monitor");
+	    put_in_hash($monitor, { VendorName => $1, ModelName => $2 });
+	    configure_automatic($monitor, $monitors_db) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorDB");
+	}
     }
     $raw_X->set_monitors(@$monitors);
     $monitors;
