@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 9mdk
+Release: 10mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -262,6 +262,12 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-10mdk
+- harddrake :
+	o remove - between vendor and model for ibm eide disks
+	o network devices are configurable again now
+- draksec : typo fix (deush)
+
 * Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-9mdk
 - harddrake :
 	o don't show "cancel" button in about and help windows
@@ -270,7 +276,7 @@ done
 - general reorganization cleanup:
     o move interactive_* into interactive::*
     o move partition_table_* into partition_table::*
-- XFdrake: more cleanups
+- XFdrake: more cleanups (pixel)
 
 * Sun Jul 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-8mdk
 - new snapshot (beware of XFdrake)
@@ -279,7 +285,7 @@ done
 - remove last draknet reference in harddrake::ui
 - disable diagnostics and strict mode
 
-* Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
+n* Thu Jul 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-6mdk
 - able to restart WindowMaker if needed
 - draknet is dead; vival el drakconnect
 - devices managment:
