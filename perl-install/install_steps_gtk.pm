@@ -381,7 +381,10 @@ sub choosePackagesTree {
 		return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
 	    }
 
-	    @l > @_ && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be installed/removed"), join(", ", sort @l) ], 1) || return;
+	    @l > @_ && !$auto_deps and $o->ask_okcancel('', [ $isSelection ? 
+							      _("The following packages are going to be installed") :
+							      _("The following packages are going to be removed"),
+							      join(", ", sort @l) ], 1) || return;
 	    $isSelection ? pkgs::selectPackage($packages, $_) : pkgs::unselectPackage($packages, $_) foreach @_;
 	    foreach (@l) {
 		my $p = $packages->[0]{$_};
