@@ -34,7 +34,7 @@
 #       backend : --resore_all, --restore_sys, --restore_users
 #		  --build_cd_autoinst 	
 #		  --backup_now --backup_default_now
-
+#	restore user: pbs with list selection	  
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -317,8 +317,6 @@ sub build_backup_files {
     if ($where_cd) {
 	
     }
-
-
 }
 
 sub interactive_mode {
@@ -751,9 +749,9 @@ sub advanced {
 			     0, gtkpack_(new Gtk::HBox(0,10),
 					 1, _("Please choose media to backup. "),
 					 0, gtkpack_(new Gtk::VBox(0,10),
-						     0, my $check_where_cd_daemon  = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon")  ),
-						     0, my $check_where_hd_daemon  = new Gtk::CheckButton( _(" Use Hard Drive with daemon") ),
-						     0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")    ),
+					       0, my $check_where_cd_daemon  = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon")  ),
+					       0, my $check_where_hd_daemon  = new Gtk::CheckButton( _(" Use Hard Drive with daemon") ),
+					       0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon")    ),
 						     ),
 					 ),
 			     
@@ -773,7 +771,7 @@ sub advanced {
 						      ),
 					  0, new Gtk::HSeparator,
 					  0, gtkpack_(new Gtk::VBox(0,10),
-						      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( else use tar and gunzip.)") ),
+			      0, my $check_tar_bz2  = new Gtk::CheckButton( _(" Use Tar and bzip2  ( else use tar and gunzip.)") ),
 						      0, my $check_replace = new Gtk::CheckButton( _(" Replace (no update backup files)")),
 						      0, my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")),
 						      ),
@@ -851,7 +849,7 @@ sub find_backup_to_restore {
     my @user_backuped_tmp;
     @user_backuped = ();
     -d $save_path and my @list_backup = all($save_path);
-    print $_."\n" foreach @list_backup;
+    $DEBUG and print $_."\n" foreach @list_backup;
     if (grep /^backup_other_/, @list_backup) {$other_backuped = 1;}
     if (grep /^backup_sys_/, @list_backup) {$sys_backuped = 1;}
     foreach (grep /^backup_user_/, @list_backup) {
@@ -859,10 +857,17 @@ sub find_backup_to_restore {
 	s/^backup_user_//gi;
 	s/.tar.gz$//gi;
 	s/.tar.bz2$//gi;
-	push @user_backuped ,$_;
+	push @user_backuped ,$_;	
     }
 
-    print $_."\n" foreach @user_backuped;
+    $DEBUG and print $_."\n" foreach @user_backuped;
+}
+
+sub do_restore_backend {
+    $restore_user  and system("cd / && tar xvfz $save_path/backup_user_$_.tar.gz ") foreach @user_list_to_restore;
+    $restore_sys   and system("cd / && tar xvfz $save_path/backup_sys.tar.gz ");
+    $restore_other and system("cd / && tar xvfz $save_path/backup_other.tar.gz ");
+
 }
 
 sub do_restore {
@@ -870,7 +875,7 @@ sub do_restore {
     gtkpack($retore_box2,
 	    $do_restore = gtkpack_(new Gtk::VBox(0,10),
 					  0, new Gtk::VBox(0,10),
-					  1, new Gtk::Button(_("DO RESTORE...... ")),
+					  1, new Gtk::Button(_("RESTORE...... ")),
 					  0, gtkpack_(new Gtk::HBox(0,10),
 						      0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
 							  ${$central_widget}->destroy();
@@ -883,6 +888,7 @@ sub do_restore {
 						      ),
 					  ),
 	    );
+    do_restore_backend();
     $central_widget = \$do_restore;
     $up_box->show_all();
 
@@ -890,23 +896,32 @@ sub do_restore {
 
 sub restore_step_other {
     my $retore_step_other;
+    print $_."\n" foreach (@user_list_to_restore);
     gtkpack($retore_box2,
 	    $retore_step_other = gtkpack_(new Gtk::VBox(0,10),
-					  1, new Gtk::VBox(0,10),
-					  0, my $check_restore_other_sure = new Gtk::CheckButton(_(" Sure to restore the other files .")),
-					  1, new Gtk::VBox(0,10),
-					  0, gtkpack_(new Gtk::HBox(0,10),
-						      0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
-							  $retore_step_other->destroy();
-							  restore_step2();				
-						      }),
-						      1,  new Gtk::VBox(0,10),
-						      0, gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
-							  ${$central_widget}->destroy();
-							  do_restore();
-						      }),
+		     1, new Gtk::VBox(0,10),
+		     1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
+						      gtkadd(new Gtk::Frame(_("Backup of other files content.")),
+							     gtkpack(new Gtk::VBox(0,10),
+								     cat_("$save_path/list_other"),
+								     ),
+							     ),
 						      ),
-					  ),
+					      ),
+		     0, my $check_restore_other_sure = new Gtk::CheckButton(_(" Sure to restore the other files .")),
+		     1, new Gtk::VBox(0,10),
+		     0, gtkpack_(new Gtk::HBox(0,10),
+				 0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
+				     $retore_step_other->destroy();
+				     restore_step2();				
+				 }),
+				 1,  new Gtk::VBox(0,10),
+				 0, gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
+				     ${$central_widget}->destroy();
+				     do_restore();
+				 }),
+				 ),
+		     ),
 	    );
     foreach  ([$check_restore_other_sure, \$restore_other]) {
 	my $ref = $_->[1];
@@ -919,6 +934,7 @@ sub restore_step_other {
 
 my %check_user_to_restore;
 sub restore_step_user {
+#    @user_list_to_restore = @user_backuped;
     my $retore_step_user;
     gtkpack($retore_box2,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
@@ -926,17 +942,20 @@ sub restore_step_user {
 					 0, _("User list to restore "),
 					 1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
 									  map { my $name = $_;
-										my @user_list_tmp;
+										push @user_list_to_restore, $name;
 										my $b = new Gtk::CheckButton($name); 
 										gtkset_active($b, 1);
 										$b->signal_connect(toggled => sub { 
 										    if ($check_user_to_restore{$name}[1] ) {
+											print "add : $name \n";
+											$check_user_to_restore{$name}[1] = 1;
+											if (!member($name, @user_list_to_restore) ) {
+											    push @user_list_to_restore, $name;}
+										    } else {
+											print "remove  : $name \n";
 											$check_user_to_restore{$name}[1] = 0;
-											@user_list_tmp = grep(!/^$name$/, @user_backuped);
+									       my @user_list_tmp = grep(!/^$name$/,@user_list_to_restore );
 											@user_list_to_restore = @user_list_tmp;
-										    } else { 
-										  $check_user_to_restore{$name}[1] = 1;
-									   if (!member($name, @user_backuped) ) {push @user_backuped, $name;}
 										    }
 										});
 										$b } (@user_backuped) 
@@ -996,6 +1015,7 @@ sub restore_step_sys {
 }
 
 sub restore_step2 {
+    my $un = 1;
     my $retore_step2;
     gtkpack($retore_box2,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
@@ -1036,6 +1056,7 @@ sub restore {
     my $check_restore_other;
 
     find_backup_to_restore();
+
     if ($other_backuped || $sys_backuped || @user_backuped) {
 	gtkpack($up_box,
 	      $retore_box = gtkpack_(new Gtk::VBox(0,1),
