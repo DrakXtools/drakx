@@ -213,6 +213,9 @@ my $backup_daemon = 1;
 my $backup_sys_versions = 0;
 my $backup_user_versions = 0;
 my $backup_other_versions = 0;
+my $sys_diff_mode = 0;
+my $user_diff_mode = 0;
+my $other_diff_mode = 0;
 my $what_no_browser = 1;
 my $cdrw = 0;
 my $dvdr = 0;
@@ -298,59 +301,62 @@ sub show_conf {
 sub explain_conf {
 	print "\nConfiguration File Options: \n\n";
 	print "Configuration file is located in:\n";
-	print "                          Root Mode: /etc/drakxtools/drakbackup/drakbackup.conf.\n";
-	print "                          User Mode: ~/.drakbackup/drakbackup.conf.\n\n";
-	print "SYS_FILES=                Space seperated list of system directories to backup.\n";
-	print "HOME_FILES=               Space seperated list of user home directories to backup.\n";
-	print "OTHER_FILES=              Space seperated list of other files to backup.\n";
-	print "PATH_TO_SAVE=             Default Hard Drive path to create backup files in.\n";
+	print "                            Root Mode: /etc/drakxtools/drakbackup/drakbackup.conf.\n";
+	print "                            User Mode: ~/.drakbackup/drakbackup.conf.\n\n";
+	print "SYS_FILES=                 Space seperated list of system directories to backup.\n";
+	print "HOME_FILES=                Space seperated list of user home directories to backup.\n";
+	print "OTHER_FILES=               Space seperated list of other files to backup.\n";
+	print "PATH_TO_SAVE=              Default Hard Drive path to create backup files in.\n";
 	print "                            Root Mode: default is /var/lib/drakbackup.\n";
 	print "                            User Mode: default is ~/.drakbackup/backups.\n";
-	print "NO_SYS_FILES              Don't backup system files.\n";
-	print "NO_USER_FILES             Don't backup user files.\n";
-	print "OPTION_COMP               Compression option - TAR.GZ or TAR.BZ2 (tar.gz is default).\n";
-	print "BROWSER_CACHE             Backup web browser cache also.\n";
-	print "CDRW                      Backup media is re-writable CD.\n";
-	print "DVDR                      Backup media is recordable DVD (not fully supported yet).\n";
-	print "DVDRAM                    Backup media is DVDRAM (not fully supported yet).\n";
-	print "NET_PROTO=                Network protocol to use for remote backups: \n";
+	print "NO_SYS_FILES               Don't backup system files.\n";
+	print "NO_USER_FILES              Don't backup user files.\n";
+	print "OPTION_COMP                Compression option - TAR.GZ or TAR.BZ2 (tar.gz is default).\n";
+	print "BROWSER_CACHE              Backup web browser cache also.\n";
+	print "CDRW                       Backup media is re-writable CD.\n";
+	print "DVDR                       Backup media is recordable DVD (not fully supported yet).\n";
+	print "DVDRAM                     Backup media is DVDRAM (not fully supported yet).\n";
+	print "NET_PROTO=                 Network protocol to use for remote backups: \n";
 	print "                             ftp, rsync, ssh, or webdav.\n";
-	print "HOST_NAME=                Remote backup host.\n";
-	print "HOST_PATH=                Backup storage path or module on remote host.\n";
-	print "REMEMBER_PASS             Remember password on remote host in config file.\n";
-	print "USER_KEYS                 Ssh keys are already setup for communicating with remote host.\n";
-	print "DRAK_KEYS                 Use special drakbackup generated host keys.\n";
+	print "HOST_NAME=                 Remote backup host.\n";
+	print "HOST_PATH=                 Backup storage path or module on remote host.\n";
+	print "REMEMBER_PASS              Remember password on remote host in config file.\n";
+	print "USER_KEYS                  Ssh keys are already setup for communicating with remote host.\n";
+	print "DRAK_KEYS                  Use special drakbackup generated host keys.\n";
 	print "                             (requires perl-Expect).\n";
-	print "USE_EXPECT                Use expect to do the whole scp transfer, without keys.\n";
+	print "USE_EXPECT                 Use expect to do the whole scp transfer, without keys.\n";
 	print "                             (requires perl-Expect).\n";
-	print "LOGIN=                    Remote host login name.\n";
-	print "PASSWD=                   Password on remote host (if REMEMBER_PASS is enabled).\n";
-	print "DAEMON_MEDIA=             Daemon mode backup via given media.\n";
+	print "LOGIN=                     Remote host login name.\n";
+	print "PASSWD=                    Password on remote host (if REMEMBER_PASS is enabled).\n";
+	print "DAEMON_MEDIA=              Daemon mode backup via given media.\n";
 	print "                             (hd, cd, tape, ftp, rsync, ssh, or webdav).\n";
-	print "HD_QUOTA                  Use quota to limit hard drive space used for backups.\n";
+	print "HD_QUOTA                   Use quota to limit hard drive space used for backups.\n";
 	print "                             (not supported yet).\n";
-	print "USE_HD                    Use Hard Drive for backups (currently all modes use HD also).\n";
-	print "USE_CD                    Use CD for backups.\n";
-	print "USE_NET                   Use network for backups (driven by NET_PROTO).\n";
-	print "USE_TAPE                  Use tape for backup.\n";
-	print "DEL_HD_FILES              Delete local hard drive tar files after backup to other media.\n";
-	print "TAPE_NOREWIND             Use non-rewinding tape device.\n";
-	print "CD_TIME=                  Length of CD media (not currently utilized).\n";
-	print "DAEMON_TIME_SPACE=        Interval between daemon backup runs (hourly, daily, weekly)..\n";
-	print "CD_WITH_INSTALL_BOOT      Build a bootable restore CD (currently not utilized).\n";
-	print "CD_DEVICE=                Cdrecord style CD device name (ie: 1,3,0).\n";
-	print "USER_MAIL=                User to send backup results to via email.\n";
-	print "SEND_MAIL                 Do send backup results via email.\n";
-	print "TAPE_DEVICE               Device to use for tape backup (ie: /dev/st0).\n";
-	print "MEDIA_ERASE               Erase media before new backup (applies to tape, CD).\n";
-	print "MEDIA_EJECT               Eject media after backup completes.\n";
-	print "MULTI_SESSION             Allow muliple sessions to be written to CD media.\n";
-	print "SYS_INCREMENTAL_BACKUPS   Do incremental backups of system files.\n";
-	print "USER_INCREMENTAL_BACKUPS  Do imcremental backups of user files.\n";
-	print "OTHER_INCREMENTAL_BACKUPS Do incremental backups if other files.\n";
-	print "NO_CRITICAL_SYS           Do not backup critical system files:\n";
+	print "USE_HD                     Use Hard Drive for backups (currently all modes use HD also).\n";
+	print "USE_CD                     Use CD for backups.\n";
+	print "USE_NET                    Use network for backups (driven by NET_PROTO).\n";
+	print "USE_TAPE                   Use tape for backup.\n";
+	print "DEL_HD_FILES               Delete local hard drive tar files after backup to other media.\n";
+	print "TAPE_NOREWIND              Use non-rewinding tape device.\n";
+	print "CD_TIME=                   Length of CD media (not currently utilized).\n";
+	print "DAEMON_TIME_SPACE=         Interval between daemon backup runs (hourly, daily, weekly)..\n";
+	print "CD_WITH_INSTALL_BOOT       Build a bootable restore CD (currently not utilized).\n";
+	print "CD_DEVICE=                 Cdrecord style CD device name (ie: 1,3,0).\n";
+	print "USER_MAIL=                 User to send backup results to via email.\n";
+	print "SEND_MAIL                  Do send backup results via email.\n";
+	print "TAPE_DEVICE                Device to use for tape backup (ie: /dev/st0).\n";
+	print "MEDIA_ERASE                Erase media before new backup (applies to tape, CD).\n";
+	print "MEDIA_EJECT                Eject media after backup completes.\n";
+	print "MULTI_SESSION              Allow muliple sessions to be written to CD media.\n";
+	print "SYS_INCREMENTAL_BACKUPS    Do incremental or differential backups of system files.\n";
+	print "USER_INCREMENTAL_BACKUPS   Do incremental or differential backups of user files.\n";
+	print "OTHER_INCREMENTAL_BACKUPS  Do incremental or differential backups if other files.\n";
+	print "SYS_DIFFERENTIAL_BACKUPS   Do differential backups of system files.\n";
+	print "USER_DIFFERENTIAL_BACKUPS  Do differential backups of user files.\n";
+	print "OTHER_DIFFERENTIAL_BACKUPS Do differential backups if other files.\n";
+	print "NO_CRITICAL_SYS            Do not backup critical system files:\n";
 	print "                             passwd, fstab, group, mtab\n";
-	print "CRITICAL_SYS              Do backup above system files.\n";
+	print "CRITICAL_SYS               Do backup above system files.\n";
 	exit(0);
 }
 
@@ -424,13 +430,13 @@ sub get_tape_info {
 	system("dmesg | grep 'st[0-9] at' > $info");
 
 	local *INFO;
-	open(INFO, $info) || warn("Can't open $info\n");
-     local $_;
+	open INFO, $info or warn("Can't open $info\n");
+	local $_;
 	while (<INFO>) {
 		@line_data = split(/[ \t,]+/, $_);
 		push @tape_devices, "/dev/" . $line_data[3]; 
 	}
-    close(INFO);
+ 	close INFO;
 	unlink($info);
 }
 
@@ -441,29 +447,29 @@ sub get_cd_info {
 	my $i;
 	my $info;
 
-     my %data => (
+	my %data = (
                   "drive speed" => 'speed',
                   "Can change speed" => 'chg_speed',
                   "Can read multisession" => 'multisession',
                   "Can write CD-R" => 'cdr',
                   "Can write CD-RW" => 'cdrw',
                   "Can write DVD-R" => 'dvdr',
-                  "Can write DVD-RAM" => 'dvdram',
+                  "Can write DVD-RAM" => 'dvdram'
                   );
 
 	
 	#- kind of ugly - I'm sure Pixel could improve this, but it works
 	#- parse /proc/sys/dev/cdrom/info and get all the cd device capabilities
-     my $cd_drives;
+ 	my $cd_drives;
 	foreach (@cd_info) {
-		@line_data = split(/[:\t]+/, $_);
+	  @line_data = split(/[:\t]+/, $_);
           if ($line_data[0] =~ /drive name/) {
               $cd_drives = @line_data-1;
               chop($line_data[$cd_drives]);
               @drive_names = @line_data;
               print "drives: $cd_drives\n" unless $interactive;
           }
-		chop($line_data[$cd_drives]) if $cd_drives;
+	  chop($line_data[$cd_drives]) if $cd_drives;
           foreach my $key (keys %data) {
               if ($line_data[0] =~ $key) {
                   for ($i = 1; $i <= $cd_drives; $i++) {
@@ -481,8 +487,8 @@ sub get_cd_info {
 	$info = "/tmp/dmesg";
 	system("dmesg | grep sr[0-9] > $info");
 	local *INFO;
-	open(INFO, $info) || warn("Can't open $info\n");
-     local $_;
+	open INFO, $info or warn("Can't open $info\n");
+ 	local $_;
 	while (<INFO>) {
 		if (/sr[0-9] at/) {
 			@line_data = split(/[ \t,]+/, $_);
@@ -490,9 +496,9 @@ sub get_cd_info {
 			$line_data[5] =~ s/scsi//;
 			$cd_devices{$line_data[3]}{rec_dev} = $line_data[5] . "," . $line_data[9] . "," . $line_data[11];
 		}
-    }
-    close(INFO);
-    unlink($info);
+    	}
+    	close INFO;
+    	unlink($info);
 
 	#- should we also try to get the human readable name for display purposes?
 	
@@ -540,7 +546,10 @@ sub save_conf_file {
     $send_mail and push @cfg_list, "SEND_MAIL\n";
     $backup_sys_versions and push @cfg_list, "SYS_INCREMENTAL_BACKUPS\n"; 
     $backup_user_versions and push @cfg_list, "USER_INCREMENTAL_BACKUPS\n"; 
-    $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n"; 
+    $backup_other_versions  and push @cfg_list, "OTHER_INCREMENTAL_BACKUPS\n";
+	$sys_diff_mode and $backup_sys_versions and push @cfg_list, "SYS_DIFFERENTIAL_BACKUPS\n"; 
+    $user_diff_mode and $backup_user_versions and push @cfg_list, "USER_DIFFERENTIAL_BACKUPS\n"; 
+    $other_diff_mode  and $backup_other_versions and push @cfg_list, "OTHER_DIFFERENTIAL_BACKUPS\n"; 
     $media_erase and push @cfg_list, "MEDIA_ERASE\n"; 
     $media_eject and push @cfg_list, "MEDIA_EJECT\n"; 
     $multi_session and push @cfg_list, "MULTI_SESSION\n"; 
@@ -577,7 +586,7 @@ sub save_conf_file {
     $del_hd_files and push @cfg_list, "DEL_HD_FILES\n";
     output_p($cfg_file, @cfg_list);
     chmod(0600, $cfg_file);
-    save_cron_files() if $backup_daemon;
+    save_cron_files();
 }
 
 sub read_cron_files {
@@ -664,6 +673,9 @@ sub read_conf_file {
 	    	if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1 }
 	    	if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1 }
 	    	if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1 }
+		if (/^SYS_DIFFERENTIAL_BACKUPS/)   { $sys_diff_mode = 1 }
+	    	if (/^USER_DIFFERENTIAL_BACKUPS/)  { $user_diff_mode = 1 }
+	    	if (/^OTHER_DIFFERENTIAL_BACKUPS/) { $other_diff_mode = 1 }
 	    	if (/^NO_CRITICAL_SYS/) { $no_critical_sys = 1 }
 	    	if (/^CRITICAL_SYS/)   { $no_critical_sys = 0 }
 	    	if (/^DEL_HD_FILES/)   { $del_hd_files = 1 }
@@ -843,8 +855,8 @@ sub do_expect {
 		); 
 
 		my $exit_stat = $exp->exitstatus;
-		$in->ask_warn('', N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if $exit_stat eq 0 && $mode eq "sendkey";
-		$log_buff .= "$_\n" if $exit_stat eq 0 && $mode eq "backup";
+		$in->ask_warn('', N("Transfer successful\nYou may want to verify you can login to the server with:\n\nssh -i %s %s\@%s\n\nwithout being prompted for a password.", $backup_key, $login_user, $host_name)) if $exit_stat == 0 && $mode eq "sendkey";
+		$log_buff .= "$_\n" if $exit_stat == 0 && $mode eq "backup";
 		$exp->hard_close();
 	}
 	$interactive and progress($pbar, $plabel, 0.5, "Done...");
@@ -903,7 +915,7 @@ sub rsync_client {
 	my $rsync_cmd = "rsync -tv $save_path/* ";
 	$rsync_cmd = $rsync_cmd . "--password-file=$cfg_dir/rsync.user " if $passwd_user;
 	$rsync_cmd = $rsync_cmd . "$login_user\@" if $login_user;
-	$rsync_cmd = $rsync_cmd . "$host_name\:\:$host_path";
+	$rsync_cmd = $rsync_cmd . "$host_name::$host_path";
 	spawn_progress($rsync_cmd, "Running rsync");
 	return(0);
 }
@@ -1100,7 +1112,7 @@ sub build_tape {
 		# make a tape label for the catalog
 		# if we're using the rewinding device, change modes briefly
 		if (!$tape_norewind) {
-			$tape_device =~ s/\/st/\/nst/;
+			$tape_device =~ s|/st|/nst|;
 		}
 		$vol_name = "Drakbackup" . $the_time;
 		my $f = "$cfg_dir/drakbackup.label";
@@ -1109,7 +1121,7 @@ sub build_tape {
 		spawn_progress($command, "Creating tape label");
 		unlink $f;
 		if (!$tape_norewind) {
-			$tape_device =~ s/\/nst/\/st/;
+			$tape_device =~ s|/nst|/st|;
 		}
 	}
 	
@@ -1149,6 +1161,8 @@ sub build_backup_files {
     my $tar_cmd_other;
     my $base_sys_exist = 0;
     my @dir_content;
+	my $incr;
+	
 	local $_;
     $results = "";
 	$log_buff = "";
@@ -1177,19 +1191,21 @@ sub build_backup_files {
 	$nonroot_user and $tar_cmd_user .= " --exclude .drakbackup";
 
     -d $save_path and @dir_content = all($save_path);
-    grep(/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
+    grep { /^backup_base_sys/ } @dir_content and $base_sys_exist = 1;
 
     if ($where_hd && !$daemon || $daemon) {
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  if ($backup_sys) { 
 	    if ($backup_sys_versions) {
+			$incr = "incr_sys";
+			$incr =~ s/incr/diff/ if $sys_diff_mode;
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
- 			if (grep /^list\_incr\_sys/, @dir_content) { 
-		    	my @more_recent = grep /^list\_incr\_sys/, sort @dir_content; 
+ 			if ((grep { /^list_incr_sys/ } @dir_content) && !$sys_diff_mode) { 
+		    	my @more_recent = grep { /^list_incr_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-				system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
+				system("find @sys_files -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_sys$the_time.txt");
 		    	if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
 					system("rm $save_path/list_incr_sys$the_time.txt");
 		    	} else {
@@ -1199,23 +1215,23 @@ sub build_backup_files {
 					$results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_sys$the_time.txt");
 		    	}
-			} elsif (grep /^list\_base\_sys/,  @dir_content) { 
-		    	my @more_recent = grep /^list\_base\_sys/, sort @dir_content; 
+			} elsif (grep { /^list_base_sys/ }  @dir_content) { 
+		    	my @more_recent = grep { /^list_base_sys/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-  		  		system("find @sys_files -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_sys$the_time.txt");
-		    	if (!cat_("$save_path/list_incr_sys$the_time.txt")) {
-					system("rm $save_path/list_incr_sys$the_time.txt");
+  		  		system("find @sys_files -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$the_time.txt");
+		    	if (!cat_("$save_path/list_$incr$the_time.txt")) {
+					system("rm $save_path/list_$incr$the_time.txt");
 		    	} else {
-					system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext -T $save_path/list_incr_sys$the_time.txt");
-					push @file_list_to_send_by_ftp, "$save_path/backup_incr_sys$the_time.$tar_ext";
-					push @file_list_to_send_by_ftp, "$save_path/list_incr_sys$the_time.txt";
-					$results .= "\nfile: $save_path/backup_incr_sys$the_time.$tar_ext\n";
-					$results .= cat_("$save_path/list_incr_sys$the_time.txt");
+					system("$tar_cmd_sys -f $save_path/backup_$incr$the_time.$tar_ext -T $save_path/list_$incr$the_time.txt");
+					push @file_list_to_send_by_ftp, "$save_path/backup_$incr$the_time.$tar_ext";
+					push @file_list_to_send_by_ftp, "$save_path/list_$incr$the_time.txt";
+					$results .= "\nfile: $save_path/backup_$incr$the_time.$tar_ext\n";
+					$results .= cat_("$save_path/list_$incr$the_time.txt");
 		    	}
 			} else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find $path_name \! -type d -print > $save_path/list_base_sys$the_time.txt"); 
+				system("find $path_name ! -type d -print > $save_path/list_base_sys$the_time.txt"); 
 				system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_sys$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_sys$the_time.txt";
@@ -1228,7 +1244,6 @@ sub build_backup_files {
 			$results .= "\nfile: $save_path/backup_sys$the_time.$tar_ext\n";
 	  	}
 	  }
-	
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
 	
@@ -1237,13 +1252,15 @@ sub build_backup_files {
 		  my $user = $_;
 		  $path_name = return_path($user);
 		  if ($backup_user_versions) {
+			$incr = "incr_user";
+			$incr =~ s/incr/diff/ if $user_diff_mode;
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
-		    if (grep(/^list\_incr\_user\_$user\_/, @dir_content)) { 
-				my @more_recent = grep /^list\_incr\_user\_$user\_/, sort @dir_content; 
+		    if ((grep { /^list_incr_user_$user_/ } @dir_content) && !$user_diff_mode) { 
+				my @more_recent = grep { /^list_incr_user_$user_/ } sort @dir_content; 
 				$more_recent = pop @more_recent;
 				$DEBUG and print "more recent file: $more_recent\n";
-				system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
+				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
 				if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
 			    	system("rm $save_path/list_incr_user_$user$the_time.txt");
 				} else {
@@ -1253,23 +1270,23 @@ sub build_backup_files {
 					$results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 				}
-		    } elsif (grep /^list\_base\_user\_$user\_/, @dir_content) { 
-				my @more_recent = grep /^list\_base\_user\_$user\_/, sort @dir_content; 
+		    } elsif (grep { /^list_base_user_$user_/ } @dir_content) { 
+				my @more_recent = grep { /^list_base_user_$user_/ } sort @dir_content; 
 				$more_recent = pop @more_recent;			
 				$DEBUG and print "more recent file: $more_recent\n";
-				system("find $path_name -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
-				if (!cat_("$save_path/list_incr_user_$user$the_time.txt")) {
-			    	system("rm $save_path/list_incr_user_$user$the_time.txt");
+				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$user$the_time.txt");
+				if (!cat_("$save_path/list_$incr$user$the_time.txt")) {
+			    	system("rm $save_path/list_$incr$user$the_time.txt");
 				} else {
-					system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_incr_user_$user$the_time.txt");
-					push @file_list_to_send_by_ftp, "$save_path/backup_incr_user_$user$the_time.$tar_ext";
-					push @file_list_to_send_by_ftp, "$save_path/list_incr_user_$user$the_time.txt";
-					$results .= "\nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
-					$results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
+					system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext -T $save_path/list_$incr$user$the_time.txt");
+					push @file_list_to_send_by_ftp, "$save_path/backup_$incr$user$the_time.$tar_ext";
+					push @file_list_to_send_by_ftp, "$save_path/list_$incr$user$the_time.txt";
+					$results .= "\nfile: $save_path/backup_$incr$user$the_time.$tar_ext\n";
+					$results .= cat_("$save_path/list_$incr$user$the_time.txt");
 				}
 		    } else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find $path_name \! -type d -print > $save_path/list_base_user_$user$the_time.txt");
+				system("find $path_name ! -type d -print > $save_path/list_base_user_$user$the_time.txt");
 				system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_user_$user$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_user_$user$the_time.txt";
@@ -1288,11 +1305,13 @@ sub build_backup_files {
 
 	  if (@list_other) {
 		if ($backup_other_versions) {
- 			if (grep /^list\_incr\_other/, @dir_content) { 
-		    	my @more_recent = grep /^list\_incr\_other/, sort @dir_content; 
+			$incr = "incr_other";
+			$incr =~ s/incr/diff/ if $other_diff_mode;
+ 			if ((grep { /^list_incr_other/ } @dir_content) && !$user_diff_mode) { 
+		    	my @more_recent = grep { /^list_incr_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-				system("find @list_other -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_other$the_time.txt");
+				system("find @list_other -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_other$the_time.txt");
 		    	if (!cat_("$save_path/list_incr_other$the_time.txt")) {
 					system("rm $save_path/list_incr_other$the_time.txt");
 		    	} else {
@@ -1302,23 +1321,23 @@ sub build_backup_files {
 					$results .= "\nfile: $save_path/backup_incr_other$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_other$the_time.txt");
 		    	}
-			} elsif (grep /^list\_base\_other/,  @dir_content) { 
-		    	my @more_recent = grep /^list\_base\_other/, sort @dir_content; 
+			} elsif (grep { /^list_base_other/ }  @dir_content) { 
+		    	my @more_recent = grep { /^list_base_other/ } sort @dir_content; 
 		    	$more_recent = pop @more_recent;
 		    	$DEBUG and print "more recent file: $more_recent\n";
-  		  		system("find @list_other -cnewer $save_path/$more_recent \! -type d -print > $save_path/list_incr_other$the_time.txt");
-		    	if (!cat_("$save_path/list_incr_other$the_time.txt")) {
-					system("rm $save_path/list_incr_other$the_time.txt");
+  		  		system("find @list_other -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$the_time.txt");
+		    	if (!cat_("$save_path/list_$incr$the_time.txt")) {
+					system("rm $save_path/list_$incr$the_time.txt");
 		    	} else {
-					system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext -T $save_path/list_incr_other$the_time.txt");
-					push @file_list_to_send_by_ftp, "$save_path/backup_incr_other$the_time.$tar_ext";
-					push @file_list_to_send_by_ftp, "$save_path/list_incr_other$the_time.txt";
-					$results .= "\nfile: $save_path/backup_incr_other$the_time.$tar_ext\n";
-					$results .= cat_("$save_path/list_incr_other$the_time.txt");
+					system("$tar_cmd_other -f $save_path/backup_$incr$the_time.$tar_ext -T $save_path/list_$incr$the_time.txt");
+					push @file_list_to_send_by_ftp, "$save_path/backup_$incr$the_time.$tar_ext";
+					push @file_list_to_send_by_ftp, "$save_path/list_$incr$the_time.txt";
+					$results .= "\nfile: $save_path/backup_$incr$the_time.$tar_ext\n";
+					$results .= cat_("$save_path/list_$incr$the_time.txt");
 		    	}
 			} else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find @list_other \! -type d -print > $save_path/list_base_other$the_time.txt"); 
+				system("find @list_other ! -type d -print > $save_path/list_base_other$the_time.txt"); 
 				system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other"); 
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_other$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_other$the_time.txt";
@@ -1331,10 +1350,8 @@ sub build_backup_files {
 			$results .= "\nfile: $save_path/backup_other$the_time.$tar_ext\n";
 	  	}
 	  }
-	  
 	  $interactive and progress($pbar1, $plabel2, 1, N("Backup Other files..."));
 	  $interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
-	  
 	}
 	  
 	my $filecount = @file_list_to_send_by_ftp;
@@ -1412,20 +1429,23 @@ sub build_backup_files {
 		$catalog .= ":CD:$vol_name:$cd_device" if $where_cd;
 		$catalog .= ":Tape:$vol_name:$tape_device" if $where_tape;
 		$catalog .= ":System" if $backup_sys;
-		$catalog .= ":I" if $backup_sys_versions && $backup_sys;
+		$catalog .= ":I" if $backup_sys_versions && $backup_sys && !$sys_diff_mode;
+		$catalog .= ":D" if $backup_sys_versions && $backup_sys && $sys_diff_mode;
 		$catalog .= ":F" if !$backup_sys_versions && $backup_sys;
 		$catalog .= ":Users=(@user_list)" if $backup_user;
-		$catalog .= ":I" if $backup_user_versions && $backup_user;
-		$catalog .= ":F" if !$backup_user_versions && $backup_user;
+		$catalog .= ":I" if $backup_user_versions && $backup_user && !$user_diff_mode;
+		$catalog .= ":D" if $backup_user_versions && $backup_user && $user_diff_mode;
+		$catalog .= ":F" if !$backup_user_versions && $backup_user;;
 		$catalog .= ":Other=(@list_other)" if @list_other;
-		$catalog .= ":I" if $backup_other_versions && @list_other;
+		$catalog .= ":I" if $backup_other_versions && @list_other && !$other_diff_mode;
+		$catalog .= ":D" if $backup_other_versions && @list_other && $other_diff_mode;
 		$catalog .= ":F" if !$backup_other_versions && @list_other;
 		$catalog .= "\n";
 			
 		local *CATALOG;
-		open(CATALOG, ">> $cfg_dir/drakbackup_catalog") || show_warning("w", N_("Can't create catalog!"));
+		open CATALOG, ">> $cfg_dir/drakbackup_catalog" or show_warning("w", N_("Can't create catalog!"));
 		print CATALOG $catalog;
-		close(CATALOG);
+		close CATALOG;
 	}
 	
 	#- clean up HD files if del_hd_files and media isn't hd
@@ -1438,7 +1458,7 @@ sub build_backup_files {
 		
 	#- if we had a media problem then get rid of the text log of the backed up files too
 	if ($media_problem) {
-		system("rm $save_path/list\*$the_time.txt");
+		system("rm $save_path/list*$the_time.txt");
 	}
 	
 	$interactive and cursor_norm();
@@ -1554,8 +1574,8 @@ sub filedialog_generic {
 	
     $file_dialog = gtksignal_connect(new Gtk2::FileSelection(translate($prompt)), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => sub { 
-		${$set_var} = $file_dialog->get_filename();
-		${$widget}->set_text(${$set_var}); 
+		$$set_var = $file_dialog->get_filename();
+		$$widget->set_text($$set_var); 
 		$file_dialog->destroy() 
 	});
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
@@ -1565,7 +1585,7 @@ sub filedialog_generic {
 sub filedialog {
     my $file_dialog;
 
-    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'Add'")), destroy => sub { $file_dialog->destroy() });
+    $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'OK'")), destroy => sub { $file_dialog->destroy() });
     $file_dialog->ok_button->signal_connect(clicked => sub { file_ok_sel($file_dialog) });
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
     $file_dialog->show();
@@ -1576,7 +1596,7 @@ sub filedialog {
 sub check_list {
     foreach (@_) {
 	my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
+		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
 			invbool $ref; 
 			destroy_widget();
 			$current_widget->();
@@ -1596,19 +1616,33 @@ sub advanced_what_sys {
 		     1, N("\nPlease check all options that you need.\n"),
 		     1, N("These options can backup and restore all files in your /etc directory.\n"),
 		     0, my $check_what_sys = new Gtk2::CheckButton(N("Backup your System files. (/etc directory)")),
-		     0, my $check_what_versions = new Gtk2::CheckButton(N("Use incremental backup  (do not replace old backups)")),
-		     0, my $check_what_critical = new Gtk2::CheckButton(N("Do not include critical files (passwd, group, fstab)")),
-		     0, N("With this option you will be able to restore any version\n of your /etc directory."),
-		     1, new Gtk2::VBox(0, 15),
-		     ),
-	    );
-    check_list([$check_what_sys, \$backup_sys], [$check_what_critical, \$no_critical_sys], [$check_what_versions, \$backup_sys_versions]);
+		     0, my $check_what_versions = new Gtk2::CheckButton(N("Use Incremental/Differential Backups  (do not replace old backups)")),
+		     0, gtkpack__(new Gtk2::HBox(0,0),	
+				my @mode_buttons = gtkradio((N("Use Incremental Backups")) x 2, N("Use Differential Backups")),
+			 ),
+			 0, my $check_what_critical = new Gtk2::CheckButton(N("Do not include critical files (passwd, group, fstab)")),
+		     0, N("With this option you will be able to restore any version\n of your /etc directory."),     
+			 1, new Gtk2::VBox(0, 15),
+		),
+	);
+    check_list([$check_what_sys, \$backup_sys], [$check_what_critical, \$no_critical_sys]);
+	$check_what_versions->set_active($backup_sys_versions);
+	$check_what_versions->signal_connect('toggled' => sub {
+		invbool \$backup_sys_versions;
+		$mode_buttons[0]->set_sensitive($backup_sys_versions);
+		$mode_buttons[1]->set_sensitive($backup_sys_versions);
+			
+	});
+	$mode_buttons[1]->set_active($sys_diff_mode);
+	$mode_buttons[0]->signal_connect('toggled' => sub { $sys_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->set_sensitive($backup_sys_versions);
+	$mode_buttons[1]->set_sensitive($backup_sys_versions);
     fonction_env(\$box_what_sys, \&advanced_what_sys, \&advanced_what, "what");
     $up_box->show_all();
 }
 
 sub advanced_what_user {
-    my ($previous_function) = @_,
+    my ($previous_function) = @_;
     my $box_what_user;
     my %check_what_user;
     
@@ -1622,7 +1656,7 @@ sub advanced_what_user {
 					map { my $name = $_;
 						my @user_list_tmp;
 						my $b = new Gtk2::CheckButton($name); 
-						if (grep /^$name$/, @user_list) {
+						if (grep { /^$name$/ } @user_list) {
 							$check_what_user{$_}[1] = 1;
 							gtkset_active($b, 1);
 						} else {
@@ -1632,7 +1666,7 @@ sub advanced_what_user {
 						$b->signal_connect(toggled => sub { 
 							if ($check_what_user{$name}[1]) {
 								$check_what_user{$name}[1] = 0;
-								@user_list_tmp = grep(!/^$name$/, @user_list);
+								@user_list_tmp = grep { !/^$name$/ } @user_list;
 								@user_list = @user_list_tmp;
 							} else { 
 								$check_what_user{$name}[1] = 1;
@@ -1643,10 +1677,23 @@ sub advanced_what_user {
 				),
 			),
 			0, my $check_what_browser = new Gtk2::CheckButton(N("Do not include the browser cache")),
-	    	0, my $check_what_user_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")),
+			0, my $check_what_user_versions = new Gtk2::CheckButton(N("Use Incremental/Differential Backups  (do not replace old backups)")), 
+		    0, gtkpack__(new Gtk2::HBox(0,0),	
+				my @mode_buttons = gtkradio((N("Use Incremental Backups")) x 2, N("Use Differential Backups")),
+			),
 		),
 	);
-    check_list([$check_what_browser, \$what_no_browser], [$check_what_user_versions, \$backup_user_versions]);
+    check_list([$check_what_browser, \$what_no_browser]);
+	$check_what_user_versions->set_active($backup_user_versions);
+	$check_what_user_versions->signal_connect('toggled' => sub {
+		invbool \$backup_user_versions; 
+		$mode_buttons[0]->set_sensitive($backup_user_versions);
+		$mode_buttons[1]->set_sensitive($backup_user_versions);	
+	});
+	$mode_buttons[1]->set_active($user_diff_mode);
+	$mode_buttons[0]->signal_connect('toggled' => sub { $user_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->set_sensitive($backup_user_versions);
+	$mode_buttons[1]->set_sensitive($backup_user_versions);
     if ($previous_function) { fonction_env(\$box_what_user, \&advanced_what_user, \&$previous_function, "what", \&$previous_function) }
     else { fonction_env(\$box_what_user, \&advanced_what_user, \&advanced_what, "what") }
     $up_box->show_all();
@@ -1695,10 +1742,23 @@ sub advanced_what_other {
 					}
 				}),
 			),
-			0, my $check_what_other_versions = new Gtk2::CheckButton(N("Use Incremental Backups  (do not replace old backups)")),
+			0, my $check_what_other_versions = new Gtk2::CheckButton(N("Use Incremental/Differential Backups  (do not replace old backups)")),
+			0, gtkpack__(new Gtk2::HBox(0,0),	
+				my @mode_buttons = gtkradio((N("Use Incremental Backups")) x 2, N("Use Differential Backups")),
+			),
 		),
+		
 	);
-    check_list([$check_what_other_versions, \$backup_other_versions]);
+	$check_what_other_versions->set_active($backup_other_versions);
+	$check_what_other_versions->signal_connect('toggled' => sub {
+		invbool \$backup_other_versions; 
+		$mode_buttons[0]->set_sensitive($backup_other_versions);
+		$mode_buttons[1]->set_sensitive($backup_other_versions);	
+	});
+	$mode_buttons[1]->set_active($other_diff_mode);
+	$mode_buttons[0]->signal_connect('toggled' => sub { $other_diff_mode = $mode_buttons[1]->get_active() });
+	$mode_buttons[0]->set_sensitive($backup_other_versions);
+	$mode_buttons[1]->set_sensitive($backup_other_versions);
     fonction_env(\$box_what_other, \&advanced_what_other, \&advanced_what, "what");
     $up_box->show_all();			
 }
@@ -1781,7 +1841,7 @@ sub advanced_what {
 }
 
 sub advanced_where_net_types {
-    my ($previous_function) = @_,
+    my ($previous_function) = @_;
     my $box_where_net;
 	        
     gtkpack($advanced_box,
@@ -1858,18 +1918,18 @@ sub advanced_where_net_types {
     gtksignal_connect(gtkset_active($check_where_use_net, $where_net), toggled => sub { 
 		invbool \$where_net;
  		#- assure other methods disabled
-		if ($where_net eq 1) {
+		if ($where_net == 1) {
 			$where_cd = 0;
 			$where_tape = 0;
 		}
-		$net_proto = '' if $where_net eq 0; 
+		$net_proto = '' if $where_net == 0; 
 		destroy_widget();
  		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_use_expect, $use_expect), toggled => sub { 
 		invbool \$use_expect;
  		#- assure other methods disabled
-		if ($use_expect eq 1) {
+		if ($use_expect == 1) {
 			$xfer_keys = 0;
 			$user_keys = 0;
 		}
@@ -1879,7 +1939,7 @@ sub advanced_where_net_types {
 	gtksignal_connect(gtkset_active($check_xfer_keys, $xfer_keys), toggled => sub { 
 		invbool \$xfer_keys;
 		#- assure other methods disabled
-		if ($xfer_keys eq 1) {
+		if ($xfer_keys == 1) {
 			$use_expect = 0;
 			$user_keys = 0;
 		}
@@ -1889,7 +1949,7 @@ sub advanced_where_net_types {
 	gtksignal_connect(gtkset_active($check_user_keys, $user_keys), toggled => sub { 
 		invbool \$user_keys;
  		#- assure other methods disabled
-		if ($user_keys eq 1) {
+		if ($user_keys == 1) {
 			$xfer_keys = 0;
 			$use_expect = 0;
 		}
@@ -1990,12 +2050,12 @@ sub advanced_where_cd {
 #    foreach ([$check_cdrw_erase, \$media_erase], [$check_cd_with_install_boot, \$cd_with_install_boot ]) {
     foreach ([$check_cdrw_erase, \$media_erase], [$check_dvdr, \$dvdr], [$check_dvdram, \$dvdram], [$check_multisession, \$multi_session]) {
 		my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1 })
+		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
 	}
     gtksignal_connect(gtkset_active($check_where_cd, $where_cd), toggled => sub { 
 		$where_cd = $where_cd ? 0 : 1;
 		#- toggle where_net, where_tape off
-		if ($where_cd eq 1) {
+		if ($where_cd == 1) {
 			$where_net = 0;
 			$where_tape = 0;
 		}
@@ -2044,7 +2104,7 @@ sub advanced_where_cd {
 }
 
 sub advanced_where_tape {
-    my ($previous_function) = @_,
+    my ($previous_function) = @_;
 
 	#- look for tape devices;
 	get_tape_info();
@@ -2098,7 +2158,7 @@ sub advanced_where_tape {
     gtksignal_connect(gtkset_active($check_where_tape, $where_tape), toggled => sub { 
 		$where_tape = $where_tape ? 0 : 1;
 		#- assure other methods are off
-		if ($where_tape eq 1) {
+		if ($where_tape == 1) {
 			$where_net = 0;
 			$where_cd = 0;
 		}
@@ -2109,9 +2169,9 @@ sub advanced_where_tape {
 		$tape_norewind = $tape_norewind ? 0 : 1;
 		$_ = $tape_device;
 		if ($tape_norewind) {
-			$tape_device =~ s/\/st/\/nst/;
+			$tape_device =~ s|/st|/nst|;
 		} else {
-			$tape_device =~ s/\/nst/\/st/;
+			$tape_device =~ s|/nst|/st|;
 		}
 		$combo_where_tape_device->entry->set_text($tape_device);
 		destroy_widget();
@@ -2141,7 +2201,7 @@ sub advanced_where_tape {
 }
 
 sub advanced_where_hd {
-    my ($previous_function) = @_,
+    my ($previous_function) = @_;
     my $box_where_hd;
     my $button;
     my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
@@ -2175,7 +2235,7 @@ sub advanced_where_hd {
 	);
     foreach ([$check_where_hd_quota, \$hd_quota]) {
 		my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1 })
+		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
 	}
 #    gtksignal_connect(gtkset_active($check_where_hd, $where_hd), toggled => sub { 
 #	$where_hd = $where_hd ? 0 : 1;
@@ -2475,8 +2535,8 @@ sub wizard_step2 {
 	     [$check_wizard_tape, \$where_tape],
 	     [$check_wizard_net, \$where_net]) {
 			my $ref = $_->[1];
-			gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
-				${$ref} = ${$ref} ? 0 : 1;
+			gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
+				$$ref = $$ref ? 0 : 1;
 				$where_hd = 1;
 				if (!$where_hd && !$where_cd && !$where_net) {  
 					$next_widget = \&message_noselect_box
@@ -2518,8 +2578,8 @@ sub wizard   {
 	);
     foreach ([$check_wizard_sys, \$backup_sys], [$check_wizard_user, \$backup_user]) {
 		my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
-			${$ref} = ${$ref} ? 0 : 1;
+		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
+			$$ref = $$ref ? 0 : 1;
 			if ($backup_sys || $backup_user && @user_list) { 
 				$next_widget = \&wizard_step2 
 			} else { 
@@ -2545,13 +2605,13 @@ sub find_backup_to_restore {
     -d $path_to_find_restore and @list_backup_tmp2 = all($path_to_find_restore);
     	
 	foreach (@list_backup_tmp2) {
-		s/\_base//gi;
-		s/\_incr//gi;
+		s/_base//gi;
+		s/_incr//gi;
 		push @list_backup , $_;
     }
-    if (grep /^backup_other/, @list_backup) { $other_backuped = 1 }
-    if (grep /^backup_sys/, @list_backup) { $sys_backuped = 1 }
-    foreach (grep /^backup_sys_/, @list_backup) {
+    if (grep { /^backup_other/ } @list_backup) { $other_backuped = 1 }
+    if (grep { /^backup_sys/ } @list_backup) { $sys_backuped = 1 }
+    foreach (grep { /^backup_sys_/ } @list_backup) {
 		chomp;
 		s/^backup_sys_//gi;
 		s/.tar.gz$//gi;
@@ -2566,7 +2626,7 @@ sub find_backup_to_restore {
  		push @sys_backuped , $to_put;
     }
     $restore_step_sys_date  = $to_put;
-    foreach (grep /^backup_user_/, @list_backup) {
+    foreach (grep { /^backup_user_/ } @list_backup) {
 		chomp;
 		s/^backup_user_//gi;
 		s/.tar.gz$//gi;
@@ -2580,7 +2640,7 @@ sub find_backup_to_restore {
 #	my $to_put = "  $nom,  (date: $date, hour: $heure)";
 		$to_put = "$_       user: $nom,   date: $day/$month/$year,   hour: $hour:$min";
 		push @user_backuped , $to_put;
-		grep(/^$nom$/, @user_list_backuped) or push @user_list_backuped, $nom;
+		grep { /^$nom$/ } @user_list_backuped or push @user_list_backuped, $nom;
     }
 }
 
@@ -2661,7 +2721,7 @@ sub select_most_recent_selected_of {
     my @list_tmp2;
 	local $_;
     my @tmp = sort @user_list_to_restore2;
-    foreach (grep /$user_name\_/, sort @tmp) { push @list_tmp2 , $_ }
+    foreach (grep { /$user_name_/ } sort @tmp) { push @list_tmp2 , $_ }
     return pop @list_tmp2;
 }
 
@@ -2673,17 +2733,17 @@ sub select_user_data_to_restore {
     @user_list_to_restore = ();
 	local $_;
 
-    -d $path_to_find_restore and my @list_backup_tmp2 = grep /^backup/, all($path_to_find_restore);
+    -d $path_to_find_restore and my @list_backup_tmp2 = grep { /^backup/ } all($path_to_find_restore);
     @list_tmp2 = @list_backup_tmp2;
     foreach (@list_backup_tmp2) {
-		s/\_base//gi;
-		s/\_incr//gi;
+		s/_base//gi;
+		s/_incr//gi;
 		push @list_backup , $_;
     }
     foreach my $var_tmp (@user_list_backuped) {
 		$var_eq = 1;
 		my $more_recent = (split(' ', select_most_recent_selected_of($var_tmp)))[0]; 
-		foreach (grep /^backup\_user\_$var_tmp\_/, sort @list_backup) {
+		foreach (grep { /^backup_user_$var_tmp_/ } sort @list_backup) {
 	    	s/.tar.gz//gi;
 	    	s/.tar.bz2//gi;
 	    	if ($more_recent) {
@@ -2693,7 +2753,7 @@ sub select_user_data_to_restore {
 				} else {
 					#- only if user asked for it - previously this was restoring everything (SB)
 					my $tmp_name = $_;
-					s/backup\_user\_//gi;
+					s/backup_user_//gi;
 					foreach my $buff (@user_list_to_restore2) {
 						if (index($buff, $_) >= 0) { 
 							$var_eq and push @list_tmp , $tmp_name;
@@ -2719,10 +2779,10 @@ sub select_sys_data_to_restore {
     my @list_tmp;
 	local $_;
 	
-    -d $path_to_find_restore and @list_tmp = grep /^backup/, all($path_to_find_restore);
+    -d $path_to_find_restore and @list_tmp = grep { /^backup/ } all($path_to_find_restore);
     my @more_recent = split(' ', $restore_step_sys_date); 
     my $more_recent = pop @more_recent;
-    foreach my $var_exist (grep /\_sys\_/, sort @list_tmp) {
+    foreach my $var_exist (grep { /_sys_/ } sort @list_tmp) {
 		if ($var_exist =~ /$more_recent/) {
 	    	push @sys_list_to_restore, $var_exist;
 	    	$var_eq = 0; 
@@ -2877,7 +2937,7 @@ sub restore_backend {
 	my $theure2;
 	local $_;
 	
-    if (grep /tar.gz$/, all($path_to_find_restore)) { 
+    if (grep { /tar.gz$/ } all($path_to_find_restore)) { 
     	$untar_cmd = 0; 
     } else { 
     	$untar_cmd = 1; 
@@ -2891,9 +2951,9 @@ sub restore_backend {
 	    } else { 
 	    	foreach (@user_list_to_restore) {
 		    	if ($backup_user_versions) {
-					($tnom, $username, $theure2) = /^(\w+\_\w+\_user_)(.*)_(\d+\_\d+.*)$/;
+					($tnom, $username, $theure2) = /^(\w+_\w+_user_)(.*)_(\d+_\d+.*)$/;
 				} else {
-					($tnom, $username, $theure2) = /^(\w+\_user_)(.*)_(\d+\_\d+.*)$/;
+					($tnom, $username, $theure2) = /^(\w+_user_)(.*)_(\d+_\d+.*)$/;
 				}
 
 				$user_dir = return_path($username);
@@ -3035,7 +3095,7 @@ sub restore_step_user {
 					$b->signal_connect(toggled => sub { 
 						if (!$check_user_to_restore{$name_complet}[1]) {
 							$check_user_to_restore{$name_complet}[1] = 1;
-							if (!grep(/$name/, @user_list_to_restore2)) {
+							if (!grep { /$name/ } @user_list_to_restore2) {
 								push @user_list_to_restore2, $name_complet 
 							}
 						} else {
@@ -3105,7 +3165,7 @@ sub restore_step_sys {
 }
 
 sub restore_other_media_hd {
-    my ($previous_function) = @_,
+    my ($previous_function) = @_;
     my $box_where_hd;
     my $button;
     my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
@@ -3212,11 +3272,11 @@ sub restore_step2 {
 	my $info_prefix = "backup";
 	$info_prefix = "list" if $where_net || $where_tape;
 	
-    if (-f "$restore_info_path/$info_prefix\_other*") { $other_exist = 1 } 
+    if (-f "$restore_info_path/$info_prefix_other*") { $other_exist = 1 } 
     else { $other_exist = 0; $restore_other = 0 }
-    if (grep /\_sys\_/, grep /^$info_prefix/, all("$restore_info_path/")) { $sys_exist = 1 } 
+    if (grep  { /_sys_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $sys_exist = 1 } 
     else { $sys_exist = 0; $restore_sys = 0 }
-    if (grep /\_user\_/, grep /^$info_prefix/, all("$restore_info_path/")) { $user_exist = 1 } 
+    if (grep { /_user_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $user_exist = 1 } 
     else { $user_exist = 0; $restore_user = 0 }
 
 # disabling this (sb) - very nicely wipes out your backup media if the user isn't very careful
@@ -3256,8 +3316,8 @@ sub restore_step2 {
 	      [$check_remove_user_dir, \$remove_user_before_restore],
 	      [$check_restore_other, \$restore_other]) {
 			my $ref = $_->[1];
-			gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
-	    		${$ref} = ${$ref} ? 0 : 1;
+			gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { 
+	    		$$ref = $$ref ? 0 : 1;
 	    		if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box }
 	    		elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys }
 	    		elsif ($restore_user) { $next_widget = \&restore_step_user }
@@ -3343,6 +3403,7 @@ sub catalog_restore {
 				$m = "Label or Host: " if $indexer == 2;
 				$m = "Device or Path: " if $indexer == 3;
 				$m = "Type: Incremental" if $_ eq "I";
+				$m = "Type: Differential" if $_ eq "D";
 				$m = "Type: Full" if $_ eq "F";
 				$m .= $_ if $_ ne "I" && $_ ne "F";
 				$model->append($c_detail, $t_catalog);
@@ -3454,7 +3515,7 @@ sub restore_catalog_entry {
 		#- to the $save_path in the previous step - deal with it anyway
 		my @restore_tar_files = glob("$dev_path/*$backup_time*$tar_ext");
 		my $matches = @restore_tar_files;
-		if ($matches eq 0) {
+		if ($matches == 0) {
 			show_warning("f", N("Backup files not found at %s.", $dev_path));
 			return(0);
 		} else {
@@ -3554,7 +3615,7 @@ sub restore_hd_or_cd {
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
-	if ($indv_files eq 0) {
+	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			$command = "tar -C $restore_path -xzf $tarfile_dir/$_";
@@ -3578,9 +3639,9 @@ sub restore_tape {
 	my $command;
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
-	$dev_path =~ s/\/st/\/nst/;
+	$dev_path =~ s|/st|/nst|;
 		
-	if ($indv_files eq 0) {
+	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			my $offset = find_tape_offset($cat_entry);
@@ -3638,7 +3699,7 @@ sub restore_ftp {
 
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
-	if ($indv_files eq 0) {
+	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			$ftp->get($_, "$cfg_dir/restores/$_");
@@ -3668,13 +3729,13 @@ sub restore_rsync_ssh_webdav {
 		
 	my $wild_card = catalog_to_wildcard($cat_entry);
 		
-	if ($indv_files eq 0) {
+	if ($indv_files == 0) {
 		#- full catalog specified
 		foreach (wildcard_to_tarfile($wild_card)) {
 			if ($mode eq 'ssh') {
 				$command = "scp $username\@$hostname:$hostpath/$_ $cfg_dir/restores/";
 			} elsif ($mode eq 'rsync') {
-				$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$_ $cfg_dir/restores/";
+				$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname::$hostpath/$_ $cfg_dir/restores/";
 			} else {
 				$command = "wget http://$hostname/$hostpath/$_ -P $cfg_dir/restores/";
 			}
@@ -3695,7 +3756,7 @@ sub restore_rsync_ssh_webdav {
 				if ($mode eq 'ssh') {
 					$command = "scp $username\@$hostname:$hostpath/$tarfile $cfg_dir/restores/";
 				} elsif ($mode eq 'rsync') {
-					$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$tarfile $cfg_dir/restores/";
+					$command = "rsync --password-file=$cfg_dir/rsync.user $username\@$hostname::$hostpath/$tarfile $cfg_dir/restores/";
 				} else {
 					$command = "wget http://$hostname/$hostpath/$tarfile -P $cfg_dir/restores/";
 				}
@@ -4327,38 +4388,38 @@ sub find_backup_to_put_on_cd {
 	local $_;
 	
     -d $save_path and my @list_backup = all($save_path);
-    foreach (grep /^backup_other/, @list_backup) {
+    foreach (grep { /^backup_other/ } @list_backup) {
 		$other_backuped = 1;
 		chomp;
 		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_other//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split /\_20/;
-		my @user_date2 = split(/\_/, $user_date[1]);
+		my @user_date = split /_20/;
+		my @user_date2 = split(/_/, $user_date[1]);
 		my $to_put = "  other_data,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
-    foreach (grep /_sys_/, @list_backup) {
+    foreach (grep { /_sys_/ } @list_backup) {
 		$sys_backuped = 1;
 		chomp;
 		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_other//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split /\_20/;
-		my @user_date2 = split(/\_/, $user_date[1]);
+		my @user_date = split /_20/;
+		my @user_date2 = split(/_/, $user_date[1]);
 		my $to_put = "  system,          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
-    foreach (grep /user_/, @list_backup) {
+    foreach (grep { /user_/ } @list_backup) {
 		chomp;
 		my $tail  = (split(' ', `du $save_path/$_`))[0];
 		s/^backup_user_//gi;
 		s/.tar.gz$//gi;
 		s/.tar.bz2$//gi;
-		my @user_date = split /\_20/;
-		my @user_date2 = split(/\_/, $user_date[1]);
+		my @user_date = split /_20/;
+		my @user_date2 = split(/_/, $user_date[1]);
 		my $to_put = "  $user_date[0],          (tail: $tail ko, date: 20$user_date2[0], hour: $user_date2[1])";
 		push @data_backuped , $to_put;
     }
@@ -4618,13 +4679,13 @@ sub interactive_mode {
 
 
 sub adv_help {
-    my ($function, $custom_help) = @_,
+    my ($function, $custom_help) = @_;
 
 ################################################  help definition ##############################################
 
     my %custom_helps = (
 			"options" => 
-			N("options description:
+			N("Options Description:
 
  In this step Drakbackup allow you to change:
 
@@ -4662,9 +4723,9 @@ sub adv_help {
 "),
 
 			"what" =>
-			N("options description:
+			N("Options Description:
 
- - Backup system files:
+ - Backup System Files:
        
 	This option allows you to backup your /etc directory,
 	which contains all configuration files. Please be
@@ -4673,35 +4734,39 @@ sub adv_help {
 		/etc/group 
 		/etc/fstab
 
- - Backup User files: 
+ - Backup User Files: 
 
-	This option allows you select all users that you want 
-	to backup.
-	To preserve disk space, it is recommended that you 
-	do not include the web browser's cache.
+	This option allows you select all users that you want to 
+	backup. To preserve disk space, it is recommended that
+	you do not include the web browser's cache.
 
- - Backup Other files: 
+ - Backup Other Files: 
 
-	This option allows you to add more data to save.
-	With the other backup it's not possible at the 
-	moment to select incremental backup.		
+	This option allows you to include additional data to save.
+	If you want to add individual files, select them from the
+	righthand 'Files' list pane.  To add directories, enter the 
+	directory by clicking on it in the lefthand 'Folders' pane, 
+	and at that point click 'OK' without selecting any files.
  
  - Incremental Backups:
 
-	The incremental backup is the most powerful 
-	option for backup. This option allows you 
-	to backup all your data the first time, and 
-	only the changed data afterward.
-	Then you will be able, during the restore
-	step, to restore your data from a specified
-	date.
-	If you have not selected this option all
-	old backups are deleted before each backup.    
+	The incremental backup is the most powerful option for 
+	backup. This option allows you to backup all your data 
+	the first time, and only the changed data afterward.
+	Then you will be able, during the restore step, to restore 
+	your data from a specified date. If you have not selected 
+	this option all old backups are deleted before each backup.    
 
+ - Differential Backups:
+ 
+	The differential backup, rather than comparing changes in the
+	data to the previous incremental backup, always compares the
+	data to the initial base backup. This method allows one to
+	restore the base and then the differential from a certain date.
 
 "), 
 			"restore" =>
-			N("restore description:
+			N("Restore Description:
  
 Only the most recent date will be used, because with incremental 
 backups it is necessary to restore one by one each older backup.
@@ -4713,17 +4778,19 @@ Otherwise, you are able to select only one of these.
 
  - Incremental Backups:
 
-	The incremental backup is the most powerful 
-	option to use. This option allows you to 
-	backup all of your data the first time, and 
-	only the changed data after.
-	So you will be able, during the restore
-	step, to restore your data from a specified
-	date.
-	If you have not selected this option all
-	old backups are deleted before each backup.    
+	The incremental backup is the most powerful option for 
+	backup. This option allows you to backup all your data 
+	the first time, and only the changed data afterward.
+	Then you will be able, during the restore step, to restore 
+	your data from a specified date. If you have not selected 
+	this option all old backups are deleted before each backup.    
 
-
+ - Differential Backups:
+ 
+	The differential backup, rather than comparing changes in the
+	data to the previous incremental backup, always compares the
+	data to the initial base backup. This method allows one to
+	restore the base and then the differential from a certain date.
 
 "),  
 			"main" =>
@@ -4769,7 +4836,7 @@ Restore Step:
 
 "),
 			"ftp" =>
-			N("options description:
+			N("Options Description:
 
 Please be careful when you are using ftp backup, because only 
 backups that are already built are sent to the server.
@@ -4821,7 +4888,7 @@ sub to_normal {
 
 sub destroy_widget {
 	if ($central_widget ne '') {
-		${$central_widget}->destroy;
+		$$central_widget->destroy;
 		$central_widget = ''; 
 	}
 }
