@@ -157,6 +157,19 @@ setMouseLive(display, type, emulate3buttons)
 print '
 
 int
+is_secure_file(filename)
+  char * filename
+  CODE:
+  {
+    int fd;
+    unlink(filename); /* in case it exists and we manage to remove it */
+    RETVAL = (fd = open(filename, O_RDWR | O_CREAT | O_EXCL, 0600)) != -1;
+    if (RETVAL) close(fd);
+  }
+  OUTPUT:
+  RETVAL
+
+int
 is_ext3(device_name)
   char * device_name
   CODE:

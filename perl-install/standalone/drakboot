@@ -22,7 +22,7 @@ $::expert = /-expert/;
 
 my $in = 'interactive'->vnew('su', 'bootloader');
 
-require 'bootlook.pm' if ref($in) =~ /gtk/;
+require 'bootlook.pm' if $in->isa('interactive_gtk');
 lilo_choice();
 
 

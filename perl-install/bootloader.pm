@@ -992,6 +992,7 @@ sub install {
 
     my %l = grep_each { $::b } %{$lilo->{methods}};
     my @rcs = map {
+	c::is_secure_file('/tmp/.error') or die "can't ensure a safe /tmp/.error";
 	my $f = $bootloader::{"install_$_"} or die "unknown bootloader method $_";
 	eval { $f->(@_) };
 	$@;
