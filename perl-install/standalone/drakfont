@@ -949,10 +949,10 @@ sub font_choice {
         clicked => \&file_ok_sel,
         $file_dialog
     );
-    $file_dialog->ok_button->child->set(N("Add"));
+    $file_dialog->ok_button->set_label(N("Add"));
     $file_dialog->cancel_button->signal_connect(
         clicked => sub { $file_dialog->destroy() });
-    $file_dialog->cancel_button->child->set(N("Close"));
+    $file_dialog->cancel_button->set_label(N("Close"));
     $file_dialog->set_filename(
         N("Select the font file or directory and click on 'Add'"));
     $file_dialog->show();
