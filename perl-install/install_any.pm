@@ -197,7 +197,7 @@ sub clean_postinstall_rpms() {
 #-######################################################################################
 sub kernelVersion {
     my ($o) = @_;
-    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") and return first(/vmlinuz-(.*)/);
+    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") and return first(/vmlinuz-(.*mdk)/);
 
     require pkgs;
     my $p = pkgs::packageByName($o->{packages}, "kernel") or die "I couldn't find the kernel package!";

@@ -150,7 +150,7 @@ sub add_entry($$) {
 
 sub add_kernel($$$$$) {
     my ($prefix, $lilo, $kernelVersion, $specific, $v) = @_;
-    my $ext = $specific && "-$specific"; $specific eq 'hack' and $specific = '';
+    my $ext = $specific && "-$specific"; $specific =~ s/\d+\.\d+|hack//;
     my $kname = "vmlinuz";
     if (arch() =~ /ppc/) { 
     	$kname = "vmlinux";
@@ -305,16 +305,31 @@ wait %d seconds for default boot.
 		root  => "/dev/$root",
 	       })->{append} .= " failsafe" unless $lilo->{password};
 
-    #- manage hackkernel if installed.
-    my $hasHack = -e "$prefix/boot/vmlinuz-hack";
-    if ($hasHack) {
-	my $hackVersion = first(readlink("$prefix/boot/vmlinuz-hack") =~ /vmlinuz-(.*)/);
-	add_kernel($prefix, $lilo, $hackVersion, 'hack',
-		  {
-		   label => 'hack',
-		   root  => "/dev/$root",
-		   $vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
-		  }) if $hackVersion;
+    #- manage older kernel if installed.
+    foreach (qw(2.2 hack)) {
+	my $hasOld = -e "$prefix/boot/vmlinuz-$_";
+	if ($hasOld) {
+	    my $oldVersion = first(readlink("$prefix/boot/vmlinuz-$_") =~ /vmlinuz-(.*mdk)/);
+	    my $oldSecure = -e "$prefix/boot/vmlinuz-${_}secure";
+	    my $oldSMP = $isSMP && -e "$prefix/boot/vmlinuz-${_}smp";
+
+	    add_kernel($prefix, $lilo, $oldVersion, $oldSecure ? "${_}secure" : $oldSMP ? "${_}smp" : $_,
+		       {
+			label => "linux-$_",
+			root  => "/dev/$root",
+			$vga_fb ? ( vga => $vga_fb) : (), #- using framebuffer
+		       });
+	    add_kernel($prefix, $lilo, $oldVersion, $_,
+		       {
+			label => $oldSecure || $oldSMP ? "linux-${_}up" : "linux-${_}nonfb",
+			root  => "/dev/$root",
+		       }) if $oldSecure || $oldSMP || $vga_fb;
+	    add_kernel($prefix, $lilo, $oldVersion, $_,
+		       {
+			label => "failsafe-$_",
+			root  => "/dev/$root",
+		       })->{append} .= " failsafe" unless $lilo->{password};
+	}
     }
 
     if (arch() =~ /sparc/) {
@@ -332,15 +347,15 @@ wait %d seconds for default boot.
 			  }) if $path && isSunOS($_) && type2name($_->{type}) =~ /root/i;
 	    }
 	}
-	} elsif (arch() =~ /ppc/) {
-		#- if we identified a MacOS partition earlier - add it
-		if (defined $partition_table_mac'macos_part) {
-			add_entry($lilo->{entries},
-				{
-				label => "macos",
-				kernel_or_dev => $partition_table_mac'macos_part
-				});
-		}
+    } elsif (arch() =~ /ppc/) {
+	#- if we identified a MacOS partition earlier - add it
+	if (defined $partition_table_mac'macos_part) {
+	    add_entry($lilo->{entries},
+		      {
+		       label => "macos",
+		       kernel_or_dev => $partition_table_mac'macos_part
+		      });
+	}
     } else {
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
 	my ($dos, $win) = 0, 0;
