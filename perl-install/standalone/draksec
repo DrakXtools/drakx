@@ -52,26 +52,43 @@ sub wait_msg {
 sub remove_wait_msg { $_[0]->destroy }
 
 sub basic_seclevel_explanations() {
-    my $text = new Gtk2::TextView;
-    $text->set_editable(0);
-    gtktext_insert($text,
-             formatAlaTeX(N("Standard: This is the standard security recommended for a computer that will be used to connect
-               to the Internet as a client.
+    my $text = gtkset_markup(Gtk2::Label->new,
+                             formatAlaTeX(N("Here, you can setup the security level and administrator of your machine.
 
-High:       There are already some restrictions, and more automatic checks are run every night.
 
-Higher:    The security is now high enough to use the system as a server which can accept
-              connections from many clients. If your machine is only a client on the Internet, you
-           should choose a lower level.
+The Security Administrator is the one who will receive security alerts if the
+'Security Alerts' option is set. It can be a username or an email.
 
-Paranoid:  This is similar to the previous level, but the system is entirely closed and security
-                features are at their maximum
 
-Security Administrator:
-               If the 'Security Alerts' option is set, security alerts will be sent to this user (username or
-            email)")));
-    
-    gtkpack_(gtkshow(new Gtk2::HBox(0, 0)), 1, $text);
+The Security Level menu enable to select one of the six preconfigured security
+provided with msec. These levels range from poor security and ease of use, to
+paranoid config, suitable for very sensitive server applications:
+
+
+<span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very
+easy to use security level. It should only be used for machines not connected to
+any network and that are not accessible to everybody.
+
+
+<span foreground=\"royalblue3\">Standard</span>: This is the standard security
+recommended for a computer that will be used to connect to the Internet as a
+client.
+
+
+<span foreground=\"royalblue3\">High</span>: There are already some
+restrictions, and more automatic checks are run every night.
+
+
+<span foreground=\"royalblue3\">Higher</span>: The security is now high enough
+to use the system as a server which can accept connections from many clients. If
+your machine is only a client on the Internet, you should choose a lower level.
+
+
+<span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous
+level, but the system is entirely closed and security features are at their
+maximum")));
+    $text->set_line_wrap(1);
+    create_scrolled_window($text, [ 'never', 'automatic' ]);
 }
 
 sub new_nonedit_combo {
@@ -108,6 +125,7 @@ my %translations = reverse %inv_translations;
 
 sub to_i18n { map { $translations{$_} || $_ } @_ }
 sub from_i18n { $inv_translations{$_[0]} || $_[0] }
+sub resize { gtkset_size_request($_[0], 50, -1) }
 
 ############################ MAIN WINDOW ###################################
 # Set different options to Gtk2::Window
@@ -126,7 +144,7 @@ $window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
 # Create the notebook (for bookmarks at the top)
 my $notebook = create_notebook();
 
-my $common_opts = { col_spacings => 10, row_spacings => 5 };
+my $common_opts = { col_spacings => 10, row_spacings => 5, homogenous => 1 };
 
 ######################## BASIC OPTIONS PAGE ################################
 my $seclevel_entry;
@@ -181,7 +199,12 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
                                                                                            set_help_tip($entry, $default, $opt);
-                                                                                           [ new_wrapped_label($i), $values{$i} ];
+                                                                                           [ gtkset_size_request(gtkpack_(Gtk2::HBox->new,
+                                                                                                                          0, new_wrapped_label($i), 
+                                                                                                                          1, $values{$i}
+                                                                                                                         ), 50, -1
+                                                                                                                )
+                                                                                           ]
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain))))),
                            new_wrapped_label($label));
     $options_values{$domain} = \%values;
@@ -199,7 +222,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($opt), $i);
-                                                                                       [ gtkshow(new_wrapped_label($i)), $security_checks_value{$i} ];
+                                                                                       [ gtkshow(new_wrapped_label($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_} $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
