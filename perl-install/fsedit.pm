@@ -97,7 +97,6 @@ sub raids {
     }
 
     fs::get_major_minor(@parts);
-    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_proc_partitions_raw();
 
     my @raids;
     my @mdstat = cat_("/proc/mdstat");
@@ -113,24 +112,33 @@ sub raids {
 	my $chunks = $mdstat[$i+1] =~ /(\S+) chunks/ ? $1 : "64k";
 
 	my @raw_mdparts = map { /([^\[]+)/ } split ' ', $mdparts;
+
+	my $type = typeOfPart("md$nb");
+	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($type, "type $type "), "with parts ", join(", ", @raw_mdparts));
+	$raids[$nb] = { 'chunk-size' => $chunks, type => $type || 0x83, raw_mdparts => \@raw_mdparts,
+			device => "md$nb", notFormatted => !$type, level => $level };
+    }
+
+    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_proc_partitions_raw();
+    each_index {
+	my $raw_mdparts = delete $_->{raw_mdparts};
 	my @mdparts = 
 	  map { 
 	      my $mdpart = $devname2part{$_} || { device => $_ };
-	      if (my $part = find { is_same_hd($mdpart, $_) } @parts) {
-		  $part->{raid} = $nb;
+	      if (my $part = find { is_same_hd($mdpart, $_) } @parts, @raids) {
+		  $part->{raid} = $::i;
+		  $part->{type} = 0xfd;
 		  delete $part->{mntpoint};
 		  $part;
 	      } else {
 		  #- forget it when not found? that way it won't break much... beurk.
 		  ();
 	      }
-	  } @raw_mdparts;
+	  } @$raw_mdparts;
 
-	my $type = typeOfPart("md$nb");
-	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($type, "type $type "), "with parts ", join(", ", @raw_mdparts));
-	$raids[$nb] = { 'chunk-size' => $chunks, type => $type || 0x83, disks => \@mdparts,
-			device => "md$nb", notFormatted => !$type, level => $level };
-    }
+	$_->{disks} = \@mdparts;
+    } @raids;
+
     require raid;
     raid::update(@raids);
     \@raids;
