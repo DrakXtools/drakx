@@ -39,7 +39,7 @@ rhs-printfilters lpr cups cups-drivers samba ncpfs ghostscript-utils autologin
 );
 #- package that have to be copied only if all their requires are satisfied.
 @needToCopyIfRequiresSatisfied = qw(
-xpp kups
+Mesa-common xpp libqtcups2 qtcups kups
 );
 
 #- boot medium (the first medium to take into account).

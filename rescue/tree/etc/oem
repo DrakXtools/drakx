@@ -301,7 +301,7 @@ sub select_packages {
     foreach my $pkg (@{$o->{packages}{depslist}}) {
 	delete $pkg->{selected} and $pkg->{closure} = 1;
     }
-    foreach (qw(xpp kups)) {
+    foreach (qw(Mesa-common xpp libqtcups2 qtcups kups)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and $pkg->{closure} = 1;
     }
