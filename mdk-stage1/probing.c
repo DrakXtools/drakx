@@ -49,13 +49,23 @@
 #include "probing.h"
 
 
+enum bus_type { IDE, SCSI };
+
+struct media_info {
+	char * name;
+	char * model;
+	enum media_type type;
+	enum bus_type bus;
+};
+
+
 static void warning_insmod_failed(void)
 {
 	error_message("Warning, installation of driver failed.");
 }
 
 
-void probe_that_type(enum driver_type type)
+static void probe_that_type(enum driver_type type)
 {
 	if (IS_EXPERT)
 		ask_insmod(type);
