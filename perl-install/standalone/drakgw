@@ -134,7 +134,7 @@ What would you like to do?"),
 		stop_daemons();
 	    }
 	    foreach ($dhcpd_conf, $masq_file) {
-		renamef($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" 
+		rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" 
 	    }
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
