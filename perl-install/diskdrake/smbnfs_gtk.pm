@@ -151,6 +151,8 @@ sub import_ctree {
 	    $current_entry = $entry;
 	} else {
 	    if (!$curr->row->children) {
+		gtkset_mousecursor_wait($tree->window);
+		my_gtk::flush();
 		$tree->freeze;
 		if ($curr == $click_here) {
 		    $add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $find_servers->();
@@ -159,6 +161,7 @@ sub import_ctree {
 		    $add_exports->($curr);
 		}
 		$tree->thaw;
+		gtkset_mousecursor_normal($tree->window);
 	    }
 	    $current_entry = undef;
 	}
@@ -202,15 +205,6 @@ sub nfs2kind {
 sub nfs_create {
     my ($widget) = @_;
 
-    my $find_servers = sub {
-	my $w = $in->wait_message('', _("Scanning available nfs shared resource"));
-	&network::nfs::find_servers;
-    };
-    my $find_exports = sub {
-	my ($server) = @_;
-	my $w = $in->wait_message('', _("Scanning available nfs shared resource of server %s", $server->{name}));
-	&network::nfs::find_exports;
-    };
     my $create = sub {
 	my ($server, $export) = @_;
 
@@ -218,7 +212,7 @@ sub nfs_create {
 	fs::set_default_options($nfs);
 	$nfs;
     };
-    add_smbnfs($widget, nfs2kind($all_hds->{nfss}), $find_servers, $find_exports, $create);
+    add_smbnfs($widget, nfs2kind($all_hds->{nfss}), \&network::nfs::find_servers, \&network::nfs::find_exports, $create);
 }
 
 ################################################################################
@@ -232,15 +226,6 @@ sub smb2kind {
 sub smb_create {
     my ($widget) = @_;
 
-    my $find_servers = sub {
-	my $w = $in->wait_message('', _("Scanning available samba shared resource"));
-	&network::smb::find_servers;
-    };
-    my $find_exports = sub {
-	my ($server) = @_;
-	my $w = $in->wait_message('', _("Scanning available samba shared resource of server %s", $server->{name}));
-	&network::smb::find_exports;
-    };
     my $create = sub {
 	my ($server, $export) = @_;
 
@@ -248,7 +233,7 @@ sub smb_create {
 	fs::set_default_options($smb);
 	$smb;
     };
-    add_smbnfs($widget, smb2kind($all_hds->{smbs}), $find_servers, $find_exports, $create);
+    add_smbnfs($widget, smb2kind($all_hds->{smbs}), \&network::smb::find_servers, \&network::smb::find_exports, $create);
 }
 
 1;
