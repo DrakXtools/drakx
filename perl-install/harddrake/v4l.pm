@@ -179,20 +179,35 @@ my $cards_lst = {
         "Jetway|TV/Capture JW-TV878-FBK" => 78,
         "Kworld|KW-TV878RF" => 78,
         "D|DSP Design|TCVIDEO" => 79,
-        "Hauppauge|WinTV PVR" => 80
-        },
-            'saa7134' => {
-                N("Unknown|Generic") => 0,
-                "Proteus|Pro [philips reference design]" => 1,
-                "LifeView|FlyVIDEO3000" => 2,
-                "LifeView|FlyVIDEO2000" => 3,
-                "EMPRESS" => 4,
-                "SKNet|Monster TV" => 5,
-                "Tevion|MD 9717" => 6,
-                "KNC|One TV-Station RDS" => 7,
-                "Terratec|Cinergy 400 TV" => 8,
-                "Medion|5044" => 9
-                }
+        "Hauppauge|WinTV PVR" => 80,
+        "G|GV-BCTV5/PCI" => 81,
+        "O|Osprey|100/150 (878)" => 82,
+        "O|Osprey|100/150 (848)" => 83,
+        "O|Osprey|101 (848)" => 84,
+        "O|Osprey|101/151" => 85,
+        "O|Osprey|101/151 w/ svid" => 86,
+        "O|Osprey|200/201/250/251" => 87,
+        "O|Osprey|200/250" => 88,
+        "O|Osprey|210/220" => 89,
+        "O|Osprey|500" => 90,
+        "O|Osprey|540" => 91,
+        "O|Osprey|2000" => 92,
+        "I|IDS|Eagle" => 93,
+    },
+    'saa7134' => {
+        N("Unknown|Generic") => 0,
+        "Proteus|Pro [philips reference design]" => 1,
+        "LifeView|FlyVIDEO3000" => 2,
+        "LifeView|FlyVIDEO2000" => 3,
+        "EMPRESS" => 4,
+        "SKNet|Monster TV" => 5,
+        "Tevion|MD 9717" => 6,
+        "KNC|One TV-Station RDS" => 7,
+        "Terratec|Cinergy 400 TV" => 8,
+        "Medion|5044" => 9,
+        "Kworld/KuroutoShikou SAA7130-TVPCI" => 10,
+        "Terratec Cinergy 600 TV" => 11,
+    }
 };
 
 my %pll_lst = 
