@@ -869,7 +869,7 @@ sub set_cups_autoconf {
     }
 
     # Remove all valid "CUPS_CONFIG" lines
-    ($_ =~ /^\s*CUPS_CONFIG/ and $_="") foreach @file_content;
+    (/^\s*CUPS_CONFIG/ and $_="") foreach @file_content;
  
     # Insert the new "Printcap" line
     if ($autoconf) {
@@ -2154,11 +2154,11 @@ sub addentry {
     local $_;
     for (@lines) {
 	if (!$sectionfound) {
-	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$sectionfound = 1;
 	    }
 	} else {
-	    if (($_ !~ /^\s*$/) && ($_ !~ /^\s*;/)) {
+	    if (!/^\s*$/ && !/^\s*;/) {
 		$_ = "$entry\n$_";
 		$entryinserted = 1;
 		last;
@@ -2177,7 +2177,7 @@ sub addsection {
     my @lines = split("\n", $filecontent);
     local $_;
     for (@lines) {
-	if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+	if (/^\s*\[\s*$section\s*\]\s*$/) {
 	    # section already there, nothing to be done
 	    return $filecontent;
 	}
@@ -2195,13 +2195,13 @@ sub removeentry {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
-	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$sectionfound = 1;
 	    }
 	} else {
-	    if ($_ =~ /^\s*\[.*\]\s*$/) { # Next section
+	    if (/^\s*\[.*\]\s*$/) { # Next section
 		$done = 1;
-	    } elsif ($_ =~ /^\s*$entry/) {
+	    } elsif (/^\s*$entry/) {
 		$_ = "";
 		$done = 1;
 	    }
@@ -2220,12 +2220,12 @@ sub removesection {
 	$_ = "$_\n";
 	next if ($done);
 	if (!$sectionfound) {
-	    if ($_ =~ /^\s*\[\s*$section\s*\]\s*$/) {
+	    if (/^\s*\[\s*$section\s*\]\s*$/) {
 		$_ = "";
 		$sectionfound = 1;
 	    }
 	} else {
-	    if ($_ =~ /^\s*\[.*\]\s*$/) { # Next section
+	    if (/^\s*\[.*\]\s*$/) { # Next section
 		$done = 1;
 	    } else {
 		$_ = "";

@@ -2390,7 +2390,7 @@ sub main {
 				$printer->{configured}{$printer->{DEFAULT}}{'queuedata'}{'menuentry'} . _(" (Default)");
 			} elsif ($printer->{SPOOLER} eq "cups") {
 			    ($cursorpos) = 
-				grep { $_ =~ /!$printer->{DEFAULT}:[^!]*$/ }
+				grep { /!$printer->{DEFAULT}:[^!]*$/ }
 			    printer::get_cups_remote_queues($printer);
 			}
 		    }

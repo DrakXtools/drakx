@@ -346,7 +346,7 @@ sub hexdump {
     my $i = 0; $/ = \16; @ARGV = @_; while (<>) {
 	printf "%08lX  ", $i; $i += 16;
 	print join(" ", (map { sprintf "%02X", $_ } unpack("C*", $_)),
-		   ($_ =~ s/[^$printable_chars]/./og, $_)[1]), "\n";
+		   (s/[^$printable_chars]/./og, $_)[1]), "\n";
     }
 }
 
