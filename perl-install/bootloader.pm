@@ -823,6 +823,7 @@ sub method2text {
 
 sub method_choices_raw() {
     arch() =~ /ppc/ ? 'yaboot' : 
+    arch() =~ /ia64/ ? 'lilo' : 
       (
        if_(whereis_binary('lilo'), 'lilo-graphic', 'lilo-menu'),
        if_(whereis_binary('grub'), 'grub'),
