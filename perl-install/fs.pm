@@ -218,6 +218,7 @@ sub mount_options_unpack {
 		  vfat => [ qw(umask=0) ],
 		  nfs => [ qw(rsize=8192 wsize=8192) ],
 		  smbfs => [ qw(username= password=) ],
+		  reiserfs => [ 'notail' ],
 		 );
     while (my ($fs, $l) = each %per_fs) {
 	isThisFs($fs, $part) || $part->{type} eq 'auto' && member($fs, @auto_fs) or next;
@@ -268,7 +269,7 @@ sub mount_options_pack {
     push @l, map_each { if_($::b, $::a =~ /=$/ ? "$::a$::b" : $::a) } %$options;
     push @l, $unknown;
 
-    $part->{options} = join(",", grep { $_ } @l);
+    $part->{options} = join(",", uniq(grep { $_ } @l));
 }
 
 sub mount_options_help {
