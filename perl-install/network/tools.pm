@@ -65,26 +65,26 @@ sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompress
 sub ask_info2 {
     my ($cnx, $netc) = @_;
     $::isInstall and $in->set_help('configureNetworkDNS');
-    $in->ask_from_entries_refH(_("Connection Configuration"),
-			       _("Please fill or check the field below"),
-			       [
-				if__ ($cnx->{irq}, { label => _("Card IRQ"), val => \$cnx->{irq} })  ,
-				if__ ($cnx->{mem}, { label => _("Card mem (DMA)"), val => \$cnx->{mem} }),
-				if__ ($cnx->{io}, { label => _("Card IO"), val => \$cnx->{io} }),
-				if__ ($cnx->{io0}, { label => _("Card IO_0"), val => \$cnx->{io0} }),
-				if__ ($cnx->{io1}, { label => _("Card IO_1"), val => \$cnx->{io1} }),
-				if__ ($cnx->{phone_in}, { label => _("Your personal phone number"), val => \$cnx->{phone_in} }),
-				if__ ($netc->{DOMAINNAME2}, { label => _("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} }),
-				if__ ($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
-				if__ ($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
-				if__ ($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
-				if__ ($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
-				if__ ($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
-				if__ ($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
-				if__ ($cnx->{login}, { label => _("Account Login (user name)"), val => \$cnx->{login} }),
-				if__ ($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd} }),
-			      ]
-			     ) or return;
+    $in->ask_from(_("Connection Configuration"),
+		  _("Please fill or check the field below"),
+		  [
+		   if __ ($cnx->{irq}, { label => _("Card IRQ"), val => \$cnx->{irq} })  ,
+		   if __ ($cnx->{mem}, { label => _("Card mem (DMA)"), val => \$cnx->{mem} }),
+		   if __ ($cnx->{io}, { label => _("Card IO"), val => \$cnx->{io} }),
+		   if __ ($cnx->{io0}, { label => _("Card IO_0"), val => \$cnx->{io0} }),
+		   if __ ($cnx->{io1}, { label => _("Card IO_1"), val => \$cnx->{io1} }),
+		   if __ ($cnx->{phone_in}, { label => _("Your personal phone number"), val => \$cnx->{phone_in} }),
+		   if __ ($netc->{DOMAINNAME2}, { label => _("Provider name (ex provider.net)"), val => \$netc->{DOMAINNAME2} }),
+		   if __ ($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
+		   if __ ($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
+		   if __ ($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
+		   if __ ($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
+		   if __ ($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
+		   if __ ($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
+		   if __ ($cnx->{login}, { label => _("Account Login (user name)"), val => \$cnx->{login} }),
+		   if __ ($cnx->{passwd}, { label => _("Account Password"),  val => \$cnx->{passwd} }),
+		  ]
+		 ) or return;
     1;
 }
 

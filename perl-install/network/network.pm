@@ -286,51 +286,50 @@ notation (for example, 1.2.3.4).");
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
-    $in->ask_from_entries_refH(_("Configuring network device %s", $intf->{DEVICE}),
-			      (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver %s)", $module) : '' ) ."\n\n") .
-			      $text,
-			     [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
-			       { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
-			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-			       if_($intf->{wireless_eth},
-			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
-			       { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
-			       { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
-			       { label => "WIRELESS_FREQ", val => \$intf->{WIRELESS_FREQ} },
-			       { label => "WIRELESS_SENS", val => \$intf->{WIRELESS_SENS} },
-			       { label => "WIRELESS_RATE", val => \$intf->{WIRELESS_RATE} },
-			       { label => "WIRELESS_ENC_KEY", val => \$intf->{WIRELESS_ENC_KEY} },
-			       { label => "WIRELESS_RTS", val => \$intf->{WIRELESS_RTS} },
-			       { label => "WIRELESS_FRAG", val => \$intf->{WIRELESS_FRAG} },
-			       { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
-			       { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
-			       { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
-			       ),
-			     ],
-			     complete => sub {
-				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
-				 return 0 if $pump;
-				 for (my $i = 0; $i < @fields; $i++) {
-				     unless (is_ip($intf->{$fields[$i]})) {
-					 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
-					 return (1,$i);
-				     }
-				     return 0;
-				 }
-				 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-				     $in->ask_warn('', _('Freq should have the suffix k, M or G (for example, "2.46G" for 2.46 GHz fre­
-              quency), or add enough \'0\'.'));
-				     return (1,6);
-				 }
-				 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-				     $in->ask_warn('', _('Rate should have the suffix k, M or G (for example, "11M" for 11M), or add enough \'0\'.'));
-				     return (1,8);
-				 }
-			     },
-			     focus_out => sub {
-				 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
-			     }
-			    );
+    $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
+  	          (_("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver %s)", $module) : '' ) ."\n\n") .
+	          $text,
+	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
+	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
+	           { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
+	           if_($intf->{wireless_eth},
+	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
+	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
+	           { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
+	           { label => "WIRELESS_FREQ", val => \$intf->{WIRELESS_FREQ} },
+	           { label => "WIRELESS_SENS", val => \$intf->{WIRELESS_SENS} },
+	           { label => "WIRELESS_RATE", val => \$intf->{WIRELESS_RATE} },
+	           { label => "WIRELESS_ENC_KEY", val => \$intf->{WIRELESS_ENC_KEY} },
+	           { label => "WIRELESS_RTS", val => \$intf->{WIRELESS_RTS} },
+	           { label => "WIRELESS_FRAG", val => \$intf->{WIRELESS_FRAG} },
+	           { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
+	           { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
+	           { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
+	           ),
+	         ],
+	         complete => sub {
+	         	 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
+	         	 return 0 if $pump;
+	         	 for (my $i = 0; $i < @fields; $i++) {
+	         	     unless (is_ip($intf->{$fields[$i]})) {
+	         		 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+	         		 return (1,$i);
+	         	     }
+	         	     return 0;
+	         	 }
+	         	 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+	         	     $in->ask_warn('', _('Freq should have the suffix k, M or G (for example, "2.46G" for 2.46 GHz frequency), or add enough \'0\'.'));
+	         	     return (1,6);
+	         	 }
+	         	 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+	         	     $in->ask_warn('', _('Rate should have the suffix k, M or G (for example, "11M" for 11M), or add enough \'0\'.'));
+	         	     return (1,8);
+	         	 }
+	         },
+	         focus_out => sub {
+	         	 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
+	         }
+    	    );
 }
 
 sub configureNetworkNet {
@@ -340,7 +339,7 @@ sub configureNetworkNet {
     $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
     $::isInstall and $in->set_help('configureNetworkHost');
-    $in->ask_from_entries_refH(_("Configuring network"),
+    $in->ask_from(_("Configuring network"),
 _("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
@@ -359,7 +358,7 @@ sub miscellaneousNetwork {
     my ($in, $clicked) = @_;
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
-    $::expert || $clicked and $in->ask_from_entries_refH('',
+    $::expert || $clicked and $in->ask_from('',
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },

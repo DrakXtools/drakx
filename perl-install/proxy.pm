@@ -34,61 +34,63 @@ sub main {
   step_http_proxy:
     undef $::Wizard_no_previous;
     $proxy_cfg->{http_url} ||= "http://www.proxy.com/";
-    $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please fill in the http proxy informations\nLeave it blank if you don't want an http proxy"),
-                               [ { label => _("URL"), val => \$proxy_cfg->{http_url} },
-                                 { label => _("port"), val => \$proxy_cfg->{http_port} }
-                               ],
-                               complete => sub {
-                                   if ($proxy_cfg->{http_url} && $proxy_cfg->{http_url} !~ /^http:/) {
-                                       $in->ask_warn('', _("Url should begin with 'http:'"));
-                                       return (1,0);
-                                   }
-                                   if ($proxy_cfg->{http_port} && $proxy_cfg->{http_port} !~ /^\d+$/) {
-                                       $in->ask_warn('', _("The port part should be numeric"));
-                                       return (1,1);
-                                   }
-                                   0;
-                               }
-                              ) or goto begin;
+    $in->ask_from(_("Proxy configuration"),
+		  _("Please fill in the http proxy informations\nLeave it blank if you don't want an http proxy"),
+		  [ { label => _("URL"), val => \$proxy_cfg->{http_url} },
+		    { label => _("port"), val => \$proxy_cfg->{http_port} }
+		  ],
+		  complete => sub {
+		      if ($proxy_cfg->{http_url} && $proxy_cfg->{http_url} !~ /^http:/) {
+			  $in->ask_warn('', _("Url should begin with 'http:'"));
+			  return (1,0);
+		      }
+		      if ($proxy_cfg->{http_port} && $proxy_cfg->{http_port} !~ /^\d+$/) {
+			  $in->ask_warn('', _("The port part should be numeric"));
+			  return (1,1);
+		      }
+		      0;
+		  }
+		 ) or goto begin;
 
     # ftp proxy
     step_ftp_proxy:
     $proxy_cfg->{ftp_url} ||= "ftp://ftp.proxy.com/";
-    $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please fill in the ftp proxy informations\nLeave it blank if you don't want an ftp proxy"),
-                               [ { label => _("URL"), val => \$proxy_cfg->{ftp_url} },
-                                 { label => _("port"), val => \$proxy_cfg->{ftp_port} }
-                               ],
-                               complete => sub {
-                                   if ($proxy_cfg->{ftp_url} && $proxy_cfg->{ftp_url} !~ /^ftp:/) {
-                                       $in->ask_warn('', _("Url should begin with 'ftp:'"));
-                                       return (1,0);
-                                   }
-                                   if ($proxy_cfg->{ftp_port} && $proxy_cfg->{ftp_port} !~ /^\d+$/) {
-                                       $in->ask_warn('', _("The port part should be numeric"));
-                                       return (1,1);
-                                   }
-                                   0;
-                               }
-                              ) or goto step_http_proxy;
+    $in->ask_from(_("Proxy configuration"),
+		  _("Please fill in the ftp proxy informations\nLeave it blank if you don't want an ftp proxy"),
+		  [ { label => _("URL"), val => \$proxy_cfg->{ftp_url} },
+		    { label => _("port"), val => \$proxy_cfg->{ftp_port} }
+		  ],
+		  complete => sub {
+		      if ($proxy_cfg->{ftp_url} && $proxy_cfg->{ftp_url} !~ /^ftp:/) {
+			  $in->ask_warn('', _("Url should begin with 'ftp:'"));
+			  return (1,0);
+		      }
+		      if ($proxy_cfg->{ftp_port} && $proxy_cfg->{ftp_port} !~ /^\d+$/) {
+			  $in->ask_warn('', _("The port part should be numeric"));
+			  return (1,1);
+		      }
+		      0;
+		  }
+		 ) or goto step_http_proxy;
 
     # proxy login/passwd
     step_login:
-    $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please enter proxy login and password, if any.\nLeave it blank if you don't want login/passwd"),
-                               [ { label => _("login"), val => \$proxy_cfg->{login} },
-                                 { label => _("password"), val => \$proxy_cfg->{passwd}, hidden => 1 },
-                                 { label => _("re-type password"), val => \$proxy_cfg->{passwd2}, hidden => 1 }
-                               ],
-                               complete => sub {
-                                   if ($proxy_cfg->{passwd} ne $proxy_cfg->{passwd2}) {
-                                       $in->ask_warn('', _("The passwords don't match. Try again!"));
-                                       return(1,1);
-                                   }
-                                   0;
-                               }
-                              ) or goto step_ftp_proxy;
+    $in->ask_from(_("Proxy configuration"),
+		  _("Please enter proxy login and password, if any.\nLeave it blank if you don't want login/passwd"),
+		  [ { label => _("login"), val => \$proxy_cfg->{login} },
+		    {
+		     label => _("password"), val => \$proxy_cfg->{passwd}, hidden => 1 },
+		    {
+		     label => _("re-type password"), val => \$proxy_cfg->{passwd2}, hidden => 1 }
+		  ],
+		  complete => sub {
+		      if ($proxy_cfg->{passwd} ne $proxy_cfg->{passwd2}) {
+			  $in->ask_warn('', _("The passwords don't match. Try again!"));
+			  return(1,1);
+		      }
+		      0;
+		  }
+		 ) or goto step_ftp_proxy;
     # save config
     substInFile {
         s/^(http|ftp)_proxy.*\n//;

@@ -51,7 +51,7 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->ask_from_entries_refH_powered(
+    $o->ask_from_(
 	{ messages => _("Please, choose a language to use."),
 	  advanced_messages => _("You can choose other languages that will be available after install"),
 	  callbacks => {
@@ -179,7 +179,7 @@ sub selectKeyboard {
     my $format = sub { translate(keyboard::keyboard2text($_[0])) };
     my $other;
     my $ext_keyboard = $o->{keyboard};
-    $o->ask_from_entries_refH_powered(
+    $o->ask_from_(
 	{ title => _("Keyboard"), 
 	  messages => _("Please, choose your keyboard layout."),
 	  advanced_messages => _("Here is the full list of keyboards available"),
@@ -251,7 +251,7 @@ sub selectMouse {
 	#- set a sane default F11/F12
 	$o->{mouse}{button2_key} = 87;
 	$o->{mouse}{button3_key} = 88;
-	$o->ask_from_entries_refH('', _("Buttons emulation"),
+	$o->ask_from('', _("Buttons emulation"),
 		[
 		{ label => _("Button 2 Emulation"), val => \$o->{mouse}{button2_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
 		{ label => _("Button 3 Emulation"), val => \$o->{mouse}{button3_key}, list => [ mouse::ppc_one_button_keys() ], format => \&mouse::ppc_one_button_key2text },
@@ -303,7 +303,7 @@ sub ask_mntpoint_s {
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
-	$o->ask_from_entries_refH('', 
+	$o->ask_from('', 
 				  _("Choose the mount points"),
 				  [ map { { label => partition_table::description($_), 
 					    val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
@@ -402,7 +402,7 @@ sub choosePartitionsToFormat {
     #- keep it temporary until the guy has accepted
     $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
 
-    $o->ask_from_entries_refH_powered(
+    $o->ask_from_(
         { messages => _("Choose the partitions you want to format"),
           advanced_messages => _("Check bad blocks?"),
         },
@@ -630,23 +630,23 @@ sub reallyChooseGroups {
     my $size_text = &$size_to_display;
 
     my ($path, $all);
-    $o->ask_from_entries_refH('', _("Package Group Selection"), [
-                           { val => \$size_text, type => 'label' }, {},
-			   (map {; 
-				 my $old = $path;
-				 $path = $o->{compssUsers}{$_}{path};
-				 if_($old ne $path, { val => translate($path) }),
-				 {
-				  val => \$val->{$_},
-				  type => 'bool',
-				  disabled => sub { $all },
-				  text => translate($o->{compssUsers}{$_}{label}),
-				  help => translate($o->{compssUsers}{$_}{descr}),
-				 }
-			     } @{$o->{compssUsersSorted}}),
-			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
-			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
-			  ], changed => sub { $size_text = &$size_to_display }) or return;
+    $o->ask_from('', _("Package Group Selection"), [
+        { val => \$size_text, type => 'label' }, {},
+	 (map {; 
+	       my $old = $path;
+	       $path = $o->{compssUsers}{$_}{path};
+	       if_($old ne $path, { val => translate($path) }),
+		 {
+		  val => \$val->{$_},
+		  type => 'bool',
+		  disabled => sub { $all },
+		  text => translate($o->{compssUsers}{$_}{label}),
+		  help => translate($o->{compssUsers}{$_}{descr}),
+		 }
+	   } @{$o->{compssUsersSorted}}),
+	 if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
+	 if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
+    ], changed => sub { $size_text = &$size_to_display }) or return;
 
     if ($all) {
 	$val->{$_} = 1 foreach keys %$val;
@@ -823,7 +823,7 @@ sub configureTimezone {
     $o->set_help('configureTimezoneGMT');
 
     my $ntp = to_bool($o->{timezone}{ntp});
-    $o->ask_from_entries_refH('', '', [
+    $o->ask_from('', '', [
 	  { text => _("Hardware clock set to GMT"), val => \$o->{timezone}{UTC}, type => 'bool' },
 	  { text => _("Automatic time synchronization (using NTP)"), val => \$ntp, type => 'bool' },
     ]) or goto &configureTimezone
@@ -831,7 +831,7 @@ sub configureTimezone {
     if ($ntp) {
 	my @servers = split("\n", $timezone::ntp_servers);
 
-	$o->ask_from_entries_refH('', '',
+	$o->ask_from('', '',
 	    [ { label => _("NTP Server"), val => \$o->{timezone}{ntp}, list => \@servers, not_edit => 0 } ]
         ) or goto &configureTimezone;
 	$o->{timezone}{ntp} =~ s/.*\((.+)\)/$1/;
@@ -873,10 +873,10 @@ sub summary {
 	return "$entry->{'make'} $entry->{'model'}";
     };
 
-    $o->ask_from_entries_refH_powered({
-				       messages => _("Summary"),
-				       cancel   => '',
-				      }, [
+    $o->ask_from_({
+		   messages => _("Summary"),
+		   cancel   => '',
+		  }, [
 { label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o->{prefix}, $o->{mouse}); &$format_mouse } },
 { label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
@@ -935,7 +935,7 @@ sub setRootPassword {
 
     $::isInstall and $o->set_help("setRootPassword", if_($::expert, "setRootPasswordAuth"));
 
-    $o->ask_from_entries_refH_powered(
+    $o->ask_from_(
         {
 	 title => _("Set root password"), 
 	 messages => _("Set root password"),
@@ -957,19 +957,19 @@ sub setRootPassword {
     if ($auth eq __("LDAP")) {
 	$o->{authentication}{LDAP} ||= "localhost"; #- any better solution ?
 	$o->{netc}{LDAPDOMAIN} ||= join (',', map { "dc=$_" } split /\./, $o->{netc}{DOMAINNAME});
-	$o->ask_from_entries_refH('',
-				  _("Authentication LDAP"),
-				  [ { label => _("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
-				    { label => _("LDAP Server"), val => \$o->{authentication}{LDAP} },
-				  ]);
+	$o->ask_from('',
+		     _("Authentication LDAP"),
+		     [ { label => _("LDAP Base dn"), val => \$o->{netc}{LDAPDOMAIN} },
+		       { label => _("LDAP Server"), val => \$o->{authentication}{LDAP} },
+		     ]);
     } else { $o->{authentication}{LDAP} = '' }
     if ($auth eq __("NIS")) { 
 	$o->{authentication}{NIS} ||= 'broadcast';
-	$o->ask_from_entries_refH('',
-				  _("Authentication NIS"),
-				  [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
-				    { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
-				  ]); 
+	$o->ask_from('',
+		     _("Authentication NIS"),
+		     [ { label => _("NIS Domain"), val => \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}) },
+		       { label => _("NIS Server"), val => \$o->{authentication}{NIS}, list => ["broadcast"], not_edit => 0 },
+		     ]); 
     } else { $o->{authentication}{NIS} = '' }
     install_steps::setRootPassword($o);
 }
@@ -1037,7 +1037,7 @@ failures. Would you like to create a bootdisk for your system?")),
 	} else {
 	    @l or die _("Sorry, no floppy drive available");
 
-	    $o->ask_from_entries_refH_powered(
+	    $o->ask_from_(
               {
 	       messages => _("Choose the floppy drive you want to use to make the bootdisk"),
 	      }, [ { val => \$o->{mkbootdisk}, list => \@l, format => sub { $l{$_[0]} || $_[0] } } ]
@@ -1162,7 +1162,7 @@ Do you really want to quit now?"), 0);
 
     $o->exit unless $alldone;
 
-    $o->ask_from_entries_refH_powered_no_check(
+    $o->ask_from_no_check(
 	{
 	 messages =>
 _("Congratulations, installation is complete.

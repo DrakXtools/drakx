@@ -115,7 +115,7 @@ sub ask_okcancel {
 
     if ($::isWizard) {
 	$::no_separator = 1;
-    	$o->ask_from_entries_refH_powered_no_check({ title => $title, messages => $message, focus_cancel => !$def });
+    	$o->ask_from_no_check({ title => $title, messages => $message, focus_cancel => !$def });
     } else {
 	ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
     }
@@ -156,7 +156,7 @@ sub ask_from_listf_no_check {
 
     if (@$l <= 2 && !$::isWizard) {
 	my $ret = eval {
-	    ask_from_entries_refH_powered_no_check($o, 
+	    ask_from_no_check($o, 
 	      { title => $title, messages => $message, ok => $l->[0] && may_apply($f, $l->[0]), 
 		if_($l->[1], cancel => may_apply($f, $l->[1]), focus_cancel => $def eq $l->[1]) }, []
             ) ? $l->[0] : $l->[1];
@@ -164,7 +164,7 @@ sub ask_from_listf_no_check {
 	die if $@ && $@ !~ /^wizcancel/;
 	$@ ? undef : $ret;
     } else {
-	ask_from_entries_refH($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
+	ask_from($o, $title, $message, [ { val => \$def, type => 'list', list => $l, help => $help, format => $f } ]) && $def;
     }
 }
 
@@ -179,7 +179,7 @@ sub ask_from_treelist_ {
 }
 sub ask_from_treelistf {
     my ($o, $title, $message, $separator, $f, $l, $def) = @_;
-    ask_from_entries_refH($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f, sort => 1 } ]) or return;
+    ask_from($o, $title, $message, [ { val => \$def, separator => $separator, list => $l, format => $f, sort => 1 } ]) or return;
     $def;
 }
 
@@ -203,7 +203,7 @@ sub ask_many_from_list {
 	    $h->{list} = [ sort { $h->{e}{$a}{text} cmp $h->{e}{$b}{text} } @{$h->{list}} ];
 	}
     }
-    $o->ask_from_entries_refH($title, $message, [ map { my $h = $_; map { $h->{e}{$_} } @{$h->{list}} } @l ]) or return;
+    $o->ask_from($title, $message, [ map { my $h = $_; map { $h->{e}{$_} } @{$h->{list}} } @l ]) or return;
 
     @l = map {
 	my $h = $_;
@@ -221,7 +221,7 @@ sub ask_from_entries {
 
     my @l = map { my $i = ''; { label => $_, val => \$i } } @$l;
 
-    $o->ask_from_entries_refH($title, $message, \@l, %callback) ?
+    $o->ask_from($title, $message, \@l, %callback) ?
       map { ${$_->{val}} } @l :
       undef;
 }
@@ -229,13 +229,13 @@ sub ask_from_entries {
 #- can get a hash of callback: focus_out changed and complete
 #- moreove if you pass a hash with a field list -> combo
 #- if you pass a hash with a field hidden -> emulate stty -echo
-sub ask_from_entries_refH {
+sub ask_from {
     my ($o, $title, $message, $l, %callback) = @_;
-    ask_from_entries_refH_powered($o, { title => $title, messages => $message, callbacks => \%callback }, $l);
+    ask_from_($o, { title => $title, messages => $message, callbacks => \%callback }, $l);
 }
 
 
-sub ask_from_entries_refH_powered_normalize {
+sub ask_from_normalize {
     my ($o, $common, $l) = @_;
 
     foreach my $e (@$l) {
@@ -270,7 +270,7 @@ sub ask_from_entries_refH_powered_normalize {
 	    if (@{$_->{list}} == ()) {
 		eval {
 		    require log;
-		    log::l("ask_from_entries_refH_powered_normalize: empty list for $_->{label}\n" . common::backtrace());
+		    log::l("ask_from_normalize: empty list for $_->{label}\n" . common::backtrace());
 		};
 	    }
 	    @{$_->{list}} > 1;
@@ -285,17 +285,17 @@ sub ask_from_entries_refH_powered_normalize {
     add2hash_($common->{callbacks} ||= {}, { changed => sub {}, focus_out => sub {}, complete => sub { 0 }, canceled => sub { 0 } });
 }
 
-sub ask_from_entries_refH_powered {
+sub ask_from_ {
     my ($o, $common, $l) = @_;
-    ask_from_entries_refH_powered_normalize($o, $common, $l);
+    ask_from_normalize($o, $common, $l);
 
     @$l or return 1;
-    $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
 }
-sub ask_from_entries_refH_powered_no_check {
+sub ask_from_no_check {
     my ($o, $common, $l) = @_;
-    ask_from_entries_refH_powered_normalize($o, $common, $l);
-    $o->ask_from_entries_refW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    ask_from_normalize($o, $common, $l);
+    $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
 }
 
 

@@ -59,7 +59,7 @@ sub separator {
 }
 sub checkval { $_[0] && $_[0] ne ' '  ? '*' : ' ' }
 
-sub ask_from_entries_refW {
+sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
@@ -194,7 +194,7 @@ sub ask_from_entries_refW {
 		$form->FormDestroy;
 		Newt::PopWindow;
 		$_->{e}{clicked}();
-		return ask_from_entries_refW($o, $common, $l, $l2);
+		return ask_fromW($o, $common, $l, $l2);
 	    }
 	}
 	$canceled = $cancel && $$r == $$cancel;

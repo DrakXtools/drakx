@@ -154,13 +154,13 @@ ifdown eth0
   step_1:
     $::Wizard_no_previous=1;
     my @profiles=get_profiles();
-    $in->ask_from_entries_refH(_("Network Configuration Wizard"),
-		       _("Welcome to The Network Configuration Wizard\n\nWe are about to configure your internet/network connection.\nIf you don't want to use the auto detection, deselect the checkbox.\n"),
-			       [
-				if_(@profiles > 1, { label => _("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
-				{ label => _("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
-			       ]
-			      ) or goto step_5;
+    $in->ask_from(_("Network Configuration Wizard"),
+		  _("Welcome to The Network Configuration Wizard\n\nWe are about to configure your internet/network connection.\nIf you don't want to use the auto detection, deselect the checkbox.\n"),
+		  [
+		   if_(@profiles > 1, { label => _("Choose the profile to configure"), val => \$netcnx->{PROFILE}, list => \@profiles }),
+		   { label => _("Use auto detection"), val => \$netc->{autodetection}, type => 'bool' },
+		  ]
+		 ) or goto step_5;
     undef $::Wizard_no_previous;
     set_profile($netcnx);
     if ($netc->{autodetection}) {
@@ -183,14 +183,14 @@ ifdown eth0
 	);
     my $i=0;
     map { defined $set_default or do { $_->[1] and $set_default=$i; }; $i++; } @l;
-    my $e = $in->ask_from_entries_refH(_("Network Configuration Wizard"),
-				       _("Choose the connection you want to configure"),
-				       [
-					map { {
-					    label => $_->[0] . if_($_->[1], " - " . _ ($_->[2], $_->[1])),
-					      val => $_->[3], type => 'bool'} } @l 
-				       ]
-				      ) or goto step_1;
+    my $e = $in->ask_from(_("Network Configuration Wizard"),
+			  _("Choose the connection you want to configure"),
+			  [
+			   map { {
+			       label => $_->[0] . if_($_->[1], " - " . _ ($_->[2], $_->[1])),
+				 val => $_->[3], type => 'bool'} } @l 
+			  ]
+			 ) or goto step_1;
 
 #    load_conf ($netcnx, $netc, $intf);
 
@@ -204,12 +204,10 @@ ifdown eth0
     my $nb = keys %{$netc->{internet_cnx}};
     if ($nb < 1) {
     } elsif ($nb > 1) {
-	$in->ask_from_entries_refH(_("Network Configuration Wizard"),
-  				   _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
-  				   [
-  				    { label => _("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]}
-  				   ]
-  				  ) or goto step_2;
+	$in->ask_from(_("Network Configuration Wizard"),
+		      _("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
+		      [ { label => _("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]} ]
+		     ) or goto step_2;
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }

@@ -94,7 +94,7 @@ sub partitionWizardSolutions {
 		my ($s_root, $s_swap);
 		my $part = $o->ask_from_listf('', _("Which partition do you want to use for Linux4Win?"), \&partition_table::description, \@ok_forloopback) or return;
 		$max_swap = $min_swap + 1 if $part->{free} - $max_swap < $min_linux;
-		$o->ask_from_entries_refH('', _("Choose the sizes"), [ 
+		$o->ask_from('', _("Choose the sizes"), [ 
 		   { label => _("Root partition size in MB: "), val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
 		   { label => _("Swap partition size in MB: "), val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
 		]) or return;
@@ -125,7 +125,7 @@ restart the installation. You should also backup your data.
 When sure, press Ok.")) or return;
 
 		my $size = $part->{size};
-		$o->ask_from_entries_refH('', _("Which size do you want to keep for windows on"), [
+		$o->ask_from('', _("Which size do you want to keep for windows on"), [
                    { label => _("partition %s", partition_table::description($part)), val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 		$size <<= 11;

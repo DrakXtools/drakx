@@ -146,7 +146,7 @@ sub setupBootloader {
 
 	$b->{vga} ||= 'Normal';
 	if (arch !~ /ppc/) {
-	$in->ask_from_entries_refH('', _("Bootloader main options"), [
+	$in->ask_from('', _("Bootloader main options"), [
 { label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },
     arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
@@ -178,7 +178,7 @@ sub setupBootloader {
 				) or return 0;
 	} else {
 	$b->{boot} = $partition_table_mac::bootstrap_part;	
-	$in->ask_from_entries_refH('', _("Bootloader main options"), [
+	$in->ask_from('', _("Bootloader main options"), [
 	{ label => _("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
 	{ label => _("Init Message"), val => \$b->{initmsg} },
 	{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
@@ -205,7 +205,7 @@ sub setupBootloader {
     while ($::expert || $more > 1) {
 	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 	my ($c, $e);
-	eval { $in->ask_from_entries_refH_powered( 
+	eval { $in->ask_from_( 
 		{
 		 messages => 
 _("Here are the different entries.
@@ -287,7 +287,7 @@ if (arch() !~ /ppc/) {
 	}
 }
 
-	if ($in->ask_from_entries_refH_powered(
+	if ($in->ask_from_(
 	    { 
 	     if_($c ne "Add", cancel => _("Remove entry")),
 	     callbacks => {
@@ -712,7 +712,7 @@ sub ask_users {
 	    member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
 	    return 0;
 	};
-	my $ret = $in->ask_from_entries_refH_powered(
+	my $ret = $in->ask_from_(
 	    { title => _("Add user"),
 	      messages => _("Enter a user\n%s", $names),
 	      ok => _("Accept user"),
@@ -753,15 +753,15 @@ sub autologin {
     if (@wm && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
 	add2hash_($o, { autologin => $users[0] });
 
-	$in->ask_from_entries_refH_powered(
-					   { title => _("Autologin"),
-					     messages => _('I can set up your computer to automatically log on one user.
+	$in->ask_from_(
+		       { title => _("Autologin"),
+			 messages => _('I can set up your computer to automatically log on one user.
 Do you want to use this feature?'),
-					     ok => _("Yes"),
-					     cancel => _("No") },
-					   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
-					     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
-					  )
+			 ok => _("Yes"),
+			 cancel => _("No") },
+		       [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+			 { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
+		      )
 	  or delete $o->{autologin};
     }
 }

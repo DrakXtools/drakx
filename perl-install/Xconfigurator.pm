@@ -479,7 +479,7 @@ sub optionsConfiguration($) {
     }
     @l = @l[0..9] if @l > 9; #- reduce list size to 10 for display
 
-    $in->ask_from_entries_refH('', _("Choose options for server"), \@l);
+    $in->ask_from('', _("Choose options for server"), \@l);
 }
 
 sub monitorConfiguration(;$$) {
@@ -498,7 +498,7 @@ sub monitorConfiguration(;$$) {
       ($::auto_install ? $low_default_monitor :
        $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], $good_default));
     if ($monitor->{type} eq 'Custom') {
-	$in->ask_from_entries_refH('',
+	$in->ask_from('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
@@ -1401,7 +1401,7 @@ sub main {
 	$in->set_help('configureXmain') unless $::isStandalone;
 
 	my $f;
-	$in->ask_from_entries_refH_powered(
+	$in->ask_from_(
 		{ 
 		 title => 'XFdrake',
 		 messages => _("What do you want to do?"),

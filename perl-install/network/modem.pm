@@ -41,7 +41,7 @@ sub pppConfig {
 					     [ grep { $_ ne $mouse->{device} } (mouse::serial_ports, if_(-e '/dev/modem', '/dev/modem')) ]) || return;
 
     $::isStandalone || $in->set_help('configureNetworkISP');
-    $in->ask_from_entries_refH('', _("Dialup options"), [
+    $in->ask_from('', _("Dialup options"), [
 { label => _("Connection name"), val => \$modem->{connection} },
 { label => _("Phone number"), val => \$modem->{phone} },
 { label => _("Login ID"), val => \$modem->{login} },

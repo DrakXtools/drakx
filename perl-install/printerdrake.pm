@@ -74,7 +74,7 @@ sub setup_remote_cups_server {
 	#- according to new settings. There are no other point where such
 	#- information is written in this file.
 
-	if ($in->ask_from_entries_refH_powered
+	if ($in->ask_from_
 	    ({ title => _("Remote CUPS server"),
 	       messages => _("With a remote CUPS server, you do not have to configure any 
 printer here; CUPS servers inform your machine automatically
@@ -209,7 +209,7 @@ sub setup_local {
     }
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
-	return if !$in->ask_from_entries_refH(_("Local Printer Device"),
+	return if !$in->ask_from(_("Local Printer Device"),
 _("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
 { label => _("Printer Device"), val => \$device, list => \@port, not_edit => !$::expert } ],
@@ -258,7 +258,7 @@ sub setup_lpd {
 	$remotequeue = "lp";
     }
 
-    return if !$in->ask_from_entries_refH(_("Remote lpd Printer Options"),
+    return if !$in->ask_from(_("Remote lpd Printer Options"),
 _("To use a remote lpd printer, you need to supply
 the hostname of the printer server and the printer name
 on that server."), [
@@ -339,7 +339,7 @@ sub setup_smb {
 	}
     }
 
-    return if !$in->ask_from_entries_refH(_("SMB (Windows 9x/NT) Printer Options"),
+    return if !$in->ask_from(_("SMB (Windows 9x/NT) Printer Options"),
 _("To print to a SMB printer, you need to provide the
 SMB host name (Note! It may be different from its
 TCP/IP hostname!) and possibly the IP address of the print server, as
@@ -420,7 +420,7 @@ sub setup_ncp {
 	}
     }
 
-    return if !$in->ask_from_entries_refH(_("NetWare Printer Options"),
+    return if !$in->ask_from(_("NetWare Printer Options"),
 _("To print on a NetWare printer, you need to provide the
 NetWare print server name (Note! it may be different from its
 TCP/IP hostname!) as well as the print queue name for the printer you
@@ -474,7 +474,7 @@ sub setup_socket {
 	$remoteport = "9100";
     }
 
-    return if !$in->ask_from_entries_refH(_("Socket Printer Options"),
+    return if !$in->ask_from(_("Socket Printer Options"),
 _("To print to a socket printer, you need to provide the
 host name of the printer and optionally the port number.
 On HP JetDirect servers the port number is usually 9100,
@@ -512,7 +512,7 @@ complete => sub {
 sub setup_uri {
     my ($printer, $in) = @_;
 
-    return if !$in->ask_from_entries_refH(_("Printer Device URI"),
+    return if !$in->ask_from(_("Printer Device URI"),
 _("You can specify directly the URI to access the printer. The URI must fulfill either the CUPS or the Foomatic specifications. Note that not all URI types are supported by all the spoolers."), [
 { label => _("Printer Device URI"),
 val => \$printer->{currentqueue}{'connect'},
@@ -579,7 +579,7 @@ sub setup_postpipe {
 	$commandline = "";
     }
 
-    return if !$in->ask_from_entries_refH(_("Pipe into command"),
+    return if !$in->ask_from(_("Pipe into command"),
 _("Here you can specify any arbitrary command line into which the job should be piped instead of being sent directly to a printer."), [
 { label => _("Command line"),
 val => \$commandline }, ],
@@ -603,7 +603,7 @@ sub choose_printer_name {
     # Name, description, location
     $in->set_help('configurePrinterLocal') if $::isInstall;
     my $default = $printer->{currentqueue}{'queue'};
-    $in->ask_from_entries_refH_powered
+    $in->ask_from_
 	(
 	 { title => _("Enter Printer Name and Comments"),
 	   #cancel => !$printer->{configured}{$queue} ? '' : _("Remove queue"),
@@ -881,7 +881,7 @@ sub setup_options {
 	    $windowtitle = "$printer->{currentqueue}{'make'} " .
 		"$printer->{currentqueue}{'model'}"
 		}
-	return 0 if !$in->ask_from_entries_refH
+	return 0 if !$in->ask_from
 	    ($windowtitle,
 	     _("Printer default settings
 You should make sure that the page size and the
@@ -960,7 +960,7 @@ sub print_testpages {
     my $alta4 = 0;
     my $photo = 0;
     my $ascii = 0;
-    if ($in->ask_from_entries_refH_powered
+    if ($in->ask_from_
 	({ title => _("Test pages"),
 	   messages => _("Please select the test pages you want to print.
 Note: the photo test page can take a rather long time to get printed
@@ -1058,7 +1058,7 @@ sub copy_queues_from {
 	}
     }
     if ($noninteractive ||
-	$in->ask_from_entries_refH_powered
+	$in->ask_from_
 	({ title => _("Transfer printer configuration"),
 	   messages => _("You can copy the printer configuration which you have done 
 for the spooler %s to %s, your current spooler. All the
@@ -1096,7 +1096,7 @@ Mark the printers which you want to transfer and click
                 my $newqueue = $_;
                 if ((!$printer->{configured}{$newqueue}) ||
 		    ($noninteractive) ||
-		    ($in->ask_from_entries_refH_powered
+		    ($in->ask_from_
 	             ({ title => _("Transfer printer configuration"),
 	                messages => _("A printer named \"%s\" already exists under %s. 
 Click \"Transfer\" to overwrite it.
@@ -1298,7 +1298,7 @@ sub main {
 		    $continue = 1;
 		    # $expertwitch gets one when the "Expert mode"/
 		    # "Standard mode" button is clicked.
-		    $expertswitch = !$in->ask_from_entries_refH_powered(
+		    $expertswitch = !$in->ask_from_(
 			{messages =>
 			     _("The following printers are configured.\nYou can add some more or modify the existing ones."),
 			 cancel => ($::isInstall ? 
@@ -1397,7 +1397,7 @@ sub main {
 	    }
 	} else {
 	    # Modify a queue, ask which part should be modified
-	    if ($in->ask_from_entries_refH_powered
+	    if ($in->ask_from_
 		   ({ title => _("Modify printer configuration"),
 		      messages => _("Printer %s: %s %s
 What do you want to modify on this printer?",

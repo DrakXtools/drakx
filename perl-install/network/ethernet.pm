@@ -209,12 +209,12 @@ sub configureNetwork {
 	$netc->{minus_one} = 1;
 	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
-	$in->ask_from_entries_refH(_("Configuring network"),
+	$in->ask_from(_("Configuring network"),
 _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-				   [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
+		      [ { label => _("Host name"), val => \$netc->{HOSTNAME} }]) or goto configureNetwork_step_1;
 	$netc->{HOSTNAME} ne $dhcp_hostname and $netc->{DHCP_HOSTNAME} = $netc->{HOSTNAME};
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;

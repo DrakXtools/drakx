@@ -313,7 +313,7 @@ sub create_list {
     };
 }
 
-sub ask_from_entries_refW {
+sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
 
