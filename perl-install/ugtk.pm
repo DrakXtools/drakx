@@ -17,7 +17,9 @@ my $use_pixbuf;
 my $use_imlib;
 my $use_gnome;
 
-BEGIN { 
+BEGIN {
+    require Gtk;
+    Gtk->init;
     eval { require Gtk::Gdk::Pixbuf; Gtk::Gdk::Pixbuf->init };
     $use_pixbuf = $@ ? 0 : 1;
     eval { require Gtk::Gdk::ImlibImage; Gtk::Gdk::ImlibImage->init };
@@ -25,8 +27,6 @@ BEGIN {
     eval { require Gnome };
     $use_gnome = $@ ? 0 : 1;
 }
-
-use Gtk;
 
 use c;
 use log;
@@ -752,8 +752,8 @@ sub gtkcreate_png_pixbuf {
 
 sub gtkcreate_png {
     my ($f) = shift;
-    $f =~ m|.png$| or $f = "$f.png";
-    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
+    $f =~ /\.png$/ or $f .= '.png';
+    if ($f !~ /^\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     if ($use_imlib) {
 	my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
 	$im->render($im->rgb_width, $im->rgb_height);
