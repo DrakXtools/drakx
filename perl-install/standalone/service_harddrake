@@ -119,7 +119,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         require network::ethernet;
         network::ethernet::configure_eth_aliases($modules_conf);
         $modules_conf->write;
-    } elsif (member($Ident qw(AGP ATA_STORAGE SATA_STORAGE SCSI_CONTROLLER TV)) {
+    } elsif (member($Ident, qw(AGP ATA_STORAGE SATA_STORAGE SCSI_CONTROLLER TV))) {
         # add agpgart modules to modprobe.preload if needed:
         $modules_conf->write;
     } elsif ($Ident eq "USB_CONTROLLER") {
