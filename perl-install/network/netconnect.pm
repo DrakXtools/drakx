@@ -245,48 +245,46 @@ If you don't want to use the auto detection, deselect the checkbox.
                     
                     name => N("Connection Configuration") . "\n\n" .
                     N("Please fill or check the field below"),
-                    data => [],
-                    pre => sub {
-                        push @{$wiz->{pages}{hw_account}{data}}, map {
-                            my ($dstruct, $field, $item) = @$_;
-                            $item->{val} = \$wiz->{var}{$dstruct}{$field};
-                            if__($wiz->{var}{$dstruct}{$field}, $item);
-                        } ([ "cnx",  "irq", { label => N("Card IRQ") } ],
-                           [ "cnx",  "mem", { label => N("Card mem (DMA)") } ],
-                           [ "cnx",  "io",  { label => N("Card IO") } ],
-                           [ "cnx",  "io0", { label => N("Card IO_0") } ],
-                           [ "cnx",  "io1", { label => N("Card IO_1") } ],
-                           [ "cnx",  "phone_in",     { label => N("Your personal phone number") } ],
-                           [ "netc", "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
-                           [ "cnx",  "phone_out",    { label => N("Provider phone number") } ],
-                           [ "netc", "dnsServer2",   { label => N("Provider dns 1 (optional)") } ],
-                           [ "netc", "dnsServer3",   { label => N("Provider dns 2 (optional)") } ],
-                           [ "cnx",  "vpivci",       { label => N("Choose your country"), list => detect_timezone() } ],
-                           [ "cnx",  "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
-                           [ "cnx",  "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
-                           [ "cnx",  "huptimeout",   { label => N("Connection timeout (in sec)") } ],
-                          );
-                        push @{$wiz->{pages}{hw_account}{data}}, 
-                          ({ label => N("Account Login (user name)"), val => \$wiz->{var}{cnx}{login} },
-                           {
-                            label => N("Account Password"),  val => \$wiz->{var}{cnx}{passwd}, hidden => 1 },
-                          );
-                    }
+                    data => [ 
+                             (map {
+                                 my ($dstruct, $field, $item) = @$_;
+                                 $item->{val} = \$wiz->{var}{$dstruct}{$field};
+                                 if__($wiz->{var}{$dstruct}{$field}, $item);
+                             } ([ "cnx",  "irq", { label => N("Card IRQ") } ],
+                                [ "cnx",  "mem", { label => N("Card mem (DMA)") } ],
+                                [ "cnx",  "io",  { label => N("Card IO") } ],
+                                [ "cnx",  "io0", { label => N("Card IO_0") } ],
+                                [ "cnx",  "io1", { label => N("Card IO_1") } ],
+                                [ "cnx",  "phone_in",     { label => N("Your personal phone number") } ],
+                                [ "netc", "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
+                                [ "cnx",  "phone_out",    { label => N("Provider phone number") } ],
+                                [ "netc", "dnsServer2",   { label => N("Provider dns 1 (optional)") } ],
+                                [ "netc", "dnsServer3",   { label => N("Provider dns 2 (optional)") } ],
+                                [ "cnx",  "vpivci",       { label => N("Choose your country"), list => detect_timezone() } ],
+                                [ "cnx",  "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
+                                [ "cnx",  "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
+                                [ "cnx",  "huptimeout",   { label => N("Connection timeout (in sec)") } ],
+                               )
+                             ),
+                             ({ label => N("Account Login (user name)"), val => \$wiz->{var}{cnx}{login} },
+                              { label => N("Account Password"),  val => \$wiz->{var}{cnx}{passwd}, hidden => 1 },
+                             )
+                            ],
+                    post => sub {
+                        my $netc = $wiz->{var}{netc};
+                        if ($netc->{vpivci}) {
+                            my %h = (N("Belgium") => '8_35' ,
+                                     N("France")  => '8_35'  ,
+                                     N("Italy")   => '8_35' ,
+                                     N("Netherlands")    => '8_48' ,
+                                     N("United Kingdom") => '0_38' ,
+                                     N("United States")  => '8_35',
+                                    );
+                            $netc->{vpivci} = $h{$netc->{vpivci}};
+                        }
+                    },
                    },
-                   post => sub {
-                       my $netc = $wiz->{var}{netc};
-                       if ($netc->{vpivci}) {
-                           my %h = (N("Belgium") => '8_35' ,
-                                    N("France")  => '8_35'  ,
-                                    N("Italy")   => '8_35' ,
-                                    N("Netherlands")    => '8_48' ,
-                                    N("United Kingdom") => '0_38' ,
-                                    N("United States")  => '8_35',
-                                   );
-                           $netc->{vpivci} = $h{$netc->{vpivci}};
-                       }
-                   },
-
+                   
                    cable => 
                    {
                     name => N("Connect to the Internet") . "\n\n" .
