@@ -1,21 +1,18 @@
 #!/usr/bin/perl
 
-@ARGV == 2 or die "usage $0: <dir> <cvslog2changelog script>\n";
+@ARGV == 1 or die "usage $0: <cvslog2changelog script>\n";
 
-($dir, $script) = @ARGV;
+($script) = @ARGV;
 
-chomp(my $cwd = `pwd`);
-$script = "$cwd/$script" if $script !~ m|^/|;
+$date = (split('/', `grep ChangeLog perl-install/CVS/Entries`))[3];
 
-chdir $dir;
-$date = (split('/', `grep ChangeLog CVS/Entries`))[3];
+@changelog = `(cvs log -d ">$date" mdk-stage1 ; cd perl-install; cvs log -d ">$date") | $script`;
+@before = `cat perl-install/ChangeLog`;
 
-@changelog = `cvs log -d ">$date" | $script`;
-@before = `cat ChangeLog`;
-
-print foreach @changelog;
-
-open F, ">ChangeLog";
+open F, ">perl-install/ChangeLog";
 print F foreach @changelog, @before;
 
-system(q(cvs commit -m "New snapshot uploaded" ChangeLog));
+`cvs commit -m '' perl-install/ChangeLog >/dev/null` =~ /new revision: (.*$);/;
+
+print "$1\n";
+print foreach @changelog;
