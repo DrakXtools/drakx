@@ -1007,7 +1007,7 @@ or off.")
                                help => N("Here, one can configure some extra wireless parameters such as:
 ap, channel, commit, enc, power, retry, sens, txpower (nick is already set as the hostname).
 
-See iwpconfig(8) man page for further information."),
+See iwconfig(8) man page for further information."),
                              },
                              { label =>
                                #-PO: split the "xyz command extra argument" translated string into two lines if it's bigger than the english one
