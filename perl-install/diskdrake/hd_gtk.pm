@@ -25,6 +25,9 @@ my ($w, @notebook, $done_button);
 
 =begin
 
+
+=head1 SYNOPSYS
+
 struct {
   string name      # which is displayed in tab of the notebook
   bool no_auto     # wether the kind can disappear after creation

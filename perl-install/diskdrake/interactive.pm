@@ -19,6 +19,8 @@ use fs;
 
 =begin
 
+=head1 SYNOPSYS
+
 struct part {
   int active            # one of { 0 | 0x80 }  x86 only, primary only
   int start             # in sectors
