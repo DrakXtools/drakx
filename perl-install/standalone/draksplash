@@ -467,15 +467,15 @@ sub make_boot_frame() {
 	  #- calculation of the 2 angle of text box and progress bar
 	  set_thm_values();
 	  my $_w = $in->wait_message('', N("Generating preview ..."));
-       my $txt_tl_x 	= $theme{boot_conf}{tx}*$font_size{w}; 
-       my $txt_tl_y 	= $theme{boot_conf}{ty}*$font_size{h};
+       my $txt_tl 	= $theme{boot_conf}{tx}*$font_size{w}; 
+       my $txt_tl 	= $theme{boot_conf}{ty}*$font_size{h};
        my $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};
        my $txt_height	= $theme{boot_conf}{th}*$font_size{h};
-       my $prog_tl_x 	= $theme{boot_conf}{px};
-       my $prog_tl_y 	= $theme{boot_conf}{py};
+       my $prog_tl_xx 	= $theme{boot_conf}{px};
+       my $prog_tl_yy 	= $theme{boot_conf}{py};
        my $prog_width	= $theme{boot_conf}{pw};
        my $prog_height  = $theme{boot_conf}{ph};
-	  show_prev($txt_tl_x, $txt_tl_y, $txt_width, $txt_height, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height);
+	  show_prev($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height);
 	});
 	$boot_conf_frame{frame}->show_all;
 #	- check scales values are possibly correct
@@ -507,7 +507,7 @@ sub kill_preview() {
 #- Desc  => create a new window with a preview of splash screen
 #- Args  => $img_file (str) full path to preview file
 sub show_prev {
- my ($txt_tl_x, $txt_tl_y, $txt_width, $txt_height, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height) = @_;
+ my ($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height) = @_;
  $prev_window
    or $prev_window = Gtk2::Window->new('toplevel'); 
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
@@ -521,8 +521,8 @@ sub show_prev {
      my ($w, $event) = @_;
      my ($x, $y, $width, $height) = $event->area->values;
      $prev_pic->render_to_drawable($w->window, $w->style->fg_gc('normal'), $x, $y, $x, $y, $width, $height, 'normal', 0, 0);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $txt_tl_x, $txt_tl_y, $txt_width, $txt_height);
-     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_x, $prog_tl_y, $prog_width, $prog_height);
+     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height);
+     $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height);
  });
  $prev_window->signal_connect(delete_event => \&kill_preview);
  $prev_window->show_all;
@@ -555,15 +555,15 @@ sub check_boot_scales {
   my $ph = $adj{ph}->get_value;
   my $px = $adj{px}->get_value;
   my $py = $adj{py}->get_value;
-  my $max_x = $scale_size{tw};
-  my $max_y = $scale_size{th};
+  my $max_xx = $scale_size{tw};
+  my $max_yy = $scale_size{th};
   my $max_xres = $theme{res}{w};
   my $max_yres = $theme{res}{h};
   
-  $obj eq 'tw' and $max_x < $tw + $tx and $adj{tx}->set_value($max_x - $tw);
-  $obj eq 'tx' and $max_x < $tw + $tx and $adj{tw}->set_value($max_x - $tx);
-  $obj eq 'th' and $max_y < $th + $ty and $adj{ty}->set_value($max_y - $th);
-  $obj eq 'ty' and $max_y < $th + $ty and $adj{th}->set_value($max_y - $ty);
+  $obj eq 'tw' and $max_xx < $tw + $tx and $adj{tx}->set_value($max_xx - $tw);
+  $obj eq 'tx' and $max_xx < $tw + $tx and $adj{tw}->set_value($max_xx - $tx);
+  $obj eq 'th' and $max_yy < $th + $ty and $adj{ty}->set_value($max_yy - $th);
+  $obj eq 'ty' and $max_yy < $th + $ty and $adj{th}->set_value($max_yy - $ty);
   $obj eq 'pw' and $max_xres < $pw + $px and $adj{px}->set_value($max_xres - $pw);
   $obj eq 'px' and $max_xres < $pw + $px and $adj{pw}->set_value($max_xres - $px);
   $obj eq 'ph' and $max_yres < $ph + $py and $adj{py}->set_value($max_yres - $ph);
