@@ -46,29 +46,55 @@ Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libd
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
-Contains , diskdrake, drakautoinst, drakbackup, drakboot, drakfont, draknet,
-drakxtv, keyboarddrake, liveupdate, lspcidrake, mousedrake, printerdrake
-and XFdrake.
+Contains adduserdrake, ddcxinfos, diskdrake, drakautoinst, drakbackup,
+drakboot, drakbug, drakbug_report, drakfloppy, drakfont, drakgw,
+draknet, drakproxy, draksec, drakTermServ, drakxconf, drakxservices,
+drakxtv, lsnetdrake, lspcidrake, keyboarddrake, livedrake,
+localedrake, mousedrake, printerdrake, scannerdrake, tinyfirewall and
+XFdrake :
 
-diskdrake: The purpose of the DiskDrake project is to make hard disk
-partitioning easier. It is graphical, simple and powerful. Different
-skill levels are available (newbie, advanced user, expert). It's
-written entirely in Perl and Perl/Gtk. It uses resize_fat which is a
-perl rewrite of the work of Andrew Clausen (libresize).
+adduserdrake: help you adding a user
+
+ddcxinfos: get infos from the graphic card and print XF86Config
+modlines
+
+diskdrake: DiskDrake makes hard disk partitioning easier. It is
+graphical, simple and powerful. Different skill levels are available
+(newbie, advanced user, expert). It's written entirely in Perl and
+Perl/Gtk. It uses resize_fat which is a perl rewrite of the work of
+Andrew Clausen (libresize).
 
 drakautoinst: help you configure an automatic installation replay
 
 drakbackup: backup and restore your system.
 
 drakboot: configures your boot configuration (Lilo/GRUB, Aurora, X, autologin)
-mousedrake: configures and autodetects your mouse
+
+drakbug: interactive bug report tool
+
+drakbug_report: help find bugs in DrakX
+
+drakfloppy: boot disk creator
 
 drakfont: import some fonts in the system.
+
+drakgw: internet connection sharing
 
 draknet: LAN/Internet connection configuration. It handles ethernet,
 ISDN, DSL, cable, modem.
 
+drakproxy: proxies configuration
+
+draksec: security configurator (security levels, ...)
+
+drakTermServ: mandrake terminal server configurator
+
+drakxconf: simple control center
+
+drakxservices: SysV service and dameaons configurator
+
 drakxtv: auto configure tv card for xawtv grabber
+
 keyboarddrake: configures your keyboard (both console and X)
 
 liveupdate: live update software.
@@ -76,7 +102,15 @@ liveupdate: live update software.
 lspcidrake: displays your pci information, *and* the corresponding
 kernel module.
 
+localedrake: locale configurator (language, ...)
+
+mousedrake: configures and autodetects your mouse
+
 printerdrake: detects and configures your printer
+
+scannerdrake: scanner configurator
+
+tinyfirewall: simple firewall configurator
 
 XFdrake: menu-driven program which walks you through setting up your X
 server. It works on console and under X :)
@@ -215,6 +249,7 @@ done
 
 %changelog 
 * Wed Jul 10 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-5mdk
+- list and describe all gui tools from drakxtools
 - code enhancement: increase coherency around the whole drakx code
 - decrease the debug verbosity
 
