@@ -124,6 +124,7 @@ if_(arch() !~ /alpha/ && arch() !~ /sparc/,
   "kaweth" => "kaweth",
   "usbnet" => "usbnet",
   "catc" => "CATC EL1210A NetMate USB Ethernet driver",
+  "CDCEther" => "CDCEther",
 }],
 [ 'isdn', {
    "hisax" => "hisax",
