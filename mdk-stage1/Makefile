@@ -187,6 +187,17 @@ clean:
 	done
 	rm -f *.o .depend *.rdz *.img $(BINS)
 
+
+tar-mkinitrd_helper: clean
+	$(MAKE) -C mkinitrd_helper clean
+	rm -rf mkinitrd_helper-subdir
+	mkdir mkinitrd_helper-subdir
+	cd mkinitrd_helper-subdir ; cp -a ../dietlibc ../insmod-busybox ../mkinitrd_helper ../Makefile.common ../insmod.h ../log.h . ; \
+	    cp ../Makefile.mkinitrd_helper Makefile
+	tar cfj mkinitrd_helper.tar.bz2 mkinitrd_helper-subdir --exclude CVS
+	rm -rf mkinitrd_helper-subdir
+
+
 .depend:
 	$(CPP) $(CFLAGS) -DHAVE_CONFIG_H -M $(ALLSRC) > .depend
 
