@@ -89,65 +89,65 @@ static void serialFreeDevice(struct serialDevice *dev) {
 
 static void serialWriteDevice(FILE *file, struct serialDevice *dev)
 {
-	writeDevice(file, (struct device *) dev);
-	if (dev->pnpmfr)
-	  fprintf(file,"pnpmfr: %s\n",dev->pnpmfr);
-	if (dev->pnpmodel)
-	  fprintf(file,"pnpmodel: %s\n",dev->pnpmodel);
-	if (dev->pnpcompat)
-	  fprintf(file,"pnpcompat: %s\n",dev->pnpcompat);
-	if (dev->pnpdesc)
-	  fprintf(file,"pnpdesc: %s\n",dev->pnpdesc);
+    writeDevice(file, (struct device *) dev);
+    if (dev->pnpmfr)
+	fprintf(file,"pnpmfr: %s\n",dev->pnpmfr);
+    if (dev->pnpmodel)
+	fprintf(file,"pnpmodel: %s\n",dev->pnpmodel);
+    if (dev->pnpcompat)
+	fprintf(file,"pnpcompat: %s\n",dev->pnpcompat);
+    if (dev->pnpdesc)
+	fprintf(file,"pnpdesc: %s\n",dev->pnpdesc);
 }
 
 static int serialCompareDevice( struct serialDevice *dev1, struct serialDevice *dev2)
 {
-	int x;
-	
-	x = compareDevice((struct device *)dev1, (struct device *)dev2);
-	if (x && x!=2) return x;
-	if (dev1->pnpmfr && dev2->pnpmfr && strcmp(dev1->pnpmfr,dev2->pnpmfr))
-	  return 1;
-	if ((!dev1->pnpmfr || !dev2->pnpmfr) && (dev1->pnpmfr != dev2->pnpmfr))
-	  return 1;
-	if (dev1->pnpmodel && dev2->pnpmodel && strcmp(dev1->pnpmodel,dev2->pnpmodel))
-	  return 1;
-	if ((!dev1->pnpmodel || !dev2->pnpmodel) && (dev1->pnpmodel != dev2->pnpmodel))
-	  return 1;
-	if (dev1->pnpcompat && dev2->pnpcompat && strcmp(dev1->pnpcompat,dev2->pnpcompat))
-	  return 1;
-	if ((!dev1->pnpcompat || !dev2->pnpcompat) && (dev1->pnpcompat != dev2->pnpcompat))
-	  return 1;
-	if (dev1->pnpdesc && dev2->pnpdesc && strcmp(dev1->pnpdesc,dev2->pnpdesc))
-	  return 1;
-	if ((!dev1->pnpdesc || !dev2->pnpdesc) && (dev1->pnpdesc != dev2->pnpdesc))
-	  return 1;
-	return x;
+    int x;
+    
+    x = compareDevice((struct device *)dev1, (struct device *)dev2);
+    if (x && x!=2) return x;
+    if (dev1->pnpmfr && dev2->pnpmfr && strcmp(dev1->pnpmfr,dev2->pnpmfr))
+	return 1;
+    if ((!dev1->pnpmfr || !dev2->pnpmfr) && (dev1->pnpmfr != dev2->pnpmfr))
+	return 1;
+    if (dev1->pnpmodel && dev2->pnpmodel && strcmp(dev1->pnpmodel,dev2->pnpmodel))
+	return 1;
+    if ((!dev1->pnpmodel || !dev2->pnpmodel) && (dev1->pnpmodel != dev2->pnpmodel))
+	return 1;
+    if (dev1->pnpcompat && dev2->pnpcompat && strcmp(dev1->pnpcompat,dev2->pnpcompat))
+	return 1;
+    if ((!dev1->pnpcompat || !dev2->pnpcompat) && (dev1->pnpcompat != dev2->pnpcompat))
+	return 1;
+    if (dev1->pnpdesc && dev2->pnpdesc && strcmp(dev1->pnpdesc,dev2->pnpdesc))
+	return 1;
+    if ((!dev1->pnpdesc || !dev2->pnpdesc) && (dev1->pnpdesc != dev2->pnpdesc))
+	return 1;
+    return x;
 }
 
 
 struct serialDevice * serialNewDevice(struct serialDevice *dev) {
-        struct serialDevice *ret;
-        
-        ret = malloc(sizeof(struct serialDevice));
-        memset(ret,'\0',sizeof(struct serialDevice));
-        ret=(struct serialDevice *)newDevice((struct device *)dev,(struct device *)ret);
-        ret->bus = BUS_SERIAL;
-        ret->newDevice = serialNewDevice;
-        ret->freeDevice = serialFreeDevice;
-	ret->writeDevice = serialWriteDevice;
-	ret->compareDevice = serialCompareDevice;
-	if (dev && dev->bus == BUS_SERIAL) {
-		if (dev->pnpmfr)
-		  ret->pnpmfr=strdup(dev->pnpmfr);
-		if (dev->pnpmodel)
-		  ret->pnpmodel=strdup(dev->pnpmodel);
-		if (dev->pnpcompat)
-		  ret->pnpcompat=strdup(dev->pnpcompat);
-		if (dev->pnpdesc)
-		  ret->pnpdesc=strdup(dev->pnpdesc);
-	}
-        return ret;
+    struct serialDevice *ret;
+    
+    ret = malloc(sizeof(struct serialDevice));
+    memset(ret,'\0',sizeof(struct serialDevice));
+    ret=(struct serialDevice *)newDevice((struct device *)dev,(struct device *)ret);
+    ret->bus = BUS_SERIAL;
+    ret->newDevice = serialNewDevice;
+    ret->freeDevice = serialFreeDevice;
+    ret->writeDevice = serialWriteDevice;
+    ret->compareDevice = serialCompareDevice;
+    if (dev && dev->bus == BUS_SERIAL) {
+	if (dev->pnpmfr)
+	    ret->pnpmfr=strdup(dev->pnpmfr);
+	if (dev->pnpmodel)
+	    ret->pnpmodel=strdup(dev->pnpmodel);
+	if (dev->pnpcompat)
+	    ret->pnpcompat=strdup(dev->pnpcompat);
+	if (dev->pnpdesc)
+	    ret->pnpdesc=strdup(dev->pnpdesc);
+    }
+    return ret;
 }
 
 /*
@@ -179,14 +179,14 @@ static int open_serial_port( char *port ) {
     } else {
 	DEBUG("successful.\n");
     }
-
+    
     /* reset file so it is no longer in non-blocking mode */
     if (fcntl(fd, F_SETFL, 0) < 0) {
 	close(fd);
 	DEBUG("Failed to set port to non-blocking mode\n");
 	return -1;
     }
-	
+    
     return fd;
 }
 
@@ -205,7 +205,7 @@ static int set_serial_lines( int fd, int modem_lines ) {
 
 /* set serial port to 1200 baud, 'nbits' bits, 1 stop, no parity */
 static int setup_serial_port( int fd, int nbits, struct termios *attr ) {
-	
+
     DEBUG("setting up serial port\n");
     
     attr->c_iflag = IGNBRK | IGNPAR;
@@ -223,9 +223,9 @@ static int setup_serial_port( int fd, int nbits, struct termios *attr ) {
     attr->c_cc[VTIME] = 5;
 
     if (cfsetospeed( attr, B1200))
-         return -1;
+	return -1;
     if (cfsetispeed( attr, B1200))
-         return -1;
+	return -1;
     return tcsetattr(fd, TCSANOW, attr);
 }
 
@@ -235,18 +235,18 @@ static int setup_serial_port( int fd, int nbits, struct termios *attr ) {
  */
 
 static int init_port(int fd) {
-	struct termios attr;
-	
-	if (tcgetattr(fd,&attr))
-	  return 1;
-	
-	cfsetospeed(&attr, B2400);
-	cfsetispeed(&attr, B2400);
-	attr.c_iflag = IXON | ICRNL;
-	attr.c_cflag = CLOCAL | HUPCL | CREAD | B9600 | CS8;
-	attr.c_oflag = 0;
-	attr.c_lflag = 0;
-	return tcsetattr(fd, TCSANOW, &attr);
+    struct termios attr;
+    
+    if (tcgetattr(fd,&attr))
+	return 1;
+    
+    cfsetospeed(&attr, B2400);
+    cfsetispeed(&attr, B2400);
+    attr.c_iflag = IXON | ICRNL;
+    attr.c_cflag = CLOCAL | HUPCL | CREAD | B9600 | CS8;
+    attr.c_oflag = 0;
+    attr.c_lflag = 0;
+    return tcsetattr(fd, TCSANOW, &attr);
 }
 
 
@@ -265,7 +265,7 @@ static int init_pnp_com_seq1( int fd ) {
 
     DEBUG("initializing 1st PNP sequence\n");
     if (init_port(fd))
-	  return PNP_COM_FATAL;
+      return PNP_COM_FATAL;
 
     modem_lines = get_serial_lines(fd);
 
@@ -572,11 +572,11 @@ static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int
     struct timeval timo;
     unsigned char buf[80];
     unsigned char end_char;
-    
+
     DEBUG("Attempting to read PNP ID string\n");
     
     /* see if we have any input waiting */
-    pnp_index  =0;
+    pnp_index  = 0;
     seen_start = 0;
     done       = 0;
     end_char   = 0;
@@ -588,7 +588,7 @@ static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int
 	    temp = read( fd, buf, 1 );
 	    if (temp < 0) {
 		if (errno != EAGAIN)
-		    return PNP_COM_FATAL;
+		    return PNP_COM_FAIL;
 	    } else {
 		for (counter=0; counter < temp; counter++) {
 		    pnp_string[pnp_index++] = buf[counter];
@@ -611,8 +611,8 @@ static int read_pnp_string( int fd, unsigned char *pnp_string, int *pnp_len, int
 	} else
 	    done = 1;
 	
-	/* shouldnt run more than 4 seconds */
-	if (time(NULL)-starttime > 4 )
+	/* shouldnt run more than 3 seconds */
+	if (time(NULL)-starttime > 3 )
 	    done = 1;
 
 	if (pnp_index >= pnp_stringbuf_size)
@@ -886,7 +886,7 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
     int console=-1;
     int stdin_line=-1;
     struct serial_struct si;
-	
+
     DEBUG("Probing for serial ports\n");
     
     if (probeFlags & PROBE_SAFE) return devlist;
@@ -895,44 +895,44 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
     fstat(0,&sb);
     maj = major(sb.st_rdev);
     if (maj != 4 && (maj < 136 || maj > 143)) {
-	    if (ioctl (0, TIOCLINUX, &twelve) < 0) {
-		    if (ioctl (0, TIOCGSERIAL, &si) >= 0) {
-			    if (si.line > 0) {
-				    stdin_line = 1 << si.line;
-			    } else {
-				    stdin_line = 0;
-			    }
-		    } else stdin_line = 0;
-	    }
+	if (ioctl (0, TIOCLINUX, &twelve) < 0) {
+	    if (ioctl (0, TIOCGSERIAL, &si) >= 0) {
+		if (si.line > 0) {
+		    stdin_line = 1 << si.line;
+		} else {
+		    stdin_line = 0;
+		}
+	    } else stdin_line = 0;
+	}
     }
 	
     fd=open("/dev/console",O_RDWR);
     if (fd != -1) {
-	    fstat(fd,&sb);
-	    maj = major(sb.st_rdev);
-	    if (maj != 4 && (maj < 136 || maj > 143)) {
-		    if (ioctl (fd, TIOCLINUX, &twelve) < 0) {
+	fstat(fd,&sb);
+	maj = major(sb.st_rdev);
+	if (maj != 4 && (maj < 136 || maj > 143)) {
+	    if (ioctl (fd, TIOCLINUX, &twelve) < 0) {
 			#ifdef __powerpc__
 			// we could have gotten an error for another reason - like EINVAL
 			// skipping ttyS0 on PPC - which is where most modems reside
 			if (errno == ENOTTY) {
 			#endif
-			    if (ioctl (fd, TIOCGSERIAL, &si) >= 0) {
-				    if (si.line > 0) {
-					    console = 1 << si.line;
-				    } else {
-					    console = 0;
-				    }
-			    } else console = 0;
+		if (ioctl (fd, TIOCGSERIAL, &si) >= 0) {
+		    if (si.line > 0) {
+			console = 1 << si.line;
+		    } else {
+			console = 0;
 			#ifdef __powerpc__
 			}
 			#endif 
 		    }
+		} else console = 0;
 	    }
-	    close(fd);
+	}
+	close(fd);
     }
-
-	
+    
+    
     if (
 	(probeClass == CLASS_UNSPEC) ||
 	(probeClass == CLASS_OTHER) ||
@@ -953,29 +953,31 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	    if (!stat(lockfile,&sbuf)) {
 		DEBUG("Port %s in use, skipping probe.\n",
 		      port);
-		 continue;
+		continue;
 	    }
 	    memset(lockfile,'\0',32);
 	    if (readlink("/dev/modem",lockfile,32)>0) {
 		    if (!strcmp(basename(port),basename(lockfile))) {
-			    snprintf(lockfile,32,"/var/lock/LCK..modem");
+			snprintf(lockfile,32,"/var/lock/LCK..modem");
 			if (!stat(lockfile,&sbuf)) {
 			    DEBUG("Port %s in use, skipping probe.\n",
 				  port);
-			      continue;
+			    continue;
+			}
 		    }
-	    }
 	    }
 	    
 	    if ((fd=open_serial_port(port)) < 0) {
-		    continue;
+		continue;
 	    }
 	    /* save the current state of the port */
 	    temp = tcgetattr(fd, &origattr);
 	    if (temp < 0) {
-		    close(fd);
-		    continue;
+		DEBUG("unable to retrieve port attributes...no port present?\n");
+		close(fd);
+		continue;
 	    }
+	    
 
 	    /* try twiddling RS232 control lines and see if it talks to us */
 	    devicetype=-1;
@@ -1068,54 +1070,54 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 		if (temp == PNP_COM_FATAL) {
 			goto endprobe;
 		} else if (temp == PNP_COM_OK) {
-			if (probeClass == CLASS_UNSPEC || probeClass == CLASS_MOUSE) {
-				serdev=serialNewDevice(NULL);
-				serdev->type = CLASS_MOUSE;
-				serdev->device = strdup(port+5);
-				serdev->driver= strdup("generic");
-				serdev->desc = strdup("Generic Serial Mouse");
-				if (devlist)
-				  serdev->next = devlist;
-				devlist = (struct device *)serdev;
-				if (probeFlags & PROBE_ONE) {
-					tcsetattr(fd, TCSANOW, &origattr);
-					tcflush(fd, TCIOFLUSH);
-					close(fd);
-					return devlist;
-				}
+		    if (probeClass & CLASS_MOUSE) {
+			serdev=serialNewDevice(NULL);
+			serdev->type = CLASS_MOUSE;
+			serdev->device = strdup(port+5);
+			serdev->driver= strdup("generic");
+			serdev->desc = strdup("Generic Serial Mouse");
+			if (devlist)
+			    serdev->next = devlist;
+			devlist = (struct device *)serdev;
+			if (probeFlags & PROBE_ONE) {
+			    tcsetattr(fd, TCSANOW, &origattr);
+			    tcflush(fd, TCIOFLUSH);
+			    close(fd);
+			    return devlist;
 			}
-			goto endprobe;
+		    }
+		    goto endprobe;
 		} else {
 		    DEBUG("Didn't see a legacy mouse.\n");
-
+		    
 		    temp = find_legacy_modem(fd);
 		    if (temp == PNP_COM_FATAL) {
-			    goto endprobe;
+			goto endprobe;
 		    } else if (temp == PNP_COM_OK) {
 			DEBUG("Legacy modem signature seen.\n");
-			if (probeClass == CLASS_UNSPEC || probeClass == CLASS_MODEM) {
-				serdev=serialNewDevice(NULL);
-				serdev->type = CLASS_MODEM;
-				serdev->device = strdup(port+5);
-				serdev->driver= strdup("ignore");
-				serdev->desc = strdup("Generic Serial Modem");
-				if (devlist)
-				  serdev->next = devlist;
-				devlist = (struct device *)serdev;
-				if (probeFlags & PROBE_ONE) {
-					tcsetattr(fd, TCSANOW, &origattr);
-					tcflush(fd, TCIOFLUSH);
-					close(fd);
-					return devlist;
-				}
+			if (probeClass & CLASS_MODEM) {
+			    serdev=serialNewDevice(NULL);
+			    serdev->type = CLASS_MODEM;
+			    serdev->device = strdup(port+5);
+			    serdev->driver= strdup("ignore");
+			    serdev->desc = strdup("Generic Serial Modem");
+			    if (devlist)
+				serdev->next = devlist;
+			    devlist = (struct device *)serdev;
+			    if (probeFlags & PROBE_ONE) {
+				tcsetattr(fd, TCSANOW, &origattr);
+				tcflush(fd, TCIOFLUSH);
+				close(fd);
+				return devlist;
+			    }
 			}
-			    goto endprobe;
+			goto endprobe;
 		    } else {
 			DEBUG("Didnt see a legacy modem, game over.\n");
 		    }
 		}
 	    }
-endprobe:
+	endprobe:
 	    DEBUG("Restoring original port attributes\n");
 	    tcsetattr(fd, TCSANOW, &origattr);
 	    tcflush(fd, TCIOFLUSH);
