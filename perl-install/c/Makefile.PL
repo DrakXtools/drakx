@@ -1,10 +1,13 @@
+use MDK::Common;
 use ExtUtils::MakeMaker;
 use Config;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
+my $lib = arch() =~ /x86_64/ ? 'lib64' : 'lib';
+
 my $libs = '-lldetect -lext2fs';
-$libs .= ' -L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc' if $ENV{C_DRAKX};
+$libs .= " -L/usr/X11R6/$lib -lX11 -lgdk -lXxf86misc" if $ENV{C_DRAKX};
 $libs .= ' -lrpm -lrpmdb -lrpmio -lpopt -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia_' : '';
