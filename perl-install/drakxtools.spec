@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 8mdk
+Release: 9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 18 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-9mdk
+- drakTermServ: detect all NIC that're know to drakconnect
+- drakups: fix device path when manually adding an UPS (#12290)
+- logdrake: fix explanation mode only displaying last line (#14368)
+
 * Fri Mar 18 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-8mdk
 - diskdrake (pixel):
   o fix remove on LVM in newt interface (#14254)
