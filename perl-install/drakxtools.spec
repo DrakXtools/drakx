@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.35mdk
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,23 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar  7 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-1mdk
+- diskdrake: allow live resizing of reiserfs on lvm (pixel)
+- drakboot: fix detecting yaboot (pixel)
+- drakconnet (blino):
+  o configure CMV for sagem modems
+  o delete gateway:
+    * if reconfiguring the gateway interface to dhcp
+    * if gateway device is invalid (#11761)
+    * if needed when configuring DSL devices (#13978)
+  o manage interface:
+    * detect all ethernet interfaces
+    * allow to modify DHCP settings
+- localedrake: let's be able to setup gcin (funda wang)
+- printerdrake: detect if the user has manually edited
+  /etc/cups/client.conf (till)
+- XFdrake: still improving monitors support (pixel)
+
 * Wed Mar  2 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.35mdk
 - drakboot (pixel):
   o fix corrupted "Precise RAM size" field (#13874)
