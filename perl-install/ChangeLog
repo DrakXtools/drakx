@@ -1,3 +1,135 @@
+2004/08/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakupdate_fstab: do not restrict "many partitions" test to
+	SCSI devices
+	do not mount and add/delete in fstab when many partitions (#11005)
+
+	* mouse.pm: really make synaptics works at install (don't crash graphical
+	install)
+
+2004/08/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* ugtk2.pm (Gtk2::ComboBox::set_text) explain which caller failled
+
+	* drakxtools.spec: 10.1-0.16mdk
+
+	* Xconfig/resolution_and_depth.pm (choose_gtk) fix crash
+
+	* share/po/fr.po: update
+
+2004/08/29  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/lv.po,
+	share/po/hu.po, share/po/fa.po, share/po/id.po, share/po/ru.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: Updated POT file
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+	Updated POT file
+
+2004/08/29  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 618
+	authentication
+	DrakX-zh_TW: 612
+		Espanol
+
+2004/08/29  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, standalone/printerdrake, printer/printerdrake.pm: 
+	  - Inform the user on first-time setup, both during or after
+	installation, that he can set up a daemon-less CUPS client.
+	  - Warn the user when printerdrake is set to daemon-less CUPS client
+	but no server is specified.
+	  - Fixed bug of local queues not being recognized when the spooler
+	daemon is not running during printerdrake startup.
+	  - Do not try to copy print queues when switchung from daemon-less CUPS
+	to normal CUPS.
+	  - Remove the client.conf when switching from daemon-less CUPS to
+	normal CUPS.
+
+2004/08/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakroam: move DHCP column to left for better sizing (Austin
+	<aacton@yorku.ca>)
+	(UpdateAvailable) print ESSID too (Austin <aacton@yorku.ca>)
+	fix Add button behavior (Austin <aacton@yorku.ca>)
+
+2004/08/29  vljubovic
+
+	* share/po/bs.po: Improving Bosnian translation
+
+2004/08/27  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 604
+	done
+
+2004/08/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm, network/tools.pm, network/network.pm,
+	network/adsl.pm: write metric in ifcfg files according to connection
+	type
+
+	* standalone/drakconnect (manage) read settings from correct interface for
+	non ethernet interfaces
+	(manage) add metric text entry for all connections
+
+	* network/modem.pm: use same keys than manage interface for metrics
+	(ppp_read_conf) read metric if set
+	write metric in ifcfg files according to connection type
+
+2004/08/27  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/rpmsrate: Remove duplicated entries with complex flags from the
+	rpmsrate
+
+2004/08/27  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/default.pm, printer/cups.pm, printer/main.pm, printer/data.pm,
+	standalone/printerdrake, printer/printerdrake.pm: 
+	  - Made support for daemon-less CUPS client working.
+	  - Fixed graying out of buttons/menu entries in the main window.
+
+2004/08/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/localedrake: do not complain on wizcancel
+
+	* standalone/logdrake (insert_text_n_scroll) fix displaying only last
+	parsed file
+
+	* detect_devices.pm (matching_driver) introduce it in order to factorize
+	some tests
+	add __regexp suffix to matching_desc() and  matching_driver()
+	(getModem) report modems supported by ALSA too
+
+	* lang.pm: space cleanup for lord perl_checker
+	(IM2packages)
+	  - alter prototype: directly take a locale hash
+	  - get lang from locale hash
+	  - use it to install needed packages depending on locale (instead of
+	only generic ones depending on IM)
+
+	* drakxtools.spec: 10.1-0.15mdk
+
+	* Xconfig/card.pm, pkgs.pm, common.pm, install_steps.pm, bootloader.pm,
+	install_any.pm: add __regexp suffix to matching_desc() and
+	matching_driver()
+
+	* share/rpmsrate: sort a few entries
+
 2004/08/27  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: melo
@@ -36634,7 +36766,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.952 2004/08/25 06:58:12 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.953 2004/08/27 09:00:34 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
