@@ -811,7 +811,7 @@ Modifying the fields below will override this configuration."),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         @fields = qw(IPADDR NETMASK);
-                        $netcnx->{dhcp_client} ||= "dhcp-client";
+                        $netc->{dhcp_client} ||= "dhcp-client";
                     },
                     name => sub { join('', 
                                        N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module),
@@ -833,7 +833,7 @@ notation (for example, 1.2.3.4).")),
                           { text => N("Track network card id (useful for laptops)"), val => \$track_network_id, type => "bool" },
                           { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
                           { text => N("Start at boot"), val => \$onboot, type => "bool" },
-                          { label => N("DHCP client"), val => \$netcnx->{dhcp_client}, 
+                          { label => N("DHCP client"), val => \$netc->{dhcp_client}, 
                             list => ["dhcp-client", "dhcpcd", "dhcpxd"], advanced => 1 },
                         ],
                     },
@@ -855,7 +855,7 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{NEEDHOSTNAME} = bool2yesno($needhostname);
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
-                        $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
+                        $in->do_pkgs->install($netc->{dhcp_client}) if $auto_ip;
                         write_cnx_script($netc, "cable", qq(
 /sbin/ifup $netc->{NET_DEVICE}
 ),
