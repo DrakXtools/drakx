@@ -81,7 +81,7 @@ sub installPackages() {
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach lang::langsLANGUAGE({ all => 1 });
 
     #- we don't want those
-    foreach (qw(mdkonline quanta)) {
+    foreach (qw(mdkonline quanta crack-attack crack-attack-music crack-attack-sounds)) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_) or die "$_ not there anymore";
 	$pkg->set_rate(0);
     }
