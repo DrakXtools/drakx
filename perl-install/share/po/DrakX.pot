@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-10-04 14:03+0200\n"
+"POT-Creation-Date: 2000-10-04 14:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1250,7 +1250,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:532
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:532
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr ""
@@ -1405,7 +1407,7 @@ msgid ""
 "You need to accept the terms of the above license to continue installation.\n"
 "\n"
 "\n"
-"Please click on \"Accept\" if you are agree with its terms.\n"
+"Please click on \"Accept\" if you agree with its terms.\n"
 "\n"
 "\n"
 "Please click on \"Refuse\" if you disagree with its terms. Installation will "
@@ -2494,7 +2496,7 @@ msgstr ""
 msgid "Exit install"
 msgstr ""
 
-#: ../../install_any.pm_.c:581
+#: ../../install_any.pm_.c:580
 msgid "Error reading file $f"
 msgstr ""
 
@@ -2524,11 +2526,11 @@ msgid ""
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr ""
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -2720,6 +2722,80 @@ msgstr ""
 msgid "Entering step `%s'\n"
 msgstr ""
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:242 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:608
+msgid "Installing"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:608
+msgid "Preparing installation"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
+#: ../../install_steps_gtk.pm_.c:546
+msgid "Go on anyway?"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:542
+msgid "There was an error ordering packages:"
+msgstr ""
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:1013
+msgid "Use existing configuration for X11?"
+msgstr ""
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -2765,19 +2841,6 @@ msgstr ""
 msgid "Percentage of packages to install"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:242
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
 msgstr ""
@@ -2801,16 +2864,6 @@ msgstr ""
 #: ../../install_steps_gtk.pm_.c:352
 #, c-format
 msgid "Name: %s\n"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:355
@@ -2858,24 +2911,8 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:608
-msgid "Installing"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
@@ -2885,18 +2922,9 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:608
-msgid "Preparing installation"
-msgstr ""
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:526
@@ -2907,14 +2935,6 @@ msgid ""
 "Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when "
 "done.\n"
 "If you don't have it, press Cancel to avoid installation from this Cd-Rom."
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:542 ../../install_steps_gtk.pm_.c:546
-msgid "Go on anyway?"
-msgstr ""
-
-#: ../../install_steps_gtk.pm_.c:542
-msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:546
@@ -3673,10 +3693,6 @@ msgstr ""
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
-msgstr ""
-
-#: ../../install_steps_interactive.pm_.c:1013
-msgid "Use existing configuration for X11?"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:1042
@@ -5203,41 +5219,12 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr ""
 
-#: ../../standalone/drakgw_.c:104
-msgid ""
-"The setup of Internet connection sharing has already been done.\n"
-"It's currently enabled.\n"
-"\n"
-"What would you like to do?"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:108
-msgid "disable"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:118
-#: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:137
-msgid "dismiss"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:126
-msgid "reconfigure"
+#: ../../standalone/drakgw_.c:104 ../../standalone/drakgw_.c:123
+msgid "The setup of Internet connection sharing has already been done.\n"
 msgstr ""
 
 #: ../../standalone/drakgw_.c:122
 msgid "Internet Connection Sharing currently disabled"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:123
-msgid ""
-"The setup of Internet connection sharing has already been done.\n"
-"It's currently disabled.\n"
-"\n"
-"What would you like to do?"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:127
-msgid "enable"
 msgstr ""
 
 #: ../../standalone/drakgw_.c:141
@@ -5252,14 +5239,6 @@ msgstr ""
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
-"Note: you need a dedicated Network Adapter to set up a Local Area Network "
-"(LAN).\n"
-"\n"
-"Would you like to setup the Internet Connection Sharing?"
-msgstr ""
-
-#: ../../standalone/drakgw_.c:177
-msgid "using module"
 msgstr ""
 
 #: ../../standalone/drakgw_.c:210
@@ -5336,10 +5315,7 @@ msgid "Congratulations!"
 msgstr ""
 
 #: ../../standalone/drakgw_.c:513
-msgid ""
-"Everything has been configured.\n"
-"You may now share Internet connection with other computers on your Local "
-"Area Network, using automatic network configuration (DHCP)."
+msgid "Everything has been configured.\n"
 msgstr ""
 
 #: ../../standalone/draksec_.c:28
@@ -5618,152 +5594,4 @@ msgstr ""
 
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "The K Desktop Environment, the basic graphical environment with a collection of accompanying tools"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Internet Tools"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Internet"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Personnal Finance"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Office"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Multimedia - Graphics"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Video players and editors"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Set of tools to read and send mail and news (pine, mutt, tin..) and to browse the Web"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file transfer tools"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "A graphical environment with user-friendly set of applications and desktop tools"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Multimedia - Video"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "KDE"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Multimedia"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Multimedia - Sound"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Gnome"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Documentation"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Graphics Manipulation"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Games"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Multimedia - CD Burning"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Communication facilities"
-msgstr ""
-
-#: ../../share/compssUsers
-msgid "Databases"
 msgstr ""
