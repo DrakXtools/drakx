@@ -130,8 +130,9 @@ sub ask_from_entries_ref($$$$;$%) {
 	if ((ref $_) eq "SCALAR") {
 	    { val => $_ }
 	} else {
+	    print "Here", ref $_, "\n";
 	    ($_->{list} && @{$_->{list}}) ?
-	      { %{$_}, type => "list"} : $_;
+	      { %$_, type => "list"} : $_;
 	}
     } @$val ];
 
