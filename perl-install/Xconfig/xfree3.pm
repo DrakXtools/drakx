@@ -51,6 +51,16 @@ sub new_mouse_sections {
     }
 }
 
+sub set_mice {
+    my ($raw_X, @mice) = @_;
+    @mice = map { 
+	my %h = %$_;
+	put_in_hash(\%h, { Protocol => 'IMPS/2', ZAxisMapping => '4 5' }) if $h{Protocol} eq 'ExplorerPS/2';
+	\%h;
+    } @mice;
+    $raw_X->SUPER::set_mice(@mice);
+}
+
 sub set_wacoms {
     my ($raw_X, @wacoms) = @_;
 
