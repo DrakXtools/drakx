@@ -263,8 +263,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Mon Jul 29 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-14mdk
-- fix mousedrake
+* Wed Jul 31 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-14mdk
+- harddrake:
+	o fix pcmcia network card detection (unknown => ethernet)
+	o fix scsi detection :
+		* fix SCSI controllers detection (unknown => scsi controllers)
+		* fix misdetection of scsi devices as scsi host adapter
+		* fix double scsi devices detection (both unknown and real
+		  category)
+- updated translations
+- fix mousedrake (pixel)
+- drakbug, drakbackup: spell/i18n fixes (pixel, me)
+- xfdrake: fixes (pixel)
+- new draksex (stew)
+- diskdrake: (pixel)
+	o fix LVM on RAID
+	o explain the pb when maximal number of primary partitions is reached
 
 * Mon Jul 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-13mdk
 - harddrake:
