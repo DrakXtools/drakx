@@ -49,7 +49,7 @@ my $in = 'interactive'->vnew('su', if_(!$::isEmbedded, 'printer-mdk'));
 
 my $commandline = $_;
 
-exit 0 unless printer::printerdrake::first_time_dialog($printer, $in, 1);
+exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
 
 # Data structure for GTK2 main window
 my $us = {} ;
@@ -213,8 +213,8 @@ map {
     my $t = $toolb->append_item($_->[0], $_->[1], $_->[2],  
 			       Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb); push(@toolbwg, $t);
 #    $toolb->append_space;
-} ( [ N("Add Printer"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
-    [ N("Set as default"), N("Set selected printer as the default printer"), 'printer_default', \&SetAsDefault ],
+} ( [ N("Add"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
+    [ N("Default"), N("Set selected printer as the default printer"), 'printer_default', \&SetAsDefault ],
     [ N("Edit"), N("Edit selected printer"), 'printer_conf', \&Edit ],
     [ N("Delete"), N("Delete selected printer"), 'printer_del', \&Delete ],
     [ N("Refresh"), N("Refresh the list"), 'refresh', sub { Refresh($stringsearch) } ],
