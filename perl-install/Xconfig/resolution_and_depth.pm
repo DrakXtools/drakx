@@ -13,7 +13,6 @@ our %depth2text = (
      15 => N_("32 thousand colors (15 bits)"),
      16 => N_("65 thousand colors (16 bits)"),
      24 => N_("16 million colors (24 bits)"),
-     32 => N_("4 billion colors (32 bits)"),
 );
 our @depths_available = ikeys(%depth2text);
 
@@ -84,33 +83,21 @@ sub allowed {
 
     my ($prefered_depth, @depths, @resolutions, @resolution_and_depth);
     
-    my $using_xf4 = Xconfig::card::using_xf4($card);
-
-    if ($using_xf4 ? $card->{Driver} eq 'fbdev' : $card->{server} eq 'FBDev') {
+    if ($card->{Driver} eq 'fbdev') {
 	push @resolution_and_depth, grep { $_->{Depth} == 16 } @bios_vga_modes;
-    } elsif ($using_xf4 && $card->{Driver} eq 'fglrx') {
+    } elsif ($card->{Driver} eq 'fglrx') {
 	$prefered_depth = 24;
 	push @depths, 24;
-    } elsif ($using_xf4) {
+    } else {
 	if ($card->{use_DRI_GLX}) {
 	    $prefered_depth = 16;
 	    push @depths, 16, 24;
 	}
 	if ($card->{BoardName} eq 'RIVA128') { @depths = qw(8 15 24) }  #- X doesn't even start in 16bpp for RIVA128
-    } elsif ($card->{use_UTAH_GLX}) {
-	$prefered_depth = 16;
-	push @depths, 16;
-    } else {
-	   if ($card->{server} eq 'Sun24')   { push @depths, 24, 8, 2 }
-	elsif ($card->{server} eq 'Sun')     { push @depths, 8, 2 }
-	elsif ($card->{server} eq 'SunMono') { push @depths, 2 }
-	elsif ($card->{server} eq 'VGA16')   { push @depths, 8; push @resolutions, '640x480' }
-        elsif ($card->{BoardName} =~ /SiS/)  { push @depths, 24, 16, 8 }
-        elsif ($card->{BoardName} eq 'S3 Trio3D') { push @depths, 24, 16, 8 }
     }
     if (!@resolution_and_depth || @depths || @resolutions) {
-	@depths = grep { !($using_xf4 && /32/) } (our @depths_available) if !@depths;
-	@resolutions = @Xconfig::xfreeX::resolutions if !@resolutions;
+	@depths = our @depths_available if !@depths;
+	@resolutions = @Xconfig::xfree::resolutions if !@resolutions;
 
 	push @resolution_and_depth,
 	  map {
@@ -186,7 +173,7 @@ sub configure {
 
     if ($b_auto) {
 	#- use $default_resolution
-	if (Xconfig::card::using_xf4($card) && $card->{Driver} eq 'fglrx') {
+	if ($card->{Driver} eq 'fglrx') {
 	    $default_resolution = first(find { $default_resolution->{Y} eq $_->{Y} && $_->{Depth} == 24 }
 					$default_resolution, @resolutions);
 	    $default_resolution ||= first(find { $_->{Depth} == 24 } $default_resolution, @resolutions);

@@ -48,7 +48,7 @@ sub test {
     fuzzy_pidofs(qr/\bxfs\b/) or die "xfs is not running";
 
     my $f = $::testing ? $tmpconfig : "/etc/X11/XF86Config.test";
-    $raw_X->{Xconfig::card::using_xf4($card) ? 'xfree4' : 'xfree3'}->write("$::prefix/$f");
+    $raw_X->write("$::prefix/$f");
 
     my $f_err = common::secured_file($::prefix . ($ENV{TMPDIR} || "$ENV{HOME}/tmp") . '/.drakx.Xoutput');
     
@@ -57,9 +57,7 @@ sub test {
 	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
 	chroot $::prefix if $::prefix;
-	exec $card->{prog}, 
-	  if_($card->{prog} !~ /Xsun/, "-xf86config", $f),
-	  ":9" or c::_exit(0);
+	exec 'XFree86', '-xf86config', $f, ":9" or c::_exit(0);
     }
 
     do { sleep 1 } until xtest(":9") || waitpid($pid, c::WNOHANG());
@@ -76,26 +74,12 @@ sub test {
 
 	local $_;
       i: while (<$F>) {
-	    if (Xconfig::card::using_xf4($card)) {
-		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
-		    my @msg = !/error/ && $_;
-		    local $_;
-		    while (<$F>) {
-			/reporting a problem/ and last;
-			$warn_error->(join(@msg, $_));
-			return 0;
-		    }
-		}
-	    } else {
-		if (/\b(error|not supported)\b/i) {
-		    my @msg = !/error/ && $_;
-		    local $_;
-		    while (<$F>) {
-			/not fatal/ and last i;
-			/^$/ and last;
-			push @msg, $_;
-		    }
-		    $warn_error->(join(@msg));
+	    if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
+		my @msg = !/error/ && $_;
+		local $_;
+		while (<$F>) {
+		    /reporting a problem/ and last;
+		    $warn_error->(join(@msg, $_));
 		    return 0;
 		}
 	    }

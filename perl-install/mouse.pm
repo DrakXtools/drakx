@@ -367,7 +367,6 @@ sub set_xfree_conf {
 
     if (my @wacoms = @{$mouse->{wacom} || []}) {
 	$xfree_conf->set_wacoms(map { { Device => "/dev/$_", USB => m|input/event| } } @wacoms);
-	$xfree_conf->{xfree3}->add_load_module('xf86Wacom.so') if $xfree_conf->{xfree3};
     }
 }
 

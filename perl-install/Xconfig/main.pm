@@ -48,7 +48,7 @@ sub configure_everything_auto_install {
     $X->{monitor} = Xconfig::monitor::configure_auto_install($raw_X, $old_X) or return;
     $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
     $X->{card} = Xconfig::card::configure_auto_install($raw_X, $do_pkgs, $old_X, $options) or return;
-    Xconfig::screen::configure($raw_X, $X->{card}) or return;
+    Xconfig::screen::configure($raw_X) or return;
     $X->{resolution} = Xconfig::resolution_and_depth::configure_auto_install($raw_X, $X->{card}, $X->{monitor}, $old_X);
 
     &write($raw_X, $X);
@@ -64,7 +64,7 @@ sub configure_everything {
     $ok &&= $X->{monitor} = Xconfig::monitor::configure($in, $raw_X, $auto);
     $options->{VideoRam_probed} = $X->{monitor}{VideoRam_probed};
     $ok &&= $X->{card} = Xconfig::card::configure($in, $raw_X, $do_pkgs, $auto, $options);
-    $ok &&= Xconfig::screen::configure($raw_X, $X->{card});
+    $ok &&= Xconfig::screen::configure($raw_X);
     $ok &&= $X->{resolution} = Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}, $auto);
     $ok &&= Xconfig::test::test($in, $raw_X, $X->{card}, '', 'skip_badcard') if !$auto;
 
@@ -102,7 +102,7 @@ sub configure_chooser_raw {
 	    $update_texts->();
 
 	    if (member($field, 'card', 'monitor')) {
-		Xconfig::screen::configure($raw_X, $X->{card});
+		Xconfig::screen::configure($raw_X);
 		$raw_X->set_resolution($X->{resolution}) if $X->{resolution};
 	    }
 	}
@@ -158,17 +158,12 @@ sub configure_chooser {
 sub configure_everything_or_configure_chooser {
     my ($in, $options, $auto, $o_keyboard, $o_mouse) = @_;
     my $raw_X = Xconfig::xfree->read;
-    my $default = Xconfig::default::configure($o_keyboard, $o_mouse);
-    my $has_conf = @{$raw_X->{xfree3}} || @{$raw_X->{xfree4}};
-    $raw_X->{xfree3} = $default->{xfree3} if !@{$raw_X->{xfree3}};
-    $raw_X->{xfree4} = $default->{xfree4} if !@{$raw_X->{xfree4}};
 
-    return $raw_X if $has_conf && $auto;
-
-    if ($has_conf) {
-	Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options) or return;
-    } else {
+    if (is_empty_array_ref($raw_X)) {
+	$raw_X = Xconfig::default::configure($o_keyboard, $o_mouse);
 	Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options) or return;
+    } else {
+	Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options) or return if !$auto;
     }
     $raw_X;
 }
@@ -191,7 +186,7 @@ sub write {
     export_to_install_X($X);
     $raw_X->write;
     Xconfig::various::check_XF86Config_symlink();
-    symlinkf "../..$X->{card}{prog}", "$::prefix/etc/X11/X" if $X->{card}{server} !~ /Xpmac/;
+    symlinkf "../../usr/X11R6/bin/XFree86", "$::prefix/etc/X11/X";
 }
 
 

@@ -18,9 +18,9 @@ sub to_string {
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
-    my $xf_ver = Xconfig::card::using_xf4($card) ? Xconfig::card::xfree4_version() : Xconfig::card::xfree3_version();
-    my $title = $card->{use_DRI_GLX} || $card->{use_UTAH_GLX} ?
-		 N("XFree %s with 3D hardware acceleration", $xf_ver) : N("XFree %s", $xf_ver);
+    my $xf_ver = Xconfig::card::xfree4_version();
+    my $title = $card->{use_DRI_GLX} ? N("XFree %s with 3D hardware acceleration", $xf_ver) : 
+                                       N("XFree %s", $xf_ver);
     my $keyboard = eval { $raw_X->get_keyboard } || {};
     my $monitor = eval { $raw_X->get_monitor } || {};
     my $device = eval { $raw_X->get_device } || {};
@@ -38,7 +38,6 @@ sub info {
 	$info .= N("Color depth: %s\n", translate($Xconfig::resolution_and_depth::depth2text{$resolution->{Depth}}));
 	$info .= N("Resolution: %s\n", join('x', @$resolution{'X', 'Y'}));
     }
-    $info .= N("XFree86 server: %s\n", $card->{server}) if $card->{server};
     $info .= N("XFree86 driver: %s\n", $device->{Driver}) if $device->{Driver};
     "$title\n\n$info";
 }
@@ -81,7 +80,7 @@ Would you like XFree to start when you reboot?"),
 sub tvout {
     my ($in, $card, $options) = @_;
 
-    $card->{FB_TVOUT} && Xconfig::card::using_xf4($card) && $options->{allowFB} or return;
+    $card->{FB_TVOUT} && $options->{allowFB} or return;
 
     $in->ask_yesorno('', N("Your graphic card seems to have a TV-OUT connector.
 It can be configured to work using frame-buffer.
@@ -104,26 +103,25 @@ sub configure_FB_TVOUT {
     my ($use_FB_TVOUT) = @_;
 
     my $raw_X = Xconfig::default::configure();
-    my $xfree4 = $raw_X->{xfree4};
-    return if is_empty_array_ref($xfree4);
+    return if is_empty_array_ref($raw_X);
 
-    $xfree4->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });
-    first($xfree4->get_monitor_sections)->{ModeLine} = [ 
+    $raw_X->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });
+    first($raw_X->get_Sections('Monitor'))->{ModeLine} = [ 
 	{ val => '"640x480"   29.50       640 675 678 944  480 530 535 625', pre_comment => "# PAL\n" },
 	{ val => '"800x600"   36.00       800 818 820 960  600 653 655 750' },
 	{ val => '"640x480"  28.195793   640 656 658 784  480 520 525 600', pre_comment => "# NTSC\n" },
 	{ val => '"800x600"  38.769241   800 812 814 880  600 646 649 735' },
     ];
-    $xfree4->set_devices({ Driver => 'fbdev' });
+    $raw_X->set_devices({ Driver => 'fbdev' });
 
-    my ($device) = $xfree4->get_devices;
-    my ($monitor) = $xfree4->get_monitors;
-    $xfree4->set_screens({ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} });
+    my ($device) = $raw_X->get_devices;
+    my ($monitor) = $raw_X->get_monitors;
+    $raw_X->set_screens({ Device => $device->{Identifier}, Monitor => $monitor->{Identifier} });
 
-    my $Screen = $xfree4->get_default_screen;
+    my $Screen = $raw_X->get_default_screen;
     $Screen->{Display} = [ map { { l => { Depth => { val => $_ } } } } 8, 16 ];
 
-    $xfree4->write("$::prefix/etc/X11/XF86Config-4.tvout");
+    $raw_X->write("$::prefix/etc/X11/XF86Config.tvout");
 
     check_XF86Config_symlink();
 
