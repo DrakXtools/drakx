@@ -3,11 +3,15 @@
 $width = 556;
 $height = 303;
 
-$y_start = 80;
+$y_start = 10;
 $border = 10;  #- for leftish text
 
-@text = ([ N("Congratulations for choosing <b>Mandrake Linux</b>!"), center => 1 ],
+# Use <b>text</b> for bold
+
+# @text = ([ N("text to display"), center => 1 ],
+
+@text = ([ N("<b>Congratulations for choosing Mandrake Linux!</b>"), center => 1 ],
          ' ',
-         N("Mandrake Linux is committed to the Open Source Model and fully respects the <b>General Public License</b>. This new release is the result of collaboration between MandrakeSoft's team of developers and the worldwide community of Mandrake Linux <b>contributors</b>."),
+         N("Mandrake Linux is committed to the Open Source Model and fully respects the General Public License. This new release is the result of collaboration between MandrakeSoft's team of developers and the worldwide community of Mandrake Linux contributors."),
          ' ',
-         [ N("We would like to thank everyone who participated in the development of this latest release."), center => 1 ]);
+         N("We would like to thank everyone who participated in the development of this latest release."));

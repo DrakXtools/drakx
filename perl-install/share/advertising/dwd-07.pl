@@ -3,15 +3,20 @@
 $width = 556;
 $height = 303;
 
-$y_start = 80;
+$y_start = 10;
+$border = 10;  #- for leftish text
 
-$title = N("Become a MandrakeClub member!");
+# Use <b>text</b> for bold
 
-@text = (N("Take advantage of valuable benefits, products and services by joining MandrakeClub, such as:"),
-         N("   * Full access to commercial applications"),
-		 N("   * Special download mirror list exclusively for MandrakeClub Members"),
-		 N("   * Voting for software to put in Mandrake Linux"),
-		 N("   * Special discounts for products and services at MandrakeStore"),
-		 N("   * Plus much more"),
-		 '',
-		 N("For more information, please visit www.mandrakeclub.com")); 
+# @text = ([ N("text to display"), center => 1 ],
+
+@text = ([ N("<b>Become a MandrakeClub member!</b>"), center => 1 ],
+        ' ',
+        N("Take advantage of valuable benefits, products and services by joining Mandrake Club, such as:"),
+		N("	- Full access to commercial applications"),
+		N("	- Special download mirror list exclusively for MandrakeClub Members"),
+		N("	- Voting for software to put in Mandrake Linux"),
+		N("	- Special discounts for products and services at MandrakeStore"),
+		N("	- Plus much more"),
+		' ',
+		N("For more information, please visit <b>www.mandrakeclub.com</b>")); 
