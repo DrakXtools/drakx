@@ -753,7 +753,7 @@ sub autologin {
     my ($prefix, $o, $in) = @_;
 
     my $cmd = $prefix ? "chroot $prefix" : "";
-    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
+    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l 2>/dev/null`));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (@wm && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
