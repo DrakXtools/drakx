@@ -586,7 +586,7 @@ sub ask_user_one {
                   ok_disabled => sub { $security >= 4 && !@$users || $options{needauser} && !$u->{name} },
 	  } }, [ 
 	  { label => N("Real name"), val => \$u->{realname} },
-          { label => N("User name"), val => \$u->{name} },
+          { label => N("Login name"), val => \$u->{name} },
           { label => N("Password"),val => \$u->{password}, hidden => 1 },
           { label => N("Password (again)"), val => \$u->{password2}, hidden => 1 },
           { label => N("Shell"), val => \$u->{shell}, list => [ shells() ], not_edit => !$::expert, advanced => 1 },
