@@ -79,6 +79,7 @@ sub move_callback {
     my $iter2 = $model->get_iter($path);
     return if !$iter2 || $model->get($iter2, 0);
     $model->swap($iter, $iter2);
+    $modified = 1;
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
 }
