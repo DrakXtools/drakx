@@ -281,7 +281,7 @@ sub services {
     if ($::isInstall) {
         @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } @raw_l;
     } else {
-        my $runlevel = my $runlevel = (split " ", `/sbin/runlevel`)[1];
+        my $runlevel = (split " ", `/sbin/runlevel`)[1];
         @l = sort { $a->[0] cmp $b->[0] } map { [ /([^\s:]+)/, /^\t/ ? /\bon\b/ : /\b$runlevel:on\b/ ] } grep { !/:$/ } @raw_l;
     }
     [ map { $_->[0] } @l ], [ map { $_->[0] } grep { $_->[1] } @l ];
