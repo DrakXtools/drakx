@@ -56,7 +56,7 @@ my $shorewall = network::shorewall::read();
 
 my $in = 'interactive'->vnew('su', 'default');
 
-$::isEmbedded || $in->isa('interactive::gtk') and $::isWizard = 1;
+!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
 
 pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
