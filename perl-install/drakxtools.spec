@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 1mdk
+Release: 2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Aug 26 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-2mdk
+- diskdrake: fix WebDAV configuration embedding (#4703) (pixel)
+- printerdrake: misc fixes (till)
+- service_harddrake: prevent depmod to be runned everytime
+
 * Mon Aug 25 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-1mdk
 - drakfloppy: make it CJK aware
 - drakTermServ: add /etc/modules for local hardware config (stew)
