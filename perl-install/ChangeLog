@@ -1,3 +1,66 @@
+2001/01/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): fixed horrible
+	bug causing reiserfs partitions
+	not to be displayed/asked for formatting. The default value being used.
+
+	* any.pm (get_autologin): adapt to new format of sysconfig/desktop
+
+2001/01/28  siegel
+
+	* share/po/de.po: new german version
+
+2001/01/26  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm: updated embedded mode
+
+	* standalone/drakboot: added embedded mode
+
+2001/01/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/include/stdio.h: adjust include files to compile
+	bzlib
+
+	* mdk-stage1/stage1.c: restore passing of pcmcia info to stage2
+
+	* mdk-stage1/bzlib/compress.c, mdk-stage1/bzlib/bzlib.c,
+	mdk-stage1/bzlib/randtable.c, mdk-stage1/bzlib/huffman.c,
+	mdk-stage1/modules.c, mdk-stage1/bzlib/crctable.c,
+	mdk-stage1/bzlib/decompress.c, mdk-stage1/bzlib/Makefile,
+	mdk-stage1/bzlib/bzlib_private.h, mdk-stage1/tools.c,
+	mdk-stage1/Makefile, mdk-stage1/bzlib/blocksort.c: 
+	  - use bzlib instead of zlib to reduce overall size
+	  - take home my own bzlib code to (1) reduce code size with good
+	compile options (2) make it compile and link against dietlibc
+
+	* mdk-stage1/mar/mar-extract-only.c, mdk-stage1/mar/mar-extract-only.h,
+	mdk-stage1/mar/mar-frontend.c, mdk-stage1/mar/mar.h,
+	mdk-stage1/mar/Makefile: mar now uses bzlib, no more zlib
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: comply to new "mar -l" format
+
+2001/01/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): prepare for advertising...
+
+	* interactive_newt.pm (ask_from_entries_refW): major rework for new
+	format, still need work
+	(ask_from_entries_refW): use NEWT_FLAG_PASSWORD (aka 1<<11) instead of
+	NEWT_FLAG_HIDDEN
+	(myTextbox): wrap the text if needed
+	(myTextbox): use a vertical scrollbar if needed
+
+	* Newt/Newt.xs (newtFormAddGrid): new name for
+	newtGridAddComponentsToForm, swap
+	parameters for much better understanding
+	(newtListboxGetCurrent): returns a SV (together with
+	newtListboxAddEntry)
+	(newtListboxAddEntry): data is now a SV
+
+2001/01/26  siegel
+
+	* share/po/de.po: .
+
 2001/01/26  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_gtk.pm (installPackages): prepare for advertising...
