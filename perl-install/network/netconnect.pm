@@ -826,12 +826,12 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                     pre => $lan_detect,
                     name => N("Select the network interface to configure:"),
                     data =>  sub {
-                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N("Manual choice") ], 
-                            allow_empty_list => 1, format => sub { $eth_intf{$_[0]} || $_[0] } } ];
+                        [ { label => N("Net Device"), type => "list", val => \$ntf_name, list => [ (sort keys %eth_intf), N_("Manual choice") ], 
+                            allow_empty_list => 1, format => sub { translate($eth_intf{$_[0]} || $_[0]) } } ];
                     },
                     post => sub {
                         $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
-                        if ($ntf_name eq N("Manual choice")) {
+                        if ($ntf_name eq "Manual choice") {
                             modules::interactive::load_category__prompt($in, 'network/main|gigabit|pcmcia|usb|wireless');
                             return 'lan';
                         }
