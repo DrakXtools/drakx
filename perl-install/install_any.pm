@@ -323,6 +323,7 @@ sub setPackages {
 	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 	}
 	$o->{compssUsersChoice}{SYSTEM} = 1;
+	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::IDEburners();
 
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
