@@ -85,6 +85,7 @@ upload_only:
 	upload misc auto ;\
 	upload images MD5SUM ;\
 	upload images *.img* ;\
+	upload images *.iso* ;\
 	upload images/alternatives '' ;\
 	upload isolinux '' ;\
 	echo
