@@ -82,13 +82,13 @@ sub start_daemons ()
 
     my $netscripts = '/etc/sysconfig/network-scripts';
     sys("$netscripts/net_cnx_down >/dev/null");
-    sys("/etc/rc.d/init.d/network restart");
+    sys("/etc/rc.d/init.d/network restart >/dev/null");
     sys("$netscripts/net_cnx_up >/dev/null");
 
     sys("/etc/init.d/shorewall restart >/dev/null");
 
-    sys("/etc/rc.d/init.d/$_ start"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
-    sys("/etc/rc.d/init.d/cups start") if $cups_used;
+    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
+    sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
 }
 
 sub stop_daemons ()
