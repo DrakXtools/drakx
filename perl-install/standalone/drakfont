@@ -112,7 +112,6 @@ my $pbar1;
 my $pbar2;
 my $pbar3;
 my $window1;
-my $font_box;
 my $model;
 my $list;
 my $list_all_font_path;
@@ -222,8 +221,7 @@ sub search_windows_font() {
     if (!@font_list) {
         print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
         $interactive
-          and display_error(
-            N("could not find any font in your mounted partitions"));
+          and err_dialog(N("Error"), N("could not find any font in your mounted partitions"));
         return 0;
     }
     1;
@@ -552,7 +550,6 @@ sub help() {
 }
 
 sub appli_choice() {
-    my %checks;
     dialog(N("Options"),
 	   [
 	    0, N("Choose the applications that will support the fonts:"),
@@ -619,7 +616,7 @@ sub list_remove() { #- TODO : multi-selection
     $treeStore->remove($iter);
 }
 
-sub exitdialog { Gtk2->main_quit };
+sub exitdialog() { Gtk2->main_quit };
 
 sub dialog {
     my ($title, $widgets, $buttons, $o_main_loop) = @_;
@@ -698,7 +695,6 @@ sub show_list_to_remove() {
 }
 
 sub uninstall() { #- TODO : add item to right list with gtksignal_connect
-    my $uninst_box;
     @install              = ();
     @installed_fonts_path = ();
     list_fontpath();
