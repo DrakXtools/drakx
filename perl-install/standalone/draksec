@@ -42,7 +42,7 @@ my ($w, %fields);
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = ugtk2->new('wait', (modal => 1, if_(!$::isEmbedded, transient => $w->{rwindow})));
-    $mainw->{window}->add(new Gtk2::Label($_[0]));
+    $mainw->{window}->add(new Gtk2::WrappedLabel($_[0]));
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
     gtkflush();
@@ -52,7 +52,7 @@ sub wait_msg {
 sub remove_wait_msg { $_[0]->destroy }
 
 sub basic_seclevel_explanations() {
-    my $text = gtkset_markup(Gtk2::Label->new,
+    my $text = gtkset_markup(Gtk2::WrappedLabel->new,
 #-PO Do not alter the <span ..> and </span> tags
 #-PO Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words
                              formatAlaTeX(N("Here, you can setup the security level and administrator of your machine.
@@ -89,7 +89,6 @@ your machine is only a client on the Internet, you should choose a lower level.
 <span foreground=\"royalblue3\">Paranoid</span>: This is similar to the previous
 level, but the system is entirely closed and security features are at their
 maximum")));
-    $text->set_line_wrap(1);
     create_scrolled_window($text, [ 'never', 'automatic' ]);
 }
 
@@ -98,13 +97,6 @@ sub new_nonedit_combo {
     my $w = new Gtk2::OptionMenu();
     $w->set_popdown_strings(to_i18n(@$string_list)) unless is_empty_array_ref $string_list;
     $w->entry->set_text(to_i18n($o_default_value)) if $o_default_value;
-    $w;
-}
-
-sub new_wrapped_label {
-    my ($label) = @_;
-    my $w = gtkset_justify(Gtk2::Label->new($label), 'left');
-    $w->set_line_wrap(1);
     $w;
 }
 
@@ -207,12 +199,12 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
                                                                                            set_help_tip($entry, $default, $opt);
-                                                                                           [ new_wrapped_label($i), resize($values{$i}) ];
+                                                                                           [ Gtk2::WrappedLabel->new($i), resize($values{$i}) ];
                                                                                        } sort map { $fields{$_} || $_ } $msec->list_functions($domain))),
                                                           [ 'never', 'automatic' ],
                                                          )
                                   ),
-                           new_wrapped_label($label));
+                           Gtk2::WrappedLabel->new($label));
     $options_values{$domain} = \%values;
 }
 
@@ -228,7 +220,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                        $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($opt));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($opt), $opt);
-                                                                                       [ gtkshow(new_wrapped_label($i)), resize($security_checks_value{$i}) ];
+                                                                                       [ gtkshow(Gtk2::WrappedLabel->new($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_ } $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 

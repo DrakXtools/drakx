@@ -323,7 +323,7 @@ sub create_box_with_title {
 	undef $::no_separator;
      my $new_label = sub {
          my ($txt) = @_;
-         my $w = ref($txt) ? $txt : gtkset_line_wrap(Gtk2::Label->new($txt), 1);
+         my $w = ref($txt) ? $txt : Gtk2::WrappedLabel->new($txt);
          gtkset_name($w, "Title");
      };
 	if ($o->{icon} && (!$::isWizard || $::isInstall)) {
@@ -377,7 +377,7 @@ sub create_dialog {
     my $ret = 0;
     my $dialog = _create_dialog($title, $o_options);
     $dialog->set_border_width(10);
-    my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::Label->new, $label) : Gtk2::Label->new($label);
+    my $text = $o_options->{use_markup} ? gtkset_markup(Gtk2::WrappedLabel->new, $label) : Gtk2::WrappedLabel->new($label);
     gtkpack($dialog->vbox,
             gtkpack_(Gtk2::HBox->new,
                      if_($o_options->{stock}, 0, Gtk2::Image->new_from_stock($o_options->{stock}, 'dialog')),
