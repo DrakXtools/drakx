@@ -148,7 +148,7 @@ rescan();
 gtkflush() while $isconnected == -2 || $isconnected == -1;
 
 Glib::Source->remove($time_tag2);
-$time_tag2 = Glib::Timeout->add(20000, \&update);
+$time_tag2 = Glib::Timeout->add(5000, \&update);
 
 connection() if $connect && !$isconnected || $disconnect && $isconnected;
 
