@@ -832,76 +832,44 @@ sub setupBootloaderBefore {
 	bootloader::set_append($o->{bootloader}, resume => devices::make($biggest_swap->{device})) if $MemTotal < $biggest_swap->{size} / 2;
     }
 
-    if (arch() =~ /alpha/) {
-	if (my $dev = fsedit::get_root($o->{fstab})) {
-	    $o->{bootloader}{boot} ||= "/dev/$dev->{rootDevice}";
-	    $o->{bootloader}{root} ||= "/dev/$dev->{device}";
-	    $o->{bootloader}{part_nb} ||= first($dev->{device} =~ /(\d+)/);
-	}
-    } else {
-	#- check for valid fb mode to enable a default boot with frame buffer.
-	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('3D Rage LT') &&
-				    !detect_devices::matching_desc('Rage Mobility [PL]') &&
-				    !detect_devices::matching_desc('i740') &&
-				    !detect_devices::matching_desc('Matrox') &&
-				    !detect_devices::matching_desc('Tseng.*ET6\d00') &&
-				    !detect_devices::matching_desc('SiS.*SG86C2.5') &&
-				    !detect_devices::matching_desc('SiS.*559[78]') &&
-				    !detect_devices::matching_desc('SiS.*300') &&
-				    !detect_devices::matching_desc('SiS.*540') &&
-				    !detect_devices::matching_desc('SiS.*6C?326') &&
-				    !detect_devices::matching_desc('SiS.*6C?236') &&
-				    !detect_devices::matching_desc('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
-				    !detect_devices::matching_desc('828[14][05].* CGC') #- i810 & i845 now have FB support during install but we disable it afterwards
-				   );
-	my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') || #- SiS 630 need frame buffer.
-					  detect_devices::matching_desc('GeForce.*Integrated') #- needed for fbdev driver (hack).
-					 );
+    #- check for valid fb mode to enable a default boot with frame buffer.
+    my $vga = $o->{allowFB} && (!detect_devices::matching_desc('3D Rage LT') &&
+                                !detect_devices::matching_desc('Rage Mobility [PL]') &&
+                                !detect_devices::matching_desc('i740') &&
+                                !detect_devices::matching_desc('Matrox') &&
+                                !detect_devices::matching_desc('Tseng.*ET6\d00') &&
+                                !detect_devices::matching_desc('SiS.*SG86C2.5') &&
+                                !detect_devices::matching_desc('SiS.*559[78]') &&
+                                !detect_devices::matching_desc('SiS.*300') &&
+                                !detect_devices::matching_desc('SiS.*540') &&
+                                !detect_devices::matching_desc('SiS.*6C?326') &&
+                                !detect_devices::matching_desc('SiS.*6C?236') &&
+                                !detect_devices::matching_desc('Voodoo [35]|Voodoo Banshee') && #- 3d acceleration seems to bug in fb mode
+                                !detect_devices::matching_desc('828[14][05].* CGC') #- i810 & i845 now have FB support during install but we disable it afterwards
+                               );
+    my $force_vga = $o->{allowFB} && (detect_devices::matching_desc('SiS.*630') || #- SiS 630 need frame buffer.
+                                      detect_devices::matching_desc('GeForce.*Integrated') #- needed for fbdev driver (hack).
+                                     );
 
-	#- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
-	my $need_fb = do {
-	    my $p = pkgs::packageByName($o->{packages}, 'bootsplash');
-	    $p && $p->flag_installed;
-	};
-        bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
-			    vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
-			    quiet => $o->{meta_class} ne 'server');
-	bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
+    #- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
+    my $need_fb = do {
+        my $p = pkgs::packageByName($o->{packages}, 'bootsplash');
+        $p && $p->flag_installed;
+    };
+    bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
+                        vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
+                        quiet => $o->{meta_class} ne 'server');
+    bootloader::suggest_floppy($o->{bootloader}) if $o->{security} <= 3 && arch() !~ /ppc/;
 
-	$o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
-    }
+    $o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
 }
 
 sub setupBootloader {
     my ($o) = @_;
     return if $::g_auto_install;
 
-    if (arch() =~ /alpha/) {
-	return if $::testing;
-	my $b = $o->{bootloader};
-	$b->{boot} or $o->ask_warn('', "Can't install aboot, not a bsd disklabel"), return;
-		
-	run_program::rooted($o->{prefix}, "swriteboot", $b->{boot}, "/boot/bootlx") or do {
-	    cdie "swriteboot failed";
-	    run_program::rooted($o->{prefix}, "swriteboot", "-f1", $b->{boot}, "/boot/bootlx");
-	};
-	run_program::rooted($o->{prefix}, "abootconf", $b->{boot}, $b->{part_nb});
- 
-        modules::load('loop');
-	output "$o->{prefix}/etc/aboot.conf", 
-	map_index { -e "$o->{prefix}/boot/initrd-$_->[1]" ? 
-			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} initrd=/boot/initrd-$_->[1] $b->{perImageAppend}\n" :
-			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} $b->{perImageAppend}\n" }
-	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]);
-	  $_ } grep { $_->[0] && $_->[1] }
-	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } glob_("$o->{prefix}/boot/vmlinux-*");
-#	output "$o->{prefix}/etc/aboot.conf", 
-#	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
-#	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
-    } else {
-	require bootloader;
-	bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
-    }
+    require bootloader;
+    bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
 }
 
 #------------------------------------------------------------------------------
