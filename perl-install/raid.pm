@@ -17,7 +17,7 @@ sub max_nb() { 31 }
 
 sub check_prog {
     my ($in) = @_;
-    $in->do_pkgs->ensure_binary_is_installed('mdadm', 'mdadm') or return;
+    $::isInstall || $in->do_pkgs->ensure_binary_is_installed('mdadm', 'mdadm');
 }
 
 sub new {
