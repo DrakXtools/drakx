@@ -198,7 +198,6 @@ sub setup_tooltips() {
 		'use_expect' => N("Expect is an extension to the Tcl scripting language that allows interactive sessions without user intervention."),
 		'remember_pass' => N("Store the password for this system in drakbackup configuration."),
 		'erase_cdrw' => N("For a multisession CD, only the first session will erase the cdrw. Otherwise the cdrw is erased before each backup."),	
-		'cdrecord_device' => N("This uses the same syntax as the command line program 'cdrecord'. 'cdrecord -scanbus' would also show you the device number."),
 		'use_incr_decr' => N("This option will save files that have changed.  Exact behavior depends on whether incremental or differential mode is used."), 
 		'use_incremental' => N("Incremental backups only save files that have changed or are new since the last backup."),
 		'use_differential' => N("Differential backups only save files that have changed or are new since the original 'base' backup."),
@@ -380,12 +379,13 @@ sub check_storage_quota {
 }
 
 sub get_cd_info() {
-	my @cd_info = cat_("/proc/sys/dev/cdrom/info");
 	my @line_data;
 	my @drive_names;
 	my $i;
-	my $info;
-
+	require_rpm("cdrecord") if $nonroot_user;
+    # just trying load ide-cd, since it doesn't seem to be loaded by default
+	$nonroot_user ? `cdrecord -scanbus -dev=ATA > /dev/null 2>&1` : `modprobe ide-cd` unless -f "/proc/sys/dev/cdrom";
+	my @cd_info = cat_("/proc/sys/dev/cdrom/info");
 	my %data = (
                   "drive speed" => 'speed',
                   "Can change speed" => 'chg_speed',
@@ -396,67 +396,41 @@ sub get_cd_info() {
                   "Can write DVD-RAM" => 'dvdram'
                   );
 
-	
-	#- kind of ugly - I'm sure Pixel could improve this, but it works
-	#- parse /proc/sys/dev/cdrom/info and get all the cd device capabilities
- 	my $cd_drives;
+	my $cd_drives;
 	foreach (@cd_info) {
-	  @line_data = split(/[:\t]+/, $_);
-          if ($line_data[0] =~ /drive name/) {
-              $cd_drives = @line_data-1;
-              chop($line_data[$cd_drives]);
-              @drive_names = @line_data;
-              print "drives: $cd_drives\n" unless $interactive;
-          }
-	  chop($line_data[$cd_drives]) if $cd_drives;
-          foreach my $key (keys %data) {
-              if ($line_data[0] eq $key) {
-                  for ($i = 1; $i <= $cd_drives; $i++) {
-                      $cd_devices{$drive_names[$i]}{$data{$key}} = $line_data[$i];
-                  }
-              }
-          }
-
+	@line_data = split(/[:\t]+/, $_);
+	if ($line_data[0] =~ /drive name/) {
+		$cd_drives = @line_data-1;
+		chop($line_data[$cd_drives]);
+		@drive_names = @line_data;
+		print "drives: $cd_drives\n" unless $interactive;
+	}
+	chop($line_data[$cd_drives]) if $cd_drives;
+ 		foreach my $key (keys %data) {
+			if ($line_data[0] eq $key) {
+				for ($i = 1; $i <= $cd_drives; $i++) {
+					$cd_devices{$drive_names[$i]}{$data{$key}} = $line_data[$i];
+				}
+			}
+		}
 	}
 	
-	#- now we know all the capabilities, we need the cdrecord device id
-	#- this is scsi-channel, id, lun from /dev/scsi/host*
-	#- oops - can't count on devfs - use dmesg
-
-	$info = "$ENV{HOME}/tmp/dmesg";
-	system("dmesg | grep sr[0-9] > $info");
-	local *INFO;
-	open INFO, $info or warn("Can't open $info\n");
- 	local $_;
-	while (<INFO>) {
-		if (/sr[0-9] at/) {
-			@line_data = split(/[ \t,]+/, $_);
-			chop($line_data[11]);
-			$line_data[5] =~ s/scsi//;
-			$cd_devices{$line_data[3]}{rec_dev} = $line_data[5] . "," . $line_data[9] . "," . $line_data[11];
-		}
-    }
-    close INFO;
-    unlink($info);
-
-	#- should we also try to get the human readable name for display purposes?
-	
 	#- now just report the data if we called --cd-info from the command line
-	if (!$interactive) {
-		foreach my $key (keys %cd_devices) {
-			print "\n{$key}->{rec_dev} = $cd_devices{$key}->{rec_dev}\n"; 
-			print "{$key}->{speed} = $cd_devices{$key}->{speed}\n";
-			print "{$key}->{chg_speed} = $cd_devices{$key}->{chg_speed}\n";
-			print "{$key}->{multisession} = $cd_devices{$key}->{multisession}\n";
-			print "{$key}->{cdr} = $cd_devices{$key}->{cdr}\n";
-			print "{$key}->{cdrw} = $cd_devices{$key}->{cdrw}\n";
-			print "{$key}->{dvdr} = $cd_devices{$key}->{dvdr}\n";
-			print "{$key}->{dvdram} = $cd_devices{$key}->{dvdram}\n"; 
-		}
-	} else {
-		#- in non-interactive mode we just let all the devices through
-		#- as a general purpose probe - in reality we want only burners
-		foreach my $key (keys %cd_devices) {
+	foreach my $key (keys %cd_devices) {
+		my $rec_dev = $key;
+		$rec_dev =~ s/sr/sg/;
+		my $can_record = $cd_devices{$key}{cdr} || $cd_devices{$key}{cdrw} || $cd_devices{$key}{dvdr};
+		$cd_devices{$key}{rec_dev} = "/dev/" . $rec_dev if $can_record;
+		if (!$interactive) {
+			print "\n{$key}->{rec_dev} = $cd_devices{$key}{rec_dev}\n"; 
+			print "{$key}->{speed} = $cd_devices{$key}{speed}\n";
+			print "{$key}->{chg_speed} = $cd_devices{$key}{chg_speed}\n";
+			print "{$key}->{multisession} = $cd_devices{$key}{multisession}\n";
+			print "{$key}->{cdr} = $cd_devices{$key}{cdr}\n";
+			print "{$key}->{cdrw} = $cd_devices{$key}{cdrw}\n";
+			print "{$key}->{dvdr} = $cd_devices{$key}{dvdr}\n";
+			print "{$key}->{dvdram} = $cd_devices{$key}{dvdram}\n"; 
+		} else {
 			delete $cd_devices{$key} if $cd_devices{$key}{rec_dev} eq ''
    		}
 	}
@@ -1034,28 +1008,10 @@ sub spawn_progress {
 	$interactive and Glib::Source->remove($timer);
 }
 
-sub get_cd_device() {
-	my $check_device = "/dev/cdrom";
-	get_cd_info();
-	foreach  (keys %cd_devices) {
-		if ($cd_devices{$_}{rec_dev} eq $cd_device) {
-			s/sr/scd/;
-			$check_device = "/dev/" . $_;				
-		}
-	}
-	$check_device;
-}
-
 sub get_cd_volname() {
-	#- we want the volname for the catalog
-	my $check_device = get_cd_device();
-     local *TMP;
-	open TMP, "volname $check_device 2>&1 |";
-     local $_;
-	while (<TMP>) {
-		$vol_name = $_;		
-	}
-	close TMP;
+	my $vol_device = $cd_device;
+	$vol_device =~ s/sg/scd/;
+	$vol_name = `volname $vol_device` if $cd_device;
 	$vol_name =~ s/[ \t]+\n$//;
 	$vol_name; 			
 }
@@ -2050,12 +2006,17 @@ sub advanced_where_net_types {
 sub advanced_where_cd {
     my ($previous_function) = @_;
     my $box_where_cd;
-	
+	my %dev_codes;
+
 	get_cd_info();
+
+	foreach my $key (keys %cd_devices) {
+		$dev_codes{$cd_devices{$key}{rec_dev}} = $key; 
+	}
 	
 	my $combo_where_cd_device = new Gtk2::OptionMenu();
 	if (keys %cd_devices) {
-    	$combo_where_cd_device->set_popdown_strings(sort keys %cd_devices);
+    	$combo_where_cd_device->set_popdown_strings('', sort keys %dev_codes);
 	} else {
 		$combo_where_cd_device->set_popdown_strings(@no_devices);
 	}  
@@ -2063,15 +2024,6 @@ sub advanced_where_cd {
     my $combo_where_cd_time = new Gtk2::OptionMenu();
     $combo_where_cd_time->set_popdown_strings("650 MB", "700 MB", "750 MB", "800 MB", "4.7 GB");    
  
-	my $combo_where_cdrecord_device = new Gtk2::Combo();
-	my @dev_codes;
-	
-	foreach my $key (keys %cd_devices) {
-		push(@dev_codes, $cd_devices{$key}{rec_dev}); 
-	}
-	
-    $combo_where_cdrecord_device->set_popdown_strings(@dev_codes) if keys %cd_devices;  	 
-
     gtkpack($advanced_box,
 		$box_where_cd = gtkpack_(new Gtk2::VBox(0, 6),
 			0, my $check_where_cd = new Gtk2::CheckButton(N("Use CD-R/DVD-R to backup")),
@@ -2096,9 +2048,9 @@ sub advanced_where_cd {
 			),
 			0, new Gtk2::VBox(0, 5),
 	 		0, gtkpack_(new Gtk2::HBox(0,10),
+	    		1, new Gtk2::VBox(0, 5),
 	 			0, gtkset_sensitive(new Gtk2::Label(N("Erase your RW media (1st Session)")), $cdrw && $where_cd),
 				0, gtkset_sensitive(my $button_erase_now = Gtk2::Button->new(N(" Erase Now ")), $cdrw),			
-	    		1, new Gtk2::VBox(0, 5),
 	    		0, gtkset_sensitive(my $check_cdrw_erase = new Gtk2::CheckButton(), $cdrw && $where_cd),
 			),
 			0, new Gtk2::VBox(0, 5),
@@ -2110,12 +2062,6 @@ sub advanced_where_cd {
 				0, gtkset_sensitive(my $check_dvdr = new Gtk2::CheckButton(), $where_cd),
 				0, gtkset_sensitive(new Gtk2::Label(N("DVDRAM device")), $where_cd),
 				0, gtkset_sensitive(my $check_dvdram = new Gtk2::CheckButton(), $where_cd),
-			),
-			0, new Gtk2::VBox(0, 5),
-			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Enter your CD Writer device name\n ex: 0,1,0")),  $where_cd),
-				1, new Gtk2::VBox(0, 5),
-				0, gtkset_sensitive(gtkset_size_request($combo_where_cdrecord_device, 200, 20), $where_cd),
 			),
 		),
 	);
@@ -2148,24 +2094,21 @@ sub advanced_where_cd {
 			$in->ask_warn(N("Error"), N("No CD device defined!"));
 		}
 	}); 	
-    $combo_where_cdrecord_device->entry->set_text($cd_device);
-    $combo_where_cdrecord_device->entry->signal_connect('changed', sub { $cd_device = $combo_where_cdrecord_device->entry->get_text });
     
 	$combo_where_cd_time->entry->set_text($cd_time);
     $combo_where_cd_time->entry->signal_connect('changed', sub { $cd_time = $combo_where_cd_time->entry->get_text });
 
-	$combo_where_cd_device->entry->signal_connect('activate', sub {
-		$std_device = $combo_where_cd_device->entry->get_text;
-		$combo_where_cdrecord_device->entry->set_text($cd_devices{$std_device}{rec_dev});
+	$combo_where_cd_device->entry->set_text($cd_device);
+	$combo_where_cd_device->entry->signal_connect('changed', sub {
+		$cd_device = $combo_where_cd_device->entry->get_text;
+		$std_device = $dev_codes{$cd_device};
 		$check_dvdr->set_active($cd_devices{$std_device}{dvdr});
 		$check_dvdrw->set_active($cd_devices{$std_device}{dvdr});
 		$check_dvdram->set_active($cd_devices{$std_device}{dvdram});
-		#- do this one last or the widget destroy mucks up the others
 		$check_cdrw->set_active($cd_devices{$std_device}{cdrw});			
 	});
 	
 	set_help_tip($button_erase_now, 'erase_cdrw');
-	set_help_tip($combo_where_cdrecord_device, 'cdrecord_device');
 	
     if ($previous_function) { 
 		fonction_env(\$box_where_cd, \&advanced_where_cd, \&$previous_function, \&wizard_step3); 
