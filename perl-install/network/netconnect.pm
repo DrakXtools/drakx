@@ -1058,8 +1058,8 @@ I cannot set up this connection type.")), return;
                     format => sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
                     
                     post => sub {
-                        network::ethernet::write_ether_conf();
-                        $modules_conf->write if $::isStandalone;
+                        network::ethernet::write_ether_conf();   #- FIXME: perl_checker is right, something's missing here
+                        $modules_conf->write if $::isStandalone; #- FIXME: already done in network::ethernet::write_ether_conf()
                         my $_device = network::ethernet::conf_network_card_backend($netc, $intf, $type, $interface->[0], $ipadr, $netadr);
                         return "lan";
                     },
