@@ -2095,11 +2095,13 @@ sub install_spooler {
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
 					       /sbin/ifconfig
-					       /usr/bin/xpp),
+					       /usr/bin/xpp
+					       /usr/bin/curl),
 					    ($::expert ? 
 					     "/usr/share/cups/model/postscript.ppd.gz" : ())
 					    )))) {
 		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
+					   'curl',
 					   ($::expert ? 'cups-drivers' : ())));
 		}
 		# Start daemon
@@ -2223,6 +2225,8 @@ sub setup_default_spooler {
 	return;
     }
     if ($printer->{SPOOLER} ne $oldspooler) {
+	# Remove the local printers from Star Office/Open Office
+	printer::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
 	    my $w = $in->wait_message('', _("Reading printer data ..."));
@@ -2422,7 +2426,9 @@ sub main {
 			{title => _("Printerdrake"),
 			 messages =>
 			     ($noprinters ? "" :
-			      _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it.")),
+			      (($printer->{SPOOLER} eq "cups") ?
+			       _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star/Open Office.") :
+			       _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."))),
 			 cancel => (""),
 			 ok => (""),
 			},
@@ -2733,6 +2739,9 @@ What do you want to modify on this printer?",
 				     _("Printer options") : ())) : ()),
 				   (($queue ne $printer->{DEFAULT}) ?
 				    _("Set this printer as the default") : ()),
+				   ($printer->{configured}{$queue} ? () :
+				    (_("Add this printer to Star/Open Office"),
+				     _("Remove this printer from Star/Open Office"))),
 				   _("Print test pages"),
 				   _("Know how to use this printer"),
 				   ($printer->{configured}{$queue} ?
@@ -2806,6 +2815,24 @@ What do you want to modify on this printer?",
 		    printer::set_default_printer($printer);
 		    $in->ask_warn(_("Default printer"),
 				  _("The printer \"%s\" is set as the default printer now.", $queue));
+		} elsif ($modify eq _("Add this printer to Star/Open Office")) {
+		    if (printer::addcupsremotetoapplications
+			($printer, $queue)) {
+			$in->ask_warn(_("Adding printer to Star/Open Office"),
+				      _("The printer \"%s\" was successfully added to Star/Open Office.", $queue));
+		    } else {
+			$in->ask_warn(_("Adding printer to Star/Open Office"),
+				      _("Failed to add the printer \"%s\" to Star/Open Office.", $queue));
+		    }
+		} elsif ($modify eq _("Remove this printer from Star/Open Office")) {
+		    if (printer::removeprinterfromapplications
+			($printer, $queue)) {
+			$in->ask_warn(_("Removing printer from Star/Open Office"),
+				      _("The printer \"%s\" was successfully removed from Star/Open Office.", $queue));
+		    } else {
+			$in->ask_warn(_("Removing printer from Star/Open Office"),
+				      _("Failed to remove the printer \"%s\" from Star/Open Office.", $queue));
+		    }
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
 		} elsif ($modify eq _("Know how to use this printer")) {

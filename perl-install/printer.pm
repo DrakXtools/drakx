@@ -1610,31 +1610,43 @@ sub configureapplications {
     configureopenoffice($printer);
 }
 
+sub addcupsremotetoapplications {
+    my ($printer, $queue) = @_;
+    return (addcupsremotetostaroffice($printer, $queue) &&
+	    addcupsremotetoopenoffice($printer, $queue));
+}
+
 sub removeprinterfromapplications {
     my ($printer, $queue) = @_;
-    removeprinterfromstaroffice($printer, $queue);
-    removeprinterfromopenoffice($printer, $queue);
+    return (removeprinterfromstaroffice($printer, $queue) &&
+	    removeprinterfromopenoffice($printer, $queue));
+}
+
+sub removelocalprintersfromapplications {
+    my ($printer) = @_;
+    removelocalprintersfromstaroffice($printer);
+    removelocalprintersfromopenoffice($printer);
 }
 
 sub configurestaroffice {
     my ($printer) = @_;
     # Do we have Star Office installed?
     my $configfilename = findsofficeconfigfile();
-    return 0 if !$configfilename;
+    return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
     my $configprefix = $1;
     # Load Star Office printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && ($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/wget")) {
+	(-x "$prefix/usr/bin/curl")) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
 	    eval(run_program::rooted
-		 ($prefix, "wget", "-O", "/etc/foomatic/$queue.ppd",
+		 ($prefix, "curl", "-o", "/etc/foomatic/$queue.ppd",
 		  "http://$server:631/printers/$queue.ppd"));
 	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
 		$configfilecontent = 
@@ -1670,28 +1682,28 @@ sub configurestaroffice {
 				       $configfilecontent);
     }
     # Write back Star Office configuration file
-    writesofficeconfigfile($configfilename, $configfilecontent);
+    return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
 sub configureopenoffice {
     my ($printer) = @_;
     # Do we have Open Office installed?
     my $configfilename = findopenofficeconfigfile();
-    return 0 if !$configfilename;
+    return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
     # Load Open Office printer config file
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && ($printer->{SPOOLER} eq "cups") && 
-	(-x "$prefix/usr/bin/wget")) {
+	(-x "$prefix/usr/bin/curl")) {
 	my @printerlist = getcupsremotequeues();
 	for my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $queue = $1;
 	    my $server = $2;
 	    eval(run_program::rooted
-		 ($prefix, "wget", "-O", "/etc/foomatic/$queue.ppd",
+		 ($prefix, "curl", "-o", "/etc/foomatic/$queue.ppd",
 		  "http://$server:631/printers/$queue.ppd"));
 	    if (-r "$prefix/etc/foomatic/$queue.ppd") {
 		$configfilecontent = 
@@ -1727,14 +1739,97 @@ sub configureopenoffice {
 				       $configfilecontent);
     }
     # Write back Open Office configuration file
-    writesofficeconfigfile($configfilename, $configfilecontent);
+    return writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub addcupsremotetostaroffice {
+    my ($printer, $queue) = @_;
+    # Do we have Star Office installed?
+    my $configfilename = findsofficeconfigfile();
+    return 1 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
+    my $configprefix = $1;
+    # Load Star Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Update remote CUPS queues
+    if (($printer->{SPOOLER} eq "cups") && 
+	(-x "$prefix/usr/bin/curl")) {
+	my @printerlist = getcupsremotequeues();
+	for my $listentry (@printerlist) {
+	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    my $q = $1;
+	    next if ($q ne $queue);
+	    my $server = $2;
+	    # Remove server name from queue name
+	    $q =~ s/^([^@]*)@.*$/$1/;
+	    eval(run_program::rooted
+		 ($prefix, "/usr/bin/curl", "-o",
+		  "/etc/foomatic/$queue.ppd",
+		  "http://$server:631/printers/$q.ppd"));
+	    # Does the file exist and is it not an error message?
+	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
+		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
+		 /^\*PPD-Adobe/)) {
+		$configfilecontent = 
+		    makestarofficeprinterentry($printer, $queue,
+					       $configprefix,
+					       $configfilecontent);
+	    } else {
+		return 0;
+	    }
+	    last;
+	}
+    }
+    # Write back Star Office configuration file
+    return writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub addcupsremotetoopenoffice {
+    my ($printer, $queue) = @_;
+    # Do we have Open Office installed?
+    my $configfilename = findopenofficeconfigfile();
+    return 1 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
+    my $configprefix = $1;
+    # Load Open Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Update remote CUPS queues
+    if (($printer->{SPOOLER} eq "cups") && 
+	(-x "$prefix/usr/bin/curl")) {
+	my @printerlist = getcupsremotequeues();
+	for my $listentry (@printerlist) {
+	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
+	    my $q = $1;
+	    next if ($q ne $queue);
+	    my $server = $2;
+	    # Remove server name from queue name
+	    $q =~ s/^([^@]*)@.*$/$1/;
+	    eval(run_program::rooted
+		 ($prefix, "/usr/bin/curl", "-o",
+		  "/etc/foomatic/$queue.ppd",
+		  "http://$server:631/printers/$q.ppd"));
+	    # Does the file exist and is it not an error message?
+	    if ((-r "$prefix/etc/foomatic/$queue.ppd") &&
+		(cat_("$prefix/etc/foomatic/$queue.ppd") =~ 
+		 /^\*PPD-Adobe/)) {
+		$configfilecontent = 
+		    makeopenofficeprinterentry($printer, $queue,
+					       $configprefix,
+					       $configfilecontent);
+	    } else {
+		return 0;
+	    }
+	}
+    }
+    # Write back Open Office configuration file
+    return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
 sub removeprinterfromstaroffice {
     my ($printer, $queue) = @_;
     # Do we have Star Office installed?
     my $configfilename = findsofficeconfigfile();
-    return 0 if !$configfilename;
+    return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
     my $configprefix = $1;
     # Load Star Office printer config file
@@ -1744,14 +1839,14 @@ sub removeprinterfromstaroffice {
 	removestarofficeprinterentry($printer, $queue, $configprefix,
 				     $configfilecontent);
     # Write back Star Office configuration file
-    writesofficeconfigfile($configfilename, $configfilecontent);
+    return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
 sub removeprinterfromopenoffice {
     my ($printer, $queue) = @_;
     # Do we have Open Office installed?
     my $configfilename = findopenofficeconfigfile();
-    return 0 if !$configfilename;
+    return 1 if !$configfilename;
     $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
     my $configprefix = $1;
     # Load Open Office printer config file
@@ -1761,7 +1856,45 @@ sub removeprinterfromopenoffice {
 	removeopenofficeprinterentry($printer, $queue, $configprefix,
 				     $configfilecontent);
     # Write back Open Office configuration file
-    writesofficeconfigfile($configfilename, $configfilecontent);
+    return writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub removelocalprintersfromstaroffice {
+    my ($printer) = @_;
+    # Do we have Star Office installed?
+    my $configfilename = findsofficeconfigfile();
+    return 1 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/xp3/Xpdefaults$!;
+    my $configprefix = $1;
+    # Load Star Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Remove the printer entries
+    for my $queue (keys(%{$printer->{configured}})) {
+	$configfilecontent = 
+	    removestarofficeprinterentry($printer, $queue, $configprefix,
+					 $configfilecontent);
+    }
+    # Write back Star Office configuration file
+    return writesofficeconfigfile($configfilename, $configfilecontent);
+}
+
+sub removelocalprintersfromopenoffice {
+    my ($printer) = @_;
+    # Do we have Open Office installed?
+    my $configfilename = findopenofficeconfigfile();
+    return 1 if !$configfilename;
+    $configfilename =~ m!^(.*)/share/psprint/psprint.conf$!;
+    my $configprefix = $1;
+    # Load Open Office printer config file
+    my $configfilecontent = readsofficeconfigfile($configfilename);
+    # Remove the printer entries
+    for my $queue (keys(%{$printer->{configured}})) {
+	$configfilecontent = 
+	    removeopenofficeprinterentry($printer, $queue, $configprefix,
+					 $configfilecontent);
+    }
+    # Write back Open Office configuration file
+    return writesofficeconfigfile($configfilename, $configfilecontent);
 }
 
 sub makestarofficeprinterentry {
@@ -1969,8 +2102,7 @@ sub findopenofficeconfigfile {
 sub readsofficeconfigfile {
     my ($file) = @_;
     local *F; 
-    open F, "< $prefix$file" ||
-	die "Could not read $file!\n";
+    open F, "< $prefix$file" || return "";
     my $filecontent = join("", <F>);
     close F;
     return $filecontent;
@@ -1979,10 +2111,10 @@ sub readsofficeconfigfile {
 sub writesofficeconfigfile {
     my ($file, $filecontent) = @_;
     local *F; 
-    open F, "> $prefix$file" ||
-	die "Could not write $file!\n";
+    open F, "> $prefix$file" || return 0;
     print F $filecontent;
     close F;
+    return 1;
 }
 
 sub getcupsremotequeues {
