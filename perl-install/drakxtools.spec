@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 37mdk
+Release: 38mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-38mdk
+- detect aliased network interfaces too
+- drakfirewall: handle BitTorrent (robert vojta)
+- keyboardrake (pablo):
+  o support more keyboards
+  o Nepali uses devanagari script
+- localedrake: handle Latgalian language (pablo)
+- net_monitor: ignore sit0
+- switch Japanese input method to "uim" (pablo)
+
 * Tue May 25 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-37mdk
 - drakbackup: fix dropped .txt files when running mkisofs (stew)
   (Anthill #799)
