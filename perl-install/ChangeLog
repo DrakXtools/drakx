@@ -1,3 +1,37 @@
+2002/01/09  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed too many package selected for No X or With X
+	option of minimal installation.
+
+	* install_steps_interactive.pm: avoid asking for minimal install for
+	upgrade.
+	fixed stupid.
+
+	* crypto.pm: fix incomplete prefix for update mirror when adding an entry
+	for urpmi.
+
+	* pkgs.pm: use rpm version comparison function.
+
+	* c/stuff.xs.pm: added rpmvercmp.
+
+2002/01/08  dam's  <damien@mandrakesoft.com>
+
+	* install2.pm: cosmetik
+
+2002/01/08  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_gtk.pm: added eval around pixmap drawing for advertising.
+
+2002/01/08  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/drakbackup: another round of bad use of _() fixes.
+	fixed bad use of _().
+
+2002/01/08  sdupont
+
+	* standalone/drakbackup: drakbackup work ...
+	incremental backup and restore work.
+
 2002/01/08  François Pons  <fpons@mandrakesoft.com>
 
 	* Makefile: again fixed dam's sucking, please dam's check what you write
