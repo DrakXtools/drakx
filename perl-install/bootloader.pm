@@ -1084,35 +1084,31 @@ sub write_grub_config {
 	dev2grub($part->{device}, \%dev2bios) . $file;
     };
     {
-        local $\ = "\n";
-	my $f = "$::prefix/boot/grub/menu.lst";
-	local *F;
-	open F, ">$f" or die "cannot create grub config file: $f";
-	log::l("writing grub config to $f");
+	my @grub_config;
 
-	$bootloader->{$_} and print F "$_ $bootloader->{$_}" foreach qw(timeout);
+	$bootloader->{$_} and push @grub_config, "$_ $bootloader->{$_}" foreach qw(timeout);
 
-	print F "color black/cyan yellow/cyan";
-	print F "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
+	push @grub_config, "color black/cyan yellow/cyan";
+	push @grub_config, "serial --unit=$1 --speed=$2\nterminal --timeout=" . ($bootloader->{timeout} || 0) . " console serial" if get_append($bootloader, 'console') =~ /ttyS(\d),(\d+)/;
 
 	each_index {
-	    print F "default $::i" if $_->{label} eq $bootloader->{default};
+	    push @grub_config, "default $::i" if $_->{label} eq $bootloader->{default};
 	} @{$bootloader->{entries}};
 
 	foreach (@{$bootloader->{entries}}) {
-	    print F "\ntitle $_->{label}";
+	    push @grub_config, "\ntitle $_->{label}";
 
 	    if ($_->{type} eq "image") {
 		my $vga = $_->{vga} || $bootloader->{vga};
-		printf F "kernel %s root=%s %s%s%s\n",
+		push @grub_config, sprintf "kernel %s root=%s %s%s%s",
 		  $file2grub->($_->{kernel_or_dev}),
 		  $_->{root} =~ /loop7/ ? "707" : $_->{root}, #- special to workaround bug in kernel (see #ifdef CONFIG_BLK_DEV_LOOP)
 		  $_->{append},
 		  $_->{'read-write'} && " rw",
 		  $vga && $vga ne "normal" && " vga=$vga";
-		print F "initrd ", $file2grub->($_->{initrd}) if $_->{initrd};
+		push @grub_config, join("", "initrd ", $file2grub->($_->{initrd})) if $_->{initrd};
 	    } else {
-		print F "root ", dev2grub($_->{kernel_or_dev}, \%dev2bios);
+		push @grub_config, join("", "root ", dev2grub($_->{kernel_or_dev}, \%dev2bios));
 
 		if (my ($dev) = $_->{table} =~ m|/dev/(.*)|) {
 		    if ($dev2bios{$dev} =~ /hd([1-9])/) {
@@ -1122,12 +1118,15 @@ sub write_grub_config {
 		    }
 		}
 		if ($_->{mapdrive}) {
-		    map_each { print F "map ($::b) ($::a)" } %{$_->{mapdrive}};
-		    print F "makeactive";
+		    map_each { push @grub_config, "map ($::b) ($::a)" } %{$_->{mapdrive}};
+		    push @grub_config, "makeactive";
 		}
-		print F "chainloader +1";
+		push @grub_config, "chainloader +1";
 	    }
 	}
+	my $f = "$::prefix/boot/grub/menu.lst";
+	log::l("writing grub config to $f");
+	output($f, join("\n", @grub_config));
     }
     my $dev = dev2grub($bootloader->{boot}, \%dev2bios);
     my ($s1, $s2, $m) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
