@@ -582,3 +582,27 @@ sub progress_timeout3   {
 # xlsfonts | less pour verifier l'installation des polices.
 
 
+# sub file_s {
+#     my $window1 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+#     $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+#     $window1->set_position(1);
+#     $window1->set_title(_("Fonts Importation"));
+#     $window1->set_policy(1, 1, 1);
+#     $window1->set_border_width(5);
+    
+
+# 	if (not defined $window1) {
+# 		$window1 = new Gtk::FileSelection "file selection dialog";
+# 		$window1->position(-mouse);
+# 		$window1->signal_connect("destroy", \&destroy_window, \$window1);
+# 		$window1->signal_connect("delete_event", \&destroy_window, \$window1);
+# 		$window1->ok_button->signal_connect("clicked", \&file_selection_ok, $window1);
+# 		$window1->cancel_button->signal_connect("clicked", sub { destroy $window1 });
+		
+# 	}
+# 	if (!visible $window1) {
+# 		show $window1;
+# 	} else {
+# 		destroy $window1;
+# 	}
+# }
