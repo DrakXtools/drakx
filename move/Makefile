@@ -80,9 +80,9 @@ clean:
 
 %.clp: %
 	if [ -e $<.sort ]; then \
-	mkisofs -r -sort $<.sort $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	mkisofs -R -sort $<.sort $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	else \
-	mkisofs -r $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	mkisofs -R $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
 	fi
 
 # touch r/isolinux/boot.cat ; find r/isolinux -type f -printf '%p 100\n' > r.sort ; echo 'r/isolinux/live_tree_boot.clp 5' >> r.sort
