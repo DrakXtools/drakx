@@ -340,6 +340,8 @@ sub gtkctree_children {
 
 sub gtkcreate_xpm {
     my ($w, $f) = @_;
+    $f =~ m|.xpm$| or $f="$f.xpm";
+    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach $ENV{SHARE_PATH}, "$ENV{SHARE_PATH}/libDrakX/pixmaps", "pixmaps" }
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
