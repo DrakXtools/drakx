@@ -533,11 +533,12 @@ sub list_passwd() {
 sub list_home() {
     map { $_->[7] } grep { $_->[2] >= 500 } list_passwd();
 }
+sub list_skels() { "/etc/skel", "/root", list_home() }
 
 sub template2userfile($$$$%) {
     my ($prefix, $inputfile, $outputrelfile, $force, %toreplace) = @_;
 
-    foreach ("/etc/skel", "/root", list_home()) {
+    foreach (list_skels()) {
 	my $outputfile = "$prefix/$_/$outputrelfile";
 	if (-d dirname($outputfile) && ($force || ! -e $outputfile)) {
 	    log::l("generating $outputfile from template $inputfile");
@@ -549,7 +550,7 @@ sub template2userfile($$$$%) {
 sub update_userkderc($$$) {
     my ($prefix, $cat, $subst) = @_;
 
-    foreach ("/etc/skel", "/root", list_home()) {
+    foreach (list_skels()) {
 	my ($inputfile, $outputfile) = ("$prefix$_/.kderc", "$prefix$_/.kderc.new");
 	my %tosubst = (%$subst);
 	local *INFILE; local *OUTFILE;
@@ -583,7 +584,7 @@ sub kderc_largedisplay($) {
 				      kpaneliconstyle => "kpanelIconStyle=Normal\n", #- to change to Large when icons looks better
 				      kdeiconstyle => "KDEIconStyle=Large\n",
 				     });
-    foreach ("/etc/skel", "/root", list_home()) {
+    foreach (list_skels()) {
 	substInFile {
 	    s/^(GridWidth)=85/$1=100/;
 	    s/^(GridWidth)=70/$1=75/;
@@ -640,8 +641,16 @@ sub kdeicons_postinstall($) {
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
 	}
     }
+
+    my @l = map { "$prefix$_/Desktop/Doc.kdelnk" } list_skels();
+    if (my ($lang) = all("$prefix/usr/doc/mandrake")) {
+	substInFile { s|^(URL=.*?)/?$|$1/$lang| } @l;
+    } else {
+	unlink @l;
+    }
+
     my $lang = quotemeta $ENV{LANG};
-    foreach my $dir (map { "$prefix$_/Desktop" } qw(/etc/skel /root)) {
+    foreach my $dir (map { "$prefix$_/Desktop" } list_skels()) {
 	-d $dir or next;
 	foreach (grep { /\.kdelnk$/ } all($dir)) {
 	    cat_("$dir/$_") =~ /^Name\[$lang\]=(.{2,14})$/m
@@ -654,7 +663,7 @@ sub move_desktop_file($) {
     my ($prefix) = @_;
     my @toMove = qw(doc.kdelnk news.kdelnk updates.kdelnk home.kdelnk printer.kdelnk floppy.kdelnk cdrom.kdelnk);
 
-    foreach ("/etc/skel", "/root", list_home()) {
+    foreach (list_skels()) {
 	my $dir = "$prefix$_";
 	if (-d "$dir/Desktop") {
 	    my @toSubst = glob_("$dir/Desktop/.*\.rpmorig");
