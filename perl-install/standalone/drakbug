@@ -117,6 +117,7 @@ gtkpack2__(
 
 if (defined $prog) {
     update_app($prog); 
+    $comb_app->entry->set_text("$prog");
 };
 
 $comb_app->entry->signal_connect('changed', sub { update_app($comb_app->entry->get_text()) });
@@ -143,23 +144,27 @@ sub update_app {
     if (member($text,@all_drakxtools) || $text eq _("Standalone Tools")) {
 	$app_choice = chomp_(`rpm -q drakxtools`) ;
     } elsif (member($text,keys %{$mdk_app}) && $text ne _("Standalone Tools")) {	
-	$which_app = chomp_(`which '$mdk_app->{$text}'`);
-	$app_choice = chomp_(`rpm -qf '$which_app' 2>1&`);
+	$app_choice = get_package($mdk_app->{$text});
     } else {
-	while (($key,$value) = each %{$mdk_app}) {
+	LOOP: while (($key,$value) = each %{$mdk_app}) {
 	    next if $key eq _("Standalone Tools");
 	    if ($value eq $text) { 
-		$which_app = chomp_(`which '$text'`);
-		$app_choice = chomp_(`rpm -qf '$which_app' 2>1&`);
-		$text = $key; 
-		print ("*********** key is : $key **** text is : $text\n");
-		
-		last;
+		$app_choice = get_package($text);
+		$prog = $key; 
+		last LOOP;
 	    }
 	}
+	
     }
     $app_choice ne '' ? $package->set_text("$app_choice") : $package->set_text(_("Not installed"));
-    $comb_app->entry->set_text("$text");
+}
+
+sub get_package {
+    my ($executable) = @_;
+    my ($rpm_package, $which_app);
+    $which_app = chomp_(`which '$executable'`);
+    $rpm_package = chomp_(`rpm -qf '$which_app' 2>1&`);
+    $rpm_package;
 }
 
 sub connect_bugzilla {
