@@ -54,7 +54,7 @@ our %l = (
       qw(catc CDCEther kaweth pegasus rtl8150 usbnet),
     ],
     wireless => [
-      qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd ath_pci atmel_cs atmel_pci dyc_ar5),
+      qw(acx100_pci adm8211 airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd ath_pci atmel_cs atmel_pci dyc_ar5),
       qw(hostap_pci hostap_plx ipw2100 ipw2200 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
       qw(prism2_pci prism2_usb prism54 r8180 ray_cs rt2400 rt2500 usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs zd1201),
       if_(arch() =~ /ppc/, qw(airport)),
@@ -78,7 +78,7 @@ our %l = (
   {
     ide => [ qw(aec62xx cs5520 cs5530 delkin_cb rz1000 sc1200 slc90e66 triflex trm290) ],
     all_ide => [
-        qw(ali14xx dtc2278 ht6560b qd65xx umc8672 aec62xx alim15x3 atiixp cmd64x cs5520 cs5530 cy82c693),
+        qw(ali14xx amd74xx dtc2278 ht6560b qd65xx umc8672 aec62xx alim15x3 atiixp cmd64x cs5520 cs5530 cy82c693),
         qw(generic hpt34x hpt366 ns87415 opti621 pdc202xx_new pdc202xx_old piix rz1000 sc1200 serverworks),
         qw(siimage sis5513 slc90e66 triflex trm290 via82cxxx),
     ],
