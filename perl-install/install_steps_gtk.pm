@@ -372,7 +372,7 @@ sub choosePackagesTree {
 				}
 			    },
 			    grep_allowed_to_toggle => sub {
-				grep { $_ ne N("Other") && !pkgs::packageByName($packages, $_)->flag_base } @_;
+				grep { my $p = pkgs::packageByName($packages, $_); $p && !$->flag_base } @_;
 			    },
 			    grep_unselected => sub {
 				grep { !pkgs::packageByName($packages, $_)->flag_selected } @_;
