@@ -550,38 +550,50 @@ sub interactive_mode {
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakfont.620x57");
 
     gtkadd($window1,
-	   gtkpack_(gtkset_usize(new Gtk::VBox(0,2),,620, 390),
+	   gtkpack_(new Gtk::VBox(0,2),
 		    if_(!$::isEmbedded, 0,  new Gtk::Pixmap($pix_u_map, $pix_u_mask)),
 		    1, gtkpack_(new Gtk::HBox(0,2),
 			     1, gtkpack_(new Gtk::VBox(0,2),
 					 1, gtkpack($font_box = new Gtk::VBox(0,5),
 						    $font_sel = new Gtk::FontSelection,
 						    ),
-					 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-						   gtksignal_connect(new Gtk::Button(_("Get Windows Fonts")), clicked 	=>
-								     sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
-						   gtksignal_connect(new Gtk::Button(_("Advanced Options")), clicked =>
-								    sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
-						   gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
-								     sub { ${$central_widget}->destroy(); uninstall() }),
-						   gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
-								     sub { ${$central_widget}->destroy(); create_fontsel()}),
-						   ),
-					 ),
-			     0, gtkpack_(new Gtk::VBox(0,5),
-					 0, new Gtk::VBox(0,0),
-					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-					 1, new Gtk::VBox(0,0),
-					 1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-						   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
-						       ${$central_widget}->destroy(); about() }),
-						   gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
-						       ${$central_widget}->destroy(); help() }),
-						   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
-									 $::isEmbedded and kill USR1, $::CCPID;
-									 Gtk->main_quit() }),
-						   ),
-					 )
+					 1, gtkpack_(new Gtk::HBox(0,2),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+							       gtksignal_connect(new Gtk::Button(_("Get Windows Fonts")), clicked 	=>
+									 sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
+							       gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
+									 sub { ${$central_widget}->destroy(); uninstall() }),
+							      ),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+							       gtksignal_connect(new Gtk::Button(_("Advanced Options")), clicked =>
+								 sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
+							       gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
+								 sub { ${$central_widget}->destroy(); create_fontsel()}),
+							      ),
+						     1, new Gtk::HBox(0,2),
+						     0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -spread),
+							       gtksignal_connect(new Gtk::Button(_("Help")),clicked =>
+										 sub { ${$central_widget}->destroy(); help() }),
+							       gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
+										     $::isEmbedded and kill USR1, $::CCPID;
+										     Gtk->main_quit() }),
+							      ),
+						    ),
+					),
+# 			     0, gtkpack_(new Gtk::VBox(0,5),
+# 					 0, new Gtk::VBox(0,0),
+# 					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
+# 					 1, new Gtk::VBox(0,0),
+# 					 1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+# 						   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
+# 						       ${$central_widget}->destroy(); about() }),
+# 						   gtksignal_connect(new Gtk::Button(_("             Help           ")), clicked => sub { 
+# 						       ${$central_widget}->destroy(); help() }),
+# 						   gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub {
+# 									 $::isEmbedded and kill USR1, $::CCPID;
+# 									 Gtk->main_quit() }),
+# 						   ),
+# 					 )
 			     ),
 		    ),
 	   );
