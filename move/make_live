@@ -33,7 +33,7 @@ sub installPackages {
 					    });
 
     my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
-    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND';
+    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D';
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach @langs;
 
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
@@ -55,17 +55,15 @@ $::prefix = "/tmp/live_tree";
 {
     eval { fs::umount("$::prefix/proc") };
 #    eval { rm_rf($::prefix) };
-    output("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
+    output_p("$::prefix/etc/fstab", "none /proc proc defaults 0 0\n");
     installPackages();
     system("chroot $::prefix ldconfig");
 }
 
-system("ln -sf /var/lib/xkb $::prefix/etc/X11/xkb/compiled"); # don't want the relative path, prefering the absolute path
+symlinkf('/var/lib/xkb', "$::prefix/etc/X11/xkb/compiled"); # don't want the relative path, prefering the absolute path
 system("find $::prefix/dev -type b -o -type c | xargs chmod a+rw");
 
 substInFile {
     #- /lib is ro, for the moment we don't save, we'll see later if we may want to save (using /var/dev-state for example)
     s|.*lib/dev-state.*||;
 } "$::prefix/etc/devfsd.conf";
-
-system("chroot $::prefix pango-querymodules > $::prefix/etc/pango/pango.modules");
