@@ -1,3 +1,66 @@
+2004/02/26  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/main.pm, printer/data.pm: Fixes for HPOJ setup during
+	installation.
+
+2004/02/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: skip apply_setting step for now since anyway
+	we've already written
+	most config files... (btw, now installer also write cnx type as side
+	effect)
+	reverse debug stuff that should never have been commited
+	typo fix: only write ether config for lan...
+
+	* network/adsl.pm (adsl_conf_backend) install needed packages
+
+2004/02/25  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/compssUsers: Don't install Webmin by default in Download and
+	PowerPack
+
+	* share/compssUsers.powerpack: Don't install Webmin by default in Download
+	and PowerPack
+	compssUsers for 10.0 PowerPack
+
+	* share/compssUsers.server: compssUsers for 10.0 PowerPackPlus
+
+2004/02/25  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/rescue-gui.c: give us more chance to get bootloader write
+	actually commited to
+	disk before reboot
+
+2004/02/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: defined GTK_IM_MODULE values for CJK languages; so xim is used
+	by default for languages for which we don't ship good enough
+	native gtk2 input methods.
+
+	* share/po/he.po: updated Hebrew file
+
+2004/02/25  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Use ATAPI:/dev/hdX for both 2.4/2.6
+	compatibility.
+
+	* standalone/drakTermServ: Really filter symlinked kernels. nohup the dm
+	restart.
+	Don't let any kernel symlinks be visible for making NBIs.
+
+2004/02/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: when sound card is added/removed, delete
+	current sound levels so that sound
+	service reset it to sg sane
+
+	* harddrake/data.pm: look at sound cards changes on bootstrapping
+
+	* drakxtools.spec (harddrake-ui package) requires sane-backends so that
+	scanner
+	detection works smoothly (#8305)
+	10-11mdk
+
 2004/02/25  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/compssUsers.powerpack: Don't install Webmin by default in Download
@@ -27531,7 +27594,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.888 2004/02/25 08:56:34 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.889 2004/02/25 15:36:13 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
