@@ -16,7 +16,8 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
                      gtktext_insert ) ],
 
     helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
-                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size) ],
+                    gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size
+                    string_width string_height) ],
 
     create => [ qw(create_adjustment create_box_with_title create_dialog create_factory_menu create_factory_popup_menu
                    create_hbox create_hpaned create_menu create_notebook create_okcancel create_packtable
@@ -626,6 +627,18 @@ sub string_size {
     @size;
 }
 
+sub string_width {
+    my ($widget, $text) = @_;
+    my ($width, undef) = string_size($widget, $text);
+    $width;
+}
+
+sub string_height {
+    my ($widget, $text) = @_;
+    my (undef, $height) = string_size($widget, $text);
+    $height;
+}
+
 sub get_text_coord {
     my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $o_wrap_char) = @_;
     my $wrap_char = $o_wrap_char || ' ';
@@ -635,11 +648,9 @@ sub get_text_coord {
     my @lines;
     my @widths;
     my @heights;
-    my %fontinfo = gtkfontinfo($widget4style);
-    my $height_elem = $fontinfo{ascent} + $fontinfo{descent};
     $heights[0] = 0;
     my $max_width2 = $max_width;
-    my $height = $heights[0] = $height_elem;
+    my $height = 0;
     my $width = 0;
     my $flag = 1;
     my @t = split($wrap_char, $text);
@@ -663,10 +674,10 @@ sub get_text_coord {
 	@t2 = @t;
     }
     foreach (@t2) {
-	my ($l, undef) = string_size($widget4style, $_ . (!$flag ? $wrap_char : ''));
+	my $l = string_width($widget4style, $_ . (!$flag ? $wrap_char : ''));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
-	    $height += $height_elem + 1;
+	    $height += string_height($widget4style, $lines[$idx]) + 1;
 	    $heights[$idx+1] = $height;
 	    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 	    $width = 0;
@@ -678,7 +689,7 @@ sub get_text_coord {
 	$l <= $max_width2 or $max_width2 = $l;
 	$width <= $real_width or $real_width = $width;
     }
-    $height += $height_elem;
+    $height += string_height($widget4style, $lines[$idx]);
     $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 
     $height < $real_height or $real_height = $height;
@@ -689,7 +700,7 @@ sub get_text_coord {
     $real_height < $max_height && $can_be_smaller and $height = $real_height;
     $real_height > $max_height && $can_be_greater and $height = $real_height;
     if ($centeredy) {
- 	my $dh = ($height-$real_height)/2 + ($height_elem)/2;
+ 	my $dh = ($height-$real_height)/2 + (string_height($widget4style, $lines[0]))/2;
  	@heights = map { $_ + $dh } @heights;
     }
     ($width, $height, \@lines, \@widths, \@heights)
