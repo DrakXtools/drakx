@@ -223,14 +223,16 @@ sub card_config__not_listed {
 }
 
 sub multi_head_choose {
-    my ($in, @cards) = @_;
+    my ($in, $auto, @cards) = @_;
 
     my @choices = multi_head_choices('', @cards);
 
-    my $tc = $in->ask_from_listf(N("Multi-head configuration"),
-				 N("Your system support multiple head configuration.
+    my $tc = $choices[0];
+    if (!$auto) {
+	$tc = $in->ask_from_listf(N("Multi-head configuration"),
+				  N("Your system support multiple head configuration.
 What do you want to do?"), sub { $_[0]{text} }, \@choices) or return;
-
+    }
     $tc->{code} or die internal_error();
     return $tc->{code}();
 }
@@ -272,10 +274,11 @@ sub configure {
     my @cards = probe();
     @cards or @cards = {};
 
-    if (!$cards[0]{server} && !$cards[0]{Driver} || !$auto) {
+    if (!$cards[0]{server} && !$cards[0]{Driver}) {
+	return if $auto;
 	card_config__not_listed($in, $cards[0], $options) or return;
     }
-    my $card = multi_head_choose($in, @cards) or return;
+    my $card = multi_head_choose($in, $auto, @cards) or return;
 
     $card->{Driver} = 'fbdev' if $options->{allowFB} && !$card->{server} && !$card->{Driver};
 
@@ -284,6 +287,7 @@ sub configure {
     $card->{prog} = install_server($card, $options, $do_pkgs);
     
     if ($card->{needVideoRam} && !$card->{VideoRam}) {
+	return if $auto;
 	$card->{VideoRam} = (find { $_ <= $options->{VideoRam_probed} } reverse ikeys %VideoRams) || 4096;
 	$in->ask_from('', N("Select the memory size of your graphics card"),
 		      [ { val => \$card->{VideoRam},
