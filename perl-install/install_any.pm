@@ -93,7 +93,8 @@ sub look_for_ISO_images() {
     my $get_iso_ids = sub {
 	my ($F) = @_;
 	my ($vol_id, $app_id) = c::get_iso_volume_ids(fileno $F);
-	my ($cd_set) = $vol_id =~ /^(.*)-[0-9]+$/;
+	#- the ISO volume names must end in -Disc\d+
+	my ($cd_set) = $vol_id =~ /^(.*)-Disc\d+$/;
 	$cd_set && { cd_set => $cd_set, app_id => $app_id };
     };
 
