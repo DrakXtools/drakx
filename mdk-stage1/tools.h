@@ -43,6 +43,7 @@ char ** grab_env(void);
 char ** list_directory(char * direct);
 int string_array_length(char ** a);
 int kernel_version(void);
+char * floppy_device(void);
 char * asprintf_(const char *msg, ...);
 int scall_(int retval, char * msg, char * file, int line);
 #define scall(retval, msg) scall_(retval, msg, __FILE__, __LINE__)

@@ -42,7 +42,8 @@
 #include "automatic.h"
 
 #include "tools.h"
-
+#include "probing.h"
+#include "modules.h"
 
 static struct param_elem params[50];
 static int param_number = 0;
@@ -474,6 +475,17 @@ int kernel_version(void)
                 return -1;
         }
         return charstar_to_int(val.release + 2);
+}
+
+char * floppy_device(void)
+{
+        char ** names, ** models;
+        my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
+	get_medias(FLOPPY, &names, &models, BUS_ANY);
+	if (names && *names)
+                return asprintf_("/dev/%s", *names);
+        else
+                return "/dev/fd0";
 }
 
 char * asprintf_(const char *msg, ...)
