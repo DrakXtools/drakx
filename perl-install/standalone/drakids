@@ -46,6 +46,11 @@ my $activefw = activefw->new(sub {
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Blacklist";
 
+    handle_whitelist($msg->get_args_list) if
+      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+      $msg->get_member eq "Whitelist";
+
     clear_blacklist() if
       $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
@@ -140,6 +145,11 @@ sub unblacklist {
 
 sub init_whitelist {
     @{$whitelist->{data}} = map { [ $_ ] } $activefw->get_whitelist;
+}
+
+sub handle_whitelist {
+    my ($addr) = @_;
+    push @{$whitelist->{data}}, [ $addr ];
 }
 
 sub whitelist {
