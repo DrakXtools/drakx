@@ -643,6 +643,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     }
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
+    *any::hdInstallPath = sub () { "/var/ftp/pub/Mandrakelinux" };
 }
 
 sub set_rpmsrate_default_category_flags {
