@@ -660,13 +660,14 @@ sub del_intf() {
                                           list => [ keys %$intf, grep { -f "/etc/ppp/peers/$_" } qw(adsl isdn) ], } ],
                              post => sub {
                                  !$::testing and eval {
-                                     if (member($intf2delete, qw(adsl isdn))) {
-                                         system("service internet stop");
-                                         # system("ifdown " . $intf2delete eq "isdn" : "ippp0" : "ppp0");
-                                         rm_rf("/etc/ppp/peers/$intf2delete");
-                                         if (any { /$intf2delete/ } cat_("/etc/sysconfig/network-scripts/net_cnx_up")) {
-                                             unlink "/etc/sysconfig/network-scripts/net_cnx_$_" foreach qw(up down);
-                                         }
+                                     if (member($intf2delete, qw(adsl modem)) {
+                                         rm_rf("/etc/ppp/peers/ppp0");
+                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-ppp0");
+                                     }
+                                     if ($intf2delete eq 'adsl') {
+                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-sagem");
+                                     } elsif ($intf2delete eq 'isdn') {
+                                         rm_rf("/etc/sysconfig/network-scripts/ifcfg-ippp0");
                                      } else {
                                          system("ifdown $intf2delete");
                                          rm_rf("/etc/sysconfig/network-scripts/ifcfg-$intf2delete");
