@@ -102,12 +102,12 @@ sub psUsingDirectory(;$) {
 
     $dirname ||= install_any::imageGetFile('');
     log::l("scanning $dirname for packages");
-    foreach (glob_("$dirname/*.rpm")) {
-	local *F;
-	open F, $_ or log::l("failed to open package $_: $!");
-	my $header = c::rpmReadPackageHeader(fileno F) or log::l("failed to rpmReadPackageHeader $_: $!");
-	my $name = c::headerGetEntry($header, 'name');
-	addInfosFromHeader(\%packages, $header, $_);
+    foreach (all("$dirname")) {
+	my ($name, $version, $release) = /(.*)-([^-]+)-([^-.]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
+	$packages{$name} = {
+            name => $name, version => $version, release => $release,
+	    file => "$dirname/$_", selected => 0, deps => [],
+        };
     }
     \%packages;
 }
@@ -118,9 +118,10 @@ sub getDeps($) {
     local *F;
     open F, install_any::imageGetFile("depslist"); # or die "can't find dependencies list";
     foreach (<F>) {
-	my ($name, @deps) = split;
-	Package($packages, $name)->{deps} = \@deps;
-	map { push @{Package($packages, $_)->{provides}}, $name } @deps;
+	my ($name, $size, @deps) = split;
+	$packages->{$name}->{size} = $size;
+	$packages->{$name}->{deps} = \@deps;
+	map { push @{$packages->{$_}->{provides}}, $name } @deps;
     }
 }
 

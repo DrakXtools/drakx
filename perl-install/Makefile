@@ -5,7 +5,7 @@ DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
-EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps consolefonts
+EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps consolefonts install
 
 .PHONY: all po tags install clean verify_c
 
