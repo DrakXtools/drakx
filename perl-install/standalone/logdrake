@@ -31,6 +31,7 @@ use Config;
 init Gtk;
 Gtk->set_locale;
 use my_gtk qw(:helpers :wrappers);
+use ugtk qw(:helpers);
 
 use MDK::Common;
 use Data::Dumper;
