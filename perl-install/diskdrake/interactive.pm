@@ -1051,7 +1051,7 @@ sub format_part_info {
     $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
     $info .= _(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
-    $info .= _("Cylinder %d to cylinder %d\n", $part->{start} / $hd->cylinder_size(), ($part->{start} + $part->{size} - 1) / $hd->cylinder_size()) if ($::expert || !$part->{type}) && !isSpecial($part);
+    $info .= _("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size(), ($part->{start} + $part->{size} - 1) / $hd->cylinder_size()) if ($::expert || !$part->{type}) && !isSpecial($part);
     $info .= _("Formatted\n") if $part->{isFormatted};
     $info .= _("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= _("Mounted\n") if $part->{isMounted};
