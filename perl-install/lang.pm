@@ -417,8 +417,8 @@ sub standard_locale {
 sub fix_variant {
     my ($locale) = @_;
     #- uz@Cyrl_UZ -> uz_UZ@Cyrl
-    $locale =~ s/(\@\w+)_/_/;
-    $locale . $1;
+    $locale =~ s/(.*)(\@\w+)(_.*)/$1$3$2/;
+    $locale;
 }
 
 sub getlocale_for_lang {
