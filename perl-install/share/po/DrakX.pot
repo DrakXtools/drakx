@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-01-24 19:10+0100\n"
+"POT-Creation-Date: 2000-01-24 22:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Monitor that can do 1600x1200 at 76 Hz"
 msgstr ""
 
-#: ../diskdrake.pm_.c:16
+#: ../diskdrake.pm_.c:16 ../diskdrake.pm_.c:371
 msgid "Create"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Unmount"
 msgstr ""
 
-#: ../diskdrake.pm_.c:18
+#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:373
 msgid "Delete"
 msgstr ""
 
@@ -375,15 +375,15 @@ msgstr ""
 msgid "Format"
 msgstr ""
 
-#: ../diskdrake.pm_.c:18
+#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:528
 msgid "Resize"
 msgstr ""
 
-#: ../diskdrake.pm_.c:18
+#: ../diskdrake.pm_.c:18 ../diskdrake.pm_.c:371 ../diskdrake.pm_.c:415
 msgid "Type"
 msgstr ""
 
-#: ../diskdrake.pm_.c:19
+#: ../diskdrake.pm_.c:19 ../diskdrake.pm_.c:431
 msgid "Mount point"
 msgstr ""
 
@@ -503,7 +503,8 @@ msgstr ""
 msgid "Please make a backup of your data first"
 msgstr ""
 
-#: ../diskdrake.pm_.c:132 ../diskdrake.pm_.c:146
+#: ../diskdrake.pm_.c:132 ../diskdrake.pm_.c:146 ../diskdrake.pm_.c:459
+#: ../diskdrake.pm_.c:488
 msgid "Read carefully!"
 msgstr ""
 
@@ -512,67 +513,332 @@ msgstr ""
 msgid "After %s partition %s,"
 msgstr ""
 
-#: ../diskdrake.pm_.c:197
-msgid "Mounted\n"
+#: ../diskdrake.pm_.c:146
+msgid "all data on this partition will be lost"
+msgstr ""
+
+#: ../diskdrake.pm_.c:165 ../install_any.pm_.c:197 ../install_steps.pm_.c:71
+#: ../install_steps_interactive.pm_.c:37 ../standalone/diskdrake_.c:60
+#: ../standalone/rpmdrake_.c:294 ../standalone/rpmdrake_.c:304
+msgid "Error"
+msgstr ""
+
+#: ../diskdrake.pm_.c:189 ../diskdrake.pm_.c:611
+msgid "Mount point: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:190 ../diskdrake.pm_.c:228
+msgid "Device: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:191
+#, c-format
+msgid "DOS drive letter: %s (just a guess)\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:192 ../diskdrake.pm_.c:231
+msgid "Type: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:193
+#, c-format
+msgid "Start: sector %s\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:194
+#, c-format
+msgid "Size: %s MB"
+msgstr ""
+
+#: ../diskdrake.pm_.c:196
+#, c-format
+msgid ", %s sectors"
 msgstr ""
 
 #: ../diskdrake.pm_.c:198
 #, c-format
-msgid "RAID md%s\n"
+msgid "Cylinder %d to cylinder %d\n"
 msgstr ""
 
 #: ../diskdrake.pm_.c:199
+msgid "Formatted\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:200
+msgid "Not formatted\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:201
+msgid "Mounted\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:202
+#, c-format
+msgid "RAID md%s\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:203
 msgid ""
 "Partition booted by default\n"
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:201
+#: ../diskdrake.pm_.c:205
 #, c-format
 msgid "Level %s\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:202
+#: ../diskdrake.pm_.c:206
 #, c-format
 msgid "Chunk size %s\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:203
+#: ../diskdrake.pm_.c:207
 #, c-format
 msgid "RAID-disks %s\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:220
+#: ../diskdrake.pm_.c:224
 msgid "Please click on a partition"
 msgstr ""
 
-#: ../diskdrake.pm_.c:224
-msgid "Device: "
-msgstr ""
-
-#: ../diskdrake.pm_.c:225
+#: ../diskdrake.pm_.c:229
 #, c-format
 msgid "Size: %d MB\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:226
-msgid ""
-"Geomet/* SOME DESCRIPTIVE TITLE.*/\n"
-"/* Copyright (C) YEAR Free Software Foundation, Inc.*/\n"
-"/* FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.*/\n"
-"/*"
+#: ../diskdrake.pm_.c:230
+#, c-format
+msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
 msgstr ""
 
-#: ../diskdrake.pm_.c:280
+#: ../diskdrake.pm_.c:232
+#, c-format
+msgid "Partition table type: %s\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:233
+#, c-format
+msgid "on bus %d id %d\n"
+msgstr ""
+
+#: ../diskdrake.pm_.c:246
+msgid "Mount"
+msgstr ""
+
+#: ../diskdrake.pm_.c:247
+msgid "Active"
+msgstr ""
+
+#: ../diskdrake.pm_.c:248
+msgid "Add to RAID"
+msgstr ""
+
+#: ../diskdrake.pm_.c:249
 msgid "Remove from RAID"
 msgstr ""
 
-#: ../diskdrake.pm_.c:281
+#: ../diskdrake.pm_.c:250
 msgid "Modify RAID"
 msgstr ""
 
-#: ../diskdrake.pm_.c:288
+#: ../diskdrake.pm_.c:257
 msgid "Choose action"
+msgstr ""
+
+#: ../diskdrake.pm_.c:350
+msgid ""
+"Sorry I won't accept to create /boot so far onto the drive (on a cylinder > "
+"1024).\n"
+"Either you use LILO and it won't work, or you don't use LILO and you don't "
+"need /boot"
+msgstr ""
+
+#: ../diskdrake.pm_.c:354
+msgid ""
+"The partition you've selected to add as root (/) is physically located "
+"beyond\n"
+"the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
+"If you plan to use the LILO boot manager, be careful to add a /boot partition"
+msgstr ""
+
+#: ../diskdrake.pm_.c:371 ../diskdrake.pm_.c:373
+#, c-format
+msgid "Use ``%s'' instead"
+msgstr ""
+
+#: ../diskdrake.pm_.c:376
+msgid "Use ``Unmount'' first"
+msgstr ""
+
+#: ../diskdrake.pm_.c:377 ../diskdrake.pm_.c:410
+msgid "changing type of"
+msgstr ""
+
+#: ../diskdrake.pm_.c:389
+msgid "Continue anyway?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:394
+msgid "Quit without saving"
+msgstr ""
+
+#: ../diskdrake.pm_.c:394
+msgid "Quit without writing the partition table?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:413
+msgid "Change partition type"
+msgstr ""
+
+#: ../diskdrake.pm_.c:414
+msgid "Which partition type do you want?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:430
+#, c-format
+msgid "Where do you want to mount device %s?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:452
+msgid "formatting"
+msgstr ""
+
+#: ../diskdrake.pm_.c:454
+msgid "Formatting"
+msgstr ""
+
+#: ../diskdrake.pm_.c:454 ../install_steps_interactive.pm_.c:221
+#, c-format
+msgid "Formatting partition %s"
+msgstr ""
+
+#: ../diskdrake.pm_.c:459
+msgid "After formatting all partitions,"
+msgstr ""
+
+#: ../diskdrake.pm_.c:459
+msgid "all data on these partitions will be lost"
+msgstr ""
+
+#: ../diskdrake.pm_.c:469
+msgid "Move"
+msgstr ""
+
+#: ../diskdrake.pm_.c:470
+msgid "Which disk do you want to move to?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:474
+msgid "Sector"
+msgstr ""
+
+#: ../diskdrake.pm_.c:475
+msgid "Which sector do you want to move to?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:478
+msgid "Moving"
+msgstr ""
+
+#: ../diskdrake.pm_.c:478
+msgid "Moving partition..."
+msgstr ""
+
+#: ../diskdrake.pm_.c:488
+#, c-format
+msgid "Partition table of drive %s is going to be written to disk!"
+msgstr ""
+
+#: ../diskdrake.pm_.c:490
+msgid "You'll need to reboot before the modification can take place"
+msgstr ""
+
+#: ../diskdrake.pm_.c:511 ../install_steps_gtk.pm_.c:267
+msgid "Computing fat filesystem bounds"
+msgstr ""
+
+#: ../diskdrake.pm_.c:511 ../diskdrake.pm_.c:556
+#: ../install_steps_gtk.pm_.c:267
+msgid "Resizing"
+msgstr ""
+
+#: ../diskdrake.pm_.c:525
+msgid "resizing"
+msgstr ""
+
+#: ../diskdrake.pm_.c:535
+msgid "Choose the new size"
+msgstr ""
+
+#: ../diskdrake.pm_.c:535 ../install_steps_graphical.pm_.c:287
+#: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:332
+#: ../install_steps_gtk.pm_.c:376
+msgid "MB"
+msgstr ""
+
+#: ../diskdrake.pm_.c:588
+msgid "Create a new partition"
+msgstr ""
+
+#: ../diskdrake.pm_.c:604
+msgid "Start sector: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:607
+msgid "Size in MB: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:610
+msgid "Filesystem type: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:612
+msgid "Preference: "
+msgstr ""
+
+#: ../diskdrake.pm_.c:654 ../diskdrake.pm_.c:670
+msgid "Select file"
+msgstr ""
+
+#: ../diskdrake.pm_.c:663
+msgid ""
+"The backup partition table has not the same size\n"
+"Still continue?"
+msgstr ""
+
+#: ../diskdrake.pm_.c:671
+msgid "Warning"
+msgstr ""
+
+#: ../diskdrake.pm_.c:672
+msgid ""
+"Insert a floppy in drive\n"
+"All data on this floppy will be lost"
+msgstr ""
+
+#: ../diskdrake.pm_.c:686
+msgid "Trying to rescue partition table"
+msgstr ""
+
+#: ../diskdrake.pm_.c:697
+msgid "device"
+msgstr ""
+
+#: ../diskdrake.pm_.c:698
+msgid "level"
+msgstr ""
+
+#: ../diskdrake.pm_.c:699
+msgid "chunk size"
+msgstr ""
+
+#: ../diskdrake.pm_.c:711
+msgid "Choose an existing RAID to add to"
+msgstr ""
+
+#: ../diskdrake.pm_.c:712
+msgid "new"
 msgstr ""
 
 #: ../fs.pm_.c:67 ../fs.pm_.c:73
@@ -1196,12 +1462,6 @@ msgstr ""
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr ""
 
-#: ../install_any.pm_.c:197 ../install_steps.pm_.c:71
-#: ../install_steps_interactive.pm_.c:37 ../standalone/diskdrake_.c:60
-#: ../standalone/rpmdrake_.c:294 ../standalone/rpmdrake_.c:304
-msgid "Error"
-msgstr ""
-
 #: ../install_any.pm_.c:198 ../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -1284,11 +1544,6 @@ msgstr ""
 msgid "Choose the size you want to install"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:287 ../install_steps_graphical.pm_.c:334
-#: ../install_steps_gtk.pm_.c:332 ../install_steps_gtk.pm_.c:376
-msgid "MB"
-msgstr ""
-
 #: ../install_steps_graphical.pm_.c:334 ../install_steps_gtk.pm_.c:376
 msgid "Total size: "
 msgstr ""
@@ -1356,14 +1611,6 @@ msgstr ""
 #: ../install_steps_graphical.pm_.c:577
 #: ../install_steps_interactive.pm_.c:1011
 msgid "Use existing configuration for X11?"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:267
-msgid "Computing fat filesystem bounds"
-msgstr ""
-
-#: ../install_steps_gtk.pm_.c:267
-msgid "Resizing"
 msgstr ""
 
 #: ../install_steps_gtk.pm_.c:272
@@ -1522,11 +1769,6 @@ msgstr ""
 
 #: ../install_steps_interactive.pm_.c:211
 msgid "Check bad blocks?"
-msgstr ""
-
-#: ../install_steps_interactive.pm_.c:221
-#, c-format
-msgid "Formatting partition %s"
 msgstr ""
 
 #: ../install_steps_interactive.pm_.c:230
