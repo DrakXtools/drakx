@@ -108,11 +108,9 @@ sub setupBootloader {
 
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
 	if (arch() =~ /sparc/) {
-	    $b->{use_partition} = $in->ask_from_listf_(N("SILO Installation"),
-						       N("Where do you want to install the bootloader?"),
-						       sub { $l[$_[0]] },
-						       [ 0, 1 ], $b->{use_partition});
-	    defined $b->{use_partition} or return 0
+	    $in->ask_from(N("SILO Installation"),
+			  N("Where do you want to install the bootloader?"),
+			  { val => \$b->{use_partition}, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } }) or return 0;
 	} elsif (arch() =~ /ppc/) {
 		if (defined $partition_table::mac::bootstrap_part) {
 			$b->{boot} = $partition_table::mac::bootstrap_part;
@@ -122,11 +120,11 @@ sub setupBootloader {
 		}
 	} else {
 	    my $boot = $hds->[0]{device};
-	    my $onmbr = "/dev/$boot" eq $b->{boot};
-	    $b->{boot} = "/dev/" . ($in->ask_from_list_(N("LILO/grub Installation"),
-							N("Where do you want to install the bootloader?"),
-							\@l, $l[!$onmbr]) eq $l[0] ? 
-				    $boot : fsedit::get_root($fstab, 'boot')->{device});
+	    my $use_partition = "/dev/$boot" ne $b->{boot};
+	    $in->ask_from(N("LILO/grub Installation"),
+			  N("Where do you want to install the bootloader?"),
+			  { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } });
+	    $b->{boot} = "/dev/" . ($use_partition ? fsedit::get_root($fstab, 'boot')->{device} : $boot);
 	}
     } else {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' : "setupBootloader") unless $::isStandalone; #- TO MERGE ?
