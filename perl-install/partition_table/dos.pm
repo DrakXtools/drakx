@@ -41,9 +41,9 @@ sub CHS2rawCHS {
 	#- no way to have a #cylinder >= 1024
 	$c = 1023;
 	$h = $hd->{geom}{heads} - 1;
-	$s = $hd->{geom}{sectors};
+	$s = $hd->{geom}{sectors} - 1;
     }
-    ($c & 0xff, $h, $s | (($c >> 2) & 0xc0));
+    ($c & 0xff, $h, ($s + 1) | (($c >> 2) & 0xc0));
 }
 
 # returns (cylinder, head, sector)
@@ -52,7 +52,7 @@ sub sector2CHS {
     my ($s, $h);
     ($start, $s) = divide($start, $hd->{geom}{sectors});
     ($start, $h) = divide($start, $hd->{geom}{heads});
-    [ $start, $h, $s + 1 ];
+    [ $start, $h, $s ];
 }
 
 sub read {
