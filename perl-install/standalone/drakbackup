@@ -2465,7 +2465,7 @@ sub advanced_where() {
 }
 
 #- 7/7/2002 - S.Benedict reworked when - drop all the checkboxes and use a list
-#- chances that we want to do backups via multiple medias in cron are slim
+#- chances that we want to do backups via multiple media in cron are slim
 sub advanced_when() {
     my $box_when;
 #   $daemon_media = '';
@@ -2480,7 +2480,7 @@ sub advanced_when() {
 		  'monthly' => N("monthly"));
     $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"));    
 
-	#- drop down list of possible medias - default to config value
+	#- drop down list of possible media - default to config value
     my $entry_media_type = new Gtk2::OptionMenu();
     $entry_media_type->set_popdown_strings(@media_types, @net_methods);
 	$entry_media_type->entry->set_text($daemon_media);
@@ -2509,7 +2509,7 @@ sub advanced_when() {
 			),
 			0, new Gtk2::HSeparator,
 			1, gtkset_sensitive(new Gtk2::Label(N("Please be sure that the cron daemon is included in your services. 
-\nNote that currently all 'net' medias also use the hard drive.")),  $backup_daemon),
+\nNote that currently all 'net' media also use the hard drive.")),  $backup_daemon),
 		),
 	);
 
