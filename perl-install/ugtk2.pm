@@ -748,7 +748,7 @@ sub wrap_paragraph {
             push @lines, @$lines;
             $width = max($width, $width_);
             $ydec += $height + 1;
-        } else {
+        } elsif (@lines) {
             #- void line
             my $yvoid = $ydec / @lines;
             push @widths, 0;
