@@ -93,6 +93,7 @@ sub removeXiBSuffix {
     /(\d+)\s*kB?$/i and return $1 * 1024;
     /(\d+)\s*MB?$/i and return $1 * 1024 * 1024;
     /(\d+)\s*GB?$/i and return $1 * 1024 * 1024 * 1024;
+    /(\d+)\s*TB?$/i and return $1 * 1024 * 1024 * 1024 * 1024;
     $_;
 }
 sub formatXiB {
