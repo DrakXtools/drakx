@@ -7,7 +7,7 @@ chomp($ver = <STDIN>);
 print F 
 q(Subject: [DrakX] DrakX snapshot #), $ver, q( uploaded
 From: devel@mandrakesoft.com
-To: changelog@mandrakesoft.com, install@mandrakesoft.com
+To: changelog@linux-mandrake.com, install@mandrakesoft.com
 Reply-To: install@mandrakesoft.com
 
 );
