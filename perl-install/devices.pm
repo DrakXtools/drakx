@@ -37,15 +37,19 @@ sub del_loop {
     my ($dev) = @_;
     run_program::run("losetup", "-d", $dev);
 }
-sub find_free_loop() {
+sub find_free_loop_raw {
+    my ($o_chloop) = @_;
     foreach (0..7) {
-	my $dev = make("loop$_");
+	my $dev = make(($o_chloop && 'ch') . "loop$_");
+        log::l("trying $dev");
 	sysopen(my $F, $dev, 2) or next;
 	!ioctl($F, c::LOOP_GET_STATUS(), my $_tmp) && $! == 6 or next; #- 6 == ENXIO
 	return $dev;
     }
     die "no free loop found";
 }
+sub find_free_loop() { find_free_loop_raw() }
+sub find_free_chloop() { find_free_loop_raw('chloop') }
 sub set_loop {
     my ($file, $o_encrypt_key, $o_encryption) = @_;
     my $dev = find_free_loop();
@@ -115,6 +119,7 @@ sub entry {
 		   "usb/lp"      => [ c::S_IFCHR(), 180, 0 ],
 		   "input/event" => [ c::S_IFCHR(), 13, 64 ],
 		   "loop"        => [ c::S_IFBLK(), 7,  0  ],
+		   "chloop"      => [ c::S_IFBLK(), 100, 0 ],
 		   "md"          => [ c::S_IFBLK(), 9,  0  ],
 		   "nst"         => [ c::S_IFCHR(), 9, 128 ],
 		   "scd"         => [ c::S_IFBLK(), 11, 0  ],

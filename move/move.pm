@@ -197,7 +197,7 @@ sub lomount_clp {
     log::l("lomount_clp: lomounting $name");
 
     mkdir_p($dir);
-    my $dev = devices::find_free_loop();
+    my $dev = devices::find_free_chloop();
     run_program::run('losetup', '-r', '-e', 'gz', $dev, $clp);
     run_program::run('mount', '-r', $dev, $dir);
 }
