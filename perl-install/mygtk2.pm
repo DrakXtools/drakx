@@ -437,6 +437,56 @@ sub _gtk_any_Window {
     $w;
 }
 
+sub _gtk__MagicWindow {
+    my ($w, $opts) = @_;
+
+    my $pop_it = delete $opts->{pop_it} || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
+	#- do not take into account the wizard banner
+	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
+    };
+
+    my $sub_child = delete $opts->{child} or internal_error("missing child");
+
+    if ($pop_it) {
+	$opts->{child} = $::isInstall ?
+	  gtknew('Frame', shadow_type => 'out', 
+		 child => gtknew('Frame', shadow_type => 'none', border_width => 3, child => $sub_child)) :
+	  $sub_child;
+
+	$w = _create_Window($opts);
+    } else {
+	if (!$::WizardWindow) {
+
+	    my $banner;
+	    if (!$::isEmbedded && !$::isInstall) {
+		$banner = Gtk2::Banner->new($opts->{icon_no_error}, $::Wizard_title) or log::l("ERROR: missing wizard banner");
+	    }
+	    $::WizardTable = gtknew('VBox', if_($banner, children_tight => [ $banner ]));
+
+	    if ($::isEmbedded) {
+		add2hash($opts, {
+		    socket_id => $::XID,
+		    child => $::WizardTable,
+		});
+		$::Plug = $::WizardWindow = _gtk(undef, 'Plug', 'gtknew', $opts);
+		sync($::WizardWindow);
+	    } else {
+		add2hash($opts, {
+		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+		});
+		$::WizardWindow = _create_Window($opts);
+		$::WizardWindow->show;
+	    }
+	} else {
+	    %$opts = ();
+	}
+
+	gtkset($::WizardTable, children_loose => [ $sub_child ]);
+	$w = $::WizardWindow;
+    }
+    $w;
+}
+
 sub _gtk__FileSelection {
     my ($w, $opts) = @_;
 
@@ -559,21 +609,22 @@ sub _gtknew_handle_children {
 }
 
 sub _create_Window {
-    my (%options) = @_;
+    my ($opts) = @_;
 
     my $no_Window_Manager = !$::isStandalone;
 
-    my $w = gtknew('Window', 
-		   if_(!$::isInstall && !$::isWizard, border_width => 5),
+    add2hash($opts, {
+	if_(!$::isInstall && !$::isWizard, border_width => 5),
 
-		   #- policy: during install, we need a special code to handle the weird centering, see below
-		   position_policy => $::isInstall ? 'none' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
+	#- policy: during install, we need a special code to handle the weird centering, see below
+	position_policy => $::isInstall ? 'none' : $no_Window_Manager ? 'center-always' : 'center-on-parent',
 
-		   if_($::isInstall, position => [
-		       $::rootwidth - ($::windowwidth + $::real_windowwidth) / 2, 
-		       $::logoheight + ($::windowheight - $::real_windowheight) / 2,
-		   ]),
-		   %options);
+	if_($::isInstall, position => [
+	    $::rootwidth - ($::windowwidth + $::real_windowwidth) / 2, 
+	    $::logoheight + ($::windowheight - $::real_windowheight) / 2,
+	]),
+    });
+    my $w = _gtk(undef, 'Window', 'gtknew', $opts);
 
     #- when the window is closed using the window manager "X" button (or alt-f4)
     $w->signal_connect(delete_event => sub { 

@@ -830,61 +830,23 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{pop_it} ||= !$::isWizard && !$::isEmbedded || $::WizardTable && do {
-	#- do not take into account the wizard banner
-	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
-    };
-
-    my %window_options = (
+    my $window = gtknew(
+	'MagicWindow',
 	title => $title || '',
+	pop_it => $o->{pop_it},
+	child => $o->{window} = gtknew('VBox'),
+	modal => $grab || $o->{grab} || $o->{modal},
 	if_(!$::isInstall, icon_no_error => wm_icon()),
+	if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
     );
 
-
-    if ($o->{pop_it}) {
-	$o->{rwindow} = mygtk2::_create_Window(
-	    %window_options,
-	    modal => $grab || $o->{grab} || $o->{modal},
-	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
-	);
-
-	if ($::isInstall) {
-	    gtkadd($o->{rwindow}, 
-		   gtknew('Frame', shadow_type => 'out', child =>
-			  $o->{window} = gtknew('Frame', shadow_type => 'none', border_width => 3)
-			 ));
-	} else {
-	    $o->{window} = $o->{rwindow};
-	}
-    } else {
-	if (!$::WizardWindow) {
-	    my $banner;
-	    if (!$::isEmbedded && !$::isInstall) {
-		$banner = Gtk2::Banner->new(wm_icon(), $::Wizard_title) or log::l("ERROR: missing wizard banner");
-	    }
-	    $::WizardTable = gtknew('VBox', 
-				    if_($banner, children_tight => [ $banner ]),
-				);
-
-	    if ($::isEmbedded) {
-		$::Plug = $::WizardWindow = gtknew('Plug',
-					       socket_id => $::XID,
-					       icon_no_error => wm_icon(),
-					       child => $::WizardTable,
-					       title => $title || '',
-					   );
-		mygtk2::sync($::WizardWindow);
-	    } else {
-		$::WizardWindow = mygtk2::_create_Window(
-		    %window_options,
-		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
-		);
-		$::WizardWindow->show;
-	    }
-	}
-	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => 10);
+    if ($window == $::WizardWindow) {
+	$o->{rwindow} = $o->{window};
 	set_main_window_size($o->{window});
-	gtkpack($::WizardTable, $o->{window});
+	$o->{window}->set_border_width(10);
+    } else {
+	$o->{rwindow} = $window;
+	$o->{pop_it} = 1;
     }
     $o;
 }
