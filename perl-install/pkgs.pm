@@ -175,7 +175,12 @@ sub packageById {
 }
 
 sub analyse_kernel_name {
-    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-i586-up-1GB|-p3-smp-64GB|-secure|-smp|-multimedia|-multimedia-smp)?(?:-([^\-]+))?$/;
+    my $kernels = join('|', map { "-$_" }
+	'(p3|i586|i686)-(up|smp)-(1GB|4GB|64GB)', 
+	qw(enterprise secure smp multimedia multimedia-smp),
+    );
+    my @l = $_[0] =~ /kernel[^\-]*($kernels)?(-([^\-]+))?$/ or return;
+    $l[0], $l[-1];
 }
 
 sub packages2kernels {
