@@ -168,6 +168,10 @@ my $pbar;
 my $pbar1;
 my $pbar2;
 my $pbar3;
+my $plabel;
+my $plabel1;
+my $plabel2;
+my $plabel3;
 my $stext;
 my $the_time;
 my @user_list_to_restore2;
@@ -750,7 +754,7 @@ sub do_expect {
 	
 	if ($@) {
 		if ($mode eq 'sendkey') {
-			${$central_widget}->destroy();
+			destroy_widget();
 			check_pkg_needs();
 		} else { 
 			$log_buff .= "perl-Expect not installed!", 
@@ -1172,7 +1176,7 @@ sub build_backup_files {
     grep(/^backup\_base\_sys/, @dir_content) and $base_sys_exist = 1;
 
     if ($where_hd && !$daemon || $daemon) {
-	  $interactive and progress($pbar, 0.5, N("Backup system files..."));
+	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  if ($backup_sys) { 
 	    if ($backup_sys_versions) {
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
@@ -1221,8 +1225,8 @@ sub build_backup_files {
 	  	}
 	  }
 	
-	$interactive and progress($pbar, 0.5, N("Backup system files..."));
-	$interactive and progress($pbar3, 0.3, N("Hard Disk Backup files..."));
+	$interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
+	$interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup files..."));
 
 	if (@list_other) {
 		system("cd $save_path && rm -f backup_other* ");
@@ -1234,8 +1238,8 @@ sub build_backup_files {
 	    output_p($save_path . '/list_other', @list_other_);    
 	}
 	
-	$interactive and progress($pbar1, 1, N("Backup User files..."));
-	$interactive and progress($pbar3, 0.3, N("Hard Disk Backup Progress..."));
+	$interactive and progress($pbar1, $plabel1, 1, N("Backup User files..."));
+	$interactive and progress($pbar3, $plabel3, 0.3, N("Hard Disk Backup Progress..."));
 	
 	if ($backup_user) {
 	    foreach (@user_list) {
@@ -1288,8 +1292,8 @@ sub build_backup_files {
 		}
 	  }
 	}
-	$interactive and progress($pbar2, 1, N("Backup Other files..."));
-	$interactive and progress($pbar3, 0.4, N("Hard Disk Backup files..."));
+	$interactive and progress($pbar2, $plabel2, 1, N("Backup Other files..."));
+	$interactive and progress($pbar3, $plabel3, 0.4, N("Hard Disk Backup files..."));
     }
 
 	my $filecount = @file_list_to_send_by_ftp;
@@ -1448,22 +1452,22 @@ sub cursor_wait {
 
 sub cursor_norm {
 	# restore normal cursor
-	$window1->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_LEFT_PRT"));
+	$window1->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_LEFT_PTR"));
 	gtkflush();
 }
 
 sub show_status {
     #- just a generic routine to display an array of text in the GUI screen
-    
-    my $text = new Gtk2::TextView;
-	
-    $table->destroy();
-	
+    my $text = new Gtk2::TextView;	
+	destroy_widget();
+	my $scrolled_window = Gtk2::ScrolledWindow->new;
+	$scrolled_window->set_border_width(10);
+	$scrolled_window->add_with_viewport($text);
+	gtktext_insert(gtkset_editable($text, 0), [ [ $results ] ]);
+
     gtkpack($advanced_box,
-	    $table = gtkpack_(new Gtk2::VBox(0,10),
-			      1, gtktext_insert(gtkset_editable($text, 0), [ [ $results ] ]),
-			      ),
-	    );
+		$table = gtkpack_(new Gtk2::VBox(0,10), 1, $scrolled_window)
+	);
     $central_widget = \$table;
     $table->show_all();    
 }
@@ -1532,7 +1536,7 @@ sub check_list {
 	my $ref = $_->[1];
 		gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
 			invbool $ref; 
-			${$central_widget}->destroy();
+			destroy_widget();
 			$current_widget->();
 		});
 	}
@@ -1541,19 +1545,6 @@ sub check_list {
 sub fonction_env {
     ($central_widget, $current_widget, $previous_widget, $custom_help, $next_widget) = @_;
 }
-
-# sub redraw_during_check {
-#     my ($tmp1, $tmp2) = @_;
-#     gtksignal_connect(gtkset_active($tmp1, $tmp2), toggled => sub { 
-# #	invbool \$tmp2;
-# 	print "tmp2 bef = $tmp2\n";
-# 	$tmp2 = $tmp2 ? 0 : 1;
-# 	${$central_widget}->destroy();
-# 	print "tmp2 after = $tmp2\n";
-# 	$current_widget->();
-# 	return ($tmp2);
-#     });
-# }
 
 sub advanced_what_sys {
     my $box_what_sys;
@@ -1673,9 +1664,9 @@ sub advanced_what_entire_sys {
 		     1, gtkpack_(new Gtk2::VBox(0, 15),	
 				 1, new Gtk2::VBox(0, 5),
 				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
-						      clicked => sub { ${$central_widget}->destroy(); message_underdevel() }),
+						      clicked => sub { destroy_widget(); message_underdevel() }),
 				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
-						      clicked => sub { ${$central_widget}->destroy(); message_underdevel() }),
+						      clicked => sub { destroy_widget(); message_underdevel() }),
 				 1, new Gtk2::VBox(0, 5),
 				 ),
 		     1, new Gtk2::VBox(0, 5),	
@@ -1706,11 +1697,11 @@ sub advanced_what {
 				 1, gtksignal_connect(my $button_what_sys = new Gtk2::Button(), 
 						      clicked => sub { $box_what->destroy(); advanced_what_sys() }),
 				 1, gtksignal_connect(my $button_what_user = new Gtk2::Button(), 
-						      clicked => sub { ${$central_widget}->destroy(); advanced_what_user() }),
+						      clicked => sub { destroy_widget(); advanced_what_user() }),
 				 1, gtksignal_connect(my $button_what_other = new Gtk2::Button(), 
-						      clicked => sub { ${$central_widget}->destroy(); advanced_what_other() }),
+						      clicked => sub { destroy_widget(); advanced_what_other() }),
 #				 1, gtksignal_connect(my $button_what_all = new Gtk2::Button(), 
-#						  clicked => sub { ${$central_widget}->destroy(); advanced_what_entire_sys(); }),
+#						  clicked => sub { destroy_widget(); advanced_what_entire_sys(); }),
 				 1, new Gtk2::VBox(0, 5),
 				 ),
 		     1, new Gtk2::VBox(0, 5),	
@@ -1824,7 +1815,7 @@ sub advanced_where_net_types {
 			$where_tape = 0;
 		}
 		$net_proto = '' if $where_net eq 0; 
-		${$central_widget}->destroy();
+		destroy_widget();
  		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_use_expect, $use_expect), toggled => sub { 
@@ -1834,7 +1825,7 @@ sub advanced_where_net_types {
 			$xfer_keys = 0;
 			$user_keys = 0;
 		}
-		${$central_widget}->destroy();
+		destroy_widget();
  		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_xfer_keys, $xfer_keys), toggled => sub { 
@@ -1844,7 +1835,7 @@ sub advanced_where_net_types {
 			$use_expect = 0;
 			$user_keys = 0;
 		}
-		${$central_widget}->destroy();
+		destroy_widget();
  		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_user_keys, $user_keys), toggled => sub { 
@@ -1854,7 +1845,7 @@ sub advanced_where_net_types {
 			$xfer_keys = 0;
 			$use_expect = 0;
 		}
-		${$central_widget}->destroy();
+		destroy_widget();
  		$current_widget->();
     });
     if ($previous_function) { 
@@ -1960,13 +1951,13 @@ sub advanced_where_cd {
 			$where_net = 0;
 			$where_tape = 0;
 		}
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
     gtksignal_connect(gtkset_active($check_cdrw, $cdrw), toggled => sub { 
 		$cdrw = $cdrw ? 0 : 1;
 		$check_cdrw_erase->set_sensitive($cdrw);
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
 	$button_erase_now->signal_connect('clicked', sub { 
@@ -2063,7 +2054,7 @@ sub advanced_where_tape {
 			$where_net = 0;
 			$where_cd = 0;
 		}
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_tape_rewind, $tape_norewind), toggled => sub { 
@@ -2075,18 +2066,18 @@ sub advanced_where_tape {
 			$tape_device =~ s/\/nst/\/st/;
 		}
 		$combo_where_tape_device->entry->set_text($tape_device);
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
 
     });
 	gtksignal_connect(gtkset_active($check_tape_erase, $media_erase), toggled => sub { 
 		$media_erase = $media_erase ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
 	gtksignal_connect(gtkset_active($check_tape_eject, $media_eject), toggled => sub { 
 		$media_eject = $media_eject ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
     $combo_where_tape_device->entry->set_text($tape_device);
@@ -2141,7 +2132,7 @@ sub advanced_where_hd {
 #    gtksignal_connect(gtkset_active($check_where_hd, $where_hd), toggled => sub { 
 #	$where_hd = $where_hd ? 0 : 1;
 #	$where_hd = 1;
-#	${$central_widget}->destroy();
+#	destroy_widget();
 #	$current_widget->();
 #    });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
@@ -2164,24 +2155,24 @@ sub advanced_where {
 				  1, gtkpack_(new Gtk2::VBox(0, 15),	
 					  1, new Gtk2::VBox(0, 5),
 					  1, gtksignal_connect(my $button_where_net = new Gtk2::Button(), clicked => sub { 
-					      ${$central_widget}->destroy();
+					      destroy_widget();
 					      advanced_where_net_types(); 
 					  }),
 					  1, gtksignal_connect(my $button_where_cd = new Gtk2::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); 
+					      destroy_widget(); 
 					      if (require_rpm("mkisofs", "cdrecord")) { 
 					      	advanced_where_cd();
 					      } else { 
-						  	${$central_widget}->destroy();
+						  	destroy_widget();
 						  	install_rpm(\&advanced_where);
 						  }
 					  }),
 					  1, gtksignal_connect(my $button_where_hd = new Gtk2::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); 
+					      destroy_widget(); 
 					      advanced_where_hd();
 					  }),
 					  1, gtksignal_connect(my $button_where_tape = new Gtk2::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); 
+					      destroy_widget(); 
 						  # message_underdevel();
 						  advanced_where_tape() }),
 					  1, new Gtk2::VBox(0, 5),
@@ -2265,7 +2256,7 @@ sub advanced_when {
 
     gtksignal_connect(gtkset_active($check_when_daemon, $backup_daemon), toggled => sub { 
 		$backup_daemon = $backup_daemon ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		advanced_when();
     });
     $combo_when_space->entry->set_text($trans2{$when_space});
@@ -2321,13 +2312,13 @@ sub advanced_box {
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(my $button_what = new Gtk2::Button(), clicked => sub { 
-				    ${$central_widget}->destroy(); advanced_what() }),
+				    destroy_widget(); advanced_what() }),
 				1, gtksignal_connect(my $button_where = new Gtk2::Button(), clicked => sub { 
-				    ${$central_widget}->destroy();  advanced_where() }),
+				    destroy_widget();  advanced_where() }),
 				1, gtksignal_connect(my $button_when = new Gtk2::Button(), clicked => sub { 
-				    ${$central_widget}->destroy();  advanced_when() }),
+				    destroy_widget();  advanced_when() }),
 				1, gtksignal_connect(my $button_options = new Gtk2::Button(), clicked => sub {
-					${$central_widget}->destroy(); advanced_options() }),
+					destroy_widget(); advanced_options() }),
 				1, new Gtk2::VBox(0, 5),	
 			),
 			1, new Gtk2::VBox(0, 5),	
@@ -2394,7 +2385,7 @@ sub wizard_step2 {
 					0, my $check_wizard_hd = new Gtk2::CheckButton(N("on Hard Drive")),
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
-						${$central_widget}->destroy();
+						destroy_widget();
 						to_ok();
 						advanced_where_hd(\&wizard_step2);
 						to_normal();
@@ -2404,7 +2395,7 @@ sub wizard_step2 {
 					0, my $check_wizard_net = new Gtk2::CheckButton(N("across Network")),
 					1, new Gtk2::VBox(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
-						${$central_widget}->destroy();
+						destroy_widget();
 						to_ok();
 						advanced_where_net_types(\&wizard_step2);
 						to_normal();
@@ -2414,7 +2405,7 @@ sub wizard_step2 {
  					0, my $check_wizard_cd = new Gtk2::CheckButton(N("on CDROM")),
  					1, new Gtk2::VBox(0, 5),	
  					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
- 						${$central_widget}->destroy();
+ 						destroy_widget();
  						advanced_where_cd(\&wizard_step2);
  					}), $where_cd),
  				),
@@ -2422,7 +2413,7 @@ sub wizard_step2 {
  					0, my $check_wizard_tape = new Gtk2::CheckButton(N("on Tape Device")),
  					1, new Gtk2::VBox(0, 5),
  					0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => sub {
- 						${$central_widget}->destroy();
+ 						destroy_widget();
  						advanced_where_tape(\&wizard_step2);
  					}), $where_tape),
  				),
@@ -2444,7 +2435,7 @@ sub wizard_step2 {
 				} else { 
 					$next_widget = \&wizard_step3 
 				}
-				${$central_widget}->destroy();
+				destroy_widget();
 				wizard_step2();
 			})
 	}
@@ -2468,7 +2459,7 @@ sub wizard   {
 				0, gtkpack_(new Gtk2::HBox(0, 15),
 					1, new Gtk2::VBox(0, 5),	
 					0, gtksignal_connect(new Gtk2::Button(N("Select user manually")), clicked => sub {
-						${$central_widget}->destroy();
+						destroy_widget();
 						advanced_what_user(\&wizard);
 					}),
 				),
@@ -2743,7 +2734,7 @@ sub show_backup_details {
 			),
 			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
 				gtksignal_connect(new Gtk2::Button(N("Done")), clicked => sub { 
-					${$central_widget}->destroy(); 
+					destroy_widget(); 
 					$function->() }),
 			),
 		)
@@ -3013,7 +3004,7 @@ sub restore_step_user {
 					$details->signal_connect('clicked', sub { 
 						#- we're only passing a portion of the filename to
 						#- the subroutine so we need to let it know this
-						${$central_widget}->destroy();
+						destroy_widget();
 						show_backup_details(\&restore_step_user, "user", $name);
 					}); 	
 					$restore_row } (@user_backuped) 
@@ -3054,7 +3045,7 @@ sub restore_step_sys {
 		#- we're only passing a portion of the filename to
 		#- the subroutine so we need to let it know this
 		my $backup_date = $combo_restore_step_sys->entry->get_text();
-		${$central_widget}->destroy();
+		destroy_widget();
 		show_backup_details(\&restore_step_sys, "sys", $backup_date);
 	}); 	
     $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
@@ -3100,7 +3091,7 @@ sub restore_other_media_hd {
     check_list([$check_where_hd_quota, \$hd_quota]);
     gtksignal_connect(gtkset_active($check_where_hd, $where_hd), toggled => sub { 
 		$where_hd = $where_hd ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
@@ -3134,7 +3125,7 @@ sub restore_other_media {
 # 					 1, gtkpack(new Gtk2::HBox(0,10),
 # 						    new Gtk2::VBox(0, 6),
 # 						    gtkset_sensitive(gtksignal_connect(new Gtk2::Button("Network"),  clicked => sub {
-# 							${$central_widget}->destroy();
+# 							destroy_widget();
 # 							restore_find_net(\&restore_other_media);}), !$other_media_hd),
 # 						    new Gtk2::VBox(0, 6),
 # 						    ),
@@ -3145,12 +3136,12 @@ sub restore_other_media {
 	);
 	gtksignal_connect(gtkset_active($check_other_media_hd, $other_media_hd), toggled => sub { 
 		$other_media_hd = $other_media_hd ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
 #     gtksignal_connect(gtkset_active($check_other_media_net, !$other_media_hd), toggled => sub { 
 # 	$other_media_hd = $other_media_hd ? 0 : 1;
-# 	${$central_widget}->destroy();
+# 	destroy_widget();
 # 	$current_widget->();
 #    });
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
@@ -3192,7 +3183,7 @@ sub restore_step2 {
 				0, my $check_restore_other_src = new Gtk2::CheckButton(N("Select another media to restore from")),
 				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("Other Media")), clicked => sub {
-					${$central_widget}->destroy();
+					destroy_widget();
 					restore_other_media();
 				}), $restore_other_src),
 			),
@@ -3228,14 +3219,15 @@ sub restore_step2 {
 	}
     gtksignal_connect(gtkset_active($check_restore_other_path, $restore_other_path), toggled => sub {
 		$restore_other_path = $restore_other_path ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
     gtksignal_connect(gtkset_active($check_restore_other_src, $restore_other_src), toggled => sub {
 		$restore_other_src = $restore_other_src ? 0 : 1;
-		${$central_widget}->destroy();
+		destroy_widget();
 		$current_widget->();
     });
+	$central_widget = \$retore_step2;
     fonction_env(\$retore_step2, \&restore_step2, \&restore_box, "restore");
     if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box }
     elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys }
@@ -3326,7 +3318,7 @@ sub catalog_restore {
 						if ($cat_entry) {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
-								${$central_widget}->destroy();
+								destroy_widget();
 #								button_box_restore();
 								interactive_mode_box();
 							} 
@@ -3339,7 +3331,7 @@ sub catalog_restore {
 						if ($cat_entry && $files) {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if ($media_check) {
-								${$central_widget}->destroy();
+								destroy_widget();
 #								button_box_restore();
 								interactive_mode_box();
 							} 
@@ -3756,7 +3748,7 @@ sub restore_box {
 			),
 		);
     } else {
-		${$central_widget}->destroy();
+		destroy_widget();
 		restore_find_media_box(),
 	}
     fonction_env(\$retore_box, \&restore_box, \&interactive_mode_box, "restore");
@@ -3813,7 +3805,7 @@ sub restore_find_media_box {
 }
 
 sub restore_status {
-	${$central_widget}->destroy();
+	destroy_widget();
     $pbar3 =  new Gtk2::ProgressBar;
     $stext = new Gtk2::Label("");
     gtkpack($advanced_box,
@@ -3844,34 +3836,23 @@ sub restore_status {
 
 ################################################  BUTTON_BOX  ################################################  
 
-# sub generic_button_box {
-# # 1-n -  [button name, fonctions associated]
-#     $button_box_tmp->destroy();
-#     gtkpack($button_box,
-# 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,				         
-# 				       0, gtksignal_connect(new Gtk2::Button($_->[0]), clicked => sub {$_->[1]}) foreach (@_), 
-# 				       }),);    
-# }
-
 sub button_box_adv {
     $button_box_tmp->destroy();
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy();
 				interactive_mode_box();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
-				${$central_widget}->destroy();
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				$previous_widget->();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				unless (check_pkg_needs()) {
 					save_conf_file();
 					$previous_widget->();
@@ -3881,30 +3862,25 @@ sub button_box_adv {
 	);
 }
 
-# sub button_box_adv {
-#     generic_button_box(["cancel", ${$central_widget}->destroy() ]);
-# }
-
 sub button_box_restore_main {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
-				${$central_widget}->destroy(); 
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box() 
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box() }),
 			),
 		),
@@ -3917,20 +3893,19 @@ sub button_box_backup_end {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box() 
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
-				${$central_widget}->destroy(); 
 				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				$previous_widget->() 
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Build Backup")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				build_backup_status();
 				build_backup_files(); 
 			}),
@@ -3944,20 +3919,19 @@ sub button_box_wizard_end {
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				interactive_mode_box();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
-				${$central_widget}->destroy();
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				$previous_widget->();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Save")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				save_conf_file();
 				interactive_mode_box();
 			}),
@@ -3971,20 +3945,19 @@ sub button_box_restore_end {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			0, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				interactive_mode_box();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
-				${$central_widget}->destroy();
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 1),	
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				$previous_widget->();
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub { 
- 				${$central_widget}->destroy();
+ 				destroy_widget();
 				restore_backend(); 
 			}),
 		),
@@ -3999,7 +3972,7 @@ sub button_box_build_backup_end {
 			1, new Gtk2::HBox(0, 5),	
 			1, new Gtk2::HBox(0, 5),	
 			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
-				${$central_widget}->destroy();
+#				destroy_widget();
 				interactive_mode_box();  
 			}),
 		),
@@ -4014,11 +3987,10 @@ sub button_box_restore_pbs_end {
 			1, new Gtk2::HBox(0, 5),	
 			1, new Gtk2::HBox(0, 5),	
 			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
-				${$central_widget}->destroy();
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				interactive_mode_box();
 			}),
 		),
@@ -4031,20 +4003,19 @@ sub button_box_build_backup {
 	gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box();
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
-				${$central_widget}->destroy();
 				adv_help(\&$current_widget, $custom_help); 
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				$previous_widget->();
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
-				${$central_widget}->destroy();
+				destroy_widget();
 				$next_widget->();
 			}),
 		),
@@ -4058,20 +4029,19 @@ sub button_box_restore {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box();  
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
-				${$central_widget}->destroy(); 
 				adv_help(\&$current_widget, $custom_help);
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(new Gtk2::Button(N("Previous")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				$previous_widget->(); 
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				$next_widget->();
 			}),
 		),
@@ -4114,20 +4084,19 @@ sub button_box_wizard {
     gtkpack($button_box,
 	    $button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
 			1, gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { 
-				${$central_widget}->destroy(); 
+				destroy_widget(); 
 				interactive_mode_box() 
 			}),
 			1, gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub {
-				${$central_widget}->destroy(); 
 				adv_help(\&$current_widget, $custom_help) 
 			}),
 			1, new Gtk2::HBox(0, 0),
 			0, gtksignal_connect(new Gtk2::Button($next_widget ? N("Previous") : N("OK")), clicked => sub { 
-				${$central_widget}->destroy();
+				destroy_widget();
 				$previous_widget ? $previous_widget->() : $next_widget->();
 			}),
 			if_($next_widget, 1, gtksignal_connect(new Gtk2::Button(N("Next")), clicked => sub {
-				${$central_widget}->destroy();
+				destroy_widget();
 				$next_widget ? $next_widget->() : $previous_widget->();
 			})),
 		),
@@ -4141,7 +4110,6 @@ sub button_box_main {
 	    $button_box_tmp = gtkpack(gtkset_layout(new Gtk2::HButtonBox, 'start'),
 			gtksignal_connect(new Gtk2::Button(N("Close")), clicked => sub { ugtk2->exit(0) }),
 			gtksignal_connect(new Gtk2::Button(N("Help")), clicked => sub { 
-				${$central_widget}->destroy(); 
 				adv_help(\&interactive_mode_box, $custom_help) 
 			}),
 		),
@@ -4196,7 +4164,7 @@ sub install_rpm {
 				0, new Gtk2::HSeparator,
 				0, gtksignal_connect(new Gtk2::Button(N("Install")), clicked => sub {  
 					system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
-					${$central_widget}->destroy();
+					destroy_widget();
 					$previous_widget->();		  
 				}),
 		),
@@ -4297,12 +4265,12 @@ sub message_underdevel {
 ################################################  BUILD_BACKUP  ################################################  
 
 sub progress {
-    my ($progressbar, $incr, $label_text) = @_;
-    my ($new_val) = $progressbar->get_value;
+    my ($progressbar, $plabel, $incr, $label_text) = @_;
+    my ($new_val) = $progressbar->fraction;
     $new_val += $incr;
     if ($new_val > 1) { $new_val = 1 }
-    $progressbar->update($new_val);
-    $progressbar->{label}->set($label_text);
+    $progressbar->fraction($new_val);
+    $plabel->set_text($label_text);
     gtkflush();
 }
 
@@ -4353,32 +4321,40 @@ sub build_backup_status {
     $pbar1 =  new Gtk2::ProgressBar;
     $pbar2 =  new Gtk2::ProgressBar;
     $pbar3 =  new Gtk2::ProgressBar;
+	$plabel = new Gtk2::Label(" ");
+	$plabel1 = new Gtk2::Label(" ");
+	$plabel2 = new Gtk2::Label(" ");
+	$plabel3 = new Gtk2::Label(" ");
+	
     $stext = new Gtk2::Label("");
 	button_box_build_backup_end();
+
+	my $table = Gtk2::Table->new(10, 2, 1);
+	$table->set_row_spacings(5);
+	$table->set_col_spacings(10);
+	
+	$table->attach_defaults(new Gtk2::Label(N("Backup system files")), 0, 1, 0, 1);
+	$table->attach_defaults($pbar, 0, 1, 1, 2);
+	$table->attach_defaults($plabel, 1, 2, 1, 2);	
+	$table->attach_defaults(new Gtk2::Label(N("Backup user files")), 0, 1, 2, 3);
+	$table->attach_defaults($pbar1, 0, 1, 3, 4);
+	$table->attach_defaults($plabel1, 1, 2, 3, 4);	
+	$table->attach_defaults(new Gtk2::Label(N("Backup other files")), 0, 1, 4, 5);
+	$table->attach_defaults($pbar2, 0, 1, 5, 6);
+	$table->attach_defaults($plabel2, 1, 2, 5, 6);	
+	$table->attach_defaults(new Gtk2::Label(N("Total Progress")), 0, 1, 6, 7);
+	$table->attach_defaults($pbar3, 0, 1, 7, 8);
+	$table->attach_defaults($plabel3, 1, 2, 7, 8);	
+
     gtkpack($advanced_box,
-		$table = gtkpack(new Gtk2::VBox(0, 5),
-	    	create_packtable({ col_spacings => 10, row_spacings => 5 },
-				[""], 
-				[""], 
-				[""], 
-				[""], 
-				[""], 
-				[""], 
-				[""], 
-				[N("Backup system files")],
-				[ $pbar, $pbar->{label} = new Gtk2::Label(' ') ],
-				[N("Backup user files")],
-				[ $pbar1, $pbar1->{label} = new Gtk2::Label(' ') ],
-				[N("Backup other files")],
-				[ $pbar2, $pbar2->{label} = new Gtk2::Label(' ') ],
-				[N("Total Progress")],
-				[ $pbar3, $pbar3->{label} = new Gtk2::Label(' ') ],
-			),
+		my $tbox = gtkpack(new Gtk2::VBox(0, 5),
+			$table,
 			$stext,
 		),
 	);
+
     $custom_help = "options";
-    $central_widget = \$table;
+    $central_widget = \$tbox;
     $up_box->show_all();
     gtkflush();
 }
@@ -4401,11 +4377,11 @@ sub build_backup_ftp_status {
 #						    [ $pbar->set_show_text( $show_text);
 				[N("Sending files...")],
 				[""], 
-				[ $pbar->{label} = new Gtk2::Label(' ') ],
+				[ $plabel = new Gtk2::Label(' ') ],
 				[ $pbar ],
 				[""], 
 				[N("Total Progress")],
-				[ $pbar3->{label} = new Gtk2::Label(' ') ],
+				[ $plabel3 = new Gtk2::Label(' ') ],
 				[$pbar3],
 			),
 			1, new Gtk2::VBox(0, 15),
@@ -4467,12 +4443,12 @@ sub build_backup_box {
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(my $button_from_conf_file = new Gtk2::Button(), clicked => sub { 
-					${$central_widget}->destroy();
+					destroy_widget();
 					build_backup_box_see_conf();
 				}),
  				0, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(my $button_see_conf = new Gtk2::Button(), clicked => sub { 
-					${$central_widget}->destroy();
+					destroy_widget();
 					build_backup_box_see_conf();
 				}),
 				1, new Gtk2::VBox(0, 5),	
@@ -4500,27 +4476,28 @@ sub build_backup_box {
 ################################################  INTERACTIVE  ################################################  
 
 sub interactive_mode_box {
-    $box2->destroy();
+
+	destroy_widget();
 	my ($mode) = @_;
 	
-    read_conf_file();
+#    read_conf_file();
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
 			1, gtkpack_(new Gtk2::VBox(0, 15),	
 				1, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(new Gtk2::Button(N("Wizard Configuration")), clicked => sub { 
-					${$central_widget}->destroy();
+					destroy_widget();
 					read_conf_file();
 					wizard(); 
 				}),
 				1, gtksignal_connect(new Gtk2::Button(N("Advanced Configuration")), clicked => sub { 
 					button_box_adv();
-					${$central_widget}->destroy();
+					destroy_widget();
 					advanced_box(); 
 				}),
 				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
-#					${$central_widget}->destroy();
+#					destroy_widget();
 					if ($cfg_file_exist) { 
 						build_backup_box();
 					} else { 
@@ -4528,7 +4505,7 @@ sub interactive_mode_box {
 					}
 				}),
 				1, gtksignal_connect(new Gtk2::Button(N("Restore")), clicked => sub {
-					${$central_widget}->destroy(); 
+					destroy_widget(); 
 					restore_box();
 				}),
 				1, new Gtk2::VBox(0, 5),	
@@ -4541,7 +4518,7 @@ sub interactive_mode_box {
     $central_widget = \$box2;
     $up_box->show_all();
 	if ($mode eq "restore") {
-		${$central_widget}->destroy(); 
+		destroy_widget(); 
 		restore_box();
 	}    
 }
@@ -4573,7 +4550,7 @@ sub interactive_mode {
 				  		1, gtkpack_(new Gtk2::HBox(0, 15),	
 							0, new Gtk2::HBox(0, 5),	
 					    	1, $advanced_box = gtkpack_(new Gtk2::HBox(0, 15),	
-								1, $box2 = gtkpack_(new Gtk2::VBox(0, 15),),
+#								1, $box2 = gtkpack_(new Gtk2::VBox(0, 15),),
 							),
 					    	0, new Gtk2::HBox(0, 5),	
 						),
@@ -4774,19 +4751,20 @@ backup data files by hand.
 );
 
 ################################################  help function ##############################################
+	destroy_widget();
     my $text = new Gtk2::TextView;
     gtktext_insert($text, $custom_helps{$custom_help} || $custom_helps{main});
     gtkpack($advanced_box,
 	    my $advanced_box_help = gtkpack_(new Gtk2::VBox(0,10),
-					     1, create_scrolled_window($text), 
-					     0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-						       gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { 
-							   $$central_widget->destroy(); 
-							   $function->();
-						       }),
-						       ),
-					     )
-	    );
+			1, create_scrolled_window($text), 
+			0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+				gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { 
+					destroy_widget(); 
+					$function->();
+				}),
+			),
+		)
+	);
     $central_widget = \$advanced_box_help;
     $up_box->show_all();
 }
@@ -4799,4 +4777,11 @@ sub to_ok {
 
 sub to_normal {
     $next_widget = $sav_next_widget;
+}
+
+sub destroy_widget {
+	if ($central_widget ne '') {
+		${$central_widget}->destroy;
+		$central_widget = ''; 
+	}
 }
