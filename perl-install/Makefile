@@ -10,7 +10,7 @@ STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 BASE        = $(ROOTDEST)/Mandrake/base
 DESTREP4PMS = $(DEST)$(REP4PMS)
 PERL        = perl
-LOCALFILES  = ../tools/ddcprobe/ddcxinfos ../tools/e2fsck.shared pnp_serial 
+LOCALFILES  = $(patsubst %, ../tools/%,e2fsck.shared ddcprobe/ddcxinfos pnp_serial/pnp_serial)
 LOCALFILES2 = extract_archive
 DIRS        = c Newt po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
@@ -31,9 +31,9 @@ clean:
 
 tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
-	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe drakxtools	
+	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/pnp_serial drakxtools	
 	cd ../drakxtools ; rm -rf install* ForMakefile.pm pkgs.pm ftp.pm t.pm standalone/CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake mousedrake lspcidrake printerdrake keyboarddrake *.pm)
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake diskdrake.rc XFdrake mousedrake lspcidrake printerdrake keyboarddrake *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):

@@ -1,4 +1,4 @@
-DIRS = ddcprobe po Newt c pci_probing resize_fat
+DIRS = ddcprobe pnp_serial po Newt c pci_probing resize_fat
 PREFIX = 
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
@@ -17,7 +17,7 @@ $(DIRS):
 install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(X11DEST) $(DIRS:%=$(LIBDEST)/%)
 	install diskdrake XFdrake mousedrake lspcidrake printerdrake keyboarddrake $(SBINDEST)
-	install -s ddcprobe/ddcxinfos $(SBINDEST)
+	install -s ddcprobe/ddcxinfos pnp_serial/pnp_serial $(SBINDEST)
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
 	install -m 644 MonitorsDB $(X11DEST)
