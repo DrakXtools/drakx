@@ -79,7 +79,6 @@ function create_modules_mar() {
     for i in $images; do
         eval "modules=\$${i}_modules_raw"
         modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl $version modules.dep $modules`
-        if [ -n "$MOVE" ]; then modules_with_deps="change_loop.o gzloop.o isofs.o zlib_inflate.o supermount.o $modules_with_deps"; fi
 	eval "create_marfile ${i}_modules.mar $modules_with_deps"
     done
     echo
@@ -164,7 +163,7 @@ for i in $ALL_KERNELS/*; do
 done
 cp -f all.modules/$main/modules.description .
 
-l=`perl modules.pl images` || exit 1
+l=`MOVE=$MOVE perl modules.pl images` || exit 1
 eval $l
 
 for i in $ALL_KERNELS/*; do

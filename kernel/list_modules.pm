@@ -112,7 +112,7 @@ our %l = (
   {
     network => [ qw(af_packet nfs lockd sunrpc) ],
     cdrom => [ qw(isofs) ],
-    loopback => [ qw(isofs loop) ],
+    loopback => [ qw(isofs loop), if_($ENV{MOVE}, qw(cryptoloop gzloop supermount)) ],
     local => [
       if_(arch() =~ /^i.86|x86_64/, qw(vfat fat)),
       if_(arch() =~ /^ppc/, qw(hfs)),
