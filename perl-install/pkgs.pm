@@ -164,19 +164,39 @@ sub packageById {
     $pkg->is_arch_compat && $pkg;
 }
 
+sub analyse_kernel_name {
+    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-p3-smp-64GB|-secure|-smp)?(?:-([^\-]+))?$/;
+}
+
+sub packages2kernels {
+    my ($packages) = @_;
+
+    map { 
+	my $pkg = $packages->{depslist}[$_];
+	if (my ($ext, $version) = analyse_kernel_name($pkg->name)) {
+	    [ $pkg, $ext, $version ];
+	} else {
+	    log::l("ERROR: unknown package " . $pkg->name . " providing kernel");
+	    ();
+	}
+    } keys %{$packages->{provides}{kernel}};
+}
+
 sub bestKernelPackage {
     my ($packages) = @_;
-    my ($best, $best2, $best3);
 
-    foreach (keys %{$packages->{provides}{kernel}}) {
-	my $pkg = $packages->{depslist}[$_] or next;
-	$pkg->name =~ /kernel-\d/ and $best = $pkg;
-	$pkg->name =~ /kernel-i686/ and $best2 = $pkg;
-	$pkg->name =~ /kernel-enterprise/ and $best3 = $pkg;
+    my @kernels = packages2kernels($packages) or internal_error('no kernel available');
+    my ($version_BOOT) = c::kernel_version() =~ /^(\d+\.\d+)/;
+    if (my @l = grep { $_->[2] =~ /\Q$version_BOOT/ } @kernels) {
+	#- favour versions corresponding to current BOOT version
+	@kernels = @l;
     }
-    log::l("bestKernelPackage's: " . join(' ', map { if_($_, $_->name) } $best, $best2, $best3));
-
-    $best || $best2 || $best3;
+    if (my @l = grep { $_->[1] eq '' } @kernels) {
+	@kernels = @l;
+    }
+    
+    log::l("bestKernelPackage: " . join(' ', map { $_->[0]->name } @kernels) . (@kernels > 1 ? ' (choosing the first)' : ''));
+    $kernels[0][0];
 }
 
 sub packagesOfMedium {
@@ -226,14 +246,6 @@ sub packageCallbackChoices {
 	$prefer;
     } else {
 	my @l = grep {
-	    #- or if a kernel has to be chosen, chose the basic one.
-	    if ($_->arch ne 'src') {
-		if ($_->name =~ /kernel-\d/ || $_->name =~ /kernel-i686/) {
-		    log::l("packageCallbackChoices: chosen " . $_->name);
-		    return $_;
-		}
-	    }
-
 	    #- or even if a package requires a specific locales which
 	    #- is already selected.
 	    find {

@@ -62,17 +62,18 @@ sub check_kernel_module_packages {
     my ($do, $base_name, $o_ext_name) = @_;
 
     if (!$o_ext_name || pkgs::packageByName($do->{o}{packages}, $o_ext_name)) {
-	my @rpms;
-	foreach my $p (@{$do->{o}{packages}{depslist}}) {
-	    my ($ext, $version_release) = $p->name =~ /kernel[^\-]*(-smp|-enterprise|-secure|-i686-up-4GB)?(?:-([^\-]+))?$/
-	      or next;
-	    $p->flag_available or next;
-	    my $name = "$base_name$ext-$version_release";
-	    pkgs::packageByName($do->{o}{packages}, $name) or next;
-	    log::l("found kernel module packages $name");
-	    push @rpms, $name;
-	}
-	@rpms > 0 and return [ @rpms, if_($o_ext_name, $o_ext_name) ];
+	my @rpms = map {
+	    my ($p, $ext, $version) = @$_;	    
+	    my $name = "$base_name$ext-$version";
+	    if ($p->flag_available && pkgs::packageByName($do->{o}{packages}, $name)) {
+		log::l("found kernel module packages $name");
+		$name;
+	    } else {
+		();
+	    }
+	} pkgs::packages2kernels($do->{o}{packages});
+
+	@rpms and return [ @rpms, if_($o_ext_name, $o_ext_name) ];
     }
     return undef;
 }
