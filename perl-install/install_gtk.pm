@@ -195,14 +195,13 @@ sub create_logo_window {
     mygtk2::may_destroy($o->{logo_window});
 
     my $file = $o->{meta_class} eq 'firewall' ? "logo-mandrake-Firewall.png" : "logo-mandrake.png";
-    -r $file or $file = "$ENV{SHARE_PATH}/$file";
 
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = 
       gtknew('Window', 
 	     width => $::logowidth, height => $::logoheight, 
 	     title => 'skip', widget_name => 'logo',
-	     if_(-r $file, child => gtknew('Image', file => $file)),
+	     child => gtknew('Image', file => $file),
 	 );
     $w->show;
     $o->{logo_window} = $w;
