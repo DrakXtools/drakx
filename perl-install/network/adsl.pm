@@ -73,7 +73,7 @@ sub adsl_probe_info {
 	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
     my $passwd = passwd_by_login($login);
-    if (!$netc->{vpi} && !$netc->{vpi} && member($o_adsl_modem, qw(eci speedtouch))) {
+    if (!$netc->{vpi} && !$netc->{vci} && member($o_adsl_modem, qw(eci speedtouch))) {
       ($netc->{vpi}, $netc->{vci}) = 
 	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, map { sprintf("%x", $_) } $1, $2) } cat_("$::prefix/etc/ppp/peers/ppp0"));
     }
