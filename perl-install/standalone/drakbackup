@@ -120,6 +120,7 @@
 
 use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use strict;
 
 use interactive;
 use common;
@@ -290,7 +291,7 @@ if ($ENV{HOME} ne '/root') {
 }
 $cfg_file = $cfg_dir . "drakbackup.conf";
 
-sub show_conf {
+sub show_conf() {
     print "DrakBackup configuration:\n\n";
     read_conf_file();
     system_state();
@@ -298,7 +299,7 @@ sub show_conf {
     exit(0);
 }
 
-sub explain_conf {
+sub explain_conf() {
 	print "\nConfiguration File Options: \n\n";
 	print "Configuration file is located in:\n";
 	print "                            Root Mode: /etc/drakxtools/drakbackup/drakbackup.conf.\n";
@@ -360,13 +361,13 @@ sub explain_conf {
 	exit(0);
 }
 
-sub backend_mode {
+sub backend_mode() {
 	$backend_only = 1;
     build_backup_files();
     exit(0);
 }
 
-sub daemon_mode {
+sub daemon_mode() {
     $daemon = 1;
     build_backup_files();
     exit(0);
@@ -384,7 +385,7 @@ if (check_for_xserver()) {
 	die "Can't run in console mode...";
 }
 
-sub all_user_list {
+sub all_user_list() {
     my $passwdfile = "/etc/passwd";
     my $user;
     my $uid;
@@ -407,7 +408,7 @@ sub all_user_list {
     }
 }
 
-sub the_time {
+sub the_time() {
     $the_time = "_";
     $the_time .= localtime->year() + 1900;
     if (localtime->mon() < 9) { $the_time .= "0" }
@@ -423,7 +424,7 @@ sub the_time {
     $the_time .= localtime->sec();    
 }
 
-sub get_tape_info {
+sub get_tape_info() {
 	my @line_data;
 	my $info = "/tmp/dmesg";
 	@tape_devices = ();
@@ -440,7 +441,7 @@ sub get_tape_info {
 	unlink($info);
 }
 
-sub get_cd_info {
+sub get_cd_info() {
 	my @cd_info = cat_("/proc/sys/dev/cdrom/info");
 	my @line_data;
 	my @drive_names;
@@ -523,7 +524,7 @@ sub get_cd_info {
 	}
 }
 
-sub save_conf_file {
+sub save_conf_file() {
     write_sitecopyrc() if $net_proto eq 'webdav';
     write_password_file() if $net_proto eq 'rsync' && $passwd_user;
     
@@ -589,7 +590,7 @@ sub save_conf_file {
     save_cron_files();
 }
 
-sub read_cron_files {
+sub read_cron_files() {
     my $daemon_found = 0;
     foreach (qw(hourly daily weekly monthly)) {
 		if (-f "/etc/cron.$_/drakbackup") {
@@ -601,7 +602,7 @@ sub read_cron_files {
     !$daemon_found and $backup_daemon = 0; 
 }
 
-sub save_cron_files {
+sub save_cron_files() {
 	if ($nonroot_user) {
 		show_warning("w", N_("Cron not available yet as non-root")) if $not_warned;
 		$not_warned = 0;
@@ -623,7 +624,7 @@ sub save_cron_files {
     }
 }
 
-sub read_conf_file {
+sub read_conf_file() {
     if (-e $cfg_file) {
 #        %config = getVarsFromSh($cfg_file) || print "You must be root to read configuration file. \n";
 		local *CONF_FILE;
@@ -633,52 +634,52 @@ sub read_conf_file {
 	    	next unless /\S/;
 	    	next if /^#/;
 	    	chomp;
-	    	if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
-	    	if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
-	    	if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
-		if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_ }
-	    	if (/^NO_SYS_FILES/)   { $backup_sys = 0 }
-	    	if (/^NO_USER_FILES/)  { $backup_user = 0 }
-	    	if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1 }
-	    	if (/^BROWSER_CACHE/)  { $what_no_browser = 0 }
-	    	if (/^CDRW/)           { $cdrw = 1 }
-	    	if (/^DVDR/)           { $dvdr = 1 }
-	    	if (/^DVDRAM/)         { $dvdram = 1 }
-	    	if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_ }
-	    	if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_ } 
-	    	if (/^DAEMON_MEDIA/)   { s/^DAEMON_MEDIA=//gi; $daemon_media = $_ }
-	    	if (/^HD_QUOTA/)       { $hd_quota = 1 }
-	    	if (/^USE_HD/)         { $where_hd = 1 }
-	    	if (/^USE_CD/)         { $where_cd = 1 }
-	    	if (/^USE_NET/)        { $where_net = 1 }
-	    	if (/^USE_TAPE/)       { $where_tape = 1 }
-		if (/^TAPE_NOREWIND/)  { $tape_norewind = 1 }
-	    	if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_ }
-	    	if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_ }
-	    	if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1 }
-	    	if (/^CD_DEVICE/)      { s/^CD_DEVICE=//gi; $cd_device = $_ }
-	    	if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_ } 
-	    	if (/^REMEMBER_PASS/)  { $remember_pass = 1 }
-	    	if (/^USER_KEYS/)      { $user_keys = 1 }
-		if (/^DRAK_KEYS/)      { $xfer_keys = 1; $user_keys = 0 }
-		if (/^USE_EXPECT/)     { $use_expect = 1; $user_keys = 0 }
-		if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_ }
-	    	if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1 }
-	    	if (/^USER_MAIL/)      { s/^USER_MAIL=//gi; $user_mail = $_ }		     
-	    	if (/^SEND_MAIL/)      { $send_mail = 1 }
-	    	if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $tape_device = $_ }
-	    	if (/^MEDIA_ERASE/)    { $media_erase = 1 }
-	    	if (/^MEDIA_EJECT/)    { $media_eject = 1 }
-	    	if (/^MULTI_SESSION/)  { $multi_session = 1 }
-	    	if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1 }
-	    	if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1 }
-	    	if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1 }
-		if (/^SYS_DIFFERENTIAL_BACKUPS/)   { $sys_diff_mode = 1 }
-	    	if (/^USER_DIFFERENTIAL_BACKUPS/)  { $user_diff_mode = 1 }
-	    	if (/^OTHER_DIFFERENTIAL_BACKUPS/) { $other_diff_mode = 1 }
-	    	if (/^NO_CRITICAL_SYS/) { $no_critical_sys = 1 }
-	    	if (/^CRITICAL_SYS/)   { $no_critical_sys = 0 }
-	    	if (/^DEL_HD_FILES/)   { $del_hd_files = 1 }
+			if (/^SYS_FILES/)      { s/^SYS_FILES=//gi;    @sys_files = split(' ', $_) }
+			if (/^HOME_FILES/)     { s/^HOME_FILES=//gi;   @user_list = split(' ', $_) }
+			if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @list_other = split(' ', $_) }
+			if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_ }
+			if (/^NO_SYS_FILES/)   { $backup_sys = 0 }
+			if (/^NO_USER_FILES/)  { $backup_user = 0 }
+			if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1 }
+			if (/^BROWSER_CACHE/)  { $what_no_browser = 0 }
+			if (/^CDRW/)           { $cdrw = 1 }
+			if (/^DVDR/)           { $dvdr = 1 }
+			if (/^DVDRAM/)         { $dvdram = 1 }
+			if (/^NET_PROTO/)      { s/^NET_PROTO=//gi; $net_proto = $_ }
+			if (/^HOST_PATH/)      { s/^HOST_PATH=//gi; $host_path = $_ } 
+			if (/^DAEMON_MEDIA/)   { s/^DAEMON_MEDIA=//gi; $daemon_media = $_ }
+			if (/^HD_QUOTA/)       { $hd_quota = 1 }
+			if (/^USE_HD/)         { $where_hd = 1 }
+			if (/^USE_CD/)         { $where_cd = 1 }
+			if (/^USE_NET/)        { $where_net = 1 }
+			if (/^USE_TAPE/)       { $where_tape = 1 }
+			if (/^TAPE_NOREWIND/)  { $tape_norewind = 1 }
+			if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_ }
+			if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_ }
+			if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1 }
+			if (/^CD_DEVICE/)      { s/^CD_DEVICE=//gi; $cd_device = $_ }
+			if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_ } 
+			if (/^REMEMBER_PASS/)  { $remember_pass = 1 }
+			if (/^USER_KEYS/)      { $user_keys = 1 }
+			if (/^DRAK_KEYS/)      { $xfer_keys = 1; $user_keys = 0 }
+			if (/^USE_EXPECT/)     { $use_expect = 1; $user_keys = 0 }
+			if (/^LOGIN/)          { s/^LOGIN=//gi;  $login_user  = $_ }
+			if (/^PASSWD/)         { s/^PASSWD=//gi; $passwd_user = $_; $remember_pass = 1 }
+			if (/^USER_MAIL/)      { s/^USER_MAIL=//gi; $user_mail = $_ }		     
+			if (/^SEND_MAIL/)      { $send_mail = 1 }
+			if (/^TAPE_DEVICE/)    { s/TAPE_DEVICE=//gi; $tape_device = $_ }
+			if (/^MEDIA_ERASE/)    { $media_erase = 1 }
+			if (/^MEDIA_EJECT/)    { $media_eject = 1 }
+			if (/^MULTI_SESSION/)  { $multi_session = 1 }
+			if (/^SYS_INCREMENTAL_BACKUPS/)   { $backup_sys_versions = 1 }
+			if (/^USER_INCREMENTAL_BACKUPS/)  { $backup_user_versions = 1 }
+			if (/^OTHER_INCREMENTAL_BACKUPS/) { $backup_other_versions = 1 }
+			if (/^SYS_DIFFERENTIAL_BACKUPS/)   { $sys_diff_mode = 1 }
+			if (/^USER_DIFFERENTIAL_BACKUPS/)  { $user_diff_mode = 1 }
+			if (/^OTHER_DIFFERENTIAL_BACKUPS/) { $other_diff_mode = 1 }
+			if (/^NO_CRITICAL_SYS/) { $no_critical_sys = 1 }
+			if (/^CRITICAL_SYS/)   { $no_critical_sys = 0 }
+			if (/^DEL_HD_FILES/)   { $del_hd_files = 1 }
 	    }
 		close(CONF_FILE);
 		read_cron_files();
@@ -692,7 +693,7 @@ sub read_conf_file {
     }    
 }
 
-sub write_sitecopyrc {
+sub write_sitecopyrc() {
 	#- FIXME - how to deal with existing sitecopyrc
     my @cfg_list = ("site drakbackup\n",
 		     "\tserver $host_name\n",
@@ -708,7 +709,7 @@ sub write_sitecopyrc {
     chmod(0700, "$user_home/.sitecopy");
 }
 
-sub write_password_file {
+sub write_password_file() {
 	output_p("$cfg_dir/rsync.user", "$passwd_user\n");
 	chmod(0600, "$cfg_dir/rsync.user");
 }
@@ -728,7 +729,7 @@ sub show_warning {
 	$log_buff .= "\n$mode: $warning\n";
 }
 	
-sub complete_results {
+sub complete_results() {
     system_state();
     $results .=  "***********************************************************************\n\n";
     $daemon or $results .=  N("\n                      DrakBackup Report \n\n");
@@ -740,7 +741,7 @@ sub complete_results {
     $results .=  "***********************************************************************\n\n";
 }
 
-sub ftp_client {
+sub ftp_client() {
     use Net::FTP; 
     my $ftp;
 
@@ -754,7 +755,8 @@ sub ftp_client {
 		$interactive and $pbar->set_fraction(0);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
-		$ftp->put($_);
+		#- make perl_checker happy...
+		$ftp->put($_, undef, undef);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
 		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progess"));
@@ -863,7 +865,7 @@ sub do_expect {
 	$interactive = 1 if $mode eq "sendkey";
 }
 
-sub ssh_client {
+sub ssh_client() {
     $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	my $command;
 	my $value;
@@ -891,7 +893,7 @@ sub ssh_client {
     return(0);
 }
 
-sub webdav_client {
+sub webdav_client() {
     $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	if (!(-e "$user_home/.sitecopy/drakbackup")) {
 		my $command = "sitecopy -f $host_path";
@@ -910,7 +912,7 @@ sub webdav_client {
 	return(0);
 }
 
-sub rsync_client {
+sub rsync_client() {
     $DEBUG and print "file list to send: $_\n "  foreach @file_list_to_send_by_ftp;
 	my $rsync_cmd = "rsync -tv $save_path/* ";
 	$rsync_cmd = $rsync_cmd . "--password-file=$cfg_dir/rsync.user " if $passwd_user;
@@ -920,7 +922,7 @@ sub rsync_client {
 	return(0);
 }
 
-sub check_for_cd {	
+sub check_for_cd() {	
 	#- check for a cd
 	my $command = "cdrecord dev=$cd_device -atip";
 	spawn_progress($command, "Check for media in drive");
@@ -957,7 +959,7 @@ sub check_for_cd {
 	}
 }
 	
-sub write_on_cd {	
+sub write_on_cd() {	
 	my $command = "cdrecord -v dev=$cd_device -data ";
 	#- only blank if it's the first session
 	$command .= "blank=fast " if $media_erase && $session_offset eq '';
@@ -969,7 +971,7 @@ sub write_on_cd {
 	unlink("$save_path/drakbackup.iso");
 }
 
-sub erase_cdrw {
+sub erase_cdrw() {
 	#- we can only hit this via interactive
 	$interactive = 0;
 	$in->ask_warn('', N("This may take a moment to erase the media."));
@@ -1005,15 +1007,15 @@ sub spawn_progress {
 	$interactive and Gtk2->timeout_remove($timer);
 }
 
-sub progress_timeout {
+sub progress_timeout() {
 	my $new_val;
-	$new_val = $pbar3->fraction + 0.1;
+	$new_val = $pbar3->get_fraction + 0.1;
     if ($new_val > 1) { $new_val = 0 }
 	$pbar3->set_fraction($new_val);	
 	return(1);
 }
 
-sub get_cd_device {
+sub get_cd_device() {
 	my $check_device = "/dev/cdrom";
 	get_cd_info();
 	foreach  (keys %cd_devices) {
@@ -1025,7 +1027,7 @@ sub get_cd_device {
 	$check_device;
 }
 
-sub get_cd_volname {
+sub get_cd_volname() {
 	#- we want the volname for the catalog
 	my $check_device = get_cd_device();
      local *TMP;
@@ -1039,7 +1041,7 @@ sub get_cd_volname {
 	$vol_name; 			
 }
 
-sub build_iso {	
+sub build_iso() {	
 	if ($multi_session && $session_offset) {
 		$vol_name = get_cd_volname();
 	} else {
@@ -1052,7 +1054,7 @@ sub build_iso {
 	spawn_progress($command, "Running mkisofs...");
 }
 
-sub build_cd {
+sub build_cd() {
 	if (!check_for_cd()) {
 		build_iso();
 		if ($log_buff =~ /Permission denied/) {
@@ -1077,7 +1079,7 @@ sub get_tape_label {
 	$vol_name;
 }
 
-sub build_tape {
+sub build_tape() {
 	my $command;
 	#- do we have a tape?
 	$command = "mt -f $tape_device status"; 
@@ -1152,7 +1154,7 @@ sub send_mail {
     return(0);
 }
 
-sub build_backup_files {
+sub build_backup_files() {
     my $path_name;
     my $tar_cmd;
     my $more_recent;
@@ -1252,12 +1254,12 @@ sub build_backup_files {
 		  my $user = $_;
 		  $path_name = return_path($user);
 		  if ($backup_user_versions) {
-			$incr = "incr_user";
+			$incr = "incr_user_";
 			$incr =~ s/incr/diff/ if $user_diff_mode;
 			#- 8/19/2002 - changed these greps to look at the list, rather than the tar file
 			#- we retain the list for other media backups, but the tar file goes away, potentially
-		    if ((grep { /^list_incr_user_$user_/ } @dir_content) && !$user_diff_mode) { 
-				my @more_recent = grep { /^list_incr_user_$user_/ } sort @dir_content; 
+		    if ((grep { /^list_incr_user_$user/ } @dir_content) && !$user_diff_mode) { 
+				my @more_recent = grep { /^list_incr_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;
 				$DEBUG and print "more recent file: $more_recent\n";
 				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_incr_user_$user$the_time.txt");
@@ -1270,8 +1272,8 @@ sub build_backup_files {
 					$results .= " \nfile: $save_path/backup_incr_user_$user$the_time.$tar_ext\n";
 					$results .= cat_("$save_path/list_incr_user_$user$the_time.txt");
 				}
-		    } elsif (grep { /^list_base_user_$user_/ } @dir_content) { 
-				my @more_recent = grep { /^list_base_user_$user_/ } sort @dir_content; 
+		    } elsif (grep { /^list_base_user_$user/ } @dir_content) { 
+				my @more_recent = grep { /^list_base_user_$user/ } sort @dir_content; 
 				$more_recent = pop @more_recent;			
 				$DEBUG and print "more recent file: $more_recent\n";
 				system("find $path_name -cnewer $save_path/$more_recent ! -type d -print > $save_path/list_$incr$user$the_time.txt");
@@ -1484,7 +1486,7 @@ sub require_rpm {
     return($all_rpms_found);
 }
 
-sub check_pkg_needs {
+sub check_pkg_needs() {
 	my $extra_pkg = '';
 	if ($where_net) {
 		$extra_pkg = 'rsync' if $net_proto eq 'rsync';
@@ -1505,19 +1507,19 @@ sub check_pkg_needs {
 	}	
 }
 
-sub cursor_wait {
+sub cursor_wait() {
 	# turn the cursor to a watch
 	$window1->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_WATCH"));    
 	gtkflush();
 }
 
-sub cursor_norm {
+sub cursor_norm() {
 	# restore normal cursor
 	$window1->window->set_cursor(new Gtk2::Gdk::Cursor("GDK_LEFT_PTR"));
 	gtkflush();
 }
 
-sub show_status {
+sub show_status() {
     #- just a generic routine to display an array of text in the GUI screen
     my $text = new Gtk2::TextView;	
 	destroy_widget();
@@ -1543,7 +1545,7 @@ sub file_ok_sel {
     }
 }
 
-sub filedialog_where_hd {
+sub filedialog_where_hd() {
     my $file_dialog;
 
     $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
@@ -1554,7 +1556,7 @@ sub filedialog_where_hd {
     $file_dialog->show();
 }
 
-sub filedialog_restore_find_path {
+sub filedialog_restore_find_path() {
     my $file_dialog;
 
     $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("File Selection")), destroy => sub { $file_dialog->destroy() });
@@ -1582,7 +1584,7 @@ sub filedialog_generic {
     $file_dialog->show();
 }
 
-sub filedialog {
+sub filedialog() {
     my $file_dialog;
 
     $file_dialog = gtksignal_connect(new Gtk2::FileSelection(N("Select the files or directories and click on 'OK'")), destroy => sub { $file_dialog->destroy() });
@@ -1608,7 +1610,7 @@ sub fonction_env {
     ($central_widget, $current_widget, $previous_widget, $custom_help, $next_widget) = @_;
 }
 
-sub advanced_what_sys {
+sub advanced_what_sys() {
     my $box_what_sys;
     
     gtkpack($advanced_box,
@@ -1699,12 +1701,11 @@ sub advanced_what_user {
     $up_box->show_all();
 }
 
-sub advanced_what_other {
+sub advanced_what_other() {
     my $box_what_other;
 	my $file_iter;
 	$iter = Gtk2::TreeIter->new;
 	my $other_file;
-	my @to_remove;
 			
 	$list_model = Gtk2::ListStore->new(Gtk2::GType->STRING);
 	my $list_others = Gtk2::TreeView->new_with_model($list_model);
@@ -1763,7 +1764,7 @@ sub advanced_what_other {
     $up_box->show_all();			
 }
 
-sub advanced_what_entire_sys {
+sub advanced_what_entire_sys() {
     my $box_what;
     
     gtkpack($advanced_box,
@@ -1794,7 +1795,7 @@ sub advanced_what_entire_sys {
     $up_box->show_all();
 }
 
-sub advanced_what {
+sub advanced_what() {
     my $box_what;    
 
     gtkpack($advanced_box,
@@ -2254,7 +2255,7 @@ sub advanced_where_hd {
     $up_box->show_all();
 }
 
-sub advanced_where {
+sub advanced_where() {
     my $box_where;
 
     gtkpack($advanced_box,
@@ -2314,7 +2315,7 @@ sub advanced_where {
 
 #- 7/7/2002 - S.Benedict reworked when - drop all the checkboxes and use a list
 #- chances that we want to do backups via multiple medias in cron are slim
-sub advanced_when {
+sub advanced_when() {
     my $box_when;
 #   $daemon_media = '';
     my $combo_when_space = new Gtk2::Combo();
@@ -2376,7 +2377,7 @@ sub advanced_when {
     $up_box->show_all();
 }
 
-sub advanced_options {
+sub advanced_options() {
     my $box_options;
     
     gtkpack($advanced_box,
@@ -2411,7 +2412,7 @@ sub advanced_options {
     $up_box->show_all();
 }
 
-sub advanced_box {
+sub advanced_box() {
     my $box_adv;
 
     gtkpack($advanced_box,
@@ -2458,7 +2459,7 @@ sub advanced_box {
 
 ################################################  WIZARD  ################################################  
 
-sub wizard_step3 {
+sub wizard_step3() {
     my $box2;    
     my $text = new Gtk2::TextView;
 	save_conf_file();
@@ -2480,7 +2481,7 @@ sub wizard_step3 {
     $up_box->show_all();
 }
 
-sub wizard_step2 {
+sub wizard_step2() {
     my $box2;    
     
     gtkpack($advanced_box,
@@ -2553,7 +2554,7 @@ sub wizard_step2 {
     $up_box->show_all();
 }
 
-sub wizard   {
+sub wizard()   {
 	my $box2;    
     
 	gtkpack($advanced_box,
@@ -2594,7 +2595,7 @@ sub wizard   {
 
 ################################################  RESTORE  ################################################  
 
-sub find_backup_to_restore {
+sub find_backup_to_restore() {
     my @list_backup;
     my @list_backup_tmp2;
     my $to_put;
@@ -2644,7 +2645,7 @@ sub find_backup_to_restore {
     }
 }
 
-sub system_state {
+sub system_state() {
 #    $system_state;
 
     if ($cfg_file_exist) { 
@@ -2696,7 +2697,7 @@ sub system_state {
     }
 }
 
-sub restore_state {
+sub restore_state() {
     my @tmp = split(' ', $restore_step_sys_date);
     $restore_state = N("List of data to restore:\n\n");
     if ($restore_sys) { $restore_state .= "- Restore System Files.\n";
@@ -2721,11 +2722,11 @@ sub select_most_recent_selected_of {
     my @list_tmp2;
 	local $_;
     my @tmp = sort @user_list_to_restore2;
-    foreach (grep { /$user_name_/ } sort @tmp) { push @list_tmp2 , $_ }
+    foreach (grep { /$user_name/ } sort @tmp) { push @list_tmp2 , $_ }
     return pop @list_tmp2;
 }
 
-sub select_user_data_to_restore {
+sub select_user_data_to_restore() {
     my $var_eq = 1;
     my @list_backup;
     my @list_tmp;
@@ -2743,7 +2744,7 @@ sub select_user_data_to_restore {
     foreach my $var_tmp (@user_list_backuped) {
 		$var_eq = 1;
 		my $more_recent = (split(' ', select_most_recent_selected_of($var_tmp)))[0]; 
-		foreach (grep { /^backup_user_$var_tmp_/ } sort @list_backup) {
+		foreach (grep { /^backup_user_$var_tmp/ } sort @list_backup) {
 	    	s/.tar.gz//gi;
 	    	s/.tar.bz2//gi;
 	    	if ($more_recent) {
@@ -2774,7 +2775,7 @@ sub select_user_data_to_restore {
     $DEBUG and print "real user list to restore:  $_ \n" foreach @user_list_to_restore;
 }
 
-sub select_sys_data_to_restore {
+sub select_sys_data_to_restore() {
     my $var_eq = 1;
     my @list_tmp;
 	local $_;
@@ -2865,7 +2866,7 @@ sub valid_backup_test {
     return $is_corrupted;
 }
 
-sub restore_aff_backup_problems {
+sub restore_aff_backup_problems() {
     my $do_restore;
     my $text = new Gtk2::TextView;
     my $restore_pbs_state = N("List of data corrupted:\n\n");
@@ -2892,7 +2893,7 @@ sub restore_aff_backup_problems {
     $up_box->show_all();
 }
 
-sub restore_aff_result {
+sub restore_aff_result() {
     my $do_restore;
     my $text = new Gtk2::TextView;
     gtktext_insert($text, [ [ $restore_state ] ]);
@@ -2928,7 +2929,7 @@ sub return_path {
     return $home_dir;
 }
 
-sub restore_backend {
+sub restore_backend() {
     my $untar_cmd;
     my $exist_problem = 0;
     my $user_dir;
@@ -2991,7 +2992,7 @@ sub restore_backend {
     $exist_problem or restore_aff_result();
 }
 
-sub restore_do {
+sub restore_do() {
     if ($backup_bef_restore) {
 		if ($restore_sys) { 
 			$backup_sys = 1;
@@ -3012,7 +3013,7 @@ sub restore_do {
     restore_do2();
 }
 
-sub restore_do2 {
+sub restore_do2() {
     my $do_restore;
     my $text = new Gtk2::TextView;
     restore_state();
@@ -3030,7 +3031,7 @@ sub restore_do2 {
     $up_box->show_all();
 }
 
-sub restore_step_other {
+sub restore_step_other() {
     my $retore_step_other;
     my $text = new Gtk2::TextView;
     my $other_rest = cat_("$path_to_find_restore/list_other");
@@ -3049,7 +3050,7 @@ sub restore_step_other {
 }
 
 my %check_user_to_restore;
-sub restore_step_user {
+sub restore_step_user() {
     my $retore_step_user;
     my @tmp_list = sort @user_backuped;
     @user_backuped = @tmp_list;
@@ -3126,7 +3127,7 @@ sub restore_step_user {
     $up_box->show_all();
 }
 
-sub restore_step_sys {
+sub restore_step_sys() {
     my $restore_step_sys;
 	my $check_backup_before;
     my $combo_restore_step_sys = new Gtk2::Combo();
@@ -3210,7 +3211,7 @@ sub restore_other_media_hd {
     $up_box->show_all();
 }
 
-sub restore_other_media {
+sub restore_other_media() {
     my $box_find_restore;
     my $button;
     
@@ -3260,7 +3261,7 @@ sub restore_other_media {
     $up_box->show_all();
 }
 
-sub restore_step2 {
+sub restore_step2() {
     my $retore_step2;
     my $other_exist;
     my $sys_exist;
@@ -3272,7 +3273,7 @@ sub restore_step2 {
 	my $info_prefix = "backup";
 	$info_prefix = "list" if $where_net || $where_tape;
 	
-    if (-f "$restore_info_path/$info_prefix_other*") { $other_exist = 1 } 
+    if (-f "$restore_info_path/$info_prefix" . "_other*") { $other_exist = 1 } 
     else { $other_exist = 0; $restore_other = 0 }
     if (grep  { /_sys_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { $sys_exist = 1 } 
     else { $sys_exist = 0; $restore_sys = 0 }
@@ -3347,7 +3348,7 @@ sub restore_step2 {
     $up_box->show_all();
 }
 
-sub catalog_restore {
+sub catalog_restore() {
 	my $catalog_box;
 	my $cat_entry;
 	my @restore_files;
@@ -3818,7 +3819,7 @@ sub find_tape_offset {
 	}	
 }
 
-sub restore_box {
+sub restore_box() {
     my $retore_box;
     
 	if ($good_restore_path) {
@@ -3865,7 +3866,7 @@ sub restore_box {
 	$up_box->show_all();
 }
 
-sub restore_find_media_box {
+sub restore_find_media_box() {
     my $mount_media = 1;
     $good_restore_path = 0;
     my $message = "Unable to find backups to restore...\n";
@@ -3913,7 +3914,7 @@ sub restore_find_media_box {
     $up_box->show_all();
 }
 
-sub restore_status {
+sub restore_status() {
 	destroy_widget();
     $pbar3 =  new Gtk2::ProgressBar;
     $stext = new Gtk2::Label("");
@@ -3945,7 +3946,7 @@ sub restore_status {
 
 ################################################  BUTTON_BOX  ################################################  
 
-sub button_box_adv {
+sub button_box_adv() {
     $button_box_tmp->destroy();
     gtkpack($button_box,
 		$button_box_tmp = gtkpack_(new Gtk2::HButtonBox,
@@ -3971,7 +3972,7 @@ sub button_box_adv {
 	);
 }
 
-sub button_box_restore_main {
+sub button_box_restore_main() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -3996,7 +3997,7 @@ sub button_box_restore_main {
 	);
 }
 
-sub button_box_backup_end {
+sub button_box_backup_end() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4022,7 +4023,7 @@ sub button_box_backup_end {
 	);
 }
 
-sub button_box_wizard_end {
+sub button_box_wizard_end() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4048,7 +4049,7 @@ sub button_box_wizard_end {
 	);
 }
 
-sub button_box_restore_end {
+sub button_box_restore_end() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4073,7 +4074,7 @@ sub button_box_restore_end {
 	);
 }
 
-sub button_box_build_backup_end {
+sub button_box_build_backup_end() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4088,7 +4089,7 @@ sub button_box_build_backup_end {
 	);
 }
 
-sub button_box_restore_pbs_end {
+sub button_box_restore_pbs_end() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4106,7 +4107,7 @@ sub button_box_restore_pbs_end {
 	);
 }
 
-sub button_box_build_backup {
+sub button_box_build_backup() {
     $button_box_tmp->destroy();
 
 	gtkpack($button_box,
@@ -4131,7 +4132,7 @@ sub button_box_build_backup {
 	);
 }
 
-sub button_box_restore {
+sub button_box_restore() {
 
     $button_box_tmp->destroy();
 
@@ -4187,7 +4188,7 @@ sub button_box_find_media {
 	);
 }
 
-sub button_box_wizard {
+sub button_box_wizard() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4212,7 +4213,7 @@ sub button_box_wizard {
 	);
 }
 
-sub button_box_main {
+sub button_box_main() {
     $button_box_tmp->destroy();
 
     gtkpack($button_box,
@@ -4248,13 +4249,13 @@ sub dialog_one {
     $up_box->show_all();    
 }
 
-sub send_mail_pb {
+sub send_mail_pb() {
     dialog_one(N("Error during sendmail.
   Your report mail was not sent.
   Please configure sendmail"));
 }
 
-sub client_ftp_pb {
+sub client_ftp_pb() {
     dialog_one(N("Error during sending file via FTP.
  Please correct your FTP configuration."));
 }
@@ -4283,7 +4284,7 @@ sub install_rpm {
 }
 
 
-sub message_norestore_box {
+sub message_norestore_box() {
     $box2->destroy();
     
     gtkadd($advanced_box,
@@ -4326,7 +4327,7 @@ sub message_common_box {
     $up_box->show_all();    
 }
 
-sub message_noselect_box {
+sub message_noselect_box() {
     message_common_box(N("Please select media for backup..."));
     $previous_widget = \&wizard_step2;
     $next_widget = \&wizard_step2;
@@ -4334,7 +4335,7 @@ sub message_noselect_box {
     $up_box->show_all();    
 }
 
-sub message_noselect_what_box {
+sub message_noselect_what_box() {
     message_common_box(N("Please select data to backup..."));
     $previous_widget = \&wizard;
     $next_widget = \&wizard;
@@ -4363,19 +4364,19 @@ sub message_common_box_2 {
     $central_widget = \$box2;
     $up_box->show_all();    
 }
-sub message_noconf_box {
+sub message_noconf_box() {
     message_common_box_2(N("No configuration file found \nplease click Wizard or Advanced."), 1);
 }
 
-sub message_underdevel {
-    message_common_box_2(N("Under Devel ... please wait."));
+sub message_underdevel() {
+    message_common_box_2(N("Under Devel ... please wait."), 1);
 }
 
 ################################################  BUILD_BACKUP  ################################################  
 
 sub progress {
     my ($progressbar, $plabel, $incr, $label_text) = @_;
-    my ($new_val) = $progressbar->fraction;
+    my ($new_val) = $progressbar->get_fraction;
     $new_val += $incr;
     if ($new_val > 1) { $new_val = 1 }
     $progressbar->fraction($new_val);
@@ -4383,7 +4384,7 @@ sub progress {
     gtkflush();
 }
 
-sub find_backup_to_put_on_cd {
+sub find_backup_to_put_on_cd() {
     @data_backuped = ();
 	local $_;
 	
@@ -4425,7 +4426,7 @@ sub find_backup_to_put_on_cd {
     }
 }
 
-sub build_backup_status {
+sub build_backup_status() {
     $pbar =   new Gtk2::ProgressBar;
     $pbar1 =  new Gtk2::ProgressBar;
     $pbar2 =  new Gtk2::ProgressBar;
@@ -4469,7 +4470,7 @@ sub build_backup_status {
 }
 
 
-sub build_backup_ftp_status {
+sub build_backup_ftp_status() {
     $pbar =   new Gtk2::ProgressBar;
     $pbar3 =  new Gtk2::ProgressBar;
 	destroy_widget();
@@ -4480,7 +4481,7 @@ sub build_backup_ftp_status {
 
     gtkpack($advanced_box,
 		$table =  gtkpack_(new Gtk2::VBox(0, 15),
-			1, N("files sending by FTP"),
+			1, N("Sending files by FTP"),
 			1, new Gtk2::VBox(0, 15),
 			1, create_packtable ({ col_spacings => 10, row_spacings => 5 },
 				[N("Sending files...")],
@@ -4501,7 +4502,7 @@ sub build_backup_ftp_status {
     gtkflush();
 }
 
-sub build_backup_box_see_conf {
+sub build_backup_box_see_conf() {
     my $box2;
     my $text = new Gtk2::TextView;
     system_state();
@@ -4524,11 +4525,11 @@ sub build_backup_box_see_conf {
     $up_box->show_all();
 }
 
-sub build_backup_box_progress {
+sub build_backup_box_progress() {
 #    build_backup_files(); 
 }
 
-sub aff_total_tail {
+sub aff_total_tail() {
     my @toto;
     my $total = 0;
     push @toto, (split(",", $_))[1] foreach @list_to_build_on_cd;
@@ -4541,7 +4542,7 @@ sub aff_total_tail {
     $label_tail->set("total tail: $total ko");
 }
 
-sub build_backup_box {
+sub build_backup_box() {
 	destroy_widget();
 
     gtkadd($advanced_box,
@@ -4628,7 +4629,7 @@ sub interactive_mode_box {
 	}    
 }
 
-sub interactive_mode {
+sub interactive_mode() {
     $interactive = 1;
 
     $in = 'interactive'->vnew;
@@ -4876,17 +4877,17 @@ backup data files by hand.
     $up_box->show_all();
 }
 
-sub to_ok {
+sub to_ok() {
     $sav_next_widget = $next_widget;
     $next_widget = undef;
     button_box_wizard();
 }
 
-sub to_normal {
+sub to_normal() {
     $next_widget = $sav_next_widget;
 }
 
-sub destroy_widget {
+sub destroy_widget() {
 	if ($central_widget ne '') {
 		$$central_widget->destroy;
 		$central_widget = ''; 

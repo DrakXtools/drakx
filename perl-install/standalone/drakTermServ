@@ -121,16 +121,16 @@ if ("@ARGV" =~ /--deluser/) {
 }
 
 if ("@ARGV" =~ /--addclient/) {
-	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image...\n" if $#ARGV < 4;
+	die "$0 $ARGV[0] requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT...\n" if $#ARGV < 5;
 	my $cmd_line = 1;
-	addclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4]);
+	addclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3], $ARGV[4], $ARGV[5]);
 	exit(0);	
 }
 
 if ("@ARGV" =~ /--delclient/) {
 	die "$0 $ARGV[0] requires hostname...\n" if $#ARGV < 1;
 	my $cmd_line = 1;
-	delclient($cmd_line, $ARGV[1], $ARGV[2], $ARGV[3]);
+	delclient($cmd_line, $ARGV[1]);
 	exit(0);	
 }
 
@@ -139,14 +139,14 @@ interactive_mode() if $#ARGV < 1;
 
 sub read_conf_file() {
 	if (-e $cfg_file) {
-         local *CONF_FILE;
+		local *CONF_FILE;
 		open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
-          local $_;
+		local $_;
 		while (<CONF_FILE>) {
-			if (/^ALLOW_THIN/) {
-                   $thin_clients = 1;
-                   last;
-               }
+			if (/^\bALLOW_THIN\b/) {
+				$thin_clients = 1;
+				last;
+			}
 		}
 	}
 }
@@ -1015,7 +1015,7 @@ sub dhcpd_config() {
 	
 	foreach (@resolve) {
 		@ifvalues = split / /;
-		if ($ifvalues[0] =~ /nameserver/ && $i lt 4) {
+		if ($ifvalues[0] =~ /nameserver/ && $i < 4) {
 			$nservers[$i++] = $ifvalues[1];
 		}
 	}
