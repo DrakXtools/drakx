@@ -1,0 +1,64 @@
+ # -*- makefile -*-
+ #******************************************************************************
+ #
+ # Guillaume Cottenceau (gc@mandrakesoft.com)
+ #
+ # Copyright 2000 Mandrakesoft
+ #
+ # This software may be freely redistributed under the terms of the GNU
+ # public license.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ #
+ #*****************************************************************************
+
+ARCH := $(patsubst i%86,i386,$(shell uname -m))
+ARCH := $(patsubst sparc%,sparc,$(ARCH))
+
+ #- default lib is dietlibc (honoured by main Makefile whenever possible)
+L = DIETLIBC
+#L = GLIBC
+
+ #- default frontend is newt (honoured by main Makefile whenever possible)
+F = NEWT
+# F = STDIO
+
+ #- override in some situations
+ifeq (ia64, $(ARCH))
+L = GLIBC
+endif
+ifeq (ppc, $(ARCH))
+L = GLIBC
+endif
+ifeq (x86_64, $(ARCH))
+#L = GLIBC
+endif
+
+ifeq (DIETLIBC, $(L))
+DIET = $(top_dir)/dietlibc/bin-$(ARCH)/diet
+endif
+
+
+ #- flags used by all stuff
+ifeq (ppc, $(ARCH))
+CFLAGS = -Os -pipe -Wall -fomit-frame-pointer -fno-strict-aliasing
+else
+CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer -fno-strict-aliasing
+endif
+
+DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I. -I$(top_dir)/bzlib
+GLIBC_INCLUDES = -I. -I$(top_dir)/bzlib
+INCLUDES = $($(L)_INCLUDES)
+
+GLIBC_LDFLAGS_STAGE1 = -static
+DIETLIBC_LDFLAGS_STAGE1 = -nostdlib
+LDFLAGS_STAGE1 = $($(L)_LDFLAGS_STAGE1)
+
+GLIBC_LIBC =
+DIETLIBC_LIBC = 
+STAGE1_LIBC = $($(L)_LIBC)
+
+STRIPCMD = strip -R .note -R .comment
+
