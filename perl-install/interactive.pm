@@ -9,6 +9,12 @@ use strict;
 use MDK::Common::Func;
 use common;
 
+#- minimal example using interactive:
+#- > use interactive;
+#- > my $in = interactive->vnew;
+#- > $in->ask_okcancel('title', 'question');
+#- > $in->exit;
+
 #- ask_from_entries takes:
 #-  val      => reference to the value
 #-  label    => description
