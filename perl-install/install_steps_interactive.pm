@@ -1317,7 +1317,7 @@ sub generateAutoInstFloppy {
 sub exitInstall {
     my ($o, $alldone) = @_;
 
-    return $o->{step} = '' unless $alldone || $o->ask_yesorno('', 
+    return $o->{step} = '' if !$alldone && !$o->ask_yesorno('', 
 N("Some steps are not completed.
 
 Do you really want to quit now?"), 0);

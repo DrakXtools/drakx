@@ -1041,8 +1041,8 @@ sub install_loadlin {
 
     my $boot;
     ($boot) = grep { $lilo->{boot} eq "/dev/$_->{device}" } @$fstab;
-    ($boot) = grep { loopback::carryRootLoopback($_) } @$fstab unless $boot && $boot->{device_windobe};
-    ($boot) = grep { isFat($_) } @$fstab unless $boot && $boot->{device_windobe};
+    ($boot) = grep { loopback::carryRootLoopback($_) } @$fstab if !$boot || !$boot->{device_windobe};
+    ($boot) = grep { isFat($_) } @$fstab if !$boot || !$boot->{device_windobe};
     log::l("loadlin device is $boot->{device} (windobe $boot->{device_windobe})");
     $lilo->{boot_drive} = $boot->{device_windobe};
 

@@ -206,7 +206,7 @@ sub ask_mntpoint_s {
     my %m; foreach (@$fstab) {
 	my $m = $_->{mntpoint};
 
-	next unless $m && $m ne 'swap'; #- there may be a lot of swap.
+	next if !$m || $m eq 'swap'; #- there may be a lot of swap.
 
 	$m{$m} and die N("Duplicate mount point %s", $m);
 	$m{$m} = 1;

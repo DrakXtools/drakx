@@ -277,7 +277,7 @@ sub isdn_get_list {
 sub isdn_get_info {
     my ($desc) = @_;
     foreach (@isdndata) {
-	return $_ if ($_->{description} eq $desc);
+	return $_ if $_->{description} eq $desc;
     }
 }
 

@@ -84,7 +84,7 @@ sub write_resolv_conf {
     #- get the list of used dns.
     my %used_dns; @used_dns{$netc->{dnsServer}, $netc->{dnsServer2}, $netc->{dnsServer3}} = (1, 2, 3);
 
-    unless ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2} || keys %used_dns > 0) {
+    if (!$netc->{DOMAINNAME} && !$netc->{DOMAINNAME2} && !%used_dns) {
 	unlink($file);
 	log::l("neither domain name nor dns server are configured");
 	return 0;
@@ -107,7 +107,7 @@ sub write_resolv_conf {
     unlink $file;  #- workaround situation when /etc/resolv.conf is an absolute link to /etc/ppp/resolv.conf or whatever
     open F, ">$file" or die "cannot write $file: $!";
     print F "# search $_\n" foreach grep { $_ ne "$netc->{DOMAINNAME} $netc->{DOMAINNAME2}" } sort { $search{$a} <=> $search{$b} } keys %search;
-    print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
+    print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n" if $netc->{DOMAINNAME} || $netc->{DOMAINNAME2};
 #-    print F "$options\n\n";
     print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
     print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;

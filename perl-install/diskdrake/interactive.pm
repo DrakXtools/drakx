@@ -515,7 +515,7 @@ sub Delete {
 	fsedit::recompute_loopbacks($all_hds);
     } else {
 	if (arch() =~ /ppc/) {
-	    undef $partition_table::mac::bootstrap_part if (isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part));
+	    undef $partition_table::mac::bootstrap_part if isAppleBootstrap($part) && ($part->{device} = $partition_table::mac::bootstrap_part);
 	}
 	partition_table::remove($hd, $part);
 	warn_if_renumbered($in, $hd);

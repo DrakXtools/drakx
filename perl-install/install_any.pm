@@ -126,7 +126,7 @@ sub getFile {
 	    #- handling changing a media when some of the file on the first CD has been copied
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
-	    $f2 = "/tmp/image/$rel" unless $postinstall_rpms && -e $f2;
+	    $f2 = "/tmp/image/$rel" if !$postinstall_rpms || !-e $f2;
 	    open GETFILE, $f2 and *GETFILE;
 	}
     } || errorOpeningFile($f);

@@ -410,7 +410,7 @@ sub adjust_main_extended {
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
     }
-    unless (@{$hd->{extended} || []} || !$hd->{primary}{extended}) {
+    if (!@{$hd->{extended} || []} && $hd->{primary}{extended}) {
 	%{$hd->{primary}{extended}} = (); #- modify the raw entry
 	delete $hd->{primary}{extended};
     }

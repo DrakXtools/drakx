@@ -195,7 +195,7 @@ To use alsa, one can either use:
                                 }
                                 ]))
         {
-            return if ($new_driver eq $driver);
+            return if $new_driver eq $driver;
             standalone::explanations("switching audio driver from '$driver' to '$new_driver'\n");
             $in->ask_warn(N("Warning"), N("The old \"%s\" driver is blacklisted.\n
 It has been reported to oopses the kernel on unloading.\n

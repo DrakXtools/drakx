@@ -46,10 +46,10 @@ sub intro {
 				    translate($text),
 				    sub { $_[0]{description} },
 				    \@l);
-	run_program::rooted($prefix, $connect_prog) if ($e->{c}==1);
-	run_program::rooted($prefix, $disconnect_file) if ($e->{c}==2);
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if ($e->{c}==3);
-	$in->exit(0) if ($e->{c}==4);
+	run_program::rooted($prefix, $connect_prog) if $e->{c}==1;
+	run_program::rooted($prefix, $disconnect_file) if $e->{c}==2;
+	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if $e->{c}==3;
+	$in->exit(0) if $e->{c}==4;
     } else {
 	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0);
     }

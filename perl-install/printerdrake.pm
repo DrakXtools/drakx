@@ -19,7 +19,7 @@ sub choose_printer_type {
     my $queue = $printer->{OLD_QUEUE};
     $printer->{str_type} = $printer::printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
-    $autodetect = 1 if ($printer->{AUTODETECT});
+    $autodetect = 1 if $printer->{AUTODETECT};
     my @printertypes = printer::printer_type($printer);
     $in->ask_from_(
 		   { title => N("Select Printer Connection"),
@@ -87,7 +87,7 @@ sub config_cups {
 	       ($::expert ? "\n" . N("
 Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").") : ()),
 	   callbacks => { complete => sub {
-	       unless (!$server || network::is_ip($server)) {
+	       if ($server && !network::is_ip($server)) {
 		   $in->ask_warn('', N("The IP address should look like 192.168.1.20"));
 		   return (1,0);
 	       }
@@ -596,7 +596,7 @@ sub setup_local_autoscan {
 	    }
 	} else {
 	    my $manualconf = 0;
-	    $manualconf = 1 if (($printer->{MANUAL}) || (!$do_auto_detect));
+	    $manualconf = 1 if $printer->{MANUAL} || !$do_auto_detect;
 	    if (!$in->ask_from_
 		(
 		 { title => ($expert_or_modify ?
@@ -874,19 +874,19 @@ sub setup_smb {
 	     allow_empty_list => 1, type => 'combo' }
 	   : ()) ],
 	 complete => sub {
-	     unless ((network::is_ip($smbserverip)) || ($smbserverip eq "")) {
+	     if (!network::is_ip($smbserverip) && $smbserverip ne "") {
 		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
 		 return (1,1);
 	     }
-	     unless (($smbserver ne "") || ($smbserverip ne "")) {
+	     if ($smbserver eq "" && $smbserverip eq "") {
 		 $in->ask_warn('', N("Either the server name or the server's IP must be given!"));
 		 return (1,0);
 	     }
-	     unless ($smbshare ne "") {
+	     if ($smbshare eq "") {
 		 $in->ask_warn('', N("Samba share name missing!"));
 		 return (1,2);
 	     }
-	     unless ($smbpassword eq "") {
+	     if ($smbpassword ne "") {
 		 local $::isWizard = 0;
 		 my $yes = $in->ask_yesorno
 		     (N("SECURITY WARNING!"),
@@ -2079,16 +2079,15 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		     my $i;
 		     for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
 			 if (($printer->{ARGS}[$i]{type} eq 'int') || ($printer->{ARGS}[$i]{type} eq 'float')) {
-			     unless (($printer->{ARGS}[$i]{type} ne 'int') || ($userinputs[$i] =~ /^[\-\+]?[0-9]+$/)) {
+			     if ($printer->{ARGS}[$i]{type} eq 'int' && $userinputs[$i] !~ /^[\-\+]?[0-9]+$/) {
 				 $in->ask_warn('', N("Option %s must be an integer number!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
-			     unless (($printer->{ARGS}[$i]{type} ne 'float') || ($userinputs[$i] =~ /^[\-\+]?[0-9\.]+$/)) {
+			     if ($printer->{ARGS}[$i]{type} eq 'float' && $userinputs[$i] !~ /^[\-\+]?[0-9\.]+$/) {
 				 $in->ask_warn('', N("Option %s must be a number!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
-			     unless (($userinputs[$i] >= $printer->{ARGS}[$i]{min}) &&
-				     ($userinputs[$i] <= $printer->{ARGS}[$i]{max})) {
+			     if ($userinputs[$i] < $printer->{ARGS}[$i]{min} || $userinputs[$i] > $printer->{ARGS}[$i]{max}) {
 				 $in->ask_warn('', N("Option %s out of range!", $printer->{ARGS}[$i]{comment}));
 				 return (1, $i);
 			     }
@@ -3090,8 +3089,7 @@ sub main {
 		# Show a queue list window when there is at least one queue,
 		# when we are in expert mode, or when we are not in the
 		# installation.
-		unless ((!%{$printer->{configured} || {}}) && 
-			(!$::expert) && ($::isInstall)) {
+		if (%{$printer->{configured} || {}} || $::expert || !$::isInstall) {
 		    $in->set_help('mainMenu') if $::isInstall;
 		    # Cancelling the printer type dialog should leed to this
 		    # dialog
