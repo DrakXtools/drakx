@@ -71,13 +71,13 @@ use common;
 #            Write a mail to <documentation@mandrakesoft.com> if
 #            you want it changed.
 
-%steps = (
+our %steps = (
 empty => '',
 };
     foreach (sort keys %$help) {
 	my $s = to_ascii($help->{$_});
 	print STDERR "Writing id=$_\n";
-	print F qq(\n$_ => \n__("$s"),\n);
+	print F qq(\n$_ => \nN_("$s"),\n);
     }
     print F ");\n";
 }
@@ -109,14 +109,14 @@ sub rewrite1 {
 }
 
 # return the list of nodes named $tag
-sub find {
+sub find_tag {
     my ($tag, $tree) = @_;
     if (!ref($tree)) {
 	();
     } elsif ($tree->{tag} eq $tag) {
 	$tree;
     } else {
-	map { find($tag, $_) } @{$tree->{children}};
+	map { find_tag($tag, $_) } @{$tree->{children}};
     }
 }
 
@@ -149,12 +149,12 @@ sub rewrite2 {
 }
 
 sub rewrite2_ {
-    my ($tree) = @_;
+    my ($tree, @parents) = @_;
     ref($tree) or return $tree;
     !$tree->{attr}{condition} || $tree->{attr}{condition} !~ /no-inline-help/ or return '';
 
     my $text = do {
-	my @l = map { rewrite2_($_) } @{$tree->{children}};
+	my @l = map { rewrite2_($_, $tree, @parents) } @{$tree->{children}};
 	my $text = "";
 	foreach (@l) {
 	    s/^ // if $text =~ /\s$/;
@@ -164,6 +164,19 @@ sub rewrite2_ {
 	}
 	$text;
     };
+
+    if ($tree->{attr}{id} && $tree->{attr}{id} =~ /drakxid-(.+)/) {
+	my $id = $1;
+	my $t = $text;
+	$t =~ s/^\s+//;
+
+	my @footnotes = map { 
+	    my $s = rewrite2_({ %$_, tag => 'para' });
+	    $s =~ s/^\s+//;
+	    "(*) $s";
+	} find_tag('footnote', $tree);
+	$help->{$id} = aerate($t . join('', @footnotes));
+    }
 
     if (0) {
     } elsif (member($tree->{tag}, 'formalpara', 'para', 'itemizedlist', 'orderedlist')) {
@@ -191,37 +204,25 @@ sub rewrite2_ {
 	$text =~ s/(\s+)$/ !!$1/;
 	$text;
     } elsif ($tree->{tag} eq 'listitem') {
-	my $cnt;
+	my $cnt = (any { $_->{tag} eq 'variablelist' } @parents) ? 1 : 0;
 	$text =~ s/^\s+//;
 	$text =~ s/^/' ' . ($cnt++ ? '  ' : '* ')/emg;
 	"\n$text\n";
-
     } elsif (member($tree->{tag},  
 		    'acronym', 'application', 'emphasis',  
-		    'keycombo', 'note', 
+		    'keycombo', 'note', 'sect1', 'sect2',
 		    'superscript', 'systemitem', 
-		    'tip', 'ulink', 'xref' 
+		    'tip', 'ulink', 'xref', 'varlistentry', 'variablelist', 'term',
 		   )) {
 	# ignored tags
 	$text;
     } elsif (member($tree->{tag},
 		    qw(title article primary secondary indexterm revnumber
-                       date authorinitials revision revhistory chapterinfo
+                       date authorinitials revision revhistory revremark chapterinfo
                        imagedata imageobject mediaobject figure
-                       book chapter)
+                       abstract book chapter)
 		   )) {
 	# dropped tags
-	'';
-    } elsif ($tree->{tag} =~ /sect[12]/) {
-	my $id = $tree->{attr}{id} && $tree->{attr}{id} =~ /drakxid-(.*)/ ? $1 : return;
-	$text =~ s/^\s+//;
-
-	my @footnotes = map { 
-	    my $s = rewrite2_({ %$_, tag => 'para' });
-	    $s =~ s/^\s+//;
-	    "(*) $s";
-	} find('footnote', $tree);
-	$help->{$id} = aerate($text . join('', @footnotes));
 	'';
     } elsif ($tree->{tag} eq 'screen') {
 	qq(\n$text\n);
