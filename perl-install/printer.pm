@@ -430,9 +430,9 @@ sub copy_master_filter($) {
     my $complete_path = "$prefix/$queue_path/filter";
     my $master_filter = "$prefix/$PRINTER_FILTER_DIR/master-filter";
 
-    eval { commands::cp('-f', $master_filter, $complete_path);
-           commands::cp("root.lp", $complete_path); }; #- -f for update.
+    eval { commands::cp('-f', $master_filter, $complete_path) };
     $@ and die "Can't copy $master_filter to $complete_path $!";
+    eval { commands::chown_("root.lp", $complete_path); };
 }
 
 #------------------------------------------------------------------------------
@@ -633,6 +633,8 @@ sub configure_queue($) {
 	print F "user='$entry->{SMBUSER}'\n";
 	print F "password='$entry->{SMBPASSWD}'\n";
 	print F "workgroup='$entry->{SMBWORKGROUP}'\n";
+	close F;
+	eval { chmod 0640, $config_file; commands::chown_("root.lp", $config_file) };
     } elsif ($entry->{TYPE} eq "NCP") {
 	#- same for NCP printer
 	my $config_file = "$prefix$queue_path/.config";
@@ -642,8 +644,9 @@ sub configure_queue($) {
 	print F "queue=$entry->{NCPQUEUE}\n";
 	print F "user=$entry->{NCPUSER}\n";
 	print F "password=$entry->{NCPPASSWD}\n";
+	close F;
+	eval { chmod 0640, $config_file; commands::chown_("root.lp", $config_file) };
     }
-    eval { chmod 0640, "$prefix$queue_path/.config"; commands::chown_("root.lp", "$prefix$queue_path/.config") };
 
     copy_master_filter($queue_path);
 
