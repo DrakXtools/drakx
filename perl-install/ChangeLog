@@ -1,3 +1,33 @@
+2001/09/24  François Pons  <fpons@mandrakesoft.com>
+
+	* share/rpmsrate: removed any reference to XFree86-glide-module or
+	Glide_XXX packages.
+
+	* pkgs.pm: sort mediums by number, in allMediums() else they will be in
+	hash keys orders in
+	install_steps_interactive::chooseCD().
+
+2001/09/24  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm: File permission settings during install were not done.
+	Fixed.
+
+2001/09/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: misc typo correction
+
+	* install_steps.pm: voodoo cards don't like performing 3d accel in fb mode
+
+2001/09/23  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: add "Graphical Environment" in meta_class server
+
+	* share/rpmsrate: simplify (for the moment)
+	do not force X flag, have it selected for any "Graphical Environment"
+
+	* share/compssUsers, install_any.pm: do not force X flag, have it selected
+	for any "Graphical Environment"
+
 2001/09/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* install_steps.pm: voodoo cards don't like performing 3d accel in fb mode
