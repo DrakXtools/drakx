@@ -437,7 +437,7 @@ sub get_kernels_and_labels {
       grep { -d "$::prefix/lib/modules/$_->{complete_version}" }
       map {
 	  s/vmlinuz-//;
-	  { complete_version => $_, /(.*mdk)(.*)/ ? (ext => $2, version => $1) : (version => $_) };
+	  { complete_version => $_, /(.*mdk)-?(.*)/ ? (ext => $2, version => $1) : (version => $_) };
       } @kernels;
 
     if ($b_prefer_24) {
