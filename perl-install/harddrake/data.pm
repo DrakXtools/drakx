@@ -12,7 +12,11 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/ && $_->{driver} !~ /^(scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/ && $_->{type} ne 'network' } @devices;
+    grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
+	       && $_->{driver} !~ /^(scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|www.linmodems.org|nvnet/
+	       && $_->{type} ne 'network'
+	       && $_->{description} !~ /Alcatel|ADSL Modem/
+	   } @devices;
 }
 
 
@@ -52,7 +56,7 @@ our @tree =
          # should be taken from detect_devices.pm or modules.pm. it's identical
          
          grep { $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} eq 'network' } @devices }, 1 ],
-     [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getModem() }, 0 ],
+     [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getSpeedtouch(), detect_devices::getSagem(), detect_devices::getModem() }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
 
