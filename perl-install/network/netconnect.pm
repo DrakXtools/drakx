@@ -83,6 +83,7 @@ sub real_main {
       my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf, %all_eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
+      my $cable_no_auth;
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
       my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
@@ -266,10 +267,6 @@ sub real_main {
                         #- why read again the net_conf here?
                         read_net_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         $type = $netcnx->{type} = $connections{$cnx_type};
-                        if ($type eq 'cable') {
-                            $auto_ip = 1;
-                            return "lan";
-                        }
                         return $type;
                     },
                    },
@@ -317,6 +314,35 @@ sub real_main {
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         $handle_multiple_cnx->();
                     },
+                   },
+
+                   cable =>
+                   {
+                    pre => sub {
+                        $cable_no_auth = sub { $netc->{bpalogin} eq N("None") };
+                    },
+                    name => N("Cable: account options"),
+                    data => sub {
+                        [
+                            { label => N("Authentication"), type => "list", val => \$netc->{bpalogin}, list => [ N("None"), N("Use BPALogin (needed for Telstra)") ] },
+                            { label => N("Account Login (user name)"), val => \$netcnx->{login}, disabled => $cable_no_auth },
+                            { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1, disabled => $cable_no_auth },
+                        ];
+                    },
+                    post => sub {
+                        unless ($cable_no_auth->()) {
+                            substInFile {
+                                s/username\s+.*\n/username $netcnx->{login}\n/;
+                                s/password\s+.*\n/password $netcnx->{passwd}\n/;
+                            } "$::prefix/etc/bpalogin.conf";
+                            if ($in->do_pkgs->install("bpalogin")) {
+                                require services;
+                                services::restart("bpalogin");
+                            }
+                        }
+                        $auto_ip = 1;
+                        return "lan";
+                    }
                    },
 
                    isdn =>
