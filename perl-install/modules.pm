@@ -122,7 +122,6 @@ sub load_category {
 
     my @try_modules = (
       if_($category =~ /scsi/,
-	  if_(arch() !~ /ppc/, 'parport_pc', 'imm', 'ppa'),
 	  if_(detect_devices::usbStorage(), 'usb-storage'),
       ),
       arch() =~ /ppc/ ? (
@@ -143,6 +142,17 @@ sub load_category {
 	!($_->{error} && $_->{try});
     } probe_category($category),
       map { { driver => $_, description => $_, try => 1 } } @try_modules;
+}
+
+sub load_parallel_zip {
+    my ($conf) = @_;
+
+    arch() !~ /ppc/ or return;
+
+    eval { modules::load('parport_pc') };
+    grep { 
+	eval { modules::load_and_configure($conf, $_); 1 };
+    } 'imm', 'ppa';
 }
 
 sub probe_category {

@@ -180,6 +180,7 @@ my %menu_options = (
                     'PRINTERS_DETECTION' => [ $menus{options}, N("/Autodetect _printers") ],
                     'MODEMS_DETECTION' => [ $menus{options}, N("/Autodetect _modems") ],
                     'JAZZ_DETECTION' => [ $menus{options}, N("/Autodetect _jaz drives") ],
+                    'PARALLEL_ZIP_DETECTION' => [ $menus{options}, N("/Autodetect parallel _zip drives") ],
                     );
 
 
@@ -194,6 +195,8 @@ my @menu_items =
        sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{JAZZ_DETECTION}}), undef,
        sub { $options{JAZZ_DETECTION} = $check_boxes{JAZZ_DETECTION}->get_active }, undef, '<CheckItem>' ],
+     [ join('', @{$menu_options{PARALLEL_ZIP_DETECTION}}), undef,
+       sub { $options{PARALLEL_ZIP_DETECTION} = $check_boxes{PARALLEL_ZIP_DETECTION}->get_active }, undef, '<CheckItem>' ],
      [ $menus{help}, undef, undef, undef, '<Branch>' ],
      if_(-x "/usr/sbin/drakhelp_inst",
 	 [ $menus{help} . N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp --id harddrake") } }, undef, '<Item>' ],
@@ -359,7 +362,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
     next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
 
-    my @devices = &$detector;
+    my @devices = $detector->(\%options);
     next unless @devices; # Skip empty class (no devices)
     push @classes, [ $Ident, $title, $icon, $configurator, @devices ];
 }

@@ -71,7 +71,13 @@ our @tree =
       string => N("Zip"),
       icon => "floppy.png",
       configurator => "",
-      detector => \&detect_devices::zips,
+      detector => sub {
+	  my ($options) = @_;
+	  if ($options->{PARALLEL_ZIP_DETECTION}) {
+	      modules::load_parallel_zip($modules_conf) and $modules_conf->write;
+	  }
+	  detect_devices::zips();
+      },
       checked_on_boot => 1,
       automatic => 1,
      },
