@@ -857,7 +857,7 @@ sub new {
 		$banner = Gtk2::Banner->new(wm_icon(), $::Wizard_title) or log::l("ERROR: missing wizard banner");
 	    }
 	    $::WizardTable = gtknew('VBox', 
-				    if_($banner, children_tight => $banner),
+				    if_($banner, children_tight => [ $banner ]),
 				);
 
 	    if ($::isEmbedded) {
