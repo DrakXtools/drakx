@@ -1076,7 +1076,7 @@ _("Error installing aboot,
 try to force installation even if that destroys the first partition?"));
 	};
     } else {
-	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
+	any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}, $o->{prefix}, $more) or return;
 
 	eval { $o->SUPER::setupBootloader };
 	if ($@) {
