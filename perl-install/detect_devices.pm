@@ -193,6 +193,8 @@ sub getSCSI() {
 	put_in_hash $_, { device => "scd$::i", media_type => 'cdrom' };
     } grep { $_->{raw_type} =~ /CD-ROM|WORM/ } @l;
 
+    # Old hp scanners report themselves as "Processor"s
+    # (see linux/include/scsi/scsi.h and sans-find-scanner.1)
     each_index {
 	put_in_hash $_, { media_type => 'scanner' };
     } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor /} @l;
