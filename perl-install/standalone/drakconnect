@@ -609,7 +609,7 @@ sub del_intf() {
                  welcome => {
                              no_back => 1,
                              name => N("Select the network interface to remove:"),
-                             data =>  [ { label => N("Net Device"), val => \$intf2delete, list => [ uniq(detect_devices::getNet(), keys %$intf) ], allow_empty_list => 1 } ],
+                             data =>  [ { label => N("Net Device"), val => \$intf2delete, list => [ keys %$intf ], allow_empty_list => 1 } ],
                              post => sub {
                                  !$::testing and eval {
                                      modules::mergein_conf('/etc/modules.conf');
