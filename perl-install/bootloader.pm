@@ -196,6 +196,16 @@ sub add_kernel {
     $v;
 }
 
+sub duplicate_kernel_entry {
+    my ($bootloader, $new_label) = @_;
+
+    get_label($new_label, $bootloader) and return;
+
+    my $entry = { %{ get_label('linux', $bootloader) }, label => $new_label };
+    add_entry($bootloader->{entries}, $entry);
+    $entry;
+}
+
 sub unpack_append {
     my ($s) = @_;
     my @l = split(' ', $s);
