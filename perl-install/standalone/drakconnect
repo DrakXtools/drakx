@@ -88,7 +88,7 @@ $window1->{rwindow}->set_border_width(10);
 
 my $warning_label1;
 
-my ($lan_button, $host_button, $button_apply);
+my $button_apply;
 
 
 my $hostname = chomp_(`hostname`);
@@ -135,27 +135,27 @@ $window1->{window}->add(
                                  0, gtkpack(Gtk2::HBox->new,
                                             Gtk2::Label->new(N("Hostname: ")),
                                             $label_host = Gtk2::Label->new($hostname),
-                                            $host_button = gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
-                                                                             clicked => sub {
-                                                                                 local ($::isWizard, $::Wizard_finished) = (1, 1);
-                                                                                 eval { # For wizcancel
-                                                                                     configureNetworkNet($in, $netc, $intf, map { $_->[0] } @all_cards);
-                                                                                     $button_apply->set_sensitive(1);
-                                                                                     update();
-                                                                                 };
-                                                                                 if ($@ =~ /wizcancel/) {}
-                                                                                 $::WizardWindow->destroy;
-                                                                                 undef $::WizardWindow;
-                                                                             }
-                                                                            ),
+                                            gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
+                                                              clicked => sub {
+                                                                  local ($::isWizard, $::Wizard_finished) = (1, 1);
+                                                                  eval { # For wizcancel
+                                                                      configureNetworkNet($in, $netc, $intf, map { $_->[0] } @all_cards);
+                                                                      $button_apply->set_sensitive(1);
+                                                                      update();
+                                                                  };
+                                                                  if ($@ =~ /wizcancel/) {}
+                                                                  $::WizardWindow->destroy;
+                                                                  undef $::WizardWindow;
+                                                              }
+                                                             ),
                                            ),
                                  1, gtkadd(gtkcreate_frame(N("LAN configuration")),
                                            gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
                                                     0, $list,
                                                     0, Gtk2::HBox->new(0,0),
                                                     0, gtkpack_(Gtk2::HBox->new(0, 0),
-                                                                0, $lan_button = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
-                                                                                                   clicked => \&configure_lan),
+                                                                0, gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
+                                                                                     clicked => \&configure_lan),
                                                                ),
                                                    )
                                           ),
