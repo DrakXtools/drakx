@@ -116,6 +116,7 @@ sub translate {
     my ($s) = @_;
     unless (defined %po::I18N::I18N) {
 	if (my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2)) {
+	    local $@;
 	    local $SIG{__DIE__} = 'none';
 	    eval { require "po/$lang.pm" };
 	}
@@ -133,12 +134,13 @@ sub warp_text($;$) {
     my ($text, $width) = shift;
     $width ||= 80;
    
-    my ($t, @l); foreach (split /(\s+)/, $text) {
-	if (length "$t$_" > $width) {
+    my ($t, @l); foreach (split /\s+/, $text) {
+	if (length "$t $_" > $width) {
 	    push @l, $t;
-	    $t = '';
+	    $t = $_;
+	} else {
+	    $t = "$t $_";
 	}
-	$t .= $_;
     }
     @l, $t;
 }

@@ -118,9 +118,11 @@ sub adjustStart($$) {
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
     my $end = $part->{start} + $part->{size};
-
-    $end = round_down($end, cylinder_size($hd));
-    $part->{size} = $end - $part->{start};
+    my $end2 = round_down($end, cylinder_size($hd));
+    unless ($part->{start} < $end2) {
+	$end2 = round_up($end, cylinder_size($hd));
+    }
+    $part->{size} = $end2 - $part->{start};
 }
 sub adjustStartAndEnd($$) {
     &adjustStart;

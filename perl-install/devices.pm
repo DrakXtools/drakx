@@ -38,13 +38,16 @@ sub size($) {
 sub make($) {
     local $_ = my $file = $_[0];
     my ($type, $major, $minor);
-    my ($prefix);
+    my $prefix = '';
 
-    unless (s,^(.*)/(dev|tmp)/,,) {
+    if (m,^(.*)/(dev|tmp)/(.*),) {
 	$prefix = $1;
-	$file = -e "$prefix/dev/$file" ? "$prefix/dev/$file" : "$prefix/tmp/$file";
+	$_ = $3;
+    } elsif (m,/,) {
+	die "can't make device $file";
     }
-
+    $file = "$prefix/dev/$_";
+    -e $file or $file = "$prefix/tmp/$_";
     -e $file and return $file; # assume nobody takes fun at creating files named as device
 
     if (/^sd(.)(\d{0,2})/) {

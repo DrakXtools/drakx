@@ -29,7 +29,7 @@ my @suggestions_mntpoints = qw(/mnt/dos);
 
 sub suggestions_mntpoint($) { 
     my ($hds) = @_;
-    @suggestions_mntpoints, grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
+    sort @suggestions_mntpoints, grep { !/swap/ && !has_mntpoint($_, $hds) } map { $_->{mntpoint} } @suggestions;
 }
 
 sub hds($$) {
@@ -228,33 +228,17 @@ sub undo($) {
     }
 }
 
-sub verify_room {
-    my ($part, $hd2, $sector2) = @_;
-    my $free_sectors = [ 1, $hd2->{totalsectors} ]; # first sector is always occupied by the MBR
-    my $remove = sub { removeFromList($_[0]->{start}, $_[0]->{start} + $_[0]->{size}, $free_sectors) };
-
-    $_ eq $part or &$remove($_) foreach get_fstab($hd2);
-
-    for (my $i = 0; $i < @$free_sectors; $i += 2) {
-	$sector2 < $free_sectors->[$i] && $sector2 < $free_sectors->[$i + 1] or next;
-	$sector2 + $part->{size} < $free_sectors->[$i + 1] or die
-_("Not enough place to move (%dGb, should be %dGb)", ($free_sectors->[$i + 1] - $free_sectors->[$i]), $part->{size} >> 11);
-	return;
-    }
-    die _("There is already a partition there");
-}
-
 sub move {
     my ($hd, $part, $hd2, $sector2) = @_;
 
     my $part2 = { %$part };
     $part2->{start} = $sector2;
+    $part2->{size} += partition_table::cylinder_size($hd2);
     partition_table::remove($hd, $part);
     {
-    local ($part2->{notFormatted}, $part2->{isFormatted}); # do not allow partition::add to change this
-    partition_table::add($hd2, $part2);
+	local ($part2->{notFormatted}, $part2->{isFormatted}); # do not allow partition::add to change this
+	partition_table::add($hd2, $part2);
     }
-    verify_room($part, $hd2, $part2->{start});
 
     return if $part2->{notFormatted} && !$part2->{isFormatted} || $::testing;
 

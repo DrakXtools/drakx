@@ -221,8 +221,8 @@ sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
     #  if this fails, it's okay -- it might help with free space though 
-    unlink "/sbin/install";
-    unlink "/sbin/insmod";
+    unlink "/sbin/install" unless $::testing;
+    unlink "/sbin/insmod" unless $::testing;
 
     print STDERR "in second stage install\n";
     log::openLog(($::testing || $o->{localInstall}) && 'debug.log');
