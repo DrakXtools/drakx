@@ -1100,7 +1100,7 @@ sub build_backup_files() {
 		my $msg = N("No changes to backup!");
 		show_warning("w", $msg);
 		$interactive and gtkset_mousecursor_normal();
-		$interactive and interactive_mode_box();
+		$interactive and interactive_mode_box(undef);
 		results_to_logfile();
 		return 1;		
 	}
@@ -1580,7 +1580,7 @@ sub advanced_what() {
 				1, gtksignal_connect(my $button_what_sys = Gtk2::Button->new, 
 					clicked => sub { $box_what->destroy; advanced_what_sys() }),
 				1, gtksignal_connect(my $button_what_user = Gtk2::Button->new, 
-					clicked => sub { destroy_widget(); advanced_what_user() }),
+					clicked => sub { destroy_widget(); advanced_what_user(undef) }),
 				1, gtksignal_connect(my $button_what_other = Gtk2::Button->new, 
 					clicked => sub { destroy_widget(); advanced_what_other() }),
 				1, Gtk2::VBox->new(0, 5),
@@ -2006,19 +2006,19 @@ sub advanced_where() {
 				1, Gtk2::VBox->new(0, 5),
 				1, gtksignal_connect(my $button_where_net = Gtk2::Button->new, clicked => sub { 
 					destroy_widget();
-					advanced_where_net_types(); 
+					advanced_where_net_types(undef); 
 				}),
 				1, gtksignal_connect(my $button_where_cd = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
-					advanced_where_cd();
+					advanced_where_cd(undef);
 				}),
 				1, gtksignal_connect(my $button_where_hd = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
-					advanced_where_hd();
+					advanced_where_hd(undef);
 				}),
 				1, gtksignal_connect(my $button_where_tape = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
-					advanced_where_tape() 
+					advanced_where_tape(undef) 
 				}),
 				1, Gtk2::VBox->new(0, 5),
 			),
@@ -2320,67 +2320,51 @@ sub wizard_step2() {
 			1, gtkpack_(Gtk2::VBox->new(0, 15),	
 				1, Gtk2::VBox->new(0, 5),
 				0, N("Please choose where you want to backup"),
-				0, gtkpack_(Gtk2::HBox->new(0, 15),	      
-					0, N("Hard Drive used to prepare backups for all media"),
-					1, Gtk2::VBox->new(0, 5),
+				0, gtkpack_(Gtk2::HBox->new(0, 15),
+					0, gtkpack__(Gtk2::VBox->new(0, 10),
+ 						my @where_radio = gtkradio('', N("Hard Drive used to prepare backups for all media"), N("Across Network"), N("On CD-R"), N("On Tape Device")),
+					),
+					1, gtkpack_(Gtk2::HBox->new(0,5),),
+					0, gtkpack_(Gtk2::VBox->new(0,5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
 						advanced_where_hd(\&wizard_step2);
 					}), $use_hd),
-				),
-				0, gtkpack_(Gtk2::HBox->new(0, 15),
-					0, my $check_wizard_net = Gtk2::CheckButton->new(N("Across Network")),
-					1, Gtk2::VBox->new(0, 5),
 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
 						advanced_where_net_types(\&wizard_step2);
 					}), $conf{USE_NET}),
-				),
- 				0, gtkpack_(Gtk2::HBox->new(0, 15),	      
- 					0, my $check_wizard_cd = Gtk2::CheckButton->new(N("On CD-R")),
- 					1, Gtk2::VBox->new(0, 5),	
- 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
+					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
 						advanced_where_cd(\&wizard_step2);
- 					}), $conf{USE_CD}),
- 				),
- 				0, gtkpack_(Gtk2::HBox->new(0, 15),	      
- 					0, my $check_wizard_tape = Gtk2::CheckButton->new(N("On Tape Device")),
- 					1, Gtk2::VBox->new(0, 5),
- 					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
+					}), $conf{USE_CD}),
+					0, gtkset_sensitive(gtksignal_connect(Gtk2::Button->new(N("Configure")), clicked => sub {
 						destroy_widget();
 						advanced_where_tape(\&wizard_step2);
  					}), $conf{USE_TAPE}),
- 				),
+					),
+				),
 				1, Gtk2::VBox->new(0, 5),
 			),
 			1, Gtk2::VBox->new(0, 5),
 		),
 	);
-	gtksignal_connect(gtkset_active($check_wizard_cd, $conf{USE_CD}), toggled => sub {
-		invbool \$conf{USE_CD}; 
-		if ($conf{USE_CD}) { $conf{USE_TAPE} = 0; $conf{USE_NET} = 0 };
-		refresh_wizard_step2();
-	});
-	gtksignal_connect(gtkset_active($check_wizard_net, $conf{USE_NET}), toggled => sub {
-		invbool \$conf{USE_NET};
-		if ($conf{USE_NET}) { $conf{USE_TAPE} = 0; $conf{USE_CD} = 0 };
-		refresh_wizard_step2();
-	});
-	gtksignal_connect(gtkset_active($check_wizard_tape, $conf{USE_TAPE}), toggled => sub {
-		invbool \$conf{USE_TAPE};
-		if ($conf{USE_TAPE}) { $conf{USE_CD} = 0; $conf{USE_NET} = 0 };
-		refresh_wizard_step2();
-	});
+	my @wheres = ($use_hd, $conf{USE_NET}, $conf{USE_CD}, $conf{USE_TAPE});
+	foreach my $i (0..3) {
+		$where_radio[$i]->set_active($wheres[$i]);
+		$where_radio[$i]->signal_connect(toggled => sub {
+			if ($where_radio[$i]->get_active) {
+				@wheres = (0, 0, 0, 0);
+				$wheres[$i] = 1;
+				($use_hd, $conf{USE_NET}, $conf{USE_CD}, $conf{USE_TAPE}) = @wheres;  		
+				destroy_widget();
+				wizard_step2();
+			}	
+		});
+	}
 	fonction_env(\$box2, \&wizard_step2, \&wizard, undef); 
     button_box_wizard();
     $up_box->show_all;
-}
-
-sub refresh_wizard_step2() {
-	$use_hd = !($conf{USE_TAPE} || $conf{USE_CD} || $conf{USE_NET});
-	destroy_widget();
-	wizard_step2();
 }
 
 sub wizard()   {
@@ -3380,7 +3364,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box();
+								interactive_mode_box(undef);
 							} 
 						} 
 					}),
@@ -3392,7 +3376,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box();
+								interactive_mode_box(undef);
 							} 
 						}
 					}),
@@ -4007,7 +3991,7 @@ sub button_box_wizard_end() {
 			pbutton(),
 			0, gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { 
 				save_conf_file();
-				interactive_mode_box();
+				interactive_mode_box(undef);
 			}),
 		),
 	);
@@ -4274,7 +4258,7 @@ sub build_backup_box() {
  				0, Gtk2::VBox->new(0, 5),	
 				1, gtksignal_connect(my $button_see_conf = Gtk2::Button->new, clicked => sub { 
 					destroy_widget();
-					build_backup_box_see_conf();
+					build_backup_box_see_conf(undef);
 				}),
 				1, Gtk2::VBox->new(0, 5),	
 			),
@@ -4383,7 +4367,7 @@ sub interactive_mode() {
 		),
 	);
 	setup_tooltips();
-    interactive_mode_box();
+    interactive_mode_box(undef);
     button_box_main();
     $central_widget = \$box2;
     $window1->realize;
