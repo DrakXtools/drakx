@@ -131,9 +131,9 @@ sub before_leaving(&) {
 sub catch_cdie(&&) {
     my ($f, $catch) = @_;
 
+    local @common::cdie_catches;
     unshift @common::cdie_catches, $catch;
     &$f();
-    shift @common::cdie_catches;
 }
 
 sub cdie {
@@ -141,7 +141,7 @@ sub cdie {
     foreach (@common::cdie_catches) {
 	&{$_}(@_) and return;
     }
-    die @_;
+    die join '', @_;
 }
 
 sub all {

@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 use vars qw($o);
 
-use common qw(:common :file :system);
+use common qw(:common :file :system :functional);
 use install_any qw(:all);
 use log;
 use network;
@@ -282,7 +282,14 @@ sub setupSCSI {
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}{partitioning});
+    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{default}{partitioning}) }
+      sub {
+	  $o->ask_warn(_("Error"), 
+_("I can't read your partition table, it's too corrupted for me :(
+I'll try to go on blanking bad partitions"));
+	  1;
+      };
+
     unless (@{$o->{hds}} > 0) {
 	$o->setupSCSI if $o->{autoSCSI}; # ask for an unautodetected scsi card
     }

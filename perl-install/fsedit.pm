@@ -3,7 +3,7 @@ package fsedit;
 use diagnostics;
 use strict;
 
-use common qw(:common :constant);
+use common qw(:common :constant :functional);
 use partition_table qw(:types);
 use partition_table_raw;
 use Data::Dumper;
@@ -50,10 +50,8 @@ sub hds($$) {
 
 	eval { partition_table::read($hd, $flags->{clearall}) }; 
 	if ($@) {
-#	    $@ =~ /bad magic number/ or die;
-	    $flags->{eraseBadPartitions} ?
-	      partition_table_raw::zero_MBR($hd) :
-	      die;
+	    &cdie($@) unless $flags->{eraseBadPartitions};
+	    partition_table_raw::zero_MBR($hd);
 	}
 	push @hds, $hd;
     }
