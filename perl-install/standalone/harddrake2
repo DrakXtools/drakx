@@ -162,6 +162,7 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                                                                create_scrolled_window(my $text = Gtk2::TextView->new)),
                                                      0, my $module_cfg_button = gtksignal_connect(Gtk2::Button->new(N("Configure module")),
                                                                                                   clicked => sub {
+                                                                                                      local $SIG{CHLD} = undef;
                                                                                                       require modules::interactive;
                                                                                                       modules::interactive::config_window($in, $current_device);
                                                                                                       gtkset_mousecursor_normal();
