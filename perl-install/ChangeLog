@@ -1,3 +1,130 @@
+2004/09/30  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/compssUsers.powerpack, share/rpmsrate, share/compssUsers.pl,
+	share/compssUsers-discovery.pl, share/compssUsers.server,
+	share/compssUsers.desktop, share/compssUsers-powerpack.pl,
+	share/compssUsers-powerpackplus.pl: Update
+
+2004/09/30  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/net_applet: 
+	  - Numeric comparisons
+
+2004/09/30  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/09/30  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: 1425:WARNING: this device
+
+2004/09/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* authentication.pm: removed "\t" and "\n" out of translatable strings to
+	avoid useless
+	duplication; fixed English typographic errors (don't put spaces
+	before colons!).
+
+	* share/po/hr.po, share/po/sv.po: updated pot file
+	updated pot file
+	updated Croatian and Swedish files
+
+	* share/po/ja.po: updated po file
+	updated pot file
+	updated pot file
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/be.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+2004/09/30  Pixel  <pixel at mandrakesoft.com>
+
+	* lvm.pm: don't die when device-mapper is missing (occurs on 2.4 kernel)
+	(bugzilla #11834)
+
+	* authentication.pm: kinds() must return all kinds
+	only allow Active Directory for the corporate product
+	revert enhancement commit since we are in deep freeze
+
+	* standalone/drakauth, install_steps_interactive.pm: only allow Active
+	Directory for the corporate product
+
+2004/09/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: typo fix
+	list tablets too with mice
+	use a distinct icon for UPS devices in harddrake GUI
+	fix UPS devices listed in both "UPS" and "unknown" classes
+	list all mice and keyboards (thus lowering unknown hardware in
+	hwdb-clients)
+
+	* lang.pm (configure_kdeglobals) set KDE in m17n emvironment if needed
+
+	* drakxtools.spec: split localedrake menu entry in two ones:
+	  - one for user config
+	  - one for system (embedded in mcc)
+	add one missing log in 10.1-12mdk
+	10.1-12mdk
+
+	* share/po/br.po: translate reverted messages so that they got smoothly
+	uncommented once
+	drakauth changes are merged back after mdk10.1 release
+	update
+
+	* standalone/icons/harddrake2/ups.png: use a distinct icon for UPS devices
+	in harddrake GUI
+
+	* detect_devices.pm (getUPS) provide more data on UPS (arnaud quette)
+	(getInputDevices) introduce it in order to list input devices
+
+2004/09/30  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: Remove ssl config in ldap
+	Add pam_mkhomedir for ldap
+
+2004/09/29  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_monitor: check every 5 seconds (instead of 20) for new or
+	disconnected interfaces (#11780)
+
+2004/09/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po: corrected typo
+
+2004/09/29  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: 
+	  - disable the new gtk smart search which display an entry box
+	  - fix return value of key_press_event for some cases
+	(otherwise arrow keys do not work)
+
+2004/09/29  rcasha
+
+	* share/po/mt.po: var
+
+2004/09/29  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2004/09/29  Vincent Guardiola <vguardiola at mandrakesoft.com>
+
+	* authentication.pm: Add more new entry for LDAP
+
 2004/09/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/es.po: corrected typo
@@ -40196,7 +40323,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.975 2004/09/28 08:51:59 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.976 2004/09/29 08:20:24 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
