@@ -108,7 +108,7 @@ sub get_ports {
 sub set_ports {
     my ($disabled, $ports) = @_;
 
-    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die '';
+    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die _("No network card");
     $shorewall->{disabled} = $disabled;
     $shorewall->{ports} = $$ports;
 
