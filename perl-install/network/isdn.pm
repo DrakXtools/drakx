@@ -16,7 +16,6 @@ use MDK::Common::File;
 @ISA = qw(Exporter);
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect_backend isdn_get_list isdn_get_info read_providers_backend);
 
-sub read_providers_backend { my ($file) = @_; map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 sub isdn_write_config {
     my ($isdn, $netc) = @_;
@@ -107,8 +106,11 @@ sub isdn_read_config {
     $isdn;
 }
 
+my $file = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
+$file = "$::prefix$file" if !-e $file;
+
 sub get_info_providers_backend {
-    my ($isdn, $_netc, $name, $file) = @_;
+    my ($isdn, $_netc, $name) = @_;
     $name eq 'Unlisted - edit manually' and return;
     foreach (catMaybeCompressed($file)) {
 	chop;
@@ -119,6 +121,8 @@ sub get_info_providers_backend {
 	}
     }
 }
+
+sub read_providers_backend { map { /(.*?)=>/ } catMaybeCompressed($file) }
 
 sub isdn_ask_info {
     my ($isdn, $netc) = @_;
