@@ -837,7 +837,7 @@ sub addUser {
 
     if ($o->{autologin}) {
 	$o->{desktop} ||= first(any::sessions());
-	$o->pkg_install("autologin") if !member($o->{desktop}, 'KDE', 'Gnome');
+	$o->pkg_install("autologin") if !member($o->{desktop}, 'KDE', 'GNOME');
     }
     any::set_autologin($o->{autologin}, $o->{desktop});
 

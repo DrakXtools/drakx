@@ -492,7 +492,7 @@ sub set_autologin {
 	log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
     }
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($desktop, 'KDE', 'Gnome')) {
+    if (member($desktop, 'KDE', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
