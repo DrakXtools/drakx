@@ -70,8 +70,8 @@ my $server_ip = get_ip_from_sys();
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -qa | grep terminal-server > /dev/null");
-if ($ts == 255) { #BUG: 256
-	if ($ENV{'DISPLAY'}) {
+if ($ts == 256) {
+	if ($ENV{DISPLAY}) {
 		system("urpmi --X terminal-server > /dev/null");
 	} else {
 		system("urpmi terminal-server > /dev/null");
@@ -139,8 +139,10 @@ read_conf_file();
 interactive_mode() if $#ARGV < 1;
 
 sub read_conf_file {
+    local *CONF_FILE;
 	if (-e $cfg_file) {
 		open(CONF_FILE, "<" . $cfg_file) || print "You must be root to read configuration file. \n";
+          local $_;
 		while (<CONF_FILE>) {
 			next unless /\S/;
 			next if /^#/;
@@ -154,7 +156,7 @@ sub read_conf_file {
 sub write_conf_file {
 	my @cfg_list;
 	if ($thin_clients eq 1) {
-		@cfg_list = ("ALLOW_THIN\n");
+		@cfg_list = "ALLOW_THIN\n";
 	}
 	output_p($cfg_file, @cfg_list);
 	chmod(0600, $cfg_file);
@@ -193,6 +195,7 @@ ca::ctrlaltdel:/sbin/reboot -f
 x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 
 	my $inittab_file = "/etc/inittab\$\$IP=$client_ip\$\$";
+     local *INITTAB;
 	open(INITTAB, "> $inittab_file") || warn("Can't open $inittab_file!");
 	print INITTAB $inittab;
 	close INITTAB	
@@ -212,7 +215,6 @@ sub cursor_norm {
 
 sub display_error {
     my ($message) = @_;
-    my $label;
     my $error_box;
     ${$central_widget}->destroy();
     gtkpack($status_box,
@@ -230,8 +232,6 @@ sub display_error {
 }
 
 sub interactive_mode {
-    my $font_sel;
-#    $interactive = 1;
     $window1 = ugtk2->new('drakTermServ');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
@@ -502,14 +502,14 @@ sub make_boot {
 
 sub make_nbi {
 	my $nbi_box;
-	my @kernels = grep(/vmlinuz/, all("/boot"));
+	my @kernels = grep { /vmlinuz/ } all("/boot");
 	my $kernel;
 	my $nic;
 	
 	#- just a static list for the moment
 	#- method in mknbi-net is much better
 	my @nics = ("3c509", "3c59x", "3c90x", "8139cp", "8139too", "acenic", "airo",
-		"aironet4500_card","bcm5700", "dgrs", "dl2k", "dmfe", "e100",
+		"aironet4500_card", "bcm5700", "dgrs", "dl2k", "dmfe", "e100",
 		"e1000", "eepro100", "epic100", "fealnx", "hamachi", "hp100",
 		"hysdn", "natsemi", "natsemi_old", "ne", "ne2k-pci", "ns83820",
 		"pcnet32", "prism2_pci", "prism2_plx", "rcpci", "sis900",
@@ -519,9 +519,9 @@ sub make_nbi {
 	#- kernel/module info in tree view
 	my $tree_kernels = new Gtk2::Tree();
 	
-	foreach (@kernels){
+	foreach (@kernels) {
 		my $t = $_;
-		my $t_kernel = new_with_label Gtk2::TreeItem($t);
+		my $t_kernel = Gtk2::TreeItem->new_with_label($t);
 		gtksignal_connect($t_kernel, select => sub { $kernel = $t;
 								$nic = '' });
 		$tree_kernels->append($t_kernel);
@@ -531,7 +531,7 @@ sub make_nbi {
 		
 		foreach (@nics) {
 			my $m = $_;
-			my $k_det_nic = new_with_label Gtk2::TreeItem($m);
+			my $k_det_nic = Gtk2::TreeItem->new_with_label($m);
 			gtksignal_connect($k_det_nic, select => sub { $nic = $m;
 								$kernel = $t });
 			$k_detail->append($k_det_nic);
@@ -541,7 +541,7 @@ sub make_nbi {
 
 	# existing nbi images in list
 	my $list_nbis = new Gtk2::List();
-	my @nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+	my @nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 	my $nbi;
 	
 	foreach (@nbis) {
@@ -558,11 +558,11 @@ sub make_nbi {
 				gtkadd(new Gtk2::VBox(1,10),
 					gtksignal_connect(new Gtk2::Button(N("Build Whole Kernel -->")), clicked => 
 						sub { if ($kernel) {
-								$in->ask_warn('',N("This will take a few minutes."));
+								$in->ask_warn('', N("This will take a few minutes."));
 								cursor_wait();
 								system("/usr/bin/mknbi-set -k /boot/$kernel");
 								$list_nbis->clear_items();
-								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
 									my $t = $_;
 									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
@@ -570,29 +570,29 @@ sub make_nbi {
 								}
 								cursor_norm(); 
 							} else {
-								$in->ask_warn('',N("No kernel selected!")) if !($kernel); 
+								$in->ask_warn('', N("No kernel selected!")) if !($kernel); 
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Build Single NIC -->")), clicked => 
 						sub { if ($nic) {
 								system("/usr/bin/mknbi-set -k /boot/$kernel -r $nic");
 								$list_nbis->clear_items();
-								@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+								@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 								foreach (@nbis) {
 									my $t = $_;
 									$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
 									select => sub { $nbi = $t })));
 								} 
 							} else {
-								$in->ask_warn('',N("No nic selected!"));
+								$in->ask_warn('', N("No nic selected!"));
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Build All Kernels -->")), clicked => sub {
-					                $in->ask_warn('',N("This will take a few minutes."));
+					                $in->ask_warn('', N("This will take a few minutes."));
 							cursor_wait();
 							system("/usr/bin/mknbi-set");
 							$list_nbis->clear_items();
-							@nbis = grep(/\.nbi/, all("/var/lib/tftpboot"));
+							@nbis = grep { /\.nbi/ } all("/var/lib/tftpboot");
 							foreach (@nbis) {
 								my $t = $_;
 								$list_nbis->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t), 
@@ -609,10 +609,10 @@ sub make_nbi {
 							}
 						}),
 					gtksignal_connect(new Gtk2::Button(N("Delete All NBIs")), clicked => 
-						sub { cursor_wait(); 
-							foreach (grep(/\.nbi/, all("/var/lib/tftpboot"))) {
+						sub { cursor_wait();
+							foreach (grep { /\.nbi/ } all("/var/lib/tftpboot")) {
 								my $nbi = "/var/lib/tftpboot/" . $_;
-								my $result = unlink($nbi) || warn("Can't delete $nbi...");
+								unlink($nbi) || warn("Can't delete $nbi...");
 								#- wanted to walk through these and delete
 								#- but can't figure out how to get the item from
 								#- the label :(
@@ -643,7 +643,7 @@ sub maintain_users {
 	my $sys_user;
 	
 	foreach (@sys_users) {		
-		my ($s_label, $dummy) = split(/:/, $_, 2);
+		my ($s_label) = split(/:/, $_, 2);
 		if (grep(/$s_label/, @homes)) {
 			$list_sys_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($s_label), 
 				select => sub { $sys_user = $s_label })));
@@ -655,9 +655,9 @@ sub maintain_users {
 	my $ts_user;
 	
 	foreach (@ts_users) {
-		my ($t_label, $dummy) = split(/:/, $_, 2);
+		my ($t_label) = split(/:/, $_, 2);
 		my @system_entry = grep(/$t_label/, @sys_users); 
-		$t_label = $t_label . " !!!" if ($_ ne $system_entry[0]);
+		$t_label = $t_label . " !!!" if $_ ne $system_entry[0];
 		$list_ts_users->add(gtkshow(gtksignal_connect(new Gtk2::ListItem($t_label), 
 		select => sub { $ts_user = $t_label })));
 	}
@@ -700,29 +700,29 @@ sub maintain_clients {
 	
 	#- client info in tree view
 	my $tree_clients = new Gtk2::Tree();
-	foreach my $key(keys(%clients)){
+	foreach my $key (keys(%clients)) {
 		my $t = $key;
-		my $t_client = new_with_label Gtk2::TreeItem($t);
+		my $t_client = Gtk2::TreeItem->new_with_label($t);
 		gtksignal_connect($t_client, select => sub { $client = $t });
 		$tree_clients->append($t_client);
 		
 		my $c_detail = new Gtk2::Tree();
 		$t_client->set_subtree($c_detail);
 		
-		my $c_det_hw = new_with_label Gtk2::TreeItem($clients{$key}{hardware});
+		my $c_det_hw = Gtk2::TreeItem->new_with_label($clients{$key}{hardware});
 		$c_detail->append($c_det_hw);
 		$c_det_hw->show();
 
-		my $c_det_ip = new_with_label Gtk2::TreeItem($clients{$key}{address});
+		my $c_det_ip = Gtk2::TreeItem->new_with_label($clients{$key}{address});
 		$c_detail->append($c_det_ip);
 		$c_det_ip->show();
 		
-		my $c_det_type = new_with_label Gtk2::TreeItem(N("type: %s", $clients{$key}{type}));
+		my $c_det_type = Gtk2::TreeItem->new_with_label(N("type: %s", $clients{$key}{type}));
 		$c_detail->append($c_det_type);
 		$c_det_type->show();
 		
 		if ($clients{$key}{filename}) {
-			my $c_det_nbi = new_with_label Gtk2::TreeItem($clients{$key}{filename});
+			my $c_det_nbi = Gtk2::TreeItem->new_with_label($clients{$key}{filename});
 			$c_detail->append($c_det_nbi);
 			$c_det_nbi->show();
 		}		
@@ -743,14 +743,14 @@ sub maintain_clients {
 	$label_nbi->set_justify('left');
 	my $entry_nbi = new Gtk2::Combo();
 
-	my @images = grep(/\.nbi/, all("/var/lib/tftpboot/"));
+	my @images = grep { /\.nbi/ } all("/var/lib/tftpboot/");
 	my $have_nbis = @images;
 	if ($have_nbis) {
 		unshift(@images, "");
 		$entry_nbi->set_popdown_strings(@images);
 		$entry_nbi->set_value_in_list(1, 0);
 	} else {
-		$in->ask_warn('',N("No net boot images created!"));		
+		$in->ask_warn('', N("No net boot images created!"));		
 		make_nbi();
 		return 1;
 	}
@@ -785,29 +785,29 @@ sub maintain_clients {
 								my $result = addclient(0, $hostname, $mac, $ip, $nbi, $is_thin);
 								
 								if ($result eq 0) {
-									my $t_client = new_with_label Gtk2::TreeItem($hostname);
+									my $t_client = Gtk2::TreeItem->new_with_label($hostname);
 									gtksignal_connect($t_client, select => sub { $client = $hostname });
 									$tree_clients->append($t_client);
 		
 									my $c_detail = new Gtk2::Tree();
 									$t_client->set_subtree($c_detail);
 		
-									my $c_det_hw = new_with_label Gtk2::TreeItem($mac);
+									my $c_det_hw = Gtk2::TreeItem->new_with_label($mac);
 									$c_detail->append($c_det_hw);
 									$c_det_hw->show();
 								
-									my $c_det_ip = new_with_label Gtk2::TreeItem($ip);
+									my $c_det_ip = Gtk2::TreeItem->new_with_label($ip);
 									$c_detail->append($c_det_ip);
 									$c_det_ip->show();
 									
 									my $client_type = "type: fat";
-									$client_type = "type: thin" if ($is_thin eq 1);
-									my $c_det_type = new_with_label Gtk2::TreeItem($client_type);
+									$client_type = "type: thin" if $is_thin eq 1;
+									my $c_det_type = Gtk2::TreeItem->new_with_label($client_type);
 									$c_detail->append($c_det_type);
 									$c_det_type->show();
 									
 									if ($nbi) {
-										my $c_det_nbi = new_with_label Gtk2::TreeItem($nbi);
+										my $c_det_nbi = Gtk2::TreeItem->new_with_label($nbi);
 										$c_detail->append($c_det_nbi);
 										$c_det_nbi->show();
 									}
@@ -873,7 +873,7 @@ sub maintain_clients {
 				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
 				update_hosts_allow("disable");
 			}
-			$in->ask_warn('',N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
+			$in->ask_warn('', N("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
 	$central_widget = \$client_box;
@@ -885,7 +885,6 @@ sub dhcpd_config {
 	my $dhcpd_box;
 	my @ifvalues;
 	my @resolve;
-	my @nserve;
 	my %netconfig;
 	my @nservers;
 						
@@ -966,8 +965,8 @@ sub dhcpd_config {
 	my $sys_subnet = get_subnet_from_sys($sys_broadcast, $sys_netmask);
 		
 	$entry_subnet->set_text($sys_subnet);
-		
-	my @route = grep(/^0.0.0.0/, `/sbin/route -n`);
+
+	my @route = grep { /^0.0.0.0/ } `/sbin/route -n`;
 	@ifvalues = split(/[ \t]+/, $route[0]);
 	$entry_routers->set_text($ifvalues[1]);
 	
@@ -977,8 +976,8 @@ sub dhcpd_config {
 	
 	foreach (@resolve) {
 		@ifvalues = split / /;
-		if (($ifvalues[0] =~ /nameserver/) && ($i lt 4)){
-			$nservers[$i] = $ifvalues[1]; $i++;
+		if ($ifvalues[0] =~ /nameserver/ && $i lt 4) {
+			$nservers[$i++] = $ifvalues[1];
 		}
 	}
 	
@@ -998,7 +997,7 @@ sub dhcpd_config {
 				gtkadd($box_name_servers),
 			),
 			0, gtkadd(new Gtk2::VBox(0,0),
-				new Gtk2::Label(N("dhcpd Server Configuration")."\n\n".
+				new Gtk2::Label(N("dhcpd Server Configuration") . "\n\n" .
 					N("Most of these values were extracted\nfrom your running system.\nYou can modify as needed.")),
 				new Gtk2::HSeparator,
 				gtkadd((new Gtk2::HBox),
@@ -1064,25 +1063,26 @@ sub get_subnet_from_sys {
 }
 
 sub get_broadcast_from_sys {
-	my @ifconfig = grep(/inet/, `/sbin/ifconfig eth0`);
+	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
 	$ifvalues[5];
 }
 
 sub get_ip_from_sys {
-	my @ifconfig = grep(/inet/, `/sbin/ifconfig eth0`);
+	my @ifconfig = grep { /inet/ } `/sbin/ifconfig eth0`;
 	my @ifvalues = split(/[: \t]+/, $ifconfig[0]);
 		
 	$ifvalues[3];
 }
 
 sub write_dhcpd_config {
-	my($subnet, $netmask, $routers, $subnet_mask, $broadcast, $domain, $ns1, $ns2, $ns3, $pool_start, $pool_end) = @_;
+	my ($subnet, $netmask, $routers, $subnet_mask, $broadcast, $domain, $ns1, $ns2, $ns3, $pool_start, $pool_end) = @_;
 
 	$nfs_subnet = $subnet;
 	$nfs_mask = $subnet_mask;
 	
+     local *FHANDLE;
 	open(FHANDLE, "> /etc/dhcpd.conf");
 	print FHANDLE "#dhcpd.conf - generated by drakTermServ\n\n";
 	print FHANDLE "ddns-update-style none;\n\n";
@@ -1121,12 +1121,12 @@ sub write_eb_image {
 			return if !($result);
 			$result = system("cat $rom_path/boot1a.bin $rom_path/lzrom/$nic > /dev/fd0") if $result;
 			if ($result) {
-				$in->ask_warn('',N("Couldn't access the floppy!"))
+				$in->ask_warn('', N("Couldn't access the floppy!"))
 			} else {
-				$in->ask_warn('',N("Floppy can be removed now"))
+				$in->ask_warn('', N("Floppy can be removed now"))
 			}
 		} else {
-			$in->ask_warn('',N("No floppy drive available!"));
+			$in->ask_warn('', N("No floppy drive available!"));
 		}
 	} else {
 		mkdir_p("/tmp/eb");
@@ -1135,9 +1135,9 @@ sub write_eb_image {
 		system("mkisofs -b eb.img -o /tmp/$nic.iso /tmp/eb");
 		rm_rf("/tmp/eb");
 		if (-e "/tmp/$nic.iso") {
-			$in->ask_warn('',N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
+			$in->ask_warn('', N("Etherboot ISO image is %s", "/tmp/$nic.iso"))
 		} else { 
-			$in->ask_warn('',N("Something went wrong! - Is mkisofs installed?"))
+			$in->ask_warn('', N("Something went wrong! - Is mkisofs installed?"))
 		}		
 	}
 }
@@ -1156,7 +1156,7 @@ sub enable_ts {
 			print("No /etc/dhcpd.conf built yet - use GUI to create!!\n");
 			return;
 		} else {
-			$in->ask_warn('',N("Need to create /etc/dhcpd.conf first!"));
+			$in->ask_warn('', N("Need to create /etc/dhcpd.conf first!"));
 			#$central_widget->destroy;
 			dhcpd_config();
 			return;		
@@ -1164,7 +1164,8 @@ sub enable_ts {
 	}
 	my $buff_index = toggle_chkconfig("on", "dhcpd", 2);
 	$buff[$buff_index] = "\tSetting up default /etc/exports...\n";
-	cp_af("/etc/exports", "/etc/exports.mdkTS") if (-e "/etc/exports");
+	cp_af("/etc/exports", "/etc/exports.mdkTS") if -e "/etc/exports";
+     local *FHANDLE;
 	open(FHANDLE, "> /etc/exports");
 	print FHANDLE "#/etc/exports - generated by drakTermServ\n\n";
 	print FHANDLE "/\t(ro,all_squash)\n";
@@ -1182,7 +1183,7 @@ sub enable_ts {
 	$buff_index = service_change("xinetd", "restart", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
 	}
@@ -1197,16 +1198,16 @@ sub disable_ts {
 	@buff = ();
 	$buff[0] = "Disabling Terminal Server...\n\n";
 	$buff[1] = "\tRestoring original /etc/dhcpd.conf...\n";
-	cp_af("/etc/dhcpd.conf.mdkTS", "/etc/dhcpd.conf") if (-e "/etc/dhcpd.conf.mdkTS");
+	cp_af("/etc/dhcpd.conf.mdkTS", "/etc/dhcpd.conf") if -e "/etc/dhcpd.conf.mdkTS";
 	my $buff_index = toggle_chkconfig("off", "dhcpd", 2);
 	$buff[$buff_index] = "\tRestoring default /etc/exports...\n";
-	cp_af("/etc/exports.mdkTS", "/etc/exports") if (-e "/etc/exports.mdkTS");
+	cp_af("/etc/exports.mdkTS", "/etc/exports") if -e "/etc/exports.mdkTS";
 	$buff_index = toggle_chkconfig("off", "clusternfs", $buff_index+1);
 	$buff_index = toggle_chkconfig("off", "tftp", $buff_index);
 	$buff_index = service_change("xinetd", "restart", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 	
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
 	}
@@ -1226,8 +1227,10 @@ sub toggle_chkconfig {
 sub service_change {
 	my ($service, $command, $buff_index) = @_;
 	system("BOOTUP=serial /sbin/service $service $command > /tmp/drakTSservice.status 2>&1");
+     local *STATUS;
 	open(STATUS, "/tmp/drakTSservice.status");
-	while(<STATUS>) {
+     local $_;
+	while (<STATUS>) {
 		$buff[$buff_index] = "\t$_";
 		$buff_index++;
 	}
@@ -1246,7 +1249,7 @@ sub start_ts {
 	$buff_index = service_change("clusternfs", "start", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 	
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
 	}
@@ -1264,7 +1267,7 @@ sub stop_ts {
 	$buff_index = service_change("clusternfs", "stop", $buff_index);
 	$buff[$buff_index] = "\n\tDone!";	
 	
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "@buff\n";
 		return;
 	}
@@ -1281,15 +1284,15 @@ sub adduser {
 	my ($cmd_line, $username) = @_;
 	my @active_users = cat_("/etc/shadow");
 	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
-	my $is_user = grep(/$username/, @active_users);
+	my $is_user = grep { /$username/ } @active_users;
 	my $add_fail = 0;
 	my $in_already;
 	
 	if ($is_user) {
-		my @shadow_entry = grep(/$username/, @active_users);
-		my $is_ts_user = grep(/$username/, @ts_users);
+		my @shadow_entry = grep { /$username/ } @active_users;
+		my $is_ts_user = grep { /$username/ } @ts_users;
 		if ($is_ts_user) {
-			my @ts_shadow = grep(/$username/, @ts_users);
+			my @ts_shadow = grep { /$username/ } @ts_users;
 			if ($shadow_entry[0] eq $ts_shadow[0]) {
 				$in_already = 1;
 			} else {
@@ -1300,14 +1303,15 @@ sub adduser {
 			}
 		} else {
 			# new ts user
+               local *FHANDLE;
 			open(FHANDLE, ">> /etc/shadow\$\$CLIENT\$\$");
-			print FHANDLE "$shadow_entry[0]" or $add_fail = 1; 
+			print FHANDLE $shadow_entry[0] or $add_fail = 1; 
 			close FHANDLE;
 			$in_already = 0;
 		}
 	}	
 		
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "$username is not a user..\n" if !($is_user);
 		print "$username is already a Terminal Server user\n" if $in_already;
 		if ($add_fail == 1 || $in_already || !$is_user) {
@@ -1328,26 +1332,27 @@ sub deluser {
 	my $user_deleted;
 		
 	my @ts_users = cat_("/etc/shadow\$\$CLIENT\$\$");
-	my $is_ts_user = grep(/$username/, @ts_users);
+	my $is_ts_user = grep { /$username/ } @ts_users;
 	
 	if ($is_ts_user) {
 		$i = 0;
 		foreach my $user (@ts_users) {
 			if ($user =~ /$username/) {
-				splice (@ts_users, $i, 1);
+				splice(@ts_users, $i, 1);
 				$user_deleted = 1;
 				last;
 			}
 			$i++;
-		}			
+          }
+          local *FHANDLE;
 		open(FHANDLE, "> /etc/shadow\$\$CLIENT\$\$");
 		foreach my $user (@ts_users) {
-			print FHANDLE "$user";
+			print FHANDLE $user;
 		} 
 		close FHANDLE;
 	}
 	
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		if ($user_deleted) {
 			print "Deleted $username...\n";
 		} else {
@@ -1367,13 +1372,13 @@ sub addclient {
 			
 	my %ts_clients = read_dhcpd_conf();
 
-	foreach my $client(keys(%ts_clients)){
-		$host_in_use = 1 if ($hostname eq $client);
-		$mac_in_use = 1 if ($mac eq $ts_clients{$client}{hardware});
-		$ip_in_use = 1 if ($ip eq $ts_clients{$client}{address});
+	foreach my $client (keys(%ts_clients)) {
+		$host_in_use = 1 if $hostname eq $client;
+		$mac_in_use = 1 if $mac eq $ts_clients{$client}{hardware};
+		$ip_in_use = 1 if $ip eq $ts_clients{$client}{address};
 	}
 	
-	if ($cmd_line == 1){
+	if ($cmd_line == 1) {
 		print "$hostname already in use\n" if $host_in_use;
 		print "$mac already in use\n" if $mac_in_use;
 		print "$ip already in use\n" if $ip_in_use;
@@ -1393,7 +1398,8 @@ sub addclient {
 		$ts_clients{$hostname}{filename} = $nbi;
 			
 		my $clients = "/etc/dhcpd.conf.etherboot.clients";
-		open(CLIENT, ">> $clients") || warn ("Can't open $clients!");
+          local *CLIENT;
+		open(CLIENT, ">> $clients") || warn("Can't open $clients!");
 		my $client_entry = format_client_entry($hostname, %ts_clients);
 		print CLIENT $client_entry;
 		close CLIENT;	
@@ -1408,7 +1414,7 @@ sub delclient {
 	
 	my %ts_clients = read_dhcpd_conf();
 	
-	foreach my $client (keys(%ts_clients)){
+	foreach my $client (keys(%ts_clients)) {
 		if ($hostname eq $client) {
 			$host_found = 1;
 			delete $ts_clients{$client};
@@ -1417,8 +1423,8 @@ sub delclient {
 		}
 	}
 		
-	if ($cmd_line == 1){
-		print "$hostname not found...\n" if (!$host_found);
+	if ($cmd_line == 1) {
+		print "$hostname not found...\n" unless $host_found;
 		return;
 	}	
 }
@@ -1427,8 +1433,8 @@ sub change_gdm_xdmcp {
 	my ($enable) = @_;
 	my @conf_data = cat_("/etc/X11/gdm/gdm.conf");
 	for (my $i = 0; $i < @conf_data; $i++) {
-		$conf_data[$i] =~ s/^Enable\=false/Enable\=true/ if ($enable eq "true");
-		$conf_data[$i] =~ s/^Enable\=true/Enable\=false/ if ($enable eq "false");
+		$conf_data[$i] =~ s/^Enable\=false/Enable\=true/ if $enable eq "true";
+		$conf_data[$i] =~ s/^Enable\=true/Enable\=false/ if $enable eq "false";
 		# bail here so we don't alter the debug setting
 		if ($conf_data[$i] eq "[debug]\n") {
 			output("/etc/X11/gdm/gdm.conf", @conf_data);
@@ -1445,7 +1451,7 @@ sub update_hosts_allow {
 	if ($mode eq "enable") {
 		my $has_all = `grep ALL /etc/hosts.allow`;
 		if ($has_all) {
-			$in->ask_warn('',N("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
+			$in->ask_warn('', N("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
 			return;
 		}
 		if (!$has_all) {
@@ -1490,7 +1496,7 @@ sub format_client_entry {
 	$entry .= "\t#type\t\t\t$ts_clients{$client}{type};\n" if $ts_clients{$client}{type};
 	$entry .= "\tfilename\t\t\"$ts_clients{$client}{filename}\";\n" if $ts_clients{$client}{filename};
 	$entry .= "}\n";
-	write_thin_inittab($ts_clients{$client}{address}) if ($ts_clients{$client}{type} eq "thin"); 
+	write_thin_inittab($ts_clients{$client}{address}) if $ts_clients{$client}{type} eq "thin";
 	$entry
 }
 
@@ -1498,8 +1504,9 @@ sub write_dhcpd_conf {
 	my %ts_clients = @_;
 	my $clients = "/etc/dhcpd.conf.etherboot.clients";
 		
-	open(CLIENT, "> $clients") || warn ("Can't open $clients!");
-	foreach my $key(keys(%ts_clients)){
+     local *CLIENT;
+	open(CLIENT, "> $clients") || warn("Can't open $clients!");
+	foreach my $key (keys(%ts_clients)) {
 		my $client_entry = format_client_entry($key, %ts_clients);
 		print CLIENT $client_entry;
 	}
@@ -1512,17 +1519,18 @@ sub read_dhcpd_conf {
 	my $hostname;
 	
 	#- read and parse current client entries
+     local *CLIENTS;
 	open(CLIENTS, $clients) || warn("Can't open $clients\n"); 
-	while(<CLIENTS>) {
-		my ($name, $val, $val2) = split(' ',$_);
-		$val = $val2 if ($name =~ /hardware/);
+	while (<CLIENTS>) {
+		my ($name, $val, $val2) = split ' ';
+		$val = $val2 if $name =~ /hardware/;
 		$val =~ s/[;"]//g;
 		if ($name !~ /}/) {
 			if ($name =~ /host/) {
 				$hostname = $val;
 			} else {
-				$name = "address" if ($name =~ /fixed-address/);
-				$name = "type" if ($name =~ /#type/);
+				$name = "address" if $name =~ /fixed-address/;
+				$name = "type" if $name =~ /#type/;
 				$ts_clients{$hostname}{$name} = $val;
 			}
 		}	
