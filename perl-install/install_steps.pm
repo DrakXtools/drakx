@@ -576,7 +576,7 @@ sub installCrypto {
 sub summary {
     my ($o) = @_;
     configureTimezone($o);
-    configurePrinter($o);
+    configurePrinter($o) if $o->{printer};
 }
 
 #------------------------------------------------------------------------------
