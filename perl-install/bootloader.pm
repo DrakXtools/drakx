@@ -368,7 +368,7 @@ wait %d seconds for default boot.
 		       kernel_or_dev => $partition_table_mac'macos_part
 		      });
 	}
-    } else {
+    } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
 	my %nbs;
 	foreach (@$hds) {
@@ -649,7 +649,9 @@ sub write_lilo_conf {
 	    last;
 	}
     }
-    -e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
+	if (arch() !~ /ia64/) {
+		-e "$prefix/boot/boot.b" && -e "$prefix/boot/message" or die "unable to get right lilo configuration in $prefix/boot";
+	}
 
     {
 	local *F;
