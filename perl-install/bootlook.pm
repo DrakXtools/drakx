@@ -25,10 +25,11 @@ use Config;
 init Gtk;
 use POSIX;
 use Locale::GetText;
+use any;
 
 my $path_to_pixmaps = "/usr/share/libDrakX/pixmaps/";
 setlocale (LC_ALL, "");
-Locale::GetText::textdomain ("c'est ton boot !");
+Locale::GetText::textdomain ("Drakboot");
 
 import Locale::GetText I_;
 *_ = *I_;
@@ -44,6 +45,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die _("no help implemented yet.\n");
 
+my @users;
 my $x_mode = isXlaunched();
 my $a_mode = (-e "/etc/aurora/Monitor") ? 1 : 0;
 my $l_mode = isAutologin();
@@ -168,12 +170,15 @@ $x_box->pack_start($x_no_button, 0, 0, 0);
 
 my $user_dedans = new Gtk::HBox( 0, 10 );
 $user_dedans->border_width (0);
-my $x_yes_button = new Gtk::RadioButton _("yes, I want autologin with this user"), $x_no_button;
+my $x_yes_button = new Gtk::RadioButton _("yes, I want autologin with this (user, desktop)"), $x_no_button;
 $x_yes_button->set_active($l_mode);
 my $user_combo = new Gtk::Combo;
-$user_combo->set_popdown_strings("you", "me", "rms", "linus");
+\&parse_etc_passwd;
+$user_combo->set_popdown_strings(@users);
+my $desktop_combo = new Gtk::Combo;
 $user_dedans->pack_start($x_yes_button, 0, 0, 0);
 $user_dedans->pack_start($user_combo, 0, 0, 0);
+$user_dedans->pack_start($desktop_combo, 0, 0, 0);
 $x_box->pack_start ($user_dedans, 0, 0, 0);
 
 ($x_mode) ? $x_box->set_sensitive(1) : $x_box->set_sensitive(0);
@@ -212,6 +217,22 @@ if ($a_mode) {
 }
 
 main Gtk;
+#-------------------------------------------------------------
+# get user names to put in combo  
+#-------------------------------------------------------------
+
+sub parse_etc_passwd
+{
+    setpwent();
+    do {
+	@user_info = getpwent();                                                                                                                                                                                                                                                                                    
+	my ($uname, $uid) = @user_info[0,2];
+	print "$user_info[0]";
+	if ($uid == 0 || $uid >500){
+	    push (@users, $uname);
+	}
+    } while (@user_info);
+}
 
 #-------------------------------------------------------------
 # menu callback functions
