@@ -353,14 +353,14 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			del_loop(loopdev);
 			umount(disk_own_mount);
+			del_loop(loopdev);
 			return try_with_device(dev_name);
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			stg1_error_message("Could not load program into memory.");
-			del_loop(loopdev);
 			umount(disk_own_mount);
+			del_loop(loopdev);
 			return try_with_device(dev_name);
 		}
 	} else {
@@ -375,8 +375,8 @@ static enum return_type try_with_device(char *dev_name)
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", disk_extract_list_directory(IMAGE_LOCATION));
-			del_loop(loopdev);
 			umount(disk_own_mount);
+			del_loop(loopdev);
 			return try_with_device(dev_name);
 		}
 #ifndef MANDRAKE_MOVE
@@ -385,8 +385,8 @@ static enum return_type try_with_device(char *dev_name)
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
-			del_loop(loopdev);
 			umount(disk_own_mount);
+			del_loop(loopdev);
 			return try_with_device(dev_name);
 		}
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
@@ -394,8 +394,8 @@ static enum return_type try_with_device(char *dev_name)
 #endif
 
 	if (IS_RESCUE) {
-                del_loop(loopdev);
 		umount(disk_own_mount);
+                del_loop(loopdev);
 	}
 
         add_to_env("METHOD", "disk");
