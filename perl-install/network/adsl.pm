@@ -100,6 +100,7 @@ sub adsl_conf_backend {
     # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
+    $adsl_type eq 'pptp' and $adsl_device = 'pptp_modem';
     my $bewan_module;
     $bewan_module = $o_netcnx->{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $adsl_device eq "bewan";  
 
@@ -189,6 +190,12 @@ linkname eciadsl
 noauth
 lcp-echo-interval 0)
                   },
+                  pptp_modem =>
+                  {
+                   server => {
+                              pptp => qq("pty "/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
+                             },
+                  },
                  );
 
 
@@ -198,7 +205,7 @@ lcp-echo-interval 0)
         my %packages = (
                         pppoa => [ qw(ppp-pppoatm) ],
                         pppoe => [ qw(ppp-pppoe rp-pppoe) ],
-                        pptp  => [ qw(pptp-linux pptp-adsl) ],
+                        pptp  => [ qw(pptp-linux) ],
                        );
         $in->do_pkgs->install(@{$packages{$adsl_type}}) if !$>;
         output("$::prefix/etc/ppp/options",
