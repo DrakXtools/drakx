@@ -319,13 +319,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - diskdrake: (pixel)
   o fix growing ext2/ext3 partitions
   o handle beos partitions with filesystem befs (#5523)
-- drakbackup/drakTermServ: (stew)
-  o use hd as default daemon media
+- drakbackup:
+  o use hd as default daemon media (stew)
   o fix translation issues (Arpad Biro)
   o fix user cron misbehavior (Keld Jørn Simonsen)
 - drakTermServ:
-  o fix translation issues (Arpad Biro),
-  o fix help text format
+  o fix translation issues (Arpad Biro)
+  o fix help text format (stew)
 - drakboot: when "Back" is pressed, restore the list of entries in
   bootloader (#5680) (pixel)
 - drakbug: add support for bug submission about stable releases into
