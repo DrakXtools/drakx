@@ -820,7 +820,7 @@ sub generate_ks_cfg {
     if ($o->{method} =~ /ftp|http/) {
 	$ks .= "url --url $ENV{URLPREFIX}\n";
     } elsif ($o->{method} =~ /nfs/) {
-	cat_("/proc/mounts") =~ m|(\S+:\S+)\s+/tmp/rhimage nfs| or die;
+	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/rhimage nfs| or die;
 	$ks .= "nfs --server $1 --dir $2\n";
     }
     my %intf = %{$o->{intf}[0]};
@@ -829,7 +829,7 @@ sub generate_ks_cfg {
     } else {
 	my %l = (ip => $intf{IPADDR}, netmask => $intf{NETMASK}, gateway => $o->{netc}{GATEWAY});
 	$ks .= "network " . join(" ", map_each { $::b && "--$::a $::b" } %l);
-	$ks .= "--nameserver $_" foreach network::dnsServers($o->{netc});
+	$ks .= " --nameserver $_" foreach network::dnsServers($o->{netc});
 	$ks .= "\n";
     }
     $ks;

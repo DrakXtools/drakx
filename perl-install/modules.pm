@@ -137,6 +137,7 @@ arch() =~ /^sparc/ ? (
   "sd_mod" => "sd_mod",
   "ide-mod" => "ide-mod",
   "ide-probe" => "ide-probe",
+  "ide-probe-mod" => "ide-probe-mod",
 }],
 [ 'disk', {
 arch() =~ /^sparc/ ? (
@@ -158,15 +159,15 @@ arch() =~ /^sparc/ ? (
 }],
 [ 'cdrom', {
 arch() !~ /^sparc/ ? (
-#-  "sbpcd" => "SoundBlaster/Panasonic", #- removed for space
-  "aztcd" => "Aztech CD",
-  "gscd" => "Goldstar R420",
-  "isp16" => "ISP16/MAD16/Mozart",
+  "sbpcd" => "SoundBlaster/Panasonic",
+#-  "aztcd" => "Aztech CD",
+#-  "gscd" => "Goldstar R420",
+#-  "isp16" => "ISP16/MAD16/Mozart",
 #-  "mcd" => "Mitsumi", #- removed for space
-  "mcdx" => "Mitsumi (alternate)",
-  "optcd" => "Optics Storage 8000",
-  "cm206" => "Phillips CM206/CM260",
-  "sjcd" => "Sanyo",
+#-  "mcdx" => "Mitsumi (alternate)",
+#-  "optcd" => "Optics Storage 8000",
+#-  "cm206" => "Phillips CM206/CM260",
+#-  "sjcd" => "Sanyo",
   "cdu31a" => "Sony CDU-31A",
   "sonycd535" => "Sony CDU-5xx",
 ) : (),
@@ -447,9 +448,11 @@ sub load_raw {
 }
 
 sub read_already_loaded() {
-    foreach (cat_("/proc/modules", "die")) {
+    foreach (cat_("/proc/modules")) {
 	my ($name) = split;
 	$conf{$name}{loaded} = 1;
+	my $l = $loaded{($drivers{$name} || next)->{type}} ||= [];
+	push @$l, $name unless member($name, @$l);
     }
 }
 
@@ -603,6 +606,6 @@ sub load_ide {
     eval {
 	load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
 	delete $conf{"ide-mod"}{options};
-	load_multi(qw(ide-probe ide-disk ide-cd));
+	load_multi(qw(ide-probe ide-probe-mod ide-disk ide-cd));
     }
 }

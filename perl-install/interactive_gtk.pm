@@ -188,7 +188,6 @@ sub ask_from_entries_refW {
 	    $w->entry->set_editable(!$_->{not_edit});
 	    $w->set_popdown_strings(@{$_->{list}});
 	    $w->disable_activate;
-	    $_->{val} ||= $_->{list}[0];
 	    $w;
 	} elsif ($_->{type} eq "bool") {
 	    my $w = Gtk::CheckButton->new($_->{text});
@@ -264,7 +263,7 @@ sub ask_from_entries_refW {
 		#-i must say before &$go_to_next, but with it doen't work HACK!
 		$w->signal_emit_stop("key_press_event") if chr($e->{keyval}) eq "\x8d";
 	    });
-	    $widget->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
+	    $widget->set_text(${$val->[$i]{val}});
 	    $widget->set_visibility(0) if $val->[$i]{hidden};
 	}
 	&{$updates[$i]};

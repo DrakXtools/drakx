@@ -227,8 +227,9 @@ sub ask_from_entries_ref($$$$;$%) {
 	if ((ref $_) eq "SCALAR") {
 	    { val => $_ }
 	} else {
-	    ($_->{list} && (@{$_->{list}} > 1)) ?
-	      { %$_, type => "list"} : $_;
+	    add2hash_($_, { type => 'list' }) if @{$_->{list}} > 1; #- TODO: remove the if, not needed?
+	    ${$_->{val}} = $_->{list}[0] if $_->{not_edit} && !member(${$_->{val}}, @{$_->{list}});
+	    $_;
 	}
     } @$val ];
 

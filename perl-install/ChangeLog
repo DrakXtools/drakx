@@ -1,5 +1,23 @@
 2000-05-04  Pixel  <pixel@mandrakesoft.com>
 
+	* install2.pm (configurePrinter): give clicked to printerConfig
+
+	* interactive.pm (ask_from_entries_ref): set default val if not_edit
+
+	* interactive_newt.pm (ask_from_entries_refW): remove setting of
+	default val. Now done in interactive::ask_from_entries_ref
+
+	* interactive_gtk.pm (ask_from_entries_refW): handle empty value
+
+	* modules.pm (read_already_loaded): ensure that already loaded
+	modules are put in %loaded.
+	* modules.pm (load_ide): add loading if ide-probe-mod (for new kernel)
+
+	* lilo.pm (install_lilo): truncate label's to 15 chars
+
+	* install_any.pm (generate_ks_cfg): fix missing space
+	* install_any.pm (generate_ks_cfg): fix bug for nfs comand
+
 	* install2.pm: get rid of autoformat
 	* install_steps.pm (choosePartitionsToFormat): get rid of autoformat
 

@@ -128,7 +128,6 @@ sub ask_from_entries_refW {
 #-	$_->{type} = "entry" if $_->{type} eq "list" && !$_->{not_edit};
 	${$_->{val}} ||= '';
 	if ($_->{type} eq "list") {
-	    $_->{val} ||= $_->{list}[0];
 	    my $w = Newt::Component::Listbox(-1, -1, 1, 0);
 	    $w->ListboxSetWidth(20);
 	    $w->ListboxAddEntry($_) foreach @{$_->{list}};
