@@ -282,7 +282,7 @@ sub setupBootloader {
     installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
     installStepsCall($o, $auto, 'setupBootloader');
 
-    install_any::set_security($o);
+    eval { install_any::set_security($o) };
 }
 #------------------------------------------------------------------------------
 sub configureX {
