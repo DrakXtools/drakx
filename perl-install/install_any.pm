@@ -1012,6 +1012,9 @@ sub install_urpmi {
 		close $F;
 	    }
 
+	    #- touch a MD5SUM file
+	    if (open my $F, ">", "$::prefix/var/lib/urpmi/MD5SUM") { close $F }
+
 	    #- build synthesis file if there are still not existing (ie not copied from mirror).
 	    if (-s "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz" <= 32) {
 		unlink "$::prefix/var/lib/urpmi/synthesis.hdlist.$name.cz";
