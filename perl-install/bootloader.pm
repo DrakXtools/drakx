@@ -196,7 +196,7 @@ sub add_kernel {
 	symlinkf("initrd-$version.img", "$::prefix$initrd") or cp_af("$::prefix/boot/initrd-$version.img", "$::prefix$initrd");
     }
 
-    my $label = $ext =~ /-(default)/ ? $1 : "linux$ext";
+    my $label = $ext =~ /-(default)/ ? $1 : $ext =~ /\d\./ ? sanitize_ver("linux$ext") : "linux$ext";
 
     #- more yaboot concessions - PPC
     if (arch() =~ /ppc/) {
@@ -328,6 +328,46 @@ sub get_kernels_and_labels() {
 	$labels{$label} = $complete_version;
     }
     %labels;
+}
+
+# sanitize_ver: long function when it could be shorter but we are sure
+#		to catch everything and can be readable if we want to
+#		add new scheme name.
+# DUPLICATED from /usr/share/loader/common.pm
+my $mdksub = "smp|enterprise|secure|linus|mosix|BOOT|custom";
+
+sub sanitize_ver {
+    my $string = shift;
+    my $return;
+    (my $ehad, my $chtaim, my $chaloch, my $arba, my $hamesh, my $chech); #where that names come from ;)
+
+    $string =~ m|([^-]+)-([^-]+)(-([^-]+))?(-([^-]*))?|;
+    $ehad = $1; $chtaim = $2; $chaloch = $3; $arba = $4; $hamesh = $5; $chech = $6;
+
+    if ($chtaim =~ m|mdk| and $chech =~ m|mdk(${mdksub})|) { #new mdk with mdksub
+	my $s = $1;
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk|;
+	$return = "$1$2$3-$4$s";
+    } elsif ($chtaim =~ m|mdk$|) { #new mdk
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk$|;
+	$return = "$1$2$3-$4";
+    } elsif ($chaloch =~ m|(\d+)mdk(${mdksub})$|) { #old mdk with mdksub
+	my $s = "$1$2";
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)|;
+	$return = "$1$2$3-$s";
+    } elsif ($chaloch =~ m|(\d+)mdk$|) { #old mdk
+	my $s = $1;
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)|;
+	$return = "$1$2$3-$s";
+    } elsif (not defined($chaloch)) { #linus/marcelo vanilla
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)$|;
+	$return = "$1$2$3";
+    } else { #a pre ac vanilla or whatever with EXTRAVERSION
+	$chtaim =~ m|^(\d+)\.(\d+)\.(\d+)$|;
+	$return = "$1$2$3${chaloch}";
+    }
+    $return =~ s|\.||g; $return =~ s|mdk||; $return =~ s|secure|sec|; $return =~ s|enterprise|ent|;
+    return $return;
 }
 
 sub suggest {
