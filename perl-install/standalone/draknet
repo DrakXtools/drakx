@@ -170,6 +170,7 @@ $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
 my $button2 = new Gtk::Button($c ? _("Disconnect...") : _("Connect..."));
 $button2->signal_connect (clicked => sub {
+			      $::isWizard = 0;
 			      if (!netconnect::connected('', $netc)) {
 				  my $up;
 				  {
@@ -216,9 +217,15 @@ $clist1->set_shadow_type('etched_out');
 $vbox2->pack_start($clist1, 0, 0, 5);
 #$scrolled1->add_with_viewport($table2);
 
+my $ip_regexp = qr/(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/;
 foreach (0..$#all_cards) {
-$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
-$clist1->set_selectable($_, 0);
+    my $ip;
+    if (-e "/sbin/ifconfig") {
+	local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
+	/inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
+    } else { $intf->{"eth$_"}{IPADDR} }
+    $clist1->append($_+1, "eth$_", $ip , $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
+    $clist1->set_selectable($_, 0);
 }
 
 my $hbox3 = new Gtk::HBox(0,0);
@@ -331,6 +338,11 @@ sub update {
     $clist1->freeze();
     $clist1->clear();
     foreach (0..$#all_cards) {
+	my $ip;
+	if (-e "/sbin/ifconfig") {
+	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
+	    /inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
+	} else { $intf->{"eth$_"}{IPADDR} }
 	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	$clist1->set_selectable($_, 0);
     }
