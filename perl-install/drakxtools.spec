@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 8mdk
+Release: 9mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Sep  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-9mdk
+- drakfont: fix not being able to select directories (#4964)
+- drakconnect: fix firmware loading (#5307, poulpy)
+- printerdrake:
+  o use new help scheme (daouda)
+  o reread database when switching between normal and expert mode
+    (till)
+
+- scannerdrake: complain if saned could not be installed
+- XFdrake: Xuse OptionMenu's rather than Combo's (more consistent gui
+  and better behavior when embedded)
+
 * Sun Sep  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-8mdk
 - localedrake: configuration fixes (gc)
 - drakgw: fix #2120 & #2405 (florin)
