@@ -1045,13 +1045,18 @@ sub dev2grub {
     "($grub" . ($3 && "," . ($3 - 1)) . ")";
 }
 
+sub read_grub_device_map() {
+    my %grub2dev = map { m!\((.*)\) /dev/(.*)$! } cat_("$::prefix/boot/grub/device.map");
+    \%grub2dev;
+}
+
 sub grub2dev {
     my ($device, $o_block_device) = @_;
     my ($dev, $part) = ($1 . ")", $2) if $device =~ s/(\([^,]*?)(?:,(.*))?\)//;
     undef $part if $o_block_device;
     $part++ if defined $part;   # grub wants "(hdX,Y)" where lilo just want "hdY+1"
     $dev =~ s/,[^)]*//;
-    my $new_dev = +{ map { chomp; s/()//g; split(/\s+/, $_, 2) } cat_("$::prefix/boot/grub/device.map") }->{$dev} . $part;
+    my $new_dev = '/dev/' . read_grub_device_map()->{$dev} . $part;
     wantarray() ? ($device, $new_dev) : $new_dev;
 }
 
