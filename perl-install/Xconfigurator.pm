@@ -303,7 +303,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
 	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
     }
-    if (availableRamMB() <= 800 || arch() =~ /ppc/) {
+    if (availableRamMB() > 800 || arch() =~ /ppc/) {
 	#- No 3D XFree 3.3 for PPC
 	#- and no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
 	$card->{Utah_glx} = $card->{Utah_glx_EXPERIMENTAL} = '';
