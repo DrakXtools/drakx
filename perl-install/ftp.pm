@@ -57,10 +57,10 @@ sub new {
 }
 
 sub getFile {
-    my $f = shift;
-    my ($ftp, $retr) = new(@_ ? @_ : fromEnv);
+    my ($f, @para) = @_;
+    my ($ftp, $retr) = new(@para ? @para : fromEnv);
     $$retr->close if $$retr;
-    $$retr   = $ftp->retr($f) or rewindGetFile();
+    $$retr   = $ftp->retr($f) or do { rewindGetFile(); goto &getFile };
     $$retr ||= $ftp->retr($f);
 }
 
