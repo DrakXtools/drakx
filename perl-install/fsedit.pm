@@ -536,12 +536,6 @@ sub check_mntpoint {
     loopback::check_circular_mounts($hd, $part, $all_hds);
 }
 
-sub check {
-    my ($hd, $part, $all_hds) = @_;
-    check_mntpoint($part->{mntpoint}, $hd, $part, $all_hds);
-    check_type($part->{type}, $hd, $part);
-}
-
 sub add {
     my ($hd, $part, $all_hds, $options) = @_;
 
