@@ -1,16 +1,16 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 36mdk
+Release: 37mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 # Temporary requires for tools that still use gtk+1 (mainly drakfloppy and net_monitor)
-Requires: perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
-Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.0.4-14mdk
-Conflicts: drakconf < 9.1-14mdk 
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.8, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
+Requires: perl-GTK >= 0.7008-29mdk, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf
+Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2003.04.04.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk
+Conflicts: drakconf < 9.1-14mdk
+BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-devel, newt-devel, perl-devel >= 1:5.8.0-20mdk, libext2fs-devel, perl-MDK-Common-devel >= 1.1.2-2mdk
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -19,7 +19,7 @@ Obsoletes: draksec
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
+Requires: perl-base >= 1:5.8.0-20mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.7-3mdk, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
 Provides: perl(Newt::Newt)
@@ -28,7 +28,7 @@ Provides: perl(network::isdn_consts)
 %package http
 Summary: The drakxtools via http
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Net_SSLeay, perl-Authen-PAM, perl-CGI
+Requires: %{name}-newt = %version-%release, perl-Net_SSLeay >= 1.22-1mdk, perl-Authen-PAM >= 0.14-1mdk, perl-CGI >= 2.91-1mdk
 PreReq: rpm-helper
 
 %package -n harddrake
@@ -311,6 +311,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-37mdk
+- drakfont: fix #1352 (do not add font directory with dummy messages)
+- harddrake2: fix #3487 (invalid charset in help windows)
+- drakconnect: fix "isdn modem choice step is skipped" bug (poulpy)
+
 * Mon May 12 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-36mdk
 - drakboot:
   o do not loop on console (part of #3560) (pixel)
