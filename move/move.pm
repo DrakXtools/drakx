@@ -56,7 +56,7 @@ sub init {
 
     #- these files are typically opened in read-write mode, we need them copied
     mkdir_p("/etc/$_"), system("cp -R /image/etc/$_/* /etc/$_")
-      foreach qw(cups profile.d sysconfig sysconfig/network-scripts devfs/conf.d);
+      foreach qw(cups profile.d sysconfig devfs/conf.d);
 
     #- directories we badly need as non-links because files will be written in
     handle_etcfiles('DIR');
