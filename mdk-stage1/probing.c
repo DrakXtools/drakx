@@ -238,7 +238,7 @@ static void probe_that_type(enum driver_type type)
 				goto end_usb_probe;
 			}
 			wait_message("Waiting for USB stuff to show up.");
-			sleep(2); /* sucking background work */
+			sleep(4); /* sucking background work */
 			remove_wait_message();
 		}
 
