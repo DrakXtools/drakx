@@ -33,12 +33,6 @@ $::isInstall and die "Not supported during install.\n";
 my $in = 'interactive'->vnew('su', 'default');
 my $cron_hourly = "/etc/cron.hourly/logdrake_service";
 
-if ($::isEmbedded) {
-  print "EMBED\n";
-  print "parent XID\t$::XID\n";
-  print "mcc pid\t$::CCPID\n";
-}
-
 #- parse arguments list.
 foreach (@ARGV) {
     /^--explain=(.*)$/ and do { $::isExplain = ($::Explain) = $1; $::isFile = 1; $::File = "/var/log/explanations"; next };
@@ -214,7 +208,7 @@ $::isFile and gtkset_size_request($log_text, 400, 500);
 $my_win->{window}->realize;
 $my_win->{window}->show_all();
 search() if $::isFile;
-kill 'USR2', $::CCPID unless $::isExplain || !$::isEmbedded; # special case because logdrake is also embedded for logs
+kill 'USR2', $::CCPID if $::isEmbedded; # special case because logdrake is also embedded for logs
 $my_win->main;
 
 sub quit { ugtk2->exit(0) }
