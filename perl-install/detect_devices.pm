@@ -730,7 +730,7 @@ sub hasSMP() {
 }
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
-sub dmidecode {
+sub dmidecode() {
     my (%l, $cat);
 
     my $dmidecode_infos if 0;
