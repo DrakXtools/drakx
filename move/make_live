@@ -41,7 +41,7 @@ sub installPackages {
 					     default_packages => [
                                  qw(XFree86-server XFree86-xfs XFree86-FBDev),
 				 qw(openssh-server), #- fred wants it
-				 qw(alsa-utils),
+				 qw(alsa-utils newt), #- newt
 				 qw(davfs nfs-utils samba-server sane-backends xsane xsane-gimp),
                                  qw(acpi acpid), #- so that removing acpi=ht will work
 				 qw(mountloop),	#- crypted folders
