@@ -616,7 +616,7 @@ sub read_rpmsrate {
                    (?: \s*\|\|\s* (?: !\s*)? [0-9A-Z_]+(?:".*?")?)*
                   )
                   (?:\s+|$)
-                 )(.*)/x) {
+                 )(.*)/x) { #@")) {
 	    ($t, $flag, $data) = ($1,$2,$3);
 	    while ($flag =~ s,^\s*(("[^"]*"|[^"\s]*)*)\s+,$1,) {}
 	    my $ok = 0;
@@ -1340,6 +1340,25 @@ sub remove($$) {
 
     #- keep in mind removing of these packages by cleaning $toRemove.
     @{$toRemove || []} = ();
+}
+
+sub selected_leaves {
+    my ($packages) = @_;
+    my %l;
+    $l{$_->[$FILE]} = 1 foreach grep { packageFlagSelected($_) && !packageFlagBase($_) } @{$packages->{depslist}};
+
+    my %m = %l;
+    foreach (@{$packages->{depslist}}) {
+	delete $m{$_->[$FILE]} or next;
+
+	foreach (map { split '\|' } grep { !/^NOTFOUND_/ } packageDepsId($_)) {
+	    delete $l{$packages->{depslist}[$_][$FILE]};
+	}
+    }
+    [ map {
+	my @l; $l[$FILE] = $_;
+	packageName(\@l);
+    } grep { $l{$_} } keys %l ];
 }
 
 1;
