@@ -94,6 +94,8 @@ sub getinfoFromXF86Config {
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
 	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
+	    $monitor{VendorName} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
+	    $monitor{ModelName} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
 	    $monitor{ModeLines} .= $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
 	    $card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
@@ -126,6 +128,8 @@ sub getinfoFromXF86Config {
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
 	    $monitor{hsyncrange} ||= $1 if /^\s*HorizSync\s+(.*)/;
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
+	    $monitor{VendorName} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
+	    $monitor{ModelName} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
 	    $monitor{ModeLines_xf3} .= $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    %c = () if $i == 1;
