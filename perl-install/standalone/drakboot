@@ -329,6 +329,6 @@ Be sure your video card supports the mode you choose."),
         }
     };
     die if $@ && $@ !~ /^wizcancel/;
-    $::WizardWindow->destroy;
+    $::WizardWindow->destroy unless $::isEmbedded;
     $vga;
 }
