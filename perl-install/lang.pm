@@ -286,7 +286,7 @@ my %charsets = (
    "iso-8859-8" => [ "iso08.f16",	undef,	"iso08",
 #-	std_("iso8859-8") ],
 	"iso8859-8", "862", std_("microsoft-cp1255") ],
-  "iso-8859-9" => [ "iso09.f16",	undef,	"iso09",
+  "iso-8859-9" => [ "lat5u-16",	undef,	"iso09",
 	"iso8859-9", "857", sub { std("iso8859-9", @_) } ],
   "iso-8859-13" => [ "tlat7",		undef,	"iso13",
 	"iso8859-13", "775", std_("iso8859-13") ],
