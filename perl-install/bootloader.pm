@@ -707,9 +707,10 @@ sub install_grub {
 	output "$prefix/boot/grub/device.map", 
 	  join '', map { "($_) /dev/$bios2dev{$_}\n" } sort keys %bios2dev;
     }
+    my $bootIsReiser = isReiserfs(fsedit::get_root($fstab, 'boot'));
     my $file2grub = sub {	
 	my $file = expand_symlinks "$prefix$_[0]";
-	if (!isReiserfs(fsedit::get_root($fstab, 'boot'))) { #- grub in reiserfs doesn't handle symlinks.
+	if (!$bootIsReiser) { #- grub in reiserfs doesn't handle symlinks.
 	    if (my $l = readlink "$prefix$_[0]") {
 		$l =~ m|/| or $file =~ s/\Q$l/basename $_[0]/e; #- keep simple end symlinks
 	    }
@@ -742,7 +743,8 @@ sub install_grub {
 	print F "color black/cyan yellow/cyan";
 	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($lilo->{keytable}) if $lilo->{keytable};
-	print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once");
+	#- since we use notail in reiserfs, altconfigfile is broken :-(
+	print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once") if !$bootIsReiser;
 	output "$prefix$once", " " x 100;
 
 	map_index {
