@@ -488,7 +488,7 @@ sub interactive_mode() {
                  if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 
                  0, Gtk2::WrappedLabel->new(N("Font List")),
                  1, create_fontsel(),
-                 0, create_okcancel( my $oc = {
+                 0, create_okcancel(my $oc = {
                                      ok_clicked => sub { Gtk2->main_quit },
                                     },
                                     undef, undef, '',
@@ -756,8 +756,7 @@ sub import_status() {
                                 [ N("Post Install"), $pbar3, $pbar3->set_text(' ') ],
                                ),
            ],
-           [
-           ],
+           [],
            \&backend_mod,
           );
 }
@@ -776,8 +775,7 @@ sub import_status_uninstall() {
 				[ N("Post Uninstall"), $pbar2, $pbar2->set_text(' ') ],
 			       ),
 	   ],
-	   [
-	   ],
+	   [],
 	   \&backend_mod,
 	  );
 }
