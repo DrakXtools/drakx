@@ -585,21 +585,12 @@ sub set_profiles {
 }
 
 sub get_of_dev {
-	my ($unix_dev) = @_;
-	#- don't care much for this - need to run ofpath rooted, and I need the result
-	#- In test mode, just run on "/", otherwise you can't get to the /proc files		
-	run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath $unix_dev", ">", "/tmp/ofpath");
-	open(FILE, "$::prefix/tmp/ofpath") || die "Can't open $::prefix/tmp/ofpath";
-	my $of_dev = "";
-	local $_;
-	while (<FILE>){
-		$of_dev = $_;
-	}
-	chop($of_dev);
-	my @del_file = ($::prefix . "/tmp/ofpath");
-	unlink (@del_file);
-	log::l("OF Device: $of_dev");
-	$of_dev;
+    my ($unix_dev) = @_;
+    my $of_dev;
+    run_program::rooted_or_die($::prefix, "/usr/sbin/ofpath", ">", \$of_dev, $unix_dev);
+    chomp($of_dev);
+    log::l("OF Device: $of_dev");
+    $of_dev;
 }
 
 sub install_yaboot {
