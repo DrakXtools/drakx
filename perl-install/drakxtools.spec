@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 4mdk
+Release: 5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+
+* Thu Aug 28 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-5mdk
+- drakhelp: add support for contextual help (daouda)
+- explanations are back (pixel)
+- fix autologin for xdm (pixel)
+- drakconnect:
+  o fix dialogs height
+  o fix #4372 (poulpy)
+  o profiles are back
+- printerdrake: new GUI (till)
+
 * Wed Aug 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-4mdk
 - drakconnect:
   o non wizard gui
@@ -323,7 +334,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o both wizard and non wizard modes: (poulpy)
     * fix #4363
     * fix speedtouch firmware file name
-- drakhelp: add support for contextual help
 - drakxtv: resync with kernel's bttv
 - printerdrake: misc fixes (till)
 
