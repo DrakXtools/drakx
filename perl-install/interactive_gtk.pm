@@ -22,6 +22,7 @@ sub leave_console { my ($o) = @_; common::setVirtual(delete $o->{suspended}) }
 sub exit { 
     gtkset_mousecursor_normal(); #- for restoring a normal in any case on standalone
     my_gtk::flush();
+    $::isEmbedded and kill 10, $::CCPID; #10 is USR1
     c::_exit($_[1]) #- workaround 
 }
 
