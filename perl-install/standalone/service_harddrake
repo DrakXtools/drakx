@@ -96,7 +96,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     $config{$Ident} = \%ID;
     next if !$is_globetrotter && !$force && is_empty_hash_ref($previous_config); # do not fsck on first run but if --force
 
-    my $oldconfig = $previous_config->{$Ident};
+    my $oldconfig = $force ? {} : $previous_config->{$Ident};
 
     my $msg;
     my @was_removed = difference2([ keys %$oldconfig ], [ keys %ID ]);
