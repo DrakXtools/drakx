@@ -289,6 +289,9 @@ sub write_conf {
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if any { $_->{driver} eq 'bttv' } detect_devices::probeall();
     append_to_etc_modules($prefix, @l);
+
+    #- use module-init-tools script for the moment
+    run_program::rooted($prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if (-e "$prefix/etc/modprobe.conf");
 }
 
 sub append_to_etc_modules {
