@@ -522,7 +522,7 @@ sub chooseGroups {
     while (1) {
 	if ($available_size < 140) {
 	    # too small to choose anything. Defaulting to no group chosen
-	    $val{$_} = 0 foreach %val;
+	    $val{$_} = 0 foreach keys %val;
 	    last;
 	}
 
