@@ -92,9 +92,7 @@ upload: clean install
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
 
-	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | tools/mailchangelog
-	tools/addchangelog perl-install/ChangeLog 'snapshot uploaded'
-	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
+	tools/addchangelog.pl perl-install tools/cvslog2changelog.pl | tools/mailchangelog.pl
 
 upload_sparc:
 	touch /tmp/mdkinst_done
