@@ -49,6 +49,6 @@ system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 my $i = $0 =~ Xdrakres ? Xconfig::getinfoFromXF86Config() : {};
 Xconfig::getinfo($i);
 
-Xconfigurator::main('', $i, $in, 0, 0, sub { system("urpmi --auto XFree86-$_[0]") });
+Xconfigurator::main('', $i, $in, 0, -e "/etc/pcmcia", sub { system("urpmi --auto XFree86-$_[0]") });
 
 $in->exit(0);

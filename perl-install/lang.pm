@@ -1,4 +1,4 @@
- package lang;
+package lang;
 
 use diagnostics;
 use strict;
@@ -237,11 +237,14 @@ sub write {
 	    add2hash $h, { SYSFONT => $c->[0], UNIMAP => $c->[1], SYSFONTACM => $c->[2] };
 
 	    my $p = "$prefix/usr/lib/kbd";
-	    commands::cp("-f",
+	    eval {
+		commands::cp("-f",
 		     "$p/consolefonts/$c->[0].psf.gz",
 		     glob_("$p/consoletrans/$c->[1]*"),
 		     glob_("$p/consoletrans/$c->[2]*"),
 		     "$prefix/etc/sysconfig/console");
+	    };
+	    $@ and log::l("missing console $c->[0], $c->[1], $c->[2]");
 	}
 	add2hash $h, $xim{$lang};
     }

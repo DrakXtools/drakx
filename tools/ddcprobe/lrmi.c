@@ -727,7 +727,7 @@ static int
 lrmi_vm86(struct vm86_struct *vm)
 	{
 	int r;
-#ifdef __PIC__
+#if 1
 	asm volatile (
 	 "pushl %%ebx\n\t"
 	 "movl %2, %%ebx\n\t"

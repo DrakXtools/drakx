@@ -27,7 +27,7 @@ sub require2package { $deps{$_[0]} || $_[0] }
 sub mirror2text($) { $mirrors{$_[0]} && "$mirrors{$_[0]}[0] ($_[0])" }
 sub mirrorstext() { map { mirror2text($_) } keys %mirrors }
 sub text2mirror($) { first($_[0] =~ /\((.*)\)$/) }
-sub ftp($) { ftp::new($_[0], "$mirrors{$_[0]}[1]/RPMS") }
+sub ftp($) { ftp::new($_[0], "$mirrors{$_[0]}[1]/$::VERSION") }
 
 sub packages($) { ftp($_[0])->ls }
 

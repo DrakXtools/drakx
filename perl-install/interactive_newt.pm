@@ -84,10 +84,10 @@ sub ask_many_from_list_refW($$$$$) {
     $checklist->FormSetHeight($height);
     $checklist->FormSetBackground(9);
 
-    map_index {	
-	$checklist->FormAddComponent(
-	     Newt::Component::Checkbox(1, $::i + 1, $_, checkval(${$val->[$::i]} ||= ''), " *", ${$val->[$::i]}));
+    my @l = map_index {	
+	Newt::Component::Checkbox(1, $::i + 1, $_, checkval(${$val->[$::i]} ||= ''), " *");
     } @$list;
+    $checklist->FormAddComponent($_) foreach @l;
 
     my $listg = Newt::Grid::HCloseStacked($checklist, $height < @$list ? (separator(1, $height), $sb) : ());
 
@@ -98,12 +98,17 @@ sub ask_many_from_list_refW($$$$$) {
     $window->GridWrappedWindow($title);
     $window->GridAddComponentsToForm($form, 1);
     my $r = $form->RunForm;
+
     $form->FormDestroy;
     Newt::PopWindow;
 
     $$r == $$cancel and return;
 
-    $$_ = $$_ eq "*" foreach @$val;
+    mapn {
+	my ($a, $b) = @_;
+	$$a = $b->CheckboxGetValue == ord '*';
+    } $val, \@l;
+
     1;
 }
 
@@ -124,7 +129,7 @@ sub ask_from_entries_refW {
 	    map_index { $w->ListboxAddEntry($_, $_) } @{$_->{list}};
 	    $w;
 	} elsif ($_->{type} eq "bool") {
-	    Newt::Component::Checkbox(-1, -1, $_->{text} || '', checkval(${$_->{val}}), " *", ${$_->{val}});
+	    Newt::Component::Checkbox(-1, -1, $_->{text} || '', checkval(${$_->{val}}), " *");
 	} else {
 	    Newt::Component::Entry(-1, -1, '', 20, ($_->{hidden} && 1 << 1) | 1 << 2);
 	}
@@ -135,7 +140,7 @@ sub ask_from_entries_refW {
 	 sub {
 	     ${$ref->{val}} = 
 	       $ref->{type} eq "bool" ?
-	         $w->CheckboxGetValue :
+	         $w->CheckboxGetValue == ord '*' :
 	       $ref->{type} eq "list" ?
 	         $w->ListboxGetCurrent :
 		 $w->EntryGetValue;

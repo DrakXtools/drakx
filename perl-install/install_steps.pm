@@ -251,6 +251,7 @@ sub afterInstallPackages($) {
 
     my $msec = "$o->{prefix}/etc/security/msec";
     substInFile { s/^audio\n//; $_ .= "audio\n" if eof } "$msec/group.conf" if -d $msec;
+    substInFile { s/^cdrom\n//; $_ .= "cdrom\n" if eof } "$msec/group.conf" if -d $msec;
     substInFile { s/^xgrp\n//; $_ .= "xgrp\n" if eof } "$msec/group.conf" if -d $msec;
 
     my $p = $o->{packages}{urpmi};
@@ -371,7 +372,7 @@ sub installCrypto {
 	$packages = pkgs::psUsingDirectory($dir);
 	foreach (values %$packages) {
 	    foreach (c::headerGetEntry(pkgs::getHeader($_), 'requires')) {
-		my $r = crypto::require2package($_);
+		my $r = quotemeta crypto::require2package($_);
 		/^$r-\d/ and $u->{packages}{$_} = 1 foreach keys %{$u->{packages}};
 	    }
 	}
@@ -543,7 +544,10 @@ sub readBootloaderConfigBeforeInstall {
 
 sub setupBootloaderBefore {
     my ($o) = @_;
-    $o->{bootloader}{perImageAppend} = "mem=$o->{miscellaneous}{memsize}" if $o->{miscellaneous}{memsize};
+    $o->{bootloader}{perImageAppend} .= " " . join(" ", grep { /^ide/ } split ' ', cat_("/proc/cmdline"));
+    if (my $ramsize = $o->{miscellaneous}{memsize} && $o->{bootloader}{perImageAppend} !~ /mem=/) {
+	$o->{bootloader}{perImageAppend} .= " mem=$ramsize";
+    }
     require lilo;
     lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
     $o->{bootloader}{keytable} ||= keyboard::keyboard2kmap($o->{keyboard});
@@ -560,6 +564,7 @@ sub setupXfreeBefore {
     my ($o) = @_;
     $o->{X}{keyboard}{xkb_keymap} ||= keyboard::keyboard2xkb($o->{keyboard});
     $o->{X}{mouse} = $o->{mouse};
+    $o->{X}{wacom} = $o->{wacom};
 
     require Xconfig;
     Xconfig::getinfoFromDDC($o->{X});
@@ -606,6 +611,11 @@ sub miscellaneousNetwork {
 #------------------------------------------------------------------------------
 sub miscellaneous {
     my ($o) = @_;
+
+    my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
+    $o->{miscellaneous}{HDPARM} ||= $s{HDPARM} if exists $s{HDPARM};
+    $o->{security} ||= $s{SECURITY} if exists $s{SECURITY};
+
     $ENV{SECURE_LEVEL} = $o->{security};
     add2hash_ $o, { useSupermount => $o->{security} < 4 };
 

@@ -17,6 +17,7 @@ use install_any;
 use detect_devices;
 use run_program;
 use commands;
+use devices;
 use fsedit;
 use network;
 use raid;
@@ -336,6 +337,7 @@ sub configureNetworkIntf {
     my @fields = qw(IPADDR NETMASK);
     $o->set_help('configureNetworkIP');
     $o->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
+($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
 _("Please enter the IP configuration for this machine.
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4)."),
@@ -530,7 +532,7 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
 			     length $sup->{password} < 2 * $o->{security}
-			       and $o->ask_warn('', _("This password is too simple")), return (1,0);
+			       and $o->ask_warn('', _("This password is too simple (must be at least %d characters long)", 2 * $o->{security})), return (1,0);
 			     return 0
 			 }
     ) or return;
@@ -947,6 +949,48 @@ sub load_thiskind {
 	     !$o->ask_yesorno('', _("Try to find PCMCIA cards?"), 1);
     $w = $o->wait_message(_("PCMCIA"), _("Configuring PCMCIA cards...")) if modules::pcmcia_need_config($pcmcia);
     modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
+
+    if ($type =~ /scsi/i && cat_("/proc/cmdline") !~ /ide2=/) {
+	log::l("HPT: looking for HPT");
+	my @l = grep { $_->[1] =~ /HPT/ } pci_probing::main::probe('STORAGE_OTHER', 'more');
+	if (@l == 2) {
+	    log::l("HPT: found");
+	    my $ide = sprintf "ide2=0x%x,0x%x ide3=0x%x,0x%x", map { 
+		my ($a, $b) = (split ' ', $_->[0])[3,4];
+		hex($a) - 1, hex($b) + 1;
+	    } @l;
+	    log::l("HPT: gonna add ($ide)");
+
+	    my $dev = devices::make("fd0");
+	    my $image = $o->{pcmcia} ? "pcmcia" :
+	      ${{ hd => 'hd', cdrom => 'cdrom', 
+		  ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+	
+	    my $nb_try; 
+	    for ($nb_try = 0; $nb_try <= 1; $nb_try++) {
+		eval { fs::mount($dev, "/floppy", "vfat", 0) };
+		last if !$@ && -e "/floppy/syslinux.cfg";
+
+		eval { fs::umount("/floppy") };		    
+		$o->ask_warn('', _("Enter a floppy (all data will be lost)"));
+		if (my $fd = install_any::getFile("$image.img")) {
+		    local *OUT;
+		    open OUT, ">$dev" or log::l("failed to write $dev"), return;
+		    local $/ = \ (16 * 1024);
+		    print OUT foreach <$fd>;
+		}
+	    }
+	    log::l("HTP: modifying syslinux.cfg");
+	    substInFile { s/(?=$)/ $ide/ if /^\s*append\s/ } "/floppy/syslinux.cfg";	
+	    fs::umount("/floppy");
+	    log::l("HPT: all done");
+
+	    $o->ask_warn('', $nb_try ? 
+			 _("It is necessary to restart installation booting on the floppy") :
+			 _("It is necessary to restart installation with the new parameters"));
+	    install_steps::rebootNeeded($o);	    
+	}
+    }
 }
 
 #------------------------------------------------------------------------------

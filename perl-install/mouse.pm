@@ -87,7 +87,7 @@ sub write($;$) {
 }
 
 sub mouseconfig {
-    my ($t, $mouse);
+    my ($t, $mouse, $wacom);
 
     foreach (0..1) { #- probe only ttyS0 and ttyS1.
 	$t = detect_devices::probe_device("/dev/ttyS$_");
@@ -101,16 +101,18 @@ sub mouseconfig {
 	    $mouse ||= name2mouse("Generic Mouse (serial)"); #- generic by default.
 	    $mouse->{device} = "ttyS$_";
 	    last;
+	} elsif ($t->{CLASS} eq "PEN" || $t->{MANUFACTURER} eq "WAC") {
+	    $wacom = "ttyS$_";
 	}
     }
-    $mouse;
+    $mouse, $wacom;
 }
 
 sub detect() {
     detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
 
     eval { commands::modprobe("serial") };
-    my $r; $r = mouseconfig(); return $r if $r;
+    my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
     #- my %l;
     #- eval { commands::modprobe("serial") };
     #- @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
@@ -120,7 +122,7 @@ sub detect() {
     if (my ($c) = pci_probing::main::probe("serial_usb")) {
 	eval { modules::load($c->[1], "serial_usb") };
 	sleep(1);
-	do { modules::unload("serial"); return name2mouse("USB Mouse") } if !$@ && detect_devices::tryOpen("usbmouse");
+	do { $wacom or modules::unload("serial"); return name2mouse("USB Mouse"), $wacom } if !$@ && detect_devices::tryOpen("usbmouse");
 	modules::unload($c->[1]);
     }
     die "mouseconfig failed";

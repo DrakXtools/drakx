@@ -15,7 +15,7 @@ $::isStandalone = 1;
 my $in = vnew interactive('su');
 
 my @l = grep { !/\.rpm/ } map { chop; $_ } `cd /etc/rc.d/init.d ; grep -l "chkconfig:" *`;
-my @before = map { bool(@_ = glob("/etc/rc.d/rc*.d/*$_"))  } @l;
+my @before = map { bool(@_ = glob("/etc/rc.d/rc*.d/S*$_"))  } @l;
 
 my $after = $in->ask_many_from_list("drakxservices",
 _("Choose which services should be automatically started at boot time"),

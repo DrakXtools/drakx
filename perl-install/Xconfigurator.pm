@@ -622,6 +622,28 @@ sub write_XF86Config {
     print F "    ClearRTS\n\n"  if $O->{cleardtrrts};
     print F "EndSection\n\n\n";
 
+    print F qq(
+Section "Module"
+   Load "xf86Wacom.so"
+EndSection
+     
+Section "XInput"
+    SubSection "WacomStylus"
+        Port "/dev/$o->{wacom}"
+        AlwaysCore
+    EndSubSection
+    SubSection "WacomCursor"
+        Port "/dev/$o->{wacom}"
+        AlwaysCore
+    EndSubSection
+    SubSection "WacomEraser"
+        Port "/dev/$o->{wacom}"
+        AlwaysCore
+    EndSubSection
+EndSection
+
+) if $o->{wacom};
+
     #- Write monitor section.
     $O = $o->{monitor};
     print F $monitorsection_text1;
@@ -795,11 +817,12 @@ sub main {
     if ($ok) {
 	unless ($::testing) {
 	    my $f = "$prefix/etc/X11/XF86Config";
-	    rename $f, "$f.old" or die "unable to make a backup of XF86Config";
-	    rename "$f.test", $f;
-
-	    symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
-	}    
+	    if (-e "$f.test") {
+		rename $f, "$f.old" or die "unable to make a backup of XF86Config";
+		rename "$f.test", $f;
+		symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
+	    }
+	}
 
 	if ($::isStandalone && $0 =~ /Xdrakres/) {
 	    my $found;

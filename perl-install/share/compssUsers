@@ -4,20 +4,20 @@ Graphics Manipulation
 
 KDE
 	kde
-	XFree86
-	XFree86-75dpi-fonts	
+	+XFree86
+	+XFree86-75dpi-fonts	
 
 Gnome
 	gnome
-	enlightenment
-	gmc
-	XFree86
-	XFree86-75dpi-fonts
+	+enlightenment
+	+gmc
+	+XFree86
+	+XFree86-75dpi-fonts
 
 Other window managers
 	window-managers:window-managers
-	XFree86
-	XFree86-75dpi-fonts	
+	+XFree86
+	+XFree86-75dpi-fonts	
 
 Mail/WWW/News Tools
 	network:web
@@ -26,8 +26,8 @@ Mail/WWW/News Tools
 
 Communication facilities
 	communications
-	network:ftp:x11
-	network:irc&co:x11
+	network:ftp
+	network:irc&co
 
 Office
 	daemons:database
@@ -36,7 +36,7 @@ Office
 	productivity
 
 Multimedia Support
-	configuration:sound:console
+	configuration:sound
 	multimedia
 	daemons:sound
 
@@ -48,27 +48,27 @@ System configuration
 	kde:administration:utilities
 
 Web Server
- 	apache
- 	mod_perl
- 	mod_php3
+ 	+apache
+ 	+mod_perl
+ 	+mod_php3
 
-Network Management Workstation	
+Network Management Workstation
 	network:tools
 # above is daemons:network *without* sendmail and http
 	daemons:network:base
 	daemons:network:ftp
 	daemons:network:nfs
 	daemons:network:telnet
-	BeroList
-	comsat
-	postfix
-	imap
+	+BeroList
+	+comsat
+	+postfix
+	+imap
 
 Documentation
 	documentation:languages:en
 	documentation:misc
-	documentation:tools:console
-	documentation:tools:x11
+	documentation:tools
+	documentation:tools
 
 Databases
 	database

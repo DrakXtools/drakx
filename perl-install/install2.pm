@@ -5,7 +5,7 @@ use diagnostics;
 use strict;
 use Data::Dumper;
 
-use vars qw($o);
+use vars qw($o $version);
 
 #-######################################################################################
 #- misc imports
@@ -33,6 +33,7 @@ use install_steps_interactive;
 #-######################################################################################
 #- Steps table
 #-######################################################################################
+$::VERSION = "7.0";
 
 my (%installSteps, @orderedInstallSteps);
 {    
@@ -384,11 +385,11 @@ sub configureNetwork {
 
     if ($o->{isUpgrade} && !$clicked) {
 	$o->{netc} or $o->{netc} = {};
-	add2hash($o->{netc}, { network::read_conf("$o->{prefix}/etc/sysconfig/network") }) if -r "$o->{prefix}/etc/sysconfig/network";
-	add2hash($o->{netc}, { network::read_resolv_conf("$o->{prefix}/etc/resolv.conf") }) if -r "$o->{prefix}/etc/resolv.conf";
+	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
+	add2hash($o->{netc}, network::read_resolv_conf("$o->{prefix}/etc/resolv.conf")) if -r "$o->{prefix}/etc/resolv.conf";
 	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
-	    if (/ifcfg-(\w*)/) {
-		push @{$o->{intf}}, { network::read_conf("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
+	    if (/ifcfg-(\w+)/) {
+		push @{$o->{intf}}, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
 	    }
 	}
     }
@@ -576,7 +577,7 @@ sub main {
 #-    }
 
     #- needed very early for install_steps_gtk
-    eval { $o->{mouse} ||= mouse::detect() } unless $o->{nomouseprobe};
+    eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     $::o = $o = $::auto_install ?
       install_steps_auto_install->new($o) :

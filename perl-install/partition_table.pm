@@ -166,7 +166,7 @@ sub name2type($) {
     /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
 }
 
-sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf }
+sub isExtended($) { $_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85 }
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }

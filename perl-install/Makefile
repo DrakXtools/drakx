@@ -41,9 +41,9 @@ install_pms: $(DIRS)
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
 		perl -ne 'print' $$i > $(DESTREP4PMS)/$$i; \
-		perl -pe 's/#-.*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics)/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -pe 's/#[-+].*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 	done
-#		perl -pe 's/#-.*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
+#		perl -pe 's/#-.*//; $$_ = "\n" if (/^=head/ .. /^=cut/) || /use (diagnostics)/' $$i > $(DESTREP4PMS)/$$i; \
 
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po

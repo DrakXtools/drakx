@@ -180,15 +180,14 @@ newtButton(left,top,text)
 	const char * text;
 
 Newt::Component
-newtCheckbox(left,top,text,defValue,seq,result)
+newtCheckbox(left,top,text,defValue,seq)
 	int left;
 	int top;
 	const char * text;
 	char *defValue;
 	const char * seq;
-        int *result;
   CODE: 
-  RETVAL = newtCheckbox(left, top, text, defValue[0], seq, (char*)result);
+  RETVAL = newtCheckbox(left, top, text, defValue[0], seq, NULL);
   OUTPUT:
   RETVAL
 

@@ -8,19 +8,26 @@ use any;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: adduserdrake [--beginner] [--expert]\n";
+/-h/ and die "usage: adduserdrake [--beginner] [--expert] [<users...>]\n";
 
 $::beginner = /-beginner/;
 $::expert = /-expert/;
 $::isStandalone = 1;
-
-my $in = vnew interactive('su');
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
 my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
 my $security = $ENV{SECURE_LEVEL};
+
+
+
+if (my @l = grep { ! /^-/ } @ARGV) {
+    addusers(map {{ name => $_, realname => $_ }} @l);
+    exit 0;
+}
+
+my $in = vnew interactive('su');
 
 new:
 if ($in->ask_from_entries_refH(
@@ -51,25 +58,34 @@ if ($in->ask_from_entries_refH(
 	},
 )) {
     push @users, $u;
-    $u->{pw} = $isMD5 ? c::crypt_md5($u->{password}, salt(8)) : crypt($u->{password}, salt(2));  
     $u = {};
     goto new;
 }
-my @u = map { $_->{name} } @users;
 
-system("adduser $_") foreach @u;
-any::addUsers('', @u);
+addusers(@users);
 
-substInFile {
-    foreach my $u (@users) {
-	if (/^$u->{name}:/) {
-	    chomp;
-	    my %l; @l{@etc_pass_fields} = split ':';
-	    add2hash($u, \%l);
-	    $_ = join(':', @$u{@etc_pass_fields}) . "\n";
-	}
+sub addusers {
+    my @u = map { $_->{name} } my @users = @_;
+
+    foreach (@users) {
+	$_->{pw} = $isMD5 ? c::crypt_md5($_->{password}, salt(8)) : crypt($_->{password}, salt(2));
+	$_->{shell} ||= "/bin/bash";
     }
-} "/etc/passwd";
-system("pwconv") if $isShadow;
+
+    system("adduser $_") foreach @u;
+    any::addUsers('', @u);
+
+    substInFile {
+	foreach my $u (@users) {
+	    if (/^$u->{name}:/) {
+		chomp;
+		my %l; @l{@etc_pass_fields} = split ':';
+		add2hash($u, \%l);
+		$_ = join(':', @$u{@etc_pass_fields}) . "\n";
+	    }
+	}
+    } "/etc/passwd";
+    system("pwconv") if $isShadow;
+}
 
 $in->exit(0);

@@ -173,7 +173,7 @@ sub new($$) {
 	$my_gtk::force_focus = $ENV{DISPLAY} eq ":0";
 
 	my $f = "/tmp/Xconf";
-	createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"});
+	createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
 
 	if ($ENV{DISPLAY} eq ":0") {
 	    my $launchX = sub {
@@ -248,7 +248,8 @@ sub doPartitionDisks($$) {
     if (!$::isStandalone && fsedit::is_one_big_fat($hds)) {
 	#- wizard
 	my $min_linux = 600 << 11;
-	my $min_freewin = 100 << 11;
+	my $max_linux = 1500 << 11;
+	my $min_freewin = 300 << 11;
 
 	my ($part) = fsedit::get_fstab(@{$o->{hds}});
 	my $w = $o->wait_message(_("Resizing"), _("Computing fat filesystem bounds"));
@@ -264,7 +265,7 @@ When sure, press Ok."))) {
 	    my $hd = $hds->[0];
 	    my $oldsize = $part->{size};
 	    $hd->{isDirty} = $hd->{needKernelReread} = 1;
-	    $part->{size} -= $min_linux;
+	    $part->{size} -= min($max_linux, $part->{size} - $min_win);
 	    partition_table::adjustEnd($hd, $part);
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
@@ -336,7 +337,7 @@ sub chooseSizeToInstall {
     $w->main or return;
 
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
-      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 0,
+      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 1,
 				      pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
 				      $o->{installClass}, $o->{isUpgrade});
 }
@@ -777,9 +778,34 @@ sub create_logo_window() {
 
 #------------------------------------------------------------------------------
 sub createXconf($$$) {
-    my ($file, $mouse_type, $mouse_dev) = @_;
+    my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
     $mouse_type ||= "Microsoft";
     $mouse_dev = devices::make($mouse_dev || "ttyS0");
+
+    my $wacom;
+    if ($wacom_dev) {
+	$wacom_dev = devices::make($wacom_dev);
+	$wacom = <<END;
+Section "Module"
+   Load "xf86Wacom.so"
+EndSection
+
+Section "XInput"
+    SubSection "WacomStylus"
+        Port "$wacom_dev"
+        AlwaysCore
+    EndSubSection
+    SubSection "WacomCursor"
+        Port "$wacom_dev"
+        AlwaysCore
+    EndSubSection
+    SubSection "WacomEraser"
+        Port "$wacom_dev"
+        AlwaysCore
+    EndSubSection
+EndSection
+END
+    }
 
     local *F;
     open F, ">$file" or die "can't create X configuration file $file";
@@ -790,7 +816,7 @@ EndSection
 
 Section "Keyboard"
    Protocol    "Standard"
-   AutoRepeat  250 30
+   AutoRepeat  0 0
 
    LeftAlt         Meta
    RightAlt        Meta
@@ -805,6 +831,7 @@ Section "Pointer"
    Emulate3Timeout    50
 EndSection
 
+$wacom
 
 Section "Monitor"
    Identifier  "My Monitor"

@@ -32,8 +32,9 @@ use log;
 #-######################################################################################
 sub relGetFile($) {
     local $_ = $_[0];
+    /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" :
-      (member($_, qw(compss compssList compssUsers depslist hdlist)) ? "base" : "RPMS");
+      member($_, qw(compss compssList compssUsers depslist hdlist)) ? "base" : "RPMS";
     $_ = "Mandrake/$dir/$_";
     s/i386/i586/;
     $_;
@@ -174,7 +175,7 @@ sub getHds {
     my ($ok, $ok2) = 1;
 
     my @drives = detect_devices::hds();
-    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
+#    add2hash_($o->{partitioning}, { readonly => 1 }) if partition_table_raw::typeOfMBR($drives[0]{device}) eq 'system_commander';
 
   getHds: 
     $o->{hds} = catch_cdie { fsedit::hds(\@drives, $o->{partitioning}) }
@@ -413,7 +414,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
@@ -597,27 +598,27 @@ sub kdeicons_postinstall($) {
     foreach (<F>) {
 	if (m|^/dev/(\S+)\s+/mnt/cdrom(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && "_$2") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/zip(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && "_$2") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+/mnt/floppy(\d*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && "_$2") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && " $2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/cdrom(\d*)\s+/mnt/cdrom\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($1 && "_$1") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/zip(\d*)\s+/mnt/zip\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($1 && "_$1") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/mnt/floppy(\d*)\s+/mnt/floppy\d*\s+supermount|) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($1 && "_$1") .".kdelnk",
+	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($1 && " $1") .".kdelnk",
 			      1, %toreplace);
 	} elsif (m|^/dev/(\S+)\s+(/mnt/DOS_\S*)\s+|) {
 	    my %toreplace = ( device => $1, id => $2, mntpoint => $2 );
@@ -625,6 +626,14 @@ sub kdeicons_postinstall($) {
 	} elsif (m|^/dev/(\S+)\s+(\S*)\s+vfat\s+|) {
 	    my %toreplace = ( device => $1, id => $1, mntpoint => $2 );
 	    template2userfile($prefix, "/usr/share/Dos_.kdelnk.in", "Desktop/Dos_$1.kdelnk", 1, %toreplace);
+	}
+    }
+    my $lang = quotemeta $ENV{LANG};
+    foreach my $dir (map { "$prefix$_/Desktop" } qw(/etc/skel /root)) {
+	-d $dir or next;
+	foreach (grep { /\.kdelnk$/ } all($dir)) {
+	    cat_("$dir/$_") =~ /^Name\[$lang\]=(.*)/m
+	      and rename "$dir/$_", "$dir/$1.kdelnk";
 	}
     }
 }

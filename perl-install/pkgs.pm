@@ -15,11 +15,12 @@ use c;
 my @skip_list = qw(
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
-XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
+XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
 MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
+kernel-linus kernel-secure kernel-fb kernel-BOOT
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
 hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb 
-autoirpm autoirpm-icons numlock kernel-linus
+autoirpm autoirpm-icons numlock 
 );
 
 my %by_lang = (
@@ -252,9 +253,9 @@ sub readCompssUsers {
 	if (/^(\S.*)/) {
 	    push @sorted, $1;
 	    $compssUsers{$1} = $l = [];
-	} elsif (/\s+\+(.*)/) {
+	} elsif (/\s+\+(\S+)/) {
 	    push @$l, $packages->{$1} || do { log::l("unknown package $1 (in compssUsers)"); next };
-	} elsif (/\s+(.*)/) {
+	} elsif (/\s+(\S+)/) {
 	    my $p = $compss;
 	    $p &&= $p->{childs}{$_} foreach split ':', $1;
 	    $p or log::l("unknown category $1 (in compssUsers)"), next;

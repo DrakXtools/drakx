@@ -1,19 +1,42 @@
+for upgrade in expert, give choice of packages to install
+
+choosing packages available in upgrade?
+
+put the updated FBDev server
+
+refresh the kde desktop after package installation in rpmdrake
+(restart kpanel)
+
+with 2MB of video ram, chooses 8bpp instead of 16bpp
+
+retest windows autoresizing in newbie
+
+test bug with lilo and windows (if not on mbr)
+
 kdelnk in mandrake_desk (especially Kppp -> Internet)
 removed icons come back later
 
 rpmdrake and same name packages
 
-test drakxservices (on autofs)
-
 segfault in linuxconf (adapter 1 empty)
+(test with the sysconfig sent)
 
-test delete_event != cancel -> is now good
+UDMA66
 
-crypto dependencies to update
+test crypto
 
-mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
+just before release:
+- mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
+- crypto dependencies to update
+- update kudzu's pcitable
 
 --------------------------------------------------------------------------------
+> Here I go into the printer configuration select 'HP Deskjet 722C Colour',
+> print a test ASCII page, pressing 'No' when prompted to indicate the page did
+> not print OK and then hitting cancel when prompted to choose a printer type
+> again.
+> ask_from_list cancel at /usr/lib/libDrakX/my_gtk.pm line 504.
+
 bug in ext2resizing (no sparse superbloc, don't finish properly)
 
 error handling (like reading hdlist)
@@ -33,6 +56,8 @@ bug rpmdrake: just after installing a package, switch to `Installed', the packag
 
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 
+PPPoE install and configuration (SuSE includes it, DHCP-like)
+
 auto ppp-configure with free provider
 
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
@@ -42,6 +67,7 @@ Xconfiguration: if "can't open fixed font", relaunch xfs.
 bug in defcfg in with lang=fr_FR, display is buggy
 
 feature missing: cancel installation
+cancel button in packages installation
 
 bug keyboard focus: after switch in console at Xconfig step
 
@@ -103,8 +129,6 @@ aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
 try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
-
-cancel button in packages installation
 
 grub, chos
 

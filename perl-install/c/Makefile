@@ -4,7 +4,7 @@ C_RPM = 1
 
 stuff: %: %.xs
 	test -e Makefile_c || C_RPM=$(C_RPM) perl Makefile.PL
-	$(MAKE) -f Makefile_c
+	$(MAKE) -f Makefile_c LD_RUN_PATH=
 	rm -f ../auto/c ; ln -s ../c/blib/arch/auto ../auto/c
 
 clean:

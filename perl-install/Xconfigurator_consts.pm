@@ -17,6 +17,7 @@ $resolution_wanted = "1024x768";
 %serversdriver = (
     'SVGA'      => "svga",
     'Rage128'   => "svga",
+    '3dfx'      => "svga",
     'S3'        => "accel",
     'Mach32'    => "accel",
     'Mach8'     => "accel",
@@ -78,8 +79,8 @@ $resolution_wanted = "1024x768";
 	14 => "800x600",
 	15 => "800x600",
 	16 => "1024x768",
-	17 => "1152x864",
-	18 => "1280x1024",
+	17 => "1024x768",
+	18 => "1024x768",
 	19 => "1280x1024",
         20 => "1600x1200",
     );
@@ -513,7 +514,7 @@ Section "Keyboard"
     # following line
     #Protocol   "Xqueue"
 
-    AutoRepeat  250 30
+    AutoRepeat  0 0
 
     # Let the server do the NumLock processing.  This should only be
     # required when using pre-R6 clients
