@@ -34,7 +34,6 @@ msgstr ""
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
-#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Cancel"
 msgstr "Поништи"
@@ -120,24 +119,14 @@ msgstr "Изаберите window менадзер коjи желите да користите:"
 msgid "Choose the default user:"
 msgstr "Изаберите default (основног) корисникa:"
 
-#: ../../any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "No"
-msgstr "Не"
-
-#: ../../any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1 ../../standalone/drakgw:1
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Yes"
-msgstr "Да"
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Do you want to use this feature?"
+msgstr "Да ли желите да користите aboot ?"
 
 #: ../../any.pm:1
-#, c-format
-msgid ""
-"I can set up your computer to automatically log on one user.\n"
-"Do you want to use this feature?"
+#, fuzzy, c-format
+msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Ja могу подести ваш рачунар да аутоматски улогуje jeдног корисникa.\n"
 "Да ли желите да кориситите ову опцију ?"
@@ -467,6 +456,11 @@ msgstr "Очисти /tmp при сваком стартaњу"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Create a bootdisk"
+msgstr "Направи стартни диск"
+
+#: ../../any.pm:1
+#, c-format
 msgid "restrict"
 msgstr "ограничено"
 
@@ -520,6 +514,16 @@ msgstr "LILO/grub инсталација"
 msgid "SILO Installation"
 msgstr "SILO инсталација"
 
+#: ../../any.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Прескочи"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "On Floppy"
+msgstr "Boot Floppy"
+
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -534,6 +538,102 @@ msgstr ""
 "бутујете.\n"
 "\n"
 "На који драјв се бутујете?"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Creating bootdisk..."
+msgstr "Креирам стартни диск..."
+
+#: ../../any.pm:1
+#, c-format
+msgid "Insert a floppy in %s"
+msgstr "Убаците дискету у уређај %s"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Choose the floppy drive you want to use to make the bootdisk"
+msgstr ""
+"Изабрерите дискетни уређај који ћете користити  за креирање старне дискете"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Second floppy drive"
+msgstr "Други флопи/дискетни урeђаj"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First floppy drive"
+msgstr "Први флопи/дискетни урeђаj "
+
+#: ../../any.pm:1
+#, c-format
+msgid "Sorry, no floppy drive available"
+msgstr "Ти малера, нема дискетe"
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures. Would you like to create a bootdisk for your system?\n"
+"%s"
+msgstr ""
+"Стартни диск обезбеђује начин подизања вашег Линукс система без зависности\n"
+"од нормалног стартерa. Ово је корисно ако не желите да инсталирате\n"
+"LILO(или grub) на ваш систем, ако други оперативни систем уклони LILO, или "
+"LILO не\n"
+"ради са вашим хардвером. Стартни диск можете користити са Mandrake Linux\n"
+"'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
+"Да ли бисте да креирате стартну дискету за ваш систем? %s"
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"(WARNING! You're using XFS for your root partition,\n"
+"creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
+"because XFS needs a very large driver)."
+msgstr ""
+"\n"
+"\n"
+"(УПОЗОРЕЊЕ! Ви користите XFS за вашу root партицију,\n"
+"па креирање стартног 1.44 Mb флопија вероватно неће успети,\n"
+"зато што XFS тражи велики драјвер)."
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"SILO on your system, or another operating system removes SILO, or SILO "
+"doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures.\n"
+"\n"
+"If you want to create a bootdisk for your system, insert a floppy in the "
+"first\n"
+"drive and press \"Ok\"."
+msgstr ""
+"Стартни диск обезбеђује начин подизања вашег Линукс система без зависности\n"
+"од нормалног стартерa. Ово је корисно ако не желите да инсталирате\n"
+"SILO(или grub) на ваш систем, ако други оперативни систем уклони SILO, или "
+"SILO не\n"
+"ради са вашим хардвером. Стартни диск можете користити са Mandrake Linux\n"
+"'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
+"Уколико желите да креирате стартну дискету за ваш системубаците дискету у "
+"погон и притисните \"Да\"."
 
 #: ../../bootloader.pm:1
 #, c-format
@@ -724,7 +824,6 @@ msgid "Splash selection"
 msgstr "Splash селекција"
 
 #: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Configure"
 msgstr "Подеси"
@@ -3192,11 +3291,11 @@ msgstr "Custom конфигурација"
 msgid "System installation"
 msgstr "SILO инсталација"
 
-#: ../../install_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../Xconfig/main.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "Ok"
 msgstr "У реду"
@@ -3969,6 +4068,12 @@ msgstr "Лош пакет"
 msgid "Total size: %d / %d MB"
 msgstr "Укупна величина: %d / %d MB"
 
+#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Next ->"
+msgstr "Следeћи  ->"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
@@ -4027,6 +4132,11 @@ msgstr ""
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Креираj ауто инсталациону дискету"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Reboot"
+msgstr "Root"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4107,107 +4217,6 @@ msgstr ""
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Припремам стартер..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Creating bootdisk..."
-msgstr "Креирам стартни диск..."
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Insert a floppy in %s"
-msgstr "Убаците дискету у уређај %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Choose the floppy drive you want to use to make the bootdisk"
-msgstr ""
-"Изабрерите дискетни уређај који ћете користити  за креирање старне дискете"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Sorry, no floppy drive available"
-msgstr "Ти малера, нема дискетe"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"A custom bootdisk provides a way of booting into your Linux system without\n"
-"depending on the normal bootloader. This is useful if you don't want to "
-"install\n"
-"LILO (or grub) on your system, or another operating system removes LILO, or "
-"LILO doesn't\n"
-"work with your hardware configuration. A custom bootdisk can also be used "
-"with\n"
-"the Mandrake rescue image, making it much easier to recover from severe "
-"system\n"
-"failures. Would you like to create a bootdisk for your system?\n"
-"%s"
-msgstr ""
-"Стартни диск обезбеђује начин подизања вашег Линукс система без зависности\n"
-"од нормалног стартерa. Ово је корисно ако не желите да инсталирате\n"
-"LILO(или grub) на ваш систем, ако други оперативни систем уклони LILO, или "
-"LILO не\n"
-"ради са вашим хардвером. Стартни диск можете користити са Mandrake Linux\n"
-"'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
-"Да ли бисте да креирате стартну дискету за ваш систем? %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"(WARNING! You're using XFS for your root partition,\n"
-"creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
-"because XFS needs a very large driver)."
-msgstr ""
-"\n"
-"\n"
-"(УПОЗОРЕЊЕ! Ви користите XFS за вашу root партицију,\n"
-"па креирање стартног 1.44 Mb флопија вероватно неће успети,\n"
-"зато што XFS тражи велики драјвер)."
-
-#: ../../install_steps_interactive.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Прескочи"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Second floppy drive"
-msgstr "Други флопи/дискетни урeђаj"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "First floppy drive"
-msgstr "Први флопи/дискетни урeђаj "
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"A custom bootdisk provides a way of booting into your Linux system without\n"
-"depending on the normal bootloader. This is useful if you don't want to "
-"install\n"
-"SILO on your system, or another operating system removes SILO, or SILO "
-"doesn't\n"
-"work with your hardware configuration. A custom bootdisk can also be used "
-"with\n"
-"the Mandrake rescue image, making it much easier to recover from severe "
-"system\n"
-"failures.\n"
-"\n"
-"If you want to create a bootdisk for your system, insert a floppy in the "
-"first\n"
-"drive and press \"Ok\"."
-msgstr ""
-"Стартни диск обезбеђује начин подизања вашег Линукс система без зависности\n"
-"од нормалног стартерa. Ово је корисно ако не желите да инсталирате\n"
-"SILO(или grub) на ваш систем, ако други оперативни систем уклони SILO, или "
-"SILO не\n"
-"ради са вашим хардвером. Стартни диск можете користити са Mandrake Linux\n"
-"'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
-"Уколико желите да креирате стартну дискету за ваш системубаците дискету у "
-"погон и притисните \"Да\"."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4758,11 +4767,6 @@ msgstr "Изаберите  распоред тастатуре."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Are you sure you refuse the licence?"
-msgstr "Да ли сте сигурни да одбијате лиценцу?"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "License agreement"
 msgstr "ЛИценцирани уговор"
 
@@ -4862,6 +4866,18 @@ msgstr "Додај"
 #, c-format
 msgid "Choose a file"
 msgstr "Изаберите фајл"
+
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "No"
+msgstr "Не"
+
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Yes"
+msgstr "Да"
 
 #: ../../interactive.pm:1
 #, c-format
@@ -5544,11 +5560,6 @@ msgstr "Инфо"
 #, c-format
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
-
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Next ->"
-msgstr "Следeћи  ->"
 
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -6293,11 +6304,6 @@ msgstr "Излаз из инсталације"
 #, c-format
 msgid "Install system updates"
 msgstr "Инсталирај системске update-ове"
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Create a bootdisk"
-msgstr "Направи стартни диск"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7772,6 +7778,31 @@ msgstr "cpu # "
 
 #: ../../harddrake/sound.pm:1
 #, c-format
+msgid "Let me pick any driver"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Driver:"
+msgstr "Драjвер:"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"If you really think that you know which driver is the right one for your "
+"card\n"
+"you can pick one in the above list.\n"
+"\n"
+"The current driver for your \"%s\" sound card is \"%s\" "
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitratry driver"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
@@ -7822,8 +7853,8 @@ msgid "Sound trouble shooting"
 msgstr "Помоћ за подешавање звука"
 
 #: ../../harddrake/sound.pm:1
-#, c-format
-msgid "The \"%s\" driver for your sound card is unlisted"
+#, fuzzy, c-format
+msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "Драјвер \"%s\" за  вашу звучну картицу није приказан"
 
 #: ../../harddrake/sound.pm:1
@@ -7839,6 +7870,20 @@ msgstr "Не постоји познати драјвер за вашу звучну картицу (%s)"
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No known driver"
+msgstr "Нема познатог драјвера"
+
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid ""
+"There's no free driver for your sound card (%s), but there's a proprietary "
+"driver at \"%s\"."
+msgstr ""
+"Не постоји познати алтернативни OSS/ALSA драјвер за вашу звучну картицу (%s) "
+"која тренутно користи \"%s\""
+
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid "No open source driver"
 msgstr "Нема познатог драјвера"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
@@ -7911,11 +7956,6 @@ msgstr "Помоћ за промену између ALSA и OSS"
 #, c-format
 msgid "Help"
 msgstr "Помоћ"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Driver:"
-msgstr "Драjвер:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8535,7 +8575,7 @@ msgstr ""
 
 #: ../../network/isdn.pm:1
 #, fuzzy, c-format
-msgid "Europe protocol"
+msgid "European protocol"
 msgstr "Европски протокол"
 
 #: ../../network/isdn.pm:1
@@ -9087,7 +9127,7 @@ msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Netmask"
 msgstr "Мрежна маска"
@@ -12495,7 +12535,7 @@ msgstr ""
 "Сада можете поновити вашу инсталацију."
 
 #: ../../standalone/drakautoinst:1 ../../standalone/drakgw:1
-#: ../../standalone/scannerdrake:1 ../../standalone/drakpxe:1
+#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Congratulations!"
 msgstr "Честитамо !"
@@ -12791,7 +12831,7 @@ msgid ""
 "\tThis option allows you select all users that you want \n"
 "\tto backup.\n"
 "\tTo preserve disk space, it is recommended that you \n"
-"\tdo not include web browser's cache.\n"
+"\tdo not include the web browser's cache.\n"
 "\n"
 " - Backup Other files: \n"
 "\n"
@@ -12804,7 +12844,7 @@ msgid ""
 "\tThe incremental backup is the most powerful \n"
 "\toption for backup. This option allows you \n"
 "\tto backup all your data the first time, and \n"
-"\tonly the changed afterward.\n"
+"\tonly the changed data afterward.\n"
 "\tThen you will be able, during the restore\n"
 "\tstep, to restore your data from a specified\n"
 "\tdate.\n"
@@ -13951,7 +13991,7 @@ msgstr "Не могу да креирам каталог!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
-msgid " Error during mail sending. \n"
+msgid " Error while sending mail. \n"
 msgstr " Грешка током слања mail-а. \n"
 
 #: ../../standalone/drakbackup:1
@@ -14389,7 +14429,7 @@ msgstr "Конфигурациjа Интернет конекциjа"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
-"You don't have any internet connection.\n"
+"You don't have an Internet connection.\n"
 "Create one first by clicking on 'Configure'"
 msgstr ""
 "Ви немате ни једну подешену Интернет конекцију.\n"
@@ -14593,7 +14633,7 @@ msgstr "Подешавање мрежe (%d адаптерa)"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid ""
-"Unable to close properly mkbootdisk: \n"
+"Unable to properly close mkbootdisk: \n"
 " %s \n"
 " %s"
 msgstr ""
@@ -14786,8 +14826,8 @@ msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
 "install them on your system.\n"
 "\n"
-"-You can install the fonts using the normal way. In rare cases, bogus fonts "
-"may hang up your X Server."
+"-You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
 msgstr ""
 "Пе инсталације иједног фонта, проверите да ли имате право да их инсталирате "
 "и користите на вашем систему.\n"
@@ -14857,15 +14897,16 @@ msgid ""
 "          - import from windows partition.\n"
 "                import from all fat32 partitions and look for winnt/windows/"
 "font\n"
-"                and import all (delete doublon) but don't import if already "
-"exist.\n"
+"                and import all (delete doubles) but don't import if they "
+"already exist.\n"
 "          - import from directory\n"
-"                look for if it exist before for each font and not delete the "
+"                look to see if each font exists and do not delete the "
 "original.\n"
 "                (replace all, no, none)\n"
 "                expert options:\n"
-"                        ask the directory, and look for if it exist before\n"
-"                        if it exist ask: (replace all, no, none)\n"
+"                        specify the directory, and look to see if it exists "
+"before\n"
+"                        if it exists ask: (replace all, no, none)\n"
 "          - uninstall with list per font type\n"
 "        Expert additional switch\n"
 "          - option support:   ghostscript, Staroffice, etc...\n"
@@ -14963,7 +15004,7 @@ msgstr "Добави Windows фонтове"
 
 #: ../../standalone/drakfont:1
 #, c-format
-msgid "Fonts Importation"
+msgid "Import Fonts"
 msgstr "Увоз фонтова"
 
 #: ../../standalone/drakfont:1
@@ -14988,7 +15029,7 @@ msgstr "Рестартуј XFS"
 
 #: ../../standalone/drakfont:1
 #, c-format
-msgid "Suppress temporary Files"
+msgid "Suppress Temporary Files"
 msgstr "Сажми temp фајлове"
 
 #: ../../standalone/drakfont:1
@@ -15038,7 +15079,7 @@ msgstr "Копија фонта"
 
 #: ../../standalone/drakfont:1
 #, c-format
-msgid "Search fonts in installed list"
+msgid "Search for fonts in installed list"
 msgstr "Тражи фонтове у лити инсталираних"
 
 #: ../../standalone/drakfont:1
@@ -15076,7 +15117,7 @@ msgstr "Деселектовани фонтови инсталирани"
 msgid "Search installed fonts"
 msgstr "Тражи инсталиране фонтове"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -15090,30 +15131,30 @@ msgstr ""
 "\n"
 "Кликните на Подеси (Configure) да би покренули подeшавaње."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing configuration"
+msgid "Internet Connection Sharing configuration"
 msgstr "Конфигурациjа Дeљeња Интернет конекциje"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "До сада Дeљeње интернет конекциjе ниjе подeшавано."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The setup has already been done, and it's currently enabled."
 msgstr ""
 "Подeшавaњe дeљeњa интернет конекциjе jе вeћ завршено и тренутно jе омогућено."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The setup has already been done, but it's currently disabled."
 msgstr ""
 "Подeшавaњe дeљeњa интернет конекциjе jе вeћ завршено али jе тренутно "
 "онeмогућено."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -15129,67 +15170,67 @@ msgstr ""
 msgid "Problems installing package %s"
 msgstr "Проблеми при инсталациjи %s пакетa"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Конфигурисaње скрипти,инсталациjа софтвера, стартaње сервиса..."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring..."
 msgstr "Kонфигурациjа у току..."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Потенциjални конфликт LAN адресe у тренутном конфиг. %s!\n"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "Локална Мрежа није завршила са`.0', bailing out."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Re-configure interface and DHCP server"
 msgstr "Реконфигуриши интерфејс и DHCP сервер"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr "Максимално пуштање (у секундама)"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr "default пуштање (у секундама)"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP end range"
 msgstr "DHCP крај распона"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP start range"
 msgstr "DHCP почетак распона"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The internal domain name"
 msgstr "Интерно име домена"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The DNS Server IP"
 msgstr "DNS сервер IP"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "(This) DHCP Server IP"
 msgstr "(Овај) DHCP сервер IP"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -15204,12 +15245,12 @@ msgstr ""
 "Уколико не знате значење неке опције, једноставно је немојте мењати.\n"
 "\n"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Local Network adress"
 msgstr "Адреса Локалне Мреже"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
@@ -15220,8 +15261,8 @@ msgid ""
 "The default DNS entry is the Caching Nameserver configured on the firewall. "
 "You can replace that with your ISP DNS IP, for example.\n"
 "\t\t      \n"
-"Else, I can reconfigure your interface and (re)configure a DHCP server for "
-"you.\n"
+"Otherwise, I can reconfigure your interface and (re)configure a DHCP server "
+"for you.\n"
 "\n"
 msgstr ""
 "Могу да задржим вашу тренутну конфигурацију и претпоставити да је већ "
@@ -15236,7 +15277,7 @@ msgstr ""
 "сервер за вас.\n"
 "\n"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -15253,27 +15294,27 @@ msgstr ""
 "IP атрибути: %s\n"
 "Драјвер: %s"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Current interface configuration"
 msgstr "Тренутна конфигурација интерфејса"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Show current interface configuration"
 msgstr "Прикажи тренутну конфигурацију"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No (experts only)"
 msgstr "Не (само експерти)"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Automatic reconfiguration"
 msgstr "Аутоматска реконфигурација"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -15288,19 +15329,19 @@ msgstr ""
 "\n"
 "Можете то учинити ручно али морате да знате шта радите."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface already configured"
 msgstr "Мрежни интерфејс је већ подешшен"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr "Изаберите коjи ће мрeжни адаптер бити кориштен зa LANмрeжу."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -15315,7 +15356,7 @@ msgstr ""
 "\n"
 "Сада подеавам вaшу локалну мрeжу са овим адаптером."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
@@ -15334,12 +15375,12 @@ msgstr ""
 msgid "No network adapter on your system!"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Interface %s"
 msgstr "Интерфеjс %s"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Интерфеjс %s (користeћи модул %s)"
@@ -15373,7 +15414,7 @@ msgstr "Дeљeње интернет конекциjе"
 
 #: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing is now enabled."
+msgid "Internet Connection Sharing is now enabled."
 msgstr "Дeљeње интернет конекциjе jе омогућено."
 
 #: ../../standalone/drakgw:1
@@ -15397,7 +15438,7 @@ msgid "enable"
 msgstr "омогући"
 
 #: ../../standalone/drakgw:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -15416,7 +15457,7 @@ msgstr "Дeљeње интернет конекциjе jе тренутно онeмогућено"
 
 #: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing is now disabled."
+msgid "Internet Connection Sharing is now disabled."
 msgstr "Дeљeње интернет конекциjе jе онeмогућено."
 
 #: ../../standalone/drakgw:1
@@ -15432,7 +15473,7 @@ msgstr "онeмогући"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
-"The setup of Internet connection sharing has already been done.\n"
+"The setup of Internet Connection Sharing has already been done.\n"
 "It's currently enabled.\n"
 "\n"
 "What would you like to do?"
@@ -15447,7 +15488,7 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
 
-#: ../../standalone/drakgw:1
+#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "Жалим, али подржани су само 2.4 кернели."
@@ -15548,7 +15589,7 @@ msgstr "Подигни одабрано правило за један ниво"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Edit curent rule"
+msgid "Edit current rule"
 msgstr "Уреди тренутно правило"
 
 #: ../../standalone/drakperm:1
@@ -15872,7 +15913,7 @@ msgstr "ширина текста"
 #, c-format
 msgid ""
 "y coordinate of text box\n"
-"in number of character"
+"in number of characters"
 msgstr ""
 "y коордитната текст бокса\n"
 "у броју карактера"
@@ -15881,7 +15922,7 @@ msgstr ""
 #, c-format
 msgid ""
 "x coordinate of text box\n"
-"in number of character"
+"in number of characters"
 msgstr ""
 "x координата текст бокса\n"
 "у броју карактера"
@@ -17138,13 +17179,22 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP end ip"
+msgstr "DHCP крај распона"
+
+#: ../../standalone/drakpxe:1
+#, fuzzy, c-format
+msgid "The DHCP start ip"
+msgstr "DHCP почетак распона"
+
+#: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
 "The DHCP server will allow other computer to boot using PXE in the given "
 "range of address.\n"
 "\n"
-"If you give an inexistant directory, you will be asked to insert "
-"Installation CD or DVD to copy the installation program and rpm files.\n"
+"The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
 
@@ -17435,6 +17485,9 @@ msgstr "Личне финансиje"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finance, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "Are you sure you refuse the licence?"
+#~ msgstr "Да ли сте сигурни да одбијате лиценцу?"
 
 #~ msgid "Upgrade partition %s"
 #~ msgstr "Ажурирање партиције %s"

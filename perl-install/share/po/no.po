@@ -35,7 +35,6 @@ msgstr ""
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
 #: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
-#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Cancel"
 msgstr "Avbryt"
@@ -115,24 +114,14 @@ msgstr "Velg vindushåndtereren som skal kjøres:"
 msgid "Choose the default user:"
 msgstr "Velg standard bruker:"
 
-#: ../../any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1
-#, c-format
-msgid "No"
-msgstr "Nei"
-
-#: ../../any.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../modules/interactive.pm:1 ../../standalone/drakgw:1
-#: ../../standalone/drakpxe:1
-#, c-format
-msgid "Yes"
-msgstr "Ja"
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Do you want to use this feature?"
+msgstr "Ønsker du å bruke aboot?"
 
 #: ../../any.pm:1
-#, c-format
-msgid ""
-"I can set up your computer to automatically log on one user.\n"
-"Do you want to use this feature?"
+#, fuzzy, c-format
+msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "Jeg kan sette opp maskinen din til å automatisk logge på en bruker ved "
 "oppstart.\n"
@@ -463,6 +452,11 @@ msgstr "Tøm /tmp ved hver oppstart"
 
 #: ../../any.pm:1
 #, c-format
+msgid "Create a bootdisk"
+msgstr "Opprett en oppstartdiskett"
+
+#: ../../any.pm:1
+#, c-format
 msgid "restrict"
 msgstr "begrense"
 
@@ -516,6 +510,16 @@ msgstr "LILO/grub-installasjon"
 msgid "SILO Installation"
 msgstr "SILO-installasjon"
 
+#: ../../any.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Skip"
+msgstr "Dropp"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "On Floppy"
+msgstr "Lagre på diskett"
+
 #: ../../any.pm:1
 #, c-format
 msgid ""
@@ -530,6 +534,111 @@ msgstr ""
 "starter fra (eks: System Commander.)\n"
 "\n"
 "Hvilken disk starter du fra?"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Creating bootdisk..."
+msgstr "Oppretter oppstartdiskett"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Insert a floppy in %s"
+msgstr "Sett inn en diskett i %s"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Choose the floppy drive you want to use to make the bootdisk"
+msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Second floppy drive"
+msgstr "Andre diskettstasjon"
+
+#: ../../any.pm:1
+#, c-format
+msgid "First floppy drive"
+msgstr "Første diskettstasjon"
+
+#: ../../any.pm:1
+#, c-format
+msgid "Sorry, no floppy drive available"
+msgstr "Beklager, ingen diskettstasjon tilgjengelig"
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures. Would you like to create a bootdisk for your system?\n"
+"%s"
+msgstr ""
+"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
+"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
+"ikke ønsker\n"
+"å installere LILO (eller grub) på systemet ditt, eller et annet "
+"operativsystem fjerner LILO,\n"
+"eller at LILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
+"oppstartsdiskett\n"
+"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
+"lettere gjenopprette\n"
+"etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
+"ditt?\n"
+"%s"
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"\n"
+"\n"
+"(WARNING! You're using XFS for your root partition,\n"
+"creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
+"because XFS needs a very large driver)."
+msgstr ""
+"\n"
+"\n"
+"(ADVARSEL! Du bruker XFS på din rotpartisjon,\n"
+"det å lage en oppstartsdiskett på en 1,44 Mb diskett vil\n"
+"antageligvis ikke gå, dan XFS trenger en veldig stor driver)."
+
+#: ../../any.pm:1
+#, c-format
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"SILO on your system, or another operating system removes SILO, or SILO "
+"doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures.\n"
+"\n"
+"If you want to create a bootdisk for your system, insert a floppy in the "
+"first\n"
+"drive and press \"Ok\"."
+msgstr ""
+"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
+"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
+"ikke ønsker\n"
+"å installere SILO på systemet ditt, eller et annet operativsystem fjerner "
+"SILO,\n"
+"eller at SILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
+"oppstartsdiskett\n"
+"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
+"lettere gjenopprette\n"
+"etter systemsvikt.\n"
+"Hvis du ønsker du å opprette en oppstartsdiskett for systemet ditt, sett inn "
+"en diskett\n"
+"i den første stasjonen og trykk \"Ok\"."
 
 #: ../../bootloader.pm:1
 #, c-format
@@ -681,7 +790,6 @@ msgid "Splash selection"
 msgstr "Splash valg"
 
 #: ../../bootlook.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakgw:1
-#: ../../standalone/drakpxe:1
 #, c-format
 msgid "Configure"
 msgstr "Konfigurer"
@@ -2608,11 +2716,11 @@ msgstr "Internett-konfigurasjon"
 msgid "System installation"
 msgstr "SILO-installasjon"
 
-#: ../../install_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../Xconfig/main.pm:1
-#: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
-#: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
-#: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
+#: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
+#: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
+#: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
+#: ../../standalone/draksec:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -3384,6 +3492,12 @@ msgstr "Dårlig pakke"
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
+#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../Xconfig/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Next ->"
+msgstr "Neste ->"
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
@@ -3441,6 +3555,11 @@ msgstr ""
 #, c-format
 msgid "Generate auto install floppy"
 msgstr "Oppretter diskett for autoinstallasjon"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Reboot"
+msgstr "Root"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3521,116 +3640,6 @@ msgstr ""
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "Klargjør oppstartslaster"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Creating bootdisk..."
-msgstr "Oppretter oppstartdiskett"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Insert a floppy in %s"
-msgstr "Sett inn en diskett i %s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Choose the floppy drive you want to use to make the bootdisk"
-msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Sorry, no floppy drive available"
-msgstr "Beklager, ingen diskettstasjon tilgjengelig"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"A custom bootdisk provides a way of booting into your Linux system without\n"
-"depending on the normal bootloader. This is useful if you don't want to "
-"install\n"
-"LILO (or grub) on your system, or another operating system removes LILO, or "
-"LILO doesn't\n"
-"work with your hardware configuration. A custom bootdisk can also be used "
-"with\n"
-"the Mandrake rescue image, making it much easier to recover from severe "
-"system\n"
-"failures. Would you like to create a bootdisk for your system?\n"
-"%s"
-msgstr ""
-"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
-"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
-"ikke ønsker\n"
-"å installere LILO (eller grub) på systemet ditt, eller et annet "
-"operativsystem fjerner LILO,\n"
-"eller at LILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
-"oppstartsdiskett\n"
-"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
-"lettere gjenopprette\n"
-"etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
-"ditt?\n"
-"%s"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"(WARNING! You're using XFS for your root partition,\n"
-"creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
-"because XFS needs a very large driver)."
-msgstr ""
-"\n"
-"\n"
-"(ADVARSEL! Du bruker XFS på din rotpartisjon,\n"
-"det å lage en oppstartsdiskett på en 1,44 Mb diskett vil\n"
-"antageligvis ikke gå, dan XFS trenger en veldig stor driver)."
-
-#: ../../install_steps_interactive.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Skip"
-msgstr "Dropp"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Second floppy drive"
-msgstr "Andre diskettstasjon"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "First floppy drive"
-msgstr "Første diskettstasjon"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid ""
-"A custom bootdisk provides a way of booting into your Linux system without\n"
-"depending on the normal bootloader. This is useful if you don't want to "
-"install\n"
-"SILO on your system, or another operating system removes SILO, or SILO "
-"doesn't\n"
-"work with your hardware configuration. A custom bootdisk can also be used "
-"with\n"
-"the Mandrake rescue image, making it much easier to recover from severe "
-"system\n"
-"failures.\n"
-"\n"
-"If you want to create a bootdisk for your system, insert a floppy in the "
-"first\n"
-"drive and press \"Ok\"."
-msgstr ""
-"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
-"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
-"ikke ønsker\n"
-"å installere SILO på systemet ditt, eller et annet operativsystem fjerner "
-"SILO,\n"
-"eller at SILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
-"oppstartsdiskett\n"
-"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
-"lettere gjenopprette\n"
-"etter systemsvikt.\n"
-"Hvis du ønsker du å opprette en oppstartsdiskett for systemet ditt, sett inn "
-"en diskett\n"
-"i den første stasjonen og trykk \"Ok\"."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4170,11 +4179,6 @@ msgstr "Vennligst velg tastatur-oppsettet ditt."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
-msgid "Are you sure you refuse the licence?"
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
 msgid "License agreement"
 msgstr "License agreement"
 
@@ -4275,6 +4279,18 @@ msgstr "Legg til"
 #, c-format
 msgid "Choose a file"
 msgstr "Velg en fil"
+
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../modules/interactive.pm:1
+#, c-format
+msgid "No"
+msgstr "Nei"
+
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakgw:1
+#, c-format
+msgid "Yes"
+msgstr "Ja"
 
 #: ../../interactive.pm:1
 #, c-format
@@ -4957,11 +4973,6 @@ msgstr "Info"
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Next ->"
-msgstr "Neste ->"
-
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Finish"
@@ -5629,11 +5640,6 @@ msgstr "Avslutt installering"
 #, fuzzy, c-format
 msgid "Install system updates"
 msgstr "Installer systemet"
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Create a bootdisk"
-msgstr "Opprett en oppstartdiskett"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7107,6 +7113,31 @@ msgstr ""
 
 #: ../../harddrake/sound.pm:1
 #, c-format
+msgid "Let me pick any driver"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Driver:"
+msgstr "Driver:"
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid ""
+"If you really think that you know which driver is the right one for your "
+"card\n"
+"you can pick one in the above list.\n"
+"\n"
+"The current driver for your \"%s\" sound card is \"%s\" "
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
+msgid "Choosing an arbitratry driver"
+msgstr ""
+
+#: ../../harddrake/sound.pm:1
+#, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
@@ -7136,7 +7167,7 @@ msgstr ""
 
 #: ../../harddrake/sound.pm:1
 #, fuzzy, c-format
-msgid "The \"%s\" driver for your sound card is unlisted"
+msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "Det er ingen kjent driver for lydkortet ditt (%s)"
 
 #: ../../harddrake/sound.pm:1
@@ -7152,6 +7183,20 @@ msgstr "Det er ingen kjent driver for lydkortet ditt (%s)"
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No known driver"
+msgstr "Ingen kjent driver"
+
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid ""
+"There's no free driver for your sound card (%s), but there's a proprietary "
+"driver at \"%s\"."
+msgstr ""
+"Det er ingen OSS/ALSA alternative drivere for lydkortet ditt (%s) som nå "
+"bruker \"%s\""
+
+#: ../../harddrake/sound.pm:1
+#, fuzzy, c-format
+msgid "No open source driver"
 msgstr "Ingen kjent driver"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
@@ -7210,11 +7255,6 @@ msgstr "Endrer mellom ALSA og OSS hjelp"
 #, c-format
 msgid "Help"
 msgstr "Hjelp"
-
-#: ../../harddrake/sound.pm:1
-#, c-format
-msgid "Driver:"
-msgstr "Driver:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -7820,7 +7860,7 @@ msgstr ""
 
 #: ../../network/isdn.pm:1
 #, fuzzy, c-format
-msgid "Europe protocol"
+msgid "European protocol"
 msgstr "Europaprotokollen"
 
 #: ../../network/isdn.pm:1
@@ -8367,7 +8407,7 @@ msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp)"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Netmask"
 msgstr "Nettmaske"
@@ -11469,7 +11509,7 @@ msgstr ""
 "Du kan nå gjennomføre installasjonen på nytt."
 
 #: ../../standalone/drakautoinst:1 ../../standalone/drakgw:1
-#: ../../standalone/scannerdrake:1 ../../standalone/drakpxe:1
+#: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Congratulations!"
 msgstr "Gratulerer!"
@@ -11681,7 +11721,7 @@ msgid ""
 "\tThis option allows you select all users that you want \n"
 "\tto backup.\n"
 "\tTo preserve disk space, it is recommended that you \n"
-"\tdo not include web browser's cache.\n"
+"\tdo not include the web browser's cache.\n"
 "\n"
 " - Backup Other files: \n"
 "\n"
@@ -11694,7 +11734,7 @@ msgid ""
 "\tThe incremental backup is the most powerful \n"
 "\toption for backup. This option allows you \n"
 "\tto backup all your data the first time, and \n"
-"\tonly the changed afterward.\n"
+"\tonly the changed data afterward.\n"
 "\tThen you will be able, during the restore\n"
 "\tstep, to restore your data from a specified\n"
 "\tdate.\n"
@@ -12696,7 +12736,7 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
-msgid " Error during mail sending. \n"
+msgid " Error while sending mail. \n"
 msgstr "Feil ved lesing av fil %s"
 
 #: ../../standalone/drakbackup:1
@@ -13090,7 +13130,7 @@ msgstr "Internett tilkobling konfigurasjon"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
-"You don't have any internet connection.\n"
+"You don't have an Internet connection.\n"
 "Create one first by clicking on 'Configure'"
 msgstr ""
 "Du har ingen internett-tilkobling.\n"
@@ -13289,7 +13329,7 @@ msgstr "Nettverkskonfigurasjon (%d adaptere"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid ""
-"Unable to close properly mkbootdisk: \n"
+"Unable to properly close mkbootdisk: \n"
 " %s \n"
 " %s"
 msgstr ""
@@ -13482,8 +13522,8 @@ msgid ""
 "Before installing any fonts, be sure that you have the right to use and "
 "install them on your system.\n"
 "\n"
-"-You can install the fonts using the normal way. In rare cases, bogus fonts "
-"may hang up your X Server."
+"-You can install the fonts the normal way. In rare cases, bogus fonts may "
+"hang up your X Server."
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -13548,15 +13588,16 @@ msgid ""
 "          - import from windows partition.\n"
 "                import from all fat32 partitions and look for winnt/windows/"
 "font\n"
-"                and import all (delete doublon) but don't import if already "
-"exist.\n"
+"                and import all (delete doubles) but don't import if they "
+"already exist.\n"
 "          - import from directory\n"
-"                look for if it exist before for each font and not delete the "
+"                look to see if each font exists and do not delete the "
 "original.\n"
 "                (replace all, no, none)\n"
 "                expert options:\n"
-"                        ask the directory, and look for if it exist before\n"
-"                        if it exist ask: (replace all, no, none)\n"
+"                        specify the directory, and look to see if it exists "
+"before\n"
+"                        if it exists ask: (replace all, no, none)\n"
 "          - uninstall with list per font type\n"
 "        Expert additional switch\n"
 "          - option support:   ghostscript, Staroffice, etc...\n"
@@ -13623,7 +13664,7 @@ msgstr ""
 
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
-msgid "Fonts Importation"
+msgid "Import Fonts"
 msgstr "Formater partisjoner"
 
 #: ../../standalone/drakfont:1
@@ -13648,7 +13689,7 @@ msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
-msgid "Suppress temporary Files"
+msgid "Suppress Temporary Files"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -13698,7 +13739,7 @@ msgstr "Formater diskett"
 
 #: ../../standalone/drakfont:1
 #, c-format
-msgid "Search fonts in installed list"
+msgid "Search for fonts in installed list"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -13736,7 +13777,7 @@ msgstr ""
 msgid "Search installed fonts"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -13751,27 +13792,27 @@ msgstr ""
 "\n"
 "Klikk på Konfigurer for å starte oppsett-hjelperen."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing configuration"
+msgid "Internet Connection Sharing configuration"
 msgstr "Internett deling av tilkobling konfigurasjon"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Deling av Internett tilkobling har aldri blitt konfigurert."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Oppsett har allerede blitt gjort, og er for øyeblikket slått på."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Oppsett har allerede blitt gjort, men er for øyeblikket slått av."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Everything has been configured.\n"
@@ -13787,67 +13828,67 @@ msgstr ""
 msgid "Problems installing package %s"
 msgstr "Problemer ved installering av pakke %s"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer script, installerer programvare, starter tjenere..."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Configuring..."
 msgstr "Konfigurerer..."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til %s!\n"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Re-configure interface and DHCP server"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The maximum lease (in seconds)"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP end range"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP start range"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "The internal domain name"
 msgstr "Nytt skrivernavn"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "The DNS Server IP"
 msgstr "CUPS tjener IP"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "(This) DHCP Server IP"
 msgstr "CUPS tjener IP"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "DHCP Server Configuration.\n"
@@ -13857,12 +13898,12 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Local Network adress"
 msgstr "ingen nettverkskort funnet"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
@@ -13873,12 +13914,12 @@ msgid ""
 "The default DNS entry is the Caching Nameserver configured on the firewall. "
 "You can replace that with your ISP DNS IP, for example.\n"
 "\t\t      \n"
-"Else, I can reconfigure your interface and (re)configure a DHCP server for "
-"you.\n"
+"Otherwise, I can reconfigure your interface and (re)configure a DHCP server "
+"for you.\n"
 "\n"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -13889,27 +13930,27 @@ msgid ""
 "Driver: %s"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Current interface configuration"
 msgstr "Modifiser skriverkonfigurasjon"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Show current interface configuration"
 msgstr "Modifiser skriverkonfigurasjon"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "No (experts only)"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Automatic reconfiguration"
 msgstr "Konfigurasjon av automatiske skritt"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -13919,12 +13960,12 @@ msgid ""
 "You can do it manually but you need to know what you're doing."
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, fuzzy, c-format
 msgid "Network interface already configured"
 msgstr "Monitor er ikke konfigurert"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
@@ -13933,7 +13974,7 @@ msgstr ""
 "Vennligst velg hvilket nettverksadapter som skal kobles til ditt lokale "
 "nettverk (LAN)."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -13948,7 +13989,7 @@ msgstr ""
 "\n"
 "Jeg er i ferd med å sette opp ditt lokale nettverk (LAN) med dette adapteret."
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Network interface"
 msgstr "Nettverksgrensesnitt"
@@ -13967,12 +14008,12 @@ msgstr ""
 msgid "No network adapter on your system!"
 msgstr "Ikke noe nettverksadapter i systemet ditt!"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Interface %s"
 msgstr "Grensesnitt %s"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Grensesnitt %s (bruker modul %s)"
@@ -14005,7 +14046,7 @@ msgstr "Deling av Internett tilkobling"
 
 #: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing is now enabled."
+msgid "Internet Connection Sharing is now enabled."
 msgstr "Deling av Internett tilkobling er nå slått på."
 
 #: ../../standalone/drakgw:1
@@ -14029,7 +14070,7 @@ msgid "enable"
 msgstr "slå på"
 
 #: ../../standalone/drakgw:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -14048,7 +14089,7 @@ msgstr "Deling av Internett tilkobling er slått av"
 
 #: ../../standalone/drakgw:1
 #, c-format
-msgid "Internet connection sharing is now disabled."
+msgid "Internet Connection Sharing is now disabled."
 msgstr "Deling av Internett tilkobling er slått av"
 
 #: ../../standalone/drakgw:1
@@ -14064,7 +14105,7 @@ msgstr "slå av"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
-"The setup of Internet connection sharing has already been done.\n"
+"The setup of Internet Connection Sharing has already been done.\n"
 "It's currently enabled.\n"
 "\n"
 "What would you like to do?"
@@ -14079,7 +14120,7 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
-#: ../../standalone/drakgw:1
+#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
 msgstr ""
@@ -14178,7 +14219,7 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Edit curent rule"
+msgid "Edit current rule"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -14458,14 +14499,14 @@ msgstr ""
 #, c-format
 msgid ""
 "y coordinate of text box\n"
-"in number of character"
+"in number of characters"
 msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
 "x coordinate of text box\n"
-"in number of character"
+"in number of characters"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -15669,12 +15710,21 @@ msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
+msgid "The DHCP end ip"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
+msgid "The DHCP start ip"
+msgstr ""
+
+#: ../../standalone/drakpxe:1
+#, c-format
 msgid ""
 "The DHCP server will allow other computer to boot using PXE in the given "
 "range of address.\n"
 "\n"
-"If you give an inexistant directory, you will be asked to insert "
-"Installation CD or DVD to copy the installation program and rpm files.\n"
+"The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
 
