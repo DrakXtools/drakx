@@ -86,7 +86,7 @@ my %lang2keyboard =
 #- [1] = name for loadkeys, [2] = name for XKB
 my %keyboards = (
 arch() =~ /^sparc/ ? (
- "cs" => [ __("Czech"),          "sunt5-us-cz", "czsk(cz_us_qwertz)" ],
+ "cs" => [ __("Czech"),          "sunt5-cz-us", "czsk(cz_us_qwertz)" ],
  "de" => [ __("German"),         "sunt5-de-latin1", "de" ],
  "dvorak" => [ __("Dvorak"),     "sundvorak",   "dvorak" ],
  "es" => [ __("Spanish"),        "sunt5-es",    "es" ],
@@ -95,11 +95,13 @@ arch() =~ /^sparc/ ? (
  "no" => [ __("Norwegian"),      "sunt4-no-latin1", "no" ],
  "pl" => [ __("Polish"),         "sun-pl-altgraph", "pl" ],
  "ru" => [ __("Russian"),        "sunt5-ru",    "ru" ],
- "uk" => [ __("UK keyboard"),    "sunt5-uk",    "us" ],
+ "uk" => [ __("UK keyboard"),    "sunt5-uk",    "gb" ],
  "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
 ) : (),
 arch() =~ /^ppc/ ? (
  "us" => [ __("US keyboard"),    "mac-us-ext",  "us" ],
+ "de_nodeadkeys" => [ __("German"), "mac-de-latin1-nodeadkeys", "de(nodeadkeys)" ],
+ "fr" => [ __("French"),         "mac-fr3",   "fr" ],
 ) : (
  "am_old" => [ __("Armenian (old)"),	"am_old",	"am(old)" ],
  "am" => [ __("Armenian (typewriter)"),	"am-armscii8",	"am" ],
