@@ -61,11 +61,11 @@ sub new {
 	    my $draw1 = new Gtk::DrawingArea;
 	    $draw1->set_usize(540,100);
 	    my $draw2 = new Gtk::DrawingArea;
-	    $draw2->set_usize(1,300);
+	    $draw2->set_usize(100,300);
 	    my ($im_up, $mask_up) = gtkcreate_png($::Wizard_pix_up || "wiz_default_up.png");
 	    my ($y1, $x1) = $im_up->get_size;
-#	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
-#	    my ($y2, $x2) = $im_left->get_size;
+	    my ($im_left, $mask_left) = gtkcreate_png($::Wizard_pix_left || "wiz_default_left.png");
+	    my ($y2, $x2) = $im_left->get_size;
 	    my $style= new Gtk::Style;
 	    $style->font(Gtk::Gdk::Font->fontset_load("-adobe-times-bold-r-normal-*-25-*-100-100-p-*-iso8859-*"));
 	    my $w = $style->font->string_width($::Wizard_title);
@@ -82,14 +82,14 @@ sub new {
 								       ($::Wizard_title) );
 				       }
 				   });
-#	    $draw2->signal_connect(expose_event => sub {
-#				       my $i;
-#				       for ($i=0;$i<(300/$y2);$i++) {
-#					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
-#									$im_left, 0, 0, 0, $y2*$i,
-#									$x2 , $y2 );
-#				       }
-#				   });
+	    $draw2->signal_connect(expose_event => sub {
+				       my $i;
+				       for ($i=0;$i<(300/$y2);$i++) {
+					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
+									$im_left, 0, 0, 0, $y2*$i,
+									$x2 , $y2 );
+				       }
+				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
 	    $::WizardTable->set_usize(540,400);
@@ -366,7 +366,7 @@ sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
 sub write_on_pixmap {
     my ($pixmap, $x_pos, $y_pos, @text)=@_;
     my ($gdkpixmap, $gdkmask) = $pixmap->get();
-    my ($width, $height) = (540, 250); #($pixmap->allocation->[2], $pixmap->allocation->[3]);
+    my ($width, $height) = (440, 250);
     my $gc = Gtk::Gdk::GC->new(gtkroot());
     $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
 
