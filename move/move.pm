@@ -68,6 +68,7 @@ sub install2::startMove {
     ugtk2::gtkflush();
 
     run_program::run('/sbin/service', 'syslog', 'start'); # otherwise minilogd will strike
+    run_program::run('killall', 'minilogd'); # get rid of minilogd
 
     run_program::run('adduser', 'mdk');
 
