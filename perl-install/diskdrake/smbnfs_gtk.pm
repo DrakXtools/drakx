@@ -12,18 +12,19 @@ use network::smb;
 use network::nfs;
 use my_gtk qw(:helpers :wrappers :ask);
 
-my ($all_hds, $in, $current_entry);
+my ($all_hds, $in, $tree, $current_entry, $current_leaf, $icon_pix, $icon_mask);
 
 sub main {
     ($in, $all_hds, my $type) = @_;
-    my ($check, $create) = $type eq 'smb' ? (\&network::smb::check, \&smb_create) : (\&network::nfs::check, \&nfs_create);
+    my ($kind) = $type eq 'smb' ? smb2kind() : nfs2kind();
     {
 	local $my_gtk::pop_it = 1;
-	$check->($in) or return;
+	$kind->check($in) or return;
     }
 
     my $w = my_gtk->new('DiskDrake');
-    $create->($w->{window});
+
+    add_smbnfs($w->{window}, $kind);
     $w->{rwindow}->set_default_size(400, 300) if $w->{rwindow}->can('set_default_size');
     $w->{window}->show_all;
     $w->main;
@@ -101,38 +102,58 @@ sub update {
     my ($kind) = @_;
     per_entry_action_box($kind->{action_box}, $kind, $current_entry);
     per_entry_info_box($kind->{info_box}, $kind, $current_entry);
+    my_gtk::ctree_set_icon($tree, $current_leaf, $current_entry->{mntpoint} ? ($icon_pix, $icon_mask) : (undef, undef)) if $current_entry;
+}
+
+sub find_fstab_entry {
+    my ($kind, $e, $add_or_not) = @_;
+
+    my $fs_entry = $kind->to_fstab_entry($e);
+
+    if (my ($fs_entry_) = grep { $fs_entry->{device} eq $_->{device} } @{$kind->{val}}) {
+	$fs_entry_;
+    } elsif ($add_or_not) {
+	push @{$kind->{val}}, $fs_entry;
+	$fs_entry;
+    } else {
+	undef;
+    }
 }
 
 sub import_ctree {
-    my ($kind, $default_imports, $find_servers, $find_exports, $create) = @_;
-    my (%name2server, %wservers, %name2export, $inside);
+    my ($kind) = @_;
+    my (%servers_displayed, %wservers, %wexports, $inside);
 
-    my $tree = Gtk::CTree->new(1, 0);
+    $tree = Gtk::CTree->new(1, 0);
     $tree->set_column_auto_resize(0, 1);
     $tree->set_selection_mode('browse');
     $tree->set_row_height($tree->style->font->ascent + $tree->style->font->descent + 1);
 
+#    ($icon_pix, $icon_mask) = gtkcreate_png("user");
+
     my $add_server = sub {
 	my ($server) = @_;
 	my $name = $server->{name} || $server->{ip};
-	$name2server{$name} = $server;
-	$wservers{$name} ||= $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
-	$wservers{$name}
+	$servers_displayed{$name} ||= do {
+	    my $w = $tree->insert_node(undef, undef, [$name], 5, (undef) x 4, 0, 0);
+	    $wservers{$w} = $server;
+	    $w;
+	};
     };
 
     my $add_exports = sub {
 	my ($node) = @_;
 	$tree->expand($node);
-	my $name = first $tree->node_get_pixtext($node, 0);
-	foreach ($find_exports->($name2server{$name})) {
-	    my $name = $_->{name} . ($_->{comment} ? " ($_->{comment})" : '');
-	    $name2export{$name} = $_;
-	    $tree->insert_node($node, undef, [$name], 5, (undef) x 4, 1, 0);
+	foreach ($kind->find_exports($wservers{$node} || die '')) {
+	    my $w = $tree->insert_node($node, undef, [$kind->to_string($_)], 5, (undef) x 4, 1, 0);
+	    my_gtk::ctree_set_icon($tree, $w, $icon_pix, $icon_mask) if (find_fstab_entry($kind, $_) || {})->{mntpoint}; 
+	    $wexports{$w->{_gtk}} = $_;
 	}
     };
 
     my $click_here = $tree->insert_node(undef, undef, [_("click here")], 5, (undef) x 4, 0, 0);
-    foreach (@$default_imports) {
+
+    foreach (uniq(map { ($kind->from_dev($_->{device}))[0] } @{$kind->{val}})) {
 	my $node = $add_server->({ name => $_ });
 	$add_exports->($node);
     }
@@ -142,23 +163,15 @@ sub import_ctree {
 	$inside and return;
 	$inside = 1;
 	if ($curr->row->is_leaf) {
-	    my ($export) = $tree->node_get_pixtext($curr, 0);
-	    $export =~ s/ \(.*?\)$//;
-	    my ($server) = $tree->node_get_pixtext($curr->row->parent, 0);
-	    my $entry = $create->($server, $export);
-	    if (my ($e) = grep { $entry->{device} eq $_->{device} } @{$kind->{val}}) {
-		$entry = $e;
-	    } else {
-		push @{$kind->{val}}, $entry;
-	    }
-	    $current_entry = $entry;
+	    $current_leaf = $curr;
+	    $current_entry = find_fstab_entry($kind, $wexports{$curr->{_gtk}} || die(''), 'add');
 	} else {
 	    if (!$curr->row->children) {
 		gtkset_mousecursor_wait($tree->window);
 		my_gtk::flush();
 		$tree->freeze;
 		if ($curr == $click_here) {
-		    $add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $find_servers->();
+		    $add_server->($_) foreach sort { $a->{name} cmp $b->{name} } $kind->find_servers;
 		    $tree->remove_node($click_here);
 		} else {
 		    $add_exports->($curr);
@@ -175,10 +188,10 @@ sub import_ctree {
 }
 
 sub add_smbnfs {
-    my ($widget, $kind, $find_servers, $find_exports, $create, $default_imports) = @_;
+    my ($widget, $kind) = @_;
     die if $kind->{main_box};
 
-    $kind->{display_box} = createScrolledWindow(import_ctree($kind, $default_imports, $find_servers, $find_exports, $create));
+    $kind->{display_box} = createScrolledWindow(import_ctree($kind));
     $kind->{action_box} = new Gtk::HBox(0,0);
     $kind->{info_box} = new Gtk::VBox(0,0);
     $kind->{main_box} =
@@ -195,48 +208,13 @@ sub add_smbnfs {
     $kind;
 }
 
-################################################################################
-# nfs: helpers
-################################################################################
 sub nfs2kind {
-    my ($l) = @_;
-    { type => 'nfs', name => 'NFS', val => $l, no_auto => 1 };
+    network::nfs->new({ type => 'nfs', name => 'NFS', val => $all_hds->{nfss}, no_auto => 1 });
 }
 
-sub nfs_create {
-    my ($widget) = @_;
-
-    my $create = sub {
-	my ($server, $export) = @_;
-
-	my $nfs = { device => "$server:$export", type => 'nfs' };
-	fs::set_default_options($nfs);
-	$nfs;
-    };
-    my $servers = [ uniq(map { $_->{device} =~ m|(.*?):| } @{$all_hds->{nfss}}) ];
-    add_smbnfs($widget, nfs2kind($all_hds->{nfss}), \&network::nfs::find_servers, \&network::nfs::find_exports, $create, $servers);
-}
-
-################################################################################
-# smb: helpers
-################################################################################
 sub smb2kind {
-    my ($l) = @_;
-    { type => 'smb', name => 'Samba', val => $l, no_auto => 1 };
+    network::smb->new({ type => 'smb', name => 'Samba', val => $all_hds->{smbs}, no_auto => 1 });
 }
 
-sub smb_create {
-    my ($widget) = @_;
-
-    my $create = sub {
-	my ($server, $export) = @_;
-
-	my $smb = { device => "//$server/$export", type => 'smbfs', options => 'username=%' };
-	fs::set_default_options($smb);
-	$smb;
-    };
-    my $servers = [ uniq(map { $_->{device} =~ m|//(.*?)/| } @{$all_hds->{smbs}}) ];
-    add_smbnfs($widget, smb2kind($all_hds->{smbs}), \&network::smb::find_servers, \&network::smb::find_exports, $create, $servers);
-}
 
 1;
