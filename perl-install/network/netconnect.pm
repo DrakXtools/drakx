@@ -591,16 +591,25 @@ sub load_conf {
     }
 }
 
+#- ensures the migration from old config files
+sub read_raw_net_conf {
+    my ($suffix) = @_;
+    my $dir = "$::prefix/etc/sysconfig";
+    $suffix = $suffix ? ".$suffix" : '';
+    rename "$dir/draknet$suffix", "$dir/drakconnect$suffix";
+    getVarsFromSh("$dir/drakconnect$suffix");
+}
+
 sub get_net_device {
-    ${{ getVarsFromSh("/etc/sysconfig/drakconnect") }}{NET_DEVICE};
+    ${{ read_raw_net_conf() }}{NET_DEVICE};
 }
 
 sub read_net_conf {
     my ($prefix, $netcnx, $netc)=@_;
-    add2hash($netcnx, { getVarsFromSh("$prefix/etc/sysconfig/drakconnect") });
+    add2hash($netcnx, { read_raw_net_conf() });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}}||={};
-    add2hash($netcnx->{$netcnx->{type}}, { getVarsFromSh("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}) });
+    add2hash($netcnx->{$netcnx->{type}}, { read_raw_net_conf($netcnx->{type}) });
 }
 
 sub set_net_conf {
