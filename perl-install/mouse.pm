@@ -312,14 +312,11 @@ sub detect() {
     #- probe serial device to make sure a wacom has been detected.
     eval { modules::load("serial") };
     my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom;
+    $r and return { wacom => \@wacom, %$r };
 
     if (!$::isStandalone) {
 	my $mouse = $fast_mouse_probe->();
-	$r && $mouse and $r->{auxmouse} = $mouse; #- we kept the auxilliary mouse as PS/2.
-	$r and return { wacom => \@wacom, %$r };
 	$mouse and return { wacom => \@wacom, %$mouse };
-    } else {
-	$r and return { wacom => \@wacom, %$r };
     }
 
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).
