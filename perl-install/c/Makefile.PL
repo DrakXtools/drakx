@@ -2,7 +2,7 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
-my $libs = '-L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc';
+my $libs = '-L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc -lldetect';
 $libs .= ' -lrpm -lrpmio -lz' if $ENV{C_RPM};
 
 WriteMakefile(

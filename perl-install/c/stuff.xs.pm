@@ -28,6 +28,7 @@ print '
 #include <net/if.h>
 #include <net/route.h>
 
+#include <libldetect.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
@@ -199,6 +200,23 @@ _exit(status)
   
 int
 detectSMP()
+
+void
+pci_probe(probe_type)
+  int probe_type
+  PPCODE:
+    struct pci_entries entries = pci_probe(probe_type);
+    char buf[2048];
+    int i;
+
+    EXTEND(SP, entries.nb);
+    for (i = 0; i < entries.nb; i++) {
+      struct pci_entry e = entries.entries[i];
+      snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%s\t%s\t%s", 
+               e.vendor, e.device, e.subvendor, e.subdevice, pci_class2text(e.class), e.module ? e.module : "unknown", e.text);
+      PUSHs(sv_2mortal(newSVpv(buf, 0)));
+    }
+    pci_free(entries);
 
 char*
 crypt_md5(pw, salt)

@@ -358,7 +358,7 @@ sub monitorConfiguration(;$$) {
 
     $monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-    readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
+    readMonitorsDB("/usr/share/ldetect-lst/MonitorsDB");
 
     add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
     if ($monitor->{type} eq 'Custom') {
