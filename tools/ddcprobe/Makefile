@@ -1,29 +1,26 @@
-CFLAGS=-Wall -O # -g -DDEBUG
-LDFLAGS = -lm
-TARGETS=ddcxinfos
+CC	= gcc
+CFLAGS	= -O -Wall # -g -DDEBUG
+INCS	= -I.
+LDFLAGS	= -lm -L. -lint10 -lx86emu
+OBJS	= ddcxinfos.o vesamode.o vbe.o
+LIBS	= libint10.a libx86emu.a
+TARGETS	= ddcxinfos
 
-ARCH := $(patsubst i%86,i386,$(shell uname -m))
-ARCH := $(patsubst sparc%,sparc,$(ARCH))
+all: $(TARGETS)
 
-ifeq (i386,$(ARCH))
+ddcxinfos: $(OBJS) $(LIBS)
+	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LDFLAGS)
 
-ddcxinfos: lrmi.o vesamode.o vbe.o ddcxinfos.o
+libx86emu.a:
+	$(MAKE) -C x86emu
 
-libvbe.a: lrmi.o vesamode.o vbe.o
-	$(AR) cru $@ $^
+libint10.a: libx86emu.a
+	$(MAKE) -C int10
 
-#install: $(DESTDIR)/usr/include/vbe.h $(DESTDIR)/usr/lib/libvbe.a
-
-$(DESTDIR)/usr/include/vbe.h:
-	install -m 644 vbe.h $(DESTDIR)/usr/include/vbe.h
-
-$(DESTDIR)/usr/lib/libvbe.a:
-	install -m 644 libvbe.a $(DESTDIR)/usr/lib/libvbe.a
-
-else
-ddcxinfos: not_handled.c
-	gcc -o $@ $<
-endif
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
-	$(RM) $(TARGETS) *.o core
+	$(MAKE) -C int10 clean
+	$(MAKE) -C x86emu clean
+	$(RM) $(TARGETS) $(LIBS) *.o core

@@ -2,30 +2,54 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <sys/mman.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <stdarg.h>
 #include "vbe.h"
 #include "vesamode.h"
+#include "int10/vbios.h"
 #ident "$Id$"
 
 #define SQR(x) ((x) * (x))
 
-int main(int argc, char **argv)
+void log_err(char *format, ...)
+{
+  va_list args;
+  va_start(args, format);
+  vfprintf(stderr, format, args);
+  va_end(args);
+}
+
+int main(void)
 {
 	int i, j;
-	u_int16_t *mode_list;
 	unsigned char hmin, hmax, vmin, vmax;
-	struct vbe_info *vbe_info;
-	struct vbe_edid1_info *edid;
+	struct vbe_info vbe_info_static;
+	struct vbe_info *vbe_info = &vbe_info_static;
+	struct vbe_edid1_info edid_static;
+	struct vbe_edid1_info *edid = &edid_static;
 	struct vbe_modeline *modelines;
-	
+	int pci_config_type = 0;
 
-	if ((vbe_info = vbe_get_vbe_info()) == NULL) return 1;
+	/* Determine PCI configuration type */
+	pci_config_type = 1;
 
-	printf("%dKB of video ram\n", vbe_info->memory_size * 64);
+	/* Initialize Int10 */
+	if (InitInt10(pci_config_type)) return 1;
 
-	/* List supported standard modes. */
-	for (mode_list = vbe_info->mode_list.list; *mode_list != 0xffff; mode_list++)
+	/* Get VBE information */
+	if (vbe_get_vbe_info(vbe_info) == 0) {
+	  FreeInt10();
+	  return 1;
+	}
+	printf("%dKB of video ram\n", vbe_info->memory_size / 1024);
+
+	/* List supported standard modes */
+	for (j = 0; j < vbe_info->modes; j++)
 	  for (i = 0; known_vesa_modes[i].x; i++)
-	    if (known_vesa_modes[i].number == *mode_list)
+	    if (known_vesa_modes[i].number == vbe_info->mode_list[j])
 	      printf("%d %d %d\n", 
 		     known_vesa_modes[i].colors,
 		     known_vesa_modes[i].x,
@@ -33,7 +57,14 @@ int main(int argc, char **argv)
 		     );
 	printf("\n");
 
-	if ((edid = vbe_get_edid_info()) == NULL) return 0;
+	/* Get EDID information */
+	if (vbe_get_edid_info(edid) == 0) {
+	  FreeInt10();
+	  return 0;
+	}
+	FreeInt10();
+
+	if (edid->manufacturer_name.p == 0 || edid->product_code == 0) return 0;
 	if (edid->version == 255 && edid->revision == 255) return 0;
 
 	vbe_get_edid_ranges(edid, &hmin, &hmax, &vmin, &vmax);
@@ -48,9 +79,9 @@ int main(int argc, char **argv)
 	  char manufacturer[4];
 	  double size = sqrt(SQR(edid->max_size_horizontal) + 
 			     SQR(edid->max_size_vertical)) / 2.54;
-	  manufacturer[0] = edid->manufacturer_name.char1 + 'A' - 1;
-	  manufacturer[1] = edid->manufacturer_name.char2 + 'A' - 1;
-	  manufacturer[2] = edid->manufacturer_name.char3 + 'A' - 1;
+	  manufacturer[0] = edid->manufacturer_name.u.char1 + 'A' - 1;
+	  manufacturer[1] = edid->manufacturer_name.u.char2 + 'A' - 1;
+	  manufacturer[2] = edid->manufacturer_name.u.char3 + 'A' - 1;
 	  manufacturer[3] = '\0';
 	  printf(size ? "%3.2f inches monitor (truly %3.2f')  EISA ID=%s%04x\n" : "\n", size * 1.08, size, manufacturer, edid->product_code);
 	}

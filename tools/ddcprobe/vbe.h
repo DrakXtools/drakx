@@ -3,113 +3,20 @@
 #ident "$Id$"
 #include <sys/types.h>
 
+struct vbe_mode_info;
+
 /* Record returned by int 0x10, function 0x4f, subfunction 0x00. */
 struct vbe_info {
-	unsigned char signature[4];
-	unsigned char version[2];
-	union {
-		struct {
-			u_int16_t ofs;
-			u_int16_t seg;
-		} addr;
-		const char *string;
-	} oem_name;
-	u_int32_t capabilities;
-	union {
-		struct {
-			u_int16_t ofs;
-			u_int16_t seg;
-		} addr;
-		u_int16_t *list;
-	} mode_list;
-	u_int16_t memory_size;
-	/* VESA 3.0+ */
-	u_int16_t vbe_revision;
-	union {
-		struct {
-			u_int16_t ofs;
-			u_int16_t seg;
-		} addr;
-		const char *string;
-	} vendor_name;
-	union {
-		struct {
-			u_int16_t ofs;
-			u_int16_t seg;
-		} addr;
-		const char *string;
-	} product_name;
-	union {
-		struct {
-			u_int16_t ofs;
-			u_int16_t seg;
-		} addr;
-		const char *string;
-	} product_revision;
-	char reserved1[222];
-	char reserved2[256];
-} __attribute__ ((packed));
-
-/* Stuff returned by int 0x10, function 0x4f, subfunction 0x01. */
-struct vbe_mode_info {
-	/* required for all VESA versions */
-	struct {
-		/* VBE 1.0+ */
-		u_int16_t supported: 1;
-		u_int16_t optional_info_available: 1;
-		u_int16_t bios_output_supported: 1;
-		u_int16_t color: 1;
-		u_int16_t graphics: 1;
-		/* VBE 2.0+ */
-		u_int16_t not_vga_compatible: 1;
-		u_int16_t not_bank_switched: 1;
-		u_int16_t lfb: 1;
-		/* VBE 1.0+ */
-		u_int16_t unknown: 1;
-		u_int16_t must_enable_directaccess_in_10: 1;
-	} mode_attributes;
-	struct {
-		unsigned char exists: 1;
-		unsigned char readable: 1;
-		unsigned char writeable: 1;
-		unsigned char reserved: 5;
-	} windowa_attributes, windowb_attributes;
-	u_int16_t window_granularity;
-	u_int16_t window_size;
-	u_int16_t windowa_start_segment, windowb_start_segment;
-	u_int16_t window_positioning_seg, window_positioning_ofs;
-	u_int16_t bytes_per_scanline;
-	/* optional for VESA 1.0/1.1, required for OEM modes */
-	u_int16_t w, h;
-	unsigned char cell_width, cell_height;
-	unsigned char memory_planes;
-	unsigned char bpp;
-	unsigned char banks;
-	enum {
-		memory_model_text = 0,
-		memory_model_cga = 1,
-		memory_model_hgc = 2,
-		memory_model_ega16 = 3,
-		memory_model_packed_pixel = 4,
-		memory_model_sequ256 = 5,
-		memory_model_direct_color = 6,
-		memory_model_yuv = 7,
-	} memory_model: 8;
-	unsigned char bank_size;
-	unsigned char image_pages;
-	unsigned char reserved1;
-	/* required for VESA 1.2+ */
-	unsigned char red_mask, red_field;
-	unsigned char green_mask, green_field;
-	unsigned char blue_mask, blue_field;
-	unsigned char reserved_mask, reserved_field;
-	unsigned char direct_color_mode_info;
-	/* VESA 2.0+ */
-	u_int32_t linear_buffer_address;
-	u_int32_t offscreen_memory_address;
-	u_int16_t offscreen_memory_size;
-	unsigned char reserved2[206];
-} __attribute__ ((packed));
+  unsigned int version;
+  unsigned int oem_version;
+  unsigned int memory_size;
+  char *oem_name;
+  char *vendor_name;
+  char *product_name;
+  char *product_revision;
+  unsigned int modes;
+  unsigned int mode_list[0x100];
+};
 
 /* Modeline information used by XFree86. */
 struct vbe_modeline {
@@ -211,12 +118,15 @@ struct vbe_edid_monitor_descriptor {
 
 struct vbe_edid1_info {
 	unsigned char header[8];
-	struct {
-		u_int16_t char3: 5;
-		u_int16_t char2: 5;
-		u_int16_t char1: 5;
-		u_int16_t zero: 1;
-	} manufacturer_name __attribute__ ((packed));
+	union {
+	  u_int16_t p;
+	  struct {
+	    u_int16_t char3: 5;
+	    u_int16_t char2: 5;
+	    u_int16_t char1: 5;
+	    u_int16_t zero: 1;
+	  } u;
+	} manufacturer_name;
 	u_int16_t product_code;
 	u_int32_t serial_number;
 	unsigned char week;
@@ -282,24 +192,10 @@ struct vbe_edid1_info {
 #define VBE_LINEAR_FRAMEBUFFER 0x4000
 
 /* Get VESA information. */
-struct vbe_info *vbe_get_vbe_info();
-
-/* Get information about a particular video mode, bitwise or with
-   VBE_LINEAR_FRAMEBUFFER to check if LFB version is supported. */
-struct vbe_mode_info *vbe_get_mode_info(u_int16_t mode);
+int vbe_get_vbe_info(struct vbe_info *vbe);
 
 /* Check if EDID reads are supported, and do them. */
-int vbe_get_edid_supported();
-struct vbe_edid1_info *vbe_get_edid_info();
-
-/* Get the current video mode, -1 on error. */
-int32_t vbe_get_mode();
-/* Set a new video mode, bitwise or with VBE_LINEAR_FRAMEBUFFER. */
-void vbe_set_mode(u_int16_t mode);
-
-/* Save/restore the SVGA state.  Call free() on the state record when done. */
-const void *vbe_save_svga_state();
-void vbe_restore_svga_state(const void *state);
+int vbe_get_edid_info(struct vbe_edid1_info *edid);
 
 /* Get the ranges of values suitable for the attached monitor. */
 void vbe_get_edid_ranges(struct vbe_edid1_info *edid,
