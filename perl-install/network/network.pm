@@ -548,19 +548,20 @@ sub easy_dhcp {
 sub configureNetwork2 {
     my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
-
-    $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
-    write_conf("$etc/sysconfig/network", $netc);
-    write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
-    add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME} && !$netc->{DHCP};
-    add2hosts("$etc/hosts", "localhost", "127.0.0.1");
-
-    any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
-    $in->do_pkgs->install(qw(tmdns)) if !$in->do_pkgs->is_installed('bind');
-    $in->do_pkgs->install(qw(zcip));
-    $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
-    any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
+    if (!$::testing) {
+        $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
+        write_conf("$etc/sysconfig/network", $netc);
+        write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
+        write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
+        add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME} && !$netc->{DHCP};
+        add2hosts("$etc/hosts", "localhost", "127.0.0.1");
+        
+        any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+        $in->do_pkgs->install(qw(tmdns)) if !$in->do_pkgs->is_installed('bind');
+        $in->do_pkgs->install(qw(zcip));
+        $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
+        any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
+    }
 
     proxy_configure($::o->{miscellaneous});
 }
