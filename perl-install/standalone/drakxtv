@@ -61,7 +61,7 @@ sub scan4channels {
 				  # Note that this'll be broken if/when we implement interactive_qt
 				  my $use_X =$in->isa('interactive_gtk') && -x "/usr/X11R6/bin/xvt";
 				  system( (($use_X ) ?
-						 "xvt -title '"._("Scanning for TV channels")." ...' -e ":"")
+						 "xvt -T '"._("Scanning for TV channels")." ...' -e ":"")
 						. "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
 				  $in->exit(0);
 			   },
