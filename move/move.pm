@@ -6,6 +6,7 @@ use strict;
 use common;
 use fs;
 use run_program;
+use log;
 
 
 #- run very soon at stage2 start, setup things on tmpfs rw / that
@@ -28,6 +29,19 @@ sub init {
     #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
     run_program::rooted('', '/sbin/devfsd', '/dev');
+}
+
+
+sub automatic_xconf {
+    my ($o) = @_;
+    log::l('automatic XFree configuration');
+
+    require Xconfig::default;
+    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'us' }, $o->{mouse});
+
+    require Xconfig::main;
+    require class_discard;
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {}, { allowNVIDIA_rpms => 1 });
 }
 
 
