@@ -83,7 +83,7 @@ sub read() {
     my %b;
     foreach (cat_("$::prefix$file")) {
 	next if /^\s*#/ || /^\s*$/;
-	($_, $v) = /^\s*(\S+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in lilo.conf: $_"), next;
+	($_, $v) = /^\s*([^=\s]+)\s*(?:=\s*(.*?))?\s*$/ or log::l("unknown line in lilo.conf: $_"), next;
 
 	if (/^(image|other)$/) {
 	    if (arch() =~ /ppc/) {
