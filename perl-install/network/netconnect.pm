@@ -213,7 +213,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 			  }
 			 ) or goto step_1;
 
-    load_conf ($netcnx, $netc, $intf);
+    load_conf($netcnx, $netc, $intf);
     $conf{modem} and do { pre_func("modem"); require network::modem; network::modem::configure($netcnx, $mouse, $netc, $intf) or goto step_2 };
     $conf{winmodem} and do { pre_func("winmodem"); require network::modem; network::modem::winmodemConfigure($netc) or goto step_2 }; 
     $conf{isdn} and do { pre_func("isdn"); require network::isdn; network::isdn::configure($netcnx, $netc) or goto step_2 };

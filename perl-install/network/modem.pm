@@ -19,7 +19,7 @@ sub configure {
 #    $netcnx->{$netcnx->{type}} = {};
 #    $netcnx->{modem}{device} = $netc->{autodetect}{modem};
 #  modem_step_1:
-    $netcnx->{$netcnx->{type}}->{login} = ($netcnx->{$netcnx->{type}}->{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}->{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
+    $netcnx->{$netcnx->{type}}{login} = ($netcnx->{$netcnx->{type}}{auth} eq 'PAP' || $netcnx->{$netcnx->{type}}{auth} eq 'CHAP') && $intf->{ppp0}{PAPNAME};
     pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc, $intf) or return;
     write_cnx_script($netc, "modem",
 q(

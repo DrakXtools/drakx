@@ -14,7 +14,7 @@ my $w;
 
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
-    my $mainw = ugtk2->new('wait', ( modal => 1, transient => $w->{rwindow} ));
+    my $mainw = ugtk2->new('wait', ( modal => 1, transient => $w->{rwindow}));
     my $label = new Gtk2::Label($_[0]);
     $mainw->{window}->add($label);
     $mainw->{window}->show_all;

@@ -85,9 +85,9 @@ If you don't know, choose 'use pppoe'"), $l) or return;
 sub adsl_ask_info {
     my ($adsl, $netc, $intf, $adsl_type) = @_;
     my $pppoe_file = "/etc/ppp/pppoe.conf";
-    my $pppoe_conf = { getVarsFromSh($pppoe_file) } if ($adsl_type =~ /pppoe/ && -f $pppoe_file);
+    my $pppoe_conf = { getVarsFromSh($pppoe_file) } if $adsl_type =~ /pppoe/ && -f $pppoe_file;
     add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
-    add2hash($adsl, { login => "$pppoe_conf->{USER}", passwd => '', passwd2 => '' });
+    add2hash($adsl, { login => $pppoe_conf->{USER}, passwd => '', passwd2 => '' });
     ask_info2($adsl, $netc);
 }
 
@@ -103,7 +103,7 @@ sub adsl_conf {
     my ($adsl, $netc, $intf, $adsl_type) = @_;
 
   adsl_conf_step_1:
-    adsl_ask_info ($adsl, $netc, $intf, $adsl_type) or return;
+    adsl_ask_info($adsl, $netc, $intf, $adsl_type) or return;
   adsl_conf_step_2:
     $adsl_type =~ /speedtouch|eci/ or conf_network_card($netc, $intf, 'static', '10.0.0.10') or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
