@@ -402,7 +402,7 @@ sub keyboard2full_xkb {
 	XkbLayout => join(',', if_($keyboard->{GRP_TOGGLE}, 'us'), $XkbLayout),
 	XkbModel => $XkbModel,
 	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : '',
-	XkbCompat => $keyboard->{GRP_TOGGLE} ? "group_led" : '',
+	XkbCompat => $keyboard->{GRP_TOGGLE} ? "default+group_led" : '',
     } : { XkbDisable => '' };
 }
 
