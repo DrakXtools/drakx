@@ -316,14 +316,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Sat Nov  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-5mdk
-- drakconnect: fix lan always marked as detected even
+- drakconnect:
+  o fix lan always marked as detected even
+  o list acx100_pci as a wireless network cards driver so that one can
+    set wireless parameters for it (#6312)
 - harddrake2: 
   o do not display "unknown module" in red for modems known to not
     need any module (#3047)
   o enumerate cpus from 1 instead of 0 (#4704)
   o typo fix #6134: (JAZ drives are nothing to do with jazz music)
-  o list acx100_pci as a wireless network cards driver so that one can
-    set wireless parameters for it (#6312)
 
 * Fri Nov  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-4mdk
 - drakconnect:
