@@ -878,8 +878,7 @@ sub new {
 		$::WizardWindow = mygtk2::_create_Window(
 		    %window_options,
 		    child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
-		    if_(!$::isInstall, icon_no_error => wm_icon()),
-		);   
+		);
 		$::WizardWindow->show;
 	    }
 	}
