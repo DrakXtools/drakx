@@ -4,7 +4,7 @@ use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
-use ugtk2 qw(:helpers :wrappers :create);
+use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use interactive;
 
 #- convenience variables for true and false
@@ -513,7 +513,16 @@ sub show_prev {
  $prev_window->set_title(
                          #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
                          N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
- $prev_pic = gtkcreate_pixbuf($img_file);
+ eval { $prev_pic = gtkcreate_pixbuf($img_file) };
+ if (my $err = $@) {
+     err_dialog(N("Error"),
+                #-PO: Do not alter the <span ..> and </span> tags
+                N("The image \"%s\" cannot be load due to the following issue:\n\n<span foreground=\"Red\">%s</span>", $img_file, $err),
+                { use_markup => 1 }
+               );
+     return;
+ }
+
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
  $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
 	 or $prev_canvas = Gtk2::DrawingArea->new and $prev_window->add($prev_canvas);
