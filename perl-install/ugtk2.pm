@@ -377,18 +377,18 @@ sub create_dialog {
     $dialog->vbox->pack_start(create_scrolled_window($text, [ 'never', 'automatic' ]), 1, 1, 0);
     $text->set_line_wrap(1);
 
-    my $button = Gtk2::Button->new_from_stock('gtk-ok');
-    $button->can_default(1);
-    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
-    $dialog->action_area->pack_start($button, 1, 1, 0);
-    $button->grab_default;
-
     if ($o_options->{cancel}) {
 	my $button2 = Gtk2::Button->new_from_stock('gtk-cancel');
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit });
 	$button2->can_default(1);
 	$dialog->action_area->pack_start($button2, 1, 1, 0);
     }
+
+    my $button = Gtk2::Button->new_from_stock('gtk-ok');
+    $button->can_default(1);
+    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy; Gtk2->main_quit });
+    $dialog->action_area->pack_start($button, 1, 1, 0);
+    $button->grab_default;
 
     $dialog->show_all;
     Gtk2->main;
@@ -465,7 +465,7 @@ sub create_okcancel {
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new_from_stock($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
     my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
-				       if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
+                                           if_(!$::Wizard_no_previous, $b2), $b1) : ($b2, $b1);
     my @l2 = map { gtksignal_connect(Gtk2::Button->new_from_stock($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { gtksignal_connect(Gtk2::Button->new_from_stock($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
 
