@@ -25,6 +25,7 @@ my $in = vnew interactive('su');
 undef $::Plug;
 begin:
 my ($mouse) = mouse::detect() unless $::noauto;
+my $time_tag2;
 
 $::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
@@ -41,7 +42,8 @@ if (!$mouse || !$::auto) {
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
-    $name or $::isEmbedded ? do { kill(USR1, $::CCPID), goto begin } : $in->exit(0);
+    Gtk->timeout_remove($time_tag2) if $::isEmbedded  && ref($in) =~ /gtk/;
+    $name or $::isEmbedded ? do { kill(USR1, $::CCPID); goto begin } : $in->exit(0);
     $mouse = mouse::fullname2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
@@ -122,23 +124,15 @@ sub test_mouse {
 			       $expose2 = 1;
 			   });
     $darea->signal_connect(expose_event => sub { $expose = 1 });
-    my $time_tag = Gtk->timeout_add(100, sub {
+    $time_tag2 = Gtk->timeout_add(100, sub {
 					$expose && $expose2 or return 1;
-					print "PLOP\n";
 					$expose = 0;
 					$draw_rect->(1, 0, [ 0, 0, $width, $height]);
-					$draw_text->(_("Please test the mouse"), 2 * $bh - 20);
+					$draw_text->(_("Test the mouse here."), 2 * $bh - 20);
 					$draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
 					$draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 30) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
 					$paintButton->($_, 0) foreach 0..2;
 					$expose = 0;
 					1;
 				    });
-    $hbox->show_all;
-    Gtk->main_iteration while Gtk->events_pending;
-
-#    $w->{cancel}->grab_focus;
-#    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
-#    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
-#    $w->main;
 }
