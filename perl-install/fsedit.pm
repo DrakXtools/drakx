@@ -482,7 +482,7 @@ sub suggest_part {
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type} if !(isTrueFS($best) && isTrueFS($part));
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
-    foreach ('options', 'lv_name') {
+    foreach ('options', 'lv_name', 'encrypt_key') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
     1;
