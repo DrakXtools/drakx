@@ -53,7 +53,7 @@ static int insmod_archived_file(const char * mod_name, char * options)
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
 		log_message("file-not-found-in-archive %s", module_name);
-		return -1;
+		return -2;
 	}
 	if (i != 0)
 		return -1;
@@ -294,7 +294,7 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 		}
 #endif
 	} else
-		log_message("warning, insmod failed (%s %s)", mod_name, options);
+		log_message("warning, insmod failed (%s %s) (%d)", mod_name, options, i);
 	
 	return i;
 

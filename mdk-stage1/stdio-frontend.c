@@ -46,7 +46,7 @@ void finish_frontend(void)
 static void get_any_response(void)
 {
 	unsigned char t;
-	printf(" (press <enter> to proceed)");
+	printf("\n\t(press <enter> to proceed)");
 	fflush(stdout);
 	read(0, &t, 1);
 	fcntl(0, F_SETFL, O_NONBLOCK);

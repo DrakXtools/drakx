@@ -61,7 +61,7 @@ struct media_info {
 
 static void warning_insmod_failed(void)
 {
-	error_message("Warning, installation of driver failed.");
+	error_message("Warning, installation of driver failed. (please include msg from <Alt-F3> for bugreports)");
 }
 
 #ifndef DISABLE_NETWORK
@@ -149,7 +149,7 @@ static void probe_that_type(enum driver_type type)
 
 		while (1) {
 			int i, garb, vendor, device;
-		
+
 			if (!fgets(buf, sizeof(buf), f)) break;
 		
 			sscanf(buf, "%x %x", &garb, &vendor);
@@ -158,15 +158,15 @@ static void probe_that_type(enum driver_type type)
  
 			for (i = 0; i < len; i++) {
 				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-					log_message("PCI: found suggestion for %s (%s)", pcidb[i].name, pcidb[i].module);
+					log_message("PCI: device %x %x is \"%s\" (%s)", vendor, device, pcidb[i].name, pcidb[i].module);
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
 						wait_message("Installing %s", pcidb[i].name);
 						garb = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
 						remove_wait_message();
-						if (garb)
-							warning_insmod_failed();
+						if (garb && !(IS_AUTOMATIC && garb == -2))
+								warning_insmod_failed();
 					}
 #endif
 #ifndef DISABLE_NETWORK
@@ -174,8 +174,9 @@ static void probe_that_type(enum driver_type type)
 						/* insmod is quick, let's use the info message */
 						info_message("Found %s", pcidb[i].name);
 						prepare_intf_descr(pcidb[i].name);
-						if (my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL))
-							warning_insmod_failed();
+						garb = my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL);
+						if (garb && !(IS_AUTOMATIC && garb == -2))
+								warning_insmod_failed();
 						if (intf_descr_for_discover) /* for modules providing more than one net intf */
 							net_discovered_interface(NULL);
 					}
