@@ -90,12 +90,14 @@ sub setPackages {
 
     pkgs::getDeps($o->{packages});
 
-    $o->{compss} = pkgs::readCompss($o->{packages});
+    $o->{compss}     = pkgs::readCompss    ($o->{packages});
+    $o->{compssList} = pkgs::readCompssList($o->{packages});
     push @{$o->{base}}, "kernel-smp" if smp::detect();
 
     $o->{packages}{$_}{base} = 1 foreach @{$o->{base}};
 
-    pkgs::setCompssSelected($o->{compss}, $o->{packages}, $o->{installClass}, $o->{lang});
+    pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
+    pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages}, $size, $o->{installClass}, $o->{lang});
 }
 
 sub addToBeDone(&$) {

@@ -68,7 +68,7 @@ gendepslist: %: %.cc
 	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
 
 depslist: gendepslist
-	./gendepslist $(ROOTDEST)/Mandrake/base/depslist /tmp/rhimage/Mandrake/RPMS/*.rpm
+	./gendepslist $(ROOTDEST)/Mandrake/base/depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
 
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done

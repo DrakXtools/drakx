@@ -24,10 +24,7 @@ sub Package {
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
     $p->{selected} = -1; # selected by user
-    unless ($p->{deps}) {
-	1;
-    }
-    my @l = @{$p->{deps}};
+    my @l = @{$p->{deps} || die "missing deps file"};
     while (@l) {
 	my $n = shift @l;
 	$n =~ /|/ and $n = first(split '\|', $n); #TODO better handling of choice
@@ -147,51 +144,82 @@ sub getDeps($) {
 
 sub readCompss($) {
     my ($packages) = @_;
-    my (@compss, $ps, $category);
+    my (@compss, $ps);
 
     my $f = install_any::getFile("compss") or die "can't find compss";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
-	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or die "bad line in compss: $_";
+	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or log::l("bad line in compss: $_"), next;
 
 	if ($name =~ /(.*):$/) {
-	    push @compss, $category if $category;
 	    $ps = [];
-	    $category = { options => $options, name => $1, packages => $ps };
+	    push @compss, { options => $options, name => $1, packages => $ps };
 	} else {
 	    my $p = $packages->{$name} or log::l("unknown package $name (in compss)"), next;
 	    $p->{options} = $options;
 	    push @$ps, $p;
 	}
     }
-    [ @compss, $category ];
+    \@compss;
 }
 
-sub setCompssSelected($$$$) {
-    my ($compss, $packages, $install_class, $lang) = @_;
+sub readCompssList($) {
+    my ($packages) = @_;
+    my ($list, %compssList);
+
+    my $f = install_any::getFile("compssList") or die "can't find compssList";
+    foreach (<$f>) {
+	/^\s*$/ || /^#/ and next;
+
+	if (/(.*):$/) {
+	    $compssList{$1} = $list = [];
+	} else {
+	    my $p = $packages->{$_} or log::l("unknown package $_ (in compss)"), next;	    
+	    push @$list, $p;
+	}
+    }
+    \%compssList;
+}
+
+sub verif_lang($$) {
+    local $_ = shift;
+    my $lang = shift;
+    local $SIG{__DIE__} = 'none';
+    /-([^-]*)$/ && ($1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@);
+}
+
+sub setShowFromCompss($$$) {
+    my ($compss, $install_class, $lang) = @_;
 
     my $l = substr($install_class, 0, 1);
-    my $L = uc $l;
-
-    my $verif_lang = sub {
-	local $SIG{__DIE__} = 'none';
-	$_[0] =~ /-([^-]*)$/;
-	$1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
-    };
 
     foreach my $c (@$compss) {
 	$c->{show} = bool($c->{options} =~ /($l|\*)/);
-	my $nb = 0;
 	foreach my $p (@{$c->{packages}}) {
 	    local $_ = $p->{options};
-	    $p->{show} = ! (/$L/);
-
-	    &select($packages, $p, $p->{base}), $nb++ 
-	      if /$l|\*/ && (!/l/ || &$verif_lang($p->{name})) ||
-		 $p->{base};
+	    $p->{show} = /$l|\*/ && (!/l/ || verif_lang($p->{name}, $lang));
 	}
-	$c->{selected} = $nb;
+    }
+}
+
+sub setSelectedFromCompssList($$$$$) {
+    my ($compssList, $packages, $size, $install_class, $lang) = @_;
+    
+    my $l = $compssList->{$install_class} or log::l("no $_ entry in compssList"), return;
+    foreach (@$l) {
+	local $_ = $_->{options};
+	/l/ && !verif_lang($_->{name}, $lang) and next;
+
+	&select($packages, $_);
+
+	my $nb = 0; foreach (values %$packages) {
+	    $nb += $_->{size} if $_->{selected};
+	}
+	if ($nb > $size) {
+	    unselect($packages, $_);
+	    last;
+	}
     }
 }
 

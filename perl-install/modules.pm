@@ -225,14 +225,14 @@ sub text2driver($) {
 }
 
 
-sub load($;$) {
+sub load($;$@) {
     my ($name, $type, @options) = @_;
 
     $conf{$name}{loaded} and return;
 
     $type ||= $drivers{$name}{type};
 
-    load($_, 'prereq', $minor) foreach @{$deps{$name}};
+    load($_, 'prereq') foreach @{$deps{$name}};
     load_raw($name, @options);
 }
 
