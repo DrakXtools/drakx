@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 2mdk
+Release: 3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-3mdk
+- drakconnect: fix empty vci/vpi paremeters when speetouch firmware
+  wasn't provided
+- logdrake: fix title when run from mcc (#8111)
+
 * Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-2mdk
 - drakboot/diskdrake updates regarding partition renumbering (pixel)
 - drakconnect:
