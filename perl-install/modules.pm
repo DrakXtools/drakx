@@ -159,91 +159,10 @@ sub probe_category {
 #-###############################################################################
 #- modules.conf functions
 #-###############################################################################
-
-sub read_conf {
-    my ($file) = @_;
-    my %c;
-
-    foreach (cat_($file)) {
-	next if /^\s*#/;
-	s/#.*$//;
-
-	s/\b(snd-card-)/snd-/g;
-	s/\b(snd-via686|snd-via8233)\b/snd-via82xx/g;
-
-	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3) or next;
-	$val =~ s/\s+$//;
-
-	if ($type eq 'probeall') {
-	    $val = [ split ' ', $val ];
-	}
-
-	$c{$module}{$type} = $val;
-    }
-    #- cheating here: not handling aliases of aliases
-    while (my ($_k, $v) = each %c) {
-	if (my $a = $v->{alias}) {
-	    local $c{$a}{alias};
-	    delete $v->{probeall};
-	    add2hash($c{$a}, $v);
-	}
-    }
-    #- convert old aliases to new probeall
-    foreach my $name ('scsi_hostadapter', 'usb-interface') {
-	my @old_aliases = 
-	  map { $_->[0] } sort { $a->[1] <=> $b->[1] } 
-	  map { if_(/^$name(\d*)/ && $c{$_}{alias}, [ $_, $1 || 0 ]) } keys %c;
-	foreach my $alias (@old_aliases) {
-	    push @{$c{$name}{probeall} ||= []}, delete $c{$alias}{alias};
-	}
-    }
-    \%c;
-}
-
-sub write_conf {
-    my ($conf) = @_;
-    my $file = "$::prefix/etc/modules.conf";
-    rename "$::prefix/etc/conf.modules", $file; #- make the switch to new name if needed
-
-    #- Substitute new aliases in modules.conf (if config has changed)
-    substInFile {
-	my ($type, $module, $val) = split(/\s+/, chomp_($_), 3);
-	if ($type eq 'post-install' && $module eq 'supermount') {	    
-	    #- remove the post-install supermount stuff.
-	    $_ = '';
-	} elsif ($type eq 'alias' && $module =~ /scsi_hostadapter|usb-interface/) {
-	    #- remove old aliases which are replaced by probeall
-	    $_ = '';
-	} elsif ($type eq 'above' && !defined $conf->{$module}{above}) { #TODO
-	    $_ = '';
-	} elsif ($type eq 'alias' && !defined $conf->{$module}{alias}) { #TODO
-	    $_ = '';
-	} elsif ($conf->{$module}{$type} && $conf->{$module}{$type} ne $val) { #TODO
-	    my $v = join(' ', uniq(deref($conf->{$module}{$type}))); #TODO
-	    $_ = "$type $module $v\n";
-	}
-    } $file;
-
-    my $written = read_conf($file);
-
-    open(my $F, ">> $file") or die("cannot write module config file $file: $!\n");
-    while (my ($mod, $h) = each %$conf) { #TODO
-	while (my ($type, $v) = each %$h) {
-	    my $v2 = join(' ', uniq(deref($v)));
-	    print $F "$type $mod $v2\n" 
-	      if $v2 && !$written->{$mod}{$type};
-	}
-    }
-    #- use module-init-tools script for the moment
-    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$::prefix/etc/modprobe.conf";
-
-    write_preload_conf($conf);
-}
-
 sub write_preload_conf {
     my ($conf) = @_;
     my @l;
-    push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf->get_probeall('scsi_hostadapter'));
+    push @l, 'scsi_hostadapter' if $conf->get_probeall('scsi_hostadapter');
     push @l, intersection([ qw(bttv cx8800 saa7134) ],
 			  [ map { $_->{driver} } detect_devices::probeall() ]);
     my @l_26 = @l;

@@ -6,34 +6,60 @@ use common;
 our @ISA = qw(modules::any_conf);
 
 
+sub file { '/etc/modprobe.conf' }
+sub handled_fields { qw(alias options install remove) }
+
 sub get_above {
-    my ($conf, $name) = @_;
-    after_modules($name, $conf->{$name}{install});
+    my ($conf, $module) = @_;
+
+    my (undef, $after) = parse_non_virtual($module, $conf->{$module}{install}) or return;
+    my ($l, $_other_cmds) = partition_modprobes($after);
+    join(' ', @$l);
 }
 sub set_above {
-    my ($conf, $name, $modules) = @_;
-    #TODO
+    my ($conf, $module, $o_modules) = @_;
+
+    { #- first add to "install" command
+	my ($before, $after) = parse_non_virtual($module, $conf->{$module}{install});
+	my ($_previous_modules, $other_cmds) = partition_modprobes($after || '');
+	$after = join('; ', @$other_cmds, map { "/sbin/modprobe $_" } split(' ', $o_modules || ''));
+	$conf->{$module}{install} = unparse_non_virtual($module, '--ignore-install', $before, $after);
+    }
+    { #- then to "remove" command
+	my ($before, $after) = parse_non_virtual($module, $conf->{$module}{remove});
+	my ($_previous_modules, $other_cmds) = partition_modprobes($before || '');
+	$before = join('; ', @$other_cmds, map { "/sbin/modprobe -r $_" } split(' ', $o_modules || ''));
+	$conf->{$module}{remove} = unparse_non_virtual($module, '-r --ignore-remove', $before, $after);
+    }
 }
 
-sub get_probeall {
-    my ($conf, $alias) = @_;
-    #TODO
-}
-sub add_probeall {
-    my ($conf, $alias, $module) = @_;
+sub read {
+    my ($type, $o_file) = @_;
 
-    #TODO
-    my $l = $conf->{$alias}{probeall} ||= [];
-    @$l = uniq(@$l, $module);
-    log::l("setting probeall $alias to @$l");
-}
-sub remove_probeall {
-    my ($conf, $alias, $module) = @_;
+    my $file = $o_file || do {
+	my $f = $::prefix . file();
+	if (!-e $f && -e "$::prefix/etc/modules.conf") {
+	    #- use module-init-tools script
+	    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", file());
+	}
+	$f;
+    };
 
-    #TODO
-    my $l = $conf->{$alias}{probeall} ||= [];
-    @$l = grep { $_ ne $module } @$l;
-    log::l("setting probeall $alias to @$l");
+    my $conf = modules::any_conf::read($type, $file);
+
+    extract_probeall_field($conf);
+
+    $conf;
+}
+
+sub write {
+    my ($conf, $o_file) = @_;
+
+    remove_probeall_field($conf);
+
+    my $_b = before_leaving { extract_probeall_field($conf) };
+
+    modules::any_conf::write($conf, $o_file);
 }
 
 
@@ -45,7 +71,7 @@ sub remove_braces {
     $s;
 }
 
-sub non_virtual {
+sub parse_non_virtual {
     my ($module, $s) = @_;
     my ($before, $options, $after) = 
       $s =~ m!^(?:(.*);)?
@@ -60,16 +86,32 @@ sub non_virtual {
     $before, $after;
 }
 
-sub after_modules {
-    my ($module, $s) = @_;
-    my (undef, $after) = non_virtual($module, $s) or return;
-    
+sub unparse_non_virtual {
+    my ($module, $mode, $before, $after) = @_;
+    ($before ? "$before; " : '')
+      . "/sbin/modprobe --first-time $mode $module" 
+	. ($after ? " && { $after; /bin/true; }" : '');    
 }
 
-sub probeall {
+sub partition_modprobes {
+    my ($s) = @_;
+
+    my (@modprobes, @other_cmds);
+    my @l = split(/\s*;\s*/, $s);
+    foreach (@l) {
+	if (m!^(?:/sbin/)?modprobe\s+(?:-r\s+)?(\S+)$!) {
+	    push @modprobes, $1;
+	} else {
+	    push @other_cmds, $1;
+	}
+    }
+    \@modprobes, \@other_cmds;
+}
+
+sub parse_for_probeall {
     my ($module, $s) = @_;
 
-    non_virtual($module, $s) and return;
+    parse_non_virtual($module, $s) and return;
     if ($s =~ /[{&|]/) {
 	log::l("weird install line in modprobe.conf for $module: $s");
 	return;
@@ -78,30 +120,30 @@ sub probeall {
 
     $s =~ s!\s*;\s*/bin/true$!!;
 
-    my @l = split(/\s*;\s*/, $s);
+    my ($l, $other_cmds) = partition_modprobes($s);
 
-    [ map {
-	if (m!^(?:/sbin/)?modprobe\s+(\S+)$!) {
-	    $1
-	} else {
-	    log::l("weird probeall string $_ (from install $module $s)");
-	    ();
-	}
-    } @l ];
+    @$other_cmds ? undef : $l;
 }
 
-sub parse {
-    my ($type, $module, $s) = @_;
+sub extract_probeall_field {
+    my ($conf) = @_;
 
-    member($type, 'install', 'remove') or return;
+    foreach my $module (keys %$conf) {
+	$conf->{$module}{install} or next;
+	my $l = parse_for_probeall($module, $conf->{$module}{install}) or next;
 
-    if (my ($before, $after) = non_virtual($module, $s)) {
-	[
-	 if_($after, [ "post-$type", $after ]),
-	 if_($before, [ "pre-$type", $before ]),
-	];	  
-    } elsif (my $l = probeall($module, $s)) {
-	[ [ 'probeall', @$l ] ];
+	$conf->{$module}{probeall} = join(' ', @$l);
+	delete $conf->{$module}{install};
+    }
+}
+
+sub remove_probeall_field {
+    my ($conf) = @_;
+
+    foreach my $module (keys %$conf) {
+	my $modules = delete $conf->{$module}{probeall} or next;
+
+	$conf->{$module}{install} = join('; ', (map { "/sbin/modprobe $_" }    split(' ', $modules)), '/bin/true');
     }
 }
 
