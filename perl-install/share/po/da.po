@@ -14,14 +14,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-10-09 15:58+0200\n"
-"PO-Revision-Date: 2000-10-07 13:32+0100\n"
+"POT-Creation-Date: 2000-10-16 13:34+0200\n"
+"PO-Revision-Date: 2000-10-19 17:46+0200\n"
 "Last-Translator: Troels Liebe Bentsen <tlb@iname.com>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO 8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.5.3\n"
+"X-Generator: KBabel 0.5.5\n"
 
 #: ../../Xconfigurator.pm_.c:179
 msgid "Graphic card"
@@ -60,8 +60,7 @@ msgstr ""
 #: ../../Xconfigurator.pm_.c:234 ../../Xconfigurator.pm_.c:257
 #, c-format
 msgid "Your card can have 3D hardware acceleration support with XFree %s."
-msgstr ""
-"Dit kort kan have 3D hardware accelerations-understøttelse med XFree %s."
+msgstr "Dit kort kan have 3D hardware accelerations-understøttelse med XFree %s."
 
 #: ../../Xconfigurator.pm_.c:236 ../../Xconfigurator.pm_.c:259
 #, c-format
@@ -166,8 +165,7 @@ msgstr "Ønsker du at afprøve konfigurationen?"
 
 #: ../../Xconfigurator.pm_.c:431
 msgid "Warning: testing this graphic card may freeze your computer"
-msgstr ""
-"Advarsel: afprøvning af dette grafikkort kan få din maskine til at låse"
+msgstr "Advarsel: afprøvning af dette grafikkort kan få din maskine til at låse"
 
 #: ../../Xconfigurator.pm_.c:434
 msgid "Test of the configuration"
@@ -527,7 +525,7 @@ msgid "Delay before booting default image"
 msgstr "Ventetid før opstart af forvalgt styresystem"
 
 #: ../../any.pm_.c:134 ../../install_steps_interactive.pm_.c:760
-#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:811 ../../netconnect.pm_.c:555
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/adduserdrake_.c:42
 msgid "Password"
@@ -552,8 +550,7 @@ msgid "Bootloader main options"
 msgstr "systemopstarterens hovedindstillinger"
 
 #: ../../any.pm_.c:145
-msgid ""
-"Option ``Restrict command line options'' is of no use without a password"
+msgid "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 "Indstillingen ``Begræns kommandolinie-indstillinger'' er intet værd uden\n"
 "en adgangskode"
@@ -584,7 +581,7 @@ msgid "Add"
 msgstr "Tilføj"
 
 #: ../../any.pm_.c:165 ../../diskdrake.pm_.c:46
-#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:830
+#: ../../install_steps_interactive.pm_.c:805 ../../netconnect.pm_.c:837
 #: ../../printerdrake.pm_.c:352 ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Færdig"
@@ -1216,10 +1213,8 @@ msgstr "Benyt ``Afmontér'' først"
 
 #: ../../diskdrake.pm_.c:425 ../../diskdrake.pm_.c:467
 #, c-format
-msgid ""
-"After changing type of partition %s, all data on this partition will be lost"
-msgstr ""
-"Efter type-ændring af partition %s vil alle data på denne partition gå tabt"
+msgid "After changing type of partition %s, all data on this partition will be lost"
+msgstr "Efter type-ændring af partition %s vil alle data på denne partition gå tabt"
 
 #: ../../diskdrake.pm_.c:437
 msgid "Continue anyway?"
@@ -1267,8 +1262,7 @@ msgstr ""
 #: ../../diskdrake.pm_.c:515
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr ""
-"Efter formatering af partitionen %s vil alle data på denne partition gå tabt"
+msgstr "Efter formatering af partitionen %s vil alle data på denne partition gå tabt"
 
 #: ../../diskdrake.pm_.c:517
 msgid "Formatting"
@@ -1353,7 +1347,9 @@ msgstr ""
 msgid "Choose the new size"
 msgstr "Vælg den nye størrelse"
 
-#: ../../diskdrake.pm_.c:609 ../../install_steps_interactive.pm_.c:518
+#: ../../diskdrake.pm_.c:609 ../../install_steps_graphical.pm_.c:287
+#: ../../install_steps_graphical.pm_.c:334
+#: ../../install_steps_interactive.pm_.c:518
 #: ../../partition_table_raw.pm_.c:101
 msgid "MB"
 msgstr "Mb"
@@ -1508,8 +1504,7 @@ msgid "You don't have any partitions!"
 msgstr "Du har ikke nogen partitioner!"
 
 #: ../../help.pm_.c:9
-msgid ""
-"Please choose your preferred language for installation and system usage."
+msgid "Please choose your preferred language for installation and system usage."
 msgstr "Vælg dit foretrukne sprog til installation- og system-brug."
 
 #: ../../help.pm_.c:12
@@ -2721,7 +2716,6 @@ msgstr ""
 "'SMB/Windows\n"
 "95/98/NT'"
 
-# Mangler
 #: ../../help.pm_.c:521
 msgid ""
 "Please turn on your printer before continuing to let DrakX detect it.\n"
@@ -2747,8 +2741,26 @@ msgid ""
 "     printer location, put it here (you are free to write what\n"
 "     you want, for example \"2nd floor\").\n"
 msgstr ""
+"Tænd venligst din printer inden du fortsætter med at lade DrakX søge efter "
+"dn.\n"
+"\n"
+"   * Printerens navn: Printer spooleren bruger \"lp\" som standard "
+"printernavn. Så du må have en printer der heder \"lp\".\n"
+"     Hvis du kun har én printer, kan du give den mange navne. De skal blot "
+"blot adskilles med en pipe (a \"|\") \n"
+"     Det kan du bruge hvis du vil give printeren et mere sigend navn. Skriv "
+"det først fx \"Min printer|lp\".\n"
+"     Printeren hvis navn(e) indeholder \"lp\", vil blive vrugt som "
+"standard-printer.\n"
+"   * Beskrivelse: dette er valgfrit men det kan være praktisk hvis du har "
+"flere printere tilsluttet til din computer, \n"
+"     eller hvis du tillader andre computere at bruge din printer.\n"
+"\n"
+"\n"
+"   * Placering: Hvis du vil tilføje nogle yderligere oplysninger\n"
+"     om din printer, så kan su skrive det her. Du kan skrive lige\n"
+"     har lyst til (fx \"2. sal\", eller lignende...).\n"
 
-# Mangler
 #: ../../help.pm_.c:542
 msgid ""
 "You need to enter some informations here.\n"
@@ -2782,6 +2794,31 @@ msgid ""
 "     If you want to acces a printer located on NetWare network, select "
 "\"NetWare\".\n"
 msgstr ""
+"   * Køens navn: Printer spooleren bruger \"lp\" som standard printernavn. "
+"Så du må have en printer der heder \"lp\".\n"
+"     Hvis du kun har én printer, kan du give den mange navne. De skal blot "
+"blot adskilles med en pipe (a \"|\") \n"
+"     Det kan du bruge hvis du vil give printeren et mere sigend navn. Skriv "
+"det først fx \"Min printer|lp\".\n"
+"     Printeren hvis navn(e) indeholder \"lp\", vil blive brugt som "
+"standardprinter.\n"
+"\n"
+"\n"
+"   * Spool-bibliotek: Det er i dette bibliotek at print-jobs gemmes. Behold "
+"standard indstillingen hvis du ikke ved hvad du skal bruge.\n"
+"\n"
+"\n"
+"   * Printer-tilslutning: Hvis din printer er fysisk forbundet til din "
+"computer, så vælg \"Local printer\".\n"
+"\n"
+"\n"
+"     Hvis du vil bruge en printer der befinder sig på en anden Microsoft "
+"Windows maskine (eller en Linux maskine med SMB\n"
+"protokol), skal du vælge \"SMB/Windows 95/98/NT\".\n"
+"\n"
+"\n"
+"     Hvis du vil bruge en printer der befinder sig på et NetWare netværk, "
+"skal du vælge \"NetWare\".\n"
 
 #: ../../help.pm_.c:567
 msgid ""
@@ -3298,7 +3335,7 @@ msgstr "Autoinstallerings-diskette"
 msgid "Exit install"
 msgstr "Afslut installation"
 
-#: ../../install_any.pm_.c:584
+#: ../../install_any.pm_.c:575
 msgid "Error reading file $f"
 msgstr "Fejl ved læsning af fil $f"
 
@@ -3334,11 +3371,11 @@ msgstr ""
 "vælg en eksisterende).\n"
 "Vælg så kommandoen \"Monterings-sti\" og sæt den til `/'"
 
-#: ../../install_interactive.pm_.c:46
+#: ../../install_interactive.pm_.c:46 ../../install_steps_graphical.pm_.c:259
 msgid "You must have a swap partition"
 msgstr "Du skal tildele en partition til Swap"
 
-#: ../../install_interactive.pm_.c:47
+#: ../../install_interactive.pm_.c:47 ../../install_steps_graphical.pm_.c:261
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -3554,6 +3591,80 @@ msgstr "Intet tilgængeligt diskettedrev"
 msgid "Entering step `%s'\n"
 msgstr "Går til trin `%s'\n"
 
+#: ../../install_steps_graphical.pm_.c:287
+msgid "Choose the size you want to install"
+msgstr "Vælg den samlede størrelse som din installation må fylde"
+
+#: ../../install_steps_graphical.pm_.c:334
+msgid "Total size: "
+msgstr "Total størrelse: "
+
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:353
+#: ../../standalone/rpmdrake_.c:136
+#, c-format
+msgid "Version: %s\n"
+msgstr "Version: %s\n"
+
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:354
+#: ../../standalone/rpmdrake_.c:137
+#, c-format
+msgid "Size: %d KB\n"
+msgstr "Størrelse: %d KB\n"
+
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:260
+msgid "Choose the packages you want to install"
+msgstr "Vælg pakker som skal installeres"
+
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:263
+msgid "Info"
+msgstr "Info"
+
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:216 ../../standalone/rpmdrake_.c:161
+msgid "Install"
+msgstr "Installér"
+
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Installing"
+msgstr "Installerer"
+
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:472
+msgid "Please wait, "
+msgstr "Vent venligst, "
+
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:474
+msgid "Time remaining "
+msgstr "Resterende tid "
+
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:475
+msgid "Total time "
+msgstr "Total tid "
+
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:484
+#: ../../install_steps_interactive.pm_.c:594
+msgid "Preparing installation"
+msgstr "Forbereder installationen"
+
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:500
+#, c-format
+msgid "Installing package %s"
+msgstr "Installerer pakke %s"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+#: ../../install_steps_gtk.pm_.c:573
+msgid "Go on anyway?"
+msgstr "Fortsæt alligevel?"
+
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:569
+msgid "There was an error ordering packages:"
+msgstr "Der opstod en fejl ved sorteringen af pakkerne:"
+
+#: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:999
+msgid "Use existing configuration for X11?"
+msgstr "Benyt eksisterende konfiguration for X11?"
+
 #: ../../install_steps_gtk.pm_.c:136
 msgid ""
 "Your system is low on resource. You may have some problem installing\n"
@@ -3572,8 +3683,7 @@ msgstr "Vælg venligst en af de følgende installations-måder"
 
 #: ../../install_steps_gtk.pm_.c:215
 #, c-format
-msgid ""
-"The total size for the groups you have selected is approximately %d MB.\n"
+msgid "The total size for the groups you have selected is approximately %d MB.\n"
 msgstr "Den totale størrelse af de grupper du har valg er cirka %d Mb.\n"
 
 #: ../../install_steps_gtk.pm_.c:217
@@ -3608,25 +3718,11 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:228
 msgid "You will be able to choose them more specifically in the next step."
-msgstr ""
-"Du har mulighed for at vælge dem mere præcist i næste installationstrin"
+msgstr "Du har mulighed for at vælge dem mere præcist i næste installationstrin"
 
 #: ../../install_steps_gtk.pm_.c:230
 msgid "Percentage of packages to install"
 msgstr "Procentandel pakker til installation"
-
-#: ../../install_steps_gtk.pm_.c:260
-msgid "Choose the packages you want to install"
-msgstr "Vælg pakker som skal installeres"
-
-#: ../../install_steps_gtk.pm_.c:263
-msgid "Info"
-msgstr "Info"
-
-#: ../../install_steps_gtk.pm_.c:268 ../../install_steps_interactive.pm_.c:216
-#: ../../standalone/rpmdrake_.c:161
-msgid "Install"
-msgstr "Installér"
 
 #: ../../install_steps_gtk.pm_.c:272
 msgid "Automatic dependencies"
@@ -3653,16 +3749,6 @@ msgstr "Dårlig pakke"
 msgid "Name: %s\n"
 msgstr "Navn: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:353 ../../standalone/rpmdrake_.c:136
-#, c-format
-msgid "Version: %s\n"
-msgstr "Version: %s\n"
-
-#: ../../install_steps_gtk.pm_.c:354 ../../standalone/rpmdrake_.c:137
-#, c-format
-msgid "Size: %d KB\n"
-msgstr "Størrelse: %d KB\n"
-
 #: ../../install_steps_gtk.pm_.c:355
 #, c-format
 msgid "Importance: %s\n"
@@ -3674,8 +3760,7 @@ msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d Mb"
 
 #: ../../install_steps_gtk.pm_.c:382
-msgid ""
-"You can't select this package as there is not enough space left to install it"
+msgid "You can't select this package as there is not enough space left to install it"
 msgstr ""
 "Du kan ikke vælge denne pakke, da der ikke er nok plads tilbage til at "
 "installere den"
@@ -3712,25 +3797,9 @@ msgstr ""
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Du kan ikke fravælge denne pakke. Den skal opgraderes"
 
-#: ../../install_steps_gtk.pm_.c:466 ../../install_steps_interactive.pm_.c:594
-msgid "Installing"
-msgstr "Installerer"
-
 #: ../../install_steps_gtk.pm_.c:469
 msgid "Estimating"
 msgstr "Beregner"
-
-#: ../../install_steps_gtk.pm_.c:472
-msgid "Please wait, "
-msgstr "Vent venligst, "
-
-#: ../../install_steps_gtk.pm_.c:474
-msgid "Time remaining "
-msgstr "Resterende tid "
-
-#: ../../install_steps_gtk.pm_.c:475
-msgid "Total time "
-msgstr "Total tid "
 
 #: ../../install_steps_gtk.pm_.c:481 ../../interactive.pm_.c:86
 #: ../../interactive.pm_.c:249 ../../interactive_newt.pm_.c:51
@@ -3739,21 +3808,11 @@ msgstr "Total tid "
 msgid "Cancel"
 msgstr "Annullér"
 
-#: ../../install_steps_gtk.pm_.c:484 ../../install_steps_interactive.pm_.c:594
-msgid "Preparing installation"
-msgstr "Forbereder installationen"
-
 #: ../../install_steps_gtk.pm_.c:495
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:500
-#, c-format
-msgid "Installing package %s"
-msgstr "Installerer pakke %s"
-
-# Mangler
 #: ../../install_steps_gtk.pm_.c:531
 msgid ""
 "\n"
@@ -3785,6 +3844,36 @@ msgid ""
 "respective authors and are protected by intellectual property and \n"
 "copyright laws applicable to software programs.\n"
 msgstr ""
+"\n"
+"Advarsel\n"
+"\n"
+"Læs venligst betingelserne nedenfor omhyggeligt. Hvis du ikke er enig\n"
+"i alt der står, må du ikke installere indholdet af CD´en. Tryk på 'nægt' \n"
+"og fortsætte installationen uden dette medie.\n"
+"\n"
+"\n"
+"Visse komponenter på den næste CD er ikke omfattet af GPL licensen eller \n"
+"andre lignende licenser. Hver enkelt komponent er derfor omfattet af \n"
+"de betingelser der er beskrevet i dets egen licens. \n"
+"Læs derfor venligst omhyggeligt betingelserne og følg de opstillede "
+"betingelser\n"
+"når du bruger og/eller genudgiver komponenterne.\n"
+"Sådanne licenser forebygger normalt kopiering (sikkerheds-kopiering "
+"undtaget) \n"
+"genudgivelse, at folk skiller programmet ad, eller ændre i komponenterne.\n"
+"Et hvert brud på licensen vil øjeblikkeligt fratage dig rettighederne "
+"beskrevet\n"
+"i den specifikke licens. Med mindre licensen giver dig lov hertil. Det vil \n"
+"normalt ikke være tilladt at installere programmet på mere end en computer, "
+"\n"
+"eller bruge det på et netværk. Hvis du er i tvivl, så kontakt venligst "
+"producenten\n"
+"af komponenten direkte.\n"
+"\n"
+"\n"
+"Alle rettigheder til komponenterne på CD´en, tilfalder deres respektive "
+"skabere\n"
+"og er beskyttet af Lov om Ophavsret.\n"
 
 #: ../../install_steps_gtk.pm_.c:559 ../../install_steps_interactive.pm_.c:147
 msgid "Accept"
@@ -3809,14 +3898,6 @@ msgstr ""
 msgid "Refuse"
 msgstr "Nægt"
 
-#: ../../install_steps_gtk.pm_.c:569 ../../install_steps_gtk.pm_.c:573
-msgid "Go on anyway?"
-msgstr "Fortsæt alligevel?"
-
-#: ../../install_steps_gtk.pm_.c:569
-msgid "There was an error ordering packages:"
-msgstr "Der opstod en fejl ved sorteringen af pakkerne:"
-
 #: ../../install_steps_gtk.pm_.c:573
 msgid "There was an error installing packages:"
 msgstr "Der opstod en fejl ved installeringen af pakkerne:"
@@ -3829,7 +3910,6 @@ msgstr "Der er opstået en fejl"
 msgid "Please, choose a language to use."
 msgstr "Vælg venligst det sprog, du vil bruge."
 
-# Mangler
 #: ../../install_steps_interactive.pm_.c:70
 msgid "License agreement"
 msgstr "Licensaftale"
@@ -3955,6 +4035,107 @@ msgid ""
 "Paris - France.\n"
 "For any question on this document, please contact MandrakeSoft S.A.  \n"
 msgstr ""
+"Intruduktion\n"
+"\n"
+"Operativ systemet og de forskellige komponenter tilgængelig i "
+"Linux-Mandrake distributionen \n"
+"ved her efter blive kaldt \"Software produkter\". Software produkterne "
+"inkludere, men ikke begrænset til: værktøjs sættet, metoder, regler og dokumentation.\n"
+"\n"
+"\n"
+"1. Lisens aftale\n"
+"\n"
+"Læs venligst dette dokument. Dette dokument er er en lisens aftale"
+"mellem dig og  \n"
+"MandrakeSoft S.A., som gælder til disse Software produkter.\n"
+"Ved at installere, kopiere eller bruge disse Software produkter, akseptere du "
+"indirekte \n"
+"og fuldt ud denne lisens aftale med dens betingelser og regler.\n"
+"Hvis du er uenig i hvilken som helst del af denne lisens, mister du rette til at "
+"installere, kopiere eller bruge \n"
+"disse Software produkter. \n"
+"Hvilken som helst forsøg på at installere, kopiere eller bruge disse Software produkter på"
+"en måde som ikke er i overensstemmelse \n"
+"med betingelserne og reglerne i denne lisens er ulovlig og vil betyde du miste "
+"dine rettighedder under denne \n"
+"lisens, Hvis dette sker skal du med samme ødelægge all"
+"kopiere af disse \n"
+"Software produkter.\n"
+"\n"
+"\n"
+"2. Begrænset garanti\n"
+"\n"
+"Disse Software produkter og dokumenter leveres \"som de er\", "
+"uden nogen form for garanti \n"
+"til hvad loven tillader.\n"
+"MandrakeSoft S.A. vil under ingen omstendighedder og til hvad lov tillader, "
+"være ansvarlig for specielle, \n"
+"tilfældige, direkte eller indirekte tab af nogen art (inkluderende unden "
+"begrænsninger, skader ved tab af \n"
+"forretning, forstyelser af forretning, finansielle tab, advokat bistand, erstatninger"
+"som resultat af en retssag \n"
+"eller nogen anden form for tab.) opstået under brugen af disse "
+"Software produkter eller \n"
+"mangel på samme, selv hvis MandrakeSoft S.A. er blevet gjort opmærksom på "
+"mulighedder ved sådanne \n"
+"skader.\n"
+"\n"
+"BEGRÆNSET GARANTI MED HENSYN TIL REGLER OM BRUG AF FORBUDT SOFTWARE I"
+"NOGEN LANDE\n"
+"\n"
+"Til hvad loven tillader, vil MandrakeSoft S.A. eller sine distribuere under ingen, "
+"omstendighedder, være \n"
+"ansvarlig for tilfældige, direkte eller indirekte tab af nogen art (inkluderende unden "
+"begrænsninger, skader ved tab af \n"
+"forretning, forstyelser af forretning, finansielle tab, advokat bistand, erstatninger"
+"som resultat af en retssag \n"
+"eller nogen anden form for tab.) opstået under hentning eller brugen af disse software."
+"fra Linux-Mandrake websider\n"
+"som er forbudt i nogen lande ved lov.\n"
+"Denne begrænset garenti gælder, min ikke begrænset til, de stærk krypterings "
+"komponenter \n"
+"inkluderet i disse Software produkter.\n"
+"\n"
+"\n"
+"3. GPL licensen og relaterede licenser. \n"
+"\n"
+"Dette software består af komponenter lavet af forskellige personer.\n"
+"De fleste af disse komponenter bliver regeret under vilkårene og aftalerne i"
+"GNU General Public License, herefter \"GPL\", eller lignende licenser."
+"De fleste af disse licenser tillader dig at bruge, kopiere,"
+"tilpasse eller redistribuere komponenterne de dækker. Læs venligst vilkårene\n"
+"og aftalerne i licensaftalen for hvert komponent før du bruger det."
+"Ved spørgsmål ang. et komponent, bedes adresseret til komponentets forfatter og ikke"
+"til MandrakeSoft.\n"
+"Programmerne udviklet af MandrakeSoft S.A. bliver regeret af GPL licensen."
+"Dokumentationen skrevet af MandrakeSoft S.A. bliver regeret af en specifik licens."
+"Referer venligst til dokumentationen for yderligere detaljer.\n"
+"\n"
+"\n"
+"4. Intellektuelle rettigheder \n"
+"\n"
+"Alle rettigheder til komponenterne i software produktet tilhører deres respektive"
+"forfattere, og er\n"
+"beskyttet af intellektuelle rettigheds- og copyrightlove, gældende for software"
+"programmer.\n"
+"MandrakeSoft S.A. reserverer deres rettigheder til at ændre eller tilpasse software"
+"produkterne, helt eller delvist, med alle midler og til alle formål.\n"
+"\"Mandrake\", \"Linux-Mandrake\" samt de tilhørende logoer er varemærker for"
+"MandrakeSoft S.A.  \n"
+"\n"
+"\n"
+"5. Gældende love \n"
+"\n"
+"Hvis dele af denne aftale bliver kendt ugyldig, ulovlig eller ubrugelig ved en"
+"domstolsafgørelse, \n"
+"vil de dele blive ekskluderet fra denne kontrakt. Du vil forblive"
+"bundet af de andre gældende dele af\n"
+"aftalen.\n"
+"Vilkårene og aftalerne i denne licens er styret under fransk lov.\n"
+"Alle uenigheder vedr. vilkårene i denne licens vil helst blive løst udenfor domstolene."
+"Som en sidste udvej, vil uenighederne blive håndteret ved den rette domstol i"
+"Paris, Frankrig\n"
+"Ved spørgsmål omkring dette dokument, kontakt venligst MandrakeSoft S.A.  \n"
 
 #: ../../install_steps_interactive.pm_.c:154
 #: ../../standalone/keyboarddrake_.c:21
@@ -4148,8 +4329,7 @@ msgstr "Leder efter pakker som skal opgraderes"
 
 #: ../../install_steps_interactive.pm_.c:433
 #, c-format
-msgid ""
-"Your system has not enough space left for installation or upgrade (%d > %d)"
+msgid "Your system has not enough space left for installation or upgrade (%d > %d)"
 msgstr ""
 "Dit system har ikke nok plads tilbage til en installation eller opgradering "
 "(%d > %d)"
@@ -4408,8 +4588,7 @@ msgstr "Indtast venligst et brugernavn"
 
 #: ../../install_steps_interactive.pm_.c:828
 #: ../../standalone/adduserdrake_.c:59
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgid "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brugernavnet må kun indeholde små bogstaver, tal, `-' og `_'"
 
 #: ../../install_steps_interactive.pm_.c:829
@@ -4613,14 +4792,9 @@ msgstr ""
 "Vær forsigtig, NumLock aktiveret forårsager at en masse tasteanslag\n"
 "giver cifre i stedet for normale bogstaver (fx tastning af 'p' giver '6')"
 
-#: ../../install_steps_interactive.pm_.c:999
-msgid "Use existing configuration for X11?"
-msgstr "Benyt eksisterende konfiguration for X11?"
-
 #: ../../install_steps_interactive.pm_.c:1028
 msgid "Do you want to generate an auto install floppy for linux replication?"
-msgstr ""
-"Ønsker du at lave en auto-installations diskette til linux genskabelse?"
+msgstr "Ønsker du at lave en auto-installations diskette til linux genskabelse?"
 
 #: ../../install_steps_interactive.pm_.c:1030
 #, c-format
@@ -4642,7 +4816,6 @@ msgstr ""
 "\n"
 "Er du sikker på du ønsker du at lukke nu?"
 
-# Mangler
 #: ../../install_steps_interactive.pm_.c:1109
 msgid ""
 "Congratulations, installation is complete.\n"
@@ -4655,6 +4828,14 @@ msgid ""
 "Information on configuring your system is available in the post\n"
 "install chapter of the Official Linux-Mandrake User's Guide."
 msgstr ""
+"Tillykke, installationen er færdig.\n"
+"Fjern boot-mediet og tryk enter for at genstarte.\n"
+"\n"
+"For information om opdateringer til denne udgivelse af Linux-\n"
+"Mandrake, kontakt Errata på http://www.linux-mandrake.com/.\n"
+"\n"
+"Information om konfigurering af systemet kan findes i den\n"
+"Officielle Linux-Mandrake Bruger Guide."
 
 #: ../../install_steps_newt.pm_.c:22
 #, c-format
@@ -4662,10 +4843,8 @@ msgid "Linux-Mandrake Installation %s"
 msgstr "Linux-Mandrake Installation %s"
 
 #: ../../install_steps_newt.pm_.c:33
-msgid ""
-"  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
-msgstr ""
-"  <Tab>/<Alt-Tab> mellem elementer  | <Space> vælger  | <F12> næste skærm "
+msgid "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
+msgstr "  <Tab>/<Alt-Tab> mellem elementer  | <Space> vælger  | <F12> næste skærm "
 
 #: ../../interactive.pm_.c:273
 msgid "Please wait"
@@ -4696,239 +4875,239 @@ msgstr "Dit valg? (standard %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Dit valg? (standard %s  skriv `none' for ingenting) "
 
-#: ../../keyboard.pm_.c:104 ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:135
 msgid "Czech"
 msgstr "Tjekkisk"
 
-#: ../../keyboard.pm_.c:105 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:136
 msgid "German"
 msgstr "Tysk"
 
-#: ../../keyboard.pm_.c:106
+#: ../../keyboard.pm_.c:107
 msgid "Dvorak"
 msgstr "Dvorak"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
 msgid "Spanish"
 msgstr "Spansk"
 
-#: ../../keyboard.pm_.c:108 ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:143
 msgid "Finnish"
 msgstr "Finsk"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:144
 msgid "French"
 msgstr "Fransk"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:164
 msgid "Norwegian"
 msgstr "Norsk"
 
-#: ../../keyboard.pm_.c:111
+#: ../../keyboard.pm_.c:112
 msgid "Polish"
 msgstr "Polsk"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:169
 msgid "Russian"
 msgstr "Russisk"
 
-#: ../../keyboard.pm_.c:113 ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:178
 msgid "UK keyboard"
 msgstr "Britisk"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:117 ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:118 ../../keyboard.pm_.c:179
 msgid "US keyboard"
 msgstr "Amerikansk"
 
-#: ../../keyboard.pm_.c:121
+#: ../../keyboard.pm_.c:122
 msgid "Armenian (old)"
 msgstr "Armensk (gammel)"
 
-#: ../../keyboard.pm_.c:122
+#: ../../keyboard.pm_.c:123
 msgid "Armenian (typewriter)"
 msgstr "Armensk (skrivemaskine)"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:124
 msgid "Armenian (phonetic)"
 msgstr "Armensk (fonetisk)"
 
-#: ../../keyboard.pm_.c:126
+#: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (latin)"
 msgstr "Azerbaidiansk (latin)"
 
-#: ../../keyboard.pm_.c:127
+#: ../../keyboard.pm_.c:128
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Azerbaidiansk (kyrillisk)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:129
 msgid "Belgian"
 msgstr "Belgisk"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:130
 msgid "Bulgarian"
 msgstr "Bulgarsk"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:131
 msgid "Brazilian (ABNT-2)"
 msgstr "Brasiliansk"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:132
 msgid "Belarusian"
 msgstr "Hviderussisk"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:133
 msgid "Swiss (German layout)"
 msgstr "Schweizisk (Tysk layout)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:134
 msgid "Swiss (French layout)"
 msgstr "Schweizisk (Fransk layout)"
 
-#: ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:137
 msgid "German (no dead keys)"
 msgstr "Tysk (ingen døde taster)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:138
 msgid "Danish"
 msgstr "Dansk"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:139
 msgid "Dvorak (US)"
 msgstr "Dvorak (US)"
 
-#: ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:140
 msgid "Dvorak (Norwegian)"
 msgstr "Dvorak (Norsk)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:141
 msgid "Estonian"
 msgstr "Estisk"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:145
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Georgisk (russisk layout)"
 
-#: ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:146
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Georgisk (Latin layout)"
 
-#: ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:147
 msgid "Greek"
 msgstr "Græsk"
 
-#: ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:148
 msgid "Hungarian"
 msgstr "Ungarsk"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:149
 msgid "Croatian"
 msgstr "Kroatisk"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:150
 msgid "Israeli"
 msgstr "Israelsk"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:151
 msgid "Israeli (Phonetic)"
 msgstr "Israelsk (Fonetisk)"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:152
 msgid "Iranian"
 msgstr "Iransk"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:153
 msgid "Icelandic"
 msgstr "Islandsk"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:154
 msgid "Italian"
 msgstr "Italiensk"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:155
 msgid "Japanese 106 keys"
 msgstr "Japansk 106 taster"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:156
 msgid "Latin American"
 msgstr "Latinamerikansk"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:158
 msgid "Dutch"
 msgstr "Hollandsk"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:159
 msgid "Lithuanian AZERTY (old)"
 msgstr "Litauisk AZERTY (gammel)"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:161
 msgid "Lithuanian AZERTY (new)"
 msgstr "Litauisk AZERTY (ny)"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:162
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Litauisk \"talrække\" QWERTY"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:163
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Litauisk \"fonetisk\" QWERTY"
 
-#: ../../keyboard.pm_.c:163
+#: ../../keyboard.pm_.c:165
 msgid "Polish (qwerty layout)"
 msgstr "Polsk (polsk layout)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:166
 msgid "Polish (qwertz layout)"
 msgstr "Polsk (polsk layout)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:167
 msgid "Portuguese"
 msgstr "Portugisisk"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:168
 msgid "Canadian (Quebec)"
 msgstr "Canadisk (Québec)"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:170
 msgid "Russian (Yawerty)"
 msgstr "Russisk (Yawerty)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:171
 msgid "Swedish"
 msgstr "Svensk"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:172
 msgid "Slovenian"
 msgstr "Slovensk"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:173
 msgid "Slovakian"
 msgstr "Slovakisk"
 
-#: ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:174
 msgid "Thai keyboard"
 msgstr "Thailandsk"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:175
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Tyrkisk (traditionel \"F\" model)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:176
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Tyrkisk (moderne \"Q\" model)"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:177
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:180
 msgid "US keyboard (international)"
 msgstr "Amerikansk (internaltionalt)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:181
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Vietnamesisk \"talrække\" QWERTY"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:182
 msgid "Yugoslavian (latin layout)"
 msgstr "Jugoslavisk (latin layout)"
 
@@ -5053,9 +5232,8 @@ msgid "Testing your connection..."
 msgstr "Tester din forbindelse..."
 
 #: ../../netconnect.pm_.c:106
-#, fuzzy
 msgid "The system is now connected to Internet."
-msgstr "Du er ikke forbundet til internettet nu."
+msgstr "Systemet er ikke forbundet til internettet nu."
 
 #: ../../netconnect.pm_.c:107
 msgid ""
@@ -5232,14 +5410,13 @@ msgid "Choose the network interface"
 msgstr "Vælg netværksgrænsesnit"
 
 #: ../../netconnect.pm_.c:336
-msgid ""
-"Please choose which network adapter you want to use to connect to Internet"
+msgid "Please choose which network adapter you want to use to connect to Internet"
 msgstr ""
 "Vælg venligst hvilken netværksadapter du ønsker at bruge til at lave "
 "forbindelse til internettet med."
 
-#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:623
-#: ../../netconnect.pm_.c:754 ../../standalone/drakgw_.c:217
+#: ../../netconnect.pm_.c:351 ../../netconnect.pm_.c:630
+#: ../../netconnect.pm_.c:761 ../../standalone/drakgw_.c:217
 msgid "Network interface"
 msgstr "Netværksgrænsesnit"
 
@@ -5263,59 +5440,59 @@ msgstr "ADSL Konfiguration"
 msgid "Do you want to start your connection at boot?"
 msgstr "Ønsker du at starte din forbindelse ved opstart?"
 
-#: ../../netconnect.pm_.c:529
+#: ../../netconnect.pm_.c:536
 msgid "Try to find a modem?"
 msgstr "Forsøg at finde et modem?"
 
-#: ../../netconnect.pm_.c:539
+#: ../../netconnect.pm_.c:546
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Angiv venligst hvilken seriel port dit modem er forbundet til."
 
-#: ../../netconnect.pm_.c:544
+#: ../../netconnect.pm_.c:551
 msgid "Dialup options"
 msgstr "Opkaldsindstillinger"
 
-#: ../../netconnect.pm_.c:545
+#: ../../netconnect.pm_.c:552
 msgid "Connection name"
 msgstr "Navn på forbindelsen"
 
-#: ../../netconnect.pm_.c:546
+#: ../../netconnect.pm_.c:553
 msgid "Phone number"
 msgstr "Telefonnummer"
 
-#: ../../netconnect.pm_.c:547
+#: ../../netconnect.pm_.c:554
 msgid "Login ID"
 msgstr "Login id"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Authentication"
 msgstr "Identifikation"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "PAP"
 msgstr "PAP"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Script-based"
 msgstr "Skript-baseret"
 
-#: ../../netconnect.pm_.c:549
+#: ../../netconnect.pm_.c:556
 msgid "Terminal-based"
 msgstr "Terminal-baseret"
 
-#: ../../netconnect.pm_.c:550
+#: ../../netconnect.pm_.c:557
 msgid "Domain name"
 msgstr "Domænenavn"
 
-#: ../../netconnect.pm_.c:552
+#: ../../netconnect.pm_.c:559
 msgid "First DNS Server"
 msgstr "Første DNS-server"
 
-#: ../../netconnect.pm_.c:553
+#: ../../netconnect.pm_.c:560
 msgid "Second DNS Server"
 msgstr "Anden DNS server"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid ""
 "\n"
 "You can connect to Internet or reconfigure your connection."
@@ -5323,7 +5500,7 @@ msgstr ""
 "\n"
 "Du kan lave forbindelse til internettet eller omkonfigurere din forbindelse."
 
-#: ../../netconnect.pm_.c:582 ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:589 ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can reconfigure your connection."
@@ -5331,11 +5508,11 @@ msgstr ""
 "\n"
 "Du kan genkonfigurere din forbindelse"
 
-#: ../../netconnect.pm_.c:582
+#: ../../netconnect.pm_.c:589
 msgid "You are not currently connected to Internet."
 msgstr "Du er ikke forbundet til internettet nu."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid ""
 "\n"
 "You can disconnect or reconfigure your connection."
@@ -5344,95 +5521,93 @@ msgstr ""
 "Du kan lukke forbindelsen til internettet eller genkonfigurere din "
 "forbindelse."
 
-#: ../../netconnect.pm_.c:586
+#: ../../netconnect.pm_.c:593
 msgid "You are currently connected to internet."
 msgstr "Du har forbindelse til internettet nu."
 
-#: ../../netconnect.pm_.c:590
+#: ../../netconnect.pm_.c:597
 msgid "Connect to Internet"
 msgstr "Lav forbindelse til internettet"
 
-#: ../../netconnect.pm_.c:592
+#: ../../netconnect.pm_.c:599
 msgid "Disconnect from Internet"
 msgstr "Luk forbindelse til internettet"
 
-#: ../../netconnect.pm_.c:594
+#: ../../netconnect.pm_.c:601
 msgid "Configure network connection (LAN or Internet)"
 msgstr "Konfigurér netværks forbindelse (LAN eller internet)"
 
-#: ../../netconnect.pm_.c:597
+#: ../../netconnect.pm_.c:604
 msgid "Internet connection & configuration"
 msgstr "Internetforbindelse & -konfiguration"
 
-#: ../../netconnect.pm_.c:624 ../../netconnect.pm_.c:755
-msgid ""
-"I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
-msgstr ""
-"Jeg er ved at genstarte netværksenheden @netc->{NET_DEVICE}. Er du enig?"
+#: ../../netconnect.pm_.c:631 ../../netconnect.pm_.c:762
+msgid "I'm about to restart the network device $netc->{NET_DEVICE}. Do you agree?"
+msgstr "Jeg er ved at genstarte netværksenheden @netc->{NET_DEVICE}. Er du enig?"
 
-#: ../../netconnect.pm_.c:641
+#: ../../netconnect.pm_.c:648
 msgid "Configure a normal modem connection"
 msgstr "Konfigurér en normal modem forbindelse"
 
-#: ../../netconnect.pm_.c:661
+#: ../../netconnect.pm_.c:668
 msgid "Configure an ISDN connection"
 msgstr "Konfigurér en ISDN forbindelse"
 
-#: ../../netconnect.pm_.c:666
+#: ../../netconnect.pm_.c:673
 msgid "Internal ISDN card"
 msgstr "Internt ISDN-kort"
 
-#: ../../netconnect.pm_.c:668
+#: ../../netconnect.pm_.c:675
 msgid "External ISDN modem"
 msgstr "Eksternt ISDN modem"
 
-#: ../../netconnect.pm_.c:671 ../../netconnect.pm_.c:705
-#: ../../netconnect.pm_.c:717 ../../netconnect.pm_.c:741
-#: ../../netconnect.pm_.c:786
+#: ../../netconnect.pm_.c:678 ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:724 ../../netconnect.pm_.c:748
+#: ../../netconnect.pm_.c:793
 msgid "Connect to the Internet"
 msgstr "Lav forbindelse til internettet"
 
-#: ../../netconnect.pm_.c:672
+#: ../../netconnect.pm_.c:679
 msgid "What kind is your ISDN connection?"
 msgstr "Hvad slags type er din ISDN-forbindelse?"
 
-#: ../../netconnect.pm_.c:691
+#: ../../netconnect.pm_.c:698
 msgid "Configure a DSL (or ADSL) connection"
 msgstr "Konfigurér en DSL (eller ADSL) forbindelse"
 
-#: ../../netconnect.pm_.c:700
+#: ../../netconnect.pm_.c:707
 msgid "France"
 msgstr "Frankrig"
 
-#: ../../netconnect.pm_.c:702
+#: ../../netconnect.pm_.c:709
 msgid "Other countries"
 msgstr "Andre lande"
 
-#: ../../netconnect.pm_.c:706
+#: ../../netconnect.pm_.c:713
 msgid "In which country are you located ?"
 msgstr "I hvilket land er du ?"
 
-#: ../../netconnect.pm_.c:712
+#: ../../netconnect.pm_.c:719
 msgid "Alcatel modem"
 msgstr "Alcatel modem"
 
-#: ../../netconnect.pm_.c:714
+#: ../../netconnect.pm_.c:721
 msgid "ECI modem"
 msgstr "ECI modem"
 
-#: ../../netconnect.pm_.c:718
+#: ../../netconnect.pm_.c:725
 msgid "If your adsl modem is an Alcatel one, choose Alcatel. Otherwise, ECI."
 msgstr "Hvis dit ADSL modem er en Alcatel, vælg Alcatel. Ellers ECI."
 
-#: ../../netconnect.pm_.c:736
+#: ../../netconnect.pm_.c:743
 msgid "use pppoe"
 msgstr "brug pppoe"
 
-#: ../../netconnect.pm_.c:738
+#: ../../netconnect.pm_.c:745
 msgid "don't use pppoe"
 msgstr "brug ikke pppoe"
 
-#: ../../netconnect.pm_.c:742
+#: ../../netconnect.pm_.c:749
 msgid ""
 "The most common way to connect with adsl is dhcp + pppoe.\n"
 "However, some connections only use dhcp.\n"
@@ -5442,11 +5617,11 @@ msgstr ""
 "Men der findes nogen forbindelser der kun bruger DHCP. Hvis du ikke ved "
 "noget, vælg 'brug pppoe'"
 
-#: ../../netconnect.pm_.c:765
+#: ../../netconnect.pm_.c:772
 msgid "Configure a cable connection"
 msgstr "Konfigurér en kabel forbindelse"
 
-#: ../../netconnect.pm_.c:787
+#: ../../netconnect.pm_.c:794
 msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcpd"
@@ -5454,31 +5629,31 @@ msgstr ""
 "Hvilken DHCP klient ønsker du at bruge?\n"
 "Standard er dhcpd"
 
-#: ../../netconnect.pm_.c:800
+#: ../../netconnect.pm_.c:807
 msgid "Disable Internet Connection"
 msgstr "Deaktivér internet forbindelse"
 
-#: ../../netconnect.pm_.c:811
+#: ../../netconnect.pm_.c:818
 msgid "Configure local network"
 msgstr "Konfigurér lokalnetværk"
 
-#: ../../netconnect.pm_.c:815
+#: ../../netconnect.pm_.c:822
 msgid "Network configuration"
 msgstr "Netværks konfiguration"
 
-#: ../../netconnect.pm_.c:816
+#: ../../netconnect.pm_.c:823
 msgid "Do you want to restart the network"
 msgstr "Ønsker du at genstarte netværket"
 
-#: ../../netconnect.pm_.c:824
+#: ../../netconnect.pm_.c:831
 msgid "Disable networking"
 msgstr "Deaktivér netværk"
 
-#: ../../netconnect.pm_.c:834
+#: ../../netconnect.pm_.c:841
 msgid "Configure the Internet connection / Configure local Network"
 msgstr "Konfigurér internettet forbindelse eller lokalnetværk"
 
-#: ../../netconnect.pm_.c:835
+#: ../../netconnect.pm_.c:842
 msgid ""
 "Local networking has already been configured.\n"
 "Do you want to:"
@@ -5486,15 +5661,15 @@ msgstr ""
 "Lokalnet er allerede konfigureret.\n"
 "Ønsker du at:"
 
-#: ../../netconnect.pm_.c:836
+#: ../../netconnect.pm_.c:843
 msgid "How do you want to connect to the Internet?"
 msgstr "Hvordan vil du lave forbindelse til internettet?"
 
-#: ../../netconnect.pm_.c:858
+#: ../../netconnect.pm_.c:865
 msgid "Network Configuration"
 msgstr "Konfigurér netværk"
 
-#: ../../netconnect.pm_.c:859
+#: ../../netconnect.pm_.c:866
 msgid ""
 "Now that your Internet connection is configured,\n"
 "your computer can be configured to share its Internet connection.\n"
@@ -6348,26 +6523,26 @@ msgstr "Installationen af LILO mislykkedes. Følgende fejl opstod:"
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling af internetforbindelse er slået til"
 
-# Mangler
 #: ../../standalone/drakgw_.c:104
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
 "\n"
 "What would you like to do?"
-msgstr "Indstilling af deling af internetforbindelse er allerede gjort.\n"
+msgstr ""
+"Indstilling af deling af internetforbindelse er allerede gjort.\n"
+"Deling er aktiveret.\n"
+"\n"
+"Hvad vi du ønsker du at gøre?"
 
-# Mangler
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:108
 msgid "disable"
-msgstr ""
+msgstr "de-aktivér"
 
-# Mangler
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:118
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:137
 msgid "dismiss"
-msgstr ""
+msgstr "træd af"
 
 #: ../../standalone/drakgw_.c:107 ../../standalone/drakgw_.c:126
 msgid "reconfigure"
@@ -6377,21 +6552,19 @@ msgstr "genkonfigurer"
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Deling af internetforbindelse er slået fra"
 
-# Mangler
 #: ../../standalone/drakgw_.c:123
-#, fuzzy
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
-msgstr "Indstilling af deling af internetforbindelse er allerede gjort.\n"
+msgstr ""
+"Indstilling af deling af internetforbindelse er allerede gjort.\n"
+"det er de-aktiveret"
 
-# Mangler
 #: ../../standalone/drakgw_.c:126 ../../standalone/drakgw_.c:127
-#, fuzzy
 msgid "enable"
-msgstr "Tabel"
+msgstr "aktivér"
 
 #: ../../standalone/drakgw_.c:141
 msgid "Config file content could not be interpreted."
@@ -6401,9 +6574,7 @@ msgstr "Indhold i konfigurations filen kunne ikke blive fortolket."
 msgid "Internet Connection Sharing"
 msgstr "Deling af internetforbindelse"
 
-# Mangler
 #: ../../standalone/drakgw_.c:152
-#, fuzzy
 msgid ""
 "Your computer can be configured to share its Internet connection.\n"
 "\n"
@@ -6412,12 +6583,11 @@ msgid ""
 "\n"
 "Would you like to setup the Internet Connection Sharing?"
 msgstr ""
-"Nu da din internetforbindelse er konfigureret,\n"
-"kan din maskine blive konfigureret til at dele sin internetforbindelse.\n"
-"Info: Du skal bruge en ekstra netværks adapter for at sætte et lokalnet op "
-"(LAN).\n"
+"Din computer kan konfigureres til at dele sin internetforbindelse.\n"
 "\n"
-"Ønsker du at opsætte deling af internetforbindelsen?\n"
+"Bemærk: du skal bruge en dedikeret Network Adapter, for at lave et lokalt "
+"netværk (LAN).\n"
+"Vil du dele din internetforbindelse?"
 
 #: ../../standalone/drakgw_.c:177
 msgid "using module"
@@ -6489,38 +6659,23 @@ msgstr "Konfigurerer skript, installerer programmel, starter servere..."
 msgid "Configuring..."
 msgstr "Konfigurere..."
 
-#: ../../standalone/drakgw_.c:306
-msgid "Could not install ipchains RPM with urpmi."
-msgstr "Kunne ikke installere ipchains RPM med urpmi."
+#: ../../standalone/drakgw_.c:313
+msgid "Problems installing package $bin2rpm{$_}"
+msgstr "Problemer med installation af $bin2rpm{$_}"
 
-#: ../../standalone/drakgw_.c:456
-msgid "Could not install dhcp RPM with urpmi."
-msgstr "Kunne ikke installere dhcp RPM med urpmi."
-
-#: ../../standalone/drakgw_.c:480
-msgid "Could not install linuxconf RPM with urpmi."
-msgstr "Kunne ikke installere linuxconf RPM med urpmi."
-
-#: ../../standalone/drakgw_.c:496
-msgid "Could not install bind RPM with urpmi."
-msgstr "Kunne ikke installere bind RPM med urpmi."
-
-#: ../../standalone/drakgw_.c:500
-msgid "Could not install caching-nameserver RPM with urpmi."
-msgstr "Kunne ikke installere caching-nameserver RPM med urpmi."
-
-# Mangler
-#: ../../standalone/drakgw_.c:512
+#: ../../standalone/drakgw_.c:504
 msgid "Congratulations!"
 msgstr "Tillykke!"
 
-# Mangler
-#: ../../standalone/drakgw_.c:513
+#: ../../standalone/drakgw_.c:505
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
 "Area Network, using automatic network configuration (DHCP)."
 msgstr ""
+"Alt er blevet konfigureret.\n"
+"Du kan nu dele din internetforbindelse med andre computere på dit lokal "
+"netværk, ved at bruge DHCP."
 
 #: ../../standalone/draksec_.c:28
 msgid ""
@@ -6583,6 +6738,14 @@ msgstr "Indstiller sikkerhedsniveau"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Vælg det værktøj du ønsker at benytte"
+
+#: ../../standalone/keyboarddrake_.c:14
+msgid "usage: keyboarddrake [--expert]\n"
+msgstr "brug: keyboarddrake [--expert]\n"
+
+#: ../../standalone/keyboarddrake_.c:27
+msgid "Do you want the BackSpace to return Delete in console?"
+msgstr "Vil du have at BackSpace giver Delete i konsollen?"
 
 #: ../../standalone/livedrake_.c:23
 msgid "Change Cd-Rom"
@@ -6822,185 +6985,202 @@ msgstr "Finder blade"
 msgid "Finding leaves takes some time"
 msgstr "At finde blade tager nogen tid"
 
-# Mangler
-# ../../share/compssUsers
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid ""
-"The K Desktop Environment, the basic graphical environment with a collection "
-"of accompanying tools"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Personnal Information Management"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Tools to create and burn CD's"
-msgstr ""
-
-msgid "Internet Tools"
-msgstr "Internet værktøjer"
-
-msgid "Internet"
-msgstr "Internet"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Personnal Finance"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Graphics programs such as The Gimp"
-msgstr ""
-
-msgid "Office"
-msgstr "Kontor"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Databases clients and servers (mysql and postgresql)"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr ""
-
-msgid "Multimedia - Graphics"
-msgstr "Multimedie - Grafik"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Video players and editors"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid ""
-"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
-"gnumeric), pdf viewers, etc"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid ""
-"Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
-"transfer tools"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Books and Howto's on Linux and Free Software"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid ""
-"A graphical environment with user-friendly set of applications and desktop "
-"tools"
-msgstr ""
-
-# Mangler
-# ../../share/compssUsers
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr ""
-
-msgid "Multimedia - Video"
-msgstr "Multimedie - Video"
-
-msgid "KDE"
-msgstr "KDE"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Sound and video playing/editing programs"
-msgstr ""
-
-msgid "Multimedia"
-msgstr "Multimedie"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Other Graphical Desktops"
-msgstr ""
-
-msgid "Multimedia - Sound"
-msgstr "Multimedie - Lyd"
-
-msgid "Gnome"
-msgstr "Gnome"
-
-msgid "Documentation"
-msgstr "Dokumentation"
-
-# Mangler
-# ../../share/compssUsers
-msgid "Programs to manage your finance, such as gnucash"
-msgstr ""
-
-# Mangler
 # ../../share/compssUsers
 msgid "Graphics Manipulation"
-msgstr ""
+msgstr "Grafisk manipulation"
 
-msgid "Games"
-msgstr "Spil"
-
-msgid "Multimedia - CD Burning"
-msgstr "Multimedie - CD-brænding"
-
-# Mangler
 # ../../share/compssUsers
-msgid "Communication facilities"
-msgstr ""
+msgid "KDE, QT, Gnome, GTK+"
+msgstr "KDE, QT, Gnome, GTK+"
+
+# ../../share/compssUsers
+msgid "Personnal Finance"
+msgstr "Personlig økonomi"
+
+# ../../share/compssUsers
+msgid "Python, Perl, libraries, tools"
+msgstr "Python, Perl, biblioteker, værktøjer"
+
+# ../../share/compssUsers
+msgid "Scientific applications"
+msgstr "Videnskabs programmer"
 
 # ../../share/compssUsers
 msgid "Databases"
 msgstr "Databaser"
 
-#~ msgid "Choose the size you want to install"
-#~ msgstr "Vælg den samlede størrelse som din installation må fylde"
+msgid "Internet"
+msgstr "Internet"
 
-#~ msgid "Total size: "
-#~ msgstr "Total størrelse: "
+msgid "Multimedia - Graphics"
+msgstr "Multimedie - Grafik"
 
-#~ msgid ""
-#~ "The system is now connected to Internet! Congratulation.\n"
-#~ "Feel free to launch draknet at any time to setup your connection.\n"
-#~ msgstr ""
-#~ "Systemet er nu forbundet til internettet! Tillykker.\n"
-#~ "Du kan starte draknet når som helst for at konfigurere din forbindelse.\n"
+# ../../share/compssUsers
+msgid "editors, shells, file tools, terminals"
+msgstr "redigerings værktøjer, skaller, fil værktøjer, terminaler"
+
+msgid "Development applications"
+msgstr "Udviklings programmer"
+
+# ../../share/compssUsers
+msgid "Audio-related tools: mp3 or midi players, mixers, etc"
+msgstr "Lyd-relaterede værktøjer: mp3 eller midi-afspillere, mixere o.lign."
+
+msgid "Multimedia"
+msgstr "Multimedie"
+
+msgid "Office"
+msgstr "Kontor"
+
+# ../../share/compssUsers
+msgid "Sciences"
+msgstr "Videnskaber"
+
+# ../../share/compssUsers
+msgid ""
+"Chat (IRC or instant messaging) programs such as xchat, licq, gaim, and file "
+"transfer tools"
+msgstr ""
+"Chat (IRC eller instant-messaging) programmer som xchat, licq, gaim og "
+"fil-overførsels værktøjer"
+
+# ../../share/compssUsers
+msgid ""
+"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
+"browse the Web"
+msgstr ""
+"Indstil et værktøj til at læse samt sende post og nyhede, og til at browse "
+"på internettet"
+
+# ../../share/compssUsers
+msgid "C and C++ development libraries, programs and include files"
+msgstr "C og C++ udvikling biblioteker, programmer, og include filer."
+
+# ../../share/compssUsers
+msgid "Communication facilities"
+msgstr "Kommunikations-faciliteter"
+
+msgid "KDE"
+msgstr "KDE"
+
+# ../../share/compssUsers
+msgid "Personnal Information Management"
+msgstr "Persinlig Informations Håndtering"
+
+# ../../share/compssUsers
+msgid "Programs to manage your finance, such as gnucash"
+msgstr "Programmer til at håndtere din økonomi, som fx gnucash"
+
+msgid "Gnome"
+msgstr "Gnome"
+
+msgid "Internet Tools"
+msgstr "Internet værktøjer"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+# ../../share/compssUsers
+msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm, etc"
+
+# ../../share/compssUsers
+msgid "Utilities"
+msgstr "Værktøjer"
+
+msgid "Multimedia - Sound"
+msgstr "Multimedie - Lyd"
+
+# ../../share/compssUsers
+msgid "Amusement programs: arcade, boards, strategy, etc"
+msgstr "Underholdnings-programmer: arkace, strategi, bræt o.ling."
+
+# ../../share/compssUsers
+msgid "Video players and editors"
+msgstr "Videoafspillere og redigeringsværktøjer"
+
+# ../../share/compssUsers
+msgid "Console Tools"
+msgstr "Konsol værktøjer"
+
+msgid "Development other"
+msgstr "Udvikling andre"
+
+# ../../share/compssUsers
+msgid "Databases clients and servers (mysql and postgresql)"
+msgstr "Databaseklienter og servere (mysql og postgresql)"
+
+# ../../share/compssUsers
+msgid "Sound and video playing/editing programs"
+msgstr "Lyd og video afspillere og redigeringsværktøjer"
+
+# ../../share/compssUsers
+msgid "Books and Howto's on Linux and Free Software"
+msgstr "Bøger og vejledninger om Linux og Free Software"
+
+# ../../share/compssUsers
+msgid ""
+"A graphical environment with user-friendly set of applications and desktop "
+"tools"
+msgstr "Et grafisk miljø med brugervenlige indstillinger af programmer og værktøjer"
+
+msgid "Games"
+msgstr "Spil"
+
+msgid "Development C/C++"
+msgstr "Udvikling C/C++"
+
+msgid "Multimedia - Video"
+msgstr "Multimedie - Video"
+
+# ../../share/compssUsers
+msgid "Graphics programs such as The Gimp"
+msgstr "Grafiske programmer som fx The Gimp"
+
+# ../../share/compssUsers
+msgid ""
+"The K Desktop Environment, the basic graphical environment with a collection "
+"of accompanying tools"
+msgstr ""
+"K Desktop -miljøet, det grundlæggende grafiske miljø, med en vifte af "
+"suplerende værktøjer."
+
+# ../../share/compssUsers
+msgid "Tools to create and burn CD's"
+msgstr "Værktøjer til at lave og brænde CD´er"
+
+# ../../share/compssUsers
+msgid "More Graphical Desktops (Gnome, IceWM)"
+msgstr "Flere grafiske miljøer (Gnome, IceWM)"
+
+msgid "Multimedia - CD Burning"
+msgstr "Multimedie - CD-brænding"
+
+# ../../share/compssUsers
+msgid "Archiving, emulators, monitoring"
+msgstr "Arkivering, emlulation, overvågning"
+
+# ../../share/compssUsers
+msgid ""
+"Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
+"gnumeric), pdf viewers, etc"
+msgstr ""
+"Kontor-programmer: Tekstbehandler (kword, abiword), regneark (kspread, "
+"gnumeric), pdf-visere, o.lign."
+
+# ../../share/compssUsers
+msgid "Other Graphical Desktops"
+msgstr "Andre grafiske miljøer"
+
+# ../../share/compssUsers
+msgid "Tools for your Palm Pilot or your Visor"
+msgstr "Værktøjer til Palm Pilot og Visor"
+
+# ../../share/compssUsers
+msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, o.lign."
+
+# ../../share/compssUsers
+msgid "Set of tools for mail, news, web, file transfer, and chat"
+msgstr "Sæt af værktøjer til post, nyheder, filoverførsel og chat"
+
