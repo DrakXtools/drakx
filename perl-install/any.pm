@@ -1063,7 +1063,8 @@ connections from many clients. Note: if your machine is only a client on the Int
 		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
 		       { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
 			 _("A library which defends against buffer overflow and format string attacks.") }
-		      )
+		      ),
+		   { label => _("Security user (login or email)"), val => $email,  }
 		  ]
 		 );
 }
