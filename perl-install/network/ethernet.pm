@@ -70,7 +70,7 @@ I cannot set up this connection type.")), return;
 
     my $interface = $in->ask_from_listf(N("Choose the network interface"),
 					N("Please choose which network adapter you want to use to connect to Internet."),
-					sub { $_->[0] . ($_->[1] ? " (using module $_->[1])" : "") },
+					sub { my ($e) = @_; $e->[0] . ($e->[1] ? " (using module $e->[1])" : "") },
 					\@all_cards) or return;
 
     modules::write_conf($prefix) if $::isStandalone;
