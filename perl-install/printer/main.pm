@@ -2312,6 +2312,8 @@ sub configure_hpoj {
 			    $_->{val}{MODEL} =~ /^\s*$/) {
 			    if ($model_long =~ /:([^:;]+);/) {
 				$_->{val}{MODEL} = $1;
+				$model = $_->{val}{MODEL};
+				$model =~ s/ /_/g;
 			    }
 			}
 		    }
