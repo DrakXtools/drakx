@@ -10,6 +10,8 @@ use MDK::Common::Func;
 use common;
 
 #- minimal example using interactive:
+#
+#- > use lib qw(/usr/lib/libDrakX);
 #- > use interactive;
 #- > my $in = interactive->vnew;
 #- > $in->ask_okcancel('title', 'question');
