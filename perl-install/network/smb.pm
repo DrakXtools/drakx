@@ -42,7 +42,15 @@ sub smbclient {
     my $group = $server->{group} ? " -W $server->{group}" : '';
 
     my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'domain', 'username', 'password'}) : '%';
-    `smbclient -U $U -L $name $ip$group 2>/dev/null`;
+    my %h;
+    foreach (`smbclient -g -U $U -L $name $ip$group 2>/dev/null`) {
+	if (my ($type, $v1, $v2) = /(.*)\|(.*)\|(.*)/) {
+	    push @{$h{$type}}, [ $v1, $v2 ];
+	} elsif (/^Error returning browse list/) {
+	    push @{$h{Error}}, $_;
+	}
+    }
+    \%h;
 }
 
 sub find_servers {
@@ -64,10 +72,9 @@ sub find_servers {
     }
     if ($browse) {
 	my %l;
-	foreach (smbclient($browse)) {
-	    my $nb = /^\s*Workgroup/ .. /^$/;
-	    $nb > 2 or next;
-	    my ($group, $name) = split(' ', lc($_));
+	my $workgroups = smbclient($browse)->{Workgroup} || [];
+	foreach (@$workgroups) {
+	    my ($group, $name) = map { lc($_) } @$_;
 
 	    # already done
 	    next if any { $group eq $_->{group} } values %servers;
@@ -87,15 +94,14 @@ sub find_exports {
     my ($_class, $server) = @_;
     my @l;
 
-    foreach (smbclient($server)) {
-	chomp;
-	s/^\t//;
-	/NT_STATUS_/ and die $_;
-	my ($name, $type, $comment) = unpack "A15 A10 A*", $_;
-	if (($name eq '---------' && $type eq '----' && $comment eq '-------') .. /^$/) {
-	    push @l, { name => $name, type => $type, comment => $comment, server => $server }
-	      if $type eq 'Disk' && $name !~ /\$$/ && $name !~ /NETLOGON|SYSVOL/;
-	}
+    my $browse = smbclient($server);
+    if (my $err = find { /NT_STATUS_/ } @{$browse->{Error} || []}) {
+	die $err;
+    }
+    foreach (@{$browse->{Disk} || []}) {
+	my ($name, $comment) = @$_;
+	push @l, { name => $name, type => 'Disk', comment => $comment, server => $server }
+	  if $name !~ /\$$/ && $name !~ /netlogon|NETLOGON|SYSVOL/;
     }
     @l;
 }
