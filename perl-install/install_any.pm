@@ -555,6 +555,7 @@ sub setup_suppl_medium {
     $supplmedium->{selected} = 1;
     $supplmedium->{method} = $suppl_method;
     $supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
+    $supplmedium->{issuppl} = 1; #- remember it's a suppl medium
 }
 
 sub _media_rank {
@@ -690,8 +691,10 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	}
     };
     foreach my $k (pkgs::allMediums($o->{packages})) {
-	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	my $m = $o->{packages}{mediums}{$k};
+	#- don't copy rpms of supplementary media, except suppl CDs
+	next if $m->{issuppl} && $m->{medium} !~ /^\d+s$/;
+	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
 	$wait_message->(N("Copying in progress") . "\n($m->{descr})"); #- XXX to be translated
 	if ($k != $current_medium) {
 	    do {
