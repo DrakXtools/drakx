@@ -400,6 +400,7 @@ sub setPackages {
 	foreach (lang::langsLANGUAGE($o->{langs})) {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
+	$o->{compssUsersChoice}{'CHARSET"' . lang::lang2charset($o->{lang}) . '"'} = 1;
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.

@@ -8,7 +8,9 @@ GRAPHICAL_DESKTOP
 
 GNOME
   4 gnome-tiles gnome-users-guide gdm gnome-applets
-    gnome-network gnome-utils nautilus xscreensaver
+    gnome-network gnome-utils xscreensaver
+  4 CHARSET"iso-8859-1" || CHARSET"iso-8859-15" nautilus
+  5 !CHARSET"iso-8859-1" !CHARSET"iso-8859-15" gmc
   3 gnome-pilot sawfish-themes gtk-themes
   2 bug-buddy eog g-print
   1 sawfish-themer
@@ -241,7 +243,9 @@ NETWORKING_FILE_SERVER
 NETWORKING_WWW
   5 lynx
   4 netscape-communicator wget links mozilla mozilla-psm netscape-plugins
-  4 GNOME screem galeon nautilus-mozilla
+  4 GNOME 
+      screem galeon 
+      CHARSET"iso-8859-1" || CHARSET"iso-8859-15" nautilus-mozilla
   3 plugger opera bluefish
   4 netscape-castellano netscape-catalan netscape-chinese_gb2312 netscape-chinese_big5 netscape-euskara netscape-francais netscape-german netscape-japanese netscape-polish netscape-russian netscape-walon
 NETWORKING_WWW_SERVER
@@ -455,7 +459,7 @@ X
   5 GNOME ami-gnome
   2 app-defaults-be app-defaults-cs app-defaults-ga app-defaults-ru app-defaults-th app-defaults-uk
 
-  4 LOCALES"lt" || LOCALES"lv" || LOCALES"mi" fonts-type1-baltic
+  4 CHARSET"iso-8859-13" fonts-type1-baltic
     LOCALES"ru" || LOCALES"uk" XFree86-cyrillic-fonts
     LOCALES"he" fonts-hebrew-elmar
     LOCALES"hy" fonts-ttf-armenian

@@ -16,7 +16,7 @@ use c;
 
 
 
-my @preferred = qw(perl-GTK postfix proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module);
+my @preferred = qw(perl-GTK postfix proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus);
 @preferred{@preferred} = ();
 
 #- lower bound on the left ( aka 90 means [90-100[ )
@@ -786,8 +786,8 @@ sub computeGroupSize {
 		map { "$_&&$n" } @l;
 	    } split('\|\|');
 	}
-	#- HACK, remove LOCALES, too costly
-	grep { !/LOCALES/ } @l;
+	#- HACK, remove LOCALES & CHARSET, too costly
+	grep { !/LOCALES|CHARSET/ } @l;
     }
     sub or_clean {
 	my (@l) = map { [ sort split('&&') ] } @_ or return '';
