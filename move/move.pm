@@ -514,7 +514,7 @@ sub install2::startMove {
 	$ENV{LOGNAME} = $ENV{USER} = $username;
 	$ENV{HOME} = $home;
 	$ENV{SHELL} = $shell;
-	exec 'startkde';
+	exec 'startkde_move';
     } else {
 	exec 'xwait' or c::_exit(0);
     }

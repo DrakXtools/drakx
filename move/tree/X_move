@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ok=0
+while [ "$ok" == 0 ]; do
+    X $@
+    ok=$?
+done

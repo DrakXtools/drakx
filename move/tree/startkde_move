@@ -1,0 +1,32 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+use lib qw(/usr/lib/libDrakX);
+use c;
+
+sub wait4x() {
+    my $nb = 0;
+    foreach (1..30) {
+        sleep 1;
+        print("no X server :("), exit 1 if !fuzzy_pidofs(qr/\bX_move\b/);
+        $nb++ if c::Xtest(':0');
+        if ($nb > 2) { #- one succeeded test is not enough :-(
+            return;
+        }
+    }
+    exit 1;
+}
+
+my ($kde_ok, $xwait);
+
+while (1) {
+    wait4x();
+    if (!($xwait = fork())) {
+        exec 'xwait', '-permanent';  #- so that server doesn't blink when startkde finishes
+    }
+    my ($xdim) = `xdpyinfo` =~ /dimensions:\s*(\d+)/;
+    system("qiv --root /image/move/BOOT-$xdim-MOVE.jpg");
+    system('startkde');
+    system('sudo killall X');
+    waitpid $xwait, 0;
+}
