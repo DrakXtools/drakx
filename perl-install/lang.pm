@@ -412,15 +412,22 @@ sub standard_locale {
     $prefer_lang && member($lang, @locales) and return $lang;
     length($lang) > 2 and $lang =~ s/^(..).*/$1/, goto retry;
 }
-    
+
+sub fix_variant {
+    my ($locale) = @_;
+    #- uz@Cyrl_UZ -> uz_UZ@Cyrl
+    $locale =~ s/(\@\w+)_/_/;
+    $locale . $1;
+}
+
 sub getlocale_for_lang {
     my ($lang, $country, $o_utf8) = @_;
-    (standard_locale($lang, $country, 'prefer_lang') || l2locale($lang)) . ($o_utf8 ? '.UTF-8' : '');
+    fix_variant((standard_locale($lang, $country, 'prefer_lang') || l2locale($lang)) . ($o_utf8 ? '.UTF-8' : ''));
 }
 
 sub getlocale_for_country {
     my ($lang, $country, $o_utf8) = @_;
-    (standard_locale($lang, $country, '') || c2locale($country)) . ($o_utf8 ? '.UTF-8' : '');
+    fix_variant((standard_locale($lang, $country, '') || c2locale($country)) . ($o_utf8 ? '.UTF-8' : ''));
 }
 
 sub getLANGUAGE {
@@ -841,6 +848,7 @@ sub pack_langs {
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
     my $locale = {};
+    my $variant = $locale_lang =~ s/(\@\w+)// && $1;
     my $locale_lang_no_encoding = $locale_lang =~ /(.*)\./ ? $1 : $locale_lang;
     if (member($locale_lang_no_encoding, list_langs())) {
 	#- special lang's such as en_US pt_BR
@@ -848,6 +856,7 @@ sub system_locales_to_ourlocale {
     } else {
 	($locale->{lang}) = $locale_lang =~ /^(..)/;
     }
+    $locale->{lang} .= $variant;
     ($locale->{country}) = $locale_country =~ /^.._(..)/;
     $locale->{utf8} = $locale_lang =~ /UTF-8/;
     #- safe fallbacks
