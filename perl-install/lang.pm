@@ -137,6 +137,20 @@ my %xim = (
 	XIM_PROGRAM => 'kinput2',
 	XMODIFIERS => '"@im=kinput2"',
   },
+  # xvnkb is not an XIM input method; but an input method of another
+  # kind, only XIM_PROGRAM needs to be defined
+  'vi' => {
+	XIM_PROGRAM => 'xvnkb',
+  }
+  'vi_VN.TCVN' => {
+	XIM_PROGRAM => 'xvnkb',
+  }
+  'vi_VN.VISCII' => {
+	XIM_PROGRAM => 'xvnkb',
+  }
+  'vi_VN.UTF-8' => {
+	XIM_PROGRAM => 'xvnkb',
+  }
   # right to left languages only work properly on console
   'ar' => {
 	X11_NOT_LOCALIZED => "yes",
@@ -144,9 +158,10 @@ my %xim = (
   'fa' => {
 	X11_NOT_LOCALIZED => "yes",
   },
-  'he' => {
-	X11_NOT_LOCALIZED => "yes",
-  },
+# KDE has some "mirrored" translations
+#  'he' => {
+#	X11_NOT_LOCALIZED => "yes",
+#  },
   'ur' => {
 	X11_NOT_LOCALIZED => "yes",
   },
