@@ -529,7 +529,7 @@ sub main {
 	my $f = ${{
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
-	    vga       => sub { $o->{vga16} = $v },
+	    vga16     => sub { $o->{vga16} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = 1; $::beginner = 0 },
 	    beginner  => sub { $::beginner = $v },

@@ -90,16 +90,25 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append $ks ramdisk_size=32000 initrd=$type.rdz $type
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type vga=788
+label vgalo
+  kernel vmlinuz
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type vga=785
+label vgahi
+  kernel vmlinuz
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type vga=791
+label vga16
+  kernel vmlinuz
+  append $ks ramdisk_size=32000 initrd=$type.rdz $type vga16
 label text
   kernel vmlinuz
   append $ks ramdisk_size=32000 initrd=$type.rdz $type text
 label patch
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type patch
+  append ramdisk_size=32000 initrd=$type.rdz $type patch vga=788
 label expert
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $type expert
+  append ramdisk_size=32000 initrd=$type.rdz $type expert vga=788
 label rescue
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $type rescue rw
