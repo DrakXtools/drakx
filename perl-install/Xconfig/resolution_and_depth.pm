@@ -119,7 +119,7 @@ sub choose {
     my ($in, $default_resolution, @resolutions) = @_;
 
     $in->ask_from_listf(_("Resolutions"), "",
-			sub { "$_->{X}x$_->{Y} $_->{Depth}bpp" },
+			sub { "$_[0]{X}x$_[0]{Y} $_[0]{Depth}bpp" },
 			\@resolutions, $default_resolution || {});
 }
 
