@@ -603,7 +603,13 @@ sub first_time_dialog {
     undef $w;
 
     # Show dialog
-    return $in->ask_yesorno(N("Printerdrake"), $dialogtext, 0);
+    
+    my $do_it = N("Yes");
+    my $quit = N("Quit");
+    my @choices = ($do_it, $quit);
+    my $choice = $in->ask_from_list(N("Printerdrake"), $dialogtext, 
+				    \@choices, $quit);
+    return ($choice eq $do_it);
 }
 
 sub configure_new_printers {
