@@ -49,7 +49,7 @@ sub test {
     my $f = $::testing ? $tmpconfig : "/etc/X11/XF86Config.test";
     $raw_X->{Xconfig::card::using_xf4($card) ? 'xfree4' : 'xfree3'}->write("$::prefix/$f");
 
-    my $f_err = secured_file($::prefix . ($ENV{TMPDIR} || "$ENV{HOME}/tmp") . '/.drakx.Xoutput');
+    my $f_err = common::secured_file($::prefix . ($ENV{TMPDIR} || "$ENV{HOME}/tmp") . '/.drakx.Xoutput');
     
     my $pid;
     unless ($pid = fork()) {
