@@ -78,12 +78,12 @@ for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && rpm --root /mnt -ivh /cdrom/Mandrake/RPMS/$i.*.rpm --nodeps --force
 done
 umount /mnt/proc
-umount /cdrom
+umount -a -f -t noproc
 eject $cd
 
 echo
 echo "Done. OEM hard drive ready!"
 echo "The hard drive is now ready for a customer."
-echo "Press enter to halt."
-read
+echo "System is now halted."
+echo
 halt
