@@ -462,6 +462,7 @@ sub load_mo {
 
     $lang ||= $ENV{LANGUAGE} || $ENV{LC_ALL} || $ENV{LC_MESSAGES} || $ENV{LANG};
 
+    c::setlocale();
     c::bindtextdomain('libDrakX', $localedir);
 
     foreach (split ':', $lang) {
