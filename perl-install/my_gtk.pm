@@ -388,7 +388,7 @@ sub create_pix_text {
 	$style->font(Gtk::Gdk::Font->fontset_load($font));
     }
 
-    my ($width, $height, $lines, $widths, $heights, $ascents, $descents) = get_text_coord (
+    my ($width, $height, $lines, $widths, $heights) = get_text_coord (
         $text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
 
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
@@ -405,10 +405,12 @@ sub create_pix_text {
     $gc_text->set_foreground($color_text);
     my $i = 0;
     foreach (@{$lines}) {
-	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
+	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$heights}[$i], $_);
+#	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$heights}[$i], $_);
+#	$pix->draw_string($style->font, $gc_text, ${$widths}[$i], ${$ascents}[$i] + ${$descents}[$i], $_);
 	$i++;
     }
-    ($pix, $width, $height, ${$ascents}[0], ${$descents}[0]);
+    ($pix, $width, $height);
 }
 
 sub get_text_coord {
@@ -421,11 +423,12 @@ sub get_text_coord {
     my @lines;
     my @widths;
     my @heights;
-    my @ascents;
-    my @descents;
+    my $ascent = $style->font->ascent;
+    my $descent = $style->font->descent;
+    print "ascent : $ascent | descent : $descent\n";
     $heights[0] = 0;
     my $max_width2 = $max_width;
-    my $height = 0;
+    my $height = $heights[0] = $ascent + $descent;
     my $width = 0;
     my $flag = 1;
     my @t = split(' ', $text);
@@ -433,8 +436,7 @@ sub get_text_coord {
 	my $l = $style->font->string_width($_ . if_(!$flag, " "));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
-	    $height += $style->font->string_height($lines[$idx]);
-	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
+	    $height += $ascent + $descent + 1;
 	    $heights[$idx+1] = $height;
 	    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 	    $width = 0;
@@ -446,8 +448,7 @@ sub get_text_coord {
 	$l <= $max_width2 or $max_width2 = $l;
 	$width <= $real_width or $real_width = $width;
     }
-    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
-    $height += $style->font->string_height($lines[$idx]);
+    $height += $ascent + $descent;
 
     $height < $real_height or $real_height = $height;
     $width = $max_width;
@@ -457,10 +458,10 @@ sub get_text_coord {
     $real_height < $max_height && $can_be_smaller and $height = $real_height;
     $real_height > $max_height && $can_be_greater and $height = $real_height;
     if($centeredy) {
-	my $dh = ($height-$real_height)/2;
-	@heights = map { $_ + $dh } @heights;
+ 	my $dh = ($height-$real_height)/2 + ($ascent+$descent)/2;
+ 	@heights = map { $_ + $dh } @heights;
     }
-    ($width, $height, \@lines, \@widths, \@heights, \@ascents, \@descents)
+    ($width, $height, \@lines, \@widths, \@heights)
 }
 
 sub fill_tiled {
@@ -518,12 +519,11 @@ sub gtkicons_labels_widget {
 	       });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
 	$darea->signal_connect( button_release_event => sub { system("$exec&") });
-	$darea->{width} = $dx;
-	$darea->{height} = $dy;
 	$tab[$i] = $darea;
 	$i++;
     }
     my $fixed = new Gtk::Fixed;
+    $i = 0;
     foreach (@tab) {
 	$fixed->put($_, $i*75, 65);
 	$i++;
@@ -531,7 +531,6 @@ sub gtkicons_labels_widget {
     $fixed->signal_connect( size_allocate => sub {
 				my ($dx, $dy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
 				foreach (@tab) {
-				    $fixed->move($_);
 				}
 			    });
     $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
