@@ -52,12 +52,12 @@ sub empty_config {
 my @keyboard_fields = qw(XkbLayout XkbModel XkbDisable XkbOptions XkbCompat);
 sub get_keyboard {
     my ($raw_X) = @_;
-    my $raw_kbd = $raw_X->get_InputDevices('Keyboard') or die "no keyboard section";
+    my $raw_kbd = first($raw_X->get_InputDevices('Keyboard')) or die "no keyboard section";
     raw_export_section($raw_kbd, \@keyboard_fields);
 }
 sub set_keyboard {
     my ($raw_X, $kbd) = @_;
-    my $raw_kbd = $raw_X->get_InputDevices('Keyboard') || _new_keyboard_section($raw_X);
+    my $raw_kbd = first($raw_X->get_InputDevices('Keyboard')) || _new_keyboard_section($raw_X);
     raw_import_section($raw_kbd, $kbd);
     _set_Option('keyboard', $raw_kbd, keys %$kbd);
 }
