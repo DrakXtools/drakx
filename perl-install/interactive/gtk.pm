@@ -81,6 +81,7 @@ sub create_treeview_list {
 
     my ($starting_word, $start_reg) = ('', '^');
     my $timeout;
+    $list_tv->set_enable_search(0);
     $list_tv->signal_connect(key_press_event => sub {
         my ($_w, $event) = @_;
 	my $c = chr($event->keyval & 0xff);
@@ -234,11 +235,12 @@ sub create_treeview_tree {
 	}
     };
 
+    $tree->set_enable_search(0);
     $tree->signal_connect(key_press_event => sub {
         my ($_w, $event) = @_;
 	$selected_via_click = 0;
 	my $c = chr($event->keyval & 0xff);
-	$curr or return;
+	$curr or return 0;
 	Glib::Source->remove($timeout) if $timeout; $timeout = '';
 
 	if ($event->keyval >= 0x100) {
@@ -248,7 +250,7 @@ sub create_treeview_tree {
 	    my $next;
 	    if (member('control-mask', @{$event->state})) {
 		$c eq "s" or return 1;
-		$start_reg and $start_reg = '', return 1;
+		$start_reg and $start_reg = '', return 0;
 		$next = 1;
 	    } else {
 		&$toggle if $c eq ' ';
