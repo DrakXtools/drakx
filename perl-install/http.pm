@@ -15,7 +15,6 @@ sub getFile {
 
     # can be used for ftp urls (with http proxy)
     my ($host, $port, $path) = $url =~ m,^(?:http|ftp)://([^/:]+)(?::(\d+))?(/\S*)?$,;
-    $host = resolv($host);
 
     my $use_http_proxy = $ENV{PROXY} && $ENV{PROXYPORT};
 
@@ -39,7 +38,13 @@ sub getFile {
 	$now = $buf =~ /\012/;
     } until $now && $last;
 
-    $tmp =~ /^.*\b200\b/ ? $sock : undef;
+    $tmp =~ /^(.*\b(\d+)\b.*)/;
+    if ($2 == 200) {
+        $sock;
+    } else {
+	log::l("HTTP error: $1");
+        undef;
+    }
 }
 
 1;
