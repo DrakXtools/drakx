@@ -1,3 +1,37 @@
+2001/04/06  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/make_mdkinst_stage2: instead of removing modules.cz-2.2*, remove
+	every modules.cz except the
+	biggest one
+
+	* install_steps.pm, fs.pm, install2.pm: create install_any::write_fstab
+	and use it
+
+	* install_any.pm: add write_fstab
+	create install_any::write_fstab and use it
+
+2001/04/05  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/drakboot: 
+	  - fix getting result of fsedit::hds
+	  - cleanup
+
+	* lang.pm (fs_options): created (gets codepage and iocharset)
+
+	* common.pm (if_): better logging of the error
+	(getVarsFromSh): fix for AA="" inspired by chmou the Great (but the
+	Great
+	what?)
+
+	* bootloader.pm (install_grub): small fix
+	(install_lilo): fix lilo's dumbness (when lilo warns about not the first
+	drive, it usually fails)
+
+	* diskdrake.pm (More): created, asks for supermount, rescue pt, reload.
+
+	* install_steps_interactive.pm (addUser): default autologin to first user
+	in beginner
+
 2001/04/05  Pixel  <pixel@mandrakesoft.com>
 
 	* any.pm (autologin): fix
