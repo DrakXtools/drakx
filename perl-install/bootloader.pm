@@ -703,10 +703,13 @@ sub write_lilo_conf {
 	open F, ">$f" or die "cannot create lilo config file: $f";
 	log::l("writing lilo config to $f");
 
+	#- normalize: RESTRICTED is only valid if PASSWORD is set
+	delete $lilo->{restricted} if !$lilo->{password};
+
 	local $lilo->{default} = make_label_lilo_compatible($lilo->{default});
 	$lilo->{$_} and print F "$_=$lilo->{$_}" foreach qw(boot map install vga default append keytable);
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
- 	print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- also done by msec
+ 	print F "password=", $lilo->{password} if $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
 	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
 
