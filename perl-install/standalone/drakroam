@@ -166,7 +166,7 @@ sub UpdateAll {
 }
 
 sub UpdateRoaming() {
-	my $status = any { /wlandetect$/ } run_program::get_stdout("ps", "-A") ? "on" : "off";
+	my $status = (any { /wlandetect$/ } run_program::get_stdout("ps", "-A")) ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
 }
 
