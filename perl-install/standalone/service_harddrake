@@ -113,10 +113,6 @@ foreach my $hw_class (@harddrake::data::tree) {
     modules::load_and_configure($modules_conf, 'ohci1394') if $Ident eq 'FIREWIRE_CONTROLLER' && any { $_->{driver} eq 'ohci1394' } @added;
     @added || @was_removed or next;
 
-    if (harddrake::data::is_removable($Ident)) {
-        modules::load_category('floppy') if $Ident eq 'FLOPPY';
-    }
-
     next if $Ident eq 'MOUSE' && $curr_kernel ne $prev_kernel;
 
     my @configurator_pool;
