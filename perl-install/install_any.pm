@@ -649,7 +649,7 @@ sub g_auto_install {
     }
 
     local $o->{partitioning}{auto_allocate} = !$replay;
-    local $o->{autoExitInstall} = $replay;
+    local $o->{autoExitInstall} = !$replay;
 
     #- deep copy because we're modifying it below
     $o->{users} = [ @{$o->{users} || []} ];
