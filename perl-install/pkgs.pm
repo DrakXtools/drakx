@@ -177,7 +177,11 @@ sub invCorrectSize { min($_[0], (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2
 
 sub selectedSize {
     my ($packages) = @_;
-    int (sum map { packageSize($_) - ($_->{installedCumulSize} || 0) } grep { packageFlagSelected($_) } values %{$packages->[0]});
+    my $size = 0;
+    foreach (values %{$packages->[0]}) {
+	packageFlagSelected($_) && !packageFlagInstalled($_) and $size += packageSize($_) - ($_->{installedCumulSize} || 0);
+    }
+    $size;
 }
 sub correctedSelectedSize { correctSize(selectedSize($_[0]) / sqr(1024)) }
 

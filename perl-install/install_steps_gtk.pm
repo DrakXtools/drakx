@@ -453,14 +453,10 @@ sub choosePackagesTree {
     };
 
     my $update_size = sub {
-	my $size = 0;
-	foreach (values %{$packages->[0]}) {
-	    $size += pkgs::packageSize($_) - ($_->{installedCumulSize} || 0) if pkgs::packageFlagSelected($_); #- on upgrade, installed packages will be removed.
-	}
+	my $size = pkgs::selectedSize();
 	$w_size->set(_("Total size: %d / %d MB", 
 		       pkgs::correctSize($size / sqr(1024)),
 		       install_any::getAvailableSpace($o) / sqr(1024)));
-
     };
     my $toggle = sub {
 	if (ref $curr) {
