@@ -469,6 +469,8 @@ sub get_net_device {
 	my $network_file = "/etc/sysconfig/network";
 	if (cat_("$prefix$connect_file") =~ /network/) {
 		${{ getVarsFromSh("$prefix$network_file") }}{GATEWAYDEV};
+	} elsif (cat_("$prefix$connect_file") =~ /isdn/) {
+		"ippp+"; 
 	} else {
 		"ppp+";
 	};
