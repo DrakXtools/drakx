@@ -331,13 +331,11 @@ sub killCardServices {
     $pid and kill(15, $pid); #- send SIGTERM
 }
 
-sub unlockCdroms() {
-    ioctl detect_devices::tryOpen($_->{device}), c::CDROM_LOCKDOOR(), 0
-      foreach detect_devices::cdroms();
-}
 sub ejectCdrom() {
-    eval { ioctl detect_devices::tryOpen($_), c::CDROMEJECT(), 1 }
-      foreach map { first split } grep { m|/tmp/rhimage| } cat_("/proc/mounts");
+    cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
+    my $f = eval { detect_devices::tryOpen($1) } or next;
+    ioctl $f, c::CDROM_LOCKDOOR(), 0;
+    ioctl $f, c::CDROMEJECT(), 1;
 }
 
 sub setupFB {
@@ -408,6 +406,7 @@ sub loadO {
 	-e $f or $f .= ".pl";
 	$o = loadO($O, $f);
 	fs::umount("/mnt") unless $::testing;
+	eval { run_program::run("rmmod", "vfat") };
     } else {
 	-e $f or $f .= ".pl";
 	{
@@ -430,6 +429,6 @@ sub pkg_install {
 }
 
 sub fsck_option() {
-    my $y = $::o->{security} < 3 && $::beginner && "-y ";
+    my $y = $::o->{security} < 3 && $::beginner ? "-y " : "";
     substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }

@@ -223,6 +223,8 @@ sub afterInstallPackages($) {
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
+    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
+
     $o->pcmciaConfig();
 }
 
@@ -494,10 +496,7 @@ sub miscellaneous {
 }
 
 #------------------------------------------------------------------------------
-sub exitInstall { 
-    install_any::unlockCdroms;
-    install_any::ejectCdrom;
-}
+sub exitInstall { install_any::ejectCdrom }
 
 #-######################################################################################
 #- Wonderful perl :(

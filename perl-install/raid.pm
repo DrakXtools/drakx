@@ -43,7 +43,6 @@ sub delete($$) {
     my ($raid, $nb) = @_;
     $nb = nb($nb);
 
-    run_program::run("raidstop", devices::make($raid->[$nb]{device}));
     delete $_->{raid} foreach @{$raid->[$nb]{disks}};
     $raid->[$nb] = undef;
 }
@@ -61,6 +60,7 @@ sub changeNb($$$) {
 sub removeDisk($$) {
     my ($raid, $part) = @_;
     my $nb = nb($part->{raid});
+    run_program::run("raidstop", devices::make($part->{device}));
     delete $part->{raid};
     @{$raid->[$nb]{disks}} = grep { $_ != $part } @{$raid->[$nb]{disks}};
     update($raid->[$nb]);
@@ -127,7 +127,6 @@ sub make($$) {
     run_program::run("raidstop", $dev);
     &write($raid, "/etc/raidtab");
     run_program::run("mkraid", "--really-force", $dev);
-    run_program::run("raidstart", $dev);
 }
 
 sub format_part($$) {
@@ -156,5 +155,7 @@ sub prepare_prefixed($$) {
 	devices::make("$prefix/dev/$_->{device}") foreach @{$_->{disks}};
     }
 }
+
+sub stopAll() { run_program::run("raidstop", devices::make("md$_")) foreach 0..7 }
 
 1;

@@ -864,13 +864,11 @@ sub miscellaneous {
 	[ _("Do you have a laptop?"), 
 	  _("Use hard drive optimizations?"), 
 	  _("Choose security level"),
-#-GOLD	  _("Use kudzu"),
 	  _("Precise ram size if needed (found %d MB)", availableRam / 1024),
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-#-GOLD	  { val => \$u->{kudzu}, type => 'bool' },
 	  \$u->{memsize},
 	],
         complete => sub {

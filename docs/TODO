@@ -8,6 +8,7 @@ is configureNetworkNet needed with dhcp/bootp?
 X configuration and bootloader in kickstart
 
 (pix)diskdrake
+auto_partitions
 
 text install
 
@@ -28,18 +29,7 @@ suggested partition tables must be better foreach installClass
 
 (fpons)pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
 
-(fpons)modem config
-
-(done,pix)kudzu or not in miscellaneous
-
-(done,pix)warn the user if not enough ram to fulfill install
-
-(done,fpons)test after printer config
-
-(done,pix)ask for more than the memory size detected
-
 --------------------------------------------------------------------------------
-call kudzu in batch to initialize its list
 
 XFdrake chooseResolutions with ask_from_list do not permit ``Show all''
 
@@ -95,3 +85,15 @@ diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
 
 (?)strange: no scsi of type 'fd', only 'tape'
 
+
+(done,pix)kudzu or not in miscellaneous
+
+(done,pix)warn the user if not enough ram to fulfill install
+
+(done,fpons)test after printer config
+
+(done,pix)ask for more than the memory size detected
+
+(done,fpons)modem config
+
+(done,pix)call kudzu in batch to initialize its list

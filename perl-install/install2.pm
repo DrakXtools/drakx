@@ -289,7 +289,7 @@ sub partitionDisks {
 
     my $ok = fsedit::get_root($o->{fstab} || []) ? 1 : install_any::getHds($o);
     my $auto = $ok && !$o->{partitioning}{readonly} &&
-	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 4);
+	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 3);
 
     eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $auto;
 
@@ -355,7 +355,6 @@ sub miscellaneous {
     $o->miscellaneous($_[0]); 
     addToBeDone { 
 	install_any::fsck_option();
-#-GOLD	run_program::rooted($o->{prefix}, "chkconfig --del kudzu") unless $o->{miscellaneous}{kudzu};
     } 'doInstallStep';
 }
 
@@ -479,7 +478,7 @@ sub main {
 #	    kickstart => sub { $::auto_install = 1; $cfg = $v; },
 	    auto_install => sub { $::auto_install = 1; $cfg = $v; },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
-	    alawindows => sub { $o->{security} = $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
+	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
@@ -534,6 +533,7 @@ sub main {
 	add2hash(network::findIntf($o->{intf} ||= [], $l->{DEVICE}), $l);
     }
 
+    eval { run_program::run("rmmod", "vfat") };
     modules::load_deps("/modules/modules.dep");
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
