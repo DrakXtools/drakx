@@ -451,12 +451,6 @@ sub main {
     modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
 
-    $o->{interactive} ||= 'gtk';
-    if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
-	log::l("switching to newt install cuz not enough memory");
-	$o->{interactive} = "newt";
-    }
-
     #- done after module dependencies are loaded for "vfat depends on fat"
     if ($::auto_install) {
 	require install_steps_auto_install;
@@ -473,11 +467,15 @@ sub main {
 	    log::l("auto install config file loaded successfully");
 	}
     }
-    unless ($::auto_install) {
-	$o->{interactive} ||= 'gtk';
-	require"install_steps_$o->{interactive}.pm";
+    $o->{interactive} ||= 'gtk' if !$::auto_install;
+ 
+    if ($o->{interactive} eq "gtk" && availableMemory < 22 * 1024) {
+ 	log::l("switching to newt install cuz not enough memory");
+ 	$o->{interactive} = "newt";
     }
+    require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
 
+ 
     eval { $o = $::o = install_any::loadO($o, "patch") } if $patch;
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
 
@@ -514,7 +512,6 @@ sub main {
 
     my $o_;
     while (1) {
-	require"install_steps_$o->{interactive}.pm";
     	$o_ = $::auto_install ?
     	  install_steps_auto_install->new($o) :
     	    $o->{interactive} eq "stdio" ?

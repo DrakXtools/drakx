@@ -7,8 +7,6 @@ use vars qw(@ISA $graphical @graphical_steps);
 
 @ISA = qw(install_steps);
 
-@graphical_steps = qw(enteringStep beforeInstallPackages installPackages);
-
 use modules;
 
 
@@ -22,19 +20,35 @@ use log;
 sub new {
     my ($type, $o) = @_;
 
-    if ($graphical) {
-	require install_steps_gtk;
-	push @ISA, 'interactive_gtk';
-	foreach my $f (@graphical_steps) {
-	    no strict 'refs';
-	    my $pkg = $install_steps_gtk::{$f} ? 'install_steps_gtk' : 'install_steps_interactive';
-	    log::l("install_steps_auto_install: adding function ", $pkg, "::", $f);
-	    *{"install_steps_auto_install::$f"} = sub {
-		local @ISA = ('install_steps_gtk', @ISA);
-		&{$pkg . '::' . $f};
-	    };
+    # Handle legacy options
+    $o->{interactive} ||= 'gtk' if $graphical;
+    $o->{interactiveSteps} ||= [ @graphical_steps ];
+    push @{$o->{interactiveSteps}}, qw(enteringStep formatMountPartitions beforeInstallPackages installPackages);
+
+    if ($o->{interactive}) {
+	push @ISA, "interactive_$o->{interactive}";
+
+        my $interactiveClass = "install_steps_$o->{interactive}";
+	require"$interactiveClass.pm"; #- no space to skip perl2fcalls
+
+	#- remove the empty wait_message
+	undef *wait_message;
+
+	foreach my $f (@{$o->{interactiveSteps}}) {
+	    foreach my $pkg ($interactiveClass, 'install_steps_interactive') {
+		if ($::{$pkg . "::"}{$f}) {
+		    log::l("install_steps_auto_install: adding function ", $pkg, "::", $f);
+
+		    no strict 'refs';
+		    *{"install_steps_auto_install::$f"} = sub {
+			local @ISA = ($interactiveClass, @ISA);
+			&{$::{$pkg . "::"}{$f}};
+		    };
+		    last;
+		}
+	    }
 	}
-	goto &install_steps_gtk::new;
+	goto &{$::{$interactiveClass . "::"}{new}};
     } else {
 	(bless {}, ref $type || $type)->SUPER::new($o);
     }
