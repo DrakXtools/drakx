@@ -143,7 +143,7 @@ my %files = (
 );
 
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
-my $log_text = new Gtk2::TextView;
+my $log_text = gtktext_insert(Gtk2::TextView->new, [ [ '' ] ]);
 
 my $log_buf = $log_text->get_buffer();
 my $refcount_search;
@@ -207,7 +207,6 @@ gtkadd($my_win->{window},
 
 $::isFile && !$::isEmbedded and gtkset_size_request($log_text, 400, 500);
 
-$my_win->{window}->realize;
 $my_win->{window}->show_all();
 search() if $::isFile;
 $my_win->main;
@@ -218,9 +217,8 @@ sub quit { ugtk2->exit(0) }
 # search functions
 #-------------------------------------------------------------
 sub search {
-#    gtk_text_buffer_delete();
-#BUG    $log_text->backward_delete($log_text->get_length()); #BUG
-#BUG    $log_text->freeze();
+    $log_text->window->freeze_updates();
+    $log_buf->set_text('', -1);
     if ($::isFile) {
 	parse_file($::File);
     } else {
@@ -228,7 +226,7 @@ sub search {
 	    parse_file($files{$_}{file}) if $toggle{$_}->active;
 	}
     }
-#BUG    $log_text->thaw();
+    $log_text->window->thaw_updates();
     $log_text->show();
     gtkflush();
 }
