@@ -12,20 +12,9 @@
 
 use MDK::Common;
 
-sub date_to_raw {
-    my ($y, $m, $d, $h, $mi, $s) = $_[0] =~ /\s(\d+)-(\d+)-(\d+)\s(\d+):(\d+):(\d+)\./;
-    ($y-1970)*32140800 + $m*2678400 + $d*86400 + $h*3600 + $mi*60 + $s;
-}
-
 sub stat_ {
-    my ($f) = @_;
-
-    my (undef, undef, undef, undef, $a, $m, $c) = `stat $f`;
-
-    my $araw = date_to_raw($a);
-    my $mraw = max(date_to_raw($m), date_to_raw($c));
-
-    [ $araw, $mraw ];
+    my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat $_[0];
+    [ $atime, max($mtime, $ctime) ];
 }
 
 our $reference = (stat_('/dummy'))->[0];
