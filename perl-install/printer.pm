@@ -193,6 +193,19 @@ sub stop_service ($) {
     if (($? >> 8) != 0) { return 0 } else { return 1 }
 }
 
+sub service_running ($) {
+    my ($service) = @_;
+    # Exit silently if the service is not installed
+    return 0 if (!(-x "$prefix/etc/rc.d/init.d/$service"));
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "status");
+    # The exit status is not zero when the service is not running
+    if (($? >> 8) != 0) {
+	return 0;
+    } else {
+	return 1;
+    }
+}
+
 sub service_starts_on_boot ($) {
     my ($service) = @_;
     local *F; 
@@ -699,6 +712,18 @@ sub read_configured_queues($) {
 	#- Find the first spooler where there are queues
 	my $spooler;
 	for $spooler (qw(cups pdq lprng lpd)) {
+	    #- Is the spooler's daemon running?
+	    my $service = $spooler;
+	    if ($service eq "lprng") {
+		$service = "lpd";
+	    }
+	    if ($service ne "pdq") {
+		if (!service_running($service)) {
+		    next;
+		}
+		# daemon is running, spooler found
+		$printer->{SPOOLER} = $spooler;
+	    }
 	    #- poll queue info 
 	    local *F; 
 	    open F, ($::testing ? $prefix : "chroot $prefix/ ") . 
@@ -706,9 +731,16 @@ sub read_configured_queues($) {
 		    die "Could not run foomatic-configure";
 	    eval (join('',(<F>))); 
 	    close F;
-	    #- Have we found queues?
-	    if ($#QUEUES != -1) {
-		$printer->{SPOOLER} = $spooler;
+	    if ($service eq "pdq") {
+		#- Have we found queues? PDQ has no damon, so we consider
+		#- it in use when there are defined printer queues
+		if ($#QUEUES != -1) {
+		    $printer->{SPOOLER} = $spooler;
+		    last;
+		}
+	    } else {
+		#- For other spoolers we have already found a running
+		#- daemon when we have arrived here
 		last;
 	    }
 	}
