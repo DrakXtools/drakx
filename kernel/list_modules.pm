@@ -27,7 +27,7 @@ our %l = (
         qw(sb1000 sis900 smc-ultra smc9194 starfire tlan tmspci tulip via-rhine),
         qw(wd winbond-840 forcedeth),
 	qw(fealnx 3c990 3c990fx bcm4400),
-        qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
+        qw(skfp tc35815 lanstreamer farsync sdladrv prism2_plx),
 
 	qw(iph5526), #- fibre channel
       ),
@@ -51,7 +51,7 @@ our %l = (
     ],
     wireless => [
       qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503 at76c503-rfmd atmel_cs),
-      qw(hermes netwave_cs orinoco orinoco_cs prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
+      qw(hermes netwave_cs orinoco orinoco_cs orinoco_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
