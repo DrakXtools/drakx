@@ -163,6 +163,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 #ifdef MANDRAKE_MOVE
 		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
 #else
+		char p;
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
 #endif
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
@@ -173,7 +174,6 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 			return RETURN_ERROR;
 		}
 #ifndef MANDRAKE_MOVE
-		char p;
 		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "

@@ -477,8 +477,9 @@ int kernel_version(void)
 char * floppy_device(void)
 {
         char ** names, ** models;
+        int fd;
 	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
-        int fd = open("/dev/fd0", O_RDONLY|O_NONBLOCK);
+        fd = open("/dev/fd0", O_RDONLY|O_NONBLOCK);
         if (fd != -1) {
                 char drivtyp[17];
                 if (!ioctl(fd, FDGETDRVTYP, (void *)drivtyp)) {

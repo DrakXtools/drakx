@@ -199,7 +199,6 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 #endif
 #endif
 #ifdef ENABLE_USB
-			static int already_probed_usb_controllers = 0;
 		case USB_CONTROLLERS:
 			if (already_probed_usb_controllers || IS_NOAUTO)
 				goto end_pci_probe;
