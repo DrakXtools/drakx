@@ -119,7 +119,7 @@ sub selectKeyboard {
 	$o->{keyboard}{KEYBOARD} = $other ? $ext_keyboard : $KEYBOARD;
 	delete $o->{keyboard}{unsafe};
     }
-    any::keyboard_group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
+    keyboard::group_toggle_choose($o, $o->{keyboard}) or goto &selectKeyboard;
     install_steps::selectKeyboard($o);
 }
 

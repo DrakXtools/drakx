@@ -28,7 +28,7 @@ if (my ($kb) = grep { !/^-/ } @ARGV) {
 						[ keyboard::KEYBOARDs() ],
 						$keyboard->{KEYBOARD}) or goto end;
 
-    any::keyboard_group_toggle_choose($in, $keyboard) or goto choose;
+    keyboard::group_toggle_choose($in, $keyboard) or goto choose;
 }
 
 if ($::expert) {

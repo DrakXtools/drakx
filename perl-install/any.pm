@@ -905,21 +905,4 @@ sub config_mtools {
     } $file;
 }
 
-sub keyboard_group_toggle_choose {
-    my ($in, $keyboard) = @_;
-
-    if (my $grp_toggles = keyboard::grp_toggles($keyboard)) {
-	my $GRP_TOGGLE = $keyboard->{GRP_TOGGLE} || 'caps_toggle';
-	$GRP_TOGGLE = $in->ask_from_listf('', N("Here you can choose the key or key combination that will 
-allow switching between the different keyboard layouts
-(eg: latin and non latin)"), sub { $grp_toggles->{$_[0]} }, [ sort keys %$grp_toggles ], $GRP_TOGGLE) or return;
-
-        log::l("GRP_TOGGLE: $GRP_TOGGLE");
-        $keyboard->{GRP_TOGGLE} = $GRP_TOGGLE;
-    } else {
-        $keyboard->{GRP_TOGGLE} = '';
-    }
-    1;
-}
-
 1;
