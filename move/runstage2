@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/bin/stage2 /usr/lib/libDrakX);
+use install2;
+
+$::isStandalone = 0;
+install2::main(@ARGV, '--move');
+
+c::_exit(0);

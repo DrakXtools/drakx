@@ -1,0 +1,418 @@
+#!/usr/bin/perl
+
+@ARGV >= 2 or die "usage: $0 <image> all|other|cdrom|hd|network|blank|pcmcia|live|tftp|tftprd\n";
+
+use Config;
+Config->import;
+my ($arch) = $Config{archname} =~ /(.*)-/;
+my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corporate version.
+
+($img, $type) = @ARGV;
+
+$instdir = "../mdk-stage1/";
+$mnt = "/tmp/drakx_mnt";
+$mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
+
+if ($>) {
+    $sudo = "sudo";
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+sub __ { print @_, "\n"; system(@_); }
+sub _ { __ @_; $? and die; }
+
+_ "$sudo mkdir $mnt" unless -e $mnt;
+_ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
+
+$install = $ {{
+    all => "stage1-full",
+    other => "stage1-full",
+    blank => "stage1-full",
+    live => "stage1-full",
+    tftp => "stage1-full",
+    tftprd => "stage1-full",
+    pcmcia => "stage1-full",
+    network => "stage1-network",
+    usb => "stage1-usb",
+    cdrom => "stage1-cdrom",
+    hd => "stage1-disk",
+    live64 => "stage1-full",
+    tftp64 => "stage1-full",
+    tftprd64 => "stage1-full",
+    pcmcia64 => "stage1-full",
+    network64 => "stage1-network",
+    cdrom64 => "stage1-cdrom",
+    hd64 => "stage1-disk",
+}}{$type} or die;
+
+chomp($main = `cat ../kernel/all.kernels/.main`);
+
+    @kernels = $main;
+
+foreach (@kernels) {
+    if ($img =~ /rdz$/) {
+	initrd($mnt, "$img-$_");
+    } else {
+	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("../kernel/all.kernels/$_/boot/vmlinu*"));
+    }
+}
+rename("$img-$main", "$img");
+
+sub install_stripped { _ "$sudo install $_[0] $_[1]" }
+
+sub initrd {
+    my ($mnt, $img) = @_;
+    my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
+    my $tmp = "$ENV{HOME}/tmp/initrd";
+    my $tar = "$instdir/stage1-data/stage1-with-busybox.tar.bz2";
+
+    __ "$sudo umount $tmp $mnt 2>/dev/null";
+    _ "dd if=/dev/zero of=$tmp bs=1k count=4000";
+    _ "$mke2fs $tmp";
+    _ "$sudo mount -t ext2 $tmp $mnt -o loop";
+
+    _ "$sudo tar xjC $mnt -f $tar";
+    install_stripped("$instdir/init", "$mnt/sbin");
+    install_stripped("$instdir/$install", "$mnt/sbin/stage1");
+
+    if ($type eq "network" || $type eq "usb" || $type eq "all" || $type eq "other" || $type eq "blank") {
+	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
+	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
+	_ "$sudo mknod $mnt/dev/ppp c 108 0";
+	_ "$sudo mknod $mnt/dev/ptyp0 c 2 0";
+	_ "$sudo mknod $mnt/dev/ttyp0 c 3 0";
+    }
+
+    my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
+    if ($ftype eq "pcmcia") {
+	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
+	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
+	 _ "../tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp ../kernel/all.modules/$main/modules.dep";
+	 _ "sudo mv /tmp/pcmcia_config_tmp $mnt/etc/pcmcia/config";
+    }
+    my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
+    $modz = "../kernel/all.modules$I/$ext";
+    if ($type !~ /blank/) {
+	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" ;
+	_ "$sudo cp -f $modz/modules.dep $mnt/modules/";
+    }
+    _ "$sudo umount $mnt";
+
+
+# Workaround for vfat-loop bug (quite touchy)
+    _ "gzip -9f $tmp";
+    _ "cp -f $tmp.gz $img";
+    _ "rm -f $tmp.gz";
+#    _ "gzip -9 -c $tmp > $img";
+#    _ "rm -f $tmp";
+}
+
+sub boot_img_i386 {
+    my ($mnt, $img, $kernel) = @_;
+
+    __ "$sudo umount $mnt 2>/dev/null";
+    my $automatic = "";
+
+    if ($type eq "hd") {
+	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
+    } elsif ($type eq "all") {
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
+    } else {
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
+    }
+
+    $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
+    $automatic = "automatic=method:disk" if ($type eq "hd");
+
+    _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
+    _ "cat $kernel > $mnt/vmlinuz" if $type !~ /blank/;
+
+    my $rdz = $img; $rdz =~ s/\.img/.rdz/;
+    initrd("${mnt}2", $rdz) if !-e $rdz;
+    eval { _ "cp -f $rdz $mnt/$type.rdz" };
+    if ($@) {
+	unlink "$mnt/$type.rdz";
+	my $avail = (split ' ', `df $mnt`)[-3];
+	my $s = int((-s $rdz) / 1024);
+	die sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
+    }
+
+#    my $ftype = $type =~ /^(other|all)$/ ? "cdrom" : $type;
+    my $timeout = 72;
+    output("$mnt/syslinux.cfg",
+"default linux
+prompt 1
+timeout $timeout
+display boot.msg
+F1 help.msg
+F2 boot.msg
+label linux
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=788
+label vgalo
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=785
+label vgahi
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga=791
+label vga16
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic vga16
+label text
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic text
+label patch
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic patch vga=788
+label expert
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic expert vga=788
+label rescue
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic rescue rw
+label lnx4win
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic lnx4win vga=788" .
+
+($type eq 'all' &&
+"label preinst
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw
+label oem
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:cdrom rescue oem rw") .
+
+"label auto
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz $automatic auto_install=Mandrake/base/auto_inst.cfg.pl
+label all
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788
+label ackbar
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:nfs,network:static,ip:192.168.1.205,dns:192.168.1.11,domain:mandrakesoft.com,server:ackbar,directory:/export vga=788
+");
+    _ "sync";
+    _ "df $mnt";
+}
+
+sub boot_img_alpha {
+    my ($mnt, $img) = @_;
+
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "dd if=/dev/zero of=$img bs=1k count=1440";
+    _ "$mke2fs $img";
+    _ "/sbin/e2writeboot $img /boot/bootlx";
+    _ "$sudo mount -t ext2 $img $mnt -o loop";
+    _ "cp -f vmlinux.gz $mnt" if $type !~ /blank/;
+    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
+
+    mkdir "$mnt/etc", 0777;
+    output("$mnt/etc/aboot.conf", 
+"0:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 $type
+1:vmlinux.gz initrd=$type.rdz rw ramdisk_size=32000 text $type
+");
+    _ "sync";
+    _ "df $mnt";
+}
+
+sub boot_img_sparc {
+    my ($mnt, $img) = @_;
+    if ($type =~ /^live(.*)/) {
+	#- hack to produce directly into /export the needed file for cdrom boot.
+	my $dir = "/export";
+	my $boot = "boot"; #- non-absolute pathname only!
+
+	_ "mkdir -p $dir/$boot";
+	_ "cp -f /boot/cd.b /boot/second.b $dir/$boot";
+	_ "cp -f vmlinux$1 $dir/$boot/vmlinux$1";
+	-f "live$1.rdz" ? _ "cp -f live$1.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live$1.rdz");
+
+	output("$dir/$boot/silo.conf", "
+partition=1
+default=linux
+timeout=100
+read-write
+message=/$boot/boot.msg
+image=\"cat /$boot/boot.msg\"
+  label=1
+  single-key
+image=\"cat /$boot/general.msg\"
+  label=2
+  single-key
+image=\"cat /$boot/expert.msg\"
+  label=3
+  single-key
+image=\"cat /$boot/rescue.msg\"
+  label=4
+  single-key
+image=\"cat /$boot/kickit.msg\"
+  label=5
+  single-key
+image=\"cat /$boot/param.msg\"
+  label=6
+  single-key
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=linux
+  alias=install
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000$corporate\"
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=text
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000 text$corporate\"
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=expert
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000 expert$corporate\"
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=ks
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000 ks$corporate\"
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=rescue
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=linux
+  alias=install
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=text
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 text$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=expert
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 expert$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=ks
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 ks$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=rescue
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
+");
+
+	output("$dir/$boot/README", "
+To Build a Bootable CD-ROM, try:
+  mkisofs -R -o t.iso -s /$boot/silo.conf /export
+");
+    } elsif ($type =~ /^tftprd(.*)/) {
+	my $dir = "/export";
+	my $boot = "images";
+	my $setarch = $1 ? "sparc64" : "sparc32";
+
+	_ "mkdir -p $dir/$boot";
+	-f "$type.rdz" or initrd("${mnt}2", "$type.rdz");
+	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
+	_ "$setarch kernel$1/src/arch/sparc$1/boot/piggyback $dir/$boot/$type.img kernel$1/boot/System.map $type.rdz";
+    } elsif ($type =~ /^tftp(.*)/) {
+	my $dir = "/export";
+	my $boot = "images";
+
+	_ "mkdir -p $dir/$boot";
+	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
+    } else {
+	my $dir = "floppy";
+	my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
+
+	__ "$sudo umount $mnt 2>/dev/null";
+	_ "rm -rf $dir";
+	_ "mkdir -p $dir";
+	_ "cp -f /boot/fd.b /boot/second.b $dir";
+	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz" if $type !~ /blank/;
+	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
+
+	output("$dir/boot.msg", "
+Welcome to Mandrake Linux 7.1
+
+Press <Enter> to install or upgrade a system 7mMandrake Linux7m
+");
+
+	output("$dir/silo.conf", "
+partition=1
+default=linux
+timeout=100
+read-write
+message=/boot.msg
+image=/vmlinux$I.gz
+  label=linux
+  initrd=/$type.rdz
+  append=\"ramdisk_size=32000 $ltype$corporate\"
+");
+	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
+	_ "$sudo mount -t romfs /dev/ram $mnt";
+	_ "silo -r $mnt -F -i /fd.b -b /second.b -C /silo.conf";
+	_ "$sudo umount $mnt";
+	_ "dd if=/dev/ram of=$type.img bs=1440k count=1";
+	_ "sync";
+	_ "$sudo mount -t romfs /dev/ram $mnt";
+	_ "df $mnt";
+    }
+}
+
+sub boot_img_ppc {
+    my ($mnt, $img, $kern, $modz) = @_;
+    my $dir = "/export";
+    my $boot = "boot"; #- non-absolute pathname only!
+    my ($extension) = $modz =~ /.*\/([^\/]+)/;
+    _ "mkdir -p $dir/$boot";
+    _ "cp -f $kern $dir/$boot/vmlinux";
+    _ "cp -f all.rdz$extension $dir/boot/all.gz";
+    _ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
+	
+	output("$dir/$boot/yaboot.conf", "
+init-message = \"\\nWelcome to Mandrake Linux PPC!\\nHit <TAB> for boot options.\\n\\n\"
+timeout = 150
+default = install-novideo
+
+image = cd:,\\\\\\\\vmlinux
+    label = install-novideo
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=ofonly\"
+    
+image = cd:,\\\\\\\\vmlinux
+    label = install-atyfb
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=atyfb:vmode:17\"
+    
+image = cd:,\\\\\\\\vmlinux
+    label = install-aty128fb
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" video=aty128fb:vmode:17\"
+
+image = cd:,\\\\\\\\vmlinux
+    label = install-text
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" text\"
+
+image = cd:,\\\\\\\\vmlinux
+    label = rescue
+    initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" rescue\"    
+");
+	#- seem to need 2 yaboot.conf, one in the root, and one in boot
+	_ "cp -f $dir/boot/yaboot.conf $dir/yaboot.conf";		
+
+	output("$dir/$boot/README", "
+To Build a Bootable CD-ROM, do:
+cd /tools/ppc
+./mkINSTALLCD /export ppc-cd.img
+");
+
+}
+
+sub output {
+    my $f = shift;
+    local *F;
+    open F, "> $f" or die "error writing to $f";
+    print F join '', @_;
+}
