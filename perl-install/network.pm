@@ -117,7 +117,7 @@ sub add2hosts {
     local *F;
     if (-e $file) {
 	open F, $file or die "cannot open $file: $!";
-	/\s*(\S+)(.*)/ and $l{$1} = $2 foreach <F>;
+	/\s*(\S+)(.*)/ and $l{$1} ||= $2 foreach <F>;
     }
     log::l("writing host information to $file");
     open F, ">$file" or die "cannot write $file: $!";

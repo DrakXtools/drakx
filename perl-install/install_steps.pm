@@ -521,16 +521,23 @@ sub configureServices {
 #------------------------------------------------------------------------------
 sub configurePrinter {
     my($o) = @_;
-    if ($o->{printer}{configured}) {
-	require pkgs;
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'rhs-printfilters'));
-	$o->installPackages($o->{packages});
+    my ($use_cups, $use_lpr) = (0, 0);
+    foreach (values %{$o->{printer}{configured} || {}}) {
+	for ($_->{mode}) {
+	    /cups/ and $use_cups++;
+	    /lpr/  and $use_lpr++;
+	}
+    }
+    #- if at least one queue is configured, configure it.
+    if ($use_cups || $use_lpr) {
+	$o->pkg_install(($use_cups ? ('cups-drivers') : ()), ($use_lpr ? ('rhs-printfilters') : ()));
 
 	require printer;
 	eval { add2hash($o->{printer}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
-	printer::read_printer_db(); #- load printer db, else configuration will fails.
+	$use_cups and printer::poll_ppd_base();
+	$use_lpr and printer::read_printer_db();
 	foreach (keys %{$o->{printer}{configured} || {}}) {
-	    log::l("configuring printer queue $_->{queue}");
+	    log::l("configuring printer queue $_->{queue} for $_->{mode}");
 	    printer::copy_printer_params($_, $o->{printer});
 	    #- setup all configured queues, which is not the case interactively where
 	    #- only the working queue is setup on configuration.

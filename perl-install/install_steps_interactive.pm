@@ -578,7 +578,9 @@ sub configurePrinter {
     }
 
     $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
-    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
+    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
+
+    $o->pkg_install_if_requires_satisfied('xpp', 'kups');
 }
 
 #------------------------------------------------------------------------------

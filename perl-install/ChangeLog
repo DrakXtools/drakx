@@ -1,3 +1,13 @@
+2000-09-01  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixes to configure XF86Config-4 when XFree-3.3
+	is installed, make 16bits by default on 3D hardware acceleration,
+	fixed selection of hardware for hardware acceleration.
+	* install_steps.pm: add cups for printer configuration, used for
+	auto_install. added new function to add packages only if requires
+	are already satisfied.
+	* standalone/printerdrake: updated.
+
 2000-08-31  dam's  <damien@mandrakesoft.com>
 
 	* moved many things to network.pm and any.pm

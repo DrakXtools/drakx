@@ -129,6 +129,7 @@ sub read_configured_queue($) {
 	if (/^##PRINTTOOL3##\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p(?:\s+$p)?/) {
 	    &$flush_current;
 	    $current = {
+			mode => 'lpr',
 			TYPE => $1 || $2,
 			GSDRIVER => $3 || $4,
 			RESOLUTION => $5 || $6,
@@ -238,8 +239,8 @@ sub read_configured_queue($) {
 	}
     }
 
-    #- assume this printing system.
-    $printer->{mode} ||= 'lpr';
+    #- assume this printing system, but only if some queue are defined.
+    scalar(keys %{$printer->{configured}}) > 0 and $printer->{mode} ||= 'lpr';
 }
 
 sub read_printer_db(;$) {
@@ -320,7 +321,7 @@ sub read_printers_conf {
     foreach (<PRINTERS>) {
 	chomp;
 	/^\s*#/ and next;
-	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { QUEUE => $1, } }
+	if (/^\s*<(?:DefaultPrinter|Printer)\s+([^>]*)>/) { $current = { mode => 'cups', QUEUE => $1, } }
 	elsif (/\s*<\/Printer>/) { $current->{QUEUE} && $current->{DeviceURI} or next; #- minimal check of synthax.
 				   add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current); $current = undef }
 	elsif (/\s*(\S*)\s+(.*)/) { $current->{$1} = $2 }

@@ -183,20 +183,21 @@ sub cardConfiguration(;$$$) {
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
-    $card->{Utah_glx} = ($card->{identifier} =~ /MGA G[24]00/ ||
+    $card->{Utah_glx} = ($card->{identifier} =~ /MGA G[24]00/ || #- 8bpp does not work.
 			 $card->{identifier} =~ /3D Rage Pro AGP/ || #- by default only such card are supported, with AGP ?
-			 $card->{type} =~ /RIVA TNT/ ||
+			 $card->{type} =~ /RIVA TNT/ || $card->{type} =~ /RIVA128/ || $card->{type} =~ /GeForce 256/ ||
 			 #- $card->{type} =~ /SiS / || #- EXPERIMENTAL
-			 #- $card->{type} =~ /S3 ViRGE/ || #- EXPERIMENTAL
+			 #- $card->{type} =~ /S3 ViRGE/ || #- EXPERIMENTAL, 15bits only (!).
+			 #- $card->{type} =~ /S3 Savage3D/ || #- EXPERIMENTAL, use no_pixmap_cache, 16bit only.
 			 $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 4.0 using DRI.
-    $card->{DRI_glx} = ($card->{type} =~ /Voodoo3 / || $card->{type} =~ /Voodoo Banshee / ||
-			$card->{identified} =~ /MGA G[24]00/ ||
-			$card->{type} =~ /Intel 810/ ||
-			$card->{type} =~ /ATI Rage 128/);
+    $card->{DRI_glx} = ($card->{identifier} =~ /Voodoo [35]/ || #- 16bit only #- NOT YET $card->{identifier} =~ /Voodoo Banshee/ ||
+			$card->{identifier} =~ /MGA G[24]00/ || #- prefer 16bit (24bit not well tested according to DRI)
+			$card->{type} =~ /Intel 810/ || #- 16bit
+			$card->{type} =~ /ATI Rage 128/); #- 16 and 32 bits, prefer 16bit as no DMA.
 
     #- check to use XFree 4.0 or XFree 3.3.
-    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
+    $card->{use_xf4} = !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported};
 
     #- ask the expert user if he want 3D acceleration.
     if ($::expert && ($card->{Utah_glx} || $card->{DRI_glx})) {
@@ -206,19 +207,19 @@ sub cardConfiguration(;$$$) {
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
-    if ($card->{driver} && $card->{Utah_glx} && !$card->{DRI_glx}) {
+    if ($card->{use_xf4} && $card->{Utah_glx} && !$card->{DRI_glx}) {
 	$::beginner || $in->ask_yesorno('',
 					_("Your card can have 3D acceleration but only with XFree 3.3.
-Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '';
+Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{use_xf4} = '';
     }
 
-    $card->{prog} = "/usr/X11R6/bin/" . ($card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
+    $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
 					 "Xsun$1" : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
 	$in->suspend if ref($in) =~ /newt/;
-	&$install($card->{server}, $card->{Utah_glx} ? 'Mesa' : ()) if !$card->{driver};
-	&$install('server') if $card->{driver}; #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
+	&$install($card->{server}, $card->{Utah_glx} ? 'Mesa' : ()) if !$card->{use_xf4};
+	&$install('server') if $card->{use_xf4}; #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
 	$in->resume if ref($in) =~ /newt/;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
@@ -252,7 +253,7 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
 
     if (!$::isStandalone && $card->{driver} eq "i810") {
 	require modules;
-	modules::load("agpgart"); eval { modules::load("i810"); };
+	modules::load("agpgart"); };
     }
     $card;
 }
@@ -313,7 +314,7 @@ sub testConfig($) {
     unlink "/tmp/.X9-lock";
     #- restart_xfs;
 
-    my $f = $tmpconfig . ($o->{card}{driver} && "-4");
+    my $f = $tmpconfig . ($o->{card}{use_xf4} && "-4");
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $f 2>&1 |";
     foreach (<F>) {
@@ -350,7 +351,7 @@ sub testFinalConfig($;$$) {
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
     $bad_card ||= $o->{card}{identifier} eq "ATI|3D Rage P/M Mobility AGP 2x";
-    $bad_card ||= $o->{card}{driver}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
+    $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
     my $mesg = _("Do you want to test the configuration?");
@@ -380,7 +381,7 @@ sub testFinalConfig($;$$) {
 	open STDERR, ">$f_err";
 	chroot $prefix if $prefix;
 	exec $o->{card}{prog}, 
-	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{driver} && "-4")) : ()),
+	  ($o->{card}{prog} !~ /Xsun/ ? ("-xf86config", ($::testing ? $tmpconfig : $f) . ($o->{card}{use_xf4} && "-4")) : ()),
 	  ":9" or c::_exit(0);
     }
 
@@ -473,9 +474,8 @@ sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
-    return 24 if $card->{identifier} =~ /SiS/;
-
-    return 16 if $card->{type} =~ /Voodoo (?!5)/x;
+    return 24 if $card->{identifier} =~ /SiS/; #- assume 24 bit event for 3D acceleration (not enabled currently).
+    return 16 if $card->{Utah_glx} || $card->{DRI_glx}; #- assume 16bit as most of them need 16.
     
     for ($card->{server}) {
 	/FBDev/   and return 16; #- this should work by default, FBDev is allowed only if install currently uses it at 16bpp.

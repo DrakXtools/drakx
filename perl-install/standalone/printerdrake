@@ -37,12 +37,13 @@ $::skiptest = /-skiptest/;
 $::testing = /-testing/;
 $::isStandalone = 1;
 
-my $f = "/usr/lib/rhs/rhs-printfilters";
--e $f or system("urpmi --auto rhs-printfilters");
--e $f or die "install rhs-printfilters first!\n";
+my $printer; eval { $printer = printer::getinfo('') };
+/-lpr/ and $printer->{mode} = 'lpr';
+/-cups/ and $printer->{mode} = 'cups';
+$printer->{mode} ||= 'cups'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 
-printerdrake::main(eval { printer::getinfo('') } || {}, $in, sub { `urpmi --auto $_[0]` });
+printerdrake::main(eval { printer::getinfo('') } || {}, $in, sub { my $l = join(' ', @_); `urpmi --auto $l` });
 
 $in->exit(0);
