@@ -455,9 +455,7 @@ sub pppConfig {
     $toreplace{papname} = ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') && $toreplace{login};
 
     #- build ifcfg-ppp0.
-    my $ifcfg = "$prefix/etc/sysconfig/network-scripts/ifcfg-ppp0";
-    local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
-    print IFCFG <<END;
+    my $various = <<END;
 DEVICE="$toreplace{intf}"
 ONBOOT="no"
 USERCTL="no"
@@ -482,15 +480,12 @@ RETRYTIMEOUT="60"
 BOOTPROTO="none"
 PEERDNS="$toreplace{peerdns}"
 END
-    foreach (1..2) {
-	print IFCFG qq(DNS$_=$toreplace{"dns$_"}\n) if $toreplace{"dns$_"};
-    }
-    close IFCFG;
+    output("$prefix/etc/sysconfig/network-scripts/ifcfg-ppp0", 
+	   $various,
+	   map { qq(DNS$_=$toreplace{"dns$_"}\n) } grep { $toreplace{"dns$_"} } 1..2);
 
     #- build chat-ppp0.
-    my $chat = "$prefix/etc/sysconfig/network-scripts/chat-ppp0";
-    local *CHAT; open CHAT, ">$chat" or die "Can't open $chat";
-    print CHAT <<END;
+    my @chat = <<END;
 'ABORT' 'BUSY'
 'ABORT' 'ERROR'
 'ABORT' 'NO CARRIER'
@@ -500,26 +495,26 @@ END
 '' 'ATZ'
 END
     if ($modem->{special_command}) {
-	print CHAT <<END;
+	push @chat, <<END;
 'OK' '$modem->{special_command}'
 END
     }
-    print CHAT <<END;
+    push @chat, <<END;
 'OK' 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
     if ($modem->{auth} eq 'Terminal-based' || $modem->{auth} eq 'Script-based') {
-	print CHAT <<END;
+	push @chat, <<END;
 'ogin:--ogin:' '$toreplace{login}'
 'ord:' '$toreplace{passwd}'
 END
     }
-    print CHAT <<END;
+    push @chat, <<END;
 'TIMEOUT' '5'
 '~--' ''
 END
-    close CHAT;
-    chmod 0600, $chat;
+    my $chat_file = "$prefix/etc/sysconfig/network-scripts/chat-ppp0";
+    output_with_perm($chat_file, 0600, @chat);
 
     if ($modem->{auth} eq 'PAP' || $modem->{auth} eq 'CHAP') {
 	#- need to create a secrets file for the connection.

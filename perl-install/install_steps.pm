@@ -634,8 +634,7 @@ sub configureNetwork {
 	$o->{netcnx}{type} = 'lan';
 	foreach ("up", "down") {
 	    my $f = "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_$_";
-	    output $f, "\nif$_ eth0\n";
-	    chmod 0755, $f;
+	    output_with_perm($f, 0755, "\nif$_ eth0\n");
 	}
 	output "$o->{prefix}/etc/sysconfig/network-scripts/net_cnx_pg", "\n/usr/sbin/drakconnet\n";
     }

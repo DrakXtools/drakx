@@ -138,16 +138,14 @@ sub main {
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1)) and do {
     $netcnx->{type} = 'lan';
-    output "$prefix$connect_file",
+    output_with_perm("$prefix$connect_file", 0755,
       qq(
 ifup eth0
-);
-    output "$prefix$disconnect_file",
+));
+    output("$prefix$disconnect_file", 0755,
       qq(
 ifdown eth0
-);
-    chmod 0755, "$prefix$disconnect_file";
-    chmod 0755, "$prefix$connect_file";
+));
     $direct_net_install = 1;
     goto step_5;
 };
@@ -283,9 +281,9 @@ Test your connection via net_monitor or mcc. If your connection doesn't work, yo
 
     $network_configured or network::configureNetwork2($in, $prefix, $netc, $intf);
 
+    my $connect_cmd;
     if ($netcnx->{type} =~ /modem/ || $netcnx->{type} =~ /isdn_external/) {
-	output "$prefix$connect_prog",
-	  qq(
+	$connect_cmd = qq(
 #!/bin/bash
 if [ -n "\$DISPLAY" ]; then
 if [ -e /usr/bin/kppp ]; then
@@ -299,8 +297,7 @@ $connect_file
 fi
 );
     } elsif ($netcnx->{type}) {
-	output "$prefix$connect_prog",
-	  qq(
+	$connect_cmd = qq(
 #!/bin/bash
 if [ -n "\$DISPLAY" ]; then
 /usr/sbin/net_monitor --connect
@@ -309,15 +306,13 @@ $connect_file
 fi
 );
     } else {
-	output "$prefix$connect_prog",
-	  qq(
+	$connect_cmd = qq(
 #!/bin/bash
 /usr/sbin/drakconnect
 );
     }
     if ($direct_net_install) {
-	output "$prefix$connect_prog",
-	  qq(
+	$connect_cmd = qq(
 #!/bin/bash
 if [ -n "\$DISPLAY" ]; then
 /usr/sbin/net_monitor --connect
@@ -326,7 +321,7 @@ $connect_file
 fi
 );
     }
-    chmod 0755, "$prefix$connect_prog";
+    output_with_perm("$prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
 
     $netcnx->{NET_INTERFACE} and set_net_conf($netcnx, $netc);
@@ -354,7 +349,7 @@ sub save_conf {
 
     $intf = { %$intf };
 
-    output("$prefix/etc/sysconfig/network-scripts/drakconnect_conf",
+    output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600,
       "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
 InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
@@ -430,7 +425,6 @@ ADSLLogin=$adsl->{login}
 ADSLPassword=$adsl->{passwd}
 DOMAINNAME2=$netc->{DOMAINNAME2}"
 	  );
-    chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";

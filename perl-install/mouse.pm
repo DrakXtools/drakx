@@ -383,8 +383,7 @@ sub various_xfree_conf {
 	if ($mouse->{nbuttons} <= 5) {
 	    unlink($f);
 	} else {
-	    output_p($f, "xmodmap -e 'pointer = 1 2 3 6 7 4 5'\n");
-	    chmod 0755, $f;
+	    output_with_perm($f, 0755, "xmodmap -e 'pointer = 1 2 3 6 7 4 5'\n");
 	}
     }
     {
@@ -393,8 +392,7 @@ sub various_xfree_conf {
 	    unlink($f);
 	} else {
 	    $in->do_pkgs->install('xinput');
-	    output_p($f, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
-	    chmod 0755, $f;
+	    output_with_perm($f, 0755, "xinput set-button-map Mouse2 1 2 3 6 7 4 5\n");
 	}
     }
 }

@@ -100,8 +100,7 @@ sub isdn_write_config_backend {
 	symlinkf("isdn" . $bundle . ".conf", "$prefix/etc/isdn/isdnctrl.conf");
 	symlinkf("ioptions" . $bundle, "$prefix/etc/ppp/ioptions");
     } else {
-	my $f = "$prefix/etc/isdn/profile/link/myisp";
-	output($f,
+	output_with_perm("$prefix/etc/isdn/profile/link/myisp", 0600,
 	  qq(
 I4L_USERNAME="$isdn->{login}"
 I4L_SYSNAME=""
@@ -110,8 +109,6 @@ I4L_REMOTE_OUT="$isdn->{phone_out}"
 I4L_DIALMODE="$isdn->{dialing_mode}"
 ) . if_($isdn->{speed} =~ /128/, 'SLAVE="ippp1"
 '));
-	chmod 0600, $f;
-
 	output "$prefix/etc/isdn/profile/card/mycard",
 	  qq(
 I4L_MODULE="$isdn->{driver}"
