@@ -99,7 +99,7 @@ sub new {
 	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, {'fill', 'expand'}, {'fill', 'expand'}, 0, 0);
     }
 
-    ($::isEmbedded && !$my_gtk::pop_it) or return $o;
+    $::isEmbedded && !$my_gtk::pop_it or return $o;
     $o->{window} = new Gtk::HBox(0,0);
     $o->{rwindow} = $o->{window};
     defined($::Plug) or $::Plug = new Gtk::Plug ($::XID);
@@ -115,7 +115,7 @@ sub main {
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $b = before_leaving { Gtk->timeout_remove($timeout) };
     $o->show;
-    $o->{rwindow}->window->set_events(['key_press_mask', 'key_release_mask', 'exposure_mask']) if !$::isEmbedded;
+    $o->{rwindow}->window->set_events(['key_press_mask', 'key_release_mask', 'exposure_mask']) if $o->{rwindow}->window;
 
     do {
 	local $::setstep = 1;

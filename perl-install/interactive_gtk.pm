@@ -14,7 +14,6 @@ my $forgetTime = 1000; #- in milli-seconds
 
 sub new {
     ($::windowheight, $::windowwidth) = my_gtk::gtkroot()->get_size if !$::isInstall;
-    ($::wantedheight, $::wantedwidth) = $::isEmbedded ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
     goto &interactive::new;
 }
 sub enter_console { my ($o) = @_; $o->{suspended} = common::setVirtual(1) }
@@ -500,11 +499,13 @@ sub ask_fromW {
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
 
+	my ($wantedheight, $wantedwidth) = $::isEmbedded && !$my_gtk::pop_it ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
+
 	my $width = max(250, $max_width * 5);
-	$mainw->{box_width} = min($::wantedwidth, $width);
+	$mainw->{box_width} = min($wantedwidth, $width);
 
 	my $height = max(200, my_gtk::n_line_size($always_total_size, 'various', $mainw->{rwindow}));
-	$mainw->{box_height} = min($::wantedheight, $height);
+	$mainw->{box_height} = min($wantedheight, $height);
 
 	my $has = $width > $mainw->{box_width} || $height > $mainw->{box_height};
 	$has_scroll ||= $has;
@@ -526,11 +527,10 @@ sub ask_fromW {
 
     $pack->pack_start($advanced_pack, 1, 1, 0);
     gtkadd($mainw->{window}, $pack);
-    if ($has_scroll && !$::isEmbedded &&!$::isWizard) {
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height});
-    } elsif ($has_horiz_scroll && !$::isEmbedded &&!$::isWizard) {
-	$mainw->{rwindow}->set_default_size($mainw->{box_width}, 0);
-    } 
+    if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height}) if $has_scroll;
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}, 0) if $has_horiz_scroll;
+    }
     $set_advanced->(0);
     (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
@@ -761,7 +761,7 @@ sub wait_messageW($$$) {
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(join("\n", warp_text($_))) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
-    $w->{rwindow}->set_position('center') if ($::isStandalone && !$::isEmbedded && !$::isWizard);
+    $w->{rwindow}->set_position('center') if ($::isStandalone && (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it));
     $w->{window}->show_all;
     $w->sync until $w->{displayed};
     $w;
