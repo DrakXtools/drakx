@@ -64,7 +64,8 @@
 #endif
 
 
-/* globals */
+/************************************************************
+ * globals */
 
 char * method_name;
 
@@ -76,7 +77,24 @@ void fatal_error(char *msg)
 }
 
 
-/* spawns a shell on console #2 */
+/************************************************************
+ * backend functs
+ * the principle is to not pollute frontend code with stage1-specific stuff */
+
+int error_message_backend(void)
+{
+	unset_param(MODE_AUTOMATIC);
+	return 0;
+}
+
+int info_message_backend(void)
+{
+	return IS_AUTOMATIC ? 1 : 0;
+}
+
+
+/************************************************************
+ * spawns a shell on console #2 */
 static void spawn_shell(void)
 {
 #ifdef SPAWN_SHELL
@@ -175,6 +193,9 @@ static void spawn_interactive(void)
 }
 
 
+/************************************************************
+ */
+
 static void expert_third_party_modules(void)
 {
 	enum return_type results;
@@ -250,6 +271,10 @@ static void handle_pcmcia(char ** pcmcia_adapter)
 	remove_wait_message();
 #endif
 }
+
+
+/************************************************************
+ */
 
 static enum return_type method_select_and_prepare(void)
 {
@@ -337,7 +362,7 @@ int main(int argc, char **argv, char **env)
 	handle_env(env);
 	spawn_shell();
 	init_modules_insmoding();
-	init_frontend();
+	init_frontend("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
 
 	if (IS_EXPERT)
 		expert_third_party_modules();

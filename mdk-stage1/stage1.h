@@ -28,8 +28,6 @@
 
 /* Some global stuff */
 
-enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
-
 extern char * method_name;
 extern char * interactive_fifo;
 
@@ -48,5 +46,7 @@ extern char * interactive_fifo;
 #define IS_RAMDISK     (get_param(MODE_RAMDISK))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
+
+#define __FRONTEND_NEED_BACKEND__
 
 #endif

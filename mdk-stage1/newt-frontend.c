@@ -31,19 +31,16 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/time.h>
-#include "stage1.h"
-#include "log.h"
 #include "newt/newt.h"
 
 #include "frontend.h"
 
-
-void init_frontend(void)
+void init_frontend(char * welcome_msg)
 {
 	newtInit();
 	newtCls();
 	
-	newtDrawRootText(0, 0, "Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
+	newtDrawRootText(0, 0, welcome_msg);
 	
 	newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
 }
@@ -58,21 +55,25 @@ void finish_frontend(void)
 void error_message(char *msg, ...)
 {
 	va_list args;
+#ifdef __FRONTEND_NEED_BACKEND__
+	if (error_message_backend())
+		return;
+#endif
 	va_start(args, msg);
-	va_end(args);
 	newtWinMessagev("Error", "Ok", msg, args);
-	unset_param(MODE_AUTOMATIC);
+	va_end(args);
 }
 
 void info_message(char *msg, ...)
 {
 	va_list args;
+#ifdef __FRONTEND_NEED_BACKEND__
+	if (info_message_backend())
+		return;
+#endif
 	va_start(args, msg);
+	newtWinMessagev("Notice", "Ok", msg, args);
 	va_end(args);
-	if (!IS_AUTOMATIC)
-		newtWinMessagev("Notice", "Ok", msg, args);
-	else
-		vlog_message(msg, args);
 }
 
 

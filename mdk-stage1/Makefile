@@ -174,6 +174,9 @@ $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
 
+$(FRONTEND_OBJS): %.o: %.c
+	$(COMPILE) $(INCLUDES) -D__FRONTEND_NEED_BACKEND__ -c $<
+
 .c.o: .depend
 	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $<
 

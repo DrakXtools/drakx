@@ -26,16 +26,13 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <termios.h>
-#include "stage1.h"
-#include "log.h"
-#include "newt.h"
 
 #include "frontend.h"
 
 
-void init_frontend(void)
+void init_frontend(char * welcome_msg)
 {
-	printf("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__ "\n");
+	printf(welcome_msg);
 }
 
 
@@ -176,21 +173,25 @@ static void blocking_msg(char *type, char *fmt, va_list args)
 void error_message(char *msg, ...)
 {
 	va_list args;
+#ifdef __FRONTEND_NEED_BACKEND__
+	if (error_message_backend())
+		return;
+#endif
 	va_start(args, msg);
-	va_end(args);
 	blocking_msg("> Error! ", msg, args);
-	unset_param(MODE_AUTOMATIC);
+	va_end(args);
 }
 
 void info_message(char *msg, ...)
 {
 	va_list args;
+#ifdef __FRONTEND_NEED_BACKEND__
+	if (info_message_backend())
+		return;
+#endif
 	va_start(args, msg);
+	blocking_msg("> Notice: ", msg, args);
 	va_end(args);
-	if (!IS_AUTOMATIC)
-		blocking_msg("> Notice: ", msg, args);
-	else
-		vlog_message(msg, args);
 }
 
 void wait_message(char *msg, ...)
