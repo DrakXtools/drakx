@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-29 14:35+0200\n"
+"POT-Creation-Date: 2003-07-31 22:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,6 +327,11 @@ msgstr ""
 msgid "256 kB"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Don't rewind tape after backup"
+msgstr ""
+
 #: ../../any.pm:1 ../../any.pm:1
 #, c-format
 msgid "Bootloader main options"
@@ -556,7 +561,7 @@ msgstr ""
 msgid "Remove a module"
 msgstr ""
 
-#: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Password"
 msgstr ""
@@ -611,47 +616,6 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "/Autodetect _jazz drives"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Description:\n"
-"\n"
-"  Drakbackup is used to backup your system.\n"
-"  During the configuration you can select: \n"
-"\t- System files, \n"
-"\t- Users files, \n"
-"\t- Other files.\n"
-"\tor All your system ...  and Other (like Windows Partitions)\n"
-"\n"
-"  Drakbackup allows you to backup your system on:\n"
-"\t- Harddrive.\n"
-"\t- NFS.\n"
-"\t- CDROM (CDRW), DVDROM (with autoboot, rescue and autoinstall.).\n"
-"\t- FTP.\n"
-"\t- Rsync.\n"
-"\t- Webdav.\n"
-"\t- Tape.\n"
-"\n"
-"  Drakbackup allows you to restore your system to\n"
-"  a user selected directory.\n"
-"\n"
-"  Per default all backups will be stored on your\n"
-"  /var/lib/drakbackup directory\n"
-"\n"
-"  Configuration file:\n"
-"\t/etc/drakconf/drakbackup/drakbackup.conf\n"
-"\n"
-"Restore Step:\n"
-"  \n"
-"  During the restore step, DrakBackup will remove \n"
-"  your original directory and verify that all \n"
-"  backup files are not corrupted. It is recommended \n"
-"  you do a last backup before restoring.\n"
-"\n"
-"\n"
-""
 msgstr ""
 
 #: ../../install_messages.pm:1
@@ -939,53 +903,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Multisession CD"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" - Backup System Files:\n"
-"       \n"
-"\tThis option allows you to backup your /etc directory,\n"
-"\twhich contains all configuration files. Please be\n"
-"\tcareful during the restore step to not overwrite:\n"
-"\t\t/etc/passwd \n"
-"\t\t/etc/group \n"
-"\t\t/etc/fstab\n"
-"\n"
-" - Backup User Files: \n"
-"\n"
-"\tThis option allows you select all users that you want to \n"
-"\tbackup. To preserve disk space, it is recommended that\n"
-"\tyou do not include the web browser's cache.\n"
-"\n"
-" - Backup Other Files: \n"
-"\n"
-"\tThis option allows you to include additional data to save.\n"
-"\tIf you want to add individual files, select them from the\n"
-"\trighthand 'Files' list pane.  To add directories, enter the \n"
-"\tdirectory by clicking on it in the lefthand 'Folders' pane, \n"
-"\tand at that point click 'OK' without selecting any files.\n"
-" \n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-""
 msgstr ""
 
 #: ../../modules/parameters.pm:1
@@ -2171,6 +2088,13 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
+"Directory (or module) to\n"
+" put the backup on this host."
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
 "\t\t user name: %s\n"
 "\t\t on path: %s \n"
 ""
@@ -2345,13 +2269,6 @@ msgstr ""
 msgid "Connection speed"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter your CD Writer device name\n"
-" ex: 0,1,0"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Namibia"
@@ -2478,6 +2395,11 @@ msgstr ""
 msgid "CUPS"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Erase tape before backup"
+msgstr ""
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Run config tool"
@@ -2508,14 +2430,14 @@ msgstr ""
 msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Saint Lucia"
-msgstr ""
-
 #: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Saint Lucia"
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -3111,11 +3033,6 @@ msgstr ""
 msgid "No password prompt on %s at port %s"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to use the non-rewinding device."
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Usage of remote scanners"
@@ -3173,14 +3090,14 @@ msgstr ""
 msgid "not enough room in /boot"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Liechtenstein"
-msgstr ""
-
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Liechtenstein"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -3654,6 +3571,11 @@ msgstr ""
 msgid "Mount points must begin with a leading /"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Choose your CD/DVD device"
+msgstr ""
+
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Postfix Mail Server"
@@ -3730,11 +3652,6 @@ msgstr ""
 msgid "Your card can have 3D hardware acceleration support with XFree %s."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please choose your CD/DVD media size (Mb)"
-msgstr ""
-
 #: ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Choose a monitor"
@@ -3763,6 +3680,11 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Size in MB: "
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Choose your CD/DVD media size (Mb)"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -4367,6 +4289,11 @@ msgstr ""
 msgid ""
 "\n"
 "- Save to Tape on device: %s"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Login name"
 msgstr ""
 
 #: ../../security/l10n.pm:1
@@ -5745,11 +5672,6 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your password"
-msgstr ""
-
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Name of the profile to create (the new profile is created as a copy of the current one) :"
@@ -5758,11 +5680,6 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Floppy"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your RW media (1st Session)"
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -6311,12 +6228,8 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
-"\n"
-" Some errors during sendmail are caused by \n"
-" a bad configuration of postfix. To solve it you have to\n"
-" set myhostname or mydomain in /etc/postfix/main.cf\n"
-"\n"
-""
+"Enter the maximum size\n"
+" allowed for Drakbackup (Mb)"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -6404,6 +6317,11 @@ msgstr ""
 msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Erase your RW media (1st Session)"
+msgstr ""
+
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid ""
@@ -6480,7 +6398,7 @@ msgstr ""
 msgid "Reunion"
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Details"
 msgstr ""
@@ -6673,6 +6591,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Western Sahara"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Eject tape after the backup"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -6928,46 +6851,6 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Uzbek (cyrillic)"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-" In this step Drakbackup allow you to change:\n"
-"\n"
-" - the .backupignore mode:\n"
-"\n"
-"      Like with cvs, drakbackup will ignore all references\n"
-"      included in .backupignore files in each directory.\n"
-"      \n"
-"\t  Example: \n"
-"         #> cat .backupignore\n"
-"         *.o\n"
-"         *~\n"
-"         ...\n"
-" \n"
-" - The user(s) to whom drakbackup reports should be mailed to.\n"
-"      \n"
-"      This can be a comma sperated lists of local users, or\n"
-"      internet email addresses if your system is setup to\n"
-"      do internet mail.\n"
-"  \n"
-" - The compression mode (not enabled):\n"
-"    \n"
-"      If you check bzip2 compression, you will compress\n"
-"      your data better than gzip (about 2-10 %%).\n"
-"      This option is not checked by default because\n"
-"      this compression mode needs more time (about 1000%% more).\n"
-" \n"
-" - The update mode (not enabled):\n"
-"\n"
-"      This option will update your backup, but this\n"
-"      option is not really useful because you need to\n"
-"      decompress your backup before you can update it.\n"
-"      \n"
-""
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -7364,14 +7247,6 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose your filesystem encryption key"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please choose your CD/DVD device\n"
-"(Press Enter to propogate settings to other fields.\n"
-"This field isn't necessary, only a tool to fill in the form.)"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -8019,11 +7894,6 @@ msgstr ""
 msgid "Poland"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to eject your tape after the backup."
-msgstr ""
-
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid "Other ports"
@@ -8382,6 +8252,13 @@ msgstr ""
 msgid "Apache is a World Wide Web server. It is used to serve HTML files and CGI."
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Enter your CD Writer device name\n"
+" ex: 0,1,0"
+msgstr ""
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid "ALL"
@@ -8462,13 +8339,6 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the number of buttons the mouse has"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the directory (or module) to\n"
-" put the backup on this host."
 msgstr ""
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -9059,6 +8929,11 @@ msgstr ""
 msgid "Removable media automounting"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save:"
+msgstr ""
+
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
@@ -9156,11 +9031,6 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuration of a remote printer"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please check if you want to erase your tape before the backup."
 msgstr ""
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
@@ -9529,11 +9399,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Zimbabwe"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the host name or IP."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -10050,11 +9915,6 @@ msgstr ""
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter your login"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
@@ -10244,6 +10104,13 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detected"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"Maximum size\n"
+" allowed for Drakbackup (Mb)"
 msgstr ""
 
 #: ../../standalone/drakpxe:1
@@ -11223,11 +11090,6 @@ msgstr ""
 msgid "Local Printer"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita.fr>"
-msgstr ""
-
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
@@ -11273,11 +11135,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominica"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the device name to use for backup"
 msgstr ""
 
 #: ../../Xconfig/various.pm:1
@@ -11329,19 +11186,6 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Reselect correct fonts"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Options Description:\n"
-"\n"
-"Please be careful when you are using ftp backup, because only \n"
-"backups that are already built are sent to the server.\n"
-"So at the moment, you need to build the backup on your hard \n"
-"drive before sending it to the server.\n"
-"\n"
-""
 msgstr ""
 
 #: ../../help.pm:1
@@ -12382,7 +12226,7 @@ msgstr ""
 msgid "Choose the mount points"
 msgstr ""
 
-#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../ugtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakTermServ:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1
 #, c-format
 msgid "OK"
 msgstr ""
@@ -13173,6 +13017,11 @@ msgstr ""
 msgid "device"
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory to save to:"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "All"
@@ -13421,21 +13270,6 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Saint Pierre and Miquelon"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"Restore Backup Problems:\n"
-"\n"
-"During the restore step, Drakbackup will verify all your\n"
-"backup files before restoring them.\n"
-"Before the restore, Drakbackup will remove \n"
-"your original directory, and you will loose all your \n"
-"data. It is important to be careful and not modify the \n"
-"backup data files by hand.\n"
-""
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -13849,11 +13683,6 @@ msgstr ""
 msgid "Add host/network"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save to:"
-msgstr ""
-
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Model name"
@@ -14051,14 +13880,14 @@ msgstr ""
 msgid "Card IO_1"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Kazakhstan"
-msgstr ""
-
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Routers:"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Kazakhstan"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -14455,6 +14284,11 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Host name or IP."
+msgstr ""
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "simple"
@@ -14617,13 +14451,6 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Internet connection configuration"
-msgstr ""
-
-#: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Please enter the maximum size\n"
-" allowed for Drakbackup (Mb)"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -15008,44 +14835,6 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"Restore Description:\n"
-"\n"
-"Drakbackup now allows you to search the backup lists for a particular\n"
-"file or files to restore.  If the search is successful, you will be \n"
-"presented with a list of matches, along with backup media and dates.\n"
-"You can then select individual files to restore from your backup media.\n"
-" \n"
-"For 'normal' restores, only the most recent date will be used, \n"
-"because with incremental  backups it is necessary to restore \n"
-"one by one each older backup.\n"
-"\n"
-"So if you don't want to restore a user please unselect all their\n"
-"check boxes.\n"
-"\n"
-"Otherwise, you are able to select only one of these.\n"
-"\n"
-" - Incremental Backups:\n"
-"\n"
-"\tThe incremental backup is the most powerful option for \n"
-"\tbackup. This option allows you to backup all your data \n"
-"\tthe first time, and only the changed data afterward.\n"
-"\tThen you will be able, during the restore step, to restore \n"
-"\tyour data from a specified date. If you have not selected \n"
-"\tthis option all old backups are deleted before each backup.    \n"
-"\n"
-" - Differential Backups:\n"
-" \n"
-"\tThe differential backup, rather than comparing changes in the\n"
-"\tdata to the previous incremental backup, always compares the\n"
-"\tdata to the initial base backup. This method allows one to\n"
-"\trestore the base and then the differential from a certain date.\n"
-"\n"
-""
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -15440,11 +15229,6 @@ msgstr ""
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid " adsl"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory to save:"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -16046,11 +15830,6 @@ msgstr ""
 msgid "Install themes"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid " updates 2002 MandrakeSoft by Stew Benedict <sbenedict\\@mandrakesoft.com>"
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid "Espanol"
@@ -16159,11 +15938,6 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "System Options"
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Please enter the directory where backups are stored"
 msgstr ""
 
 #: ../../security/level.pm:1
@@ -16391,6 +16165,11 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Enter the directory where backups are stored"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -16726,6 +16505,11 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run the daily security checks."
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Device name to use for backup"
 msgstr ""
 
 #: ../../lang.pm:1
