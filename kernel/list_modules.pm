@@ -75,6 +75,7 @@ our %l = (
     pcmcia => [ qw(aha152x_cs fdomain_cs nsp_cs qlogic_cs ide-cs) ], #ide_cs
     raw => [ qw(scsi_mod sd_mod) ],
     usb => [ qw(usb-storage) ],
+    firewire => [ qw(sbp2) ],
     cdrom => [ qw(ide-cd cdrom sr_mod) ],
   },
 
@@ -83,7 +84,7 @@ our %l = (
   bus => 
   {
     usb => [ qw(usbcore usb-uhci usb-ohci ehci-hcd usbkbd keybdev input) ],
-    firewire => [ qw(ohci1394) ],
+    firewire => [ qw(ohci1394 ieee1394) ],
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(pcmcia_core tcic ds i82365 yenta_socket)), # cb_enabler
     ],

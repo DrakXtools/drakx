@@ -48,8 +48,8 @@ my %images = (
     other   => 'disk/scsi|hardware_raid network/main ONLY_BIG fs/cdrom disk/cdrom|raw fs/network network/raw',
     pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia fs/network network/pcmcia|raw',
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
-    usb     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb fs/network network/usb|raw',
-    all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw',
+    usb     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb fs/network network/usb|raw bus/firewire disk/firewire',
+    all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw bus/firewire disk/firewire',
 );
 
 my $verbose = "@ARGV" =~ /-v/;

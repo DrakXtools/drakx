@@ -24,6 +24,7 @@ void init_modules_insmoding(void);
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options);
 enum return_type ask_insmod(enum driver_type);
 void update_modules(void);
+int module_already_present(const char * name);
 
 struct module_deps_elem {
     char * name;

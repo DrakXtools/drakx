@@ -197,7 +197,7 @@ static void add_modules_conf(char * str)
 }
 
 
-static int module_already_present(const char * name)
+int module_already_present(const char * name)
 {
 	FILE * f;
 	int answ = 0;

@@ -244,6 +244,8 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 		if (!already_mounted_usbdev) {
 			already_mounted_usbdev = 1;
 			my_insmod("usb-storage", SCSI_ADAPTERS, NULL);
+			if (module_already_present("ieee1394"))
+				my_insmod("sbp2", SCSI_ADAPTERS, NULL);
 			if (mount("/proc/bus/usb", "/proc/bus/usb", "usbdevfs", 0, NULL)) {
 				log_message("USB: couldn't mount /proc/bus/usb");
 				goto end_usb_probe;
