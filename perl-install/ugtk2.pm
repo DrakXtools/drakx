@@ -873,6 +873,7 @@ sub new {
 	$o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
+	set_main_window_size($o);
 	if (!defined($::WizardWindow) && !$::isEmbedded) {
 	    $::WizardWindow = Gtk2::Window->new('toplevel');
 	    $::WizardWindow->signal_connect(delete_event => sub { die 'wizcancel' });
@@ -882,7 +883,6 @@ sub new {
 	    $::WizardWindow->add(gtkadd(gtkset_shadow_type(Gtk2::Frame->new, 'out'), $::WizardTable));
 
 	    if ($::isInstall) {
-		$::WizardTable->set_size_request($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9));
 		$::WizardWindow->set_uposition($::stepswidth + $::windowwidth * 0.04 + ($::move && 50), $::logoheight + $::windowheight * ($::logoheight ? 0.12 : 0.05));
 		$::WizardWindow->signal_connect(key_press_event => sub {
 		    my (undef, $event) = @_;
@@ -924,7 +924,6 @@ sub new {
 
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
 		$::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
-		$::WizardTable->set_size_request(540,460);
 	    }
 	    $::WizardWindow->show_all;
 	    flush();
@@ -949,6 +948,14 @@ sub new {
 
     $o;
 }
+sub set_main_window_size {
+    my ($o) = @_;
+    my ($width, $height) = 
+      $::isInstall ? ($::windowwidth * 0.90, $::windowheight * ($::logoheight ? 0.73 : 0.9)) :
+	$o->{isWizard} ? (540, 360) : (600, 400);    
+    $o->{window}->set_size_request($width, $height);
+}
+
 sub main {
     my ($o, $o_completed, $o_canceled) = @_;
     gtkset_mousecursor_normal();

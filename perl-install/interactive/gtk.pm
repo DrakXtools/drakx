@@ -568,7 +568,7 @@ sub ask_fromW {
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;
 
     my $pack = create_box_with_title($mainw, @{$common->{messages}});
-    $mainw->{rwindow}->set_size_request(720, 420) if $mainw->{pop_it} && @$l;
+    ugtk2::set_main_window_size($mainw) if $mainw->{pop_it} && @$l;
 
     my $first_time = 1;
     my $set_advanced = sub {
@@ -616,7 +616,7 @@ sub ask_fromW {
 	    create_scrolled_window(gtkpack(Gtk2::VBox->new(0,0),
 					   $always_pack,
 					   if_(@widgets_advanced, $advanced_pack)), 
-				   [ 'automatic', 'automatic' ], 'none')) if @$l;
+				   [ 'automatic', 'automatic' ], 'none')) if @$l || !$mainw->{pop_it};
 	    
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
