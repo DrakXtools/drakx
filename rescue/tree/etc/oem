@@ -175,23 +175,19 @@ close F or die "error while executing grub";
 
 my $packages = select_packages("/cdrom", $lang);
 
-print "Copying packages\n";
-foreach my $pkg (@{$packages->{depslist}}) {
-    $pkg->{closure} && !$pkg->{selected} or next;
-    foreach (qw(i586 noarch)) {
-	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
-	-e $file or next;
-	print "  copying $pkg->{name}.$_.rpm\n";
-	system "cp", "-a", $file, "/hd/Mandrake/RPMS";
-	delete $pkg->{closure};
-	last;
-    }
-}
-foreach my $pkg (@{$packages->{depslist}}) {
-    $pkg->{closure} && !$pkg->{selected} and print "package $pkg->{name} marked as closure but not copied!\n";
-}
+my @media;
+open F, "/cdrom/Mandrake/base/hdlists";
+foreach (<F>) {
+    chomp;
+    s/\s*#.*$//;
+    /^\s*$/ and next;
+    m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
 
-print "Installing packages\n";
+    push @media, { rpmsdir => $2, descr => $3 };
+}
+close F;
+
+#- initialize installation.
 $ENV{DURING_INSTALL} = 1;
 $ENV{RPM_INSTALL_LANG} = $lang;
 $ENV{LD_LIBRARY_PATH} = "/usr/X11R6/lib";
@@ -204,33 +200,60 @@ open F, ">/mnt/etc/fstab";
 print F "/dev/$hd$root / ext2 defaults 1 1\n";
 close F;
 system "rpm", "--root", "/mnt", "--initdb";
-if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
-    delete $pkg->{selected} or die "glibc not selected";
-    foreach (qw(i586 noarch)) {
-	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
-	-e $file or next;
-	system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
-	last; #- update glibc twice, in case.
+
+#- copy and install from each cd image.
+foreach my $medium (@media) {
+    while (! -d "/cdrom/$medium->{rpmsdir}") {
+	system "unmount", "/dev/$cd";
+	system "eject", "/dev/$cd";
+	print "Please insert the cdrom labeled \"$medium->{descr}\"\n  and press [enter] when done\n";
+	$yes = <STDIN>;
+	system "mount", "-r", "-t", "iso9660", "/dev/$cd", "/cdrom";
     }
-} else {
-    die "no glibc package found";
-}
-my @files;
-foreach my $pkg (@{$packages->{depslist}}) {
-    $pkg->{selected} or next;
-    foreach (qw(i586 noarch)) {
-	my $file = "/cdrom/Mandrake/RPMS/$pkg->{name}.$_.rpm";
-	-e $file or next;
-	push @files, $file;
-	delete $pkg->{selected};
-	last;
+
+    print "Copying packages from medium labeled \"$medium->{descr}\" to hard disk\n";
+    system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
+    foreach my $pkg (@{$packages->{depslist}}) {
+	$pkg->{closure} && !$pkg->{selected} or next;
+	foreach (qw(i586 noarch)) {
+	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+	    -e $file or next;
+	    print "  copying $pkg->{name}.$_.rpm\n";
+	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
+	    delete $pkg->{closure};
+	    last;
+	}
     }
+
+    print "Installing packages from medium labeled \"$medium->{descr}\"\n";
+    if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
+	if (delete $pkg->{selected}) {
+	    foreach (qw(i586 noarch)) {
+		my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+		-e $file or next;
+		system "rpm", "--root", "/mnt", "--nodeps", "--force", "--noscripts", "-ivh", $file;
+		last; #- update glibc twice, in case.
+	    }
+	}
+    } else {
+	die "no glibc package found";
+    }
+    my @files;
+    foreach my $pkg (@{$packages->{depslist}}) {
+	$pkg->{selected} or next;
+	foreach (qw(i586 noarch)) {
+	    my $file = "/cdrom/$medium->{rpmsdir}/$pkg->{name}.$_.rpm";
+	    -e $file or next;
+	    push @files, $file;
+	    delete $pkg->{selected};
+	    last;
+	}
+    }
+    system "rpm", "--root", "/mnt", "--nodeps", "--force", "-ivh", @files;
+    print "Installed " . scalar(@files) . " packages\n";
+
+    scalar(grep { $_->{selected} || $_->{closure} } @{$packages->{depslist}}) == 0 and last;
 }
-foreach my $pkg (@{$packages->{depslist}}) {
-    $pkg->{selected} and print "package $pkg->{name} marked as selected but not installable!\n";
-}
-system "rpm", "--root", "/mnt", "--nodeps", "--force", "-ivh", @files;
-print "Installed " . scalar(@files) . " packages\n";
 
 system "umount", "/mnt/proc";
 system "umount", "-a", "-f", "-t", "noproc";
