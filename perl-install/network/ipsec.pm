@@ -357,10 +357,9 @@ open(my $ADD, "> $racoon_conf") or die "Can't open the $racoon_conf file for wri
 }
 
 sub get_section_names_racoon_conf {
-  my ($racoon_conf, $racoon) = @_;
+  my ($racoon) = @_;
   my @section_names;
 
-  if (-e $racoon_conf) {
 	foreach my $key1 (ikeys %$racoon) {
 		if (!$racoon->{$key1}{1}) {
 			next;
@@ -381,7 +380,6 @@ sub get_section_names_racoon_conf {
 
 	@section_names;
 
-  }
 }
 
 sub add_section_racoon_conf {
@@ -450,11 +448,13 @@ sub remove_section_racoon_conf {
 	my ($section_name, $racoon, $k) = @_;
 	if ($section_name =~ /^remote/) {
 
-		delete $racoon->{$k};
-		my $proposal_removed = "n";
-		delete $racoon->{$k+1};
-		delete $racoon->{$k+2}; #- remove assoc } 
-		delete $racoon->{$k+3}; #- remove assoc } 
+		delete $racoon->{$k} if $k > 1 && !$racoon->{$k-1};
+		my $closing_curly_bracket = 0;
+		while ($closing_curly_bracket < 2) {
+			$closing_curly_bracket++ if $racoon->{$k} eq "}"; 
+			delete $racoon->{$k};
+			$k++;
+		}
 
 	} elsif ($section_name =~ /^path/) {
 
