@@ -285,22 +285,27 @@ sub choosePackages {
 
     $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
-    my $min_mark = $::beginner ? 25 : 1;
-    my @l = values %{$packages->[0]};
-    my @flags = map { pkgs::packageFlagSelected($_) } @l;
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
-    my $max_size = 1 + pkgs::selectedSize($packages); #- avoid division by zero.
-    mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
+    #- avoid reselection of package if individual selection is requested and this is not the first time.
+    if ($first_time || !$individual) {
+	my $min_mark = $::beginner ? 25 : 1;
+	my @l = values %{$packages->[0]};
+	my @flags = map { pkgs::packageFlagSelected($_) } @l;
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+	my $max_size = 1 + pkgs::selectedSize($packages); #- avoid division by zero.
+	mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
 #-	  if (!$::beginner && $max_size > $availableC) {
 #-	      $o->ask_okcancel('', 
 #-_("You need %dMB for a full install of the groups you selected.
 #-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
 #-	  }
-    my $size2install = $::beginner && $first_time ? $availableC * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) or goto &choosePackages;
+	my $size2install = $::beginner && $first_time ? $availableC * 0.7 :
+	  $o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) or goto &choosePackages;
 
-    ($o->{packages_}{ind}) = 
-      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
+	($o->{packages_}{ind}) =
+	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
+    }
+
     $o->choosePackagesTree($packages, $compss) if $individual;
 }
 

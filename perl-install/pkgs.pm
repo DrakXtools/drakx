@@ -361,6 +361,44 @@ sub skipSetWithProvides {
     packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } @l;
 }
 
+sub psUpdateHdlistsDeps {
+    my ($prefix, $method) = @_;
+    my $listf = install_any::getFile('hdlists') or die "no hdlists found";
+
+    #- WARNING: this function should be kept in sync with functions
+    #- psUsingHdlists and psUsingHdlist.
+    #- it purpose it to update hdlist files on system to install.
+
+    #- parse hdlist.list file.
+    my $medium = 1;
+    foreach (<$listf>) {
+	chomp;
+	s/\s*#.*$//;
+	/^\s*$/ and next;
+	m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+
+	my ($hdlist, $rpmsdir, $descr) = ($1, $2, $3);
+	my $f = install_any::getFile($hdlist) or die "no $hdlist found";
+
+	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
+	#- for getting header of package during installation or after by urpmi.
+	my $fakemedium = $method . $medium;
+	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
+	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
+	local *F;
+	open F, ">$newf" or die "cannot create $newf: $!";
+	my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
+	close F;
+	symlinkf $newf, "/tmp/$hdlist";
+
+	++$medium;
+    }
+
+    #- this is necessary for urpmi, but also as hdlist are copied here,
+    #- we can make consistent the directory.
+    install_any::getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
+}
+
 sub psUsingHdlists {
     my ($prefix, $method) = @_;
     my $listf = install_any::getFile('hdlists') or die "no hdlists found";
@@ -417,7 +455,6 @@ sub psUsingHdlist {
     open F, ">$newf" or die "cannot create $newf: $!";
     my ($buf, $sz); while (($sz = sysread($f, $buf, 16384))) { syswrite(F, $buf) }
     close F;
-
     symlinkf $newf, "/tmp/$hdlist";
 
     #- extract filename from archive, this take advantage of verifying
@@ -475,7 +512,8 @@ sub getOtherDeps($$) {
 
 	$pkg or log::l("ignoring package $name-$version-$release in depslist is not in hdlist"), next;
 	$version eq packageVersion($pkg) and $release eq packageRelease($pkg)
-	  or log::l("warning package $name-$version-$release in depslist mismatch version or release in hdlist ($version ne ", packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), next;
+	  or log::l("warning package $name-$version-$release in depslist mismatch version or release in hdlist ($version ne ",
+		    packageVersion($pkg), " or $release ne ", packageRelease($pkg), ")"), next;
 
 	my $index = scalar @{$packages->[1]};
 	$index >= $pkg->{medium}{min} && $index <= $pkg->{medium}{max}

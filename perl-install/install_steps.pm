@@ -238,11 +238,16 @@ sub choosePackages {
 	pkgs::packageSetFlagSkip($_, 0);
 	pkgs::packageSetFlagUnskip($_, 0);
     }
-    pkgs::unselectAllPackages($packages);
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
-    add2hash_($o, { compssListLevel => $::expert ? 90 : 80 }) unless $::auto_install;
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $availableCorrected, $o->{installClass}) if exists $o->{compssListLevel};
+    #- avoid destroying user selection of packages. TOCHECK
+    if ($first_time) {
+	pkgs::unselectAllPackages($packages);
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+
+	add2hash_($o, { compssListLevel => $::expert ? 90 : 80 }) unless $::auto_install;
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $availableCorrected, $o->{installClass}) if exists $o->{compssListLevel};
+    }
+
     $availableCorrected;
 }
 

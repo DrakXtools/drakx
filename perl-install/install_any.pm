@@ -297,8 +297,11 @@ sub setPackages($) {
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
     } else {
-	#- remove upgrade flag with selection one.
-	pkgs::unselectAllPackagesIncludingUpgradable($o->{packages});
+	#- this has to be done to make sure the hdlist files and depslist file are present.
+	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
+
+	#- remove upgrade flag with selection one. TOCHECK
+	#pkgs::unselectAllPackagesIncludingUpgradable($o->{packages});
     }
 }
 

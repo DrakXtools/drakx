@@ -361,8 +361,13 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 sub choosePackages {
     require pkgs;
+
+    #- always setPackages as it may have to copy hdlist files and depslist file.
+    $o->setPackages;
+
+    #- for the first time, select package to upgrade.
+    #- TOCHECK this may not be the best place for that as package are selected at some other point.
     if ($_[1] == 1) {
-	$o->setPackages;
 	$o->selectPackagesToUpgrade($o) if $o->{isUpgrade};
 
 	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, 'Miscellaneous';
