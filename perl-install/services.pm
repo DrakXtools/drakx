@@ -264,7 +264,9 @@ sub doit {
 	    if ($after && cat_("$::prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
 		run_program::rooted($::prefix, "chkconfig", "--level", "35", $_, "on");
 	    }
-	    if (!$after && $::isStandalone) {
+	    if (!$after && !$::isInstall && !$in->isa('interactive::gtk')) {
+		#- only done after install AND when not using the gtk frontend (since it allows one to start/stop services)
+		#- this allows to skip stopping service "dm"
 		run_program::rooted($::prefix, $script, "stop");
 	    }
 	}
