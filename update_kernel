@@ -117,14 +117,15 @@ done
 
 
 install_kernel() {
- v=2.4.17.4mdk
- vv=${v}BOOT
+ v=2.4.17
+ vr=6mdk
+ rpm=kernel-BOOT-${v}.${vr}-1-1mdk.i586.rpm
+ vv=${v}-${vr}BOOT
  rm -rf all.kernels/$(cat all.kernels/.main)
- scp kenobi:~chmou/public_html/kernel/BOOT/kernel-BOOT-$v.i586.rpm /tmp
- cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/kernel-BOOT-$v*.i586.rpm | cpio -id
+ (cd /tmp ; rm -f kernel-BOOT-* ; wget https://kenobi.mandrakesoft.com/~chmou/kernel/BOOT/$rpm)
+ cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/$rpm | cpio -id
  cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
  /bin/cp -f all.kernels/$vv/boot/vmlinu* /var/lib/tftpboot/vmlinuz
  /bin/cp -f images/network.rdz-$vv /var/lib/tftpboot/network.rdz
  /bin/cp -f ~/gi/all.modules/modules.cz-$vv /export/Mandrake/mdkinst/lib
 }
-# scp kenobi:~mbadaire/kernel/boot/archive/kernel-$v.tar.bz2 /tmp
