@@ -720,7 +720,7 @@ sub getAndSaveInstallFloppies {
     } else {
 	my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
 	  arch() =~ /ia64|ppc/ ? "all"  : #- we only use all.img there
-	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{'disk' || $o->{method}};
+	  ${{ disk => 'hd_grub', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	my $have_drivers = $image eq 'network';
 	$image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
 
