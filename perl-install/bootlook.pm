@@ -217,7 +217,7 @@ if ($a_mode) {
 }
 
 Gtk->main_iteration while Gtk->events_pending;
-kill USR2, $::CCPID;
+$::isEmbedded and kill USR2, $::CCPID;
 Gtk->main;
 #-------------------------------------------------------------
 # get user names to put in combo  
@@ -227,7 +227,7 @@ sub parse_etc_passwd
 {
     setpwent();
     do {
-	@user_info = getpwent();                                                                                                                                                                                                                                                                                    
+	@user_info = getpwent();
 	my ($uname, $uid) = @user_info[0,2];
 	print "$user_info[0]";
 	if ($uid == 0 || $uid >500){
