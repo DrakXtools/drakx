@@ -84,6 +84,7 @@ my $mode = -1;
 my @application;
 my @install;
 my @uninstall;
+my $interactive;
 
 foreach (@ARGV) {
     /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
@@ -144,6 +145,10 @@ my @fontsdir_to_install;
 my @fontsdir_to_uninstall;
 my @installed_fonts_full_path;
 
+my $pbar;
+my $pbar1;
+my $pbar2;
+my $pbar3;
 
 sub list_fontpath {
     foreach (grep { /\d+:\s/ } `$chkfontpath -l`) {
@@ -173,12 +178,14 @@ sub search_windows_font {
 	my $win_dir = (split('\s', $fstab_line))[1];
 	my @list_fonts_win = all("$win_dir/windows/fonts");
 	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
+	my $nb_dir = @list_fonts_win + @list_fonts_winnt;
 	if(!@list_fonts_win && !@list_fonts_winnt) {
 	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
 	    return 0;
 	}
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
+		$interactive and progress($pbar, 100/$nb_dir);
 		!$replace && grep(/$i/, @installed_fonts) and next;
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
@@ -186,7 +193,6 @@ sub search_windows_font {
     }
     1;
 }
-
 
 sub is_a_font {
     local $_ = $_[0];
@@ -240,7 +246,6 @@ sub search_dir_font_uninstall {
     print "Fonts to uninstal : " . $_ . "\n" foreach (@font_list);
 }
 
-
 sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_list) }
 
 sub dir_created {
@@ -252,7 +257,6 @@ sub dir_created {
     -e $drakfont_dir . "/tmp/Type1" || mkdir_p($drakfont_dir."/tmp/Type1");
     -e $drakfont_dir . "/tmp/tmp"   || mkdir_p($drakfont_dir."/tmp/tmp");
 }
-
 
 sub put_font_dir {
   -e "/usr/share/ghostscript" or $gs = 0 && print "ghostscript is not installed on your system...\n"  ;
@@ -301,12 +305,11 @@ sub put_font_dir {
   }
 }
 
-
 sub remove_gs_fonts {
     my @Fontmap_new;
 
     if (all("$drakfont_dir/remove"))  {
-	system (" cd $drakfont_dir/remove && $type1inst && touch tttttttttt");
+	system (" cd $drakfont_dir/remove && $type1inst");
 	my @Fontmap_out = cat_("$drakfont_dir/remove/Fontmap");
 	my $FontmapGS = `rpm -ql ghostscript | grep Fontmap.GS`;
 	chomp ($FontmapGS);
@@ -319,8 +322,6 @@ sub remove_gs_fonts {
 	output($FontmapGS, @Fontmap_new );
     }
 }
-
-
 
 sub remove_fonts {
     my @list_dir;
@@ -350,13 +351,9 @@ sub remove_fonts {
     -e "/usr/share/ghostscript" and  rm_rf("$drakfont_dir/remove");
 }
 
-
 sub lisence_msg {
     print _("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode.")."\n";
 }
-
-
-
 
 $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
 
@@ -396,19 +393,8 @@ sub backend_mod {
     }
 }
 
-
 #######################################  INTERACTIVE ######################################################################
 
-
-my $true;
-my $pbar;
-my $pbar1;
-my $pbar2;
-my $pbar3;
-my $adj;
-my $adj1;
-my $adj2;
-my $adj3;
 my $font_box;
 
 my $check4;
@@ -419,164 +405,84 @@ my $check3;
 sub interactive_mode {
 
 init Gtk;
-
-
-sub result_gi {
-    my $window3 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window3->signal_connect ( delete_event => sub { Gtk->exit(0); });
-    $window3->set_position(1);
-    $window3->set_title(_("Fonts Importation"));
-    $window3->set_policy(1, 1, 1);
-    $window3->set_border_width(5);
-    
-    gtkadd($window3,
-	   gtkpack_(new Gtk::HBox(0,6),
-		    1, my $notebook =  new Gtk::FontSelection,		
-		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-			      _("DrakFont"),
-			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod() }),
-			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub { $window3->destroy(); install_gi() }),
-			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
-			      )
-		    ),
-	   );
-    $window3->show_all;
-    $window3->realize;
-    $window3->show_all();
-}
-
-
-
-
-sub import_status {
-    my $window2 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    my $align;
-
-    $window2->signal_connect ( delete_event => sub {  $window2->destroy(); result_gi });
-    $window2->set_position(1);
-    $window2->set_title(_("Fonts Importation"));
-    $window2->set_policy(1, 1, 1);
-    $window2->set_border_width(5);
-    $adj = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
-    $adj1 = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
-    $adj2 = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
-    $adj3 = new Gtk::Adjustment( 0, 1, 300, 0, 0, 0 );
-    gtkadd($window2,
-	   gtkpack__(new Gtk::VBox(0,0),
-		     create_packtable({ col_spacings => 30, row_spacings => 20},
-				      [ "Work", "Status" , "Valid"],
-#				      [ _("Sending Speed:"), my $label_st = new Gtk::Label(""), my $label_sta=new Gtk::Label("na")],
-#				      [ _("Receiving Speed:"),my $label_sr= new Gtk::Label(""), my $label_sra=new Gtk::Label("na")],
-	#							  ),
-#		     gtkpack_(new Gtk::VBox(0,6),
-		     [_("Search Fonts on your System"), $pbar  = new_with_adjustment Gtk::ProgressBar( $adj ), $check1 = new Gtk::CheckButton()],
-		     ["Supress Doublons ", $pbar1 = new_with_adjustment Gtk::ProgressBar( $adj1 ),$check2 =  new Gtk::CheckButton()],  
-		     ["Install Fonts ", $pbar2 = new_with_adjustment Gtk::ProgressBar( $adj2 ),$check3 =  new Gtk::CheckButton()],  
-		     ["Post Install Fonts ", $pbar3 = new_with_adjustment Gtk::ProgressBar( $adj3 ),$check4 =  new Gtk::CheckButton()],  
-				      ),
-		     gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-#			      _("DrakFont"),
-
-			      )
-		    ),
-	   );   
-
-    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );  
-    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );       
-    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );       
-    my $timer3 = Gtk->timeout_add( 20, \&progress_timeout3 );       
-#    $check4->set_active;
-#    gtkset_active($check4 , 1);
-#    $check4 -> set_active =1;
-
-    $window2->show_all;
-    $window2->realize;
-    $window2->show_all();
-}
-
-sub main_gi {
-    my $window1 =  $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
+$interactive = 1;
+#sub main_gi {
+    my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
     $window1->set_title(_("Fonts Importation"));
-    $window1->set_policy(1, 1, 1);
+#    $window1->set_policy(1, 1, 1);
     $window1->set_border_width(5);
-    
 
- gtkadd($window1,
+    my $font_sel;
+    gtkadd($window1,
 	   gtkpack_(new Gtk::HBox(0,2),
-		    0, gtkpack_(new Gtk::HBox(0,5),
+		    1, gtkpack_(new Gtk::VBox(0,0),
+				1, new Gtk::VBox(0,0),
 				0, gtkpack($font_box = new Gtk::VBox(0,5),
-					   my $font_sel =  new Gtk::FontSelection,
-					  )
+					$font_sel = new Gtk::FontSelection,
+				       ),
+				1, new Gtk::VBox(0,0)
 			       ),
-		    0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
-			      _("DrakFont"),
-			      gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=> sub { $windows = 1; backend_mod(); }),
-			      gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked => sub {
-						  gtkdestroy($font_box); import_status(); 
-						}),
-			      gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked 	=> sub { Gtk->main_quit() }),
-			      gtksignal_connect(new Gtk::Button(_("Close")), clicked 		=> sub { Gtk->main_quit() }),
-			     ),
+		    0, gtkpack_(new Gtk::VBox(0,5),
+				0, _("DrakFont"),
+				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("Windows Importation")), clicked 	=>
+							    sub { $windows = 1; backend_mod(); }),
+					  gtksignal_connect(new Gtk::Button(_("Advanced Importation")), clicked =>
+							    sub { gtkdestroy($font_sel); import_status(); search_windows_font();
+							      }),
+					  gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => sub { Gtk->main_quit() }),
+					 ),
+				1, new Gtk::VBox(0,0),
+				0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
+					  gtksignal_connect(new Gtk::Button(_("Help")), clicked => sub { print _("Help\n") }),
+					  gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
+					 ),
+			       )
 		   ),
 	  );
     $window1->show_all;
     $window1->realize;
     $window1->show_all();
+#}
 
-}
-
-main_gi;
+#main_gi;
 Gtk->main;
 Gtk->exit(0);
 }
 
-
-
-sub progress_timeout   {     
-    my $new_val;     
-    my $adjt;          	      
-    $new_val = $pbar->get_value() + 5;       
-    $adjt = $pbar->adjustment;  1;   
-    $pbar->set_value( $new_val );  
-    $new_val < 300 || gtkset_active($check1 , 1);
-    $new_val < 300 ;
+sub import_status {
+    my $adj = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
+    my $adj1 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
+    my $adj2 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
+    my $adj3 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
+    my $table;
+    gtkpack($font_box,
+	    $table = create_packtable({ col_spacings => 30, row_spacings => 20},
+   [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
+   ["Supress Doublons ", $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
+   ["Install Fonts ", $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
+   ["Post Install Fonts ", $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
+			    ),
+	   );
+    $font_box->show_all();
+#    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );
+#    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );
+#    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );
+#    my $timer3 = Gtk->timeout_add( 20, \&progress_timeout3 );
+    my $timer4 = Gtk->timeout_add( 5000, sub { $table->destroy(); gtkpack($font_box, "c fini") });
 }
 
-
-sub progress_timeout1   {     
-    my $new_val;     
-    my $adjt;          
-#    my $tmmm = $pbar1->get_value("MAX");
-    $new_val = $pbar1->get_value() + 4;       
-    $adjt = $pbar1->adjustment;  
-#    $new_val = $adjt->lower if ( $new_val > $adjt->upper );      
-    $pbar1->set_value( $new_val );       
-    $new_val < 300 || gtkset_active($check2 , 1);
-    $new_val < 300 ;
-}
-
-sub progress_timeout2   {     
-    my $new_val;     
-    my $adjt;          	  
-    $new_val = $pbar2->get_value() + 3;       
-    $adjt = $pbar2->adjustment;  
-    $pbar2->set_value( $new_val );       
-    $new_val < 300 || gtkset_active($check3 , 1);
-    $new_val < 300 ;
-
-}
-
-sub progress_timeout3   {     
-    my $new_val;     
-    my $adjt;          	  
-    $new_val = $pbar3->get_value() + 2;       
-    $adjt = $pbar3->adjustment;  
-    $pbar3->set_value( $new_val );       
-    $new_val < 300 || gtkset_active($check4 , 1);
-    $new_val < 300;
+sub progress {
+    my ($bar, $incr) = @_;
+    my $new_val;
+    my $adjt;
+    $new_val = $pbar->get_value() + $incr;
+    $adjt = $bar->adjustment;
+    $bar->set_value( $new_val );
+    $new_val < 100 || gtkset_active($check1 , 1);
+    $new_val < 100 ;
 }
 
 
