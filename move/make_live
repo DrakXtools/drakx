@@ -172,8 +172,8 @@ substInFile {
     }
 } "$::prefix/usr/lib/menu/simplified/mandrake_desk";
 
-#- remove "Login Manager" module from kcontrol
-unlink "$::prefix/usr/lib/menu/kdebase-kdm";
+#- remove "Login Manager" module from kcontrol, rpmdrake stuff
+unlink "$::prefix/usr/lib/menu/$_" foreach qw(kdebase-kdm rpmdrake);
 
 touch("$::prefix/etc/menu/enable_simplified");
 
