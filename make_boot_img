@@ -6,9 +6,13 @@ use Config;
 use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*)-/;
-my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corporate version.
 
 ($img, $type) = @ARGV;
+
+# move stuff to new "kernel" directory
+-d 'kernel' or die "directory kernel is missing\n";
+rename 'all.kernels', 'kernel/all.kernels';
+rename 'all.modules', 'kernel/all.modules';
 
 $default_append = "ramdisk_size=32000 root=/dev/ram3";
 $default_vga = "vga=788";
@@ -50,12 +54,12 @@ $install = $ {{
 }}{$type} or die;
 
 mkdir "images";
-chomp($main = `cat all.kernels/.main`);
+chomp($main = `cat kernel/all.kernels/.main`);
 
 if ($img =~ /blank|other|pcmcia/) {
     @kernels = $main;
 } else {
-    @kernels = map { m|all.kernels/(.*)| } glob('all.kernels/*');
+    @kernels = map { m|kernel/all.kernels/(.*)| } glob('kernel/all.kernels/*');
     $img =~ /usb/ and @kernels = grep { $_ !~ /2\.2\.14/ } @kernels;  #- 2.2.14 is too old, usb support was not working properly
 }
 
@@ -63,7 +67,7 @@ foreach (@kernels) {
     if ($img =~ /rdz$/) {
 	initrd($mnt, "$img-$_");
     } else {
-	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("all.kernels/$_/boot/vmlinu*"));
+	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*"));
 	rename("$img-$main", "$img");
     }
 }
@@ -72,7 +76,7 @@ if ($arch =~ /i.86/ && $img =~ /all/) {
 }
 
 if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-    system("/bin/cp -f all.kernels/$main/boot/vmlinu* $tftpboot/vmlinuz 2>/dev/null");
+    system("/bin/cp -f kernel/all.kernels/$main/boot/vmlinu* $tftpboot/vmlinuz 2>/dev/null");
     system("/bin/cp -f images/network.rdz-$main $tftpboot/network.rdz 2>/dev/null");
 }
 
@@ -104,11 +108,11 @@ sub initrd {
     if (member($type, qw(pcmcia all network)) && $arch !~ /ppc/ && $arch !~ /ia64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
-	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp all.modules/$main/modules.dep";
+	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp kernel/all.modules/$main/modules.dep";
 	 _ "sudo mv /tmp/pcmcia_config_tmp $mnt/etc/pcmcia/config";
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
-    $modz = "all.modules$I/$ext";
+    $modz = "kernel/all.modules$I/$ext";
     _ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" if $type !~ /blank/;
     _ "$sudo cp -f $modz/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
@@ -290,44 +294,44 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 text$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 text root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 expert$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 expert root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 ks$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 ks root=/dev/ram3\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=rescue
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 text$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 text root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 expert$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 expert root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 ks$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 ks root=/dev/ram3\"
 image[sun4u]=/$boot/vmlinux64
   label=rescue
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3\"
 ");
 
 	output("$dir/$boot/README", "
@@ -375,7 +379,7 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=\"ramdisk_size=32000 $ltype$corporate root=/dev/ram3\"
+  append=\"ramdisk_size=32000 $ltype root=/dev/ram3\"
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
@@ -478,7 +482,7 @@ sub isolinux {
     my $i = 0;
     foreach (@kernels) {
 	mkdir "isolinux/alt$i", 0777;
-	my ($kernel) = glob("all.kernels/$_/boot/vmlinu*");
+	my ($kernel) = glob("kernel/all.kernels/$_/boot/vmlinu*");
 	_ "cp $kernel isolinux/alt$i/vmlinuz";
 	_ "cp images/all.rdz-$_ isolinux/alt$i/all.rdz";
 	$i++;

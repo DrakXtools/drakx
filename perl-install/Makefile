@@ -162,7 +162,7 @@ endif
 
 	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS
 
-	for i in ../all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
+	for i in ../kernel/modules.description ../kernel/all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
 
 	$(MAKE) -C share/po install NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
@@ -171,7 +171,7 @@ endif
 
 ifeq (i386,$(ARCH))
 	cp -a /etc/pcmcia $(DEST)/etc
-	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../all.modules/`cat ../all.kernels/.main`/modules.dep
+	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.modules/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
 
 	find $(DEST) -name CVS | xargs rm -rf

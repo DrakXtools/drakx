@@ -88,10 +88,12 @@ foreach (cat_("aliases")) {
     symlink $dest, "$tmp$f";
 }
 
-chomp($main = `cat ../all.kernels/.main`);
+-e "../kernel/all.modules" or die "use ./update_kernel in gi/kernel first\n";
 
-_ "cp ../all.modules/modules.cz-$main $tmp/modules/modules.cz";
-_ "cp ../all.modules/$main/modules.dep $tmp/modules";
+chomp($main = `cat ../kernel/all.kernels/.main`);
+
+_ "cp ../kernel/all.modules/modules.cz-$main $tmp/modules/modules.cz";
+_ "cp ../kernel/all.modules/$main/modules.dep $tmp/modules";
 
 installown("drvinst", "/usr/bin");
 installown("guessmounts", "/usr/bin");
