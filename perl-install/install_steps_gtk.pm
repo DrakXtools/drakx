@@ -545,28 +545,30 @@ sub installPackages {
 	    gtkpack($box, $advertising = !$draw_text ?
 		    gtkpng($f) :
 		    gtksignal_connect(gtkset_usize($darea, $width, $height), expose_event => sub {
+			       my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 			       if (!defined($dbl_area)) {
-				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $width, $height);
+				   $dbl_area = new Gtk::Gdk::Pixmap($darea->window, $dx, $dy);
+				   $dbl_area->draw_rectangle($darea->style->bg_gc('active'), 1, 0, 0, $dx, $dy);
 				   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-							  $pix, 0, 0, 0, 0, $width, $height);
+							  $pix, 0, 0, ($dx-$width)/2, 0, $width, $height);
 				   my $gc_text = new Gtk::Gdk::GC($darea->window);
 				   $gc_text->set_foreground(gtkcolor(65535, 65535, 65535));
 				   foreach (@data) {
-				       my ($text, $x, $y, $area_width, $area_height) = @$_;
+				       my ($text, $x, $y, $area_width, $area_height, $bold) = @$_;
 				       my ($width, $height, $lines, $widths, $heights, $ascents, $descents) =
 					 get_text_coord ($text, $darea->style, $area_width, $area_height, 1, 0, 1, 1);
 				       my $i = 0;
 				       foreach (@{$lines}) {
 					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  $x + ${$widths}[$i], $y + ${$heights}[$i], $_);
-					   $dbl_area->draw_string($darea->style->font, $gc_text,
-								  $x + ${$widths}[$i] + 1, $y + ${$heights}[$i], $_);
+								  ($dx-$width)/2 + $x + ${$widths}[$i], $y + ${$heights}[$i], $_);
+ 					   $bold and $dbl_area->draw_string($darea->style->font, $gc_text,
+ 								  ($dx-$width)/2 + $x + ${$widths}[$i] + 1, $y + ${$heights}[$i], $_);
 					   $i++;
 				       }
 				   }
 			       }
 			       $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-							   $dbl_area, 0, 0, 0, 0, $width, $height);
+							   $dbl_area, 0, 0, 0, 0, $dx, $dy);
 			   }));
 	} else {
 	    $advertising = undef;
