@@ -124,17 +124,17 @@ sub DoInterface {
 #    my $popimap = sub {	$_[0] or return; $settings{FORCE_PASV_FTP} = 11;  mapn {$settings{"$_[0]"} = "$_[1]"; }
 #[ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
 #[ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY" ]; };
-my $popimap = sub {
-    $_[0] or return;
-    $settings{'FORCE_PASV_FTP'} = "N";
-    $settings{TCP_BLOCKED_SERVICES}= "6000:6020";
-    $settings{UDP_BLOCKED_SERVICES}= "2049";
-    $settings{ICMP_ALLOWED_TYPES}= "destination-unreachable echo-reply time-exceeded";
-    $settings{ENABLE_SRC_ADDR_VEIFY}= "Y";
-    $settings{IP_MASQ_NETWORK}= "";
-    $settings{IP_MASQ_MODULES}= "";
-    $settings{REJECT_METHOD}= "DENY";
-};
+    my $popimap = sub {
+	$_[0] or return;
+	$settings{'FORCE_PASV_FTP'} = "N";
+	$settings{TCP_BLOCKED_SERVICES}= "6000:6020";
+	$settings{UDP_BLOCKED_SERVICES}= "2049";
+	$settings{ICMP_ALLOWED_TYPES}= "destination-unreachable echo-reply time-exceeded";
+	$settings{ENABLE_SRC_ADDR_VEIFY}= "Y";
+	$settings{IP_MASQ_NETWORK}= "";
+	$settings{IP_MASQ_MODULES}= "";
+	$settings{REJECT_METHOD}= "DENY";
+    };
     #    my $ntp = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] } ['ICMP_OUTBOUND_DISABLED_TYPES}', 'LOG_FAILURES'], [ "", "N"] };
     my $ntp = sub { $_[0] or return;
 		    $settings{'ICMP_OUTBOUND_DISABLED_TYPES}'} = "";
@@ -145,6 +145,13 @@ my $popimap = sub {
 	my (undef, undef, @netstat) = `/bin/netstat -in`;
 	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { /(\S+)/ } @netstat );
     } else { $settings{DHCP_IFACES} = "" } };
+    my $install = sub {
+	if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
+	    $in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
+ Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
+	    $in->exit(0);
+	}
+    };
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	SaveConfig();
@@ -170,7 +177,7 @@ my $popimap = sub {
 			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start"); };
     my @struct = (
 		  [$GetNetworkInfo],
-		  [],
+		  [undef , undef, undef, $install ],
 		  [undef , undef, undef, undef, ["tcp", "80"], ["tcp", "443"]],
 		  [undef , undef, undef, undef, ["tcp", "53"], ["udp", "53"]],
 		  [undef , undef, undef, undef, ["tcp", "22"]],
@@ -186,11 +193,6 @@ my $popimap = sub {
 	pop @struct; pop @struct; pop @struct;
 	@struct = ( @struct, [undef , _("Don't Save"), _("Save & Quit"), $quit ] );
 	$messages[9]=$messages[11];
-    }
-    if ($in->standalone::pkgs_install(Kernel22() ? "ipchains" : "iptables", "Bastille")) {
-	$in->ask_warn('', _("Failure installing the needed packages : %s and Bastille.
- Try to install them manually.", Kernel22() ? "ipchains" : "iptables") );
-	$in->exit(0);
     }
     for (my $i=0;$i<@struct;$i++) {
 	$::Wizard_no_previous = $i == 0;
