@@ -1112,7 +1112,7 @@ Would you like X to start when you reboot?"), 1);
 _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
                                            [ _("Choose the default user:") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ])
-		    && delete $o->{miscellaneaous}{autologuser} && do { $flag='yes'; system("urpmi --auto autologin"); } ;
+		    ? do { $flag='yes'; system("urpmi --auto autologin"); } : delete $o->{miscellaneaous}{autologuser};
 	    }
 	    any::setAutologin($prefix, $o->{miscellaneous}{autologuser}, "startx", $flag);
 	}
