@@ -462,39 +462,25 @@ sub get_kernels_and_labels() {
 #		to catch everything and can be readable if we want to
 #		add new scheme name.
 # DUPLICATED from /usr/share/loader/common.pm
-my $mdksub = "smp|enterprise|secure|linus|mosix|BOOT|custom";
-
 sub sanitize_ver {
-    my $string = shift;
-    my $return;
-    my ($ehad, $chtaim, $chaloch, $arba, $hamesh, $chech); #where that names come from ;)
+    my ($string) = @_;
 
-    if ($string =~ m|([^-]+)-([^-]+)(-([^-]+))?(-([^-]*))?|) {
-        $ehad = $1; $chtaim = $2; $chaloch = $3; $arba = $4; $hamesh = $5; $chech = $6;
+    my ($main_version, undef, $extraversion, $rest) = 
+      $string =~ m!(\d+\.\d+\.\d+)(-((?:pre|rc)\d+))?(.*)!;
+
+    if (my ($mdkver, $cpu, $nproc, $mem) = $rest =~ m|-(.+)-(.+)-(.+)-(.+)|) {
+	$rest = "$cpu$nproc$mem-$mdkver";
     }
 
-    if ($chtaim =~ m|mdk| && $chech =~ m|mdk(${mdksub})|) { #new mdk with mdksub
-	my $s = $1;
-	$return = "$1$2$3-$4$s" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk|;
-    } elsif ($chaloch =~ m|mdk| && $chtaim =~ /pre\d+/
-	     && $arba =~ m|(\d+)mdk(${mdksub})?|) { #new mdk with mdksub
-	my $r = $1;
-	my $s = $2 ? $2 : "";
-	$return = "$1$2$3-p$4$r$s" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)pre(\d+)|;
-    } elsif ($chtaim =~ m|mdk$|) { #new mdk
-	$return = "$1$2$3-$4" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)\.(\d+)mdk$|;
-    } elsif ($chaloch =~ m|(\d+)mdk(${mdksub})$|) { #old mdk with mdksub
-	my $s = "$1$2";
-	$return = "$1$2$3-$s" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)|;
-    } elsif ($chaloch =~ m|(\d+)mdk$|) { #old mdk
-	my $s = $1;
-	$return = "$1$2$3-$s" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)|;
-    } elsif (!defined($chaloch)) { #linus/marcelo vanilla
-	$return = "$1$2$3" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)$|;
-    } else { #a pre ac vanilla or whatever with EXTRAVERSION
-	$return = "$1$2$3${chaloch}" if $chtaim =~ m|^(\d+)\.(\d+)\.(\d+)$|;
-    }
-    $return =~ s|\.||g; $return =~ s|mdk||; $return =~ s|secure|sec|; $return =~ s|enterprise|ent|;
+    my $return = "$main_version$extraversion$rest";
+
+    $return =~ s|\.||g;
+    $return =~ s|mdk||;
+    $return =~ s|64GB|64G|;
+    $return =~ s|4GB|4G|;
+    $return =~ s|secure|sec|;
+    $return =~ s|enterprise|ent|;
+
     return $return;
 }
 
