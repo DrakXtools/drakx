@@ -416,7 +416,7 @@ sub choosePackages {
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
     my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    my $level = pkgs::setSelectedFromCompssList($packages, '', $min_mark, 0);
+    my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
