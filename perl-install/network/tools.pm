@@ -127,10 +127,9 @@ sub connected_bg {
   	if (defined($a = <F>)) {
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
-	    print STDERR "debug - hostname result : $a\n";
 	    $$ref = $a;
   	}
-    } else { $kid_pipe = connected2() }
+    } else { $kid_pipe = connected2(); }
     1;
 }
 
@@ -140,6 +139,7 @@ sub connected2 {
 	return \*KID_TO_READ;
     } else {      # child
 	my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
+	print $a;
 	c::_exit(0);
     }
 }
