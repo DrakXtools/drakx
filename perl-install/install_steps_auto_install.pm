@@ -74,7 +74,9 @@ sub configureNetwork {
 
 sub enteringStep {
     my ($o, $step) = @_;
-    print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
+    my ($s, $t) = (__("Entering step `%s'\n"), $o->{steps}{$step}{text});
+    ($s, $t) = (translate($s), translate($t)) if $ENV{LANG} !~ /ja|ko|zh/;
+    print sprintf($s, $t);
     $o->install_steps::enteringStep($step);
 }
 
