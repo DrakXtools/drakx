@@ -131,7 +131,15 @@ sub test_connected {
 sub check_link_beat() {
     bg_command->new(sub {
                         require Net::Ping;
-                        print Net::Ping->new($> ? "tcp" : "icmp")->ping("mandrakesoft.com") ? 1 : 0;
+                        my $p;
+                        if ($>) {
+                            $p = Net::Ping->new("tcp");
+                            # Try connecting to the www port instead of the echo port
+                            $p->{port_num} = getservbyname("http", "tcp");
+                        } else {
+                            $p = Net::Ping->new("icmp");
+                        }
+                        print $p->ping("www.mandrakesoft.com") ? 1 : 0;
                     });
 }
 
