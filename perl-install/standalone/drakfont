@@ -336,7 +336,7 @@ sub put_font_dir() {
         interactive_progress($pbar2, 0.10, N("True Type fonts installation"));
         glob("$drakfont_dir/tmp/tmp/*.TTF") 
           and system('cd ' . $drakfont_dir . '/tmp/tmp ; for foo in *.TTF; do mv $foo `basename $foo .TTF`.ttf; done');
-        system('cd ' . $drakfont_dir . '/tmp/tmp  && cp *.ttf ../../ttf');
+        system('cd ' . $drakfont_dir . '/tmp/tmp  && cp *.ttf ../../ttf; chmod 644 ../../ttf/*ttf');
         interactive_progress($pbar2, 0.20, N("please wait during ttmkfdir..."));
 
         my $ttfdir = $drakfont_dir . "/ttf";
