@@ -235,18 +235,38 @@ sub row_setting_dialog {
     my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
     
     my %rights = (user => $user, group => $group, other => $other);
+    my %rights_labels = (user => N("User"), group => N("Group"), other => N("Other"));
     my @check  = ('', 'read', 'write', 'execute');
+    
+    my %checks = ('read' => {
+                             label => N("Read"),
+                             tip => N("Enable \"%s\" to read the file"),
+                            },
+                  'write' => {
+                              label => N("Write"),
+                              tip => N("Enable \"%s\" to write the file"),
+                             },
+                  'execute' => {
+                                label => N("Execute"),
+                                tip => N("Enable \"%s\" to execute the file")
+                               }
+                 );
+    $tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
+    $tips->set_tip($suid, N("Use owner id for execution"));
+    $tips->set_tip($gid, N("Use group id for execution"));
+    $tips->set_tip($usr_check, N("When checked, owner and group won't be changed"));
 
-    $vb_rights->add(new Gtk2::Label($_)) foreach @check;
+    $vb_rights->add(new Gtk2::Label($checks{$_}{label})) foreach @check;
     $hb_rights->add($vb_rights);
 
     foreach my $r (keys %rights) {
      $perms{$r} = { get_right($rights{$r}) };
-     my $vbox = gtkadd(Gtk2::VBox->new(0,5), Gtk2::Label->new($r));
+     my $vbox = gtkadd(Gtk2::VBox->new(0,5), Gtk2::Label->new($rights_labels{$r}));
      foreach my $c (@check) {
          $c eq '' and next;
          my $active = $perms{$r}{$c};
          $perms{$r}{$c} = Gtk2::CheckButton->new;
+         $tips->set_tip($perms{$r}{$c}, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
          $perms{$r}{$c}->set_active($active);
          $vbox->add($perms{$r}{$c});
      }
