@@ -1822,7 +1822,7 @@ sub setup_common {
 			    if !$printer->{noninteractive};
 			$in->do_pkgs->install('sane-backends',
 					      'sane-frontends',
-					      'xsane', 'libsane-hpoj0',
+					      'xsane', 'libsane-hpoj1',
 					      if_($in->do_pkgs->is_installed('gimp'), 'xsane-gimp'));
 		    }
 		    # Configure the HPOJ SANE backend
