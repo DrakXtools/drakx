@@ -251,7 +251,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    foreach ($card, @{$card->{cards}}) {
+    foreach ($card, @{$card->{cards} || []}) {
 	$_->{memory} = 4096,  delete $_->{depth} if $_->{driver} eq 'i810';
 	$_->{memory} = 16384, delete $_->{depth} if $_->{chipset} =~ /PERMEDIA/ && $_->{memory} <= 1024;
     }
