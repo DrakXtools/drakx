@@ -158,7 +158,7 @@ sub get_subwizard {
       my %adsl_types = (
                         dhcp   => N("Dynamic Host Configuration Protocol (DHCP)"),
                         manual => N("Manual TCP/IP configuration"),
-                        ppptp  => N("Point to Point Tuneling Protocol (PPPTP)"),
+                        pptp  => N("Point to Point Tuneling Protocol (PPPTP)"),
                         pppoe  => N("PPP over Ethernet (PPPoE)"),
                         pppoa  => N("PPP over ATM (PPPoA)"),
                        );
