@@ -428,7 +428,7 @@ sub psUsingHdlists {
 }
 
 sub psUsingHdlist {
-    my ($prefix, $method, $packages, $hdlist, $medium_name, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey) = @_;
+    my ($prefix, $method, $packages, $hdlist, $medium_name, $rpmsdir, $descr, $selected, $o_fhdlist, $o_pubkey, $o_nocopy) = @_;
     my $fakemedium = "$descr ($method$medium_name)";
     my $urpmidir = urpmidir($prefix);
     log::l("trying to read $hdlist for medium $medium_name");
@@ -447,14 +447,16 @@ sub psUsingHdlist {
     #- copy hdlist file directly to urpmi directory, this will be used
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$urpmidir/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
-    install_any::getAndSaveFile($o_fhdlist || "media/media_info/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
-    $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
-    symlinkf $newf, "/tmp/$hdlist";
+    unless ($o_nocopy) {
+	-e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
+	install_any::getAndSaveFile($o_fhdlist || "media/media_info/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
+	$m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
+	symlinkf $newf, "/tmp/$hdlist";
+    }
 
-    #- if $o_fhdlist is a filehandle, this is preferable not to try to find the associated synthesis.
     my $newsf = "$urpmidir/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
-    unless (ref $o_fhdlist) {
+    #- if $o_fhdlist is a filehandle, it's preferable not to try to find the associated synthesis.
+    if (!$o_nocopy && !ref $o_fhdlist) {
 	#- copy existing synthesis file too.
 	my $synth;
 	if ($o_fhdlist) {

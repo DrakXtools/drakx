@@ -363,6 +363,7 @@ sub preConfigureTimezone {
 }
 
 sub deselectFoundMedia {
+    #- TODO group by CD
     my ($o, $hdlists) = @_;
     my $l = $o->ask_many_from_list('',
 N("The following installation media have been found.
@@ -396,6 +397,27 @@ Do you have a supplementary installation media to configure?",
     return $suppl;
 }
 
+#- if the supplementary media is networked, but not the main one, network
+#- support must be installed and network started.
+sub prep_net_suppl_media {
+    return if our $net_suppl_media_configured;
+    $net_suppl_media_configured = 1;
+    my ($o) = @_;
+    #- install basesystem now
+    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
+    #- from install_steps_interactive:
+    local $::expert = $::expert;
+    require network::netconnect;
+    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+    require install_interactive;
+    install_interactive::upNetwork($o);
+    #- force reinitialisation of network modules
+    delete $INC{'IO/Socket.pm'};
+    delete $INC{'IO/Socket/UNIX.pm'};
+    delete $INC{'IO/Socket/INET.pm'};
+    require IO::Socket;
+}
+
 sub selectSupplMedia {
     my ($o, $suppl_method) = @_;
     #- ask whether there are supplementary media
@@ -411,24 +433,9 @@ sub selectSupplMedia {
 	my $medium_name = $suppl_method eq 'cdrom'
 	    ? (max(map { $_->{medium} =~ /^(\d+)s$/ ? $1 : 0 } values %{$o->{packages}{mediums}}) + 1) . "s"
 	    : int(keys %{$o->{packages}{mediums}}) + 1;
-	local $::isWizard = 0;
 	#- configure network if needed
-	if (!(our $asked) && !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/) {
-	    $asked = 1;
-	    #- install basesystem now
-	    $::o->do_pkgs->ensure_is_installed('basesystem', undef, 1);
-	    #- from install_steps_interactive:
-	    local $::expert = $::expert;
-	    require network::netconnect;
-	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
-	    require install_interactive;
-	    install_interactive::upNetwork($o);
-	    #- force reinitialisation of network modules
-	    delete $INC{'IO/Socket.pm'};
-	    delete $INC{'IO/Socket/UNIX.pm'};
-	    delete $INC{'IO/Socket/INET.pm'};
-	    require IO::Socket;
-	}
+	prep_net_suppl_media($o) if !scalar keys %{$o->{intf}} && $suppl_method !~ /^(?:cdrom|disk)/;
+	local $::isWizard = 0;
 	my $main_method = $o->{method};
 	local $o->{method} = $suppl_method;
 	if ($suppl_method eq 'cdrom') {
@@ -535,15 +542,51 @@ sub setup_suppl_medium {
     $supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
 }
 
+sub _media_rank {
+    my ($x) = @_;
+    my ($y, $s) = $x =~ /(\d+)(s?)\)\.cz/;
+    $s and $y += 100;
+    $y;
+}
+
 sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
 	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o, $o->{method});
+	my $nb_suppl_media = 0;
 
-	1 while
-	$suppl_method = $o->selectSupplMedia($suppl_method);
+	++$nb_suppl_media while $suppl_method = $o->selectSupplMedia($suppl_method);
+
+	if ($nb_suppl_media) {
+	    #- reread all hdlists and recompute dependencies
+	    log::l("re-read hdlists");
+	    pkgs::cleanHeaders($o->{prefix});
+	    %pkgs::uniq_pkg_seen = ();
+	    my $oldmediums = $o->{packages}{mediums};
+	    delete $o->{packages}{rpmdb}; delete $o->{packages};
+	    $o->{packages} = new URPM;
+	    @{$o->{packages}}{qw(count mediums)} = (0, {}); #- add additional fields used by DrakX
+	    for my $h (sort { _media_rank($b) <=> _media_rank($a) } glob(pkgs::urpmidir($o->{prefix}) . "/hdlist.*.cz")) {
+		my ($description, $method, $medium_name) = $h =~ /hdlist\.(.*) \(([-a-z]*)(\d+s?)\)\.cz/;
+		my $m = pkgs::psUsingHdlist(
+		    $o->{prefix},
+		    $method,
+		    $o->{packages},
+		    $oldmediums->{$medium_name}{hdlist},
+		    $medium_name,
+		    $oldmediums->{$medium_name}{rpmsdir},
+		    $description,
+		    1, #- selected
+		    $h, #- fhdlist
+		    undef, #- pubkey
+		    1, #- nocopy
+		);
+		defined $oldmediums->{$medium_name}{$_} and $m->{$_} = $oldmediums->{$medium_name}{$_} for qw(hdlist_size synthesis_hdlist_size with_hdlist ftp_prefix pubkey);
+	    }
+	    #$o->{packages}->compute_deps;
+	}
 
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
@@ -767,6 +810,7 @@ sub install_urpmi {
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !any::hdInstallPath() and return;
 
+    log::l("install_urpmi $method");
     #- clean to avoid opening twice the rpm db.
     delete $packages->{rpmdb};
 
