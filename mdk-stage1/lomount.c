@@ -60,7 +60,7 @@ struct loop_info
 #define LOOP_GET_STATUS	0x4C03
 
 int
-set_loop (const char *device, const char *file)
+set_loop (const char *device, const char *file, int gz)
 {
 	struct loop_info loopinfo;
 	int fd, ffd, mode;
@@ -79,6 +79,7 @@ set_loop (const char *device, const char *file)
 	strncpy(loopinfo.lo_name, file, LO_NAME_SIZE);
 	loopinfo.lo_name[LO_NAME_SIZE - 1] = 0;
 	loopinfo.lo_offset = 0;
+	loopinfo.lo_encrypt_key = 13; /* LO_CRYPT_GZ */
 
 #ifdef MCL_FUTURE  
 	/*
