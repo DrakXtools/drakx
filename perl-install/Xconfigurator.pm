@@ -182,8 +182,8 @@ sub cardConfiguration(;$$$) {
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $card->{memory} = 4096  if $card->{memory} <= 1024 && $card->{driver} eq "i810";
-    $card->{memory} = 16384 if $card->{memory} <= 1024 && $card->{chipset} =~ /PERMEDIA/;
+    $card->{memory} = 4096,  delete $card->{depth} if $card->{memory} <= 1024 && $card->{driver} eq "i810";
+    $card->{memory} = 16384, delete $card->{depth} if $card->{memory} <= 1024 && $card->{chipset} =~ /PERMEDIA/;
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
@@ -385,7 +385,7 @@ sub testConfig($) {
     ($resolutions, $clocklines);
 }
 
-sub testFinalConfig($;$$) {
+sub testFinalConfig {
     my ($o, $auto, $skiptest, $skip_badcard) = @_;
 
     $o->{monitor}{hsyncrange} && $o->{monitor}{vsyncrange} or
@@ -498,37 +498,6 @@ sub testFinalConfig($;$$) {
     $rc;
 }
 
-sub autoResolutions($;$) {
-    my ($o, $nowarning) = @_;
-    my $card = $o->{card};
-
-    $nowarning || $in->ask_okcancel(_("Automatic resolutions"),
-_("To find the available resolutions I will try different ones.
-Your screen will blink...
-You can switch if off if you want, you'll hear a beep when it's over"), 1) or return;
-
-    #- swith to virtual console 1 (hopefully not X :)
-    my $vt = setVirtual(1);
-
-    #- Configure the modes order.
-    my ($ok, $best);
-    foreach (reverse @depths) {
-	local $o->{default_depth} = $_;
-
-	my ($resolutions, $clocklines) = eval { testConfig($o) };
-	if ($@ || !$resolutions) {
-	    delete $card->{depth}{$_};
-	} else {
-	    $card->{clocklines} ||= $clocklines unless $card->{flags}{noclockprobe};
-	    $card->{depth}{$_} = [ @$resolutions ];
-	}
-    }
-
-    #- restore the virtual console
-    setVirtual($vt);
-    local $| = 1; print "\a"; #- beeeep!
-}
-
 sub autoDefaultDepth($$) {
     my ($card, $wres_wanted) = @_;
     my ($best, $depth);
@@ -639,8 +608,8 @@ sub chooseResolutions($$;$) {
 }
 
 
-sub resolutionsConfiguration($%) {
-    my ($o, %options) = @_;
+sub resolutionsConfiguration {
+    my ($o, $auto) = @_;
     my $card = $o->{card};
 
     #- For the mono and vga16 server, no further configuration is required.
@@ -655,49 +624,10 @@ sub resolutionsConfiguration($%) {
 	$o->{default_depth} = max(keys %{$card->{depth}});
 	return 1; #- aka we cannot test, assumed as good (should be).
     }
-
-    #- some of these guys hate to be poked
-    #- if we dont know then its at the user's discretion
-    #-my $manual ||=
-    #-	$card->{server} =~ /^(TGA|Mach32)/ ||
-    #-	$card->{name} =~ /^Riva 128/ ||
-    #-	$card->{chipset} =~ /^(RIVA128|mgag)/ ||
-    #-	$::expert;
-    #-
-    #-my $unknown =
-    #-	member($card->{server}, qw(S3 S3V I128 Mach64)) ||
-    #-	member($card->{type},
-    #-	       "Matrox Millennium (MGA)",
-    #-	       "Matrox Millennium II",
-    #-	       "Matrox Millennium II AGP",
-    #-	       "Matrox Mystique",
-    #-	       "Matrox Mystique",
-    #-	       "S3",
-    #-	       "S3V",
-    #-	       "I128",
-    #-	      ) ||
-    #-	$card->{type} =~ /S3 ViRGE/;
-    #-
-    #-$unknown and $manual ||= !$in->ask_okcancel('', [ _("I can try to autodetect information about graphic card, but it may freeze :("),
-    #-							_("Do you want to try?") ]);
-
     if (is_empty_hash_ref($card->{depth})) {
 	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ]
 	  foreach @depths;
-
-	unless ($options{noauto}) {
-	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"),
-_("I can try to find the available resolutions (eg: 800x600).
-Sometimes, though, it may hang the machine.
-Do you want to try?"), 1)) {
-		autoResolutions($o, $options{nowarning});
-		is_empty_hash_ref($card->{depth}) and $in->ask_warn('',
-_("No valid modes found
-Try with another video card or monitor")), return;
-	    }
-	}
     }
-
     #- sort resolutions in each depth
     foreach (values %{$card->{depth}}) {
 	my $i = 0;
@@ -715,11 +645,11 @@ Try with another video card or monitor")), return;
     $wres ||= max map { first(grep { $_->[0] <= $wres } @$_)->[0] } values %{$card->{depth}};
     my $depth = eval { $o->{default_depth} || autoDefaultDepth($card, $wres) };
 
-    $options{auto} or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
+    $auto or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
 
     unless ($wres) {
 	delete $card->{depth};
-	return resolutionsConfiguration($o, noauto => 1);
+	return resolutionsConfiguration($o);
     }
 
     #- needed in auto mode when all has been provided by the user
@@ -1093,7 +1023,7 @@ sub main {
 
 	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
     }
-    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
+    my $ok = resolutionsConfiguration($o, $::auto);
 
     $ok &&= testFinalConfig($o, $::auto, $o->{skiptest}, $::auto);
 
@@ -1104,11 +1034,7 @@ sub main {
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) },
            ($::expert ? (__("Change Server options") => sub { optionsConfiguration($o) }) : ()),
-	   __("Change Resolution") => sub { resolutionsConfiguration($o, noauto => 1) },
-	   __("Automatical resolutions search") => sub {
-	       delete $o->{card}{depth};
-	       resolutionsConfiguration($o, nowarning => 1);
-	   },
+	   __("Change Resolution") => sub { resolutionsConfiguration($o) },
 	   __("Show information") => sub { show_info($o) },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },

@@ -63,13 +63,13 @@ sub initrd {
     install_s("$instdir/installinit/init", "$mnt/sbin");
     install_s("$instdir/$install", "$mnt/sbin/install");
 
-    if ($type eq "pcmcia") {
+    my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
+    if ($ftype eq "pcmcia") {
 	unlink "$mnt/sbin/sh";
 	_ "$sudo cp -a tools/$arch/sh $mnt/sbin";
 	_ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	_ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
     }
-    my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
     _ "$sudo cp -f install_${ftype}_modules/* $mnt/modules/" if -d "install_${ftype}_modules";
     _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
@@ -137,6 +137,9 @@ label oem
 label auto
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=auto_inst.cfg.pl
+label all
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=$type.rdz vga=788
 ");
     _ "sync";
     _ "df $mnt";

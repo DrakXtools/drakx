@@ -211,11 +211,11 @@ sub selectLanguage {
 #------------------------------------------------------------------------------
 sub selectMouse {
     $::live and return;
-    my ($clicked) = $_[0];
+    my ($first_time) = $_[1] == 1;
 
-    add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && !$clicked;
+    add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && $first_time;
 
-    $o->selectMouse($clicked);
+    $o->selectMouse(!$first_time);
     addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages';
 }
 
@@ -352,7 +352,7 @@ sub miscellaneous {
             CLASS => $::expert && "expert" || $::beginner && "beginner" || "medium",
             TYPE => $o->{installClass},
             SECURITY => $o->{security},
-	    LITTLE_OIGNONS_WELL_FRIED => 'PowerPack', # Desktop
+	    META_CLASS => $o->{meta_class} || 'PowerPack',
         });
 
 	my $f = "$o->{prefix}/etc/sysconfig/usb";

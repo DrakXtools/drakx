@@ -1,3 +1,4 @@
+
 package install_steps_interactive; # $Id$
 
 
@@ -138,7 +139,7 @@ are you ready to answer that kind of questions?"),
 		);
 	$o->set_help('selectInstallClass2');
 	$o->{installClass} = $o->ask_from_listf(_("Install Class"),
-						_("Which usage is your system used for ?"),
+						_("What is your system used for?"),
 						sub { $c{$_[0]} },
 						[ keys %c ],
 						$o->{installClass});
@@ -350,16 +351,29 @@ sub choosePackages {
 	my $max_size = 1 + $size; #- avoid division by zero.
 	
 	my $size2install = min($availableC, do {
-	    if ($::beginner) {
-		my @l = (300, 700, round_up(min($max_size, $availableC) / sqr(1024), 100));
-		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
-		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
-		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
+	    my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
+
+	    if ($::beginner) {		
+		my (@l, @text);
+		if ($o->{meta_class} eq 'desktop') {
+		    @l = (500, 800, 0);
+		    @text = (__("Minimum (%dMB)"), __("Complete (%dMB)"), __("Custom"));
+		    $max > $l[1] or splice(@l, 1, 1), splice(@text, 1, 1);
+		    $max > $l[0] or @l = $max;
+		} else {
+		    @l = (300, 700, $max);
+		    @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
+		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
+		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
+		}
 		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	    }
 	});
+	if (!$size2install) { #- special case for desktop
+	    $o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual);
+	}
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     }

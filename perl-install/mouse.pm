@@ -122,7 +122,7 @@ sub fullnames {
 		my $l = raw2mouse($type, $_);
 		"$type|$l->{name}";
 	    } else { 
-		$type .= '|_' . _("Other");
+		$type .= "|[" . _("Other");
 		'';
 	    }
 	} @{$::b->[1]}
