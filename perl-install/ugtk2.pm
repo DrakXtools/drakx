@@ -531,7 +531,7 @@ sub gtkfontinfo {
 
 sub gtkmodify_font {
     my ($w, $arg) = @_;
-    $w->modify_font($arg);
+    $w->modify_font(ref($arg) ? $arg : Gtk2::Pango::FontDescription->from_string($arg));
     $w;
 }
 
