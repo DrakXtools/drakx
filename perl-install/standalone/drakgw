@@ -19,6 +19,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 
+use strict;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -55,7 +56,7 @@ my $shorewall = network::shorewall::read();
 
 my $in = 'interactive'->vnew('su', 'default');
 
-!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard=1;
+!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
 
 pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
@@ -66,8 +67,7 @@ sub outpend {
     my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
 }
 
-sub start_daemons ()
-{
+sub start_daemons () {
     my $cups_used = 0;
     standalone::explanations("Starting daemons");
     if (-f "/etc/rc.d/init.d/cups") {
@@ -90,8 +90,7 @@ sub start_daemons ()
     sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
 }
 
-sub stop_daemons ()
-{
+sub stop_daemons () {
     standalone::explanations("Stopping daemons");
     foreach (qw(dhcpd named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
@@ -100,8 +99,9 @@ sub stop_daemons ()
     sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
 }
 
-sub fatal_quit ($)
-{
+my $wait_configuring;
+
+sub fatal_quit ($) {
     log::l("[drakgw] FATAL: $_[0]");
     undef $wait_configuring;
     $in->ask_warn('', $_[0]);
@@ -145,9 +145,7 @@ What would you like to do?"),
 	if ($r eq "dismiss") {
 	    quit_global($in, 0);
 	}
-    }
-    else
-    {
+    } else {
 	my $r = $in->ask_from_list_(N("Internet Connection Sharing currently disabled"),
 N("The setup of Internet connection sharing has already been done.
 It's currently disabled.
@@ -232,9 +230,7 @@ N("There is only one configured network adapter on your system:
 %s
 
 I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_ask_confirm;
-}
-else
-{
+} else {
     $device = $in->ask_from_listf(N("Choose the network interface"),
 				    N("Please choose what network adapter will be connected to your Local Area Network."),
 				     $format,
@@ -467,7 +463,7 @@ if (-f $cups_conf) {
 	for (my $i = 0; $i < @cups_conf_content && $root_location_end == -1; $i++) {
 	    if ($cups_conf_content[$i] =~ m|^\s*<\s*Location\s+/\s*>|) {
 		$root_location_start = $i;
-	    } elsif (($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>|) && ($root_location_start != -1)) {
+	    } elsif (($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>|) && $root_location_start != -1) {
 		$root_location_end = $i;
 	    }
 	}
@@ -519,8 +515,7 @@ sub quit_global {
     goto begin
 }
 
-sub pur_gtk_mode
-{
+sub pur_gtk_mode {
     require Gtk;
     init Gtk;
     my $setup_state = $shorewall && $shorewall->{masquerade} ? 
