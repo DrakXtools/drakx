@@ -501,6 +501,7 @@ sub setAuthentication {
 
 sub write_smb_conf {
     my ($domain) = @_;
+    $domain =~ tr/a-z/A-Z/;
 
     #- was going to just have a canned config in samba-winbind
     #- and replace the domain, but sylvestre/buchan didn't bless it yet

@@ -176,7 +176,7 @@ sub import_ctree {
 		      _("Please enter your username, password and domain name to access this host."),
 		      [ 
 		       { label => _("Username"), val => \$server->{username} },
-		       { label => _("Password"), val => \$server->{password} },
+		       { label => _("Password"), val => \$server->{password}, hidden => 1 },
 		       { label => _("Domain"), val => \$server->{domain} },
 		      ])) {
 	    goto $find_exports;
