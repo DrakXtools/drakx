@@ -1,3 +1,7 @@
+2000-10-06  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm (ask_connect_now): connection is now tested.
+
 2000-10-06  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_interactive.pm, install_steps_gtk.pm: updated
@@ -54,6 +58,7 @@
 	(main): added $netc->{minus_one} to avoid to count dhcp configured
 	eth when asking to share the connection.
 	(adsl-pppoe): improvement. Should work now.
+	(miscellaneous): corrected chmod 755 to 744 for connections scripts
 
 	* netconnect.pm (main): network is stopped then started, instead
 	of restarted.
