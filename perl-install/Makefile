@@ -47,6 +47,9 @@ $(DIRS):
 test_pms:
 	perl_checker install2.pm install_steps_gtk.pm install_steps_stdio.pm partition_table/*.pm standalone/{harddrake2,diskdrake,draksec}
 
+test_pms_all:
+	perl_checker --check-unused $(wildcard $(ALLPMS))
+
 %.mo: %.po
 	msgfmt -o $@ $<
 
