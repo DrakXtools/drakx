@@ -62,7 +62,7 @@ sub load_category__prompt_for_more {
 	$in->ask_from_({ messages => $msg,
 			 if_($category =~ m|disk/scsi|, interactive_help_id => 'setupSCSI'),
 		       }, 
-		       [ { list => [ N_("Yes"), N_("No"), N_("See hardware info") ], val => \$r, type => 'list' } ]);
+		       [ { list => [ N_("Yes"), N_("No"), N_("See hardware info") ], val => \$r, type => 'list', format => \&translate } ]);
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_category__prompt($in, $category) || next;
