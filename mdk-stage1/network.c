@@ -30,9 +30,47 @@
 #include "network.h"
 
 
+static char * interface_select(void)
+{
+	char ** interfaces, ** ptr;
+	char * choice;
+	int i, count = 0;
+	enum return_type results;
+
+	interfaces = get_net_devices();
+
+	ptr = interfaces;
+	while (ptr && *ptr) {
+		count++;
+		ptr++;
+	}
+
+	if (count == 0) {
+		error_message("No NET device found.");
+		i = ask_insmod(NETWORK_DEVICES);
+		if (i == RETURN_BACK)
+			return NULL;
+		return interface_select();
+	}
+
+	if (count == 1)
+		return *interfaces;
+
+	results = ask_from_list("Please choose the NET device to use for the installation.", interfaces, &choice);
+
+	if (results != RETURN_OK)
+		return NULL;
+
+	return choice;
+}
+
 enum return_type nfs_prepare(void)
 {
-	pci_probing(NETWORK_DEVICES);
+	char * iface = interface_select();
+
+	if (iface == NULL)
+		return RETURN_BACK;
+
 
 	return RETURN_ERROR;
 }

@@ -12,13 +12,6 @@
  *
  */
 
-/*
- * Portions from Erik Troan (ewt@redhat.com)
- *
- * Copyright 1996 Red Hat Software 
- *
- */
-
 
 /*
  * Each different frontend must implement all functions defined in frontend.h

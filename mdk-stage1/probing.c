@@ -25,6 +25,7 @@
  * (1) PCI devices
  * (2) IDE media
  * (3) SCSI media
+ * (4) ETH devices
  */
 
 
@@ -35,6 +36,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <net/if.h>
+#include <sys/ioctl.h>
 #include "log.h"
 #include "frontend.h"
 #include "modules.h"
@@ -47,7 +52,7 @@ void pci_probing(enum driver_type type)
 {
 	if (IS_EXPERT)
 		ask_insmod(type);
-	else {
+	else { 
 		/* do it automatically */
 		char * mytype;
 		FILE * f;
@@ -351,4 +356,56 @@ void get_medias(enum media_type media, char *** names, char *** models)
 
 	*models = (char **) malloc(sizeof(char *) * count);
 	memcpy(*models, tmp_models, sizeof(char *) * count);
+}
+
+
+int net_device_available(char * device) {
+	struct ifreq req;
+	int s;
+    
+	s = socket(AF_INET, SOCK_DGRAM, 0);
+	if (s < 0) {
+		close(s);
+		log_perror(device);
+		return 0;
+	}
+	strcpy(req.ifr_name, device);
+	if (ioctl(s, SIOCGIFFLAGS, &req)) {
+		/* if we can't get the flags, the networking device isn't available */
+		close(s);
+		return 0;
+	}
+	return 1;
+}
+
+
+char ** get_net_devices(void)
+{
+	char * devices[] = {
+		"eth0", "eth1", "eth2", "eth3",
+		"tr0",
+		"plip0", "plip1", "plip2",
+		"fddi0",
+		NULL
+	};
+	char ** ptr = devices;
+	char * tmp[50];
+	char ** results;
+	int i = 0;
+
+	pci_probing(NETWORK_DEVICES);
+
+	while (ptr && *ptr) {
+		if (net_device_available(*ptr)) {
+			log_message("NET: interface %s available", *ptr);
+			tmp[i++] = strdup(*ptr);
+		}
+		ptr++;
+	}
+	tmp[i++] = NULL;
+
+	results = (char **) malloc(sizeof(char *) * i);
+	memcpy(results, tmp, sizeof(char *) * i);
+	
+	return results;
 }
