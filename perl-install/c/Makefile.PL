@@ -4,7 +4,7 @@ use Config;
 # the contents of the Makefile that is written.
 
 my $libs = '-lldetect';
-$libs .= ' -L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc' if $ENV{C_DRAKX};
+$libs .= ' -L/usr/X11R6/lib -lX11 -lgdk -lXxf86misc -lext2fs' if $ENV{C_DRAKX};
 $libs .= ' -lrpm -lrpmdb -lrpmio -lz' if $ENV{C_RPM};
 
 my $pcmcia_dir = $ENV{C_DRAKX} && $Config{archname} =~ /i.86/ ? '../../mdk-stage1/pcmcia' : '';

@@ -77,6 +77,10 @@ void rpmError_callback(void) {
 ';
 
 $ENV{C_DRAKX} and print '
+
+#include <ext2fs/ext2_fs.h>
+#include <ext2fs/ext2fs.h>
+
 #include <gdk/gdkx.h>
 
 void initIMPS2() {
@@ -126,6 +130,23 @@ pcmcia_probe()
 ';
 
 $ENV{C_DRAKX} and print '
+
+int
+is_ext3(device_name)
+  char * device_name
+  CODE:
+  {
+    ext2_filsys fs;
+    int retval = ext2fs_open (device_name, 0, 0, 0, unix_io_manager, &fs);
+    if (retval) {
+      RETVAL = 0;
+    } else {
+      RETVAL = fs->super->s_feature_compat & EXT3_FEATURE_COMPAT_HAS_JOURNAL;
+      ext2fs_close(fs);  
+    }
+  }
+  OUTPUT:
+  RETVAL
 
 void
 setMouseLive(display, type, emulate3buttons)
