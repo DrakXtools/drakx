@@ -114,6 +114,7 @@ sub real_main {
                             3 => N("Protocol for the rest of the world\nNo D-Channel (leased lines)"),
                            );
 
+      network::tools::remove_initscript();
 
       init_globals($in);
       $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
@@ -184,7 +185,6 @@ sub real_main {
           if ($netc->{internet_cnx_choice}) {
               write_cnx_script($netc);
               $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type} if $netc->{internet_cnx_choice};
-              write_initscript();
           } else {
               undef $netc->{NET_DEVICE};
           }
