@@ -73,16 +73,7 @@ sub read_squid_conf {
 }
 
 sub read_tmdns_conf {
-    my ($file) = @_;
-    local *F; open $F, $file or die "cannot open file $file: $!";
-    local $_;
-    my %outf;
-
-    while (<F>) {
-	($outf{ZEROCONF_HOSTNAME}) = /^\s*hostname\s*=\s*(\w+)/ and return \%outf;
-    }
-    
-    \%outf;
+    { if_(cat_($_[0]) =~ /^\s*hostname\s*=\s*(\w+)/m, ZEROCONF_HOSTNAME => $1) };
 }
 
 sub write_conf {
