@@ -104,7 +104,7 @@ $permList->signal_connect(button_press_event => sub {
 my $tips = new Gtk2::Tooltips;
 
 $W->add(gtkpack_(Gtk2::VBox->new(0,5),
-                 0, Gtk2::WrappedLabel->new(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")),
+                 0, Gtk2::WrappedLabel->new(N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules.")),
                  1, gtkadd(Gtk2::Frame->new,
                            gtkpack_(Gtk2::VBox->new,
                                     0, Gtk2::WrappedLabel->new(N("The current security level is %s.

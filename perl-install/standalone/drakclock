@@ -33,7 +33,7 @@ $my_win->{window}->signal_connect(delete_event => sub { ugtk2->exit(0) });
 my $calendar = Gtk2::Calendar->new;
 $calendar->signal_connect($_ => \&cal_changed) foreach 'month-changed', 'day-selected', 'day-selected-double-click', 'prev-month', 'next-month', 'prev-year', 'next-year';
 
-my $button_time = Gtk2::Button->new(N("Time Zone"));
+my $button_time = Gtk2::Button->new(N("Change Time Zone"));
 $button_time->signal_connect(clicked => sub {
 				   local $::isEmbedded = 0; # to prevent sub window embedding
 				   $in->{timezone} = {};
