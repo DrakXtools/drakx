@@ -617,6 +617,11 @@ sub gtktext_insert { &mygtk2::_text_insert }
 sub icon_paths { &mygtk2::_icon_paths }
 sub add_icon_path { &mygtk2::add_icon_path }
 
+sub set_main_window_size { 
+    my ($o) = @_;
+    mygtk2::set_main_window_size($o->{rwindow});
+}
+
 # extracts interesting font metrics for a given widget
 sub gtkfontinfo {
     my ($widget) = @_;
