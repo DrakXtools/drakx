@@ -450,7 +450,7 @@ and optionally the port number."), [
                     { title => _("Select Printer Connection"),
 		      cancel => !$printer->{configured}{$printer->{QUEUE}} ? '' : _("Remove queue"),
 		      callbacks => { complete => sub {
-					 unless ($printer->{QUEUE} =~ /^\w*$/) {
+					 unless ($printer->{QUEUE} =~ /^\w+[\w\|]*\w+$/) {
 					     $in->ask_warn('', _("Name of printer should contains only letters, numbers and the underscore"));
 					     return (1,0);
 					 }
