@@ -454,6 +454,12 @@ sub selectPackagesToUpgrade($$$) {
     log::l("done selecting packages to upgrade");
 }
 
+sub installCallback {
+    my $msg = shift;
+
+    log::l($msg .": ". join(',', @_));
+}
+
 sub install($$) {
     my ($prefix, $toInstall) = @_;
     my %packages;
@@ -476,7 +482,6 @@ sub install($$) {
 			       c::headerGetEntry(getHeader($p), 'arch');
 	$packages{$p->{name}} = $p;
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{name}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
-#	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, 1); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }
@@ -491,12 +496,6 @@ sub install($$) {
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
 
-    #- if someone try to change the function log::ld or the parameters used,
-    #- DON TRY THAT unless you have modified accordingly install_steps_gtk.
-    #- because log::ld is catched, furthermore do not translate the messages used.
-    log::l("starting installation: ", $nb, " packages, ", $total, " bytes");
-    log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
-
     my $callbackOpen = sub {
 	my $f = (my $p = $packages{$_[0]})->{file};
 	print LOG "$f\n";
@@ -504,11 +503,16 @@ sub install($$) {
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };
-    my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
-    my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
+    my $callbackMessage = \&pkgs::installCallback;
+#    my $callbackStart = sub { log::ld("starting installing package ", $_[0]) };
+#    my $callbackProgress = sub { log::ld("progressing installation ", $_[0], "/", $_[1]) };
 
-    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose,
-					  $callbackStart, $callbackProgress, 0)) {
+    #- do not modify/translate the message used with installCallback since
+    #- these are keys during progressing installation, or change in other
+    #- place (install_steps_gtk.pm,...).
+    &$callbackMessage("Starting installation", $nb, $total);
+
+    if (my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, $callbackMessage, 0)) {
 	my %parts;
 	@probs = reverse grep {
 	    if (s/(installing package) .* (needs (?:.*) on the (.*) filesystem)/$1 $2/) {

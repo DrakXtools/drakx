@@ -507,16 +507,16 @@ sub installPackages {
     $msg->set(_("Preparing installation"));
     $w->sync;
 
-    my $old = \&log::ld;
-    local *log::ld = sub {
+    my $old = \&pkgs::installCallback;
+    local *pkgs::installCallback = sub {
 	my $m = shift;
-	if ($m =~ /^starting installation:/) {
+	if ($m =~ /^Starting installation/) {
 	    $nb = $_[0];
-	    $total_size = $_[2]; $current_total_size = 0;
+	    $total_size = $_[1]; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(join '', @_);
+	    $msg->set(_("%d packages", $nb) . _(", %U bytes", $total_size));
 	    $w->flush;
-	} elsif ($m =~ /^starting installing/) {
+	} elsif ($m =~ /^Starting installing package/) {
 	    $progress->update(0);
 	    my $name = $_[0];
 	    $msg->set(_("Installing package %s", $name));
@@ -524,11 +524,11 @@ sub installPackages {
 	    $last_size = c::headerGetEntry($o->{packages}{$name}{header}, 'size');
 	    $text->set((split /\n/, c::headerGetEntry($o->{packages}{$name}{header}, 'summary'))[0] || '');
 	    $w->flush;
-	} elsif ($m =~ /^progressing installation/) {
-	    $progress->update($_[2] ? $_[0] / $_[2] : 0);
+	} elsif ($m =~ /^Progressing installing package/) {
+	    $progress->update($_[2] ? $_[1] / $_[2] : 0);
 
 	    my $dtime = time() - $start_time;
-	    my $ratio = $total_size ? ($_[0] + $current_total_size) / $total_size : 0;
+	    my $ratio = $total_size ? ($_[1] + $current_total_size) / $total_size : 0;
 	    my $total_time = $ratio ? $dtime / $ratio : time();
 
 	    $progress_total->update($ratio);
@@ -538,7 +538,7 @@ sub installPackages {
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;
-	} else { goto $old }
+	} else { unshift @_, $m; goto $old }
     };
     catch_cdie { $o->install_steps::installPackages($packages); }
       sub {

@@ -431,18 +431,21 @@ rpmtransSetScriptFd(trans, fd)
   rpmtransSetScriptFd(trans, fdDup(fd));
 
 void
-rpmRunTransactions(trans, callbackOpen, callbackClose, callbackStart, callbackProgress, force)
+rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   void *trans
   SV *callbackOpen
   SV *callbackClose
-  SV *callbackStart
-  SV *callbackProgress
+  SV *callbackMessage
   int force
   PPCODE:
   rpmProblemSet probs;
   void *rpmRunTransactions_callback(const Header h, const rpmCallbackType what, const unsigned long amount, const unsigned long total, const void * pkgKey, void * data) {
       static FD_t fd;
       static int last_amount;
+      char *msg = NULL;
+      char *param_s = NULL;
+      const unsigned long *param_ul1 = NULL;
+      const unsigned long *param_ul2 = NULL;
       char *n = (char *) pkgKey;
 
       switch (what) {
@@ -470,26 +473,72 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackStart, callbackPr
   	break;
       }
 
+      case RPMCALLBACK_TRANS_START: {
+        switch (amount) {
+        case 1: msg = "Examining packages to install..."; break;
+        case 5: msg = "Examining files to install..."; break;
+        case 6: msg = "Finding overlapping files..."; break;
+        }
+        if (msg) param_ul1 = &total;
+      } break;
+
+      case RPMCALLBACK_UNINST_START: {
+        msg = "Removing old files...";
+        param_ul1 = &total;
+      } break;
+
+      case RPMCALLBACK_TRANS_PROGRESS: {
+        msg = "Progressing transaction";
+        param_ul1 = &amount;
+      } break;
+
+      case RPMCALLBACK_UNINST_PROGRESS: {
+        msg = "Progressing removing old files";
+        param_ul1 = &amount;
+      } break;
+
+      case RPMCALLBACK_TRANS_STOP: {
+        msg = "Done transaction";
+      } break;
+
+      case RPMCALLBACK_UNINST_STOP: {
+        msg = "Done removing old files";
+      } break;
+
       case RPMCALLBACK_INST_START: {
-  	dSP ;
-  	PUSHMARK(sp) ;
-  	XPUSHs(sv_2mortal(newSVpv(n, 0)));
-  	PUTBACK ;
-  	perl_call_sv(callbackStart, G_DISCARD);
+        msg = "Starting installing package";
+        param_s = n;
+
         last_amount = 0;
       } break;
 
       case RPMCALLBACK_INST_PROGRESS:
         if ((amount - last_amount) * 4 / total) {
-  	  dSP;
-  	  PUSHMARK(sp);
-  	  XPUSHs(sv_2mortal(newSViv(amount)));
-  	  XPUSHs(sv_2mortal(newSViv(total)));
-  	  PUTBACK ;
-  	  perl_call_sv(callbackProgress, G_DISCARD);
+          msg = "Progressing installing package";
+          param_s = n;
+          param_ul1 = &amount;
+          param_ul2 = &total;
+
           last_amount = amount;
   	} break;
       default: break;
+      }
+
+      if (msg) {
+        dSP ;
+        PUSHMARK(sp) ;
+  	XPUSHs(sv_2mortal(newSVpv(msg, 0)));
+        if (param_s) {
+  	  XPUSHs(sv_2mortal(newSVpv(param_s, 0)));
+        }
+        if (param_ul1) {
+  	  XPUSHs(sv_2mortal(newSViv(*param_ul1)));
+        }
+        if (param_ul2) {
+          XPUSHs(sv_2mortal(newSViv(*param_ul2)));
+        }
+  	PUTBACK ;
+  	perl_call_sv(callbackMessage, G_DISCARD);
       }
       return NULL;
   }

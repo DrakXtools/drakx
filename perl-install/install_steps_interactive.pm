@@ -250,16 +250,16 @@ sub installPackages {
 
     my $w = $o->wait_message(_("Installing"), _("Preparing installation"));
 
-    my $old = \&log::ld;
-    local *log::ld = sub {
+    my $old = \&pkgs::installCallback;
+    local *pkgs::installCallback = sub {
 	my $m = shift;
-	if ($m =~ /^starting installation:/) {
+	if ($m =~ /^Starting installation/) {
 	    $total = $_[2];
-	} elsif ($m =~ /^starting installing/) {
+	} elsif ($m =~ /^Starting installing package/) {
 	    my $name = $_[0];
 	    $w->set(_("Installing package %s\n%d%%", $name, 100 * $current / $total));
 	    $current += c::headerGetEntry($o->{packages}{$name}{header}, 'size');
-	} else { goto $old }
+	} else { unshift @_, $m; goto $old }
     };
     $o->SUPER::installPackages($packages);
 }
