@@ -209,7 +209,7 @@ my $cards_lst = {
         "P|Pace|TV & Radio Card" => 101,
         "I|IVC-200" => 102,
         "G|Grand X-Guard / Trust 814PCI" => 103,
-        "Nebula Electronics DigiTV" => 104,
+        "N|Nebula Electronics|DigiTV" => 104,
         "P|ProVideo|PV143" => 105,
         "P|PHYTEC|VD-009-X1 MiniDIN (bt878)" => 106,
         "P|PHYTEC|VD-009-X1 Combi (bt878)" => 107,
@@ -220,7 +220,12 @@ my $cards_lst = {
         "P|pcHDTV HD-2000 TV" => 112,
         "T|Twinhan DST + clones" => 113,
         "L|Leadtek|Winfast VC100" => 114,
-
+        "T|Teppro|TEV-560/InterVision IV-560" => 115,
+        "S|SIMUS|GVC1100" => 116,
+        "N|NGS|NGSTV+" => 117,
+        "L|LMLBT4" => 118,
+        "T|Tekram|M205 PRO" => 119,
+        "C|Conceptronic|CONTVFMi" => 120,
 
     },
     'saa7134' => {
@@ -247,6 +252,18 @@ my $cards_lst = {
         "Matrox|CronosPlus" => 20,
         "Medion|2819" => 21,
         "BMK|MPEX Tuner" => 22,
+        "Medion|2819 / AverMedia M156" => 23,
+        "AVerMedia|M156" => 23,
+        "BMK|MPEX Tuner alternative" => 24,
+        "ASUS|TV-FM 7133" => 25,
+        "Pinnacle|PCTV Stereo (saa7134)" => 26,
+        "Manli|MuchTV M-TV002" => 27,
+        "Manli|MuchTV M-TV001" => 28,
+        "Nagase Sangyo TransGear 3000TV" => 29,
+        "Elitegroup|ECS TVP3XP FM1216 Tuner Card(PAL-BG,FM)" => 30,
+        "Elitegroup|ECS TVP3XP FM1236 Tuner Card (NTSC,FM)" => 31,
+        "AVACS|SmartTV" => 32,
+        "AVerMedia|DVD EZMaker" => 33,
     }
 };
 
