@@ -584,7 +584,10 @@ sub get_mac_generation() {
     return "Unknown Generation";	
 }
 
-sub hasSMP() { !$::testing && c::detectSMP() }
+sub hasSMP() { 
+    return if $::testing;
+    c::detectSMP() || any { /\bProcessors: (\d+)/ && $1 > 1 } syslog();
+}
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
