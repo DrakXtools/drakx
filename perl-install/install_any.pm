@@ -907,11 +907,11 @@ sub getAndSaveAutoInstallFloppies {
 		} "$mountdir/syslinux.cfg";
 
 		unlink "$mountdir/help.msg";
-		output "$mountdir/boot.msg", "\n0c",
+		output "$mountdir/boot.msg", $replay ? '' : "\n0c" .
 "!! If you press enter, an auto-install is going to start.
    All data on this computer is going to be lost,
    including any Windows partitions !!
-", "07\n" if !$replay;
+" . "07\n";
 	    }
 	
 	    fs::umount($mountdir);
