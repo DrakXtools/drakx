@@ -214,8 +214,8 @@ sub row_setting_dialog {
     $dlg->set_transient_for($w->{rwindow}) unless $::isEmbedded;
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);
-    my $ok          = new Gtk2::Button('ok');
-    my $cancel      = new Gtk2::Button('cancel');
+    my $ok          = Gtk2::Button->new_from_stock('gtk-ok');
+    my $cancel      = Gtk2::Button->new_from_stock('gtk-cancel');
     my $browse = new Gtk2::Button(N("browse"));
     my $users  = new Gtk2::Combo;
     my $groups = new Gtk2::Combo;
@@ -351,8 +351,10 @@ sub row_setting_dialog {
               0, $F_usr,
               1, $F_rights
              );
-    $dlg->action_area->add($ok);
-    $dlg->action_area->add($cancel);
+    gtkadd($dlg->action_area,
+           $cancel,
+           $ok
+          );
      
     $dlg->show_all;
 
