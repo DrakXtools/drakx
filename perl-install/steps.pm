@@ -22,14 +22,14 @@ use common;
   formatPartitions   => [ N_("Format partitions"), 1, -1, '1', "doPartitionDisks" ],
   choosePackages     => [ N_("Choose packages to install"), 1, -2, '1', "formatPartitions" ],
   installPackages    => [ N_("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"] ],
-  setRootPassword    => [ N_("Set root password"), 1, 1, '', "installPackages" ],
+  setRootPassword    => [ N_("Root password"), 1, 1, '', "installPackages" ],
   addUser            => [ N_("Add a user"), 1, 1, '', "installPackages" ],
   configureNetwork   => [ N_("Configure networking"), 1, 1, '1', "formatPartitions" ],
   setupBootloader    => [ N_("Install bootloader"), 1, 0, '', "installPackages" ],
   configureX         => [ N_("Configure X"), 1, 1, '1', ["formatPartitions", "setupBootloader"] ],
   summary            => [ N_("Summary"), 1, 0, '', "installPackages" ],
   configureServices  => [ N_("Configure services"), 1, 1, '1', "installPackages" ],
-  installUpdates     => [ N_("Install system updates"), 1, 1, '',  ["installPackages", "configureNetwork", "summary"] ],
+  installUpdates     => [ N_("Install updates"), 1, 1, '',  ["installPackages", "configureNetwork", "summary"] ],
   exitInstall        => [ N_("Exit install"), 0, 0, '', '' ],
 );
     for (my $i = 0; $i < @installSteps; $i += 2) {
