@@ -1,6 +1,171 @@
 2004/09/09  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/rpmsrate: Up kpilot
+
+2004/09/09  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: Updated POT file
+
+2004/09/09  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* c/smp-dmi.c: add dmi type 6 in detection memory size
+
+2004/09/09  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/isdn_consts.pm: add @isdn_capi array of cards than can use capi
+	drivers
+
+	* lang.pm: reduce font size in japanese install
+
+2004/09/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/be.po: cyrillic fixes
+
+	* share/po/bs.po, share/po/af.po, share/po/az.po, share/po/am.po,
+	share/po/ar.po: some Mandrake -> Mandrakelinux and MandrakeSoft ->
+	Mandrakesoft fixes
+
+	* share/po/tg.po, share/po/ltg.po, share/po/ru.po, share/po/ro.po,
+	share/po/mt.po, share/po/sr@Latn.po, share/po/it.po, share/po/tl.po,
+	share/po/sr.po, share/po/de.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/el.po, share/po/lv.po: fixed media paths
+
+	* share/po/uk.po: cyrillic fixes
+	fixed media paths
+
+	* share/po/bg.po: some Mandrake -> Mandrakelinux and MandrakeSoft ->
+	Mandrakesoft fixes
+	fixed media paths
+
+2004/09/09  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: 
+	  - choose the good kernel for the box
+	  - add recognition of i586-up-1GB
+
+	* share/rpmsrate: cleanup
+	remove tabulation
+
+	* any.pm: even "lilo -u" can prompt about the "Volume ID" fixing process
+	handles the lilo case where it wants to assign a new Volume ID: prompt
+	the user, then
+	  - if it doesn't want to modify the Volume ID, use static-bios-codes to
+	be able to install lilo
+	  - otherwise call lilo with answer "n" to the question "Is the above
+	disk an NT boot disk?"
+	so that it assigns a new Volume ID
+
+	* c/smp-dmi.c: max() is not defined, inline it
+
+	* bootloader.pm: handle raid-extra-boot (bugzilla #11350)
+	remove unused variable
+	  - handle lilo "static-bios-codes" option
+	  - call lilo with a forced stdin (so that it doesn't read from tty)
+	  - enable calling lilo with a special stdin value
+	help emacs mode
+	fix regexp to work with "linux-2.6.8.1-10mdk"
+	instead of expanding symlinks in any case, only do it when renaming
+	"linux"
+	into the kernel version based label (eg: "2681-10")
+	that way "linux" like entries won't be modified, the way the "linux" is
+	already handled
+
+	* run_program.pm: don't check_prog when the prog is a complex command
+	(containing a pipe)
+	simplify
+	rename $str into $real_name
+	remove redundant code
+
+	* install_any.pm: BIGMEM now means >4GB
+
+	* detect_devices.pm: add is_i586() based on "cpu family", hopefully it
+	works for detecting K6 and C3
+
+2004/09/09  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* share/po/fr.po: Grammar fixes
+
+	* install_steps_interactive.pm: minor fix in last patch
+	Re-read all hdlists in reverse order when there are supplementary media.
+	Don't unselect every single media when doing an installation from iso
+	images.
+
+	* pkgs.pm, install_any.pm: Re-read all hdlists in reverse order when there
+	are supplementary media.
+	Don't unselect every single media when doing an installation from iso
+	images.
+
+2004/09/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* any.pm (selectCountry) do not default to per locale default IM.  IM was
+	either setup by drakx or by localedrake.  If the field does not
+	exists, this means the user *decided* to not have an IM.
+	(selectCountry) do not overwrite current IM (why does this only failed
+	with miniChinput???)
+
+	* lang.pm: fix thai IM that was broken for ages (but it was disabled in
+	10.0
+	anyway so ...)
+	fix ENC and locale specific stuff even when IM is disabled (because of
+	thai)
+	simplify ENC setting
+	  - sanitize some variable names
+	  - add/update comments
+	(write) make it a little more readable
+	(write) kill unused variable
+	add a comment about font settings for installer
+	Singapore is en_SG not zh_SG !!!
+	(read) fix chinput identification
+	fix XIM_MODIFIER field for xcin and chinput IM
+	(write) set proper XIM_PROGRAM depending on both encoding and locale
+	(fix chinput configuration that was broken for ages)
+	(set_default_im) really just set default IM and nothing more
+	(write) fix XIM_PROGRAM setting
+	(set_default_im) simplify
+	(IM packages list) when configuring chinput, we need miniChinput (a
+	evolution of chinput that replaced it)
+
+	* share/rpmsrate: install slmodem for ltmodem, slamr, slusb windmodem
+	drivers too
+
+	* standalone/localedrake: really reset IM on language switch
+	remove debug message
+	only default to per locale default IM when switching between locales
+
+	* network/network.pm (read_all_conf) remove spurous character from regexp
+	(read_all_conf) ignore rpm's backups (#10816)
+
+	* resize_fat/c_rewritten.xs, xf86misc/main.xs, Newt/Newt.xs: kill warnings
+
+	* drakxtools.spec: 10.1-0.27mdk
+	10.1-0.26mdk
+	10.1-0.25mdk
+
+2004/09/09  Warly  <warly at mandrakesoft.com>
+
+	* share/compssUsers.pl: Display Development group in the same way as other
+	groups.
+
+2004/09/09  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: Up kpilot
 	compssUsers.pl and rpmsrate for 10.1 Community
 
 	* share/compssUsers.pl: compssUsers.pl and rpmsrate for 10.1 Community
@@ -38176,7 +38341,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.961 2004/09/07 11:51:04 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.962 2004/09/09 03:37:29 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
