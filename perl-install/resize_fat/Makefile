@@ -1,12 +1,10 @@
-PRODUCT = libresize
-TARSOURCE = $(PRODUCT).tar.bz2
+.PHONY: clean
 
-.PHONY: clean tar
+c_rewritten: %: %.xs
+	test -e Makefile_c || perl Makefile.PL
+	$(MAKE) -f Makefile_c
+	rm ../auto/resize_fat ; ln -s ../resize_fat/blib/arch/auto ../auto/resize_fat
 
 clean:
-	rm -f *~ TAGS $(TARSOURCE)
-
-tar: clean
-	cp -f ../common.pm .
-	cd .. ; tar cfy $(TARSOURCE) $(PRODUCT) ; mv $(TARSOURCE) $(PRODUCT)
-	rm -f common.pm
+	test ! -e Makefile_c || $(MAKE) -f Makefile_c clean
+	rm -f *~

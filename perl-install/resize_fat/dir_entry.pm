@@ -21,14 +21,9 @@ sub set_cluster($$) {
     $entry->{first_cluster_high} = $val >> 16 if $resize_fat::isFAT32;
 }
 
-sub is_directory_raw($) {
-    my ($entry) = @_;
-    !is_special_entry($entry) && $entry->{attributes} & $DIRECTORY_ATTR;
-}
-
 sub is_directory($) {
     my ($entry) = @_;
-    is_directory_raw($entry) && $entry->{name} !~ /^\.\.? /;
+    $entry->{attributes} & $DIRECTORY_ATTR && $entry->{name} !~ /^\.\.? / && !is_special_entry($entry);
 }
 
 sub is_volume($) {

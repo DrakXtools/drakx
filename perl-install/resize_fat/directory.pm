@@ -24,10 +24,11 @@ my @fields = (
     'first_cluster',
     'length',
 );
+my $psizeof_format = psizeof($format);
 
 1;
 
-sub entry_size { psizeof($format) }
+sub entry_size { $psizeof_format }
 
 #- call `f' for each entry of the directory
 #- if f return true, then modification in the entry are taken back
@@ -35,7 +36,7 @@ sub traverse($$$) {
     my ($fs, $directory, $f) = @_;
 
     for (my $i = 0;; $i++) {
-	my $raw = \substr($directory, $i * psizeof($format), psizeof($format));
+	my $raw = \substr($directory, $i * $psizeof_format, $psizeof_format);
 
 	#- empty entry means end of directory
 	$$raw =~ /^\0*$/ and return $directory;

@@ -1,16 +1,17 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
-PMS         = *.pm c/*.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
+PMS         = *.pm c/stuff.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
+REP4PMS     = /usr/bin/perl-install
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
 STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
 BASE        = $(ROOTDEST)/Mandrake/base
-DESTREP4PMS = $(DEST)/usr/bin/perl-install
+DESTREP4PMS = $(DEST)$(REP4PMS)
 STAGE2TMP   = /tmp/stage2_tmp
 PERL        = perl
 LOCALFILES  = $(PERL) mouseconfig ddcxinfos
-DIRS        = po pci_probing
+DIRS        = c po pci_probing resize_fat
 EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
 CFLAGS	    = -Wall
@@ -18,15 +19,14 @@ override CFLAGS  += -pipe
 
 .PHONY: all $(DIRS) tags install clean stage2 full_stage2 verify_c 
 
-all: $(SO_FILES) $(DIRS)
+all: $(DIRS)
 
 tags:
 	etags -o - $(PMS) | ./perl2etags > TAGS
 
 clean:
-	test ! -e c/Makefile || $(MAKE) -C c clean
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf c/c.xs gendepslist ../diskdrake*
+	rm -rf gendepslist auto ../diskdrake*
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
@@ -47,16 +47,8 @@ tar-XFdrake: clean
 	l=`./perl2fcalls -uses -excludec -excludepci_probing::ids XFdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/XFdrake\//' -e 's/$$/.pm/'` ; \
 	cd .. ; tar cfz XFdrake.tgz --exclude CVS $(patsubst %,XFdrake/%,c MonitorsDB po pci_probing XFdrake*) $$l
 
-c/c.xs: c/c.xs.pm
-	rm -f $@
-	export C_RPM=1 ; perl $< > $@
-	chmod a-w $@
-
-$(SO_FILES): c/c.xs
-	test -e c/Makefile || (cd c; export C_RPM=1 ; perl Makefile.PL)
-	$(MAKE) -C c
-
 $(DIRS):
+	install -d auto
 	$(MAKE) -C $@
 
 test_pms: verify_c
@@ -76,7 +68,7 @@ $(BASE)/depslist: gendepslist $(RPMS)
 $(BASE)/hdlist: $(RPMS) 
 	$(ROOTDEST)/misc/genhdlist $(ROOTDEST)
 
-install_pms: all
+install_pms: $(DIRS)
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
@@ -88,9 +80,6 @@ install_pms: all
 #		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/) || /use (diagnostics|vars|strict)/' $$i > $(DESTREP4PMS)/$$i; \
 # /
 
-	rm $(DESTREP4PMS)/c/c.xs.pm
-	mv -f $(DESTREP4PMS)/c/c.pm $(DESTREP4PMS)
-
 	cp *.rc $(DESTREP4PMS)
 	install -d $(DESTREP4PMS)/po
 	cp po/*.po* $(DESTREP4PMS)/po
@@ -101,13 +90,12 @@ install_pms: all
 	chmod a+x $(DESTREP4PMS)/XFdrake
 	chmod a+x $(DESTREP4PMS)/g_auto_install
 
-	cp -af */blib/arch/auto $(DESTREP4PMS)
-	find $(DESTREP4PMS) -name "*.so" | xargs strip
-
-get_needed_files: $(SO_FILES)
+get_needed_files: $(DIRS)
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	cp -f list /tmp/list
-	for i in c/blib/arch/auto/c/c.so $(LOCALFILES) `cat /tmp/list` ; do \
+	ls auto/*/*/*.so >> /tmp/list
+
+	for i in $(LOCALFILES) `cat /tmp/list` ; do \
 		ldd $$i 2>/dev/null | grep -v "not a dynamic" | sed -e 's/.*=> //' -e 's/ .*//' | uniq | sort >> /tmp/list; \
 	done
 
@@ -125,13 +113,14 @@ get_needed_files: $(SO_FILES)
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
 		  install -s $$i $(DEST)/lib; \
 		else \
-		  d=`echo $(DEST)/$$i | sed 's/\/usr\/local\//\/usr\//'`; \
+		  d=$$i; \
+	          (echo $$d | grep -q "^[^/]") && d="$(REP4PMS)/$$d"; \
+		  d=`echo $(DEST)/$$d | sed 's/\/usr\/local\//\/usr\//'`; \
 		  install -d `dirname $$d` && \
 		  if (echo $$i | grep -q "\.pm"); then \
 		     perl -pe '$$_ =~ /^__END__/ and exit(0);' $$i > $$d; \
 		  else \
 		  	  cp -f $$i $$d; \
-			  strip $$d 2>/dev/null || true; \
 		  fi; \
 		fi; \
 	done

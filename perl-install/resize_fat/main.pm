@@ -64,7 +64,7 @@ sub copy_clusters {
 	}
     };
     for (; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	$fs->{fat_flag_map}[$cluster] == $resize_fat::any::FILE or next;
+	resize_fat::c_rewritten::flag($cluster) == $resize_fat::any::FILE or next;
 	push @buffer, $fs->{fat_remap}[$cluster], resize_fat::io::read_cluster($fs, $cluster);
 	@buffer > 50 and &$flush();
     }
@@ -78,11 +78,11 @@ sub construct_dir_tree {
     if ($resize_fat::isFAT32) {
 	#- fat32's root must remain in the first 64k clusters
 	#- so don't set it as DIRECTORY, it will be specially handled
-	$fs->{fat_flag_map}[$fs->{fat32_root_dir_cluster}] = $resize_fat::any::FREE;
+	resize_fat::c_rewritten::set_flag($fs->{fat32_root_dir_cluster}, $resize_fat::any::FREE);
     }
 
     for (my $cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	$fs->{fat_flag_map}[$cluster] == $resize_fat::any::DIRECTORY or next;
+	resize_fat::c_rewritten::flag($cluster) == $resize_fat::any::DIRECTORY or next;
 
       resize_fat::io::write_cluster($fs,
 				    $fs->{fat_remap}[$cluster],

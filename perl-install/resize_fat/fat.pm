@@ -5,6 +5,7 @@ use strict;
 
 use resize_fat::any;
 use resize_fat::io;
+use resize_fat::c_rewritten;
 
 1;
 
@@ -20,15 +21,8 @@ sub read($) {
 
     $fs->{fat} = $fs->{fats}[0];
 
-    my ($free, $bad, $used) = (0, 0, 0);
-
-    for (my $i = 2; $i < $fs->{nb_clusters} + 2; $i++) {
-	my $cluster = &next($fs, $i);
-	if ($cluster == 0) { $free++; }
-	elsif ($cluster == $resize_fat::bad_cluster_value) { $bad++; }
-	else { $used++; }
-    }
-    @{$fs->{clusters}{count}}{qw(free bad used)} = ($free, $bad, $used);
+    @{$fs->{clusters}{count}}{qw(free bad used)} =
+      resize_fat::c_rewritten::scan_fat($fs->{fat}, $fs->{nb_clusters}, $fs->{fs_type_size});
 }
 
 sub write($) {
@@ -61,7 +55,7 @@ sub allocate_remap {
     $fs->{last_free_cluster} = 2;
     for ($cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
 	if ($cluster < $cut_point) {
-	    if ($fs->{fat_flag_map}[$cluster] == $resize_fat::any::DIRECTORY) {
+	    if (resize_fat::c_rewritten::flag($cluster) == $resize_fat::any::DIRECTORY) {
 		&$get_new();
 	    } else {
 		$new_cluster = $cluster;
@@ -80,7 +74,7 @@ sub update {
     my ($fs) = @_;
 
     for (my $cluster = 2; $cluster < $fs->{nb_clusters} + 2; $cluster++) {
-	 if ($fs->{fat_flag_map}[$cluster]) {
+	 if (resize_fat::c_rewritten::flag($cluster)) {
 	     my $old_next = &next($fs, $cluster);
 	     my $new      = $fs->{fat_remap}[$cluster];
 	     my $new_next = $fs->{fat_remap}[$old_next];
@@ -100,6 +94,7 @@ sub update {
 #- are done in count.c
 sub check($) {
     my ($fs) = @_;
+    return;
     foreach (@{$fs->{fats}}) {
 	$_ eq $fs->{fats}[0] or die "FAT tables do not match";
     }
@@ -118,12 +113,13 @@ sub endianness($$) {
     $r;
 }
 
-sub next($$) {
-    my ($fs, $cluster) = @_;
-    $cluster > $fs->{nb_clusters} + 2 and die "fat::next: cluster $cluster outside filesystem";
-    endianness(vec($fs->{fat}, $cluster, $fs->{fs_type_size}), $fs->{fs_type_size});
+#-sub next($$) {
+#-    my ($fs, $cluster) = @_;
+#-    $cluster > $fs->{nb_clusters} + 2 and die "fat::next: cluster $cluster outside filesystem";
+#-    endianness(vec($fs->{fat}, $cluster, $fs->{fs_type_size}), $fs->{fs_type_size});
+#-}
+*next = \&resize_fat::c_rewritten::next;
 
-}
 sub set_next($$$) {
     my ($fs, $cluster, $new_v) = @_;
     $cluster > $fs->{nb_clusters} + 2 and die "fat::set_next: cluster $cluster outside filesystem";
