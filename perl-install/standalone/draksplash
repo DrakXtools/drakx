@@ -1,11 +1,11 @@
 #!/usr/bin/perl 
 
+use strict;
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 use common;
+use ugtk2 qw(:helpers :wrappers :create);
 use interactive;
-use ugtk qw(:helpers :wrappers);
-use my_gtk qw(:helpers :wrappers);
 
 #- convenience variables for true and false
 my $true = 1;
@@ -13,8 +13,8 @@ my $true = 1;
 
 my $in = 'interactive'->vnew('su', 'default');
 
-my $window = my_gtk->new();
-$window->{rwindow}->signal_connect(delete_event => &CloseAppWindow);
+my $window = ugtk2->new;
+$window->{rwindow}->signal_connect(delete_event => \&CloseAppWindow);
 
 #- verification of package image magik
 unless ($in->do_pkgs->is_installed('ImageMagick')) {
@@ -64,7 +64,7 @@ my %scale_size = ('tx' => ($theme{res}{w} / $font_size{w}),
                   'ph' => $theme{res}{h},
                   );
 
-my %first = ('frame' => new Gtk::Frame(N("first step creation")),
+my %first = ('frame' => new Gtk2::Frame(N("first step creation")),
              'widget' => { 
                  'label' => {
                      'res' => N("final resolution"),
@@ -78,13 +78,13 @@ my %first = ('frame' => new Gtk::Frame(N("first step creation")),
                          },
                  'combo' => { 
                      'res' => ['800x600', '1024x768', '1280x1024'],
-                     'name' => [ $theme{name} , &giv_exist_thm]
+                     'name' => [ $theme{name} , &giv_exist_thm ]
                      }
              },
              'pos' => [ 'name', 'res', 'file', 'boot_conf', #'save', #'kill'
 					],
              );
-my %boot_conf_frame = ('frame' => new Gtk::Frame(N("Configure bootsplash picture")),
+my %boot_conf_frame = ('frame' => new Gtk2::Frame(N("Configure bootsplash picture")),
                        'widget' => {
                            'label' => {
                                'tx' => N("x coordinate of text box\nin number of character"),
@@ -139,10 +139,10 @@ my %boot_conf_frame = ('frame' => new Gtk::Frame(N("Configure bootsplash picture
                        );
 #- var action is used to hide/show the correct frame
 my @action_frame = (\%boot_conf_frame , \%first);
+my $VB2 = new Gtk2::VBox(0,5);
+my $first_vbox = new Gtk2::VBox(0,5);
 
-my $VB2 = new Gtk::VBox(0,5);
-my $first_vbox;
-&mk_frame(\$VB2, \%first);
+&mk_frame($VB2, \%first);
 #****************************- Signal event actions
 #- change resolution 
 $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
@@ -150,7 +150,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	($theme{res}{w}, $theme{res}{h}) = $theme{res}{res} =~ /([^x]+)x([^x]+)/;
 	&set_scale_size;
 	$boot_conf_frame{frame}->destroy;
-	$boot_conf_frame{frame} = new Gtk::Frame(N("Configure bootsplash picture"));
+	$boot_conf_frame{frame} = new Gtk2::Frame(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
 	member($theme{name}, &giv_exist_thm) and &thm_in_this_res and &get_this_thm_res_conf or $in->ask_warn(N("Notice"), N("This theme haven't yet any bootsplash in %s !", $theme{res}{res}));
@@ -159,7 +159,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
 #- image file selection for new theme
 $first{widgets}{button}{file}->signal_connect(clicked => sub {
-	my $file_dialog = new Gtk::FileSelection('choose image');
+	my $file_dialog = new Gtk2::FileSelection('choose image');
 	$file_dialog->set_filename($first{widgets}{label}{file}->get ne N("choose image file") ? $first{widgets}{label}{file}->get : '~/');
 	$file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy });
 	$file_dialog->ok_button->signal_connect(clicked => sub { $first{widgets}{label}{file}->set_text($file_dialog->get_filename); $file_dialog->destroy });
@@ -170,8 +170,6 @@ $first{widgets}{combo}{name}->entry->signal_connect(changed => sub { &get_this_t
 #**************************************************
 
 
-
-$first_vbox = new Gtk::VBox(0,5);
 $first_vbox->add($first{frame});
 $first_vbox->add($boot_conf_frame{frame});
 &make_boot_frame;
@@ -179,9 +177,8 @@ $first_vbox->add($boot_conf_frame{frame});
 # set window attributes and show it
 
 unless ($::isEmbedded) {
-    $window->{rwindow}->border_width(5);
-    $window->{rwindow}->add($first_vbox);
-    $window->{rwindow}->set_policy(0, 1, 1);
+    $window->{rwindow}->set_border_width(5);
+    $window->{window}->add($first_vbox);
     $window->{rwindow}->set_position('center');
     $window->{rwindow}->show_all();
 #&show_act(\%first);
@@ -191,18 +188,18 @@ unless ($::isEmbedded) {
 $window->main;
 
 # Should never get here
-my_gtk->exit(0);
+ugtk2->exit(0);
 
 ### Callback function to close the window
 sub CloseAppWindow {
-   my_gtk->exit(0);
+   ugtk2->exit(0);
 }
 
 #- ====## used funtions ##=====
 
 #- Desc  => write config file for boot theme and copy image in the right location
 sub write_boot_thm {
-	my $w = $in->wait_message('', N("saving Bootsplash theme..."));
+	my $_w = $in->wait_message('', N("saving Bootsplash theme..."));
   	&set_thm_values;
   	my $logo = $boot_conf_frame{widgets}{check}{logo}->get_active ? 'yes' : 'no';
 	my $quiet = $boot_conf_frame{widgets}{check}{quiet}->get_active ? 'yes' : 'no';
@@ -281,7 +278,8 @@ sub read_boot_conf {
 	chdir($thm_conf_path);
 	my $line;
 	if (-f $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg') {
-		open  CFG , $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg';
+          local *CFG;
+		open CFG , $theme{name}.'/cfg/bootsplash-'.$theme{res}{res}.'.cfg';
 	  	while ($line = <CFG>) {
 			$line =~ m/^([a-z][a-z])=([^\n]+)/
 			  and $theme{boot_conf}{$1} = $2;
@@ -293,9 +291,10 @@ sub read_boot_conf {
 	}
 }
 
+my %adj;
 sub set_scale_values {
     foreach (keys %{$theme{boot_conf}}) {
-        ${$_.'_adj'} and ${$_.'_adj'}->set_value($theme{boot_conf}{$_});
+        $adj{$_} and $adj{$_}->set_value($theme{boot_conf}{$_});
     }
 }
 
@@ -356,11 +355,13 @@ sub tool_tip {
 	foreach (keys %{$ref->{widget}}) {
 		$_ eq 'tooltip' and next;
 	  	if ($ref->{widget}{$_}{$name}) {
-		  ! ${$name.'_tip'} and ${$name.'_tip'} = new Gtk::Tooltips();
-		  ${$name.'_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
+		  ! $adj{$name.'_tip'} and $adj{$name.'_tip'} = new Gtk2::Tooltips();
+		  $adj{$name.'_tip'}->set_tip($ref->{widgets}{$_}{$name}, $ref->{widget}{tooltip}{$name}, '');
 		}
 	}
 }
+
+my %hboxes;
 
 #- Desc  => just prepare widgets for a fram hash 
 #- Args  => $box(a Vbox widget to contain all widgets), \%frame (hash with complete definition of the frame)
@@ -369,40 +370,40 @@ sub mk_frame {
 	my ($box , $ref) = @_;
 	foreach my $pos (@{$ref->{pos}}) {
 	  $pos =~ m/^(\w+)(\s+)?(\w+)?$/;
+       my $key = $1.'hb';
 	  #- open a new hbox
-	  ${$1.'hb'} = new Gtk::HBox($3 ? 1 : 0, 5);
+	  $hboxes{$key} = new Gtk2::HBox($3 ? 1 : 0, 5);
 	  #- look for label
 	  $ref->{widget}{label}{$1}
-	    and $ref->{widgets}{label}{$1} = new Gtk::Label($ref->{widget}{label}{$1}) 
-	    and ${$1.'hb'}->add($ref->{widgets}{label}{$1});
+	    and $ref->{widgets}{label}{$1} = new Gtk2::Label($ref->{widget}{label}{$1}) 
+	    and $hboxes{$key}->add($ref->{widgets}{label}{$1});
 	  #- look for scale
 	  $ref->{widget}{scale}{$1}
-	    and $ref->{widgets}{scale}{$1} = new Gtk::HScale(${$1."_adj"} =  new Gtk::Adjustment(0, 0, $scale_size{$1}, 1, 10, 0))
-	    and ${$1."hb"}->add($ref->{widgets}{scale}{$1})
+	    and $ref->{widgets}{scale}{$1} = new Gtk2::HScale($adj{$1} =  new Gtk2::Adjustment(0, 0, $scale_size{$1}, 1, 10, 0))
+	    and $hboxes{$key}->add($ref->{widgets}{scale}{$1})
 	    and $ref->{widgets}{scale}{$1}->set_digits(0);
-	  ${$1.'_adj'} and ${$1.'_adj'}->set_value($theme{boot_conf}{$1});
+	  $adj{$1} and $adj{$1}->set_value($theme{boot_conf}{$1});
 	  #- look for combo
        my @popdown;
 	  $ref->{widget}{combo}{$1} 
 	    and @popdown = @{$ref->{widget}{combo}{$1}}
-	    and $ref->{widgets}{combo}{$1} = new Gtk::Combo
-	    and ${$1."hb"}->add($ref->{widgets}{combo}{$1})
+	    and $ref->{widgets}{combo}{$1} = new Gtk2::Combo
+	    and $hboxes{$key}->add($ref->{widgets}{combo}{$1})
 	    and $ref->{widgets}{combo}{$1}->set_popdown_strings(@popdown);
 	  #- look for checkbox
 	  $ref->{widget}{check}{$1}
-	    and $ref->{widgets}{check}{$1} = new Gtk::CheckButton($ref->{widget}{check}{$1})
-	    and ${$1."hb"}->add($ref->{widgets}{check}{$1})
+	    and $ref->{widgets}{check}{$1} = new Gtk2::CheckButton($ref->{widget}{check}{$1})
+	    and $hboxes{$key}->add($ref->{widgets}{check}{$1})
 	    and $ref->{widgets}{check}{$1}->set_active(1);
 	  #- look for button
 	  $ref->{widget}{button}{$1}
-	    and $ref->{widgets}{button}{$1} = new Gtk::Button($ref->{widget}{button}{$1})
-	    and  ${$1."hb"}->add($ref->{widgets}{button}{$1});
+	    and $ref->{widgets}{button}{$1} = new Gtk2::Button($ref->{widget}{button}{$1})
+	    and  $hboxes{$key}->add($ref->{widgets}{button}{$1});
 	  #- look for tooltips
-	  $ref->{widget}{tooltip}{$1}
-	    and &tool_tip($1, \%{$ref});
-	  ${$box}->add(${$1."hb"});
+	  $ref->{widget}{tooltip}{$1} and &tool_tip($1, \%{$ref});
+	  $box->add($hboxes{$key});
 	}
-	$ref->{frame}->add(${$box});
+	$ref->{frame}->add($box);
 }
 
 #- Desc  => take a decimal value between 0 to 255 and return the corresponding hexadecimal value
@@ -421,18 +422,18 @@ sub dec2hex {
 
 #- Desc  => prepare and set all signal_connect for boot_frame widget 
 sub make_boot_frame {
-	my $VB = new Gtk::VBox(0,5);
-	&mk_frame(\$VB, \%boot_conf_frame);
+	my $VB = new Gtk2::VBox(0,5);
+	&mk_frame($VB, \%boot_conf_frame);
 	#- open a color choose box
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
-		my $color = new Gtk::ColorSelectionDialog(N("ProgressBar color selection"));
+		my $color = new Gtk2::ColorSelectionDialog(N("ProgressBar color selection"));
 		$theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
 		my @rgb = map { hex($_)/255 }  ($1 ,$2, $3);
 		$color->colorsel->set_color(@rgb);#$theme{boot_conf}{pc});
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
 			@rgb = $color->colorsel->get_color();
-			@rgb = map (dec2hex($_*255)  , @rgb);
+			@rgb = map { dec2hex($_*255) } @rgb;
 			$theme{boot_conf}{pc} =  "0x$rgb[0]$rgb[1]$rgb[2]";
 			$color->destroy;
 		});
@@ -451,20 +452,15 @@ sub make_boot_frame {
 	  }
 	  #- calculation of the 2 angle of text box and progress bar
 	  &set_thm_values;
-	  my $text_tl = $theme{boot_conf}{tx}*$font_size{w} . ','.$theme{boot_conf}{ty}*$font_size{h};
-	  my $text_br = $theme{boot_conf}{tw}*$font_size{w}+$theme{boot_conf}{tx}*$font_size{w} . ','.($theme{boot_conf}{th}*$font_size{h}+$theme{boot_conf}{ty}*$font_size{h});
-	  my $progress_tl = $theme{boot_conf}{px}.','.$theme{boot_conf}{py};
-	  my $progress_br = ($theme{boot_conf}{px}+$theme{boot_conf}{pw}).','.($theme{boot_conf}{py}+$theme{boot_conf}{ph});
-	  my $w = $in->wait_message('', N("Generating preview ..."));
-	  $x++;
-		local $txt_tl_x 	= $theme{boot_conf}{tx}*$font_size{w}; 
-		local $txt_tl_y 	= $theme{boot_conf}{ty}*$font_size{h};
-		local $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};
-		local $txt_height	= $theme{boot_conf}{th}*$font_size{h};
-		local $prog_tl_x 	= $theme{boot_conf}{px};
-		local $prog_tl_y 	= $theme{boot_conf}{py};
-		local $prog_width	= $theme{boot_conf}{pw};
-		local $prog_height  = $theme{boot_conf}{ph};
+	  my $_w = $in->wait_message('', N("Generating preview ..."));
+       my $txt_tl_x 	= $theme{boot_conf}{tx}*$font_size{w}; 
+       my $txt_tl_y 	= $theme{boot_conf}{ty}*$font_size{h};
+       my $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};
+       my $txt_height	= $theme{boot_conf}{th}*$font_size{h};
+       my $prog_tl_x 	= $theme{boot_conf}{px};
+       my $prog_tl_y 	= $theme{boot_conf}{py};
+       my $prog_width	= $theme{boot_conf}{pw};
+       my $prog_height  = $theme{boot_conf}{ph};
 	  &show_prev($first{widgets}{label}{file}->get,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height);
 	});
 	$boot_conf_frame{frame}->show_all;
@@ -473,16 +469,15 @@ sub make_boot_frame {
 	
 	foreach my $k (keys %{$theme{boot_conf}}) {
 		$k =~ m/[tp][hwyx]/
-		  and ${$k.'_adj'}->signal_connect(value_changed => sub { &check_boot_scales($k) });
+		  and $adj{$k}->signal_connect(value_changed => sub { &check_boot_scales($k) });
 	}
-	#	unlink "$tmp_path.prev$x.png";
 }
 
 #- Desc  => set theme values from user entry (scales widgets)
 sub set_thm_values {
   foreach (keys %{$theme{boot_conf}}) {
     	m/[tp][hwyx]/
-	  and $theme{boot_conf}{$_} = int(${$_.'_adj'}->get_value);
+	  and $theme{boot_conf}{$_} = int($adj{$_}->get_value);
   }
 }
 
@@ -499,17 +494,17 @@ sub kill_preview {
 #- Desc  => create a new window with a preview of splash screen
 #- Args  => $file (str) full path to preview file
 sub show_prev {
- my ($file,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width,$prog_height) = @_;
+ my ($file,$txt_tl_x,$txt_tl_y,$txt_width,$txt_height,$prog_tl_x,$prog_tl_y,$prog_width, $prog_height) = @_;
  $prev_window
-   or $prev_window = new Gtk::Window('toplevel') and $prev_window->set_policy(0, 1, 1); 
+   or $prev_window = new Gtk2::Window('toplevel') and $prev_window->set_policy(0, 1, 1); 
 #-PO  First %s is theme name, second %s (in parenthesis) is resolution
  $prev_window->set_title(N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
- $prev_pic = gtkcreate_png_pixbuf($file);
+ $prev_pic = gtkcreate_pixbuf($file);
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h},0);
  $prev_pix = $prev_pic->render_pixmap_and_mask($prev_pic);
- $prev_canvas and $prev_canvas->isa('Gtk::Widget')
-	 or $prev_canvas = new Gtk::DrawingArea() and $prev_window->add($prev_canvas);
- $prev_canvas->set_usize($theme{res}{w}, $theme{res}{h});
+ $prev_canvas and $prev_canvas->isa('Gtk2::Widget')
+	 or $prev_canvas = new Gtk2::DrawingArea() and $prev_window->add($prev_canvas);
+ $prev_canvas->set_size_request($theme{res}{w}, $theme{res}{h});
  $prev_canvas->signal_connect(expose_event => sub {
      $prev_canvas->window->draw_pixmap($prev_canvas->style->bg_gc('normal'),$prev_pix,0,0,0,0, $theme{res}{w}, $theme{res}{h});
      $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true,$txt_tl_x, $txt_tl_y,$txt_width,$txt_height);
@@ -538,26 +533,26 @@ sub set_scale_size {
 
 sub check_boot_scales {
   my ($obj) = @_;
-  my $tw = $tw_adj->get_value;
-  my $tx = $tx_adj->get_value;
-  my $th = $th_adj->get_value;
-  my $ty = $ty_adj->get_value;
-  my $pw = $pw_adj->get_value;
-  my $ph = $ph_adj->get_value;
-  my $px = $px_adj->get_value;
-  my $py = $py_adj->get_value;
+  my $tw = $adj{tw}->get_value;
+  my $tx = $adj{tx}->get_value;
+  my $th = $adj{th}->get_value;
+  my $ty = $adj{ty}->get_value;
+  my $pw = $adj{pw}->get_value;
+  my $ph = $adj{ph}->get_value;
+  my $px = $adj{px}->get_value;
+  my $py = $adj{py}->get_value;
   my $max_x = $scale_size{tw};
   my $max_y = $scale_size{th};
   my $max_xres = $theme{res}{w};
   my $max_yres = $theme{res}{h};
   
-  $obj eq 'tw' and $max_x < $tw + $tx and $tx_adj->set_value($max_x - $tw);
-  $obj eq 'tx' and $max_x < $tw + $tx and $tw_adj->set_value($max_x - $tx);
-  $obj eq 'th' and $max_y < $th + $ty and $ty_adj->set_value($max_y - $th);
-  $obj eq 'ty' and $max_y < $th + $ty and $th_adj->set_value($max_y - $ty);
-  $obj eq 'pw' and $max_xres < $pw + $px and $px_adj->set_value($max_xres - $pw);
-  $obj eq 'px' and $max_xres < $pw + $px and $pw_adj->set_value($max_xres - $px);
-  $obj eq 'ph' and $max_yres < $ph + $py and $py_adj->set_value($max_yres - $ph);
-  $obj eq 'py' and $max_yres < $ph + $py and $ph_adj->set_value($max_yres - $py);
+  $obj eq 'tw' and $max_x < $tw + $tx and $adj{tx}->set_value($max_x - $tw);
+  $obj eq 'tx' and $max_x < $tw + $tx and $adj{tw}->set_value($max_x - $tx);
+  $obj eq 'th' and $max_y < $th + $ty and $adj{ty}->set_value($max_y - $th);
+  $obj eq 'ty' and $max_y < $th + $ty and $adj{th}->set_value($max_y - $ty);
+  $obj eq 'pw' and $max_xres < $pw + $px and $adj{px}->set_value($max_xres - $pw);
+  $obj eq 'px' and $max_xres < $pw + $px and $adj{pw}->set_value($max_xres - $px);
+  $obj eq 'ph' and $max_yres < $ph + $py and $adj{py}->set_value($max_yres - $ph);
+  $obj eq 'py' and $max_yres < $ph + $py and $adj{ph}->set_value($max_yres - $py);
   
 }
