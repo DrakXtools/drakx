@@ -107,11 +107,7 @@ STAGE1_OWN_LIBS = $(INSMOD)/libinsmod.a mar/libmar.a bzlib/libbzlib.a
 ifeq (DIETLIBC, $(L))
 STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
 else
-ifeq (x86_64, $(ARCH))
 STAGE1_NETWORK_LIBS = /usr/$(LIB)/libresolv.a
-else
-STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
-endif
 endif
 
  #- stage1 itself
@@ -146,9 +142,9 @@ ifeq (x86_64, $(ARCH))
 LDFLAGS_INIT = -static -nostdlib /usr/$(LIB)/crt1.o
 else
 ifeq (ia64, $(ARCH))
-LDFLAGS_INIT = $(GLIBC_LDFLAGS_STAGE1)
+LDFLAGS_INIT = -static
 else
-LDFLAGS_INIT = $(DIETLIBC_LDFLAGS_STAGE1)
+LDFLAGS_INIT = -nostdlib
 endif
 endif
 endif
