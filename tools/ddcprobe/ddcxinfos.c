@@ -9,7 +9,14 @@
 #include <stdarg.h>
 #include "vbe.h"
 #include "vesamode.h"
+
+#if defined(__i386__) || defined(__x86_64__)
 #include "int10/vbios.h"
+#else
+#define InitInt10(PCI_CONFIG)	0
+#define FreeInt10()				/**/
+#endif
+
 #ident "$Id$"
 
 #define SQR(x) ((x) * (x))
@@ -47,6 +54,7 @@ int main(void)
 	printf("%dKB of video ram\n", vbe_info->memory_size / 1024);
 
 	/* List supported standard modes */
+#if defined(__i386__) || defined(__x86_64__)
 	for (j = 0; j < vbe_info->modes; j++)
 	  for (i = 0; known_vesa_modes[i].x; i++)
 	    if (known_vesa_modes[i].number == vbe_info->mode_list[j])
@@ -56,6 +64,7 @@ int main(void)
 		     known_vesa_modes[i].y
 		     );
 	printf("\n");
+#endif
 
 	/* Get EDID information */
 	if (vbe_get_edid_info(edid) == 0) {
