@@ -31,9 +31,7 @@ sub detect {
                  $auto_detect->{adsl} = network::adsl::adsl_detect();
              },
              modem => sub {
-                 my ($modem, @pci_modems) = detect_devices::getModem();
-                 $modem->{device} and $auto_detect->{modem} = $modem->{device};
-                 @pci_modems and $auto_detect->{winmodem}{$_->{driver}} = $_->{description} foreach @pci_modems;
+                 $auto_detect->{modem} = { map { ($_->{device} || $_->{description}) => $_ } detect_devices::getModem() };
              },
             );
     $l{$_}->() foreach ($o_class || (keys %l));
