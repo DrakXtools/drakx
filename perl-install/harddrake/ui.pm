@@ -68,6 +68,8 @@ my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
 							  . join("\n\n", map { "$fields{$_}[0]: $fields{$_}[1]"} keys %fields));
 			    }
 			  },
+			    { path => _("/_Help")._("/_Report Bug"),
+				 callback => sub { unless (fork) { exec("drakbug --report harddrake2 &") } } },
 			    { path => _("/_Help")._("/_About..."), callback => sub {
 				   $in->ask_warn(_("About Harddrake"), 
 							  join ("", _("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
