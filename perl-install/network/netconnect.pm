@@ -186,9 +186,9 @@ sub get_subwizard {
                    {
                     pre => sub {
                         # keep b/c of translations in case they can be reused somewhere else:
-                        N("(detected on port %s)"), 
+                        my @_a = (N("(detected on port %s)", 'toto'), 
                           #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
-                          N("(detected %s)"), N("(detected)");
+                          N("(detected %s)", 'toto'), N("(detected)"));
                         my @connections = 
                           ([ N("Modem connection"),  "modem" ],
                            [ N("ISDN connection"),   "isdn"  ],
@@ -628,7 +628,7 @@ or skip and do it later."),
                         -e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
 
                         # kept translations b/c we may want to reuse it later:
-                        N("Firmware copy succeeded");
+                        my $_msg = N("Firmware copy succeeded");
                         return $adsl_failed ? 'adsl_copy_firmware_failled' : 'adsl_provider';
                     },
                    },
@@ -749,10 +749,10 @@ Modifying the fields below will override this configuration."),
                    {
                     pre => sub  {
                         $find_lan_module->();
-                        $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') :$ethntf->{BOOTPROTO}} || 0;
+                        $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') : $ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 
-                        N("Zeroconf hostname resolution");
+                        my $_msg = N("Zeroconf hostname resolution");
                         N("Configuring network device %s (driver %s)", $ethntf->{DEVICE}, $module) . "\n\n" .
                           N("The following protocols can be used to configure an ethernet connection. Please choose the one you want to use")
                     },
@@ -802,7 +802,7 @@ notation (for example, 1.2.3.4).")),
                           { text => N("Network Hotplugging"), val => \$hotplug, type => "bool" },
                           { text => N("Start at boot"), val => \$onboot, type => "bool" },
                           { label => N("DHCP client"), val => \$netc->{dhcp_client}, 
-                            list => ["dhcp-client", "dhcpcd", "dhcpxd"], advanced => 1 },
+                            list => [ "dhcp-client", "dhcpcd", "dhcpxd" ], advanced => 1 },
                         ],
                     },
                     complete => sub {
