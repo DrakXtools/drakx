@@ -1065,6 +1065,7 @@ You may also enter the IP address of the gateway if you have one."),
                     },
                     name => N("Do you want to start the connection at boot?"),
                     type => "yesorno",
+                    default => sub { ($type eq 'modem' ? 'no' : 'yes') },
                     post => sub {
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
