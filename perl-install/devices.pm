@@ -201,7 +201,19 @@ sub to_devfs {
 	my $r = $to_devfs_prefix{$1};
 	return "$r$2" if $r;
     }
-    undef;
+    readlink("/dev/" . $dev);
+}
+
+sub read_proc_partitions_raw() {
+    my (undef, undef, @all) = cat_("/proc/partitions");
+    grep {
+	$_->{size} != 1 &&	 # skip main extended partition
+	$_->{size} != 0x3fffffff # skip cdroms (otherwise stops cd-audios)
+    } map { 
+	my %l; 
+	@l{qw(major minor size dev)} = split; 
+	\%l;
+    } @all;
 }
 
 sub from_devfs {
@@ -214,7 +226,11 @@ sub from_devfs {
 	my $r = $from_devfs_prefix{$1};
 	return "$r$2" if $r;
     }
-    undef;
+    $dev = "/dev/" . $dev;
+    if (-e $dev) {
+        my ($major, $minor) = unmakedev((stat($dev))[6]);
+        (find { $_->{major} == $major && $_->{minor} == $minor } read_proc_partitions_raw())->{dev};
+    }
 }
 
 1;

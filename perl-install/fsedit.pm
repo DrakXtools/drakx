@@ -119,7 +119,7 @@ sub raids {
 			device => "md$nb", notFormatted => !$type, level => $level };
     }
 
-    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } read_proc_partitions_raw();
+    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } devices::read_proc_partitions_raw();
     each_index {
 	my $raw_mdparts = delete $_->{raw_mdparts};
 	my @mdparts = 
@@ -258,22 +258,10 @@ Do you agree to loose all the partitions?
     }
 }
 
-sub read_proc_partitions_raw() {
-    my (undef, undef, @all) = cat_("/proc/partitions");
-    grep {
-	$_->{size} != 1 &&	 # skip main extended partition
-	$_->{size} != 0x3fffffff # skip cdroms (otherwise stops cd-audios)
-    } map { 
-	my %l; 
-	@l{qw(major minor size dev)} = split; 
-	\%l;
-    } @all;
-}
-
 sub read_proc_partitions {
     my ($hds) = @_;
 
-    my @all = read_proc_partitions_raw();
+    my @all = devices::read_proc_partitions_raw();
     my @parts = grep { $_->{dev} =~ /\d$/ } @all;
     my @disks = grep { $_->{dev} !~ /\d$/ } @all;
 
