@@ -1,3 +1,40 @@
+2000-09-28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm (partitionWizardSolutions): fix the limit
+	cases for lnx4win	
+
+	* share/po/Makefile ($(PMSCFILES)): fix the DrakX.pot generation	
+
+2000-09-27  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (choosePackages): set $size2install
+	to $availableC in desktop install, as it should be
+
+	* install2.pm (choosePackages): remove the code for removing kdesu
+	in high security...
+
+	* install_steps_interactive.pm (createBootdisk): format more
+	nicely the text
+
+	* install_steps_gtk.pm (installPackages): add 10 seconds to have a
+	better estimation
+
+	* install_steps_interactive.pm (chooseGroups): now returns a boolean
+	(choosePackages): use chooseGroups return value to redo
+	choosePackages	
+
+	* install_steps_gtk.pm (selectMouse): if mouse type is none, then
+	don't test!
+
+	* Xconfigurator.pm (monitorConfiguration): rename Unlisted to Custom
+
+	* various: replace all Rescue by Update
+
+	* pkgs.pm (readCompssUsers): read description for groups
+	
+	* install_steps_interactive.pm (chooseGroups): add description for
+	groups	
+
 2000-09-27  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* share/compssUsers.desktop: added description
@@ -8,6 +45,10 @@
 	  renamed
 
 	* share/compssUsers: reordered, renamed
+
+2000-09-27  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
 
 2000-09-27  Pixel  <pixel@mandrakesoft.com>
 

@@ -172,8 +172,9 @@ sub selectMouse {
     my %old = %{$o->{mouse}};
     $o->SUPER::selectMouse($force);
     my $mouse = $o->{mouse};
-    $old{type} eq $mouse->{type} && 
-      $old{name} eq $mouse->{name} &&
+    $mouse->{type} eq 'none' ||
+      $old{type}   eq $mouse->{type}   && 
+      $old{name}   eq $mouse->{name}   &&
       $old{device} eq $mouse->{device} && !$force and return;
 
     local $my_gtk::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
@@ -510,8 +511,8 @@ sub installPackages {
 
 	    $progress_total->update($ratio);
 	    if ($dtime != $last_dtime && $current_total_size > 10 * 1024 * 1024) {
-		$msg_time_total->set(formatTime(10 * round($total_time / 10)));
-		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10)));
+		$msg_time_total->set(formatTime(10 * round($total_time / 10) + 10));
+		$msg_time_remaining->set(formatTime(10 * round(max($total_time - $dtime, 0) / 10) + 10));
 		$last_dtime = $dtime;
 	    }
 	    $w->flush;

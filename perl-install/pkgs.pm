@@ -664,7 +664,7 @@ sub readCompssList {
 
 sub readCompssUsers {
     my ($packages, $compss, $meta_class) = @_;
-    my (%compssUsers, %compssUsersIcons, @sorted, $l);
+    my (%compssUsers, %compssUsersIcons, , %compssUsersDescr, @sorted, $l);
     my (%compss); 
     foreach (@$compss) {
 	local ($_, $a) = m|(.*)/(.*)|;
@@ -683,7 +683,8 @@ sub readCompssUsers {
 
 	if (/^(\S.*)/) {
 	    &$map;
-	    /^(.*?)\s*\[icon=(.*?)\]/ and $_ = $1, $compssUsersIcons{$_} = $2;
+	    /^(.*?)\s*\[icon=(.*?)\]/  and $_ = $1, $compssUsersIcons{$_} = $2;
+	    /^(.*?)\s*\[descr=(.*?)\]/ and $_ = $1, $compssUsersDescr{$_} = $2;
 	    push @sorted, $_;
 	    $compssUsers{$_} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
@@ -693,7 +694,7 @@ sub readCompssUsers {
 	}
     }
     &$map;
-    \%compssUsers, \@sorted, \%compssUsersIcons;
+    \%compssUsers, \@sorted, \%compssUsersIcons, \%compssUsersDescr;
 }
 
 sub setSelectedFromCompssList {

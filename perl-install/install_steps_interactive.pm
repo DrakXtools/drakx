@@ -201,7 +201,7 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $verif->($o->ask_from_list(_("Install Class"), _("Which installation class do you want?"), $l, $def));
 
-    $::live ? 'Rescue' : $o->ask_from_list_(_("Install/Rescue"), _("Is this an install or a rescue?"), $l2, $def2);
+    $::live ? 'Update' : $o->ask_from_list_(_("Install/Update"), _("Is this an install or an update?"), $l2, $def2);
 }
 
 #------------------------------------------------------------------------------
@@ -234,7 +234,7 @@ are you ready to answer that kind of questions?"),
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
 					      first(list2kv(@c)), ${{reverse %c}}{$::beginner ? "beginner" : $::expert ? "expert" : "specific"},
-					      [ __("Install"), __("Rescue") ], $o->{isUpgrade} ? "Rescue" : "Install") eq "Rescue";
+					      [ __("Install"), __("Update") ], $o->{isUpgrade} ? "Update" : "Install") eq "Update";
 
     if ($::corporate || $::beginner) {
 	delete $o->{installClass};
@@ -489,7 +489,8 @@ sub choosePackages {
 	    }
 	});
 	if (!$size2install) { #- special case for desktop
-	    $o->chooseGroups($packages, $compssUsers);
+	    $o->chooseGroups($packages, $compssUsers) or goto &choosePackages;
+	    $size2install = $availableC;
 	}
 	($o->{packages_}{ind}) =
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
@@ -519,13 +520,14 @@ sub chooseGroups {
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
+			     help => sub { $o->{compssUsersDescr}{$_} },
 			     ref => sub { \$o->{compssUsersChoice}{$_} },
 			     icon2f => sub { "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default') . "_section.xpm" },
 			     label => sub { $size{$_} ? sprintf "$_ (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : translate($_) }, 
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
 			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
-			  ) or goto &chooseGroups;
+			  ) or return;
     if ($all) {
 	$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsersSorted}}, "Miscellaneous";
     }
@@ -543,6 +545,7 @@ sub chooseGroups {
 	    pkgs::packageSetFlagSkip($_, 0);
 	}
     }
+    1;
 }
 
 sub chooseCD {
@@ -876,13 +879,13 @@ drive and press \"Ok\"."),
 		 );
 
 	if ($first_time || @l == 1) {
-	    $o->ask_yesorno('',
+	    $o->ask_yesorno('', formatAlaTeX(
 			    _("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
 LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
-failures. Would you like to create a bootdisk for your system?"), 
+failures. Would you like to create a bootdisk for your system?")), 
 			    $o->{mkbootdisk}) or return $o->{mkbootdisk} = '';
 	    $o->{mkbootdisk} = $l[0] if !$o->{mkbootdisk} || $o->{mkbootdisk} eq "1";
 	} else {

@@ -191,7 +191,7 @@ sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 
 sub loadkeys_files {
-    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /^i\d/ ? "i386" : arch();
+    my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch();
     my $p = "/usr/lib/kbd/keymaps/$archkbd";
     my $post = ".kmap.gz";
     my %trans = ("cz-latin2" => "cz-lat2");

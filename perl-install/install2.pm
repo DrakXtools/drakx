@@ -316,8 +316,6 @@ sub choosePackages {
     }
 
     $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
-    my $pkg = pkgs::packageByName($o->{packages}, 'kdesu');
-    pkgs::unselectPackage($o->{packages}, $pkg) if $pkg && $o->{security} > 3;
 
     #- check pre-condition where base backage has to be selected.
     pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";

@@ -31,10 +31,10 @@ selectInstallClass =>
 installed or if you wish to use several operating systems.
 
 
-Please choose \"Rescue\" if you wish to rescue an already installed version of Linux-Mandrake.
+Please choose \"Update\" if you wish to update an already installed version of Linux-Mandrake.
 
 
-Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or rescue your
+Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or update your
 Linux-Mandrake operating system:
 
 	* Recommanded: if you have never installed a GNU/Linux operating system choose this. Installation will be

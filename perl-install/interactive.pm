@@ -257,7 +257,7 @@ sub ask_from_entries_ref($$$$;$%) {
 		add2hash_($_, { not_edit => 1, type => 'list' });
 		${$_->{val}} = $_->{list}[0] if $_->{not_edit} && !member(${$_->{val}}, @{$_->{list}});
 	    } elsif ($_->{type} eq 'range') {
-		$_->{min} <= $_->{max} or die "bad range (called from " . caller() . ")";
+		$_->{min} <= $_->{max} or die "bad range min $_->{min} > max $_->{max} (called from " . join(':', caller()) . ")";
 		${$_->{val}} = max($_->{min}, min(${$_->{val}}, $_->{max}));
 	    }
 	    $_;

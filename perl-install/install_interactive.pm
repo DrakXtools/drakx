@@ -82,15 +82,16 @@ sub partitionWizardSolutions {
 
     my @fats = grep { isFat($_) } @$fstab;
     fs::df($_) foreach @fats;
-    if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_freewin } @fats) {
+    if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_swap + $min_freewin } @fats) {
 	$solutions{loopback} = 
 	  [ -10 - @fats, _("Use the Windows partition for loopback"), 
 	    sub { 
 		my ($s_root, $s_swap);
-		my $part = $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
+		my $part = $o->ask_from_listf('', _("Which partition do you want to use for Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
+		$max_swap = $min_swap + 1 if $part->{free} - $max_swap < $min_linux;
 		$o->ask_from_entries_refH('', _("Choose the sizes"), [ 
-		   _("Root partition size in MB: ") => { val => \$s_root, min => 1 + ($min_linux >> 11), max => min($part->{free} - $max_swap - $min_freewin, $max_linux) >> 11, type => 'range' },
-		   _("Swap partition size in MB: ") => { val => \$s_swap, min => 1 + ($min_swap >> 11),  max => $max_swap >> 11, type => 'range' },
+		   _("Root partition size in MB: ") => { val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
+		   _("Swap partition size in MB: ") => { val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
 		  { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, device => $part, notFormatted => 1 },
@@ -108,7 +109,7 @@ sub partitionWizardSolutions {
 		$@ and die _("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
 		my $min_win = $resize_fat->min_size;
-		$part->{size} > $min_linux + $min_freewin + $min_win or die _("Your Windows partition is too fragmented, please run ``defrag'' first");
+		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die _("Your Windows partition is too fragmented, please run ``defrag'' first");
 		$o->ask_okcancel('', _("WARNING!
 
 DrakX will now resize your Windows partition. Be careful: this operation is
@@ -119,7 +120,7 @@ When sure, press Ok.")) or return;
 
 		my $size = $part->{size};
 		$o->ask_from_entries_refH('', _("Which size do you want to keep for windows on"), [
-                   _("partition %s", partition_table_raw::description($part)) => { val => \$size, min => 1 + ($min_win >> 11), max => ($part->{size} - $min_linux) >> 11, type => 'range' },
+                   _("partition %s", partition_table_raw::description($part)) => { val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 		$size <<= 11;
 
@@ -140,7 +141,8 @@ When sure, press Ok.")) or return;
 		1;
 	    } ] if !$readonly;
     } else {
-	push @wizlog, _("There is no FAT partitions to resize or to use as loopback (or not enough space left)");
+	push @wizlog, _("There is no FAT partitions to resize or to use as loopback (or not enough space left)") .
+	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
     }
 
     if (@$fstab && !$readonly) {
@@ -197,6 +199,7 @@ sub partitionWizard {
     log::l("solutions found: " . join('', map {$_->[1]} @sol) . " (all solutions found: " . join('', map {$_->[1]} @solutions) . ")");
 
     @solutions = @sol if @sol > 1;
+    @solutions or $o->ask_warn('', _("I can't find any room for installing")), die 'already displayed';
 
     my $ok; while (!$ok) {
 	my $sol = $o->ask_from_listf('', _("The DrakX Partitioning wizard found the following solutions:"), sub { $_->[1] }, \@solutions) or redo;

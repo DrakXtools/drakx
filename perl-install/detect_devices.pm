@@ -184,7 +184,7 @@ sub matching_desc {
     grep { $_->{description} =~ /$regexp/i } probeall();
 }
 sub stringlist { 
-    map { " $_->{description} ($_->{type} $_->{driver})" } probeall(1); 
+    map { " $_->{description} ($_->{type} $_->{driver})" . ($_->{subid} ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '') } probeall(1); 
 }
 sub check {
     my ($l) = @_;

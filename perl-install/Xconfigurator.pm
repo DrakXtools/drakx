@@ -351,8 +351,8 @@ sub monitorConfiguration(;$$) {
 
     readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
 
-    add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
-    if ($monitor->{type} eq 'Unlisted') {
+    add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], 'Generic|' . translate($default_monitor)) }) unless $monitor->{type};
+    if ($monitor->{type} eq 'Custom') {
 	$in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
 at which the whole screen is refreshed, and most importantly the horizontal
