@@ -620,7 +620,7 @@ sub install_silo($$$) {
     c::setPromVars($silo->{bootalias}, $silo->{bootdev});
 }
 
-sub install_lilo ($$) {
+sub write_lilo_conf {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     $lilo->{prompt} = $lilo->{timeout};
 
@@ -718,6 +718,12 @@ wait %d seconds for default boot.
 	    }
 	}
     }
+}
+
+sub install_lilo {
+    my ($prefix, $lilo, $fstab, $hds) = @_;
+
+    write_lilo_conf($prefix, $lilo, $fstab, $hds);
 
     log::l("Installing boot loader...");
     $::testing and return;
@@ -755,7 +761,7 @@ sub dev2grub {
     "($grub" . ($3 && "," . ($3 - 1)) . ")";
 }
 
-sub install_grub {
+sub write_grub_config {
     my ($prefix, $lilo, $fstab, $hds) = @_;
     my %dev2bios = (
       (map_index { $_ => "fd$::i" } detect_devices::floppies()),
@@ -854,6 +860,13 @@ __("The highlighted entry will be booted automatically in %d seconds."),
     my $e = "$prefix/boot/.enough_space";
     output $e, 1; -s $e or die _("not enough room in /boot");
     unlink $e;
+    $f;
+}
+
+sub install_grub {
+    my ($prefix, $lilo, $fstab, $hds) = @_;
+
+    my $f = write_grub_config($prefix, $lilo, $fstab, $hds);
 
     log::l("Installing boot loader...");
     $::testing and return;
@@ -970,6 +983,12 @@ sub install {
 	setVarsInSh($f, add2hash_({ CLEAN_TMP => $lilo->{CLEAN_TMP} }, { getVarsFromSh($f) }));
     }
     $lilo->{keytable} = keytable($prefix, $lilo->{keytable});
+
+    if (arch() =~ /i.86/) {
+	#- when lilo is selected, we don't try to install grub. 
+	#- just create the config file in case it may be useful
+	write_grub_config($prefix, $lilo, $fstab, $hds);
+    }
 
     my %l = grep_each { $::b } %{$lilo->{methods}};
     my @rcs = map {
