@@ -269,13 +269,23 @@ sub create_buttons4partitions {
 	$ratio /= $totalwidth / $width * 1.1;
     }
 
+    my $current_button;
+    my $set_current_button = sub {
+	my ($w) = @_;
+	$current_button->set_active(0) if $current_button;
+	($current_button = $w)->set_active(1);
+    };
+
     foreach my $entry (@parts) {
-	my $w = Gtk2::Button->new_with_label($entry->{mntpoint} || '') or die '';
-	$w->signal_connect(focus_in_event     => sub { current_entry_changed($kind, $entry); $w->grab_focus }); #- grab_focus is needed because gtk2 is buggy. Forcing an expose event would be enough
-	$w->signal_connect(button_press_event => sub { current_entry_changed($kind, $entry); $w->grab_focus }); #- grab_focus is needed because gtk2 is buggy. The creation of widgets causes the lost of the focus
+	my $w = Gtk2::ToggleButton->new_with_label($entry->{mntpoint} || '') or die '';
+	$w->signal_connect(clicked => sub { 
+	    $current_button != $w or return;
+	    current_entry_changed($kind, $entry); 
+	    $set_current_button->($w);
+	});
 	$w->signal_connect(key_press_event => sub {
 	    my (undef, $event) = @_;
-	    member('control-mask', @{$event->state}) or return; 
+	    member('control-mask', @{$event->state}) && $w == $current_button or return; 
 	    my $c = chr $event->keyval;
 
 	    foreach my $s (diskdrake::interactive::part_possible_actions($in, kind2hd($kind), $entry, $all_hds)) {
@@ -294,7 +304,10 @@ sub create_buttons4partitions {
 	$w->set_name("PART_" . fs::type::part2type_name($entry));
 	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
 	gtkpack__($kind->{display_box}, $w);
-	$w->grab_focus if $current_entry && fsedit::are_same_partitions($current_entry, $entry);
+	if ($current_entry && fsedit::are_same_partitions($current_entry, $entry)) {
+	    $set_current_button->($w);
+	    $w->grab_focus;
+	}
     }
 }
 
