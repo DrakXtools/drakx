@@ -166,7 +166,9 @@ static enum return_type third_party_choose_device(char ** device, char *mount_lo
 	}
 #endif
 
-	return results;
+	stg1_error_message("I can't mount the selected device.");
+
+	return RETURN_ERROR;
 }
 
 void thirdparty_load_modules(void)
