@@ -699,7 +699,7 @@ sub addUser($) {
     )) {
 	push @{$o->{users}}, $o->{user};
 	$o->{user} = {};
-	goto &addUser unless $o->{security} < 1 && !$clicked;
+	goto &addUser unless $o->{security} < 2 && !$clicked; #- INFO_TO_DEL: bad security level may cause deadlocks...
     }
     install_steps::addUser($o);
 }
