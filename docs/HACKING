@@ -27,13 +27,17 @@ cvs update -P
 Preparing the compilation process:
 
 create a /export directory and copy a recent Mandrake-Linux CD in there.
+(You don't have to put have all the RPMS...)
 
-return to the gi directory and type 'make'.
+return to the gi directory, and type:
+ln -s /usr/bin/perl .
+make
+
 
 ---------------------------------------------------------------------------
 testing all:
 
-  go to the perl-install directory and execute ./install2 --test
+  go to the perl-install directory and execute ./g_auto_install --test
 
   You should be able to test the whole thing in a non-destructive way.
 
