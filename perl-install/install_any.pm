@@ -41,7 +41,8 @@ my $cdrom = undef;
 sub useMedium($) {
     #- before ejecting the first CD, there are some files to copy!
     #- does nothing if the function has already been called.
-    $_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    #$_[0] > 1 and $::o->{method} eq 'cdrom' and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
+    $_[0] > 1 and setup_postinstall_rpms($::o->{prefix}, $::o->{packages});
 
     $asked_medium eq $_[0] or log::l("selecting new medium '$_[0]'");
     $asked_medium = $_[0];
@@ -160,7 +161,7 @@ sub setup_postinstall_rpms($$) {
     my %toCopy;
     #- compute closure of package that may be copied, use INSTALL category
     #- in rpmsrate.
-    pkgs::setSelectedFromCompssList($packages, { INSTALL => 1 }, 0, 0, %toCopy);
+    pkgs::setSelectedFromCompssList($packages, { INSTALL => 1 }, 0, 0, \%toCopy);
 
     my @toCopy = grep { $_ && pkgs::packageFlagSelected($_) == 0 } map { pkgs::packageByName($packages, $_) } keys %toCopy;
 
