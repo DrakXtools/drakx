@@ -558,12 +558,13 @@ sub is_lan_interface {
     #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
     #   plip%d are created by drivers/net/plip.c
     #   ppp%d are created by drivers/net/ppp_generic.c
+    # - wifi%d are created by 3rdparty/hostap/hostap_hw.c (pseudo statistics devices, #14523)
     #
     # we need both detection schemes since:
     # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
     # - /proc/net/dev does not list VLAN and IP aliased interfaces
 
-    $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0)/;
+    $_[0] !~ /^(?:lo|ippp|isdn|plip|ppp|sit0|wifi)/;
 }
 
 sub getNet() {
