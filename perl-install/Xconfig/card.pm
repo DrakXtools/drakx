@@ -200,22 +200,25 @@ What do you want to do?"), sub { $_[0]{text} }, \@choices) or return;
 sub configure_auto_install {
     my ($raw_X, $do_pkgs, $old_X, $options) = @_;
 
-    {
-	my $card = $old_X->{card} || {};
-	if ($card->{card_name}) {
-	    #- try to get info from given card_name
-	    add_to_card__using_Cards($card, $card->{card_name});
-	    undef $card->{card_name} if !$card->{Driver}; #- bad card_name as we can not find the driver
+    my $card = $old_X->{card} || {};
+
+    if ($card->{card_name}) {
+	#- try to get info from given card_name
+	add_to_card__using_Cards($card, $card->{card_name});
+	if (!$card->{Driver}) {
+	    log::l("bad card_name $card->{card_name}, using probe");
+	    undef $card->{card_name};
 	}
-	return if $card->{Driver};
     }
 
-    my @cards = probe();
-    my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards);
-    my $card = $choice ? $choice->{code}() : do {
-	log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{card_name}. Defaulting...');
-	{ Driver => $options->{allowFB} ? 'fbdev' : 'vesa' };
-    };
+    if (!$card->{Driver}) {
+	my @cards = probe();
+	my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards);
+	$card = $choice ? $choice->{code}() : do {
+	    log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{card_name}. Defaulting...');
+	    { Driver => $options->{allowFB} ? 'fbdev' : 'vesa' };
+	};
+    }
 
     my ($glx_choice) = xfree_and_glx_choices($card);
     log::l("Using $glx_choice->{text}");
