@@ -64,16 +64,16 @@ my $cal_butt = gtksignal_connect(new Gtk2::CheckButton(N("Show only for the sele
 # the menus are not shown
 # but they provides shiny shortcut like C-q
 my @menu_items = (
-		  { path => N("/_File"), type => '<Branch>' },
+		  { path => N("/_File"), item_type => '<Branch>' },
 		  { path => N("/File/_New"), accelerator => N("<control>N") },
 		  { path => N("/File/_Open"), accelerator => N("<control>O") },
 		  { path => N("/File/_Save"), accelerator => N("<control>S"), callback => \&save },
 		  { path => N("/File/Save _As") },
-		  { path => N("/File/-"),type => '<Separator>' },
+		  { path => N("/File/-"), item_type => '<Separator>' },
 		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback => \&quit },
-		  { path => N("/_Options"), type => '<Branch>' },
+		  { path => N("/_Options"), item_type => '<Branch>' },
 		  { path => N("/Options/Test") },
-		  { path => N("/_Help"),type => '<LastBranch>' },
+		  { path => N("/_Help"), item_type => '<LastBranch>' },
 		  { path => N("/Help/_About...") } 
 		 );
 my $menubar = create_factory_menu($my_win->{rwindow}, @menu_items) unless $::isEmbedded;
