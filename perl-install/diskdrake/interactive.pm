@@ -1179,7 +1179,7 @@ sub format_part_info {
     $info .= N("Formatted\n") if $part->{isFormatted};
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
-    $info .= N("RAID md%s\n", $part->{raid}) if isPartOfRAID($part);
+    $info .= N("RAID %s\n", $part->{raid}) if isPartOfRAID($part);
     $info .= sprintf "LVM %s\n", $part->{lvm} if isPartOfLVM($part);
     $info .= N("Loopback file(s):\n   %s\n", join(", ", map { $_->{loopback_file} } @{$part->{loopback}})) if isPartOfLoopback($part);
     $info .= N("Partition booted by default\n    (for MS-DOS boot, not for lilo)\n") if $part->{active} && $::expert;
