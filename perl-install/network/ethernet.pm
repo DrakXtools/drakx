@@ -13,7 +13,7 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(conf_network_card conf_network_card_backend go_ethernet);
+@EXPORT = qw(conf_network_card_backend);
 
 my (@cards, @ether_steps, $last, %last);
 

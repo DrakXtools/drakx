@@ -14,7 +14,7 @@ use MDK::Common::File;
 
 
 @ISA = qw(Exporter);
-@EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
+@EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect_backend isdn_get_list isdn_get_info);
 
 
 sub isdn_write_config {
