@@ -427,9 +427,6 @@ sub psUsingHdlist {
     my $urpmidir = urpmidir($prefix);
     log::l("trying to read $hdlist for medium $medium_name");
 
-    #- if the medium already exists, use it.
-    #$packages->{mediums}{$medium_name} and return $packages->{mediums}{$medium_name};
-
     my $m = { hdlist     => $hdlist,
 	      method     => $method,
 	      medium     => $medium_name,
