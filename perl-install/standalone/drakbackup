@@ -1027,7 +1027,7 @@ sub build_backup_files() {
 				my $list_file = name_list_file($incr . $user);
 				do_find($more_recent, $find_args_user, $list_file, $path_name);
 				if (check_rm_list($list_file)) {
-					do_tar($tar_cmd_user, "backup_$incr$user", $list_file, undef);
+					do_tar($tar_cmd_cuser, "backup_$incr$user", $list_file, undef);
 				}
 				$first_done = 1;
 		    } else {
@@ -1039,7 +1039,7 @@ sub build_backup_files() {
 		  }
 		  if (!$first_done) {
 			my $list_file = name_list_file($incr . $user);
-			do_find(undef, $find_args_user, $list_file, $path_name);
+			do_find(undef, $find_args_cuser, $list_file, $path_name);
 			do_tar($tar_cmd_user, "backup_$incr$user", undef, $path_name);
 		  }
 		  push_list("list_$incr$user") if $incr =~ /_user/;
@@ -1076,7 +1076,7 @@ sub build_backup_files() {
 		if (!$first_done) {
 			my $list_file = name_list_file($incr);
 			do_find(undef, $find_args_other, $list_file, @other_files);
-			do_tar($tar_cmd_user, "backup_$incr", undef, @other_files);
+			do_tar($tar_cmd_other, "backup_$incr", undef, @other_files);
 		}
 		push_list("list_$incr") if $incr =~ /_other/;
 		files_to_results($incr);
