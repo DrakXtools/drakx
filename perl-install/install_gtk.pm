@@ -64,7 +64,7 @@ sub load_rc {
 	Gtk2::Rc->parse_string(join("\n", @contents));
  	foreach (@contents) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
+		@background = map { $_ * 255 * 255 } split ',', $1 if /NORMAL.*\{(.*)\}/;
 	    }
 	}
    }
