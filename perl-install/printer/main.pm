@@ -1242,7 +1242,8 @@ sub configure_hpoj {
 	}
 	close PTALINIT;
 
-	eval "@ptalinitfunctions
+	eval "package printer::hpoj;
+        @ptalinitfunctions
         sub getDevnames {
 	    return (%devnames)
 	}
@@ -1260,8 +1261,8 @@ sub configure_hpoj {
 
     # Read the HPOJ config file and check whether this device is already
     # configured
-    setupVariables ();
-    readDeviceInfo ();
+    printer::hpoj::setupVariables();
+    printer::hpoj::readDeviceInfo();
 
     $device =~ m!^/dev/\S*lp(\d+)$! or
 	$device =~ m!^/dev/printers/(\d+)$! or
@@ -1346,7 +1347,7 @@ sub configure_hpoj {
 		    close F;
 		    chomp $serialnumber_long;
 		}
-		$cardreader = 1 if cardReaderDetected($ptalprobedevice);
+		$cardreader = 1 if printer::hpoj::cardReaderDetected($ptalprobedevice);
 	    }
 	}
 	if ($bus ne "hpjd") {
@@ -1370,7 +1371,7 @@ sub configure_hpoj {
     # Determine the ptal device name from already existing config files
     my $ptalprefix =
 	($bus eq "hpjd" ? "hpjd:" : "mlc:$bus:");
-    my $ptaldevice = lookupDevname ($ptalprefix, $model_long, 
+    my $ptaldevice = printer::hpoj::lookupDevname ($ptalprefix, $model_long, 
 				    $serialnumber_long, $base_address);
 
     # It's all done for us, the device is already configured
@@ -1386,12 +1387,12 @@ sub configure_hpoj {
     }
 
     # Delete any old/conflicting devices
-    deleteDevice($ptaldevice);
+    printer::hpoj::deleteDevice($ptaldevice);
     if ($bus eq "par") {
 	while (1) {
-	    my $oldDevname = lookupDevname ("mlc:par:",undef,undef,$base_address);
+	    my $oldDevname = printer::hpoj::lookupDevname ("mlc:par:",undef,undef,$base_address);
 	    last unless defined($oldDevname);
-	    deleteDevice($oldDevname);
+	    printer::hpoj::deleteDevice($oldDevname);
 	}
     }
 
@@ -1517,7 +1518,7 @@ sub configure_hpoj {
 	    "init.photod.append+=-maxaltports 26\n";
     }
     close(CONFIG);
-    readOneDevice($ptaldevice);
+    printer::hpoj::readOneDevice($ptaldevice);
 
     # Restart HPOJ
     printer::services::restart("hpoj");
