@@ -49,7 +49,7 @@ if (!files_exist('/usr/bin/scanimage',
     if (!$in->do_pkgs->install('sane-backends', 'xsane',
 			       if_($in->do_pkgs->is_installed('gimp'),
 				   'xsane-gimp'))) {
-	$in->ask_warn(N("Scannerdrake"),
+	$in->ask_warn(N("Error"),
 		      N("Could not install the packages needed to set up a scanner with Scannerdrake.") . " " .
 		      N("Scannerdrake will not be started now."));
 	exit 0;
@@ -191,7 +191,7 @@ sub installfirmware {
 	# Let user select a firmware file from a floppy, hard disk, ...
         $firmware = $in->ask_file(N("Select firmware file"), "$dir");
 	last if !$firmware || (-r $firmware);
-	$in->ask_warn('Scannerdrake',
+	$in->ask_warn(N("Error"),
 		      N("The firmware file %s does not exist or is unreadable!",
 			$firmware));
 	
@@ -250,7 +250,7 @@ sub updatefirmware {
         $firmware = $in->ask_file(N("Select firmware file for the %s",
 				    $scannerchoice), "$dir");
 	last if !$firmware || (-r $firmware);
-	$in->ask_warn('Scannerdrake',
+	$in->ask_warn(N("Error"),
 		      N("The firmware file %s does not exist or is unreadable!",
 			$firmware));
 	
@@ -673,7 +673,7 @@ sub sharewindow {
 				       }
 				       # Do not allow an empty address
 				       if ($address !~ /\S/) {
-					   $in->ask_warn(N("Scannerdrake"), 
+					   $in->ask_warn(N("Error"), 
 							 N("You must enter a host name or an IP address.\n"));
 					   return (1,0);
 				       }
@@ -684,7 +684,7 @@ sub sharewindow {
 				       if ($address ne $oldaddress &&
 					   member("$address\n",
 						   @exports)) {
-					   $in->ask_warn(N("Scannerdrake"), 
+					   $in->ask_warn(N("Error"), 
 							 N("This host is already in the list, it cannot be added again.\n"));
 					   return (1,1);
 				       }
@@ -823,7 +823,7 @@ sub sharewindow {
 				       }
 				       # Do not allow an empty address
 				       if ($address !~ /\S/) {
-					   $in->ask_warn(N("Scannerdrake"), 
+					   $in->ask_warn(N("Error"), 
 							 N("You must enter a host name or an IP address.\n"));
 					   return (1,0);
 				       }
@@ -834,7 +834,7 @@ sub sharewindow {
 				       if ($address ne $oldaddress &&
 					   member("$address\n",
 						   @imports)) {
-					   $in->ask_warn(N("Scannerdrake"), 
+					   $in->ask_warn(N("Error"), 
 							 N("This host is already in the list, it cannot be added again.\n"));
 					   return (1,1);
 				       }
@@ -899,7 +899,7 @@ sub sharewindow {
 			if (!files_exist('/usr/sbin/xinetd',
 					 '/usr/sbin/saned')) {
 			    if (!$in->do_pkgs->install('xinetd', 'saned')) {
-				$in->ask_warn(N("Scannerdrake"),
+				$in->ask_warn(N("Error"),
 					      N("Could not install the packages needed to share your scanner(s).") . " " .
 					      N("Your scanner(s) will not be available on the network."));
 			    }
