@@ -13,6 +13,7 @@ use detect_devices;
 use Data::Dumper;
 use fsedit;
 use devices;
+use loopback;
 use fs;
 use log;
 
@@ -39,6 +40,7 @@ my @suggestions_mntpoints = qw(/mnt/dos);
 my @partitions_signatures = (
     [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x82, 4086, "SWAP-SPACE" ],
+    [ 0x7, 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
 arch() !~ /^sparc/ ? (
     [ 0x6,  0x1FE, "\x55\xAA", 0x36, "FAT" ],
@@ -92,12 +94,12 @@ sub readProcPartitions {
 
 #- get all normal partition including special ones as found on sparc.
 sub get_fstab(@) {
-    map { partition_table::get_normal_parts($_) } @_;
+    loopback::loopbacks(@_), map { partition_table::get_normal_parts($_) } @_
 }
 
 #- get normal partition that should be visible for working on.
 sub get_visible_fstab(@) {
-    grep { $_ && !partition_table::isWholedisk($_) } get_fstab(@_);
+    grep { $_ && !partition_table::isWholedisk($_) } map { partition_table::get_normal_parts($_) } @_;
 }
 
 sub free_space(@) {
@@ -219,7 +221,10 @@ sub suggestions_mntpoint($) {
 
 sub has_mntpoint($$) {
     my ($mntpoint, $hds) = @_;
-    scalar grep { $mntpoint eq $_->{mntpoint} } get_fstab(@$hds);
+    scalar grep { 
+	$mntpoint eq $_->{mntpoint} || 
+	grep { $mntpoint eq $_->{mntpoint} } @{$_->{loopback} || []}
+    } get_fstab(@$hds);
 }
 
 #- do this before modifying $part->{mntpoint}

@@ -7,7 +7,7 @@ use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isApplePartMap) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -173,7 +173,7 @@ arch() !~ /^sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
-  ox402 => 'hfs',
+  0x402 => 'hfs',
   nfs  => 'nfs', #- hack
 );
 
@@ -204,7 +204,9 @@ sub isFat($) { isDos($_[0]) || isWin($_[0]) }
 sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
+sub isMountableRW { isExt2($_[0]) || isFat($_[0]) }
 sub isApplePartMap { defined $_[0]{isMap} }
+sub isLoopback { defined $_[0]{loopback_file} }
 
 sub isPrimary($$) {
     my ($part, $hd) = @_;
@@ -320,7 +322,9 @@ sub adjust_local_extended($$) {
 sub get_normal_parts($) {
     my ($hd) = @_;
 
+    #- HACK !!
     $hd->{raid} and return grep {$_} @{$hd->{raid}};
+    $hd->{loopback} and return grep {$_} @{$hd->{loopback}};
 
     @{$hd->{primary}{normal} || []}, map { $_->{normal} } @{$hd->{extended} || []}
 }

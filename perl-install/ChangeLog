@@ -1,3 +1,18 @@
+2000-03-09  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (format_*): move the @options before the device
+
+	* loopback.pm: created, added a lot of stuff for loopback in
+	diskdrake.pm, fs.pm...
+
+2000-03-08  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm: %type2fs replaced ox402 by 0x402
+
+	* detect_devices.pm (cdroms): fix "scd" (should be "scd0")
+
+	* install_any.pm (install_urpmi): update for new hdlist.cz2
+
 2000-03-07  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive_gtk.pm (ask_from_treelistW): s/focus_row/set_focus_row/

@@ -168,7 +168,7 @@ sub choosePartitionsToFormat($$) {
 sub formatPartitions {
     my $o = shift;
     foreach (@_) {
-	raid::format_part($o->{raid}, $_) if $_->{toFormat};
+	fs::format_part($o->{raid}, $_) if $_->{toFormat};
     }
 }
 

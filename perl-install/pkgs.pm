@@ -745,7 +745,7 @@ sub install($$$;$) {
 	    foreach @transToInstall;
 
 	my $close = sub {
-#	    c::headerFree(delete $_->{header}) foreach @transToInstall;
+	    c::headerFree(delete $_->{header}) foreach @transToInstall;
 	    c::rpmtransFree($trans);
 	};
 

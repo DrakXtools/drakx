@@ -13,8 +13,16 @@ use swap;
 use detect_devices;
 use commands;
 use modules;
+use raid;
+use loopback;
 
 1;
+
+sub add_options(\$@) {
+    my ($option, @options) = @_;
+    my %l; @l{split(',', $$option), @options} = (); delete $l{defaults};
+    $$option = join(',', keys %l) || "defaults";
+}
 
 sub read_fstab($) {
     my ($file) = @_;
@@ -64,29 +72,31 @@ sub format_ext2($@) {
 
     $dev =~ m,(rd|ida)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
 
-    run_program::run("mke2fs", devices::make($dev), @options) or die _("%s formatting of %s failed", "ext2", $dev);
+    run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
 sub format_dos($@) {
     my ($dev, @options) = @_;
 
-    run_program::run("mkdosfs", devices::make($dev), @options) or die _("%s formatting of %s failed", "dos", $dev);
+    run_program::run("mkdosfs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "dos", $dev);
 }
 
 sub format_hfs($@) {
     my ($dev, @options) = @_;
 
-    run_program::run("hformat", devices::make($dev), @options) or die _("%s formatting of %s failed", "HFS", $dev);
+    run_program::run("hformat", @options, devices::make($dev)) or die _("%s formatting of %s failed", "HFS", $dev);
 }
 
-sub format_part($;@) {
-    my ($part, @options) = @_;
+sub real_format_part {
+    my ($part) = @_;
 
     $part->{isFormatted} and return;
 
+    my @options = $part->{toFormatCheck} ? "-c" : ();
     log::l("formatting device $part->{device} (type ", type2name($part->{type}), ")");
 
     if (isExt2($part)) {
+	push @options, "-F" if isLoopback($part);
 	format_ext2($part->{device}, @options);
     } elsif (isDos($part)) {
         format_dos($part->{device}, @options);
@@ -101,6 +111,16 @@ sub format_part($;@) {
 	die _("don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
     }
     $part->{isFormatted} = 1;
+}
+sub format_part {
+    my ($raid, $part) = @_;
+    if (raid::is($part)) {
+	raid::format_part($raid, $part);
+    } elsif (isLoopback($part)) {
+	loopback::format_part($part);
+    } else {
+	real_format_part($part);
+    }
 }
 
 sub mount($$$;$) {
@@ -184,7 +204,7 @@ sub mount_all($;$$) {
     $hd_dev ||= cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| unless $::isStandalone;
 
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
-    foreach (grep { $_->{mntpoint} } sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
+    foreach (sort { $a->{mntpoint} cmp $b->{mntpoint} } grep { $_->{mntpoint} } @$fstab) {
 	if ($hd_dev && $_->{device} eq $hd_dev) {
 	    my $dir = "$prefix$_->{mntpoint}";
 	    $dir =~ s|/+$||;
@@ -258,39 +278,24 @@ sub write_fstab($;$$) {
 	  $options = $_->{options} || $options;
 
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	  isNfs($_) and $dir = '', $options ||= 'ro,nosuid,rsize=8192,wsize=8192';
+	  isNfs($_) and $dir = '', $options = $_->{options} || 'ro,nosuid,rsize=8192,wsize=8192';
+	  isFat($_) and $options = $_->{options} || "user,exec";
+
+	  my $dev = isLoopback($_) ? loopback::file($_) :
+	    $_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}";
+	      
+	  add_options($options, "loop") if isLoopback($_);
 
 	  #- keep in mind the new line for fstab.
-	  @new{($_->{mntpoint}, "$dir$_->{device}")} = undef;
+	  @new{($_->{mntpoint}, $dev)} = undef;
 
-	  #- tested? devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir && !$_->{noMakeDevice};
-	  eval { devices::make("$prefix/$dir$_->{device}") } if $_->{device} && $dir;
+	  eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
 	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
 
-	  [ ( $_->{device} =~ /^\// ? $_->{device} : "$dir$_->{device}" ),
-	    $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
+	  [ $dev, $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
-      } grep { $_->{mntpoint} && type2fs($_->{type}) && !isFat($_) &&
-		 ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
-
-    #- inserts dos/win partitions in fstab.
-    #- backward compatible win kdeicons script to handle upgrade correctly?
-    #- take into account an already provided mount point.
-    unshift @to_add,
-      map_index {
-	  my $i = $::i ? $::i + 1 : '';
-	  my $device = $_->{device} =~ /^\/dev\/(.*)$/ ? $1 : $_->{device};
-	  my $mntpoint = $_->{mntpoint} ? $_->{mntpoint} : "/mnt/DOS_$device";
-
-	  #- keep in mind the new line for fstab.
-	  @new{($mntpoint, "/dev/$device")} = undef;
-
-	  mkdir "$prefix/$mntpoint", 0755 or log::l("failed to mkdir $prefix/$mntpoint: $!");
-	  eval { devices::make("$prefix/dev/$device") };
-
-	  [ "/dev/$device", $mntpoint, "vfat", "user,exec,conv=binary", 0, 0 ];
-      } grep { isFat($_) &&
-		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
+      } grep { $_->{mntpoint} && type2fs($_->{type}) && 
+	       ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
     push @to_add,
       grep { !exists $new{$_->[0]} && !exists $new{$_->[1]} }

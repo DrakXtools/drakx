@@ -229,7 +229,7 @@ sub formatPartitions {
     foreach (@_) {
 	if ($_->{toFormat}) {
 	    $w->set(_("Formatting partition %s", $_->{device}));
-	    raid::format_part($o->{raid}, $_);
+	    fs::format_part($o->{raid}, $_);
 	}
     }
 }

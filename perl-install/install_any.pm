@@ -506,6 +506,9 @@ sub install_urpmi {
 
     (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
 
+    my $hdlist = "$prefix/var/lib/urpmi/hdlist";
+    symlink "$hdlist.cz2", "hdlist.$name.cz2" or log::l("symlink failed " . __FILE__ . " " . __LINE__);
+
     {
 	local *F = getFile("depslist");
 	output("$prefix/var/lib/urpmi/depslist", <F>);
@@ -519,7 +522,10 @@ sub install_urpmi {
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
-	print LIST "$dir/Mandrake/RPMS/", /(\S+)/, "\n" foreach cat_("$prefix/var/lib/urpmi/depslist");
+
+	local *FILES; open FILES, "bzip2 -dc $hdlist.cz2 2>/dev/null | hdlist2names - |";
+	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
+	close FILES or log::l("hdlist2names failed"), return;
 
 	$dir .= "/Mandrake/RPMS with ../base/hdlist.cz2" if $method =~ /ftp|http/;
 	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };

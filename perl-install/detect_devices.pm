@@ -38,13 +38,13 @@ sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
 #-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
 sub cdroms() { 
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
-    if (getIDEBurners()) {
+    if (my @l2 = getIDEBurners()) {
 	require modules;
-	my $nb = modules::add_alias('scsi_hostadapter', 'ide-scsi') =~ /(\d+)/;
-	foreach my $b (getIDEBurners()) {
+	my ($nb) = modules::add_alias('scsi_hostadapter', 'ide-scsi') =~ /(\d*)/;
+	foreach my $b (@l2) {
 	    log::l("getIDEBurners: $b");
 	    my ($e) = grep { $_->{device} eq $b } @l or next;
-	    $e->{device} = "scd" . $nb++;
+	    $e->{device} = "scd" . ($nb++ || 0);
 	}
     }
     @l;

@@ -132,11 +132,9 @@ sub make {
 
 sub format_part($$) {
     my ($raid, $part) = @_;
-    make($raid->{raid}, $part) if is($part);
-    fs::format_part($part, $part->{toFormatCheck} ? "-c" : ());
-    if (is($part)) {
-	$_->{isFormatted} = 1 foreach @{$part->{disks}};
-    }
+    make($raid->{raid}, $part);
+    fs::real_format_part($part);
+    $_->{isFormatted} = 1 foreach @{$part->{disks}};
 }
 
 sub verify($) {
