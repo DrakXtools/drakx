@@ -27,17 +27,6 @@
 #include "mar.h"
 #include "mar-extract-only.h"
 
-void
-mar_list_files(struct mar_stream *s)
-{
-	struct mar_element * elem = s->first_element;
-	printf("%-20s%8s\n", "FILENAME", "LENGTH");
-	while (elem)
-	{
-		printf("%-20s%8d\n", elem->filename, elem->file_length);
-		elem = elem->next_element;
-	}
-}
 
 int
 file_size(char *filename)
@@ -57,32 +46,36 @@ file_size(char *filename)
  */
 /* ``files'' is a NULL-terminated array of char* */
 
+char * fnf_tag = "FILE_NOT_FOUND&";
+
 int
 mar_create_file(char *dest_file, char **files)
 {
 	int filenum = 0;
-	int current_offset_filetable;
-	int current_offset_rawdata;
+	int current_offset_filetable = 0;
+	int current_delta_rawdata = 0;
+	int filetable_size;
 	char * temp_marfile_buffer;
 	int total_length;
 
 	/* calculate offset of ``raw_files_data'' */
-	current_offset_rawdata = sizeof(int) + sizeof(char); /* crc32, ``char 0'' */
+	total_length = sizeof(char); /* ``char 0'' */
 	while (files[filenum])
 	{
-		current_offset_rawdata += 2*sizeof(int) /* file_length, data_offset */ + strlen(files[filenum]) + 1;
+		total_length += 2*sizeof(int) /* file_length, data_offset */ + strlen(files[filenum]) + 1;
 		filenum++;
 	}
 	DEBUG_MAR(printf("D: mar::create_marfile number-of-files %d offset-data-start %d\n", filenum, current_offset_rawdata););
 
+	filetable_size = total_length;
+
 	/* calculate length of final uncompressed marfile, for malloc */
-	total_length = current_offset_rawdata; /* first part of the marfile: the crc plus filetable */
 	filenum = 0;
 	while (files[filenum])
 	{
 		int fsiz = file_size(files[filenum]);
 		if (fsiz == -1)
-			files[filenum] = "FILE_NOT_FOUND&";
+			files[filenum] = fnf_tag;
 		else
 			total_length += fsiz;
 		filenum++;
@@ -91,11 +84,10 @@ mar_create_file(char *dest_file, char **files)
 	temp_marfile_buffer = (char *) malloc(total_length); /* create the whole file in-memory (not with alloca! it can be bigger than typical limit for stack of programs (ulimit -s) */
 	DEBUG_MAR(printf("D: mar::create_marfile total-length %d\n", total_length););
 
-	current_offset_filetable = sizeof(int); /* first file is after the crc */
 	filenum = 0;
 	while (files[filenum])
 	{
-		if (strcmp(files[filenum], "FILE_NOT_FOUND&")) {
+		if (strcmp(files[filenum], fnf_tag)) {
 			FILE * f = fopen(files[filenum], "r");
 			int fsize;
 			if (!f)
@@ -115,18 +107,18 @@ mar_create_file(char *dest_file, char **files)
 			current_offset_filetable += sizeof(int);
 			
 			/* data_offset */
-			memcpy(&temp_marfile_buffer[current_offset_filetable], &current_offset_rawdata, sizeof(int));
+			memcpy(&temp_marfile_buffer[current_offset_filetable], &current_delta_rawdata, sizeof(int));
 			current_offset_filetable += sizeof(int);
 			
 			/* data_raw_data */
-			if (fread(&temp_marfile_buffer[current_offset_rawdata], 1, fsize, f) != fsize)
+			if (fread(&temp_marfile_buffer[current_delta_rawdata + filetable_size], 1, fsize, f) != fsize)
 			{
 				perror(files[filenum]);
 				return -1;
 			}
 			fclose(f);
 
-			current_offset_rawdata += fsize;
+			current_delta_rawdata += fsize;
 		}
 
 		filenum++;
@@ -135,30 +127,20 @@ mar_create_file(char *dest_file, char **files)
 	/* write down ``char 0'' to terminate file table */
 	memset(&temp_marfile_buffer[current_offset_filetable], 0, sizeof(char));
 
-	/* calculate crc with all the data we now got */
-	{
-		int current_crc = 0;
-		int i;
-		for (i=sizeof(int); i<total_length ; i++)
-			current_crc += temp_marfile_buffer[i];
-		memcpy(&temp_marfile_buffer[0], &current_crc, sizeof(int));
-		DEBUG_MAR(printf("D: mar::create_marfile computed-crc %d\n", current_crc););
-	}
-
 	/* ok, buffer is ready, let's write it on-disk */
 	{
-		gzFile f = gzopen(dest_file, "w9");
+		BZFILE * f = BZ2_bzopen(dest_file, "w9");
 		if (!f)
 		{
 			perror(dest_file);
 			return -1;
 		}
-		if (gzwrite(f, temp_marfile_buffer, total_length) != total_length)
+		if (BZ2_bzwrite(f, temp_marfile_buffer, total_length) != total_length)
 		{
-			fprintf(stderr, gzerror(f, &gz_errnum));
+			fprintf(stderr, BZ2_bzerror(f, &z_errnum));
 			return -1;
 		}
-		gz_errnum = gzclose(f);
+		BZ2_bzclose(f);
 	}
 
 	printf("mar: created archive %s (%d files, length %d)\n", dest_file, filenum, total_length);
@@ -183,30 +165,21 @@ main(int argc, char **argv)
 	{
 		if (strcmp(argv[1], "-l") == 0)
 		{
-			struct mar_stream s;
-			if (mar_open_file(argv[2], &s) != 0)
-			{
-				fprintf(stderr, "E: open-marfile-failed\n");
-				exit(-1);
-			}
-			mar_list_files(&s);
+			char ** contents = mar_list_contents(argv[2]);
+			if (contents)
+				while (contents && *contents) {
+					printf("\t%s\n", *contents);
+					contents++;
+				}
 			exit(0);
 		}
-		if ((strcmp(argv[1], "-x") == 0) && argc >= 4)
+		if ((strcmp(argv[1], "-x") == 0) && argc == 4)
 		{
-			struct mar_stream s;
-			int i = 3;
-			if (mar_open_file(argv[2], &s) != 0)
+			int res = mar_extract_file(argv[2], argv[3], "./");
+			if (res == 1)
+				fprintf(stderr, "W: file-not-found-in-archive %s\n", argv[3]);
+			if (res == -1)
 				exit(-1);
-			while (i < argc)
-			{
-				int res = mar_extract_file(&s, argv[i], "./");
-				if (res == 1)
-					fprintf(stderr, "W: file-not-found-in-archive %s\n", argv[i]);
-				if (res == -1)
-					exit(-1);
-				i++;
-			}
 			exit(0);
 		}
 		if ((strcmp(argv[1], "-c") == 0) && argc >= 4)

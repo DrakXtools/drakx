@@ -24,13 +24,14 @@
  * (and it DOES perform tests and return values, blaaaah..)
  */
 
+#include "mar-extract-only.h"
 #include "mar.h"
 
 #ifdef _STANDALONE_
 void
-gzerr(gzFile f) /* decrease code size */
+zerr(BZFILE * f) /* decrease code size */
 {
-	fprintf(stderr, gzerror(f, &gz_errnum));
+	fprintf(stderr, BZ2_bzerror(f, &z_errnum));
 }
 void
 log_perror(char *msg)
@@ -45,137 +46,24 @@ log_message(char *msg)
 #else /* _STANDALONE_ */
 #include "../log.h"
 void
-gzerr(gzFile f) /* decrease code size */
+zerr(BZFILE * f) /* decrease code size */
 {
-	log_message(gzerror(f, &gz_errnum));
+	log_message(BZ2_bzerror(f, &z_errnum));
 }
 #endif /* _STANDALONE_ */
 
 
-char **
-mar_list_contents(struct mar_stream *s)
-{
-	struct mar_element * elem = s->first_element;
-	char * tmp_contents[500];
-	char ** answ;
-	int i = 0;
-	while (elem)
-	{
-		tmp_contents[i++] = strdup(elem->filename);
-		elem = elem->next_element;
-	}
-	tmp_contents[i++] = NULL;
-	answ = (char **) malloc(sizeof(char *) * i);
-	memcpy(answ, tmp_contents, sizeof(char *) * i);
-	return answ;
-}
-
-int
-mar_calc_integrity(struct mar_stream *s)
-{
-	char buf[4096];
-	int current_crc = 0;
-	if (gzseek(s->mar_gzfile, sizeof(int), SEEK_SET) != sizeof(int))
-	{
-		gzerr(s->mar_gzfile);
-		return -1;
-	}
-	while (!gzeof(s->mar_gzfile))
-	{
-		int bytes = gzread(s->mar_gzfile, buf, sizeof(buf));
-		if (bytes == -1)
-		{
-			gzerr(s->mar_gzfile);
-			return -1;
-		}
-		while (bytes > 0)
-		{
-			bytes--;
-			current_crc += buf[bytes];
-		}
-	}
-	return current_crc;
-}
-
-
-int
-mar_extract_file(struct mar_stream *s, char *filename, char *dest_dir)
-{
-	struct mar_element * elem = s->first_element;
-	while (elem)
-	{
-		if (strcmp(elem->filename, filename) == 0)
-		{
-			char *buf;
-			char *dest_file;
-			int fd;
-			dest_file = (char *) alloca(strlen(dest_dir) + strlen(filename) + 1);
-			strcpy(dest_file, dest_dir);
-			strcat(dest_file, filename);
-			fd = creat(dest_file, 00660);
-			if (fd == -1)
-			{
-				log_perror(dest_file);
-				return -1;
-			}
-			buf = (char *) alloca(elem->file_length);
-			if (!buf)
-			{
-				log_perror(dest_file);
-				return -1;
-			}
-			if (gzseek(s->mar_gzfile, elem->data_offset, SEEK_SET) != elem->data_offset)
-			{
-				gzerr(s->mar_gzfile);
-				return -1;
-			}
-			if (gzread(s->mar_gzfile, buf, elem->file_length) != elem->file_length)
-			{
-				gzerr(s->mar_gzfile);
-				return -1;
-			}
-			if (write(fd, buf, elem->file_length) != elem->file_length)
-			{
-				log_perror(dest_file);
-				return -1;
-			}
-			close(fd); /* do not check return value for code size */
-			return 0;
-		}
-		elem = elem->next_element;
-	}
-	return 1; /* 1 for file_not_found_in_archive */
-}
-
-
-int
+static int
 mar_open_file(char *filename, struct mar_stream *s)
 {
 	int end_filetable = 0;
 	struct mar_element * previous_element = NULL;
 
-	/* mar_gzfile */
-	s->mar_gzfile = gzopen(filename, "rb");
-	if (!s->mar_gzfile)
+	/* mar_zfile */
+	s->mar_zfile = BZ2_bzopen(filename, "rb");
+	if (!s->mar_zfile)
 	{
 		log_perror(filename);
-		return -1;
-	}
-
-	/* crc32 */
-	if (gzread(s->mar_gzfile, &(s->crc32), sizeof(int)) != sizeof(int))
-	{
-		gzerr(s->mar_gzfile);
-		return -1;
-	}
-
-	/* verify integrity */
-	if (s->crc32 != mar_calc_integrity(s))
-		log_message("ERROR! mar_open_file: CRC check failed (trying to continue)");
-
-	if (gzseek(s->mar_gzfile, sizeof(int), SEEK_SET) != sizeof(int))
-	{
-		gzerr(s->mar_gzfile);
 		return -1;
 	}
 
@@ -186,9 +74,9 @@ mar_open_file(char *filename, struct mar_stream *s)
 		/* read filename */
 		do
 		{
-			if (gzread(s->mar_gzfile, &(buf[ptr]), sizeof(char)) != sizeof(char))
+			if (BZ2_bzread(s->mar_zfile, &(buf[ptr]), sizeof(char)) != sizeof(char))
 			{
-				gzerr(s->mar_gzfile);
+				zerr(s->mar_zfile);
 				return -1;
 			}
 			ptr++;
@@ -199,15 +87,15 @@ mar_open_file(char *filename, struct mar_stream *s)
 			struct mar_element * e = (struct mar_element *) malloc(sizeof(struct mar_element));
 			e->filename = strdup(buf);
 			/* read file_length */
-			if (gzread(s->mar_gzfile, &(e->file_length), sizeof(int)) != sizeof(int))
+			if (BZ2_bzread(s->mar_zfile, &(e->file_length), sizeof(int)) != sizeof(int))
 			{
-				gzerr(s->mar_gzfile);
+				zerr(s->mar_zfile);
 				return -1;
 			}
 			/* read data_offset */
-			if (gzread(s->mar_gzfile, &(e->data_offset), sizeof(int)) != sizeof(int))
+			if (BZ2_bzread(s->mar_zfile, &(e->data_offset), sizeof(int)) != sizeof(int))
 			{
-				gzerr(s->mar_gzfile);
+				zerr(s->mar_zfile);
 				return -1;
 			}
 			/* write down chaining */
@@ -226,4 +114,93 @@ mar_open_file(char *filename, struct mar_stream *s)
 
 	return 0;
 }
+
+
+char **
+mar_list_contents(char * mar_filename)
+{
+	struct mar_stream s;
+	struct mar_element * elem;
+	char * tmp_contents[500];
+	char ** answ;
+	int i = 0;
+
+	if (mar_open_file(mar_filename, &s))
+		return NULL;
+
+	elem = s.first_element;
+	while (elem)
+	{
+		tmp_contents[i++] = strdup(elem->filename);
+		elem = elem->next_element;
+	}
+	tmp_contents[i++] = NULL;
+	answ = (char **) malloc(sizeof(char *) * i);
+	memcpy(answ, tmp_contents, sizeof(char *) * i);
+	return answ;
+}
+
+
+int
+mar_extract_file(char *mar_filename, char *filename_to_extract, char *dest_dir)
+{
+	struct mar_stream s;
+	struct mar_element * elem;
+
+	if (mar_open_file(mar_filename, &s))
+		return -1;
+
+	elem = s.first_element;
+	while (elem)
+	{
+		if (strcmp(elem->filename, filename_to_extract) == 0)
+		{
+			char garb_buf[4096];
+			char *buf;
+			char *dest_file;
+			int fd, i;
+			dest_file = (char *) alloca(strlen(dest_dir) + strlen(filename_to_extract) + 1);
+			strcpy(dest_file, dest_dir);
+			strcat(dest_file, filename_to_extract);
+			fd = creat(dest_file, 00660);
+			if (fd == -1)
+			{
+				log_perror(dest_file);
+				return -1;
+			}
+			buf = (char *) alloca(elem->file_length);
+			if (!buf)
+			{
+				log_perror(dest_file);
+				return -1;
+			}
+			i = elem->data_offset;
+			while (i > 0) {
+				int to_read = i > sizeof(garb_buf) ? sizeof(garb_buf) : i;
+				if (BZ2_bzread(s.mar_zfile, garb_buf, to_read) != to_read) {
+					log_message("MAR: unexpected EOF in stream");
+					return -1;
+				}
+				i -= to_read;
+			}
+			if (BZ2_bzread(s.mar_zfile, buf, elem->file_length) != elem->file_length)
+			{
+				zerr(s.mar_zfile);
+				return -1;
+			}
+			if (write(fd, buf, elem->file_length) != elem->file_length)
+			{
+				log_perror(dest_file);
+				return -1;
+			}
+			close(fd); /* do not check return value for code size */
+			BZ2_bzclose(s.mar_zfile);
+			return 0;
+		}
+		elem = elem->next_element;
+	}
+	BZ2_bzclose(s.mar_zfile);
+	return 1; /* 1 for file_not_found_in_archive */
+}
+
 

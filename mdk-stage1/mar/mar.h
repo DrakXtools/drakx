@@ -15,7 +15,7 @@
 /*
  * mar - The Mandrake Archiver
  *
- * An archiver that supports compression (through zlib).
+ * An archiver that supports compression (through bzlib).
  *
  * Designed to be small so these bad designs are inside:
  *  . archive and compression are mixed together
@@ -36,14 +36,13 @@
 #include <errno.h>
 #include <unistd.h>
 
-#include <zlib.h>
+#include <bzlib.h>
 
 /*
  * Format of a mar file:
  *
- * int crc32                           \
  * ASCIIZ filename         \           |
- * int file_length         | repeated  | gzipped
+ * int file_length         | repeated  | bzipped
  * int pointer_in_archive  /           |
  * char 0                              |
  * raw_files_data                      /
@@ -60,12 +59,11 @@ struct mar_element
 
 struct mar_stream
 {
-	int crc32;                    /* crc32 of the mar stream; it is the addition of all the 8-bit char's from the stream */
 	struct mar_element * first_element;  /* pointer to the first element inside the mar stream */
-	gzFile mar_gzfile;            /* associated gzFile (opened) */
+	BZFILE * mar_zfile;            /* associated zfile (opened) */
 };
 
-int gz_errnum;
+int z_errnum;
 
 #define DEBUG_MAR(x)
 

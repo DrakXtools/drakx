@@ -26,11 +26,7 @@
 #ifndef MAR_EXTRACT_ONLY_H
 #define MAR_EXTRACT_ONLY_H
 
-#include "mar.h"
-
-int mar_open_file(char *filename, struct mar_stream *s);
-int mar_extract_file(struct mar_stream *s, char *filename, char *dest_dir);
-int mar_calc_integrity(struct mar_stream *s);
-char ** mar_list_contents(struct mar_stream *s);
+int mar_extract_file(char *mar_filename, char *filename_to_extract, char *dest_dir);
+char ** mar_list_contents(char *mar_filename);
 
 #endif

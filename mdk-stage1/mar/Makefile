@@ -31,7 +31,7 @@ FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
 
 
 mar: mar-frontend.o mar-extract-only-standalone.o
-	gcc -o mar mar-frontend.o mar-extract-only-standalone.o -lz
+	gcc -o mar mar-frontend.o mar-extract-only-standalone.o -lbz2
 	$(STRIPCMD) $@
 
 libmar.a: mar-extract-only.o
