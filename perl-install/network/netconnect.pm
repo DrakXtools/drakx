@@ -154,8 +154,7 @@ sub real_main {
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
                           sagem => N("Sagem USB modem"),
-                          bewan_usb => N("Bewan USB modem"),
-                          bewan_pci => N("Bewan PCI modem"),
+                          bewan => N("Bewan modem"),
                           eci       => N("ECI Hi-Focus modem"), # this one needs eci agreement
                          );
 
@@ -539,7 +538,6 @@ killall pppd
                         get_subwizard($wiz, 'adsl');
                         $lan_detect->();
                         detect($netc->{autodetect}, 'adsl');
-                        # FIXME: we still need to detect bewan modems
                         @adsl_devices = keys %eth_intf;
                         foreach my $modem (keys %adsl_devices) {
                             push @adsl_devices, $modem if $netc->{autodetect}{adsl}{$modem};
