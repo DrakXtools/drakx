@@ -303,6 +303,7 @@ sub setPackages {
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
+	push @{$o->{default_packages}}, "usbd" if modules::get_alias("usb-interface");
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
 
