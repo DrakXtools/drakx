@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 3mdk
+Release: 4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,32 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-4mdk
+- drakbackup (stew):
+  o verify user has selected a cron interval and media (#8138)
+  o tweak wizard setup
+- drakconnect:
+  o misc santizing in manual module loading
+  o adsl provider db: fix vci number for Belgium and France (poulpy)
+  o wizard:
+    * modem:
+      + enable one to manually choose the serial port to use while
+        configuring modem
+      + really default to dynamic dns, gateway and ip (really fix #7705)
+      + do not overwrite current kppp settings with provider db ones
+        but on provider switch
+    * adsl: prevent having to choose between '' and 'adsl' connections
+    * ethernet: enable one to manually load a driver like expert mode
+      in old pre-10.0 wizard
+  o manage interface:
+    * modem:
+      + read kppp authentication method
+      + handle new PAP/CHAP method
+    * ethernet:
+      + handle and translate BOOTPROTO
+      + do not complain about gateway format when it's not set
+    * fix untranslated strings
+
 * Fri Feb 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-3mdk
 - drakconnect: fix empty vci/vpi paremeters when speetouch firmware
   wasn't provided
