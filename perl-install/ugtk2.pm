@@ -840,11 +840,10 @@ sub new {
 	if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
     );
 
-    if ($window->isa('Gtk2::Window')) {
-	$o->{rwindow} = $window;
-	$o->{pop_it} = 1;
-    } else {
-	$o->{rwindow} = $o->{window};
+    $o->{rwindow} = $o->{window} = $window;
+    $o->{pop_it} = $window->{pop_it};
+
+    if (!$o->{pop_it}) {
 	set_main_window_size($o->{window});
 	$o->{window}->set_border_width(10);
     }
