@@ -95,7 +95,7 @@ sub isdn_read_config {
     foreach ('link/myisp', 'card/mycard') {
 	my %conf = getVarsFromSh("$::prefix/etc/isdn/profile/$_");
 	foreach (keys %conf) {	 
-	    $isdn->{$match{$_}} = $conf{$_} if $match{$_};
+	    $isdn->{$match{$_}} = $conf{$_} if $match{$_} && $conf{$_};
 	}
     }
 
