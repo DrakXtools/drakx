@@ -33,7 +33,6 @@ use bootloader;
 use fs;
 use my_gtk qw(:helpers :wrappers :ask);
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
   print "EMBED\n";
   print "XID : $::XID\n";
