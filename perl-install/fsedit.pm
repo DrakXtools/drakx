@@ -148,6 +148,7 @@ sub hds {
 
 	eval { partition_table::read($hd, $flags->{clearall} || member($_->{device}, @{$flags->{clear} || []})) };
 	if ($@) {
+	    cdie "ask_before_blanking:$@";
 	    partition_table_raw::zero_MBR($hd);
 	}
 	member($_->{device}, @{$flags->{clear} || []}) and partition_table::remove($hd, $_)

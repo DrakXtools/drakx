@@ -67,13 +67,13 @@ my ($all_hds) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
 	my $err = formatError($@);
-	if ($err =~ /overlapping/) {
-	    $in->ask_warn('', $err);
-	    1;
-	} else {
-	    !$in->ask_okcancel(_("Error"),
+	if ($err =~ s/ask_before_blanking://) {
+	    $in->ask_okcancel(_("Error"),
 [_("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"), $err]);
+	} else {
+	    $in->ask_warn('', $err);
+	    1;
         }
     };
 
