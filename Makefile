@@ -76,7 +76,6 @@ install_only:
 	cp -af isolinux $(ROOTDEST)
     endif
 
-	install live_update $(ROOTDEST)/live_update
 	make -C perl-install full_stage2
 	make -C perl-install/share/advertising install
 	make -C rescue install
