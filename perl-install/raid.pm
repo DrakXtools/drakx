@@ -104,23 +104,22 @@ sub update {
 sub write {
     my ($raids, $file) = @_;
     return if $::testing;
-    local $\ = "\n";
-    local *F;
-    open F, ">$file" or die N("Can't write file %s", $file);
 
-    foreach (grep { $_ } @$raids) {
-	print F <<EOF;
-raiddev       /dev/$_->{device}
-raid-level    $_->{level}
-chunk-size    $_->{'chunk-size'}
+    output($file,
+	   map {
+	       my $s = sprintf(<<EOF, $_->{device}, $_->{level}, $_->{'chunk-size'}, int @{$_->{disks}});
+raiddev       /dev/%s
+raid-level    %s
+chunk-size    %s
 persistent-superblock 1
+nr-raid-disks %d
 EOF
-	print F "nr-raid-disks ", int @{$_->{disks}};
-	each_index {	    
-	    print F "    device    ", devices::make($_->{device});
-	    print F "    raid-disk $::i";
-	} @{$_->{disks}};
-    }
+	       my @devs = map_index { 
+		   "    device    " . devices::make($_->{device}) . "\n    raid-disk $::i\n";
+	       } @{$_->{disks}};
+
+	       $s, @devs
+	   } grep { $_ } @$raids);
 }
 
 sub make {
