@@ -122,7 +122,7 @@ sub connected_bg {
     if (defined $kid_pipe) {
 	local *F;
 	*F = *$kid_pipe;
-	fcntl(F, c::F_SETFL, c::O_NONBLOCK) or die "can't fcntl F_SETFL: $!";
+	fcntl(F, c::F_SETFL(), c::O_NONBLOCK()) or die "can't fcntl F_SETFL: $!";
 	my $a;
   	if ($a = <F> ) {
 	    close($kid_pipe) || warn "kid exited $?";
