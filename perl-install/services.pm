@@ -108,7 +108,7 @@ xfs => __("Starts the X Font Server (this is mandatory for XFree to run)."),
     $s;
 }
 
-sub ask_install {
+sub ask_install_simple {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
     $in->ask_many_from_list("drakxservices",
@@ -121,7 +121,7 @@ sub ask_install {
 			    });
 }
 
-sub ask_install_gtk {
+sub ask_install {
     my ($in, $prefix) = @_;
     my %root_services = (
 			 _("Printing") => [ qw(cups lpr oki4daemon) ],
@@ -237,10 +237,9 @@ sub ask_standalone_gtk {
     ($l, $on_services);
 }
 
-sub ask {
+sub ask {    
     my ($in, $prefix) = @_;
-    return ref($in) !~ /gtk/ ? ask_install($in, $prefix) :
-      $::isInstall ? ask_install_gtk($in, $prefix) : ask_standalone_gtk($in, $prefix);
+    !$::isInstall && ref($in) =~ /gtk/ ? &ask_standalone_gtk : &ask_install;
 }
 
 sub doit {
