@@ -83,7 +83,7 @@ sub raw_checks_list {
 
 sub list_checks {
     my ($msec) = @_;
-    grep { !member($_, qw(MAIL_WARN MAIL_USER)) } $msec->raw_checks_list;
+    difference2([ $msec->raw_checks_list ], [ qw(MAIL_WARN MAIL_USER) ]);
 }
 
 sub list_functions {
