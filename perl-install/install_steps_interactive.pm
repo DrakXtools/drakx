@@ -910,7 +910,9 @@ sub summary {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("Sound card"),
-	    val => sub { $device->{description} },
+	    val => sub { 
+		$device->{driver} && modules::module2description($device->{driver}) || $device->{description};
+	    },
 	    clicked => sub {
 	        require harddrake::sound; 
 	        harddrake::sound::config($o, $device)
