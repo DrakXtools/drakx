@@ -1,3 +1,97 @@
+2002/09/09  David Baudens  <baudens@mandrakesoft.com>
+
+	* share/po/fr.po: Update
+	Update
+	Fix typos and bad french translations
+	Update
+
+	* share/advertising/14-mdkexpert.pl, share/advertising/03-internet.pl: Fix
+	typos
+
+2002/09/09  dam's  <dams@idm.fr>
+
+	* ugtk.pm: corrected typo (modification of constant if ugtk.pm was a
+	string)
+
+2002/09/09  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/ethernet.pm: 
+	  - check DNS & Gateway IP
+
+	* network/network.pm: 
+	  - show pcmcia ethernet cards in list
+
+	* modules.pm: 
+	  - change "=~ /isdn/" in "eq 'network/isdn'"
+
+2002/09/09  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fix urpmi installation.
+	fixed still present hdlist and synthesis file for media not configured
+	(because
+	of not selected).
+
+2002/09/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* my_gtk.pm: gfx specs is to have the text justified on the left
+
+	* share/po/fi.po: a fix from cooker
+
+2002/09/09  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/DrakX.pot: updated pot file
+
+	* share/po/fr.po: updated po files
+	updated pot file
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated po files
+
+2002/09/09  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk.pm, Xconfig/test.pm, install2.pm: 
+	  - use variable $::no_ugtk_init in ugtk.pm instead of using
+	$::isInstall
+	  - that way, the X test can be made to work both at install and
+	standalone
+
+	* standalone/drakupdate_fstab: force non-supermount, supermount is too
+	buggy
+
+	* mouse.pm: have the IMPS/2 warning "MOVE YOUR WHEEL" for ExplorerPS/2 too
+
+	* Xconfig/card.pm: have BusID's on MULTI_HEAD, otherwise G450 & G550 go
+	crazy
+
+	* any.pm: when "password" or "restricted" is set, propose the entries to
+	change them
+	(thanks to Aleksander Adamowski)
+	fix detection of mixed_kind_of_disks (eg: hde with hda)
+
+	* standalone/fileshareset: add "sync" to nfs exports default_options (so
+	that exportfs doesn't warn a lot of stuff)
+
+2002/09/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: enforce unique ids
+	add drakbug report entry in help menu
+
+	* drakxtools.spec: fix confirm script
+	require perl-GTK-Gdkpixbuf for bootlook
+
+	* harddrake/TODO: update
+
 2002/09/09  Pixel  <pixel@mandrakesoft.com>
 
 	* ugtk.pm, Xconfig/test.pm, install2.pm: 
@@ -2695,7 +2789,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.741 2002/09/06 22:51:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.742 2002/09/09 12:58:14 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
