@@ -39,10 +39,10 @@ foreach my $lang (keys %helps) {
     open F, ">:encoding($charset)", "help-$lang.pot";
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
-	$base->{$id} or die "$lang:$id doesn't exist in english\n";
+	$base->{$id} or warn "$lang:$id doesn't exist in english\n", next;
 	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/$dir/$lang/drakx-chapter.xml\n);
 	print F qq(msgid ""\n");
-	print F join(qq(\\n"\n"), split "\n", $base->{$id});
+	print F join(qq(\\n"\n"), split "\n", to_ascii($base->{$id}));
 	print F qq("\nmsgstr ""\n");
 	print F join(qq(\\n"\n"), split "\n", $helps{$lang}{$id});
 	print F qq("\n\n);
