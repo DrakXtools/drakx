@@ -522,9 +522,11 @@ sub rotate_logs {
 sub writeandclean_ldsoconf {
     my ($prefix) = @_;
     my $file = "$prefix/etc/ld.so.conf";
-    output $file,
-      grep { !m|^(/usr)?/lib(64)?$| } #- no need to have /lib and /usr/lib in ld.so.conf
-	uniq cat_($file), (if_(arch() =~ /x86_64/, "/usr/X11R6/lib64\n"), "/usr/X11R6/lib\n");
+    my @l = chomp_(cat_($file));
+    @l = grep { !m|^(/usr)?/lib(64)?$| } @l; #- no need to have /lib and /usr/lib in ld.so.conf
+    push @l, '/usr/X11R6/lib', if_(arch() =~ /x86_64/, '/usr/X11R6/lib64');
+    push @l, grep { -d "$::prefix$_" } '/usr/lib/qt3/lib', if_(arch() =~ /x86_64/, '/usr/lib/qt3/lib64'); #- needed for upgrade where package renaming can cause this to disappear
+    output($file, map { "$_\n" } uniq(@l));
 }
 
 sub shells() {
