@@ -34,6 +34,8 @@ my %keyboards = (
  "de" => [ __("German"),         "de-latin1",   "de" ],
  "dk" => [ __("Danish"),         "dk-latin1",   "dk" ],
 "dvorak" => [ __("Dvorak"),      "dvorak",      "dvorak" ],
+ "ee" => [ __("Estonian"),      "ee-latin9",   "ee" ],
+ "es" => [ __("Spanish"),       "es-latin1",   "es" ],
  "fi" => [ __("Finnish"),        "fi-latin1",   "fi" ],
  "fr" => [ __("French"),         "fr-latin1",   "fr" ],
 #- georgian keyboards have to be written...
