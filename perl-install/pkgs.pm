@@ -948,7 +948,7 @@ sub installTransactionClosure {
 	    $cdrom = $cdromdev->{device};
 	    log::l("cdrom redetected at $cdrom");
 	    devices::make($cdrom);
-	    install_any::ejectCdrom($cdrom) if $::o->{method} eq 'cdrom'; # will umount /tmp/image
+	    install_any::ejectCdrom($cdrom) if $::o->{method} eq 'cdrom';
 	    install_any::mountCdrom("/mnt/cdrom", $cdrom);
 	} else { log::l("cdrom already found at $cdrom") }
 	'cdrom';

@@ -149,9 +149,10 @@ sub errorOpeningFile($) {
 
     my $max = 32; #- always refuse after $max tries.
     if ($current_method eq "cdrom") {
-	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
+	cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(/mnt/cdrom|/tmp/image),
+	    and ($cdrom, my $mountpoint) = ($1, $2);
 	return unless $cdrom;
-	ejectCdrom($cdrom);
+	ejectCdrom($cdrom, $mountpoint);
 	while ($max > 0 && askChangeMedium($current_method, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    mountCdrom("/tmp/image");
@@ -159,7 +160,7 @@ sub errorOpeningFile($) {
 	    $getFile && @advertising_images and copy_advertising($::o);
 	    $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
-	    ejectCdrom($cdrom);
+	    ejectCdrom($cdrom, $mountpoint);
 	    --$max;
 	}
     } else {
@@ -433,6 +434,7 @@ sub selectSupplMedia {
 	    devices::make($cdrom);
 	    ejectCdrom($cdrom);
 	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
+		#- mount suppl CD in /mnt/cdrom to avoid umounting /tmp/image
 		mountCdrom("/mnt/cdrom", $cdrom);
 		log::l($@) if $@;
 		useMedium($medium_name);
@@ -704,14 +706,16 @@ sub unlockCdrom() {
     my $cdrom = cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
     eval { ioctl(detect_devices::tryOpen($cdrom), c::CDROM_LOCKDOOR(), 0) };
 }
+
 sub ejectCdrom {
-    my ($o_cdrom) = @_;
+    my ($o_cdrom, $o_mountpoint) = @_;
     getFile("XXX"); #- close still opened filehandle
-    my $cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image)! && $1 or return;
+    my $cdrom = $o_cdrom || cat_("/proc/mounts") =~ m!(/(?:dev|tmp)/\S+)\s+(/mnt/cdrom|/tmp/image)! && $1 or return;
+    $o_mountpoint ||= $2 || '/tmp/image';
 
     #- umount BEFORE opening the cdrom device otherwise the umount will
     #- D state if the cdrom is already removed
-    eval { fs::umount("/tmp/image") };
+    eval { fs::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
     eval { 
 	my $dev = detect_devices::tryOpen($cdrom);
