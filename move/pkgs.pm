@@ -1,11 +1,13 @@
-package pkg;
+#- $Id$ $
+
+package urpm_pkg;
 
 sub flag_available {
     return 1;
 }
 
 
-package pkgs; # $Id$ $
+package pkgs;
 use log;
 
 sub rpmDbOpen {
@@ -14,7 +16,7 @@ sub rpmDbOpen {
 
 sub packageByName {
     #- install_steps:344
-    return bless {}, 'pkg';
+    return bless {}, 'urpm_pkg';  #- we'll need to call flag_available on it
 }
 
 sub selectPackage {
