@@ -19,12 +19,14 @@ sub nb($) {
     first((ref $nb ? $nb->{device} : $nb) =~ /(\d+)/);
 }
 
-sub new($$) {
-    my ($raid, $part) = @_;
+sub new {
+    my ($raid, @parts) = @_;
     my $nb = @$raid; 
-    $raid->[$nb] = { 'chunk-size' => "64k", type => 0x83, disks => [ $part ], device => "md$nb", notFormatted => 1 };
-    $part->{raid} = $nb;
-    delete $part->{mntpoint};
+    $raid->[$nb] = { 'chunk-size' => "64k", type => 0x83, disks => [ @parts ], device => "md$nb", notFormatted => 1 };
+    foreach my $part (@parts) {
+	$part->{raid} = $nb;
+	delete $part->{mntpoint};
+    }
     $nb;
 }
 
