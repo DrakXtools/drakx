@@ -2916,6 +2916,10 @@ sub wizard_close {
 sub main {
     my ($printer, $in, $ask_multiple_printer, $upNetwork) = @_;
 
+    # Save the user mode, so that the same one is used on the next start
+    # of Printerdrake
+    printer::set_usermode($::expert);
+
     # Default printer name, we do not use "lp" so that one can switch the
     # default printer under LPD without needing to rename another printer.
     # Under LPD the alias "lp" will be given to the default printer.
@@ -3133,7 +3137,7 @@ sub main {
 		    );
 		    # Toggle expert mode and standard mode
 		    if ($menuchoice eq "\@usermode") {
-			$::expert = !$::expert;
+			printer::set_usermode(!$::expert);
 			# Read printer database for the new user mode
 			%printer::thedb = ();
 			#my $w = $in->wait_message(_("Printerdrake"), 

@@ -1150,7 +1150,7 @@ sub set_cups_autoconf {
     # Remove all valid "CUPS_CONFIG" lines
     (/^\s*CUPS_CONFIG/ and $_ = "") foreach @file_content;
  
-    # Insert the new "Printcap" line
+    # Insert the new "CUPS_CONFIG" line
     if ($autoconf) {
 	push @file_content, "CUPS_CONFIG=automatic\n";
     } else {
@@ -1170,7 +1170,7 @@ sub set_cups_autoconf {
 
 sub get_cups_autoconf {
     local *F;
-    open F, ("< $prefix/etc/sysconfig/printing") || return 1;
+    open F, "< $prefix/etc/sysconfig/printing" or return 1;
     my $line;
     while ($line = <F>) {
 	if ($line =~ m!^[^\#]*CUPS_CONFIG=manual!) {
@@ -1178,6 +1178,53 @@ sub get_cups_autoconf {
 	}
     }
     return 1;
+}
+
+sub set_usermode {
+    my $usermode = $_[0];
+    $::expert = $usermode;
+
+    # Read config file
+    local *F;
+    my $file = "$prefix/etc/sysconfig/printing";
+    if (!(-f $file)) {
+	@file_content = ();
+    } else {
+	open F, "< $file" or die "Cannot open $file!";
+	@file_content = <F>;
+	close F;
+    }
+
+    # Remove all valid "USER_MODE" lines
+    (/^\s*USER_MODE/ and $_ = "") foreach @file_content;
+ 
+    # Insert the new "USER_MODE" line
+    if ($usermode) {
+	push @file_content, "USER_MODE=expert\n";
+    } else {
+	push @file_content, "USER_MODE=recommended\n";
+    }
+
+    # Write back modified file
+    open F, "> $file" or die "Cannot open $file!";
+    print F @file_content;
+    close F;
+
+    return 1;
+}
+
+sub get_usermode {
+    local *F;
+    open F, "< $prefix/etc/sysconfig/printing" or return 0;
+    my $line;
+    while ($line = <F>) {
+	if ($line =~ m!^[^\#]*USER_MODE=expert!) {
+	    $::expert = 1;
+	    return 1;
+	}
+    }
+    $::expert = 0;
+    return 0;
 }
 
 sub set_default_printer {
