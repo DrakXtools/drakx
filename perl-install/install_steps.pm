@@ -701,7 +701,6 @@ sub configureNetwork {
 	require network::netconnect;
 	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
 	$o->{netcnx}{NET_INTERFACE} and network::netconnect::set_net_conf($o->{netcnx}, $o->{netc});
-	network::netconnect::save_conf($o->{netcnx});
     }
 }
 
