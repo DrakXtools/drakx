@@ -13,5 +13,5 @@ $border = 10;  #- for leftish text
 @text = ([ N("<b>Mandrakesoft Products (Nomad Products)</b>"), center => 1 ],
 	' ',
 	N("Mandrakesoft has developed two products that allow you to use Mandrakelinux <b>on any computer</b> and without any need to actually install it:"),
-	N("	* <b>Move</b>, a Mandrakelinux distribution that runs entirely from a bootable CD-Rom."),
+	N("	* <b>Move</b>, a Mandrakelinux distribution that runs entirely from a bootable CD-ROM."),
 	N("	* <b>GlobeTrotter</b>, a Mandrakelinux distribution pre-installed on the ultra-compact “LaCie Mobile Hard Drive”."));
