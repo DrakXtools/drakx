@@ -958,7 +958,7 @@ Do you really want to reconfigure this device?"),
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
-                        delete $ethntf->{TYPE} unless $netcnx->{type} eq 'adsl' && member($adsl_type, qw(manual dhcp));
+                        delete $ethntf->{TYPE} if $netcnx->{type} ne 'adsl' || !member($adsl_type, qw(manual dhcp));
                         @fields = qw(IPADDR NETMASK);
                         $netc->{dhcp_client} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
                         $netc->{dhcp_client} = "dhcp-client" if $netc->{dhcp_client} eq "dhclient";
