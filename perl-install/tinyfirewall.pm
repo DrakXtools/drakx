@@ -1,5 +1,4 @@
 package tinyfirewall;
-
 use diagnostics;
 use strict;
 use common qw(:common :functional :system :file);
@@ -7,8 +6,6 @@ use commands;
 use run_program;
 use netconnect;
 use network;
-use my_gtk qw(:helpers :wrappers);
-
 my @messages = (_("tinyfirewall configurator
 
 This configures a personal firewall for this Linux Mandrake machine.
@@ -57,79 +54,37 @@ of a larger office and haven't heard of this, you probably
 aren't."),
 _("Configuration complete.  May we write these changes to disk?")
 );
-
 my %settings;
-#sub ReadConfig {
 my $config_file = "/etc/Bastille/bastille-firewall.cfg";
 my $default_config_file = "/usr/share/Bastille/bastille-firewall.cfg"; # set this later
-sub ReadConfig
-##############################
-## Reads the default values from $config_file
-{
-	## if $config_file doesn't exist, move the
-	## $default_config_file to $config_file
-
-	system ("/bin/cp $default_config_file $config_file")
-	       	if !( -e $config_file);
-
-
-	open CONFIGFILE, $config_file
-		or die "Can't open $config_file: $!\n";
-
-	while (my $line = <CONFIGFILE>)
-	{
-		$line =~ s/\#.*$//;  # remove comments
-		$line =~ s/^\s+//;   # remove leading whitespace
-		$line =~ s/\s+$//;   # remove tailing whitespace	
-		$line =~ s/\s+/ /;   # remove extra whitespace	
-
-
-		## what's left will be useful stuff, so
-		## get the values
-
-		$line =~ m/^(.+)\s*\=\s*\"(.*)\"\s*$/;
-		my ($variable, $value) = ($1, $2);
-
-
-		## set the proper value in the hash
-		$settings{$variable} = $value
-			if ($variable);
-	}
-
-	close CONFIGFILE;
-	return;
-#    my ($config_file, $default_config_file)=@_;
-    $config_file ||= "/etc/Bastille/bastille-firewall.cfg";
-    $default_config_file ||= "/usr/share/Bastille/bastille-firewall.cfg";
+sub ReadConfig {
     -e $config_file or cp($default_config_file, $config_file);
     add2hash(\%settings, { getVarsFromSh("$config_file") });
 }
-
-my $GetNetworkInfo = sub {
-    $settings{DNS_SERVERS} = join(' ', uniq(split(' ', $settings{DNS_SERVERS}),
-            @{network::read_resolv_conf("/etc/resolv.conf")}{'dnsServer', 'dnsServer2', 'dnsServer3'}));
-    open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
-    my @interfaces = map { (split / /)[0]; } (<NETSTAT>); close NETSTAT;
-    open ROUTE, "/sbin/route -n |" or die "Can't pipe from /sbin/route: $!\n"; <ROUTE>; <ROUTE>;
-    my $defaultgw;
-    my $iface;
-    while (<ROUTE>) {
-	my @parts = split /\s+/;
-	($parts[0] eq "0.0.0.0") and $defaultgw = $parts[1], $iface = $parts[7];
-    } close ROUTE;
-    my $fulliface = $iface;
-    $fulliface =~ s/[0-9]+/\\\+/;    # so we can match eth0 against eth+, for example
-    $settings{PUBLIC_INTERFACES} = join(' ', uniq(split(' ', $settings{PUBLIC_INTERFACES}), $iface));
-    $settings{PUBLIC_INTERFACES} =~ $fulliface and $settings{PUBLIC_INTERFACES} =~ s/$iface *//;
-    $settings{INTERNAL_IFACES} = join(' ', uniq(split(' ', $settings{INTERNAL_IFACES}),
-            map { my $i=$_; my $f=$i; $f=~s/[0-9]+/\\\+/;
-		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
-	      } (@interfaces) ));
-};
-
 sub DoInterface {
     my ($in)=@_;
     $::isWizard=1;
+    my $GetNetworkInfo = sub {
+	$settings{DNS_SERVERS} = join(' ', uniq(split(' ', $settings{DNS_SERVERS}),
+            @{network::read_resolv_conf("/etc/resolv.conf")}{'dnsServer', 'dnsServer2', 'dnsServer3'}));
+	open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
+	my @interfaces = map { (split / /)[0]; } (<NETSTAT>); close NETSTAT;
+	open ROUTE, "/sbin/route -n |" or die "Can't pipe from /sbin/route: $!\n"; <ROUTE>; <ROUTE>;
+	my $defaultgw;
+	my $iface;
+	while (<ROUTE>) {
+	    my @parts = split /\s+/;
+	    ($parts[0] eq "0.0.0.0") and $defaultgw = $parts[1], $iface = $parts[7];
+	} close ROUTE;
+	my $fulliface = $iface;
+	$fulliface =~ s/[0-9]+/\\\+/;
+	$settings{PUBLIC_INTERFACES} = join(' ', uniq(split(' ', $settings{PUBLIC_INTERFACES}), $iface));
+	$settings{PUBLIC_INTERFACES} =~ $fulliface and $settings{PUBLIC_INTERFACES} =~ s/$iface *//;
+	$settings{INTERNAL_IFACES} = join(' ', uniq(split(' ', $settings{INTERNAL_IFACES}),
+            map { my $i=$_; my $f=$i; $f=~s/[0-9]+/\\\+/;
+		  if_(and_( map {$settings{$_} !~ /$i/ and $settings{$_} !~ /$f/ } ('TRUSTED_IFACES', 'PUBLIC_IFACES', 'INTERNAL_IFACES')), $i)
+	    } (@interfaces) ));
+    };
     my $popimap = sub { $_[0] or return; mapn { $settings{$_[0]} = $_[1] }
 [ qw(FORCE_PASV_FTP TCP_BLOCKED_SERVICES UDP_BLOCKED_SERVICES ICMP_ALLOWED_TYPES ENABLE_SRC_ADDR_VERIFY IP_MASQ_NETWORK IP_MASQ_MODULES REJECT_METHOD) ] ,
 [ "N", "6000:6020", "2049", "destination-unreachable echo-reply time-exceeded" , "Y", "", "", "DENY" ]; };
@@ -138,7 +93,7 @@ sub DoInterface {
 	$settings{DHCP_IFACES} and return;
 	open NETSTAT, "/bin/netstat -in |" or die "Can't pipe from /bin/netstat: $!\n"; <NETSTAT>; <NETSTAT>;
 	$settings{DHCP_IFACES} = join(' ', split(' ', $settings{DHCP_IFACES}), map { (split / /)[0]; } (<NETSTAT>)); close NETSTAT;
-    } else { $settings{DHCP_IFACES} = "" }};
+    } else { $settings{DHCP_IFACES} = "" } };
     my $quit = sub {
 	$_[0] or $in->exit(0);
 	cp("-f", $config_file, $config_file . ".orig");
@@ -151,8 +106,7 @@ sub DoInterface {
 			    "/bin/cp /usr/share/Bastille/bastille-firewall /etc/rc.d/init.d/",
 			    "/bin/chmod 0700 /etc/rc.d/init.d/bastille-firewall", "/bin/chmod 0700 /sbin/bastille-ipchains",
 			    "/bin/chmod 0700 /sbin/bastille-netfilter", "/sbin/chkconfig bastille-firewall on",
-			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start");
-    };
+			    "/etc/rc.d/init.d/bastille-firewall stop", "/etc/rc.d/init.d/bastille-firewall start"); };
     my @struct = (
 		  [$GetNetworkInfo],
 		  [],
@@ -192,8 +146,6 @@ sub DoInterface {
 	}
     }
 }
-
-
 sub Service {
     my ($add, $protocol, $port) = @_;
     if ($add) {
@@ -204,18 +156,14 @@ sub Service {
 	  join( ' ', map { if_($_ ne $port, $_)} (split (' ', $settings{uc($protocol) . "_PUBLIC_SERVICES"})) );
     }
 }
-
 sub CheckService {
     my ($protocol, $port) = @_;
     map { $_ eq $port and return 1 } split / /, $settings{uc($protocol) . "_PUBLIC_SERVICES"};
 }
-
-sub Kernel22
-{
+sub Kernel22 {
     my ($major, $minor, $patchlevel) = (cat_("/proc/version"))[0] =~ m/^Linux version ([0-9]+)\.([0-9]+)\.([0-9]+)/;
     $major eq "2" && $minor eq "2";
 }
-
 sub main {
     my ($in)=@_;
     ReadConfig;
