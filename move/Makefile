@@ -29,7 +29,7 @@ default: install
 get_dest_livetree:
 	@echo -n $(DEST_LIVETREE)
 
-iso: build install live_tree_boot clps only_iso
+iso: build install live_tree_boot only_iso
 
 
 build: stage1 xwait runlevel_set
