@@ -63,10 +63,10 @@ our @tree =
          my @usbnet = (list_modules::category2modules('network/usb'), "nvnet"); # rought hack for nforce2's nvet
          
          grep { $_->{media_type} && $_->{media_type} =~ /^NETWORK/ || member($_->{driver}, @usbnet) || $_->{type} && $_->{type} eq 'network' } @devices }, 1 ],
-     [ "MODEM", , N("Modem"), "modem.png", "", sub { detect_devices::getModem() }, 0 ],
-     [ "ADSL", , N("ADSL adapters"), "modem.png", "", sub { 
+     [ "MODEM", , N("Modem"), "modem.png", "$sbindir/drakconnect", sub { detect_devices::getModem() }, 0 ],
+     [ "ADSL", , N("ADSL adapters"), "modem.png", "$sbindir/drakconnect", sub { 
            require network::adsl; my $a = network::adsl::adsl_detect(); $a ? values %$a : () }, 0 ],
-     [ "ISDN", , N("ISDN adapters"), "modem.png", "", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
+     [ "ISDN", , N("ISDN adapters"), "modem.png", "$sbindir/drakconnect", sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); 
                                                             if_(!is_empty_hash_ref($isdn), $isdn) }, 0 ],
      [ "BRIDGE", , N("Bridges and system controllers"), "memory.png", "", sub { grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices }, 0 ],
      [ "UNKNOWN", , N("Unknown/Others"), "unknown.png", "", \&unknown, 0 ],
