@@ -64,6 +64,8 @@ foreach my $medium (@media) {
 if ($mode eq 'clean') {
     #- copy and install from each cd image.
     foreach my $medium (@media) {
+	print "Examining packages from medium labeled \"$medium->{descr}\"\n";
+
 	foreach my $pkg (@{$packages->{depslist}}) {
 	    $pkg->{closure} && !$pkg->{selected} or next;
 	    my $file = "$dir/$medium->{rpmsdir}/" . rpm_filename($pkg);
@@ -74,7 +76,6 @@ if ($mode eq 'clean') {
 	    }
 	}
 
-	print "Installing packages from medium labeled \"$medium->{descr}\"\n";
 	if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
 	    if (delete $pkg->{selected}) {
 		delete $rpms{rpm_filename($pkg)} or next;
@@ -125,8 +126,8 @@ sub select_packages {
 
     #- INSTALL class need to be copied as closure (unless installed after).
     foreach (@{$o->{packages}{needToCopy}}) {
-	my $pkg = pkgs::packageByName($packages, $_);
-	pkgs::selectPackage($packages, $pkg);
+	my $pkg = pkgs::packageByName($o->{packages}, $_);
+	pkgs::selectPackage($o->{packages}, $pkg);
     }
 	
     #- first select package that have to go to closure according to their names.
@@ -424,7 +425,7 @@ sub readCompssUsers {
 }
 
 sub setSelectedFromCompssList {
-    my ($packages, $compssUsersChoice, $min_level, $max_size) = @_;
+    my ($packages, $compssUsersChoice, $min_level, $max_size, $otherOnly) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
     foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
@@ -450,9 +451,15 @@ sub setSelectedFromCompssList {
 	}
 
 	#- at this point the package can safely be selected.
-	selectPackage($packages, $p);
+	if ($otherOnly) {
+	    selectPackage($packages, $p, 0, $otherOnly);
+	} else {
+	    selectPackage($packages, $p);
+	}
     }
-    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
-    log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
+    unless ($otherOnly) {
+	log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+	log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
+    }
     $min_level;
 }
