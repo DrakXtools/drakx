@@ -5,7 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 use common qw(:common :system :file :functional);
 use interactive;
 use any;
-use lilo;
+use bootloader;
 use detect_devices;
 use fsedit;
 use c;
@@ -40,7 +40,7 @@ if ($ENV{DISPLAY} && c::Xtest($ENV{DISPLAY})) {
     exec $cmd if $cmd;
 }
 
-my $bootloader = lilo::read('', '/etc/lilo.conf');
+my $bootloader = bootloader::read('', '/etc/lilo.conf');
 local ($_) = `detectloader`;
 $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
 
@@ -51,7 +51,7 @@ fs::get_mntpoints_from_fstab($fstab);
 ask:
 any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
 
-eval { lilo::install('', $bootloader, $fstab, $hds) };
+eval { bootloader::install('', $bootloader, $fstab, $hds) };
 
 if ($@) {
     $in->ask_warn('', 
