@@ -1221,6 +1221,8 @@ sub loadO {
 	foreach (keys %{$o->{rpmsrate_flags_chosen}}) {
 	    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = $o->{rpmsrate_flags_chosen}{$_};
 	}
+	#- it used to be always selected
+	$o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
     }
 
     $o;
