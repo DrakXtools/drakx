@@ -121,7 +121,8 @@ sub process {
                 push @$data2, $d
             }
         }
-        my $a = $in->ask_from($o->{name}, $page->{name}, $data2, complete => $page->{complete} || sub { 0 });
+        my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
+        my $a = $in->ask_from($o->{name}, $name, $data2, complete => $page->{complete} || sub { 0 });
         if ($a) {
             # step forward:
             push @steps, $next if !$page->{ignore} && $steps[-1] ne $next;
