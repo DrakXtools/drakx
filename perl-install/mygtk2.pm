@@ -675,6 +675,7 @@ sub set_root_window_background {
     my $gc = Gtk2::Gdk::GC->new($root);
     my $color = rgb2color($r, $g, $b);
     $gc->set_rgb_fg_color($color);
+    $root->set_background($color);
     my ($w, $h) = $root->get_size;
     $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
