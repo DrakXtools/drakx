@@ -82,7 +82,7 @@ sub basic_seclevel_explanations() {
             my %tags = %common_opts;
             while (s!(\w+?)="(\w+?)"!!) {
                 $tags{weight} ||= Gtk2::Pango->PANGO_WEIGHT_BOLD if $1 eq 'foreground';
-                $tags{$1} = $2;
+                $tags{$1} = $2 eq "bold" ? Gtk2::Pango->PANGO_WEIGHT_BOLD : $2;
             }
             s/^>//;
             [ $_, \%tags ];
@@ -96,13 +96,13 @@ sub basic_seclevel_explanations() {
 					  N("Here, you can setup the security level and administrator of your machine.
 
 
-The Security Administrator is the one who will receive security alerts if the
-'Security Alerts' option is set. It can be a username or an email.
+The '<span weight=\"bold\">Security Administrator</span>' is the one who will receive security alerts if the
+'<span weight=\"bold\">Security Alerts</span>' option is set. It can be a username or an email.
 
 
-The Security Level menu allows you to select one of the six preconfigured security levels
-provided with msec. These levels range from poor security and ease of use, to
-paranoid config, suitable for very sensitive server applications:
+The '<span weight=\"bold\">Security Level</span>' menu allows you to select one of the six preconfigured security levels
+provided with msec. These levels range from '<span weight=\"bold\">poor</span>' security and ease of use, to
+'<span weight=\"bold\">paranoid</span>' config, suitable for very sensitive server applications:
 
 
 <span foreground=\"royalblue3\">Poor</span>: This is a totally unsafe but very
