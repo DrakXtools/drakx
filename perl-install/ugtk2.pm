@@ -471,8 +471,8 @@ sub create_packtable {
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
     my $wizard_buttons = $::isWizard && !$w->{pop_it};
-    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? N("<- Previous") : 'gtk-cancel';
-    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : 'gtk-ok';
+    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? 'gtk-go-back' : 'gtk-cancel';
+    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : 'gtk-go-forward') : 'gtk-ok';
     my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new_from_stock($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new_from_stock($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new_from_stock('gtk-cancel'), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
