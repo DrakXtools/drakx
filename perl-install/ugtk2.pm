@@ -1113,7 +1113,7 @@ sub ask_browse_tree_info_given_widgets {
 	my ($iter, $state) = @_;
 	$state eq 'XXX' and return;
 	$pix{$state} ||= gtkcreate_pixbuf($state);
-	$w->{tree_model}->set($iter, [ 1 => $pix{$state} ]);
+	$w->{tree_model}->set($iter, 1 => $pix{$state});
     };
     my $set_node_state_tree; $set_node_state_tree = sub {
 	my ($iter, $state) = @_;
@@ -1129,7 +1129,7 @@ sub ask_browse_tree_info_given_widgets {
 		my $new_state = @list == 1 ? $list[0] : 'semiselected';
 		$node_state{$parent_str} ne $new_state and $set_node_state_tree->($parent, $new_state);
 	    }
-	    $w->{tree_model}->set($iter, [ 1 => $pix{$state} ]);
+	    $w->{tree_model}->set($iter, 1 => $pix{$state});
 	    $node_state{$iter_str} = $state;  #- cache for efficiency
 	}
     };
