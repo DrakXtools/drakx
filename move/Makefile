@@ -15,6 +15,8 @@ build:
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" make init stage1-network stage1-cdrom init-move
 
 install: build
+	while [ -e $(DEST_LIVETREE)/lock ]; do echo -e "\t*** sleeping because of lock... ***\n"; sleep 1; done
+	sudo touch $(DEST_LIVETREE)/lock
 	 #- todo: make_boot_img alike to create boot volume from ../mdk-stage1/stage1-cdrom (isolinux mandatory since stock kernel is so big)
 	sudo cp -f $(STAGE1)/init-move $(DEST_LIVETREE)/sbin/init
 
@@ -38,3 +40,4 @@ install: build
 
 	grep ChangeLog $(INSTALL)/CVS/Entries > /tmp/version
 	sudo cp -f /tmp/version $(DEST_LIVETREE)/usr/share/VERSION
+	sudo rm -f $(DEST_LIVETREE)/lock
