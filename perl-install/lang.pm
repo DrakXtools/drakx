@@ -552,7 +552,7 @@ my %charset2pango_font = (
   'ksc5601' =>    [ "baekmuk_gulim_h_14.pcf" ],
   'gb2312' =>     [ "gb16fs.pcf" ],
   'Big5' =>       [ "taipei16.pcf" ],
-  'jisx0208' =>   [ "12x13ja.pcf",     "Sans" ],
+  'jisx0208' =>   [ "12x13ja.pcf",     "Nimbus Sans L" ],
   'tis620' =>     [ "norasi_n.ttf",    "Norasi" ],
   'tscii' =>      [ "tscava.ttf",      "TSC_Avarangal" ],
   'utf_vi' =>     [ "cu12.pcf",        "ClearlyU" ],
@@ -570,7 +570,7 @@ my %charset2pango_font = (
 sub charset2pango_font {
     my ($charset) = @_;
     
-    $charset2pango_font{exists $charset2pango_font{$charset} ? $charset : 'default'}->[1];
+    $charset2pango_font{exists $charset2pango_font{$charset} ? $charset : 'default'}[1];
 }
 
 sub lang2pango_font {
