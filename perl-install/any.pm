@@ -445,7 +445,7 @@ sub pppConfig {
     $modem or return;
 
     if ($modem->{device} ne "/dev/modem") {
-	devfssymlinkf($modem->{device}, 'modem', $prefix) or log::l("creation of $prefix/dev/modem failed")
+	devfssymlinkf($modem, 'modem', $prefix) or log::l("creation of $prefix/dev/modem failed")
     }
     $in->do_pkgs->install('ppp') if !$::testing;
 
@@ -943,7 +943,8 @@ sub report_bug {
 }
 
 sub devfssymlinkf {
-    my ($if, $of, $prefix) = @_;
+    my ($o_if, $of, $prefix) = @_;
+    my $if = $o_if->{devfs_device} || $o_if->{device};
     symlinkf($if, "$prefix/dev/$of");
 
     output_p("$prefix/etc/devfs/conf.d/$of.conf", 
@@ -1138,10 +1139,10 @@ sub config_dvd {
 	log::l("configuring DVD");
 	#- create /dev/dvd symlink
 	each_index {
-	    devfssymlinkf($_->{device}, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
+	    devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
 	} @dvds;
 	if (my $raw_dev = alloc_raw_device($prefix, 'dvd')) {
-	    devfssymlinkf($raw_dev, 'rdvd', $prefix);
+	    devfssymlinkf({ device => $raw_dev }, 'rdvd', $prefix);
 	}	
     }
 }
