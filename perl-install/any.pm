@@ -100,11 +100,6 @@ sub add_users {
     }
 }
 
-sub enableShadow() {
-    run_program::rooted($::prefix, "pwconv")  or log::l("pwconv failed");
-    run_program::rooted($::prefix, "grpconv") or log::l("grpconv failed");
-}
-
 sub hdInstallPath() {
     my $tail = first(readlink("/tmp/image") =~ m|^(?:/tmp/)?hdimage/*(.*)|);
     my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);

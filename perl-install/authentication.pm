@@ -186,7 +186,7 @@ sub set {
 
     my $when_network_is_up = $o_when_network_is_up || sub { my ($f) = @_; $f->() };
 
-    any::enableShadow() if $authentication->{shadow};    
+    enable_shadow() if $authentication->{shadow};    
 
     my $kind = authentication::to_kind($authentication);
 
@@ -611,14 +611,18 @@ sub query_srv_names {
     map { $_->target } $query->answer;
 }
 
-sub crypt {
-    my ($password, $md5) = @_;
-    crypt($password, $md5 ? '$1$' . salt(8) : salt(2));
+sub enable_shadow() {
+    run_program::rooted($::prefix, "pwconv")  or log::l("pwconv failed");
+    run_program::rooted($::prefix, "grpconv") or log::l("grpconv failed");
 }
 
 sub user_crypted_passwd {
     my ($u, $isMD5) = @_;
-    $u->{password} ? &crypt($u->{password}, $isMD5) : $u->{pw} || '';
+    if ($u->{password}) {
+	crypt($u->{password}, $isMD5 ? '$1$' . salt(8) : salt(2));
+    } else {
+	$u->{pw} || '';
+    }
 }
 
 sub set_root_passwd {
