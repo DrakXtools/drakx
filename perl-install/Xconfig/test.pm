@@ -133,10 +133,17 @@ sub test {
             1;
 	});
 
-        my $background = "/usr/share/mdk/xfdrake/xfdrake-test-card.jpg";
-        my $qiv = "/usr/bin/qiv";
-        run_program::rooted($::prefix, $qiv, "-y", $background)
-            if -r "$::prefix/$background" && -x "$::prefix/$qiv";
+        eval {  #- eval it so that missing pixmap will not break the test completely
+            my $root = gtkroot();
+            my $gc = Gtk2::Gdk::GC->new($root);
+            my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file("/usr/share/mdk/xfdrake/xfdrake-test-card.jpg");
+            my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
+            my $pixmap = Gtk2::Gdk::Pixmap->new($root, $w, $h, $root->get_depth);
+            $pixbuf->render_to_drawable($pixmap, $gc, 0, 0, 0, 0, $w, $h, 'none', 0, 0);
+            $root->set_back_pixmap($pixmap, 0);
+            $root->clear;
+            $gc->unref;
+        };
 
         my $in = interactive::gtk->new;
 	$in->exit($in->ask_yesorno('', [ N("Is this the correct setting?"), $text ], 0) ? 0 : 222);
