@@ -698,7 +698,9 @@ sub automatic_xconf {
 
     modules::load_category('various/agpgart'); 
 
-    my ($Driver) = cat_('/etc/X11/XF86Config-4') =~ /Section "Device".*Driver\s*"(.*?)"/s;
+    my $file = '/etc/X11/XF86Config';
+    $file = "$file-4" if -e "$file-4";
+    my ($Driver) = cat_($file) =~ /Section "Device".*Driver\s*"(.*?)"/s;
     if ($Driver eq 'nvidia') {
         modules::load('nvidia');
 	lomount_clp('nvidia', '/usr/lib/libGLcore.so.1');
