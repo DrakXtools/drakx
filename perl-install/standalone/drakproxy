@@ -34,7 +34,7 @@ $::Wizard_title = _("Proxy handling");
 
 my $in = 'interactive'->vnew('su', 'default');
 
-if ($::isWizard || ($::isEmbedded && ref($in) =~ /gtk/)) {
+if ($::isWizard || ($::isEmbedded && $in->isa('interactive_gtk'))) {
     proxy::main('', $in);
     $in->exit(0);
 }
@@ -67,6 +67,9 @@ Gtk->exit(0);
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.8  2001/10/30 20:11:31  damien
+#- corrected ref($in) =~ /gtk/
+#-
 #- Revision 1.7  2001/08/09 09:35:37  gc
 #- use vnew the right way everywhere
 #-

@@ -94,7 +94,7 @@ sub new {
 	    $::WizardWindow->show_all;
 	    flush();
 	}
-	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, {'fill', 'expand'}, {'fill', 'expand'}, 0, 0);
+	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
     }
 
     $::isEmbedded && !$my_gtk::pop_it or return $o;
