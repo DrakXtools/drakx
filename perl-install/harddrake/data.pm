@@ -6,7 +6,7 @@ use MDK::Common;
 use class_discard;
 
 our (@ISA, @EXPORT_OK) = (qw(Exporter), (qw(version tree)));
-our ($version, $sbindir, $bindir) = ("1.1.7", "/usr/sbin", "/usr/bin");
+our ($version, $sbindir, $bindir) = ("1.1.8", "/usr/sbin", "/usr/bin");
 
 my @devices = detect_devices::probeall(1);
 
