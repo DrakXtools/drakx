@@ -995,6 +995,7 @@ risk!
     #- wait for remainging processes.
     foreach (@{$o->{waitpids}}) {
 	waitpid $_, 0;
+	log::l("pid $_ returned $?");
     }
     install_any::unlockCdrom();
     install_any::log_sizes($o);
