@@ -11,17 +11,8 @@ my %hosts;
 1;
 
 sub fromEnv() {
-    # using URLPREFIX to find out information if kickstart
-    ($ENV{LOGIN}, $ENV{PASSWORD}, $ENV{HOST}, $ENV{PREFIX}) =
-      $ENV{URLPREFIX} =~ m|
-       ://
-       (?: ([^:]*)              # login
-           (?: :([^@]*))?       # password
-       @)?
-       ([^/]*)                	# host
-       /?(.*)			# prefix
-      |x unless $ENV{HOST};
-    
+    #- now URLPREFIX is generated from what is given by mdk-stage1 which is only this 4 variables.
+    $ENV{URLPREFIX} = "ftp://$ENV{LOGIN}" . ($ENV{PASSWORD} && ":$ENV{PASSWORD}") . '@' . "$ENV{HOST}/$ENV{PREFIX}";
     @ENV{qw(HOST PREFIX LOGIN PASSWORD)};
 }
 
