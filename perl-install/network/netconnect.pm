@@ -867,6 +867,27 @@ notation (for example, 1.2.3.4).")),
                              { label => N("Sensitivity threshold"), val => \$ethntf->{WIRELESS_SENS} },
                              { label => N("Bitrate (in b/s)"), val => \$ethntf->{WIRELESS_RATE} },
                              { label => N("Encryption key"), val => \$ethntf->{WIRELESS_ENC_KEY} },
+                            ],
+                    },
+                    complete => sub {
+                        if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+                            $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
+                            return 1, 6;
+                        }
+                        if ($ethntf->{WIRELESS_RATE} && $ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+                            $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
+                            return 1, 8;
+                        }
+                    },
+                    next => "wireless2",
+                   },
+
+
+                   wireless2 =>
+                   {
+                    name => N("Please enter the wireless parameters for this card:"),
+                    data => sub {
+                        [
                              { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS},
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
@@ -903,17 +924,7 @@ those interface specific commands and their effect.
 
 See iwpriv(8) man page for further information."),
                              }
-                            ],
-                    },
-                    complete => sub {
-                        if ($ethntf->{WIRELESS_FREQ} && $ethntf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn(N("Error"), N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."));
-                            return 1, 6;
-                        }
-                        if ($ethntf->{WIRELESS_RATE} && $ethntf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-                            $in->ask_warn(N("Error"), N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."));
-                            return 1, 8;
-                        }
+                         ]
                     },
                     post => sub {
                         # untranslate parameters
