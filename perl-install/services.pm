@@ -97,7 +97,7 @@ sub services {
 sub ask {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
-    ref($in) !~ /gtk/ and return $in->ask_many_from_list("drakxservices",
+    ref($in) !~ /gtk/ || $::isInstall and return $in->ask_many_from_list("drakxservices",
 			    _("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
@@ -151,11 +151,11 @@ sub ask {
                                         }}), "@$on_services" =~ /$service/ )),
 		  map { my $a = $_;
                       gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
-                          clicked => sub { my $c = "service $service " . lc($a) . " 2>&1"; local $_=$strip->(`$c`); s/\033\[[^mG]*[mG]//g;
+                          clicked => sub { my $c = "service $service " . (lc($a) eq "start" ? "restart" : lc($a)) . " 2>&1"; local $_=$strip->(`$c`); s/\033\[[^mG]*[mG]//g;
                                            ($started, $action) = $update_service->($service, $l);
                                            $display->($_);
                                          }
-                      )) } ("Start", "Stop","Restart")
+                      )) } ("Start", "Stop")
 		]
 	    }
             @$l)), 500, 400),
