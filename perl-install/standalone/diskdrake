@@ -43,20 +43,22 @@ if ($::isEmbedded) {
   print "mcc pid\t$::CCPID\n";
 }
 
-my %options = map { /-?-?(.*)/ => 1 } @ARGV;
+my %options = map { /(.*?)=(.*)/ ? ($1,$2) : ($_,'') } map { if_(/--?(.*)/, $1) } @ARGV;
 $::expert = delete $options{expert};
 $::testing = delete $options{testing};
 
 my @types = qw(hd nfs smb removable fileshare);
-my $type = 'hd';
+my ($type, $para) = ('hd', '');
 foreach (@types) {
-    if (delete $options{$_}) {
+    if (exists $options{$_}) {
+        $para = delete $options{$_};
 	$type = $_;
 	last;
     }
 }
 %options and die "usage: diskdrake [--expert] [--testing] [--{" . join(",", @types) . "}]\n";
 
+$type ne 'removable' || $para or die "usage: diskdrake --removable=<dev>\n";
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
@@ -101,7 +103,9 @@ if ($type eq 'hd') {
     diskdrake::interactive::main($in, $all_hds);
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
-    diskdrake::removable::main($in, $all_hds);
+    $para =~ s|^/dev/||;
+    my ($raw_hd) = grep { $para eq $_->{device} } @{$all_hds->{raw_hds}} or die "unknown removable $para\n";
+    diskdrake::removable::main($in, $all_hds, $raw_hd);
 } else {
     $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive_gtk');
     require diskdrake::smbnfs_gtk;
