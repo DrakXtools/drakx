@@ -239,23 +239,28 @@ sub set_synaptics {
 	my $synaptics_mouse = $_;
         my $identifier = "SynapticsMouse" . ($::i + 1);
         my $pointer_type = $synaptics_mouse->{Primary} ? "CorePointer" : "AlwaysCore";
+        my $opt = sub {
+            my ($name, $value) = @_;
+            ($name => { val => $value, Option => 1 });
+        };
         my $h = { Identifier => { val => $identifier },
                   Driver => { val => "synaptics" },
-                  Device => { val => $synaptics_mouse->{Device}, Option => 1 },
-                  Protocol => { val => $synaptics_mouse->{Protocol}, Option => 1 },
-                  LeftEdge => { val => 1700, Option => 1 },
-                  RightEdge => { val => 5300, Option => 1 },
-                  TopEdge => { val => 1700, Option => 1 },
-                  BottomEdge => { val => 4200, Option => 1 },
-                  FingerLow => { val => 25, Option => 1 },
-                  FingerHigh => { val => 30, Option => 1 },
-                  MaxTapTime => { val => 180, Option => 1 },
-                  MaxTapMove => { val => 220, Option => 1 },
-                  VertScrollDelta => { val => 100, Option => 1 },
-                  MinSpeed => { val => '0.06', Option => 1 },
-                  MaxSpeed => { val => '0.12', Option => 1 },
-                  AccelFactor => { val => '0.0010', Option => 1 },
-                  SHMConfig => { val => "on", Option => 1 },
+                  #- from /usr/share/doc/synaptics-0.14.0/INSTALL
+                  $opt->("Device", $synaptics_mouse->{Device}),
+                  $opt->("Protocol", $synaptics_mouse->{Protocol}),
+                  $opt->("LeftEdge", 1700),
+                  $opt->("RightEdge", 5300),
+                  $opt->("TopEdge", 1700),
+                  $opt->("BottomEdge", 4200),
+                  $opt->("FingerLow", 25),
+                  $opt->("FingerHigh", 30),
+                  $opt->("MaxTapTime", 180),
+                  $opt->("MaxTapMove", 220),
+                  $opt->("VertScrollDelta", 100),
+                  $opt->("MinSpeed", '0.06'),
+                  $opt->("MaxSpeed", '0.12'),
+                  $opt->("AccelFactor", '0.0010'),
+                  $opt->("SHMConfig", "on"),
                 };
         $raw_X->add_Section('InputDevice', $h);
         push @$layout, { val => qq("$identifier" "$pointer_type") };
