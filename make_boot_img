@@ -482,7 +482,7 @@ sub isolinux {
 	_ "cp images/all.rdz-$_ isolinux/alt$i/all.rdz";
 	$i++;
     }
-    _ "cp /usr/lib/isolinux$debug.bin isolinux/isolinux.bin";
+    _ "cp /usr/lib/syslinux/isolinux$debug.bin isolinux/isolinux.bin";
     output "isolinux/isolinux.cfg", "
 default linux
 prompt 1
