@@ -18,6 +18,7 @@ action "Setting hostname rescue" hostname rescue
 echo rescue > /etc/HOSTNAME
 
 # Loads common modules ( no kerneld :( )
+echo "Loading additional modules..."
 load() { modprobe $* 2>/dev/null; }
 load ide-mod
 load ide-probe
@@ -37,8 +38,7 @@ grep -q oem /proc/cmdline && exec /etc/oem -f
 /sbin/ifconfig lo 127.0.0.1 netmask 255.0.0.0
 /sbin/route add 127.0.0.1 lo
 
-grep -q noguessmounts /proc/cmdline
-if [ $? != 0 ]; then
+if ! grep -q noguessmounts /proc/cmdline; then
     echo "I will try now to guess your mountpoints;"
     echo -e "If any problems, reboot with \\033[1;37mrescue noguessmounts\\033[0;39m to disable this."
     echo ""
