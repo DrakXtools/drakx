@@ -477,7 +477,7 @@ int mandrake_move_post(void)
                 return RETURN_ERROR;
 
         if (handle_clp(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION "/live_tree/etc/fstab",
-                       IMAGE_LOCATION "/live_tree", IMAGE_LOCATION_REAL,
+                       IMAGE_LOCATION "/live_tree", STAGE2_LOCATION,
                        &main__real_is_symlink_to_raw, NULL) != RETURN_OK)
                 return RETURN_ERROR;
        
@@ -493,7 +493,7 @@ int mandrake_move_post(void)
                 if (scall(symlink(STAGE2_LOCATION_ROOTED "/usr", SLASH_LOCATION "/usr"), "symlink"))
                         return RETURN_ERROR;
 
-        if (create_initial_fs(IMAGE_LOCATION_REAL "/move/symlinks", IMAGE_LOCATION_REAL "/move/devices") != RETURN_OK)
+        if (create_initial_fs(STAGE2_LOCATION "/move/symlinks", STAGE2_LOCATION "/move/devices") != RETURN_OK)
                 return RETURN_ERROR;
 
         if (boot__real_is_symlink_to_raw) {
@@ -518,9 +518,9 @@ int mandrake_move_post(void)
         }
 
         if (main__real_is_symlink_to_raw) {
-                if (scall(unlink(IMAGE_LOCATION_REAL), "unlink"))
+                if (scall(unlink(STAGE2_LOCATION), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
+                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree", STAGE2_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 	return RETURN_OK;
