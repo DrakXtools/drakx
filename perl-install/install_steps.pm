@@ -118,11 +118,34 @@ sub setupSCSI {
     modules::load_thiskind('scsi');
 }
 #------------------------------------------------------------------------------
-sub doPartitionDisks($$) {
+sub doPartitionDisks {
     my ($o, $hds) = @_;
     return if $::testing;
-    partition_table::write($_) foreach @$hds;
+
+    if ($o->{lnx4win}) {
+	my @l = sort { $a->{device_windobe} cmp $b->{device_windobe} } 
+	        grep { isFat($_) } fsedit::get_fstab(@{$o->{hds}}) or die "wow, lnx4win with no fat partitions! hard times :(";
+	my $real_part = @l > 1 && $o->doPartitionDisksLnx4winDev(\@l) || $l[0];
+
+	my $handle = loopback::inspect($real_part) or die _("This partition can't be used for loopback");
+	my $size = loopback::getFree($handle->{dir}, $real_part); 
+
+	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
+	my $min_freewin = 100 << 11;
+
+	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };	
+	my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
+	$root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
+
+	$o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size});
+	    
+	push @{$real_part->{loopback}}, $root, $swap;	
+    } else {
+	partition_table::write($_) foreach @$hds;
+    }
 }
+sub doPartitionDisksLnx4winDev {}
+sub doPartitionDisksLnx4winSize {}
 
 #------------------------------------------------------------------------------
 
@@ -274,6 +297,9 @@ Consoles 1,3,4,7 may also contain interesting information";
     #- make the mdk fonts last in available fonts for buggy kde
     run_program::rooted($o->{prefix}, "chkfontpath", "--remove", "/usr/X11R6/lib/X11/fonts/mdk");
     run_program::rooted($o->{prefix}, "chkfontpath", "--add", "/usr/X11R6/lib/X11/fonts/mdk");
+
+    #- call update-menus at the end of package installation
+    run_program::rooted($o->{prefix}, "update-menus");
 
     #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
@@ -576,7 +602,7 @@ sub addUser($) {
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
     }
     require any;
-    any::addUsers($o->{prefix}, map { $_->{name} } @l);
+    any::addUsers($o->{prefix}, @l);
 }
 
 #------------------------------------------------------------------------------
@@ -668,8 +694,11 @@ sub setupBootloader($) {
 	return if $::testing;
 	my $b = $o->{bootloader};
 	$b->{boot} or $o->ask_warn('', "Can't install aboot, not a bsd disklabel"), return;
-	
-	run_program::rooted($o->{prefix}, "swriteboot", $b->{boot}, "/boot/bootlx");
+		
+	run_program::rooted($o->{prefix}, "swriteboot", $b->{boot}, "/boot/bootlx") or do {
+	    cdie "swriteboot failed";
+	    run_program::rooted($o->{prefix}, "swriteboot", "-f1", $b->{boot}, "/boot/bootlx");
+	};
 	run_program::rooted($o->{prefix}, "abootconf", $b->{boot}, $b->{part_nb});
  
 	output "$o->{prefix}/etc/aboot.conf", 
@@ -677,6 +706,9 @@ sub setupBootloader($) {
 	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
+    } elsif ($o->{lnx4win}) {
+	local $o->{bootloader}{boot} = first(grep { loopback::carryRootLoopback($_) } @{$o->{fstab}});
+        eval { lilo::install_loadlin($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
     } else {
         eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
 	my $err = $@;

@@ -92,10 +92,7 @@ sub new($$) {
 		my $prog = /Xsun/ ? $_ : "XF86_$_";
 		unless (-x "$dir/XF86_$_") {
 		    unlink $_ foreach glob_("$dir/X*");
-		    local *F; open F, ">$dir/$prog" or die "failed to write server: $!";
-		    local $/ = \ (16 * 1024);
-		    my $f = install_any::getFile("$dir/$prog") or next;
-		    syswrite F, $_ foreach <$f>;
+		    install_any::getAndSaveFile("$dir/$prog", "$dir/$prog") or die "failed to get server: $!";
 		    chmod 0755, "$dir/$prog";
 		}
 		if (/FB/) {
@@ -187,9 +184,16 @@ sub selectMouse {
 }
 
 #------------------------------------------------------------------------------
-sub doPartitionDisks($$) {
+sub doPartitionDisks {
     my ($o, $hds, $raid) = @_;
 
+    if ($o->{lnx4win}) {
+	eval { install_steps::doPartitionDisks(@_) };
+	$@ =~ /no fat/ or return;
+
+	$o->ask_warn('', _("You don't have any windows partitions!"));
+	delete $o->{lnx4win};
+    }
     if ($::beginner && fsedit::is_one_big_fat($hds)) {
 	#- wizard
 	my $min_linux = 600 << 11;
@@ -246,9 +250,54 @@ When sure, press Ok."))) {
     }
 }
 
+sub doPartitionDisksLnx4winDev {
+    my ($o, $l) = @_;
+    return if $::beginner;
+
+    my ($dev) = $o->ask_from_list('', _("Which partition do you want to use to put Linux4Win?"),
+				  [ map { sprintf "%s (%s) [%dMB]", $_->{device_windobe}, $_->{device}, $_->{size} >> 11 } @$l ]
+				 ) =~ /\((\S+)\)/;
+    $_->{device} eq $dev and return $_ foreach @$l;
+}
+
+sub doPartitionDisksLnx4winSize {
+    my ($o, $root_size, $swap_size, $max_root_size, $max_swap_size) = @_;
+    return if $::beginner;
+    
+    my $w = my_gtk->new('');
+
+    my $root_adj = create_adjustment($max_root_size >> 11, 1, $$root_size >> 11);
+    my $swap_adj = create_adjustment($max_swap_size >> 11, 1, $$swap_size >> 11);
+    my $root_spin = new Gtk::SpinButton($root_adj, 0, 0);
+    my $swap_spin = new Gtk::SpinButton($swap_adj, 0, 0);
+
+    gtkadd($w->{window},
+	  gtkpack(new Gtk::VBox(0,20),
+_("Choose the sizes"),
+		 create_packtable({},
+		  [ _("Root partition size in MB: "), $root_spin ],
+		  [ undef, new Gtk::HScrollbar($root_adj) ],
+		  [ _("Swap partition size in MB: "), $swap_spin ],
+		  [ undef, new Gtk::HScrollbar($swap_adj) ],
+		 ),
+		 create_okcancel($w)
+		 ),
+    );
+    $w->{ok}->grab_focus;
+    $w->main(sub {
+		 $$root_size = $root_spin->get_value_as_int << 11;
+		 $$swap_size = $swap_spin->get_value_as_int << 11;
+	     });	     
+    
+}
+
 #------------------------------------------------------------------------------
 sub chooseSizeToInstall {
     my ($o, $packages, $min_size, $max_size) = @_;
+
+    #- don't ask anything if the difference between min and max is too small
+    return $max_size if $min_size && $max_size / $min_size < 1.01;
+
     my ($min, $max) = map { pkgs::correctSize($_ / sqr(1024)) } $min_size, $max_size;
     log::l("choosing size to install between $min and $max (really between $min_size and $max_size)");
     my $w = my_gtk->new('');
@@ -260,7 +309,7 @@ sub chooseSizeToInstall {
 _("Now that you've selected desired groups, please choose 
 how many packages you want, ranging from minimal to full 
 installation of each selected groups.") .
-		  ($::expert ? "\n" . _("You will be able to choose more precisely in next step") : ''),
+		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose more precisely in next step") : ''),
 		 create_packtable({ col_spacings => 10 },
 				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
 				  [ undef, new Gtk::HScrollbar($adj) ],

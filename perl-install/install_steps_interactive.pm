@@ -212,7 +212,9 @@ sub choosePartitionsToFormat($$) {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
+    my @l = grep { !$_->{isFormatted} && $_->{mntpoint} && !($::beginner && isSwap($_)) &&
+		    (!isFat($_) || $::expert || $_->{toFormat})
+	       } @$fstab;
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
@@ -656,7 +658,7 @@ sub addUser {
     my ($o, $clicked) = @_;
     my $u = $o->{user} ||= {};
     if ($::beginner || $o->{security} < 1) {
-	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default" });
+	add2hash_($u, { name => "mandrake", password => "mandrake", realname => "default", icon => translate('automagic') });
 	$o->{users} ||= [ $u ];
     }
     $u->{password2} ||= $u->{password} ||= "";
@@ -875,7 +877,11 @@ sub setupBootloader {
     my ($o) = @_;
     if (arch() =~ /^alpha/) {
 	$o->ask_yesorno('', _("Do you want to use aboot?"), 1) or return;
-	$o->SUPER::setupBootloader;	
+	catch_cdie { $o->SUPER::setupBootloader } sub {
+	    $o->ask_yesorno('', 
+_("Error installing aboot, 
+try to force installation even if that destroys the first partition?"));
+	};
     } elsif (arch() =~ /^sparc/) {
 	&setupSILO;
     } else {
@@ -997,13 +1003,10 @@ sub generateAutoInstFloppy($) {
 
     my $image = $o->{pcmcia} ? "pcmcia" :
       ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
-	
-    if (my $fd = install_any::getFile("$image.img")) {
-	 my $w = $o->wait_message('', _("Creating auto install floppy"));
-	 local *OUT;
-	 open OUT, ">$dev" or log::l("failed to write $dev"), return;
-	 local $/ = \ (16 * 1024);
-	 print OUT foreach <$fd>;
+
+    {
+	my $w = $o->wait_message('', _("Creating auto install floppy"));
+	install_any::getAndSaveFile("$image.img", $dev) or log::l("failed to write $dev"), return;
     }
     fs::mount($dev, "/floppy", "vfat", 0);
     substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";

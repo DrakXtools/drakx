@@ -7,7 +7,7 @@ use Data::Dumper;
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
+    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isReiserfs isSwap isDos isWin isFat isPrimary isNfs isSupermount isRAID isHFS isNT isMountableRW isApplePartMap isLoopback) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -204,6 +204,7 @@ sub isExtended($) { (arch() !~ /^sparc/ && $_[0]{type} == 5) || $_[0]{type} == 0
 sub isRAID($) { $_[0]{type} == 0xfd }
 sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
 sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
+sub isReiserfs($) { $type2fs{$_[0]{type}} eq 'reiserfs' }
 sub isDos($) { $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
 sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
 sub isFat($) { isDos($_[0]) || isWin($_[0]) }

@@ -93,7 +93,7 @@ sub ask_from_list_ {
 
 sub ask_from_list {
     my ($o, $title, $message, $l, $def) = @_;
-    @$l == 0 and die '';
+    @$l == 0 and die 'ask_from_list: empty list';
     @$l == 1 and return $l->[0];
     goto &ask_from_list2;
 }

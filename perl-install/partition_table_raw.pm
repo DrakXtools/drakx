@@ -11,6 +11,7 @@ my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
     [ 'lilo', 0x2,  "LILO" ],
     [ 'lilo', 0x6,  "LILO" ],
+    [ 'grub', 0x17d, "stage1 \0" ],
     [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
     [ 'pqmagic', 0xef, "PQV" ],
     [ 'BootStar', 0x130, "BootStar:" ],
@@ -18,7 +19,6 @@ my @MBR_signatures = (
     [ 'system_commander', 0x1ad, "SYSCMNDRSYS" ],
     [ 'Be Os', 0x24, 'Boot Manager' ],
     [ 'TimO', 0, 'IBM Thinkpad hibernation partition' ],
-    [ 'os2', 0x1c2, "\xA" ],
     [ 'dos', 0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
     [ 'dos', 0xa0, "\x00\xB4\x08\xCD\x13\x72" ], #- nt2k's
     [ 'dos', 0x60, "\xBB\x00\x7C\xB8\x01\x02\x57\xCD\x13\x5F\x73\x0C\x33\xC0\xCD\x13" ], #- nt's
@@ -27,6 +27,7 @@ my @MBR_signatures = (
     [ 'freebsd', 0x160, "\x6A\x10\x89\xE6\x48\x80\xCC\x40\xCD\x13" ],
     [ 'dummy', 0xAC, "\x0E\xB3\x07\x56\xCD\x10\x5E\xEB" ], #- caldera?
     [ 'ranish', 0x100, "\x6A\x10\xB4\x42\x8B\xF4\xCD\x13\x8B\xE5\x73" ],
+    [ 'os2', 0x1c2, "\xA" ],
 );
 
 sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }

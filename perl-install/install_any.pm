@@ -58,7 +58,7 @@ sub changeMedium($$) {
 }
 sub relGetFile($) {
     local $_ = $_[0];
-    m|^Mandrake/| and return $_;
+    m,^(Mandrake|lnx4win)/, and return $_;
     /\.img$/ and return "images/$_";
     my $dir = m|/| ? "mdkinst" : /^(?:compss|compssList|compssUsers|filelist|depslist.*|hdlist.*)$/ ?
       "base/": "RPMS$asked_medium/";
@@ -127,12 +127,15 @@ sub getFile {
     }
     goto &getFile;
 }
-sub rewindGetFile() {
-    if ($::o->{method} && $::o->{method} eq "ftp") {
-	require ftp;
-	ftp::rewindGetFile(); #- make sure to reopen connection.
-    }
+sub getAndSaveFile {
+    my ($file, $local) = @_;
+    local *F; open F, ">$local" or return;
+    local $/ = \ (16 * 1024);
+    my $f = getFile($file) or return;
+    syswrite F, $_ foreach <$f>;
+    1;
 }
+
 
 #-######################################################################################
 #- Post installation RPMS from cdrom only, functions
@@ -457,25 +460,6 @@ sub crypt($) {
          crypt    ($password, salt(2));
 }
 
-sub lnx4win_preinstall {
-    require swap;
-    swap::swapon("/dos/lnx4win/swapfile"); #- allow lnx4win to run with a little more memory.
-}
-sub lnx4win_postinstall {
-    my ($prefix) = @_;
-    my $dir = "/dos/lnx4win";
-    my $kernel = "$dir/vmlinuz";
-    rename $kernel, "$kernel.old";
-    commands::dd("if=$prefix/boot/vmlinuz", "of=$kernel");
-    run_program::run("rdev", $kernel, "/dev/loop7");
-
-    unlink "$dir/size.txt";
-    unlink "$dir/swapsize.txt";
-
-    mkdir "$prefix/initrd", 0755;
-    symlinkf "/initrd/dos", "$prefix/mnt/dos";
-}
-
 sub killCardServices {
     my $pid = chop_(cat_("/tmp/cardmgr.pid"));
     $pid and kill(15, $pid); #- send SIGTERM
@@ -624,10 +608,9 @@ sub fsck_option() {
 
 sub install_urpmi {
     my ($prefix, $method, $mediums) = @_;
-    {
-	local *F = getFile("depslist");
-	output("$prefix/var/lib/urpmi/depslist", <F>);
-    }
+
+    getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
+
     my @cfg = map_index {
 	my $name = $_->{fakemedium};
 

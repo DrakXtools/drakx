@@ -280,11 +280,6 @@ sub selectInstallClass {
 #------------------------------------------------------------------------------
 sub partitionDisks {
     return install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
-    return
-      $o->{fstab} = [
-	{ device => "loop7", type => 0x83, size => 2048 * cat_('/dos/lnx4win/size.txt'), mntpoint => "/", isFormatted => 1, isMounted => 1 },
-	{ device => "/initrd/dos/lnx4win/swapfile", type => 0x82, mntpoint => "swap", isFormatted => 1, isMounted => 1 },
-      ] if $o->{lnx4win};
 
     ($o->{hd_dev}) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage|;
 
@@ -320,7 +315,7 @@ Then choose action ``Mount point'' and set it to `/'");
 }
 
 sub formatPartitions {
-    unless ($o->{lnx4win} || $o->{isUpgrade}) {
+    unless ($o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
 	$o->formatMountPartitions($o->{fstab}) unless $::testing;
 	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
@@ -332,6 +327,11 @@ sub formatPartitions {
     mkdir "$o->{prefix}/$_", 0700 foreach qw(root);
 
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
+
+    my $d = "/initrd/loopfs/lnx4win";
+    if (-d $d) {
+	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe);
+    }
 
     #-noatime option for ext2 fs on laptops (do not wake up the hd)
     #-	 Do  not  update  inode  access times on this
@@ -454,13 +454,12 @@ sub addUser {
 sub createBootdisk {
     modules::write_conf("$o->{prefix}/etc/conf.modules");
 
-    return if $o->{lnx4win};
     $o->createBootdisk($_[1] == 1);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    return if $o->{lnx4win} || $::g_auto_install;
+    return if $::g_auto_install;
 
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);
@@ -494,6 +493,7 @@ sub main {
 		       install_steps_auto_install::errorInStep();
 		   };
     $ENV{SHARE_PATH} ||= "/usr/share";
+    $ENV{DURING_INSTALL} = 1;
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
@@ -641,7 +641,6 @@ sub main {
     modules::read_already_loaded();
 
     eval { modules::load("af_packet") };
-    install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle
     my $clicked = 0;
@@ -677,7 +676,6 @@ sub main {
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules");
 
-    install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
 
     #- make sure failed upgrade will not hurt too much.

@@ -85,6 +85,12 @@ sub format_ext2($@) {
     run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
 
+sub format_reiserfs($@) {
+    my ($dev, @options) = @_;
+
+    run_program::run("mkreiserfs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
+}
+
 sub format_dos($@) {
     my ($dev, @options) = @_;
 
@@ -108,6 +114,8 @@ sub real_format_part {
     if (isExt2($part)) {
 	push @options, "-F" if isLoopback($part);
 	format_ext2($part->{device}, @options);
+    } elsif (isReiserfs($part)) {
+        format_reiserfs($part->{device}, @options);
     } elsif (isDos($part)) {
         format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
@@ -294,7 +302,7 @@ sub write($$$$) {
     my @to_add = (
        $useSupermount ?
        [ split ' ', "/mnt/floppy /mnt/floppy supermount fs=vfat,dev=/dev/$floppy 0 0" ] :
-       [ split ' ', '/dev/$floppy /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ],
+       [ split ' ', "/dev/$floppy /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0" ],
        [ split ' ', 'none /proc proc defaults 0 0' ],
        [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
        (map_index {

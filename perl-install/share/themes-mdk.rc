@@ -43,6 +43,84 @@ style "checkradiobutton" {
   }
 }
 
+style "button"
+{
+  bg[NORMAL] = "#909090"
+
+  engine "pixmap" 
+    {
+    image 
+      {
+        function        = FOCUS
+	recolorable     = TRUE
+	overlay_file    = "focus.png"
+	overlay_border  = { 4, 4, 4, 4 }
+	overlay_stretch = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	detail          = "buttondefault"
+	shadow          = IN
+	file            = "blueHeart-button_def.png"
+	border          = { 9, 9, 9, 9 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	shadow          = OUT
+	file            = "blueHeart-button1.png"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = PRELIGHT
+	shadow          = OUT
+	file            = "blueHeart-button2.png"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
+	shadow          = IN
+	file            = "blueHeart-button4.png"
+	border          = { 2, 2, 2, 2 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = SELECTED
+	shadow          = IN
+	file            = "blueHeart-button4.png"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = ACTIVE
+	shadow          = IN
+	file            = "blueHeart-button4.png"
+	border          = { 3, 3, 3, 3 }
+	stretch         = TRUE
+      }
+   }
+}
+
 style "window" 
 {
   engine "pixmap" {
@@ -85,8 +163,8 @@ style "entry"
 
 style "notebook"
 {
-  bg[NORMAL]      = { 0, 0, 1.0 }
-  bg[ACTIVE]      = { 0, 0, 0.67 }
+  bg[NORMAL]      = { 0.4, 0.4, 0.6 }
+  bg[ACTIVE]      = { 0.2, 0.2, 0.4 }
   fg[NORMAL]      = { 1.0, 1.0, 1.0 }
 }
 
@@ -106,6 +184,7 @@ style "background"
 
 style "steps"
 {
+  engine "pixmap" { image { function = FLAT_BOX } }
   bg[NORMAL] = { 0.4, 0.4, 0.6 }
   fg[NORMAL] = { 1.0, 1.0, 1.0 }
 }

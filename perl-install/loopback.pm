@@ -40,8 +40,8 @@ sub carryRootCreateSymlink {
 	#- do non-relative link for install, should be changed to relative link before rebooting
 	symlink "/initrd/loopfs", $mntpoint;
 
-	mkdir "/initrd/loopfs/boot", 0755;
-	symlink "/initrd/loopfs/boot", "$prefix/boot";
+	commands::mkdir_("-p", "/initrd/loopfs/lnx4win/boot");
+	symlink "/initrd/loopfs/lnx4win/boot", "$prefix/boot";
     }
     #- indicate kernel to keep initrd
     mkdir "$prefix/initrd", 0755;
@@ -63,18 +63,18 @@ sub create {
 
     eval { commands::mkdir_("-p", dirname($f)) };
 
-    log::l("creating loopback file $f");
-    
+    log::l("creating loopback file $f ($part->{size} sectors)");
+    unlink $f;
+
     local *F;
-    open F, ">$f" or die "failed to create loopback file";
-    for (my $nb = $part->{size}; $nb >= 0; $nb -= 8) { #- 8 * 512 = 4096 :)
-	print F "\0" x 4096;
-    }
+    sysopen F, $f, 2 | c::O_CREAT() or die "failed to create loopback file";
+    sysseek F, ($part->{size} << 9) - 1, 0 or die "failed to create loopback file";
+    syswrite F, "\0" or die "failed to create loopback file";
     $f;
 }
 
 sub inspect {
-    my ($part, $prefix) = @_;
+    my ($part, $prefix, $rw) = @_;
 
     isMountableRW($part) or return;
 
@@ -86,7 +86,7 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	fs::mount($part->{device}, $dir, type2fs($part->{type}), 'rdonly');
+	fs::mount($part->{device}, $dir, type2fs($part->{type}), !$rw);
     }
     my $h = before_leaving {
 	if (!$part->{isMounted} && $dir) {
