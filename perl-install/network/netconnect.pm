@@ -788,14 +788,14 @@ If you don't know, choose 'use PPPoE'"),
                         # blacklist bogus driver, enable ifplugd support else:
                         $find_lan_module->();
                         $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
-                        if ($ntf_name eq "sagem") {
-                            #- "fctStartAdsl -i" links ifcfg-ethX to ifcfg-sagem and echoes ethX
-                            #- it auto-detects dhcp/static modes thanks to encapsulation setting
-                            $ethntf = $intf->{$ntf_name} = { DEVICE => "`/usr/sbin/fctStartAdsl -i`", MII_NOT_SUPPORTED => "yes" };
-                            network::adsl::sagem_set_parameters($netc); #- FIXME: should be delayed
-                        }
                         # process static/dhcp ethernet devices:
                         if (exists($intf->{$ntf_name}) && member($adsl_type, qw(manual dhcp))) {
+                            if ($ntf_name eq "sagem") {
+                                #- "fctStartAdsl -i" builds ifcfg-ethX from ifcfg-sagem and echoes ethX
+                                #- it auto-detects dhcp/static modes thanks to encapsulation setting
+                                $ethntf = $intf->{sagem} = { DEVICE => "`/usr/sbin/fctStartAdsl -i`", MII_NOT_SUPPORTED => "yes" };
+                                network::adsl::sagem_set_parameters($netc); #- FIXME: should be delayed
+                            }
                             $ethntf->{TYPE} = "ADSL";
                             $auto_ip = $adsl_type eq 'dhcp';
                             return 'lan_intf';
