@@ -125,15 +125,6 @@ sub mkinitrd {
     -e "$::prefix/$initrd";
 }
 
-sub make_boot_splash {
-    my ($initrd, $vga) = @_;
-
-    if ($vga) {
-	add_boot_splash($initrd, $vga);
-    } else {
-	remove_boot_splash($initrd);
-    }
-}
 sub remove_boot_splash {
     my ($initrd) = @_;
     run_program::rooted($::prefix, '/usr/share/bootsplash/scripts/remove-boot-splash', $initrd);

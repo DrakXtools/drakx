@@ -150,7 +150,7 @@ sub remove_entry() {
 #-###############################################################################
 sub update_splash() {
     foreach (@{$bootloader->{entries}}) {
-	bootloader::make_boot_splash($_->{initrd}, $_->{vga}) if $_->{initrd};
+	bootloader::add_boot_splash($_->{initrd}, $_->{vga}) if $_->{initrd};
     }
     bootloader::action($bootloader, 'when_config_changed', $hds) if !$no_launch;
 }
