@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 22mdk
+Release: 23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,34 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-23mdk
+- drakbackup: (stew)
+  o another cron issue reported on Anthill
+  o fix broken sys, other restore
+- drakconnect:
+  o new drakconnect wizard:
+    * remaining issues: isdn and zeroconf config, bewan modem, isapnp
+      cards, X11 behavior on name change
+    * provider database for modem and adsl connections
+    * renewed steps
+    * show device name rather than ethX
+    * modem:
+      + handle CHAP/PAP
+      + enable to use dynamic ip/dns/gateway
+    * adsl:
+      + update for eagle package replacing adiusb
+      + detect eci modems and explain why we cannot handle them
+  o manage part: update (poulpy)
+- draksound: fix unwriten sound aliases when configuring not yet
+  configured cards (#6988)
+- printerdrake: kill stupid userdrake dependancy (gc)
+- ugtk2 / interactive layers:
+  o make trees and lists take all availlable space
+  o pack/align checkboxes to left
+  o rework window sizing: size all windows and add a scrollbar for the
+    whole window if needed (not just around advanced settings) (pixel)
+- misc fixes for 2.6.x kernels (gc, pixel & planel)
+
 * Tue Jan 20 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-22mdk
 - drakboot: add a warning telling to run lilo after modifying
   lilo.conf (#6924)
