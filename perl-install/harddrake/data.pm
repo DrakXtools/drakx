@@ -244,7 +244,7 @@ our @tree =
       string => N("Bridges and system controllers"),
       icon => "memory.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ && $_->{driver} ne 'nvnet' } @devices) },
+      detector => sub { f(grep { $_->{media_type} =~ /BRIDGE|MEMORY_RAM/ } @devices) },
       checked_on_boot => 0,
      },
 
