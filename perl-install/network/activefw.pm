@@ -105,6 +105,11 @@ sub set_interactive {
                     Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
 }
 
+sub get_reports {
+    my ($o) = @_;
+    $o->call_method('GetReports');
+}
+
 sub get_blacklist {
     my ($o) = @_;
     $o->call_method('GetBlacklist');
