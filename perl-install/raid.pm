@@ -103,6 +103,7 @@ sub update {
 
 sub write {
     my ($raids, $file) = @_;
+    return if $::testing;
     local $\ = "\n";
     local *F;
     open F, ">$file" or die N("Can't write file %s", $file);
