@@ -252,11 +252,8 @@ sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
     install_any::setPackages($o, $rebuild_needed);
-    if ($rebuild_needed) {
-	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
-    } else {
-	pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
-    }
+    pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
 }
 
 sub choosePackages {
