@@ -122,6 +122,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif (member($Ident, qw(AGP ATA_STORAGE SATA_STORAGE SCSI_CONTROLLER TV))) {
         # add agpgart modules to modprobe.preload if needed:
         $modules_conf->write;
+        next;
     } elsif ($Ident eq "USB_CONTROLLER") {
         modules::load_category($modules_conf, 'bus/usb');
         $modules_conf->write;
