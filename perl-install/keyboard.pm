@@ -99,10 +99,10 @@ arch() =~ /^sparc/ ? (
  "uk" => [ __("UK keyboard"),    "sunt5-uk",    "gb" ],
  "us" => [ __("US keyboard"),    "sunkeymap",   "us" ],
 ) : (
-arch() =~ /^ppc/ ? (
+arch() eq "ppc" ? (
  "us" => [ __("US keyboard"),    "mac-us-ext",  "us" ],
  "de_nodeadkeys" => [ __("German"), "mac-de-latin1-nodeadkeys", "de(nodeadkeys)" ],
- "fr" => [ __("French"),         "mac-fr3",   "fr" ],
+ "fr" => [ __("French"),         "mac-fr2-ext",   "fr" ],
 ) : (
  "am_old" => [ __("Armenian (old)"),	"am_old",	"am(old)" ],
  "am" => [ __("Armenian (typewriter)"),	"am-armscii8",	"am" ],

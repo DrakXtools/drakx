@@ -76,7 +76,15 @@ my $pmagic = 0x504D;
 
 sub adjustStart($$) {
     my ($hd, $part) = @_;
+    my $end = $part->{start} + $part->{size};
+    my $partmap_end = $hd->{primary}{raw}[0]{size};
+
+    if ($part->{start} <= $partmap_end) {
+        $part->{start} = $partmap_end + 1;
+        $part->{size} = $end - $part->{start};
+    }
 }
+
 sub adjustEnd($$) {
     my ($hd, $part) = @_;
 }
@@ -94,7 +102,8 @@ sub read($$) {
 
     foreach $i (0 .. $info{bzDrvrCnt}-1) {
         sysread F, $tmp, psizeof($dd_format) or die "error while reading driver data in sector $sector";
-        $info{ddMap}[$i] = unpack $dd_format, $tmp;
+        my %dd; @dd{@$dd_fields} = unpack $dd_format, $tmp;
+        push @{$info{ddMap}}, \%dd;
     }
 
     #- check magic number
@@ -127,7 +136,8 @@ sub read($$) {
                 if ($h{pType} =~ /^Apple_UNIX_SVR2/i) {
                     $h{pName} =~ /swap/i ? ($h{type} = 0x82) : ($h{type} = 0x83);
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
-                    $h{type} = 0x0;
+                    next;
+					#$h{type} = 0x0;
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
                  	$h{type} = 0x402;
                 } elsif ($h{pType} =~ /^Apple_Partition_Map/i) {
@@ -136,6 +146,12 @@ sub read($$) {
                 } else {
                  	$h{type} = 0x401;
                 };
+
+                # Let's see if this partition is a driver.
+                foreach (@{$info{ddMap}}) {
+                    $_->{ddBlock} == $h{pPBlockStart} and $h{isDriver} = 1;
+                }
+
             }
             \%h;
         } [ $part ];
@@ -191,13 +207,16 @@ sub write($$$;$) {
     }
 
     # Since we didn't create any new drivers, let's try and match up our driver records with out partitons and see if any are missing.
-    my $i;
+    $info->{bzDrvrCnt} = 0;
     my @ddstowrite;
-    foreach $i ( 0 .. $info->{bzDrvrCnt} - 1) {
-        my $ddBlock = $_->{ddBlock};
-        my $dd = $_;
+    my $dd;
+    foreach $dd (@{$info->{ddMap}}) {
         foreach (@partstowrite) {
-            $ddBlock == $_->{pPBlockStart} and push @ddstowrite, $dd;
+            if ($dd->{ddBlock} == $_->{pPBlockStart}) {
+            	push @ddstowrite, $dd;
+            	$info->{bzDrvrCnt}++;
+            	last;
+            }
         }
     }
 
@@ -205,11 +224,11 @@ sub write($$$;$) {
     syswrite F, pack($bz_format, @$info{@$bz_fields}), psizeof($bz_format) or return 0;
 
     # ...and now the driver information.
-    foreach $i ( 0 .. $info->{bzDrvrCnt} - 1) {
-        syswrite F, pack($dd_format, $ddstowrite[$i]{@$dd_fields}), psizeof($dd_format) or return 0;
+    foreach (@ddstowrite) {
+        syswrite F, pack($dd_format, @$_{@$dd_fields}), psizeof($dd_format) or return 0;
     }
     # zero the rest of the data in the first block.
-    foreach $i ( 1 .. (494 - ($info->{bzDrvrCnt} * 8))) {
+    foreach ( 1 .. (494 - ((@ddstowrite) * 8))) {
      	syswrite F, "\0", 1 or return 0;
     }
     #c::lseek_sector(fileno(F), $sector, 512) or return 0;
@@ -285,18 +304,36 @@ sub info {
 
 sub clear_raw {
     my ($hd) = @_;
+    my @oldraw = @{$hd->{primary}{raw}};
     my $pt = { raw => [ ({}) x 63 ], info => info($hd) };
 
     #- handle special case for partition 1 which is the partition map.
-    my $part = {
+    $pt->{raw}[0] = {
         type => 0x401,
         start => 1,
         size => 63,
         isMap => 1,
     };
+#	$pt->{raw}[1] = {
+#		type => 0x0,
+#		start => 64,
+#		size => $hd->{totalsectors} - 64,
+#		isMap => 0,
+#	};
+    push @{$pt->{normal}}, $pt->{raw}[0];
+#	push @{$pt->{normal}}, $pt->{raw}[1];
 
-    $pt->{raw}[0] = $part;
-    push @{$pt->{normal}}, $part;
+    #- Recover any Apple Drivers, if any.
+    my $i = 1;
+    foreach (@oldraw) {
+        if (defined $_->{isDriver}) {
+            $pt->{raw}[$i] = $_;
+            push @{$pt->{normal}}, $pt->{raw}[$i];
+            $i++;
+        }
+    };
+    @{$pt->{info}{ddMap}} = @{$hd->{primary}{info}{ddMap}};
+
     $pt;
 }
 

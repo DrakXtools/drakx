@@ -1,3 +1,17 @@
+2000-05-27 Adam Lebsack <adam@mandrakesoft.com>
+	* share/list.ppc: various PPC modifications, for HFS
+	* partition_table_mac.pm: bug fixes
+	* partition_table.pm: various HFS fixes, isHiddenMacPart()
+	* diskdrake.pm: added HFS to top buttons when run on PPC
+	* keyboard.pm: fixed name of mac-fr2-ext keymap
+	* install_steps_gtk.pm: added Xpmac server support for PPC.
+	* install_steps_interactive.pm: disallow hardware configuration on PPC for
+	now.  All drivers should be in the kernel. setup_this_kind().
+	* fsedit.pm: fixed verify_hds for PPC, /proc/partitions will never match
+	our partition table read.  Added PPC grep condition for PPC in get_visible_fstab.
+	* fs.pm: fix argument for HFS formatting.	
+	* Makefile: special installation of PPC files.
+
 2000-05-25  Chmouel Boudjnah  <chmouel@mandrakesoft.com>
 
 	* standalone/drakboot: Don't display Configure-/LILO/GRUB/ on

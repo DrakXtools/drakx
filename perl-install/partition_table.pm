@@ -216,7 +216,7 @@ sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
 sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isSupermount($) { $_[0]{type} eq 'supermount' }
 sub isHFS($) { $type2fs{$_[0]{type}} eq 'hfs' }
-sub isApplePartMap { defined $_[0]{isMap} }
+sub isHiddenMacPart { defined $_[0]{isMap} }
 sub isLoopback { defined $_[0]{loopback_file} }
 sub isTrueFS { isExt2($_[0]) || isReiserfs($_[0]) }
 sub isMountableRW { isTrueFS($_[0]) || isFat($_[0]) }

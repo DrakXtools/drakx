@@ -121,7 +121,7 @@ sub real_format_part {
     } elsif (isWin($part)) {
         format_dos($part->{device}, @options, '-F', 32);
     } elsif (isHFS($part)) {
-        format_hfs($part->{device}, @options, '-l', "\"Untitled\"");
+        format_hfs($part->{device}, @options, '-l', "Untitled");
     } elsif (isSwap($part)) {
 	my $check_blocks = grep { /^-c$/ } @options;
         swap::make($part->{device}, $check_blocks);

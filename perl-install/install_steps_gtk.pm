@@ -61,8 +61,8 @@ sub new($$) {
 		my $ok = 1;
 		local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 		unless (fork) {
-		    exec $_[0], (arch() =~ /^sparc/ ? () : ("-kb")), "-dpms","-s" ,"240",
-		      ($_[0] =~ /Xsun/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
+		    exec $_[0], (arch() =~ /^sparc/ || arch() eq "ppc" ? () : ("-kb")), "-dpms","-s" ,"240",
+		      ($_[0] =~ /Xsun/ || $_[0] =~ /Xpmac/ ? ("-fp", "/usr/X11R6/lib/X11/fonts:unscaled") :
 		       ("-allowMouseOpenFail", "-xf86config", $f)) or exit 1;
 		}
 		foreach (1..60) {
@@ -85,14 +85,15 @@ sub new($$) {
 		if (/Mach64/) { @servers = qw(Mach64) }
 		elsif (/Permedia2/) { @servers = qw(3DLabs) }
 		else { @servers = qw(Xsun24) }
-	    }
-	    @servers = qw(PPCDummy) if arch() eq "ppc";
+	    } elsif (arch() eq "ppc") {
+	    	@servers = qw(Xpmac);
+            }
 
 	    foreach (@servers) {
 		log::l("Trying with server $_");
 		sleep 3;
 		my $dir = "/usr/X11R6/bin";
-		my $prog = /Xsun/ ? $_ : "XF86_$_";
+		my $prog = /Xsun/ || /Xpmac/ ? $_ : "XF86_$_";
 		unless (-x "$dir/$prog") {
 		    unlink $_ foreach glob_("$dir/X*");
 		    install_any::getAndSaveFile("$dir/$prog", "$dir/$prog") or die "failed to get server: $!";
@@ -812,6 +813,8 @@ sub create_logo_window() {
 }
 
 sub init_sizes() {
+#    my $maxheight = arch() eq "ppc" ? 1024 : 600;
+#    my $maxwidth = arch() eq "ppc" ? 1280 : 800;
     ($::rootheight,  $::rootwidth)    = (480, 640);
     ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));

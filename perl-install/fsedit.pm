@@ -107,7 +107,7 @@ sub get_fstab(@) {
 
 #- get normal partition that should be visible for working on.
 sub get_visible_fstab(@) {
-    grep { $_ && !partition_table::isWholedisk($_) } map { partition_table::get_normal_parts($_) } @_;
+    grep { $_ && !partition_table::isWholedisk($_) && !partition_table::isHiddenMacPart($_) } map { partition_table::get_normal_parts($_) } @_;
 }
 
 sub free_space(@) {
@@ -438,7 +438,7 @@ sub verifyHds {
     }
 
     my @parts = readProcPartitions($hds);
-    $ok &&= @parts == listlength(get_fstab(@$hds));
+    $ok &&= @parts == listlength(get_fstab(@$hds)) unless arch() eq "ppc";
 
     if ($readonly && !$ok) {
 	log::l("using /proc/partitions as diskdrake failed :(");

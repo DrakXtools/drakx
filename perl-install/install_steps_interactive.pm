@@ -1165,6 +1165,8 @@ sub load_thiskind {
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
 
+	return if arch() eq "ppc";
+
     my @l;
     my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
 
