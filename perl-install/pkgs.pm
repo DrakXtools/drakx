@@ -488,7 +488,7 @@ sub psUsingHdlist {
 
     #- update maximal index.
     $m->{max} = $packages->{count} - 1;
-    $m->{max} >= $m->{min} or die "nothing found while parsing $newf";
+    $m->{max} >= $m->{min} || $relocated > 0 || $ignored > 0 or die "nothing found while parsing $newf";
     $relocated > 0 and log::l("relocated $relocated headers in $hdlist");
     $ignored > 0 and log::l("ignored $ignored headers in $hdlist");
     log::l("read " . ($m->{max} - $m->{min} + 1) . " new headers in $hdlist");
