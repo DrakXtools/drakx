@@ -49,7 +49,7 @@
 /* include it after config-stage1.h so that _GNU_SOURCE is defined and strndup is available */
 #include <string.h>
 
-static int choose_mirror_from_list(const char *desired_protocol, char **host, char **filepath);
+static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *desired_protocol, char **host, char **filepath);
 
 static void error_message_net(void)  /* reduce code size */
 {
@@ -319,6 +319,11 @@ static int save_netinfo(struct interface_info * intf) {
 		fprintf(f, "BOOTPROTO=adsl_pppoe\n");
 		fprintf(f, "USER=%s\n", intf->user);
 		fprintf(f, "PASS=%s\n", intf->pass);
+	}
+
+	if (!streq(intf->http_proxy_host, "") && !streq(intf->http_proxy_port, "")) {
+		fprintf(f, "PROXY=%s\n", intf->http_proxy_host);
+		fprintf(f, "PROXYPORT=%s\n", intf->http_proxy_port);
 	}
 
 	fclose(f);
@@ -605,11 +610,31 @@ static char * interface_select(void)
 }
 
 
+static enum return_type intf_get_http_proxy(struct interface_info * intf)
+{
+	char *questions[] = { "HTTP proxy host", "HTTP proxy port", NULL };
+	char *questions_auto[] = { "proxy_host", "proxy_port", NULL };
+	static char ** answers = NULL;
+	enum return_type results;
+	
+	results = ask_from_entries_auto("Please enter HTTP proxy host and port if you need it, else leave them blank or cancel.",
+					questions, &answers, 40, questions_auto, NULL);
+	if (results == RETURN_OK) {
+		intf->http_proxy_host = strdup(answers[0]);
+		intf->http_proxy_port = strdup(answers[1]);
+	} else {
+		intf->http_proxy_host = "";
+		intf->http_proxy_port = "";
+	}
+
+	return results;
+}
+
 
 /* -=-=-- */
 
 
-static enum return_type intf_select_and_up(void)
+static enum return_type intf_select_and_up(char **http_proxy_host, char **http_proxy_port)
 {
 	static struct interface_info intf[20];
 	static int num_interfaces = 0;
@@ -634,9 +659,15 @@ static enum return_type intf_select_and_up(void)
 	
 	results = bringup_networking(sel_intf);
 
+	if (http_proxy_host && http_proxy_port) {
+		intf_get_http_proxy(intf);
+		*http_proxy_host = intf->http_proxy_host;
+		*http_proxy_port = intf->http_proxy_port;
+	}
+
 	if (results == RETURN_OK)
 		save_netinfo(sel_intf);
-	
+
 	return results;
 }
 
@@ -648,7 +679,7 @@ enum return_type nfs_prepare(void)
 	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
 	char * nfsmount_location;
-	enum return_type results = intf_select_and_up();
+	enum return_type results = intf_select_and_up(NULL, NULL);
 
 	if (results != RETURN_OK)
 		return results;
@@ -704,12 +735,13 @@ enum return_type nfs_prepare(void)
 
 enum return_type ftp_prepare(void)
 {
-	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", "HTTP proxy host", "HTTP proxy port", NULL };
-	char * questions_auto[] = { "server", "directory", "user", "pass", "proxy_host", "proxy_port", NULL };
+	char * questions[] = { "FTP server", DISTRIB_NAME " directory", "Login", "Password", NULL };
+	char * questions_auto[] = { "server", "directory", "user", "pass", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
 	char modules_cz[500];
 	struct utsname kernel_uname;
+	char *http_proxy_host = "", *http_proxy_port = "";
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("FTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -717,7 +749,7 @@ enum return_type ftp_prepare(void)
 		return RETURN_ERROR;
 	}
 
-	results = intf_select_and_up();
+	results = intf_select_and_up(&http_proxy_host, &http_proxy_port);
 
 	if (results != RETURN_OK)
 		return results;
@@ -733,19 +765,18 @@ enum return_type ftp_prepare(void)
 
 		if (answers == NULL)
 			answers = (char **) malloc(sizeof(questions));
-		results = choose_mirror_from_list("ftp", &answers[0], &answers[1]);
+		results = choose_mirror_from_list(http_proxy_host, http_proxy_port, "ftp", &answers[0], &answers[1]);
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
 						"the directory containing the " DISTRIB_NAME " Distribution, "
-						"and the login/pass if necessary (leave login blank for anonymous). "
-						"Please enter HTTP proxy host and port if you need it.",
+						"and the login/pass if necessary (leave login blank for anonymous). ",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 			return ftp_prepare();
 		}
 
-		use_http_proxy = !streq(answers[4], "") && !streq(answers[5], "");
+		use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 		if (use_http_proxy) {
 		        log_message("FTP: don't connect to %s directly, will use proxy", answers[0]);
@@ -791,7 +822,7 @@ enum return_type ftp_prepare(void)
 			    strcpy(ftp_hostname, "");
 			}
 			strcat(ftp_hostname, answers[0]);
-			fd = http_download_file(ftp_hostname, location_full, &size, "ftp", answers[4], answers[5]);
+			fd = http_download_file(ftp_hostname, location_full, &size, "ftp", http_proxy_host, http_proxy_port);
 		} else {
 		        fd = ftp_start_download(ftp_serv_response, location_full, &size);
 		}
@@ -826,8 +857,8 @@ enum return_type ftp_prepare(void)
                         add_to_env("METHOD", "http");
 		        sprintf(location_full, "ftp://%s%s", ftp_hostname, answers[1]);
 		        add_to_env("URLPREFIX", location_full);
-			add_to_env("PROXY", answers[4]);
-			add_to_env("PROXYPORT", answers[5]);
+			add_to_env("PROXY", http_proxy_host);
+			add_to_env("PROXYPORT", http_proxy_port);
 		} else {
                         add_to_env("METHOD", "ftp");
 		        add_to_env("HOST", answers[0]);
@@ -845,10 +876,11 @@ enum return_type ftp_prepare(void)
 
 enum return_type http_prepare(void)
 {
-	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", "HTTP proxy host", "HTTP proxy port", NULL };
-	char * questions_auto[] = { "server", "directory", "proxy_host", "proxy_port", NULL };
+	char * questions[] = { "HTTP server", DISTRIB_NAME " directory", NULL };
+	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
 	enum return_type results;
+	char *http_proxy_host = "", *http_proxy_port = "";
 
 	if (!ramdisk_possible()) {
 		stg1_error_message("HTTP install needs more than %d Mbytes of memory (detected %d Mbytes). You may want to try an NFS install.",
@@ -856,7 +888,7 @@ enum return_type http_prepare(void)
 		return RETURN_ERROR;
 	}
 
-	results = intf_select_and_up();
+	results = intf_select_and_up(&http_proxy_host, &http_proxy_port);
 
 	if (results != RETURN_OK)
 		return results;
@@ -867,8 +899,7 @@ enum return_type http_prepare(void)
 		int use_http_proxy;
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the HTTP server, "
-						"and the directory containing the " DISTRIB_NAME " Distribution."
-						"Please enter HTTP proxy host and port if you need it.",
+						"and the directory containing the " DISTRIB_NAME " Distribution.",
 						questions, &answers, 40, questions_auto, NULL);
 		if (results != RETURN_OK || streq(answers[0], "")) {
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
@@ -880,9 +911,9 @@ enum return_type http_prepare(void)
 
 		log_message("HTTP: trying to retrieve %s from %s", location_full, answers[0]);
 		
-		use_http_proxy = !streq(answers[2], "") && !streq(answers[3], "");
+		use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
-		fd = http_download_file(answers[0], location_full, &size, use_http_proxy ? "http" : NULL, answers[2], answers[3]);
+		fd = http_download_file(answers[0], location_full, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 		if (fd < 0) {
 			log_message("HTTP: error %d", fd);
 			if (fd == FTPERR_FAILED_CONNECT)
@@ -902,9 +933,9 @@ enum return_type http_prepare(void)
 		sprintf(location_full, "http://%s%s", answers[0], answers[1]);
 		add_to_env("URLPREFIX", location_full);
                 if (!streq(answers[2], ""))
-			add_to_env("PROXY", answers[2]);
+			add_to_env("PROXY", http_proxy_host);
                 if (!streq(answers[3], ""))
-			add_to_env("PROXYPORT", answers[3]);
+			add_to_env("PROXYPORT", http_proxy_port);
 	}
 	while (results == RETURN_BACK);
 
@@ -954,19 +985,20 @@ static int mirrorlist_entry_split(const char *entry, char *mirror[4]) /* mirror 
 	return 0;
 }
 
-static int choose_mirror_from_list(const char *protocol, char **selected_host, char **filepath) {
+static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port, const char *protocol, char **selected_host, char **filepath) {
 	enum return_type results;
 	char *mirrorlist[MIRRORLIST_MAX_ITEMS][4];
 	char *medialist[MIRRORLIST_MAX_MEDIA+1];
 	int mirrorlist_number = 0, media_number = 0;
 	int fd, size, line_pos = 0;
 	char line[500];
+	int use_http_proxy = !streq(http_proxy_host, "") && !streq(http_proxy_port, "");
 
 	if (IS_AUTOMATIC)
 		return RETURN_OK;
 
 
-	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, NULL, NULL, NULL);
+	fd = http_download_file(MIRRORLIST_HOST, MIRRORLIST_PATH, &size, use_http_proxy ? "http" : NULL, http_proxy_host, http_proxy_port);
 	if (fd < 0) {
 		log_message("HTTP: unable to get mirrors list");
 		return RETURN_ERROR;
