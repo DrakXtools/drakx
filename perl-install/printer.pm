@@ -325,6 +325,10 @@ sub write_cupsd_conf {
     open F, ">$prefix/etc/cups/cupsd.conf";
     print F @cupsd_conf;
     close F;
+
+    #- restart cups after updating configuration.
+    require run_program;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/cups restart"); sleep 1;
 }
 
 sub read_printers_conf {
