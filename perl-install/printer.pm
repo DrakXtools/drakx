@@ -308,6 +308,25 @@ sub read_printer_db(;$) {
 }
 
 #------------------------------------------------------------------------------
+sub read_cupsd_conf {
+    my @cupsd_conf;
+    local *F;
+
+    open F, "$prefix/etc/cups/cupsd.conf";
+    @cupsd_conf = <F>;
+    close F;
+
+    @cupsd_conf;
+}
+sub write_cupsd_conf {
+    my (@cupsd_conf) = @_;
+    local *F;
+
+    open F, ">$prefix/etc/cups/cupsd.conf";
+    print F @cupsd_conf;
+    close F;
+}
+
 sub read_printers_conf {
     my ($printer) = @_;
     my $current = undef;
