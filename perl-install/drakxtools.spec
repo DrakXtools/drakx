@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 3mdk
+Release: 4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -368,6 +368,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-4mdk
+- harddrake2: enable to upload the hardware list
+- XFdrake:
+  o fix crash when called from hwdb-clients
+  o skip the 4/3 detailed_timings otherwise they conflict with the
+    Xorg builtin vesamodes (pixel)
+- drakconnect (blino):
+  o use a higher timeout for modem dialing (#10814)
+  o make wpa_supplicant.conf readable by root only
+
 * Wed Mar  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-3mdk
 - drakconnect:
   o workaround buggy sk98lin kernel driver (#14163)
