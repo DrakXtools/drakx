@@ -36,7 +36,7 @@ sub installPackages {
 					    });
 
     my %compssUsersChoice = map { $_ => 1 } map { @{$_->{flags}} } values %{$o->{compssUsers}};
-    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D';
+    $compssUsersChoice{$_} = 1 foreach 'SYSTEM', 'DVD', 'USB', 'SOUND', 'BURNER', 'UTF8', 'DOCS', 'TV', '3D', 'INSTALL';
     $compssUsersChoice{qq(LOCALES"$_")} = 1 foreach @langs;
 
     pkgs::setSelectedFromCompssList($o->{packages}, \%compssUsersChoice, 4, 0);
