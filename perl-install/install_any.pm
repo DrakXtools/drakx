@@ -620,8 +620,10 @@ sub copy_rpms_on_disk {
 	    if ($method =~ /-iso$/) {
 		$r = install_any::changeIso($name);
 	    } else {
-		ejectCdrom();
-		$r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
+		cat_("/proc/mounts") =~ m,(/dev/\S+)\s+(/mnt/cdrom|/tmp/image),
+		    and ($cdrom, my $mountpoint) = ($1, $2);
+		ejectCdrom($cdrom, $mountpoint);
+		$r = $o->ask_okcancel('', N("Change your Cd-Rom!
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.", $name), 1);
 	    }
 	    return $r;
@@ -631,8 +633,14 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     };
     foreach my $k (pkgs::allMediums($o->{packages})) {
 	my $m = $o->{packages}{mediums}{$k};
-	askChangeMedium($o->{method}, $m->{descr})
-	    or next;
+	if ($k != $current_medium) {
+	    do {
+		askChangeMedium($o->{method}, $k)
+		    or next;
+		mountCdrom("/tmp/image", $cdrom)
+	    } while (!-d "/tmp/image/$m->{rpmsdir}");
+	    $current_medium = $k
+	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
 	my $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
 	eval { cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media") };
@@ -643,6 +651,8 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     }
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
+    #- shoud be enough to fool errorOpeningFile
+    $current_medium = 1;
     our $copied_rpms_on_disk = 1;
 }
 
