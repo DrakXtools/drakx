@@ -179,22 +179,22 @@ my ($lan_button, $wiz_button, $int_button);
 
 $window1->{window}->add(
                         gtkpack_(Gtk2::VBox->new(0,10),
-				 if_($activate_profile,
-				     0, gtkpack_(Gtk2::HBox->new(0,0),
-						 0, Gtk2::Label->new(N("Profile: ")),
-						 0, $combo1,
-						 0, $button_del,
-						 0, $button_new,
-						),
-				 ),
+                                 if_($activate_profile,
+                                     0, gtkpack_(Gtk2::HBox->new(0,0),
+                                                 0, Gtk2::Label->new(N("Profile: ")),
+                                                 0, $combo1,
+                                                 0, $button_del,
+                                                 0, $button_new,
+                                                ),
+                                    ),
                                  0, gtkpack_(Gtk2::HBox->new(1,0),
-					     0, gtkpack_(Gtk2::HBox->new(0,0),
-							 0, Gtk2::Label->new(N("Hostname: ")),
-							 0, $label_host = Gtk2::Label->new($hostname),
-							),
-					     0, gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
-								  clicked => \&configure_hostname),
-					    ),
+                                             0, gtkpack_(Gtk2::HBox->new(0,0),
+                                                         0, Gtk2::Label->new(N("Hostname: ")),
+                                                         0, $label_host = Gtk2::Label->new($hostname),
+                                                        ),
+                                             0, gtksignal_connect(Gtk2::Button->new(N("Configure hostname...")),
+                                                                  clicked => \&configure_hostname),
+                                            ),
                                  0, gtkadd(Gtk2::Frame->new(N("Internet access")),
                                            gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
                                                     1, gtkset_border_width(create_packtable({ col_spacings => 5, row_spacings => 5 },
@@ -202,16 +202,16 @@ $window1->{window}->add(
                                                                                             [ $int_label, $interface_name ],
                                                                                             [ Gtk2::Label->new(N("Status:")), 
                                                                                               $int_state = Gtk2::Label->new(N("Testing your connection...")) ]
-                                                                                            ),
+                                                                                           ),
                                                                            5),
                                                     0, $warning_label1,
                                                     0, gtkpack(Gtk2::HButtonBox->new,
                                                                $int_button = gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
-                                                                                 clicked => sub { configure_net('', $netcnx, $netc, $intf) }),
+                                                                                               clicked => sub { configure_net('', $netcnx, $netc, $intf) }),
                                                                $int_connect,
                                                               ),
-                                                    )
-                                           ),
+                                                   )
+                                          ),
                                  1, gtkadd(Gtk2::Frame->new(N("LAN configuration")),
                                            gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
                                                     0, $list,
@@ -220,8 +220,8 @@ $window1->{window}->add(
                                                                 0, $lan_button = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
                                                                                                    clicked => \&configure_lan),
                                                                ),
-                                                    )
-                                           ),
+                                                   )
+                                          ),
                                  0, gtkadd(Gtk2::HButtonBox->new,
                                            $wiz_button = gtksignal_connect(Gtk2::Button->new(N("Launch the wizard")),
                                                                            clicked => sub {
@@ -410,26 +410,17 @@ sub configure_hostname() {
     $hbox->set_border_width(10);
     $hbox->pack_start(Gtk2::Label->new(N("Hostname")), 0, 1, 0);
     $hbox->pack_start(my $entry = Gtk2::Entry->new_with_text($netc->{HOSTNAME}), 0, 1, 0);
-
-    $window->action_area->pack_start(gtkpack(Gtk2::HButtonBox->new,
-                                             gtksignal_connect(Gtk2::Button->new(N("Cancel")),
-                                                               clicked => sub { $window->destroy; Gtk2->main_quit }),
-                                            ),
-                                     1, 1, 0,
-				    );
-
-    $window->action_area->pack_start(gtkpack(Gtk2::HButtonBox->new,
-					     gtksignal_connect(Gtk2::Button->new(N("Ok")),
-                                                               clicked => sub {
- 								   $netc->{HOSTNAME} = $entry->get_text || "localhost";
- 								   network::sethostname($netc);
-								   update();
-								   $window->destroy; Gtk2->main_quit
-							       }),
-                                            ),
-                                     1, 1, 0,
-				    );
-
+    gtkpack($window->action_area,
+            gtksignal_connect(Gtk2::Button->new(N("Cancel")),
+                              clicked => sub { $window->destroy; Gtk2->main_quit }),
+            gtksignal_connect(Gtk2::Button->new(N("Ok")),
+                              clicked => sub {
+                                  $netc->{HOSTNAME} = $entry->get_text || "localhost";
+                                  network::sethostname($netc);
+                                  update();
+                                  $window->destroy; Gtk2->main_quit
+                              }),
+           );
     $window->show_all;
     $window->run;
     return;
