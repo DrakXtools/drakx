@@ -445,11 +445,6 @@ sub get_intf_status {
     ethisup($c) ? N("Deactivate now") : N("Activate now")
 }
 
-sub get_intf_status {
-    my ($c) = @_;
-    ethisup($c) ? N("Deactivate now") : N("Activate now")
-}
-
 sub configure_lan() {
     sensitive_buttons(0);
     my $window = _create_dialog(N("LAN configuration"), { small => 1 });
