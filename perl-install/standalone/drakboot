@@ -78,8 +78,10 @@ unless ($::isEmbedded) {
     ######### menus end
 }
 
-my $user_combo = Gtk2::ComboBox->new_with_strings([ sort(list_users()) ], $auto_mode->{autologin});
-my $desktop_combo = Gtk2::ComboBox->new_with_strings([ sort(split(' ', `/usr/sbin/chksession -l`)) ], $auto_mode->{desktop});
+my @users = sort(list_users());
+my @sessions = sort(split(' ', `/usr/sbin/chksession -l`));
+my $user_combo = Gtk2::ComboBox->new_with_strings(\@users, if_(member($auto_mode->{autologin}, @users), $auto_mode->{autologin}));
+my $desktop_combo = Gtk2::ComboBox->new_with_strings(\@sessions, if_(member($auto_mode->{desktop}, @sessions), $auto_mode->{desktop}));
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
    	        'sysconfig' => '/etc/sysconfig/bootsplash',
