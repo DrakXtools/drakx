@@ -346,7 +346,12 @@ void unmount_filesystems(void)
 	}
 }
 
-int reboot_magic = 0x01234567;
+#define BMAGIC_HARD	0x89ABCDEF
+#define BMAGIC_SOFT	0
+#define BMAGIC_REBOOT	0x01234567
+#define BMAGIC_HALT	0xCDEF0123
+#define BMAGIC_POWEROFF	0x4321FEDC
+int reboot_magic = BMAGIC_REBOOT;
 
 int in_reboot(void)
 {
@@ -356,7 +361,7 @@ int in_reboot(void)
                 int i = read(fd, buf, sizeof(buf));
                 close(fd);
                 if (strstr(buf, "halt"))
-                        reboot_magic = 0x4321FEDC;
+                        reboot_magic = BMAGIC_HALT;
                 return i > 0;
         }
         return 0;
@@ -395,6 +400,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	signal(SIGINT, SIG_IGN);
 	signal(SIGTSTP, SIG_IGN);
 
+        /* disallow Ctrl Alt Del to reboot */
+        reboot(0xfee1dead, 672274793, BMAGIC_SOFT);
 
 	if (!testing) {
 		fd = open("/dev/console", O_RDWR, 0);
@@ -448,6 +455,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			end_stage2 = 1;
 	}
 
+        /* allow Ctrl Alt Del to reboot */
+        reboot(0xfee1dead, 672274793, BMAGIC_HARD);
+
         if (in_reboot()) {
                 // any exitcode is valid if we're in_reboot
         } else if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
@@ -489,18 +499,18 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	sync(); sync();
 
 	if (!abnormal_termination) {
-                if (reboot_magic == 0x01234567) {
+                if (reboot_magic == BMAGIC_REBOOT) {
                         printf("automatic reboot in 10 seconds\n");
                         sleep(10);
+                        reboot(0xfee1dead, 672274793, reboot_magic);
                 } else {
-                        printf("automatic poweroff in 15 seconds\n");
-                        sleep(15);
+                        printf("you can safely turn your computer off\n");
+                        /* if I ask kernel to do BMAGIC_POWEROFF, it panics :( */
                 }
-		reboot(0xfee1dead, 672274793, reboot_magic);
 	} else {
 		printf("you may safely reboot or halt your system\n");
-                select(0, NULL, NULL, NULL, NULL);
 	}
 
+        select(0, NULL, NULL, NULL, NULL);
 	return 0;
 }
