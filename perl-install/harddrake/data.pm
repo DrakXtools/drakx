@@ -244,7 +244,7 @@ our @tree =
       icon => "memory.png",
       configurator => "",
       detector => sub { grep { member($_->{name}, 'Cache', 'Memory Module') } detect_devices::dmidecode() },
-      checked_on_boot => 1,
+      checked_on_boot => 0,
      },
 
      {
