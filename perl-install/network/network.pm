@@ -347,13 +347,11 @@ xml:readonly:$defaults_dir
 ));
         -d $p_defaults_dir or mkdir $p_defaults_dir, 0755;
 
-        require Gnome2::GConf;
-        my $gconf = Gnome2::GConf::Client->get_source("xml::$p_defaults_dir", 1);
         my $use_alternate_proxy;
-
         my $gconf_set = sub {
             my ($key, $type, $value) = @_;
-            $gconf->set($key, { type => $type, value => $value });
+            #- gconftool-2 is available since /etc/gconf/2/ exists
+            system("gconftool-2", "--config-source=xml::$p_defaults_dir", "--direct", "--set", "--type=$type", $key, $value);
         };
 
         #- http proxy
@@ -390,9 +388,6 @@ xml:readonly:$defaults_dir
 
         #- set proxy mode to manual if either https or ftp is used
         $gconf_set->("/system/proxy/mode", "string", $use_alternate_proxy ? "manual" : "none");
-
-        #- apply settings in local file
-        $gconf->suggest_sync;
 
         #- make gconf daemons reload their settings
         system("killall -s HUP gconfd-2");
