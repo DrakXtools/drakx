@@ -1,3 +1,34 @@
+2004/10/07  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/various.pm, install_steps.pm, Xconfig/default.pm,
+	Xconfig/main.pm, harddrake/autoconf.pm: 
+	  - XFdrake can detect a auxmouse which was not detected by mousedrake
+	so we need to call various_xfree_conf()
+	  - this implies adding parameter $do_pkgs to a few functions
+
+	* Xconfig/parse.pm: fix parsing fully commented Section. eg:
+	#Section "Extensions"
+	#    Option "Composite" "Enable"
+	#    Option "RENDER" "Enable"
+	#Endsection
+
+2004/10/06  Jos� JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2004/10/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/am.po: updated Amharic file
+
+	* share/po/nb.po: updated Bokmål file
+	updated Bokmål file
+
+2004/10/06  Thomas Backlund  <tmb at mandrake.org>
+
+	* share/po/sv.po: updated translations, was 269 fuzzy, 193 untranslated,
+	 is now 171 fuzzy, 136 untranslated, the rest will be done by
+	 tomorrow (today?)
+
 2004/10/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/nb.po: updated Bokmål file
@@ -40697,7 +40728,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.980 2004/10/05 02:49:33 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.981 2004/10/06 07:20:40 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
