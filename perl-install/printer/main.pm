@@ -654,11 +654,8 @@ sub set_cups_autoconf {
 sub get_cups_autoconf {
     local *F;
     open F, "< $::prefix/etc/sysconfig/printing" or return 1;
-    my $line;
-    while ($line = <F>) {
-	if ($line =~ m!^[^\#]*CUPS_CONFIG=manual!) {
-	    return 0;
-	}
+    while (my $line = <F>) {
+	return 0 if $line =~ m!^[^\#]*CUPS_CONFIG=manual!;
     }
     return 1;
 }
