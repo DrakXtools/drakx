@@ -31,10 +31,6 @@ use c;
 my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
-print "EMBED\n" if $::isEmbedded;
-print "XID : $::XID\n";
-print "CCPID :  $::CCPID\n";
-print "wiz : $::isWizard\n";
 
 local $_ = join '', @ARGV;
 
@@ -428,8 +424,16 @@ sub configure_lan {
 	$notebook->append_page($vbox_local, $hbox_local);
     }
     my $bbox1 = new Gtk::HButtonBox;
-    $vbox1->pack_start($bbox1,0,0,0);
+    $vbox1->pack_start($bbox1,0,0,10);
     $bbox1->set_layout(-end);
+    my $old_networking = $netc->{NETWORKING};
+    my $button_able = new Gtk::Button $netc->{NETWORKING} eq "yes" ? _("Disable") : _("Enable");
+    $button_able->signal_connect ( clicked => sub {
+				       $netc->{NETWORKING} eq "yes" ? ($netc->{NETWORKING} = "no") : ($netc->{NETWORKING} = "yes");
+				       $notebook->set_sensitive($netc->{NETWORKING} eq "yes");
+				       $button_able->child->set($netc->{NETWORKING} eq "yes" ? _("Disable") : _("Enable"));
+				   } );
+    $bbox1->add($button_able);
     my $button_ok = new Gtk::Button "OK";
     $button_ok->signal_connect ( clicked => sub {
 				     my $i=0;
@@ -443,7 +447,7 @@ sub configure_lan {
 				 });
     $bbox1->add($button_ok);
     my $button_cancel = new Gtk::Button "Cancel";
-    $button_cancel->signal_connect ( clicked => sub { $window->destroy(); Gtk->main_quit });
+    $button_cancel->signal_connect ( clicked => sub { $netc->{NETWORKING}=$old_networking; $window->destroy(); Gtk->main_quit });
     $bbox1->add($button_cancel);
 
     $window->set_modal(1);
@@ -539,7 +543,6 @@ sub configure_net {
 @mask=(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0) if ($netcnx->{type}eq'modem'||$netcnx->{type} eq 'isdn_external');
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0) if $netcnx->{type} =~ 'adsl';
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1) if $netcnx->{type} eq 'cable';
-#    @mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq '' && $cnx->{card_type} eq 'isa';
     $vbox1->pack_start(new Gtk::HSeparator,0,0,5);
 
 
