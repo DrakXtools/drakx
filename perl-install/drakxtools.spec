@@ -294,6 +294,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o don't pollute sbin namespace with one shot scripts
   o add run wrapper script for harddrake service
   o disable ?dm part
+- draksound:
+  o really display default driver
+  o wait message while switching
+- update translations
 
 * Sat Sep  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-42mdk
 - cvs up before packaging (fix messy drakboot conf). 
