@@ -724,18 +724,15 @@ sub wait_messageW {
     my ($_o, $title, $messages) = @_;
 
     my $to_modify;
-    my @l = map { ref $_ ? $_ : ($to_modify = Gtk2::Label->new(scalar warp_text($_))) } @$messages;
+    my @l = map { ref $_ ? (0, $_) : (1, $to_modify = Gtk2::Label->new(scalar warp_text($_))) } @$messages;
+    $l[0] = 0; #- force first one
 
     my $Window = gtknew('MagicWindow',
 			title => $title,
 			pop_it => !$::isInstall, 
 			modal => 1, 
 			if__($::main_window, transient_for => $::main_window),
-			child => 
-			  gtknew('VBox', padding => 4, border_width => 10, children => [ 
-			      0, $l[0],
-			      map { (1, $_) } @l[1..$#l],
-			  ])
+			child => gtknew('VBox', padding => 4, border_width => 10, children => \@l),
 		      );
     $Window->signal_connect(expose_event => sub { $Window->{displayed} = 1; 0 });
     $Window->{wait_messageW} = $to_modify;
