@@ -60,3 +60,4 @@ install:
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
 	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
+	ln -s $(SBINDEST)/{drakclock,clock.pl}
