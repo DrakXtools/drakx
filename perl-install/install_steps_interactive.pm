@@ -413,7 +413,8 @@ sub choosePackages {
     my $min_mark = 4;
 
     my $b = pkgs::saveSelected($packages);
-    my $_level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
+    my %all_compssUsers_flags = map { $_ => 1 } map { @{$_->{flags}} } @$compssUsers;
+    my $_level = pkgs::setSelectedFromCompssList($packages, \%all_compssUsers_flags, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     log::l("max size (level $min_mark) is : " . formatXiB($max_size));
     pkgs::restoreSelected($b);
@@ -423,7 +424,7 @@ sub choosePackages {
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$o->{isUpgrade} && !$::corporate && $o->{meta_class} ne 'desktop';
 
     ($o->{packages_}{ind}) =
-      pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
+      pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $min_mark, $availableC);
 
     $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
 
@@ -481,7 +482,6 @@ sub chooseGroups {
     #- limitation of current implementation.
     #- use an empty state for each one (no flag update should be propagated).
     
-#- OLD VERSION
     my $b = pkgs::saveSelected($packages);
     install_any::unselectMostPackages($o);
     pkgs::setSelectedFromCompssList($packages, {}, $min_level, $max_size);
@@ -490,9 +490,8 @@ sub chooseGroups {
     pkgs::restoreSelected($b);
     log::l("system_size: $system_size");
 
-    my @groups = @{$o->{compssUsersSorted}};
-    my %stable_flags = grep_each { $::b } %{$o->{compssUsersChoice}};
-    delete $stable_flags{$_} foreach map { @{$compssUsers->{$_}{flags}} } @groups;
+    my %stable_flags = grep_each { $::b } %{$o->{rpmsrate_flags_chosen}};
+    delete $stable_flags{$_} foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
 
     my $compute_size = sub {
 	my %pkgs;
@@ -508,20 +507,16 @@ sub chooseGroups {
 		  next A;
 	      }
 	  }
-	log::l("computed size $total_size");
+	log::l("computed size $total_size (flags " . join(' ', keys %flags) . ")");
 	log::l("chooseGroups: ", join(" ", sort keys %pkgs));
 
 	int $total_size;
     };
-    my %val = map {
-	$_ => every { $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}}
-    } @groups;
 
-#    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
     my ($size, $unselect_all);
     my $available_size = install_any::getAvailableSpace($o) / sqr(1024);
     my $size_to_display = sub { 
-	my $lsize = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
+	my $lsize = $system_size + $compute_size->(map { @{$_->{flags}} } grep { $_->{selected} } @$compssUsers);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
 	$unselect_all ||= $size > $lsize;
@@ -532,49 +527,49 @@ sub chooseGroups {
     while (1) {
 	if ($available_size < 140) {
 	    # too small to choose anything. Defaulting to no group chosen
-	    $val{$_} = 0 foreach keys %val;
+	    $_->{selected} = 0 foreach @$compssUsers;
 	    last;
 	}
 
-	$o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
+	$o->reallyChooseGroups($size_to_display, $individual, $compssUsers) or return;
 
 	last if $::testing || pkgs::correctSize($size / sqr(1024)) < $available_size;
        
 	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
 
-    $o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
-    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
+    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach map { @{$_->{flags}} } grep { !$_->{selected} } @$compssUsers;
+    $o->{rpmsrate_flags_chosen}{$_} = 1 foreach map { @{$_->{flags}} } grep {  $_->{selected} } @$compssUsers;
 
-    log::l("compssUsersChoice: " . (!$val{$_} && "not ") . "selected [$_] as [$o->{compssUsers}{$_}{label}]") foreach keys %val;
+    log::l("compssUsersChoice selected: ", join(', ', map { qq("$_->{path}|$_->{label}") } grep { $_->{selected} } @$compssUsers));
 
     #- do not try to deselect package (by default no groups are selected).
     $o->{isUpgrade} or $unselect_all and install_any::unselectMostPackages($o);
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
-    if (!$o->{isUpgrade} && !any { $_ } values %val) {
+    if (!$o->{isUpgrade} && !any { $_->{selected} } @$compssUsers) {
 	my $docs = !$o->{excludedocs};	
-	my $minimal = !any { $_ } values %{$o->{compssUsersChoice}};
+	my $minimal = !any { $_ } values %{$o->{rpmsrate_flags_chosen}};
 
 	$o->ask_from(N("Type of install"), 
 		     N("You haven't selected any group of packages.
 Please choose the minimal installation you want:"),
 		     [
-		      { val => \$o->{compssUsersChoice}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
+		      { val => \$o->{rpmsrate_flags_chosen}{X}, type => 'bool', text => N("With X"), disabled => sub { $minimal } },
 		      { val => \$docs, type => 'bool', text => N("With basic documentation (recommended!)"), disabled => sub { $minimal } },
 		      { val => \$minimal, type => 'bool', text => N("Truly minimal install (especially no urpmi)") },
 		     ],
-		     changed => sub { $o->{compssUsersChoice}{X} = $docs = 0 if $minimal },
+		     changed => sub { $o->{rpmsrate_flags_chosen}{X} = $docs = 0 if $minimal },
 	) or return &chooseGroups;
 
 	$o->{excludedocs} = !$docs || $minimal;
 
 	#- reselect according to user selection.
 	if ($minimal) {
-	    $o->{compssUsersChoice}{$_} = 0 foreach keys %{$o->{compssUsersChoice}};
+	    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach keys %{$o->{rpmsrate_flags_chosen}};
 	} else {
-	    my $X = $o->{compssUsersChoice}{X}; #- don't let setDefaultPackages modify this one
+	    my $X = $o->{rpmsrate_flags_chosen}{X}; #- don't let setDefaultPackages modify this one
 	    install_any::setDefaultPackages($o, 'clean');
-	    $o->{compssUsersChoice}{X} = $X;
+	    $o->{rpmsrate_flags_chosen}{X} = $X;
 	}
 	install_any::unselectMostPackages($o);
     }
@@ -582,7 +577,7 @@ Please choose the minimal installation you want:"),
 }
 
 sub reallyChooseGroups {
-    my ($o, $size_to_display, $individual, $val) = @_;
+    my ($o, $size_to_display, $individual, $compssUsers) = @_;
 
     my $size_text = &$size_to_display;
 
@@ -594,22 +589,22 @@ sub reallyChooseGroups {
         { val => \$size_text, type => 'label' }, {},
 	 (map { 
 	       my $old = $path;
-	       $path = $o->{compssUsers}{$_}{path};
+	       $path = $_->{path};
 	       if_($old ne $path, { val => translate($path) }),
 		 {
-		  val => \$val->{$_},
+		  val => \$_->{selected},
 		  type => 'bool',
 		  disabled => sub { $all },
-		  text => translate($o->{compssUsers}{$_}{label}),
-		  help => translate($o->{compssUsers}{$_}{descr}),
+		  text => translate($_->{label}),
+		  help => translate($_->{descr}),
 		 }
-	   } @{$o->{compssUsersSorted}}),
+	   } @$compssUsers),
 	 if_($o->{meta_class} eq 'desktop', { text => N("All"), val => \$all, type => 'bool' }),
 	 if_($individual, { text => N("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
     ]);
 
     if ($all) {
-	$val->{$_} = 1 foreach keys %$val;
+	$_->{selected} = 1 foreach @$compssUsers;
     }
     1;    
 }
@@ -980,7 +975,7 @@ sub summary {
      $sound_index++;
     }
 
-    if (!@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO})) {
+    if (!@sound_cards && ($o->{rpmsrate_flags_chosen}{GAMES} || $o->{rpmsrate_flags_chosen}{AUDIO})) {
 	#- if no sound card are detected AND the user selected things needing a sound card,
 	#- propose a special case for ISA cards
 	push @l, {

@@ -490,12 +490,12 @@ sub setPackages {
 	    $o->{packages},
 	    getFile($suppl_method eq 'cdrom' ? "/mnt/cdrom/media/media_info/rpmsrate" : "media/media_info/rpmsrate")
 	);
-	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers(
+	($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
 	    $o->{meta_class},
-	    $suppl_method eq 'cdrom' ? "/mnt/cdrom/media/media_info/compssUsers" : "",
+	    ($suppl_method eq 'cdrom' ? '/mnt/cdrom/' : '') . 'media/media_info/compssUsers.pl'
 	);
 
-	#- preselect default_packages and compssUsersChoices.
+	#- preselect default_packages and compssUsers selected.
 	setDefaultPackages($o);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
@@ -529,7 +529,7 @@ sub setDefaultPackages {
     my ($o, $b_clean) = @_;
 
     if ($b_clean) {
-	delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
+	delete $o->{default_packages}; #- clean modified variables.
     }
 
     push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
@@ -543,35 +543,31 @@ sub setDefaultPackages {
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
     unless ($b_clean) {
-	if ($::auto_install && ($o->{compssUsersChoice} || {})->{ALL}) {
-	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
+	if ($::auto_install && ($o->{rpmsrate_flags_chosen} || {})->{ALL}) {
+	    $o->{rpmsrate_flags_chosen}{$_} = 1 foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
 	}
-	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
+	if (!$o->{rpmsrate_flags_chosen} && !$o->{isUpgrade}) {
 	    #- use default selection seen in compssUsers directly.
-	    foreach (keys %{$o->{compssUsers}}) {
-		$o->{compssUsers}{$_}{selected} or next;
-		log::l("looking for default selection on $_");
-		member($o->{meta_class} || 'default', @{$o->{compssUsers}{$_}{selected}}) ||
-		  member('all', @{$o->{compssUsers}{$_}{selected}}) or next;
-		log::l("   doing selection on $_");
-		$o->{compssUsersChoice}{$_} = 1 foreach @{$o->{compssUsers}{$_}{flags}};
+	    foreach (@{$o->{compssUsers}}) {
+		$_->{selected} = $_->{default_selected} or next;
+		$o->{rpmsrate_flags_chosen}{$_} = 1 foreach @{$_->{flags}};
 	    }
 	}
     }
-    $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
-    $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
-    $o->{compssUsersChoice}{SYSTEM} = 1;
-    $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
-    $o->{compssUsersChoice}{UTF8} = $o->{locale}{utf8};
-    $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
-    $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
-    $o->{compssUsersChoice}{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
-    $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
-    $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-    $o->{compssUsersChoice}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64|x86_64/;
-    $o->{compssUsersChoice}{SMP} = 1 if detect_devices::hasSMP();
-    $o->{compssUsersChoice}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
-    $o->{compssUsersChoice}{'3D'} = 1 if 
+    $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
+    $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
+    $o->{rpmsrate_flags_chosen}{SYSTEM} = 1;
+    $o->{rpmsrate_flags_chosen}{DOCS} = !$o->{excludedocs};
+    $o->{rpmsrate_flags_chosen}{UTF8} = $o->{locale}{utf8};
+    $o->{rpmsrate_flags_chosen}{BURNER} = 1 if detect_devices::burners();
+    $o->{rpmsrate_flags_chosen}{DVD} = 1 if detect_devices::dvdroms();
+    $o->{rpmsrate_flags_chosen}{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
+    $o->{rpmsrate_flags_chosen}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
+    $o->{rpmsrate_flags_chosen}{HIGH_SECURITY} = 1 if $o->{security} > 3;
+    $o->{rpmsrate_flags_chosen}{BIGMEM} = 1 if !$::oem && availableRamMB() > 800 && arch() !~ /ia64|x86_64/;
+    $o->{rpmsrate_flags_chosen}{SMP} = 1 if detect_devices::hasSMP();
+    $o->{rpmsrate_flags_chosen}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
+    $o->{rpmsrate_flags_chosen}{'3D'} = 1 if 
       detect_devices::matching_desc('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc('Rage X[CL]') ||
       detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
@@ -592,9 +588,9 @@ sub setDefaultPackages {
     unshift @{$o->{default_packages}}, uniq(map { $_->name } @locale_pkgs);
 
     foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
-	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
+	$o->{rpmsrate_flags_chosen}{qq(LOCALES"$_")} = 1;
     }
-    $o->{compssUsersChoice}{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
+    $o->{rpmsrate_flags_chosen}{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
 }
 
 sub unselectMostPackages {
@@ -1066,6 +1062,9 @@ sub loadO {
 		fs::type::set_fs_type($_, $type);
 	    }
 	}
+    }
+    if (my $rpmsrate_flags_chosen = delete $o->{compssUsersChoice}) {
+	$o->{rpmsrate_flags_chosen} = $rpmsrate_flags_chosen;
     }
 
     $o;

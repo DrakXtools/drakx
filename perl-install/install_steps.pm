@@ -310,7 +310,7 @@ sub choosePackages {
     #- for expert, as they may have done individual selection before.
     if ($first_time || !$::expert) {
 	exists $o->{compssListLevel}
-	  and pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
+	  and pkgs::setSelectedFromCompssList($packages, $o->{rpmsrate_flags_chosen}, $o->{compssListLevel}, $availableCorrected);
     }
     $availableCorrected;
 }
@@ -598,7 +598,7 @@ sub install_urpmi {
 				   $o->{method},
 				   $o->{packages},
 				   $o->{packages}{mediums});
-	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers}, $o->{compssUsersSorted});
+	pkgs::saveCompssUsers($o->{prefix}, $o->{packages}, $o->{compssUsers});
     }
 }
 
@@ -689,7 +689,7 @@ sub summary {
 }
 
 sub summaryAfter {
-    my ($o) = @_;
+    my ($_o) = @_;
 }
 
 #------------------------------------------------------------------------------

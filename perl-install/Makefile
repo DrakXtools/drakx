@@ -173,7 +173,7 @@ endif
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cp `perl -I. -Mlang -e 'lang::png_lang_files()'` $(DEST)/usr/share/langs
-	cd share ; cp compssUsers compssUsers.* rpmsrate $(MEDIA_INFO_DEST)
+	cd share ; cp compssUsers.pl* rpmsrate $(MEDIA_INFO_DEST)
 
 	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 

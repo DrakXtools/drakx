@@ -37,7 +37,6 @@ $(POFILES): DrakX.pot
 
 DrakX.pot: $(PMSFILES_HERE)
 	cd ../.. ; perl_checker -q --generate-pot share/po/$@ $(PMSFILES)
-	perl i18n_compssUsers 2>/dev/null >> $@
 
 install:
 	for l in $(LANGS); do \

@@ -200,7 +200,7 @@ sub selectMouse {
 }
 
 sub reallyChooseGroups {
-    my ($o, $size_to_display, $individual, $val) = @_;
+    my ($o, $size_to_display, $individual, $compssUsers) = @_;
 
     my $w = ugtk2->new('');
     my $tips = Gtk2::Tooltips->new;
@@ -208,60 +208,22 @@ sub reallyChooseGroups {
 
     my $entry = sub {
 	my ($e) = @_;
-	my $text = translate($o->{compssUsers}{$e}{label});
-	my $help = translate($o->{compssUsers}{$e}{descr});
+	my $text = translate($e->{label});
+	my $help = translate($e->{descr});
 
 	my $check = Gtk2::CheckButton->new($text);
-	$check->set_active($val->{$e});
+	$check->set_active($e->{selected});
 	$check->signal_connect(clicked => sub { 
-	    $val->{$e} = $check->get_active;
+	    $e->{selected} = $check->get_active;
 	    $w_size->set_label(&$size_to_display);
 	});
 	gtkset_tip($tips, $check, $help);
-	#gtkpack_(Gtk2::HBox->new(0, 0), 0, gtkpng($file), 1, $check);
 	$check;
-    };
-    my $entries_in_path = sub {
-	my ($path) = @_;
-	translate($path), map { $entry->($_) } grep { $o->{compssUsers}{$_}{path} eq $path } @{$o->{compssUsersSorted}};
     };
     gtkadd($w->{window},
 	   gtkpack_($w->create_box_with_title(N("Package Group Selection")),
-		    1, gtkpack_(Gtk2::VBox->new(0, 0),
-			   1, gtkpack_(Gtk2::HBox->new(0, 0),
-			        $o->{meta_class} eq 'server' ? (
-				   1, gtkpack(Gtk2::VBox->new(0, 0), 
-					   $entries_in_path->('Workstation'),
-					   '',
-					   $entries_in_path->('Server'),
-					  ),
-				   1, gtkpack(Gtk2::VBox->new(0, 0), 
-					   $entries_in_path->('Graphical Environment'),
-					   '',
-					   $entries_in_path->('Development'),
-					   '',
-					   $entries_in_path->('Utilities'),
-					  ),
-				) : $o->{meta_class} eq 'desktop' ? (
-				   1, gtkpack(Gtk2::VBox->new(0, 0), 
-					   $entries_in_path->('Workstation'),
-					  ),
-				) : (
-				   1, gtkpack(Gtk2::VBox->new(0, 0), 
-					   $entries_in_path->('Workstation'),
-					   '',
-					   $entry->('Development|Development'),
-					   $entry->('Development|Documentation'),
-					   $entry->('Development|LSB'),
-					  ),
-				   0, gtkpack(Gtk2::VBox->new(0, 0), 
-					   $entries_in_path->('Server'),
-					   '',
-					   $entries_in_path->('Graphical Environment'),
-					  ),
-				),
-			   )),
-		   1, '',
+		    1, $o->{gtk_display_compssUsers}->($entry),
+		    1, '',
 		   0, gtkadd(Gtk2::HBox->new(0, 0),
 			  gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => $o->interactive_help_sub_display_id('choosePackages')),
 			  $w_size,
@@ -309,10 +271,9 @@ sub choosePackagesTree {
 					$add_node->($_, undef);
 				    }
 				} else {
-				    foreach my $root (@{$o->{compssUsersSorted}}) {
-					my (%fl, @firstchoice, @others);
-					#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
-					$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
+				    foreach my $root (@{$o->{compssUsers}}) {
+					my (@firstchoice, @others);
+					my %fl = map { $_ => 1 } @{$root->{flags}};
 					foreach my $p (@{$packages->{depslist}}) {
 					    !$o_limit_medium || pkgs::packageMedium($packages, $p) == $o_limit_medium or next;
 					    my @flags = $p->rflags;
@@ -321,7 +282,7 @@ sub choosePackagesTree {
 					      push(@firstchoice, $p->name) :
 						push(@others,    $p->name);
 					}
-					my $root2 = join('|', map { translate($_) } split('\|', $root));
+					my $root2 = translate($root->{path}) . '|' . translate($root->{label});
 					$add_node->($_, $root2)                    foreach sort @firstchoice;
 					$add_node->($_, $root2 . '|' . N("Other")) foreach sort @others;
 				    }

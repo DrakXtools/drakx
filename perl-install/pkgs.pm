@@ -587,44 +587,22 @@ sub read_rpmsrate {
 sub readCompssUsers {
     my ($meta_class, $file) = @_;
 
-    $file ||= 'media/media_info/compssUsers';
     my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
-    readCompssUsers_raw($f);
-}
-
-sub readCompssUsers_raw {
-    my ($f) = @_;
-    my (%compssUsers, @sorted, $l);
-
-    local $_;
-    while (<$f>) {
-	/^\s*$/ || /^#/ and next;
-	s/#.*//;
-
-	if (/^(\S.*)/) {
-	    my $verbatim = $_;
-	    my ($icon, $descr, $path, $selected);
-	    /^(.*?)\s*\[path=(.*?)\](.*)/  and $_ = "$1$3", $path  = $2;
-	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
-	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    /^(.*?)\s*\[selected=(.*?)\](.*)/ and $_ = "$1$3", $selected = $2;
-	    $compssUsers{"$path|$_"} = { label => $_, verbatim => $verbatim,
-					 path => $path, icons => $icon, descr => $descr,
-					 if_(defined $selected, selected => [ split /[\s,]+/, $selected ]), flags => $l = [] };
-	    push @sorted, "$path|$_";
-	} elsif (/^\s+(.*?)\s*$/) {
-	    push @$l, $1;
-	}
+    my ($compssUsers, $gtk_display_compssUsers) = eval join('', <$f>);
+    if ($@) {
+	log::l("ERROR: bad $file: $@");
+    } else {
+	log::l("compssUsers.pl got: ", join(', ', map { qq("$_->{path}|$_->{label}") } @$compssUsers));
     }
-    \%compssUsers, \@sorted;
+    ($compssUsers, $gtk_display_compssUsers);
 }
+
 sub saveCompssUsers {
-    my ($prefix, $packages, $compssUsers, $sorted) = @_;
+    my ($prefix, $packages, $compssUsers) = @_;
     my $flat;
-    foreach (@$sorted) {
-	my @fl = @{$compssUsers->{$_}{flags}};
-	my %fl; $fl{$_} = 1 foreach @fl;
-	$flat .= $compssUsers->{$_}{verbatim};
+    foreach (@$compssUsers) {
+	my %fl = map { $_ => 1 } @{$_->{flags}};
+	$flat .= "$_->{label} [icon=xxx] [path=$_->{path}]\n";
 	foreach my $p (@{$packages->{depslist}}) {
 	    my @flags = $p->rflags;
 	    if ($p->rate && any { any { !/^!/ && $fl{$_} } split('\|\|') } @flags) {
@@ -637,14 +615,14 @@ sub saveCompssUsers {
 }
 
 sub setSelectedFromCompssList {
-    my ($packages, $compssUsersChoice, $min_level, $max_size) = @_;
-    $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
+    my ($packages, $rpmsrate_flags_chosen, $min_level, $max_size) = @_;
+    $rpmsrate_flags_chosen->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
     foreach my $p (sort { $b->rate <=> $a->rate } @{$packages->{depslist}}) {
 	my @flags = $p->rflags;
 	next if 
 	  !$p->rate || $p->rate < $min_level || 
-	  any { !any { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
+	  any { !any { /^!(.*)/ ? !$rpmsrate_flags_chosen->{$1} : $rpmsrate_flags_chosen->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
@@ -665,7 +643,7 @@ sub setSelectedFromCompssList {
 	    last;
 	}
     }
-    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ") for flags ", map_each { if_($::b, $::a) } %$rpmsrate_flags_chosen);
     log::l("setSelectedFromCompssList: ", join(" ", sort map { $_->name } grep { $_->flag_selected } @{$packages->{depslist}}));
     $min_level;
 }
@@ -730,6 +708,8 @@ sub computeGroupSize {
 	join("\t", map { join('&&', @$_) } @r);
     }
     my (%group, %memo, $slowpart_counter);
+
+    log::l("pkgs::computeGroupSize");
 
     foreach my $p (@{$packages->{depslist}}) {
 	my @flags = $p->rflags;
