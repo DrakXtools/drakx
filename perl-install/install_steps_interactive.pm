@@ -797,7 +797,7 @@ sub summary {
     my $format_printers = sub {
 	my ($printer) = @_;
 	if (is_empty_hash_ref($printer->{configured})) {
-	    pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'cups')) and return _("Remote CUPS server");
+	    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups')) and return _("Remote CUPS server");
 	    return _("No printer");
 	}
 	my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
@@ -865,7 +865,7 @@ sub configurePrinter {
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($printer, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
     
-    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'cups'));
+    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'cups'));
 }
 
 #------------------------------------------------------------------------------
