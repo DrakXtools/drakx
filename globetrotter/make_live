@@ -31,6 +31,13 @@ foreach (@ARGV) {
     }
 }
 
+my $rescue;
+
+if ($0 =~ /restore_globetrotter/) {
+    %options = (install => 1, post => 1);
+    $rescue = 1;
+}
+
 @ARGV = @new_ARGV;
 
 my @suggestions = (
@@ -95,15 +102,29 @@ sub formatdisk {
         run_program::get_stdout('service', 'usb', 'start');
     }
 
+my $pkg_dev;
+if ($rescue) {
+    system("mount -t tmpfs none /tmp");
+    # let be able to see USB devices:
+    system("mount -t usbfs none /proc/bus/usb");
+    system("modprobe usb-storage; modprobe sd_mod");
+    # let be able to detect SCSI hds:
+    mkdir("/sys");
+    system("mount -t sysfs none /sys");
 
-my $kernel_version = do {
-    #my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
-    my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
-    @l >= 1 or die "can't find kernel";
-    @l <= 1 or die "too many kernels";
-    first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
-};
+    my ($all_hds, $hd, $other) = get_hds();
+    print "Looking for the package partition\n";
+    my @parts = partition_table::get_normal_parts($hd);
+    my $pkg_dev = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-PKGS" } @parts;
+    die "I cannot find the package partition which is needed in order to restore the system!" if is_empty_hash_ref($pkg_dev) || !$pkg_dev->{device} ;
+    my $root = find { member(fs::type2fs($_), qw(ext2 ext3)) && chomp_(`e2label /dev/$_->{device} 2>/dev/root`) eq "MDK-ROOT" } @parts;
+    $root = find { $_->{device} eq "sda1" } @parts if is_empty_hash_ref($root);
+    die "I cannot find any hard disk to restore!" if is_empty_hash_ref($root) || !$root->{device} ;
+    print "Please wait, disk reinstallation is in progress, this can take quite some time\n";
+    print "Formating $root->{device}\n";
+    system("mkfs.ext2 /dev/$root->{device} > /dev/null\n");
 
+}
 
 sub installPackages() {
     local $::testing = undef;
@@ -140,7 +161,15 @@ sub installPackages() {
     };
 
     undef *c::kernel_version;
-    *c::kernel_version = sub { $kernel_version };
+    *c::kernel_version = sub {
+	#my @l = glob_('/export/Mandrake/RPMS/kernel-enterprise-2.6*');
+	my @l = glob_('/export/Mandrake/RPMS/kernel-2.6*');
+	@l >= 1 or die  "TOTO\n$str\n"."can't find kernel";
+	@l <= 1 or die "too many kernels";
+	first(`rpm -qp --qf '%{name}' $l[0]` =~ /kernel-(.*)/);
+    };
+
+    my $kernel_version = c::kernel_version();
 
     print "INSTALLING\n";
     install_any::setPackages(my $o = $::o =
@@ -268,6 +297,7 @@ my $fstab = [ fsedit::get_all_fstab($all_hds) ];
 # we need to mount every fs we want to see into /etc/fstab !!!
 fs::mount_part($_, $::prefix) foreach sort { $a->{mntpoint} cmp $b->{mntpoint} } @$fstab;
 
+symlink("$::prefix/mnt/packages", "/export") if $rescue;
 
 eval {
     print "Installing packages\n";
@@ -412,7 +442,7 @@ unlink $_ foreach glob("$::prefix/core.*");
 #
 
 
-system("rsync -rvltp /export/ $::prefix/mnt/packages/");
+system("rsync -rvltp /export/ $::prefix/mnt/packages/") if !$rescue;
 unlink $_ foreach glob("$::prefix/var/lib/urpmi/*");
 run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'main', 'file:///mnt/packages/Mandrake/RPMS');
 run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/packages/Mandrake/RPMS2');
@@ -420,4 +450,4 @@ run_program::rooted($::prefix, 'urpmi.addmedia', '-h', 'contrib', 'file:///mnt/p
 # for fast test replaying:
 run_program::rooted($::prefix, 'tar', 'cfj', '/root/etc.tar.bz2', '/etc');
 
-fs::umount_all($fstab, $::prefix);
+eval { fs::umount_all($fstab, $::prefix) } or system("umount $::prefix"); 
