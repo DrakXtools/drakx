@@ -116,7 +116,10 @@ my $pbar2;
 my $pbar3;
 my $font_box;
 my $central_widget;
-
+my $label1;
+my $label2;
+my $label3;
+my $label4;
 
 foreach (@ARGV) {
     /--xls_fonts/ and $xlsfonts = 1, $mode=-1;
@@ -189,6 +192,7 @@ sub list_fontpath {
 sub search_installed_fonts {
     list_fontpath();
     push @installed_fonts, all($_) foreach @installed_fonts_path;
+	$interactive and  progress($pbar, 100/3 );
 }
 
 sub search_installed_fonts_full_path {
@@ -201,7 +205,7 @@ sub search_installed_fonts_full_path {
 }
 
 sub search_windows_font {
-    foreach my $fstab_line (grep { /vfat/ } cat_('/etc/mtab') ) {
+    foreach my $fstab_line (grep { /ext2/ } cat_('/etc/mtab') ) {
 	my $win_dir = (split('\s', $fstab_line))[1];
 	my @list_fonts_win = all("$win_dir/windows/fonts");
 	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
@@ -214,7 +218,7 @@ sub search_windows_font {
 	foreach $_ ([\@list_fonts_win, "windows"], [\@list_fonts_winnt, "winnt"]) {
 	    foreach my $i (@{$_->[0]}) {
 		if($interactive) {
-		    if($nb_dir) { progress($pbar, 100/$nb_dir) } else {
+		    if($nb_dir) { progress($pbar, 34/$nb_dir) } else {
 			display_error(_("no fonts found"));
 			return 0;
 		    }
@@ -223,6 +227,7 @@ sub search_windows_font {
 		grep ( /$i$/, @font_list) or push @font_list, "$win_dir/$_->[1]/fonts/$i";
 	    }
 	}
+	$interactive && $nb_dir and  progress($pbar, 100/3 );
     }
     1;
 }
@@ -240,6 +245,7 @@ sub search_dir_font {
     if (!(-e $fn )) { print "$_ :: no such file or directory \n" } else {
 	if ( -d $fn ) {
 	    $dir = $fn;
+# fixme : faire test avant sur les repertoiers ne pas avoir plusieurs fosi le meme rep!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 	    foreach my $i (all($fn)) {
 		if (is_a_font($i)) {
 		    push @font_list_tmp, "$i";
@@ -295,11 +301,14 @@ sub put_font_dir {
   -e "/usr/share/ghostscript" or $gs = 0 && print "ghostscript is not installed on your system...\n"  ;
   if (@font_list) {
     dir_created();
-    cp_af(@font_list, $drakfont_dir . "/tmp/tmp");
-
+    foreach my $i (@font_list) {
+	cp_af($i, $drakfont_dir . "/tmp/tmp");
+	$interactive and  progress($pbar1, 100/@font_list );
+    }
     system ("cd $drakfont_dir/tmp/tmp   && cp *.ttf ../../ttf");
     system ("cd $drakfont_dir/ttf && $ttmkfdir > fonts.dir" );
     system ("$chkfontpath -a $drakfont_dir/ttf");
+    $interactive and  progress($pbar2, 50 );
 
     if ($so && $gs)  {
       foreach my $fontname ( glob ("$drakfont_dir/tmp/tmp/*.ttf") ) { 
@@ -332,9 +341,12 @@ sub put_font_dir {
       system ("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
       system ("cd $drakfont_dir/Type1 && $type1inst &&  $chkfontpath -a $drakfont_dir/Type1");
     }
+    $interactive and  progress($pbar2, 50 );
     rm_rf("$drakfont_dir/tmp/");
+    $interactive and  progress($pbar3, 50 );
     print "\n\nretarting xfs......\n";
     system ("/etc/rc.d/init.d/xfs restart");
+    $interactive and  progress($pbar3, 50 );
   }
 }
 
@@ -385,7 +397,7 @@ sub remove_fonts {
 }
 
 sub license_msg {
-    print _("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode.")."\n";
+    print _("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.")."\n";
 }
 
 $xlsfonts || $windows || @install || @uninstall ? backend_mod() : interactive_mode();
@@ -410,6 +422,7 @@ sub backend_mod {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
 	search_dir_font $_ foreach (@install);
+	print "font directory_______ : $_ \n" foreach (@install);
 	print ".................................................\n\n";
 	print "Font to install : " . $_ . "\n" foreach (@font_list);
 	put_font_dir();
@@ -508,7 +521,7 @@ sub license {
     gtkpack($font_box,
 	    $license_box = gtkpack_(new Gtk::VBox(0,10),
 				    1, gtkpack_(new Gtk::HBox(0,0),
-						1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
+						1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server."),
 						0, new Gtk::VScrollbar($text->vadj),
 					       ),
 				    0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
@@ -576,9 +589,15 @@ ________________________ ABOUT ____________________________
 
 
  USING:
-    -  pfm2afm:   by Ken Borgendale: Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
-    -  type1inst: by James Macnicol: type1inst generates files fonts.dir fonts.scale & Fontmap.
-    -  ttf2pt1:   by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  convert ttf font files to afm and pfb fonts
+    -  pfm2afm:   
+	 by Ken Borgendale:
+	    Convert a Windows .pfm  file to a .afm (Adobe Font Metrics)
+    -  type1inst:
+	 by James Macnicol: 
+	    type1inst generates files fonts.dir fonts.scale & Fontmap.
+    -  ttf2pt1:   
+	  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  
+             Convert ttf font files to afm and pfb fonts
 
 
 "),
@@ -670,7 +689,7 @@ sub advanced_install {
 				0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					  gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub { font_choice() }),
 					  gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list),
-					  gtksignal_connect(new Gtk::Button(_("Install Selection")), clicked => sub { 
+					  gtksignal_connect(new Gtk::Button(_("Install List")), clicked => sub { 
 					      ${$central_widget}->destroy(); import_status() }),
 					  ),
 				)
@@ -686,15 +705,30 @@ sub import_status {
     my $adj3 = new Gtk::Adjustment( 0, 1, 100, 0, 0, 0 );
     my $table;
     gtkpack($font_box,
-	    $table = create_packtable({ col_spacings => 30, row_spacings => 20},
-   [_("Search Fonts on your System"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
-   [_("Supress Doublons"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
-   [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
-   [_("Post Install Fonts"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
+	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
+   [ " ", $label1 = new Gtk::Label(' ' ), ' '],				 
+   [_("Initial tests"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), ' '],
+   [ " ", $label2 = new Gtk::Label(' ' ), ' '],				 
+   [_("Copy all fonts on your system"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), ' '],
+   [ " ", $label3 = new Gtk::Label(' ' ), ' '],				 
+   [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), ' '],
+   [ " ", $label4 = new Gtk::Label(' ' ), ' '],				 
+   [_("Post Install"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), ' '],
 			    ),
+# 	    $table = create_packtable({ col_spacings => 10, row_spacings => 2},
+#    [ " ", $label1 = new Gtk::Label(' ' )],				 
+#    [_("Initial tests"), $pbar = new_with_adjustment Gtk::ProgressBar($adj), gtkset_sensitive($check1 = new Gtk::CheckButton(), 0)],
+#    [ " ", $label2 = new Gtk::Label(' ' )],				 
+#    [_("Copy all fonts on your system"), $pbar1 = new_with_adjustment Gtk::ProgressBar($adj1), gtkset_sensitive($check2 = new Gtk::CheckButton(), 0)],
+#    [ " ", $label3 = new Gtk::Label(' ' )],				 
+#    [_("Install & convert Fonts"), $pbar2 = new_with_adjustment Gtk::ProgressBar($adj2), gtkset_sensitive($check3 = new Gtk::CheckButton(), 0)],
+#    [ " ", $label4 = new Gtk::Label(' ' )],				 
+#    [_("Post Install"), $pbar3 = new_with_adjustment Gtk::ProgressBar($adj3), gtkset_sensitive($check4 = new Gtk::CheckButton(), 0)],
+# 			    ),
 	   );
     $central_widget = \$table;
     $font_box->show_all();
+    progress($pbar, 0.1 );
 #    my $timer  = Gtk->timeout_add(  5, \&progress_timeout );
 #    my $timer1 = Gtk->timeout_add( 10, \&progress_timeout1 );
 #    my $timer2 = Gtk->timeout_add( 15, \&progress_timeout2 );
@@ -709,7 +743,7 @@ sub progress {
     $new_val = $pbar->get_value() + $incr;
     $adjt = $bar->adjustment;
     $bar->set_value( $new_val );
-    $new_val < 100 || gtkset_active($check1 , 1);
+#    $new_val < 100 || gtkset_active($check1 , 1);
     $new_val < 100 ;
 }
 
