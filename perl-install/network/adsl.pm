@@ -111,6 +111,7 @@ sub adsl_conf_backend {
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";
     $adsl_type eq 'pptp' and $adsl_device = 'pptp_modem';
+    $adsl_type eq 'capi' and $adsl_device = 'capi_modem';
     my $bewan_module;
     $bewan_module = $o_netcnx->{bus} eq 'PCI' ? 'unicorn_pci_atm' : 'unicorn_usb_atm' if $adsl_device eq "bewan";  
 
@@ -212,10 +213,33 @@ lcp-echo-interval 0)
                               pptp => qq("/usr/sbin/pptp 10.0.0.138 --nolaunchpppd"),
                              },
                   },
+                  capi_modem =>
+                  {
+                   ppp_options => qq(
+connect /bin/true
+ipcp-accept-remote
+ipcp-accept-local
+
+sync
+noauth
+lcp-echo-interval 5
+lcp-echo-failure 3
+lcp-max-configure 50
+lcp-max-terminate 2
+
+noccp
+noipx
+mru 1492
+mtu 1492),
+                   plugin => {
+                              capi => qq(capiplugin.so
+protocol adslpppoe)
+                             },
+                  },
                  );
 
 
-    if ($adsl_type =~ /^pp/) {
+    if ($adsl_type =~ /^pp|^capi$/) {
         mkdir_p("$::prefix/etc/ppp");
         $in->do_pkgs->install('ppp') if !$>;
         my %packages = (
@@ -311,7 +335,7 @@ user "$adsl->{login}"
 #                     },
 
     }
-   
+
     #- FIXME: 
     #-   ppp0 and ippp0 are hardcoded
     my $kind = $adsl_type eq 'pppoe' ? 'xDSL' : 'ADSL';
@@ -329,6 +353,19 @@ METRIC=$metric
     if (exists $modems{$adsl_device}{aliases}) {
         $modules_conf->set_alias($_->[0], $_->[1]) foreach @{$modems{$adsl_device}{aliases}};
         $::isStandalone and $modules_conf->write;
+    }
+
+    if ($adsl_type eq "capi") {
+        require network::isdn;
+        network::isdn::setup_capi_conf($adsl->{capi});
+        services::stop("isdn4linux");
+        services::do_not_start_service_on_boot("isdn4linux");
+        services::start_service_on_boot("capi4linux");
+        services::restart("capi4linux");
+
+        #- install and run drdsl for dsl connections, once capi driver is loaded
+        $in->do_pkgs->ensure_is_installed_if_available("drdsl", "$::prefix/usr/sbin/drdsl");
+        run_program::rooted($::prefix, "/usr/sbin/drdsl");
     }
 
     unless ($::isStandalone) {
