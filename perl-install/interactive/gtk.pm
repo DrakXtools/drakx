@@ -500,10 +500,8 @@ sub ask_fromW {
     my ($totalheight, $totalwidth) = ($mainw->{box_size}, 0);
 
     my $set_default_size = sub {
-	if (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it) {
-	    if ($has_scroll || $has_horiz_scroll) {
-		$mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $has_scroll ? $totalheight+6+3+$my_gtk::shape_width : 0);
-	    }
+	if (($has_scroll || $has_horiz_scroll) && !$mainw->{isEmbedded} && !$mainw->{isWizard}) {
+	    $mainw->{rwindow}->set_default_size($totalwidth+6+$my_gtk::shape_width, $has_scroll ? $totalheight+6+3+$my_gtk::shape_width : 0);
 	}
     };
 
@@ -529,7 +527,7 @@ sub ask_fromW {
 	$size && $total_size or return $w; #- do not bother computing stupid/bad things
 	my $ratio = max($size / $total_size, 0.2);
 
-	my ($possibleheight, $possiblewidth) = $::isEmbedded && !$my_gtk::pop_it ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
+	my ($possibleheight, $possiblewidth) = $mainw->{isEmbedded} ? (450, 380) : ($::windowheight * 0.8, $::windowwidth * 0.8);
 	$possibleheight -= $mainw->{box_size};
 
 	my $wantedwidth = max(250, $max_width * 5);
@@ -598,7 +596,7 @@ sub wait_messageW($$$) {
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(scalar warp_text($_)) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
-    $w->{rwindow}->set_position('center') if ($::isStandalone && (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it));
+    $w->{rwindow}->set_position('center') if $::isStandalone && !$w->{isEmbedded} && !$w->{isWizard};
     $w->{window}->show_all;
     $w->sync until $w->{displayed};
     $w;
