@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.15mdk
+Release: 0.16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -239,16 +239,6 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 	icon="harddrake.png"
 EOF
 
-cat > $RPM_BUILD_ROOT%_datadir/harddrake/convert <<EOF
-#!/usr/bin/perl
-use Storable;
- 
-my \$last_boot_config = "/etc/sysconfig/harddrake2/previous_hw";
- 
-my \$config = do \$last_boot_config;
-store \$config, \$last_boot_config;
-EOF
-
 cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
 #!/bin/sh
 exec /usr/share/harddrake/service_harddrake X11
@@ -262,6 +252,7 @@ case \$DESKTOP in
 esac
 EOF
 
+mv $RPM_BUILD_ROOT%_sbindir/convert $RPM_BUILD_ROOT%_datadir/harddrake/
 mv $RPM_BUILD_ROOT%_sbindir/service_harddrake_confirm $RPM_BUILD_ROOT%_datadir/harddrake/confirm
 
 chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/{harddrake2,net_applet}}
@@ -367,6 +358,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jan 26 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.16mdk
+- diskdrake: use the new option auto=dev instead of auto=yes when
+  configuring mdadm (pixel)
+- drakTermServ (stew):
+  o drop quasi-pxe setup in dhcp.conf as we can use real pxe now
+  o portmap check, dhcpd.conf.pxe.include (#13138 & #13139)
+- package installation: use the new --gui option to urpmi for the
+  drakxtools to ask for media change (rafael)
+- mygtk2 related fixes (pixel)
+
 * Fri Jan 21 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.15mdk
 - fix mygtk2 for drakloop (pixel)
 - printerdrake: fix main loop (daouda)
