@@ -41,7 +41,7 @@ $window_g->set_title(_("Mandrake Bug Report Tool"));
 #$window_g->set_usize(540, 350);
 $window_g->signal_connect( "delete_event", \&quit_global);
 
-chomp(my $kernel_release = `uname -m -r -s`);
+chomp(my $kernel_release = `uname -r`);
 $kernel_release.="";
 chomp(my $mdk_release = cat_("/etc/mandrake-release"));
 
@@ -50,9 +50,10 @@ my $mdk_app = {
 	       _("First Time Wizard") => 'drakfw',
 	       _("Synchronization tool") => 'draksync',  
 	       _("Standalone Tools") =>['adduserdrake','diskdrake','drakautoinst','drakbackup','drakboot','drakbug','drakfloppy','drakfont','drakgw','drakconnect','drakxservices','drakxtv','keyboardrake','logdrake','mousedrake','net_monitor','printerdrake','scannerdrake','tinyfirewall','XFdrake'],
-	       _("HardDrake") => 'harddrake',
+	       _("HardDrake") => 'harddrake2',
 	       _("Mandrake Online") => ['mdkonline','mdkupdate'],
 	       _("Menudrake") => 'menudrake',
+	       _("Msec") => 'msec',
 	       _("Remote Control") => 'rfbdrake',
 	       _("Software Manager") => ['rpmdrake','MandrakeUpdate'],
 	       _("Urpmi") => ['urpmi','urpmq','urpme'],
@@ -60,12 +61,15 @@ my $mdk_app = {
 	       _("Userdrake") => 'userdrake',
 	       _("Configuration Wizards") => 'wizdrake',
 	      };
+my @generic_tool = keys %{$mdk_app}; 
+my @all_drakxtools = @ { $mdk_app->{_("Standalone Tools")} };
+push(@generic_tool,@all_drakxtools);
 
 gtkpack2__(
 	   gtkpack2__(my $vbx = new Gtk::VBox(0,5),
 		      gtkpack(new Gtk::HBox(0,0),
 			      gtkpack(new Gtk::Label(_("Application:"))),
-			      gtkpack(gtkcombo_setpopdown_strings(my $comb_app = new Gtk::Combo(),("",keys %{$mdk_app}))),
+			      gtkpack(gtkcombo_setpopdown_strings(my $comb_app = new Gtk::Combo(),("",@generic_tool))),
 			     ),
 		      gtkpack(new Gtk::HBox(0,5),
 			      gtkpack(new Gtk::Label(_("Package: "))),
@@ -86,23 +90,24 @@ gtkpack2__(
 		      
 		     ),
 	  );
-my $app_choice;
-
 $comb_app->entry->signal_connect('changed', sub {
-				     if ((my $text = $comb_app->entry->get_text()) ne '') {
+				     if (($text = $comb_app->entry->get_text()) ne '') {
+					 if (member($text,@all_drakxtools)) {chomp($app_choice = `rpm -q drakxtools`) } else {
+					 
 					 exists $mdk_app->{$text}[1] ? chomp($which_app =`which '$mdk_app->{$text}[1]'`) : chomp($which_app = `which '$mdk_app->{$text}'`);
 					 chomp($app_choice = `rpm -qf '$which_app'`); 
-					 $app_choice ne '' ? $version->set_text("$app_choice") : $version->set_text(_("Not installed"));
+				     }
+					 $app_choice !~ m/ / ? $version->set_text("$app_choice") : $version->set_text(_("Not installed"));
 				     }
 				 }
 				);
-
+my $kernel = $kernel_rel->get_chars(0,-1);
 my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0)});
 $hbx->pack_start($Close_Button,0,0,0);
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("http://192.168.100.126/~daouda/bugs/html/wizard/");});
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("https://qa.mandrakesoft.com/wizard/");});
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -114,7 +119,7 @@ in->exit(0);
 
 sub connect_bugzilla {
     my($url) = @_;
-    my $w = $in->wait_message('',_("connecting to Bugzilla wizard ..."));
+    my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
     exec $ENV{BROWSER},$url if $ENV{BROWSER};
     $in->ask_warn('', _("No browser available please! Please install one"));
 }
