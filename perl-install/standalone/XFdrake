@@ -26,9 +26,9 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: XFdrake [--xf4] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+/-h/ and die "usage: XFdrake [--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
-$::xf4 = /-xf4/;
+$::force_xf3 = /-xf3/;
 $::beginner = /-beginner/;
 $::expert = /-expert/;
 $::auto = /-auto/;

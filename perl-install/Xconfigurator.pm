@@ -193,9 +193,17 @@ sub cardConfiguration(;$$$) {
 			$card->{type} =~ /Intel 810/ ||
 			$card->{type} =~ /ATI Rage 128/);
 
+    #- check to use XFree 4.0 or XFree 3.3.
+    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
+
+    #- ask the expert user if he want 3D acceleration.
+    if ($::expert && ($card->{Utah_glx} || $card->{DRI_glx})) {
+	$in->ask_yesorno('', _("Do you want support for hardware 3D acceleration?", 1)) or
+	  $card->{Utah_glx} = $card->{DRI_glx} = ''; #- disable all 3D acceleration
+    }
+
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
-    !$::force_xf3 && $card->{driver} && !$card->{flags}{unsupported} or $card->{driver} = ''; #- disable XFree 4.0
     if ($card->{driver} && $card->{Utah_glx} && !$card->{DRI_glx}) {
 	$::beginner || $in->ask_yesorno('',
 					_("Your card can have 3D acceleration but only with XFree 3.3.
@@ -778,8 +786,12 @@ Section "Module"
 # This loads the DBE extension module.
 
     Load	"dbe"
+);
+    print G qq(
     Load	"glx"
     Load	"dri"
+) if $o->{card}{DRI_glx};
+    print G qq(
 
 # This loads the miscellaneous extensions module, and disables
 # initialisation of the XFree86-DGA extension within that module.
@@ -793,11 +805,13 @@ Section "Module"
     Load	"type1"
     Load	"freetype"
 EndSection
+);
+    print G qq(
 
 Section "DRI"
     Mode	0666
 EndSection
-);
+) if $o->{card}{DRI_glx};
 
     #- Write monitor section.
     $O = $o->{monitor};
