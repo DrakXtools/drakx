@@ -174,7 +174,7 @@ $button2->signal_connect (clicked => sub {
 			      if (!netconnect::connected('', $netc)) {
 				  my $up;
 				  {
-				      my $w = $in->wait_message('', _("Openning your connection..."), 1);
+				      my $w = $in->wait_message('', _("Opening your connection..."), 1);
 				      netconnect::connect_backend($prefix);
 				      sleep 5;
 				      $up=netconnect::connected($prefix, $netc);
