@@ -443,7 +443,7 @@ sub main {
 	if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	    log::l("found network config file $file");
 	    my $l = network::network::read_interface_conf($file);
-	    $o->{intf} ||= { $l->{DEVICE} => $l };
+	    $o->{intf}{$l->{DEVICE}} ||= $l;
 	}
 	if (-e '/etc/resolv.conf') {
 	    my $file = '/etc/resolv.conf';
