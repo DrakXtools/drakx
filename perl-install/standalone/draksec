@@ -238,18 +238,18 @@ my $bok = gtksignal_connect(Gtk2::Button->new(N("Ok")),
 
                                 if ($seclevel_value ne security::level::get_string()) {
                                     $w = wait_msg(N("Please wait, setting security level..."));
-                                    log::explanations("Setting security level to $seclevel_value");
+                                    log::explanations(qq(Setting security level to "$seclevel_value"));
                                     security::level::set(security::level::from_string($seclevel_value));
                                     remove_wait_msg($w);
                                 }
 
                                 $w = wait_msg(N("Please wait, setting security options..."));
-                                log::explanations("Setting security administrator option");
-                                $msec->set_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
+                                log::explanations(qq(Setting security administrator option to ") . bool2yesno($secadmin_check_value) . '"');
+                                $msec->set_check('MAIL_WARN', bool2yesno($secadmin_check_value));
 
                                 if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
-                                    log::explanations("Setting security administrator contact");
-                                      $msec->set_check('MAIL_USER', $secadmin_value);
+                                    log::explanations(qq(Setting security administrator contact to "$secadmin_value"));
+                                    $msec->set_check('MAIL_USER', $secadmin_value);
                                   }
 
                                 log::explanations("Setting security periodic checks");
