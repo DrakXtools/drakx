@@ -29,7 +29,7 @@ my $has_nvaudio = -x '/lib/modules/' . c::kernel_version() . '/';
 my %alsa2oss = 
     (
      "snd-ad1816a" => [ "ad1816" ], # isa
-     "snd-ad1848"  => [ "ad1848" ], # isa
+     "snd-ad1848"  => [ "pss" ], # isa
      "snd-ali5451" => [ "trident" ],
      "snd-als100"  => [ "sb" ], # isa
      "snd-als4000" => [ "unknown" ],
@@ -85,7 +85,6 @@ my %alsa2oss =
 my %oss2alsa = 
     (
      "ad1816"  => [ "snd-ad1816a" ],
-     "ad1848"  => [ "snd-ad1848" ],
      "ad1889"  => [ "unknown" ],
      "ali5455" => [ "snd-intel8x0" ],
      "audigy"  => [ "snd-emu10k1" ],
@@ -114,6 +113,7 @@ my %oss2alsa =
      "opl3sa"  => [ "snd-opl3sa2" ],
      "opl3sa2" => [ "snd-opl3sa2" ],
      "pas2"    => [ "unknown" ],
+     "pss" => [ "snd-ad1848" ],
      "rme96xx" => [ "snd-rme9652" ],
      "sb"      => [ "snd-als100", "snd-cmi8330", "snd-sb8", "snd-sb16" ],
      "sgalaxy" => [ "snd-sgalaxy" ],
