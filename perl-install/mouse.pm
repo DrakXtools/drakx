@@ -122,10 +122,11 @@ my %mouse_btn_keymap = (
     89  => "F14",
     90  => "F15",
     56  => "L-Option/Alt",
-    125 => "L-Command",
+    125 => "L-Command (Apple)",
     98  => "Num: /",
     55  => "Num: *",
     117 => "Num: =",
+    96 => "Enter",
 );
 sub ppc_one_button_keys { keys %mouse_btn_keymap }
 sub ppc_one_button_key2text { $mouse_btn_keymap{$_[0]} }
