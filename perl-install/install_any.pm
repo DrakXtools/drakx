@@ -380,7 +380,7 @@ sub ask_if_suppl_media {
 
 
 Do you have a supplementary installation media to configure?",
-	    join ", ", uniq(map { $_->{descr} } values %{$o->{packages}{mediums}})));
+	    join ", ", sort uniq(map { $_->{descr} } values %{$o->{packages}{mediums}})));
     $o->ask_from(
 	'', $msg,
 	[ {
