@@ -88,7 +88,7 @@ begin:
 #- **********************************
 #- * 0th step: verify if we are already set up
 
-if ($shorewall && -f "/etc/shorewall/tunnels") {
+if ($shorewall && any { !/^\s*(?:#|\n)/ } cat_($tunnels_file)) {
     $::Wizard_no_previous = 1;
 
     if (!$shorewall->{disabled}) { 
