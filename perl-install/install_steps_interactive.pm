@@ -130,14 +130,14 @@ sub selectInstallClass {
 
     if (my @l = install_any::find_root_parts($o->{fstab}, $o->{prefix})) {
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{device} } @l));
-	$p = $o->ask_from_listf(N("Install/Upgrade"),
-				N("Is this an install or an upgrade?"),
-				sub {
-				    ref $_[0] ? (@l > 1 ? 
-						   N("Upgrade partition %s", partition_table::description($_[0])) : 
-						   N("Upgrade")) : 
-						 translate($_[0]);
-				}, [ @l, N_("Install") ]);
+	my $p = $o->ask_from_listf(N("Install/Upgrade"),
+				   N("Is this an install or an upgrade?"),
+				   sub {
+				       ref $_[0] ? (@l > 1 ? 
+						     N("Upgrade partition %s", partition_table::description($_[0])) : 
+						     N("Upgrade")) : 
+						    translate($_[0]);
+				   }, [ @l, N_("Install") ]);
 	if (ref $p) {
 	    log::l("choosing to upgrade partition $p->{device}");
 	    install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
