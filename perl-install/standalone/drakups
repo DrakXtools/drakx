@@ -385,8 +385,6 @@ foreach my $i (@pages) {
       });
 }
 
-    $models{ups}->append_set(1 => "toto", 2 => "tata", 3 => "titi");
-
 #------------------------------------------------------------------
 # let's start the show:
 $in->do_pkgs->ensure_binary_is_installed('nut-server', 'upsd') if !$::testing;
