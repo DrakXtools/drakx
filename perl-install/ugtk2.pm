@@ -880,7 +880,7 @@ sub new {
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window($o, $title);
 
-	if ($::isInstall) {
+	if ($::isInstall || $::isEmbedded) {
 	    gtkadd($o->{rwindow}, 
 		   gtkadd(gtkset_shadow_type(Gtk2::Frame->new(undef), 'out'),
 			  $o->{window} = gtkset_border_width(gtkset_shadow_type(Gtk2::Frame->new(undef), 'none'), 3)
