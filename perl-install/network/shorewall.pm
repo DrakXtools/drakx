@@ -50,7 +50,6 @@ sub default_interfaces {
     my @l = detect_devices::getNet() or return;
     if (@l == 1) {
 	$conf{net_interface} = $l[0];
-	$conf{loc_interface} = [ 'lo0' ];
     } else {
 	$conf{net_interface} = network::netconnect::get_net_device() or return;
 	$conf{loc_interface} = [ grep { $_ ne $conf{net_interface} } @l ];
