@@ -33,6 +33,7 @@ local $_ = join '', @ARGV;
 /-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
 $::isEmbedded or $::isWizard = 1;
+$::Wizard_pix_up = "wiz_drakgw.png";
 $::direct = /-direct/;
 
 
@@ -592,6 +593,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.30  2001/03/29 11:52:15  damien
+#- updated for new wiz png policy
+#-
 #- Revision 1.29  2001/03/26 15:29:01  gc
 #- first attempt at pixelization of code (till's cups patches)
 #-
