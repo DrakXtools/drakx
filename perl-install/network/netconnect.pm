@@ -749,6 +749,8 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
                         if (!exists $adsl_devices{$ntf_name}) {
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
                             $adsl_type = $ethntf->{BOOTPROTO} || "dhcp";
+                            #- pppoa shouldn't be selected by default for ethernet devices, fallback on pppoe
+                            $adsl_type = "pppoe" if $adsl_type = "pppoa";
                         }
                     },
                     name => N("Connect to the Internet") . "\n\n" .
