@@ -112,20 +112,23 @@ sub adsl_conf {
 
 sub load_firmware_floppy {
     my ($file, $destination) = @_;
+    my $floppy = detect_devices::floppy();
+    my $failed;
     
-    $in->ask_okcancel(N("Insert floppy"), N("Insert floppy and press %s", N("Next"))) or return;
+    $in->ask_okcancel(N("Insert floppy"), 
+		      N("Insert a FAT formatted floppy in drive %s with %s in root directory and press %s", $floppy, $file, N("Next"))) or return;
     
-    fs::mount(devices::make(detect_devices::floppy()), "/mnt", "vfat", 'readonly');
+    eval { fs::mount(devices::make($floppy), "/mnt", "vfat", 'readonly'); 1 } or $failed = N("Floppy access error, unable to mount device %s", $floppy);
     my $_b = before_leaving { fs::umount("/mnt") };
     
     if (-e "/mnt/$file") {
-	system("cp /mnt/$file $destination");	
-	$in->ask_warn('', N("Firmware copy succeed"));
-    } else {
-	log::l("File not found");
-	$in->ask_warn(N("Warning"), N("Firmware copy failed !"));
-	return;
-    }
+	cp_af("/mnt/$file");
+	system("cp /mnt/$file $destination");
+    } else { $failed ||= N("Firmware copy failed, file %s not found", $file) }
+    
+    eval { $in->ask_warn('', $failed || N("Firmware copy succeed")) }; $in->exit if $@ =~ /wizcancel/;
+    $failed and log::l($failed) && return;
+    
     1;
 }
 
@@ -183,7 +186,7 @@ user "$adsl->{login}"
 	output("$prefix/etc/ppp/peers/adsl", 
 qq(noauth
 noipdefault
-pty "/usr/sbin/pppoa3 -c -vpi $vpi -vci $vci"
+pty "/usr/sbin/pppoa3 -e 1 -c -vpi $vpi -vci $vci"
 sync
 kdebug 1
 noaccomp
@@ -207,12 +210,12 @@ user "$adsl->{login}"
 	$::isStandalone and modules::write_conf($prefix);
 	$in->do_pkgs->what_provides("speedtouch_mgmt") and $in->do_pkgs->install('speedtouch_mgmt');
 	-e "/usr/share/speedtouch/mgmt.o" and return 1;
-      
+	
       firmware:
 	
-	my $l = [ N("Use a floppy"),
-		  N("Use my Windows partition"),
-		  N("Do it later"),
+	my $l = [ N_("Use a floppy"),
+		  N_("Use my Windows partition"),
+		  N_("Do it later"),
 		];
 	
 	my $answer = $in->ask_from_list_(N("Firmware needed"),
@@ -220,12 +223,12 @@ user "$adsl->{login}"
 You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
-	$answer eq N("Use a floppy") and load_firmware_floppy("mgmt.o", "/usr/share/speedtouch/") || goto firmware;
-	$answer eq N("Use my Windows partition") and goto firmware; # to be done
-	$answer eq N("Do it later") and $in->ask_warn('', N("You need the alcatel microcode.
-Download it at
-http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2
-and copy the mgmt.o in /usr/share/speedtouch"));
+	$answer eq "Use a floppy" and load_firmware_floppy("boot.msg", "/usr/share/speedtouch/") || goto firmware;
+	$answer eq "Use my Windows partition" and goto firmware; # to be done
+	$answer eq "Do it later" and $in->ask_warn('', N("You need the Alcatel microcode.
+Download it at:
+%s
+and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'));
     }
     
     if ($adsl_type eq 'eci') {
