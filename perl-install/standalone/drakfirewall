@@ -25,6 +25,6 @@ use network::drakfirewall;
 
 my $in = 'interactive'->vnew('su');
 
-network::drakfirewall::main($in);
+network::drakfirewall::main($in, undef);
 
 $in->exit;
