@@ -136,6 +136,7 @@ sub new {
     }
     my @class_tree = &detect;
 
+    # Build the gui
     add_icon_path('/usr/share/pixmaps/harddrake2/');
     $w = my_gtk->new((_("Harddrake2 version ") . $harddrake::data::version));
     $w->{window}->set_usize(760, 550) unless $::isEmbedded;
@@ -169,6 +170,7 @@ sub new {
     $cmap->color_alloc($wcolor);
     $tree->set_column_auto_resize(0, 1);
     my $curr = $tree->node_nth(0); #- default value
+
     $tree->signal_connect( 'select_row', sub {
 	   my ( $ctree, $row, $column, $event ) = @_;
 	   my $node = $ctree->node_nth( $row );
@@ -185,6 +187,8 @@ sub new {
 			 } else { $text->insert("", $color, "", "$data->{$i}\n\n") }
 		  }
 		  disconnect($module_cfg_button, 'module');
+
+		  # we've valid driver, let's offer to configure it
 		  if (exists $data->{driver} &&  $data->{driver} !~ /(unknown|.*\|.*)/ &&  $data->{driver} !~ /^Card:/) {
 			 $module_cfg_button->show;
 			 $IDs{module} = $module_cfg_button->signal_connect(clicked => sub {
@@ -198,6 +202,8 @@ sub new {
 		  my $configurator = $tree->{configurator}{$name};
 
 		  return unless -x $configurator;
+		  
+		  # we've a configurator, let's add a button for it and show it
 		  $IDs{tool} = $config_button->signal_connect(clicked => sub {
 			 return if defined $pid;
 			 if ($pid = fork()) {
@@ -212,10 +218,12 @@ sub new {
 	   }
     });
 
+    # Fill the graphic tree with a "tree branch" widget per device category
     foreach (@class_tree) {
 	my ($devices_list, $arg, $icon, $arg2, $title, $configurator ) = @$_;
 	my $hw_class_tree = $tree->insert_node(undef, undef, @$arg, (gtkcreate_png($icon)) x 2, @$arg2);
 	   my $prev_item;
+	# Fill the graphic tree with a "tree leaf" widget per device
 	foreach (@$devices_list) {
 		  my $custom_id = harddrake::data::custom_id($_, $title);
 		  $custom_id .= ' ' while exists($tree->{data}{$custom_id});
@@ -245,6 +253,7 @@ sub quit_global {
     $in->exit;
 }
 
+# remove a signal handler from a button & hide it  if needed
 sub disconnect {
     my ($button, $id) = @_;
     if ($IDs{$id}) {
