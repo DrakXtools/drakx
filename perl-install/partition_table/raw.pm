@@ -11,7 +11,8 @@ use c;
 
 my @MBR_signatures = (
 if_(arch() =~ /ppc/,
-    map { [ 'yaboot', 0, "PM", 0x200 * $_ + 0x10, "bootstrap\0" ] } 0 .. 61
+    (map { [ 'yaboot', 0, "PM", 0x200 * $_ + 0x10, "bootstrap\0" ] } 0 .. 61), #- "PM" is a Partition Map
+    [ 'yaboot', 0x400, "BD", 0x424, "\011bootstrap" ], #- "BD" is a HFS filesystem
 ),
     [ 'empty', 0, "\0\0\0\0" ],
     [ 'grub', 0, "\xEBG", 0x17d, "stage1 \0" ],
