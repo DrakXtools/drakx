@@ -12,6 +12,21 @@ use fs;
 use lang;
 use c;
 
+#- lower bound on the left ( aka 90 means [90-100[ )
+my %compssList = (
+  90 => __("must have"), #- every install have these packages (unless hand de-selected in expert, or not enough room)
+  80 => __("important"), #- every custom install have these packages (unless not enough space)
+		         #- has minimum X install (XFree86 + icewm)(normal)
+  70 => __("very nice"), #- KDE(normal)
+  60 => __("nice"),      #- gnome(normal)
+  50 => __("interesting"),
+  40 => __("interesting"),
+  30 => __("maybe"),
+  20 => __("maybe"),
+  10 => __("useless"),
+   0 => __("garbage"),
+);
+
 my @skip_list = qw(
 XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
 XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
