@@ -704,7 +704,7 @@ not cause any damage.", $l),
 	if (@names >= 0) {
 
 	    my @args = map { my $i = ''; /TOOLTIP=>(.*)/; my $t = $1; s/TOOLTIP=>.*//;print "tooltip : $t\n"; { label => $_, val => \$i, help => $t} } @names;
-	    my @l = $in->ask_from('', _("You may now provide its options to module %s.\nNote that any addresse should be entered with the prefix 0x like '0x123'", $l), \@args) ? map { ${$_->{val}} } @args : undef or return;
+	    my @l = $in->ask_from('', _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $l), \@args) ? map { ${$_->{val}} } @args : undef or return;
 
 	    @options = modparm::get_options_result($m, @l);
 	} else {
