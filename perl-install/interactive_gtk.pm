@@ -792,7 +792,7 @@ sub wait_messageW($$$) {
     my $w = my_gtk->new($title, %$o, grab => 1);
     gtkadd($w->{window}, my $hbox = new Gtk::HBox(0,0));
     $hbox->pack_start(my $box = new Gtk::VBox(0,0), 1, 1, 10);  
-    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(warp_text($_)) } @$messages;
+    $box->pack_start($_, 1, 1, 4) foreach my @l = map { new Gtk::Label(scalar warp_text($_)) } @$messages;
 
     ($w->{wait_messageW} = $l[$#l])->signal_connect(expose_event => sub { $w->{displayed} = 1 });
     $w->{rwindow}->set_position('center') if ($::isStandalone && (!$::isEmbedded && !$::isWizard || $my_gtk::pop_it));
