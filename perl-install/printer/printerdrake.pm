@@ -2603,6 +2603,9 @@ You should make sure that the page size and the ink type/printing mode (if avail
 	my $i;
 	my @oldgroup = ("", "");
 	for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
+	    # Do not show hidden options (member options of a forced
+	    # composite option)
+	    next if $printer->{ARGS}[$i]{hidden};
 	    my $optshortdefault = $printer->{ARGS}[$i]{default};
 	    # Should the option only show when the "Advanced" button was
 	    # clicked?
