@@ -447,7 +447,7 @@ sub set_default_options {
 			      });
     }
     if (isThisFs('smbfs', $part)) {
-	put_in_hash($options, { 'username=' => '%' });
+	add2hash_($options, { 'username=' => '%' });
     }
     if (isFat($part) || $is_auto) {
 
