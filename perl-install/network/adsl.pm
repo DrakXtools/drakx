@@ -67,13 +67,11 @@ If you don't know, choose 'use pppoe'"),
 sub adsl_probe_info {
     my ($adsl, $netc, $adsl_type, $o_adsl_modem) = @_;
     my $pppoe_file = "$::prefix/etc/ppp/pppoe.conf";
-    my $pptp_file = "$::prefix/etc/sysconfig/network-scripts/net_cnx_up";
     my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type eq 'pppoe') && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/ppp0 /etc/ppp/options /etc/ppp/options.adsl)) {
 	($login) = map { if_(/^user\s+"([^"]+)"/, $1) } cat_("$::prefix/$_") if !$login && -r "$::prefix/$_";
     }
-    ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type eq 'pptp') && -r $pptp_file;
     my $passwd = passwd_by_login($login);
     if (!$netc->{vpi} && !$netc->{vpi} && member($o_adsl_modem, qw(eci speedtouch))) {
       ($netc->{vpi}, $netc->{vci}) = 
