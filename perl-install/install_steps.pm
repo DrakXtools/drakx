@@ -911,7 +911,7 @@ sub configureX {
     { local $::testing = 0; #- unset testing
       local $::auto = 1;
       $o->{X}{skiptest} = 1;
-      Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->do_pkgs,
+      Xconfigurator::main($o->{X}, class_discard->new, $o->do_pkgs,
 			  { allowFB          => $o->{allowFB},
 			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
 			  });
