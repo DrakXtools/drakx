@@ -41,7 +41,7 @@ my $splash_working = 0;
 
 my $in = 'interactive'->vnew('su');
 
-if (!$in->isa('interactive::gtk')) {
+if (!$in->isa('interactive::gtk') || any { /^--boot$/ } @ARGV) {
     lilo_choice();
     $in->exit(0);
 }
@@ -236,16 +236,6 @@ my $x_box;
 
 gtkadd($window,
        gtkpack_(new Gtk2::VBox(0,0),
-                0, gtkadd(new Gtk2::Frame($disp_mode),
-                        #			  gtkpack__(new Gtk2::VBox(0,0),
-                        (gtkpack_(gtkset_border_width(new Gtk2::HBox(0, 0),5),
-                                  1, my $boot_label = Gtk2::WrappedLabel->new(""),
-                                  0, gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => \&lilo_choice),
-                                 )),
-                        #				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
-                        #				   )
-				     
-                       ),
                  #Splash Selector
                  if_($splash_working,
                  0, gtkadd(my $thm_frame = new Gtk2::Frame(N("Splash selection")),
@@ -317,17 +307,11 @@ $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 $window->show_all;
 #$no_bootsplash and $thm_frame->set_sensitive(0);
 $thm_frame->hide if !$splash_working;
-update_bootloader_label($lilogrub);
 gtkflush();
 $w->main;
 $in->exit(0);
 
 
-sub update_bootloader_label {
-    my ($bootloader) = @_;
-    $boot_label->set_label(N("You are currently using %s as your boot manager.
-Click on Configure to launch the setup wizard.", $bootloader));
-}
 
 sub lilo_choice() {
     my $bootloader = bootloader::read(); 
@@ -346,7 +330,6 @@ sub lilo_choice() {
                       [ N("Installation of %s failed. The following error occured:", $loader), $err ]);
         goto ask;
     }
-    eval { update_bootloader_label(bootloader::detect_bootloader()) };
 }
 
 
