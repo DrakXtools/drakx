@@ -11,7 +11,14 @@
 2000-09-29  François Pons  <fpons@mandrakesoft.com>
 
 	* modules.pm (load): fixed when standalone, use modprobe.
+
 	* pkgs.pm: added preference for wu-ftpd.
+
+	* detect_devices.pm: added code to proble USB printer.
+
+	* printer.pm: fixed missing PRINTER=yes on CUPS configuration for
+	USB printer.
+
 	* install_steps.pm: removed possibilty to add an user in urpmi
 	group (jloup).
 

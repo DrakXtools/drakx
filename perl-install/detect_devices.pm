@@ -254,13 +254,32 @@ sub whatParport() {
     @res;
 }
 
+sub whatUsbport() {
+    my ($i, $elem, @res) = (0, {});
+    local *F;
+    open F, "/proc/bus/usb/devices" or return;
+    foreach (<F>) {
+	$elem->{$1} = $2 if /S:\s+(.*)=(.*\S)/;
+	if (/I:.*Driver=(printer|usblp)/ && $elem->{Manufacturer} && $elem->{Product}) {
+	    my $MF = ${{ 'Hewlett-Packard' => 'HP' }}{$elem->{Manufacturer}} || $elem->{Manufacturer};
+	    push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',
+							   MODEL => $elem->{Product},
+							   MANUFACTURER => $elem->{Manufacturer},
+							   DESCRIPTION => "$MF $elem->{Product}",
+							 }};
+	    $i++; $elem = {}; #- try next one, but blank what has been probed.
+	}
+    }
+    @res;
+}
+
 #-CLASS:PRINTER;
 #-MODEL:HP LaserJet 1100;
 #-MANUFACTURER:Hewlett-Packard;
 #-DESCRIPTION:HP LaserJet 1100 Printer;
 #-COMMAND SET:MLC,PCL,PJL;
 sub whatPrinter() {
-    my @res = whatParport();
+    my @res = (whatParport(), whatUsbport());
     grep { $_->{val}{CLASS} eq "PRINTER"} @res;
 }
 

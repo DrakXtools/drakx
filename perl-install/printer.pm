@@ -580,18 +580,18 @@ sub configure_queue($) {
 		print PRINTCAP "\n";
 	    }
 	    eval { commands::chown_("root.lp", "$prefix/etc/printcap") };
-
-	    my $useUSB = 0;
-	    foreach (values %{$entry->{configured}}) {
-		$useUSB ||= $_->{DEVICE} =~ /usb/;
-	    }
-	    if ($useUSB) {
-		my $f = "$prefix/etc/sysconfig/usb";
-		my %usb = getVarsFromSh($f);
-		$usb{PRINTER} = "yes";
-		setVarsInSh($f, \%usb);
-	    }
 	    last };
+    }
+
+    my $useUSB = 0;
+    foreach (values %{$entry->{configured}}) {
+	$useUSB ||= $_->{DEVICE} =~ /usb/ || $_->{DeviceURI} =~ /usb/;
+    }
+    if ($useUSB) {
+	my $f = "$prefix/etc/sysconfig/usb";
+	my %usb = getVarsFromSh($f);
+	$usb{PRINTER} = "yes";
+	setVarsInSh($f, \%usb);
     }
 }
 
