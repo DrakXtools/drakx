@@ -983,7 +983,6 @@ sub _create_window($$) {
 
 sub _XSetInputFocus {
     my ($w) = @_;
-    log::l("_XSetInputFocus");
     if (!@interactive::objects || $interactive::objects[-1]{rwindow} == $w) {
 	$w->window->XSetInputFocus;
     } else {
