@@ -21,16 +21,17 @@ This is free software and may be redistributed under the terms of the GNU GPL.
 Usage: 
 ") . N(" --help                - display this help     
 ") . N(" --id <id_label>       - load the html help page which refers to id_label
+") . N(" --doc <link>          - link to another web page ( for WM welcome frontend)
 ");
     exit(0)
 }
 my ($opt, $idlabel) = @ARGV;
-@ARGV == 2 && ($opt eq '--id' || $opt eq '--help') or usage();
+@ARGV == 2 && ($opt eq '--id' || $opt eq '--doc' || $opt eq '--help') or usage();
 
 my $in = interactive->vnew;
-my ($lg, $instpath, $ancpath) = ctxhelp::path2help($idlabel);
+my ($lg, $instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 
--e $instpath or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $lg);
+-e $instpath or system("/usr/sbin/drakhelp_inst $package");
 -e $instpath or $in->ask_warn('Mandrake Help Center', N("%s cannot be displayed \n. No Help entry of this type\n", $instpath));
 
 my $wm = any::running_window_manager();
@@ -40,9 +41,7 @@ my %launchhelp = (
 		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
 				   log::explanations("Loading help system : $ancpath");
 				   system("$browser " . $ancpath . "&") 
-				}
+			       }
 		 );
 member($wm, 'kwin', 'gnome-session') or $wm = 'other';
 -e $instpath and eval { $launchhelp{$wm}->() };
-
-
