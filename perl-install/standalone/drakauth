@@ -28,6 +28,11 @@ $in->ask_from('', '',
 
 any::ask_authentification_parameters($in, $netc, $authentication, $authentication_kind) or goto main;
 
-any::set_authentication($in, $netc, $authentication, sub { my ($f) = @_; $f->() });
+eval { any::set_authentication($in, $netc, $authentication, sub { my ($f) = @_; $f->() }) };
+if (my $err = $@) {
+    $in->ask_warn(N("Error"), formatError($err));
+    goto main;
+}
+
 
 $in->exit;
