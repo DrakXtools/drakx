@@ -254,53 +254,17 @@ $button_wizard->signal_connect ( clicked => sub {
 $bbox1->add($button_wizard );
 my $button_ok = new Gtk::Button "OK";
 $button_ok->signal_connect ( clicked => sub {
-				 apply();
-				 my @window_managers = ('kdeinit: kwin', qw(gnome-session icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish));
-				 my $wm;
-				 foreach (@window_managers) { $wm=$_ if (`pidof "$_"` > 0) };
 				 my $dialog = new Gtk::Dialog();
 				 $dialog->set_position(1);
 				 $dialog->vbox->set_border_width(10);
-				 my $label = new Gtk::Label(_("
-Warning:
-Applying the changes while running may crash your X environnement.") .
-							    ($wm ? _("
-If you continue, I will shut down your %s environnement", $wm) : ""));
+				 my $label = new Gtk::Label(_("Please Wait... Applying the configuration"));
 				 $dialog->vbox->pack_start($label,1,1,20);
-				 my $bbox_dialog = new Gtk::HButtonBox;
-				 $dialog->action_area->add($bbox_dialog);
-				 $bbox_dialog->set_layout(-end);
-				 my $button_ok = new Gtk::Button "OK";
-				 $button_ok->signal_connect ( clicked => sub {
-								  $label->set("Please Wait... Applying the configuration");
-								  Gtk->main_iteration while Gtk->events_pending;
-								  system("$prefix/etc/rc.d/init.d/network $_") foreach "stop", "start";
-								  unless(fork) {
-								      local $_=$wm;
-								      system("kwmcom logout") if /kwm/;
-								      system("dcop kdesktop default logout") if /kwin/;
-								      system("save-session --kill") if /gnome-session/;
-								      system("killall -QUIT icewm") if /icewm/;
-								      open STDIN, "</dev/zero";
-								      open STDOUT, ">/dev/null";
-								      open STDERR, ">&STDERR";
-								      c::setsid();
-								      exec qw(perl -e), q{
-                                                                          my $wm = shift;
-  		                                                          for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
-               		                                           system("killall X ; killall -15 xdm gdm kdm prefdm") unless `pidof "$wm"` > 0;
-                                       		                      }, $_;
-								  }
-								  Gtk->main_quit();
-								  kill TERM, $CCPID;
-							      });
-				 $bbox_dialog->add($button_ok );
-				 my $button_cancel = new Gtk::Button "Cancel";
-				 $button_cancel->signal_connect ( clicked => sub { Gtk->main_quit(); });
-				 $bbox_dialog->add($button_cancel);
 				 $dialog->show_all;
-				 Gtk->main();
+				 Gtk->main_iteration while Gtk->events_pending;
+				 apply();
+				 system("$prefix/etc/rc.d/init.d/network $_") foreach "stop", "start";
 				 $dialog->destroy;
+				 update();
 				 quit_global();
 			     });
 $bbox1->add($button_ok);
@@ -350,6 +314,7 @@ sub update {
     chop (my $h = `hostname`);
     $label_host->set ($h);
     $label4->set($netcnx->{type});
+    $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
     $clist1->freeze();
     $clist1->clear();
