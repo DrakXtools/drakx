@@ -471,6 +471,11 @@ sub get_options {
     $conf{$name}{options};
 }
 
+sub set_options {
+    my ($name, $new_option) = @_;
+    $conf{$name}{options} = $new_option;
+}
+
 sub add_alias { 
     my ($alias, $name) = @_;
     $name =~ /ignore/ and return;

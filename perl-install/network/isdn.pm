@@ -1,5 +1,6 @@
 package network::isdn;
 
+use network::isdn_consts;
 use common qw(:common :file :system);
 use any;
 use modules;
@@ -58,28 +59,20 @@ We recommand the light configuration.
     1;
 }
 
-#- isdn_write_config_backend : write isdn info, only for ippp0 -> ask_connect_now
-#- input :
-#-  $isdn
-#-  $light : boolean : if yes : uses the isdn-light package, if not, isdn4net
-#- $isdn input:
-#-  $isdn->{login} $isdn->{passwd} $isdn->{phone_in} $isdn->{phone_out} $isdn->{dialing_mode}
-#-  $isdn->{driver} $isdn->{type} $isdn->{irq} $isdn->{mem} $isdn->{io} $isdn->{io0} $isdn->{io1}
 sub isdn_write_config_backend {
     my ($isdn, $light) = @_;
     if ($light) {
 	modules::mergein_conf("$prefix/etc/modules.conf");
-	if ($netc->{autodetect}{isdn}{id}) {
+	if ($isdn->{id}) {
 	    @c = any::setup_thiskind($in, 'isdn', !$::expert, 1);
 	    modules::add_alias("ippp0", $c[0]{driver});
 	    isdn_detect_backend($isdn);
 	} else {
 	    my $a="";
 	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
+	    modules::add_alias("ippp0", $isdn->{driver});
 	    modules::set_options($isdn->{driver}, $a);
 	}
-
-
 	$::isStandalone and modules::write_conf($prefix);
 	foreach my $f ('ioptions1B', 'ioptions2B') {
 	    substInFile { s/^name .*\n//; $_ .= "name $isdn->{login}\n" if eof  } "$prefix/etc/ppp/$f";
@@ -87,8 +80,8 @@ sub isdn_write_config_backend {
 	}
 	foreach my $f ('isdn1B.conf', 'isdn2B.conf') {
 	    substInFile {
-		s/EAZ = .*\n/EAZ = $isdn->{phone_in}/;
-		s/PHONE_OUT = .*\n/PHONE_OUT = $isdn->{phone_out}/;
+		s/EAZ =.*/EAZ = $isdn->{phone_in}/;
+		s/PHONE_OUT =.*/PHONE_OUT = $isdn->{phone_out}/;
 	    } "$prefix/etc/isdn/$f";
 	    chmod 0600, $f;
 	}
@@ -204,11 +197,10 @@ If you have a PCMCIA card, you have to know the irq and io of your card.
 
   isdn_ask_step_2:
     $e = $in->ask_from_listf(_("ISDN Configuration"),
-				    _("Which is your ISDN card ?"),
-				    sub { $_[0]{description} },
-				    [ grep {$_->{card} eq $isdn->{card_type}; } @network::netconnect::isdndata ] ) or goto isdn_ask_step_1;
-    $isdn->{driver}='hisax';
-    $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(type mem io io0 io1 irq);
+			     _("Which is your ISDN card ?"),
+			     sub { $_[0]{description} },
+			     [ grep {$_->{card} eq $isdn->{card_type}; } @isdndata ] ) or goto isdn_ask_step_1;
+    $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq);
 
   isdn_ask_step_3:
     $isdn->{protocol} = isdn_ask_protocol() or goto isdn_ask_step_2;
@@ -239,12 +231,6 @@ sub isdn_detect {
     1;
 }
 
-#- isdn_detect_backend : detects isdn pci card and fills the infos in $isdn : only detects one card
-#- input
-#-  $isdn
-#- $isdn output:
-#-  $isdn->{description} $isdn->{vendor} $isdn->{id} $isdn->{driver} $isdn->{card_type} $isdn->{type}
-
 sub isdn_detect_backend {
     my ($isdn) = @_;
     if (my ($c) = (modules::get_that_type('isdn'))) {
@@ -256,24 +242,16 @@ sub isdn_detect_backend {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
-	print "plop " . $c->{options} . "\n";
     }
 }
 
-#- isdn_get_list : return isdn cards descriptions list. This function is not use internally.
-#- output : descriptions : list of strings
-
 sub isdn_get_list {
-    map { $_->{description} } @network::netconnect::isdndata;
+    map { $_->{description} } @isdndata;
 }
-
-#- isdn_get_info : return isdn card infos. This function is not use internally.
-#- input : the description of the card (see isdn_get_list)
-#- output : a reference on the decription of the card. : ref on a hash(description,type,irq,mem,io,io0,io1card,)
 
 sub isdn_get_info {
     my ($desc) = @_;
-    foreach (@network::netconnect::isdndata) {
+    foreach (@isdndata) {
 	return $_ if ($_->{description} eq $desc);
     }
 }

@@ -9,7 +9,6 @@ use common qw(:common :file :functional :system);
 use log;
 use detect_devices;
 use run_program;
-use network::netconnect_consts;
 use modules;
 use any;
 use mouse;
