@@ -18,7 +18,6 @@ sub detect {
     my ($auto_detect) = @_;
     require network::isdn;
     $auto_detect->{isdn} = network::isdn::isdn_detect_backend();
-    $auto_detect->{isdn}{description} =~ s/.*\|//;
 
     modules::load_category('network/main|gigabit|usb');
     require network::ethernet;
@@ -107,7 +106,7 @@ If you don't want to use the auto detection, deselect the checkbox.
 
     my %net_conf_callbacks = (adsl => sub { require network::adsl; network::adsl::configure($netcnx, $netc, $intf, $first_time) },
                               cable => sub { require network::ethernet; network::ethernet::configure_cable($netcnx, $netc, $intf, $first_time) },
-                              isdn => sub { require network::isdn; network::isdn::configure($netcnx, $netc, undef) },
+                              isdn => sub { require network::isdn; network::isdn::configure($netcnx, $netc) },
                               lan => sub { require network::ethernet; network::ethernet::configure_lan($netcnx, $netc, $intf, $first_time) },
                               modem => sub { require network::modem; network::modem::configure($in, $netcnx, $mouse, $netc) },
                               winmodem => sub { require network::modem; network::modem::winmodemConfigure($in, $netcnx, $mouse, $netc) }, 
@@ -116,13 +115,13 @@ If you don't want to use the auto detection, deselect the checkbox.
 
     $conf{$_} = values %{$netc->{autodetect}{$_}} ? 1 : 0 foreach 'lan';
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach qw(adsl cable modem winmodem);
-    $conf{isdn} = $netc->{autodetect}{isdn}{driver} ? 1 : 0;
+    $conf{isdn} = any { $_->{driver} } values %{$netc->{autodetect}{isdn}};
   step_2:
 
     my @l = (
 	  [ join('', N("Normal modem connection"), if_($conf{modem}, " - " . N("detected on port %s", $netc->{autodetect}{modem}))), \$conf{modem} ],
 	  [ join('', N("Winmodem connection"), if_($conf{winmodem}, " - " . N("detected"))), \$conf{winmodem} ],
-	  [ join('', N("ISDN connection"), if_($conf{isdn}, " - " . N("detected %s", $netc->{autodetect}{isdn}{description}))), \$conf{isdn} ],
+	  [ join('', N("ISDN connection"), if_($conf{isdn}, " - " . N("detected %s", join(', ', map { $_->{description} } values %{$netc->{autodetect}{isdn}})))), \$conf{isdn} ],
 	  [ join('', N("ADSL connection"), if_($conf{adsl}, " - " . N("detected"))), \$conf{adsl} ],
 	  [ join('', N("Cable connection"), if_($conf{cable}, " - " . N("cable connection detected"))), \$conf{cable} ],
 	  [ join('', N("LAN connection"), if_($conf{lan}, " - " . N("ethernet card(s) detected"))), \$conf{lan} ]

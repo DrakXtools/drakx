@@ -17,9 +17,14 @@ use MDK::Common::File;
 @EXPORT = qw(isdn_write_config isdn_write_config_backend get_info_providers_backend isdn_ask_info isdn_ask_protocol isdn_ask isdn_detect isdn_detect_backend isdn_get_list isdn_get_info);
 
 sub configure {
-    my ($netcnx, $netc, $_isdn) = @_;
+    my ($netcnx, $netc) = @_;
+    configure_device($netcnx, $netc, $_) foreach values %{$netc->{autodetect}{isdn}};
+}
+
+sub configure_device {
+    my ($netcnx, $netc, $isdn) = @_;
   isdn_step_1:
-    defined $netc->{autodetect}{isdn}{id} and goto intern_pci;
+    defined $isdn->{id} and goto intern_pci;
 
     my $e = $in->ask_from_list_(N("Network Configuration Wizard"),
 				N("What kind is your ISDN connection?"), [ N_("Internal ISDN card"), N_("External ISDN modem") ]
@@ -28,7 +33,7 @@ sub configure {
     if ($e =~ /card/) {
       intern_pci:
 	$netc->{isdntype} = 'isdn_internal';
-	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type';
+	$netcnx->{isdn_internal} = $isdn;
 	$netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
 	isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
     } else {
@@ -85,7 +90,7 @@ defaultroute
     substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
 
     # we start the virtual interface at boot (we dial only on demand.
-    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
+    substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$prefix/etc/sysconfig/network-scripts/ifcfg-ippp$isdn->{intf_id}";
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
@@ -246,17 +251,21 @@ sub isdn_detect {
 
 sub isdn_detect_backend() {
     my $isdn = { };
-    if (my ($c) = modules::probe_category('network/isdn')) {
-	$isdn = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
+     each_index {
+ 	my $c = $_;
+ 	$isdn->{$::i} = { map { $_ => $c->{$_} } qw(description vendor id driver card_type type) };
+ 	my $isdn = $isdn->{$::i};
+        $isdn->{intf_id} = $::i;
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
 	$isdn->{card_type} = $c->{bus} eq 'USB' ? 'usb' : 'pci';
 	($isdn->{type}) = $isdn->{options} =~ /type=(\d+)/;
+        $isdn->{description} =~ s/.*\|//;
 #	$c->{options} !~ /id=HiSax/ && $isdn->{driver} eq "hisax" and $c->{options} .= " id=HiSax";
 	if ($c->{options} !~ /protocol=/ && $isdn->{protocol} =~ /\d/) {
 	    modules::set_options($c->{driver}, $c->{options} . " protocol=" . $isdn->{protocol});
 	}
 	$c->{options} =~ /protocol=(\d)/ and $isdn->{protocol} = $1;
-    }
+    } modules::probe_category('network/isdn');
     $isdn;
 }
 
