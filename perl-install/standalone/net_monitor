@@ -384,10 +384,10 @@ sub update() {
 	    $notebook->set_current_page($notebook->page_num($page));
 	    $monitor->{$intf}{page} = $notebook->page_num($page);
          $darea->{$intf}->realize;
-         $pixmap = Gtk2::Gdk::Pixmap->new($darea->{$intf}->window, $width, $height, $darea->{$intf}->window->get_depth);
+         $pixmap->{$intf} = Gtk2::Gdk::Pixmap->new($darea->{$intf}->window, $width, $height, $darea->{$intf}->window->get_depth);
 	    $monitor->{$intf}{referencer} = $monitor->{$intf}{val}[0];
 	    $monitor->{$intf}{referencet} = $monitor->{$intf}{val}[8];
-	    $pixmap->draw_rectangle($darea->{$intf}->style->black_gc, 1, 0, 0, $width, $height);
+	    $pixmap->{$intf}->draw_rectangle($darea->{$intf}->style->black_gc, 1, 0, 0, $width, $height);
 	    $darea->{$intf}->signal_connect(motion_notify_event => sub { 
                                     my (undef, $e) = @_;
                                     my $x = $e->x - 50;
@@ -401,7 +401,7 @@ sub update() {
                                     $measure_t->set_label(formatXiB($transmitted));
                                 });
 	    $darea->{$intf}->signal_connect(expose_event => sub {
-                         $darea->{$intf}->window->draw_drawable($darea->{$intf}->style->bg_gc('normal'), $pixmap, 0, 0, 0, 0, $width, $height);
+                         $darea->{$intf}->window->draw_drawable($darea->{$intf}->style->bg_gc('normal'), $pixmap->{$intf}, 0, 0, 0, 0, $width, $height);
                      });
 	}
     }
@@ -440,6 +440,7 @@ sub in_ifconfig {
 sub draw_monitor {
     my ($o, $intf) = @_;
     defined $darea->{$intf} or return;
+    my $pixmap = $pixmap->{$intf};
     $pixmap->draw_rectangle($darea->{$intf}->style->black_gc, 1, 0, 0, $width, $height);
     my $maxr = 0;
     foreach (@{$o->{stack_r}}) { $maxr = $_ if $_ > $maxr }
