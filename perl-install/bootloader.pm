@@ -307,6 +307,20 @@ wait %d seconds for default boot.
     $entry->{append} .= " quiet" if $vga_fb;
     $failsafe->{append} .= " failsafe" if $failsafe && !$lilo->{password};
 
+    #- manage prioritary default kernel (given as /boot/vmlinuz-default).
+    if (-e "$prefix/boot/vmlinuz-default") {
+	#- we use directly add_entry as no initrd should be done.
+	add_entry($lilo->{entries},
+		  {
+		   type => 'image',
+		   label => 'default',
+		   root  => "/dev/$root",
+		   kernel_or_dev => '/boot/vmlinuz-default',
+		   append => $lilo->{perImageAppend},
+		  });
+	$lilo->{default} = 'default'; #- this one should be booted by default now.
+    }
+
     #- manage older kernel if installed.
     foreach (qw(2.2 hack)) {
 	my $hasOld = -e "$prefix/boot/vmlinuz-$_";
