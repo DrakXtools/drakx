@@ -1,3 +1,172 @@
+2001/08/11  dam's  <damien@mandrakesoft.com>
+
+	* share/themes.rc, share/logo-mandrake.png, share/themes-mdk.rc,
+	share/themes/mdk-bg.png: new theme for beta
+
+	* share/theme-editor.pl: updated
+	now works.
+
+2001/08/11  tkamppeter
+
+	* printer.pm, printerdrake.pm: Restructuring continued and debugged
+
+2001/08/10  dam's  <damien@mandrakesoft.com>
+
+	* share/theme-editor.pl: added theme editor
+
+	* network/tools.pm: corrected password file substitution
+
+	* network/ethernet.pm: remove Data::Dumper
+
+	* network/netconnect.pm: added spped and timeout handling for isdn
+
+	* any.pm: corrected autologin question
+
+	* network/isdn.pm: tomeout option deactivated.
+
+	* standalone/draknet: corrected internet cnfiguration pop up, and some
+	other studds
+	ifup/down ethx, anew pixmap for list
+
+	* my_gtk.pm: removed Datta::Dump use
+
+	* pixmaps/eth_card_mini2.png: added
+
+2001/08/10  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: small font fix
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/da.po, share/po/cs.po,
+	share/po/af.po: updated pot file
+
+	* share/po/bg.po: updated Bulgarian file
+	updated pot file
+
+2001/08/10  yduret
+
+	* bootlook.pm: corrected vnew usage (thx gc)
+
+2001/08/09  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: added missing use
+	added pixmap for eth. Some factorisation
+
+	* network/tools.pm: added useless function type2interface for future use
+
+	* my_gtk.pm: added gtkbuttonset, and corrected scrollbar height for
+	standalone mode.
+
+	* network/isdn.pm: labels corrections
+
+2001/08/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/tinyfirewall, standalone/printerdrake, standalone/mousedrake,
+	standalone/drakxservices, standalone/net_monitor, standalone/draknet,
+	standalone/drakproxy, standalone/XFdrake, standalone/keyboarddrake,
+	standalone/drakxconf, standalone/adduserdrake, standalone/livedrake,
+	standalone/drakboot, standalone/draksec: use vnew the right way
+	everywhere
+
+	* standalone/drakgw: use vnew the right way everywhere
+	  - if package installs fail, redo one by one to know which one failed
+	  - try to not end up with a failing configuration file, if program is
+	brutally stopped
+	  - if unrecognized config file, don't fail, rather ignore it and
+	proceed
+	  - run dhcpd_update feature (if present) after setup of dhcp server
+
+	* share/rpmsrate: put traceroute in network client also, for claudio
+
+2001/08/09  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone.pm, install_any.pm: rename interactive_pkgs in
+	pkgs_interactive
+
+2001/08/09  siegel
+
+	* standalone/interactive_http/miniserv.logrotate,
+	standalone/interactive_http/Makefile: Added logrotate for
+	"/var/log/drakxtools_http.log"
+
+2001/08/09  tkamppeter
+
+	* printer.pm, printerdrake.pm: New structure for queue modification,
+	general structure clean-up
+
+2001/08/09  yduret
+
+	* bootlook.pm: readded in->do_pkg->install (i sux)
+	rewrite in a more drakx fashion
+
+	* my_gtk.pm: added gtkset_sensitive in wrapper..
+
+2001/08/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/ga.po,
+	share/po/sr.po, share/po/de.po, share/po/et.po, share/po/tr.po,
+	share/po/eu.po, share/po/az.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/hr.po, share/po/ko.po, share/po/cy.po, share/po/nl.po,
+	share/po/ja.po, share/po/wa.po, share/po/sv.po, share/po/is.po,
+	share/po/hu.po, share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po,
+	share/po/pl.po, share/po/fi.po, share/po/no.po,
+	share/po/zh_CN.GB2312.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/uk.po, share/po/eo.po, share/po/ro.po,
+	share/po/da.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2001/08/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: typo
+	makes interactive_pkgs stuff work
+	add interactive_pkgs stuff
+
+	* Makefile: skip module CGI in test_pms (perl_checker)
+
+	* fsedit.pm (check_mntpoint): remove /root from directories that "should
+	remain within the root filesystem"
+
+	* proxy.pm, network/ethernet.pm, network/isdn.pm, tinyfirewall.pm,
+	printerdrake.pm, standalone/drakgw, standalone/draknet,
+	network/tools.pm, bootlook.pm, standalone.pm, standalone/drakproxy,
+	standalone/XFdrake, network/netconnect.pm, standalone/adduserdrake,
+	network/adsl.pm, network/network.pm, printer.pm, network/modem.pm: add
+	interactive_pkgs stuff
+
+	* install_steps_interactive.pm: installing foomatic before doing anything
+	about printer
+	add interactive_pkgs stuff
+
+	* Xconfigurator.pm, any.pm: makes interactive_pkgs stuff work
+	add interactive_pkgs stuff
+
+	* install_any.pm (remove, remove_nodeps): fix typo
+	makes interactive_pkgs stuff work
+	add interactive_pkgs stuff
+
+2001/08/08  tkamppeter
+
+	* install_steps_interactive.pm: Installation fitted to new printerdrake
+
+	* printer.pm: Different choosable test pages available now
+	Corrected init script calls in the (start|stop|restart)_service
+	functions
+
+	* printerdrake.pm: Different choosable test pages available now
+	Removed superfluous line in install_spooler function
+
 2001/08/08  Pixel  <pixel@mandrakesoft.com>
 
 	* pkgs.pm (naughtyServers): add drakxtools-http
