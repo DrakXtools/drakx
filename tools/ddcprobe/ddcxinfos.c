@@ -63,8 +63,8 @@ int main(void)
 		     known_vesa_modes[i].x,
 		     known_vesa_modes[i].y
 		     );
-	printf("\n");
 #endif
+	printf("\n");
 
 	/* Get EDID information */
 	if (vbe_get_edid_info(edid) == 0) {

@@ -120,11 +120,18 @@ struct vbe_edid1_info {
 	unsigned char header[8];
 	union {
 	  u_int16_t p;
-	  struct {
+	  struct __attribute__ ((packed)) {
+#if __BYTE_ORDER == __LITTLE_ENDIAN
 	    u_int16_t char3: 5;
 	    u_int16_t char2: 5;
 	    u_int16_t char1: 5;
 	    u_int16_t zero: 1;
+#else /* __BIG_ENDIAN */
+	    u_int16_t zero: 1;
+	    u_int16_t char1: 5;
+	    u_int16_t char2: 5;
+	    u_int16_t char3: 5;
+#endif
 	  } u;
 	} manufacturer_name;
 	u_int16_t product_code;
@@ -176,9 +183,15 @@ struct vbe_edid1_info {
 		unsigned char reserved: 7;
 	} manufacturer_timings __attribute__ ((packed));
 	struct {
+#if __BYTE_ORDER == __LITTLE_ENDIAN
 		u_int16_t xresolution: 8;
 		u_int16_t vfreq: 6;
 		u_int16_t aspect: 2;
+#else /* __BIG_ENDIAN */
+		u_int16_t aspect: 2;
+		u_int16_t vfreq: 6;
+		u_int16_t xresolution: 8;
+#endif
 	} standard_timing[8] __attribute__ ((packed));
 	union {
 		struct vbe_edid_detailed_timing detailed_timing[4];

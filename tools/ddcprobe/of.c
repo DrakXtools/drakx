@@ -138,6 +138,9 @@ int vbe_get_edid_info(struct vbe_edid1_info * ret)
 	man = ntohs(man);
 	memcpy(&ret->manufacturer_name, &man, 2);
 
+	/* byteswap to match the contents of MonitorsDB */
+	ret->product_code = ((ret->product_code >> 8) & 0xff) | ((ret->product_code & 0xff) << 8);
+
 	free(mem);
 	return 1;
 }
