@@ -586,17 +586,18 @@ Please run \"Internet access\" in control center."));
                                                                    5),
                                               ),
                                      1, gtkadd(Gtk2::Frame->new(N("Parameters")), $param_vbox),
-                                     0, gtkpack(Gtk2::HBox->new,
-                                                gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
-                                                gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
-                                                                      each_index {
-                                                                          ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
-                                                                      } @mask;
-                                                                      update();
-                                                                      $button_apply->set_sensitive(1);
-                                                                      $exit_dialogsub->();
-                                                                  }),
-                                               ),
+                                     0, gtkpack_(Gtk2::HBox->new,
+                                                 0, gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {
+                                                                          each_index {
+                                                                              ${$conf_data[$::i][1]} = $infos[2*$::i+1]->get_text if $_;
+                                                                          } @mask;
+                                                                          update();
+                                                                          $button_apply->set_sensitive(1);
+                                                                          $exit_dialogsub->();
+                                                                      }),
+                                                 1, Gtk2::Label->new(""),
+                                                 0, gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => $exit_dialogsub),
+                                                ),
                                     ),
                            );
 
