@@ -62,6 +62,8 @@ my $a_mode = (-e "/etc/aurora/Monitor") ? 1 : 0;
 my $l_mode = isAutologin();
 my %auto_mode = get_autologin("");
 my $inmain = 0;
+my $lilogrub = `detectloader -q`;
+$lilogrub =~ s/GRUB\n/GRUB (GNU GRand Unified Bootloader)/;
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect(delete_event => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
@@ -111,11 +113,16 @@ my $menubar = get_main_menu( $window );
 ######### menus end
 
 my $global_vbox = new Gtk::VBox();
-#$global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0);
 
-# lilo/grub
+########### lilo/grub
 my $lilo_dedans = new Gtk::HBox(0, 0);
-my $lilo_button = new Gtk::Button _("Lilo/Grub configuration");
+my $lilo_button = new Gtk::Button _("Configure");
+
+my $lilo_label = new Gtk::Label(
+_("You are currently using %s as Boot Manager.
+Click on Configure to launch the setup wizard.", $lilogrub));
+
+$lilo_dedans->pack_start($lilo_label,0,0,0);
 $lilo_dedans->pack_end($lilo_button,0,0,0);
 $lilo_button->signal_connect(clicked => sub { lilo_choice(); });
 
