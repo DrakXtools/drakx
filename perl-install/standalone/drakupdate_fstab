@@ -79,7 +79,6 @@ sub device_name_to_entry {
 	}
     }
 
-    $e ||= {};
     $e->{media_type} = 'fd' if $name =~ /fd[01]/;
     $e;
 }
