@@ -36,6 +36,9 @@ if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
 	xset fp rehash
     fi
 
+    # avoid pollution for environment
+    unset LC_MONETARY LC_CTYPE LC_NUMERIC LC_MESSAGES LC_TIME LC_COLLATE LANGUAGE LANG RPM_INSTALL_LANG
+
     # start DrakX, do not keep shell script in background else the CD is locked by it!!!
     cd /tmp/drakx/mdkinst/usr/bin/perl-install
     exec ../../../lib/ld-linux.so.2 ../perl ./live_install2
