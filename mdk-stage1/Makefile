@@ -4,9 +4,9 @@
  #
  # $Id$
  #
- # Guillaume Cottenceau (gc@mandrakesoft.com)
+ # Pixel (pixel@mandrakesoft.com) (mostly done by Guillaume Cottenceau)
  #
- # Copyright 2000 MandrakeSoft
+ # Copyright 2000-2004 MandrakeSoft
  #
  # This software may be freely redistributed under the terms of the GNU
  # public license.
@@ -133,16 +133,6 @@ STAGE1OBJS-CDROM = $(subst .c,-CDROM.o,$(STAGE1SRC) $(CDROMSRC))
 CDROM_DEFS = -DDISABLE_DISK -DDISABLE_NETWORK
 
 
-STAGE1OBJS-DISK = $(subst .c,-DISK.o,$(STAGE1SRC) $(DISKSRC))
-
-DISK_DEFS = -DDISABLE_CDROM -DDISABLE_NETWORK
-
-
-STAGE1OBJS-MEDIAS-USB = $(subst .c,-MEDIAS-USB.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC))
-
-MEDIAS-USB_DEFS = -DDISABLE_NETWORK
-
-
 STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
@@ -172,10 +162,10 @@ endif
 BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network stage1-medias-usb
+BINS += stage1-cdrom stage1-network
 endif
 ifeq (x86_64, $(ARCH))
-BINS += stage1-cdrom stage1-disk stage1-network stage1-medias-usb
+BINS += stage1-cdrom stage1-network
 endif
 
 ifeq (i386, $(ARCH))
@@ -220,14 +210,6 @@ stage1-cdrom: $(STAGE1OBJS-CDROM) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_L
 	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-disk: $(STAGE1OBJS-DISK) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
-	$(STRIPCMD) $@
-
-stage1-medias-usb: $(STAGE1OBJS-MEDIAS-USB) $(STAGE1_OWN_LIBS) $(FRONTEND_LINK) $(STAGE1_LIBC)
-	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
-	$(STRIPCMD) $@
-
 stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
 	$(DIET) $(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
@@ -245,12 +227,6 @@ $(INITOBJS-MANDRAKE_MOVE): %-MOVE.o: %.c
 
 $(STAGE1OBJS-CDROM): %-CDROM.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
-
-$(STAGE1OBJS-DISK): %-DISK.o: %.c
-	$(DIET) $(COMPILE) $(INCLUDES) $(DISK_DEFS) -c $< -o $@
-
-$(STAGE1OBJS-MEDIAS-USB): %-MEDIAS-USB.o: %.c
-	$(DIET) $(COMPILE) $(INCLUDES) $(MEDIAS-USB_DEFS) $(USB_DEFS_GEN) -c $< -o $@
 
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c
 	$(DIET) $(COMPILE) $(INCLUDES) $(NETWORK_DEFS) $(PCMCIA_DEFS) $(USB_DEFS_GEN) -c $< -o $@
@@ -291,10 +267,6 @@ endif
 
 
 *-CDROM.o: %-CDROM.o: %.o
-
-*-DISK.o: %-DISK.o: %.o
-
-*-MEDIAS-USB.o: %-MEDIAS-USB.o: %.o
 
 *-NETWORK.o: %-NETWORK.o: %.o
 
