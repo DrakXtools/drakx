@@ -358,7 +358,7 @@ sub add_extended($$) {
     my $e = $hd->{primary}{extended};
 
     if ($e && !verifyInside($part, $e)) {
-	#ie "sorry, can't add outside the main extended partition" unless $::unsafe;
+	#-die "sorry, can't add outside the main extended partition" unless $::unsafe;
 	my $end = $e->{start} + $e->{size};
 	my $start = min($e->{start}, $part->{start});
 	$end = max($end, $part->{start} + $part->{size}) - $start;
@@ -377,12 +377,12 @@ The only solution is to move your primary partitions to have the hole next to th
 
 	my $l = first (@{$hd->{extended}});
 
-	# the first is a special case, must recompute its real size
+	#- the first is a special case, must recompute its real size
 	$l->{start} = round_down($l->{normal}{start} - 1, cylinder_size($hd));
 	$l->{size} = $l->{normal}{start} + $l->{normal}{size} - $l->{start};
 	my $ext = { %$l };
 	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
-	# size will be autocalculated :)
+	#- size will be autocalculated :)
     } else {
 
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?

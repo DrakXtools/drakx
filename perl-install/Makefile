@@ -78,7 +78,7 @@ install_pms: all
 	for i in $(PMS); do \
 		dest=$(DESTREP4PMS)/`dirname $$i`; \
 		install -d $$dest; \
-		perl -ne 'print unless (/^=head/ .. /^=cut/) || /#-.*/' $$i > $(DESTREP4PMS)/$$i; \
+		perl -ne 's/\s*#-.*//; print unless (/^=head/ .. /^=cut/)' $$i > $(DESTREP4PMS)/$$i; \
 	done
 # || /use (diagnostics|vars|strict)/
 
