@@ -301,7 +301,7 @@ sub chooseSizeToInstall {
     my $percentage = int 100 * $max_size / $max_size_;
 
     #- don't ask anything if the difference between min and max is too small
-#    return $max_size if $min_size && $max_size / $min_size < 1.01;
+    return $max_size if $min_size && $max_size / $min_size < 1.01;
 
     log::l("choosing size to install between $min_size and $max_size");
     my $w = my_gtk->new('');
@@ -333,7 +333,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
 		)
 	 );
     $spin->signal_connect(changed => my $changed = sub { 
-	my $val = $spin->get_value_as_int / 100 * $max_size;
+	$val = $spin->get_value_as_int / 100 * $max_size;
 	$mb->set(sprintf("(%dMB)", pkgs::correctSize($val / sqr(1024)))); 
     }); &$changed();
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
