@@ -27,12 +27,20 @@ sub interactive::do_pkgs {
 
 sub install {
     my ($o, @l) = @_;
-    $o->{in}->suspend;
-    my $wait = $o->{in}->wait_message('', _("Installing packages..."));
+    my $wait;
+    if ($o->{in}->isa('interactive::newt')) {
+	$o->{in}->suspend;
+    } else {
+	$wait = $o->{in}->wait_message('', _("Installing packages..."));
+    }
     standalone::explanations("installed packages @l");
     my $ret = system('urpmi', '--allow-medium-change', '--auto', '--best-output', @l) == 0;
-    undef $wait;
-    $o->{in}->resume;
+
+    if ($o->{in}->isa('interactive::newt')) {
+	$o->{in}->resume;
+    } else {
+	undef $wait;
+    }
     $ret;
 }
 
