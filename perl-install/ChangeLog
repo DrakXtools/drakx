@@ -1,3 +1,110 @@
+2001/09/05  dam's  <damien@mandrakesoft.com>
+
+	* pixmaps/wiz_default_left.png, pixmaps/wiz_default_up.png,
+	pixmaps/wiz_drakgw.png: new icons
+
+	* share/themes-mdk.rc: updated theme
+
+	* standalone/draknet: interface display corrected
+
+	* share/themes/mdk-button4.png, share/themes/mdk-button1.png: new buttons
+
+	* install_gtk.pm: 2 sec without sensitives buttons
+
+	* network/netconnect.pm: only if standalone
+
+	* pixmaps/network.png, pixmaps/bootloader.png, pixmaps/printer.png,
+	pixmaps/security.png, pixmaps/rootpasswd.png, pixmaps/harddrive.png,
+	pixmaps/keyboard.png, pixmaps/X.png, pixmaps/mouse.png,
+	pixmaps/bootdisk.png: new pixmaps
+
+2001/09/05  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fixed display of XFdrake test image (fcrozat).
+
+	* install_steps.pm: fixed typo preventing removable devices to be seen in
+	/etc/fstab.
+	fixed configurePrinter (used for auto_install).
+
+	* install_steps_interactive.pm: avoid asking when using existing partition
+	for magic partition with a real
+	mntpoint (typically /tmp/hdimage) if we are not using a ramdisk (so
+	partition is
+	not unmountable).
+
+	* bootloader.pm: removed yvounet sucking, handle Mandrake lilo or unknown
+	lilo.
+
+	* fs.pm: fix bad creation of /mnt/hd for an hd installation without
+	ramdisk.
+	support setting /tmp/hdimage in /etc/fstab even if memory is low (not
+	using ramdisk).
+
+	* install_any.pm: filtering $o->{printer} for g_auto_install().
+	allow installing urpmi on hd install even if low memory (so not using
+	ramdisk).
+
+	* diskdrake_interactive.pm: Do not use for loopback of magic partition
+	(/tmp/hdimage).
+
+2001/09/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/i386/busybox: hopefully fix the _ problems with busybox 0.60.1
+
+2001/09/05  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bs.po: updated Bosnian file
+
+	* share/po/uk.po: updated Ukrainian file
+
+2001/09/05  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: use EISA_ID in more cases to have the name
+	non-case dependent EISA comparison
+	also try EISA ID to auto-detect the monitor (sometimes the EISA ID is
+	there, but not the [hv]syncrange
+
+	* Xconfig.pm: fix typos
+	non-case dependent EISA comparison
+	also try EISA ID to auto-detect the monitor (sometimes the EISA ID is
+	there, but not the [hv]syncrange
+
+	* modules.pm: favor tmscsim over AM53C974
+
+	* tools/ddcprobe/ddcxinfos.c: fix for cards giving bad info
+	also try EISA ID to auto-detect the monitor (sometimes the EISA ID is
+	there, but not the [hv]syncrange
+
+	* standalone/diskdrake: fix function called
+
+2001/09/04  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/mount.c: reflect scd -> sr here too, /me sucks :-(
+
+2001/09/04  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/fr.po, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/cy.po, share/po/nl.po, share/po/wa.po, share/po/is.po,
+	share/po/hu.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/th.po, share/po/el.po,
+	share/po/sk.po, share/po/lt.po, share/po/ar.po, share/po/sl.po,
+	share/po/vi.po, share/po/br.po, share/po/ca.po, share/po/gl.po,
+	share/po/lv.po, share/po/eo.po, share/po/bs.po, share/po/ro.po,
+	share/po/da.po, share/po/zh_TW.po, share/po/cs.po, share/po/af.po:
+	Updated Danish file; updated pot file
+
+2001/09/04  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: fix typo
+
+2001/09/04  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Fitted to the new Foomatic version.
+	Fixed bug of spooler change only working when language is English.
+
 2001/09/04  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps.pm: fix bad vga= which go for some install.
