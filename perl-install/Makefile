@@ -16,7 +16,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/pnp_serial drakxtools	
 	cd ../drakxtools ; rm -rf install* pkgs.pm ftp.pm t.pm */CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* share/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config MonitorsDB Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake.rc $(STANDALONEPMS) icons *.pm)
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config MonitorsDB CardsNames Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake.rc $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -114,7 +114,7 @@ endif
 	cd share ; cp -a keymaps $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
-	cd share ; cp MonitorsDB $(DEST)/usr/X11R6/lib/X11
+	cd share ; cp MonitorsDB CardsNames $(DEST)/usr/X11R6/lib/X11
 	cd share ; cp logo-mandrake.xpm $(DEST)/usr/share
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compss compssUsers compssList $(ROOTDEST)/Mandrake/base

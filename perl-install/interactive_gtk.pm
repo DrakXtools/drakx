@@ -53,7 +53,7 @@ sub ask_from_listW {
     $r or die "ask_from_list cancel";
 }
 
-sub ask_from_treelist {
+sub ask_from_treelistW {
     my ($o, $title, $messages, $separator, $l, $def) = @_;
     my $sep = quotemeta $separator;
     my $w = my_gtk->new($title);
@@ -95,9 +95,11 @@ sub ask_from_treelist {
 	Gtk->main_quit;
     };
 
+    $w->{ok_clicked} = $leave;
+    $w->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::VBox(0,0),
-		    1, gtkset_usize(createScrolledWindow($tree), 200, 280),
+		    1, gtkset_usize(createScrolledWindow($tree), 400, 350),
 		    0, $w->create_okcancel));
     $tree->set_selection_mode('browse');
     $tree->signal_connect(tree_select_row => sub { $curr = $_[1]; });

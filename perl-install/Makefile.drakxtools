@@ -27,7 +27,7 @@ install:
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
-	install -m 644 MonitorsDB $(LIBX11DEST)
+	install -m 644 MonitorsDB CardsNames $(LIBX11DEST)
 	install -m 644 diskdrake.rc $(ETCDEST)
 	install -m 644 po/*.po $(LIBDEST)/po
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt

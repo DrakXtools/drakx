@@ -37,6 +37,7 @@ sub readCardsDB {
 
     local *F;
     open F, $file or die "file $file not found";
+    print "readCardsDB\n";
 
     my ($lineno, $cmd, $val) = 0;
     my $fs = {
@@ -84,6 +85,25 @@ sub readCardsDB {
     $cards{I128}{flags}{noclockprobe} = 1;
     \%cards;
 }
+sub readCardsNames {
+    my $file = "$prefix/usr/X11R6/lib/X11/CardsNames";
+    local *F; open F, $file or die "can't find $file\n";
+    map { (split '=>')[0] } <F>;
+}
+sub cardName2RealName {
+    my $file = "$prefix/usr/X11R6/lib/X11/CardsNames";
+    my ($name) = @_;
+    local *F; open F, $file or die "can't find $file\n";
+    foreach (<F>) { chop;
+	my ($name_, $real) = split '=>';
+	return $real if $name eq $name_;
+    }
+    $name;
+}
+sub cardName2card {
+    my ($name) = @_;
+    readCardsDB("$prefix/usr/X11R6/lib/X11/Cards")->{$name};
+}
 
 sub readMonitorsDB {
     my ($file) = @_;
@@ -110,7 +130,7 @@ sub readMonitorsDB {
 	$monitors{$l{type}} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{" " . translate($k)} =
+	$monitors{_("Generic") . "|" . translate($k)} =
 	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }
@@ -155,16 +175,14 @@ sub cardConfiguration(;$$$) {
     my ($card, $noauto, $allowFB) = @_;
     $card ||= {};
 
-    readCardsDB("$prefix/usr/X11R6/lib/X11/Cards");
-
-    add2hash($card, $cards{$card->{type}}) if $card->{type}; #- try to get info from given type
+    add2hash($card, cardName2card($card->{type})) if $card->{type}; #- try to get info from given type
     undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
-    $card->{type} = $in->ask_from_list(_("Graphic card"), _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
     undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
-    add2hash($card, $cards{$card->{type}}) if $card->{type};
+    add2hash($card, cardName2card($card->{type})) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
@@ -222,9 +240,9 @@ sub monitorConfiguration(;$$) {
     } else {
 	$monitor->{hsyncrange} && $monitor->{vsyncrange} and return $monitor;
 
-	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/X11R6/lib/X11/MonitorsDB");
+	readMonitorsDB("/usr/X11R6/lib/X11/MonitorsDB");
 
-	add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], ' ' . translate($default_monitor)) }) unless $monitor->{type};
+	add2hash($monitor, { type => $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Unlisted', keys %monitors], _("Generic") . '|' . translate($default_monitor)) }) unless $monitor->{type};
 	if ($monitor->{type} eq 'Unlisted') {
 	    $in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -473,9 +491,9 @@ sub chooseResolutionsGtk($$;$) {
     }
     gtkadd($W->{window},
 	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth"),
-					      "(" . ($o->{card}{type} ? 
-						     _("Graphic card: %s\n", $o->{card}{type}) :
-						     _("XFree86 server: %s\n", $o->{card}{server})) . ")"
+					      "(" . ($card->{type} ? 
+						     _("Graphic card: %s", $card->{type}) :
+						     _("XFree86 server: %s", $card->{server})) . ")"
 					     ),
 		    1, gtkpack(new Gtk::HBox(0,20),
 			       $depth_combo = new Gtk::Combo,
