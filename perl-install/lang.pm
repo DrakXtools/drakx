@@ -1036,7 +1036,7 @@ sub write {
                                         )
                                       );
         } elsif (@packages) {
-            do_pkgs_standalone->new->install(IM2packages($locale));
+            do_pkgs_standalone->new->install(@packages);
         }
     }
 
