@@ -306,41 +306,64 @@ sub build_notebook {
                 gtkadd(gtkcreate_frame(N("IP configuration")),
                        gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
                                 if_($is_ethernet,
-                                     0, gtkpack__(Gtk2::HBox->new,
-						  Gtk2::Label->new(N("Protocol")),
-                                                  $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::ComboBox->new_text,
-                                                                            changed => sub {
-                                                                                return if !$_[0]->realized;
-                                                                                my $proto = $gui->{intf}{BOOTPROTO};
-                                                                                my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
+                                    0, gtkpack__(Gtk2::HBox->new,
+                                                 Gtk2::Label->new(N("Protocol")),
+                                                 $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::ComboBox->new_text, changed => sub {
+                                                     return if !$_[0]->realized;
+                                                     my $proto = $gui->{intf}{BOOTPROTO};
+                                                     my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
 
-                                                                                foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
-                                                                                    $_->set_sensitive($protocol eq "static" ? 1 : 0);
-                                                                                }
-                                                                                $apply->();
-                                                                            },
-                                                                                             ),
-                                                 ),
-                                    ),
+                                                     foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
+                                                         $_->set_sensitive(to_bool($protocol eq "static"));
+                                                     }
+                                                     foreach ($gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD}) {
+                                                         $_->set_sensitive(to_bool($protocol eq "dhcp"));
+                                                     }
+                                                     $apply->();
+                                                 },
+                                                                                         ),
+                                             ),
+                                ),
                                 0, gtkpack(Gtk2::VBox->new(1,0),
                                            gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("IP address"))),
                                            gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{intf}{IPADDR} = Gtk2::Entry->new,
                                                                                         key_press_event => $apply)),
-                                          ),
+                                       ),
                                 0, gtkpack(Gtk2::VBox->new(1,0),
                                            gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Netmask"))),
                                            gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{intf}{NETMASK} = Gtk2::Entry->new,
                                                                                         key_press_event => $apply)),
-                                          ),
+                                       ),
                                 if_($is_ethernet,
-                                     0, gtkpack(Gtk2::VBox->new(1,0),
-                                                gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Gateway"))),
-                                                gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
-                                                                                             key_press_event => $apply)),
-                                               ),
-                                    ),
-                               ),
-                      ),
+                                    0, gtkpack(Gtk2::VBox->new(1,0),
+                                               gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("Gateway"))),
+                                               gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+                                                                                            key_press_event => $apply)),
+                                           ),
+                                ),
+                            ),
+                   ),
+                if_($is_ethernet,
+                    gtkadd(gtkcreate_frame(N("Dynamic Host Configuration Protocol (DHCP)")),
+                           gtkpack_(gtkset_border_width(Gtk2::VBox->new(0,10), 5),
+                                    0, gtkpack(Gtk2::VBox->new(1,0),
+                                               gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("DHCP client"))),
+                                               gtkpack__(Gtk2::HBox->new,
+                                                         gtksignal_connect($gui->{netc}{dhcp_client} = Gtk2::ComboBox->new_with_strings(\@network::ethernet::dhcp_clients,
+                                                                                                                                        $netc->{dhcp_client} || $network::ethernet::dhcp_clients[0]),
+                                                                           changed => $apply)),
+                                           ),
+                                    0, gtkpack(Gtk2::VBox->new(1,0),
+                                               gtkpack__(Gtk2::HBox->new, Gtk2::Label->new(N("DHCP timeout (in seconds)"))),
+                                               gtkpack__(Gtk2::HBox->new, gtksignal_connect($gui->{intf}{DHCP_TIMEOUT} = Gtk2::Entry->new,
+                                                                                            key_press_event => $apply)),
+                                           ),
+                                    0, gtksignal_connect($gui->{intf_bool}{PEERDNS} = Gtk2::CheckButton->new(N("Get DNS servers from DHCP")), toggled => $apply),
+                                    0, gtksignal_connect($gui->{intf_bool}{PEERYP} = Gtk2::CheckButton->new(N("Get YP servers from DHCP")), toggled => $apply),
+                                    0, gtksignal_connect($gui->{intf_bool}{PEERNTPD} = Gtk2::CheckButton->new(N("Get NTPD servers from DHCP")), toggled => $apply),
+                                ),
+                       ),
+                ),
                 gtkpack_(Gtk2::VBox->new,
                          1, gtkadd(gtkcreate_frame(N("DNS servers")),
                                    gtkpack(Gtk2::VBox->new(0,0),
@@ -361,14 +384,19 @@ sub build_notebook {
             $proto->{protocols} = { none => N("none"), static => N("static"), dhcp => N("DHCP") };
             $proto->set_popdown_strings(values %{$proto->{protocols}});
             $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO} || 'none'});
-            foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
-                $_->set_sensitive($intf->{BOOTPROTO} eq 'static' ? 1 : 0);
+            if ($intf->{BOOTPROTO} ne 'static') {
+                $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY};
+            }
+            if ($intf->{BOOTPROTO} ne 'dhcp') {
+                $_->set_sensitive(0) foreach $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD}
             }
 	} else {
-	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}, $gui->{netc}{dhcp_client}, $gui->{intf}{DHCP_TIMEOUT}, $gui->{intf_bool}{PEERDNS}, $gui->{intf_bool}{PEERYP}, $gui->{intf_bool}{PEERNTPD};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_name);
+	$gui->{intf}{DHCP_TIMEOUT}->set_text($intf->{DHCP_TIMEOUT});
+	$gui->{intf_bool}{$_}->set_active(text2bool($intf->{$_})) foreach qw(PEERDNS PEERYP PEERNTPD);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
 
