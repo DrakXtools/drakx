@@ -558,13 +558,13 @@ sub appli_choice() {
 			   0, $label,
 			   1, Gtk2::HBox->new, 
 			   # BUG: that code never had supported canceling
-			   0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new, $ref), toggled => sub { $$ref = $$ref ? 0 : 1 }),
+			   0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new, $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 }),
 			  ),
 	      );
-	    } ([ N("Ghostscript"), $gs ],
-	       [ N("StarOffice"), $so ],
-	       [ N("Abiword"), $abi ],
-	       [ N("Generic Printers"), $printer ],
+	    } ([ N("Ghostscript"), \$gs ],
+	       [ N("StarOffice"), \$so ],
+	       [ N("Abiword"), \$abi ],
+	       [ N("Generic Printers"), \$printer ],
 	      ), 
 	    ),
 	   ],
