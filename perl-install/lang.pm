@@ -560,6 +560,10 @@ sub set {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", lang2LANG($lang));
+
+		#- LC_COLLATE and LC_CTYPE are getFile'd (cuz they are big, causing the .cz2 to be *big*)
+		my ($dir) = glob_("$ENV{SHARE_PATH}/locale/*");
+		install_any::getAndSaveFile("$dir/$_") foreach 'LC_COLLATE', 'LC_CTYPE';
 	    };
 	}
 

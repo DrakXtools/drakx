@@ -45,6 +45,8 @@ rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{taipei16,gb16fs,k14,baekmuk_gulim_h_14
 rm -rf $STAGE2TMP/usr/share/locale_special
 for i in /usr/share/locale; do
     name=`basename $i`
+    # LC_COLLATE and LC_CTYPE are getFile'd (cuz they are big, causing the .cz2 to be *big*)
+    find $STAGE2TMP/$i -name LC_COLLATE -o -name LC_CTYPE | xargs rm
     (cd $STAGE2TMP/$i ; find * | $BUILD_ARCHIVE -b9s ../$name.cz2 4000000)
     rm -rf $STAGE2TMP/$i
 done
@@ -62,6 +64,7 @@ dd if=/dev/zero of=$STAGE2 bs=1k count=$[ `du -s $STAGE2TMP | cut -f1` + 1024 + 
 $MKE2FS -N 1000 $STAGE2
 $SUDO mount -t ext2 $STAGE2 $MNTPOINT -o loop
 
+rmdir $MNTPOINT/lost+found
 $SUDO cp -a $STAGE2TMP/* $MNTPOINT
 $SUDO rm -rf $STAGE2TMP
 
