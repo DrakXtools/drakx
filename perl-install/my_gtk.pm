@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text fill_tiled write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
+    wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkset_editable gtksetstyle gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkbuttonset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -154,6 +154,7 @@ sub gtkset_modal       { $_[0]->set_modal($_[1]); $_[0] }
 sub gtkset_sensitive   { $_[0]->set_sensitive($_[1]); $_[0] }
 sub gtkset_border_width{ $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkmove { $_[0]->window->move($_[1], $_[2]); $_[0] }
+sub gtkresize { $_[0]->window->resize($_[1], $_[2]); $_[0] }
 
 sub gtksignal_connect($@) {
     my $w = shift;
@@ -369,63 +370,24 @@ sub gtkbuttonset {
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
+
 sub create_pix_text {
-    #reference widget, text, color_text, font(opt), width(opt), height(opt), background(opt) (gtkcolor or gdkpixmap), flag1, flag2
-    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back) = @_;
+    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, correction, [background (color or gdkpix), backsize x y]
+    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $correction, $background, $x_back, $y_back) = @_;
     my $color_background;
     my $backpix;
-    if ($color_text =~ /#(\d+)#(\d+)#(\d+)/) {
-	$color_text = gtkcolor(map{$_*65535/255}($1, $2, $3))
-    }
-    if (ref($background) eq 'Gtk::Gdk::Color') {
-	$color_background = $background
-    } elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) {
-	$color_background = gtkcolor(map{$_*65535/255}($1, $2, $3))
-    } elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) {
-	$backpix = 1;
-    }
+    if ($color_text =~ /#(\d+)#(\d+)#(\d+)/) { $color_text = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
+    if (ref($background) eq 'Gtk::Gdk::Color') { $color_background = $background }
+    elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
+    elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
     my $max_width2 = $max_width;
     $font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
     my $style= new Gtk::Style;
     $style->font(Gtk::Gdk::Font->fontset_load($font));
-    my @lines;
-    my @heights;
-    $heights[0] = 0;
-    my @ascents;
-    my @descents;
-    my $flag = 1;
-    my $idx = 0;
-    my $height = 0;
-    my $width = 0;
-    my $real_width = 0;
-    my $real_height = 0;
-    my @t = split(' ', $text);
-    foreach (@t) {
-	my $l = $style->font->string_width($_ . if_(!$flag, " "));
-	if ($width + $l > $max_width2 && !$flag) {
-	    $flag = 1;
-	    $width = 0;
-	    $height += $style->font->string_height($lines[$idx]);
-	    $heights[$idx+1] = $height;
-	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
-	    $idx++;
-	}
-	$lines[$idx] = $flag ? "$_" : $lines[$idx] . " $_";
-	$width += $l;
-	$flag = 0;
-	$l <= $max_width2 or $max_width2 = $l;
-	$width <= $real_width or $real_width = $width;
-    }
-    $height += $style->font->string_height($lines[$idx]);
-    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
 
-    $height < $real_height or $real_height = $height;
-    $width = $max_width;
-    $height = $max_height;
-    $real_width < $max_width && $can_be_smaller and $width = $real_width;
-    $real_width > $max_width && $can_be_greater and $width = $real_width;
-    $real_height < $max_height && $can_be_smaller and $height = $real_height;
-    $real_height > $max_height && $can_be_greater and $height = $real_height;
+    my ($width, $height, $lines, $heights, $ascents, $descents) = get_text_coord (
+        $text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller);
+
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
     if ($backpix) {
 	fill_tiled($w, $pix, $background, $x_back, $y_back, $width, $height);
@@ -439,11 +401,61 @@ sub create_pix_text {
     my $gc_text = new Gtk::Gdk::GC($w->window);
     $gc_text->set_foreground($color_text);
     my $i = 0;
-    foreach (@lines) {
-	$pix->draw_string($style->font, $gc_text, 0, $ascents[$i] + $heights[$i], $_);
+    foreach (@{$lines}) {
+	$pix->draw_string($style->font, $gc_text, 0, ${$ascents}[$i] + ${$heights}[$i], $_);
 	$i++;
     }
-    ($pix, $width, $height);
+    ($pix, $width, $height, ${$ascents}[0], ${$descents}[0]);
+}
+
+sub get_text_coord {
+
+    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, correction, [background (color or gdkpix), backsize x y]
+    my ($text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller) = @_;
+
+    my $idx = 0;
+    my $real_width = 0;
+    my $real_height = 0;
+    my @lines;
+    my @heights;
+    my @ascents;
+    my @descents;
+    $heights[0] = 0;
+    my $max_width2 = $max_width;
+    my $height = 0;
+    my $width = 0;
+    my $flag = 1;
+    my @t = split(' ', $text);
+    foreach (@t) {
+	my $l = $style->font->string_width($_ . if_(!$flag, " "));
+	if ($width + $l > $max_width2 && !$flag) {
+	    $flag = 1;
+	    $width = 0;
+	    $height += $style->font->string_height($lines[$idx]);
+	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
+	    $height -= $correction;
+	    $heights[$idx+1] = $height;
+	    $idx++;
+	}
+	$lines[$idx] = $flag ? "$_" : $lines[$idx] . " $_";
+	$width += $l;
+	$flag = 0;
+	$l <= $max_width2 or $max_width2 = $l;
+	$width <= $real_width or $real_width = $width;
+    }
+    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
+    $height += $style->font->string_height($lines[$idx]);
+    $height -= $correction;
+
+    $height < $real_height or $real_height = $height;
+    $width = $max_width;
+    $height = $max_height;
+    $real_width < $max_width && $can_be_smaller and $width = $real_width;
+    $real_width > $max_width && $can_be_greater and $width = $real_width;
+    $real_height < $max_height && $can_be_smaller and $height = $real_height;
+    $real_height > $max_height && $can_be_greater and $height = $real_height;
+
+    ($width, $height, \@lines, \@heights, \@ascents, \@descents)
 }
 
 sub fill_tiled {
@@ -452,14 +464,75 @@ sub fill_tiled {
     while(1) {
 	$x2 = 0;
 	while(1) {
+	    print "tiled($width, $height) x : $x2 - y : $y2\n";
 	    $pix->draw_pixmap($w->style->bg_gc('normal'),
 			      $bitmap, 0, 0, $x2, $y2, $x_back, $y_back);
 	    $x2 += $x_back;
-	    $x2 > $width and last;
+	    $x2 >= $width and last;
 	}
 	$y2 += $y_back;
-	$y2 > $height and last;
+	$y2 >= $height and last;
     }
+}
+
+sub gtkicons_labels_widget {
+    my ($args, $w, $color_text, $font, $correction, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
+#      [_("Menus") , 'menudrake-mdk.png', "$_sbindir/menus.pm"],
+#      [_("Services") , 'service-mdk.png', "$_sbindir/drakxservices"],
+#      [_("Fonts"), 'drakfont-mdk.png', "$_xbindir/drakfont"],
+#      [_("Date & Time") , 'time-mdk.png', "$_sbindir/clock.pm"],
+#      [_("Software Manager"), 'harddrake-mdk.png', "$_bindir/rpmdrake"],
+#      [_("Logs"), 'logdrake-mdk.png', "$_sbindir/logdrake"],
+#      [_("Console"), 'drakboot-mdk.png', "$_xbindir/rxvt"],
+
+    my @tab;
+    my $i = 0;
+    foreach (@$args) {
+	my $label = $_->[0];
+	my $dbl_area;
+	my $darea = new Gtk::DrawingArea;
+	my ($icon, undef) = gtkcreate_png($_->[1]);
+	$darea->signal_connect(expose_event => sub {
+		   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+		   if (!defined($dbl_area)) {
+		       my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
+								1, 1, $correction, $background, $x_back2, $y_back2);
+		       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
+		       $darea->set_usize($dx, $dy);
+		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
+		       #$dbl_area->draw_rectangle($darea->style->black_gc, 1, 0, 0, 500, 500);
+		       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
+		       print " coord : $dx - $icon_width\n";
+		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
+					      $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
+		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
+					      $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
+		   }
+		   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
+					       $dbl_area, 0, 0, 0, 0, $darea->allocation->[2], $darea->allocation->[3]);
+	       });
+	$tab[$i] = $darea;
+	$i++;
+    }
+    my $fixed = new Gtk::Fixed;
+    my $darea = new Gtk::DrawingArea;
+    $fixed->signal_connect(realize => sub {
+			       $darea->set_usize($fixed->allocation->[2], $fixed->allocation->[3]);
+			   });
+    $fixed->put(gtksignal_connect($darea, expose_event => sub { 
+		      if ($_[0]->allocation->[2] != $fixed->allocation->[2] || $_[0]->allocation->[3] != $fixed->allocation->[3]) {
+			  $darea->set_usize($fixed->allocation->[2], $fixed->allocation->[3]);
+		      }
+		      my ($dx, $dy) = ($_[0]->allocation->[2], $_[0]->allocation->[3]);
+		      fill_tiled($darea, $darea->window, $background, $x_back, $y_back, $dx, $dy);
+		  }), 0, 0);
+    $i = 0;
+    foreach (@tab) {
+	$fixed->put($_, $i*64, 64);
+	$i++;
+    }
+    $fixed->show_all();
+    $fixed;
 }
 
 sub write_on_pixmap {
