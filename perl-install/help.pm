@@ -365,7 +365,7 @@ __("Normally, drakX will have selected the right keyboard for you (depending on 
 language you have chosen) and you won't even see this step. However, you might
 not have a keyboard which corresponds exactly to your language: for example, if
 you are an English speaking Swiss person, you may still want your keyboard to be
-a Swiss keyboard. Or if you speak English but are located in Québec, you may
+a Swiss keyboard. Or if you speak English but are located in Quebec, you may
 find yourself in the same situation. In both cases, you will have to go back to
 this installation step and select an appropriate keyboard from the list.
 
