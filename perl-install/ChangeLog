@@ -2,6 +2,46 @@
 
 	* netconnect.pm: corrected bad pci number -> string
 
+2001/03/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/bg.po, share/po/sr.po, share/po/sp.po, share/po/ca.po: updated
+	Bulgarian, Catalan and Serbian files
+
+2001/03/08  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm (dev2grub): better error reporting
+
+	* tools/cvslog2changelog.pl (%users): add stew
+
+	* install_steps.pm (setupBootloaderBefore): aurora stupid renaming fix
+
+	* share/rpmsrate: raise kdebase
+	xcdroast is the best cd burner ui, raise it above others
+	lower some EDITORS
+	raise vim-X11
+	lower xrn, raise pan
+
+	* install_any.pm (setPackages): use burners instead of IDEburners
+	(setPackages): at least set BURNER for ide burners
+
+	* any.pm: cleanup
+
+	* install_steps_interactive.pm, install2.pm: re-add miscellaneous step,
+	but always hidden (aka automatic)
+
+	* detect_devices.pm (isBurner): use syslog to detect scsi burners
+
+	* fs.pm (write_fstab): special case for device ``none'' (which can be
+	mounted
+	twice or more :)
+
+	* tools/i386/netboot/stage2.3c90x, tools/i386/netboot/grub: new versions
+	(without mem=)
+
+2001/03/08  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected bad pci number -> string
+
 2001/03/08  Pixel  <pixel@mandrakesoft.com>
 
 	* tools/i386/netboot/stage2.3c90x, tools/i386/netboot/grub: new versions
