@@ -384,9 +384,9 @@ Take a look at http://www.linmodems.org"),
                         my $type;
                         
                         foreach (map { $_->{driver} } values %{$netc->{autodetect}{modem}}) {
-                            /Hcf/ and $type = "hcfpcimodem";
-                            /Hsf/ and $type = "hsflinmodem";
-                            /LT/  and $type = "ltmodem";
+                            /^Hcf:/ and $type = "hcfpcimodem";
+                            /^Hsf:/ and $type = "hsflinmodem";
+                            /^LT:/  and $type = "ltmodem";
                             $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
                         }
                         
