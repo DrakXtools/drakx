@@ -444,9 +444,7 @@ sub pppConfig {
     my ($in, $modem, $prefix) = @_;
     $modem or return;
 
-    if ($modem->{device} ne "/dev/modem") {
-	devfssymlinkf($modem, 'modem', $prefix) or log::l("creation of $prefix/dev/modem failed")
-    }
+    devfssymlinkf($modem, 'modem', $prefix) if $modem->{device} ne "/dev/modem";
     $in->do_pkgs->install('ppp') if !$::testing;
 
     my %toreplace;
