@@ -625,7 +625,7 @@ sub g_auto_install {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication printer mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication printer mouse wacom netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall mkbootdisk); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
@@ -655,10 +655,89 @@ sub g_auto_install {
 	 Data::Dumper->Dump([$o], ['$o']), if_($replay, 
 qq(\npackage install_steps_auto_install;), q(
 $graphical = 1;
-push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMountPartitions';
+push @graphical_steps, 'doPartitionDisks', 'formatPartitions';
 )), "\0");
     $str =~ s/ {8}/\t/g; #- replace all 8 space char by only one tabulation, this reduces file size so much :-)
     $str;
+}
+
+sub getAndSaveInstallFloppy {
+    my ($o, $where) = @_;
+    my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
+      ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+    $image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
+    install_any::getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
+    1;
+}
+
+sub getAndSaveAutoInstallFloppy {
+    my ($o, $replay, $where) = @_;
+
+    eval { modules::load('loop') };
+
+    if (arch() =~ /sparc/) {
+	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
+	my $mountdir = "$o->{prefix}/tmp/mount"; -d $mountdir or mkdir $mountdir, 0755;
+	my $workdir = "$o->{prefix}/tmp/work"; -d $workdir or rmdir $workdir;
+
+	install_any::getAndSaveInstallFloppy($o, $imagefile) or return;
+        devices::make($_) foreach qw(/dev/loop6 /dev/ram);
+
+	require commands;
+        run_program::run("losetup", "/dev/loop6", $imagefile);
+        fs::mount("/dev/loop6", $mountdir, "romfs", 'readonly');
+        commands::cp("-f", $mountdir, $workdir);
+        fs::umount($mountdir);
+        run_program::run("losetup", "-d", "/dev/loop6");
+
+	substInFile { s/timeout.*//; s/^(\s*append\s*=\s*\".*)\"/$1 kickstart=floppy\"/ } "$workdir/silo.conf"; #" for po
+#-TODO	output "$workdir/ks.cfg", install_any::generate_ks_cfg($o);
+	output "$workdir/boot.msg", "\n7m",
+"!! If you press enter, an auto-install is going to start.
+    ALL data on this computer is going to be lost,
+    including any Windows partitions !!
+", "7m\n";
+
+	local $o->{partitioning}{clearall} = 1;
+	output("$workdir/auto_inst.cfg", install_any::g_auto_install());
+
+        run_program::run("genromfs", "-d", $workdir, "-f", "/dev/ram", "-A", "2048,/..", "-a", "512", "-V", "DrakX autoinst");
+        fs::mount("/dev/ram", $mountdir, 'romfs', 0);
+        run_program::run("silo", "-r", $mountdir, "-F", "-i", "/fd.b", "-b", "/second.b", "-C", "/silo.conf");
+        fs::umount($mountdir);
+        commands::dd("if=/dev/ram", "of=$where", "bs=1440", "count=1024");
+
+        commands::rm("-rf", $workdir, $mountdir, $imagefile);
+    } else {
+	my $imagefile = "$o->{prefix}/tmp/autoinst.img";
+	my $mountdir = "$o->{prefix}/tmp/mount"; -d $mountdir or mkdir $mountdir, 0755;
+
+	my $param = 'kickstart=floppy ' . install_any::generate_automatic_stage1_params($o);
+
+	install_any::getAndSaveInstallFloppy($o, $imagefile) or return;
+
+	my $dev = devices::set_loop($imagefile) or log::l("couldn't set loopback device"), return;
+        fs::mount($dev, $mountdir, 'vfat', 0);
+
+	substInFile { 
+	    s/timeout.*/$replay ? 'timeout 1' : ''/e;
+	    s/^(\s*append)/$1 $param/ 
+	} "$mountdir/syslinux.cfg";
+
+	unlink "$mountdir/help.msg";
+	output "$mountdir/boot.msg", "\n0c",
+"!! If you press enter, an auto-install is going to start.
+   All data on this computer is going to be lost,
+   including any Windows partitions !!
+", "07\n" if !$replay;
+
+	local $o->{partitioning}{clearall} = !$replay;
+	output("$mountdir/auto_inst.cfg", install_any::g_auto_install($replay));
+
+	fs::umount($mountdir);
+        commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
+    }
+    1;
 }
 
 

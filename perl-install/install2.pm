@@ -8,6 +8,7 @@ use vars qw($o $version);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
+use steps;
 use common;
 use install_any qw(:all);
 use install_steps;
@@ -26,53 +27,6 @@ use log;
 use fs;
 #-$::corporate=1;
 
-#-######################################################################################
-#- Steps table
-#-######################################################################################
-my (%installSteps, @orderedInstallSteps);
-{    
-    my @installStepsFields = qw(text redoable onError hidden needs icon); 
-    #entered reachable toBeDone next done;
-    my @installSteps = (
-  selectLanguage     => [ __("Choose your language"), 1, 1, '', '', 'default' ],
-  selectInstallClass => [ __("Select installation class"), 1, 1, '', '', 'default' ],
-  setupSCSI          => [ __("Hard drive detection"), 1, 0, '', '', 'harddrive' ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass", 'mouse' ],
-  selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass", 'keyboard' ],
-  miscellaneous      => [ __("Security"), 1, 1, '!$::expert', '', 'security' ],
-  doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass", 'default' ],
-  formatPartitions   => [ __("Format partitions"), 1, -1, '$o->{isUpgrade}', "doPartitionDisks", 'default' ],
-  choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions", 'default' ],
-  installPackages    => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectInstallClass"], '' ],
-  setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages", 'rootpasswd' ],
-  addUser            => [ __("Add a user"), 1, 1, '', "installPackages", 'user' ],
-  configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions", 'network' ],
-#-  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
-  summary            => [ __("Summary"), 1, 0, '', "installPackages", 'default' ],
-  configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages", 'services' ],
-if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
-  createBootdisk     => [ __("Create a bootdisk"), 1, 0, '', "installPackages", 'bootdisk' ],
-),
-  setupBootloader    => [ __("Install bootloader"), 1, 1, '', "installPackages", 'bootloader' ],
-  configureX         => [ __("Configure X"), 1, 1, '', ["formatPartitions", "setupBootloader"], 'X' ],
-  exitInstall        => [ __("Exit install"), 0, 0, '!$::expert && !$::live', '', 'default' ],
-);
-    for (my $i = 0; $i < @installSteps; $i += 2) {
-	my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
-	$h{next}    = $installSteps[$i + 2];
-	$h{entered} = 0;
-	$h{onError} = $installSteps[$i + 2 * $h{onError}];
-	$h{reachable} = !$h{needs};
-	$installSteps{ $installSteps[$i] } = \%h;
-	push @orderedInstallSteps, $installSteps[$i];
-    }
-    $installSteps{first} = $installSteps[0];
-}
-#-#####################################################################################
-#-INTERNAL CONSTANT
-#-#####################################################################################
-
-my @install_classes = qw(normal developer server);
 
 #-#######################################################################################
 #-$O
@@ -102,8 +56,8 @@ $o = $::o = {
 
 #-    keyboard => 'de',
 #-    display => "192.168.1.19:1",
-    steps        => \%installSteps,
-    orderedSteps => \@orderedInstallSteps,
+    steps        => \%steps::installSteps,
+    orderedSteps => \@steps::orderedInstallSteps,
 
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => { eth0 => { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } },
@@ -119,6 +73,13 @@ $o = $::o = {
 
 };
 
+
+sub installStepsCall {
+    my ($o, $auto, $fun, @args) = @_;
+    eval($auto ? "install_steps::$fun".'($o, @args)' : '$o->'."$fun".'(@args)');
+    #- TODO check $@ (when the method doesn't exist for example) ? I fail to do that
+}
+
 #-######################################################################################
 #- Steps Functions
 #- each step function are called with two arguments : clicked(because if you are a
@@ -127,7 +88,9 @@ $o = $::o = {
 
 #------------------------------------------------------------------------------
 sub selectLanguage {
-    $o->selectLanguage($_[1] == 1);
+    my ($clicked, $ent_number, $auto) = @_;
+
+    installStepsCall($o, $auto, 'selectLanguage', $ent_number == 1);
 
     addToBeDone {
 	lang::write_langs($o->{prefix}, $o->{langs});
@@ -140,24 +103,27 @@ sub selectLanguage {
 
 #------------------------------------------------------------------------------
 sub selectMouse {
+    my ($clicked, $ent_number, $auto) = @_;
+
     require pkgs;
-    my ($first_time) = $_[1] == 1;
+    my ($first_time) = $ent_number == 1;
 
     add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && $first_time;
 
-    $o->selectMouse(!$first_time);
+    installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
+
     addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages';
 }
 
 #------------------------------------------------------------------------------
 sub setupSCSI {
-    my ($clicked) = @_;
-    $o->setupSCSI($clicked);
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'setupSCSI', $clicked);
 }
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
-    my ($clicked, $first_time) = ($_[0], $_[1] == 1);
+    my ($clicked, $first_time, $auto) = ($_[0], $_[1] == 1, $_[2]);
 
     if ($o->{isUpgrade} && $first_time && $o->{keyboard_unsafe}) {
 	my $keyboard = keyboard::read($o->{prefix});
@@ -165,18 +131,18 @@ sub selectKeyboard {
     }
     return if !$::expert && !$clicked;
 
-    $o->selectKeyboard($clicked);
+    installStepsCall($o, $auto, 'selectKeyboard', $clicked);
 }
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
-    my ($clicked) = @_;
+    my ($clicked, $ent_number, $auto) = @_;
 
-    $o->selectInstallClass($clicked);
-   
+    installStepsCall($o, $auto, 'selectInstallClass', $clicked);
+
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
-        $o->setPackages(\@install_classes);
-        $o->selectPackagesToUpgrade if $o->{isUpgrade};
+	installStepsCall($o, $auto, 'setPackages');
+	installStepsCall($o, $auto, 'selectPackagesToUpgrade') if $o->{isUpgrade};
     }
     if ($o->{isUpgrade}) {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
@@ -190,16 +156,19 @@ sub selectInstallClass {
 
 #------------------------------------------------------------------------------
 sub doPartitionDisks {
+    my ($clicked, $ent_number, $auto) = @_;
     $o->{steps}{formatPartitions}{done} = 0;
-    $o->doPartitionDisksBefore;
-    $o->doPartitionDisks;
-    $o->doPartitionDisksAfter;
+    installStepsCall($o, $auto, 'doPartitionDisksBefore');
+    installStepsCall($o, $auto, 'doPartitionDisks');
+    installStepsCall($o, $auto, 'doPartitionDisksAfter');
 }
 
 sub formatPartitions {
+    my ($clicked, $ent_number, $auto) = @_;
+
     $o->{steps}{choosePackages}{done} = 0;
-    $o->choosePartitionsToFormat($o->{fstab}) unless $o->{isUpgrade};
-    $o->formatMountPartitions($o->{fstab}) unless $::testing;
+    installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) unless $o->{isUpgrade};
+    installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) unless $::testing;
 
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console 
@@ -230,13 +199,14 @@ sub formatPartitions {
 
 #------------------------------------------------------------------------------
 sub choosePackages {
+    my ($clicked, $ent_number, $auto) = @_;
     require pkgs;
 
     #- always setPackages as it may have to copy hdlist files and depslist file.
-    $o->setPackages;
-    $o->selectPackagesToUpgrade if $o->{isUpgrade} && $_[1] == 1;
+    installStepsCall($o, $auto, 'setPackages');
+    installStepsCall($o, $auto, 'selectPackagesToUpgrade') if $o->{isUpgrade} && $ent_number == 1;
 
-    $o->choosePackages($o->{packages}, $o->{compssUsers}, $_[1] == 1);
+    installStepsCall($o, $auto, 'choosePackages', $o->{packages}, $o->{compssUsers}, $ent_number == 1);
     log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
 
     #- check pre-condition where base backage has to be selected.
@@ -248,16 +218,20 @@ sub choosePackages {
 
 #------------------------------------------------------------------------------
 sub installPackages {
-    $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
+    my ($clicked, $ent_number, $auto) = @_;
 
-    $o->beforeInstallPackages;
-    $o->installPackages;
-    $o->afterInstallPackages;
+    installStepsCall($o, $auto, 'readBootloaderConfigBeforeInstall') if $ent_number == 1;
+
+    installStepsCall($o, $auto, 'beforeInstallPackages');
+    installStepsCall($o, $auto, 'installPackages');
+    installStepsCall($o, $auto, 'afterInstallPackages');
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
-    $o->miscellaneousBefore($_[0]);
-    $o->miscellaneous($_[0]);
+    my ($clicked, $ent_number, $auto) = @_;
+
+    installStepsCall($o, $auto, 'miscellaneousBefore', $clicked);
+    installStepsCall($o, $auto, 'miscellaneous', $clicked);
 
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
@@ -272,64 +246,81 @@ sub miscellaneous {
 }
 
 #------------------------------------------------------------------------------
-sub summary { $o->summary($_[1] == 1) }
+sub summary {
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'summary', $ent_number == 1);
+}
 #------------------------------------------------------------------------------
 sub configureNetwork {
+    my ($clicked, $ent_number, $auto) = @_;
     #- get current configuration of network device.
     require network;
     eval { network::read_all_conf($o->{prefix}, $o->{netc} ||= {}, $o->{intf} ||= {}) };
-    $o->configureNetwork($_[1] == 1);
+    installStepsCall($o, $auto, 'configureNetwork', $ent_number == 1);
 }
 #------------------------------------------------------------------------------
-sub installCrypto { $o->installCrypto }
+sub installCrypto {
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'installCrypto');
+}
 #------------------------------------------------------------------------------
-sub configureServices { $o->configureServices($_[0]) }
+sub configureServices {
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'configureServices', $clicked);
+}
 #------------------------------------------------------------------------------
 sub setRootPassword {
+    my ($clicked, $ent_number, $auto) = @_;
     return if $o->{isUpgrade};
 
-    $o->setRootPassword($_[0]);
+    installStepsCall($o, $auto, 'setRootPassword', $clicked);
     addToBeDone { install_any::setAuthentication($o) } 'installPackages';
 }
 #------------------------------------------------------------------------------
 sub addUser {
-    return if $o->{isUpgrade} && !$_[0];
+    my ($clicked, $ent_number, $auto) = @_;
+    return if $o->{isUpgrade} && !$clicked;
 
-    $o->addUser($_[0]);
+    installStepsCall($o, $auto, 'addUser', $clicked);
 }
 
 #------------------------------------------------------------------------------
 sub createBootdisk {
+    my ($clicked, $ent_number, $auto) = @_;
     modules::write_conf($o->{prefix});
-    $o->createBootdisk($_[1] == 1);
+    installStepsCall($o, $auto, 'createBootdisk', $ent_number == 1);
 }
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
+    my ($clicked, $ent_number, $auto) = @_;
     return if $::g_auto_install;
 
     modules::write_conf($o->{prefix});
 
-    $o->setupBootloaderBefore if $_[1] == 1;
-    $o->setupBootloader($_[1] - 1);
-    
+    installStepsCall($o, $auto, 'setupBootloaderBefore') if $ent_number == 1;
+    installStepsCall($o, $auto, 'setupBootloader', $ent_number - 1);
+
     local $ENV{DRAKX_PASSWORD} = $o->{bootloader}{password};
     local $ENV{DURING_INSTALL} = 1;
     run_program::rooted($o->{prefix}, "/usr/sbin/msec", $o->{security});
 }
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($clicked) = @_;
+    my ($clicked, $ent_number, $auto) = @_;
 
     #- done here and also at the end of install2.pm, just in case...
     install_any::write_fstab($o);
     modules::write_conf($o->{prefix});
 
     require pkgs;
-    $o->configureX($clicked) if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked || $::testing;
+    installStepsCall($o, $auto, 'configureX', $clicked) if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) && !$o->{X}{disabled} || $clicked || $::testing;
 }
 #------------------------------------------------------------------------------
-sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
+sub exitInstall {
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'exitInstall', getNextStep() eq 'exitInstall');
+}
 
 
 #-######################################################################################
@@ -507,9 +498,8 @@ sub main {
     }
 
     foreach (@auto) {
-	eval "undef *" . (!/::/ && "install_steps_interactive::") . $_;
 	my $s = $o->{steps}{/::(.*)/ ? $1 : $_} or next;
-	$s->{hidden} = 1;
+	$s->{auto} = $s->{hidden} = 1;
     }
 
     my $o_;
@@ -554,7 +544,9 @@ sub main {
 	$o->enteringStep($o->{step});
 	$o->{steps}{$o->{step}}{icon} and $o->{icon} = $o->{steps}{$o->{step}}{icon};
 	eval {
-	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
+	    &{$install2::{$o->{step}}}($clicked || $o->{steps}{$o->{step}}{noauto},
+				       $o->{steps}{$o->{step}}{entered},
+				       $clicked ? 0 : $o->{steps}{$o->{step}}{auto});
 	};
 	my $err = $@;
 	$o->kill_action;

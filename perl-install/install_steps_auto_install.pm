@@ -23,31 +23,22 @@ sub new {
     # Handle legacy options
     $o->{interactive} ||= 'gtk' if $graphical || !is_empty_array_ref($o->{interactiveSteps});
     $o->{interactiveSteps} ||= [ @graphical_steps ];
-    push @{$o->{interactiveSteps}}, qw(enteringStep formatMountPartitions beforeInstallPackages installPackages);
+    push @{$o->{interactiveSteps}}, qw(formatPartitions installPackages);
 
     if ($o->{interactive}) {
-	push @ISA, "interactive_$o->{interactive}";
-
         my $interactiveClass = "install_steps_$o->{interactive}";
 	require"$interactiveClass.pm"; #- no space to skip perl2fcalls
 
-	#- remove the empty wait_message
-	undef *wait_message;
+	@ISA = ($interactiveClass, @ISA);
 
-	foreach my $f (@{$o->{interactiveSteps}}) {
-	    foreach my $pkg ($interactiveClass, 'install_steps_interactive') {
-		if ($::{$pkg . "::"}{$f}) {
-		    log::l("install_steps_auto_install: adding function ", $pkg, "::", $f);
+	#- remove our non-interactive stuff
+	eval "undef *$_" foreach qw(configureNetwork enteringStep ask_warn wait_message errorInStep installPackages);
 
-		    no strict 'refs';
-		    *{"install_steps_auto_install::$f"} = sub {
-			local @ISA = ($interactiveClass, @ISA);
-			&{$::{$pkg . "::"}{$f}};
-		    };
-		    last;
-		}
-	    }
-	}
+	my $f = $o->{steps}{first};
+	do {
+	    member($f, @{$o->{interactiveSteps}}) ? $o->{steps}{$f}{noauto} = 1 : $o->{steps}{$f}{auto} = 1;
+	} while ($f = $o->{steps}{$f}{next});
+
 	goto &{$::{$interactiveClass . "::"}{new}};
     } else {
 	(bless {}, ref $type || $type)->SUPER::new($o);
@@ -69,6 +60,7 @@ sub enteringStep {
 sub ask_warn {
     log::l(ref $_[1] ? join " ", @{$_[1]} : $_[1]);
 }
+
 sub wait_message {}
 
 sub errorInStep {

@@ -899,6 +899,7 @@ sub miscellaneous {
 sub exitInstall { 
     my ($o) = @_;
     eval { output "$o->{prefix}/root/report.bug", install_any::report_bug($o->{prefix}) };
+    install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/replay_install.img");
     install_any::unlockCdrom;
     install_any::log_sizes($o);
 }
