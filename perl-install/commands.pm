@@ -423,7 +423,8 @@ sub kill {
     kill $signal, @_ or die "kill failed: $!\n";
 }
 
-sub lspci() {
+sub lspci() { lspcidrake() }
+sub lspcidrake() {
     require detect_devices;
     print join "\n", detect_devices::stringlist(), '';
 }
