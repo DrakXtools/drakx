@@ -1311,13 +1311,12 @@ sub ask_browse_tree_info_given_widgets {
 	0;
     });
     $w->{tree}->signal_connect(button_press_event => sub {  #- not too good, but CellRendererPixbuf doesn't have the needed signals :(
-				   eval {
 	my ($path, $column) = $w->{tree}->get_path_at_pos($_[1]->x, $_[1]->y);
 	if ($path && $column) {
-	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($path, 0);
+	    $column->{is_pix} and $mouse_toggle_pending = $w->{tree_model}->get($w->{tree_model}->get_iter($path), 0);
 	}
-    }; #- there is a die for the line above about a variable not of type Gtk2::TreeIter where is_pix and tree_model are reference.
-			       });
+        0;
+    });
     $common->{rebuild_tree}->();
     &$update_size;
     my $_b = before_leaving { $clear_all_caches->() };
