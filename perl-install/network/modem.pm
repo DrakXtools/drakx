@@ -1,5 +1,10 @@
 package network::modem;
+
 use common qw(:common :file);
+use any;
+use modules;
+use detect_devices;
+use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
 

@@ -1,8 +1,10 @@
 package network::isdn;
 
-#use network::tools;
+use common qw(:common :file);
+use any;
 use modules;
-use common qw(:file);
+use log;
+use network::tools;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);
@@ -27,7 +29,8 @@ sub configure {
 	$netcnx->{isdn_external}={};
 	$netcnx->{isdn_external}{device}=$netc->{autodetect}{modem};
 	$netcnx->{isdn_external}{special_command}='AT&F&O2B40';
-	pppConfig($netcnx->{isdn_external}, $mouse, $netc) or goto isdn_step_1;
+	require network::modem;
+	network::modem::pppConfig($netcnx->{isdn_external}, $mouse, $netc) or goto isdn_step_1;
     }
     1;
 }
@@ -123,17 +126,6 @@ defaultroute
     1;
 }
 
-#- get_info_isdn_backend : fills the infos from the line of the tree returned into $isdn and $netc
-#- input :
-#-  $isdn
-#-  $netc
-#-  $name : the line choosen in the tree of ISP : string : /^(.*)\|(.*)\|(.*)$/ with $1=Land $2=City $3=ISP_name
-#-  $file : 1st location of the file : ISDN_DB_FILE
-#-  $file2 : 2nd location of the file : ISDN_DB_FILE
-#- $isdn ouput
-#-  $isdn->{user_name}, $isdn->{phone_out}, $netc->{DOMAINNAME2}, $netc->{dnsServer2}, $netc->{dnsServer3},
-#- $netc output
-#-  $netc->{DOMAINNAME2}, $netc->{dnsServer2}, $netc->{dnsServer3}
 sub get_info_providers_backend {
     my ($isdn, $netc, $name, $file) = @_;
     $name eq 'Unlisted - edit manually' and return;
@@ -153,7 +145,7 @@ sub isdn_ask_info {
     $f = "$prefix$f" if !-e $f;
     my $str= $in->ask_from_treelist( _("ISDN Configuration"), _("Select your provider.\n If it's not in the list, choose Unlisted"),
 				     '|', ['Unlisted - edit manually',
-					   netconnect::read_providers_backend($f)], 'Unlisted - edit manually')
+					   read_providers_backend($f)], 'Unlisted - edit manually')
       or return;
     get_info_providers_backend($isdn, $netc, $str || 'Unlisted - edit manually', $f);
     $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl);

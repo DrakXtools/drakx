@@ -1,5 +1,7 @@
 package network::tools;
 
+use common qw(:common :file)
+use run_program;
 use vars qw(@ISA @EXPORT);
 
 @ISA = qw(Exporter);

@@ -1,6 +1,9 @@
 package network::adsl;
 
-#use network::tools;
+use common qw(:common :file);
+use run_program;
+use network::tools;
+use network::ethernet;
 
 use vars qw(@ISA @EXPORT);
 
