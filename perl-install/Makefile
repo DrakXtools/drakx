@@ -154,6 +154,9 @@ endif
 ifeq (i386,$(ARCH))
 	cp ../tools/i386/busybox $(DEST)/usr/bin
 endif
+ifeq (x86_64,$(ARCH))
+	cp ../tools/x86_64/busybox $(DEST)/usr/bin/
+endif
 ifeq (ia64,$(ARCH))
 	ln -sf bash $(DEST)/usr/bin/sh
 else
