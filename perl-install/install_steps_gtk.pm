@@ -304,6 +304,7 @@ sub choosePackagesTree {
 			    node_state => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return;
 				pkgs::packageMedium($packages, $p)->{selected} or return;
+				$p->arch eq 'src'                       and return;
 				$p->flag_base                           and return 'base';
 				$p->flag_installed && !$p->flag_upgrade and return 'installed';
 				$p->flag_selected                       and return 'selected';
