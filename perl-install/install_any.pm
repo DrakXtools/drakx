@@ -589,7 +589,7 @@ sub kderc_largedisplay($) {
     foreach (list_skels()) {
 	substInFile {
 	    s/^(GridWidth)=85/$1=100/;
-	    s/^(GridWidth)=70/$1=75/;
+	    s/^(GridHeight)=70/$1=75/;
 	} "$prefix$_/.kde/share/config/kfmrc" 
     }
 }

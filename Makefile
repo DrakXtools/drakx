@@ -1,5 +1,5 @@
 BOOT_IMG = hd.img cdrom.img network.img network_ks.img pcmcia.img pcmcia_ks.img
-BOOT_RDZ = hd.rdz cdrom.rdz network.rdz pcmcia.rdz
+BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = install/install install/full-install install/local-install install/installinit/init
 DIRS = tools install install/installinit perl-install lnx4win
 ROOTDEST = /export
