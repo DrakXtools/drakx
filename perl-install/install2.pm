@@ -21,47 +21,53 @@ use partition_table qw(:types);
 use detect_devices;
 use smp;
 
-$testing = $ENV{PERL_INSTALL_TEST};
+$testing = 1;#$ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
-my @installStepsFields = qw(text skipOnCancel skipOnLocal prev next);
+my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
 my @installSteps = (
-  selectInstallClass => [ "Select installation class", 0, 0 ],
-  setupSCSI => [ "Setup SCSI", 0, 1 ],	
-  partitionDisks => [ "Setup filesystems", 0, 1 ],
-  findInstallFiles => [ "Find installation files", 1, 0 ],
-  choosePackages => [ "Choose packages to install", 0, 0 ],
-  doInstallStep => [ "Install system", 0, 0 ],
-#  configureMouse => [ "Configure mouse", 0, 0 ],
-  finishNetworking => [ "Configure networking", 0, 0 ],
-#  configureTimezone => [ "Configure timezone", 0, 0 ],
-#  configureServices => [ "Configure services", 0, 0 ],
-#  configurePrinter => [ "Configure printer", 0, 0 ],
-  setRootPassword => [ "Set root password", 0, 0 ],
-  addUser => [ "Add a user", 0, 0 ],
-  createBootdisk => [ "Create bootdisk", 0, 1 ],
-  setupBootloader => [ "Install bootloader", 0, 1 ],
-#  configureX => [ "Configure X", 0, 0 ],
-  exitInstall => [ "Exit install", 0, 0, undef, 'done' ],
+  selectLanguage => [ "Choose your language", "aide", 0, 0 ],
+  selectPath => [ "Choose install or upgrade", "aide", 0, 0 ],
+  selectInstallClass => [ "Select installation class", "aide", 0, 0 ],
+  setupSCSI => [ "Setup SCSI", "aide", 0, 1 ],	
+  partitionDisks => [ "Setup filesystems", "aide", 0, 1 ],
+  findInstallFiles => [ "Find installation files", "aide", 1, 0 ],
+  choosePackages => [ "Choose packages to install", "aide", 0, 0 ],
+  doInstallStep => [ "Install system", "aide", 0, 0 ],
+#  configureMouse => [ "Configure mouse", "aide", 0, 0 ],
+  finishNetworking => [ "Configure networking", "aide", 0, 0 ],
+#  configureTimezone => [ "Configure timezone", "aide", 0, 0 ],
+#  configureServices => [ "Configure services", "aide", 0, 0 ],
+#  configurePrinter => [ "Configure printer", "aide", 0, 0 ],
+  setRootPassword => [ "Set root password", "aide", 0, 0 ],
+  addUser => [ "Add a user", "aide", 0, 0 ],
+  createBootdisk => [ "Create bootdisk", "aide", 0, 1 ],
+  setupBootloader => [ "Install bootloader", "aide", 0, 1 ],
+#  configureX => [ "Configure X", "aide", 0, 0 ],
+  exitInstall => [ "Exit install", "aide", 0, 0, undef, 'done' ],
 );
 
 # this table is translated at run time
 my @upgradeSteps = (
-  setupSCSI => [ "Setup SCSI", 0, 0 ],
-  upgrFindInstall => [ "Find current installation", 0, 0 ],
-  findInstallFiles => [ "Find installation files", 1, 0 ],
-  upgrChoosePackages => [ "Choose packages to upgrade", 0, 0 ],
-  doInstallStep => [ "Upgrade system", 0, 0 ],
-  createBootdisk => [ "Create bootdisk", 0, 0 , 'none' ],
-  setupBootloader => [ "Install bootloader", 0, 0 ],
-  exitInstall => [ "Exit install", 0, 0 , undef, 'done' ],
+  selectLanguage => [ "Choose your language", "aide", 0, 0 ],
+  selectPath => [ "Choose install or upgrade", "aide", 0, 0 ],
+  selectInstallClass => [ "Select installation class", "aide", 0, 0 ],
+  setupSCSI => [ "Setup SCSI", "aide", 0, 0 ],
+  upgrFindInstall => [ "Find current installation", "aide", 0, 0 ],
+  findInstallFiles => [ "Find installation files", "aide", 1, 0 ],
+  upgrChoosePackages => [ "Choose packages to upgrade", "aide", 0, 0 ],
+  doInstallStep => [ "Upgrade system", "aide", 0, 0 ],
+  createBootdisk => [ "Create bootdisk", "aide", 0, 0 , 'none' ],
+  setupBootloader => [ "Install bootloader", "aide", 0, 0 ],
+  exitInstall => [ "Exit install", "aide", 0, 0 , undef, 'done' ],
 );
-my (%installSteps, %upgradeSteps);
+my (%installSteps, %upgradeSteps, @orderedInstallSteps, @orderedUpgradeSteps);
 for (my $i = 0; $i < @installSteps; $i += 2) {
     my %h; @h{@installStepsFields} = @{ $installSteps[$i + 1] };
     $h{prev} ||= $installSteps[$i - 2];
     $h{next} ||= $installSteps[$i + 2];
     $installSteps{ $installSteps[$i] } = \%h;
+    push @orderedInstallSteps, $installSteps[$i];
 }
 $installSteps{first} = $installSteps[0];
 for (my $i = 0; $i < @upgradeSteps; $i += 2) {
@@ -69,6 +75,7 @@ for (my $i = 0; $i < @upgradeSteps; $i += 2) {
     $h{prev} ||= $upgradeSteps[$i - 2];
     $h{next} ||= $upgradeSteps[$i + 2];
     $upgradeSteps{ $upgradeSteps[$i] } = \%h;
+    push @orderedUpgradeSteps, $installSteps[$i];
 }
 $upgradeSteps{first} = $upgradeSteps[0];
 
@@ -103,12 +110,17 @@ my $default = {
 	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash) ],
 };
-$o = { default => $default };
+$o = { default => $default, steps => \%installSteps, orderedSteps => \@orderedInstallSteps };
 
+
+sub selectLanguage {
+    $o->{lang} = $o->chooseLanguage;
+}
 
 sub selectPath {
     $o->{isUpgrade} = $o->selectInstallOrUpgrade;
-    $o->{steps} = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
+    $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
+    $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
 }
 
 sub selectInstallClass {
@@ -170,9 +182,15 @@ sub findInstallFiles {
     $o->{comps} = $o->{method}->getComponentSet($o->{packages});
 }
  
-sub choosePackages { 
+sub choosePackages {
+    # remove Base from comps so that it's hidden
+    my $base = $o->{comps}->{Base};
+    delete $o->{comps}->{Base};
+
     $o->choosePackages($o->{packages}, $o->{comps}); 
 
+    #restore Base
+    $o->{comps}->{Base} = $base;
     $o->{comps}->{Base}->{selected} = 1;
 
     foreach (grep { $_->{selected} } values %{$o->{comps}}) {
@@ -208,7 +226,15 @@ sub setupBootloader {
 
 sub configureX { $o->setupXfree; }
 
-sub exitInstall { $o->exitInstall }
+sub exitInstall { 
+    $o->warn( 
+"Congratulations, installation is complete.
+Remove the boot media and press return to reboot.
+For information on fixes which are available for this release of Linux Mandrake,
+consult the Errata available from http://www.linux-mandrake.com/.
+Information on configuring your system is available in the post
+install chapter of the Official Linux Mandrake User's Guide.");
+}
 
 sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
@@ -235,8 +261,6 @@ sub main {
 
     $o = install_steps_graphical->new($o);
 
-    $o->{lang} = $o->chooseLanguage;
-
     $o->{netc} = net::readNetConfig("/tmp");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");
@@ -252,12 +276,10 @@ sub main {
 
     $o->{keyboard} = eval { keyboard::read("/tmp/keyboard") } || $default->{keyboard};
 
-    selectPath();
-
     for (my $step = $o->{steps}->{first}; $step ne 'done'; $step = getNextStep($step)) {
-	log::l("entering step $step");
-	&{$main::{$step}}() and $o->{steps}->{completed} = 1;
-	log::l("step $step finished");
+	$o->enteringStep($step);
+	&{$main::{$step}}() and $o->{steps}->{$step}->{completed} = 1;
+	$o->leavingStep($step);
     }
     killCardServices();
 

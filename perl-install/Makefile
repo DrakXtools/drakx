@@ -4,6 +4,7 @@ DEST = /tmp/t/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig fr.map
+EXCLUDE = $(LOCALFILES) boot-hd.img
 
 .PHONY: all tags install clean verify_c
 
@@ -14,11 +15,11 @@ tags:
 
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
-	rm -f c/c.xs
+	rm -f c/c.xs install1_hd
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
-	cd .. ; tar cfy perl-install.tar.bz2 $(LOCALFILES:%=--exclude %) perl-install
+	cd .. ; tar cfy perl-install.tar.bz2 $(EXCLUDE:%=--exclude %) perl-install
 
 tar-diskdrake: clean
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
@@ -112,13 +113,14 @@ as_root:
 
 full_stage2:
 	rm -rf $(DEST)
-	mkdir $(DEST)
+	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) stage2
 
 stage2:
 	$(MAKE) install_pms
-	cd $(DEST) ; tar cfz $(DEST).tgz [^M]* ; mv $(DEST).tgz /tmp/t.tgz
+	cd /tmp/t ; tar cfz /tmp/instimage-full.tgz Mandrake
+	cd /tmp/t ; tar cfz /tmp/instimage-light.tgz Mandrake/instimage/usr/[bl]*
 
 	@#rm -rf /mnt/initrd/*
 	@#cp -a $(DEST)/* /mnt/initrd

@@ -22,10 +22,21 @@ my $o;
 1;
 
 
+sub warn {}
+
 sub new($$) {
     my ($type, $o_) = @_;
 
     $o = bless $o_, ref $type || $type;
+}
+
+sub enteringStep($$) {
+    my ($o, $step) = @_;
+    log::l("starting step `$step'");
+}
+sub leavingStep($$) {
+    my ($o, $step) = @_;
+    log::l("step `$step' finished");
 }
 
 sub chooseLanguage($) {

@@ -204,6 +204,7 @@ sub _create_window($$) {
     $o->{window}->set_title($title);
     $o->{window}->signal_connect("expose_event" => sub { c::XSetInputFocus($o->{window}->window->XWINDOW) }) if $my_gtk::force_focus; 
     $o->{window}->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
+    $o->{window}->set_uposition(@$my_gtk::force_position) if $my_gtk::force_position;
     $o->{window}
 }
 
@@ -241,16 +242,13 @@ sub _ask_from_entry($$@) {
 sub _ask_from_list($$$@) {
     my ($o, $l, @msgs) = @_;
     my $list = new Gtk::List;
+    my @sorted = sort @$l;
     $list->signal_connect(select_child => sub { 
-	$o->{retval} = $l->[$list->child_position($_[1])];
+	$o->{retval} = $sorted[$list->child_position($_[1])];
 	Gtk->main_quit;
     });
-    gtkadd($list, map { new Gtk::ListItem($_) } @$l);
+    gtkadd($list, map { new Gtk::ListItem($_) } @sorted);
 
-#    myadd($o->{window}, 
-#	   mypack_(myset_usize(new Gtk::VBox(0,0), 0, 200),
-#		   0, $o->create_box_with_title(@msgs), 
-#		   1, createScrolledWindow(mypack(new Gtk::VBox(0,0), @l))));
     gtkadd($o->{window}, gtkpack($o->create_box_with_title(@msgs), $list));
 }
 

@@ -18,6 +18,15 @@ use log;
 
 1;
 
+sub enteringStep($$$) {
+    my ($o, $step) = @_;
+    print "Starting step `$o->{steps}->{$step}->{text}'\n";
+}
+sub leavingStep {
+    my ($o) = @_;
+    print "--------\n";
+}
+
 sub chooseLanguage($) {
     my $lang = ask_from_list('Language', 'Which language do you want?', [ lang::list() ]);
     run_program::run('xmodmap', "/usr/bin/$lang.map");
@@ -120,18 +129,6 @@ the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?");
 }
 
-sub exitInstall {
-    ask_warn('', 
-"Congratulations, installation is complete.
-Remove the boot media and press return to reboot.
-For information on fixes which are available for this release of Linux Mandrake,
-consult the Errata available from http://www.linux-mandrake.com/.
-Information on configuring your system is available in the post
-install chapter of the Official Linux Mandrake User's Guide.");
-}
-
-
-
 sub readln {
     my $l = <STDIN>;
     chomp $l;
@@ -140,13 +137,12 @@ sub readln {
 
 sub ask_warn {
     my ($title, @msgs) = @_;
-    print "----------\n", map { "$_\n" } @_;
-    print "Press enter"; readln();
+    warn(@msgs);
 }
 
 sub ask_yesorno {
     my ($title, @msgs) = @_;
-    print "----------\n", join("\n", @_);
+    print join("\n", @_);
     print " (yes/No) "; readln() =~ /y/i;
 
 }
@@ -159,7 +155,7 @@ sub check_it {
 sub ask_from_list {
     my ($title, @msgs) = @_;
     my $list = pop @msgs;
-    print "----------\n", map { "$_\n" } @msgs;
+    print map { "$_\n" } @msgs;
     my $n = 0; foreach (@$list) { $n++; print "$n: $_\n"; }
     my $i;
     do {
@@ -175,7 +171,7 @@ sub ask_many_from_list {
     my $default = pop @msgs;
     my $list = pop @msgs;
     my @defaults;
-    print "----------\n", map { "$_\n" } @msgs;
+    print map { "$_\n" } @msgs;
     my $n = 0; foreach (@$list) { 
 	$n++; 
 	print "$n: $_\n"; 

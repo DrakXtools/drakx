@@ -21,7 +21,9 @@ sub skipThisPackage { member($_[0], @skipThesesPackages) }
 sub addInfosFromHeader($$) {
     my ($packages, $header) = @_;
 
-    $packages->{c::headerGetEntry($header, 'name')} = {
+    my $name = c::headerGetEntry($header, 'name');
+    $packages->{$name} = {
+        name => $name,
 	header => $header, size => c::headerGetEntry($header, 'size'),
 	group => c::headerGetEntry($header, 'group') || "(unknown group)",
     };
