@@ -663,7 +663,7 @@ sub chooseGroups {
 	$type ||= __("Base system only");
 
 	#- ask user for its choice.
-	my $type = $o->ask_from_list_(_("Type of install"), _("You do not have selected any group of packages
+	$type = $o->ask_from_list_(_("Type of install"), _("You do not have selected any group of packages
 Please choose the minimal installation you want"), [ __("Base system only"), __("No X"), __("With X"), ], $type);
 
 	#- reselect according to user selection.
