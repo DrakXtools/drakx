@@ -546,6 +546,12 @@ my %IM_config =
              XIM_PROGRAM => 'fcitx',
              XMODIFIERS => '@im=fcitx',
             },
+   gcin => {
+             GTK_IM_MODULE => 'gcin',
+             XIM => 'xcin',
+             XIM_PROGRAM => 'gcin',
+             XMODIFIERS => '@im=xcin',
+   			},
    'im-ja' => {
                GTK_IM_MODULE => 'im-ja',
                XIM => 'im-ja-xim-server',
