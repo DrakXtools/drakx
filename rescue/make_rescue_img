@@ -112,3 +112,4 @@ __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 exit 0 if $ARGV[0];
 
 _ "mkisofs -quiet -D -R $tmp | create_compressed_fs - 65536 $rescue 200 2>/dev/null"
+_ "$sudo rm -rf $tmp";
