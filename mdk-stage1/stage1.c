@@ -155,14 +155,13 @@ static void spawn_shell(void)
 }
 #endif
 
-
+#ifdef SPAWN_INTERACTIVE
 char * interactive_fifo = "/tmp/stage1-fifo";
 static pid_t interactive_pid = 0;
 
 /* spawns my small interactive on console #6 */
 static void spawn_interactive(void)
 {
-#ifdef SPAWN_INTERACTIVE
 	int fd;
 	char * dev = "/dev/tty6";
 
@@ -211,8 +210,8 @@ static void spawn_interactive(void)
 		
 		close(fd);
 	}
-#endif
 }
+#endif
 
 
 /************************************************************
@@ -583,6 +582,7 @@ void finish_preparing(void)
 	if (file_size(IS_RESCUE ? "/sbin/init" : "/etc/init") == -1)
 		stg1_fatal_message("Fatal error giving hand to second stage.");
 
+#ifdef SPAWN_SHELL
 	if (shell_pid != 0) {
                 int fd;
 		kill(shell_pid, 9);
@@ -590,6 +590,7 @@ void finish_preparing(void)
                 write(fd, "Killed\n", 7);
                 close(fd);
         }
+#endif
 }
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
@@ -604,7 +605,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		mkdir(SLASH_LOCATION "/tmp", 0755);
 	}
 
+#ifdef SPAWN_INTERACTIVE
 	spawn_interactive();
+#endif
 
 	open_log();
 	log_message("welcome to the " DISTRIB_NAME " install (mdk-stage1, version " DISTRIB_VERSION " built " __DATE__ " " __TIME__")");
@@ -653,8 +656,10 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 			log_perror("symlink from " IMAGE_LOCATION_REL "/" LIVE_LOCATION_REL " to " STAGE2_LOCATION " failed");
 #endif
 
+#ifdef SPAWN_INTERACTIVE
 	if (interactive_pid != 0)
 		kill(interactive_pid, 9);
+#endif
 
 	finish_preparing();
 
