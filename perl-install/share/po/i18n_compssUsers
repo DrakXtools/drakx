@@ -26,10 +26,13 @@ sub get {
 }
 
 foreach (uniq(get(''), get('.desktop'))) {
-    s/"/\"/g;
-    print qq(
+    if ($_) {
+        s/"/\"/g;
+        s/\n//g;
+        print qq(
 #: ../../share/compssUsers
 msgid "$_"
 msgstr ""
 );
+    }
 }
