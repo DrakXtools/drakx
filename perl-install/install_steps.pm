@@ -477,6 +477,10 @@ GridHeight=70
     #- move some file after an upgrade that may be seriously annoying.
     #- and rename saved files to .mdkgiorig.
     if ($o->{isUpgrade}) {
+	my $pkg = pkgs::packageByName($o->{packages}, 'rpm');
+	$pkg && pkgs::packageSelectedOrInstalled($pkg) && pkgs::versionCompare(pkgs::packageVersion($pkg), '4.0') >= 0 and
+	  pkgs::clean_old_rpm_db($o->{prefix});
+
 	log::l("moving previous desktop files that have been updated to Trash of each user");
 	install_any::kdemove_desktop_file($o->{prefix});
 
