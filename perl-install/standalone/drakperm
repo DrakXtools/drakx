@@ -80,11 +80,14 @@ sub move_callback {
     return if !$iter2 || $model->get($iter2, 0);
     $model->swap($iter, $iter2);
     $modified = 1;
+    hide_up_button_iffirst_item($path);
+    hide_down_button_iflast_item($path);
     $permList->get_selection->select_iter($iter);
     $permList->queue_draw;
 }
 
 my $combo_sig = $combo_perm->entry->signal_connect(changed => sub { display_perm($rev_perm_l10n{$combo_perm->entry->get_text} , @_) });
+
 $permList->signal_connect(button_press_event => sub { 
                      return unless $editable;
                      my (undef, $event) = @_;
@@ -133,12 +136,31 @@ $combo_perm->entry->set_text($perm_l10n{$default_perm_level});
 $permList->get_selection->signal_connect('changed' => sub {
                                                my ($select) = @_;
                                                my (undef, $iter) = $select->get_selected;
-                                               sensitive_buttons($iter ? $editable && !$treeModel->get($iter, 0) : 0);
+                                               return if !$iter;
+                                               my $locked = $treeModel->get($iter, 0);
+                                               sensitive_buttons($iter ? $editable && !$locked : 0);
+                                               return if $locked;
+                                               my $curr_path = $treeModel->get_path($iter);
+                                               hide_up_button_iffirst_item($curr_path);
+                                               hide_down_button_iflast_item($curr_path);
                                            });
 
 $w->main;
 ugtk2->exit;
 
+
+sub hide_up_button_iffirst_item {
+    my ($curr_path) = @_;
+    my $first_path = $treeModel->get_path($treeModel->get_iter_first);
+    $buttons[0]->set_sensitive($first_path && $first_path->compare($curr_path));
+}
+
+sub hide_down_button_iflast_item {
+    my ($curr_path) = @_;
+    $curr_path->next;
+    my $next_item = $treeModel->get_iter($curr_path);
+    $buttons[1]->set_sensitive($next_item && !$treeModel->get($next_item, 0));
+}
 
 sub check_save() {
     $modified or return 0;
