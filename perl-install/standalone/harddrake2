@@ -180,7 +180,13 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
         
         if ($current_device) {
             gtktext_insert($text, [ map  {
-                if_($fields{$_}[0], [ $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
+		# The U+200E character is to force LTR display, as what
+		# what follows the colon is always in LTR (device names,
+		# paths, etc), this ensures proper displaying of names
+		# like /dev/fd0 (otherwise it gets 'dev/fd0/').
+		# it must come *after* the space, as the space must follow
+		# the colon following the direction of writting.
+                if_($fields{$_}[0], [ $fields{$_}[0] . ": \x{200e}", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
                     [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} =~ /^(unknown|Bad:)/ ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
