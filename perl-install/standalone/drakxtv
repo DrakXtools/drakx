@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 # DrakxTV
+# $Id$
 
 # Copyright (C) 2002 MandrakeSoft (tvignaud@mandrakesoft.com)
 #
@@ -48,17 +49,17 @@ sub scan4channels {
 			    { label => _("Area :"), val => \$ftable_id, list => [keys %freqtables], not_edit => 1, sort => 1},
 			    ],
 			   complete => sub { 
-				  my $wait = $in->wait_message('Please wait',
+				  my $wait = $in->wait_message(_('Please wait'),
 										 _("Scanning for TV channels in progress ..."));
 
 #                     france is a bogus table provided to scantv which will
 #                     ignore it as "All" is selected because of -a
 				  $ftable_id = $freqtables{$ftable_id};
 				  $ftable_id = "france -a " if ($ftable_id eq -1);
-
-				  system( (( -x "/usr/X11R6/bin/xvt") ?
-					   "xvt -title '"._("Scanning for TV channels")." ...' -e " : "")
-					  . "scantv -n $norm -f $ftable_id -o ~/.xawtv");
+				  my $use_X =$ENV{DISPLAY} && -x "/usr/X11R6/bin/xvt";
+				  system( (($use_X ) ?
+						 "xvt -title '"._("Scanning for TV channels")." ...' -e ":"")
+						. "scantv -n $norm -f $ftable_id -o ~/.xawtv".(($use_X )?"":" &>~/tmp/scantv.log"));
 				  $in->exit(0);
 			   },
 			   ) or $in->exit(0);
