@@ -282,7 +282,7 @@ sub ask_mntpoint_s {
 
     {
 	my $w = $o->wait_message('', _("Scanning partitions to find mount points"));
-	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
+	install_any::suggest_mount_points($fstab, $o->{prefix}, 'uniq');
 	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
     }
     if (@fstab == 1) {
@@ -330,7 +330,7 @@ Continue at your own risk!"));
 	  $o->ask_from_listf(_("Root Partition"),
 			     _("What is the root partition (/) of your system?"),
 			     \&partition_table_raw::description, 
-			     [ install_any::find_root_parts($o->{hds}, $o->{prefix}) ]) or die "setstep exitInstall\n";
+			     [ install_any::find_root_parts($o->{fstab}, $o->{prefix}) ]) or die "setstep exitInstall\n";
 	install_any::use_root_part($o->{fstab}, $p, $o->{prefix});
     } elsif ($::expert && ref($o) =~ /gtk/) {
         install_interactive::partition_with_diskdrake($o, $o->{hds});
