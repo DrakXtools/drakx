@@ -89,10 +89,9 @@ sub bestMirror {
 	    ++$value;
 	}
     }
-    my ($min_value) = sort { $a <=> $b } values %mirror2value;
+    my $min_value = min(values %mirror2value);
 
-    my @possible = grep { $mirror2value{$_} == $min_value } keys %mirror2value;
-    push @possible, grep { $mirror2value{$_} == $min_value } keys %mirror2value;
+    my @possible = (grep { $mirror2value{$_} == $min_value } keys %mirror2value) x 2; #- increase probability
     push @possible, grep { $mirror2value{$_} == 1 + $min_value } keys %mirror2value;
 
     $possible[rand @possible];
