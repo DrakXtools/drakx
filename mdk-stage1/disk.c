@@ -234,7 +234,8 @@ static enum return_type try_with_device(char *dev_name)
                         return results;
         }
 
-        if (try_mount(choice, disk_own_mount)) {
+	/* in testing mode, assume the partition is already mounted on SLASH_LOCATION "/tmp/hdimage" */
+        if (!IS_TESTING && try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs).");
 		return try_with_device(dev_name);
 	}
