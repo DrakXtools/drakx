@@ -18,8 +18,7 @@
 
 all: pci-ids.h
 
-pci-ids.h: ../../perl-install/pci_probing/pcitable update-pci-ids.pl
-	make -C ../../perl-install/pci_probing
+pci-ids.h: /usr/share/ldetect-lst/pcitable update-pci-ids.pl
 	perl update-pci-ids.pl > $@
 
 clean:
