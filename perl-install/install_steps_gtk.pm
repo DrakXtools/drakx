@@ -608,7 +608,7 @@ copyright laws applicable to software programs.
             $r &&= $o->ask_okcancel('', _("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name));
+If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $name), 1);
             #- add the elapsed time (otherwise the predicted time will be rubbish)
             $start_time += time() - $time;
             $r;
