@@ -22,8 +22,8 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
-Obsoletes: Xconfigurator mouseconfig kbdconfig printtool drakfloppy
-Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool drakfloppy
+Obsoletes: Xconfigurator mouseconfig kbdconfig printtool
+Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
 
 %package http
 Summary: The drakxtools via http
@@ -271,7 +271,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 
 %changelog 
 * Wed Sep  4 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-31mdk
-- (daouda) obsoletes/provides drakfloppy
 - snapshot for gtktext_insert with color/font capabilities (rpmdrake)
 
 * Tue Sep  3 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-30mdk
