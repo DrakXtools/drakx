@@ -75,7 +75,7 @@ STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
 endif
 
 ifeq (GLIBC, $(L))
-STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
+STAGE1_NETWORK_LIBS =
 endif
 
  #- stage1 itself
