@@ -755,7 +755,13 @@ sub uninstall {
     list_fontpath();    
     $list_path = new Gtk::List();
     $list_path->set_selection_mode(-extended);
-    $list_path->add(gtkshow(new Gtk::ListItem($_))) foreach @installed_fonts_path ;
+    foreach (@installed_fonts_path) {
+	my $t = $_;
+	$list_path->add(gtkshow(gtksignal_connect(new Gtk::ListItem($t), select => sub {
+						      $path_list->clear_items(0, -1);
+						      $path_list->append_items(map { /fonts/ ? () : gtkshow(new Gtk::ListItem($_)) } all($t));
+					      })));
+    }
     $list_path->set_selection_mode(-single);
 
     $path_list = new Gtk::List();
@@ -763,21 +769,10 @@ sub uninstall {
 
     gtkpack($font_box,
 	    $uninst_box = gtkpack_(new Gtk::VBox(0,10),
-				1, gtkpack_(new Gtk::HBox(0,4),
-					    1, gtkpack_(new Gtk::VBox(0,0),
-							1, $scrolled_window2 =new Gtk::ScrolledWindow( undef, undef ),
-							$scrolled_window2->set_usize( 210, 300 ),
-							$scrolled_window2->add_with_viewport( $list_path ),
-							$list_path->signal_connect( 'selection_changed'   => sub {
-							    $path_list->add(gtkshow(new Gtk::ListItem($list_path->selection()))  ); } ),
-#				     $path_list->add(gtkshow(new Gtk::ListItem($_)) ) foreach ($list_path->selection) } ),
-							),
-					    1, gtkpack_(new Gtk::VBox(0,2),
-							1, $scrolled_window =new Gtk::ScrolledWindow( undef, undef ),
-							$scrolled_window->set_usize( 210, 300 ),
-							$scrolled_window->add_with_viewport( $path_list ),
-							),
-					    ),
+				   1, gtkpack_(new Gtk::HBox(0,4),
+					       1, createScrolledWindow($list_path),
+					       1, createScrolledWindow($path_list)
+					      ),
 				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 					     gtksignal_connect(new Gtk::Button(_("Unselected All")), clicked => 
 							       sub {$path_list->unselect_all (); }),
@@ -786,7 +781,7 @@ sub uninstall {
 					     gtksignal_connect(new Gtk::Button(_("Remove List")), clicked => 
 							       sub { ${$central_widget}->destroy(); import_status_uninstall() }),
 					     ),
-				   )
+				  )
 	    );
     $central_widget = \$uninst_box;
     $uninst_box->show_all();
