@@ -32,5 +32,6 @@ struct module_deps_elem {
 };
 
 extern int disable_modules;
+extern int allow_additional_modules_floppy;
 
 #endif

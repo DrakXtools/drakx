@@ -39,8 +39,10 @@
 
 static struct module_deps_elem * modules_deps = NULL;
 
-static char * archive_name = "/modules/modules.mar";
+static char archive_name[] = "/modules/modules.mar";
+static char additional_archive_name[] = "/tmp/tmpfs/modules.mar";
 int disable_modules = 0;
+int allow_additional_modules_floppy = 1;
 
 extern long init_module(void *, unsigned long, const char *);
 
@@ -85,6 +87,48 @@ static void *grab_file(const char *filename, unsigned long *size)
 	return buffer;
 }
 
+static enum return_type ensure_additional_modules_available(void)
+{
+        struct stat statbuf;
+        if (stat(additional_archive_name, &statbuf)) {
+                char floppy_mount_location[] = "/tmp/floppy";
+                char floppy_modules_mar[] = "/tmp/floppy/modules.mar";
+                int ret;
+
+                if (stat("/tmp/tmpfs", &statbuf)) {
+                        if (scall(mkdir("/tmp/tmpfs", 0755), "mkdir"))
+                                return RETURN_ERROR;
+                        if (scall(mount("none", "/tmp/tmpfs", "tmpfs", MS_MGC_VAL, NULL), "mount tmpfs"))
+                                return RETURN_ERROR;
+                }
+                                
+        retry:
+                stg1_info_message("Please insert the Additional Drivers floppy.");;
+                my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
+
+                while (my_mount("/dev/fd0", floppy_mount_location, "ext2", 0) == -1) {
+                        enum return_type results = ask_yes_no("I can't find a Linux ext2 floppy in first floppy drive.\n"
+                                                              "Retry?");
+                        if (results != RETURN_OK) {
+                                allow_additional_modules_floppy = 0;
+                                return results;
+                        }
+                }
+                                
+                if (stat(floppy_modules_mar, &statbuf)) {
+                        stg1_error_message("This is not an Additional Drivers floppy, as far as I can see.");
+                        umount(floppy_mount_location);
+                        goto retry;
+                }
+
+                init_progression("Copying...", file_size(floppy_modules_mar));
+                ret = copy_file(floppy_modules_mar, additional_archive_name, update_progression);
+                end_progression();
+                return ret;
+        } else
+                return RETURN_OK;
+}
+
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
@@ -101,9 +145,18 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
                 strcat(module_name, ".ko");
 	i = mar_extract_file(archive_name, module_name, "/tmp/");
 	if (i == 1) {
-		log_message("file-not-found-in-archive %s (maybe you can try another boot floppy such as 'hdcdrom_usb.img')", module_name);
-		return INSMOD_FAILED_FILE_NOT_FOUND;
-	}
+                static int recurse = 0;
+                if (allow_additional_modules_floppy && !recurse && !IS_AUTOMATIC) {
+                        recurse = 1;
+                        if (ensure_additional_modules_available() == RETURN_OK)
+                                i = mar_extract_file(additional_archive_name, module_name, "/tmp/");
+                        recurse = 0;
+                }
+        }
+        if (i == 1) {
+                log_message("file-not-found-in-archive %s (maybe you can try another boot floppy such as 'hdcdrom_usb.img')", module_name);
+                return INSMOD_FAILED_FILE_NOT_FOUND;
+        }
 	if (i != 0)
 		return INSMOD_FAILED;
 
@@ -410,22 +463,23 @@ enum return_type ask_insmod(enum driver_type type)
 	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
 
 	{
-		char ** drivers = mar_list_contents(archive_name);
-		char ** descrs = malloc(sizeof(char *) * string_array_length(drivers));
-		char ** p_drivers = drivers;
+		char ** modules = mar_list_contents(ensure_additional_modules_available() == RETURN_OK ? additional_archive_name
+                                                                                                       : archive_name);
+		char ** descrs = malloc(sizeof(char *) * string_array_length(modules));
+		char ** p_modules = modules;
 		char ** p_descrs = descrs;
-		while (p_drivers && *p_drivers) {
+		while (p_modules && *p_modules) {
 			int i;
 			*p_descrs = NULL;
 			for (i = 0 ; i < modules_descriptions_num ; i++) {
-				if (!strncmp(*p_drivers, modules_descriptions[i].module, strlen(modules_descriptions[i].module))
-				    && (*p_drivers)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.o' not the other */
+				if (!strncmp(*p_modules, modules_descriptions[i].module, strlen(modules_descriptions[i].module))
+				    && (*p_modules)[strlen(modules_descriptions[i].module)] == '.') /* one contains '.o' not the other */
 					*p_descrs = modules_descriptions[i].descr;
 			}
-			p_drivers++;
+			p_modules++;
 			p_descrs++;
 		}
-		results = ask_from_list_comments(msg, drivers, descrs, &choice);
+		results = ask_from_list_comments(msg, modules, descrs, &choice);
 	}
 
 	if (results == RETURN_OK) {

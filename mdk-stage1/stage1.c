@@ -329,9 +329,11 @@ static void method_select_and_prepare(void)
 #endif
 #ifndef DISABLE_CDROM
 	means[i] = cdrom_install; means_auto[i++] = cdrom_install_auto;
+        allow_additional_modules_floppy = 0;
 #endif
 #ifndef DISABLE_DISK
 	means[i] = disk_install; means_auto[i++] = disk_install_auto;
+        allow_additional_modules_floppy = 0;
 #endif
 	means[i] = NULL;
 
@@ -631,6 +633,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                 close(fd);
         }
 
+        umount("/tmp/tmpfs");
 	finish_frontend();
 	close_log();
 
