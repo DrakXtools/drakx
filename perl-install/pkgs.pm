@@ -676,7 +676,7 @@ sub readCompssUsers {
 	$_ = $packages->[0]{$_} or log::l("unknown package $_ (in compssUsers)") foreach @$l;
     };
     my $file = 'Mandrake/base/compssUsers';
-    my $f = install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
+    my $f = $meta_class && install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
