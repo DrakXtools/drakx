@@ -73,7 +73,7 @@ sub device_name_to_entry {
 	unless ($e = find { $name eq $_->{device} } @l) {
 	    my ($prefix, $nb) = $name =~ m/^(.*?)(\d*)$/;
 	    $e = find { $prefix eq ($_->{prefix} || $_->{device}) } @l;
-	    $e->{device} = ($e->{prefix} || $e->{device}) . $nb;
+	    $e->{device} = $name;
 	}
     }
 
