@@ -201,22 +201,6 @@ sub selectInstallClass {
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
 					      first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
 					      [ __("Install"), __("Update") ], $o->{isUpgrade} ? "Update" : "Install") eq "Update";
-
-    if ($::corporate || !$::expert) {
-	delete $o->{installClass};
-    } else {
-	my %c = (
-		 normal    => _("Workstation"),
-		 developer => _("Development"),
-		 server    => _("Server"),
-		);
-	$o->set_help('selectInstallClass2');
-	$o->{installClass} = $o->ask_from_listf(_("Install Class"),
-						_("What is your system used for?"),
-						sub { $c{$_[0]} },
-						[ keys %c ],
-						$o->{installClass});
-    }
     install_steps::selectInstallClass($o);
 }
 
@@ -432,7 +416,7 @@ sub choosePackages {
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
-    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if $::expert && !$::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$::corporate;
 
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
@@ -455,8 +439,9 @@ sub choosePackages {
 		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
 		}
 		$o->set_help('empty');
-		$o->ask_from_listf('', _("Select the size you want to install"),
-				   sub { _ ($text[$_[0]], $_[0]) }, \@l, $l[1]) * sqr(1024);
+#		$o->ask_from_listf('', _("Select the size you want to install"),
+#				   sub { _ ($text[$_[0]], $_[0]) }, \@l, $l[1]) * sqr(1024);
+		$max * sqr(1024);
 	    }
 	} else {
 	    $o->chooseSizeToInstall($packages, $min_size, $def_size, $max_size, $availableC, $individual) || goto &choosePackages;
@@ -466,6 +451,9 @@ sub choosePackages {
 	$o->chooseGroups($packages, $compssUsers, $min_mark) or goto &choosePackages;
 	$size2install = $availableC;
     }
+
+    log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
+
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
 
@@ -476,7 +464,19 @@ sub chooseSizeToInstall {
     my ($o, $packages, $min, $def, $max, $availableC) = @_;
     min($def, $availableC * 0.7);
 }
-sub choosePackagesTree {}
+sub choosePackagesTree {
+    my ($o, $packages, $compss) = @_;
+
+    $o->ask_many_from_list('', _("Choose the packages you want to install"),
+			   {
+			    list => [ #grep { pkgs::packageMedium($_)->{selected} } 
+				      map { pkgs::packageByName($packages, $_) }
+				      keys %{$packages->{names}} ],
+			    value => \&pkgs::packageFlagSelected,
+			    label => \&pkgs::packageName,
+			    sort => 1,
+			   });
+}
 
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
@@ -510,7 +510,7 @@ sub chooseGroups {
 			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
 			   },
 			   if_($o->{meta_class} eq 'desktop', { list => [ _("All") ], val => sub { \$all }, shadow => 0 }),
-			   if_($individual, { list => [ _("Individual package selection") ], val => sub { \$individual } }),
+			   if_($individual, { list => [ _("Individual package selection") ], val => sub { $individual }, advanced => 1 }),
 			  ) or return;
     if ($all) {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}};
@@ -737,7 +737,7 @@ sub setRootPassword {
     return if $o->{security} < 1 && !$clicked;
 
     $o->set_help("setRootPassword", 
-		 if_($o->{installClass} =~ "server" || $::expert, "setRootPasswordMd5"),
+		 if_($::expert, "setRootPasswordMd5"),
 		 if_($::expert, "setRootPasswordNIS"));
 
     $o->ask_from_entries_refH_powered(
