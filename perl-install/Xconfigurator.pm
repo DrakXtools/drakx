@@ -873,10 +873,10 @@ sub write_XF86Config {
     print G "EndSection\n\n\n";
 
     #- write module section for version 3.
-    if ($o->{wacom} || $o->{card}{Utah_glx}) {
+    if (@{$o->{wacom}} || $o->{card}{Utah_glx}) {
 	print F qq(Section "Module"
 );
-	print F qq(    Load "xf86Wacom.so"\n) if $o->{wacom};
+	print F qq(    Load "xf86Wacom.so"\n) if @{$o->{wacom}};
 	print F qq(    Load "glx-3.so"\n) if $o->{card}{Utah_glx}; #- glx.so may clash with server version 4.
 	print F qq(EndSection
 
@@ -884,50 +884,109 @@ sub write_XF86Config {
     }
 
     #- write wacom device support.
-    print F qq(
+    foreach (@{$o->{wacom}}) {
+	my $dev = "/dev/" . $o->{wacom}[$_-1];
+	print F $dev =~ /input\/event/ ? qq(
 Section "XInput"
     SubSection "WacomStylus"
-        Port "/dev/$o->{wacom}"
+        DeviceName "stylus$_"
+        Port "$dev"
+        USB
         AlwaysCore
         Mode Absolute
     EndSubSection
     SubSection "WacomCursor"
-        Port "/dev/$o->{wacom}"
+        DeviceName "cursor$_"
+        Port "$dev"
+        USB
         AlwaysCore
         Mode Relative
     EndSubSection
     SubSection "WacomEraser"
-        Port "/dev/$o->{wacom}"
+        DeviceName "eraser$_"
+        Port "$dev"
+        USB
         AlwaysCore
         Mode Absolute
     EndSubSection
 EndSection
 
-) if $o->{wacom};
+) : qq(
+Section "XInput"
+    SubSection "WacomStylus"
+        DeviceName "stylus$_"
+        Port "$dev"
+        AlwaysCore
+        Mode Absolute
+    EndSubSection
+    SubSection "WacomCursor"
+        DeviceName "cursor$_"
+        Port "$dev"
+        AlwaysCore
+        Mode Relative
+    EndSubSection
+    SubSection "WacomEraser"
+        DeviceName "eraser$_"
+        Port "$dev"
+        AlwaysCore
+        Mode Absolute
+    EndSubSection
+EndSection
 
-    print G qq(
+);
+    }
+
+    foreach (1..@{$o->{wacom}}) {
+	my $dev = "/dev/" . $o->{wacom}[$_-1];
+	print G $dev =~ /input\/event/ ? qq(
 Section "InputDevice"
-    Identifier	"stylus"
+    Identifier	"stylus$_"
     Driver	"wacom"
     Option	"Type" "stylus"
-    Option	"Device" "/dev/$o->{wacom}"
+    Option	"Device" "$dev"
     Option	"Mode" "Absolute"
+    Option	"USB" "on"
 EndSection
 Section "InputDevice"
-    Identifier	"eraser"
+    Identifier	"eraser$_"
     Driver	"wacom"
     Option	"Type" "eraser"
-    Option	"Device" "/dev/$o->{wacom}"
+    Option	"Device" "$dev"
+    Option	"Mode" "Absolute"
+    Option	"USB" "on"
+EndSection
+Section "InputDevice"
+    Identifier	"cursor$_"
+    Driver	"wacom"
+    Option	"Type" "cursor"
+    Option	"Device" "$dev"
+    Option	"Mode" "Relative"
+    Option	"USB" "on"
+EndSection
+) : qq(
+Section "InputDevice"
+    Identifier	"stylus$_"
+    Driver	"wacom"
+    Option	"Type" "stylus"
+    Option	"Device" "$dev"
     Option	"Mode" "Absolute"
 EndSection
 Section "InputDevice"
-    Identifier	"cursor"
+    Identifier	"eraser$_"
+    Driver	"wacom"
+    Option	"Type" "eraser"
+    Option	"Device" "$dev"
+    Option	"Mode" "Absolute"
+EndSection
+Section "InputDevice"
+    Identifier	"cursor$_"
     Driver	"wacom"
     Option	"Type" "cursor"
-    Option	"Device" "/dev/$o->{wacom}"
+    Option	"Device" "$dev"
     Option	"Mode" "Relative"
 EndSection
-) if $o->{wacom};
+);
+    }
 
     #- write modules section for version 4.
     print G qq(
@@ -1158,11 +1217,13 @@ Section "ServerLayout"
     print G '
     InputDevice "Mouse1" "CorePointer"
 ';
-    print G '
-    InputDevice "stylus" "AlwaysCore"
-    InputDevice "eraser" "AlwaysCore"
-    InputDevice "cursor" "AlwaysCore"
-' if $o->{wacom};
+    foreach (1..@{$o->{wacom}}) {
+	print G '
+    InputDevice "stylus$_" "AlwaysCore"
+    InputDevice "eraser$_" "AlwaysCore"
+    InputDevice "cursor$_" "AlwaysCore"
+';
+    }
     print G '
     InputDevice "Keyboard1" "CoreKeyboard"
 EndSection

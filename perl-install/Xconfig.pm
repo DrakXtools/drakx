@@ -60,7 +60,7 @@ sub getinfoFromXF86Config {
 		  if $c{driver} =~ /keyboard/i;
 		@mouse{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
 		  if $c{driver} =~ /mouse/i;
-		@wacom{qw(device)} = @c{qw(device)}
+		$wacom{$c{device}} = undef;
 		  if $c{driver} =~ /wacom/i;
 	    }
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
@@ -100,7 +100,7 @@ sub getinfoFromXF86Config {
 	    $mouse{nbuttons}   = 7 if m/^\s*ZAxisMapping\s.*7/;
 	} elsif (/^Section "XInput"/ .. /^EndSection/) {
 	    if (/^\s*SubSection "Wacom/ .. /^\s*EndSubSection/) {
-		$wacom{device} ||= $1 if /^\s*Port\s+"\/dev\/(.*?)"/;
+		$wacom{$1} = undef if /^\s*Port\s+"\/dev\/(.*?)"/;
 	    }
 	} elsif (/^Section "Monitor"/ .. /^EndSection/) {
 	    $monitor{type} ||= $1 if /^\s*Identifier\s+"(.*?)"/;
@@ -157,7 +157,7 @@ sub getinfoFromXF86Config {
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
-    $o->{wacom} ||= $wacom{device};
+    @{$o->{wacom}} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
 
     $o;

@@ -166,7 +166,7 @@ sub write {
 }
 
 sub mouseconfig {
-    my ($t, $mouse, $wacom);
+    my ($t, $mouse, @wacom);
 
     #- Whouah! probing all devices from ttyS0 to ttyS3 once a time!
     detect_devices::probeSerialDevices();
@@ -185,10 +185,10 @@ sub mouseconfig {
 	    $mouse->{device} = "ttyS$_";
 	    last;
 	} elsif ($t->{CLASS} eq "PEN" || $t->{MANUFACTURER} eq "WAC") {
-	    $wacom = "ttyS$_";
+	    push @wacom, "ttyS$_";
 	}
     }
-    $mouse, $wacom;
+    $mouse, @wacom;
 }
 
 sub detect() {
@@ -202,41 +202,48 @@ sub detect() {
 			      # find one whether or not I had one installed!  So..  default to it.
 			      "busmouse|1 button");
     }
-    
-    if ($::isStandalone) {
-        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1);
-    }
 
-    #- probe serial device to make sure a wacom has been detected.
-    eval { modules::load("serial") };
-    my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
-
-    if (!$::isStandalone) {
-        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1), $wacom;
-    }
+    my @wacom;
+    my $fast_mouse_probe = sub {
+	if (modules::get_alias("usb-interface")) {
+	    if (my (@l) = detect_devices::usbMice()) {
+		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
+		eval { modules::load("usbmouse"); modules::load("mousedev"); };
+		!$@ && detect_devices::tryOpen("usbmouse") and
+		  return fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic"), @wacom;
+		eval { modules::unload("mousedev"); modules::unload("usbmouse"); };
+	    }
+	}
+        detect_devices::hasMousePS2("psaux") and return fullname2mouse("PS/2|Standard", unsafe => 1), @wacom;
+    };
 
     if (modules::get_alias("usb-interface")) {
-	if (my (@l) = detect_devices::usbMice()) {
-	    log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
-	    eval { 
-		modules::load("usbmouse");
-		modules::load("mousedev");
-	    };
-	    !$@ && detect_devices::tryOpen("usbmouse") and 
-	      return fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic"), $wacom;
-	    eval { 
-		modules::unload("mousedev");
-		modules::unload("usbmouse");
+	if (my (@l) = detect_devices::usbWacom()) {
+	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
+	    eval { modules::load("wacom"); modules::load("evdev"); };
+	    unless ($@) {
+		foreach (0..$#l) {
+		    detect_devices::tryOpen("input/event$_") and push @wacom, "input/event$_";
+		}
 	    }
+	    eval { modules::unload("evdev"); modules::unload("wacom"); };
 	}
     }
 
+    $::isStandalone and $fast_mouse_probe->();
+
+    #- probe serial device to make sure a wacom has been detected.
+    eval { modules::load("serial") };
+    my ($r, @serial_wacom) = mouseconfig(); push @wacom, @serial_wacom; return ($r, @wacom) if $r;
+
+    $::isStandalone or $fast_mouse_probe->();
+
     #- in case only a wacom has been found, assume an inexistant mouse (necessary).
-    $wacom and 	return { CLASS      => 'MOUSE',
-			 nbuttons   => 2,
-			 device     => "nothing",
-			 MOUSETYPE  => "Microsoft",
-			 XMOUSETYPE => "Microsoft"}, $wacom;
+    @wacom and return { CLASS      => 'MOUSE',
+			nbuttons   => 2,
+			device     => "nothing",
+			MOUSETYPE  => "Microsoft",
+			XMOUSETYPE => "Microsoft"}, @wacom;
 
     #- defaults to generic serial mouse on ttyS0.
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)

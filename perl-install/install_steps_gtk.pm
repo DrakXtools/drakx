@@ -38,7 +38,7 @@ sub new($$) {
 
 	if ($ENV{DISPLAY} eq ":0" && !$::live) {
 	    my $f = "/tmp/Xconf";
-	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
+	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom}[0]);
 	    devices::make("/dev/kbd");
 
 	    local (*T1, *T2);
