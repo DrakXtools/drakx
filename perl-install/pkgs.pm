@@ -121,13 +121,9 @@ sub extractHeaders($$$) {
 
     eval {
 	require packdrake;
-	my $packer = new packdrake("/tmp/$medium->{hdlist}");
+	my $packer = new packdrake("/tmp/$medium->{hdlist}", quiet => 1);
 	$packer->extract_archive("$prefix/tmp/headers", map { packageHeaderFile($_) } @$pkgs);
     };
-    #run_program::run("packdrake", "-x",
-	#	     "/tmp/$medium->{hdlist}",
-	#	     "$prefix/tmp/headers",
-	#	     map { packageHeaderFile($_) } @$pkgs);
 
     foreach (@$pkgs) {
 	my $f = "$prefix/tmp/headers/". packageHeaderFile($_);
@@ -425,11 +421,9 @@ sub psUsingHdlist {
     #- the archive too.
     eval {
 	require packdrake;
-	my $packer = new packdrake($newf);
+	my $packer = new packdrake($newf, quiet => 1);
 	foreach (@{$packer->{files}}) {
 	    $packer->{data}{$_}[0] eq 'f' or next;
-	    #if (/^f\s+\d+\s+(.*)/) {
-	    #my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $1; $pkg->[$MEDIUM] = $m;
 	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $m;
 	    my $specific_arch = packageArch($pkg);
 	    if (!$specific_arch || compat_arch($specific_arch)) {

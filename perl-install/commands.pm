@@ -433,10 +433,9 @@ sub insmod {
 	    if (-e $cz) {
 		eval {
 		    require packdrake;
-		    my $packer = new packdrake($cz);
+		    my $packer = new packdrake($cz, quiet => 1);
 		    $packer->extract_archive("/tmp", "$_.o");
 		};
-		#run_program::run("packdrake -x $cz /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
 		run_program::run("cd /tmp ; $ENV{LD_LOADER} bzip2 -cd /lib/modules.cpio.bz2 | $ENV{LD_LOADER} cpio -i $_.o");
 	    } else {

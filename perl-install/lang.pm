@@ -307,7 +307,7 @@ sub set {
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    eval {
 		require packdrake;
-		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2");
+		my $packer = new packdrake("$ENV{SHARE_PATH}/locale.cz2", quiet => 1);
 		$packer->extract_archive("$ENV{SHARE_PATH}/locale", "UTF-8", $languages{$lang}[2]);
 	    };
 	}
