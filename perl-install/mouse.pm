@@ -268,6 +268,7 @@ sub detect() {
 	}
 
 	if (modules::get_probeall("usb-interface")) {
+	    sleep 2;
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l(join('', "found usb mouse $_->{driver} $_->{description} (", if_($_->{type}, $_->{type}), ")")) foreach @l;
 		eval { modules::load(qw(hid mousedev usbmouse)) };
@@ -323,6 +324,20 @@ sub detect() {
     #- defaults to generic serial mouse on ttyS0.
     #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
     return fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+}
+
+sub load_modules {
+    my ($mouse) = @_;
+    my @l;
+    for ($mouse->{type}) {
+	/serial/ and @l = qw(serial);
+	/USB/    and @l = qw(hid mousedev usbmouse);
+    }
+    foreach ($mouse->{wacom}) {
+	/ttyS/   and push @l, qw(serial);
+	/event/  and push @l, qw(wacom evdev);
+    }
+    eval { modules::load(@l) };
 }
 
 sub set_xfree_conf {
