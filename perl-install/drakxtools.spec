@@ -42,6 +42,11 @@ Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Net_SSLeay >= 1.22-1mdk, perl-Authen-PAM >= 0.14-1mdk, perl-CGI >= 2.91-1mdk
 PreReq: rpm-helper
 
+%package -n drakx-finish-install
+Summary: First boot configuration
+Group: System/Configuration/Other
+Requires: %{name} = %version-%release
+
 %package -n harddrake
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
@@ -155,6 +160,14 @@ kernel module
 %description http
 This add the capability to be runned behind a web server to the drakx tools.
 See package %name
+
+
+%description -n drakx-finish-install
+For OEM-like duplications, it allows at first boot:
+- network configuration
+- creating users
+- setting root password
+- choosing authentication
 
 
 %description -n harddrake
@@ -337,6 +350,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %_iconsdir/mini/harddrake.png
 %_iconsdir/harddrake.png
 
+%files -n drakx-finish-install
+%defattr(-,root,root)
+%config(noreplace) %_sysconfdir/sysconfig/finish-install
+%_sysconfdir/X11/xsetup.d/finish-install.xsetup
+%_sbindir/finish-install
+
 %files http -f %{name}-http.list
 %defattr(-,root,root)
 %dir %_sysconfdir/drakxtools_http
@@ -347,6 +366,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+- new package drakx-finish-install
+
 * Fri Nov 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.5mdk
 - diskdrake: handle common geometry XXX/240/63 is quite common thus
   fixing yet another infamous "XP doesn't boot" (though it should
