@@ -93,7 +93,7 @@ sub main {
     });
     $w->sync;
     $done_button->grab_focus;
-    $ugtk2::pop_it = 1;
+    local $ugtk2::pop_it = 1;
     $in->ask_okcancel(N("Read carefully!"), N("Please make a backup of your data first"), 1) or return
       if $::isStandalone;
     $in->ask_warn('', 
