@@ -24,11 +24,11 @@ use log;
 # system a real UTF-8 locale will be used
 #
 
-my %languages = (
-'en_US.UTF-8'=> [ 'English|UTF-8',	'utf_15',     'en', 'en_US:en' ],
+my %languages = my @languages = (
 'en_US' => [ 'English|United States',	'iso-8859-1', 'en', 'en_US:en' ],
 'en_GB' => [ 'English|United Kingdom',	'iso-8859-1', 'en', 'en_GB:en' ],
 'en_IE' => [ 'English|Ireland',		'iso-8859-15','en', 'en_IE:en_GB:en' ],
+'en_US.UTF-8'=> [ 'English|UTF-8',	'utf_15',     'en', 'en_US:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
 #'az_AZ.ISO-8859-9E'=> [ 'Azeri (Latin)','iso-8859-9e','az', 'az:tr' ],
@@ -156,6 +156,7 @@ my %languages = (
 # does this one works? 
 #'zh_CN.GB18030' => [ 'Chinese|Simplified|GB18030','gb2312','zh_CN', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh:zh_TW:zh_HK' ],
 );
+@languages = map { $_->[0] } group_by2(@languages);
 
 my %xim = (
 # 'zh_TW.Big5' => { 
@@ -430,7 +431,7 @@ my %lang2country = (
 #- Functions
 #-######################################################################################
 
-sub list { keys %languages }
+sub list { @languages }
 sub lang2text     { exists $languages{$_[0]} && $languages{$_[0]}[0] }
 sub lang2charset  { exists $languages{$_[0]} && $languages{$_[0]}[1] }
 sub lang2LANG     { exists $languages{$_[0]} && $languages{$_[0]}[2] }
@@ -439,9 +440,8 @@ sub getxim { $xim{$_[0]} }
 
 sub lang2country {
     my ($lang, $prefix) = @_;
-    my $country;
-    my $dir = "$prefix/usr/share/locale/l10n";
 
+    my $dir = "$prefix/usr/share/locale/l10n";
     my @countries = grep { -d "$dir/$_" } all($dir);
     my %countries; @countries{@countries} = ();
 
@@ -451,12 +451,29 @@ sub lang2country {
 	exists $countries{$country} && $country;
     };
 
+    my $country;
     $country ||= $valid_country->($lang2country{$lang});
     $country ||= $valid_country->(lc($1)) if $lang =~ /([A-Z]+)/;
     $country ||= $valid_country->(lc($1)) if lang2LANGUAGE($lang) =~ /([A-Z]+)/;
     $country ||= $valid_country->(substr($lang, 0, 2));
-    $country ||= first(grep { $valid_country->(substr($_, 0, 2)) } split(':', lang2LANGUAGE($lang)));
+    $country ||= first(grep { $valid_country->($_) } map { substr($_, 0, 2) } split(':', lang2LANGUAGE($lang)));
     $country || 'C';
+}
+
+
+sub country2lang {
+    my ($country, $default) = @_;
+
+    my $uc_country = uc $country;
+    my %country2lang = reverse %lang2country;
+    
+    my ($lang1, $lang2);
+    $lang1 ||= $country2lang{$country};
+    $lang1 ||= first(grep { /^$country/    } list());
+    $lang1 ||= first(grep { /_$uc_country/ } list());
+    $lang2 ||= first(grep { int grep { /^$country/    } split(':', lang2LANGUAGE($_)) } list());
+    $lang2 ||= first(grep { int grep { /_$uc_country/ } split(':', lang2LANGUAGE($_)) } list());
+    ($lang1 =~ /UTF-8/ && $lang2 !~ /UTF-8/ ? $lang2 || $lang1 : $lang1 || $lang2) || $default || 'en_US';
 }
 
 sub lang2kde_lang {
@@ -586,11 +603,11 @@ sub unpack_langs {
 }
 
 sub read {
-    my ($prefix, $file) = @_;
-    $file ||= '/etc/sysconfig/i18n';
+    my ($prefix, $user_only) = @_;
+    my $file = $prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n');
     my %h = getVarsFromSh("$prefix$file");
     my $lang = $h{LC_MESSAGES} || 'en_US';
-    my $langs = 
+    my $langs = $user_only ? () :
       cat_("$prefix/etc/rpm/macros") =~ /%_install_langs (.*)/ ? unpack_langs($1) : { $lang => 1 };
     $lang, $langs;
 }
@@ -644,12 +661,14 @@ sub write {
     }
     setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
-    update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
-		      Locale => (
-				 Charset => charset2kde_charset(lang2charset($lang)),
-				 Country => lang2country($lang),
-				 Language => lang2kde_lang($lang),
-				));
+    eval {
+	update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
+			  Locale => (
+				     Charset => charset2kde_charset(lang2charset($lang)),
+				     Country => lang2country($lang, $prefix),
+				     Language => lang2kde_lang($lang),
+				    ));
+    };
 }
 
 sub load_mo {
