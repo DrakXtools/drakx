@@ -1027,7 +1027,7 @@ sub set_authentication {
     my ($shadow, $ldap, $nis, $winbind, $winpass) = @$authentication{qw(shadow LDAP NIS winbind winpass)};
     enableShadow() if $shadow;
     if ($ldap) {
-	$in->do_pkgs->install(qw(chkauth openldap-clients nss_ldap pam_ldap));
+	$in->do_pkgs->install(qw(chkauth openldap-clients nss_ldap pam_ldap autofs));
 	run_program::rooted($::prefix, "/usr/sbin/chkauth", "ldap", "-D", $netc->{LDAPDOMAIN}, "-s", $ldap);
     } elsif ($nis) {
 	#$o->pkg_install(qw(chkauth ypbind yp-tools net-tools));
