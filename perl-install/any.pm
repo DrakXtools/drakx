@@ -381,6 +381,7 @@ END
 '~--' ''
 END
     close CHAT;
+    chmod 0600, $chat;
 
     if ($modem->{auth} eq 'PAP') {
 	#- need to create a secrets file for the connection.
@@ -406,7 +407,7 @@ END
     commands::mkdir_("-p", "$prefix/usr/share/config");
     local *KPPPRC;
     open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
-    chmod 0600, "$prefix/usr/share/config/kppprc";
+    #chmod 0600, "$prefix/usr/share/config/kppprc";
     print KPPPRC <<END;
 # KDE Config File
 [Account0]

@@ -322,6 +322,7 @@ sub setPackages($) {
 	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.
 	my @gl = ();
 	if (detect_devices::matching_desc('Matrox.* G[24]00') ||
+	    detect_devices::matching_desc('Riva.*128') ||
 	    detect_devices::matching_desc('Rage X[CL]') ||
 	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
 	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
@@ -330,7 +331,8 @@ sub setPackages($) {
 	    detect_devices::matching_desc('8281[05].* CGC') ||
 	    detect_devices::matching_desc('Rage 128')) {
 	    push @gl, "xscreensaver-gl", "Mesa-demos", "xmms-mesa";
-	    push @gl, "bzflag" if (!detect_devices::matching_desc('Rage X[CL]') &&
+	    push @gl, "bzflag" if (!detect_devices::matching_desc('Riva.*128') &&
+				   !detect_devices::matching_desc('Rage X[CL]') &&
 				   !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
 				   !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
 	    push @gl, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.

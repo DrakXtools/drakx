@@ -187,13 +187,14 @@ sub cardConfiguration(;$$$) {
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
+			 $card->{identifier} =~ /Riva.*128/ ||
 			 $card->{identifier} =~ /Rage X[CL]/ ||
 			 $card->{identifier} =~ /Rage Mobility (?:P\/M|L) / ||
 			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
-				      $card->{type} =~ /RIVA128/ ||
+				      #$card->{type} =~ /RIVA128/ ||
 				      $card->{type} =~ /GeForce 256/ ||
 				      $card->{type} =~ /S3 Savage3D/ || #- only this one is evoluting (expect a stable release ?)
 				      #- $card->{type} =~ /S3 ViRGE/ || #- 15bits only
