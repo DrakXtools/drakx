@@ -160,7 +160,7 @@ sub selectKeyboard($) {
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
 	$o->set_help('selectLangs');
-	$o->{langs} ||= [];
+	$o->{langs} ||= [ $o->{lang} ];
 	my $all = $o->{langs}[0] eq 'all';
 	$o->{langs} = $o->ask_many_from_list('',
 			       _("You can choose other languages that will be available after install"),			       
