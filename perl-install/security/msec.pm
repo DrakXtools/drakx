@@ -9,8 +9,8 @@ use log;
 sub get_secure_level {
     my ($prefix) = @_;
          
-    cat_("/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
-    cat_("/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
+    cat_("$prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.0 msec
+    cat_("$prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 || #- 8.1 msec
     ${{ getVarsFromSh("$prefix/etc/sysconfig/msec") }}{SECURE_LEVEL}  || #- 8.2 msec
         $ENV{SECURE_LEVEL};
 }
@@ -25,9 +25,15 @@ sub config_security_user {
     $t{MAIL_USER};
 }                                                                                                        
 
+sub get_options {
+    my ($prefix, $security) = @_;
+    my %options = ();
+    
+    %options;
+}
+
 sub choose_security_level {
     my ($in, $security, $libsafe, $email) = @_;
-    my $expert_file = "/etc/security/msec/expert_mode";
 
     my %l = (
         0 => _("Welcome To Crackers"),
@@ -71,7 +77,7 @@ sub choose_security_level {
 
 sub sec_options {
     my ($in, $security) = @_;
-    my %options = 
+    my %options = get_options('', $security);
     
     $in->ask_from(
         ("DrakSec Advanced Options"),
