@@ -28,9 +28,6 @@ use log;
 sub new($$) {
     my ($type, $o) = @_;
 
-    my $old = $SIG{__DIE__};
-    $SIG{__DIE__} = sub { $_[0] !~ /ugtk2\.pm/ and goto $old };
-
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     my $wanted_DISPLAY = $::testing && -x '/usr/X11R6/bin/Xnest' ? ':9' : $ENV{DISPLAY};
 
