@@ -74,6 +74,17 @@ sub blacklist {
     }
 }
 
+sub unblacklist {
+    my ($o, $addr) = @_;
+    eval {
+        $o->{daemon}->UnBlacklist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
+    };
+    if ($@) {
+        print "(Blacklist) exception: $@\n";
+        $o->dispatch;
+    }
+}
+
 sub set_interactive {
     my ($o, $mode) = @_;
     print "setting new IDS mode: $mode\n";
