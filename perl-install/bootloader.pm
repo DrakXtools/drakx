@@ -20,7 +20,7 @@ use run_program;
 use modules;
 
 
-%vga_modes = (
+my %vga_modes = (
 'ask' => "Ask at boot",
 'normal' => "Normal",
 '0x0f01' => "80x50",

@@ -17,7 +17,7 @@ use loopback;
 use log;
 use fs;
 
-%suggestions = (
+my %suggestions = (
   N_("simple") => [
     { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize => 6000 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11 },
