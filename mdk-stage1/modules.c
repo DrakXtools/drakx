@@ -201,7 +201,7 @@ static enum insmod_return insmod_archived_file(const char * mod_name, char * opt
                 file = grab_file(final_name, &len);
 
                 if (!file) {
-                        log_perror("\terror reading %s");
+                        log_perror(asprintf_("\terror reading %s", final_name));
                         return INSMOD_FAILED;
                 }
 
