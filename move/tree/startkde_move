@@ -11,7 +11,7 @@ while true; do
     xwait -permanent &
     xdim=`xdpyinfo | perl -ne 'print $1 if /dimensions:\s*(\d+)/'`
     qiv --root /image/move/BOOT-$xdim-MOVE.jpg
-    /etc/X11/Xsession KDE   #- call it with KDE parameter to keep background image
+    /etc/X11/xdm/Xsession KDE   #- call it with KDE parameter to keep background image
     sudo killall X
     sleep 2
 done
