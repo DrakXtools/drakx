@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 2mdk
+Release: 3mdk
 Url: http://www.linux-mandrake.com/drakx/
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -169,7 +169,7 @@ done
 %_preun_service drakxtools_http
 
 %post -n harddrake
-%_initrddir/harddrake
+%_initrddir/harddrake start
 
 %post -n harddrake-ui
 %update_menus
@@ -212,6 +212,9 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Jul  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
+- 
+
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-2mdk
 - spec :
   o enhance descriptions
