@@ -348,6 +348,7 @@ sub ask_fromW {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}, $_) foreach @widgets_always, @widgets_advanced;
 	$_->{real_w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets_always, @widgets_advanced;
+	$mainw->{ok}->set_sensitive(!$common->{callbacks}{ok_disabled}()) if $common->{callbacks}{ok_disabled};
 	$ignore = 0;
     };
     my $get_all = sub {
