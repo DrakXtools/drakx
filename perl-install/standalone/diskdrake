@@ -72,8 +72,7 @@ if ($type eq 'fileshare') {
     $in->exit(0);
 }
 
-my $all_hds = do {
-    if ($type eq 'hd') {
+my $all_hds =
 	catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
 	  sub {
 	      my $err = formatError($@);
@@ -86,8 +85,6 @@ I'll try to go on blanking bad partitions"), $err]);
 		  1;
 	      }
 	  };
-    } else { fsedit::empty_all_hds() }
-};
 
 $SIG{__DIE__} = sub { my $m = chomp_($_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_all_fstab($all_hds) ];
