@@ -222,15 +222,6 @@ sub partitionWizard {
     }
 }
 
-#--------------------------------------------------------------------------------
-#- wait_load_module moved to any.pm
-#- load_module moved to any.pm
-#------------------------------------------------------------------------------
-#-load_thiskind moved to any.pm
-#------------------------------------------------------------------------------
-#-setup_thiskind moved to any.pm
-#------------------------------------------------------------------------------
-
 sub upNetwork {
     my ($o, $pppAvoided) = @_;
     my $w = $o->wait_message('', _("Bringing up the network"));
