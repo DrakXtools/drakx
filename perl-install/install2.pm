@@ -59,7 +59,7 @@ panel\", \"System\", \"Peripheral manager\"."),
 partitionDisks => 
  __("At this point, hard drive partitions must be defined. (Unless you
 are overwriting a previous install of Linux and have already defined
-your hard drives partions as desired.) This operation consists of
+your hard drives partitions as desired.) This operation consists of
 logically dividing the computer's hard drive capacity into separate
 areas for use. Two common partition are: \"root\" which is the point at
 which the filesystem's directory structure starts, and \"boot\", which
@@ -87,7 +87,7 @@ without installing all of its dependencies.
 
 Information on each category and specific package is available in the
 area titled \"Info\". This is located above the buttons: [confirmation]
-[selection] [deselection]."),
+[selection] [unselection]."),
 
 doInstallStep => 
  __("The packages selected are now being installed. This operation
@@ -212,7 +212,7 @@ my $default = {
     autoSCSI => 0,
     mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
     packages => [ qw() ],
-    partitionning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
+    partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
     partitions => [
 		   { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 		   { mntpoint => "/",     size => 300 << 11, type => 0x83 }, 
@@ -269,7 +269,7 @@ sub setupSCSI {
 
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
-    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}{partitionning});
+    $o->{hds} = fsedit::hds($o->{drives}, $o->{default}{partitioning});
     unless (@{$o->{hds}} > 0) {
 	$o->setupSCSI if $o->{autoSCSI}; # ask for an unautodetected scsi card
     }
@@ -278,7 +278,7 @@ sub partitionDisks {
     }
 
     unless ($o->{isUpgrade}) {
-	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{default}{partitionning}{auto_allocate};
+	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{default}{partitioning}{auto_allocate};
 	$o->doPartitionDisks($o->{hds});
 
 	unless ($::testing) {
@@ -289,7 +289,7 @@ sub partitionDisks {
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
     my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
-    $root_fs or die _("partitionning failed: no root filesystem");
+    $root_fs or die _("partitioning failed: no root filesystem");
 
 }
 

@@ -278,7 +278,7 @@ sub testFinalConfig($;$) {
     unlink "/tmp/.X11-unix/X9" if $prefix;
     kill 2, $pid;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occured, try changing some parameters"));
+    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try changing some parameters"));
     $rc;
 }
 
@@ -644,7 +644,7 @@ sub main {
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
 	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
-	   __("Automaticall resolutions search") => sub { 
+	   __("Automatical resolutions search") => sub { 
 	       delete $o->{card}{depth};
 	       resolutionsConfiguration($o, 'nowarning');
 	   },

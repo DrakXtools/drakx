@@ -21,7 +21,7 @@ use log;
 
 sub errorInStep($$) {
     my ($o, $err) = @_;
-    $o->ask_warn(_("Error"), [ _("An error occured"), $err ]);
+    $o->ask_warn(_("Error"), [ _("An error occurred"), $err ]);
 }
 
 
@@ -35,7 +35,7 @@ sub chooseLanguage($) {
 sub selectInstallOrUpgrade($) {
     my ($o) = @_;
     $o->ask_from_list_(_("Install/Upgrade"), 
-		       _("Is it an install or an updgrade?"),
+		       _("Is it an install or an upgrade?"),
 		       [ __("Install"), __("Upgrade") ], 
 		       $o->default("isUpgrade") ? "Upgrade" : "Install") eq "Upgrade";
 }
