@@ -368,6 +368,10 @@ sub getCPUs {
     @cpus;
 }
 
+sub getSoundDevices {
+    (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
+}
+
 sub getSerialModem {
     my ($modem, $mouse) = @_;
     $mouse ||= {};
