@@ -24,23 +24,13 @@ use partition_table_raw;
 use install_steps;
 use install_steps_interactive;
 use interactive_gtk;
+use install_gtk;
 use install_any;
 use diskdrake;
 use log;
 use mouse;
 use help;
 use lang;
-
-#-#####################################################################################
-#-INTERN CONSTANT
-#-#####################################################################################
-my $w_help;
-my $itemsNB = 1;
-my (@background1, @background2);
-
-my @themes_vga16 = qw(blue blackwhite savane);
-my @themes = qw(mdk DarkMarble marble3d blueHeart);
-
 
 #-######################################################################################
 #- In/Out Steps Functions
@@ -56,7 +46,7 @@ sub new($$) {
 	$my_gtk::force_focus = $ENV{DISPLAY} eq ":0";
 
 	my $f = "/tmp/Xconf";
-	createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
+	install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom});
 	devices::make("/dev/kbd");
 
 	if ($ENV{DISPLAY} eq ":0") {
@@ -118,11 +108,10 @@ sub new($$) {
 	    return undef;
 	}
     }
-  OK: @themes = @themes_vga16 if $o->{simple_themes} || $o->{vga16};
-
-    init_sizes();
-    install_theme($o);
-    create_logo_window($o);
+  OK:
+    install_gtk::init_sizes();
+    install_gtk::default_theme($o);
+    install_gtk::create_logo_window($o);
 
     $my_gtk::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
@@ -134,8 +123,8 @@ sub enteringStep {
 
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
-    create_steps_window($o);
-    create_help_window($o);
+    install_gtk::create_steps_window($o);
+    install_gtk::create_help_window($o);
 }
 sub leavingStep {
     my ($o, $step) = @_;
@@ -151,7 +140,7 @@ sub selectLanguage {
     my ($o, $first_time) = @_;
     $o->SUPER::selectLanguage;
     Gtk->set_locale;
-    install_theme($o);
+    install_gtk::install_theme($o);
     
     $o->ask_warn('',
 _("Your system is low on resource. You may have some problem installing
@@ -181,7 +170,7 @@ sub selectInstallClass1 {
     $w->main;
 
     mapn { $verif->($_[1]) if $_[0]->active } \@radios, $l;
-    create_steps_window($o);
+    install_gtk::create_steps_window($o);
 
     $w->{retval};
 }
@@ -558,350 +547,16 @@ _("There was an error installing packages:"), $1, _("Go on anyway?") ], 1) and r
     $w->destroy;
 }
 
-#------------------------------------------------------------------------------
-sub load_rc($) {
-    if (my ($f) = grep { -r $_ } map { "$_/$_[0].rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
-	Gtk::Rc->parse($f);
-	foreach (cat_($f)) {
-	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background1 = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
-		@background2 = map { $_ * 256 * 257 } split ',', $1 if /PRELIGHT.*\{(.*)\}/;
-	    }
-	}
-    }
-}
-
-sub install_theme {
-    $::live and return;
-    my ($o, $theme) = @_;    
-    $o->{theme} = $theme || $o->{theme} || $themes[0];
-
-    load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
-
-    if (my ($font, $font2) = lang::get_x_fontset($o->{lang}, $::rootwidth < 800 ? 10 : 12)) {
-	$font2 ||= $font;
-	Gtk::Rc->parse_string(qq(
-style "default-font" 
-{
-   fontset = "$font"
-}
-style "small-font"
-{
-   fontset = "$font2"
-}
-widget "*" style "default-font"
-widget "*Steps*" style "small-font"
-
-));
-    }
-    gtkset_background(@background1);# unless $::testing;
-
-    create_logo_window($o);
-    create_help_window($o);
-}
-
-#------------------------------------------------------------------------------
-sub create_big_help {
-    my $w = my_gtk->new('', grab => 1, force_position => [ $::stepswidth, $::logoheight ]);
-    $w->{rwindow}->set_usize($::logowidth, $::rootheight - $::logoheight);
-    gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,0),
-		    1, createScrolledWindow(gtktext_insert(new Gtk::Text, 
-							   formatAlaTeX(_ deref($help::steps{$::o->{step}})))),
-		    0, gtksignal_connect(my $ok = new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
-		   ));
-    $ok->grab_focus;
-    $w->main;
-    gtkset_mousecursor_normal();
-}
-
-#------------------------------------------------------------------------------
-sub create_help_window {
-    $::live and return;
-    my ($o) = @_;
-
-#    $o->{help_window}->destroy if $o->{help_window};
-
-    my $w;
-    if ($w = $o->{help_window}) {
-	$_->destroy foreach $w->{window}->children;
-    } else {
-	$w = bless {}, 'my_gtk';
-	$w->{rwindow} = $w->{window} = new Gtk::Window;
-	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
-	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
-	$w->sync;
-    }
-    my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
-    gtkadd($w->{window},
-	   gtkpack_(new Gtk::HBox(0,-2),
-		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => \&create_big_help), $pixmap),
-		    1, createScrolledWindow($w_help = new Gtk::Text),
-		   ));
-    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(_ deref($help::steps{$o->{step}})) : '');
-
-    $w->show;
-    $o->{help_window} = $w;
-}
-
 sub set_help {
+    my ($o, @l) = @_;
+
     $::live and return 1;
-    shift;
-    gtktext_insert($w_help, 
+    gtktext_insert($o->{help_window_text}, 
 		   formatAlaTeX(join "\n", 
-				map { _ deref($help::steps{$_}) } @_));
+				map { _ deref($help::steps{$_}) } @l));
     1;
 }
 
-#------------------------------------------------------------------------------
-sub create_steps_window {
-    $::live and return;
-    my ($o) = @_;
-
-    my $PIX_H = my $PIX_W = 21;
-
-    $o->{steps_window}->destroy if $o->{steps_window};
-
-    my $w = bless {}, 'my_gtk';
-    $w->{rwindow} = $w->{window} = new Gtk::Window;
-    $w->{rwindow}->set_uposition(0, 0);
-    $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
-    $w->{rwindow}->set_name('Steps');
-    $w->{rwindow}->set_events('button_press_mask');
-    $w->show;
-
-    gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,0),
-		    (map {; 1, $_ } map {
-			my $step_name = $_;
-			my $step = $o->{steps}{$_};
-			my $darea = new Gtk::DrawingArea;
-			my $in_button;
-			my $draw_pix = sub {
-			    my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm($darea->window,
-									   $darea->style->bg('normal'),
-									   $_[0]) or die;
-			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
-							 $pixmap, 0, 0,
-							 ($darea->allocation->[2]-$PIX_W)/2,
-							 ($darea->allocation->[3]-$PIX_H)/2,
-							 $PIX_W , $PIX_H );
-			};
-
-			my $f = sub { 
-			    my ($type) = @_;
-			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
-			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
-			};
-			$darea->set_usize($PIX_W,$PIX_H);
-			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
-			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
-			if ($step->{reachable}) {
-			    $darea->signal_connect(enter_notify_event => sub { $in_button=1; $draw_pix->($f->('-on')); });
-			    $darea->signal_connect(leave_notify_event => sub { undef $in_button; $draw_pix->($f->('')); });
-			    $darea->signal_connect(button_press_event => sub { $draw_pix->($f->('-click')); });
-			    $darea->signal_connect(button_release_event => sub { $in_button && die "setstep $step_name\n" });
-			}
-			gtkpack_(new Gtk::HBox(0,5), 0, $darea, 0, new Gtk::Label(translate($step->{text})));
-		    } grep {
-			!eval $o->{steps}{$_}{hidden};
-		    } @{$o->{orderedSteps}}),
-		    0, gtkpack(new Gtk::HBox(0,0), map {
-			my $t = $_;
-			my $w = new Gtk::Button('');
-			$w->set_name($t);
-			$w->set_usize(0, 7);
-			gtksignal_connect($w, clicked => sub {
-			    $::setstep or return; #- just as setstep s
-			    install_theme($o, $t); die "theme_changed\n" 
-			});
-		    } @themes)));
-    $w->show;
-    $o->{steps_window} = $w;
-}
-
-#------------------------------------------------------------------------------
-sub create_logo_window() {
-    $::live and return;
-    my ($o) = @_;
-    gtkdestroy($o->{logo_window});
-    my $w = bless {}, 'my_gtk';
-    $w->{rwindow} = $w->{window} = new Gtk::Window;
-    $w->{rwindow}->set_uposition($::stepswidth, 0);
-    $w->{rwindow}->set_usize($::logowidth, $::logoheight);
-    $w->{rwindow}->set_name("logo");
-    $w->show;
-    my $file = "logo-mandrake.xpm";
-    -r $file or $file = "$ENV{SHARE_PATH}/$file";
-    if (-r $file) {
-	my $ww = $w->{window};
-	my @logo = Gtk::Gdk::Pixmap->create_from_xpm($ww->window, $ww->style->bg('normal'), $file);
-	gtkadd($ww, new Gtk::Pixmap(@logo));
-    }
-    $o->{logo_window} = $w;
-}
-
-sub init_sizes() {
-#    my $maxheight = arch() eq "ppc" ? 1024 : 600;
-#    my $maxwidth = arch() eq "ppc" ? 1280 : 800;
-    ($::rootheight,  $::rootwidth)    = (480, 640);
-    ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
-    #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);
-    ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);
-    ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 104);
-    ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);
-}
-
-#------------------------------------------------------------------------------
-sub createXconf {
-    my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
-
-    devices::make("/dev/kbd") if arch() =~ /^sparc/; #- used by Xsun style server.
-    symlinkf($mouse_dev, "/dev/mouse");
-
-    #- needed for imlib to start on 8-bit depth visual.
-    symlink("/tmp/stage2/etc/imrc", "/etc/imrc");
-    symlink("/tmp/stage2/etc/im_palette.pal", "etc/im_palette.pal");
-
-    my $wacom;
-    if ($wacom_dev) {
-	$wacom_dev = devices::make($wacom_dev);
-	$wacom = <<END;
-Section "Module"
-   Load "xf86Wacom.so"
-EndSection
-
-Section "XInput"
-    SubSection "WacomStylus"
-        Port "$wacom_dev"
-        AlwaysCore
-    EndSubSection
-    SubSection "WacomCursor"
-        Port "$wacom_dev"
-        AlwaysCore
-    EndSubSection
-    SubSection "WacomEraser"
-        Port "$wacom_dev"
-        AlwaysCore
-    EndSubSection
-EndSection
-END
-    }
-
-    local *F;
-    open F, ">$file" or die "can't create X configuration file $file";
-    print F <<END;
-Section "Files"
-   FontPath   "/usr/X11R6/lib/X11/fonts:unscaled"
-EndSection
-
-Section "Keyboard"
-   Protocol    "Standard"
-   AutoRepeat  0 0
-
-   LeftAlt         Meta
-   RightAlt        Meta
-   ScrollLock      Compose
-   RightCtl        Control
-END
-
-    if (arch() =~ /^sparc/) {
-	print F <<END;
-   XkbRules    "sun"
-   XkbModel    "sun"
-   XkbLayout   "us"
-   XkbCompat   "compat/complete"
-   XkbTypes    "types/complete"
-   XkbKeycodes "sun(type5)"
-   XkbGeometry "sun(type5)"
-   XkbSymbols  "sun/us(sun5)"
-END
-    } else {
-	print F "    XkbDisable\n";
-    }
-
-    print F <<END;
-EndSection
-
-Section "Pointer"
-   Protocol    "$mouse_type"
-   Device      "/dev/mouse"
-   ZAxisMapping 4 5
-EndSection
-
-$wacom
-
-Section "Monitor"
-   Identifier  "My Monitor"
-   VendorName  "Unknown"
-   ModelName   "Unknown"
-   HorizSync   31.5-35.5
-   VertRefresh 50-70
-   Modeline "640x480"     25.175 640  664  760  800   480  491  493  525
-   Modeline "640x480"     28.3   640  664  760  800   480  491  493  525
-   ModeLine "800x600"     36     800  824  896 1024   600  601  603  625
-EndSection
-
-
-Section "Device"
-   Identifier "Generic VGA"
-   VendorName "Unknown"
-   BoardName "Unknown"
-   Chipset "generic"
-EndSection
-
-Section "Device"
-   Identifier "svga"
-   VendorName "Unknown"
-   BoardName "Unknown"
-EndSection
-
-Section "Screen"
-    Driver      "vga16"
-    Device      "Generic VGA"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Modes       "640x480"
-        ViewPort    0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver      "fbdev"
-    Device      "Generic VGA"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Depth       16
-        Modes       "default"
-        ViewPort    0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver "svga"
-    Device      "svga"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Depth       16
-        Modes       "800x600" "640x480"
-        ViewPort    0 0
-    EndSubsection
-EndSection
-
-Section "Screen"
-    Driver      "accel"
-    Device      "svga"
-    Monitor     "My Monitor"
-    Subsection "Display"
-        Depth       16
-        Modes       "800x600" "640x480"
-        ViewPort    0 0
-    EndSubsection
-EndSection
-END
-}
-#-   ModeLine "640x480"     28     640  672  768  800   480  490  492  525
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
