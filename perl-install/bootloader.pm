@@ -639,8 +639,8 @@ sub write_lilo_conf {
 	  open F, ">$prefix/boot/message" and print F $lilo->{message}; #- fallback in case of another lilo.
     }
     foreach ($lilo->{methods}{lilo}, "lilo-menu", "lilo-graphic", "lilo-text") {
-	if (-e "$prefix/boot/$lilo->{methods}{lilo}/boot.b" && -e "$prefix/boot/$lilo->{methods}{lilo}/message") {
-	    symlinkf $lilo->{methods}{lilo}, "$prefix/boot/lilo";
+	if (-e "$prefix/boot/$_/boot.b" && -e "$prefix/boot/$_/message") {
+	    symlinkf $_, "$prefix/boot/lilo";
 	    symlinkf "lilo/boot.b", "$prefix/boot/boot.b";
 	    symlinkf "lilo/message", "$prefix/boot/message";
 	    log::l("stage2 of lilo used is " . readlink "$prefix/boot/lilo");
