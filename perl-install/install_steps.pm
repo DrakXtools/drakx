@@ -575,7 +575,7 @@ sub updateModulesFromFloppy {
 	    my @dest_files = map { chomp_($_) } run_program::rooted_get_stdout($o->{prefix}, 'find', '/lib/modules');
 	    foreach my $s (@src_files) {
 		log::l("found updatable module $s");
-		my ($sfile, $sext) = $s =~ m!([^/\.]*\.o)(?:\.gz|\.bz2)?$!;
+		my ($sfile, $sext) = $s =~ m!([^/\.]*\.k?o)(?:\.gz|\.bz2)?$!;
 		my $qsfile = quotemeta $sfile;
 		my $qsext = quotemeta $sext;
 		foreach my $target (@dest_files) {

@@ -14,8 +14,7 @@ sub parameters {
   my ($module) = @_;
 
   if (!$::isStandalone && !$::testing) {
-      modules::extract_modules('/tmp', $module);
-      $module = "/tmp/$module.o";
+      ($module) = modules::extract_modules('/tmp', $module);
   }
 
   my @parameters;

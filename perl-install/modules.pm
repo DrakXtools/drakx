@@ -360,6 +360,13 @@ sub read_already_loaded() {
     when_load($_) foreach reverse loaded_modules();
 }
 
+my $module_extension = c::kernel_version() =~ /^\Q2.4/ ? 'o' : 'ko';
+
+sub name2file {
+    my ($name) = @_;
+    "$name.$module_extension";
+}
+
 sub when_load {
     my ($name, @options) = @_;
 
@@ -402,7 +409,8 @@ sub extract_modules {
     eval {
 	require packdrake;
 	my $packer = new packdrake($cz, quiet => 1);
-	$packer->extract_archive($dir, map { "$_.o" } @modules);
+	$packer->extract_archive($dir, map { name2file($_) } @modules);
+	map { $dir . '/' . name2file($_) } @modules;
     };
 }
 
@@ -411,7 +419,7 @@ sub load_raw {
 
     extract_modules('/tmp', map { $_->[0] } @l);
     my @failed = grep {
-	my $m = "/tmp/$_->[0].o";
+	my $m = '/tmp/' . name2file($_->[0]);
 	if (-e $m && run_program::run(["/usr/bin/insmod_", "insmod"], '2>', '/dev/tty5', $m, @{$_->[1]})) {
 	    unlink $m;
 	    '';
