@@ -562,7 +562,8 @@ static char * interface_select(void)
 	}
 
 	if (count == 0) {
-		stg1_error_message("No NET device found.");
+		stg1_error_message("No NET device found.\n"
+				   "Hint: if you're using a Laptop, most PCMCIA Network adapters are now supported with `network.img' rather than `pcmcia.img'.");
 		i = ask_insmod(NETWORK_DEVICES);
 		if (i == RETURN_BACK)
 			return NULL;
