@@ -536,8 +536,18 @@ sub write {
     $hd->{isDirty} = 0;
     $hd->{hasBeenDirty} = 1; #- used in undo (to know if undo should believe isDirty or not)
 
-    #- now sync disk and re-read the partition table
-    if ($hd->{needKernelReread}) {
+    if ($hd->{needKernelReread} && ref($hd->{needKernelReread}) eq 'ARRAY' && $::isStandalone) {
+	#- we've only been adding partitions. Try special add_partition (using BLKPG_ADD_PARTITION)
+	local *F;
+	partition_table_raw::openit($hd, *F) or goto force_reread;
+
+	foreach (@{$hd->{needKernelReread}}) {
+	    c::add_partition(fileno F, $_->{start}, $_->{size}, $_->{device} =~ /(\d+)$/)
+		or goto force_reread;
+	}
+    } elsif ($hd->{needKernelReread}) {
+      force_reread:
+	#- now sync disk and re-read the partition table
 	common::sync();
 
 	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
@@ -548,8 +558,8 @@ sub write {
 	foreach (@magic_parts) {
 	    syscall_('mount', , $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(_("mount failed: ") . "$!");
 	}
-	$hd->{needKernelReread} = 0;
     }
+    $hd->{needKernelReread} = 0;
 }
 
 sub active {
@@ -664,7 +674,6 @@ sub add {
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     $part->{rootDevice} = $hd->{device};
-    $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $forceNoAdjust;
 
@@ -675,13 +684,17 @@ sub add {
 	$primaryOrExtended eq 'Primary' ||
 	$primaryOrExtended !~ /Extended/ && @{$hd->{primary}{normal} || []} < $nb_primaries) {
 	eval { add_primary($hd, $part) };
-	return unless $@;
+	goto success if !$@;
     }
     eval { add_extended($hd, $part, $primaryOrExtended) } if $hd->hasExtended; #- try adding extended
     if ($@ || !$hd->hasExtended) {
 	eval { add_primary($hd, $part) };
 	die $@ if $@; #- send the add extended error which should be better
     }
+  success:
+    assign_device_numbers($hd);
+    $hd->{isDirty} = 1;
+    push @{$hd->{needKernelReread} ||= []}, $part if !$hd->{needKernelReread} || ref($hd->{needKernelReread}) eq 'ARRAY'
 }
 
 # search for the next partition
