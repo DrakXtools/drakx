@@ -1,3 +1,64 @@
+2003/01/31  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* install_steps_interactive.pm: be sure $o->{netcnx}{type} is set when
+	using easy_dhcp
+
+	* mdk-stage1/network.c: don't save hostname if intf->boot_proto ==
+	BOOTPROTO_DHCP
+
+	* ugtk2.pm: avoid poping
+
+2003/01/31  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/resize_ntfs.pm: create diskdrake::resize_ntfs to factorize
+	code
+
+	* install_gtk.pm (createXconf): special case for "none" mouse device
+	graphical layout change
+
+	* install_steps_gtk.pm: handle pop_it more nicely: no need to precise
+	pop_it when the wizard window already has a window,
+	that way, two dialog boxes won't merge in the same window (which is
+	dumb!)
+	remove explicitly setting the size of advertising window
+	(it wasn't setting the same size as the wizard mode size)
+
+	* install_any.pm: fix typo
+
+	* diskdrake/interactive.pm: 
+	  - do not write_partitions when resizing & loosing data (not needed)
+	  - handle "cancel" on write_partitions
+	fix typo (calling resize_fat::main instead of diskdrake::resize_ntfs)
+	create diskdrake::resize_ntfs to factorize code
+
+	* install_interactive.pm: fix "one big ntfs" resizing (in the limit case)
+	small fixes
+	add ntfs resize to the wizard
+
+	* interactive/gtk.pm, diskdrake/hd_gtk.pm, ugtk2.pm: handle pop_it more
+	nicely: no need to precise pop_it when the wizard window already has a
+	window,
+	that way, two dialog boxes won't merge in the same window (which is
+	dumb!)
+
+	* mouse.pm (detect): cleanup the value returned when only a wacom is found
+
+	* install_steps_interactive.pm: fix poulpy
+
+	* install_steps.pm: do "yelp-pregenerate -a" only once
+
+2003/01/31  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Faster switch between normal and expert mode (no re-read of the
+	print
+	queues).
+	  - Prepared for working with pre-compiled Foomatic PPDs.
+
+2003/01/31  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 3 logo
+
 2003/01/31  Pixel  <pixel@mandrakesoft.com>
 
 	* diskdrake/interactive.pm, diskdrake/resize_ntfs.pm: create
@@ -9342,7 +9403,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.774 2003/01/30 01:32:42 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.775 2003/01/31 01:01:56 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
