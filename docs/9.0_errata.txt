@@ -96,5 +96,8 @@ o kernel:
 
   i810_audio mistakely say to modules.pm through modules.*map it
   handles nforces whereas it lacks some workaround nvidia and alsa
-  uses
+  uses.
   workaround: perl-install/patch/patch-nforce.pl
+
+  snd-via686 is said to produce background noise since alsa-0.9.0rc3
+  workaround: switch to via82cxxx_audio (oss driver) through draksound
