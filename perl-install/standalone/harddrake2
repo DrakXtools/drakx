@@ -19,9 +19,8 @@ my %fields =
      "bus" => 
      [ N("Bus"), 
        N("this is the physical bus on which the device is plugged (eg: PCI, USB, ...)") ],
-     "channel" => [N("Channel"), N("EIDE/SCSI channel")],
-	 "bogomips" => [N("Bogomips"), N("The GNU/Linux kernel needs to do run a calculation loop at boot time
-	 to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu.")],
+     "channel" => [ N("Channel"), N("EIDE/SCSI channel")],
+     "bogomips" => [ N("Bogomips"), N("The GNU/Linux kernel needs to do run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu.")],
      "bus_id" => 
      [ N("Bus identification"), 
        N("- PCI and USB devices: this list the vendor, device, subvendor and subdevice PCI/USB ids") ],
