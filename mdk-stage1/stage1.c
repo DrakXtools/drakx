@@ -324,6 +324,9 @@ static void method_select_and_prepare(void)
 
 	if (results != RETURN_OK)
 		return method_select_and_prepare();
+
+        /* try to find third party modules on the install media */
+        thirdparty_load_media_modules();
 }
 
 static enum return_type create_initial_fs_symlinks(char* symlinks)

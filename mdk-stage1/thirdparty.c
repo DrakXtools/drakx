@@ -26,13 +26,14 @@
 #include "frontend.h"
 #include "partition.h"
 #include "automatic.h"
+#include "probing.h"
 
 #include "thirdparty.h"
 
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
 #define THIRDPARTY_DIRECTORY "/install/thirdparty"
 
-static enum return_type third_party_choose_device(char ** device, int probe_only)
+static enum return_type thirdparty_choose_device(char ** device, int probe_only)
 {
 	char ** medias, ** medias_models;
 	char ** ptr, ** ptr_models;
@@ -210,7 +211,7 @@ static enum return_type thirdparty_prompt_modules(const char *modules_location, 
 }
 
 
-static enum return_type thirdparty_autoload_modules(const char *modules_location, char ** modules_list, FILE *f)
+static enum return_type thirdparty_autoload_modules(const char *modules_location, char ** modules_list, FILE *f, int load_probed_only)
 {
 	while (1) {
 		char final_name[500];
@@ -228,6 +229,11 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 		if (options) {
 			options[0] = '\0';
 			options++;
+		}
+
+		if (load_probed_only && !exists_orphan_device(module)) {
+			log_message("third party: no device detected for module %s, skipping", module);
+			continue;
 		}
 
 		log_message("third party: auto-loading module (%s) (%s)", module, options);
@@ -250,31 +256,83 @@ static enum return_type thirdparty_autoload_modules(const char *modules_location
 			}
 		}
 	}
-	fclose(f);
 
 	return RETURN_OK;
 }
 
+static enum return_type thirdparty_try_directory(char * root_directory, int interactive) {
+	char modules_location[100];
+	char list_filename[50];
+	FILE *f_load, *f_detect;
+	char **modules_list;
+
+	/* look first in the specific third-party directory */
+	strcpy(modules_location, root_directory);
+	strcat(modules_location, THIRDPARTY_DIRECTORY);
+	modules_list = list_directory(modules_location);
+
+	/* if it's empty, look in the root of selected device */
+	if (!modules_list || !modules_list[0]) {
+		modules_location[strlen(root_directory)] = '\0';
+		modules_list = list_directory(modules_location);
+	}
+
+	log_message("third party: using modules location %s", modules_location);
+
+	if (!modules_list || !*modules_list) {
+		log_message("third party: no modules found");
+		if (interactive)
+			stg1_error_message("No modules found on selected device.");
+		return RETURN_ERROR;
+        }
+
+	sprintf(list_filename, "%s/to_load", modules_location);
+	f_load = fopen(list_filename, "rb");
+	if (f_load) {
+		thirdparty_autoload_modules(modules_location, modules_list, f_load, 0);
+		fclose(f_load);
+	}
+
+	sprintf(list_filename, "%s/to_detect", modules_location);
+	f_detect = fopen(list_filename, "rb");
+	if (f_detect) {
+		thirdparty_autoload_modules(modules_location, modules_list, f_detect, 1);
+		fclose(f_detect);
+	}
+
+	if (f_load || f_detect)
+		return RETURN_OK;
+	else if (interactive) {
+		if (IS_AUTOMATIC)
+			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
+		log_message("third party: no \"to_load\" file, prompting for modules");
+		return thirdparty_prompt_modules(modules_location, modules_list);
+	} else {
+		return RETURN_OK;
+	}
+}
+
+void thirdparty_load_media_modules(void)
+{
+	thirdparty_try_directory(IMAGE_LOCATION, 0);
+}
 
 void thirdparty_load_modules(void)
 {
 	enum return_type results;
-	char * device, * modules_location;
-	char ** modules_list;
-	char toload_name[500];
-	FILE * f;
+	char * device;
 
 	device = NULL;
 	if (IS_AUTOMATIC) {
 		device = get_auto_value("thirdparty");
-		third_party_choose_device(NULL, 1); /* probe only to create devices */
+		thirdparty_choose_device(NULL, 1); /* probe only to create devices */
 		log_message("third party: trying automatic device %s", device);
 		if (thirdparty_mount_device(device) != RETURN_OK)
 			device = NULL;
 	}
 
 	while (!device || streq(device, "")) {
-		results = third_party_choose_device(&device, 0);
+		results = thirdparty_choose_device(&device, 0);
 		if (results == RETURN_BACK)
 			return;
 		if (thirdparty_mount_device(device) != RETURN_OK)
@@ -283,38 +341,9 @@ void thirdparty_load_modules(void)
 
 	log_message("third party: using device %s", device);
 
-	/* look first in the specific third-party directory */
-	modules_location = THIRDPARTY_MOUNT_LOCATION THIRDPARTY_DIRECTORY;
-	modules_list = list_directory(modules_location);
-	if (!modules_list || !modules_list[0]) {
-		/* if it's empty, look in the root of selected device */
-		modules_location = THIRDPARTY_MOUNT_LOCATION;
-		modules_list = list_directory(modules_location);
-	}
-
-	log_message("third party: using modules location %s", modules_location);
-
-	if (!modules_list || !*modules_list) {
-		log_message("third party: no modules found");
-		stg1_error_message("No modules found on selected device.");
-		umount(THIRDPARTY_MOUNT_LOCATION);
-		return thirdparty_load_modules();
-	}
-
-	sprintf(toload_name, "%s/to_load", modules_location);
-	f = fopen(toload_name, "rb");
-	if (f) {
-		results = thirdparty_autoload_modules(modules_location, modules_list, f);
-	} else {
-		if (IS_AUTOMATIC)
-			stg1_error_message("I can't find a \"to_load\" file. Please select the modules manually.");
-		log_message("third party: no \"to_load\" file, prompting for modules");
-		results = thirdparty_prompt_modules(modules_location, modules_list);
-	}
+	results = thirdparty_try_directory(THIRDPARTY_MOUNT_LOCATION, 1);
 	umount(THIRDPARTY_MOUNT_LOCATION);
 
-	if (results == RETURN_OK)
-		return;
-	else
+	if (results != RETURN_OK)
 		return thirdparty_load_modules();
 }

@@ -16,6 +16,15 @@
 #ifndef _THIRDPARTY_H_
 #define _THIRDPARTY_H_
 
+/* load third party modules present on install media
+ * use to_load and to_detect files in /install/thirdparty
+ * do not prompt user
+ */
+void thirdparty_load_media_modules(void);
+
+/* load modules if to_load or to_detect files are present
+ * prompt user if no to_load file is present
+ */
 void thirdparty_load_modules(void);
 
 #endif
