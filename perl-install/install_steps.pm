@@ -598,7 +598,7 @@ sub installCrypto {
     $o->pkg_install(@{$u->{packages}});
 }
 
-sub installUpates {
+sub installUpdates {
     my ($o) = @_;
     my $u = $o->{updates} or return; $u->{updates} or return;
 
