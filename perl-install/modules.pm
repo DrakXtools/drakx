@@ -292,14 +292,9 @@ sub load_thiskind($;&) {
 
 sub get_pcmcia_devices($) {
     my ($type) = @_;
-    my $file = "/var/run/stab";
-    my @devs;
-    my $module;
-    my $desc;
+    my (@devs, $module, $desc);
 
-    local *F;
-    open F, $file or return; #- no pcmcia is not an error.
-    while (<F>) {
+    foreach (cat_("/var/run/stab")) {
 	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
 	$module = $1 if /^\d+\s+$type[^\s]*\s+([^\s]+)/;
 	if ($desc && $module) {

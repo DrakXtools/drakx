@@ -7,6 +7,10 @@ all: $(POFILES)
 clean:
 	rm -f empty.po $(POFILES:%=%t) $(PMSCFILES)
 
+verif:
+	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
+	perl -ne '$$i += my @l = /\.c:/g; END { print "$$i\n" }' panoramix.pot
+
 $(POFILES): panoramix.pot
 	cp -f $@ $@t
 	msgmerge $@t $< > $@

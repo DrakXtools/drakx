@@ -111,3 +111,33 @@ For cdrom install, the ramdisk is used to speed up things (access time is quite
 high on cdrom drives)
 
 For pcmcia, it depends on the type of install.
+
+
+********************************************************************************
+* modules **********************************************************************
+********************************************************************************
+Modules can be found in at least 3 places:
+- in /modules/modules.cgz
+- in /lib/modules/
+- in /lib/modules/modules.cpio.bz2
+
+/modules/modules.cgz is used in stage1. It contains only modules interesting for
+one kind of install. For example in an gi_hd install, it contains scsi modules.
+For an gi_network install, it contains network card modules.
+
+/lib/modules/ contains modules that should be in /lib/modules/modules.cpio.bz2
+but are not for speed up. The serial.o module is there to speed up mouseconfig.
+
+/lib/modules/modules.cpio.bz2 contains every module except those of
+/lib/modules/
+
+
+To install a module, use modprobe which is in /usr/bin. It's a perl wrapper
+around /usr/bin/insmod. It uses the dependencies found in
+/lib/modules/modules.dep (stage1).
+
+/usr/bin/insmod is a wrapper around /usr/bin/insmod_. It just extracts the
+module out of /lib/modules/modules.cpio.bz2 in /tmp. Then it calls insmod_.
+
+/usr/bin/insmod_ is the real prog (which you usually find in /sbin/). You need
+to give it the complete path.

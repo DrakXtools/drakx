@@ -181,7 +181,7 @@ sub configureNetwork($) {
 			_("Do you want to configure LAN (not dialup) networking for your system?")) or $r = "Don't";
     }
 
-    if ($r =~ /^Don\'t/) {
+    if ($r =~ /^Don't/) { #-' for xgettext
 	$o->{netc}{NETWORKING} = "false";
     } elsif ($r !~ /^Keep/) {
 	$o->setup_thiskind('net', !$::expert, 1);
@@ -608,6 +608,7 @@ You can add some more or change the existent ones."),
 	    $e = $b->{entries}{$name};
 	}
 	my $old_name = $name;
+	my %old_e = %$e;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	    
 	my @l;
@@ -634,16 +635,18 @@ _("Label") => \$e->{label},
 _("Default") => { val => \$default, type => 'bool' },
 	);
 
-	$o->ask_from_entries_ref('',
-				 '',
-				 [ grep_index { even($::i) } @l ],
-				 [ grep_index {  odd($::i) } @l ],
-				 ) or return;
-
-	$b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
-
-	delete $b->{entries}{$old_name};
-	$b->{entries}{$name} = $e;
+	if ($o->ask_from_entries_ref('',
+				     '',
+				     [ grep_index { even($::i) } @l ],
+				     [ grep_index {  odd($::i) } @l ],
+				    )) {
+	    $b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
+	    
+	    delete $b->{entries}{$old_name};
+	    $b->{entries}{$name} = $e;
+	} else {
+	    %$e = %old_e;
+	}
     }
     eval { $o->SUPER::setupBootloader };
     if ($@) {

@@ -164,14 +164,8 @@ If you want to access a SMB printer (which means, a printer located
 on a remote Windows 9x/NT machine), you will have to specify its
 SMB name (which is not its TCP/IP name), and possibly its IP address,
 plus the username, workgroup and password required in order to
-access the printer, and of course the name of the printer.
-
-
-The same goes for a NetWare printer, except that you need no
-workgroup information. As for SMB printers, keep in mind that
-the Netware name (which is the one you have to enter) is not
-the name as its TCP/IP name, therefore you may also want to
-enter the IP address of the print server as well."),
+access the printer, and of course the name of the printer. The same goes
+for a NetWare printer, except that you need no workgroup information."),
 
 setRootPassword =>
  __("You must now enter the root password for your Linux-Mandrake
@@ -402,14 +396,8 @@ If you want to access a SMB printer (which means, a printer located
 on a remote Windows 9x/NT machine), you will have to specify its
 SMB name (which is not its TCP/IP name), and possibly its IP address,
 plus the username, workgroup and password required in order to
-access the printer, and of course the name of the printer.
-
-
-The same goes for a NetWare printer, except that you need no
-workgroup information. As for SMB printers, keep in mind that
-the Netware name (which is the one you have to enter) is not
-the name as its TCP/IP name, therefore you may also want to
-enter the IP address of the print server as well."),
+access the printer, and of course the name of the printer.The same goes
+for a NetWare printer, except that you need no workgroup information."),
 
 setRootPassword =>
  __("You must now enter the root password for your Linux-Mandrake

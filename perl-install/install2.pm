@@ -75,7 +75,8 @@ $installSteps{first} = $installSteps[0];
 #-#####################################################################################
 #-INTERN CONSTANT
 #-#####################################################################################
-my @install_classes = (__("Beginner"), __("Developer"), __("Server"), __("Expert"));
+#- these strings are used in quite a lot of places and must not be changed!!!!!
+my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
 
 #-#####################################################################################
 #-Default value
