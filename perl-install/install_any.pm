@@ -608,7 +608,7 @@ sub install_urpmi {
   hdlist: hdlist.$name.cz
   with_hdlist: ../base/" . ($_->{update} ? "hdlist.cz" : $_->{hdlist}) . ($need_list ? "
   list: list.$name" : "") . ($dir =~ /removable:/ && "
-  removable: /dev/cdrom") . ($_->{update} && "
+  removable: /dev/cdrom") . ("
   update") . "
 }
 
