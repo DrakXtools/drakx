@@ -188,6 +188,68 @@ sub network_status {
     return 1;
 }
 
+sub get_security_level {
+    # Get security level by reading /etc/profile (only after install).
+    # This is a preliminary solution until msec puts the security level
+    # definition into the correct file.
+    $file = "/etc/profile";
+    if (-f $file) {
+	local *F; 
+	open F, "< $file" || return 0;
+	while (<F>) {
+	    if ($_ =~ /^\s*SECURE_LEVEL=([0-5])\s*$/) {
+		close F;
+		return $1;
+	    }
+	}
+	close F;
+    }
+    return 0;
+}
+    
+
+sub spooler_in_security_level {
+    # Was the current spooler already added to the current security level?
+    my ($spooler, $level) = @_;
+    my $sp;
+    if (($spooler eq "lpr") || ($spooler eq "lprng")) {
+	$sp = "lpd";
+    } else {
+	$sp = $spooler;
+    }
+    $file = "$prefix/etc/security/msec/server.$level";
+    if (-f $file) {
+	local *F; 
+	open F, "< $file" || return 0;
+	while (<F>) {
+	    if ($_ =~ /^\s*$sp\s*$/) {
+		close F;
+		return 1;
+	    }
+	}
+	close F;
+    }
+    return 0;
+}
+
+sub add_spooler_to_security_level {
+    my ($spooler, $level) = @_;
+    my $sp;
+    if (($spooler eq "lpr") || ($spooler eq "lprng")) {
+	$sp = "lpd";
+    } else {
+	$sp = $spooler;
+    }
+    $file = "$prefix/etc/security/msec/server.$level";
+    if (-f $file) {
+	local *F; 
+	open F, ">> $file" || return 0;
+	print F "$sp\n";
+	close F;
+    }
+    return 1;
+}
+
 sub files_exist {
     my @files = @_;
     for (@files) {

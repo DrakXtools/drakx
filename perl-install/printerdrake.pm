@@ -1465,6 +1465,64 @@ can set up local printers usable from your local machine. How do
     1;
 }
 
+sub security_check {
+    # Check the security mode and when in "high" or "paranoid" mode ask the
+    # user whether he really wants to configure printing.
+    my ($printer, $in, $spooler) = @_;
+    $in->set_help('securityCheck') if $::isInstall;
+
+    # Get security level
+    my $security = undef;
+    if ($::isInstall) {
+	$security = $in->{'security'};
+    } else {
+	$security = printer::get_security_level();
+    }
+
+    # Exit silently if the spooler is PDQ
+    if ($spooler eq "pdq") {return 1;}
+
+    # Exit silently in medium or lower security levels
+    if ((!$security) || ($security < 4)) {return 1;}
+    
+    # Exit silently if the current spooler is already activated for the current
+    # security level
+    if (printer::spooler_in_security_level($spooler, $security)) {return 1;}
+
+    # Tell user in which security mode he is and ask him whether he really
+    # wants to activate the spooler in the given security mode. Stop the
+    # operation of installing the spooler if he disagrees.
+    my $securitystr = ($security == 4 ? _("high") : _("paranoid"));
+    if ($in->ask_yesorno(_("Installing a printing system in the %s security level", $securitystr),
+			 _("You are about to install the printing system %s on
+a system running in the %s security level.
+
+This printing system runs a daemon (background process)
+which waits for print jobs and handles them. This daemon
+is also accessable by remote machines through the network
+and so it is a possible point for attacks. Therefore only
+a few selected daemons are started by default in this
+security level.
+
+Do you reeally want to configure printing on this
+machine?",
+			   $printer::shortspooler_inv{$spooler},
+			   $securitystr))) {
+	print "##### secyes\n";
+        printer::add_spooler_to_security_level($spooler, $security);
+	my $service;
+	if (($spooler eq "lpr") || ($spooler eq "lprng")) {
+	    $service = "lpd";
+	} else {
+	    $service = $spooler;
+	}
+        printer::start_service_on_boot($service);
+	return 1;
+    } else {
+	return 0;
+    }
+}
+
 sub start_spooler_on_boot {
     # Checks whether the spooler will be started at boot time and if not,
     # ask the user whether he wants to start the spooler at boot time.
@@ -1481,7 +1539,7 @@ system is a potential point for attacks.
 
 Do you want to have the automatic starting of the printing
 system turned on again?",
-		       $printer::shortspooler_inv{$printer->{SPOOLER}})), 1) {
+		       $printer::shortspooler_inv{$printer->{SPOOLER}}))) {
 	    printer::start_service_on_boot($service);
 	}
     }
@@ -1492,6 +1550,11 @@ sub install_spooler {
     # installs the default spooler and start its daemon
     my ($printer, $in) = @_;
     if (!$::testing) {
+	# If the user refuses to install the spooler in high or paranoid
+	# security level, exit.
+	if (!security_check($printer, $in, $printer->{SPOOLER})) {
+	    return 0;
+	}
 	if ($printer->{SPOOLER} eq "cups") {
 	    {
 		my $w = $in->wait_message('', _("Checking installed software..."));
