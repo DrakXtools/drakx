@@ -473,6 +473,10 @@ sub testFinalConfig($;$$) {
             1;
 	});
 
+        my $background = "$prefix/usr/share/pixmaps/mdk/mandrake-logo.xpm";
+        my $qiv = "$prefix/usr/bin/qiv";
+        -r $background && -x $setroot and
+           system(($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv --display :9 -y $background");
 	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
