@@ -63,10 +63,11 @@ sub zips__faking_ide_scsi {
     if (my @l_ide = grep { $_->{interface_type} eq 'ide' } @l) {
 	require modules;
 	modules::add_alias('scsi_hostadapter', 'ide-scsi');
-	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\s+)/, ord($1) - ord('a')) } getSCSI());
+	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
 	foreach my $e (@l_ide) {	    
-	    log::l("IDE Zip: $e->{device}");
-	    $e->{device} = "sd" . chr(ord('a') + $nb++);
+	    my $faked = "sd" . chr(ord('a') + $nb++);
+	    log::l("IDE Zip: $e->{device} => $faked");
+	    $e->{device} = $faked;
 	}
     }
     map { $_->{device} .= 4; $_ } @l;
