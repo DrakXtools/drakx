@@ -269,8 +269,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Wed Sep 04 2002 David BAUDENS <baudens@mandrakesoft.com> 1.1.9-35mdk
-- Update banners
+* Thu Sep  5 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-35mdk
+- Update banners (David Baudens)
+- my_gtk snapshot for rpmdrake (gc)
 
 * Wed Sep  4 2002 Stew Benedict <sbenedict@mandrakesoft.com> 1.1.9-34mdk
 - add perl-Expect requires for drakbackup (now enabled)
