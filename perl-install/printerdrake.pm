@@ -1705,9 +1705,9 @@ sub setup_default_spooler {
 	%printer::thedb = ();
 	#my $w = $in->wait_message('', _("Reading printer database ..."));
 	#printer::read_printer_db($printer->{SPOOLER});
-	# Save spooler choice
-        printer::set_default_spooler($printer);
     }
+    # Save spooler choice
+    printer::set_default_spooler($printer);
     return $printer->{SPOOLER};
 }
 
