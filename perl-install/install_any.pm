@@ -394,10 +394,10 @@ sub setDefaultPackages {
 
     foreach (lang::langs($o->{locale}{langs})) {
 	pkgs::packageByName($o->{packages}, "locales-$_") or next;
-	push @{$o->{default_packages}}, "locales-$_";
+	unshift @{$o->{default_packages}}, "locales-$_";
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
     }
-    push @{$o->{default_packages}}, 'locales-' . substr(lang::c2locale($o->{locale}{country}), 0, 2);
+    unshift @{$o->{default_packages}}, 'locales-' . substr(lang::c2locale($o->{locale}{country}), 0, 2);
     foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
     }
