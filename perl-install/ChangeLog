@@ -1,3 +1,12 @@
+2004/07/28  Pixel  <pixel at mandrakesoft.com>
+
+	* fs/type.pm: remove small ugly typo
+
+	* detect_devices.pm: fix getSCSI_26() not sorting the drives
+	fix getCompaqSmartArray() on 2.6 (since /proc/driver/cciss/cciss0
+	doesn't talk about c0dX anymore)
+	fix getSCSI_26() not sorting the drives
+
 2004/07/27  Daouda Lo  <daouda at mandrakesoft.com>
 
 	* standalone/drakbug: 
@@ -33376,7 +33385,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.935 2004/07/27 00:59:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.936 2004/07/28 01:06:37 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
