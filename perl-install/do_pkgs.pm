@@ -24,6 +24,21 @@ sub ensure_is_installed {
     1;
 }
 
+sub ensure_binary_is_installed {
+    my ($do, $pkg, $binary, $b_auto) = @_;
+
+    if (!whereis_binary($binary, $::prefix)) {
+	$do->in->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
+	  or return if !$b_auto;
+	$do->install($pkg) or return;
+    }
+    if (!whereis_binary($binary, $::prefix)) {
+	$do->in->ask_warn('', N("Mandatory package %s is missing", $pkg));
+	return;
+    }
+    1;
+}
+
 sub ensure_is_installed_if_available {
     my ($do, $pkg, $file) = @_;
     if (! -e "$::prefix$file" && !$::testing) {

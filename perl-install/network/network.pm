@@ -410,7 +410,7 @@ sub configureNetwork2 {
     my ($in, $_prefix, $netc, $intf) = @_;
     my $etc = "$::prefix/etc";
     if (!$::testing) {
-        $netc->{wireless_eth} and $in->do_pkgs->ensure_is_installed('wireless-tools', '/sbin/iwconfig', 'auto');
+        $netc->{wireless_eth} and $in->do_pkgs->ensure_binary_is_installed('wireless-tools', 'iwconfig', 'auto');
         write_conf("$etc/sysconfig/network", $netc);
         write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
         write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $::prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
@@ -419,8 +419,8 @@ sub configureNetwork2 {
         
         any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
         if ($netc->{ZEROCONF_HOSTNAME}) {
-            $in->do_pkgs->ensure_is_installed('tmdns', '/sbin/tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
-            $in->do_pkgs->ensure_is_installed('zcip', '/sbin/zcip', 'auto');
+            $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
+            $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
             write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME}); 
         } else { run_program::rooted($::prefix, "chkconfig", "--del", $_) foreach qw(tmdns zcip) }  # disable zeroconf
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');

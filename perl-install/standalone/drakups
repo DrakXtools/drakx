@@ -380,6 +380,6 @@ foreach my $i (@pages) {
 
 #------------------------------------------------------------------
 # let's start the show:
-$in->do_pkgs->ensure_is_installed('nut-server', '/usr/sbin/upsd') if !$::testing;
+$in->do_pkgs->ensure_binary_is_installed('nut-server', 'upsd') if !$::testing;
 $w->{rwindow}->show_all;
 $w->main;

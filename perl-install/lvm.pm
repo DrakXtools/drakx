@@ -64,7 +64,7 @@ sub lvm_cmd_or_die {
 sub check {
     my ($in) = @_;
 
-    $in->do_pkgs->ensure_is_installed('lvm2', '/sbin/lvm2') or return;
+    $in->do_pkgs->ensure_binary_is_installed('lvm2', 'lvm2') or return;
     init();
     1;
 }

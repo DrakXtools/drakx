@@ -249,7 +249,7 @@ sub setupBootloader__general {
     delete $b->{bios} if $b->{boot} ne $prev_boot;
 
     if ($b->{method} eq 'grub') {
-	$in->do_pkgs->ensure_is_installed('grub', "/usr/sbin/grub", 1) or return 0;
+	$in->do_pkgs->ensure_binary_is_installed('grub', "grub", 1) or return 0;
     }
 
     bootloader::set_profiles($b, $profiles);

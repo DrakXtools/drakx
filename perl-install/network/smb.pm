@@ -32,7 +32,7 @@ sub to_dev_raw {
 
 sub check {
     my ($_class, $in) = @_;
-    $in->do_pkgs->ensure_is_installed('samba-client', '/usr/bin/nmblookup');
+    $in->do_pkgs->ensure_binary_is_installed('samba-client', 'nmblookup');
 }
 
 sub smbclient {
