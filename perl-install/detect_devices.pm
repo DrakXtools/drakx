@@ -283,7 +283,7 @@ sub probeSerialDevices {
     open F, "serial_probe 2>/dev/null |";
     my %current = (); foreach (<F>) {
 	chomp;
-	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/;
+	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
 	$current{$1} = $2 if /^([^=]+)=(.*)$/;
     }
     close F;
