@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 11mdk
+Release: 12mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -339,6 +339,47 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Sep 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-12mdk
+- disable the new gtk smart search which display an entry box (pixel)
+- preload nvram on laptops
+- print translated usage message (#5657)
+- bootloader-config, drakboot: add raid-extra-boot=mbr when installing
+  on mdX (pixel, #11699)
+- diskdrake (pixel):
+  o fix LVM2 support
+  o fix "Illegal division by zero" when installing lilo (#11738)
+  o skip unopenable devices when looking for device geometry
+- drakperm: list users rather than groups when requested for (anthill #1161)
+- drakroam: specify device to iwconfig when applying settings (blino,
+  #11279)
+- localedrake:
+  o fix KDE font names to match currently shiped Xfs font names (pablo)
+  o fix setting fonts at install time
+- drakconnect (blino):
+  o all linmodems (including Hsf and Hcf ones) are now supported with
+    2.6 kernels
+  o ask to connect for modem/isdn connections again
+  o better default connection detection
+  o check if IP address is already used for static interfaces
+  o handle madwifi (fredl)
+  o try to detect default connection in adsl > isdn > modem > ethernet
+    order
+- harddrake: list all mice and keyboards (thus lowering unknown
+  hardware in hwdb-clients)
+- mousedrake, XFdrake: use input/mice instead of psaux for synaptics
+  touchpads with 2.6 kernels (blino, #11771)
+- net_applet (blino):
+  o do not destroy/re-create menu if state hasn't changed, or else the
+    menu may disappear without any reason
+  o fix again running processes detection
+- net_monitor (blino):
+  o fix start/stop
+  o check every 5 seconds (instead of 20) for new or disconnected
+    interfaces (#11780)
+- printerdrake: misc fixes (pixel)
+- XFdrake: use driver "keyboard" instead of "Keyboard" (fix Xorg-6.8
+  support) (pixel)
+
 * Fri Sep 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-11mdk
 - handle aes-i586 instead of aes (pixel, #11588)
 - bootloader-config: fix typos in usage (pixel)
