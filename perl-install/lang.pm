@@ -687,8 +687,8 @@ my %charset2kde_font = (
   'iso-8859-13' => [ "Sans,10", "Monospace,10" ],
   'jisx0208' => [ "Kochi Mincho,13", "Kochi Gothic,13" ],
   'ksc5601' => [ "Baekmuk Gulim,16" ],
-  'gb2312' => [ "Ar Pl Sungtil Gb,13" ],
-  'Big5' => [ "Ar Pl Mingti2l Big5,13" ],
+  'gb2312' => [ "AR PL SungtiL GB,13" ],
+  'Big5' => [ "AR PL Mingti2L Big5,13" ],
   'tis620' => [ "Norasi,16", "Norasi,15" ],
   'utf_ar' => [ "Kacs_qr,14", "Courier New,13", "Kacs_qr,13" ], 
   'utf_am' => [ "GF Zemen Unicode,15" ],
@@ -697,7 +697,7 @@ my %charset2kde_font = (
   'utf_he' => [ "Nachlieli,13", , "Miriam Mono,10", "Nachlieli,11" ],
   'utf_hy' => [ "Artsounk,12", "Monospace,10", "Artsounk,11" ],
   'utf_kn' => [ "Sampige,14", ],
-  'utf_ta' => [ "Tscu_paranar,14", "Tsc_avarangalfxd,10", "Tscu_paranar,12", ],
+  'utf_ta' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,10", "TSCu_Paranar,12", ],
   #- the following should be changed to better defaults when better fonts
   #- get available
   'utf_vi' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
