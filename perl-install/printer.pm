@@ -19,6 +19,9 @@ my $FOOMATICCONFDIR = "/etc/foomatic";
 #-location of the file containing the default spooler's name
 my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 
+#-Did we already read the subroutines of /usr/sbin/ptal-init?
+my $ptalinitread = 0;
+
 %spooler = (
     _("CUPS - Common Unix Printing System") => "cups",
     _("LPRng - LPR New Generation")         => "lprng",
@@ -1456,36 +1459,44 @@ sub configure_hpoj {
     my ($device, @autodetected) = @_;
 
     # Make the subroutines of /usr/sbin/ptal-init available
-    local *PTALINIT;
-    open PTALINIT, "/usr/sbin/ptal-init" || do {
-	die "unable to open /usr/sbin/ptal-init";
-    };
-    my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
-    while(<PTALINIT>) {
-	if (m!sub main!) {
-	    last;
-	} elsif (m!^[^\#]!) {
-	    push (@ptalinitfunctions, $_);
+    # It's only necessary to read it at the first call of this subroutine,
+    # the subroutine definitions stay valid after leaving this subroutine.
+    if (!$ptalinitread) {
+	local *PTALINIT;
+	open PTALINIT, "/usr/sbin/ptal-init" || do {
+	    die "unable to open /usr/sbin/ptal-init";
+	};
+	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
+	while(<PTALINIT>) {
+	    if (m!sub main!) {
+		last;
+	    } elsif (m!^[^\#]!) {
+		push (@ptalinitfunctions, $_);
+	    }
 	}
+	close PTALINIT;
+	eval "@ptalinitfunctions
+        sub getDevnames {
+	    return (%devnames)
+	}
+        sub getConfigInfo {
+            return (%configInfo)
+        }";
+	$ptalinitread = 1;
     }
-    close PTALINIT;
-    eval "@ptalinitfunctions
-    sub getDevnames {
-        return (%devnames)
-    }
-    sub getConfigInfo {
-        return (%configInfo)
-    }";
 
     # Read the HPOJ config file and check whether this device is already
     # configured
-    setupVariables();
-    readDeviceInfo();
+    setupVariables ();
+    readDeviceInfo ();
 
     # Get the model ID as auto-detected
     $device =~ m!^/dev/\S*lp(\d+)$!;
     my $model = $1;
+    my $model_long = $1;
     my $serialnumber = "";
+    my $serialnumber_long = "";
+    my $cardreader = 0;
     my $device_ok = 1;
     my $bus;
     my $address_arg = "";
@@ -1505,7 +1516,6 @@ sub configure_hpoj {
 	$devdata = $_;
 	$model = $_->{val}{MODEL};
 	$serialnumber = $_->{val}{SERIALNUMBER};
-	undef $_->{val}{CARDREADER};
 	# Check if the device is really an HP multi-function device
 	stop_service("hpoj");
 	run_program::rooted($prefix, 
@@ -1518,8 +1528,18 @@ sub configure_hpoj {
 	    close F;
 	    if ($devid) {
 		$device_ok = 1;
-		if (cardReaderDetected("mlc:$bus:probe")) {
-		    $_->{val}{CARDREADER} = 1;
+		if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -mdl 2>/dev/null |") {
+		    $model_long = join("", <F>);
+		    close F;
+		    chomp $model_long;
+		}
+		if (open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . "/usr/bin/ptal-devid mlc:$bus:probe -long -sern 2>/dev/null |") {
+		    $serialnumber_long = join("", <F>);
+		    close F;
+		    chomp $serialnumber_long;
+		}
+		if (cardReaderDetected ("mlc:$bus:probe")) {
+		    $cardreader = 1;
 		}
 	    }
 	}
@@ -1536,32 +1556,29 @@ sub configure_hpoj {
     }
     # No, it is not an HP multi-function device.
     return "" if (!$device_ok);
-    #$device = "/dev/usb/lp1"; $model = "DeskJet 990C";
 
-    # Determine the ptal device name
-    my $ptaldevice = lookupDevname("mlc:$bus:", $model, $serialnumber,
-				   $base_address);
-
-
+    # Determine the ptal device name from already existing config files
+    my $ptaldevice = lookupDevname ("mlc:$bus:", $model_long, 
+				    $serialnumber_long, $base_address);
 
     # It's all done for us, the device is already configured
     return $ptaldevice if defined($ptaldevice);
 
-    # Determine the ptal name for the device
+    # Determine the ptal name for a new device
     $ptaldevice = $model;
     $ptaldevice =~ s![\s/]+!_!g;
     $ptaldevice = "mlc:$bus:$ptaldevice";
 
     # Delete any old/conflicting devices
-    &deleteDevice($ptaldevice);
+    deleteDevice ($ptaldevice);
     if ($bus eq "par") {
 	while (1) {
-	    my $oldDevname=&lookupDevname("mlc:par:",undef,undef,
+	    my $oldDevname = lookupDevname ("mlc:par:",undef,undef,
 					  $base_address);
 	    if (!defined($oldDevname)) {
 		last;
 	    }
-	    &deleteDevice($oldDevname);
+	    deleteDevice ($oldDevname);
 	}
     }
 
@@ -1594,7 +1611,7 @@ sub configure_hpoj {
 	"init.version=1\n";
 
     # Write model string.
-    if ($model !~ /\S/) {
+    if ($model_long !~ /\S/) {
 	print CONFIG
 	    "\n".
 	    "# \"printerdrake\" couldn't read the model but added this device anyway:\n".
@@ -1612,10 +1629,10 @@ sub configure_hpoj {
 	}
     }
     print CONFIG
-	"init.mlcd.append+=-devidmatch \"$model\"\n";
+	"init.mlcd.append+=-devidmatch \"$model_long\"\n";
 
     # Write serial-number string.
-    if ($serialnumber!~/\S/) {
+    if ($serialnumber_long!~/\S/) {
 	print CONFIG
 	    "\n".
 	    "# The device's serial number is unknown.\n".
@@ -1631,7 +1648,7 @@ sub configure_hpoj {
 	}
     }
     print CONFIG
-	"init.mlcd.append+=-devidmatch \"$serialnumber\"\n";
+	"init.mlcd.append+=-devidmatch \"$serialnumber_long\"\n";
 
     if ($bus=~/^[pu]/) {
 	print CONFIG
@@ -1676,7 +1693,7 @@ sub configure_hpoj {
 	"# If you need to pass any additional command-line options to ptal-printd,\n".
 	"# then add them to the following line and uncomment the line:\n".
 	"# init.printd.append+=\n";
-    if (defined($_->{val}{CARDREADER})) {
+    if ($cardreader) {
 	print CONFIG
 	    "\n".
 	    "# Uncomment the following line to enable ptal-photod for this device:\n".
@@ -1688,7 +1705,7 @@ sub configure_hpoj {
 	    "init.photod.append+=-maxaltports 26\n";
     }
     close(CONFIG);
-    readOneDevice($ptaldevice);
+    readOneDevice ($ptaldevice);
 
     # Restart HPOJ
     restart_service("hpoj");
@@ -1716,8 +1733,6 @@ sub parport_addr{
 }
 
 sub config_sane {
-    my ($ptaldevice) = @_;
-
     # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
     # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
     # scanner automatically)
@@ -1726,6 +1741,68 @@ sub config_sane {
     open F, ">> $prefix/etc/sane.d/dll.conf" or 
 	die "can't write SANE config in /etc/sane.d/dll.conf: $!";
     print F "hpoj\n";
+    close F;
+}
+
+sub config_photocard {
+
+    # Add definitions for the drives p:. q:, r:, and s: to /etc/mtools.conf
+    my $mtoolsconf = join("", cat_("$prefix/etc/mtools.conf"));
+    return if $mtoolsconf =~ m/^\s*drive\s+p:/m;
+    my $mtoolsconf_append = "
+# Drive definitions added for the photo card readers in HP multi-function
+# devices driven by HPOJ
+drive p: file=\":0\" remote
+drive q: file=\":1\" remote
+drive r: file=\":2\" remote
+drive s: file=\":3\" remote
+# This turns off some file system integrity checks of mtools, it is needed
+# for some photo cards.
+mtools_skip_check=1
+";
+    open F, ">> $prefix/etc/mtools.conf" or 
+	die "can't write mtools config in /etc/mtools.conf: $!";
+    print F $mtoolsconf_append;
+    close F;
+
+    # Generate a config file for the graphical mtools frontend MToolsFM or
+    # modify the existing one
+    my $mtoolsfmconf;
+    if (-f "$prefix/etc/mtoolsfm.conf") {
+	open F, "< $prefix/etc/mtoolsfm.conf" or 
+	    die "can't read MToolsFM config in $prefix/etc/mtoolsfm.conf: $!";
+	$mtoolsfmconf = join("", <F>);
+	close F;
+	$mtoolsfmconf =~ m/^\s*DRIVES\s*=\s*\"([A-Za-z ]*)\"/m;
+	my $alloweddrives = lc($1);
+	foreach my $letter ( "p", "q", "r", "s" ) {
+	    if ($alloweddrives !~ /$letter/) {
+		$alloweddrives .= $letter;
+	    }
+	}
+	$mtoolsfmconf =~ s/^\s*DRIVES\s*=\s*\"[A-Za-z ]*\"/DRIVES=\"$alloweddrives\"/m;
+	$mtoolsfmconf =~ s/^\s*LEFTDRIVE\s*=\s*\"[^\"]*\"/LEFTDRIVE=\"p\"/m;
+    } else {
+	$mtoolsfmconf = "\# MToolsFM config file. comments start with a hash sign.
+\#
+\# This variable sets the allowed driveletters (all lowercase). Example:
+\# DRIVES=\"ab\"
+DRIVES=\"apqrs\"
+\#
+\# This variable sets the driveletter upon startup in the left window.
+\# An empty string or space is for the hardisk. Example:
+\# LEFTDRIVE=\"a\"
+LEFTDRIVE=\"p\"
+\#
+\# This variable sets the driveletter upon startup in the right window.
+\# An empty string or space is for the hardisk. Example:
+\# RIGHTDRIVE=\"a\"
+RIGHTDRIVE=\" \"
+";
+    }
+    open F, "> $prefix/etc/mtoolsfm.conf" or 
+	die "can't write mtools config in /etc/mtools.conf: $!";
+    print F $mtoolsfmconf;
     close F;
 }
 

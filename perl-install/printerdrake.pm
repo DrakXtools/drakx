@@ -460,12 +460,11 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     if (!$do_auto_detect) {
 	local $::isWizard = 0;
 	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
-				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart P100 or 1315 or an HP LaserJet 2200?"), 0);
+				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
     }
     if (($menuchoice =~ /HP\s+OfficeJet/i) ||
 	($menuchoice =~ /HP\s+PSC/i) ||
-	($menuchoice =~ /HP\s+PhotoSmart\s+P?\s*100\D/i) ||
-	($menuchoice =~ /HP\s+PhotoSmart\s+P?\s*1315/i) ||
+	($menuchoice =~ /HP\s+PhotoSmart/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1100/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1200/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1220/i) ||
@@ -476,9 +475,10 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	# Install HPOJ package
 	if ((!$::testing) &&
 	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
-				       /etc/ptal-start.conf))))) {
+				       /usr/sbin/ptal-init
+				       /usr/bin/xojpanel))))) {
 	    my $w = $in->wait_message('', _("Installing HPOJ package..."));
-	    $in->do_pkgs->install('hpoj');
+	    $in->do_pkgs->install('hpoj', 'xojpanel');
 	}
 	# Configure and start HPOJ
 	my $w = $in->wait_message
@@ -487,32 +487,58 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 
 	if ($ptaldevice) {
 	    # Configure scanning with SANE on the MF device
-	    if (($menuchoice =~ /HP\s+OfficeJet\s+[KVRGPD]/i) ||
-		($menuchoice =~ /HP\s+PSC\s+[579]/i)) {
+	    if (($menuchoice !~ /HP\s+PhotoSmart/i) &&
+		($menuchoice !~ /HP\s+LaserJet\s+2200/i)) {
 		# Install SANE
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/bin/scanimage
 					       /usr/bin/xscanimage
 					       /usr/bin/xsane
-					       /etc/sane.d/dll.conf),
+					       /etc/sane.d/dll.conf
+					       /usr/lib/libsane-hpoj.so.1),
 					    (printer::files_exist
 					     ('/usr/bin/gimp') ? 
 					     '/usr/bin/xsane-gimp' : 
 					     ()))))) {
 		    my $w = $in->wait_message
-			('', _("Installing SANE package..."));
+			('', _("Installing SANE packages..."));
 		    $in->do_pkgs->install('sane-backends', 'sane-frontends',
-					  'xsane', 
+					  'xsane', 'libsane-hpoj0',
 					  if_($in->do_pkgs->is_installed
 					      ('gimp'),'xsane-gimp'));
 		}
-		# Configure the HP SANE backend
-		printer::config_sane($ptaldevice);
+		# Configure the HPOJ SANE backend
+		printer::config_sane();
 	    }
+	    # Configure photo card access with mtools and MToolsFM
+	    if (($menuchoice =~ /HP\s+PhotoSmart/i) ||
+		($menuchoice =~ /HP\s+PSC\s*9[05]0/i) ||
+		($menuchoice =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
+		# Install mtools and MToolsFM
+		if ((!$::testing) &&
+		    (!printer::files_exist(qw(/usr/bin/mdir
+					      /usr/bin/mcopy
+					      /usr/bin/MToolsFM
+					      )))) {
+		    my $w = $in->wait_message
+			('', _("Installing mtools packages..."));
+		    $in->do_pkgs->install('mtools', 'MToolsFM');
+		}
+		# Configure mtools/MToolsFM for photo card access
+		printer::config_photocard();
+	    }
+
+	    my $text = "";
 	    # Inform user about how to scan with his MF device
-	    my $text = scanner_help($menuchoice, "ptal:/$ptaldevice");
+	    $text = scanner_help($menuchoice, "ptal:/$ptaldevice");
 	    if ($text) {
 		$in->ask_warn(_("Scanning on your HP multi-function device"),
+			      $text);
+	    }
+	    # Inform user about how to access photo cards with his MF device
+	    $text = photocard_help($menuchoice, "ptal:/$ptaldevice");
+	    if ($text) {
+		$in->ask_warn(_("Photo memory card access on your HP multi-function device"),
 			      $text);
 	    }
 	    # make the DeviceURI from $ptaldevice.
@@ -1658,6 +1684,7 @@ sub printer_help {
     my $raw = 0;
     my $cupsremote = 0;
     my $scanning = "";
+    my $photocard = "";
     if ($printer->{configured}{$queue}) {
 	if (($printer->{configured}{$queue}{queuedata}{model} eq
 	     _("Unknown model")) ||
@@ -1672,6 +1699,14 @@ sub printer_help {
 	     $printer->{configured}{$queue}{queuedata}{connect});
 	if ($scanning) {
 	    $scanning = "\n\n$scanning\n\n";
+	}
+	# Information about photo card access with HP's multi-function devices
+	$photocard = photocard_help
+	    ($printer->{configured}{$queue}{queuedata}{make} . " " .
+	     $printer->{configured}{$queue}{queuedata}{model}, 
+	     $printer->{configured}{$queue}{queuedata}{connect});
+	if ($photocard) {
+	    $photocard = "\n\n$photocard\n\n";
 	}
     } else {
 	$cupsremote = 1;
@@ -1688,12 +1723,13 @@ _("These commands you can also use in the \"Printing command\" field of the prin
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
 (!$cupsremote ?
- _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s
+ _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning) . printer::lphelp_output($printer) : $scanning .
+", $scanning, $photocard) . printer::lphelp_output($printer) : 
+ $scanning . $photocard .
  _("Here is a list of the available printing options for the current printer:
 
-") . printer::lphelp_output($printer)) : $scanning);
+") . printer::lphelp_output($printer)) : $scanning . $photocard);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -1703,7 +1739,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning) : $scanning);
+_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning . $photocard) : $scanning . $photocard);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -1713,7 +1749,7 @@ _("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 _("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning) : $scanning);
+_("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning . $photocard) : $scanning . $photocard);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -1727,18 +1763,23 @@ If you are using KDE as desktop environment you have a \"panic button\", an icon
 _("
 The \"%s\" and \"%s\" commands also allow to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\".
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
-_("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s
+_("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning) . printer::pdqhelp_output($printer) : $scanning);
+", $scanning, $photocard) . printer::pdqhelp_output($printer) :
+ $scanning . $photocard);
     }
+    my $windowtitle = ($scanning ?
+                       ($photocard ?
+			_("Printing/Scanning/Photo Cards on \"%s\"", $queue) :
+			_("Printing/Scanning on \"%s\"", $queue)) :
+                       ($photocard ?
+			_("Printing/Photo Card Access on \"%s\"", $queue) :
+			_("Printing on the printer \"%s\"", $queue)));
     if (!$raw && !$cupsremote) {
         my $choice;
         while ($choice ne _("Close")) {
 	    $choice = $in->ask_from_list_
-	        (($scanning ?
-		  _("Printing/Scanning on \"%s\"", $queue) :
-		  _("Printing on the printer \"%s\"", $queue)),
-		 $dialogtext,
+	        ($windowtitle, $dialogtext,
 		 [ _("Print option list"), _("Close") ],
 		 _("Close"));
 	    if ($choice ne _("Close")) {
@@ -1747,10 +1788,7 @@ _("To know about the options available for the current printer read either the l
 	    }
 	}
     } else {
-	$in->ask_warn(($scanning ?
-		       _("Printing/Scanning on \"%s\"", $queue) :
-		       _("Printing on the printer \"%s\"", $queue)), 
-		      $dialogtext);
+	$in->ask_warn($windowtitle, $dialogtext);
     }
 }
 
@@ -1758,21 +1796,32 @@ sub scanner_help {
     my ($makemodel, $deviceuri) = @_;
     if ($deviceuri =~ m!^ptal:/(.*)$!) {
 	my $ptaldevice = $1;
-	if (($makemodel =~ /HP\s+OfficeJet\s+[KVRGPD]/i) ||
-	    ($makemodel =~ /HP\s+PSC\s+[579]/i)) {
-	    # SANE-driven models
-	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" and \"man sane-hp\" on the command line to get more information.
-
-Do not use \"scannerdrake\" for this device!",
-		     $ptaldevice);
-	} elsif (($makemodel !~ /HP\s+PhotoSmart/i) &&
-		 ($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
-	    # "ptal-hp"-driven models
-	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan from the command line with \"ptal-hp %s scan ...\". Scanning via a graphical interface or from the GIMP is not supported yet for your device. More information you will find in the \"/usr/share/doc/hpoj-0.8/ptal-hp-scan.html\" file on your system. If you have an HP LaserJet 1100 or 1200 you can only scan when you have the scanner option installed.
+	if (($makemodel !~ /HP\s+PhotoSmart/i) &&
+	    ($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
+	    # Models with built-in scanner
+	    return _("Your HP multi-function device was configured automatically to be able to scan. Now you can scan with \"scanimage\" (\"scanimage -d hp:%s\" to specify the scanner when you have more than one) from the command line or with the graphical interfaces \"xscanimage\" or \"xsane\". If you are using the GIMP, you can also scan by choosing the appropriate point in the \"File\"/\"Acquire\" menu. Call also \"man scanimage\" on the command line to get more information.
 
 Do not use \"scannerdrake\" for this device!",
 		     $ptaldevice);
 	} else {
+	    # Scanner-less models
+	    return "";
+	}
+    }
+}
+
+sub photocard_help {
+    my ($makemodel, $deviceuri) = @_;
+    if ($deviceuri =~ m!^ptal:/(.*)$!) {
+	my $ptaldevice = $1;
+	if (($makemodel =~ /HP\s+PhotoSmart/i) ||
+	    ($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
+	    ($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
+	    # Models with built-in photo card drives
+	    return _("Your HP printer was configured automatically to give you access to the photo card drives from your PC. Now you can access your photo cards using the graphical program \"MtoolsFM\" (Menu: \"Applications\" -> \"File tools\" -> \"MTools File Manager\") or the command line utilities \"mtools\" (enter \"man mtools\" on the command line for more info). You find the card's file system under the drive letter \"p:\", or subsequent drive letters when you have more than one HP printer with photo card drives. In \"MtoolsFM\" you can switch between drive letters with the field at the upper-right corners of the file lists.",
+		     $ptaldevice);
+	} else {
+	    # Photo-card-drive-less models
 	    return "";
 	}
     }
