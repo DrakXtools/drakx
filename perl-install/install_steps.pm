@@ -443,6 +443,11 @@ Consoles 1,3,4,7 may also contain interesting information";
 	run_program::rooted($o->{prefix}, "chkconfig", "--del", "gpm") 
     }
 
+    #- update menu scheme before calling update menus if desktop mode.
+    if ($o->{meta_class} eq 'desktop') {
+	run_program::rooted($o->{prefix}, "touch", "/etc/menu/do-not-create-menu-link");
+	run_program::rooted($o->{prefix}, "touch", "/etc/menu/enable_simplified");
+    }
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
 
