@@ -53,7 +53,7 @@ sub parameters {
 		$min == 1 ?
 		($is_a_number ? _("comma separated numbers") : _("comma separated strings")) :
 		''; #- too weird and buggy, do not display it
-    push @parameters, [ $name, $format, $description, $min, $max, $is_a_number ];
+    push @parameters, [ $name, $format, $description ];
   }
   @parameters;
 }
