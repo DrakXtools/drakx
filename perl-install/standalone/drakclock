@@ -244,7 +244,7 @@ sub motion_event {
 	$button_reset->set_sensitive(1);
     }
 
-    $$Radian = -atan2(($event->x-$midx), ($event->y-$midy)) + $PI;
+    $$Radian = -atan2($event->x - $midx, $event->y - $midy) + $PI;
 
     Repaint($widget);
     rad_to_time();

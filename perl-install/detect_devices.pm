@@ -587,12 +587,12 @@ sub stringlist() {
 
 sub tryOpen($) {
     my $F;
-    sysopen $F, devices::make($_[0]), c::O_NONBLOCK() and $F;
+    sysopen($F, devices::make($_[0]), c::O_NONBLOCK()) && $F;
 }
 
 sub tryWrite($) {
     my $F;
-    sysopen $F, devices::make($_[0]), 1 | c::O_NONBLOCK() and $F;
+    sysopen($F, devices::make($_[0]), 1 | c::O_NONBLOCK()) && $F;
 }
 
 sub syslog() {
@@ -685,7 +685,7 @@ sub probeSerialDevices() {
 sub probeSerial($) { $serialprobe{$_[0]} }
 
 sub hasModem($) {
-    $serialprobe{$_[0]} and $serialprobe{$_[0]}{CLASS} eq 'MODEM' and $serialprobe{$_[0]}{DESCRIPTION};
+    $serialprobe{$_[0]} && $serialprobe{$_[0]}{CLASS} eq 'MODEM' && $serialprobe{$_[0]}{DESCRIPTION};
 }
 
 sub hasMousePS2 {

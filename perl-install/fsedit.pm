@@ -678,7 +678,8 @@ sub undo_prepare {
 sub undo {
     my ($all_hds) = @_;
     foreach (@{$all_hds->{hds}}) {
-	my $h; eval pop @{$_->{undo}} || next;
+	my $code = pop @{$_->{undo}} or next;
+	my $h; eval $code;
 	@$_{@partition_table::fields2save} = @$h;
 
 	$_->{isDirty} = $_->{needKernelReread} = 1 if $_->{hasBeenDirty};

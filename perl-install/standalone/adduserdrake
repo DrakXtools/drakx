@@ -8,8 +8,6 @@ use common;
 use interactive;
 use any;
 
-my @etc_pass_fields = qw(name pw uid gid realname home shell);
-my @shells = any::shells();
 my $isMD5 = cat_("/etc/pam.d/system-auth") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/system-auth") =~ /shadow/;
 

@@ -33,7 +33,6 @@ if (defined $klang) {
 
 my $locale = lang::read('', $>);
 my $in = 'interactive'->vnew;
-my $one_lang_only;
 
 sub select_language() {
     $locale->{lang} = any::selectLanguage($in, $locale->{lang});

@@ -155,7 +155,8 @@ sub packageByName {
 	    $best = $_;
 	}
     }
-    $best or log::l("unknown package `$name'") && undef;
+    $best or log::l("unknown package `$name'");
+    $best;
 }
 sub packageById {
     my ($packages, $id) = @_;

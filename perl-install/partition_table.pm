@@ -522,8 +522,9 @@ sub read {
     verifyPrimary($pt);
     eval {
 	my $need_removing_empty_extended;
-	$pt->{extended} and read_extended($hd, $pt->{extended}, \$need_removing_empty_extended) || return 0;
-
+	if ($pt->{extended}) {
+	    read_extended($hd, $pt->{extended}, \$need_removing_empty_extended) or return 0;
+	}
 	if ($need_removing_empty_extended) {
 	    #- special case when hda5 is empty, it must be skipped
 	    #- (windows XP generates such partition tables)
