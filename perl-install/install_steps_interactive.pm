@@ -515,10 +515,8 @@ such as ``mybox.mylab.myco.com''."),
 	$o->pppConfig;
     }
     #- (dam's)
-    if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
-			_("Do you want to configure a ISDN connection for your system?"), 0)) {
-#        netconnect::detect_isdn($o->{prefix}, $o->{isdn}, $o, bool($o->{pcmcia}));
-    }
+    $o->{netcnx} ||= {};
+    netconnect::intro($o->{prefix}, $o->{netcnx}, $o, bool($o->{pcmcia}));
 }
 
 sub configureNetworkIntf {
