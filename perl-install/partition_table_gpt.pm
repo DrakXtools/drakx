@@ -110,7 +110,7 @@ sub read_partitionEntries {
       map {
 	sysread $F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
 	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
-	$h{size} = $h{ending} - $h{start};
+	$h{size} = $h{ending} - $h{start} + 1;
 	$h{type} = $gpt_types_rev{$h{gpt_type}};
 	$h{type} = 0x100 if !defined $h{type};
 	\%h;
@@ -146,7 +146,7 @@ sub write {
     my ($hd, $sector, $pt, $info) = @_;
 
     foreach (@$pt) {
-	$_->{ending} = $_->{start} + $_->{size};
+	$_->{ending} = $_->{start} + $_->{size} - 1;
 	$_->{guid} ||= 'TODO';
 	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
