@@ -136,6 +136,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         next;
     }
     my ($pid, $no, $res);
+    $hw_class->{automatic} ||= ref($configurator) eq 'CODE';
+
     if (!$hw_class->{automatic}) {
         $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
         unless ($pid = fork()) {
@@ -149,7 +151,10 @@ foreach my $hw_class (@harddrake::data::tree) {
     } else {
         $res = 1;
     }
-    if (!$no && $res) {
+    if (ref($configurator) eq 'CODE') {
+        eval { $configurator->() };
+        log::explanations(qw(cannot run "$configurator": $@)) if $@;
+    } elsif (!$no && $res) {
         foreach my $configurator (@configurator_pool) {
             if (fork()) {
                 wait();
