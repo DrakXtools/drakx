@@ -296,27 +296,21 @@ sub setPackageSelection($$$) {
 
 sub unselectAllPackages($) {
     my ($packages) = @_;
-    my (%keep_selected, %unselected);
+    my %keep_selected;
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
 	    #- keep track of package that should be kept selected.
 	    $keep_selected{$_->id} = $_;
 	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
-	    $unselected{$_->id} = $_;
+	    $_->set_flag_required(0);
+	    $_->set_flag_requested(0);
 	}
     }
-    if (%unselected) {
-	my $state = $packages->{state} ||= {};
-	$packages->disable_selected($packages->{rpmdb}, $state, values %unselected);
-
-	if (my @l = $packages->resolve_requested($packages->{rpmdb}, $state, \%keep_selected,
-						 callback_choices => \&packageCallbackChoices)) {
-	    foreach (@l) {
-		log::l("unselectAllPackage unselected ".$_->fullname." which has been selected again");
-	    }
-	}
-    }
+    #- clean staten, in order to start with a brand new set...
+    $packages->{state} = {};
+    $packages->resolve_requested($packages->{rpmdb}, $packages->{state}, \%keep_selected,
+				 callback_choices => \&packageCallbackChoices);
 }
 
 sub psUpdateHdlistsDeps {
@@ -573,16 +567,14 @@ sub setSelectedFromCompssList {
 	#- determine the packages that will be selected when
 	#- selecting $p. the packages are not selected.
 	my $state = $packages->{state} ||= {};
-	$state->{selected} = {};
 
 	my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
 					     callback_choices => \&packageCallbackChoices);
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
-	foreach (keys %{$state->{selected}}) {
-	    my $p = $packages->{depslist}[$_] or next;
-	    $nb += $p->size;
+	foreach (@l) {
+	    $nb += $_->size;
 	}
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
