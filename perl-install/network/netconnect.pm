@@ -318,7 +318,7 @@ sub real_main {
                             detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
-                            $netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
+                            isdn_read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
@@ -334,7 +334,7 @@ sub real_main {
                             $isdn->{description} =~ s/\|/ -- /;
                             
                         }
-                        $netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
+                        isdn_read_config($netcnx->{isdn_internal});
                         return "isdn_protocol";
                     },
                    },

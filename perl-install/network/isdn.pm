@@ -103,7 +103,6 @@ sub isdn_read_config {
     #$isdn->{description} = '';
     #$isdn->{vendor} = '';
     #$isdn->{passwd2} = '';
-    $isdn;
 }
 
 my $file = "$ENV{SHARE_PATH}/ldetect-lst/isdn.db";
