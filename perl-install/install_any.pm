@@ -642,25 +642,29 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
     };
     my $total = $o->{mediumsize};
     log::l("totalsize=$total");
-    my $pid = fork();
-    if (!$pid && defined $pid) { #- child
-	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
-	$wait_message->(N("Copying in progress"));
-	#- from commands.pm. TODO: factorize, possibly in MDK::Common.
-	my $f; $f = sub {
-	    my ($e) = @_;
-	    my $s = (lstat($e))[12];
-	    $s += sum(map { &$f($_) } glob_("$e/*")) if !-l _ && -d _;
-	    $s;
-	};
-	while (1) {
-	    my $s = $f->("$o->{prefix}/var/ftp/pub/Mandrakelinux/media") / 1024;
-	    $wait_message->('', $s, $total);
-	    sleep 1;
-	    last if $s > $total - 100;
+    my $pid;
+    if (!method_allows_medium_change($o->{method}) || $o->{method} =~ /-iso$/) {
+	#- display the progress bar only for non-cdrom installation methods
+	$pid = fork();
+	if (!$pid && defined $pid) { #- child
+	    my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
+	    $wait_message->(N("Copying in progress"));
+	    #- from commands.pm. TODO: factorize, possibly in MDK::Common.
+	    my $f; $f = sub {
+		my ($e) = @_;
+		my $s = (lstat($e))[12];
+		$s += sum(map { &$f($_) } glob_("$e/*")) if !-l _ && -d _;
+		$s;
+	    };
+	    while (1) {
+		my $s = $f->("$o->{prefix}/var/ftp/pub/Mandrakelinux/media") / 1024;
+		$wait_message->('', $s, $total);
+		sleep 1;
+		last if $s > $total - 100;
+	    }
+	    undef $wait_w;
+	    c::_exit(0);
 	}
-	undef $wait_w;
-	c::_exit(0);
     }
     foreach my $k (pkgs::allMediums($o->{packages})) {
 	my $m = $o->{packages}{mediums}{$k};
@@ -681,7 +685,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	$m->{method} = 'disk';
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
     }
-    kill 15, $pid;
+    kill 15, $pid if defined $pid;
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
     #- shoud be enough to fool errorOpeningFile
