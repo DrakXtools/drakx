@@ -870,7 +870,11 @@ sub has_cpu_flag {
 
 sub matching_type {
     my ($type) = @_;
-    $type =~ /laptop/i && isLaptop();
+    if ($type =~ /laptop/i) {
+        return isLaptop();
+    } elsif ($type =~ /wireless/i) {
+        return any { c::isNetDeviceWirelessAware($_) } getNet();
+    }
 }
 
 sub usbMice()      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /wacom/ ||
