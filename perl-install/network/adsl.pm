@@ -126,7 +126,7 @@ sub load_firmware_floppy {
 	system("cp /mnt/$file $destination");
     } else { $failed ||= N("Firmware copy failed, file %s not found", $file) }
     
-    eval { $in->ask_warn('', $failed || N("Firmware copy succeed")) }; $in->exit if $@ =~ /wizcancel/;
+    eval { $in->ask_warn('', $failed || N("Firmware copy succeeded")) }; $in->exit if $@ =~ /wizcancel/;
     $failed and log::l($failed) && return;
     
     1;
