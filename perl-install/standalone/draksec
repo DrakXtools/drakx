@@ -26,6 +26,7 @@ use common;
 use interactive;
 use any;
 use c;
+use log;
 use security::msec;
 
 local $_ = join '', @ARGV;
@@ -43,53 +44,21 @@ $::isEmbedded and kill USR2, $::CCPID;
 
 my $security = any::get_secure_level('');
 my $libsafe = any::config_libsafe('');
-my @logins = security::msec::get_user_list('');
-my $email = "put.your\@email.here";
+my $sec_user = any::config_security_user('');
 my $w;
-my (@options) = security::msec::get_config('', $security);
 
-my $expert_file = "/etc/security/msec/expert_mode";
-my $expert_section = "";
-
-#for $href (@options) {
-#    for $href2 (keys %$href) {
-#	    %noref = %$href;
-#            print "$href2 = $noref{$href2}{description}\n";
-#    }
-#}
-
-if (any::choose_security_level($in, \$security, \$libsafe, \$email)) {
+if (any::choose_security_level($in, \$security, \$libsafe, \$sec_user)) {
+    log::l("[draksec] Setting libsafe activation variable to $libsafe");
     any::config_libsafe('', $libsafe);
+    log::l("[draksec] Setting security administrator contact to $sec_user");
+    any::config_security_user('', $sec_user);
 
     $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
+    log::l("[draksec] Setting security level to $security");
     system "/usr/sbin/msec", $security;
     $in->resume;
-
-    $w = $in->wait_message('', _("Setting security user"));
-    $in->suspend;
-    security::msec::add_config('', "set_security_conf", "MAIL_USER", $email);
-    security::msec::commit_changes('');
-    $in->resume;
-}
-
-while (-f $expert_file) {
-    $expert_section = cat_($expert_file);
-
-    %config_hash = %{ $options[$expert_section] };
-   
-#    foreach $key (keys %config_hash) {
-#        print "$key = $config_hash{$key}{val}\n";
-#    }
-
-    if(any::choose_security_options($in, $security, $libsafe, \$email, \%config_hash)) {
-       $w = $in->wait_message('', _("Setting security options"));
-       $in->suspend;
-       $in->resume;
-    }
-
-    rm_rf($expert_file);
 }
 
 !$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
