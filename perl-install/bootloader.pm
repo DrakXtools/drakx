@@ -1107,7 +1107,7 @@ sub install_grub {
 sub install {
     my ($bootloader, $hds) = @_;
 
-    if (my $ppart = device2part($bootloader->{boot}, [ fsedit::get_fstab(@$hds) ]) {
+    if (my $part = fs::device2part($bootloader->{boot}, [ fsedit::get_fstab(@$hds) ])) {
 	die N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($part))
 	  if isThisFs('xfs', $part);
     }
