@@ -319,7 +319,7 @@ sub create_box_with_title {
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-    if (@_ <= 2 && $nbline > 4) {
+    if (@_ <= 2 && ($nbline > 4 || $o->{box_size} > 100)) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
