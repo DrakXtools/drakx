@@ -44,8 +44,8 @@ my @installSteps = (
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, 1, "selectPath" ],
   partitionDisks     => [ __("Setup filesystems"), 1, 0, 0, "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, 0, "partitionDisks" ],
-  choosePackages     => [ __("Choose packages to install"), 1, 1, 0, "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, 0 ],
+  choosePackages     => [ __("Choose packages to install"), 1, 1, 1, "selectPath" ],
+  doInstallStep      => [ __("Install system"), 1, -1, 0, ["formatPartitions", "selectPath"] ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, 1 ],
   configureNetwork   => [ __("Configure networking"), 1, 1, 1, "formatPartitions" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, 0, "doInstallStep" ],
@@ -87,11 +87,12 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #- partition layout
 my %suggestedPartitions = (
-  beginner => [
+  beginner => my $b = [
     { mntpoint => "/",     size => 700 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83 },
   ],
+  normal => $b,
   developer => [
     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
