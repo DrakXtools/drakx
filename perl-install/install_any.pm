@@ -1003,6 +1003,8 @@ sub install_urpmi {
                 $removable_device = ($p->{mntpoint} || "/mnt/hd") . "/$iso_path";
             } elsif ($curmethod eq 'cdrom') {
                 $removable_device = '/dev/cdrom';
+		my $p; $p = fs::get::mntpoint2part("/tmp/image", $::o->{fstab})
+		    and $removable_device = $p->{device};
             }
 
 	    #- build a list file if needed.
