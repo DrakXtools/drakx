@@ -58,7 +58,7 @@ my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 
 #- make sure terminal server and friends are installed
-my $ts = system("rpm -qa | grep terminal-server > /dev/null");
+my $ts = system("rpm -q terminal-server > /dev/null");
 if ($ts == 256) {
 	if ($ENV{DISPLAY}) {
 		system("urpmi --X terminal-server > /dev/null");
@@ -476,20 +476,6 @@ sub restart_dm() {
     	my $result = $in->ask_okcancel('', N("In order to enable changes made for thin clients, the display manager must be restarted. Restart now?"));
 		system('/sbin/service dm restart') if $result;
 	}
-}
-
-sub about() {
-    text_view(N("
- Coprright (C) 2002-2004 by MandrakeSoft 
-	Stew Benedict sbenedict\@mandrakesoft.com
-
-") . $::license . N("
-
- Thanks:
-	- LTSP Project http://www.ltsp.org
-	- Michael Brown <mbrown\@fensystems.co.uk>
-
-"), "close");
 }
 
 sub text_view {
