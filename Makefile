@@ -35,7 +35,7 @@ install_only:
 	if [ `ls $(ROOTDEST)/images/*.img-* 2>/dev/null | wc -l` -gt 0 ]; then	\
 	  cd $(ROOTDEST)/images; mkdir alternatives; cd alternatives; mv ../*.img-* .; md5sum *.img-* > MD5SUM; \
 	fi
-	cd $(ROOTDEST)/images; md5sum *.img* > MD5SUM
+	cd $(ROOTDEST)/images; md5sum *.{img,iso}* > MD5SUM
 
     ifeq (i386,$(ARCH))
 	rm -rf $(ROOTDEST)/isolinux
