@@ -728,13 +728,13 @@ sub select_packages {
     }
 
     #- special packages that are to be removed always... BEWARE THIS IS A HACK !!!
-    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
-	my $pkg = pkgs::packageByName($o->{packages}, $_);
-	if ($pkg) {
-	    delete $pkg->{closure};
-	    delete $pkg->{selected};
-	}
-    }
+#    foreach (qw(gmc gcc3.0 gcc3.0-c++ gcc3.0-cpp libstdc++3.0 libstdc++3.0-devel)) {
+#	my $pkg = pkgs::packageByName($o->{packages}, $_);
+#	if ($pkg) {
+#	    delete $pkg->{closure};
+#	    delete $pkg->{selected};
+#	}
+#    }
 
     $o->{packages};
 }
