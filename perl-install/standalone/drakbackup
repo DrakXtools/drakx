@@ -225,14 +225,11 @@ sub get_tape_info() {
 	@tape_devices = ();
 	system("dmesg | grep 'st[0-9] at' > $info");
 
-	local *INFO;
-	open INFO, $info or warn("Can't open $info\n");
-	local $_;
-	while (<INFO>) {
+	my @info = cat_($info);
+	foreach (@info) {
 		@line_data = split(/[ \t,]+/, $_);
 		push @tape_devices, "/dev/" . $line_data[3]; 
 	}
- 	close INFO;
 	unlink($info);
 }
 
@@ -2776,22 +2773,18 @@ sub restore_aff_result() {
     button_box_ok_only();
     $central_widget = \$do_restore;
     $up_box->show_all;
-
 }
 
 sub return_path {
     my ($username) = @_;
     my $usr;
     my $home_dir;
-    my $passwdfile = "/etc/passwd";
-	local *PASSWD;
-    open(PASSWD, $passwdfile) or exit 1; 
-    while (defined(my $line = <PASSWD>)) {
+    my @passwords = cat_("/etc/passwd");
+    foreach my $line (@passwords) {
 		chomp($line);
 		($usr, $home_dir) = (split(/:/, $line))[0,5];
 		last if $usr eq $username; 
     }
-    close(PASSWD);
     return $home_dir;
 }
 
