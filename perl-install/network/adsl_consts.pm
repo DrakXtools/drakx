@@ -9,7 +9,7 @@ use common;
 @EXPORT = qw(@adsl_data);
 
 # From:
-# http://fast800.tuxfamily.org/pub/article.php3?id_article=23
+# http://eagle-usb.ath.cx/pub/article.php3?id_article=23
 # http://baud123.blogdrive.com/archive/cm-10_cy-2003_m-10_d-1_y-2003_o-0.html
 # http://www.sagem.com/web-modems/download/support-fast1000-fr.htm
 # http://perso.wanadoo.fr/michel-m/protocolesfai.htm
