@@ -624,10 +624,20 @@ my %xim = (
 #-  },
 );
 
+my %default_im;
+
+sub get_default_im {
+    my ($lang) = @_;
+    $default_im{$lang}{IM};
+}
+
 sub set_default_im {
     my ($im, @langs) = @_;
     add2hash($xim{$_}, $gtkqt_im{$im}) foreach @langs;
     add2hash($xim{$_}, { XIM_PROGRAM => $im_xim_program{$im}{$_} }) foreach @langs;
+    foreach (@langs) {
+        $default_im{$_}{IM} = $im foreach $_, analyse_locale_name($_)->{main};
+    }
 }
 
 set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
