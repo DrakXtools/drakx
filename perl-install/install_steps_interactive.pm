@@ -1252,8 +1252,8 @@ sub configureX {
 
     my $options = { 
 	allowFB => $o->{allowFB},
-	allowNVIDIA_rpms => $o->do_pkgs->check_kernel_module_packages('NVIDIA_kernel', 'NVIDIA_GLX'),
-	allowATI_rpms => $o->do_pkgs->check_kernel_module_packages('ATI_kernel', 'ATI_GLX'),
+	allowNVIDIA_rpms => sub { $o->do_pkgs->check_kernel_module_packages('NVIDIA_kernel', 'NVIDIA_GLX') },
+	allowATI_rpms => sub { $o->do_pkgs->check_kernel_module_packages('ATI_kernel', 'ATI_GLX') },
     };
 
     require Xconfig::main;
