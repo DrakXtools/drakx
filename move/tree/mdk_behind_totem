@@ -24,6 +24,11 @@ while [ -n "$1" ]; do
             shift
 	    shift
 	;;
+	--restore-cmd)
+            RESTORE_CMD="$2"
+            shift
+	    shift
+	;;
 	*)
             ok=''
 	    shift
@@ -74,9 +79,7 @@ mount_cd() {
     mdk_move_loop to_cdrom always always_i18n totem nvidia
 
     # restore killed kde apps
-    su -c kded $USER
-    su -c kicker $USER
-    su -c kdesktop $USER
+    su -c "$RESTORE_CMD" $USER
 }
 
 while [ -e "/proc/$totem_pid" ]; do
