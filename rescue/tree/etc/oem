@@ -26,7 +26,7 @@ echo "cdrom: $cd"
 
 mkdir /cdrom ; mount -r -t iso9660 $cd /cdrom
 
-if grep -q " fr" /cdrom/VERSION; then
+if grep -q "[ -]fr" /cdrom/VERSION; then
   lang=fr
   flang=fr_FR
 else
