@@ -1016,10 +1016,10 @@ but very sensitive: it must not be used for a machine connected to others
 or to the Internet. There is no password access.")),
       1 => formatAlaTeX(_("Password are now enabled, but use as a networked computer is still not recommended.")),
       2 => formatAlaTeX(_("This is the standard security recommended for a computer that will be used to connect to the Internet as a client.")),
-      3 => formatAlaTeX(_("Standard security, but we already set some restrictions, and more automatic checks are run every night.")),
+      3 => formatAlaTeX(_("There are already some restrictions, and more automatic checks are run every night.")),
       4 => formatAlaTeX(_("With this security level, the use of this system as a server becomes possible.
 The security is now high enough to use the system as a server which accept
-connections from many clients. Note: if your machine is only a client on the Internet, you should better choose the previous level.")),
+connections from many clients. Note: if your machine is only a client on the Internet, you should better choose a lower level.")),
       5 => formatAlaTeX(_("Based on the previous level, but the system is entirely closed.
 Security features are at their maximum.")),
     );
