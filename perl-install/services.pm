@@ -72,7 +72,7 @@ postfix => N_("Postfix is a Mail Transport Agent, which is the program that move
 random => N_("Saves and restores system entropy pool for higher quality random
 number generation."),
 rawdevices => N_("Assign raw devices to block devices (such as hard drive
-partitions), for the use of applications such as Oracle"),
+partitions), for the use of applications such as Oracle or DVD players"),
 routed => N_("The routed daemon allows for automatic IP router table updated via
 the RIP protocol. While RIP is widely used on small networks, more complex
 routing protocols are needed for complex networks."),
