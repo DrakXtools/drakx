@@ -161,7 +161,9 @@ the following error occured: %s", formatError($@));
 		$min_win += partition_table::raw::cylinder_size($hd);
 
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrakelinux installation.");
-		$o->ask_okcancel('', formatAlaTeX(N("WARNING!
+		$o->ask_okcancel('', formatAlaTeX(
+                                            #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                                            N("WARNING!
 
 DrakX will now resize your Windows partition. Be careful: this
 operation is dangerous. If you have not already done so, you

@@ -6,6 +6,7 @@ use strict;
 use common;
 
 sub main_license() {
+#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
 N("Introduction
 
 The operating system and the different components available in the Mandrakelinux distribution 
@@ -93,6 +94,7 @@ http://www.mp3licensing.com for more details). If you are unsure if a patent
 may be applicable to you, check your local laws.");
 }
 sub com_license() { 
+#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
 N("
 Warning
 
@@ -125,6 +127,7 @@ copyright laws applicable to software programs.
 }
 
 sub install_completed() {
+#-PO: keep the doble empty lines between sections, this is formated a la LaTeX
 N("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 

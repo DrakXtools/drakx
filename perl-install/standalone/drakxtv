@@ -130,7 +130,8 @@ if (@devices) {
     } @devices
 } else {
     $in->ask_warn(N("No TV Card detected!"), formatAlaTeX(
-											   N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
+                                                          #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                                                          N("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
 
 
 You can visit our hardware database at:

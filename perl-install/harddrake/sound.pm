@@ -276,7 +276,9 @@ sub config {
 sub trouble {
     my ($in) = @_;
     $in->ask_warn(N("Sound trouble shooting"),
-                  formatAlaTeX(N("The classic bug sound tester is to run the following commands:
+                  formatAlaTeX(
+                               #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                               N("The classic bug sound tester is to run the following commands:
 
 
 - \"lspcidrake -v | fgrep AUDIO\" will tell you which driver your card uses
@@ -306,7 +308,9 @@ sub get_any_driver_entry {
         clicked => sub {
             my $old_driver = $driver;
             if ($in->ask_from(N("Choosing an arbitrary driver"),
-                              formatAlaTeX(N("If you really think that you know which driver is the right one for your card
+                              formatAlaTeX(
+                                           #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+                                           N("If you really think that you know which driver is the right one for your card
 you can pick one in the above list.
 
 The current driver for your \"%s\" sound card is \"%s\" ", $device->{description}, $driver)),

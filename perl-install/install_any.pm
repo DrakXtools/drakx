@@ -545,7 +545,9 @@ sub warnAboutNaughtyServers {
     my ($o) = @_;
     my @naughtyServers = pkgs::naughtyServers($o->{packages}) or return 1;
     my $r = $o->ask_from_list_('', 
-formatAlaTeX(N("You have selected the following server(s): %s
+formatAlaTeX(
+             #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+             N("You have selected the following server(s): %s
 
 
 These servers are activated by default. They don't have any known security
@@ -566,7 +568,9 @@ sub warnAboutRemovedPackages {
     my ($o, $packages) = @_;
     my @removedPackages = keys %{$packages->{state}{ask_remove} || {}} or return;
     if (!$o->ask_yesorno('', 
-formatAlaTeX(N("The following packages will be removed to allow upgrading your system: %s
+formatAlaTeX(
+             #-PO: keep the doble empty lines between sections, this is formated a la LaTeX
+             N("The following packages will be removed to allow upgrading your system: %s
 
 
 Do you really want to remove these packages?
