@@ -51,7 +51,7 @@ sub leavingStep {
     log::l("step `$step' finished");
 
     if (-d "$o->{prefix}/root") {
-	eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
+	eval { commands::cp('-f', "/tmp/ddebug.log", "/tmp/exec.log", "$o->{prefix}/root") };
 	install_any::g_auto_install();
     }
 
@@ -305,9 +305,12 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = pkgs::packagesToInstall($packages);
 
+    my $time = time;
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages->[1], $packages->[2]);
+    run_program::rooted($o->{prefix}, 'ldconfig');
     delete $ENV{DURING_INSTALL};
+    log::l("Install took: ", formatTime(time - $time));
 }
 
 sub afterInstallPackages($) {
@@ -353,9 +356,6 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
-
-    #- mainly for auto_install's
-    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
@@ -924,7 +924,7 @@ sub miscellaneous {
     $ENV{SECURE_LEVEL} = $o->{security};
     add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && $o->{installClass} !~ /corporate|server/ };
 
-    cat_("/proc/cmdline") =~ /mem=(\S+)/;
+    cat_("/proc/cmdline") =~ /.mem=(\S+)/; #- if /^mem/, it means that's the value grub gave
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
 
     local $_ = $o->{bootloader}{perImageAppend};

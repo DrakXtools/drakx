@@ -509,7 +509,7 @@ sub choosePackagesTree {
     $tree->signal_connect(button_press_event => sub { &$toggle if $_[1]{type} =~ /^2/ });
     $tree->signal_connect(key_press_event => sub {
         my ($w, $e) = @_;
-	my $c = chr $e->{keyval};
+	my $c = chr($e->{keyval} & 0xff);
 	&$toggle if $e->{keyval} >= 0x100 ? $c eq "\r" || $c eq "\x8d" : $c eq ' ';
 	1;
     });
@@ -818,7 +818,7 @@ sub init_sizes() {
     ($::rootheight,  $::rootwidth)    = (480, 640);
     ($::rootheight,  $::rootwidth)    = my_gtk::gtkroot()->get_size;
     #- ($::rootheight,  $::rootwidth)    = (min(768, $::rootheight), min(1024, $::rootwidth));
-    ($::stepswidth,  $::stepsheight)  = (140, $::rootheight);
+    ($::stepswidth,  $::stepsheight)  = (145, $::rootheight);
     ($::logowidth,   $::logoheight)   = ($::rootwidth - $::stepswidth, 40);                                 
     ($::helpwidth,   $::helpheight)   = ($::rootwidth - $::stepswidth, 100);                                
     ($::windowwidth, $::windowheight) = ($::rootwidth - $::stepswidth, $::rootheight - $::helpheight - $::logoheight);

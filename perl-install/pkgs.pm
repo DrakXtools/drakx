@@ -642,7 +642,7 @@ sub setSelectedFromCompssList {
     my @packages = allPackages($packages);
     my @places = do {
 	#- special case for /^k/ aka kde stuff
-	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 0) } @packages;
+	my @values = map { $_->{values}[$ind] + (packageFlagUnskip($_) && packageName($_) !~ /^k/ ? 10 : 1) } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
