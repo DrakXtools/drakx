@@ -105,6 +105,7 @@ my %file2loop = do {
 ugtk2::gtkset_mousecursor_normal(); #- for restoring a normal in any case
 ugtk2::flush();
 
+my ($lang) = map { if_(/live_tree_i18n_(.*)\.clp/, $1) } keys %file2loop;
 my $totem_pid = $$;
 
 if (my $pid = fork()) {
@@ -112,7 +113,10 @@ if (my $pid = fork()) {
     $ENV{G_BROKEN_FILENAMES} = 1;
     exec 'totem';
 } else {
-    exec 'sudo', 'mdk_behind_totem', 
+    exec 'sudo', 'mdk_behind_totem',
+        '--lang', $lang,
+	'--i18n-loop', $file2loop{"live_tree_i18n_$lang.clp"},
+	'--boot-loop', $file2loop{'live_tree_boot.clp'},
 	'--boot-loop', $file2loop{'live_tree_boot.clp'},
 	'--main-loop', $file2loop{'live_tree.clp'},
 	'--totem-pid', $totem_pid,

@@ -4,6 +4,16 @@ ok=1
 
 while [ -n "$1" ]; do
     case "$1" in
+	--lang)
+	    lang="$2"
+            shift
+	    shift
+	;;
+	--i18n-loop)
+	    i18n_loop="$2"
+            shift
+	    shift
+	;;
 	--boot-loop)
 	    boot_loop="$2"
             shift
@@ -47,6 +57,9 @@ trap 'umount_cd' USR1
 umount_cd() {
     echo umount_cd
 
+    umount /image_i18n_$lang
+    losetup -d /dev/$i18n_loop
+
     umount /image_boot
     losetup -d /dev/$boot_loop
 
@@ -73,6 +86,9 @@ mount_cd() {
 
     losetup -r -e gz /dev/$boot_loop /cdrom/live_tree_boot.clp 
     mount -r /dev/$boot_loop /image_boot
+
+    losetup -r -e gz /dev/$i18n_loop /cdrom/live_tree_i18n_$lang.clp
+    mount -r /dev/$i18n_loop /image_i18n_$lang
 
     ln -sf /image/lib /
 
