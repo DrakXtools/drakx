@@ -517,7 +517,7 @@ sub create_okcancel {
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
     if (!defined $wm_is_kde) {
         require any;
-        $wm_is_kde = $::isInstall || any::running_window_manager() eq "kwin" || 0;
+        $wm_is_kde = !$::isInstall && any::running_window_manager() eq "kwin" || 0;
     }
     my @l2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
@@ -892,7 +892,7 @@ sub new {
 	  $force_center || $o->{force_center} || 
 	    @interactive::objects && $::isStandalone && !$o->{transient}; #- no need to center when set_transient is used
 	$o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
-	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} =~/Gtk2::Window/;
+	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} =~ /Gtk2::Window/;
 
     } else {
 	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
