@@ -499,8 +499,8 @@ wait %d seconds for default boot.
 
     #- add a restore entry if installation is done from disk, in order to allow redoing it.
     if (my $hd_install_path = any::hdInstallPath()) {
-	if (-e "$hd_install_path/boot/vmlinuz" && -e "$hd_install_path/boot/all.rdz" and
-	    my ($cmdline) = cat_("$hd_install_path/boot/menu.lst") =~ /kernel \S+\/boot\/vmlinuz (.*)$/) {
+	if (-e "/tmp/image/boot/vmlinuz" && -e "/tmp/image/boot/all.rdz" and
+	    my ($cmdline) = cat_("/tmp/image/boot/menu.lst") =~ /kernel \S+\/boot\/vmlinuz (.*)$/) {
 	    log::l("adding a restore bootloader entry on $hd_install_path");
 	    add_entry($bootloader, {
 				    type => 'image',
@@ -510,7 +510,7 @@ wait %d seconds for default boot.
 				    append => $cmdline,
 				   });
 	} else {
-	    log::l("no restore bootloader need to be used");
+	    log::l("no restore bootloader need to be used on $hd_install_path");
 	}
     }
 
