@@ -43,6 +43,7 @@ void init_frontend(char * welcome_msg)
 	newtDrawRootText(0, 0, welcome_msg);
 	
 	newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
+	newtRefresh();
 }
 
 
