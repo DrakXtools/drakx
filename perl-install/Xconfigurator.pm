@@ -288,6 +288,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     $card->{prefer_xf3} = !$card->{force_xf4} && ($card->{type} =~ /RIVA TNT/ ||
 						  $card->{type} =~ /RIVA128/ ||
 						  $card->{type} =~ /GeForce/ ||
+						  $card->{type} =~ /SiS / && $card->{type} !~ /SiS 6326/ ||
 						  $card->{type} =~ /NeoMagic /);
     #- take into account current environment in standalone to keep
     #- the XFree86 version.
