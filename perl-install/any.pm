@@ -688,18 +688,6 @@ sub set_login_serial_console {
     substInFile { s/^s$port:.*//; $_ = $line if eof } "$::prefix/etc/inittab";
 }
 
-
-sub runlevel {
-    my ($runlevel) = @_;
-    my $f = "$::prefix/etc/inittab";
-    -r $f or log::l("missing inittab!!!"), return;
-    if ($runlevel) {
-	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f if !$::testing;
-    } else {
-	cat_($f) =~ /^id:(\d):initdefault:\s*$/ && $1;
-    }
-}
-
 sub report_bug {
     my ($prefix, @other) = @_;
 

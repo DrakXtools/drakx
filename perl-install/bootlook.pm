@@ -25,6 +25,7 @@ use Config;
 use POSIX;
 use interactive;
 use standalone;
+use Xconfig::various;
 use any;
 use bootloader;
 use fs;
@@ -42,7 +43,7 @@ my @usernames;
 parse_etc_passwd();
 
 my $no_bootsplash;
-my $x_mode = any::runlevel() == 5;
+my $x_mode = Xconfig::various::runlevel() == 5;
 my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
 my $auto_mode = any::get_autologin();
 my $inmain = 0;
@@ -332,7 +333,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'end'),
-			 gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { any::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk2->exit(0) }),
+			 gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { Xconfig::various::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk2->exit(0) }),
 			 gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk2->exit(0) })
 			)
 	       )

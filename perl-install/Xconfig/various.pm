@@ -7,7 +7,6 @@ use Xconfig::card;
 use Xconfig::default;
 use Xconfig::resolution_and_depth;
 use common;
-use any;
 
 
 sub info {
@@ -46,9 +45,20 @@ sub various {
     1;
 }
 
+sub runlevel {
+    my ($runlevel) = @_;
+    my $f = "$::prefix/etc/inittab";
+    -r $f or log::l("missing inittab!!!"), return;
+    if ($runlevel) {
+	substInFile { s/^id:\d:initdefault:\s*$/id:$runlevel:initdefault:\n/ } $f if !$::testing;
+    } else {
+	cat_($f) =~ /^id:(\d):initdefault:\s*$/ && $1;
+    }
+}
+
 sub choose_xdm {
     my ($in, $auto) = @_;
-    my $xdm = $::isStandalone ? any::runlevel() == 5 : 1;
+    my $xdm = $::isStandalone ? runlevel() == 5 : 1;
 
     if (!$auto || $::isStandalone) {
 	$in->set_help('configureXxdm') if !$::isStandalone;
@@ -57,7 +67,7 @@ sub choose_xdm {
 N("I can setup your computer to automatically start the graphical interface (XFree) upon booting.
 Would you like XFree to start when you reboot?"), $xdm) or return;
     }
-    any::runlevel($xdm ? 5 : 3);
+    runlevel($xdm ? 5 : 3);
 }
 
 sub tvout {
