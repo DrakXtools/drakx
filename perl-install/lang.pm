@@ -18,6 +18,8 @@ use log;
 #- languages, carefully choosen)
 my %languages = (
   'en'  => [ 'English',			undef,	      'en', 'en_US:en' ],
+  'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
+#-'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
   'bg'  => [ 'Bulgarian',		'cp1250',     'bg', 'bg' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:fr_FR:es:fr' ],
@@ -32,6 +34,8 @@ my %languages = (
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
   'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
+#- 'iw' was the old code for hebrew language
+#-'he'  => [ 'Hebrew',			'iso-8859-8', 'he', 'he:iw_IL' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
   'hy'  => [ 'Armenian',                'armscii-8',  'hy', 'hy' ],
