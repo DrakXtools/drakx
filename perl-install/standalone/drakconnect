@@ -208,7 +208,7 @@ $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
 
 my $hbox_frame1_button = new Gtk2::HBox(0,0);
 my $button1 = new Gtk2::Button(N("Configure Internet Access..."));
-$button1->signal_connect(clicked => [ \&configure_net, '', $netcnx, $netc, $intf ]);
+$button1->signal_connect(clicked => sub { configure_net('', $netcnx, $netc, $intf) } );
 $hbox_frame1_button->pack_start($button1, 0, 0, 0);
 $vbox_frame1->pack_start($hbox_frame1_button,0,0,0);
 
@@ -237,7 +237,7 @@ build_list();
 
 my $hbox3 = new Gtk2::HBox(0,0);
 my $button3 = new Gtk2::Button(N("Configure Local Area Network..."));
-$button3->signal_connect(clicked => [ \&configure_lan, '', $netcnx, $netc, $intf ]);
+$button3->signal_connect(clicked => sub { configure_lan('', $netcnx, $netc, $intf) });
 $hbox3->pack_start($button3, 0, 0, 0);
 $vbox2->pack_start($hbox3, 0, 0, 0);
 
@@ -492,10 +492,8 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 					 ),0,0,0);
 	#	$list->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$list->set_selectable($_, 0);
-#	require Data::Dumper;
-#	print "------------\n" . Data::Dumper->Dump([$b],['b']) . "\n";
 	my $hbox_local = new Gtk2::HBox(0,0);
-	my $pix = gtkpng("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
+	my $pix = gtkcreate_img("/usr/share/libDrakX/pixmaps/eth_card_mini.png");
 	$hbox_local->pack_start($pix,0,0,0);
 	$hbox_local->pack_start(new Gtk2::Label("eth$_"),0,0,0);
 	$hbox_local->show_all;
