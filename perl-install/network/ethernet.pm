@@ -174,7 +174,7 @@ sub go_ethernet {
 sub configureNetwork {
     my ($netc, $intf, $first_time) = @_;
     local $_;
-    any::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1);
+    any::load_category($in, 'network/main|usb|pcmcia', !$::expert, 1) or return;
     my @l = detect_devices::getNet() or die _("no network card found");
     my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);
 
