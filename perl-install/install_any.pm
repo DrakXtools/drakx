@@ -1270,24 +1270,106 @@ sub find_root_parts {
 	} else { () }
     } @$fstab;
 }
-sub use_root_part {
-    my ($all_hds, $part, $prefix) = @_;
-    {
-	my $handle = any::inspect($part, $prefix) or die;
 
-	my @l = fs::read_fstab($handle->{dir}, '/etc/fstab', 'keep_default');
+sub migrate_device_names {
+    my ($all_hds, $from_fstab, $new_root, $root_from_fstab, $o_in) = @_;
 
-	my $root = fs::get::root_(\@l);
-	if (!fsedit::is_same_hd($root, $part)) {
-	    log::l("warning: fstab says root partition is $root->{device}, whereas we were reading fstab from $part->{device}");
-	    my ($old, $new) = map { my $s = $_->{device}; $s =~ s/\d+$//; $s } ($root, $part);
-	    if ($old && $new) {
-		log::l("replacing $old with $new");
-		$_->{device} =~ s!^\Q$old!$new! foreach @l;
-		log::l("l contains: $_->{device} $_->{mntpoint}") foreach @l;
-	    }
+    log::l("warning: fstab says root partition is $root_from_fstab->{device}, whereas we were reading fstab from $new_root->{device}");
+    my ($old_prefix, $old_part_number) = devices::simple_partition_scan($root_from_fstab);
+    my ($new_prefix, $new_part_number) = devices::simple_partition_scan($new_root);
+
+    if ($old_part_number != $new_part_number) {
+	log::l("argh, $root_from_fstab->{device} and $old_part_number->{device} are not the same partition number");
+	return;
+    }
+
+    log::l("replacing $old_prefix with $new_prefix");
+    
+    my %h;
+    foreach (@$from_fstab) {
+	if ($_->{device} =~ s!^\Q$old_prefix!$new_prefix!) {
+	    #- this is simple to handle, nothing more to do
+	} elsif ($_->{part_number}) {
+	    my $device_prefix = devices::part_prefix($_);
+	    push @{$h{$device_prefix}}, $_;
+	} else {
+	    #- hopefully this doesn't need anything special
 	}
-	fs::add2all_hds($all_hds, @l);
+    };
+    my @from_fstab_per_hds = values %h or return;
+
+
+    my @current_hds = grep { $new_root->{rootDevice} ne $_->{device} } fs::get::hds($all_hds);
+
+    found_one:
+    @from_fstab_per_hds or return;
+
+    foreach my $from_fstab_per_hd (@from_fstab_per_hds) {
+	my ($matching, $other) = partition { 
+	    my $hd = $_;
+	    every {
+		my $wanted = $_;
+		my $part = find { $_->{part_number} eq $wanted->{part_number} } partition_table::get_normal_parts($hd);
+		$part && $part->{fs_type} && fs::type::can_be_this_fs_type($wanted, $part->{fs_type});
+	    } @$from_fstab_per_hd;
+	} @current_hds;
+	@$matching == 1 or next;
+
+	my ($hd) = @$matching;
+	@current_hds = @$other;
+	@from_fstab_per_hds = grep { $_ != $from_fstab_per_hd } @from_fstab_per_hds;
+
+	log::l("$hd->{device} nicely corresponds to " . join(' ', map { $_->{device} } @$from_fstab_per_hd));
+	foreach (@$from_fstab_per_hd) {
+	    partition_table::compute_device_name($_, $hd);
+	}
+	goto found_one;
+    }
+	
+    #- we can't find one and only one matching hd
+    my @from_fstab_not_handled = map { @$_ } @from_fstab_per_hds;
+    log::l("we still don't know what to do with: " . join(' ', map { $_->{device} } @from_fstab_not_handled));
+
+
+    if (!$o_in) {
+	die 'still have';
+	log::l("well, ignoring them!");
+	return;
+    }
+
+    my $propositions_valid = every {
+	my $wanted = $_;
+	my @parts = grep { $_->{part_number} eq $wanted->{part_number}
+			     && $_->{fs_type} && fs::type::can_be_this_fs_type($wanted, $_->{fs_type}) } fs::get::hds_fstab(@current_hds);
+	$wanted->{propositions} = \@parts;
+	@parts > 0;
+    } @from_fstab_not_handled;
+
+    $o_in->ask_from('', 
+		    N("The "),
+		    [ map {
+			{ label => N("%s (was %s)", $_->{mntpoint}, $_->{device}), val => \$_->{device}, 
+			  format => sub { $_[0] && $_->{device} },
+			  list => [ '', 
+				    $propositions_valid ? @{$_->{propositions}} : 
+				    fs::get::hds_fstab(@current_hds) ] };
+		    } @from_fstab_not_handled ]);
+}
+
+sub use_root_part {
+    my ($all_hds, $part, $o_in) = @_;
+    {
+	my $handle = any::inspect($part, $::prefix) or die;
+
+	my @from_fstab = fs::read_fstab($handle->{dir}, '/etc/fstab', 'keep_default');
+
+	my $root_from_fstab = fs::get::root_(\@from_fstab);
+	if (!fsedit::is_same_hd($root_from_fstab, $part)) {
+	    log::l("from_fstab contained: $_->{device} $_->{mntpoint}") foreach @from_fstab;
+	    migrate_device_names($all_hds, \@from_fstab, $part, $root_from_fstab, $o_in);
+	    log::l("from_fstab now contains: $_->{device} $_->{mntpoint}") foreach @from_fstab;
+	}
+	fs::add2all_hds($all_hds, @from_fstab);
 	log::l("fstab is now: $_->{device} $_->{mntpoint}") foreach fs::get::fstab($all_hds);
     }
     isSwap($_) and $_->{mntpoint} = 'swap' foreach fs::get::really_all_fstab($all_hds); #- use all available swap.

@@ -239,4 +239,17 @@ sub from_devfs {
     undef;
 }
 
+sub simple_partition_scan {
+    my ($part) = @_;
+    $part->{device} =~ /([hs]d[a-z])(\d+)$/;
+}
+sub part_number {
+    my ($part) = @_;
+    (simple_partition_scan($part))[1];
+}
+sub part_prefix {
+    my ($part) = @_;
+    (simple_partition_scan($part))[0];
+}
+
 1;

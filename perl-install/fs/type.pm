@@ -341,6 +341,11 @@ sub isMounted { $_[0]{isMounted} }
 sub isBusy { isMounted($_[0]) || isPartOfRAID($_[0]) || isPartOfLVM($_[0]) || isPartOfLoopback($_[0]) }
 sub isSpecial { isRAID($_[0]) || isLVM($_[0]) || isLoopback($_[0]) || isUBD($_[0]) }
 
+sub can_be_this_fs_type {
+    my ($part, $fs_type) = @_;
+    $part->{fs_type} && ($part->{fs_type} eq 'auto' || member($fs_type, split(':', $part->{fs_type})));
+}
+
 sub maybeFormatted { 
     my ($part) = @_;
     $part->{isFormatted} || !$part->{notFormatted} && !$part->{bad_fs_type_magic};

@@ -162,7 +162,7 @@ sub selectInstallClass {
 	if (ref $p) {
 	    my $part = $p->{part};
 	    log::l("choosing to upgrade partition $part->{device}");
-	    install_any::use_root_part($o->{all_hds}, $part, $o->{prefix});
+	    install_any::use_root_part($o->{all_hds}, $part, $o);
 	    foreach (grep { $_->{mntpoint} } @{$o->{fstab}}) {
 		my ($options, $_unknown) = fs::mount_options::unpack($_);
 		$options->{encrypted} or next;

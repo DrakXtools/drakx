@@ -86,6 +86,12 @@ sub verifyPrimary {
     verifyParts_(@{$pt->{normal}}, $pt->{extended});
 }
 
+sub compute_device_name {
+    my ($part, $hd) = @_;
+    $part->{device} = $hd->{prefix} . $part->{part_number};
+    $part->{devfs_device} = $hd->{devfs_prefix} . '/part' . $part->{part_number};
+}
+
 sub assign_device_numbers {
     my ($hd) = @_;
 
@@ -104,15 +110,15 @@ sub assign_device_numbers {
 		log::l("PPC: found a hole on $hd->{prefix} before $_->{start}, skipping device..."); 
 		$i++;
 	    }
-	    $_->{device} = $hd->{prefix} . $i;
-	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    $_->{part_number} = $i;
+	    compute_device_name($_, $hd);
 	    $start = $_->{start} + $_->{size};
 	    $i++;
 	}
     } else {
 	foreach (@{$hd->{primary}{raw}}) {
-	    $_->{device} = $hd->{prefix} . $i;
-	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    $_->{part_number} = $i;
+	    compute_device_name($_, $hd);
 	    $i++;
 	}
 	foreach (map { $_->{normal} } @{$hd->{extended} || []}) {
@@ -124,8 +130,8 @@ sub assign_device_numbers {
 		will_tell_kernel($hd, del => $_, 'delay_del');
 		push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ];
 	    }
-	    $_->{device} = $dev;
-	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    $_->{part_number} = $i;
+	    compute_device_name($_, $hd);
 	    if ($renumbered) {
 		will_tell_kernel($hd, add => $_, 'delay_add');
 	    }
@@ -338,7 +344,7 @@ sub will_tell_kernel {
 	will_tell_kernel($hd, del => $o_part);
 	will_tell_kernel($hd, add => $o_part);
     } else {
-	my $part_number = sub { $o_part->{device} =~ /(\d+)$/ ? $1 : internal_error("bad device " . description($o_part)) };
+	my $part_number = sub { devices::part_number($o_part) || internal_error("bad device " . description($o_part)) };
 	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, 
 	  [
 	   $action,

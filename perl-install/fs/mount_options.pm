@@ -195,7 +195,7 @@ sub set_default {
     if ($part->{fs_type} eq 'smbfs') {
 	add2hash($options, { 'username=' => '%' }) if !$options->{'credentials='};
     }
-    if (member('vfat', split(':', $part->{fs_type})) || $part->{fs_type} eq 'auto') {
+    if (fs::type::can_be_this_fs_type($part, 'vfat')) {
 
 	put_in_hash($options, {
 			       users => 1, noexec => 0,
@@ -211,7 +211,7 @@ sub set_default {
 				'umask=0' => $opts{security} < 3, 'umask=0022' => $opts{security} < 4,
 			      });
     }
-    if (member('iso9660', split(':', $part->{fs_type})) || $part->{fs_type} eq 'auto') {
+    if (fs::type::can_be_this_fs_type($part, 'iso9660')) {
 	put_in_hash($options, { user => 1, noexec => 0, 'iocharset=' => $opts{iocharset} });
     }
     if ($part->{fs_type} eq 'reiserfs') {

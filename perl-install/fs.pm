@@ -157,8 +157,14 @@ sub subpart_from_wild_device_name {
 	    }
 	    $dev =~ s!/(tmp|u?dev)/!!;
 
-	    my $is_devfs = $dev =~ m!/(disc|part\d+)$!;
-	    $part{$is_devfs ? 'devfs_device' : 'device'} = $dev;
+	    if (my ($is_devfs, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
+		$part{part_number} = $part_number if $part_number;
+		$part{devfs_device} = $dev;
+	    } else {
+		$part{device} = $dev;
+		my $part_number = devices::part_number(\%part);
+		$part{part_number} = $part_number if $part_number;
+	    }
 	    return \%part;
 	} elsif ($dev =~ m!^/! && -f "$::prefix$dev") {
 	    #- loopback file
