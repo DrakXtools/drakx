@@ -19,6 +19,7 @@ check:
 	$(MAKE) -C share/po check
 
 tar-drakxtools: clean
+	rm -rf standalone/pixmaps
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/rpcinfo-flushed.c tools/ddcprobe tools/serial_probe drakxtools
 	cd ../drakxtools ; perl -pi -e 's/^C_RPM.*/C_RPM=0/; s/^C_DRAKX.*/C_DRAKX=0/' c/Makefile
