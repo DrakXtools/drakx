@@ -50,10 +50,22 @@ sub kill_action {
 sub selectLanguage($) {
     my ($o) = @_;
 
-    $o->ask_from_entries_refH("Language",
-			      _("Please, choose a language to use."),
-			      [ { val => \$o->{lang}, type => 'list', 
-				  format => \&lang::lang2text, list => [ lang::list() ] } ]);
+    $o->ask_from_entries_refH(
+	{ messages => _("Please, choose a language to use."),
+	  advanced_messages => _("You can choose other languages that will be available after install"),
+	  callbacks => {
+	      changed => sub { $o->{langs}{$o->{lang}} = 1 },
+	  },
+	},
+	[ { val => \$o->{lang}, type => 'list', 
+	    format => \&lang::lang2text, list => [ lang::list() ] },
+	  (map {;
+	       { val => \$o->{langs}{$_}, type => 'bool', disabled => sub { $o->{langs}{all} },
+		 text => lang::lang2text($_)
+	       } 
+	   } lang::list()),
+	  { val => \$o->{langs}{all}, type => 'bool', text => _("All") }
+	]);
 
     install_steps::selectLanguage($o);
 
@@ -158,21 +170,6 @@ sub selectKeyboard($) {
 				  list => [ keyboard::xmodmaps() ] } ]);
     delete $o->{keyboard_unsafe};
 
-    if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
-	$o->set_help('selectLangs');
-	$o->{langs} ||= [ $o->{lang} ];
-	my $all = member('all', @{$o->{langs}});
-	my $l = $o->ask_many_from_list('',
-			       _("You can choose other languages that will be available after install"),			       
-			       {
-				list => [ lang::list() ],
-				label => sub { lang::lang2text($_) },
-				values => $o->{langs},
-				sort => 1,				
-			       },
-			       { list => ['all'], label => sub { _("All") }, ref => sub { \$all }, shadow => 0 }) or goto &selectKeyboard;
-	$o->{langs} = [ $all ? 'all' : $l ];
-    }
     install_steps::selectKeyboard($o);
 }
 #------------------------------------------------------------------------------
@@ -348,7 +345,7 @@ Continue at your own risk!"));
 }
 
 #------------------------------------------------------------------------------
-sub rebootNeeded($) {
+sub rebootNeeded {
     my ($o) = @_;
     $o->ask_warn('', _("You need to reboot for the partition table modifications to take place"));
 
@@ -356,7 +353,7 @@ sub rebootNeeded($) {
 }
 
 #------------------------------------------------------------------------------
-sub choosePartitionsToFormat($$) {
+sub choosePartitionsToFormat {
     my ($o, $fstab) = @_;
 
     $o->SUPER::choosePartitionsToFormat($fstab);
@@ -374,22 +371,25 @@ sub choosePartitionsToFormat($$) {
     };
 
     #- keep it temporary until the guy has accepted
-    my $toFormat = $o->ask_many_from_list('', _("Choose the partitions you want to format"), 
-        {
-          list => \@l,
-          label => $name2label,
-          value => sub { $_->{toFormat} || $_->{toFormatUnsure} },
-        }) or die "already displayed";
-    #- ok now we can really set toFormat
-    $_->{toFormat} = 1 foreach @$toFormat;
+    $_->{toFormatTmp} = $_->{toFormat} || $_->{toFormatUnsure} foreach @l;
 
-    my @m = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
-    !@m || $o->ask_many_from_list('', _("Check bad blocks?"),
-        { 
-          list => \@m,
-          label => $name2label,
-	  ref => sub { \$_->{toFormatCheck} },
-        }) or goto &choosePartitionsToFormat if $::expert;
+    $o->ask_from_entries_refH_powered(
+        { messages => _("Choose the partitions you want to format"),
+          advanced_messages => _("Check bad blocks?"),
+        },
+        [ map { 
+	    my $e = $_;
+	    ({
+	      text => $name2label->($e), type => 'bool',
+	      val => \$e->{toFormatTmp}
+	     }, {
+	      text => $name2label->($e), type => 'bool', advanced => 1, 
+	      disabled => sub { !$e->{toFormatTmp} },
+	      val => \$e->{toFormatCheck}
+        }) } grep { !isLoopback($_) && !isReiserfs($_) } @l ]        
+    ) or die 'already displayed';
+    #- ok now we can really set toFormat
+    $_->{toFormat} = delete $_->{toFormatTmp} foreach @l;
 }
 
 
@@ -766,10 +766,7 @@ sub setRootPassword {
         } } }, [
 { label => _("Password"), val => \$sup->{password},  hidden => 1 },
 { label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
-  if_($o->{installClass} eq "server" || $::expert,
-{ label => _("Use shadow file"), val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
-{ label => _("Use MD5 passwords"), val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
-  ), if_(!$::beginner,
+  if_(!$::beginner,
 { label => _("Use NIS"), val => \$nis, type => 'bool', text => _("yellow pages") },
   ),
 			 ]) or return;
