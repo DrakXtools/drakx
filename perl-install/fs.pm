@@ -727,7 +727,7 @@ sub mount {
 	}
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	$wait_message->(N("Mounting partition %s", $dev)) if $wait_message;
-	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die \N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)";
+	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die \(N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)");
     } else {
 	log::l("skipping mounting $fs partition");
 	return;
