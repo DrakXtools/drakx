@@ -136,6 +136,9 @@ if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
     symlink '/etc/mgmt.o', "$::prefix/usr/share/speedtouch/mgmt.o";
 }
 
+#- we don't want everyone to have the same ssh key :)
+system("rm -f $::prefix/etc/ssh/*key*");
+
 
     #- XFree
 
