@@ -135,18 +135,20 @@ sub ask_fromW_real {
 	} elsif ($e->{type} eq 'button') {
 	    $w = Newt::Component::Button(-1, -1, simplify_string(may_apply($e->{format}, ${$e->{val}})));
 	} elsif ($e->{type} =~ /list/) {
-	    my ($h, $wi) = (@$l == 1 && $height > 30 ? 10 : 5, 20);
+	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
 	    $has_scroll = 1;
 	    $size = min(int @{$e->{list}}, $h);
 
 	    $w = Newt::Component::Listbox(-1, -1, $size, $scroll); #- NEWT_FLAG_SCROLL	    
-	    foreach (@{$e->{list}}) {
-		my $t = simplify_string(may_apply($e->{format}, $_));
+
+	    my @l = map { 
+		my $t = simplify_string(may_apply($e->{format}, $_), $width - 10);
 		$w->ListboxAddEntry($t, $_);
-		$wi = max($wi, length $t);
-	    }
-	    $w->ListboxSetWidth(min($wi + 3, $width - 7)); # 3 added for the scrollbar (?)
+		$t;
+	    } @{$e->{list}};
+
+	    $w->ListboxSetWidth(max(map { length($_) } @l) + 3); # 3 added for the scrollbar (?)
 	    $get = sub { $w->ListboxGetCurrent };
 	    $set = sub {
 		my ($val) = @_;
@@ -283,9 +285,9 @@ sub wait_message_endW {
 }
 
 sub simplify_string {
-    my ($s) = @_;
+    my ($s, $width) = @_;
     $s =~ s/\n/ /g;
-    $s = substr($s, 0, 40); #- truncate if too long
+    $s = substr($s, 0, $width || 40); #- truncate if too long
     $s;
 }
 
