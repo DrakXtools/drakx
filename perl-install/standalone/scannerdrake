@@ -37,7 +37,7 @@ for (@ARGV) {
 }
 
 $in = 'interactive'->vnew('su', 'default');
-$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+#$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
 if ($::Manual) {manual(); quit();}
 my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
 @f = scanner::findScannerUsbport();
@@ -58,8 +58,6 @@ sub auto {
 
 sub manual {
     my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '' ) or return;
-    # DRIVER usb or scsi
-    #print "$s\n";
     return if $s eq ' None';
     tryConfScanner($s);
 }
@@ -90,14 +88,24 @@ sub tryConfScanner {
      	#$in->ask_warn('scannerdrake', _("This %s scanner uses parallel port, which is unsupported for the moment", $model));
      	#return;
     }
+    if ($scanner::scannerDB->{$model}{ask} =~ /DEVICE/) {
+	$port='/dev/sg0';
+	$in->ask_from('scannerdrake',
+		      _("Scannerdrake was not able to detect your %s scanner.\nPlease select the device where your scanner is plugged", $model),
+		      [
+		       { label => _("choose device"), val => \$port, list => ['/dev/sg0', '/dev/sg1', '/dev/sg2', '/dev/sg3', '/dev/sg4' ], not_edit => 0, sort => 1},
+		      ],
+		     ) or manual();
+    }
+
     if ($scanner::scannerDB->{$model}{server} =~ /printerdrake/) {
      	$in->ask_warn('scannerdrake', _("This %s scanner must be configured by printerdrake.\nYou can launch printerdrake from the Mandrake Control Center in Hardware section.", $model));
      	return;
     }
     scanner::confScanner($model,$port);
-$in->ask_warn(_("Congratulations!"),
-_("Your %s scanner has been configured.\nYou may now scan documents using ``XSane'' from Multimedia/Graphics in the applications menu.", $model));
-
+    $in->ask_warn(_("Congratulations!"),
+		  _("Your %s scanner has been configured.\nYou may now scan documents using ``XSane'' from Multimedia/Graphics in the applications menu.", $model));
+    
 }
 
 sub quit {
@@ -106,6 +114,9 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
+# Revision 1.10  2002/03/10 15:25:10  yduret
+# added ASK DEVICE support
+#
 # Revision 1.9  2002/03/09 14:23:48  yduret
 # added sum up at the end
 #
