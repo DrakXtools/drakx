@@ -78,6 +78,16 @@ Information on each category of packages and each one of them is available in th
 located above buttons of confirmation/selection/deselection."),
 doInstallStep => 
  __("Selected packages are now getting installed on your system. This operation take only a few minutes."),
+configureMouse => 
+ __("Help"),
+configureNetwork =>
+ __("Help"),
+configureTimezone =>
+ __("Help"),
+configureServices =>
+ __("Help"),
+configurePrinter =>
+ __("Help"),
 setRootPassword => 
  __("The system now requires an administrator password for your Linux system.
 This passwd is required of you by twice in order to being certain of its spelling.
@@ -101,11 +111,18 @@ that is essential."),
 doInstallStep => 
  __("The system being now copied on your disk, he is now time to indicate to it from where it will have to start.
 Unless you know exactly what you do, always choose \"First sector of drive\"."),
-
+createBootdisk =>
+ __("Help"),
+setupBootloader =>
+ __("Help"),
+configureX =>
+ __("Help"),
 configureX => 
  __("It is now time to configure the graphic server. First of all, choose your monitor. You have then
 the possibility of testing your configuration and of reconsidering your choices if the latter are not
 appropriate to you."),
+exitInstall =>
+ __("Help"),
 );
 
 
@@ -160,7 +177,7 @@ my $default = {
 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI => 0,
-    mkbootdisk => 0,
+    mkbootdisk => "fd0", # no mkbootdisk if 0 or undef,   find a floppy with 1
     packages => [ qw() ],
     partitionning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
     partitions => [

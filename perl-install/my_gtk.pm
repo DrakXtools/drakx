@@ -371,14 +371,14 @@ sub _ask_from_list($$$$) {
 	     }
 	     1;
 	});
-	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
+#	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
 	push @widgets, $w;
     } @$l;
     gtkadd($list, @widgets);
     gtkadd($o->{window}, 
 	   gtkpack($o->create_box_with_title(@$messages), 
 		   @widgets > 15 ? 
-		     gtkset_usize(createScrolledWindow($list), 200, 300) : 
+		     gtkset_usize(createScrolledWindow($list), 200, 280) : 
 		     $list));
     $widgets[$def]->grab_focus;
 }

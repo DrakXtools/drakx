@@ -221,7 +221,23 @@ sub addUser($) {
 }
 
 sub createBootdisk($) {
-    lilo::mkbootdisk($o->{prefix}, versionString()) if $o->default("mkbootdisk") && !$::testing;
+    my $dev = $o->default("mkbootdisk") or return;
+
+    my @l = detect_devices::floppies();
+
+    $dev = shift @l if $dev eq "1"; # special case to specify autochoose
+
+    return if $::testing;
+
+	
+	unshift @l, $
+
+	$o->{mkbootdisk} = shift @l || die _("no floppy available") if $o->{mkbootdisk} eq "1";
+       
+	    eval { 
+		lilo::mkbootdisk($o->{prefix}, versionString(), "/dev/" . $o->{mkbootdisk}) 
+	      };
+	    $o->{mkbootdisk} = 1;
 }
 
 sub setupBootloader($) {
