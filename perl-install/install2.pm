@@ -380,6 +380,7 @@ sub main {
 	    patch     => sub { $patch = 1 },
 	    defcfg    => sub { $cfg = $v },
 	    recovery  => sub { $::recovery = 1 },
+	    restore   => sub { $::restore = 1 },
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio" },
