@@ -888,10 +888,10 @@ sub setupBootloaderBefore {
 					 );
 
 	#- propose the default fb mode for kernel fb, if aurora or bootsplash is installed.
-	my $need_fb = any {
-	    my $p = pkgs::packageByName($o->{packages}, $_);
+	my $need_fb = do {
+	    my $p = pkgs::packageByName($o->{packages}, 'bootsplash');
 	    $p && $p->flag_installed;
-	} 'Aurora', 'bootsplash';
+	};
         bootloader::suggest($o->{bootloader}, $o->{all_hds}{hds}, $o->{fstab},
 			    vga_fb => ($force_vga || $vga && $need_fb) && $o->{vga}, 
 			    quiet => $o->{meta_class} ne 'server');
