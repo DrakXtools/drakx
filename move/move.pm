@@ -633,7 +633,7 @@ sub install2::startMove {
         $ENV{GDMSESSION} = 1;  #- disable ~/.xsession-errors in Xsession (waste of usb key writes)
 	exec '/etc/X11/Xsession', 'KDE';  #- call it with KDE parameter to keep background
     } else {
-	exec 'xwait' or c::_exit(0);
+	exec 'xwait', '-permanent' or c::_exit(0);
     }
 }
 
