@@ -1,9 +1,9 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-RELEASE_BOOT_IMG = cdrom.img hd.img hdreiser.img network.img 
+RELEASE_BOOT_IMG = cdrom.img hd.img hdreiser.img# network.img 
 ifeq (i386,$(ARCH))
-RELEASE_BOOT_IMG += all.img blank.img other.img pcmcia.img
+#RELEASE_BOOT_IMG += all.img blank.img other.img pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
@@ -40,7 +40,7 @@ autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/boot
 #	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
-	cp -f vmlinuz {hd,hdreiser,cdrom,network,all,other}.rdz $(ROOTDEST)/boot
+	cp -f vmlinuz $(BOOT_RDZ) $(ROOTDEST)/boot
 	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
 endif
 
@@ -77,7 +77,7 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload: install #clean
+upload: clean install
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base compss* ;\

@@ -423,7 +423,7 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
-	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk", 
+	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk",
 			    "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
     }
 
