@@ -46,12 +46,9 @@ Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libd
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
-Contains XFdrake, diskdrake, keyboarddrake, lspcidrake, mousedrake,
-printerdrake and drakboot.
-
-XFdrake: menu-driven program which walks you through setting up your X
-server. It works on console and under X :)
-It autodetects both monitor and video card if possible.
+Contains , diskdrake, drakautoinst, drakbackup, drakboot, drakfont, draknet,
+drakxtv, keyboarddrake, liveupdate, lspcidrake, mousedrake, printerdrake
+and XFdrake.
 
 diskdrake: The purpose of the DiskDrake project is to make hard disk
 partitioning easier. It is graphical, simple and powerful. Different
@@ -59,29 +56,32 @@ skill levels are available (newbie, advanced user, expert). It's
 written entirely in Perl and Perl/Gtk. It uses resize_fat which is a
 perl rewrite of the work of Andrew Clausen (libresize).
 
+drakautoinst: help you configure an automatic installation replay
+
 drakbackup: backup and restore your system.
 
-drakfont: import some fonts in the system.
-
-keyboarddrake: configures your keyboard (both console and X)
-
-lspcidrake: displays your pci information, *and* the corresponding
-kernel module.
-
+drakboot: configures your boot configuration (Lilo/GRUB, Aurora, X, autologin)
 mousedrake: configures and autodetects your mouse
 
-printerdrake: detects and configures your printer
+drakfont: import some fonts in the system.
 
 draknet: LAN/Internet connection configuration. It handles ethernet,
 ISDN, DSL, cable, modem.
 
+drakxtv: auto configure tv card for xawtv grabber
+keyboarddrake: configures your keyboard (both console and X)
+
 liveupdate: live update software.
 
-drakboot: configures your boot configuration (Lilo/GRUB, Aurora, X, autologin)
+lspcidrake: displays your pci information, *and* the corresponding
+kernel module.
 
-drakautoinst: help you configure an automatic installation replay
+printerdrake: detects and configures your printer
 
-drakxtv: auto configure tv card for xawtv grabber
+XFdrake: menu-driven program which walks you through setting up your X
+server. It works on console and under X :)
+It autodetects both monitor and video card if possible.
+
 
 %description newt
 This add the capability to be runned behind a web server to the drakx tools.
@@ -213,7 +213,13 @@ done
 
 %changelog 
 * Mon Jul  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
-- 
+- harddrake2:
+	o no need to 'use strict' in "binary" => remove warnings 
+
+- spec:
+	o reorder entries in description
+	o list all entries in first line of description
+	o fix post: add start argument
 
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-2mdk
 - spec :
@@ -299,16 +305,19 @@ done
 - (dams)
 	* standalone/net_monitor: make gc happy
 	* modparm.pm, share/po/fr.po: corrected
-	* standalone/draknet: corrected network/internet restart when already connected
+	* standalone/draknet: corrected network/internet restart when already
+	connected
 	* standalone/drakfont: corrected bad system command
 	* standalone/drakautoinst: corrected HASH and ARRAY label
 - (gc)
 	* standalone/drakgw: 
-	  - call net_monitor to disable internet connection before network-restart
+	  - call net_monitor to disable internet connection before
+	    network-restart
 	  - user return value when status'ing the
 	  initscripts rather than grepping their text output
 - (pixel)
-	* standalone/fileshareset (nfs_exports::update_server): ensure portmap is running
+	* standalone/fileshareset (nfs_exports::update_server): ensure portmap
+	is running
 
 * Wed Mar  6 2002 Pixel <pixel@mandrakesoft.com> 1.1.7-90mdk
 - corrected font in wizard (dams)
