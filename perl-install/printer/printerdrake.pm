@@ -2061,7 +2061,7 @@ sub setup_common {
 					/usr/lib/libsane-hpoj.so.1)) ||
 			 (!files_exist(qw(/usr/bin/xsane)) &&
 			  !files_exist(qw(/usr/bin/kooka)) &&
-			  !$in->do_pkgs->is_installed('scanner-gui')))) {
+			  ($::isInstall || !$in->do_pkgs->is_installed('scanner-gui'))))) {
 			undef $w;
 			$w = $in->wait_message(
 			     N("Printerdrake"),
