@@ -467,7 +467,8 @@ sub test_mouse {
     };
     my $drawarea; 
     $drawarea = sub {
-	$draw_pixbuf->($image, 0, 0, 210, 350);
+	my ($height) = @_;
+	$draw_pixbuf->($image, 0, 0, 210, $height || 200);
 	if ($::isInstall) {
 	    $draw_text->(N("Please test the mouse"), $height - 120);
 	    if ($x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
@@ -477,10 +478,11 @@ sub test_mouse {
 	}
     };
 
+    my $timeout;
     my $paintButton = sub {
 	my ($nb) = @_;
 	my $x = 60 + $nb*33;
-	$drawarea->();
+	$timeout or $drawarea->();
 	if ($nb == 0) {
 	    $draw_pixbuf->($xpms{left}, 31, 52, 59, 91);
 	} elsif ($nb == 2) {
@@ -500,14 +502,15 @@ sub test_mouse {
 		$draw_pixbuf->($xpms{ad}, 102, 131, 6, 8);
 	    }
 	    $draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
-	    Gtk2->timeout_add(200, sub { $drawarea->(); 0 });
+	    $timeout and Gtk2->timeout_remove($timeout);
+	    $timeout = Gtk2->timeout_add(100, sub { $drawarea->(); $timeout = 0; 0 });
 	}
     };
     
     $darea->signal_connect(button_press_event => sub { $paintButton->($_[1]->button - 1) });
     $darea->signal_connect(scroll_event => sub { $paintButton->($_[1]->direction eq 'up' ? 3 : 4) });
     $darea->signal_connect(button_release_event => sub { $drawarea->() });
-    $darea->signal_connect(expose_event => sub { $drawarea->() });
+    $darea->signal_connect(expose_event => sub { $drawarea->(350) });
     $darea->set_size_request($width, $height);
 }
 
