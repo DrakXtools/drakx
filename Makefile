@@ -1,9 +1,9 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-RELEASE_BOOT_IMG = cdrom.img network.img hd.img hdreiser.img 
+RELEASE_BOOT_IMG = cdrom.img hd.img hdreiser.img network.img 
 ifeq (i386,$(ARCH))
-RELEASE_BOOT_IMG += all.img blank.img other.img # pcmcia.img
+RELEASE_BOOT_IMG += all.img blank.img other.img pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
@@ -13,7 +13,7 @@ BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
 BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
-DIRS = tools mdk-stage1
+DIRS = tools #mdk-stage1
 
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
@@ -23,9 +23,9 @@ UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
 .PHONY: dirs $(FLOPPY_IMG) install
 
-install: build autoboot rescue
+install: #rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
-	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
+#	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
 ifeq (alpha,$(ARCH))
 	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
@@ -77,10 +77,11 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
-upload: clean install
+upload: install #clean
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base compss* ;\
+	upload Mandrake/base rpmsrate ;\
 	upload Mandrake/base *_stage2.gz ;\
 	upload boot '' ;\
 	upload misc genbasefiles ;\
