@@ -477,15 +477,19 @@ sub formatMountPartitions {
 
 #------------------------------------------------------------------------------
 sub setPackages {
-    my ($o) = @_;
-    my $w = $o->wait_message('', _("Looking for available packages..."));
-    $o->SUPER::setPackages;
-}
-#------------------------------------------------------------------------------
-sub selectPackagesToUpgrade {
-    my ($o) = @_;
-    my $w = $o->wait_message('', _("Finding packages to upgrade..."));
-    $o->SUPER::selectPackagesToUpgrade();
+    my ($o, $rebuild_needed) = @_;
+
+    my $w = $o->wait_message('', $rebuild_needed ? _("Looking for available packages and rebuilding rpm database...") :
+			     _("Looking for available packages..."));
+    install_any::setPackages($o, $rebuild_needed);
+
+    if ($rebuild_needed) {
+	$w->set(_("Finding packages to upgrade..."));
+	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
+    } else {
+	$w->set(_("Looking at packages already installed..."));
+	pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
+    }
 }
 #------------------------------------------------------------------------------
 sub choosePackages {
@@ -509,8 +513,10 @@ sub choosePackages {
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
     my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
+    log::l("default size (level $def_mark) is : " . formatXiB($def_size));
     my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
+    log::l("max size (level $min_mark) is : " . formatXiB($def_size));
     pkgs::restoreSelected($b);
 
     $o->chooseGroups($packages, $compssUsers, $min_mark, \$individual, $max_size) if !$::corporate;
