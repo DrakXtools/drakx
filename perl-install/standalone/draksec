@@ -36,7 +36,6 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
-$::isStandalone=1;
 my $in = 'interactive'->vnew('su', 'security');
 
 begin:
