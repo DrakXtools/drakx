@@ -641,3 +641,20 @@ sub stop_internet {
 #                WONDERFULL pad
 #---------------------------------------------
 1;
+
+=head1 network::netconnect::detect()
+
+=head2 example of usage
+
+use lib qw(/usr/lib/libDrakX);
+use network::netconnect;
+use Data::Dumper;
+
+use class_discard;
+
+local $in = class_discard->new;
+
+network::netconnect::init_globals($in);
+my %i;
+&network::netconnect::detect(\%i);
+print Dumper(\%i),"\n";
