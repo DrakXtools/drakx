@@ -1,5 +1,92 @@
 2001/08/24  dam's  <damien@mandrakesoft.com>
 
+	* network/adsl.pm: bugfix, speedtouch help
+
+	* standalone/mousedrake: updated mouse test
+
+2001/08/24  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: fixed possible bug (not sorted partition when calling
+	mount_part).
+
+	* install_any.pm: fixed hdInstallPath for an hd installation without
+	usingRamdisk (not installing
+	urpmi in such case).
+	updated packages to copy for printerdrake, removed almost obsoletes
+	XFree86
+	3.3.6 servers (8514, AGX, Mach32, Mach8, Mono, P9000, W32, I128, VGA16,
+	3DLabs)
+	which means user will have to change CD back to CD#1 if he a such a
+	card.
+	removed obsolete code for cond_remount and cond_umount and update
+	hdInstallPath
+	for hd installation.
+
+	* diskdrake_interactive.pm: fixed typo common::usingRamdisk() instead of
+	common::useRamdisk().
+	take care mount point action is available for the hd installation
+	partition only
+	if a ramdisk is used (as it can be unmounted).
+	use more global isMagicPart instead of isInstallHdPart.
+	added real_mntpoint documentation and take care of hd install partition
+	for
+	available actions.
+
+	* fs.pm: take care of using ram disk to remap mntpoint of hd installation
+	partition.
+	fixed partition never seen as mounted, added special case for
+	real_mntpoint to
+	remount magic partition on the right place.
+
+2001/08/24  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/libstdio/fdglue.c: fix this dietlibc... hope the
+	uncompressing of ramdisk will rulz now
+
+	* mdk-stage1/automatic.c: revert my auto->interactive patch
+
+	* mdk-stage1/network.c: allow unsetting of automatic mode if not enough
+	parameter provided in network steps
+
+	* mdk-stage1/dietlibc/Makefile, mdk-stage1/bzlib/Makefile: use CC rather
+	than gcc statically
+
+	* mdk-stage1/tools.c, mdk-stage1/mount.c, mdk-stage1/probing.c: enable
+	install from Compaq Smart Array
+
+2001/08/24  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/locales-skeleton.tar.bz2, share/fonts.tar.bz2, keyboard.pm:
+	enabling euro and utf-8 for some languages; added unicode font
+
+2001/08/24  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: remove the cond_umount_hdimage and
+	cond_remount_hdimage
+
+	* tools/pcmcia_config.patch: update the patch
+
+	* lang.pm: no need for UTF-8/LC_CTYPE
+	(load_mo): if not usingRamdisk, don't try getFile
+
+	* diskdrake_interactive.pm: remove the cond_umount_hdimage and
+	cond_remount_hdimage
+	(Done): do not write fstab nor ask about it in install
+
+	* fs.pm (mount): allow to mount 'proc' and 'usbdevfs'
+
+	* Makefile: ensure no .orig are generated when the pcmcia patch is applied
+
+	* partition_table.pm (write): do not die when real_mntpoint fs fail to
+	unmount/remount, just log
+	(write): unmount+remount real_mntpoint before doing the kernel_read
+
+	* share/gen_locales.sh: no need for UTF-8/LC_CTYPE
+
+	* pkgs.pm: fix "invalid file"
+
+2001/08/24  dam's  <damien@mandrakesoft.com>
+
 	* network/netconnect.pm: speedtouch configuration
 
 	* my_gtk.pm: gtk_create_xpm handles no absolute xpm path
