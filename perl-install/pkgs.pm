@@ -1478,7 +1478,17 @@ sub install($$$;$$) {
 		close OUTPUT;
 
 		#- now search for child process which may be locking the cdrom, making it unable to be ejected.
-		if (my @killpid = difference2([ grep { /^\d+$/ } all("/proc") ], \@prev_pids)) {
+		my @allpids = grep { /^\d+$/ } all("/proc");
+		my %ppids;
+		foreach (@allpids) {
+		    cat_("/proc/$_/status") =~ /^PPid:\s+(\d+)/m;
+		    push @{$ppids{$1 || 1}}, $_;
+		}
+		my @killpid = difference2(\@allpids, [ @prev_pids, 
+						       difference2([ $$, hashtree2list(getppid, \%ppids) ],
+								   [ hashtree2list($$, \%ppids) ]) ]);
+	
+		if (@killpid) {
 		    log::l("ERROR: DrakX should not have to clean the packages shit. Killing ". join(", ", @killpid));
 		    kill 15, @killpid;
 		    sleep 2;
@@ -1676,6 +1686,18 @@ ypserv
 	my $p = packageByName($packages, $_);
 	$p && packageFlagSelected($p);
     } @naughtyServers;
+}
+
+sub hashtree2list {
+    my ($e, $h) = @_;
+    my @l;
+    my @todo = $e;
+    while (@todo) {
+	my $e = shift @todo;
+	push @l, $e;
+	push @todo, @{$h->{$e}};
+    }
+    @l;
 }
 
 1;
