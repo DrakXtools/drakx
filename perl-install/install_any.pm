@@ -385,7 +385,11 @@ sub ask_if_suppl_media {
 
 
 Do you have a supplementary installation media to configure?",
-	    join ", ", sort uniq(map { $_->{descr} } values %{$o->{packages}{mediums}})));
+	    join ", ", uniq(sort {
+		    (my $x) = $a =~ /CD(\d+)/;
+		    (my $y) = $b =~ /CD(\d+)/;
+		    $x && $y ? $x <=> $y : $a cmp $b
+		} map { $_->{descr} } values %{$o->{packages}{mediums}})));
     $o->ask_from(
 	'', $msg,
 	[ {
