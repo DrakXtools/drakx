@@ -54,8 +54,7 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {})
-      || return $o->ask_yesorno('', N("Do you really want to leave the installation?")) ? $o->exit : &selectLanguage;
+    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
@@ -862,7 +861,7 @@ sub summary {
 { label => N("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
 { label => N("Bootloader"), val => \$o->{bootloader}, clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) }, format => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" } },
-{ label => N("Graphical interface"), val => \$o->{raw_X}, clicked => sub { configureX($o, 'expert') }, format => sub { $o->{raw_X} ? Xconfig::resolution_and_depth::to_string($o->{raw_X}->get_resolution) : N("not configured") } },
+{ label => N("Graphical interface"), val => \$o->{raw_X}, clicked => sub { configureX($o, 'expert') }, format => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") } },
 { label => N("Network"), val => \$o->{netcnx}{type}, format => sub { $_[0] || N("not configured") }, clicked => sub { 
       require network::netconnect;
       network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, $o->{lang} eq "fr_FR" && $o->{keyboard}{KEYBOARD} eq "fr", 1);
