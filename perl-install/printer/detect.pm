@@ -31,6 +31,27 @@ sub whatPrinter {
     grep { $_->{val}{CLASS} eq "PRINTER" } @res;
 }
 
+sub whatParport() {
+    my @res;
+    foreach (0..3) {
+	my $elem = {};
+	my $F;
+	open $F, "/proc/parport/$_/autoprobe" or open $F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
+	{
+	    local $_;
+	    while (<$F>) { 
+		if (/(.*):(.*);/) { #-#
+		    $elem->{$1} = $2;
+		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
+		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
+		}
+	    }
+	}
+	push @res, { port => "/dev/lp$_", val => $elem };
+    }
+    @res;
+}
+
 sub whatPrinterPort() {
     grep { tryWrite($_) } qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9);
 }

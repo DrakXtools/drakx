@@ -565,27 +565,6 @@ sub isLaptop {
 		    matching_desc('ATI.*(Mobility|LT)'));
 }
 
-sub whatParport() {
-    my @res;
-    foreach (0..3) {
-	my $elem = {};
-	my $F;
-	open $F, "/proc/parport/$_/autoprobe" or open $F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
-	{
-	    local $_;
-	    while (<$F>) { 
-		if (/(.*):(.*);/) { #-#
-		    $elem->{$1} = $2;
-		    $elem->{$1} =~ s/Hewlett[-\s_]Packard/HP/;
-		    $elem->{$1} =~ s/HEWLETT[-\s_]PACKARD/HP/;
-		}
-	    }
-	}
-	push @res, { port => "/dev/lp$_", val => $elem };
-    }
-    @res;
-}
-
 sub usbMice      { grep { $_->{media_type} =~ /\|Mouse/ && $_->{driver} !~ /Tablet:wacom/ ||
 			  $_->{driver} =~ /Mouse:USB/ } usb_probe() }
 sub usbWacom     { grep { $_->{driver} =~ /Tablet:wacom/ } usb_probe() }
