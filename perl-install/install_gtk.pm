@@ -110,33 +110,57 @@ sub create_help_window {
 }
 
 #------------------------------------------------------------------------------
+my %steps;
 sub create_steps_window {
     my ($o) = @_;
 
     return if $::stepswidth == 0;
 
-    $o->{steps_window}->destroy if $o->{steps_window};
-
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(0, 100);
+    $w->{rwindow}->set_uposition(8, 160);
     $w->{rwindow}->set_size_request($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
 
-    my @l = ('', '', N("System installation"));
-    my $s;
+    $steps{$_} = gtkcreate_pixbuf("steps_$_") foreach qw(on off);
+
+    gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = Gtk2::Label->new(N("System installation")), '');
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
-	if ($_ eq 'setRootPassword') {
-	    push @l, $s, N("System configuration");
-	    $s = '';
-	}
-	$s .= ($o->{steps}{$_}{done} ? '+' : '-') . ' ' . translate($o->{steps}{$_}{text}) . "\n";	
+	$_ eq 'setRootPassword'
+	  and gtkpack__($vb, '', '', $steps{conf} = Gtk2::Label->new(N("System configuration")), '');
+	$steps{steps}{$_} = { img => gtkcreate_img('steps_off.png'),
+			      txt => Gtk2::Label->new($o->{steps}{$_}{text}) };
+	gtkpack__($vb, gtkpack__(Gtk2::HBox->new(0, 7), $steps{steps}{$_}{img}, $steps{steps}{$_}{txt}));
+					      
     }
 
-    gtkadd($w->{window}, gtkpack__(Gtk2::VBox->new(0,15), @l, $s));
+    gtkadd($w->{window}, $vb);
     $w->show;
     $o->{steps_window} = $w;
+}
+
+sub update_steps_position {
+    my ($o) = @_;
+    return if !$steps{steps};
+    my $last_step;
+    foreach (@{$o->{orderedSteps}}) {
+	exists $steps{steps}{$_} or next;
+	if ($o->{steps}{$_}{entered} && !$o->{steps}{$_}{done}) {
+	    $steps{steps}{$_}{img}->set_from_pixbuf($steps{on});
+	    $last_step and $steps{steps}{$last_step}{img}->set_from_pixbuf($steps{off});
+	    return;
+	}
+	$last_step = $_;
+    }
+}
+
+sub update_steps_labels {
+    my ($o) = @_;
+    return if !$steps{steps};
+    $steps{inst}->set_label(N("System installation"));
+    $steps{conf}->set_label(N("System configuration"));
+    $steps{steps}{$_}{txt}->set_label(translate($o->{steps}{$_}{text})) foreach keys %{$steps{steps}};
 }
 
 #------------------------------------------------------------------------------

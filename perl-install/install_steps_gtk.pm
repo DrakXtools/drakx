@@ -124,6 +124,7 @@ sub new($$) {
     install_gtk::init_sizes();
     install_gtk::install_theme($o);
     install_gtk::create_logo_window($o);
+    install_gtk::create_steps_window($o);
 
     $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
@@ -137,7 +138,7 @@ sub enteringStep {
 
     printf "Entering step `%s'\n", $o->{steps}{$step}{text};
     $o->SUPER::enteringStep($step);
-    install_gtk::create_steps_window($o);
+    install_gtk::update_steps_position($o);
 #    install_gtk::create_help_window($o); #- HACK: without this it doesn't work (reaches step doPartitionDisks then fail)
 }
 sub leavingStep {
@@ -149,7 +150,7 @@ sub leavingStep {
 sub charsetChanged {
     my ($o) = @_;
     Gtk2->set_locale;
-    install_gtk::create_steps_window($o);
+    install_gtk::update_steps_labels($o);
 }
 
 #-######################################################################################
