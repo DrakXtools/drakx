@@ -48,6 +48,7 @@ unless ($::no_ugtk_init) {
     Gtk2->init;
     c::bind_textdomain_codeset($_, 'UTF8') foreach 'libDrakX', @::textdomains;
     $::need_utf8_i18n = 1;
+    Glib->install_exception_handler(sub { warn "$_[0]"; exit(255) }) if 0.95 < $Gtk2::VERSION;
 }
 
 
