@@ -581,6 +581,7 @@ sub loadO {
 	    local $/ = "\0";
 	    no strict;
 	    eval <$fh>;
+	    close $fh;
 	    $@ and log::l("Bad kickstart file $f (failed $@)");
 	}
 	add2hash_($o ||= {}, $O);

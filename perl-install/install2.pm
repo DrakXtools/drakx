@@ -545,6 +545,7 @@ sub main {
     if ($::g_auto_install) {
 	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
 	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
+	$o->{method} ||= "cdrom";
     }
 
     unless ($::testing) {

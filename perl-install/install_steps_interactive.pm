@@ -111,9 +111,8 @@ sub selectInstallClass($@) {
     );
 
     my $verifInstallClass = sub {
-	$o->{installClass} = $c{$_[0]};
-	$::beginner = $o->{installClass} eq "beginner";
-	$::expert   = $o->{installClass} eq "expert" &&
+	$::beginner = $c{$_[0]} eq "beginner";
+	$::expert   = $c{$_[0]} eq "expert" &&
 	  $o->ask_from_list_('',
 _("Are you sure you are an expert? 
 Hey no kidding, you will be allowed powerfull but dangerous things here."), 
@@ -124,7 +123,9 @@ Hey no kidding, you will be allowed powerfull but dangerous things here."),
 					      first(list2kv(@c)), ${{reverse %c}}{$o->{installClass}},
 					      [ __("Install"), __("Upgrade") ], $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
 
-    unless ($::beginner || $o->{isUpgrade}) {
+    if ($::beginner || $o->{isUpgrade}) {
+	$o->{installClass} = "normal";
+    } else {
 	my %c = (
 		 normal    => _("Normal"),
 		 developer => _("Development"),
@@ -640,14 +641,14 @@ _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("
 #------------------------------------------------------------------------------
 sub addUser($) {
     my ($o, $clicked) = @_;
-    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", passwd => "mandrake", realname => "default" } : {};
+    my $u = $o->{user} ||= $o->{security} < 1 ? { name => "mandrake", password => "mandrake", realname => "default" } : {};
     $u->{password2} ||= $u->{password} ||= "";
     $u->{shell} ||= "/bin/bash";
     $u->{icon} ||= translate('default');
     my @fields = qw(realname name password password2);
     my @shells = install_any::shells($o);
 
-    if (($o->{security} >= 2 || $clicked) && $o->ask_from_entries_refH(
+    if (($o->{security} >= 2 && !$::beginner || $clicked) && $o->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), $o->{security} >= 4 && !@{$o->{users}} ? () : _("Done") ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
@@ -965,7 +966,7 @@ sub setupXfree {
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
 
-    return unless $::expert && $::corporate;
+    $::expert && $::corporate || $::g_auto_install or return;
 
     my ($floppy) = detect_devices::floppies();
 
@@ -980,23 +981,24 @@ sub generateAutoInstFloppy($) {
       ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
 	
     if (my $fd = install_any::getFile("$image.img")) {
-	my $w = $o->wait_message('', _("Creating auto install floppy"));
-	local *OUT;
-	open OUT, ">$dev" or log::l("failed to write $dev"), return;
-	local $/ = \ (16 * 1024);
-	print OUT foreach <$fd>;
+	 my $w = $o->wait_message('', _("Creating auto install floppy"));
+	 local *OUT;
+	 open OUT, ">$dev" or log::l("failed to write $dev"), return;
+	 local $/ = \ (16 * 1024);
+	 print OUT foreach <$fd>;
     }
     fs::mount($dev, "/floppy", "vfat", 0);
     substInFile { s/timeout.*//; s/^(\s*append)/$1 kickstart=floppy/ } "/floppy/syslinux.cfg";
 
+    output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
+    output "/floppy/boot.msg", "\n0c",
+"!! If you press enter, an auto-install is going to start.
+   All data on this computer is going to be lost !!
+", "07\n";
+
     local $o->{partitioning}{clearall} = 1;
     install_any::g_auto_install("/floppy/auto_inst.cfg");
 
-    output "/floppy/ks.cfg", install_any::generate_ks_cfg($o);
-    output "/floppy/boot.msg", "0c",
-"!! If you press enter, an auto-install is going to start.
-   All data on this computer is going to be lost !!
-", "07";
     fs::umount("/floppy");
 }
 
