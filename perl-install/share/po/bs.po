@@ -1,11 +1,12 @@
 # Copyright (C) 2001. Free Software Foundation, Inc.
 # Amila Akagić <bono@lugbih.org>, 06. 2001.
+# Vedran Ljubović <vljubovic@smartnet.ba>, 2002, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2003-03-12 17:27+0100\n"
-"PO-Revision-Date: 2003-03-14 11:42--800\n"
+"PO-Revision-Date: 2003-03-15 18:00--800\n"
 "Last-Translator: Vedran Ljubović <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <lokal-subscribe@lugbih.org>\n"
 "MIME-Version: 1.0\n"
@@ -11381,14 +11382,14 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Štampam/skeniram/foto kartica na \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Za listu opcija koje su dostupne za trenutni štampač ili pročitajte listu "
-"koja je data ispod ili kliknite na dugme \"Lista opcija za štampu\".%s\n"
+"koja je data ispod ili kliknite na dugme \"Lista opcija za štampu\".%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11635,7 +11636,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "Upload firmware-a za HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12724,7 +12725,7 @@ msgstr "Nedostaje IP adresa servera!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Ako nije naveden port, podrazumijevaće se 631."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12861,11 +12862,18 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
+"Ako ovo uključite, moći ćete štampati obične tekstualne datoteke na "
+"japanskom jeziku. Koristite ovu funkciju samo ako zaista želite štampati "
+"japanski tekst, jer kada je aktivirana, više ne možete štampati znakove sa "
+"akcentima u latiničnim fontovima (npr. naša slova). Takođe nećete moći "
+"prilagoditi margine, veličine znakova, itd. Ova postavka će utjecati samo na "
+"štampače koji su definisani na ovom računaru. Ako želite štampati japanski "
+"tekst na udaljenom računaru, trebate aktivirati ovu funkciju na tom računaru."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Promjenite sistem štampe"
+msgstr "Japanski režim štampanja"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12941,9 +12949,9 @@ msgstr ""
 "dostupni drugim računarima i kojim drugim računarima."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "Podešavanje OKI winprinter-a"
+msgstr "Podešavanje CUPS štampača"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12982,6 +12990,14 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
+"Za štampač HP LaserJet 1000 potrebno je da uploadujete firmwer prilikom "
+"paljenja. Potrebno je da skinete Windows drajvere sa HPove web stranice "
+"(firmware koji se nalazi na CDu koji je došao uz štampač ne radi) i izvadite "
+"firmware datoteku. Ovo ćete uraditi tako što ćete raspakovati "
+"samoraspakujuću '.exe' datoteku koristeći 'unzip' alat, te potražiti "
+"datoteku 'sihp1000.img'. Kopirajte ovu datoteku u direktorij '/etc/printer'. "
+"Ovdje će je automatski pronaći uploader skripta i poslati štampaču svaki put "
+"kada štampač bude spojen i upaljen.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -19598,151 +19614,29 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS server, SMB server, Proxy server, ssh server"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Audio station"
-msgstr "Multimedijalna stanica"
+msgstr "Audio stanica"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Sound playing/editing programs"
-msgstr "Programi za pregled i editovanje zvuka i videa"
+msgstr "Programi za slušanje i editovanje zvuka"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video station"
-msgstr "Stanica za igru"
+msgstr "Video stanica"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video playing programs"
-msgstr "Programi za pregled i editovanje zvuka i videa"
+msgstr "Programi za pregled video datoteka"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphic station"
-msgstr "Stanica za igru"
+msgstr "Grafička stanica"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphics programs"
-msgstr "Grafički programi kao što je Gimp"
+msgstr "Grafički programi"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
-msgstr ""
-"Skup alata za čitanje i slanje pošte i news-a (pine, mutt, tin...) i "
-"pregledanje Weba"
-
-#~ msgid "Printer sharing"
-#~ msgstr "Dijeljenje štampača"
-
-#~ msgid ""
-#~ "To know about the options available for the current printer read either "
-#~ "the list shown below or click on the \"Print option list\" button.%s%s\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Za listu opcija koje su dostupne za trenutni štampač ili pročitajte listu "
-#~ "koja je data ispod ili kliknite na dugme \"Lista opcija za štampu\".%s%s\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "Your printer belongs to the group of GDI laser printers (winprinters) "
-#~ "sold by different manufacturers which uses the Zenographics ZJ-stream "
-#~ "raster format for the data sent to the printer. The driver for these "
-#~ "printers is still in a very early development stage and so it will "
-#~ "perhaps not always work properly. Especially it is possible that the "
-#~ "printer only works when you choose the A4 paper size.\n"
-#~ "\n"
-#~ "Some of these printers, as the HP LaserJet 1000, for which this driver "
-#~ "was originally created, need their firmware to be uploaded to them after "
-#~ "they are turned on. In the case of the HP LaserJet 1000 you have to "
-#~ "search the printer's Windows driver CD or your Windows partition for the "
-#~ "file \"sihp1000.img\" and upload the file to the printer with one of the "
-#~ "following commands:\n"
-#~ "\n"
-#~ "     lpr -o raw sihp1000.img\n"
-#~ "     cat sihp1000.img > /dev/usb/lp0\n"
-#~ "\n"
-#~ "The first command can be given by any normal user, the second must be "
-#~ "given as root. After having done so you can print normally.\n"
-#~ msgstr ""
-#~ "Vaš štampač spada u grupu GDI laserskih štampača (winprinteri) koje "
-#~ "prodaju razni proizvođači, koji koriste Zenographics ZJ-stream rasterski "
-#~ "format za podatke koji se šalju štampaču. Drajver za ove štampače je još "
-#~ "u vrlo ranoj fazi razvoja, tako da vjerovatno neće uvijek raditi "
-#~ "ispravno. Posebno, moguće je da štampač radi samo ako izaberete A4 format "
-#~ "stranice.\n"
-#~ "\n"
-#~ "Neki od ovih štampača, kao što je HP LaserJet 1000, za koji je drajver "
-#~ "originalno napisan, zahtijevaju da im se uploaduje firmware nakon "
-#~ "paljenja. U slučaju HP LaserJet 1000 štampača potrebno je da na CDu sa "
-#~ "Windows drajverom štampača ili vašoj Windows particiji potražite datoteku "
-#~ "\"sihp1000.img\" i uploadujete datoteku u štampač jednom od sljedećih "
-#~ "naredbi:\n"
-#~ "\n"
-#~ "      lpr -o raw sihp1000.img\n"
-#~ "      cat sihp1000.img > /dev/usb/lp0\n"
-#~ "\n"
-#~ "Prvu naredbu može zadati bilo koji običan korisnik, dok drugu mora zadati "
-#~ "root. Nakon što to uradite, mođete normalno štampati.\n"
-
-#~ msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-#~ msgstr "GDI Laserski štampač koristeći Zenographics ZJ-Stream Format"
-
-#~ msgid "CUPS printer sharing configuration"
-#~ msgstr "Podesavanje CUPS dijeljenja štampača"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Office"
-#~ msgstr "Ured"
-
-#~ msgid "Set of tools for mail, news, web, file transfer, and chat"
-#~ msgstr "Skup alata za mail, news, web, prenos datoteka i chat"
-
-#~ msgid "Games"
-#~ msgstr "Igre"
-
-#~ msgid "Multimedia - Graphics"
-#~ msgstr "Multimedija - Grafika"
-
-#~ msgid "Graphics programs such as The Gimp"
-#~ msgstr "Grafički programi kao što je Gimp"
-
-#~ msgid "Multimedia - Sound"
-#~ msgstr "Multimedija - Zvuk"
-
-#~ msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-#~ msgstr "Alati vezani za zvuk: mp3 ili midi playeri, mixeri itd."
-
-#~ msgid "Multimedia - Video"
-#~ msgstr "Multimedija - Video"
-
-#~ msgid "Video players and editors"
-#~ msgstr "Video playeri i editori"
-
-#~ msgid "Multimedia - CD Burning"
-#~ msgstr "Multimedija - Prženje CDa"
-
-#~ msgid "Tools to create and burn CD's"
-#~ msgstr "Alati za pravljenje i prženje CDova"
-
-#~ msgid "More Graphical Desktops (Gnome, IceWM)"
-#~ msgstr "Druge grafičke okoline (Gnome, IceWM)"
-
-#~ msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-#~ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, itd."
-
-#~ msgid "Personal Information Management"
-#~ msgstr "Upravljanje ličnim informacijama"
-
-#~ msgid "Tools for your Palm Pilot or your Visor"
-#~ msgstr "Alati za vaš Palm Pilot ili Visor"
-
-#~ msgid "Personal Finance"
-#~ msgstr "Lične finansije"
-
-#~ msgid "Programs to manage your finances, such as gnucash"
-#~ msgstr "Programi za upravljanje vašim finansijama, kao što je gnucash"
+msgstr "Skup alata za čitanje i slanje pošte i news-a i pregledanje Weba"
