@@ -2333,7 +2333,7 @@ Please check whether Printerdrake did the auto-detection of your printer model c
 	    }, [ 
 		 # List the printers/drivers
 		 { val => \$choice, format => \&translate,
-		   sort => 0, separator => "|", tree_expanded => 0,
+		   sort => 1, separator => "|", tree_expanded => 0,
 		   quit_if_double_click => 1, allow_empty_list => 1,
 		   list => [ keys %printer::main::thedb ] },
 		 # Button to install a manufacturer-supplied PPD file
