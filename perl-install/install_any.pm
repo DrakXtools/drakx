@@ -788,6 +788,7 @@ sub copy_advertising {
 
     return if $::rootwidth < 800;
 
+    my $f;
     my $source_dir = "Mandrake/share/advertising";
     foreach ("." . $o->{lang}, "." . substr($o->{lang},0,2), '') {
 	$f = getFile("$source_dir$_/list") or next;
