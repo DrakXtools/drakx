@@ -30,13 +30,13 @@ use detect_devices;
 use log;
 
 
-my $_sanedir = "$prefix/etc/sane.d";
-my $_scannerDBdir = "$prefix$ENV{SHARE_PATH}/ldetect-lst";
+my $_sanedir = "$::prefix/etc/sane.d";
+my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
 my $scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port) = @_;
-    $port ||= detect_devices::dev_is_devfs() ? "$prefix/dev/usb/scanner0" : "$prefix/dev/scanner";
+    $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
     output("$_sanedir/$a.conf", (join "\n", @{$scannerDB->{$model}{lines}}));
