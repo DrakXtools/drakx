@@ -145,8 +145,10 @@ sub write_interface_conf {
     $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
 
     #- write interface MAC address in iftab (if any)
-    my $descriptor = $link_type eq 'ether' ? 'mac' : 'unspec';
-    substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\t$descriptor $mac_address\n) if eof } "$::prefix/etc/iftab" if $mac_address;
+    my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type};
+    if ($mac_address && $descriptor) {
+        substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\t$descriptor $mac_address\n) if eof } "$::prefix/etc/iftab";
+    }
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
