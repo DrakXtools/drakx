@@ -924,7 +924,7 @@ sub summary {
 	    my @pkgs = pkgs::packagesProviding($o->{packages}, "locales-$pkg_locale");
 	    $o->pkg_install(map { $_->name } @pkgs) if @pkgs;
 
-	    lang::write($o->{prefix}, $o->{locale});
+	    lang::write($o->{locale});
 	    if (!$timezone_manually_set) {
 		delete $o->{timezone};
 		install_any::preConfigureTimezone($o); #- now we can precise the timezone thanks to the country

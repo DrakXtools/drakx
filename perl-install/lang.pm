@@ -985,7 +985,7 @@ sub i18n_env {
 }
 
 sub write { 
-    my ($prefix, $locale, $b_user_only, $b_dont_touch_kde_files) = @_;
+    my ($locale, $b_user_only, $b_dont_touch_kde_files) = @_;
 
     $locale && $locale->{lang} or return;
 
@@ -993,13 +993,13 @@ sub write {
 
     my ($name, $sfm, $acm) = l2console_font($locale, 0);
     if ($name && !$b_user_only) {
-	my $p = "$prefix/usr/lib/kbd";
+	my $p = "$::prefix/usr/lib/kbd";
 	if ($name) {
 	    eval {
 		log::explanations(qq(Set system font to "$name"));
 		my $font = "$p/consolefonts/$name.psf";
 		$font .= ".gz" if ! -e $font;
-		cp_af($font, "$prefix/etc/sysconfig/console/consolefonts");
+		cp_af($font, "$::prefix/etc/sysconfig/console/consolefonts");
 		add2hash $h, { SYSFONT => $name };
 	    };
 	    $@ and log::explanations("missing console font $name");
@@ -1007,7 +1007,7 @@ sub write {
 	if ($sfm) {
 	    eval {
 		log::explanations(qq(Set screen font map (Unicode mapping table) to "$name"));
-		cp_af(glob_("$p/consoletrans/$sfm*"), "$prefix/etc/sysconfig/console/consoletrans");
+		cp_af(glob_("$p/consoletrans/$sfm*"), "$::prefix/etc/sysconfig/console/consoletrans");
 		add2hash $h, { UNIMAP => $sfm };
 	    };
 	    $@ and log::explanations("missing console unimap file $sfm");
@@ -1015,7 +1015,7 @@ sub write {
 	if ($acm) {
 	    eval {
 		log::explanations(qq(Set application-charset map (Unicode mapping table) to "$name"));
-		cp_af(glob_("$p/consoletrans/$acm*"), "$prefix/etc/sysconfig/console/consoletrans");
+		cp_af(glob_("$p/consoletrans/$acm*"), "$::prefix/etc/sysconfig/console/consoletrans");
 		add2hash $h, { SYSFONTACM => $acm };
 	    };
 	    $@ and log::explanations("missing console acm file $acm");
@@ -1055,7 +1055,7 @@ sub write {
 
     my $file = $b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
     log::explanations(qq(Setting l10n configuration in "$file"));
-    setVarsInSh($prefix . $file, $h);
+    setVarsInSh($::prefix . $file, $h);
 
     if (!$b_user_only) {
         log::explanations("Set default menu language");
@@ -1065,7 +1065,7 @@ sub write {
     }
 
     eval {
-	my $confdir = $prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
+	my $confdir = $::prefix . ($b_user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
 
 	-d $confdir or die 'not configuring kde config files since it is not installed/used';
 

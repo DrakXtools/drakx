@@ -24,7 +24,7 @@ if (defined $klang) {
     my $locale = lang::read($>);
     $klang and $locale->{lang} = $lang;
     $kcountry and $locale->{country} = $country;
-    lang::write('', $locale, $>, 'dont_touch_kde_files') if $apply;
+    lang::write($locale, $>, 'dont_touch_kde_files') if $apply;
 
     #- help KDE defaulting to the right charset
     print lang::charset2kde_charset(lang::l2charset($lang)), "\n";
@@ -59,7 +59,7 @@ if ($@) {
     }
 }
 
-lang::write('', $locale, $>);
+lang::write($locale, $>);
 if ($>) {
     if (my $wm = any::running_window_manager()) {
 	$in->ask_okcancel('', N("The change is done, but to be effective you must logout"), 1)
