@@ -1,3 +1,32 @@
+2004/09/28  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: madwifi_pci => ath_pci
+
+2004/09/28  Pixel  <pixel at mandrakesoft.com>
+
+	* rescue/install_bootloader: handle /etc/mandrakelinux-release
+
+	* Xconfig/xfree.pm: use Driver "keyboard" instead of "Keyboard" (for Xorg
+	6.8)
+
+	* install_steps.pm, printer/main.pm, standalone/printerdrake,
+	printer/printerdrake.pm, install_steps_interactive.pm: 
+	  - make printer::printerdrake::install_spooler() work with an optional
+	$in
+	  - many functions now take $security (which used to be taken from $in
+	during install)
+	  - fix some functions with empty prototype but still using a parameter
+	  - remove some unused variable
+	  - rename some $_foo vars to $foo since those vars are used
+	  - add some undef to some function calls to be minimally perl_checker
+	compliant
+	  - perl_checker compliant optional parameters in
+	start_spooler_on_boot(), install_spooler()
+
+2004/09/28  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: More logs on install_urpmi
+
 2004/09/28  Pixel  <pixel at mandrakesoft.com>
 
 	* install_steps.pm, printer/main.pm, standalone/printerdrake,
@@ -40115,7 +40144,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.973 2004/09/27 10:56:21 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.974 2004/09/28 02:51:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
