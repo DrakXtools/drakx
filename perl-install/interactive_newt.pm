@@ -23,6 +23,8 @@ sub new() {
     bless {}, $_[0];
 }
 
+sub enter_console { Newt::Suspend }
+sub leave_console { Newt::Suspend }
 sub suspend { Newt::Suspend }
 sub resume { Newt::Resume }
 sub end() { Newt::Finished }

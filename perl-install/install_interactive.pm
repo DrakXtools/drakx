@@ -158,7 +158,7 @@ When sure, press Ok.")) or return;
 
     $solutions{fdisk} =
       [ -10, _("Use fdisk"), sub { 
-	    $o->suspend;
+	    $o->enter_console;
 	    foreach (@$hds) {
 		print "\n" x 10, _("You can now partition %s.
 When you are done, don't forget to save using `w'", partition_table_raw::description($_));
@@ -166,7 +166,7 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 		my $pid = fork or exec "fdisk", devices::make($_->{device});
 		waitpid($pid, 0);
 	    }
-	    $o->resume;
+	    $o->leave_console;
 	    0;
 	} ] if $o->{partitioning}{fdisk};
 

@@ -61,6 +61,8 @@ sub vnew {
     }
 }
 
+sub enter_console {}
+sub leave_console {}
 sub suspend {}
 sub resume {}
 sub end {}

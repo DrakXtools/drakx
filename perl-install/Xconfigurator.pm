@@ -271,10 +271,10 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     }
 
     -x "$prefix$card->{prog}" or $install && do {
-	$in->suspend if ref($in) =~ /newt/;
+	$in->suspend;
 	&$install('server', @l) if $card->{use_xf4};
 	&$install($card->{server}, @l) if !$card->{use_xf4};
-	$in->resume if ref($in) =~ /newt/;
+	$in->resume;
     };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
 
