@@ -424,7 +424,7 @@ sub psUsingHdlists {
 	    $o_hdlistsprefix ? ($is_ftp ? "media/media_info/$hdlist" : "$o_hdlistsprefix/media/media_info/$hdlist") : undef,
 	];
 	if ($size) {
-	    ($mediumsize{$hdlist}) = $size =~ /(\d+)/;
+	    ($mediumsize{$hdlist}) = $size =~ /(\d+)/; #- XXX assume Mo
 	} else {
 	    $mediumsize{$hdlist} = 0;
 	}
