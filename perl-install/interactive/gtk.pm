@@ -723,7 +723,8 @@ sub ask_from__add_modify_removeW {
 sub wait_messageW {
     my ($_o, $title, $messages) = @_;
 
-    my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
+    my $to_modify;
+    my @l = map { ref $_ ? $_ : ($to_modify = Gtk2::Label->new(scalar warp_text($_))) } @$messages;
 
     my $Window = gtknew('MagicWindow',
 			title => $title,
@@ -737,7 +738,7 @@ sub wait_messageW {
 			  ])
 		      );
     $Window->signal_connect(expose_event => sub { $Window->{displayed} = 1; 0 });
-    $Window->{wait_messageW} = $l[-1];
+    $Window->{wait_messageW} = $to_modify;
     mygtk2::sync($Window) while !$Window->{displayed};
     $Window;
 }
