@@ -144,7 +144,7 @@ get_needed_files: $(SO_FILES)
 
 	tar xfy locales.tar.bz2 -C $(DEST)
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
-	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
+#	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
 
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
