@@ -6,6 +6,7 @@ use strict;
 use modules;
 use common;
 use fs;
+use fsedit;
 use run_program;
 use log;
 use lang;
@@ -178,21 +179,28 @@ sub install2::handleI18NClp {
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 }
 
-sub install2::handleMoveKey {
-    my $o = $::o;
-
-    require detect_devices;
-    require fsedit;
-    require fs;
+sub keys_parts {
+    my ($o) = @_;
 
     my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
-    my @parts = fsedit::get_fstab(@keys);
-    each_index { 
+    map_index { 
 	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
 	$_->{options} = 'umask=077,uid=501,gid=501';
-    } @parts;
+        $_;
+    } fsedit::get_fstab(@keys);
+}
+    
+sub install2::handleMoveKey {
+    my ($o_reread) = @_;
+    my $o = $::o;
 
-    fs::mount_part($_) foreach @parts;
+    if ($o_reread) {
+        $o->{all_hds} = fsedit::empty_all_hds();
+        install_any::getHds($o, $o);
+    }
+
+    require fs;
+    fs::mount_part($_) foreach keys_parts($o);
 }
 
 sub install2::verifyKey {
@@ -216,11 +224,28 @@ Operating System.")),
                             ok => N("Detect again USB key"),
                             cancel => N("Continue without USB key") }) or return;
 
-        require fsedit;
-        $o->{all_hds} = fsedit::empty_all_hds();
-        install_any::getHds($o, $o);
-        install2::handleMoveKey();
+        install2::handleMoveKey('reread');
     }
+
+    local *F;
+    while (!open F, '>/home/.touched') {
+
+        fs::umount_part($_) foreach keys_parts($o);
+        modules::unload('usb-storage');  #- it won't notice change on write protection otherwise :/
+
+        $o->ask_okcancel_({ title => N("Key isn't writable"), 
+                            messages => formatAlaTeX(
+N("The USB key seems to have write protection enabled. Please
+unplug it, remove write protection, and then plug it again.")),
+                            ok => N("Retry"),
+                            cancel => N("Continue without USB key") }) or return;
+
+        modules::load('usb-storage');
+        sleep 2;
+        install2::handleMoveKey('reread');
+    }
+    close F;
+    unlink '/home/.touched';
 }
 
 sub install2::startMove {
