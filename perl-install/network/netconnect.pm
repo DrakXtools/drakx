@@ -400,12 +400,6 @@ Take a look at http://www.linmodems.org"),
                         [ { label => N("Modem"), type => "list", val => \$modem, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
                     },
                     post => sub {
-                        $mouse ||= {};
-                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                        write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"), q(
-ifdown ppp0
-killall pppd
-), $netcnx->{type});
                         $ntf_name = $netc->{autodetect}{modem}{$modem}{device} || $netc->{autodetect}{modem}{$modem}{description};
                         print "Interface is $ntf_name\n";
 
@@ -438,11 +432,6 @@ killall pppd
                    
                    choose_serial_port =>
                    {
-                    pre => sub {
-                        $mouse ||= {};
-                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                    },
-                    
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
@@ -454,6 +443,8 @@ killall pppd
                    ppp_choose =>
                    {
                     pre => sub {
+                        $mouse ||= {};
+                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
                         write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
                                          q(ifdown ppp0
 killall pppd
