@@ -58,8 +58,6 @@ foreach (@types) {
 }
 %options and die "usage: diskdrake [--expert] [--testing] [--{" . join(",", @types) . "}]\n";
 
-$type ne 'removable' || $para or die "usage: diskdrake --removable=<dev>\n";
-
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
@@ -104,7 +102,9 @@ if ($type eq 'hd') {
 } elsif ($type eq 'removable') {
     require diskdrake::removable;
     $para =~ s|^/dev/||;
-    my ($raw_hd) = grep { $para eq $_->{device} } @{$all_hds->{raw_hds}} or die "unknown removable $para\n";
+    my ($raw_hd) = $para ?
+      first(grep { $para eq $_->{device} } @{$all_hds->{raw_hds}}) || die "unknown removable $para\n" :
+      $in->ask_from_listf('', '', \&diskdrake::interactive::format_raw_hd_info, $all_hds->{raw_hds}) or $in->exit(0);
     diskdrake::removable::main($in, $all_hds, $raw_hd);
 } else {
     $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive_gtk');
