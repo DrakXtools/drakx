@@ -21,8 +21,8 @@ function start_mixer () {
 	    if [ -d /proc/asound ] && [ -x /usr/sbin/alsactl ];then
              MIXER_SETTINGS=/root/tmp/asound.state_tmp
              alsactl -f $MIXER_SETTINGS store
-             # set sensible defaults:
-             perl -pi /usr/bin/alsa_default.pl $MIXER_SETTINGS
+             # set some sane default volume and unmute needed channels:
+             /etc/rc.d/rc.alsa_default $MIXER_SETTINGS
              action "Setting mixer settings" alsactl -f $MIXER_SETTINGS restore
              rm -f $MIXER_SETTINGS
 		return 0
