@@ -300,7 +300,7 @@ wait %d seconds for default boot.
 		label => 'failsafe',
 		root  => "/dev/$root",
 	       });
-    $entry->{append} .= " quiet" if $vga_fb;
+    $entry->{append} .= " quiet" if $vga_fb && !$isSMP && !$isEnterprise;
     $failsafe->{append} .= " failsafe" if $failsafe && !$lilo->{password};
 
     #- manage prioritary default kernel (given as /boot/vmlinuz-default).
