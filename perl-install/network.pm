@@ -455,7 +455,7 @@ sub read_all_conf {
 #-  $intf->{$device}{DEVICE} : DEVICE = $device
 #-  $intf->{$device}{BOOTPROTO} : boot prototype : "bootp" or "dhcp" or "pump" or ...
 sub configureNetwork2 {
-    my ($prefix, $netc, $intf, $install) = @_;
+    my ($in, $prefix, $netc, $intf, $install) = @_;
     my $etc = "$prefix/etc";
 
     $netc->{wireless_eth} and $install->('wireless-tools');
@@ -464,8 +464,12 @@ sub configureNetwork2 {
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
-    grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf and $install && $install->('dhcpcd');
-    grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $install && $install->('pump');
+    if (grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
+	$::isStandalone ? $in->standalone::pkgs_install('dhcpd') : $install->('dhcpcd');
+    }
+    if (grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
+	$::isStandalone ? $in->standalone::pkgs_install('pump') : $install->('pump');
+    }
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
     any::miscellaneousNetwork($prefix);

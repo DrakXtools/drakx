@@ -340,7 +340,7 @@ sub apply {
 
     $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
     netconnect::save_conf('', $netcnx, $netc, $intf);
-    network::configureNetwork2($prefix, $netc, $intf, \&standalone::pkgs_install);
+    network::configureNetwork2($in, $prefix, $netc, $intf, \&standalone::pkgs_install);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     system("$prefix/etc/rc.d/init.d/network $_") foreach "stop", "start";
     $button_apply->set_sensitive(0);
