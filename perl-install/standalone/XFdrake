@@ -57,7 +57,7 @@ $configure_this ||= 'everything';
 	    Xconfig::main::configure_resolution($in, Xconfig::xfree->read);
 	}
     };
-    $rc && $rc eq 'config_changed' and ask_for_X_restart($in);
+    ask_for_X_restart($in) if $rc;
 
     $in->exit(0);
 }
@@ -92,8 +92,10 @@ sub ask_for_X_restart {
 
     $in->ask_okcancel('', N("You need to log out and back in again for changes to take effect"), 1) or return;
 
-    fork() and return;
-    any::ask_window_manager_to_logout($wm);
+    if (fork()) {
+	any::ask_window_manager_to_logout($wm);
+	return;
+    }
     
     open STDIN, "</dev/zero";
     open STDOUT, ">/dev/null";
