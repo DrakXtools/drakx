@@ -13,22 +13,22 @@ addUser =>
 __("GNU/Linux is a multiuser system, and this means that each user can have his
 own preferences, his own files and so on. You can read the ``User Guide''
 to learn more. But unlike \"root\", which is the administrator, the users
-you will add here will not be entitled to change anything except their own
-files and their own configuration. You will have to create at least one
-regular user for yourself. That account is where you should log in for
-routine use. Although it is very practical to log in as \"root\" everyday,
-it may also be very dangerous! The slightest mistake could mean that your
-system would not work any more. If you make a serious mistake as a regular
-user, you may only lose some information, but not the entire system.
+you add here will not be entitled to change anything except their own files
+and their own configuration. You will have to create at least one regular
+user for yourself. That account is where you should log in for routine use.
+Although it is very practical to log in as \"root\" everyday, it may also
+be very dangerous! The slightest mistake could mean that your system would
+not work any more. If you make a serious mistake as a regular user, you may
+only lose some information, but not the entire system.
 
 First, you have to enter your real name. This is not mandatory, of course -
 as you can actually enter whatever you want. DrakX will then take the first
 word you have entered in the box and will bring it over to the \"User
 name\". This is the name this particular user will use to log onto the
 system. You can change it. You then have to enter a password here. A
-non-privileged (regular) user's password is not as crucial as \"root\"' one
-from a security point of view, but that is no reason to neglect it: after
-all, your files are at risk.
+non-privileged (regular) user's password is not as crucial as the \"root\"'
+one from a security point of view, but that is no reason to neglect it:
+after all, your files are at risk.
 
 If you click on \"Accept user\", you can then add as many as you want. Add
 a user for each one of your friends: your father or your sister, for
@@ -101,7 +101,7 @@ preferred graphical environment. At least one must be selected if you want
 to have a graphical workstation!
 
 Moving the mouse cursor over a group name will display a short explanatory
-text about that group. If you deselect all groups when performing a regular
+text about that group. If you unselect all groups when performing a regular
 installation (by opposition to an upgrade), a dialog will pop up proposing
 different options for a minimal installation:
 
@@ -125,10 +125,10 @@ groups to avoid installing any new package. This is useful for repairing or
 updating an existing system."),
 
 choosePackagesTree => 
-__("Finally, depending on whether or not you selected individual packages, you
-will be presented a tree containing all packages classified by groups and
-subgroups. While browsing the tree, you can select entire groups,
-subgroups, or individual packages.
+__("Finally, depending on whether or not you chose to be able to select
+individual packages, you will be presented a tree containing all packages
+classified by groups and subgroups. While browsing the tree, you can select
+entire groups, subgroups, or individual packages.
 
 Whenever you select a package on the tree, a description appears on the
 right. When your selection is finished, click the \"Install\" button which
@@ -161,11 +161,11 @@ another installation. See the second tip of last step on how to create such
 a floppy."),
 
 configureNetwork => 
-__("You are now proposed to set up your Internet/network connection. If you
-wish to connect your computer to the Internet or to a local network, click
-\"OK\". The autodetection of network devices and modem will be launched. If
-this detection fails, uncheck the \"Use auto detection\" box next time. You
-may also choose not to configure the network, or do it later; in that case,
+__("You are now able to set up your Internet/network connection. If you wish to
+connect your computer to the Internet or to a local network, click \"OK\".
+The autodetection of network devices and modem will be launched. If this
+detection fails, uncheck the \"Use auto detection\" box next time. You may
+also choose not to configure the network, or do it later; in that case,
 simply click the \"Cancel\" button.
 
 Available connections are: traditional modem, ISDN modem, ADSL connection,
@@ -202,7 +202,7 @@ enabled on a server. In general, select only the services you really need.
 configureTimezoneGMT => 
 __("GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in
 local time according to the time zone you selected. It is however possible
-to deactivate this by deselecting \"Hardware clock set to GMT\" so that the
+to deactivate this by unselecting \"Hardware clock set to GMT\" so that the
 hardware clock is the same as the system clock. This is useful when the
 machine is hosting another operating system like Windows.
 
@@ -231,19 +231,9 @@ information about this wizard.
 If you can see the message during the test, and answer \"Yes\", then DrakX
 will proceed to the next step. If you cannot see the message, it simply
 means that the configuration was wrong and the test will automatically end
-after 10 seconds, restoring the screen."),
-
-configureXmain => 
-__("The first time you try the X configuration, you may not be very satisfied
-with its display (screen is too small, shifted left or right...). Hence,
-even if X starts up correctly, DrakX then asks you if the configuration
-suits you. It will also propose to change it by displaying a list of valid
-modes it could find, asking you to select one.
-
-As a last resort, if you still cannot get X to work, choose \"Change
-graphics card\", select \"Unlisted card\", and when prompted on which
-server, choose \"FBDev\". This is a failsafe option which works with any
-modern graphics card. Then choose \"Test again\" to be sure."),
+after 10 seconds, restoring the screen. Refer then to the Video
+configuration section of the user guide for more information on how to
+configure your display."),
 
 configureXxdm => 
 __("Finally, you will be asked whether you want to see the graphical interface
@@ -271,10 +261,10 @@ contains a fair number of system tools for restoring a system, which has
 crashed due to a power failure, an unfortunate typing error, a typo in a
 password, or any other reason.
 
-When you click on this step, you will be asked to insert a disk inside the
-drive. The floppy disk you will insert must be empty or contain data which
-you do not need. You will not have to format it since DrakX will rewrite
-the whole disk."),
+If you say \"Yes\", you will be asked to enter a disk inside the drive. The
+floppy disk you will insert must be empty or contain data which you do not
+need. You will not have to format it since DrakX will rewrite the whole
+disk."),
 
 doPartitionDisks => 
 __("At this point, you need to choose where you want to install the Mandrake
@@ -308,7 +298,9 @@ partitioning of your blank drive(s). You will not be prompted further;
 
  * \"Use existing partition\": the wizard has detected one or more existing
 Linux partitions on your hard drive. If you want to use them, choose this
-option;
+option. You will then be asked to choose the mount points associated to
+each of the partitions. The legacy mount points are selected by default,
+and you should generally keep them.
 
  * \"Use the free space on the Windows; partition\": if Microsoft Windows
 is installed on your hard drive and takes all the space available on it,
@@ -341,7 +333,9 @@ will be lost;
  * \"Expert mode\": choose this option if you want to manually partition
 your hard drive. Be careful - it is a powerful but dangerous choice. You
 can very easily lose all your data. Hence, do not choose this unless you
-know what you are doing."),
+know what you are doing. To know how do use the DiskDrake utility used
+here, refer to the section ``Managing Your Partitions'' of the ````User
+Guide''''"),
 
 exitInstall => 
 __("There you are. Installation is now complete and your GNU/Linux system is
@@ -412,7 +406,7 @@ installUpdates =>
 __("At the time you are installing Mandrake Linux, it is likely that some
 packages have been updated since the initial release. Some bugs may have
 been fixed, and security issues solved. To allow you to benefit from these
-updates, you are now proposed to download them from the Internet. Choose
+updates, you are now able to download them from the Internet. Choose
 \"Yes\" if you have a working Internet connection, or \"No\" if you prefer
 to install updated packages later.
 
@@ -433,8 +427,8 @@ __("At this point, it is time to choose the security level desired for the
 machine. As a rule of thumb, the more exposed the machine is, and the more
 the data stored in it is crucial, the higher the security level should be.
 However, a higher security level is generally obtained at the expense of
-easiness of use. Refer to the \"msec\" chapter of the ``Reference Manual''
-to get more information about the meaning of these levels.
+ease of use. Refer to the \"msec\" chapter of the ``Reference Manual'' to
+get more information about the meaning of these levels.
 
 If you do not know what to choose, keep the default option."),
 
@@ -454,26 +448,26 @@ To partition the selected hard drive, you can use these options:
  * \"Clear all\": this option deletes all partitions on the selected hard
 drive;
 
- * \"Auto allocate\": this option enables to automatically create \"Ext2\"
-and swap partitions in free space of your hard drive;
+ * \"Auto allocate\": this option enables to automatically create ext3 and
+swap partitions in free space of your hard drive;
 
- * \"More\": gives access to additional features:
+\"More\": gives access to additional features:
 
-    * \"Save partition table\": saves the partition table to a floppy.
-Useful for later partition-table recovery if necessary. It is strongly
-recommended to perform this step;
+ * \"Save partition table\": saves the partition table to a floppy. Useful
+for later partition-table recovery if necessary. It is strongly recommended
+to perform this step;
 
-    * \"Restore partition table\": allows to restore a previously saved
+ * \"Restore partition table\": allows to restore a previously saved
 partition table from floppy disk;
 
-    * \"Rescue partition table\": if your partition table is damaged, you
-can try to recover it using this option. Please be careful and remember
-that it can fail;
+ * \"Rescue partition table\": if your partition table is damaged, you can
+try to recover it using this option. Please be careful and remember that it
+can fail;
 
-    * \"Reload partition table\": discards all changes and loads your
-initial partition table;
+ * \"Reload partition table\": discards all changes and loads your initial
+partition table;
 
-    * \"Removable media automounting\": unchecking this option will force
+ * \"Removable media automounting\": unchecking this option will force
 users to manually mount and unmount removable medias such as floppies and
 CD-ROMs.
 
@@ -501,7 +495,7 @@ When a partition is selected, you can use:
  * Ctrl-m to set the mount point.
 
 To get information about the different filesystem types available, please
-read the ext2fs chapter from the ``Reference Manual''.
+read the ext2FS chapter from the ``Reference Manual''.
 
 If you are installing on a PPC machine, you will want to create a small HFS
 ``bootstrap'' partition of at least 1MB, which will be used by the yaboot
@@ -549,23 +543,23 @@ installation or if you want to have greater control (\"Expert\"). You can
 also choose to do a new install or an upgrade of an existing Mandrake Linux
 system:
 
- * \"Install\": completely wipes out the old system. In fact, depending on
-what currently holds your machine, you will be able to keep some old (Linux
-or other) partitions unchanged;
+ * \"Install\": completely wipes out the old system, however, depending on
+what is currently installed on your machine, you may be able to keep some
+old partitions (Linux or otherwise) unchanged;
 
  * \"Upgrade\": this installation class allows to simply update the
 packages currently installed on your Mandrake Linux system. It keeps the
 current partitions of your hard drives as well as user configurations. All
-other configuration steps remain available with respect to plain
+other configuration steps remain available, similar to a normal
 installation;
 
- * \"Upgrade Packages Only\": this brand new class allows to upgrade an
-existing Mandrake Linux system while keeping all system configurations
-unchanged. Adding new packages to the current installation is also
-possible.
+ * \"Upgrade Packages Only\": this new installation class allows you to
+upgrade an existing Mandrake Linux system while keeping all system
+configurations unchanged. Adding new packages to the current installation
+is also possible.
 
-Upgrades should work fine for Mandrake Linux systems starting from \"8.1\"
-release.
+Upgrades should work fine on Mandrake Linux systems containing version
+\"8.1\" or later.
 
 Depending on your knowledge of GNU/Linux, select one of the following
 choices:
@@ -574,27 +568,32 @@ choices:
 operating system. The installation will be very easy and you will only be
 asked a few questions;
 
- * Expert: if you have a good knowledge of GNU/Linux, you can choose this
-installation class. The expert installation will allow you to perform a
-highly-customized installation. Answering some of the questions can be
-difficult if you do not have a good knowledge of GNU/Linux, so do not
-choose this unless you know what you are doing."),
+ * Expert: if you have a good understanding of GNU/Linux, you may wish to
+perform a highly customized installation. Some of the decisions you will
+have to make may be difficult if you do not have good knowledge of
+GNU/Linux, so it is not recommended that those without a fair amount of
+experience select this installation class."),
 
 selectKeyboard => 
 __("Normally, DrakX selects the right keyboard for you (depending on the
-language you have chosen) and you won't even see this step. However, you
-might not have a keyboard that corresponds exactly to your language: for
-example, if you are an English speaking Swiss person, you may still want
-your keyboard to be a Swiss keyboard. Or if you speak English but are
-located in Quebec, you may find yourself in the same situation. In both
-cases, you will have to go back to this installation step and select an
-appropriate keyboard from the list.
+language you have chosen). However, you might not have a keyboard that
+corresponds exactly to your language: for example, if you are an English
+speaking Swiss person, you may still want your keyboard to be a Swiss
+keyboard. Or if you speak English but are located in Quebec, you may find
+yourself in the same situation. In both cases, you will have to go back to
+this installation step and select an appropriate keyboard from the list.
 
 Click on the \"More\" button to be presented with the complete list of
-supported keyboards."),
+supported keyboards.
+
+If you choose a keyboard layout based on a non-latin alphabet, you will be
+asked on next dialog to choose the key binding that will switch the
+keyboard layout between the latin and non latin layouts."),
 
 selectLanguage => 
-__("Please choose your preferred language for installation and system usage.
+__("The first step is to choose your preferred language.
+
+Please choose your preferred language for installation and system usage.
 
 Clicking on the \"Advanced\" button will allow you to select other
 languages to be installed on your workstation. Selecting other languages
@@ -618,7 +617,14 @@ type from the provided list.
 If you choose a mouse other than the default, a test screen will be
 displayed. Use the buttons and wheel to verify that the settings are
 correct. If the mouse is not working well, press the space bar or [Return]
-to \"Cancel\" and choose again."),
+to \"Cancel\" and choose again.
+
+Wheel mouses are sometimes not automatically detected. You will need to
+manually select it in the list. Be sure to select the one corresponding to
+the correct port it is attached to. After you have pressed the \"OK\"
+button, a mouse image is displayed. You then need to move the wheel of your
+mouse to activate it correctly. Then test all buttons and movements are
+correct."),
 
 selectSerialPort => 
 __("Please select the correct port. For example, the \"COM1\" port under
@@ -653,9 +659,9 @@ error. If you do happen to make the same typing error twice, this
 In Expert mode, you will be asked if you will be connecting to an
 authentication server, like NIS or LDAP.
 
-If your network uses the LDAP (or NIS) protocol for authentication, select
-\"LDAP\" (or \"NIS\") as authentication. If you do not know, ask your
-network administrator.
+If your network uses either of the LDAP, NIS, or PDC Windows Domain
+authentication services, select the appropriate one as \"authentication\".
+If you do not know, ask your network administrator.
 
 If your computer is not connected to any administrated network, you will
 want to choose \"Local files\" for authentication."),
@@ -698,23 +704,17 @@ Linux system! Also, be sure you know what you do before changing any of the
 options. !!
 
 Clicking the \"Advanced\" button in this dialog will offer many advanced
-options, which are reserved to the expert user.
+options, which are reserved for the expert user."),
 
-After you have configured the general bootloader parameters, the list of
+setupBootloaderAddEntry => 
+__("After you have configured the general bootloader parameters, the list of
 boot options which will be available at boot time will be displayed.
 
 If there is another operating system installed on your machine, it will
 automatically be added to the boot menu. Here, you can choose to fine-tune
 the existing options. Select an entry and click \"Modify\" to modify or
 remove it; \"Add\" creates a new entry; and \"Done\" goes on to the next
-installation step."),
-
-setupBootloaderAddEntry => 
-__("LILO (the LInux LOader) and grub are bootloaders: they are able to boot
-either GNU/Linux or any other operating system present on your computer.
-Normally, these other operating systems are correctly detected and
-installed. If this is not the case, you can add an entry by hand in this
-screen. Be careful to choose the correct parameters.
+installation step.
 
 You may also not want to give access to these other operating systems to
 anyone. In which case, you can delete the corresponding entries. But then,
@@ -756,18 +756,18 @@ Otherwise, CUPS is preferable as it is simpler and better at working over
 networks."),
 
 setupSCSI => 
-__("DrakX now detects any IDE device present in your computer. It will also
-scan for one or more PCI SCSI card(s) on your system. If a SCSI card is
+__("DrakX now detects any IDE devices present in your computer. It will also
+scan for one or more PCI SCSI cards on your system. If a SCSI card is
 found, DrakX will automatically install the appropriate driver.
 
 Because hardware detection does not always detect a piece of hardware,
 DrakX will ask you to confirm if a PCI SCSI card is present. Click \"Yes\"
 if you know that there is a SCSI card installed in your machine. You will
-be presented a list of SCSI cards to choose from. Click \"No\" if you have
-no SCSI hardware. If you are unsure, you can check the list of hardware
-detected in your machine by selecting \"See hardware info\" and clicking
-\"OK\". Examine the list of hardware and then click on the \"OK\" button to
-return to the SCSI interface question.
+be presented with a list of SCSI cards to choose from. Click \"No\" if you
+have no SCSI hardware. If you are unsure, you can check the list of
+hardware detected in your machine by selecting \"See hardware info\" and
+clicking \"OK\". Examine the list of hardware and then click on the \"OK\"
+button to return to the SCSI interface question.
 
 If you have to manually specify your adapter, DrakX will ask if you want to
 specify options for it. You should allow DrakX to probe the hardware for
@@ -878,7 +878,9 @@ correspond. Hence, you may need to click on the \"Timezone\" button in
 order to configure the clock according to the time zone you are in;
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
-configuration wizard;
+configuration wizard. Consult the correpsonding chapter of the ``User
+Guide'' for more information on how to setup a new printer. The interface
+presented there is similar to the one used during installation;
 
  * \"Sound card\": if a sound card is detected on your system, it is
 displayed here. No modification possible at installation time;
