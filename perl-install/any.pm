@@ -69,9 +69,11 @@ sub setupBootloader {
     } elsif ($more || !$::beginner) {
 	$in->set_help("setupBootloaderGeneral") unless $::isStandalone;
 
-	my @m = keys %{$b->{methods}};
-	$::expert and $in->ask_many_from_list_ref('', _("Which bootloader(s) do you want to use?"), 
-						  [ @m ], [ map { \$b->{methods}{$_} } @m ]) || return;
+	if ($::expert) {
+	    my $m = $in->ask_from_list_('', _("Which bootloader(s) do you want to use?"), [ keys(%{$b->{methods}}), __("None") ]) or return;
+	    $b->{methods}{$_} = 0 foreach keys %{$b->{methods}};
+	    $b->{methods}{$m} = 1 if $m ne "None";
+	}
 	#- at least one method
 	grep_each { $::b } %{$b->{methods}} or return;
 
