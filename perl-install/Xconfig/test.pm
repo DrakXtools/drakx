@@ -137,7 +137,7 @@ sub test {
         eval {  #- eval it so that missing pixmap will not break the test completely
             my $root = gtkroot();
             my $gc = Gtk2::Gdk::GC->new($root);
-            my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file("/usr/share/mdk/xfdrake/xfdrake-test-card.jpg");
+            my $pixbuf = Gtk2::Gdk::Pixbuf->new_from_file("$::prefix/usr/share/mdk/xfdrake/xfdrake-test-card.jpg");
             my ($w, $h) = ($pixbuf->get_width, $pixbuf->get_height);
             my $pixmap = Gtk2::Gdk::Pixmap->new($root, $w, $h, $root->get_depth);
             $pixbuf->render_to_drawable($pixmap, $gc, 0, 0, 0, 0, $w, $h, 'none', 0, 0);
