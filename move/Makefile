@@ -26,7 +26,7 @@ endif
 
 all: install
 
-build: xwait isolinux/boot.msg
+build: xwait runlevel_set isolinux/boot.msg
 	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
 	sudo ./collect-directories-to-create.pl $(DEST_LIVETREE) > data/directories-to-create
 	sudo find $(DEST_LIVETREE)/etc -type f | perl -pe 's|$(DEST_LIVETREE)||' > data/all-etcfiles
@@ -42,6 +42,7 @@ install: build
 	$(MAKE) -C ../perl-install/share/po install NAME=libDrakX DATADIR=$(DEST_LIVETREE)/usr/share
 
 	sudo cp -f xwait $(DEST_LIVETREE)/usr/bin
+	sudo cp -f runlevel_set $(DEST_LIVETREE)/usr/bin
 	sudo cp -f runstage2 $(DEST_LIVETREE)/usr/bin/runstage2.pl
 	sudo rm -rf $(DEST_STAGE2)
 	sudo mkdir -p $(DEST_STAGE2)
@@ -107,6 +108,9 @@ iso: un_live_tree_boot install live_tree_boot
 
 xwait: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
+
+runlevel_set: %: %.c
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	rm -f xwait
