@@ -12,7 +12,7 @@ use partition_table;
 use c;
 
 my @fields = qw(active start_head start_sec start_cyl type end_head end_sec end_cyl start size);
-my $format = "C8 I2";
+my $format = "C8 V2";
 my $magic = "\x55\xAA";
 my $nb_primary = 4;
 
