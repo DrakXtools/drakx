@@ -835,7 +835,10 @@ sub addUser {
 
     any::addUsers($users);
 
-    $o->pkg_install("autologin") if $o->{autologin};
+    if ($o->{autologin}) {
+	$o->{desktop} ||= first(any::sessions());
+	$o->pkg_install("autologin") if !member($o->{desktop}, 'KDE', 'Gnome');
+    }
     any::set_autologin($o->{autologin}, $o->{desktop});
 
     install_any::disable_user_view() if @$users == ();
