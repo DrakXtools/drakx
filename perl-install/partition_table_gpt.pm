@@ -147,6 +147,7 @@ sub write {
 
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size};
+	$_->{guid} ||= 'TODO';
 	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
     my $partitionEntries = join('', map {
