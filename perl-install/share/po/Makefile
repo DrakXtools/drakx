@@ -25,6 +25,7 @@ help:
 	fi
 	touch doc/manualB/entities/es/{button,icon,tab,text_field}_list.ent
 	./help_xml2pm.pl
+	mv help-zh_cn.pot help-zh_CN.pot
 
 %.mo: %.po
 	msgfmt -o $@ $<
