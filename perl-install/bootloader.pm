@@ -206,7 +206,7 @@ sub get_append {
 sub add_append {
     my ($b, $key, $val) = @_;
 
-    foreach (\$b->{perImageAppend}, map { \$_->{append} } @{$b->{entries}}) {
+    foreach (\$b->{perImageAppend}, map { \$_->{append} } grep { $_->{type} eq 'image' } @{$b->{entries}}) {
 	my ($simple, $dict) = unpack_append($$_);
 	@$dict = grep { $_->[0] ne $key || $key eq 'mem' && append__mem_is_memsize($_->[1]) != append__mem_is_memsize($val) } @$dict;
 	push @$dict, [ $key, $val ] if $val;
