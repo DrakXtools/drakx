@@ -29,6 +29,7 @@ sub ask_from_listW {
     my ($o, $title, $messages, $l, $def) = @_;
 
     if (@$l < 5 && sum(map { length $_ } @$l) < 70) {
+	my $defW;
 	my $w = my_gtk->new($title, %$o);
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	gtkadd($w->{window},
@@ -37,12 +38,12 @@ sub ask_from_listW {
 			      map {
 				  my $b = new Gtk::Button($_);
 				  $b->signal_connect(clicked => [ $f, $_ ]);
-				  $_ eq $def and $def = $b;
+				  $_ eq $def and $defW = $b;
 				  $b;
 			      } @$l),
 		       ),
 	       );
-	$def->grab_focus if $def;
+	$defW->grab_focus if $defW;
 	$w->main;
     } else {
 	my $w = my_gtk->new($title);

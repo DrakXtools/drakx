@@ -363,8 +363,8 @@ sub create_config_file($$%) {
     
     while (<IN>) {
 	if (/@@@(.*)@@@/) {
-	    defined($toreplace{$1}) or die "I can't replace $chaine";
-	    s/@@@(.*)@@@/$toreplace{$1}/g;
+	    my $r = $toreplace{$1} or die "I can't replace $1";
+	    s/@@@(.*)@@@/$r/g;
 	}
 	print OUT;
     }
