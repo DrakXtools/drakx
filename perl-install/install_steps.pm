@@ -306,6 +306,11 @@ sub beforeInstallPackages {
 
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
+
+    #- add oem lilo theme and background if the files exists.
+    mkdir "$o->{prefix}$_" foreach qw(/boot /usr /usr/share /usr/share/mdk);
+    install_any::getAndSaveFile("Mandrake/base/oem-message-graphic", "$o->{prefix}/boot/oem-message-graphic");
+    install_any::getAndSaveFile("Mandrake/base/oem-background.png", "$o->{prefix}/usr/share/mdk/oem-background.png");
 }
 
 sub pkg_install {
@@ -512,6 +517,31 @@ GridHeight=70
 		renamef("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgiorig");
 		renamef("$o->{prefix}/$_.rpmnew", "$o->{prefix}/$_");
 	    }
+	}
+    }
+
+    #- update oem lilo image if it exists.
+    if (-s "/boot/oem-message-graphic") {
+	rename "$o->{prefix}/boot/message-graphic", "$o->{prefix}/boot/message-graphic.mdkgiorig";
+	rename "$o->{prefix}/boot/oem-message-graphic", "$o->{prefix}/boot/message-graphic";
+    }
+
+    #- update background image if it exists for common environment.
+    if (-s -s "/usr/share/mdk/oem-background.png") {
+	#- KDE desktop background.
+	if (-e "$o->{prefix}/usr/share/config/kdesktoprc") {
+	    update_gnomekderc("$o->{prefix}/usr/share/config/kdesktoprc", "Desktop0",
+			      MultiWallpaperMode => "NoMulti",
+			      Wallpaper => "/usr/share/mdk/oem-background.png",
+			      WallpaperMode => "Scaled",
+			     );
+	}
+	#- GNOME desktop background.
+	if (-e "$o->{prefix}/etc/gnome/config/Background") {
+	    update_gnomekderc("$o->{prefix}/etc/gnome/config/Background", "Default",
+			      wallpaper => "/usr/share/mdk/oem-background.png",
+			      wallpaperAlign => "3",
+			     );
 	}
     }
 
