@@ -195,17 +195,18 @@ sub selectMouse {
 
 #------------------------------------------------------------------------------
 sub chooseSizeToInstall {
-    my ($o, $packages, $min_size, $max_size_, $availableC, $individual) = @_;
+    my ($o, $packages, $min_size, $def_size, $max_size_, $availableC, $individual) = @_;
     my $max_size = min($max_size_, $availableC);
     my $enough = $max_size == $max_size_;
     my $percentage = int 100 * $max_size / $max_size_;
 
     #- don't ask anything if the difference between min and max is too small
+    log::l("chooseSizeToInstall: min_size=$min_size, def_size=$def_size, max_size=$max_size_, available=$availableC");
     return $max_size if $min_size && $max_size / $min_size < 1.05;
 
     log::l("choosing size to install between $min_size and $max_size");
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($percentage, $min_size * 100 / $max_size_, $percentage);
+    my $adj = create_adjustment(int(100 * $def_size / $max_size_), $min_size * 100 / $max_size_, $percentage);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 20, 0);
     my $val;
 
