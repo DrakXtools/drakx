@@ -209,9 +209,8 @@ endif
 
 # POFILES to disable for installation:
 # be,fur: too few messages translated; 
-# pa_IN: too few and font problem
 # ta: font problem
-	rm -rf $(DEST)/usr/share/locale_special/{be,fur,pa_IN,ta}
+	rm -rf $(DEST)/usr/share/locale_special/{be,fur,ta}
 
 ifeq (y,$(USE_PCMCIA))
 	cp -a /etc/pcmcia $(DEST)/etc

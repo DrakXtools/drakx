@@ -101,7 +101,7 @@ our %langs = (
 'nl' =>    [ 'Dutch',               'Nederlands',        'nl_NL', '1    ', 'iso-8859-15' ],
 'nn' =>    [ 'Norwegian Nynorsk',   'Norsk, Nynorsk',    'nn_NO', '1    ', 'iso-8859-1',  'nn:no@nynorsk:no_NY:no:nb' ],
 'oc' =>    [ 'Occitan',             'Occitan',           'oc_FR', '1    ', 'iso-8859-1',  'oc:fr_FR:fr' ],
-'pa' =>    [ 'Punjabi',             'ZZ Punjabi',        'pa_IN', ' 2   ', 'unicode' ],
+'pa_IN' => [ 'Punjabi (gurmukhi)',  'ZZ Punjabi',        'pa_IN', ' 2   ', 'utf_pa' ],
 #- 'tl' in priority position for now, as 'fil' is not much used.
 #- Monolingual window managers will not see the menus otherwise
 #- "ph_PH" should change to "fil_PH" in the future ("ph" is not
@@ -713,6 +713,7 @@ my %charsets = (
 "utf_kn"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_ml"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_lo"      => [ undef,            undef,   undef,      "utf8",    undef ],
+"utf_pa"      => [ undef,            undef,   undef,      "utf8",    undef ],
 "utf_ta"      => [ "tamil",          undef,   undef,      "utf8",    undef ],
 "utf_vi"      => [ "tcvn8x16",       undef,   undef,      "utf8",    undef ],
 "utf_lat8"    => [ "iso14.f16",      undef,   undef,      "utf8",    undef ],
@@ -821,6 +822,7 @@ my %charset2kde_font = (
 #-'utf_km' => [ "????,14", ],
   'utf_kn' => [ "Sampige,14", ],
   'utf_ml' => [ "malayalam,14", ],
+  'utf_pa' => [ "Lohit Punjab,14", ],
   'utf_ta' => [ "TSCu_Paranar,14", "Tsc_avarangalfxd,10", "TSCu_Paranar,12", ],
   'utf_vi' => [ "Nimbus Sans L,12", "Nimbus Mono L,10", "Nimbus Sans L,11" ],
   #- the following should be changed to better defaults when better fonts
@@ -1058,7 +1060,7 @@ sub write {
     }
 
     #- deactivate translations on console for most CJK, RTL and complex languages
-    if (member($locale->{lang}, qw(ar bn fa he hi ja kn ko pa ug ur yi zh_TW zh_CN))) {
+    if (member($locale->{lang}, qw(ar bn fa he hi ja kn ko pa_IN ug ur yi zh_TW zh_CN))) {
         #- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
         #-	it is needed for languages not supported by the linux console
         log::explanations(qq(Disabling tranlsation on console since "$locale->{lang}" is not supported by the console));
