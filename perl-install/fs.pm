@@ -95,7 +95,7 @@ sub merge_info_from_mtab {
     foreach (@l1, @l2) {
 	if ($::isInstall && $_->{mntpoint} eq '/tmp/hdimage') {
 	    $_->{real_mntpoint} = delete $_->{mntpoint};
-	    $_->{mntpoint} = "/mnt/hd"; #- remap for hd install.
+	    $_->{mntpoint} = common::usingRamdisk() && "/mnt/hd"; #- remap for hd install.
 	}
 	$_->{isMounted} = $_->{isFormatted} = 1;
 	delete $_->{options};
@@ -569,8 +569,12 @@ sub mount_part {
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
 
-    if ($part->{isMounted} && $part->{real_mntpoint}) {
+    if ($part->{isMounted} && $part->{real_mntpoint} && $part->{mntpoint}) {
 	log::l("remounting partition on $prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
+	if ($::isInstall) { #- ensure partition will not be busy.
+	    require install_any;
+	    install_any::getFile('XXX');
+	}
 	umount($part->{real_mntpoint});
 	rmdir $part->{real_mntpoint};
 	symlinkf "$prefix$part->{mntpoint}", $part->{real_mntpoint};
