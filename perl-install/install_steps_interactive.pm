@@ -348,26 +348,22 @@ sub afterInstallPackages($) {
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
     local $_;
-    if ($o->{intf}) {
-	if (!$::beginner && $first_time || $::expert) {
-	    my @l = (
-		     __("Keep the current IP configuration"),
-		     __("Reconfigure network now"),
-		     __("Do not set up networking"),
-		    );
-	    $_ = $o->ask_from_list_([ _("Network Configuration") ],
-				    _("Local networking has already been configured. Do you want to:"),
-				    [ @l ]) || "Do not";
-	} else { $_ = "Keep"; }
-    } elsif ($o->{modem}) {
-	$_ = "Dialup";
+    if ($o->{intf} && $first_time) {
+	my @l = (
+		 __("Keep the current IP configuration"),
+		 __("Reconfigure network now"),
+		 __("Do not set up networking"),
+		);
+	$_ = $::beginner ? "Keep" : 
+	  $o->ask_from_list_([ _("Network Configuration") ],
+			       _("Local networking has already been configured. Do you want to:"),
+			     [ @l ]) || "Do not";
     } else {
 	$_ = $::beginner ? "Do not" :
 	  $o->ask_from_list_([ _("Network Configuration") ],
 			     _("Do you want to configure networking for your system?"),
 			     [ __("Local LAN"), __("Dialup with modem"), __("Do not set up networking") ]);
     }
-
     if (/^Dialup/) {
 	$o->pppConfig;
     } elsif (/^Do not/) {

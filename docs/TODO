@@ -5,7 +5,18 @@ relative to 7.0-2.
 diskdrake can olverlap partitions (resize lower, resize original typically
 after clear all and auto allocate, try maximal size available).
 
+
+-to test--------------------------------------------------------------------------------
+fstab must be sorted (/usr/local after /usr)
+
+in chooseResolutions: display the graphic card found
+
+diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
+
+
 -choices--------------------------------------------------------------------------------
+tree for choosing things like timezone, monitors, graphic cards, modules, keyboard? ...
+
 index/compress hdlist?
 
 checkboxes in groups based on compssList (and availableSpace?)
@@ -19,8 +30,6 @@ feature missing: cancel installation
 crypto: add a cancel & progress bar while downloading
 
 error handling (like reading hdlist)
-
-get the error when reading .rpm files fail
 
 diskdrake in text mode
 
@@ -55,32 +64,15 @@ auto ppp-configure with free provider
 
 
 -easy fixes-----------------------------------------------------------------------------
-usb module not removed if no mouse found
-
-(small)urpmi: handle many args on cmd-line
-
-fstab must be sorted (/usr/local after /usr)
-
 configure DHCP for newbies if ethernet & DHCP card available
 
 rpmdrake proposition for cdrom labels
 
-fix any // in path to ftp server otherwise windobe server bug :(
-
-(?) Je viens de faire une installation sur une machine où seul Be était
-installé. Je l'ai supprimé et installé (mode recommandé) Oxygen. Au
-redémarrage, le boot manager de Be apparaît et il est impossible de
-démarrer Linux.
-Pourquoi ne pas installer LILO si on supprime toutes les partitions ?
-
-(?) Xconfiguration: if "can't open fixed font", relaunch xfs.
-
-(?) in chooseResolutions: display the graphic card found
-
-(?) diskdrake should warn if nb_ide_parts > 63, nb_scsi_parts > 15
-
 
 -fixes needing thinking-----------------------------------------------------------------
+get the error when getting/reading .rpm files fail
+better timeout handling for network installs
+
 handle not enough room for update
 (fpons)verify the free space is big enough.
 
@@ -159,6 +151,8 @@ aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
+usb module not removed if no mouse found
+
 (fpons)handle dat drives
 
 hibernation on laptop -> clock not restored
@@ -170,6 +164,14 @@ eg: SIS6326 needs "no_bitblt" "no_bltimage" and 24bpp instead of 32bpp
 
 
 -(?)---------------------------------------------------------------------------------
+(?) Xconfiguration: if "can't open fixed font", relaunch xfs.
+
+(?) Je viens de faire une installation sur une machine où seul Be était
+installé. Je l'ai supprimé et installé (mode recommandé) Oxygen. Au
+redémarrage, le boot manager de Be apparaît et il est impossible de
+démarrer Linux.
+Pourquoi ne pas installer LILO si on supprime toutes les partitions ?
+
 (?)initrd in bzip2
 
 (?)smaller zsh (or ash in initrd)
@@ -389,3 +391,8 @@ peut en sortir. La seule solution est de redémarrer.
 (obsolete)bug when selecting compssUsers, do not deselect after (if u deselect)
 
 (done,pix)detect ide burners and then add hdX=ide-scsi to kernel cmdline
+
+(done,pix)urpmi: handle many args on cmd-line
+
+(done,pix)fix any // in path to ftp server otherwise windobe server bug :(
+

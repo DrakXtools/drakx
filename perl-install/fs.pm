@@ -284,17 +284,14 @@ sub write_fstab($;$$) {
       } grep { isFat($_) &&
 		 ! exists $new{"/dev/$_->{device}"} } @$fstab;
 
-    my @current = cat_("$prefix/etc/fstab");
+    push @to_add,
+      sort { $a->[1] cmp $b->[1] }
+      grep { !exists $new{$_->[0]} && !exists $new{$_->[1]} }
+      map { [ split ] } cat_("$prefix/etc/fstab");
 
     log::l("writing $prefix/etc/fstab");
     local *F;
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
-    foreach (@current) {
-	my ($a, $b) = split;
-	#- if we find one line of fstab containing either the same device or mntpoint, do not write it
-	exists $new{$a} || exists $new{$b} and next;
-	print F $_;
-    }
     print F join(" ", @$_), "\n" foreach @to_add;
 }
 

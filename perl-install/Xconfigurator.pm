@@ -472,7 +472,11 @@ sub chooseResolutionsGtk($$;$) {
 			   });
     }
     gtkadd($W->{window},
-	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth")),
+	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth"),
+					      "(" . ($o->{card}{type} ? 
+						     _("Graphic card: %s\n", $o->{card}{type}) :
+						     _("XFree86 server: %s\n", $o->{card}{server})) . ")"
+					     ),
 		    1, gtkpack(new Gtk::HBox(0,20),
 			       $depth_combo = new Gtk::Combo,
 			       gtkpack_(new Gtk::VBox(0,0),
