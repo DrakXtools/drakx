@@ -33,7 +33,7 @@ sub configure {
 	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
 	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
 	require network::modem;
-	network::modem::pppConfig($netcnx->{isdn_external}, $mouse, $netc) or goto isdn_step_1;
+	network::modem::pppConfig($netcnx->{isdn_external}, undef, $netc) or goto isdn_step_1;
     }
     1;
 }
