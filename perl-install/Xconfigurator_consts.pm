@@ -112,7 +112,8 @@ use common qw(:common);
     __("16 MB or more") => 16384,
 );
 
-$good_default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
+$good_default_monitor = arch !~ /ppc/ ? "High Frequency SVGA, 1024x768 at 70 Hz" : 
+    detect_devices::get_mac_model =~ /^iBook/ ? "iBook 800x600" : "iMac/PowerBook 1024x768";
 $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 
 %standard_monitors = (
@@ -653,6 +654,19 @@ Modeline "800x600"     50     800  856  976 1040   600  637  643  666 +hsync +vs
 #Modeline "1024x768"    65    1024 1032 1176 1344   768  771  777  806 -hsync -vsync
 # 1024x768 @ 70 Hz, 56.5 kHz hsync
 Modeline "1024x768"    75    1024 1048 1184 1328   768  771  777  806 -hsync -vsync
+';
+$modelines_text_apple = '
+Section "Modes"
+    Identifier "Mac Modes"    
+    # Apple iMac modes
+    Modeline "1024x768"   78.525 1024 1049 1145 1312   768  769  772  800 +hsync +vsync
+    Modeline "800x600"    62.357  800  821  901 1040   600  601  604  632 +hsync +vsync
+    Modeline "640x480"    49.886  640  661  725  832   480  481  484  514 +hsync +vsync
+    # Apple monitors tend to do 832x624
+    Modeline "832x624"    57      832  876  940 1152   624  625  628  667 -hsync -vsync
+    # Apple PowerBook G3
+    Modeline "800x600"    100     800  816  824  840   600  616  624  640 -hsync -vsync
+EndSection
 ';
 $modelines_text = '
 # This is a set of standard mode timings. Modes that are out of monitor spec

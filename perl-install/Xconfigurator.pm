@@ -195,7 +195,8 @@ sub cardConfigurationAuto() {
     }
     #- in case of only one cards, remove all busid reference, this will avoid
     #- need of change of it if the card is moved.
-    @cards == 1 and delete $cards[0]{busid};
+    #- on many PPC machines, card is on-board, busid is important, leave?
+    @cards == 1 and delete $cards[0]{busid} if arch() !~ /ppc/;
     @cards;
 }
 
@@ -262,6 +263,7 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 			 $card->{identifier} =~ /Rage X[CL]/ ||
 			 $card->{identifier} =~ /3D Rage (?:LT|Pro)/);
                          #- NOT WORKING $card->{type} =~ /Intel 810/);
+    $card->{Utah_glx} = '' if arch() =~ /ppc/; #- No #D XFree 3.3 for PPC
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX but EXPERIMENTAL that may freeze the machine (FOR INFO NOT USED).
     $card->{Utah_glx_EXPERIMENTAL} = ($card->{type} =~ /RIVA TNT/ || #- all RIVA/GeForce comes from NVIDIA and may freeze (gltron).
 				      #$card->{type} =~ /RIVA128/ ||
@@ -452,7 +454,7 @@ sub monitorConfiguration(;$$) {
 
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
-    my $good_default = 'Generic|' . translate($good_default_monitor);
+    my $good_default = (arch() =~ /ppc/ ? 'Apple|' : 'Generic|') . translate($good_default_monitor);
     $monitor->{type} ||=
       ($::auto_install ? $low_default_monitor :
        $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], $good_default));
@@ -642,14 +644,13 @@ sub autoDefaultDepth($$) {
 sub autoDefaultResolution {
     return "1024x768" if detect_devices::hasPCMCIA;
 
-	if (arch() =~ /ppc/) {
-		my $mac_model = detect_devices::get_mac_model();
-		return "1024x768" if $mac_model =~ /PowerBook1,1/; #- 800x600 not a pretty site on Powerbook
-	}
+    if (arch() =~ /ppc/) {
+	return "1024x768" if detect_devices::get_mac_model =~ /^PowerBook|^iMac/;
+    }
 	
     my ($size) = @_;
     $monitorSize2resolution[round($size || 14)] || #- assume a small monitor (size is in inch)
-      $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+    $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
 sub chooseResolutionsGtk($$;$) {
@@ -1059,6 +1060,7 @@ EndSection
     print G $monitorsection_text1;
     print F qq(    Identifier "$O->{type}"\n);
     print G qq(    Identifier "$O->{type}"\n);
+    print G qq(    UseModes   "Mac Modes"\n) if arch() =~ /ppc/;
     print F qq(    VendorName "$O->{vendor}"\n);
     print G qq(    VendorName "$O->{vendor}"\n);
     print F qq(    ModelName  "$O->{model}"\n\n);
@@ -1075,6 +1077,7 @@ EndSection
     print F ($O->{modelines} || '') . ($o->{card}{type} eq "TG 96" ? $modelines_text_Trident_TG_96xx : $modelines_text);
     print F "\nEndSection\n\n\n";
     print G "\nEndSection\n\n\n";
+    print G $modelines_text_apple if arch() =~ /ppc/;
     foreach (2..@{$o->{card}{cards} || []}) {
 	print G qq(Section "Monitor"\n);
 	print G qq(    Identifier "monitor$_"\n);

@@ -350,7 +350,7 @@ sub boot_img_ppc {
     my ($extension) = $modz =~ /.*\/([^\/]+)/;
     _ "mkdir -p $dir/$boot";
     _ "cp -f $kern $dir/$boot/vmlinux";
-    _ "cp -f all.rdz$extension $dir/boot/all.gz";
+    _ "cp -f images/all.rdz$extension $dir/boot/all.gz";
     _ "cp -f tools/ppc/yaboot $dir/boot/yaboot";
 	
 	output("$dir/$boot/yaboot.conf", "

@@ -40,7 +40,8 @@ my %mice =
      
  'USB' =>
  [ [ 'usbmouse' ],
-   [ [ 2, 'ps/2', 'PS/2', __("Generic") ],
+   [ if_(arch() eq 'ppc', [ 1, 'ps/2', 'PS/2', __("1 button") ]),
+     [ 2, 'ps/2', 'PS/2', __("Generic") ],
      [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
    ]],
 
@@ -192,6 +193,8 @@ sub write {
 	    $_ = '' if /^\Qdev.mac_hid.mouse_button/;
 	    $_ .= $s if eof;
 	} "$prefix/etc/sysctl.conf";
+	#- hack - dev RPM symlinks to mouse0 - lands on mouse1 with new input layer on PPC input/mice will get both ADB and USB
+	symlinkf "/dev/input/mice", "$prefix/dev/usbmouse" if ($mouse->{device} eq "usbmouse");    
     }
 }
 
@@ -227,7 +230,7 @@ sub detect() {
     }
     if (arch() eq "ppc") {
         return fullname2mouse(detect_devices::hasMousePS2("usbmouse") ? 
-			      "USB|Generic" :
+			      "USB|1 button" :
 			      # No need to search for an ADB mouse.  If I did, the PPC kernel would
 			      # find one whether or not I had one installed!  So..  default to it.
 			      "busmouse|1 button");
