@@ -313,7 +313,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Tue Jul 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.15mdk
-- fix error and warning dialogs
+- drakbackup, drakperm: fix button layout
 - drakboot, drakfloppy: use option menus rather than non editable
   combo
 - drakboot:
@@ -322,8 +322,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakfloppy: grey remove button if no module to remove in modules
   list
 - draksec: wrap labels
+- fix interactive apps on X11 (eg diskdrake)
+- fix error and warning dialogs
 - logdrake: ensure we got a valied email in "email alert"
 - printerdrake: make printerdrake runable
+- xfdrake: make it use stock items too
 
 * Mon Jul 14 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.14mdk
 - drakboot: fix /etc/lilo.conf generation when reading grub config by setting
