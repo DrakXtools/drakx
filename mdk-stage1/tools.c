@@ -33,6 +33,7 @@
 #include <bzlib.h>
 #include <sys/mount.h>
 #include <sys/poll.h>
+#include <errno.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -224,37 +225,58 @@ int ramdisk_possible(void)
 }
 
 
-static void save_stuff_for_rescue(void)
+enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall))
 {
-	void save_this_file(char * file) {
-		char buf[5000];
-		int fd_r, fd_w, i;
-		char location[100];
+        FILE * f_from, * f_to;
+        size_t quantity __attribute__((aligned(16))), overall = 0;
+        char buf[4096] __attribute__((aligned(4096)));
+        int ret = RETURN_ERROR;
 
-		if ((fd_r = open(file, O_RDONLY)) < 0) {
-			log_message("can't open %s for read", file);
-			return;
-		}
-		strcpy(location, STAGE2_LOCATION);
-		strcat(location, file);
-		if ((fd_w = open(location, O_WRONLY)) < 0) {
-			log_message("can't open %s for write", location);
-			close(fd_r);
-			return;
-		}
-		if ((i = read(fd_r, buf, sizeof(buf))) <= 0) {
-			log_message("can't read from %s", file);
-			close(fd_r); close(fd_w);
-			return;
-		}
-		if (write(fd_w, buf, i) != i)
-			log_message("can't write %d bytes to %s", i, location);
-		close(fd_r); close(fd_w);
-		log_message("saved file %s for rescue (%d bytes)", file, i);
-	}
-	save_this_file("/etc/resolv.conf");
+        log_message("copy_file: %s -> %s", from, to);
+
+        if (!(f_from = fopen(from, "rb"))) {
+                log_perror(from);
+                return RETURN_ERROR;
+        }
+
+        if (!(f_to = fopen(to, "w"))) {
+                log_perror(to);
+                goto close_from;
+                return RETURN_ERROR;
+        }
+
+        do {
+                if ((quantity = fread(buf, 1, sizeof(buf), f_from)) > 0) {
+                        if (fwrite(buf, 1, quantity, f_to) != quantity) {
+                                log_message("short write (%s)", strerror(errno));
+                                goto cleanup;
+                        }
+                }
+                if (callback_func) {
+                        overall += quantity;
+                        callback_func(overall);
+                }
+        } while (!feof(f_from) && !ferror(f_from) && !ferror(f_to));
+
+        if (ferror(f_from) || ferror(f_to)) {
+                log_message("an error occured: %s", strerror(errno));
+                goto cleanup;
+        }
+
+        ret = RETURN_OK;
+
+ cleanup:
+        fclose(f_to);
+ close_from:
+        fclose(f_from);
+
+        return ret;
 }
 
+static void save_stuff_for_rescue(void)
+{
+        copy_file("/etc/resolv.conf", STAGE2_LOCATION "/resolv.conf", NULL);
+}
 
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 {

@@ -33,6 +33,7 @@ off_t file_size(const char * path);
 int total_memory(void);
 int ramdisk_possible(void);
 char * get_ramdisk_realname(void);
+enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
 enum return_type load_ramdisk(void);
 enum return_type load_ramdisk_fd(int ramdisk_fd, int size);
 void * memdup(void *src, size_t size);

@@ -424,6 +424,7 @@ int mandrake_move_post(void)
         char* clp       = IMAGE_LOCATION "/live_tree_boot.clp";
         char* clp_tmpfs = SLASH_LOCATION "/live_tree_boot.clp";
         char* live = IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl";
+        int ret;
 
         if (IS_LIVE || access(clp, R_OK)) {
                 log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
@@ -438,42 +439,13 @@ int mandrake_move_post(void)
                 }
         }
 
-        {
-                FILE * from, * to;
-                size_t quantity __attribute__((aligned(16))), overall = 0;
-                char buf[4096] __attribute__((aligned(4096)));
-
-                log_message("move: copying live_tree_boot.clp to tmpfs");
-                if (scall(!(from = fopen(clp, "rb")), "fopen"))
-                        return RETURN_ERROR;
-                if (scall(!(to = fopen(clp_tmpfs, "w")), "fopen"))
-                        return RETURN_ERROR;
-
-                init_progression("Loading startup program into memory...", file_size(clp));
-
-                do {
-                        if ((quantity = fread(buf, 1, sizeof(buf), from)) > 0) {
-                                if (fwrite(buf, 1, quantity, to) != quantity) {
-                                        log_message("short write (%s)", strerror(errno));
-                                        return RETURN_ERROR;
-                                }
-                        }
-                        overall += quantity;
-                        update_progression(overall);
-                } while (!feof(from) && !ferror(from) && !ferror(to));
-
-                end_progression();
-
-                if (ferror(from) || ferror(to)) {
-                        log_message("an error occured while copying live_tree_boot.clp (%s)", strerror(errno));
-                        return RETURN_ERROR;
-                }
-                fclose(from);
-                fclose(to);
-
-                if (lomount(clp_tmpfs, BOOT_LOCATION, NULL, 1))
-                        stg1_error_message("Could not mount boot compressed loopback :(.");
-        }
+        init_progression("Loading startup program into memory...", file_size(clp));
+        ret = copy_file(clp, clp_tmpfs, update_progression);
+        end_progression();
+        if (ret != RETURN_OK)
+                return ret;
+        if (lomount(clp_tmpfs, BOOT_LOCATION, NULL, 1))
+                stg1_error_message("Could not mount boot compressed loopback :(.");
 
  handle_clps:
         if (handle_clp(IMAGE_LOCATION "/live_tree_always.clp", IMAGE_LOCATION "/live_tree_always/bin/bash",
@@ -536,6 +508,9 @@ int mandrake_move_post(void)
                 if (scall(symlink(RAW_LOCATION_REL "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
                         return RETURN_ERROR;
         }
+
+        mkdir(SLASH_LOCATION "/etc", 0755);
+        copy_file("/etc/resolv.conf", SLASH_LOCATION "/etc/resolv.conf", NULL);
 
         if (IS_DEBUGSTAGE1)
                 while (1);
