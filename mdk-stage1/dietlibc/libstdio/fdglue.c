@@ -36,6 +36,9 @@ FILE* __stdio_init_file(int fd) {
   tmp->bm=0;
   tmp->bs=0;
 #endif
+#ifdef WANT_UNGETC
+  tmp->ungotten = 0;
+#endif
   tmp->flags=0;
 #ifdef WANT_BUFFERED_STDIO
   if (__stdio_atexit==0) {
