@@ -531,7 +531,8 @@ sub create_okcancel {
         push @right, $bok;
     }
 
-    gtknew('VBox', children_loose => [
+    gtknew('VBox', spacing => 5, children_loose => [
+	    gtknew('HBox', height => 5),
             gtknew('HSeparator'),
             gtknew('HBox', children_loose => [
                    map {
