@@ -72,9 +72,9 @@ sub enableShadow() {
 }
 
 sub hdInstallPath() {
-    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/(.*)|);
+    my $tail = first(readlink("/tmp/image") =~ m|^/tmp/hdimage/?(.*)|);
     my $head = first(readlink("/tmp/hdimage") =~ m|$::prefix(.*)|);
-    $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
+    defined $tail && ($head ? "$head/$tail" : "/mnt/hd/$tail");
 }
 
 sub kernelVersion() {
