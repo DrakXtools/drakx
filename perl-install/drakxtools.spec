@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.13mdk
+Release: 0.14mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -288,6 +288,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Fri Jan 24 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.14mdk
+- drakconnect :
+  o get back serial modem detection
+
 * Thu Jan 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.13mdk
 - fix standalone apps error on --help
 - many enhancements to draksound:
