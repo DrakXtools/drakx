@@ -41,9 +41,9 @@ print "Missing in pcitable:\n";
 foreach my $p (@probes) {
     my @r = grep { $_->{vd} eq $p->{vd} } @pcitable;
     @r > 1 and die "duplicate entry in pcitable <$p->{vd}>\n";
-    if (@r && $r[0]->{driver} ne 'yenta_socket') {
-	push @res, "0x$p->{vendor}\t0x$p->{device}\t\"yenta_socket\"\t\"$r[0]->{name}\"\n";
-	$r[0]->{driver} ne 'unknown' and print STDERR "WARNING, driver for <$p->{vd}> was <$r[0]->{driver}>\n";
+    if (!@r || @r && $r[0]->{driver} ne 'yenta_socket') {
+	push @res, "0x$p->{vendor}\t0x$p->{device}\t\"yenta_socket\"\t\"" . (@r ? $r[0]->{name} : '(COMPLETELY MISSING)') . "\"\n";
+	@r and $r[0]->{driver} ne 'unknown' and print STDERR "WARNING, driver for <$p->{vd}> was <$r[0]->{driver}>\n";
     }
 }
 print sort @res;
