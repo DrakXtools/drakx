@@ -447,6 +447,7 @@ my %xim = (
  	XIM => 'xcin',
  	XIM_PROGRAM => 'xcin',
  	XMODIFIERS => '"@im=xcin-zh_TW"',
+	GTK_IM_MODULE => 'xim',
  	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_TW.UTF-8' => {
@@ -454,6 +455,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -big5"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN' => {
@@ -461,6 +463,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -gb"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN.UTF-8' => {
@@ -468,6 +471,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -gb"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_SG' => {
@@ -475,6 +479,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -gb"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_SG.UTF-8' => {
@@ -482,6 +487,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -gb"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_HK' => {
@@ -489,6 +495,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -big5"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_HK.UTF-8' => {
@@ -496,6 +503,7 @@ my %xim = (
 	XIM => 'Chinput',
 	XIM_PROGRAM => '"chinput -big5"',
 	XMODIFIERS => '"@im=Chinput"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko_KR' => {
@@ -506,6 +514,7 @@ my %xim = (
 	#- be the xinitrc script, XIM section, that will choose the right one 
 	#- XIM_PROGRAM => 'ami',
 	XMODIFIERS => '"@im=Ami"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko_KR.UTF-8' => {
@@ -516,6 +525,7 @@ my %xim = (
 	#- be the xinitrc script, XIM section, that will choose the right one 
 	#- XIM_PROGRAM => 'ami',
 	XMODIFIERS => '"@im=Ami"',
+	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ja_JP' => {
@@ -523,12 +533,14 @@ my %xim = (
 	XIM => 'uim-anthy',
 	XIM_PROGRAM => 'uim-xim',
 	XMODIFIERS => '"@im=uim-anthy"',
+	GTK_IM_MODULE => 'uim-anthy',
   },
   'ja_JP.UTF-8' => {
 	ENC => 'utf8',
 	XIM => 'uim-anthy',
 	XIM_PROGRAM => 'uim-xim',
 	XMODIFIERS => '"@im=uim-anthy"',
+	GTK_IM_MODULE => 'uim-anthy',
   },
   #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
   #- 'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
