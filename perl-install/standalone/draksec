@@ -1,31 +1,11 @@
 #!/usr/bin/perl
 
-# DrakSec
-
-# Copyright (C) 2002 MandrakeSoft (cbelisle@mandrakesoft.com)
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2, or (at your option)
-# any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use common;
 use interactive;
-use any;
-use c;
 use log;
 use security::msec;
 
@@ -42,24 +22,12 @@ my $in = 'interactive'->vnew('su', 'security');
 begin:
 $::isEmbedded and kill USR2, $::CCPID;
 
-my $security = any::get_secure_level('');
-my $libsafe = any::config_libsafe('');
-my $sec_user = any::config_security_user('');
+my $security = security::msec::get_secure_level('');
+my $libsafe = security::msec::config_libsafe('');
+my $sec_user = security::msec::config_security_user('');
 my $w;
 
-if (any::choose_security_level($in, \$security, \$libsafe, \$sec_user)) {
-    log::l("[draksec] Setting libsafe activation variable to $libsafe");
-    any::config_libsafe('', $libsafe);
-    log::l("[draksec] Setting security administrator contact to $sec_user");
-    any::config_security_user('', $sec_user);
-
-    $w = $in->wait_message('', _("Setting security level"));
-    $in->suspend;
-    $ENV{LILO_PASSWORD} = ''; # make it non interactive
-    log::l("[draksec] Setting security level to $security");
-    system "/usr/sbin/msec", $security;
-    $in->resume;
-}
+security::main($in, $security, $sec_user);
 
 !$::isEmbedded ? $in->exit(0) : kill(USR1, $::CCPID);
 goto begin;
