@@ -21,7 +21,7 @@ sub init {
     $::testing and goto drakx_stuff;
 
     #- rw things
-    mkdir "/$_" foreach qw(home mnt root etc var);
+    mkdir "/$_" foreach qw(home mnt root root/tmp etc var);
     mkdir "/etc/$_" foreach qw(X11 cups);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
@@ -87,6 +87,7 @@ sub install2::startMove {
     require install_steps;
     install_steps::addUser($o);
 
+    #- need be done early because it provide some libs such as libssl which is needed for automatic printer config
     lomount_clp('totem') if ! -x '/usr/bin/totem';
 
     #- automatic printer, timezone, network configs
