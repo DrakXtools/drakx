@@ -854,7 +854,7 @@ sub new {
 	    $o->{window} = $o->{rwindow};
 	}
     } else {
-	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => $::Wizard_splash ? 0 : 10);
+	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => 10);
 	set_main_window_size($o);
 
 	$::WizardTable ||= gtknew('VBox');
