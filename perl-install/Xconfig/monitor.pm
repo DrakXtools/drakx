@@ -179,6 +179,7 @@ sub getinfoFromDDC() {
     }
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
     foreach (@{$monitor->{detailed_timings} || []}) {
+	next if $_->{bad_ratio};
 	unshift @{$monitor->{ModeLine}},
 	  { val => $_->{ModeLine}, pre_comment => $_->{ModeLine_comment} . "\n" };
     }
