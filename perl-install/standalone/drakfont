@@ -722,7 +722,7 @@ sub font_choice() {
 sub file_ok_sel {
     my ($_widget, $file_selection) = @_;
     my $file_name = $file_selection->get_filename();
-    if ($file_name =~ /$select_font_msg/) {
+    if ($file_name =~ /\Q$select_font_msg/) {
         create_dialog(N("Error"), N("You've not selected any font"));
     } else {
         print "-- @install\n";
