@@ -114,9 +114,9 @@ sub DoInterface {
 		  [undef , undef, undef, undef, ["tcp", "20"],["tcp", "21"]],
 		  [undef , undef, undef, undef, ["tcp", "25"]],
 		  [undef , undef, undef, $popimap, ["tcp", "109"], ["tcp", "110"], ["tcp", "143"]],
-		  [undef , _("No I don't need DHCP"), _("Yes I need DHCP"), $dhcp],
-		  [undef , _("No I don't need NTP"), _("Yes I need NTP"), $ntp ],
-		  [undef , _("Don't Save"), _("Save & Quit"), $quit ]
+		  [undef , "No I don't need DHCP", "Yes I need DHCP", $dhcp],
+		  [undef , "No I don't need NTP", "Yes I need NTP", $ntp ],
+		  [undef , "Don't Save", "Save & Quit", $quit ]
 		 );
     !Kernel22() and pop @struct, pop @struct;
     for (my $i=0;$i<@struct;$i++) {
@@ -131,12 +131,12 @@ sub DoInterface {
 	}
 	my $no = $l->[1] ? $l->[1] : _("No (firewall this off from the internet)");
 	my $yes = $l->[2] ? $l->[2] : _("Yes (allow this through the firewall)");
-	if (my $e = $in->ask_from_list(_("Firewall Configuration Wizard"),
+	if (my $e = $in->ask_from_list_(_("Firewall Configuration Wizard"),
 				       $messages[$i],
 				       [ $yes, $no ], or_( map { $_ && CheckService($_->[0], $_->[1]) } (@$l[4..6])) ? $yes : $no
 				      )) {
 	    map { $_ and Service($e=~/Yes/, $_->[0], $_->[1]) } (@{$struct[$i]}[4..6]);
-	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/);
+	    $struct[$i][3] and $struct[$i][3]->($e=~/Yes/ || $e eq "Save & Quit");
 	} else {
 	  prev:
 	    $i = $i-2 >= -1 ? $i-2 : -1;
