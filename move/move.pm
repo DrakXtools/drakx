@@ -352,13 +352,10 @@ sub key_installfiles {
             log::l("key_installfiles: installing config files in $sysconf");
             mkdir $sysconf;
             foreach (chomp_(cat_('/image/move/keyfiles'))) {
-                my $target_dir = $sysconf . dirname($_);
-                mkdir_p($target_dir);
-                if (/\*$/) {
-                    run_program::run('cp', glob_($_), $target_dir);
-                    symlinkf("$sysconf$_", $_) foreach glob($_);
-                } else {
-                    run_program::run('cp', $_, "$sysconf$_");
+                mkdir_p($sysconf . dirname($_));
+                my @l = /\*$/ ? glob_($_) : $_;
+		foreach (@l) {
+		    eval { cp_f($_, "$sysconf$_") };
                     symlinkf("$sysconf$_", $_);
                 }
             }
