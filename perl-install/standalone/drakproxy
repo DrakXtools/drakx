@@ -24,6 +24,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use network::network;
 use any;
+use common;
 
 my $u = { getVarsFromSh('/etc/profile.d/proxy.sh') };
 my $in = 'interactive'->vnew('su', 'network');
