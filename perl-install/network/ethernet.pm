@@ -10,8 +10,6 @@ use run_program;
 use network::tools;
 use vars qw(@ISA @EXPORT);
 
-use MDK::Common::Globals "network", qw($in);
-
 @ISA = qw(Exporter);
 @EXPORT = qw(conf_network_card_backend);
 
