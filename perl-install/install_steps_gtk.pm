@@ -577,7 +577,6 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
 	}
     };
     my $install_result;
-    local $ugtk2::pop_it = 1;
     catch_cdie { $install_result = $o->install_steps::installPackages($packages) }
       sub {
 	  if ($@ =~ /^error ordering package list: (.*)/) {

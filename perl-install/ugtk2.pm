@@ -438,7 +438,7 @@ sub create_packtable {
 
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
-    my $wizard_buttons = $::isWizard && !$pop_it;
+    my $wizard_buttons = $::isWizard && !$w->{pop_it};
     $spread ||= $wizard_buttons ? "end" : "spread";
     $cancel = $wizard_buttons ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
     $ok = $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok") if !defined $ok;
@@ -721,7 +721,10 @@ sub new {
     $o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
     
-    if ($::isWizard && !$pop_it) {
+
+    $o->{pop_it} ||= $pop_it || $::WizardTable && listlength($::WizardTable->get_children);
+
+    if ($::isWizard && !$o->{pop_it}) {
 	$o->{isWizard} = 1;
 	$o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
@@ -788,7 +791,7 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
 
-    if ($::isEmbedded && !$pop_it && !eval { $::Plug && $::Plug->child }) {
+    if ($::isEmbedded && !$o->{pop_it} && !eval { $::Plug && $::Plug->child }) {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
 	$o->{rwindow} = $o->{window};
