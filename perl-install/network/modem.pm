@@ -9,6 +9,15 @@ use mouse;
 use network::tools;
 
 
+#-----modem conf
+sub ppp_configure {
+    my ($in, $modem) = @_;
+    $modem or return;
+    $in->do_pkgs->install('ppp') if !$::testing;
+    $in->do_pkgs->install('kdenetwork-kppp') if $in->do_pkgs->is_installed('kdebase');
+    ppp_configure_raw($modem);
+}
+
 sub ppp_configure_raw {
     my ($in, $netc, $modem) = @_;
     $netc->{DOMAINNAME2} = $modem->{domain};
