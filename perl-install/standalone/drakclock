@@ -63,13 +63,13 @@ my (undef, undef, $h_old, $old_day, $old_month, $old_year) = localtime(time());
 
 my @image_size = (300, 300);
 
-$my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
-                                1, gtkpack_(Gtk2::HBox->new(0,0),
-                                            1, gtkpack_(Gtk2::VBox->new(0,0),
+$my_win->{window}->add(gtkpack_(Gtk2::VBox->new,
+                                1, gtkpack_(Gtk2::HBox->new,
+                                            1, gtkpack_(Gtk2::VBox->new,
                                                         0, $calendar,
                                                         0, $button_time,
                                                         1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Network Time Protocol")), 'etched_in'),
-                                                                  gtkpack_(Gtk2::VBox->new(0, 3),
+                                                                  gtkpack_(Gtk2::VBox->new,
                                                                            0, Gtk2::Label->new(N("Your computer can synchronize its clock\n with a remote time server using NTP")),
                                                                            0, gtksignal_connect(gtkset_active($check_ntp = Gtk2::CheckButton->new(N("Enable Network Time Protocol")), $mode),  clicked => sub { 
                                                                                                     $mode = !$mode; 
@@ -78,18 +78,17 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                                                                                         install_ntp();
                                                                                                     }
                                                                                                 }),
-                                                                           0, gtkpack_($hb_ntp = Gtk2::HBox->new(0, 2),
+                                                                           0, gtkpack_($hb_ntp = Gtk2::HBox->new,
                                                                                        0, Gtk2::Label->new(N("Server:")),
                                                                                        1, $combo_ntpserver = Gtk2::Combo->new
                                                                                       )
                                                                           ))
                                                        ),
-                                            1, gtkpack_(Gtk2::VBox->new(0,0),
-                                                        0, gtkpack_(Gtk2::HBox->new(0,0),
+                                            0, gtkpack_(Gtk2::VBox->new,
+                                                        0, gtkpack_(Gtk2::HBox->new,
                                                                     0, $drawing_area = gtkset_size_request(Gtk2::DrawingArea->new, @image_size),
                                                                    ),
                                                         0, gtkpack_(Gtk2::HBox->new(1,0),
-                                                                    0, Gtk2::HBox->new(1,0),
                                                                     0, my $spinner_h = Gtk2::SpinButton->new($adjh, 0, 0),
                                                                     0, my $spinner_m = Gtk2::SpinButton->new($adjm, 0, 0),
                                                                     0, my $spinner_s = Gtk2::SpinButton->new($adjs, 0, 0),
