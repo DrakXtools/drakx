@@ -16,7 +16,7 @@ use vars qw(@ISA @EXPORT);
 use log;
 
 @ISA = qw(Exporter);
-@EXPORT = qw(add2hosts addDefaultRoute configureNetwork2 dns dnsServers down_it findIntf gateway guessHostname is_ip is_ip_forbidden masked_ip netmask read_all_conf read_conf read_interface_conf read_resolv_conf resolv sethostname up_it write_conf write_resolv_conf);
+@EXPORT = qw(add2hosts addDefaultRoute configureNetwork2 dns dnsServers findIntf gateway guessHostname is_ip is_ip_forbidden masked_ip netmask read_all_conf read_conf read_interface_conf read_resolv_conf resolv sethostname write_conf write_resolv_conf);
 
 #-######################################################################################
 #- Functions
@@ -83,20 +83,6 @@ sub read_tmdns_conf {
     }
     
     \%outf;
-}
-
-sub up_it {
-    my ($prefix, $intfs) = @_;
-    $_->{isUp} and return foreach values %$intfs;
-    my $f = "/etc/resolv.conf"; symlink "$prefix/$f", $f;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/network", "start");
-    $_->{isUp} = 1 foreach values %$intfs;
-}
-
-sub down_it {
-    my ($prefix, $intfs) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/network", "stop");
-    $_->{isUp} = 1 foreach values %$intfs;
 }
 
 sub write_conf {
