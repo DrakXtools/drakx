@@ -867,7 +867,7 @@ sub setup_smb {
 	  ($autodetect ?
 	   { label => _("Auto-detected"),
 	     val => \$menuchoice, list => \@menuentrieslist, 
-	     not_edit => 0, format => \&translate, sort => 0,
+	     not_edit => 1, format => \&translate, sort => 0,
 	     allow_empty_list => 1, type => 'combo' }
 	   : ()) ],
 	 complete => sub {
