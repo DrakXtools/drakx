@@ -1,18 +1,16 @@
-merge the install(1) of redhat
+ddcprobe for pnp monitors
 
 smp::detect
 
-try detect_devices::floppies (and how are scsi floppies handled?)
+kickstart like
+
+upgrade
 
 have a better time estimation of the remaining time in install packages
-
-intelligent arguments to insmod.
 
 update the list of modules (in update_kernel)
 
 look at the pcmcia case
-
-upgrade
 
 Xconfigurator:
   simplify Monitors
@@ -21,10 +19,9 @@ Xconfigurator:
   the wait_message is nasty (just pops half second)
   use the VideoRam for skeeping some tests (not all the 32 24 16 15 8)
 
-in package choosing, the group (on the left) is no more `selected' (gtk focus) when clicking on a package (on the right)
+merge the install(1) of redhat
 
-install2 sigsegv when leaving :(
-(i hacked init to reboot on error)
+in package choosing, the group (on the left) is no more `selected' (gtk focus) when clicking on a package (on the right)
 
 verify the free space is big enough.
 
@@ -47,8 +44,6 @@ remove the gray line surrounding the logo
 
 pb with dependencies ``missing'': icewm do not require XFree86 and so you can have icewm but no X server
 
-replace in place catchable die's by cdie's  (as in partition_table::load)
-
 rewrite mouseconfig in perl?
 
 cleanup /etc/services & /etc/protocols
@@ -63,8 +58,6 @@ remove cpio from base when mkbootdisk deps is added
 
 quotema in _ask_from_list in my_gtk
 
-do a iotcl FDGETPRM to detect fd1, fd0.
-
 look at SuperProbe
 
 timezone using a picture (pb: how to delimit zones)
@@ -77,3 +70,11 @@ xmodmap needed even for english as the backspace is not what it should
 aha152x needs "insmod aha152x.o aha152x=0x140,11,7"
 
 have isofs in module.
+
+replace in place catchable die's by cdie's  (as in partition_table::load)
+
+strange: no scsi of type 'fd', only 'tape'
+
+try detect_devices::floppies (and how are scsi floppies handled?)
+maybe: do a iotcl FDGETPRM to detect fd1, fd0.
+

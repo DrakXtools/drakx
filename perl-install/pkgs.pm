@@ -218,7 +218,7 @@ sub setSelectedFromCompssList($$$$$) {
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
 	my @values = map { $_->{values}[$ind] } @packages;
-	sort { $values[$a] <=> $values[$b] } 0 .. $#packages;
+	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
 	my $p = $packages[$_];

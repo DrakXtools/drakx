@@ -121,7 +121,7 @@ sub set {
 	delete $ENV{LC_ALL};
 	delete $ENV{LINGUAS};
     }
-    install_any::install_cpio($prefix, "/usr/share/locale", $lang);
+    install_any::install_cpio("/usr/share/locale", $lang);
 }
 
 sub write {

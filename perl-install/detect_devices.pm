@@ -31,9 +31,7 @@ sub get {
 sub hds() { grep { $_->{type} eq 'hd' } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
 sub floppies() {
-    (grep { 
-	my $fd = tryOpen($_);
-    } qw(fd0 fd1)),
+    (grep { tryOpen($_) } qw(fd0 fd1)),
     (grep { $_->{type} eq 'fd' } get());
 }
 

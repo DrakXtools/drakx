@@ -131,12 +131,12 @@ sub addToBeDone(&$) {
 sub install_cpio {
     my ($dir, $name) = @_;
 
-    return if -e "$dir/$name";
+    return "$dir/$name" if -e "$dir/$name";
 
     my $cpio = "$dir.cpio.bz2";
     -e $cpio or return;
 
-    commands::rm "-r", $dir;
+    eval { commands::rm "-r", $dir };
     mkdir $dir, 0755;
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -i $name");
     "$dir/$name";

@@ -70,7 +70,7 @@ gendepslist: %: %.cc
 	$(CXX) -I/usr/include/rpm $(CFLAGS) $< -lrpm -ldb1 -lz -o $@
 
 $(BASE)/depslist: gendepslist $(RPMS) 
-	./gendepslist $(BASE)depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
+	./gendepslist $(BASE)/depslist $(ROOTDEST)/Mandrake/RPMS/*.rpm
 
 install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
@@ -178,7 +178,7 @@ stage2:
 	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_SVGA
 	for i in /usr/share/locale /usr/share/keymaps /usr/share/xmodmap; do \
 		name=`basename $$i` ; \
-		(cd $(STAGE2TMP)/`dirname $$i` ; find $$name | cpio --quiet -o 2>/dev/null | bzip2 > $$name.cpio.bz2 ; rm -rf $$name) \
+		(cd $(STAGE2TMP)/$$i ; find * | cpio --quiet -o 2>/dev/null | bzip2 > ../$$name.cpio.bz2 ; rm -rf $$name) \
 	done
 	$(SUDO) cp -a $(STAGE2TMP)/* /mnt/stage2
 	$(SUDO) rm -rf $(STAGE2TMP)
