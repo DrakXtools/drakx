@@ -265,7 +265,7 @@ sub build_tree {
 	$intf->{device} = $netc->{autodetect}{modem};
 	my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
 
-	$intf->{kppprc} = "/root/.kde/share/config/kppprc";
+	$intf->{kppprc} = "$::prefix/root/.kde/share/config/kppprc";
 	my %m = getVarsFromSh($intf->{kppprc});
 	$l{$_} = $m{$_} foreach keys %m;
         
