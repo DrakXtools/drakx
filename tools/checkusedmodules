@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# This script compares the perl modules used by the .pm files in perl-install
+# against the ones listed in share/list, to detect potential missing modules
+# (and potential run-time problems during the stage 2)
+
+cd ../perl-install || exit 1;
+
+# list of used .pm files
+find . -name '*.pm' -not -name b_dump_strings.pm -not -path ./interactive/http.pm | \
+    xargs perl -lne '/^\s*(use|require)\s+([\w:]+)/ && print $2' | sort -u > /tmp/gi-used-pm
+
+# list of .pm files included in install
+perl -lne 'm{/(?:PERL_VERSION|ARCH-linux|vendor_perl/\*)/([\w/]+)\.pm$} and $_=$1, s,/,::,g, print' share/list > /tmp/gi-found-pm0
+find . -name blib -prune -o -name '*.pm' | perl -ne 's,^\./,,; s/\.pm$// or next; s,/,::,g; print' >> /tmp/gi-found-pm0
+
+# compute difference
+sort -u /tmp/gi-found-pm0 > /tmp/gi-found-pm
+diff -u /tmp/gi-{used,found}-pm | perl -lne 'BEGIN{print"Unpackaged modules:"} s/^-(?!-)/  / && print'
+
+# cleanup
+rm -f /tmp/gi-used-pm /tmp/gi-found-pm{,0}
