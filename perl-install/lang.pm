@@ -867,40 +867,39 @@ sub set {
     if (!-e "$dir/$lang" && common::usingRamdisk()) {
 	@ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
 
-	my @LCs = qw(LC_ADDRESS LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME);
+	my @LCs = qw(LC_ADDRESS LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME);
 	
-	my $charset = during_install__l2charset($lang) || $lang;
-	
-	#- there are 3 main charsets containing everything for all locales, except LC_CTYPE
-	#- by default, there is UTF-8.
-	#- when asked for GB2312 or BIG5, removing the other main charsets
-	my $main_charset = member($charset, 'GB2312', 'BIG5') ? $charset : 'en_US.UTF-8';
+	#- model locale, everything is taken from it
+	my $model_locale = 'en_US.UTF-8';
 	
 	#- removing everything
-	#- except in main charset: only removing LC_CTYPE if it is there
-	eval { rm_rf($_ eq $main_charset ? "$dir/$_/LC_CTYPE" : "$dir/$_") } foreach all($dir);
+	#- except in model locale: only removing LC_COLLATE if it is there
+	#eval { rm_rf($_ eq $model_locale ? "$dir/$_/LC_COLLATE" : "$dir/$_") } foreach all($dir);
+	eval { if ($_ ne $model_locale) { rm_rf("$dir/$_"); }; } foreach all($dir);
 	
-	if (!-e "$dir/$main_charset") {
-	    #- getting the main charset
-	    mkdir "$dir/$main_charset";
-	    mkdir "$dir/$main_charset/LC_MESSAGES";
-	    install_any::getAndSaveFile("$dir/$main_charset/$_") foreach @LCs, 'LC_MESSAGES/SYS_LC_MESSAGES';
+	if (!-e "$dir/$model_locale") {
+	    #- getting the model locale
+	    mkdir "$dir/$model_locale";
+	    mkdir "$dir/$model_locale/LC_MESSAGES";
+	    install_any::getAndSaveFile("$dir/$model_locale/$_") foreach @LCs, 'LC_MESSAGES/SYS_LC_MESSAGES';
 	}
 	mkdir "$dir/$lang";
 	
 	#- linking to the main charset
-	symlink "../$main_charset/$_", "$dir/$lang/$_" foreach @LCs, 'LC_MESSAGES';	    
+	symlink "../$model_locale/$_", "$dir/$lang/$_" foreach @LCs, 'LC_MESSAGES';	    
 	
-	#- getting LC_CTYPE (putting it directly in $lang)
-	install_any::getAndSaveFile("install/stage2/live$dir/$charset/LC_CTYPE", "$dir/$lang/LC_CTYPE");
+	#- getting LC_COLLATE (putting it directly in $lang)
+	#install_any::getAndSaveFile("install/stage2/live$dir/$lang/LC_COLLATE", "$dir/$lang/LC_COLLATE");
+	symlink "../$model_locale/LC_COLLATE", "$dir/$lang/LC_COLLATE";
     }
     
     #- set all LC_* variables to a unique locale ("C"), and only redefine
-    #- LC_CTYPE (for X11 choosing the fontset) and LANGUAGE (for the po files)
-    $ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
+    #- LC_COLLATE (for sorting) and LANGUAGE (for the po files)
+    $ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
     
     $ENV{LC_CTYPE}    = $lang;
     $ENV{LC_MESSAGES} = $lang;
+    $ENV{LC_COLLATE}  = $lang;
     $ENV{LANG}        = $lang;
     
     if ($b_translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
