@@ -611,7 +611,12 @@ sub formatXiB {
 	$base >= 1024 ? ($newbase = $base / 1024) : ($newnb = $nb / 1024);
     };
     foreach ('', _("KB"), _("MB"), _("GB")) {
-	$decr->(); $newnb >= 1 || $newnb * $newbase >= 1 or return int($nb * $base) . $_;
+	$decr->(); 
+	if ($newnb < 1 && $newnb * $newbase < 1) {
+	    my $v = $nb * $base;
+	    my $s = $v < 10 && int(10 * $v - 10 * int($v));
+	    return int($v) . ($s ? ".$s" : '') . $_;
+	}
     }
     int($newnb * $newbase) . _("TB");
 }
