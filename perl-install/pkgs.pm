@@ -681,7 +681,7 @@ sub setSelectedFromCompssList {
     my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
-    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
+    foreach my $p (sort { substr($a->[$VALUES],0,1) <=> substr($b->[$VALUES],0,1) } values %{$packages->{names}}) {
 	my ($rate, @flags) = split "\t", $p->[$VALUES];
 	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
