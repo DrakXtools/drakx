@@ -330,6 +330,11 @@ sub beforeInstallPackages {
     mkdir "$o->{prefix}$_" foreach qw(/boot /usr /usr/share /usr/share/mdk);
     install_any::getAndSaveFile("Mandrake/base/oem-message-graphic", "$o->{prefix}/boot/oem-message-graphic");
     install_any::getAndSaveFile("Mandrake/base/oem-background.png", "$o->{prefix}/usr/share/mdk/oem-background.png");
+    #- add oem bootsplash theme if files exists.
+    foreach (qw(oem-message-graphic oem-bootsplash-800x600.jpg oem-bootsplash-1024x768.jpg oem-bootsplash-1200x1024.jpg
+                oem-bootsplash-1600x1200.jpg)) {
+	install_any::getAndSaveFile("Mandrake/base/$_", "$o->{prefix}/usr/share/bootsplash/$_");
+    }
 }
 
 sub pkg_install {
@@ -570,6 +575,22 @@ GridHeight=70
 				  wallpaperAlign => "3",
 				 );
 	    }
+	}
+    }
+
+    #- modifying Mandrake theme directly, all image may not be available.
+    if (-e "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message" &&
+	-e "$o->{prefix}/usr/share/bootsplash/oem-message-graphic") {
+	rename "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message",
+	  "$o->{prefix}/usr/share/bootsplash/message.mdkgiorig";
+	rename "$o->{prefix}/usr/share/bootsplash/oem-message-graphic",
+	  "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/lilo/message";
+    }
+    foreach (qw(oem-bootsplash-800x600.jpg oem-bootsplash-1024x768.jpg oem-bootsplash-1200x1024.jpg
+                oem-bootsplash-1600x1200.jpg)) {
+	if (-e "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_" && "$o->{prefix}/usr/share/bootsplash/$_") {
+	    rename "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_", "$o->{prefix}/usr/share/bootsplash/$_.mdkgiorig";
+	    rename "$o->{prefix}/usr/share/bootsplash/$_", "$o->{prefix}/usr/share/bootsplash/themes/Mandrake/images/$_";
 	}
     }
 
