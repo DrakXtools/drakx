@@ -48,10 +48,8 @@ gtkadd($window1,
 			    0, gtkpack_(new Gtk::VBox(0,5),
 					1, gtkadd(gtkset_shadow_type(new Gtk::Frame("Statistics"), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
-				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Average Speed : "), my $label_avsr = new Gtk::Label("")),
-				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Current Speed : "), my $label_cusr = new Gtk::Label("")),
-				      gtkpack__(new Gtk::HBox(0,0), _("Sending Average Speed : "), my $label_avst = new Gtk::Label("")),
-				      gtkpack__(new Gtk::HBox(0,0), _("Sending Current Speed : "), my $label_cust = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
+				      gtkpack__(new Gtk::HBox(0,0), _("Sending Speed : "), my $label_st = new Gtk::Label("")),
 							   )
 						 ),
 					0, my $button_connect = new Gtk::Button("connect"),
@@ -74,6 +72,8 @@ my $time_tag = Gtk->timeout_add(1000, sub {
 					my $transmit = $monitor->{$intf}{val}->[8];
 					my $refr = $monitor->{$intf}{referencer};
 					my $reft = $monitor->{$intf}{referencet};
+					$monitor->{sr} += $recv - $refr;
+					$monitor->{st} += $transmit - reft;
 					push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
 					shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > 300;
 					$labelr->set(formatXiB($recv - $monitor->{$intf}{initialr}));
@@ -82,10 +82,11 @@ my $time_tag = Gtk->timeout_add(1000, sub {
 					shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > 300;
 					$monitor->{$intf}{referencet} = $transmit;
 					$labelt->set(formatXiB($transmit - $monitor->{$intf}{initialt}));
-					$monitor->{$intf}{avgsr}+=reicv;
-					$monitor->{$intf}{avgst}+=transmit;
 					draw_monitor($monitor->{$intf});
 				    }
+				    $label_sr->set(formatXiB($monitor->{sr}) . "/s");
+				    $label_st->set(formatXiB($monitor->{st}) . "/s");
+				    $monitor->{$_} = 0 foreach ('sr', 'st');
 				    1;
 				});
 my $time_tag = Gtk->timeout_add(5000, \&update);
@@ -136,8 +137,8 @@ sub update {
 								     $monitor->{$intf}{pixmap_db}, 0, 0, 0, 0, 300, 150);
 				    });
 	}
-	$label_avs->set("");
     }
+    1;
 }
 
 sub draw_monitor {
