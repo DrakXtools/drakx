@@ -208,7 +208,7 @@ sub search_windows_font() {
                     if ($nb_dir) {
                         progress($pbar, 0.25 / $nb_dir, N("parse all fonts"));
                     } else {
-                        err_dialog(N("Error"), N("no fonts found"));
+                        err_dialog(N("Error"), N("No fonts found"));
                         return 0;
                     }
                 }
@@ -221,7 +221,7 @@ sub search_windows_font() {
     if (!@font_list) {
         print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
         $interactive
-          and err_dialog(N("Error"), N("could not find any font in your mounted partitions"));
+          and err_dialog(N("Error"), N("Could not find any font in your mounted partitions"));
         return 0;
     }
     1;
@@ -259,7 +259,7 @@ sub search_dir_font() {
         interactive_progress($pbar, 0.50 / @install, N("Reselect correct fonts"));
     }
     interactive_progress($pbar, 1, N("done"));
-    !@font_list && $interactive and err_dialog(N("Error"), N("could not find any font.\n"));
+    !@font_list && $interactive and err_dialog(N("Error"), N("Could not find any font.\n"));
 }
 
 sub search_dir_font_uninstall {
