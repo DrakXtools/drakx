@@ -507,6 +507,7 @@ killall pppd
                         delete $ethntf->{$_} foreach keys %$ethntf;
                         add2hash($ethntf, $intf->{$ntf_name});
                         $net_device = $netc->{NET_DEVICE};
+                        return "lan_intf" if $type eq 'cable';
                         if ($::isInstall && $net_device eq $ethntf->{DEVICE}) {
                             return 'lan_alrd_cfg';
                         } else {
