@@ -991,28 +991,6 @@ struct device *serialProbe(enum deviceClass probeClass, int probeFlags,
 	    
 	    /* see if we found any PnP signature */
 	    if (pnp_strlen != 0) {
-		if (*pnp_string == 'M') { /* Legacy mouse */
-			if (probeClass == CLASS_MOUSE || probeClass == CLASS_UNSPEC) {
-				serdev = serialNewDevice(NULL);
-				serdev->type=CLASS_MOUSE;
-				serdev->device=strdup(port+5);
-				serdev->desc=strdup("Generic Serial Mouse");
-				serdev->driver=strdup("generic");
-				if (devlist)
-				  serdev->next = devlist;
-				devlist = (struct device *)serdev;
-				if (probeFlags & PROBE_ONE) {
-					tcsetattr(fd, TCSANOW, &origattr);
-					tcflush(fd, TCIOFLUSH);
-					close(fd);
-					return devlist;
-				}
-			}
-			tcsetattr(fd, TCSANOW, &origattr);
-			close(fd);
-			continue;
-		}
-
 		/* fill in the PnP com structure */
 		if (parse_pnp_string( pnp_string, pnp_strlen, &pnp_id )<0) {
 		    DEBUG("Got PNP data back, but failed to parse.  Aborting\n");
