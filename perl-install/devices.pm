@@ -187,7 +187,7 @@ sub make($) {
 #- i.e. entries which can go devfs -> normal and normal -> devfs
 my %to_devfs = (
     psaux => 'misc/psaux',
-    usbmouse => 'input/mouse0',
+    usbmouse => 'input/mice',
 );
 my %to_devfs_prefix = (
     ttyS => 'tts/',
