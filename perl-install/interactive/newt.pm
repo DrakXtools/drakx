@@ -74,6 +74,7 @@ sub ask_fromW {
     } elsif ((any { $_->{type} ne 'button' } @$l) || @$l < 5) {
 	&ask_fromW_real;
     } else {
+	$common->{cancel} = N("Do") if $common->{cancel} eq '';
 	my $r;
 	do {
 	    my @choices = map {
@@ -83,7 +84,7 @@ sub ask_fromW {
 	    } @$l;
 	    #- replace many buttons with a list
 	    my $new_l = [ { val => \$r, type => 'list', list => \@choices, format => sub { $_[0]{label} }, sort => 0 } ];
-	    ask_fromW_real($o, $common, $new_l, $l2) or return;
+	    ask_fromW_real($o, $common, $new_l, $l2) and return;
 	} until $r->{clicked_may_quit}->();
 	1;
     }
