@@ -161,7 +161,7 @@ sub check_link_beat() {
                         } else {
                             $p = Net::Ping->new("icmp");
                         }
-                        print $p->Net::Ping::ping("www.mandrakesoft.com") ? 1 : 0;
+                        print $p->ping("www.mandrakesoft.com") ? 1 : 0;
                     });
 }
 
