@@ -27,6 +27,7 @@
 #ifndef MAR_H
 #define MAR_H
 
+#if 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,6 +36,9 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <unistd.h>
+#endif
+//#include <minilibc.h>
+
 #include <zlib.h>
 
 /*

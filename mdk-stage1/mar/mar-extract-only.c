@@ -27,12 +27,14 @@
 #include "mar.h"
 
 
-void gzerr(gzFile f) /* decrease code size */
+void
+gzerr(gzFile f) /* decrease code size */
 {
 	fprintf(stderr, gzerror(f, &gz_errnum));
 }
 
-int calc_integrity(mar_stream *s)
+int
+calc_integrity(mar_stream *s)
 {
 	char buf[4096];
 	int current_crc = 0;
@@ -61,10 +63,11 @@ int calc_integrity(mar_stream *s)
 }
 
 
-int extract_file(mar_stream *s, char *filename, char *dest_dir)
+int
+extract_file(mar_stream *s, char *filename, char *dest_dir)
 {
 	mar_element * elem = s->first_element;
-	while (elem != NULL)
+	while (elem)
 	{
 		if (strcmp(elem->filename, filename) == 0)
 		{
@@ -81,7 +84,7 @@ int extract_file(mar_stream *s, char *filename, char *dest_dir)
 				return -1;
 			}
 			buf = (char *) malloc(elem->file_length);
-			if (buf == NULL)
+			if (!buf)
 			{
 				perror(dest_file);
 				return -1;
@@ -110,7 +113,8 @@ int extract_file(mar_stream *s, char *filename, char *dest_dir)
 }
 
 
-mar_stream * open_marfile(char *filename)
+mar_stream *
+open_marfile(char *filename)
 {
 	int end_filetable = 0;
 	mar_stream * s = (mar_stream *) malloc(sizeof(mar_stream));
@@ -118,7 +122,7 @@ mar_stream * open_marfile(char *filename)
 
 	/* mar_gzfile */
 	s->mar_gzfile = gzopen(filename, "rb");
-	if (s->mar_gzfile == NULL)
+	if (!s->mar_gzfile)
 	{
 		perror(filename);
 		return NULL;
@@ -178,10 +182,10 @@ mar_stream * open_marfile(char *filename)
 				return NULL;
 			}
 			/* write down chaining */
-			if (previous_element == NULL)
-				s->first_element = e;
-			else
+			if (previous_element)
 				previous_element->next_element = e;
+			else
+				s->first_element = e;
 			previous_element = e;
 		}
 		else

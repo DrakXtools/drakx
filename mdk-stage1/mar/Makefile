@@ -3,7 +3,8 @@ all: mar
 clean:
 	rm -f *.o mar
 
-FLAGS = -Wall -Werror -O1 -fomit-frame-pointer -c
+FLAGS = -Wall -Werror -Os -fomit-frame-pointer -c
+
 
 mar: mar-frontend.o mar-extract-only.o
 	gcc -o mar mar-frontend.o mar-extract-only.o -lz
