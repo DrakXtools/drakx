@@ -76,10 +76,10 @@ sub gtkval_register {
     my ($w, $ref, $sub) = @_;
     push @{$w->{_ref}}, $ref;
     $w->signal_connect(destroy => sub { 
-	delete $refs{$ref}{$w};
-	delete $refs{$ref} if !%{$refs{$ref}};
+	@{$refs{$ref}} = grep { $_->[1] != $w } @{$refs{$ref}};
+	delete $refs{$ref} if !@{$refs{$ref}};
     });
-    push @{$refs{$ref}{$w}}, [ $sub, $w ];
+    push @{$refs{$ref}}, [ $sub, $w ];
 }
 sub gtkval_modify {
     my ($ref, $val, @to_skip) = @_;
@@ -88,7 +88,7 @@ sub gtkval_modify {
     if ($prev ne '' . $ref) {
 	internal_error();
     }
-    foreach (map { @$_ } values %{$refs{$ref} || {}}) {	
+    foreach (@{$refs{$ref} || []}) {	
 	my ($f, @para) = @$_;
 	$f->(@para) if !member($f, @to_skip);
     }
