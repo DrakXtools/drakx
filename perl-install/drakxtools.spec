@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.26mdk
+Release: 0.27mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -358,6 +358,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Feb 16 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.27mdk
+- drakboot: make it more robust (pixel)
+- drakproxy: set up KDE too (blino)
+- harddrake: list usb mice that are not listed in usbtable (#13575)
+- interactive layer: use the new gtk+ file chooser (pixel)
+- keyboarddrake: make keyboard layout more user friendly
+- printerdrake (till):
+  o force only ASCII letters, numbers, and underscores being used in
+    print queue names
+  o wait for CUPS being ready before querying the printer states for
+    the printer list in the main window
+- reduce drakxtools-backend's requires (pixel)
+
 * Mon Feb 14 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.26mdk
 - draksound, service_harddrake: handle more sound cards
 - localedrake: alter font settings for zh_CN and zh_TW (funda wang)
