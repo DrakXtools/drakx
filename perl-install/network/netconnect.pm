@@ -1098,7 +1098,9 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{PEERNTPD} = bool2yesno($peerntpd);
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
-                        $netc->{$_} = $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
+                        #- FIXME: special case for sagem where $ethntf->{DEVICE} is the result of a command
+                        #- we can't always use $ntf_name because of some USB DSL modems
+                        $netc->{$_} = $ntf_name eq "sagem" ? "sagem" : $ethntf->{DEVICE} foreach qw(NET_DEVICE NET_INTERFACE);
                         if ($auto_ip) {
                             #- delete gateway settings if gateway device is invalid or if reconfiguring the gateway interface to dhcp
                             $delete_gateway_settings->($ntf_name);
