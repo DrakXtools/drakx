@@ -526,7 +526,7 @@ sub g_auto_install {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users partitioning isUpgrade manualFstab nomouseprobe crypto security netcnx useSupermount autoExitInstall); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{$_} = $::o->{X}{$_} foreach qw(default_depth resolution_wanted);
@@ -701,6 +701,7 @@ sub use_root_part {
 sub getHds {
     my ($o, $f_err) = @_;
     my $ok = 1;
+    my $try_scsi = !$::expert;
     my $flags = $o->{partitioning};
 
     my @drives = detect_devices::hds();
@@ -715,7 +716,8 @@ sub getHds {
 	  !$flags->{readonly} && $f_err and $f_err->($err);
       };
 
-    if (is_empty_array_ref($hds) && $o->{autoSCSI}) {
+    if (is_empty_array_ref($hds) && $try_scsi) {
+	$try_scsi = 0;
 	$o->setupSCSI; #- ask for an unautodetected scsi card
 	goto getHds;
     }
