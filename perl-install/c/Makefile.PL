@@ -7,9 +7,10 @@ my $libs = '-L/usr/X11R6/lib -lX11 -lgdk';
 $libs .= ' -lrpm -ldb1 -lz' if $ENV{C_RPM};
 
 WriteMakefile(
-    'NAME'	=> 'c',
+    'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
-    'VERSION_FROM' => 'c.pm', # finds $VERSION
+    'MAKEFILE'  => 'Makefile_c',
+    'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
     'INC'	=> '-I/usr/include/rpm `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 

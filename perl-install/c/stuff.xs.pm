@@ -1,0 +1,576 @@
+print '
+#include "EXTERN.h"
+#include "perl.h"
+#include "XSUB.h"
+
+#include <ctype.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <resolv.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/ioctl.h>
+#include <sys/stat.h>
+#include <sys/utsname.h>
+#include <linux/keyboard.h>
+#include <linux/kd.h>
+#include <linux/fs.h>
+#include <linux/hdreg.h>
+#include <linux/vt.h>
+#include <net/if.h>
+#include <net/route.h>
+
+#include <gdk/gdkx.h>
+#include <X11/Xlib.h>
+
+#define SECTORSIZE 512
+';
+
+$ENV{C_RPM} and print '
+#include <rpm/rpmlib.h>
+
+void rpmError_callback_empty(void) {}
+
+int rpmError_callback_data;
+void rpmError_callback(void) {
+  if (rpmErrorCode() != RPMERR_UNLINK && rpmErrorCode() != RPMERR_RMDIR) {
+    write(rpmError_callback_data, rpmErrorString(), strlen(rpmErrorString()));
+    write(rpmError_callback_data, "\n", 1);
+  }
+}
+
+FD_t fd2FD_t(int fd) {
+  static struct _FD f = { -1, NULL, NULL, NULL };
+  f.fd_fd  = fd;
+  return fd == -1 ? NULL : &f;
+}
+
+';
+
+print '
+
+long long llseek(int fd, long long offset,  int whence);
+
+MODULE = c::stuff		PACKAGE = c::stuff
+
+int
+Xtest(display)
+  char *display
+  CODE:
+  int pid;
+  if ((pid = fork()) == 0) {
+    Display *d = XOpenDisplay(display);
+    if (d) {
+      XSetCloseDownMode(d, RetainPermanent);
+      XCloseDisplay(d);
+    }
+    { 
+	char *args[2]; 
+	args[0] = d ? "false" : "true"; /* inverted on purpose! */
+        args[1] = NULL;
+        execvp(args[0], args);
+    }
+    printf("***************** SHOUDNT GET THERE ***************\n");
+    exit(d != NULL);
+  }
+
+  waitpid(pid, &RETVAL, 0);
+  OUTPUT:
+  RETVAL
+
+void
+XSetInputFocus(window)
+  int window
+  CODE:
+  XSetInputFocus(GDK_DISPLAY(), window, RevertToParent, CurrentTime);
+
+int
+KTYP(x)
+  int x
+  CODE:
+  RETVAL = KTYP(x);
+  OUTPUT:
+  RETVAL
+
+int
+lseek_sector(fd, sector, offset)
+  int fd
+  long sector
+  long offset
+  CODE:
+  RETVAL = llseek(fd, (long long) sector * SECTORSIZE + offset, SEEK_SET) >= 0;
+  OUTPUT:
+  RETVAL
+
+void
+setsid()
+
+unsigned int
+getpagesize()
+
+int
+loadFont(fontFile)
+  char *fontFile
+  CODE:
+    char font[8192];
+    unsigned short map[E_TABSZ];
+    struct unimapdesc d;
+    struct unimapinit u;
+    struct unipair desc[2048];
+    int rc = 0;
+
+	int fd = open(fontFile, O_RDONLY);
+	read(fd, font, sizeof(font));
+	read(fd, map, sizeof(map));
+        read(fd, &d.entry_ct, sizeof(d.entry_ct));
+        d.entries = desc;
+        read(fd, desc, d.entry_ct * sizeof(desc[0]));
+	close(fd);
+
+	rc = ioctl(1, PIO_FONT, font);
+	rc = ioctl(1, PIO_UNIMAPCLR, &u) || rc;
+	rc = ioctl(1, PIO_UNIMAP, &d) || rc;
+	rc = ioctl(1, PIO_UNISCRNMAP, map) || rc;
+        RETVAL = rc == 0;
+     OUTPUT:
+     RETVAL
+
+int
+hasNetDevice(device)
+  char * device
+  CODE:
+    struct ifreq req;
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+    if (s == -1) { RETVAL = 0; return; }
+
+    strcpy(req.ifr_name, device);
+
+    RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
+    if (!RETVAL) close(s);
+  OUTPUT:
+  RETVAL
+
+int
+addDefaultRoute(gateway)
+  char *gateway
+  CODE:
+    struct rtentry route;
+    struct sockaddr_in addr;
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+    if (s == -1) { RETVAL = 0; return; }
+
+    memset(&route, 0, sizeof(route));
+
+    addr.sin_family = AF_INET;
+    addr.sin_port = 0;
+    inet_aton(gateway, &addr.sin_addr);
+    memcpy(&route.rt_gateway, &addr, sizeof(addr));
+
+    addr.sin_addr.s_addr = INADDR_ANY;
+    memcpy(&route.rt_dst, &addr, sizeof(addr));
+    memcpy(&route.rt_genmask, &addr, sizeof(addr));
+
+    route.rt_flags = RTF_UP | RTF_GATEWAY;
+    route.rt_metric = 0;
+
+    RETVAL = !ioctl(s, SIOCADDRT, &route);
+  OUTPUT:
+  RETVAL
+
+char *
+kernel_version()
+  CODE:
+  struct utsname u;
+  if (uname(&u) == 0) RETVAL = u.release; else RETVAL = NULL;
+  OUTPUT:
+  RETVAL
+
+
+';
+
+$ENV{C_RPM} and print '
+int
+rpmReadConfigFiles()
+  CODE:
+  RETVAL = rpmReadConfigFiles(NULL, NULL) == 0;
+  OUTPUT:
+  RETVAL
+
+int
+rpmdbInit(root, perms)
+  char *root
+  int perms
+  CODE:
+  RETVAL = rpmdbInit(root, perms) == 0;
+  OUTPUT:
+  RETVAL
+
+void *
+rpmdbOpen(root)
+  char *root
+  CODE:
+  static rpmdb db;
+  RETVAL = rpmdbOpen(root, &db, O_RDWR | O_CREAT, 0644) == 0 ||
+           rpmdbOpen(root, &db, O_RDONLY, 0644) == 0 ? db : NULL;
+  OUTPUT:
+  RETVAL
+
+void *
+rpmdbOpenForTraversal(root)
+  char *root
+  CODE:
+  static rpmdb db;
+  RETVAL = rpmdbOpenForTraversal(root, &db) == 0 ? db : NULL;
+  OUTPUT:
+  RETVAL
+
+void
+rpmdbClose(db)
+  void *db
+
+int
+rpmdbTraverse(db, ...)
+  void *db
+  PREINIT:
+  SV *callback = &PL_sv_undef;
+  int num, count;
+  Header h;
+  CODE:
+  if (items > 1) {
+    callback = ST(1);
+  }
+  count = 0;
+  num = rpmdbFirstRecNum(db);
+  while (num) {
+    if (callback != &PL_sv_undef && SvROK(callback)) {
+      h = rpmdbGetRecord(db, num);
+      {
+        dSP;
+        ENTER;
+        SAVETMPS;
+        PUSHMARK(sp);
+        XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
+        PUTBACK;
+        perl_call_sv(callback, G_DISCARD | G_SCALAR);
+        FREETMPS;
+        LEAVE;
+      }
+      headerFree(h);
+    }
+    num = rpmdbNextRecNum(db, num);
+    ++count;
+  }
+  RETVAL = count;
+  OUTPUT:
+  RETVAL
+
+int
+rpmdbNameTraverse(db, name, ...)
+  void *db
+  char *name
+  PREINIT:
+  SV *callback = &PL_sv_undef;
+  int i, rc;
+  Header h;
+  rpmErrorCallBackType oldcb;
+  dbiIndexSet matches;
+  CODE:
+  if (items > 2) {
+    callback = ST(2);
+  }
+  rc = rpmdbFindPackage(db, name, &matches);
+  if (rc == 0) {
+    RETVAL = matches.count;
+    if (callback != &PL_sv_undef && SvROK(callback) && matches.count > 0) {
+      oldcb = rpmErrorSetCallback(rpmError_callback_empty);
+      for (i = 0; i < matches.count; ++i) {
+        h = rpmdbGetRecord(db, matches.recs[i].recOffset);
+
+        {
+          dSP;
+          ENTER;
+          SAVETMPS;
+          PUSHMARK(sp);
+          XPUSHs(sv_2mortal(newSViv((IV)(void *)h)));
+          PUTBACK;
+          perl_call_sv(callback, G_DISCARD | G_SCALAR);
+          FREETMPS;
+          LEAVE;
+        }
+
+        headerFree(h);
+      }
+      rpmErrorSetCallback(oldcb);
+    }
+    dbiFreeIndexRecord(matches);
+  } else
+    RETVAL = 0;
+  OUTPUT:
+  RETVAL
+
+
+void *
+rpmtransCreateSet(db, rootdir)
+  void *db
+  char *rootdir
+
+void
+rpmtransAvailablePackage(rpmdep, header, key)
+  void *rpmdep
+  void *header
+  char *key
+  CODE:
+  rpmtransAvailablePackage(rpmdep, header, strdup(key));
+
+int
+rpmtransAddPackage(rpmdep, header, key, update)
+  void *rpmdep
+  void *header
+  char *key
+  int update
+  CODE:
+  rpmTransactionSet r = rpmdep;
+  RETVAL = rpmtransAddPackage(r, header, NULL, strdup(key), update, NULL) == 0;
+  OUTPUT:
+  RETVAL
+
+int
+rpmdepOrder(order)
+  void *order
+  CODE:
+  RETVAL = rpmdepOrder(order) == 0;
+  OUTPUT:
+  RETVAL
+
+void
+rpmdepCheck(rpmdep)
+  void *rpmdep
+  PPCODE:
+  struct rpmDependencyConflict * conflicts;
+  int numConflicts, i;
+  rpmdepCheck(rpmdep, &conflicts, &numConflicts);
+  if (numConflicts) {
+    EXTEND(SP, numConflicts);
+    for (i = 0; i < numConflicts; i++)
+      if (conflicts[i].sense == RPMDEP_SENSE_CONFLICTS) {
+        fprintf(stderr, "%s conflicts with %s\n", conflicts[i].byName, conflicts[i].needsName);
+      } else {
+ 	if (conflicts[i].suggestedPackage)
+ 	  PUSHs(sv_2mortal(newSVpv((char *) conflicts[i].suggestedPackage, 0)));
+ 	else {
+ 	  char *p = malloc(100 + strlen(conflicts[i].needsName) + strlen(conflicts[i].byName));
+ 	  sprintf(p, "%s needed but nothing provide it (%s)", conflicts[i].needsName, conflicts[i].byName);
+ 	  PUSHs(sv_2mortal(newSVpv(p, 0)));
+ 	  free(p);
+      }
+    }
+  }
+
+void
+rpmdepCheckFrom(rpmdep)
+  void *rpmdep
+  PPCODE:
+  struct rpmDependencyConflict * conflicts;
+  int numConflicts, i;
+  rpmdepCheck(rpmdep, &conflicts, &numConflicts);
+  if (numConflicts) {
+    EXTEND(SP, numConflicts);
+    for (i = 0; i < numConflicts; i++)
+        PUSHs(sv_2mortal(newSVpv(conflicts[i].byName, 0)));
+  }
+
+int
+rpmdbRebuild(root)
+  char *root
+  CODE:
+  RETVAL = rpmdbRebuild(root) == 0;
+  OUTPUT:
+  RETVAL
+
+void
+rpmtransFree(trans)
+  void *trans
+
+char *
+rpmErrorString()
+
+int
+rpmVersionCompare(headerFirst, headerSecond)
+  void *headerFirst
+  void *headerSecond
+
+void
+rpmSetVeryVerbose()
+  CODE:
+  rpmSetVerbosity(RPMMESS_DEBUG);
+
+void
+rpmtransSetScriptFd(trans, fd)
+  void *trans
+  int fd
+  CODE:
+  rpmtransSetScriptFd(trans, fdDup(fd));
+
+void
+rpmRunTransactions(trans, callbackOpen, callbackClose, callbackStart, callbackProgress, force)
+  void *trans
+  SV *callbackOpen
+  SV *callbackClose
+  SV *callbackStart
+  SV *callbackProgress
+  int force
+  PPCODE:
+  rpmProblemSet probs;
+  void *rpmRunTransactions_callback(const Header h, const rpmCallbackType what, const unsigned long amount, const unsigned long total, const void * pkgKey, void * data) {
+      static FD_t fd;
+      static int last_amount;
+      char *n = (char *) pkgKey;
+
+      switch (what) {
+      case RPMCALLBACK_INST_OPEN_FILE: {
+        int i;
+  	dSP;
+  	PUSHMARK(sp);
+  	XPUSHs(sv_2mortal(newSVpv(n, 0)));
+  	PUTBACK;
+  	i = perl_call_sv(callbackOpen, G_SCALAR);
+        SPAGAIN;
+        if (i != 1) croak("Big trouble\n");
+        fd = fd2FD_t(POPi);
+  	PUTBACK;
+        return fd;
+      }
+
+      case RPMCALLBACK_INST_CLOSE_FILE: {
+	dSP;
+  	PUSHMARK(sp);
+  	XPUSHs(sv_2mortal(newSVpv(n, 0)));
+  	PUTBACK;
+  	perl_call_sv(callbackClose, G_DISCARD);
+        free(n); /* was strdup in rpmtransAddPackage  */
+  	break;
+      }
+
+      case RPMCALLBACK_INST_START: {
+  	  dSP ;
+  	  PUSHMARK(sp) ;
+  	  XPUSHs(sv_2mortal(newSVpv(n, 0)));
+  	  PUTBACK ;
+  	  perl_call_sv(callbackStart, G_DISCARD);
+          last_amount = 0;
+  	} break;
+
+      case RPMCALLBACK_INST_PROGRESS:
+         if ((amount - last_amount) * 4 / total) {
+  	  dSP;
+  	  PUSHMARK(sp);
+  	  XPUSHs(sv_2mortal(newSViv(amount)));
+  	  XPUSHs(sv_2mortal(newSViv(total)));
+  	  PUTBACK ;
+  	  perl_call_sv(callbackProgress, G_DISCARD);
+          last_amount = amount;
+  	} break;
+      default: break;
+      }
+      return NULL;
+  }
+  if (rpmRunTransactions(trans, rpmRunTransactions_callback, NULL, NULL, &probs, 0, force ? ~0 : ~RPMPROB_FILTER_DISKSPACE)) {
+    int i;
+    EXTEND(SP, probs->numProblems);
+    for (i = 0; i < probs->numProblems; i++) {
+      PUSHs(sv_2mortal(newSVpv(rpmProblemString(probs->probs[i]), 0)));
+    }
+  }
+
+void
+rpmErrorSetCallback(fd)
+  int fd
+  CODE:
+  rpmError_callback_data = fd;
+  rpmErrorSetCallback(rpmError_callback);
+
+void *
+rpmReadPackageHeader(fd)
+  int fd
+  CODE:
+  Header h;
+  int isSource, major;
+  RETVAL = rpmReadPackageHeader(fd2FD_t(fd), &h, &isSource, &major, NULL) ? NULL : h;
+  OUTPUT:
+  RETVAL
+
+void *
+headerRead(fd, magicp)
+  int fd
+  int magicp
+  CODE:
+  RETVAL = (void *) headerRead(fd2FD_t(fd), magicp);
+  OUTPUT:
+  RETVAL
+
+char *
+headerGetEntry_string(h, query)
+  void *h
+  int query
+  CODE:
+  int type, count;
+  headerGetEntry((Header) h, query, &type, (void **) &RETVAL, &count);
+  OUTPUT:
+  RETVAL
+
+int
+headerGetEntry_int(h, query)
+  void *h
+  int query
+  CODE:
+  int type, count, *i;
+  headerGetEntry((Header) h, query, &type, (void **) &i, &count);
+  RETVAL = *i;
+  OUTPUT:
+  RETVAL
+
+void
+headerGetEntry_string_list(h, query)
+  void *h
+  int query
+  PPCODE:
+  int i, type, count = 0;
+  char **strlist = (char **) NULL;
+  if (headerGetEntry((Header) h, query, &type, (void**) &strlist, &count) && count) {
+    EXTEND(SP, count);
+    for (i = 0; i < count; i++) {
+      PUSHs(sv_2mortal(newSVpv(strlist[i], 0)));
+    }
+  }
+  free(strlist);
+';
+
+@macros = (
+  [ qw(int S_IFCHR S_IFBLK KDSKBENT KT_SPEC NR_KEYS MAX_NR_KEYMAPS BLKRRPART TIOCSCTTY
+       HDIO_GETGEO BLKGETSIZE
+       MS_MGC_VAL MS_RDONLY O_NONBLOCK SECTORSIZE WNOHANG
+       VT_ACTIVATE VT_WAITACTIVE VT_GETSTATE
+       ) ],
+);
+push @macros, [ qw(int RPMTAG_NAME RPMTAG_GROUP RPMTAG_SIZE RPMTAG_VERSION RPMTAG_SUMMARY RPMTAG_DESCRIPTION RPMTAG_RELEASE RPMTAG_ARCH RPMTAG_FILENAMES RPMTAG_OBSOLETES) ]
+  if $ENV{C_RPM};
+
+$\= "\n";
+print;
+
+foreach (@macros) {
+    my ($type, @l) = @$_;
+    foreach (@l) {
+	print<< "END"
+$type
+$_()
+  CODE:
+  RETVAL = $_;
+
+  OUTPUT:
+  RETVAL
+
+END
+
+    }
+}
