@@ -219,6 +219,18 @@ sub read_conf {
 	    push @{$c{$name}{probeall} ||= []}, delete $c{$alias}{alias};
 	}
     }
+    # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
+    foreach my $alias (sort keys %c) {
+        if ($c{$alias}{alias} =~ /^snd-card/) {
+            my $new_driver = $c{$alias}{alias};
+            $new_driver =~ s/^snd-card/snd/;
+            $c{$alias}{alias} = $new_driver;
+        }
+    }
+    # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
+    foreach my $alias (sort keys %c) {
+        $c{$alias}{alias} = 'snd-via82xx' if $c{$alias}{alias} =~ /^snd-via686|^snd-via8233/;
+    }
 
     \%c;
 }
@@ -248,6 +260,11 @@ sub write_conf {
 	} elsif ($type eq 'alias' && $alias =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
+     } elsif ($type eq 'above') {
+         # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
+         # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
+         s/snd-card/snd/g;
+         s/snd-via(686|8233)/snd-via82xx/g;
 	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
