@@ -967,7 +967,7 @@ sub summary {
 	};
     }
 
-    foreach my $tv (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
+    foreach my $tv (detect_devices::getTVcards()) {
 	push @l, {
 	    group => N("Hardware"),
 	    label => N("TV card"),

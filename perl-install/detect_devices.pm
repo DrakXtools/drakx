@@ -373,6 +373,12 @@ sub getSoundDevices {
     (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
 }
 
+sub isTVcard { $_[0]{driver} =~ /bttv|saa7134/ }
+
+sub getTVcards { 
+    grep { isTVcard($_) } detect_devices::probeall();
+}
+
 sub getSerialModem {
     my ($modem, $mouse) = @_;
     $mouse ||= {};
