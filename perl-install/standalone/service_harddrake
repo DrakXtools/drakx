@@ -26,7 +26,7 @@ modules::mergein_conf('/etc/modules.conf');
 my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
 my $curr_kernel = c::kernel_version();
 $curr_kernel =~ s/(^\d+\.\d+).*/\1/;
-setVarsInSh("$hw_sysconfdir/kernel", KERNEL => $curr_kernel);
+setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
 if ($curr_kernel ne $prev_kernel) {
     require class_discard;
     require mouse;
