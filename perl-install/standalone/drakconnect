@@ -920,33 +920,15 @@ Please run \"Internet access\" in control center."));
 	require network::adsl;
 	network::adsl::adsl_probe_info($cnx, $netc, $intf);
     }
-    my @conf_data = ([ N("Card IRQ"), \$cnx->{irq} ],
-		     [ N("Card mem (DMA)"), \$cnx->{mem} ],
-		     [ N("Card IO"), \$cnx->{io} ],
-		     [ N("Card IO_0"), \$cnx->{io0} ],
-		     [ N("Card IO_1"), \$cnx->{io1} ],
-		     [ N("Your personal phone number"), \$cnx->{phone_in} ],
+    my @conf_data = (
 		     [ N("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2} ],
 		     [ N("Provider phone number"), \$cnx->{phone_out} ],
+		     [ N("Domain name"), \$cnx->{domain} ],
 		     [ N("Provider dns 1 (optional)"), \$netc->{dnsServer2} ],
 		     [ N("Provider dns 2 (optional)"), \$netc->{dnsServer3} ],
-		     [ N("Account Login (user name)"), \$cnx->{login} ],
-		     [ N("Account Password"), \$cnx->{passwd} ],
-		     [ N("Dialing mode"), \$cnx->{dialing_mode}, [ "auto", "manual" ] ],
-		     [ N("Gateway"), \$netc->{GATEWAY} ],
-		     [ N("Connection name"), \$cnx->{connection} ],
-		     [ N("Phone number"), \$cnx->{phone} ],
-		     [ N("Login ID"), \$cnx->{login} ],
-		     [ N("Password"), \$cnx->{passwd} ],
-		     [ N("Authentication"), \$cnx->{auth}, [ N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP") ] ],
-		     [ N("Domain name"), \$cnx->{domain} ],
 		     [ N("First DNS Server (optional)"), \$cnx->{dns1} ],
 		     [ N("Second DNS Server (optional)"), \$cnx->{dns2} ],
-		     [ N("Ethernet Card"), \$netc->{NET_DEVICE}, [ detect_devices::getNet(), $extra_netdevice ] ],
-		     [ N("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcp-client", "dhcpcd", "dhcpxd"] ],
-		     [ N("Connection speed"), \$cnx->{speed}, ["64 Kb/s", "128 Kb/s"] ],
-		     [ N("Connection timeout (in sec)"), \$cnx->{huptimeout} ]
-);
+                    );
     my @infos;
     foreach (@conf_data) {
         if (!$mask[$i]) {
