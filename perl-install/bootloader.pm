@@ -84,7 +84,7 @@ sub mkbootdisk($$$;$) {
     } else {
 	push @l, "--bios", 0, if $dev !~ /fd/;
     }
-    run_program::rooted($prefix, @l, "--device", "/dev/$dev", $kernelVersion) or die "mkbootdisk failed";
+    run_program::rooted_or_die($prefix, @l, "--device", "/dev/$dev", $kernelVersion);
 }
 
 sub read($$) {
@@ -613,7 +613,7 @@ sub install_lilo($$) {
     log::l("stage2 of lilo used is " . readlink "$prefix/boot/boot.b");
     log::l("Installing boot loader...");
     $::testing and return;
-    run_program::rooted($prefix, "lilo", "2>", "/tmp/.error") or die "lilo failed";
+    run_program::rooted_or_die($prefix, "lilo", "2>", "/tmp/.error");
     unlink "$prefix/tmp/.error";
 }
 
