@@ -186,28 +186,6 @@ sub clean_postinstall_rpms() {
 
 
 #-######################################################################################
-#- Specific Hardware to take into account and associated rpms to install
-#-######################################################################################
-sub allowNVIDIA_rpms {
-    my ($packages) = @_;
-    require pkgs;
-    if (pkgs::packageByName($packages, "NVIDIA_GLX")) {
-	#- at this point, we can allow using NVIDIA 3D acceleration packages.
-	my @rpms;
-	foreach my $p (@{$packages->{depslist}}) {
-	    my ($ext, $version, $release) = $p->name =~ /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d.*?)\.(\d+mdk))?$/ or next;
-	    $p->flag_available or next;
-	    $version or ($version, $release) = ($p->version, $p->release);
-	    my $name = "NVIDIA_kernel-$version-$release$ext";
-	    pkgs::packageByName($packages, $name) or next;
-	    push @rpms, $name;
-	}
-	@rpms > 0 or return;
-	return [ @rpms, "NVIDIA_GLX" ];
-    }
-}
-
-#-######################################################################################
 #- Functions
 #-######################################################################################
 sub getNextStep {
