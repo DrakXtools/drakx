@@ -121,7 +121,11 @@ gtkadd($window1,
 						   1, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
 						   0, new Gtk::VSeparator,
 						   0, gtkpack(new Gtk::VBox(0,5),
-							      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub { system("/usr/sbin/logdrake --file /var/log/messages &") }),
+							      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub {
+							        -e "/usr/sbin/logdrake"
+								  ? system('/usr/sbin/logdrake --file /var/log/messages &')
+								    : system('/usr/X11R6/bin/xvt -e "tail -f /var/log/messages " &')
+						 }),
 							      gtksignal_connect(my $button_close = new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) }),
 							     )
 						  )
