@@ -75,8 +75,9 @@ my %keyboards = (
 #- Functions
 #-######################################################################################
 sub list { map { $_->[0] } values %keyboards }
-sub xmodmaps { map { $_ } values %keyboards }
+sub xmodmaps { keys %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
+sub keyboard2xkb { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 sub text2keyboard {
     my ($t) = @_;
     while (my ($k, $v) = each %keyboards) {

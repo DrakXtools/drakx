@@ -35,15 +35,19 @@ this.
 customized installation, this Install Class is for you."),
 
 setupSCSI =>
- __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s) to be tested. Otherwise,
-select \"No\".
+ __("Panoramix will attempt at first to look for one or more PCI
+SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
+to use, it will insert it (them)  automatically.
 
+If your SCSI adapter is ISA, or is PCI but Panoramix doesn't know
+which driver to use for this card, or if you have no SCSI adapters
+at all, you will then be prompted on whether you have one or not.
+If you have none, answer \"No\". If you have one or more, answer
+\"Yes\". You will then be asked which driver to try.
 
-If you don't know if your computer has SCSI interfaces, consult the
-original documentation delivered with the computer, or if you use
-Microsoft Windows 95/98, inspect the information available via the \"Control
-panel\", \"System's icon, \"Device Manager\" tab."),
+In this case, you will be prompted on options to pass to the dri-
+ver (namely, I/O port and IRQ). Don't forget the information you
+could get from Windows, as suggested by the installation guide!"),
 
 partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you
@@ -185,15 +189,20 @@ this.
 customized installation, this Install Class is for you."),
 
 setupSCSI =>
- __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module(s) to be tested. Otherwise,
-select \"No\".
+__("Panoramix will attempt at first to look for one or more PCI
+SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
+to use, it will insert it (them)  automatically.
 
+If your SCSI adapter is ISA, or is PCI but Panoramix doesn't know
+which driver to use for this card, or if you have no SCSI adapters
+at all, you will then be prompted on whether you have one or not.
+If you have none, answer \"No\". If you have one or more, answer
+\"Yes\". You will then be asked which driver to try.
 
-If you don't know if your computer has SCSI interfaces, consult the
-original documentation delivered with the computer, or if you use
-Microsoft Windows 95/98, inspect the information available via the \"Control
-panel\", \"System's icon, \"Device Manager\" tab."),
+In this case, you will be prompted on options to pass to the dri-
+ver (namely, I/O port and IRQ). Don't forget the information you
+could get from Windows, as suggested by the installation guide!"),
+
 
 partitionDisks =>
  __("At this point, hard drive partitions must be defined. (Unless you

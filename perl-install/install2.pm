@@ -172,7 +172,7 @@ $o = $::o = {
 #-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
 
 #-    keyboard => 'de',
-#-    display => "192.168.1.9:0",
+#    display => "192.168.1.19:1",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 

@@ -138,7 +138,7 @@ while (my ($k, $v) = each %drivers) {
 
 1;
 
-
+sub drivers { %drivers }
 sub text_of_type($) {
     my ($type) = @_;
 
