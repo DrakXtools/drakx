@@ -662,7 +662,7 @@ sub install_yaboot {
     output($f, "$of_dev\n");  
     $::testing and return;
     if (defined $install_steps_interactive::new_bootstrap) {
-	run_program::run("hformat", "$lilo->{boot}") or die "hformat failed";
+	run_program::run("hformat", $lilo->{boot}) or die "hformat failed";
     }	
     run_program::rooted_or_die($::prefix, "/usr/sbin/ybin", "2>", "/tmp/.error");
     unlink "$::prefix/tmp/.error";	

@@ -600,7 +600,7 @@ sub write {
 	}
 	$hd->kernel_read;
 	foreach (@magic_parts) {
-	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . "$!");
+	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
 	}
     }
     $hd->{needKernelReread} = 0;

@@ -11,7 +11,7 @@ my %hosts;
 
 sub fromEnv() {
     #- now URLPREFIX is generated from what is given by mdk-stage1 which is only this 4 variables.
-    $ENV{URLPREFIX} = "ftp://" . ($ENV{LOGIN} && ("$ENV{LOGIN}" . ($ENV{PASSWORD} && ":$ENV{PASSWORD}") . '@')) .
+    $ENV{URLPREFIX} = "ftp://" . ($ENV{LOGIN} && ($ENV{LOGIN} . ($ENV{PASSWORD} && ":$ENV{PASSWORD}") . '@')) .
       "$ENV{HOST}/$ENV{PREFIX}";
     @ENV{qw(HOST PREFIX LOGIN PASSWORD)};
 }

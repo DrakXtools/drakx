@@ -47,10 +47,10 @@ If you don't know, choose 'use pppoe'"), $l) or return;
     if ($type =~ /Sagem/) {
 	$in->do_pkgs->install(qw(rp-pppoe adiusbadsl));
 	$netcnx->{type} = "adsl_pppoe";
-	$netcnx->{"adsl_pppoe"} = {};
+	$netcnx->{adsl_pppoe} = {};
 	modules::add_alias('ADIModem', 'adiusbadsl');
 	$netc->{$_} = 'ADIModem' foreach qw(NET_DEVICE NET_INTERFACE);
-	adsl_conf($netcnx->{"adsl_pppoe"}, $netc, $intf, $type) or goto conf_adsl_step1;
+	adsl_conf($netcnx->{adsl_pppoe}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     if ($type eq 'dhcp') {
 	$in->do_pkgs->install(qw(dhcpcd));

@@ -114,14 +114,14 @@ if (member( $cur_res, qw( 785 788 791 794))) {
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
 my @thms;
-my @lilo_thms = ($themes{'default'} ? () : qw(default));
-my @boot_thms = ($themes{'default'} ? () : qw(default));
-chdir($themes{'path'}); #- we must change directory for correct @thms assignement
+my @lilo_thms = ($themes{default} ? () : qw(default));
+my @boot_thms = ($themes{default} ? () : qw(default));
+chdir($themes{path}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
-    if (-d $themes{'path'} . $_ && m/^[^.]/) {
+    if (-d $themes{path} . $_ && m/^[^.]/) {
 	push @thms, $_;
-	-f $themes{'path'} . $_ . $themes{'lilo'}{'file'} and push @lilo_thms, $_;
-	-f $themes{'path'} . $_ . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg" and push @boot_thms, $_;
+	-f $themes{path} . $_ . $themes{lilo}{file} and push @lilo_thms, $_;
+	-f $themes{path} . $_ . $themes{boot}{path} . "bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
 #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
 }
@@ -131,14 +131,14 @@ foreach (keys(%combo)) {
     $combo{$_}->set_value_in_list(1, 0);
 }
 
-$combo{'thms'}->set_popdown_strings(@thms);
-$combo{'lilo'}->set_popdown_strings(@lilo_thms);
-$combo{'boot'}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
+$combo{thms}->set_popdown_strings(@thms);
+$combo{lilo}->set_popdown_strings(@lilo_thms);
+$combo{boot}->set_popdown_strings(@boot_thms) if !$no_bootsplash;
 my ($lilo_pixbuf, $boot_pixmap);
-my $lilo_pic = gtkpng($themes{'def_thmb'});
+my $lilo_pic = gtkpng($themes{def_thmb});
 
 my $boot_pixbuf;
-my $boot_pic = gtkpng($themes{'def_thmb'});
+my $boot_pic = gtkpng($themes{def_thmb});
 
 my $thm_button = new Gtk::Button(N("Install themes"));
 my $logo_thm = new Gtk::CheckButton(N("Display theme\nunder console"));
@@ -151,31 +151,31 @@ $B_create->signal_connect(clicked => sub {
     });
 #- ******** action to take on changing combos values
 
-$combo{'thms'}->entry->signal_connect(changed => sub {
-    my $thm_txt = $combo{'thms'}->entry->get_text();
-    $combo{'lilo'}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : $themes{'default'} || 'default');
-    $combo{'boot'}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : $themes{'default'} || 'default');
+$combo{thms}->entry->signal_connect(changed => sub {
+    my $thm_txt = $combo{thms}->entry->get_text();
+    $combo{lilo}->entry->set_text(member($thm_txt, @lilo_thms) ? $thm_txt : $themes{default} || 'default');
+    $combo{boot}->entry->set_text(member($thm_txt, @boot_thms) ? $thm_txt : $themes{default} || 'default');
     
 });
 
-$combo{'lilo'}->entry->signal_connect(changed => sub {
-    my $new_file = $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'thumb'};
+$combo{lilo}->entry->signal_connect(changed => sub {
+    my $new_file = $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{thumb};
     undef($lilo_pixbuf);
-    $lilo_pixbuf = gtkcreate_png_pixbuf(-r $new_file ? $new_file : $themes{'def_thmb'});
+    $lilo_pixbuf = gtkcreate_png_pixbuf(-r $new_file ? $new_file : $themes{def_thmb});
     $lilo_pixbuf = $lilo_pixbuf->scale_simple(155,116,0);
     $lilo_pic->set($lilo_pixbuf->render_pixmap_and_mask(0), '');
 });
 
 $no_bootsplash == 0 
-	and $combo{'boot'}->entry->signal_connect( changed => sub {
-    my $img_file = $themes{'path'}.$combo{'boot'}->entry->get_text().$themes{'boot'}{'path'}."bootsplash-$cur_res.jpg";
+	and $combo{boot}->entry->signal_connect( changed => sub {
+    my $img_file = $themes{path}.$combo{boot}->entry->get_text().$themes{boot}{path}."bootsplash-$cur_res.jpg";
     undef($boot_pixmap);
     $boot_pixmap = gtkcreate_png_pixbuf( $img_file);
     $boot_pixmap = $boot_pixmap->scale_simple(155,116,0);
     $boot_pic->set($boot_pixmap->render_pixmap_and_mask(0), '');
 });
 
-$combo{'thms'}->entry->set_text($themes{'default'});
+$combo{thms}->entry->set_text($themes{default});
 
 $thm_button->signal_connect('clicked',
 
@@ -184,20 +184,20 @@ sub {
         my $boot_conf_file = '/etc/sysconfig/bootsplash';
 	my $lilomsg = '/boot/message-graphic';
       #lilo installation
-      if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
+      if (-f $themes{path}.$combo{lilo}->entry->get_text() . $themes{lilo}{file}) {
 			use MDK::Common::File;
 	    standalone::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
 	    cp_af($lilomsg, "/boot/message-graphic.old");
 	    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
-	    standalone::explanations(N("Copy %s to %s", $themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
-	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg);
+	    standalone::explanations(N("Copy %s to %s", $themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file},$lilomsg)); 
+	    cp_af($themes{path} . $combo{lilo}->entry->get_text() . $themes{lilo}{file}, $lilomsg);
 			#can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
 	} else {
             $error = 1;
             $in->ask_warn(N("Error"), N("Lilo message not found"));
         }
         #bootsplash install
-        if (-f $themes{'path'} . $combo{'boot'}->entry->get_text() . $themes{'boot'}{'path'} . "bootsplash-$cur_res.jpg") {
+        if (-f $themes{path} . $combo{boot}->entry->get_text() . $themes{boot}{path} . "bootsplash-$cur_res.jpg") {
                 my $bootsplash_cont = "# -*- Mode: shell-script -*-
 # Specify here if you want add the splash logo to initrd when
 # generating an initrd. You can specify :
@@ -211,7 +211,7 @@ sub {
 SPLASH=$cur_res
 # Choose the themes. The should be based in
 # /usr/share/bootsplash/themes/
-THEME=" . $combo{'boot'}->entry->get_text() . "
+THEME=" . $combo{boot}->entry->get_text() . "
 # Say yes here if you want to leave the logo on the console.
 # Three options :
 #
@@ -258,7 +258,7 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 
 gtkadd($window,
        gtkpack__(my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd(new Gtk::Frame("$disp_mode"),
+		  gtkadd(new Gtk::Frame($disp_mode),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1, N("You are currently using %s as your boot manager.
@@ -274,17 +274,17 @@ Click on Configure to launch the setup wizard.", $lilogrub),
                        gtkpack__(gtkset_border_width(new Gtk::HBox(0,5),5),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            N("Themes"),
-                                           $combo{'thms'},
+                                           $combo{thms},
                                            N("\nSelect theme for\nlilo and bootsplash,\nyou can choose\nthem separatly"),
                                            $logo_thm),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            N("Lilo screen"),
-                                           $combo{'lilo'},
+                                           $combo{lilo},
                                            $lilo_pic,
 					   $B_create),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            N("Bootsplash"),
-                                           $combo{'boot'},
+                                           $combo{boot},
                                            $boot_pic,
                                            $thm_button))
                       ),
