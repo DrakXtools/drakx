@@ -447,7 +447,7 @@ sub get_text_coord {
     my $flag = 1;
     my @t = split(' ', $text);
     foreach (@t) {
-	my $l = $style->font->string_width($_ . if_(!$flag, " "));
+	my $l = $style->font->string_width($_ . (!$flag ? " " : ""));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
 	    $height += $height_elem + 1;
@@ -496,7 +496,8 @@ sub fill_tiled {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
+    my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round,
+	$y_round, $x_back2, $y_back2, $icon_width, $icon_height, $exec_func, $exec_hash) = @_;
 
     my @tab;
     my $i = 0;
@@ -504,7 +505,6 @@ sub gtkicons_labels_widget {
     my $cursor_normal = new Gtk::Gdk::Cursor 68;
     foreach (@$args) {
 	my $label = $_->[0];
-	my $exec = $_->[2];
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
         my ($icon, undef) = gtkcreate_png($_->[1]);
@@ -546,16 +546,18 @@ sub gtkicons_labels_widget {
 					$darea->draw(undef);
 				    }
 				});
-	$darea->signal_connect( button_release_event => sub { system("$exec&") });
+	my $label_exec = $_->[0];
+	$darea->signal_connect( button_release_event => sub {
+				    $exec_func->($exec_hash->{$label_exec});
+#				    $exec_hash->{$label_exec}{function}->($exec_hash->{$label_exec}{arg});
+				});
 	$darea->signal_connect( realize => sub { $darea->window->set_cursor($cursor_hand) });
 	$tab[$i] = $darea;
 	$i++;
     }
     my $fixed = new Gtk::Fixed;
     foreach (@tab) { $fixed->put($_, 75, 65) }
-    my $redraw_function = sub { 
-	$fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 5, @tab);
-    };
+    my $redraw_function = sub { $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 15, 10, @tab) };
     $fixed->signal_connect(expose_event => $redraw_function );
     $fixed->signal_connect(realize => sub {
 			       $fixed->window->set_back_pixmap($background, 0);
