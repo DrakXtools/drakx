@@ -1032,9 +1032,9 @@ ifdown eth0
       if ($use_wizard) {
           require wizards;
           $wiz->{var} = {
-                         netc  => $o_netc  || {},
-                         mouse => $o_mouse || {},
-                         intf  => $o_intf  || {},
+                         netc  => $netc,
+                         mouse => $mouse,
+                         intf  => $intf,
                         };
           wizards->new->safe_process($wiz, $in);
       }
