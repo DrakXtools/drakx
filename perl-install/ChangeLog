@@ -1,3 +1,462 @@
+2004/08/25  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* tools/ddcprobe/vbe.c, tools/ddcprobe/vbe.h, tools/ddcprobe/Makefile,
+	tools/ddcprobe/ddcxinfos.c: Extensive rewrite and cleanups to use the
+	new int10 interface. Plus add
+	some 64-bit fixes and a last-resort means to get VBE/EDID information
+	from special -BOOT kernel during early boot.
+
+	* Xconfig/monitor.pm: Parse XFree86.log in last resort in case we have not
+	got any valuable
+	information at this stage from ddcxinfos.
+
+	* crypto.pm: Always prefer 64-bit packages for updates on biarch
+	platforms.
+
+	* share/list.x86_64: i18n stuff at install time, probably make it common
+	with /LIB/
+
+	* tools/ddcprobe/x86emu/include/x86emu.h,
+	tools/ddcprobe/x86emu/include/x86emu/fpu_regs.h,
+	tools/ddcprobe/x86emu/include/x86emu/regs.h,
+	tools/ddcprobe/x86emu/include/x86emu/types.h: Add remaining x86 CPU
+	emulator bits
+
+	* partition_table.pm: add XFS to x86_64 known FS
+
+	* Xconfig/card.pm: handle lib64 drivers on x86-64
+
+	* install_steps_gtk.pm: default to 75dpi in order to get anti-aliased
+	fonts
+
+	* tools/ddcprobe/x86emu/x86emu/prim_asm.h, tools/ddcprobe/x86emu/sys.c,
+	tools/ddcprobe/x86emu/x86emu/fpu.h, tools/ddcprobe/x86emu/prim_ops.c,
+	tools/ddcprobe/x86emu/ops.c, tools/ddcprobe/x86emu/debug.c,
+	tools/ddcprobe/x86emu/x86emu/x86emui.h,
+	tools/ddcprobe/x86emu/x86emu/decode.h, tools/ddcprobe/x86emu/validate.c,
+	tools/ddcprobe/x86emu/x86emu/prim_ops.h, tools/ddcprobe/x86emu/decode.c,
+	tools/ddcprobe/x86emu/x86emu/debug.h, tools/ddcprobe/x86emu/fpu.c,
+	tools/ddcprobe/x86emu/LICENSE, tools/ddcprobe/x86emu/Makefile,
+	tools/ddcprobe/x86emu/x86emu/ops.h, tools/ddcprobe/x86emu/ops2.c: Add
+	x86 CPU emulator for BIOS int10 emulation on non x86 arches.
+
+	* drakxtools.spec: update changelog dates to please rpm + add some
+	highlights to please titi
+	enough amd64 changes merged
+
+	* c/smp.c: fix smp detection on x86_64
+
+	* tools/ddcprobe/int10/vbios.h, tools/ddcprobe/int10/pci.h,
+	tools/ddcprobe/int10/Makefile, tools/ddcprobe/int10/i10_v86.c,
+	tools/ddcprobe/int10/i10_int.c, tools/ddcprobe/int10/i10_vbios.c,
+	tools/ddcprobe/int10/v86bios.h, tools/ddcprobe/int10/emu_vm86.c,
+	tools/ddcprobe/int10/i10_pci.c, tools/ddcprobe/int10/i10_io.c,
+	tools/ddcprobe/int10/vm86_struct.h, tools/ddcprobe/int10/README,
+	tools/ddcprobe/int10/AsmMacros.h: VGA softbootloader for Linux, uses an
+	x86 CPU emulator on non x86 arches.
+
+	* Makefile: Handle PCMCIA on x86-64 too. Fix libs glob for live tree.
+	Don't ship with
+	"cdcom" modules archives in netinstallable trees.
+
+	* install_steps.pm: handle nolapic, idle=poll, ide=nodma boot options
+
+2004/08/25  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 604
+	(not finished)
+
+2004/08/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl_consts.pm: fix Titi sux hard (add missing comma and spaces,
+	remove spurious
+	nameserver word)
+
+	* network/tools.pm: add missing spaces
+	add get_interface_type to guess interface type
+
+	* any.pm (selectCountry) fix Pixel broke country selection (bug 10938)
+
+	* standalone/drakconnect: use exists
+	(manage) use network::tools::get_interface_type instead of
+	/etc/sysconfig/drakconnect in order to avoid to recognize ppp0 as both
+	modem and adsl (bug 10772)
+
+2004/08/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.13mdk
+	merge in lost 10-34.3.100mdk's changelog
+
+	* network/adsl_consts.pm: fix siol's vci (hexa formated)
+
+	* Makefile.config: add listsupportedprinters
+
+2004/08/24  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+	Updated Simplified Chinese translation
+
+2004/08/24  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: mmodem
+
+2004/08/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* modules/modprobe_conf.pm, modules/any_conf.pm, modules/modules_conf.pm:
+	really parse modules file according to its type when reading it (always
+	call $conf->read, split modules::any_conf::read in
+	modules::any_conf::read_handled)
+
+	* printer/detect.pm (local_detect) fix modules conf parsing
+
+	* install_steps.pm: drop non-standard tld (localdomain)
+
+	* network/network.pm (add2hosts) use difference2
+	(add2hosts) make it more readable
+	(add2hosts) rework parsing
+	i sux
+	(configureNetwork2) always add an hostname alias and add it on the
+	loopback device (bug 10345)
+	(add2hosts) allow multiple aliases per host
+	(add2hosts) regexp fixes
+
+	* standalone/drakconnect (configure_net) do not ask the user to do an
+	inifinite looping in MCC ...
+
+	* detect_devices.pm (usbMice, usbWacom) wacom devices can have 'wacom' as
+	driver
+
+	* mouse.pm, Xconfig/xfree.pm: synaptics touchpad support
+
+2004/08/24  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/ky.po, share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/fr.po,
+	share/po/ta.po, share/po/vi.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated Japanese file; retrieved
+	some old translation strings
+
+	* share/po/nb.po: updated BokmÃ¥l file
+	updated Japanese file; retrieved some old translation strings
+
+2004/08/24  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Special treatments for print queues with the "lbp660" and "ml85p"
+	drivers. Here the driver communicates directly with the printer instead
+	of sending the output to a CUPS backend.
+	  - Make sure that queues which have special treatment, as for example
+	the ones using "lbp660" and "ml85p", do not try to open message indows
+	when the print queues are auto-generated by dynamic/hotplug.
+	  - If the user gets an error/warning message during setup of a queue
+	with special treatment, he is automatically put back to the previous
+	step in the add-printer wizard.
+	  - Let warning messages (funktion "ask_warn()") never embed in the
+	add-printer wizard, as they have no "Previous" button in the wizard.
+	Fixed "ask_from_()" calls in "config_cups()" (Thanks Olivier for
+	breaking it in your perl-checker clean-up in 1.119 --> 1.120).
+
+	* standalone/listsupportedprinters: Added "listsupportedprinters", a
+	simple program which runs the printer model list function of
+	printerdrake to get a list of supported printer models on STDOUT (Mainly
+	for auto-generation of Mandrakelinux hardware support database).
+
+	* standalone/printerdrake: Version number.
+
+2004/08/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm (write) use newly introduced IM2packages() in order to install
+	proper
+	packages depending on (locale, input method) tuple
+	(IM2packages) introduce it in order to know which packages need to be
+	installed for a (locale, input method) tuple
+
+	* standalone/drakroam: fix crash when config directory does not exist
+	(#10935)
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, standalone/drakups, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: typo fix
+
+	* network/adsl_consts.pm: add Siol (the bigest ADSL provider in Slovenia)
+	in ADSL providers DB
+	(Gregor Pirnaver <gregor.pirnaver@mandrakeprinas.org>)
+
+2004/08/23  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/08/23  hilbert
+
+	* share/po/zh_TW.po: DrakX-zh_TW: 598
+	If you chose
+
+2004/08/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* crypto.pm (getPackages) use new mirror structure filepaths
+
+	* standalone/net_monitor: watch connection time, not disconnection time
+	:-)
+
+	* commands.pm (modprobe) use load_with_options instead of load_raw to take
+	care of
+	module dependencies
+
+	* network/network.pm (add2hosts) make it work with sub hostnames
+
+2004/08/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* standalone/drakvpn, standalone/drakclock: no space before question marks
+	in English
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: updated pot file
+
+	* install_steps_interactive.pm: no space before a question mark in English
+
+	* network/netconnect.pm: no space before question marks in English
+	no space before a question mark in English
+
+2004/08/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.12mdk
+
+	* printer/printerdrake.pm: language names are upcase in english
+	aspell's typo fixes
+
+	* Xconfig/card.pm (to_raw_X) do not set DRI mode anymore; this is not
+	needed anymore
+	with PAM
+
+	* Makefile.config: add autosetupprintqueues
+
+	* network/netconnect.pm, standalone/drakvpn, standalone/drakTermServ,
+	standalone/drakbackup, standalone/drakconnect: protocol names, trademark
+	and acronyms should be upcase
+	aspell's typo fixes
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/da.po, share/po/ca.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/nl.po, share/po/tl.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/uz@Latn.po: language names are upcase in
+	english
+	protocol names, trademark and acronyms should be upcase
+	aspell's typo fixes
+
+	* standalone/drakpxe, network/adsl.pm, network/adsl_consts.pm: protocol
+	names, trademark and acronyms should be upcase
+
+	* standalone/logdrake, standalone.pm, standalone/draksound,
+	install_any.pm, standalone/drakxtv, standalone/draksec,
+	standalone/harddrake2, install_interactive.pm, any.pm,
+	harddrake/sound.pm, services.pm, install_messages.pm,
+	standalone/drakfont: aspell's typo fixes
+
+2004/08/22  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+	* share/po/Makefile: adjust Makefile to fit doc module zh_cn
+
+2004/08/22  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/08/21  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/08/21  Till Kamppeter  <till at mandrakesoft.com>
+
+	* standalone/autosetupprintqueues, printer/main.pm,
+	printer/printerdrake.pm: 
+	  - Added fully automatic, non-interactive, X-less print queue set up by
+	the "autosetupprintqueues" command, preferrably to be started by
+	hotplug.
+	  - Typo correction.
+	  - Correction of file check for package installation.
+
+2004/08/20  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/network.pm: add a fixme comment
+	update mac address in network::ethernet::get_eth_cards to be sure iftab
+	is always up-to-date
+
+	* share/rpmsrate: install kdeutils-klaptop on laptops
+
+	* standalone/net_monitor: do not assume internet isn't configured if
+	connect scripts do not
+	exist (they're obsolete), fix connect button sensitivity
+
+	* pkgs.pm (read_rpmsrate) support the TYPE keyword, using
+	detect_devices::matching_type()
+
+	* install_steps.pm (configureNetwork) net_cnx_* scripts are dead
+
+	* share/po/fr.po: update adsl message (partial fix of bug 5778)
+
+	* network/ethernet.pm: update mac address in
+	network::ethernet::get_eth_cards to be sure iftab is always up-to-date
+
+	* network/netconnect.pm (network_on_boot step) do not create ifcfg-ippp0
+	quite randomly
+	($after_start_on_boot_step) remove obsolete call to write_cnx_script
+	fix nonsense in reconfigure message (#10827)
+
+	* detect_devices.pm: add matching_type() to introduce the TYPE keyword in
+	rpmsrate
+	(supports only laptop type for now)
+	(firewire_probe) use sysfs to detect firewire devices (eth1394 should be
+	detected now)
+	fix nasty typo
+
+2004/08/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+
+	* standalone/drakvpn: Fixed English typos
+	fixed English typos (no space before colon)
+
+	* standalone/drakups: fixed English typo
+
+	* share/advertising/05.pl: standardized on using the asterisk as bullet
+	list for all advertisings
+
+2004/08/20  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Use standard mouse wait/normal. Make $cmd_line
+	a global. perl_checker fixes.
+
+2004/08/20  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed problem of Brother laser printer on parallel port not showing
+	its name in auto-detection result.
+
+2004/08/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: add BuildRequires: rpm-devel b/c of c/stuff.xs
+	(Christiaan Welvaart)
+
+	* share/po/Makefile: fix drakxtools build
+
+	* network/netconnect.pm: rollback (a string was removed so translators
+	still have to
+	investigate anyway...)
+	rollback 'n split in order to reduce pressure on translators
+
+2004/08/19  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/printerdrake: perl_checker fixes
+
+	* printer/printerdrake.pm: always close the wizard_window, die when an
+	exception has been raised
+	perl_checker fixes
+	perl_checker fixes
+
+2004/08/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/am.po: updated Amharic file
+
+	* share/po/eu.po: updated Basque file
+
+	* share/po/sr.po: fixed cyrillic encoding mess with Serbian translations
+
+	* share/po/tg.po, share/po/uk.po, share/po/uz.po, share/po/ru.po,
+	share/po/mk.po, share/po/bg.po: fixed wrong cyrillic encoding chars
+
+2004/08/19  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Let printer name, description, location be entered after determining
+	the model in the add printer wizard
+	  - Let default print queue name be derived from the model instead of
+	being "Printer", "Printer1", ...
+	  - Simplified print queue name generation in non-interactive printer
+	setup
+	  - Fixed "Previous" button in the test page step of the add printer
+	wizard.
+
+2004/08/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.11mdk
+
 2004/08/19  Erwan Velu  <erwan at mandrakesoft.com>
 
 	* share/rpmsrate: removing OpenIPMI as default
@@ -35789,7 +36248,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.950 2004/08/18 10:52:59 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.951 2004/08/19 12:56:34 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
