@@ -91,20 +91,20 @@ sub write_resolv_conf {
     my (%search, %dns, @unknown);
     local *F; open F, $file;
     local $_;
-    my $options;
+#-    my $options;
     while (<F>) {
-	if (/^[\s]*(options\s+[^#]*).*$/) { $options = $1; $options =~ s/timeout:\d+/timeout:1/; next }
+#-	if (/^[\s]*(options\s+[^#]*).*$/) { $options = $1; $options =~ s/timeout:\d+/timeout:1/; next }
 	/^[#\s]*search\s+(.*?)\s*$/ and $search{$1} = $., next;
 	/^[#\s]*nameserver\s+(.*?)\s*$/ and $dns{$1} = $., next;
 	/^.*# ppp temp entry\s*$/ and next;
 	/^[#\s]*(\S.*?)\s*$/ and push @unknown, $1;
     }
-    $options ||= "options timeout:1";
+#-    $options ||= "options timeout:1";
 
     close F; open F, ">$file" or die "cannot write $file: $!";
     print F "# search $_\n" foreach grep { $_ ne "$netc->{DOMAINNAME} $netc->{DOMAINNAME2}" } sort { $search{$a} <=> $search{$b} } keys %search;
     print F "search $netc->{DOMAINNAME} $netc->{DOMAINNAME2}\n" if ($netc->{DOMAINNAME} || $netc->{DOMAINNAME2});
-    print F "$options\n\n";
+#-    print F "$options\n\n";
     print F "# nameserver $_\n" foreach grep { ! exists $used_dns{$_} } sort { $dns{$a} <=> $dns{$b} } keys %dns;
     print F "nameserver $_\n" foreach  sort { $used_dns{$a} <=> $used_dns{$b} } grep { $_ } keys %used_dns;
     print F "\n";
