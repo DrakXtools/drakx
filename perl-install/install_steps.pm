@@ -649,10 +649,15 @@ sub setupBootloaderBefore {
 	    $o->{bootloader}{part_nb} ||= first($dev->{device} =~ /(\d+)/);
 	}
     } else {
+	#- check for valid fb mode to enable a default boot with frame buffer.
+	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
+				    !detect_devices::matching_desc('SiS') &&
+				    !detect_devices::matching_desc('Rage Mobility')) && $o->{vga};
+
 	require bootloader;
 	#- propose the default fb mode for kernel fb, if aurora is installed too.
         bootloader::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion($o),
-			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'Aurora') || {}) && ($o->{vga} || 785));
+			    pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'Aurora') || {}) && $vga);
 	if ($o->{miscellaneous}{profiles}) {
 	    my $e = bootloader::get_label("linux", $o->{bootloader});
 	    push @{$o->{bootloader}{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };

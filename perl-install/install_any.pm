@@ -117,6 +117,7 @@ sub errorOpeningFile($) {
 }
 sub getFile {
     my ($f, $method) = @_;
+    log::l("getFile $f:$method");
     my $rel = relGetFile($f);
     do {
 	if ($method =~ /crypto/i) {
@@ -292,13 +293,8 @@ sub setPackages {
 	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
-
-#	 #- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
-#	 $o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
-#			   !detect_devices::matching_desc('SiS') &&
-#			   !detect_devices::matching_desc('Rage Mobility'))
-#	   or push @pkgs::skip_list (*deprecated*), 'Aurora';
+	pkgs::selectPackage($o->{packages},
+			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
@@ -319,18 +315,6 @@ sub setPackages {
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
  
-#	 if (detect_devices::matching_desc('Matrox.* G[24]00') ||
-#	     detect_devices::matching_desc('Riva.*128') ||
-#	     detect_devices::matching_desc('Rage X[CL]') ||
-#	     detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
-#	     detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
-#	     detect_devices::matching_desc('Voodoo [35]') ||
-#	     detect_devices::matching_desc('Voodoo Banshee') ||
-#	     detect_devices::matching_desc('8281[05].* CGC') ||
-#	     detect_devices::matching_desc('Radeon ') ||
-#	     detect_devices::matching_desc('Rage 128')) {
-#	}
-
 	#- for the first time, select package to upgrade.
 	#- TOCHECK this may not be the best place for that as package are selected at some other point.
 	$o->selectPackagesToUpgrade if $o->{isUpgrade};
@@ -338,9 +322,6 @@ sub setPackages {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
 	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
-
-	#- remove upgrade flag with selection one. TOCHECK
-	#pkgs::unselectAllPackagesIncludingUpgradable($o->{packages});
     }
 }
 
