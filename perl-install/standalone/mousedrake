@@ -48,6 +48,10 @@ substInFile {
     if (/^Section "Pointer"/ .. /^EndSection/) {
 	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
 	s|^(\s*Device\s+).*|$1"/dev/mouse"|;
+#-	  my $zaxis = "4 5" if $mouse->{nbuttons} > 3;
+#-	  $zaxis .= " 6 7" if $mouse->{nbuttons} > 5;
+#-	  s|^(\s*ZAxisMapping\s+).*|$1$zaxis| if $zaxis;
+#-	  s|^([#]\s*ZAxisMapping\s+).*|#    ZAxisMapping\t\n|; }
     }
 } $f if -e $f && !$::testing;
 substInFile {

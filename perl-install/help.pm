@@ -10,7 +10,7 @@ selectKeyboard =>
  __("Choose the layout corresponding to your keyboard from the list above"),
 
 selectInstallClass =>
- __("Choose \"Install\" if there are no previous versions of Linux
+ __("Choose \"Install\" if there are no previous versions of GNU/Linux
 installed, or if you wish to use multiple distributions or versions.
 
 Choose \"Upgrade\" if you wish to update a previous version of Mandrake Linux:
@@ -20,7 +20,7 @@ or 7.0 (Air).
 
 Select:
 
-  - Automated (recommended): If you have never installed Linux before, choose this. NOTE:
+  - Automated (recommended): If you have never installed GNU/Linux before, choose this. NOTE:
     networking will not be configured during installation, use \"LinuxConf\"
     to configure it after the install completes.
 
@@ -67,40 +67,38 @@ following:
 "),
 
 setupSCSI =>
- __("DrakX will attempt at first to look for one or more PCI
-SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
-to use, it will insert it (them)  automatically.
+ __("DrakX will attempt to look for PCI SCSI adapter(s). 
+If DrakX finds a SCSI adapter and knows which driver to use it will
+automatically install it (or them).
+
+If you have no SCSI adapter, an ISA SCSI adapter, or a
+PCI SCSI adapter that DrakX doesn't recognize you will be asked if a
+SCSI adapter is present in your system. If there is no adapter present
+you can just click 'No'. If you click 'Yes' a list of drivers will be
+presented from which you can select your specific adapter.
 
 
-If your SCSI adapter is an ISA board, or is a PCI board but DrakX
-doesn't know which driver to use for this card, or if you have no
-SCSI adapters at all, you will then be prompted on whether you have
-one or not. If you have none, answer \"No\". If you have one or more,
-answer \"Yes\". A list of drivers will then pop up, from which you
-will have to select one.
+If you had to manually specify your adapter, DrakX will
+ask if you want to specify options for it.  You should allow DrakX to
+probe the hardware for the options. This usually works well.
 
-
-After you have selected the driver, DrakX will ask if you
-want to specify options for it. First, try and let the driver
-probe for the hardware: it usually works fine.
-
-
-If not, do not forget the information on your hardware that you
-could get from your documentation or from Windows (if you have it
-on your system), as suggested by the installation guide. These
-are the options you will need to provide to the driver."),
+If not, you will need to provide options to the driver.
+Review the Installation Guide for hints on retrieving this
+information from Windows (if you have it on your system),
+from hardware documentation, or from the manufacturer's
+website (if you have Internet access)."),
 
 partitionDisks =>
  __("At this point, you may choose what partition(s) to use to install
 your Linux-Mandrake system if they have been already defined (from a
-previous install of Linux or from another partitionning tool). In other
+previous install of GNU/Linux or from another partitioning tool). In other
 cases, hard drive partitions must be defined. This operation consists of
 logically dividing the computer's hard drive capacity into separate
 areas for use.
 
 
 If you have to create new partitions, use \"Auto allocate\" to automatically
-create partitions for Linux. You can select the disk for partitionning by
+create partitions for GNU/Linux. You can select the disk for partitioning by
 clicking on \"hda\" for the first IDE drive,
 \"hdb\" for the second or \"sda\" for the first SCSI drive and so on.
 
@@ -163,10 +161,9 @@ check what it has done, you will be presented the list of mice
 above.
 
 
-If you agree with DrakX' settings, just jump to the section
-you want by clicking on it in the menu on the left. Otherwise,
-choose a mouse type in the menu which you think is the closest
-match for your mouse.
+If you agree with DrakX's settings, just click 'Ok'.
+Otherwise you may choose the mouse that more closely matches your own
+from the menu above.
 
 
 In case of a serial mouse, you will also have to tell DrakX
@@ -174,7 +171,7 @@ which serial port it is connected to."),
 
 selectSerialPort =>
  __("Please select the correct port. For example, the COM1 port under MS Windows
-is named ttyS0 under Linux."),
+is named ttyS0 under GNU/Linux."),
 
 configureNetwork =>
  __("This section is dedicated to configuring a local area
@@ -216,7 +213,7 @@ configureNetworkIP =>
 sure, ask your network administrator or ISP.
 
 
-  - Automatic IP: If your network uses bootp or dhcp protocol, select 
+  - Automatic IP: If your network uses BOOTP or DHCP protocol, select 
 this option. If selected, no value is needed in \"IP address\". If you are
 not sure, ask your network administrator or ISP.
 "),
@@ -241,7 +238,7 @@ configureTimezone =>
  __("You can now select your timezone according to where you live.
 
 
-Linux manages time in GMT or \"Greenwich Mean Time\" and translates it
+GNU/Linux manages time in GMT or \"Greenwich Mean Time\" and translates it
 in local time according to the time zone you have selected."),
 
 configureServices =>
@@ -254,7 +251,7 @@ server: you will probably want not to start any services which you don't
 want."),
 
 configurePrinter =>
- __("Linux can deal with many types of printer. Each of these
+ __("GNU/Linux can deal with many types of printer. Each of these
 types require a different setup. Note however that the print
 spooler uses 'lp' as the default printer name; so you
 must have one printer with such a name; but you can give
@@ -329,11 +326,11 @@ createBootdisk =>
  __("It is strongly recommended that you answer \"Yes\" here. If you install
 Microsoft Windows at a later date it will overwrite the boot sector.
 Unless you have made a bootdisk as suggested, you will not be able to
-boot into Linux any more."),
+boot into GNU/Linux any more."),
 
 setupBootloaderBeginner =>
  __("You need to indicate where you wish
-to place the information required to boot to Linux.
+to place the information required to boot to GNU/Linux.
 
 
 Unless you know exactly what you are doing, choose \"First sector of
@@ -345,7 +342,7 @@ setupBootloader =>
 
 setupBootloaderAddEntry =>
  __("LILO (the LInux LOader) and Grub are bootloaders: they are able to boot
-either Linux or any other operating system present on your computer.
+either GNU/Linux or any other operating system present on your computer.
 Normally, these other operating systems are correctly detected and
 installed. If this is not the case, you can add an entry by hand in this
 screen. Be careful as to choose the correct parameters.
@@ -376,7 +373,7 @@ when booting. The following values are available:
 
 configureX =>
  __("Now it's time to configure the X Window System, which is the
-core of the Linux GUI (Graphical User Interface). For this purpose,
+core of the GNU/Linux GUI (Graphical User Interface). For this purpose,
 you must configure your video card and monitor. Most of these
 steps are automated, though, therefore your work may only consist
 of verifying what has been done and accept the settings :)
@@ -405,15 +402,11 @@ miscellaneous =>
 
   - Choose security level: you can choose a security level for your
     system. Please refer to the manual for complete information. Basically: if
-    you don't know, select \"Medium\" ; if you really want to have a secure
-    machine, choose \"Paranoid\" but beware: IN THIS LEVEL, ROOT LOGIN AT
-    CONSOLE IS NOT ALLOWED! If you want to be root, you have to login as a user
-    and then use \"su\". More generally, do not expect to use your machine
-    for anything but as a server. You have been warned.
+    you don't know, select \"Medium\".
 
   - Precise RAM size if needed: unfortunately, in today's PC world, there is no
     standard method to ask the BIOS about the amount of RAM present in your
-    computer. As a consequence, Linux may fail to detect your amount of RAM
+    computer. As a consequence, GNU/Linux may fail to detect your amount of RAM
     correctly. If this is the case, you can specify the correct amount of RAM
     here. Note that a difference of 2 or 4 MB is normal.
 
@@ -442,7 +435,7 @@ the additional instructions."),
 #- __("Choose the layout corresponding to your keyboard from the list above"),
 #-
 #-selectPath =>
-#- __("Choose \"Installation\" if there are no previous versions of Linux
+#- __("Choose \"Installation\" if there are no previous versions of GNU/Linux
 #-installed, or if you wish to use multiple distributions or versions.
 #-
 #-
@@ -452,16 +445,16 @@ the additional instructions."),
 #-selectInstallClass =>
 #- __("Select:
 #-
-#-  - Beginner: If you have never installed Linux before, and wish to
+#-  - Beginner: If you have never installed GNU/Linux before, and wish to
 #-install the distribution elected \"Product of the year\" for 1999,
 #-click here.
 #-
-#-  - Developer: If you are familiar with Linux and will be using the
+#-  - Developer: If you are familiar with GNU/Linux and will be using the
 #-computer primarily for software development, you will find happiness
 #-here.
 #-
 #-  - Server: If you wish to install a general purpose server, or the
-#-Linux distribution elected \"Distribution/Server\" for 1999, select
+#-GNU/Linux distribution elected \"Distribution/Server\" for 1999, select
 #-this.
 #-
 #-  - Expert: If you are fluent with GNU/Linux and want to perform
@@ -493,7 +486,7 @@ the additional instructions."),
 #-Linux-Mandrake system."),
 #-
 #-#At this point, hard drive partitions must be defined. (Unless you
-#-#are overwriting a previous install of Linux and have already defined
+#-#are overwriting a previous install of GNU/Linux and have already defined
 #-#your hard drive partitions as desired.) This operation consists of
 #-#logically dividing the computer's hard drive capacity into separate
 #-#areas for use.
@@ -582,7 +575,7 @@ the additional instructions."),
 #- __("Help"),
 #-
 #-configurePrinter =>
-#- __("Linux can deal with many types of printer. Each of these
+#- __("GNU/Linux can deal with many types of printer. Each of these
 #-types require a different setup.
 #-
 #-
@@ -642,12 +635,12 @@ the additional instructions."),
 #-createBootdisk =>
 #- __("Please, please, answer \"Yes\" here! Just for example, when you
 #-reinstall Windows, it will overwrite the boot sector. Unless you have
-#-made the bootdisk as suggested, you won't be able to boot into Linux
+#-made the bootdisk as suggested, you won't be able to boot into GNU/Linux
 #-any more!"),
 #-
 #-setupBootloader =>
 #- __("You need to indicate where you wish
-#-to place the information required to boot to Linux.
+#-to place the information required to boot to GNU/Linux.
 #-
 #-
 #-Unless you know exactly what you are doing, choose \"First sector of
@@ -655,7 +648,7 @@ the additional instructions."),
 #-
 #-configureX =>
 #- __("Now it's time to configure the X Window System, which is the
-#-core of the Linux GUI (Graphical User Interface). For this purpose,
+#-core of the GNU/Linux GUI (Graphical User Interface). For this purpose,
 #-you must configure your video card and monitor. Most of these
 #-steps are automated, though, therefore your work may only consist
 #-of verifying what has been done and accept the settings :)

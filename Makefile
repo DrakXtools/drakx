@@ -72,7 +72,7 @@ rescue: modules
 
 network_ks.rdz pcmcia_ks.rdz: %_ks.rdz: %.rdz
 
-network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz network64.rdz hd64.rdz cdrom64.rdz live64.rdz tftp64.rdz tftprd64.rdz: dirs modules
+network.rdz pcmcia.rdz hd.rdz cdrom.rdz live.rdz tftp.rdz tftprd.rdz network64.rdz hd64.rdz cdrom64.rdz live64.rdz tftp64.rdz tftprd64.rdz blank.rdz: dirs modules
 	./make_boot_img $@ $(@:%.rdz=%)
 
 $(BOOT_IMG): %.img: %.rdz
@@ -104,7 +104,7 @@ upload: tar install
 #	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/images ; mput $(ROOTDEST)/images/*.img"
 #	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/dosutils/autoboot/mdkinst ; put $(ROOTDEST)/dosutils/autoboot/mdkinst/vmlinuz ; mput $(ROOTDEST)/dosutils/autoboot/mdkinst/initrd.*"
 #	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST)/lnx4win ; lcd $(ROOTDEST)/lnx4win ; put initrd.gz vmlinuz"
-	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
+#	lftp -c "open mandrakesoft.com; cd $(UPLOAD_DEST_CONTRIB)/others/src ; put ../gi.tar.bz2"
 	rm -f $(ROOTDEST)/Mandrake/mdkinst.tgz
 	rm -f /tmp/mdkinst_done
 

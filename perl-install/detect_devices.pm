@@ -45,7 +45,7 @@ sub cdroms() {
     my @l = grep { $_->{type} eq 'cdrom' } get(); 
     if (my @l2 = getIDEBurners()) {
 	require modules;
-	my ($nb) = modules::add_alias('scsi_hostadapter', 'ide-scsi') =~ /(\d*)/;
+	my $nb = first(modules::add_alias('scsi_hostadapter', 'ide-scsi') =~ /(\d*)/) + 1;
 	foreach my $b (@l2) {
 	    log::l("getIDEBurners: $b");
 	    my ($e) = grep { $_->{device} eq $b } @l or next;

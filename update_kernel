@@ -1,6 +1,6 @@
 #!/bin/bash
 
-KERNEL_BOOT_PATH="kernel64"
+KERNEL_BOOT_PATH="kernel"
 
 function f() { 
     v=`perl -Iperl-install -Mmodules -e "print qq(\\$_.o\n) foreach modules::module_of_type(\"$1\")"` 

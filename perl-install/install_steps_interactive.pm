@@ -120,7 +120,7 @@ sub selectInstallClass($@) {
 	$::expert   = $c{$_[0]} eq "expert" &&
 	  $o->ask_from_list_('',
 _("Are you sure you are an expert? 
-You will be allowed to make powerfull but dangerous things here."), 
+You will be allowed to make powerful but dangerous things here."), 
 			 [ _("Expert"), _("Customized") ]) ne "Customized";
     };      
 
@@ -982,8 +982,12 @@ _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;
 	    my %m = reverse %l; $ENV{SECURE_LEVEL} = $o->{security} = $m{$s};
 	    $o->{useSupermount} && $o->{security} > 3 and $o->ask_warn('', _("Can't use supermount in high security level")), return 1;
-	    0;
-	}
+	    $o->{security} == 5 and $o->ask_okcancel('',
+_("beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!
+If you want to be root, you have to login as a user and then use \"su\".
+More generally, do not expect to use your machine for anything but as a server.
+You have been warned.")) || return;
+	    0; }
     ) || return;
 }
 

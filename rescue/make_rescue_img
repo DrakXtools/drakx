@@ -36,7 +36,7 @@ _ "$sudo rm -rf $tmp" if -e $tmp;
 _ "mkdir $tmp";
 _ 'find . -name "*~" | xargs rm -f';
 _ "cp -a tree/* $tmp";
-_ "find $tmp -name CVS | xargs rm -rf";
+_ "find $tmp -name 'CVS*' | xargs rm -rf";
 _ "cd $tmp; mkdir -p lib tmp modules proc";
 
 
@@ -68,7 +68,7 @@ exit 0 if $ARGV[0];
 $size = `du -s $tmp | cut -f1` + 2048; #- add 2MB of free space
 
 commands::mkdir_("-p", $mnt) if !-e $mnt;
-__ "$sudo umount $rescue";
+__ "$sudo umount $rescue 2>/dev/null";
 
 _ "dd if=/dev/zero of=$rescue bs=1k count=$size";
 _ "$mke2fs $rescue";

@@ -590,9 +590,11 @@ sub get_pcmcia_devices($$) {
 	symlink("/tmp/stage2/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
 	symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
 
-	load("pcmcia_core");
-	load($pcic);
-	load("ds");
+	eval {
+	    load("pcmcia_core");
+	    load($pcic);
+	    load("ds");
+	};
 
 	#- run cardmgr in foreground while it is configuring the card.
 	run_program::run("cardmgr", "-f", "-m" ,"/modules");
