@@ -8,7 +8,7 @@ sub get {
     my %compssUsersDescr;
 
     local *F;
-    open F, "../compssUsers$meta_class" or die "can't open file ../compssUsers$meta_class";
+    open F, "../compssUsers$meta_class" or return; #die "can't open file ../compssUsers$meta_class";
     foreach (<F>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
