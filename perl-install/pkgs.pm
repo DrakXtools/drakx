@@ -175,7 +175,7 @@ sub packageById {
 }
 
 sub analyse_kernel_name {
-    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-p3-smp-64GB|-secure|-smp|-multimedia|-multimedia-smp)?(?:-([^\-]+))?$/;
+    $_[0] =~ /kernel[^\-]*(-enterprise|-i686-up-4GB|-i586-up-1GB|-p3-smp-64GB|-secure|-smp|-multimedia|-multimedia-smp)?(?:-([^\-]+))?$/;
 }
 
 sub packages2kernels {
@@ -200,7 +200,12 @@ sub bestKernelPackage {
 	#- favour versions corresponding to current BOOT version
 	@kernels = @l;
     }
-    if (my @l = grep { $_->{ext} eq '' } @kernels) {
+    my $prefered_ext = 
+      detect_devices::is_i586() || 1 ? 'i586-up-1GB' :
+      c::dmiDetectMemory() > 4 * 1024 ? 'enterprise' : 
+      detect_devices::hasSMP() ? 'smp' : 
+      '';
+    if (my @l = grep { $_->{ext} eq $prefered_ext } @kernels) {
 	@kernels = @l;
     }
     
