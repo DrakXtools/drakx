@@ -79,7 +79,7 @@ sub get_default {
 
     if ($category eq "functions") {
         require security::level;
-        $num_level = security::level::get() unless $num_level;
+        $num_level ||= security::level::get();
         $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
     elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf" }
