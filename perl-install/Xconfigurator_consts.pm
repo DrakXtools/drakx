@@ -402,9 +402,7 @@ Section "ServerFlags"
     # This  allows  the  server  to start up even if the
     # mouse device can't be opened/initialised.
     AllowMouseOpenFail
-);
 
-$XF86firstchunk_text2 = q(
 EndSection
 
 # **********************************************************************
