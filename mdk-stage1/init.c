@@ -352,7 +352,7 @@ void unmount_filesystems(void)
                                 continue;
 #endif
 			printf("\tumount failed: %s\n", fs[i].name);
-			if (strcmp(fs[i].fs, "ext2") == 0) nb++; /* don't count not-ext2 umount failed */
+			if (strcmp(fs[i].fs, "ext3") == 0) nb++; /* don't count not-ext3 umount failed */
 		}
 
 #ifdef MANDRAKE_MOVE
@@ -527,7 +527,6 @@ int main(int argc, char **argv)
 
         if (in_reboot()) {
                 // any exitcode is valid if we're in_reboot
-		abnormal_termination = 1;
 	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == exit_value_proceed) {
 		kill(klog_pid, 9);
 		printf("proceeding, please wait...\n");
@@ -537,6 +536,7 @@ int main(int argc, char **argv)
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
+	  	abnormal_termination = 1;
         }
 
         if (!abnormal_termination) {
