@@ -536,7 +536,7 @@ sub chooseGroups {
     };
 
     while (1) {
-	if ($available_size < 140) {
+	if ($available_size < 200) {
 	    # too small to choose anything. Defaulting to no group chosen
 	    $_->{selected} = 0 foreach @$compssUsers;
 	    last;
@@ -544,7 +544,7 @@ sub chooseGroups {
 
 	$o->reallyChooseGroups($size_to_display, $individual, $compssUsers) or return;
 
-	last if $::testing || pkgs::correctSize($size / sqr(1024)) < $available_size;
+	last if $::testing || pkgs::correctSize($size / sqr(1024)) < $available_size || every { !$_->{selected} } @$compssUsers;
        
 	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
