@@ -14,7 +14,7 @@ our %l = (
   network => 
   {
     main => [
-      if_(arch() =~ /ppc/, qw(mace bmac gmac)),
+      if_(arch() =~ /ppc/, qw(mace bmac sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
