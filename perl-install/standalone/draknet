@@ -185,59 +185,32 @@ $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
 my $isconnected = -1;
-sub connected_local {
-    print "in connected local\n";
-    my $w = $in->wait_message('', _("Testing your connection..."), 1);
-    Gtk->main_iteration while Gtk->events_pending;
-    $isconnected=connected();
-}
+#-sub connected_local {
+#-    print "in connected local\n";
+#-    my $w = $in->wait_message('', _("Testing your connection..."), 1);
+#-    Gtk->main_iteration while Gtk->events_pending;
+#-    $isconnected=connected();
+#-}
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label8 = new Gtk::Label(_("Testing your connection..."));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
+my $warning_label1 = new Gtk::Label("");
+$vbox_frame1->pack_start($warning_label1,0,0,0);
 my $button2 = new Gtk::Button(_("Wait please"));
 $button2->set_sensitive(0);
-$button2->signal_connect (clicked => sub {
-			      my $dialog = new Gtk::Dialog();
-			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
-			      $dialog->set_position(1);
-			      $dialog->vbox->set_border_width(10);
-			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
-			      $dialog->vbox->pack_start(my $l = new Gtk::Label(""),1,1,0);
-			      my $bbox_dialog = new Gtk::HButtonBox;
-			      $dialog->action_area->add($bbox_dialog);
-			      $bbox_dialog->set_layout(-end);
-			      my $button_ok = new Gtk::Button _("OK");
-			      $button_ok->signal_connect ( clicked => sub { Gtk->main_quit(); });
-			      $button_ok->set_sensitive(0);
-			      $bbox_dialog->add($button_ok );
-			      $dialog->show_all;
-			      $dialog->set_modal(1);
-			      if (!$isconnected) {
-				  $l->set(_("Starting your connection..."));
-				  Gtk->main_iteration while Gtk->events_pending;
-				  connect_backend();
-				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=connected_local();
-				  $l->set($up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
-Try to reconfigure your connection."));
-			      } else {
-				  $l->set(_("Closing your connection..."));
-				  Gtk->main_iteration while Gtk->events_pending;
-				  disconnect_backend();
-				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=connected_local();
-				  $l->set($up ? _("The connection is not closed.
-Try to do it manually by running
-/etc/sysconfig/network-scripts/net_cnx_down
-in root.") : _("The system is now disconnected.") );
-			      }
-			      $button_ok->set_sensitive(1);
-			      Gtk->main();
-			      $dialog->destroy;
-			      update2();
-			  });
+$button2->signal_connect(clicked => sub {
+			     if (!$isconnected && cat_($connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
+				 run_program::rooted($prefix, "/usr/bin/kppp &");
+			     } elsif (!$isconnected) {
+				 connect_backend();
+			     } else {
+				 disconnect_backend();
+			     }
+			     update2();
+			 });
+
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
 
 #$table1->attach($button1, 2, 3, 1, 2, 'fill', 'fill',0,0);
@@ -393,6 +366,7 @@ sub apply {
 
 sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig` =~ /eth$_[0]/ }
 
+my $to_update;
 sub update {
     my $h = chomp_(`hostname`);
     $label_host->set ($h);
@@ -411,11 +385,32 @@ sub update {
     1;
 }
 
+sub in_ifconfig {
+    my ($intf) = @_;
+    -e '/sbin/ifconfig' or return 1;
+    $intf eq '' and return 1;
+    `/sbin/ifconfig` =~ /$intf/;
+}
+
 sub update2 {
-    connected_bg(\$isconnected);
+    undef $to_update;
+    connected_bg(\$to_update);
+    if (defined $to_update) {
+        $isconnected = $to_update;
+        if($isconnected !=-1) {
+            if ($isconnected && !in_ifconfig($netcnx->{NET_INTERFACE})) {
+                $warning_label1->set(_("Warning, another internet connexion has been detected, maybe using your network"));
+                $isconnected=0;
+            } else { $warning_label1->set("") }
+            $label8->set($isconnected ? _("Connected") : _("Not connected"));
+            $button2->child->set($isconnected ? _("Disconnect...") : _("Connect..."));
+            $button2->set_sensitive(1);
+        }
+    }
     update();
     1;
 }
+
 sub quit_global {
     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
 }
@@ -495,11 +490,19 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $i++;
 	}
 	my $c = $_;
+	my $widget_temp;
+	if (-e "$prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
+	    $widget_temp = gtksignal_connect(new Gtk::Button(ethisup($c) ? _("desactivate now") : _("activate now")),
+					     clicked => sub {
+						 system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");
+						 gtkbuttonset($_[0], ethisup($c)?_("desactivate now"):_("activate now"));
+					     });
+	} else {
+	    $widget_temp = _("This interface has not been configured yet.\nLaunch the configuration wizard in the main window");
+	}
 	$vbox_local->pack_start(gtkpack__(new Gtk::HBox(0,0),
-	  gtksignal_connect(my $b = new Gtk::Button(ethisup($c) ? _("desactivate now") : _("activate now")), clicked => sub {
-				system("/sbin/if".(ethisup($c)?"down":"up")." eth$c");
-				gtkbuttonset($_[0], ethisup($c)?_("desactivate now"):_("activate now"));
-			    })),0,0,0);
+					  $widget_temp
+					 ),0,0,0);
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 #	require Data::Dumper;

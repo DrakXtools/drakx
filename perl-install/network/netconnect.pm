@@ -224,7 +224,7 @@ ifdown eth0
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
-    member($netc->{internet_cnx_choice}, ('modem', 'adsl', 'isdn')) and
+    member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and
       $netc->{at_boot} = $in->ask_yesorno(_("Network Configuration Wizard"), _("Do you want to start the connection at boot?"));
     if ($netc->{internet_cnx_choice} ) {
 	write_cnx_script($netc);
@@ -274,6 +274,7 @@ environnement to avoid hostname changing problem."));
 #!/bin/bash
 if [ -n "\$DISPLAY" ]; then
 if [ -e /usr/bin/kppp ]; then
+/sbin/route del default
 /usr/bin/kppp &
 else
 /usr/sbin/net_monitor --connect

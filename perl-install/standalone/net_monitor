@@ -413,18 +413,37 @@ sub update {
     }
     @interfaces = @intfs;
     my $netc={};
-    if ($isconnected != -1 && !$during_connection) {
-	$button_connect->set_sensitive(1);
-	$label_c->set($isconnected ? _("Disconnect") : _("Connect"));
-	$statusbar->pop(1);
-	$statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
-	$isconnected ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
+    my $tmp;
+    connected_bg(\$tmp);
+    if(defined $tmp) {
+	$isconnected = $tmp;
+	if ($isconnected != -1 && !$during_connection) {
+	    if($isconnected && !in_ifconfig($netcnx->{NET_INTERFACE})) {
+		$isconnected=0;
+		$statusbar->pop(1);
+		$statusbar->push(1, _("Warning, another internet connexion has been detected, maybe using your network"));
+	    } else {
+		#- translators : $netcnx->{type} is the type of network connection (modem, adsl...)
+		$statusbar->pop(1);
+		$statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
+	    }
+	    $label_c->set($isconnected ? _("Disconnect %s", $netcnx->{type}) : _("Connect %s", $netcnx->{type}));
+	    $isconnected ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
+	    $button_connect->set_sensitive(1);
+	}
     }
     if (!(-e $connect_file && -e $disconnect_file)) {
 	$button_connect->set_sensitive(0);
 	$label_c->set("No internet connection configured");
     }
     1;
+}
+
+sub in_ifconfig {
+    my ($intf) = @_;
+    -e '/sbin/ifconfig' or return 1;
+    $intf eq '' and return 1;
+    `/sbin/ifconfig` =~ /$intf/;
 }
 
 sub draw_monitor {

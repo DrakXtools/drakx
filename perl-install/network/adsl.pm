@@ -170,7 +170,8 @@ LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE
 /usr/bin/killall pppoe pppd
 ', $netc->{adsltype}) } elsif ($adsl_type eq 'speedtouch') {
     write_cnx_script($netc, 'adsl',
-'/usr/share/speedtouch/speedtouch.sh start
+'/sbin/route del default
+/usr/share/speedtouch/speedtouch.sh start
 ',
 '/usr/share/speedtouch/speedtouch.sh stop
 ', $netc->{adsltype}) }

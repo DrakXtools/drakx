@@ -261,8 +261,12 @@ sub gateway {
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
-    my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs");
-    if (member($module, @wireless_modules)) {
+    my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs", "airport");
+    my $flag = 0;
+    foreach (@wireless_modules) {
+	$module =~ /$_/ and $flag =1;
+    }
+    if ($flag) {
 	$intf->{wireless_eth} = 1;
 	$netc->{wireless_eth} = 1;
 	$intf->{WIRELESS_MODE} = "Managed";
@@ -344,7 +348,8 @@ sub configureNetworkNet {
     my ($in, $netc, $intf, @devices) = @_;
 
     $netc->{dnsServer} ||= dns($intf->{IPADDR});
-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
+    my $gateway_ex = gateway($intf->{IPADDR});
+#-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
     $::isInstall and $in->set_help('configureNetworkHost');
     $in->ask_from(_("Configuring network"),
@@ -354,7 +359,7 @@ such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
 			       [ { label => _("Host name"), val => \$netc->{HOSTNAME} },
 				 { label => _("DNS server"), val => \$netc->{dnsServer} },
-				 { label => _("Gateway"), val => \$netc->{GATEWAY} },
+				 { label => _("Gateway (e.g. %s)", $gateway_ex), val => \$netc->{GATEWAY} },
 				    if_(@devices > 1,
 				 { label => _("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
 				    ),
