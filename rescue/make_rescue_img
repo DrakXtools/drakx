@@ -23,20 +23,32 @@ BEGIN { undef *_; }
 sub __ { print @_, "\n"; system(@_); }
 sub _ { __ @_; $? and die; }
 
-sub install_ {
-    return if -e "$tmp$_[0]";
-    my $d = dirname($_[0]);
-    commands::mkdir_("-p", "$tmp$d") unless -d "$tmp$d";
-    _ "$sudo cp $_[1] $_[0] $tmp$d";
+sub install_raw {
+    s|^/|| foreach @_;
+    _ "tar c -C / @_ | tar x -C $tmp" if @_;
 }
-sub install_lib { install_($_[0], "") }
-sub install { grep {/lib\w+.so/} @_ and install_lib(@_) or install_($_[0], "-a") }
+sub install_lib {
+    s|^/|| foreach @_;
+    _ "tar c -C / --dereference @_ | tar x -C $tmp" if @_;
+}
+
+sub install_l {
+    my @l = @_;
+
+    @l = uniq(map { chomp_($_) } @l);
+    push @l, 
+      `ldd @l 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
+
+    @l = uniq(map { chomp_($_) } @l);
+    install_raw(grep { !/lib.*\.so/ } @l);
+    install_lib(grep {  /lib.*\.so/ } @l);
+}
 
 sub installown($$) {
     my ($own, $dir) = @_;
     return if -e "$tmp$dir$own";
     commands::mkdir_("-p", "$tmp$dir") unless -d "$tmp$dir";
-    _ "$sudo cp -a $own $tmp$dir";
+    _ "cp -a $own $tmp$dir";
 }
 
 _ "$sudo rm -rf $tmp" if -e $tmp;
@@ -48,22 +60,21 @@ foreach (cat_("dirs")) {
 }
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
+_ "perl devices.pl $tmp";
 
-foreach (keyboard::loadkeys_files) {
-    install($_);
+install_raw(keyboard::loadkeys_files());
+foreach (keyboard::loadkeys_files()) {
+    # create the long name based on the short one (if needed)
     symlink "$2.kmap.gz", "$tmp$1/$3.kmap.gz" if m|(.*)/((..).+)\.kmap\.gz|;
 }
-unlink "$tmp/usr/lib/kbd/keymaps/i386/qwertz/fr.kmap.gz";
 
 my $perl_version = join ".", unpack "C3", $^V;
 @files = map { chomp; s/PERL_VERSION/$perl_version/g; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
-`ls @files`; 
+@files = `ls -d @files`; 
 $? == 0 or exit 1;
 
-foreach (@files) {
-    install($_);
-    chomp, install_lib($_) foreach `ldd $_ 2>/dev/null | grep "=>" | sed -e 's/.*=> //' -e 's/ .*//'`;
-}
+install_l(@files);
+
 foreach (cat_("aliases")) {
     chomp; my ($f, $dest) = split;
     symlink $dest, "$tmp$f";
@@ -77,8 +88,7 @@ _ "cp ../all.modules/$main/modules.dep $tmp/modules";
 installown("drvinst", "/usr/bin");
 installown("guessmounts", "/usr/bin");
 
-#_ "install -s kernel_read_part $tmp/sbin" if $arch =~ /i.86/;
-__ "$sudo strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
+__ "strip $tmp/{lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 
 exit 0 if $ARGV[0];
 
