@@ -154,7 +154,7 @@ sub afterInstallPackages($) {
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
-#    configPCMCIA($o->{rootPath}, $o->{pcmcia});
+    $o->pcmciaConfig();
 }
 
 #------------------------------------------------------------------------------
@@ -174,6 +174,21 @@ sub configureNetwork($) {
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
     #-res_init();		#- reinit the resolver so DNS changes take affect     
+}
+
+#------------------------------------------------------------------------------
+sub pcmciaConfig($) {
+    my ($o) = @_;
+    my $t = $o->{pcmcia};
+    my $f = "$o->{prefix}/etc/sysconfig/pcmcia";
+
+    # should be set after installing the package above else the file will be renamed.
+    setVarsInSh($f, {
+	PCMCIA    => $t ? "yes" : "no",
+	PCIC      => $t,
+	PCIC_OPTS => "",
+        CORE_OPTS => "",
+    });
 }
 
 #------------------------------------------------------------------------------

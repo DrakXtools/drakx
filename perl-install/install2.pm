@@ -377,6 +377,8 @@ sub main {
 	} elsif (/--g_auto_install/) {
 	    $::testing = $::g_auto_install = 1;
 	    $o->{partitioning}{auto_allocate} = 1;
+	} elsif (/--pcmcia/) {
+	    $o->{pcmcia} = shift;
 	}       
     }
 
