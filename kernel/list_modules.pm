@@ -18,7 +18,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(myri_sbus sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515), # 3c90x
-        qw(82596), #abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci
+	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620 r8169),
 	#qw(defxx orinoco_plx), # most unused
         #qw(dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i), # depca dgrs 
@@ -36,7 +36,7 @@ our %l = (
 
 	qw(iph5526), #- fibre channel
       ),
-      qw(3c59x 8139too ), #rtl8139 sundance dl2k
+      qw(3c59x 8139too sundance dl2k), #rtl8139
     ],
     raw => [
       qw(8390 mii),
@@ -62,10 +62,10 @@ our %l = (
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
       if_(arch() =~ /^sparc/, qw(qlogicpti)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
-        qw(3w-xxxx AM53C974 BusLogic NCR53c406a a100u2w advansys), # aha152x aha1542 aha1740
-        qw(atp870u dc395x_trm dtc g_NCR5380 in2000 initio), # pas16 pci2220i psi240i fdomain
+        qw(3w-xxxx AM53C974 BusLogic NCR53c406a a100u2w advansys aha152x aha1542 aha1740),
+        qw(atp870u dc395x_trm dtc g_NCR5380 in2000 initio pas16 pci2220i psi240i fdomain),
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
-        qw(seagate), # wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor
+        qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma),
       ),
       '53c7,8xx',
@@ -75,7 +75,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid ataraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc), # qla2200 qla2300
+	qw(cpqfc qla2200 qla2300),
         qw(ips ppa imm),
       ),
     ],
