@@ -7,8 +7,6 @@ all: $(OBJDIR) $(OBJDIR)/start.o $(OBJDIR)/dietlibc.a $(OBJDIR)/liblatin1.a $(OB
 CFLAGS=-pipe
 CROSS=
 
-CC=gcc
-
 VPATH=lib:libstdio:libugly:libcruft:libcrypt:libshell:liblatin1:librpc:libregex:syscalls.c
 
 SYSCALLOBJ=$(patsubst syscalls.s/%.S,$(OBJDIR)/%.o,$(wildcard syscalls.s/*.S))

@@ -49,7 +49,7 @@ $(LIBNAME)-DIET.a: $(OBJS-DIET)
 	ranlib $@
 
 $(OBJS): %.o: %.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEFS) $(INCS) $(GLIBC_INCLUDES) -c $< -o $@
 
 $(OBJS-DIET): %-DIET.o: %.c
-	gcc $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(DEFS) $(INCS) $(DIETLIBC_INCLUDES) -c $< -o $@
