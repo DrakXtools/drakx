@@ -352,7 +352,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 
 $window->show_all();
 $no_bootsplash and $thm_frame->hide();
-Gtk->main_iteration while Gtk->events_pending;
+gtkflush();
 $::isEmbedded and kill 'USR2', $::CCPID;
 $inmain = 1;
 Gtk->main;

@@ -208,7 +208,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 #  		   ),
 #  	  );
 #    $notebook->set_tab_pos('left');
-#    $::isEmbedded and Gtk2->main_iteration while Gtk2->events_pending;
+#    $::isEmbedded and gtkflush();
     $::isEmbedded and kill ('USR2', $::CCPID);
     $W->main;
 #    $W->destroy();

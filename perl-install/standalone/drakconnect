@@ -185,7 +185,7 @@ my $isconnected = -1;
 #-sub connected_local {
 #-    print "in connected local\n";
 #-    my $w = $in->wait_message('', N("Testing your connection..."), 1);
-#-    Gtk->main_iteration while Gtk->events_pending;
+#-    gtkflush();
 #-    $isconnected = connected();
 #-}
 my $label7 = new Gtk2::Label(N("Status:"));
@@ -299,7 +299,7 @@ $button_ok->signal_connect (clicked => sub {
 				 $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
 				 $dialog->vbox->pack_start($label,1,1,20);
 				 $dialog->show_all;
-				 Gtk->main_iteration while Gtk->events_pending;
+				 gtkflush();
 				 apply();
 				 $dialog->destroy;
 				 update();
@@ -318,7 +318,7 @@ $combo1->entry->signal_connect('changed', sub {
 
 $window1->{rwindow}->show_all();
 $_->hide foreach ($button1, $button3);
-Gtk->main_iteration while Gtk->events_pending;
+gtkflush();
 $::isEmbedded and kill 'USR2', $::CCPID;
 my $tag = Gtk->timeout_add(4000, \&update2);
 $window1->main;

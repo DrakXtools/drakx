@@ -201,13 +201,13 @@ x:5:respawn:/usr/X11R6/bin/X -ac -query $server_ip\n";
 sub cursor_wait {
 	# turn the cursor to a watch
 	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(150));	
-	Gtk->main_iteration while Gtk->events_pending;
+	gtkflush();
 }
 
 sub cursor_norm {
 	# restore normal cursor
 	$window1->{rwindow}->window->set_cursor(new Gtk2::Gdk::Cursor(68));
-	Gtk->main_iteration while Gtk->events_pending;
+	gtkflush();
 }
 
 sub display_error {
