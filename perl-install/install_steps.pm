@@ -732,9 +732,12 @@ sub setupBootloaderBefore {
 	}
     } else {
 	#- check for valid fb mode to enable a default boot with frame buffer.
-	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
+	my $vga = $o->{allowFB} && (!detect_devices::matching_desc('3D Rage LT') &&
+				    !detect_devices::matching_desc('Rage Mobility [PL]') &&
+				    !detect_devices::matching_desc('i740') &&
+				    !detect_devices::matching_desc('ViRGE') &&
 				    !detect_devices::matching_desc('Matrox') &&
-				    !detect_devices::matching_desc('Rage Mobility') &&
+				    !detect_devices::matching_desc('Tseng.*ET6\d00') &&
 				    !detect_devices::matching_desc('SiS.*SG86C2.5') &&
 				    !detect_devices::matching_desc('SiS.*559[78]') &&
 				    !detect_devices::matching_desc('SiS.*300') &&
