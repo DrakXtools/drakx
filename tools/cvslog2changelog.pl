@@ -87,6 +87,7 @@ BEGIN {
               'erwan'   => 'Erwan Velu  <erwan at mandrakesoft.com>',
               'nplanel' => 'Nicolas Planel  <nplanel at mandrakesoft.com>',
               'rgarciasuarez' => 'Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>',
+              'rvojta' => 'Robert Vojta <robert.vojta at mandrake.cz>',
               'oblin' => 'Olivier Blin <oblin at mandrakesoft.com>',
               'vguardiola' => 'Vincent Guardiola <vguardiola at mandrakesoft.com>',
 	     );
