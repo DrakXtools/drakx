@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 29mdk
+Release: 30mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -20,7 +20,7 @@ BuildRoot: %_tmppath/%name-buildroot
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
-Requires: perl-base >= 1:5.8.0, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
+Requires: perl-base >= 1:5.8.0-10mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.4-1mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
 Obsoletes: Xconfigurator mouseconfig kbdconfig printtool 
 Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
@@ -270,6 +270,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Sep  3 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-30mdk
+- ugtk:
+	o better fix for glib warning that don't make drakx feel mad
+	o make icons more transparent when selected in mcc
+
 * Mon Sep  2 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-29mdk
 - harddrake:
   o use new icons
