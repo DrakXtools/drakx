@@ -368,6 +368,7 @@ our @tree =
       configurator => "$sbindir/keyboardrake",
       detector => sub {
           f(grep { $_->{description} =~ /Keyboard/i } @devices),
+            # USB devices are filtered out since we already catch them through probeall():
           grep { $_->{bus} ne 'usb' && $_->{driver} eq 'kbd' } detect_devices::getInputDevices();
       },
       checked_on_boot => 0,
@@ -380,6 +381,7 @@ our @tree =
       configurator => "$sbindir/mousedrake",
       detector => sub {
           f(grep { $_->{driver} =~ /^Mouse:|^Tablet:/ } @devices),
+            # USB devices are filtered out since we already catch them through probeall():
             grep { $_->{bus} ne 'usb' && $_->{driver} =~ /mouse/ } detect_devices::getInputDevices();
       },
       checked_on_boot => 1,
