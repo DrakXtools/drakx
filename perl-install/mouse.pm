@@ -401,16 +401,15 @@ sub test_mouse_install {
     require ugtk2;
     ugtk2->import(qw(:wrappers :create));
     my $w = ugtk2->new('', disallow_big_help => 1);
-    my ($width, $height, $_offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
     gtkadd($w->{window},
   	   gtkpack(my $vbox_grab = Gtk2::VBox->new(0, 0),
-		   gtkset_size_request($darea, $width+1, $height+1),
+		   $darea,
 		   gtkset_sensitive(create_okcancel($w, undef, undef, 'edge'), 1)
 		  ),
 	  );
-    test_mouse($mouse, $w, $darea, $width, $height, $x_protocol_changed);
+    test_mouse($mouse, $darea, $x_protocol_changed);
     $w->sync; # HACK
     Gtk2::Gdk->pointer_grab($vbox_grab->window, 1, 'pointer_motion_mask', $vbox_grab->window, undef, 0);
     my $r = $w->main;
@@ -422,27 +421,31 @@ sub test_mouse_standalone {
     my ($mouse, $hbox) = @_;
     require ugtk2;
     ugtk2->import(qw(:wrappers));
-    my ($width, $height, $_offset) = (210, round_up(min(350, $::windowheight - 150), 6), 25);
     my $darea = Gtk2::DrawingArea->new;
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);  #$darea must be unrealized.
-    gtkpack($hbox,
-	    gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10),
-		    gtksize(gtkset_size_request($darea, $width+1, $height+1), $width, $height)));
-    test_mouse($mouse, $hbox, $darea, $width, $height);
+    gtkpack($hbox, gtkpack(gtkset_border_width(Gtk2::VBox->new(0,10), 10), $darea));
+    test_mouse($mouse, $darea);
 }
 
 sub test_mouse {
-    my ($mouse, $_w, $darea, $width, $height, $b_x_protocol_changed) = @_;
+    my ($mouse, $darea, $b_x_protocol_changed) = @_;
 
-#    $darea->realize;  IS IT REALLY NEEDED? generates a Gtk-CRITICAL when run..
     require ugtk2;
     ugtk2->import(qw(:wrappers));
-    my %xpms;
-    $xpms{$_} = ugtk2::gtkcreate_pixbuf("mouse_$_.xpm") foreach qw(3b 3b+ left right middle);
-    $xpms{au} = ugtk2::gtkcreate_pixbuf('arrow_up.xpm');
-    $xpms{ad} = ugtk2::gtkcreate_pixbuf('arrow_down.xpm');
-    my $image = $xpms{'3b'};
-    $mouse->{nbuttons} > 3 and $image = $xpms{'3b+'};
+    my $suffix = $mouse->{nbuttons} <= 2 ? '2b' : $mouse->{nbuttons} == 3 ? '3b' : '3b+';
+    my %offsets = (mouse_2b_right => [ 93, 0 ], mouse_3b_right => [ 117, 0 ],
+		   mouse_2b_middle => [ 82, 80 ], mouse_3b_middle => [ 68, 0 ], 'mouse_3b+_middle' => [ 85, 67 ]);
+    my %image_files = (
+		       mouse => "mouse_$suffix",
+		       left => 'mouse_' . ($suffix eq '3b+' ? '3b' : $suffix) . '_left',
+		       right => 'mouse_' . ($suffix eq '3b+' ? '3b' : $suffix) . '_right',
+		       if_($mouse->{nbuttons} > 2, middle => 'mouse_' . $suffix . '_middle'),
+		       up => 'arrow_up',
+		       down => 'arrow_down');
+    my %images = map { $_ => ugtk2::gtkcreate_pixbuf("$image_files{$_}.png") } keys %image_files;
+    my $width = $images{mouse}->get_width;
+    my $height = round_up(min($images{mouse}->get_height, $::windowheight - 150), 6);
+
     my $draw_text = sub {
   	my ($t, $y) = @_;
 	my $layout = $darea->create_pango_layout($t);
@@ -454,19 +457,26 @@ sub test_mouse {
     };
     my $draw_pixbuf = sub {
 	my ($p, $x, $y, $w, $h) = @_;
+	$w = $p->get_width;
+	$h = $p->get_height;
 	$p->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
 			       ($darea->allocation->width-$width)/2 + $x, ($darea->allocation->height-$height)/2 + $y,
 			       $w, $h, 'none', 0, 0);
     };
-    my $drawarea; 
-    $drawarea = sub {
+    my $draw_by_name = sub {
+	my ($name) = @_;
+	my $file = $image_files{$name};
+	my ($x, $y) = @{$offsets{$file} || [ 0, 0 ]};
+	$draw_pixbuf->($images{$name}, $x, $y);
+    };
+    my $drawarea = sub {
 	my ($height) = @_;
-	$draw_pixbuf->($image, 0, 0, 210, $height || 200);
-	if ($::isInstall) {
-	    $draw_text->(N("Please test the mouse"), $height - 120);
+	$draw_by_name->('mouse');
+	if ($::isInstall || 1) {
+	    $draw_text->(N("Please test the mouse"), 200);
 	    if ($b_x_protocol_changed && $mouse->{nbuttons} > 3 && member($mouse->{XMOUSETYPE}, 'IMPS/2', 'ExplorerPS/2')) {
-		$draw_text->(N("To activate the mouse,"), $height - 105);
-		$draw_text->(N("MOVE YOUR WHEEL!"), $height - 90);
+		$draw_text->(N("To activate the mouse,"), 240);
+		$draw_text->(N("MOVE YOUR WHEEL!"), 260);
 	    }
 	}
     };
@@ -474,27 +484,28 @@ sub test_mouse {
     my $timeout;
     my $paintButton = sub {
 	my ($nb) = @_;
-	my $x = 60 + $nb*33;
 	$timeout or $drawarea->();
 	if ($nb == 0) {
-	    $draw_pixbuf->($xpms{left}, 31, 52, 59, 91);
+	    $draw_by_name->('left');
 	} elsif ($nb == 2) {
-	    $draw_pixbuf->($xpms{right}, 117, 52, 61, 91);
+	    $draw_by_name->('right');
 	} elsif ($nb == 1) {
-	    if ($mouse->{nbuttons} > 3) {
-		$draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
+	    if ($mouse->{nbuttons} >= 3) {
+		$draw_by_name->('middle');
 	    } else {
+		my ($x, $y) = @{$offsets{mouse_2b_middle}};
   		$darea->window->draw_arc($darea->style->black_gc,
-  					  1, ($darea->allocation->width-$width)/2 + $x, ($darea->allocation->height-$height)/2 + 90, 20, 25,
-  					  0, 360*64);
+  					  1, ($darea->allocation->width-$width)/2 + $x, ($darea->allocation->height-$height)/2 + $y, 20, 25,
+  					  0, 360 * 64);
 	    }
-	} else {
+	} elsif ($mouse->{nbuttons} > 3) {
+	    my ($x, $y) = @{$offsets{$image_files{middle}}};
 	    if ($nb == 3) {
-		$draw_pixbuf->($xpms{au}, 102, 57, 6, 8);
+		$draw_pixbuf->($images{up}, $x+6, $y-10);
 	    } elsif ($nb == 4) {
-		$draw_pixbuf->($xpms{ad}, 102, 131, 6, 8);
+		$draw_pixbuf->($images{down}, $x+6, $y + $images{middle}->get_height + 2);
 	    }
-	    $draw_pixbuf->($xpms{middle}, 98, 67, 13, 62);
+	    $draw_by_name->('middle');
 	    $timeout and Glib::Source->remove($timeout);
 	    $timeout = Glib::Timeout->add(100, sub { $drawarea->(); $timeout = 0; 0 });
 	}
@@ -502,8 +513,8 @@ sub test_mouse {
     
     $darea->signal_connect(button_press_event => sub { $paintButton->($_[1]->button - 1) });
     $darea->signal_connect(scroll_event => sub { $paintButton->($_[1]->direction eq 'up' ? 3 : 4) });
-    $darea->signal_connect(button_release_event => sub { $drawarea->() });
-    $darea->signal_connect(expose_event => sub { $drawarea->(350) });
+    $darea->signal_connect(button_release_event => $drawarea);
+    $darea->signal_connect(expose_event => $drawarea);
     $darea->set_size_request($width, $height);
 }
 
