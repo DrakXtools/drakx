@@ -347,11 +347,11 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    my $nb_lines = map { split "\n" } @_;
+    $o->{box_size} = map { split "\n" } @_;
     $o->{box} = new Gtk::VBox(0,0);
-    if (@_ <= 2 && $nb_lines > 4) {
+    if (@_ <= 2 && $o->{box_size} > 4) {
 	my $font = $o->{box}->style->font;
-	my $wanted = $nb_lines * ($font->ascent + $font->descent) + 7;
+	my $wanted = $o->{box_size} * ($font->ascent + $font->descent) + 7;
 	my $height = min(250, $wanted);
 	my $has_scroll = $height < $wanted;
 
