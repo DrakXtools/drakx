@@ -114,6 +114,11 @@ sub read_grub {
             }
         }
     }
+    # Generating /etc/lilo.conf require having a boot device:
+    foreach (cat_("$::prefix/boot/grub/install.sh")) {
+        $b{boot} = grub2dev($1) if /\s*d\s* (\(.*?\))\s*/;
+    }
+
     $b{default} = $b{entries}[$b{default}]->{label};
 
     \%b;
