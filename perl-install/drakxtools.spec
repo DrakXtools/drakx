@@ -85,10 +85,10 @@ It autodetects both monitor and video card if possible.
 
 %description newt
 This add the capability to be runned behind a web server to the drakx tools.
-See package %{name}
+See package %name
 
 %description http
-See package %{name}
+See package %name
 
 %description -n harddrake
 The harddrake service is a hardware probing tool run at system boot
@@ -118,12 +118,12 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/{%_initrddir,etc/sysconfig/harddrake2}
 touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
-mv ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor \
-   ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor.real
-ln -sf %{_bindir}/consolehelper ${RPM_BUILD_ROOT}%{_sbindir}/net_monitor
-mkdir -p ${RPM_BUILD_ROOT}%{_sysconfdir}/{pam.d,security/console.apps}
-cp pam.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/net_monitor
-cp apps.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/net_monitor
+mv $RPM_BUILD_ROOT%_sbindir/net_monitor \
+   $RPM_BUILD_ROOT%_sbindir/net_monitor.real
+ln -sf %_bindir/consolehelper $RPM_BUILD_ROOT%_sbindir/net_monitor
+mkdir -p $RPM_BUILD_ROOT%_sysconfdir/{pam.d,security/console.apps}
+cp pam.net_monitor $RPM_BUILD_ROOT%_sysconfdir/pam.d/net_monitor
+cp apps.net_monitor $RPM_BUILD_ROOT%_sysconfdir/security/console.apps/net_monitor
 
 dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
@@ -204,7 +204,7 @@ done
 
 %files http -f %{name}-http.list
 %defattr(-,root,root)
-%dir %{_sysconfdir}/drakxtools_http
+%dir %_sysconfdir/drakxtools_http
 %config(noreplace) %_sysconfdir/pam.d/miniserv
 %config(noreplace) %_sysconfdir/init.d/drakxtools_http
 %config(noreplace) %_sysconfdir/drakxtools_http/conf
@@ -215,6 +215,9 @@ done
 * Mon Jul  8 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-3mdk
 - harddrake2:
 	o no need to 'use strict' in "binary" => remove warnings 
+	o fix boot freeze on hw change: initscript was running us with
+	  stdout redirected to /dev/null; just use a small sh wrapper to
+	  fix it
 
 - spec:
 	o reorder entries in description

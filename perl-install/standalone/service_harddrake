@@ -1,22 +1,10 @@
 #!/usr/bin/perl -w
 # harddrake2         This service runs the HardDrake hardware probe.
-#
-# chkconfig: 345 05 95
-# description:  This runs the hardware probe, and optionally configures \
-#               changed hardware.
-
-
-# TODO: start/stop/status/
 
 use lib qw(/usr/lib/libDrakX);
 
-use strict;
+#use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
-
-if ($ARGV[0] !~ /^start$/) {
-	print "service harddrake [start|stop]\n";
-	exit 0;
-}
 
 use MDK::Common;
 use POSIX;

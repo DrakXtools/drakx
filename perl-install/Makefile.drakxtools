@@ -26,7 +26,7 @@ $(DIRS):
 	[ ! -e $@/Makefile ] || $(MAKE) -C $@
 
 install:
-	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/pixmaps $(LIBDEST)/{network,security,harddrake} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
+	mkdir -p $(BINDEST) $(ETCDEST) $(SBINDEST) $(DATADIR)/{harddrake,pixmaps} $(LIBDEST)/{network,security,harddrake} $(BINX11DEST) $(LIBX11DEST) $(PIXDIR) $(INITDIR)
 	install -d $(INLIBDEST_DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -50,7 +50,7 @@ install:
 	install -d $(LIBDEST)/diskdrake
 	install -m 644 diskdrake/*.pm $(LIBDEST)/diskdrake
 
-	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/'
+	find $(LIBDEST) -name "*.pm" | xargs perl -pi -e 's/\s*use\s+(diagnostics|vars|strict)//g'
 
 	for i in $(HAVEINST_DIRS); do \
 		$(MAKE) -C $$i install PREFIX=$(PREFIX) DATADIR=$(DATADIR) NAME=$(NAME) ; \
@@ -59,4 +59,5 @@ install:
 	find auto -follow -name .exists -o -name "*.bs" | xargs rm -f
 	cp -rfL auto standalone/icons $(LIBDEST)
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
-	mv $(SBINDEST)/service_harddrake $(INITDIR)/harddrake
+	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake
+	mv $(SBINDEST)/service_harddrake $(DATADIR)/harddrake/
