@@ -91,6 +91,9 @@ clean:
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
+check:
+	@badrights=`find $(ROOTDEST)/Mandrake/mdkinst | perl -lne 'print if !((stat)[2] & 4)'`; [ -z "$$badrights" ] || { echo "bad rights for files vvvvvvvvvvvvvvvvvvvvvvvvvv" ; echo "$$badrights" ; echo "bad rights for files ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" ; exit 1; }
+
 upload: 
 	$(MAKE) clean
 
@@ -98,6 +101,7 @@ upload:
 	tools/addchangelog.pl tools/cvslog2changelog.pl | tools/mailchangelog.pl &
 
 	$(MAKE) install
+	$(MAKE) check
 
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
