@@ -25,7 +25,7 @@ static void * newtvwindow(char * title, char * button1, char * button2,
 	i = vsnprintf(buf, size, message, args);
     } while (i >= size || i == -1);
 
-    flowedText = newtReflowText(buf, 35, 5, 5, &width, &height);
+    flowedText = newtReflowText(buf, 50, 5, 5, &width, &height);
     if (height > 6) {
 	free(flowedText);
 	flowedText = newtReflowText(buf, 60, 5, 5, &width, &height);
