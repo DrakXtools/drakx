@@ -448,12 +448,13 @@ sub getUPS() {
         return $ret == $usage ? 1 : 0;
     };
 
-    (grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
+    (map { $_->{driver} = "mge-shut"; $_ } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
     (map {
         open(my $f, $_);
         if_(!$hiddev_find_application->($f, $UPS_USAGE) && !$hiddev_find_application->($f, $POWER_USAGE),
             { port => $_,
-              name => c::get_usb_ups_name(fileno($f))
+              name => c::get_usb_ups_name(fileno($f)),
+              driver => "hidups",
             }
            );
     } -e "/dev/.devfsd" ? glob("/dev/usb/hid/hiddev*") : glob("/dev/usb/hiddev*"));
