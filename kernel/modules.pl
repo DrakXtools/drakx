@@ -100,7 +100,7 @@ my %images = (
 	    => 'disk/cdrom|raw fs/local|loopback|cdrom bus/usb disk/usb bus/firewire disk/firewire',
     pcmcia  => 'fs/cdrom disk/cdrom|raw|pcmcia bus/pcmcia fs/network network/pcmcia|raw',
     cdrom   => 'fs/cdrom disk/cdrom|raw|scsi',
-    all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw bus/firewire disk/firewire',
+    all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
 );
 
 load_dependencies(glob("all.modules/2.4*/modules.dep"));
