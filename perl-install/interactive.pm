@@ -32,7 +32,7 @@ use common;
 #-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
 #-     bool (with text)
 #-     range (with min, max)
-#-     combo (with list, not_edit)
+#-     combo (with list, not_edit, format)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
 #-           help can be a hash or a function,
 #-           tree_expanded boolean telling wether the tree should be wide open by default
@@ -260,9 +260,15 @@ sub ask_from_normalize {
 	    }
 	    $e->{type} = 'iconlist' if $e->{icon2f};
 	    $e->{type} = 'treelist' if $e->{separator};
-	    $e->{type} ||= 'list' if $e->{format};
 	    add2hash_($e, { not_edit => 1, type => 'combo' });
 	    ${$e->{val}} = $l->[0] if ($e->{type} ne 'combo' || $e->{not_edit}) && !member(${$e->{val}}, @$l);
+	    if ($e->{type} eq 'combo' && $e->{format}) {
+		my @l = map { $e->{format}->($_) } @{$e->{list}};
+		each_index {
+		    ${$e->{val}} = $l[$::i] if $_ eq ${$e->{val}};
+		} @{$e->{list}};
+		($e->{list}, $e->{saved_list}) = (\@l, $e->{list});
+	    }
 	} elsif ($e->{type} eq 'range') {
 	    $e->{min} <= $e->{max} or die "bad range min $e->{min} > max $e->{max} (called from " . join(':', caller()) . ")";
 	    ${$e->{val}} = max($e->{min}, min(${$e->{val}}, $e->{max}));
@@ -304,16 +310,26 @@ sub ask_from_normalize {
 sub ask_from_ {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
-
     @$l or return 1;
-    my $v = $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
-    %$common = ();
-    $v;
+    ask_from_real($o, $common, $l);
 }
 sub ask_from_no_check {
     my ($o, $common, $l) = @_;
     ask_from_normalize($o, $common, $l);
     $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+}
+sub ask_from_real {
+    my ($o, $common, $l) = @_;
+    my $v = $o->ask_fromW($common, [ grep { !$_->{advanced} } @$l ], [ grep { $_->{advanced} } @$l ]);
+    %$common = ();
+    foreach my $e (@$l) {
+	my $l = delete $e->{saved_list} or next;
+	each_index {
+	    ${$e->{val}} = $l->[$::i] if $_ eq ${$e->{val}};
+	} @{$e->{list}};
+	$e->{list} = $l;
+    }
+    $v;
 }
 
 
