@@ -581,7 +581,7 @@ foreach my $medium (@media) {
 	my $infile = "/cdrom/" . $rpms{rpm_fullname($pkg)} . "/" . $files{rpm_fullname($pkg)};
 	my $outfile = "/hd/" . $rpms{rpm_fullname($pkg)} . "/" . $files{rpm_fullname($pkg)};
 	if (-r $infile && -s $infile != -s $outfile) {
-	    -d "/hd" . $rpms{rpm_fullname($pkg)} or system "mkdir", "-p", "/hd" . $rpms{rpm_fullname($pkg)};
+	    -d "/hd/" . $rpms{rpm_fullname($pkg)} or system "mkdir", "-p", "/hd/" . $rpms{rpm_fullname($pkg)};
 	    print "  copying " . rpm_fullname($pkg) . "\n";
 	    system "cp", "-a", $infile, $outfile;
 	    if (rpm_fullname($pkg) =~ /mandrake-release/) {
