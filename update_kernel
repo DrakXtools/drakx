@@ -1,0 +1,51 @@
+#!/bin/bash
+
+KERNEL_VERSION="*BOOT"
+KERNEL_VERSION="2.2.11-BOOT"
+
+SCSI_DRIVERS="
+     53c7,8xx.o AM53C974.o BusLogic.o NCR53c406a.o advansys.o aha152x.o
+     aha1542.o aha1740.o aic7xxx.o dtc.o eata_dma.o eata_pio.o fdomain.o
+     g_NCR5380.o in2000.o megaraid.o ncr53c8xx.o pas16.o
+     qlogicisp.o seagate.o t128.o u14-34f.o wd7000.o ultrastor.o"
+
+# broken network modules: at1700.o
+NETWORK_DRIVERS="
+     3c501.o 3c503.o 3c505.o 3c507.o 3c509.o 3c59x.o 82596.o 8390.o ac3200.o
+     epic100.o cs89x0.o de4x5.o de600.o de620.o dgrs.o e2100.o
+     eepro.o eepro100.o eexpress.o es3210.o eth16i.o hp-plus.o hp.o
+     hp100.o ibmtr.o lance.o lne390.o ne.o ne2k-pci.o ne3210.o ni52.o
+     ni5010.o ni65.o plip.o
+     pcnet32.o rtl8139.o rcpci45.o sktr.o smc9194.o smc-ultra.o
+     smc-ultra32.o tlan.o 
+     tulip.o via-rhine.o wavelan.o wd.o yellowfin.o
+
+     nfs.o lockd.o sunrpc.o"
+
+CD_DRIVERS="aztcd.o cm206.o isp16.o mcdx.o sbpcd.o sonycd535.o cdu31a.o gscd.o mcd.o optcd.o sjcd.o"
+
+BLOCK_DRIVERS="DAC960.o cpqarray.o"
+
+PCMCIAMODULES="pcmcia_core.o tcic.o ds.o i82365.o"
+
+MISCMODULES="lp.o parport_pc.o parport.o loop.o"
+
+FSMODULES="vfat.o fat.o"
+
+NETWORK_MODULES="$MISCMODULES $FSMODULES $NETWORK_DRIVERS"
+CDROM_MODULES="  $MISCMODULES $FSMODULES $SCSI_DRIVERS $CD_DRIVERS"
+HD_MODULES="     $MISCMODULES $FSMODULES $SCSI_DRIVERS $BLOCK_DRIVERS"
+
+
+cp -f /boot/vmlinuz-$KERNEL_VERSION vmlinuz
+rm -rf modules ; install -d modules
+
+(cd modules ; 
+    cp -f `find /lib/modules/$KERNEL_VERSION -name "*.o"` .
+    /sbin/depmod -m /boot/System.map-$KERNEL_VERSION -i -e *.o | grep ': ' | sed 's/\.o//g' > modules.dep
+    ls *.o              | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
+    ls $NETWORK_MODULES | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
+    ls $CDROM_MODULES   | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
+    ls $HD_MODULES      | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
+    rm -f $NETWORK_MODULES $CDROM_MODULES $HD_MODULES # leave in the directory non-install1 used modules
+)

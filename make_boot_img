@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+
+@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks\n";
+
+($img, $type) = @ARGV;
+
+$ks = "kickstart=floppy" if $type =~ s/_ks//;
+$mnt = "/mnt/disk";
+if ($>) {
+    $sudo = "sudo";
+    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
+}
+
+
+$install = $ {{
+    network => "install",
+    cdrom => "local-install",
+    hd => "local-install"
+}}{$type} or die;
+
+$0 =~ /initrd/ ?
+    initrd($mnt, $img) :
+    boot_img($mnt, $img);
+
+sub __ { print @_, "\n"; system(@_); }
+sub _ { __ @_; $? and die; }
+
+
+sub initrd {
+    my ($mnt, $img) = @_;
+    my $tmp = "$ENV{HOME}/tmp/initrd";
+
+    _ "install -s install/installinit/init install/install1/sbin/init";
+    _ "install -s install/$install install/install1/sbin/install";
+
+    __ "$sudo umount $tmp $mnt 2>/dev/null";
+    _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
+    _ "echo y | mke2fs $tmp";
+    _ "$sudo mount $tmp $mnt -o loop";
+    _ "$sudo cp -a install/install1/* $mnt";
+    _ "$sudo install -d $mnt/modules";
+    _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
+    _ "$sudo cp -f modules/modules.dep $mnt/modules/";
+    _ "$sudo umount $mnt";
+    _ "gzip -9 -c $tmp > $img";
+    _ "rm -f $tmp";
+}
+
+sub boot_img {
+    my ($mnt, $img) = @_;
+
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "bunzip2 -c install/installinit/emptyboot.img.bz2 > $img";
+    _ "$sudo mount -o umask=0 $img $mnt -o loop";
+    _ "cat vmlinuz > $mnt/vmlinuz";
+    initrd("${mnt}2", "$mnt/initrd.gz");
+    
+    output("$mnt/syslinux.cfg", "
+default linux
+prompt 0
+label linux
+  kernel vmlinuz
+  append $ks initrd=initrd.gz mdkinst $type
+");
+    _ "cp -f install/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
+    _ "sync";
+}
+
+
+
+sub output {
+    my $f = shift;
+    local *F;
+    open F, "> $f" or die "error writing to $f";
+    print F join '', @_;
+}
