@@ -267,8 +267,10 @@ sub whatParport() {
 	my $elem = {};
 	local *F;
 	open F, "/proc/parport/$_/autoprobe" or open F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
-	local $_;
-	while (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
+	{
+	    local $_;
+	    while (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
+	}
 	push @res, { port => "/dev/lp$_", val => $elem};
     }
     @res;
@@ -281,19 +283,13 @@ sub usbZips      { grep { $_->{type} =~ /Mass Storage\|/ } usb_probe() }
 
 sub whatUsbport() {
     my ($i, $elem, @res) = (0, {});
-    local *F; open F, "/proc/bus/usb/devices" or return;
-    local $_;
-    while (<F>) {
-	$elem->{$1} = $2 if /S:\s+(.*)=(.*\S)/;
-	if (/I:.*Driver=(printer|usblp)/ && $elem->{Manufacturer} && $elem->{Product}) {
-	    my $MF = ${{ 'Hewlett-Packard' => 'HP' }}{$elem->{Manufacturer}} || $elem->{Manufacturer};
-	    push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',
-							   MODEL => $elem->{Product},
-							   MANUFACTURER => $elem->{Manufacturer},
-							   DESCRIPTION => "$MF $elem->{Product}",
-							 }};
-	    $i++; $elem = {}; #- try next one, but blank what has been probed.
-	}
+    foreach (grep { $_->{type} =~ /Printer/ } usb_probe()) {
+	my ($manufacturer, $model) = split '\|', $_->{description};
+	push @res, { port => "/dev/usb/lp$i", val => { CLASS => 'PRINTER',
+						       MODEL => $model,
+						       MANUFACTURER => $manufacturer,
+						       DESCRIPTION => $_->{description},
+						     }};
     }
     @res;
 }
@@ -309,7 +305,7 @@ sub whatPrinter() {
 }
 
 sub whatPrinterPort() {
-    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0);
+    grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2);
 }
 
 sub probeSerialDevices {
