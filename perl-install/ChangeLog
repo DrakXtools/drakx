@@ -1,3 +1,191 @@
+2003/08/05  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* drakxtools.spec: commit titi's requested typos changes
+
+2003/08/04  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/04  François Pons  <fpons at mandrakesoft.com>
+
+	* pkgs.pm: added log.
+	updated with newer perl-URPM
+
+2003/08/04  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ftp.pm: don't have two / in the urpmi url or it seems it causes problems
+	for some people (some ftp servers? wget/curl? proxy? no sé..)
+
+	* drakxtools.spec: 9.2-0.27mdk
+
+	* ugtk2.pm: fix not possible to select with mouse anymore (rpmdrake etc)
+	revert "use checkboxes instead of icons"
+
+2003/08/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sr.po, share/po/sq.po, share/po/mt.po, share/po/sr@Latn.po,
+	share/po/nb.po, share/po/hr.po, share/po/be.po, share/po/sv.po,
+	share/po/vi.po, share/po/fi.po, share/po/ru.po, share/po/eo.po,
+	share/po/sl.po, share/po/el.po, share/po/bg.po, share/po/gl.po,
+	share/po/DrakX.pot, share/po/az.po, share/po/bs.po, share/po/eu.po,
+	share/po/pt.po, share/po/zh_TW.po, share/po/tr.po, share/po/sk.po,
+	share/po/ar.po, share/po/it.po, share/po/af.po, share/po/ga.po,
+	share/po/da.po, share/po/ta.po, share/po/lt.po, share/po/id.po,
+	share/po/ko.po, share/po/cy.po, share/po/is.po, share/po/tg.po,
+	share/po/fa.po, share/po/uz@Cyrl.po, share/po/pt_BR.po, share/po/pl.po,
+	share/po/nl.po, share/po/lv.po, share/po/cs.po, share/po/th.po,
+	share/po/ca.po, share/po/ro.po, share/po/ja.po, share/po/zh_CN.po,
+	share/po/es.po, share/po/uz.po, share/po/hu.po, share/po/wa.po,
+	share/po/fr.po, share/po/de.po: updated pot file
+
+	* share/po/he.po: updated Hebrew file
+	updated pot file
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/uk.po: updated Ukrainian file
+	updated pot file
+
+	* keyboard.pm: removed bad keyboard from list for Swedish;
+
+	* lang.pm: removed 'xh_ZA' in double in @locales
+	updated list of available locales
+
+2003/08/04  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: fix ask_window_manager_to_logout for gnome
+
+	* ugtk2.pm: don't export destroy_window(), this function doesn't exist!
+	(thanks to perl_checker)
+	perl_checker compliance
+	disable selecting text and popping the contextual menu
+	(GUI team says it's *horrible* to be able to do select text!)
+
+	* drakxtools.spec: gc: commit pixel's 9.2-0.26mdk changelog diff (pixel
+	sux)
+
+2003/08/04  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/08/04  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: Add new cooker logo for installation
+
+2003/08/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: Added Farsi file
+
+2003/08/03  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: don't overwrite $o->{bootloader}{method} (much nicer for
+	auto_installs)
+
+	* install_steps_interactive.pm: more complete name for the setRootPassword
+	step: "Set root password and
+	network authentication methods" instead of simply "Set root password"
+
+	* interactive/gtk.pm: OptionMenus do not have an horizontal scroll-bar.
+	This can cause havoc for
+	long strings. So use combo box as we used to do in those cases
+	(eg: diskdrake Create dialog box in expert mode) (bug #4484)
+
+	* rescue/make_rescue_img: fix /sbin/insmod /sbin/rmmod and /sbin/lsmod
+	which were dead symlinks
+	(to /etc/alternatives/something)
+
+	* rescue/guessmounts: 
+	  - copy /etc/mtab to /mnt/etc/mtab to have a nice chrooted "mount" or
+	"df"
+	  - some perl_checker compliance
+
+2003/08/03  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Tool tips.
+
+2003/08/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+2003/08/01  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm, install_steps.pm, network/smb.pm,
+	install_steps_interactive.pm: 
+	  - move write_smb_conf() from install_any to network::smb
+	  - rename setAuthentication() to set_authentication()
+	  - move the work of set_authentication() from install_any to any
+	  - move the per-authentification kind questions from
+	install_steps_interactive::setRootPassword() to
+	any::ask_authentification_parameters()
+	  - various cleanup in code prompting authentification questions
+	  - call install_any::set_authentication() in
+	install_steps::setRootPassword()
+	instead of waiting for the installPackages step to be done
+	  (since setRootPassword occurs *after* packages installation)
+	  - don't call set_authentification() in install_steps::addUser()
+	  (why was this done there??)
+	=> these changes will allow drakauth
+
+	* drakxtools.spec: re-adding with -kb
+	add drakauth
+
+	* Xconfig/xfreeX.pm, Xconfig/parse.pm, Xconfig/xfree4.pm,
+	Xconfig/xfree3.pm: => do as Chris Picton suggested
+	Chris Picton said (nearly one year ago :-/) :
+	I have found the need for many low res screen resolutions for such
+	thingas as movie playing, xmame, etc.
+	
+	The method XFdrake uses to enable modes is to enumerate each mode in the
+	XF86Config file. For example (a newly created file):
+	
+	Subsection "Display"
+	    Depth 24
+	    Modes "1280x960" "1152x864" "1024x768" "800x600" "640x480"
+	EndSubsection
+	
+	It would be better (at least under XFree 4, which automatically provides
+	resoltions from the monitor, if it is capable), to not limit the modes
+	provided to the user
+	
+	If I use instead, the following:
+	
+	Subsection "Display"
+	    Depth 24
+	    Virtual 1280 960
+	EndSubsection
+	
+	My maximum mode is exactly the same as before, but I have many more low
+	resolution modes.
+
+	* any.pm, install_any.pm: 
+	  - move write_smb_conf() from install_any to network::smb
+	  - rename setAuthentication() to set_authentication()
+	  - move the work of set_authentication() from install_any to any
+	  - move the per-authentification kind questions from
+	install_steps_interactive::setRootPassword() to
+	any::ask_authentification_parameters()
+	  - various cleanup in code prompting authentification questions
+	  - call install_any::set_authentication() in
+	install_steps::setRootPassword()
+	instead of waiting for the installPackages step to be done
+	  (since setRootPassword occurs *after* packages installation)
+	  - don't call set_authentification() in install_steps::addUser()
+	  (why was this done there??)
+	=> these changes will allow drakauth
+	use $::prefix
+
+	* standalone/drakauth, Makefile.config: add drakauth
+
+	* pixmaps/langs/lang-ku.png, pixmaps/langs/lang-uz@Cyrl.png,
+	pixmaps/langs/lang-gu.png, pixmaps/langs/lang-zu.png,
+	pixmaps/langs/lang-sr@Latn.png, pixmaps/langs/lang-ne.png,
+	pixmaps/langs/lang-se.png, pixmaps/langs/lang-xh.png,
+	pixmaps/langs/lang-as.png, pixmaps/langs/lang-st.png,
+	pixmaps/langs/lang-li.png, pixmaps/langs/lang-ss.png,
+	pixmaps/langs/lang-ve.png, pixmaps/langs/lang-ml.png: re-adding with -kb
+	removing for re-adding with -kb
+
 2003/08/01  Frederic Crozat  <fcrozat at mandrakesoft.com>
 
 	* share/rpmsrate: Add gnome calculator and charmap
@@ -18124,7 +18312,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.812 2003/07/21 15:11:53 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.813 2003/08/01 22:46:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
