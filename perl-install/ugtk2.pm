@@ -661,12 +661,12 @@ sub gtktext_insert {
             }
             if ($tag) {
                 if (ref($tag)) {
+                    # use anonymous tags
+                    $buffer->insert_with_tags($iter1, $item, $buffer->create_tag(undef, %$tag));
+                } else {
                     # fast text insertion:
                     # since in some contexts (eg: localedrake, rpmdrake), we use quite a lot of identical tags,
                     # it's much more efficient and less memory pressure to use named tags
-                    $buffer->insert_with_tags($iter1, $item, $buffer->create_tag(undef, %$tag));
-                } else {
-                    # use anonymous tags
                     $gtk_tags->{$tag} ||= $buffer->create_tag($tag, %{$tags->{$token->[1]}});
                     $buffer->insert_with_tags($iter1, $item, $gtk_tags->{$tag});
                 }
