@@ -850,7 +850,7 @@ You can now edit the path entries.
 
 Choose continue or previous when you are done.\n", $racoon_conf),
 		  [     { label => N("path_type"), val => \$racoon->{$number}{1}[1], list => [ 'certificate', 'pre_shared_key', 'include' ] },
-			{ label => N("real_file"), val => \$racoon->{$number}{1}[2], type => 'entry' },
+			{ label => N("real file"), val => \$racoon->{$number}{1}[2], type => 'entry' },
 		  ]
 ) or goto step_configure_racoon_conf;
 }
