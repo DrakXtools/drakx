@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 44mdk
+Release: 45mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -313,6 +313,28 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Jun 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-45mdk
+- authentication: more LDAP work (pixel)
+- drakbackup: fix .backupignore issue (stew)
+- drakupdate_fstab: add suppor for floppies
+- harddrake service:
+  o mouse: autoreconfigure it when switching between 2.4.x and 2.6.x kernels
+  o network: automatic config with DHCP of new cards
+  o removable media: automatically config
+  o x11:
+    * do not automatically swtich from nv to nvidia driver (b/c the
+      nvidia driver is buggy on some machines)
+    * automatic configuration of new card
+- harddrake GUI:
+  o show more data on SCSI disks
+  o do not display USB disks in both harddisks and unknown sections
+  o fix cpu and SCSI hd help
+  o show right driver for USB devices (from /proc/bus/usb/devices)
+  o enhanced help
+  o show detailled data on bus connection
+- interactive layer: display "cancel" button instead of "previous" in
+  wizards' first step
+
 * Mon Jun 14 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-44mdk
 - diskdrake: fix hde devfs link (pixel)
 - drakconnect: start to make strings more helpfull
