@@ -354,6 +354,12 @@ sub setPackages {
     }
 }
 
+sub unselectMostPackages {
+    my ($o) = @_;
+    pkgs::unselectAllPackages($o->{packages});
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+}
+
 sub addToBeDone(&$) {
     my ($f, $step) = @_;
 

@@ -267,8 +267,7 @@ sub choosePackages {
     #- avoid destroying user selection of packages but only
     #- for expert, as they may have done individual selection before.
     if ($first_time || !$::expert) {
-	pkgs::unselectAllPackages($packages);
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+	install_any::unselectMostPackages($o);
 
 	unless ($::expert) {
 	    add2hash_($o, { compssListLevel => 5 }) unless $::auto_install;

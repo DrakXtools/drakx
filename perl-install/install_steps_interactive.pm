@@ -525,7 +525,7 @@ sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
     my $b = pkgs::saveSelected($packages);
-    pkgs::unselectAllPackages($packages);
+    install_any::unselectMostPackages($o);
     pkgs::setSelectedFromCompssList($packages, {}, $min_level, $max_size);
     my $system_size = pkgs::selectedSize($packages);
     my ($sizes, $pkgs) = pkgs::computeGroupSize($packages, $min_level);
@@ -565,7 +565,7 @@ sub chooseGroups {
 	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
-	$old_size > $size and pkgs::unselectAllPackages($packages);
+	$old_size > $size and install_any::unselectMostPackages($o);
 	$old_size = $size;
 	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
     }; &$update_size;
