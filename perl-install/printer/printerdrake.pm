@@ -1,8 +1,7 @@
 package printer::printerdrake;
 # $Id$
 
-
-
+use strict;
 
 use common;
 use detect_devices;
@@ -40,11 +39,7 @@ Printers on remote CUPS servers you do not have to configure here; these printer
 		      type => 'bool', val => \$autodetect }
 		    ]
 		   ) or return 0;
-    if ($autodetect) {
-	$printer->{AUTODETECT} = 1;
-    } else {
-	undef $printer->{AUTODETECT};
-    }
+    $printer->{AUTODETECT} = $autodetect ? 1 : undef;
     $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
     1;
 }
@@ -472,7 +467,7 @@ sub setup_local_autoscan {
 	my $second = $menuentries->{$b};
 	for (my $i = 0; $i <= $#prefixes; $i++) {
 	    my $firstinlist = ($first =~ m!^$prefixes[$i]!);
-	    my $secondinlist = ($second =~ m!^$prefixes[$i]!);
+	    my $secondinlist = ($second =~ m!^$::prefixes[$i]!);
 	    if (($firstinlist) && (!$secondinlist)) { return -1 };
 	    if (($secondinlist) && (!$firstinlist)) { return 1 };
 	}
@@ -546,16 +541,14 @@ sub setup_local_autoscan {
 		     N("No local printer found! To manually install a printer enter a device name/file name in the input line (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."),
 		     { 
 			 complete => sub {
-			     unless ($menuchoice ne "") {
+			     if ($menuchoice eq "") {
 				 $in->ask_warn('', N("You must enter a device or file name!"));
 				 return (1,0);
 			     }
 			     return 0;
 			 }
 		     });
-		if ($device eq "") {
-		    return 0;
-		}
+		return 0 if $device eq "";
 	    } else {
 		$in->ask_warn(N("Printer auto-detection"),
 			      N("No printer found!"));
@@ -615,11 +608,7 @@ sub setup_local_autoscan {
 		$menuchoice = "";
 		$do_auto_detect = 0;
 	    }
-	    if ($manualconf) {
-		$printer->{MANUAL} = 1;
-	    } else {
-		undef $printer->{MANUAL};
-	    }
+	    $printer->{MANUAL} = $manualconf ? 1 : undef;
 	}
     }
 
@@ -2681,6 +2670,7 @@ Do you want to have the automatic starting of the printing system turned on agai
     1;
 }
 
+# FIXME: heavy duplication
 sub install_spooler {
     # installs the default spooler and start its daemon
     my ($printer, $in, $upNetwork) = @_;
