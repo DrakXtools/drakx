@@ -755,7 +755,7 @@ sub computeGroupSize {
 	B: while (@l) {
 	    my $e = shift @l;
 	    foreach (@r, @l) {
-		inside($e, $_) and next B;
+		inside($_, $e) and next B;
 	    }
 	    push @r, $e;
 	}
@@ -764,21 +764,31 @@ sub computeGroupSize {
     my (%group, %memo, $slowpart_counter);
 
     log::l("pkgs::computeGroupSize");
+    my $time = time();
 
-    foreach my $p (@{$packages->{depslist}}) {
-	my @flags = $p->rflags;
-	next if !$p->rate || $p->rate < $min_level || @flags == 1 && $flags[0] eq 'FALSE';
+    my %pkgs_with_same_rflags;
+    foreach (@{$packages->{depslist}}) {
+	next if !$_->rate || $_->rate < $min_level || $_->flag_available;
+	my $flags = join(' ', $_->rflags);
+	next if $flags eq 'FALSE';
+	push @{$pkgs_with_same_rflags{$flags}}, $_;
+    }
 
-	my $flags = join("\t", @flags = or_ify(@flags));
-	$group{$p->name} = ($memo{$flags} ||= or_clean(@flags));
+    foreach my $raw_flags (keys %pkgs_with_same_rflags) {
+	my $flags = join("\t", my @flags = or_ify(split(' ', $raw_flags)));
+	my $flag_group = $memo{$flags} ||= or_clean(@flags);
+
+	my @pkgs = @{$pkgs_with_same_rflags{$raw_flags}};
+
+	$group{$_->name} = $flag_group foreach @pkgs;
 
 	#- determine the packages that will be selected when selecting $p.
 	#- make a fast selection (but potentially erroneous).
 	#- installed and upgrade flags must have been computed (see compute_installed_flags).
 	my %newSelection;
-	unless ($p->flag_available) {
-	    my @l2 = $p->id;
-	    my $id;
+			 
+	my @l2 = map { $_->id } @pkgs;
+	my $id;
 
 	    while (defined($id = shift @l2)) {
 		exists $newSelection{$id} and next;
@@ -810,14 +820,13 @@ sub computeGroupSize {
 		    }
 		}
 	    }
-	}
 
 	foreach (keys %newSelection) {
 	    my $p = $packages->{depslist}[$_] or next;
+	    next if $p->flag_selected; #- always installed (accounted in system_size)
 	    my $s = $group{$p->name} || do {
 		join("\t", or_ify($p->rflags));
 	    };
-	    next if length($s) > 120; # HACK, truncated too complicated expressions, too costly
 	    my $m = "$flags\t$s";
 	    $group{$p->name} = ($memo{$m} ||= or_clean(@flags, split("\t", $s)));
 	}
@@ -828,6 +837,7 @@ sub computeGroupSize {
 	push @{$pkgs{$v}}, $k;
 	$sizes{$v} += $pkg->size - $packages->{sizes}{$pkg->name};
     }
+    log::l("pkgs::computeGroupSize took: ", formatTimeRaw(time() - $time));
     log::l(sprintf "%s %dMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
     \%sizes, \%pkgs;
 }
