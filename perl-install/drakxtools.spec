@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.27mdk
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,10 +327,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Sep 10 2o004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-1mdk
+- fix console UIs (pixel)
+- drakboot: do not kill the whole bootsplash wizard when embedded (blino)
+- drakconnect: fix cnx status in "internet" interface (blino)
+- harddrake service: autoconfigure mice if needed
+- localedrake: fix ENC setting when IM is disabled
+
 * Thu Sep  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.27mdk
 - localedrake:
   o really reset IM on language switch
-  o fix ENC and locale specific stuff even when IM is disabled
+  o set ENC and locale specific stuff even when IM is disabled
   o fix thai IM
 
 * Thu Sep  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.26mdk
@@ -338,7 +345,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakboot: handles more cases where lilo wants to assign a new Volume
   ID (pixel)
 - localedrake:
-  o install miniChinput when  configuring chinput
+  o install miniChinput when configuring chinput
   o fix miniChinput configuration for Singapore 
   o handle languages with default IM w/o any configured IM (aka keep
     "none" user choice) but default to per locale default IM when
