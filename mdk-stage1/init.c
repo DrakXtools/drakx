@@ -488,7 +488,7 @@ int main(int argc, char **argv)
 //		print_error("could not set new controlling tty");
 
 	if (!testing) {
-		char my_hostname[] = "localhost.localdomain";
+		char my_hostname[] = "localhost";
 		sethostname(my_hostname, sizeof(my_hostname));
 		/* the default domainname (as of 2.0.35) is "(none)", which confuses 
 		   glibc */
