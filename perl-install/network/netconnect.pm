@@ -1187,7 +1187,7 @@ sub start_internet {
 
 sub stop_internet {
     my ($o) = @_;
-    init_globals($o, $o->{prefix});
+    init_globals($o);
     run_program::rooted($::prefix, $disconnect_file);
 }
 
