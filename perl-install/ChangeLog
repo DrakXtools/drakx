@@ -1,3 +1,81 @@
+2001/08/17  dam's  <damien@mandrakesoft.com>
+
+	* interactive_gtk.pm: no scrollbar if list <= 10 and the list is alone
+
+	* interactive.pm, install2.pm: removed no_incon
+
+	* standalone/net_monitor: added no internet connection configured label on
+	button
+
+	* network/netconnect.pm, network/ethernet.pm: corrected connection script
+	creation
+
+2001/08/17  Pixel  <pixel@mandrakesoft.com>
+
+	* install_interactive.pm: use diskdrake_interactive instead of diskdrake
+	a hell lot of cleanup/rewrite:
+	* diskdrake_interactive created, diskdrake is now interactive aware
+	* added some documentation about the structure used for partitioning
+	* all_hds now contain the various hds, lvm, raid
+	* cleanup the isLVM, isRAID and alike functions
+	* field {type} in detect_devices is now {media_type}
+	* detect_devices::floppies is now floppies_dev
+	* removed old function prototypes
+
+	* fs.pm, diskdrake.pm: add mount options choice (with IA-like stripping of
+	unused options)
+	a hell lot of cleanup/rewrite:
+	* diskdrake_interactive created, diskdrake is now interactive aware
+	* added some documentation about the structure used for partitioning
+	* all_hds now contain the various hds, lvm, raid
+	* cleanup the isLVM, isRAID and alike functions
+	* field {type} in detect_devices is now {media_type}
+	* detect_devices::floppies is now floppies_dev
+	* removed old function prototypes
+
+	* install_steps_interactive.pm, install_steps_auto_install.pm,
+	install2.pm, partition_table.pm, loopback.pm, raid.pm, bootlook.pm,
+	standalone/diskdrake, install_any.pm, install_steps.pm, fsedit.pm,
+	any.pm, detect_devices.pm, partition_table_raw.pm, bootloader.pm: a hell
+	lot of cleanup/rewrite:
+	* diskdrake_interactive created, diskdrake is now interactive aware
+	* added some documentation about the structure used for partitioning
+	* all_hds now contain the various hds, lvm, raid
+	* cleanup the isLVM, isRAID and alike functions
+	* field {type} in detect_devices is now {media_type}
+	* detect_devices::floppies is now floppies_dev
+	* removed old function prototypes
+
+	* diskdrake_interactive.pm: add mount options choice (with IA-like
+	stripping of unused options)
+	(part_possible_actions): have possible actions sorted the way we want
+	(Type): fix ext2->ext3 detection
+	a hell lot of cleanup/rewrite:
+	* diskdrake_interactive created, diskdrake is now interactive aware
+	* added some documentation about the structure used for partitioning
+	* all_hds now contain the various hds, lvm, raid
+	* cleanup the isLVM, isRAID and alike functions
+	* field {type} in detect_devices is now {media_type}
+	* detect_devices::floppies is now floppies_dev
+	* removed old function prototypes
+
+	* modules.pm: move back sunhme in sparc only
+
+2001/08/17  Till Kamppeter <till@mandrakesoft.com>
+
+	* share/rpmsrate: Corrected listing of packages for printing in 'INSTALL'
+	section.
+
+2001/08/17  warly
+
+	* share/rpmsrate: add package needed by the install in INSTALL
+	remove shapecfg and gpa
+
+2001/08/16  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Fixed bug of CUPS not being installed during
+	installation
+
 2001/08/16  Pixel  <pixel@mandrakesoft.com>
 
 	* install2.pm, install_any.pm: add remove_unused to have more place for mo
