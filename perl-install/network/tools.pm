@@ -6,7 +6,7 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected connected_bg connected2 disconnected);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -112,7 +112,43 @@ sub type2interface {
 					      [ lan => 'eth']);
 }
 
-sub connected { gethostbyname("www.mandrakesoft.com") ? 1 : 0 }
+sub connected { gethostbyname("mandrakesoft.com") ? 1 : 0 }
+
+my $kid_pipe;
+sub connected_bg {
+    my ($ref) = @_;
+    if (defined $kid_pipe) {
+	print "GGGGGGGGG\n";
+	local *F;
+	*F = *$kid_pipe;
+	fcntl(F, F_SETFL, O_NONBLOCK) or die "can't fcntl F_SETFL: $!";
+	my $a;
+  	if ($a = <F> ) {
+	    print "gooood\n";
+  	    chomp $a;
+	    close($kid_pipe) || warn "kid exited $?";
+	    undef $kid_pipe;
+	    $a eq '1' and $$ref = 1;
+	    $a eq '0' and $$ref = 0;
+  	}
+    } else {
+	print "BBBBBBBBB\n";
+  	$kid_pipe = connected2();
+    }
+    1;
+}
+
+sub connected2 {
+           my $pid = open(KID_TO_READ, "-|");
+           if ($pid) {   # parent
+	       return \*KID_TO_READ;
+           } else {      # child
+               ($EUID, $EGID) = ($UID, $GID); # suid only
+	       my $a = gethostbyname("mandrakesoft.com") ? 1 : 0;
+	       print "$a\n";
+	       c::_exit(0);
+           }
+}
 
 sub disconnected { }
 
@@ -169,3 +205,5 @@ exit 0
 	  '0.d/K11internet', '1.d/K11internet', '2.d/K11internet', '3.d/S89internet', '5.d/S89internet', '6.d/K11internet';
     };
 }
+
+1;

@@ -72,7 +72,7 @@ $window1->set_border_width(5);
 my $colorr = my_gtk::gtkcolor(50400, 655, 20000);
 my $colort = my_gtk::gtkcolor(55400, 55400, 655);
 my $colora = my_gtk::gtkcolor(655, 50400, 655);
-my $isconnected=0;
+my $isconnected=-1;
 my @interfaces;
 my $monitor = {};
 my $netcnx = {};
@@ -121,7 +121,7 @@ gtkadd($window1,
 							   )
 						 ),
 					0, gtkpack_(new Gtk::HBox(0,5),
-						   1, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
+						   1, gtksignal_connect(my $button_connect = gtkset_sensitive(new Gtk::Button(), 0), clicked => \&connection),
 						   0, new Gtk::VSeparator,
 						   0, gtkpack(new Gtk::VBox(0,5),
 							      gtksignal_connect(new Gtk::Button(_("Logs")), clicked => sub {
@@ -153,19 +153,23 @@ my $gca = new Gtk::Gdk::GC($window1->window);
 $gca->set_foreground($colora);
 my ($pix_c_map, $pix_c_mask) = gtkcreate_png("net_c.png");
 my ($pix_d_map, $pix_d_mask) = gtkcreate_png("net_d.png");
+my ($pix_u_map, $pix_u_mask) = gtkcreate_png("net_u.png");
 $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
-				   my $pix_c = new Gtk::Pixmap($pix_d_map, $pix_d_mask),
-				   my $label_c = new Gtk::Label(_("Connect to Internet"))
+				   my $pix_c = new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+				   my $label_c = new Gtk::Label(_("Wait please"))
 				  ));
-$statusbar->push(1, _("Not connected"));
+$statusbar->push(1, _("Wait please, testing your connection..."));
 $window1->show_all();
 #$window1->set_policy (1, 1, 1);
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
-my $time_tag2 = Gtk->timeout_add(15000, \&update);
+my $time_tag2 = Gtk->timeout_add(5000, \&update);
+
 update();
 rescan();
-connection() if ($connect && !$isconnected);
-connection() if ($disconnect && $isconnected);
+while ($isconnected == -1) {
+    Gtk->main_iteration while Gtk->events_pending;
+}
+connection() if ($connect && !$isconnected || $disconnect && $isconnected);
 Gtk->main;
 Gtk->exit(0);
 
@@ -194,16 +198,16 @@ sub connection {
     my $tag2 = Gtk->timeout_add(10000, sub {
 				    Gtk->timeout_remove($tag);
 				    $statusbar->pop(1);
-				    $statusbar->push(1, $isconnected2 ? ( connected() ?
+				    $statusbar->push(1, $isconnected2 ? ( $isconnected ?
 									  _("Disconnection from Internet failed.") :
 									  _("Disconnection from Internet complete.")) :
-						     ( connected() ?
+						     ( $isconnected ?
 						       _("Connection complete.") :
 						       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
 						    );
 				    my $tag3 = Gtk->timeout_add(10000, sub {
 					    $statusbar->pop(1);
-					    $statusbar->push(1, connected() ? _("Connected") : _("Not connected"));
+					    $statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
 					    0;
 					});
 				    $button_connect->set_sensitive(1);
@@ -313,6 +317,7 @@ sub change_color {
 }
 
 sub update {
+    connected_bg(\$isconnected);
     my @intfs = get_val();
     if($combo1->entry->get_text ne ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default")) {
 	$combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
@@ -372,19 +377,17 @@ sub update {
     }
     @interfaces = @intfs;
     my $netc={};
-    my $connected_now = connected();
-    if($connected_now == !$isconnected) {
-	$isconnected = $isconnected ? 0 : 1;
+    if ($isconnected != -1) {
+	$button_connect->set_sensitive(1);
 	$label_c->set($isconnected ? _("Disconnect") : _("Connect"));
 	$statusbar->pop(1);
-	$statusbar->push(1, $connected_now ? _("Connected") : _("Not connected"));
+	$statusbar->push(1, $isconnected ? _("Connected") : _("Not connected"));
 	$isconnected ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
     }
     if (!(-e $connect_file && -e $disconnect_file)) {
 	$button_connect->set_sensitive(0);
 	$label_c->set("No internet connection configured");
     }
-    #$time_tag2 = Gtk->timeout_add(5000, \&update);
     1;
 }
 

@@ -184,17 +184,20 @@ my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interf
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $connected_now;
+my $isconnected = -1;
 sub connected_local {
+    print "in connected local\n";
     my $w = $in->wait_message('', _("Testing your connection..."), 1);
-    $connected_now=connected();
+    Gtk->main_iteration while Gtk->events_pending;
+    $isconnected=connected();
 }
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
-my $label8 = new Gtk::Label($connected_now ? _("Connected") : _("Not connected"));
+my $label8 = new Gtk::Label(_("Testing your connection..."));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
-my $button2 = new Gtk::Button($connected_now ? _("Disconnect...") : _("Connect..."));
+my $button2 = new Gtk::Button(_("Wait please"));
+$button2->set_sensitive(0);
 $button2->signal_connect (clicked => sub {
 			      my $dialog = new Gtk::Dialog();
 			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
@@ -211,7 +214,7 @@ $button2->signal_connect (clicked => sub {
 			      $bbox_dialog->add($button_ok );
 			      $dialog->show_all;
 			      $dialog->set_modal(1);
-			      if (!$connected_now) {
+			      if (!$isconnected) {
 				  $l->set(_("Starting your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
 				  connect_backend();
@@ -347,7 +350,7 @@ $window1->show_all();
 $_->hide foreach ($button1, $button3);
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill USR2, $::CCPID;
-my $tag = Gtk->timeout_add(15000, \&update2);
+my $tag = Gtk->timeout_add(4000, \&update2);
 Gtk->main;
 Gtk->exit(0);
 
@@ -401,14 +404,18 @@ sub update {
     build_clist();
     $clist1->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
+    $isconnected !=-1 or return 1;
+    $label8->set($isconnected ? _("Connected") : _("Not connected"));
+    $button2->child->set($isconnected ? _("Disconnect...") : _("Connect..."));
+    $button2->set_sensitive(1);
     1;
 }
 
 sub update2 {
+    print "HHHHHH\n";
+    connected_bg(\$isconnected);
     update();
-    $connected_now = connected();
-    $label8->set($connected_now ? _("Connected") : _("Not connected"));
-    $button2->child->set($connected_now ? _("Disconnect...") : _("Connect..."));
+    1;
 }
 sub quit_global {
     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
