@@ -2,7 +2,6 @@ package any; # $Id$
 
 use diagnostics;
 use strict;
-use vars qw(@users);
 
 #-######################################################################################
 #- misc imports
@@ -42,9 +41,9 @@ sub addKdmIcon {
 }
 
 sub allocUsers {
-    my ($prefix, @users) = @_;
+    my ($prefix, $users) = @_;
     my @m = my @l = facesnames($prefix);
-    foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @users) {
+    foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @$users) {
 	$_->{auto_icon} = splice(@m, rand(@m), 1); #- known biased (see cookbook for better)
 	log::l("auto_icon is $_->{auto_icon}");
 	@m = @l unless @m;
@@ -52,16 +51,15 @@ sub allocUsers {
 }
 
 sub addUsers {
-    my ($prefix, @users) = @_;
+    my ($prefix, $users) = @_;
     my $msec = "$prefix/etc/security/msec";
 
-    allocUsers($prefix, @users);
-    foreach my $u (@users) {
+    allocUsers($prefix, $users);
+    foreach my $u (@$users) {
 	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
 	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon});
     }
     run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh >/dev/null");
-#    addKdmIcon($prefix, 'root', 'root');
 }
 
 sub crypt {
@@ -128,7 +126,7 @@ sub setupBootloader {
 arch() =~ /sparc/ ? (
 { label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
-{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },
+{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (@$hds, grep { !isFat($_) } @$fstab)), detect_devices::floppies() ], not_edit => !$::expert },
 { label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba" },
 { label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact") },
 { label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => $::beginner },
@@ -612,5 +610,91 @@ Do you want to try again with other parameters?", $l), 1) or return;
     $l;
 }
 
+sub ask_users {
+    my ($prefix, $in, $users, $security) = @_;
+
+    my $u if 0; $u ||= {};
+
+    my @shells = map { chomp; $_ } cat_("$prefix/etc/shells");
+
+    while (1) {
+	$u->{password2} ||= $u->{password} ||= '';
+	$u->{shell} ||= '/bin/bash';
+	my $names = @$users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @$users)) : '';
+
+	$in->ask_from_entries_refH_powered(
+	    { title => _("Add user"),
+	      messages => _("Enter a user\n%s", $names),
+	      ok => _("Accept user"),
+	      cancel => $security < 4 || @$users ? _("Done") : '',
+	      callbacks => {
+	          focus_out => sub {
+		      if ($_[0] eq 0) {
+			  $u->{name} ||= lc first($u->{realname} =~ /((\w|-)+)/);
+		      }
+		  },
+	          complete => sub {
+		      $u->{password} eq $u->{password2} or $in->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,2);
+		      $security > 3 && length($u->{password}) < 6 and $in->ask_warn('', _("This password is too simple")), return (1,2);
+		      $u->{name} or $in->ask_warn('', _("Please give a user name")), return (1,0);
+		      $u->{name} =~ /^[a-z0-9_-]+$/ or $in->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
+		      member($u->{name}, map { $_->{name} } @$users) and $in->ask_warn('', _("This user name is already added")), return (1,0);
+		      return 0;
+		  },
+	    } }, [ 
+	    { label => _("Real name"), val => \$u->{realname} },
+	    { label => _("User name"), val => \$u->{name} },
+            { label => _("Password"),val => \$u->{password}, hidden => 1 },
+            { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
+            { label => _("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
+	      if_($security <= 3,
+	    { label => _("Icon"), val => \$u->{icon}, list => [ facesnames($prefix) ], icon2f => sub { face2xpm($_[0], $prefix) }, format => \&translate },
+	      ),
+           ],
+        ) or return;
+
+	push @$users, $u;
+	$u = {};
+    }
+}
+
+#sub autologin {
+#    my ($prefix, $o, $in, $install) = @_;
+#
+#    my $cmd = $prefix ? "chroot $prefix" : "";
+#    my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
+#
+#    if (@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
+#	 my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
+#	 $o->{autologin} ||= $l{USER};
+#	 $in->ask_from_entries_refH(_("Autologin"),
+#				    _("I can set up your computer to automatically log on one user.
+#If you don't want to use this feature, click on the cancel button."),
+#				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+#				      { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
+#    }
+#
+#    $o->{autologin} and $install->("autologin");
+#    setAutologin($prefix, $o->{autologin}, $o->{desktop});
+#}
+
+sub write_passwd_user {
+    my ($prefix, $u, $isMD5) = @_;
+
+    local $u->{pw} ||= $u->{password} && &crypt($u->{password}, $isMD5);
+    $u->{shell} ||= '/bin/bash';
+
+    substInFile {
+	my $l = unpack_passwd($_);
+	if ($l->{name} eq $u->{name}) {
+	    add2hash_($u, $l);
+	    $_ = pack_passwd($u);
+	    $u = {};
+	}
+	if (eof && $u->{name}) {
+	    $_ .= pack_passwd($u);
+	}
+    } "$prefix/etc/passwd";
+}
 
 1;
