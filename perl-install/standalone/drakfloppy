@@ -307,11 +307,11 @@ sub select_item  {
   my $i;
   $file =~ s|/lib/modules/.*?/||g;
   for ($i = 0; $i < $lr; $i++) {
-    last if ($file eq $list->get_text($i, 0));
+    last if $file eq $list->get_text($i, 0);
   }
-  print $file,"\n";
+  print $file, "\n";
   
-  $list->append($file, $size) if ($i == $lr) or ($lr == 0);
+  $list->append($file, $size) if $i == $lr or $lr == 0;
 }
 
 #-------------------------------------------------------------
@@ -327,13 +327,13 @@ sub print_hello {
 #-------------------------------------------------------------
 sub build_it {
   my $y;
-  my $co = "/sbin/mkbootdisk --noprompt --verbose --device ". $device_combo->entry->get_text();
+  my $co = "/sbin/mkbootdisk --noprompt --verbose --device " . $device_combo->entry->get_text();
   if ($expert_mode) {
     $co .= " --mkinitrdargs -f" if $force_button->get_active;
     $co .= " --mkinitrdargs --ifneeded" if $needed_button->get_active;
     $co .= " --mkinitrdargs --omit-scsi-modules" if $scsi_button->get_active;
     $co .= " --mkinitrdargs --omit-raid-modules" if $raid_button->get_active;
-    for (my $i=0; $i<$list->rows(); $i++) {
+    for (my $i = 0; $i < $list->rows(); $i++) {
       $y = $list->get_text($i, 0);
       $y =~ s|.*?/||g;
       $co .= " --mkinitrdargs --with=" . $y; #. "/usr/lib/" . $kernel_combo->entry->get_text() . "/" . $y;
@@ -344,13 +344,13 @@ sub build_it {
   create_dialog(N("Be sure a media is present for the device %s",  $device_combo->entry->get_text()), 1) or return;
 # we test if the media is present
  test:
-  my $a = "dd count=1 if=/dev/null of=". $device_combo->entry->get_text() ." 2>&1";
-  my $b= `$a`;
-  if ($b =~ "dd") {create_dialog(N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0; }
+  my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text() . " 2>&1";
+  my $b = `$a`;
+  if ($b =~ /dd/) { create_dialog(N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text()), 1) ? goto test : return 0 }
   
-  open STATUS, $co or do { create_dialog(N("Unable to fork: %s", $!), 0); return; };
+  open STATUS, $co or do { create_dialog(N("Unable to fork: %s", $!), 0); return };
   while (<STATUS>) {
-      $output->insert( $fixed_font, undef, undef, $_ );
+      $output->insert( $fixed_font, undef, undef, $_);
   }
   close STATUS or create_dialog(N("Unable to close properly mkbootdisk: \n %s \n %s", $!, $?), 0);
   
@@ -368,7 +368,7 @@ sub has_sub_trees {
     my ($dir) = @_;
     
     foreach my $file (glob_("$dir/*")) {
-        return 1 if ( -d $file ) or ($file =~ /\.o(\.gz)?$/);
+        return 1 if -d $file or $file =~ /\.o(\.gz)?$/;
     }
     
     return (0);
