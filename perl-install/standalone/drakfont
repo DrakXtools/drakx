@@ -557,20 +557,20 @@ sub interactive_mode {
 					 1, gtkpack($font_box = new Gtk::VBox(0,5),
 						    $font_sel = new Gtk::FontSelection,
 						    ),
-					 ),
-			     0, gtkpack_(new Gtk::VBox(0,5),
-					 0, new Gtk::VBox(0,0),
-					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
 					 0, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 						   gtksignal_connect(new Gtk::Button(_("Get Windows Fonts")), clicked 	=>
-						       sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
+								     sub { ${$central_widget}->destroy(); $windows = 1; appli_choice();}),
 						   gtksignal_connect(new Gtk::Button(_("Advanced Options")), clicked =>
-						       sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
+								    sub {  ${$central_widget}->destroy(); $windows = 0; advanced_install();}),
 						   gtksignal_connect(new Gtk::Button(_("Uninstall Fonts")), clicked => 
 								     sub { ${$central_widget}->destroy(); uninstall() }),
 						   gtksignal_connect(new Gtk::Button(_("Font List")), clicked 	=>
 								     sub { ${$central_widget}->destroy(); create_fontsel()}),
 						   ),
+					 ),
+			     0, gtkpack_(new Gtk::VBox(0,5),
+					 0, new Gtk::VBox(0,0),
+					 0, new Gtk::Pixmap($pix_user_map, $pix_user_mask),
 					 1, new Gtk::VBox(0,0),
 					 1, gtkadd(gtkset_layout(new Gtk::VButtonBox, -end),
 						   gtksignal_connect(new Gtk::Button(_("About")), clicked => sub { 
@@ -587,8 +587,13 @@ sub interactive_mode {
 	   );
     $central_widget = \$font_sel;
     $window1->show_all;
+    $font_sel->set_page(1);  
+    $font_sel->cur_page->child->hide();
+    $font_sel->set_page(2);  
+    $font_sel->cur_page->child->hide();
+    $font_sel->set_page(0);  
     $window1->realize;
-    $window1->show_all();    
+#    $window1->show_all();    
     Gtk->main_iteration while Gtk->events_pending;
     $::isEmbedded and kill USR2, $::CCPID;
     Gtk->main;
