@@ -29,7 +29,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use standalone; #- warning, standalone must be loaded very first, for 'explanations'
 use common;
-use ugtk2 qw(:helpers :create :wrappers);
+use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use detect_devices;
 
 #- languages that can't be displayed with gtk1, so we unset translations
@@ -298,22 +298,22 @@ sub build_it() {
     $co .= join(" --mkinitrdargs --with=", map { $_->[0] } @modules);
     $co .= " " . $kernel_combo->entry->get_text;
     $co .= " 2>&1 |";
-    create_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text), { cancel => 1 }) or return;
+    warn_dialog(N("Warning"), N("Be sure a media is present for the device %s",  $device_combo->entry->get_text)) or return;
     # we test if the media is present
   test:
     my $a = "dd count=1 if=/dev/null of=" . $device_combo->entry->get_text . " 2>&1";
     my $b = `$a`;
     if ($b =~ /dd/) {
-        create_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), { cancel => 1 }) ? goto test : return 0;
+        err_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), { cancel => 1 }) ? goto test : return 0;
     }
   
     local *STATUS;
-    open STATUS, $co or do { create_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
+    open STATUS, $co or do { err_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
     local $_;
     while (<STATUS>) {
         gtktext_append($output, [ [ $_ ] ]);
     }
-    close STATUS or create_dialog(N("Error"), N("Unable to properly close mkbootdisk: \n %s \n %s", $!, $?));
+    close STATUS or err_dialog(N("Error"), N("Unable to properly close mkbootdisk: \n %s \n %s", $!, $?));
   
     return (0);
 }
