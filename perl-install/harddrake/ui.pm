@@ -188,22 +188,8 @@ sub new {
 		  if (exists $data->{driver} &&  $data->{driver} !~ /(unknown|.*\|.*)/ &&  $data->{driver} !~ /^Card:/) {
 			 $module_cfg_button->show;
 			 $IDs{module} = $module_cfg_button->signal_connect(clicked => sub {
-				require modules;
-				modules::mergein_conf('/etc/modules.conf');
-				my %conf = modules::get_parameters($data->{driver});
-				require modparm;
-				my @l;
-				foreach (modparm::parameters($data->{driver})) {
-				    my ($name, $format, $description) = @$_;
-				    push @l, { label => $name, help => "$description\n[$format]", val => \$conf{$name} };
-				}
-				if ($in->ask_from("Module configuration", _("You can configure each parameter of the module here."), \@l)) {
-				    my $options = join(' ', map { if_($conf{$_}, "$_=$conf{$_}") } keys %conf);
-				    if ($options) {
-					   modules::set_options($_->{driver}, $options);
-						modules::write_conf;
-					 }
-				}
+				require modules::interactive;
+				modules::interactive::config_window($in, $data);
 				gtkset_mousecursor_normal();
 			 });
 		  }
