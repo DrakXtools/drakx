@@ -35,7 +35,7 @@ use fs;
 #-#######################################################################################
 $o = $::o = {
 #    bootloader => { linear => 0, lba32 => 1, message => 1, timeout => 5, restricted => 0 },
-    mkbootdisk => 1, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
+    mkbootdisk => 0, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     security => 2,
