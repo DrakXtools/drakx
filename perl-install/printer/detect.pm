@@ -101,6 +101,33 @@ sub whatNetPrinter {
     @res;
 }
 
+sub getNetworkInterfaces {
+
+    # subroutine determines the list of all network interfaces reported
+    # by "ifconfig", except "lo".
+    
+    # Return an empty list if no network is running
+    return () unless network_running();
+    
+    my @interfaces;
+	
+    local *IFCONFIG_OUT;
+    open IFCONFIG_OUT, ($::testing ? "" : "chroot $::prefix/ ") .
+	"/bin/sh -c \"export LC_ALL=C; ifconfig\" |" or return ();
+    while (my $readline = <IFCONFIG_OUT>) {
+	# New entry ...
+	if ($readline =~ /^(\S+)\s/) {
+	    my $dev = $1;
+	    if ($dev ne "lo") {
+		push (@interfaces, $dev);
+	    }
+	}
+    }
+    close(IFCONFIG_OUT);
+
+    @interfaces;
+}
+
 sub getIPsInLocalNetworks {
 
     # subroutine determines the list of all hosts reachable in the local

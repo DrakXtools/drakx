@@ -61,77 +61,257 @@ sub config_cups {
     # when "Apply" was at least pressed once.
     my $retvalue = 0;
     # Read CUPS config file
-    my @cupsd_conf = printer::main::read_cupsd_conf();
-    foreach (@cupsd_conf) {
-	/^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
-    }
-    $server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
-    #- Did we have automatic or manual configuration mode for CUPS
-    $autoconf = printer::main::get_cups_autoconf();
-    #- Remember the server/port/autoconf settings to check whether the user
-    #- has changed them.
-    my $oldserver   = $server;
-    my $oldport     = $port;
-    my $oldautoconf = $autoconf;
-    
-    #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
-    #- according to new settings. There are no other point where such
-    #- information is written in this file.
-    
-    if ($in->ask_from_(
-	 { title => ($::expert ? N("CUPS configuration") :
-		     N("Specify CUPS server")),
-	   messages => N("To get access to printers on remote CUPS servers in your local network you do not have to configure anything; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. When your CUPS server is not in your local network, you have to enter the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
-	       if_($::expert, "\n" . N("
-Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").")),
-	   callbacks => { complete => sub {
-	       if ($server && !network::is_ip($server)) {
-		   $in->ask_warn('', N("The IP address should look like 192.168.1.20"));
-		   return (1,0);
-	       }
-	       if ($port !~ /^\d*$/) {
-		   $in->ask_warn('', N("The port number should be an integer!"));
-		   return (1,1);
-	       }
-	       return 0;
-	   } }
-       },
-	 [	
-		{ label => N("CUPS server IP"), val => \$server },
-		{ label => N("Port"), val => \$port },
-		if_($::expert,
-		 { text => N("Automatic CUPS configuration"), type => 'bool',
-		   val => \$autoconf }),
-	 ]
-	 )) {
-	# We have clicked "OK"
-	$retvalue = 1;
-	# Set BrowsePoll line
-	if ($server ne $oldserver || $port ne $oldport) {
-	    $server && $port and $server = "$server:$port";
-	    if ($server) {
-		@cupsd_conf = 
-		    map { $server and 
-			      s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and
-			      $server = '';
-			  $_ } @cupsd_conf;
-		$server and push @cupsd_conf, "\nBrowsePoll $server\n";
+    @{$printer->{cupsconfig}{cupsd_conf}} =
+	printer::main::read_cupsd_conf();
+    printer::main::read_cups_config($printer);
+    # Read state for auto-correction of cupsd.conf
+    $printer->{cupsconfig}{autocorrection} =
+	printer::main::get_cups_autoconf();
+    # Human-readable strings for hosts onto which the local printers
+    # are shared
+    my $maindone;
+    while (!$maindone) {
+	my $sharehosts = printer::main::makesharehostlist($printer);
+	my $buttonclicked;
+	#- Show dialog
+	if ($in->ask_from_
+	    (
+	     { 
+		 title => N("CUPS printer sharing configuration"),
+		 messages => N("Here you can choose whether the printers connected to this machine should be accessable by remote machines and by which remote machines.") .
+		     N("You can also decide here whether printers on remote machines should be automatically made available on this machine."),
+	     },
+	     [
+	      { text => N("The printers on this machine are available to other computers"), type => 'bool',
+		val => \$printer->{cupsconfig}{localprintersshared} },
+	      { val => N("Local printers available on: ") .
+		    ($printer->{cupsconfig}{customsharingsetup} ?
+		     N("Custom configuration") :
+		     ($#{$sharehosts->{list}} >= 0 ?
+		      ($#{$sharehosts->{list}} > 1 ?
+		       join (", ", @{$sharehosts->{list}}[0,1]) . " ..." :
+		       join (", ", @{$sharehosts->{list}})) :
+		      N("No remote machines"))), 
+		type => 'button',
+		clicked_may_quit => sub {
+		    $buttonclicked = "sharehosts";
+		    1;
+		},
+		disabled => sub {
+		    (!$printer->{cupsconfig}{localprintersshared});
+		}},
+	      { text => N("Automatically find available printers on remote machines"), type => 'bool',
+		val => \$printer->{cupsconfig}{remotebroadcastsaccepted} },
+	      if_($::expert,
+		  { text => N("Automatic correction of CUPS configuration"),
+		    type => 'bool',
+		    help => N("When this option is turned on, on every startup of CUPS is automatically made sure that
+
+- if LPD/LPRng is installed, /etc/printcap will not be overwritten by CUPS
+
+- if /etc/cups/cupsd.conf is missing, it will be created
+
+- when printer information is broadcasted, it does not contain \"localhost\" as the server name.
+
+If some of these measures lead to problems for you, turn this option off, but then you have to take care of these points."),
+		    val => \$printer->{cupsconfig}{autocorrection} }),
+	      ]
+	     )
+	    ) {
+	    if ($buttonclicked eq "sharehosts") {
+		# Show dialog to add hosts to share printers to
+		my $subdone = 0;
+		my $choice;
+		while (!$subdone) {
+		    # Entry should be edited when double-clicked
+		    $buttonclicked = "edit";
+		    $in->ask_from_
+			(
+			 { title => N("Sharing of local printers"),
+			   messages => N("These are the machines and networks on which the locally connected printer(s) should be available:"),
+			   ok => "",
+			   cancel => "",
+		         },
+			 # List the hosts
+			 [ { val => \$choice, format => \&translate,
+			     sort => 0, separator => "#####",
+			     tree_expanded => 1,
+			     quit_if_double_click => 1,
+			     allow_empty_list => 1,
+			     list => $sharehosts->{list} },
+			   { val => N("Add host/network"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "add";
+				 1; 
+			     }},
+			   { val => N("Edit selected host/network"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "edit";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#{$sharehosts->{list}} < 0);
+			     }},
+			   { val => N("Remove selected host/network"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "remove";
+				 1; 
+			     },
+			     disabled => sub {
+				 return ($#{$sharehosts->{list}} < 0);
+			     }},
+			   { val => N("Done"), 
+			     type => 'button',
+			     clicked_may_quit => sub {
+				 $buttonclicked = "";
+				 $subdone = 1;
+				 1; 
+			     }},
+			   ]
+			 );
+		    if (($buttonclicked eq "add") ||
+			($buttonclicked eq "edit")) {
+			my ($hostchoice, $ip);
+			if ($buttonclicked eq "add") {
+			    # Use first entry as default for a new entry
+			    $hostchoice = N("Local network(s)");
+			} else {
+			    if ($sharehosts->{invhash}{$choice} =~ /^\@/) {
+				# Entry to edit is not an IP address
+				$hostchoice = $choice;
+			    } else {
+				# Entry is an IP address
+				$hostchoice = 
+				    N("IP address of host/network:");
+				$ip = $sharehosts->{invhash}{$choice};
+			    }
+			}
+			my @menu = (N("Local network(s)"));
+			my @interfaces = 
+			    printer::detect::getNetworkInterfaces();
+		        for my $interface (@interfaces) {
+			    push (@menu,
+				  (N("Interface \"%s\"", $interface)));
+			}
+			push (@menu, N("IP address of host/network:"));
+			# Show the dialog
+			print "##### |@menu|$hostchoice|\n";
+			my $address;
+			my $oldaddress = 
+			    ($buttonclicked eq "edit" ?
+			     $sharehosts->{invhash}{$choice} : "");
+			if ($in->ask_from_
+			    (
+			     { title => N("Sharing of local printers"),
+			       messages => N("Choose the network or host on which the local printers should be made available:"),
+			       callbacks => {
+				   complete => sub {
+				       if (($hostchoice eq 
+					    N("IP address of host/network:")) &&
+					   (!printer::main::is_network_ip($ip))) {
+					   
+					   $in->ask_warn('', 
+N("The entered host/network IP is not correct.\n") .
+N("Examples for correct IPs:\n") .
+N("192.168.100.194\n") .
+N("10.0.0.*\n") .
+N("10.1.*\n") .
+N("192.168.100.0/24\n") .
+N("192.168.100.0/255.255.255.0\n")
+);
+					   return (1,0);
+				       }
+				       if ($hostchoice eq $menu[0]) {
+					   $address = "\@LOCAL";
+				       } elsif ($hostchoice eq 
+						$menu[$#menu]) {
+					   $address = $ip;
+				       } else {
+					   ($address) =
+					       grep {$hostchoice =~ /$_/} 
+					       @interfaces;
+					   $address = "\@IF($address)";
+				       }
+				       # Check whether item is duplicate
+				       if (($address ne $oldaddress) &&
+					   (member($address,
+						   @{$printer->{cupsconfig}{clientnetworks}}))) {
+					   $in->ask_warn('', 
+							 N("This host/network is already in the list, it cannot be added again.\n"));
+					   return (1,1);
+				       }
+				       return 0;
+				   },
+			       },
+			   },
+			     # List the host types
+			     [ { val => \$hostchoice, format => \&translate,
+				 type => 'list',
+				 sort => 0,
+				 list => \@menu },
+			       { val => \$ip, 
+				 disabled => sub {
+				     $hostchoice ne 
+					 N("IP address of host/network:");
+			         }},
+			       ],
+			     )) {
+			    # OK was clicked, insert new item into the list
+			    if ($buttonclicked eq "add") {
+				push(@{$printer->{cupsconfig}{clientnetworks}},
+				     $address);
+			    } else {
+				@{$printer->{cupsconfig}{clientnetworks}} =
+				    map {($_ eq
+					  $sharehosts->{invhash}{$choice} ?
+					  $address : $_)}
+				        @{$printer->{cupsconfig}{clientnetworks}};
+			    }
+			    # Refresh list of hosts
+			    $sharehosts = 
+			    printer::main::makesharehostlist($printer);
+			    # We have modified the configuration now
+			    $printer->{cupsconfig}{customsharingsetup} = 0;
+			    # Position the list cursor on the new/modified
+			    # item
+			    $choice = $sharehosts->{hash}{$address};
+			}
+		    } elsif ($buttonclicked eq "remove") {
+			@{$printer->{cupsconfig}{clientnetworks}} =
+			    grep {$_ ne $sharehosts->{invhash}{$choice}}
+			    @{$printer->{cupsconfig}{clientnetworks}};
+			# Refresh list of hosts
+			$sharehosts = 
+			    printer::main::makesharehostlist($printer);
+			# We have modified the configuration now
+			$printer->{cupsconfig}{customsharingsetup} = 0;
+		    }
+		    # If we have no entry in the list, we do not
+		    # share the local printers, mark this
+		    $printer->{cupsconfig}{localprintersshared} =
+			($#{$printer->{cupsconfig}{clientnetworks}} >= 0);
+		}
 	    } else {
-		@cupsd_conf = 
-		    map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
-			  $_ } @cupsd_conf;
+		# We have clicked "OK"
+		$retvalue = 1;
+		$maindone = 1;
+		# Write state for auto-correction of cupsd.conf
+		printer::main::set_cups_autoconf
+		    ($printer->{cupsconfig}{autocorrection});
+		# Write cupsd.conf
+		printer::main::write_cups_config($printer);
+		printer::main::write_cupsd_conf
+		    (@{$printer->{cupsconfig}{cupsd_conf}});
 	    }
-	    printer::main::write_cupsd_conf(@cupsd_conf);
+	} else {
+	    # Cancel clicked
+	    $maindone = 1;
 	}
-	# Set auto-configuration state
-	if ($autoconf != $oldautoconf) {
-	    printer::main::set_cups_autoconf($autoconf);
-	}
-	# Save user settings for auto-install
-	$printer->{BROWSEPOLLADDR} = $server;
-	$printer->{BROWSEPOLLPORT} = $port;
-	$printer->{MANUALCUPSCONFIG} = 1 - $autoconf;
     }
+    printer::main::clean_cups_config($printer);
     return $retvalue;
 }
 
@@ -2941,7 +3121,7 @@ sub main {
 				       1;
 				   },
 			       val => ($::expert ? N("CUPS configuration") :
-				       N("Specify CUPS server")) }) : ()),
+				       N("Printer sharing")) }) : ()),
 			  ($::expert ?
 			    { clicked_may_quit =>
 				  sub {
