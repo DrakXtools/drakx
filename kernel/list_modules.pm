@@ -99,11 +99,12 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd usbkbd keybdev) ],
+    usb => [ qw(usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd) ],
     firewire => [ qw(ohci1394) ],
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(tcic i82365 i82092 yenta_socket)), # cb_enabler
     ],
+    usb_keyboard => [ qw(usbkbd keybdev) ],
    #serial_cs
    #ftl_cs 3c575_cb apa1480_cb epic_cb serial_cb tulip_cb iflash2+_mtd iflash2_mtd
    #cb_enabler
