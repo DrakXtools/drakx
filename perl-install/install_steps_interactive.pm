@@ -1281,22 +1281,12 @@ sub configureX {
     my ($o, $clicked) = @_;
     $o->configureXBefore;
 
-    #- strange, xfs must not be started twice...
-    #- trying to stop and restart it does nothing good too...
-    my $xfs_started if 0;
-    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start") unless $::live || $xfs_started;
-    $xfs_started = 1;
-
-    require Xconfigurator;
-    { local $::testing = 0; #- unset testing
-      local $::auto = !$::expert && !$clicked;
-
-      symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-      Xconfigurator::main($o->{X}, $o, $o->do_pkgs,
+    symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
+    require Xconfig::main;
+    Xconfig::main::configure_everything($o, $o->{raw_X}, $o->do_pkgs, !$::expert && !$clicked,
 			  { allowFB          => $o->{allowFB},
 			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
 			  });
-    }
     $o->configureXAfter;
 }
 
