@@ -774,7 +774,7 @@ sub write_lilo_conf {
 	    print F "\tlabel=", make_label_lilo_compatible($_->{label});
 
 	    if ($_->{type} eq "image") {		
-		print F "\troot=$_->{root}";
+		print F "\troot=$_->{root}" if $_->{root};
 		print F "\tinitrd=", $file2fullname->($_->{initrd}) if $_->{initrd};
 		print F "\tappend=\"$_->{append}\"" if $_->{append};
 		print F "\tvga=$_->{vga}" if $_->{vga};
