@@ -23,6 +23,7 @@ KDE
   2 kdesdk quanta kdoc
 
 VIDEO
+  4 powerdvd
   3 nist xanim xmms-smpeg xmovie
   1 bcast mpeg2_movie
 TV
@@ -31,8 +32,13 @@ TV
 
 OFFICE
   5 LOCALES"en" staroffice-en
-  4 !KDE !GNOME abisuite 
-  4 cbb gaddr ical xpdf
+    LOCALES"de" staroffice-de
+    LOCALES"es" staroffice-es
+    LOCALES"fr" staroffice-fr
+    LOCALES"it" staroffice-it
+    acroread
+  4 !KDE abisuite 
+  4 cbb gaddr ical xpdf moneydance
   3 wv 
   2 units lyx
   GNOME
@@ -209,7 +215,7 @@ NETWORKING_FILE
   2 GNOME gnomba gtm
 NETWORKING_FILE_SERVER 
   5 nfs-utils
-  4 samba
+  4 samba arkeia-server-shareware
   3 squid am-utils
 
 NETWORKING_WWW
@@ -227,6 +233,7 @@ NETWORKING_WWW_SERVER
   1 Zope Zope-core Zope-pcgi Zope-zserver
 
 GRAPHICS
+  5 blender
   4 ImageMagick giftrans gimp gphoto qiv xli
   3 gimp-data-extras gqview sketch xloadimage xpcd xwpick
   2 gif2png gimp-perl xfig xpcd-gimp gd-utils
@@ -237,9 +244,9 @@ GRAPHICS
     3 ee
 
 ARCHIVING
-  5 dump ncompress sharutils unzip
+  5 dump ncompress sharutils unzip arkeia-server-shareware
   4 gtkzip
-  3 unarj
+  3 unarj unstuff
   2 zip mt-st taper
   1 lha
   GNOME
@@ -266,6 +273,7 @@ DATABASES
     1 MySQL-bench MySQL-devel
 
 GAMES
+  5 shogo-demo sin-demo
   4 clanbomber
   3 Maelstrom cxhextris freeciv gnuchess pingus xboard xboing xgammon xjewel xkobo xpat2
     xpilot xpuzzles xsoldier xdaliclock xearth xfishtank
@@ -307,7 +315,7 @@ DEVELOPMENT
 
   3 swig
 
-  4 python python-devel
+  4 python python-devel veepee
   3 tkinter python-imaging pygtk-glarea pygtk pygtk-libglade rpm-python
 
   4 perl perl-Term-Readline-Gnu perl-libnet perl-libwww-perl perl-devel
