@@ -754,7 +754,7 @@ sub miscellaneousNetwork {
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
-	#- 0 => _("Windows(TM)"), #- sorry :-)
+	0 => _("Welcome To Crackers"),
 	1 => _("Poor"),
 	2 => _("Low"),
 	3 => _("Medium"),

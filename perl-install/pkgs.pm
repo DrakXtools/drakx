@@ -226,10 +226,13 @@ sub readCompssList($$$) {
 	my $p = $e->{$name} or log::l("unknown entry $name (in compssList)"), next;
 	$p->{values} = \@values;
     }
+
+    my %done;
     foreach (split ':', $ENV{LANGUAGE}) {
 	my $locales = "locales-" . substr($_, 0, 2);
 	my $p = $packages->{$locales} or next;
 	foreach ($locales, @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
+	    next if $done{$_}; $done{$_} = 1;
 	    my $p = $packages->{$_} or next;
 	    $p->{values} = [ map { $_ + 70 } @{$p->{values}} ];
 	}
@@ -532,6 +535,10 @@ sub installCallback {
 sub install($$$) {
     my ($prefix, $isUpgrade, $toInstall) = @_;
     my %packages;
+
+#-    foreach (@$toInstall) {
+#-	  print "$_->{name}\n";
+#-    }
 
     return if $::g_auto_install;
 

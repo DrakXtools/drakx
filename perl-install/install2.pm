@@ -493,6 +493,7 @@ sub main {
 	my $f = ${{
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
+	    vga       => sub { $o->{vga16} = $v },
 	    step      => sub { $o->{steps}{first} = $v },
 	    expert    => sub { $::expert = 1 },
 	    beginner  => sub { $::beginner = 1 },
@@ -567,6 +568,12 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
+#-    #- needed very early to switch bad cards in VGA16
+#-    foreach (pci_probing::main::probe('')) {
+#-	  log::l("Here: $_->[0]");
+#-	  $_->[0] =~ /i740|ViRGE/ and add2hash_($o, { vga16 => 1 }), log::l("switching to VGA16 as bad graphic card");
+#-    }
+
     #- needed very early for install_steps_gtk
     eval { $o->{mouse} ||= mouse::detect() } unless $o->{nomouseprobe};
 
@@ -625,8 +632,6 @@ sub main {
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
-
-#-    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     #- have the really bleeding edge ddebug.log for this f*cking msec :-/
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };

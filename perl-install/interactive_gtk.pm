@@ -28,12 +28,12 @@ sub ask_from_listW {
 
     my $w = my_gtk->new(first(deref($title)), %$o);
     $w->{retval} = $def || $l->[0]; #- nearly especially for the X test case (see timeout in Xconfigurator.pm)
-    if (@$l < 5) { #- really ? : && sum(map { length $_ } @$l) < 90) {
+    if (@$l < 5) {
 	my $defW;
 	my $f = sub { $w->{retval} = $_[1]; Gtk->main_quit };
 	gtkadd($w->{window},
 	       gtkpack(create_box_with_title($w, @$messages),
-		       gtkadd((@$l < 3 ? create_hbox() : create_vbox()),
+		       gtkadd(@$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox(),
 			      map {
 				  my $b = new Gtk::Button($_);
 				  $b->signal_connect(clicked => [ $f, $_ ]);

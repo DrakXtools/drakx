@@ -190,7 +190,7 @@ sub new($$) {
 		0;
 	    };
 
-	     if (listlength(cat_("/proc/fb"))) {
+	     if (!$o->{vga16} && listlength(cat_("/proc/fb"))) {
 		 &$launchX("XF86_FBDev");
 		 $o->{allowFB} = 1; #- keep in mind FB is used.
 	     } else {

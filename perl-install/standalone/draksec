@@ -14,10 +14,10 @@ local $_ = join '', @ARGV;
 $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
 
-my $in = vnew interactive();
+my $in = vnew interactive('su');
 
 my %m = reverse (my %l = (
-  0 => _("Windows(TM)"),
+  0 => _("Welcome To Crackers"),
   1 => _("Poor"),
   2 => _("Low"),
   3 => _("Medium"),

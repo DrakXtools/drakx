@@ -169,9 +169,19 @@ sub mount_all($;$) {
 
     log::l("mounting all filesystems");
 
+    my ($hd_dev) = cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/hdimage| unless $::isStandalone;
+
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
-    foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
-	mount_part($_, $prefix) if $_->{mntpoint};
+    foreach (grep { $_->{mntpoint} } sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
+	if ($hd_dev && $_->{device} eq $hd_dev) {
+	    my $dir = "$prefix$_->{mntpoint}";
+	    $dir =~ s|/+$||;
+	    log::l("special hd case ($dir)");
+	    rmdir $dir;
+	    symlink "/tmp/hdimage", $dir;
+	} else {
+	  mount_part($_, $prefix);
+      }
     }
 }
 

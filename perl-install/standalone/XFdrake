@@ -40,11 +40,11 @@ my $f = "/usr/X11R6/lib/X11/Cards";
 -e $f or system("urpmi --auto XFree86 XFree86-75dpi-fonts");
 -e $f or die "install XFree86 first!\n";
 
+my $in = vnew interactive('su');
+
 `pidof xfs` > 0 or system("/etc/rc.d/init.d/xfs start");
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
-
-my $in = vnew interactive('su');
 
 my $i = $0 =~ Xdrakres ? Xconfig::getinfoFromXF86Config() : {};
 Xconfig::getinfo($i);

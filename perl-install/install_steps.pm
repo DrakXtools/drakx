@@ -265,8 +265,8 @@ sub afterInstallPackages($) {
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 
-    substInFile { s/^(GreetString)=/$1=Welcome to [HOSTNAME]/ } "$o->{prefix}/usr/share/config/kdmrc";
-    substInFile { s/(?<=UserView=)false/true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;
+    substInFile { s/^(GreetString)=.*/$1=Welcome to [HOSTNAME]/ } "$o->{prefix}/usr/share/config/kdmrc";
+    substInFile { s/^(UserView)=false/$1=true/ } "$o->{prefix}/usr/share/config/kdmrc" if $o->{security} < 3;    
     run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 
     #- move some file after an upgrade that may be seriously annoying.
@@ -492,6 +492,14 @@ sub addUser($) {
 	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
     }
     run_program::rooted($o->{prefix}, "/etc/security/msec/init-sh/grpuser.sh --refresh");
+
+    my @users = qw(tie brunette default girl woman-blond);
+    my @u = @users; push @u, @users while @u < @l; @u = @u[0..$#l];
+    foreach (@l) {
+	my $u = splice(@u, rand(@u), 1); #- known biased (see cookbook for better)
+	symlink "../../../../icons/util-$u.xpm", "$o->{prefix}/usr/share/apps/kdm/pics/users/$_->{name}.xpm";
+    }
+    symlinkf "../../../../icons/util-hat.xpm", "$o->{prefix}/usr/share/apps/kdm/pics/users/root.xpm";
 }
 
 #------------------------------------------------------------------------------

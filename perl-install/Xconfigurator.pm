@@ -281,9 +281,18 @@ sub testFinalConfig($;$$) {
 
     $skiptest || $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
 
-    $auto
-      or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"), 1)
-      or return 1;
+    #- needed for bad cards not restoring cleanly framebuffer
+    my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
+    log::l("the graphic card does not like X in framebuffer") if $bad_card;
+
+    my $mesg = _("Do you want to test the configuration?");
+    my $def = 1;
+    if ($bad_card && !$::isStandalone) {
+	!$::expert || $auto and return 1;
+	$mesg = $mesg . "\n" . _("Warning: testing is dangerous on this graphic card");
+	$def = 0;
+    }
+    $in->ask_yesorno(_("Test configuration"), $mesg, $def) or return 1;
 
     unlink "$prefix/tmp/.X9-lock";
 

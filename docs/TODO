@@ -2,13 +2,9 @@ cyrillic font buggy in DrakX
 
 mandrake_doc-xx, the symlink is no good in /usr/doc/mandrake as 
 
-in ftp install, locale not installed properly
-
 in ftp install, bug with X server install with wu-ftpd 2.6 (see http://www.wu-ftpd.org/broken-clients.html)
 
 remove xfs user from kdm
-
-when clicking on X configuration, installation of packages is not displayed
 
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
@@ -24,6 +20,9 @@ urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
 --------------------------------------------------------------------------------
+Xconfiguration: if "can't open fixed font", relaunch xfs.
+
+bug in defcfg in with lang=fr_FR, display is buggy
 
 bug keyboard focus: after switch in console at Xconfig step
 
@@ -86,9 +85,12 @@ cancel button in packages installation
 
 grub, chos
 
+(?)when clicking on X configuration, installation of packages is not displayed
+
 (?)maybe remove commented lines in /usr/lib/perl5/... files
 
 (?)timezone using a picture (pb: how to delimit zones)
+when asking GMT or not, display the time for each possibility
 the list is too big for USA
 
 (fpons)handle dat drives
@@ -221,3 +223,6 @@ suggested partition tables must be better foreach installClass
 (done,pix)locale (and fonts?) buggy in case ramdisk is used
 
 (done,pix)rpmdrake: Installed packages not in hdlist should be there
+
+(done)in ftp install, locale not installed properly
+
