@@ -378,7 +378,7 @@ my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
 @needed_to_install and $in->do_pkgs->install(@needed_to_install);
 #- second: try one by one if failure detected
-if (any { !-e $rpm2file{$_} } keys %rpm2file) {
+if (!$::testing && any { !-e $rpm2file{$_} } keys %rpm2file) {
     foreach (keys %rpm2file) {
 	-e $rpm2file{$_} or $in->do_pkgs->install($_);
 	-e $rpm2file{$_} or fatal_quit(N("Problems installing package %s", $_));
