@@ -44,9 +44,7 @@ sub set {
     run_program::rooted($::prefix, "/usr/sbin/msec", $run_level || 3);
 }
 
-sub level_choose {
-    my ($in, $security, $libsafe, $email) = @_;
-
+sub to_string {
     my %l = (
       0 => N("Welcome To Crackers"),
       1 => N("Poor"),
@@ -55,6 +53,12 @@ sub level_choose {
       4 => N("Higher"),
       5 => N("Paranoid"),
     );
+    $l{$_[0]};
+}
+
+sub level_choose {
+    my ($in, $security, $libsafe, $email) = @_;
+
     my %help = (
       0 => N("This level is to be used with care. It makes your system more easy to use,
 but very sensitive. It must not be used for a machine connected to others
@@ -75,7 +79,7 @@ connections from many clients. Note: if your machine is only a client on the Int
 		                 join('', map { "$l{$_}: " . formatAlaTeX($help{$_}) . "\n\n" } ikeys %l),
 		     interactive_help_id => 'miscellaneous',
 		   }, [
-              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_[0]} } },
+              { label => N("Security level"), val => $security, list => [ sort keys %l ], format => \&to_string },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
                 { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
                   N("A library which defends against buffer overflow and format string attacks.") }),
