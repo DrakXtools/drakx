@@ -898,7 +898,7 @@ sub new {
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	set_main_window_size($o);
 
-	$::WizardTable ||= Gtk2::Table->new(2, 2, 0);
+	$::WizardTable ||= Gtk2::VBox->new(0, 0);
 
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
@@ -922,13 +922,12 @@ sub new {
 		});
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
-		$::WizardTable->attach(gtkshow(Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title)),
-                                 0, 2, 0, 1, 'fill', 'fill', 0, 0);
+		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
 	    }
 	    $::WizardWindow->show;
 	}
 	$::WizardWindow->set_title($title);
-	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
+	gtkpack($::WizardTable, $o->{window});
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
 
