@@ -90,7 +90,7 @@ all: $(WHAT)
 
 profiling: $(OBJDIR)/libgmon.a $(OBJDIR)/pstart.o
 
-CFLAGS=-pipe -nostdinc
+CFLAGS=-pipe -nostdinc -fno-builtin
 CROSS=
 
 CC=gcc
@@ -117,11 +117,12 @@ LIBPTHREAD_OBJS=$(patsubst libpthread/%.c,$(OBJDIR)/%.o,$(shell ./threadsafe.sh)
 
 LIBGMON_OBJS=$(OBJDIR)/__mcount.o $(OBJDIR)/monitor.o $(OBJDIR)/profil.o
 
+ORIG_CFLAGS := $(CFLAGS)
 include $(ARCH)/Makefile.add
 
 LIBMATHOBJ=$(patsubst %,$(OBJDIR)/%,$(LIBMATH))
 
-ifeq ($(CFLAGS),-pipe -nostdinc)
+ifeq ($(CFLAGS),$(ORIG_CFLAGS))
 CFLAGS+=-O -fomit-frame-pointer
 endif
 
