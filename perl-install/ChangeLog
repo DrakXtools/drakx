@@ -1,3 +1,28 @@
+2001/04/17  dam's  <damien@mandrakesoft.com>
+
+	* bootlook.pm: chmoded autologin
+
+2001/04/17  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: fixed swap size instead of inst size for swap gap.
+	make sure kernel is selected.
+	fixed parted problem.
+
+	* rescue/tree/etc/oem-server: fixed swap size instead of inst size for
+	swap gap.
+	make sure kernel will be selected.
+
+2001/04/17  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (setRootPassword): set NIS to broadcast
+	when NIS asked. Empty NIS still means no NIS
+
+	* any.pm (setupBootloader): remove a warning
+
+2001/04/16  dam's  <damien@mandrakesoft.com>
+
+	* any.pm: removed Grub if Embedded
+
 2001/04/16  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: minor bug.
