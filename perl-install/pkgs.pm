@@ -225,7 +225,10 @@ sub packageCallbackChoices {
     } else {
 	my @l = grep {
 	    #- or if a kernel has to be chosen, chose the basic one.
-	    $_->arch ne 'src' && $_->name =~ /kernel-\d/ and return $_;
+	    if ($_->arch ne 'src') {
+		$_->name =~ /kernel-\d/ and return $_;
+		$_->name =~ /kernel-i686/ and return $_;
+	    }
 
 	    #- or even if a package requires a specific locales which
 	    #- is already selected.
