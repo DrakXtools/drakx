@@ -55,16 +55,6 @@ defaultroute
 
     write_secret_backend($isdn->{login}, $isdn->{passwd});
 
-    set_cnx_script($netc, "isdn", join('',
-"/sbin/route del default
-modprobe $isdn->{driver}", if_($isdn->{type}, " type=$isdn->{type}"),
-"
-/usr/sbin/isdnctrl dial ippp0
-", if_($isdn->{speed} =~ /128/, "service ibod restart
-")),
-"/usr/sbin/isdnctrl hangup ippp0
-"  . if_($isdn->{speed} =~ /128/, "service ibod stop
-"), $netc->{isdntype});
     1;
 }
 
