@@ -2110,7 +2110,7 @@ sub main {
 			{title => _("Printerdrake"),
 			 messages =>
 			     ($noprinters ? "" :
-			      _("he following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it.")),
+			      _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it.")),
 			 cancel => (""),
 			 ok => (""),
 			},

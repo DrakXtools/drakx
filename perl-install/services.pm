@@ -25,8 +25,7 @@ Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
 harddrake => __("HardDrake runs a hardware probe, and optionally configures
 new/changed hardware."),
-httpd => __("Apache is a World Wide Web server.  It is used to serve HTML files
-and CGI."),
+httpd => __("Apache is a World Wide Web server. It is used to serve HTML files and CGI."),
 inet => __("The internet superserver daemon (commonly called inetd) starts a
 variety of other internet services as needed. It is responsible for starting
 many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables
@@ -45,8 +44,7 @@ lpd => __("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
 lvs => __("Linux Virtual Server, used to build a high-performance and highly
 available server."),
-named => __("named (BIND) is a Domain Name Server (DNS) that is used to resolve
-host names to IP addresses."),
+named => __("named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."),
 netfs => __("Mounts and unmounts all Network File System (NFS), SMB (Lan
 Manager/Windows), and NCP (NetWare) mount points."),
 network => __("Activates/Deactivates all network interfaces configured to start
@@ -65,8 +63,7 @@ it installed on machines that don't need it."),
 portmap => __("The portmapper manages RPC connections, which are used by
 protocols such as NFS and NIS. The portmap server must be running on machines
 which act as servers for protocols which make use of the RPC mechanism."),
-postfix => __("Postfix is a Mail Transport Agent, which is the program that
-moves mail from one machine to another."),
+postfix => __("Postfix is a Mail Transport Agent, which is the program that moves mail from one machine to another."),
 random => __("Saves and restores system entropy pool for higher quality random
 number generation."),
 rawdevices => __("Assign raw devices to block devices (such as hard drive

@@ -403,7 +403,7 @@ my $r= "*** ". chomp_(`date`) . " ***\n";
 	   };
 
     $in->ask_from(_("service setting"),
-		  _("You will recieve an alert if one of the selected service is no more running"),
+		  _("You will receive an alert if one of the selected service is no more running"),
 		  [ map { {label => "$_", val=> \${$_}, type => "bool", text => "$l->{$_}[1]" }; } keys %$l
 		  ]) or goto begin;
 
@@ -414,7 +414,7 @@ my $r= "*** ". chomp_(`date`) . " ***\n";
 
   step_load:
     $in->ask_from(_("load setting"),
-		  _("You will recieve an alert if the load is upper than this value"),
+		  _("You will receive an alert if the load is higher than this value"),
 		  [
 		   { label => "load ", val => \$load, type => 'range', min => 1, max => 50 },
 		  ]) or goto step_service;
@@ -508,6 +508,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.5  2002/02/01 10:01:39  pablo
+# changed some strings to make translation easier
+#
 # Revision 1.4  2002/01/29 23:19:31  yduret
 # logdrake is now under gi/perl-install/standalone
 #
