@@ -493,7 +493,7 @@ sub create_okcancel {
     my $box = create_hbox($o_spread || "edge");
     
     $box->pack_start($_, 0, 0, 1) foreach @l2;
-    $box->pack_end($_, 0, 0, 1) foreach @r2, @l;
+    $box->pack_end($_, 0, 0, 1) foreach uniq(@r2, @l);
     foreach (@l2, @r2, @l) {
 	$_->show;
 	$_->can_default($wizard_buttons);
