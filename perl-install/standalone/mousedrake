@@ -11,9 +11,9 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: mousedrake [--auto] [--noauto] [--testing]\n";
 
-$::auto = /--auto/;
-$::noauto = /--noauto/;
-$::testing = /--testing/;
+$::auto = /-auto/;
+$::noauto = /-noauto/;
+$::testing = /-testing/;
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');

@@ -776,7 +776,9 @@ sub main {
 	!$@ || $@ =~ /ask_from_list cancel/ or die;
 	$in->kill;
     }
-
+    if (!$ok) {
+	$ok = !$in->ask_yesorno('', _("Forget the changes?"), 1);
+    }
     if ($ok) {
 	unless ($::testing) {
 	    my $f = "$prefix/etc/X11/XF86Config";

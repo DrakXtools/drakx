@@ -1,16 +1,28 @@
-DrakConf
+draksec is still buggy, don't try security >= 4
+
+BUG bootp in network install sigsegv
+
+missing alias ll for root
+
+bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
 bug in users: mandrake user is added twice in strange installs
-
-rpmdrake proposition for cdrom labels
-
-standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
 bug in diskdrake:
 in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
 in the middle, remove the first one. Result hda5 at the end and bug.
 
+urpmi.addmedia: |gzip instead of doing it afterwards
+rpmdrake: Installed packages not in hdlist should be there
+urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
+
+standalone applications for configuration (netdrake, authentificationconf, soundcard)
+
 --------------------------------------------------------------------------------
+
+rpmdrake proposition for cdrom labels
+
+detect ide burners and then add hdX=ide-scsi to kernel cmdline
 
 bug in upgrade: install from hda1:/usr/local/blah with hda1:/
 
@@ -187,4 +199,6 @@ suggested partition tables must be better foreach installClass
 (done(replaced by msec's),pix) bug: usermod -G urpmi a not done (full install)
 
 (done,pix)perl and .ph's
+
+? in ftp install, locale not installed properly
 

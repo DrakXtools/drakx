@@ -491,7 +491,7 @@ sub addUser($) {
 		chmod $mode, "$p$u->{home}";
 	    }
 	}
-	commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}")
+	eval { commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}") }
 	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
 
 	my $msec = "$o->{prefix}/etc/security/msec";

@@ -16,7 +16,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe tools/pnp_serial drakxtools	
 	cd ../drakxtools ; rm -rf install* ForMakefile.pm pkgs.pm ftp.pm t.pm standalone/CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config MonitorsDB Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake.rc $(STANDALONEPMS) *.pm)
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile Makefile.config MonitorsDB Newt c ddcprobe pnp_serial po pci_probing resize_fat diskdrake.rc $(STANDALONEPMS) icons *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):
@@ -26,6 +26,9 @@ $(DIRS):
 test_pms: verify_c
 	./perl2fcalls -excludec -excluderesize_fat::c_rewritten install2
 	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
+
+test_all: test_pms
+	for i in $(PMS); do perl -cw -I. $$i; done
 
 verify_c:
 	./verify_c $(PMS)

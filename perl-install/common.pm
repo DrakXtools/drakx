@@ -218,7 +218,7 @@ sub glob_ {
     ($f = quotemeta $f) =~ s/\\\*/.*/g;
 
     $d =~ m|/$| or $d .= '/';
-    map { $d eq './' ? $_ : "$d$_" } grep { /$f/ } all($d);
+    map { $d eq './' ? $_ : "$d$_" } grep { /^$f$/ } all($d);
 }
 
 

@@ -284,20 +284,9 @@ sub readCompssUsers {
 #-     $1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@;
 #- }
 
-sub setSelectedFromCompssList($$$$$$) {
-    my ($compssListLevels, $packages, $level, $install_class) = @_;
+sub setSelectedFromCompssList {
+    my ($compssListLevels, $packages, $min_level, $max_size, $install_class, $isUpgrade) = @_;
     my ($ind);
-
-    map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
-
-    foreach (allpackages($packages)) {
-	&select($packages, $_) if $_->{values}[$ind] >= $level;
-    }
-}
-
-sub setSelectedFromCompssList_($$$$$$) {
-    my ($compssListLevels, $packages, $size, $install_class, $isUpgrade) = @_;
-    my ($level, $ind) = 100;
 
     my @packages = allpackages($packages);
     my @places = do {
@@ -309,20 +298,20 @@ sub setSelectedFromCompssList_($$$$$$) {
     };
     foreach (@places) {
 	my $p = $packages[$_];
-	$level = min($level, $p->{values}[$ind]);
-	last if $level == 0;
+	last if $p->{values}[$ind] < $min_level;
 
 	&select($packages, $p) unless $isUpgrade;
 
 	my $nb = 0; foreach (@packages) {
 	    $nb += $_->{size} if $_->{selected};
 	}
-	if ($nb > $size) {
-	    unselect($packages, $p, $nb - $size) unless $isUpgrade;
+	if ($nb > $max_size) {
+	    unselect($packages, $p, $nb - $max_size) unless $isUpgrade;
+	    $min_level = $p->{values}[$ind];
 	    last;
 	}
     }
-    $ind, $level;
+    $ind, $min_level;
 }
 
 sub init_db {

@@ -11,7 +11,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: draksec [--expert]\n";
 
-$::expert = /--expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
+$::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
@@ -28,7 +28,9 @@ delete @l{0,1,5} unless $::expert;
 
 if (my $level = $in->ask_from_list('', _("Choose security level"), [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
     my $w = $in->wait_message('', _("Setting security level"));
+    $in->suspend;
     system("/etc/security/msec/init.sh ". $m{$level});
+    $in->resume;
 }
 
 $in->exit(0);

@@ -28,12 +28,12 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: XFdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
-$::beginner = /--beginner/;
-$::expert = /--expert/;
-$::auto = /--auto/;
-$::noauto = /--noauto/;
-$::skiptest = /--skiptest/;
-$::testing = /--testing/;
+$::beginner = /-beginner/;
+$::expert = /-expert/;
+$::auto = /-auto/;
+$::noauto = /-noauto/;
+$::skiptest = /-skiptest/;
+$::testing = /-testing/;
 $::isStandalone = 1;
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing

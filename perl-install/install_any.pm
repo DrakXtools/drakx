@@ -482,7 +482,7 @@ sub install_urpmi {
 
     (my $name = _("installation")) =~ s/\s/_/g; #- in case translators are too good :-/
 
-    my $f = "$prefix/etc/urpmi/hdlist.$name";
+    my $f = "$prefix/var/lib/urpmi/hdlist.$name";
     {
 	my $fd = getFile("hdlist") or return;
 	local *OUT;
@@ -492,11 +492,11 @@ sub install_urpmi {
     }
     {
 	local *F = getFile("depslist");
-	output("$prefix/etc/urpmi/depslist", <F>);
+	output("$prefix/var/lib/urpmi/depslist", <F>);
     }
     {
 	local *LIST;
-	open LIST, ">$prefix/etc/urpmi/list.$name" or log::l("failed to write list.$name"), return;
+	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name"), return;
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
                       hd => "file:/" . hdInstallPath,

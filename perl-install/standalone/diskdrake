@@ -36,8 +36,8 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: XFdrake [--expert] [--testing]\n";
 
-$::expert = /--expert/;
-$::testing = /--testing/;
+$::expert = /-expert/;
+$::testing = /-testing/;
 $::isStandalone = 1;
 
 if ($>) {

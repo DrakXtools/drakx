@@ -13,7 +13,7 @@ use common qw(:common :file :functional :system);
 use partition_table qw(:types);
 use my_gtk qw(:helpers :wrappers);
 use Gtk;
-use Gtk::XmHTML;
+#use Gtk::XmHTML;
 use devices;
 use fsedit;
 use modules;
@@ -300,12 +300,13 @@ When sure, press Ok."))) {
 #------------------------------------------------------------------------------
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
+    my $size = install_any::getAvailableSpace($o) * 0.7;
 
     if ($::beginner) {
 	require pkgs;
-	pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{isUpgrade});
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 1, $size, $o->{installClass}, $o->{isUpgrade});
     } else {
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 90, $o->{installClass}) unless $::expert || $o->{isUpgrade};
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, $::expert ? 95 : 80, $size, $o->{installClass}) unless $::expert || $o->{isUpgrade};
 	install_steps_interactive::choosePackages(@_);
 	chooseSizeToInstall(@_);
 	choosePackagesTree(@_) if $::expert;
@@ -316,7 +317,7 @@ sub chooseSizeToInstall {
     my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
     my $current = pkgs::correctSize((sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024));
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($current * 1.2, $current, $availableSpace);
+    my $adj = create_adjustment($current * 1.3, $current, $availableSpace);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},
@@ -335,9 +336,9 @@ sub chooseSizeToInstall {
     $w->main or return;
 
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
-      pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, 
-				       pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
-				       $o->{installClass}, $o->{isUpgrade});
+      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 0,
+				      pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
+				      $o->{installClass}, $o->{isUpgrade});
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
@@ -556,7 +557,7 @@ sub installPackages {
 	    $nb = $_[0];
 	    $total_size = $_[1]; $current_total_size = 0;
 	    $start_time = time();
-	    $msg->set(_("%d packages", $nb) . _(", %U MB", $total_size / 1024 / 1024));
+	    $msg->set(_("%d packages", $nb) . _(", %U MB", pkgs::correctSize($total_size / sqr(1024))));
 	    $w->flush;
 	} elsif ($m =~ /^Starting installing package/) {
 	    $progress->update(0);
@@ -673,7 +674,7 @@ sub create_help_window {
 #-    my @pixmap = Gtk::Gdk::Pixmap->create_from_xpm_d($w->{window}->window, undef, @l);
 #-    gtkadd($b, new Gtk::Pixmap(@pixmap));
 
-    Gtk::XmHTML->init;
+#    Gtk::XmHTML->init;
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
 #-		    0, $b,

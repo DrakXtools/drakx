@@ -347,7 +347,6 @@ notation (for example, 1.2.3.4)."),
 			     focus_out => sub {
 				 $intf->{NETMASK} = network::netmask($intf->{IPADDR}) unless $_[0]
 			     }
-
 			    );
 }
 
@@ -362,7 +361,7 @@ _("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
-			     [_("Host name:"), _("DNS server:"), _("Gateway:"), !$::beginner ? _("Gateway device:") : ()],
+			     [_("Host name:"), _("DNS server:"), _("Gateway:"), $::expert ? _("Gateway device:") : ()],
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
 			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );

@@ -619,6 +619,8 @@ sub main {
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
 
+    run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
+
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
 

@@ -9,8 +9,8 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: adduserdrake [--beginner] [--expert]\n";
 
-$::beginner = /--beginner/;
-$::expert = /--expert/;
+$::beginner = /-beginner/;
+$::expert = /-expert/;
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
