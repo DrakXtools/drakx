@@ -64,10 +64,10 @@ listed means there is some support for it anyway. That is, once GNU/Linux
 will be installed, you will be able to at least read and write in that
 language; and possibly more (various fonts, spell checkers, various programs
 translated etc. that varies from language to language).") if $o->{lang} !~ /^en/ && translate("_I18N_");
-
-#-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
-#-"Warning no warranty", 
-#-			 [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or _exit(1) unless $o->{useless_thing_accepted};
+    
+    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
+						      "License - no warranty", 
+						      [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or _exit(1) unless $o->{useless_thing_accepted};
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
@@ -355,7 +355,7 @@ sub choosePackages {
 		$l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
 		$l[1] > $l[0] + 100 or splice(@l, 0, 1);
 		my @text = (__("Minimum (%dMB)"), __("Recommended (%dMB)"), __("Complete (%dMB)"));
-		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l) * sqr(1024);
+		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
 	    }

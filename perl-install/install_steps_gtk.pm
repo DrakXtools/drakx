@@ -177,7 +177,7 @@ sub selectMouse {
 
     my %old = %{$o->{mouse}};
     $o->SUPER::selectMouse($force);
-    $old{FULLNAME} eq $o->{mouse}{FULLNAME} && !$force and return;
+    $old{type} eq $o->{mouse}{type} && $old{name} eq $o->{mouse}{name} && !$force and return;
 
     local $my_gtk::grab = 1; #- unsure a crazy mouse don't go wild clicking everywhere
 

@@ -176,8 +176,8 @@ sub cardConfiguration(;$$$) {
     undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
-    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
-    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
+    $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
+    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq 'Other|Unlisted';
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });

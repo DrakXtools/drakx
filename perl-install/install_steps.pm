@@ -151,7 +151,10 @@ sub doPartitionDisksAfter {
 	my ($part) = grep { $_->{device} eq $s->{device} } @{$o->{fstab}};
 	$part->{isMounted} ?
 	  do { rmdir "/tmp/hdimage" ; symlinkf("$o->{prefix}$part->{mntpoint}", "/tmp/hdimage") } :
-	  eval { fs::mount($s->{device}, "/tmp/hdimage", $s->{type}) };
+	  eval { 
+	      fs::mount($s->{device}, "/tmp/hdimage", $s->{type});
+	      $part->{isMounted} = 1;
+	  };
     }
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
