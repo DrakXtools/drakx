@@ -48,7 +48,7 @@ clean:
 	@rm -rf drakx-help.xml .memdump doc empty.po tmp.* messages tmp.pot *.mo $(POFILES:%=%t)
 
 check:
-	@grep -F '$$' DrakX.pot && { echo "bad translation strings (contains \$$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"; exit 1; } ||:
+	@grep '[^\\]\$$' DrakX.pot && { echo 'bad translation strings (contains $$) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^'; exit 1; } ||:
 
 verif:
 	perl -ne '/^\s*#/ or $$i += my @l = /\b__?\(/g; END { print "$$i\n" }' $(PMSFILES)
