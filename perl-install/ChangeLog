@@ -1,3 +1,184 @@
+2003/03/04  florin
+
+	* standalone/drakgw: simplified form (pixel)
+
+2003/03/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+2003/03/04  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake/hd_gtk.pm: 
+	  - in focus_in_event for partition buttons, grab_focus is needed
+	because gtk2 is buggy. Forcing an expose event would be enough
+	  - in button_press_event for partition buttons, grab_focus is needed
+	because gtk2 is buggy. The creation of widgets causes the lost of the
+	focus
+	(fixes part of #2621)
+
+	* share/rpmsrate: move imap to NETWORKING_MAIL_SERVER (bug #2622)
+
+	* rescue/tree/etc/profile: 
+	  - unsetting LD_LIBRARY_PATH: setting LD_LIBRARY_PATH to libraries in
+	/mnt is
+	wrong since the ld loader used (/lib/ld-linux.so.2) won't use the one in
+	/mnt,
+	causing dependency problems.
+	  - removing /mnt dirs from PATH (which are not useful anymore since the
+	corresponding libraries won't be found)
+	(fixes bug #2554)
+
+	* install_steps_interactive.pm: fix typo
+
+	* network/nfs.pm (check): fix return value (bug introduced with checking
+	portmap is running)
+
+	* lang.pm: make perl_checker happy
+
+	* services.pm: in drakxservices, don't stop services if one is using the
+	gtk frontend (since it allows one to start/stop services)
+	this allows to skip stopping service "dm" (bug #2664)
+
+2003/03/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakboot: remove debuging assertions (as spoted by gc)
+
+	* standalone/drakperm: 
+	  - remove last warning
+	  - remove unused variables
+	  - fix #1776 (part one): make up and down button be usefull instead of
+	nop (this need an updated perl-GTK2 though)
+	  - let up, down, delete and edit buttons be insensitive when selection
+	  is destroyed or when there's no selection
+	  - fix #1776 part two (do not insert dummy lines)
+	  - restore special lines with current keyword
+	  - reuse already defined path
+
+2003/03/03  alafox
+
+	* share/po/ru.po: updated and partially proofread. need more lproof
+
+2003/03/03  alus
+
+	* share/po/pl.po: updated
+
+2003/03/03  florin
+
+	* standalone/drakgw: add an extra first choose the net device step
+
+2003/03/03  François Pons  <fpons@mandrakesoft.com>
+
+	* network/tools.pm: simplified unquotify.
+
+	* network/adsl.pm: simplified code of adsl_ask_info, password can be
+	retrieved using
+	passwd_by_login which was not used with computed login from
+	/etc/ppp/peers/adsl
+	or /etc/ppp/options or /etc/ppp/options.adsl.
+
+2003/03/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: thx po validato
+
+	* any.pm, drakxtools.spec: any::selectLanguage: in standalone, don't
+	categorize langs, for
+	better looking (since most people will have very few of them)
+
+	* share/po/validate.pl: make it useful
+	  - print problems with GREP_COLOR
+	  - have enough exceptions to get usable errors
+
+	* interactive/gtk.pm: a few treeview/list fixes:
+	  - when selecting a value, scroll it like in treeview/tree
+	  - use saved_default_val dirty hackery to really honour default value
+	  - fix not calling $select again when trying to select an already
+	selected value (happens when clicking or keyboard-selecting;
+	  broken, it ended up in always scrolling the selected value to
+	  the center)
+
+2003/03/03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/lt.po, share/po/he.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/sq.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/it.po: updated Italian file
+	updated pot file
+
+	* share/po/et.po, share/po/fi.po, share/po/nl.po: updated Estonian,
+	Finnish and Dutch files
+	updated pot file
+
+2003/03/03  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm (n_line_size): spacing for default font using XFT is 3
+
+	* install_steps_interactive.pm: add some explaination for translators
+	translate _bootloader_ on _device_
+	translate mouse names
+
+	* install_interactive.pm: use formatAlaTeX() for the warning "DrakX will
+	now resize your Windows partition..."
+
+	* share/po/help-fr.pot, share/po/help-de.pot, help.pm,
+	share/po/help-es.pot: update from xml
+
+	* share/rpmsrate: add ncurses-devel in DEVELOPMENT
+
+	* Xconfig/various.pm (runlevel): fix typo
+
+2003/03/03  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/detect.pm: Fixed bug of USB printers which do not report back an
+	IEEE-1284 ID string after
+	three attempts being invisible instead of being listed as an "Unknown
+	device".
+
+	* printer/data.pm, printer/printerdrake.pm: Fixed bug of wrong function
+	call to display the spooler name (Titi's untested changes).
+
+2003/03/03  tpittich
+
+	* share/po/sk.po: updated slovak translation
+	updated slovak translation
+	change code page to utf-8
+
+2003/03/03  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: 9.1-13mdk
+	9.1-12mdk
+
+	* share/po/fr.po: unfuzzy()
+	fix translation
+
+	* standalone/harddrake2: 
+	  - remove a warning
+	  - better scsi bus location
+	reap zombie children (aka fix mem leak :-( )
+
+	* standalone/drakboot: 
+	  - fix #2091 and #2480 (settings restoration
+	  - make dialogs be modal
+
+	* standalone/drakperm: remove unused $rows_cnt
+	smoother gui: let main windows be unreachable until modal dialog is
+	closed
+	fix bug reported by Cédric Thévenet (impossible to save newly edited
+	rules)
+
+	* share/po/help-fr.pot, share/po/help-de.pot, share/po/help-es.pot,
+	share/po/help-it.pot: revert to non broken version
+
 2003/03/02  alafox
 
 	* share/po/ru.po: updated
@@ -13693,7 +13874,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.799 2003/02/28 22:36:27 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.800 2003/03/03 00:35:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
