@@ -476,7 +476,7 @@ sub setup {
     } elsif (-e (my $f = "$ENV{SHARE_PATH}/keymaps/$kmap.bkmap")) {
 	load(scalar cat_($f));
     } else {
-	my $kid = run_program::bg_command(sub {
+	my $kid = bg_command->new(sub {
 	    eval {
 		require packdrake;
 		my $packer = new packdrake("$ENV{SHARE_PATH}/keymaps.cz2", quiet => 1);
