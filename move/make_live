@@ -181,6 +181,10 @@ substInFile {
     s/mandrake_doc-(en|fr)/mandrake_doc-move-$1/g;
 } "$::prefix/usr/lib/menu/simplified/mandrake_desk";
 
+substInFile {
+    s!/es/Starter.html/!/en/Starter.html/!;
+} "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-es.html";
+
 $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
 run_program::rooted($::prefix, 'update-menus', '-n');
 
