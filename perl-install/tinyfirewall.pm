@@ -82,10 +82,8 @@ sub SaveConfig {
 		or die _("Can't open %s: %s\n", $config_file, $!);
 	open TMPFILE, ">$tmp_file"
 		or die _("Can't open %s for writing: %s\n", $tmp_file, $!);
-	while (my $line = <CONFIGFILE>)
-	{
-		if ($line =~ m/^(.+)\s*\=\s*"(.*)"/)
-		{
+	while (my $line = <CONFIGFILE>) {
+	     if ($line =~ m/^(.+)\s*\=\s*"(.*)"/) {
 			my ($variable, $value) = ($1, $2);
 			my $newvalue = $settings{$variable};
 			$line =~ s/".*"/"$newvalue"/
