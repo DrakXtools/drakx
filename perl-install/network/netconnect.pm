@@ -873,8 +873,8 @@ notation (for example, 1.2.3.4).")),
                     pre => sub {
                         $ethntf->{wireless_eth} = 1;
                         $netc->{wireless_eth} = 1;
-                        $ethntf->{WIRELESS_MODE} = "Managed";
-                        $ethntf->{WIRELESS_ESSID} = "any";
+                        $ethntf->{WIRELESS_MODE} ||= "Managed";
+                        $ethntf->{WIRELESS_ESSID} ||= "any";
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => sub {
