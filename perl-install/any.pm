@@ -358,7 +358,7 @@ sub setupBootloader__entries {
 	    @l = @l[0..2] unless $::expert;
 	} else {
 	    @l = ( 
-{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => N("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab, detect_devices::floppies_dev() ], not_edit => !$::expert },
 if_(arch() !~ /sparc|ppc|ia64/,
 { label => N("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @{$all_hds->{hds}} ], not_edit => !$::expert },
 { label => N("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
