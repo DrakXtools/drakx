@@ -298,7 +298,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
 
     #- hack for ATI Mach64 card where two options should be used if using Utah-GLX.
-    if ($card->{type} =~ /ATI Mach64/) {
+    if ($card->{identifier} =~ /3D Rage Pro AGP/) {
 	$card->{options_xf3}{no_font_cache} = $card->{Utah_glx};
 	$card->{options_xf3}{no_pixmap_cache} = $card->{Utah_glx};
     }

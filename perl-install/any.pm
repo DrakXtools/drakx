@@ -361,21 +361,19 @@ END
 'ABORT' 'Invalid Login'
 'ABORT' 'Login incorrect'
 '' 'ATZ'
-'OK'
 END
     if ($modem->{special_command}) {
 	print CHAT <<END;
-'$modem->{special_command}'
-'OK'
+'OK' '$modem->{special_command}'
 END
     }
     print CHAT <<END;
-'ATDT$toreplace{phone}'
+'OK' 'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
     if ($modem->{auth} eq 'Terminal-based' || $modem->{auth} eq 'Script-based') {
 	print CHAT <<END;
-'ogin:' '$toreplace{login}'
+'ogin:--ogin:' '$toreplace{login}'
 'ord:' '$toreplace{passwd}'
 END
     }
@@ -405,9 +403,66 @@ END
 	chmod 0600, $secrets;
     }
 
-    #-install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
+    #- install kppprc file according to used configuration.
     commands::mkdir_("-p", "$prefix/usr/share/config");
-    template2file("$ENV{SHARE_PATH}/kppprc.in", "$prefix/usr/share/config/kppprc", %toreplace);
+    local *KPPPRC;
+    open KPPPRC, ">$prefix/usr/share/config/kppprc" or die "Can't open $prefix/usr/share/config/kppprc: $!";
+    print KPPPRC <<END;
+# KDE Config File
+[Account0]
+ExDNSDisabled=0
+AutoName=0
+ScriptArguments=
+AccountingEnabled=0
+Phonenumber=$toreplace{phone}
+IPAddr=0.0.0.0
+Domain=$toreplace{domain}
+Name=$toreplace{connection}
+VolumeAccountingEnabled=0
+pppdArguments=
+Password=$toreplace{passwd}
+BeforeDisconnect=
+Command=
+ScriptCommands=
+Authentication=$toreplace{pppauth}
+DNS=$toreplace{dnsserver}
+SubnetMask=0.0.0.0
+AccountingFile=
+DefaultRoute=1
+Username=$toreplace{login}
+Gateway=0.0.0.0
+StorePassword=1
+DisconnectCommand=
+[Modem]
+BusyWait=0
+Enter=CR
+FlowControl=CRTSCTS
+Volume=0
+Timeout=60
+UseCDLine=0
+UseLockFile=1
+Device=/dev/modem
+Speed=57600
+[Graph]
+InBytes=0,0,255
+Text=0,0,0
+Background=255,255,255
+Enabled=true
+OutBytes=255,0,0
+[General]
+QuitOnDisconnect=0
+ShowLogWindow=0
+DisconnectOnXServerExit=1
+DefaultAccount=$toreplace{connection}
+iconifyOnConnect=1
+Hint_QuickHelp=0
+AutomaticRedial=0
+PPPDebug=0
+NumberOfAccounts=1
+ShowClock=1
+DockIntoPanel=0
+pppdTimeout=30
+END
 
     miscellaneousNetwork($prefix);
 }
