@@ -186,6 +186,7 @@ if (-e "/boot/vmlinuz" && -e "/boot/hd.rdz" || -e "/cdrom/boot/vmlinuz" && -e "/
 
 mkdir "/hd/Mandrake";
 mkdir "/hd/Mandrake/RPMS";
+system "cp", "-a", "/cdrom/VERSION", "/hd";
 system "cp", "-a", "/cdrom/Mandrake/base", "/cdrom/Mandrake/mdkinst", "/hd/Mandrake";
 
 print "Setting bootloader\n";
