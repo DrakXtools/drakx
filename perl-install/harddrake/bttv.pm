@@ -205,7 +205,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
 	     'radio=' . ($conf{radio} ? 1 : 0) . ' '.
 	     join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers));
 	   log::l("[harddrake::bttv] $options");
-	   standalone::explanations("modified file /etc/modules.conf ($options)"); $::isStandalone;
+	   standalone::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
 	   modules::set_options("bttv", $options) if $options;
 	 }
 }
