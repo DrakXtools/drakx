@@ -243,7 +243,7 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 %printer_type = (
     __("Local printer")     => "LOCAL",
     __("Remote lpd")        => "REMOTE",
-    __("SMB/Windows 95/NT") => "SMB",
+    __("SMB/Windows 95/98/NT") => "SMB",
     __("NetWare")           => "NCP",
 );
 %printer_type_inv = reverse %printer_type;

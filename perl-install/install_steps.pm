@@ -65,8 +65,8 @@ sub leavingStep($$) {
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
 	$o->ask_warn(_("Error"), [
-_("An error occurred, but I don't know how to handle it nicely,
-so continue at your own risk :("), $@ ]) if $@;
+_("An error occurred, but I don't know how to handle it nicely.
+Continue at your own risk."), $@ ]) if $@;
     }
 }
 

@@ -20,14 +20,17 @@ Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 selectInstallClass =>
  __("Select:
 
-  - Beginner: If you have never installed Linux before, click here.
+  - Beginner: If you have never installed Linux before.
+
 
   - Developer: If you are familiar with Linux and will be using the
 computer primarily for software development, you will find happiness
 here.
 
+
   - Server: If you wish to install a general purpose server (for mail,
 printing...), select this.
+
 
   - Expert: If you are fluent with GNU/Linux and want to perform
 a highly customized installation, this Install Class is for you."),
@@ -37,16 +40,19 @@ setupSCSI =>
 SCSI adapter(s). If it finds it (or them)  and knows which driver(s)
 to use, it will insert it (them)  automatically.
 
-If your SCSI adapter is ISA, or is PCI but DrakX doesn't know
-which driver to use for this card, or if you have no SCSI adapters
-at all, you will then be prompted on whether you have one or not.
-If you have none, answer \"No\". If you have one or more, answer
-\"Yes\". A list of drivers will then pop up, from which you will
-have to select one.
+
+If your SCSI adapter is an ISA board, or is a PCI board but DrakX
+doesn't know which driver to use for this card, or if you have no
+SCSI adapters at all, you will then be prompted on whether you have
+one or not. If you have none, answer \"No\". If you have one or more,
+answer \"Yes\". A list of drivers will then pop up, from which you
+will have to select one.
+
 
 After you have selected the driver, DrakX will ask if you
 want to specify options for it. First, try and let the driver
 probe for the hardware: it usually works fine.
+
 
 If not, do not forget the information on your hardware that you
 could get from your documentation or from Windows (if you have it
@@ -93,7 +99,7 @@ of its dependencies.
 
 Information on each category and specific package is available in the
 area titled \"Info\",  located between list of packages and the five
-buttons \"Go\", \"Select more/less\" and \"Show more/less\"."),
+buttons \"Install\", \"Select more/less\" and \"Show more/less\"."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation
@@ -324,7 +330,7 @@ of its dependencies.
 
 Information on each category and specific package is available in the
 area titled \"Info\",  located between list of packages and the five
-buttons \"Go\", \"Select more/less\" and \"Show more/less\"."),
+buttons \"Install\", \"Select more/less\" and \"Show more/less\"."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation
