@@ -183,6 +183,10 @@ sub allocatePartitions($$) {
 
 sub auto_allocate($;$) {
     my ($hds, $suggestions) = @_;
-    allocatePartitions($hds, $suggestions || \@suggestions);
+    my %mntpoints; map { $mntpoints{$_->{mntpoint}} = 1 } get_fstab(@$hds);
+    allocatePartitions($hds, [
+			      grep { ! $mntpoints{$_->{mntpoint}} }
+			      @{ $suggestions || \@suggestions } 
+			     ]);
     map { partition_table::assign_device_numbers($_) } @$hds;
 }

@@ -19,7 +19,7 @@ my %languages = (
   "ro" => [ "Romanian",  "lat2-sun16",	"iso02",	"ro_RO" ],
   "sk" => [ "Slovak",    "lat2-sun16",	"iso02",	"sk_SK" ],
   "ru" => [ "Russian",   "Cyr_a8x16", 	"koi2alt",	"ru_SU" ],
-"uk_UA"=> [ "Ukrainian", "RUSCII_8x16",	"koi2alt",	"uk_UA" ],
+"uk_UA"=> [ "Ukrainian", "ruscii_8x16",	"koi2alt",	"uk_UA" ],
 );
 
 1;
@@ -39,7 +39,7 @@ sub set {
     if ($lang) {
 	$ENV{LANG} = $ENV{LINGUAS} = $lang;
 	$ENV{LC_ALL} = $languages{$lang}->[3];
-	my $f = $languages{$lang}->[1]; $f and load_font($f);
+	#if (my $f = $languages{$lang}->[1]) { load_font($f) }
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
@@ -74,7 +74,7 @@ sub write {
 
 sub load_font {
     my ($fontFile) = @_;
-    cpio::installCpioFile("/etc/fonts.cgz", $fontFile, "/tmp/font", 1) or die "error extracting $fontFile from /etc/fonts.cfz";
-    c::loadFont('/tmp/font') or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
+    log::l("loading font /usr/share/consolefonts/$fontFile.psf");
+    c::loadFont("/tmp/$fontFile") or log::l("error in loadFont: one of PIO_FONT PIO_UNIMAPCLR PIO_UNIMAP PIO_UNISCRNMAP failed: $!");
     print STDERR "\033(K";
 }

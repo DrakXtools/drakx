@@ -5,6 +5,7 @@ use strict;
 use vars qw($fd);
 
 use common qw(:common :file);
+use install_any;
 use log;
 use smp;
 use fs;
@@ -119,7 +120,7 @@ sub init_db {
 }
 
 sub install {
-    my ($prefix, $method, $toInstall, $isUpgrade, $force) = @_;
+    my ($prefix, $toInstall, $isUpgrade, $force) = @_;
 
     my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();
     log::l("opened rpm database");
@@ -131,7 +132,7 @@ sub install {
     foreach my $p (@$toInstall) {
 	my $fullname = sprintf "%s-%s-%s.%s.rpm", 
 	                       map { c::headerGetEntry($p->{header}, $_) } qw(name version release arch);
-	c::rpmtransAddPackage($trans, $p->{header}, $method->getFile($fullname) , $isUpgrade);
+	c::rpmtransAddPackage($trans, $p->{header}, install_any::imageGetFile($fullname) , $isUpgrade);
 	$nb++;
 	$total += $p->{size};
     }

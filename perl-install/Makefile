@@ -1,10 +1,10 @@
 SO_FILES = c/blib/arch/auto/c/c.so
-PMS = *.pm c/*.pm resize_fat/*.pm commands install2 diskdrake
+PMS = *.pm c/*.pm resize_fat/*.pm po/*.pm commands install2 diskdrake
 DEST = /tmp/t/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
-EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps
+EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps consolefonts
 
 .PHONY: all po tags install clean verify_c
 
@@ -50,7 +50,7 @@ test_pms: verify_c
 verify_c:
 	./verify_c $(PMS)
 
-install_pms: $(SO_FILES)
+install_pms: all
 	for i in `perl -ne 's/sub (\w+?)_? {.*/$$1/ and print' commands.pm`; do ln -sf commands $(DEST)/usr/bin/$$i; done
 
 	install -d $(DESTREP4PMS)
@@ -108,6 +108,7 @@ get_needed_files: $(SO_FILES)
 
 	cp -a xmodmaps $(DEST)/usr/share
 	cp -a keymaps $(DEST)/usr/share
+	cp -a consolefonts $(DEST)/usr/share
 
 	echo -e "#!/usr/bin/perl\n\nsymlink '/tmp/rhimage/usr/lib/perl5', '/usr/lib/perl5';\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
 	chmod a+x $(DEST)/usr/bin/runinstall2

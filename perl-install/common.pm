@@ -85,7 +85,8 @@ sub translate {
     my ($s) = @_;
     unless (defined %po::I18N::I18N) {
 	if (my ($lang) = ($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG}) =~ /(..)/) {
-	    eval { require "po/$lang.pm" }; $@ and warn "no translation in $lang available\n";
+	    local $SIG{__DIE__} = 'none';
+	    eval { require "po/$lang.pm" };
 	}
     }
     $po::I18N::I18N{$s} || $s;

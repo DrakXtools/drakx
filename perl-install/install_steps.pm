@@ -40,7 +40,6 @@ sub leavingStep($$) {
 }
 
 sub chooseLanguage($) {
-#    eval { run_program::run('loadkeys', "/tmp/$o->{default}->{lang}) }; $@ and log::l("loadkeys failed");
     $o->{default}->{lang};
 }
 sub selectInstallOrUpgrade($) {
@@ -78,8 +77,6 @@ sub choosePackages($$$) {
 
 sub beforeInstallPackages($) {
 
-    $o->{method}->prepareMedia($o->{prefix}, $o->{fstab}) unless $::testing;
-
     foreach (qw(dev etc home mnt tmp var var/tmp var/lib var/lib/rpm)) {
 	mkdir "$o->{prefix}/$_", 0755;
     }
@@ -96,7 +93,7 @@ sub beforeInstallPackages($) {
 sub installPackages($$) {
     my ($o, $packages) = @_;
     my $toInstall = [ grep { $_->{selected} } values %$packages ];
-    pkgs::install($o->{prefix}, $o->{method}, $toInstall, $o->{isUpgrade}, 0);
+    pkgs::install($o->{prefix}, $toInstall, $o->{isUpgrade}, 0);
 }
 
 sub afterInstallPackages($) {
@@ -205,7 +202,7 @@ sub setupXfree {
     $o->{packages}->{$x} or die "can't find X server $x";
 
     log::l("I will install the $x package");
-    pkgs::install($o->{prefix}, $o->{method}, $o->{packages}->{$x}, $o->{isUpgrade}, 0);
+    pkgs::install($o->{prefix}, $o->{packages}->{$x}, $o->{isUpgrade}, 0);
 
     #TODO
 }

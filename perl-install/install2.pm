@@ -19,7 +19,7 @@ use pkgs;
 use smp;
 use lang;
 
-$::testing = 1;#$ENV{PERL_INSTALL_TEST};
+$::testing = $ENV{PERL_INSTALL_TEST};
 $INSTALL_VERSION = 0;
 
 my @installStepsFields = qw(text help skipOnCancel skipOnLocal prev next);
@@ -93,7 +93,7 @@ my $default = {
 #    display => "jaba:1",
     user => { name => 'foo', password => 'foo', shell => '/bin/bash', realname => 'really, it is foo' },
     rootPassword => 'toto',
-    lang => 'us',
+    lang => 'fr',
     isUpgrade => 0,
     installClass => 'Server',
     bootloader => { onmbr => 1, linear => 0 },
