@@ -1,5 +1,64 @@
 2001/03/08  dam's  <damien@mandrakesoft.com>
 
+	* common.pm: added if__
+
+	* netconnect.pm: applied if__
+
+2001/03/08  François Pons  <fpons@mandrakesoft.com>
+
+	* diskdrake.pm: avoid using e2fsck, else it abort by checking partition
+	size (which differs).
+	fix resize ext2 by using resize2fs.
+
+	* pkgs.pm: changed choice of package for selection.
+
+	* share/list: added resize2fs and dumpe2fs, removed ext2resize which is
+	replaced.
+
+2001/03/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: do not segfault in dhcp stuff, when af_packet is not
+	honoured by kernel
+
+2001/03/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/no.po: updated Norwegian file
+
+2001/03/08  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: advertising modifs
+	(setPackages): use burners instead of IDEburners
+
+	* bootloader.pm: cleanup
+
+	* interactive.pm (ask_from_listf_no_check): catch wizcancel and return
+	undef
+
+	* fs.pm (write_fstab): change again for 'none' checking the mount point
+	(write_fstab): special case for device ``none'' (which can be mounted
+	twice or more :)
+
+	* my_gtk.pm (_create_window): on delete_event, destroy the window and
+	raise wizcancel
+
+	* share/po/fr.po: fix bad translation
+
+	* share/rpmsrate: add i18n'ed packages
+	raise kdebase
+
+	* install2.pm, install_steps.pm, install_steps_gtk.pm: advertising modifs
+
+	* detect_devices.pm: cleanup
+	(isBurner): use syslog to detect scsi burners
+
+2001/03/08  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_steps_gtk.pm: encourage Xpmac to run in at least 16bpp
+
+	* partition_table_mac.pm: fixed variable referencing - thx Pixel
+
+2001/03/08  dam's  <damien@mandrakesoft.com>
+
 	* netconnect.pm: corrected bad pci number -> string
 
 2001/03/08  Pablo Saratxaga <pablo@mandrakesoft.com>
