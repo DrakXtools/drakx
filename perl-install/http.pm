@@ -27,13 +27,12 @@ sub getFile {
 		     "", "");
 
     #- skip until empty line
-    local $_;
-    my ($now, $last, $tmp) = 0;
-    my $read = sub { sysread($sock, $_, 1) || die; $tmp .= $_ };
+    my ($now, $last, $buf, $tmp) = 0;
+    my $read = sub { sysread($sock, $buf, 1) || die; $tmp .= $buf };
     do {
 	$last = $now;
-	&$read; &$read if /\015/;
-	$now = /\012/;
+	&$read; &$read if $buf =~ /\015/;
+	$now = $buf =~ /\012/;
     } until ($now && $last);
 
     $tmp =~ /^.*\b200\b/ ? $sock : undef;
