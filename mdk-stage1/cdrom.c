@@ -49,7 +49,7 @@ static enum return_type try_with_device(char *dev_name)
 		return results;
 	}	
 
-	if (access("/tmp/image/Mandrake", R_OK)) {
+	if (access("/tmp/image/Mandrake/mdkinst", R_OK)) {
 		enum return_type results;
 		umount("/tmp/image");
 		results = ask_yes_no("That CDROM disc does not seem to be a Linux-Mandrake Installation CDROM.\nRetry with another disc?");
@@ -78,10 +78,8 @@ enum return_type cdrom_prepare(void)
 
 	my_insmod("ide-cd");
 	my_insmod("sr_mod");
-	my_insmod("isofs");
 	
-	medias = get_medias(CDROM, QUERY_NAME);
-	medias_models = get_medias(CDROM, QUERY_MODEL);
+	get_medias(CDROM, &medias, &medias_models);
 
 	ptr = medias;
 	while (ptr && *ptr) {
@@ -91,7 +89,7 @@ enum return_type cdrom_prepare(void)
 
 	if (count == 0) {
 		error_message("No CDROM device found.");
-		i = ask_scsi_insmod();
+		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return cdrom_prepare();
@@ -101,7 +99,7 @@ enum return_type cdrom_prepare(void)
 		results = try_with_device(*medias);
 		if (results == RETURN_OK)
 			return RETURN_OK;
-		i = ask_scsi_insmod();
+		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return cdrom_prepare();
@@ -115,7 +113,7 @@ enum return_type cdrom_prepare(void)
 	results = try_with_device(choice);
 	if (results == RETURN_OK)
 		return RETURN_OK;
-	i = ask_scsi_insmod();
+	i = ask_insmod(SCSI_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
 	return cdrom_prepare();

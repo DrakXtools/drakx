@@ -56,11 +56,12 @@ void fatal_error(char *msg)
 }
 
 
+
 /* spawns a shell on console #2 */
 void spawn_shell(void)
 {
-	pid_t pid;
 	int fd;
+	pid_t pid;
 	char * shell_name = "/sbin/sash";
 
 	log_message("spawning a shell..");
@@ -93,6 +94,7 @@ void spawn_shell(void)
 		close(fd);
 	}
 }
+
 
 enum return_type method_select_and_prepare(void)
 {
@@ -180,8 +182,19 @@ int main(int argc, char **argv)
 			fatal_error("symlink to /tmp/stage2 failed");
 	}
 
+	if (IS_RESCUE) {
+		int fd = open("/proc/sys/kernel/real-root-dev", O_RDWR);
+#ifdef __sparc__
+		write(fd, "0x1030000", sizeof("0x1030000")); /* ram3 or sparc */
+#else
+		write(fd, "0x103", sizeof("0x103")); /* ram3 */
+#endif
+		close(fd);
+		return 0;
+	}
+
 	if (IS_TESTING)
-	  return 0;
+		return 0;
 
 	argptr = stage2_args;
 	*argptr++ = "/usr/bin/runinstall2";

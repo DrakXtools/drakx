@@ -134,6 +134,7 @@ void * memcpy(void * dst, const void * src, size_t count);
 int strcmp(const char * a, const char * b);
 int strncmp(const char * a, const char * b, int len);
 char * strchr(char * str, int ch);
+char * strstr(char *haystack, char *needle);
 char * strncpy(char * dst, const char * src, int len);
 
 void print_str(int fd, char * string);

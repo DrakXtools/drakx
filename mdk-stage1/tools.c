@@ -94,10 +94,18 @@ void process_cmdline(void)
 		if (!strcmp(name, "cdrom")) set_param(MODE_CDROM);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
 	}
-	tmp_params[p].name = NULL;
+	
+	if (IS_RESCUE) {
+		tmp_params[p].name = "special_stage2";
+		tmp_params[p].value = "rescue";
+		p++;
+		set_param(MODE_SPECIAL_STAGE2);
+	}
 
-	params = (struct cmdline_elem *) malloc(sizeof(struct cmdline_elem) * (p+1));
-	memcpy(params, tmp_params, sizeof(struct cmdline_elem) * (p+1));
+	tmp_params[p++].name = NULL;
+
+	params = (struct cmdline_elem *) malloc(sizeof(struct cmdline_elem) * p);
+	memcpy(params, tmp_params, sizeof(struct cmdline_elem) * p);
 
 	log_message("\tgot %d args", p);
 }
@@ -184,7 +192,7 @@ enum return_type load_ramdisk(void)
 {
 	char * img_name;
 	gzFile st2;
-	char * ramdisk = "/dev/ram"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
+	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
 	int ram_fd;
 	char buffer[4096];
 	char * stg2_name = get_param_valued("special_stage2");
@@ -194,6 +202,9 @@ enum return_type load_ramdisk(void)
 
 	if (!stg2_name)
 		stg2_name = "mdkinst";
+
+	if (IS_RESCUE)
+		stg2_name = "rescue";
 	
 	img_name = malloc(strlen(begin_img) + strlen(stg2_name) + strlen(end_img) + 1);
 	strcpy(img_name, begin_img);
@@ -237,6 +248,9 @@ enum return_type load_ramdisk(void)
 	remove_wait_message();
 	gzclose(st2);
 	close(ram_fd);
+
+	if (IS_RESCUE)
+		return RETURN_OK; /* fucksike, I lost several hours wondering why the kernel won't see the rescue if it is alreay mounted */
 
 	if (my_mount(ramdisk, "/tmp/stage2", "ext2"))
 		return RETURN_ERROR;

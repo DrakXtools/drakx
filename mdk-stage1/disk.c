@@ -48,18 +48,17 @@ enum return_type disk_prepare(void)
 	my_insmod("vfat");
 	my_insmod("reiserfs");
 	
-	medias = get_medias(DISK, QUERY_NAME);
+	get_medias(DISK, &medias, &medias_models);
 
 	ptr = medias;
 	while (ptr && *ptr) {
-		log_message("found DISK %s", *ptr);
 		count++;
 		ptr++;
 	}
 
 	if (count == 0) {
 		error_message("No DISK drive found.");
-		i = ask_scsi_insmod();
+		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return disk_prepare();
@@ -69,13 +68,11 @@ enum return_type disk_prepare(void)
 		results = try_with_device(*medias);
 		if (results == RETURN_OK)
 			return RETURN_OK;
-		i = ask_scsi_insmod();
+		i = ask_insmod(SCSI_ADAPTERS);
 		if (i == RETURN_BACK)
 			return RETURN_BACK;
 		return disk_prepare();
 	}
-
-	medias_models = get_medias(DISK, QUERY_MODEL);
 
 	results = ask_from_list_comments("Please choose the DISK drive to use for the installation.", medias, medias_models, &choice);
 
@@ -85,7 +82,7 @@ enum return_type disk_prepare(void)
 	results = try_with_device(choice);
 	if (results == RETURN_OK)
 		return RETURN_OK;
-	i = ask_scsi_insmod();
+	i = ask_insmod(SCSI_ADAPTERS);
 	if (i == RETURN_BACK)
 		return RETURN_BACK;
 	return disk_prepare();

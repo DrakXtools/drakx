@@ -16,11 +16,12 @@
 #define _MODULES_H_
 
 #include "stage1.h"
+#include "probing.h"
 
 int load_modules_dependencies(void);
-int my_insmod(char * mod_name);
+int my_insmod(const char * mod_name);
 
-enum return_type ask_scsi_insmod(void);
+enum return_type ask_insmod(enum driver_type);
 
 
 struct module_deps_elem {

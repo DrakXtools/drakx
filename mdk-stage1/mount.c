@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "log.h"
+#include "modules.h"
 
 #include "mount.h"
 
@@ -130,11 +131,15 @@ int my_mount(char *dev, char *location, char *fs)
 
 	flags = MS_MGC_VAL;
 
-	if (!strcmp(fs, "vfat"))
+	if (!strcmp(fs, "vfat")) {
+		my_insmod("vfat");
 		opts = "check=relaxed";
-	
-	if (!strcmp(fs, "iso9660"))
+	}
+
+	if (!strcmp(fs, "iso9660")) {
+		my_insmod("isofs");
 		flags |= MS_RDONLY;
+	}
 
 	rc = mount(dev, location, fs, flags, opts);
 

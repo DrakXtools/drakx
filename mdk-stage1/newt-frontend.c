@@ -44,7 +44,7 @@ void init_frontend(void)
 	
 	newtDrawRootText(0, 0, "Welcome to Linux-Mandrake (" VERSION ") " __DATE__ " " __TIME__);
 	
-	newtPushHelpLine("  <Tab>/<Alt-Tab> between elements, <Space>/<Enter> selects");
+	newtPushHelpLine(" <Alt-F1> for here, <Alt-F3> to see the logs, <Alt-F4> for kernel msg");
 }
 
 
@@ -54,14 +54,25 @@ void finish_frontend(void)
 }
 
 
-void error_message(char *msg)
+void error_message(char *msg, ...)
 {
-	newtWinMessage("Error", "Ok", msg);
+	va_list args;
+	va_start(args, msg);
+	va_end(args);
+	newtWinMessagev("Error", "Ok", msg, args);
+}
+
+void info_message(char *msg, ...)
+{
+	va_list args;
+	va_start(args, msg);
+	va_end(args);
+	newtWinMessagev("Notice", "Ok", msg, args);
 }
 
 void wait_message(char *msg, ...)
 {
-	int width = strlen(msg) + 12;
+	int width = 8;
 	int height = 3;
 	char * title = "Please wait...";
 	newtComponent t, f;
@@ -77,6 +88,7 @@ void wait_message(char *msg, ...)
 		if (buf) free(buf);
 		buf = malloc(size);
 		i = vsnprintf(buf, size, msg, args);
+		width += i;
 	} while (i == size);
 	
 	va_end(args);

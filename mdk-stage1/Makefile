@@ -40,15 +40,21 @@ INITSRC = minilibc.c init.c
 INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
- #- frontend
+ #- frontends
 NEWT_FRONTEND_SRC = newt-frontend.c
 NEWT_FRONTEND_LIBS = /usr/lib/libnewt.a /usr/lib/libslang.a
 
 STDIO_FRONTEND_SRC = stdio-frontend.c
 STDIO_FRONTEND_LIBS =
 
-FRONTEND_OBJS = $(subst .c,.o,$(STDIO_FRONTEND_SRC))
-FRONTEND_LIBS = $(STDIO_FRONTEND_LIBS)
+WSLIB_FRONTEND_SRC = wslib-frontend.c
+WSLIB_FRONTEND_LIBS = /usr/lib/libwslib.a
+
+ #- default frontend is newt
+F = NEWT
+
+FRONTEND_OBJS = $(subst .c,.o,$($(F)_FRONTEND_SRC))
+FRONTEND_LIBS = $($(F)_FRONTEND_LIBS)
 
 
  #- stage1 itself (minus stage1.c)
@@ -94,7 +100,7 @@ BINS = init stage1-network
 #BINS += stage1-all
 #endif
 
-DIRS = mar insmod-busybox
+DIRS = mar insmod-busybox pci-resource
 
 
 all: dirs $(BINS)

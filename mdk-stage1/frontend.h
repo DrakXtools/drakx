@@ -24,7 +24,8 @@
 
 void init_frontend(void);
 void finish_frontend(void);
-void error_message(char *msg); /* blocking */
+void error_message(char *msg, ...); /* blocking */
+void info_message(char *msg, ...); /* blocking */
 void wait_message(char *msg, ...); /* non-blocking */
 void remove_wait_message(void);
 

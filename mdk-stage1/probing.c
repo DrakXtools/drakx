@@ -38,19 +38,74 @@
 #include "log.h"
 #include "frontend.h"
 #include "modules.h"
+#include "pci-resource/pci-ids.h"
 
 #include "probing.h"
 
 
-static void pci_probing(enum driver_type type)
+void pci_probing(enum driver_type type)
 {
-	if (IS_EXPERT) {
-		error_message("You should be asked if you have some SCSI.");
-	} else {
-/*		wait_message("Installing SCSI module...");
-		my_insmod("advansys");
-		remove_wait_message();
-*/	}
+	if (IS_EXPERT)
+		ask_insmod(type);
+	else {
+		/* do it automatically */
+		char * mytype;
+		FILE * f;
+		int len;
+		char buf[100];
+		struct pci_module_map * pcidb;
+
+		if (type == SCSI_ADAPTERS)
+			mytype = "SCSI";
+		else if (type == NETWORK_DEVICES)
+			mytype = "NET";
+		else
+			return;
+		
+		f = fopen("/proc/bus/pci/devices", "rb");
+    
+		if (!f) {
+			log_message("PCI: could not open proc file");
+			return;
+		}
+
+		switch (type) {
+		case SCSI_ADAPTERS:
+			pcidb = scsi_pci_ids;
+			len   = scsi_num_ids;
+			break;
+		case NETWORK_DEVICES:
+			pcidb = eth_pci_ids;
+			len   = eth_num_ids;
+			break;
+		default:
+			return;
+		}
+
+		while (1) {
+			int i, garb, vendor, device;
+		
+			if (!fgets(buf,100,f)) break;
+		
+			sscanf(buf, "%x %04x%04x", &garb, &vendor, &device);
+ 
+			for (i = 0; i < len; i++) {
+				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
+					log_message("PCI: found suggestion for %s (%s)", pcidb[i].name, pcidb[i].module);
+					if (type == SCSI_ADAPTERS) {
+						/* insmod takes time, let's use the wait message */
+						wait_message("Installing %s driver for %s", mytype, pcidb[i].name);
+						my_insmod(pcidb[i].module);
+						remove_wait_message();
+					} else if (type == NETWORK_DEVICES) {
+						/* insmod is quick, let's use the info message */
+						info_message("Found %s driver for %s", mytype, pcidb[i].name);
+						my_insmod(pcidb[i].module);
+					}
+				}
+			}
+		}
+	}
 }
 
 
@@ -64,8 +119,10 @@ static void find_media(void)
 	int count;
         int fd;
 
-	if (medias)
-		return;
+	if (!medias)
+		pci_probing(SCSI_ADAPTERS);
+	else
+		free(medias); /* that does not free the strings, by the way */
 
 	/* ----------------------------------------------- */
 	log_message("looking for ide media");
@@ -138,7 +195,6 @@ static void find_media(void)
 	/* ----------------------------------------------- */
 	log_message("looking for scsi media");
 
-	pci_probing(SCSI_ADAPTERS);
 
 	fd = open("/proc/scsi/scsi", O_RDONLY);
 	if (fd != -1) {
@@ -268,11 +324,11 @@ static void find_media(void)
 
 
 /* Finds by media */
-char ** get_medias(enum media_type media, enum media_query_type qtype)
+void get_medias(enum media_type media, char *** names, char *** models)
 {
 	struct media_info * m;
-	char * tmp[50];
-	char ** answer;
+	char * tmp_names[50];
+	char * tmp_models[50];
 	int count;
 
 	find_media();
@@ -282,19 +338,17 @@ char ** get_medias(enum media_type media, enum media_query_type qtype)
 	count = 0;
 	while (m && m->name) {
 		if (m->type == media) {
-			if (qtype == QUERY_NAME)
-				tmp[count] = m->name;
-			else
-				tmp[count] = m->model;
-			count++;
+			tmp_names[count] = strdup(m->name);
+			tmp_models[count++] = strdup(m->model);
 		}
 		m++;
 	}
-	tmp[count] = NULL;
-	count++;
+	tmp_names[count] = NULL;
+	tmp_models[count++] = NULL;
 
-	answer = (char **) malloc(sizeof(char *) * count);
-	memcpy(answer, tmp, sizeof(char *) * count);
+	*names = (char **) malloc(sizeof(char *) * count);
+	memcpy(*names, tmp_names, sizeof(char *) * count);
 
-	return answer;
+	*models = (char **) malloc(sizeof(char *) * count);
+	memcpy(*models, tmp_models, sizeof(char *) * count);
 }

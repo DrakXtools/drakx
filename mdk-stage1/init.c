@@ -54,6 +54,7 @@ char * env[] = {
  */
 
 int testing;
+int klog_pid;
 
 
 void fatal_error(char *msg)
@@ -107,12 +108,11 @@ void doklog()
 		return;
 	}
 
-	if (fork()) {
+	if ((klog_pid = fork())) {
 		/* parent */
 		close(in);
 		close(out);
 		close(log);
-		sleep(1);
 		return;
 	}
 	
@@ -364,6 +364,17 @@ void disable_swap(void)
 	}
 }
 
+int is_rescue()
+{
+	int fd, size;
+	char buf[512];
+	if ((fd = open("/proc/cmdline", O_RDONLY, 0)) == -1)
+		fatal_error("could not open /proc/cmdline");
+	size = read(fd, buf, sizeof(buf));
+	buf[size-1] = 0;
+	close(fd);
+	return (strstr(buf, "rescue") != NULL);
+}
 
 int main(int argc, char **argv)
 {
@@ -372,7 +383,7 @@ int main(int argc, char **argv)
 	int fd;
 	int abnormal_termination = 0;
 	int end_stage2 = 0;
-	
+
 	/* getpid() != 1 should work, by linuxrc tends to get a larger pid */
 	testing = (getpid() > 50);
 
@@ -452,8 +463,8 @@ int main(int argc, char **argv)
 
 		printf("execing: %s\n", child_argv[0]);
 		execve(child_argv[0], child_argv, env);
-	
-		exit(0);
+		printf("error in exec of stage1 :-(\n");
+		return 0;
 	}
 
 	while (!end_stage2) {
@@ -468,12 +479,16 @@ int main(int argc, char **argv)
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
 		abnormal_termination = 1;
-	}
-	else
-		printf("back to stage1-initializer control -- install exited normally\n");
+	} else if (is_rescue()) {
+		kill(klog_pid, 9);
+		printf("exiting stage1-initializer -- giving hand to rescue\n");
+		return 0;
+        }
+	
+	printf("back to stage1-initializer control -- install exited normally\n");
 
 	if (testing)
-		exit(0);
+		return 0;
 
 	sync(); sync();
 
@@ -501,6 +516,5 @@ int main(int argc, char **argv)
 		while (1);
 	}
 
-	exit(0);
 	return 0;
 }

@@ -30,18 +30,12 @@
 
 static struct module_deps_elem * modules_deps = NULL;
 
+static char * archive_name = "/modules/modules.mar";
+static struct mar_stream s = { 0, NULL, NULL };
 
-/* unarchive and insmod given module
- * WARNING: module must not contain the trailing ".o"
- */
-int insmod_archived_file(char * mod_name)
+
+static int ensure_archive_opened(void)
 {
-	char * archive_name = "/modules/modules.mar";
-	char module_name[50];
-	char final_name[50] = "/tmp/";
-	static struct mar_stream s = { 0, NULL, NULL };
-	int i;
-
 	/* don't consume too much memory */
 	if (s.first_element == NULL) { 
 		if (mar_open_file(archive_name, &s) != 0) {
@@ -49,6 +43,20 @@ int insmod_archived_file(char * mod_name)
 			return -1;
 		}
 	}
+	return 0;
+}
+
+/* unarchive and insmod given module
+ * WARNING: module must not contain the trailing ".o"
+ */
+static int insmod_archived_file(const char * mod_name)
+{
+	char module_name[50];
+	char final_name[50] = "/tmp/";
+	int i, rc;
+
+	if (ensure_archive_opened() == -1)
+		return -1;
 
 	strncpy(module_name, mod_name, sizeof(module_name));
 	strncat(module_name, ".o", sizeof(module_name));
@@ -63,7 +71,11 @@ int insmod_archived_file(char * mod_name)
 	strncat(final_name, mod_name, sizeof(final_name));
 	strncat(final_name, ".o", sizeof(final_name));
 
-	return insmod_call(final_name);
+	rc = insmod_call(final_name);
+	if (rc)
+		log_message("\tfailed.");
+	unlink(final_name); /* sucking no space left on device */
+	return rc;
 }
 
 
@@ -157,7 +169,7 @@ int load_modules_dependencies(void)
 }
 
 
-int insmod_with_deps(char * mod_name)
+static int insmod_with_deps(const char * mod_name)
 {
 	struct module_deps_elem * dep;
 
@@ -180,7 +192,7 @@ int insmod_with_deps(char * mod_name)
 }
 
 
-int my_insmod(char * mod_name)
+int my_insmod(const char * mod_name)
 {
 	int i;
 	log_message("have to insmod %s", mod_name);
@@ -196,7 +208,36 @@ int my_insmod(char * mod_name)
 }
 
 
-enum return_type ask_scsi_insmod(void)
+enum return_type ask_insmod(enum driver_type type)
 {
-	return ask_yes_no("Try to load a SCSI module");
+	char * mytype;
+	char msg[200];
+	enum return_type results;
+	char * choice;
+
+	if (type == SCSI_ADAPTERS)
+		mytype = "SCSI";
+	else if (type == NETWORK_DEVICES)
+		mytype = "NET";
+	else
+		return RETURN_ERROR;
+
+	if (ensure_archive_opened() == -1)
+		return -1;
+
+	snprintf(msg, sizeof(msg), "Which driver should I try to gain %s access?", mytype);
+
+	results = ask_from_list(msg, mar_list_contents(&s), &choice);
+
+	if (results == RETURN_OK) {
+		int rc;
+		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
+		rc = my_insmod(choice);
+		if (rc) {
+			error_message("Insmod failed.");
+			return RETURN_ERROR;
+		} else
+			return RETURN_OK;
+	} else
+		return results;
 }

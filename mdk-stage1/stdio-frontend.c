@@ -48,37 +48,55 @@ void finish_frontend(void)
 {
 }
 
-static char get_char_response(void)
+static void get_any_response(void)
 {
-	unsigned char cmd1, cmd2;
-
+	unsigned char t;
 	fflush(stdout);
-	if (read(0, &cmd1, 1) > 0) {
-		fcntl(0, F_SETFL, O_NONBLOCK);
-		while (read(0, &cmd2, 1) > 0);
-		fcntl(0, F_SETFL, 0);
-	}
-
-	return cmd1;
+	read(0, &t, 1);
+	fcntl(0, F_SETFL, O_NONBLOCK);
+	while (read(0, &t, 1) > 0);
+	fcntl(0, F_SETFL, 0);
+}
+	
+static int get_int_response(void)
+{
+	int i = 0; /* (0) tied to Cancel */
+	fflush(stdout);
+	scanf(" %d", &i);
+	return i;
 }
 
-
-void error_message(char *msg)
+static void blocking_msg(char *type, char *fmt, va_list args)
 {
-	printf("Error! %s", msg);
-	get_char_response();
+	printf(type);
+	vprintf(fmt, args);
+	get_any_response();
 	printf("\n");
+}
+
+void error_message(char *msg, ...)
+{
+	va_list args;
+	va_start(args, msg);
+	va_end(args);
+	blocking_msg("> Error! ", msg, args);
+}
+
+void info_message(char *msg, ...)
+{
+	va_list args;
+	va_start(args, msg);
+	va_end(args);
+	blocking_msg("> Info! ", msg, args);
 }
 
 void wait_message(char *msg, ...)
 {
 	va_list args;
-
 	printf("Please wait: ");
 	va_start(args, msg);
 	vprintf(msg, args);
 	va_end(args);
-
 	fflush(stdout);
 }
 
@@ -92,7 +110,6 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 {
 	char ** sav_elems = elems;
 	int i, j;
-	unsigned char answ;
 
 	printf("> %s\n(0) Cancel\n", msg);
 	i = 1;
@@ -105,9 +122,7 @@ enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_
 
 	printf("? ");
 
-	answ = get_char_response();
-
-	j = answ - '0';
+	j = get_int_response();
 
 	if (j == 0)
 		return RETURN_BACK;
@@ -125,7 +140,6 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 {
 	char ** sav_elems = elems;
 	int i, j;
-	unsigned char answ;
 
 	printf("> %s\n(0) Cancel\n", msg);
 	i = 1;
@@ -137,9 +151,7 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 
 	printf("? "); 
 
-	answ = get_char_response();
-
-	j = answ - '0';
+	j = get_int_response();
 
 	if (j == 0)
 		return RETURN_BACK;
@@ -155,14 +167,11 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 
 enum return_type ask_yes_no(char *msg)
 {
-	unsigned char answ;
 	int j;
 
 	printf("> %s\n(0) Yes\n(1) No\n(2) Back\n? ", msg);
 
-	answ = get_char_response();
-
-	j = answ - '0';
+	j = get_int_response();
 
 	if (j == 0)
 		return RETURN_OK;

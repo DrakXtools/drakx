@@ -188,6 +188,21 @@ char * strchr(char * str, int ch)
 	return NULL;
 }
 
+
+char * strstr(char *haystack, char *needle)
+{
+	char * tmp = haystack;
+	while ((tmp = strchr(tmp, needle[0])) != NULL) {
+		int i = 1;
+		while (i < strlen(tmp) && i < strlen(needle) && tmp[i] == needle[i])
+			i++;
+		if (needle[i] == '\0')
+			return tmp;
+		tmp++;
+	}
+	return NULL;
+}
+
 void print_int(int fd, int i)
 {
 	char buf[10];

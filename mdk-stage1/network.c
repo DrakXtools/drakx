@@ -32,6 +32,8 @@
 
 enum return_type nfs_prepare(void)
 {
+	pci_probing(NETWORK_DEVICES);
+
 	return RETURN_ERROR;
 }
 
