@@ -197,7 +197,7 @@ sub main {
 			    title => 'diskdrake',
 			    messages => format_part_info($current_hd, $current_part),
 			   },
-			   [ { val => \$a, list => $actions, type => 'list', sort => 0, gtk => { use_boxradio => 0 } } ]) or last;
+			   [ { val => \$a, list => $actions, format => \&translate, type => 'list', sort => 0, gtk => { use_boxradio => 0 } } ]) or last;
 	    $actions{$a}();
 	    $current_hd = $current_part = '' if !is_part_existing($current_part, $all_hds);	    
 	} else {
