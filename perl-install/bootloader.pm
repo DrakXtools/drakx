@@ -281,6 +281,7 @@ sub read_lilo() {
 	    local ($_) = @_;
 	    s/^\s*//; s/\s*$//;
 	    s/^"(.*?)"$/$1/;
+	    s/^\s*//; s/\s*$//; #- do it again for append=" foo"
 	    $_;
 	}
 	$_->{append} = remove_quotes_and_spaces($_->{append}) foreach \%b, @{$b{entries}};
