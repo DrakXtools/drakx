@@ -32,6 +32,7 @@ use interactive;
 use strict;
 use detect_devices;
 use lang;
+use log;
 use common;
 
 /-h/ and die "usage: drakxtv [-h] [--help] [--no-guess]\n";
@@ -106,7 +107,7 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 				$norm = $tbl->[1] if ($tbl->[1]);
 			 }
 		  }
-		  standalone::explanations "guess lang=>$_, norm=>$norm, area=>$ftable_id";
+		  log::l("[drakxtv] guess lang=>$_, norm=>$norm, area=>$ftable_id");
 	   }
 
 	   if ($in->ask_from("TVdrake", _("Please,\ntype in your tv norm and country"),
