@@ -1,5 +1,91 @@
 2004/01/29  Damien Chaumette  <dchaumette at mandrakesoft.com>
 
+	* standalone/drakconnect: beautify ethernet cards name
+	shrink
+
+2004/01/29  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* share/advertising/dwd-03.pl, install_steps_gtk.pm,
+	share/advertising/dwd-01.pl, share/advertising/dwd-02.pl, ugtk2.pm:
+	advertising:
+	  - support leftish and centered text
+	  - support arbitrary bold text with ml-like syntax <b>foo</b> in
+	strings
+	  - simplify get_text_coord and unexport it, no one else than
+	wrap_paragraph uses it nowadays
+
+2004/01/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/help-ru.pot, share/po/help-fr.pot: converted help-*.pot files
+	to utf-8 too (they MUST be of same encoding
+	as po files)
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/mn.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/he.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/tg.po, share/po/nb.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/hi.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po,
+	share/po/it.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/hu.po: updated pot file
+
+2004/01/29  Pixel  <pixel at mandrakesoft.com>
+
+	* fs.pm: replace iocharset= with nls= for ntfs (as instructed by Thomas
+	Backlund, thanks)
+
+2004/01/29  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: Configure clients with defined IPs to set
+	hostname so gnome works.
+
+2004/01/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: prevent the installer from going back to proxy
+	configuration (!!!)
+	when pressinth the previous button on first step of network config
+	wizard :-)
+	cleanups enabled b/c of path sharing between standalone tool and
+	installer
+	convert some write_cnx_script() callers into set_cnx_script() ones
+	replace conf_network_card_backend() "detect" calls by get_eth_cards()
+	ones
+	help cperl-mode parsing this file (drawback: perl_checker won't be
+	happy)
+	simplify
+
+	* network/tools.pm (set_cnx_script) split it out of write_cnx_script()
+	rationale:functions whose behavior is totally altered by arguments
+	number are insane should just be splited and their callers be fixed
+
+	* network/adsl.pm, network/isdn.pm: convert some write_cnx_script()
+	callers into set_cnx_script() ones
+
+	* network/network.pm, standalone/drakconnect: replace
+	conf_network_card_backend() "detect" calls by get_eth_cards() ones
+
+	* share/po/fr.po: update
+
+	* network/ethernet.pm: convert some write_cnx_script() callers into
+	set_cnx_script() ones
+	(conf_network_card_backend) insert a bug notice
+	(conf_network_card_backend) remove compat stuff since callers were
+	cleaned up
+
+	* drakxtools.spec: 9.3-26mdk
+	9.3-24mdk was never released
+	9.3-25mdk
+
+2004/01/29  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
 	* standalone/drakconnect: shrink
 	fix modem login fetching
 	  - use nice interfaces name (e.g. ethernet0 rather than eth0)
@@ -24453,7 +24539,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.858 2004/01/29 12:48:32 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.859 2004/01/29 17:57:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
