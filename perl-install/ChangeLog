@@ -1,3 +1,109 @@
+2001/02/23  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm (ask_from_entries_refW): double clicking on list
+	means 'Ok'
+
+	* pkgs.pm (setSelectedFromCompssList): fix sillyness
+
+2001/02/22  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corected infinite loop
+
+2001/02/22  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: minor cleanup to edit partition size more easily.
+	brand new version written in perl, support repartitionning on the fly of
+	the
+	hard disk and resize of already present FAT partition.
+
+	* rescue/list.i386, rescue/list, rescue/Makefile: make rescue build a bit
+	more cleaner (added dependancy).
+	added missing file for rescue to enable new oem install.
+
+2001/02/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/insmod-modutils/include/elf_hppa64.h,
+	mdk-stage1/insmod-modutils/util/alias.h,
+	mdk-stage1/insmod-modutils/util/xstrcat.c,
+	mdk-stage1/insmod-modutils/util/gzfiles.c,
+	mdk-stage1/insmod-modutils/include/elf_arm.h,
+	mdk-stage1/insmod-modutils/util/sys_qm.c,
+	mdk-stage1/insmod-modutils/util/modstat.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc.c,
+	mdk-stage1/insmod-modutils/include/elf_m68k.h,
+	mdk-stage1/insmod-modutils/Makefile,
+	mdk-stage1/insmod-modutils/util/xstrdup.c,
+	mdk-stage1/insmod-modutils/obj/obj_arm.c,
+	mdk-stage1/insmod-modutils/obj/obj_m68k.c,
+	mdk-stage1/insmod-modutils/obj/obj_hppa64.c,
+	mdk-stage1/insmod-modutils/include/elf_sparc64.h,
+	mdk-stage1/insmod-modutils/util/sys_dm.c,
+	mdk-stage1/insmod-modutils/include/elf_s390.h,
+	mdk-stage1/insmod-modutils/obj/obj_s390.c,
+	mdk-stage1/insmod-modutils/util/xmalloc.c,
+	mdk-stage1/insmod-modutils/util/xsystem.c, mdk-stage1/insmod.h,
+	mdk-stage1/insmod-modutils/util/xftw.c,
+	mdk-stage1/insmod-modutils/include/elf_i386.h,
+	mdk-stage1/insmod-modutils/util/sys_gks.c,
+	mdk-stage1/insmod-modutils/util/snap_shot.c,
+	mdk-stage1/insmod-modutils/obj/obj_i386.c, mdk-stage1/modules.c,
+	mdk-stage1/stage1.c, mdk-stage1/insmod-modutils/include/obj.h,
+	mdk-stage1/insmod-modutils/include/elf_ppc.h,
+	mdk-stage1/insmod-modutils/obj/obj_reloc.c,
+	mdk-stage1/insmod-modutils/include/elf_sparc.h,
+	mdk-stage1/insmod-modutils/util/sys_nim.c,
+	mdk-stage1/insmod-modutils/obj/obj_ppc.c, mdk-stage1/Makefile,
+	mdk-stage1/insmod-modutils/include/elf_hppa.h,
+	mdk-stage1/insmod-busybox/insmod.c,
+	mdk-stage1/insmod-modutils/util/meta_expand.c,
+	mdk-stage1/insmod-modutils/util/arch64.c,
+	mdk-stage1/insmod-modutils/obj/obj_load.c,
+	mdk-stage1/insmod-modutils/obj/obj_hppa.c,
+	mdk-stage1/insmod-busybox/insmod.h,
+	mdk-stage1/insmod-modutils/include/elf_ia64.h,
+	mdk-stage1/insmod-modutils/obj/obj_ia64.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc64.c,
+	mdk-stage1/insmod-modutils/include/elf_mips.h,
+	mdk-stage1/insmod-modutils/include/module.h,
+	mdk-stage1/insmod-modutils/obj/obj_mips.c,
+	mdk-stage1/insmod-modutils/util/sys_cm.c,
+	mdk-stage1/insmod-modutils/obj/obj_alpha.c,
+	mdk-stage1/insmod-modutils/include/kerneld.h,
+	mdk-stage1/insmod-modutils/util/xrealloc.c,
+	mdk-stage1/insmod-modutils/obj/Makefile,
+	mdk-stage1/insmod-modutils/insmod-frontend.c,
+	mdk-stage1/insmod-modutils/obj/obj_common.c,
+	mdk-stage1/insmod-modutils/include/modstat.h,
+	mdk-stage1/insmod-modutils/util/Makefile,
+	mdk-stage1/insmod-modutils/include/config.h,
+	mdk-stage1/insmod-modutils/util/logger.c,
+	mdk-stage1/insmod-modutils/obj/obj_kallsyms.c,
+	mdk-stage1/Makefile.common, mdk-stage1/insmod-modutils/include/util.h,
+	mdk-stage1/insmod-modutils/util/config.c,
+	mdk-stage1/insmod-modutils/include/version.h,
+	mdk-stage1/insmod-modutils/include/kallsyms.h,
+	mdk-stage1/insmod-modutils/include/elf_alpha.h,
+	mdk-stage1/insmod-modutils/util/sys_oim.c,
+	mdk-stage1/insmod-modutils/insmod.c: use modutils for non Intel arch's
+
+2001/02/22  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm (write_fstab): clean-up, $fstab takes precedence over @to_add, but
+	not
+	over existing /etc/fstab. Fix some stupid stuff
+
+	* modules.pm, commands.pm: call /usr/bin/insmod_ with full path
+
+	* install2.pm (main): don't set a special $remote_path PATH for
+	postInstallNonRooted
+	(otherwise install's modprobe is not used, and you can't "modprobe
+	vfat",
+	even if "/usr/bin/modprobe vfat" doesn't work because insmod_ is not
+	found.
+
+	* my_gtk.pm (create_box_with_title): disallow focusing on text if it is
+	non-scrolled
+
 2001/02/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/dietlibc/include/stdlib.h, mdk-stage1/minilibc.c,
