@@ -49,8 +49,8 @@ sub test {
     my $f = $::testing ? $tmpconfig : "/etc/X11/XF86Config.test";
     $raw_X->{Xconfig::card::using_xf4($card) ? 'xfree4' : 'xfree3'}->write("$::prefix/$f");
 
-    $ENV{HOME} || $::isInstall or die q($HOME is unset, so I don't know where to put my temporary files);
-    my $f_err = "$::prefix$ENV{HOME}/tmp/.drakx.Xoutput";
+    my $f_err = secured_file($::prefix . ($ENV{TMPDIR} || "$ENV{HOME}/tmp") . '/.drakx.Xoutput');
+    
     my $pid;
     unless ($pid = fork()) {
 	system("xauth add :9 . `mcookie`");
