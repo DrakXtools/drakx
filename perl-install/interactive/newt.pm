@@ -94,9 +94,12 @@ sub ask_fromW {
 }
 
 sub ask_fromW_real {
-    my ($_o, $common, $l, $_l2) = @_;
+    my ($_o, $common, $l, $l2) = @_;
     my $ignore; #-to handle recursivity
     my $old_focus = -2;
+
+    my @l = $common->{advanced_state} ? @$l2 : @$l;
+    my @messages = (@{$common->{messages}}, if_($common->{advanced_state}, @{$common->{advanced_messages}}));
 
     #-the widgets
     my (@widgets, $total_size, $has_scroll);
@@ -148,7 +151,7 @@ sub ask_fromW_real {
 	    };
 	    $size = $count->($data_tree);
 	    
-	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
+	    my ($h) = @l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll = $size > $h;
 	    $has_scroll = 1;
 	    $size = min($size, $h);
@@ -197,7 +200,7 @@ sub ask_fromW_real {
 		1;
 	    };
 	} elsif ($e->{type} =~ /list/) {
-	    my ($h) = @$l == 1 && $height > 30 ? 10 : 5;
+	    my ($h) = @l == 1 && $height > 30 ? 10 : 5;
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
 	    $has_scroll = 1;
 	    $size = min(int @{$e->{list}}, $h);
@@ -232,28 +235,31 @@ sub ask_fromW_real {
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
 	  invalid_choice => \$invalid_choice };
     };
-    @widgets = map_index { $create_widget->($_, $::i) } @$l;
+    @widgets = map_index { $create_widget->($_, $::i) } @l;
 
     $_->{w}->addCallback($_->{callback}) foreach @widgets;
 
     $set_all->();
 
-    my $grid = Newt::Grid::CreateGrid(3, max(1, int @$l));
+    my $grid = Newt::Grid::CreateGrid(3, max(1, int @l));
     each_index {
 	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label($_->{e}{label})}, 0, 0, 1, 0, 1, 0);
 	$grid->GridSetField(1, $::i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
     } @widgets;
 
     my $listg = do {
-	my $wanted_header_height = min(8, listlength(messages(@{$common->{messages}})));
+	my $wanted_header_height = min(8, listlength(messages(@messages)));
 	my $height_avail = $height - $wanted_header_height - 13;
 	#- use a scrolled window if there is a lot of checkboxes (aka 
 	#- ask_many_from_list) or a lot of widgets in general (aka
 	#- options of a native PostScript printer in printerdrake)
 	#- !! works badly together with list's (lists are one widget, so a
 	#- big list window will not switch to scrollbar mode) :-(
-	if (@$l > 3 && $total_size > $height_avail) {
+	if (@l > 3 && $total_size > $height_avail) {
 	    $grid->GridPlace(1, 1); #- Uh?? otherwise the size allocated is bad
+	    if ($has_scroll) {
+		#- :'-(
+	    }
 	    $has_scroll = 1;
 	    $total_size = $height_avail;
 
@@ -271,12 +277,16 @@ sub ask_fromW_real {
     $cancel = $::isWizard ? N("<- Previous") : N("Cancel") if !defined $cancel && !defined $ok;
     $ok ||= $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
 
-    my ($b1, $b2) = map { simplify_string($_) } $::isWizard ? (if_($cancel, $cancel), $ok) : ($ok, if_($cancel, $cancel));
-    my ($buttonbar, @buttons) = Newt::Grid::ButtonBar(grep { $_ } $b1, $b2);
-    my ($ok_button, $cancel_button) = @buttons > 1 && $::isWizard ? ($buttons[1], $buttons[0]) : @buttons;
+    my @okcancel = grep { $_ } $ok, $cancel;
+    @okcancel = reverse(@okcancel) if $::isWizard;
+    my @buttons_text = (if_(@$l2, $common->{advanced_state} ? $common->{advanced_label_close} : $common->{advanced_label}), @okcancel);
+    my ($buttonbar, @buttons) = Newt::Grid::ButtonBar(map { simplify_string($_) } @buttons_text);
+    my $advanced_button = @$l2 && shift @buttons;
+    @buttons = reverse(@buttons) if $::isWizard;
+    my ($ok_button, $cancel_button) = @buttons;
 
     my $form = Newt::Component::Form(\undef, '', 0);
-    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(!$has_scroll, $height - $total_size, @{$common->{messages}})), $listg, $buttonbar);
+    my $window = Newt::Grid::GridBasicWindow(first(myTextbox(!$has_scroll, $height - $total_size, @messages)), $listg, $buttonbar);
     $window->GridWrappedWindow($common->{title} || '');
     $form->FormAddGrid($window, 1);
 
@@ -295,9 +305,17 @@ sub ask_fromW_real {
     while (1) {
 	my $r = $form->RunForm;
 
+	$get_all->();
+
+	if ($advanced_button && $$r == $$advanced_button) {
+	    invbool(\$common->{advanced_state});
+	    $form->FormDestroy;
+	    Newt::PopWindow();
+	    return &ask_fromW_real;
+	}
+
 	$canceled = $cancel_button && $$r == $$cancel_button;
 
-	$get_all->();
 	next if !$canceled && any { ${$_->{invalid_choice}} } @widgets;
 
 	$blocked = 
