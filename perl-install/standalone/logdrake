@@ -271,7 +271,7 @@ sub parse_file {
        $win_pb->window->process_updates(1); # no gtkflush() because we do not want to refresh the TextView
       }
       
-      logcolorize($_) if $test;
+      logcolorize($_) if $test->();
   }
   $win_pb->destroy if !$::isEmbedded || !$isExplain;
 
