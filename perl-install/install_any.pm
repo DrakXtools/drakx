@@ -687,7 +687,7 @@ sub setDefaultPackages {
     $o->{rpmsrate_flags_chosen}{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
     $o->{rpmsrate_flags_chosen}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
     $o->{rpmsrate_flags_chosen}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-    $o->{rpmsrate_flags_chosen}{BIGMEM} = 1 if c::dmiDetectMemory() > 4 * 1024;
+    $o->{rpmsrate_flags_chosen}{BIGMEM} = 1 if detect_devices::BIGMEM();
     $o->{rpmsrate_flags_chosen}{SMP} = 1 if detect_devices::hasSMP();
     $o->{rpmsrate_flags_chosen}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
     $o->{rpmsrate_flags_chosen}{TV} = 1 if detect_devices::getTVcards();

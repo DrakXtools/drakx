@@ -837,6 +837,10 @@ sub isLaptop() {
 	|| cat_('/proc/cpuinfo') =~ /\bmobile\b/i;
 }
 
+sub BIGMEM() {
+    arch() !~ /x86_64|ia64/ && $> == 0 && c::dmiDetectMemory() > 4 * 1024;
+}
+
 sub is_i586() {
     my $cpuinfo = cat_('/proc/cpuinfo');
     $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
