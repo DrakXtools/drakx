@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.22mdk
+Release: 0.23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,6 +310,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.23mdk
+- drakperm:
+  o main window:
+    * "ok" button should exit after having saved the preferences
+    * localize levels in option menu
+  o preferences dialog :
+    * fix preferences saving on  exit
+    * fix tips
+- draksec:
+  o restore help for msec checks
+  o enhanced help in tooltips
+
 * Thu Jul 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.22mdk
 - drakautoinst, drakper, draksound, and many other tools: use option
   menus instead of combo boxes when the user is selecting from a fixed
