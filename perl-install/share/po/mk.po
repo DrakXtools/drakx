@@ -10648,7 +10648,15 @@ msgstr "Пауза на врската (во секунди)"
 msgid "Get DNS servers from DHCP"
 msgstr "DNS Сервер IP"
 
+#: network/netconnect.pm:1043
+#, c-format
+msgid "Get YP servers from DHCP"
+msgstr ""
 
+#: network/netconnect.pm:1044
+#, c-format
+msgid "Get NTPD servers from DHCP"
+msgstr ""
 
 #: network/netconnect.pm:1037 printer/printerdrake.pm:1605
 #: standalone/drakconnect:649
@@ -16704,11 +16712,6 @@ msgstr "Лансирај го волшебникот"
 msgid "Wizards to configure server"
 msgstr "Не успеа да го конфигурира принтерот \"%s\"!"
 
-#: share/compssUsers.pl.~1.8.~:196
-#, fuzzy, c-format
-msgid "MandrakeSoft Wizards"
-msgstr "Лансирај го волшебникот"
-
 #: standalone.pm:21
 #, c-format
 msgid ""
@@ -19635,11 +19638,6 @@ msgstr "Не е инсталиран"
 msgid "Package not installed"
 msgstr "Пакетот не е инсталиран"
 
-#: standalone/drakbug:191
-#, fuzzy, c-format
-msgid "No browser available! Please install one"
-msgstr "Не пости пребарувач! Ве молиме инсталирајте некој"
-
 #: standalone/drakclock:29
 #, fuzzy, c-format
 msgid "DrakClock"
@@ -19746,9 +19744,9 @@ msgid "State"
 msgstr "Состојба"
 
 #: standalone/drakconnect:133
-#, fuzzy, c-format
+#, c-format
 msgid "Hostname: "
-msgstr "Име на компјутер "
+msgstr "Име на компјутер: "
 
 #: standalone/drakconnect:135
 #, c-format
@@ -19805,16 +19803,6 @@ msgstr "Автоматска IP"
 #, c-format
 msgid "DHCP"
 msgstr "DHCP"
-
-#: standalone/drakconnect:438
-#, c-format
-msgid "Get YP servers from DHCP"
-msgstr ""
-
-#: standalone/drakconnect:394
-#, c-format
-msgid "Get NTPD servers from DHCP"
-msgstr ""
 
 #: standalone/drakconnect:470
 #, fuzzy, c-format
@@ -20949,15 +20937,6 @@ msgid ""
 msgstr ""
 "%s не може да биде прикажано \n"
 ". Нема Помош за овој вид\n"
-
-#: standalone/drakhelp:42
-#, c-format
-msgid ""
-"No browser is installed on your system, Please install one if you want to "
-"browse the help system"
-msgstr ""
-"Немате инсталирано пребарувач на Вашиот комјутер,Ве молиме инсталирајте еден "
-"ако сакате да пребарате помош за системот"
 
 #: standalone/drakperm:22
 #, c-format
@@ -23928,11 +23907,10 @@ msgstr "DVD"
 msgid "Upload the hardware list"
 msgstr ""
 
-
 #: standalone/harddrake2:530
-#, fuzzy, c-format
+#, c-format
 msgid "Account:"
-msgstr "Монтирај"
+msgstr "Сметка:"
 
 #: standalone/harddrake2:531
 #, c-format
@@ -25323,6 +25301,21 @@ msgstr ""
 #, c-format
 msgid "Installation failed"
 msgstr "Неуспешна инсталација"
+
+#, fuzzy
+#~ msgid "MandrakeSoft Wizards"
+#~ msgstr "Лансирај го волшебникот"
+
+#, fuzzy
+#~ msgid "No browser available! Please install one"
+#~ msgstr "Не пости пребарувач! Ве молиме инсталирајте некој"
+
+#~ msgid ""
+#~ "No browser is installed on your system, Please install one if you want to "
+#~ "browse the help system"
+#~ msgstr ""
+#~ "Немате инсталирано пребарувач на Вашиот комјутер,Ве молиме инсталирајте "
+#~ "еден ако сакате да пребарате помош за системот"
 
 #~ msgid "Installing HPOJ package..."
 #~ msgstr "Инсталирање на HPOJ пакет..."
