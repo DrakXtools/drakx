@@ -25,8 +25,6 @@ use strict;
 use warnings;
 use diagnostics;
 
-use Data::Dumper;
-
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -206,10 +204,14 @@ sub manage {
     $notebook->set_property('show-tabs', 0);
     $notebook->set_property('show-border', 0);
     
+    my $apply_button;
+    $apply_button = gtksignal_connect(Gtk2::Button->new(N("Apply")), 
+				      clicked => sub { save($netc, $netcnx, $intf, $gui, $apply_button) });
+    
     each_index {
 	my $interface = $_;
 	$gui->{$interface}{index} = $::i;
-	build_notebook($window, $netc, $intf->{$interface}, $gui->{$interface}, $interface);
+	build_notebook($window, $netc, $intf->{$interface}, $gui->{$interface}, $interface, $apply_button);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
     } (sort keys %$intf);
     
@@ -222,13 +224,21 @@ sub manage {
 									   ),
 				     1, $notebook,
 				     0, gtkpack(Gtk2::HButtonBox->new,
-						gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $window->destroy; Gtk2->main_quit }),
+						gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { $window->destroy; 
+														   Gtk2->main_quit }),
 						gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub {}),
-						gtksignal_connect(Gtk2::Button->new(N("Apply")), clicked => sub { save($netc, $netcnx, $intf, $gui) }),
-						gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub {}),
+						$apply_button,
+						gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => sub { 
+								      if ($apply_button->get_property('sensitive')) {
+									  save($netc, $netcnx, $intf, $gui, $apply_button);
+									  $window->destroy;
+									  Gtk2->main_quit;
+								      }
+								  }),
 					       ),
 				    ));
     $interface_menu->set_popdown_strings(sort keys %$intf);
+    $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
     $window->main;
@@ -236,8 +246,10 @@ sub manage {
 }
 
 sub build_notebook {
-    my ($window, $netc, $intf, $gui, $interface) = @_;
+    my ($window, $netc, $intf, $gui, $interface, $apply_button) = @_;
  
+    my $apply = sub { $apply_button->set_sensitive(1) };
+
     #- tcp/ip box
     gtkpack_($gui->{sheet}{'Tcp/ip'} = Gtk2::VBox->new(0,0),
 	     if_($interface =~ /eth/, 
@@ -249,15 +261,18 @@ sub build_notebook {
 			gtkpack_(Gtk2::VBox->new(0,0),
 				 0, gtkpack_(Gtk2::VBox->new(0,0),
 					     1, Gtk2::Label->new(N("IP address")),
-					     0, $gui->{intf}{IPADDR} = Gtk2::Entry->new,
+					     0, gtksignal_connect($gui->{intf}{IPADDR} = Gtk2::Entry->new, 
+								  key_press_event => $apply),
 					    ),
 				 0, gtkpack_(Gtk2::VBox->new(0,0),
 					     1, Gtk2::Label->new(N("Netmask")),
-					     0, $gui->{intf}{NETMASK} = Gtk2::Entry->new,
+					     0, gtksignal_connect($gui->{intf}{NETMASK} = Gtk2::Entry->new,
+								  key_press_event => $apply),
 					    ),
 				 0, gtkpack_(Gtk2::VBox->new(0,0),
 					     1, Gtk2::Label->new(N("Gateway")),
-					     0, $gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+					     0, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
+								  key_press_event => $apply),
 					    ),
 				),
 			Gtk2::VSeparator->new,
@@ -284,7 +299,8 @@ sub build_notebook {
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 					    1, Gtk2::Label->new($_->[0]),
-					    0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					    0, gtksignal_connect($gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+								 key_press_event => $apply),
 					   ));
 			   } ([ N("Operating Mode"), "WIRELESS_MODE" ],
 			      [ N("Netwok name (ESSID)"), "WIRELESS_ESSID" ],
@@ -298,7 +314,8 @@ sub build_notebook {
 		gtkpack_(Gtk2::VBox->new(0,0),
 			 map { (0, gtkpack_(Gtk2::VBox->new(0,0),
 					    1, Gtk2::Label->new($_->[0]),
-					    0, $gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+					    0, gtksignal_connect($gui->{intf}{$_->[1]} = Gtk2::Entry->new,
+								 key_press_event => $apply),
 					   ));
 			   } ([ N("Encryption key"), 'WIRELESS_ENC_KEY' ],
 			      [ N("RTS/CTS"), 'WIRELESS_RTS' ],
@@ -315,9 +332,12 @@ sub build_notebook {
     #- options box
     gtkpack($gui->{sheet}{Options} = Gtk2::VBox->new(0,0),
 	    gtkpack__(Gtk2::VBox->new(0,0),
-		      $gui->{intf_bool}{ONBOOT} = Gtk2::CheckButton->new(N("Start at boot")),
-		      $gui->{intf_bool}{HWADDR} = Gtk2::CheckButton->new(N("Track network card id (useful for laptops)")),
-		      $gui->{intf_bool}{MII_NOT_SUPPORTED} = Gtk2::CheckButton->new(N("Network Hotplugging")),	    
+		      map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
+									    toggled => $apply))
+			} ([ "ONBOOT", N("Start at boot") ],
+			   [ "HWADDR", N("Track network card id (useful for laptops)") ],
+			   [ "MII_NOT_SUPPORTED", N("Network Hotplugging") ],
+			  ),		     
 		     ));
     $gui->{intf_bool}{$_}->set_active($intf->{$_} eq 'yes' ? 1 : 0) foreach keys %{$gui->{intf_bool}};
     
@@ -353,10 +373,10 @@ sub populate_notebook {
 }
 
 sub save {
-    my ($netc, $netcnx, $intf, $gui) = @_;
+    my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
 
     save_notebook($netc, $intf->{$_}, $gui->{$_}) foreach keys %$intf;
-    apply($netc, $netcnx, $intf);
+    apply($netc, $netcnx, $intf, $apply_button);
 }
 
 sub save_notebook {
@@ -452,7 +472,7 @@ sub update_list() {
 }
 
 sub apply {
-    my ($netc, $netcnx, $intf) = @_;
+    my ($netc, $netcnx, $intf, $button_apply) = @_;
     
     network::network::sethostname($netc) if is_dynamic_ip($intf);
     
@@ -468,8 +488,7 @@ sub apply {
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
     $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
 
-    #network::netconnect::save_profile($netcnx); #- profile use has been moved out of drakconnect
-    #$button_apply->set_sensitive(0);
+    $button_apply->set_sensitive(0);
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
