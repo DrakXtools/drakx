@@ -46,7 +46,7 @@ Backup and Restore application
 --config-info         : explain configuration file options (for non-X users).
 --daemon              : use daemon configuration. 
 --help                : show this message.
---version             : show version name.
+--version             : show version number.
 "),
            'drakbug' => N("[OPTIONS] [PROGRAM_NAME]
 
