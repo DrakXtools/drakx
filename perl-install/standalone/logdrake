@@ -276,7 +276,7 @@ sub parse_file {
   $win_pb->destroy if !$::isEmbedded || !$isExplain;
 
   if ($isTail) {
-      close $F;
+      close $F if $F;
       open $F, $file or die "E: $!";
       local $_;
       while (<$F>) {} #to prevent to output the file twice..
