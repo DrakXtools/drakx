@@ -425,7 +425,7 @@ Take a look at http://www.linmodems.org"),
 killall pppd
 ), $netcnx->{type});
                         $modem = $netcnx->{$netcnx->{type}};
-                        $modem->{device} = $first_modem->();
+                        $modem->{device} = $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
                         $modem->{connection} = $l{Name};
                         $modem->{domain} = $l{Domain};
