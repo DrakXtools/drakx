@@ -184,7 +184,7 @@ sub switch {
 What's more, OSS drivers all reinvent the wheel.
 
 ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
-supports quite a large range of ISA and PCI cards.\n
+supports quite a large range of ISA, USB and PCI cards.\n
 It also provides a much higher API than OSS.\n
 To use alsa, one can either use:
 - the old compatibility OSS api
