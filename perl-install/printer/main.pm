@@ -2320,7 +2320,7 @@ sub configure_hpoj {
 	if ($bus eq "usb") {
 	    # Important: don't put more quotes around /dev/usb/lp[0-9]*,
 	    # because ptal-mlcd currently does no globbing:
-	    print CONFIG "-device /dev/usb/lp[0-9]*";
+	    print CONFIG "-device /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2 /dev/usb/lp3 /dev/usb/lp4 /dev/usb/lp5 /dev/usb/lp6 /dev/usb/lp7 /dev/usb/lp8 /dev/usb/lp9 /dev/usb/lp10 /dev/usb/lp11 /dev/usb/lp12 /dev/usb/lp13 /dev/usb/lp14 /dev/usb/lp15";
 	} elsif ($bus eq "par") {
 	    print CONFIG "$address_arg -device $device";
 	}
