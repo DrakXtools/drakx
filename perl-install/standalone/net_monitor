@@ -195,7 +195,7 @@ sub connection() {
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
     $statusbar->push(1, $wasconnected ? N("Disconnecting from Internet ") : N("Connecting to Internet "));
-    if ($wasconnected == 1) {
+    if ($wasconnected == 0) {
 	$c_time = time();
 	$ct_tag = Glib::Timeout->add(1000, sub {
 				       my ($sec, $min, $hour) = gmtime(time() - $c_time);
