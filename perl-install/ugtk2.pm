@@ -614,7 +614,7 @@ sub get_text_coord {
 	@t2 = @t;
     }
     foreach (@t2) {
-	my ($l, undef) = gtkstring_size($_ . (!$flag ? $wrap_char : ''));
+	my ($l, undef) = string_size($_ . (!$flag ? $wrap_char : ''));
 	if ($width + $l > $max_width2 && !$flag) {
 	    $flag = 1;
 	    $height += $height_elem + 1;
