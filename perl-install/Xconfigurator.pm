@@ -242,7 +242,7 @@ Do You want to use XFree 3.3 instead of XFree 4.0?"), 1) and $card->{driver} = '
 
     #- 3D acceleration configuration for XFree 4.0 using DRI, this is enabled by default
     #- but for some there is a need to specify VideoRam (else it won't run).
-    if (card->{DRI_glx}) {
+    if ($card->{DRI_glx}) {
 	($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 32768) if $card->{identifier} =~ /MGA G[24]00/;
 	($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 10000) if $card->{type} =~ /Intel 810/;
     }
@@ -1094,15 +1094,41 @@ Would you like X to start when you reboot?"), 1);
 		my %l; @l{@etc_pass_fields} = split ':';
 		$l{uid} > 500, $l{name};
 	    } cat_("$o->{prefix}/etc/passwd");
-
-	    exists $o->{miscellaneous}{autologuser} || $::auto || !@users or 
-	      $in->ask_yesorno(_("Autologin at startup"),
-_("I can set up your computer to automatically log on one user.
-Would you like to use this feature?"), 1) && $in->ask_from_entries_refH(_("Autologin"),
-					 _("Autologin - Choose default user"),
-					 [ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ],
-	      );
-	}
-	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
+	    if (!(exists $o->{miscellaneous}{autologuser} || $::auto || !@users || exists $o->{authentication}{NIS} ))
+	      {
+		if($in->ask_from_entries_refH(_("Autologin"),
+  _("I can set up your computer to automatically log on one user.
+If you don't want to use this feature, click on the cancel button."),
+[ _("Choose the default user :") => {val => \$o->{miscellaneous}{autologuser}, list => \@users, not_edit => 1} ], )) {
+		  my  (@lines, $autoString, $autoUser);
+		  open (F, "$prefix/etc/X11/xdm/xdm_config");
+		  foreach (<F>) {
+		    /DisplayManager._0.autoUser/ and $autoUser=1;
+		    /DisplayManager._0.autoString/ and $autoString=1;
+		  }
+		  close F;
+		  if ( $autoUser) {
+		    substInFile {
+		      s/^(DisplayManager._0.autoUser):.*/$1:\t$o->{miscellaneous}{autologuser}/;
+		    } "$prefix/etc/X11/xdm/xdm_config"
+		  } else {
+		    open F, ">>$prefix/etc/X11/xdm/xdm_config" or die "Can't append $prefix/etc/X11/xdm/xdm_config !";
+		    print F "\nDisplayManager._0.autoUser:\t$o->{miscellaneous}{autologuser}";
+		    close F;
+		  }
+		  if ( $autoString) {
+		    substInFile {
+		      s/^(DisplayManager._0.autoString):.*/$1:\tkde\n/; # Change it when /etc/wmsession.d is complete.
+		    } "$prefix/etc/X11/xdm/xdm_config"
+		  } else {
+		    open F, ">>$prefix/etc/X11/xdm/xdm_config" or die "Can't append $prefix/etc/X11/xdm/xdm_config !";
+		    print F "\nDisplayManager._0.autoString:\tkde\n";
+		    close F;
+		  }
+		  # (dam's) : a patch for gdm is being done.
+		}
+	      }
+	  }
+      run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }
