@@ -222,7 +222,7 @@ arch() =~ /^sparc/ ? (
  "sk" => [ N_("Slovakian (QWERTZ)"), "sk-qwertz",   "sk",    0 ],
  "sk_qwerty" => [ N_("Slovakian (QWERTY)"), "sk-qwerty", "sk_qwerty", 0 ],
 # TODO: console map
- "sr" => [ N_("Serbian (cyrillic)"), "sr",          "sr",    0 ],
+ "sr" => [ N_("Serbian (cyrillic)"), "sr",          "sr",    1 ],
 #-"syr" => [ N_("Syriak"),         "us",             "syr",  1 ],
 #-"tel" => [ N_("Telugu"),         "us",             "tel",  1 ],
 # no console kbd that I'm aware of
