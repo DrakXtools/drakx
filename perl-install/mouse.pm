@@ -205,7 +205,12 @@ sub write {
     local $mouse->{WHEEL} = bool2yesno($mouse->{nbuttons} > 3);
     setVarsInSh("$::prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3 WHEEL device));
     any::devfssymlinkf($mouse, 'mouse');
+
+    #- we should be using input/mice directly instead of usbmouse, but legacy...
+    symlinkf 'input/mice', "$::prefix/dev/usbmouse" if $mouse->{device} eq "usbmouse";
+
     any::devfssymlinkf($mouse->{auxmouse}, 'mouse1') if $mouse->{auxmouse};
+
 
     various_xfree_conf($in, $mouse);
 
@@ -219,8 +224,6 @@ sub write {
 	    $_ = '' if /^\Qdev.mac_hid.mouse_button/;
 	    $_ .= $s if eof;
 	} "$::prefix/etc/sysctl.conf";
-	#- hack - dev RPM symlinks to mouse0 - lands on mouse1 with new input layer on PPC input/mice will get both ADB and USB
-	symlinkf "/dev/input/mice", "$::prefix/dev/usbmouse" if ($mouse->{device} eq "usbmouse");    
     }
 }
 
