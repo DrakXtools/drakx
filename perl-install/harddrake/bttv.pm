@@ -17,11 +17,11 @@ my %tuners_lst =
     (
 	-1 => $default,
 	0 => "Temic|PAL (4002 FH5)",
-	1 => "Philips|PAL_I",
-	2 => "Philips|NTSC",
-	3 => "Philips|SECAM",
+	1 => "Philips|PAL_I (FI1246 and compatibles)",
+	2 => "Philips|NTSC (FI1236 and compatibles)",
+	3 => "Philips|(SECAM+PAL_BG) (FI1216MF, FM1216MF, FR1216MF)",
 	4 => "NoTuner",
-	5 => "Philips|PAL",
+	5 => "Philips|PAL_BG (FI1216 and compatibles)",
 	6 => "Temic|NTSC (4032 FY5)",
 	7 => "Temic|PAL_I (4062 FY5)",
 	8 => "Temic|NTSC (4036 FY5)",
@@ -39,7 +39,7 @@ my %tuners_lst =
 	20 => "Temic|PAL_BG (4009 FR5) or PAL_I (4069 FR5)",
 	21 => "Temic|NTSC (4039 FR5)",
 	22 => "Temic|PAL/SECAM multi (4046 FM5)",
-	23 => "Philips|PAL_DK",
+	23 => "Philips|PAL_DK (FI1256 and compatibles)",
 	24 => "Philips|PAL/SECAM multi (FQ1216ME)",
 	25 => "LG|PAL_I+FM (TAPC-I001D)",
 	26 => "LG|PAL_I (TAPC-I701D)",
@@ -54,7 +54,8 @@ my %tuners_lst =
 	35 => "Temic|PAL_DK/SECAM_L (4012 FY5)",
 	36 => "Temic|NTSC (4136 FY5)",
 	37 => "LG|PAL (newer TAPC series)",
-	38 => "Philips|PAL/SECAM multi (FM1216ME)"
+	38 => "Philips|PAL/SECAM multi (FM1216ME)",
+	39 => "LG NTSC (newer TAPC series)"
 	);
 
 # Tweaked from Cardlist
@@ -108,7 +109,8 @@ my %cards_lst =
 	"I|Intel|Create and Share PCI (bttv type 32)" => 32,
 	"I|Intel|Smart Video Recorder III (bttv type 32)" => 32,
 	"T|Terratec|TerraTValue" => 33,
-	"L|Leadtek|WinFast 2000" => 34,
+	"L|Leadtek|WinFast TV 2000" => 34,
+	"L|Leadtek|WinFast VC 100" => 35,
 	"L|Lifeview|FlyVideo 98 LR50" => 35,
 	"C|Chronos|Video Shuttle II" => 35,
 	"L|Lifeview|FlyVideo 98FM LR50" => 36,
@@ -176,7 +178,8 @@ my %cards_lst =
 	"G|GrandTec|Multi Capture Card (Bt878)" => 77,
 	"Jetway|TV/Capture JW-TV878-FBK" => 78,
 	"Kworld|KW-TV878RF" => 78,
-	"D|DSP Design|TCVIDEO" => 79
+	"D|DSP Design|TCVIDEO" => 79,
+	"Hauppauge|WinTV PVR" => 80
 	);
 
 my %pll_lst = 
