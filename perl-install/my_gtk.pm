@@ -145,7 +145,7 @@ sub exit {
 }
 
 #- in case "exit" above was not called by the program
-END { &exit() }
+END { print "BUG in $0 : my_gtk->exit was *NOT* called !! \n"; &exit() }
 
 #-###############################################################################
 #- createXXX functions
