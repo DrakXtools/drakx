@@ -770,7 +770,7 @@ If you don't want to use this feature, click on the cancel button."),
 sub write_passwd_user {
     my ($prefix, $u, $isMD5) = @_;
 
-    local $u->{pw} ||= $u->{password} && &crypt($u->{password}, $isMD5);
+    local $u->{pw} = $u->{pw} || $u->{password} && &crypt($u->{password}, $isMD5);
     $u->{shell} ||= '/bin/bash';
 
     substInFile {
