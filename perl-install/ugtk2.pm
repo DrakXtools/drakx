@@ -422,7 +422,7 @@ sub create_packtable {
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     'fill', 'fill', 5, 0) :
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
-			     ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' ? ['expand', 'fill'] : [], 0, 0);
+			     ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
 		$_->show;
 	    }
 	} @$l;
