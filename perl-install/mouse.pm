@@ -101,9 +101,13 @@ sub write($;$) {
 sub mouseconfig {
     my ($t, $mouse, $wacom);
 
-    foreach (0..1) { #- probe only ttyS0 and ttyS1.
-	$t = detect_devices::probe_device("/dev/ttyS$_");
-	if ($t->{CLASS} =~ /MOUSE/i) {
+    #- Whouah! probing all devices from ttyS0 to ttyS3 once a time!
+    detect_devices::probeSerialDevices();
+
+    #- check new probing methods keep everything used here intact!
+    foreach (0..3) {
+	$t = detect_devices::probeSerial("/dev/ttyS$_");
+	if ($t->{CLASS} eq 'MOUSE') {
 	    $t->{MFG} ||= $t->{MANUFACTURER};
 
 	    $mouse = name2mouse("Microsoft IntelliMouse (serial)") if $t->{MFG} eq 'MSH' && $t->{MODEL} eq '0001';

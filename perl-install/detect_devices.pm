@@ -15,6 +15,7 @@ use c;
 #- Globals
 #-#####################################################################################
 my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr plip fddi);
+my %serialprobe = ();
 
 #-######################################################################################
 #- Functions
@@ -239,23 +240,36 @@ sub whatPrinterPort() {
     grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2);
 }
 
-sub probe_device($) {
-    my $device = devices::make($_[0]);
-    my %probe;
+sub probeSerialDevices {
+    #- make sure the device are created before probing.
+    foreach (0..3) { devices::make("/dev/ttyS$_") }
 
-    #- TODO cache hash result of probe according to device.
+    #- for device already probed, we can safely (assuming device are
+    #- not moved during install :-)
+    #- include /dev/mouse device if using an X server.
+    -d "/var/lock" or mkdir "/var/lock", 0755;
+    -l "/dev/mouse" and $serialprobe{"/dev/" . readlink "/dev/mouse"} = undef;
+    foreach (keys %serialprobe) { m|^/dev/(.*)| and touch "/var/lock/LCK..$1" }
+
+    #- start probing all serial ports... really faster than before :-)
     local *F;
-    open F, "pnp_serial $device 2>/dev/null |" if $device =~ /ttyS/;
+    open F, "serial_probe 2>/dev/null |";
+    my %current = (); foreach (<F>) {
+	chomp;
+	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/;
+	$current{$1} = $2 if /^([^=]+)=(.*)$/;
+    }
+    close F;
 
-    foreach (<F>) { $probe{$1} = $2 if /^\s+(.*?)\s*:\s*\"(.*)\"\s*$/ }
-    log::l("probing $device find class: $probe{CLASS}");
-
-    \%probe;
+    foreach (values %serialprobe) {
+	log::l("probed $_->{DESCRIPTION} of class $_->{CLASS} on device $_->{DEVICE}");
+    }
 }
 
+sub probeSerial($) { $serialprobe{$_[0]} }
+
 sub hasModem($) {
-    my $probe = probe_device($_[0]);
-    $probe->{CLASS} =~ /MODEM/i && $probe->{DESCRIPTION};
+    $serialprobe{$_[0]} and $serialprobe{$_[0]}{CLASS} eq 'MODEM' and $serialprobe{$_[0]}{DESCRIPTION};
 }
 
 sub hasMousePS2() {

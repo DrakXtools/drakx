@@ -1,3 +1,13 @@
+2000-04-07  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/serial_probe: obsoleting pnp_serial which is now replaced
+	by this one, taken from kudzu, really faster and probe all serial
+	devices at one time. modified to probe correctly modem :-)
+	* mouse.pm: updated to use serial_probe interface of
+	detect_devices.pm.
+	* detect_devices.pm: modified to use serial_probe, cache probed
+	devices to avoid reprobing.
+
 2000-04-06  François Pons  <fpons@mandrakesoft.com>
 
 	* install_steps_interactive.pm, install_steps.pm: added support

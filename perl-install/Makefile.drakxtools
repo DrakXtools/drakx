@@ -1,6 +1,6 @@
 include Makefile.config
 
-DIRS = ddcprobe pnp_serial share/po Newt c pci_probing resize_fat
+DIRS = ddcprobe serial_probe share/po Newt c pci_probing resize_fat
 PREFIX = 
 SBINDEST = $(PREFIX)/usr/sbin
 ETCDEST = $(PREFIX)/etc/gtk
@@ -23,7 +23,7 @@ install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)
-	install -s ddcprobe/ddcxinfos pnp_serial/pnp_serial $(SBINDEST)
+	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done

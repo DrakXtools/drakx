@@ -481,6 +481,7 @@ sub pppConfig {
     my $m = $o->{modem} ||= {};
 
     unless ($m->{device} || $::expert && !$o->ask_yesorno('', _("Try to find a modem?"), 1)) {
+	detect_devices::probeSerialDevices();
 	foreach (0..3) {
 	    next if $o->{mouse}{device} =~ /ttyS$_/;
 	    detect_devices::hasModem("$o->{prefix}/dev/ttyS$_")

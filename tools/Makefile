@@ -1,7 +1,7 @@
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
-DIRS	    = ddcprobe pnp_serial
+DIRS	    = ddcprobe serial_probe
 BASE        = $(ROOTDEST)/Mandrake/base
 CFLAGS      = -Wall
 
