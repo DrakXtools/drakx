@@ -13,8 +13,6 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
-my @background;
-
 #- if we're running for the doc team, we want screenshots with
 #- a good B&W contrast: we'll override values of our theme
 my $theme_overriding_for_doc = q(style "galaxy-default"
@@ -57,17 +55,10 @@ widget "*logo*" style "background-logo"
 sub load_rc {
     my ($o, $name) = @_;
 
-    if (my $f = -r $name ? $name
-                         : find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
-	my @contents = cat_($f);
-	$o->{doc} and push @contents, $theme_overriding_for_doc;
-
-	Gtk2::Rc->parse_string(join("\n", @contents));
- 	foreach (@contents) {
-	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background = map { $_ * 255 * 255 } split ',', $1 if /NORMAL.*\{(.*)\}/;
-	    }
-	}
+    my $f = $name;
+    -r $name or $f = find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__));
+    if ($f) {
+	Gtk2::Rc->parse_string($o->{doc} ? $theme_overriding_for_doc : scalar cat_($f));
    }
 
     if ($::move) {
@@ -118,7 +109,12 @@ sub install_theme {
 
     load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
-    mygtk2::set_root_window_background(@background) if !$::move;
+
+    if (!$::move) {
+	my $win = gtknew('Window', widget_name => 'background');
+	$win->realize;
+	mygtk2::set_root_window_background_with_gc($win->style->bg_gc('normal'));
+    }
 }
 
 #------------------------------------------------------------------------------
