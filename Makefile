@@ -105,7 +105,10 @@ upload:
 	upload misc rpmtools.pm ;\
 	upload misc auto ;\
 	upload '' live_update ;\
-	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; done; done;\
+	rm -f MD5SUM ;\
+	for i in $(RELEASE_BOOT_IMG); do for j in $${i}*; do upload images $$j; md5sum $$j >> MD5SUM; done; done;\
+	upload images MD5SUM ;\
+	rm -f MD5SUM ;\
 	echo
 
 upload_sparc:
