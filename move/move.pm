@@ -301,7 +301,14 @@ sub key_mount {
 	}
 	$_->{mntpoint} = '/home';
 	$_->{options} = $key_mountopts;
-	if (eval { fs::mount_part($_); 1 }) {
+	my $ok = eval { fs::mount_part($_); 1 };
+	if ($ok) {
+	    my ($kb_size) = MDK::Common::System::df('/home');
+	    log::l("$_->{device} is $kb_size KB");
+	    $ok = $kb_size > 10 * 1024; #- at least 10 MB
+	    fs::umount_part($_) if !$ok;
+	}
+	if ($ok) {
 	    $key_part = $_;
 	    last if -e $key_sysconf;
 	} else {
