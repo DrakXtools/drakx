@@ -622,7 +622,7 @@ sub select_packages {
 		xawtv kwintv xscreensaver-gl xmms-mesa 
 		bzflag csmash gltron spacecup chromium tuxracer FlightGear armagetron 
 		alsa imwheel nfs-utils-clients lvm usbd hotplug reiserfsprogs xfsprogs jfsprogs 
-		sox aumix xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
+		sox aumix xmms-arts xawtv gatos kwintv sane-frontends gphoto gnome-toaster gcombust xcdroast apmd cdlabelgen
 		), exists $options{server} ? qw(Aurora Aurora-Monitor-NewStyle-Categorizing-WsLib) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	if ($pkg) {
