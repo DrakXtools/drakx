@@ -1,3 +1,106 @@
+2003/09/14  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: last updates, fixed some typos
+
+2003/09/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/hu.po, share/po/he.po, share/po/pt_BR.po, share/po/uk.po,
+	share/po/fa.po, share/po/sq.po: updated Farsi, Hebrew, Hungarian,
+	Brazilian, Albanian and Ukrainian files
+
+2003/09/14  Pixel  <pixel at mandrakesoft.com>
+
+	* fsedit.pm: add a warning for / on LVM: "You may not be able to install
+	lilo (since lilo doesn't handle a LV on multiple PVs)"
+
+2003/09/13  nplanel
+
+	* install2.pm: back to i810fb xcon=4 (bad docummented option)
+
+2003/09/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: put quotes around the XIM_PROGRAM values that use spaces
+
+	* share/po/it.po, share/po/ro.po, share/po/he.po, share/po/pt_BR.po,
+	share/po/sk.po, share/po/bg.po: updated Bulgarian, Hebrew, Italian,
+	Brazilian and Romanian files;
+	fixed syntax errors in Slovak file
+
+	* share/po/zh_CN.po, share/po/cy.po: updated Welsh and Chinese files
+
+2003/09/13  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/09/12  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/compssUsers: Always install a termunal emulator and don't install
+	GNOME by default
+
+	* standalone/icons/wiz_logdrake.png, standalone/icons/wiz_drakgw.png,
+	standalone/icons/wiz_scannerdrake.png,
+	standalone/icons/wiz_drakconnect.png,
+	standalone/icons/wiz_default_up.png, standalone/icons/wiz_firewall.png,
+	standalone/icons/wiz_printerdrake.png,
+	standalone/icons/drakfont.620x57.png: Update
+
+2003/09/12  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - dropped sub load_firmware_floppy
+	  - handle windows firmware's copy
+
+	* network/tools.pm: added sub copy_firmware, sub use_windows(), sub
+	use_floppy
+	firmware copy works from floppy and windows/winnt
+
+2003/09/12  François Pons  <fpons at mandrakesoft.com>
+
+	* share/rpmsrate: fixed fatal error in rpmsrate.
+
+2003/09/12  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* lang.pm: fix garbled font when asking UTF8 in text install
+
+	* c/Makefile.PL, c/stuff.xs.pl: stuff doesn't contain gtk stuff anymore
+
+	* tools/make_mdkinst_stage2: die if cp failed
+
+	* share/themes-galaxy.rc: fix progressbar color (should be blue)
+
+2003/09/12  keld
+
+	* share/po/da.po: corrections
+	gi/perl-install/share/po/da.po
+	corrections
+	soft/wizard_perl/po/da.po gi/perl-install/share/po/da.po
+	updates
+	soft/menu-messages/da.po soft/ftw/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/09/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po, share/po/nb.po, share/po/vi.po: updated Norwegian,
+	Swedish and Vietnamese files
+
+	* share/po/cs.po: updated Czech file
+
+	* share/po/az.po: updated Azeri file
+
+2003/09/12  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: hd as default daemon media
+
+2003/09/12  tpittich
+
+	* share/po/sk.po: updated slovak translation
+
+2003/09/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: fix #5586 (profiles with spaces in name)
+
+	* drakxtools.spec: 9.2-11mdk
+
 2003/09/12  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
 
 	* share/po/pl.po: Updated
@@ -21542,7 +21645,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.834 2003/09/11 18:52:49 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.835 2003/09/12 13:48:48 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
