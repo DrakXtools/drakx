@@ -303,7 +303,7 @@ sub create_box_with_title {
 	return $box;
     }
     $o->{box_size} = n_line_size($nbline, 'text', $box);
-    if (@_ <= 2 && ($nbline > 4)) {
+    if (@_ <= 2 && $nbline > 4) {
 	$o->{icon} && !$::isWizard and 
 	  eval { gtkpack__($box, gtkset_border_width(gtkpack_(Gtk2::HBox->new(0,0), 1, gtkcreate_img($o->{icon})),5)) };
 	my $wanted = $o->{box_size};
@@ -487,7 +487,7 @@ sub create_okcancel {
     my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
     my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
-                                           if_(!$::Wizard_no_previous, $b2), $b1) : ($b1, $b2);
+                                           if_(!$::Wizard_no_previous, $b2), $b1) : ($::isInstall ? ($b1, $b2) : $b2, $b1);
     my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
 
