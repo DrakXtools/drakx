@@ -123,7 +123,7 @@ our %langs = (
 'tg' =>    [ 'Tajik',               'Tojiki',            'tg_TJ', ' 2   ', 'utf_cyr2' ],
 'th' =>    [ 'Thai',                'ZZ Thai',           'th_TH', ' 2   ', 'tis620' ],
 'tk' =>    [ 'Turkmen',             'Turkmence',         'tk_TM', ' 2   ', 'utf8' ],
-'tr' =>    [ 'Turkish',             'Turkce',            'tr_TR', ' 2   ', 'iso-8859-9' ],
+'tr' =>    [ 'Turkish',             'Turkce',            'tr_TR', '12   ', 'iso-8859-9' ],
 'tt' =>    [ 'Tatar',               'Tatarca',           'tt_RU', ' 2   ', 'utf8' ],
 #- ug_CN locale not done yet, using ar_EG locale instead
 'ug' =>    [ 'Uyghur',              'AA Uyghur',         'ar_EG', ' 2   ', 'utf_ar', 'ug' ],  
