@@ -18,8 +18,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-use strict;
-use diagnostics;
+
+
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -391,18 +391,20 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     }
 
     $window->set_border_width(10);
-    
     $window->vbox->pack_start(my $vbox0 = new Gtk2::VBox(0,0),
                               1, 1, 0,
                              );
+
     $vbox0->pack_start(new Gtk2::Label(N("LAN Configuration")),0,1,0);
     my $notebook = new Gtk2::Notebook;
     $vbox0->pack_start($notebook,0,1,0);
+
     foreach (0..$#all_cards) {
 	my @infos;
 	my @conf_data;
 	$card_tab[2*$_] = \@infos;
 	$card_tab[2*$_+1] = \@conf_data;
+
 	my $vbox_local = new Gtk2::VBox(0,0);
 	$vbox_local->set_border_width(10);
 	$vbox_local->pack_start(new Gtk2::Label(N("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
@@ -411,20 +413,20 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	#	Eth${_}Driver = $all_cards[$_]->[1]
 	my ($ip, undef, $mask) = get_eth_ip($_);
 	$mask ||= $intf->{"eth$_"}{NETMASK};
-        @conf_data = ([N("IP address"), \$ip ],
-			 [N("Netmask"), \$mask],
-			 [N("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"]],
-			 [N("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["yes", "no"]],
-			 [N("DHCP client"), \$netcnx->{dhcp_client}]
-			);
+        @conf_data = ([ N("IP address"), \$ip ],
+		      [ N("Netmask"), \$mask ],
+		      [ N("Boot Protocol"), \$intf->{"eth$_"}{BOOTPROTO}, ["static", "dhcp", "bootp"] ],
+		      [ N("Started on boot"), \$intf->{"eth$_"}{ONBOOT} , ["yes", "no"] ],
+		      [ N("DHCP client"), \$netcnx->{dhcp_client} ]
+		     );
 	my $i = 0;
-     my $size_group = Gtk2::SizeGroup->new('horizontal');
+	my $size_group = Gtk2::SizeGroup->new('horizontal');
 
 	foreach my $j (@conf_data) {
 	    my $l = new Gtk2::Label($j->[0]);
 	    $l->set_justify('left');
 	    $infos[2*$i] = gtkpack_(Gtk2::HBox->new,
-                                 1, $l);
+				    1, $l);
 	    $vbox_local->pack_start($infos[2*$i], 1, 1, 0);
 	    my $c;
 	    if (defined $j->[2]) {
@@ -440,6 +442,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 	    $infos[2*$i+1]->set_text(${$j->[1]});
 	    $i++;
 	}
+
 	my $c = $_;
 	my $widget_temp;
 	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-eth$c") {
@@ -461,29 +464,33 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     my $bbox8 = new Gtk2::HButtonBox;
     $vbox0->pack_start($bbox8,0,0,10);
     $bbox8->set_layout('end');
+
     my $button_ok = Gtk2::Button->new(N("Ok"));
     $button_ok->signal_connect(clicked => sub {
-	foreach (0..$#all_cards) {
-	    my @infos = @{$card_tab[2*$_]};
-	    each_index {
-		${$_->[1]} = $infos[2*$::i+1]->get_text;
-	    } @{$card_tab[2*$_+1]};
-	    if ($intf->{"eth$_"}{BOOTPROTO} eq "dhcp") {
-		delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
-	    }
-	}
-	update();
-	$button_apply->set_sensitive(1);
-	$window->destroy; Gtk2->main_quit;
-    });
+				   foreach (0..$#all_cards) {
+				       my @infos = @{$card_tab[2*$_]};
+				       
+				       each_index { ${$_->[1]} = $infos[2*$::i+1]->get_text } @{$card_tab[2*$_+1]};
+				       
+				       if ($intf->{"eth$_"}{BOOTPROTO} ne "static") {
+					   delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
+				       } else {
+					   $intf->{"eth$_"}{IPADDR}  = $infos[1]->get_text;
+					   $intf->{"eth$_"}{NETMASK} = $infos[3]->get_text;
+				       }
+				   }
+				   update();
+				   $button_apply->set_sensitive(1);
+				   $window->destroy; Gtk2->main_quit;
+			       });
     $window->action_area->pack_start(gtkpack(Gtk2::HButtonBox->new,
                                              gtksignal_connect(Gtk2::Button->new(N("Cancel")),
                                                                clicked => sub { $window->destroy; Gtk2->main_quit }),
                                              $button_ok,
                                             ),
                                      1, 1, 0,
-                                     );
-
+				    );
+    
     $window->show_all;
     foreach (0..$#all_cards) {
 	my @infos = @{$card_tab[2*$_]};
