@@ -81,11 +81,13 @@ sub from_raw_X {
 
     my $device = $raw_X->get_device or die "no card configured";
 
+    my ($xfree3_server) = readlink("$::prefix/etc/X11/X") =~ /XF86_(.*)/;
+
     my $card = {
 	use_UTAH_GLX => int(grep { /glx/ } $raw_X->{xfree3}->get_modules),
 	use_DRI_GLX  => int(grep { /dri/ } $raw_X->{xfree4}->get_modules),
-	server => $raw_X->{xfree3_server},
-	prefer_xf3 => readlink("$::prefix/etc/X11/X") !~ /XFree86/ && !$force_xf4,
+	server => $xfree3_server,
+	prefer_xf3 => $xfree3_server && !$force_xf4,
 	%$device,
     };
     add_to_card__using_Cards($card, $card->{BoardName});
@@ -393,11 +395,11 @@ sub xfree_and_glx_choices {
     #- XFree version available, better to parse available package and get version from it.
     my ($xf4_ver, $xf3_ver) = ('4.2.0', '3.3.6');
 
-    my $xf3 = { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } };
-    my $xf4 = { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } };
+    my $xf3 = if_($card->{server}, { text => _("XFree %s", $xf3_ver), code => sub { $card->{prefer_xf3} = 1 } });
+    my $xf4 = if_($card->{Driver}, { text => _("XFree %s", $xf4_ver), code => sub { $card->{prefer_xf3} = 0 } });
 
     #- no XFree3 with multi-head
-    my @choices = $card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3);
+    my @choices = grep {$_} ($card->{cards} ? $xf4 : $card->{prefer_xf3} ? ($xf3, $xf4) : ($xf4, $xf3));
 
     #- no GLX with Xinerama
     return @choices if $card->{Xinerama};
@@ -506,7 +508,7 @@ sub add_to_card__using_Cards {
     delete @$card{'UTAH_GLX', 'UTAH_GLX_EXPERIMENTAL'} 
       if $force_xf4 || availableRamMB() > 800; #- no Utah GLX if more than 800 Mb (server, or kernel-enterprise, Utha GLX does not work with latest).
 
-    $card->{prefer_xf3} = 1 if $card->{Driver} eq 'neomagic' && !$force_xf4;
+    $card->{prefer_xf3} = 1 if $card->{Driver} eq 'neomagic' && !$force_xf4 && $card->{server};
 
     $card;
 }
