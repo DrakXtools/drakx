@@ -146,6 +146,11 @@ The command 'wbinfo -t' will test whether your authentication secrets are good."
     1;
 }
 
+sub get() {
+    my $system_auth = cat_("/etc/pam.d/system-auth");
+    { md5 => $system_auth =~ /md5/, shadow => $system_auth =~ /shadow/ };
+}
+
 sub set {
     my ($in, $netc, $authentication, $when_network_is_up) = @_;
 
