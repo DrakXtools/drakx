@@ -609,6 +609,10 @@ sub real_format_part {
 
     $part->{isFormatted} and return;
 
+    if ($part->{encrypt_key}) {
+	set_loop($part);
+    }
+
     my $dev = $part->{real_device} || $part->{device};
 
     my @options = if_($part->{toFormatCheck}, "-c");
@@ -674,9 +678,6 @@ sub formatMount_part {
     }
     if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
 	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) unless loopback::carryRootLoopback($part);
-    }
-    if ($part->{encrypt_key}) {
-	set_loop($part);
     }
     if ($part->{toFormat}) {
 	format_part($raids, $part, $prefix, $wait_message);
