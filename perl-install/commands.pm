@@ -606,6 +606,13 @@ sub bug {
     sync;
 }
 
+sub loadkeys {
+    my ($h) = getopts(\@_, "h");
+    $h || @_ != 1 and die "usage: loadkeys <keyboard>\n";
+
+    require keyboard;
+    keyboard::setup($_[0]);
+}
 
 #-######################################################################################
 #- Wonderful perl :(
