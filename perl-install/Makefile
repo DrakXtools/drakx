@@ -116,7 +116,7 @@ endif
 
 	for i in fonts keyboards locales gconv; do tar xfy `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 
-	cp -a modparm.lst $(DEST)/usr/share
+	cd share ; cp -a modparm.lst $(DEST)/usr/share
 	cd share ; cp -a keymaps $(DEST)/usr/share
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	cd share ; cp template.in/*.in $(DEST)/usr/share
