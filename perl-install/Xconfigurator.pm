@@ -263,6 +263,8 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     #- examine choice of user, beware the list MUST NOT BE REORDERED AS the first item should be the
     #- proposed one by DrakX.
     my $tc = $in->ask_from_listf(_("XFree configuration"), formatAlaTeX($msg), sub { translate($_[0]{text}) }, \@choices);
+    #- in case of class discarding, this can help ...
+    $tc or $tc = $choices[0];
     $tc->{code} and $tc->{code}();
 
     $card->{prog} = "/usr/X11R6/bin/" . ($card->{use_xf4} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
