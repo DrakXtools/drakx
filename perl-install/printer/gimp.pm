@@ -212,34 +212,27 @@ sub makeprinterentry {
 }
 
 sub findconfigfiles {
-    my @configfilenames;
-    push @configfilenames, ".gimp-1.2/printrc" if -d "$::prefix/usr/lib/gimp/1.2";
-    push @configfilenames, ".gimp-1.3/printrc" if -d "$::prefix/usr/lib/gimp/1.3";
+    my @configfilenames = (if_(-d "$::prefix/usr/lib/gimp/1.2", ".gimp-1.2/printrc"),
+                           if_( -d "$::prefix/usr/lib/gimp/1.3", ".gimp-1.3/printrc"));
+    return () unless @configfilenames;
     my @filestotreat;
-    local *PASSWD;
-    open PASSWD, "< $::prefix/etc/passwd" or die "Cannot read /etc/passwd!\n";
-    local $_;
-    while (<PASSWD>) {
-	chomp;
-	if (/^([^:]+):[^:]*:([^:]+):([^:]+):[^:]*:([^:]+):[^:]*$/) {
-	    my ($username, $uid, $gid, $homedir) = ($1, $2, $3, $4);
-	    if (($uid == 0 || $uid >= 500) && $username ne "nobody") {
-		foreach my $file (@configfilenames) {
-		    my $dir = "$homedir/$file";
-		    $dir =~ s,/[^/]*$,,;
-		    next if -f $dir && ! -d $dir;
-		    if (! -d "$::prefix$dir") {
-			eval { mkdir_p("$::prefix$dir") } or next;
-               run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", $dir) or next;
-		    }
-		    if (! -f "$::prefix$homedir/$file") {
-			eval { output("$::prefix$homedir/$file", "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n") } or next;
-               run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", "$homedir/$file") or next;
-		    }
-		    push @filestotreat, "$homedir/$file";
-		}
-	    }
-	}
+    foreach (&list_passwd()) {
+        my ($username, undef, $uid, $gid, undef, undef, undef, $homedir) = @$_;
+        next if 0 < $uid && $uid < 500 || $username eq "nobody";
+        foreach my $file (@configfilenames) {
+            my $dir = "$homedir/$file";
+            $dir =~ s,/[^/]*$,,;
+            next if -f $dir;
+            if (! -d "$::prefix$dir") {
+                eval { mkdir_p("$::prefix$dir") } or next;
+                run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", $dir) or next;
+            }
+            if (! -f "$::prefix$homedir/$file") {
+                eval { output("$::prefix$homedir/$file", "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n") } or next;
+                run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", "$homedir/$file") or next;
+            }
+            push @filestotreat, "$homedir/$file";
+        }
     }
     @filestotreat;
 }
