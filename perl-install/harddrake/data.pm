@@ -172,6 +172,7 @@ our @tree =
                 || member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc ultracam usbvideo))
             } @devices)
       },
+      # managed by hotplug:
       checked_on_boot => 0,
      },
 
@@ -181,6 +182,7 @@ our @tree =
       icon => "cpu.png",
       configurator => "",
       detector => sub { detect_devices::getCPUs() },
+      # maybe should we install schedutils?
       checked_on_boot => 0,
      },
 
