@@ -136,7 +136,7 @@ sub ask_fromW_real {
 	    $w = Newt::Component::Button(simplify_string(may_apply($e->{format}, ${$e->{val}})));
 	} elsif ($e->{type} eq 'treelist') {
 	    $e->{formatted_list} = [ map { may_apply($e->{format}, $_) } @{$e->{list}} ];
-	    my $data_tree = interactive::helper_separator_tree_to_tree($e->{separator}, $e->{formatted_list}, $e->{list});
+	    my $data_tree = interactive::helper_separator_tree_to_tree($e->{separator}, $e->{list}, $e->{formatted_list});
 
 	    my $count; $count = sub {
 		my ($t) = @_;
