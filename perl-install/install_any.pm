@@ -518,8 +518,8 @@ sub kdemove_desktop_file {
     #- remove any existing save in Trash of each user and
     #- move appropriate file there after an upgrade.
     foreach my $dir (grep { -d $_ } list_skels($prefix, 'Desktop')) {
-	unlink("$dir/Trash/$_") && rename("$dir/$_", "$dir/Trash/$_")
-	    foreach grep { -e "$dir/$_" } @toMove, grep { /\.rpmorig$/ } all($dir)
+	renamef("$dir/$_", "$dir/Trash/$_") 
+	  foreach grep { -e "$dir/$_" } @toMove, grep { /\.rpmorig$/ } all($dir)
     }
 }
 
