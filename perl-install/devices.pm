@@ -168,6 +168,11 @@ sub make($) {
     my ($type, $major, $minor) = eval { entry($_) };
     $@ and die "unknown device $_ (caller is " . join(":", caller()) . ")";
 
+    if ($file =~ m|/dev/| && -e '/dev/.devfsd') {
+	#- argh, creating devices is no good with devfs...
+	die "devices are handled by devfsd, and $file doesn't exist";
+    }
+
     #- make a directory for this inode if needed.
     mkdir dirname($file), 0755;
 
