@@ -1276,14 +1276,45 @@ sub allowedToUpgrade { $_[0] !~ /^(kernel|kernel22|kernel2.2|kernel-secure|kerne
 
 sub installTransactionClosure {
     my ($packages, $id2pkg) = @_;
-    my ($id, %closure, @l);
+    my ($id, %closure, @l, $medium, $min_id, $max_id);
 
     @l = sort { $a <=> $b } keys %$id2pkg;
+
+    #- search first usable medium (sorted by medium ordering).
+    foreach (sort { $a->{start} <=> $b->{start} } values %{$packages->{mediums}}) {
+	$_->{selected} or next;
+	if ($l[0]->id <= $_->{end}) {
+	    #- we have a candidate medium, it could be the right one containing
+	    #- the first package of @l...
+	    $l[0]->id >= $_->{start} and $medium = $_, last;
+	    #- ... but it could be necessary to find the first
+	    #- medium containing package of @l.
+	    foreach $id (@l) {
+		$id >= $_->{start} && $id <= $_->{end} and $medium = $_, last;
+	    }
+	    $medium and last;
+	}
+    }
+    $medium or return (); #- no more medium usable -> end of installation by returning empty list.
+    ($min_id, $max_id) = ($medium->{start}, $medium->{end});
+
+    #- it is sure at least one package will be installed according to medium chosen.
+    install_any::useMedium($medium->{medium});
+    if ($medium->{method} eq 'cdrom') {
+	my $pkg = $packages->{depslist}[$l[0]];
+
+	#- force changeCD callback to be called from main process.
+	install_any::getFile($pkg->filename, $medium->{descr});
+	#- close opened handle above.
+	install_any::getFile('XXX');
+    }
+
     while (defined($id = shift @l)) {
 	my @l2 = ($id);
 
 	while (defined($id = shift @l2)) {
 	    exists $closure{$id} and next;
+	    $id >= $min_id && $id <= $max_id or next;
 	    $closure{$id} = undef;
 
 	    my $pkg = $packages->{depslist}[$id];
@@ -1338,7 +1369,6 @@ sub install($$$;$$) {
     #- place (install_steps_gtk.pm,...).
     installCallback($packages, 'user', undef, 'install', $nb, $total);
 
-    my $medium = 1;
     do {
 	my @transToInstall = installTransactionClosure($packages, \%packages);
 	$nb = values %packages;
@@ -1353,25 +1383,6 @@ sub install($$$;$$) {
 
 	#- extract headers for parent as they are used by callback.
 	extractHeaders($prefix, \@transToInstall, $packages->{mediums});
-
-	if ($packages->{mediums}{$medium}{method} eq 'cdrom') {
-	    #- extract packages to make sure the getFile below to force
-	    #- accessing medium will not be redirected to updates.
-	    my @origin = grep { packageMedium($packages, $_) == $medium } @transToInstall;
-
-	    if (@origin) {
-		#- reset file descriptor open for main process but
-		#- make sure error trying to change from hdlist are
-		#- trown from main process too.
-		install_any::getFile($origin[0]->filename, packageMedium($packages, $origin[0])->{descr});
-
-#		#- allow some log here to check selected status.
-#		log::l("status for medium $origin[0][$MEDIUM] ($media->{$origin[0][$MEDIUM]}{descr}) is " .
-#		       ($media->{$origin[0][$MEDIUM]}{selected} ? "selected" : "refused"));
-	    }
-	}
-	#- and make sure there are no staling open file descriptor too (before forking)!
-	install_any::getFile('XXX');
 
 	my ($retry_pkg, $retry_count);
 	while ($retry_pkg || @transToInstall) {
