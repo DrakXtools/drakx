@@ -112,6 +112,8 @@ TERMINALS
   3 Eterm vlock
   1 aterm x3270
 
+  4 KDE ktelnet
+  4 GNOME gnome-telnet
   4 LOCALES"ja" kterm 
 
 NETWORKING_CHAT
@@ -125,10 +127,11 @@ NETWORKING_FILE_TRANSFER
   CLIENT
     5 lftp mirrordir rsync uucp
     4 gftp rdist
-    3 fmirror ncftp
+    3 fmirror ncftp tftp
     3 GNOME dpsftp
   SERVER
     4 proftpd
+    3 anonftp
 
 NETWORKING_INSTANT_MESSAGING
   CLIENT
@@ -141,9 +144,10 @@ NETWORKING_INSTANT_MESSAGING
 NETWORKING_IRC
   CLIENT
     4 KDE kvirc
-    3 BitchX irssi
+    3 BitchX 
     3 GNOME xchat
-    2 eggdrop
+    2 irssi
+    1 eggdrop
 
 NETWORKING_MAIL
   CLIENT
@@ -285,7 +289,8 @@ DEVELOPMENT
     ghc ghc-prof happy haskell-GTK haskell-GTK-devel hugs98 mercury swi-prolog 
     ruby-extensions ruby-gtk ruby 
 
-  2 gettext-devel ImageMagick-devel Mesa-common-devel Xaw3d-devel detect-devel
+  4 gettext-devel
+  2 ImageMagick-devel Mesa-common-devel Xaw3d-devel detect-devel
     gd-devel p2c-devel gmp-devel guile-devel libgr-devel libjpeg-devel libpng-devel
     libtermcap-devel libtiff-devel libungif-devel libxml-devel libxml2-devel
     linuxconf-devel slang-devel sox-devel zlib-devel XFree86-devel dev86-devel
@@ -321,17 +326,17 @@ MONITORING
   5 procinfo psacct
   5 PCMCIA apmd
   4 lsof swatch tcpdump traceroute
-  3 arpwatch lslk nmap nmap-frontend procps-X11 xcpustate xosview xsysinfo xtraceroute
+  3 iplog arpwatch lslk nmap nmap-frontend procps-X11 xcpustate xosview xsysinfo xtraceroute
   2 cfengine gkrellm gps rusers mon
-  1 iplog logcheck bonnie
+  1 logcheck bonnie
   GNOME
     4 gtop
 
 FILE_TOOLS
   5 file gnupg mkxauth mtools slocate
-  4 symlinks xwc
+  4 gpa symlinks xwc
   3 FileRunner dosfstools draksync mc tree
-  2 git gentoo gpa sfm
+  2 git gentoo sfm
   1 xdelta
 
 WEB_SERVER
@@ -344,12 +349,13 @@ WEB_SERVER
 
 SERVER
   4 nfs-utils
-  3 intimed mcserv nscd tftp tftp-server anonftp dhcp gated imap pidentd
+  3 intimed mcserv nscd dhcp gated imap pidentd
     postfix rdate routed samba bind bootparamd caching-nameserver
-    cleanfeed timed ucd-snmp xntp3 leafnode rsh-server squid sympa vnc-server
+    cleanfeed timed ucd-snmp xntp3 leafnode squid sympa vnc-server
     am-utils cvsweb finger-server jabber mars-nwe 
     inews portsentry XFree86-Xvfb XFree86-Xnest webmin
-  2 heartbeat
+  2 heartbeat tftp-server
+  1 rsh-server 
   5 NIS ypbind
 
 CONFIG
@@ -369,8 +375,8 @@ SYSTEM
     menudrake sndconfig ftp
     hexedit strace xterm drakfloppy drakfont
   3 XFree86-100dpi-fonts autofs drakprofile 
-  2 usbd sane acpid tksysv imlib-cfgeditor adns audiofile awesfx fbset gfcc sudo
-  1 DrakeLogo Mesa xtoolwait fdutils genromfs mailcap usbview kernel-utils pinfo X11R6-contrib 
+  2 kernel-utils usbd sane acpid tksysv imlib-cfgeditor adns audiofile awesfx fbset gfcc sudo
+  1 DrakeLogo Mesa xtoolwait fdutils genromfs mailcap usbview pinfo X11R6-contrib 
   GNOME
     3 gnome-print gnorpm
 
@@ -407,7 +413,8 @@ SYSTEM
 
 EMULATORS
   3 wine
-  2 BasiliskII BasiliskII-sheepnet xdosemu xmame xmess
+  2 BasiliskII BasiliskII-sheepnet xdosemu 
+  1 xmame xmess
 
 INSTALL
   5 pptp-adsl-fr dhcpcd dhcpxd dhcp-client isdn4net isdn4k-utils rp-pppoe pump wireless-tools
