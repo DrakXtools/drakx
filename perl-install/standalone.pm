@@ -296,7 +296,7 @@ sub import {
     c::openlog($standalone_name."[$$]");
     explanations('### Program is starting ###');
 
-    eval "*MDK::Common::$_ = *$_" foreach @common_functs;
+    eval "*common::$_ = *$_" foreach @common_functs;
 
     foreach my $f (@builtin_functs) {
 	eval "*$_"."::$f = *$f" foreach @drakx_modules;
@@ -321,6 +321,7 @@ sub symlinkf {
 }
 
 sub output {
+    warn "output explanations\n";
     explanations "created file $_[0]";
     goto &MDK::Common::File::output;
 }
