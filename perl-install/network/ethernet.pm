@@ -184,16 +184,12 @@ sub configureNetwork {
     if ($last->{BOOTPROTO} !~ /static/) {
 	$netc->{minus_one} = 1;
 #	$::isInstall and $in->set_help('configureNetworkHostDHCP');
-	$in->ask_from(N("Configuring network"),
-N("Please enter your host name if you know it.
-Some DHCP servers require the hostname to work.
-Your host name should be a fully-qualified host name,
-such as ``mybox.mylab.myco.com''.") . N("
+	$in->ask_from(N("Configuring network"), N("
 
 Enter a Zeroconf host name without any dot if you don't
 want to use the default host name."),
-		      [ { label => N("Host name"), val => \$netc->{HOSTNAME} },
-			{ label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
+		      [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} },
+			if_($::expert, { label => N("Host name"), val => \$netc->{HOSTNAME} }),
 		      ],
 		      complete => sub {
 			  if ($netc->{ZEROCONF_HOSTNAME} and $netc->{ZEROCONF_HOSTNAME} =~ /\./) {
