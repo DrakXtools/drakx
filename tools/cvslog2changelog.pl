@@ -17,6 +17,8 @@ while (<>) {
 
 foreach $date (reverse sort keys %l) {
     foreach $user (sort keys %{$l{$date}}) {
+	next if $ENV{AUTHOR} && $ENV{AUTHOR} ne $user;
+
 	$fuser = $users{$user} || $user;
 	print "$date  $fuser\n\n";
 	my %inv;
