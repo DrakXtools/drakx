@@ -42,7 +42,7 @@ arch() =~ /^sparc/ ? (
   [ 2, "inportbm", "Busmouse",  "BusMouse",       __("Microsoft Bus Mouse") ],
   [ 3, "logibm",   "Busmouse",  "BusMouse",       __("Logitech Bus Mouse") ],
   [ 2, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse") ],
-  [ 3, "usbmouse", "ps/2",      "IMPS/2",           __("USB Mouse (3 buttons or more)") ],
+  [ 5, "usbmouse", "ps/2",      "IMPS/2",         __("USB Mouse (3 buttons or more)") ],
 ),
   [ 0, "none",  "none",         "Microsoft",      __("No Mouse") ],
   [ 2, "ttyS",  "pnp",          "Auto",           __("Microsoft Rev 2.1A or higher (serial)") ],

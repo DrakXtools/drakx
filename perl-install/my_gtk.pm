@@ -238,7 +238,7 @@ sub create_okcancel {
     my $b2 = !$one && gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit });
     my @l = grep { $_ } $::isStandalone ? ($b2, $b1) : ($b1, $b2);
 
-    $_->can_default(1) foreach @l;
+    $_->can_default($::isStandalone) foreach @l;
     gtkadd(create_hbox($spread), @l);
 }
 

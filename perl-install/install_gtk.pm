@@ -386,12 +386,11 @@ sub test_mouse {
     };
     my $paintWheel = sub {
 	my ($x, $y, $w, $h) = ($width / 2 - $bw / 6, $bh / 4, $bw / 3, $bh / 2);
-	
-	my $offset = 0 if 0;
-	$offset += $_[0] if $_[0];
-
+	$mouse->{nbuttons} = max($mouse->{nbuttons}, 5); #- it means, the mouse has more than 3 buttons...
 	$draw_rect->(1, 0, [ $x, $y, $w, $h ]);
 
+	my $offset = 0 if 0;
+	$offset += $_[0] if $_[0];
 	my $step = 10;
 	for (my $i = $offset % $step; $i < $h; $i += $step) {
 	    $draw_rect->(1, 1, [ $x, $y + $i, $w, min(2, $h - $i) ]);
@@ -407,7 +406,7 @@ sub test_mouse {
 	my ($t, $y) = @_;
 	my $font = $darea->style->font;
 	my $w = $font->string_width($t);
-	$darea->window->draw_string($font, $darea->style->black_gc, ($width - $w) / 2, $y, $t);
+	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
     };
     $darea->signal_connect(button_press_event => sub {
 			       my $b = $_[1]{button};
@@ -425,7 +424,7 @@ sub test_mouse {
     $w->sync; # HACK
     $draw_rect->(0, 1, [ 0, 0, $width, $height]);
     $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
-    $draw_text->(_("Move your wheel"), 2 * $bh);# if 1 && $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $draw_text->(_("Move your wheel"), 2 * $bh) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
     $paintButton->($_, 0) foreach 0..2;
     $w->main;
 }
