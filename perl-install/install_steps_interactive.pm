@@ -657,6 +657,7 @@ If only some CDs are missing, unselect them, then click Ok."),
     foreach (@mediums) {
 	my $descr = pkgs::mediumDescr($packages, $_);
 	$packages->{mediums}{$_}{selected} = $mediumsDescr{$descr};
+	log::l("select status of medium $_ is $packages->{mediums}{$_}{selected}");
     }
 }
 
@@ -795,7 +796,10 @@ sub summary {
     #- format printer description in a better way according to CUPS/LPR used.
     my $format_printers = sub {
 	my ($printer) = @_;
-	is_empty_hash_ref($printer->{configured}) and return _("No printer");
+	if (is_empty_hash_ref($printer->{configured})) {
+	    pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'cups')) and return _("Remote CUPS server");
+	    return _("No printer");
+	}
 	my $entry = $printer->{configured}{$printer->{QUEUE}} || (values %{$printer->{configured}})[0];
 	for ($entry->{mode}) {
 	    /CUPS/ and return $entry->{cupsDescr};
@@ -860,8 +864,8 @@ sub configurePrinter {
 
     $printer->{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';
     printerdrake::main($printer, $o, sub { $o->pkg_install(@_) }, sub { install_interactive::upNetwork($o, 'pppAvoided') });
-
-    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured});
+    
+    $o->pkg_install_if_requires_satisfied('Mesa-common', 'xpp', 'libqtcups2', 'qtcups', 'kups') if !is_empty_hash_ref($printer->{configured}) || pkgs::packageFlagInstalled(pkgs::packageByName($packages, 'cups'));
 }
 
 #------------------------------------------------------------------------------
