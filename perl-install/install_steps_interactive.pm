@@ -1093,7 +1093,7 @@ sub setRootPassword {
 	 cancel => ($o->{security} <= 2 && !$::corporate ? _("No password") : ''),
 	 callbacks => { 
 	     complete => sub {
-		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
+		 $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,0);
 		 length $sup->{password} < 2 * $o->{security}
 		   and $o->ask_warn('', _("This password is too simple (must be at least %d characters long)", 2 * $o->{security})), return (1,0);
 		 return 0
