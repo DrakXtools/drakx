@@ -29,8 +29,6 @@ void log_message(const char * s, ...);
 void vlog_message(const char * s, va_list args);
 void vlog_message_nobs(const char * s, va_list args);
 void log_perror(char *msg);
-void log_progression(int divide_for_count);
-void log_progression_done(void);
 void open_log(void);
 void close_log(void);
 

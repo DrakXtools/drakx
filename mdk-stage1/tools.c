@@ -193,12 +193,13 @@ enum return_type load_ramdisk(void)
 	char * img_name;
 	gzFile st2;
 	char * ramdisk = "/dev/ram3"; /* warning, verify that this file exists in the initrd (and actually is a ramdisk device file) */
-	int ram_fd;
+	int ram_fd, st2_fd;
 	char buffer[4096];
 	char * stg2_name = get_param_valued("special_stage2");
 	char * begin_img = "/tmp/image/Mandrake/base/";
 	char * end_img = "_stage2.gz";
 	int gz_errnum;
+	struct stat statr;
 
 	if (!stg2_name)
 		stg2_name = "mdkinst";
@@ -213,7 +214,9 @@ enum return_type load_ramdisk(void)
 
 	log_message("trying to load %s as a ramdisk", img_name);
 
-	st2 = gzopen(img_name, "r");
+	st2_fd = open(img_name, O_RDONLY); /* to be able to see the progression */
+	st2 = gzdopen(st2_fd, "r");
+
 	if (!st2) {
 		log_message("Opening compressed ramdisk: %s", gzerror(st2, &gz_errnum));
 		error_message("Could not open compressed ramdisk file.");
@@ -226,8 +229,9 @@ enum return_type load_ramdisk(void)
 		error_message("Could not open ramdisk device file.");
 		return RETURN_ERROR;
 	}
-
-	wait_message("Loading Installation program into memory...");
+	
+	stat(img_name, &statr);
+	init_progression("Loading Installation program into memory...", statr.st_size);
 
 	while (!gzeof(st2)) {
 		int actually = gzread(st2, buffer, sizeof(buffer));
@@ -241,11 +245,11 @@ enum return_type load_ramdisk(void)
 			remove_wait_message();
 			return RETURN_ERROR;
 		}
-		log_progression(100);
+		update_progression(lseek(st2_fd, 0L, SEEK_CUR));
 	}
 
-	log_progression_done();
-	remove_wait_message();
+	end_progression();
+
 	gzclose(st2);
 	close(ram_fd);
 

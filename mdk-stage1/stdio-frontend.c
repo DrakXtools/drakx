@@ -106,6 +106,37 @@ void remove_wait_message(void)
 }
 
 
+static int size_progress;
+static int actually_drawn;
+
+void init_progression(char *msg, int size)
+{
+	size_progress = size;
+	actually_drawn = 0;
+	printf("%s\n[", msg);
+}
+
+void update_progression(int current_size)
+{
+	while ((int)((current_size*40)/size_progress) > actually_drawn) {
+		printf(".");
+		actually_drawn++;
+		if (actually_drawn == 10)
+			printf("(25%%)");
+		if (actually_drawn == 20)
+			printf("(50%%)");
+		if (actually_drawn == 30)
+			printf("(75%%)");
+	}
+	fflush(stdout);
+}
+
+void end_progression(void)
+{
+	printf("]\n");
+}
+
+
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
 	char ** sav_elems = elems;

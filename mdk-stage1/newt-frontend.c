@@ -114,6 +114,36 @@ void remove_wait_message(void)
 }
 
 
+static newtComponent form = NULL, scale = NULL;
+static int size_progress;
+static int actually_drawn;
+
+void init_progression(char *msg, int size)
+{
+	size_progress = size;
+	actually_drawn = 0;
+	newtCenteredWindow(70, 5, "Please wait...");
+	form = newtForm(NULL, NULL, 0);
+	newtFormAddComponent(form, newtLabel(1, 1, msg));
+	scale = newtScale(1, 3, 68, size);
+	newtFormAddComponent(form, scale);
+	newtDrawForm(form);
+	newtRefresh();
+}
+
+void update_progression(int current_size)
+{
+	newtScaleSet(scale, current_size);
+	newtRefresh();
+}
+
+void end_progression(void)
+{
+	newtPopWindow();
+	newtFormDestroy(form);
+}
+
+
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
 	char * items[50];
