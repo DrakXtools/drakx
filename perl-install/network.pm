@@ -352,7 +352,7 @@ sub configureNetworkIntf {
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
     my @fields = qw(IPADDR NETMASK);
-    $in->set_help('configureNetworkIP');
+    $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from_entries_ref(_("Configuring network device %s", $intf->{DEVICE}),
 ($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
 _("Please enter the IP configuration for this machine.
