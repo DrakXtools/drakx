@@ -54,13 +54,16 @@ sub to_raw_X {
     $raw_X->get_ServerLayout->{Xinerama} = { commented => !$card->{Xinerama}, Option => 1 }
       if defined $card->{Xinerama};
 
-    $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL}); #- glx for everyone, except proprietary nvidia
+    $raw_X->set_load_module('glx', !$card->{DRI_GLX_SPECIAL} && $card->{Driver2} ne 'fglrx'); #- glx for everyone, except proprietary nvidia
     $raw_X->set_load_module('dri', $card->{use_DRI_GLX} && !$card->{DRI_GLX_SPECIAL});
 
     # This loads the NVIDIA GLX extension module.
     # IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
     # IT WILL LOAD XFree86 glx module and the server will crash.
     $raw_X->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.so', $card->{DRI_GLX_SPECIAL}); 
+    if ($card->{Driver2} ne 'nvidia') {
+        $raw_X->set_load_module('/usr/X11R6/lib/modules/extensions/libglx.a', 1);
+    }
 
     $raw_X->remove_Section('DRI');
     $raw_X->add_Section('DRI', { Mode => { val => '0666' } }) if $card->{use_DRI_GLX};
@@ -309,6 +312,18 @@ sub install_server {
 	$card->{DRI_GLX_SPECIAL} = 1;
 	$card->{Options}{IgnoreEDID} = 1;
     }
+    my %driver_to_libgl_config = (
+                                  nvidia => "$::prefix/etc/ld.so.conf.d/.conf.nvidia",
+                                  fglrx => "$::prefix/etc/ld.so.conf.d/.conf.ati",
+                                 );
+    if (my $file = $driver_to_libgl_config{$card->{Driver2}}) {
+        if (-e $file) { 
+            symlinkf(basename($file), "$::prefix/etc/ld.so.conf.d/GL.conf"); 
+        }
+    } else {
+	eval { rm_rf("/etc/ld.so.conf.d/GL.conf") };
+    }
+    system("/sbin/ldconfig") if $::isStandalone;
     if ($card->{Driver2} eq 'fglrx' &&
 	-e "$::prefix/usr/X11R6/lib/modules/dri/fglrx_dri.so" &&
 	-e "$::prefix/usr/X11R6/lib/modules/drivers/fglrx_drv.o") {
