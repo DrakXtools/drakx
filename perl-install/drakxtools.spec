@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,6 +291,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Feb 25 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-7mdk
+- drakfloppy: 
+  o fix #1761
+  o only list physically present floppies
+- harddrake gui:
+  o better support for zip devices
+  o removable devices cleanups
+  o display dvd/burning capacities
+- harddrake service:
+  o do not flash the screen if nothing has to be configured
+  o removable devices cleanups
+- fix #1802 (pixel)
+
 * Mon Feb 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-6mdk
 - fix logdrake's mail alerts (services alert, don't crash)
 - drakperm: fix #1771, non editable combo1
