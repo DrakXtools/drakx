@@ -734,38 +734,14 @@ sub get_cups_autoconf {
 sub set_usermode {
     my $usermode = $_[0];
     $::expert = $usermode;
-
-    # Read config file
-    my $file = "$prefix/etc/sysconfig/printing";
-    @file_content = cat_($file);
-
-    # Remove all valid "USER_MODE" lines
-    (/^\s*USER_MODE/ and $_ = "") foreach @file_content;
- 
-    # Insert the new "USER_MODE" line
-    if ($usermode) {
-	push @file_content, "USER_MODE=expert\n";
-    } else {
-	push @file_content, "USER_MODE=recommended\n";
-    }
-
-    output($file, @file_content);
-
-    return 1;
+    $str = $usermode ? "expert" : "recommended";
+    substInFile { s/^(USER_MODE=).*/$1=$str/ } "$prefix/etc/sysconfig/printing";
 }
 
 sub get_usermode {
-    local *F;
-    open F, "< $prefix/etc/sysconfig/printing" or return 0;
-    my $line;
-    while ($line = <F>) {
-	if ($line =~ m!^[^\#]*USER_MODE=expert!) {
-	    $::expert = 1;
-	    return 1;
-	}
-    }
-    $::expert = 0;
-    return 0;
+    my %cfg = getVarsFromSh("$prefix/etc/sysconfig/printing");
+    $::expert = $cfg{CLASS} eq 'expert' ? 1 : 0;
+    return $::expert;
 }
 
 sub read_cupsd_conf {
