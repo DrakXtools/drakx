@@ -28,6 +28,14 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 );
 %spooler_inv = reverse %spooler;
 
+%shortspooler = (
+    _("CUPS")   => "cups",
+    _("LPRng")  => "lprng",
+    _("LPD")    => "lpd",
+    _("PDQ")    => "pdq"
+);
+%shortspooler_inv = reverse %shortspooler;
+
 %printer_type = (
     _("Local printer")                              => "LOCAL",
     _("Remote printer")                             => "REMOTE",
@@ -774,6 +782,88 @@ sub print_pages($@) {
 	grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
     close F;
     @lpq_output;
+}
+
+# ---------------------------------------------------------------
+#
+# Spooler config stuff
+#
+# ---------------------------------------------------------------
+
+sub get_copiable_queues {
+    my ($oldspooler, $newspooler) = @_;
+    local $_; #- use of while (<...
+
+    local *QUEUEOUTPUT; #- don't have to do close ... and don't modify globals
+                        #- at least
+    my @queuelist;      #- here we will list all Foomatic-generated queues
+    # Get queue list with foomatic-configure
+    open QUEUEOUTPUT, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
+	    "foomatic-configure -Q -s $oldspooler |" ||
+		die "Could not run foomatic-configure";
+
+    my $entry = {};
+    my $inentry = 0;
+    while (<QUEUEOUTPUT>) {
+	chomp;
+	if ($inentry) {
+	    # We are inside a queue entry
+	    if (m!^\s*</queue>\s*$!) {
+		# entry completed
+		$inentry = 0;
+		if (($entry->{foomatic}) && 
+		    ($entry->{spooler} eq $oldspooler)) {
+		    # Is the connection type supported by the new
+		    # spooler?
+		    if ((($newspooler eq "cups") &&
+			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^lpd:/) ||
+			  ($entry->{connect} =~ /^socket:/) ||
+			  ($entry->{connect} =~ /^smb:/) ||
+			  ($entry->{connect} =~ /^ipp:/))) ||
+			((($newspooler eq "lpd") ||
+			  ($newspooler eq "lprng")) &&
+			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^lpd:/) ||
+			  ($entry->{connect} =~ /^socket:/) ||
+			  ($entry->{connect} =~ /^smb:/) ||
+			  ($entry->{connect} =~ /^ncp:/) ||
+			  ($entry->{connect} =~ /^postpipe:/))) ||
+			(($newspooler eq "pdq") &&
+			 (($entry->{connect} =~ /^file:/) ||
+			  ($entry->{connect} =~ /^lpd:/) ||
+			  ($entry->{connect} =~ /^socket:/)))) {
+			push(@queuelist, $entry->{name});
+		    }
+		}
+		$entry = {};
+	    } elsif (m!^\s*<name>(.+)</name>\s*$!) {
+		    # queue name
+		    $entry->{name} = $1;
+	    } elsif (m!^\s*<connect>(.+)</connect>\s*$!) {
+		    # connection type (URI)
+		    $entry->{connect} = $1;
+	    }
+	} else {
+	    if (m!^\s*<queue\s+foomatic\s*=\s*\"?(\d+)\"?\s*spooler\s*=\s*\"?(\w+)\"?\s*>\s*$!) {
+		# new entry
+		$inentry = 1;
+		$entry->{foomatic} = $1;
+		$entry->{spooler} = $2;
+	    }
+	}
+    }
+    close QUEUEOUTPUT;
+    
+    return @queuelist;
+}
+
+sub copy_foomatic_queue {
+    my ($printer, $oldqueue, $oldspooler, $newqueue) = @_;
+    run_program::rooted($prefix, "foomatic-configure",
+		      "-s", $printer->{SPOOLER},
+		      "-n", $newqueue,
+			"-C", $oldspooler, $oldqueue);
 }
 
 

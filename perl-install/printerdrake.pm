@@ -1029,9 +1029,98 @@ It may take some time before the printer starts.\n");
     return 0;
 }
 
+sub copy_queues_from {
+    my ($printer, $in, $oldspooler) = @_;
+    my $newspooler = $printer->{SPOOLER};
+    my @oldqueues = printer::get_copiable_queues($oldspooler, $newspooler);
+    my @queueentries;
+    my @queuesselected;
+    my $newspoolerstr = $printer::shortspooler_inv{$newspooler};
+    my $oldspoolerstr = $printer::shortspooler_inv{$oldspooler};
+    for (@oldqueues) {
+	push (@queuesselected, 1);
+	push (@queueentries, { text => $_, type => 'bool', 
+			       val => \$queuesselected[$#queuesselected] });
+    }
+    if ($in->ask_from_entries_refH_powered
+	({ title => _("Transfer printer configuration"),
+	   messages => _("You can copy the printer configuration which you have done 
+for the spooler %s to %s, your current spooler. All the
+configuration data (printer name, description, location, 
+connection type, and default option settings) is overtaken,
+but jobs will not be transferred.
+Not all queues can be transferred due to the following 
+reasons:
+", $oldspoolerstr, $newspoolerstr) .
+($newspooler eq "cups" ? _("CUPS does not support printers on Novell servers or printers
+sending the data into a free-formed command.
+") :
+ ($newspooler eq "pdq" ? _("PDQ only supports local printers, remote LPD printers, and
+Socket/TCP printers.
+") :
+  _("LPD and LPRng do not support IPP printers.
+"))) .
+_("In addition, queues not created with this program or
+\"foomatic-configure\" cannot be transferred.") .
+($oldspooler eq "cups" ? _("
+Also printers configured with the PPD files provided by
+their manufacturers or with native CUPS drivers can not be
+transferred.") : ()) . _("
+Mark the printers which you want to transfer and click 
+\"Transfer\"."),
+	   cancel => _("Do not transfer printers"),
+           ok => _("Transfer")
+	 },
+         \@queueentries
+      )) {
+	my $queuecopied = 0;
+	for (@oldqueues) {
+	    if (shift(@queuesselected)) {
+                my $oldqueue = $_;
+                my $newqueue = $_;
+                if ((!$printer->{configured}{$newqueue}) ||
+		    ($in->ask_from_entries_refH_powered
+	             ({ title => _("Transfer printer configuration"),
+	                messages => _("A printer named \"%s\" already exists under %s. 
+Click \"Transfer\" to overwrite it.
+You can also type a new name or skip this printer.", 
+				      $newqueue, $newspoolerstr),
+                        ok => _("Transfer"),
+                        cancel => _("Skip"),
+		        callbacks => { complete => sub {
+	                    unless ($newqueue =~ /^\w+$/) {
+				$in->ask_warn('', _("Name of printer should contain only letters, numbers and the underscore"));
+				return (1,0);
+			    }
+			    if (($printer->{configured}{$newqueue})
+				&& ($newqueue ne $oldqueue) && 
+				(!$in->ask_yesorno('', _("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
+							 $newqueue),
+						   0))) {
+				return (1,0); # Let the user correct the name
+			    }
+			    return 0;
+			}}
+		    },
+		      [{label => _("New printer name"),val => \$newqueue}]))) {
+		    my $w = $in->wait_message('', 
+			        _("Transferring $oldqueue ..."));
+		    printer::copy_foomatic_queue($printer, $oldqueue,
+						 $oldspooler, $newqueue) and
+						     $queuecopied = 1;
+		}
+            }
+	}
+        if ($queuecopied) {
+            printer::read_configured_queues($printer);
+        }    
+    }
+}
+
 sub setup_default_spooler {
     my ($printer, $in) = @_;
     $printer->{SPOOLER} ||= 'cups';
+    my $oldspooler = $printer->{SPOOLER};
     my $str_spooler = 
 	$in->ask_from_list_(_("Select Printer Spooler"),
 			    _("Which printing system (spooler) do you want to use?"),
@@ -1039,10 +1128,14 @@ sub setup_default_spooler {
 			    $printer::spooler_inv{$printer->{SPOOLER}},
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
-    # Install the spooler if not done yet
-    install_spooler($printer, $in);
-    # Get the queues of this spooler
-    printer::read_configured_queues($printer);
+    if ($printer->{SPOOLER} ne $oldspooler) {
+	# Install the spooler if not done yet
+	install_spooler($printer, $in);
+	# Get the queues of this spooler
+        printer::read_configured_queues($printer);
+	# Copy queues from former spooler
+	copy_queues_from($printer, $in, $oldspooler);
+    }
     return $printer->{SPOOLER};
 }
 
