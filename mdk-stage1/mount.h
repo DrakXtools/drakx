@@ -19,17 +19,9 @@
  *
  */
 
+#ifndef _MOUNT_H_
+#define _MOUNT_H_
 
-#ifndef _LOG_H_
-#define _LOG_H_
-
-#include <stdarg.h>
-
-void log_message(const char * s, ...);
-void vlog_message(const char * s, va_list args);
-void vlog_message_nobs(const char * s, va_list args);
-void log_perror(char *msg);
-void open_log(void);
-void close_log(void);
+int my_mount(char *dev, char *location, char *fs);
 
 #endif

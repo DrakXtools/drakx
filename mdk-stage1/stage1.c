@@ -46,8 +46,9 @@
 
 /* globals */
 
-int stage1_mode = 0;
 struct cmdline_elem params[500];
+int stage1_mode = 0;
+char * method_name;
 
 
 void fatal_error(char *msg)
@@ -200,11 +201,14 @@ enum return_type method_select_and_prepare(void)
 int main(int argc, char **argv)
 {
 	enum return_type ret;
+	char ** argptr;
+	char * stage2_args[30];
+
 
 	if (getpid() > 50)
 		stage1_mode |= MODE_TESTING;
 
-	open_log(IS_TESTING);
+	open_log();
 
 	log_message("welcome to the Linux-Mandrake install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 
@@ -224,10 +228,27 @@ int main(int argc, char **argv)
 		ret = method_select_and_prepare();
 
 	finish_frontend();
-	close_log();
 
 	if (ret == RETURN_ERROR)
 		fatal_error("could not select an installation method");
 
-	return 0;
+	if (!IS_LIVE) {
+		if (symlink("/tmp/image/Mandrake/mdkinst", "/tmp/stage2") != 0)
+			fatal_error("symlink to /tmp/stage2 failed");
+	}
+
+	close_log();
+
+	argptr = stage2_args;
+	*argptr++ = "/usr/bin/runinstall2";
+	*argptr++ = "--method";
+	*argptr++ = method_name;
+	*argptr++ = NULL;
+
+	execv(stage2_args[0], stage2_args);
+
+	printf("error in exec of stage2 :-(");
+	fatal_error(strerror(errno));
+	
+	return 0; /* shut up compiler (we can't get here) */
 }

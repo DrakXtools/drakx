@@ -28,6 +28,7 @@ void error_message(char *msg);
 void wait_message(char *msg, ...);
 void remove_wait_message(void);
 
+enum return_type ask_yes_no(char *msg);
 enum return_type ask_from_list(char *msg, char ** elems, char ** choice);
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice);
 

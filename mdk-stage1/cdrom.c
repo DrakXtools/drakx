@@ -21,20 +21,48 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/mount.h>
 #include "stage1.h"
 #include "frontend.h"
 #include "modules.h"
 #include "probing.h"
 #include "log.h"
+#include "mount.h"
 
 #include "cdrom.h"
 
+
+
 static enum return_type try_with_device(char *dev_name)
 {
-	log_message("with dev %s", dev_name);
+	char device_fullname[50];
 
-	error_message("Should be trying with sucking device.");
+	strcpy(device_fullname, "/dev/");
+	strcat(device_fullname, dev_name);
 
+	if (my_mount(device_fullname, "/tmp/image", "iso9660") == -1) {
+		enum return_type results;
+		results = ask_yes_no("I can't access a CDROM disc in your drive.\nRetry?");
+		if (results == RETURN_OK)
+			return try_with_device(dev_name);
+		return results;
+	}	
+
+	if (access("/tmp/image/Mandrake", R_OK)) {
+		enum return_type results;
+		umount("/tmp/image");
+		results = ask_yes_no("That CDROM disc does not seem to be a Linux-Mandrake Installation CDROM.\nRetry with another disc?");
+		if (results == RETURN_OK)
+			return try_with_device(dev_name);
+		return results;
+	}
+
+	log_message("found a Linux-Mandrake CDROM, good news!");
+/*
+	if (special_stage2 || total_memory() > 52 * 1024) loadMdkinstStage2();
+	if (rescue) umount("/tmp/rhimage");
+*/
 	return RETURN_OK;
 }
 
@@ -50,10 +78,11 @@ enum return_type cdrom_prepare(void)
 	my_insmod("isofs");
 	
 	medias = get_medias(CDROM, QUERY_NAME);
+	medias_models = get_medias(CDROM, QUERY_MODEL);
 
 	ptr = medias;
 	while (ptr && *ptr) {
-		log_message("found CDROM %s", *ptr);
+		log_message("have CDROM %s", *ptr);
 		count++;
 		ptr++;
 	}
@@ -67,6 +96,7 @@ enum return_type cdrom_prepare(void)
 	}
 
 	if (count == 1) {
+		log_message("Only one CDROM detected: %s (%s)", *medias, *medias_models);
 		results = try_with_device(*medias);
 		if (results == RETURN_OK)
 			return RETURN_OK;
@@ -75,8 +105,6 @@ enum return_type cdrom_prepare(void)
 			return RETURN_BACK;
 		return cdrom_prepare();
 	}
-
-	medias_models = get_medias(CDROM, QUERY_MODEL);
 
 	results = ask_from_list_comments("Please choose the CDROM drive to use for the installation.", medias, medias_models, &choice);
 

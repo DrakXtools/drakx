@@ -48,7 +48,6 @@ static void pci_probing(enum driver_type type)
 		error_message("You should be asked if you have some SCSI.");
 	} else {
 		wait_message("Installing SCSI module...");
-		my_insmod("advansys");
 		remove_wait_message();
 	}
 }

@@ -147,3 +147,16 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 	return RETURN_OK;
 }
 
+
+enum return_type ask_yes_no(char *msg)
+{
+	int rc;
+
+	rc = newtWinTernary("Please answer..", "Yes", "No", "Back", msg);
+
+	if (rc == 1)
+		return RETURN_OK;
+	else if (rc == 3)
+		return RETURN_BACK;
+	else return RETURN_ERROR;
+}

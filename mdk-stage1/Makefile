@@ -41,7 +41,7 @@ INITOBJS = $(subst .c,.o,$(INITSRC))
 
 
  #- stage1 itself (minus stage1.c)
-STAGE1SRC = log.c tools.c modules.c probing.c newt-frontend.c cdrom.c disk.c network.c
+STAGE1SRC = log.c tools.c modules.c probing.c newt-frontend.c cdrom.c disk.c network.c mount.c
 
 STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC)) insmod-busybox/libinsmod.a mar/libmar.a /usr/lib/libnewt.a /usr/lib/libslang.a /usr/lib/libz.a
 

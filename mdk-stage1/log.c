@@ -27,6 +27,7 @@
 #include <string.h>
 #include <time.h>
 #include <errno.h>
+#include "stage1.h"
 
 #include "log.h"
 
@@ -68,9 +69,9 @@ void log_perror(char *msg)
 }
 
 
-void open_log(int testing)
+void open_log(void)
 {
-	if (!testing) {
+	if (!IS_TESTING) {
 		logfile = fopen("/dev/tty3", "w");
 		if (!logfile)
 			logfile = fopen("/tmp/install.log", "a");
@@ -81,6 +82,8 @@ void open_log(int testing)
 
 void close_log(void)
 {
-	if (logfile)
+	if (logfile) {
+		log_message("stage1: disconnecting life support systems");
 		fclose(logfile);
+	}
 }

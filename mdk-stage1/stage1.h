@@ -37,6 +37,7 @@ extern struct cmdline_elem params[500];
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 
 extern int stage1_mode;
+extern char * method_name;
 
 #define MODE_TESTING        (1 << 0)
 #define MODE_EXPERT         (1 << 1)
@@ -45,6 +46,7 @@ extern int stage1_mode;
 #define MODE_KICKSTART	    (1 << 4)
 #define MODE_PCMCIA         (1 << 5)
 #define MODE_CDROM          (1 << 6)
+#define MODE_LIVE           (1 << 7)
 
 #define IS_TESTING     ((stage1_mode) & MODE_TESTING)
 #define IS_EXPERT      ((stage1_mode) & MODE_EXPERT)
@@ -53,6 +55,7 @@ extern int stage1_mode;
 #define IS_KICKSTART   ((stage1_mode) & MODE_KICKSTART)
 #define IS_PCMCIA      ((stage1_mode) & MODE_PCMCIA)
 #define IS_CDROM       ((stage1_mode) & MODE_CDROM)
+#define IS_LIVE        ((stage1_mode) & MODE_LIVE)
 
 
 void fatal_error(char *msg);
