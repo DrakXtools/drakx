@@ -496,27 +496,67 @@ sub isolinux {
 default linux
 prompt 1
 timeout 150
-" . (-e "isolinux/boot.msg" ? "display boot.msg
-F1 help.msg" : "display help.msg") . "
-" . join('', map { 
+" . (-e "isolinux/boot.msg" ? "display boot.msg" : "display help.msg") . "
+F1 help.msg
+F2 advanced.msg" . (-e "isolinux/boot.msg" && "F3 boot.msg") . "
+" . join('', map {
 "label $_->[0]
   kernel alt0/vmlinuz
   append initrd=alt0/all.rdz $_->[1] automatic=method:cdrom
 " } entries_append('all'))
-  . join('', map_index { 
+  . join('', map_index {
 "label alt$::i
   kernel alt$::i/vmlinuz
   append initrd=alt$::i/all.rdz $default_append $default_vga
 " } @kernels);
 
-    output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x03, 0x00) .
-"Welcome to Mandrake Linux Installation.
+    output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
+"
+                  0aWelcome to 09Mandrake Linux0a install help07
 
-If you want more installations options (install from hard
-disk, network, etc), select the kernel you wish to use for
-this installation. Or you may just type Enter, so that the
-automatic CDROM installation will proceed, with the default
-kernel ($main).
+In most cases, the best way to get started is to simply press the 0e<Enter>07 key.
+If you experience problems with standard install, try one of the following 
+install types (type the highlighted text and press 0e<Enter>07):
 
-" . join('', map_index { "\"alt$::i\" is kernel $_\n" } @kernels);
+ o  0fvgalo07 for low resolution graphical installation.
+ o  0ftext07 for text installation instead of the graphical one.
+ o  0flinux07 for standard graphical installation at normal resolution.
+ o  0fexpert07 for expert graphical installation at normal resolution.
+
+
+To use this CD to repair an already installed system type 0frescue07
+followed by 0e<Enter>07.
+
+You can also pass some 0f<specific kernel options>07 to the Linux kernel. 
+For example, try 0flinux mem=128M07 if your system has 128Mb of RAM but the default
+kernel ($main) does not detect it correctly.
+0cNOTE07: You cannot pass options to modules (SCSI, ethernet card) or devices
+such as CD-ROM drives in this way. If you need to do so, use expert mode.
+
+" . (-e "isolinux/boot.msg" ?
+     "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
+     "0c[F1-Help] [F2-Advanced Help]07") . "\n";
+
+    output "isolinux/advanced.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
+"
+The following install types may be used instead of previously notified :
+ o  0fvgahi07 for high resolution graphical installation.
+ o  0fvga1607 for 640x480 in 16 colors graphical installation.
+
+The following options may be added on the command line :
+ o  0freadonly=107 to disable editing disk partitions.
+ o  0fdisplay=ackbar:007 to export display to 09ackbar07 machine screen 0 during
+    installation.
+ o  0fnoauto07 to disable automatic detection (generally used with 0fexpert07).
+ o  0fsecurity=n07 to set security level to value 09n07.
+ o  0fupdatemodules07 to use the special update floppy containing modules updates.
+ o  0fpatch07 to use a patch from the floppy (file named 09patch.pl07).
+ o  0fauto_install=floppy07 to enable auto_install using 09auto_inst.cfg07 file on the
+    floppy.
+
+You can choose the following kernels :
+" . join('', map_index { " o  0alt$::i07 is kernel $_\n" } @kernels) . "
+" . (-e "isolinux/boot.msg" ?
+     "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
+     "0c[F1-Help] [F2-Advanced Help]07") . "\n";
 }
