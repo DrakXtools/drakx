@@ -56,7 +56,7 @@ sub addUsers {
 	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
 	addKdmIcon($prefix, $u->{name}, delete $u->{auto_icon} || $u->{icon});
     }
-    run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh");
+    run_program::rooted($prefix, "/usr/share/msec/grpuser.sh --refresh >/dev/null");
 #    addKdmIcon($prefix, 'root', 'root');
 }
 
