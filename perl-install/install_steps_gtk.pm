@@ -465,7 +465,7 @@ sub installPackages {
 
     my ($current_total_size, $last_size, $nb, $total_size, $start_time, $last_dtime, $trans_progress_total);
 
-    my $w = my_gtk->new(_("Installing"), grab => 1);
+    my $w = my_gtk->new(_("Installing"));
     $w->{window}->set_usize($::windowwidth * 0.8, 260);
     my $text = new Gtk::Label;
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;

@@ -18,11 +18,11 @@ use modules;
 
 
 sub partition_with_diskdrake {
-    my ($o, $hds) = @_;
+    my ($o, $hds, $nowizard) = @_;
     my $ok = 1;
     do {
-	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions});
-	delete $o->{wizard} and return partitionWizard($o);
+	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}, $nowizard);
+	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds);
 	
 	unless (fsedit::get_root(\@fstab)) {
@@ -146,7 +146,7 @@ When sure, press Ok.")) or return;
     }
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
-	$solutions{diskdrake} = [ 0, _("Use diskdrake"), sub { partition_with_diskdrake($o, $hds) } ];
+	$solutions{diskdrake} = [ 0, _("Use diskdrake"), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 
     $solutions{fdisk} =
@@ -168,9 +168,10 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 }
 
 sub partitionWizard {
-    my ($o) = @_;
+    my ($o, $nodiskdrake) = @_;
 
     my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
+    delete $solutions{diskdrake} if $nodiskdrake;
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 

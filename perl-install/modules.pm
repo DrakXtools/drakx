@@ -1,5 +1,6 @@
 package modules;
 
+use strict;
 use vars qw(%drivers);
 
 use common qw(:common :file :system);
@@ -370,6 +371,12 @@ sub remove_alias($) {
     0;
 }
 
+sub when_load {
+    my ($name, $type, @options) = @_;
+    add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
+    $conf{$name}{options} = join " ", @options if @options;
+}
+
 sub load {
     my ($name, $type, @options) = @_;
 
@@ -388,10 +395,7 @@ sub load {
 	-d "/proc/scsi/usb" or return;
 	$conf{"usb-storage"}{"post-install"} = "modprobe usbkbd; modprobe keybdev";
     }
-    if ($type) {
-	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
-    }
-    $conf{$name}{options} = join " ", @options if @options;
+    when_load($name, $type, @options);
 }
 sub load_multi {
     my $f; $f = sub { map { $f->(@{$deps{$_}}), $_ } @_ };
@@ -452,7 +456,7 @@ sub read_already_loaded() {
     foreach (cat_("/proc/modules")) {
 	my ($name) = split;
 	$conf{$name}{loaded} = 1;
-	push @$l, $name unless member($name, @$l);
+	when_load($name, $drivers{$name}{type});
     }
 }
 

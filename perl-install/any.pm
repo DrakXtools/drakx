@@ -281,7 +281,8 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	fs::mount($part->{device}, $dir, type2fs($part->{type}), !$rw);
+	eval { fs::mount($part->{device}, $dir, type2fs($part->{type}), !$rw) };
+	$@ and return;
     }
     my $h = before_leaving {
 	if (!$part->{isMounted} && $dir) {
