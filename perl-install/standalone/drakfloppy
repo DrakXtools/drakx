@@ -32,10 +32,6 @@ use common;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use detect_devices;
 
-#- languages that can't be displayed with gtk1, so we unset translations
-#- for them until this tool is ported to gtk2
-$ENV{LANGUAGE} = "C" if $ENV{LANGUAGE} =~ /\b(ar|he|hi|ta)/;
-
 require_root_capability();
 
 my $window = ugtk2->new('drakfloppy');
