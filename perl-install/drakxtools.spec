@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.3mdk
+Release: 0.4mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.4mdk
+- don't set /etc/sysconfig/desktop anymore, configure ~/.wmrc,
+  ~/.gnome2/gdm and ~/.desktop instead (pixel)
+
 * Tue Aug  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.3mdk
 - bootloader-config (pixel):
   o try to keep the order of kernel options
