@@ -16,7 +16,7 @@ use partition_table_raw;
 use Data::Dumper;
 
 
-@important_types = ("Linux native", "Linux swap", "DOS FAT16", "Win98 FAT32");
+@important_types = ('Linux native', 'Linux swap', 'DOS FAT16', 'Win98 FAT32', 'Linux RAID');
 
 @fields2save = qw(primary extended totalsectors);
 
@@ -132,7 +132,7 @@ my %types = (
   0xf2 => 'DOS 3.3+ secondary partition',
   0xf4 => 'SpeedStor large partition / Prologue single-volume partition',
   0xf5 => 'Prologue multi-volume partition',
-  0xfd => 'Linux raid partition with autodetect using persistent superblock',
+  0xfd => 'Linux RAID',
   0xfe => 'SpeedStor > 1024 cyl. or LANstep / IBM PS/2 IML (Initial Microcode Load) partition, located at the end of the disk. / Windows NT Disk Administrator hidden partition / Linux Logical Volume Manager partition (old)',
   0xff => 'Xenix Bad Block Table',
 );

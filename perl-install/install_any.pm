@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    all => [ qw(getNextStep spawnSync spawnShell addToBeDone) ],
+    all => [ qw(getNextStep spawnShell addToBeDone) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -63,12 +63,6 @@ sub getNextStep {
     my ($s) = $::o->{steps}{first};
     $s = $::o->{steps}{$s}{next} while $::o->{steps}{$s}{done} || !$::o->{steps}{$s}{reachable};
     $s;
-}
-
-sub spawnSync {
-    return if $::o->{localInstall} || $::testing;
-    fork and return;
-    while (1) { sleep(30); sync(); }
 }
 
 sub spawnShell {
@@ -129,6 +123,7 @@ sub setPackages($) {
 	$o->{compssUsers} = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};
+	push @{$o->{base}}, "raidtools" if !is_empty_hash_ref($o->{raid});
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {

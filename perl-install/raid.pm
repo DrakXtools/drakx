@@ -30,7 +30,7 @@ sub new($$) {
 }
 
 sub add($$$) {
-    my ($raid, $part, $nb) = @_;
+    my ($raid, $part, $nb) = @_; $nb = nb($nb);
     $raid->[$nb]{isMounted} and die _("Can't add a partition to _formatted_ RAID md%d", $nb);
     $part->{raid} = $nb;
     push @{$raid->[$nb]{disks}}, $part;
@@ -42,6 +42,16 @@ sub delete($$) {
 
     delete $_->{raid} foreach @{$raid->[$nb]{disks}};
     $raid->[$nb] = undef;
+}
+
+sub changeNb($$$) {
+    my ($raid, $oldnb, $newnb) = @_;
+    if ($oldnb != $newnb) {
+	($raid->[$newnb], $raid->[$oldnb]) = ($raid->[$oldnb], undef);
+	$raid->[$newnb]{device} = "md$newnb";
+	$_->{raid} = $newnb foreach @{$raid->[$newnb]{disks}};
+    }
+    $newnb;
 }
 
 sub removeDisk($$) {
@@ -78,9 +88,11 @@ sub updateIsFormatted($) {
     $part->{isFormatted}  = and_ map { $_->{isFormatted}  } @{$part->{disks}};
     $part->{notFormatted} = and_ map { $_->{notFormatted} } @{$part->{disks}};
 }
-sub update($) {
-    &updateSize;
-    &updateIsFormatted;
+sub update {
+    foreach (@_) {
+	updateSize($_);
+	updateIsFormatted($_);
+    }
 }
 
 sub write($) {
@@ -123,7 +135,7 @@ sub format_part($$) {
 sub verify($) {
     my ($raid) = @_;
     $raid && $raid->{raid} or return;
-    foreach (@{$raid->{raid}}) {
+    foreach (grep {$_} @{$raid->{raid}}) {
 	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die _("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
