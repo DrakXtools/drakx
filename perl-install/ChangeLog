@@ -1,3 +1,52 @@
+2003/01/05  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: in bootloader configuration, add return values to Add and Remove
+	callbacks
+
+	* interactive.pm: 
+	  - callbacks "Add", "Modify" and "Remove" return undef when they fail
+	  - callback "Add" return the new added element (not handled by
+	interactive emulation, but correctly handled by interactive::gtk native
+	ask_from__add_modify_removeW)
+
+	* interactive/gtk.pm: add ask_from__add_modify_removeW gtk handling
+
+2003/01/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix missing "use modules::interactive"
+	(thanks to David Eastcott)
+
+2003/01/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* c/stuff.xs.pl: dgettext needs to have previous behaviour in standalone
+	mode (fixes #736)
+
+2003/01/03  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: fix call to method ask_from__add_modify_removeW
+
+	* interactive/gtk.pm (create_treeview_list): fix setter
+	  - factorize the creation of the {formatted_list} from {list} for
+	create_boxradio, create_treeview_list, create_treeview_tree
+	  - an added advantage for create_treeview_list is the ability to easily
+	change
+	{list}, {formatted_list} and Gtk2::ListStore without breaking keyboard
+	acceleration (see next commit for a usage of this feature)
+
+	* ugtk2.pm (create_packtable): ScrolledWindow are not the only one allowed
+	to grow,
+	widgets with get_data('must_grow') set are allowed too
+
+	* printer/printerdrake.pm (first_time_dialog): much cleanup (but not
+	tested)
+
+	* mdk-stage1/minilibc.c: add symbols __libc_csu_fini and __libc_csu_init
+	to be compatible with new glibc (?)
+
+2003/01/02  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/test.pm: X test is now working :)
+
 2003/01/03  Pixel  <pixel@mandrakesoft.com>
 
 	* interactive.pm: fix call to method ask_from__add_modify_removeW
@@ -7352,7 +7401,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.759 2002/09/22 00:31:27 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.760 2003/01/03 00:06:08 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
