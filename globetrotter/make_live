@@ -358,7 +358,7 @@ bootloader::suggest($bootloader, $all_hds->{hds}, $fstab,
 # $bootloader->{method} = 'lilo-graphic';
 $bootloader->{method} = 'grub';
 
-bootloader::install($bootloader, $fstab, $all_hds->{hds});
+eval { bootloader::install($bootloader, $fstab, $all_hds->{hds}) };
 
 doRootSubst("$::prefix/boot/grub/menu.lst");
 run_program::rooted($::prefix, 'sh', '/boot/grub/install.sh');
