@@ -109,9 +109,10 @@ my @menu_items =
                create_dialog(N("Harddrake help"), 
                              N("Description of the fields:\n\n")
 #-PO Do not alter the <span ..> and </span> tags
-                             . join("\n\n", map { if_($fields{$_}[0], "<span foreground=\"royalblue3\">$fields{$_}[0]:</span> $fields{$_}[1]") } sort keys %$current_device), { use_markup => 1 })
+                             . join("\n\n", map { if_($fields{$_}[0], "<span foreground=\"royalblue3\">$fields{$_}[0]:</span> $fields{$_}[1]") } sort keys %$current_device), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}) })
+
            } else {
-               create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
+               create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) })
            }
        },
        undef, '<Item>'
@@ -122,7 +123,7 @@ my @menu_items =
 #-PO Do not alter the <span ..> and </span> tags
                          N("This is HardDrake, a Mandrake hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
 <span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $harddrake::data::version) .
-                         formatAlaTeX($::license), { use_markup => 1 });
+                         formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}) });
        }, undef, '<Item>'
      ]
     );
