@@ -4,6 +4,8 @@ package network::network; # $Id$wir
 #- misc imports
 #-######################################################################################
 
+use strict;
+
 use Socket;
 use common;
 use detect_devices;
@@ -75,8 +77,8 @@ sub write_conf {
 }
 
 sub write_zeroconf {
-    my ($file, $netc);
-    my %zeroconf_file = getVarsFromSh($file) or die "$file isn't installed";
+    my ($file, $netc) = @_;
+    my %zeroconf_file = getVarsFromSh($file);
     $zeroconf_file{hostname} = $netc->{ZEROCONF_HOSTNAME};
     setVarsInSh($file, \%zeroconf_file);
 }
@@ -501,7 +503,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
-    $netc->{DHCP} && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    ($netc->{DHCP} || grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) && $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
     $netc->{ZEROCONF} && $in->do_pkgs->install(qw(tmdns zcip)) and write_zeroconf('/etc/tmdns.conf', $netc);      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
             
