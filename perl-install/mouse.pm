@@ -312,8 +312,7 @@ sub detect() {
     @wacom and return fullname2mouse('none|No mouse', wacom => \@wacom);
 
     #- defaults to generic serial mouse on ttyS0.
-    #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
-    return fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
+    fullname2mouse("serial|Generic 2 Button Mouse", unsafe => 1);
 }
 
 sub load_modules {
