@@ -68,6 +68,12 @@ sub update_size {
     $lvm->{totalsectors} = ($lvm->{PE_size} = $l[12]) * $l[13];
 }
 
+sub get_lv_size {
+    my ($lvm_device) = @_;
+    my $info = run_program::get_stdout('lvdisplay', '-D', '-c', "/dev/$lvm_device");
+    (split(':', $info))[6];
+}
+
 sub get_lvs {
     my ($lvm) = @_;
     my @l = run_program::get_stdout('vgdisplay', '-v', '-D', $lvm->{VG_name});
@@ -75,11 +81,10 @@ sub get_lvs {
       [
        map {
 	   my $type = -e "/dev/$_" && fsedit::typeOfPart("/dev/$_");
-	   my $info = run_program::get_stdout('lvdisplay', '-D', '-c', "/dev/$_");
 
 	   { device => $_, 
 	     type => $type || 0x83,
-	     size => (split(':', $info))[6] }
+	     size => get_lv_size($_) }
        } map { if_(m|^LV Name\s+/dev/(\S+)|, $1) } @l
       ];
 }
@@ -120,6 +125,7 @@ sub lv_create {
     my $nb = 1 + max(map { basename($_->{device}) } @$list);
     $lv->{device} = "$lvm->{VG_name}/$nb";
     run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $nb, $lvm->{VG_name});
+    $lv->{size} = get_lv_size($lv->{device}); #- the created size is smaller than asked size
     $lv->{notFormatted} = 1;
     $lv->{isFormatted} = 0;
     push @$list, $lv;
@@ -129,6 +135,7 @@ sub lv_resize {
     my ($lv, $oldsize) = @_;
     run_or_die($oldsize > $lv->{size} ? ('lvreduce', '-f') : 'lvextend', 
 	       '--size', int($lv->{size} / 2) . 'k', "/dev/$lv->{device}");
+    $lv->{size} = get_lv_size($lv->{device}); #- the resized partition may not be the exact asked size
 }
 
 1;
