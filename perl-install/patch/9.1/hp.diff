@@ -86,3 +86,35 @@ diff -u -p -r1.247 drakxtools.spec
  * Sun Mar 16 2003 Warly <warly@mandrakesoft.com> 9.1-25mdk
  - do a correct cvs up of all gi before (me sux)
  
+Index: install_steps_interactive.pm
+===================================================================
+RCS file: /cooker/gi/perl-install/install_steps_interactive.pm,v
+retrieving revision 1.810
+diff -u -p -r1.810 install_steps_interactive.pm
+--- install_steps_interactive.pm	12 Mar 2003 15:34:46 -0000	1.810
++++ install_steps_interactive.pm	21 Mar 2003 16:11:09 -0000
+@@ -894,7 +894,7 @@ sub summary {
+     my $timezone_manually_set;  
+     push @l, {
+ 	group => N("System"),
+-	label => N("Country"),
++	label => N("Country") . N(" / Region"),
+ 	val => sub { lang::c2name($o->{locale}{country}) },
+ 	clicked => sub {
+ 	    any::selectCountry($o, $o->{locale}) or return;
+Index: any.pm
+===================================================================
+RCS file: /cooker/gi/perl-install/any.pm,v
+retrieving revision 1.340
+diff -u -p -r1.340 any.pm
+--- any.pm	13 Mar 2003 10:42:51 -0000	1.340
++++ any.pm	21 Mar 2003 16:11:09 -0000
+@@ -688,7 +688,7 @@ sub selectCountry {
+     my ($other, $ext_country);
+     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
+     $o->ask_from_(
+-		  { title => N("Country"), 
++		  { title => N("Country") . N(" / Region"), 
+ 		    messages => N("Please choose your country."),
+ 		    interactive_help_id => 'selectCountry',
+ 		    advanced_messages => N("Here is the full list of available countries"),
