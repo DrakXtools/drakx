@@ -181,7 +181,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
             show_hide($current_device->{driver} !~ /(unknown|.*\|.*)/ &&  $current_device->{driver} !~ /^Card:/, $module_cfg_button);
             
             $current_configurator = $configurators{$id};
-            show_hide(-x scalar first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
+            show_hide(-x first(split /\s+/, $current_configurator), $config_button);  # strip arguments for -x test
             return 1;
         }
     }
