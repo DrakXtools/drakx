@@ -236,16 +236,11 @@ sub UpdateAll {
 }
 
 sub UpdateRoaming {
-	open (PS, "ps -A |") or die ("Can't open ps\n");
-	while (<PS>) {
-		if (/wlandetect/) {
-			$RoamStatus->set_text("Roaming: on");
-		}
-		else {
-			$RoamStatus->set_text("Roaming: off");
-		}
-	}
-	close PS;
+	my $status = "off";
+	open (my $PS, "ps -A |") or die ("Can't open ps\n");
+	grep { /wlandetect$/ } <$PS> and $status = "on";
+	close $PS;
+	$RoamStatus->set_text("Roaming: $status");
 }
 
 sub UpdateStatus {
