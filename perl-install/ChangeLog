@@ -1,3 +1,22 @@
+2000-09-27  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (selectLanguage): intregrate
+	license again
+
+	* pkgs.pm (readCompssUsers): reads compssUsers.meta_class
+
+	* diskdrake.pm (Create): replace ``ne "i386"'' by ``!~ /i.86/''
+	(as should be)
+
+	* install_steps_gtk.pm (selectInstallClass1): if @$l (list of
+	install classes) contains only one element, call
+	install_steps_interactive::selectInstallClass1	
+
+	* install_steps_interactive.pm (choosePartitionsToFormat): fix for
+	"no partitions selected to format"
+
+	* my_gtk.pm (_create_window): alt-e now *toggles* expert/newbie	
+
 2000-09-27  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* share/compssList: more for gnupg, -11 for sucking things,

@@ -142,7 +142,7 @@ press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availa
 #------------------------------------------------------------------------------
 sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
-    $::live and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
+    $::live || @$l == 1 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
     my $w = my_gtk->new('');
     my ($radio, $focused);

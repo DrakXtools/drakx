@@ -605,7 +605,6 @@ sub main {
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     if ($o->{meta_class} eq 'desktop') {
 	$o->{installClass} = 'normal';
-	push @auto, 'selectInstallClass';
     }
     if ($oem) {
 	$o->{partitioning}{auto_allocate} = 1;

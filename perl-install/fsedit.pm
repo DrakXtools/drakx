@@ -168,7 +168,7 @@ sub suggest_part {
       grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
 	@$suggestions or return;
 
-#-    if (arch() =~ /^i386/) {
+#-    if (arch() =~ /i.86/) {
 #-	  $best = $second if
 #-	    $best->{mntpoint} eq '/boot' &&
 #-	    $part->{start} + $best->{size} > 1024 * $hd->cylinder_size(); #- if the empty slot is beyond the 1024th cylinder, no use having /boot
@@ -257,7 +257,7 @@ sub check_mntpoint {
     die "raid / with no /boot" if $mntpoint eq "/" && isMDRAID($part) && !has_mntpoint("/boot", $hds);
     die _("This directory should remain within the root filesystem") if member($mntpoint, qw(/bin /dev /etc /lib /sbin));
     die _("You need a true filesystem (ext2, reiserfs) for this mount point\n") if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
-#-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i386/) {
+#-    if ($part->{start} + $part->{size} > 1024 * $hd->cylinder_size() && arch() =~ /i.86/) {
 #-	  die "/boot ending on cylinder > 1024" if $mntpoint eq "/boot";
 #-	  die     "/ ending on cylinder > 1024" if $mntpoint eq "/" && !has_mntpoint("/boot", $hds);
 #-    }

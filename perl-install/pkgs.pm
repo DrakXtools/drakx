@@ -663,7 +663,7 @@ sub readCompssList {
 }
 
 sub readCompssUsers {
-    my ($packages, $compss) = @_;
+    my ($packages, $compss, $meta_class) = @_;
     my (%compssUsers, %compssUsersIcons, @sorted, $l);
     my (%compss); 
     foreach (@$compss) {
@@ -675,7 +675,8 @@ sub readCompssUsers {
 	$l or return;
 	$_ = $packages->[0]{$_} or log::l("unknown package $_ (in compssUsers)") foreach @$l;
     };
-    my $f = install_any::getFile('Mandrake/base/compssUsers') or die "can't find compssUsers";
+    my $file = 'Mandrake/base/compssUsers';
+    my $f = install_any::getFile("$file.$meta_class") || install_any::getFile($file) or die "can't find $file";
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;

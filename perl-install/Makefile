@@ -123,7 +123,7 @@ endif
 	cd share ; cp isdndb.net $(DEST)/usr/share/isdn_db.txt
 	cd share ; cp adsldb.net $(DEST)/usr/share/adsl_db.txt
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
-	cd share ; cp compssUsers compssList $(ROOTDEST)/Mandrake/base
+	cd share ; cp compssUsers compssUsers.desktop compssList $(ROOTDEST)/Mandrake/base
 
 	if [ -f ../modules/modules.cz* ]; then \
 		cp -f ../modules/modules.cz* $(DEST)/lib/; \

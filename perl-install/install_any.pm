@@ -304,7 +304,7 @@ sub setPackages($) {
 	#- must be done after getProvides
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, lang::get_langs());
 	($o->{compssUsers}, $o->{compssUsersSorted}, $o->{compssUsersIcons}) = 
-	  pkgs::readCompssUsers($o->{packages}, $o->{compss});
+	  pkgs::readCompssUsers($o->{packages}, $o->{compss}, $o->{meta_class});
 
 	my @l = ();
 	push @l, 'xawtv', 'kwintv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
