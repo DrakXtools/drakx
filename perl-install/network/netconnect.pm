@@ -585,11 +585,11 @@ killall pppd
                     next => 'adsl_protocol',
                     post => sub {
                         $adsl_data = $adsl_data{$adsl_provider};
+                        $adsl_protocol = $adsl_types{pppoa} if $ntf_name eq 'speedtouch';
                         if ($adsl_provider ne $adsl_old_provider) {
                             $netc->{$_} = $adsl_data->{$_} foreach qw(dnsServer2 dnsServer3 DOMAINNAME2 Encapsulation vpi vci);
-                              $adsl_protocol = $adsl_types{$adsl_data->{method}};
+                              $adsl_protocol ||= $adsl_types{$adsl_data->{method}};
                         }
-                        $adsl_protocol = $adsl_types{pppoa} if $ntf_name eq 'speedtouch';
                         return 'adsl_protocol';
                     },
                    },
