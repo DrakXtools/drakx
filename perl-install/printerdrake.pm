@@ -1532,7 +1532,7 @@ sub printer_help {
     my $dialogtext;
     if ($spooler eq "cups") {
 	$dialogtext =
-_("To print a file from the command line (terminal window) you can either use the command \"%s <file>\" or a graphical printing tool: \"xpp <file>\" or \"qtcups <file>\". The graphical tools allow you to choose the printer and to modify the option settings easily.
+_("To print a file from the command line (terminal window) you can either use the command \"%s <file>\" or a graphical printing tool: \"xpp <file>\" or \"kprinter <file>\". The graphical tools allow you to choose the printer and to modify the option settings easily.
 ", ($queue ne $default ? "lpr -P $queue" : "lpr")) .
 _("These commands you can also use in the \"Printing command\" field of the printing dialogs of many applications, but here do not supply the file name because the file to print is provided by the application.
 ") .
@@ -1880,15 +1880,11 @@ sub install_spooler {
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/lib/cups/cgi-bin/printers.cgi
 					       /sbin/ifconfig
-					       /usr/bin/xpp
-					       /usr/bin/qtcups),
-					    (printer::files_exist("/usr/bin/kwin")?
-					     "/usr/bin/kups" : ()),
+					       /usr/bin/xpp),
 					    ($::expert ? 
 					     "/usr/share/cups/model/postscript.ppd.gz" : ())
 					    )))) {
-		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp', 'qtcups', 
-					   if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
+		    $in->do_pkgs->install(('cups', 'net-tools', 'xpp',
 					   ($::expert ? 'cups-drivers' : ())));
 		}
 		# Start daemon
@@ -1918,8 +1914,11 @@ sub install_spooler {
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/sbin/lpf
 					       /usr/sbin/lpd
-					       /sbin/ifconfig))))) {
-		    $in->do_pkgs->install(('lpr', 'net-tools'));
+					       /sbin/ifconfig
+					       /usr/bin/gpr
+					       /usr/bin/a2ps
+					       /usr/bin/convert))))) {
+		    $in->do_pkgs->install(('lpr', 'net-tools', 'gpr', 'a2ps', 'ImageMagick'));
 		}
 		# Start daemon
 	        printer::restart_service("lpd");
@@ -1945,8 +1944,11 @@ sub install_spooler {
 		if ((!$::testing) &&
 		    (!printer::files_exist((qw(/usr/lib/filters/lpf
 					       /usr/sbin/lpd
-					       /sbin/ifconfig))))) {
-		    $in->do_pkgs->install('LPRng', 'net-tools');
+					       /sbin/ifconfig
+					       /usr/bin/gpr
+					       /usr/bin/a2ps
+					       /usr/bin/convert))))) {
+		    $in->do_pkgs->install('LPRng', 'net-tools', 'gpr', 'a2ps', 'ImageMagick');
 		}
 		# Start daemon
 	        printer::restart_service("lpd");
