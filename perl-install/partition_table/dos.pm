@@ -109,7 +109,7 @@ sub is_geometry_valid_for_the_partition_table {
 
 #- from parted, thanks!
 my @valid_nb_sectors = (63, 61, 48, 32, 16);
-my @valid_nb_heads = (255, 192, 128, 96, 64, 61, 32, 17, 16);
+my @valid_nb_heads = (255, 240, 192, 128, 96, 64, 61, 32, 17, 16);
 
 sub guess_geometry_from_partition_table {
     my ($hd) = @_;
@@ -120,7 +120,7 @@ sub guess_geometry_from_partition_table {
     partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
     log::l("guess_geometry_from_partition_table $hd->{device}: " . geometry_to_string($geom));
 
-    member($geom->{heads}, @valid_nb_heads) && member($geom->{sectors}, @valid_nb_sectors) or return { invalid => 1 };
+    member($geom->{sectors}, @valid_nb_sectors) or return { invalid => 1 };
     $geom;
 }
 
