@@ -7,6 +7,7 @@ use interactive;
 use standalone;
 use modules;
 use detect_devices;
+use Xconfig;
 use mouse;
 use c;
 
@@ -24,8 +25,14 @@ my $in = 'interactive'->vnew('su', 'mouse');
 
 undef $::Plug;
 begin:
+my ($curr_env) = Xconfig::getinfoFromXF86Config('');
 my ($mouse) = mouse::detect() unless $::noauto;
 my $time_tag2;
+
+#- now try to merge $curr_env->{mouse} with $mouse.
+$mouse->{XMOUSETYPE} eq $curr_env->{mouse}{XMOUSETYPE} ||
+    $mouse->{XMOUSETYPE} eq 'PS/2' && ($curr_env->{mouse}{XMOUSETYPE} =~ m|PS/2| ||
+				       $curr_env->{mouse}{auxmouse}{XMOUSETYPE} =~ m|PS/2|) and $mouse = $curr_env->{mouse};
 
 $::isEmbedded and kill USR2, $::CCPID;
 if (!$mouse || !$::auto) {
