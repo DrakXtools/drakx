@@ -120,7 +120,7 @@ unless (-e "/cdrom/VERSION") {
 #- using default options for HP.
 $options{free_size} = 500;
 $options{free_primary} = 1;
-$options{free_fs} = 'fat16';
+$options{free_fs} = 'fat32';
 $options{boot_entries} = 'linux,linux-nonfb,failsafe,floppy';
 $options{kernel} = "acpi=off";
 
@@ -574,7 +574,7 @@ foreach my $medium (@media) {
 	    print "  copying " . rpm_fullname($pkg) . "\n";
 	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
 	    if (rpm_fullname($pkg) =~ /mandrake-release/) {
-		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/$medium->{rpmsdir}" . $files{rpm_fullname($pkg)};
+		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	    }
 	}
     }
