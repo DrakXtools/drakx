@@ -19,7 +19,7 @@ use log;
 @important_types = ('Linux native', 'Linux swap', 
 		    if_(arch() =~ /i.86/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'DOS FAT16', 'FAT32'),
 			if_(arch() =~ /ia64/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: XFS', 'FAT32'),
-		    if_(arch() =~ /ppc/, 'Apple HFS Partition', 'Apple Bootstrap'));
+		    if_(arch() =~ /ppc/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
@@ -29,6 +29,10 @@ use log;
 my %types = (
   0x0 => 'Empty',
 if_(arch() =~ /^ppc/, 
+  0x183 => 'Journalised FS: ReiserFS',
+  0x283 => 'Journalised FS: XFS',
+  0x383 => 'Journalised FS: JFS',
+  0x483 => 'Journalised FS: ext3',
   0x401	=> 'Apple Partition',
   0x401	=> 'Apple Bootstrap',
   0x402	=> 'Apple HFS Partition',
