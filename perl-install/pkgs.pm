@@ -378,13 +378,15 @@ sub psUpdateHdlistsDeps {
 }
 
 sub psUsingHdlists {
-    my ($prefix, $method) = @_;
-    my $listf = install_any::getFile('media/media_info/hdlists') or die "no hdlists found";
-    my $packages = new URPM;
+    my ($prefix, $method, $hdlistsfile, $packages) = @_;
+    my $listf = install_any::getFile($hdlistsfile || 'media/media_info/hdlists')
+	or die "no hdlists found";
     my $suppl_CDs = 0;
-
-    #- add additional fields used by DrakX.
-    @$packages{qw(count mediums)} = (0, {});
+    if (!$packages) {
+	$packages = new URPM;
+	#- add additional fields used by DrakX.
+	@$packages{qw(count mediums)} = (0, {});
+    }
 
     #- parse hdlists file.
     my $medium_name = 1;
