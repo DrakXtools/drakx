@@ -106,7 +106,6 @@ sub test {
         Gtk2->init;
 
         gtkset_background(200 * 257, 210 * 257, 210 * 257);
-        my ($h, $w) = gtkroot()->get_size;
         $ugtk2::force_center = 1;
 	$ugtk2::force_focus = 1;
         my $text = Gtk2::Label->new;
