@@ -331,7 +331,7 @@ sub is_same_hd {
     } else {
 	$hd1->{devfs_device} && $hd2->{devfs_device} && $hd1->{devfs_device} eq $hd2->{devfs_device}
 	  || $hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
-	  || $hd1->{device} eq $hd2->{device};
+	  || $hd1->{device} && $hd2->{device} && $hd1->{device} eq $hd2->{device};
     }
 }
 
