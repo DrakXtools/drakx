@@ -1,3 +1,11 @@
+2000-06-19  François Pons  <fpons@mandrakesoft.com>
+
+	* crypto.pm: modified for getting sparc crypto file for sparc*.
+	* modules.pm: make sure to load sd_mod when needed.
+	* pci_probing/main.pm: always use loaw_endian in pci structs.
+	* pci_probing/translate-pcitable.pl: added arch specific module name
+	translation.
+
 2000-06-16  Pixel  <pixel@mandrakesoft.com>
 
 	* modules.pm (write_conf): rename conf.modules to modules.conf if

@@ -88,6 +88,7 @@ ifeq (sparc,$(ARCH))
 endif
 
 	for i in `cat /tmp/list`; do \
+	    if [ -e $$i ]; then \
 		if (echo $$i | grep -q "lib/[^/]*\.so"); then \
 		  install -s $$i $(DEST)/lib; \
 		else \
@@ -103,6 +104,7 @@ endif
 		  	  cp -f $$i $$d; \
 		  fi; \
 		fi; \
+	    fi; \
 	done
 	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
 

@@ -30,7 +30,7 @@ sub require2package { $deps{$_[0]} || $_[0] }
 sub mirror2text($) { $mirrors{$_[0]} && "$mirrors{$_[0]}[0] ($_[0])" }
 sub mirrorstext() { map { mirror2text($_) } keys %mirrors }
 sub text2mirror($) { first($_[0] =~ /\((.*)\)$/) }
-sub dir { $mirrors{$_[0]}[1] . '/' . (arch() !~ /i.86/ && arch() . '/') . $::VERSION }
+sub dir { $mirrors{$_[0]}[1] . '/' . (arch() !~ /i.86/ && ((arch() =~ /sparc/ ? "sparc" : arch()). '/')) . $::VERSION }
 sub ftp($) { ftp::new($_[0], dir($_[0])) }
 
 sub getFile($$) {

@@ -66,7 +66,7 @@ sub get_rpms {
 
     opendir D, $dir or die "cannot open directory $dir\n";
     map { 
-	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-]*)\.rpm$/) {
+	if (/([^\/]*?)-([^-]*)-([^-]*)\.([^-\.]*)\.rpm$/) {
 	    my $key = "$1 $4"; #- get name including architecture.
 	    if ($rpms->{$key}) {
 		if (version_compare($2, $rpms->{$key}{version}) > 0 ||
@@ -255,10 +255,10 @@ sub main {
 
     #- parse directory structures.
     get_rpms($_, \%source, \%flag, 0) foreach @from_rpms;
-    get_rpms($_, \%target, \%flag, 1) foreach @to_rpms;
-
     print STDERR "reading " . scalar(keys %source) . " packages as source rpms from\n";
     print STDERR "    $_\n" foreach @from_rpms;
+
+    get_rpms($_, \%target, \%flag, 1) foreach @to_rpms;
     print STDERR "reading " . scalar(keys %target) . " packages as target rpms from\n";
     print STDERR "    $_\n" foreach @to_rpms;
 

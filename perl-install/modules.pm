@@ -388,7 +388,7 @@ sub load {
 
     if ($type) {
 	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
-	add_alias('scsi_hostadapter', $name) if $type eq "scsi" || $type eq $type_aliases{scsi};
+	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type eq "scsi" || $type eq $type_aliases{scsi};
     }
     $conf{$name}{options} = join " ", @options if @options;
 }

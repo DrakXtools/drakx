@@ -224,7 +224,7 @@ image[sun4u]=/$boot/vmlinux64
 
 	output("$dir/$boot/README", "
 To Build a Bootable CD-ROM, try:
-  mkisofs -R -o t.iso -S $boot/cd.b -B $boot/second.b -s /$boot/silo.conf /export
+  mkisofs -R -o t.iso -s /$boot/silo.conf /export
 ");
     } elsif ($type =~ /^tftprd(.*)/) {
 	my $dir = "/export";
@@ -260,7 +260,7 @@ read-write
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=ramdisk_size=32000 $ltype$corporate
+  append=\"ramdisk_size=32000 $ltype$corporate\"
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
