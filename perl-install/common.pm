@@ -6,7 +6,6 @@ use diagnostics;
 use strict;
 use run_program;
 use vars qw(@ISA @EXPORT $SECTORSIZE);
-use POSIX qw(setlocale LC_ALL LC_COLLATE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
@@ -89,8 +88,9 @@ sub untranslate {
 sub set_l10n_sort() {
     my $collation_locale = $ENV{LC_ALL};
     if (!$collation_locale) {
-        $collation_locale = setlocale(LC_COLLATE);
-        $collation_locale =~ /UTF-8/ or setlocale(LC_COLLATE, "$collation_locale.UTF-8");
+	require POSIX;
+        $collation_locale = POSIX::setlocale(POSIX::LC_COLLATE());
+        $collation_locale =~ /UTF-8/ or POSIX::setlocale(POSIX::LC_COLLATE(), "$collation_locale.UTF-8");
     }
 }
 
