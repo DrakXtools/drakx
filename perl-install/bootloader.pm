@@ -738,7 +738,7 @@ quit
 EOF
 ";
 
-     output "$prefix/boot/grub/messages", map { translate($_) . "\n" } (
+     output "$prefix/boot/grub/messages", map { substr(translate($_) . "\n", 0, 78) } ( #- ensure the translated messages are not too big the hard way
 #-PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 __("Welcome to GRUB the operating system chooser!"),
 __("Use the %c and %c keys for selecting which entry is highlighted."),
