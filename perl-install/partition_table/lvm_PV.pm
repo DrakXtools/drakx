@@ -18,11 +18,12 @@ use c;
 
 
 sub read {
-    my ($hd, $sector) = @_;
+    my ($hd, $_sector) = @_;
 
+    require fs::type;
     my $t = fs::type::type_subpart_from_magic($hd);
 
-    $t && $t->{pt_type} eq 0x8e or die "bad magic number on disk $hd->{device}";
+    $t && $t->{pt_type} == 0x8e or die "bad magic number on disk $hd->{device}";
 
     [];
 }
