@@ -163,7 +163,7 @@ sub ask_install {
 				     scalar(values %services));
 			       },
 			       get_info => sub { formatLines(description($_[0], $prefix)) },
-			      });
+			      }) or return ($l, $on_services); #- no change on cancel.
     ($l, [ grep { $services{$_} } @$l ]);
 }
 
