@@ -17,7 +17,7 @@ BuildRequires: rpm-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
-%define _requires_exceptions perl(Net::FTP)\\|perl(Time::localtime)
+%define _requires_exceptions perl(Net::FTP)\\|perl(Time::localtime)\\|perl(URPM)
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
@@ -36,7 +36,7 @@ Group: System/Configuration/Other
 Requires: ldetect-lst >= 0.1.25-1mdk
 Requires: dmidecode
 Conflicts: drakxtools-newt < 10-51mdk
-%define _requires_exceptions perl(URPM)
+
 
 %package http
 Summary: The drakxtools via http
