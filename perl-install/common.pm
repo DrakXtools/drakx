@@ -222,19 +222,19 @@ sub secured_file {
 }
 
 sub set_permissions {
-    my ($file, $perms, $owner, $group) = @_;
+    my ($file, $perms, $o_owner, $o_group) = @_;
     # We only need to set the permissions during installation to be able to
     # print test pages. After installation the devfsd daemon does the business
     # automatically.
     return 1 unless $::isInstall;
-    if ($owner && $group) {
-        run_program::rooted($::prefix, "/bin/chown", "$owner.$group", $file)
+    if ($o_owner && $o_group) {
+        run_program::rooted($::prefix, "/bin/chown", "$o_owner.$o_group", $file)
 	    or die "Could not start chown!";
-    } elsif ($owner) {
-        run_program::rooted($::prefix, "/bin/chown", $owner, $file)
+    } elsif ($o_owner) {
+        run_program::rooted($::prefix, "/bin/chown", $o_owner, $file)
 	    or die "Could not start chown!";
-    } elsif ($group) {
-        run_program::rooted($::prefix, "/bin/chgrp", $group, $file)
+    } elsif ($o_group) {
+        run_program::rooted($::prefix, "/bin/chgrp", $o_group, $file)
 	    or die "Could not start chgrp!";
     }
     run_program::rooted($::prefix, "/bin/chmod", $perms, $file)
