@@ -1,6 +1,6 @@
 package modules;
 
-use vars qw(%loaded %drivers);
+use vars qw(%loaded %drivers $scsi);
 
 use common qw(:common :file :system);
 use detect_devices;
@@ -10,7 +10,7 @@ use log;
 
 my %conf;
 my %loaded; #- array of loaded modules for each types (scsi/net/...)
-my $scsi = 0;
+$scsi = 0;
 my %deps = ();
 
 my @drivers_by_category = (
@@ -460,7 +460,7 @@ sub write_conf {
 
     add_alias('scsi_hostadapter', 'ide-scsi') if detect_devices::getIDEBurners();
 
-    if (my @scsis = grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf) {
+    if (my @scsis = sort grep { $conf{$_}{alias} && /scsi_hostadapter/ } keys %conf) {
 	log::l("has scsis ", join " ; ", map { "modprobe $_" } @scsis);
 	$conf{supermount}{"post-install"} = join " ; ", map { "modprobe $_" } @scsis;
     }

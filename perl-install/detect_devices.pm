@@ -36,7 +36,15 @@ sub get {
 sub hds() { grep { $_->{type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get(); }
 sub zips() { grep { $_->{type} eq 'hd' && isZipDrive($_) } get(); }
 #-sub jazzs() { grep { $_->{type} eq 'hd' && isJazDrive($_) } get(); }
-sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
+sub cdroms() { 
+    my @l = grep { $_->{type} eq 'cdrom' } get(); 
+    my $nb = $modules::scsi; #- this is gross!
+    foreach (getIDEBurners()) {
+	my ($e) = grep { $_->{device} eq $_ } @l or next;
+	$e->{device} = "scd" . ($nb++ || '');
+    }
+    @l;
+}
 sub floppies() {
     (grep { tryOpen($_) } qw(fd0 fd1)),
     (grep { $_->{type} eq 'fd' } get());
@@ -100,7 +108,6 @@ sub getIDE() {
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
 	push @idi, { type => $type, device => basename($d), info => $info, bus => $num/2, id => $num%2 };
     }
-    #- push @idi, { type => 'hd', device => 'hde', info => 'ZIP 100', bus => '1', id => 1 } if $::testing;
     @idi;
 }
 
