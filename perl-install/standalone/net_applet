@@ -132,7 +132,7 @@ sub setState {
     my $arr = $appletstate{$state_type}{menu};
     my $tmp = gtkcreate_pixbuf($appletstate{$state_type}{colour}[0]);
     $img->set_from_pixbuf($tmp);
-    gtkset_tip(new Gtk2::Tooltips, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($appletstate{$state_type}{tt}[0]), $interface)));
+    gtkset_tip(Gtk2::Tooltips->new, $eventbox, formatAlaTeX(common::sprintf_fixutf8(translate($appletstate{$state_type}{tt}[0]), $interface)));
     my $menu = Gtk2::Menu->new;
     foreach (@$arr) {
         $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label($actions{$_}{name})), activate => $actions{$_}{launch}));

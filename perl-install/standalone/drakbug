@@ -80,8 +80,8 @@ if ($mandrake_release =~ /(official|community)/i) {
 
 if ($stable_release == 0) {
     $table = create_packtable({ col_spacings => 5, row_spacings => 10 },
-			      [ new Gtk2::Label(N("Application:")), $comb_app = Gtk2::ComboBox->new_text ],
-			      [ new Gtk2::Label(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
+			      [ Gtk2::Label->new(N("Application:")), $comb_app = Gtk2::ComboBox->new_text ],
+			      [ Gtk2::Label->new(N("Package: ")), $package = Gtk2::Entry->new_with_text("...") ], # complain on gtk-perl@ml
 			      [ Gtk2::Label->new(N("Kernel:")), gtkset_editable(Gtk2::Entry->new_with_text($kernel_release), 0) ],
 			      [ Gtk2::Label->new(N("Release: ")), gtkset_editable(Gtk2::Entry->new_with_text($mandrake_release), 0) ]
                              );
@@ -89,7 +89,7 @@ if ($stable_release == 0) {
 } else {
     $table = create_packtable({ col_spacings => 5, row_spacings => 5 },
 			      [Gtk2::Label->new(N("Application Name\nor Full Path:")), 
-			       gtkpack_(new Gtk2::HBox(0,5),
+			       gtkpack_(Gtk2::HBox->new(0,5),
 					1, $comb_app = gtkset_editable(Gtk2::Entry->new, 1), 
 					0, $button_pkg = Gtk2::Button->new(N("Find Package")),
 				       )],
@@ -100,16 +100,16 @@ if ($stable_release == 0) {
     
     $textview = Gtk2::TextView->new;
     
-    $extra_data = gtkpack_(new Gtk2::VBox(0,1),
+    $extra_data = gtkpack_(Gtk2::VBox->new(0,1),
 			   0, Gtk2::Label->new(N("Bug Description/System Information")),
 			   1, create_scrolled_window(gtktext_insert($textview,  N("YOUR TEXT HERE"), editable => 1, visible => 1)),
-			   0, gtkpack_(new Gtk2::HBox(0,20),
-				       0, new Gtk2::HBox(0,0),
-				       1, $kversion = new Gtk2::CheckButton(N("Submit kernel version")),
-				       1, $cpuinfo = new Gtk2::CheckButton(N("Submit cpuinfo")),
-				       1, $lspci = new Gtk2::CheckButton(N("Submit lspci")),
+			   0, gtkpack_(Gtk2::HBox->new(0,20),
+				       0, Gtk2::HBox->new(0,0),
+				       1, $kversion = Gtk2::CheckButton->new(N("Submit kernel version")),
+				       1, $cpuinfo = Gtk2::CheckButton->new(N("Submit cpuinfo")),
+				       1, $lspci = Gtk2::CheckButton->new(N("Submit lspci")),
 				      ),
-			   0, new Gtk2::HSeparator,		
+			   0, Gtk2::HSeparator->new,		
 			  );
     $kversion->set_active(1);
     $cpuinfo->set_active(1);
@@ -117,13 +117,13 @@ if ($stable_release == 0) {
 }
 
 gtkadd($window->{window},
-       gtkpack_(new Gtk2::VBox(0,5),
+       gtkpack_(Gtk2::VBox->new(0,5),
 		0, gtkadd($table),
 		1, gtkadd($extra_data),
-		0, gtkpack(new Gtk2::HBox(0,0),
-			   gtkpack(gtkset_justify(new Gtk2::Label($upload_info), "left")),
+		0, gtkpack(Gtk2::HBox->new(0,0),
+			   gtkpack(gtkset_justify(Gtk2::Label->new($upload_info), "left")),
 			  ),
-		0, gtkpack(new Gtk2::HSeparator),
+		0, gtkpack(Gtk2::HSeparator->new),
 		0, gtkpack_(Gtk2::HBox->new(0,0),
 			    0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
 			    1, Gtk2::Label->new(""),

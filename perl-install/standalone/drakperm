@@ -100,7 +100,7 @@ $permList->signal_connect(button_press_event => sub {
                  });
 
 
-my $tips = new Gtk2::Tooltips;
+my $tips = Gtk2::Tooltips->new;
 
 $W->add(gtkpack_(Gtk2::VBox->new(0,5),
                  0, Gtk2::WrappedLabel->new(N("Here you can see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."), 0.5),
@@ -234,12 +234,12 @@ sub load_perms() {
 sub row_setting_dialog {
     my ($iter) = @_;
     
-    my $dlg         = new Gtk2::Dialog();
+    my $dlg = Gtk2::Dialog->new;
     $dlg->set_transient_for($w->{rwindow}) unless $::isEmbedded;
     $dlg->set_modal(1);
 #    $dlg->set_resizable(0);
-    my $browse = new Gtk2::Button(N("browse"));
-    my $file        = new Gtk2::Entry;
+    my $browse = Gtk2::Button->new(N("browse"));
+    my $file        = Gtk2::Entry->new;
     my ($other, $group, $user, $s) = reverse(split(//, $model->get($iter, 4))) if $iter;
     my @bits = qw(sticky gid suid);
     my @rights = qw(read write execute);
@@ -303,7 +303,7 @@ sub row_setting_dialog {
      
      
     $browse->signal_connect(clicked => sub {
-                     my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
+                     my $file_dlg = Gtk2::FileSelection->new(N("Path selection"));
                      $file_dlg->set_modal(1);
                      $file_dlg->set_transient_for($dlg);
                      $file_dlg->show;

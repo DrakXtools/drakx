@@ -62,7 +62,7 @@ my %inv_fields = reverse %fields;
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
     my $mainw = ugtk2->new(N("Please wait"), (modal => 1, if_(!$::isEmbedded, transient => $w->{rwindow})));
-    $mainw->{window}->add(new Gtk2::WrappedLabel($_[0]));
+    $mainw->{window}->add(Gtk2::WrappedLabel->new($_[0]));
     $mainw->{rwindow}->show_all;
     gtkset_mousecursor_wait($mainw->{rwindow}->window);
     gtkflush();
@@ -132,7 +132,7 @@ sub new_nonedit_combo {
 sub set_help_tip {
      my ($entry, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-     gtkset_tip(new Gtk2::Tooltips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", to_i18n($default)));
+     gtkset_tip(Gtk2::Tooltips->new, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", to_i18n($default)));
 }
 
 my $msec = new security::msec;
@@ -152,7 +152,7 @@ unless ($::isEmbedded) {
 $window->signal_connect('delete_event', sub { $window->destroy });
 $window->signal_connect('destroy', sub { ugtk2->exit });
 
-$window->add(my $vbox = gtkshow(new Gtk2::VBox(0, 0)));
+$window->add(my $vbox = gtkshow(Gtk2::VBox->new(0, 0)));
 
 # Create the notebook (for bookmarks at the top)
 my $notebook = create_notebook();
@@ -162,7 +162,7 @@ my $common_opts = { col_spacings => 10, row_spacings => 5, mcc => 1 };
 ######################## BASIC OPTIONS PAGE ################################
 my ($seclevel_entry, $secadmin_entry);
 
-$notebook->append_page(gtkshow(gtkpack_(new Gtk2::VBox(0, 0),
+$notebook->append_page(gtkshow(gtkpack_(Gtk2::VBox->new(0, 0),
                                        1, basic_seclevel_explanations(),
                                        0, create_packtable($common_opts,
                                                         [ 
@@ -182,7 +182,7 @@ $notebook->append_page(gtkshow(gtkpack_(new Gtk2::VBox(0, 0),
                                                                                                  }) ],
                                                         [ Gtk2::WrappedLabel->new(N("Security Administrator:")),
                                                           $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
-                               new Gtk2::Label(N("Basic options")));
+                               Gtk2::Label->new(N("Basic options")));
                        
 if ($msec->get_check_value("MAIL_WARN") eq "yes") {
     $secadmin_check->set_active(1);
@@ -213,7 +213,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $values{$i} = new_nonedit_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
                                                                                                $entry = $values{$i}->entry;
                                                                                            } else {
-                                                                                               $values{$i} = new Gtk2::Entry();
+                                                                                               $values{$i} = Gtk2::Entry->new;
                                                                                                $entry = $values{$i};
                                                                                            }
                                                                                            $entry->set_text(to_i18n($msec->get_function_value($opt)));
@@ -243,7 +243,7 @@ gtkappend_page($notebook, gtkshow(gtkpack_(Gtk2::VBox->new,
                                                                                        set_help_tip($entry, $msec->get_check_default($opt), $opt);
                                                                                        [ gtkshow(Gtk2::WrappedLabel->new($i)), resize($security_checks_value{$i}) ];
                                                                                    } sort map { $fields{$_} || $_ } $msec->list_checks)))),
-                       new Gtk2::Label(N("Periodic Checks")));
+                       Gtk2::Label->new(N("Periodic Checks")));
 
 
 ####################### OK CANCEL BUTTONS ##################################
