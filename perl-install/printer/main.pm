@@ -2139,7 +2139,7 @@ sub configure_hpoj {
 	while (<PTALINIT>) {
 	    if (m!sub main!) {
 		last;
-	    } elsif (m!^[^#]!) {
+	    } elsif (m!^[^\#]!) {
 		# Make the subroutines also working during installation
 		if ($::isInstall) {
 		    s!\$::prefix!\$hpoj_prefix!g;
@@ -2391,7 +2391,8 @@ qq(
 
 # The format version of this file:
 #   ptal-init ignores devices with incorrect/missing versions.
-init.version=2\n");
+init.version=2
+);
 
     # Write model string.
     if ($model_long !~ /\S/) {
