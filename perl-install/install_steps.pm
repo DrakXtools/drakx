@@ -499,6 +499,17 @@ GridHeight=70
 	}
     }
 
+    #- fix bad update-alternatives that may occurs after upgrade (but let them for install too).
+    if (-d "$o->{prefix}/etc/alternatives") {
+	local (*ALTERNATE_DIR, $_); opendir ALTERNATE_DIR, "$o->{prefix}/etc/alternatives";
+	while (defined($_ = readdir ALTERNATE_DIR)) {
+	    -e "$o->{prefix}/etc/alternatives/$_" and next;
+	    log::l("fixing broken alternative $_");
+	    run_program::rooted($o->{prefix}, "update-alternatives", "--auto", $_);
+	}
+	closedir ALTERNATE_DIR;
+    }
+
     #- update oem lilo image if it exists.
     if (-s "/boot/oem-message-graphic") {
 	rename "$o->{prefix}/boot/message-graphic", "$o->{prefix}/boot/message-graphic.mdkgiorig";
