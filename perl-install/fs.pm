@@ -149,7 +149,7 @@ sub add2all_hds {
 	    isThisFs('nfs', $_) ? 'nfss' :
 	    isThisFs('smbfs', $_) ? 'smbs' :
 	    isThisFs('davfs', $_) ? 'davs' :
-	    isTrueFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
+	    isTrueLocalFS($_) || isSwap($_) || isOtherAvailableFS($_) ? '' :
 	    'special';
 	push @{$all_hds->{$s}}, $_ if $s;
     }
