@@ -236,40 +236,29 @@ sub get_subwizard {
                     data => [ 
                              (map {
                                  my ($dstruct, $field, $item) = @$_;
-                                 $item->{val} = \$wiz->{var}{$dstruct}{$field};
-                                 if__($wiz->{var}{$dstruct}{$field}, $item);
-                             } ([ "cnx",  "irq", { label => N("Card IRQ") } ],
-                                [ "cnx",  "mem", { label => N("Card mem (DMA)") } ],
-                                [ "cnx",  "io",  { label => N("Card IO") } ],
-                                [ "cnx",  "io0", { label => N("Card IO_0") } ],
-                                [ "cnx",  "io1", { label => N("Card IO_1") } ],
-                                [ "cnx",  "phone_in",     { label => N("Your personal phone number") } ],
-                                [ "netc", "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
-                                [ "cnx",  "phone_out",    { label => N("Provider phone number") } ],
-                                [ "netc", "dnsServer2",   { label => N("Provider dns 1 (optional)") } ],
-                                [ "netc", "dnsServer3",   { label => N("Provider dns 2 (optional)") } ],
-                                [ "cnx",  "vpivci",       { label => N("Choose your country"), list => detect_timezone() } ],
-                                [ "cnx",  "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
-                                [ "cnx",  "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
-                                [ "cnx",  "huptimeout",   { label => N("Connection timeout (in sec)") } ],
+                                 $item->{val} = \$dstruct->{$field};
+                                 if__($dstruct->{$field}, $item);
+                             } ([ $netcnx, "irq", { label => N("Card IRQ") } ],
+                                [ $netcnx, "mem", { label => N("Card mem (DMA)") } ],
+                                [ $netcnx, "io",  { label => N("Card IO") } ],
+                                [ $netcnx, "io0", { label => N("Card IO_0") } ],
+                                [ $netcnx, "io1", { label => N("Card IO_1") } ],
+                                [ $netcnx, "phone_in",     { label => N("Your personal phone number") } ],
+                                [ $netc,   "DOMAINNAME2",  { label => N("Provider name (ex provider.net)") } ],
+                                [ $netcnx, "phone_out",    { label => N("Provider phone number") } ],
+                                [ $netc,   "dnsServer2",   { label => N("Provider DNS 1 (optional)") } ],
+                                [ $netc,   "dnsServer3",   { label => N("Provider DNS 2 (optional)") } ],
+                                [ $netcnx, "dialing_mode", { label => N("Dialing mode"),  list => ["auto", "manual"] } ],
+                                [ $netcnx, "speed",        { label => N("Connection speed"), list => ["64 Kb/s", "128 Kb/s"] } ],
+                                [ $netcnx, "huptimeout",   { label => N("Connection timeout (in sec)") } ],
                                )
                              ),
-                             ({ label => N("Account Login (user name)"), val => \$wiz->{var}{cnx}{login} },
-                              { label => N("Account Password"),  val => \$wiz->{var}{cnx}{passwd}, hidden => 1 },
+                             ({ label => N("Account Login (user name)"), val => \$netcnx->{login} },
+                              { label => N("Account Password"),  val => \$netcnx->{passwd}, hidden => 1 },
                              )
                             ],
                     post => sub {
-                        my $netc = $wiz->{var}{netc};
-                        if ($netc->{vpivci}) {
-                            my %h = (N("Belgium") => '8_35' ,
-                                     N("France")  => '8_35'  ,
-                                     N("Italy")   => '8_35' ,
-                                     N("Netherlands")    => '8_48' ,
-                                     N("United Kingdom") => '0_38' ,
-                                     N("United States")  => '8_35',
-                                    );
-                            $netc->{vpivci} = $h{$netc->{vpivci}};
-                        }
+                        $handle_multiple_cnx->();
                     },
                    },
                    
