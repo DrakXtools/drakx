@@ -535,6 +535,13 @@ sub when_load {
     if ($name =~ /^snd-card-/) {
 	load('snd-pcm-oss', 'prereq');
     }
+    if ($name =~ /usb-[uo]hci/) {
+	add_alias('usb-interface', $name);
+    }
+    if ($name eq 'ehci-hcd') {
+	add_alias('usb-interface1', $name);
+    }
+
     $conf{$name}{options} = join " ", @options if @options;
 }
 
@@ -631,7 +638,6 @@ sub load_raw {
 		/^irq=(\d+)/ and eval { output "/proc/parport/0/irq", $1 };
 	    }
 	} elsif ($_->[0] =~ /usb-[uo]hci/) {
-	    add_alias('usb-interface', $_->[0]);
 	    eval {
 		require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
 		#- ensure keyboard is working, the kernel must do the job the BIOS was doing
