@@ -177,14 +177,7 @@ sub get_subwizard {
                             $connections{$string} = $type;
                         }
                         %rconnections = reverse %connections;
-                        if ($::isInstall) {
-                            @connection_list = map {
-                                my (undef, undef, $type) = @$_;
-                                +{ text => $rconnections{$type}, val => \$conf{$type}, type => 'bool' }
-                            } @connections;
-                        } else {
-                            @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
-                        }
+                        @connection_list = ({ val => \$cnx_type, type => 'list', list => [ map { $_->[0] } @connections ], });
                     },
                     if_(!$::isInstall, no_back => 1),
                     name => N("Choose the connection you want to configure"),
