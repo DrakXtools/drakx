@@ -488,35 +488,22 @@ sub psUsingHdlist {
     if ($m->{ignored}) {
 	log::l("ignoring packages in $hdlist");
     } else {
-	our %uniq_pkg_seen;
+	my $callback = sub {
+	    my (undef, $p) = @_;
+	    our %uniq_pkg_seen;
+	    if ($uniq_pkg_seen{$p->fullname}++) {
+		log::l("skipping " . scalar $p->fullname);
+		return 0;
+	    } else {
+		return 1;
+	    }
+	};
 	if (-s $newsf) {
 	    log::l("parse_synthesis");
-	    ($m->{start}, $m->{end}) = $packages->parse_synthesis(
-		$newsf,
-		callback => sub {
-		    my (undef, $p) = @_;
-		    if ($uniq_pkg_seen{$p->fullname}++) {
-			log::l("skipping " . scalar $p->fullname);
-			return 0;
-		    } else {
-			return 1;
-		    }
-		},
-	    );
+	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($newsf, callback => $callback);
 	} elsif (-s $newf) {
 	    log::l("parse_hdlist");
-	    ($m->{start}, $m->{end}) = $packages->parse_hdlist(
-		$newf,
-		callback => sub {
-		    my (undef, $p) = @_;
-		    if ($uniq_pkg_seen{$p->fullname}++) {
-			log::l("skipping " . scalar $p->fullname);
-			return 0;
-		    } else {
-			return 1;
-		    }
-		},
-	    );
+	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, callback => $callback);
 	} else {
 	    delete $packages->{mediums}{$medium_name};
 	    unlink $newf;
