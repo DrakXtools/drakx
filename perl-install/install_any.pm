@@ -594,7 +594,9 @@ sub install_urpmi {
 					   disk => "file:/" . hdInstallPath(),
 					   ftp => $ENV{URLPREFIX},
 					   http => $ENV{URLPREFIX},
-					   cdrom => "removable://mnt/cdrom" }}{$method}) . "/$_->{rpmsdir}";
+					   cdrom => "removable://mnt/cdrom" }}{$method} ||
+		       #- for live_update or live_install script.
+		       readlink "/tmp/image/Mandrake" =~ m,^(\/.*)\/Mandrake\/*$, && "removable:/$1") . "/$_->{rpmsdir}";
 
 	    #- build list file using internal data, synthesis file should exists.
 	    #- WARNING this method of build only works because synthesis (or hdlist)
