@@ -166,6 +166,20 @@ sub take_screenshot {
     $in->ask_warn('', _("Screenshots will be available after install in %s", "/root/DrakX-screenshots")) if $warn;
 }
 
+sub join_lines {
+    my @l;
+    my $s;
+    foreach (@_) {
+	if (/^\s/) {
+	    $s .= $_;
+	} else {
+	    push @l, $s if $s;
+	    $s = $_;
+	}
+    }
+    @l, if_($s, $s);
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################

@@ -23,7 +23,7 @@ sub parameters {
   }
 
   my @parameters;
-  foreach (join_lines(`$modinfo -p $module`)) {
+  foreach (common::join_lines(`$modinfo -p $module`)) {
       chomp;
       next if /^warning:/;
       (my $name, $_) = /(\S+)\s+(.*)/s or warn "modparm::get_options_name($module): unknown line\n";
@@ -58,21 +58,6 @@ sub parameters {
       push @parameters, [ $format ? "$name ($format)" : $name, $description ];
   }
   @parameters;
-}
-
-
-sub join_lines {
-    my @l;
-    my $s;
-    foreach (@_) {
-	if (/^\s/) {
-	    $s .= $_;
-	} else {
-	    push @l, $s if $s;
-	    $s = $_;
-	}
-    }
-    @l, if_($s, $s);
 }
 
 1;
