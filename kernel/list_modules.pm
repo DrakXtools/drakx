@@ -89,7 +89,7 @@ our %l = (
 
   bus => 
   {
-    usb => [ qw(usbcore usb-uhci usb-ohci ehci-hcd usbkbd keybdev input) ],
+    usb => [ qw(usbcore usb-uhci usb-ohci ehci-hcd uhci-hcd ohci-hcd usbkbd keybdev input) ],
     firewire => [ qw(ohci1394 ieee1394) ],
     pcmcia => [
       if_(arch() !~ /^sparc/, qw(pcmcia_core tcic ds i82365 i82092 yenta_socket)), # cb_enabler
