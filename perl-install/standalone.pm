@@ -145,11 +145,8 @@ Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
 }
 
 sub on_request_help {
-    my ($link) = shift;
-    my $browser;
-    if (!($browser = $ENV{BROWSER})) {
-	foreach (qw(mozilla konqueror galeon)) { -x "/usr/bin/$_" or next; $browser = $_; last };
-    }
+    my ($o, $link) = @_;
+    my $browser = $ENV{BROWSER} || MDK::Common::Func::find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $o->ask_warn('',N("No browser is installed on your system, Please install one if you want to browse the help system"));
     standalone::explanations("Connection to help system at $link");
     system("$browser $link &");
 }
