@@ -240,7 +240,8 @@ static int add_default_route(void)
 }
 
 
-static int write_resolvconf(void) {
+static int write_resolvconf(void)
+{
 	char * filename = "/etc/resolv.conf";
 	FILE * f;
 	
@@ -268,7 +269,8 @@ static int write_resolvconf(void) {
 }
 
 
-static int save_netinfo(struct interface_info * intf) {
+static int save_netinfo(struct interface_info * intf)
+{
 	char * file_network = "/tmp/network";
 	char file_intf[500];
 	FILE * f;
@@ -348,7 +350,8 @@ char * guess_netmask(char * ip_addr)
 }
 
 
-char * guess_domain_from_hostname(char *hostname) {
+char * guess_domain_from_hostname(char *hostname)
+{
 	char *domain = strchr(strdup(hostname), '.');
 	if (!domain || domain[1] == '\0') {
 		log_message("unable to guess domain from hostname: %s", hostname);
