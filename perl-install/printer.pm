@@ -125,6 +125,10 @@ sub set_permissions {
 
 sub restart_service ($) {
     my ($service) = @_;
+    # Exit silently if the service is not installed
+    if (!(-x "/etc/rc.d/init.d/$service")) {
+	return 1;
+    }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
     if (($? >> 8) != 0) {
 	return 0;
@@ -139,6 +143,10 @@ sub restart_service ($) {
 
 sub start_service ($) {
     my ($service) = @_;
+    # Exit silently if the service is not installed
+    if (!(-x "/etc/rc.d/init.d/$service")) {
+	return 1;
+    }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
     if (($? >> 8) != 0) {
 	return 0;
@@ -153,6 +161,10 @@ sub start_service ($) {
 
 sub stop_service ($) {
     my ($service) = @_;
+    # Exit silently if the service is not installed
+    if (!(-x "/etc/rc.d/init.d/$service")) {
+	return 1;
+    }
     run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
     if (($? >> 8) != 0) {return 0;} else {return 1;}
 }
@@ -183,6 +195,7 @@ sub start_service_on_boot ($) {
 
 sub SIGHUP_daemon {
     my ($service) = @_;
+    if ($service eq "cupsd") {$service = "cups"};
     # PDQ has no daemon, exit.
     if ($service eq "pdq") {return 1};
     # CUPS needs auto-configuration
