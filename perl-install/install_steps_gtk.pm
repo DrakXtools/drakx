@@ -193,7 +193,13 @@ sub new($$) {
 		0;
 	    };
 	    my @servers = qw(FBDev VGA16); #-)
-	    @servers = qw(SVGA 3DLabs TGA) if arch() eq "alpha";
+	    if (arch() eq "alpha") {
+		require Xconfigurator;
+		my $card = Xconfigurator::cardConfigurationAuto();
+		add2hash($card, Xconfigurator::cardName2card($card->{type})) if $card && $card->{type};
+		@servers = $card->{server} || "TGA";
+		#-@servers = qw(SVGA 3DLabs TGA) 
+	    }
 	    @servers = qw(Mach64) if arch() =~ /^sparc/;
 
 	    foreach (@servers) {

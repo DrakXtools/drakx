@@ -20,8 +20,8 @@ Mandrake Alpha short Howto-Install :
 the system 
 
 - if the device is not available via SRM, use the
-cdrom: `boot -file boot/v.gz -root /dev/sda1' (replace sda1 by the
-root you installed on)
+cdrom: `boot dqa0 -file boot/v.gz -fl root=/dev/sda1' (replace sda1 by the
+root you installed on, and dqa0 by the cdrom device)
 
 
 * to install from the network:

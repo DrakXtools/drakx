@@ -34,12 +34,12 @@ install: build autoboot
 ifeq (alpha,$(ARCH))
 	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
-	sudo install -d /mnt/loop
-	for i in $(ROOTDEST)/images/disks/*; do \
-	  sudo mount $$i /mnt/loop -o loop ;\
-	  sudo cp -f vmlinux.gz /mnt/loop ;\
-	  sudo umount $$i ;\
-	done
+#	 sudo install -d /mnt/loop
+#	 for i in $(ROOTDEST)/images/disks/*; do \
+#	   sudo mount $$i /mnt/loop -o loop ;\
+#	   sudo cp -f vmlinux.gz /mnt/loop ;\
+#	   sudo umount $$i ;\
+#	 done
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
 endif
 	make -C perl-install full_stage2
