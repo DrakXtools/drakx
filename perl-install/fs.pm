@@ -271,7 +271,7 @@ sub mount_options_help {
 }
 
 sub set_default_options {
-    my ($all_hds, $useSupermount, $iocharset, $codepage) = @_;
+    my ($all_hds, $useSupermount, $security, $iocharset, $codepage) = @_;
 
     my @removables = @{$all_hds->{raw_hds}};
 
@@ -304,7 +304,7 @@ sub set_default_options {
 	}
 	if (isFat($part) || $is_auto) {
 	    put_in_hash($options, {
-	        user => 1, 'umask=0' => 1, exec => 1,
+	        user => 1, 'umask=0' => $security < 3, exec => 1,
 	        'iocharset=' => $iocharset, 'codepage=' => $codepage,
             });
 	}
