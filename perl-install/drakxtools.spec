@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 16mdk
+Release: 17mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -263,6 +263,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-17mdk
+- harddrake :
+	o workaround for the busy mouse cursor set by
+	  gtkset_mousecursor_wait() in my_gtk::destroy
+	o remove debugging prints
+	o cleanups
+- drakx: various cleanups
+
+
 * Thu Aug  1 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-16mdk
 - my_gtk:
 	o splitup it into my_gtk and ugtk as done by dams
