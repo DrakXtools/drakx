@@ -166,7 +166,7 @@ sub setupBootloader {
 { label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert, format => sub { $bootloader::vga_modes{$_[0]} }, advanced => 1 },
 ),
 { label => _("Delay before booting default image"), val => \$b->{timeout} },
-    if_($security >= 4,
+    if_($security >= 4 || $b->{password} || $b->{restricted},
 { label => _("Password"), val => \$b->{password}, hidden => 1 },
 { label => _("Password (again)"), val => \$b->{password2}, hidden => 1 },
 { label => _("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => _("restrict") },
