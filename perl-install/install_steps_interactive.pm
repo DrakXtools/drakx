@@ -889,7 +889,7 @@ sub summary {
 ]);
 
     if (!$o->{raw_X} && pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed) {
-	$o->ask_yesorno('', _("You have not configured X. Are you sure you really want this?"))
+	$o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"))
 	  or goto summary;
     }
 
