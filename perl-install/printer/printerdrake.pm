@@ -403,6 +403,71 @@ sub first_time_dialog {
     $in->ask_yesorno(N("Printerdrake"), $dialogtext, 0);
 }
 
+sub find_new_printers {
+    my ($printer, $in, $upNetwork) = @_;
+
+    # This procedure auto-detects local printers and checks whether
+    # there is already a queue for them. If there is no queue for an
+    # auto-detected printer, it gets added to a list, so that we can
+    # install it nom-interactively.
+
+    # Experts can have weird things as self-made CUPS backend, so do not
+    # automatically pollute the system with unwished queues in expert
+    # mode
+    return 1 if $::expert;
+    
+    # Wait message
+    my $w = $in->wait_message(N("Printerdrake"),
+			      N("Searching for new printers..."));
+
+    # When HPOJ is running, it blocks the printer ports on which it is
+    # configured, so we stop it here. If it is not installed or not 
+    # configured, this command has no effect.
+    require services;
+    services::stop("hpoj");
+
+    # Auto-detect local printers   
+    my @autodetected = printer::detect::local_detect();
+
+    # We are ready with auto-detection, so we restart HPOJ here. If it 
+    # is not installed or not configured, this command has no effect.
+    printer::services::start("hpoj");
+
+    # No printer found? So no need of new queues.
+    return 1 if !@autodetected;
+
+    # List of detected printers which have no queue yet
+    $printer->{autoconfig} = ();
+
+    # Black-list all auto-detected printers for which there is already
+    # a queue
+    my @blacklist;
+    foreach my $queue (keys %{$printer->{configured}}) {
+	# Does the URI of this installed queue match one of the autodetected
+	# printers?
+	my $uri = $printer->{configured}{$queue}{queuedata}{connect};
+	my $p = printer::main::autodetectionentry_for_uri
+	    ($uri, @autodetected);
+	if (defined($p)) {
+	    # Blacklist the port
+	    push(@blacklist, $p->{port});
+	}
+    }
+
+    # Now copy all autodetection entries which still need a queue
+    foreach my $p (@autodetected) {
+	if (!member($p->{port}, @blacklist)) {
+	    push(@{$printer->{autoconfig}}, $p);
+	}
+    }
+
+    # For debugging, will be deleted before release of Mandrake 9.1.
+    #print "##### Queues needed:\n";
+    #use Data::Dumper;
+    #print Dumper(@{$printer->{autoconfig}});
+    #print "#####\n";
+}
+
 sub wizard_welcome {
     my ($printer, $in, $upNetwork) = @_;
     my $ret;
@@ -619,12 +684,13 @@ sub setup_local_autoscan {
 	}
     }
     my @menuentrieslist = sort { 
-	my @prefixes = ("/dev/lp", "/dev/usb/lp", "/dev/", "socket:", "smb:");
+	my @prefixes = ("/dev/lp", "/dev/usb/lp", "/dev/", "socket:", 
+			"smb:");
 	my $first = $menuentries->{$a};
 	my $second = $menuentries->{$b};
 	for (my $i = 0; $i <= $#prefixes; $i++) {
 	    my $firstinlist = $first =~ m!^$prefixes[$i]!;
-	    my $secondinlist = $second =~ m!^$::prefixes[$i]!;
+	    my $secondinlist = $second =~ m!^$prefixes[$i]!;
 	    if ($firstinlist && !$secondinlist) { return -1 };
 	    if ($secondinlist && !$firstinlist) { return 1 };
 	}
@@ -633,63 +699,15 @@ sub setup_local_autoscan {
     my $menuchoice = "";
     my $oldmenuchoice = "";
     my $device;
-    if ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~
-	m!^usb://([^/]+)/([^/\?]+)(|\?serial=(\S+))$!) {
-	# USB device with URI referring to printer model
-	my $make = $1;
-	my $model = $2;
-	my $serial = $4;
-	if ($make and $model) {
-	    $make =~ s/\%20/ /g;
-	    $model =~ s/\%20/ /g;
-	    $serial =~ s/\%20/ /g;
-	    $make =~ s/Hewlett[-\s_]Packard/HP/;
-	    $make =~ s/HEWLETT[-\s_]PACKARD/HP/;
-	    foreach my $p (@autodetected) {
-		next if (!$p->{val}{MANUFACTURER} or
-			 ($p->{val}{MANUFACTURER} ne $make));
-		next if (!$p->{val}{MODEL} or
-			 ($p->{val}{MODEL} ne $model));
-		next if ((!$p->{val}{SERIALNUMBER} and $serial) or
-			 ($p->{val}{SERIALNUMBER} and !$serial) or
-			 ($p->{val}{SERIALNUMBER} ne $serial));
-		$device = $p->{port};
-		$menuchoice = { reverse %$menuentries }->{$device}
-	    }
+    my $p;
+    if ($printer->{configured}{$queue}) {
+	my $p = printer::main::autodetectionentry_for_uri
+	    ($printer->{currentqueue}{connect}, @autodetected);
+	if (defined($p)) {
+	    $device = $p->{port};
+	    $menuchoice = { reverse %$menuentries }->{$device};
 	}
-    } elsif ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~
-	m/^(file|parallel|usb|serial):/) {
-	# Non-HP or HP print-only device (HPOJ not used)
-	$device = $printer->{currentqueue}{connect};
-	$device =~ s/^(file|parallel|usb|serial)://;
-	$menuchoice = { reverse %$menuentries }->{$device}
-    } elsif ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~ m!^ptal:/mlc:!) {
-	# HP multi-function device (controlled by HPOJ)
-	my $ptaldevice = $printer->{currentqueue}{connect};
-	$ptaldevice =~ s!^ptal:/mlc:!!;
-	if ($ptaldevice =~ /^par:(\d+)$/) {
-	    $menuchoice = { reverse %$menuentries }->{"/dev/lp$1"}
-	} else {
-	    $ptaldevice =~ /^usb:(.*)$/;
-	    my $model = $1;
-	    $model =~ s/_/ /g;
-	    $device = "";
-	    foreach my $p (keys %{$menuentries}) {
-		if ($p =~ /$model/i) {
-		    $menuchoice = $p;
-		    $device = $menuentries->{$p};
-		    last;
-		}
-	    }
-	}
-    } elsif ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~ m!^(socket|smb):/!) {
-	# Ethernet-(TCP/Socket)-connected printer or printer on Windows server
-	$menuchoice = { reverse %$menuentries }->{$printer->{currentqueue}{connect}}
-    } else { $device = "" }
+    }
     if ($menuchoice eq "" && @menuentrieslist > -1) {
 	$menuchoice = $menuentrieslist[0];
 	$oldmenuchoice = $menuchoice;
@@ -725,41 +743,53 @@ sub setup_local_autoscan {
 	    $manualconf = 1 if $printer->{MANUAL} || !$do_auto_detect;
 	    if (!$in->ask_from_(
 		 { title => ($expert_or_modify ?
-			     N("Local Printer") :
+			     N("Local Printers") :
 			     N("Available printers")),
 		   messages => (($do_auto_detect ?
 				 ($::expert ?
 				  ($#menuentrieslist == 0 ?
-				   N("The following printer was auto-detected, if it is not the one you want to configure, enter a device name/file name in the input line") :
-				   N("Here is a list of all auto-detected printers. Please choose the printer you want to set up or enter a device name/file name in the input line")) :
+				   (N("The following printer was auto-detected. ") .
+				    ($printer->{NEW} ?
+				     N("If it is not the one you want to configure, enter a device name/file name in the input line") :
+				     N("Alternatively, you can specify a device name/file name in the input line"))) :
+				   (N("Here is a list of all auto-detected printers. ") .
+				    ($printer->{NEW} ?
+				     N("Please choose the printer you want to set up or enter a device name/file name in the input line") :
+				     N("Please choose the printer to which the print jobs should go or enter a device name/file name in the input line")))) :
 				  ($#menuentrieslist == 0 ?
-				   N("The following printer was auto-detected. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
-				   N("Here is a list of all auto-detected printers. Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."))) :
+				   (N("The following printer was auto-detected. ") .
+				    ($printer->{NEW} ?
+				     N("The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") : 
+				     N("There is currently no alternative possibiliy"))) :
+				   (N("Here is a list of all auto-detected printers. ") .
+				    ($printer->{NEW} ?
+				     N("Please choose the printer you want to set up. The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\".") :
+				     N("Please choose the printer to which the print jobs should go."))))) :
 				 ($::expert ?
 				  N("Please choose the port that your printer is connected to or enter a device name/file name in the input line") :
 				  N("Please choose the port that your printer is connected to."))) .
 				if_($::expert,
-				 N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."))), 
-				 callbacks => {
-				     complete => sub {
-					 unless ($menuchoice ne "") {
-					     $in->ask_warn('', N("You must choose/enter a printer/device!"));
-					     return (1,0);
-					 }
-					 return 0;
-				     },
-				     changed => sub {
-					 if ($oldmenuchoice ne $menuchoice) {
-					     $device = $menuentries->{$menuchoice};
-					     $oldmenuchoice = $menuchoice;
-					 }
-					 return 0;
-				     }
-				 } },
+				    N(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."))), 
+				  callbacks => {
+				      complete => sub {
+					  unless ($menuchoice ne "") {
+					      $in->ask_warn('', N("You must choose/enter a printer/device!"));
+					      return (1,0);
+					  }
+					  return 0;
+				      },
+				      changed => sub {
+					  if ($oldmenuchoice ne $menuchoice) {
+					      $device = $menuentries->{$menuchoice};
+					      $oldmenuchoice = $menuchoice;
+					  }
+					  return 0;
+				      }
+				  } },
 		 [
 		  if_($::expert, { val => \$device }),
 		  { val => \$menuchoice, list => \@menuentrieslist, 
-		    not_edit => !$::expert, format => \&translate, sort => 0,
+		    not_edit => !$::expert, format => \&translate,
 		    allow_empty_list => 1, type => 'list' },
 		  if_(!$::expert && $do_auto_detect && $printer->{NEW}, 
 		   { text => N("Manual configuration"), type => 'bool',
@@ -3020,6 +3050,8 @@ sub main {
     # of Printerdrake
     printer::main::set_usermode($::expert);
 
+    find_new_printers($printer, $in, $upNetwork);
+
     # Default printer name, we do not use "lp" so that one can switch the
     # default printer under LPD without needing to rename another printer.
     # Under LPD the alias "lp" will be given to the default printer.
@@ -3224,11 +3256,10 @@ sub main {
 				  },
 				  val => N("Change the printing system") } :
 			    ()),
-			  (!$::isInstall ?
-			    { clicked_may_quit =>
+			  { clicked_may_quit =>
 				  sub { $menuchoice = "\@usermode"; 1 },
 				  val => ($::expert ? N("Normal Mode") :
-					  N("Expert Mode")) } : ()),
+					  N("Expert Mode")) },
 			  { clicked_may_quit =>
 			    sub { $menuchoice = "\@quit"; 1 },
 			    val => ($::isEmbedded || $::isInstall ?

@@ -1892,6 +1892,76 @@ sub copy_foomatic_queue {
 
 # ------------------------------------------------------------------
 #
+# Stuff for non-interactive printer configuration
+#
+# ------------------------------------------------------------------
+
+# Check whether a given URI (for example of an existing queue matches
+# one of the auto-detected printers
+
+sub autodetectionentry_for_uri {
+    my ($uri, @autodetected) = @_;
+
+    if ($uri =~ m!^usb://([^/]+)/([^/\?]+)(|\?serial=(\S+))$!) {
+	# USB device with URI referring to printer model
+	my $make = $1;
+	my $model = $2;
+	my $serial = $4;
+	if ($make and $model) {
+	    $make =~ s/\%20/ /g;
+	    $model =~ s/\%20/ /g;
+	    $serial =~ s/\%20/ /g;
+	    $make =~ s/Hewlett[-\s_]Packard/HP/;
+	    $make =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    foreach my $p (@autodetected) {
+		next if (!$p->{val}{MANUFACTURER} or
+			 ($p->{val}{MANUFACTURER} ne $make));
+		next if (!$p->{val}{MODEL} or
+			 ($p->{val}{MODEL} ne $model));
+		next if ((!$p->{val}{SERIALNUMBER} and $serial) or
+			 ($p->{val}{SERIALNUMBER} and !$serial) or
+			 ($p->{val}{SERIALNUMBER} ne $serial));
+		return $p;
+	    }
+	}
+    } elsif ($uri =~ m!^ptal:/mlc:!) {
+	# HP multi-function device (controlled by HPOJ)
+	my $ptaldevice = $uri;
+	$ptaldevice =~ s!^ptal:/mlc:!!;
+	if ($ptaldevice =~ /^par:(\d+)$/) {
+	    my $device = "/dev/lp$1";
+	    foreach my $p (@autodetected) {
+		next if (!$p->{port} or
+			 ($p->{port} ne $device));
+		return $p;
+	    }
+	} else {
+	    $ptaldevice =~ /^usb:(.*)$/;
+	    my $model = $1;
+	    $model =~ s/_/ /g;
+	    my $device = "";
+	    foreach my $p (@autodetected) {
+		next if (!$p->{val}{MODEL} or
+			 ($p->{val}{MODEL} ne $model));
+		return $p;
+	    }
+	}
+    } elsif ($uri =~ m!^(socket|smb|file|parallel|usb|serial):/!) {
+	# Local print-only device, Ethernet-(TCP/Socket)-connected printer, 
+	# or printer on Windows server
+	my $device = $uri;
+	$device =~ s/^(file|parallel|usb|serial)://;
+	foreach my $p (@autodetected) {
+	    next if (!$p->{port} or
+		     ($p->{port} ne $device));
+	    return $p;
+	}
+    }
+    return undef;
+}
+
+# ------------------------------------------------------------------
+#
 # Configuration of HP multi-function devices
 #
 # ------------------------------------------------------------------
