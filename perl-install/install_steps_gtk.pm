@@ -511,11 +511,13 @@ sub installPackages {
 					       my ($gc, $decx, $decy) = @_;
 					       $darea->window->draw_layout($gc,
 									   ($dx-$width)/2 + $x + ${$widths}[$i] + $decx,
-									   ($first ? 0 : $decy) + $y + ${$heights}[$i] + $decy,
+									   $y + ${$heights}[$i] + $decy,
 									   $layout);
 					   };
-					   $bold and $draw_lay->($darea->style->black_gc, 1, 1);
+					   $draw_lay->($darea->style->black_gc, 1, 1);
+					   $bold and $draw_lay->($darea->style->black_gc, 2, 1);
 					   $draw_lay->($darea->style->white_gc, 0, 0);
+					   $bold and $draw_lay->($darea->style->white_gc, 1, 0);
 					   $layout->unref;
 					   $i++;
 				       }
