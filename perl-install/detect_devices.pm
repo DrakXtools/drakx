@@ -167,14 +167,8 @@ sub getDAC960() {
 }
 
 sub getNet() {
-    my @nets = grep { hasNetDevice($_) } @netdevices;
-    $::isStandalone ? grep { !/plip/ } @nets : @nets;
+    grep { !($::isStandalone && /plip/) && c::hasNetDevice($_) } @netdevices;
 }
-
-sub hasNet() { goto &getNet }
-sub hasEthernet() { hasNetDevice("eth0"); }
-sub hasTokenRing() { hasNetDevice("tr0"); }
-sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
 # pci_probing::main::probe with $probe_type is unsafe for pci! (bug in kernel&hardware)
 # get_pcmcia_devices provides field "device", used in network.pm
