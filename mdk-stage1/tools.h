@@ -31,6 +31,7 @@ void unset_param(int i);
 int charstar_to_int(const char * s);
 off_t file_size(const char * path);
 int total_memory(void);
+int image_has_stage2();
 int ramdisk_possible(void);
 enum return_type copy_file(char * from, char * to, void (*callback_func)(int overall));
 #ifndef MANDRAKE_MOVE

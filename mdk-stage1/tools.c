@@ -222,6 +222,15 @@ int total_memory(void)
 }
 
 
+int image_has_stage2()
+{
+#ifdef MANDRAKE_MOVE
+        return access(IMAGE_LOCATION "/live_tree.clp", R_OK) == 0;
+#else
+	return access(IMAGE_LOCATION LIVE_LOCATION, R_OK) == 0;
+#endif
+}
+
 int ramdisk_possible(void)
 {
 	if (total_memory() > (IS_RESCUE ? MEM_LIMIT_RESCUE : MEM_LIMIT_DRAKX))

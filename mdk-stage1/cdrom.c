@@ -49,21 +49,11 @@ static int mount_that_cd_device(char * dev_name)
 }
 
 
-static int test_that_cd()
-{
-#ifdef MANDRAKE_MOVE
-        return access(IMAGE_LOCATION "/live_tree.clp", R_OK);
-#else
-	return access(IMAGE_LOCATION LIVE_LOCATION, R_OK);
-#endif
-}
-
-
 static enum return_type try_with_device(char * dev_name, char * dev_model);
 
 static enum return_type do_with_device(char * dev_name, char * dev_model)
 {
-	if (test_that_cd()) {
+	if (!image_has_stage2()) {
 		enum return_type results;
 		umount(IMAGE_LOCATION);
 		results = ask_yes_no("That CDROM disc does not seem to be a " DISTRIB_NAME " Installation CDROM.\nRetry with another disc?");
@@ -123,7 +113,7 @@ int try_automatic(char ** medias, char ** medias_models)
 
 		wait_message("Trying to access " DISTRIB_NAME " CDROM disc (drive %s)", *model);
 		if (mount_that_cd_device(*ptr) != -1) {
-			if (!test_that_cd()) {
+			if (image_has_stage2()) {
 				remove_wait_message();
 				return i;
 			}
