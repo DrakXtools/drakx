@@ -501,6 +501,28 @@ sub _gtk__FileSelection {
     $w;
 }
 
+sub _gtk__FileChooser {
+    my ($w, $opts) = @_;
+
+    #- no nice way to have a {file_ref} on a FileChooser since selection_changed only works for browsing, not file/folder creation
+
+    if (!$w) {
+	my $action = delete $opts->{action} || internal_error("missing action for FileChooser");
+	$w = Gtk2::FileChooserWidget->new($action);
+
+	my $file = $opts->{file} && delete $opts->{file};
+
+	if (my $dir = delete $opts->{directory} || $file && dirname($file)) {
+	    $w->set_current_folder($dir);
+	}
+	if ($file) {
+	    my $meth = $action =~ /save|create/ ? 'set_current_name' : 'set_filename';
+	    $w->$meth($file);
+	}
+    }
+    $w;
+}
+
 sub _gtk__VBox { &_gtk_any_Box }
 sub _gtk__HBox { &_gtk_any_Box }
 sub _gtk_any_Box {
@@ -816,13 +838,7 @@ sub main {
     my $destroyed;
     $window->signal_connect(destroy => sub { $destroyed = 1 });
     $window->show;
-    do { 
-        if ($window->isa('Gtk2::FileSelection')) {
-            $window->run;
-        } else {
-            Gtk2->main;
-        }
-    } while (!$destroyed && $o_verif && !$o_verif->());
+    do { Gtk2->main } while (!$destroyed && $o_verif && !$o_verif->());
     may_destroy($window);
     flush();
 }
