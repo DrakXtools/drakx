@@ -67,9 +67,8 @@
 #include "linux-2.2/nfs.h"
 #include "linux-2.2/nfs_mount.h" //#include "mount_constants.h"
 
-
-#include "dns.h"
 #include "log.h"
+#include "dns.h"
 
 #include "nfsmount.h"
 
@@ -151,11 +150,13 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 	/* first, try as IP address */
 	if (!inet_aton(hostname, &server_addr.sin_addr)) {
 		/* failure, try as machine name */
-		if (mygethostbyname(hostname, &server_addr.sin_addr)) {
-			log_message("nfsmount: can't get address for %s", hostname);
-			goto fail;
+		struct hostent * host;
+		host = mygethostbyname(hostname);
+		if (host && host->h_addr_list && (host->h_addr_list)[0]) {
+			server_addr.sin_addr = *((struct in_addr *) (host->h_addr_list)[0]);
+			log_message("is-at: %s", inet_ntoa(server_addr.sin_addr));
 		} else
-			server_addr.sin_family = AF_INET;
+			goto fail;
 	}
 
 	memcpy (&mount_server_addr, &server_addr, sizeof (mount_server_addr));
