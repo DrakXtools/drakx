@@ -17,16 +17,23 @@ sub new {
 ################################################################################
 sub read {
     my ($class) = @_;
-    my $file = "$::prefix/etc/X11/XF86Config";
-    $file = "$file-4" if -e "$file-4"; #- prefer XF86Config-4 when there is one. Writing will take care of keeping only the new name
+    my @files = map { "$::prefix/etc/X11/$_" } 'xorg.conf', 'XF86Config-4', 'XF86Config';
+    my $file = (find { -f $_ && ! -l $_ } @files) || (find { -f $_ } @files);
     $class->new(Xconfig::parse::read_XF86Config($file));
 }
 sub write {
     my ($raw_X, $o_file) = @_;
     my $file = $o_file || "$::prefix/etc/X11/XF86Config";
     if (!$o_file) {
-	rename $file, "$file.old";
-	rename "$file-4", "$file-4.old"; #- there won't be any XF86Config-4 anymore, we want this!
+	my $xorg = "$::prefix/etc/X11/xorg.conf";
+	foreach ($file, "$file-4", $xorg) {
+	    if (-l $_) {
+		unlink $_;
+	    } else {
+		rename $_, "$_.old"; #- there won't be any XF86Config-4 anymore, we want this!
+	    }
+	}
+	symlinkf 'XF86Config', $xorg;
     }
     Xconfig::parse::write_XF86Config($raw_X, $file);
 }
