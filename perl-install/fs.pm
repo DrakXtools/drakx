@@ -525,8 +525,7 @@ sub write_fstab($;$$@) {
 	isTrueFS($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	isNfs($_) and $dir = '', $options = $_->{options} || $format_options->('ro,nosuid,rsize=8192,wsize=8192', 'iocharset');
 	isFat($_) and $options = $_->{options} || $format_options->("user,exec,umask=0", 'codepage', 'iocharset');
-	
-	#isThisFs("reiserfs", $_) && $_ == fsedit::get_root($fstab, 'boot') and add_options($options, "notail");
+	isThisFs("reiserfs", $_) and add_options($options, "notail");
 	
 	my $dev = isLoopback($_) ?
 	  ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
