@@ -932,7 +932,7 @@ sub miscellaneousBefore {
 
     add2hash_ $o, { useSupermount => 1 && $o->{security} < 4 && arch() !~ /sparc/ && !$::corporate };
 
-    add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia} });
+    add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
 }
 sub miscellaneous {
     my ($o) = @_;
