@@ -515,10 +515,10 @@ sub wlan_ng_configure {
                                     dot11WEPDefaultKey0 => qq("$ethntf->{WIRELESS_ENC_KEY}")
                                 )
                             });
-        #- apply settings on wlan interface
-        require services;
-        services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
     }
+    #- apply settings on wlan interface
+    require services;
+    services::restart($module eq 'prism2_cs' ? 'pcmcia' : 'wlan');
 }
 
 sub wpa_supplicant_add_network {
