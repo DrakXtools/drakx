@@ -7,7 +7,7 @@ ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
 ifeq (i386,$(ARCH))
-    BOOT_IMG = cdrom.img hd.img hdcdrom_usb.img network.img network_gigabit_usb.img blank.img pcmcia.img
+    BOOT_IMG = cdrom.img hdcdrom_usb.img blank.img pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
     BOOT_IMG  = cdrom.img   hd.img   network.img   live.img   tftp.img   tftprd.img
