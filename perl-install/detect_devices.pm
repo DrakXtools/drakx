@@ -329,12 +329,14 @@ sub getIDE() {
 	    if_($info =~ /^$_(-|\s)*(.*)/, $eide_hds{$_}, $2);
 	} keys %eide_hds;
 
-	my ($channel, $id) = ($num / 2, $num % 2);
-	my $devfs_prefix = sprintf('ide/host0/bus%d/target%d/lun0', $channel, $id);
+	my $host = $num;
+	($host, my $id) = divide($host, 2);
+	($host, my $channel) = divide($host, 2);
+	my $devfs_prefix = sprintf('ide/host%d/bus%d/target%d/lun0', $host, $channel, $id);
 
 	push @idi, { media_type => $type, device => basename($d), 
 		     devfs_prefix => $devfs_prefix,
-		     info => $info, channel => $channel, id => $id, bus => 'ide', 
+		     info => $info, host => $host, channel => $channel, id => $id, bus => 'ide', 
 		     if_($vendor, Vendor => $vendor), if_($model, Model => $model) };
     }
     get_devfs_devices(@idi);
