@@ -171,6 +171,8 @@ sub switch {
     if ($alternative) {
         my $new_driver = $driver;
         push @$alternative, $driver;
+        my %des = modules::category2modules_and_description('multimedia/sound');
+
         if ($new_driver eq 'unknown') {
             $in->ask_from(N("No alternative driver"),
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
@@ -200,10 +202,7 @@ To use alsa, one can either use:
                                [
                                 { 
                                     label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
-                                    format => sub {
-                                        my %des = modules::category2modules_and_description('multimedia/sound');
-                                        "$_[0] (" . $des{$_[0]} . ')';
-                                    },
+                                    help => join("\n\n", map { "\"$_\": " . $des{$_} } @$alternative),
                                     allow_empty_list => 1,
                                 },
                                 {
@@ -296,7 +295,7 @@ sub configure_sound_slots() {
     each_index {
         my $default_driver = modules::get_alias("sound-slot-$::i");
         if (!member($default_driver, @{get_alternative($_->{driver})}, $_->{driver})) {
-            $altered ||= $default_driver ;
+            $altered ||= $default_driver;
             modules::add_alias("sound-slot-$::i", $_->{driver});
         }
     } detect_devices::getSoundDevices();
