@@ -223,49 +223,35 @@ sub get_all_mntpoints_from_fstab {
 #- tune2fs
 sub format_ext2($@) {
     my ($dev, @options) = @_;
-
     $dev =~ m,(rd|ida|cciss)/, and push @options, qw(-b 4096 -R stride=16); #- For RAID only.
     push @options, qw(-b 1024 -O none) if arch() =~ /alpha/;
-
     run_program::run("mke2fs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "ext2", $dev);
 }
-
 sub format_ext3 {
     my ($dev, @options) = @_;
     format_ext2($dev, "-j", @options);
 }
-
-sub format_reiserfs($@) {
+sub format_reiserfs {
     my ($dev, @options) = @_;
-
     #TODO add -h tea
     run_program::run("mkreiserfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
 }
-
-sub format_xfs($@) {
+sub format_xfs {
     my ($dev, @options) = @_;
-
     run_program::run("mkfs.xfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "xfs", $dev);
 }
-
-sub format_jfs($@) {
+sub format_jfs {
     my ($dev, @options) = @_;
-
     run_program::run("mkfs.jfs", "-f", @options, devices::make($dev)) or die _("%s formatting of %s failed", "jfs", $dev);
 }
-
-sub format_dos($@) {
+sub format_dos {
     my ($dev, @options) = @_;
-
     run_program::run("mkdosfs", @options, devices::make($dev)) or die _("%s formatting of %s failed", "dos", $dev);
 }
-
-sub format_hfs($@) {
+sub format_hfs {
     my ($dev, @options) = @_;
-
     run_program::run("hformat", @options, devices::make($dev)) or die _("%s formatting of %s failed", "HFS", $dev);
 }
-
 sub real_format_part {
     my ($part) = @_;
 
@@ -601,20 +587,3 @@ sub merge_fstabs {
     my %l; $l{$_->{device}} = $_ foreach @$manualFstab;
     put_in_hash($_, $l{$_->{device}}) foreach @$fstab;
 }
-
-#sub check_mount_all_fstab($;$) {
-#    my ($fstab, $prefix) = @_;
-#    $prefix ||= '';
-#
-#    foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
-#	 #- avoid unwanted mount in fstab.
-#	 next if ($_->{device} =~ /none/ || $_->{type} =~ /nfs|smbfs|ncpfs|proc/ || $_->{options} =~ /noauto|ro/);
-#
-#	 #- TODO fsck
-#
-#	 eval { mount(devices::make($_->{device}), $prefix . $_->{mntpoint}, $_->{type}, 0); };
-#	 if ($@) {
-#	     log::l("unable to mount partition $_->{device} on $prefix/$_->{mntpoint}");
-#	 }
-#    }
-#}
