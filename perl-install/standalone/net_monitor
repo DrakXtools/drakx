@@ -407,9 +407,6 @@ sub update() {
                                     my $y = $e->y;
                                     my $received    = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
                                     my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
-                                    my $type;
-                                    $y * $echt / $height < $transmitted and $type = N("transmitted");
-                                    ($height - $y) * $echr / $height < $received and $type = N("received");
                                     $measure_r->set_label(formatXiB($received));
                                     $measure_t->set_label(formatXiB($transmitted));
                                 });
