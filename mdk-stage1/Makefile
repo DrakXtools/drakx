@@ -47,7 +47,7 @@ top_dir = .
 include $(top_dir)/Makefile.common
 
 
-DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS)
+DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
