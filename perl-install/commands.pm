@@ -511,10 +511,11 @@ sub  install_cpio($$) {
     eval { rm("-r", $dir) };
     mkdir $dir, 0755;
     require 'run_program.pm';
-    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*") and return "$dir/$name";
+    run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
 
     #- not found, cache result
-    $cached_failed_install_cpio{"$dir $name"} = 1;
+    $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
+    "$dir/$name";
 }
 
 

@@ -54,7 +54,7 @@ sub ask_many_from_list_refW($$$$$) {
     my ($o, $title, $messages, $list, $val) = @_;
     my $w = my_gtk->new('', %$o);
     my $box = gtkpack(new Gtk::VBox(0,0),
-	map {
+	map_index {
 	    my $i = $::i;
 	    my $o = Gtk::CheckButton->new($_);
 	    $o->set_active(${$val->[$i]});

@@ -232,15 +232,12 @@ sub selectPackagesToUpgrade {
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers) = @_;
     my %s;
-    
+
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ keys %$compssUsers ],
-			       [ map { \$s{$_} } keys %$compssUsers ]
-			       ) or return;
-    foreach (grep { $s{$_} } keys %s) {
-	pkgs::select($o->{packages}, $_) foreach @{$compssUsers->{$_}};
-    }
+			       [ map { \$o->{compssUsersChoice}{$_} } keys %$compssUsers ]
+			       );
 }
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
@@ -481,7 +478,7 @@ applicable user name, password, and workgroup information."),
 		 return 0;
 	     },
 					   );
-	install_any::pkg_install($o, 'samba') unless $::testing;
+	install_any::pkg_install($o, 'samba');
     } elsif ($o->{printer}{TYPE} eq "NCP") {
 	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
 	    _("To print to a NetWare printer, you need to provide the
@@ -493,7 +490,7 @@ wish to access and any applicable user name and password."),
 	    [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
 	     \$o->{printer}{NCPUSER}, {val => \$o->{printer}{NCPPASSWD}, hidden => 1}],
 					   );
-	install_any::pkg_install($o, 'ncpfs') unless $::testing;
+	install_any::pkg_install($o, 'ncpfs');
     }
 
     my $action;
@@ -534,10 +531,10 @@ wish to access and any applicable user name and password."),
 	$o->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$o->{printer}{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
 _("Eject page after job?") => { val => \$o->{printer}{AUTOSENDEOF}, type => 'bool' },
-$#list_res > 0 ? (
+@list_res > 1 ? (
 _("Resolution") => { val => \$o->{printer}{RESOLUTION}, type => 'list', , not_edit => !$::expert, list => \@res } ) : (),
 _("Fix stair-stepping text?") => { val => \$o->{printer}{CRLF}, type => "bool" },
-$#list_col > 0 ? (
+@list_col > 1 ? (
 $is_uniprint ? (
 _("Uniprint driver options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ) : (
 _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ), ) : ()
@@ -592,8 +589,9 @@ _("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
   $o->{installClass} eq "server" || $::expert ? (
 _("Use shadow file") => { val => \$o->{authentification}{shadow}, type => 'bool', text => _("shadow") },
 _("Use MD5 passwords") => { val => \$o->{authentification}{md5}, type => 'bool', text => _("MD5") },
-  ) : (), $::beginner ? () : 
-_("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") }
+  ) : (), $::beginner ? () : (
+_("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _("yellow pages") },
+  )
 			 ], 
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
@@ -634,8 +632,9 @@ sub addUser($) {
 	   $o->{security} < 2 ? () : (
          _("Password") => {val => \$u->{password}, hidden => 1},
          _("Password (again)") => {val => \$u->{password2}, hidden => 1},
-	   ), $::beginner ? () : 
+	   ), $::beginner ? () : (
          _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
+	   ),
         ],
         focus_out => sub {
 	    if ($_[0] eq 0) {

@@ -388,7 +388,7 @@ sub autoDefaultDepth($$) {
 sub autoDefaultResolution(;$) {
     my $size = round(shift || 14); #- assume a small monitor (size is in inch)
     $monitorSize2resolution[$size] ||
-      $monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+      $monitorSize2resolution[-1]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
 }
 
 sub chooseResolutionsGtk($$;$) {

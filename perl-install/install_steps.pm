@@ -193,6 +193,12 @@ sub beforeInstallPackages {
 
 sub installPackages($$) {
     my ($o, $packages) = @_;
+
+    while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
+	$v or next;
+	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
+    }
+
     #- hack to ensure proper ordering for installation of packages.
     my @firstToInstall = qw(basesystem sed);
     my %firstInstalled;

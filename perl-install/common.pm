@@ -47,7 +47,7 @@ sub sign { $_[0] <=> 0 }
 sub product { fold_left { $a * $b } @_ }
 sub first { $_[0] }
 sub second { $_[1] }
-sub top { $_[$#_] }
+sub top { $_[-1] }
 sub uniq { my %l; @l{@_} = (); keys %l }
 sub to_int { $_[0] =~ /(\d*)/; $1 }
 sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }

@@ -133,7 +133,7 @@ get_needed_files: $(DIRS)
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
-	ln -sf zsh $(DEST)/usr/bin/sh
+	ln -sf ash $(DEST)/usr/bin/sh
 
 	tar xfy locales.tar.bz2 -C $(DEST)
 #	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
