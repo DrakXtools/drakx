@@ -299,18 +299,18 @@ sub write_conf() {
 	} elsif ($type eq 'alias' && $alias =~ /scsi_hostadapter|usb-interface/) {
 	    #- remove old aliases which are replaced by probeall
 	    $_ = '';
-     } elsif ($type eq 'above') {
-         # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
-         # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
-         s/snd-card/snd/g;
-         s/snd-via686|snd-via8233/snd-via82xx/g;
-         defined $conf{$alias}{above} or $_ = '';
+	} elsif ($type eq 'above') {
+	    # Convert alsa driver from old naming system to new one (snd-card-XXX => snd-XXX)
+	    # Ensure correct upgrade for snd-via683 and snd-via8233 drivers
+	    s/snd-card/snd/g;
+	    s/snd-via686|snd-via8233/snd-via82xx/g;
+	    defined $conf{$alias}{above} or $_ = '';
 	} elsif ($conf{$alias}{$type} && $conf{$alias}{$type} ne $module) {
 	    my $v = join(' ', uniq(deref($conf{$alias}{$type})));
 	    $_ = "$type $alias $v\n";
 	} elsif ($type eq 'alias' && !defined $conf{$alias}{alias}) { 
-         $_ = '';
-     }
+	    $_ = '';
+	}
     } $file;
 
     my $written = read_conf($file);
