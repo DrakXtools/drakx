@@ -489,8 +489,6 @@ sub choosePackages {
 	$size2install = $availableC;
     }
 
-    log::l("compssUsersChoice's: ", join(" ", grep { $o->{compssUsersChoice}{$_} } keys %{$o->{compssUsersChoice}}));
-
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $size2install);
 
