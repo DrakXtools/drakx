@@ -1124,7 +1124,7 @@ _("Loading module %s failed.
 Do you want to try again with other parameters?", $l), 1) or return;
 	goto ASK;
     }
-    $l, $m;
+    $l;
 }
 
 #------------------------------------------------------------------------------
@@ -1153,7 +1153,7 @@ sub setup_thiskind {
     }
     while (1) {
 	my $msg = @l ?
-	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
+	  [ _("Found %s %s interfaces", join(", ", @l), $type),
 	    _("Do you have another one?") ] :
 	  _("Do you have any %s interfaces?", $type);
 
@@ -1163,8 +1163,7 @@ sub setup_thiskind {
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return }
 	elsif ($r eq "Yes") {
-	    my @r = $o->load_module($type) or return;
-	    push @l, \@r;
+	    push @l, $o->load_module($type) || return;
 	} else {
 	    #-eval { commands::modprobe("isapnp") };
 	    require pci_probing::main;

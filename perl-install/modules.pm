@@ -541,18 +541,18 @@ sub load_thiskind($;&$) {
 	#- probe for USB SCSI.
 	if (my ($c) = grep { /usb-/ } map { $_->[1] } pci_probing::main::probe('')) {
 	    eval { load($c, "SERIAL_USB"); load("usb-storage", $type); sleep(1); };
-	    -d "/proc/scsi/usb" ? push(@devs, [ "usb-storage", "usb-storage" ]) : unload("usb-storage");
+	    -d "/proc/scsi/usb" or unload("usb-storage");
 	}
 	#- probe for parport SCSI.
 	foreach ("imm", "ppa") {
-	    eval { load($_, $type); push @devs, [ $_, $_ ] };
+	    eval { load($_, $type) };
 	    last if !$@;
 	}
 	if (my ($c) = pci_probing::main::probe('AUDIO')) {
 	    add_alias("sound", $c->[1]) if pci_probing::main::check($c->[1]);
 	}
     }
-    @devs, map { [ $_, $_ ] } @{$loaded{$type} || []};
+    @{$loaded{$type} || []};
 }
 
 sub pcmcia_need_config($) {
