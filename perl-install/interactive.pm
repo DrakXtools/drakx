@@ -291,7 +291,7 @@ sub ask_from__add_modify_remove {
 					 } } }
 		     N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
 	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l) or return;
-	    return if !$continue;
+	    return 1 if !$continue;
 	}
     }
 }
