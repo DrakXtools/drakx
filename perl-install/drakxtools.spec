@@ -13,7 +13,7 @@ BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel >= 0.4.9, ncurses-d
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
-
+%define _requires_exceptions perl(Net::FTP)\\|perl(Time::localtime)
 
 %package newt
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
@@ -23,6 +23,7 @@ Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
 Provides: perl(Newt::Newt)
 Provides: perl(network::isdn_consts)
+%define _requires_exceptions perl(interactive::gtk)\\|perl(ugtk2)
 
 %package http
 Summary: The drakxtools via http
