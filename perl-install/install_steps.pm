@@ -334,6 +334,10 @@ sub beforeInstallPackages {
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
+    if (my ($agp) = modules::probe_category('other/agpgart')) {
+	modules::add_alias('agpgart', $agp);
+    }
+
     #- add oem theme if the files exists.
     mkdir_p("$o->{prefix}/usr/share");
     install_any::getAndSaveFile("Mandrake/base/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
