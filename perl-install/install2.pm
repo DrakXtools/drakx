@@ -393,8 +393,7 @@ sub configureNetwork {
 	    }
 	}
     }
-
-    $o->configureNetwork;
+    $o->configureNetwork($_[1] == 1);
 }
 #------------------------------------------------------------------------------
 sub installCrypto { $o->installCrypto }

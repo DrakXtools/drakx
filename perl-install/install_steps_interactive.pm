@@ -232,16 +232,27 @@ sub selectPackagesToUpgrade {
 #------------------------------------------------------------------------------
 sub choosePackages {
     my ($o, $packages, $compss, $compssUsers, $compssUsersSorted) = @_;
+    my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
 
     require pkgs;
+
+    #- alas, it through away any tree selected packages
+    pkgs::unselect_all($o->{packages});
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 95 : 80, $availableSpace * 0.7, $o->{installClass}) unless $o->{isUpgrade};
+
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted ],
 			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted ]
-			       );
+			       ) or goto &choosePackages;
     while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
 	$v or next;
 	pkgs::select($packages, $_) foreach @{$o->{compssUsers}{$k}};
+    }
+    my $current = pkgs::correctedSelectedSize($packages);
+    if ($availableSpace < $current) {
+	$o->ask_warn('', _("Too many packages chosen: %dMB doesn't fit in %dMB", $current, $availableSpace));
+	goto &choosePackages;
     }
 
     my $f = "$o->{prefix}/etc/sysconfig/desktop";
@@ -280,7 +291,7 @@ sub afterInstallPackages($) {
 sub configureNetwork($) {
     my ($o, $first_time) = @_;
     local $_;
-    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+    if ($o->{intf}) {
 	if (!$::beginner && $first_time || $::expert) {
 	    my @l = (
 		     __("Keep the current IP configuration"),
@@ -1014,8 +1025,12 @@ You may have to restart installation and give ``%s'' at the prompt", $ide));
 
 #------------------------------------------------------------------------------
 sub setup_thiskind {
-    my ($o, $type, $auto, $at_least_one) = @_;
-    my @l = $o->load_thiskind($type) unless $::expert && !$o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+    my ($o, $type, $auto, $at_least_one) = @_;    
+
+    if (!exists $o->{auto_probe_pci}) {
+	$o->{auto_probe_pci} = !$::expert || $o->ask_yesorno('', _("Try to find PCI devices?"), 1);
+    }
+    my @l = $o->load_thiskind($type) if $o->{auto_probe_pci};
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	my $msg = @l ?

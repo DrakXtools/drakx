@@ -48,6 +48,12 @@ my $B = 16258;
 sub correctSize { ($A - $_[0]) * $_[0] / $B } #- size correction in MB.
 sub invCorrectSize { $A / 2 - sqrt(max(0, sqr($A) - 4 * $B * $_[0])) / 2 }
 
+sub selectedSize {
+    my ($packages) = @_;
+    int (sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024);
+}
+sub correctedSelectedSize { correctSize(selectedSize($_[0])) }
+
 sub Package {
     my ($packages, $name) = @_;
     $packages->{$name} or log::l("unknown package `$name'") && undef;

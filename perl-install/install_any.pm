@@ -138,7 +138,7 @@ sub setPackages($) {
 
 	grep { !$o->{packages}{$_} && log::l("missing base package $_") } @{$o->{base}} and die "missing some base packages";
     } else {
-    	$_->{selected} = 0 foreach values %{$o->{packages}};
+	pkgs::unselect_all($o->{packages});
     }
 
     #- this will be done if necessary in the selectPackagesToUpgrade,
@@ -414,7 +414,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe crypto modem useSupermount auto_probe_pci); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
