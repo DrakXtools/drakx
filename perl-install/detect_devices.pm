@@ -772,20 +772,22 @@ sub hasSMP() {
 }
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
+my @dmis;
+
 sub dmidecode() {
-	my @l;
+	return @dmis if @dmis;
 
 	foreach (run_program::get_stdout('dmidecode')) {
 	    if (/^\t\t(.*)/) {
-		$l[-1]{string} .= "$1\n";
-		$l[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
+		$dmis[-1]{string} .= "$1\n";
+		$dmis[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
 	    } elsif (my ($s) = /^\t(.*)/) {
 		next if $s =~ /^DMI type /;
 		$s =~ s/ Information$//;
-		push @l, { name => $s };
+		push @dmis, { name => $s };
 	    }
 	}
-    @l;
+    @dmis;
 }
 
 sub computer_info() {
