@@ -200,7 +200,7 @@ sub selectMouse {
 	my $xId = mouse::xmouse2xId($mouse->{XMOUSETYPE});
 	my $x_protocol_changed = $old{device} ne $mouse->{device} || $xId != mouse::xmouse2xId($old{XMOUSETYPE});
 	if ($x_protocol_changed) {
-	    log::l("telling X server to use another mouse");
+	    log::l("telling X server to use another mouse ($mouse->{XMOUSETYPE}, $xId)");
 	    eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
 
 	    if (!$::testing) {
