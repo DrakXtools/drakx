@@ -112,7 +112,6 @@ sub list_checks {
 
 sub list_functions {
     my ($msec, $category) = @_;
-    my @functions;
 
     ## TODO handle 3 last functions here so they can be removed from this list
     my @ignore_list = qw(indirect commit_changes closelog error initlog log set_secure_level
