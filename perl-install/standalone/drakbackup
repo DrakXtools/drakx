@@ -206,6 +206,7 @@ my @list_other;
 my $cfg_dir = "/etc/drakxtools/drakbackup/";
 my $cfg_file = $cfg_dir . "drakbackup.conf";
 my $save_path = "/var/lib/drakbackup";
+my $log_file = "/var/log/drakbackup";
 my $log_buff;
 my $comp_mode = 0;
 my $backup_sys = 1;
@@ -265,6 +266,7 @@ my $not_warned = 0;
 my $media_problem = 0;
 my $vol_name = 'Drakbackup';
 my $good_restore_path = 1;
+my $max_space = 1000.0;
 
 foreach (@ARGV) {
 
@@ -281,6 +283,7 @@ if ($ENV{HOME} ne '/root') {
 	standalone::explanations("Running as $ENV{USER}...");
 	$cfg_dir = "$user_home/.drakbackup/";
 	$save_path = $cfg_dir . "backups";
+	$log_file = $cfg_dir . "drakbackup.log";
 	-d $save_path or mkdir_p $save_path;
 	$nonroot_user = 1;
 	$not_warned = 1;
@@ -334,6 +337,7 @@ sub explain_conf() {
 	print "HD_QUOTA                   Use quota to limit hard drive space used for backups.\n";
 	print "                             (not supported yet).\n";
 	print "USE_HD                     Use Hard Drive for backups (currently all modes use HD also).\n";
+	print "MAX_SPACE=                 Maximum Hard Drive Space(Mb) to consume for backups. \n";   	
 	print "USE_CD                     Use CD for backups.\n";
 	print "USE_NET                    Use network for backups (driven by NET_PROTO).\n";
 	print "USE_TAPE                   Use tape for backup.\n";
@@ -439,6 +443,45 @@ sub get_tape_info() {
 	}
  	close INFO;
 	unlink($info);
+}
+
+sub get_free_space {
+	my ($dir) = @_;
+	my @line_data;
+	my $free = "/tmp/free_space";
+	system("df -P $dir | tail -1 > $free");
+
+	local *FREE;
+	open FREE, $free or warn("Can't open $free\n");
+	local $_;
+	while (<FREE>) {
+		@line_data = split(/[ \t,]+/, $_); 
+	}
+ 	close FREE;
+#	unlink($free);
+	my $free_space = int($line_data[3] / 1024);
+	return $free_space;	
+}
+
+sub check_storage_quota {
+	my ($dir) = @_;
+	my $used = "/tmp/used_space";
+	my $used_space;
+	system("du $dir > $used");
+	
+	local *USED;
+	open USED, $used or warn("Can't open $used\n");
+	local $_;
+	while (<USED>) {
+		$used_space = $_ / 1024;
+	}
+	close USED;
+	unlink($used);
+	if ($used_space > $max_space) {
+		return $used_space;
+	} else {
+		return 0;
+	}
 }
 
 sub get_cd_info() {
@@ -570,6 +613,7 @@ sub save_conf_file() {
     $daemon_media eq 'rsync' and $backup_daemon and push @cfg_list, "DAEMON_MEDIA=rsync\n";
     $hd_quota and  push @cfg_list, "HD_QUOTA\n";
     $where_hd and  push @cfg_list, "USE_HD\n";
+	$where_hd and push @cfg_list, "MAX_SPACE=$max_space\n";
     $where_cd and  push @cfg_list, "USE_CD\n";
     $where_tape and push @cfg_list, "USE_TAPE\n";
     $tape_norewind and push @cfg_list, "TAPE_NOREWIND\n";
@@ -650,6 +694,7 @@ sub read_conf_file() {
 			if (/^DAEMON_MEDIA/)   { s/^DAEMON_MEDIA=//gi; $daemon_media = $_ }
 			if (/^HD_QUOTA/)       { $hd_quota = 1 }
 			if (/^USE_HD/)         { $where_hd = 1 }
+			if (/^MAX_SPACE/)	   { s/^MAX_SPACE=//gi; $max_space = $_ }
 			if (/^USE_CD/)         { $where_cd = 1 }
 			if (/^USE_NET/)        { $where_net = 1 }
 			if (/^USE_TAPE/)       { $where_tape = 1 }
@@ -732,8 +777,10 @@ sub show_warning {
 sub complete_results() {
     system_state();
     $results .=  "***********************************************************************\n\n";
-    $daemon or $results .=  N("\n                      DrakBackup Report \n\n");
-    $daemon and $results .= N("\n                      DrakBackup Daemon Report\n\n\n");
+    $daemon or $results .=  N("\n                      DrakBackup Report \n");
+    $daemon and $results .= N("\n                      DrakBackup Daemon Report\n");
+	my $datem = `date`;
+	$results .=               "                      $datem\n\n";	
     $results .=  "***********************************************************************\n\n";
     $results .= $system_state;
     $results .=  "\n\n***********************************************************************\n\n";
@@ -1185,7 +1232,17 @@ sub build_backup_files() {
 		$DEBUG or $tar_cmd = "tar cpz "; 
 		$tar_ext = "tar.gz"
 	}
-    $tar_cmd_sys = $tar_cmd;
+	my $used_space = check_storage_quota($save_path);
+	if ($used_space) {
+		my $msg = N("Backup quota exceeded!\n%d Mb used vs %d Mb allocated.", $used_space, $max_space);
+		show_warning("f", $msg);
+		$interactive and cursor_norm();
+		$results .= $msg;
+		$interactive and show_status();
+		results_to_logfile();
+		return 1; 
+	}
+	$tar_cmd_sys = $tar_cmd;
     $tar_cmd_user = $tar_cmd;
     $tar_cmd_other = $tar_cmd;
     $no_critical_sys and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group --exclude mtab";
@@ -1233,7 +1290,7 @@ sub build_backup_files() {
 		    	}
 			} else {
 				#- need this for the first pass too, if we're offloading the backups to other media (sb)
-				system("find $path_name ! -type d -print > $save_path/list_base_sys$the_time.txt"); 
+				system("find @sys_files ! -type d -print > $save_path/list_base_sys$the_time.txt"); 
 				system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); 
 				push @file_list_to_send_by_ftp, "$save_path/backup_base_sys$the_time.$tar_ext";
 				push @file_list_to_send_by_ftp, "$save_path/list_base_sys$the_time.txt";
@@ -1358,9 +1415,11 @@ sub build_backup_files() {
 	  
 	my $filecount = @file_list_to_send_by_ftp;
 	if (!$filecount) {
-		show_warning("w", N("No changes to backup!"));
+		my $msg = N("No changes to backup!");
+		show_warning("w", $msg);
 		$interactive and cursor_norm();
 		$interactive and interactive_mode();
+		results_to_logfile();
 		return 1;		
 	}
 		
@@ -1410,7 +1469,7 @@ sub build_backup_files() {
 			$results .= N("\nDrakbackup activities via tape:\n\n");
 		}
 		$results .= $log_buff;
-	
+		results_to_logfile();
 	}
 	
     if ($send_mail) { 
@@ -1520,7 +1579,6 @@ sub cursor_norm() {
 }
 
 sub show_status() {
-    #- just a generic routine to display an array of text in the GUI screen
     my $text = new Gtk2::TextView;	
 	destroy_widget();
 	my $scrolled_window = Gtk2::ScrolledWindow->new;
@@ -1533,6 +1591,13 @@ sub show_status() {
 	);
     $central_widget = \$table;
     $table->show_all;    
+}
+
+sub results_to_logfile() {
+		local *LOG;
+		open LOG, "> $log_file" or show_warning("w", N("Can't create log file!"));
+		print LOG "$results\n";
+		close LOG;
 }
 
 sub file_ok_sel { 
@@ -2106,10 +2171,7 @@ sub advanced_where_tape {
     $combo_where_tape_device->set_popdown_strings(@tape_devices) if @tape_devices;  
 
     my $box_where_tape;
-    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
-    #my ($pix_fs_map, $pix_fs_mask) = gtkcreate_img("filedialog");
     local $_;
-	my $spinner;
 	
     gtkpack($advanced_box,
 		$box_where_tape = gtkpack_(new Gtk2::VBox(0, 6),
@@ -2140,11 +2202,12 @@ sub advanced_where_tape {
 	    		0, gtkset_sensitive(my $check_tape_eject = new Gtk2::CheckButton(), $where_tape),
 			),
 			0, new Gtk2::VBox(0, 6),
-			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")), $where_tape),
-				1, new Gtk2::VBox(0, 6),
-				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
-			),
+# not appropriate - disable
+#			0, gtkpack_(new Gtk2::HBox(0,10),
+#				0, gtkset_sensitive(new Gtk2::Label(N("Please enter the maximum size\n allowed for Drakbackup (Mb)")), $where_tape),
+#				1, new Gtk2::VBox(0, 6),
+#				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_tape), 200, 20),
+#			),
 			0, gtkpack_(new Gtk2::HBox(0,10),),
 		),
 	);
@@ -2197,7 +2260,10 @@ sub advanced_where_hd {
     my ($previous_function) = @_;
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
+	if ($max_space == 1000.0) {
+		$max_space = int(0.8 * get_free_space($save_path)) if -d $save_path;
+    }
+	my $adj = new Gtk2::Adjustment($max_space, 0.0, $max_space, 10.0, 5.0, 0.0);
     my $spinner;
 	
     gtkpack($advanced_box,
@@ -2219,26 +2285,32 @@ sub advanced_where_hd {
 				1, new Gtk2::VBox(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($spinner = new Gtk2::SpinButton($adj, 0, 0), $where_hd), 200, 20),
 			),
-			0, gtkpack_(new Gtk2::HBox(0,10),
-				1, new Gtk2::VBox(0, 6),
-	   			0, gtkset_sensitive(my $check_where_hd_quota = new Gtk2::CheckButton(N("Use quota for backup files.")), $where_hd),
-		    	0, new Gtk2::VBox(0, 6),
-			),
+# just disable for now - doesn't do anything anyway (sb)
+#			0, gtkpack_(new Gtk2::HBox(0,10),
+#				1, new Gtk2::VBox(0, 6),
+#	   			0, gtkset_sensitive(my $check_where_hd_quota = new Gtk2::CheckButton(N("Use quota for backup files.")), $where_hd),
+#		    	0, new Gtk2::VBox(0, 6),
+#			),
 		),
 	);
-    foreach ([$check_where_hd_quota, \$hd_quota]) {
-		my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
-	}
-#    gtksignal_connect(gtkset_active($check_where_hd, $where_hd), toggled => sub { 
-#	$where_hd = $where_hd ? 0 : 1;
-#	$where_hd = 1;
-#	destroy_widget();
-#	$current_widget->();
-#    });
+#    foreach ([$check_where_hd_quota, \$hd_quota]) {
+#		my $ref = $_->[1];
+#		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
+#	}
     $button->add(gtkpack(new Gtk2::HBox(0,10), gtkcreate_img("ic82-dossier-32")));
     $save_path_entry->set_text($save_path);
-    $save_path_entry->signal_connect('changed', sub { $save_path = $save_path_entry->get_text });
+	$spinner->signal_connect('changed', sub { $max_space = $spinner->get_text });
+    $save_path_entry->signal_connect('changed', 
+		sub { 
+			$save_path = $save_path_entry->get_text;
+			if (-d $save_path) { 
+				$max_space = int(0.8 * get_free_space($save_path));
+				# seems to be the easiest way to avoid the widgets fighting over values
+				# and getting grabage in $max_value
+				destroy_widget();
+				advanced_where_hd();
+			}
+		});
     if ($previous_function) { 
 		fonction_env(\$box_where_hd, \&advanced_where_hd, \&$previous_function, ""); 
 	} else { 
@@ -2649,6 +2721,7 @@ sub system_state() {
         @list_other and $system_state .= N("\n- Other Files:\n"); 
         @list_other and $system_state .= "\t\t$_\n" foreach @list_other;
         $where_hd and $system_state .= N("\n- Save on Hard drive on path: %s\n", $save_path);
+		$where_hd and $system_state .= N("\tLimit disk usage to %s Mb\n", $max_space);
 
 		if ($del_hd_files && ($where_cd || $where_tape || $where_net) && $daemon_media ne 'hd')  {
 			$system_state .= N("\n- Delete hard drive tar files after backup.\n");	
@@ -2929,6 +3002,7 @@ sub restore_backend() {
 	my $username;
 	my $theure2;
 	local $_;
+	-d $restore_path or mkdir_p $restore_path;
 	
     if (any { /tar.gz$/ } all($path_to_find_restore)) { 
     	$untar_cmd = 0; 
@@ -3145,7 +3219,7 @@ sub restore_step_sys() {
 	$details->signal_connect('clicked', sub { 
 		#- we're only passing a portion of the filename to
 		#- the subroutine so we need to let it know this
-		my $backup_date = $combo_restore_step_sys->entry->get_;
+		my $backup_date = $combo_restore_step_sys->entry->get_text;
 		destroy_widget();
 		show_backup_details(\&restore_step_sys, "sys", $backup_date);
 	}); 	
@@ -3161,7 +3235,7 @@ sub restore_other_media_hd {
     my ($previous_function) = @_;
     my $box_where_hd;
     my $button;
-    my $adj = new Gtk2::Adjustment(550.0, 1.0, 10000.0, 1.0, 5.0, 0.0);
+    my $adj = new Gtk2::Adjustment(550.0, 10.0, 10000.0, 10.0, 5.0, 0.0);
     my $spinner;
 	 
     gtkpack($advanced_box,
@@ -3989,6 +4063,21 @@ sub button_box_restore_main() {
 	);
 }
 
+sub button_box_log_main() {
+    $button_box_tmp->destroy;
+
+    gtkpack($button_box,
+	    $button_box_tmp = gtkpack_(gtkpack_(new Gtk2::HButtonBox, 
+			1, new Gtk2::HBox(0, 1),	
+			0, gtksignal_connect(new Gtk2::Button(N("Ok")), clicked => sub { 
+				destroy_widget(); 
+				interactive_mode_box() }),
+			),
+		),
+	);
+}
+
+
 sub button_box_backup_end() {
     $button_box_tmp->destroy;
 
@@ -4502,13 +4591,13 @@ sub build_backup_box_see_conf {
     button_box_restore_main();
 
     gtkpack($advanced_box,
-	    $box2 =  gtkpack_(new Gtk2::HBox(0, 15),	
-			      1, gtkpack_(new Gtk2::VBox(0,10),
-					  0, N("Drakbackup Configuration"),
-					  1, create_scrolled_window($text),
-					  ),
-			      ),
-	    );
+	    $box2 = gtkpack_(new Gtk2::HBox(0, 15),	
+			1, gtkpack_(new Gtk2::VBox(0,10),
+				0, N("Drakbackup Configuration"),
+				1, create_scrolled_window($text),
+			),
+		),
+	);
     button_box_backup_end();
     $custom_help = "";
     $central_widget = \$box2;
@@ -4592,7 +4681,7 @@ sub interactive_mode_box {
     gtkadd($advanced_box,
 		$box2 = gtkpack_(new Gtk2::HBox(0, 15),	
 			1, new Gtk2::VBox(0, 5),	
-			1, gtkpack_(new Gtk2::VBox(0, 15),	
+			1, gtkpack_(new Gtk2::VBox(0, 5),	
 				1, new Gtk2::VBox(0, 5),	
 				1, gtksignal_connect(new Gtk2::Button(N("Wizard Configuration")), clicked => sub { 
 					destroy_widget();
@@ -4608,6 +4697,11 @@ sub interactive_mode_box {
 					destroy_widget();
 					build_backup_box_see_conf("interactive");
 				}),
+				1, gtksignal_connect(new Gtk2::Button(N("View Last Log")), clicked => sub { 
+					$results = cat_($log_file);
+					button_box_log_main();
+					show_status();
+				}),				
 				1, gtksignal_connect(new Gtk2::Button(N("Backup Now")), clicked => sub { 
 					if ($cfg_file_exist) { 
 						build_backup_box();
