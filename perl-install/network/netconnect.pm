@@ -144,6 +144,8 @@ sub get_subwizard {
               modules::add_alias($card->[0], $card->[1]);
           }
       };
+
+      my $find_lan_module = sub { $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1] };
       
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
@@ -690,7 +692,7 @@ Modifying the fields below will override this configuration."),
                    lan_protocol =>
                    {
                     pre => sub  {
-                        $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1];
+                        $find_lan_module->();
                         $auto_ip = $l10n_lan_protocols{defined $auto_ip ? ($auto_ip ? 'dhcp' : 'static') :$ethntf->{BOOTPROTO}} || 0;
                     },
                     name => sub { 
