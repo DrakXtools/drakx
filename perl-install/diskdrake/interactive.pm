@@ -49,7 +49,7 @@ struct part {
     # !isFormatted &&  notFormatted means the device is not formatted
     # !isFormatted && !notFormatted means we don't know which state we're in
 
-  int raid          # for partitions of type isRawRAID and which isPartOfRAID, the raid device number
+  string raid       # for partitions of type isRawRAID and which isPartOfRAID, the raid device
   string lvm        # partition used as a PV for the VG with {lvm} as VG_name  #-#
   loopback loopback[]   # loopback living on this partition
 
@@ -68,7 +68,7 @@ struct part_allocate inherits part {
 }
 
 struct part_raid inherits part {
-  string chunk-size  # usually '64k'
+  string chunk-size  # in KiB, usually '64'
   string level       # one of { 0, 1, 4, 5, 'linear' }
 
   part disks[]
@@ -155,7 +155,7 @@ struct raw_hd inherits hd {
 struct all_hds {
   hd hds[]
   hd_lvm lvms[]
-  part_raid raids[]     # indexed by number: raids[$n]{device} is "md$n"
+  part_raid raids[]
   part_loopback loopbacks[]
   raw_hd raw_hds[]
   raw_hd nfss[]
@@ -407,7 +407,7 @@ sub Hd_info {
 ################################################################################
 
 sub part_possible_actions {
-    my ($_in, $hd, $part, $_all_hds) = @_;
+    my ($_in, $hd, $part, $all_hds) = @_;
     $part or return;
 
     my %actions = my @l = (
@@ -424,7 +424,7 @@ sub part_possible_actions {
         N_("Delete")	       => '!isBusy && !readonly',
         N_("Remove from RAID") => 'isPartOfRAID',
         N_("Remove from LVM")  => 'isPartOfLVM',
-        N_("Modify RAID")      => 'isPartOfRAID && !isMounted($all_hds->{raids}[$part->{raid}])',
+        N_("Modify RAID")      => 'canModifyRAID',
         N_("Use for loopback") => '!$part->{real_mntpoint} && isMountableRW && !isSpecial && hasMntpoint && $::expert',
     );
     my ($actions_names) = list2kv(@l);
@@ -432,6 +432,7 @@ sub part_possible_actions {
 	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
         isPrimary => 'isPrimary($part, $hd)',
+	canModifyRAID => 'isPartOfRAID($part) && !isMounted(fs::get::device2part($part->{raid}, $all_hds->{raids}))',
     );
     if ($part->{pt_type} eq '0') {
 	if_(!$hd->{readonly}, N_("Create"));
@@ -803,17 +804,16 @@ sub Add2RAID {
     my ($in, $_hd, $part, $all_hds) = @_;
     my $raids = $all_hds->{raids};
 
-    local $_ = @$raids == () ? "new" :
-      $in->ask_from_list_('', N("Choose an existing RAID to add to"),
-			  [ (grep { $_ } map_index { $_ && "md$::i" } @$raids), N_("new") ]) or return;
+    my $md_part = $in->ask_from_listf('', N("Choose an existing RAID to add to"),
+				      sub { ref($_[0]) ? $_[0]{device} : $_[0] },
+				      [ @$raids, N_("new") ]) or return;
 
-    if (/new/) {
-	my $nb1 = raid::new($raids, $part);
-	defined modifyRAID($in, $raids, $nb1) or return raid::delete($raids, $nb1);
+    if (ref($md_part)) {
+	raid::add($md_part, $part);
     } else {
-	raid::add($raids, $part, $_);
+	my $md_part = raid::new($raids, disks => [ $part ]);
+	modifyRAID($in, $raids, $md_part) or return raid::delete($raids, $md_part);
     }
-    raid::update(@$raids);
 }
 sub Add2LVM {
     my ($in, $hd, $part, $all_hds) = @_;
@@ -856,7 +856,7 @@ sub RemoveFromLVM {
 }
 sub ModifyRAID { 
     my ($in, $_hd, $part, $all_hds) = @_;
-    modifyRAID($in, $all_hds->{raids}, $part->{raid});
+    modifyRAID($in, $all_hds->{raids}, fs::get::device2part($part->{raid}, $all_hds->{raids}));
 }
 sub Loopback {
     my ($in, $hd, $real_part, $all_hds) = @_;
@@ -976,17 +976,19 @@ sub is_part_existing {
 }
 
 sub modifyRAID {
-    my ($in, $raids, $nb) = @_;
-    my $md = "md$nb";
+    my ($in, $raids, $md_part) = @_;
+    my @free_mds = difference2([ map { "md$_" } 0 .. raid::max_nb() ], [ map { $_->{device} } @$raids ]);
+    my $prev_device = $md_part->{device};
     $in->ask_from('', '',
 		  [
-{ label => N("device"), val => \$md, list => [ map { "md$_" } grep { $nb == $_ || !$raids->[$_] } 0..8 ] },
-{ label => N("level"), val => \$raids->[$nb]{level}, list => [ qw(0 1 4 5 linear) ] },
-{ label => N("chunk size"), val => \$raids->[$nb]{'chunk-size'} },
+{ label => N("device"), val => \$md_part->{device}, list => [ $md_part->{device}, @free_mds ] },
+{ label => N("level"), val => \$md_part->{level}, list => [ qw(0 1 4 5 linear) ] },
+{ label => N("chunk size in KiB"), val => \$md_part->{'chunk-size'} },
 		  ],
 		 ) or return;
-    raid::updateSize($raids->[$nb]); # changing the raid level changes the size available
-    raid::changeNb($raids, $nb, first($md =~ /(\d+)/));
+    raid::change_device($md_part, $prev_device);
+    raid::updateSize($md_part); # changing the raid level changes the size available
+    1;
 }
 
 
@@ -1182,7 +1184,7 @@ sub format_part_info {
     $info .= N("Partition booted by default\n    (for MS-DOS boot, not for lilo)\n") if $part->{active} && $::expert;
     if (isRAID($part)) {
 	$info .= N("Level %s\n", $part->{level});
-	$info .= N("Chunk size %s\n", $part->{'chunk-size'});
+	$info .= N("Chunk size %d KiB\n", $part->{'chunk-size'});
 	$info .= N("RAID-disks %s\n", join ", ", map { $_->{device} } @{$part->{disks}});
     } elsif (isLoopback($part)) {
 	$info .= N("Loopback file name: %s", $part->{loopback_file});

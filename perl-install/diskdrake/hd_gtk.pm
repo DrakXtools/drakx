@@ -244,7 +244,7 @@ sub create_automatic_notebooks {
     };
     $may_add->(hd2kind($_)) foreach @{$all_hds->{hds}};
     $may_add->(lvm2kind($_)) foreach @{$all_hds->{lvms}};
-    $may_add->(raid2kind()) if any { $_ } @{$all_hds->{raids}};
+    $may_add->(raid2kind()) if @{$all_hds->{raids}};
     $may_add->(loopback2kind()) if @{$all_hds->{loopbacks}};
 
     @notebook = grep_index {

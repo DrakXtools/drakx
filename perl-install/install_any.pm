@@ -472,7 +472,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-    push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
+    push @{$o->{default_packages}}, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
     push @{$o->{default_packages}}, "grub" if isLoopback(fs::get::root($o->{fstab}));

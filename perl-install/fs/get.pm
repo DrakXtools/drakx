@@ -15,8 +15,7 @@ sub empty_all_hds() {
 sub fstab {
     my ($all_hds) = @_;
     my @parts = map { partition_table::get_normal_parts($_) } hds($all_hds);
-    my @raids = grep { $_ } @{$all_hds->{raids}};
-    @parts, @raids, @{$all_hds->{loopbacks}};
+    @parts, @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
 }
 sub really_all_fstab {
     my ($all_hds) = @_;
@@ -26,8 +25,7 @@ sub really_all_fstab {
 
 sub fstab_and_holes {
     my ($all_hds) = @_;
-    my @raids = grep { $_ } @{$all_hds->{raids}};
-    hds_fstab_and_holes(hds($all_hds)), @raids, @{$all_hds->{loopbacks}};
+    hds_fstab_and_holes(hds($all_hds)), @{$all_hds->{raids}}, @{$all_hds->{loopbacks}};
 }
 
 sub holes {

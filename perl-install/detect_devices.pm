@@ -803,49 +803,6 @@ sub hasMousePS2 {
     my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
-sub raidAutoStartIoctl() {
-    sysopen(my $F, devices::make("md0"), 2) or return;
-    ioctl $F, 0x914, 0; #- RAID_AUTORUN
-}
-
-sub raidAutoStartRaidtab {
-    my (@parts) = @_;
-    $::isInstall or return;
-    require raid;
-    #- faking a raidtab, it seems to be working :-)))
-    #- (choosing any inactive md)
-    raid::inactivate_all();
-    my $detect_one = sub {
-	my ($device) = @_;
-	my $free_md = devices::make(find { !raid::is_active($_) } map { "md$_" } 0 .. raid::max_nb());
-	output("/tmp/raidtab", "raiddev $free_md\n  device " . devices::make($device) . "\n");
-	log::l("raidAutoStartRaidtab: trying $device");
-	run_program::run('raidstart', '-c', "/tmp/raidtab", $free_md);
-    };
-    $detect_one->($_->{device}) foreach @parts;
-
-    #- try again to detect RAID 10
-    $detect_one->($_) foreach raid::active_mds();
-
-    unlink "/tmp/raidtab";
-}
-
-sub raidAutoStart {
-    my (@parts) = @_;
-
-    log::l("raidAutoStart");
-    eval { modules::load('md') };
-    my %personalities = ('1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5');
-    raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
-    foreach (1..2) { #- try twice for RAID 10
-	my @needed_perso = map { 
-	    if_(/^kmod: failed.*md-personality-(.)/ ||
-		/^md: personality (.) is not loaded/, $personalities{$1}) } syslog() or last;
-	eval { modules::load(@needed_perso) };
-	raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
-    }
-}
-
 sub usb_description2removable {
     local ($_) = @_;
     return 'camera' if /\bcamera\b/i;

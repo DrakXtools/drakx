@@ -61,57 +61,12 @@ sub raids {
     my ($hds) = @_;
 
     my @parts = fs::get::hds_fstab(@$hds);
-    {
-	my @l = grep { isRawRAID($_) } @parts or return [];
-	detect_devices::raidAutoStart(@l);
-    }
 
-    fs::get_major_minor(@parts);
-
-    my @raids;
-    my @mdstat = cat_("/proc/mdstat");
-    for (my $i = 0; $i < @mdstat; $i++) {
-
-	my ($nb, $level, $mdparts) = 
-	  #- line format is:
-	  #- md%d : {in}?active{ (read-only)}? {linear|raid1|raid4|raid5}{ DEVNAME[%d]{(F)}?}*
-	  $mdstat[$i] =~ /^md(\d+).* ([^ \[\]]+) (\S+\[\d+\].*)/ or next;
-
-	$level =~ s/raid//; #- { linear | raid0 | raid1 | raid5 } -> { linear | 0 | 1 | 5 }
-
-	my $chunks = $mdstat[$i+1] =~ /(\S+) chunks/ ? $1 : "64k";
-
-	my @raw_mdparts = map { /([^\[]+)/ } split ' ', $mdparts;
-
-	my $fs_type = fs::type::fs_type_from_magic({ device => "md$nb" });
-	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($fs_type, "type $fs_type "), "with parts ", join(", ", @raw_mdparts));
-	$raids[$nb] = { 'chunk-size' => $chunks, fs_type => $fs_type || 'ext2', raw_mdparts => \@raw_mdparts,
-			device => "md$nb", notFormatted => !$fs_type, level => $level };
-    }
-
-    my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } devices::read_proc_partitions_raw();
-    each_index {
-	my $raw_mdparts = delete $_->{raw_mdparts};
-	my @mdparts = 
-	  map { 
-	      my $mdpart = $devname2part{$_} || { device => $_ };
-	      if (my $part = find { is_same_hd($mdpart, $_) } @parts, @raids) {
-		  $part->{raid} = $::i;
-		  fs::type::set_pt_type($part, 0xfd);
-		  delete $part->{mntpoint};
-		  $part;
-	      } else {
-		  #- forget it when not found? that way it won't break much... beurk.
-		  ();
-	      }
-	  } @$raw_mdparts;
-
-	$_->{disks} = \@mdparts;
-    } @raids;
-
+    my @l = grep { isRawRAID($_) } @parts or return [];
+    
     require raid;
-    raid::update(@raids);
-    \@raids;
+    raid::detect_during_install(@l) if $::isInstall;
+    raid::get_existing(@l);
 }
 
 sub lvms {
@@ -517,13 +472,15 @@ sub auto_allocate_raids {
     foreach my $md (@mds) {
 	my @raids_ = grep { !$md->{parts} || $md->{parts} =~ /\Q$_->{mntpoint}/ } @raids;
 	@raids = difference2(\@raids, \@raids_);
-	my $nb = raid::new($all_hds->{raids}, @raids_);
-	my $part = $all_hds->{raids}[$nb];
 
 	my %h = %$md;
-	delete @h{'hd', 'parts'};
-	put_in_hash($part, \%h); # mntpoint, level, chunk-size, fs_type
+	delete @h{'hd', 'parts'}; # keeping mntpoint, level, chunk-size, fs_type/pt_type
+	$h{disks} = \@raids_;
+
+	my $part = raid::new($all_hds->{raids}, %h);
+
 	raid::updateSize($part);
+	push @raids, $part; #- we can build raid over raid
     }
 }
 

@@ -201,7 +201,7 @@ sub formatPartitions {
     }
 
     require raid;
-    raid::prepare_prefixed($o->{all_hds}{raids}, $o->{prefix});
+    raid::prepare_prefixed($o->{all_hds}{raids});
 
     #- needed by lilo
     if (my @vgs = map { $_->{VG_name} } @{$o->{all_hds}{lvms}}) {
