@@ -1,3 +1,57 @@
+2002/09/16  David Baudens  <baudens@mandrakesoft.com>
+
+	* share/advertising/17-mdkclub.pl,
+	share/advertising/15-mdkexpert-corporate.pl,
+	share/advertising/04-multimedia.pl, share/advertising/06-mcc.pl,
+	share/advertising/12-mdkstore.pl: Adapt text postion to fix french
+	translations
+
+2002/09/16  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - typo in options
+
+	* standalone.pm: 
+	  - use basename with drakbug for standalone tools
+
+	* standalone/drakfloppy: 
+	  - translation for drakfloppy
+
+	* standalone/logdrake: 
+	  - enable translation for logdrake
+
+2002/09/16  florin
+
+	* network/shorewall.pm: add internal_ports variable
+
+2002/09/16  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/XFdrake: fixed no translation for XFdrake (pixel idea).
+
+2002/09/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* my_gtk.pm, drakxtools.spec: fix die wizcancel in non wizard mode
+
+	* rescue/tree/sbin/modprobe: remove modules files even when modprobe fails
+
+2002/09/16  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* bootlook.pm: remove File::Copy dependencies and change lilo message path
+
+2002/09/16  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/zh_CN.po, share/po/pt.po, share/po/lv.po,
+	share/po/sv.po: updated Indonesian, Latvian, Portuguese, Swedish and
+	Chinese files
+
+2002/09/15  Pixel  <pixel@mandrakesoft.com>
+
+	* fsedit.pm: do not allow encrypted filesystem for /boot
+
+2002/09/15  Till Kamppeter  <till@mandrakesoft.com>
+
+	* share/po/de.po: In wizards: "Finish" --> "Assistent beenden"
+
 2002/09/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* my_gtk.pm: workaround ERROR: Can't call method "child" on an undefined
@@ -3439,7 +3493,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.749 2002/09/13 14:57:47 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.750 2002/09/15 14:50:32 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
