@@ -456,8 +456,8 @@ sub proxy_configure {
 }
 
 sub read_all_conf {
-    my ($prefix, $netc, $intf) = @_;
-    $netc ||= {}; $intf ||= {};
+    my ($prefix, $netc, $intf, $netcnx) = @_;
+    $netc ||= {}; $intf ||= {}; $netcnx ||= {};
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
@@ -466,6 +466,14 @@ sub read_all_conf {
 	    my $intf = findIntf($intf, $1);
 	    add2hash($intf, { getVarsFromSh("$prefix/etc/sysconfig/network-scripts/$_") });
 	}
+    }
+    #- try to probe $netcnx->{type} which is used almost everywhere.
+    unless ($netcnx->{type}) {
+	#- ugly hack to determine network type (avoid saying not configured in summary).
+	$intf->{eth0} and $netcnx->{type} ||= 'lan';
+	$intf->{ppp0} and $netcnx->{type} ||= 'modem';
+	-e "$prefix/etc/ppp/peers/adsl" and $netcnx->{type} ||= 'adsl'; # enough ?
+	-e "$prefix/etc/ppp/ioptions1B" || -e "$prefix/etc/ppp/ioptions2B" and $netcnx->{type} ||= 'isdn'; # enough ?
     }
 }
 
