@@ -403,7 +403,7 @@ sub part_possible_actions {
         N_("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
         N_("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         N_("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
-        N_("Add to RAID")      => '!isBusy && isRawRAID && !isSpecial',
+        N_("Add to RAID")      => '!isBusy && isRawRAID && (!isSpecial || isRAID)',
         N_("Add to LVM")       => '!isBusy && isRawLVM',
         N_("Unmount")          => '!$part->{real_mntpoint} && isMounted',
         N_("Delete")	       => '!isBusy && !readonly',
@@ -546,8 +546,10 @@ sub Type {
     @types = grep { (name2type($_) & 0xff) == 0x83 } @types if $hd->{readonly};
 
     my $type_name = type2name($part->{type});
-    $in->ask_from(N("Change partition type"),
-		  N("Which filesystem do you want?"),
+    $in->ask_from_({ title => N("Change partition type"),
+		     messages => N("Which filesystem do you want?"),
+		     focus_first => 1,
+		   },
 		  [ { label => N("Type"), val => \$type_name, list => \@types, sort => 0, not_edit => !$::expert } ]) or return;
 
     my $type = $type_name && name2type($type_name);
@@ -581,10 +583,11 @@ sub Mount_point {
 	    fsedit::has_mntpoint('/', $all_hds) || $part_->{mntpoint} eq '/boot' ? $part_->{mntpoint} : '/';
 	} else { '' }
     };
-    $in->ask_from(
-        '',
+    $in->ask_from_({ messages =>
         isLoopback($part) ? N("Where do you want to mount the loopback file %s?", $part->{loopback_file}) :
 			    N("Where do you want to mount device %s?", $part->{device}),
+		     focus_first => 1,
+	},
 	[ { label => N("Mount point"), val => \$mntpoint, 
 	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ], 
 	    not_edit => 0 } ],
