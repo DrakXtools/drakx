@@ -103,8 +103,6 @@ sub checkNetwork() {
         ($addrgd, $gd) = `/sbin/ip route show` =~ /^default\s+via\s+(\S+).*\s+dev\s+(\S+)/m;
     }
 
-    $gd or die "No Gatewaydev defined";
-
     if ($addrgd) {
         go2State('connected', $gd)
     } else { go2State('disconnected', '') }
