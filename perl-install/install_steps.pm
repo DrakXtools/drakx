@@ -137,7 +137,6 @@ sub setupSCSI {
 sub doPartitionDisksBefore {
     my ($o) = @_;
     eval { 
-	close *pkgs::LOG;
 	eval { fs::umount("$o->{prefix}/proc") };
 	eval {          fs::umount_all($o->{fstab}, $o->{prefix}) };
 	eval { sleep 1; fs::umount_all($o->{fstab}, $o->{prefix}) } if $@; #- HACK
