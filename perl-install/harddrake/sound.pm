@@ -182,8 +182,7 @@ sub switch {
 				    $device->{description}) .
 				  N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
 				  interactive_help => sub {  
-                                        $in->ask_warn(N("Switching between ALSA and OSS help"),
-                                                      N("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
+				      N("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
 What's more, OSS drivers all reinvent the wheel.
 
 ALSA (Advanced Linux Sound Architecture) is a modularized architecture which
@@ -192,7 +191,7 @@ It also provides a much higher API than OSS.\n
 To use alsa, one can either use:
 - the old compatibility OSS api
 - the new ALSA api that provides many enhanced features but requires using the ALSA library.
-"))
+");
                                         },
 				},
                                [

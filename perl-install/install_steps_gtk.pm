@@ -125,14 +125,6 @@ sub new($$) {
     install_gtk::install_theme($o, install_gtk::default_theme($o));
     install_gtk::create_logo_window($o);
 
-    $o->{interactive_help} = sub {  
-	my $w = ugtk2->new('');
-	$w->{rwindow}->set_size_request($::windowwidth * 0.92, $::windowheight * 0.9);
-	gtkadd($w->{window}, gtkpack__(create_box_with_title($w, $o->{current_help}), 
-				       $w->create_okcancel(N("Ok"))));
-	$w->{ok}->grab_focus;
-	$w->main;
-    };
     $ugtk2::force_center = [ $::rootwidth - $::windowwidth, $::logoheight, $::windowwidth, $::windowheight ];
 
     $o = (bless {}, ref($type) || $type)->SUPER::new($o);
