@@ -32,6 +32,7 @@ init();
 
 sub init() {
     eval { modules::load('dm-mod') };
+    devices::make('urandom');
     run_program::run('lvm2', 'vgscan') if !-e '/etc/lvmtab';
     run_program::run('lvm2', 'vgchange', '-a', 'y');
 }

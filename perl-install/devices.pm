@@ -143,6 +143,7 @@ sub entry {
 		   "psaux"    => [ c::S_IFCHR(), 10, 1  ],
 		   "atibm"    => [ c::S_IFCHR(), 10, 3  ],
 		   "random"   => [ c::S_IFCHR(), 1,  8  ],
+		   "urandom"  => [ c::S_IFCHR(), 1,  9  ],
 		   "sbpcd"    => [ c::S_IFBLK(), 25, 0  ],
 		   "sjcd"     => [ c::S_IFBLK(), 18, 0  ],
 		   "tty"      => [ c::S_IFCHR(),  5, 0  ],
