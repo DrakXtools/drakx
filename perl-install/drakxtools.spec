@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.15mdk
+Release: 0.16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -327,6 +327,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Aug 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.16mdk
+- drakconnect: add metric support according to connection type (blino)
+- drakroam (Austin):
+  o fix "Add" button behavior
+  o don't show channel 0 for auto mode
+  o move DHCP column to left for better sizing
+- drakupdate_fstab: do not mount and add/delete in fstab when many
+  partitions (blino, #11005)
+- logdrake: fix displaying only last parsed file
+- printerdrake (till):
+  o add support for daemon-less CUPS client
+  o fix graying out of buttons/menu entries in the main window
+  o fix unrecognized local queues when the spooler daemon is not
+    running during printerdrake startup
+- XFdrake: fix crash on resolution change
+
 * Fri Aug 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.15mdk
 - GUI cleanups:
   o drakboot: fix canceling first step
