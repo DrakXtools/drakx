@@ -677,6 +677,9 @@ sub get_usermode {
     return $::expert;
 }
 
+#----------------------------------------------------------------------
+# Handling of /etc/cups/cupsd.conf
+
 sub read_cupsd_conf {
     cat_("$::prefix/etc/cups/cupsd.conf");
 }
@@ -689,6 +692,245 @@ sub write_cupsd_conf {
     printer::services::restart("cups");
 }
 
+sub read_directives {
+
+    # Read one or more occurences of a directive from the cupsd.conf file 
+    # or from a ripped-out location block
+
+    my ($lines_ptr, $directive) = @_;
+
+    my @result = ();
+    ($_ =~ /^\s*$directive\s+(\S.*)$/ and push(@result, $1)) 
+	foreach @{$lines_ptr};
+    (chomp) foreach @result;
+    return @result;
+}
+
+sub insert_directive {
+
+    # Insert a directive into the cupsd.conf file or into a ripped-out
+    # location block (but only if it is not already there)
+
+    my ($lines_ptr, $directive) = @_;
+
+    ($_ =~ /^\s*$directive$/ and return 0) foreach @{$lines_ptr};
+    splice(@{$lines_ptr}, -1, 0, "$directive\n");
+    return 1;
+}
+
+sub remove_directive {
+
+    # Remove a directive from the cupsd.conf file or from a ripped-out
+    # location block
+
+    my ($lines_ptr, $directive) = @_;
+
+    my $success = 0;
+    ($_ =~ /^\s*$directive/ and $_ = "" and $success = 1)
+	foreach @{$lines_ptr};
+    return $success;
+}
+
+sub replace_directive {
+
+    # Replace a directive in the cupsd.conf file or from a ripped-out
+    # location block, if the directive appears more than once, remove
+    # the additional occurences
+
+    my ($lines_ptr, $olddirective, $newdirective) = @_;
+
+    # Do not do the replacement when the new directive already exists
+    ($_ =~ /^\s*$newdirective$/ and return 0) foreach @{$lines_ptr};
+
+    $newdirective = "$newdirective\n";
+    my $success = 0;
+    ($_ =~ /^\s*$olddirective/ and $_ = $newdirective and 
+     $success = 1 and $newdirective = "") foreach @{$lines_ptr};
+    return $success;
+}
+
+sub set_directive {
+
+    # Set a directive in the cupsd.conf, replace the old definition or
+    # a commented definition
+
+    my ($cupsd_conf_ptr, $directive) = @_;
+
+    my $olddirective = $directive;
+    $olddirective =~ s/^\s*(\S+)\s+.*$/$1/;
+
+    return (replace_directive($cupsd_conf_ptr, $olddirective,
+			      $directive) or
+	    replace_directive($cupsd_conf_ptr, "\#$olddirective", 
+			      $directive) or 
+	    insert_directive($cupsd_conf_ptr, $directive));
+}
+
+sub read_location {
+
+    # Return the lines inside the [path] location block
+    #
+    #   <Location [path]>
+    #   ...
+    #   </Location>
+
+    my ($cupsd_conf_ptr, $path) = @_;
+
+    my @result = ();
+    if (grep(m!^\s*<Location\s+$path\s*>!, @{$cupsd_conf_ptr})) {
+	my $location_start = -1;
+	my $location_end = -1;
+	# Go through all the lines, bail out when start and end line found
+	for (my $i = 0; 
+	     ($i <= $#{$cupsd_conf_ptr}) and ($location_end == -1);
+	     $i++) {
+	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
+		# Start line of block
+		$location_start = $i;
+	    } elsif (($cupsd_conf_ptr->[$i] =~ 
+		      m!^\s*<\s*/Location\s*>!) and
+		     ($location_start != -1)) {
+		# End line of block
+		$location_end = $i;
+		last;
+	    } elsif (($location_start >= 0) and ($location_end < 0)) {
+		# Inside the location block
+		push(@result, $cupsd_conf_ptr->[$i]);
+	    }
+	}
+    } else {
+	# If there is no root location block, set the result array to
+	# "undef"
+	@result = undef;
+    }
+    return (@result);
+}
+
+sub rip_location {
+
+    # Cut out the [path]  location block
+    #
+    #   <Location [path]>
+    #   ...
+    #   </Location>
+    #
+    # so that it can be treated seperately without affecting the
+    # rest of the file
+
+    my ($cupsd_conf_ptr, $path) = @_;
+
+    my @location = ();
+    my $location_start = -1;
+    my $location_end = -1;
+    if (grep(m!^\s*<Location\s+$path\s*>!, @{$cupsd_conf_ptr})) {
+	# Go through all the lines, bail out when start and end line found
+	for (my $i = 0; 
+	     ($i <= $#{$cupsd_conf_ptr}) and ($location_end == -1);
+	     $i++) {
+	    if ($cupsd_conf_ptr->[$i] =~ m!^\s*<\s*Location\s+$path\s*>!) {
+		# Start line of block
+		$location_start = $i;
+	    } elsif (($cupsd_conf_ptr->[$i] =~ 
+		      m!^\s*<\s*/Location\s*>!) and
+		     ($location_start != -1)) {
+		# End line of block
+		$location_end = $i;
+		last;
+	    }
+	}
+	# Rip out the block and store it seperately
+	@location = 
+	    splice(@{$cupsd_conf_ptr},$location_start,
+		   $location_end - $location_start + 1);
+    } else {
+	# If there is no root location block, create one
+	$location_start = $#{$cupsd_conf_ptr} + 1;
+	@location = ();
+	push @location, "<Location $path>\n";
+	push @location, "</Location>\n";
+    }
+
+    return ($location_start, @location);
+}
+
+sub insert_location {
+
+    # Re-insert a location block ripped with "rip_location"
+
+    my ($cupsd_conf_ptr, $location_start, @location) = @_;
+
+    splice(@{$cupsd_conf_ptr}, $location_start,0,@location);
+}
+
+sub add_to_location {
+
+    # Add a directive to a given location (only if it is not already there)
+
+    my ($cupsd_conf_ptr, $path, $directive) = @_;
+
+    my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
+    my $success = insert_directive(\@location, $directive);
+    insert_location($cupsd_conf_ptr, $location_start, @location);
+    return $success;
+}
+
+sub remove_from_location {
+
+    # Remove a directive from a given location
+
+    my ($cupsd_conf_ptr, $path, $directive) = @_;
+
+    my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
+    my $success = remove_directive(\@location, $directive);
+    insert_location($cupsd_conf_ptr, $location_start, @location);
+    return $success;
+}
+
+sub replace_in_location {
+
+    # Replace a directive in a given location
+
+    my ($cupsd_conf_ptr, $path, $olddirective, $newdirective) = @_;
+
+    my ($location_start, @location) = rip_location($cupsd_conf_ptr, $path);
+    my $success = replace_directive(\@location, $olddirective, 
+				    $newdirective);
+    insert_location($cupsd_conf_ptr, $location_start, @location);
+    return $success;
+}
+
+sub add_allowed_host {
+
+    # Add a host or network which should get access to the local printer(s)
+    my ($cupsd_conf_ptr, $host) = @_;
+    
+    return (insert_directive($cupsd_conf_ptr, "BrowseAddress $host") and
+	    add_to_location($cupsd_conf_ptr, "/", "Allow From $host"));
+}
+
+sub remove_allowed_host {
+
+    # Remove a host or network which should get access to the local 
+    # printer(s)
+    my ($cupsd_conf_ptr, $host) = @_;
+    
+    return (remove_directive($cupsd_conf_ptr, "BrowseAddress $host") and
+	    remove_from_location($cupsd_conf_ptr, "/", "Allow From $host"));
+}
+
+sub replace_allowed_host {
+
+    # Remove a host or network which should get access to the local 
+    # printer(s)
+    my ($cupsd_conf_ptr, $oldhost, $newhost) = @_;
+    
+    return (replace_directive($cupsd_conf_ptr, "BrowseAddress $oldhost",
+			      "BrowseAddress $newhost") and
+	    replace_in_location($cupsd_conf_ptr, "/", "Allow From $newhost",
+				"Allow From $newhost"));
+}
+
+#----------------------------------------------------------------------
 sub read_printers_conf {
     my ($printer) = @_;
     my $current;
