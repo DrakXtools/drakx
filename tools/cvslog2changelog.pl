@@ -72,5 +72,6 @@ BEGIN {
 	      'tvignaud' => 'Thierry Vignaud  <tvignaud@mandrakesoft.com',
 	      'sbenedict'=>'Stew Benedict  <sbenedict@mandrakesoft.com>',
 	      'tkamppeter' => 'Till Kamppeter <till@mandrakesoft.com>',
+	      'yduret' => 'Yves Duret <yduret@mandrakesoft.com>'
 	     );
 }
