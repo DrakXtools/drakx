@@ -143,13 +143,10 @@ sub set_options {
 sub add_alias { 
     my ($alias, $module) = @_;
     $module =~ /ignore/ and return;
-    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $module and return $_ foreach keys %conf;    
+    /\Q$alias/ && $conf{$_}{alias} && $conf{$_}{alias} eq $module and return $_ foreach keys %conf;
     log::l("adding alias $alias to $module");
     $conf{$alias}{alias} ||= $module;
-
-    if ($module =~ /^snd-card-/) {
-	$conf{$module}{above} = 'snd-pcm-oss';
-    }
+    $conf{$module}{above} = 'snd-pcm-oss' if $module =~ /^snd-/;
     $alias;
 }
 sub add_probeall {
@@ -333,15 +330,9 @@ sub when_load {
 	add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
     }
-    if ($category =~ /sound/) {
-	add_alias('sound-slot-0', $name);
-    }
-    if ($name =~ /^snd-card-/) {
-	load('snd-pcm-oss');
-    }
-    if ($name =~ /usb-[uo]hci/ || $name eq 'ehci-hcd') {
-	add_probeall('usb-interface', $name);
-    }
+    add_alias('sound-slot-0', $name) if $category =~ /sound/;
+    load('snd-pcm-oss') if $name =~ /^snd-/;
+    add_probeall('usb-interface', $name) if $name =~ /usb-[uo]hci/ || $name eq 'ehci-hcd';
     $conf{$name}{options} = join " ", @options if @options;
 }
 
