@@ -1396,6 +1396,7 @@ sub ask_browse_tree_info_given_widgets {
     });
     $common->{rebuild_tree}->();
     &$update_size;
+    $common->{initial_selection} and $common->{toggle_nodes}($set_leaf_state, @{$common->{initial_selection}});
     my $_b = before_leaving { $clear_all_caches->() };
     $w->{w}->main;
 }
