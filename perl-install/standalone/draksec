@@ -50,7 +50,7 @@ if (my $level = $in->ask_from_list('', _("Choose security level") . "\n\n" .
     $in->suspend;
 
     $ENV{LILO_PASSWORD} = ''; # make it non interactive
-    system("/etc/security/msec/init.sh ". $m{$level});
+    system "/usr/sbin/msec", $m{$level};
 
     $in->resume;
 }
