@@ -298,78 +298,84 @@ sub mount_options_help {
 }
 
 sub set_default_options {
+    my ($part, $is_removable, $useSupermount, $security, $iocharset, $codepage) = @_;
+
+    my ($options, $unknown) = mount_options_unpack($part);
+
+    if ($is_removable) {
+	$options->{supermount} = $useSupermount;
+	$part->{type} = 'auto';	# if supermount, code below will handle choosing the right type
+    }
+
+    my $is_auto = isThisFs('auto', $part);
+
+    if ($options->{supermount} && $is_auto) {
+	# this can't work, guessing :-(
+	$part->{type} = fs2type($part->{media_type} eq 'cdrom' ? 'iso9660' : 'vfat');
+	$is_auto = 0;
+    }
+
+    if ($part->{media_type} eq 'cdrom') {
+	$options->{ro} = 1;
+    }
+
+    if ($part->{media_type} eq 'fd') {
+	# slow device so don't loose time, write now!
+	$options->{sync} = 1;
+    }
+
+    if (isNfs($part)) {
+	put_in_hash($options, { 
+			       nosuid => 1, 'rsize=8192,wsize=8192' => 1,
+			       'iocharset=' => $iocharset,
+			      });
+    }
+    if (isFat($part) || $is_auto) {
+
+	put_in_hash($options, {
+			       user => 1, exec => 1,
+			      }) if !exists $part->{rootDevice}; # partition means no removable media
+
+	put_in_hash($options, {
+			       'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
+			      });
+    }
+    if (isThisFs('ntfs', $part) || $is_auto) {
+	put_in_hash($options, { 'iocharset=' => $iocharset });
+    }
+    if (isThisFs('iso9660', $part) || $is_auto) {
+	put_in_hash($options, { user => 1, exec => 1, });
+    }
+    if (isThisFs('reiserfs', $part)) {
+	$options->{notail} = 1;
+    }
+    if (isLoopback($_) && !isSwap($_)) { #- no need for loop option for swap files
+	$options->{loop} = 1;
+    }
+
+    # rationalize: no need for user
+    if ($options->{autofs} || $options->{supermount}) {
+	$options->{user} = 0;
+    }
+
+    # have noauto when we have user
+    $options->{noauto} = 1 if $options->{user}; 
+
+    if ($options->{user}) {
+	# ensure security  (user_implies - noexec as noexec is not a security matter)
+	$options->{$_} = 1 foreach 'nodev', 'nosuid';
+    }
+
+    mount_options_pack($part, $options, $unknown);
+}
+
+sub set_all_default_options {
     my ($all_hds, $useSupermount, $security, $iocharset, $codepage) = @_;
 
     my @removables = @{$all_hds->{raw_hds}};
 
     foreach my $part (fsedit::get_really_all_fstab($all_hds)) {
-	my ($options, $unknown) = mount_options_unpack($part);
-
-	if (member($part, @removables)) {
-	    $options->{supermount} = $useSupermount;
-	    $part->{type} = 'auto'; # if supermount, code below will handle choosing the right type
-	}
-
-	my $is_auto = isThisFs('auto', $part);
-
-	if ($options->{supermount} && $is_auto) {
-	    # this can't work, guessing :-(
-	    $part->{type} = fs2type($part->{media_type} eq 'cdrom' ? 'iso9660' : 'vfat');
-	    $is_auto = 0;
-	}
-
-	if ($part->{media_type} eq 'cdrom') {
-	    $options->{ro} = 1;
-	}
-
-	if ($part->{media_type} eq 'fd') {
-	    # slow device so don't loose time, write now!
-	    $options->{sync} = 1;
-	}
-
-	if (isNfs($part)) {
-	    put_in_hash($options, { 
-	        ro => 1, nosuid => 1, 'rsize=8192,wsize=8192' => 1, 
-		'iocharset=' => $iocharset,
-            });
-	}
-	if (isFat($part) || $is_auto) {
-
-	    put_in_hash($options, {
-	        user => 1, exec => 1,
-            }) if !exists $part->{rootDevice}; # partition means no removable media
-
-	    put_in_hash($options, {
-                'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
-            });
-	}
-	if (isThisFs('ntfs', $part) || $is_auto) {
-	    put_in_hash($options, { 'iocharset=' => $iocharset });
-	}
-	if (isThisFs('iso9660', $part) || $is_auto) {
-	    put_in_hash($options, { user => 1, exec => 1, });
-	}
-	if (isThisFs('reiserfs', $part)) {
-	    $options->{notail} = 1;
-	}
-	if (isLoopback($_) && !isSwap($_)) { #- no need for loop option for swap files
-	    $options->{loop} = 1;
-	}
-
-	# rationalize: no need for user
-	if ($options->{autofs} || $options->{supermount}) {
-	    $options->{user} = 0;
-	}
-
-	# have noauto when we have user
-	$options->{noauto} = 1 if $options->{user}; 
-
-	if ($options->{user}) {
-	    # ensure security  (user_implies - noexec as noexec is not a security matter)
-	    $options->{$_} = 1 foreach 'nodev', 'nosuid';
-	}
-
-	mount_options_pack($part, $options, $unknown);
+	set_default_options($part, member($part, @removables), $useSupermount, $security, $iocharset, $codepage);
     }
 }
 
