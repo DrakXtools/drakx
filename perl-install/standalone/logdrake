@@ -486,5 +486,6 @@ print F $r;
 sub save {
     $::isWizard = 0;
     $yy = $in->ask_file(N("Save as.."), "/root") or return;
-    output($yy, $log_text->get_chars(0, $log_text->get_length()));
+    my $buf = $log_text->get_buffer;
+    output($yy, $buf->get_text($buf->get_start_iter, $buf->get_end_iter, 0));
 }
