@@ -319,7 +319,7 @@ sub setPackages {
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
-	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
+	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method}, $o->{packages});
     }
 }
 
