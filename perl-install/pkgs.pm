@@ -72,7 +72,8 @@ autoirpm autoirpm-icons numlock
 # 'mk'	=> [ 'fonts-ttf-cyrillic' ],
   'pl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'ro'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
-# 'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
+# 'ru'  => [ 'XFree86-cyrillic-fonts', 'fonts-ttf-cyrillic' ],
+  'ru'  => [ 'XFree86-cyrillic-fonts' ],
   'ru_RU.KOI8-R' => [ 'XFree86-cyrillic-fonts' ],
   'sk'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
   'sl'	=> [ 'XFree86-ISO8859-2', 'XFree86-ISO8859-2-75dpi-fonts' ],
@@ -83,6 +84,7 @@ autoirpm autoirpm-icons numlock
 #'uk_UA' => [ 'fonts-ttf-cyrillic' ],
 # 'vi'	=> vietnamese fonts
   'yi'  => [ 'acon' ],
+  'zh'  => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5', 'fonts-ttf-gb2312' ],
   'zh_CN.GB2312' => [ 'rxvt-CLE', 'fonts-ttf-gb2312' ],
   'zh_TW.Big5' => [ 'rxvt-CLE', 'taipeifonts', 'fonts-ttf-big5' ],
 );

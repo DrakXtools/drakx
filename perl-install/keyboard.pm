@@ -23,6 +23,7 @@ my $KMAP_MAGIC = 0x8B39C07F;
 my %lang2keyboard =
 (
   'af' => 'us_intl',
+  'az' => 'az',
   'be' => 'by',
   'be_BY.CP1251' => 'by',
   'bg' => 'bg',
@@ -48,6 +49,7 @@ my %lang2keyboard =
 'es_MX'=> 'la',
   'et' => 'ee',
   'eu' => 'es',
+  'fa' => 'ir',
   'fi' => 'fi',
   'fr' => 'fr',
 'fr_BE'=> 'be',
@@ -121,6 +123,8 @@ arch() eq "ppc" ? (
  "am_phonetic" => [ __("Armenian (phonetic)"), "am_phonetic", "am(phonetic)" ],
 #- only xmodmap is currently available
 #-"ar" => [ __("Arabic"),        "ar-8859_6",   "ar" ],
+ "az" => [ __("Armenian (latin)"), "az",	"az" ],
+ "a3" => [ __("Armenian (cyrillic)"), "az-koi8c","az(cyrillic)" ],
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
  "br" => [ __("Brazilian (ABNT-2)"),      "br-abnt2",    "br" ],

@@ -21,6 +21,8 @@ my %languages = (
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
+  'az'  => [ 'Azeri (latin)',		'iso-8859-9e', 'az', 'az' ],
+  'a3'  => [ 'Azeri (cyrillic)',	'koi8-c',     'a3', 'a3' ],
 'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
 'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
@@ -66,9 +68,8 @@ my %languages = (
 #-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
-#-'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
-#-'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk:sp:sr' ],
-#-'mk_latin'=> [ 'Macedonian (Latin)',	'iso-8859-2', 'mk_latin', 'mk_latin:sr' ],
+  'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
+  'mk'  => [ 'Macedonian (Cyrillic)',	'iso-8859-5', 'mk', 'mk:sp:sr' ],
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
   'nl'  => [ 'Dutch (Netherlands)',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
 # 'nb' is the new locale name in glibc 2.2
@@ -91,9 +92,11 @@ my %languages = (
 'sv@traditionell' => [ 'Swedish (traditional sorting)','iso-8859-1', 'sv', 'sv' ],
 'sv@ny' => [ 'Swedish (new sorting (v diff of w)','iso-8859-1', 'sv', 'sv' ],
 #-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
+  'tg'	=> [ 'Tajik',			'koi8-c',     'tg', 'tg' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-#-'ur'	=> [ 'Urdu',			'????',	      'ur', 'ur' ],  
+  'tt'	=> [ 'Tatar',			'tatar-cyr',  'tg', 'tg' ],
+#-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
 					'vi_VN.tcvn:vi_VN.tcvn-5712:vi' ],
@@ -110,22 +113,41 @@ my %xim = (
 	ENC => 'big5',
 	XIM => 'xcin',
 	XMODIFIERS => '"@im=xcin"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN.GB2312' => {
 	ENC => 'gb',
 	XIM => 'xcin-zh_CN.GB2312',
 	XMODIFIERS => '"@im=xcin-zh_CN.GB2312"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko' => {
 	ENC => 'kr',
 	XIM => 'Ami',
 	XMODIFIERS => '"@im=Ami"',
+	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ja' => {
 	ENC => 'eucj',
 	XIM => 'kinput2',
 	XMODIFIERS => '"@im=kinput2"',
-  }
+  },
+  # right to left languages only work properly on console
+  'ar' => {
+	X11_NOT_LOCALIZED => "yes",
+  },
+  'fa' => {
+	X11_NOT_LOCALIZED => "yes",
+  },
+  'he' => {
+	X11_NOT_LOCALIZED => "yes",
+  },
+  'ur' => {
+	X11_NOT_LOCALIZED => "yes",
+  },
+  'yi' => {
+	X11_NOT_LOCALIZED => "yes",
+  },
 );
 
 sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
@@ -174,6 +196,8 @@ my %charsets = (
 	std_("iso8859-14") ],
   "iso-8859-15" => [ "lat0-sun16",	undef,		"iso15",
 	std("iso8859-15") ],
+  "iso-8859-9e" => [ "tiso09e",		"iso09",	"trivial.trans",
+	std("iso8859-9e") ],
 #- japanese needs special console driver for text mode [kon2]
   "jisx0208"   => [ undef,		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
@@ -181,11 +205,19 @@ my %charsets = (
 	std("koi8-r") ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
 	std("koi8-u") ],
+  "koi8-c"     => [ "tkoi8c",		"iso01",	"trivial.trans",
+	std("koi8-c") ],
+  "tatar-cyr"  => [ "tcp1251tt",	"iso01",	"trivial.trans",
+	std("tatar-cyr") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
 	std("microsoft-cp1251") ],
 #- Yiddish needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
   "cp1255"     => [ "iso08.f16",        "iso08",        "trivial.trans",
+	std_("microsoft-cp1255") ],
+#- Urdu needs special console driver for text mode [acon]
+#- (and gtk support isn't done yet)
+  "cp1256"     => [ undef,              undef,          "trivial.trans",
 	std_("microsoft-cp1255") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ undef,		undef,		undef,
