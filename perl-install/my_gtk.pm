@@ -85,7 +85,7 @@ sub new {
 				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
 	    #- $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
-	    $::WizardTable->set_usize(540,400);
+	    $::WizardTable->set_usize(540,420);
 	    $::WizardWindow->show_all;
 	    flush();
 	}
