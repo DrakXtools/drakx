@@ -84,7 +84,7 @@ do {
 fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
-my $o_old = $o;
+my $o_old = $o; # BUG (maybe install's $::o ?)
 my %struct_gui;
 
 if (!$::isEmbedded && $in->isa('interactive::gtk')) {
@@ -99,7 +99,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
     $struct_gui{$_} = 'Users' foreach qw(superuser users authentication);
     $struct_gui{$_} = 'Hardware' foreach qw(keyboard mouse X printer wacom nomouseprobe);
 
-    %pixmap = (lang => 'language',
+    my %pixmap = (lang => 'language',
 		isUpgrade => '',
 		security => 'security',
 		autoExitInstall => '',
@@ -122,7 +122,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 		wacom => '',
 	      );
 
-    member($_, keys %struct_gui) and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_}") ] foreach keys %$o;
+    exists $struct_gui{$_} and push @{$tree{$struct_gui{$_}}}, [ $_ , $pixmap{$_}, h2widget($o->{$_}, "\$o->\{$_}") ] foreach keys %$o;
 
     my $W = ugtk2->new('$o edition');
     my @box_to_hide;
@@ -142,7 +142,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 				    1, new Gtk2::VBox(0,0),
 				   ), undef);
     $notebook->show_all;
-    $notebook->set_page(0);
+    $notebook->set_current_page(0);
 
     gtkadd($W->{window},
 	   gtkpack_(new Gtk2::VBox(0,5),
@@ -155,7 +155,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 					 $box->{vis} = 0;
 					 my @button_to_hide;
 					 0, gtksignal_connect(new Gtk2::Button($_), clicked => sub {
-								if ($box->{vis}) { $box->hide; $box->{vis} = 0; $notebook->set_page(0) }
+								if ($box->{vis}) { $box->hide; $box->{vis} = 0; $notebook->set_current_page(0) }
 								else {
 								    $_->hide, $_->{vis}=0 foreach @box_to_hide;
 								    $box->show; $box->{vis} = 1;
@@ -169,7 +169,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							      $notebook->append_page(gtkshow($_->[2]), undef);
 							      $nb_pages++;
 							      my $local_page = $nb_pages;
-							      my $function = sub { $notebook->set_page($local_page) };
+							      my $function = sub { $notebook->set_current_page($local_page) };
 							      gtksignal_connect($button, toggled => sub {
 										    $button->get_active and $function->()
 										});
@@ -178,7 +178,7 @@ if (!$::isEmbedded && $in->isa('interactive::gtk')) {
 							      gtksignal_connect(gtkadd($button,
 										       gtkpack__(new Gtk2::VBox(0,3),
 												 $b,
-												 translate($_->[0]),
+												 translate($gru),
 												)
 										      ), released => sub {
 											  $button->get_active or $button->set_active(1), return;
@@ -256,7 +256,6 @@ sub h2widget {
 	my @list_keys = keys(%$k);
 	if (ref($k->{$list_keys[0]}) =~ /HASH/) {
 	    $i++;
-	    my ($button_add, $button_remove);
 	    $w = gtkpack_(new Gtk2::VBox(0,0),
 			  1, create_scrolled_window(gtkpack__($vb = new Gtk2::VBox(0,10),
 							    $widget_list[$i] = create_packtable({ col_spacings => 10, row_spacings => 3 },
@@ -321,7 +320,7 @@ sub create_entry_element {
     } else {
 	$e = new Gtk2::Entry;
 	$e->{value} = $value;
-	my $tag = Glib::Timeout->add(1000, sub { $e->set_text($text); 0 });
+	my $_tag = Glib::Timeout->add(1000, sub { $e->set_text($text); 0 });
 	gtksignal_connect($e, changed => sub {
 			      my $exe = $e->{value} . "='" . $e->get_text . "'";
 			      print "EXEC : $exe\n ";
