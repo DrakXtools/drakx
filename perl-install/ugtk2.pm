@@ -465,7 +465,7 @@ sub create_packtable {
 		ref $_ or $_ = Gtk2::Label->new($_);
 		$j != $#$l && !$options->{mcc} ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
-			     'fill', 'fill', 5, 0) :
+			     'fill', 'fill', defined $options->{xpadding} ? $options->{xpadding} : 5, $options->{ypadding} || 0) :
 		  $w->attach($_, $j, $j + 1, $i, $i + 1,
 			     ['expand', 'fill'], ref($_) eq 'Gtk2::ScrolledWindow' || $_->get_data('must_grow') ? ['expand', 'fill'] : [], 0, 0);
 		$_->show;
