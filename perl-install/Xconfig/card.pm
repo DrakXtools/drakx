@@ -321,24 +321,14 @@ sub install_server {
 	$card->{DRI_GLX_SPECIAL} = 1;
 	$card->{Options}{IgnoreEDID} = 1;
     }
-    my %driver_to_libgl_config = (
-                                  nvidia => "$::prefix/etc/ld.so.conf.d/.conf.nvidia",
-                                  fglrx => "$::prefix/etc/ld.so.conf.d/.conf.ati",
-                                 );
-    if (my $file = $driver_to_libgl_config{$card->{Driver2}}) {
-        if (-e $file) { 
-            symlinkf(basename($file), "$::prefix/etc/ld.so.conf.d/GL.conf"); 
-        }
-    } else {
-	eval { rm_rf("/etc/ld.so.conf.d/GL.conf") };
-    }
-    system("/sbin/ldconfig") if $::isStandalone;
     if ($card->{Driver2} eq 'fglrx' &&
 	-e "$::prefix/usr/X11R6/$lib/modules/dri/fglrx_dri.so" &&
 	-e "$::prefix/usr/X11R6/$lib/modules/drivers/fglrx_drv.o") {
 	log::l("Using specific ATI fglrx and DRI drivers");
 	$card->{Driver} = 'fglrx';
     }
+
+    libgl_config($card->{Driver});
 
     if ($card->{need_MATROX_HAL}) {
 	require Xconfig::proprietary;
@@ -453,6 +443,23 @@ sub set_glx_restrictions {
 	log::l("this is only used for XFree 3.3.6, see /etc/X11/glx.conf");
 	substInFile { s/^\s*#*\s*mga_dma\s*=\s*\d+\s*$/mga_dma = 0\n/ } "$::prefix/etc/X11/glx.conf";
     }
+}
+
+sub libgl_config {
+    my ($Driver) = @_;
+
+    my $dir = "$::prefix/etc/ld.so.conf.d/";
+
+    my %driver_to_libgl_config = (
+	nvidia => '.conf.nvidia',
+	fglrx => '.conf.ati',
+    );
+    if (my $file = $driver_to_libgl_config{$Driver}) {
+	symlinkf($file, "$dir/GL.conf") if -e "$dir/$file";
+    } else {
+	eval { rm_rf("$dir/GL.conf") };
+    }
+    system("/sbin/ldconfig") if $::isStandalone;
 }
 
 sub add_to_card__using_Cards {
