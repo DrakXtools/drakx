@@ -92,45 +92,38 @@ my $use_same_scale = text2bool($config{use_same_scale});
 MDK::Common::Globals::init(in => $in);
 
 gtkadd($window1->{window},
-       gtknew('VBox', spacing => 5, children => [
-                1, gtknew('HBox', spacing => 5, children => [
-                            0, my $notebook = gtknew('Notebook'),
-                            1, gtknew('VBox', spacing => 5, children => [
-                                        0, gtknew('Frame', text => N("Settings"), shadow_type => 'etched_out', child =>
-                                                  gtknew('HBox', border_width => 5, children_tight => [
+       gtkpack_(Gtk2::VBox->new(0,5),
+                1, gtkpack_(Gtk2::HBox->new(0,5),
+                            0, my $notebook = Gtk2::Notebook->new,
+                            1, gtkpack_(Gtk2::VBox->new(0,5),
+                                        0, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Settings")), 'etched_out'),
+                                                  gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,0),5),
                                                             N("Connection type: "), 
-                                                            my $label_cnx_type = gtknew('Label', text => ""),
-						  ]),
+                                                            my $label_cnx_type = Gtk2::Label->new("")),
                                                  ),
-                                        1, gtknew('Frame', text => N("Global statistics"), shadow_type => 'etched_out', child =>
-                                                  gtknew('VBox', border_width => 5, children_tight => [
-                                                            gtknew('Table', col_spacings => 1, row_spacings => 5, homogeneous => 1, children => [
-                                                                             [ gtknew('Label', text => ""), 
-									       gtknew('Label', text => N("Instantaneous")) , 
-									       gtknew('Label', text => N("Average")) ],
-                                                                             [ gtknew('WrappedLabel', text => N("Sending\nspeed:")),   
-									       my $label_st = gtknew('Label', text => ""), 
-									       my $label_sta = gtknew('Label', text => N("unknown")) ],
-                                                                             [ gtknew('WrappedLabel', text => N("Receiving\nspeed:")), 
-									       my $label_sr = gtknew('Label', text => ""),
-									       my $label_sra = gtknew('Label', text => N("unknown")) ],
-                                                                            ]),
-                                                            gtknew('HSeparator'),
-                                                            gtknew('HBox', border_width => 5, children_tight => [
+                                        1, gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Global statistics")), 'etched_out'),
+                                                  gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,0),5),
+                                                            create_packtable({ col_spacings => 1, row_spacings => 5, homogeneous => 1 },
+                                                                             [ Gtk2::Label->new(""), Gtk2::Label->new(N("Instantaneous")) , Gtk2::Label->new(N("Average")) ],
+                                                                             [ Gtk2::WrappedLabel->new(N("Sending\nspeed:")),   my $label_st = Gtk2::Label->new(""), my $label_sta = Gtk2::Label->new(N("unknown")) ],
+                                                                             [ Gtk2::WrappedLabel->new(N("Receiving\nspeed:")), my $label_sr = Gtk2::Label->new(""), my $label_sra = Gtk2::Label->new(N("unknown")) ],
+                                                                            ),
+                                                            Gtk2::HSeparator->new,
+                                                            gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,0),5),
                                                                       N("Connection\ntime: "), 
-                                                                      my $label_ct = gtknew('Label', text => N("unknown")),
-                                                                     ]),
-                                                           ])
+                                                                      my $label_ct = Gtk2::Label->new(N("unknown")),
+                                                                     ),
+                                                           )
                                                  ),
-                                       ])
-                           ]),
-                0, gtknew('CheckButton', text => N("Use same scale for received and transmitted"), val => \$use_same_scale),
-                0, gtknew('HButtonBox', layout => 'edge', children_loose => [
-                           my $button_connect = gtknew('Button', text => N("Wait please"), sensitive => 0, clicked => \&connection),
-                           my $button_close = gtknew('Button', text => N("Close"), clicked => \&main_quit),
-                          ]),
+                                       )
+                           ),
+                0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use same scale for received and transmitted")), $use_same_scale), clicked => sub { $use_same_scale = !$use_same_scale }),
+                0, gtkpack(create_hbox('edge'),
+                           gtksignal_connect(my $button_connect = gtkset_sensitive(Gtk2::Button->new(N("Wait please")), 0), clicked => \&connection),
+                           gtksignal_connect(my $button_close = Gtk2::Button->new(N("Close")), clicked => \&main_quit),
+                          ),
                 0, my $statusbar = Gtk2::Statusbar->new
-               ]),
+               ),
       );
 
 $window1->{rwindow}->show_all;
@@ -198,7 +191,7 @@ sub connection() {
 	$ct_tag = Glib::Timeout->add(1000, sub {
 				       my ($sec, $min, $hour) = gmtime(time() - $c_time);
 				       my $e = sprintf("%02d:%02d:%02d", $hour, $min, $sec);
-				       gtkset($label_ct, text => $e); 1 })
+				       $label_ct->set_label($e); 1 })
     }
     my $nb_point = 1;
     $first = 1;
@@ -290,7 +283,7 @@ sub rescan() {
 
 	push(@{$monitor->{$intf}{stack_r}}, $recv - $refr);
 	shift @{$monitor->{$intf}{stack_r}} if @{$monitor->{$intf}{stack_r}} > graph_window_width();
-	gtkset($monitor->{$intf}{labelr}, text => formatXiB($recv - $monitor->{$intf}{initialr}));
+	$monitor->{$intf}{labelr}->set_label(formatXiB($recv - $monitor->{$intf}{initialr}));
 	$monitor->{$intf}{referencer} = $recv;
 
 	$monitor->{$intf}{transmita} += $transmit - $reft;
@@ -303,24 +296,24 @@ sub rescan() {
 
 	push(@{$monitor->{$intf}{stack_t}}, $transmit - $reft);
 	shift @{$monitor->{$intf}{stack_t}} if @{$monitor->{$intf}{stack_t}} > graph_window_width();
-	gtkset($monitor->{$intf}{labelt}, text => formatXiB($transmit - $monitor->{$intf}{initialt}));
+	$monitor->{$intf}{labelt}->set_label(formatXiB($transmit - $monitor->{$intf}{initialt}));
 	$monitor->{$intf}{referencet} = $transmit;
 
 	draw_monitor($monitor->{$intf}, $intf);
     }
-    gtkset($label_sr, text => formatXiB($monitor->{sr}) . "/s");
-    gtkset($label_st, text => formatXiB($monitor->{st}) . "/s");
+    $label_sr->set_label(formatXiB($monitor->{sr}) . "/s");
+    $label_st->set_label(formatXiB($monitor->{st}) . "/s");
     $monitor->{sra} += $monitor->{sr};
     $monitor->{sta} += $monitor->{st};
     $monitor->{nba}++;
     if ($monitor->{nba} > 9) {
-	gtkset($label_sra, text => formatXiB($monitor->{sra}/10) . "/s");
-	gtkset($label_sta, text => formatXiB($monitor->{sta}/10) . "/s");
+	$label_sra->set_label(formatXiB($monitor->{sra}/10) . "/s");
+	$label_sta->set_label(formatXiB($monitor->{sta}/10) . "/s");
 	$monitor->{sra} = 0;
 	$monitor->{sta} = 0;
 	$monitor->{nba} = 0;
     }
-    gtkset($label_cnx_type, text => translate($netcnx->{type}));
+    $label_cnx_type->set_label(translate($netcnx->{type}));
     $monitor->{$_} = 0 foreach 'sr', 'st';
     1;
 }
@@ -381,52 +374,52 @@ sub update() {
 	    $monitor->{$intf}{initialt} = $monitor->{$intf}{val}[8];
 	    $darea->{$intf} = Gtk2::DrawingArea->new;
 	    $darea->{$intf}->set_events(["pointer_motion_mask"]);
-	    $notebook->append_page(gtkshow(my $page = gtknew('VBox', children => [
-					       0, gtknew('HBox', border_width => 5, children_tight => [
-							    gtkset($darea->{$intf}, width => $width, height => $height) ]),
-					       0, gtknew('HBox', children => [
-							    1, gtknew('VBox', children_tight => [
-								      gtknew('HBox', spacing => 5, border_width => 5, children_tight => [
-										   my $button_t = gtknew('Button', relief => 'none', clicked => sub {
+	    $notebook->append_page(gtkshow(my $page = gtkpack_(Gtk2::VBox->new(0,0),
+					       0, gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,0), 5),
+							    gtksize($darea->{$intf}, $width, $height)),
+					       0, gtkpack_(Gtk2::HBox->new(0,0),
+							    1, gtkpack__(Gtk2::VBox->new(0,0),
+								      gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,5), 5),
+										   gtksignal_connect(my $button_t = gtkset_relief(Gtk2::Button->new, 'none'), clicked => sub {
 													 $colort = change_color($colort);
 													 $gct->set_foreground($colort);
 													 $_[0]->queue_draw;
 												     }),
-										   N("sent: "), $monitor->{$intf}{labelt} = gtknew('Label', text => "0") ]),
-								      gtknew('HBox', spacing => 5, border_width => 5, children_tight => [
-										   my $button_r = gtknew('Button', relief => 'none', clicked => sub {
+										   N("sent: "), $monitor->{$intf}{labelt} = Gtk2::Label->new("0")),
+								      gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,5), 5),
+										   gtksignal_connect(my $button_r = gtkset_relief(Gtk2::Button->new, 'none'), clicked => sub {
 													 $colorr = change_color($colorr);
 													 $gcr->set_foreground($colorr);
 													 $_[0]->queue_draw;
 												     }),
-										   N("received: "), $monitor->{$intf}{labelr} = gtknew('Label', text => "0") ]),
-								      gtknew('HBox', spacing => 5, border_width => 5, children_tight => [
-										   my $button_a = gtknew('Button', relief => 'none', clicked => sub {
+										   N("received: "), $monitor->{$intf}{labelr} = Gtk2::Label->new("0")),
+								      gtkpack__(gtkset_border_width(Gtk2::HBox->new(0,5), 5),
+										   gtksignal_connect(my $button_a = gtkset_relief(Gtk2::Button->new, 'none'), clicked => sub {
 													 $colora = change_color($colora);
 													 $gca->set_foreground($colora);
 													 $_[0]->queue_draw;
 												     }),
-										   N("average") ])
-								     ]),
-							    0, gtknew('VBox', border_width => 5, children_tight => [
-							      gtknew('Frame', text => N("Local measure"), shadow_type => 'etched_out', child =>
-								     gtknew('VBox', border_width => 5, children_tight => [
-									       gtknew('HBox', children_tight => [
+										   N("average"))
+								     ),
+							    0, gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
+							      gtkadd(gtkset_shadow_type(Gtk2::Frame->new(N("Local measure")), 'etched_out'),
+								     gtkpack__(gtkset_border_width(Gtk2::VBox->new(0,0), 5),
+									       gtkpack__(Gtk2::HBox->new(0,0),
 											 N("sent: "),
-											 my $measure_t = gtknew('Label', text => "0")
-											]),
-									       gtknew('HBox', children_tight => [
+											 my $measure_t = Gtk2::Label->new("0")
+											),
+									       gtkpack__(Gtk2::HBox->new(0,0),
 											 N("received: "),
-											 my $measure_r = gtknew('Label', text => "0")
-											])
-									      ])
+											 my $measure_r = Gtk2::Label->new("0")
+											)
+									      )
 									)
-									])
-							  ])
-					       ])),
-				   gtknew('Label', text => $intf));
+									)
+							  )
+					       )),
+				   Gtk2::Label->new($intf));
 	    foreach my $i ([$button_t, $gct], [$button_r, $gcr], [$button_a, $gca]) {
-		$i->[0]->add(gtksignal_connect(gtkshow(gtkset(Gtk2::DrawingArea->new, width => 10, height => 10)),
+		$i->[0]->add(gtksignal_connect(gtkshow(gtksize(gtkset_size_request(Gtk2::DrawingArea->new, 10, 10), 10, 10)),
 					       expose_event => sub { $_[0]->window->draw_rectangle($i->[1], 1, 0, 0, 10, 10) }));
 	    }
 	    $monitor->{$intf}{page} = $notebook->page_num($page);
@@ -440,8 +433,8 @@ sub update() {
                                     my $x = $e->x - 50;
                                     my $received    = $x >= 0 ? $monitor->{$intf}{stack_r}[$x] : 0;
                                     my $transmitted = $x >= 0 ? $monitor->{$intf}{stack_t}[$x] : 0;
-                                    gtkset($measure_r, text => formatXiB($received));
-                                    gtkset($measure_t, text => formatXiB($transmitted));
+                                    $measure_r->set_label(formatXiB($received));
+                                    $measure_t->set_label(formatXiB($transmitted));
                                 });
 	    $darea->{$intf}->signal_connect(expose_event => sub {
                          $darea->{$intf}->window->draw_drawable($darea->{$intf}->style->bg_gc('normal'), $pixmap->{$intf}, 0, 0, 0, 0, $width, $height);
