@@ -10,7 +10,7 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(pppConfig modem_detect_backend);
+@EXPORT = qw(pppConfig);
 
 sub configure{
     my ($netcnx, $mouse, $netc) = @_;
@@ -55,37 +55,6 @@ sub pppConfig {
     any::pppConfig($in, $modem, $prefix);
     $netc->{$_}='ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
-}
-#-AT&F&O2B40
-#- DialString=ATDT0231389595((
-
-#- modem_detect_backend : detects modem on serial ports and fills the infos in $modem : detects only one card
-#- input
-#-  $modem
-#-  $mouse : facultative, hash containing device to exclude not to test mouse port : ( device => /ttyS[0-9]/ )
-#- output:
-#-  $modem->{device} : device where the modem were detected
-sub modem_detect_backend {
-    my ($modem, $mouse) = @_;
-    $mouse ||= {};
-    $mouse->{device} = readlink "/dev/mouse";
-    my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
-    eval { modules::load($serdev) };
-
-    detect_devices::probeSerialDevices();
-    foreach ('modem', map { "ttyS$_" } (0..7)) {
-	next if $mouse->{device} =~ /$_/;
-	next unless -e "/dev/$_";
-	detect_devices::hasModem("/dev/$_") and $modem->{device} = $_, last;
-    }
-
-    #- add an alias for macserial on PPC
-    modules::add_alias('serial', $serdev) if (arch() =~ /ppc/ && $modem->{device});
-    my @devs = detect_devices::pcmcia_probe();
-    foreach (@devs) {
-	$_->{type} =~ /serial/ and $modem->{device} = $_->{device};
-    }
-
 }
 
 1;
