@@ -5,6 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 use strict;
 use diagnostics;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use c;
 use common;
 use interactive;
 use detect_devices;
@@ -20,6 +21,13 @@ my $last_boot_config = $hw_sysconfdir."/previous_hw";
 $last_boot_config .= '_X11' if $invert_do_it;
 
 modules::mergein_conf('/etc/modules.conf');
+
+# autoreconfigure the mouse on major kernel change:
+my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
+my $curr_kernel = c::kernel_version();
+$curr_kernel =~ s/(^\d+\.\d+).*/\1/;
+setVarsInSh("$hw_sysconfdir/kernel", KERNEL => $curr_kernel);
+system("mousedrake --auto") if $curr_kernel ne $prev_kernel;
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
