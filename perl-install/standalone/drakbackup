@@ -308,7 +308,7 @@ sub get_cd_info() {
 			print "{$key}->{dvdr} = $cd_devices{$key}{dvdr}\n";
 			print "{$key}->{dvdram} = $cd_devices{$key}{dvdram}\n"; 
 		} else {
-			delete $cd_devices{$key} if $cd_devices{$key}{rec_dev} eq ''
+			delete $cd_devices{$key} if $cd_devices{$key}{rec_dev} eq '';
    		}
 	}
 }
@@ -390,7 +390,7 @@ sub save_cron_files() {
 		system("chmod +x /etc/cron.$conf{DAEMON_TIME_SPACE}/drakbackup");
 	}
 	if ($conf{DAEMON_TIME_SPACE} eq "custom" || !$backup_daemon) {
-		my $newdetail = join(" ", $time_string, $exec_string, "\n") if $backup_daemon;
+		my $newdetail = $backup_daemon && join(" ", $time_string, $exec_string, "\n");
 		system("crontab -l | tail +4 > $tmpcron");
 		my @cronlines = cat_($tmpcron);
 		my $index = 0;
@@ -398,7 +398,7 @@ sub save_cron_files() {
 			if (/$exec_string/) {
 				splice(@cronlines, $index, 1);
 			}
-			$index++
+			$index++;
 		}
 		push(@cronlines, $newdetail) if $backup_daemon;
 		output($tmpcron, @cronlines);
@@ -1182,7 +1182,7 @@ sub build_backup_files() {
 		$catalog .= ":Users=(@user_list)" unless $conf{NO_USER_FILES};
 		$catalog .= ":I" if $conf{USER_INCREMENTAL_BACKUPS} && !$conf{NO_USER_FILES} && !$conf{USER_DIFFERENTIAL_BACKUPS};
 		$catalog .= ":D" if $conf{USER_INCREMENTAL_BACKUPS} && !$conf{NO_USER_FILES} && $conf{USER_DIFFERENTIAL_BACKUPS};
-		$catalog .= ":F" if !$conf{USER_INCREMENTAL_BACKUPS} && !$conf{NO_USER_FILES};;
+		$catalog .= ":F" if !$conf{USER_INCREMENTAL_BACKUPS} && !$conf{NO_USER_FILES};
 		$catalog .= ":Other=(@other_files)" if $conf{OTHER_FILES};
 		$catalog .= ":I" if $conf{OTHER_INCREMENTAL_BACKUPS} && $conf{OTHER_FILES} && !$conf{OTHER_DIFFERENTIAL_BACKUPS};
 		$catalog .= ":D" if $conf{OTHER_INCREMENTAL_BACKUPS} && $conf{OTHER_FILES} && $conf{OTHER_DIFFERENTIAL_BACKUPS};
@@ -1249,6 +1249,8 @@ sub do_find {
 	#- $newer may be undef - if it's defined then "-cnewer $newer"
 	$newer = $conf{PATH_TO_SAVE} . "/" . $newer if defined($newer);
 	defined($newer) ? system("find @where -cnewer $newer $more_args > $into") : system("find @where $more_args > $into");
+	#- someone on club complained about perms being too open
+	chmod(0600, $into) if -e $into;
 }
 
 sub do_tar {
@@ -1261,6 +1263,8 @@ sub do_tar {
 		#- if $list_file is undefined, then use the @files list
 		defined($list_file) ? system("$tar_cmd -f $full_dest_file -T $list_file") : system("$tar_cmd -f $full_dest_file @files");
 	}
+	#- someone on club complained about perms being too open
+	chmod(0600, $full_dest_file) if -e $full_dest_file;
 	push_list($dest_file);
 }
 
@@ -1281,6 +1285,7 @@ sub files_to_results {
 		$results .= cat_("$conf{PATH_TO_SAVE}/list_" . $basename . $the_time . ".txt");
 	}
 	$results .= "\nignored:\n" . $ignore_files_list . "\n" if $ignore_files_list;
+
 }
 
 sub handle_ignores {
@@ -1377,6 +1382,8 @@ sub filedialog_generic {
 			$$widget->set_text($file_dialog->get_filename);
 		} else {
     		my $file_name = $file_dialog->get_filename;
+			#- catch files and dirs with spaces
+			$file_name = '"' . $file_name . '"' if $file_name =~ / /;
     		if (!member($file_name, @other_files)) {
 				push(@other_files, $file_name);
 				$list_model->append_set(0, $file_name);
@@ -1795,7 +1802,7 @@ sub advanced_where_cd {
 
     foreach ([$check_cdrw_erase, \$conf{MEDIA_ERASE}], [$check_dvdrw, \$conf{DVDRW}], [$check_dvdr, \$conf{DVDR}], [$check_dvdram, \$conf{DVDRAM}], [$check_multisession, \$conf{MULTI_SESSION}]) {
 		my $ref = $_->[1];
-		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 })
+		gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 });
 	}
     gtksignal_connect(gtkset_active($check_where_cd, $conf{USE_CD}), toggled => sub { 
 		$conf{USE_CD} = $conf{USE_CD} ? 0 : 1;
@@ -1963,7 +1970,7 @@ sub advanced_where_hd {
 				1, Gtk2::VBox->new(0, 6),
 				0, gtkset_size_request(gtkset_sensitive($save_path_entry = Gtk2::Entry->new, $conf{USE_HD}), 152, 20),
 				0, gtkset_sensitive($button = gtksignal_connect(Gtk2::Button->new,  clicked => sub {
-					filedialog_generic(N("Directory to save to"), \$save_path_entry) 
+					filedialog_generic(N("Directory to save to"), \$save_path_entry); 
 				}), $conf{USE_HD}),
 			),
 			0, Gtk2::VBox->new(0, 6),
@@ -2018,7 +2025,7 @@ sub advanced_where() {
 				}),
 				1, gtksignal_connect(my $button_where_tape = Gtk2::Button->new,  clicked => sub { 
 					destroy_widget(); 
-					advanced_where_tape(undef) 
+					advanced_where_tape(undef); 
 				}),
 				1, Gtk2::VBox->new(0, 5),
 			),
@@ -2166,7 +2173,7 @@ sub advanced_when() {
 		advanced_when();		
 	});
 	if ($custom_cron) {
-		$entry_crontab->set_text("$time_string $exec_string")
+		$entry_crontab->set_text("$time_string $exec_string");
 	}
 	
 	$combo_minute_when->entry->signal_connect('changed', sub { combo_to_cron_string($combo_minute_when->get_text - 1, 0) });
@@ -2280,7 +2287,7 @@ sub advanced_box() {
 
 sub wizard_step3() {
 	destroy_widget();
-	my $no_device = 1 if $conf{USE_CD} && $conf{CD_DEVICE} eq '' || $conf{USE_TAPE} && $conf{TAPE_DEVICE} eq '' || $conf{USE_NET} && $conf{NET_PROTO} eq '';
+	my $no_device = $conf{USE_CD} && $conf{CD_DEVICE} eq '' || $conf{USE_TAPE} && $conf{TAPE_DEVICE} eq '' || $conf{USE_NET} && $conf{NET_PROTO} eq '' && 1;
 	if ($no_device) {
 		show_warning("f", N("Backup destination not configured..."));
 		advanced_where_net_types(\&wizard_step2) if $conf{USE_NET};
@@ -2407,7 +2414,7 @@ sub wizard()   {
 			} else {
 				@user_list = ();
 			}
-		})
+		});
 	}
     if (!$conf{NO_SYS_FILES} || !$conf{NO_USER_FILES} && @user_list) { 
 		fonction_env(\$box2, \&wizard, \&interactive_mode_box, \&wizard_step2); 
@@ -2572,7 +2579,7 @@ sub select_user_data_to_restore() {
     @user_list_to_restore = ();
 	local $_;
 
-    -d $path_to_find_restore and my @list_backup_tmp2 = grep { /^backup/ } all($path_to_find_restore);
+    my @list_backup_tmp2 = -d $path_to_find_restore && grep { /^backup/ } all($path_to_find_restore);
     @list_tmp2 = @list_backup_tmp2;
     foreach (@list_backup_tmp2) {
 		s/_base//gi;
@@ -2953,7 +2960,7 @@ sub restore_step_user() {
 						if (!$check_user_to_restore{$name_complet}[1]) {
 							$check_user_to_restore{$name_complet}[1] = 1;
 							if (!any { /$name/ } @user_list_to_restore2) {
-								push @user_list_to_restore2, $name_complet 
+								push @user_list_to_restore2, $name_complet; 
 							}
 						} else {
 							$check_user_to_restore{$name_complet}[1] = 0;
@@ -3076,7 +3083,7 @@ sub restore_step2() {
 		$sys_exist = 0; $restore_sys = 0; 
 	}
     if (any { /_user_/ } grep { /^$info_prefix/ } all("$restore_info_path/")) { 
-		$user_exist = 1 
+		$user_exist = 1; 
 	} else { 
 		$user_exist = 0; $restore_user = 0; 
 	}
@@ -3131,7 +3138,7 @@ sub restore_step2() {
 				} else { 
 					$next_widget = \&restore_do; 
 				}
-			})
+			});
 	}
     gtksignal_connect(gtkset_active($check_restore_other_path, $restore_other_path), toggled => sub {
 		$restore_other_path = $restore_other_path ? 0 : 1;
@@ -3210,7 +3217,7 @@ sub find_files_to_restore() {
 								chop;
 								$model->append_set($list_entry, [ 0 => $_, 1 => $unselected, 2 => 0 ]);
 							}
-							$match = 1
+							$match = 1;
 						}
 					}
 					show_warning("i", N("No matches found...")) if $match == 0;
@@ -3400,7 +3407,7 @@ sub catalog_restore {
 	});
 	$button->add(gtkpack(Gtk2::HBox->new(0,10), gtkcreate_img("ic82-dossier-32")));
 	button_box_restore();
-	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore) if $call_method eq "need media";;
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, \&catalog_restore) if $call_method eq "need media";
 	fonction_env(\$catalog_box, \&catalog_restore, \&restore_box, \&catalog_restore) if $call_method eq "button";
 	$central_widget = \$catalog_box;	
     $up_box->show_all;
@@ -3763,7 +3770,7 @@ sub restore_box() {
 					1, Gtk2::VBox->new(0,10),
 					1, gtksignal_connect(Gtk2::Button->new(N("Search for files to restore")), clicked => sub { 
 						button_box_file_restore();
-						find_files_to_restore() 
+						find_files_to_restore(); 
 					}),
 					1, gtksignal_connect(Gtk2::Button->new(N("Restore all backups")), clicked => sub { 
 						button_box_restore();
@@ -3771,7 +3778,7 @@ sub restore_box() {
 						$restore_sys = 1;
 						$restore_other = 1;
 						$restore_user = 1;
-						restore_do() 
+						restore_do(); 
 					}),
 					1, gtksignal_connect(Gtk2::Button->new(N("Custom Restore")), clicked => sub { 
 						button_box_restore(); 
@@ -3788,7 +3795,7 @@ sub restore_box() {
 		);
     } else {
 		destroy_widget();
-		restore_find_media_box(),
+		restore_find_media_box();
 	}
     fonction_env(\$box2, \&restore_box, \&interactive_mode_box);
     $central_widget = \$box2;
@@ -3833,7 +3840,7 @@ sub restore_find_media_box() {
 					gtksignal_connect(Gtk2::Button->new(N("Search for files to restore")), clicked => sub { 
 						$box2->destroy;
 						button_box_file_restore();
-						find_files_to_restore() 
+						find_files_to_restore(); 
 					}),
 				),
 				Gtk2::VBox->new(0, 5),
