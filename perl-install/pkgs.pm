@@ -320,8 +320,9 @@ sub psUpdateHdlistsDeps {
     #- check if current configuration is still up-to-date and do not need to be updated.
     foreach (values %{$packages->{mediums}}) {
 	$_->{selected} || $_->{ignored} or next;
-	my $hdlistf = "$prefix/var/lib/urpmi/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
-	my $synthesisf = "$prefix/var/lib/urpmi/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
+	my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
+	my $hdlistf = "$urpmidir/hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
+	my $synthesisf = "$urpmidir/synthesis.hdlist.$_->{fakemedium}.cz" . ($_->{hdlist} =~ /\.cz2/ && "2");
 	if (-s $hdlistf != $_->{hdlist_size}) {
 	    install_any::getAndSaveFile("Mandrake/base/$_->{hdlist}", $hdlistf) or die "no $_->{hdlist} found";
 	    symlinkf $hdlistf, "/tmp/$_->{hdlist}";
@@ -335,7 +336,8 @@ sub psUpdateHdlistsDeps {
 
     if ($need_copy) {
 	#- this is necessary for urpmi.
-	install_any::getAndSaveFile("Mandrake/base/$_", "$prefix/var/lib/urpmi/$_") foreach qw(rpmsrate);
+	my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
+	install_any::getAndSaveFile("Mandrake/base/$_", "$urpmidir/$_") foreach qw(rpmsrate);
     }
 }
 
@@ -371,6 +373,7 @@ sub psUsingHdlists {
 sub psUsingHdlist {
     my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $o_fhdlist) = @_;
     my $fakemedium = "$descr ($method$medium)";
+    my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
@@ -386,16 +389,16 @@ sub psUsingHdlist {
 	      ignored    => !$selected, #- keep track of ignored medium by DrakX.
 	    };
 
-    #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
+    #- copy hdlist file directly to urpmi directory, this will be used
     #- for getting header of package during installation or after by urpmi.
-    my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
+    my $newf = "$urpmidir/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
     install_any::getAndSaveFile($o_fhdlist || "Mandrake/base/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
     #- if $o_fhdlist is defined, this is preferable not to try to find the associated synthesis.
-    my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
+    my $newsf = "$urpmidir/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     unless ($o_fhdlist) {
 	#- copy existing synthesis file too.
 	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
@@ -551,7 +554,8 @@ sub saveCompssUsers {
 	    }
 	}
     }
-    output "$prefix/var/lib/urpmi/compssUsers.flat", $flat;
+    my $urpmidir = -w "$prefix/var/lib/urpmi" ? "$prefix/var/lib/urpmi" : "/tmp";
+    output "$urpmidir/compssUsers.flat", $flat;
 }
 
 sub setSelectedFromCompssList {
