@@ -402,13 +402,14 @@ sub xfree_and_glx_choices {
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4 then ask user to keep XFree 3.3 ?
     if ($card->{UTAH_GLX}) {
-	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
+	my $e = { text => _("XFree %s with 3D hardware acceleration", $xf3_ver),
 			    code => sub { $card->{prefer_xf3} = 1; $card->{use_UTAH_GLX} = 1 },
 			    more_messages => ($card->{Driver} && !$card->{DRI_GLX} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)),
 			  };
+	$card->{prefer_xf3} ? unshift(@choices, $e) : push(@choices, $e);
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
