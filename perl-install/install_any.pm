@@ -617,7 +617,7 @@ sub ejectCdrom {
     eval { fs::umount("/tmp/image") };
     $@ and warnAboutFilesStillOpen();
     eval { 
-	my $dev = detect_devices::tryOpen($o_cdrom);	    
+	my $dev = detect_devices::tryOpen($cdrom);
 	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
     };
 }
