@@ -55,8 +55,13 @@ void log_perror(char *msg)
 
 static void fatal_error(char *msg)
 {
-	printf("[] fatal: %s\n[] giving hand to kernel.\n", msg);
+	printf("[] E: %s\n[] giving hand to kernel.\n", msg);
         exit(-1);
+}
+
+static void warning(char *msg)
+{
+	printf("[] W: %s\n", msg);
 }
 
 static void parse_parms(const char * parm, char ** parm1, char ** parm2, char ** parm3)
@@ -70,6 +75,9 @@ static void parse_parms(const char * parm, char ** parm1, char ** parm2, char **
 	*parm1 = malloc(ptr-parm+1); /* yup, never freed :-) */
 	memcpy(*parm1, parm, ptr-parm);
 	(*parm1)[ptr-parm] = '\0';
+
+	if (!parm2)
+		return;
 
 	*parm2 = strchr(*parm1, ' ');
 	if (!*parm2)
@@ -199,6 +207,32 @@ static void set_loop_(const char * parm)
 }
 
 
+#define MD_MAJOR 9
+#define RAID_AUTORUN           _IO (MD_MAJOR, 0x14)
+#include <linux/raid/md_u.h>
+
+static void raidautorun_(const char * parm)
+{
+	char * device;
+	int fd;
+
+	parse_parms(parm, &device, NULL, NULL);
+
+	printf("[] Calling raid autorun for %s\n", device);
+	
+	fd = open(device, O_RDWR, 0);
+	if (fd < 0) {
+		printf("raidautorun: failed to open %s: %d\n", device, errno);
+		return;
+	}
+	
+	if (ioctl(fd, RAID_AUTORUN, 0)) {
+		printf("raidautorun: RAID_AUTORUN failed: %d\n", errno);
+	}
+	
+	close(fd);
+}
+
 static int handle_command(char ** ptr, char * cmd_name, void (*cmd_func)(const char * parm))
 {
 	if (!strncmp(*ptr, cmd_name, strlen(cmd_name))) {
@@ -239,8 +273,9 @@ int main(int argc, char **argv)
 	while (*ptr)
 		if (!(handle_command(&ptr, "insmod", insmod_) +
 		      handle_command(&ptr, "mount", mount_) +
+		      handle_command(&ptr, "raidautorun", raidautorun_) +
 		      handle_command(&ptr, "set_loop", set_loop_)))
-			fatal_error("unkown command");
+			warning("unkown command (trying to continue)");
 
 	return 0;
 }
