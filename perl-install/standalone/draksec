@@ -56,11 +56,17 @@ $secure_level = ${{ getVarsFromSh("/etc/profile") }}{SECURE_LEVEL} || $ENV{SECUR
 #	     )
 
 my ($level, $libsafe);
+my %h = getVarsFromSh("$prefix/etc/sysconfig/system");
+$libsafe = $h{LIBSAFE};
+
 if ($in->ask_from('', _("Choose security level") . "\n\n" .
 		       join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
 		       [
 			{ label => _('Security level'), val => \$level, list => [ (values %l) ] },
-		        { label => _('Use libsafe'), val => \$libsafe, type => 'bool' }
+		        if_(pkgs_interactive::is_installed('libsafe') && arch() =~ /^i.86/,
+			    { label => _('Use libsafe for servers'), val => \$libsafe, type => 'bool', text =>
+			      _('A library which defends against buffer overflow and format string attacks.') }
+			   )
 		       ]
 		      )) {
     my $w = $in->wait_message('', _("Setting security level"));
