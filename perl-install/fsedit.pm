@@ -135,12 +135,24 @@ sub get_hds {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
 		    1;
-		} elsif (exists $hd->{usb_description} && fs::type::fs_type_from_magic($hd)) {
-		    #- non partitioned drive
-		    $hd->{fs_type} = fs::type::fs_type_from_magic($hd);
-		    push @raw_hds, $hd;
-		    $hd = '';
-		    1;
+		} elsif (my $type = fs::type::type_subpart_from_magic($hd)) {
+		    #- non partitioned drive?
+		    if (exists $hd->{usb_description} && $type->{fs_type}) {
+			#- USB keys
+			put_in_hash($hd, $type);
+			push @raw_hds, $hd;
+			$hd = '';
+			1;
+		    } elsif ($type->{pt_type} == 0x8e) {
+			#- LVM on full disk
+			my $part = { size => $hd->{totalsectors}, device => $hd->{device}, %$type };
+			bless $hd, 'partition_table::raw';
+			$hd->{readonly} = $hd->{getting_rid_of_readonly_allowed} = 1;
+			$hd->{primary}{normal} = [ $part ];
+			1;
+		    } else {
+			0;
+		    }
 		} else {
 		    0;
 		}

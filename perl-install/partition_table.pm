@@ -241,7 +241,7 @@ sub read_one($$) {
 	  if_(arch() =~ /^ia64/, 'gpt'),
 	  arch() =~ /^sparc/ ? ('sun', 'bsd') : ('dos', 'bsd', 'sun', 'mac'),
 	);
-	foreach ('empty', @parttype, 'lvm_PV', 'unknown') {
+	foreach ('empty', @parttype, 'unknown') {
 	    /unknown/ and die "unknown partition table format on disk " . $hd->{file};
 	    eval {
 		# perl_checker: require partition_table::bsd
