@@ -1,3 +1,159 @@
+2002/07/28  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/main.pm: fix displaying info about current configuration
+	14 new modules, will it be enough?? :)
+
+	* Xconfig/resolution_and_depth.pm: 
+	  - make the gtk resolution chooser work
+	  - dropped the differenciation between embedded or not
+	14 new modules, will it be enough?? :)
+
+	* install_steps_gtk.pm, install_gtk.pm, standalone.pm: adapt to new
+	Xconfig modules
+
+	* install_any.pm (g_auto_install): no need to handle $o->{X} as a special
+	case, it's already done by Xconfig::main::export_to_install_X
+
+	* mouse.pm (detect): return wacom inside $mouse
+	(mouseconfig): reduce the number of "Use of undefined value"
+	(set_xfree_conf): created
+
+	* install_steps.pm (configureX, configureXBefore, configureXAfter):
+	greatly simplified using new Xconfig stuff
+
+	* install2.pm: wacom is now inside $mouse
+
+	* standalone/XFdrake: 
+	  - adapt to new Xconfig modules
+	  - try out the new "XFdrake resolution" and "XFdrake monitor" that'll
+	get into DrakConf soon
+
+	* Xconfig/xfree3.pm, Xconfig/various.pm, Xconfig/parse.pm,
+	Xconfig/xfree.pm, Xconfig/test.pm, Xconfig/xfreeX.pm,
+	Xconfig/proprietary.pm, Xconfig/xfree4.pm, Xconfig/monitor.pm,
+	Xconfig/default.pm, Xconfig/screen.pm, Xconfig/FILES: 14 new modules,
+	will it be enough?? :)
+
+	* Xconfig.pm, Xconfigurator.pm, Xconfigurator_consts.pm: thou hast served
+	well, you may now lie in peace
+
+	* install_steps_interactive.pm (configureX): adapt to new Xconfig
+
+	* any.pm (running_window_manager): return the pids found if wanted
+	(ddcxinfos): ensure no probe is done when $::noauto
+
+	* Xconfig/card.pm: make perl_checker happy
+	rahh, don't commit my test code!
+	14 new modules, will it be enough?? :)
+
+	* common.pm (availableRamMB): use a precise constraint on 'Card:Intel 810'
+	instead of a regexp
+
+	* interactive.pm: fix "nicer error message when {val} is not set for
+	ask_from & list" in case of a reference to a reference (ref is REF
+	instead of SCALAR)
+
+2002/07/28  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Check for/install terminal-server and friends.
+	More intelligent error message when
+	mkisofs fails.  Cleanup code for use strict. Fix crash when no backup
+	dhcpd.conf.
+
+	* standalone/drakbackup: Numerous GUI crash fixes, oddities. Install
+	needed packages. Fix email, daemon modes.
+	Add rsync, webdav, cd, tape capabilities. Consolidate net method setup
+	screens.
+	Add CD device capability query.
+
+2002/07/27  alus
+
+	* share/po/pl.po: Fixes. There're some entries concerning mdk 8.2 - they
+	should be changed
+	globally
+
+2002/07/27  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (add_probeall): use "uniq" to have modules only once in
+	ddebug.log (a "uniq"
+	was already in modules.conf so it doesn't change the result)
+
+	* detect_devices.pm: use add_probeall for scsi_hostadapter, not add_alias
+	(may fix a bug reported by Jure Repinc)
+
+2002/07/27  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Completed implementation of the support for
+	HPOJ 0.9: Automatic photo card reader configuration, bugfixes.
+
+2002/07/26  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/logdrake: 
+	  - more consistency when back button hit in wizard mode
+	  - back button at last stage.
+
+	* standalone/drakbug: 
+	  - add browser list in case BROWSER env var isn't set
+
+2002/07/26  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/Makefile: fixed reference to rpmtools perl module.
+
+2002/07/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/rescue-gui.c: 
+	  - usage of attribute unused (has not been rebuilt since -W? ;p)
+	  - since i polluted the newt-frontend with probing functions, i
+	need to have probing functions (doing nothing) here :-((
+
+2002/07/26  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* harddrake/ui.pm: changed _("") -> "" empty strings must not be
+	translated
+
+2002/07/26  Pixel  <pixel@mandrakesoft.com>
+
+	* rescue/list: remove traceroute (c naze dixit gc)
+
+	* share/gen_locales.sh, lang.pm: hy is now using UTF8 locales
+
+	* any.pm, services.pm, install_steps.pm: use
+	run_program::rooted_get_stdout instead of `chroot $prefix ...`
+
+	* install_any.pm: use run_program::rooted_get_stdout
+
+	* Xconfigurator.pm: cleanup launching qiv (using run_program)
+
+	* bootloader.pm: 
+	  - fix dying when mkinitrd doesn't create an initrd
+	  - cleanup
+
+	* run_program.pm (rooted_get_stdout): handle one line return using
+	wantarray
+	  - also give the ability to redirect to an array ref
+	  - add rooted_get_stdout which is alike ``
+	add 2 functionalities to run_program:
+	  - run_program::run(prog, '>', 'STDOUT', ...)
+	run_program::run(prog, '2>', 'STDERR, ...)
+	  which will run with verbatim stdout or stderr
+	  - run_program::run(prog, '>', \$s, ...)
+	  run_program::run(prog, '2>', \$s, ...)
+	  which will return the stdout (resp. stderr) of the program in $s
+
+	* rescue/Makefile: ensure rescue is built and uploaded
+
+2002/07/26  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/TODO: dadou said "no expert mode"
+
+	* harddrake/ui.pm: 
+	  - s/channel/Channel/
+	  - bus_id is for usb devices too
+	  - remove obsolete fields info and name
+	  - add nbuttons, device, old_device descriptions
+
+	* drakxtools.spec: 13mdk
+
 2002/07/26  François Pons  <fpons@mandrakesoft.com>
 
 	* tools/Makefile: fixed reference to rpmtools perl module.
