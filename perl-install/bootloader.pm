@@ -149,7 +149,7 @@ sub add_entry {
     my ($bootloader, $v) = @_;
 
     foreach my $label ($v->{label}, map { 'old' . $_ . '_' . $v->{label} } ('', 2..10)) {
-	my $conflicting = get_label($v->{label}, $bootloader);
+	my $conflicting = get_label($label, $bootloader);
 	if ($conflicting && same_entries($conflicting, $v)) {
 	    #- removing $conflicting. 
 	    #- It's better than better $conflicting and not adding $v because same_entries can match not so same entries, esp. regarding symlinks
