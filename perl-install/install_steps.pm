@@ -750,8 +750,6 @@ sub addUser {
 	
 	$_->{uid} = $u; $uids{$u} = 1;
 	$_->{gid} = $g; $gids{$g} = 1;
-
-	push @{$_->{groups} ||= []}, 'usb' if $o->{security} <= 3;
     }
 
     any::write_passwd_user($p, $_, $o->{authentication}{md5}) foreach @$users;
@@ -954,7 +952,7 @@ sub miscellaneousBefore {
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
-    $o->{security} ||= any::get_secure_level($o->{prefix}) || ($o->{meta_class} eq 'server' ? 3 : 2);
+    $o->{security} ||= any::get_secure_level($o->{prefix}) || ($o->{meta_class} =~ /server|firewall/ ? 3 : 2);
 
     log::l("security $o->{security}");
 
