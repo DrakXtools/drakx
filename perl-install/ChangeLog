@@ -1,3 +1,83 @@
+2001/09/06  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, network/tools.pm: corrected speedtouch
+
+	* install_gtk.pm: removed comments
+	new mouse test
+
+2001/09/06  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: revert previous patch, this is not usable with current rpm as
+	it complains if
+	one the file has a modified MD5SUM against the header describing it in
+	the
+	hdlist, so this is most of the time useless.
+	guess filename if the file is not found (for an rpm file during
+	installation),
+	so try with release incremented in such case (good for Cooker user or
+	local
+	tester using network installation).
+
+	* install_steps.pm: fix log when configuring printer queue.
+
+	* Xconfigurator.pm: avoid using @resolutions_laptop, now use only
+	@resolutions, this means 1400x1050
+	is available to other, use XFree86 4.1.0 builtin timings for 1400x1050
+	(so
+	1400x1050 is no more printed as modeline for XFree 4.1.0 configuration
+	file).
+
+	* Xconfigurator_consts.pm: added 1400, 1920 and 2048 for %min_hsync4wres.
+	cleaned up a bit and using XFree86 4.1.0 builtin timings for 1400x1050
+	and
+	1920x1440, 2048x1536 has no modeline (but its min hsync is really high).
+
+	* install_any.pm: update printer data for g_auto_install.
+
+	* printerdrake.pm: revert previous commit.
+	added a missing ifup lo, on some case (auto_install) it fails.
+
+	* printer.pm: start ifup lo before starting service cups.
+
+2001/09/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+	* share/po/ga.po, share/po/no.po: updated Irish and Norwegian files
+
+2001/09/06  Pixel  <pixel@mandrakesoft.com>
+
+	* share/diskdrake.rc, fsedit.pm, diskdrake.pm: add journalised in legend,
+	fix the use
+
+	* diskdrake_interactive.pm (Add2LVM): do not allow spaces in lvm names
+
+	* fs.pm (merge_fstabs): correction allowing manual_fstab to not give the
+	type
+
+	* timezone.pm (ntp_server): fix (step-tickers was empty)
+
+2001/09/05  dam's  <damien@mandrakesoft.com>
+
+	* standalone/net_monitor, standalone/draknet: corrected opeions
+
+	* standalone/mousedrake: typo
+	updated
+
+	* network/tools.pm: corrected initcript
+
+	* pixmaps/mouse_middle.xpm, pixmaps/mouse_right.xpm,
+	pixmaps/mouse_left.xpm: new pixmaps
+
+2001/09/05  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/diskdrake: fix function called
+
+2001/09/05  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Set default printer (all spoolers), manual
+	config (CUPS), bugfixes, clean-ups.
+
 2001/09/05  dam's  <damien@mandrakesoft.com>
 
 	* pixmaps/wiz_default_left.png, pixmaps/wiz_default_up.png,
