@@ -143,6 +143,7 @@ sub get_alternative {
 
 sub do_switch {
     my ($in, $old_driver, $new_driver, $index) = @_;
+    return if $old_driver eq $new_driver;
     my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
@@ -168,7 +169,8 @@ sub switch {
     foreach (@blacklist) { $blacklisted = 1 if $driver eq $_ }
     my $alternative = get_alternative($driver);
     if ($alternative) {
-        my $new_driver = $alternative->[0];
+        my $new_driver = $driver;
+        push @$alternative, $driver;
         if ($new_driver eq 'unknown') {
             $in->ask_from(N("No alternative driver"),
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
