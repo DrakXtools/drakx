@@ -55,9 +55,7 @@ sub lvm_cmd_or_die {
 sub check {
     my ($in) = @_;
 
-    my $f = '/sbin/pvcreate';
-    -e $f or $in->do_pkgs->install('lvm');
-    -e $f or $in->ask_warn('', "Mandatory package lvm is missing"), return;
+    $in->do_pkgs->ensure_is_installed('lvm2', '/sbin/lvm2') or return;
     init();
     1;
 }
@@ -99,7 +97,7 @@ sub vg_add {
     my ($part) = @_;
     my $dev = expand_symlinks(devices::make($part->{device}));
     lvm_cmd_or_die('pvcreate', '-y', '-ff', $dev);
-    my $prog = lvm_cmd('vgdisplay', $part->{lvm}) ? 'vgextend' : 'vgcreate';
+    my $prog = lvm_cmd('vgs', $part->{lvm}) ? 'vgextend' : 'vgcreate';
     lvm_cmd_or_die($prog, $part->{lvm}, $dev);
 }
 
