@@ -1,3 +1,38 @@
+2003/09/22  François Pons  <fpons at mandrakesoft.com>
+
+	* install_steps_gtk.pm: try to follow what is wrong when requiring
+	multiple cds.
+
+	* install_steps.pm: avoid mounting partitions in recovery mode.
+	avoid urpmi source in oem to use cdrom (we now use disk instead,
+	avoiding
+	supermount problems).
+
+	* pkgs.pm: simplified code.
+	use kernel-i686 or kernel-enterprise as other kernel.
+
+	* network/network.pm: simplified perl writing, make sure bool2yesno has a
+	chance to be called for MII_NOT_SUPPORTED
+	fixed strange perl writing sense less...
+
+	* install2.pm: keep use_existing_root for recovery (behaviour changed
+	later)
+
+	* network/netconnect.pm: make sure module are loaded only during
+	installation.
+	try loading boot kernel modules before trying to start internet
+	connection...
+
+2003/09/22  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: dmi doesn't detect ht, but acpi does, so use it
+
+	* fs.pm: fix error message
+
+	* rescue/tree/etc/oem-all: 
+	  - fix typo
+	  - add CVS Id
+
 2003/09/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/pt.po, share/po/fa.po, share/po/eu.po, share/po/bs.po,
@@ -22307,7 +22342,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.843 2003/09/19 12:58:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.844 2003/09/22 08:15:36 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
