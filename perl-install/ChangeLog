@@ -1,3 +1,87 @@
+2001/12/17  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm, any.pm, install2.pm, bootloader.pm: clean_tmp now means using
+	tmpfs
+
+2001/12/14  François Pons  <fpons@mandrakesoft.com>
+
+	* mdk-stage1/init-data/msgboot-graphicallogo.img.bz2: new picture for 8.2.
+
+2001/12/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/update-pci-ids.pl: change again way of selection
+	PCI entries :
+	what's in mar files --> what's given by modules (e.g. just
+	as update_kernel does)
+
+2001/12/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install2.pm: use "askdisplay" to ask a question at begining of install
+	for what
+	display you want to use during install
+
+	* Makefile, tools/patch_pcmcia_config.pl: externalize patch_pcmcia_config
+	(from make_boot_img)
+	because we need it in perl-install/Makefile also
+
+	* mdk-stage1/rescue-gui.c, rescue/make_rescue_img, rescue/rescue-doc,
+	rescue/Makefile: have a bunch of Rescue documentation directly
+	available from the Rescue-menu following suggestions
+	by Denis among others
+
+2001/12/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm: enable easy screenshot'ing
+	  - ensure /usr is formatted if / is
+	  - remove /var/lib/rpm if /var is kept
+
+	* common.pm, docs/README: enable easy screenshot'ing
+
+2001/12/12  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* rescue/make_rescue_img: larger rescue image on PPC to accomodate huge
+	xfs module
+
+	* bootloader.pm: mods to address new yaboot's lack of symlink ability, xfs
+	initrd load
+
+2001/12/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/dhcp.c, mdk-stage1/stage1.h: support
+	"filename" in DHCP answers and give this
+	to stage2 as --kickstart parameter
+
+2001/12/11  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm, keyboard.pm: finish journalled fs usage - PPC,
+	add "\n" keyboard.pm, new modelines
+
+2001/12/10  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: added network package not present in @needToCopy
+	(package that may be installed
+	by DrakX to avoid re-asking of CD1).
+
+	* bootloader.pm: added safe guard against looping symlink.
+
+2001/12/10  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm, any.pm, bootloader.pm: 
+	  - fix bootloader::add_append
+	  - add handling of serial console
+
+	* http.pm, install_any.pm: enable http:// in auto_install file location
+
+2001/12/05  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: no need to give kernelVersion to bootloader::suggest
+
+	* install_any.pm (kernelVersion): looks at /boot/vmlinuz
+
+	* bootloader.pm (suggest, add_kernel): much cleanup
+
+	* diskdrake.pm: fix call to fileshare_config
+
 2001/12/05  dam's  <damien@mandrakesoft.com>
 
 	* share/logo-mandrake.png: updateed logo
