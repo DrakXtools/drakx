@@ -570,7 +570,7 @@ wait %d seconds for default boot.
 	       {
 		if_($options{vga_fb} && $ext eq '', vga => $options{vga_fb}), #- using framebuffer
 	       });
-	$entry->{append} .= " quiet" if $options{vga_fb} && $version !~ /smp|enterprise/ && $options{quiet};
+	$entry->{append} .= " splash=silent" if $options{vga_fb} && $version !~ /smp|enterprise/ && $options{quiet};
 
 	if ($options{vga_fb} && $ext eq '') {
 	    add_kernel($bootloader, $version, $ext, $root, { label => 'linux-nonfb' });
