@@ -921,6 +921,9 @@ sub miscellaneous {
     if ($o->{miscellaneous}{HDPARM}) {
 	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
     }
+    if (grep { /Athlon|Duron/ } cat_("/proc/cpuinfo")) {
+	$_ .= " mem=nopentium";
+    }
     #- keep some given parameters
     #-TODO
 
