@@ -1206,6 +1206,11 @@ postgresql-server
 mon
 );
 
+    my @_old_92 = qw(
+finger-server imap leafnode postfix ypbind ftp-server-krb5 telnet-server-krb5
+bind ibod samba-swat tftp-server
+);
+
     my @new_80 = qw(
 jabber
 MySQL
@@ -1230,8 +1235,7 @@ squid
 webmin
 wu-ftpd
 ypbind
-); # nfs-utils-clients portmap
-   # X server
+);
 
     my @new_81 = qw(
 apache-mod_perl
@@ -1256,7 +1260,26 @@ tftp-server
 ucd-snmp
 );
 
-    my @naughtyServers = (@new_80, @new_81, @new_82);
+    my @new_92 = qw(
+DansGuardian
+FreeWnn
+clusternfs
+gkrellm-server
+iplog
+krb5-server
+lisa
+mon
+net-snmp
+openldap-servers
+samba-server
+);
+
+    my @_not_warned = qw(
+nfs-utils-clients
+portmap
+); # X server
+
+    my @naughtyServers = (@new_80, @new_81, @new_82, @new_92);
 
     grep {
 	my $p = packageByName($packages, $_);
