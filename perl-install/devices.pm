@@ -88,6 +88,11 @@ sub entry {
 	$type = c::S_IFBLK();
 	$major = ($1 eq 'ida' ? 72 : 104) + $2;
 	$minor = 16 * $3 + ($4 || 0);
+    } elsif (m,(ataraid)/d(\d+)(?:p(\d+))?,) {
+	# ATA raid "ataraid/d0{p1}"
+	$type = c::S_IFBLK();
+	$major = 114;
+	$minor = 16 * $1 + ($2 || 0);
     } elsif (/(.*)(\d+)$/) {
 	    ($type, $major, $minor) =
 	     @{ ${{"fd"          => [ c::S_IFBLK(), 2,  0 ],
