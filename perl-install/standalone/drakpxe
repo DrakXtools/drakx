@@ -42,18 +42,17 @@ $::Wizard_title = N("PXE Server Configuration");
 $::direct = /-direct/;
 
 
-
-my $sysconf_network = "/etc/sysconfig/network";
-my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
-my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
-my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
-my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
-my $masq_file = "/etc/shorewall/masq";
-my $dhcpd_conf = "/etc/dhcpd.conf";
-my $cups_conf = "/etc/cups/cupsd.conf";
-
-my $shorewall = network::shorewall::read();
-
+#
+#my $sysconf_network = "/etc/sysconfig/network";
+#my $sysconf_dhcpd = "/etc/sysconfig/dhcpd";
+#my $rc_firewall_generic = "/etc/rc.d/rc.firewall";
+#my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
+#my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
+#my $masq_file = "/etc/shorewall/masq";
+#my $cups_conf = "/etc/cups/cupsd.conf";
+#
+#my $shorewall = network::shorewall::read();
+#
 #- get network configuration.
 my $netcnx = {};
 my $netc = {};
@@ -67,48 +66,29 @@ my $in = 'interactive'->vnew('su', 'default');
 
 pur_gtk_mode() if $::isEmbedded && $in->isa('interactive::gtk');
 
-sub sys { system(@_) == 0 or log::l("[drakgw] Warning, sys failed for $_[0]") }
+sub sys { system(@_) == 0 or log::l("[drakpxe] Warning, sys failed for $_[0]") }
 
 sub outpend { 
     log::explanations("modified file $_[0]");
     my $f = shift; local *F; open F, ">>$f" or die "outpend in file $f failed: $!\n"; print F foreach @_;
 }
 
-
-#vvvvvvvvvvvvvvvvvvv TODO
 sub start_daemons () {
     my $cups_used = 0;
     log::explanations("Starting daemons");
-    if (-f "/etc/rc.d/init.d/cups") {
-        if (system("/etc/rc.d/init.d/cups status >/dev/null") == 0) {
-           $cups_used = 1;
-           sys("/etc/rc.d/init.d/cups stop");
-        }
-    }
+
     system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
-    system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
-    my $netscripts = '/etc/sysconfig/network-scripts';
-    sys("$netscripts/net_cnx_down >/dev/null");
-    sys("/etc/rc.d/init.d/network restart >/dev/null");
-    sys("$netscripts/net_cnx_up >/dev/null");
-
-    sys("/etc/init.d/shorewall restart >/dev/null");
-
-    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
-    sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
+    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'httpd', 'dhcpd';
 }
 
 sub stop_daemons () {
     log::explanations("Stopping daemons");
-    foreach (qw(dhcpd named)) {
+    foreach (qw(dhcpd httpd)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
-    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear >/dev/null");
-    sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
+    sys("/sbin/chkconfig --level 345 $_ off") foreach 'dhcpd', 'httpd';
 }
-
-#^^^^^^^^^^^^^^^^^ TODO
 
 my $wait_configuring;
 
@@ -170,16 +150,25 @@ if (@intf < 1) {
 
 step_ip_range:
 
-my ($start_range, $end_range);
+#- read current configuration, or create a default suitable automatically.
+my $dhcpd_conf = parse_dhcpd_conf("/etc/dhcpd.conf", $netcnx, $netc, $intf[0]);
+
+#- get back default of ip.
+my $pool;
+foreach (@{$dhcpd_conf->{network}{pool}}) {
+    exists $_->{allow}{$dhcpd_conf->{class_PXE}} and $pool = $_, last;
+}
+my ($start_ip, $end_ip) = @{$pool || { start_ip => join('.', (split '\.', $intf[0]{NETWORK})[0..2], 16),
+				       end_ip   => join('.', (split '\.', $intf[0]{NETWORK})[0..2], 253) }}{qw(start_ip end_ip)};
 
 #- it become too complicated to handle address range, so ask user directly.
 $in->ask_from('DHCP Server Configuration',
 	      N("The DHCP server will allow other computer to boot using PXE in the given range of address.
 
-If you give an inexistant directory, you will be asked to insert Installation CD or DVD to copy the installation program and rpm files.
+The network address is %s using a netmask of %s.
 
-"), [ { label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
-      { label => N("The DHCP end range"), val => \$end_range, type => 'entry' }, ])
+", @{$intf[0]}{qw(NETWORK NETMASK)}), [ { label => N("The DHCP start ip"), val => \$start_ip, type => 'entry' },
+					{ label => N("The DHCP end ip"), val => \$end_ip, type => 'entry' }, ])
   or goto begin;
 
 
@@ -211,8 +200,9 @@ unless (-d $dir && -e "$dir/VERSION" && -d "$dir/isolinux" && -d "$dir/Mandrake/
 
 step_auto_install:
 
-my $auto_inst_cfg = ""; #- TODO change according configuration?
-    
+my $auto_inst_cfg = "Mandrake/base/auto_inst.cfg"; #- TODO change according configuration?
+-e "$dir/$auto_inst_cfg" or $auto_inst_cfg = '';
+
 $in->ask_from('Choose auto installation',
 	      N("Please indicate where the auto_install.cfg file is located.
 
@@ -222,177 +212,11 @@ Leave it blank if you do not want to set up automatic installation mode.
       [ { label => N("Location of auto_install.cfg file"), val => \$auto_inst_cfg, type => 'entry' }, ])
   or goto step_install_dir;
 
-__END__
-
-my @configured_devices = map { /ifcfg-(\S+)/ } glob('/etc/sysconfig/network-scripts/ifcfg*');
-
-my %aliased_devices; 
-/^\s*alias\s+(eth[0-9])\s+(\S+)/ and $aliased_devices{$1} = $2 foreach cat_("/etc/modules.conf");
-
-my $card_netconnect = network::netconnect::get_net_device();
-defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
-
-my @cards = grep {
-    log::l("[drakgw] Have network card: $_");
-    $_ ne $card_netconnect
-} detect_devices::getNet();
-log::l("[drakgw] Available network cards: ", join(", ", @cards));
-
-my $format = sub {
-    $aliased_devices{$_[0]} ?
-      N("Interface %s (using module %s)", $_[0], $aliased_devices{$_[0]}) :
-      N("Interface %s", $_[0]);
-};
-
-#- setup the network interface we shall use
-
-my $device;
-if (!@cards)
-{
-    $in->ask_warn(N("No network adapter on your system!"), 
-		  N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
-    quit_global($in, 0);
-}
-elsif (@cards == 1)
-{
-    $device = $cards[0];
-    $in->ask_okcancel(N("Network interface"),
-N("There is only one configured network adapter on your system:
-
-%s
-
-I am about to setup your Local Area Network with that adapter.", $format->($device)), 1) or goto step_ask_confirm;
-} else {
-    $device = $in->ask_from_listf(N("Choose the network interface"),
-				    N("Please choose what network adapter will be connected to your Local Area Network."),
-				     $format,
-				    \@cards,
-				    ) or goto step_ask_confirm;
-    defined $device or quit_global($in, 0);
-}
-log::explanations("Choosing network device: $device");
-
-
-my $lan_address = "192.168.1.0";
-my $server_ip = "192.168.1.1";
-my $nameserver_ip = "192.168.1.1";
-my $netmask = "255.255.255.0";
-my $start_range = "16";
-my $end_range = "253";
-my $default_lease = "21600";
-my $max_lease = "43200";
-my $internal_domain_name = "homeland.net";
-
-my $reconf_dhcp_server_intf = 1;
-
-if (grep(/$device/, @configured_devices)) {
-  step_warning_already_conf:
-    my $auto = N("Yes");
-		my $dhcp_details = N("Yes");
-    my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
-    $in->ask_from(N("Network interface already configured"),
-		  N("Warning, the network adapter (%s) is already configured.
-
-Do you want an automatic re-configuration?
-
-You can do it manually but you need to know what you're doing.", $device),
-		  [ { label => N("Automatic reconfiguration"), val => \$auto, list => [ N("Yes"), N("No (experts only)") ] },
-		    { val => N("Show current interface configuration"), clicked =>
-		      sub { $in->ask_warn(N("Current interface configuration"),
-					  N("Current configuration of `%s':
-
-Network: %s
-IP address: %s
-IP attribution: %s
-Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $aliased_devices{$device} || '(unknown)')) } } ]) or goto step_detectsetup;
-    
-    if ($auto ne N("Yes")) {
-	$reconf_dhcp_server_intf = 0;
-	$server_ip = $conf->{IPADDR};
-	$nameserver_ip = $conf->{IPADDR};
-	$lan_address = $conf->{NETWORK};
-	$in->ask_from('',
-		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
-
-The default DNS entry is the Caching Nameserver configured on the firewall. You can replace that with your ISP DNS IP, for example.
-		      
-Else, I can reconfigure your interface and (re)configure a DHCP server for you.
-
-", $device),
-      [ { label => N("Local Network adress"), val => \$lan_address, type => 'entry' },
-			{ label => N("Netmask"), val => \$netmask, type => 'entry' } ])
-		  or goto step_warning_already_conf;
-	$in->ask_from('',
-		      N("DHCP Server Configuration.
-
-Here you can select different options for the DHCP server configuration.
-If you don't know the meaning of an option, simply leave it as it is.
-
-", $device),
-			[ { label => N("(This) DHCP Server IP"), val => \$server_ip, type => 'entry' },
-			{ label => N("The DNS Server IP"), val => \$nameserver_ip, type => 'entry' },
-			{ label => N("The internal domain name"), val => \$internal_domain_name, type => 'entry' },
-			{ label => N("The DHCP start range"), val => \$start_range, type => 'entry' },
-			{ label => N("The DHCP end range"), val => \$end_range, type => 'entry' },
-			{ label => N("The default lease (in seconds)"), val => \$default_lease, type => 'entry' },
-			{ label => N("The maximum lease (in seconds)"), val => \$max_lease, type => 'entry' },
-			{ label => N("Re-configure interface and DHCP server"), val => \$reconf_dhcp_server_intf, type => 'bool' } ])
-	  or goto step_warning_already_conf;
-    }
-}
-    
-if (!($lan_address =~ s/\.0$//)) {
-    $in->ask_warn('', 
-		  N("The Local Network did not finish with `.0', bailing out."));
-    quit_global($in, 0);
-}
-log::explanations("Using LAN address <$lan_address>");
-
-
-#- test for potential conflict with other networks
-
-foreach (grep { $_ ne $device } @configured_devices)
-{
-    grep(/$lan_address/, cat_("/etc/sysconfig/network-scripts/ifcfg-$_")) and
-      ($in->ask_warn('', N("Potential LAN address conflict found in current config of %s!\n", $_)) or goto step_detectsetup);
-}
-
-
-#- test for potential conflict with previous firewall config
-network::shorewall::check_iptables($in) or goto step_detectsetup;
-
-#- **********************************
-#- * 2nd step: configure
-
-$wait_configuring = $in->wait_message(N("Configuring..."), 
-				      N("Configuring scripts, installing software, starting servers..."));
-
-
-#- setup the /etc/sysconfig/network-script/ script
-
-if ($reconf_dhcp_server_intf) {
-    log::explanations("Reconfiguring network parameters of $device");
-    my $network_scripts = "/etc/sysconfig/network-scripts";
-    my $ifcfg = "$network_scripts/ifcfg-$device";
-    renamef($ifcfg, "$network_scripts/old.ifcfg-$device");
-    output($ifcfg, qq(DEVICE=$device
-BOOTPROTO=static
-IPADDR=$server_ip
-NETMASK=$netmask
-NETWORK=$lan_address.0
-BROADCAST=$lan_address.255
-ONBOOT=yes
-));
-}
-
-
-#- install and setup the RPM packages
-
-my $rpms_to_install;
+#- now install packages...
 my %rpm2file = ('dhcp-server' => '/usr/sbin/dhcpd',
-		bind => '/usr/sbin/named',
-		shorewall => '/sbin/shorewall',
-		'caching-nameserver' => '/var/named/named.local');
+		pxe => '/usr/sbin/pxe',
+		'tftp-server' => '/usr/sbin/in.tftpd',
+		'apache' => '/usr/sbin/httpd' );
 
 #- first: try to install all in one step
 my @needed_to_install = grep { !-e $rpm2file{$_} } keys %rpm2file;
@@ -405,192 +229,276 @@ if (grep { !-e $rpm2file{$_} } keys %rpm2file) {
     }
 }
 
-put_in_hash($shorewall ||= {}, {
-    disabled => 0,
-    net_interface => $card_netconnect,
-    if_(@cards > 1, loc_interface => [ grep { $_ ne $device } @cards ]),
-    masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
-});
-
-network::shorewall::write($shorewall);
-
-#- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
-
-substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network;
-
-
-#- setup the DHCP server
-
-if ($reconf_dhcp_server_intf) {
-    log::explanations("Configuring a DHCP server on $lan_address.0");
-    renamef($dhcpd_conf, "$dhcpd_conf.old");
-    output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
-	# default gateway
-	option routers $server_ip;
-	option subnet-mask $netmask;
-
-	option domain-name "$internal_domain_name";
-	option domain-name-servers $nameserver_ip;
-
-	range dynamic-bootp $lan_address.$start_range $lan_address.$end_range;
-	default-lease-time $default_lease;
-	max-lease-time $max_lease;
+#- check if a pool already exist allowing PXE, else create one wich will be correct.
+if ($pool) {
+    @{$pool}{qw(start_ip end_ip)} = ($start_ip, $end_ip);
+} else {
+    $pool = { start_ip => $start_ip, end_ip => $end_ip };
+    foreach (keys %{$dhcpd_conf->{class}}) {
+	$pool->{$_ eq $dhcpd_conf->{class_PXE} ? 'allow' : 'deny'}{$_} = undef;
+    }
+    push @{$dhcpd_conf->{network}{pool}}, $pool;
 }
-));
+build_dhcpd_conf($dhcpd_conf, "/etc/dhcpd.conf");
+
+#- make kernel and initrd available for initrd.
+mkdir "/var/lib/tftpboot/PXEClient/images";
+sys("cp", "-af", "$dir/isolinux/alt0", "/var/lib/tftpboot/PXEClient/images/");
+
+my $pxelinux_cfg = parse_pxelinux_cfg("/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
+my $label = undef;
+foreach my $i (0..99) {
+    foreach my $e (@{$pxelinux_cfg->{entry}}) {
+	$e->{label} eq "halt$i" and $label = "halt$i", last;
+    }
+    defined $label or $label = "halt$i", last;
 }
+push @{$pxelinux_cfg->{entry}}, { label => $label, 
+				  kernel => "images/alt0/vmlinuz",
+				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$netc->{dnsServer},server:$intf[0]{IPADDR},directory:$dir root=/dev/ram3" };
+build_pxelinux_cfg($pxelinux_cfg, "/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 
-my $update_dhcp = '/usr/sbin/update_dhcp.pl';
--e $update_dhcp and system($update_dhcp);
+#- make directory available for httpd.
+log::explanations("Linking $dir in /var/www/html to make it available");
+system "mkdir", "-p", "/var/www/html/$dir";
+rmdir "/var/www/html/$dir";
+symlink $dir, "/var/www/html/$dir";
 
+#- sub for reading/writing dhcpd.conf and pxelinux.cfg/default...
+sub parse_dhcpd_conf {
+    my ($file, $netcnx, $netc, $intf) = @_;
+    my (%dhcpd_conf, $pool);
+    local (*F, $_);
 
-#- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
+    #- fake reading configuration from dhcpd.conf file which is really too complex for this tools.
+    $dhcpd_conf{class_PXE} = 'PXE';
+    $dhcpd_conf{class} = { PXE => undef, Etherboot => undef, known => undef };
+    add2hash($dhcpd_conf{network} = { pool => [] }, $intf);
+    add2hash($dhcpd_conf{network}, $netc);
 
-substInFile { s/^INTERFACES\n//; $_ .= "INTERFACES=\"$device\"\n" if eof } $sysconf_dhcpd;
-
-
-#- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
-#- working correctly: 
-#- 
-#-  1. ServerName <server's IP address>  # because clients do necessarily 
-#-                                       # know the server's name
-#-
-#-  2. BrowseAddress <server's Broadcast IP> # broadcast printer info into
-#-                                           # the local network.
-#-
-#-  3. BrowseOrder Deny,Allow
-#-     BrowseDeny All
-#-     BrowseAllow <IP mask for local net> # Only accept broadcast signals 
-#-                                         # coming from local network
-#-
-#-  4. <Location />
-#-     Order Deny,Allow
-#-     Deny From All
-#-     Allow From <IP mask for local net> # Allow only machines of local 
-#-     </Location>                        # network to access the server
-#-     
-#- These steps are only done when the CUPS package is installed.
-
-#- Modify the root location block in /etc/cups/cupsd.conf
-
-if (-f $cups_conf) {
-    log::explanations("Updating CUPS configuration accordingly");
-
-    substInFile {
-        s/^ServerName[^:].*\n//; $_ .= "ServerName $server_ip\n" if eof;
-        s/^BrowseAddress.*\n//; $_ .= "BrowseAddress $lan_address.255\n" if eof;
-        s/^BrowseOrder.*\n//; $_ .= "BrowseOrder Deny,Allow\n" if eof;
-        s/^BrowseDeny.*\n//; $_ .= "BrowseDeny All\n" if eof;
-        s/^BrowseAllow.*\n//; $_ .= "BrowseAllow $lan_address.*\n" if eof;
-    } $cups_conf;
-
-    my @cups_conf_content = cat_($cups_conf);
-    my @root_location; my $root_location_start; my $root_location_end;
-
-    # Cut out the root location block so that it can be treated seperately
-    # without affecting the rest of the file
-    if (grep(m|^\s*<Location\s+/\s*>|, @cups_conf_content)) {
-	$root_location_start = -1;
-	$root_location_end = -1;
-	# Go through all the lines, bail out when start and end line found
-	for (my $i = 0; $i < @cups_conf_content && $root_location_end == -1; $i++) {
-	    if ($cups_conf_content[$i] =~ m|^\s*<\s*Location\s+/\s*>|) {
-		$root_location_start = $i;
-	    } elsif ($cups_conf_content[$i] =~ m|^\s*<\s*/Location\s*>| && $root_location_start != -1) {
-		$root_location_end = $i;
+    if (open F, $file) {
+	while (<F>) {
+	    if (/^\s*pool\s*{/ .. /}/) {
+		/^\s*range\s+(\S+)\s+(\S+)\s*;/ and ($pool->{start_ip}, $pool->{end_ip}) = ($1, $2);
+		/^\s*(allow|deny)\s+members\s+of\s+"([^"]*)"\s*;/ and $pool->{$1}{$2} = undef;
+		/}/ and do { push @{$dhcpd_conf{network}{pool}}, $pool; $pool = undef };
 	    }
 	}
-	# Rip out the block and store it seperately
-	@root_location = splice(@cups_conf_content, $root_location_start, $root_location_end - $root_location_start + 1);
+	close F;
+    }
+
+    \%dhcpd_conf;
+}
+
+sub build_dhcpd_conf {
+    my ($dhcpd_conf, $file) = @_;
+    local *F;
+    open F, ">$file" or return;
+    log::explanations("Modified file $file");
+    print F qq[# for explanation in french go to : http://www.delafond.org/traducmanfr/man/man5/dhcpd.conf.5.html
+ddns-update-style none;
+allow booting;
+allow bootp;
+
+# Your dhcp server is not master on your network !
+#not authoritative;
+# Your dhcpd server is master on your network !
+#authoritative;
+not authoritative;
+
+#Interface where dhcpd is active
+DHCPD_INTERFACE = "$dhcpd_conf->{network}{DEVICE}";
+
+# Definition of PXE-specific options
+# Code 1: Multicast IP address of bootfile
+# Code 2: UDP port that client should monitor for MTFTP responses
+# Code 3: UDP port that MTFTP servers are using to listen for MTFTP requests
+# Code 4: Number of secondes a client must listen for activity before trying
+#         to start a new MTFTP transfer
+# Code 5: Number of secondes a client must listen before trying to restart
+#         a MTFTP transfer
+
+# define Option for the PXE class
+option space PXE;
+option PXE.mtftp-ip code 1 = ip-address;
+option PXE.mtftp-cport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option PXE.discovery-control code 6 = unsigned integer 8;
+option PXE.discovery-mcast-addr code 7 = ip-address;
+
+#Define options for pxelinux
+option space pxelinux;
+option pxelinux.magic      code 208 = string;
+option pxelinux.configfile code 209 = text;
+option pxelinux.pathprefix code 210 = text;
+option pxelinux.reboottime code 211 = unsigned integer 32;
+site-option-space "pxelinux";
+# These lines should be customized to your setup
+#option pxelinux.configfile "configs/common";
+#option pxelinux.pathprefix "/pxelinux/files/";
+#filename "/pxelinux/pxelinux.bin";
+				
+option pxelinux.magic f1:00:74:7e;
+option pxelinux.reboottime 30;
+#if exists dhcp-parameter-request-list {
+	# Always send the PXELINUX options
+#	append dhcp-parameter-request-list 208, 209, 210, 211;
+#	append dhcp-parameter-request-list 208,211;
+#					}
+
+#Class that determine the options for Etherboot 5.x requests
+class "Etherboot" {
+
+#if The vendor-class-identifier equal Etherboot-5.0
+match if substring (option vendor-class-identifier, 0, 13) = "Etherboot-5.0";
+
+# filename define the file retrieve by the client, there nbgrub
+# our tftp is chrooted so is just the path to the file
+filename "/etherboot/nbgrub";
+
+#Used by etherboot to detect a valid pxe dhcp server
+option vendor-encapsulated-options 3c:09:45:74:68:65:72:62:6f:6f:74:ff;
+
+# Set the  "vendor-class-identifier" field to "PXEClient" in dhcp answer        
+# if this field is not set the pxe client will ignore the answer !
+option vendor-class-identifier "Etherboot-5.0";
+
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+
+# IP of you TFTP server
+next-server $dhcpd_conf->{network}{IPADDR};
+}
+
+
+# create the Class PXE
+class "PXE" {
+# if the "vendor-class-identifier" is set to "PXEClient" in the client dhcp request
+match if substring(option vendor-class-identifier, 0, 9) = "PXEClient";
+  
+# filename define the file retrieve by the client, there pxelinux.0
+# our tftp is chrooted so is just the path to the file
+# If you prefer use grub, use pxegrub compiled for your ethernet card.
+#filename "/PXEClient/pxegrub";
+filename "/PXEClient/pxelinux.0";
+
+# Set the  "vendor-class-identifier" field to "PXEClient" in dhcp answer
+# if this field is not set the pxe client will ignore the answer !
+option vendor-class-identifier "PXEClient";
+
+				  
+vendor-option-space PXE;
+option PXE.mtftp-ip 0.0.0.0;
+
+# IP of you TFTP server
+next-server $dhcpd_conf->{network}{IPADDR};
+}
+
+# the class know exist just for deny the response to other DHCP request
+class "known" {
+  match hardware;
+  one-lease-per-client on;
+  ddns-updates on;
+  ddns-domainname = "$dhcpd_conf->{network}{DOMAINNAME}";
+  option domain-name "$dhcpd_conf->{network}{DOMAINNAME}";
+  option domain-name-servers $dhcpd_conf->{network}{dnsServer};
+  ddns-hostname = pick-first-value(ddns-hostname, option host-name);
+  option fqdn.no-client-update on;
+  set vendor_class_identifier = option vendor-class-identifier;
+}
+
+# Tags uses by setup_node_mac_to_dhcp
+# TAG: NODE_LIST_BEGIN
+
+# TAG: NODE_LIST_END
+shared-network "mynetwork" {
+  subnet $dhcpd_conf->{network}{NETWORK} netmask $dhcpd_conf->{network}{NETMASK} {
+  option subnet-mask $dhcpd_conf->{network}{NETMASK};
+  option routers $dhcpd_conf->{network}{GATEWAY};
+  default-lease-time 28800;
+  max-lease-time 86400;
+  option domain-name "$dhcpd_conf->{network}{DOMAINNAME}";
+  option domain-name-servers $dhcpd_conf->{network}{dnsServer};
+# Used by clusterautosetup-client to find its server
+  next-server $dhcpd_conf->{network}{IPADDR};
+
+];
+    foreach (@{$dhcpd_conf->{network}{pool}}) {
+	print F "    pool {
+       range $_->{start_ip} $_->{end_ip};
+";
+	print F "       allow members of \"$_\";\n" foreach keys %{$_->{allow}};
+	print F "       deny members of \"$_\";\n" foreach keys %{$_->{deny}};
+	print F "    }\n";
+    }
+print F qq[
+
+#   pool {
+#     range 192.168.200.200 192.168.200.254;
+# give an address of the the pool for PXE client and deny the other
+#allow members of "PXE";
+#deny members of "known";
+#allow members of "Etherboot";
+#        }
+  }
+}
+];
+    close F;
+}
+
+sub parse_pxelinux_cfg {
+    my ($file) = @_;
+    my (%pxelinux_cfg, $entry);
+    local (*F, $_);
+
+    if (open F, $file) {
+	while (<F>) {
+	    chomp;
+	    s/#.*//; next if /^\s*$/;
+	    if (/^\s*(PROMPT|DEFAULT|DISPLAY|TIMEOUT)\s+(.*)/i) {
+		$pxelinux_cfg{$1} = $2;
+	    } elsif (/^\s*label\s+(.*)/i) {
+		$entry and push @{$pxelinux_cfg{entry}}, $entry;
+		$entry = { label => $1 },
+	    } elsif (/^\s*(LOCALBOOT|KERNEL|APPEND)\s+(.*)/) {
+		$entry->{$1} = $2;
+	    } else {
+		log::l("ignoring line $. in file $file due to parsing error");
+	    }
+	}
+	$entry and push @{$pxelinux_cfg{entry}}, $entry;
+	close F;
     } else {
-	# If there is no root location block, create one
-	$root_location_start = @cups_conf_content;
-	@root_location = ("<Location />\n", "</Location>\n");
+	%pxelinux_cfg = ( PROMPT => 1,
+			  DEFAULT => "local",
+			  DISPLAY => "messages",
+			  TIMEOUT => 50,
+			  entry => [ label => "local",
+				     LOCALBOOT => 0 ],
+			);
     }
- 
-    # Delete all former "Order", "Allow", and "Deny" lines from the root location block
-    s/^\s*Order.*//, s/^\s*Allow.*//, s/^\s*Deny.*// foreach @root_location;
- 
-    # Add the new "Order" and "Deny" lines, add an "Allow" line for the local network
-    splice(@root_location, -1, 0, $_) foreach "Order Deny,Allow\n", "Deny From All\n", "Allow From 127.0.0.1\n",
-					       "Allow From $lan_address.*\n";
- 
-    # Put the changed root location block back into the file
-    splice(@cups_conf_content, $root_location_start, 0, @root_location);
- 
-    output $cups_conf, @cups_conf_content;
+    \%pxelinux_cfg;
 }
 
-
-#- start the daemons
-
-start_daemons();
-
-
-#- bye-bye message
-
-undef $wait_configuring;
-
-$::Wizard_no_previous = 1;
-$::Wizard_finished = 1;
-
-$in->ask_okcancel(N("Congratulations!"), 
-N("Everything has been configured.
-You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
-
-
-log::l("[drakgw] Installation complete, exiting");
-quit_global($in, 0);
-
-sub quit_global {
-    my ($in, $exitcode) = @_;
-    $in->exit($exitcode);
-    goto begin
-}
-
-sub pur_gtk_mode {
-    require ugtk2;
-    import ugtk2 qw(:wrappers :helpers :create);
-    my $setup_state = $shorewall && $shorewall->{masquerade} ? 
-                         ($shorewall->{disabled} ? 
-			  N("The setup has already been done, but it's currently disabled.") :
-			  N("The setup has already been done, and it's currently enabled.")) :
-			 N("No Internet Connection Sharing has ever been configured.");
-    
-    my $window1 = ugtk2->new('drakgw');
-    $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
-    unless ($::isEmbedded) {
-        $window1->{rwindow}->set_position('center');
-        $window1->{rwindow}->set_title(N("Internet connection sharing configuration"));
+sub build_pxelinux_cfg {
+    my ($pxelinux_cfg, $file) = @_;
+    my %pxelinux_cfg;
+    local *F;
+    open F, ">$file" or return;
+    log::explanations("Modified file $file");
+    foreach (keys %$pxelinux_cfg) {
+	/^entry$/ and next;
+	print F "$_ $pxelinux_cfg{$_}\n";
     }
-    $window1->{rwindow}->border_width(10);
-    my $vbox1 = new Gtk2::VBox(0,0);
-    $window1->{rwindow}->add($vbox1);
-    my $hbox1 = new Gtk2::HBox(0,0);
-    $vbox1->pack_start($hbox1,1,1,0);
-    my $label1 = new Gtk2::Label(
-N("Welcome to the Internet Connection Sharing utility!
-
-%s
-
-Click on Configure to launch the setup wizard.", $setup_state));
-    $hbox1->pack_start($label1,1,1,0);
-    my $hbox2 = new Gtk2::HBox(0,0);
-    $vbox1->pack_start($hbox2,1,1,0);
-    
-    my $bbox1 = new Gtk2::HButtonBox;
-    $vbox1->pack_start($bbox1,0,0,0);
-    $bbox1->set_layout('end');
-    my $button_conf = Gtk2::Button->new(N("Configure"));
-    $button_conf->signal_connect(clicked => sub {
-				       system("/usr/sbin/drakgw --wizard");
-				       ugtk2->exit(0);
-				   });
-    $bbox1->add($button_conf);
-    my $button_cancel = Gtk2::Button->new(N("Cancel"));
-    $button_cancel->signal_connect(clicked => sub { ugtk2->exit(0) });
-    $bbox1->add($button_cancel);
-    $window1->{rwindow}->show_all();
-    $window1->main;
-    ugtk2->exit(0);
-    
+    foreach my $e (@{$pxelinux_cfg{entry}}) {
+	print F "label $e->{label}\n";
+	foreach (keys %$e) {
+	    /^label$/ and next;
+	    print F "      $_ $e->{$_}\n";
+	}
+    }
+    close F;
 }
+
