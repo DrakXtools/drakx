@@ -31,12 +31,15 @@ sub end() { Newt::Finished() }
 sub exit() { end(); exit($_[1]) }
 END { end() }
 
-sub messages { warp_text(join("\n", @_), $width - 9) }
+sub messages { 
+    my ($width, @messages) = @_;
+    warp_text(join("\n", @messages), $width - 9);
+}
 
 sub myTextbox {
     my ($allow_scroll, $free_height, @messages) = @_;
 
-    my @l = messages(@messages);
+    my @l = messages($width, @messages);
     my $h = min($free_height - 13, int @l);
 
     my $want_scroll;
@@ -104,6 +107,11 @@ sub ask_fromW_real {
     #-the widgets
     my (@widgets, $total_size, $has_scroll);
 
+    my $label_width;
+    my $get_label_width = sub {
+	$label_width ||= max (map { length($_->{label}) } @l);
+    };
+
     my $set_all = sub {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}) foreach @widgets;
@@ -133,9 +141,16 @@ sub ask_fromW_real {
 	    $old_focus = $ind;
 	};
 
-	my ($w, $real_w, $set, $get, $expand, $size, $invalid_choice);
+	my ($w, $real_w, $set, $get, $expand, $size, $invalid_choice, $extra_text);
 	if ($e->{type} eq 'bool') {
-	    $w = Newt::Component::Checkbox($e->{text} || '', checkval(${$e->{val}}), " *");
+	    my $subwidth = $width - $get_label_width->() - 9;
+	    my @text = messages($subwidth, $e->{text} || '');
+	    $size = @text;
+	    $w = Newt::Component::Checkbox(shift(@text), checkval(${$e->{val}}), " *");
+	    if (@text) {
+		$extra_text = Newt::Component::Textbox(-1, -1, $subwidth, $size - 1, 0);
+		$extra_text->TextboxSetText(join("\n", @text));
+	    }
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
 	} elsif ($e->{type} eq 'button') {
@@ -233,7 +248,7 @@ sub ask_fromW_real {
 
 	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand, callback => $changed,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
-	  invalid_choice => \$invalid_choice };
+	  extra_text => $extra_text, invalid_choice => \$invalid_choice };
     };
     @widgets = map_index { $create_widget->($_, $::i) } @l;
 
@@ -241,14 +256,21 @@ sub ask_fromW_real {
 
     $set_all->();
 
-    my $grid = Newt::Grid::CreateGrid(3, max(1, int @l));
-    each_index {
-	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label($_->{e}{label})}, 0, 0, 1, 0, 1, 0);
-	$grid->GridSetField(1, $::i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
-    } @widgets;
+    my $grid = Newt::Grid::CreateGrid(3, max(1, sum(map { $_->{extra_text} ? 2 : 1 } @widgets)));
+    my $i;
+    foreach (@widgets) {
+	$grid->GridSetField(0, $i, 1, ${Newt::Component::Label($_->{e}{label})}, 0, 0, 1, 0, 1, 0);
+	$grid->GridSetField(1, $i, 1, ${$_->{real_w}}, 0, 0, 0, 0, 1, 0);
+	$i++;
+	if ($_->{extra_text}) {
+	    $grid->GridSetField(0, $i, 1, ${Newt::Component::Label('')}, 0, 0, 1, 0, 1, 0);
+	    $grid->GridSetField(1, $i, 1, ${$_->{extra_text}}, 0, 0, 0, 0, 1, 0);
+	    $i++;
+	}
+    }
 
     my $listg = do {
-	my $wanted_header_height = min(8, listlength(messages(@messages)));
+	my $wanted_header_height = min(8, listlength(messages($width, @messages)));
 	my $height_avail = $height - $wanted_header_height - 13;
 	#- use a scrolled window if there is a lot of checkboxes (aka 
 	#- ask_many_from_list) or a lot of widgets in general (aka
