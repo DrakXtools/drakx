@@ -3442,64 +3442,80 @@ sub wizard_close {
 
 #- Program entry point for configuration of the printing system.
 sub main {
-    my ($printer, $in, $normal_run, $upNetwork) = @_;
+    my ($printer, $in, $install_step, $upNetwork) = @_;
+    # $install_step is only made use of during the installation. It is
+    # 0 when this function is called during the preparation of the "Summary"
+    # screen and 1 when the user clicks on "Configure" on the "Summary" 
+    # screen
 
-    # Save the user mode, so that the same one is used on the next start
-    # of Printerdrake
-    printer::main::set_usermode($::expert);
+    # Initialization of Printerdrake and queue auto-installation:
+    # During installation we do this step only once, when we prepare
+    # the "Summary" screen in case of detected local printers or when
+    # the "Configure" button in the "Printer" entry of the "Summary"
+    # screen is clicked. If the button is clicked after an automatic
+    # installation of local printers or if it is clicked for the
+    # second time, these steps are not repeated.
+    if (!$::isInstall || !$::printerdrake_initialized) {
+	# Save the user mode, so that the same one is used on the next start
+	# of Printerdrake
+	printer::main::set_usermode($::expert);
 
-    # Default printer name, we do not use "lp" so that one can switch the
-    # default printer under LPD without needing to rename another printer.
-    # Under LPD the alias "lp" will be given to the default printer.
-    my $defaultprname = N("Printer");
+	# printerdrake does not work without foomatic, and for more
+	# convenience we install some more stuff
+        {
+	    my $_w = $in->wait_message(N("Printerdrake"),
+				       N("Checking installed software..."));
+	    if (!$::testing &&
+		!files_exist(qw(/usr/bin/foomatic-configure
+				/usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
+				/usr/bin/foomatic-rip
+				/usr/share/foomatic/db/source/driver/ljet4.xml
+				/usr/bin/escputil
+				/usr/share/printer-testpages/testprint.ps
+				/usr/bin/nmap
+				/usr/bin/scli
+				),
+			     if_(files_exist("/usr/bin/gimp"),
+				 "/usr/lib/gimp/1.2/plug-ins/print")
+			     )) {
+		$in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
+				      'foomatic-db', 'printer-utils',
+				      'printer-testpages', 'nmap', 'scli',
+				      if_($in->do_pkgs->is_installed('gimp'),
+					  'gimpprint'));
+	    }
 
-    # printerdrake does not work without foomatic, and for more convenience
-    # we install some more stuff
-    {
-	my $_w = $in->wait_message(N("Printerdrake"),
-				   N("Checking installed software..."));
-	if (!$::testing &&
-	    !files_exist(qw(/usr/bin/foomatic-configure
-			    /usr/lib/perl5/vendor_perl/5.8.0/Foomatic/DB.pm
-			    /usr/bin/foomatic-rip
-			    /usr/share/foomatic/db/source/driver/ljet4.xml
-			    /usr/bin/escputil
-			    /usr/share/printer-testpages/testprint.ps
-			    /usr/bin/nmap
-			    /usr/bin/scli
-			    ),
-			 if_(files_exist("/usr/bin/gimp"),
-			     "/usr/lib/gimp/1.2/plug-ins/print")
-			 )) {
-	    $in->do_pkgs->install('foomatic-db-engine', 'foomatic-filters',
-				  'foomatic-db', 'printer-utils',
-				  'printer-testpages', 'nmap', 'scli',
-				  if_($in->do_pkgs->is_installed('gimp'),
-				      'gimpprint'));
+	    # only experts should be asked for the spooler
+	    $printer->{SPOOLER} ||= 'cups' if !$::expert;
+
 	}
 
-	# only experts should be asked for the spooler
-	$printer->{SPOOLER} ||= 'cups' if !$::expert;
+	# If we have chosen a spooler, install it and mark it as default 
+        # spooler
+	if ($printer->{SPOOLER}) {
+	    return unless install_spooler($printer, $in, $upNetwork);
+	    printer::default::set_spooler($printer);
+	}
 
+        # Get the default printer (Done after non-interactive queue setup,
+        # so that these queues are taken into account)
+        assure_default_printer_is_set($printer, $in);
+
+        # Non-interactive setup of newly detected printers (This is done
+	# only when not in expert mode, so we always have a spooler defined
+        # here)
+        configure_new_printers($printer, $in, $upNetwork);
+
+	# Mark this part as done, it should not be done a second time.
+	if ($::isInstall) {
+	    $::printerdrake_initialized = 1;
+	}
     }
 
-    # If we have chosen a spooler, install it and mark it as default spooler
-    if ($printer->{SPOOLER}) {
-        return unless install_spooler($printer, $in, $upNetwork);
-        printer::default::set_spooler($printer);
-    }
-
-    # Get the default printer (Done after non-interactive queue setup, so
-    # that these queues are taken into account)
-    assure_default_printer_is_set($printer, $in);
-
-    # Non-interactive setup of newly detected printers (This is done only
-    # when not in expert mode, so we always have a spooler defined here)
-    configure_new_printers($printer, $in, $upNetwork);
-
-    # For preparation of the "Summary" step of the installation all is done
-    # now. We do not go into the main loop
-    if ($normal_run) {
+    # Main loop: During installation we only enter it when the user has
+    # clicked on the "Configure" button in the "Summary" step. We do not
+    # call it during the preparation of the "Summary" screen.
+    if (!$::isInstall || ($install_step == 1)) {
 
 	# Ask for a spooler when none is defined yet
 	$printer->{SPOOLER} ||= 
@@ -3511,6 +3527,12 @@ sub main {
 	$printer->{AUTODETECTNETWORK} = 1;
 	$printer->{AUTODETECTSMB} = 1;
 	
+	# Default printer name, we do not use "lp" so that one can
+	# switch the default printer under LPD without needing to
+	# rename another printer.  Under LPD the alias "lp" will be
+	# given to the default printer.
+	my $defaultprname = N("Printer");
+
 	# Control variables for the main loop
 	my ($menuchoice, $cursorpos, $queue, $newqueue, $editqueue) =
 	    ('', '::', $defaultprname, 0, 0);
@@ -4020,6 +4042,15 @@ What do you want to modify on this printer?",
 	    $printer->{complete} = 0;
 	}
     }
+    # In the installation we call the clean-up manually when we leave 
+    # the "Summary" step
+    if (!$::isInstall) {
+	final_cleanup($printer);
+    }
+}
+
+sub final_cleanup {
+    my ($printer) = @_;
     # Clean up the $printer data structure for auto-install log
     foreach my $queue (keys %{$printer->{configured}}) {
 	foreach my $item (keys %{$printer->{configured}{$queue}}) {
@@ -4027,7 +4058,7 @@ What do you want to modify on this printer?",
 	}
 	delete($printer->{configured}{$queue}{queuedata}{menuentry});
     }
-    foreach (qw(Old_queue QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB))
+    foreach (qw(Old_queue OLD_QUEUE QUEUE TYPE str_type currentqueue DBENTRY ARGS complete OLD_CHOICE NEW MORETHANONE MANUALMODEL AUTODETECT AUTODETECTLOCAL AUTODETECTNETWORK AUTODETECTSMB noninteractive))
     { delete $printer->{$_} };
 }
 

@@ -1045,6 +1045,7 @@ sub summary {
 
     $o->summary_prompt(\@l, $check_complete);
 
+    $o->cleanupPrinter();
     install_steps::configureTimezone($o) if !$timezone_manually_set;  #- do not forget it.
 }
 
@@ -1056,15 +1057,18 @@ sub configurePrinter {
     require printer::printerdrake;
     require printer::detect;
 
-    #- try to determine if a question should be asked to the user or
-    #- if he is autorized to configure multiple queues.
-    my $ask_multiple_printer = $clicked ? 2 : $o && printer::detect::local_detect();
-    $ask_multiple_printer-- or return;
+    #- $clicked = 0: Preparation of "Summary" step, check whether there are
+    #- are local printers. Continue for automatically setting up print
+    #- queues if so, return otherwise
+    #- $clicked = 1: User clicked "Configure" button in "Summary", enter
+    #- Printerdrake for manual configuration
+    my $go_on = $clicked ? 2 : $o && printer::detect::local_detect();
+    $go_on-- or return;
 
     #- install packages needed for printer::getinfo()
     $::testing or $o->do_pkgs->install('foomatic-db-engine');
 
-    #- take default configuration, this include choosing the right system
+    #- take default configuration, this include choosing the right spooler
     #- currently used by the system.
     my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::main::getinfo($o->{prefix})) };
@@ -1074,6 +1078,15 @@ sub configurePrinter {
 
 }
 
+sub cleanupPrinter {
+    my ($o) = @_;
+    #- Clean up $o->{printer} so that the records for an auto-installation
+    #- contain only the important stuff
+    return if !defined($o->{printer});
+    require printer::printerdrake;
+    printer::printerdrake::final_cleanup($o->{printer});
+}
+    
 #------------------------------------------------------------------------------
 sub setRootPassword {
     my ($o, $clicked) = @_;
