@@ -31,7 +31,8 @@ sub installPackages {
 					     meta_class => 'desktop', 
 					     default_packages => [
                                  qw(XFree86-server XFree86-xfs XFree86-FBDev),
-                                 qw(acpi acpid)  #- so that removing acpi=ht will work
+                                 qw(acpi acpid), #- so that removing acpi=ht will work
+				 qw(mountloop),	#- crypted folders
                                                                  ],
 					    });
 
