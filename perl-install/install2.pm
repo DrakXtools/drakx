@@ -371,7 +371,7 @@ sub miscellaneous {
 
 	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
 	run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-    } 'doInstallStep';
+    } 'setupBootloader';
 }
 
 #------------------------------------------------------------------------------

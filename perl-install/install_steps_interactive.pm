@@ -625,6 +625,7 @@ _("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
 $o->{security} < 4 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
+_("Password (again)") => { val => \$b->{password2}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
 )
 	);
@@ -635,6 +636,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 				 complete => sub {
 #-				     $o->{security} > 4 && length($b->{password}) < 6 and $o->ask_warn('', _("At this level of security, a password (and a good one) in lilo is requested")), return 1;
 				     $b->{restricted} && !$b->{password} and $o->ask_warn('', _("Option ``Restrict command line options'' is of no use without a password")), return 1;
+				     $b->{password} eq $b->{password2} or !$b->{restricted} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return 1;
 				     0;
 				 }
 				) or return;
