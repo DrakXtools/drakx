@@ -30,12 +30,7 @@ my $prev_kernel = { getVarsFromSh("$hw_sysconfdir/kernel") }->{KERNEL};
 my $curr_kernel = c::kernel_version();
 $curr_kernel =~ s/(^\d+\.\d+).*/$1/;
 setVarsInSh("$hw_sysconfdir/kernel", { KERNEL => $curr_kernel });
-if ($curr_kernel ne $prev_kernel) {
-    log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
-    require do_pkgs;
-    require mouse;
-    mouse::write_conf(do_pkgs_standalone->new, $modules_conf, mouse::detect($modules_conf), 1);
-}
+harddrake::autoconf::mouse_conf($modules_conf) if $curr_kernel ne $prev_kernel;
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
@@ -133,6 +128,8 @@ foreach my $hw_class (@harddrake::data::tree) {
         require harddrake::autoconf;
         harddrake::autoconf::xconf($modules_conf, {});
         next;
+    } elsif ($Ident eq "MOUSE") {
+        harddrake::autoconf::mouse_conf($modules_conf);
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};

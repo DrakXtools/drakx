@@ -272,6 +272,7 @@ our @tree =
           mouse::detect($modules_conf);
       },
       checked_on_boot => 1,
+      automatic => 1,
      },
 
      {

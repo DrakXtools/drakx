@@ -24,4 +24,12 @@ sub network_conf {
     network::network::easy_dhcp($obj->{modules_conf}, $obj->{netc}, $obj->{intf}) and $obj->{netcnx}{type} = 'lan';
 }
 
+sub mouse_conf {
+    my ($modules_conf) = @_;
+    log::explanations("Autoconfiguring mouse since we switched between 2.4.x and 2.6.x kernels");
+    require do_pkgs;
+    require mouse;
+    mouse::write_conf(do_pkgs_standalone->new, $modules_conf, mouse::detect($modules_conf), 1);
+}
+
 1;
