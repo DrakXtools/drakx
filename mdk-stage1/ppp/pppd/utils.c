@@ -44,6 +44,7 @@
 #endif
 
 #include "pppd.h"
+#include <time.h>
 
 static const char rcsid[] = RCSID;
 

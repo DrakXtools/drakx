@@ -23,6 +23,9 @@
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <errno.h>
+#include <stdio.h>
+#include <resolv.h>
+#include <signal.h>
 
 #include "stage1.h"
 #include "log.h"
@@ -30,19 +33,89 @@
 #include "modules.h"
 #include "tools.h"
 #include "frontend.h"
+#include "automatic.h"
 
 #include "adsl.h"
 
+
+static enum return_type adsl_connect(char * net_device, char * username, char * password)
+{
+	char pppoe_call[500];
+	char * pppd_launch[] = { "/sbin/pppd", "pty", pppoe_call, "noipdefault", "noauth", "default-asyncmap", "defaultroute",
+				 "hide-password", "nodetach", "usepeerdns", "local", "mtu", "1492", "mru", "1492", "noaccomp",
+				 "noccp", "nobsdcomp", "nodeflate", "nopcomp", "novj", "novjccomp", "user", username,
+				 "password", password, "lcp-echo-interval", "20", "lcp-echo-failure", "3", "lock", "persist", NULL };
+	int fd;
+	int retries = 10;
+	char * tty_adsl = "/dev/tty6";
+	enum return_type status = RETURN_ERROR;
+	pid_t ppp_pid;
+
+	snprintf(pppoe_call, sizeof(pppoe_call), "/sbin/pppoe -p /var/run/pppoe.conf-adsl.pid.pppoe -I %s -T 80 -U -m 1412", net_device);
+
+
+	fd = open(tty_adsl, O_RDWR);
+	if (fd == -1) {
+		log_message("cannot open tty -- no pppd");
+		return RETURN_ERROR;
+	}
+	else if (access(pppd_launch[0], X_OK)) {
+		log_message("cannot open pppd - %s doesn't exist", pppd_launch[0]);
+		return RETURN_ERROR;
+	}
+
+	if (!(ppp_pid = fork())) {
+		dup2(fd, 0);
+		dup2(fd, 1);
+		dup2(fd, 2);
+		
+		close(fd);
+		setsid();
+		if (ioctl(0, TIOCSCTTY, NULL))
+			log_perror("could not set new controlling tty");
+		
+		printf("\t(exec of pppd)\n");
+		execve(pppd_launch[0], pppd_launch, grab_env());
+		log_message("execve of %s failed: %s", pppd_launch[0], strerror(errno));
+		exit(-1);
+	}
+	close(fd);
+	while (retries > 0 && kill(ppp_pid, 0) == 0) {
+		FILE * f;
+		if ((f = fopen("/var/run/pppd.tdb", "rb"))) {
+			while (1) {
+				char buf[500];
+				if (!fgets(buf, sizeof(buf), f))
+					break;
+				if (strstr(buf, "IPLOCAL="))
+					status = RETURN_OK;
+			}
+			fclose(f);
+			if (status == RETURN_OK) {
+				log_message("PPP: connected!");
+				break;
+			}
+		}
+		retries--;
+		log_message("PPP: <sleep>");
+		sleep(2);
+	}
+
+	if (status != RETURN_OK) {
+		kill(ppp_pid, SIGTERM);
+		log_message("PPP: could not connect");
+	}
+	return status;
+}
+
+
 enum return_type perform_adsl(struct interface_info * intf)
 {
-	char * pppd_launch[] = { "/sbin/pppd", "pty", "/sbin/pppoe -p /var/run/pppoe.conf-adsl.pid.pppoe -I eth0 -T 80 -U  -m 1412",
-				 "noipdefault", "noauth", "default-asyncmap", "defaultroute", "hide-password", "nodetach", "usepeerdns",
-				 "local", "mtu", "1492", "mru", "1492", "noaccomp", "noccp", "nobsdcomp", "nodeflate", "nopcomp", 
-				 "novj", "novjccomp", "user", "netissimo@netissimo", "lcp-echo-interval", "20", "lcp-echo-failure",
-				 "3", NULL };
-	int fd;
-	
 	struct in_addr addr;
+	char * questions[] = { "Username", "Password", NULL };
+	char * questions_auto[] = { "user", "pass", NULL };
+	static char ** answers = NULL;
+	enum return_type results;
 
 	if (strncmp(intf->device, "eth", 3)) {
 		stg1_error_message("ADSL available only for Ethernet networking (through PPPoE).");
@@ -65,42 +138,32 @@ enum return_type perform_adsl(struct interface_info * intf)
 		return RETURN_ERROR;
 	}
 
+	results = ask_from_entries_auto("Please enter the username and password for your ADSL account.\n"
+					"(Warning! only PPPoE protocol is supported)",
+					questions, &answers, 40, questions_auto, NULL);
+	if (results != RETURN_OK)
+		return results;
+
+	wait_message("Waiting for ADSL connection to show up...");
 	my_insmod("ppp_generic", ANY_DRIVER_TYPE, NULL);
 	my_insmod("ppp_async", ANY_DRIVER_TYPE, NULL);
-	my_insmod("ppp_synctty", ANY_DRIVER_TYPE, NULL);
 	my_insmod("ppp", ANY_DRIVER_TYPE, NULL);
+	results = adsl_connect(intf->device, answers[0], answers[1]);
+	remove_wait_message();
 
-	stg1_info_message("Interface %s seems ready.", intf->device);
-
-	
-	fd = open("/dev/tty6", O_RDWR);
-	if (fd == -1) {
-		log_message("cannot open /dev/tty6 -- no pppd");
-		return RETURN_ERROR;
-	}
-	else if (access(pppd_launch[0], X_OK)) {
-		log_message("cannot open pppd - %s doesn't exist", pppd_launch[0]);
-		return RETURN_ERROR;
+	if (results != RETURN_OK) {
+		wait_message("Retrying the ADSL connection...");
+		results = adsl_connect(intf->device, answers[0], answers[1]);
+		remove_wait_message();
 	}
 
-	if (!fork()) {
-		dup2(fd, 0);
-		dup2(fd, 1);
-		dup2(fd, 2);
-		
-		close(fd);
-		setsid();
-		if (ioctl(0, TIOCSCTTY, NULL))
-			log_perror("could not set new controlling tty");
-	
-		execve(pppd_launch[0], pppd_launch, grab_env());
-		log_message("execve of %s failed: %s", pppd_launch[0], strerror(errno));
+	if (results != RETURN_OK) {
+		stg1_error_message("I could not connect to the ADSL network.");
+		return perform_adsl(intf);
 	}
 
-	close(fd);
-
-	stg1_info_message("Forked for %s.", intf->device);
+	sleep(1);
+	res_init();		/* reinit the resolver, pppd modified /etc/resolv.conf */
 
 	return RETURN_OK;
-
 }

@@ -13,9 +13,10 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
+#include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
 #include <netdb.h>
 #include <errno.h>
 #include <signal.h>

@@ -1415,9 +1415,24 @@ device_script(program, in, out, dont_wait)
 	exit(1);
     }
     setgid(getgid());
-    execl("/bin/sh", "sh", "-c", program, (char *)0);
-    error("could not exec /bin/sh: %m");
-    exit(99);
+    {
+	    int argc = 0;
+	    char * argv[500];
+	    char * ptr = program;
+	    while (ptr != NULL) {
+		    argv[argc] = ptr;
+		    argc++;
+		    ptr = strchr(ptr, ' ');
+		    if (ptr) {
+			    ptr[0] = '\0';
+			    ptr++;
+		    }
+	    }
+	    argv[argc] = NULL;
+	    execv(argv[0], argv);
+	    error("could not exec %s: %m", program);
+	    exit(99);
+    }
     /* NOTREACHED */
 }
 

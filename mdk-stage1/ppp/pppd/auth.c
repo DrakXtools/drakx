@@ -76,6 +76,8 @@
 #endif
 #include "pathnames.h"
 
+#include <time.h>
+
 static const char rcsid[] = RCSID;
 
 /* Bits in scan_authfile return value */
@@ -1183,7 +1185,7 @@ plogin(user, passwd, msg)
     tty = devnam;
     if (strncmp(tty, "/dev/", 5) == 0)
 	tty += 5;
-    logwtmp(tty, user, remote_name);		/* Add wtmp login entry */
+//    logwtmp(tty, user, remote_name);		/* Add wtmp login entry */
 
 #if defined(_PATH_LASTLOG) && !defined(USE_PAM)
     if (pw != (struct passwd *)NULL) {
@@ -1229,7 +1231,7 @@ plogout()
     tty = devnam;
     if (strncmp(tty, "/dev/", 5) == 0)
 	tty += 5;
-    logwtmp(tty, "", "");		/* Wipe out utmp logout entry */
+//    logwtmp(tty, "", "");		/* Wipe out utmp logout entry */
 #endif /* ! USE_PAM */
     logged_in = 0;
 }
@@ -1475,8 +1477,7 @@ set_allowed_addrs(unit, addrs, opts)
     struct permitted_ip *ip;
     char *ptr_word, *ptr_mask;
     struct hostent *hp;
-    struct netent *np;
-    u_int32_t a, mask, ah, offset;
+    u_int32_t a, mask, offset;
     struct ipcp_options *wo = &ipcp_wantoptions[unit];
     u_int32_t suggested_ip = 0;
 
@@ -1551,22 +1552,8 @@ set_allowed_addrs(unit, addrs, opts)
 	if (hp != NULL && hp->h_addrtype == AF_INET) {
 	    a = *(u_int32_t *)hp->h_addr;
 	} else {
-	    np = getnetbyname (ptr_word);
-	    if (np != NULL && np->n_addrtype == AF_INET) {
-		a = htonl (*(u_int32_t *)np->n_net);
-		if (ptr_mask == NULL) {
-		    /* calculate appropriate mask for net */
-		    ah = ntohl(a);
-		    if (IN_CLASSA(ah))
-			mask = IN_CLASSA_NET;
-		    else if (IN_CLASSB(ah))
-			mask = IN_CLASSB_NET;
-		    else if (IN_CLASSC(ah))
-			mask = IN_CLASSC_NET;
-		}
-	    } else {
-		a = inet_addr (ptr_word);
-	    }
+		printf("*** getnetbyname is unsupported, please report bug! ***\n");
+		return;
 	}
 
 	if (ptr_mask != NULL)

@@ -894,7 +894,7 @@ print_option(opt, mainopt, printer, arg)
 		break;
 
 	default:
-		printer(arg, "# %s value (type %d??)", opt->name, opt->type);
+		printer(arg, "# %s value (type %d)", opt->name, opt->type);
 		break;
 	}
 	printer(arg, "\t\t# (from %s)\n", mainopt->source);

@@ -147,7 +147,7 @@ endif
 ifneq (ia64, $(ARCH))
 DIRS = dietlibc
 endif
-DIRS += mar pci-resource bzlib $(INSMOD) slang newt
+DIRS += mar pci-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
 ifeq (i386,$(ARCH))
 DIRS += pcmcia
 endif
