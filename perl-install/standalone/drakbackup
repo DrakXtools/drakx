@@ -77,7 +77,6 @@
 #
 # PBS persistants:
 #		selection des sources a inclure dans le backup cd. 
-#		et dans le restore_step_user
 #
 #
 # WARNING:      ne pas ecraser les fichiers /etc/passwd fstab 
@@ -85,6 +84,7 @@
 #
 #
 # TODO:
+#		1 - replace tar --after-date by find / -mtime -1 \! -type d -print > /tmp/liste.jour
 #		during restore step catch the most recent date
 #		and put in list all backup between the fisrt date 
 #		and the select date.
@@ -262,7 +262,7 @@ foreach (@ARGV) {
     $mode == 1 and push @list_arg, $_;
 }
 
-$build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
+$build_floppy || $build_cd || $default || @list_arg || $conf_file ? build_backup_files() : interactive_mode();
 
 sub read_passwd {
     my @tmp1;
@@ -438,23 +438,6 @@ sub ftp_client {
     $ftp->quit; 
 }
 
-sub return_file_date {
-    my($more_recent) = @_;
-    my $file_date;
-    $_ = $more_recent;
-    s/backup\_incr\_sys\_//gi;
-    s/backup\_base\_sys\_//gi;
-    s/backup\_incr\_user\_//gi;
-    s/backup\_base\_user\_//gi;
-    s/.tar.\w+$//gi;
-    s/\_/ /gi;
-    my $date = substr($_, 0, 8);
-    my $hour = substr($_, 9,  2);
-    my $min =  substr($_, 11, 2);
-    $file_date = $date . ' ' . $hour . ':' . $min;
-    return $file_date;
-}
-
 sub build_backup_files {
     my $path_name;
     my $tar_cmd;
@@ -486,51 +469,35 @@ sub build_backup_files {
     grep (/backup_base_sys/, @dir_content) and $base_sys_exist = 1;
     grep (/backup_base_other/, @dir_content) and $base_other_exist = 1;
 
-# fixme use incremental backup   
-#tar -cvf tarfilename --after-date="sept 1, 2000" /home
-# tar -cf archive.tar --newer="`date -r file`" /home
-# algo: liste des fichiers du meme nom, on prend le dernier puis on applique le tar ci-dessus.
-# faire fonctions qui retourne le plus recent element.
 
     if ($where_hd) {
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	if ($backup_sys) { 
 	    if ($backup_sys_versions) {
  		if (grep(/backup_incr_sys/, @dir_content)) { 
-		    my @more_recent = grep /backup_incr_sys/, @dir_content; 
-		    @list_temp = sort  @more_recent;
- 		    $more_recent = pop @list_temp;
-		    $file_date = return_file_date($more_recent);
+		    my @more_recent = grep /backup_incr_sys/, sort @dir_content; 
+		    $more_recent = pop @more_recent;
  		}
   		else { 
-		    my @more_recent = grep /backup_base_sys/, @dir_content; 
-		    $more_recent = @more_recent[0];
-		    $file_date = return_file_date($more_recent);
+		    my @more_recent = grep /backup_base_sys/, sort @dir_content; 
+		    $more_recent = pop @more_recent;
  		}
 		if (!$base_sys_exist) { 
 		    system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files"); }
 		else { 
-		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext --after-date='$file_date'  @sys_files"); }
+		    system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");}
 	    } else {
 		system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
 		system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
 	    }
 	}
-
+	
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
 
 	if (@list_other) {
-#	    if ($backup_other_versions) {
-#		$base_other_exist or  system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other");
-#		$base_other_exist and system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext @list_other");
-#	    } else {
-#	    system("cd $save_path && rm -f backup_other* backup_base_other* backup_incr_other*");
-#	    system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
-#	    }
 	    system("cd $save_path && rm -f backup_other* ");
 	    system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
-	    
 	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
 	    output_p( $save_path . '/list_other', @list_other_);    
 	}
@@ -546,20 +513,17 @@ sub build_backup_files {
 		$path_name = return_path($user);
 		if ($backup_user_versions) {
 		    if (grep(/backup_incr_user/, @dir_content)) { 
-			my @more_recent = grep /backup_incr_user/, @dir_content; 
-			@list_temp = sort  @more_recent;
-			$more_recent = pop @list_temp;
-			$file_date = return_file_date($more_recent);
+			my @more_recent = grep /backup_incr_user_$user\_/, sort @dir_content; 
+			$more_recent = pop @more_recent;
 		    }
 		    else { 
-			my @more_recent = grep /backup_base_user/, @dir_content; 
-			$more_recent = @more_recent[0];
-			$file_date = return_file_date($more_recent);
+			my @more_recent = grep /backup_base_user_$user\_/, sort @dir_content; 
+			$more_recent = pop @more_recent;			
 		    }
 		    if (!$base_user_exist) { 
 			system("$tar_cmd_user -f $save_path/backup_base_user_$user$the_time.$tar_ext $path_name");}
 		    else { 
-			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext --after-date='$file_date' $path_name");}
+			system("$tar_cmd_user -f $save_path/backup_incr_user_$user$the_time.$tar_ext `find @sys_files -newer $save_path/$more_recent`");}
 		} else {
 		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
 		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
@@ -1155,7 +1119,7 @@ sub advanced_where{
 					  1, gtksignal_connect(my $button_where_hd = new Gtk::Button(),  clicked => sub { 
 					      ${$central_widget}->destroy(); advanced_where_hd(); }),
 					  1, gtksignal_connect(my $button_where_tape = new Gtk::Button(),  clicked => sub { 
-					      ${$central_widget}->destroy(); advanced_where_tape(); }),
+					      ${$central_widget}->destroy(); message_underdevel();}), #advanced_where_tape(); }),
 					  1, new Gtk::VBox(0, 5),
 					     ),
 				  1, new Gtk::VBox(0, 5),	
@@ -1569,49 +1533,76 @@ sub select_most_recent_selected_of {
 }
 
 sub select_user_data_to_restore {
+    my $var_eq = 1;
     my @list_backup = ();
     my @list_tmp = ();
+    my @list_tmp2 = ();
+    @user_list_to_restore = ();
+
     -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
+    @list_tmp2 = @list_backup_tmp2;
     foreach (@list_backup_tmp2) {
 	s/\_base//gi;
 	s/\_incr//gi;
 	push @list_backup , $_;
     }
     foreach my $var_tmp (@user_list_backuped) {
+	$var_eq = 1;
 	my $more_recent = (split( ' ', select_most_recent_selected_of($var_tmp)))[0]; 
-	print "more_recent:  $more_recent\n";
 	foreach (grep /^backup_user_$var_tmp/, sort @list_backup) {
 	    s/.tar.gz//gi;
 	    s/.tar.bz2//gi;	    
-
 	    if ($more_recent) {
-		print "to compare $more_recent avec $_\n";
 		if ( $_ =~ /$more_recent/ ) {
-		    print "egalite ....\n";
 		    push @list_tmp , $_;
-		    next;
+		    $var_eq = 0;    
 		}
-		else { push @list_tmp , $_;}
+		else { $var_eq and push @list_tmp , $_;}
 	    }
 	}
-	
-	print "______________________ end\n";
     }
-    print "tmp_list :  $_ \n" foreach (@list_tmp);
+     foreach my $var_to_restore (@list_tmp) {
+	$var_to_restore =~ s/backup_//gi;
+	foreach my $var_exist (@list_tmp2) {
+	    if ($var_exist =~ /$var_to_restore/ ) {
+		push @user_list_to_restore, $var_exist;
+	    }
+	}
+    }
+    $DEBUG and print "(incremental restore) real user list to restore :  $_ \n" foreach (@user_list_to_restore);
 }
+
+sub select_sys_data_to_restore {
+#     my @list_tmp = ();
+#     my @list_tmp2 = ();
+#     my @list_backup = ();
+
+#     -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
+#     @list_tmp2 = @list_backup_tmp2;
+#     foreach (@list_backup_tmp2) {
+# 	s/\_base//gi;
+# 	s/\_incr//gi;
+# 	push @list_backup , $_;
+#     }
+
+#     -d $path_to_find_restore and my @list_backup_tmp2 = all($path_to_find_restore);
+
+#     $DEBUG and print "(incremental restore) real sys list to restore :  $_ \n" foreach (@user_list_to_restore);
+}
+
 
 sub restore_backend {
     my $untar_cmd;
     if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
     else { $untar_cmd = 1; }
-    select_user_data_to_restore(); 
+    
     if ($restore_user)  { 
-#	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
-#	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
-#	print "user list too restore : $_\n"foreach @user_list_to_restore2;
-    }
-## fixme 
+	select_user_data_to_restore(); 
+ 	$untar_cmd or system(" echo 'user: $_'  &&  tar xfz  $path_to_find_restore/$_ -C $restore_path") foreach @user_list_to_restore;
+ 	$untar_cmd and system("echo 'user: $_'  &&  /usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") foreach @user_list_to_restore;
+     }
     if ($restore_sys)   { 
+	select_sys_data_to_restore();
 #	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
 #	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
 #	print " restore sys\n";
@@ -1694,34 +1685,37 @@ my %check_user_to_restore;
 sub restore_step_user {
     my $retore_step_user;
     my @tmp_list = sort @user_backuped;
-#    @user_list_to_restore2 = sort @user_backuped;
     @user_backuped   = @tmp_list;
-#= @user_list_to_restore2;
 
     gtkpack($advanced_box,
 	    $retore_step_user = gtkpack_(new Gtk::VBox(0,10),
 		     0, new Gtk::VBox(0,10),
 		     0, _("User list to restore (only the more recent date per user is important)"),
 		     1, createScrolledWindow( gtkpack__(new Gtk::VBox(0,0),
-							map { my @name_l = split(/,/, $_);
+							map { my $name;
+							      my $var2;
 							      my $name_complet = $_;
+							      $name = (split( ' ',$name_complet))[0];
 							      my @user_list_tmp = ();
-							      my $name  = $name_l[0];
+							      
 							      my $b = new Gtk::CheckButton($name_complet); 
 							      if ( grep $name_complet, @user_list_to_restore2)  {
 								  gtkset_active($b, 1);
+								  $check_user_to_restore{$name_complet}[1] = 1;
 							      } else {
 								  gtkset_active($b, 0);
+								  $check_user_to_restore{$name_complet}[1] = 0;
 							      }
 							      $b->signal_connect(toggled => sub { 
-								  if ($check_user_to_restore{$name_complet}[1] ) {
-								      $check_user_to_restore{$name_complet}[1] = 0;
-								      if (!member(/$name_complet/, @user_list_to_restore2) ) {
+								  if (!$check_user_to_restore{$name_complet}[1] ) {
+								      $check_user_to_restore{$name_complet}[1] = 1;
+								      if (!grep (/$name/, @user_list_to_restore2)) {
 									  push @user_list_to_restore2, $name_complet;}
 								  } else {
-								      $check_user_to_restore{$name_complet}[1] = 1;
+								      $check_user_to_restore{$name_complet}[1] = 0;
 								      foreach (@user_list_to_restore2) {
-									  if ($name_complet ne $_) {
+									  $var2 =  (split( ' ',$_))[0];
+									  if ($name ne $var2) {
 									      push @user_list_tmp, $_;
 									  }
 								      }
@@ -3021,6 +3015,17 @@ Drakbacup allow to restore the system (etc, var files)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 # _____________________________________________________________ DOCS
 
 ##### tester taille decompressee
@@ -3324,5 +3329,19 @@ Drakbacup allow to restore the system (etc, var files)
 # 6This is the only part of the HOWTO that actually shows "HOW TO" do something. Even so, the reasons 
 # why you'd want to do this aren't explained.
 
+#__________________
 
+# fixme use incremental backup   
+#tar -cvf tarfilename --after-date="sept 1, 2000" /home
+# tar -cf archive.tar --newer="`date -r file`" /home
+# algo: liste des fichiers du meme nom, on prend le dernier puis on applique le tar ci-dessus.
+# faire fonctions qui retourne le plus recent element.
+
+
+#			tar cvzf ~/toto.tar.gz  `find . -name "*" `
+#			find / -mtime -1 \! -type d -print > /tmp/liste.jour
+# man find:
+#-newer fichier
+#              Fichier modifié plus récemment que le fichier indiqué.  L'option -newer n'est affectée par l'option -follow  que  si
+#              celle-ci la précède sur la ligne de commande.
 
