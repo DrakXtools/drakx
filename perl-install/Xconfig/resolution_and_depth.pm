@@ -161,7 +161,7 @@ sub choices {
 
     #- finding it in @resolutions (well @matching)
     #- (that way, we check it exists, and we get field "bios" for fbdev)
-    my @default_resolutions = grep { $_->{Depth} eq $Depth } @matching;
+    my @default_resolutions = sort { $b->{Y} <=> $a->{Y} } grep { $_->{Depth} eq $Depth } @matching;
     my $default_resolution = first(grep { $resolution_wanted->{Y} eq $_->{Y} } @default_resolutions) || $default_resolutions[0];
 
     $default_resolution, @resolutions;
