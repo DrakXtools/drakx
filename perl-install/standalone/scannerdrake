@@ -27,26 +27,21 @@ use scanner;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 for (@ARGV) {
     /^--version$/ and die 'version: $Id$ '."\n";
-    /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev]';
-    /^--update$/ and do {scanner::updateScannerDBfromUsbtable(); quit();};
-    /^--manual$/ and main(1);
-    /^--device=(.*)$/ and do { $::isFile = ($::File) = $1; next };
+    /^--help$/ and die 'logdrake [--version] [--help] [--manual] [--device=dev] [--update-sane=sane_desc_dir] [--update-usbtable]';
+    /^--update-usbtable$/ and do {scanner::updateScannerDBfromUsbtable(); exit;};
+    /^--update-sane=(.*)$/ and do {scanner::updateScannerDBfromSane($1); exit;};
+    /^--manual$/ and $::Manual=1;
+    /^--device=(.*)$/ and do { $::isFile = ($::File) = $1; next };   
 }
 
-main();
-
-sub main {
-    $in = 'interactive'->vnew(su, 'default');
-    #$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
-    if ($_[0]) {
-	manual(); quit();
-    }
-    my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
-    @f = scanner::findScannerUsbport();
-    $wait=undef;
-    (@f) ? auto() : manual();
-    quit();
-}
+$in = 'interactive'->vnew('su', 'default');
+$in->do_pkgs->install('sane-backends', 'xsane', if_($in->do_pkgs->is_installed('gimp'),'xsane-gimp'));
+if ($::Manual) {manual(); quit();}
+my $wait = $in->wait_message(_("Test ports"), _("Detecting devices ..."));
+@f = scanner::findScannerUsbport();
+$wait=undef;
+(@f) ? auto() : manual();
+quit();
 
 sub auto {
     foreach (@f) { 
@@ -62,17 +57,24 @@ sub auto {
 sub manual {
     my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [keys %$scanner::scannerDB]) or return;
     # DRIVER usb or scsi
+    #print "$s\n";
     tryConfScanner($s);
 }
 
 sub dynamic {
+    # return the backend for the device
+    # or do whatis needed !!
 }
 
 sub tryConfScanner {
-    # take care if interactive ouptut is needed (unsupported..)
+    # take care if interactive ouptut is needed (unsupported, parallel..)
     my ($model, $port) = @_;
     if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
 	$in->ask_warn('scannerdrake', _("This %s scanner is unsupported", $model));
+	return;
+    }
+    if ($scanner::scannerDB->{$model}{driver} =~ /Parport/) {
+	$in->ask_warn('scannerdrake', _("This %s scanner use parallel port, wich is unsupported for the moment", $model));
 	return;
     }
     scanner::confScanner($model,$port);
@@ -84,6 +86,6 @@ sub quit {
 
 #-----------------------------------------------
 # $Log$
-# Revision 1.1  2001/10/10 12:45:48  yduret
-# first apparition on earth..
+# Revision 1.2  2001/11/12 15:19:54  yduret
+# update
 #
