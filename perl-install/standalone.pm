@@ -67,10 +67,12 @@ OPTIONS:
   --skip-wizard     - manage connections
   --internet        - configure internet
   --wizard          - like --add"),
-           'drakfont' => N_("Font Importation and monitoring application                                     
+           'drakfont' => N_("
+Font Importation and monitoring application
+
+OPTIONS:
 --windows_import : import from all available windows partitions.
 --xls_fonts      : show all fonts that already exist from xls
---strong         : strong verification of font.
 --install        : accept any font file and any directry.
 --uninstall      : uninstall any font or any directory of font.
 --replace        : replace all font if already exist
