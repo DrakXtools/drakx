@@ -32,7 +32,7 @@ if (!$mouse || !$::auto) {
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
 				       $mouse->{type} . '|' . $mouse->{name});
-    $name or $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+    $name or $::isEmbedded ? do { kill(USR1, $::CCPID), goto begin } : $in->exit(0);
     $mouse = mouse::fullname2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
