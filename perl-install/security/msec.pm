@@ -2,6 +2,7 @@ package security::msec;
 
 use strict;
 use vars qw($VERSION);
+use MDK::Common::File;
 
 $VERSION = "0.2";
 
@@ -15,17 +16,17 @@ msec - Perl functions to handle msec configuration files
 
     my $msec = new msec;
 
-    $secure_level = get_secure_level($prefix);
+    $secure_level = get_secure_level;
 
-    @functions = $msec->get_functions($prefix);
-    foreach @functions { %options{$_} = $msec->get_function_value($prefix, $_) }
-    foreach @functions { %defaults{$_} = $msec->get_function_default($prefix, $_) }
-    foreach @functions { $msec->config_function($prefix, $_, %options{$_}) }
+    @functions = $msec->get_functions;
+    foreach @functions { %options{$_} = $msec->get_function_value($_) }
+    foreach @functions { %defaults{$_} = $msec->get_function_default($_) }
+    foreach @functions { $msec->config_function($_, %options{$_}) }
 
-    @checks = $msec->get_checks($prefix);
-    foreach @checks { %options{$_} = $msec->get_check_value($prefix, $_) }
-    foreach @checks { %defaults{$_} = $msec->get_check_default($prefix, $_) }
-    foreach @checks { $msec->config_check($prefix, $_, %options{$_}) }
+    @checks = $msec->get_checks;
+    foreach @checks { %options{$_} = $msec->get_check_value($_) }
+    foreach @checks { %defaults{$_} = $msec->get_check_default($_) }
+    foreach @checks { $msec->config_check($_, %options{$_}) }
 
 =head1 DESCRIPTION
 
@@ -54,75 +55,33 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 use MDK::Common;
 
+
+my $check_file = "$::prefix/etc/security/msec/security.conf";
 # ***********************************************
 #              PRIVATE FUNCTIONS
 # ***********************************************
-sub config_option {
-    my ($prefix, $option, $value, $category) =@_;
-    my %options_hash = ( );
-    my $key = "";
-    my $options_file = "";
-
-    if($category eq "functions") { $options_file = "$prefix/etc/security/msec/level.local"; }
-    elsif($category eq "checks") { $options_file ="$prefix/etc/security/msec/security.conf"; }
-
-    if(-e $options_file) {
-        open F, $options_file;
-        if($category eq "functions") {
-            while(<F>) {
-               if (!($_ =~ /^from mseclib/) && $_ ne "\n") {
-                   my ($name, $value_set) = split (/\(/, $_);
-                   chop $value_set; chop $value_set;
-                   $options_hash{$name} = $value_set;
-               }
-            }
-        }
-        elsif($category eq "checks") {
-            %options_hash = getVarsFromSh($options_file);
-        }
-        close F;
-    }
-
-    $options_hash{$option} = $value;
-
-    open F, '>'.$options_file;
-    foreach $key (keys %options_hash) {
-        if ($options_hash{$key} ne "default") {
-            if($category eq "functions") { print F "$key"."($options_hash{$key})\n"; }
-            elsif($category eq "checks") { print F "$key=$options_hash{$key}\n"; }
-        }
-    }
-    close F;
-}
 
 sub get_default {
-    my ($prefix, $option, $category) = @_;
+    my ($option, $category) = @_;
     my $default_file = "";
     my $default_value = "";
     my $num_level = 0;
 
     if ($category eq "functions") {
-        my $word_level = get_secure_level($prefix);
+        my $word_level = get_secure_level();
         if ($word_level eq "Dangerous") { $num_level = 0 }
         elsif ($word_level eq "Poor") { $num_level = 1 }
         elsif ($word_level eq "Standard") { $num_level = 2 }
         elsif ($word_level eq "High") { $num_level = 3 }
         elsif ($word_level eq "Higher") { $num_level = 4 }
         elsif ($word_level eq "Paranoid") { $num_level = 5 }
-        $default_file = "$prefix/usr/share/msec/level.".$num_level;
+        $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
-    elsif ($category eq "checks") { $default_file = "$prefix/var/lib/msec/security.conf"; }
+    elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf"; }
 
     open F, $default_file;
-    if($category eq "functions") {
-        while(<F>) {
-            if ($_ =~ /^$option/) { (undef, $default_value) = split(/ /, $_); }
-	}
-    }
-    elsif ($category eq "checks") {
-        while(<F>) {
-            if ($_ =~ /^$option/) { (undef, $default_value) = split(/=/, $_); }
-	}
+    while(<F>) {
+	   if ($_ =~ /^$option/) { (undef, $default_value) = split(/$category eq "functions" ? ' ' : '=' /o, $_); }
     }
     close F;
     chop $default_value;
@@ -135,27 +94,21 @@ sub get_default {
 #               SPECIFIC OPTIONS
 # ***********************************************
 
-# get_secure_level(prefix) - Get the secure level
+# get_secure_level() - Get the secure level
 
 # duplicated with some drakx code
 
 sub get_secure_level {
-    shift @_;
-    my $prefix = $_;
+    shift;
     my $num_level = 2;
 
-    $num_level = cat_("$prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
-                cat_("$prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
-                ${{ getVarsFromSh("$prefix/etc/sysconfig/msec") }}{SECURE_LEVEL};
+    $num_level = cat_("$::prefix/etc/profile")           =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
+                cat_("$::prefix/etc/profile.d/msec.sh") =~ /export SECURE_LEVEL=(\d+)/ && $1 ||
+                ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL};
 		# || $ENV{SECURE_LEVEL};
 
-    if ($num_level == 0) { return "Dangerous" }
-    elsif ($num_level == 1) { return "Poor" }
-    elsif ($num_level == 2) { return "Standard" }
-    elsif ($num_level == 3) { return "High" }
-    elsif ($num_level == 4) { return "Higher" }
-    elsif ($num_level == 5) { return "Paranoid" }
-}
+    my @sec_levels = ("Dangerous",  "Poor", "Standard", "High",  "Higher", "Paranoid");
+    return $sec_levels[$num_level];}
 
 sub get_seclevel_list {
     qw(Standard High Higher Paranoid);
@@ -163,28 +116,22 @@ sub get_seclevel_list {
 
 sub set_secure_level {
     my $word_level = $_[1];
-    my $num_level = 0;
 
-    if ($word_level eq "Dangerous") { $num_level = 0 }
-    elsif ($word_level eq "Poor") { $num_level = 1 }
-    elsif ($word_level eq "Standard") { $num_level = 2 }
-    elsif ($word_level eq "High") { $num_level = 3 }
-    elsif ($word_level eq "Higher") { $num_level = 4 }
-    elsif ($word_level eq "Paranoid") { $num_level = 5 }
-
-    system "/usr/sbin/msec", $num_level;
+    my %sec_levels = ("Dangerous" => 0,  "Poor" => 1, "Standard" => 2, "High" => 3,  "Higher" => 4, "Paranoid" => 5);
+    my $num_level = $sec_levels{$word_level};
+    system "/usr/sbin/msec", $num_level ? $run_level : 3;
 }
 
 # ***********************************************
 #         FUNCTIONS (level.local) RELATED
 # ***********************************************
 
-# get_functions(prefix) -
+# get_functions() -
 #   return a list of functions handled by level.local (see
 #   man mseclib for more info).
 sub get_functions {
     shift;
-    my ($prefix, $category) = @_;
+    my ($category) = @_;
     my @functions = ();
     my (@tmp_network_list, @tmp_system_list);
 
@@ -204,10 +151,10 @@ sub get_functions {
                          enable_sulogin password_aging password_history password_length set_root_umask
                          set_shell_history_size set_shell_timeout set_user_umask);
 
-    my $file = "$prefix/usr/share/msec/mseclib.py";
+    my $file = "$::prefix/usr/share/msec/mseclib.py";
     my $function = '';
 
-    print "$prefix\n";
+    print "$::prefix\n";
     # read mseclib.py to get each function's name and if it's
     # not in the ignore list, add it to the returned list.
     open F, $file;
@@ -226,13 +173,13 @@ sub get_functions {
     @functions;
 }
 
-# get_function_value(prefix, function) -
+# get_function_value(function) -
 #   return the value of the function passed in argument. If no value is set,
 #   return "default".
 sub get_function_value {
-    my ($prefix, $function) = @_;
+    my ($function) = @_;
     my $value = '';
-    my $msec_options = "$prefix/etc/security/msec/level.local";
+    my $msec_options = "$::prefix/etc/security/msec/level.local";
     my $found = 0;
 
     if (-e $msec_options) {
@@ -252,34 +199,40 @@ sub get_function_value {
     $value;
 }
 
-# get_function_default(prefix, function) -
+# get_function_default(function) -
 #   return the default value of the function according to the security level
 sub get_function_default {
     shift;
-    my ($prefix, $function) = @_;
-    return get_default($prefix, $function, "functions");
+    my ($function) = @_;
+    return get_default($function, "functions");
 }
 
-# config_function(prefix, function, value) -
+# config_function(function, value) -
 #   Apply the configuration to 'prefix'/etc/security/msec/level.local
 sub config_function {
-    shift @_;
-    my ($prefix, $function, $value) = @_;
-    config_option($prefix, $function, $value, "functions");
+    shift;
+    my ($function, $value) = @_;
+    my $options_file = "$::prefix/etc/security/msec/level.local";
+
+    if ($value eq 'default') {
+	   substInFile { s/^$function.*// } $options_file;
+    } else {
+	   substInFile { s/^$function.*// } $options_file;
+	   append_to_file($options_file, "$function $value")
+    }
 }
 
 # ***********************************************
 #     PERIODIC CHECKS (security.conf) RELATED
 # ***********************************************
 
-# get_checks(prefix) -
+# get_checks() -
 #   return a list of periodic checks handled by security.conf
 sub get_checks {
-    my $prefix = $_;
     my $check;
     my @checks = ();
 
-    my $check_file = "$prefix/var/lib/msec/security.conf";
+    my $check_file = "$::prefix/var/lib/msec/security.conf";
     my @ignore_list = qw(MAIL_USER);
 
     if (-e $check_file) {
@@ -294,12 +247,12 @@ sub get_checks {
     @checks;
 }
 
-# get_check_value(prefix, check)
+# get_check_value(check)
 #   return the value of the check passed in argument
 sub get_check_value {
-    shift @_;
-    my ($prefix, $check) = @_;
-    my $check_file = "$prefix/etc/security/msec/security.conf";
+    shift;
+    my ($check) = @_;
+    my $check_file = $check_file;
     my $value = '';
     my $found = 0;
 
@@ -320,19 +273,23 @@ sub get_check_value {
     $value;
 }
 
-# get_check_default(prefix, check)
+# get_check_default(check)
 #   Get the default value according to the security level
 sub get_check_default {
-    my ($prefix, $check) = @_;
-    return get_default($prefix, $check, "checks");
+    my ($check) = @_;
+    return get_default($check, "checks");
 }
 
-# config_check(prefix, check, value)
-#   Apply the configuration to "prefix"/etc/security/msec/security.conf
+# config_check(check, value)
+#   Apply the configuration to "$::prefix"/etc/security/msec/security.conf
 sub config_check {
-    shift @_;
-    my ($prefix, $check, $value) = @_;
-    config_option($prefix, $check, $value, "checks");
+    shift;
+    my ($check, $value) = @_;
+    if ($value eq 'default') {
+	   substInFile { s/^$check.*// } $check_file;
+    } else {
+	   setVarsInSh($check_file, { $check => $value });
+    }
 }
 
 sub new { shift }

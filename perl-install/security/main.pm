@@ -5,7 +5,7 @@ use MDK::Common;
 use my_gtk qw(:helpers :wrappers :ask);
 use log;
 
-use security::libsafe;
+#use security::libsafe;
 use security::msec;
 
 sub myexit { my_gtk::exit @_ }
@@ -68,7 +68,7 @@ sub basic_seclevel_option {
 sub basic_secadmin_check {
 	my ($secadmin_check, $msec) = @_;
 
-	$$secadmin_check->set_active(1) if ($msec->get_check_value('', "MAIL_WARN") eq "yes");
+	$$secadmin_check->set_active(1) if ($msec->get_check_value("MAIL_WARN") eq "yes");
 
 	new Gtk::Label(_("Security Alerts:")), $$secadmin_check;
 }
@@ -76,7 +76,7 @@ sub basic_secadmin_check {
 sub basic_secadmin_entry {
 	my ($secadmin_entry, $msec) = @_;
 
-	$$secadmin_entry->set_text($msec->get_check_value('', "MAIL_USER"));
+	$$secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
 
 	my $hbox = new Gtk::HBox(0, 0);
 	new Gtk::Label(_("Security Administrator:")), $$secadmin_entry;
@@ -84,7 +84,7 @@ sub basic_secadmin_entry {
 
 sub network_generate_page {
 	my ($rsecurity_net_hash, $msec) = @_;
-	my @network_options = $msec->get_functions('', "network");
+	my @network_options = $msec->get_functions("network");
         my @yesno_choices = qw(yes no default ignore);
 	my @alllocal_choices = qw(ALL LOCAL NONE default);
 
@@ -93,22 +93,22 @@ sub network_generate_page {
 	foreach my $tmp (@network_options) {
 #		my $hbutton = gtksignal_connect(new Gtk::Button(_("Help")),
 #								  'clicked' => sub { show_msec_help($tmp) } );
-		my $default = $msec->get_function_default('', $tmp);
+		my $default = $msec->get_function_default($tmp);
 		if (member($default, @yesno_choices) || member($default, @alllocal_choices)) {
 			$$rsecurity_net_hash{$tmp} = new Gtk::Combo();
 			$$rsecurity_net_hash{$tmp}->entry->set_editable(0);
 		}
 		else {
 			$$rsecurity_net_hash{$tmp} = new Gtk::Entry();
-			$$rsecurity_net_hash{$tmp}->set_text($msec->get_check_value('', $tmp));
+			$$rsecurity_net_hash{$tmp}->set_text($msec->get_check_value($tmp));
 		}
 		if (member($default, @yesno_choices)) {
 			$$rsecurity_net_hash{$tmp}->set_popdown_strings(@yesno_choices);
-			$$rsecurity_net_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
+			$$rsecurity_net_hash{$tmp}->entry->set_text($msec->get_check_value($tmp));
 		}
 		elsif (member($default, @alllocal_choices)) {
 			$$rsecurity_net_hash{$tmp}->set_popdown_strings(@alllocal_choices);
-			$$rsecurity_net_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
+			$$rsecurity_net_hash{$tmp}->entry->set_text($msec->get_check_value($tmp));
 		}
 		push @items, [ new Gtk::Label($tmp._(" (default: %s)",$default)), $$rsecurity_net_hash{$tmp} ]; #, $hbutton];
 	}
@@ -120,7 +120,7 @@ sub network_generate_page {
 
 sub system_generate_page {
 	my ($rsecurity_system_hash, $msec) = @_;
-	my @system_options = $msec->get_functions('', "system");
+	my @system_options = $msec->get_functions("system");
         my @yesno_choices = qw(yes no default ignore);
 	my @alllocal_choices = qw(ALL LOCAL NONE default);
 
@@ -129,24 +129,29 @@ sub system_generate_page {
 	foreach my $tmp (@system_options) {
 #		my $hbutton = gtksignal_connect(new Gtk::Button(_("Help")),
 #								  'clicked' => sub { show_msec_help($tmp) } );
-		my $default = $msec->get_function_default('', $tmp);
+		my $default = $msec->get_function_default($tmp);
+		my $def = $default ? $default : "default";
 		my $item_hbox = new Gtk::HBox(0, 0);
 		if (member($default, @yesno_choices) || member($default, @alllocal_choices)) {
 			$$rsecurity_system_hash{$tmp} = new Gtk::Combo();
 			$$rsecurity_system_hash{$tmp}->entry->set_editable(0);
 		} else {
-			$$rsecurity_system_hash{$tmp} = new Gtk::Entry();
-			$$rsecurity_system_hash{$tmp}->set_text($msec->get_check_value('', $tmp));
+		    $$rsecurity_system_hash{$tmp} = new Gtk::Entry();
+#			$$rsecurity_system_hash{$tmp}->set_text($def);
+			$$rsecurity_system_hash{$tmp}->set_text($msec->get_check_value($tmp));
+
 		}
 		if (member($default, @yesno_choices)) {
 			$$rsecurity_system_hash{$tmp}->set_popdown_strings(@yesno_choices);
-			$$rsecurity_system_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
+#			$$rsecurity_system_hash{$tmp}->entry->set_text($msec->get_check_value($tmp));
+			$$rsecurity_system_hash{$tmp}->entry->set_text($def);
 		}
 		elsif (member($default, @alllocal_choices)) {
 			$$rsecurity_system_hash{$tmp}->set_popdown_strings(@alllocal_choices);
-			$$rsecurity_system_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
+#			$$rsecurity_system_hash{$tmp}->entry->set_text($msec->get_check_value($tmp));
+			$$rsecurity_system_hash{$tmp}->entry->set_text($def);
 		}
-		push @items, [ new Gtk::Label($tmp._(" (default: %s)",$default)), $$rsecurity_system_hash{$tmp} ]; #, $hbutton ];
+		push @items, [ new Gtk::Label($tmp._(" (default: %s)",$def)), $$rsecurity_system_hash{$tmp} ]; #, $hbutton ];
 	}
 
 	createScrolledWindow(gtkpack(new Gtk::VBox(0, 0),
@@ -154,10 +159,9 @@ sub system_generate_page {
 		   create_packtable({ col_spacings => 10, row_spacings => 5 }, @items)));
 }
 
-# TODO: Format label & entry in a table to make it nice to see
 sub checks_generate_page {
 	my ($rsecurity_checks_hash, $msec) = @_;
-	my @security_checks = $msec->get_checks('');
+	my @security_checks = $msec->get_checks;
 	my @choices = qw(yes no default);
 	my @ignore_list = qw(MAIL_WARN MAIL_USER);
 
@@ -169,7 +173,7 @@ sub checks_generate_page {
 			$$rsecurity_checks_hash{$tmp} = new Gtk::Combo();
 			$$rsecurity_checks_hash{$tmp}->entry->set_editable(0);
 			$$rsecurity_checks_hash{$tmp}->set_popdown_strings(@choices);
-			$$rsecurity_checks_hash{$tmp}->entry->set_text($msec->get_check_value('', $tmp));
+			$$rsecurity_checks_hash{$tmp}->entry->set_text($msec->get_check_value($tmp));
 			push @items, [ new Gtk::Label(_($tmp)), $$rsecurity_checks_hash{$tmp} ]; #, $hbutton ];
 		}
 	}
@@ -260,31 +264,31 @@ sub draksec_main {
 
 		  $w = wait_msg(_("Please wait, setting security options..."));
 		  standalone::explanations("Setting security administrator option");
-		  if($secadmin_check_value == 1) { $msec->config_check('', 'MAIL_WARN', 'yes') }
-		  else { $msec->config_check('', 'MAIL_WARN', 'no') }
+		  if($secadmin_check_value == 1) { $msec->config_check('MAIL_WARN', 'yes') }
+		  else { $msec->config_check('MAIL_WARN', 'no') }
 
 		  standalone::explanations("Setting security administrator contact");
-		  if($secadmin_value ne $msec->get_check_value('', 'MAIL_USER') && $secadmin_check_value) {
-		      $msec->config_check('', 'MAIL_USER', $secadmin_value);
+		  if($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
+		      $msec->config_check('MAIL_USER', $secadmin_value);
 		  }
 
 		  standalone::explanations("Setting security periodic checks");
 		  foreach my $key (keys %security_checks_value) {
-		      if ($security_checks_value{$key}->entry->get_text() ne $msec->get_check_value('', $key)) {
-			  $msec->config_check('', $key, $security_checks_value{$key}->entry->get_text());
+		      if ($security_checks_value{$key}->entry->get_text() ne $msec->get_check_value($key)) {
+			  $msec->config_check($key, $security_checks_value{$key}->entry->get_text());
 		      }
 		  }
 
 		  standalone::explanations("Setting msec functions related to networking");
 		  foreach my $key (keys %network_options_value) {
-		      if($network_options_value{$key} =~ /Combo/) { $msec->config_function('', $key, $network_options_value{$key}->entry->get_text()) }
-		      else { $msec->config_function('', $key, $network_options_value{$key}->get_text()) }
+		      if($network_options_value{$key} =~ /Combo/) { $msec->config_function($key, $network_options_value{$key}->entry->get_text()) }
+		      else { $msec->config_function($key, $network_options_value{$key}->get_text()) }
 		  }
 
 		  standalone::explanations("Setting msec functions related to the system");
 		  foreach my $key (keys %system_options_value) {
-		      if($system_options_value{$key} =~ /Combo/) { $msec->config_function('', $key, $system_options_value{$key}->entry->get_text()) }
-		      else { $msec->config_function('', $key, $system_options_value{$key}->get_text()) }
+		      if($system_options_value{$key} =~ /Combo/) { $msec->config_function($key, $system_options_value{$key}->entry->get_text()) }
+		      else { $msec->config_function($key, $system_options_value{$key}->get_text()) }
 		  }
 		  remove_wait_msg($w);
 
