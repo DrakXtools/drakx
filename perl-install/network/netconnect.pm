@@ -360,7 +360,8 @@ sub real_main {
                         network::isdn::read_config($isdn);
                         $isdn->{driver} = $isdn_cards{$isdn_name}{driver}; #- do not let config overwrite default driver
 
-                        network::isdn::get_capi_card($isdn) and return "isdn_driver";
+                        #- let the user choose hisax or capidrv if both are available
+                        $isdn->{driver} ne "capidrv" && network::isdn::get_capi_card($isdn) and return "isdn_driver";
                         return "isdn_protocol";
                     },
                    },
