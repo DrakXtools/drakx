@@ -426,7 +426,7 @@ sub load_po {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
 	if (-e $f) {
 	    open $F, "$ENV{LD_LOADER} bzip2 -dc $f 2>/dev/null |";
-	} elsif (!$::isStandalone) {
+	} elsif ($::isInstall) {
 	    require install_any;
 	    $F = install_any::getFile("Mandrake/mdkinst/usr/bin/perl-install/po/$lang.po");
 	}
