@@ -168,9 +168,9 @@ my ($menu, $factory) = create_factory_menu($::isEmbedded ? $::Plug : $us->{wnd}{
 						      ();
                                               }, undef, '<CheckItem>' ],
                                             [ N("/_Help"), undef, undef, undef, '<Branch>' ],
-                                            [ N("/_Help").N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
-                                            [ N("/_Help").N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.$domainname &") }, undef, '<StockItem>', 'gtk-stop' ],
-                                            [ N("/_Help").N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
+                                            [ N("/_Help") . N("/_Help"), undef, sub { HelpSystem() }, undef, '<StockItem>', 'gtk-help' ],
+                                            [ N("/_Help") . N("/_Report Bug"), undef, sub { system("$ENV{BROWSER} https://qa.$domainname &") }, undef, '<StockItem>', 'gtk-stop' ],
+                                            [ N("/_Help") . N("/_About..."), undef, \&About, undef, '<StockItem>', 'gtk-preferences' ]
 					   )
 					  );
 %buttorcheck = map {
@@ -220,7 +220,7 @@ my @toolbwg = map {
     $toolb->append_item($_->[0], $_->[1], $_->[2],  
                         Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb);
 #    $toolb->append_space;
-} ( [
+} ([
      # FIXME: then "add printer" should be a simple verb as suggested in Human Guidelines!!!
      #-PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
      N("Add Printer"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
@@ -524,7 +524,7 @@ sub About() {
     $list->can_focus(0);
     each_index { $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => $::i)) } 0..2;
     $list->set_headers_visible(0);
-    foreach my $row ([ '', '', ''], [ N("Authors: "), 'Till Kamppeter', "<till\@$domainname>" ], ['', '', '']) {
+    foreach my $row ([ '', '', '' ], [ N("Authors: "), 'Till Kamppeter', "<till\@$domainname>" ], [ '', '', '' ]) {
         $tree_model->append_set(undef, [ map_index { $::i => $_ } @$row ]);
     }
     $list->get_selection->set_mode('none');
