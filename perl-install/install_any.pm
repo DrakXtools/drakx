@@ -192,10 +192,12 @@ sub allowNVIDIA_rpms {
     if (pkgs::packageByName($packages, "NVIDIA_GLX")) {
 	#- at this point, we can allow using NVIDIA 3D acceleration packages.
 	my @rpms;
-	foreach (qw(kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure)) {
+	foreach (keys %{$packages->{names}}) {
+	    my ($ext, $version, $release) = /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d.*?)\.(\d+mdk))?$/ or next;
 	    my $p = pkgs::packageByName($packages, $_);
 	    pkgs::packageSelectedOrInstalled($p) or next;
-	    my $name = "NVIDIA_kernel-" . pkgs::packageVersion($p) . "-" . pkgs::packageRelease($p) . (/(-.*)/ && $1);
+	    $version or ($version, $release) = (pkgs::packageVersion($p), pkgs::packageRelease($p));
+	    my $name = "NVIDIA_kernel-$version-$release$ext";
 	    pkgs::packageByName($packages, $name) or return;
 	    push @rpms, $name;
 	}
