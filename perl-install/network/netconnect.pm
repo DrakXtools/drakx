@@ -516,12 +516,14 @@ Take a look at http://www.linmodems.org"),
                             $driver =~ /^LT:/  and $type = "ltmodem";
                             #- we need a better agreement to use list_modules::category2modules('network/slmodem')
                             member($driver, qw(slamr slusb)) and $type = "slmodem";
-                            $type = undef if !($type && (-f $pkgs2path{$type} || $in->do_pkgs->ensure_is_installed_if_available($type, $pkgs2path{$type})));
-                            $modem->{device} = $devices{$type} || '/dev/modem' if $type; # automatically linked by /etc/devfs/conf entry
+                            if ($type && (my $packages = $in->do_pkgs->check_kernel_module_packages("$type-kernel", if_(! -f $pkgs2path{$type}, $type)))) {
+                                $in->do_pkgs->install(@$packages);
+                                $modem->{device} = $devices{$type} || '/dev/modem';
+                                return "ppp_provider";
+                            }
                         }
-                        
-                        #- fallback to modem configuration (beware to never allow test it).
-                        return $type ? "ppp_provider" : "no_supported_winmodem";
+
+                        return "no_supported_winmodem";
                     },
                    },
 
