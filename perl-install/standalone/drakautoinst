@@ -78,11 +78,11 @@ my $mountdir = "/root/tmp/drakautoinst-mountdir"; -d $mountdir or mkdir $mountdi
 my $floppy = detect_devices::floppy();
 my $dev = devices::make($floppy);
 $in->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or quit_global($in, 0);
-{
-    my $w = $in->wait_message('', _("Creating auto install floppy"));
-    commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
-    common::sync();
-}
+#{
+#    my $w = $in->wait_message('', _("Creating auto install floppy"));
+#    commands::dd("if=$imagefile", "of=$dev", "bs=1440", "count=1024");
+#    common::sync();
+#}
 fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
@@ -289,20 +289,7 @@ sub h2widget {
 			 );
 	} else {
 	    $w = create_packtable({ col_spacings => 10, row_spacings => 3 },
-				  map {
-				      my $e;
-				      my $t = ${$k}{$_}; $e = new Gtk::Entry;
-				      $e->{value} = "$label\{$_\}";
-				      my $tag = Gtk->timeout_add(1000, sub {
-								     $e->set_text($t);
-								     0;
-								 });
-				      gtksignal_connect($e, changed => sub {
-							    my $exe = $e->{value} . "='" . $e->get_text() . "'";
-#								      print "EXEC : $exe\n ";
-							    eval "$exe";
-							});
-				      [ "$_ : ", $e ] } @list_keys
+				  map { create_entry_element(${$k}{$_}, "$label\{$_\}", $_) } @list_keys
 				 )
 	}
     } elsif(ref($k) =~ /ARRAY/) {
@@ -324,9 +311,25 @@ sub h2widget {
 				      $vb, \$i, \@widget_list)
 		     );
     } else {
-	$w = new Gtk::Label($k);
+	$label =~ /\$o->\{(.+)\}/;
+	$w = create_packtable({ col_spacings => 10, row_spacings => 3 },
+			      create_entry_element($k, $label, $1))
     }
     return $w;
+}
+
+
+sub create_entry_element {
+    my ($text, $value, $label) = @_;
+    my $e = new Gtk::Entry;
+    $e->{value} = $value;
+    my $tag = Gtk->timeout_add(1000, sub { $e->set_text($text); 0 });
+    gtksignal_connect($e, changed => sub {
+			  my $exe = $e->{value} . "='" . $e->get_text() . "'";
+			  print "EXEC : $exe\n ";
+			  eval "$exe";
+		      });
+    [ "$label : ", $e ]
 }
 
 sub control_buttons {
@@ -355,6 +358,9 @@ sub control_buttons {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.10  2001/10/25 11:59:58  damien
+#- simple variables handled, code compression.
+#-
 #- Revision 1.9  2001/10/25 11:17:03  damien
 #- The new and shiny drakautoinst is coming. P|-|34R
 #-
