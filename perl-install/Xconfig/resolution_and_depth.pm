@@ -143,6 +143,9 @@ sub choices {
     @resolutions = filter_using_HorizSync_VertRefresh($monitors->[0]{HorizSync}, $monitors->[0]{VertRefresh}, @resolutions) if $monitors->[0]{HorizSync};
     @resolutions = filter_using_VideoRam($card->{VideoRam}, @resolutions) if $card->{VideoRam};
 
+    #- sort it, so we can take the first one when we want the "best"
+    @resolutions = sort { $b->{X} <=> $a->{X} || $b->{Y} <=> $a->{Y} || $b->{Depth} <=> $a->{Depth} } @resolutions;
+
     if ($resolution_wanted->{X} && !$resolution_wanted->{Y}) {
 	#- assuming ratio 4/3
 	$resolution_wanted->{Y} = round($resolution_wanted->{X} * 3 / 4);
@@ -168,12 +171,15 @@ sub choices {
 	#- take the first available resolution <= the wanted resolution
 	@matching = grep { $_->{X} < $resolution_wanted->{X} } @resolutions;
     }
-
-    my $max_Depth = max(map { $_->{Depth} } @matching);
-    my $default_resolution;
-    foreach my $Depth ($resolution_wanted->{Depth}, $prefered_depth, $max_Depth) {
-	$default_resolution = find { $_->{Depth} eq $Depth } @matching and last;
+    if (!@matching) {
+	@matching = @resolutions;
     }
+
+    my $default_resolution;
+    foreach my $Depth ($resolution_wanted->{Depth}, $prefered_depth) {
+	$Depth and $default_resolution ||= find { $_->{Depth} eq $Depth } @matching;
+    }
+    $default_resolution ||= $matching[0];
 
     $default_resolution, @resolutions;
 }
