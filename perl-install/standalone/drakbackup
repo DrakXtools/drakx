@@ -216,7 +216,7 @@ my %cd_devices;
 my $cd_drives;
 my $std_device;
 my @tape_devices;
-my $tar_ext;
+my $tar_ext = "tar.gz";
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -703,7 +703,7 @@ sub write_sitecopyrc {
 	#- FIXME - how to deal with existing sitecopyrc
     my @cfg_list = ("site drakbackup\n",
 		     "\tserver $host_name\n",
-		     "\tremote $host_path\n",
+		     "\tremote /$host_path\n",
 		     "\tlocal $save_path\n",
 		     "\tusername $login_user\n",
 		     "\tpassword $passwd_user\n",
@@ -1382,8 +1382,11 @@ sub build_backup_files {
 	
 	#- write our catalog file
 	if (!$media_problem) {
-		my $catalog = substr($the_time, 1); 
-		$catalog .= ":HD:localhost:$save_path" if (($net_proto eq '') && (!$where_tape) && (!$where_cd));
+		my $catalog = substr($the_time, 1);
+		if ((!$where_net) && (!$where_tape) && (!$where_cd)) { 
+			$catalog .= ":HD:localhost:$save_path";
+			$net_proto = '';
+		} 
 		$catalog .= ":$net_proto:$login_user\@$host_name:$host_path" if ($net_proto ne '');
 		$catalog .= ":CD:$vol_name:$cd_device" if ($where_cd);
 		$catalog .= ":Tape:$vol_name:$tape_device" if ($where_tape);
@@ -1443,7 +1446,7 @@ sub check_pkg_needs {
 	my $extra_pkg = '';
 	if ($where_net) {
 		$extra_pkg = 'rsync' if ($net_proto eq 'rsync');
-		$extra_pkg = 'sitecopy' if ($net_proto eq 'webdav');
+		$extra_pkg = 'sitecopy wget' if ($net_proto eq 'webdav');
 		$extra_pkg = 'perl-Expect' if (($net_proto eq 'ssh') && ($use_expect));
 	}
 	$extra_pkg = 'mt-st' if ($where_tape);
@@ -1843,6 +1846,7 @@ sub advanced_where_net_types {
 			$where_cd = 0;
 			$where_tape = 0;
 		}
+		$net_proto = '' if ($where_net eq 0); 
 		${$central_widget}->destroy();
  		$current_widget->();
     });
@@ -3379,11 +3383,11 @@ sub catalog_restore {
 				0, gtkpack_(new Gtk::HBox(1, 10),
 					1, gtksignal_connect(new Gtk::Button(_("Restore Selected\nCatalog Entry")), clicked => sub { 
 						if ($cat_entry ne '') {
-							my $media_check = restore_catalog_entry($cat_entry, '');
+							my $media_check = restore_catalog_entry($cat_entry, ());
 							if ($media_check) {
 								${$central_widget}->destroy();
-								button_box_restore();
-								restore_do();
+#								button_box_restore();
+								interactive_mode_box();
 							} 
 						} 
 					}),
@@ -3395,8 +3399,8 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if ($media_check) {
 								${$central_widget}->destroy();
-								button_box_restore();
-								restore_do();
+#								button_box_restore();
+								interactive_mode_box();
 							} 
 						}
 					}),
@@ -3415,8 +3419,10 @@ sub catalog_restore {
 	);		
 	
 	$restore_path_entry->set_text($restore_path);
+	gtksignal_connect($restore_path_entry, changed => sub { $restore_path = $restore_path_entry->get_text() });
+	
 	button_box_restore();		
-	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, "restore", \&restore_do);
+	fonction_env(\$catalog_box, \&catalog_restore, \&restore_find_media_box, "restore", \&catalog_restore);
 	$central_widget = \$catalog_box;	
     $up_box->show_all();
 }
@@ -3434,7 +3440,8 @@ sub restore_catalog_entry {
 	my ($cat_entry, @restore_files) = @_;
 	my $username;
 	my $userpass = $passwd_user;
-	
+	my $restore_result = 1;
+		
 	my @line_data = split(':', $cat_entry);
 	my $backup_time = $line_data[0];
 	
@@ -3453,6 +3460,9 @@ sub restore_catalog_entry {
 		$username = $login_user;
 	}
 	
+	#- create a restore work directory if we don't have one
+	-d "$cfg_dir/restores" or mkdir_p "$cfg_dir/restores";
+
 	#- can be a device name or a path
 	my $dev_path = $line_data[3];
 	
@@ -3465,9 +3475,10 @@ sub restore_catalog_entry {
 			show_warning("f", _("Backup files not found at %s.", $dev_path));
 			return(0);
 		} else {
-			#- now we can get busy - FIXME
-
-#			return(1);
+			my $save_path_org = $save_path;
+			$save_path = $dev_path;
+			$restore_result = restore_hd_or_cd($cat_entry, $dev_path, @restore_files);
+			$save_path = $save_path_org;
 		}			
 	}
 	
@@ -3479,9 +3490,7 @@ sub restore_catalog_entry {
 			show_warning("f", _("Not the correct CD label. Disk is labelled %s.", $vol_name));
 			return(0);
 		} else {
-			#- now we can get busy - FIXME
-			
-#			return(1);
+			$restore_result = restore_hd_or_cd($cat_entry, '/mnt/cdrom', @restore_files);
 		}	
 	}
 	
@@ -3493,10 +3502,7 @@ sub restore_catalog_entry {
 			show_warning("f", _("Not the correct tape label. Tape is labelled %s.", $vol_name));
 			return(0);
 		} else {
-			#- now we can get busy - FIXME
-			#- calculate the record offset
-			
-#			return(1);
+			$restore_result = restore_tape($cat_entry, $dev_path, @restore_files);
 		}			
 	}
 	
@@ -3504,13 +3510,13 @@ sub restore_catalog_entry {
 		#- show the user what we know of the connection from the catalog 
 		#- and the config file, let them override if necessary
 		
-		#- the various protocals are going to have different requirements
+		#- the various protocols are going to have different requirements
 		#- webdav - it should already be in sitecopyrc - compare it?
 		#- ssh - the only method we have enabled at the moment is with keys 
 		#-	- no passwd needed
 		#-  - if we use expect, it is needed
 		#-  - if we use drackbackup keys, then a different ssh call is needed
-		#- rsync - uses a config file - need to check again
+		#- rsync - uses a config file with username - rsync.user
 		#- ftp needs all parameters entered
 		
 		$in->ask_from(_("Restore Via Network"), _("Restore Via Network Protocol: %s", $media),
@@ -3540,15 +3546,210 @@ sub restore_catalog_entry {
 			return(0);
 		}
 			
-		#- now to try restoring - FIXME
-					
-#		return(1)		
+		$restore_result = restore_ftp($cat_entry, $vol_host, $dev_path, $username, $userpass, @restore_files) if ($media eq 'ftp');
+		$restore_result = restore_rsync_ssh_webdav($cat_entry, $vol_host, $dev_path, $username, $userpass, $media, @restore_files) 
+			if (($media eq 'rsync') || ($media eq 'ssh') || ($media eq 'webdav'));
 	}
 
-# just head back for now
-show_warning("i", __("Under Development..."));
-return(0);
+	# cleanup our restore dir - unlink fails here?
+	system("rm -f $cfg_dir/restores/*");
 
+	if (!$restore_result) {
+		show_warning("i", __("Files Restored..."));
+		return(0);
+	} else {
+		show_warning("f", __("Restore Failed..."));
+		return(1);
+	}
+
+}
+
+sub restore_hd_or_cd {
+	my ($cat_entry, $tarfile_dir, @restore_files) = @_;
+	my $indv_files = @restore_files;
+		
+	my $wild_card = catalog_to_wildcard($cat_entry);
+		
+	if ($indv_files eq 0) {
+		#- full catalog specified
+		foreach (wildcard_to_tarfile($wild_card)) {
+			system("tar -C $restore_path -xzf $tarfile_dir/$_");
+		}
+	} else {
+		#- individual files - pull from appropriate catalog
+		foreach (@restore_files) {
+			my $tarfile = file_to_tarfile($_, $wild_card);
+			$_ = substr($_, 1);
+			system("tar -C $restore_path -xzf $tarfile_dir/$tarfile $_");
+		}
+	}
+    return(0);
+}
+
+sub restore_tape {
+	my ($cat_entry, $dev_path, @restore_files) = @_;
+	my $indv_files = @restore_files;
+		
+	my $wild_card = catalog_to_wildcard($cat_entry);
+	$dev_path =~ s/\/st/\/nst/;
+		
+	if ($indv_files eq 0) {
+		#- full catalog specified
+		foreach (wildcard_to_tarfile($wild_card)) {
+			my $offset = find_tape_offset($cat_entry);
+			system("mt -f $dev_path rewind");
+			system("mt -f $dev_path fsf $offset");
+			system("tar -C cfg_dir/restores -xf $dev_path");
+			if (-e "$cfg_dir/restores/$_") {
+				system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+			} else {
+				return(1);
+			}
+		}
+	} else {
+		#- individual files - pull from appropriate catalog
+		foreach (@restore_files) {
+			my $tarfile = file_to_tarfile($_, $wild_card);
+			$_ = substr($_, 1);
+			if (!-e "$cfg_dir/restores/$tarfile") {
+				my $offset = find_tape_offset($cat_entry);
+				system("mt -f $dev_path rewind");
+				system("mt -f $dev_path fsf $offset");
+				system("tar -C cfg_dir/restores -xf $dev_path");
+			}
+			if (-e "$cfg_dir/restores/$tarfile") {
+				system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+			} else {
+				return(1);
+			}
+		}
+	}
+    return(0);
+}
+
+sub restore_ftp {
+    use Net::FTP; 
+    my $ftp;
+	my ($cat_entry, $hostname, $hostpath, $username, $userpass, @restore_files) = @_;
+	my $indv_files = @restore_files;
+		
+    $DEBUG and print "file list to retrieve : $cat_entry\n ";
+    if ($DEBUG && $interactive) { $ftp = Net::FTP->new($hostname, Debug => 1) or return(1) }
+    elsif ($interactive)  {  $ftp = Net::FTP->new($hostname, Debug => 0) or return(1) }
+    else {  $ftp = Net::FTP->new($hostname, Debug => 0) or return(1) }
+    $ftp->login($username, $userpass);
+    $ftp->cwd($hostpath);
+
+	my $wild_card = catalog_to_wildcard($cat_entry);
+		
+	if ($indv_files eq 0) {
+		#- full catalog specified
+		foreach (wildard_to_tarfile($wild_card)) {
+			$ftp->get($_, "$cfg_dir/restores/$_");
+			system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+		}
+	} else {
+		#- individual files - pull from appropriate catalog
+		foreach (@restore_files) {
+			my $tarfile = file_to_tarfile($_, $wild_card);
+			$_ = substr($_, 1);
+			if (!-e "$cfg_dir/restores/$tarfile") {
+				$ftp->get($tarfile, "$cfg_dir/restores/$tarfile");
+			}
+			system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+		}
+	}
+    $ftp->quit; 
+    return(0);
+}
+
+sub restore_rsync_ssh_webdav {
+	my ($cat_entry, $hostname, $hostpath, $username, $userpass, $mode, @restore_files) = @_;
+	my $indv_files = @restore_files;
+		
+	my $wild_card = catalog_to_wildcard($cat_entry);
+		
+	if ($indv_files eq 0) {
+		#- full catalog specified
+		foreach (wildcard_to_tarfile($wild_card)) {
+			if ($mode eq 'ssh') {
+				system("scp $username\@$hostname:$hostpath/$_ $cfg_dir/restores/");
+			} elsif ($mode eq 'rsync') {
+				system("rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$_ $cfg_dir/restores/");
+			} else {
+				system("wget http://$hostname/$hostpath/$_ -P $cfg_dir/restores/");
+			}
+			if (-e "$cfg_dir/restores/$_") {
+				system("tar -C $restore_path -xzf $cfg_dir/restores/$_");
+			} else {
+				return(1);
+			}
+		}
+	} else {
+		#- individual files - pull from appropriate catalog
+		foreach (@restore_files) {
+			my $tarfile = file_to_tarfile($_, $wild_card);
+			$_ = substr($_, 1);
+			if (!-e "$cfg_dir/restores/$tarfile") {
+				if ($mode eq 'ssh') {
+					system("scp $username\@$hostname:$hostpath/$tarfile $cfg_dir/restores/");
+				} elsif ($mode eq 'rsync') {
+					system("rsync --password-file=$cfg_dir/rsync.user $username\@$hostname\:\:$hostpath/$tarfile $cfg_dir/restores/");
+				} else {
+					system("wget http://$hostname/$hostpath/$tarfile -P $cfg_dir/restores/");
+				}
+			}
+			if (-e "$cfg_dir/restores/$tarfile") {
+				system("tar -C $restore_path -xzf $cfg_dir/restores/$tarfile $_");
+			} else {
+				return(1);
+			}
+		}
+	}
+    return(0);
+}
+
+sub catalog_to_wildcard {
+	my ($cat_entry) = @_;
+	my @line_data = split(':', $cat_entry);
+	my $wildcard = $line_data[0];
+	$wildcard;
+}
+
+sub wildcard_to_tarfile {
+	my ($wildcard) = @_;
+	my $tarfile = basename(glob("$save_path/*$wildcard.txt"));
+	$tarfile =~ s/txt/$tar_ext/;
+	$tarfile =~ s/list/backup/;
+	$tarfile;
+}
+
+sub file_to_tarfile {
+	my ($restore_file, $wildcard) = @_;
+	my $tarfile = `grep -l $restore_file $save_path/*$wildcard.txt`;
+	chop $tarfile;
+	$tarfile = basename($tarfile);
+	$tarfile =~ s/txt/$tar_ext/;
+	$tarfile =~ s/list/backup/;
+	$tarfile;
+}
+
+sub find_tape_offset {
+	my ($cat_entry) = @_;
+	my @line_data = split(':', $cat_entry);
+	my $label = $line_data[2];
+	my @catalog = cat_("$cfg_dir/drakbackup_catalog");
+	# always off by 1 for tape label.
+	my $offset = 1;
+	foreach (@catalog) {
+		if (instr($_, $label)) {
+			if (!instr($_, $cat_entry)) {
+				$offset++;
+			} else {
+				return($offset);
+			}
+		} 
+	}	
 }
 
 sub restore_box {
