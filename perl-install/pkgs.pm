@@ -336,8 +336,7 @@ sub psUpdateHdlistsDeps {
 
     #- parse hdlist.list file.
     my $medium = 1;
-    local $_;
-    while (<$listf>) {
+    foreach (<$listf>) {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
