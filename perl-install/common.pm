@@ -96,8 +96,8 @@ sub symlinkf { unlink $_[1]; symlink $_[0], $_[1] }
 sub chop_ { map { my $l = $_; chomp $l; $l } @_ }
 sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
 sub round { int ($_[0] + 0.5) }
-sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
-sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
+sub round_up { my ($i, $r) = @_; $i = int $i; $i += $r - ($i + $r - 1) % $r - 1; }
+sub round_down { my ($i, $r) = @_; $i = int $i; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }
 sub is_empty_hash_ref { my $a = shift; !defined $a || keys(%$a) == 0 }
 sub difference2 { my %l; @l{@{$_[1]}} = (); grep { !exists $l{$_} } @{$_[0]} }

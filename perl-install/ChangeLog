@@ -1,3 +1,14 @@
+2000-10-09  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm (selectKeyboard): don't assume $o->{langs} is set
+	(selectLanguage): don't set $o->{langs} (so that you can go back
+	and it works)
+
+	* common.pm (round_up, round_down): ensure number is an integer
+
+	* install_steps_interactive.pm (chooseGroups): take into account
+	the min_level to compute the size
+
 2000-10-08  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_interactive.pm (choosePackages): move the

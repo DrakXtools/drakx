@@ -435,11 +435,11 @@ sub choosePackages {
     my $min_mark = $::beginner ? 25 : $::expert ? 0 : 1;
 
     my $b = pkgs::saveSelected($packages);
-    my (undef, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+    my ($ind, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
 
-    $o->chooseGroups($packages, $compssUsers, \$individual, $max_size) unless $::beginner || $::corporate;
+    $o->chooseGroups($packages, $compssUsers, $min_mark, $ind, \$individual, $max_size) unless $::beginner || $::corporate;
 
     my $size2install = min($availableC, do {
 	my $max = round_up(min($max_size, $availableC) / sqr(1024), 100);
@@ -465,7 +465,7 @@ sub choosePackages {
 	}
     });
     if (!$size2install) { #- special case for desktop
-	$o->chooseGroups($packages, $compssUsers) or goto &choosePackages;
+	$o->chooseGroups($packages, $compssUsers, $min_mark, $ind) or goto &choosePackages;
 	$size2install = $availableC;
     }
     ($o->{packages_}{ind}) =
@@ -481,13 +481,13 @@ sub chooseSizeToInstall {
 sub choosePackagesTree {}
 
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $individual, $max_size) = @_;
+    my ($o, $packages, $compssUsers, $min_level, $ind, $individual, $max_size) = @_;
 
     my %size;
     my $base = pkgs::selectedSize($packages);
     foreach (@{$o->{compssUsersSorted}}) {
 	my $b = pkgs::saveSelected($packages);
-	pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	$_->{values}[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
 	$size{$_} = pkgs::selectedSize($packages) - $base;
 	pkgs::restoreSelected($b);
     }
@@ -498,11 +498,12 @@ sub chooseGroups {
 
 	my $b = pkgs::saveSelected($packages);
 	foreach (@{$o->{compssUsersSorted}}) {
-	    pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	    $_->{values}[$ind] < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
 	}
 	$size{Miscellaneous} = $max_size - pkgs::selectedSize($packages);
 	pkgs::restoreSelected($b);
     }
+    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
     my $all;
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
@@ -514,7 +515,7 @@ sub chooseGroups {
 				 -e "$f.xpm" or $f = '/usr/share/icons/default_section';
 				 "$f.xpm";
 			     },
-			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : '') }, 
+			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') }, 
 			   },
 			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
 			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),

@@ -87,7 +87,6 @@ sub set_help { 1 }
 sub selectLanguage {
     my ($o) = @_;
     lang::set($o->{lang});
-    $o->{langs} ||= [ $o->{lang} ];
 
     if ($o->{keyboard_unsafe} || !$o->{keyboard}) {
 	$o->{keyboard_unsafe} = 1;
@@ -99,7 +98,7 @@ sub selectLanguage {
 sub selectKeyboard {
     my ($o) = @_;
     keyboard::setup($o->{keyboard});
-    lang::set_langs($o->{langs});
+    lang::set_langs($o->{langs} || [ $o->{lang} ]);
 }
 #------------------------------------------------------------------------------
 sub selectPath {}
