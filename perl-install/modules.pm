@@ -97,6 +97,7 @@ arch() =~ /^sparc/ ? (
   "parport" => "parport",
   "parport_pc" => "parport_pc",
   "sunrpc" => "sunrpc",
+  "pci-scan" => "pci-scan",
 }],
 [ 'isdn', {
    "hisax" => "hisax",

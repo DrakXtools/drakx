@@ -17,7 +17,6 @@ my $tmpconfig = "/tmp/Xconfig";
 
 my ($prefix, %monitors, %standard_monitors_);
 
-1;
 
 sub getVGAMode($) { $_[0]->{card}{vga_mode} || $vgamodes{"640x480x16"}; }
 
@@ -1165,3 +1164,5 @@ Would you like X to start when you reboot?"), 1);
 	run_program::rooted($prefix, "chkconfig", "--del", "gpm") if $o->{mouse}{device} =~ /ttyS/ && !$::isStandalone;
     }
 }
+
+1;

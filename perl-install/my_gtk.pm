@@ -375,7 +375,7 @@ sub create_packtable($@) {
 		ref $_ or $_ = new Gtk::Label($_);
 		$j != $#$l ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0) :
-		  $w->attach($_, $j, $j + 1, $i, $i + 1, { 'fill', 'expand' }, ref($_) eq 'Gtk::ScrolledWindow' ? { 'fill', 'expand' } : 0, 0, 0);
+		  $w->attach($_, $j, $j + 1, $i, $i + 1, 1|4, ref($_) eq 'Gtk::ScrolledWindow' ? 1|4 : 0, 0, 0);
 		$_->show;
 	    }
 	} @$l;
