@@ -493,7 +493,26 @@ sub getECI() {
     grep { member(sprintf("%04x%04x%04x%04x", $_->{vendor}, $_->{id}, $_->{subvendor}, $_->{subid}), @ids) } usb_probe();
 }
 
-sub getNet() { grep { $_ ne 'lo' } c::get_netdevices() }
+sub getNet() { 
+    # we want LAN like interfaces here (eg: ath|br|eth|fddi|plip|tr|usb|wifi|wlan).
+    # there's also bnep%d for bluetooth, bcp%d...
+    # we do this by blacklisting the following interfaces:
+    # - sit0 which is *always* created by net/ipv6/sit.c, thus is always created since net.agent loads ipv6 module
+    # - ippp|isdn|plip|ppp (initscripts suggest that isdn%d can be created but kernel sources claim not)
+    #   ippp%d are created by drivers/isdn/i4l/isdn_ppp.c
+    #   plip%d are created by drivers/net/plip.c
+    #   ppp%d are created by drivers/net/ppp_generic.c
+    #
+    # we need both detection schemes since:
+    # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
+    # - /proc/net/dev does not list VLAN and IP aliased interfaces
+
+    grep { $_ !~ /^(?:lo|ippp|isdn|plip|ppp|sit0)/ }
+      uniq(
+           (map { if_(/^\s*([A-Za-z0-9:\.]*):\s/, $1) } cat_("/proc/net/dev")),
+           c::get_netdevices(),
+          );
+ }
 
 #sub getISDN() {
 #    mapgrep(sub {member (($_[0] =~ /\s*(\w*):/), @netdevices), $1 }, split(/\n/, cat_("/proc/net/dev")));
