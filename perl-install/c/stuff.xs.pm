@@ -40,6 +40,10 @@ print '
 ';
 
 $ENV{C_RPM} and print '
+#include <langinfo.h>
+#include <string.h>
+#include <iconv.h>
+
 #undef Fflush
 #undef Mkdir
 #undef Stat
@@ -427,6 +431,29 @@ setPromVars(linuxAlias, bootDevice)
 ';
 
 $ENV{C_RPM} and print '
+char *
+from_utf8(s)
+  char *s
+  CODE:
+  char *charset = nl_langinfo(CODESET);
+  iconv_t cd = iconv_open(charset, "utf-8");
+  RETVAL = s;
+  if (cd != (iconv_t) (-1)) {
+      int s_len = strlen(RETVAL);
+      char *buf = alloca(2 * s_len);
+      {
+	  char *ptr = buf;
+	  int ptr_len = s_len;
+	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
+	      *ptr = 0;
+	      RETVAL = buf;
+	  }
+      }
+      iconv_close(cd);
+  }
+  OUTPUT:
+  RETVAL
+
 int
 rpmReadConfigFiles()
   CODE:
