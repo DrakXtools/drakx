@@ -630,28 +630,44 @@ sub miscellaneousNetwork {
     setVarsInCsh("$prefix/etc/profile.d/proxy.csh", $::o->{miscellaneous}, qw(http_proxy ftp_proxy));
 }
 
-sub setup_thiskind {
-    my ($in, $type, $auto, $at_least_one) = @_;
+sub load_category_no_message {
+    my ($category, $at_least_one) = @_;
+    my @l;
+    @l = modules::load_category($category, undef);
+    @l = modules::load_category($category, undef, 'force') if !@l && $at_least_one;
+    @l;
+}
 
-    my @l = do {
-	my $w;
-	setup_thiskind_backend($type, $auto, $at_least_one, sub { $w = wait_load_module($in, $type, @_) });
-    };
+sub load_category {
+    my ($in, $category, $auto, $at_least_one) = @_;
 
+    my @l;
     if (!$::noauto) {
-	if (my @err = grep { $_ } map { $_->{error} } @l) {
-	    $in->ask_warn('', join("\n", @err));
-	}
-	return @l if $auto && (@l || !$at_least_one);
+	my $w;
+	my $wait_message = sub { $w = wait_load_module($in, $category, @_) };
+	@l = modules::load_category($category, $wait_message);
+	@l = modules::load_category($category, $wait_message, 'force') if !@l && $at_least_one;
     }
+    if (my @err = grep { $_ } map { $_->{error} } @l) {
+	$in->ask_warn('', join("\n", @err));
+    }
+    return @l if $auto && (@l || !$at_least_one);
+
     @l = map { $_->{description} } @l;
 
     if ($at_least_one && !@l) {
-	push @l, load_module($in, $type) || return;
+	@l = load_category__prompt($in, $category) or return;
     }
 
+    load_category__prompt_for_more($in, $category, @l);
+}
+
+sub load_category__prompt_for_more {
+    my ($in, $category, @l) = @_;
+
+    (my $msg_type = $category) =~ s/\|.*//;
+
     while (1) {
-	(my $msg_type = $type) =~ s/\|.*//;
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", @l), $msg_type),
 	    _("Do you have another one?") ] :
@@ -662,91 +678,78 @@ sub setup_thiskind {
 	my $r = $in->ask_from_list_('', $msg, $opt, "No") or die 'already displayed';
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
-	    push @l, load_module($in, $type) || next;
+	    push @l, load_category__prompt($in, $category) || next;
 	} else {
 	    $in->ask_warn('', [ detect_devices::stringlist() ]);
 	}
     }
 }
 
-# setup_thiskind_backend : setup the kind of hardware
-# input :
-#  $type : typeof hardware to setup
-#  $auto : automatic behaviour
-#  $at_least_one : 
-# output:
-#  @l : list of loaded
-sub setup_thiskind_backend {
-    my ($type, $auto, $at_least_one, $wait_function) = @_;
-    #- for example $wait_function=sub { $w = wait_load_module($in, $type, @_) }
-
-    if (!$::noauto) {
-	my @l = modules::load_thiskind($type, $wait_function, '');
-	@l = modules::load_thiskind($type, $wait_function, 'force') if !@l && $at_least_one;
-	return @l;# sorry to be a sucker, pixel... :)
-    }
-}
-
 sub wait_load_module {
-    my ($in, $type, $text, $module) = @_;
+    my ($in, $category, $text, $module) = @_;
 #-PO: the first %s is the card type (scsi, network, sound,...)
 #-PO: the second is the vendor+model name
     $in->wait_message('',
-		     [ _("Installing driver for %s card %s", $type, $text),
+		     [ _("Installing driver for %s card %s", $category, $text),
 		       if_($::expert, _("(module %s)", $module))
 		     ]);
 }
 
-sub load_module {
-    my ($in, $type) = @_;
-    my @options;
+sub load_module__ask_options {
+    my ($in, $module_descr, $parameters) = @_;
 
-    (my $msg_type = $type) =~ s/\|.*//;
-    my $m = $in->ask_from_listf('',
+    if (@$parameters) {
+	$in->ask_from('', 
+		      _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $module_descr), 
+		      [ map {; { label => $_->[0], help => $_->[1], val => \$_->[2] } } @$parameters ],
+		     ) or return;
+	map { if_($_->[2], "$_->[0]=$_->[2]") } @$parameters;
+    } else {
+	split ' ', $in->ask_from_entry('',
+_("You may now provide options to module %s.
+Options are in format ``name=value name2=value2 ...''.
+For instance, ``io=0x300 irq=7''", $module_descr), _("Module options:"),
+				);
+    }
+}
+
+sub load_category__prompt {
+    my ($in, $category) = @_;
+
+    (my $msg_type = $category) =~ s/\|.*//;
+    my %available_modules = map_each { $::a => $::b ? "$::a ($::b)" : $::a } modules::category2modules_and_description($category);
+    my $module = $in->ask_from_listf('',
 #-PO: the %s is the driver type (scsi, network, sound,...)
 			       _("Which %s driver should I try?", $msg_type),
-			       \&modules::module2text,
-			       [ modules::module_of_type($type) ]) or return;
-    my $l = modules::module2text($m);
-    require modparm;
-    my @names = modparm::get_options_name($m);
+			       sub { $available_modules{$_[0]} },
+			       [ keys %available_modules ]) or return;
+    my $module_descr = $available_modules{$module};
 
-    if ((@names != 0) && $in->ask_from_list_('',
+    my @options;
+    require modparm;
+    my @parameters = modparm::parameters($module);
+    if (@parameters && $in->ask_from_list_('',
 _("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
-not cause any damage.", $l),
-			      [ __("Autoprobe"), __("Specify options") ], "Autoprobe") ne "Autoprobe") {
-      ASK:
-	if (@names >= 0) {
-
-	    my @args = map { my $i = ''; /TOOLTIP=>(.*)/; my $t = $1; s/TOOLTIP=>.*//;print "tooltip : $t\n"; { label => $_, val => \$i, help => $t} } @names;
-	    my @l = $in->ask_from('', _("You may now provide its options to module %s.\nNote that any address should be entered with the prefix 0x like '0x123'", $l), \@args) ? map { ${$_->{val}} } @args : undef or return;
-
-	    @options = modparm::get_options_result($m, @l);
-	} else {
-	    @options = split ' ',
-	      $in->ask_from_entry('',
-_("You may now provide options to module %s.
-Options are in format ``name=value name2=value2 ...''.
-For instance, ``io=0x300 irq=7''", $l),
-				 _("Module options:"),
-				);
-	}
+not cause any damage.", $module_descr), [ __("Autoprobe"), __("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
+	@options = load_module__ask_options($in, $module_descr, \@parameters);
     }
-    eval {
-	my $w = wait_load_module($in, $type, $l, $m);
-	log::l("user asked for loading module $m (type $type, desc $l)");
-	modules::load($m, $type, @options);
-    };
-    if ($@) {
+    while (1) {
+	eval {
+	    my $w = wait_load_module($in, $category, $module_descr, $module);
+	    log::l("user asked for loading module $module (type $category, desc $module_descr)");
+	    modules::load([ $module, @options ]);
+	};
+	return $module_descr if !$@;
+
 	$in->ask_yesorno('',
 _("Loading module %s failed.
-Do you want to try again with other parameters?", $l), 1) or return;
-	goto ASK;
+Do you want to try again with other parameters?", $module_descr), 1) or return;
+
+	@options = load_module__ask_options($in, $module_descr, \@parameters);
     }
-    $l;
 }
 
 sub ask_users {
