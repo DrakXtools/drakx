@@ -1,3 +1,8 @@
+2000-02-11  François Pons  <fpons@mandrakesoft.com>
+
+	* fixed diskdrake to handle limit case when creating and resizing
+	partition table, address size limit and start sector limit.
+
 2000-02-11  Pixel  <pixel@mandrakesoft.com>
 
 	* install2.pm (main): add a callback on SEGV
@@ -25,6 +30,7 @@
 	(that way no pci probe the second time)
 
 2000-02-10  François Pons  <fpons@mandrakesoft.com>
+
 	* heavy modification of build_archive and extract_archive to manage
 	a TOC directly in archive file, handle bzip2 or gzip compression,
 	extract_archive can extract multiple files a time, with minimal

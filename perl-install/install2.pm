@@ -78,7 +78,7 @@ arch() =~ /alpha/ ? (
     $installSteps{first} = $installSteps[0];
 }
 #-#####################################################################################
-#-INTERN CONSTANT
+#-INTERNAL CONSTANT
 #-#####################################################################################
 
 #- these strings are used in quite a lot of places and must not be changed!!!!!
