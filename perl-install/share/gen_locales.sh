@@ -17,7 +17,7 @@ for i in CP1251 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO-8859-3 ISO-88
 done
 
 rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
-for i in hy ja ko th vi ; do
+for i in ja ko th vi ; do
     ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
     rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
     f=usr/share/locale/$i/LC_CTYPE

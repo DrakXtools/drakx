@@ -371,7 +371,7 @@ my %lang2country = (
 );
 
 
-my @during_install__lang_having_their_LC_CTYPE = qw(hy ja ko th vi);
+my @during_install__lang_having_their_LC_CTYPE = qw(ja ko th vi);
 
 #-######################################################################################
 #- Functions
@@ -825,7 +825,7 @@ sub during_install__lang2charset {
     $c = 'cp1251' if $c =~ /koi8-/;
     $c = 'iso-8859-15' if member($c, 'iso-8859-1', 'C');
     $c = 'UTF-8' if member($c, 'unicode', 'utf_ka');
-    $c = 'UTF-8' if member($c, 'iso-8859-9e', 'iso-8859-8', 'iso-8859-6'); #- BAD, need fixing
+    $c = 'UTF-8' if member($c, 'armscii-8', 'iso-8859-9e', 'iso-8859-8', 'iso-8859-6'); #- BAD, need fixing
     uc($c);
 }
 
