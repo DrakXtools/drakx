@@ -751,17 +751,16 @@ sub ask_users {
 }
 
 sub autologin {
-    my ($prefix, $o, $in, $install) = @_;
+    my ($prefix, $o, $in) = @_;
 
     my $cmd = $prefix ? "chroot $prefix" : "";
     my @wm = (split (' ', `$cmd /usr/sbin/chksession -l`));
-    my @users;
 
-    if (@wm && @users && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
+    if (@wm && !is_empty_array_ref($o->{users}) && !$o->{authentication}{NIS} && $ENV{SECURE_LEVEL} <= 3) {
 	 $in->ask_from_entries_refH(_("Autologin"),
 				    _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+				    [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @{$o->{users}} ] },
 				      { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
     }
 }
