@@ -99,7 +99,7 @@ sub pre_func {
 					   20,200,
 					   _("We are now going to configure the %s connection.",_($text)),
 					  ),
-			0, $W->create_okcancel
+			0, $W->create_okcancel(_("OK"))
 		       )
 	      );
 	$W->main;
