@@ -82,9 +82,7 @@ sub start_daemons () {
     system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
     my $netscripts = '/etc/sysconfig/network-scripts';
-    sys("$netscripts/net_cnx_down >/dev/null") if cat_("$netscripts/net_cnx_down") !~ /network/;
     sys("/etc/rc.d/init.d/network restart >/dev/null");
-    sys("$netscripts/net_cnx_up >/dev/null") if cat_("$netscripts/net_cnx_down") !~ /network/;
 
     sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid';
     sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
