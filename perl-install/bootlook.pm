@@ -43,7 +43,7 @@ if ($::isEmbedded) {
 my $in = interactive::vnew('su');
 local $_ = join '', @ARGV;
 
-/-h/ and die _("bootlook.pm $Id$\nno help implemented yet.\n");
+/-h/ and die _("$Id$\nno help implemented yet.\n");
 
 my @winm;
 my @usernames;
@@ -247,19 +247,19 @@ sub updateAurora
     if ($a_mode) {
         if ($a_c_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-Categorizing-WsLib",    "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(q(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
+            $in->do_pkgs->install(q(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
         }
         if ($a_h_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(q(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
+            $in->do_pkgs->install(q(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
         }
         if ($a_v_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(q(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
+            $in->do_pkgs->install(q(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
         }
         if ($a_g_button->get_active()) {
             symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
-            $in->standalone::pkgs_install(q(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
+            $in->do_pkgs->install(q(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
 	}
     } else {
 	unlink "/etc/aurora/Monitor";
