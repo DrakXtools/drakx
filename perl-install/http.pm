@@ -28,15 +28,15 @@ sub getFile {
 
     #- skip until empty line
     local $_;
-    my ($now, $last) = 0;
+    my ($now, $last, $tmp) = 0;
+    my $read = sub { sysread($sock, $_, 1) || die; $tmp .= $_ };
     do {
 	$last = $now;
-	sysread($sock, $_, 1) || die;
-	sysread($sock, $_, 1) || die if /\015/;
+	&$read; &$read if /\015/;
 	$now = /\012/;
     } until ($now && $last);
 
-    $sock;
+    $tmp =~ /^.*\b200\b/ ? $sock : undef;
 }
 
 1;
