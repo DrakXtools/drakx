@@ -238,44 +238,128 @@ sub setup_local {
 
 For local printers auto-detection is not really necessary, because they are external devices where you can easily see on their labels which models you have, but if you really want to auto-detect them, connect them and turn them on now and click \"Yes\", otherwise click \"No\"."),0);
     my @parport;
+    my $menuentries;
     if ($do_auto_detect) {
 	@parport = auto_detect($in);
 	$in->set_help('setupLocal') if $::isInstall;
-	foreach (@parport) {
-	    $_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
-						    $_->{val}{DESCRIPTION}) . $_->{port};
+	for my $p (@parport) {
+	    if ($p->{val}{DESCRIPTION}) {
+		my $menustr = $p->{val}{DESCRIPTION};
+		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
+		    $menustr .= _(" on parallel port \#%s", $1);
+		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
+		    $menustr .= _(", USB printer \#%s", $1);
+		}
+		if ($::expert) {
+		    $menustr .= " ($p->{port})";
+		}
+		$menuentries->{$menustr} = $p->{port};
+		push @str, _("Detected %s", $menustr);
+	    } else {
+		my $menustr;
+		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
+		    $menustr = _("Printer on parallel port \#%s", $1);
+		} elsif ($p->{port} =~ m!^/dev/usb/lp(\d+)$!) {
+		    $menustr = _("USB printer \#%s", $1);
+		}
+		if ($::expert) {
+		    $menustr .= " ($p->{port})";
+		}
+		$menuentries->{$menustr} = $p->{port};
+	    }
 	}
 	if ($::expert || !@str) {
 	    @port = detect_devices::whatPrinterPort();
-	} else {
-	    @port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
+	    for my $q (@port) {
+		if (@str) {
+		    my $alreadyfound = 0;
+		    for my $p (@parport) {
+			if ($p->{port} eq $q) {
+			    $alreadyfound = 1;
+			    last;
+			}
+		    }
+		    if ($alreadyfound) {
+			next;
+		    }
+		}
+		my $menustr;
+		if ($q =~ m!^/dev/lp(\d+)$!) {
+		    $menustr = _("Printer on parallel port \#%s", $1);
+		} elsif ($q =~ m!^/dev/usb/lp(\d+)$!) {
+		    $menustr = _("USB printer \#%s", $1);
+		}
+		if ($::expert) {
+		    $menustr .= " ($q)";
+		}
+		$menuentries->{$menustr} = $q;
+	    }
 	}
     } else {
-	@port = qw(/dev/lp0 /dev/lp1 /dev/lp2
-		   /dev/usb/lp0 /dev/usb/lp1 /dev/usb/lp2);
+	my $m;
+	for ($m = 0; $m <= 2; $m++) {
+	    my $menustr = _("Printer on parallel port \#%s", $m);
+	    if ($::expert) {
+		$menustr .= " (/dev/lp$m)";
+	    }
+	    $menuentries->{$menustr} = "/dev/lp$m";
+	    $menustr = _("USB printer \#%s", $m);
+	    if ($::expert) {
+		$menustr .= " (/dev/usb/lp$m)";
+	    }
+	    $menuentries->{$menustr} = "/dev/usb/lp$m";
+	}
     }
+    my @menuentrieslist = sort { $menuentries->{$a} cmp $menuentries->{$b} }
+    keys(%{$menuentries});
+    my $menuchoice = "";
     if (($printer->{configured}{$queue}) &&
 	($printer->{currentqueue}{'connect'} =~ m/^file:/)) {
 	$device = $printer->{currentqueue}{'connect'};
 	$device =~ s/^file://;
-    } elsif ($port[0]) {
-	$device = $port[0];
+	for my $p (keys %{$menuentries}) {
+	    if ($device eq $menuentries->{$p}) {
+		$menuchoice = $p;
+		last;
+	    }
+	}
+    }
+    if (($menuchoice eq "") && (@menuentrieslist > -1)) {
+	$menuchoice = $menuentrieslist[0];
     }
     if ($in) {
 	$::expert or $in->set_help('configurePrinterDev') if $::isInstall;
-	return if !$in->ask_from(_("Local Printer Device"),
-_("What device is your printer connected to?
-(Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ...,
-1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)\n") . (join "\n", @str), [
-{ label => _("Printer Device"), val => \$device, list => \@port, not_edit => !$::expert } ],
-complete => sub {
-    unless ($device ne "") {
-	$in->ask_warn('', _("Device/file name missing!"));
-	return (1,0);
+	return if !$in->ask_from(_("Local Printer"),
+				 ($do_auto_detect ?
+				  ($::expert ?
+				   (@str ?
+_("Here is a list of all auto-detected printers. ") : ()) . 
+_("Please choose the desired printer/printer port or enter a device name/file name in the input line") :
+				   (@str ?
+_("Here is a list of all auto-detected printers. ") : ()) . 
+_("Please choose the desired printer/printer port.\n\n")) :
+				  ($::expert ?
+_("Please choose the port where your printer is connected to or enter a device name/file name in the input line") :
+_("Please choose the port where your printer is connected to.\n\n"))) .
+				  ($::expert ?
+_(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...).\n\n") :
+				   ()). (join "\n", @str), [
+{ label => _("Your choice"), val => \$menuchoice, list => \@menuentrieslist, not_edit => !$::expert } ],
+        complete => sub {
+            unless ($menuchoice ne "") {
+	        $in->ask_warn('', _("You must choose/enter a printer/device!"));
+	        return (1,0);
+            }
+            return 0;
+        }
+        );
     }
-    return 0;
-}
-					     );
+
+    #- Get the device file name according to what was chosen from the menu
+    if ($menuentries->{$menuchoice}) {
+	$device = $menuentries->{$menuchoice};
+    } else {
+	$device = $menuchoice;
     }
 
     #- make the DeviceURI from $device.

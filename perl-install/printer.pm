@@ -453,7 +453,6 @@ sub make_menuentry {
     } else {
 	$localremote = _("Remote Printers");
     }
-    my $queue = $printer->{configured}{$queue}{'queuedata'}{'queue'};
     my $make = $printer->{configured}{$queue}{'queuedata'}{'make'};
     my $model = $printer->{configured}{$queue}{'queuedata'}{'model'};
     my $connection;
@@ -1136,6 +1135,9 @@ sub configure_queue($) {
 	$printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} =
 	    read_cups_options($printer->{currentqueue}{'queue'});
     }
+    # Construct an entry line for tree view in main window of
+    # printerdrake
+    make_menuentry($printer, $printer->{currentqueue}{'queue'});
     # Clean up
     delete($printer->{ARGS});
     $printer->{OLD_CHOICE} = "";
