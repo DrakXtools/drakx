@@ -1409,7 +1409,7 @@ sub migrate_device_names {
     } @from_fstab_not_handled;
 
     $o_in->ask_from('', 
-		    N("The disk %s was renamed:", $_->{device}),
+		    N("The following disk(s) were renamed:"),
 		    [ map {
 			{ label => N("%s (previously named as %s)", $_->{mntpoint}, $_->{device}),
 			  val => \$_->{device}, format => sub { $_[0] && $_->{device} },
