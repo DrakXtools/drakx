@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+#- $Id$
+
 if (shift(@ARGV) ne '-f') {
     print "Call it with option -f, but don't fear loosing all your data, this command is dangerous!";
     print "
@@ -153,7 +155,7 @@ sub correct_start_end {
     my ($cylinder_size, $c_start, $c_end) = ($sectors*$heads*512/1024/1024, undef, undef);
     if (abs($cylinder_size*$cylinders-$hd_size)/$hd_size < 0.01) {
 	$c_start = $$rstart+($keep_start ? 0 : $cylinder_size/$heads);
-	$c_end = $cylinder_size*int(1/2+$end/$cylinder_size);
+	$c_end = $cylinder_size * int(1 / 2 + $end / $cylinder_size);
 	$c_end > $hd_size and $c_end = $hd_size;
 	$$rstart = $c_end;
     } else {
@@ -565,7 +567,7 @@ system "rpm", "--root", "/mnt", "--initdb";
 
 #- copy and install from each cd image.
 foreach my $medium (@media) {
-    my $rpmsidr = $medium->{rpmsdir};
+    my $rpmsdir = $medium->{rpmsdir};
     $rpmsdir =~ s|%{ARCH}.*||; #- only for checking directory presence...
     while ($cd && ! -d "/cdrom/$rpmsdir") {
 	system "unmount", "/dev/$cd";
