@@ -544,6 +544,7 @@ sub read_ipsec_conf {
 		        	chomp($_);
 				$myline = $_;
 				$myline =~ s/^\s+//;
+				$myline =~ s/;$//;
 				if ($myline =~ /^spdadd/) {
 					@mylist = split /\s+/,$myline;
 					$in_a_conn = "y";
@@ -756,7 +757,7 @@ sub already_existing_section_ipsec_conf {
 #- returns the reference to the dynamical list for editing
 sub dynamic_list {
 	my ($number, $ipsec) = @_;
-	my @list = 	map { { 	label   => "$ipsec->{$number}{$_}[0]" . "=",
+	my @list = 	map { { 	label   => $ipsec->{$number}{$_}[0] . "=",
 					val     => \$ipsec->{$number}{$_}[1] } } ikeys %{$ipsec->{$number}};
 
 	@list;
