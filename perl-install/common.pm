@@ -258,7 +258,7 @@ sub require_root_capability() {
     return unless $>; # we're already root
     if (check_for_xserver()) {
 	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
-	    exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
+	    exec("kdesu", "--ignorebutton","-c", "$0 @ARGV") or die N("kdesu missing");
 	}
     }
     exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
