@@ -170,7 +170,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		log_message("found the " DISTRIB_NAME " Installation, good news!");
 
 #endif
-	if (IS_RESCUE || ret != RETURN_OK) {
+	if (!KEEP_MOUNTED || ret != RETURN_OK) {
 		/* in rescue mode, we don't need the media anymore */
 		umount(IMAGE_LOCATION);
 		del_loop(loopdev);

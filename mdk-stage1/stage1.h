@@ -34,6 +34,7 @@ extern char * interactive_fifo;
 #define MODE_EXPERT         (1 << 1)
 #define MODE_RESCUE         (1 << 3)
 #define MODE_AUTOMATIC	    (1 << 4)
+#define MODE_KEEP_MOUNTED   (1 << 5) /* for rescue */
 #define MODE_DEBUGSTAGE1    (1 << 6)
 #define MODE_CHANGEDISK     (1 << 10)
 #define MODE_UPDATEMODULES  (1 << 11)
@@ -51,6 +52,7 @@ extern char * interactive_fifo;
 #define IS_NOAUTO      (get_param(MODE_NOAUTO))
 #define IS_NETAUTO     (get_param(MODE_NETAUTO))
 #define IS_RECOVERY    (get_param(MODE_RECOVERY))
+#define KEEP_MOUNTED   (!IS_RESCUE || get_param(MODE_KEEP_MOUNTED))
 
 void fatal_error(char *msg) __attribute__ ((noreturn));
 

@@ -249,7 +249,7 @@ static enum return_type try_with_device(char *dev_name)
 		goto ask_dir;
 	}
 
-	if (IS_RESCUE)
+	if (!KEEP_MOUNTED)
 		umount(disk_own_mount);
 
 	return RETURN_OK;

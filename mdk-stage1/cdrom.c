@@ -67,7 +67,7 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 #ifndef MANDRAKE_MOVE
 	may_load_clp();
 
-	if (IS_RESCUE)
+	if (!KEEP_MOUNTED)
 		/* in rescue mode, we don't need the media anymore */
 		umount(IMAGE_LOCATION);
 #endif

@@ -105,6 +105,7 @@ void process_cmdline(void)
 		if (!strcmp(name, "changedisk")) set_param(MODE_CHANGEDISK);
 		if (!strcmp(name, "updatemodules")) set_param(MODE_UPDATEMODULES);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
+		if (!strcmp(name, "keepmounted")) set_param(MODE_KEEP_MOUNTED);
 		if (!strcmp(name, "noauto")) set_param(MODE_NOAUTO);
 		if (!strcmp(name, "netauto")) set_param(MODE_NETAUTO);
 		if (!strcmp(name, "debugstage1")) set_param(MODE_DEBUGSTAGE1);
