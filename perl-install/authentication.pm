@@ -47,7 +47,8 @@ sub ask_parameters {
 	my %sub_kinds = my @sub_kinds = (
 	    anonymous => N("anonymous"), 
 	    simple => N("simple"), 
-	    tls => N("over SSL/TLS"), 
+	    tls => N("TLS"),
+	    ssl => N("SSL"),
 	    kerberos => N("security layout (SASL/Kerberos)"),
 	);
 	my $AD_user = $authentication->{AD_user} =~ /(.*)\@\Q$val\E$/ ? $1 : $authentication->{AD_user};
@@ -125,8 +126,9 @@ sub set {
 	my $ssl = { 
 		   anonymous => 'off', 
 		   simple => 'off', 
-		   tls => 'start_tls' . "\n" . 'ssl on',
-		   kerberos => 'on',
+		   tls => 'start_tls',
+		   ssl => 'on',
+		   kerberos => 'off',
 		  }->{$authentication->{sub_kind}};
 
 	update_ldap_conf(
@@ -346,7 +348,7 @@ sub configure_krb5_for_AD {
 
     my @sections = (
 		    realms => <<EOF,
- MANDRAKESOFT.COM = {
+ $uc_domain = {
   kdc = $authentication->{AD_server}:88
   admin_server = $authentication->{AD_server}:749
   default_domain = $authentication->{AD}
