@@ -22,9 +22,9 @@
 #ifndef H_DNS
 #define H_DNS 
 
-#include <netinet/in.h>
+#include <netdb.h>
 
-int mygethostbyname(char * name, struct in_addr * addr);
-char * mygethostbyaddr(char * ipnum);
+// needs a wrapper since gethostbyname from dietlibc doesn't support domain handling
+struct hostent *mygethostbyname(const char *name);
 
 #endif
