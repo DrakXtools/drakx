@@ -1,3 +1,71 @@
+2005/02/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: handle bpalogin service
+	perl_checker fixes
+	add bpalogin support for cable connections
+
+2005/02/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/zh_TW.po, share/po/fr.po: updated French file; corrected syntax
+	errors in Chinese file
+
+	* share/po/vi.po: updated Vietnamese file
+
+2005/02/04  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Better version to install urpmi with copied RPMs
+	Make install_urpmi work when having copied every RPM on disk
+	call hdInstallPath only once
+	Remove a debug trace, and perl_checker fixes
+	Add support to copy all RPMs to the hard drive before installation.
+
+	* share/po/zh_TW.po: Fix zh_TW problem
+
+	* install_steps.pm, install_steps_gtk.pm, pkgs.pm,
+	install_steps_interactive.pm: Add support to copy all RPMs to the hard
+	drive before installation.
+
+	* diskdrake/interactive.pm: Untranslated string
+
+2005/02/04  shivahuang
+
+	* share/po/zh_TW.po: updated po file
+
+2005/02/04  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: beta 10.2 logo
+
+2005/02/03  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2005/02/03  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/rpmsrate: CAT_X at Pixel's suggestion
+	Always install mozilla-firefox when NETWORKING_WWW is selected
+
+2005/02/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po: updated Japanese file
+
+2005/02/03  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/main.pm: in auto, $raw_X non empty is "ok"
+
+	* partition_table.pm: cleanup
+
+2005/02/03  rstandtke
+
+	* share/po/de.po: some additions
+
+2005/02/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-0.18mdk
+
+2005/02/03  Youcef Rabah Rahal <rahal at arabeyes.org>
+
+	* share/po/ar.po: Arabnic translation
+
 2005/02/02  José JORGE <jjorge at free.fr>
 
 	* share/po/pt.po: melo
@@ -44213,7 +44281,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1004 2005/01/26 17:43:11 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1005 2005/02/02 18:46:12 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
