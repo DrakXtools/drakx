@@ -136,7 +136,6 @@ my $servers = get_server();
 $combo_ntpserver->set_popdown_strings(@$servers);
 if (-e $ntpfile && -e $ntpdlock) {
     $ntp = timezone::ntp_server('');
-    print "******$ntp*******\n";
     $ntp and ntp_widget_state(1);
     foreach my $s (@$servers) {
 	$s =~ /\Q$ntp/ and $fullntp = $s;
