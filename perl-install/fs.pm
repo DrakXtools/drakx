@@ -94,7 +94,10 @@ sub add2all_hds {
 }
 
 sub get_major_minor {
-    (undef, $_->{major}, $_->{minor}) = devices::entry($_->{device}) foreach @_;
+    eval {
+	my (undef, $major, $minor) = devices::entry($_->{device});
+	($_->{major}, $_->{minor}) = ($major, $minor);
+    } foreach @_;
 }
 
 sub merge_info_from_mtab {
@@ -141,7 +144,8 @@ sub write_fstab {
 	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs$_->{loopback_file}" : $_->{device}) :
 	  do {
 	      my $dir = $_->{device} =~ m|^/| ? '' : '/dev/';
-	      devices::make("$prefix$dir$_->{device}"); "$dir$_->{device}";
+	      eval { devices::make("$prefix$dir$_->{device}") };
+	      "$dir$_->{device}";
 	  };
 
 	mkdir("$prefix/$_->{mntpoint}", 0755);
