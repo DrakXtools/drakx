@@ -21,9 +21,9 @@ $(DIRS):
 install:
 	@install -d $(MISC_DEST)/auto
 	@install mdkinst_stage2_tool $(MISC_DEST)
-	cp -rf `perl -Mpackdrake -le 'print $$INC{"packdrake.pm"}'` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
-	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`URPM* $(MISC_DEST) || { echo "install perl-URPM first!" ; exit 1; }
-	@cp -rf `perl -MURPM -le 'print $$INC{"URPM.pm"}' | sed s/URPM.pm//`auto/URPM $(MISC_DEST)/auto || { echo "install perl-URPM first!" ; exit 1; }
+	cp -rf `perldoc -l packdrake` $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
+	@cp -rf `perldoc -l URPM | sed s/URPM.pm//`URPM* $(MISC_DEST) || { echo "install perl-URPM first!" ; exit 1; }
+	@cp -rf `perldoc -l URPM | sed s/URPM.pm//`auto/URPM $(MISC_DEST)/auto || { echo "install perl-URPM first!" ; exit 1; }
 	@cd /usr/bin ; install packdrake $(MISC_DEST) || { echo "packdrake is missing"; exit 1; }
 	@cd /usr/bin ; install gendistrib rpm2header $(MISC_DEST) || { echo "install rpmtools first!" ; exit 1; }
 	@mkdir -p $(STAGE2_LIVE)/usr/bin
