@@ -439,7 +439,7 @@ sub when_load {
 	    eval { load('sd_mod') };
 	}
         if ($category =~ /sound/) {
-            my $sound_alias = find { /^sound-slot-[0-9]+$/ and $conf{$_}{alias} eq $name } keys %conf;
+            my $sound_alias = find { /^sound-slot-[0-9]+$/ && $conf{$_}{alias} eq $name } keys %conf;
             $sound_alias ||= 'sound-slot-0';
             add_alias($sound_alias, $name);
         }
