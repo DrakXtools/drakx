@@ -186,9 +186,10 @@ sub boot_img_i386 {
 
     my $rdz = $img; $rdz =~ s/\.img/.rdz/;
     initrd("${mnt}2", $rdz) if !-e $rdz;
-    eval { _ "cp -f $rdz $mnt/$type.rdz" };
+    my $short_type = substr($type, 0, 8);
+    eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
-	unlink "$mnt/$type.rdz";
+	unlink "$mnt/$short_type.rdz";
 	my $avail = (split ' ', `df $mnt`)[-3];
 	my $s = int((-s $rdz) / 1024);
 	die sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
@@ -207,7 +208,7 @@ F3 boot.msg
     my $args = $args_callback ? $args_callback->($_->[1]) : $_->[1];
 "label $_->[0]
   kernel vmlinuz
-  append initrd=$type.rdz $args
+  append initrd=$short_type.rdz $args
 " } entries_append($type));
 
     _ "sync";
