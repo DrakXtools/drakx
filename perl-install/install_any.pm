@@ -205,9 +205,9 @@ sub searchAndMount4Upgrade {
     getHds($o);
 
     #- get all ext2 partition that may be root partition.
-    my %Parts = my %parts = map { $_->{device} => $_ } grep { isExt2($_->{type}) } @{$o->{fstab}};
+    my %Parts = my %parts = map { $_->{device} => $_ } grep { isExt2($_) } @{$o->{fstab}};
     while (%parts) {
-	my $root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
+	$root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
 	$root = delete $parts{$root};
 
 	my $r; unless ($r = $root->{realMntpoint}) {
@@ -216,14 +216,14 @@ sub searchAndMount4Upgrade {
 	    log::l("trying to mount root partition $root->{device}");
 	    eval { fs::mount_part($root, $o->{prefix}, 'readonly') };
 	}
-	my $found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$root/etc/fstab") ];
+	my $found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$r/etc/fstab") ];
 
 	unless ($root->{realMntpoint}) {
 	    log::l("umounting non root partition $root->{device}");
-	    eval { fs::umount_part($root) };
+	    eval { fs::umount_part($root, $o->{prefix}) };
 	}
 
-	last if $found;
+	last if is_empty_array_ref($found);
 
 	delete $root->{mntpoint};
 	$o->ask_warn(_("Information"), 
