@@ -145,7 +145,7 @@ sub real_main {
 
       my $find_lan_module = sub { 
           if (my $dev = find { $_->{device} eq $ethntf->{DEVICE} } detect_devices::pcmcia_probe()) { # PCMCIA case
-              $module = $b->{driver};
+              $module = $dev->{driver};
           } elsif (my $dev = find { $_->[0] eq $ethntf->{DEVICE} } @all_cards) {
               $module = $dev->[1];
           } else { $module = "" }
