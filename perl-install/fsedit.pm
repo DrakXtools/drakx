@@ -248,7 +248,7 @@ sub read_proc_partitions {
 	} else {
 	    $dev = $part->{dev};
 	    if (my $hd = find { $part->{dev} =~ /^$_->{device}./ } @$hds) {
-		$part->{rootDevice} = $hd->{device};
+		put_in_hash($part, partition_table::hd2minimal_part($hd));
 	    }
 	}
 	undef $prev_part if $prev_part && ($prev_part->{rootDevice} || '') ne ($part->{rootDevice} || '');

@@ -41,6 +41,7 @@ struct part {
   string comment        # comment to have in fstab
   string volume_label   # 
 
+  bool is_removable     # is the partition on a removable drive
   bool isMounted
 
   bool isFormatted
@@ -498,7 +499,7 @@ sub Create {
 	    put_in_hash($part, fs::type::type_name2subpart($type_name));
 	    $part->{mntpoint} = '' if isNonMountable($part);
 	    $part->{mntpoint} = 'swap' if isSwap($part);
-	    fs::mount_options::set_default($part);
+	    fs::mount_options::set_default($part, ignore_is_removable => 1);
 
 	    check($in, $hd, $part, $all_hds) or return 1;
 	    $migrate_files = need_migration($in, $part->{mntpoint}) or return 1;

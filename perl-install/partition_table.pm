@@ -12,6 +12,14 @@ use log;
 our @fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
 
 
+sub hd2minimal_part {
+    my ($hd) = @_;
+    { 
+	rootDevice => $hd->{device}, 
+	if_($hd->{usb_media_type}, is_removable => 1),
+    };
+}
+
 #- works for both hard drives and partitions ;p
 sub description {
     my ($hd) = @_;
@@ -202,14 +210,17 @@ sub get_normal_parts_and_holes {
 
     ref($hd) or print("get_normal_parts_and_holes: bad hd" . backtrace(), "\n");
 
+    my $minimal_hole = put_in_hash({ pt_type => 0 }, hd2minimal_part($hd));
+
     my @l = map {
 	my $current = $start;
 	$start = $_->{start} + $_->{size};
-	my $hole = { start => $current, size => $_->{start} - $current, pt_type => 0, rootDevice => $hd->{device} };
+	my $hole = { start => $current, size => $_->{start} - $current, %$minimal_hole };
+	put_in_hash($hole, hd2minimal_part($hd));
 	$hole, $_;
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
-    push @l, { start => $start, size => $last - $start, pt_type => 0, rootDevice => $hd->{device} };
+    push @l, { start => $start, size => $last - $start, %$minimal_hole };
     grep { $_->{pt_type} || $_->{size} >= $hd->cylinder_size } @l;
 }
 
@@ -252,7 +263,7 @@ sub read_one($$) {
 
     @extended > 1 and die "more than one extended partition";
 
-    $_->{rootDevice} = $hd->{device} foreach @normal, @extended;
+    put_in_hash($_, hd2minimal_part($hd)) foreach @normal, @extended;
     { raw => $pt, extended => $extended[0], normal => \@normal, info => $info, nb_special_empty => $nb_special_empty };
 }
 
@@ -532,7 +543,7 @@ sub add {
     get_normal_parts($hd) >= ($hd->{device} =~ /^rd/ ? 7 : $hd->{device} =~ /^(sd|ida|cciss|ataraid)/ ? 15 : 63) and cdie "maximum number of partitions handled by linux reached";
 
     set_isFormatted($part, 0);
-    $part->{rootDevice} = $hd->{device};
+    put_in_hash($part, hd2minimal_part($hd));
     $part->{start} ||= 1 if arch() !~ /^sparc/; #- starting at sector 0 is not allowed
     adjustStartAndEnd($hd, $part) unless $b_forceNoAdjust;
 

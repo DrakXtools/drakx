@@ -160,11 +160,11 @@ sub rationalize {
 
 sub set_default {
     my ($part, %opts) = @_;
-    #- opts are: useSupermount security iocharset codepage
+    #- opts are: useSupermount security iocharset codepage ignore_is_removable
 
     my ($options, $unknown) = &unpack($part);
 
-    if ($part->{is_removable} && !member($part->{mntpoint}, qw(/ /usr /var /boot))) {
+    if (!$opts{ignore_is_removable} && $part->{is_removable} && !member($part->{mntpoint}, qw(/ /usr /var /boot))) {
 	$options->{supermount} = $opts{useSupermount} && !($opts{useSupermount} eq 'magicdev' && $part->{media_type} eq 'cdrom');
 	$part->{fs_type} = !$options->{supermount} ? 'auto' :
 		    $part->{media_type} eq 'cdrom' ? 'udf:iso9660' : 'ext2:vfat';
