@@ -23,6 +23,7 @@ sub Package {
 
 sub select($$;$) {
     my ($packages, $p, $base) = @_;
+    $p->{base} ||= $base;
     $p->{selected} = -1; # selected by user
     my @l = @{$p->{deps} || die "missing deps file"};
     while (@l) {
@@ -226,12 +227,12 @@ sub setSelectedFromCompssList($$$$$) {
 sub init_db {
     my ($prefix, $isUpgrade) = @_;
 
-    my $f = "$prefix/tmp/" . ($isUpgrade ? "upgrade" : "install") . ".log";
+    my $f = "$prefix/root/" . ($isUpgrade ? "upgrade" : "install") . ".log";
     open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
     $fd = fileno(F) || log::fd() || 2;
     c::rpmErrorSetCallback($fd);
 #    c::rpmSetVeryVerbose();
-    
+
     log::l("reading /usr/lib/rpm/rpmrc");
     c::rpmReadConfigFiles() or die "can't read rpm config files";
     log::l("\tdone");

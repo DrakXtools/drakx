@@ -31,7 +31,9 @@ sub get {
 sub hds() { grep { $_->{type} eq 'hd' } get(); }
 sub cdroms() { grep { $_->{type} eq 'cdrom' } get(); }
 sub floppies() {
-    (grep { tryOpen($_) } qw(fd0 fd1)),
+    (grep { 
+	my $fd = tryOpen();
+    } qw(fd0 fd1)),
     (grep { $_->{type} eq 'fd' } get());
 }
 
@@ -160,12 +162,12 @@ sub hasNetDevice($) { c::hasNetDevice($_[0]) }
 
 sub tryOpen($) {
     local *F;
-    sysopen F, devices::make($_[0]), c::O_NONBLOCK();
+    sysopen F, devices::make($_[0]), c::O_NONBLOCK() and \*F;
 }
 
 sub syslog {
     my $file = "/var/log/dmesg";
     -r $file or $file = "/tmp/syslog";
-    cat_($file);
-    `dmesg`;
+    my @l = cat_($file);
+    @l ? @l : `dmesg`;
 }

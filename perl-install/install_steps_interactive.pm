@@ -187,8 +187,8 @@ sub printerConfig($) {
 	my @port = ();
 	foreach ("lp0", "lp1", "lp2") {
 	    local *LP;
-	    push @port, "/dev/$_" if open LP, ">/dev/$_"
-	    }
+	    push @port, "/dev/$_" if open LP, ">/dev/$_";
+	}
 	eval { modules::unload("lp") };
 	
 	my $string = _("What device is your printer connected to 

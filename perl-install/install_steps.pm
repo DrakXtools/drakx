@@ -144,7 +144,7 @@ sub installPackages($$) {
 sub afterInstallPackages($) {
     my ($o) = @_;
 
-    #  why not? 
+    #  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
 #    configPCMCIA($o->{rootPath}, $o->{pcmcia});

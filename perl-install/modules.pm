@@ -308,7 +308,10 @@ sub read_conf {
     # cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
 	$c{scsi} ||= $v->{scsi_hostadapter};
-	add2hash($c{$v->{alias}} ||= {}, $v) if $v->{alias};
+	if (my $a = $v->{alias}) {
+	    local $c{$a}{alias};
+	    add2hash($c{$a}, $v);
+	}
     }
     %c;
 }
@@ -328,7 +331,7 @@ sub write_conf {
 		    print "#" if $scsi;
 		    $scsi ||= 1;
 		}
-		print F "$type $mod $v2\n";
+		print F "$type $mod $v2\n" unless $type eq "loaded";
 	    }
 	}
     }
@@ -336,9 +339,9 @@ sub write_conf {
 
 sub get_stage1_conf { 
     %conf = read_conf($_[0]);
-    $conf{alias}{parport_lowlevel} ||= "parport_pc";
-    $conf{"pre-install"}{pcmcia_core} ||= "/etc/rc.d/init.d/pcmcia start";    
-    $conf{"pre-install"}{plip} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
+    $conf{parport_lowlevel}{alias} ||= "parport_pc";
+    $conf{pcmcia_core}{"pre-install"} ||= "/etc/rc.d/init.d/pcmcia start";    
+    $conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
 }
 
 sub load_thiskind($;&) {
