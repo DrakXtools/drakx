@@ -1309,6 +1309,7 @@ sub ask_browse_tree_info_given_widgets {
     $w->{w}->main;
 }
 
+
 # misc helpers:
 
 package Gtk2::TreeStore;
@@ -1321,6 +1322,7 @@ sub append_set {
     return $iter;
 }
 
+
 package Gtk2::ListStore;
 # Append a new row, set the values, return the TreeIter
 sub append_set {
@@ -1332,6 +1334,7 @@ sub append_set {
     return $iter;
 }
 
+
 package Gtk2::TreeModel;
 # gets the string representation of a TreeIter
 sub get_path_str {
@@ -1340,6 +1343,7 @@ sub get_path_str {
     $path or return;
     $path->to_string;
 }
+
 
 package Gtk2::TreeView;
 # likewise gtk-1.2 function
@@ -1353,11 +1357,69 @@ sub toggle_expansion {
 }
 
 
+# With GTK+, for more GUIes coherency, GtkOptionMenu is recommended instead of a
+# combo if the user is selecting from a fixed set of options.
+#
+# That is, non-editable combo boxes are not encouraged. GtkOptionMenu is much
+# easier to use than GtkCombo as well. Use GtkCombo only when you need the
+# editable text entry.
+#
+# GtkOptionMenu is a much better-implemented widget and also the right UI for
+# noneditable sets of choices.)
+#
+# GtkCombo isn't deprecated yet in 2.2 but will be in 2.4.x because it still
+# uses deprecated GtkList.
+#
+# A replacement widget for both GtkCombo and GtkOption menu is expected in 2.4
+# (currently in libegg). This widget will be themeable to look like either a
+# combo box or the current option menu.
+#
+#
+# This layer try to make OptionMenu look be api compatible with Combo since new
+# widget API seems following the current Combo API.
+
+package Gtk2::OptionMenu;
+use common;
+
+# try to get combox <==> option menu mapping
+sub set_popdown_strings {
+    my ($w, @strs) = @_;
+    my $menu = Gtk2::Menu->new;
+    # keep string list around for ->set_text compatibilty helper
+    $w->{strings} = \@strs;
+    #$w->set_menu((ugtk2::create_factory_menu($window, [ "File", (undef) x 3, '<Branch>' ], map { [ "File/" . $_, (undef) x 3, '<Item>' ] } @strs))[0]);
+    $menu->append(ugtk2::gtkshow(Gtk2::MenuItem->new_with_label($_))) foreach @strs;
+    $w->set_menu($menu);
+    $w
+}
+
+sub entry {
+    my ($w) = @_;
+    return $w;
+}
+
+sub get_text {
+    my ($w) = @_;
+    $w->{strings}->[$w->get_history];
+}
+
+sub set_text {
+    my ($w, $val) = @_;
+    each_index {
+        if ($_ eq $val) {
+            $w->set_history($::i);
+            return;
+        }
+    } @{$w->{strings}};
+}
+
+
 package Gtk2::Label;
 sub set {
     my ($label) = shift;
     $label->set_label(@_);
 }
+
 
 package Gtk2::Entry;
 sub new_with_text {
