@@ -76,14 +76,14 @@ translated etc. that varies from language to language).") if $o->{lang} !~ /^en/
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
     my ($o, $clicked) = @_;
-    if (!$::beginner || $clicked) {
-	$o->{keyboard} = $o->ask_from_listf_(_("Keyboard"),
-					     _("Please, choose your keyboard layout."),
-					     \&keyboard::keyboard2text,
-					     [ keyboard::xmodmaps() ],
-					     $o->{keyboard});
-	delete $o->{keyboard_unsafe};
-    }
+
+    $o->{keyboard} = $o->ask_from_listf_(_("Keyboard"),
+					 _("Please, choose your keyboard layout."),
+					 \&keyboard::keyboard2text,
+					 [ keyboard::xmodmaps() ],
+					 $o->{keyboard});
+    delete $o->{keyboard_unsafe};
+
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
 	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
 	$o->ask_many_from_list_ref('', 

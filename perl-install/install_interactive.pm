@@ -74,7 +74,7 @@ sub partitionWizardSolutions {
     fs::df($_) foreach @fats;
     if (my @ok_forloopback = sort { $b->{free} <=> $a->{free} } grep { $_->{free} > $min_linux + $min_freewin } @fats) {
 	$solutions{loopback} = 
-	  [ 5 - @fats, _("Use the FAT partition for loopback"), 
+	  [ -10 - @fats, _("Use the FAT partition for loopback"), 
 	    sub { 
 		my ($s_root, $s_swap);
 		my $part = $o->ask_from_listf('', _("Which partition do you want to use to put Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
@@ -132,13 +132,12 @@ When sure, press Ok.")) or return;
     }
 
     if (@$fstab && !$readonly) {
-	require diskdrake;
 	$solutions{wipe_drive} =
-	  [ 10, fsedit::is_one_big_fat($hds) ? _("Remove Windows(TM)") : _("Take over the hard drive"), 
+	  [ 10, fsedit::is_one_big_fat($hds) ? _("Remove Windows(TM)") : _("Erase entire disk"), 
 	    sub {
 		my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
 					    \&partition_table_raw::description, $hds) or return;
-		$o->ask_okcancel('', _("All existing partitions and their data will be lost on drive %s", $hd->{device})) or return;
+		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table_raw::description($hd))) or return;
 		partition_table_raw::zero_MBR($hd);
 		fsedit::auto_allocate($hds, $o->{partitions});
 		1;
@@ -146,7 +145,8 @@ When sure, press Ok.")) or return;
     }
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
-	$solutions{diskdrake} = [ 0, _("Use diskdrake"), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
+	require diskdrake;
+	$solutions{diskdrake} = [ 0, ($::beginner ? _("Expert mode"), _("Use diskdrake")), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 
     $solutions{fdisk} =
@@ -175,7 +175,7 @@ sub partitionWizard {
 
     my @solutions = sort { $b->[0] <=> $a->[0] } values %solutions;
 
-    my $level = $::beginner ? 2 : -9999;
+    my $level = $::beginner ? 0 : $::expert ? -9999 : -10;
     my @sol = grep { $_->[0] >= $level } @solutions;
     @solutions = @sol if @sol > 1;
 

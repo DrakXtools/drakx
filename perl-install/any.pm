@@ -193,7 +193,7 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ] },
+_("Image") => { val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
 _("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 _("Append") => \$e->{append},
 _("Initrd") => { val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },

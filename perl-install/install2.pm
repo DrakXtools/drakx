@@ -236,7 +236,7 @@ sub selectKeyboard {
     $::live and return;
     my ($clicked) = $_[0];
 
-    return unless $o->{isUpgrade} || !$::beginner || $clicked;
+    return if !$o->{isUpgrade} && $::beginner && !$clicked;
 
     $o->{keyboard} = keyboard::read($o->{prefix}) if $o->{isUpgrade} && !$clicked && $o->{keyboard_unsafe};
     $o->selectKeyboard;
@@ -273,6 +273,7 @@ sub selectInstallClass {
 sub doPartitionDisks {
     $::live and return;
     $o->{steps}{formatPartitions}{done} = 0;
+    $o->{steps}{doPartitionDisks}{done} = 0;
     $o->doPartitionDisksBefore;
     $o->doPartitionDisks;
     $o->doPartitionDisksAfter;
