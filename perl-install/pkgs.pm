@@ -92,7 +92,9 @@ sub packageMedium { $_[0]->[$MEDIUM] }
 
 sub packageProvides { map { $_[0]->{depslist}[$_] || die "unkown package id $_" } unpack "s*", $_[1]->[$PROVIDES] }
 
-sub packageRate { substr($_[0]->[$VALUES], 0, 1) }
+sub packageRate          { substr($_[0]->[$VALUES], 0, 1) }
+sub packageRateRFlags    { my ($rate, @flags) = split "\t", $_[0]->[$VALUES]; ($rate, @flags) }
+sub packageSetRateRFlags { my ($pkg, $rate, @flags) = @_; $pkg->[$VALUES] = join("\t", $rate, @flags) }
 
 sub packageHeader     { $_[0]->[$HEADER] }
 sub packageFreeHeader { c::headerFree(delete $_[0]->[$HEADER]) }
@@ -638,7 +640,7 @@ sub read_rpmsrate {
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
-		    $p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
+		    packageSetRateRFlags($p, $rate, grep { !/^\d$/ } @m);
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
@@ -681,8 +683,8 @@ sub setSelectedFromCompssList {
     my ($packages, $compssUsersChoice, $min_level, $max_size, $install_class) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
-    foreach my $p (sort { substr($b->[$VALUES],0,1) <=> substr($a->[$VALUES],0,1) } values %{$packages->{names}}) {
-	my ($rate, @flags) = split "\t", $p->[$VALUES];
+    foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
+	my ($rate, @flags) = packageRateRFlags($p);
 	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
@@ -800,6 +802,9 @@ sub versionCompare($$) {
 
 sub selectPackagesAlreadyInstalled {
     my ($packages, $prefix) = @_;
+
+    #- avoid rebuilding the database if such case.
+    $packages->{rebuild_db} = "oem does not need rebuilding the rpm db";
     my $db = rebuild_db_open_for_traversal($packages, $prefix);
 
     #- this method has only one objectif, check the presence of packages
