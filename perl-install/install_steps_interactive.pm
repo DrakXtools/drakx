@@ -141,14 +141,16 @@ sub selectInstallClass {
 	    $_->{release} .= " ($_->{part}{device})" foreach @l;
 	}
 
-	my $p = $o->ask_from_listf_raw({ title => N("Install/Upgrade"),
-					 messages => N("Is this an install or an upgrade?"),
-					 interactive_help_id => 'selectInstallClass',
-					 },
-				   sub {
-				       ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : 
-						    translate($_[0]);
-				   }, [ @l, N_("Install") ]);
+	my $p;
+	$o->ask_from_({ title => N("Install/Upgrade"),
+			messages => N("Is this an install or an upgrade?"),
+			interactive_help_id => 'selectInstallClass',
+		      },
+		      [ { val => \$p,
+			  list => [ @l, N_("Install") ], 
+			  type => 'list',
+			  format => sub { ref($_[0]) ? N("Upgrade %s", $_[0]{release}) : translate($_[0]) }
+			} ]);
 	if (ref $p) {
 	    my $part = $p->{part};
 	    log::l("choosing to upgrade partition $part->{device}");
