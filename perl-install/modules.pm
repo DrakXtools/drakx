@@ -58,12 +58,12 @@ sub load_raw {
     my ($l, $h_options) = @_;
     if ($::testing) {
 	log::l("i would load module $_ ($h_options->{$_})") foreach @$l;
-    } elsif ($::isStandalone || $::move) {
+    } elsif ($::isInstall && !$::move) {
+	load_raw_install($l, $h_options);
+    } else {
 	run_program::run('/sbin/modprobe', $_, split(' ', $h_options->{$_})) 
 	  or !run_program::run('/sbin/modprobe', '-n', $_) #- ignore missing modules
 	  or die "insmod'ing module $_ failed" foreach @$l;
-    } else {
-	load_raw_install($l, $h_options);
     }
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @$l;
 }
