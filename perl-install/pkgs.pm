@@ -458,6 +458,7 @@ sub psUsingHdlist {
     my $newsf = "$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
     $m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
+    -s $newsf > 0 or unlink $newsf;
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
