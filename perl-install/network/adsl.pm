@@ -159,8 +159,7 @@ sync
                   speedtouch =>
                   {
                    modules => [ qw(speedtch) ],
-                   #- will not call pppd since we've just written ONBOOT=no, only runs modem_run
-                   start => '/usr/bin/speedtouch-start --boot',
+                   start => '/usr/bin/speedtouch-start --nocall',
                    overide_script => 1,
                    server => {
                               pppoa => qq("/usr/sbin/pppoa3 -c")
