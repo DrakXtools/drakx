@@ -789,7 +789,8 @@ sub Loopback {
 
     my $handle = any::inspect($real_part) or $in->ask_warn('', _("This partition can't be used for loopback")), return;
 
-    my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part)); 
+    my ($min, $max) = (1, loopback::getFree($handle->{dir}, $real_part));
+    $max = max($max, 1 << (31 - 9)) if isFat($real_part); #- FAT doesn't handle file size bigger than 2GB
     my $part = { maxsize => $max, size => 0, loopback_device => $real_part, notFormatted => 1 };
     if (!fsedit::suggest_part($part, $all_hds)) {
 	$part->{size} = $part->{maxsize};
