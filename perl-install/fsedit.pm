@@ -532,6 +532,9 @@ No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
     die \N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($hd);
+    cdie \N("You may not be able to install lilo (since lilo doesn't handle a LV on multiple PVs)")
+      if arch() =~ /i.86/ && member($mntpoint, '/', '/boot') && isLVM($hd) && @{$hd->{disks} || []} > 1;
+
     cdie \N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/root));
     die \N("This directory should remain within the root filesystem")
