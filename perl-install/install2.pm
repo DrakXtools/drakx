@@ -319,8 +319,6 @@ sub formatPartitions {
     unless ($o->{isUpgrade}) {
 	$o->choosePartitionsToFormat($o->{fstab});
 	$o->formatMountPartitions($o->{fstab}) unless $::testing;
-	eval { $o = $::o = install_any::loadO($o) } if $_[1] == 1;
-
     }
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
@@ -371,7 +369,7 @@ sub doInstallStep {
     $o->readBootloaderConfigBeforeInstall if $_[1] == 1;
 
     $o->beforeInstallPackages;
-    $o->installPackages($o->{packages});
+    $o->installPackages;
     $o->afterInstallPackages;
 }
 #------------------------------------------------------------------------------
@@ -387,9 +385,11 @@ sub miscellaneous {
             SECURITY => $o->{security},
         });
 	
-	setVarsInSh("$o->{prefix}/etc/sysconfig/usb", { 
+	my $f = "$o->{prefix}/etc/sysconfig/usb";
+	setVarsInSh($f, { 
             MOUSE => bool2yesno($o->{mouse}{device} eq "usbmouse"),
-	    KEYBOARD => bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()),
+	    KBD => bool2yesno(int grep { /^keybdev\.c: Adding keyboard/ } detect_devices::syslog()),
+	    getVarsFromSh($f),
 	});
 
 	install_any::fsck_option();
@@ -442,14 +442,14 @@ sub setRootPassword {
     return if $o->{isUpgrade};
 
     $o->setRootPassword($_[0]);
-    addToBeDone { install_any::setAuthentication() } 'doInstallStep';
+    addToBeDone { install_any::setAuthentication($o) } 'doInstallStep';
 }
 #------------------------------------------------------------------------------
 sub addUser {
     return if $o->{isUpgrade};
 
     $o->addUser($_[0]);
-    install_any::setAuthentication();
+    install_any::setAuthentication($o);
 }
 
 #------------------------------------------------------------------------------

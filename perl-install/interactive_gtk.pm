@@ -147,32 +147,31 @@ sub ask_from_treelistW {
     $w->main or die "ask_from_list cancel";
 }
 
-sub ask_many_from_list_refW {
-    my ($o, $title, $messages, $list, $val) = @_;
-    ask_many_from_list_with_help_refW($o, $title, $messages, $list, undef, $val)
-}
-
 sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, $list, $help, $val) = @_;
+    my ($o, $title, $messages, @L) = @_;
     my $w = my_gtk->new('', %$o);
     my $tips = new Gtk::Tooltips;
-    my $box = gtkpack(new Gtk::VBox(0,0),
-	map_index {
-	    my $i = $::i;
-	    my $o = Gtk::CheckButton->new($_);
-	    $tips->set_tip($o, $help->[$i]) if $help->[$i];
-	    $o->set_active(${$val->[$i]});
-	    $o->signal_connect(clicked => sub { invbool \${$val->[$i]} });
-	    $o;
-	} @$list);
+    my @boxes = map {
+	my $l = $_;
+	my $box = gtkpack(new Gtk::VBox(0,0),
+		map_index {
+		    my $i = $::i;
+		    my $o = Gtk::CheckButton->new($_);
+		    $tips->set_tip($o, $l->[1][$i]) if $l->[1][$i];
+		    $o->set_active(${$l->[2][$i]});
+		    $o->signal_connect(clicked => sub { invbool $l->[2][$i] });
+		    $o;
+		} @{$l->[0]});
+	@{$l->[0]} > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box;
+    } @L;
     gtkadd($w->{window},
 	   gtkpack_(create_box_with_title($w, @$messages),
-		   1, @$list > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box,
-		   0, $w->create_okcancel,
-		  )
+		    (map {; 1, $_ } @boxes),
+		    0, $w->create_okcancel,
+		   )
 	  );
     $w->{ok}->grab_focus;
-    $w->main && $val;
+    $w->main;
 }
 
 sub ask_from_entries_refW {

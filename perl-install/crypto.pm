@@ -57,7 +57,7 @@ sub getPackages($) {
 	pkgs::getOtherDeps($packages, getDepslist($mirror));
 
     #- produce an output suitable for visualization.
-    pkgs::packagesOfMedium($packages, "Crypto");
+    map { pkgs::packageName($_) } pkgs::packagesOfMedium($packages, "Crypto");
 }
 
 sub get {

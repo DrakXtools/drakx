@@ -687,6 +687,7 @@ rpmRunTransactions(trans, callbackOpen, callbackClose, callbackMessage, force)
   }
   if (rpmRunTransactions(trans, rpmRunTransactions_callback, NULL, NULL, &probs, 0, force ? ~0 : ~RPMPROB_FILTER_DISKSPACE)) {
     int i;
+    printf("rpmRunTransactions finished, errors occured %d\n", probs->numProblems); fflush(stdout);
     EXTEND(SP, probs->numProblems);
     for (i = 0; i < probs->numProblems; i++) {
       PUSHs(sv_2mortal(newSVpv(rpmProblemString(probs->probs[i]), 0)));

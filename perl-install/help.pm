@@ -14,27 +14,44 @@ selectPath =>
 installed, or if you wish to use multiple distributions or versions.
 
 
-Choose \"Upgrade\" if you wish to update a previous version of Mandrake
-Linux: 5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1
-(Helios) or Gold 2000."),
+Choose \"Upgrade\" if you wish to update a previous version of Mandrake Linux:
+5.1 (Venice), 5.2 (Leloo), 5.3 (Festen), 6.0 (Venus), 6.1 (Helios), Gold 2000
+or 7.0 (Air)."),
 
 selectInstallClass =>
  __("Select:
 
-  - Recommended: If you have never installed Linux before.
+  - Recommended: If you have never installed Linux before, choose this. NOTE:
+    networking will not be configured during installation, use \"LinuxConf\"
+    to configure it after the install completes.
 
+  - Customized: If you are familiar enough with GNU/Linux, you may then choose
+    the primary usage for your machine. See below for details.
 
-  - Customized: If you are familiar with Linux, you will be able to 
-select the usage for the installed system between normal, development or
-server. Choose \"Normal\" for a general purpose installation of your
-computer. You may choose \"Development\" if you will be using the computer
-primarily for software development, or choose \"Server\" if you wish to
-install a general purpose server (for mail, printing...).
+  - Expert: This supposes that you are fluent with GNU/Linux and want to
+    perform a highly customized installation. As for a \"Customized\"
+    installation class, you will be able to select the usage for your system.
+    But please, please, DO NOT CHOOSE THIS UNLESS YOU KNOW WHAT YOU ARE DOING!
 
+The different choices for your machine's usage (provided, hence, that you have
+chosen either \"Custom\" or \"Expert\" as an installation class) are the
+following:
 
-  - Expert: If you are fluent with GNU/Linux and want to perform
-a highly customized installation, this Install Class is for you. You will
-be able to select the usage of your installed system as for \"Customized\"."),
+  - Normal: choose this if you intend to use your machine primarily for
+    everyday use (office work, graphics manipulation and so on). Do not
+    expect any compiler, development utility et al. installed.
+
+  - Development: as its name says. Choose this if you intend to use your
+    machine primarily for software development. You will then have a complete
+    collection of software installed in order to compile, debug and format
+    source code, or create software packages.
+
+  - Server: choose this if the machine which you're installing Linux-Mandrake
+    on is intended to be used as a server. Either a file server (NFS or SMB),
+    a print server (Unix' lp (Line Printer) protocol or Windows style SMB
+    printing), an authentication server (NIS), a database server and so on. As
+    such, do not expect any gimmicks (KDE, GNOME...) to be installed.
+"),
 
 setupSCSI =>
  __("DrakX will attempt at first to look for one or more PCI
@@ -211,11 +228,17 @@ configureTimezone =>
  __("You can now select your timezone according to where you live.
 
 
-Linux manages time in GMT or \"Greenwich Meridian Time\" and translates it
+Linux manages time in GMT or \"Greenwich Mean Time\" and translates it
 in local time according to the time zone you have selected."),
 
 configureServices =>
- __("Help"),
+ __("You may now choose which services you want to see started at boot time.
+When your mouse comes over an item, a small balloon help will popup which
+describes the role of the service.
+
+Be especially careful in this step if you intend to use your machine as a
+server: you will probably want not to start any services which you don't
+want."),
 
 configurePrinter =>
  __("Linux can deal with many types of printer. Each of these
@@ -228,7 +251,7 @@ to put it first, eg: \"My Printer|lp\".
 The printer having \"lp\" in its name(s) will be the default printer.
 
 
-If your printer is directly connected to your computer, select
+If your printer is physically connected to your computer, select
 \"Local printer\". You will then have to tell which port your
 printer is connected to, and select the appropriate filter.
 
@@ -258,7 +281,7 @@ this password carefully! Unauthorized use of the root account can
 be extremely dangerous to the integrity of the system and its data,
 and other systems connected to it. The password should be a
 mixture of alphanumeric characters and a least 8 characters long. It
-should *never* be written down. Do not make the password too long or
+should NEVER be written down. Do not make the password too long or
 complicated, though: you must be able to remember without too much
 effort."),
 
@@ -305,7 +328,7 @@ drive (MBR)\"."),
 
 setupBootloader =>
  __("Unless you know specifically otherwise, the usual choice is \"/dev/hda\"
-(the master drive on the primary channel)."),
+ (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."),
 
 setupBootloaderAddEntry =>
  __("LILO (the LInux LOader) can boot Linux and other operating systems.
@@ -373,32 +396,33 @@ configureXxdm =>
 \"No\"."),
 
 miscellaneous =>
- __("You can now select some miscellaneous options for you system.
+ __("You can now select some miscellaneous options for your system.
 
-  - Use hard drive optimizations: This option can improve hard disk
-accesses but is only for advanced users, it can ruin your hard drive if
-used incorrectly. Use it only if you know how.
+  - Use hard drive optimizations: this option can improve hard disk performance
+    but is only for advanced users: some buggy chipsets can ruin your data, so
+    beware. Note that the kernel has a builtin blacklist of drives and
+    chipsets, but if you want to avoid bad surprises, leave this option unset.
 
+  - Choose security level: you can choose a security level for your
+    system. Please refer to the manual for complete information. Basically: if
+    you don't know, select \"Medium\" ; if you really want to have a secure
+    machine, choose \"Paranoid\" but beware: IN THIS LEVEL, ROOT LOGIN AT
+    CONSOLE IS NOT ALLOWED! If you want to be root, you have to login as a user
+    and then use \"su\". More generally, do not expect to use your machine
+    for anything but as a server. You have been warned.
 
-  - Choose security level: You can choose a security level for your
-system.
-    Please refer to the manual for more information.
+  - Precise RAM size if needed: unfortunately, in today's PC world, there is no
+    standard method to ask the BIOS about the amount of RAM present in your
+    computer. As a consequence, Linux may fail to detect your amount of RAM
+    correctly. If this is the case, you can specify the correct amount of RAM
+    here. Note that a difference of 2 or 4 MB is normal.
 
+  - Removable media automounting: if you would prefer not to manually
+    mount removable media (CD-ROM, Floppy, Zip) by typing \"mount\" and
+    \"umount\", select this option. 
 
-  - Precise RAM size if needed: In some cases, Linux is unable to
-correctly detect all the installed RAM on some systems. If this is the
-case, specify the correct quantity. Note: a difference of 2 or 4 Mb is
-normal.
-
-
-  - Removable media automounting: If you would prefer not to manually
-mount removable drives (CD-ROM, Floppy, Zip) by typing \"mount\" and
-\"umount\", select this option. 
-
-
-  - Enable Num Lock at startup: If you want Number Lock enabled after
-booting, select this option (Note: Num Lock will still not work under
-X)."),
+  - Enable NumLock at startup: if you want NumLock enabled after booting,
+    select this option (Note: NumLock may or may not work under X)."),
 
 exitInstall =>
  __("Your system is going to reboot.

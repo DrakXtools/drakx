@@ -172,20 +172,18 @@ sub chown_ {
 
 sub mkswap {
     @_ == 1 or die "mkswap <device>\n";
-
-    require 'swap.pm';
+    require swap;
     swap::enable($_[0], 0);
 }
 
 sub swapon {
     @_ == 1 or die "swapon <file>\n";
-
-    require 'swap.pm';
+    require swap;
     swap::swapon($_[0]);
 }
 sub swapoff {
     @_ == 1 or die "swapoff <file>\n";
-    require 'swap.pm';
+    require swap;
     swap::swapoff($_[0]);
 }
 

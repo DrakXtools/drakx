@@ -130,12 +130,14 @@ sub doPartitionDisks {
 	my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
 	my $size = loopback::getFree($handle->{dir}, $real_part); 
 
-	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
+	my $max_linux = 250 << 11; $max_linux *= 10 if $::expert;
+	my $min_linux =  200 << 11; $max_linux /=  3 if $::expert;
 	my $min_freewin = 100 << 11;
 
 	my $swap = { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => 64 << 11, device => $real_part, notFormatted => 1 };	
 	my $root = { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => 0, device => $real_part, notFormatted => 1 };
 	$root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
+	$root->{size} > $min_linux or die "not enough room on that partition for lnx4win";
 
 	$o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size});
 
@@ -214,8 +216,23 @@ sub selectPackagesToUpgrade {
     install_any::selectPackagesToUpgrade($o);
 }
 
-sub choosePackages($$$$) {
-    my ($o, $packages, $compss, $compssUsers) = @_;
+sub choosePackages {
+    my ($o, $packages, $compss, $compssUsers, $compssUsersSorted, $first_time) = @_;
+
+    return if $o->{isUpgrade};
+
+    my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
+    
+    foreach (values %{$packages->[0]}) {
+	pkgs::packageSetFlagSkip($_, 0);
+	pkgs::packageSetFlagUnskip($_, 0);
+    }
+    pkgs::unselectAllPackages($packages);
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+
+    add2hash_($o, { compssListLevel => $::expert ? 90 : 80 });
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $available, $o->{installClass});
+    $available;
 }
 
 sub beforeInstallPackages {
@@ -241,8 +258,16 @@ sub beforeInstallPackages {
     pkgs::init_db($o->{prefix}, $o->{isUpgrade});
 }
 
+sub pkg_install {
+    my ($o, @l) = @_;
+    require pkgs;
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
+    $o->installPackages;
+}
+
 sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
-    my ($o, $packages) = @_;
+    my ($o) = @_;
+    my $packages = $o->{packages};
 
     if (@{$o->{toRemove} || []}) {
 	#- hack to ensure proper upgrade of packages from other distribution,
@@ -408,9 +433,9 @@ sub configureNetwork($) {
     network::sethostname($o->{netc}) unless $::testing;
     network::addDefaultRoute($o->{netc}) unless $::testing;
 
-    install_any::pkg_install($o, "dhcpxd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
+    $o->pkg_install("dhcpxd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
     # Handle also pump (this is still in initscripts no?)
-    install_any::pkg_install($o, "pump") if grep { $_->{BOOTPROTO} =~ /^(pump)$/ } @{$o->{intf}};
+    $o->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
     miscellaneousNetwork($o);
@@ -422,7 +447,7 @@ sub pppConfig {
     $o->{modem} or return;
 
     symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") or log::l("creation of $o->{prefix}/dev/modem failed");
-    install_any::pkg_install($o, "ppp");
+    $o->pkg_install("ppp");
 
     my %toreplace;
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
@@ -468,30 +493,26 @@ sub pppConfig {
 #------------------------------------------------------------------------------
 sub installCrypto {
     my ($o) = @_;
-    my $u = $o->{crypto} or return; $u->{mirror} or return;
-    my ($packages, %done);
-    my $dir = "$o->{prefix}/tmp";
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
-    network::up_it($o->{prefix}, $o->{intf}) if $o->{intf};
+    my $u = $o->{crypto} or return; $u->{mirror} && $u->{packages} or return;
 
-    require pkgs;
-    foreach (values %{$u->{packages}}) {
-	pkgs::selectPackage($o->{packages}, $_->{pkg}) if $_->{selected};
-    }
-
+    $o->upNetwork;
     require crypto;
+    my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
+
     my $oldGetFile = \&install_any::getFile;
     local *install_any::getFile = sub {
 	my ($rpmfile) = @_;
-	if ($rpmfile =~ /^(.*)-[^-]*-[^-]*$/) {
-	    return crypto::getFile($rpmfile, $u->{mirror}) if $u->{packages}{$1};
+	if ($rpmfile =~ /^(.*)-[^-]*-[^-]*$/ && member($1, @crypto_packages)) {
+	    log::l("crypto::getFile $rpmfile");
+	    crypto::getFile($rpmfile, $u->{mirror});
+	} else {
+	    #- use previous getFile typically if non cryptographic packages
+	    #- have been selected by dependancies.
+	    log::l("normal getFile $rpmfile");
+	    &$oldGetFile($rpmfile);
 	}
-	#- use previous getFile typically if non cryptographic packages
-	#- have been selected by dependancies.
-	&$oldGetFile($rpmfile);
     };
-
-    $o->installPackages($o->{packages});
+    $o->pkg_install(@{$u->{packages}});
 }
 
 #------------------------------------------------------------------------------
@@ -743,7 +764,7 @@ sub setupXfreeBefore {
     Xconfig::getinfoFromDDC($o->{X});
 
     #- keep this here if the package has to be updated.
-    install_any::pkg_install($o, "XFree86");
+    $o->pkg_install("XFree86");
 }
 sub setupXfree {
     my ($o) = @_;
@@ -755,7 +776,7 @@ sub setupXfree {
       local $::auto = 1;
       local $::skiptest = 1;
       Xconfigurator::main($o->{prefix}, $o->{X}, class_discard->new, $o->{allowFB}, bool($o->{pcmcia}), sub {
-         install_any::pkg_install($o, "XFree86-$_[0]");
+         $o->pkg_install("XFree86-$_[0]");
       });
     }
     $o->setupXfreeAfter;
@@ -818,6 +839,22 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub generateAutoInstFloppy($) {
     my ($o) = @_;
+}
+
+#------------------------------------------------------------------------------
+sub upNetwork {
+    my ($o) = @_;
+
+    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
+	network::up_it($o->{prefix}, $o->{intf});
+    } elsif ($o->{modem} && !$o->{modem}{isUp}) {
+	run_program::rooted($o->{prefix}, "ifup", "ppp0");
+	$o->{modem}{isUp} = 1;
+    } else {
+	$::testing or return;
+    }
+    1;
 }
 
 #------------------------------------------------------------------------------

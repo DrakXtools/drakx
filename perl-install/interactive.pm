@@ -155,20 +155,13 @@ sub ask_from_treelistW($$$$;$) {
 
 
 sub ask_many_from_list_ref {
-    my ($o, $title, $message, $l, $val) = @_;
-    return 1 if @$l == 0;
-    $o->ask_many_from_list_refW($title, [ deref($message) ], $l, $val);
+    my ($o, $title, $message, @l) = @_;
+    $o->ask_many_from_list_with_help_ref($title, [ deref($message) ], map { ($_->[0], [], $_->[1]) } combine(2, @l));
 }
 sub ask_many_from_list_with_help_ref {
-    my ($o, $title, $message, $l, $help, $val) = @_;
-    return 1 if @$l == 0;
-    $o->ask_many_from_list_with_help_refW($title, [ deref($message) ], $l, $help, $val);
-}
-
-#- defaults to without help
-sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, $list, $help, $val) = @_;
-    $o->ask_many_from_list_refW($title, $messages, $list, $val);
+    my ($o, $title, $message, @l) = @_;
+    my @L = grep { $_->[0] } combine(3, @l) or return 1;
+    $o->ask_many_from_list_with_help_refW($title, [ deref($message) ], @L);
 }
 
 sub ask_many_from_list {

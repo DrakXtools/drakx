@@ -122,7 +122,7 @@ sub new($$) {
 sub enteringStep {
     my ($o, $step) = @_;
 
-    print _("Entering step `%s'\n", $o->{steps}{$step}{text});
+    print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
     $o->SUPER::enteringStep($step);
     create_steps_window($o);
     create_help_window($o);
@@ -189,9 +189,11 @@ sub doPartitionDisks {
 
     if ($o->{lnx4win}) {
 	eval { install_steps::doPartitionDisks(@_) };
-	$@ =~ /no fat/ or return;
-
-	$o->ask_warn('', _("You don't have any windows partitions!"));
+	if ($@ =~ /no fat/) {
+	    $o->ask_warn('', _("You don't have any windows partitions!"));
+	} elsif ($@ =~ /not enough room/) {
+	    $o->ask_warn('', _("You don't have any enough room for Lnx4win"));
+	} else { return }
 	delete $o->{lnx4win};
     }
     if ($::beginner && fsedit::is_one_big_fat($hds)) {
@@ -201,7 +203,7 @@ sub doPartitionDisks {
 	my $min_freewin = 300 << 11;
 
 	my ($part) = fsedit::get_fstab(@{$o->{hds}});
-	my $w = $o->wait_message(_("Resizing"), _("Computing fat filesystem bounds"));
+	my $w = $o->wait_message(_("Resizing"), _("Computing FAT filesystem bounds"));
 	my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 	$@ and goto diskdrake;
 	my $min_win = $resize_fat->min_size;

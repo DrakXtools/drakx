@@ -48,17 +48,9 @@ sub set_loop {
     }
 }
 
-sub make($) {
-    local $_ = my $file = $_[0];
+sub entry {
     my ($type, $major, $minor);
-
-    if (m,^(.*/(?:dev|tmp))/(.*),) {
-	$_ = $2;
-    } else {
-	-e $file or $file = "/tmp/$_";
-	-e $file or $file = "/dev/$_";
-    }
-    -e $file and return $file; #- assume nobody takes fun at creating files named as device
+    local ($_) = @_;
 
     if (/^sd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
@@ -122,6 +114,22 @@ sub make($) {
 		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
 	       }}{$_} or die "unknown device $_" };
     }
+    ($type, $major, $minor);
+}
+
+
+sub make($) {
+    local $_ = my $file = $_[0];
+
+    if (m,^(.*/(?:dev|tmp))/(.*),) {
+	$_ = $2;
+    } else {
+	-e $file or $file = "/tmp/$_";
+	-e $file or $file = "/dev/$_";
+    }
+    -e $file and return $file; #- assume nobody takes fun at creating files named as device
+
+    my ($type, $major, $minor) = entry($_);
 
     #- make a directory for this inode if needed.
     mkdir dirname($file), 0755;

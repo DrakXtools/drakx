@@ -269,40 +269,33 @@ sub choosePackages {
     #- selection of CD by user if using a cdrom.
     $o->chooseCD($packages) if $o->{method} eq 'cdrom';
 
+    my $available = install_steps::choosePackages(@_);
+    my $individual = $::expert;
+
     require pkgs;
     unless ($o->{isUpgrade}) {
-	my $available = pkgs::invCorrectSize(install_any::getAvailableSpace($o) / sqr(1024)) * sqr(1024);
-	
-	foreach (values %{$packages->[0]}) {
-	    pkgs::packageSetFlagSkip($_, 0);
-	    pkgs::packageSetFlagUnskip($_, 0);
-	}
-	pkgs::unselectAllPackages($packages);
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
-
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $::expert ? 90 : 80, $available, $o->{installClass});
 	my $min_size = pkgs::selectedSize($packages);
 
-	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
+	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted, \$individual) unless $::beginner || $::corporate;
 
 	my $min_mark = 1;
+	my @l = values %{$packages->[0]};
+	my @flags = map { pkgs::packageFlagSelected($_) } @l;
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $available, $o->{installClass});
+	my $max_size = pkgs::selectedSize($packages);
+	mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
-	my $ind = $o->{compssListLevels}{$o->{install_class}};
-	my $max_size = int (sum map { pkgs::packageSize($_) } 
-			        grep { $_->{values}[$ind] >= $min_mark } values %{$packages->[0]});
-
-	 if (!$::beginner && $max_size > $available) {
-	     $o->ask_okcancel('', 
+	if (!$::beginner && $max_size > $available) {
+	    $o->ask_okcancel('', 
 _("You need %dMB for a full install of the groups you selected.
 You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
-	 }
+	}
+	my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
-	 my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
-
-	 ($o->{packages_}{ind}) = 
-	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
+	($o->{packages_}{ind}) = 
+	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     }
-    $o->choosePackagesTree($packages, $compss) if $o->{compssUsersChoice}{Individual} || $::expert && $o->{isUpgrade};
+    $o->choosePackagesTree($packages, $compss) if $individual;
 }
 
 sub chooseSizeToInstall {
@@ -312,19 +305,19 @@ sub chooseSizeToInstall {
 sub choosePackagesTree {}
 
 sub chooseGroups {
-    my ($o, $packages, $compssUsers, $compssUsersSorted) = @_;
+    my ($o, $packages, $compssUsers, $compssUsersSorted, $individual) = @_;
 
-    add2hash_($o->{compssUsersChoice}, { Individual => $::expert });
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
-			       [ @$compssUsersSorted, _("Miscellaneous"), _("Individual package selection") ],
-			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous", "Individual" ]
-			       ) or goto &chooseGroups unless $::beginner || $::corporate;
+			       [ @$compssUsersSorted, _("Miscellaneous") ],
+			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ],
+			       [  _("Individual package selection") ], [ $individual ],			       
+			       ) or goto &chooseGroups;
 
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
 	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
-	exists $l{$_} or pkgs::packageSetFlagSkip(pkgs::packageByName($packages, $_), 1) foreach keys %$packages;
+	exists $l{$_} or pkgs::packageSetFlagSkip($_, 1) foreach values %{$packages->[0]};
     }
     foreach (@$compssUsersSorted) {
 	$o->{compssUsersChoice}{$_} or pkgs::skipSetWithProvides($packages, @{$compssUsers->{$_}});
@@ -332,8 +325,8 @@ sub chooseGroups {
     foreach (@$compssUsersSorted) {
 	$o->{compssUsersChoice}{$_} or next;
 	foreach (@{$compssUsers->{$_}}) {
-	    $_->{unskip} = 1;
-	    delete $_->{skip};
+	    pkgs::packageSetFlagUnskip($_, 1);
+	    pkgs::packageSetFlagSkip($_, 0);
 	}
     }
 }
@@ -493,7 +486,7 @@ sub pppConfig {
 
     $m->{device} ||= $o->set_help('selectSerialPort') && 
                      mouse::serial_ports_names2dev(
-	$o->ask_from_list('', _("Please choose on which serial port your modem is connected to."),
+	$o->ask_from_list('', _("Please choose which serial port your modem is connected to."),
 			  [ mouse::serial_ports_names ]));
 
     $o->set_help('configureNetworkISP');
@@ -518,15 +511,7 @@ sub installCrypto {
     my $u = $o->{crypto} ||= {};
     
     $::expert or return;
-    if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
-	my $w = $o->wait_message('', _("Bringing up the network"));
-	network::up_it($o->{prefix}, $o->{intf});
-    } elsif ($o->{modem}) {
-	run_program::rooted($o->{prefix}, "ifup", "ppp0");
-    } else {
-	$::testing or return;
-    }
-    
+
     is_empty_hash_ref($u) and $o->ask_yesorno('', 
 _("You have now the possibility to download software aimed for encryption.
 
@@ -562,19 +547,17 @@ USA")) || return;
       $u->{mirror} = crypto::text2mirror($o->ask_from_list('', _("Choose a mirror from which to get the packages"), [ crypto::mirrorstext() ], crypto::mirror2text($u->{mirror})));
     };
     return if $@;
-    
-    my @packages = sort { pkgs::packageHeaderFile($a) cmp pkgs::packageHeaderFile($b) } do {
+
+    $o->upNetwork;
+
+    my @packages = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
       crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
     };
-
-    map { $u->{packages}{pkgs::packageName($_)} = { pkg => $_, selected => 0 } } @packages;
-
-    $o->ask_many_from_list_ref('', _("Please choose the packages you want to install."),
-			       [ map { pkgs::packageHeaderFile($_) } @packages ],
-			       [ map { \$u->{packages}{pkgs::packageName($_)}{selected} } @packages ]) or return;
-
-    my $w = $o->wait_message('', _("Downloading cryptographic packages"));
+    my %h; $h{$_} = 1 foreach @{$u->{packages} || []};
+    $o->ask_many_from_list_ref('', _("Please choose the packages you want to install."), 
+			       \@packages, [ map { \$h{$_} } @packages ]) or return;
+    $u->{packages} = [ grep { $h{$_} } @packages ];
     install_steps::installCrypto($o);
 }
 
@@ -603,7 +586,7 @@ sub printerConfig {
     require printer;
     eval { add2hash($o->{printer} ||= {}, printer::getinfo($o->{prefix})) };
     require printerdrake;
-    printerdrake::main($o->{printer}, $o, sub { install_any::pkg_install($o, $_[0]) });
+    printerdrake::main($o->{printer}, $o, sub { $o->pkg_install($_[0]) });
 }
 
 #------------------------------------------------------------------------------
@@ -983,7 +966,7 @@ sub setupXfree {
       $::noauto = $::noauto; #- no warning
 
       Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, bool($o->{pcmcia}), sub {
-	  install_any::pkg_install($o, "XFree86-$_[0]");
+	  $o->pkg_install("XFree86-$_[0]");
       });
     }
     $o->setupXfreeAfter;
@@ -1167,6 +1150,12 @@ sub setup_thiskind {
 	    $o->ask_warn('', [ pci_probing::main::list() ]); #-, scalar cat_("/proc/isapnp") ]);
 	}
     }
+}
+
+sub upNetwork {
+    my ($o) = @_;
+    my $w = $o->wait_message('', _("Bringing up the network"));
+    install_steps::upNetwork($o);
 }
 
 

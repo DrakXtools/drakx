@@ -254,7 +254,7 @@ sub setPackages($) {
 	pkgs::getDeps($o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $o->{compss});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();
@@ -271,15 +271,6 @@ sub setPackages($) {
 
     } else {
 	pkgs::unselectAllPackages($o->{packages});
-    }
-
-    #- this will be done if necessary in the selectPackagesToUpgrade,
-    #- move the selection here ? this will remove the little window.
-    unless ($o->{isUpgrade}) {
-	foreach (@{$o->{default_packages}}) {
-	    my $p = pkgs::packageByName($o->{packages}, $_) or log::l("missing add-on package $_"), next;
-	    pkgs::selectPackage($o->{packages}, $p);
-	}
     }
 }
 
@@ -406,14 +397,15 @@ sub write_ldsoconf {
     }
 }
 
-sub setAuthentication() {
-    my ($shadow, $md5, $nis, $nis_server) = @{$::o->{authentication} || {}}{qw(shadow md5 NIS NIS_server)};
-    my $p = $::o->{prefix};
+sub setAuthentication {
+    my ($o) = @_;
+    my ($shadow, $md5, $nis, $nis_server) = @{$o->{authentication} || {}}{qw(shadow md5 NIS NIS_server)};
+    my $p = $o->{prefix};
     enableMD5Shadow($p, $shadow, $md5);
     enableShadow() if $shadow;
     if ($nis) {
-	pkg_install($::o, "ypbind");
-	my $domain = $::o->{netc}{NISDOMAIN};
+	$o->pkg_install("ypbind");
+	my $domain = $o->{netc}{NISDOMAIN};
 	$domain || $nis_server ne "broadcast" or die _("Can't use broadcast with no NIS domain");
 	my $t = $domain ? "domain $domain" . ($nis_server ne "broadcast" && " server")
 	                : "ypserver";
@@ -421,7 +413,7 @@ sub setAuthentication() {
 	    $_ = "#~$_" unless /^#/;
 	    $_ .= "$t $nis_server\n" if eof;
 	} "$p/etc/yp.conf";
-	network::write_conf("$p/etc/sysconfig/network", $::o->{netc});
+	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
     }
 }
 
@@ -492,9 +484,7 @@ sub setupFB {
     my ($o, $vga) = @_;
 
     #- install needed packages for frame buffer.
-    require pkgs;
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_)) foreach (qw(kernel-fb XFree86-FBDev));
-    $o->installPackages($o->{packages});
+    $o->installPackages(qw(kernel-fb XFree86-FBDev));
 
     $vga ||= 785; #- assume at least 640x480x16.
 
@@ -591,17 +581,6 @@ sub loadO {
     bless $o, ref $O;
 }
 
-sub pkg_install {
-    my ($o, $name) = @_;
-    require pkgs;
-    require install_steps;
-    print "trying to pkg_install $name\n";
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $name) || die "$name rpm not found");
-    print "trying to pkg_install $name : done selection\n";
-    install_steps::installPackages($o, $o->{packages});
-    print "trying to pkg_install $name : done installed\n";
-}
-
 sub fsck_option() {
     my $y = $::o->{security} < 3 && $::beginner ? "-y " : "";
     substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
@@ -622,7 +601,7 @@ sub install_urpmi {
                       hd => "file:/" . hdInstallPath(),
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
-		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/Mandrake/RPMS$_->{medium}";
+		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
 	local *FILES; open FILES, "bzip2 -dc /tmp/$_->{hdlist} 2>/dev/null | hdlist2names - |";
 	chop, print LIST "$dir/$_\n" foreach <FILES>;

@@ -314,7 +314,7 @@ sub unselectAllPackages($) {
 
 sub skipSetWithProvides {
     my ($packages, @l) = @_;
-    packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } map { packageByName($packages, $_) } @l;
+    packageSetFlagSkip($_, 1) foreach grep { $_ } map { $_, packageProvides($_) } @l;
 }
 
 sub psUsingHdlists {
@@ -537,7 +537,11 @@ sub readCompssList {
 sub readCompssUsers {
     my ($packages, $compss) = @_;
     my (%compssUsers, @sorted, $l);
-    my %compss; m|(.*)/(.*)| && push @{$compss{$1}}, $2 foreach @$compss;
+    my (%compss); 
+    foreach (@$compss) {
+	local ($_, $a) = m|(.*)/(.*)|;
+	do { push @{$compss{$_}}, $a } while s|/[^/]+||;
+    }
 
     my $map = sub {
 	$l or return;
@@ -554,8 +558,7 @@ sub readCompssUsers {
 	    $compssUsers{$1} = $l = [];
 	} elsif (/\s+\+(\S+)/) {
 	    push @$l, $1;
-	} elsif (/\s+(\S+)/) {
-	    s|:|/|g; /\s+(\S+)/;
+	} elsif (/^\s+(.*?)\s*$/) {
 	    push @$l, @{$compss{$1} || log::l("unknown category $1 (in compssUsers)") && []};
 	}
     }
@@ -934,6 +937,7 @@ sub install($$$;$$) {
 
 	my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 0);
 	log::l("rpmRunTransactions done");
+	log::l("ERROR: rpmRunTransactions pb $_") foreach @probs;
 
 	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
 	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs), sub {

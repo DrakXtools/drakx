@@ -164,7 +164,14 @@ sub formatMount_all {
       foreach sort { isLoopback($a) ? 1 : -1 } grep { $_->{mntpoint} } @$fstab;
 
     #- ensure the link is there
-    loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;    
+    loopback::carryRootCreateSymlink($_, $prefix) foreach @$fstab;
+
+    #- for fun :)
+    #- that way, when install exits via ctrl-c, it gives hand to partition
+    eval {
+	my ($type, $major, $minor) = devices::entry(fsedit::get_root($fstab)->{device});
+	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
+    };
 }
 
 sub mount($$$;$) {
@@ -388,7 +395,7 @@ sub write_fstab($;$$) {
 sub merge_fstabs {
     my ($fstab, $manualFstab) = @_;
     my %l; $l{$_->{device}} = $_ foreach @$manualFstab;
-    add2hash_($_, $l{$_->{device}} || next) foreach @$fstab;
+    %$_ = (%$_, %{$l{$_->{device}} || next}) foreach @$fstab;
 }
 
 #sub check_mount_all_fstab($;$) {

@@ -15,7 +15,7 @@ use log;
 
 sub enteringStep($$$) {
     my ($o, $step) = @_;
-    print _("Entering step `%s'\n", $o->{steps}{$step}{text});
+    print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
     $o->SUPER::enteringStep($step);
 }
 
