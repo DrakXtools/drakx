@@ -1177,7 +1177,7 @@ in that case it will take over the hard drive!!
 (this is meant for installing on another box).
 
 You may prefer to replay the installation.
-"), [ _("Replay"), _("Automated") ]);
+"), [ __("Replay"), __("Automated") ]);
 		   $t and $o->generateAutoInstFloppy($t eq 'Replay');
 	       }, advanced => 1 },
 	     { val => \ (my $t2 = _("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
