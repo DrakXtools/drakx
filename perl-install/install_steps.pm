@@ -40,7 +40,6 @@ sub new($$) {
 sub enteringStep($$) {
     my ($o, $step) = @_;
     log::l("starting step `$step'");
-    $o->kill;
 
     for (my $s = $o->{steps}{first}; $s; $s = $o->{steps}{$s}{next}) {
 
@@ -69,7 +68,8 @@ so continue at your own risk :("), $@ ]) if $@;
     }
 }
 
-sub errorInStep($$) {}
+sub errorInStep($$) { print "error :(\n"; exit 1 }
+sub kill_action {}
 
 
 #-######################################################################################
@@ -99,7 +99,8 @@ sub setupSCSI { modules::load_thiskind('scsi') }
 #------------------------------------------------------------------------------
 sub doPartitionDisks($$) {
     my ($o, $hds) = @_;
-    fsedit::auto_allocate($hds, $o->{partitions});
+    return if $::testing;
+    partition_table::write($_) foreach $hds;
 }
 
 #------------------------------------------------------------------------------
@@ -210,8 +211,7 @@ sub setRootPassword($) {
 
     $u{password} = crypt_($u{password}) if $u{password};
 
-    my $f = "$p/etc/passwd";
-    my @lines = cat_($f, "failed to open file $f");
+    my @lines = cat_(my $f = "$p/etc/passwd") or log::l("missing passwd file"), return;
 
     local *F;
     open F, "> $f" or die "failed to write file $f: $!\n";
@@ -273,6 +273,7 @@ sub createBootdisk($) {
 #------------------------------------------------------------------------------
 sub setupBootloader($) {
     my ($o) = @_;
+    return if $::g_auto_install;
     my $versionString = versionString();
     lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader});
 }

@@ -98,7 +98,7 @@ sub getAvailableSpace {
 sub setPackages($$) {
     my ($o, $install_classes) = @_;
 
-    unless ($o->{package}) {
+    unless ($o->{packages}) {
 	my $useHdlist = $o->{method} !~ /nfs|hd/;
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;

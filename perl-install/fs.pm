@@ -208,6 +208,8 @@ sub write($$) {
     }
     write_fstab($fstab, $prefix, $cddev);
 
+    return if $::g_auto_install;
+
     devices::make "$prefix/dev/$_->{device}" foreach grep { $_->{device} && !isNfs($_) } @$fstab;
 }
 

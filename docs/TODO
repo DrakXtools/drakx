@@ -1,6 +1,5 @@
-ddcprobe for pnp monitors
-
 kickstart like
+tolook qw(fstab )
 
 upgrade
 
@@ -77,3 +76,7 @@ try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
 test smp (is it enough to scan /proc/cpuinfo for multiple /^processor/ lines?)
+
+use ddcprobe monitor's size info for pnp monitors
+use ddcprobe video card memory size info
+use ddcprobe modelines to reduce the available resolutions

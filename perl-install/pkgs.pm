@@ -263,6 +263,8 @@ sub getHeader($) {
 sub install {
     my ($prefix, $toInstall, $isUpgrade, $force) = @_;
 
+    return if $::g_auto_install;
+
     c::rpmReadConfigFiles() or die "can't read rpm config files";
 
     my $db = c::rpmdbOpen($prefix) or die "error opening RPM database: ", c::rpmErrorString();

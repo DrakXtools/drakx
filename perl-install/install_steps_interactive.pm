@@ -35,6 +35,10 @@ sub errorInStep($$) {
     $o->ask_warn(_("Error"), [ _("An error occurred"), $err ]);
 }
 
+sub kill_action {
+    my ($o) = @_;
+    $o->kill;
+}
 
 #-######################################################################################
 #- Steps Functions
@@ -175,7 +179,7 @@ _("Please enter the IP configuration for this machine.
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4)."),
 			     [ _("IP address:"), _("Netmask:")],
-			     [ \$intf->{IPADDR}, \$intf->{NETMASK}],
+			     [ \$intf->{IPADDR}, \$intf->{NETMASK} ],
 			     complete => sub {
 				 for (my $i = 0; $i < @fields; $i++) {
 				     unless (network::is_ip($intf->{$fields[$i]})) {
@@ -202,7 +206,7 @@ _("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 Also give the gateway if you have one"),
-			     [_("Host name:"), _("DNS server:"), _("Gateway:"), _("Gateway device:")],
+			     [_("Host name:"), _("DNS server:"), _("Gateway:"), !$::beginner ? _("Gateway device:") : ()],
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)), 
 				      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
@@ -214,7 +218,7 @@ sub timeConfig {
 
     $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ timezone::getTimeZones($o->{prefix}) ], $o->{timezone}{timezone});
+    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     install_steps::timeConfig($o,$f);
 }
 

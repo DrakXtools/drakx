@@ -2,6 +2,7 @@ package install2;
 
 use diagnostics;
 use strict;
+use Data::Dumper;
 
 use vars qw($o);
 
@@ -16,6 +17,7 @@ use lang;
 use keyboard;
 use fs;
 use fsedit;
+use devices;
 use partition_table qw(:types);
 use pkgs;
 use printer;
@@ -23,8 +25,6 @@ use modules;
 use detect_devices;
 use modparm;
 use run_program;
-use install_steps_graphical;
-
 
 #-######################################################################################
 #- Steps  table
@@ -260,12 +260,12 @@ my %suggestedPartitions = (
 #-if you want to do a kickstart file, you just have to add all the required fields (see for example
 #-the variable $default)
 #-#######################################################################################
-$o = $::o = { 
+$o = { 
     bootloader => { onmbr => 1, linear => 0 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => $::testing, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 }, 
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 }, 
@@ -349,11 +349,9 @@ sub selectLanguage {
     $o->selectLanguage;
 
     addToBeDone {
-	unless ($o->{isUpgrade}) {
-	    lang::write($o->{prefix});
-            keyboard::write($o->{prefix}, $o->{keyboard});
-	}
-    } 'doInstallStep';
+	lang::write($o->{prefix});
+	keyboard::write($o->{prefix}, $o->{keyboard});
+    } 'doInstallStep' unless $o->{isUpgrade} || $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
@@ -364,8 +362,8 @@ sub selectKeyboard {
     $o->selectKeyboard;
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
-	keyboard::write($o->{prefix}, $o->{keyboard}) unless $o->{isUpgrade};
-    } 'doInstallStep';
+	keyboard::write($o->{prefix}, $o->{keyboard});
+    } 'doInstallStep' unless $o->{isUpgrade} || $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
@@ -382,7 +380,7 @@ sub selectInstallClass {
 
     $::expert   = $o->{installClass} eq "expert";
     $::beginner = $o->{installClass} eq "beginner";
-    $o->{partitions} = $suggestedPartitions{$o->{installClass}};
+    $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
 
     install_any::setPackages($o, \@install_classes) if $o->{steps}{choosePackages}{entered} > 1;
 }
@@ -396,7 +394,6 @@ sub setupSCSI {
 }
 
 #------------------------------------------------------------------------------
-#-PADTODO
 sub partitionDisks {
     $o->{drives} = [ detect_devices::hds() ];
     $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
@@ -492,7 +489,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 #-PADTODO
 sub createBootdisk {
-    fs::write($o->{prefix}, $o->{fstab}) unless $o->{isUpgrade};
+    fs::write($o->{prefix}, $o->{fstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
     $o->createBootdisk($_[1] == 1);
 }
@@ -516,6 +513,25 @@ sub exitInstall { $o->exitInstall }
 sub main {
     $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
 
+    $::beginner = $::expert = $::g_auto_install = 0;
+    while (@_) {
+	local $_ = shift;
+	if (/--method/) {
+	    $o->{method} = shift;
+	} elsif (/--step/) {
+	    $o->{steps}{first} = shift;
+	} elsif (/--expert/) {
+	    $::expert = 1;
+	} elsif (/--beginner/) {
+	    $::beginner = 1;
+	#} elsif (/--ks/ || /--kickstart/) {
+	#    $::auto_install = 1;
+	} elsif (/--g_auto_install/) {
+	    $::testing = $::g_auto_install = 1;
+	    $o->{partitioning}{auto_allocate} = 1;
+	}       
+    }
+
     #-  if this fails, it's okay -- it might help with free space though 
     unlink "/sbin/install" unless $::testing;
     unlink "/sbin/insmod"  unless $::testing;
@@ -525,6 +541,10 @@ sub main {
     log::l("second stage install running");
     log::ld("extra log messages are enabled");
 
+    #-really needed ??
+    spawnSync();
+    eval { spawnShell() };
+
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
@@ -532,14 +552,39 @@ sub main {
     $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
     $ENV{LD_LIBRARY_PATH} = "";
 
-    #-really needed ??
-    spawnSync();
-    eval { spawnShell() };
+    if ($::auto_install) {
+	require 'install_steps.pm';
+	fs::mount(devices::make("fd0"), "/mnt", "vfat", 0);
+
+	my $O = $o;
+	my $f = "/mnt/auto_inst.cfg";
+	{
+	    local *F;
+	    open F, $f or die _("Error reading file $f");
+
+	    local $/ = "\0";
+	    eval <F>;
+	}
+	$@ and die _("Bad kickstart file %s (failed %s)", $f, $@);
+	fs::umount("/mnt");
+	add2hash($o, $O);
+    } else {
+	require 'install_steps_graphical.pm';
+    }
+
+    $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
+    mkdir $o->{prefix}, 0755;
+
+    #-  make sure we don't pick up any gunk from the outside world 
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
+    $ENV{LD_LIBRARY_PATH} = "";
 
     #- needed very early for install_steps_graphical
     $o->{mouse} = install_any::mouse_detect() unless $::testing || $o->{mouse};
 
-    $o = install_steps_graphical->new($o);
+    $::o = $o = $::auto_install ? 
+      install_steps->new($o) : 
+      install_steps_graphical->new($o);
 
     $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
@@ -549,29 +594,15 @@ sub main {
     }
 
     modules::load_deps("/modules/modules.dep");
-    modules::get_stage1_conf("/tmp/conf.modules");
+    $o->{modules} = modules::get_stage1_conf($o->{modules}, "/tmp/conf.modules");
     modules::read_already_loaded();
     modparm::read_modparm_file("/usr/share/modparm.lst");
 
-    while (@_) {
-	local $_ = shift;
-	if (/--method/) {
-	    $o->{method} = $_ = shift;
-	    if (/ftp/) {
-		require 'ftp.pm';
-		local $^W = 0;
-		*install_any::getFile = \&ftp::getFile;
-	    }
-	} elsif (/--step/) {
-	    $o->{steps}{first} = shift;
-	} elsif (/--expert/) {
-	    $::expert = 1;
-	} else {
-	    $::expert = 0;
-	}
-       
+    if ($o->{method} && $o->{method} eq "ftp") {
+	require 'ftp.pm';
+	local $^W = 0;
+	*install_any::getFile = \&ftp::getFile;
     }
-    
 
     #-the main cycle
     my $clicked = 0;
@@ -581,6 +612,7 @@ sub main {
 	eval { 
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
+	$o->kill_action;
 	$clicked = 0;
 	while ($@) {
 	    local $_ = $@;
@@ -599,6 +631,16 @@ sub main {
     killCardServices();
     
     log::l("installation complete, leaving");
+
+    if ($::g_auto_install) {
+	my $h = $o; $o = {};
+	$h->{$_} and $o->{$_} = $h->{$_} foreach qw(lang autoSCSI printer mouse netc timezone bootloader superuser intf keyboard mkbootdisk base user modules installClass partitions);
+
+	delete $o->{user}{password2};
+	delete $o->{superuser}{password2};
+
+	print Data::Dumper->Dump([$o], ['$o']), "\0";
+    }
 }
 
 sub killCardServices { 

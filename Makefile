@@ -27,4 +27,4 @@ $(BOOT_IMG:%=%f): %f: %
 	dd if=$< of=/dev/fd0
 	xmessage "Floppy done"
 
-# mkisofs -R -b images/gi_cdrom.img -c images/b /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
+# mkisofs -R -b images/gi_cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -

@@ -285,10 +285,12 @@ sub write_conf {
 }
 
 sub get_stage1_conf { 
-    %conf = read_conf($_[0], \$scsi);
+    %conf = read_conf($_[1], \$scsi);
+    add2hash(\%conf, $_[0]);
     $conf{parport_lowlevel}{alias} ||= "parport_pc";
     $conf{pcmcia_core}{"pre-install"} ||= "/etc/rc.d/init.d/pcmcia start";    
     $conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
+    \%conf;
 }
 
 sub load_thiskind($;&) {
