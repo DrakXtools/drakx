@@ -518,7 +518,7 @@ sub install_urpmi {
 	umask $mask;
 
 	my $dir = ${{ nfs => "file://mnt/nfs", 
-                      hd => "file:/" . hdInstallPath(),
+                      disk => "file:/" . hdInstallPath(),
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
 		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
@@ -664,7 +664,7 @@ push @graphical_steps, 'doPartitionDisks', 'formatPartitions';
 sub getAndSaveInstallFloppy {
     my ($o, $where) = @_;
     my $image = cat_("/proc/cmdline") =~ /pcmcia/ ? "pcmcia" :
-      ${{ hd => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
+      ${{ disk => 'hd', cdrom => 'cdrom', ftp => 'network', nfs => 'network', http => 'network' }}{$o->{method}};
     $image .= arch() =~ /sparc64/ && "64"; #- for sparc64 there are a specific set of image.
     getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
     1;
