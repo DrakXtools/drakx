@@ -31,8 +31,6 @@ sub lilo_choice
     my $bootloader = bootloader::read('', '/etc/lilo.conf');
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
-    print $bootloader . "\n";
-    
     
     my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
     my $fstab = [ fsedit::get_fstab(@$hds) ];
@@ -42,12 +40,12 @@ sub lilo_choice
     
   ask:
     any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
-    #eval { bootloader::install('', $bootloader, $fstab, $hds) };
+    eval { bootloader::install('', $bootloader, $fstab, $hds) };
 
     if ($@) {
 	$in->ask_warn('', 
 		      [ _("Installation of LILO failed. The following error occured:"),
-		   grep { !/^Warning:/ } cat_("/tmp/.error") ]);
+			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
 	unlink "/tmp/.error";
 	goto ask;
     }
