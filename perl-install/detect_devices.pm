@@ -708,7 +708,7 @@ sub pcmcia_controller_probe() {
 sub real_pcmcia_probe() {
     return if $::testing;
 
-    c::pcmcia_probe() || (pcmcia_controller_probe())[0]->{driver};
+    c::pcmcia_probe() || first(map { $_->{driver} } pcmcia_controller_probe());
 }
 
 sub pcmcia_probe() {
