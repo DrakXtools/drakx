@@ -76,6 +76,7 @@ sub create_user {
 			    'adduser', 
 			    '-p', authentication::user_crypted_passwd($u, $isMD5),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
+			    if_($u->{shell}, '-s', $u->{shell}), 
 			    $u->{name});
     }
 
