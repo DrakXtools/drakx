@@ -397,8 +397,8 @@ sub choosePackagesTree {
 
     my %toolbar = my @toolbar = 
       (
-       ftout =>  [ _("Expand tree") , sub { $tree->expand_recursive(undef) } ],
-       ftin  =>  [ _("Collapse tree") , sub { $tree->collapse_recursive(undef) } ],
+       ftout =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
+       ftin  =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
        reload=>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
       );
     $toolbar->set_button_relief("none");
