@@ -112,7 +112,7 @@ my %suggestedPartitions = (
 #-the variable $default)
 #-#######################################################################################
 $o = $::o = { 
-    bootloader => { onmbr => 1, linear => 0 },
+    bootloader => { onmbr => 1, linear => 0, message => 1, keytable => 1, timeout => 50 },
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
@@ -202,7 +202,7 @@ sub selectLanguage {
     addToBeDone {
 	lang::write($o->{prefix});
 	keyboard::write($o->{prefix}, $o->{keyboard});
-    } 'doInstallStep' unless $o->{isUpgrade} || $::g_auto_install;
+    } 'doInstallStep' unless $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
@@ -220,16 +220,11 @@ sub selectKeyboard {
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	keyboard::write($o->{prefix}, $o->{keyboard});
-    } 'doInstallStep' unless $o->{isUpgrade} || $::g_auto_install;
+    } 'doInstallStep' unless $::g_auto_install;
 }
 
 #------------------------------------------------------------------------------
-sub selectPath {
-    $o->selectPath;
-
-    $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
-    $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
-}
+sub selectPath { $o->selectPath; }
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
@@ -270,13 +265,11 @@ I'll try to go on blanking bad partitions"));
 	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
-    unless ($o->{isUpgrade}) {
-	eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{partitioning}{auto_allocate};
-	$o->doPartitionDisks($o->{hds});
+    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{partitioning}{auto_allocate};
+    $o->doPartitionDisks($o->{hds});
 
-	unless ($::testing) {
-	    $o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
-	}
+    unless ($::testing) {
+	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
     }
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
@@ -437,7 +430,7 @@ sub main {
     $ENV{LD_LIBRARY_PATH} = "";
 
     #- needed very early for install_steps_graphical
-    $o->{mouse} ||= mouse::detect() unless $::testing;
+    eval { $o->{mouse} ||= mouse::detect() };
 
     $::o = $o = $::auto_install ? 
       install_steps->new($o) : 

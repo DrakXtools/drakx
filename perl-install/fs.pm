@@ -253,5 +253,3 @@ sub write_fstab($;$$) {
     }
     print F join(" ", @$_), "\n" foreach @to_add;
 }
-
-

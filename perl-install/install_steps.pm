@@ -277,6 +277,7 @@ sub setupBootloader($) {
     my ($o) = @_;
     return if $::g_auto_install;
     my $versionString = versionString();
+    $o->{bootloader}{keytable} = keyboard::kmap($o->{keyboard}) if $o->{bootloader}{keytable} eq "1";
     lilo::install($o->{prefix}, $o->{hds}, $o->{fstab}, $versionString, $o->{bootloader});
 }
 

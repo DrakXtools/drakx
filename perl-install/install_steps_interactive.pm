@@ -541,7 +541,7 @@ sub setupBootloader($) {
 			 $l[!$o->{bootloader}{onmbr}]
 			) eq $l[0];
 
-    lilo::proposition($o->{hds}, $o->{fstab});
+    lilo::proposition($o->{hds}, $o->{fstab}, $o->{bootloader});
 
     unless ($::beginner) {
 	my @entries = grep { $_->{liloLabel} } @{$o->{fstab}};
@@ -555,8 +555,8 @@ and what label you want to use for each of them."),
 				 [map {\$_->{liloLabel}} @entries],
 				);
     }
-
-    install_steps::setupBootloader($o);
+    my $w = $o->wait_message('', _("Installing bootloader"));
+    $o->SUPER::setupBootloader;
 }
 
 #------------------------------------------------------------------------------

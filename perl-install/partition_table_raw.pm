@@ -4,6 +4,7 @@ use diagnostics;
 use strict;
 
 use common qw(:common :system);
+use devices;
 use c;
 
 my @fields = qw(active start_head start_sec start_cyl type end_head end_sec end_cyl start size);
@@ -13,8 +14,10 @@ my $nb_primary = 4;
 
 my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeof($format);
 
-1;
-
+my @MBR_signatures = (
+    [ 'LILO', 0x6,  'LILO' ],
+    [ 'DOS',  0xa0, '\x25\x03\x4E\x02\x\xCD\x13' ],
+);
 
 sub compute_CHS($$) {
     my ($hd, $e) = @_;
@@ -107,3 +110,28 @@ sub zero_MBR($) {
     $hd->{primary} = clear_raw();
     delete $hd->{extended};
 }
+
+sub typeOfMBR($) {
+    my $dev = devices::make($_[0]);
+    local *F; sysopen F, $dev, 0 or return;
+
+    my $tmp
+    foreach (@MBR_signatures) {
+	my ($name, $offset, $signature) = @$_;
+	sysseek F, $offset, 0 or next;
+	sysread(F, $tmp, length $signature) && $tmp eq $signature and return $name;
+    }
+    undef;
+}
+
+sub isFatFormatted($) {
+    my $dev = devices::make($_[0]);
+    local *F; sysopen F, $dev, 0 or return;
+    sysseek F, $common::SECTORSIZE - length($magic), 0;
+
+    #- check magic number
+    my $tmp;
+    sysread(F, $tmp, length $magic) && $tmp eq $magic;
+}
+
+1;

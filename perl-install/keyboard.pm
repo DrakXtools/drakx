@@ -79,6 +79,11 @@ sub text2keyboard {
     die "unknown keyboard $t";
 }
 
+sub kmap($) {
+    my ($keyboard) = @_;
+    ($keyboards{$keyboard} || [])->[1];
+}
+
 sub lang2keyboard($) {
     local ($_) = @_;
     $keyboards{$_} && $_ || $lang2keyboard{$_} || substr($_, 0, 2);    
@@ -128,11 +133,8 @@ sub setup($) {
 
 sub write($$) {
     my ($prefix, $keyboard) = @_;
-    my $o = $keyboards{$keyboard} or return;
 
-    local *F;
-    open F, ">$prefix/etc/sysconfig/keyboard" or die "failed to create keyboard configuration: $!";
-    print F "KEYTABLE=$o->[1]\n" or die "failed to write keyboard configuration: $!";
+    setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => kmap($keyboard) });
 
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or die "dumpkeys failed";
 }

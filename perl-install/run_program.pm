@@ -17,10 +17,17 @@ sub rooted {
 
     fork and wait, return $? == 0;
     {
+	my ($stdout, $stdoutm);
+	($stdoutm, $stdout, @args) = @args if $args[0] eq ">" || $args[0] eq ">>";
+
 	open STDIN, "/dev/null" or die "can't open /dev/null as stdin";
 
-	open STDERR, ">> /dev/tty7" or open STDERR, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
-	open STDOUT, ">> /dev/tty7" or open STDOUT, ">> /tmp/exec.log" or die "runProgramRoot can't log :(";
+	open STDERR, ">> /dev/tty7" or open STDERR, ">> /tmp/exec.log" or die "run_program can't log :(";
+	if ($stdout) {
+	    open STDOUT, "$stdoutm $root$stdout" or die "run_program can't output in $root$stdout (mode `$stdoutm')";
+	} else {
+	    open STDOUT, ">> /dev/tty7" or open STDOUT, ">> /tmp/exec.log" or die "run_program can't log :(";
+	}
 
 	$root and chroot $root;
 	chdir "/";

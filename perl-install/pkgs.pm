@@ -236,7 +236,7 @@ sub setSelectedFromCompssList($$$$$) {
 sub init_db {
     my ($prefix, $isUpgrade) = @_;
 
-    my $f = "$prefix/root/" . ($isUpgrade ? "upgrade" : "install") . ".log";
+    my $f = "$prefix/root/install.log";
     open(F, "> $f") ? log::l("opened $f") : log::l("Failed to open $f. No install log will be kept.");
     $fd = fileno(F) || log::fd() || 2;
     c::rpmErrorSetCallback($fd);
@@ -260,7 +260,7 @@ sub getHeader($) {
 }
 
 sub install {
-    my ($prefix, $toInstall, $isUpgrade, $force) = @_;
+    my ($prefix, $toInstall, $force) = @_;
 
     return if $::g_auto_install;
 
@@ -278,7 +278,7 @@ sub install {
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release}, 
 			       c::headerGetEntry(getHeader($p), 'arch');
-	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $isUpgrade);
+	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;
 	$total += $p->{size};
     }

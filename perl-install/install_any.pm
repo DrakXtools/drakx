@@ -38,7 +38,7 @@ sub getFile($) {
 	*install_any::getFile = \&ftp::getFile;
     } else {
 	*install_any::getFile = sub($) {
-	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or sleep(1000), return;
+	    open getFile, "/tmp/rhimage/" . relGetFile($_[0]) or return;
 	    \*getFile;
 	};
     }
@@ -148,7 +148,7 @@ sub install_cpio {
     my $cpio = "$dir.cpio.bz2";
     -e $cpio or return;
 
-    eval { commands::rm "-r", $dir };
+    eval { commands::rm("-r", $dir) };
     mkdir $dir, 0755;
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
     "$dir/$name";

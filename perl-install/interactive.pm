@@ -124,6 +124,8 @@ sub ask_from_entries($$$$;$%) {
 #- if you pass a hash with a field hidden -> emulate stty -echo
 sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
+
+    return unless @$l;
     
     $message = ref $message ? $message : [ $message ];
 
