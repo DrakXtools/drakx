@@ -195,7 +195,9 @@ sub manage {
     eval(cat_('/etc/sysconfig/drakconnect'));
 
     my %name = network::ethernet::get_eth_cards_names(network::ethernet::get_eth_cards);
-    $p->{$_} = { kind => $_ } foreach keys %name;
+    foreach (keys %name) {
+	$p->{/eth|ath|wlan/ ? $name{$_} : $_} = { kind => $_ };
+    }
     foreach (keys %$intf) {
 	/^ippp/ and $p->{isdn} = { kind => $_ };
 	/^ppp0/ and $p->{modem} = { kind => $_ };
@@ -231,7 +233,7 @@ sub manage {
     each_index {
 	my ($name, $interface, $protocol) = ($_, $p->{$_}{kind}, $p->{$_}{protocol});
 	$p->{$name}{gui}{index} = $::i;
-	build_tree($netc, $p->{$name}{intf} = $intf->{$name} || {}, $name, $interface, $protocol);
+	build_tree($netc, $p->{$name}{intf} = $intf->{$name =~ /eth|ath|wlan/ ? $interface : $name} || {}, $name, $interface, $protocol);
 	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $p->{$name}{gui}{notebook}));
     } (sort keys %$p);
@@ -331,7 +333,7 @@ sub build_notebook {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	    delete $gui->{intf}{BOOTPROTO};
 	}
-	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
+	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface_kind);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
     
