@@ -42,7 +42,7 @@ cp -f $KERNEL_BOOT_PATH/boot/System.map* System.map
 rm -rf modules ; install -d modules
 (cd modules ; 
     cp -f `find ../"$KERNEL_BOOT_PATH"/lib/modules/ -name "*.o"` .
-    /sbin/depmod -m ../System.map -i -e *.o | perl -pe 's/\\\n//' | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
+    /sbin/depmod -F ../System.map -e *.o | perl -pe 's/\\\n//' | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o               | packdrake -b9s modules.cz 400000
     ls *.o               | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
