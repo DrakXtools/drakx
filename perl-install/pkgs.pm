@@ -423,6 +423,7 @@ sub psUsingHdlist {
 	    if ($inside_block =~ /E/) {
 		push @{$m->{pubkey}}, { block => $block, content => $content };
 		$block = $content = '';
+		next;
 	    }
 	    #- now compute content (for finding the right key).
 	    chomp;
