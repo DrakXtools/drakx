@@ -323,11 +323,12 @@ sub get_val() {
     $a =~ s/^.*?\n.*?\n//;
     $a =~ s/^\s*lo:.*?\n//;
     my @line = split(/\n/, $a);
-    my @interfaces = c::get_netdevices();
+    require detect_devices;
+    my @net_devices = detect_devices::getNet();
     map {
 	s/\s*(\w*)://;
 	my $intf = $1;
-     if (member($intf, @interfaces)) {
+     if (member($intf, @net_devices)) {
          $monitor->{$intf}{val} = [ split() ];
          $monitor->{$intf}{intf} = $intf;
          $intf;
