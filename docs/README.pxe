@@ -122,18 +122,9 @@ label expert
 label rescue
   kernel vmlinuz
   append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 rescue rw
-label lnx4win
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 lnx4win vga=788
-label preinst
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=network.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
 label oem
   kernel vmlinuz
   append ramdisk_size=32000 initrd=network.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
-label auto
-  kernel vmlinuz
-  append ramdisk_size=32000 initrd=network.rdz  auto_install=Mandrake/base/auto_inst.cfg.pl
 ********************************************************************************
 * Usefull linkst ***************************************************************
 ********************************************************************************
