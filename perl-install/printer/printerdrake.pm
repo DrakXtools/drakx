@@ -714,22 +714,24 @@ sub configure_new_printers {
 Printerdrake could not determine which model your printer %s is. Please choose the correct model from the list.", $info) . " " .
 					   N("If your printer is not listed, choose a compatible (see printer manual) or a similar one."), '|',
 					   [ keys %printer::main::thedb ], $printer->{DBENTRY}) or next;
-		# Rename the queue according to the chosen model
-		$queue = $printer->{DBENTRY};
-		$queue =~ s/\|/ /g;
-		$printer->{currentqueue}{desc} = $queue;
-		$queue =~ s/[\s\(\),]//g;
-		# Append a number if the queue name already exists
-		if ($printer->{configured}{$queue}) {
-		    $queue =~ s/(\d)$/$1_/;
-		    my $i = 1;
-		    while ($printer->{configured}{"$queue$i"}) {
-			$i ++;
+		if ($unknown) {
+		    # Rename the queue according to the chosen model
+		    $queue = $printer->{DBENTRY};
+		    $queue =~ s/\|/ /g;
+		    $printer->{currentqueue}{desc} = $queue;
+		    $queue =~ s/[\s\(\),]//g;
+		    # Append a number if the queue name already exists
+		    if ($printer->{configured}{$queue}) {
+			$queue =~ s/(\d)$/$1_/;
+			my $i = 1;
+			while ($printer->{configured}{"$queue$i"}) {
+			    $i ++;
+			}
+			$queue .= $i;
 		    }
-		    $queue .= $i;
+		    $printer->{currentqueue}{queue} = $queue;
+		    $printer->{QUEUE} = $printer->{currentqueue}{queue};
 		}
-		$printer->{currentqueue}{queue} = $queue;
-		$printer->{QUEUE} = $printer->{currentqueue}{queue};
 		# Restore wait message
 		$_w = $in->wait_message(N("Printerdrake"),
 					N("Configuring printer \"%s\"...",
@@ -753,6 +755,7 @@ Printerdrake could not determine which model your printer %s is. Please choose t
 	$printer->{complete} = 0;
     }
     # Configure the current printer queues in applications
+    undef $_w;
     $_w =
 	$in->wait_message(N("Printerdrake"),
 			  N("Configuring applications..."));
@@ -2012,40 +2015,63 @@ sub setup_common {
 	    # If make and model match exactly, we have found the correct
 	    # entry and we can stop searching human-readable makes and
 	    # models
-	    if ($dbmakemodel eq $descr) {
+	    if (lc($dbmakemodel) eq lc($descr)) {
 		$printer->{DBENTRY} = $entry;
 		$matchlength = 100;
 		next;
 	    }
-	    my $searchterm = $descr;
-	    my $lsearchterm = length($searchterm);
-	    $searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
-	    if ($lsearchterm > $matchlength &&
-		$dbmakemodel =~ m!$searchterm!i) {
-		$matchlength = $lsearchterm;
-		$printer->{DBENTRY} = $entry;
+	    # Matching a part of the human-readable makes and models
+	    # should only be done id the search term is not the name of
+	    # an old model, otherwise the newest, not yet listed models
+	    # match with the oldest model of the manufavturer (as the
+	    # Epson Stylus Photo 900 with the original Epson Stylus Photo)
+	    my @badsearchterms = 
+		("HP|DeskJet",
+		 "HP|LaserJet",
+		 "HP|DesignJet",
+		 "HP|OfficeJet",
+		 "EPSON|Stylus",
+		 "EPSON|Stylus Color",
+		 "EPSON|Stylus Photo",
+		 "EPSON|Stylus Pro",
+		 "XEROX|WorkCentre",
+		 "XEROX|DocuPrint");
+	    if (!member($descr, @badsearchterms)) {
+		my $searchterm = $descr;
+		my $lsearchterm = length($searchterm);
+		$searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+		if ($lsearchterm > $matchlength &&
+		    $dbmakemodel =~ m!$searchterm!i) {
+		    $matchlength = $lsearchterm;
+		    $printer->{DBENTRY} = $entry;
+		}
 	    }
-	    $searchterm = $dbmakemodel;
-	    $lsearchterm = length($searchterm);
-	    $searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
-	    if ($lsearchterm > $matchlength &&
-		$descr =~ m!$searchterm!i) {
-		$matchlength = $lsearchterm;
-		$printer->{DBENTRY} = $entry;
+	    if (!member($dbmakemodel, @badsearchterms)) {
+		my $searchterm = $dbmakemodel;
+		my $lsearchterm = length($searchterm);
+		$searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+		if ($lsearchterm > $matchlength &&
+		    $descr =~ m!$searchterm!i) {
+		    $matchlength = $lsearchterm;
+		    $printer->{DBENTRY} = $entry;
+		}
 	    }
 	}
-	# No matching printer found, try a best match as last mean
-	$printer->{DBENTRY} ||=
-	    bestMatchSentence($descr, keys %printer::main::thedb);
-        # If the manufacturer was not guessed correctly, discard the
-        # guess.
-        $printer->{DBENTRY} =~ /^([^\|]+)\|/;
-        my $guessedmake = lc($1);
-        if ($guessedmake !~ /Generic/i &&
-	    $descr !~ /$guessedmake/i &&
-            ($guessedmake ne "hp" ||
-             $descr !~ /Hewlett[\s-]+Packard/i))
+	# No matching printer found, try a best match as last mean (not
+	# when generating queues non-interactively)
+	if (!$printer->{noninteractive}) {
+	    $printer->{DBENTRY} ||=
+		bestMatchSentence($descr, keys %printer::main::thedb);
+	    # If the manufacturer was not guessed correctly, discard the
+	    # guess.
+	    $printer->{DBENTRY} =~ /^([^\|]+)\|/;
+	    my $guessedmake = lc($1);
+	    if ($guessedmake !~ /Generic/i &&
+		$descr !~ /$guessedmake/i &&
+		($guessedmake ne "hp" ||
+		 $descr !~ /Hewlett[\s-]+Packard/i))
             { $printer->{DBENTRY} = "" };
+	}
     }
 
     #- Pre-fill the "Description" field with the printer's model name
