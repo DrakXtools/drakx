@@ -1605,5 +1605,45 @@ sub new_with_text {
 }
 
 
+package Gtk2::Banner;
+
+use ugtk2 qw(:helpers :wrappers);
+
+sub set_pixmap {
+    my ($darea) = @_;
+    return if !$darea->realized;
+    my $window = $darea->window;
+    my $pixmap = $darea->{back_pixmap} ||= Gtk2::Gdk::Pixmap->new($window, 1, 2, $window->get_depth);
+
+    my $style = $darea->get_style;
+    $pixmap->draw_points($style->bg_gc('normal'), 0, 0);
+    $pixmap->draw_points($style->base_gc('normal'), 0, 1);
+    $darea->window->set_back_pixmap($pixmap);
+
+    $darea->{layout} = $darea->create_pango_layout($darea->{text});
+    $darea->signal_connect(expose_event => sub {
+                               my $height = $darea->{icon}->get_height;
+                               $darea->{icon}->render_to_drawable($window, $darea->style->bg_gc('normal'),
+                                                                  0, 0, 10, 10, -1, -1, 'none', 0, 0);
+                               $darea->window->draw_layout($style->text_gc('normal'), $height + 20, 25, $darea->{layout});
+                           });
+}
+
+
+sub new {
+    my ($_class, $icon, $text) = @_;
+
+    my $darea = Gtk2::DrawingArea->new;
+    $darea->set_size_request(-1, 100);
+    $darea->modify_font(Gtk2::Pango::FontDescription->from_string(common::N("_banner font:\nSans 14")));
+    $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
+    $darea->{text} = $text;
+
+    $darea->signal_connect(realize => \&set_pixmap);
+    $darea->signal_connect("style-set" => \&set_pixmap);
+                               
+    return $darea;
+}
+
 1;
 
