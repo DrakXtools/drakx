@@ -268,7 +268,10 @@ sub choosePartitionsToFormat($$) {
 
 	if (!$_->{toFormat}) {
 	    my $fs_type = fs::type::fs_type_from_magic($_);
-	    $_->{toFormatUnsure} ||= !$fs_type || $fs_type ne $_->{fs_type};
+	    if (!$fs_type || $fs_type ne $_->{fs_type}) {
+		log::l("setting toFormatUnsure for $_->{device} because <$_->{fs_type}> ne <$fs_type>");
+		$_->{toFormatUnsure} = 1;
+	    }
 	}
     }
 }
