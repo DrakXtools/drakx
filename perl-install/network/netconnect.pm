@@ -31,7 +31,7 @@ sub detect {
                  $auto_detect->{adsl} = network::adsl::adsl_detect();
              },
              modem => sub {
-                 $auto_detect->{modem} = { map { ($_->{device} || $_->{description}) => $_ } detect_devices::getModem() };
+                 $auto_detect->{modem} = { map { ($_->{description} || "$_->{MANUFACTURER}|$_->{DESCRIPTION} ($_->{device})") => $_ } detect_devices::getModem() };
              },
             );
     $l{$_}->() foreach ($o_class || (keys %l));
