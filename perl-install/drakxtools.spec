@@ -314,6 +314,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakbackup: misc fixes (stew)
 - drakboot: configured directly gdm & kdm
 - drakconnect: fix #4050
+- drakfont: fix #1679 & #3673
 - drakgw:
   o fix not being able to step backward
   o fix canceling resulting in broken dhcp config
@@ -476,7 +477,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.7mdk
 - drakboot: more work on grub conf reread
 - drakedm: fix crash on service restart
-- drakfont: fix crash when trying to remove empty font list
+- drakfont: fix crash when trying to remove empty font list (#1944)
 
 * Tue Jun 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.6mdk
 - autoinstall: (pixel)
