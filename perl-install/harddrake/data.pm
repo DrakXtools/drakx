@@ -184,7 +184,7 @@ our @tree =
       string => N("ISDN adapters"),
       icon => "modem.png",
       configurator => "$sbindir/drakconnect",
-      detector => sub { require network::isdn; my $isdn = network::isdn::isdn_detect_backend(); if_(@$isdn, f(@$isdn)) },
+      detector => sub { require network::isdn; my $isdn = network::isdn::detect_backend(); if_(@$isdn, f(@$isdn)) },
       checked_on_boot => 0,
      },
 
