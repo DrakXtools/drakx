@@ -1,0 +1,60 @@
+
+> > We already have some functional backends, frontends, that works great, and has
+> > not been thrown away since 1 year. We use it during install, post install, mcc
+> > and so.
+> 
+> But aren't generic enough.
+
+DrakX handles:
+- buttons
+- bool values (checkboxes)
+- ranges
+- entries
+- combo boxes (editable or not)
+- lists / radio boxes
+- tree lists
+- iconlist
+- wait messages
+
+Features:
+- all the entries above can be mixed
+- nice separation between data and displayed data (eg: choose in list of
+objects representing hda/hdb/... but displayed nicely with size...)
+- keyboard handled nicely in GTK frontend
+- callback on events:
+ ok pressed => check before the dialog is hidden
+ focus changed => 
+  * enables pre-setting things based on other entries
+  * value checking on the fly
+- simple/advance toggle 
+- shadowing of entries
+- tooltips
+- size of windows computed the best possible
+- perl-based
+
+Misfeatures:
+- display not flexible (though i don't know any of the tools we're talking
+about that is flexible => nice)
+- quite a few features are gtk only (simple/advance toggle, shadowing of
+entries, certain events, tooltips).
+- a stdio front-end exist but handle only certain entries. It would need a
+week-work to finish it
+- a http front-end could be done (mod-perl needed)
+- perl-based
+
+The DrakX frontend (called "interactive") could be moved out of DrakX.
+
+eg of use:
+
+<#part type="text/plain" filename="~/bin/perl/imessage" disposition=attachment>
+<#/part>
+
+[...]
+
+> > -provides a lot of frontends
+> 
+> And you ideally have to provide a frontend by widget set.
+
+nope. The interface is completly standardised, even if it include some
+gtk-like niceties. The *complete* newt (and not just entries and radioboxes
+like bus) binding takes 241 lines.
