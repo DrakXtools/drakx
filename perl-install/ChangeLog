@@ -1,3 +1,204 @@
+2002/08/17  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/ru.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/br.po, share/po/th.po, share/po/no.po, share/po/et.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/be.po, share/po/uk.po, share/po/ko.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/bs.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/it.po, share/po/nl.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/lv.po,
+	share/po/hu.po: updated po files
+
+2002/08/17  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/card.pm: 
+	  - allow to change the detected card
+	  - the chosen card can be used for dualhead if it is dualhead
+
+	* Xconfig/resolution_and_depth.pm: sort resolutions to default to
+	1280x1024 instead of 1280x960
+	if the monitor size is not given, default to 14'
+
+	* any.pm (devfssymlinkf): use "mksymlink" instead of "symlink" so that
+	devfsd doesn't give an error when the symlink already exists
+
+	* Xconfig/proprietary.pm: 
+	  - fix module not returning true
+	  - don't install_matrox_hal when testing
+
+	* Xconfig/main.pm: ensure the chosen resolution is maintained unchanged
+	when changing the graphic
+	card or monitor.
+
+2002/08/17  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: Fixes to make it possible toinstall HP's multi-function
+	devices during installation.
+
+	* scanner.pm: Let a newline character be put after the entry in
+	/etc/sane.d/dll.conf, so more than one driver name can be added
+	without all of them going into one line and then being unreadable.
+
+2002/08/16  alus
+
+	* share/po/pl.po: updated
+
+2002/08/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sp.po, share/po/sl.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/sk.po: updated Slovak file
+
+	* share/po/da.po, share/po/ko.po: updated Danish and Korean files
+
+2002/08/16  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: fix "Security Administrator (login or email)" missing field
+
+	* interactive/newt.pm: fix dialog box with empty buttons (thanks to
+	Hamster <hamster@hamsternet.org>)
+
+	* Xconfig/test.pm: raise the testing time from 8 to 12 seconds
+
+	* my_gtk.pm (create_okcancel): do not display "Cancel" when {cancel} is
+	empty string
+
+	* bootloader.pm (add_entry): new entry will now keep its label, the
+	conflicting one will be renamed "old_xxx" (and not the opposite)
+
+	* diskdrake/interactive.pm: limit max size of loopback to 2GB on FAT
+
+2002/08/16  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: insert a space between "field:" and "description"
+
+	* harddrake/v4l.pm, harddrake/bttv.pm, standalone/drakxtv,
+	install_steps_interactive.pm: 
+	  - harddrake::bttv is renamed harddrake::v4l
+	  - harddrake::v4l handle saa7134 too now (and not only bttv)
+	  - harddrake::v4l::config need a new driver parameter in order to be
+	able to offer the right cards and tuners list
+	  - drakxtv: kill some old comments
+	  - add the list of cards supported by saa7134
+	  - add a not to remember a potentiel speedup
+
+2002/08/15  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - add --incident : could be used by signal catcher to launch drakbug
+	when app crash
+
+	* standalone/drakautoinst: 
+	  - explanations
+
+2002/08/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/da.po, share/po/DrakX.pot, share/po/fr.po,
+	share/po/fi.po, share/po/de.po: updated Danish and Hungarian files
+
+	* share/po/zh_CN.po, share/po/gl.po, share/po/ga.po: updated Chinese file
+
+	* share/po/hu.po: updated Chinese and hungarian files
+	updated Danish and Hungarian files
+
+	* share/po/zh_TW.po: updated Chinese and hungarian files
+	updated Chinese file
+
+2002/08/15  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: Allow non-root user to use program with personal
+	config.
+	Finish multisession support.
+	Fix various crash scenarios in GUI in restore mode.
+	Fix user restore mode to restore only what is requested.
+	View archive contents before restore, user & sys mode.
+	Add explanation of config file options for non-X users.
+
+2002/08/14  alus
+
+	* share/po/pl.po: updated translation
+
+2002/08/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ca.po, share/po/da.po: updated Catalan, Danish and Turkish
+	files
+	updated some po files
+
+	* share/po/et.po, share/po/eu.po, share/po/es.po, share/po/eo.po,
+	share/po/el.po: updated Vietnamese file
+
+	* share/po/id.po, share/po/no.po, share/po/ja.po, share/po/hr.po,
+	share/po/mt.po, share/po/ko.po, share/po/DrakX.pot, share/po/lt.po,
+	share/po/cy.po, share/po/ar.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/it.po, share/po/nl.po, share/po/de.po, share/po/cs.po,
+	share/po/lv.po, share/po/hu.po: updated some po files
+
+	* share/po/sp.po: Updated Slovak file
+	updated some po files
+
+	* share/po/vi.po: updated Vietnamese file
+	updated some po files
+
+	* share/po/th.po, share/po/tr.po: updated Catalan, Danish and Turkish
+	files
+
+	* share/po/ru.po, share/po/pt_BR.po, share/po/ro.po, share/po/pt.po:
+	updated po files
+
+	* share/po/sk.po, share/po/br.po, share/po/sl.po, share/po/be.po,
+	share/po/uk.po, share/po/sv.po, share/po/sr.po, share/po/bs.po,
+	share/po/bg.po: Updated Slovak file
+
+2002/08/14  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: reduce the width of install window
+
+	* bootloader.pm: fix "You can't install the bootloader on a xfs partition"
+	happening in weird cases (thanks to Alan Hughes)
+
+	* standalone/diskdrake: disable embedding of WebDAV configuration since it
+	is broken
+	$all_hds->{hds} must be filled in any case, not only in --hd
+
+2002/08/14  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: undo advanced_what_user I broke perl_checking
+	multisession CD support
+
+2002/08/14  Warly  <warly@mandrakesoft.com>
+
+	* share/compssUsers.server: add LSB group
+
+2002/08/13  alus
+
+	* share/po/pl.po: 2 strings overlapped each other
+
+2002/08/13  Pixel  <pixel@mandrakesoft.com>
+
+	* network/dav.pm: nothing useful for the moment
+	use ensure_is_installed
+
+	* interactive/gtk.pm: handle the setting of 'ok' and 'cancel'
+
+	* diskdrake/dav.pm: add checking davfs is installed
+	rough WebDAV gui
+
+	* standalone.pm: add ensure_is_installed (which was
+	network::smbnfs::check_raw and is often useful)
+
+	* standalone/diskdrake, diskdrake/interactive.pm: rough WebDAV gui
+
+	* network/smbnfs.pm, network/smb.pm, network/nfs.pm: use
+	ensure_is_installed
+
+2002/08/13  siegel
+
+	* share/po/de.po: updates
+
 2002/08/13  alus
 
 	* share/po/pl.po: 2 strings overlapped each other
