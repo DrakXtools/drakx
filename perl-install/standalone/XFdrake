@@ -25,7 +25,9 @@ use Xconfig::main;
 use Xconfig::xfree;
 use Xconfig::default;
 use interactive;
+use any;
 use c;
+
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 

@@ -1467,7 +1467,7 @@ sub configure_hpoj {
 	    die "unable to open /usr/sbin/ptal-init";
 	};
 	my @ptalinitfunctions; # subroutine definitions in /usr/sbin/ptal-init
-	while(<PTALINIT>) {
+	while (<PTALINIT>) {
 	    if (m!sub main!) {
 		last;
 	    } elsif (m!^[^\#]!) {
