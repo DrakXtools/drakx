@@ -129,11 +129,7 @@ sub load { modules::load(@_) if $::isStandalone || $blacklisted }
 
 sub get_alternative {
     my ($driver) = @_;
-    if ($alsa2oss{$driver}) {
-	   $alsa2oss{$driver};
-    } elsif ($oss2alsa{$driver}) {
-	   $oss2alsa{$driver}
-    } else { undef }
+    $alsa2oss{$driver} || $oss2alsa{$driver};
 }
 
 
