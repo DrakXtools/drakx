@@ -203,7 +203,7 @@ sub config_function {
 # get_default_checks() -
 #   return a list of periodic checks handled by security.conf
 sub get_default_checks {
-    map { if(/(.*?)=/, $1) } cat_("$::prefix/var/lib/msec/security.conf");
+    map { if_(/(.*?)=/, $1) } cat_("$::prefix/var/lib/msec/security.conf");
 }
 
 # get_check_value(check)
