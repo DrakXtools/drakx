@@ -38,8 +38,7 @@ sub getFile {
 	$now = $buf =~ /\012/;
     } until $now && $last;
 
-    $tmp =~ /^(.*\b(\d+)\b.*)/;
-    if ($2 == 200) {
+    if ($tmp =~ /^(.*\b(\d+)\b.*)/ && $2 == 200) {
         $sock;
     } else {
 	log::l("HTTP error: $1");
