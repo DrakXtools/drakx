@@ -446,8 +446,7 @@ sub _setup_paned {
     my ($paned, $child1, $child2, %options) = @_;
     $paned->pack1(gtkshow($child1), $options{resize1} || 0, $options{shrink1} || 1);
     $paned->pack2(gtkshow($child2), $options{resize2} || 1, $options{shrink2} || 1);
-    $paned->show;
-    $paned;
+    gtkshow($paned);
 }
 
 sub create_vpaned {
