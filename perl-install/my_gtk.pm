@@ -840,7 +840,12 @@ sub _create_window($$) {
     $w->signal_connect(delete_event => sub { $w->destroy; die 'wizcancel' });
     $w->set_uposition(@{$my_gtk::force_position || $o->{force_position}}) if $my_gtk::force_position || $o->{force_position};
 
-    $w->signal_connect(focus => sub { Gtk->idle_add(sub { $w->ensure_focus($_[0]); 0 }, $_[1]) }) if $w->can('ensure_focus');
+    my $focusing;
+    $w->signal_connect(focus => sub { 
+        return 1 if $focusing;
+	$focusing = 1;
+	Gtk->idle_add(sub { $w->ensure_focus($_[0]); $focusing = 0; 0 }, $_[1]);
+    }) if $w->can('ensure_focus');
 
     if ($::o->{mouse}{unsafe}) {
 	$w->set_events("pointer_motion_mask");
