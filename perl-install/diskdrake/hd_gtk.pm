@@ -190,7 +190,7 @@ sub per_entry_action_box {
 			    create_scrolled_window(gtkpack__(Gtk2::VBox->new(0,0), @buttons)))) if @buttons;
     } else {
 	my $txt = !$::isStandalone && fsedit::is_one_big_fat_or_NT($all_hds->{hds}) ?
-N("You have one big MicroSoft Windows partition.
+N("You have one big Microsoft Windows partition.
 I suggest you first resize that partition
 (click on it, then click on \"Resize\")") : N("Please click on a partition");
 	gtkpack($box, gtktext_insert(Gtk2::TextView->new, $txt));
