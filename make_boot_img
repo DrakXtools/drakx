@@ -1,13 +1,9 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> all|cdrom|hd|hdcdrom_usb|network|network_gigabit_usb|network_gigabit|network_usb|blank|pcmcia|live|tftp|tftprd\n";
-
 use Config;
 use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
-
-my ($img, $type) = @ARGV;
 
 # move stuff to new "kernel" directory
 -d 'kernel' or die "directory kernel is missing\n";
@@ -20,7 +16,8 @@ my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "acpi=off" 
 my $default_vga = "vga=788";
 
 my $instdir = "mdk-stage1";
-my $mnt = "/tmp/drakx_mnt";
+my $tmp_mnt = '/tmp/drakx_mnt';
+my $tmp_mnt_initrd = '/tmp/drakx_mnt2';
 my $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
 my $sudo;
@@ -32,82 +29,47 @@ if ($>) {
 sub __ { print @_, "\n"; system(@_) }
 sub _ { __ @_; $? and die }
 
-_ "$sudo mkdir $mnt" unless -e $mnt;
-_ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
-
-my $install = ${{
-    all => "stage1-full",
-    blank => "stage1-full",
-    live => "stage1-full",
-    tftp => "stage1-full",
-    tftprd => "stage1-full",
-    pcmcia => "stage1-full",
-    network => "stage1-network",
-    network_gigabit => "stage1-network",
-    network_usb => "stage1-network-usb",
-    network_gigabit_usb => "stage1-network-usb",
-    cdrom => "stage1-cdrom",
-    hd => "stage1-disk",
-    hdcdrom_usb => "stage1-medias-usb",
-    live64 => "stage1-full",
-    tftp64 => "stage1-full",
-    tftprd64 => "stage1-full",
-    pcmcia64 => "stage1-full",
-    network64 => "stage1-network",
-    cdrom64 => "stage1-cdrom",
-    hd64 => "stage1-disk",
-}}{$type} or die;
-
+_ "$sudo mkdir -p $tmp_mnt $tmp_mnt_initrd";
 mkdir "images";
+
 chomp(my $main = `cat kernel/all.kernels/.main`);
+my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
-if ($img =~ /hd_grub/) {
-    hd_grub($img);
-    exit 0;
-}
 
-my @kernels;
-if ($img =~ /blank|pcmcia/) {
-    @kernels = $main;
-} else {
-    @kernels = map { m|kernel/all.kernels/(.*)| } glob('kernel/all.kernels/*');
-    $img =~ /usb/ and @kernels = grep { !/2\.2\.14/ } @kernels;  #- 2.2.14 is too old, usb support was not working properly
-}
+my @all_images = (
+		  if_($arch =~ /i.86/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'hd_grub.img'),
+		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux'),
+		  if_($arch =~ /ia64/, 'all.img'),
+		 );
 
-foreach (@kernels) {
-    if ($img =~ /rdz$/) {
-	initrd($mnt, "$img-$_");
-    } else {
-	print STDERR "calling boot_img_$arch\n";
-	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*"));
+my @images = @ARGV ? @ARGV : map { "images/$_" } @all_images;
+
+foreach my $img (@images) {
+    my ($type, $I, $extension) = $img =~ m!([^/]*)(64)?\.([^.]*)$!;
+
+    if ($img =~ /hd_grub/) {
+	hd_grub($tmp_mnt, $img);
+    } elsif ($img =~ /isolinux/) {
+	isolinux($main, @kernels);
+
+	if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
+	    system("/bin/cp -f isolinux/alt0/* $tftpboot 2>/dev/null");
+	}
+    } elsif ($extension eq 'rdz') {
+	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
+    } elsif ($extension eq 'img') {
+	print STDERR "calling boot_img_$arch for $img\n";
+	$::{"boot_img_$arch"}->($tmp_mnt, $type, $I, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*")) foreach @kernels;
 	rename("$img-$main", $img);
+    } else {
+	die "unknown image $img";
     }
-}
-if ($arch =~ /x86_64/ && $img =~ /all/) {
-    # isolinux is supposed to work on all those new hardware
-    isolinux($main, @kernels);
-}
-if ($arch =~ /i.86/ && $img =~ /all/) {
-    isolinux($main, @kernels);
-
-    my ($img, $img_sav) = ("images/cdrom.img-$main", 'images/cdrom.img-sav');
-    rename($img, $img_sav);
-    $type = 'cdrom';
-    $::{"boot_img_$arch"}->($mnt, $img, "kernel/all.kernels/$main/boot/vmlinu*", sub { $_[0] =~ s/\bautomatic=\S+\b//; "$_[0] changedisk" });
-    rename($img, 'images/cdrom-changedisk.img');
-    rename($img_sav, $img);
-}
-
-if (my ($tftpboot) = grep { -e $_ } qw(/tftpboot /var/lib/tftpboot)) {
-    system("/bin/cp -f kernel/all.kernels/$main/boot/vmlinu* $tftpboot/vmlinuz 2>/dev/null");
-    system("/bin/cp -f images/all.rdz-$main $tftpboot/all.rdz 2>/dev/null");
 }
 
 sub install_stripped { _ "strip $_[0]"; _ "$sudo install $_[0] $_[1]" }
 
 sub initrd {
-    my ($mnt, $img) = @_;
-    my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
+    my ($mnt, $type, $I, $img) = @_;
     my $tmp = "$ENV{HOME}/tmp/initrd";
     my $tar = "$instdir/stage1-data/stage1.tar.bz2";
 
@@ -118,8 +80,20 @@ sub initrd {
 
     _ "$sudo tar xjC $mnt -f $tar";
     symlinkf "/tmp/stage2/lib64", "$mnt/lib64" if $arch =~ /x86_64/;
-    install_stripped("$instdir/init", "$mnt/sbin");
-    install_stripped("$instdir/$install", "$mnt/sbin/stage1");
+
+    {
+	my $install = ${{
+	    network => "stage1-network",
+	    network_gigabit => "stage1-network",
+	    network_usb => "stage1-network-usb",
+	    network_gigabit_usb => "stage1-network-usb",
+	    cdrom => "stage1-cdrom",
+	    hd => "stage1-disk",
+	    hdcdrom_usb => "stage1-medias-usb",
+	}}{$type} || 'stage1-full';
+	install_stripped("$instdir/init", "$mnt/sbin");
+	install_stripped("$instdir/$install", "$mnt/sbin/stage1");
+    }
 
     if (member($type, qw(network network_gigabit_usb all blank))) {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
@@ -137,12 +111,9 @@ sub initrd {
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
     my $modz = "kernel/all.modules$I/$ext";
-    if ($type !~ /blank/) {
-	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar";
-	_ "$sudo cp -f $modz/modules.dep $mnt/modules/";
-    }
+    _ "$sudo cp -f $modz/${type}_modules.mar $mnt/modules/modules$I.mar";
+    _ "$sudo cp -f $modz/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
-
 
 # Workaround for vfat-loop bug (quite touchy)
     _ "gzip -9f $tmp";
@@ -181,7 +152,7 @@ sub entries_append {
 }
 
 sub boot_img_i386 {
-    my ($mnt, $img, $kernel, $args_callback) = @_;
+    my ($mnt, $type, $I, $img, $kernel) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
 
@@ -189,18 +160,17 @@ sub boot_img_i386 {
 	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
     } elsif ($type eq "all") {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
-    } elsif ($type eq "blank") {
-	_ "bunzip2 -c $instdir/init-data/msgboot-blank.img.bz2 > $img";
     } else {
 	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
     }
 
 
     _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
-    _ "cat $kernel > $mnt/vmlinuz" if $type !~ /blank/;
+    _ "cat $kernel > $mnt/vmlinuz";
 
-    my $rdz = $img; $rdz =~ s/\.img/.rdz/;
-    initrd("${mnt}2", $rdz) if !-e $rdz;
+    (my $rdz = $img) =~ s/\.img/.rdz/;
+    (my $initrd_type = $type) =~ s/-changedisk//;
+    initrd($tmp_mnt_initrd, $initrd_type, $I, $rdz);
     my $short_type = substr($type, 0, 8);
     eval { _ "cp -f $rdz $mnt/$short_type.rdz" };
     if ($@) {
@@ -221,6 +191,7 @@ sub boot_img_i386 {
 	warn sprintf("not enough room for $rdz: need %dKB (available %dKB < needed %dKB)\n", $s - $avail, $avail, $s);
 	die qq(check file ".not-enough-room" to see modules size and pcitable usage\n);
     }
+    unlink $rdz;
 
     my $timeout = 72;
     output "$mnt/syslinux.cfg",
@@ -232,10 +203,9 @@ F1 help.msg
 F2 advanced.msg
 F3 boot.msg
 " . join('', map {
-    my $args = $args_callback ? $args_callback->($_->[1]) : $_->[1];
 "label $_->[0]
   kernel vmlinuz
-  append initrd=$short_type.rdz $args
+  append initrd=$short_type.rdz $_->[1]
 " } entries_append($type));
 
     _ "sync";
@@ -246,15 +216,15 @@ F3 boot.msg
 sub boot_img_x86_64 { &boot_img_i386 }
 
 sub boot_img_alpha {
-    my ($mnt, $img) = @_;
+    my ($mnt, $type, $I, $img) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$img bs=1k count=1440";
     _ "$mke2fs $img";
     _ "/sbin/e2writeboot $img /boot/bootlx";
     _ "$sudo mount -t ext2 $img $mnt -o loop";
-    _ "cp -f vmlinux.gz $mnt" if $type !~ /blank/;
-    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
+    _ "cp -f vmlinux.gz $mnt";
+    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd($tmp_mnt_initrd, $type, $I, "$mnt/$type.rdz");
 
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
@@ -266,7 +236,7 @@ sub boot_img_alpha {
 }
 
 sub boot_img_ia64 {
-    my ($mnt, $img, $kernel) = @_;
+    my ($mnt, $type, $_I, $img, $kernel) = @_;
 	my $rdz = $img; $rdz =~ s/\.img/.rdz/;
 
     __ "$sudo umount $mnt 2>/dev/null";
@@ -299,7 +269,7 @@ image=vmlinux
 }
 
 sub boot_img_sparc {
-    my ($mnt, $_img) = @_;
+    my ($mnt, $type, $I, $_img) = @_;
     if ($type =~ /^live(.*)/) {
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
@@ -308,7 +278,7 @@ sub boot_img_sparc {
 	_ "mkdir -p $dir/$boot";
 	_ "cp -f /boot/cd.b /boot/second.b $dir/$boot";
 	_ "cp -f vmlinux$1 $dir/$boot/vmlinux$1";
-	-f "live$1.rdz" ? _ "cp -f live$1.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live$1.rdz");
+	-f "live$1.rdz" ? _ "cp -f live$1.rdz $dir/$boot" : initrd($tmp_mnt_initrd, $type, $I, "$dir/$boot/live$1.rdz");
 
 	output("$dir/$boot/silo.conf", qq(
 partition=1
@@ -388,7 +358,7 @@ To Build a Bootable CD-ROM, try:
 	my $setarch = $1 ? "sparc64" : "sparc32";
 
 	_ "mkdir -p $dir/$boot";
-	-f "$type.rdz" or initrd("${mnt}2", "$type.rdz");
+	-f "$type.rdz" or initrd($tmp_mnt_initrd, $type, $I, "$type.rdz");
 	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
 	_ "$setarch kernel$1/src/arch/sparc$1/boot/piggyback $dir/$boot/$type.img kernel$1/boot/System.map $type.rdz";
     } elsif ($type =~ /^tftp(.*)/) {
@@ -399,14 +369,12 @@ To Build a Bootable CD-ROM, try:
 	_ "cp -f vmlinux$1.aout $dir/$boot/$type.img";
     } else {
 	my $dir = "floppy";
-	my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
-
 	__ "$sudo umount $mnt 2>/dev/null";
 	_ "rm -rf $dir";
 	_ "mkdir -p $dir";
 	_ "cp -f /boot/fd.b /boot/second.b $dir";
-	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz" if $type !~ /blank/;
-	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd("${mnt}2", "$dir/$type.rdz");
+	_ "cp -f vmlinuz$I $dir/vmlinux$I.gz";
+	-f "$type.rdz" ? _ "cp -f $type.rdz $dir" : initrd($tmp_mnt_initrd, $type, $I, "$dir/$type.rdz");
 
 	output("$dir/boot.msg", "
 Welcome to Mandrake Linux 7.1
@@ -423,7 +391,7 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append="ramdisk_size=128000 $ltype root=/dev/ram3"
+  append="ramdisk_size=128000 $type root=/dev/ram3"
 "));
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V 'DrakX boot disk'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
@@ -436,8 +404,7 @@ image=/vmlinux$I.gz
     }
 }
 
-sub boot_img_ppc {
-    my (@_kernels) = @_;
+sub boot_img_ppc() {
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
 	my $boot = "boot"; #- non-absolute pathname only!
@@ -643,14 +610,15 @@ sub isolinux {
     my ($main, @kernels) = @_;
     @kernels = ($main, grep { $_ ne $main } @kernels);
     _ "rm -rf isolinux"; mkdir "isolinux", 0777;
-    my $i = 0;
-    foreach (@kernels) {
-	mkdir "isolinux/alt$i", 0777;
+
+    each_index {
+	mkdir "isolinux/alt$::i", 0777;
 	my ($kernel) = glob("kernel/all.kernels/$_/boot/vmlinu*");
-	_ "cp $kernel isolinux/alt$i/vmlinuz";
-	_ "cp images/all.rdz-$_ isolinux/alt$i/all.rdz";
-	$i++;
-    }
+	_ "cp $kernel isolinux/alt$::i/vmlinuz";
+	initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$_");
+	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
+    } @kernels;
+
     if (-e "isolinux-graphic.bmp") {
 	#- change here for newer picture isolinux-graphic.bmp and newer parameters.
 	#- for old style pictures (9.1 and previous)
@@ -730,7 +698,7 @@ You can choose the following kernels :
 }
 
 sub hd_grub {
-    my ($img) = @_;
+    my ($mnt, $img) = @_;
     my $mapfile = '/tmp/device.map.tmp';
 
     my @grub_files = map { "/boot/grub/$_" } qw(stage1 stage2);

@@ -6,29 +6,6 @@ DIRS = tools kernel mdk-stage1 perl-install rescue
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-ifeq (i386,$(ARCH))
-    BOOT_IMG = cdrom.img hdcdrom_usb.img blank.img pcmcia.img
-endif
-ifeq (sparc,$(ARCH))
-    BOOT_IMG  = cdrom.img   hd.img   network.img   live.img   tftp.img   tftprd.img
-    BOOT_IMG += cdrom64.img hd64.img network64.img live64.img tftp64.img tftprd64.img 
-endif
-ifeq (ppc,$(ARCH))
-    BOOT_IMG = all.img
-endif
-ifeq (ia64,$(ARCH))
-    BOOT_IMG = all.img
-endif
-ifeq (x86_64,$(ARCH))
-    BOOT_IMG = cdrom.img hd.img hdcdrom_usb.img network.img network_gigabit.img network_usb.img blank.img
-endif
-
-FBOOT_IMG = $(BOOT_IMG:%=images/%)
-FBOOT_RDZ = $(FBOOT_IMG:%.img=%.rdz)
-ifneq (all.img,$(findstring all.img,$(BOOT_IMG)))
-FBOOT_RDZ += images/all.rdz
-endif
-
 .PHONY: dirs install
 
 install: dirs images rescue install_only
@@ -36,13 +13,8 @@ install: dirs images rescue install_only
 dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
 
-images: $(FBOOT_IMG) images/hd_grub.img images/all.rdz # all.rdz is needed to update isolinux
-
-$(FBOOT_RDZ): kernel/all.modules
-	./make_boot_img $@ `basename $(@:%.rdz=%)`
-
-$(FBOOT_IMG): %.img: %.rdz
-	./make_boot_img $@ `basename $(@:%.img=%)`
+images:
+	./make_boot_img
 
 tar: clean
 	rpm -qa > needed_rpms.lst
@@ -52,10 +24,10 @@ tar: clean
 install_only:
 	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
     ifneq (ppc,$(ARCH))
-	for i in $(FBOOT_IMG) images/hd_grub.img; do cp -f $${i}* $(ROOTDEST)/images; done
+	cp -f images/* $(ROOTDEST)/images; done
     endif
     ifeq (alpha,$(ARCH))
-	for i in $(FBOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
+	cp -f images/* $(ROOTDEST)/boot; done
 	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
 	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
     endif
@@ -68,7 +40,6 @@ install_only:
     ifeq (i386,$(ARCH))
 	rm -rf $(ROOTDEST)/isolinux
 	cp -af isolinux $(ROOTDEST)
-	cp -f images/cdrom-changedisk.img $(ROOTDEST)/images
     endif
 
     ifeq (x86_64,$(ARCH))
