@@ -1,4 +1,4 @@
-BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img
+BOOT_IMG = gi_hd.img gi_cdrom.img gi_network.img gi_network_ks.img gi_pcmcia.img
 BINS = install/install install/local-install install/installinit/init
 
 
@@ -14,6 +14,7 @@ clean:
 
 $(BOOT_IMG): $(BINS)
 	if [ ! -e modules ]; then $(MAKE) update_kernel; fi
+	#./make_boot_img $@ $(@:gi_%.img=%)
 	./make_boot_img $@ $(@:gi_%.img=%)
 
 $(BINS):

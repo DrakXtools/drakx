@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks\n";
+@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks|pcmcia\n";
 
 ($img, $type) = @ARGV;
 
+$instdir = "install";
 $ks = "kickstart=floppy" if $type =~ s/_ks//;
 $mnt = "/mnt/disk";
 if ($>) {
@@ -13,6 +14,7 @@ if ($>) {
 
 
 $install = $ {{
+    pcmcia => "install",
     network => "install",
     cdrom => "local-install",
     hd => "local-install"
@@ -29,15 +31,16 @@ sub _ { __ @_; $? and die; }
 sub initrd {
     my ($mnt, $img) = @_;
     my $tmp = "$ENV{HOME}/tmp/initrd";
+    my $inst1 = -d "$instdir/install1_$type" ? "install1_$type" : "install1";
 
-    _ "install -s install/installinit/init install/install1/sbin/init";
-    _ "install -s install/$install install/install1/sbin/install";
+    _ "install -s $instdir/installinit/init $instdir/$inst1/sbin/init";
+    _ "install -s $instdir/$install $instdir/$inst1/sbin/install";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=2000";
     _ "echo y | mke2fs $tmp";
     _ "$sudo mount $tmp $mnt -o loop";
-    _ "$sudo cp -a install/install1/* $mnt";
+    _ "$sudo cp -a $instdir/$inst1/* $mnt";
     _ "$sudo install -d $mnt/modules";
     _ "$sudo cp -f modules/${type}_modules.cgz $mnt/modules/modules.cgz";
     _ "$sudo cp -f modules/modules.dep $mnt/modules/";
@@ -50,19 +53,19 @@ sub boot_img {
     my ($mnt, $img) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
-    _ "bunzip2 -c install/installinit/emptyboot.img.bz2 > $img";
+    _ "bunzip2 -c $instdir/installinit/emptyboot.img.bz2 > $img";
     _ "$sudo mount -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz";
-    initrd("${mnt}2", "$mnt/initrd.gz");
+    initrd("${mnt}2", "$mnt/$type.rdz");
     
     output("$mnt/syslinux.cfg", "
 default linux
 prompt 0
 label linux
   kernel vmlinuz
-  append $ks ramdisk=32000 initrd=initrd.gz mdkinst $type
+  append $ks ramdisk=32000 initrd=$type.rdz mdkinst $type
 ");
-    _ "cp -f install/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
+    _ "cp -f $instdir/installinit/ks.cfg $mnt 2>/dev/null" if $ks;
     _ "sync";
 }
 
