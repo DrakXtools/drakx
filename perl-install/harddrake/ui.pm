@@ -5,8 +5,7 @@ use strict;
 use harddrake::data;
 use harddrake::sound;
 use common;
-use ugtk qw(:helpers :wrappers :various);
-use my_gtk qw(:helpers :wrappers);
+use my_gtk qw(:helpers :wrappers :various);
 use interactive;
 
 
@@ -59,8 +58,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 my ($in, %IDs, $pid, $w);
 
+my %options;
+my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
+
+my ($modem_check_box, $printer_check_box);
+
 my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
 			    { path => _("/_File")._("/_Quit"), accelerator => _("<control>Q"), callback => \&quit_global	},
+#		   { path => _("/_Options")._("/Autodetect _printers"), type => '<CheckItem>',
+#		     callback => sub { $options{PRINTERS_DETECTION} ^= 1 } },
+#		   { path => _("/_Options")._("/Autodetect _modems"), type => '<CheckItem>',
+#		     callback => sub { $options{MODEMS_DETECTION} ^= 1 } },
+
 			    { path => _("/_Help"), type => '<Branch>' },
 			    { path => _("/_Help")._("/_Help..."), callback => sub {
 				   $in->ask_warn(_("Harddrake help"), 
@@ -86,6 +95,8 @@ sub detect {
 	my ($Ident, $title, $icon, $configurator, $detector) = @$_;
 	next if (ref($detector) ne "CODE"); #skip class witouth detector
 	next if $Ident =~ /(MODEM|PRINTER)/ && "@ARGV" =~ /test/;
+	next if $Ident =~ /MODEM/ && !$options{MODEMS_DETECTION};
+	next if $Ident =~ /PRINTER/ && !$options{PRINTERS_DETECTION};
 #	print _("Probing %s class\n", $Ident);
 #	standalone::explanations("Probing %s class\n", $Ident);
 
@@ -132,14 +143,18 @@ sub new {
     unless ($::isEmbedded) {
     $in = 'interactive'->vnew('su', 'default');
 	$wait = $in->wait_message(_("Please wait"), _("Detection in progress"));
-	gtkflush;
+	my_gtk::flush;
     }
+    %options = getVarsFromSh($conffile);
     my @class_tree = &detect;
 
     # Build the gui
     add_icon_path('/usr/share/pixmaps/harddrake2/');
     $w = my_gtk->new((_("Harddrake2 version ") . $harddrake::data::version));
     $w->{window}->set_usize(760, 550) unless $::isEmbedded;
+    $options{MODEMS_DETECTION} = 1 unless defined $options{MODEMS_DETECTION};
+    $options{PRINTERS_DETECTION} = 1 unless defined $options{PRINTERS_DETECTION};
+
     $w->{window}->add( 
 		 my $main_vbox = gtkadd(gtkadd($::isEmbedded ? new Gtk::VBox(0, 0) :
 								 gtkadd(new Gtk::VBox(0, 0),
@@ -249,6 +264,7 @@ sub new {
 
 sub quit_global {
     kill(15, $pid) if ($pid);
+    setVarsInSh($conffile, \%options);
     $w->{rwindow}->destroy;
     $in->exit;
 }
