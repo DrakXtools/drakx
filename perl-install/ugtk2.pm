@@ -314,6 +314,7 @@ sub create_box_with_title {
 	my $wtext = Gtk2::TextView->new;
 	$wtext->set_left_margin(3);
 	$wtext->can_focus($has_scroll);
+	$wtext->signal_connect(button_press_event => sub { 1 }); #- disable selecting text and popping the contextual menu (GUI team says it's *horrible* to be able to do select text!)
 	chomp(my $text = join("\n", @_));
 	my $scroll = create_scrolled_window(gtktext_insert($wtext, $text));
 	$scroll->set_size_request(400, $o->{box_size});
