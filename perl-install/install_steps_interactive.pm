@@ -599,7 +599,7 @@ sub setupBootloader {
     my ($o, $more) = @_;
     my $b = $o->{bootloader};
 
-    if ($::beginner && !$more) {
+    if ($::beginner && $more == 1) {
 	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	my $boot = $o->{hds}[0]{device};
@@ -608,7 +608,7 @@ sub setupBootloader {
 	  $o->ask_from_list_(_("LILO Installation"),
 			     _("Where do you want to install the bootloader?"),
 			     \@l, $l[!$onmbr]) eq $l[0];
-    } else {
+    } elsif ($more || !$::beginner) {
 	$::expert and $o->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
     
 	my @l = (

@@ -386,7 +386,7 @@ sub createBootdisk {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     $o->setupBootloaderBefore if $_[1] == 1;
-    $o->setupBootloader($_[1] > 1);
+    $o->setupBootloader($_[1] - 1);
 }
 #------------------------------------------------------------------------------
 sub configureX {

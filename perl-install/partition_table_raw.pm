@@ -17,7 +17,13 @@ my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeo
 my @MBR_signatures = (
     [ 'empty', 0, "\0\0\0\0" ],
     [ 'lilo', 0x6,  "LILO" ],
-    [ 'dos',  0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
+    [ 'osbs', 0x2,  "OSBS" ], #- http://www.prz.tu-berlin.de/~wolf/os-bs.html
+    [ 'pqmagic', 0xef, "PQV" ],      
+    [ 'DocsBoot', 0x148, 'DocsBoot' ],
+    [ 'system_commander', 0x1ad, "SYSCMNDRSYS" ],
+    [ 'dos', 0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
+    [ 'dos', 0x60, "\xBB\x00\x7C\xB8\x01\x02\x57\xCD\x13\x5F\x73\x0C\x33\xC0\xCD\x13" ], #- nt's
+    [ 'ranish', 0x100, "\x6A\x10\xB4\x42\x8B\xF4\xCD\x13\x8B\xE5\x73" ],
 );
 
 sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }
