@@ -533,8 +533,9 @@ sub ask_browse_tree_info_given_widgets {
 		my @l = $common->{grep_allowed_to_toggle}($children->($curr)) or return;
 		my @unsel = $common->{grep_unselected}(@l);
 		my @p = @unsel ?
-		  @unsel : # not all is selected, select all
-		    @l;
+		  #- not all is selected, select all if no option to potentially override
+		  (exists $common->{partialsel_unsel} && $common->{partialsel_unsel}->(\@unsel, \@l) ? difference2(\@l, \@unsel) : @unsel)
+		  : @l;
 		$common->{toggle_nodes}($set_leaf_state, @p);
 		&$update_size;
 		$parent = $curr;
