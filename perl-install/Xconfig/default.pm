@@ -37,20 +37,7 @@ sub config_mouse {
 
 sub config_keyboard {
     my ($raw_X, $keyboard) = @_;
-
-    my $XkbLayout = keyboard::keyboard2xkb($keyboard);
-
-    my $XkbModel = 
-      arch() =~ /sparc/ ? 'sun' :
-	$XkbLayout eq 'jp' ? 'jp106' : 
-	$XkbLayout eq 'br' ? 'abnt2' : 'pc105';
-
-    my $xkb = { $XkbLayout ? (
-			      XkbLayout => $XkbLayout, 
-			      XkbModel => $XkbModel,
-			      if_($keyboard->{GRP_TOGGLE}, XkbOptions => "grp:$keyboard->{GRP_TOGGLE}"),
-			     ) : (XkbDisable => undef) };
-    $raw_X->set_keyboard($xkb);
+    $raw_X->set_keyboard(keyboard::keyboard2full_xkb($keyboard));
 }
 
 1;

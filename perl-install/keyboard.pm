@@ -390,6 +390,23 @@ sub load {
     #- log::l("loaded $count keymap tables");
 }
 
+sub keyboard2full_xkb {
+    my ($keyboard) = @_;
+
+    my $XkbLayout = keyboard2xkb($keyboard);
+
+    my $XkbModel = 
+      arch() =~ /sparc/ ? 'sun' :
+	$XkbLayout eq 'jp' ? 'jp106' : 
+	$XkbLayout eq 'br' ? 'abnt2' : 'pc105';
+
+    $XkbLayout ? {
+	XkbLayout => $XkbLayout, 
+	XkbModel => $XkbModel,
+	XkbOptions => $keyboard->{GRP_TOGGLE} ? "grp:$keyboard->{GRP_TOGGLE}" : undef,
+    } : { XkbDisable => undef };
+}
+
 sub xmodmap_file {
     my ($keyboard) = @_;
     my $KEYBOARD = $keyboard->{KEYBOARD};
