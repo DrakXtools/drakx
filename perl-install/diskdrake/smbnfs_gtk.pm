@@ -78,7 +78,7 @@ sub per_entry_action_box {
     my @l = (
 	     if_($entry, __("Mount point") => \&raw_hd_mount_point),
 	     if_($entry && $entry->{mntpoint}, __("Options") => \&raw_hd_options),
-	     __("Export") => \&any::fileshare_config,
+	     __("Export") => sub { any::fileshare_config($in, $kind->{type}) },
 	     __("Done") => \&done,
 	    );
     push @buttons, map {

@@ -913,13 +913,36 @@ sub devfssymlinkf {
 }
 
 sub fileshare_config {
-    my ($in) = @_;
-    
+    my ($in, $type) = @_; #- $type is 'nfs', 'smb' or ''
+
     my $file = '/etc/security/fileshare.conf';
     my %conf = getVarsFromSh($file);
 
     my @l = (__("No sharing"), __("Allow all users"), __("Custom"));
     my $restrict = exists $conf{RESTRICT} ? text2bool($conf{RESTRICT}) : 1;
+
+    if ($restrict) {
+	#- verify we can export in $type
+	my %type2file = (nfs => [ '/etc/init.d/nfs', 'nfs-utils' ], smb => [ '/etc/init.d/smb', 'samba' ]);
+	my @wanted = $type ? $type : keys %type2file;
+	my @have = grep { -e $type2file{$_}[0] } @wanted;
+	if (!@have) {
+	    if (@wanted == 1) {
+		$in->ask_okcancel('', _("The package %s needs to be installed. Do you want to install it?", $type2file{$wanted[0]}[1]), 1) or return;
+	    } else {
+		my %choices;
+		my $wanted = $in->ask_many_from_list('', _("You can export using NFS or Samba. Which one do you want"),
+						  { list => \@wanted }) or return;
+		@wanted = @$wanted or return;
+	    }
+	    $in->do_pkgs->install(map { $type2file{$_}[1] } @wanted);
+	    @have = grep { -e $type2file{$_}[0] } @wanted;
+	}
+	if (!@have) {
+	    $in->ask_warn('', _("Mandatory package %s is missing", $wanted[0]));
+	    return;
+	}
+    }
 
     my $r = $in->ask_from_list_('fileshare',
 'Do you want to allow users to export some directories in their home?
