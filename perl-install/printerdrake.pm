@@ -164,7 +164,9 @@ sub auto_detect {
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } }
     if $local;
-    detect_devices::whatPrinter($local, $network, $smb);
+    my @res = (($local ? detect_devices::whatPrinter() : ()), 
+	       ($network || $smb ? printer::whatNetPrinter($network,$smb) : ()));
+    @res;
 }
 
 sub wizard_welcome {
