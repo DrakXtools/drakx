@@ -5,7 +5,7 @@ PMSCFILES = $(PMSFILES:%=%_.c)
 
 # temporarly don't include ar.po,br.po,cy.po,ga.po,is.po,ro.po,sl.po
 # (too low translation percentage)
-POFILES = $(shell ls *.po|grep -v '\(ar.po\|cy.po\|ga.po\|is.po\|ro.po\|sl.po\)')
+POFILES = $(shell ls *.po|grep -v '\(ar.po\|ga.po\|is.po\|ro.po\|sl.po\)')
 
 MOFILES = $(POFILES:%.po=%.mo)
 LANGS = $(POFILES:%.po=%)
