@@ -6,14 +6,16 @@ inst=1
 swap=2
 root=3
 
-echo
-echo
-echo "I'm going to install the OEM version on your hard drive"
-echo "[1;31;40m!!ALL DATA IS GOING TO BE LOST!![0m"
-echo
-echo "Press enter to go on"
-
-read
+yes=
+while [ "$yes" != "yes" ]; do
+    echo
+    echo
+    echo "I'm going to install the OEM version on your hard drive"
+    echo "[1;31;40m!!ALL DATA IS GOING TO BE LOST!![0m"
+    echo
+    echo "Type \`\`yes'' and [enter] to go on"
+    read yes
+done
 
 cd /proc/ide
 for i in hd*; do
