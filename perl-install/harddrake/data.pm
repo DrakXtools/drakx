@@ -38,6 +38,8 @@ sub set_removable_remover {
     return "/usr/sbin/drakupdate_fstab --no-flag --del $device->{device}" if is_removable($class);
 }
 
+
+# Format is (HW class ID, l18n class name, icon, config tool , is_to_be_detected_on_boot)
 our @tree =
     (
      [ "FLOPPY", , N("Floppy"), "floppy.png", "", \&detect_devices::floppies, 1 ],
