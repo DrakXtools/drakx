@@ -59,7 +59,8 @@ sub get_eth_cards() {
         my $b = find { $_->{device} eq $interface } @devs;
         $a ||= $b->{driver};
         $a and $saved_driver = $a; # handle multiple cards managed by the same driver
-        [ $interface, $saved_driver, (mapIntfToDevice($interface))[0]->{description} ]
+        my ($device) = mapIntfToDevice($interface);
+        [ $interface, $saved_driver, if_($device, $device->{description}) ]
     } @all_cards;
 }
 
