@@ -112,6 +112,9 @@ sub whatUsbport() {
 	    my ($manufacturer, $model, $serialnumber, $description, $commandset) =
 		    ("", "", "", "", "");
 	    my ($sku);
+	    if ($idstr =~ /CLS:([^;]+);/ || $idstr =~ /CLASS:([^;]+);/) {
+		$itemfound = 1;
+	    }
 	    if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
 		$manufacturer = $1;
 		$manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
@@ -145,8 +148,8 @@ sub whatUsbport() {
 		$itemfound = 1;
 	    }
 	    # Nothing found? Try again if not in the third attempt,
-	    # in the third attempt always accept.
-	    next if !$itemfound && $j < 3;
+	    # after the third attempt give up
+	    next if !$itemfound;
 	    # Was there a manufacturer and a model in the string?
 	    if ($manufacturer eq "" || $model eq "") {
 		$manufacturer = "";
