@@ -705,14 +705,6 @@ standard_charset()
   RETVAL
 
 void
-get_loopback_name(int fd)
-  INIT:
-  struct loop_info loopinfo;
-  PPCODE:
-  if (!ioctl(fd, LOOP_GET_STATUS, &loopinfo))
-    XPUSHs(sv_2mortal(newSVpv(loopinfo.lo_name, 0)));
-
-void
 get_iso_volume_ids(int fd)
   INIT:
   struct iso_primary_descriptor voldesc;

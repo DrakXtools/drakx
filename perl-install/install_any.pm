@@ -89,12 +89,7 @@ sub look_for_ISOs() {
     sysopen(my $F, $iso_images{loopdev}, 0) or return;
     put_in_hash(\%iso_images, $get_iso_ids->($F));
 
-    #- may not work if it the orginal iso image path was longer than 64 chars
-    my ($loopfile) = c::get_loopback_name(fileno($F)) or return;
-    $loopfile =~ s!^/sysroot!!;
-    my $iso_dir = dirname($loopfile);
-
-    foreach my $iso_file (glob("$iso_dir/*.iso")) {
+    foreach my $iso_file (glob("$ENV{ISOPATH}/*.iso")) {
 	my $iso_dev = devices::set_loop($iso_file) or return;
 	if (sysopen($F, $iso_dev, 0)) {
 	    my $iso_ids = $get_iso_ids->($F);

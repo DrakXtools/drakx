@@ -342,6 +342,7 @@ static enum return_type try_with_device(char *dev_name)
 			umount(disk_own_mount);
 			return try_with_device(dev_name);
 		}
+		add_to_env("ISOPATH", location_full);
 		add_to_env("METHOD", "disk-iso");
 	} else {
 		symlink(location_full, IMAGE_LOCATION);
