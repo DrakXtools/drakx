@@ -365,11 +365,11 @@ sub setDefaultPackages {
       detect_devices::matching_desc('Rage 128') ||
       detect_devices::matching_desc('Radeon ') && !detect_devices::matching_desc('Radeon 8500') ||
       detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
-      detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
-      detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
-      detect_devices::matching_desc('[nN]Vidia.*GeForce') || #- GeForce cards
-      detect_devices::matching_desc('[nN]Vidia.*NV1[15]') ||
-      detect_devices::matching_desc('[nN]Vidia.*Quadro');
+      detect_devices::matching_desc('[nN][vV]idia.*NV[56]') ||
+      detect_devices::matching_desc('[nN][vV]idia.*Vanta') ||
+      detect_devices::matching_desc('[nN][vV]idia.*[gG]e[fF]orce') || #- GeForce cards
+      detect_devices::matching_desc('[nN][vV]idia.*NV1[15]') ||
+      detect_devices::matching_desc('[nN][vV]idia.*Quadro');
 
 
     foreach (lang::langs($o->{locale}{langs})) {
