@@ -487,7 +487,7 @@ sub choosePackages {
 
     #- this is done at the very beginning to take into account
     #- selection of CD by user if using a cdrom.
-    $o->chooseCD($packages) if $o->{method} eq 'cdrom' && !$::oem;
+    $o->chooseCD($packages);#if $o->{method} eq 'cdrom' && !$::oem;
 
     my $availableC = install_steps::choosePackages(@_);
     my $individual = $::expert;
@@ -632,7 +632,8 @@ sub chooseGroups {
 
     log::l("compssUsersChoice: " . (!$val{$_} && "not ") . "selected [$_] as [$o->{compssUsers}{$_}{label}]") foreach keys %val;
 
-    $unselect_all and install_any::unselectMostPackages($o);
+    #- do not try to deselect package (by default no groups are selected).
+    $o->{isUpgrade} or $unselect_all and install_any::unselectMostPackages($o);
     #- if no group have been chosen, ask for using base system only, or no X, or normal.
     unless ($o->{isUpgrade} || grep { $val{$_} } keys %val) {
 	my $docs = !$o->{excludedocs};	
@@ -702,7 +703,7 @@ sub chooseCD {
     my @mediumsDescr;
     my %mediumsDescr;
 
-    if (!common::usingRamdisk()) {
+    if (0 && !common::usingRamdisk()) {
 	#- mono-cd in case of no ramdisk
 	foreach (@mediums) {
 	    pkgs::mediumDescr($packages, $install_any::boot_medium) eq pkgs::mediumDescr($packages, $_) and next;
@@ -726,7 +727,7 @@ sub chooseCD {
 
     #- if no other medium available or a poor beginner, we are choosing for him!
     #- note first CD is always selected and should not be unselected!
-    return if @mediumsDescr == () || !$::expert;
+    #return if @mediumsDescr == () || !$::expert;
 
     $o->set_help('chooseCD');
     $o->ask_many_from_list('',
