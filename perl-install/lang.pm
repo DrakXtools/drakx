@@ -538,7 +538,10 @@ my %gtkqt_im =
             XIM_PROGRAM => 'xcin',
             GTK_IM_MODULE => 'xim',
            },
-
+   'x-unikey' => {
+                  GTK_IM_MODULE => 'xim',
+                  XMODIFIERS => '@im:unikey'
+                 },
 );
 
 sub get_ims() { keys %gtkqt_im }
@@ -615,6 +618,7 @@ sub set_default_im {
     add2hash($xim{$_}, { XIM_PROGRAM => $im_xim_program{$im}{$_} }) foreach @langs;
 }
 
+set_default_im('x-unikey',  qw(vi_VN vi_VN.TCVN vi_VN.UTF-8 vi_VN.VISCII));
 # CJK default input methods:
 set_default_im('scim',  qw(ja_JP ja_JP.UTF-8 ko_KR ko_KR.UTF-8 zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
 
