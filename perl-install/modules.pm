@@ -603,7 +603,7 @@ sub load_raw {
     };
     my @failed = grep {
 	my $m = "/tmp/$_->[0].o";
-	if (-e $m && run_program::run(["/usr/bin/insmod_", "insmod"], '2>', '/dev/tty5', '-f', $m, @{$_->[1]})) {
+	if (-e $m && run_program::run(["/usr/bin/insmod_", "insmod"], '2>', '/dev/tty5', $m, @{$_->[1]})) {
 	    unlink $m;
 	    $conf{$_->[0]}{loaded} = 1;
 	    '';
