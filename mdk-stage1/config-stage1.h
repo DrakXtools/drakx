@@ -34,7 +34,11 @@
 #ifdef MANDRAKE_MOVE
 
 #define MEM_LIMIT_MOVE 120
+
+#undef DISTRIB_NAME
 #define DISTRIB_NAME "Mandrakemove"
+#undef DISTRIB_DESCR
+#define DISTRIB_DESCR DISTRIB_NAME
 
 #define IMAGE_LOCATION_DIR SLASH_LOCATION "/"
 #define IMAGE_LOCATION_REL "cdrom"
@@ -50,8 +54,6 @@
 #define TOTEM_LOCATION SLASH_LOCATION "/image_totem"
 
 #else
-
-#define DISTRIB_NAME "Mandrakelinux"
 
 #define LIVE_LOCATION_REL "install/stage2/live/"
 #define CLP_LOCATION_REL  "install/stage2/"

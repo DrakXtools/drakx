@@ -56,6 +56,7 @@ foreach (cat_("dirs")) {
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
 _ "perl devices.pl $tmp/dev";
+substInFile { s/DISTRIB_DESCR/$ENV{DISTRIB_DESCR}/ } "$tmp/etc/issue";
 
 install_raw(keyboard::loadkeys_files());
 my %keytable_conflicts;

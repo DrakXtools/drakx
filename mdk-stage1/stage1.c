@@ -604,19 +604,13 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	spawn_interactive();
 
 	open_log();
-	log_message("welcome to the " DISTRIB_NAME " install (mdk-stage1, version " VERSION " built " __DATE__ " " __TIME__")");
+	log_message("welcome to the " DISTRIB_NAME " install (mdk-stage1, version " DISTRIB_VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
 #ifdef SPAWN_SHELL
 	spawn_shell();
 #endif
 	init_modules_insmoding();
-	init_frontend("Welcome to " DISTRIB_NAME
-#ifdef MANDRAKE_MOVE
-                      ", "
-#else
-                      " (" VERSION ") "
-#endif
-                      __DATE__ " " __TIME__);
+	init_frontend("Welcome to " DISTRIB_DESCR ", " __DATE__ " " __TIME__);
 
 	if (IS_EXPERT)
 		expert_third_party_modules();

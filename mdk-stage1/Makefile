@@ -40,14 +40,12 @@
  #*****************************************************************************
 
 
-VERSION = 10.1
-
 top_dir = .
 
 include $(top_dir)/Makefile.common
 
 
-DEFS = -DVERSION=\"$(VERSION)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64
+DEFS = -DDISTRIB_NAME=\"$(DISTRIB_NAME)\" -DDISTRIB_VERSION=\"$(DISTRIB_VERSION)\" -DDISTRIB_DESCR=\"$(DISTRIB_DESCR)\" -DSPAWN_SHELL $(ADDITIONAL_DEFS) -D_FILE_OFFSET_BITS=64
 
 COMPILE = $(CC) $(DEFS) $(CFLAGS)
 
