@@ -414,7 +414,7 @@ sub choosePartitionsToFormat {
 
     my @l = grep { !$_->{isMounted} && $_->{mntpoint} && 
 		   (!isSwap($_) || $::expert) &&
-		   (!isFat($_) || $_->{notFormatted} || $::expert) &&
+		   (!isFat($_) && !isNT($_) || $_->{notFormatted} || $::expert) &&
 		   (!isOtherAvailableFS($_) || $::expert || $_->{toFormat})
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep { isSwap($_) && !$::expert } @$fstab;
