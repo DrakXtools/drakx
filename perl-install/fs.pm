@@ -70,7 +70,7 @@ sub read_fstab {
 	$dev =~ s/\\040/ /g;
 
 	my $h = { 
-		 device => $dev, mntpoint => $mntpoint, type => $type, 
+		 mntpoint => $mntpoint, type => $type,
 		 options => $options, comment => $comment,
 		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
