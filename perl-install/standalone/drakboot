@@ -44,20 +44,19 @@ if (!$in->isa('interactive::gtk')) {
     $in->exit(0);
 }
 require ugtk2;
-import ugtk2 qw(:helpers :wrappers :create);
+ugtk2->import(qw(:helpers :wrappers :create));
 
 my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
 my $auto_mode = any::get_autologin();
 my $lilogrub = chomp_(`detectloader -q`);
 
-my $w = ugtk2->new();
+my $w = ugtk2->new(N("Boot Style Configuration"));
 my $window = $w->{window};
 $::main_window = $w->{rwindow} if !$::isEmbedded;
 
 $window->signal_connect(delete_event => sub { utk2->exit(0) });
 unless ($::isEmbedded) {
-    $w->{rwindow}->set_title(N("Boot Style Configuration"));
     $window->set_border_width(2);
 
     ### menus definition
