@@ -189,6 +189,9 @@ When sure, press Ok.")) or return;
 		    die \N("FAT resizing failed: %s", formatError($err));
 		}
 
+		$o->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
+filesystem checks will be run on your next boot into Windows(TM)")) if !isFat($part);
+
 		$part->{isFormatted} = 1;
 		$hd->{isDirty} = $hd->{needKernelReread} = 1;
 		partition_table::adjust_local_extended($hd, $part);

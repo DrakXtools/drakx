@@ -706,7 +706,7 @@ sub Resize {
 
     undef $@;
     my $_b = before_leaving { $@ and $part->{size} = $oldsize };
-    my $w = $in->wait_message(N("Resizing"), '');
+    my $wait = $in->wait_message(N("Resizing"), '');
 
     my $adjust = sub {
 	my ($write_partitions) = @_;
@@ -724,7 +724,7 @@ sub Resize {
     $adjust->(1) or return if $size > $oldsize;
 
     if ($nice_resize{fat}) {
-	local *log::l = sub { $w->set(join(' ', @_)) };
+	local *log::l = sub { $wait->set(join(' ', @_)) };
 	$nice_resize{fat}->resize($part->{size});
     } elsif ($nice_resize{ext2}) {
 	my $s = int($part->{size} / ($block_size / 512));
@@ -733,6 +733,9 @@ sub Resize {
     } elsif ($nice_resize{ntfs}) {
 	log::l("ntfs resize to $part->{size} sectors");
 	$nice_resize{ntfs}->resize($part->{size});
+	$wait = undef;
+	$in->ask_warn('', N("To ensure data integrity after resizing the partition(s), 
+filesystem checks will be run on your next boot into Windows(TM)"));
     } elsif ($nice_resize{reiserfs}) {
 	log::l("reiser resize to $part->{size} sectors");
 	run_program::run('resize_reiserfs', '-f', '-q', '-s' . int($part->{size}/2) . 'K', devices::make($part->{device}));
