@@ -272,7 +272,7 @@ sub choose_gtk {
     $depth_combo->set_use_arrows_always(1);
     $depth_combo->entry->set_editable(0);
     $depth_combo->set_popdown_strings(map { translate($depth2text{$_}) } ikeys %depth2x_res);
-    $depth_combo->entry->set_size_request(220, 0);
+    $depth_combo->entry->set_size_request(220, -1);
     $depth_combo->entry->signal_connect(changed => sub {
 	$depth_combo->entry->get_text eq '' and return;  #- FIXME temporarily workaround gtk suckiness (set_text generates two 'change' signals, one when removing the whole, one for inserting the replacement..)
         my %txt2depth = reverse %depth2text;
