@@ -429,7 +429,7 @@ sub alert_config() {
                                  no_back => 1,
                                 },
                          stop => {
-                                  pre => sub { rm_rf($cron_file) },
+                                  pre => sub { eval { rm_rf($cron_file) } },
                                   name => N("Congratulations") . "\n\n" . N("The wizard successfully disabled the mail alert."), 
                                   end => 1,
                                   no_back => 1,
