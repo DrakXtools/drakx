@@ -364,8 +364,8 @@ sub isprinterconfigured {
 		$drivernotps2 = $1 ne "ps2";
 	    } elsif (/^\s*PPD\-File:\s*(\S+)\s*$/) {
 		$ppdfileset = 1;
-	    } elsif (/^\s*Destination:\s*(\S+.*)$/) {
-		$nonrawprinting = $1 !~ /\-o\s*raw/;
+	    } elsif (my ($dest) = /^\s*Destination:\s*(\S+.*)$/) {
+		$nonrawprinting = $dest !~ /\-o\s*raw/;
 	    } 
 	}
     }
