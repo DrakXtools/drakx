@@ -2,38 +2,47 @@
 
 use strict;
 use diagnostics;
-use lib qw(/usr/lib/libDrakX);
 
+use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use interactive;
 use common;
-use lang;
 use any;
+use ctxhelp;
+use log;
 
-die "Usage: drakhelp <help_path>" if @ARGV != 1;
+
+sub usage {
+    print STDERR N(" drakhelp 0.1
+Copyright (C) 2003 MandrakeSoft.
+This is free software and may be redistributed under the terms of the GNU GPL.
+
+Usage: 
+"). N(" --help                - display this help     
+" ). N(" --id <id_label>       - load the html help page which refers to id_label
+");
+    exit(0)
+}
+my ($opt, $idlabel) = @ARGV;
+@ARGV == 2 && ($opt eq '--id' || $opt eq '--help') or usage();
 
 my $in = interactive->vnew;
+my ($lg, $instpath, $ancpath) = ctxhelp::path2help($idlabel);
 
-my $locale = lang::read('', $>);
-printf("lang is %s\n", $locale->{lang});
-$locale->{lang} = 'en' unless member($locale->{lang}, qw(en es fr));
-my $path2help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
-my $path = $ARGV[0] =~ /^http|^www/ ? $ARGV[0] : $path2help . $ARGV[0];
-
--e $path or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
--e $path or $in->ask_warn('Mandrake Help Center', N("%s cannot be displayed \n. No Help entry of this type\n", $path));
+-e $instpath or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $lg);
+-e $instpath or $in->ask_warn('Mandrake Help Center', N("%s cannot be displayed \n. No Help entry of this type\n", $instpath));
 
 my $wm = any::running_window_manager();
 my %launchhelp = (
-		  'kwin' => sub { system("mdklaunchhelp " . $path . "&") },
-		  'gnome-session' => sub { system("yelp ghelp://" . $path . "&") },
+		  'kwin' => sub { system("mdklaunchhelp " . $ancpath . "&") },
+		  'gnome-session' => sub { system("yelp ghelp://" . $ancpath . "&") },
 		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
-				    standalone::explanations("Connection to help system at $path");
-				    system("$browser " . $path . "&") 
+				   log::explanations("Loading help system : $ancpath");
+				   system("$browser " . $ancpath . "&") 
 				}
 		 );
 member($wm, 'kwin', 'gnome-session') or $wm = 'other';
--e $path and eval { $launchhelp{$wm}->() };
+-e $instpath and eval { $launchhelp{$wm}->() };
 
 
