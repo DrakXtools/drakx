@@ -3075,9 +3075,9 @@ sub get_printer_info {
 	    # Do not embed the following messages in the add-printer
 	    # wizard.
 	    local $::isWizard = 0;
-	    # oki4w driver -> OKI winprinter which needs the
+	    # oki4drv driver -> OKI winprinter which needs the
 	    # oki4daemon to work
-	    if ($printer->{currentqueue}{driver} eq 'oki4w') {
+	    if ($printer->{currentqueue}{driver} eq 'oki4drv') {
 		if ($printer->{currentqueue}{connect} !~ 
 		    m!^(parallel|file):/dev/lp0$!) {
 		    $::noX || 
