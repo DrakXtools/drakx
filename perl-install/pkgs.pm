@@ -1268,7 +1268,6 @@ ucd-snmp
 
     my @new_92 = qw(
 DansGuardian
-FreeWnn
 MySQL-Max
 clusternfs
 gkrellm-server
