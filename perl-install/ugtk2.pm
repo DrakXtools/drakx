@@ -945,7 +945,8 @@ sub new {
 		});
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
-		gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title));
+		eval { gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || "wiz_default_up.png", $::Wizard_title)) };
+		$@ and log::l("ERROR: missing wizard banner");
 		may_set_icon($::WizardWindow, $o->{wm_icon});
 	    }
 	    $::WizardWindow->show;
