@@ -562,16 +562,25 @@ sub configure_entry {
     }
 }
 
+sub get_kernels_and_labels_before_kernel_remove {
+    my ($to_remove_kernel) = @_;
+    my @kernels = grep { $_ ne $to_remove_kernel } installed_vmlinuz();
+    map { kernel_str2label($_) => $_ } get_kernel_labels(\@kernels);
+}
+
 sub get_kernels_and_labels {
     my ($b_prefer_24) = @_;
+    get_kernel_labels([ installed_vmlinuz() ], $b_prefer_24);
+}
 
-    my @kernels = installed_vmlinuz();
+sub get_kernel_labels {
+    my ($kernels, $b_prefer_24) = @_;
     
     require pkgs;
     my @kernels_str = 
       sort { c::rpmvercmp($b->{version_no_ext}, $a->{version_no_ext}) } 
       grep { -d "$::prefix/lib/modules/$_->{version}" }
-      map { vmlinuz2kernel_str($_) } @kernels;
+      map { vmlinuz2kernel_str($_) } @$kernels;
 
     if ($b_prefer_24) {
 	my ($kernel_24, $other) = partition { $_->{ext} eq '' && $_->{version} =~ /^\Q2.4/ } @kernels_str;
