@@ -415,7 +415,7 @@ sub testFinalConfig {
 
     #- needed for bad cards not restoring cleanly framebuffer
     my $bad_card = $o->{card}{identifier} =~ /i740|ViRGE/;
-    $bad_card ||= $o->{card}{identifier} =~ /Rage Mobility (?:P\/M|L) / ||  $o->{card}{identifier} =~ /3D Rage (?:LT|Pro)/;
+    $bad_card ||= $o->{card}{identifier} =~ /Rage Mobility (?:P\/M|L) / ||  $o->{card}{identifier} =~ /3D Rage LT)/;
     $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
