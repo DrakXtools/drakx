@@ -29,7 +29,7 @@ sub read {
     sysread F, my $tmp, length $magic or die "error reading magic number on disk $hd->{file}";
     $tmp eq $magic or die "bad magic number on disk $hd->{file}";
 
-    [ ];
+    [];
 }
 
 sub write { 

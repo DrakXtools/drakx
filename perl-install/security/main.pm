@@ -81,8 +81,8 @@ sub draksec_main {
 	}
 
 	# Connect the signals
-	$window->signal_connect('delete_event', sub { $window->destroy(); } );
-	$window->signal_connect('destroy', sub { my_gtk->exit(); } );
+	$window->signal_connect('delete_event', sub { $window->destroy(); });
+	$window->signal_connect('destroy', sub { my_gtk->exit(); });
 
 	$window->add(my $vbox = gtkshow(new Gtk::VBox(0, 0)));
 
@@ -100,7 +100,7 @@ sub draksec_main {
 											 [ new Gtk::Label(N("Security Alerts:")), 
 											   my $secadmin_check = new Gtk::CheckButton ],
 											 [ new Gtk::Label(N("Security Administrator:")),
-											   my $secadmin_entry = new Gtk::Entry ] )),
+											   my $secadmin_entry = new Gtk::Entry ])),
 					   new Gtk::Label(N("Basic")));
 
 	$secadmin_entry->set_text($msec->get_check_value("MAIL_USER"));
@@ -210,10 +210,10 @@ sub draksec_main {
 		  remove_wait_msg($w);
 
 		  my_gtk->exit(0);
-		  } );
+		  });
 
 	my $bcancel = gtksignal_connect(new Gtk::Button(N("Cancel")),
-							  'clicked' => sub { my_gtk->exit(0) } );
+							  'clicked' => sub { my_gtk->exit(0) });
 	gtkpack_($vbox,
 		    1, gtkshow($notebook),
 		    0, gtkadd(gtkadd(gtkshow(new Gtk::HBox(0, 0)),

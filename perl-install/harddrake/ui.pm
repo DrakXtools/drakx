@@ -94,7 +94,7 @@ my @menu_items =
              if ($current_device) {
                  $in->ask_warn(N("Harddrake help"), 
                                N("Description of the fields:\n\n")
-                               . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]")} sort keys %$current_device))
+                               . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]") } sort keys %$current_device))
                  } else {
                      $in->ask_warn(N("Select a device !"), N("Once you've selected a device, you'll be able to see explanations on fields displayed on the right frame (\"Information\")"))
                  }
@@ -106,7 +106,7 @@ my @menu_items =
          callback => sub {
              $in->ask_warn(N("About Harddrake"), 
                            join ("", N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion:"), " $harddrake::data::version\n", 
-                                 N("Author:"), " Thierry Vignaud <tvignaud\@mandrakesoft.com> \n\n" ,
+                                 N("Author:"), " Thierry Vignaud <tvignaud\@mandrakesoft.com> \n\n",
                                  formatAlaTeX($license)));
          }
      }
@@ -132,7 +132,7 @@ sub detect {
             if (exists $_->{bus} && $_->{bus} eq "PCI") {
                 my $i = $_;
                 $_->{bus_id} = join ':', map { if_($i->{$_} ne "65535",  sprintf("%lx", $i->{$_})) } qw(vendor id subvendor subid);
-                $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(pci_bus pci_device pci_function);
+                $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(pci_bus pci_device pci_function);
             }
             # split description into manufacturer/description
             ($_->{Vendor}, $_->{description}) = split(/\|/,$_->{description}) if exists $_->{description};
@@ -148,7 +148,7 @@ sub detect {
             } elsif ((exists $_->{id}) && ($_->{bus} ne 'PCI')) {
                 # SCSI detection incoherency:
                 my $i = $_;
-                $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_} ) } qw(bus id);
+                $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
             }
             if ($Ident eq "AUDIO") {
                 require harddrake::sound;
@@ -249,7 +249,7 @@ sub new {
                 if ($pid = fork()) {
                     $sig_id = $statusbar->push($statusbar->get_context_id("id"), N("Running \"%s\" ...", $configurator));
                 } else { exec($configurator) or die "$configurator missing\n" }
-            }) ;
+            });
             $config_button->show;
         } else {
             $text->backward_delete($text->get_point); # erase all previous text

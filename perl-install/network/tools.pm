@@ -54,7 +54,7 @@ sub ask_connect_now {
 	    $up = connected();
 	}
 	my $m = $up ? (N("The system is now connected to Internet.") .
-		     if_($::isInstall, N("For security reason, it will be disconnected now.")) ) :
+		     if_($::isInstall, N("For security reason, it will be disconnected now."))) :
 		       N("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection.");
 	if ($::isWizard) {
@@ -82,7 +82,7 @@ sub ask_info2 {
     $in->ask_from(N("Connection Configuration"),
 		  N("Please fill or check the field below"),
 		  [
-		   if__($cnx->{irq}, { label => N("Card IRQ"), val => \$cnx->{irq} })  ,
+		   if__($cnx->{irq}, { label => N("Card IRQ"), val => \$cnx->{irq} }),
 		   if__($cnx->{mem}, { label => N("Card mem (DMA)"), val => \$cnx->{mem} }),
 		   if__($cnx->{io}, { label => N("Card IO"), val => \$cnx->{io} }),
 		   if__($cnx->{io0}, { label => N("Card IO_0"), val => \$cnx->{io0} }),
@@ -93,8 +93,8 @@ sub ask_info2 {
 		   if__($netc->{dnsServer2}, { label => N("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => N("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
 		   if__($cnx->{vpivci}, { label => N("Choose your country"), val => \$netc->{vpivci}, list => detect_timezone() }),
-		   if__($cnx->{dialing_mode}, { label => N("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
-		   if__($cnx->{speed}, { label => N("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
+		   if__($cnx->{dialing_mode}, { label => N("Dialing mode"), val => \$cnx->{dialing_mode},list => ["auto","manual"] }),
+		   if__($cnx->{speed}, { label => N("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"] }),
 		   if__($cnx->{huptimeout}, { label => N("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),
 		   if__($cnx->{login}, { label => N("Account Login (user name)"), val => \$cnx->{login} }),
 		   if__($cnx->{passwd}, { label => N("Account Password"),  val => \$cnx->{passwd}, hidden => 1 }),
@@ -219,7 +219,7 @@ sub connected2 {
     }
 }
 
-sub disconnected { }
+sub disconnected {}
 
 
 sub write_initscript {

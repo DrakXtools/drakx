@@ -469,8 +469,7 @@ sub setAuthentication {
 	$o->pkg_install("ypbind");
 	my $domain = $o->{netc}{NISDOMAIN};
 	$domain || $nis ne "broadcast" or die N("Can't use broadcast with no NIS domain");
-	my $t = $domain ? "domain $domain" . ($nis ne "broadcast" && " server")
-	                : "ypserver";
+	my $t = $domain ? "domain $domain" . ($nis ne "broadcast" && " server") : "ypserver";
 	substInFile {
 	    $_ = "#~$_" unless /^#/;
 	    $_ .= "$t $nis\n" if eof;

@@ -118,7 +118,7 @@ sub create_clist {
 	      $starting_word = '' :
 	      $select->(($j + $curr) % @l);
 
-	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	    $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 });
 	}
 	1;
     });
@@ -536,7 +536,7 @@ sub ask_fromW {
 
     my $create_widgets = sub {
 	my ($size, @widgets) = @_;
-	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @widgets);
+	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})] } @widgets);
 
 	$size && $total_size or return $w; #- do not bother computing stupid/bad things
 	my $ratio = max($size / $total_size, 0.2);

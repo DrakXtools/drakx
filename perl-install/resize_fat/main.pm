@@ -21,7 +21,7 @@ use resize_fat::any;
 #- - reads in the boot sector/partition info., and tries to make some sense of it
 sub new($$$) {
     my ($type, $device, $fs_name) = @_;
-    my $fs = { device => $device, fs_name => $fs_name } ;
+    my $fs = { device => $device, fs_name => $fs_name };
 
     eval {
 	resize_fat::io::open($fs);

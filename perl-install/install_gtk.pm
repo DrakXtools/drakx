@@ -131,7 +131,7 @@ sub create_steps_window {
 							 $map, 0, 0,
 							 ($darea->allocation->[2]-$PIX_W)/2 + 3,
 							 ($darea->allocation->[3]-$PIX_H)/2,
-							 $PIX_W , $PIX_H);
+							 $PIX_W, $PIX_H);
 			};
 
 			my $f = sub { 
@@ -255,9 +255,7 @@ EndSection
 END
 
 
-}
-else
-  {
+} else {
 
     my $wacom;
     if ($wacom_dev) {

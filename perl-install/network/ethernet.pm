@@ -27,11 +27,11 @@ sub configure_cable {
     if ($::expert) {
 	my @m = (
 	       { description => "dhcpcd",
-		 c => 1},
+		 c => 1 },
 	       { description => "dhcpxd",
-		 c => 3},
+		 c => 3 },
 	       { description => "dhcp-client",
-		 c => 4},
+		 c => 4 },
 	      );
 	if (my $f = $in->ask_from_listf(N("Connect to the Internet"),
 					N("Which dhcp client do you want to use?

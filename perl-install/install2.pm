@@ -374,7 +374,7 @@ sub main {
 	my $f = ${{
 	    oem       => sub { $::oem = $v },
 	    lang      => sub { $o->{lang} = $v },
-	    flang     => sub { $o->{lang} = $v ; push @auto, 'selectLanguage' },
+	    flang     => sub { $o->{lang} = $v; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga16     => sub { $o->{vga16} = $v },
@@ -396,7 +396,7 @@ sub main {
 	    defcfg    => sub { $cfg = $v },
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
-	    stdio     => sub { $o->{interactive} = "stdio"},
+	    stdio     => sub { $o->{interactive} = "stdio" },
 	    corporate => sub { $::corporate = 1 },
 	    kickstart => sub { $::auto_install = $v },
 	    uml_install => sub { $::uml_install = 1 },
@@ -407,8 +407,8 @@ sub main {
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
-	    blank         => sub { $o->{blank} = $::blank = 1},
-	    updatemodules => sub { $o->{updatemodules} = 1},
+	    blank         => sub { $o->{blank} = $::blank = 1 },
+	    updatemodules => sub { $o->{updatemodules} = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
 
@@ -562,7 +562,7 @@ sub main {
 
     #-the main cycle
     my $clicked = 0;
-    MAIN: for ($o->{step} = $o->{steps}{first}; ; $o->{step} = getNextStep()) {
+    MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
 	if ($o->{steps}{$o->{step}}{icon}) { $o->{icon} = $o->{steps}{$o->{step}}{icon} } else { undef $o->{icon} }

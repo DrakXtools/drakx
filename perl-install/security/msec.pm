@@ -142,7 +142,8 @@ sub get_secure_level {
                 ${{ getVarsFromSh("$::prefix/etc/sysconfig/msec") }}{SECURE_LEVEL};
 		# || $ENV{SECURE_LEVEL};
 
-    return $sec_levels[$num_level];}
+    return $sec_levels[$num_level];
+}
 
 sub get_seclevel_list {
     qw(Standard High Higher Paranoid);

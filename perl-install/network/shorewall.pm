@@ -111,14 +111,14 @@ sub write {
 		    [ 'all', 'all', 'REJECT', 'info' ],
 		   );
     set_config_file('rules',
-		    (map
-		     { map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto }
-		      ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
+		    (map { 
+			map_each { [ 'ACCEPT', $_, 'fw', $::a, join(',', @$::b), '-' ] } %ports_by_proto 
+		    } ('net', if_($conf->{masquerade}, 'masq'), if_($conf->{loc_interface}, 'loc'))),
 		    if_($conf->{masquerade}, map { [ 'ACCEPT', 'masq', 'fw', $_, join(',', @drakgw_ports), '-' ] } 'tcp', 'udp'),
 				if_($conf->{masquerade}, map { [ 'ACCEPT', 'fw', 'masq', $_, join(',', @internal_ports), '-' ] } 'tcp', 'udp'),
 		   );
     set_config_file('masq', 
-		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ]: (),
+		    $conf->{masquerade} ? [ $conf->{net_interface}, $conf->{masquerade}{subnet} ] : (),
 		   );
 
     if ($conf->{disabled}) {

@@ -68,19 +68,19 @@ sub new {
 				       for (my $i = 0; $i < (540/$y1); $i++) {
 					   $draw1->window->draw_pixmap ($draw1->style->bg_gc('normal'),
 									$im_up, 0, 0, 0, $y1*$i,
-									$x1 , $y1);
+									$x1, $y1);
 					   $draw1->window->draw_string(
 								       $style->font,
 								       $draw1->style->white_gc,
 								       40, 62,
-								       ($::Wizard_title) );
+								       ($::Wizard_title));
 				       }
 				   });
 	    $draw2->signal_connect(expose_event => sub {
 				       for (my $i = 0; $i < (300/$y2); $i++) {
 					   $draw2->window->draw_pixmap ($draw2->style->bg_gc('normal'),
 									$im_left, 0, 0, 0, $y2*$i,
-									$x2 , $y2);
+									$x2, $y2);
 				       }
 				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
@@ -270,7 +270,7 @@ sub _create_window($$) {
 	    my $b = Gtk::Gdk::Bitmap->create_from_data($w->window, $s, $wib, $he);
 	    $w->window->shape_combine_mask($b, 0, 0);
 	}
-    }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position}) ;
+    }) if ($my_gtk::force_center || $o->{force_center}) && !($my_gtk::force_position || $o->{force_position});
 
     $o->{window} = $::noBorder ? $w : $f;
     $o->{rwindow} = $w;
@@ -378,8 +378,8 @@ sub ask_browse_tree_info {
     $go->grab_focus;
     $w->{rwindow}->show_all;
 
-    my @toolbar = (ftout  =>  [ N("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
-		   ftin   =>  [ N("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+    my @toolbar = (ftout  =>  [ N("Expand Tree"), sub { $tree->expand_recursive(undef) } ],
+		   ftin   =>  [ N("Collapse Tree"), sub { $tree->collapse_recursive(undef) } ],
 		   reload =>  [ N("Toggle between flat and group sorted"), sub { invbool(\$common->{state}{flat}); $common->{rebuild_tree}->() } ]);
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ($ic->{icon} => [ $ic->{help}, sub {
@@ -535,8 +535,7 @@ sub ask_browse_tree_info_given_widgets {
 		my @unsel = $common->{grep_unselected}(@l);
 		my @p = @unsel ?
 		  #- not all is selected, select all if no option to potentially override
-		  (exists $common->{partialsel_unsel} && $common->{partialsel_unsel}->(\@unsel, \@l) ? difference2(\@l, \@unsel) : @unsel)
-		  : @l;
+		  (exists $common->{partialsel_unsel} && $common->{partialsel_unsel}->(\@unsel, \@l) ? difference2(\@l, \@unsel) : @unsel) : @l;
 		$common->{toggle_nodes}($set_leaf_state, @p);
 		&$update_size;
 		$parent = $curr;

@@ -44,7 +44,7 @@ sub new {
 	my @l = ($ftp, \ (my $retr = undef));
 	$hosts{"$host$prefix"} = \@l;
 	@l;
-    }};
+    } };
     wantarray ? @l : $l[0];
 }
 

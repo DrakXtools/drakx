@@ -261,7 +261,7 @@ sub selectInstallClass {
     my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? N_("Upgrade packages only") : N_("Upgrade") : N_("Install");
 
     if ($installMode = $o->selectInstallClass1($verifInstallClass,
-					       first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
+					       first(list2kv(@c)), ${{ reverse %c }}{$::expert ? "expert" : "beginner"},
 					       exists $o->{isUpgrade} ? [] : [ N_("Install"), N_("Upgrade"), N_("Upgrade packages only") ], $installMode)) {
 	log::l("install class: $installMode");
 	$o->{isUpgrade} = $installMode =~ /Upgrade/;

@@ -23,11 +23,11 @@ $UNMOVEABLE = 8;
 #- returns the number of clusters for a given filesystem type
 sub min_cluster_count($) {
     my ($fs) = @_;
-    (1 << $ {{ FAT16 => 12, FAT32 => 12 }}{$fs->{fs_type}}) - 12;
+    (1 << ${{ FAT16 => 12, FAT32 => 12 }}{$fs->{fs_type}}) - 12;
 }
 sub max_cluster_count($) {
     my ($fs) = @_;
-    (1 << $ {{ FAT16 => 16, FAT32 => 28 }}{$fs->{fs_type}}) - 11;
+    (1 << ${{ FAT16 => 16, FAT32 => 28 }}{$fs->{fs_type}}) - 11;
 }
 
 

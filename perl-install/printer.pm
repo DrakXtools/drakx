@@ -2022,8 +2022,7 @@ sub configure_hpoj {
     } else {
 	print CONFIG
 	    "\n".
-	    "# The serial number of the device that was originally detected on this port:\n"
-	    ;
+	    "# The serial number of the device that was originally detected on this port:\n";
 	if ($bus=~/^[pu]/) {
 	    print CONFIG
 		"#   Comment out if you want to disable serial-number matching.\n";
@@ -2096,7 +2095,7 @@ sub configure_hpoj {
     return $ptaldevice;
 }
 
-sub parport_addr{
+sub parport_addr {
     # auto-detect the parallel port addresses
     my ($device) = @_;
     $device =~ m!^/dev/lp(\d+)$! or

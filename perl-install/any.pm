@@ -124,8 +124,8 @@ sub setupBootloader {
 	    my $onmbr = "/dev/$boot" eq $b->{boot};
 	    $b->{boot} = "/dev/" . ($in->ask_from_list_(N("LILO/grub Installation"),
 							N("Where do you want to install the bootloader?"),
-							\@l, $l[!$onmbr]) eq $l[0] 
-				    ? $boot : fsedit::get_root($fstab, 'boot')->{device});
+							\@l, $l[!$onmbr]) eq $l[0] ? 
+				    $boot : fsedit::get_root($fstab, 'boot')->{device});
 	}
     } else {
 	$in->set_help(arch() =~ /sparc/ ? "setupSILOGeneral" :  arch() =~ /ppc/ ? 'setupYabootGeneral' :"setupBootloader") unless $::isStandalone; #- TO MERGE ?
@@ -190,12 +190,12 @@ sub setupBootloader {
 	$in->ask_from('', N("Bootloader main options"), [
 	{ label => N("Bootloader to use"), val => \$bootloader, list => [ keys(%bootloaders) ], format => \&translate },	
 	{ label => N("Init Message"), val => \$b->{'init-message'} },
-	{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab))], not_edit => !$::expert },
+	{ label => N("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } (grep { isAppleBootstrap($_) } @$fstab)) ], not_edit => !$::expert },
 	{ label => N("Open Firmware Delay"), val => \$b->{delay} },
 	{ label => N("Kernel Boot Timeout"), val => \$b->{timeout} },
 	{ label => N("Enable CD Boot?"), val => \$b->{enablecdboot}, type => "bool" },
 	{ label => N("Enable OF Boot?"), val => \$b->{enableofboot}, type => "bool" },
-	{ label => N("Default OS?"), val=> \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
+	{ label => N("Default OS?"), val => \$b->{defaultos}, list => [ 'linux', 'macos', 'macosx', 'darwin' ] },
 	]) or return 0;				
 	}
 	
@@ -314,7 +314,7 @@ if (arch() !~ /ppc/) {
         unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
 	if ($e->{type} eq "image") {
 		@l = ({ label => N("Label"), val => \$e->{label} },
-		$::expert ? @l[1..4] : (@l[1..2], { label => N("Append"), val => \$e->{append} }) ,
+		$::expert ? @l[1..4] : (@l[1..2], { label => N("Append"), val => \$e->{append} }),
 		if_($::expert, { label => N("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
 		if_($::expert, $l[5]),
 		{ label => N("NoVideo"), val => \$e->{novideo}, type => 'bool' },
@@ -1100,7 +1100,7 @@ connections from many clients. Note: if your machine is only a client on the Int
               { label => N("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
                 if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
                 { label => N("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
-                  N("A library which defends against buffer overflow and format string attacks.") } ),
+                  N("A library which defends against buffer overflow and format string attacks.") }),
                 { label => N("Security Administrator (login or email)"), val => $email, },
             ],
     );

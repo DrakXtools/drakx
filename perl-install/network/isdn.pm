@@ -181,9 +181,9 @@ sub isdn_ask_info {
 sub isdn_ask_protocol {
     my @toto = (
 	      { description => $::expert ? N("Europe protocol (EDSS1)") : N("Europe protocol"),
-		protokol => 2},
+		protokol => 2 },
 	      { description => $::expert ? N("Protocol for the rest of the world\nNo D-Channel (leased lines)") : N("Protocol for the rest of the world"),
-		protokol => 3}
+		protokol => 3 }
 	     );
     my $e = $in->ask_from_listf(N("ISDN Configuration"),
 				N("Which protocol do you want to use?"),

@@ -457,7 +457,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver),
 			     $::force_xf4 = 0;
 			     $card->{server} = "Xpmac";
 			     $card->{prefer_xf3} = 1;
-			 }};
+			 } };
     }
     @choices;
 }

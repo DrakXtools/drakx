@@ -237,7 +237,7 @@ sub getSCSI() {
     # (see linux/include/scsi/scsi.h and sans-find-scanner.1)
     each_index {
 	put_in_hash $_, { media_type => 'scanner' };
-    } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor /} @l;
+    } grep { $_->{raw_type} =~ /Scanner/ || $_->{raw_type} =~ /Processor / } @l;
 
     get_devfs_devices(@l);
     get_sys_cdrom_info(@l);
@@ -283,7 +283,7 @@ sub getIDE() {
     foreach my $d (sort @{[glob_('/proc/ide/hd*')]}) {
 	cat_("$d/driver") =~ /ide-scsi/ and next; #- already appears in /proc/scsi/scsi
 	my $t = chomp_(cat_("$d/media"));
-	my $type = $ {{disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd'}}{$t} or next;
+	my $type = ${{ disk => 'hd', cdrom => 'cdrom', tape => 'tape', floppy => 'fd' }}{$t} or next;
 	my $info = chomp_(cat_("$d/model")) || "(none)";
 
 	my $num = ord (($d =~ /(.)$/)[0]) - ord 'a';
@@ -679,7 +679,7 @@ sub whatUsbport() {
 		       MANUFACTURER => $manufacturer,
 		       DESCRIPTION => $description,
 		       SERIALNUMBER => $serialnumber
-		   }};
+		   } };
     }
     @res;
 }
@@ -691,7 +691,7 @@ sub whatUsbport() {
 #-COMMAND SET:MLC,PCL,PJL;
 sub whatPrinter {
     my @res = (whatParport(), whatUsbport());
-    grep { $_->{val}{CLASS} eq "PRINTER"} @res;
+    grep { $_->{val}{CLASS} eq "PRINTER" } @res;
 }
 
 sub whatPrinterPort() {

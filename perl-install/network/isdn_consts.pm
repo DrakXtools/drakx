@@ -169,7 +169,7 @@ package network::isdn; # $Id$
     driver => 'hisax',
     type => '15',
     irq => '9',
-    io=> '0xd80',
+    io => '0xd80',
     card => 'isa',
    },
    { description => "Sedlbauer PC/104 (ISA)", #15 irq, io
@@ -206,7 +206,7 @@ package network::isdn; # $Id$
     driver => 'hisax',
     type => '16',
     irq => '9',
-    io=> '0xd80',
+    io => '0xd80',
     card => 'isa',
    },
    { description => "MIC card (ISA)",	#17 irq, io

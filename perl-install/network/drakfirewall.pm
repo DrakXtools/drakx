@@ -162,7 +162,7 @@ where port is between 1 and 65535.", $invalid_port));
 				return 1;
 			    }
 			},
-		   }},
+		   } },
 		  [ 
 		   { text => N("Everything (no firewall)"), val => \$disabled, type => 'bool' },
 		   (map { { text => $_->{name}, val => \$_->{on}, type => 'bool', disabled => sub { $disabled } } } @l),

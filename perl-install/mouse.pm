@@ -437,7 +437,7 @@ sub test_mouse_install {
     $w->sync; # HACK
     Gtk::Gdk->pointer_grab($darea->window, 1,
 			   [ 'pointer_motion_mask'],
-			   $darea->window, undef ,0);
+			   $darea->window, undef, 0);
     $w->main;
 }
 

@@ -329,13 +329,13 @@ This wizard will help you to install your printer(s) connected to this computer.
 
 If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.")))},
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now."))) },
 		     [
 		      { text => N("Auto-detect printers connected to this machine"), type => 'bool',
-			val => \$autodetectlocal},
+			val => \$autodetectlocal },
 		      ($havelocalnetworks ?
 		       ({ text => N("Auto-detect printers connected directly to the local network"), type => 'bool',
-			  val => \$autodetectnetwork},
+			  val => \$autodetectnetwork },
 			($printer->{SPOOLER} ne "pdq" ?
 			 { text => N("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
 			   val => \$autodetectsmb } : ())) : ())
@@ -631,7 +631,7 @@ sub setup_local_autoscan {
 					 }
 					 return 0;
 				     }
-				 }},
+				 } },
 		 [
 		  ($::expert ? 
 		   { val => \$device } : ()),
@@ -740,7 +740,7 @@ complete => sub {
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
-                    val => $modelinfo}));
+                    val => $modelinfo }));
 
     1;
 }
@@ -871,8 +871,8 @@ sub setup_smb {
 	   { label => N("Auto-detected"),
 	     val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 1, format => \&translate, sort => 0,
-	     allow_empty_list => 1, type => 'combo' }
-	   : ()) ],
+	     allow_empty_list => 1, type => 'combo' } :
+	   ()) ],
 	 complete => sub {
 	     if (!network::is_ip($smbserverip) && $smbserverip ne "") {
 		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
@@ -1133,8 +1133,8 @@ sub setup_socket {
 	  ($autodetect ?
 	   { val => \$menuchoice, list => \@menuentrieslist, 
 	     not_edit => 0, format => \&translate, sort => 0,
-	     allow_empty_list => 1, type => 'list' }
-	   : ())
+	     allow_empty_list => 1, type => 'list' } :
+	   ())
 	  ]
 	 );
     
@@ -1169,7 +1169,7 @@ sub setup_socket {
 		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		  $printer->{currentqueue}{connect}, $auto_hpoj,
                   ({port => $printer->{currentqueue}{connect},
-                    val => $modelinfo}));
+                    val => $modelinfo }));
     1;
 }
 
@@ -1258,7 +1258,7 @@ complete => sub {
 		      "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
 		      $printer->{currentqueue}{connect}, $auto_hpoj,
                       ({port => $printer->{currentqueue}{connect},
-                        val => $modelinfo}));
+                        val => $modelinfo }));
     }
 
     1;
@@ -2092,7 +2092,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 			 }
 		     }
 		     return (0);
-		 } );
+		 });
 	}
 	# Read out the user's choices and generate the appropriate command
 	# line arguments
@@ -2209,7 +2209,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 		   }
 		   return 0;
 	       }
-	   }},
+	   } },
 	 [
 	  { text => N("Standard test page"), type => 'bool',
 	    val => \$standard },
@@ -2272,7 +2272,7 @@ It may take some time before the printer starts.\n");
 		and return 1;
 	}
     } else {
-	return ($::isWizard ? $res1 : 1) ;
+	return ($::isWizard ? $res1 : 1);
     }
     return 2;
 }
@@ -2512,9 +2512,9 @@ You can also type a new name or skip this printer.",
 				return (1,0); # Let the user correct the name
 			    }
 			    return 0;
-			}}
+			} }
 		    },
-		      [{label => N("New printer name"),val => \$newqueue}]))) {
+		      [{label => N("New printer name"),val => \$newqueue }]))) {
 		    {
 			my $w = $in->wait_message(N("Printerdrake"), 
 			   N("Transferring %s...", $oldqueue));
@@ -2553,7 +2553,7 @@ sub start_network {
 		do { my $ret = &$upNetwork(); 
 		     undef $upNetwork; 
 		     sleep(1);
-		     $ret});
+		     $ret });
     } else {
 	return printer::start_service("network");
     }
@@ -2587,7 +2587,7 @@ sub check_network {
 			      N("You are going to configure a remote printer. This needs working network access, but your network is not configured yet. If you go on without network configuration, you will not be able to use the printer which you are configuring now. How do you want to proceed?"),
 			      [ { val => \$choice, type => 'list',
 				  list => [ N("Configure the network now"),
-					    N("Go on without configuring the network") ]} ] )) {
+					    N("Go on without configuring the network") ] } ])) {
 		if ($choice eq N("Configure the network now")) {
 		    if ($::isInstall) {
 			require network::netconnect;
@@ -3117,12 +3117,12 @@ sub main {
 		    my @printerlist = 
 			((sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
 				      . ($_ eq $printer->{DEFAULT} ?
-					 N(" (Default)") : (""))}
+					 N(" (Default)") : ("")) }
 				 keys(%{$printer->{configured}
 					|| {}})),
 				($printer->{SPOOLER} eq "cups" ?
-				 printer::get_cups_remote_queues($printer)
-				 : ())))
+				 printer::get_cups_remote_queues($printer) : 
+				 ())))
 			  );
 		    my $noprinters = ($#printerlist < 0);
 		    # Position the cursor where it were before (in case
@@ -3466,7 +3466,7 @@ What do you want to modify on this printer?",
 				   N("Print test pages"),
 				   N("Know how to use this printer"),
 				   ($printer->{configured}{$queue} ?
-				    N("Remove printer") : ()) ] } ] ) ) {
+				    N("Remove printer") : ()) ] } ])) {
 		# Stay in the queue edit window until the user clicks "Close"
 		# or deletes the queue
 		$editqueue = 1; 

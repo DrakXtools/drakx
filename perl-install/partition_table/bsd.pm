@@ -47,8 +47,8 @@ my ($main_format, $main_fields) = list2kv(
   S   => 'npartitions',
   I   => 'bbsize',
   I   => 'sbsize',
-  a128=> 'partitions',
-  a236=> 'blank',
+  a128 => 'partitions',
+  a236 => 'blank',
 );
 $main_format = join '', @$main_format;
 

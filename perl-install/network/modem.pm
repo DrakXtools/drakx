@@ -12,7 +12,7 @@ use MDK::Common::Globals "network", qw($in $prefix);
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig);
 
-sub configure{
+sub configure {
     my ($netcnx, $mouse, $netc) = @_;
     $netcnx->{type}='modem';
     $netcnx->{$netcnx->{type}}={};

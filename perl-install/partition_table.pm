@@ -199,10 +199,10 @@ arch() !~ /sparc/ ? (
   0x1e => 'vfat',
   0x82 => 'swap',
   0x83 => 'ext2',
-  0x183=> 'reiserfs',
-  0x283=> 'xfs',
-  0x383=> 'jfs',
-  0x483=> 'ext3',
+  0x183 => 'reiserfs',
+  0x283 => 'xfs',
+  0x383 => 'jfs',
+  0x483 => 'ext3',
   0x401 => 'apple',
   0x402 => 'hfs',
 );
@@ -232,10 +232,10 @@ sub isRawLVM { $_[0]{type} == 0x8e }
 sub isRawRAID { $_[0]{type} == 0xfd }
 sub isSwap { type2fs($_[0]) eq 'swap' }
 sub isExt2 { type2fs($_[0]) eq 'ext2' }
-sub isDos { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
-sub isWin { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
+sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{type}} }
+sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{type}} }
 sub isFat { isDos($_[0]) || isWin($_[0]) }
-sub isSunOS { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
+sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{type}} }
 sub isNT { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
 sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
@@ -600,7 +600,7 @@ sub write {
 	}
 	$hd->kernel_read;
 	foreach (@magic_parts) {
-	    syscall_('mount', , $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . "$!");
+	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . "$!");
 	}
     }
     $hd->{needKernelReread} = 0;

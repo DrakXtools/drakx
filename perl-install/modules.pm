@@ -306,7 +306,7 @@ sub configure_pcmcia {
     };
 
     #- run cardmgr in foreground while it is configuring the card.
-    run_program::run("cardmgr", "-f", "-m" ,"/modules");
+    run_program::run("cardmgr", "-f", "-m", "/modules");
     sleep(3);
     
     #- make sure to be aware of loaded module by cardmgr.

@@ -79,7 +79,7 @@ sub entry {
     } elsif (/^hd(.)(\d{0,2})/) {
 	$type = c::S_IFBLK();
 	($major, $minor) =
-	    @{ $ {{'a' => [3, 0], 'b' => [3, 64],
+	    @{ ${{'a' => [3, 0], 'b' => [3, 64],
 		   'c' => [22,0], 'd' => [22,64],
 		   'e' => [33,0], 'f' => [33,64],
 		   'g' => [34,0], 'h' => [34,64],
@@ -128,27 +128,27 @@ sub entry {
     }
     unless ($type) {
 	($type, $major, $minor) =
-	     @{ ${{"aztcd"   => [ c::S_IFBLK(), 29, 0 ],
-		   "bpcd"    => [ c::S_IFBLK(), 41, 0 ],
-		   "cdu31a"  => [ c::S_IFBLK(), 15, 0 ],
-		   "cdu535"  => [ c::S_IFBLK(), 24, 0 ],
-		   "cm206cd" => [ c::S_IFBLK(), 32, 0 ],
-		   "gscd"    => [ c::S_IFBLK(), 16, 0 ],
-		   "mcd"     => [ c::S_IFBLK(), 23, 0 ],
-		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
-		   "mem"     => [ c::S_IFCHR(), 1,  1 ],
-		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
-		   "kbd"     => [ c::S_IFCHR(), 11, 0 ],
-		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
-		   "atibm"   => [ c::S_IFCHR(), 10, 3 ],
-		   "random"  => [ c::S_IFCHR(), 1,  8 ],
-		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],
-		   "sjcd"    => [ c::S_IFBLK(), 18, 0 ],
-		   "tty"     => [ c::S_IFCHR(),  5, 0 ],
-		   "usbmouse"=> [ c::S_IFCHR(), 13, 63], #- aka /dev/input/mice
-		   "adbmouse"=> [ c::S_IFCHR(), 10, 10], #- PPC
-		   "zero"    => [ c::S_IFCHR(), 1,  5 ],		     
-		   "null"    => [ c::S_IFCHR(), 1,  3 ],		     
+	     @{ ${{"aztcd"    => [ c::S_IFBLK(), 29, 0 ],
+		   "bpcd"     => [ c::S_IFBLK(), 41, 0 ],
+		   "cdu31a"   => [ c::S_IFBLK(), 15, 0 ],
+		   "cdu535"   => [ c::S_IFBLK(), 24, 0 ],
+		   "cm206cd"  => [ c::S_IFBLK(), 32, 0 ],
+		   "gscd"     => [ c::S_IFBLK(), 16, 0 ],
+		   "mcd"      => [ c::S_IFBLK(), 23, 0 ],
+		   "mcdx"     => [ c::S_IFBLK(), 20, 0 ],
+		   "mem"      => [ c::S_IFCHR(), 1,  1 ],
+		   "optcd"    => [ c::S_IFBLK(), 17, 0 ],
+		   "kbd"      => [ c::S_IFCHR(), 11, 0 ],
+		   "psaux"    => [ c::S_IFCHR(), 10, 1 ],
+		   "atibm"    => [ c::S_IFCHR(), 10, 3 ],
+		   "random"   => [ c::S_IFCHR(), 1,  8 ],
+		   "sbpcd"    => [ c::S_IFBLK(), 25, 0 ],
+		   "sjcd"     => [ c::S_IFBLK(), 18, 0 ],
+		   "tty"      => [ c::S_IFCHR(),  5, 0 ],
+		   "usbmouse" => [ c::S_IFCHR(), 13, 63], #- aka /dev/input/mice
+		   "adbmouse" => [ c::S_IFCHR(), 10, 10], #- PPC
+		   "zero"     => [ c::S_IFCHR(), 1,  5 ],		     
+		   "null"     => [ c::S_IFCHR(), 1,  3 ],		     
 	       }}{$_} or die "unknown device $_ (caller is " . join(":", caller()) . ")" };
     }
     ($type, $major, $minor);

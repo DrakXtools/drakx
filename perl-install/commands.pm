@@ -41,11 +41,13 @@ sub getopts {
 sub true { exit 0 }
 sub false { exit 1 }
 sub cat { @ARGV = @_; print while <> }
-sub which { ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG }}}
 sub dirname_ { print dirname(@_), "\n" }
 sub basename_ { print basename(@_), "\n" }
 sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
 sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules") }
+sub which { 
+  ARG: foreach (@_) { foreach my $c (split /:/, $ENV{PATH}) { -x "$c/$_" and print("$c/$_\n"), next ARG }}
+}
 
 sub grep_ {
     my ($h, $v, $i) = getopts(\@_, qw(hvi));
@@ -102,7 +104,7 @@ sub mknod {
 	eval { devices::make($_[0]) }; $@ and die "mknod: failed to create $_[0]\n";
     } elsif (@_ == 4) {
 	require c;
-	my $mode = $ {{"b" => c::S_IFBLK(), "c" => c::S_IFCHR()}}{$_[1]} or die "unknown node type $_[1]\n";
+	my $mode = ${{ "b" => c::S_IFBLK(), "c" => c::S_IFCHR() }}{$_[1]} or die "unknown node type $_[1]\n";
 	syscall_('mknod', my $a = $_[0], $mode | 0600, makedev($_[2], $_[3])) or die "mknod failed: $!\n";
     } else { die "usage: mknod <path> [b|c] <major> <minor> or mknod <path>\n" }
 }
@@ -204,7 +206,7 @@ sub displaySize {
 }
 
 sub ls {
-    my ($l , $h) = getopts(\@_, qw(lh));
+    my ($l, $h) = getopts(\@_, qw(lh));
     $h and die "usage: ls [-l] <files...>\n";
 
     @_ or @_ = '.';
@@ -309,7 +311,7 @@ sub strings {
     while (<>) {
 	while (/[$printable_chars]{$n,}/og) {
 	    printf "%07d ", ($l + length $') if $o;
-	    print "$&\n" ;
+	    print "$&\n";
 	}
 	$l += length;
     } continue { $l = 0 if eof }

@@ -73,7 +73,7 @@ sub choose {
 
     configure_automatic($monitor, $monitors) and $auto and return 1;
 
-    my %h_monitors = map { ; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
+    my %h_monitors = map {; "$_->{VendorName}|$_->{ModelName}" => $_ } @$monitors;
 
   ask_monitor:
     my $merged_name = do {

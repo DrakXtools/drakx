@@ -34,13 +34,13 @@ sub intro {
 	}
 	my @l = (
 	       !$connected && -e $connect_file ? { description => N("Connect"),
-						   c => 1} : (),
+						   c => 1 } : (),
 	       $connected && -e $disconnect_file ? { description => N("Disconnect"),
-						     c => 2} : (),
+						     c => 2 } : (),
 	       { description => N("Configure the connection"),
-		 c => 3},
+		 c => 3 },
 	       { description => N("Cancel"),
-		 c => 4},
+		 c => 4 },
 	      );
 	my $e = $in->ask_from_listf(N("Internet connection & configuration"),
 				    translate($text),
@@ -184,7 +184,7 @@ If you don't want to use the auto detection, deselect the checkbox.
     my $set_default;
     my %conf;
     $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
-    $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1: 0;
+    $conf{isdn} = $netc->{autodetect}{isdn}{description} ? 1 : 0;
 #     my @l = (
 # 	     [N("Normal modem connection"), $netc->{autodetect}{modem}, N_("detected on port %s"), \$conf{modem}],
 # 	     [N("ISDN connection"), $netc->{autodetect}{isdn}{description}, N_("detected %s"), \$conf{isdn}],
@@ -229,14 +229,14 @@ If you don't want to use the auto detection, deselect the checkbox.
     } elsif ($nb > 1) {
 	$in->ask_from(N("Network Configuration Wizard"),
 		      N("You have configured multiple ways to connect to the Internet.\nChoose the one you want to use.\n\n" . if_(!$::isStandalone, "You may want to configure some profiles after the installation, in the Mandrake Control Center")),
-		      [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ]} ]
+		      [ { label => N("Internet connection"), val => \$netc->{internet_cnx_choice}, list => [ keys %{$netc->{internet_cnx}} ] } ]
 		     ) or goto step_2;
     } elsif ($nb == 1) {
 	$netc->{internet_cnx_choice} = (keys %{$netc->{internet_cnx}})[0];
     }
     member($netc->{internet_cnx_choice}, ('adsl', 'isdn')) and
       $netc->{at_boot} = $in->ask_yesorno(N("Network Configuration Wizard"), N("Do you want to start the connection at boot?"));
-    if ($netc->{internet_cnx_choice} ) {
+    if ($netc->{internet_cnx_choice}) {
 	write_cnx_script($netc);
 	$netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type};
     } else {
@@ -268,8 +268,8 @@ If you don't want to use the auto detection, deselect the checkbox.
 The configuration will now be applied to your system.
 
 ") . if_($::isStandalone && $in->isa('interactive_gtk'),
-N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems."))
-      : N("Problems occured during configuration.
+N("After this is done, we recommend that you restart your X environment to avoid any hostname-related problems.")) : 
+      N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
     if ($::isWizard) {
 	$::Wizard_no_previous=1;
@@ -409,7 +409,7 @@ ISDNCardVendor=$isdn->{vendor}
 ISDNId=$isdn->{id}
 ISDNProvider=$netc->{DOMAINNAME2}
 ISDNProviderPhone=$isdn->{phone_out}
-ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1} . "
+ISDNProviderDomain=" . do { $netc->{DOMAINNAME2} =~ /\.(.*)/; $1 } . "
 ISDNProviderDNS1=$netc->{dnsServer2}
 ISDNProviderDNS2=$netc->{dnsServer3}
 ISDNDialing=$isdn->{dialing_mode}

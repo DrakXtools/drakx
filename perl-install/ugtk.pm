@@ -48,7 +48,7 @@ sub gtkpack__                 { gtkpowerpack(0, 1, @_) }
 sub gtkpack2                  { gtkpowerpack(1, 0, @_) }
 sub gtkpack2_                 { gtkpowerpack('arg', 0, @_) }
 sub gtkpack2__                { gtkpowerpack(0, 0, @_) }
-sub gtkpack3                  { gtkpowerpack($a?1:0, 0, @_) }
+sub gtkpack3                  { gtkpowerpack($a ?1 :0, 0, @_) }
 sub gtkput                    { $_[0]->put(gtkshow($_[1]), $_[2], $_[3]); $_[0] }
 sub gtkpixmap                 { new Gtk::Pixmap(gdkpixmap(@_)) }
 sub gtkresize                 { $_[0]->window->resize($_[1], $_[2]); $_[0] }
@@ -567,9 +567,8 @@ sub gtkicons_labels_widget {
 	    if (!$dbl_area->{state} || $state != $dbl_area->{state}) {
 		   $dbl_area->{state} = $state;
 		   fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-		   ($state ? $pixbuf_h : $pixbuf)
-			  ->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
-							   $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
+		   ($state ? $pixbuf_h : $pixbuf)->render_to_drawable($dbl_area, $darea->style->fg_gc('normal'), 0, 0, 0, 0,
+								      $pixbuf->get_width, $pixbuf->get_height, 'normal', 0, 0);
 		   $dbl_area->draw_pixmap($darea->style->bg_gc('normal'), ($state ? $pix->[1] : $pix->[0]),
 							 0, 0, ($dx - $width)/2, $y_round, $width, $height);
 	    }
@@ -752,7 +751,7 @@ sub gtkpowerpack {
 	}
 	#- Get and pack the widget (create it if necessary when it is a label...)
 	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift);
-	if ($attr{pack_end}) { $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding})}
+	if ($attr{pack_end}) { $box->pack_end($widget, $attr{expand}, $attr{fill}, $attr{padding}) }
 	else { $box->pack_start($widget, $attr{expand}, $attr{fill}, $attr{padding}) }
 	$widget->show;
     }
@@ -862,8 +861,8 @@ sub compute_icons {
   bcl_init:
     @dx2 = undef;
   bcl:
-    @dx = map{ $_->{dx} } @tab[$index..$index+$nb];
-    $dy[$index] = max(map{ $_->{dy} } @tab[$index..$index+$nb]);
+    @dx = map { $_->{dx} } @tab[$index..$index+$nb];
+    $dy[$index] = max(map { $_->{dy} } @tab[$index..$index+$nb]);
     foreach (0..$#dx) {
 	if ($dx[$_] > $dx2[$_]) { $dx2[$_] = $dx[$_] } else { $dx[$_] = $dx2[$_] }
     }

@@ -178,7 +178,7 @@ sub switch {
                                     "$_[0] (". $des{$_[0]} . ')'
                                     }, allow_empty_list => 1 },
                                 {
-                                    val => N("Help"), disabled => sub { },
+                                    val => N("Help"), disabled => sub {},
                                     clicked => sub {  
                                         $in->ask_warn(N("Switching between ALSA and OSS help"),
                                                       N("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
@@ -213,8 +213,8 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
                       N("The \"%s\" driver for your sound card is unlisted\n
 Please send the output of the \"lspcidrake -v\" command to
 <install at mandrakesoft dot com>
-with subject: unlisted sound driver \"%s\"")
-                      , $driver, $driver);
+with subject: unlisted sound driver \"%s\""),
+                      $driver, $driver);
     }
 }
 

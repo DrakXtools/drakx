@@ -73,7 +73,7 @@ sub test {
       i: while (<F>) {
 	    if (Xconfig::card::using_xf4($card)) {
 		if (/^\(EE\)/ && !/Disabling/ || /^Fatal\b/) {
-		    my @msg = !/error/ && $_ ;
+		    my @msg = !/error/ && $_;
 		    local $_;
 		    while (<F>) {
 			/reporting a problem/ and last;
@@ -84,7 +84,7 @@ sub test {
 		}
 	    } else {
 		if (/\b(error|not supported)\b/i) {
-		    my @msg = !/error/ && $_ ;
+		    my @msg = !/error/ && $_;
 		    local $_;
 		    while (<F>) {
 			/not fatal/ and last i;
@@ -102,7 +102,7 @@ sub test {
     local *F;
     open F, "|perl 2>/dev/null";
     print F "use lib qw(", join(' ', @INC), ");\n";
-    print F q{
+    print F q(
         BEGIN { $::no_ugtk_init = 1 }
         require lang;
         require my_gtk; 
@@ -110,7 +110,7 @@ sub test {
 	use interactive::gtk;
         use run_program;
 
-        $::prefix = "} . $::prefix . q{";
+        $::prefix = ") . $::prefix . q(";
         $::isStandalone = 1;
 
         lang::bindtextdomain();
@@ -136,7 +136,7 @@ sub test {
 
         my $in = interactive::gtk->new;
 	$in->exit($in->ask_yesorno('', [ N("Is this the correct setting?"), $text ], 0) ? 0 : 222);
-    };
+    );
     my $rc = close F;
     my $err = $?;
 

@@ -76,8 +76,8 @@ $window->border_width(2);
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q
-my @menu_items = ( { path => N("/_File"), type => '<Branch>' },
-		   { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
+my @menu_items = ({ path => N("/_File"), type => '<Branch>' },
+		  { path => N("/File/_Quit"), accelerator => N("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
 my $menubar = ugtk::create_factory_menu($window, @menu_items);
 ######### menus end
@@ -91,24 +91,24 @@ $desktop_combo->entry->set_text($auto_mode{desktop}) if ($auto_mode{desktop});
 my $a_c_button = new Gtk::RadioButton (N("NewStyle Categorizing Monitor"));
 my $a_h_button = new Gtk::RadioButton N("NewStyle Monitor"), $a_c_button;
 my $a_v_button = new Gtk::RadioButton N("Traditional Monitor"), $a_c_button;
-my $a_g_button = new Gtk::RadioButton N("Traditional Gtk+ Monitor"),$a_c_button ;
+my $a_g_button = new Gtk::RadioButton N("Traditional Gtk+ Monitor"),$a_c_button;
 my $a_button = new Gtk::CheckButton(N("Launch Aurora at boot time"));
 my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
 my $disp_mode = arch() =~ /ppc/ ? N("Yaboot mode") : N("Lilo/grub mode");
 
-my %themes = 	('path'=>'/usr/share/bootsplash/themes/',
-		 'default'=>'Mandrake',
-		 'def_thmb'=>'/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
-		 'lilo'=>{'file'=>'/lilo/message',
-			  'thumb'=>'/lilo/thumb.png'} ,
-		 'boot'=>{'path'=>'/images/',
+my %themes = 	('path' =>'/usr/share/bootsplash/themes/',
+		 'default' =>'Mandrake',
+		 'def_thmb' =>'/usr/share/libDrakX/pixmaps/nosplash_thumb.png',
+		 'lilo' => {'file' =>'/lilo/message',
+			  'thumb' =>'/lilo/thumb.png' },
+		 'boot' => {'path' =>'/images/',
 		 	#'thumb'=>'/images/thumb.png',
 			},
 		 );
 my ($cur_res) = cat_('/etc/lilo.conf') =~ /vga=(.*)/;
 #- verify that current resolution is ok
-if ( member( $cur_res, qw( 785 788 791 794) ) ) {
+if ( member( $cur_res, qw( 785 788 791 794))) {
 	($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
 } else {
 	$no_bootsplash = 1;  #- we can't select any theme we're not in Framebuffer mode :-/
@@ -117,8 +117,8 @@ if ( member( $cur_res, qw( 785 788 791 794) ) ) {
 #- and check that lilo is the correct loader
 $no_bootsplash ||= chomp_(`detectloader -q`) ne 'LILO';
 my @thms;
-my @lilo_thms = (($themes{'default'})?():qw(default));
-my @boot_thms = (($themes{'default'})?():qw(default));
+my @lilo_thms = (($themes{'default'}) ?() :qw(default));
+my @boot_thms = (($themes{'default'}) ?() :qw(default));
 chdir($themes{'path'}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
     if (-d $themes{'path'} . $_ && m/^[^.]/) {
@@ -128,7 +128,7 @@ foreach (all('.')) {
     }
 #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
 }
-my %combo = ('thms'=> '','lilo'=> '','boot'=> '');
+my %combo = ('thms' => '','lilo' => '','boot' => '');
 foreach (keys (%combo)) {
     $combo{$_} = new Gtk::Combo;
     $combo{$_}->set_value_in_list(1, 0);
@@ -140,7 +140,7 @@ $combo{'boot'}->set_popdown_strings(@boot_thms) if(! $no_bootsplash);
 my $lilo_pixbuf;
 my $lilo_pic = gtkpng($themes{'def_thmb'});
 
-my $boot_pixbuf ;
+my $boot_pixbuf;
 my $boot_pic = gtkpng($themes{'def_thmb'});
 
 my $thm_button = new Gtk::Button(N("Install themes"));
@@ -149,8 +149,8 @@ my $B_create = new Gtk::Button(N("Create new theme"));
 my $keep_logo = 1;
 $logo_thm->set_active(1);
 $logo_thm->signal_connect(clicked => sub { invbool(\$keep_logo) });
-$B_create->signal_connect(clicked => sub{
-    $::isEmbedded ? (kill('USR1', $::CCPID) and system('/usr/sbin/draksplash ')) : system('/usr/sbin/draksplash ') ;
+$B_create->signal_connect(clicked => sub {
+    $::isEmbedded ? (kill('USR1', $::CCPID) and system('/usr/sbin/draksplash ')) : system('/usr/sbin/draksplash ');
     });
 #- ******** action to take on changing combos values
 
@@ -190,10 +190,10 @@ sub {
       if (-f $themes{'path'}.$combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}) {
 			use MDK::Common::File;
 	    standalone::explanations(N("Backup %s to %s.old",$lilomsg,$lilomsg)); 
-	    cp_af($lilomsg,"/boot/message-graphic.old") ;
+	    cp_af($lilomsg,"/boot/message-graphic.old");
 	    #can't use this anymore or $in->ask_warn(N("Error"), N("unable to backup lilo message"));
 	    standalone::explanations(N("Copy %s to %s",$themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'},$lilomsg)); 
-	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg) ;
+	    cp_af($themes{'path'} . $combo{'lilo'}->entry->get_text() . $themes{'lilo'}{'file'}, $lilomsg);
 			#can't use this anymore  or $in->ask_warn(N("Error"), N("can't change lilo message"));
 	} else {
             $error = 1;
@@ -238,7 +238,7 @@ LOGO_CONSOLE=" . ($keep_logo ? 'yes' : 'no') . "\n";
         #here is mkinitrd time
         if (!$error) {
             foreach (map { if_(m|^initrd-(.*)\.img|, $1) } all('/boot')){
-                if ( system("mkinitrd -f /boot/initrd-$_.img $_" ) ) {
+                if ( system("mkinitrd -f /boot/initrd-$_.img $_")) {
                     $in->ask_warn(N("Error"),
 				  N("Can't launch mkinitrd -f /boot/initrd-%s.img %s.", $_,$_));
                     $error = 1;
@@ -273,7 +273,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				     
 			 ),
                 #Splash Selector
-                gtkadd(my $thm_frame = new Gtk::Frame( N("Splash selection") ),
+                gtkadd(my $thm_frame = new Gtk::Frame( N("Splash selection")),
                        gtkpack__(gtkset_border_width(new Gtk::HBox(0,5),5),
                                  gtkpack__(new Gtk::VBox(0,5),
                                            N("Themes"),
@@ -340,7 +340,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 				    )
 			 ),
 		 gtkadd (gtkset_layout(new Gtk::HButtonBox,-end),
-			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub{ updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
+			 gtksignal_connect(new Gtk::Button(N("OK")), clicked => sub { updateInit(); updateAutologin(); updateAurora(); $::isEmbedded ? kill('USR1',$::CCPID) : Gtk->exit(0) }),
 			 gtksignal_connect(new Gtk::Button(N("Cancel")), clicked => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) })
 			)
 	       )
@@ -370,8 +370,7 @@ Gtk->exit(0);
 # get user names to put in combo  
 #-------------------------------------------------------------
 
-sub parse_etc_passwd
-{
+sub parse_etc_passwd {
     my ($uname, $uid);
     setpwent();
     do {
@@ -381,8 +380,7 @@ sub parse_etc_passwd
     } while (@user_info);
 }
 
-sub get_wm
-{
+sub get_wm {
     @winm = (split (' ', `/usr/sbin/chksession -l`));
 }
 
