@@ -84,7 +84,7 @@ gtkpack2__(
 			      gtkpack(gtkset_text(my $compiler = new Gtk::Entry(50),"$mdk_release")),
 			     ),
 		      gtkpack(new Gtk::HBox(0,0),
-			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
+			      gtkpack(gtkset_justify(new Gtk::Label(_("\n\nTo submit a bug report, click on the button report.\nThis will open  a web browser window  on https://www.bugzilla.com\n where you'll find a form to fill in.The information displayed above will be \ntransferred to that server\n\n")),"left")),
 			     ),
 		      gtkpack(new Gtk::HSeparator),
 		      
@@ -92,6 +92,7 @@ gtkpack2__(
 	  );
 $comb_app->entry->signal_connect('changed', sub {
 				     if (($text = $comb_app->entry->get_text()) ne '') {
+					 $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 					 if (member($text,@all_drakxtools)) {chomp($app_choice = `rpm -q drakxtools`) } else {
 					 
 					 exists $mdk_app->{$text}[1] ? chomp($which_app =`which '$mdk_app->{$text}[1]'`) : chomp($which_app = `which '$mdk_app->{$text}'`);
@@ -120,7 +121,11 @@ in->exit(0);
 sub connect_bugzilla {
     my($url) = @_;
     my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
-    exec $ENV{BROWSER},$url if $ENV{BROWSER};
+    exec $ENV{BROWSER},$url if exists $ENV{BROWSER};
+    my @browser = qw (mozilla  konqueror galeon );
+    foreach (@browser) {
+	if (-e "/usr/bin/$_") { print "execing $_\n "; exec $_,$url} 
+    }
     $in->ask_warn('', _("No browser available please! Please install one"));
 }
 
