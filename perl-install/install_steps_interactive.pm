@@ -34,8 +34,7 @@ use log;
 #-######################################################################################
 sub errorInStep($$) {
     my ($o, $err) = @_;
-    $err =~ s/ at .*?$/\./ unless $::testing; #- avoid error message.
-    $o->ask_warn(_("Error"), [ _("An error occurred"), $err ]);
+    $o->ask_warn(_("Error"), [ _("An error occurred"), common::formatError($err) ]);
 }
 
 sub kill_action {
@@ -1129,8 +1128,9 @@ For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
-install chapter of the Official Linux-Mandrake User's Guide.")
-	},
+install chapter of the Official Linux-Mandrake User's Guide."),
+	 cancel => '',
+	},      
 	[
 	 if_($::expert,
 	     { val => \ (my $t1 = _("Generate auto install floppy")), clicked => sub {
