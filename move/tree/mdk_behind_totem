@@ -2,13 +2,10 @@
 
 ok=1
 
-boot_loop=loop0
-main_loop=loop3
-
 while [ -n "$1" ]; do
     case "$1" in
 	--boot-loop)
-	    boot_loop="$1"
+	    boot_loop="$2"
             shift
 	    shift
 	;;
