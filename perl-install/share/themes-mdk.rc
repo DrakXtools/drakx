@@ -154,6 +154,19 @@ style "any"
   fg[SELECTED] = { 0.2, 0.2, 0.4 }
 }
 
+style "drawing"
+{
+  base[NORMAL]	  = { 0.6, 0.6, 0.8 }
+  bg[NORMAL]      = { 0.4, 0.4, 0.6 }
+  bg[INSENSITIVE] = { 0.2, 0.2, 0.4 }
+  base[INSENSITIVE]={ 0.2, 0.2, 0.4 }
+  bg[ACTIVE]      = { 0.2, 0.2, 0.4 }
+  bg[PRELIGHT]    = { 0.4, 0.4, 0.6 }
+  
+  bg[SELECTED] = { 1.0, 1.0, 1.0 }
+  fg[SELECTED] = { 0.1, 0.1, 0.1 }
+}
+
 style "entry"
 {
   base[NORMAL] = { 0.4, 0.4, 0.6 }
@@ -195,6 +208,7 @@ widget_class "*GtkSpin*" style "entry"
 widget_class "*GtkEntry*" style "entry"
 widget_class "*Gtk*List*" style "entry"
 widget_class "*GtkCTree*" style "entry"
+widget_class "*GtkDrawingArea*" style "drawing"
 widget_class "*GtkNotebook*" style "notebook"
 widget "*GtkButton" style "button"
 widget "*background*" style "background"
