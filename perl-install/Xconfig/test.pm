@@ -57,7 +57,7 @@ sub test {
 	system("xauth add :9 . `mcookie`");
 	open STDERR, ">$f_err";
 	chroot $::prefix if $::prefix;
-	exec 'XFree86', '-xf86config', $f, ":9" or c::_exit(0);
+	exec 'Xorg', '-xf86config', $f, ":9" or c::_exit(0);
     }
 
     do { sleep 1 } until xtest(":9") || waitpid($pid, c::WNOHANG());

@@ -188,7 +188,7 @@ sub write {
     export_to_install_X($X);
     $raw_X->write;
     Xconfig::various::check_XF86Config_symlink();
-    symlinkf "../../usr/X11R6/bin/XFree86", "$::prefix/etc/X11/X";
+    symlinkf "../../usr/X11R6/bin/Xorg", "$::prefix/etc/X11/X";
 }
 
 

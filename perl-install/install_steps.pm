@@ -859,7 +859,7 @@ sub configureXBefore {
     my ($o) = @_;
 
     #- keep this here if the package has to be updated.
-    $o->pkg_install("XFree86");
+    $o->pkg_install("xorg-x11");
 }
 sub configureX {
     my ($o) = @_;

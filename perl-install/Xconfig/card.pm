@@ -273,17 +273,17 @@ sub configure {
 sub install_server {
     my ($card, $_options, $do_pkgs) = @_;
 
-    my $prog = "$::prefix/usr/X11R6/bin/XFree86";
+    my $prog = "$::prefix/usr/X11R6/bin/Xorg";
 
     my @packages;
-    push @packages, 'XFree86-server' if ! -x $prog;
+    push @packages, 'xorg-x11-server' if ! -x $prog;
 
     #- additional packages to install according available card.
     #- add XFree86-libs-DRI here if using DRI (future split of XFree86 TODO)
     if ($card->{use_DRI_GLX}) {
 	push @packages, 'Glide_V5' if $card->{card_name} eq 'Voodoo5 (generic)';
 	push @packages, 'Glide_V3-DRI' if member($card->{card_name}, 'Voodoo3 (generic)', 'Voodoo Banshee (generic)');
-	push @packages, 'XFree86-glide-module' if $card->{card_name} =~ /Voodoo/;
+	push @packages, 'xorg-x11-glide-module' if $card->{card_name} =~ /Voodoo/;
     }
 
     my %proprietary_Driver2 = (
