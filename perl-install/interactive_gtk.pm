@@ -48,7 +48,7 @@ sub ask_from_list_with_helpW {
 	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) || die "pixmap $! not found.";
 	$::isWizard and gtkset_usize($w->{rwindow}, 500, 400);
 	my $rc = "/etc/gtk/draknet.rc";
-	-r $rc or $rc = dirname(__FILE__) . "/draknet.rc";
+	-r $rc or $rc = common::dirname(__FILE__) . "/draknet.rc";
 	Gtk::Rc->parse($rc);
  	my $style = $w->{rwindow}->style->copy();
 	$style->bg_pixmap(0);
