@@ -520,10 +520,21 @@ sub choosePackagesTree {
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
+    my $b = pkgs::saveSelected($packages);
+    pkgs::unselectAllPackages($packages);
+    pkgs::setSelectedFromCompssList($packages, {}, $min_level, $max_size);
     my $system_size = pkgs::selectedSize($packages);
-    my $sizes = pkgs::computeGroupSize($packages, $min_level);
+    my ($sizes, $pkgs) = pkgs::computeGroupSize($packages, $min_level);
+    pkgs::restoreSelected($b);
+    log::l("system_size: $system_size");
+
+    my @groups = @{$o->{compssUsersSorted}};
+    my %stable_flags = grep_each { $::b } %{$o->{compssUsersChoice}};
+    delete $stable_flags{$_} foreach map { @{$compssUsers->{$_}{flags}} } @groups;
+
     my $compute_size = sub {
-	my %flags; @flags{@_} = ();
+	my %pkgs;
+	my %flags = %stable_flags; @flags{@_} = ();
 	my $total_size;
 	A: while (my ($k, $size) = each %$sizes) {
 	    Or: foreach (split "\t", $k) {
@@ -531,24 +542,31 @@ sub chooseGroups {
 		      exists $flags{$_} or next Or;
 		  }
 		  $total_size += $size;
+		  $pkgs{$_} = 1 foreach @{$pkgs->{$k}};
 		  next A;
 	      }
 	  }
+	log::l("computed size $total_size");
+	log::l("chooseGroups: ", join(" ", sort keys %pkgs));
+
 	int $total_size;
     };
-    my @groups = @{$o->{compssUsersSorted}};
     my %val;
     foreach (@groups) {
 	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}};
     }
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $size_text, $path);
+    my ($all, $size_text, $old_size, $path);
     my $update_size = sub { 
 	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
+
+	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
+	$old_size > $size and pkgs::unselectAllPackages($packages);
+	$old_size = $size;
 	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
     }; &$update_size;
     $o->ask_from_entries_refH('', _("Package Group Selection"), [
-#                           { val => \$size_text, type => 'label' }, {},
+                           { val => \$size_text, type => 'label' }, {},
 			   (map {; 
 				 my $old = $path;
 				 $path = $o->{compssUsers}{$_}{path};
@@ -570,7 +588,7 @@ sub chooseGroups {
 			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
 			  ], changed => $update_size) or return;
     if ($all) {
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}};
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } @groups;
     } else {
 	$o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
