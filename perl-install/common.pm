@@ -25,9 +25,16 @@ $SECTORSIZE      = 512;
 #-#####################################################################################
 
 
+sub sprintf_fixutf8 {
+    my $need_upgrade;
+    $need_upgrade |= to_bool(c::is_tagged_utf8($_)) + 1 foreach @_;
+    if ($need_upgrade == 3) { c::upgrade_utf8($_) foreach @_ };
+    sprintf shift, @_;
+}
+
 sub N {
     my $s = shift @_; my $t = translate($s);
-    sprintf $t, @_;
+    sprintf_fixutf8 $t, @_;
 }
 sub N_ { $_[0] }
 

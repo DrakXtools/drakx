@@ -520,6 +520,32 @@ iconv(s, from_charset, to_charset)
   OUTPUT:
   RETVAL
 
+int
+is_tagged_utf8(s)
+   SV *s
+   CODE:
+   RETVAL = SvUTF8(s);
+   OUTPUT:
+   RETVAL
+
+void
+set_tagged_utf8(s)
+   SV *s
+   CODE:
+   SvUTF8_on(s);
+
+void
+upgrade_utf8(s)
+   SV *s
+   CODE:
+   sv_utf8_upgrade(s);
+
+void
+unset_tagged_utf8(s)
+   SV *s
+   CODE:
+   SvUTF8_off(s);
+
 char *
 standard_charset()
   CODE:
