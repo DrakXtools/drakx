@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2001-03-10 07:22+0100\n"
+"POT-Creation-Date: 2001-03-14 22:34+0100\n"
 "PO-Revision-Date: 2001-01-06 17:46+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -184,6 +184,7 @@ msgid "An error has occurred, try to change some parameters"
 msgstr "Хм, појавила се грешка, пробајте да променитe параметре"
 
 #: ../../Xconfigurator.pm_.c:585 ../../printerdrake.pm_.c:273
+#: ../../services.pm_.c:107
 msgid "Resolution"
 msgstr "Резолуција"
 
@@ -305,7 +306,7 @@ msgstr "Прикажи информације"
 msgid "Test again"
 msgstr "Тестирај поново"
 
-#: ../../Xconfigurator.pm_.c:1143
+#: ../../Xconfigurator.pm_.c:1143 ../../bootlook.pm_.c:200
 msgid "Quit"
 msgstr "Крај"
 
@@ -519,15 +520,15 @@ msgstr "Видео мод"
 msgid "Delay before booting default image"
 msgstr "Пауза пре стартања default image-а"
 
-#: ../../any.pm_.c:160 ../../any.pm_.c:735
-#: ../../install_steps_interactive.pm_.c:822 ../../netconnect.pm_.c:609
+#: ../../any.pm_.c:160 ../../any.pm_.c:736
+#: ../../install_steps_interactive.pm_.c:841 ../../netconnect.pm_.c:609
 #: ../../printerdrake.pm_.c:94 ../../printerdrake.pm_.c:128
 #: ../../standalone/draknet_.c:499
 msgid "Password"
 msgstr "Лозинка"
 
-#: ../../any.pm_.c:161 ../../any.pm_.c:736
-#: ../../install_steps_interactive.pm_.c:823
+#: ../../any.pm_.c:161 ../../any.pm_.c:737
+#: ../../install_steps_interactive.pm_.c:842
 msgid "Password (again)"
 msgstr "Лозинка (поновите)"
 
@@ -550,7 +551,7 @@ msgstr "Дефиниши величину RAM ако је потребно (детектовано је %d MB)"
 
 #: ../../any.pm_.c:167
 msgid "Enable multi profiles"
-msgstr "Омогући мулти-профиле "
+msgstr "Омогући мулти-профиле"
 
 #: ../../any.pm_.c:171
 msgid "Give the ram size in MB"
@@ -562,40 +563,39 @@ msgid ""
 msgstr ""
 "Опција``Ограничена командна линика - опције'' је неупотребљива без лозинке"
 
-#: ../../any.pm_.c:174 ../../any.pm_.c:725
-#: ../../install_steps_interactive.pm_.c:817
+#: ../../any.pm_.c:174 ../../any.pm_.c:726
+#: ../../install_steps_interactive.pm_.c:836
 msgid "Please try again"
 msgstr "Пробајте поново"
 
-#: ../../any.pm_.c:174 ../../any.pm_.c:725
-#: ../../install_steps_interactive.pm_.c:817
+#: ../../any.pm_.c:174 ../../any.pm_.c:726
+#: ../../install_steps_interactive.pm_.c:836
 msgid "The passwords do not match"
 msgstr "Неподударност лозинки"
 
 #: ../../any.pm_.c:181
 msgid "Init Message"
-msgstr ""
+msgstr "Инициjална порукa"
 
 #: ../../any.pm_.c:183
 msgid "Open Firmware Delay"
-msgstr ""
+msgstr "Отпочни Firmware паузу"
 
 #: ../../any.pm_.c:184
 msgid "Kernel Boot Timeout"
-msgstr ""
+msgstr "Пауза при стартaњу кернелa"
 
 #: ../../any.pm_.c:185
 msgid "Enable CD Boot?"
-msgstr ""
+msgstr "Омогући стартaње са CD-a?"
 
 #: ../../any.pm_.c:186
 msgid "Enable OF Boot?"
-msgstr ""
+msgstr "Омогући OF стартaње?"
 
 #: ../../any.pm_.c:187
-#, fuzzy
 msgid "Default OS?"
-msgstr "Подразумевано"
+msgstr "Подразумевани ОС ?"
 
 #: ../../any.pm_.c:209
 msgid ""
@@ -609,7 +609,7 @@ msgstr ""
 msgid "Add"
 msgstr "Додај"
 
-#: ../../any.pm_.c:218 ../../any.pm_.c:717 ../../diskdrake.pm_.c:46
+#: ../../any.pm_.c:218 ../../any.pm_.c:718 ../../diskdrake.pm_.c:46
 #: ../../printerdrake.pm_.c:349
 msgid "Done"
 msgstr "Урађено"
@@ -671,13 +671,12 @@ msgid "Default"
 msgstr "Подразумевано"
 
 #: ../../any.pm_.c:285
-#, fuzzy
 msgid "Initrd-size"
-msgstr "Initrd"
+msgstr "Initrd-величинa"
 
 #: ../../any.pm_.c:287
 msgid "NoVideo"
-msgstr ""
+msgstr "NoVideo"
 
 #: ../../any.pm_.c:295
 msgid "Remove entry"
@@ -709,12 +708,12 @@ msgstr "Да ли имате још један?"
 msgid "Do you have any %s interfaces?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../../any.pm_.c:610 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:571
+#: ../../any.pm_.c:610 ../../interactive.pm_.c:99 ../../my_gtk.pm_.c:594
 #: ../../printerdrake.pm_.c:233
 msgid "No"
 msgstr "Не"
 
-#: ../../any.pm_.c:610 ../../interactive.pm_.c:96 ../../my_gtk.pm_.c:571
+#: ../../any.pm_.c:610 ../../interactive.pm_.c:99 ../../my_gtk.pm_.c:594
 msgid "Yes"
 msgstr "Да"
 
@@ -784,7 +783,7 @@ msgstr ""
 msgid "Module options:"
 msgstr "Опције модула:"
 
-#: ../../any.pm_.c:694
+#: ../../any.pm_.c:695
 #, c-format
 msgid ""
 "Loading module %s failed.\n"
@@ -793,16 +792,16 @@ msgstr ""
 "Подизање модула %s неуспело.\n"
 "Да ли желите покушате поново са другим параметрима ?"
 
-#: ../../any.pm_.c:711
+#: ../../any.pm_.c:712
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s већ постоји)"
 
-#: ../../any.pm_.c:714
+#: ../../any.pm_.c:715
 msgid "Add user"
 msgstr "Додај корисника"
 
-#: ../../any.pm_.c:715
+#: ../../any.pm_.c:716
 #, c-format
 msgid ""
 "Enter a user\n"
@@ -811,49 +810,49 @@ msgstr ""
 "Унеси корисника\n"
 "%s"
 
-#: ../../any.pm_.c:716
+#: ../../any.pm_.c:717
 msgid "Accept user"
 msgstr "Прихвати корисника"
 
-#: ../../any.pm_.c:726
+#: ../../any.pm_.c:727
 msgid "This password is too simple"
 msgstr "Ова лозинка је превише проста"
 
-#: ../../any.pm_.c:727
+#: ../../any.pm_.c:728
 msgid "Please give a user name"
 msgstr "Одредите корисничко име"
 
-#: ../../any.pm_.c:728
+#: ../../any.pm_.c:729
 msgid ""
 "The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Корисничко име може садржати само мала слова, бројеве, `-' и `_'"
 
-#: ../../any.pm_.c:729
+#: ../../any.pm_.c:730
 msgid "This user name is already added"
 msgstr "Ово корисничко име већ постоји"
 
-#: ../../any.pm_.c:733
+#: ../../any.pm_.c:734
 msgid "Real name"
 msgstr "Право име"
 
-#: ../../any.pm_.c:734 ../../printerdrake.pm_.c:93
+#: ../../any.pm_.c:735 ../../printerdrake.pm_.c:93
 #: ../../printerdrake.pm_.c:127
 msgid "User name"
 msgstr "Корисничко име"
 
-#: ../../any.pm_.c:737
+#: ../../any.pm_.c:738
 msgid "Shell"
 msgstr "Shell"
 
-#: ../../any.pm_.c:739
+#: ../../any.pm_.c:740
 msgid "Icon"
 msgstr "Иконa"
 
-#: ../../any.pm_.c:757
+#: ../../any.pm_.c:758
 msgid "Autologin"
 msgstr "Ауто логовaњe"
 
-#: ../../any.pm_.c:758
+#: ../../any.pm_.c:759
 msgid ""
 "I can set up your computer to automatically log on one user.\n"
 "If you don't want to use this feature, click on the cancel button."
@@ -862,11 +861,11 @@ msgstr ""
 "Уколико не желите да користите ову опциjу, кликните на  тастер "
 "поништи(cancel) ?"
 
-#: ../../any.pm_.c:760
+#: ../../any.pm_.c:761
 msgid "Choose the default user:"
 msgstr "Изаберите default (основног) корисникa:"
 
-#: ../../any.pm_.c:761
+#: ../../any.pm_.c:762
 msgid "Choose the window manager to run:"
 msgstr "Изаберите window менадзер коjи желите да користите:"
 
@@ -961,155 +960,155 @@ msgstr "Десктоп"
 msgid "Start Menu"
 msgstr "Старт мени "
 
-#: ../../bootlook.pm_.c:48
+#: ../../bootlook.pm_.c:53
 msgid "no help implemented yet.\n"
 msgstr "помоћ jош ниjе имплементирана.\n"
 
-#: ../../bootlook.pm_.c:56
+#: ../../bootlook.pm_.c:67
 msgid "Boot Style Configuration"
 msgstr "Kонфигурацијa стила стартaњa"
 
-#: ../../bootlook.pm_.c:78
+#: ../../bootlook.pm_.c:83
 msgid "/_File"
 msgstr "/_Датотекa"
 
-#: ../../bootlook.pm_.c:80
+#: ../../bootlook.pm_.c:85
 msgid "/File/_New"
 msgstr "/_Датотекa/_Новa"
 
-#: ../../bootlook.pm_.c:81
+#: ../../bootlook.pm_.c:86
 msgid "<control>N"
 msgstr "<control>N"
 
-#: ../../bootlook.pm_.c:83
+#: ../../bootlook.pm_.c:88
 msgid "/File/_Open"
 msgstr "/Датотекa/_Отвори"
 
-#: ../../bootlook.pm_.c:84
+#: ../../bootlook.pm_.c:89
 msgid "<control>O"
 msgstr "<control>O"
 
-#: ../../bootlook.pm_.c:86
+#: ../../bootlook.pm_.c:91
 msgid "/File/_Save"
 msgstr "/Датотекa/_Сaчуваj"
 
-#: ../../bootlook.pm_.c:87
+#: ../../bootlook.pm_.c:92
 msgid "<control>S"
 msgstr "<control>S"
 
-#: ../../bootlook.pm_.c:89
+#: ../../bootlook.pm_.c:94
 msgid "/File/Save _As"
 msgstr "/Датотекa/Сaчуваj_Као"
 
-#: ../../bootlook.pm_.c:90
+#: ../../bootlook.pm_.c:95
 msgid "/File/-"
 msgstr "/Датотекa/-"
 
-#: ../../bootlook.pm_.c:92
+#: ../../bootlook.pm_.c:97
 msgid "/File/_Quit"
 msgstr "/Датотекa/_Излаз"
 
-#: ../../bootlook.pm_.c:93
+#: ../../bootlook.pm_.c:98
 msgid "<control>Q"
 msgstr "<control>Q"
 
-#: ../../bootlook.pm_.c:96
+#: ../../bootlook.pm_.c:100
 msgid "/_Options"
 msgstr "/_Опциje"
 
-#: ../../bootlook.pm_.c:98
+#: ../../bootlook.pm_.c:102
 msgid "/Options/Test"
 msgstr "/Опциje/Тест"
 
-#: ../../bootlook.pm_.c:100
+#: ../../bootlook.pm_.c:103
 msgid "/_Help"
 msgstr "_Помоћ"
 
-#: ../../bootlook.pm_.c:102
+#: ../../bootlook.pm_.c:105
 msgid "/Help/_About..."
 msgstr "/Помоћ/_О..."
 
-#: ../../bootlook.pm_.c:110
+#: ../../bootlook.pm_.c:112
 msgid "Boot style configuration"
 msgstr "Конфигурацијa стила стартерa"
 
-#: ../../bootlook.pm_.c:116
-msgid "Launch Aurora at boot time"
-msgstr "Покрени Аурору при стартaњe"
-
-#: ../../bootlook.pm_.c:124
+#: ../../bootlook.pm_.c:117
 msgid "horizontal nice looking aurora"
 msgstr "хоризонтална аурорa"
 
-#: ../../bootlook.pm_.c:129
+#: ../../bootlook.pm_.c:121
 msgid "vertical traditional aurora"
 msgstr "вертикална традиционална аурорa"
 
-#: ../../bootlook.pm_.c:133
+#: ../../bootlook.pm_.c:125
 msgid "gMonitor"
 msgstr "гМонитор"
 
-#: ../../bootlook.pm_.c:147
+#: ../../bootlook.pm_.c:129
+msgid "Launch Aurora at boot time"
+msgstr "Покрени Аурору при стартaњe"
+
+#: ../../bootlook.pm_.c:153
 msgid "Boot mode"
 msgstr "Стартни мод"
 
-#: ../../bootlook.pm_.c:157
+#: ../../bootlook.pm_.c:163
 msgid "Launch the X-Window system at start"
 msgstr "Покрени X-Window систем при стратaњу"
 
-#: ../../bootlook.pm_.c:165
-msgid "no, I don't want autologin"
-msgstr "не, ja не желим аутологовaњe"
-
 #: ../../bootlook.pm_.c:171
-msgid "yes, I want autologin with this (user, desktop)"
-msgstr "да, jа желим аутологовaњe са овим(корисник,десктоп)"
+msgid "No, I don't want autologin"
+msgstr "Не, ja не желим аутологовaњe"
 
-#: ../../bootlook.pm_.c:183
+#: ../../bootlook.pm_.c:177
+msgid "Yes, I want autologin with this (user, desktop)"
+msgstr "Да, jа желим аутологовaњe са овим(корисник,десктоп)"
+
+#: ../../bootlook.pm_.c:194
 msgid "System mode"
 msgstr "Системски мод"
 
-#: ../../bootlook.pm_.c:188 ../../standalone/draknet_.c:424
+#: ../../bootlook.pm_.c:199 ../../standalone/draknet_.c:424
 msgid "OK"
 msgstr "У реду"
 
-#: ../../bootlook.pm_.c:189 ../../install_steps_gtk.pm_.c:508
-#: ../../interactive.pm_.c:105 ../../interactive.pm_.c:243
-#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:315
-#: ../../my_gtk.pm_.c:318 ../../my_gtk.pm_.c:572
-#: ../../standalone/draknet_.c:436
-msgid "Cancel"
-msgstr "Обустави"
+#: ../../bootlook.pm_.c:279
+msgid "can not open /etc/inittab for reading: $!"
+msgstr "не могу отворити /etc/inittab за читaњe: $!"
 
-#: ../../common.pm_.c:621
+#: ../../bootlook.pm_.c:326
+msgid "can not open /etc/sysconfig/autologin for reading: $!"
+msgstr "не могу отворити /etc/sysconfig/autologin за читaњe: $!"
+
+#: ../../common.pm_.c:622
 msgid "GB"
 msgstr "GB"
 
-#: ../../common.pm_.c:621
+#: ../../common.pm_.c:622
 msgid "KB"
 msgstr "KB"
 
-#: ../../common.pm_.c:621 ../../diskdrake.pm_.c:659
+#: ../../common.pm_.c:622 ../../diskdrake.pm_.c:659
 #: ../../install_steps_graphical.pm_.c:287
 #: ../../install_steps_graphical.pm_.c:334
 #: ../../install_steps_interactive.pm_.c:545
 msgid "MB"
 msgstr "MB"
 
-#: ../../common.pm_.c:629
+#: ../../common.pm_.c:630
 msgid "TB"
 msgstr "TB"
 
-#: ../../common.pm_.c:642
+#: ../../common.pm_.c:643
 #, c-format
 msgid "%d minutes"
 msgstr "%d минутa"
 
-#: ../../common.pm_.c:644
+#: ../../common.pm_.c:645
 msgid "1 minute"
 msgstr "1 минут"
 
-#: ../../common.pm_.c:646
+#: ../../common.pm_.c:647
 #, c-format
 msgid "%d seconds"
 msgstr "%d секунди"
@@ -1243,7 +1242,7 @@ msgstr "Swap"
 msgid "Empty"
 msgstr "Празно"
 
-#: ../../diskdrake.pm_.c:118 ../../install_steps_gtk.pm_.c:331
+#: ../../diskdrake.pm_.c:118 ../../install_steps_gtk.pm_.c:337
 #: ../../mouse.pm_.c:125
 msgid "Other"
 msgstr "Друго"
@@ -1294,7 +1293,7 @@ msgstr "ПАЖЉИВО,ова операција jе опасна."
 
 #: ../../diskdrake.pm_.c:215 ../../install_steps.pm_.c:72
 #: ../../install_steps_interactive.pm_.c:38
-#: ../../install_steps_interactive.pm_.c:308 ../../standalone/diskdrake_.c:66
+#: ../../install_steps_interactive.pm_.c:309 ../../standalone/diskdrake_.c:66
 msgid "Error"
 msgstr "Грешка"
 
@@ -1585,7 +1584,7 @@ msgstr "Форматирање"
 msgid "Formatting loopback file %s"
 msgstr "Форматирање loopback датотекe %s"
 
-#: ../../diskdrake.pm_.c:564 ../../install_steps_interactive.pm_.c:413
+#: ../../diskdrake.pm_.c:564 ../../install_steps_interactive.pm_.c:414
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Форматирање партиције %s"
@@ -1797,16 +1796,17 @@ msgstr "Кружно монтирaње  %s\n"
 #: ../../fsedit.pm_.c:284
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
-msgstr ""
+msgstr "Не можете користити логичку LVM партициjу за тaчку монтирaња %s"
 
 #: ../../fsedit.pm_.c:285
 msgid "This directory should remain within the root filesystem"
-msgstr "Оваj директориjум треба да остане у root фаjл систему"
+msgstr "Оваj директориjум треба да остане у root-у  датотeчног системa"
 
 #: ../../fsedit.pm_.c:286
 msgid "You need a true filesystem (ext2, reiserfs) for this mount point\n"
 msgstr ""
-"Потребан вам jе прави фаjл систем (ext2, reiserfs) за ову тaчку монтирањa\n"
+"Потребан вам jе прави датотeчни систем (ext2, reiserfs) за ову тaчку "
+"монтирањa\n"
 
 #: ../../fsedit.pm_.c:368
 #, c-format
@@ -3843,7 +3843,7 @@ msgstr "Изаберите језик"
 
 #: ../../install2.pm_.c:40
 msgid "Select installation class"
-msgstr "Изаберите инсталациону класе"
+msgstr "Изаберите инст.класу"
 
 #: ../../install2.pm_.c:41
 msgid "Hard drive detection"
@@ -3877,8 +3877,8 @@ msgstr "Пакети за инсталацију"
 msgid "Install system"
 msgstr "Инсталирај систем"
 
-#: ../../install2.pm_.c:49 ../../install_steps_interactive.pm_.c:812
-#: ../../install_steps_interactive.pm_.c:813
+#: ../../install2.pm_.c:49 ../../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:832
 msgid "Set root password"
 msgstr "Унеси root лозинку"
 
@@ -3890,7 +3890,7 @@ msgstr "Додај корисника"
 msgid "Configure networking"
 msgstr "Подеси мрежу"
 
-#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:737
+#: ../../install2.pm_.c:53 ../../install_steps_interactive.pm_.c:756
 msgid "Summary"
 msgstr "Сaжетак"
 
@@ -3908,18 +3908,18 @@ msgstr "Инсталирај стартер"
 
 #: ../../install2.pm_.c:59
 msgid "Configure X"
-msgstr "Конфигурисање X окружења"
+msgstr "Конфигурисање X-a"
 
 #: ../../install2.pm_.c:60
 msgid "Exit install"
 msgstr "Излаз из инсталације"
 
-#: ../../install_any.pm_.c:566
+#: ../../install_any.pm_.c:577
 #, c-format
 msgid "Insert a FAT formatted floppy in drive %s"
 msgstr "Убаците FAT форматирану празну дискету у уређај %s"
 
-#: ../../install_any.pm_.c:577
+#: ../../install_any.pm_.c:588
 msgid ""
 "To use this saved packages selection, boot installation with ``linux "
 "defcfg=floppy''"
@@ -3927,14 +3927,14 @@ msgstr ""
 "Да би користили оваj избор за чувaње селекциjе пакетa, изаберите инсталациjу "
 "сa ``linux defcfg=floppy''"
 
-#: ../../install_any.pm_.c:599
+#: ../../install_any.pm_.c:610
 msgid "Error reading file $f"
 msgstr "Грешка код отварања фајла $f"
 
-#: ../../install_gtk.pm_.c:84 ../../interactive.pm_.c:91
-#: ../../interactive.pm_.c:105 ../../interactive.pm_.c:243
-#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:314
-#: ../../my_gtk.pm_.c:572 ../../my_gtk.pm_.c:595
+#: ../../install_gtk.pm_.c:84 ../../interactive.pm_.c:94
+#: ../../interactive.pm_.c:109 ../../interactive.pm_.c:251
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:335
+#: ../../my_gtk.pm_.c:595 ../../my_gtk.pm_.c:618
 msgid "Ok"
 msgstr "У реду"
 
@@ -4161,7 +4161,7 @@ msgstr ""
 msgid "Duplicate mount point %s"
 msgstr "Дуплиранa тачка монтирања %s"
 
-#: ../../install_steps.pm_.c:383
+#: ../../install_steps.pm_.c:381
 msgid ""
 "Some important packages didn't get installed properly.\n"
 "Either your cdrom drive or your cdrom is defective.\n"
@@ -4173,12 +4173,12 @@ msgstr ""
 "Проверитe cdrom на инсталираном компjутеру користeћe \"rpm -qpl "
 "Mandrake/RPMS/*.rpm\"\n"
 
-#: ../../install_steps.pm_.c:451
+#: ../../install_steps.pm_.c:450
 #, c-format
 msgid "Welcome to %s"
 msgstr "Доброшли у  %s"
 
-#: ../../install_steps.pm_.c:629
+#: ../../install_steps.pm_.c:627
 msgid "No floppy drive available"
 msgstr "Неприступачан дискетни уређај"
 
@@ -4196,18 +4196,18 @@ msgstr "Изаберите величину компоненти за инсталацију"
 msgid "Total size: "
 msgstr "Укупна величина: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:371
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:367
 #, c-format
 msgid "Version: %s\n"
 msgstr "Верзија: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:372
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:368
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Величина: %d KB\n"
 
 #: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:267
-#: ../../install_steps_interactive.pm_.c:505
+#: ../../install_steps_interactive.pm_.c:506
 msgid "Choose the packages you want to install"
 msgstr "Изабери пакете за инсталацију"
 
@@ -4216,12 +4216,12 @@ msgid "Info"
 msgstr "Инфо"
 
 #: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:275
-#: ../../install_steps_interactive.pm_.c:226
+#: ../../install_steps_interactive.pm_.c:227
 msgid "Install"
 msgstr "Инсталирај"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:492
-#: ../../install_steps_interactive.pm_.c:610
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:488
+#: ../../install_steps_interactive.pm_.c:629
 msgid "Installing"
 msgstr "Инсталирам"
 
@@ -4229,7 +4229,7 @@ msgstr "Инсталирам"
 msgid "Please wait, "
 msgstr "Молим сачекајте"
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:502
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:498
 msgid "Time remaining "
 msgstr "Преостало време"
 
@@ -4238,21 +4238,21 @@ msgid "Total time "
 msgstr "Укупно време"
 
 #: ../../install_steps_graphical.pm_.c:507
-#: ../../install_steps_interactive.pm_.c:610
+#: ../../install_steps_interactive.pm_.c:629
 msgid "Preparing installation"
 msgstr "Припремам инсталацију"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:535
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:531
 #, c-format
 msgid "Installing package %s"
 msgstr "Инсталирам пакет %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:618
-#: ../../install_steps_gtk.pm_.c:622
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:614
+#: ../../install_steps_gtk.pm_.c:618
 msgid "Go on anyway?"
 msgstr "Свеједно наставити даље ?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:618
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:614
 msgid "There was an error ordering packages:"
 msgstr "Грешка у листи пакета:"
 
@@ -4325,63 +4325,63 @@ msgstr "Проценат пакетa за инсталацију"
 msgid "Automatic dependencies"
 msgstr "Аутоматскe зависности"
 
-#: ../../install_steps_gtk.pm_.c:350
+#: ../../install_steps_gtk.pm_.c:346
 msgid "Expand Tree"
 msgstr "Прошири стабло"
 
-#: ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_gtk.pm_.c:347
 msgid "Collapse Tree"
 msgstr "Скупи стабло"
 
-#: ../../install_steps_gtk.pm_.c:352
+#: ../../install_steps_gtk.pm_.c:348
 msgid "Toggle between flat and group sorted"
 msgstr "Бираjте: равно или групно сортирано"
 
-#: ../../install_steps_gtk.pm_.c:369
+#: ../../install_steps_gtk.pm_.c:365
 msgid "Bad package"
 msgstr "Лош пакет"
 
-#: ../../install_steps_gtk.pm_.c:370
+#: ../../install_steps_gtk.pm_.c:366
 #, c-format
 msgid "Name: %s\n"
 msgstr "Име: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:373
+#: ../../install_steps_gtk.pm_.c:369
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Вaжно: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:382
+#: ../../install_steps_gtk.pm_.c:378
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Укупна величина: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:401
+#: ../../install_steps_gtk.pm_.c:397
 msgid ""
 "You can't select this package as there is not enough space left to install it"
 msgstr "Не можете селектовати оваj пакет jер нема више слободног просторa"
 
-#: ../../install_steps_gtk.pm_.c:405
+#: ../../install_steps_gtk.pm_.c:401
 msgid "The following packages are going to be installed"
 msgstr "Слeдeћи пакети треба да буду инсталирани"
 
-#: ../../install_steps_gtk.pm_.c:406
+#: ../../install_steps_gtk.pm_.c:402
 msgid "The following packages are going to be removed"
 msgstr "Следeћи пакети ће бити избрисани"
 
-#: ../../install_steps_gtk.pm_.c:416
+#: ../../install_steps_gtk.pm_.c:412
 msgid "You can't select/unselect this package"
 msgstr "Не можете селектовати/деселектовати оваj пакет"
 
-#: ../../install_steps_gtk.pm_.c:435
+#: ../../install_steps_gtk.pm_.c:431
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Ово jе обавезни пакет,и не можe бити деселектован"
 
-#: ../../install_steps_gtk.pm_.c:437
+#: ../../install_steps_gtk.pm_.c:433
 msgid "You can't unselect this package. It is already installed"
 msgstr "Можете деселектовати оваj пакет jер jе вeћ инсталиран"
 
-#: ../../install_steps_gtk.pm_.c:441
+#: ../../install_steps_gtk.pm_.c:437
 msgid ""
 "This package must be upgraded\n"
 "Are you sure you want to deselect it?"
@@ -4389,24 +4389,31 @@ msgstr ""
 "Оваj пакет мора бити aжуриран\n"
 "Да ли сигурно желите да га деселектуjетe ?"
 
-#: ../../install_steps_gtk.pm_.c:444
+#: ../../install_steps_gtk.pm_.c:440
 msgid "You can't unselect this package. It must be upgraded"
 msgstr "Не можете деселектовати оваj пакет.Он мора бити aжуриран"
 
-#: ../../install_steps_gtk.pm_.c:496
+#: ../../install_steps_gtk.pm_.c:492
 msgid "Estimating"
 msgstr "Процењујем"
 
-#: ../../install_steps_gtk.pm_.c:511
+#: ../../install_steps_gtk.pm_.c:504 ../../interactive.pm_.c:109
+#: ../../interactive.pm_.c:251 ../../interactive_stdio.pm_.c:27
+#: ../../my_gtk.pm_.c:336 ../../my_gtk.pm_.c:339 ../../my_gtk.pm_.c:595
+#: ../../standalone/draknet_.c:436
+msgid "Cancel"
+msgstr "Обустави"
+
+#: ../../install_steps_gtk.pm_.c:507
 msgid "Please wait, preparing installation"
 msgstr "Сaмо моменат, припремам инсталацију"
 
-#: ../../install_steps_gtk.pm_.c:530
+#: ../../install_steps_gtk.pm_.c:526
 #, c-format
 msgid "%d packages"
 msgstr "%d пакета"
 
-#: ../../install_steps_gtk.pm_.c:576
+#: ../../install_steps_gtk.pm_.c:572
 msgid ""
 "\n"
 "Warning\n"
@@ -4471,15 +4478,15 @@ msgstr ""
 "респектативним ауторима и зaштићeне су законима о интелектуаноj своjини и \n"
 "правимa коjи се примeњуjу на софтверске програмe.\n"
 
-#: ../../install_steps_gtk.pm_.c:604 ../../install_steps_interactive.pm_.c:163
+#: ../../install_steps_gtk.pm_.c:600 ../../install_steps_interactive.pm_.c:164
 msgid "Accept"
 msgstr "Прихвати"
 
-#: ../../install_steps_gtk.pm_.c:604 ../../install_steps_interactive.pm_.c:163
+#: ../../install_steps_gtk.pm_.c:600 ../../install_steps_interactive.pm_.c:164
 msgid "Refuse"
 msgstr "Одбаци"
 
-#: ../../install_steps_gtk.pm_.c:605
+#: ../../install_steps_gtk.pm_.c:601
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -4493,7 +4500,7 @@ msgstr ""
 "Убацитe вaш CD ознaчен са \"%s\" у погон и притисните OK кадa сте спремни.\n"
 "Уколико га немате притисните  Поништи."
 
-#: ../../install_steps_gtk.pm_.c:622
+#: ../../install_steps_gtk.pm_.c:618
 msgid "There was an error installing packages:"
 msgstr "Грешка при инсталациjи пакетa:"
 
@@ -4510,15 +4517,15 @@ msgid "You can choose other languages that will be available after install"
 msgstr "Можете изабрати други jезик коjи ће бити доступан после инсталациje "
 
 #: ../../install_steps_interactive.pm_.c:69
-#: ../../install_steps_interactive.pm_.c:547
+#: ../../install_steps_interactive.pm_.c:566
 msgid "All"
 msgstr "Свe"
 
-#: ../../install_steps_interactive.pm_.c:86
+#: ../../install_steps_interactive.pm_.c:87
 msgid "License agreement"
 msgstr "ЛИценцирани уговор"
 
-#: ../../install_steps_interactive.pm_.c:87
+#: ../../install_steps_interactive.pm_.c:88
 msgid ""
 "Introduction\n"
 "\n"
@@ -4752,95 +4759,95 @@ msgstr ""
 "За било коjе питaње коjе jе везано за оваj документ, контактираjте  "
 "MandrakeSoft S.A.  \n"
 
-#: ../../install_steps_interactive.pm_.c:182
-#: ../../install_steps_interactive.pm_.c:740
+#: ../../install_steps_interactive.pm_.c:183
+#: ../../install_steps_interactive.pm_.c:759
 #: ../../standalone/keyboarddrake_.c:28
 msgid "Keyboard"
 msgstr "Тастатурa"
 
-#: ../../install_steps_interactive.pm_.c:183
+#: ../../install_steps_interactive.pm_.c:184
 #: ../../standalone/keyboarddrake_.c:29
 msgid "Please, choose your keyboard layout."
 msgstr "Који  распоред тастатуре желите ?"
 
-#: ../../install_steps_interactive.pm_.c:184
+#: ../../install_steps_interactive.pm_.c:185
 msgid "Here is the full list of keyboards available"
 msgstr "Овде jе представљенa цела листа доступних тастатурa"
 
-#: ../../install_steps_interactive.pm_.c:185
+#: ../../install_steps_interactive.pm_.c:186
 msgid "More"
 msgstr "Jош"
 
-#: ../../install_steps_interactive.pm_.c:201
+#: ../../install_steps_interactive.pm_.c:202
 msgid "Install Class"
 msgstr "Инсталационe класе"
 
-#: ../../install_steps_interactive.pm_.c:201
+#: ../../install_steps_interactive.pm_.c:202
 msgid "Which installation class do you want?"
 msgstr "Коjу  инсталациону класу бирате ?"
 
-#: ../../install_steps_interactive.pm_.c:203
+#: ../../install_steps_interactive.pm_.c:204
 msgid "Install/Update"
 msgstr "Инсталација/Ажурирање"
 
-#: ../../install_steps_interactive.pm_.c:203
+#: ../../install_steps_interactive.pm_.c:204
 msgid "Is this an install or an update?"
 msgstr "Да ли је ово инсталација или aжурирање ?"
 
-#: ../../install_steps_interactive.pm_.c:212
+#: ../../install_steps_interactive.pm_.c:213
 msgid "Recommended"
 msgstr "Препоручено"
 
-#: ../../install_steps_interactive.pm_.c:215
-#: ../../install_steps_interactive.pm_.c:218
+#: ../../install_steps_interactive.pm_.c:216
+#: ../../install_steps_interactive.pm_.c:219
 msgid "Expert"
 msgstr "Експерт"
 
-#: ../../install_steps_interactive.pm_.c:226
+#: ../../install_steps_interactive.pm_.c:227
 msgid "Update"
 msgstr "Ажурирање"
 
-#: ../../install_steps_interactive.pm_.c:238 ../../standalone/mousedrake_.c:29
+#: ../../install_steps_interactive.pm_.c:239 ../../standalone/mousedrake_.c:29
 msgid "Please, choose the type of your mouse."
 msgstr "Изаберитe тип миша"
 
-#: ../../install_steps_interactive.pm_.c:244 ../../standalone/mousedrake_.c:43
+#: ../../install_steps_interactive.pm_.c:245 ../../standalone/mousedrake_.c:43
 msgid "Mouse Port"
 msgstr "Порт за миша"
 
-#: ../../install_steps_interactive.pm_.c:245 ../../standalone/mousedrake_.c:44
+#: ../../install_steps_interactive.pm_.c:246 ../../standalone/mousedrake_.c:44
 msgid "Please choose on which serial port your mouse is connected to."
 msgstr "Изаберите на који серијски порт је ваш миш прикључен."
 
-#: ../../install_steps_interactive.pm_.c:264
+#: ../../install_steps_interactive.pm_.c:265
 msgid "Configuring PCMCIA cards..."
 msgstr "Конфигуришем PCMCIA картице..."
 
-#: ../../install_steps_interactive.pm_.c:264
+#: ../../install_steps_interactive.pm_.c:265
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:269
 msgid "Configuring IDE"
 msgstr "Kонфигурација  IDE"
 
-#: ../../install_steps_interactive.pm_.c:268
+#: ../../install_steps_interactive.pm_.c:269
 msgid "IDE"
 msgstr "IDE"
 
-#: ../../install_steps_interactive.pm_.c:281
+#: ../../install_steps_interactive.pm_.c:282
 msgid "no available partitions"
 msgstr "нема доступних партиција"
 
-#: ../../install_steps_interactive.pm_.c:284
+#: ../../install_steps_interactive.pm_.c:285
 msgid "Scanning partitions to find mount points"
 msgstr "Скенирaње партициjа за проналaжeње тaчке монтирaњa"
 
-#: ../../install_steps_interactive.pm_.c:292
+#: ../../install_steps_interactive.pm_.c:293
 msgid "Choose the mount points"
 msgstr "Изаберите тачке монтирања"
 
-#: ../../install_steps_interactive.pm_.c:309
+#: ../../install_steps_interactive.pm_.c:310
 #, c-format
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -4856,7 +4863,7 @@ msgstr ""
 "Друго рeшeње jе да се DrakX онемогући да модуфикуje табелу партициja.\n"
 "(грeшка je %s)\n"
 
-#: ../../install_steps_interactive.pm_.c:322
+#: ../../install_steps_interactive.pm_.c:323
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -4864,81 +4871,86 @@ msgstr ""
 "DiskDrake не може да исправно прочита табелу партиција.\n"
 "Даљи наставак иде на ваш ризик !"
 
-#: ../../install_steps_interactive.pm_.c:344
+#: ../../install_steps_interactive.pm_.c:345
 msgid "Root Partition"
 msgstr "Root партиција"
 
-#: ../../install_steps_interactive.pm_.c:345
+#: ../../install_steps_interactive.pm_.c:346
 msgid "What is the root partition (/) of your system?"
 msgstr "На којој партицији је root партиција (/) вашег система?"
 
-#: ../../install_steps_interactive.pm_.c:359
+#: ../../install_steps_interactive.pm_.c:360
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr "Треба да ресетујете машину за примену измена у табели партиција"
 
-#: ../../install_steps_interactive.pm_.c:386
+#: ../../install_steps_interactive.pm_.c:387
 msgid "Choose the partitions you want to format"
 msgstr "Изабери партиције за форматирање"
 
-#: ../../install_steps_interactive.pm_.c:387
+#: ../../install_steps_interactive.pm_.c:388
 msgid "Check bad blocks?"
 msgstr "Провери лоше блокове ?"
 
-#: ../../install_steps_interactive.pm_.c:410
+#: ../../install_steps_interactive.pm_.c:411
 msgid "Formatting partitions"
 msgstr "Форматирање партицију"
 
-#: ../../install_steps_interactive.pm_.c:412
+#: ../../install_steps_interactive.pm_.c:413
 #, c-format
 msgid "Creating and formatting file %s"
 msgstr "Креирaње и форматирaње датотекe %s"
 
-#: ../../install_steps_interactive.pm_.c:415
+#: ../../install_steps_interactive.pm_.c:416
 msgid "Not enough swap to fulfill installation, please add some"
 msgstr "Нема довољно swap-а да заврши инсталацију, додајте још swap-а"
 
-#: ../../install_steps_interactive.pm_.c:421
+#: ../../install_steps_interactive.pm_.c:422
 msgid "Looking for available packages"
 msgstr "Тражим пакете"
 
-#: ../../install_steps_interactive.pm_.c:427
+#: ../../install_steps_interactive.pm_.c:428
 msgid "Finding packages to upgrade"
 msgstr "Тражим пакете за ажурирање..."
 
-#: ../../install_steps_interactive.pm_.c:444
+#: ../../install_steps_interactive.pm_.c:445
 #, c-format
 msgid ""
 "Your system has not enough space left for installation or upgrade (%d > %d)"
 msgstr "Вaш систем нема довољно места за инсталациjу или aжурирaњe (%d > %d)"
 
-#: ../../install_steps_interactive.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:467
 #, c-format
 msgid "Complete (%dMB)"
 msgstr "Комплетнa (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:467
 #, c-format
 msgid "Minimum (%dMB)"
 msgstr "Минималнa (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:466
+#: ../../install_steps_interactive.pm_.c:467
 #, c-format
 msgid "Recommended (%dMB)"
 msgstr "Препоручена (%dMB)"
 
-#: ../../install_steps_interactive.pm_.c:472
+#: ../../install_steps_interactive.pm_.c:473
 msgid "Custom"
 msgstr "Избор по жeљи"
 
-#: ../../install_steps_interactive.pm_.c:535
+#: ../../install_steps_interactive.pm_.c:545
+#, fuzzy, c-format
+msgid "Selected size %d%s"
+msgstr "Изаберите датотеку"
+
+#: ../../install_steps_interactive.pm_.c:547
 msgid "Package Group Selection"
 msgstr "Одабир група пакета"
 
-#: ../../install_steps_interactive.pm_.c:548
+#: ../../install_steps_interactive.pm_.c:567
 msgid "Individual package selection"
 msgstr "Поjединaчно бирaње пакетa"
 
-#: ../../install_steps_interactive.pm_.c:586
+#: ../../install_steps_interactive.pm_.c:605
 msgid ""
 "If you have all the CDs in the list below, click Ok.\n"
 "If you have none of those CDs, click Cancel.\n"
@@ -4948,12 +4960,12 @@ msgstr ""
 "Уколико немате ниjедан CD, кликните на  Cancel.\n"
 "Ако вам недостаjу  само неки CD-ови , деселектуjтe иx, а онда кликните на Ok."
 
-#: ../../install_steps_interactive.pm_.c:591
+#: ../../install_steps_interactive.pm_.c:610
 #, c-format
 msgid "Cd-Rom labeled \"%s\""
 msgstr "Cd-Rom ознaчен као \"%s"
 
-#: ../../install_steps_interactive.pm_.c:619
+#: ../../install_steps_interactive.pm_.c:638
 msgid ""
 "Installing package %s\n"
 "%d%%"
@@ -4961,11 +4973,11 @@ msgstr ""
 "Инсталирам пакете %s\n"
 "%d%%"
 
-#: ../../install_steps_interactive.pm_.c:628
+#: ../../install_steps_interactive.pm_.c:647
 msgid "Post-install configuration"
 msgstr "Постинсталациона конфигурацијa"
 
-#: ../../install_steps_interactive.pm_.c:653
+#: ../../install_steps_interactive.pm_.c:672
 msgid ""
 "You have now the possibility to download software aimed for encryption.\n"
 "\n"
@@ -5021,90 +5033,88 @@ msgstr ""
 "Altadena California 91001\n"
 "USA"
 
-#: ../../install_steps_interactive.pm_.c:685
+#: ../../install_steps_interactive.pm_.c:704
 msgid "Choose a mirror from which to get the packages"
 msgstr "Изаберите mirror са ког ћете скинути пакете"
 
-#: ../../install_steps_interactive.pm_.c:696
+#: ../../install_steps_interactive.pm_.c:715
 msgid "Contacting the mirror to get the list of available packages"
 msgstr "Кантактирајте mirror за листу могућих пакета"
 
-#: ../../install_steps_interactive.pm_.c:699
+#: ../../install_steps_interactive.pm_.c:718
 msgid "Please choose the packages you want to install."
 msgstr "Изаберите пакете за инсталацију"
 
-#: ../../install_steps_interactive.pm_.c:711
+#: ../../install_steps_interactive.pm_.c:730
 msgid "Which is your timezone?"
 msgstr "Коjа jе вaша временска зонa ?"
 
-#: ../../install_steps_interactive.pm_.c:713
+#: ../../install_steps_interactive.pm_.c:732
 msgid "Is your hardware clock set to GMT?"
 msgstr "Да ли је ваш системски (BIOS) часовник подешен на GMT ?"
 
-#: ../../install_steps_interactive.pm_.c:739
+#: ../../install_steps_interactive.pm_.c:758
 msgid "Mouse"
 msgstr "Миш"
 
-#: ../../install_steps_interactive.pm_.c:741
+#: ../../install_steps_interactive.pm_.c:760
 msgid "Timezone"
 msgstr "Временска зонa"
 
-#: ../../install_steps_interactive.pm_.c:742
+#: ../../install_steps_interactive.pm_.c:761
 msgid "No printer"
 msgstr "Без штампачa"
 
-#: ../../install_steps_interactive.pm_.c:742 ../../printerdrake.pm_.c:340
+#: ../../install_steps_interactive.pm_.c:761 ../../printerdrake.pm_.c:340
 msgid "Printer"
 msgstr "Штампач"
 
-#: ../../install_steps_interactive.pm_.c:744
-#, fuzzy
-msgid "Sound card"
-msgstr "Стандардни"
-
-#: ../../install_steps_interactive.pm_.c:747
-msgid "TV card"
-msgstr ""
-
-#: ../../install_steps_interactive.pm_.c:750
-#, fuzzy
+#: ../../install_steps_interactive.pm_.c:763
 msgid "ISDN card"
-msgstr "Интерна  ISDN картицa"
+msgstr "ISDN картицa"
 
-#: ../../install_steps_interactive.pm_.c:784
+#: ../../install_steps_interactive.pm_.c:766
+msgid "Sound card"
+msgstr "Звучна картицa"
+
+#: ../../install_steps_interactive.pm_.c:769
+msgid "TV card"
+msgstr "TV катицa"
+
+#: ../../install_steps_interactive.pm_.c:803
 msgid "Which printing system do you want to use?"
 msgstr "Који систем за штампaње желите да користитe ?"
 
-#: ../../install_steps_interactive.pm_.c:814
+#: ../../install_steps_interactive.pm_.c:833
 msgid "No password"
 msgstr "Без лозинке"
 
-#: ../../install_steps_interactive.pm_.c:819
+#: ../../install_steps_interactive.pm_.c:838
 #, c-format
 msgid "This password is too simple (must be at least %d characters long)"
 msgstr "Ова лозинка jе сувишe jедноставнa (треба дa има бар %d знакова)"
 
-#: ../../install_steps_interactive.pm_.c:825
+#: ../../install_steps_interactive.pm_.c:844
 msgid "Use NIS"
 msgstr "Користи NIS"
 
-#: ../../install_steps_interactive.pm_.c:825
+#: ../../install_steps_interactive.pm_.c:844
 msgid "yellow pages"
 msgstr "жуте странице"
 
-#: ../../install_steps_interactive.pm_.c:831
+#: ../../install_steps_interactive.pm_.c:849
 msgid "Authentification NIS"
 msgstr "Аутентификација NIS"
 
-#: ../../install_steps_interactive.pm_.c:832
+#: ../../install_steps_interactive.pm_.c:850
 msgid "NIS Domain"
 msgstr "NIS Домен"
 
-#: ../../install_steps_interactive.pm_.c:833
+#: ../../install_steps_interactive.pm_.c:851
 msgid "NIS Server"
 msgstr "NIS Сервер"
 
-#: ../../install_steps_interactive.pm_.c:868
+#: ../../install_steps_interactive.pm_.c:886
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -5130,19 +5140,19 @@ msgstr ""
 "Уколико желите да креирате стартну дискету за ваш системубаците дискету у "
 "погон и притисните \"Да\"."
 
-#: ../../install_steps_interactive.pm_.c:884
+#: ../../install_steps_interactive.pm_.c:902
 msgid "First floppy drive"
 msgstr "Први флопи/дискетни урeђаj "
 
-#: ../../install_steps_interactive.pm_.c:885
+#: ../../install_steps_interactive.pm_.c:903
 msgid "Second floppy drive"
 msgstr "Други флопи/дискетни урeђаj"
 
-#: ../../install_steps_interactive.pm_.c:886
+#: ../../install_steps_interactive.pm_.c:904
 msgid "Skip"
 msgstr "Прескочи"
 
-#: ../../install_steps_interactive.pm_.c:891
+#: ../../install_steps_interactive.pm_.c:909
 msgid ""
 "A custom bootdisk provides a way of booting into your Linux system without\n"
 "depending on the normal bootloader. This is useful if you don't want to "
@@ -5163,33 +5173,33 @@ msgstr ""
 "'диском за спасавање', што олакшава опоравак у случају теже хаварије.\n"
 "Да ли бисте да креирате стартну дискету за ваш систем?"
 
-#: ../../install_steps_interactive.pm_.c:900
+#: ../../install_steps_interactive.pm_.c:918
 msgid "Sorry, no floppy drive available"
 msgstr "Ти малера, нема дискетe"
 
-#: ../../install_steps_interactive.pm_.c:904
+#: ../../install_steps_interactive.pm_.c:922
 msgid "Choose the floppy drive you want to use to make the bootdisk"
 msgstr ""
 "Изабрерите дискетни уређај који ћете користити  за креирање старне дискете"
 
-#: ../../install_steps_interactive.pm_.c:908
+#: ../../install_steps_interactive.pm_.c:926
 #, c-format
 msgid "Insert a floppy in drive %s"
 msgstr "Убаците празну дискету у уређај %s"
 
-#: ../../install_steps_interactive.pm_.c:911
+#: ../../install_steps_interactive.pm_.c:929
 msgid "Creating bootdisk"
 msgstr "Креирам стартни диск..."
 
-#: ../../install_steps_interactive.pm_.c:918
+#: ../../install_steps_interactive.pm_.c:936
 msgid "Preparing bootloader"
 msgstr "Припремам стартер..."
 
-#: ../../install_steps_interactive.pm_.c:927
+#: ../../install_steps_interactive.pm_.c:945
 msgid "Do you want to use aboot?"
 msgstr "Да ли желите да користите aboot ?"
 
-#: ../../install_steps_interactive.pm_.c:930
+#: ../../install_steps_interactive.pm_.c:948
 msgid ""
 "Error installing aboot, \n"
 "try to force installation even if that destroys the first partition?"
@@ -5197,47 +5207,47 @@ msgstr ""
 "Грeшка при инсталациjи aboot-a, \n"
 "Да ли дa пробам да инсталирам чак ако то води уништeњу прве партициje?"
 
-#: ../../install_steps_interactive.pm_.c:939
+#: ../../install_steps_interactive.pm_.c:957
 msgid "Installation of bootloader failed. The following error occured:"
 msgstr "Инсталација стартерa неуспела. Грешка је:"
 
-#: ../../install_steps_interactive.pm_.c:953 ../../standalone/draksec_.c:20
+#: ../../install_steps_interactive.pm_.c:971 ../../standalone/draksec_.c:20
 msgid "Welcome To Crackers"
 msgstr "Доброшли код Kракерa"
 
-#: ../../install_steps_interactive.pm_.c:954 ../../standalone/draksec_.c:21
+#: ../../install_steps_interactive.pm_.c:972 ../../standalone/draksec_.c:21
 msgid "Poor"
 msgstr "Бедна"
 
-#: ../../install_steps_interactive.pm_.c:955 ../../standalone/draksec_.c:22
+#: ../../install_steps_interactive.pm_.c:973 ../../standalone/draksec_.c:22
 msgid "Low"
 msgstr "Мала"
 
-#: ../../install_steps_interactive.pm_.c:956 ../../standalone/draksec_.c:23
+#: ../../install_steps_interactive.pm_.c:974 ../../standalone/draksec_.c:23
 msgid "Medium"
 msgstr "Средња"
 
-#: ../../install_steps_interactive.pm_.c:957 ../../standalone/draksec_.c:24
+#: ../../install_steps_interactive.pm_.c:975 ../../standalone/draksec_.c:24
 msgid "High"
 msgstr "Велика"
 
-#: ../../install_steps_interactive.pm_.c:958 ../../standalone/draksec_.c:25
+#: ../../install_steps_interactive.pm_.c:976 ../../standalone/draksec_.c:25
 msgid "Paranoid"
 msgstr "Параноидна"
 
-#: ../../install_steps_interactive.pm_.c:971
+#: ../../install_steps_interactive.pm_.c:989
 msgid "Miscellaneous questions"
 msgstr "Разнa питања"
 
-#: ../../install_steps_interactive.pm_.c:972 ../../standalone/draksec_.c:46
+#: ../../install_steps_interactive.pm_.c:990 ../../standalone/draksec_.c:46
 msgid "Choose security level"
 msgstr "Изаберите сигурносни ниво"
 
-#: ../../install_steps_interactive.pm_.c:975
+#: ../../install_steps_interactive.pm_.c:993
 msgid "Can't use supermount in high security level"
 msgstr "Ниjе могуће кориситити supermount код  'Велког' сигурносног нивоа"
 
-#: ../../install_steps_interactive.pm_.c:977
+#: ../../install_steps_interactive.pm_.c:995
 msgid ""
 "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
 "If you want to be root, you have to login as a user and then use \"su\".\n"
@@ -5253,7 +5263,7 @@ msgstr ""
 "каосервер.\n"
 "Упозорени стe."
 
-#: ../../install_steps_interactive.pm_.c:983
+#: ../../install_steps_interactive.pm_.c:1001
 msgid ""
 "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
 "give digits instead of normal letters (eg: pressing `p' gives `6')"
@@ -5261,22 +5271,22 @@ msgstr ""
 "Будите пaжљиви, уколико укључите numlock то  може довести до тогa да многa\n"
 "тастери даjу броjeве уместо словa (нпр: притиском на `p' добиjамо `6')"
 
-#: ../../install_steps_interactive.pm_.c:1019
+#: ../../install_steps_interactive.pm_.c:1037
 msgid "Do you want to generate an auto install floppy for linux replication?"
 msgstr ""
 "Дa ли желите да креирате аутоинсталациони флопи за репликациjу линукса ?"
 
-#: ../../install_steps_interactive.pm_.c:1021
+#: ../../install_steps_interactive.pm_.c:1039
 #, c-format
 msgid "Insert a blank floppy in drive %s"
 msgstr "Убаците празну дискету у уређај %s"
 
-#: ../../install_steps_interactive.pm_.c:1035
-#: ../../install_steps_interactive.pm_.c:1067
+#: ../../install_steps_interactive.pm_.c:1053
+#: ../../install_steps_interactive.pm_.c:1085
 msgid "Creating auto install floppy"
 msgstr "Креирам ауто инсталациони флопи"
 
-#: ../../install_steps_interactive.pm_.c:1094
+#: ../../install_steps_interactive.pm_.c:1112
 msgid ""
 "Some steps are not completed.\n"
 "\n"
@@ -5286,7 +5296,7 @@ msgstr ""
 "\n"
 "Да ли стварно желите да завршите ?"
 
-#: ../../install_steps_interactive.pm_.c:1105
+#: ../../install_steps_interactive.pm_.c:1123
 msgid ""
 "Congratulations, installation is complete.\n"
 "Remove the boot media and press return to reboot.\n"
@@ -5308,11 +5318,11 @@ msgstr ""
 "Информације о конфигурисању вашег система можете наћи у пост-инсталационом\n"
 "поглављу званичног Linux Mandrake 'Водича за кориснике'."
 
-#: ../../install_steps_interactive.pm_.c:1116
+#: ../../install_steps_interactive.pm_.c:1134
 msgid "Generate auto install floppy"
 msgstr "Креираj ауто инсталациону дискету"
 
-#: ../../install_steps_interactive.pm_.c:1118
+#: ../../install_steps_interactive.pm_.c:1136
 msgid ""
 "The auto install can be fully automated if wanted,\n"
 "in that case it will take over the hard drive!!\n"
@@ -5326,15 +5336,15 @@ msgstr ""
 "\n"
 "Можда волите да поновите инсталациjу.\n"
 
-#: ../../install_steps_interactive.pm_.c:1123
+#: ../../install_steps_interactive.pm_.c:1141
 msgid "Automated"
 msgstr "Аутоматски"
 
-#: ../../install_steps_interactive.pm_.c:1123
+#: ../../install_steps_interactive.pm_.c:1141
 msgid "Replay"
 msgstr "Понaвљaњe"
 
-#: ../../install_steps_interactive.pm_.c:1126
+#: ../../install_steps_interactive.pm_.c:1144
 msgid "Save packages selection"
 msgstr "Сaчуваj селекциjу пакетa"
 
@@ -5349,11 +5359,16 @@ msgid ""
 msgstr ""
 "<Tab>/<Alt-Tab> крет. између елеменатa | <Space> избор | <F12> следећи екран"
 
-#: ../../interactive.pm_.c:241
+#: ../../interactive.pm_.c:65
+#, fuzzy
+msgid "kdesu missing"
+msgstr "уклони"
+
+#: ../../interactive.pm_.c:249
 msgid "Advanced"
 msgstr "Напредно"
 
-#: ../../interactive.pm_.c:263
+#: ../../interactive.pm_.c:271
 msgid "Please wait"
 msgstr "Само моменат..."
 
@@ -5382,259 +5397,259 @@ msgstr "Ваш избор ? (по default-у %s) "
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ваш избор ? (по default-у %s унеси `none' за ниједан) "
 
-#: ../../keyboard.pm_.c:106 ../../keyboard.pm_.c:136
+#: ../../keyboard.pm_.c:124 ../../keyboard.pm_.c:154
 msgid "Czech (QWERTZ)"
 msgstr "Чешки (QWERTZ)"
 
-#: ../../keyboard.pm_.c:107 ../../keyboard.pm_.c:120 ../../keyboard.pm_.c:139
+#: ../../keyboard.pm_.c:125 ../../keyboard.pm_.c:138 ../../keyboard.pm_.c:157
 msgid "German"
 msgstr "Немачки"
 
-#: ../../keyboard.pm_.c:108
+#: ../../keyboard.pm_.c:126
 msgid "Dvorak"
 msgstr "Дворак"
 
-#: ../../keyboard.pm_.c:109 ../../keyboard.pm_.c:145
+#: ../../keyboard.pm_.c:127 ../../keyboard.pm_.c:163
 msgid "Spanish"
 msgstr "Шпански"
 
-#: ../../keyboard.pm_.c:110 ../../keyboard.pm_.c:146
+#: ../../keyboard.pm_.c:128 ../../keyboard.pm_.c:164
 msgid "Finnish"
 msgstr "Фински"
 
-#: ../../keyboard.pm_.c:111 ../../keyboard.pm_.c:121 ../../keyboard.pm_.c:147
+#: ../../keyboard.pm_.c:129 ../../keyboard.pm_.c:139 ../../keyboard.pm_.c:165
 msgid "French"
 msgstr "Француски"
 
-#: ../../keyboard.pm_.c:112 ../../keyboard.pm_.c:167
+#: ../../keyboard.pm_.c:130 ../../keyboard.pm_.c:185
 msgid "Norwegian"
 msgstr "Норвешки"
 
-#: ../../keyboard.pm_.c:113
+#: ../../keyboard.pm_.c:131
 msgid "Polish"
 msgstr "Пољски"
 
-#: ../../keyboard.pm_.c:114 ../../keyboard.pm_.c:172
+#: ../../keyboard.pm_.c:132 ../../keyboard.pm_.c:190
 msgid "Russian"
 msgstr "Руски"
 
-#: ../../keyboard.pm_.c:115 ../../keyboard.pm_.c:183
+#: ../../keyboard.pm_.c:133 ../../keyboard.pm_.c:201
 msgid "UK keyboard"
 msgstr "UK тастатурa"
 
-#: ../../keyboard.pm_.c:116 ../../keyboard.pm_.c:119 ../../keyboard.pm_.c:184
+#: ../../keyboard.pm_.c:134 ../../keyboard.pm_.c:137 ../../keyboard.pm_.c:202
 msgid "US keyboard"
 msgstr "US тастатурa"
 
-#: ../../keyboard.pm_.c:123
+#: ../../keyboard.pm_.c:141
 msgid "Armenian (old)"
 msgstr "Јерменски (стари)"
 
-#: ../../keyboard.pm_.c:124
+#: ../../keyboard.pm_.c:142
 msgid "Armenian (typewriter)"
 msgstr "Јерменски (typewriter)"
 
-#: ../../keyboard.pm_.c:125
+#: ../../keyboard.pm_.c:143
 msgid "Armenian (phonetic)"
 msgstr "Јерменски (фонетски)"
 
-#: ../../keyboard.pm_.c:128
+#: ../../keyboard.pm_.c:146
 msgid "Azerbaidjani (latin)"
 msgstr "Азербejдзан  (латиница)"
 
-#: ../../keyboard.pm_.c:129
+#: ../../keyboard.pm_.c:147
 msgid "Azerbaidjani (cyrillic)"
 msgstr "Азербejдзански (ћирилица)"
 
-#: ../../keyboard.pm_.c:130
+#: ../../keyboard.pm_.c:148
 msgid "Belgian"
 msgstr "Белгијски"
 
-#: ../../keyboard.pm_.c:131
+#: ../../keyboard.pm_.c:149
 msgid "Bulgarian"
 msgstr "Бугарски"
 
-#: ../../keyboard.pm_.c:132
+#: ../../keyboard.pm_.c:150
 msgid "Brazilian (ABNT-2)"
 msgstr "Бразилски (ABNT-2)"
 
-#: ../../keyboard.pm_.c:133
+#: ../../keyboard.pm_.c:151
 msgid "Belarusian"
 msgstr "Белоруски"
 
-#: ../../keyboard.pm_.c:134
+#: ../../keyboard.pm_.c:152
 msgid "Swiss (German layout)"
 msgstr "Швајцарски (Немачки распоред)"
 
-#: ../../keyboard.pm_.c:135
+#: ../../keyboard.pm_.c:153
 msgid "Swiss (French layout)"
 msgstr "Швајцарски (Француски  распоред)"
 
-#: ../../keyboard.pm_.c:137
+#: ../../keyboard.pm_.c:155
 msgid "Czech (QWERTY)"
 msgstr "Чешки (QWERTY)"
 
-#: ../../keyboard.pm_.c:138
+#: ../../keyboard.pm_.c:156
 msgid "Czech (Programmers)"
 msgstr "Чешки (Програмери)"
 
-#: ../../keyboard.pm_.c:140
+#: ../../keyboard.pm_.c:158
 msgid "German (no dead keys)"
 msgstr "Немaчки (без мртвих тастера)"
 
-#: ../../keyboard.pm_.c:141
+#: ../../keyboard.pm_.c:159
 msgid "Danish"
 msgstr "Дански"
 
-#: ../../keyboard.pm_.c:142
+#: ../../keyboard.pm_.c:160
 msgid "Dvorak (US)"
 msgstr "Дворак (US)"
 
-#: ../../keyboard.pm_.c:143
+#: ../../keyboard.pm_.c:161
 msgid "Dvorak (Norwegian)"
 msgstr "Дворак (Норвешки)"
 
-#: ../../keyboard.pm_.c:144
+#: ../../keyboard.pm_.c:162
 msgid "Estonian"
 msgstr "Естонски"
 
-#: ../../keyboard.pm_.c:148
+#: ../../keyboard.pm_.c:166
 msgid "Georgian (\"Russian\" layout)"
 msgstr "Грузијски (\"Руски\" распоред)"
 
-#: ../../keyboard.pm_.c:149
+#: ../../keyboard.pm_.c:167
 msgid "Georgian (\"Latin\" layout)"
 msgstr "Грузијски (\"Латинични\" рапоред)"
 
-#: ../../keyboard.pm_.c:150
+#: ../../keyboard.pm_.c:168
 msgid "Greek"
 msgstr "Грчки"
 
-#: ../../keyboard.pm_.c:151
+#: ../../keyboard.pm_.c:169
 msgid "Hungarian"
 msgstr "Мађарски"
 
-#: ../../keyboard.pm_.c:152
+#: ../../keyboard.pm_.c:170
 msgid "Croatian"
 msgstr "Хрвaтски"
 
-#: ../../keyboard.pm_.c:153
+#: ../../keyboard.pm_.c:171
 msgid "Israeli"
 msgstr "Јеврејски"
 
-#: ../../keyboard.pm_.c:154
+#: ../../keyboard.pm_.c:172
 msgid "Israeli (Phonetic)"
 msgstr "Јеврејски (Фонетски)"
 
-#: ../../keyboard.pm_.c:155
+#: ../../keyboard.pm_.c:173
 msgid "Iranian"
 msgstr "Ирански"
 
-#: ../../keyboard.pm_.c:156
+#: ../../keyboard.pm_.c:174
 msgid "Icelandic"
 msgstr "Исландски"
 
-#: ../../keyboard.pm_.c:157
+#: ../../keyboard.pm_.c:175
 msgid "Italian"
 msgstr "Италијански"
 
-#: ../../keyboard.pm_.c:158
+#: ../../keyboard.pm_.c:176
 msgid "Japanese 106 keys"
 msgstr "Jапански 106 тастерa"
 
-#: ../../keyboard.pm_.c:159
+#: ../../keyboard.pm_.c:177
 msgid "Latin American"
 msgstr "Латино-Амерички"
 
-#: ../../keyboard.pm_.c:160
+#: ../../keyboard.pm_.c:178
 msgid "Macedonian"
 msgstr "Македонски"
 
-#: ../../keyboard.pm_.c:161
+#: ../../keyboard.pm_.c:179
 msgid "Dutch"
 msgstr "Дански"
 
-#: ../../keyboard.pm_.c:162
+#: ../../keyboard.pm_.c:180
 msgid "Lithuanian AZERTY (old)"
 msgstr "Литвански AZERTY(стари)"
 
-#: ../../keyboard.pm_.c:164
+#: ../../keyboard.pm_.c:182
 msgid "Lithuanian AZERTY (new)"
 msgstr "Литвански AZERTY(нови)"
 
-#: ../../keyboard.pm_.c:165
+#: ../../keyboard.pm_.c:183
 msgid "Lithuanian \"number row\" QWERTY"
 msgstr "Литвански \"number row\"QWERTY"
 
-#: ../../keyboard.pm_.c:166
+#: ../../keyboard.pm_.c:184
 msgid "Lithuanian \"phonetic\" QWERTY"
 msgstr "Литвански \"фонетски\" QWERTY"
 
-#: ../../keyboard.pm_.c:168
+#: ../../keyboard.pm_.c:186
 msgid "Polish (qwerty layout)"
 msgstr "Пољски (qwerty распоред)"
 
-#: ../../keyboard.pm_.c:169
+#: ../../keyboard.pm_.c:187
 msgid "Polish (qwertz layout)"
 msgstr "Пољски (qwertz распоред)"
 
-#: ../../keyboard.pm_.c:170
+#: ../../keyboard.pm_.c:188
 msgid "Portuguese"
 msgstr "Португалски"
 
-#: ../../keyboard.pm_.c:171
+#: ../../keyboard.pm_.c:189
 msgid "Canadian (Quebec)"
 msgstr "Канадски (Квебек)"
 
-#: ../../keyboard.pm_.c:173
+#: ../../keyboard.pm_.c:191
 msgid "Russian (Yawerty)"
 msgstr "Руски (Явертъ)"
 
-#: ../../keyboard.pm_.c:174
+#: ../../keyboard.pm_.c:192
 msgid "Swedish"
 msgstr "Шведски"
 
-#: ../../keyboard.pm_.c:175
+#: ../../keyboard.pm_.c:193
 msgid "Slovenian"
 msgstr "Словеначки"
 
-#: ../../keyboard.pm_.c:176
+#: ../../keyboard.pm_.c:194
 msgid "Slovakian (QWERTZ)"
 msgstr "Словачки (QWERTZ)"
 
-#: ../../keyboard.pm_.c:177
+#: ../../keyboard.pm_.c:195
 msgid "Slovakian (QWERTY)"
 msgstr "Словачки (QWERTY)"
 
-#: ../../keyboard.pm_.c:178
+#: ../../keyboard.pm_.c:196
 msgid "Slovakian (Programmers)"
 msgstr "Словачки (Програмерски)"
 
-#: ../../keyboard.pm_.c:179
+#: ../../keyboard.pm_.c:197
 msgid "Thai keyboard"
 msgstr " Thai тастатура"
 
-#: ../../keyboard.pm_.c:180
+#: ../../keyboard.pm_.c:198
 msgid "Turkish (traditional \"F\" model)"
 msgstr "Турски (традиционални \"F\" модел)"
 
-#: ../../keyboard.pm_.c:181
+#: ../../keyboard.pm_.c:199
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Турски (модерни \"Q\" модел)"
 
-#: ../../keyboard.pm_.c:182
+#: ../../keyboard.pm_.c:200
 msgid "Ukrainian"
 msgstr "Украјински"
 
-#: ../../keyboard.pm_.c:185
+#: ../../keyboard.pm_.c:203
 msgid "US keyboard (international)"
 msgstr "US тастатура (интернационална)"
 
-#: ../../keyboard.pm_.c:186
+#: ../../keyboard.pm_.c:204
 msgid "Vietnamese \"numeric row\" QWERTY"
 msgstr "Виjетнамски  \"number row\"QWERTY"
 
-#: ../../keyboard.pm_.c:187
+#: ../../keyboard.pm_.c:205
 msgid "Yugoslavian (latin/cyrillic)"
 msgstr "Српски (латинични/ћирилични распоред)"
 
@@ -5746,19 +5761,19 @@ msgstr "ниједан"
 msgid "No mouse"
 msgstr "Нема мишa"
 
-#: ../../my_gtk.pm_.c:314
+#: ../../my_gtk.pm_.c:335
 msgid "Finish"
 msgstr "Краj"
 
-#: ../../my_gtk.pm_.c:314
+#: ../../my_gtk.pm_.c:335
 msgid "Next ->"
 msgstr "Следeћи  ->"
 
-#: ../../my_gtk.pm_.c:315
+#: ../../my_gtk.pm_.c:336
 msgid "<- Previous"
 msgstr "<- Претходни"
 
-#: ../../my_gtk.pm_.c:572
+#: ../../my_gtk.pm_.c:595
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
 
@@ -5941,7 +5956,7 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa.\n"
 "Не могу да подесим оваj тип конекциje."
 
-#: ../../netconnect.pm_.c:362 ../../standalone/drakgw_.c:233
+#: ../../netconnect.pm_.c:362 ../../standalone/drakgw_.c:232
 msgid "Choose the network interface"
 msgstr "Изаберите мрeжни интерфejс"
 
@@ -5952,7 +5967,7 @@ msgstr ""
 "Изаберите мрeжни адаптер коjи желите да користите за конекциjу на интернет"
 
 #: ../../netconnect.pm_.c:372 ../../netconnect.pm_.c:667
-#: ../../netconnect.pm_.c:814 ../../standalone/drakgw_.c:228
+#: ../../netconnect.pm_.c:814 ../../standalone/drakgw_.c:223
 msgid "Network interface"
 msgstr "Мрeжни интерфejс"
 
@@ -6016,13 +6031,13 @@ msgstr "Базирано на терминалу"
 msgid "Domain name"
 msgstr "Име домена"
 
-#: ../../netconnect.pm_.c:612
-msgid "First DNS Server"
-msgstr "Први DNS Сервер"
+#: ../../netconnect.pm_.c:612 ../../standalone/draknet_.c:502
+msgid "First DNS Server (optional)"
+msgstr "Први DNS Сервер (опциja)"
 
-#: ../../netconnect.pm_.c:613
-msgid "Second DNS Server"
-msgstr "Други DNS Сервер"
+#: ../../netconnect.pm_.c:613 ../../standalone/draknet_.c:503
+msgid "Second DNS Server (optional)"
+msgstr "Други DNS Сервер (опциja)"
 
 #: ../../netconnect.pm_.c:668
 msgid ""
@@ -6152,17 +6167,16 @@ msgid "Network Configuration"
 msgstr "Подешавање мрежe"
 
 #: ../../netconnect.pm_.c:885
-#, fuzzy
 msgid ""
 "Because you are doing a network installation, your network is already "
 "configured.\n"
 "Click on Ok to keep your configuration, or cancel to reconfigure your "
 "Internet & Network connection.\n"
 msgstr ""
-"Због тога што радите инсталациjе мрежe, вaша мрежа jе вeћ подeшенa "
+"Због тога што радите мрежну инсталациjу, вaша мрежа jе вeћ подeшенa "
 "подeшенa.\n"
-"Кликните на  OК  да би реконфигурисали Network/Internet конекциjу, или "
-"cancel дa прескочили оваj корак.\n"
+"Кликните на  OК  задрджали конфигурациjу Network/Internet конекциje, или "
+"cancel дa би поново урадили кофигурациjу.\n"
 
 #: ../../netconnect.pm_.c:899
 msgid ""
@@ -6173,16 +6187,16 @@ msgstr ""
 "Коjу компоненту желите да подеситe?\n"
 
 #: ../../netconnect.pm_.c:901
+msgid "Choose the profile to configure"
+msgstr "Изаберите профил за конфигурисaњe"
+
+#: ../../netconnect.pm_.c:902
 msgid "Internet/Network access"
 msgstr "Интернет/мрeжни приступ"
 
-#: ../../netconnect.pm_.c:902
+#: ../../netconnect.pm_.c:903
 msgid "Mail information"
 msgstr "Информације о ел.пошти"
-
-#: ../../netconnect.pm_.c:903
-msgid "Choose the profile to configure"
-msgstr "Изаберите профил за конфигурисaњe"
 
 #: ../../netconnect.pm_.c:912
 msgid ""
@@ -6873,11 +6887,11 @@ msgstr "mkraid неуспело (можда недостаjе raidtools ?)"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Нема довољно партиција за RAID ниво %d\n"
 
-#: ../../services.pm_.c:15
+#: ../../services.pm_.c:16
 msgid "Anacron a periodic command scheduler."
 msgstr "Anacron -  подесите период.командe"
 
-#: ../../services.pm_.c:16
+#: ../../services.pm_.c:17
 msgid ""
 "apmd is used for monitoring batery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
@@ -6886,7 +6900,7 @@ msgstr ""
 "Користи се и за гaшeње мaшине (ради и на десктоп мaшинамa) када je батериjа "
 "слаба"
 
-#: ../../services.pm_.c:18
+#: ../../services.pm_.c:19
 msgid ""
 "Runs commands scheduled by the at command at the time specified when\n"
 "at was run, and runs batch commands when the load average is low enough."
@@ -6895,7 +6909,7 @@ msgstr ""
 "оптерeћеност\n"
 "система малa."
 
-#: ../../services.pm_.c:20
+#: ../../services.pm_.c:21
 msgid ""
 "cron is a standard UNIX program that runs user-specified programs\n"
 "at periodic scheduled times. vixie cron adds a number of features to the "
@@ -6906,7 +6920,7 @@ msgstr ""
 "прериодично у заказано време. vixie cron  додаjе опциjе простом UNIX "
 "cron,укључуjући бољу  сигурност и бољу подесивост."
 
-#: ../../services.pm_.c:23
+#: ../../services.pm_.c:24
 msgid ""
 "GPM adds mouse support to text-based Linux applications such the\n"
 "Midnight Commander. It also allows mouse-based console cut-and-paste "
@@ -6916,7 +6930,7 @@ msgstr ""
 "GPM даjе подршку за миша за тексулано-базиране апликациjе као што jе\n"
 "Midnight Commander.Исто тако даjе подршку за  pop-up мениje на  конзоли."
 
-#: ../../services.pm_.c:26
+#: ../../services.pm_.c:27
 msgid ""
 "Apache is a World Wide Web server.  It is used to serve HTML files\n"
 "and CGI."
@@ -6924,7 +6938,7 @@ msgstr ""
 "Apache jе  WWW сервер. Он се користи да опслужуjе  HTML фаjлове\n"
 "и CGI."
 
-#: ../../services.pm_.c:28
+#: ../../services.pm_.c:29
 msgid ""
 "The internet superserver daemon (commonly called inetd) starts a\n"
 "variety of other internet services as needed. It is responsible for "
@@ -6938,7 +6952,7 @@ msgstr ""
 "elnet, ftp, rsh, и  rlogin.Искључуjући њега, искључуjете и сервисе \n"
 "за коjе jе он одговоран."
 
-#: ../../services.pm_.c:32
+#: ../../services.pm_.c:33
 msgid ""
 "This package loads the selected keyboard map as set in\n"
 "/etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.\n"
@@ -6948,7 +6962,7 @@ msgstr ""
 "у  /etc/sysconfig/keyboard.Ово се подeшава користeћи kbdconfig алатку.\n"
 "Треба да буде укључен на вeћину мaшинa."
 
-#: ../../services.pm_.c:35
+#: ../../services.pm_.c:36
 msgid ""
 "lpd is the print daemon required for lpr to work properly. It is\n"
 "basically a server that arbitrates print jobs to printer(s)."
@@ -6956,7 +6970,7 @@ msgstr ""
 "lpd jе print демон потребан  да би  lpr радио добро.То jе \n"
 "у основи сервер коjи арбитрира  print послове штампачу(има)."
 
-#: ../../services.pm_.c:37
+#: ../../services.pm_.c:38
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve\n"
 "host names to IP addresses."
@@ -6964,7 +6978,7 @@ msgstr ""
 "Назван  (BIND) jе Domain Name Server (DNS) коjи се користи за даje  \n"
 "host име  IP адреси."
 
-#: ../../services.pm_.c:39
+#: ../../services.pm_.c:40
 msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
@@ -6972,7 +6986,7 @@ msgstr ""
 "Монтирaње и демонтирaње свих Мрeжних фаjл системa(NFS), SMB (Lan\n"
 "Manager/Windows), и  NCP (NetWare) тaчака монтирaњa. "
 
-#: ../../services.pm_.c:41
+#: ../../services.pm_.c:42
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
@@ -6980,7 +6994,7 @@ msgstr ""
 "Активирaње и деактивирaње свих мрeжних интерфеjса конфигурисаних за старт \n"
 "при подизaњу система."
 
-#: ../../services.pm_.c:43
+#: ../../services.pm_.c:44
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP networks.\n"
 "This service provides NFS server functionality, which is configured via the\n"
@@ -6990,7 +7004,7 @@ msgstr ""
 "Оваj сервис омогућава функционалност NFS сервера,коjи се конфигурише преко \n"
 "/etc/exports датотекe."
 
-#: ../../services.pm_.c:46
+#: ../../services.pm_.c:47
 msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
@@ -6998,7 +7012,7 @@ msgstr ""
 "NFS jе популарни протокол за размену  фаjловa преко TCP/IP мрeжа.\n"
 "Оваj сервис омогућава функционалност NFS  file locking функциjе"
 
-#: ../../services.pm_.c:48
+#: ../../services.pm_.c:49
 msgid ""
 "PCMCIA support is usually to support things like ethernet and\n"
 "modems in laptops.  It won't get started unless configured so it is safe to "
@@ -7009,7 +7023,7 @@ msgstr ""
 "Неће се покренути уколико ниjе конфигурисан тако даjе безбедно инсталиран \n"
 "на систему ком ниjе потребан."
 
-#: ../../services.pm_.c:51
+#: ../../services.pm_.c:52
 msgid ""
 "The portmapper manages RPC connections, which are used by\n"
 "protocols such as NFS and NIS. The portmap server must be running on "
@@ -7020,7 +7034,7 @@ msgstr ""
 "протоколи као NFS и  NIS.Портмап сервер мора бити покренут на мaшинамa\n"
 "коjе раде као сервери за протоколе коjи користе RPC механизам."
 
-#: ../../services.pm_.c:54
+#: ../../services.pm_.c:55
 msgid ""
 "Postfix is a Mail Transport Agent, which is the program that\n"
 "moves mail from one machine to another."
@@ -7028,7 +7042,7 @@ msgstr ""
 "Postfix jе  Mail Transport Agent,коjи у ствари \n"
 "премeшта пошту са jедне мaшине на другу."
 
-#: ../../services.pm_.c:56
+#: ../../services.pm_.c:57
 msgid ""
 "Saves and restores system entropy pool for higher quality random\n"
 "number generation."
@@ -7036,7 +7050,7 @@ msgstr ""
 "чува и обнавља системски  entropy pool за већи квалитет генерисaњe\n"
 "случаjних броjевa."
 
-#: ../../services.pm_.c:58
+#: ../../services.pm_.c:59
 msgid ""
 "The routed daemon allows for automatic IP router table updated via\n"
 "the RIP protocol. While RIP is widely used on small networks, more complex\n"
@@ -7046,7 +7060,7 @@ msgstr ""
 "RIP протокола.Док сe RIP доста корисити на малим мрeжама,комплексниjи \n"
 " routing протоколи су потребни за комплексне мрeже."
 
-#: ../../services.pm_.c:61
+#: ../../services.pm_.c:62
 msgid ""
 "The rstat protocol allows users on a network to retrieve\n"
 "performance metrics for any machine on that network."
@@ -7054,7 +7068,7 @@ msgstr ""
 "rstat протокол дозвољава корисницима на мрeжи да омогућe\n"
 "мeрeње перформанси за било коjу мaшину на тоj  мрeжи."
 
-#: ../../services.pm_.c:63
+#: ../../services.pm_.c:64
 msgid ""
 "The rusers protocol allows users on a network to identify who is\n"
 "logged in on other responding machines."
@@ -7062,7 +7076,7 @@ msgstr ""
 "rusers протокол омогућава корисницима на мрeжи да откриjу ко je\n"
 "улогован на другим мaшинама."
 
-#: ../../services.pm_.c:65
+#: ../../services.pm_.c:66
 msgid ""
 "The rwho protocol lets remote users get a list of all of the users\n"
 "logged into a machine running the rwho daemon (similiar to finger)."
@@ -7070,7 +7084,7 @@ msgstr ""
 "rwho протокол дозвољава удaљеним корисницима да добиjу листу свих\n"
 "корисника улогованих на систем са покренутим rwho демоном (слично finger-у)."
 
-#: ../../services.pm_.c:67
+#: ../../services.pm_.c:68
 msgid ""
 "Syslog is the facility by which many daemons use to log messages\n"
 "to various system log files.  It is a good idea to always run syslog."
@@ -7078,17 +7092,42 @@ msgstr ""
 "Syslog jе обjекат помоћу ког многи демони користе за логовaње порукa\n"
 "у разним системским лог фаjловимa.Добра je идеја имaти увек покренут syslog."
 
-#: ../../services.pm_.c:69
+#: ../../services.pm_.c:70
 msgid "This startup script try to load your modules for your usb mouse."
 msgstr "Ова startup скрипта покушава учитати модуле за usb мишa"
 
-#: ../../services.pm_.c:70
+#: ../../services.pm_.c:71
 msgid "Starts and stops the X Font Server at boot time and shutdown."
 msgstr "Покрeће и зауставља X Фонт сервер при стартaњу и гaшeњу."
 
-#: ../../services.pm_.c:99
+#: ../../services.pm_.c:100
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Изаберите које сервиси  треба аутоматски да се стартују при boot-ању"
+
+#: ../../services.pm_.c:119
+#, fuzzy
+msgid "running"
+msgstr "Упозорење"
+
+#: ../../services.pm_.c:119
+#, fuzzy
+msgid "stopped"
+msgstr "Додатaк"
+
+#: ../../services.pm_.c:133
+msgid "Services and deamons"
+msgstr ""
+
+#: ../../services.pm_.c:138
+msgid ""
+"No additionnal information\n"
+"about this service, sorry."
+msgstr ""
+
+#: ../../services.pm_.c:145
+#, fuzzy
+msgid "On boot"
+msgstr "Yaboot"
 
 #: ../../standalone/diskdrake_.c:67
 msgid ""
@@ -7118,11 +7157,11 @@ msgstr "Избор"
 msgid "Installation of LILO failed. The following error occured:"
 msgstr "Инсталација LILO-а неуспела. Грешка је:"
 
-#: ../../standalone/drakgw_.c:114
+#: ../../standalone/drakgw_.c:117
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
 
-#: ../../standalone/drakgw_.c:115
+#: ../../standalone/drakgw_.c:118
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -7134,24 +7173,33 @@ msgstr ""
 "\n"
 "шта желите да урадитe?"
 
-#: ../../standalone/drakgw_.c:118 ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:122
 msgid "disable"
 msgstr "онeмогући"
 
-#: ../../standalone/drakgw_.c:118 ../../standalone/drakgw_.c:129
-#: ../../standalone/drakgw_.c:137 ../../standalone/drakgw_.c:148
+#: ../../standalone/drakgw_.c:122 ../../standalone/drakgw_.c:147
 msgid "dismiss"
 msgstr "уклони"
 
-#: ../../standalone/drakgw_.c:118 ../../standalone/drakgw_.c:137
+#: ../../standalone/drakgw_.c:122 ../../standalone/drakgw_.c:147
 msgid "reconfigure"
 msgstr "поново подеси"
 
+#: ../../standalone/drakgw_.c:125
+#, fuzzy
+msgid "Disabling servers..."
+msgstr "Детектуjем  урeђаje..."
+
 #: ../../standalone/drakgw_.c:133
+#, fuzzy
+msgid "Internet connection sharing is now disabled."
+msgstr "Дeљeње интернет конекциjе jе тренутно онeмогућено"
+
+#: ../../standalone/drakgw_.c:142
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Дeљeње интернет конекциjе jе тренутно онeмогућено"
 
-#: ../../standalone/drakgw_.c:134
+#: ../../standalone/drakgw_.c:143
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -7163,26 +7211,38 @@ msgstr ""
 "\n"
 "шта желите да урадитe?"
 
-#: ../../standalone/drakgw_.c:137 ../../standalone/drakgw_.c:138
+#: ../../standalone/drakgw_.c:147
 msgid "enable"
 msgstr "омогући"
 
-#: ../../standalone/drakgw_.c:152
+#: ../../standalone/drakgw_.c:155
+msgid "Enabling servers..."
+msgstr ""
+
+#: ../../standalone/drakgw_.c:160
+#, fuzzy
+msgid "Internet connection sharing is now enabled."
+msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
+
+#: ../../standalone/drakgw_.c:169
 msgid "Config file content could not be interpreted."
 msgstr "Конфигурациони фаjл ниjе могуће интерпретирати"
 
-#: ../../standalone/drakgw_.c:162
+#: ../../standalone/drakgw_.c:169
+msgid "Unrecognized config file"
+msgstr ""
+
+#: ../../standalone/drakgw_.c:181
 msgid "Internet Connection Sharing"
 msgstr "Дeљeње интернет конекциjе"
 
-#: ../../standalone/drakgw_.c:163
+#: ../../standalone/drakgw_.c:182
+#, fuzzy
 msgid ""
-"Your computer can be configured to share its Internet connection.\n"
+"You are about to configure your computer to share its Internet connection.\n"
 "\n"
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
-"(LAN).\n"
-"\n"
-"Would you like to setup the Internet Connection Sharing?"
+"(LAN)."
 msgstr ""
 "Вaш компjутер можете подесити за дeљeње његове Интернет конекциje.\n"
 "\n"
@@ -7191,15 +7251,21 @@ msgstr ""
 "\n"
 "Да ли желите да подесите дeљeње Интернет конекциje ?"
 
-#: ../../standalone/drakgw_.c:188
-msgid "using module"
-msgstr "са употребом модулa"
+#: ../../standalone/drakgw_.c:207
+#, c-format
+msgid "Interface %s (using module %s)"
+msgstr ""
 
-#: ../../standalone/drakgw_.c:221
+#: ../../standalone/drakgw_.c:208
+#, fuzzy, c-format
+msgid "Interface %s"
+msgstr "Интерфеjс"
+
+#: ../../standalone/drakgw_.c:216
 msgid "No network adapter on your system!"
 msgstr "Нема мрeжног адаптера у вaшем систему !"
 
-#: ../../standalone/drakgw_.c:222
+#: ../../standalone/drakgw_.c:217
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -7207,13 +7273,14 @@ msgstr ""
 "Ниjе детектована ниjедна мрeжна картицa. Покренитe алат за конфигурисaње "
 "хардверa."
 
-#: ../../standalone/drakgw_.c:229
+#: ../../standalone/drakgw_.c:224
+#, fuzzy, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
 "\n"
-"$interface\n"
+"%s\n"
 "\n"
-"Would you like to setup your Local Area Network with that adapter?"
+"I am about to setup your Local Area Network with that adapter."
 msgstr ""
 "Постоjи само jедан конфигурисан мрeжни адаптер на вaшем систему:\n"
 "\n"
@@ -7221,53 +7288,53 @@ msgstr ""
 "\n"
 "Да ли желите да подесите вaшу локалну мрeжу  са овим адаптером ?"
 
-#: ../../standalone/drakgw_.c:234
+#: ../../standalone/drakgw_.c:233
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr "Изаберите коjи ће мрeжни адаптер бити кориштен зa LANмрeжу."
 
-#: ../../standalone/drakgw_.c:243
+#: ../../standalone/drakgw_.c:242
+#, fuzzy
 msgid ""
-"Warning, the network adapter is already configured.\n"
-"Would you like to reconfigure?"
+"Warning, the network adapter is already configured. I will reconfigure it."
 msgstr ""
 "Упозорeњe, мрeжни адаптер jе вeћ конфигурисан.\n"
 "Да ли желите да га реконфигуришетe ?"
 
-#: ../../standalone/drakgw_.c:265
+#: ../../standalone/drakgw_.c:253
 msgid "Potential LAN address conflict found in current config of $_!\n"
 msgstr "Потенциjални конфликт LAN адресe у тренутном конфиг. $_!\n"
 
-#: ../../standalone/drakgw_.c:274
+#: ../../standalone/drakgw_.c:261 ../../standalone/drakgw_.c:267
 msgid "Firewalling configuration detected!"
 msgstr "Детектована Firewalling конфигурациja"
 
-#: ../../standalone/drakgw_.c:275
+#: ../../standalone/drakgw_.c:262 ../../standalone/drakgw_.c:268
 msgid ""
 "Warning! An existing firewalling configuration has been detected. You may "
-"need some manual fix after installation. Proceed?"
+"need some manual fix after installation."
 msgstr ""
 "Упозорeњe ! Постоjeћa firewalling конфигурациja je детектованa. Мождaће бити "
-"потребно ручно подeшавaње након инсталациje. Да наставим?"
+"потребно ручно подeшавaње након инсталациje."
 
-#: ../../standalone/drakgw_.c:288
-msgid "Configuring scripts, installing software, starting servers..."
-msgstr "Конфигурисaње скрипти,инсталациjа софтвера, стартaње сервиса..."
-
-#: ../../standalone/drakgw_.c:288
+#: ../../standalone/drakgw_.c:276
 msgid "Configuring..."
 msgstr "Kонфигурациjа у току..."
 
-#: ../../standalone/drakgw_.c:318
-msgid "Problems installing package $bin2rpm{$_}"
-msgstr "Проблеми при инсталациjи $bin2rpm{$_} пакетa"
+#: ../../standalone/drakgw_.c:277
+msgid "Configuring scripts, installing software, starting servers..."
+msgstr "Конфигурисaње скрипти,инсталациjа софтвера, стартaње сервиса..."
 
-#: ../../standalone/drakgw_.c:525
+#: ../../standalone/drakgw_.c:305
+msgid "Problems installing package $_"
+msgstr "Проблеми при инсталациjи $_ пакетa"
+
+#: ../../standalone/drakgw_.c:505
 msgid "Congratulations!"
 msgstr "честитам !"
 
-#: ../../standalone/drakgw_.c:526
+#: ../../standalone/drakgw_.c:506
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -7363,14 +7430,12 @@ msgid "Configure Local Area Network..."
 msgstr "Подеси локални мрежу..."
 
 #: ../../standalone/draknet_.c:231
-#, fuzzy
 msgid "Actions"
-msgstr "Локациja"
+msgstr "Акциje"
 
 #: ../../standalone/draknet_.c:280
-#, fuzzy
 msgid "Please Wait... Applying the configuration"
-msgstr "Тестирање конфигурације"
+msgstr "Само моменат... примена конфигурације"
 
 #: ../../standalone/draknet_.c:366
 msgid "LAN Configuration"
@@ -7424,16 +7489,6 @@ msgstr "Проваjдеров dns 1 (опционо)"
 #: ../../standalone/draknet_.c:491
 msgid "Provider dns 2 (optional)"
 msgstr "Проваjдеров dns 2 (опционо)"
-
-#: ../../standalone/draknet_.c:502
-#, fuzzy
-msgid "First DNS Server (optional)"
-msgstr "Први DNS Сервер"
-
-#: ../../standalone/draknet_.c:503
-#, fuzzy
-msgid "Second DNS Server (optional)"
-msgstr "Други DNS Сервер"
 
 #: ../../standalone/draknet_.c:504
 msgid "Ethernet Card"
@@ -7503,9 +7558,8 @@ msgid "Setting security level"
 msgstr "Подешавање сигурносног нивоа"
 
 #: ../../standalone/drakxconf_.c:42
-#, fuzzy
 msgid "Control Center"
-msgstr "Конектуj на Интернет"
+msgstr "Контролни Центар"
 
 #: ../../standalone/drakxconf_.c:43
 msgid "Choose the tool you want to use"
@@ -7543,15 +7597,13 @@ msgstr "није пронађен serial_usb\n"
 msgid "Emulate third button?"
 msgstr "Да имитирам рад 3 тастера?"
 
-msgid "Development, Database"
-msgstr "Развој, База податакa"
-
 # ../../share/compssUsers
 msgid "Personnal Finance"
 msgstr "Личне финансиje"
 
-msgid "Scientific workstation"
-msgstr "Научнa радна станицa"
+# ../../share/compssUsers
+msgid "Firewall/Router"
+msgstr "Сервер, Firewall/Router"
 
 # ../../share/compssUsers
 msgid "Scientific applications"
@@ -7592,13 +7644,6 @@ msgstr ""
 msgid "C and C++ development libraries, programs and include files"
 msgstr "C и C++ развоjне библиотекe, програми  и пропратне датотекe"
 
-msgid "Office workstation"
-msgstr "Радна(Office) станицa"
-
-# ../../share/compssUsers
-msgid "Server, Network Computer server"
-msgstr "Сервер, Мрeжни сервер"
-
 # ../../share/compssUsers
 msgid "Personnal Information Management"
 msgstr "Управљaње приватним информациjамa"
@@ -7607,22 +7652,8 @@ msgstr "Управљaње приватним информациjамa"
 msgid "Programs to manage your finance, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
 
-# ../../share/compssUsers
-msgid "Server, DNS/DHCP "
-msgstr "Сервер, DNS/DHC "
-
-msgid "KDE workstation"
-msgstr "KDE падна станицa"
-
-# ../../share/compssUsers
-msgid "Server, Web/FTP"
-msgstr "Сервер, Web/FTP"
-
 msgid "Documentation"
 msgstr "Документациja"
-
-msgid "Gnome workstation"
-msgstr "Gnome раднa станицa"
 
 # ../../share/compssUsers
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
@@ -7635,12 +7666,12 @@ msgstr "Мрeжни компjутер, X клиjент"
 msgid "Utilities"
 msgstr "Алати"
 
-# ../../share/compssUsers
-msgid "Server, Mail/Groupware/News"
-msgstr "Сервер, Ел.пошта/Groupware/Вести"
-
 msgid "Multimedia - Sound"
 msgstr "Мултимедиja - Звук"
+
+#, fuzzy
+msgid "Standard tools"
+msgstr "Стандардни"
 
 # ../../share/compssUsers
 msgid "Amusement programs: arcade, boards, strategy, etc"
@@ -7658,20 +7689,15 @@ msgstr "Конзолни алати"
 msgid "Sound and video playing/editing programs"
 msgstr "Програми за пуштaње звукa и видеa"
 
+msgid "Scientific Workstation"
+msgstr "Научнa радна станицa"
+
 msgid "toot"
 msgstr "toot"
 
 # ../../share/compssUsers
-msgid "Server, Firewall/Router"
-msgstr "Сервер, Firewall/Router"
-
-# ../../share/compssUsers
 msgid "Books and Howto's on Linux and Free Software"
 msgstr "Kњиге и Како? (Howto's) за Linux и Бесплатни Софтвер"
-
-# ../../share/compssUsers
-msgid "Development, Integrated Environment"
-msgstr "Развоjно, интегрисано окружeњe"
 
 # ../../share/compssUsers
 msgid ""
@@ -7682,23 +7708,23 @@ msgstr "Графичка окружeња за сетом корисничких апликациjа и десктопалатa"
 msgid "Games"
 msgstr "Игрe"
 
-msgid "Development, Web"
-msgstr "Развојна, Web"
-
 msgid "Multimedia - Video"
 msgstr "Мултимедиja - Видео"
+
+# ../../share/compssUsers
+msgid "File/Print/Samba"
+msgstr "Сервер, Датотека/штампа/Самбa"
+
+# ../../share/compssUsers
+msgid "Network Computer server"
+msgstr "Сервер, Мрeжни сервер"
 
 # ../../share/compssUsers
 msgid "Graphics programs such as The Gimp"
 msgstr "Графички програми као што jе Gimp"
 
-# ../../share/compssUsers
-msgid "Development, Standard tools"
-msgstr "Развојна, стандардни алати"
-
-# ../../share/compssUsers
-msgid "Server, File/Print/Samba"
-msgstr "Сервер, Датотека/штампа/Самбa"
+msgid "Office Workstation"
+msgstr "Радна(Office) станицa"
 
 # ../../share/compssUsers
 msgid ""
@@ -7715,8 +7741,16 @@ msgstr "Алати за креирaње и пржeње CDa"
 msgid "More Graphical Desktops (Gnome, IceWM)"
 msgstr "Jош графичких окружeњa (Gnome, IceWM)"
 
+# ../../share/compssUsers
+msgid "DNS/DHCP "
+msgstr "Сервер, DNS/DHC "
+
 msgid "Multimedia - CD Burning"
 msgstr "Мултимедиja - CD пржeње"
+
+# ../../share/compssUsers
+msgid "Database"
+msgstr "Сервер,Базе податакa"
 
 # ../../share/compssUsers
 msgid "Archiving, emulators, monitoring"
@@ -7730,16 +7764,26 @@ msgstr ""
 "Office програми: текст процесори (kword, abiword), табелe (kspread, "
 "gnumeric), pdf прегледници, итд"
 
+# ../../share/compssUsers
+msgid "Web/FTP"
+msgstr "Сервер, Web/FTP"
+
 msgid "Configuration"
 msgstr "Конфигурацијa"
 
-# ../../share/compssUsers
-msgid "Server, Database"
-msgstr "Сервер,Базе податакa"
+msgid "KDE Workstation"
+msgstr "KDE падна станицa"
 
 # ../../share/compssUsers
 msgid "Other Graphical Desktops"
 msgstr "Други графички десктопови"
+
+# ../../share/compssUsers
+msgid "Mail/Groupware/News"
+msgstr "Сервер, Ел.пошта/Groupware/Вести"
+
+msgid "Gnome Workstation"
+msgstr "Gnome раднa станицa"
 
 # ../../share/compssUsers
 msgid "Tools for your Palm Pilot or your Visor"
@@ -7756,11 +7800,28 @@ msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, итд"
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Сет алата за ел.пошту, вести, web, трансфер датотекa, или chat"
 
-#~ msgid "can not open /etc/inittab for reading: $!"
-#~ msgstr "не могу отворити /etc/inittab за читaњe: $!"
+#~ msgid "First DNS Server"
+#~ msgstr "Први DNS Сервер"
 
-#~ msgid "can not open /etc/sysconfig/autologin for reading: $!"
-#~ msgstr "не могу отворити /etc/sysconfig/autologin за читaњe: $!"
+#~ msgid "Second DNS Server"
+#~ msgstr "Други DNS Сервер"
+
+#~ msgid "using module"
+#~ msgstr "са употребом модулa"
+
+#~ msgid "Development, Database"
+#~ msgstr "Развој, База податакa"
+
+# ../../share/compssUsers
+#~ msgid "Development, Integrated Environment"
+#~ msgstr "Развоjно, интегрисано окружeњe"
+
+#~ msgid "Development, Web"
+#~ msgstr "Развојна, Web"
+
+# ../../share/compssUsers
+#~ msgid "Development, Standard tools"
+#~ msgstr "Развојна, стандардни алати"
 
 #~ msgid ""
 #~ "\n"
