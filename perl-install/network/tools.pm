@@ -11,10 +11,6 @@ use MDK::Common::System qw(getVarsFromSh);
 @ISA = qw(Exporter);
 @EXPORT = qw(connect_backend connected connected_bg disconnect_backend is_dynamic_ip passwd_by_login read_secret_backend test_connected remove_initscript write_secret_backend start_interface stop_interface);
 
-our $connect_prog   = "/etc/sysconfig/network-scripts/net_cnx_pg";
-our $connect_file    = "/etc/sysconfig/network-scripts/net_cnx_up";
-our $disconnect_file = "/etc/sysconfig/network-scripts/net_cnx_down";
-
 sub write_secret_backend {
     my ($a, $b) = @_;
     foreach my $i ("$::prefix/etc/ppp/pap-secrets", "$::prefix/etc/ppp/chap-secrets") {
