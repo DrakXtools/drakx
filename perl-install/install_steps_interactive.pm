@@ -97,20 +97,20 @@ sub selectRootPartition($@) {
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
     my ($o, @classes) = @_;
-    my @c = qw(normal specific expert);
+    my @c = qw(beginner specific expert);
     my %c = (
-	     normal    => _("Recommended"),
+	     beginner  => _("Recommended"),
 	     specific  => _("Personalized"),
 	     expert    => _("Expert"),
 	    );
     my $installClass = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
 							 _("What installation class do you want?"),
-							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{normal})};
+							 [ map { $c{$_} } @c ], $c{$o->{installClass}} || $c{beginner})};
     $::expert   = $installClass eq "expert";
-    $::beginner = $installClass eq "normal";
+    $::beginner = $installClass eq "beginner";
 
     if ($::beginner) {
-	$o->{installClass} = $installClass;
+	$o->{installClass} = "normal";
     } else {
 	my %c = (
 		 normal    => _("Normal"),
@@ -646,10 +646,10 @@ sub addUser($) {
 	},
         complete => sub {
 	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
-	    #(length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
+	    $o->{security} > 3 && length($u->{password}) < 6 and $o->ask_warn('', _("This password is too simple")), return (1,2);
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
-	    member($u->{name}, map { $_->{name} } @{$u->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
+	    member($u->{name}, map { $_->{name} } @{$o->{users}}) and $o->ask_warn('', _("This user name is already added")), return (1,0);
 	    return 0;
 	},
     )) {
@@ -822,12 +822,7 @@ sub miscellaneous {
     );
     my $u = $o->{miscellaneous} ||= {};
     exists $u->{LAPTOP} or $u->{LAPTOP} = 1;
-    my $s = $o->{security} || ${{
-	beginner  => 2,
-	developer => 3,
-	server    => 4,
-	expert    => 3
-    }}{$o->{installClass}};
+    my $s = $o->{security};
     $s = $l{$s} || $s;
 
     !$::beginner || $clicked and $o->ask_from_entries_ref('',

@@ -45,6 +45,8 @@ my @mouses = (
   [ 2, "atibm",    "Busmouse",  "BusMouse",   	  __("ATI Bus Mouse") ],
   [ 2, "inportbm", "Busmouse",  "BusMouse",       __("Microsoft Bus Mouse") ],
   [ 3, "logibm",   "Busmouse",  "BusMouse",       __("Logitech Bus Mouse") ],
+  [ 2, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse") ],
+  [ 5, "usbmouse", "ps/2",      "PS/2",           __("USB Mouse (3 buttons or more)") ],
 );
 map_index {
     my %l; @l{@mouses_fields} = @$_;
@@ -92,8 +94,10 @@ sub detect() {
     eval { run_program::run("rmmod", "serial") };
 
     if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
-	eval { modules::load($c->[1]) };
-	return name2mouse("Generic Mouse (PS/2)") if !$@ && detect_devices::tryOpen("usbmouse");
+	eval { modules::load($c->[1], 'usbmouse') };
+	sleep(1);
+	return name2mouse("USB Mouse") if !$@ && detect_devices::tryOpen("usbmouse");
+	modules::unload($c->[1]);
     }
     die "mouseconfig failed";
 }

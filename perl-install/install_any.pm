@@ -133,7 +133,6 @@ sub setPackages($) {
     	$_->{selected} = 0 foreach values %{$o->{packages}};
     }
 
-
     #- this will be done if necessary in the selectPackagesToUpgrade,
     #- move the selection here ? this will remove the little window.
     unless ($o->{isUpgrade}) {

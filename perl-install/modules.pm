@@ -157,6 +157,7 @@ sub text2driver($) {
     die "$text is not a valid module description";
 }
 
+sub add_alias($$) { $conf{$_[0]}{alias} = $_[1]; }
 
 sub load {
     my ($name, $type, @options) = @_;
@@ -174,17 +175,19 @@ sub load {
     }
     push @{$loaded{$type}}, $name;
 
-    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name
-      if $type && $type eq 'scsi';
-
+    if ($type) {
+	$conf{$type}{alias} = $name if $type eq 'usbmouse';
+	$conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name if $type eq 'scsi';
+    }
     $conf{$name}{options} = join " ", @options if @options;
 }
 
 sub unload($) {
+    my ($m) = @_; 
     if ($::testing) {
-	log::l("rmmod $_[0]");
-    } else {
-	run_program::run("rmmod", $_[0]);
+	log::l("rmmod $m");
+    } else {	
+	run_program::run("rmmod", $m) && delete $conf{$m}{loaded};
     }
 }
 
@@ -331,14 +334,3 @@ sub get_pcmcia_devices($$) {
     }
     @devs;
 }
-
-#-#- This assumes only one of each driver type is loaded
-#-sub removeDeviceDriver {
-#-    my ($type) = @_;
-#-
-#-    my @m = grep { $loaded{$_}{type} eq $type } keys %loaded;
-#-    @m or return 0;
-#-    @m > 1 and log::l("removeDeviceDriver assume only one of each driver type is loaded, which is not the case (" . join(' ', @m) . ")");
-#-    removeModule($m[0]);
-#-    1;
-#-}

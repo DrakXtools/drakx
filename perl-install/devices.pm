@@ -77,9 +77,11 @@ sub make($) {
     } elsif (/(.*)(\d+)$/) {
 	    ($type, $major, $minor) =
 	     @{ ${{"fd"     => [ c::S_IFBLK(), 2,  0 ],
+		   "md"     => [ c::S_IFBLK(), 9,  0 ],
 		   "lp"     => [ c::S_IFCHR(), 6,  0 ],
 		   "scd"    => [ c::S_IFBLK(), 11, 0 ],
-		   "nst"    => [ c::S_IFCHR(), 9, 128 ],
+		   "nst"    => [ c::S_IFCHR(), 9, 128],
+		   "ttyS"   => [ c::S_IFCHR(), 4, 64 ],
 		   "hidbp-mse-" => [ c::S_IFCHR(), 10, 32 ],
 	       }}{$1}};
 	    $minor += $2;
@@ -96,6 +98,7 @@ sub make($) {
 		   "mcd"     => [ c::S_IFBLK(), 23, 0 ],
 		   "mcdx"    => [ c::S_IFBLK(), 20, 0 ],
 		   "mem"     => [ c::S_IFCHR(), 1,  1 ],
+		   "psaux"   => [ c::S_IFCHR(), 10, 1 ],
 		   "random"  => [ c::S_IFCHR(), 1,  8 ],
 		   "optcd"   => [ c::S_IFBLK(), 17, 0 ],
 		   "sbpcd"   => [ c::S_IFBLK(), 25, 0 ],

@@ -99,7 +99,15 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectPath {}
 #------------------------------------------------------------------------------
-sub selectInstallClass($@) {}
+sub selectInstallClass($@) {
+    my ($o) = @_;
+    $o->{installClass} ||= "normal";
+    $o->{security} || ${{
+	normal    => 2,
+	developer => 3,
+	server    => 4,
+    }}{$o->{installClass}};
+}
 #------------------------------------------------------------------------------
 sub setupSCSI { modules::load_thiskind('scsi') }
 #------------------------------------------------------------------------------
@@ -197,6 +205,7 @@ sub installPackages($$) {
     }
     push @toInstall, grep { $_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
     push @toInstall, grep { !$_->{base} && $_->{selected} && !$_->{installed} && !$firstInstalled{$_->{name}} } values %$packages;
+    print int @toInstall, "<<<<<<\n";
     pkgs::install($o->{prefix}, \@toInstall);
 }
 
@@ -316,22 +325,23 @@ sub addUser($) {
     my (%uids, %gids); 
     foreach (glob_("$p/home")) { my ($u, $g) = (stat($_))[4,5]; $uids{$u} = 1; $gids{$g} = 1; }
 
-    my @l = @{$o->{users} || []};
     my %done;
-    foreach (@l) {
-	next if !$_->{name} || getpwnam($_->{name}) || $done{$_->{name}};
+    my @l = grep {
+	if (!$_->{name} || getpwnam($_->{name}) || $done{$_->{name}}) { 
+	    0;
+	} else {
+	    my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
+	    my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
+	    if (!$u || getpwuid($u)) { for ($u = 500; getpwuid($u) || $uids{$u}; $u++) {} }
+	    if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
 
-	my $u = $_->{uid} || ($_->{oldu} = (stat("$p$_->{home}"))[4]);
-	my $g = $_->{gid} || ($_->{oldg} = (stat("$p$_->{home}"))[5]);
-	if (!$u || getpwuid($u)) { for ($u = 500; getpwuid($u) || $uids{$u}; $u++) {} }
-	if (!$g || getgrgid($g)) { for ($g = 500; getgrgid($g) || $gids{$g}; $g++) {} }
-
-	$_->{home} ||= "/home/$_->{name}";
-	$_->{uid} = $u;
-	$_->{gid} = $g;
-	$_{pw} ||= $_->{password} && install_any::crypt($_->{password});
-	$done{$_->{name}} = 1;
-    }
+	    $_->{home} ||= "/home/$_->{name}";
+	    $_->{uid} = $u;
+	    $_->{gid} = $g;
+	    $_{pw} ||= $_->{password} && install_any::crypt($_->{password});
+	    $done{$_->{name}} = 1;
+	}
+    } @{$o->{users} || []};
     my @passwd = cat_("$p/etc/passwd");;
 
     local *F;

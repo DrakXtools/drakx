@@ -1,3 +1,4 @@
+
 package install2;
 
 use diagnostics;
@@ -87,12 +88,11 @@ my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert
 #-#####################################################################################
 #- partition layout
 my %suggestedPartitions = (
-  beginner => my $b = [
+  normal => my $b = [
     { mntpoint => "/",     size => 700 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
     { mntpoint => "/home", size => 300 << 11, type => 0x83 },
   ],
-  normal => $b,
   developer => [
     { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
     { mntpoint => "swap",  size => 128 << 11, type => 0x82 },
@@ -107,9 +107,6 @@ my %suggestedPartitions = (
     { mntpoint => "/usr",  size => 600 << 11, type => 0x83 },
     { mntpoint => "/var",  size => 600 << 11, type => 0x83 },
     { mntpoint => "/home", size => 500 << 11, type => 0x83 },
-  ],
-  expert => [
-    { mntpoint => "/",     size => 200 << 11, type => 0x83 },
   ],
 );
 
