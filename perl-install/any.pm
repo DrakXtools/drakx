@@ -768,8 +768,10 @@ sub selectCountry {
 				 list => \@best, sort => 1 }),
 		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
 		      list => [ @countries ], advanced => scalar(@best) },
-		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), sort => 0,
-		      list => [ N_("None"), sort(lang::get_ims()) ], advanced => 1, format => sub { uc(translate($_[0])) }, },
+		    { val => \$locale->{IM}, type => 'combo', label => N("Input method:"), sort => 0, 
+		      list => [ N_("None"), sort(lang::get_ims()) ], format => sub { uc(translate($_[0])) },
+                advanced => !$locale->{IM} || $locale->{IM} eq 'None',
+              },
 		  ]) or return;
 
     $locale->{country} = $other || !@best ? $ext_country : $country;
