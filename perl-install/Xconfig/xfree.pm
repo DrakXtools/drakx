@@ -446,7 +446,7 @@ sub remove_Section {
 }
 sub get_Sections {
     my ($raw_X, $Section, $o_when) = @_;
-    map { if_($_->{name} eq $Section && (!$o_when || $o_when->($_->{l})), $_->{l}) } @$raw_X;
+    map { if_(lc($_->{name}) eq lc($Section) && (!$o_when || $o_when->($_->{l})), $_->{l}) } @$raw_X;
 }
 sub get_Section {
     my ($raw_X, $Section, $o_when) = @_;
