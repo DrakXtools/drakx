@@ -147,7 +147,7 @@ sub create_clist {
 }
 
 sub create_ctree {
-    my ($e, $may_go_to_next, $changed, $double_click) = @_;
+    my ($e, $may_go_to_next, $changed, $double_click, $tree_expanded) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
 
     my $sep = quotemeta $e->{separator};
@@ -159,7 +159,7 @@ sub create_ctree {
 	my $s;
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
-	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, 0);
+	      $tree->insert_node($s ? $parent->($s) : undef, undef, [$_], 5, (undef) x 4, 0, $tree_expanded);
 	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
@@ -435,7 +435,7 @@ sub ask_fromW {
 
 	    my $quit_if_double_click = 
 	      #- i'm the only one, double click means accepting
-	      @$l == 1 ? 
+	      @$l == 1 || $e->{quit_if_double_click} ? 
 		sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } } : ''; 
 
 	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
@@ -445,7 +445,7 @@ sub ask_fromW {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
 		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_list(@para);
 	    } elsif ($e->{type} eq 'treelist') {
-		($w, $set, $size) = create_ctree(@para);
+		($w, $set, $size) = create_ctree(@para, $e->{tree_expanded});
 	    } else {
 		($w, $set, $focus_w) = $use_boxradio ? create_boxradio(@para) : create_clist(@para);
 	    }

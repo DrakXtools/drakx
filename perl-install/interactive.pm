@@ -27,6 +27,8 @@ use common;
 #-     combo (with list, not_edit)
 #-     list (with list, icon2f (aka icon), separator (aka tree), format (aka pre_format function),
 #-           help can be a hash or a function,
+#-           tree_expanded boolean telling wether the tree should be wide open by default
+#-           quit_if_double_click boolean
 #-           allow_empty_list disables the special cases for 0 and 1 element lists)
 #-     entry (the default) (with hidden)
 #
