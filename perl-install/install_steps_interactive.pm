@@ -392,7 +392,7 @@ sub choosePackages {
     ($o->{packages_}{ind}) =
       pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $min_mark, $availableC);
 
-    $o->choosePackagesTree($packages) if $individual;
+    $o->choosePackagesTree($packages) or goto chooseGroups if $individual;
 
     install_any::warnAboutRemovedPackages($o, $o->{packages});
     install_any::warnAboutNaughtyServers($o) or goto chooseGroups;
