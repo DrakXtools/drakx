@@ -67,15 +67,20 @@ sub load_raw {
     }
     sleep 2 if any { /^(usb-storage|mousedev|printer)$/ } @$l;
 }
-sub load {
-    my (@l) = @_;
-    @l = map {
+sub load_with_options {
+    my ($l, $h_options) = @_;
+
+    my @l = map {
 	dependencies_closure(cond_mapping_24_26($_));
-    } @l;
+    } @$l;
 
     @l = remove_loaded_modules(@l) or return;
 
-    load_raw(\@l, {});
+    load_raw(\@l, $h_options);
+}
+sub load {
+    my (@l) = @_;
+    load_with_options(\@l, {});
 }
 
 # eg: load_and_configure($modules_conf, 'vfat', 'reiserfs', [ ne2k => 'io=0xXXX', 'dma=5' ])
