@@ -563,6 +563,9 @@ Take a look at http://www.linmodems.org"),
 
                    choose_serial_port =>
                    {
+                    pre => sub {
+                        $modem->{device} ||= readlink "$::prefix/dev/modem";
+                    },
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
@@ -618,10 +621,6 @@ Take a look at http://www.linmodems.org"),
 
                    ppp_account =>
                    {
-                    pre => sub {
-                        $mouse ||= {};
-                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                    },
                     name => N("Dialup: account options"),
                     data => sub {
                             [
