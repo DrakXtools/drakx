@@ -697,7 +697,7 @@ sub g_auto_install {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall mkbootdisk X services); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall mkbootdisk X services); #- TODO modules bootloader 
 
     if ($::o->{printer}) {
 	$o->{printer}{$_} = $::o->{printer}{$_} foreach qw(SPOOLER DEFAULT BROWSEPOLLADDR BROWSEPOLLPORT MANUALCUPSCONFIG);
