@@ -894,7 +894,7 @@ sub new {
 	$o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
 	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
 
-    } elsif ($o->{isWizard}) {
+    } else {
 	$o->{rwindow} = $o->{window} = Gtk2::VBox->new(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	set_main_window_size($o);
