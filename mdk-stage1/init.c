@@ -116,8 +116,6 @@ void doklog()
 		return;
 	}
 	
-	printf("kernel logging process forked.\n");
-
 	close(0); 
 	close(1);
 	close(2);
@@ -332,15 +330,11 @@ int main(int argc, char **argv)
 		printf("*** TESTING MODE ***\n");
 
 
-	printf("\n--- Hi. " DISTRIB_NAME " install initializer starting. ---\n");
-	printf("VERSION: %s\n", VERSION);
-
+	printf("\n\t\t\tWelcome to Linux \033[1;36mMandrake\033[0;39m\n\n");
 	
 	if (!testing) {
-		printf("mounting /proc filesystem... "); 
 		if (mount("/proc", "/proc", "proc", 0, NULL))
 			fatal_error("Unable to mount proc filesystem");
-		printf("done\n");
 	}
 	
 
@@ -388,8 +382,8 @@ int main(int argc, char **argv)
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Remember what Warly said: drink an egg white each morning builds a man!\n");
-	printf("running stage1...\n"); 
+	printf("Traktopel says: drink an egg white each morning builds a man! (c) Warly\n");
+	printf("Running install...\n"); 
 	
 	if (!(installpid = fork())) {
 		/* child */
@@ -397,7 +391,6 @@ int main(int argc, char **argv)
 		child_argv[0] = "/sbin/stage1";
 		child_argv[1] = NULL;
 
-		printf("execing: %s\n", child_argv[0]);
 		execve(child_argv[0], child_argv, env);
 		printf("error in exec of stage1 :-(\n");
 		return 0;

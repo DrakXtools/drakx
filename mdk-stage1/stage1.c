@@ -126,17 +126,17 @@ static void spawn_interactive(void)
 	int fd;
 	char * dev = "/dev/tty6";
 
-	log_message("spawning my interactive on %s", dev);
+	printf("spawning my interactive on %s\n", dev);
 
 	if (!IS_TESTING) {
 		fd = open(dev, O_RDWR);
 		if (fd == -1) {
-			log_message("cannot open %s -- no interactive", dev);
+			printf("cannot open %s -- no interactive\n", dev);
 			return;
 		}
 
 		if (mkfifo(interactive_fifo, O_RDWR)) {
-			log_message("cannot create fifo -- no interactive");
+			printf("cannot create fifo -- no interactive\n");
 			return;
 		}
 		
@@ -150,7 +150,7 @@ static void spawn_interactive(void)
 			close(fd);
 			setsid();
 			if (ioctl(0, TIOCSCTTY, NULL))
-				log_perror("could not set new controlling tty");
+				perror("could not set new controlling tty");
 
 			fif_out = open(interactive_fifo, O_WRONLY);
 			printf("Please enter your command (availables: [+,-] [rescue,expert]).\n");
