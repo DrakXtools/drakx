@@ -21,7 +21,11 @@ sub parameters {
   foreach (common::join_lines(run_program::get_stdout('modinfo', '-p', $module))) {
       chomp;
       next if /^warning:/;
-      (my $name, $_) = /(\S+)\s+(.*)/s or warn "modules::parameters::get_options_name($module): unknown line\n";
+      (my $name, $_) = /(\w+)(?::|\s+)(.*)/s or warn "modules::parameters::get_options_name($module): unknown line\n";
+      if (c::kernel_version() =~ /^\Q2.6/) {
+          push @parameters, [ $name, '', $_ ];
+          next;
+      }
 
       my $c_types = 'int|string|short|byte|char|long';
       my ($is_a_number, $description, $min, $max) = (0, '', 1, 1);
