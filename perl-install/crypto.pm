@@ -8,10 +8,12 @@ use log;
 use ftp;
 
 my %mirrors = (
+ "ftp.ucr.ac.cr" => [ "Costa Rica", "/pub/Unix/linux/mandrake/Mandrake" ],
  "ftp.nectec.or.th" => [ "Thailand", "/pub/mirrors/Mandrake-crypto" ],
  "ftp.tvd.be" => [ "Belgium", "/packages/mandrake-crypto" ],
  "sunsite.mff.cuni.cz" => [ "Czech Republic", "/OS/Linux/Dist/Mandrake-crypto" ],
  "ftp.uni-kl.de" => [ "Germany", "/pub/linux/mandrake/Mandrake-crypto" ],
+ "ftp.duth.gr" => [ "Grece", "/pub/mandrake-crypto" ],
  "ftp.leo.org" => [ "Germany", "/pub/comp/os/unix/linux/Mandrake/Mandrake-crypto" ],
  "sunsite.uio.no" => [ "Norway", "/pub/unix/Linux/Mandrake-crypto" ],
  "ftp.sunet.se" => [ "Sweden", "/pub/Linux/distributions/mandrake-crypto" ],

@@ -36,6 +36,10 @@ $::skiptest = /-skiptest/;
 $::testing = /-testing/;
 $::isStandalone = 1;
 
+my $f = "/usr/lib/rhs/rhs-printfilters";
+-e $f or system("urpmi --auto rhs-printfilters");
+-e $f or die "install rhs-printfilters first!\n";
+
 my $in = vnew interactive('su');
 
 printerdrake::main('', printerdrake::getinfo(''), $in, sub { `urpmi --auto $_[0]` });

@@ -313,7 +313,8 @@ sub setSelectedFromCompssList {
 	map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
-	my @values = map { $_->{values}[$ind] + ($_->{unskip} ? 10 : 0) } @packages;
+	#- special case for /^k/ aka kde stuff
+	my @values = map { $_->{values}[$ind] + ($_->{unskip} && $_->{name} !~ /^k/ ? 10 : 0) } @packages;
 	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
     };
     foreach (@places) {
