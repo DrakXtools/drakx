@@ -106,6 +106,7 @@ sub new {
     $::Plug->show;
     flush();
     $::Plug->add($o->{window});
+    $::CCPID anf kill USR2, $::CCPID;
     $o;
 }
 sub main {
