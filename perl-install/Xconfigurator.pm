@@ -461,13 +461,7 @@ sub testFinalConfig($;$$) {
 
 	$ENV{DISPLAY} = ":9";
 
-        my $background = "/usr/share/pixmaps/mdk/mandrake-logo.xpm";
-        my $qiv = "/usr/bin/qiv";
-        if ("$prefix/$background" && -x "$prefix/$qiv") {
-            system(($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv -y $background");
-        } else {
-            gtkset_background(200 * 257, 210 * 257, 210 * 257);
-        }
+        gtkset_background(200 * 257, 210 * 257, 210 * 257);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
 	$my_gtk::force_focus = 1;
@@ -478,6 +472,11 @@ sub testFinalConfig($;$$) {
 	    $time-- or Gtk->main_quit;
             1;
 	});
+
+        my $background = "/usr/share/pixmaps/mdk/mandrake-logo.xpm";
+        my $qiv = "/usr/bin/qiv";
+        -r "$prefix/$background" && -x "$prefix/$qiv" and
+            system(($::testing ? "$prefix" : "chroot $prefix/ ") . "$qiv -y $background");
 
 	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
