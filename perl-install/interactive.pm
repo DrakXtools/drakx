@@ -16,6 +16,7 @@ use common;
 #-  help     => tooltip
 #-  advanced => wether it is shown in by default or only in advanced mode
 #-  disabled => function returning wether it should be disabled (grayed)
+#-  gtk      => gtk preferences
 #-  type     => 
 #-     button => (with clicked) (type defaults to button if clicked is there) (val need not be a reference)
 #-     label => (val need not be a reference) (type defaults to label if val is not a reference) 
@@ -118,6 +119,15 @@ sub ask_okcancel {
     } else {
 	ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Ok" : "Cancel", $help) eq "Ok";
     }
+}
+
+sub ask_file {
+    my ($o, $title, $dir) = @_;
+    $o->ask_fileW($title, $dir);
+}
+sub ask_fileW {
+    my ($o, $title, $dir) = @_;
+    $o->ask_from_entry($title, _("Choose a file"));
 }
 
 sub ask_from_list {
@@ -317,7 +327,7 @@ sub ask_browse_tree_info_refW { #- default definition, do not use with too many 
 			  }, 'flat');
     add2hash_($common, { list   => $l, #- TODO interactivity of toggle is missing
 			 values => $v,
-			 help   => sub { $common->{get_info}($_) },
+			 help   => sub { $common->{get_info}($_[0]) },
 		       });
     my ($new_v) = $o->ask_many_from_list($common->{title}, $common->{message}, $common) or return;
     $common->{toggle_nodes}(sub {}, grep { ! delete $h->{$_} } @$new_v);

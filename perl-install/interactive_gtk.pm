@@ -30,6 +30,12 @@ sub ask_warn {
     &interactive::ask_warn;
 }
 
+sub ask_fileW {
+    my ($o, $title, $dir) = @_;
+    $o->_ask_file($title, $dir); 
+    $o->main;
+}
+
 sub create_boxradio {
     my ($e, $may_go_to_next, $changed, $double_click) = @_;
     my @l = map { may_apply($e->{format}, $_) } @{$e->{list}};
@@ -319,7 +325,7 @@ sub ask_from_entries_refW {
     my $set_all = sub {
 	$ignore = 1;
 	$_->{set}->(${$_->{e}{val}}) foreach @widgets_always, @widgets_advanced;
-	$_->{w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets_always, @widgets_advanced;
+	$_->{real_w}->set_sensitive(!$_->{e}{disabled}()) foreach @widgets_always, @widgets_advanced;
 	$ignore = 0;
     };
     my $get_all = sub {
@@ -399,7 +405,7 @@ sub ask_from_entries_refW {
 		sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } } : ''; 
 
 	    my @para = ($e, $may_go_to_next, $changed, $quit_if_double_click);
-	    my $use_boxradio = @{$e->{list}} <= 8;
+	    my $use_boxradio = exists $e->{gtk}{use_boxradio} ? $e->{gtk}{use_boxradio} : @{$e->{list}} <= 8;
 
 	    if ($e->{help}) {
 		#- used only when needed, as key bindings are dropped by List (CList does not seems to accepts Tooltips).
