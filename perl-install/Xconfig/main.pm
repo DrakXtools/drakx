@@ -101,23 +101,23 @@ sub configure_chooser_raw {
     $in->ask_from_({ interactive_help_id => 'configureX_chooser',
 		     if_($::isStandalone, ok => N("Quit")) }, 
 		   [
-		    { label => N("Graphic Card"), val => \$texts{card}, icon => "eth_card_mini", clicked => sub { 
+		    { label => N("Graphic Card"), val => \$texts{card}, clicked => sub { 
 			  $may_set->('card', Xconfig::card::configure($in, $raw_X, $do_pkgs, 0, $options));
 		      } },
-		    { label => N("Monitor"), val => \$texts{monitor}, icon => "ic82-systemeplus-40", clicked => sub { 
+		    { label => N("Monitor"), val => \$texts{monitor}, clicked => sub { 
 			  $may_set->('monitor', Xconfig::monitor::configure($in, $raw_X));
 		      } },
-		    { label => N("Resolution"), val => \$texts{resolution}, icon => "X", disabled => sub { !$X->{card} || !$X->{monitor} },
+		    { label => N("Resolution"), val => \$texts{resolution}, disabled => sub { !$X->{card} || !$X->{monitor} },
 		      clicked => sub {
 			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}));
 		      } },
 		        if_(Xconfig::card::check_bad_card($X->{card}) || $::isStandalone,
-		     { val => N("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} },
+		     { val => N("Test"), disabled => sub { !$X->{card} || !$X->{monitor} },
 		       clicked => sub { 
 			  $ok = Xconfig::test::test($in, $raw_X, $X->{card}, 'auto', 0);
 		      } },
 			),
-		    { val => N("Options"), icon => "ic82-tape-40", clicked => sub {
+		    { val => N("Options"), clicked => sub {
 			  Xconfig::various::various($in, $X->{card}, $options);
 			  $X->{various} = 'done';
 		      } },
