@@ -661,7 +661,7 @@ enum return_type nfs_prepare(void)
 		}
 
 #ifdef MANDRAKE_MOVE
-		if (access(IMAGE_LOCATION "/usr/bin/runstage2", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
 #else
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
 #endif

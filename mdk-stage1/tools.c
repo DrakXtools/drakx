@@ -94,6 +94,7 @@ void process_cmdline(void)
 		if (!strcmp(name, "netauto")) set_param(MODE_NETAUTO);
 		if (!strcmp(name, "recovery")) set_param(MODE_RECOVERY);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
+		if (!strcmp(name, "live")) set_param(MODE_LIVE);
 		if (!strcmp(name, "automatic")) {
 			set_param(MODE_AUTOMATIC);
 			grab_automatic_params(value);
@@ -180,7 +181,7 @@ void unset_param(int i)
 // warning, many things rely on the fact that:
 // - when failing it returns 0
 // - it stops on first non-digit char
-int charstar_to_int(char * s)
+int charstar_to_int(const char * s)
 {
 	int number = 0;
 	while (*s && isdigit(*s)) {

@@ -67,7 +67,7 @@ void log_message(const char * s, ...)
 	return;
 }
 
-void log_perror(char *msg)
+void log_perror(const char *msg)
 {
 	log_message("%s: %s", msg, strerror(errno));
 }

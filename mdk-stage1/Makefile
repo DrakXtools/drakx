@@ -57,7 +57,7 @@ ifeq (i386, $(ARCH))
 INITSRC = minilibc.c init.c
 INIT_DEFS = -DINIT_HEADERS=\"minilibc.h\" -fno-builtin
 INIT_DEFS_ADD = -DBINARY=\"/sbin/stage1\"
-INIT_DEFS_ADD_MANDRAKE_MOVE = -DBINARY=\"/usr/bin/runstage2\"
+INIT_DEFS_ADD_MANDRAKE_MOVE = -DBINARY=\"/usr/bin/runstage2.pl\"
 else
 ifeq (x86_64, $(ARCH))
 INITSRC = minilibc.c init.c

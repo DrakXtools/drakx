@@ -28,7 +28,7 @@ void process_cmdline(void);
 int get_param(int i);
 void set_param(int i);
 void unset_param(int i);
-int charstar_to_int(char * s);
+int charstar_to_int(const char * s);
 int total_memory(void);
 int ramdisk_possible(void);
 char * get_ramdisk_realname(void);

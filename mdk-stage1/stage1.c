@@ -388,29 +388,53 @@ int mandrake_move_pre(void)
         return RETURN_OK;
 }
 
+
 int mandrake_move_post(void)
 {
         FILE *f;
         char buf[5000];
         int fd;
         char rootdev[] = "0x0100"; 
-        int real_is_symlink_to_raw = 0;
+        int boot__real_is_symlink_to_raw = 0;
+        int main__real_is_symlink_to_raw = 0;
+        char* clp = IMAGE_LOCATION "/live_tree_boot.clp";
+        char* live = IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl";
 
-        if (!access(IMAGE_LOCATION "/move/symlinks", R_OK)) {
-                log_message("move: seems we don't use a gzloop since " IMAGE_LOCATION "/move/symlinks is here");
-                if (scall(symlink(IMAGE_LOCATION, IMAGE_LOCATION_REAL), "symlink"))
-                        return RETURN_ERROR;
-                real_is_symlink_to_raw = 1;
-        } else {
-                if (access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
-                        log_message("move: panic, " IMAGE_LOCATION "/move/symlinks isn't here but " IMAGE_LOCATION "/live_tree.clp neither");
-                        return RETURN_ERROR;
-                } else {
-                        if (lomount(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION_REAL, 1))
-                                stg1_error_message("Could not mount compressed loopback :(.");
+        if (IS_LIVE || access(clp, R_OK)) {
+                log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
+                if (!access(live, R_OK)) {
+                        if (scall(symlink(IMAGE_LOCATION "/live_tree_boot", BOOT_LOCATION), "symlink"))
+                                return RETURN_ERROR;
+                        boot__real_is_symlink_to_raw = 1;
+                        goto live_tree_clp;
                 }
+                log_message("move: panic, can't find %s nor %s", clp, live);
+                return RETURN_ERROR;
         }
 
+        if (lomount(clp, BOOT_LOCATION, NULL, 1))
+                stg1_error_message("Could not mount boot compressed loopback :(.");
+
+ live_tree_clp:
+        clp = IMAGE_LOCATION "/live_tree.clp";
+        live = IMAGE_LOCATION "/live_tree/etc/fstab";
+        if (IS_LIVE || access(clp, R_OK)) {
+                log_message("no %s found (or disabled), trying to fallback on plain tree", clp);
+                if (!access(live, R_OK)) {
+                        if (scall(symlink(IMAGE_LOCATION "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
+                                return RETURN_ERROR;
+                        main__real_is_symlink_to_raw = 1;
+                        goto live_tree_ok;
+                }
+                log_message("move: panic, can't find %s nor %s", clp, live);
+                return RETURN_ERROR;
+        }
+
+        if (lomount(clp, IMAGE_LOCATION_REAL, NULL, 1))
+                stg1_error_message("Could not mount main compressed loopback :(.");
+
+       
+live_tree_ok:
         if (scall(!(f = fopen(IMAGE_LOCATION_REAL "/move/symlinks", "rb")), "fopen"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
@@ -441,13 +465,20 @@ int mandrake_move_post(void)
         }
         fclose(f);
 
-        if (real_is_symlink_to_raw) {
-                if (scall(unlink(IMAGE_LOCATION_REAL), "unlink"))
+        if (boot__real_is_symlink_to_raw) {
+                if (scall(unlink(BOOT_LOCATION), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(RAW_LOCATION_REL, IMAGE_LOCATION_REAL), "symlink"))
+                if (scall(symlink(RAW_LOCATION_REL "/live_tree_boot", BOOT_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
-                
+
+        if (main__real_is_symlink_to_raw) {
+                if (scall(unlink(IMAGE_LOCATION_REAL), "unlink"))
+                        return RETURN_ERROR;
+                if (scall(symlink(RAW_LOCATION_REL "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
+                        return RETURN_ERROR;
+        }
+
         log_message("move: pivot_rooting");
         // trick so that kernel won't try to mount the root device when initrd exits
         if (scall((fd = open("/proc/sys/kernel/real-root-dev", O_WRONLY)) < 0, "open"))

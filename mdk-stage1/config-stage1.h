@@ -38,6 +38,7 @@
 #define SLASH_LOCATION   "/sysroot"
 #define RAW_LOCATION_REL "/image_raw"
 #define LIVE_LOCATION_REL "/image"
+#define BOOT_LOCATION "/sysroot/image_boot"
 #else
 #define DISTRIB_NAME "Mandrake Linux"
 #define IMAGE_LOCATION   "/tmp/image"
