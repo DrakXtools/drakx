@@ -23,6 +23,7 @@ use detect_devices;
 use steps;
 use commands;
 use fs;
+use Data::Dumper;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 
@@ -87,7 +88,6 @@ fs::mount($dev, $mountdir, 'vfat', 0);
 my $cfgfile = "$mountdir/auto_inst.cfg";
 eval(cat_($cfgfile));
 
-require Data::Dumper;
 my $str = join('',
 "#!/usr/bin/perl -cw
 #
@@ -125,6 +125,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.4  2001/08/26 14:34:10  gc
+#- require -> use
+#-
 #- Revision 1.3  2001/08/18 17:52:21  prigaux
 #- big renaming of ask_from_entries_refH in ask_from and ask_from_entries_refH_powered in ask_from_
 #-
