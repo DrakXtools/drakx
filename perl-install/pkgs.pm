@@ -377,23 +377,21 @@ sub psUsingHdlist {
     #- if the medium already exist, use it.
     $packages->{mediums}{$medium} and return $packages->{mediums}{$medium};
 
-    my $m = $packages->{mediums}{$medium} = { hdlist     => $hdlist,
-					      method     => $method,
-					      medium     => $medium,
-					      rpmsdir    => $rpmsdir, #- where is RPMS directory.
-					      descr      => $descr,
-					      fakemedium => $fakemedium,
-#					      min        => $packages->{count},
-#					      max        => -1, #- will be updated after reading current hdlist.
-					      selected   => $selected, #- default value is only CD1, it is really the minimal.
-					      ignored    => !$selected, #- keep track of ignored medium by DrakX.
-					    };
+    my $m = { hdlist     => $hdlist,
+	      method     => $method,
+	      medium     => $medium,
+	      rpmsdir    => $rpmsdir, #- where is RPMS directory.
+	      descr      => $descr,
+	      fakemedium => $fakemedium,
+	      selected   => $selected, #- default value is only CD1, it is really the minimal.
+	      ignored    => !$selected, #- keep track of ignored medium by DrakX.
+	    };
 
     #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
     #- for getting header of package during installation or after by urpmi.
     my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!" };
-    install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
+    install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or do { unlink $newf; die "no $hdlist found" };
     $m->{hdlist_size} = -s $newf; #- keep track of size for post-check.
     symlinkf $newf, "/tmp/$hdlist";
 
@@ -405,6 +403,9 @@ sub psUsingHdlist {
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
     }
+
+    #- integrate medium in media list, only here to avoid download error (update) to be propagated.
+    $packages->{mediums}{$medium} = $m;
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
@@ -421,7 +422,10 @@ sub psUsingHdlist {
 	} else {
 	    die "fatal: no hdlist nor synthesis to read for $fakemedium";
 	}
-	$m->{start} > $m->{end} and die "fatal: nothing read in hdlist or synthesis for $fakemedium";
+	$m->{start} > $m->{end} and do { delete $packages->{mediums}{$medium};
+					 unlink $newf;
+					 $fhdlist or unlink $newsf;
+					 die "fatal: nothing read in hdlist or synthesis for $fakemedium" };
 	log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist");
     }
     $m;
