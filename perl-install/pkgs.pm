@@ -80,7 +80,7 @@ sub packageFile         { $_[0] && $_[0]->[$FILE] =~ /^([^:\s]*-[^:\-\s]+-[^:\-\
 			    : die "invalid file `" . ($_[0] && $_[0]->[$FILE]) . "'\n" . backtrace() }
 sub packageEpoch        { $_[0] && $_[0]->[$EPOCH] || 0 }
 
-sub packageSize   { to_int($_[0] && $_[0]->[$SIZE_DEPS]) }
+sub packageSize   { to_int($_[0] && ($_[0]->[$SIZE_DEPS] - ($_[0]->[$INSTALLED_CUMUL_SIZE] || 0))) }
 sub packageDepsId { split ' ', ($_[0] && ($_[0]->[$SIZE_DEPS] =~ /^\d*\s*(.*)/)[0]) }
 
 sub packageFlagSelected  { $_[0] && $_[0]->[$FLAGS] & $PKGS_SELECTED }
@@ -168,7 +168,7 @@ sub selectedSize {
     my ($packages) = @_;
     my $size = 0;
     foreach (values %{$packages->{names}}) {
-	packageFlagSelected($_) && !packageFlagInstalled($_) and $size += packageSize($_) - ($_->[$INSTALLED_CUMUL_SIZE] || 0);
+	packageFlagSelected($_) && !packageFlagInstalled($_) and $size += packageSize($_);
     }
     $size;
 }
