@@ -360,6 +360,108 @@ sub preConfigureTimezone {
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 
+sub selectSupplMedia {
+    my ($o, $suppl_method) = @_;
+    #- ask whether there are supplementary media
+    my $prev_asked_medium = $asked_medium;
+    if ($suppl_method && !$o->{isUpgrade}
+	&& (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
+		[ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
+	) ne 'None')
+    {
+	#- translate to method name
+	$suppl_method = {
+	    'CD-ROM' => 'cdrom',
+	    'Network (http)' => 'http',
+	    'Network (ftp)' => 'ftp',
+	}->{$suppl};
+	#- by convention, the media names for suppl. CDs match /^\d+s$/
+	my $medium_name = $suppl_method eq 'cdrom' ? '1s' : int(keys %{$o->{packages}{mediums}}) + 1;
+	local $::isWizard = 0;
+	local $o->{method} = $suppl_method;
+	if ($suppl_method eq 'cdrom') {
+	    (my $cdromdev) = detect_devices::cdroms();
+	    return '' if !$cdromdev;
+	    $cdrom = $cdromdev->{device};
+	    devices::make($cdrom);
+	    ejectCdrom($cdrom);
+	    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
+		mountCdrom("/mnt/cdrom", $cdrom);
+		log::l($@) if $@;
+		useMedium($medium_name);
+		#- probe for an hdlists file and then look for all hdlists listed herein
+		eval { pkgs::psUsingHdlists($o->{prefix}, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}) };
+		if ($@) {
+		    #- no hdlists found on the suppl. CD
+		    #- Look directly for a file media/main/hdlist1s.cz
+		    my $supplmedium = pkgs::psUsingHdlist(
+			$o->{prefix}, # /mnt
+			$suppl_method,
+			$o->{packages},
+			"hdlist$medium_name.cz",
+			$medium_name,
+			'media/main',
+			"Supplementary CD $medium_name",
+			1, # selected
+			"/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
+		    );
+		    if ($supplmedium) {
+			log::l("read suppl hdlist on cdrom");
+			$supplmedium->{prefix} = "removable://mnt/cdrom"; #- for install_urpmi
+			$supplmedium->{selected} = 1;
+			$supplmedium->{method} = 'cdrom';
+		    } else {
+			log::l("no suppl hdlist");
+		    }
+		}
+	    }
+	} else {
+	    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or return '';
+	    useMedium($medium_name);
+	    require "$suppl_method.pm";
+	    my $f = eval {
+		if ($suppl_method eq 'http') {
+		    http::getFile("$url/media_info/hdlist.cz");
+		} elsif ($suppl_method eq 'ftp') {
+		    my ($login, $pass, $host, $prefix) = $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!;
+		    ftp::getFile("media_info/hdlist.cz", $host, $prefix, $login, $pass);
+		} else { undef }
+	    };
+	    if (!defined $f) {
+		log::l($@) if $@;
+		$o->ask_warn('', N("Can't find hdlist file on this mirror"));
+		useMedium($prev_asked_medium);
+		return '';
+	    }
+	    my $supplmedium = pkgs::psUsingHdlist(
+		$o->{prefix},
+		$suppl_method,
+		$o->{packages},
+		"hdlist$medium_name.cz", #- hdlist
+		$medium_name,
+		'', #- rpmsdir
+		"Supplementary media $medium_name", #- description
+		1, # selected
+		$f,
+	    );
+	    close $f;
+	    if ($supplmedium) {
+		log::l("read suppl hdlist (via $suppl_method)");
+		$supplmedium->{prefix} = $url; #- for install_urpmi
+		$supplmedium->{selected} = 1;
+		$supplmedium->{method} = $suppl_method;
+		$supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
+	    } else {
+		log::l("no suppl hdlist");
+	    }
+	}
+    } else {
+	$suppl_method = '';
+    }
+    useMedium($prev_asked_medium); #- back to main medium
+    return $suppl_method;
+}
+
 sub setPackages {
     my ($o, $rebuild_needed) = @_;
 
@@ -368,105 +470,7 @@ sub setPackages {
 	my $cdrom;
 	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
-	#- ask whether there are supplementary media
-	SUPPL: {
-	    my $prev_asked_medium = $asked_medium;
-	    if ($suppl_method && !$o->{isUpgrade}
-	        && (my $suppl = $o->ask_from_list_('', N("Do you have a supplementary installation media to configure?"),
-			[ N_("None"), N_("CD-ROM"), N_("Network (http)"), N_("Network (ftp)") ], 'None')
-		   ) ne 'None')
-	    {
-		#- translate to method name
-		$suppl_method = {
-		    'CD-ROM' => 'cdrom',
-		    'Network (http)' => 'http',
-		    'Network (ftp)' => 'ftp',
-		}->{$suppl};
-		#- by convention, the media names for suppl. CDs match /^\d+s$/
-		my $medium_name = $suppl_method eq 'cdrom' ? '1s' : int(keys %{$o->{packages}{mediums}}) + 1;
-		local $::isWizard = 0;
-		local $o->{method} = $suppl_method;
-		if ($suppl_method eq 'cdrom') {
-		    (my $cdromdev) = detect_devices::cdroms();
-		    $suppl_method = '', last SUPPL if !$cdromdev;
-		    $cdrom = $cdromdev->{device};
-		    devices::make($cdrom);
-		    ejectCdrom($cdrom);
-		    if ($o->ask_okcancel('', N("Insert the CD"), 1)) {
-			mountCdrom("/mnt/cdrom", $cdrom);
-			log::l($@) if $@;
-			useMedium($medium_name);
-			#- probe for an hdlists file and then look for all hdlists listed herein
-			eval { pkgs::psUsingHdlists($o->{prefix}, $suppl_method, "/mnt/cdrom/media/media_info/hdlists", $o->{packages}) };
-			if ($@) {
-			    #- no hdlists found on the suppl. CD
-			    #- Look directly for a file media/main/hdlist1s.cz
-			    my $supplmedium = pkgs::psUsingHdlist(
-				$o->{prefix}, # /mnt
-				$suppl_method,
-				$o->{packages},
-				"hdlist$medium_name.cz",
-				$medium_name,
-				'media/main',
-				"Supplementary CD $medium_name",
-				1, # selected
-				"/mnt/cdrom/media/main/media_info/hdlist$medium_name.cz",
-			    );
-			    if ($supplmedium) {
-				log::l("read suppl hdlist on cdrom");
-				$supplmedium->{prefix} = "removable://mnt/cdrom"; #- for install_urpmi
-				$supplmedium->{selected} = 1;
-				$supplmedium->{method} = 'cdrom';
-			    } else {
-				log::l("no suppl hdlist");
-			    }
-			}
-		    }
-		} else {
-		    my $url = $o->ask_from_entry('', N("URL of the mirror?")) or $suppl_method = '', last SUPPL;
-		    useMedium($medium_name);
-		    require "$suppl_method.pm";
-		    my $f = eval {
-			if ($suppl_method eq 'http') {
-			    http::getFile("$url/media_info/hdlist.cz");
-			} elsif ($suppl_method eq 'ftp') {
-			    ftp::getFile("$url/media_info/hdlist.cz");
-			} else { undef }
-		    };
-		    if (!defined $f) {
-			log::l($@) if $@;
-			$o->ask_warn('', N("Can't find hdlist file on this mirror"));
-			$suppl_method = '';
-			useMedium($prev_asked_medium);
-			last SUPPL;
-		    }
-		    my $supplmedium = pkgs::psUsingHdlist(
-			$o->{prefix},
-			$suppl_method,
-			$o->{packages},
-			"hdlist$medium_name.cz", #- hdlist
-			$medium_name,
-			'', #- rpmsdir
-			"Supplementary media $medium_name", #- description
-			1, # selected
-			$f,
-		    );
-		    close $f;
-		    if ($supplmedium) {
-			log::l("read suppl hdlist (via $suppl_method)");
-			$supplmedium->{prefix} = $url; #- for install_urpmi
-			$supplmedium->{selected} = 1;
-			$supplmedium->{method} = $suppl_method;
-			$supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
-		    } else {
-			log::l("no suppl hdlist");
-		    }
-		}
-	    } else {
-		$suppl_method = '';
-	    }
-	    useMedium($prev_asked_medium); #- back to main medium
-	}
+	$suppl_method = $o->selectSupplMedia($suppl_method);
 
 	#- open rpm db according to right mode needed.
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
@@ -481,6 +485,7 @@ sub setPackages {
 
 	#- must be done after getProvides
 	#- if there is a supplementary CD, override the rpmsrate/compssUsers
+	#- FIXME make this overriding optional
 	pkgs::read_rpmsrate(
 	    $o->{packages},
 	    getFile($suppl_method eq 'cdrom' ? "/mnt/cdrom/media/media_info/rpmsrate" : "media/media_info/rpmsrate")

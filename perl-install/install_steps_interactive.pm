@@ -383,6 +383,11 @@ sub setPackages {
 	pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
     }
 }
+
+sub selectSupplMedia {
+    my ($o, $suppl_method) = @_;
+    install_any::selectSupplMedia($o, $suppl_method);
+}
 #------------------------------------------------------------------------------
 sub choosePackages {
     my ($o, $packages, $compssUsers, $_first_time) = @_;

@@ -290,6 +290,8 @@ sub setPackages {
     $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
 }
 
+sub selectSupplMedia { '' }
+
 sub choosePackages {
     my ($o, $packages, $_compssUsers, $first_time) = @_;
 
