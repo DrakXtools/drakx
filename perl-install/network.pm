@@ -84,13 +84,14 @@ sub write_resolv_conf {
 	log::l("neither domain name nor dns server are configured");
 	return 0;
     }
-    my @l = cat_($file);
 
-    local *F;
-    open F, "> $file" or die "cannot write $file: $!";
-    print F "search $netc->{DOMAINNAME}\n" if $netc->{DOMAINNAME};
-    print F "nameserver $_\n" foreach dnsServers($netc);
-    print F "#$_" foreach @l;
+    substInFile {
+	s/^([^#].*\n)/\#$1/;
+	if (eof) {
+	    $_ .= "search $netc->{DOMAINNAME}\n" if $netc->{DOMAINNAME};
+	    $_ .= "nameserver $_\n" foreach dnsServers($netc);
+	}
+    } $file;
 
     #-res_init();		# reinit the resolver so DNS changes take affect
     1;
