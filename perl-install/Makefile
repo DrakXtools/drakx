@@ -287,10 +287,12 @@ nuke_perl:
 	find ../$(PACKAGE)-$(PKGVERSION)/standalone -type f | xargs perl -pi -e 's/\s*use\s+(diagnostics|strict|vars|warnings).*//g'
 
 dont_run_directly_stage2:
+	[ -d $(DEST) ] || $(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
 	echo -e '#!/bin/sh\n\nexec /usr/bin/busybox sh' > $(DEST)/usr/bin/runinstall2.sh
 	chmod a+x $(DEST)/usr/bin/runinstall2.sh
 	ln -sf runinstall2.sh $(DEST)/usr/bin/runinstall2
 
 trace_stage2:
+	[ -d $(DEST) ] || $(MISC_DEST)/mdkinst_stage2_tool $(STAGE2_DEST)
 	f=`perldoc -l Devel::Trace`; install -m 644 -D $$f $(DEST)$$f
 	perl -pi -e 's|(#!/usr/bin/perl).*|$$1 -d:Trace|' $(DEST)/usr/bin/runinstall2
