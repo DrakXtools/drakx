@@ -663,9 +663,10 @@ sub deselectFoundMedia {
     my $ask_copy_rpms_on_disk = $o->{method} !~ /iso/i;
     #- check available size for copying rpms from infos in hdlists file
     if ($ask_copy_rpms_on_disk && $totalsize >= 0) {
-	my (undef, $availvar) = install_any::getAvailableSpace_mounted('/var');
-	$availvar /= 1024; #- Mo
-	$ask_copy_rpms_on_disk = $totalsize > $availvar * 0.6;
+	my $availvar = install_any::getAvailableSpace_mounted("$::prefix/var");
+	$availvar /= 1024 * 1024; #- Mo
+	log::l("totalsize=$totalsize, avail on $::prefix/var=$availvar");
+	$ask_copy_rpms_on_disk = $totalsize < $availvar * 0.6;
     }
     if ($ask_copy_rpms_on_disk) {
 	#- don't be afraid, cleanup old RPMs if upgrade
