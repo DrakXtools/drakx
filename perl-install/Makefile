@@ -14,7 +14,10 @@ OTHERFILES = tools/rpcinfo-flushed.c
 
 .PHONY: all $(DIRS) install clean stage2 full_stage2 verify_c 
 
-all: TAGS $(DIRS)
+all: list_modules.pm TAGS $(DIRS)
+
+list_modules.pm:
+	ln -sf ../kernel/list_modules.pm
 
 TAGS: $(ALLPMS)
 	etags -o - $^ /usr/lib/perl5/site_perl/*/MDK/Common/*.pm | ./perl2etags > $@
@@ -39,7 +42,6 @@ $(DIRS):
 	$(MAKE) -C $@
 
 test_pms: verify_c
-	ln -sf ../kernel/list_modules.pm
 	for i in install2 install_steps_*.pm standalone/keyboarddrake standalone/XFdrake standalone/drakboot; do perl_checker -I. -no_cw -excludec -excludehelp -excluderesize_fat::c_rewritten -excludeMDK::Common::Globals -excludeCGI -excludestandalone -excludeurpm $$i; done
 	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
 
