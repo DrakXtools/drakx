@@ -9,12 +9,8 @@ use Digest::MD5;
 use network::netconnect;
 use network::tools;
 
-use Net::DBus;
-use Net::DBus::Binding::Watch;
-use Gtk2::Helper;
-use Socket;
 use mygtk2 qw(gtknew);
-use POSIX qw(strftime);
+use network::activefw;
 
 use Gtk2::TrayIcon;
 
@@ -81,7 +77,14 @@ if ($opt eq '--force' || $opt eq '-f') { setAutoStart('TRUE') }
 
 shouldStart() or die "$onstartupfile should be set to TRUE or use net_applet --force";
 
-my ($dbus_con, $dbus_daemon, $interactive_ids) = initDBus();
+my $activefw = activefw->new(sub {
+    my ($con, $msg) = @_;
+    handle_attack($msg->get_args_list) if
+      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+      $msg->get_member eq "Attack";
+});
+my $interactive_ids = $activefw->get_mode;
 
 checkNetwork();
 cronNetwork();
@@ -164,7 +167,7 @@ sub setState {
     }
     $menu->append(gtkshow(Gtk2::SeparatorMenuItem->new));
     $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Interactive intrusion detection")), $interactive_ids),
-                                            toggled => sub { setInteractiveIDS(to_bool($_[0]->get_active)) })));
+                                            toggled => sub { $activefw->set_interactive(to_bool($_[0]->get_active)) })));
     $menu->append(gtkshow(gtksignal_connect(gtkset_active(Gtk2::CheckMenuItem->new_with_label(N("Always launch on startup")), shouldStart()),
                                             toggled => sub { setAutoStart(uc(bool2text($_[0]->get_active))) })));
     $menu->append(gtksignal_connect(gtkshow(Gtk2::MenuItem->new_with_label(N("Quit"))), activate => sub { mainQuit() }));
@@ -179,70 +182,14 @@ sub setAutoStart {
     output_p $onstartupfile,
     qq(AUTOSTART=$state
 );
-} 
-
-sub setDBusWatch {
-    my ($con) = @_;
-    $con->set_watch_callbacks(sub {
-        my ($con, $watch) = @_;
-        my $flags = $watch->get_flags;
-        if ($flags & &Net::DBus::Binding::Watch::READABLE) {
-            Gtk2::Helper->add_watch($watch->get_fileno, 'in', sub {
-                $watch->handle(&Net::DBus::Binding::Watch::READABLE);
-                $con->dispatch;
-                1;
-            });
-        }
-        #- do nothing for WRITABLE watch, we dispatch when needed
-    }, undef, undef); #- do nothing when watch is disabled or toggled yet
 }
 
-sub initDBus {
-    my $bus = Net::DBus->system;
-    my $con = $bus->{connection};
-
-    $con->add_filter(sub {
-        my ($con, $msg) = @_;
-        if ($msg->get_interface eq "com.mandrakesoft.activefirewall" &&
-              $msg->get_path eq "/com/mandrakesoft/activefirewall") {
-            $msg->get_member eq "Attack" and handleAttack($msg->get_args_list);
-        }
-    });
-    $con->add_match("type='signal',interface='com.mandrakesoft.activefirewall'");
-
-    setDBusWatch($con);
-    $con->dispatch;
-
-    my $service = $bus->get_service("com.mandrakesoft.activefirewall.daemon");
-    my $daemon = $service->get_object("/com/mandrakesoft/activefirewall", "com.mandrakesoft.activefirewall.daemon");
-
-    my $mode;
-    eval {
-        $mode = $daemon->GetMode;
-    };
-    if ($@) {
-        print "exception: $@\n";
-        $con->dispatch;
-        return;
-    }
-    return $con, $daemon, $mode;
-}
-
-sub handleAttack {
+sub handle_attack {
     my ($seq, $timestamp, $indev, $prefix, $sensor, $protocol, $addr, $port, $icmp_type) = @_;
 
-    my $ip_addr = inet_ntoa(pack('N', $addr));
-    #- try to resolve address, timeout after 2 seconds
-    my $hostname;
-    eval {
-        local $SIG{ALRM} = sub { die "ALARM" };
-        alarm 2;
-        $hostname = gethostbyaddr(inet_aton($ip_addr), AF_INET);
-        alarm 0;
-    };
-    $hostname ||= $ip_addr;
-
-    my $service = getservbyport($port, undef) || $port;
+    my $ip_addr = activefw::get_ip($addr);
+    my $hostname = activefw::resolve_address($ip_addr);
+    my $service = activefw::get_service($port);
 
     my $msg = $prefix eq "SCAN" ? N("A port scanning attack has been attempted by %s.", $hostname)
             : $prefix eq "SERV" ? N("The %s service has been attacked by %s.", $service , $hostname)
@@ -270,18 +217,18 @@ sub handleAttack {
                gtknew('HBox', children_loose => [
                    gtknew('HButtonBox', layout => 'start', children_loose => [
                        gtknew('Button', text => N("No"),
-                              clicked => sub { dbus_blacklist($seq, 0); Gtk2->main_quit })
+                              clicked => sub { $activefw->blacklist($seq, 0); Gtk2->main_quit })
                    ]),
                    gtknew('HButtonBox', layout => 'end', children_loose => [
                        my $ok = gtknew('Button', text => N("Yes"),
-                                         clicked => sub { dbus_blacklist($seq, 1); Gtk2->main_quit })
+                                         clicked => sub { $activefw->blacklist($seq, 1); Gtk2->main_quit })
                    ])
                ]),
                gtkadd(Gtk2::Expander->new(N("Attack details")),
                       gtknew('HBox', children => [
                           0, gtknew('Label', text => "     "),
                           1, gtknew('VBox', children_loose => [
-                              N("Attack time: %s", strftime("%c", localtime($timestamp))),
+                              N("Attack time: %s", activefw::format_date($timestamp),
                               N("Network interface: %s", $indev),
                               N("Attack type: %s", $prefix),
                               if_($protocol, N("Protocol: %s", $protocol)),
@@ -295,32 +242,4 @@ sub handleAttack {
            ]));
     $ok->grab_focus;
     $w->main;
-
-    #- blacklist or allow attacker
-}
-
-sub dbus_blacklist {
-    my ($seq, $blacklist) = @_;
-    eval {
-        $dbus_daemon->Blacklist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
-                                Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
-    };
-    if ($@) {
-        print "exception: $@\n";
-        $dbus_con->dispatch;
-        return;
-    }
-}
-
-sub setInteractiveIDS {
-    my ($mode) = @_;
-    print "setting new IDS mode: $mode\n";
-    eval {
-        $dbus_daemon->SetMode(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
-    };
-    if ($@) {
-        print "exception: $@\n";
-        $dbus_con->dispatch;
-        return;
-    }
 }
