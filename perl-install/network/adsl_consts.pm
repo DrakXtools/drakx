@@ -1,6 +1,6 @@
 package network::adsl_consts; # $Id$
 
-# This should probably be splited out into ldetect-lst as some provider db
+# This should probably be splitted out into ldetect-lst as some provider db
 
 use vars qw(@ISA @EXPORT);
 use common;
