@@ -253,15 +253,18 @@ sub configureNetwork {
     local $_;
     any::setup_thiskind($in, 'net', !$::expert, 1);
     my @l = detect_devices::getNet() or die _("no network card found");
+    my @all_cards = netconnect::conf_network_card_backend ($prefix, $netc, $intf, undef, undef, undef, undef);
 
+    my $n_card=0;
     my $last; foreach ($::expert ? @l : $l[0]) {
 	my $intf2 = findIntf($intf ||= {}, $_);
 	add2hash($intf2, $last);
 	add2hash($intf2, { NETMASK => '255.255.255.0' });
-	configureNetworkIntf($in, $intf2, $netc->{NET_DEVICE}, 0) or last;
+	configureNetworkIntf($netc, $in, $intf2, $netc->{NET_DEVICE}, 0, $all_cards[$n_card]->[1]) or last;
 
 	$netc ||= {};
 	$last = $intf2;
+	$n_card++;
     }
     #-	  {
     #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
@@ -292,8 +295,10 @@ such as ``mybox.mylab.myco.com''."),
 
 
 sub configureNetworkIntf {
-    my ($in, $intf, $net_device, $skip) = @_;
+    my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
+    my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs");
+    member($module, @wireless_modules) and $netc->{wireless_eth}=1;
     if ($net_device eq $intf->{DEVICE}) {
 	$skip and return 1;
 	$text = _("WARNING: This device has been previously configured to connect to the Internet.
@@ -311,11 +316,26 @@ notation (for example, 1.2.3.4).");
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from_entries_refH(_("Configuring network device %s", $intf->{DEVICE}),
-			      ($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . "\n\n") .
+			      ($::isStandalone ? '' : _("Configuring network device %s", $intf->{DEVICE}) . ( $module ? _(" (driver $module)") : '' ) ."\n\n") .
 			      $text,
 			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
 			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
-			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") } ],
+			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") } 
+			       member($module, @wireless_modules) ?
+			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
+			       { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
+			       { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
+			       { label => "WIRELESS_FREQ", val => \$intf->{WIRELESS_FREQ} },
+			       { label => "WIRELESS_SENS", val => \$intf->{WIRELESS_SENS} },
+			       { label => "WIRELESS_RATE", val => \$intf->{WIRELESS_RATE} },
+			       { label => "WIRELESS_ENC_KEY", val => \$intf->{WIRELESS_ENC_KEY} },
+			       { label => "WIRELESS_RTS", val => \$intf->{WIRELESS_RTS} },
+			       { label => "WIRELESS_FRAG", val => \$intf->{WIRELESS_FRAG} },
+			       { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
+			       { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
+			       { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
+			       : ()
+			     ],
 			     complete => sub {
 				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
 				 return 0 if $pump;
@@ -325,6 +345,15 @@ notation (for example, 1.2.3.4).");
 					 return (1,$i);
 				     }
 				     return 0;
+				 }
+				 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+				     $in->ask_warn('', _('Freq should have the suffix k, M or G (for example, "2.46G" for 2.46 GHz fre­
+              quency), or add enough \'0\'.'));
+				     return (1,6);
+				 }
+				 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+				     $in->ask_warn('', _('Rate should have the suffix k, M or G (for example, "11M" for 11M), or add enough \'0\'.'));
+				     return (1,8);
 				 }
 			     },
 			     focus_out => sub {
@@ -414,6 +443,7 @@ sub configureNetwork2 {
     my ($prefix, $netc, $intf, $install) = @_;
     my $etc = "$prefix/etc";
 
+    $netc->{wireless_eth} and $install->('wireless-tools')
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach values %$intf;
