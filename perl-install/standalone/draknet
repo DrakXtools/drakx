@@ -18,7 +18,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
-use Data::Dumper;
+#use Data::Dumper;
 use lib qw(/usr/lib/libDrakX);
 
 use interactive;
@@ -248,6 +248,8 @@ $button_wizard->signal_connect ( clicked => sub {
 				     system("draknet --wizard");
 # netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
 				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				     netconnect::load_conf('', $netcnx, $netc, $intf);
+				     update();
 				 });
 $bbox1->add($button_wizard );
 my $button_ok = new Gtk::Button "OK";
@@ -448,14 +450,14 @@ sub configure_net {
 		     [_("Account Password"), \$cnx->{passwd}],
 		     [_("Dialing mode"), $cnx->{dialing_mode}, [ "auto", "manual"] ],
 		     [_("Gateway"), \$netc->{GATEWAY}],
-		     [_("Connection name"), \$modem->{connection} ],
-		     [_("Phone number"), \$modem->{phone} ],
-		     [_("Login ID"), \$modem->{login} ],
-		     [_("Password"), \$modem->{passwd} ],
-		     [_("Authentication"), \$modem->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
-		     [_("Domain name"), \$modem->{domain} ],
-		     [_("First DNS Server"), \$modem->{dns1} ],
-		     [_("Second DNS Server"), \$modem->{dns2} ],
+		     [_("Connection name"), \$cnx->{connection} ],
+		     [_("Phone number"), \$cnx->{phone} ],
+		     [_("Login ID"), \$cnx->{login} ],
+		     [_("Password"), \$cnx->{passwd} ],
+		     [_("Authentication"), \$cnx->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
+		     [_("Domain name"), \$cnx->{domain} ],
+		     [_("First DNS Server"), \$cnx->{dns1} ],
+		     [_("Second DNS Server"), \$cnx->{dns2} ],
 		     [_("Ethernet Card"), \$netc->{NET_DEVICE}, [ 'eth0', 'eth1', 'eth2', 'eth3', 'eth4', 'eth5','eth6', 'eth7', 'eth8', 'eth9' ]],
 		     [_("DHCP Client"), \$netcnx->{dhcp_client}, ["dhcpcd", "dhcpxd", "dhcp-client"] ]
 );
@@ -522,18 +524,18 @@ sub configure_net {
     Gtk->main;
 }
 
-sub detect {
-    my ($auto_detect) = @_;
-    my $isdn={};
-    netconnect::isdn_detect_backend($isdn);
-    $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
+#  sub detect {
+#      my ($auto_detect) = @_;
+#      my $isdn={};
+#      netconnect::isdn_detect_backend($isdn);
+#      $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
 
-    my $netc={};
-    my $intf={};
-    any::setup_thiskind_backend('net', undef);
-    my @all_cards = netconnect::conf_network_card_backend ('', undef, undef, undef, undef, undef, undef);
-    map { netconnect::adsl_detect("", $_->[0]) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
-    my $modem={};
-    netconnect::modem_detect_backend($modem);#, $mouse);
-    $modem->{device} and $auto_detect->{modem}=$modem->{device};
-}
+#      my $netc={};
+#      my $intf={};
+#      any::setup_thiskind_backend('net', undef);
+#      my @all_cards = netconnect::conf_network_card_backend ('', undef, undef, undef, undef, undef, undef);
+#      map { netconnect::adsl_detect("", $_->[0]) ? $auto_detect->{adsl}=$_->[0] : $auto_detect->{lan}{$_->[0]}=$_->[1]; } @all_cards;
+#      my $modem={};
+#      netconnect::modem_detect_backend($modem);#, $mouse);
+#      $modem->{device} and $auto_detect->{modem}=$modem->{device};
+#  }
