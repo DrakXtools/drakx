@@ -187,8 +187,6 @@ sub formatPartitions {
 
     common::screenshot_dir__and_move();
 
-    substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
-
     any::rotate_logs($o->{prefix});
 
     require raid;
