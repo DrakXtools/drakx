@@ -39,16 +39,16 @@ We recommand the light configuration.
     if ($e =~ /card/) {
       intern_pci:
 	$netc->{isdntype} = 'isdn_internal';
-	$netcnx->{isdn_internal} = isdn_read_config($isdn);
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type', 'is_light';
 	$netcnx->{isdn_internal}{is_light} =
 	  defined $netc->{autodetect}{isdn}{id} ? 1 : $netc->{autodetect}{isdn}{is_light};
+	$netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
 	$netc->{isdntype} = 'isdn_external';
-	$netcnx->{isdn_external} = isdn_read_config($isdn);
 	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
 	$netcnx->{isdn_external}{is_light} = $netc->{autodetect}{isdn}{is_light};
+	$netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
 	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
 	require network::modem;
 	network::modem::ppp_choose($in, $netc, $netcnx->{isdn_external}) or goto isdn_step_1;
