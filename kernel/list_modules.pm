@@ -39,7 +39,7 @@ our %l = (
     ],
 
     raw => [
-      qw(ppp_generic ppp_async),
+      qw(ppp_generic ppp_async ppp_deflate bsd_comp),
     ],
     pcmcia => [ 
       qw(3c574_cs 3c589_cs axnet_cs fmvj18x_cs),
@@ -132,7 +132,7 @@ our %l = (
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(reiserfs),
     ],
-    various => [ qw(smbfs romfs ext3 xfs) ],
+    various => [ qw(smbfs romfs ext3 xfs jfs ufs) ],
 
   },
 
@@ -170,10 +170,12 @@ our %l = (
   # just here for classification, unused categories (nor auto-detect, nor load_thiskind)
   {
     raid => [
-      qw(linear raid0 raid1 raid5 lvm-mod multipath),
+      qw(linear raid0 raid1 raid5 lvm-mod multipath dm-mod),
     ],
     mouse => [
       qw(busmouse msbusmouse logibusmouse serial qpmouse atixlmouse),
+      if_(arch() =~ /ppc/, 'macserial'),
+      qw(hid mousedev usbhid usbmouse),
     ],
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
@@ -184,6 +186,11 @@ our %l = (
       qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
       qw(btaudio),
+
+      arch() =~ /i.86/ ? 'aes-i586' : 'aes',
+      if_(arch() =~ /sparc/, 'openprom'),
+      
+      qw(wacom evdev), qw(usblp printer),
 
       #- these need checking
       qw(tmspci rrunner meye),
@@ -224,6 +231,10 @@ sub category2modules {
 	    @$l;
 	} @sub;
     } split(' ', $_[0]);
+}
+
+sub all_modules() {
+    map { @$_ } map { values %$_ } values %l;
 }
 
 sub module2category {

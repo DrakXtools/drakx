@@ -105,28 +105,117 @@ my %images = (
     all     => 'fs/cdrom disk/cdrom|raw bus/usb|usb_keyboard disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
 );
 
-my $verbose = "@ARGV" =~ /-v/;
-images() if "@ARGV" =~ /images/;
-check() if "@ARGV" =~ /check/;
-pci_modules4stage1($1) if "@ARGV" =~ /pci_modules4stage1:(.*)/;
+my $verbose = $ARGV[0] eq '-v' && shift;
+my ($f, @para) = @ARGV;
+$::{$f}->(@para);
 
-sub images() {
-    while (my ($image, $l) = each %images) {
-	my @modules = if_($image !~ /drivers/, @modules_always_on_stage1);
-	push @modules, map { category2modules($_) } split(' ', $l);
+sub image2modules {
+    my ($image) = @_;
+    my $l = $images{$image};
+
+    my @modules = if_($image !~ /drivers/, @modules_always_on_stage1);
+    push @modules, map { category2modules($_) } split(' ', $l);
 	
-	@modules = difference2(\@modules, \@modules_removed_from_stage1);
+    @modules = difference2(\@modules, \@modules_removed_from_stage1);
 
-	if ($image !~ /all/) {
-	    @modules = difference2(\@modules, \@modules_only_for_all_img);
-	}
-	printf qq(%s_modules_raw="%s"\n), $image, join ' ', @modules;
+    if ($image !~ /all/) {
+	@modules = difference2(\@modules, \@modules_only_for_all_img);
     }
-    printf qq(images="%s"\n), join(' ', keys %images);
+
+    @modules;
+}
+
+sub remove_unneeded_modules {
+    my ($kern_ver) = @_;
+
+    #- need creating a first time the modules.dep for all modules
+    #- it will be redone in make_modules_dep when unneeded modules are removed
+    make_modules_dep($kern_ver);
+    load_dependencies("all.kernels/$kern_ver/modules.dep");
+
+    my $ext = module_extension($kern_ver);
+
+    my @all = list_modules::all_modules();
+    my @all_with_deps = map { dependencies_closure($_) } @all;
+    my %wanted_modules = map {; "$_.$ext" => 1 } @all_with_deps;
+    foreach (all("all.kernels/$kern_ver/modules")) {
+	$wanted_modules{$_} or unlink "all.kernels/$kern_ver/modules/$_";	
+    }
+}
+
+sub make_modules_per_image {
+    my ($kern_ver) = @_;
+
+    make_modules_dep($kern_ver);
+    load_dependencies("all.kernels/$kern_ver/modules.dep");
+
+    my $ext = module_extension($kern_ver);
+
+    foreach my $image (keys %images) {
+	my @modules_with_deps = uniq(map { dependencies_closure($_) } image2modules($image));
+	my @l = map { "$_.$ext" } @modules_with_deps;
+
+	my $dir = "all.kernels/$kern_ver/modules";
+	@l = grep { -e "$dir/$_" } @l;
+
+	if ($image =~ /all/) {
+	    system("cd $dir ; tar cf ../${image}_modules.tar @l") == 0 or die "tar failed\n";
+	} else {
+	    my $gi_base_dir = chomp_(`pwd`) . '/..';
+	    system("cd $dir ; $gi_base_dir/mdk-stage1/mar/mar -c ../${image}_modules.mar @l") == 0 or die "mar failed\n";
+	}
+    }
+}
+
+sub make_modules_dep {
+    my ($kern_ver) = @_;
+
+    my @l =
+      kernel_is_26($kern_ver) ?
+	cat_("all.kernels/$kern_ver/lib/modules/$kern_ver/modules.dep") :
+	`/sbin/depmod-24 -F all.kernels/$kern_ver/boot/System.map-$kern_ver -e *.o | perl -pe 's/\\\n//'`;
+
+    @l = map {
+	if (/(\S+):\s+(.*)/) {
+	    my ($module, @deps) = map { m!.*/(.*)\.k?o(\.gz)$! && $1 } $1, split(' ', $2);
+	    if (member($module, 'plip', 'ppa', 'imm')) {
+		@deps = map { $_ eq 'parport' ? 'parport_pc' : $_ } @deps;
+	    } elsif ($module eq 'vfat') {
+		push @deps, 'nls_cp437', 'nls_iso8859-1';
+	    }
+	    if_(@deps, join(' ', "$module:", @deps));
+	} else {
+	    ();
+	}
+    } @l;
+
+    output("all.kernels/$kern_ver/modules.dep", map { "$_\n" } @l);
+}
+
+sub make_modules_description {
+    my ($kern_ver) = @_;
+    my $ext = module_extension($kern_ver);
+    my $dir = "all.kernels/$kern_ver/modules";
+
+    my @l;
+    if (kernel_is_26(`uname -r`)) { #- modinfo behaves differently depending on the build kernel used
+	my $name;
+	@l = map {
+	    $name = $1 if m!^filename:\s*(.*)\.$ext!;
+	    if_($name && /^description:\s*(.*)/, "$name\t$1");
+	} `cd $dir ; /sbin/modinfo *.$ext`;
+    } else {
+	@l = map {
+	    if_(/(.*?)\.$ext "(.*)"/, "$1\t$2\n");
+	} `cd $dir ; /sbin/modinfo-24 -f '%{filename} %{description}\n' *.$ext`;
+    }
+    output("modules.description", @l);
 }
 
 sub pci_modules4stage1 {
-    print "$_\n" foreach uniq(map { dependencies_closure($_) } difference2([ category2modules($_[0]) ], \@modules_removed_from_stage1));
+    my ($category) = @_;
+    my @modules = difference2([ category2modules($category) ], \@modules_removed_from_stage1);
+    print "$_\n" foreach uniq(map { dependencies_closure($_) } @modules);
 }
 
 sub check() {

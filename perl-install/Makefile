@@ -197,8 +197,9 @@ endif
 
 	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
-	cp -f ../kernel/{modules.description,all.modules/modules.cz*} $(DEST)/lib/
-	ls $(DEST)/lib | sed -n 's/modules.cz-//p' > $(STAGE2_DEST)/mdkinst.kernels
+	cp -f ../kernel/modules.description $(DEST)/lib/
+	for i in `ls ../kernel/all.kernels`; do cp -f ../kernel/all.kernels/$$i/modules.cz $(DEST)/lib/modules.cz-$$i; done
+	ls ../kernel/all.kernels | grep '^2' > $(STAGE2_DEST)/mdkinst.kernels
 
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
@@ -207,7 +208,7 @@ endif
 
 ifeq (y,$(USE_PCMCIA))
 	cp -a /etc/pcmcia $(DEST)/etc
-	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.modules/`cat ../kernel/all.kernels/.main`/modules.dep
+	../tools/patch_pcmcia_config.pl $(DEST)/etc/pcmcia/config ../kernel/all.kernels/`cat ../kernel/all.kernels/.main`/modules.dep
 endif
 
 	cp -f $(STAGE1)/init-stage2 $(DEST)/usr/bin/init

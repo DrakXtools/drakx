@@ -1,187 +1,110 @@
-#!/bin/bash
+#!/usr/bin/perl
 
-ALL_KERNELS="all.kernels"
-RPMS=/export/media/main
+use MDK::Common;
+use list_modules;
 
-ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
+my $RPMS = '/export/media/main';
+my $rpm = 'rpm --nosignature';
 
 
-# move stuff to this new "kernel" directory
-if [ ! -d all.kernels ]; then
-  if [ -d ../all.kernels ]; then
-  mv ../all.kernels .
-  rm -rf ../all.modules
-  else
-    # make sure "all.kernels" directory exists
-    mkdir all.kernels
-  fi
-fi
+my $MOVE = $ARGV[0] eq '--move' && shift;
 
-function create_marfile() {
-    marfile=$1
-    shift
-    $GIBASEDIR/mdk-stage1/mar/mar -c $marfile $*
-}
+@ARGV <= 1 or die "usage: ./update_kernel [--move] [<kernel rpm>]\n";
 
-function build_kernel_is_26() { 
-    uname -r | grep -q '^2\.6'
-}
 
-function kern_version() {
-    if echo $1 | grep -q ^2.4; then
-        version=24
-        objects="*.o"
-    else
-        version=25
-        objects="*.ko"
-    fi
-}
-    
-function create_modules() {
-    kernel_path=$1
-    kern=$2
-    echo "Updating modules in '`pwd`' for kernel '$kern'"
-    kern_version $kern
-    find $kernel_path/lib/modules/ -name "$objects" -exec cp -f {} . \;
-    if [ $version -eq 24 ]; then
-        /sbin/depmod-24 -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
-            | perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
-    else
-        cp $kernel_path/lib/modules/*/modules.dep .
-        perl -ni -e 's|/\S+/([^/]+)\.k?o(\.gz)|$1|g; print if /: /' modules.dep
-    fi
-    perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
-    perl -pi -e 's/(vfat: fat)/$1 nls_cp437 nls_iso8859-1/' modules.dep
+mkdir 'all.kernels'; # make sure "all.kernels" directory exists
+eval { rm_rf('all.modules') }; #- not used anymore
 
-    if build_kernel_is_26; then
-	/sbin/modinfo $objects | perl -lne 'print "$name\t$1" if $name && /^description:\s*(.*)/; $name = $1 if m!^filename:\s*(.*)\.k?o!' > modules.description
-    else
-	/sbin/modinfo-$version -f '%{filename} %{description}\n' $objects | perl -lne 'print "$1\t$2" if /(.*?)\.k?o "(.*)"/' > modules.description
-    fi
-}
+my $main = chomp_(cat_('all.kernels/.main'));
+my $main_BOOT = chomp_(cat_('all.kernels/.main-BOOT'));
 
-function create_modules_mar() {
-    kern_version $kern
-
-    if [ $version -eq 24 ]; then
-        echo -n "stripping $kern: "
-        $GIBASEDIR/kernel/strip_modules *.o 2>/dev/null
-        echo "done"
-    else
-        echo "don't strip on 2.6 since it breaks modules"
-    fi
-
-    if [ -z "$MOVE" ]; then
-        echo -n "packdrake $kern: "
-        ls $objects | packdrake -b9s "modules.cz" 400000
-        echo "done"
-        mv modules.cz ../modules.cz-$kern
-    fi
-    for i in $images; do
-        eval "modules=\$${i}_modules_raw"
-        modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl $version modules.dep $modules`
-	if [ $i = "all" ]; then
-	    echo $modules_with_deps > "${i}_modules.list"
-	else
-	    eval "create_marfile ${i}_modules.mar $modules_with_deps"
-	fi
-    done
-    echo
-}
-
-function install_kernel() {
-    rpm=$1
-
-    ver=$(rpm --nosignature -qpl $rpm | sed -n 's!/boot/vmlinuz-!!p')
-    [ -n "$ver" ] || return
-    
-    if [ -n "$2" ]; then
-        [ -d $ALL_KERNELS/$ver ] && return
-        main_ver=$2
-	echo Removing previous kernel $ALL_KERNELS/$main_ver*
-        rm -rf $ALL_KERNELS/$main_ver*
-    fi
-    
-    rm -rf $ALL_KERNELS/$ver
-    echo "Installing kernel $ver"
-    mkdir -p $ALL_KERNELS/$ver
-    rpm2cpio $rpm | (cd $ALL_KERNELS/$ver ; cpio -id)
-    
-    find $ALL_KERNELS/$ver -type f -name "*.o.gz" -o -name "*.ko.gz" | xargs gunzip
-    
-    # remove those files during update_kernel, they will get back when make_boot_img is called
-    for dir in /tftpboot /var/lib/tftpboot; do
-        rm -f $dir/{vmlinuz,network.rdz,all.rdz}
-    done
-}
-
-[ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
-
-if [ "$1" = "--move" ]; then
-    MOVE=1
-    shift
-fi
-
-if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
-    name=kernel
-else 
-    name=kernel-BOOT
-fi
-
-if [ -n "$1" ]; then
-    #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm)
-    install_kernel $1
-else
-#    install_kernel $RPMS/kernel-BOOT-2.4*.rpm 2.4
-    install_kernel $RPMS/kernel-BOOT-2.6*.rpm 2.6
-fi
-
-[ -n "$main" -a -e $ALL_KERNELS/$main ] || {
-    cd $ALL_KERNELS
-    main=$(echo 2.6* | sed 's/.* //')
-    [ -e "$main" ] || main=$(echo 2.4* | sed 's/.* //')
-    [ -e "$main" ] || { echo "no kernel installed in $ALL_KERNELS"; exit 1; }
-    echo "Choosing $main"
-    echo $main > .main
-    cd ..
+if (@ARGV) {
+    install_kernel($ARGV[0]);
+} else {
+    update_kernel_from_repository($RPMS, '2.6', 0);
+    update_kernel_from_repository($RPMS, '2.6', 1);
+    update_kernel_from_repository($RPMS, '2.4', 1);
 }
 
 
-if [ "$ARCH" == "i386" ]; then
-    for i in $ALL_KERNELS/*/boot/vmlinuz*; do
-	#disable any existing resolution!!!
-	/usr/sbin/rdev -v $i 65535 #788 #785 
-    done
-fi
+sub system_verbose { print join(' ', @_), "\n"; system(@_) }
+sub sys { &system_verbose; $? and die }
 
+sub rpm2version {
+    my ($kernel_rpm) = @_;
+    `$rpm -qpl $kernel_rpm` =~ m!/boot/vmlinuz-(.*)! && $1 or die "can't find vmlinuz in $kernel_rpm\n";
+}
 
-GIBASEDIR=`pwd`/..
+sub update_kernel_from_repository {
+    my ($RPMS, $main_ver, $is_BOOT) = @_;
+    my $rpm_wildcard = 'kernel-' . ($is_BOOT ? 'BOOT-' : '') . $main_ver . '*.rpm';
+    my ($kernel_rpm) = my @kernels = glob("$RPMS/$rpm_wildcard");
+    @kernels <= 1 or die "more than one kernel match $rpm_wildcard";
+    @kernels >= 1 or die "no kernel match $rpm_wildcard";
 
-rm -rf all.modules ; mkdir all.modules
-for i in $ALL_KERNELS/*; do
-	kern=`basename $i`
-	(
-	    mkdir all.modules/$kern
-	    cd all.modules/$kern
+    install_kernel($kernel_rpm, 1);
+}
 
-	    create_modules ../../$i $kern
-	) || exit 1
-done
-cp -f all.modules/$main/modules.description .
+sub install_kernel {
+    my ($kernel_rpm, $o_update) = @_;
 
-l=`MOVE=$MOVE perl modules.pl images` || exit 1
-eval $l
+    my $kern_ver = rpm2version($kernel_rpm);
+    my $dir = "all.kernels/$kern_ver";
 
-for i in $ALL_KERNELS/*; do
-	kern=`basename $i`
-	(
-	    cd all.modules/$kern
+    -d $dir and return if $o_update;
 
-	    if [ "$kern" = "$main" ]; then
-		create_modules_mar ../../$i $kern
-	    else
-		echo "$kern ($main)"
-		create_modules_mar ../../$i $kern 2>/dev/null
-	    fi
-	) || exit 1
-done
+    my $is_BOOT = $kern_ver =~ /BOOT/;
+    my ($main_ver) = $kern_ver =~ /^(2\.\d)/;
+    if (my @previous = grep { ($is_BOOT xor !/BOOT/) && /^\Q$main_ver/ } all('all.kernels')) {
+	warn "Removing previous kernels ", join(' ', @previous), "\n";
+        rm_rf("all.kernels/$_") foreach @previous;
+    }
+
+    if (!$main || !-d "all.kernels/$main") {
+	$main = $kern_ver;
+	output('all.kernels/.main', "$main\n");
+    }
+    if ($is_BOOT && (!$main_BOOT || !-d "all.kernels/$main_BOOT")) {
+	$main_BOOT = $kern_ver;
+	output('all.kernels/.main-BOOT', "$main_BOOT\n");
+    }
+
+    warn "Installing kernel $kern_ver\n";
+
+    eval { rm_rf($dir) };
+    mkdir_p("$dir/modules");
+    sys("rpm2cpio $kernel_rpm | (cd $dir ; cpio -id)");
+
+    rename "$dir/boot/vmlinuz-$kern_ver", "$dir/vmlinuz" or die "can't find vmlinuz\n";
+
+    sys("find $dir -name '*.gz' | xargs gunzip");
+
+    my $ext = module_extension($kern_ver);
+
+    open(my $F, "find $dir -name '*.$ext' |");
+    my $file; while ($file = <$F>) {
+	chomp($file);
+	rename $file, "$dir/modules/" . basename($file) or warn "conflict for $file\n";
+    }
+
+    if (kernel_is_26($kern_ver)) {
+        warn "no stripping on 2.6 since it breaks modules\n";
+    } else {
+        print STDERR "stripping $kern_ver: ";
+        sys("./strip_modules $dir/modules/*.$ext");
+        print STDERR "done\n";
+    }
+
+    sys('perl', 'modules.pl', 'remove_unneeded_modules', $kern_ver) if $kern_ver !~ /BOOT/;
+
+    sys('perl', 'modules.pl', 'make_modules_per_image', $kern_ver);
+    sys('perl', 'modules.pl', 'make_modules_description', $kern_ver) if $kern_ver eq $main;
+
+    if (!$MOVE) {
+        print STDERR "packdrake $kern_ver: ";
+        sys("cd $dir/modules ; ls *.$ext | packdrake -b9s ../modules.cz 400000");
+        print STDERR "done\n";
+    }
+
+    eval { rm_rf("$dir$_") } foreach qw(/boot /lib /usr /modules);
+}

@@ -48,7 +48,7 @@ install_only:
 	make -C rescue install
 
 clean:
-	rm -rf images all.modules all.modules64
+	rm -rf images
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 

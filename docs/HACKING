@@ -53,17 +53,10 @@ extract the package(s) and build stuff from it.
 FYI, for each kernel, directories will be populated as follows:
 
 gi/kernel/all.kernels/2.6.0
-        containing all files from the said kernel RPM package
-
-gi/kernel/all.modules/2.6.0
-        containing all modules, and special files containing
-        modules for stage1 (*.mar)
-
-gi/kernel/all.modules/
-        containing a special file containing modules for stage1
-        (*.cz*)
-
-Note: the modules must not be in compressed form (*.gz *.bz2 etc)
+        special files containing 
+        - vmlinuz, modules.dep
+        - modules for stage1 (*.mar, *.tar)
+        - modules for stage2 (modules.cz)
 
 
 (3) required rpm packages

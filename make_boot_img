@@ -8,7 +8,6 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 # move stuff to new "kernel" directory
 -d 'kernel' or die "directory kernel is missing\n";
 rename 'all.kernels', 'kernel/all.kernels';
-rename 'all.modules', 'kernel/all.modules';
 
 my $default_append = "ramdisk_size=128000";
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
@@ -37,8 +36,9 @@ _ "$sudo mkdir -p $tmp_mnt $tmp_mnt_initrd";
 mkdir "images";
 
 my $main = chomp_(cat_('kernel/all.kernels/.main'));
+my $main_BOOT = chomp_(cat_('kernel/all.kernels/.main-BOOT'));
 my @kernels = grep { /^2/ } all('kernel/all.kernels');
-
+my @kernels_BOOT = grep { /BOOT/ } @kernels;
 
 my @all_images = (
 		  if_($arch =~ /i.86|x86_64/, 'cdrom.img', 'cdrom-changedisk.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
@@ -76,14 +76,14 @@ foreach my $img (@images) {
     } elsif ($img =~ /bootcdrom.iso/) {
 	boot_iso($img, 1);
     } elsif ($img =~ /drivers/) {
-	drivers($type, $I, "$img-$_") foreach @kernels;
-	rename("$img-$main", $img);
+	drivers($type, $I, "$img-$_") foreach @kernels_BOOT;
+	rename("$img-$main_BOOT", $img);
     } elsif ($extension eq 'rdz') {
 	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
     } elsif ($extension eq 'img') {
 	print STDERR "calling boot_img_$arch for $img\n";
-	$::{"boot_img_$arch"}->($tmp_mnt, $type, $I, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*")) foreach @kernels;
-	rename("$img-$main", $img);
+	$::{"boot_img_$arch"}->($tmp_mnt, $type, $I, "$img-$_", "kernel/all.kernels/$_/vmlinuz") foreach @kernels_BOOT;
+	rename("$img-$main_BOOT", $img);
     } else {
 	die "unknown image $img";
     }
@@ -163,13 +163,13 @@ sub initrd {
     if (member($type, qw(pcmcia all network)) && $arch !~ /ppc|ia64|x86_64/) {
 	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
 	 _ "cp $mnt/etc/pcmcia/config /tmp/pcmcia_config_tmp";
-	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp kernel/all.modules/$main/modules.dep";
+	 _ "tools/patch_pcmcia_config.pl /tmp/pcmcia_config_tmp kernel/all.kernels/$main/modules.dep";
 	 _ "sudo mv /tmp/pcmcia_config_tmp $mnt/etc/pcmcia/config";
     }
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
-    my $modz = "kernel/all.modules$I/$ext";
+    my $modz = "kernel/all.kernels$I/$ext";
     if ($type eq 'all') {
-	__ "cd $modz ; $sudo cp -f `cat ${type}_modules.list` $mnt/modules";
+	__ "$sudo tar xC $mnt/modules -f $modz/${type}_modules.tar";
     } else {
 	_ "$sudo cp -f $modz/${type}_modules.mar $mnt/modules/modules$I.mar";
     }
@@ -254,7 +254,7 @@ F3 boot.msg
 	my $s = int((-s $rdz) / 1024);
 
 	my ($ext) = $img =~ /\.img-(.*)/ or die "bad initrd name ($img)";
-	my $dir = "kernel/all.modules/$ext";
+	my $dir = "kernel/all.kernels/$ext";
 	my $pcitable = cat_('/usr/share/ldetect-lst/pcitable');
 	my @l = sort { $a <=> $b } map {
 	    my ($name) = /(\S+)\.k?o$/ or die "bad file in .mar";
@@ -679,8 +679,7 @@ sub isolinux {
 
     each_index {
 	mkdir "isolinux/alt$::i", 0777;
-	my ($kernel) = glob("kernel/all.kernels/$_/boot/vmlinu*");
-	_ "cp $kernel isolinux/alt$::i/vmlinuz";
+	_ "cp kernel/all.kernels/$_/vmlinuz isolinux/alt$::i";
 	initrd($tmp_mnt_initrd, 'all', '', "images/all.rdz-$_");
 	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
     } @kernels;
@@ -720,8 +719,7 @@ F3 boot.msg
 sub isolinux_move {   
     my ($main) = @_;
 
-    my ($kernel) = glob("kernel/all.kernels/$main/boot/vmlinu*");
-    _ "cp $kernel move/isolinux/vmlinuz";
+    _ "cp kernel/all.kernels/$main/vmlinuz move/isolinux";
     initrd($tmp_mnt_initrd, 'all', '', "move/isolinux/all.rdz-$main", '-with-busybox');
     rename "move/isolinux/all.rdz-$main", "move/isolinux/all.rdz";
 
@@ -814,7 +812,7 @@ sub drivers {
     _ "$sudo mount -t ext2 $img $tmp_mnt -o loop";
 
     my ($ext) = $img =~ /img-(.*)/ or die "bad image name ($img)";
-    _ "$sudo cp -f kernel/all.modules$I/$ext/${type}_modules.mar $tmp_mnt/modules$I.mar";
+    _ "$sudo cp -f kernel/all.kernels$I/$ext/${type}_modules.mar $tmp_mnt/modules$I.mar";
 
     _ "sync";
     _ "df $tmp_mnt";
