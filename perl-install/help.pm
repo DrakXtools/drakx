@@ -101,13 +101,18 @@ preferred graphical environment. At least one must be selected if you want
 to have a graphical workstation!
 
 Moving the mouse cursor over a group name will display a short explanatory
-text about that group.
+text about that group. If you do not select any group when installing (and
+not upgrading), a dialog will popup asking you to choose the nature of
+minimal install. This can be \"Base system only\" for the smallest install
+possible, \"No X\" for a bit larger install but without X11 or \"With X\"
+for the the largest minimal install including X11. (this para *MUST* be
+reviewed and splitted)
 
 You can check the \"Individual package selection\" box, which is useful if
 you are familiar with the packages being offered or if you want to have
 total control over what will be installed.
 
-If you started the installation in \"Update\" mode, you can unselect all
+If you started the installation in \"Upgrade\" mode, you can unselect all
 groups to avoid installing any new package. This is useful for repairing or
 updating an existing system."),
 
@@ -380,6 +385,18 @@ significant amount of time.
 
 Please be patient."),
 
+installUpdates => 
+__("You may choose to upload updated packages that have been released after the
+distribution has been made available. You will get security fixes or bug
+fixes, but you need to have an Internet connection configured to proceed.
+Answer \"Yes\" to the dialog to choose an available mirror. After choosing
+a mirror, a packages selection tree appears to allow you to choose packages
+individually, package that need to be updated are already selected, but you
+may choose to install other package or deselect packages. Press \"Install\"
+to install the updated package or \"Cancel\" not to upgrade them. (this
+*REALLY* need to be modified according to real DrakX, if you need other
+help section, let us (DrakX team developer) known)."),
+
 license => 
 __("Before continuing you should read carefully the terms of the license. It
 covers the whole Mandrake Linux distribution, and if you do not agree with
@@ -496,13 +513,15 @@ installation or if you want to have greater control (\"Expert\"). You also
 have the choice of performing a new install or an upgrade of an existing
 Mandrake Linux system. Clicking \"Install\" will completely wipe out the
 old system. Select \"Upgrade\" if you are upgrading or repairing an
-existing system.
+existing system. Select \"Upgrade packages only\" if you are upgrading the
+packages of a previous distribution without any other modification.
 
 Please choose \"Install\" if there are no previous version of Mandrake
 Linux installed or if you wish to boot between various operating systems.
 
-Please choose \"Update\" if you wish to update or repair an already
-installed version of Mandrake Linux.
+Please choose \"Upgrade\" if you wish to update or repair an already
+installed version of Mandrake Linux. Please choose \"Upgrade packages
+only\" not to modify configuration parameters.
 
 Depending on your knowledge of GNU/Linux, please choose one of the
 following to install or update your Mandrake Linux operating system:
