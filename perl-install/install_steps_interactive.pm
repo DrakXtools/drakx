@@ -208,7 +208,7 @@ sub selectKeyboard {
 	  advanced_label => _("More"),
 	  callbacks => { changed => sub { $other = $_[0]==1 } },
 	},
-	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format,
+	  [ if_(@best > 1, { val => \$o->{keyboard}, type => 'list', format => $format, sort => 1,
 	      list => [ @best ] }),
 	    { val => \$ext_keyboard, type => 'list', format => $format,
 	      list => [ keyboard::keyboards ], advanced => @best > 1 }
