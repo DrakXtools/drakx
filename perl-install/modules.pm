@@ -373,7 +373,7 @@ sub remove_alias($) {
 
 sub when_load {
     my ($name, $type, @options) = @_;
-    add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
+    add_alias('scsi_hostadapter', $name), eval { load('sd_mod') } if $type =~ /scsi/ || $type eq $type_aliases{scsi};
     $conf{$name}{options} = join " ", @options if @options;
 }
 

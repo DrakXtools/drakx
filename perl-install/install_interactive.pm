@@ -146,7 +146,7 @@ When sure, press Ok.")) or return;
 
     if (!$readonly && ref($o) =~ /gtk/) { #- diskdrake only available in gtk for now
 	require diskdrake;
-	$solutions{diskdrake} = [ 0, ($::beginner ? _("Expert mode"), _("Use diskdrake")), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
+	$solutions{diskdrake} = [ 0, ($::beginner ? _("Expert mode") : _("Use diskdrake")), sub { partition_with_diskdrake($o, $hds, 'nowizard') } ];
     }
 
     $solutions{fdisk} =
