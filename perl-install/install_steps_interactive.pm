@@ -159,10 +159,13 @@ sub selectMouse {
 
     $force ||= $o->{mouse}{unsafe};
 
-    my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
-    $o->{mouse} = mouse::fullname2mouse(
-	$o->ask_from_treelist_('', N("Please choose your type of mouse."), 
-			       '|', [ mouse::fullnames() ], $prev) || return) if $force;
+    if ($force) {
+	my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
+
+	$o->ask_from('', N("Please choose your type of mouse."),
+		     [ { list => [ mouse::fullnames() ], separator => '|', val => \$prev } ]);
+	$o->{mouse} = mouse::fullname2mouse($prev);
+    }
 
     if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
@@ -170,7 +173,7 @@ sub selectMouse {
 	  $o->ask_from_listf(N("Mouse Port"),
 			    N("Please choose which serial port your mouse is connected to."),
 			    \&mouse::serial_port2text,
-			    [ mouse::serial_ports() ]) or return;
+			    [ mouse::serial_ports() ]) or return &selectMouse;
     }
     if (arch() =~ /ppc/ && $o->{mouse}{nbuttons} == 1) {
 	#- set a sane default F11/F12
@@ -1108,7 +1111,7 @@ sub miscellaneous {
     my ($o, $_clicked) = @_;
 
     require security::level;
-    security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user}) or return;
+    security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
 
     install_steps::miscellaneous($o);
 }

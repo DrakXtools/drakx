@@ -249,15 +249,14 @@ sub partitionWizard {
     @solutions or $o->ask_warn('', N("I can't find any room for installing")), die 'already displayed';
 
     log::l('HERE: ', join(',', map { $_->[1] } @solutions));
-    if (my $sol = $o->ask_from_listf('', N("The DrakX Partitioning wizard found the following solutions:"), sub { $_[0][1] }, \@solutions)) {
-	log::l("partitionWizard calling solution $sol->[1]");
-	my $ok = eval { $sol->[2]->() };
-	$@ and $o->ask_warn('', N("Partitioning failed: %s", $@));
-	$ok or goto &partitionWizard;
-	1;
-    } else {
-	0;
-    }
+    my $sol;
+    $o->ask_from('', N("The DrakX Partitioning wizard found the following solutions:"), 
+		 [ { val => \$sol, list => \@solutions, format => sub { $_[0][1] }, type => 'list' } ]);
+    log::l("partitionWizard calling solution $sol->[1]");
+    my $ok = eval { $sol->[2]->() };
+    $@ and $o->ask_warn('', N("Partitioning failed: %s", $@));
+    $ok or goto &partitionWizard;
+    1;
 }
 
 sub upNetwork {
