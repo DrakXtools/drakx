@@ -29,7 +29,8 @@
 #		  --build_cd_autoinst 	
 #		  --backup_now --backup_default_now
 #	restore user: pbs with list selection	  
-#  
+#       calcul disk space.
+#
 #  CD: only create iso image
 #
 #  WARNING: ne pas ecraser les fichiers /etc/passwd fstab 
@@ -136,6 +137,8 @@ my $cd_with_install_boot = 0;
 my $cd_devive = '';
 my $host_name = '';
 my $backupignore = 0; 
+my $auth_choice = 0;
+
 
 foreach (@ARGV) {
     /--default/ and $default = 1, $mode=-1;
@@ -185,7 +188,9 @@ sub save_conf_file {
 		     "LOGIN=$login_user\n",
 		     "HOST_NAME=$host_name\n"
 		     );
-
+    $auth_choice or push @cfg_list, "AUTH_CHOICE=0\n" ;
+    if ($auth_choice == 1) { push @cfg_list, "AUTH_CHOICE=1\n" ;}
+    if ($auth_choice == 2) { push @cfg_list, "AUTH_CHOICE=2\n" ;}
     $cd_with_install_boot and push @cfg_list, "CD_WITH_INSTALL_BOOT\n" ;
     $net_daemon and push @cfg_list, "NET_DAEMON\n" ;
     $hd_daemon and push @cfg_list, "HD_DAEMON\n" ;
@@ -268,6 +273,7 @@ sub read_conf_file {
 	    if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1; }
 	    if (/^CDRW_DEVICE/)    { s/^CDRW_DEVICE=//gi; $cd_devive = $_;}
 	    if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_;} 
+	    if (/^AUTH_CHOICE/)    { s/^AUTH_CHOICE=//gi; $auth_choice = $_; }
 	}
 	read_cron_files();
 	$cfg_file_exist = 1;
@@ -530,16 +536,8 @@ sub advanced {
     my $choice_what_sys;
     read_conf_file();
     
-#*    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("backup_net");
-#*    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("backup_hd");
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time");
-#*    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user");
-#*    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader");
-#*    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u");
     my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options");
-#*    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd");
-#*    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("net");
-#*    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom");
 
 my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $label_what_user, $label_what_other, $label_where_net, $label_where_cd, $label_where_hd) = map { gtkpack($_->[2] ? new Gtk::VBox(0, 2) : new Gtk::HBox(0, 2), gtkpng($_->[0]), $_->[1]) }
       (['backup_hd', _('What backup.'), 1],
@@ -610,35 +608,79 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
     
     my $combo_where_net_proto = new Gtk::Combo();
     $combo_where_net_proto->set_popdown_strings ("scp","ftp", "sftp", "rsync");
+    my $combo_where_net_auth = new Gtk::Combo();
+    $combo_where_net_auth->set_popdown_strings ("ssh/identity.pub with passphrase null",
+						"ssh-agent re ask for password between each end of root session",
+						"ask for passwrod each timer", 
+						"no pass require");
+
+    my $box2 = new Gtk::VBox( 0, 2 );
+    my $radio1 = new Gtk::RadioButton( "  ssh/identity.pub with passphrase null");
+    $box2->add( $radio1);
+    $radio1->set_active(1);
+    my $radio2 = new Gtk::RadioButton( "  ssh-agent ", $radio1);
+    $box2->add( $radio2);
+    my $radio3 = new Gtk::RadioButton( "  ask for passwrod each timer", $radio2);
+    $box2->add( $radio3);
+    gtksignal_connect( $radio1, clicked => sub { $auth_choice = 0 });
+    gtksignal_connect( $radio2, clicked => sub { $auth_choice = 1 });
+    gtksignal_connect( $radio3, clicked => sub { $auth_choice = 2 });
+
 
     my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
-				  0, new Gtk::HSeparator,
-				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
-				  0, new Gtk::HSeparator,
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please choose your protocol"),
-					      0, $combo_where_net_proto,
-					      0, _(""),
+				  0, gtkpack_(new Gtk::VBox(0,1),
+					      0, new Gtk::HSeparator,
+					      0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
+					      0, new Gtk::HSeparator,
+					      
+
+							  0, gtkpack_(new Gtk::HBox(0,10),
+								      1, _("please choose your protocol"),
+								      0, $combo_where_net_proto,
+								      0, _(""),
+								      ),
+							  0, _(""),
+							  0, gtkpack_(new Gtk::HBox(0,10),
+								      1, _("please entrer the host name or IP."),
+								      1, my $host_name_entry = new Gtk::Entry(),
+								      0, _(""),
+								      ),
+							  0, _(""),
+							  0, gtkpack_(new Gtk::HBox(0,10),
+								      1, _("please entrer the directory\n to put the backup on this host. "),
+								      1, my $host_path_entry = new Gtk::Entry(),
+								      0, _(""),
+								      ),
+							  0, _(""),
+							  0, gtkpack_(new Gtk::HBox(0,10),
+								      1, _("please entrer your login"),
+								      0, my $login_user_entry = new Gtk::Entry(),
+								      0, _(""),
+								      ),
+							  ),
+
+
+				  1, gtkpack_(new Gtk::VBox(0,1),
+					      0, new Gtk::HSeparator,
+					      1, gtkpack_(new Gtk::HBox(0,3),
+							  0, new Gtk::HBox(0,3),
+							  1, _("please choose your authentifycation method"),
+							  1, new Gtk::Button("Help "),
+							  ),
+					      0, " ", 
+					      1, gtkpack_(new Gtk::HBox(0,10),
+							  1, $box2,
+							  1, gtkpack_(new Gtk::VBox(0,1),
+								      1, new Gtk::Button(" Assistant"),
+								      ),
+							  ),
 					      ),
-				  0, _(""),
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer the host name or IP."),
-					      1, my $host_name_entry = new Gtk::Entry(),
-					      0, _(""),
-					      ),
-				  0, _(""),
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer the directory\n to put the backup on this host. "),
-					      1, my $host_path_entry = new Gtk::Entry(),
-					      0, _(""),
-					      ),
-				  0, _(""),
-				  0, gtkpack_(new Gtk::HBox(0,10),
-					      1, _("please entrer your login"),
-					      0, my $login_user_entry = new Gtk::Entry(),
-					      0, _(""),
-					      ),
-				  );
+#				  0, _("It exists three solutions to authentify with the \n host to backup: "),
+#				  0, _("   - ssh-agent ( correct security)"),
+#				  0, _("   - ssh with empty passphrase. "),
+#				  0, _(" if you are sure\n that nobody can read your\n .ssh/identity.bakup) "),
+#				  0, _("   - ask every time for password. best security "),
+    );
     $combo_where_net_proto->entry->set_text($net_proto);
     $combo_where_net_proto->entry->signal_connect( 'changed', sub { $net_proto = $combo_where_net_proto->entry->get_text()});
     $host_path_entry->set_text( $host_path );
@@ -773,7 +815,7 @@ my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $la
 						      0, my $check_replace = new Gtk::CheckButton( _(" Replace (no update backup files)")),
 						      0, my $check_backupignore = new Gtk::CheckButton( _(" Use .backupignore files")),
 						      ),
-					  ),			     
+					  ),	
 			      );
     
     gtkpack($up_box,
