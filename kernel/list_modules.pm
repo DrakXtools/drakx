@@ -162,6 +162,7 @@ our %l = (
       ),
     ],
     tv => [ qw(bt878 bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo usbvision) ],
+    dvb => [ qw(budget budget-av budget-ci dvb-ttpci hexium_orion hexium_gemini skystar2) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
