@@ -518,7 +518,7 @@ killall pppd
                         N("Bewan PCI modem");
                     },
                     name => N("ADSL configuration") . "\n\n" . N("Select the network interface to configure:"),
-                    data =>  [ { label => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
+                    data =>  [ { text => N("Net Device"), type => "list", val => \$ntf_name, allow_empty_list => 1,
                                list => \@adsl_devices, } ],
                     next => "adsl_protocol",
                    },
