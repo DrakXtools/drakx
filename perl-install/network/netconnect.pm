@@ -144,7 +144,13 @@ sub get_subwizard {
           }
       };
 
-      my $find_lan_module = sub { $module ||= (find { $_->[0] eq $ethntf->{DEVICE} } @all_cards)->[1] };
+      my $find_lan_module = sub { 
+          if (my $dev = find { $_->{device} eq $ethntf->{DEVICE} } detect_devices::pcmcia_probe()) { # PCMCIA case
+              $module = $b->{driver};
+          } elsif (my $dev = find { $_->[0] eq $ethntf->{DEVICE} } @all_cards) {
+              $module = $dev->[1];
+          } else { $module = "" }
+      };
       
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
