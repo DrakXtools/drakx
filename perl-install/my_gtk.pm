@@ -42,8 +42,8 @@ sub new {
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
     $o;
 }
-sub main($;$) {
-    my ($o, $f) = @_;
+sub main {
+    my ($o, $completed, $canceled) = @_;
     gtkset_mousecursor_normal();
     my $timeout = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal(); 1 });
     my $b = before_leaving { Gtk->timeout_remove($timeout) };
@@ -52,7 +52,7 @@ sub main($;$) {
     do {
 	local $::setstep = 1;
 	Gtk->main;
-    } while ($o->{retval} && $f && !&$f());
+    } while ($o->{retval} ? $completed && !$completed->() : $canceled && !$canceled->());
     $o->destroy;
     $o->{retval}
 }
