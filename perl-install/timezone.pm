@@ -39,6 +39,7 @@ sub ntp_server {
 		$server = '';
 	    }
 	} $f;
+	output("$prefix/etc/ntp/step-tickers", "$server\n");
     } else {
 	($server) = grep { $_ ne '127.127.1.0' } map { if_(/^\s*server\s+(\S*)/, $1) } cat_($f);
     }
