@@ -47,7 +47,11 @@ static int mount_that_cd_device(char * dev_name)
 
 static int test_that_cd()
 {
+#ifdef MANDRAKE_MOVE
+        return access(IMAGE_LOCATION "/usr/bin/runstage2", R_OK);
+#else
 	return access(IMAGE_LOCATION LIVE_LOCATION, R_OK);
+#endif
 }
 
 

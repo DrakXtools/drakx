@@ -394,7 +394,7 @@ int mandrake_move_post(void)
         int fd;
         char rootdev[] = "0x0100"; 
 
-        if (scall(!(f = fopen(IMAGE_LOCATION LIVE_LOCATION "symlinks", "rb")), "fopen"))
+        if (scall(!(f = fopen(IMAGE_LOCATION "/move/symlinks", "rb")), "fopen"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
                 char oldpath[500], newpath[500];
@@ -411,7 +411,7 @@ int mandrake_move_post(void)
         // we need only the ones before mounting /dev as devfs
         if (scall(mkdir(SLASH_LOCATION "/dev", 0755), "mkdir"))
                 return RETURN_ERROR;
-        if (scall(!(f = fopen(IMAGE_LOCATION LIVE_LOCATION "devices", "rb")), "fopen"))
+        if (scall(!(f = fopen(IMAGE_LOCATION "/move/devices", "rb")), "fopen"))
                 return RETURN_ERROR;
         while (fgets(buf, sizeof(buf), f)) {
                 char name[500], path[500], type;

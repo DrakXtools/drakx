@@ -35,7 +35,7 @@
 #ifdef MANDRAKE_MOVE
 #define IMAGE_LOCATION   "/sysroot/image"
 #define SLASH_LOCATION   "/sysroot"
-#define LIVE_LOCATION_REL "/image/Mandrake/mdkinst"
+#define LIVE_LOCATION_REL "/image"
 #else
 #define IMAGE_LOCATION   "/tmp/image"
 #endif

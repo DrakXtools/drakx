@@ -660,7 +660,11 @@ enum return_type nfs_prepare(void)
 			continue;
 		}
 
+#ifdef MANDRAKE_MOVE
+		if (access(IMAGE_LOCATION "/usr/bin/runstage2", R_OK)) {
+#else
 		if (access(IMAGE_LOCATION LIVE_LOCATION, R_OK)) {
+#endif
 			stg1_error_message("That NFS volume does not seem to contain the " DISTRIB_NAME " Distribution.");
 			umount(IMAGE_LOCATION);
 			results = RETURN_BACK;
