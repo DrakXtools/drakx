@@ -635,7 +635,7 @@ enum return_type ftp_prepare(void)
 
 		results = ask_from_entries_auto("Please enter the name or IP address of the FTP server, "
 						"the directory containing the " DISTRIB_NAME " Distribution, "
-						"and the login/pass if necessary (leave blank for anonymous).",
+						"and the login/pass if necessary (leave login blank for anonymous).",
 						questions, &answers, 40, questions_auto);
 		if (results != RETURN_OK)
 			return ftp_prepare();

@@ -188,11 +188,10 @@ int ftp_open_connection(char * host, char * name, char * password, char * proxy)
 	int rc;
 	int port = 21;
 
-	if (!strcmp(name, ""))
+	if (!strcmp(name, "")) {
 		name = "anonymous";
-
-	if (!strcmp(password, ""))
 		password = "-drakx@";
+	}
 
 	if (strcmp(proxy, "")) {
 		buf = alloca(strlen(name) + strlen(host) + 5);
