@@ -1,3 +1,65 @@
+2001/04/13  dam's  <damien@mandrakesoft.com>
+
+	* network.pm: updated wireless configuration
+
+	* netconnect.pm: corrected loop in isdn + other things
+
+	* bootlook.pm: embedded = 0 -> local
+
+	* standalone/draknet: updated
+	added delete event
+
+2001/04/13  François Pons  <fpons@mandrakesoft.com>
+
+	* netconnect.pm: fixed syntax error :-)
+
+	* install_steps.pm, install_steps_gtk.pm: added conditional update-menus
+	if package are installed.
+
+	* install_steps_interactive.pm: added conditional update-menus if package
+	are installed.
+	make sure update-menus is called after installing cups related packages.
+
+2001/04/13  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hr.po, share/po/fr.po, share/po/sv.po, share/po/hu.po: Updated
+	Croatian and Swedish files
+
+	* share/po/sl.po, share/po/cy.po, share/po/ca.po, share/po/ga.po,
+	share/po/is.po, share/po/cs.po: Removed po files with too low leve lof
+	translating ( < 60% )
+	so they are not included on final CD
+
+2001/04/13  Pixel  <pixel@mandrakesoft.com>
+
+	* common.pm (backtrace): created
+
+	* install_steps_interactive.pm (addUser): remove the setting of
+	$o->{autologin}, now done in any::autologin
+
+	* bootlook.pm: don't use Locale::GetText, use DrakX's i18n
+
+	* install2.pm (miscellaneous): add setting KEYBOARD=yes in
+	/etc/sysconfig/usb as asked by Lord Chmou
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): log the empty
+	list instead of dying (for 8.0 only, should be switched back to die)
+	(ask_from_listf): display the backtrace when empty list
+
+	* my_gtk.pm (new): make dams happy
+
+	* any.pm (ask_users): add the empty icon
+	(autologin): fix
+
+2001/04/13  warly
+
+	* share/compssUsers: add DATABASES to Database
+	add icons for server
+
+2001/04/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dhcp.c: remove unnecessary redhat history code
+
 2001/04/12  François Pons  <fpons@mandrakesoft.com>
 
 	* install_any.pm: fixed wrong kernel version extraction (typically for
