@@ -71,7 +71,7 @@ sub device2part {
     my ($dev, $fstab) = @_;
     my $subpart = fs::subpart_from_wild_device_name($dev);
     my $part = find { fsedit::is_same_hd($subpart, $_) } @$fstab;
-    log::l("fs::device2part: unknown device <<$dev>>") if !$part;
+    log::l("fs::get::device2part: unknown device <<$dev>>") if !$part;
     $part;
 }
 
