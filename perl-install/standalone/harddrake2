@@ -151,6 +151,8 @@ my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
 
 my ($current_device, $current_class, $current_configurator);
 
+my %sysh = distrib();
+my $distro_name = $sysh{system};
 
 my %menus = (
              'options' => 
@@ -198,8 +200,8 @@ my @menu_items =
      [ $menus{help} . N("/_About..."), undef, sub {
            create_dialog(N("About Harddrake"), 
 #-PO: Do not alter the <span ..> and </span> tags
-                         N("This is HardDrake, a Mandrakelinux hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
-<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $harddrake::data::version) . "\n" .
+                         N("This is HardDrake, a %s hardware configuration tool.\n<span foreground=\"royalblue3\">Version:</span> %s
+<span foreground=\"royalblue3\">Author:</span> Thierry Vignaud &lt;tvignaud\@mandrakesoft.com&gt;\n\n", $distro_name, $harddrake::data::version) . "\n" .
                          formatAlaTeX($::license), { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}) });
        }, undef, '<Item>'
      ]
