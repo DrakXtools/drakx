@@ -283,48 +283,26 @@ type=$netcnx->{type}
 }
 
 sub set_profile {
-    my ($netcnx, $o_profile) = @_;
-    my $profile = $o_profile || $netcnx->{PROFILE};
-    $profile or return;
-    my $f = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
-    -e ($f . "." . $profile) or return;
+    my ($netcnx, $profile) = @_;
     $netcnx->{PROFILE} = $profile;
-    cp_af($f . "." . $profile, $f);
-    foreach (["$prefix$connect_file", "up"],
-	      ["$prefix$disconnect_file", "down"],
-	      ["$prefix$connect_prog", "prog"],
-	      ["$prefix/etc/ppp/ioptions1B", "iop1B"],
-	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
-	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
-	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
-	      ["$prefix/etc/resolv.conf", "resolv"],
-	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
-	      ["$prefix/etc/ppp/peers/adsl", "eci"],
-	    ) {
-	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
-	-e ($c) and cp_af($c, $_->[0]);
-    }
+    system("/sbin/set-netprofile $netcnx->{PROFILE}");
+
 }
 
 sub del_profile {
     my ($_netcnx, $profile) = @_;
-    $profile or return;
-    $profile eq "default" and return;
-    rm_rf("$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile);
-    rm_rf(glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
+    return if !$profile || $profile eq "default";
+    rm_rf("$::prefix/etc/netprofile/profiles/$profile");
 }
 
 sub add_profile {
     my ($netcnx, $profile) = @_;
-    $profile or return;
-    $profile eq "default" and return;
-    my $cmd1 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . ($netcnx->{PROFILE} || "default");
-    my $cmd2 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile;
-    cp_af($cmd1, $cmd2);
+    return if !$profile || $profile eq "default" || member($profile, get_profiles());
+    system("/sbin/clone-netprofile $netcnx->{PROFILE} $profile");
 }
 
 sub get_profiles() {
-    map { if_(/drakconnect_conf\.(.*)/, $1) } all("$::prefix/etc/sysconfig/network-scripts");
+    map { if_(m!([^/]*)/$!, $1) } glob("$::prefix/etc/netprofile/profiles/*/");
 }
 
 sub load_conf {
