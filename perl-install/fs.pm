@@ -44,6 +44,9 @@ sub read_fstab {
 	    # prefering type "smbfs" over "smb"
 	    $type = 'smbfs';
 	}
+	$mntpoint =~ s/\\040/ /g;
+	$dev =~ s/\\040/ /g;
+
 	my $h = { device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
 
 	($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
@@ -189,6 +192,9 @@ sub fstab_to_string {
 	    my $type = type2fs($_);
 
 	    my $dev = $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
+
+	    $mntpoint =~ s/ /\\040/g;
+	    $dev =~ s/ /\\040/g;
 
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
