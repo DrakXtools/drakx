@@ -158,14 +158,18 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		/* LIVE install */
 #ifdef MANDRAKE_MOVE
 		if (access(IMAGE_LOCATION "/live_tree/etc/fstab", R_OK) && access(IMAGE_LOCATION "/live_tree.clp", R_OK)) {
+			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
+				      "(I need the subdirectory " IMAGE_LOCATION ")\n"
+				      "Here's a short extract of the files in the directory:\n"
+				      "%s", extract_list_directory(IMAGE_LOCATION));
 #else
 		char p;
 		if (access(IMAGE_LOCATION "/" LIVE_LOCATION_REL, R_OK)) {
-#endif
 			stg1_error_message("I can't find the " DISTRIB_NAME " Distribution in the specified directory. "
 				      "(I need the subdirectory " LIVE_LOCATION_REL ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", extract_list_directory(IMAGE_LOCATION));
+#endif
 			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_BACK;
