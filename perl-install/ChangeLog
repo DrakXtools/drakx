@@ -1,3 +1,72 @@
+2002/01/22  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: improved widget_icons
+
+	* install_steps.pm: added net_cnx_pg output when configuring network in
+	auto install
+
+2002/01/22  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added support to save already existing synthesis file.
+
+	* install_any.pm: changed code to build synthesis file, check if they have
+	not already been copied
+	from mirror, or build them using parsehdlist.
+
+2002/01/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: Translate a few things more
+
+2002/01/22  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake_interactive.pm: cleanup error messages (and fix diskdrake's)
+	defaults to ext3 instead of ext2
+
+	* interactive.pm: add "quit_if_double_click" and "tree_expanded" flags
+	(request from till)
+	add feature "allow_empty_list" for "list" entries (disables the special
+	cases for 0 and 1 element lists)
+
+	* install_any.pm, diskdrake.pm: cleanup error messages (and fix
+	diskdrake's)
+
+	* install_interactive.pm, raid.pm: defaults to ext3 instead of ext2
+
+	* partition_table.pm: remove unused auto_win_extended stuff
+	handle extended partitions with no partitions inside (esp. for the first
+	hda5 & windows XP)
+
+	* bootloader.pm: 
+	  - fix default not being formatted like labels for lilo
+	  - check the label is not already used *case-sensitively*
+	  - check a kernel_or_dev is given
+
+	* any.pm: 
+	  - remove the default entry when that entry is removed
+	  - use allow_empty_list for displaying the entries
+	  - fix default not being formatted like labels for lilo
+	  - check the label is not already used *case-sensitively*
+	  - check a kernel_or_dev is given
+
+	* fsedit.pm: yet again better error reporting
+	defaults to ext3 instead of ext2
+
+	* standalone/drakboot, bootlook.pm: fix yves's code duplication of
+	lilo_choice (use $::lilo_choice in bootlook)
+
+	* interactive_gtk.pm: add "quit_if_double_click" and "tree_expanded" flags
+	(request from till)
+
+	* install_steps_interactive.pm: cleanup error messages (and fix
+	diskdrake's)
+	better messages for the minimal installs
+
+	* standalone/diskdrake: yet again better error reporting
+	cleanup error messages (and fix diskdrake's)
+
+	* share/rpmsrate: move mandrake-mime from SYSTEM to X
+	lower sndconfig
+
 2002/01/22  fcrozat
 
 	* share/rpmsrate: Really install gnome control center when installing
