@@ -127,7 +127,7 @@ sub getFile {
 	    #- to other to avoid media change...
 	    my $f2 = "$postinstall_rpms/$f";
 	    $f2 = "/tmp/image/$rel" if !$postinstall_rpms || !-e $f2;
-	    local *GETFILE; open GETFILE, $f2 and return *GETFILE;
+	    open GETFILE, $f2 and *GETFILE;
 	}
     } || errorOpeningFile($f);
 }
