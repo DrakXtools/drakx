@@ -830,7 +830,7 @@ sub miscellaneous {
 	$_ .= join('', map { " $_=autotune" } grep { /ide.*/ } all("/proc/ide")) if !/ide.=autotune/;
     }
     if (my $m = detect_devices::hasUltra66()) {
-	#$_ .= " $m" if !/ide.=0x/;
+	#$_ .= " $m" if !/ide.=0x/; #- add it back to support Ultra66 on ide modules.
     }
 
     #- keep some given parameters

@@ -226,10 +226,8 @@ sub hasUsbZip { hasUsb(8, -1) }
 sub hasSMP { c::detectSMP() }
 
 sub hasUltra66 {
+    #- keep it BUT DO NOT USE IT as now included in kernel.
     cat_("/proc/cmdline") =~ /(ide2=(\S+)(\s+ide3=(\S+))?)/ and return $1;
-
-#    #- disable hasUltra66 (now included in kernel)
-#    return;
 
     my @l = map { $_->{verbatim} } matching_desc('HPT|Ultra66') or return;
     

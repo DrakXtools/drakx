@@ -612,6 +612,7 @@ sub get_that_type {
 }
 
 sub load_ide {
+    return; #- add it back to support Ultra66 on ide modules.
     eval {
 	load("ide-mod", 'prereq', 'options="' . detect_devices::hasUltra66() . '"');
 	delete $conf{"ide-mod"}{options};
