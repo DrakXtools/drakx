@@ -429,11 +429,6 @@ sub setPackages {
 			useMedium($prev_asked_medium);
 			last SUPPL;
 		    }
-		    my $tmphdlistfile = pkgs::urpmidir($o->{prefix}) . "/hdlist$medium_name.cz";
-		    open(my $f2, ">", $tmphdlistfile);
-		    local $_;
-		    while (<$f>) { syswrite($f2, $_) }
-		    close $f; close $f2;
 		    my $supplmedium = pkgs::psUsingHdlist(
 			$o->{prefix},
 			$suppl_method,
@@ -443,9 +438,9 @@ sub setPackages {
 			'', #- rpmsdir
 			"Supplementary media $medium_name", #- description
 			1, # selected
-			$tmphdlistfile,
+			$f,
 		    );
-		    unlink $tmphdlistfile;
+		    close $f;
 		    if ($supplmedium) {
 			log::l("read suppl hdlist (via $suppl_method)");
 			$supplmedium->{prefix} = $url; #- for install_urpmi
