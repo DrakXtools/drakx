@@ -304,7 +304,7 @@ sub real_main {
                             ],
                             },
                     post => sub {
-                        isdn_write_config($isdn, $netc); # or return 'isdn_protocol';
+                        network::isdn::isdn_write_config($isdn, $netc); # or return 'isdn_protocol';
                         $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
                         # return "static_hostname";
                         $handle_multiple_cnx->();
@@ -325,7 +325,6 @@ sub real_main {
                    isdn =>
                    {
                     pre=> sub {
-                        network::isdn->import;
                         detect($netc->{autodetect}, 'isdn');
                         %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
                     },
@@ -348,7 +347,7 @@ sub real_main {
                             detect($netc->{autodetect}, 'modem');
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = network::modem::first_modem($netc);
-                            isdn_read_config($netcnx->{isdn_external});
+                            network::isdn::isdn_read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
@@ -364,7 +363,7 @@ sub real_main {
                             $isdn->{description} =~ s/\|/ -- /;
                             
                         }
-                        isdn_read_config($netcnx->{isdn_internal});
+                        network::isdn::isdn_read_config($netcnx->{isdn_internal});
                         return "isdn_protocol";
                     },
                    },
@@ -373,7 +372,7 @@ sub real_main {
                    isdn_ask =>
                    {
                     pre => sub {
-                        %isdn_cards = isdn_get_cards();
+                        %isdn_cards = network::isdn::isdn_get_cards();
                     },
                     name => N("Select a device !"),
                     data => sub { [ { label => N("Net Device"), val => \$isdn_name, type => 'list', separator => '|', list => [ keys %isdn_cards ], allow_empty_list => 1 } ] },
@@ -407,7 +406,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                         $e = $in->ask_from_listf(N("ISDN Configuration"),
                                                  N("Which of the following is your ISDN card?"),
                                                  sub { $_[0]{description} },
-                                                 [ isdn_get_cards_by_type($isdn->{card_type}) ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
+                                                 [ network::isdn::isdn_get_cards_by_type($isdn->{card_type}) ]) or goto($isdn->{card_type} =~ /usb|pci/ ? 'isdn_ask_step_1' : 'isdn_ask_step_1b');
                         $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
                         },
@@ -434,10 +433,10 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
                     name => N("ISDN Configuration") . "\n\n" . N("Select your provider.\nIf it isn't listed, choose Unlisted."),
                     data => sub {
                         [ { label => N("Provider:"), type => "list", val => \$provider, separator => '|',
-                            list => [ N("Unlisted - edit manually"), read_providers_backend() ] } ];
+                            list => [ N("Unlisted - edit manually"), network::isdn::read_providers_backend() ] } ];
                     },
                     post => sub {
-                        get_info_providers_backend($isdn, $netc, $provider);
+                        network::isdn::get_info_providers_backend($isdn, $netc, $provider);
                         $isdn->{huptimeout} = 180;
                         $isdn->{$_} ||= '' foreach qw(phone_in phone_out dialing_mode login passwd passwd2 idl speed);
                         add2hash($netc, { dnsServer2 => '', dnsServer3 => '', DOMAINNAME2 => '' });
