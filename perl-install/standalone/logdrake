@@ -88,7 +88,7 @@ my (undef,undef,undef,$mday) = localtime(time);
 $cal->select_day($mday);
 my @months = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
 my $cal_mode=0;
-my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for this day")), clicked =>sub{$cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode);});
+my $cal_butt = gtksignal_connect(new Gtk::CheckButton(_("Show only for the selected day")), clicked =>sub{$cal_mode =!$cal_mode; gtkset_sensitive($cal,$cal_mode);});
 
 ### menus definition
 # the menus are not shown
@@ -165,13 +165,15 @@ my $col=$cyan;
 ######### font and colors end
 
 my %files = (
-	     "auth" => { file => "/var/log/auth.log", desc => _("authentification") },
-	     "user" => { file => "/var/log/user.log", desc => _("user") },
-	     "messages" => { file => "/var/log/messages", desc => _("messages") },
-	     "syslog" => { file => "/var/log/syslog", desc => _("syslog") },
+	     "auth" => { file => "/var/log/auth.log", desc => _("Authentication") },
+	     "user" => { file => "/var/log/user.log", desc => _("User") },
+	     "messages" => { file => "/var/log/messages", desc => _("Messages") },
+	     "syslog" => { file => "/var/log/syslog", desc => _("Syslog") },
 	     "explanations" => { file => "/var/log/explanations", desc => _("Mandrake Tools Explanations")}
 );
 
+my $yy=gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("search")) , clicked => \&search),0);
+my $refcount_search;
 #### far from window
 gtkadd($window,
        gtkpack_(new Gtk::VBox(0,5),
@@ -188,7 +190,7 @@ gtkadd($window,
 						     gtkpack_(new Gtk::HBox(0,0),
 							      1, gtkadd(gtkset_border_width(new Gtk::Frame(_("Choose file")),2),
 									gtkpack (gtkset_border_width(new Gtk::VBox(0,0),0),
-										 map { ${"b_". $_} = new Gtk::CheckButton($files{$_}{desc}) } keys %files,
+										 map { ${"b_". $_} = gtksignal_connect(new Gtk::CheckButton($files{$_}{desc}), clicked=> sub{$refcount_search++;gtkset_sensitive($yy,$refcount_search)}) } keys %files,
 										)
 								       ),
 							      0, gtkadd(gtkset_border_width(new Gtk::Frame(_("Calendar")),2),
@@ -197,7 +199,7 @@ gtkadd($window,
 										 )
 								       )
 							      ),
-						     gtksignal_connect(new Gtk::Button(_("search")), clicked => \&search)
+						     $yy,
 						    )
 					  )
 		    ),
@@ -509,6 +511,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.7  2002/02/01 22:59:27  yduret
+# ergo fix thx dadou report
+#
 # Revision 1.6  2002/02/01 18:10:06  yduret
 # fix --explain=foo bug that prevent to show anything
 #
