@@ -10,7 +10,7 @@ our ($version, $sbindir, $bindir) = ("1.1.6", "/usr/sbin", "/usr/bin");
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/ } detect_devices::probeall(1);
+    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_IDE|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') } detect_devices::probeall(1);
 }
 
 
