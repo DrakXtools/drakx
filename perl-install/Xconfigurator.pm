@@ -15,7 +15,7 @@ use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
-my ($prefix, %monitors);
+my ($prefix, %monitors, %standard_monitors_);
 
 1;
 
@@ -124,8 +124,8 @@ sub readMonitorsDB {
 	$monitors{"$l{vendor}|$l{type}"} = \%l;
     }
     while (my ($k, $v) = each %standard_monitors) {
-	$monitors{'Generic|' . translate($k)} =
-	    { hsyncrange => $v->[1], vsyncrange => $v->[2] };
+	$monitors{'Generic|' . translate($k)} = $standard_monitors_{$k} = 
+	  { hsyncrange => $v->[1], vsyncrange => $v->[2] };
     }
 }
 
@@ -356,9 +356,8 @@ sub monitorConfiguration(;$$) {
     readMonitorsDB("$ENV{SHARE_PATH}/ldetect-lst/MonitorsDB");
 
     my $good_default = 'Generic|' . translate($good_default_monitor);
-    my $low_default = 'Generic|' . translate($low_default_monitor);
     $monitor->{type} ||=
-      ($::auto_install ? $low_default :
+      ($::auto_install ? $low_default_monitor :
        $in->ask_from_treelist(_("Monitor"), _("Choose a monitor"), '|', ['Custom', keys %monitors], $good_default));
     if ($monitor->{type} eq 'Custom') {
 	$in->ask_from_entries_refH('',
@@ -372,7 +371,7 @@ that is beyond the capabilities of your monitor: you may damage your monitor.
 				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges, label => _("Horizontal refresh rate") },
 				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges, label => _("Vertical refresh rate") }]);
     } else {
-	add2hash($monitor, $monitors{$monitor->{type}});
+	add2hash($monitor, $monitors{$monitor->{type}} || $standard_monitors_{$monitor->{type}});
     }
     add2hash($monitor, { type => "Unknown", vendor => "Unknown", model => "Unknown", manual => 1 });
 }
