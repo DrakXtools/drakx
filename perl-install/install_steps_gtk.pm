@@ -516,7 +516,7 @@ sub installPackages {
 	    log::l("advertising $f");
 	    my $pl = $f; $pl =~ s/\.png$/.pl/;
 	    my $icon_name = $f; $icon_name =~ s/\.png$/_icon.png/;
-	    my ($draw_text, $width, $height, $y_start, $title, @text);
+	    my ($draw_text, $width, $height, $border, $y_start, @text);
 	    -e $pl and $draw_text = 1;
 	    eval(cat_($pl)) if $draw_text;
 	    my $pix = gtkcreate_pixbuf($f);
@@ -531,20 +531,15 @@ sub installPackages {
 				   $pix->render_to_drawable($darea->window, $darea->style->bg_gc('normal'), 0, 0,
 							    ($dx-$width)/2, 0, $width, $height, 'none', 0, 0);
 
-                                   my ($width, $lines, $widths, $heights) = wrap_paragraph([ $title, '', @text ], $darea, 520);
-                                   my $i = 0;
-                                   foreach (@$lines) {
-                                       my $layout = $darea->create_pango_layout($_);
+                                   my @lines = wrap_paragraph([ @text ], $darea, $border, $width);
+                                   foreach my $line (@lines) {
+                                       my $layout = $darea->create_pango_layout($line->{text});
                                        my $draw_lay = sub {
                                            my ($gc, $decx) = @_;
-                                           $darea->window->draw_layout($gc,
-                                                                       ($dx-$width)/2 + $widths->[$i] + $decx,
-                                                                       $y_start + $heights->[$i],
-                                                                       $layout);
+                                           $darea->window->draw_layout($gc, $line->{'x'} + $decx, $y_start + $line->{'y'}, $layout);
                                        };
                                        $draw_lay->($darea->style->black_gc, 0);
-                                       $i == 0 and $draw_lay->($darea->style->black_gc, 1);
-                                       $i++;
+                                       $line->{options}{bold} and $draw_lay->($darea->style->black_gc, 1);
                                    }
 			       }
 			   }));

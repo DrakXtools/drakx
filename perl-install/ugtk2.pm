@@ -18,7 +18,7 @@ $::o = { locale => lang::read() } if !$::isInstall;
                      gtkset_text gtkset_tip gtkset_visibility gtksetstyle gtkshow gtksignal_connect gtksize gtktext_append
                      gtktext_insert ) ],
 
-    helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords get_text_coord gtkcolor gtkcreate_img
+    helpers => [ qw(add2notebook add_icon_path fill_tiled fill_tiled_coords gtkcolor gtkcreate_img
                     gtkcreate_pixbuf gtkfontinfo gtkset_background n_line_size set_back_pixbuf string_size
                     string_width string_height wrap_paragraph) ],
 
@@ -723,19 +723,10 @@ sub string_height {
 }
 
 sub get_text_coord {
-    my ($text, $widget4style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy, $o_wrap_char) = @_;
+    my ($text, $widget4style, $max_width, $currentx, $currenty, $o_wrap_char) = @_;
     my $wrap_char = $o_wrap_char || ' ';
-    my $idx = 0;
-    my $real_width = 0;
-    my $real_height = 0;
     my @lines;
-    my @widths;
-    my @heights;
-    $heights[0] = 0;
-    my $max_width2 = $max_width;
-    my $height = 0;
-    my $width = 0;
-    my $flag = 1;
+    my $current_text;
     my @t = split($wrap_char, $text);
     my @t2;
     if ($::isInstall && $::o->{locale}{lang} =~ /ja|zh/) {
@@ -756,63 +747,77 @@ sub get_text_coord {
     } else {
 	@t2 = @t;
     }
-    foreach (@t2) {
-	my $l = string_width($widget4style, $_ . (!$flag ? $wrap_char : ''));
-	if ($width + $l > $max_width2 && !$flag) {
-	    $flag = 1;
-	    $height += string_height($widget4style, $lines[$idx]) + 1;
-	    $heights[$idx+1] = $height;
-	    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
-	    $width = 0;
-	    $idx++;
-	}
-	$lines[$idx] = $flag ? $_ : $lines[$idx] . $wrap_char . $_;
-	$width += $l;
-	$flag = 0;
-	$l <= $max_width2 or $max_width2 = $l;
-	$width <= $real_width or $real_width = $width;
+    my $add_line = sub {
+        my ($w, $h) = string_size($widget4style, $current_text);
+        push @lines, { text => $current_text, width => $w, height => $h + 1, 'x' => $currentx, 'y' => $currenty };
+    };
+    my $width;
+    foreach my $word (@t2) {
+	my $w = string_width($widget4style, $word . $wrap_char);
+	if ($currentx + $width + $w > $max_width) {
+            $add_line->();
+            $current_text = $word;
+	    $width = $w;
+            $currentx = 0;
+            $currenty += $lines[-1]{height};
+	} else {
+            $current_text .= ($current_text ne '' ? $wrap_char : '') . $word;
+            $width += $w;
+        }
     }
-    $height += string_height($widget4style, $lines[$idx]);
-    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
+    #- if wrap_char was at the end, don't forget it, for cases when bold/nonbold text follows
+    $text =~ /$wrap_char$/ and $current_text .= $wrap_char;
+    $add_line->();
 
-    $height < $real_height or $real_height = $height;
-    $width = $max_width;
-    $height = $max_height;
-    $real_width < $max_width && $can_be_smaller and $width = $real_width;
-    $real_width > $max_width && $can_be_greater and $width = $real_width;
-    $real_height < $max_height && $can_be_smaller and $height = $real_height;
-    $real_height > $max_height && $can_be_greater and $height = $real_height;
-    if ($centeredy) {
- 	my $dh = ($height-$real_height)/2 + (string_height($widget4style, $lines[0]))/2;
- 	@heights = map { $_ + $dh } @heights;
-    }
-    ($width, $height, \@lines, \@widths, \@heights);
+    return @lines;
 }
 
 sub wrap_paragraph {
-    my ($text, $widget4style, $max_width) = @_;
+    my ($text, $widget4style, $border, $max_width) = @_;
 
-    my ($width, @lines, @widths, @heights);
+    $max_width -= 2*$border;
+    my @lines;
     my $ydec;
-    foreach (@$text) {
-        if ($_ ne '') {
-            my ($width_, $height, $lines, $widths, $heights) = get_text_coord($_, $widget4style, $max_width, 0, 1, 0, 1, 0);
-            push @widths, @$widths;
-            push @heights, map { $_ + $ydec } @$heights;
-            push @lines, @$lines;
-            $width = max($width, $width_);
-            $ydec += $height + 1;
-        } elsif (@lines) {
-            #- void line
-            my $yvoid = $ydec / @lines;
-            push @widths, 0;
-            push @heights, $yvoid;
-            push @lines, '';
-            $ydec += $yvoid;
+
+    foreach my $paragraph (@$text) {
+        my @paragraph_lines;
+        my $center;
+        if (ref($paragraph) eq 'ARRAY') {
+            my ($text, %options) = @$paragraph;
+            $center = $options{center};
+            $paragraph = $text;
         }
+        if ($paragraph ne '') {
+            my @elements;
+            while ($paragraph =~ m|(.*?)<b>(.*?)</b>(.*)|) {
+                $1 ne '' and push @elements, [ $1, bold => 0 ];
+                push @elements, [ $2, bold => 1 ];
+                $paragraph = $3;
+            }
+            $paragraph ne '' and push @elements, [ $paragraph, bold => 0 ];
+
+            my $currentx;
+            foreach (@elements) {
+                my ($text, %options) = @$_;
+                my @newlines = get_text_coord($text, $widget4style, $max_width, $currentx, $ydec);
+                $currentx = $newlines[-1]{'x'} + $newlines[-1]{width};
+                $ydec = $newlines[-1]{'y'};
+                $options{bold} and $currentx++;
+                $_->{options} = \%options foreach @newlines;
+                push @paragraph_lines, @newlines;
+            }
+            $ydec = $paragraph_lines[-1]{'y'} + $paragraph_lines[-1]{height};
+        }
+        if ($center) {
+            my %widths;
+            $widths{$_->{'y'}} ||= $_->{x} + $_->{width} foreach reverse @paragraph_lines;
+            $_->{x} += ($max_width - $widths{$_->{'y'}})/2 foreach @paragraph_lines;
+        }
+        $_->{x} += $border foreach @paragraph_lines;
+        push @lines, @paragraph_lines;
     }
 
-    ($width, \@lines, \@widths, \@heights);
+    return @lines;
 }
 
 sub gtkcolor {
