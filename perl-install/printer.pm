@@ -2057,14 +2057,11 @@ sub removeopenofficeprinterentry {
 }
 
 sub findsofficeconfigfile {
-    my @configfilenames = ("/usr/lib/*/share/xp3/Xpdefaults",
-			   "/usr/local/lib/*/share/xp3/Xpdefaults",
-			   "/usr/local/*/share/xp3/Xpdefaults",
-			   "/opt/*/share/xp3/Xpdefaults",
-			   "/*/share/xp3/Xpdefaults",
-			   "/*/*/share/xp3/Xpdefaults",
-			   "/*/*/*/share/xp3/Xpdefaults",
-			   "/*/*/*/*/share/xp3/Xpdefaults");
+    my @configfilenames = 
+	("/usr/lib/*/share/xp3/Xpdefaults",
+	 "/usr/local/lib/*/share/xp3/Xpdefaults",
+	 "/usr/local/*/share/xp3/Xpdefaults",
+	 "/opt/*/share/xp3/Xpdefaults");
     my $configfilename = "";
     for $configfilename (@configfilenames) {
 	local *F;
@@ -2082,11 +2079,7 @@ sub findopenofficeconfigfile {
 	("/usr/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/lib/*/share/psprint/psprint.conf",
 	 "/usr/local/*/share/psprint/psprint.conf",
-	 "/opt/*/share/psprint/psprint.conf",
-	 "/*/share/psprint/psprint.conf",
-	 "/*/*/share/psprint/psprint.conf",
-	 "/*/*/*/share/psprint/psprint.conf",
-	 "/*/*/*/*/share/psprint/psprint.conf");
+	 "/opt/*/share/psprint/psprint.conf");
     my $configfilename = "";
     for $configfilename (@configfilenames) {
 	local *F;
