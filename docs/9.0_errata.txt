@@ -78,6 +78,11 @@
    to the "Device" section /etc/X11/XF86Config-4 fixes these boxes.
 
 
+   I810 driver is bogus: when Xrender extension is in use (antialiased
+   fonts), X11 may crash upon vt switch.
+   is fixed in devel branch of cvs
+
+
  o Printer drivers
    ===============
 
