@@ -3720,7 +3720,7 @@ sub get_file_from_tape {
 	my $offset = find_tape_offset($cat_entry);
 	spawn_progress("mt -f $dev_path rewind", "Rewinding tape on $dev_path.");
 	spawn_progress("mt -f $dev_path fsf $offset", "Moving forward $offset file records.");
-	spawn_progress("tar -C cfg_dir/restores -xf $dev_path", "Untarring from $dev_path to work directory.");
+	spawn_progress("tar -C $cfg_dir/restores -xf $dev_path", "Untarring from $dev_path to work directory.");
 }
 
 sub restore_box() {
