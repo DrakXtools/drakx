@@ -4,7 +4,6 @@ use XML::Parser;
 use MDK::Common;
 use utf8;
 
-my $help;
 my $dir = "doc/manualB/modules";
 my $xsltproc = "/usr/bin/xsltproc";
 
@@ -34,51 +33,57 @@ save_help($base);
 
 foreach my $lang (keys %helps) {
     print "Now transforming: $lang\n";
-    local *F;
     my ($charset) = cat_("$lang.po") =~ /charset=([^\\]+)/ or die "missing charset in $lang.po\n";
-    open F, ">:encoding($charset)", "help-$lang.pot";
-    print F "\n";
+    open(my $F, ">:encoding($charset)", "help-$lang.pot");
+    print $F <<EOF;
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=$charset\\n"
+
+EOF
     foreach my $id (keys %{$helps{$lang}}) {
+#	warn "Writing id=$id in lang=$lang\n";
 	$base->{$id} or warn "$lang:$id doesn't exist in english\n", next;
-	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/$dir/$lang/drakx-chapter.xml\n);
-	print F qq(msgid ""\n");
-	print F join(qq(\\n"\n"), split "\n", to_ascii($base->{$id}));
-	print F qq("\nmsgstr ""\n");
-	print F join(qq(\\n"\n"), split "\n", $helps{$lang}{$id});
-	print F qq("\n\n);
+	print $F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/$dir/$lang/drakx-chapter.xml\n);
+	print_in_PO($F, to_ascii($base->{$id}[0]), $helps{$lang}{$id}[0]);
     }
 }
 unlink(".memdump");
 
+sub print_in_PO {
+    my ($F, $msgid, $msgstr) = @_;
+
+    print $F qq(msgid ""\n");
+    print $F join(qq(\\n"\n"), split "\n", $msgid);
+    print $F qq("\nmsgstr ""\n");
+    print $F join(qq(\\n"\n"), split "\n", $msgstr);
+    print $F qq("\n\n);
+}
+
 sub save_help {
-    my ($help) = @_;
+    my ($help, $inside_strings) = @_;
 
-    #- HACK, don't let this one disappear
-    $help->{configureXxdm} = 
-'Finally, you will be asked whether you want to see the graphical interface
-at boot. Note this question will be asked even if you chose not to test the
-configuration. Obviously, you want to answer \"No\" if your machine is to
-act as a server, or if you were not successful in getting the display
-configured.';
-
-    local *F;
-    open F, ">:encoding(ascii)", "../../help.pm";
-    print F q{package help;
+    open(my $F, ">:encoding(ascii)", "../../help.pm");
+    print $F <<'EOF';
+package help;
 use common;
 
 # IMPORTANT: Don't edit this File - It is automatically generated 
 #            from the manuals !!! 
 #            Write a mail to <documentation@mandrakesoft.com> if
 #            you want it changed.
-
-our %steps = (
-};
+EOF
     foreach (sort keys %$help) {
-	my $s = to_ascii($help->{$_});
+	my ($main, @inside) = map { '"' . to_ascii($_) . '"' } @{$help->{$_}};
+	my $s = join(', ', $main, map { qq(N($_)) } @inside);
 	print STDERR "Writing id=$_\n";
-	print F qq(\n$_ => \nN_("$s"),\n);
+	print $F <<EOF;
+sub $_ {
+    N($s);
+}
+EOF
+	my @nb = $main =~ /\%s/g; @nb == @inside or die "bad \%s in $_\n";
     }
-    print F ");\n";
 }
 
 # i don't like the default tree format given by XML::Parser,
@@ -119,6 +124,7 @@ sub find_tag {
     }
 }
 
+my $help;
 sub rewrite2 {
     my ($tree, $lang) = @_;
     our $i18ned_open_text_quote  = $ {{ 
@@ -147,10 +153,18 @@ sub rewrite2 {
     $help;
 }
 
+my @inside_strings;
 sub rewrite2_ {
     my ($tree, @parents) = @_;
     ref($tree) or return $tree;
     !$tree->{attr}{condition} || $tree->{attr}{condition} !~ /no-inline-help/ or return '';
+
+    my @prev_inside_strings;
+    my ($id) = $tree->{attr}{id} ? $tree->{attr}{id} =~ /drakxid-(.+)/ : ();
+    if ($id) {
+	@prev_inside_strings = @inside_strings;
+	@inside_strings = ();
+    }
 
     my $text = do {
 	my @l = map { rewrite2_($_, $tree, @parents) } @{$tree->{children}};
@@ -164,8 +178,7 @@ sub rewrite2_ {
 	$text;
     };
 
-    if ($tree->{attr}{id} && $tree->{attr}{id} =~ /drakxid-(.+)/) {
-	my $id = $1;
+    if ($id) {
 	my $t = $text;
 	$t =~ s/^\s+//;
 
@@ -174,7 +187,8 @@ sub rewrite2_ {
 	    $s =~ s/^\s+//;
 	    "(*) $s";
 	} find_tag('footnote', $tree);
-	$help->{$id} = aerate($t . join('', @footnotes));
+	$help->{$id} = [ aerate($t . join('', @footnotes)), @inside_strings ];
+	unshift @inside_strings, @prev_inside_strings;
     }
 
     if (0) {
@@ -186,8 +200,12 @@ sub rewrite2_ {
     } elsif (member($tree->{tag}, 'quote', 'citetitle', 'foreignphrase')) {
 	$text =~ s/^\Q$i18ned_open_label_quote\E(.*)\Q$i18ned_close_label_quote\E$/$1/ if $i18ned_open_label_quote;
 	($i18ned_open_text_quote || "``") . $text . ($i18ned_close_text_quote || "''");
-    } elsif (member($tree->{tag}, 'guilabel', 'guibutton', 'guimenu', 'literal', 'filename')) {
+    } elsif (member($tree->{tag}, 'literal', 'filename')) {
 	($i18ned_open_label_quote || "\\\"") . $text . ($i18ned_close_label_quote || "\\\"");
+    } elsif (member($tree->{tag}, 'guilabel', 'guibutton', 'guimenu')) {
+	$text =~ s/\s+$//;
+	push @inside_strings, $text;
+	($i18ned_open_label_quote || "\\\"") . "%s" . ($i18ned_close_label_quote || "\\\"");
     } elsif ($tree->{tag} eq 'command') {
 	($i18ned_open_command_quote || "\\\"") . $text . ($i18ned_close_command_quote || "\\\"");
     } elsif ($tree->{tag} eq 'userinput') {
