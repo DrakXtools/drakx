@@ -118,7 +118,7 @@ my $exec_string = "export USER=$ENV{USER}; /usr/sbin/drakbackup --daemon > /dev/
 my $ignore_files_list;
 my @list_of_rpm_to_install;
 my @other_files;
-my @sys_files;
+my @sys_files = "/etc";
 
 # allow not-root user with own config
 if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
@@ -128,12 +128,12 @@ if ($ENV{USER} ne 'root' && $ENV{HOME} ne '/root') {
 	$cfg_dir = "$user_home/.drakbackup/";
 	$conf{PATH_TO_SAVE} = $cfg_dir . "backups";
 	$log_file = $cfg_dir . "drakbackup.log";
-	-d $conf{PATH_TO_SAVE} or mkdir_p $conf{PATH_TO_SAVE};
 	$nonroot_user = 1;
 	$conf{NO_SYS_FILES} = 1;
 	@user_list = $ENV{USER};
 } else {
 	$user_home = "/root";
+	$conf{PATH_TO_SAVE} = "/var/lib/drakbackup";
 }
 $cfg_file = $cfg_dir . "drakbackup.conf";
 my $backup_key = $user_home . "/.ssh/identity-drakbackup";
@@ -506,11 +506,8 @@ sub read_conf_file() {
 		%conf = getVarsFromSh($cfg_file);
 		@other_files = conf_to_list($conf{OTHER_FILES});
 		@user_list = conf_to_list($conf{HOME_FILES});
-		@sys_files = conf_to_list($conf{SYS_FILES});
+		@sys_files = conf_to_list($conf{SYS_FILES}) if exists($conf{SYS_FILES});
 		$backup_daemon = 1 if exists($conf{DAEMON_TIME_SPACE});
-		$conf{SMTP_SERVER} = "localhost" if !exists($conf{SMTP_SERVER});
-		$conf{MAX_SPACE} = 1000.0 if !exists($conf{MAX_SPACE});
-		$conf{PATH_TO_SAVE} = "/var/lib/drakbackup" if !exists($conf{PATH_TO_SAVE});
 		read_cron_files();
 		$cfg_file_exist = 1;
     } else { 
@@ -518,8 +515,12 @@ sub read_conf_file() {
 		#- these were 1 by default, but that made it so the user could never save the 
 		#- inverse behavior. this allows incremental as the default if not configured
 		$conf{SYS_INCREMENTAL_BACKUPS} = 1;
-		$conf{USER_INCREMENTAL_BACKUPS} = 1; 
+		$conf{USER_INCREMENTAL_BACKUPS} = 1;
     }
+	# some basic defaults
+	$conf{SMTP_SERVER} = "localhost" if !exists($conf{SMTP_SERVER});
+	$conf{MAX_SPACE} = 1000.0 if !exists($conf{MAX_SPACE});
+	$conf{USE_HD} = 1 if !exists($conf{USE_HD});
 	# deal with users that may have been deleted from the system
 	check_valid_users() if $cfg_file_exist;
 	$use_hd = !($conf{USE_CD} || $conf{USE_TAPE} || $conf{USE_NET});
@@ -1701,6 +1702,7 @@ sub advanced_what() {
 		new Gtk2::Label(N("Other")),
 		new Gtk2::HBox(0, 5)
 	));
+    gtkset_sensitive($button_what_sys, !$conf{NO_SYS_FILES});
     fonction_env(\$box_what, \&advanced_what, \&advanced_box);
     $up_box->show_all;
 }
