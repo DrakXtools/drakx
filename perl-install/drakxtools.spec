@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 34mdk
+Release: 35mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,38 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed May 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-35mdk
+- authentication:
+  o fix winbind configuration and do the same for LDAP
+    and NIS (vincent guardiola, pixel)
+  o install autofs for nis authentication (florin & fcrozat)
+- diskdrake: handle LABEL=foobar in /etc/fstab (pixel)
+  (ex2/3 only for now, no xfs)
+- drakclock: do saner check for ntp package (Robert Vojta)
+- drakconnect:
+  o fix speedtouch ADSL model (using kernel mode) (poulpy)
+  o better LAN vs wireless filtering by using SIOCGIWNAME ioctl)
+  o handle ipw2100 wireless driver
+  o do not offer to set DOMAINNAME2 since it is never saved nor read
+    (#9580)
+  o kill "speedtouch and ISDN only work under 2.4 kernel" warnings
+    (poulpy)
+- drakfirewall: open more ports for samba
+- harddrake service: do not run XFdrake in automatic mode
+- misc cleanups & bug fixes (pixel)
+- scannerdrake: fix firmware installation (till)
+- XFdrake (pixel):
+  o can now configure monitors on heads > 1
+  o do not succeed automatic configuration (not auto_install) when
+    there is many cards (as requested by Joe Bolin)
+  o speed-up monitor choosing dialog when {VendorName} is undef
+  o vmware doesn't like 24bpp (#9755)
+  o defaults to the greatest depth rather than 24
+- do not prefer devfs names when reading /proc/mounts (which uses
+  devfs names) (pixel)
+- ugtk2 layer: transparently replace obsolete OptionMenu widget by the
+  new ComboBox widget
+
 * Tue May  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-34mdk
 - drakconnect:
   o fix last step of interface destruction wizard
