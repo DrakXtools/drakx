@@ -658,8 +658,7 @@ sub configure_pcmcia {
 
     log::l("i try to configure pcmcia services");
 
-    symlink("/tmp/stage2/etc/pcmcia", "/etc/pcmcia") unless -e "/etc/pcmcia";
-    symlink("/sbin/install", "/sbin/cardmgr") unless -x "/sbin/cardmgr";
+    symlink "/tmp/stage2/$_", $_ foreach "/etc/pcmcia";
 
     eval {
 	load("pcmcia_core");
