@@ -87,8 +87,6 @@ if (!$allowNVIDIA_rpms) {
 			 -e "/usr/X11R6/lib/modules/extensions/libglx.so") && []; #- empty list but true.
 }
 
-$allowNVIDIA_rpms and print STDERR "using NVIDIA\n";
-$allowNVIDIA_rpms or print STDERR "NOT using NVIDIA\n";
 $::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, $in->do_pkgs, 
 		    { allowFB          => $::expert,
