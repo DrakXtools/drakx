@@ -29,7 +29,7 @@ DrakX.pot: $(PMSFILES)
 	rm $(PMSCFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 
-install:
+install: $(MOFILES)
 	for l in $(LANGS); do \
 		install -d $(LOCALEDIR)/$$l/LC_MESSAGES; \
 		install -m 644 $$l.mo $(LOCALEDIR)/$$l/LC_MESSAGES/$(NAME).mo; \
