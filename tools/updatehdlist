@@ -6,5 +6,5 @@ topdir=$1
 add=$topdir/Mandrake/RPMS2
 [ -d "$add" ] || add=$topdir/Mandrake/RPMS
 
-./syncrpms --verbose --clean --update --remove --add $add --from /RPMS --to $topdir/Mandrake/RPMS*
+./syncrpms --verbose --clean --update --remove --add $add --from /RPMS --to $topdir/Mandrake/RPMS{,2,3}
 gendistrib --noclean --distrib $topdir
