@@ -777,8 +777,6 @@ sub boot_iso {
 sub drivers {
     my ($type, $I, $img) = @_;
 
-    my $tmp = "$ENV{HOME}/tmp/initrd";
-
     _ "dd if=/dev/zero of=$img bs=1k count=1440";
     _ "$mke2fs $img";
     _ "$sudo mount -t ext2 $img $tmp_mnt -o loop";
