@@ -237,22 +237,30 @@ sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
 sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 
 sub loadkeys_files {
+    my ($warn) = @_;
     my $archkbd = arch() =~ /^sparc/ ? "sun" : arch() =~ /i.86/ ? "i386" : arch() =~ /ppc/ ? "mac" : arch();
     my $p = "/usr/lib/kbd/keymaps/$archkbd";
     my $post = ".kmap.gz";
     my %trans = ("cz-latin2" => "cz-lat2");
+    my %find_file;
+    foreach my $dir (all($p)) {
+	$find_file{$dir} = '';
+	foreach (all("$p/$dir")) {
+	    $find_file{$_} && $warn and warn "file $_ is both in $find_file{$_} and $dir\n";
+	    $find_file{$_} = "$p/$dir/$_";
+	}
+    }
     my (@l, %l);
     foreach (values %keyboards) {
 	local $_ = $trans{$_->[1]} || $_->[1];
-	my ($l) = grep { -e $_ } ("$p/$_$post");
-	$l or /(..)/ and ($l) = grep { -e $_ } ("$p/$1$post");
-	print STDERR "unknown $_\n" if $_[0] && !$l; $l or next;
+	my $l = $find_file{"$_$post"} || $find_file{first(/(..)/) . $post};
+	print STDERR "unknown $_\n" if $warn && !$l; $l or next;
 	push @l, $l;
 	foreach (`zgrep include $l | grep "^include"`) {
 	    /include\s+"(.*)"/ or die "bad line $_";
 	    @l{grep { -e $_ } ("$p/$1.inc.gz")} = ();
 	}
-    }        
+    }
     @l, keys %l, grep { -e $_ } map { "$p/$_.inc.gz" } qw(compose euro windowkeys linux-keys-bare);
 }
 
