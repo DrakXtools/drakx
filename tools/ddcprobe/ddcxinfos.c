@@ -39,6 +39,8 @@ int main(int argc, char **argv)
 	vbe_get_edid_ranges(edid, &hmin, &hmax, &vmin, &vmax);
 	modelines = vbe_get_edid_modelines(edid);
 
+	if (hmin > hmax || vmin > vmax) return 0;
+
 	printf(hmin ? "%d-%d kHz HorizSync\n" : "\n", hmin, hmax);
 	printf(vmin ? "%d-%d Hz VertRefresh\n" : "\n", vmin, vmax);
 
