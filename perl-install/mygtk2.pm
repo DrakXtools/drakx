@@ -630,7 +630,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 	      ? 'real_window'
 	      : 'child';
 
-#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s (@args)\n";
+#-    warn "mygtk2::MagicWindow::$meth", first($w =~ /HASH(.*)/), " on $s1 (@args)\n";
 
     $w->{$s2}->$meth(@args) if $s2;
     $w->{$s1}->$meth(@args);
