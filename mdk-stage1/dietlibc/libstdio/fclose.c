@@ -7,6 +7,8 @@ int fclose(FILE *stream) {
 #ifdef WANT_BUFFERED_STDIO
   FILE *f,*fl;
 #endif
+  if (!stream)
+	  return EOF;
   fflush(stream);
   res=close(stream->fd);
 #ifdef WANT_BUFFERED_STDIO
