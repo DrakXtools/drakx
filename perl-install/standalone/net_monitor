@@ -426,7 +426,7 @@ sub update() {
 
 sub in_ifconfig {
     my ($intf) = @_;
-    -e '/sbin/ifconfig' or return 1;
+    -x '/sbin/ifconfig' or return 1;
     $intf eq '' and return 1;
     `/sbin/ifconfig` =~ /$intf/;
 }
