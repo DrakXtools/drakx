@@ -559,11 +559,14 @@ sub raidAutoStartIoctl {
 
 sub raidAutoStartRaidtab {
     my (@parts) = @_;
+    require raid;
     #- faking a raidtab, it seems to be working :-)))
-    #- (choosing md0, but it works for the others!)
+    #- (choosing any inactive md)
+    raid::inactivate_all();
     foreach (@parts) {
-	output("/etc/raidtab", "raiddev /dev/md0\n  device " . devices::make($_->{device}) . "\n");
-	run_program::run('raidstart', devices::make("md0"));
+	my ($nb) = grep { !raid::is_active("md$_") } 0..7;
+	output("/etc/raidtab", "raiddev /dev/md$nb\n  device " . devices::make($_->{device}) . "\n");
+	run_program::run('raidstart', devices::make("md$nb"));
     }
 }
 
@@ -577,7 +580,7 @@ sub raidAutoStart {
     if (my @needed_perso = map { 
 	if_(/^kmod: failed.*md-personality-(.)/ ||
 	    /^md: personality (.) is not loaded/, $personalities{$1}) } syslog()) {
-	log::l("RAID: autostart needs personality from $_"), eval { modules::load(@needed_perso) };
+	eval { modules::load(@needed_perso) };
 	raidAutoStartIoctl() or raidAutoStartRaidtab(@parts);
     }
 }
