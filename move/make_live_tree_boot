@@ -27,6 +27,16 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	    symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
 	}
     }
+
+    if ($live_name eq 'totem') {
+	foreach my $dir ('/usr/share', '/usr/lib', '/usr/bin', '/usr') {
+	    foreach my $f (all("$prefix$dir")) {
+		my $file = "$prefix$dir/$f";
+		my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image$dir/$f";
+		symlink $link, "$light_prefix$dir/$f";
+	    }
+	}
+    }
 }
 
 sub remove_light_tree {
@@ -50,10 +60,6 @@ sub remove_light_tree {
 	    }
 	}
     }
-    system("rm -rf $light_prefix/usr/bin/stage2/*.pm");
-    system("rm -rf $light_prefix/usr/lib/libDrakX/*.pm");
-    system("rm -rf $light_prefix/usr/share/langs/*.png");
-
     rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
 
     if (-e $light_prefix) {
@@ -71,6 +77,10 @@ sub remove_light_tree {
 	    unlink $dest or die "removing $dest failed: $!\n";
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
 	}
+	system("rm -rf $light_prefix/usr/bin/stage2/*.pm");
+	system("rm -rf $light_prefix/usr/lib/libDrakX/*.pm");
+	system("rm -rf $light_prefix/usr/share/langs/*.png");
+
 	rmdir($_) foreach reverse(chomp_(`find $light_prefix -type d`));
     }
 
