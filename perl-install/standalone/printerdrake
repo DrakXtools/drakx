@@ -51,7 +51,7 @@ my $commandline = $_;
 exit 0 unless printer::printerdrake::first_time_dialog($printer, $in);
 
 # Data structure for GTK2 main window
-my $us = {} ;
+my $us = {};
 $us->{VERSION} = '0.1';
 
 # GTK2 splash screen
@@ -119,7 +119,6 @@ printer::printerdrake::init($printer, $in);
 # GTK2 main window
 
 my $error = 0;
-my $GetValue = -65533;
 my $stringsearch = '';
 
 sub HelpSystem() { exec("drakhelp --id printerdrake") unless fork() };
@@ -232,7 +231,7 @@ my @toolbwg = map {
 #-PO "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
     [ N("Configure CUPS"), N("Configure CUPS printing system"), 'cups_config', \&ConfigCUPS ]
   );
-my ($tbadd, $tbdefault, $tbedit, $tbdel, $tbref, $tbconfig) = @toolbwg;
+my ($_tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
 GrayDelEdit();
 
 $fbut->signal_connect('clicked', sub { $stringsearch = $filter->get_text; Refresh($stringsearch) });
