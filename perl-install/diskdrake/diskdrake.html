@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>DiskDrake</title>
+  </head>
+  <body bgcolor="#ffffff">
+
+<center>
+<table width=80% border=0 cellpadding=10 cellspacing=10>
+<tr>
+<td bgcolor=#ffffff>
+
+    <p>
+    <img src="images/diskdrake1-def.jpg" alt="diskdrake logo" width=400 height=100>
+    <p>  
+
+    <H2>I- What's it?</H2>
+
+      The purpose of the DiskDrake project is to make easier the hard disk
+      partitionning. It is graphical, simple and powerful. The license is
+      the GPL (General Public License).
+      <BR>
+      Different skill levels will be available (newbie, advanced user, expert).
+      <BR>
+      It's written entirely in Perl and Perl/Gtk. It uses resize_fat which is
+      a perl rewrite of the work of Andrew Clausen (libresize).
+      <P>
+      DiskDrake is a project from MandrakeSoft, the company behind the popular
+      <a href="http://www.linux-mandrake.com">Linux-Mandrake</a>
+      operating-system.
+      <P>
+      A <A href="http://www.eatel.net/~john/diskdrake/faq.html">FAQ</A> is in construction.
+
+    <H2>II - What's available now</H2>
+
+    DiskDrake should be usable now...
+
+    it can:
+    <UL>
+	<LI> create partitions
+	<LI> delete partitions
+	<LI> change type of partition
+	<LI> format partitions
+	<LI> assign a mount point (<IMG SRC="/images/updated.gif" ALT="updated"><SMALL>(21/07/99)</SMALL> propose a list
+	of classic mount points and verify the mount point is valid)
+	<LI> mount partitions
+	<LI> resize fat partitions
+	<LI> resize partitions (when not caring loosing its data)
+	<LI> clear partition table
+	<LI> auto allocation (usefull for install)
+	<LI> write fstab
+    </UL>
+
+with nice contextual menu (shortcuts available, but dangerous as all actions are
+available, whereas with the contextual menu these actions are hidden. This will
+change)
+
+    <P><IMG SRC="/images/updated.gif" ALT="updated"><SMALL>(25/07/99)</SMALL> 
+    A new Expert button appear now. It toggles between
+    expert and normal mode. Some changes in information displayed:
+    <UL>
+       <LI> when you click (or focus) the drive tab (eg: hda), you get
+       information about your drive: size, geometry
+       (cylinders/sectors/heads number), type (eg: IBM DDRS-39130D), and bus/id.
+       In normal mode you have only the size.
+       <LI> the windows drive letter (eg: C: D: ...)
+       <LI> the `start sector' information from normal mode, it still appears in
+       expert mode
+       <LI> the start&end cylinder of each partition is now displayed in expert
+       mode
+       <LI> the type is displayed numerically in expert mode
+    </UL>
+
+    <P><IMG SRC="/images/updated.gif" ALT="updated"><SMALL>(25/07/99)</SMALL>
+    The mount point in the `Create' window and `Change type' window is now a
+    combo box. It lets you choose between classical mount points (/ /usr /var
+    ...) but with already allocated mount points removed.
+
+    <H2>III - Actual developpment</H2>
+
+    We need people!!!
+
+    <UL>
+      <LI><B>Tests</B> and remove bugs (no known yet :)
+      <LI>integrate ext2resize (which has been release in version 1.0.0 <IMG
+      SRC="/images/updated.gif" ALT="updated"><SMALL>(26/07/99)</SMALL>)
+      <LI>add possibility to move partition without loosing data (by copying all
+      data) <IMG SRC="/images/updated.gif" ALT="updated">
+      <LI>Improve the look
+      <LI>Add a text-only version
+      <LI>Help text, tutorial...
+      <LI>Internationalization
+      <LI>Add some features...
+      <LI>Packaging (rpm, deb, slp...)
+    </UL>
+	
+    <H2>IV- ScreenShot</H2>
+
+    Warning: features was the main focus, so don't be too hard :)
+
+    <P>
+      <CENTER><IMG SRC="1.gif"></IMG></CENTER>
+      <CENTER>DiskDrake main interface</CENTER>      
+      
+      <BR>
+      <CENTER><IMG SRC="3.gif"></IMG></CENTER>
+      <CENTER>create dialog box</CENTER>      
+      
+    <H2>V - Contacts</H2>
+    
+    A Mailing List has been created to allow developpers to discuss about DiskDrake.<BR>
+
+    <P>
+    Send a mail to: <A HREF="mailto:sympa@linux-mandrake.com">sympa@linux-mandrake.com</A>
+
+    <BR>Put in the subject: subscribe diskdrake
+    <BR>When you're subscribed, send your messages to: <A HREF="mailto:diskdrake@linux-mandrake.com">diskdrake@linux-mandrake.com</A>
+
+    <P>Otherwise you can contact directly the <A HREF="mailto:pixel@linux-mandrake.com">project leader</A>.
+
+    <H2>VI - Download</H2>
+    
+    Warning: You must have <a href="http://www.perl.com/CPAN/modules/by-module/Gtk/Gtk-Perl-0.5121.tar.gz">Gtk-Perl</a>.
+    You can get the rpm from the <a href="http://linux-mandrake.com/cooker/">Cooker</a> distribution.
+   
+    <P>You also need perl version 5.00503 or better
+
+    <P> Here you can find the plain tgz or a rpm:
+    <a href="ftp://ftp.phys.ttu.edu/pub/mandrake-devel/contrib/others/diskdrake/">diskdrake</a> (Other mirrors in <a href="http://linux-mandrake.com/cooker/">Cooker</a>)
+
+</td>
+</tr>
+</table>
+<p>
+<a href="/en/fpowerpack.php3"><img src="/images/mandrake6.0-loop.gif" width=468 height=60 alt="Mandrake 6.0 PowerPack"></a>
+</center>    
+  </body>
+  <address><a href="mailto:pixel@linux-mandrake.com"></a></address>
+</html>
