@@ -37,7 +37,7 @@ foreach (@harddrake::data::tree) {
         my $i = $_;
         my $id = defined $i->{device} ? $i->{device} : join(':', map { $i->{$_} } qw(vendor id subvendor subid));
         $id => $i;
-    } &$detector;
+    } eval { &$detector };
     $config{$Ident} = \%ID;
     next if is_empty_hash_ref $previous_config; # don't fsck on first run
 
