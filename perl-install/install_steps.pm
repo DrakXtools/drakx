@@ -329,6 +329,7 @@ sub beforeInstallPackages {
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
     #- add oem theme if the files exists.
+    mkdir "$o->{prefix}$_" foreach qw(/usr /usr/share);
     install_any::getAndSaveFile("Mandrake/base/oem-theme.rpm", "$o->{prefix}/usr/share/oem-theme.rpm");
 }
 
@@ -1005,7 +1006,7 @@ risk!
 #------------------------------------------------------------------------------
 sub hasNetwork {
     my ($o) = @_;
-    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no' and return 1;
+    $o->{netcnx}{type} && $o->{netc}{NETWORKING} ne 'no' && $o->{netc}{DHCP} ne 'yes' and return 1;
     log::l("no network seems to be configured for internet ($o->{netcnx}{type},$o->{netc}{NETWORKING})");
     0;
 }
