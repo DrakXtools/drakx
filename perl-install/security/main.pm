@@ -100,13 +100,15 @@ sub draksec_main {
 	# Create the notebook (for bookmarks at the top)
 	my $notebook = create_notebook();
 	$notebook->set_tab_pos('top');
+     
+     my $common_opts = { col_spacings => 10, row_spacings => 5 };
 
 	######################## BASIC OPTIONS PAGE ################################
 	my $seclevel_entry = new Gtk2::Combo();
 
-	$notebook->append_page(gtkpack__(gtkshow(my $basic_page = new Gtk2::VBox(0, 0)),
+	$notebook->append_page(gtkpack(my $basic_page = new Gtk2::VBox(0, 0),
 							   basic_seclevel_explanations($msec),
-							   create_packtable ({ col_spacings => 10, row_spacings => 5 },
+							   create_packtable ($common_opts,
 											 [ basic_seclevel_option(\$seclevel_entry, $msec) ],
 											 [ new Gtk2::Label(N("Security Alerts:")), 
 											   my $secadmin_check = new Gtk2::CheckButton ],
@@ -129,7 +131,7 @@ sub draksec_main {
 	    
 	    $notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
 		   new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
-		   create_packtable({ col_spacings => 10, row_spacings => 5 },
+		   create_packtable($common_opts,
 						   map {
 		   my $i = $_;
 
@@ -160,9 +162,9 @@ sub draksec_main {
 
 	$notebook->append_page(gtkshow(create_scrolled_window(gtkpack(new Gtk2::VBox(0, 0),
 		   new Gtk2::Label(N("The following options can be set to customize your\nsystem security. If you need explanations, click on Help.\n")),
-		   create_packtable({ col_spacings => 10, row_spacings => 5 },
+		   create_packtable($common_opts,
 						map {
-						    if (!member(qw(MAIL_WARN MAIL_USER), $_)) {
+						    unless (member(qw(MAIL_WARN MAIL_USER), $_)) {
 							my $i = $_;
 							   $security_checks_value{$i} = new_editable_combo();
 							   my $entry = $security_checks_value{$i}->entry;
