@@ -209,6 +209,7 @@ sub mergein_conf {
     my $modconfref = read_conf($file);
     while (my ($key, $value) = each %$modconfref) {
 	$conf{$key}{alias} = $value->{alias} if !exists $conf{$key}{alias};
+	$conf{$key}{options} = $value->{options} if $value->{options};
 	push @{$conf{$key}{probeall} ||= []}, deref($value->{probeall});
     }
 }
