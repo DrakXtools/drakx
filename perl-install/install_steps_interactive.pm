@@ -285,7 +285,11 @@ sub choosePackages {
 
 	$o->chooseGroups($packages, $compssUsers, $compssUsersSorted);
 
-	my $max_size = int (sum map { pkgs::packageSize($_) } values %{$packages->[0]});
+	my $min_mark = 1;
+
+	my $ind = $o->{compssListLevels}{$o->{install_class}};
+	my $max_size = int (sum map { pkgs::packageSize($_) } 
+			        grep { $_->{values}[$ind] >= $min_mark } values %{$packages->[0]});
 
 	 if (!$::beginner && $max_size > $available) {
 	     $o->ask_okcancel('', 
@@ -296,7 +300,7 @@ You can go on anyway, but be warned that you won't get all packages", $max_size 
 	 my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
 
 	 ($o->{packages_}{ind}) = 
-	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, 1, $size2install, $o->{installClass});
+	   pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
     }
     $o->choosePackagesTree($packages, $compss) if $o->{compssUsersChoice}{Individual} || $::expert && $o->{isUpgrade};
 }

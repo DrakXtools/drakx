@@ -62,6 +62,17 @@ style "button"
         function        = BOX
 	recolorable     = TRUE
 	state           = NORMAL
+	detail          = "buttondefault"
+	shadow          = IN
+	file            = "blueHeart-button_def.png"
+	border          = { 9, 9, 9, 9 }
+	stretch         = TRUE
+      }
+    image 
+      {
+        function        = BOX
+	recolorable     = TRUE
+	state           = NORMAL
 	shadow          = OUT
 	file            = "mdk-button1.png"
 	border          = { 7, 7, 7, 7 }
@@ -185,7 +196,7 @@ widget_class "*GtkEntry*" style "entry"
 widget_class "*Gtk*List*" style "entry"
 widget_class "*GtkCTree*" style "entry"
 widget_class "*GtkNotebook*" style "notebook"
-widget "*GtkButton*" style "button"
+widget "*GtkButton" style "button"
 widget "*background*" style "background"
 widget "*Steps*" style "steps"
 
