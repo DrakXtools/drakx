@@ -77,7 +77,7 @@ sub detect_timezone() {
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
-      my ($modem, $modem_name);
+      my ($modem, $modem_name, $modem_conf_read);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $adsl_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -426,13 +426,15 @@ Take a look at http://www.linmodems.org"),
                                          q(ifdown ppp0
 killall pppd
 ), $netcnx->{type});
+                        return if $modem_conf_read;
+                        $modem_conf_read = 1;
                         $netcnx->{$netcnx->{type}} ||= {};
                         $modem ||= $netcnx->{$netcnx->{type}};
                         $modem->{device} ||= $first_modem->()->{device};
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
                         $modem->{connection} ||= $l{Name};
                         $modem->{domain} ||= $l{Domain};
-                        ($modem->{dns1}, $modem->{dns2}) ||= split(',', $l{DNS});
+                        ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
 
                         foreach (cat_("/etc/sysconfig/network-scripts/chat-ppp0")) {
                             /.*ATDT(\d*)/ and $modem->{phone} ||= $1;
