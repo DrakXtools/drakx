@@ -138,22 +138,6 @@ sub raw2mouse {
     +{ %l, type => $type };
 }
 
-sub update_type_name {
-    my ($mouse) = @_;
-    while (my ($k, $v) = each %mice) {
-	$mouse->{device} =~ /usb/ && $k ne 'USB' and next; #- avoid mixing USB and PS/2 mice.
-	foreach (@{$v->[1]}) {
-	    if ($_->[0] == $mouse->{nbuttons} && $_->[2] eq $mouse->{XMOUSETYPE}) {
-		add2hash($mouse, { MOUSETYPE => $_->[1],
-				   type      => $k,
-				   name      => $_->[3],
-				 });
-		return $mouse;
-	    }
-	}
-    }
-}
-
 sub fullnames { 
     map_each { 
 	my $type = $::a;
