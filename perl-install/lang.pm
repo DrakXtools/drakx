@@ -83,11 +83,12 @@ my %xim = (
 	XMODIFIERS => '"@im=xcin-zh_CN"',
   },
   'ko' => {
+	ENC => 'kr'
 	XIM => 'ami',
 	XMODIFIERS => '"@im=ami"',
   },
   'ja' => {
-	ENC => 'EUC-jp',
+	ENC => 'eucj',
 	XIM => 'kinput2',
 	XMODIFIERS => '"@im=kinput2"',
   }
