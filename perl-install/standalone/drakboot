@@ -37,7 +37,7 @@ use POSIX;
 use Xconfig::various;
 use log;
 
-my $splash_working = 1;
+my $splash_working = any { /^--splash$/ } @ARGV;
 
 my $in = 'interactive'->vnew('su');
 
@@ -55,7 +55,7 @@ my $auto_mode = any::get_autologin();
 my $lilogrub = bootloader::detect_bootloader();
 my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
 
-my $w = ugtk2->new(N("Boot Style Configuration"));
+my $w = ugtk2->new($splash_working ? N("Graphical boot theme selection") : N("System mode"));
 my $window = $w->{window};
 $::main_window = $w->{rwindow} if !$::isEmbedded;
 
@@ -138,9 +138,8 @@ my ($x_box,$splash_box);
 gtkadd($window,
        gtkpack_(new Gtk2::VBox(0,0),
                  #Splash Selector
-                 if_($splash_working,
-                 0, gtkadd(my $thm_frame = new Gtk2::Frame(N("Graphical boot theme selection")),
-                         gtkpack(gtkset_border_width(new Gtk2::VBox(0, 5), 5),
+                 ($splash_working ?
+                  (0, gtkpack(gtkset_border_width(new Gtk2::VBox(0, 5), 5),
 		         gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Use graphical boot")), $splash_mode), 
 			          clicked => sub {
 		                 	 $splash_box->set_sensitive(!$splash_mode);
@@ -156,9 +155,8 @@ gtkadd($window,
                                             $boot_pic))
                        ),
                     ),
-		 ),
-                 0, gtkadd(new Gtk2::Frame(N("System mode")),
-                        gtkpack__(new Gtk2::VBox(0, 5),
+                :
+                 (0, gtkpack__(new Gtk2::VBox(0, 5),
                                   gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
                                                         $x_box->set_sensitive(!$x_mode);
                                                         $x_mode = !$x_mode;
@@ -193,20 +191,22 @@ gtkadd($window,
                                               ugtk2->exit(0);
                                           }
                                    },
+                                   ),
+
                        )
                )
       );
 
-$auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active) });
-$auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active) });
-$auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
-$auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
+if (!$splash_working) {
+    $auto_buttons[0]->signal_connect('toggled' => sub { $auto_box->set_sensitive($auto_buttons[0]->get_active) });
+    $auto_buttons[1]->signal_connect('toggled' => sub { $auto_box->set_sensitive(!$auto_buttons[1]->get_active) });
+    $auto_buttons[0]->set_active(1) if $auto_mode->{autologin};
+    $auto_buttons[1]->set_active(1) if !$auto_mode->{autologin};
+    $x_box->set_sensitive($x_mode);
+    $auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
+}
 
-$x_box->set_sensitive($x_mode);
-$auto_box->set_sensitive($auto_mode->{autologin} ? 1 : 0);
 $window->show_all;
-#$no_bootsplash and $thm_frame->set_sensitive(0);
-$thm_frame->hide if !$splash_working;
 gtkflush();
 $w->main;
 $in->exit(0);
