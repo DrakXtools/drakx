@@ -1002,21 +1002,13 @@ sub configureX {
     my ($o, $clicked) = @_;
     $o->configureXBefore;
 
-    require Xconfig;
-    require Xconfigurator;
-    #- by default do not use existing configuration, so new card will be detected.
-    if ($o->{isUpgrade} && -r "$o->{prefix}/etc/X11/XF86Config") {
-	if ($::beginner || $o->ask_yesorno('', _("Use existing configuration for X11?"), 1)) {
-	    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix});
-	}
-    }
-
     #- strange, xfs must not be started twice...
     #- trying to stop and restart it does nothing good too...
     my $xfs_started if 0;
     run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/xfs", "start") unless $::live || $xfs_started;
     $xfs_started = 1;
 
+    require Xconfigurator;
     { local $::testing = 0; #- unset testing
       local $::auto = $::beginner && !$clicked;
 
