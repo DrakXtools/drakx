@@ -400,10 +400,10 @@ sub build_notebook {
 				      ),
 			     ),
 			 ));
-	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode_radio} = 'auto'; $apply->() });
-	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode_radio} = 'static'; $apply->() });
-	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{speed_radio} = '64'; $apply->() });
-	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{speed_radio} = '128'; $apply->() });
+	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode} = 'auto'; $apply->() });
+	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{dialing_mode} = 'static'; $apply->() });
+	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{intf}{speed} = '64'; $apply->() });
+	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{intf}{speed} = '128'; $apply->() });
 	$gui->{intf_bool}{ONBOOT}->set_active($intf->{ONBOOT} eq 'yes' ? 1 : 0);
 	$gui->{intf_bool}{MII_NOT_SUPPORTED}->set_active($intf->{MII_NOT_SUPPORTED} eq 'no' ? 1 : 0);
 	$gui->{intf_bool}{HWADDR}->set_active($intf->{HWADDR});
@@ -507,7 +507,7 @@ sub save_notebook {
     my ($netc, $intf, $gui) = @_;
     
     $netc->{$_} = $gui->{netc}{$_}->get_text foreach keys %{$gui->{netc}};
-    $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
+    $gui->{$_} and $intf->{$_} = $gui->{intf}{$_}->get_text foreach keys %{$gui->{intf}};
     $intf->{$_} = bool2yesno($gui->{intf_bool}{$_}->get_active) foreach keys %{$gui->{intf_bool}};
     $gui->{intf_bool}{MII_NOT_SUPPORTED} and $intf->{MII_NOT_SUPPORTED} = bool2yesno(!$gui->{intf_bool}{MII_NOT_SUPPORTED}->get_active);
     $gui->{intf_bool}{HWADDR} and (bool2yesno($gui->{intf_bool}{HWADDR}->get_active) eq 'yes' ? ($intf->{HWADDR} = 'yes') : delete $intf->{HWADDR});
