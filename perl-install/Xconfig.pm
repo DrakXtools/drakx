@@ -76,7 +76,7 @@ sub getinfoFromXF86Config {
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
 	    $monitor{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $monitor{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
-	    $monitor{modelines}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
+	    $monitor{modelines_}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $s = /^Section "Screen"/ .. /^EndSection/) {
 	    $card{default_depth} ||= $1 if /^\s*DefaultColorDepth\s+(\d+)/;
 	    if (my $i = /^\s*Subsection\s+"Display"/ .. /^\s*EndSubsection/) {
@@ -116,7 +116,7 @@ sub getinfoFromXF86Config {
 	    $monitor{vsyncrange} ||= $1 if /^\s*VertRefresh\s+(.*)/;
 	    $monitor{vendor} ||= $1 if /^\s*VendorName\s+"(.*?)"/;
 	    $monitor{model} ||= $1 if /^\s*ModelName\s+"(.*?)"/;
-	    $monitor{modelines}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
+	    $monitor{modelines_}{"$1_$2"} = $_ if /^\s*Mode[lL]ine\s+(\S+)\s+(\S+)\s+/;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    %c = () if $i == 1;
 
