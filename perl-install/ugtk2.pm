@@ -376,7 +376,7 @@ sub _create_dialog {
     gtknew('Dialog', title => $title, 
 	   position_policy => 'center-on-parent', # center-on-parent does not work
 	   modal => 1,
-	   icon => wm_icon(),
+	   if_(!$::isInstall, icon => wm_icon()),
 	   %$options, allow_unknown_options => 1,
        );
 }
@@ -842,9 +842,9 @@ sub new {
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window(
 	    title => $title, 
-	    icon => wm_icon(),
 	    position_policy => $force_center || $o->{force_center} ? 'center_always' : 'center-on-parent',
 	    modal => $grab || $o->{grab} || $o->{modal},
+	    if_(!$::isInstall, icon => wm_icon()),
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
 	);
 
@@ -870,9 +870,11 @@ sub new {
 					       title => $title || '',
 					   );
 	} elsif (!$::WizardWindow) {
-	    $::WizardWindow = _create_window(title => $title);
-	    gtkadd($::WizardWindow, gtknew('Frame', shadow_type => 'out', child => $::WizardTable));
-
+	    $::WizardWindow = _create_window(
+		title => $title,
+		child => gtknew('Frame', shadow_type => 'out', child => $::WizardTable),
+	    );
+	    
 	    if ($::isInstall) {
 		require install_gtk; #- for perl_checker
 		$::WizardWindow->signal_connect(key_press_event => \&install_gtk::special_shortcuts);
