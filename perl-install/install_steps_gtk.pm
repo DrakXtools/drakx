@@ -630,7 +630,7 @@ sub installPackages {
 	my ($method, $medium) = @_;
 
 	#- if not using a cdrom medium, always abort.
-	$method eq 'cdrom' && !$::oem and do {
+	if ($method eq 'cdrom' && !$::oem) {
 	    local $my_gtk::grab = 1;
 	    my $name = pkgs::mediumDescr($o->{packages}, $medium);
 	    local $| = 1; print "\a";
@@ -643,7 +643,7 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
             #- add the elapsed time (otherwise the predicted time will be rubbish)
             $start_time += time() - $time;
             return $r;
-	};
+	}
     };
     my $install_result;
     catch_cdie { $install_result = $o->install_steps::installPackages($packages); }
