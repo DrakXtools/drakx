@@ -609,6 +609,7 @@ sub create_big_help {
 		    0, gtksignal_connect(new Gtk::Button(_("Ok")), "clicked" => sub { Gtk->main_quit }),
 		   ));
     $w->main;
+    gtkset_mousecursor_normal();
 }
 
 #------------------------------------------------------------------------------
@@ -631,10 +632,9 @@ sub create_help_window {
     my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm"));
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
-		    0, $pixmap,
-		    1, createScrolledWindow($w_help = new Gtk::Text)
+		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => \&create_big_help), $pixmap),
+		    1, createScrolledWindow($w_help = new Gtk::Text),
 		   ));
-
     gtktext_insert($w_help, $o->{step} ? formatAlaTeX(_ deref($help::steps{$o->{step}})) : '');
 
     $w->show;

@@ -22,6 +22,7 @@ sub partition_with_diskdrake {
     my $ok = 1;
     do {
 	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $o->{partitions}, $nowizard);
+	log::l("diskdrake done");
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
 	my @fstab = fsedit::get_fstab(@$hds);
 	
@@ -88,15 +89,15 @@ sub partitionWizardSolutions {
 		1;
 	    } ];
 	$solutions{resize_fat} = 
-	  [ 6 - @fats, _("Use the free space on the FAT partition"),
+	  [ 6 - @fats, _("Use the free space on the Windows partition"),
 	    sub {
 		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table_raw::description, \@ok_forloopback) or return;
-		my $w = $o->wait_message(_("Resizing"), _("Computing FAT filesystem bounds"));
+		my $w = $o->wait_message(_("Resizing"), _("Computing Windows filesystem bounds"));
 		my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 		$@ and die _("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
 		my $min_win = $resize_fat->min_size;
-		$part->{size} > $min_linux + $min_freewin + $min_win or die _("Your windows partition is too fragmented, please run ``defrag'' first");
+		$part->{size} > $min_linux + $min_freewin + $min_win or die _("Your Windows partition is too fragmented, please run ``defrag'' first");
 		$o->ask_okcancel('', _("WARNING!
 
 DrakX will now resize your Windows partition. Be careful: this operation is

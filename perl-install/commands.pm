@@ -510,7 +510,7 @@ sub kill {
 
 sub lspci {
     require detect_devices;
-    print join "\n", detect_devices::stringlist(), '';
+    print join "\n", detect_devices::stringlist(@_), '';
 }
 *lssbus = *lspci;
 
@@ -578,6 +578,7 @@ sub bug {
       header("scsi"), cat_("/proc/scsi/scsi"),
       header("lsmod"), cat_("/proc/modules"),
       header("cmdline"), cat_("/proc/cmdline"),
+      header("pcmcia: stab"), cat_("/var/run/stab"),
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),

@@ -3,6 +3,8 @@ package help;
 use common qw(:common);
 
 %steps = (
+empty => '',
+
 selectLanguage =>
 __("Choose preferred language for install and system usage."),
 

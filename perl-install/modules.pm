@@ -572,7 +572,7 @@ sub pcmcia_need_config($) {
 
 sub get_pcmcia_devices($$) {
     my ($pcic) = @_;
-    my (@devs, $module, $desc, $type, $device);
+    my (@devs, $desc);
 
     #- try to setup pcmcia if cardmgr is not running.
     if (pcmcia_need_config($pcic)) {
@@ -597,11 +597,8 @@ sub get_pcmcia_devices($$) {
 
     foreach (cat_("/var/run/stab")) {
 	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
-	($type, $module, $device) = ($1, $2, $3) if /^\d+\s+(\S+)\s+(\S+)\s+\S+\s+(\S+)/;
-	if ($desc && $module) {
-	    push @devs, { description => $desc, driver => $module, type => $type, device => $device };
-	    $desc = $module = undef;
-	}
+	my (undef, $type, $module, undef, $device) = split;
+	push @devs, { description => $desc, driver => $module, type => $type, device => $device } if $module;
     }
     @devs;
 }

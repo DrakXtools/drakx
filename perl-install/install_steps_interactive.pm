@@ -200,7 +200,7 @@ sub ask_mntpoint_s {
     } else {
 	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
 
-	log::l("default mntpoint $_->{mntpoint}") foreach @fstab;
+	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
 
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
@@ -748,6 +748,7 @@ failures. Would you like to create a bootdisk for your system?"),
 sub setupBootloaderBefore {
     my ($o) = @_;
     my $w = $o->wait_message('', _("Preparing bootloader"));
+    $o->set_help('empty');
     $o->SUPER::setupBootloaderBefore($o);
 }
 
