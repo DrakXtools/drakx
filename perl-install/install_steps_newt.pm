@@ -42,6 +42,8 @@ sub doPartitionDisks($$) {
 	print 
 _("You can now partition your %s hard drive
 When you are done, don't forget to save using `w'", $_->{device});
+	arch() =~ /sparc/ and print
+_("\nBE CAREFULL NOT TO USE CYLINDER 0 ELSE YOUR PARTITION TABLE WILL BE DESTROYED!");
 	print "\n\n";
 	my $pid = fork or exec "fdisk", devices::make($_->{device});
 	waitpid($pid, 0);

@@ -191,7 +191,7 @@ sub extractHeaders($$$) {
 my $A = -1.922e-05;
 my $B = 1.18411;
 my $C = 23.2; #- doesn't take hdlist's into account as getAvailableSpace will do it.
-my $D = (sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A;
+my $D = (-sqrt(sqr($B - 1) - 4 * $A * $C) - ($B - 1)) / 2 / $A; #- $A is negative so a positive solution is with - sqrt ...
 sub correctSize { $_[0] < $D ? ($A * $_[0] + $B) * $_[0] + $C : $_[0] } #- size correction in MB.
 sub invCorrectSize { $_[0] < $D ? (sqrt(sqr($B) + 4 * $A * ($_[0] - $C)) - $B) / 2 / $A : $_[0]; } #- size correction in MB.
 

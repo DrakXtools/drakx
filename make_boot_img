@@ -5,6 +5,7 @@
 use Config;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*)-/;
+my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corporate version.
 
 ($img, $type) = @ARGV;
 
@@ -188,36 +189,36 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000\"
+  append=\"ramdisk_size=32000$corporate\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 text\"
+  append=\"ramdisk_size=32000 text$corporate\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 expert\"
+  append=\"ramdisk_size=32000 expert$corporate\"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=32000 ks\"
+  append=\"ramdisk_size=32000 ks$corporate\"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000\"
+  append=\"ramdisk_size=32000$corporate\"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 text\"
+  append=\"ramdisk_size=32000 text$corporate\"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 expert\"
+  append=\"ramdisk_size=32000 expert$corporate\"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=32000 ks\"
+  append=\"ramdisk_size=32000 ks$corporate\"
 ");
 
 	output("$dir/$boot/README", "
@@ -258,7 +259,7 @@ read-write
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=ramdisk_size=32000 $ltype
+  append=ramdisk_size=32000 $ltype$corporate
 ");
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";

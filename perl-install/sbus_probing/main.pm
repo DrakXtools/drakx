@@ -2,6 +2,7 @@ package sbus_probing::main;
 
 use c;
 use log;
+use modules;
 
 my %sbus_table_network = (
 			  hme    => [ "Sun Happy Meal Ethernet", "sunhme" ],
@@ -133,6 +134,7 @@ sub check {
 sub probe($) {
     my ($type) = @_;
 
+    eval { modules::load("openprom") };
     my $root_node = c::prom_open();
     my @l;
 
@@ -145,6 +147,7 @@ sub probe($) {
 sub matching_desc($;$) {
     my ($regexp) = @_;
 
+    eval { modules::load("openprom") };
     my $root_node = c::prom_open();
     my @l;
 

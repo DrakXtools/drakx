@@ -127,13 +127,13 @@ arch() =~ /^sparc/ ? (
   "sim710" => "sim710",
   "sym53c416" => "sym53c416",
   "tmscsim" => "tmscsim",
+  "scsi_mod" => "scsi_mod",
 ),
   "aic7xxx" => "Adaptec 2740, 2840, 2940",
   "ncr53c8xx" => "NCR 53C8xx PCI",
 #  "pci2000" => "Perceptive Solutions PCI-2000", # TODO
   "qlogicisp" => "Qlogic ISP",
   "sym53c8xx" => "Symbios 53c8xx",
-  "scsi_mod" => "scsi_mod",
   "sd_mod" => "sd_mod",
   "ide-mod" => "ide-mod",
   "ide-probe" => "ide-probe",
@@ -388,7 +388,10 @@ sub load {
 
     if ($type) {
 	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
-	add_alias('scsi_hostadapter', $name) if $type eq "scsi" || $type eq $type_aliases{scsi};
+	if ($type eq "scsi" || $type eq $type_aliases{scsi}) {
+	    add_alias('scsi_hostadapter', $name);
+	    load("sd_mod");
+	}
     }
     $conf{$name}{options} = join " ", @options if @options;
 }
@@ -540,8 +543,6 @@ sub load_thiskind($;&$) {
     log::l("pcmcia probe found " . scalar @pcmciadevs . " $type devices");
 
     my @devs = (@pcidevs, @sbusdevs, @pcmciadevs);
-
-    load("sd_mod") if arch() !~ /sparc/ && $type eq 'scsi' && @devs;
 
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;

@@ -1,3 +1,14 @@
+2000-06-07  François Pons  <fpons@mandrakesoft.com>
+
+	* diskdrake.pm: added SunOS partition as blue for diskdrake.
+	* install_steps_interactive.pm: make sure of no division by zero may
+	happen.
+	* install_steps_newt.pm: added WARNING for fdisk on sparc*.
+	* modules.pm: make sure of loading sd_mod module after any scsi module.
+	* sbus_probing/main.pm: insmod openprom before trying sbus probing.
+	* pkgs.pm: corrected by use of parabolic solution for size approximation.
+	* silo.pm: try with "silo -p 2 -t" if "silo -t" has failed due to bad probe.
+
 2000-06-05  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* install_steps.pm,lang.pm: added load_console_font, to load the 

@@ -289,7 +289,7 @@ sub choosePackages {
     my @l = values %{$packages->[0]};
     my @flags = map { pkgs::packageFlagSelected($_) } @l;
     pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
-    my $max_size = pkgs::selectedSize($packages);
+    my $max_size = 1 + pkgs::selectedSize($packages); #- avoid division by zero.
     mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
 #-	  if (!$::beginner && $max_size > $availableC) {
@@ -1165,7 +1165,7 @@ sub load_thiskind {
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
 
-	return if arch() eq "ppc";
+    return if arch() eq "ppc";
 
     my @l;
     my $allow_probe = !$::expert || $o->ask_yesorno('', _("Try to find %s devices?", "PCI" . (arch() =~ /sparc/ && "/SBUS")), 1);
