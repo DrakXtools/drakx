@@ -75,7 +75,7 @@ our @tree =
       string => N("Disk"),
       icon => "harddisk.png",
       configurator => "$sbindir/diskdrake",
-      detector => \&detect_devices::hds,
+      detector => sub { f(detect_devices::hds()) },
       checked_on_boot => 1,
      },
 
