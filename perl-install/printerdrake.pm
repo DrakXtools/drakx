@@ -417,7 +417,6 @@ sub setup_gsdriver {
     if ((keys %printer::thedb) == 0) {
         printer::read_printer_db($printer->{SPOOLER});
     }
-    my $testpage = "/usr/share/printer-testpages/testprint.ps";
     my $queue = $printer->{OLD_QUEUE};
     $in->set_help('configurePrinterType') if $::isInstall;
     while (1) {
@@ -655,14 +654,49 @@ sub setup_gsdriver {
 	$printer->{complete} = 1;
 	printer::configure_queue($printer);
 	$printer->{complete} = 0;
-	
-	if ($in->ask_yesorno('', __("Do you want to print a test page?"), 1)) {
+	# print test pages
+	my $standard = 1;
+	my $altletter = 0;
+	my $alta4 = 0;
+	my $photo = 0;
+	my $ascii = 0;
+	if ($in->ask_from_entries_refH_powered
+	    ({ title => __("Test pages"),
+	       messages => __("Please select the test pages you want to print.
+Note: the photo test page can take a rather long time to get printed.
+In most cases it is enough to print the standard test page."),
+              cancel => __("No test pages"),
+              ok => __("Print")},
+[
+{ text => __("Standard test page"), type => 'bool', val => \$standard },
+{ text => __("Alternative test page (Letter)"), type => 'bool', 
+  val => \$altletter },
+{ text => __("Alternative test page (A4)"), type => 'bool', val => \$alta4 }, 
+{ text => __("Photo test page"), type => 'bool', val => \$photo },
+{ text => __("Plain text test page"), type => 'bool', val => \$ascii }
+])) {
+#	if ($in->ask_yesorno('', __("Do you want to print a test page?"), 1)) {
 	    my @lpq_output;
 	    {
 		my $w = $in->wait_message('', _("Printing test page(s)..."));
 
 		$upNetwork and do { &$upNetwork(); undef $upNetwork; sleep(1) };
-		@lpq_output = printer::print_pages($printer, $testpage);
+                my $stdtestpage = "/usr/share/printer-testpages/testprint.ps";
+                my $altlttestpage = "/usr/share/printer-testpages/testpage.ps";
+                my $alta4testpage = "/usr/share/printer-testpages/testpage-a4.ps";
+                my $phototestpage = "/usr/share/printer-testpages/photo-testpage.jpg";
+                my $asciitestpage = "/usr/share/printer-testpages/testpage.asc";
+                my @testpages;
+                # Install the filter to convert the photo test page to PS
+                $photo && $in->do_pkgs->install('ImageMagick');
+                # set up list of pages to print
+                $standard && push (@testpages, $stdtestpage);
+                $altletter && push (@testpages, $altlttestpage);
+                $alta4 && push (@testpages, $alta4testpage);
+                $photo && push (@testpages, $phototestpage);
+                $ascii && push (@testpages, $asciitestpage);
+                # print the stuff
+		@lpq_output = printer::print_pages($printer, @testpages);
 	    }
 
 	    if (@lpq_output) {

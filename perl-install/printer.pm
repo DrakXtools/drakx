@@ -673,8 +673,17 @@ sub print_pages($@) {
 
     # Print the pages
     foreach (@pages) {
-	run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
-			    "-P", $queue, $_);
+	my $page = $_;
+	# Only text and PostScript can be printed directly with all spoolers,
+	# images must be treated seperately
+	if ($page =~ /\.jpg$/) {
+	    system(($::testing ? "$prefix" : "chroot $prefix/ ") .
+		"convert $page -page 427x654+100+65 PS:- | " .
+		   "$lpr -s $printer->{SPOOLER} -P $queue");
+	} else {
+	    run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
+				"-P", $queue, $page);
+	}
     }
     sleep 5; #- allow lpr to send pages.
     # Check whether the job is queued
