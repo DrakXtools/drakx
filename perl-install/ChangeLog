@@ -1,3 +1,24 @@
+2001/01/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fixed addUser for invocation of
+	any::ask_users.
+	fixed bad invocation of installation of X server.
+
+2001/01/12  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/cdrom.c: add more memory carefulness with CDROM install
+	  - add wait_message for initializing of CDROM's (it can be long when
+	it's SCSI)
+	  - print CDROM drive names (model) in dialogs
+
+	* mdk-stage1/mount.c, mdk-stage1/lomount.c, mdk-stage1/disk.c: 
+	  - fix behaviour with bad ISO images (DISK installs)
+	  - better dialogs for DISK installs
+
+2001/01/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* lang.pm: make lang list in format for tree-selector
+
 2001/01/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/disk.c: fix failing umount for DISK installs in some failing
