@@ -1017,7 +1017,7 @@ sub write {
 	
     }
 
-    add2hash($h, $IM_locale_specific_config{$locale->{lang}});
+    add2hash($h, $IM_locale_specific_config{$h->{LANG}});
     $h->{ENC} = $locale2encoding{$locale->{lang}};
     $h->{ENC} = 'utf8' if member($locale->{lang}, qw(ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_HK.UTF-8 zh_SG.UTF-8 zh_TW.UTF-8));
 
