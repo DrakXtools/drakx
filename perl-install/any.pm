@@ -760,11 +760,15 @@ sub autologin {
     if (@wm && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
 	add2hash_($o, { autologin => $users[0] });
 
-	$in->ask_from_entries_refH(_("Autologin"),
-				   _("I can set up your computer to automatically log on one user.
-If you don't want to use this feature, click on the cancel button."),
-				   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
-				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ])
+	$in->ask_from_entries_refH_powered(
+					   { title => _("Autologin"),
+					     messages => _('I can set up your computer to automatically log on one user.
+Do you want to use this feature?'),
+					     ok => _("Yes"),
+					     cancel => _("No") },
+					   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+					     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm } ]
+					  )
 	  or delete $o->{autologin};
     }
 }
