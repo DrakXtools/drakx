@@ -373,20 +373,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o settings dialog:
     * localize all fields
     * add tips for all check boxes
-    * use std button layout in settings dialog
-    * use stock icons on rule toolbar and in in settings dialog
-  o use stock icons on rule toolbar
+    * use std button layout
+    * use stock icons
+  o rules toolbar: use stock icons
 - net_monitor: fix crash on profile change due to netconnect api
   change
 
 * Wed Jul 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.21mdk
 - drakbackup: misc fixes (stew)
-- drakboot: configured directly gdm & kdm
+- drakboot: directly configure gdm & kdm
 - drakconnect: fix #4050
 - drakfont: fix #1679 & #3673
 - drakgw:
-  o fix not being
- able to step backward
+  o fix not being able to step backward
   o fix canceling resulting in broken dhcp config
   o make --testing option being usefull
 - drakhelp: fix no help for de/it/ru locales (daouda)
@@ -399,7 +398,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - diskdrake, drakconnect: add an help button in standalone mode
 - draksec
   o describe all security levels
-  o make it clean than security admin is not a security level
+  o make it clear that security admin is not a security level
   o colorize security levels names
   o do not offer to set syadmin when reports are disabled
   o fix infamous "when embedded draksec can be enlarged but never shrink back"
