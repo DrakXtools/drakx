@@ -263,6 +263,7 @@ sub install {
     my ($total, $nb);
 
     foreach my $p (@$toInstall) {
+	getHeader($p) or next;
 	$p->{installed} = 1;
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release}, 
