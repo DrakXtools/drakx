@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
     wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
                      gtkentry gtkexpand gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkput gtkradio gtkresize gtkroot
-                     gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_layout gtkset_markup
+                     gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_markup
                      gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
                      gtkset_property gtkset_relief gtkset_selectable gtkset_sensitive gtkset_shadow_type gtkset_size_request
                      gtkset_text gtkset_tip gtkset_visibility gtksetstyle gtkshow gtksignal_connect gtksize gtktext_append
@@ -76,6 +76,7 @@ sub gtkset_border_width       { $_[0]->set_border_width($_[1]); $_[0] }
 sub gtkset_editable           { $_[0]->set_editable($_[1]); $_[0] }
 sub gtkset_selectable         { $_[0]->set_selectable($_[1]); $_[0] }
 sub gtkset_justify            { $_[0]->set_justify($_[1]); $_[0] }
+sub gtkset_alignment          { $_[0]->set_alignment($_[1], $_[2]); $_[0] }
 sub gtkset_layout             { $_[0]->set_layout($_[1]); $_[0] }
 sub gtkset_modal              { $_[0]->set_modal($_[1]); $_[0] }
 sub gtkset_mousecursor_normal { gtkset_mousecursor('left-ptr', @_) }
