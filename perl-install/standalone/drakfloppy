@@ -72,7 +72,7 @@ $device_combo->set_popdown_strings(map { "/dev/" . $_->{device} } detect_devices
 
 # kernel part
 my $kernel_combo = new Gtk2::OptionMenu();
-$kernel_combo->set_popdown_strings(sort grep { !/^\.\.?$/ } all("/lib/modules"));
+$kernel_combo->set_popdown_strings(sort grep { !/^\.\.?$/ } sort(all("/lib/modules")));
 $kernel_combo->entry->set_text(chomp_(`uname -r`));
 
 
@@ -261,7 +261,7 @@ sub expand_tree {
         # do not refill the parent anymore
         $tree_model->set($parent_iter, 2 => 0);
         
-        foreach my $dir_entry (all($dir)) {
+        foreach my $dir_entry (sort(all($dir))) {
             my $entry_path = $dir . "/" . $dir_entry;
             if (-d $entry_path || $dir_entry =~ /\.(k|)o(\.gz)?$/) {
                 $entry_path =~ s|//|/|g;
