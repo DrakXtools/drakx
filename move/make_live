@@ -90,5 +90,3 @@ substInFile {
     s|\s*shadow||;
 } "$::prefix/etc/pam.d/system-auth";
 
-update_gnomekderc("$::prefix/usr/share/config/kdesktoprc",
-                  ScreenSaver => ('DPMS-dependent' => 'false', 'Lock' => 'true'));
