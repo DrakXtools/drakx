@@ -15,8 +15,9 @@ sub size($) {
     my $valid_offset = sub { sysseek(F, $_[0], 0) && sysread(F, my $a, 1) };
 
     #- first try getting the size nicely
-    my $size = 0;
-    ioctl(F, c::BLKGETSIZE(), $size) and return unpack("i", $size) * $common::SECTORSIZE;
+    if (my $size = c::total_sectors(fileno F)) {
+	return $size * $common::SECTORSIZE;
+    }
 
     #- sad it didn't work, well searching the size using the dichotomy algorithm!
     my $low = 0;
