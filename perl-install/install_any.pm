@@ -732,7 +732,7 @@ sub getAndSaveInstallFloppy {
 	getAndSaveFile("images/$image.img", $where) or log::l("failed to write Install Floppy ($image.img) to $where"), return;
         push @generated_floppies, $where;
     }
-    return @generated_floppies;
+    @generated_floppies;
 }
 
 sub getAndSaveAutoInstallFloppy {
@@ -781,8 +781,7 @@ sub getAndSaveAutoInstallFloppy {
 
 	my $param = 'kickstart=floppy ' . generate_automatic_stage1_params($o);
 
-	my @generated_floppies = getAndSaveInstallFloppy($o, $imagefile);
-        @generated_floppies or return;
+	my @generated_floppies = getAndSaveInstallFloppy($o, $imagefile) or return;
 
 	my $dev = devices::set_loop($imagefile) or log::l("couldn't set loopback device"), return;
         foreach my $fs (qw(ext2 vfat)) {
