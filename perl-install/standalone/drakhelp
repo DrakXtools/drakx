@@ -15,11 +15,13 @@ my $lang = lang::lang2LANG(lang::read('',$>)) || 'en';
 if (!member($lang, qw(de en es fr it ru))) { $lang = 'en' };
 my $path_to_help = "/usr/share/doc/mandrake/" . $lang . "/";
 
--d $path_to_help or $in->ask_warn('drakhelp', N("Documentation not available. \n Please install package mandrake_doc-%s \n",$lang));
+-d $path_to_help or $in->do_pkgs->install('mandrake_doc-' . $lang);
 
 if ((my $wm = any::running_window_manager()) eq 'kwin') {
     system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");
-} else {
+}elsif ($wm eq 'gnome-session') {
+    system("yelp ghelp://" . $path_to_help . $ARGV[0] . "&")
+}  else {
     on_request_help($path_to_help . $ARGV[0])
 }
 
