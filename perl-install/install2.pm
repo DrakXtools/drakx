@@ -57,7 +57,7 @@ my (%installSteps, @orderedInstallSteps);
   configurePrinter   => [ __("Configure printer"), 1, 0, '', "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, '', "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, '' ],
-arch() !~ /alpha/ ? (
+arch() !~ /alpha|sparc/ ? (
   createBootdisk     => [ __("Create a bootdisk"), 1, 0, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],
 ) : (),
   setupBootloader    => [ __("Install bootloader"), 1, 1, '$::o->{lnx4win} && !$::expert', "doInstallStep" ],

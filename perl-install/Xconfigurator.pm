@@ -151,6 +151,13 @@ sub cardConfigurationAuto() {
 	$card->{flags}{needVideoRam} &&= /86c368/;
 	push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
     }
+    #- take a default on sparc if nothing has been found.
+    if (arch() =~ /^sparc/ && !$card->{server} && !$card->{type}) {
+	local $_ = cat_("/proc/fb");
+	if (/Mach64/) { $card->{server} = "Mach64" }
+	elsif (/Permedia2/) { $card->{server} = "3DLabs" }
+	else { $card->{server} = "Sun24" }
+    }
     $card;
 }
 
@@ -169,7 +176,8 @@ sub cardConfiguration(;$$$) {
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $::xf4 = $card->{identifier} =~ /Rage 128/ if !$::expert;
-    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : "XF86_$card->{server}");
+    $card->{prog} = "/usr/X11R6/bin/" . ($::xf4 && $card->{driver} ? 'XFree86' : $card->{server} =~ /Sun (.*)/x ?
+					 "Xsun$1" : "XF86_$card->{server}");
 
     -x "$prefix$card->{prog}" or $install && do {
 	$in->suspend;

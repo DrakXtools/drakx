@@ -1,6 +1,32 @@
-2000-05-19  François Pons  <fpons@mandrakesoft.com>
+2000-05-23  François Pons  <fpons@mandrakesoft.com>
 
-	* *.pm: sparc and sparc64 update, a long to do again.
+	* common.pm: update arch to take into account sparc and sparc64. added
+	better_arch and compat_arch function.
+	* silo.pm: fixed adding new kernel automatically.
+	* install2.pm: removed create boot disk stuff for sparc*.
+	* install_steps.pm: added initrd generation for alpha. added ldconfig
+	at end of installation. removed /usr/bin/dumpkeys existence test on
+	sparc*, should be added in the future.
+	* install_steps_interactive.pm: removed supermount for sparc*.
+	* install_steps_gtk.pm: added /dev/kbd device creation and permedia2
+	support for sparc*. removed screen limit of 1024x768.
+	* detect_devices.pm: fixed problem on machine with really no IDE interface.
+	* modules.pm: added support for 32 and 64 bit architectures on sparc*.
+	* install_any.pm: fixed getAvailableSpace_mounted if /usr is not a separate
+	partition.
+	* pkgs.pm: added support for multi-arch rpm file (need for sparc*),
+	fixed correctSize and invCorrectSize to take back a linear approximation
+	above 9Gb approximatively. removed ftp rewind as broken currently.
+	* keyboard.pm: fixed bad list of available keyboard (broke sparc*), fixed
+	globing (removed) against existing '*'.
+	* partition_table.pm: removed support for non SUN partition table, as it
+	may freeze the kernel or may be blanked?
+	* Xconfigurator.pm: take Sun24 server by default on sparc*, add support
+	for permedia2 card (3DLabs server).
+	* share/list.sparc: added perl-5.6.0 for sparc*, fixed for sparc*.
+	* Makefile: added support for modules and modules64 for sparc*.
+	* c/stuff.xs.pm: added kernel_arch function for getting the current true
+	architecture provided by the kernel (uname -m).
 
 2000-05-09  Pixel  <pixel@mandrakesoft.com>
 

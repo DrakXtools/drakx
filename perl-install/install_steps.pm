@@ -335,6 +335,10 @@ Consoles 1,3,4,7 may also contain interesting information";
     #-  why not? cuz weather is nice today :-) [pixel]
     sync(); sync();
 
+    #- call ldconfig at the end of package installation
+    run_program::rooted($o->{prefix}, "ldconfig");
+
+    #- configure PCMCIA services if needed.
     $o->pcmciaConfig();
 
     #- for mandrake_firstime
@@ -825,9 +829,14 @@ sub setupBootloader($) {
 	};
 	run_program::rooted($o->{prefix}, "abootconf", $b->{boot}, $b->{part_nb});
  
+        modules::load('loop');
 	output "$o->{prefix}/etc/aboot.conf", 
-	  map_index { "$::i:$b->{part_nb}$_ root=$b->{root} $b->{perImageAppend}\n" }
-	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
+	map_index { -e "$o->{prefix}/boot/initrd-$_->[1]" ? 
+			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} initrd=/boot/initrd-$_->[1] $b->{perImageAppend}\n" :
+			    "$::i:$b->{part_nb}$_->[0] root=$b->{root} $b->{perImageAppend}\n" }
+	map { run_program::rooted($o->{prefix}, "mkinitrd", "-f", "/boot/initrd-$_->[1]", "--ifneeded", $_->[1]) or
+		  unlink "$o->{prefix}/boot/initrd-$_->[1]" } grep { $_->[0] && $_->[1] }
+	map { [ m|$o->{prefix}(/boot/vmlinux-(.*))| ] } eval { glob_("$o->{prefix}/boot/vmlinux-*") };
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
     } else {
