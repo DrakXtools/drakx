@@ -38,7 +38,6 @@ $o = $::o = {
     mkbootdisk => 0, #- no mkbootdisk if 0 or undef, find a floppy with 1, or fd1
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
-    security => 2,
     authentication => { md5 => 1, shadow => 1 },
     lang         => 'en_US',
     isUpgrade    => 0,

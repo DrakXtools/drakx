@@ -934,7 +934,9 @@ sub miscellaneousBefore {
 
     my %s = getVarsFromSh("$o->{prefix}/etc/sysconfig/system");
     $o->{miscellaneous}{HDPARM} = $s{HDPARM} if exists $s{HDPARM};
-    $o->{security} = any::get_secure_level($o->{prefix}) || $o->{security};
+    $o->{security} ||= any::get_secure_level($o->{prefix}) || ($o->{meta_class} eq 'server' ? 3 : 2);
+
+    log::l("security $o->{security}");
 
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !detect_devices::isLaptop() });
 }
