@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|network_ks|pcmcia|live|tftp|tftprd\n";
+@ARGV >= 2 or die "usage: $0 <image> cdrom|hd|network|blank|network_ks|pcmcia|live|tftp|tftprd\n";
 
 use Config;
 Config->import;
@@ -26,6 +26,7 @@ _ "$sudo mkdir $mnt" unless -e $mnt;
 _ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
 
 $install = $ {{
+    blank => "full-install",
     live => "full-install",
     tftp => "full-install",
     tftprd => "full-install",
@@ -63,7 +64,7 @@ sub initrd {
     install_s("$instdir/$install", "$mnt/sbin/install");
 
     _ "$sudo cp -f install_${type}_modules/* $mnt/modules/" if -d "install_${type}_modules";
-    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz";
+    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $ltype ne "blank";
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 

@@ -110,7 +110,7 @@ endif
 	cd $(DEST)/usr/bin ; mv insmod insmod_
 	rmdir $(DEST)/bin $(DEST)/sbin
 
-	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' aliases
+	perl -ane 'symlink "$$F[1]", "$(DEST)/usr/bin/$$F[0]"' share/aliases
 
 	for i in fonts keyboards locales gconv; do tar xfy `../tools/specific_arch share/$$i.tar.bz2` -C $(DEST); done
 

@@ -33,12 +33,12 @@ sub rooted {
 	    $stderrm =~ s/2//;
 	    open STDERR, "$stderrm $root$stderr" or die "run_program can't output in $root$stderr (mode `$stderrm')";
 	} else {
-	    open STDERR, ">> /tmp/exec.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/exec.log";
+	    open STDERR, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
 	}
 	if ($stdout) {
 	    open STDOUT, "$stdoutm $root$stdout" or die "run_program can't output in $root$stdout (mode `$stdoutm')";
 	} else {
-	    open STDOUT, ">> /tmp/exec.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/exec.log";
+	    open STDOUT, ">> /tmp/ddebug.log" or open STDOUT, ">> /dev/tty7" or die "run_program can't log, give me access to /tmp/ddebug.log";
 	}
 
 	$root and chroot $root;

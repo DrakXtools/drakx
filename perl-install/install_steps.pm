@@ -51,7 +51,7 @@ sub leavingStep {
     log::l("step `$step' finished");
 
     if (-d "$o->{prefix}/root") {
-	eval { commands::cp('-f', "/tmp/ddebug.log", "/tmp/exec.log", "$o->{prefix}/root") };
+	eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };
 	install_any::g_auto_install();
     }
 

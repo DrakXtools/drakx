@@ -22,6 +22,7 @@ sub enteringStep($$$) {
 sub ask_warn {
     log::l(ref $_[1] ? join " ", @{$_[1]} : $_[1]);
 }
+sub wait_message {}
 
 sub errorInStep {
     print "error :(\n"; 
