@@ -24,7 +24,7 @@ our @tree =
      ["FLOPPY","Floppy", "floppy.png", "",\&detect_devices::floppies, 0 ],
      ["HARDDISK","Disk", "harddisk.png", "$sbindir/diskdrake", \&detect_devices::hds, 1 ],
      ["CDROM","CDROM", "cd.png", "", sub { grep { !(detect_devices::isBurner($_) || detect_devices::isDvdDrive($_)) } &detect_devices::cdroms } , 0 ],
-     ["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners, 0 ],
+     ["BURNER","CD/DVD burners", "cd.png", "", \&detect_devices::burners(), 0 ],
      ["DVDROM","DVD-ROM", "cd.png", "", sub { grep { ! detect_devices::isBurner($_) } detect_devices::dvdroms}, 0 ],
      ["TAPE","Tape", "tape.png", "", \&detect_devices::tapes, 0 ],
      ["VIDEO","Videocard", "video.png", "$sbindir/XFdrake",  sub { grep { $_->{driver} =~ /^(Card|Server):/ || $_->{media_type} =~ 'DISPLAY_VGA' } @devices }, 1 ],
@@ -45,8 +45,10 @@ our @tree =
      ["BRIDGE","Bridge(s)", "memory.png", "", sub { grep { $_->{media_type} =~ 'BRIDGE' } @devices}, 0 ],
      ["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown, 0 ],
 
-     ["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", sub { require printerdrake; printerdrake::detect() } , 0 ],
-     ["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake", sub { require scanner; scanner::detect() }, 0 ],
+     ["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", sub { 
+         require printerdrake; printerdrake::detect() } , 0 ],
+     ["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake", sub { 
+         require scanner; scanner::detect() }, 0 ],
      ["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { 
          require mouse;
          require modules;
