@@ -855,6 +855,7 @@ sub Options {
 		 ) or return;
 
     fs::mount_options_pack($part, $options, $unknown);
+    1;
 }
 
 
