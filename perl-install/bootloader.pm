@@ -168,6 +168,19 @@ sub add_kernel($$$$$) {
     $v;
 }
 
+sub get_append {
+    my ($b, $key) = @_;
+    ($b->{perImageAppend} =~ /\b$key=(\S*)/)[0];
+}
+sub add_append {
+    my ($b, $key, $val) = @_;
+
+    foreach ({ append => $b->{perImageAppend} }, @{$b->{entries}}) {
+	$_->{append} =~ s/\b$key=\S*\s*//;
+	$_->{append} =~ s/\s*$/ $key=$val)/ if $val;
+    }
+}
+
 sub configure_entry($$) {
     my ($prefix, $entry) = @_;
     if ($entry->{type} eq 'image') {
@@ -243,6 +256,10 @@ wait %d seconds for default boot.
 	    $lilo->{message} = sprintf $msg, arch() =~ /sparc/ ? "SILO" : "LILO", $lilo->{timeout};
 	}
     }
+
+
+    add2hash_($lilo, { getVarsFromSh("$prefix/etc/sysconfig/system") }); #- for CLEAN_TMP
+    add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
 
     my $isSecure = -e "$prefix/boot/vmlinuz-${kernelVersion}secure";
 
@@ -340,6 +357,25 @@ sub keytable($$) {
 	run_program::rooted($prefix, "keytab-lilo.pl", ">", $f, $_) or undef $f;
     }
     $f && -r "$prefix/$f" && $f;
+}
+
+sub has_profiles { bool(get_label("office", $b)) }
+sub set_profiles {
+    my ($b, $want_profiles) = @_;
+
+    my $office = get_label("office", $b);
+    if ($want_profiles xor $office) {
+	my $e = get_label("linux", $b);
+	if ($want_profiles) {
+	    push @{$b->{entries}}, { %$e, label => "office", append => "$e->{append} prof=Office" };
+	    $e->{append} .= " prof=Home";
+	} else {
+	    # remove profiles
+	    $e->{append} =~ s/\s*prof=\w+//;
+	    @{$b->{entries}} = grep { $_ != $office } @{$b->{entries}};
+	}
+    }
+
 }
 
 sub install_silo($$$) {
@@ -711,6 +747,10 @@ IconIndex=0
 sub install {
     my ($prefix, $lilo, $fstab, $hds) = @_;
 
+    {
+	my $f = "$prefix/etc/sysconfig/system";
+	setVarsInSh($f, add2hash_({ CLEAN_TMP => $lilo->{CLEAN_TMP} }, { getVarsFromSh($f) }));
+    }
     $lilo->{keytable} = keytable($prefix, $lilo->{keytable});
 
     my %l = grep_each { $::b } %{$lilo->{methods}};
