@@ -24,6 +24,17 @@ _("Some hardware on your computer needs ``proprietary'' drivers to work.
 You can find some information about them at: %s", join(", ", @l))) if @l;
 }
 
+#- unit of $mb is mega bytes, min and max are in sectors, this
+#- function is used to convert back to sectors count the size of
+#- a partition ($mb) given from the interface (on Resize or Create).
+#- modified to take into account a true bounding with min and max.
+sub from_Mb {
+    my ($mb, $min, $max) = @_;
+    $mb <= $min >> 11 and return $min;
+    $mb >= $max >> 11 and return $max;
+    $mb * 2048;
+}
+
 sub partition_with_diskdrake {
     my ($o, $all_hds, $nowizard) = @_;
     my $ok; 
@@ -132,11 +143,12 @@ under Windows (and optionally run defrag), then restart the
 installation. You should also backup your data.
 When sure, press Ok.")) or return;
 
-		my $size = $part->{size};
+		my $mb_size = $part->{size} >> 11;
 		$o->ask_from('', _("Which size do you want to keep for windows on"), [
-                   { label => _("partition %s", partition_table::description($part)), val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
+                   { label => _("partition %s", partition_table::description($part)), val => \$mb_size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
-		$size <<= 11;
+
+		my $size = from_Mb($mb_size, $min_win, $part->{size});
 
 		local *log::l = sub { $w->set(join(' ', @_)) };
 		eval { $resize_fat->resize($size) };
