@@ -421,7 +421,7 @@ retrieved. Choose the one nearest you. Then a package-selection tree
 appears: review the selection, and press \"Install\" to retrieve and
 install the selected package(s), or \"Cancel\" to abort."),
 
-license => 
+acceptLicense => 
 N_("Before continuing, you should read carefully the terms of the license. It
 covers the whole Mandrake Linux distribution, and if you do not agree with
 all the terms included in it, click on the \"Refuse\" button which will
