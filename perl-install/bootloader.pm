@@ -720,7 +720,7 @@ sub write_lilo_conf {
 	    $done{0} = $done{$dev2bios{$dev}} = 1;
 	}
 	foreach (0 .. 3) {
-	    my ($letter) = $bios2dev{$_} !~ /hd([^ac])/; #- at least hda and hdc are handled correctly :-/
+	    my ($letter) = $bios2dev{$_} =~ /hd([^ac])/; #- at least hda and hdc are handled correctly :-/
 	    next if $done{$_} || !$letter;
 	    next if 
 	      $_ > 0 #- always print if first disk is hdb, hdd, hde...
