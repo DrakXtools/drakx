@@ -80,7 +80,7 @@ sub addcupsremoteto {
     my @printerlist = printer::cups::get_remote_queues();
     my $ppdfile = "";
     if ($printer->{SPOOLER} eq "cups" && 
-	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
+	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
 	    my $q = $1;
@@ -100,7 +100,7 @@ sub addcupsremoteto {
 		      "http://$server:631/printers/$q.ppd"));
 	    }
 	    # Does the file exist and is it not an error message?
-	    if ((-r "$::prefix/etc/foomatic/$queue.ppd") &&
+	    if (-r "$::prefix/etc/foomatic/$queue.ppd" &&
 		cat_("$::prefix/etc/foomatic/$queue.ppd") =~ /^\*PPD-Adobe/) {
 		$ppdfile = "/etc/foomatic/$queue.ppd";
 	    } else {
@@ -227,7 +227,7 @@ sub findconfigfiles {
 		foreach my $file (@configfilenames) {
 		    my $dir = "$homedir/$file";
 		    $dir =~ s,/[^/]*$,,;
-		    next if (-f $dir) && ! -d $dir;
+		    next if -f $dir && ! -d $dir;
 		    if (! -d "$::prefix$dir") {
                   mkdir_p("$::prefix$dir") or next;
                   set_permissions("$::prefix$dir", "$uid.$gid") or next;
@@ -362,11 +362,11 @@ sub isprinterconfigured {
 	    if (/^\s*Printer\s*:\s*.*\s*$/) { # Next section
 		$done = 1;
 	    } elsif (/^\s*Driver:\s*(\S+)\s*$/) {
-		$drivernotps2 = ($1 ne "ps2");
+		$drivernotps2 = $1 ne "ps2";
 	    } elsif (/^\s*PPD\-File:\s*(\S+)\s*$/) {
 		$ppdfileset = 1;
 	    } elsif (/^\s*Destination:\s*(\S+.*)$/) {
-		$nonrawprinting = ($1 !~ /\-o\s*raw/);
+		$nonrawprinting = $1 !~ /\-o\s*raw/;
 	    } 
 	}
     }

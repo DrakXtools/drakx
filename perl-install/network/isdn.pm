@@ -257,7 +257,7 @@ sub isdn_detect {
 
 sub isdn_detect_backend {
     my ($isdn) = @_;
-    if (my ($c) = (modules::probe_category('network/isdn'))) {
+    if (my ($c) = modules::probe_category('network/isdn')) {
   	$isdn->{$_} = $c->{$_} foreach qw(description vendor id driver options firmware);
 	$isdn->{$_} = sprintf("%0x", $isdn->{$_}) foreach 'vendor', 'id';
 	$isdn->{card_type} = 'pci';

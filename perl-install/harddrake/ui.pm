@@ -163,7 +163,7 @@ sub new {
 
     # Build the gui
     add_icon_path('/usr/share/pixmaps/harddrake2/');
-    $w = my_gtk->new((N("Harddrake2 version ") . $harddrake::data::version));
+    $w = my_gtk->new(N("Harddrake2 version ") . $harddrake::data::version);
     $w->{window}->set_usize(760, 550) unless $::isEmbedded;
     $options{MODEMS_DETECTION} = 1 unless defined $options{MODEMS_DETECTION};
     $options{PRINTERS_DETECTION} = 1 unless defined $options{PRINTERS_DETECTION};

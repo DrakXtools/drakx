@@ -270,7 +270,7 @@ sub configure {
     my ($in, $raw_X, $do_pkgs, $auto, $options) = @_;
 
     my @cards = probe();
-    @cards or @cards = ({});
+    @cards or @cards = {};
 
     if (!$cards[0]{server} && !$cards[0]{Driver} || !$auto) {
 	card_config__not_listed($in, $cards[0], $options) or return;

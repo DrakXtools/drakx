@@ -676,7 +676,7 @@ sub computeGroupSize {
 	#- installed and upgrade flags must have been computed (see compute_installed_flags).
 	my %newSelection;
 	unless ($p->flag_available) {
-	    my @l2 = ($p->id);
+	    my @l2 = $p->id;
 	    my $id;
 
 	    while (defined($id = shift @l2)) {
@@ -864,7 +864,7 @@ sub installTransactionClosure {
     }
 
     while (defined($id = shift @l)) {
-	my @l2 = ($id);
+	my @l2 = $id;
 
 	while (defined($id = shift @l2)) {
 	    exists $closure{$id} and next;

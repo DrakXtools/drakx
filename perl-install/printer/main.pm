@@ -50,7 +50,7 @@ sub spooler {
     # LPRng is not officially supported any more since Mandrake 9.0, so
     # show it only in the spooler menu when it was manually installed.
     my @res;
-    if (files_exist((qw(/usr/lib/filters/lpf /usr/sbin/lpd)))) {
+    if (files_exist(qw(/usr/lib/filters/lpf /usr/sbin/lpd))) {
         foreach (qw(cups lprng pdq)) { push @res, $spooler_inv{$_}{long_name} };
 #        {qw(cups lprng pdq)}{long_name};
     } else {
@@ -982,7 +982,7 @@ sub configure_queue($) {
 	$useUSB ||= $_->{queuedata}{connect} =~ /usb/ || 
 	    $_->{DeviceURI} =~ /usb/;
     }
-    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect} =~ /usb/);
+    $useUSB ||= $printer->{currentqueue}{queue}{queuedata}{connect} =~ /usb/;
     if ($useUSB) {
 	my $f = "$::prefix/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);

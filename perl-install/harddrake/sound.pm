@@ -123,7 +123,7 @@ my %oss2alsa =
      "ymfpci"  => [ "snd-ymfpci" ]
      );
 
-my @blacklist = (qw(cs46xx cs4281));
+my @blacklist = qw(cs46xx cs4281);
 my $blacklisted = 0;
 
 sub rooted { run_program::rooted($::prefix, @_) }

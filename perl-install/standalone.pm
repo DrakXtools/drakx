@@ -103,7 +103,7 @@ Network & Internet connection and monitoring application
        XFdrake resolution"),
 	      );
 
-$usages{$_} = $usages{rpmdrake} foreach (qw(rpmdrake-remove MandrakeUpdate));
+$usages{$_} = $usages{rpmdrake} foreach qw(rpmdrake-remove MandrakeUpdate);
 $usages{Xdrakres} = $usages{XFdrake};
 
 

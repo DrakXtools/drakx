@@ -125,7 +125,7 @@ sub getIPsInLocalNetworks {
 	    # ... for a local network (eth = ethernet, 
 	    #     vmnet = VMWare,
 	    #     ethernet card connected to ISP excluded)?
-	    $dev_is_localnet = ($dev =~ /^eth/ || $dev =~ /^vmnet/);
+	    $dev_is_localnet = $dev =~ /^eth/ || $dev =~ /^vmnet/;
 	    # delete previous address
 	    $current_bcast = "";
 	}

@@ -48,7 +48,7 @@ sub configureoffice {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if (0 && $printer->{SPOOLER} eq "cups" && 
-	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
+	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
@@ -114,7 +114,7 @@ sub add_cups_remote_to_office {
     my $configfilecontent = readsofficeconfigfile($configfilename);
     # Update remote CUPS queues
     if ($printer->{SPOOLER} eq "cups" && 
-	((-x "$::prefix/usr/bin/curl") || (-x "$::prefix/usr/bin/wget"))) {
+	(-x "$::prefix/usr/bin/curl" || -x "$::prefix/usr/bin/wget")) {
 	my @printerlist = printer::cups::get_remote_queues();
 	foreach my $listentry (@printerlist) {
 	    next if !($listentry =~ /^([^\|]+)\|([^\|]+)$/);
@@ -135,7 +135,7 @@ sub add_cups_remote_to_office {
 		      "http://$server:631/printers/$q.ppd"));
 	    }
 	    # Does the file exist and is it not an error message?
-	    if ((-r "$::prefix/etc/foomatic/$queue.ppd") &&
+	    if (-r "$::prefix/etc/foomatic/$queue.ppd" &&
 		cat_("$::prefix/etc/foomatic/$queue.ppd") =~ /^\*PPD-Adobe/) {
 		$configfilecontent = 
 		    $suites{$suite}{make}($printer, $queue,

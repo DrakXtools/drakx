@@ -174,7 +174,7 @@ sub first_time_dialog {
 	    my $entry = $printer->{val}{DESCRIPTION};
 	    if ($entry) { push (@printerlist, "  -  $entry\n") }
 	}
-	my $morethanoneprinters = ($#printerlist > 0);
+	my $morethanoneprinters = $#printerlist > 0;
 	my $unknown_printers = $#autodetected - $#printerlist;
 	if (@printerlist != ()) {
 	    unshift (@printerlist, 
@@ -210,8 +210,8 @@ sub first_time_dialog {
     # If networking is configured, start it, but don't ask the user to
     # configure networking.
     my $havelocalnetworks = 
-	 (check_network($printer, $in, $upNetwork, 1) && 
-	  printer::detect::getIPsInLocalNetworks() != ());
+	 check_network($printer, $in, $upNetwork, 1) && 
+	  printer::detect::getIPsInLocalNetworks() != ();
 
     # Finish building the dialog text
     my $question = ($havelocalnetworks ?
@@ -245,8 +245,8 @@ sub wizard_welcome {
 	undef $printer->{AUTODETECTNETWORK};
 	undef $printer->{AUTODETECTSMB};
     } else {
-	$havelocalnetworks = (check_network($printer, $in, $upNetwork, 1) &&
-			      printer::detect::getIPsInLocalNetworks() != ());
+	$havelocalnetworks = check_network($printer, $in, $upNetwork, 1) &&
+			      printer::detect::getIPsInLocalNetworks() != ();
 	if (!$havelocalnetworks) {
 	    undef $printer->{AUTODETECTNETWORK};
 	    undef $printer->{AUTODETECTSMB};
@@ -344,7 +344,7 @@ sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
     my (@port, @str, $device);
     my $queue = $printer->{OLD_QUEUE};
-    my $expert_or_modify = ($::expert || !$printer->{NEW});
+    my $expert_or_modify = $::expert || !$printer->{NEW};
     my $do_auto_detect = 
 	($expert_or_modify &&
 	  $printer->{AUTODETECT} ||
@@ -373,12 +373,12 @@ sub setup_local_autoscan {
 	# configured, this command has no effect.
 	require services;
 	services::stop("hpoj");
-	@autodetected = ($expert_or_modify || $printer->{AUTODETECTLOCAL})    and printer::detect::local_detect(),
+	@autodetected = $expert_or_modify || $printer->{AUTODETECTLOCAL}    and printer::detect::local_detect(),
 				 (!$expert_or_modify && $printer->{AUTODETECTNETWORK}) and printer::detect::net_detect(),
 				 (!$expert_or_modify && $printer->{AUTODETECTSMB})     and printer::detect::net_smb_detect();
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
-	$printer->{MORETHANONE} = ($#autodetected > 0);
+	$printer->{MORETHANONE} = $#autodetected > 0;
 	foreach my $p (@autodetected) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
@@ -438,7 +438,7 @@ sub setup_local_autoscan {
     } else {
 	# Always ask for queue name in recommended mode when no auto-
 	# detection was done
-	$printer->{MORETHANONE} = ($#autodetected > 0);
+	$printer->{MORETHANONE} = $#autodetected > 0;
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
 	    my $menustr = N("Printer on parallel port \#%s", $m);
@@ -454,8 +454,8 @@ sub setup_local_autoscan {
 	my $first = $menuentries->{$a};
 	my $second = $menuentries->{$b};
 	for (my $i = 0; $i <= $#prefixes; $i++) {
-	    my $firstinlist = ($first =~ m!^$prefixes[$i]!);
-	    my $secondinlist = ($second =~ m!^$::prefixes[$i]!);
+	    my $firstinlist = $first =~ m!^$prefixes[$i]!;
+	    my $secondinlist = $second =~ m!^$::prefixes[$i]!;
 	    if ($firstinlist && !$secondinlist) { return -1 };
 	    if ($secondinlist && !$firstinlist) { return 1 };
 	}
@@ -1599,7 +1599,7 @@ For your printer Printerdrake has found:
 	     ($printer->{MANUALMODEL} ? N("Select model manually") : 
 	      N("The model is correct")));
     return 0 if !$res;
-    $printer->{MANUALMODEL} = ($res eq N("Select model manually"));
+    $printer->{MANUALMODEL} = $res eq N("Select model manually");
     1;
 }
 
@@ -2264,7 +2264,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -Z option=setting -Z switch" : "lpr -Z option=setting -Z switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning . $photocard) : $scanning . $photocard);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard : $scanning . $photocard);
     } elsif ($spooler eq "lpd") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -2274,7 +2274,7 @@ N("This command you can also use in the \"Printing command\" field of the printi
 (!$raw ?
 N("
 The \"%s\" command also allows to modify the option settings for a particular printing job. Simply add the desired settings to the command line, e. g. \"%s <file>\". ", "lpr", ($queue ne $default ? "lpr -P $queue -o option=setting -o switch" : "lpr -o option=setting -o switch")) .
-N("To get a list of the options available for the current printer click on the \"Print option list\" button." . $scanning . $photocard) : $scanning . $photocard);
+N("To get a list of the options available for the current printer click on the \"Print option list\" button.") . $scanning . $photocard : $scanning . $photocard);
     } elsif ($spooler eq "pdq") {
 	$dialogtext =
 N("To print a file from the command line (terminal window) use the command \"%s <file>\" or \"%s <file>\".
@@ -2685,11 +2685,11 @@ sub install_spooler {
         # startup of printerdrake for several seconds.
         printer::services::start_not_running_service("cups");
      } elsif ($spoolers{$spooler}{service}) {
-          printer::services::restart($spoolers{$spooler}{service}) ;
+          printer::services::restart($spoolers{$spooler}{service});
         }
     
     # Set the choosen spooler tools as defaults for "lpr", "lpq", "lprm", ...
-    foreach (@{$spoolers{$spooler}{alternatives}}){
+    foreach (@{$spoolers{$spooler}{alternatives}}) {
         set_alternative($_->[0], $_->[1]);
     }
     undef $w;
@@ -2892,9 +2892,9 @@ sub main {
 		# have a local network, to suppress some buttons in the
 		# recommended mode
 		my $havelocalnetworks_or_expert =
-		    ($::expert ||
+		    $::expert ||
 		     check_network($printer, $in, $upNetwork, 1) && 
-		      printer::detect::getIPsInLocalNetworks() != ());
+		      printer::detect::getIPsInLocalNetworks() != ();
 		# Show a queue list window when there is at least one queue,
 		# when we are in expert mode, or when we are not in the
 		# installation.
@@ -2926,16 +2926,15 @@ sub main {
 		    }
 		    # Generate the list of available printers
 		    my @printerlist = 
-			((sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
+			sort((map { $printer->{configured}{$_}{queuedata}{menuentry} 
 				      . ($_ eq $printer->{DEFAULT} ?
 					 N(" (Default)") : "") }
 				 keys(%{$printer->{configured}
 					|| {}})),
 				($printer->{SPOOLER} eq "cups" ?
 				 printer::main::get_cups_remote_queues($printer) :
-				 ())))
-			  );
-		    my $noprinters = ($#printerlist < 0);
+				 ()));
+		    my $noprinters = $#printerlist < 0;
 		    # Position the cursor where it were before (in case
 		    # a button was pressed).
 		    $menuchoice = $cursorpos;

@@ -47,7 +47,7 @@ my @usernames;
 parse_etc_passwd();
 
 my $x_mode = isXlaunched();
-my $a_mode = (-e "/etc/aurora/Monitor") ? 1 : 0;
+my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
 my $l_mode = isAutologin();
 my %auto_mode = get_autologin("");
 my $inmain = 0;
@@ -451,7 +451,7 @@ sub isAutologin {
     close AUTOLOGIN;
     $line =~ s/AUTOLOGIN=(yes|no)/$1/;
     chomp($line);
-    $line =  ($line eq "yes");
+    $line = $line eq "yes";
     my %au = get_autologin('');
     return $line && defined $au{autologin};
 }
