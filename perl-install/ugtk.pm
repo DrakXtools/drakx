@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border $use_pixbuf $use_imlib);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    helpers => [ qw(createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
+    helpers => [ qw(createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem create_dialog destroy_window) ],
     wrappers => [ qw(gtksignal_connect gtkradio gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkpowerpack gtkcombo_setpopdown_strings gtkset_editable gtksetstyle gtkset_text gtkset_tip gtkappenditems gtkappend gtkset_shadow_type gtkset_layout gtkset_relief gtkadd gtkexpand gtkput gtktext_insert gtkset_usize gtksize gtkset_justify gtkset_active gtkset_sensitive gtkset_visibility gtkset_modal gtkset_border_width gtkmove gtkresize gtkshow gtkhide gtkdestroy gtkflush gtkcolor gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng create_pix_text get_text_coord fill_tiled gtkicons_labels_widget write_on_pixmap gtkcreate_xpm gtkcreate_png gtkcreate_png_pixbuf gtkbuttonset create_pixbutton gtkroot gtkentry compose_with_back compose_pixbufs) ],
     various => [ qw(add2notebook add_icon_path n_line_size) ],
 );
@@ -273,6 +273,42 @@ sub create_box_with_title {
 		     )
 	}
     }
+}
+
+# drakfloppy / logdrake
+sub create_dialog {
+    my ($label, $c) = @_;
+    my $ret = 0;
+    my $dialog = new Gtk::Dialog;
+    $dialog->signal_connect (delete_event => sub { Gtk->main_quit() });
+    $dialog->set_title(_("logdrake"));
+    $dialog->border_width(10);
+    $dialog->vbox->pack_start(new Gtk::Label($label),1,1,0);
+
+    my $button = new Gtk::Button _("OK");
+    $button->can_default(1);
+    $button->signal_connect(clicked => sub { $ret = 1; $dialog->destroy(); Gtk->main_quit() });
+    $dialog->action_area->pack_start($button, 1, 1, 0);
+    $button->grab_default;
+
+    if ($c) {
+	my $button2 = new Gtk::Button _("Cancel");
+	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy(); Gtk->main_quit() });
+	$button2->can_default(1);
+	$dialog->action_area->pack_start($button2, 1, 1, 0);
+    }
+
+    $dialog->show_all;
+    Gtk->main();
+    $ret;
+}
+
+# drakfloppy / logdrake
+sub destroy_window {
+	my($widget, $windowref, $w2) = @_;
+	$$windowref = undef;
+	$w2 = undef if defined $w2;
+	0;
 }
 
 sub create_hbox { gtkset_layout(gtkset_border_width(new Gtk::HButtonBox, 3), $_[0] || 'spread') }

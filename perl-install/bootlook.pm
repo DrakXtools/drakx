@@ -79,7 +79,7 @@ $window->border_width(2);
 my @menu_items = ( { path => _("/_File"), type => '<Branch>' },
 		   { path => _("/File/_Quit"), accelerator => _("<control>Q"), callback    => sub { $::isEmbedded ? kill('USR1', $::CCPID) : Gtk->exit(0) } },
 		 );
-my $menubar = get_main_menu($window);
+my $menubar = ugtk::create_factory_menu($window, @menu_items);
 ######### menus end
 
 my $user_combo = new Gtk::Combo;
@@ -393,16 +393,6 @@ sub print_hello {
   print("mcdtg !\n");
 }
 
-sub get_main_menu {
-  my ($window) = @_;
-
-  my $accel_group = new Gtk::AccelGroup();
-  my $item_factory = new Gtk::ItemFactory('Gtk::MenuBar', '<main>', $accel_group);
-  $item_factory->create_items(@menu_items);
-  $window->add_accel_group($accel_group);
-  return $item_factory->get_widget('<main>');
-}
-
 #-------------------------------------------------------------
 # launch X functions
 #-------------------------------------------------------------
@@ -500,5 +490,4 @@ sub set_autologin {
   chmod 0600, "$prefix/etc/sysconfig/autologin";
 #  log::l("cat $prefix/etc/sysconfig/autologin: ", cat_("$prefix/etc/sysconfig/autologin"));
 }
-
 
