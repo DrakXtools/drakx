@@ -670,7 +670,7 @@ sub dev2bios {
 
 sub dev2grub {
     my ($dev, $dev2bios) = @_;
-    $dev =~ m|^(/dev/)?(...)(.*)$| or die "dev2grub";
+    $dev =~ m|^(/dev/)?(...)(.*)$| or die "dev2grub (bad device $dev), caller is " . join(":", caller());
     my $grub = $dev2bios->{$2} or die "dev2grub ($2)";
     "($grub" . ($3 && "," . ($3 - 1)) . ")";
 }
