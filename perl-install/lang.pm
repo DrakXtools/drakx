@@ -528,6 +528,20 @@ my %xim = (
 #- xcin only works with 'zh_TW', 'zh_TW.Big5', 'zh_CN', 'zh_CN.GB2312'
 #- all other locale names, in particular 'zh_HK' or 'zh_TW.UTF-8'
 #- are unknown to it. So chinput is used for all but 'zh_TW'
+  'ja_JP' => {
+	ENC => 'eucj',
+  },
+  'ja_JP.UTF-8' => {
+	ENC => 'utf8',
+  },
+  'ko_KR' => {
+	ENC => 'kr',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'ko_KR.UTF-8' => {
+	ENC => 'utf8',
+	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
   'zh_TW' => { 
  	ENC => 'big5',
  	CONSOLE_NOT_LOCALIZED => 'yes',
@@ -544,14 +558,6 @@ my %xim = (
 	ENC => 'utf8',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
-  'zh_SG' => {
-	ENC => 'gb',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_SG.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
   'zh_HK' => {
 	ENC => 'big5',
 	CONSOLE_NOT_LOCALIZED => 'yes',
@@ -560,19 +566,13 @@ my %xim = (
 	ENC => 'utf8',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
-  'ko_KR' => {
-	ENC => 'kr',
+  'zh_SG' => {
+	ENC => 'gb',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
-  'ko_KR.UTF-8' => {
+  'zh_SG.UTF-8' => {
 	ENC => 'utf8',
 	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'ja_JP' => {
-	ENC => 'eucj',
-  },
-  'ja_JP.UTF-8' => {
-	ENC => 'utf8',
   },
   #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
   #- 'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
