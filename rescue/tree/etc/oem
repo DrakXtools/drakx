@@ -12,7 +12,7 @@ where [options] are:
 ";
     exit 1;
 }
-my (%options, $yes, $hd, $hdp, $cd);
+my (%options, $yes, $hd, $hdp, $cd, $fs);
 
 #- avoid globing as it is not available in rescue ramdisk.
 foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
@@ -125,6 +125,8 @@ while (<F>) {
     /\[lang[=:]([^]]*)\]/ and $options{lang} = $1;
     /\[server\]/ and $options{server} = '';
     /\[boot_entries[=:]([^]]*)\]/ and $options{boot_entries} = $1;
+    /\[ext2\]/ and $options{fs} = "ext2";
+    /\[ext3\]/ and $options{fs} = "ext3";
 }
 close F;
 foreach (@ARGV) { /^([^=:]*)[=:]?(.*)/ and $options{$1} = $2; /^no([^=:]*)/ and delete $options{$1} }
@@ -140,6 +142,11 @@ foreach ($options{lang} || 'en') {
 foreach (keys %options) {
     print "Using option [$_" . ($options{$_} && "=$options{$_}") . "]\n";
 }
+
+#- filesystem to use.
+$fs ||= $options{fs} || "ext3";
+$fs eq "ext3" and system "modprobe", "ext3";
+print "Using filesystem of type $fs\n";
 
 #- check for already existing partition table, if none are found
 #- create 3 partitions (one for install, one for swap and one for root).
@@ -283,17 +290,17 @@ if ($minor == 5) {
 }
 printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$inst_size);
 printf F "mkpart logical linux-swap %s %s\n", correct_start_end(\$point, $point+$swap_size);
-printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$root_size);
+printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $point+$root_size);
 if (exists $options{server} && $hd !~ /^rd\//) {
     my $var_size = ($hd_size - $point) / 2;
     if ($var_size > 1500) {
 	$var = $root+1;
-	printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $point+$var_size);
+	printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $point+$var_size);
     }
 }
 if ($hd_size - $point > 100 && $hd !~ /^rd\//) {
     $home = ($var || $root) + 1;
-    printf F "mkpart logical ext2 %s %s\n", correct_start_end(\$point, $hd_size);
+    printf F "mkpart logical %s %s %s\n", $fs, correct_start_end(\$point, $hd_size);
 }
 print F "quit\n";
 close F or die "unable to partition the disk $hd";
@@ -303,32 +310,32 @@ print "Setting swap\n";
 system "mkswap", "/dev/$hdp$swap";
 system "swapon", "/dev/$hdp$swap";
 
-#- we have 
+#- we have to format using right fs.
 print "Formatting /dev/$hdp$inst partition\n";
-system "mkfs.ext2", "/dev/$hdp$inst";
+mkfs("ext2", "/dev/$hdp$inst");
 print "Formatting /dev/$hdp$root partition\n";
-system "mkfs.ext2", "/dev/$hdp$root";
+mkfs($fs, "/dev/$hdp$root");
 if ($var) {
     print "Formatting /dev/$hdp$var partition\n";
-    system "mkfs.ext2", "/dev/$hdp$var";
+    mkfs($fs, "/dev/$hdp$var");
 }
 if ($home) {
     print "Formatting /dev/$hdp$home partition\n";
-    system "mkfs.ext2", "/dev/$hdp$home";
+    mkfs($fs, "/dev/$hdp$home");
 }
 
 print "Mounting partitions\n";
 mkdir "/hd";
 system "mount", "-t", "ext2", "/dev/$hdp$inst", "/hd";
 mkdir "/mnt";
-system "mount", "-t", "ext2", "/dev/$hdp$root", "/mnt";
+system "mount", "-t", $fs, "/dev/$hdp$root", "/mnt";
 if ($var) {
     mkdir "/mnt/var";
-    system "mount", "-t", "ext2", "/dev/$hdp$var", "/mnt/var";
+    system "mount", "-t", $fs, "/dev/$hdp$var", "/mnt/var";
 }
 if ($home) {
     mkdir "/mnt/home";
-    system "mount", "-t", "ext2", "/dev/$hdp$home", "/mnt/home";
+    system "mount", "-t", $fs, "/dev/$hdp$home", "/mnt/home";
 }
 
 print "Copying installation on hard drive\n";
@@ -487,12 +494,12 @@ foreach (qw(/etc /etc/sysconfig /etc/rpm /var /var/lib /var/lib/rpm /var/log /pr
 }
 system "mount", "-t", "proc", "proc", "/mnt/proc";
 open F, ">/mnt/etc/fstab";
-print F "/dev/$hdp$root / ext2 defaults 1 1\n";
+print F "/dev/$hdp$root / $fs defaults 1 1\n";
 if ($var) {
-    print F "/dev/$hdp$var /var ext2 defaults 1 2\n";
+    print F "/dev/$hdp$var /var $fs defaults 1 2\n";
 }
 if ($home) {
-    print F "/dev/$hdp$home /home ext2 defaults 1 2\n";
+    print F "/dev/$hdp$home /home $fs defaults 1 2\n";
 }
 close F;
 open F, ">/mnt/etc/sysconfig/i18n";
@@ -588,6 +595,19 @@ The hard drive is now ready for a customer.
 System is now halted.\n\n";
 
 system "halt";
+
+#- gives way to format partition (simpler approach)
+sub mkfs {
+    my ($fs, $dev) = @_;
+    for ($fs) {
+	/ext2/ and do { system "mkfs.ext2", $dev;
+			next };
+	/ext3/ and do { system "mkfs.ext2", "-j", $dev;
+			system "tune2fs", "-c0", "-i0", $dev;
+			next };
+	die "unknown fs: $_\n";
+    }
+}
 
 #- provide package fullname that have to be installed and copied.
 sub select_packages {
@@ -852,7 +872,7 @@ sub read_rpmsrate {
 		      map { packageById($packages, $_) } packageDepsId($p);
 
 		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
-		    if (@m3 == 1 && $m3[0] eq 'INSTALL') {
+		    if (@m3 >= 1 && $m3[0] eq 'INSTALL' || @m3 >=2 && $m3[1] eq 'INSTALL') {
 			push @{$packages->{needToCopy} ||= []}, $_;
 			next; #- don't need to put INSTALL flag for a package.
 		    }
