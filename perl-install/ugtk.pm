@@ -27,8 +27,6 @@ BEGIN {
 }
 
 use Gtk;
-Gtk->init;
-Gtk->set_locale;
 
 use c;
 use log;
@@ -136,8 +134,8 @@ sub gtkradio {
 }
 
 sub gtkroot {
-#    Gtk->init;
-#    Gtk->set_locale;
+    Gtk->init;
+    Gtk->set_locale;
     Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
 }
 
