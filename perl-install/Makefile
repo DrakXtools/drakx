@@ -180,9 +180,8 @@ endif
 
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
-#	ar and fa are disabled as arabic font doesn't work on install 
 #	ga and sl are disabled because too few messages are translated
-	rm -rf $(DEST)/usr/share/locale_special/{ar,fa,ga,sl}
+	rm -rf $(DEST)/usr/share/locale_special/{ga,sl}
 
 ifeq (i386,$(ARCH))
 	cp -a /etc/pcmcia $(DEST)/etc
