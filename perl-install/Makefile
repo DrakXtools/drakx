@@ -31,7 +31,7 @@ tar: clean
 floppy:
 	dd if=/dev/zero of=/tmp/initrd bs=1k count=2000 ; echo y | mke2fs /tmp/initrd ; mount /tmp/initrd /mnt/disk/ -o loop ; cp -a ../install1/* /mnt/disk/ ; umount /mnt/disk ; gzip -c /tmp/initrd > /tmp/initrd.img ; mcopy -o /tmp/initrd.img a:
 
-tar-diskdrake: clean
+tar-diskdrake: clean pci_probing
 	cd .. ; rm -rf diskdrake ; cp -af perl-install diskdrake
 
 	l=`./perl2fcalls -uses -excludec diskdrake | sort | uniq | sed -e 's/::/\//' -e 's/^/diskdrake\//' -e 's/$$/.pm/'` ; \

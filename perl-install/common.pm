@@ -173,18 +173,23 @@ sub untranslate($@) {
 }
 
 sub warp_text($;$) {
-    my ($text, $width) = shift;
+    my ($text, $width) = @_;
     $width ||= 80;
-   
-    my ($t, @l); foreach (split /\s+/, $text) {
-	if (length "$t $_" > $width) {
-	    push @l, $t;
-	    $t = $_;
-	} else {
-	    $t = "$t $_";
+
+    my @l; 
+    foreach (split "\n", $text) {
+	my $t; 
+	foreach (split /\s+/, $_) {
+	    if (length "$t $_" > $width) {
+		push @l, $t;
+		$t = $_;
+	    } else {
+		$t = "$t $_";
+	    }
 	}
+	push @l, $t;
     }
-    @l, $t;
+    @l;
 }
 
 sub getVarsFromSh($) {
