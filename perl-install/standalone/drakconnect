@@ -999,7 +999,6 @@ Please run \"Internet access\" in control center."));
 sub reread_net_conf() {
     network::netconnect::read_net_conf('', $netcnx, $netc);
     modules::load_category('net');
-    @all_cards = network::ethernet::get_eth_cards();
     network::netconnect::load_conf($netcnx, $netc, $intf);
     network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
 }
