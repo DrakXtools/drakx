@@ -51,8 +51,16 @@ sub installPackages {
 				 qw(mountloop),	#- crypted folders
 				 qw(dnotify),	#- notification of /etc changes
 				 qw(mandrake_doc-move-en mandrake_doc-move-fr mandrake_doc-move-drakxtools-en mandrake_doc-move-drakxtools-fr),
-				 qw(zcip dhcp-client dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools pcmcia-cs), #- network conf
-				 qw(eagle-usb),
+				 #- network conf:
+				 qw(wireless-tools pcmcia-cs),
+				 #- zeroconf:
+				 qw(zcip dhcpcd tmdns),
+				 #- cnx stuff:
+				 qw(dhcp-client ppp kdenetwork-kppp rp-pppoe pptp-adsl),
+				 #- network file sharing:
+				 qw(nfs-utils-clients samba-client),
+				 #- network drivers and firmwares:
+				 qw(eagle-usb speedtouch speedtouch_mgmt),
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 qw(ATI_GLX NVIDIA_GLX),
 				 qw(hcfpcimodem hsflinmodem ltmodem), "NVIDIA_nforce-$kernel_version",
