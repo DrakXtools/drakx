@@ -608,7 +608,7 @@ sub real_format_part {
         format_jfs($dev, @options);
     } elsif (isDos($part)) {
         format_dos($dev, @options);
-    } elsif (isWin($part)) {
+    } elsif (isWin($part) || isEfi($part)) {
         format_dos($dev, @options, '-F', 32);
     } elsif (isThisFs('hfs', $part)) {
         format_hfs($dev, @options, '-l', "Untitled");
@@ -760,7 +760,12 @@ sub umount {
     my ($mntpoint) = @_;
     $mntpoint =~ s|/$||;
     log::l("calling umount($mntpoint)");
-    syscall_('umount', $mntpoint) or die \N("error unmounting %s: %s", $mntpoint, $!);
+
+    # SYS_umount is not a valid sycall on modern kernels
+    (arch() =~ /x86_64/
+     ? syscall_('umount2', $mntpoint, 0)
+     : syscall_('umount', $mntpoint)
+     ) or die \N("error unmounting %s: %s", $mntpoint, $!);
 
     substInFile { $_ = '' if /(^|\s)$mntpoint\s/ } '/etc/mtab'; #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
 }
