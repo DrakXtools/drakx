@@ -117,13 +117,14 @@ sub write_interface_conf {
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
-    my $hwaddr = -e "$prefix/sbin/ip" && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE}`;
+    my $hwaddr;
+    $::o->{miscellaneous}{track_network_id} and $hwaddr = -e "$prefix/sbin/ip" && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE}`;
     if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
-		     HWADDR => $hwaddr
+		     if_($::o->{miscellaneous}{track_network_id}, HWADDR => $hwaddr)
 		    });
     setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), ($intf->{wireless_eth}) ? qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV) : ());
 }
@@ -295,7 +296,7 @@ notation (for example, 1.2.3.4).");
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
 	           { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-	           if_($intf->{wireless_eth},
+		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
 	           { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
@@ -361,10 +362,12 @@ sub miscellaneousNetwork {
     my ($in, $clicked) = @_;
     my $u = $::o->{miscellaneous} ||= {};
     $::isInstall and $in->set_help('configureNetworkProxy');
+    $u->{track_network_id} = detect_devices::isLaptop();
     $::expert || $clicked and $in->ask_from('',
        _("Proxies configuration"),
        [ { label => _("HTTP proxy"), val => \$u->{http_proxy} },
          { label => _("FTP proxy"),  val => \$u->{ftp_proxy} },
+	 { label => _("Track network card id (usefull for laptops)"), val => \$u->{track_network_id}, type => "bool" },
        ],
        complete => sub {
 	   $u->{http_proxy} =~ m,^($|http://), or $in->ask_warn('', _("Proxy should be http://...")), return 1,0;
