@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 14mdk
+Release: 15mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,15 +291,18 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-15mdk
+- fix infamous #2672
+
 * Wed Mar  5 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-14mdk
 - localedrake: fix behaviour when only one lang is available (clicking
   on "cancel" on the country selection didn't cancel it)
 - drakconnect: fixes in isdn configuration (flepied)
-- drakperm:
+- drakperm (tv):
   o fix #1776
   o fix small memory leak (tree iterators)
   o restore edit dialog on doble click
-- logdrake: restore "pre gtk+-2 port" search  behavior
+- logdrake: restore "pre gtk+-2 port" search  behavior (tv)
   o empty log buffer on search startup
   o freeze buffer while searching
   o scroll down the log buffer on filling
