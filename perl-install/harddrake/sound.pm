@@ -231,6 +231,9 @@ sub switch {
                                   messages => 
 				  N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
 				    $device->{description}) .
+                          #-PO: here the first %s is either "OSS" or "ALSA", 
+                          #-PO: the second %s is the name of the current driver
+                          #-PO: and the third %s is the name of the default driver
 				  N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
 				  interactive_help => sub {  
 				      N("OSS (Open Sound System) was the first sound API. It's an OS independent sound API (it's available on most UNIX(tm) systems) but it's a very basic and limited API.
