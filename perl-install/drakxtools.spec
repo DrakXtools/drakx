@@ -195,12 +195,21 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
+
 * Sun Jul  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
 - new entries: 
 	o harddrake2 : new hardware detection && configuration tool
 	o drakbugreport: bug reporting tool a la Kde (not working!)
 	o drakTermServ : configuration tool for diskless stations.
+- updated programs :
+	o drakxtv: if runned by root, offer to configure bttv for most tv cards
+	o disdrake:
+		* enhanced raid & lvm support,
+		* check if programs (ie jfsprogs) are installed
+		* cleanups
+	o Xconfigurator: bug fix
+- general : better supermout support, use new libldetect, various bug fixes
 
 * Tue Jun 18 2002 Frederic Lepied <flepied@mandrakesoft.com> 1.1.7-99mdk
 - added new draksec from Christian and a new way to build the packages (make rpm)
