@@ -106,8 +106,7 @@ sub setup_userconf {
 sub lang2move_clp_name {
     my ($lang) = @_;
     my $dir = '/usr/share/locale/' . lang::l2locale($lang);
-    -d $dir or return 'ERROR';
-    my $link = readlink($dir) or return;
+    my $link = readlink($dir) or return -d $dir ? '' : 'ERROR';
     my ($name) = $link =~ m!image_(i18n_.*?)/! or log::l("ERROR: bad link $link for $dir"), return 'ERROR';
     $name;
 }
