@@ -82,7 +82,8 @@ sub adsl_ask_info {
 
 sub adsl_detect {
     my ($adsl) = @_;
-    $adsl->{speedtouch} = detect_devices::getSpeedtouch();    
+    $adsl->{speedtouch} = detect_devices::getSpeedtouch();
+    return $adsl if $adsl->{speedtouch};
 }
 
 sub adsl_conf {
