@@ -227,7 +227,6 @@ sub setupBootloader__general {
 		if_(detect_devices::isLaptop(),
             { text => N("Enable multiple profiles"), val => \$profiles, type => 'bool', advanced => 1 },
 		),
-            { label => N("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], format => sub { $bootloader::vga_modes{$_[0]} }, not_edit => !$::expert, advanced => 1 },
         ]) or return 0;
     } else {
 	$b->{boot} = $partition_table::mac::bootstrap_part;	
