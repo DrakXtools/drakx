@@ -18,7 +18,7 @@ sub configure{
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp")]) or return;
+If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("speedtouch usb")]) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
@@ -40,6 +40,14 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	$in->do_pkgs->install(qw(pptp-adsl-fr));
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
+	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
+    }
+    if ($type =~ /speedtouch/) {
+	$type = 'speedtouch';
+	$in->do_pkgs->install(qw(speedtouch));
+	$netcnx->{type} = "adsl_$type";
+	$netcnx->{"adsl_$type"} = {};
+	$netcnx->{"adsl_$type"}{vcivpi} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     1;
@@ -71,34 +79,22 @@ sub adsl_conf {
   adsl_conf_step_1:
     adsl_ask_info ($adsl, $netc, $intf) or return;
   adsl_conf_step_2:
-    conf_network_card($in, $netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
+    $adsl_type eq 'speedtouch' or conf_network_card($in, $netc, $intf, 'static' , '10.0.0.10' ) or goto adsl_conf_step_1;
     adsl_conf_backend($adsl, $netc, $adsl_type);
-
-  adsl_conf_step_3:
-    $adsl->{atboot} = $in->ask_yesorno(_("ADSL configuration"),
-					  _("Do you want to start your connection at boot?")
-				      );
     1;
 }
 
 sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type) = @_;
 
-    output("$prefix/etc/ppp/options", 
-      $adsl_type eq 'pptp' ?
+    output("$prefix/etc/ppp/options",
 "lock
 noipdefault
+persist
 noauth
 usepeerdns
 defaultroute
-" :
-"noipdefault
-usepeerdns
-hide-password
-defaultroute
-persist
-lock
-") if $adsl_type =~ /pptp|pppoe/;
+") if $adsl_type =~ /pptp|pppoe|speedtouch/;
 
     write_secret_backend($adsl->{login}, $adsl->{passwd});
 
@@ -109,78 +105,27 @@ lock
 	} "$prefix/etc/ppp/pppoe.conf";
     }
 
-    write_cnx_script($netc, "adsl",
-		      $adsl_type eq 'pptp' ?
-"#!/bin/bash
-/sbin/route del default
+    if ($adsl_type eq 'pptp') {
+	write_cnx_script($netc, "adsl",
+"/sbin/route del default
 /usr/bin/pptp 10.0.0.138 name $adsl->{login}
-"
-:
-"#!/bin/bash
-/sbin/route del default
+",
+'/usr/bin/killall pptp pppd
+' ) } elsif ($adsl_type eq 'pppoe') {
+    write_cnx_script($netc, "adsl",
+"/sbin/route del default
 LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE} $adsl->{login}
 ",
-		      $adsl_type eq 'pptp' ?
-"#!/bin/bash
-/usr/bin/killall pptp pppd
-"
-:
-"#!/bin/bash
-/usr/sbin/adsl-stop
+'/usr/sbin/adsl-stop
 /usr/bin/killall pppoe pppd
-");
+' ) } elsif ($adsl_type eq 'speedtouch') {
+    write_cnx_script($netc, 'adsl',
+'/usr/share/speedtouch/speedtouch.sh start
+',
+'/usr/share/speedtouch/speedtouch.sh stop
+') }
 
-    if ($adsl->{atboot}) {
-	output ("$prefix/etc/rc.d/init.d/adsl",
-	qq{
-#!/bin/bash
-#
-# adsl       Bring up/down adsl connection
-#
-# chkconfig: 2345 11 89
-# description: Activates/Deactivates the adsl interfaces
-	case "$1" in
-		start)
-		echo -n "Starting adsl connection: "
-		$connect_file
-		touch /var/lock/subsys/adsl
-		echo -n adsl
-		echo
-		;;
-	stop)
-		echo -n "Stopping adsl connection: "
-		$disconnect_file
-		echo -n adsl
-		echo
-		rm -f /var/lock/subsys/adsl
-		;;
-	restart)
-		$0 stop
-		echo -n "Waiting 10 sec before restarting adsl."
-		sleep 10
-		$0 start
-		;;
-	status)
-		;;
-	*)
-	echo "Usage: adsl {start|stop|status|restart}"
-	exit 1
-esac
-exit 0
- });
-	chmod 0755, "$prefix/etc/rc.d/init.d/adsl";
-	$::isStandalone ? system("/sbin/chkconfig --add adsl") : do {
-	    symlinkf ("../init.d/adsl", "$prefix/etc/rc.d/rc$_") foreach
-	      '0.d/K11adsl', '1.d/K11adsl', '2.d/K11adsl', '3.d/S89adsl', '5.d/S89adsl', '6.d/K11adsl';
-	};
-    }
-    else {
-	-e "$prefix/etc/rc.d/init.d/adsl" and do{
-	    system("/sbin/chkconfig --del adsl");
-	    unlink "$prefix/etc/rc.d/init.d/adsl";
-	};
-    }
-    $netc->{NET_INTERFACE}="ppp0";
+    $netc->{NET_INTERFACE}='ppp0';
 }
 
 1;
