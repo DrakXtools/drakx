@@ -531,7 +531,7 @@ sub tryWrite($) {
 
 sub syslog {
     -r "/tmp/syslog" and return map { /<\d+>(.*)/ } cat_("/tmp/syslog");
-    my $LD_LOADER = $ENV{LD_LOADER} ? $ENV{LD_LOADER} : "";
+    my $LD_LOADER = $ENV{LD_LOADER} || "";
     `$LD_LOADER /bin/dmesg`;
 }
 
