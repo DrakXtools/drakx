@@ -1,3 +1,193 @@
+2004/10/04  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Fix "Corporate Desktop" advertisment
+
+2004/10/04  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/include/sys/io.h: allow ioports on x86_64 too for
+	pcmcia support
+
+	* c/smp.c: 64-bit fixes for x86_64
+
+	* share/symlinks.x86_64: extra links on x86_64
+
+	* rescue/list.x86_64: add grub files
+
+	* Makefile: handle lib64 dirs, build pcmcia stuff on x86_64 too, handle
+	arch-specific
+	symlinks additions.
+
+	* fs/type.pm: re-enable xfs on x86_64, for testing
+
+	* Xconfig/card.pm: make perl_checker happy
+	x86_64 is a lib64 platform, so handle nvidia glx here too (and ati in
+	the future)
+
+	* share/list.x86_64: updates for xorg
+
+	* share/list: lib64 fixes, add im-cedilla
+
+	* mdk-stage1/rescue-gui.c: allow recovery of MS bootloader on x86 too
+
+2004/10/04  (Hilbert) <h at mandrake.org>
+
+	* share/po/zh_TW.po: 1645:
+	NOTE: Depending on the printer model and the printing system up to %d MB
+	of
+	additional software will be installed.
+
+2004/10/04  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: do not lose GATEWAYDEV if it is a non wireless
+	one and a static
+	wireless card is configured (and vice versa)
+	write wlan-ng config files for prism2 drivers
+
+2004/10/04  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/it.po: updated Italian file
+
+2004/10/04  rcasha
+
+	* share/po/mt.po: var
+
+2004/10/04  rstandtke
+
+	* share/po/de.po: some additions
+
+2004/10/04  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/service_harddrake: remove what should had never been commited
+	do not disable glx when switching from nvidia driver to nv (indirect
+	support, #11285)
+	do not failled when hw db is corrupted
+
+	* share/po/br.po: fix inverted translation for autologin
+
+	* drakxtools.spec: 10.1-18mdk
+	typo fix in 10.1-17mdk's changelog
+	10.1-17mdk
+	10.1-16mdk
+
+2004/10/04  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: mdkkdm is now the default again
+
+2004/10/03  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/10/03  Keld Jørn Simonsen  <keld at dkuug.dk>
+
+	* share/po/da.po: updates
+	soft/menu-messages/da.po soft/mdkonline/po/da.po
+	soft/mountloop/po/da.po gi/perl-install/share/po/da.po
+
+2004/10/03  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl.pm: fix typo
+	(sagem_set_parameters, adsl_conf_backend): write static ip in
+	eagle-usb.conf if needed for sagem modems, else erase it
+
+	* install_steps_interactive.pm (configureNetwork) load only ethernet
+	modules before easy_dhcp (this
+	will load firewire modules after other ethernet modules, so firewire
+	interfaces won't always take the name eth0)
+
+	* network/netconnect.pm: remove TYPE field in ifcfg files if connection
+	type isn't ADSL
+	perl_checker fix
+	do not lose ONBOOT setting for manual/dhcp dsl connections
+	misc sagem fixes:
+	  - allow to write static ip in eagle-usb.conf (write this file later)
+	  - load sagem specific modules/programs before config is written
+	  - do not reset IP address each time it is configured
+	  - automatically guess gateway for static connections
+	do not break the "IP %s address is usually reserved" warning
+
+2004/10/03  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/pt.po: updated Persian file; put back current
+	version of Portuguese file
+
+2004/10/03  rcasha
+
+	* share/po/mt.po: var
+
+2004/10/03  tsdgeos
+
+	* share/po/ca.po: Small updates for ca
+
+2004/10/02  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cs.po: updated Czech file
+
+2004/10/02  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: fix keyboard names
+
+2004/10/01  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: 
+	  - added Romain
+
+2004/10/01  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* network/network.pm: call the scripts in
+	/etc/sysconfig/network-scripts/hostname.d like the network
+	scripts are doing when changing the hostname.
+
+2004/10/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: create $intf->{sagem} when needed before checking
+	it exists ...
+	(make sagem usable again with dhcp/static connections)
+
+	* mouse.pm (detect) fix synaptics auto-detection
+
+2004/10/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+
+	* share/po/uk.po: updated Ukrainian file
+
+2004/10/01  Pixel  <pixel at mandrakesoft.com>
+
+	* share/compssUsers.pl, share/compssUsers-powerpack.pl,
+	share/compssUsers-discovery.pl, share/compssUsers-powerpackplus.pl:
+	dynamically choose the compssUsers based on meta_class, so now we have
+	only one compssUsers.pl
+
+	* share/rpmsrate: revert part of the commit that was not done on purpose
+	(nb: don't modify rpmsrate *after* running clean-rpmsrate)
+
+	* pkgs.pm: fix logging rpmsrate_flags_chosen
+
+	* install2.pm: 
+	  - prosuite is now named powerpackplus
+	  - simplify the code searching for the meta_class
+	fix logging rpmsrate_flags_chosen
+
+2004/10/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakups: add --wizard option in order to directly run the
+	wizard
+	do not show banner when embedded
+
+	* standalone/service_harddrake.sh: run harddrake service on stop
+
+	* share/rpmsrate: try harder to include IMs on CDs
+
+	* standalone/service_harddrake: on stop blacklist snd-usb-audio
+
+	* standalone/man/C/man8/drakconnect.8: typo fixes
+
+	* drakxtools.spec: 10.1-15mdk
+	10.1-14mdk
+	10.1-13mdk
+
+	* detect_devices.pm: perl_checker cleanup
+
 2004/10/01  Pixel  <pixel at mandrakesoft.com>
 
 	* share/rpmsrate: revert part of the commit that was not done on purpose
@@ -40353,7 +40543,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.977 2004/09/30 14:02:30 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.978 2004/10/01 02:14:30 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
