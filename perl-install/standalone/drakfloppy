@@ -299,7 +299,7 @@ sub expand_tree
 
     chdir( $dir );
 
-    foreach $dir_entry ( <*> ) {
+    foreach $dir_entry (all(".")) {
       if (( -d $dir_entry ) or ( $dir_entry =~ /\.o(\.gz)?$/)) {
 	$path = $dir . "/" . $dir_entry;
 	$path =~ s|//|/|g;
@@ -403,7 +403,7 @@ sub has_sub_trees
     my ( $dir ) = @_;
     my $file;
 
-    foreach $file ( <$dir/*> ) {
+    foreach $file (glob_("$dir/*")) {
       return 1 if ( -d $file ) or ($file =~ /\.o(\.gz)?$/);
     }
 
