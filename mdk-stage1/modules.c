@@ -386,7 +386,7 @@ void update_modules(void)
 	char final_name[500];
 	char floppy_mount_location[] = "/tmp/floppy";
 
-	stg1_info_message("Please insert the Update Modules disk.");;
+	stg1_info_message("Please insert the Update Modules floppy.");;
 
 	my_insmod("floppy", ANY_DRIVER_TYPE, NULL);
 
