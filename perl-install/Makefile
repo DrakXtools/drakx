@@ -25,7 +25,7 @@ TAGS: $(ALLPMS)
 clean:
 	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done;:
 	rm -rf auto ../drakxtools.tar.bz2
-	find . -name "*~" -o -name ".#*" -o -name "*.old" | xargs rm -f
+	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 check:
 	$(MAKE) -C share/po check
