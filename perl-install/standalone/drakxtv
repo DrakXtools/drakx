@@ -143,7 +143,9 @@ my @devices = detect_devices::probeall(1);
 if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } @devices) {
     if (($< == 0) && (grep { $_->{driver} eq 'bttv' } @devices)) {
 	   use harddrake::bttv;
+	   modules::read_conf;
 	   harddrake::bttv::config($in);
+	   modules::write_conf;
     }
     scan4channels();
     $in->exit(0);
