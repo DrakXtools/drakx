@@ -3,54 +3,48 @@ package crypto; # $Id$
 use diagnostics;
 use strict;
 
+use vars qw(%url2land %land2tzs %static_mirrors %mirrors);
+
 use MDK::Common::System;
 use common;
 use log;
 use ftp;
 
-my %url2land = (
-		fr => _("France"),
-		cr => _("Costa Rica"),
-		be => _("Belgium"),
-		cz => _("Czech Republic"),
-		de => _("Germany"),
-		gr => _("Greece"),
-		no => _("Norway"),
-		se => _("Sweden"),
-		nl => _("Netherlands"),
-		it => _("Italy"),
-		at => _("Austria"),
-	       );
+%url2land = (
+	     fr => _("France"),
+	     cr => _("Costa Rica"),
+	     be => _("Belgium"),
+	     cz => _("Czech Republic"),
+	     de => _("Germany"),
+	     gr => _("Greece"),
+	     no => _("Norway"),
+	     se => _("Sweden"),
+	     nl => _("Netherlands"),
+	     it => _("Italy"),
+	     at => _("Austria"),
+	    );
 
-my %land2tzs = (
-		_("France") => [ 'Europe/Paris', 'Europe/Brussels', 'Europe/Berlin' ],
-		_("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
-		_("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
-		_("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
-		_("Greece") => [ 'Europe/Athens', 'Europe/Prague' ],
-		_("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
-		_("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
-		_("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
-		_("Netherlands") => [ 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Berlin' ],
-		_("Italy") => [ 'Europe/Rome', 'Europe/Brussels', 'Europe/Paris' ],
-		_("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
-	       );
+%land2tzs = (
+	     _("France") => [ 'Europe/Paris', 'Europe/Brussels', 'Europe/Berlin' ],
+	     _("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
+	     _("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
+	     _("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
+	     _("Greece") => [ 'Europe/Athens', 'Europe/Prague' ],
+	     _("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
+	     _("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
+	     _("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
+	     _("Netherlands") => [ 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Berlin' ],
+	     _("Italy") => [ 'Europe/Rome', 'Europe/Brussels', 'Europe/Paris' ],
+	     _("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
+	    );
 
-my %static_mirrors = (
-#		      "ackbar" => [ "Ackbar", "/updates", "a", "a" ],
-		     );
+%static_mirrors = (
+#		   "ackbar" => [ "Ackbar", "/updates", "a", "a" ],
+		  );
 
-my %mirrors;
+%mirrors = ();
 
-my %deps = (
-  'libcrypto.so.0' => 'openssl',
-  'libssl.so.0' => 'openssl',
-  'mod_sxnet.so' => 'mod_ssl-sxnet',
-);
-
-sub require2package { $deps{$_[0]} || $_[0] }
 sub mirror2text { $mirrors{$_[0]} && ($mirrors{$_[0]}[0] . '|' . $_[0]) }
-
 sub mirrors {
     unless (keys %mirrors) {
 	#- contact the following URL to retrieve list of mirror.
