@@ -979,11 +979,11 @@ sub fileshare_config {
     }
 
     my $r = $in->ask_from_list_('fileshare',
-'Do you want to allow users to export some directories in their home?
-Allowing this will permit users to simply click on "Share" in konqueror and nautilus.
+_("Do you want to allow users to export some directories in their home?
+Allowing this will permit users to simply click on \"Share\" in konqueror and nautilus.
 
-"Custom" permit a per-user granularity.
-',
+\"Custom\" permit a per-user granularity.
+"),
 				\@l, $l[$restrict ? 0 : 1]) or return;
     $restrict = $r ne $l[1];
     $conf{RESTRICT} = bool2yesno($restrict);
