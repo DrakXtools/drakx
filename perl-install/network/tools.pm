@@ -153,7 +153,7 @@ sub use_windows {
     fs::get_info_from_fstab($all_hds, '');
     my $part = find { $_->{device_windobe} eq 'C' } fsedit::get_fstab(@{$all_hds->{hds}});
     $part or my $failed = N("No partition available");
-    my $source = find { -d $_ && -e "$_/$file"  } map { "$part->{mntpoint}/$_" } qw(windows/system winnt/system windows/system32/drivers winnt/system32/drivers);
+    my $source = find { -d $_ && -r "$_/$file" } map { "$part->{mntpoint}/$_" } qw(windows/system winnt/system windows/system32/drivers winnt/system32/drivers);
     log::explanations($failed || "Seek in $source to find firmware");
 
     return $source, $failed;
@@ -173,6 +173,7 @@ sub use_floppy {
 
 sub is_dynamic_ip {
   my ($intf) = @_;
+  print "called from\n", common::backtrace(), "\n";
   any { $_->{BOOTPROTO} !~ /^(none|static|)$/ } values %$intf;
 }
 
