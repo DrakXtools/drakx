@@ -689,8 +689,8 @@ sub saveCompssUsers {
 	$flat .= $compssUsers->{$_}{verbatim};
 	foreach my $p (values %{$packages->{names}}) {
 	    my ($rate, @flags) = packageRateRFlags($p);
-	    $flat .= "\t$rate " . packageName($p) 
-	      if grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags;
+	    $flat .= sprintf "\t%d %s\n", $rate, packageName($p)
+	      if $rate && !grep { !grep { /^!(.*)/ ? !$fl{$1} : $fl{$_} } split('\|\|') } @flags;
 	}
     }
     output "$prefix/var/lib/urpmi/compssUsers.flat", $flat;
