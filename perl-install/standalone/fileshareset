@@ -281,7 +281,7 @@ sub read {
 	    #- first line in the category
 	    my ($label) = $s =~ /^\s*\[(.*)\]/;
 	    my ($mntpoint) = $s =~ /^\s*path\s*=\s*(.*)/m;
-	    push @l, { mntpoint => $mntpoint, raw => $s, label => $label } if $label && $mntpoint;
+	    push @l, { mntpoint => $mntpoint, raw => $s, label => $label };
 	    $s = '';
 	}
 	$s .= $_;
