@@ -89,7 +89,7 @@ sub start_daemons ()
     sys("/etc/rc.d/init.d/network restart");
     $netmon_need_start and system("$netmon --connect --force --quiet >/dev/null");
 
-    sys("/etc/init.d/shorewall start");
+    sys("/etc/init.d/shorewall restart");
 
     sys("/etc/rc.d/init.d/$_ start"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
     sys("/etc/rc.d/init.d/cups start") if $cups_used;
@@ -98,9 +98,10 @@ sub start_daemons ()
 sub stop_daemons ()
 {
     standalone::explanations("Stopping daemons");
-    foreach (qw(dhcpd named shorewall)) {
+    foreach (qw(dhcpd named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
+    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear");
     sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
 }
 

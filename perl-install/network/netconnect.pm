@@ -370,7 +370,7 @@ sub save_conf {
       "SystemName=" . do { $netc->{HOSTNAME} =~ /([^\.]*)\./; $1 } . "
 DomainName=" . do { $netc->{HOSTNAME} =~ /\.(.*)/; $1 } . "
 InternetAccessType=" . do { if ($netcnx->{type}) { $netcnx->{type} } else { $netc->{GATEWAY} ? "lan" : "" } } . "
-InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{NET_DEVICE} : $netcnx->{NET_INTERFACE}) . "
+InternetInterface=" . ($netc->{GATEWAY} && (!$netcnx->{type} || $netcnx->{type} eq 'lan') ? $netc->{GATEWAYDEV} : $netcnx->{NET_INTERFACE}) . "
 InternetGateway=$netc->{GATEWAY}
 DNSPrimaryIP=$netc->{dnsServer}
 DNSSecondaryIP=$netc->{dnsServer2}
@@ -594,14 +594,14 @@ sub load_conf {
 #- ensures the migration from old config files
 sub read_raw_net_conf {
     my ($suffix) = @_;
-    my $dir = "$::prefix/etc/sysconfig";
+    my $dir = "$::prefix/etc/sysconfig/network-scripts";
     $suffix = $suffix ? ".$suffix" : '';
     rename "$dir/draknet$suffix", "$dir/drakconnect$suffix";
-    getVarsFromSh("$dir/drakconnect$suffix");
+    getVarsFromSh("$dir/drakconnect_conf");
 }
 
 sub get_net_device {
-    ${{ read_raw_net_conf() }}{NET_DEVICE};
+    ${{ read_raw_net_conf() }}{InternetInterface};
 }
 
 sub read_net_conf {
