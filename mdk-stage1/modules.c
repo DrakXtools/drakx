@@ -443,4 +443,5 @@ void update_modules(void)
 		}
 	}
 	fclose(f);
+	umount(floppy_mount_location);
 }
