@@ -238,6 +238,8 @@ sub real_main {
           }
       };
 
+      use locale;
+      set_l10n_sort();
 
       # main wizard:
       my $wiz;
@@ -770,7 +772,7 @@ Take a look at http://www.linmodems.org"),
                     name => N("Please choose your ADSL provider"),
                     data => sub {
                         [ { label => N("Provider:"), type => "list", val => \$adsl_provider, separator => '|',
-                            list => [ N("Unlisted - edit manually"), keys %adsl_data ] } ];
+                            list => [ sort(N("Unlisted - edit manually"), keys %adsl_data) ], sort => 0 } ];
                     },
                     post => sub {
                         $adsl_type = 'pppoa' if member($ntf_name, qw(bewan speedtouch));
