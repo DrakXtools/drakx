@@ -39,11 +39,11 @@ sub smbclient {
     my ($server) = @_;
     my $name  = $server->{name} || $server->{ip};
     my $ip    = $server->{ip} ? "-I $server->{ip}" : '';
-    my $group = $server->{group} ? " -W $server->{group}" : '';
+    my $group = $server->{group} ? qq( -W "$server->{group}") : '';
 
     my $U = $server->{username} ? sprintf("%s/%s%%%s", @$server{'domain', 'username', 'password'}) : '%';
     my %h;
-    foreach (`smbclient -g -U $U -L $name $ip$group 2>/dev/null`) {
+    foreach (`smbclient -g -U "$U" -L "$name" $ip$group 2>/dev/null`) {
 	if (my ($type, $v1, $v2) = /(.*)\|(.*)\|(.*)/) {
 	    push @{$h{$type}}, [ $v1, $v2 ];
 	} elsif (/^Error returning browse list/) {

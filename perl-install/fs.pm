@@ -69,8 +69,7 @@ sub read_fstab {
 	    # prefering type "smbfs" over "smb"
 	    $fs_type = 'smbfs';
 	}
-	$mntpoint =~ s/\\040/ /g;
-	$dev =~ s/\\040/ /g;
+	s/\\040/ /g foreach $mntpoint, $dev, $options;
 
 	my $h = { 
 		 mntpoint => $mntpoint, fs_type => $fs_type,
@@ -330,8 +329,7 @@ sub prepare_write_fstab {
 
 	    my $fs_type = $_->{fs_type} || 'auto';
 
-	    $mntpoint =~ s/ /\\040/g;
-	    $device =~ s/ /\\040/g;
+	    s/ /\\040/g foreach $mntpoint, $device, $options;
 
 	    # handle bloody supermount special case
 	    if ($options =~ /supermount/) {
