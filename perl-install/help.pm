@@ -108,9 +108,9 @@ configure your system so that it complies as much as possible with the
 Linux Standard Base specifications.
 
    Selecting the \"LSB\" group will also install the \"2.4\" kernel series,
-instead of the default \"2.6\" one. This is to ensure 100%-LSB compliance
+instead of the default \"2.6\" one. This is to ensure 100%%-LSB compliance
 of the system. However, if you do not select the \"LSB\" group you will
-still have a system which is nearly 100% LSB-compliant.
+still have a system which is nearly 100%% LSB-compliant.
 
  * \"%s\": if your machine is intended to be a server, select which of the
 more common services you wish to install on your machine.
