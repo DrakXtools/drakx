@@ -169,7 +169,7 @@ $window1->show_all();
 Gtk->main;
 
 dd:
-netconnect::intro('', $netcnx, $in, \&standalone::pkgs_install);
+netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
 $in->exit(0);
 
 sub get_profiles {
