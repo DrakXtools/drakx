@@ -409,26 +409,13 @@ my %charset2kde_charset = (
 
 #- for special cases not handled magically
 my %lang2country = (
-  af => 'za',
-  be => 'by',
-  br => 'fr',
-  bs => 'bh',
   cs => 'cz',
-  cy => 'gb',
   da => 'dk',
   el => 'gr',
   et => 'ee',
-  he => 'il',
-  ja => 'jp',
   ko => 'kr',
   mi => 'nz',
-  ms => 'my',
-  nn => 'no',
   sl => 'si',
-  sp => 'yu',
-  sr => 'yu',
-  sv => 'se',
-  wa => 'be',
 );
 
 #-######################################################################################
@@ -549,37 +536,31 @@ sub charset2kde_charset {
 
 #- font+size for different charsets; the field [0] is the default,
 #- others are overrridens for fixed(1), toolbar(2), menu(3) and taskbar(4)
-my %kdefonts = (
-'iso-8859-1' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11"
-'iso-8859-2' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11"
-'iso-8859-9' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11"
-'iso-8859-15' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11"
-'gb2312' => [ "default-ming,16" ],
-'euc-jp' => [ "misc-fixed,14", "wadalab-gothic,13" ],
-'euc-kr' => [ "daewoo-gothic,16" ],
-'Big5'   => [ "taipei-fixed,16" ],
-'utf_hy' => [ "clearlyu,17" ],
-'utf_ka' => [ "clearlyu,17" ],
-'utf_vi' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
-'def' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
+my %charset2kde_font = (
+  'iso-8859-1' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-2' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-9' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-15' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'gb2312' => [ "default-ming,16" ],
+  'euc-jp' => [ "misc-fixed,14", "wadalab-gothic,13" ],
+  'euc-kr' => [ "daewoo-gothic,16" ],
+  'Big5'   => [ "taipei-fixed,16" ],
+  'utf_hy' => [ "clearlyu,17" ],
+  'utf_ka' => [ "clearlyu,17" ],
+  'utf_vi' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
+  'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
 
-sub kdefont {
-	my ($lang, $type) = @_;
-	my $charset = lang2charset($lang);
-	my $kdecharset = charset2kde_charset(lang2charset($lang));
+sub charset2kde_font {
+    my ($charset, $type) = @_;
+    my $kdecharset = charset2kde_charset($charset);
+    
+    my $font = $charset2kde_font{$charset} || $charset2kde_font{def};
+    my $r = $font->[$type] || $font->[0];
 
-	my $r;
-	$r ||= ($kdefonts{$charset})->[$type || 0];
-	$r ||= ($kdefonts{$charset})->[0];
-	$r ||= ($kdefonts{'def'})->[$type || 0];
-	$r ||= ($kdefonts{'def'})->[0];
-
-#- the format is "font-name,size,5,kdecharset,0,0" I have no idea of the
-#- meaning of that "5"...
-	$r = $r . ",5," . $kdecharset . ",0,0";
-
-	$r;
+    #- the format is "font-name,size,5,kdecharset,0,0" I have no idea of the
+    #- meaning of that "5"...
+    "$r,5,$kdecharset,0,0";
 }
 
 sub set { 
@@ -739,33 +720,33 @@ sub write {
     setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
     eval {
-	update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
-			  Locale => (
-				     Charset => charset2kde_charset(lang2charset($lang)),
-				     Country => lang2country($lang, $prefix),
-				     Language => lang2kde_lang($lang),
-				    ));
-#- The following calls to update_gnomekderc() should be done only if the
-#- user switched to a different charset encoding
-	update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
-			  WM => (
-				     activeFont => kdefont($lang,0),
-				    ),
-			  General => (
-				     fixed => kdefont($lang, 1),
-				     font => kdefont($lang, 0),
-				     menuFont => kdefont($lang, 3),
-				     taskbarFont => kdefont($lang, 4),
-				     toolBarFont => kdefont($lang, 2),
-				    ));
-	update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/konquerorrc',
-			  FMSettings => (
-				     StandardFont => kdefont($lang, 0),
-				    ));
-	update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdesktoprc',
-			  FMSettings => (
-				     StandardFont => kdefont($lang, 0),
-				    ));
+	my $charset = lang2charset($lang);
+	my $confdir = $prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config';
+	my ($prev_kde_charset) = cat_("$confdir/kdeglobals") =~ /^Charset=(.*)/mi;
+	update_gnomekderc("$confdir/kdeglobals", Locale => (
+			      Charset => charset2kde_charset($charset),
+			      Country => lang2country($lang, $prefix),
+			      Language => lang2kde_lang($lang),
+			  ));
+
+        if ($prev_kde_charset ne charset2kde_charset($charset)) {
+	    update_gnomekderc("$confdir/kdeglobals", WM => (
+	    		      activeFont => charset2kde_font($charset,0),
+	    		  ));
+	    update_gnomekderc("$confdir/kdeglobals", General => (
+	    		      fixed => charset2kde_font($charset, 1),
+	    		      font => charset2kde_font($charset, 0),
+	    		      menuFont => charset2kde_font($charset, 3),
+	    		      taskbarFont => charset2kde_font($charset, 4),
+	    		      toolBarFont => charset2kde_font($charset, 2),
+	    	          ));
+	    update_gnomekderc("$confdir/konquerorrc", FMSettings => (
+	    		      StandardFont => charset2kde_font($charset, 0),
+	    		  ));
+	    update_gnomekderc("$confdir/kdesktoprc", FMSettings => (
+	    		      StandardFont => charset2kde_font($charset, 0),
+	    		  ));
+	}
     };
 }
 
@@ -879,6 +860,7 @@ sub check {
     
     my @wanted_charsets = uniq map { lang2charset($_) } list();
     $err->("invalid charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
+    $err->("invalid charset $_ in \%charset2kde_font ($_ does not exist in \%charsets)") foreach difference2([ keys %charset2kde_font ], [ 'default', keys %charsets ]);
     $warn->("unused charset $_ (given in \%charsets, but not used in \%languages)") foreach difference2([ keys %charsets ], \@wanted_charsets);
 
     $warn->("unused entry $_ in \%xim") foreach difference2([ keys %xim ], [ list() ]);
