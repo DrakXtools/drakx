@@ -19,7 +19,7 @@ our %l = (
       if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x 3c990 3c990fx),
         qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp),
-        qw(b44 bcm4400 com20020-pci cs89x0 de600 de620),
+        qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
         qw(depca dgrs dmfe e100 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 farsync fealnx hamachi hp hp-plus hp100 ibmtr),
@@ -72,7 +72,7 @@ our %l = (
         qw(qla1280 qla2x00 qlogicfas qlogicfc),
         qw(seagate wd7000 sim710 sym53c416 t128 tmscsim u14-34f ultrastor),
         qw(eata eata_pio eata_dma mptscsih nsp32),
-        qw(ata_piix sata_promise sata_svw sata_via sata_sis sata_sil),
+        qw(ata_piix sata_promise sata_sil sata_sis sata_svw sata_sx4 sata_via),
       ),
       '53c7,8xx',
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfcdd), # ncr53c8xx
@@ -81,7 +81,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2200 qla2300 pdc-ultra iteraid),
+	qw(cpqfc qla2100 qla2200 qla2300 pdc-ultra iteraid),
         qw(ips ppa imm),
        if_(c::kernel_version =~ /^\Q2.4/,
 	qw(ataraid hptraid silraid pdcraid)
@@ -147,7 +147,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo) ],
+    tv => [ qw(bt878 bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
@@ -165,16 +165,16 @@ our %l = (
     ],
     char => [
       if_(arch() =~ /ia64/, qw(efivars)),
-      qw(amd768_rng applicom n_r3964 nvram pc110pad ppdev),
+      qw(hw_random applicom n_r3964 nvram pc110pad ppdev),
       qw(mxser moxa isicom wdt_pci epca synclink istallion sonypi i810-tco sx), #- what are these???
     ],
     other => [
-      qw(defxx i810_rng i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
+      qw(defxx i810fb ide-floppy ide-scsi ide-tape loop lp nbd sg st),
       qw(parport_pc parport_serial),
       qw(btaudio),
 
       #- these need checking
-      qw(pcilynx sktr rrunner meye 3c559 buz paep),
+      qw(pcilynx tmspci rrunner meye buz paep),
     ],
     agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
