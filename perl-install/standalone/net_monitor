@@ -23,7 +23,6 @@ use lib qw(/usr/lib/libDrakX);
 use strict;
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
-use interactive;
 use my_gtk qw(:helpers :wrappers);
 use common;
 use network::netconnect;
@@ -44,8 +43,8 @@ if ($force) {
 }
 $quiet and exit(0);
 init Gtk;
-my $in = 'interactive'->vnew('su', 'default');
 
+require_root_capability();
 
 my $window1 = my_gtk->new('net_monitor');
 $window1->{rwindow}->signal_connect(delete_event => sub { my_gtk->exit(0) });
@@ -82,7 +81,7 @@ MDK::Common::Globals::init(
 			   disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
 			   connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg");
 
-gtkadd($window1->{rwindow},
+gtkadd($window1->{window},
        gtkpack_(new Gtk::VBox(0,5),
 		0, N("Network Monitoring"),
 		1, gtkpack_(new Gtk::HBox(0,5),
@@ -155,7 +154,7 @@ update();
 rescan();
 
 while ($isconnected == -2 || $isconnected == -1) {
-    Gtk->main_iteration while Gtk->events_pending;
+    ugtk::gtkflush()
 }
 
 Gtk->timeout_remove($time_tag2);

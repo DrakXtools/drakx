@@ -93,14 +93,8 @@ sub vnew {
 	$ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 	$su = '' if $::testing || $ENV{TESTING};
     }
+    require_root_capability() if $su;
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
-	if ($su && $>) {
-	    if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
-		exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
-	    } else {
-		exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
-	    }
-	}
 	eval { require interactive::gtk };
 	if (!$@) {
 	    my $o = interactive::gtk->new;
@@ -109,15 +103,8 @@ sub vnew {
 	    $::need_utf8_i18n = 1;
 	    return $o;
 	}
-    } else {
-	if ($su && $>) {
-	    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
-	}
     }
 
-    if ($su && $>) {
-	die "you must be root to run this program";
-    }
     require 'log.pm'; #- "require log" causes some pb, perl thinking that "log" is the log() function
     undef *log::l;
     *log::l = sub {}; # otherwise, it will bother us :(

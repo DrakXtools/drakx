@@ -9,7 +9,7 @@ use vars qw(@ISA @EXPORT $SECTORSIZE);
 
 @ISA = qw(Exporter);
 # no need to export ``_''
-@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release);
+@EXPORT = qw($SECTORSIZE N N_ translate untranslate formatXiB removeXiBSuffix formatTime setVirtual makedev unmakedev salt set_permissions files_exist set_alternative mandrake_release require_root_capability);
 
 # perl_checker: RE-EXPORT-ALL
 push @EXPORT, @MDK::Common::EXPORT;
@@ -18,7 +18,7 @@ push @EXPORT, @MDK::Common::EXPORT;
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-$SECTORSIZE      = 512;
+our $SECTORSIZE  = 512;
 
 #-#####################################################################################
 #- Functions
@@ -241,6 +241,23 @@ sub set_permissions {
 
 sub mandrake_release {
     chomp_(cat_("/etc/mandrake-release"))
+}
+
+sub require_root_capability {
+    return unless $>; # we're already root
+    if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
+	if (fuzzy_pidofs(qr/\bkwin\b/) > 0) {
+	    exec("kdesu", "-c", "$0 @ARGV") or die N("kdesu missing");
+	} else {
+	    exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
+
+	}
+    } else {
+	exec { 'consolehelper' } $0, @ARGV or die N("consolehelper missing");
+    }
+
+    # still not root ?
+    die "you must be root to run this program" if $>;
 }
 
 1;

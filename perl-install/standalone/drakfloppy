@@ -23,16 +23,15 @@
 
 
 use strict;
+use diagnostics;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
-use interactive;
 use common;
-use ugtk qw(:helpers);
 use my_gtk qw(:helpers);
 
-my $in = interactive->vnew('su', 'default');
+require_root_capability();
 
 my $expert_mode = 0;
 # we have put here the list in order to do $list->clear() when we have to do
