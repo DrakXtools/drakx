@@ -53,8 +53,6 @@ defaultroute
 ";
 	system "$::prefix/etc/rc.d/init.d/isdn4linux restart";
 
-    substInFile { s/^FIRMWARE.*\n//; $_ .= qq(FIRMWARE="$isdn->{firmware}"\n) if eof  } "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp0";
-
     # we start the virtual interface at boot (we dial only on demand.
     substInFile { s/^ONBOOT.*\n//; $_ .= qq(ONBOOT=yes\n) if eof  } "$::prefix/etc/sysconfig/network-scripts/ifcfg-ippp$isdn->{intf_id}";
 
