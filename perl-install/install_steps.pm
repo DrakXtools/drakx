@@ -594,7 +594,7 @@ sub addUser($) {
 	    $done{$_->{name}} = 1;
 	}
     } @{$o->{users} || []};
-    my @passwd = cat_("$p/etc/passwd");;
+    my @passwd = cat_("$p/etc/passwd");
 
     local *F;
     open F, ">> $p/etc/passwd" or die "can't append to passwd file: $!";
