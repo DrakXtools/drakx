@@ -130,7 +130,7 @@ You can add some more or change the existing ones."),
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
 	} else {
-	    $c =~ /(\S+)/;
+	    $c =~ /(.*) \(/;
 	    ($e) = grep { $_->{label} eq $1 } @{$b->{entries}};
 	}
 	my %old_e = %$e;
