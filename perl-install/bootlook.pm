@@ -36,8 +36,8 @@ import Locale::GetText I_;
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
   print "EMBED\n";
-  print "XID : $::XID\n";
-  print "CCPID :  $::CCPID\n";
+  print "XID: $::XID\n";
+  print "CCPID:  $::CCPID\n";
 }
 
 local $_ = join '', @ARGV;
@@ -50,7 +50,7 @@ my $l_mode = isAutologin();
 
 my $window = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window ("toplevel");
 $window->signal_connect( 'delete_event', sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) });
-$window->set_title( I_("Boot Style Configuration") );
+$window->set_title( _("Boot Style Configuration") );
 #$window->set_policy('automatic', 'automatic');
 #$window->set_policy(0, 0, 0);
 $window->border_width (10);
@@ -72,31 +72,31 @@ my $pixmap = new Gtk::Pixmap( $h_pixmap, $h_mask );
 ### menus definition
 # the menus are not shown
 # but they provides shiny shortcut like C-q
-my @menu_items = ( { path        => I_("/_File"),
+my @menu_items = ( { path        => _("/_File"),
 		     type        => '<Branch>' },
-		   { path        => I_("/File/_New"),
-		     accelerator => I_("<control>N"),
+		   { path        => _("/File/_New"),
+		     accelerator => _("<control>N"),
 		     callback    => \&print_hello },
-		   { path        => I_("/File/_Open"),
-		     accelerator => I_("<control>O"),
+		   { path        => _("/File/_Open"),
+		     accelerator => _("<control>O"),
 		     callback    => \&print_hello },
-		   { path        => I_("/File/_Save"),
-		     accelerator => I_("<control>S"),
+		   { path        => _("/File/_Save"),
+		     accelerator => _("<control>S"),
 		     callback    => \&print_hello },
-		   { path        => I_("/File/Save _As") },
-		   { path        => I_("/File/-"),
+		   { path        => _("/File/Save _As") },
+		   { path        => _("/File/-"),
 		     type        => '<Separator>' },
-		   { path        => I_("/File/_Quit"),
-		     accelerator => I_("<control>Q"),
+		   { path        => _("/File/_Quit"),
+		     accelerator => _("<control>Q"),
 		     callback    => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0) } },
 
-		   { path        => I_("/_Options"),
+		   { path        => _("/_Options"),
 		     type        => '<Branch>' },
-		   { path        => I_("/Options/Test") },
+		   { path        => _("/Options/Test") },
 
-		   { path        => I_("/_Help"),
+		   { path        => _("/_Help"),
 		     type        => '<LastBranch>' },
-		   { path        => I_("/Help/_About...") } );
+		   { path        => _("/Help/_About...") } );
 
 my $menubar = get_main_menu( $window );
 
@@ -110,7 +110,7 @@ $global_vbox->pack_start (new Gtk::Label(_("Boot style configuration")), 0, 0, 0
 my $a_dedans = new Gtk::VBox( 0, 10 );
 $a_dedans->border_width (5);
 my $a_box = new Gtk::VBox(0, 0 );
-my $a_button = new Gtk::CheckButton( I_("Launch Aurora at boot time") );
+my $a_button = new Gtk::CheckButton( _("Launch Aurora at boot time") );
 $a_button->signal_connect( "clicked", sub {
 			     if ($a_mode) { 
 				 $a_box->set_sensitive(0); $pixmap->set($t_pixmap, $t_mask);
@@ -239,7 +239,7 @@ sub isXlaunched
 {
     my $line;
     
-    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading : $!");
+    open INITTAB, "/etc/inittab" or die _("can not open /etc/inittab for reading: $!");
     while (<INITTAB>) {
 	if (/id:([1-6]):initdefault:/) { $line = $_; last; }
     }
@@ -263,7 +263,7 @@ sub isAutologin
 {
     my $line;
     
-    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading : $!");
+    open AUTOLOGIN, "/etc/sysconfig/autologin" or die _("can not open /etc/sysconfig/autologin for reading: $!");
     while (<AUTOLOGIN>) {
 	if (/AUTOLOGIN=(yes|no)/) { $line = $_; last; }
     }
