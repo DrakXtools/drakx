@@ -509,7 +509,7 @@ sub getNet() {
     # - get_netdevices() use the SIOCGIFCONF ioctl that does not list interfaces that are down
     # - /proc/net/dev does not list VLAN and IP aliased interfaces
 
-    grep { $_ !~ /^(?:lo|ippp|isdn|plip|ppp|sit0)/ }
+    grep { !/^(?:lo|ippp|isdn|plip|ppp|sit0)/ }
       uniq(
            (map { if_(/^\s*([A-Za-z0-9:\.]*):\s/, $1) } cat_("/proc/net/dev")),
            c::get_netdevices(),
