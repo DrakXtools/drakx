@@ -189,7 +189,7 @@ my @menu_items =
                              { use_markup => 1, if_(!$::isEmbedded, transient => $w->{window}), height => 400, scroll => 1 })
 
            } else {
-               create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) })
+               create_dialog(N("Select a device!"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"), { if_(!$::isEmbedded, transient => $w->{window}) })
            }
        },
        undef, '<Item>'

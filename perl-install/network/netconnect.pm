@@ -371,7 +371,7 @@ sub real_main {
                     pre => sub {
                         %isdn_cards = network::isdn::get_cards();
                     },
-                    name => N("Select a device !"),
+                    name => N("Select a device!"),
                     data => sub { [ { label => N("Net Device"), val => \$isdn_name, type => 'list', separator => '|', list => [ keys %isdn_cards ], allow_empty_list => 1 } ] },
                     pre2 => sub {
                         my ($label) = @_;
