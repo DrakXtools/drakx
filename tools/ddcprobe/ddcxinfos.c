@@ -10,7 +10,7 @@
 #include "vbe.h"
 #include "vesamode.h"
 
-#if defined(__i386__) || defined(__x86_64__)
+#ifdef HAVE_VBE
 #include "int10/vbios.h"
 #else
 #define InitInt10(PCI_CONFIG)	0
@@ -54,7 +54,7 @@ int main(void)
 	printf("%dKB of video ram\n", vbe_info->memory_size / 1024);
 
 	/* List supported standard modes */
-#if defined(__i386__) || defined(__x86_64__)
+#ifdef HAVE_VBE
 	for (j = 0; j < vbe_info->modes; j++)
 	  for (i = 0; known_vesa_modes[i].x; i++)
 	    if (known_vesa_modes[i].number == vbe_info->mode_list[j])

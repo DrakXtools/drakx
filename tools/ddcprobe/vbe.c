@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "vesamode.h"
 #include "vbe.h"
-#if defined(__i386__) || defined(__x86_64__)
+#ifdef HAVE_VBE
 #include "int10/vbios.h"
 #endif
 
@@ -32,7 +32,7 @@
 #define cpuemu 0
 #endif
 
-#if defined(__i386__) || defined(__x86_64__)
+#ifdef HAVE_VBE
 /*
  * Create a 'canonical' version, i.e. no spaces at start and end.
  *

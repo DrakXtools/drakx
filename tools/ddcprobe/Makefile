@@ -8,6 +8,9 @@ endif
 ifeq (x86_64,$(ARCH))
 HAS_VBE = y
 endif
+ifeq (ia64,$(ARCH))
+HAS_VBE = y
+endif
 
 CC	= gcc
 CFLAGS	= -O -Wall # -g -DDEBUG
@@ -17,6 +20,7 @@ ifeq (y,$(HAS_VBE))
 LDFLAGS	+= -L. -lint10 -lx86emu
 OBJS	= ddcxinfos.o vesamode.o vbe.o
 LIBS	= libint10.a libx86emu.a
+DEFS	+= -DHAVE_VBE
 endif
 ifeq (ppc,$(ARCH))
 OBJS	= ddcxinfos.o of.o minifind.o vbe.o vesamode.o
@@ -24,6 +28,7 @@ endif
 ifeq (,$(OBJS))
 OBJS	= not_handled.o
 endif
+CPPFLAGS= $(DEFS)
 TARGETS	= ddcxinfos
 
 all: $(TARGETS)
@@ -38,7 +43,7 @@ libint10.a: libx86emu.a
 	$(MAKE) -C int10
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
 	$(MAKE) -C int10 clean
