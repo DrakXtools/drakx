@@ -1,3 +1,37 @@
+2002/01/24  Pixel  <pixel@mandrakesoft.com>
+
+	* share/rpmsrate: 
+	  - add msec in any install
+	  - use BIGMEM flag for kernel-enterprise
+	  - use SMP flag for kernel-smp
+	(those 2 goes together with Warly's clean-rpmsrate)
+	add flag DOCS which should work together with !excludedocs
+
+	* any.pm: ensure grub is installed if grub is chosen
+
+	* install_any.pm: 
+	  - add DOCS (based on !excludedocs)
+	  - set BIGMEM and SMP flags
+	(since kernel-smp and kernel-enterprise sub-numbers are better handled
+	by
+	 rpmsrate together with Warly's clean-rpmsrate)
+
+	* install_steps_interactive.pm, install2.pm: minimal install now handles
+	excludedocs
+
+	* install_steps.pm: log excludedocs
+	minimal install now handles excludedocs
+	put devfs=mount only if devfsd is installed
+
+	* diskdrake_interactive.pm: truncate lvm name to 63 characters since
+	longer vg names are not allowed
+
+2002/01/24  Till Kamppeter <till@mandrakesoft.com>
+
+	* detect_devices.pm, printer.pm, printerdrake.pm: Fixed bug of empty menu
+	entry appearing after adding a new printer.
+	Modified "Local Printer" dialog to be more newbie-friendly.
+
 2002/01/23  dam's  <damien@mandrakesoft.com>
 
 	* network/adsl.pm: updated speedtouch code to use pppoa3
