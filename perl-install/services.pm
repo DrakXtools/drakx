@@ -13,6 +13,7 @@ use my_gtk qw(:helpers :wrappers);
 
 sub description {
     my %services = (
+alsa => __("Launch the ALSA (Advanced Linux Sound Architecture) sound system"),
 anacron => __("Anacron a periodic command scheduler."),
 apmd => __("apmd is used for monitoring batery status and logging it via syslog.
 It can also be used for shutting down the machine when the battery is low."),
@@ -24,17 +25,28 @@ UNIX cron, including better security and more powerful configuration options."),
 gpm => __("GPM adds mouse support to text-based Linux applications such the
 Midnight Commander. It also allows mouse-based console cut-and-paste operations,
 and includes support for pop-up menus on the console."),
+harddrake => __("HardDrake runs a hardware probe, and optionally configures
+new/changed hardware."),
 httpd => __("Apache is a World Wide Web server.  It is used to serve HTML files
 and CGI."),
 inet => __("The internet superserver daemon (commonly called inetd) starts a
 variety of other internet services as needed. It is responsible for starting
 many services, including telnet, ftp, rsh, and rlogin. Disabling inetd disables
 all of the services it is responsible for."),
+ipchains => __("Launch packet filtering for Linux kernel 2.2 series, to set
+up a firewall to protect your machine from network attacks."),
 keytable => __("This package loads the selected keyboard map as set in
 /etc/sysconfig/keyboard.  This can be selected using the kbdconfig utility.
 You should leave this enabled for most machines."),
+kheader => __("Automatic regeneration of kernel header in /boot for
+/usr/include/linux/{autoconf,version}.h"),
+kudzu => __("Automatic detection and configuration of hardware at boot."),
+linuxconf => __("Linuxconf will sometimes arrange to perform various tasks
+at boot-time to maintain the system configuration."),
 lpd => __("lpd is the print daemon required for lpr to work properly. It is
 basically a server that arbitrates print jobs to printer(s)."),
+lvs => __("Linux Virtual Server, used to build a high-performance and highly
+available server."),
 named => __("named (BIND) is a Domain Name Server (DNS) that is used to resolve
 host names to IP addresses."),
 netfs => __("Mounts and unmounts all Network File System (NFS), SMB (Lan
@@ -46,6 +58,9 @@ This service provides NFS server functionality, which is configured via the
 /etc/exports file."),
 nfslock => __("NFS is a popular protocol for file sharing across TCP/IP
 networks. This service provides NFS file locking functionality."),
+numlock => __("Automatically switch on numlock key locker under console
+and XFree at boot."),
+oki4daemon => __("Support the OKI 4w and compatible winprinters."),
 pcmcia => __("PCMCIA support is usually to support things like ethernet and
 modems in laptops.  It won't get started unless configured so it is safe to have
 it installed on machines that don't need it."),
@@ -56,6 +71,8 @@ postfix => __("Postfix is a Mail Transport Agent, which is the program that
 moves mail from one machine to another."),
 random => __("Saves and restores system entropy pool for higher quality random
 number generation."),
+rawdevices => __("Assign raw devices to block devices (such as hard drive
+partitions), for the use of applications such as Oracle"),
 routed => __("The routed daemon allows for automatic IP router table updated via
 the RIP protocol. While RIP is widely used on small networks, more complex
 routing protocols are needed for complex networks."),
@@ -65,10 +82,11 @@ rusersd => __("The rusers protocol allows users on a network to identify who is
 logged in on other responding machines."),
 rwhod => __("The rwho protocol lets remote users get a list of all of the users
 logged into a machine running the rwho daemon (similiar to finger)."),
+sound => __("Launch the sound system on your machine"),
 syslog => __("Syslog is the facility by which many daemons use to log messages
 to various system log files.  It is a good idea to always run syslog."),
-usb => __("This startup script try to load your modules for your usb mouse."),
-xfs => __("Starts and stops the X Font Server at boot time and shutdown."),
+usb => __("Load the drivers for your usb devices."),
+xfs => __("Starts the X Font Server (this is mandatory for XFree to run)."),
     );
     my ($name, $prefix) = @_;
     my $s = $services{$name};
