@@ -46,7 +46,23 @@ sub remove_simple_daemons {
 
 my $in = interactive->vnew;
 
-if (my @busy = remove_simple_daemons(busy_pids_and_files())) {
+my @busy = busy_pids_and_files();
+
+my @needed_processes = (
+			'init',
+			'xfs',
+			'kdeinit: Running...', 
+			'/etc/X11/X',
+			'/sbin/devfsd',
+			);
+
+if (find { member($_->{cmdline}, @needed_processes) } @busy) {
+    exec 'totem' if $in->ask_okcancel('', N("You can only run with no CDROM support"));
+    $in->exit(1);
+}
+
+@busy = remove_simple_daemons(@busy);
+if (@busy) {
     warn '*' x 80, "\n";
     warn join("\n", "$_->{exe} ($_->{cmdline}) =>", map { "  $_" } @{$_->{files}}) . "\n" foreach @busy;
     warn '*' x 80, "\n";
