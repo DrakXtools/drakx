@@ -105,6 +105,7 @@ sub partitionWizardSolutions {
 		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table_raw::description, \@ok_forloopback) or return;
 		$o->set_help('resizeFATWait');
 		my $w = $o->wait_message(_("Resizing"), _("Computing Windows filesystem bounds"));
+		require resize_fat::main;
 		my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 		$@ and die _("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", $@);
