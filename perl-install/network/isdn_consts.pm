@@ -133,14 +133,14 @@ package network::isdn; # $Id$
     io => '0x200',
     card => 'isa',
    },
-   {description => "ASUS COM ISDNLink (PCI)", #12
+   {description => "ASUS COM ISDNLink (PCI)",
     driver => 'hisax',
     type => '35',
     card => 'pci',
    },
-   {description => "DynaLink (PCI)", #12
+   {description => "DynaLink (PCI)",
     driver => 'hisax',
-    type => '12',
+    type => '36',
     card => 'pci',
    },
    {description => "HFC-2BS0 based cards (ISA)", #13 irq, io
