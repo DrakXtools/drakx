@@ -452,6 +452,7 @@ sub setPackages {
 			$supplmedium->{prefix} = $url; #- for install_urpmi
 			$supplmedium->{selected} = 1;
 			$supplmedium->{method} = $suppl_method;
+			$supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
 		    } else {
 			log::l("no suppl hdlist");
 		    }
@@ -775,11 +776,13 @@ sub install_urpmi {
 	    $qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
 
 	    #- compute correctly reference to media/media_info
-	    #- FIXME
 	    my $with;
 	    if ($_->{update}) {
 		#- an update medium always use "../base/hdlist.cz";
+		#- FIXME
 		$with = "../base/hdlist.cz";
+	    } elsif ($_->{with_hdlist}) {
+		$with = $_->{with_hdlist};
 	    } else {
 		$with = $_->{rpmsdir};
 		$with =~ s|/[^/]*%{ARCH}.*||;
