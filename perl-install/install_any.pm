@@ -651,7 +651,7 @@ sub setDefaultPackages {
     my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
     if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
         modules::append_to_modules_loaded_at_startup($_, 'i8k') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
-        push @{$o->{default_packages}}, "i8kutils"
+        push @{$o->{default_packages}}, "i8kutils";
     }
     if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
         modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
