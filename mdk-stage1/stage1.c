@@ -47,6 +47,7 @@ _syscall2(int,pivot_root,const char *,new_root,const char *,put_old)
 #include "tools.h"
 #include "automatic.h"
 #include "mount.h"
+#include "lomount.h"
 #include "insmod.h"
 
 #ifdef ENABLE_PCMCIA
@@ -405,10 +406,7 @@ int mandrake_move_post(void)
                         log_message("move: panic, " IMAGE_LOCATION "/move/symlinks isn't here but " IMAGE_LOCATION "/live_tree.clp neither");
                         return RETURN_ERROR;
                 } else {
-                        my_insmod("cloop", ANY_DRIVER_TYPE, "file=" IMAGE_LOCATION "/live_tree.clp");
-                        if (scall(mknod("/dev/cloop0", S_IFBLK | 0600, makedev(240, 0)), "mknod"))
-                                return RETURN_ERROR;
-                        if (my_mount("/dev/cloop0", IMAGE_LOCATION_REAL, "iso9660", 0))
+                        if (lomount(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION_REAL, 1))
                                 stg1_error_message("Could not mount compressed loopback :(.");
                 }
         }

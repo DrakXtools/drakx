@@ -112,11 +112,17 @@ STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 endif
 endif
 
+ifdef MOVE
+MOVE_ADDSRC = lomount.c
+else
+MOVE_ADDSRC =
+endif
+
  #- stage1 itself
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c lomount.c
-NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c
+NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c $(MOVE_ADDSRC)
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
 

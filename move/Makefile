@@ -21,7 +21,7 @@ endif
 all: install
 
 build: xwait
-	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" make init stage1-network stage1-cdrom init-move
+	cd $(STAGE1) && ADDITIONAL_DEFS="-DMANDRAKE_MOVE" MOVE=1 make init stage1-network stage1-cdrom init-move
 
 install: build
 	while [ -e $(DEST_LIVETREE)/lock ]; do echo -e "\t*** sleeping because of lock... ***\n"; sleep 1; done
