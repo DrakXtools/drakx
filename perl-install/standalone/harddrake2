@@ -317,6 +317,7 @@ $w->{rwindow}->show_all;
 undef $wait;
 gtkset_mousecursor_normal();
 $_->hide foreach $module_cfg_button, $config_button; # hide buttons while no device
+$SIG{CHLD} = 'IGNORE';
 $w->main;
 
 
