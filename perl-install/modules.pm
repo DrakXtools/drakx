@@ -249,6 +249,11 @@ sub write_conf {
     my @l = ();
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if grep { $_->{driver} eq 'bttv' } detect_devices::probeall();
+    append_to_etc_modules($prefix, @l);
+}
+
+sub append_to_etc_modules {
+    my ($prefix, @l) = @_;
     my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
     log::l("to put in modules ", join(", ", @l));
 
