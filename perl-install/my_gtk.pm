@@ -13,7 +13,10 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
-use ugtk qw(:all);
+use ugtk qw(:helpers :wrappers :various);
+use common;
+use log;
+
 
 my $forgetTime = 1000; #- in milli-seconds
 $border = 5;

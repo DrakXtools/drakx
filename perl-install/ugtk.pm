@@ -535,7 +535,7 @@ sub gtkicons_labels_widget {
 					$darea->draw(undef);
 					$imlib_counter = 0;
 					$imlib_counter_add = 1;
-					$use_imlib and $imlib_timeout = Gtk->timeout_add(100, sub { $dbl_area = undef; $darea->draw(undef); 1; });
+					$use_imlib and $imlib_timeout = Gtk->timeout_add(100, sub { $dbl_area = undef; $darea->draw(undef); 1 });
 				    }
 				});
 	$darea->signal_connect(leave_notify_event => sub {
@@ -731,8 +731,8 @@ sub gtkset_default_fontset {
 
 sub gtkcreate_imlib {
     my ($f) = shift;
-    $f =~ m|.png$| or $f="$f.png";
-    if ( $f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    $f =~ m|.png$| or $f = "$f.png";
+    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     Gtk::Gdk::ImlibImage->load_image($f);
 }
 
@@ -749,8 +749,8 @@ sub gtkcreate_xpm {
 
 sub gtkcreate_png {
     my ($f) = shift;
-    $f =~ m|.png$| or $f="$f.png";
-    if ($f !~ /\//) { -e "$_/$f" and $f="$_/$f", last foreach icon_paths() }
+    $f =~ m|.png$| or $f = "$f.png";
+    if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     if ($use_pixbuf) {
 	print " - ugtk - INFO : rendering using gdkpixbuff\n";
 	my $pixbuf = Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
