@@ -535,8 +535,10 @@ No bootloader is able to handle this without a /boot partition.
 Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
     die \N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($hd);
+    cdie \N("This directory should remain within the root filesystem")
+      if member($mntpoint, qw(/root));
     die \N("This directory should remain within the root filesystem")
-      if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root /mnt));
+      if member($mntpoint, qw(/bin /dev /etc /lib /sbin /mnt));
     die \N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
     die \N("You can't use an encrypted file system for mount point %s", $mntpoint)
