@@ -70,7 +70,7 @@ for (1..2) {
     print "Unable to detect partition on disk, trying with new label\n";
     system "parted", "/dev/$hd", "mklabel", "msdos";
 }
-my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (1700, 2700, 4000, 200, 128);
+my ($min_size, $def_size, $trigger_size, $inst_size, $swap_size) = (2100, 2700, 4000, 200, 128);
 $hd_size > $min_size or die "hard disk is too small to contain oem install (${hd_size}MB found, need $min_size at least)";
 
 my ($fat_pos, $resize_fat_size, $root_size);
@@ -179,7 +179,7 @@ if (defined $resize_fat_size) {
     print F "timeout 0\n\n";
     print F "title oem\n";
 }
-print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner oem\n";
+print F "kernel (hd0,$instz)/boot/vmlinuz ramdisk_size=32000 automatic=method:disk,disk:$hd,partition:$hd$inst,directory:/ hd vga=788 fbeginner flang=$flang oem\n";
 print F "initrd (hd0,$instz)/boot/hd.rdz\n";
 #- if a windows partition is available, add an entrie for it.
 if (defined $resize_fat_size) {
@@ -390,11 +390,22 @@ sub getFile { open FILE, "/cdrom/$_[0]" or return; \*FILE }
 
 package pkgs;
 sub formatXiB { $_[0] } #- NOP
+sub packageName { ::chop_version($_[0]{name}) }
 sub packageSize { $_[0]{size} }
+sub packageDepsId { @{$_[0]{deps}} }
 sub packageRate { $_[0]{values}[0] }
+sub packageRateRFlags { @{$_[0]{values}} }
+sub packageSetRateRFlags {
+    my ($pkg, @rate_rflags) = @_;
+    $pkg->{values} = [ @rate_rflags ];
+}
 sub packageByName {
     my ($packages, $name) = @_;
     $packages->{names}{$name};
+}
+sub packageById {
+    my ($packages, $id) = @_;
+    $packages->{depslist}[$id];
 }
 sub selectedSize {
     my ($packages) = @_;
@@ -479,7 +490,7 @@ sub read_rpmsrate {
 	    }
 	    my $ok = 0;
 	    $flag = join('||', grep { 
-		if (my ($inv, $p) = /^(!)?PCI"(.*)"/) {
+		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
 		    ($inv xor detect_devices::matching_desc($p)) and $ok = 1;
 		    0;
 		} else {
@@ -496,8 +507,9 @@ sub read_rpmsrate {
 	    foreach (split ' ', $data) {
 		if ($packages) {
 		    my $p = packageByName($packages, $_) or next;
-		    #		    $p->[$VALUES] = join("\t", $rate, grep { !/^\d$/ } @m);
-		    $p->{values} = [ $rate, grep { !/^\d$/ } @m] ; #- LOCALLY MODIFIED FOR OEM
+		    
+		    my @m2 = map { packageName(packageById($packages, $_)) =~ /locales-(.*)/ ? qq(LOCALES"$1") : () } packageDepsId($p);
+		    packageSetRateRFlags($p, $rate, (grep { !/^\d$/ } @m), @m2);
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
 		}
@@ -544,7 +556,7 @@ sub setSelectedFromCompssList {
 #    foreach my $p (sort { substr($a,0,1) <=> substr($b,0,1) } values %{$packages->{names}}) {
     foreach my $p (sort { $b->{values}[0] <=> $a->{values}[0] } @{$packages->{depslist}}) { #- LOCALLY MODIFIED FOR OEM
 #	my ($rate, @flags) = split "\t", $p->[$VALUES];
-	my ($rate, @flags) = @{$p->{values}}; #- LOCALLY MODIFIED FOR OEM
+	my ($rate, @flags) = packageRateRFlags($p);
 	next if !$rate || $rate < $min_level || grep { !grep { /^!(.*)/ ? !$compssUsersChoice->{$1} : $compssUsersChoice->{$_} } split('\|\|') } @flags;
 
 	#- determine the packages that will be selected when
