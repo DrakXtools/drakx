@@ -373,16 +373,17 @@ sub psUpdateHdlistsDeps {
 	    install_any::getAndSaveFile("media/media_info/$_->{hdlist}", $hdlistf) or die "no $_->{hdlist} found";
 	    symlinkf $hdlistf, "/tmp/$_->{hdlist}";
 	    ++$need_copy;
+	    chown 0, 0, $hdlistf;
 	}
 	if (-s $synthesisf != $_->{synthesis_hdlist_size}) {
 	    install_any::getAndSaveFile("media/media_info/synthesis.$_->{hdlist}", $synthesisf);
-	    -s $synthesisf > 0 or unlink $synthesisf;
+	    if (-s $synthesisf > 0) { chown 0, 0, $synthesisf } else { unlink $synthesisf }
 	}
     }
 
     if ($need_copy) {
 	#- this is necessary for urpmi.
-	install_any::getAndSaveFile("media/media_info/$_", "$urpmidir/$_") foreach qw(rpmsrate);
+	install_any::getAndSaveFile("media/media_info/$_", "$urpmidir/$_") && chown 0, 0, "$urpmidir/$_" foreach qw(rpmsrate);
     }
 }
 
@@ -475,6 +476,8 @@ sub psUsingHdlist {
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
     }
+
+    chown 0, 0, $newf, $newsf;
 
     #- get all keys corresponding in the right pubkey file,
     #- they will be added in rpmdb later if not found.
