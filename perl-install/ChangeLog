@@ -1,3 +1,33 @@
+2001/01/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/Makefile, mdk-stage1/disk.c: 
+	  - add DISK install from ISO image file
+	  - add FTP
+	  - add HTTP
+	  - use single place for mountpoints and static directories
+
+	* mdk-stage1/hack, mdk-stage1/lomount.c, mdk-stage1/lomount.h: 
+	  - add DISK install from ISO image file
+
+	* mdk-stage1/stage1.c, mdk-stage1/config-stage1.h, mdk-stage1/stage1.h,
+	mdk-stage1/tools.c, mdk-stage1/stdio-frontend.c, mdk-stage1/cdrom.c,
+	mdk-stage1/tools.h, mdk-stage1/newt-frontend.c, mdk-stage1/network.c: 
+	  - add FTP
+	  - add HTTP
+	  - use single place for mountpoints and static directories
+
+	* mdk-stage1/insmod-busybox/Config.h: tweak config
+
+2001/01/11  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/adduserdrake: adduserdrake may handles autologin
+
+	* install_steps.pm (addUser): set autologin
+
+	* install2.pm (addUser): moved setAuthentication to install_steps::addUser
+
+	* install_steps_interactive.pm (addUser): fix
+
 2001/01/11  dam's  <damien@mandrakesoft.com>
 
 	* install_steps.pm, install_steps_interactive.pm, ChangeLog,
