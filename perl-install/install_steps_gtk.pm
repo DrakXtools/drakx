@@ -431,17 +431,15 @@ sub installPackages {
     my $w = ugtk2->new(N("Installing"));
     $w->sync;
     my $text = Gtk2::Label->new;
-    my ($advertising, $change_time, $i, $show_release_notes);
+    my ($advertising, $change_time, $i);
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
 
-    my $release_notes_scroll = gtkset_size_request(create_scrolled_window(gtktext_insert(Gtk2::TextView->new, $o->{release_notes})), 
-						   -1, 280);
     my ($msg, $msg_time_remaining) = map { Gtk2::Label->new($_) } '', N("Estimating");
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
     $box->pack_end(gtkshow(gtkpack(Gtk2::VBox->new(0,5),
-			   $msg, $progress, $release_notes_scroll,
+			   $msg, $progress,
 			   create_packtable({},
 					    [N("Time remaining "), $msg_time_remaining],
 					   ),
@@ -449,32 +447,25 @@ sub installPackages {
 			   $progress_total,
 			   gtkadd(create_hbox(),
 				  my $cancel = Gtk2::Button->new(N("Cancel")),
-				  my $release_notes_button = Gtk2::Button->new(''),
 				  my $details = Gtk2::Button->new(''),
 				  ),
 			  )), 0, 1, 0);
-    $release_notes_button->hide if !$o->{release_notes};
     $details->hide if !@install_any::advertising_images;
-    $release_notes_scroll->hide; #- it is hidden by default
     $w->sync;
     $msg->set_label(N("Please wait, preparing installation..."));
-    foreach ($cancel, $release_notes_button, $details) {
+    foreach ($cancel, $details) {
 	gtkset_mousecursor_normal($_->window);
     }
     my $advertize = sub {
 	my ($update) = @_;
 	@install_any::advertising_images or return;
 	foreach ($msg, $progress, $text) {
-	    $show_advertising || $show_release_notes ? $_->hide : $_->show;
-	}
-	for ($release_notes_scroll) {
-	    $show_release_notes ? $_->show : $_->hide;
+	    $show_advertising ? $_->hide : $_->show;
 	}
 	$details->set_label($show_advertising ? N("Details") : N("No details"));
-	$release_notes_button->set_label($show_release_notes ? N("Hide Release Notes") : N("Release Notes"));
 
 	gtkdestroy($advertising) if $advertising;
-	if ($show_advertising && !$show_release_notes && $update) {
+	if ($show_advertising && $update) {
 	    $change_time = time();
 	    my $f = $install_any::advertising_images[$i++ % @install_any::advertising_images];
 	    log::l("advertising $f");
@@ -515,12 +506,6 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
     $details->signal_connect(clicked => sub {
 	invbool \$show_advertising;
-	$show_release_notes = 0 if !$show_advertising;
-	$advertize->(1);
-    });
-    $release_notes_button->signal_connect(clicked => sub {
-	invbool \$show_release_notes;
-	$show_advertising = 1 if $show_release_notes;
 	$advertize->(1);
     });
     $advertize->(0);
