@@ -8,6 +8,7 @@ use vars qw(@ISA);
 
 use interactive;
 use common;
+use mygtk2;
 use ugtk2 qw(:helpers :wrappers :create);
 use Gtk2::Gdk::Keysyms;
 
@@ -438,7 +439,7 @@ sub ask_fromW {
 	    $real_w = gtkpack_(Gtk2::HBox->new(0,10), 1, Gtk2::HBox->new(0,0), 0, $w, 1, Gtk2::HBox->new(0,0));
 	} elsif ($e->{type} eq 'bool') {
 	    if ($e->{image}) {
-		$w = gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
+		$w = ugtk2::gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
 	    } else {
 #-		warn "\"text\" member should have been used instead of \"label\" one at:\n", common::backtrace(), "\n" if $e->{label} && !$e->{text};
 		$w = Gtk2::CheckButton->new_with_label($e->{text});
@@ -668,7 +669,7 @@ sub ask_fromW {
     if ($buttons_pack) {
 	$pack->pack_end(gtkshow($buttons_pack), 0, 0, 0);
     }
-    gtkadd($mainw->{window}, $pack);
+    ugtk2::gtkadd($mainw->{window}, $pack);
     $set_advanced->($common->{advanced_state});
     
     my $widget_to_focus =
@@ -719,33 +720,33 @@ sub ask_from__add_modify_removeW {
     $o->ask_from($title, $message, $l, %callback);
 }
 
-sub wait_messageW($$$) {
-    my ($o, $title, $messages) = @_;
+sub wait_messageW {
+    my ($_o, $title, $messages) = @_;
 
     my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;
-    my $w = ugtk2->new($title, %$o, pop_it => !$::isInstall, grab => 1, if__($::main_window, transient => $::main_window));
-    gtkadd($w->{window}, my $hbox = Gtk2::HBox->new(0,0));
-    $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
-    $box->pack_start(shift @l, 0, 0, 4);
-    $box->pack_start($_, 1, 1, 4) foreach @l;
 
-    ($w->{wait_messageW} = $l[-1])->signal_connect(expose_event => sub { $w->{displayed} = 1; 0 });
-    $w->{rwindow}->set_position('center') if $::isStandalone && !$::isEmbedded && !$::isWizard;
-    $w->{window}->show_all;
-    $w->sync until $w->{displayed};
-    $w;
+    my $Window = gtknew('MagicWindow',
+			title => $title,
+			pop_it => !$::isInstall, 
+			modal => 1, 
+			if__($::main_window, transient_for => $::main_window),
+			child => gtknew('VBox', padding => 4, border_width => 10, children_loose => \@l));
+    $Window->{wait_messageW} = $l[-1];
+    mygtk2::sync($Window) if !$Window->{displayed};
+    $Window;
 }
 sub wait_message_nextW {
-    my ($_o, $messages, $w) = @_;
+    my ($_o, $messages, $Window) = @_;
     my $msg = warp_text(join "\n", @$messages);
-    return if $msg eq $w->{wait_messageW}->get_text; #- needed otherwise no expose_event :(
-    $w->{displayed} = 0;
-    $w->{wait_messageW}->set($msg);
-    $w->flush until $w->{displayed};
+    return if $msg eq $Window->{wait_messageW}->get_text; #- needed otherwise no expose_event :(
+    $Window->{displayed} = 0;
+    $Window->{wait_messageW}->set($msg);
+    mygtk2::sync($Window) if !$Window->{displayed};
 }
 sub wait_message_endW {
-    my ($_o, $w) = @_;
-    $w->destroy;
+    my ($_o, $Window) = @_;
+    mygtk2::may_destroy($Window);
+    mygtk2::flush();
 }
 
 sub kill {
