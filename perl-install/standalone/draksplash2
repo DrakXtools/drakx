@@ -330,7 +330,7 @@ $bmp_file_name .= '.bmp';
 
 if ($file ne $bmp_file_name || $magick->Get('colors') > 128) {
     warn "writing $bmp_file_name\n";
-    $err = $magick->Quantize(colors => 128, dither => 'False') and die $err;
+    $err = $magick->Quantize(colors => 128, dither => 'True', treedepth => 6) and die $err;
     $err = $magick->Write(filename => "bmp3:$bmp_file_name", compression => 'None') and die $err;
 }
 read_parameters("$bmp_file_name.parameters");
