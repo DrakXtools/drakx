@@ -7,13 +7,13 @@ my $mar = '../mdk-stage1/mar/mar';
 
 my %sanity_check = (
     hd => [ 
-	if_(arch() !~ /x86_64/, 'aic7xxx'),
-	qw(sym53c8xx initio), 
-	if_(arch() !~ /ppc/, 'advansys'),
+	qw(sym53c8xx),
+	if_(arch() !~ /x86_64/, 'initio'),
+	if_(arch() !~ /ppc|x86_64/, 'advansys'),
     ],
     network => [ 
 	qw(3c59x eepro100 tulip via-rhine ne2k-pci 8139too), 
-	if_(arch() !~ /ppc|x86_64/, 'e100'), 
+	if_(arch() !~ /ppc/, 'e100'), 
 	if_(arch() !~ /ppc|ia64/, 'tlan'),
     ],
 );

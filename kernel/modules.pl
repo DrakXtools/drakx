@@ -25,16 +25,24 @@ my %modules_only_for_all_img = (
     qw(3c501 3c503 3c505 3c507 3c515), # unused, hopefully?
     qw(eepro 82596 de620 depca ewrk3 cs89x0),
 
+    if_(arch() =~ /x86_64/, qw(orinoco_plx)), # don't support laptop for now
+    if_(arch() =~ /x86_64/, qw(hp100 epic100)), # old (nico)
     if_(arch() =~ /alpha|ppc/, qw(sb1000)),
     qw(iph5526),
 
     qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
   ],
 
+  'bus/pcmcia' => [
+    if_(arch() =~ /x86_64/, qw(pcmcia_core ds tcic yenta_socket)), # don't support laptop for now
+    if_(arch() =~ /x86_64/, qw(i82092 i82365)), # doco says "older laptops"
+  ],
+
   'disk/scsi' => [
     # ISA cards:
     qw(NCR53c406a aha152x psi240i qlogicfas qlogicfc wd7000 sim710 t128 ultrastor), '53c7,8xx',
     qw(qla2x00 in2000 pas16 a100u2w seagate g_NCR5380),
+    if_(arch() =~ /x86_64/, qw(53c7,8xx nsp32 initio advansys atp870u)), #- old
     qw(AM53C974), # deprecated by tmscsim
     qw(u14-34f), #- duplicate from ultrastor.o
     #- still used, keeping them: qw(aha1542 sym53c416),
@@ -45,6 +53,7 @@ my %modules_only_for_all_img = (
   ],
 
   'disk/hardware_raid' => [
+    if_(arch() =~ /x86_64/, qw(ataraid)), #- old
     qw(i2o_block qla2200 qla2300 cpqfc DAC960 gdth),
   ],
 );
@@ -92,6 +101,10 @@ my @modules_removed_from_stage1 = flatten_and_check(\%modules_removed_from_stage
 
 
 my %images = (
+    network_gigabit 
+            => 'fs/network network/raw network/gigabit',
+    network_usb 
+            => 'fs/network network/raw bus/usb network/usb',
     network_gigabit_usb 
             => 'fs/network network/raw bus/usb network/gigabit|usb',
     network => 'fs/network network/raw bus/pcmcia network/main',

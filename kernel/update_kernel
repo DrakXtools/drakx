@@ -3,6 +3,12 @@
 ALL_KERNELS="all.kernels"
 RPMS=/export/Mandrake/RPMS
 
+ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
+
+if [[ "$ARCH" = "x86_64" ]]; then
+  STRIP_MODULES="yes"
+fi
+
 # move stuff to this new "kernel" directory
 if [ ! -d all.kernels ]; then
   if [ -d ../all.kernels ]; then
@@ -33,11 +39,16 @@ function create_modules() {
 }
 
 function create_modules_mar() {
+    if [[ -n "$STRIP_MODULES" ]]; then
+	echo -n "stripping $kern: "
+	$GIBASEDIR/kernel/strip_modules *.o
+	echo "done"
+    fi
     echo -n "packdrake $kern: "
     ls *.o | packdrake -b9s "modules.cz" 400000
     echo "done"
     mv modules.cz ../modules.cz-$kern
-    for i in network network_gigabit_usb cdrom hd hdcdrom_usb pcmcia all; do
+    for i in network network_gigabit_usb network_gigabit network_usb cdrom hd hdcdrom_usb pcmcia all; do
 	modules_var="${i}_modules"
 	eval "create_marfile ${i}_modules.mar \$$modules_var"
     done
@@ -45,8 +56,6 @@ function create_modules_mar() {
 }
 
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
-
-ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
 
 if [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
 	rpm=$(rpm -qp --qf '%{name}' $RPMS/kernel-[0-9]*.rpm | perl -pe 's/kernel-((\.?[0-9]+){3})\.(.*)/$1-${3}/')

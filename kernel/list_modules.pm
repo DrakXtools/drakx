@@ -16,7 +16,7 @@ our %l = (
     main => [
       if_(arch() =~ /ppc/, qw(mace bmac gmac airport)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
-      if_(arch() !~ /alpha/ && arch() !~ /sparc/,
+      if_(arch() !~ /alpha|sparc/,
         qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x),
 	qw(82596 abyss ac3200 acenic aironet4500_card at1700 atp com20020-pci),
         qw(cs89x0 de600 de620),
@@ -74,7 +74,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2200 qla2300 ataraid hptraid silraid pdcraid),
+	qw(cpqfc qla2200 qla2300 ataraid hptraid silraid pdcraid pdc-ultra),
         qw(ips ppa imm),
       ),
     ],
@@ -105,7 +105,7 @@ our %l = (
     cdrom => [ qw(isofs) ],
     loopback => [ qw(isofs loop) ],
     local => [
-      if_(arch() =~ /^i.86/, qw(vfat fat)),
+      if_(arch() =~ /^i.86|x86_64/, qw(vfat fat)),
       if_(arch() =~ /^ppc/, qw(hfs)),
       qw(reiserfs),
     ],
@@ -149,6 +149,7 @@ our %l = (
       qw(busmouse msbusmouse logibusmouse serial qpmouse atixlmouse),
     ],
     char => [
+      if_(arch() =~ /ia64/, qw(efivars)),
       qw(amd768_rng applicom n_r3964 nvram pc110pad ppdev),
       qw(mxser moxa isicom wdt_pci epca synclink istallion sonypi i810-tco sx), #- what are these???
     ],
