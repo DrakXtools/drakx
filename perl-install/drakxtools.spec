@@ -54,6 +54,7 @@ Requires: %{name} = %version-%release
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
 Requires: %{name}-newt = %version-%release
+Requires: hwdb-clients
 Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 Prereq: rpm-helper
