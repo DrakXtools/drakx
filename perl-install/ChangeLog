@@ -1,3 +1,3408 @@
+2003/01/03  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm: fix call to method ask_from__add_modify_removeW
+
+	* mdk-stage1/minilibc.c: add symbols __libc_csu_fini and __libc_csu_init
+	to be compatible with new glibc (?)
+
+2003/01/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: titi's message annoys me too much.. removing it
+
+2003/01/02  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: replace any::load_category() with
+	modules::interactive::load_category()
+
+	* Xconfig/test.pm: X test is now working :)
+
+	* interactive.pm (ask_from__add_modify_remove): check all callbacks are
+	given
+	(ask_from__add_modify_remove): fix
+	add ask_from__add_modify_remove, and use it for bootloader entries
+
+	* any.pm: add ask_from__add_modify_remove, and use it for bootloader
+	entries
+
+2003/01/02  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: 
+	  - Layout widget has native scrolling support
+	  - shadow parameter can always be used
+
+	* standalone.pm: fixes for wizards
+
+	* drakxtools.spec: 9.1-0.6mdk
+	merge in back external stefan changes
+
+	* standalone/logdrake: embedding fixes
+
+2002/12/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/fi.po: updated Finnish file
+
+2002/12/29  Pixel  <pixel@mandrakesoft.com>
+
+	* network/ethernet.pm: move any::load_category() to
+	network::interactive::load_category()
+	(and a few other functions which are only used by load_category())
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	(and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+	* printer/gimp.pm: set_permissions() doesn't want the given file to be
+	$::prefix'ed
+
+	* network/network.pm, standalone/drakproxy: 
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	(and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+	* pkgs.pm: use "our" instead of "use vars"
+	*pkg::LOG is unused, so don't export it
+
+	* install_steps.pm: move any::runlevel() to Xconfig::various::runlevel()
+	  - move any::choose_security_level() to security::level::level_choose()
+	  - move any::config_security_user() to
+	security::various::config_security_user()
+	  - move any::config_libsafe() and security::libsafe::config_libsafe()
+	to security::various::config_libsafe()
+	no need to close *pkgs::LOG, pkgs handles it nicely now
+
+	* install_steps_interactive.pm: move any::keyboard_group_toggle_choose()
+	to keyboard::group_toggle_choose()
+	  - move any::choose_security_level() to security::level::level_choose()
+	  - move any::config_security_user() to
+	security::various::config_security_user()
+	  - move any::config_libsafe() and security::libsafe::config_libsafe()
+	to security::various::config_libsafe()
+	cleanup comments
+
+	* security/various.pm: deprecates security::libsafe
+
+	* security/level.pm, security/libsafe.pm, install2.pm: 
+	  - move any::choose_security_level() to security::level::level_choose()
+	  - move any::config_security_user() to
+	security::various::config_security_user()
+	  - move any::config_libsafe() and security::libsafe::config_libsafe()
+	to security::various::config_libsafe()
+
+	* network/modem.pm: in network::modem::configure $intf is unused, rename
+	it to $_intf
+	  - do not use a global $in in network::modem, pass it as a parameter
+	  - create network::modem::ppp_configure_raw() which doesn't need $in
+	(it is only used by network::modem::ppp_configure(), but this is clearer
+	that way)
+	  - use $::prefix instead the global $prefix
+	  - don't pass $prefix to ppp_configure
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	  (and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+	* Xconfig/various.pm, bootlook.pm, Xconfig/main.pm: move any::runlevel()
+	to Xconfig::various::runlevel()
+
+	* keyboard.pm, standalone/keyboarddrake: move
+	any::keyboard_group_toggle_choose() to keyboard::group_toggle_choose()
+
+	* network/netconnect.pm: 
+	  - do not use a global $in in network::modem, pass it as a parameter
+	  - create network::modem::ppp_configure_raw() which doesn't need $in
+	(it is only used by network::modem::ppp_configure(), but this is clearer
+	that way)
+
+	* standalone/drakconnect: any::load_category_no_message() doesn't exist
+	anymore, it really is modules::load_category() !
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	(and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+	* modules/interactive.pm: move any::load_category() to
+	network::interactive::load_category()
+	(and a few other functions which are only used by load_category())
+
+	* any.pm: cleanup (using ask_from instead of ask_from_listf_)
+	cleanup (using "format => ...")
+	move any::load_category() to network::interactive::load_category()
+	(and a few other functions which are only used by load_category())
+	move any::keyboard_group_toggle_choose() to
+	keyboard::group_toggle_choose()
+	move any::runlevel() to Xconfig::various::runlevel()
+	  - move any::choose_security_level() to security::level::level_choose()
+	  - move any::config_security_user() to
+	security::various::config_security_user()
+	  - move any::config_libsafe() and security::libsafe::config_libsafe()
+	to security::various::config_libsafe()
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	(and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+	* network/isdn.pm: 
+	  - do not use a global $in in network::modem, pass it as a parameter
+	  - create network::modem::ppp_configure_raw() which doesn't need $in
+	(it is only used by network::modem::ppp_configure(), but this is clearer
+	that way)
+	  - move any::pppConfig() to network::modem::ppp_configure()
+	  - move any::miscellaneousNetwork() to
+	network::network::proxy_configure()
+	  (and uses the parameter instead of $::o->{miscellaneous})
+	  - move network::network::miscellaneousNetwork() to
+	network::network::miscellaneous_choose()
+	  (and do not export it)
+	  (and uses a parameter instead of $::o->{miscellaneous})
+	  - move network::modem::pppConfig() to network::modem::ppp_choose()
+	  (and change parameter order, and drop unused parameter $intf)
+	  - do not export network::network::write_interface_conf()
+	  (since it is only used locally (?))
+	  - cleanup network::network::write_interface_conf()
+	  (one still needs to pass $::o->{miscellaneous}{track_network_id} more
+	  cleanly, and use run_program::rooted when calling /sbin/ip)
+
+2002/12/28  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone.pm: don't import everything from "common" (including
+	MDK::Common::*) to get rid of
+	warnings "Subroutine renamef redefined ..." "Subroutine linkf redefined
+	..."
+	... (but I don't understand how to make explainations on common_functs
+	work?!)
+
+	* printer/gimp.pm: 
+	  - mkdir_p throws an exception on error, so "mkdir_p() or ..." is dumb,
+	fixing
+	(thanks to Lea Gris)
+	  - use output()
+
+2002/12/24  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: Updated Portuguese file
+
+2002/12/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* lang.pm: CJK font names changes (still doesn't work :/)
+
+	* share/list: perl's automatic utf8 handling will need these files (will
+	try to do better in the future)
+
+	* install_steps_gtk.pm: fix 'bold' advertisements
+
+	* share/fonts.tar.bz2: use another default font
+	have a default fixed alias for a font which will always be here even in
+	ramdisk
+
+	* tools/make_mdkinst_stage2: fonts changes (doesn't work with CJK (at
+	least) in ramdisk, though)
+
+	* Xconfig/resolution_and_depth.pm: workaround gtk bug in
+	gtk_entry_set_text
+	fix titi porting gtk2 without testing enough..
+
+	* interactive/gtk.pm: be more efficient in precomputing, previous
+	situation could lead to several tens of seconds of wait in
+	XFdrake-monitor
+
+2002/12/23  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+2002/12/23  Pixel  <pixel@mandrakesoft.com>
+
+	* printer/printerdrake.pm: help perl_checker (interactive is used even if
+	the constructor is not there)
+
+	* Xconfig/resolution_and_depth.pm: fix setting size of depth combo
+
+2002/12/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* lang.pm: simplify since we don't use X11 fonts (we can't since
+	GDK_USE_XFT is not switchable once program is launched)
+
+	* mouse.pm: image in CVS is 3b+, not 3bp
+
+	* share/themes-mdk.rc: allow gtk2 theme engine to find pixmaps
+
+	* share/list, Makefile: list files changes for gtk2 (is that really
+	optimal to have utf8.pm and utf8_heavy.pl?)
+
+2002/12/20  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+	updated Portuguese file
+
+	* share/fonts.tar.bz2: updated fonts tarball, all old bitmap fonts have
+	been removed,
+	now it only includes:
+	  - an OpenType font with glyphs for latin and cyrillic
+	  - two unicode encoded bitmap fonts with glyphs for CJK and Greek
+	(and it could be used for non latin/cyrillic scripts for which there
+	  isn't any outline font available).
+	Those fonts are based on fonts shipped with XFree86 (Nimbus Sans L and
+	"misc-fixed"), but with some modifications (extra glyphs added to
+	complete the "holes" in latin and cyrillic for the outline font,
+	added a few missing chines chars and changed ascii portion from
+	monospaced
+	to varaible width for the bitmap fonts (so the visual output is
+	better)).
+	The choice of bitmap fonts for CJK has been done due to the very huge
+	size of CJK outline fonts.
+
+	* share/po/fi.po: updated Finnish file
+
+	* share/po/eo.po: Small change in Esperanto file
+
+2002/12/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: gtk+2 support for plug/socket is back since 2.1.5-2mdk
+
+2002/12/19  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/doc/README: meuh
+
+2002/12/19  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+	* share/po/ta.po: Converted Tamil file to utf-8
+
+2002/12/19  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: add "make test_pms_all"
+
+	* standalone/.perl_checker: use libDrakX from CVS (ie. ..) in perl_checker
+
+	* printer/cups.pm, printer/main.pm, printer/printerdrake.pm: 
+	  - printer::main::read_cups_printer_list() is now
+	printer::cups::read_printer_list() (but it is unused!)
+	  - printer::main::get_cups_remote_queues() is now
+	printer::cups::get_formatted_remote_queues()
+	  - cleanup printer::cups::get_remote_queues() using
+	printer::cups::lpstat_v()
+
+	* standalone/drakupdate_fstab: any::get_secure_level() doesn't exist
+	anymore, use security::level::get() instead (fix titi change)
+
+	* printer/gimp.pm: do not use "$1 !~ ..."
+
+2002/12/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: conflict with "non gtk+-2 aware" releases of mcc
+	9.1-0.4mdk
+
+2002/12/18  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm, .perl_checker, install_any.pm: new features including checking
+	unused functions, and checking methods being available
+
+	* install2.pm, partition_table.pm: enumerate the various required packages
+	when requiring a package dynamically known
+
+	* standalone.pm, Newt/Newt.pm: help perl_checker knowing packages are used
+	as classes
+
+	* diskdrake/interactive.pm, lvm.pm, fsedit.pm: add "new" to lvm.pm, and
+	use it
+
+	* .cvsignore: ignore .perl_checker.cache
+
+2002/12/18  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: XFdrake gtk+-2
+
+	* Xconfig/test.pm: fix
+	XFdrake gtk+-2
+
+	* standalone/drakperm: 
+	  - basic gtk+-2 port (edition is not ready yet)
+	  - perl_checker fixes
+
+	* ugtk2.pm: perl_checker fixes
+	disable embedded mode for now due to gtk+-2 bugs
+	fix wizards and draconnect:
+	it's the same code as in old my_gtk but i don't understand
+	how it could have worked...
+	yet the logic is quite simple : we add the "previous" button only if
+	we're not in the wizard's first page; but the "next/finish" button
+	must still be added, else the wizard is quite unusefull :-(
+
+	* standalone/harddrake2, harddrake/data.pm: saner default size (too big
+	for 800x600 sadly)
+
+	* standalone/drakconnect: refresh: remove current interfaces before
+	readding them, like it was
+	before
+	  - consolidate some code into new_dialog
+	  - simplify through MDK::Common
+	perl_checker fixes
+	  - gtk+-2 port is completed (switch from CList to TreeView)
+	  - gtk+-2 minor fixes (use new API rather than old one)
+	  - fix non wizard mode (add to frame not to window which is already
+	full)
+	  - wizard mode is fixed by previous ugtk2 fix
+	  - simplify through MDK::Common
+	fix drakconnect warnings
+
+2002/12/17  alus
+
+	* share/po/pl.po: updated
+
+2002/12/17  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* ugtk2.pm: 
+	  - export gtkappend_page
+	  - add gtkappend_page function (for gui building wizard)
+
+2002/12/16  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+2002/12/16  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/card.pm: fix english typo (thanks to J. Grant)
+
+	* mouse.pm: really drop update_type_name
+
+	* fsedit.pm: really drop check()
+
+	* standalone/drakautoinst: use ->method syntax for method call
+
+2002/12/16  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: build automatically the font description if needed
+	fix string_size() usage in get_text_coord()
+
+2002/12/14  Pixel  <pixel@mandrakesoft.com>
+
+	* network/netconnect.pm: do not export start_internet and stop_internet
+	(was broken since network::netconnect do not inheritate from Exporter)
+
+2002/12/13  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_messages.pm: must return a true value
+
+	* interactive/gtk.pm: expand_row no longer bugs, great :)
+
+	* c/stuff.xs.pl: iconv_ is needed all the times, not only in drakx
+
+2002/12/13  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (kdeicons_postinstall): drop (unused)
+
+	* detect_devices.pm: drop hasUltra66 (unused)
+
+	* any.pm, bootloader.pm: drop loadlin handling
+
+	* network/network.pm, ugtk.pm, my_gtk.pm, printer/data.pm,
+	partition_table.pm, ugtk2.pm: remove exported names which are not
+	defined
+
+	* printer/main.pm: commit the real code, not the debug code :-(
+	put back the comment
+	(read_cups_printer_list, get_cups_remote_queues): much cleanup
+
+	* fsedit.pm (check): drop it (unused, maybe you should use
+	diskdrake::interactive::check instead)
+
+	* services.pm: use wrap_text (instead of handcoding it)
+
+	* Xconfig/various.pm (show_info): drop (unused)
+
+	* timezone.pm (sexProb): drop (unused!)
+
+	* standalone/drakbackup: replace "%" with "%%" in translated string
+
+	* mouse.pm (update_type_name): drop (unused (?))
+
+	* bootlook.pm: drop unused function
+
+	* fs.pm (add_options): drop (unused, use mount_options_unpack +
+	mount_options_pack instead)
+	(mount_all): drop (unused, use formatMount_all instead)
+
+2002/12/13  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Makefile.drakxtools, Makefile: fix installation after pixel changes
+
+	* drakxtools.spec: fix {build,}requires for gtk+2
+
+	* ugtk.pm: remove uneeded variables
+
+	* standalone.pm: remove double
+	move draksec's gui into the standalone program,
+	nobody will uses it so it's useless to load drakx with it.
+	also use common cli options managment
+
+	* standalone/harddrake2: perl_checker fixes
+
+	* security/main.pm, standalone/draksec: move draksec's gui into the
+	standalone program,
+	nobody will uses it so it's useless to load drakx with it.
+	also use common cli options managment
+
+2002/12/12  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po, share/po/he.po: Added a starting Hebrew file; updated
+	Portguese file
+
+2002/12/12  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: remove unused variable $clicked
+	remove some $::expert
+	remove beginner/expert choice
+
+	* install_steps_gtk.pm: remove beginner/expert choice
+
+	* ugtk.pm: unused variables renamed with a leading underscore (some code
+	should be removed?)
+
+	* diskdrake/hd_gtk.pm: when clicking on one of the legend buttons together
+	with an existing partition
+	selected, it doesn't change the partition type, it tells to use "Type"
+	(it used to be ignored in non-expert, and do a change type in expert)
+
+	* install2.pm: drop options "fexpert" and "fbeginner" which used to skip
+	the choice expert/beginner
+
+2002/12/12  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: simplify
+	add gtkmodify_font() and gtkset_property()
+
+	* standalone/harddrake2: better english
+	don't confuse people by altering sentences that could have been
+	interpreted as questions
+	  - s/::/:/ on cpu info
+	  - print field names in bold blue rather than just blue
+
+2002/12/11  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/pt.po: updated Portuguese and Chinese files
+
+2002/12/11  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk2.pm: reuse already consolided code
+	reuse already consolided code
+	add set_back_pixbuf() to let a widget paint itself a pixbuf in its
+	background rather that doing this ourselves in rpmdrake or mcc
+
+2002/12/10  Pixel  <pixel@mandrakesoft.com>
+
+	* share/po/Makefile, share/po/fake_c.pl: use "perl_checker --generate-pot"
+	instead of fake_c + xgettext
+
+	* Xconfig/test.pm: do not duplicate "An error occurred ..." t10n string
+
+	* any.pm, bootloader.pm: perl_checker --generate-pot is a bit picky about
+	the localisation of "#-PO:" comments
+
+	* install_steps_interactive.pm: fix % in translated string (it must be %%)
+
+	* standalone/drakbug, standalone/logdrake, standalone/drakfloppy,
+	standalone/drakTermServ, standalone/drakautoinst, standalone/drakbackup,
+	standalone/drakconnect, standalone/drakxtv: minimal perl_checker fixes
+	to have only warnings
+
+	* Makefile.config: service_harddrake.sh is not a PM, so i remove it from
+	STANDALONEPMS_
+	live_install is a shell script, do not pretend it's perl ;p
+
+2002/12/10  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* network/netconnect.pm, network/tools.pm, network/isdn.pm,
+	standalone/drakTermServ, standalone/drakxtv: perl_checker fixes
+
+	* standalone/harddrake2: no gratuitously tab
+
+	* standalone/draksplash: 
+	  - gtk+2 port
+	  - "use strict" fixes
+	  - perl_checker fixes
+
+	* standalone/drakconnect: perl_checker fixes
+	fix gtk+2 port
+
+2002/12/09  adesmons
+
+	* network/netconnect.pm: make perl_checker happy
+	drakconnect conf file no more uploaded with now useless variable
+
+	* network/adsl.pm: drakconnect conf file no more uploaded with now useless
+	variable
+
+2002/12/09  Pixel  <pixel@mandrakesoft.com>
+
+	* share/themes-blackwhite.rc, share/themes.rc, share/themes-savane.rc:
+	remove already obsolete themes
+
+	* my_gtk.pm, ugtk2.pm: remove dynamic theme choosing, and next/previous
+	(F11/F12) handling
+	remove code handling setstep
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm, install_interactive.pm: 
+	  - handle more locally "Reload partition table" (esp. without using
+	setstep)
+	=> no exception is called through gtk
+
+	* interactive/newt.pm, install2.pm: remove code handling setstep
+
+	* install_steps_gtk.pm, install_messages.pm, install_steps_interactive.pm:
+	move long messages (like license) to a new package: install_messages.pm
+
+	* install_gtk.pm: remove unused variable ($step_name)
+	remove code handling setstep
+
+	* any.pm: remove old code
+
+2002/12/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* network/isdn.pm: remove unused modules
+
+2002/12/08  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+2002/12/07  alus
+
+	* share/po/pl.po: update
+	update
+
+2002/12/07  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sq.po: Added Albanian file
+
+2002/12/06  adesmons
+
+	* network/netconnect.pm, network/tools.pm, network/modem.pm,
+	network/isdn.pm, network/adsl.pm: isdn data are now fetched form system
+	instead of drakconnect conf file
+
+2002/12/06  alus
+
+	* share/po/pl.po: removed unuset texts
+
+2002/12/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: don't use unless
+
+	* c/stuff.xs.pl: add bind_textdomain_codeset, iconv the dgettext results
+	to UTF8 since perl seems to mess with that when trying to do so from
+	within gtk2-perl (with sv_utf8_upgrade)
+
+	* install_gtk.pm: better style
+
+	* interactive/gtk.pm: 2.1.3 doesn't have trouble with expand_to_path
+
+	* lang.pm: perl checker OwnZ Da W3rld
+	misc
+
+	* bootlook.pm: perl_checker help'ed fix
+	s/Gtk->/Gtk2->/
+
+2002/12/06  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po, share/po/vi.po: updated po file
+
+2002/12/06  Pixel  <pixel@mandrakesoft.com>
+
+	* network/isdn.pm, standalone/XFdrake: be more perl_checker compliant
+
+2002/12/05  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_gtk.pm: fix syntax & style
+
+	* lang.pm: try to fix charset2pango_font
+	fix syntax & style
+	add bind_textdomain_codeset
+
+	* ugtk2.pm: remove unused $_lan
+
+2002/12/05  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* standalone/harddrake2, share/po/DrakX.pot, standalone/net_monitor: Fixed
+	some typos or bad English
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/Makefile,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/nl.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/lv.po, share/po/cs.po,
+	share/po/bg.po, share/po/el.po, share/po/hu.po: updated po files
+
+	* install_gtk.pm: two pango font names, for 10 and 12 sizes
+	made some functions to retrieve pango font namese from lang/charset
+
+	* share/gen_locales.sh, share/locales-skeleton.tar.bz2: Changed the way
+	locale->encoding is handled; revert to the old way which was
+	working.
+	And changed the charset to use during install to UTF-8 for all but CJK
+	locales,
+	in the X11 locale config files and in lang.pm;
+	So, the same values of LC_* variables are used as before; but they
+	should
+	point, in glibc and in X11, to UTF-8 locales now
+
+	* lang.pm: made some functions to retrieve pango font namese from
+	lang/charset
+	Changed the way locale->encoding is handled; revert to the old way which
+	was
+	working.
+	And changed the charset to use during install to UTF-8 for all but CJK
+	locales,
+	in the X11 locale config files and in lang.pm;
+	So, the same values of LC_* variables are used as before; but they
+	should
+	point, in glibc and in X11, to UTF-8 locales now
+
+2002/12/05  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: parameter passing using $_ is bad
+
+	* any.pm: format => sub { ...}  doesn't pass parameter as $_, but as $_[0]
+
+	* printer/main.pm: $_ was not localized, fixing (and cleanup)
+
+	* bootlook.pm: fix typo, be perl_checker compatible
+	packages should not "use lib qw(/usr/lib/libDrakX)"
+
+	* partition_table.pm: replace "map $_->{normal}, @l" with "map {
+	$_->{normal} } @l"
+	(the other form is perl_checker-deprecated)
+
+	* standalone.pm: remove unused variables or rename them with an underscore
+	(eg: $o becomes $_o)
+
+2002/12/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/mousedrake: gtk+2 port (how difficult it was ...)
+
+	* network/netconnect.pm: gtk+-2 port
+
+	* c/Makefile.PL: glib-config is obsolete now
+	gtk+-2 port
+
+	* modules/interactive.pm: bug fix
+
+	* standalone/drakTermServ, standalone/drakconnect: use gtkflush()
+
+	* drakxtools.spec: pre gtk+2 work snapshot for mcc (mandrake_release() and
+	the like
+
+	* standalone/drakgw: gtk+2 fixes
+
+	* bootlook.pm: use gtkflush()
+	start gtk+2 port; perl-gtk2 is expected to implement
+	Gtk::Image->set_from_pixbuf()
+
+	* standalone/drakautoinst: use gtkflush()
+	gtk+2 port
+
+	* standalone/harddrake2: s/describe/describes/
+
+	* standalone/drakfont: fix gtk+-2 port
+	don't use anymore deprecated widgets
+
+	* services.pm: drakxservices' gtk+-2 port
+
+	* standalone/logdrake: fix gtk+2 port
+
+2002/12/04  adesmons
+
+	* network/netconnect.pm, network/tools.pm, network/network.pm,
+	network/modem.pm: More data are now fetched from system instead of
+	drakconnect conf file
+
+2002/12/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/locales-skeleton.tar.bz2: added recognition of locale named
+	"en_US.UTF-8"
+
+	* lang.pm: made 'en_US.UTF-8' the default locale for LC_* varaibles during
+	isntall
+
+	* share/fonts.tar.bz2: Put Nimbus Sans L as default font
+	put back the default iso8859-15 fonts used by install.rc
+
+	* install_gtk.pm: put "Nimbus Sans L" as used font
+	try of Gtk2 font definitions
+
+2002/12/04  Pixel  <pixel@mandrakesoft.com>
+
+	* network/adsl.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	syntax changes to make perl_checker happy
+
+	* install_steps.pm: remove unused code (installCrypto)
+	remove unused variables or rename them with an underscore (eg: $o
+	becomes $_o)
+	do not use "local *F"
+
+	* install_steps_interactive.pm, install2.pm: remove unused code
+	(installCrypto)
+	remove unused variables or rename them with an underscore (eg: $o
+	becomes $_o)
+
+	* interactive.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	"require log" causes some pb, perl thinking that "log" is the log()
+	function. So replace it with require 'log.pm' (perl_checker will handle
+	this)
+
+	* fsedit.pm: remove unused variables or rename them with an underscore
+	(eg: $o becomes $_o)
+	use if_() where possible (as reported by perl_checker)
+	don't use "local *F"
+
+	* interactive/stdio.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	fix typo
+
+	* crypto.pm: use if_() where possible (as reported by perl_checker)
+
+	* my_gtk.pm, ugtk.pm, printer/printerdrake.pm, ugtk2.pm,
+	install_steps_gtk.pm, printer/main.pm, fs.pm, bootloader.pm: remove
+	unused variables or rename them with an underscore (eg: $o becomes $_o)
+	use if_() where possible (as reported by perl_checker)
+
+	* scanner.pm: remove unused variables or rename them with an underscore
+	(eg: $o becomes $_o)
+	$prefix is no good, replace it with $::prefix
+
+	* partition_table/dos.pm, partition_table/sun.pm, partition_table/bsd.pm,
+	partition_table/empty.pm, keyboard.pm, partition_table/lvm_PV.pm: do not
+	use "local *F"
+
+	* printer/office.pm, Xconfig/parse.pm, network/smb.pm, mouse.pm,
+	resize_fat/io.pm, Xconfig/xfree4.pm, network/drakfirewall.pm,
+	Xconfig/main.pm, diskdrake/smbnfs_gtk.pm, partition_table.pm,
+	printer/common.pm, diskdrake/interactive.pm, pkgs.pm,
+	install_steps_auto_install.pm, diskdrake/hd_gtk.pm, Xconfig/monitor.pm,
+	install_any.pm, diskdrake/removable.pm, network/isdn.pm, swap.pm,
+	resize_fat/directory.pm, devices.pm, commands.pm,
+	install_interactive.pm, printer/gimp.pm, any.pm, interactive/http.pm,
+	printer/detect.pm, ftp.pm, services.pm, interactive/newt.pm,
+	resize_fat/dir_entry.pm, network/ethernet.pm,
+	Xconfig/resolution_and_depth.pm, Xconfig/test.pm, diskdrake/dav.pm,
+	network/smbnfs.pm, interactive/gtk.pm, network/nfs.pm: remove unused
+	variables or rename them with an underscore (eg: $o becomes $_o)
+
+	* standalone.pm: no need to "require common", it is "use"d
+	"require log" causes some pb, perl thinking that "log" is the log()
+	function. So replace it with require 'log.pm' (perl_checker will handle
+	this)
+
+	* network/tools.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	my' variables as needed
+
+	* security/main.pm, network/modem.pm: remove unused variables or rename
+	them with an underscore (eg: $o becomes $_o)
+	syntax changes to make perl_checker happy
+	syntax changes to make perl_checker happy
+
+	* network/network.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	syntax changes to make perl_checker happy
+	use if_() where possible (as reported by perl_checker)
+
+	* network/netconnect.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	  - %l is not used, so why declare it??
+	  - in network::netconnect::main(), declare @l as it should be. But the
+	code is really wrong, it NEEDS fixing (bis)
+	syntax changes to make perl_checker happy
+	use if_() where possible (as reported by perl_checker)
+	syntax changes to make perl_checker happy
+
+	* partition_table/mac.pm, modules.pm, partition_table/raw.pm, loopback.pm:
+	remove unused variables or rename them with an underscore (eg: $o
+	becomes $_o)
+	do not use "local *F"
+
+	* partition_table/gpt.pm: remove unused variables or rename them with an
+	underscore (eg: $o becomes $_o)
+	fix typo ($hd is not available in read_header(), so don't use it)
+	do not use "local *F"
+
+2002/12/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/harddrake2: 
+	  - free objects non freeed by gtk+ (the eternal gobject vs boxed types
+	debat)
+	  - remove dead code
+	  - use ->append_set() everywhere
+	  - strip again vendor name from displayed string (aka keep only the
+	  model description)
+	  - enfoce pixel style : remove () from method calls
+
+	* harddrake/data.pm: display "cpu #<XX>: <name>" for cpus
+
+	* harddrake/TODO: update
+
+2002/12/04  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: use option tty7 to force X server to be on tty7
+	(instead of opening tty5 and
+	tty6 so that the next available tty is tty7)
+
+2002/12/04  uid580
+
+	* harddrake/ui.pm: kill "used by only one" harddrake::ui module,
+	move its content to standalone/harddrake2
+	cleanups
+	hide config buttons when switching from a configurable device to a non
+	configurable one
+	fix gtktext_insert() usage
+	gtk+2 port, yeah baby :-)
+
+	* security/main.pm: share common options
+
+	* pkgs.pm: perl_checker
+
+	* standalone/harddrake2, harddrake/data.pm: kill "used by only one"
+	harddrake::ui module,
+	move its content to standalone/harddrake2
+
+	* standalone/drakxservices: strict mode
+
+	* ugtk2.pm: reverse
+	clean up
+
+	* security/msec.pm: 
+	  - fix obvious pixel typo (s/if/if_/)
+	  - no need to maintain dummy documentation about something which is
+	called only in one place
+	  - simplify
+
+2002/12/03  dam's  <dams@idm.fr>
+
+	* any.pm: allow #, and other characters in phone number
+
+2002/12/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: gcsux
+
+	* pkgs.pm, network/tools.pm: make it $::testing aware
+
+	* ugtk2.pm: misc fixes
+
+	* interactive/gtk.pm, diskdrake/hd_gtk.pm, install_steps_gtk.pm, mouse.pm,
+	services.pm, install_gtk.pm, diskdrake/smbnfs_gtk.pm: gtk2
+
+2002/12/03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po, share/po/ja.po, share/po/vi.po: updated Estonian and
+	Vietnamese files; fixed typo in Japanese file
+
+2002/12/03  Pixel  <pixel@mandrakesoft.com>
+
+	* raid.pm: use output()
+
+	* network/tools.pm: cleanup use of filehandles
+
+	* detect_devices.pm: do not use "local my $F, ...", use "local(my $F, ...)
+	instead
+	do not use "local *F", use run_program::get_stdout() or "local $F"
+	instead
+
+	* scanner.pm, install_any.pm, timezone.pm, partition_table.pm: do not use
+	"local *F", use "my $F" or output() instead
+
+	* install_steps.pm: do not use "local my $F, ...", use "local(my $F, ...)
+	instead
+
+	* network/network.pm (read_resolv_conf): simplify
+
+	* Xconfig/test.pm, devices.pm: do not use "local my $F, ...", use
+	"local(my $F, ...) instead
+	do not use "local *F"
+
+	* commands.pm: do not use "local my $F, ...", use "local(my $F, ...)
+	instead
+	remove pack_ and unpack_ (unused)
+
+	* security/msec.pm: fix typo
+	simplify (esp. use cat_)
+	(get_value): cleanup
+
+	* fs.pm: one need run_program::raw() to use options
+
+	* common.pm: do not use "local my $F, ...", use "local(my $F, ...) instead
+	(formatXiB): simplify
+	use "my $F" instead of "local *F" (and cleanup)
+
+	* network/nfs.pm (find_exports): use run_program::raw + stdout
+
+2002/12/03  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/logdrake, ugtk2.pm: add gtktext_append() and uses it
+
+2002/12/03  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* common.pm, c/stuff.xs.pl: workaround perl sprintf bug when some
+	parameters are utf8 and some not
+
+	* ugtk2.pm: titisux, revert the pango pixels stuff
+
+2002/12/03  uid551
+
+	* share/fonts.tar.bz2: First try of fonts for Xft2
+
+	* share/po/zh_CN.po, share/po/pt_BR.po: updated Brazilian and Chinese
+	files
+
+2002/12/02  adesmons
+
+	* network/netconnect.pm, network/network.pm, network/modem.pm,
+	standalone/drakconnect, network/adsl.pm: Some data are now fetched from
+	system instead of drakconnect conf file (adsl, ppp, ifcfg-eth)
+
+2002/12/02  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: updated
+	pot file
+
+2002/12/02  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/adduserdrake: remove commented code
+
+	* proxy.pm: this package is unused, no need to keep it
+
+	* install_steps.pm: use output_with_perm()
+	use $::prefix
+	any::runlevel() doesnt need the prefix anymore
+
+	* Xconfig/card.pm: don't use $_
+
+	* bootloader.pm: use output()
+
+	* fs.pm: formatting timeout is now 1 hour
+	remove the duplicate mke2fs (fixes buggy 1.225 change)
+	use append_to_file()
+
+	* install_steps_interactive.pm: any::get_autologin() doesnt modify $o, it
+	returns a hash
+	use $::prefix
+
+	* network/network.pm (add2hosts): use output and pixelization
+
+	* any.pm: use output_with_perm()
+	any::get_autologin() doesnt modify $o, it returns a hash
+	use $::prefix
+	(get_autologin): $o->{autologin} is set to the chosen user only if
+	AUTOLOGIN is set (it now mirrors what set_autologin() does)
+	any::runlevel() doesnt need the prefix anymore
+	use output and append_to_file
+
+	* common.pm (set_alternative): simplify
+	(files_exist): simplify
+
+	* Xconfig/main.pm: any::runlevel() doesnt need the prefix anymore
+
+	* Xconfig/various.pm: 
+	  - any::runlevel() doesnt need the prefix anymore
+	  - fix use of any:runlevel()
+
+	* printer/main.pm, printer/office.pm: simplify
+
+	* network/isdn.pm, network/netconnect.pm, mouse.pm, network/smb.pm,
+	network/tools.pm: use output_with_perm()
+
+	* Makefile: adapt "make test_pms" to new perl_checker
+
+	* bootlook.pm: 
+	  - use any::get_autologin and any::set_autologin
+	  - any::set_autologin doesn't set /etc/sysconfig/autologin to perm 600,
+	is it needed??
+	use any::runlevel()
+
+2002/12/02  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakbug: fix gtk2 port
+
+	* standalone/logdrake: make append option be usable as other ones
+	use named tags for color rather than rgbt triplet,
+	waiting for full foreground-gdk support in perl-gtk2
+	  - gtk2 port
+	  - add a note to remember to try gtkhtml instead of TextView
+	  - make wait message be transcient and modal (we should share some
+	create_*_dialog() around logdrake/mcc/drakfloppy/rpmdrake)
+	  - fixes for 'strict ref'
+
+	* security/main.pm, standalone/drakbackup, standalone/drakconnect: 
+	  - gtk2 port
+	  - perl_checker fixes
+
+	* standalone/drakgw: 
+	  - fix gtk2 port
+	  - let it work with kernel 2.5 too
+
+	* docs/porting-ugtk: add a tool to ease gtk2 port.
+	this is not the rule of thumb but basic stuff.
+
+	* standalone/drakTermServ, standalone/drakfont: 
+	  - gtk2 port
+	  - consolidate some code in text_view()
+	  - perl_checker fixes
+
+	* ugtk2.pm: make append option be usable as other ones
+	gtkfontinfo() is bugged since it uses a C macro which is
+	(oh surprise) not in binary library .... :
+	$fontinfo{$_} = Gtk2::Pango->PANGO_PIXELS($metrics->$func);
+	  - use useless when needed
+	  - gtktext_insert() : add an append argument to prevent overwriting
+	already present text in TextBuffer
+	  - gtkfontinfo() is bugged since it uses a C macro which is
+	  (oh surprise) not in binary library .... :
+	  $fontinfo{$_} = Gtk2::Pango->PANGO_PIXELS($metrics->$func);
+
+2002/11/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* raid.pm: testing aware
+
+	* any.pm: load_category__prompt: use formatAlaTeX
+
+2002/11/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po: Updated Estonian file
+
+	* share/po/pt.po: Updated Portuguese file
+
+2002/11/28  Pixel  <pixel@mandrakesoft.com>
+
+	* commands.pm: fix "ps" and "df" (were broken due to localization of *DF
+	and *PS)
+
+	* bootlook.pm, network/adsl.pm, printer/printerdrake.pm: perl_checker
+	adaptations
+	perl_checker adaptations
+
+	* resize_fat/c_rewritten.pm: to export, one needs to inheritate from
+	Exporter
+
+	* resize_fat/io.pm: perl_checker adaptations
+	remove debug code
+
+	* Makefile: fix removing of pods when installing pms
+
+	* printer/cups.pm, any.pm, install_steps_gtk.pm, printer/main.pm,
+	printer/detect.pm, printer/common.pm, network/network.pm, ftp.pm,
+	services.pm, ugtk.pm, network/isdn.pm, network/ethernet.pm,
+	resize_fat/fat.pm, install_steps_interactive.pm, network/netconnect.pm,
+	lang.pm, network/tools.pm, install_any.pm, printer/gimp.pm,
+	partition_table.pm, harddrake/ui.pm: perl_checker adaptations
+
+	* Xconfig/test.pm: in the test snippet, add "use common" to have access to
+	N()
+
+	* bootloader.pm: 
+	  - compare labels case insensitively (thanks to D.Faure)
+	  - when reading existing config, remove double quotes around the label
+	(thanks to D.Faure)
+	  - add double quotes around the label instead of removing spaces (need
+	checking installkernel compatibility)
+	perl_checker adaptations
+
+2002/11/28  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* services.pm: 
+	  - my_gtk->main already do the kill 'USR2'
+	and hardcoding signal number was bad anyway
+	  - use gtkflush()
+	  - my_gtk->main already do the kill 'USR2'
+	  and hardcoding signal number was bad anyway
+	  - use gtkflush()
+
+	* standalone/drakperm: one more fix
+	  - "use strict" fixes
+	  - perl_checker fixes
+
+	* standalone/drakgw: fix
+
+	* ugtk2.pm: perl_checker fixes
+	fix create_factory_menu*(): since we get an object and not anymore a
+	hash, let just return factory as another variable...
+
+2002/11/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: reflect calling style change of PANGO_PIXELS
+
+2002/11/27  Pixel  <pixel@mandrakesoft.com>
+
+	* printer/main.pm: perl_checker adaptations
+	(configure_hpoj): functions dynamically loaded from /usr/sbin/ptal-init
+	are
+	now loaded in printer::hpoj namespace (needs testing)
+
+	* .perl_checker: update for new packages (Gtk2), and remove the
+	now-handled-by-perl_check packages
+
+	* Xconfig/card.pm, bootlook.pm, network/network.pm, log.pm,
+	printer/office.pm, help.pm, scanner.pm, install_steps.pm,
+	Xconfig/parse.pm, install_gtk.pm, network/isdn.pm, interactive.pm,
+	my_gtk.pm, swap.pm, resize_fat/fat.pm, partition_table/gpt.pm,
+	Newt/Newt.pm, resize_fat/c_rewritten.pm, mouse.pm, resize_fat/io.pm,
+	standalone.pm, lang.pm, devices.pm, install2.pm, commands.pm,
+	install_interactive.pm, printer/gimp.pm, partition_table.pm,
+	Xconfig/xfree3.pm, any.pm, install_steps_gtk.pm, printer/detect.pm,
+	interactive/http.pm, diskdrake/interactive.pm, ftp.pm,
+	interactive/stdio.pm, interactive/newt.pm, harddrake/sound.pm, fs.pm,
+	ugtk.pm, network/ethernet.pm, Xconfig/resolution_and_depth.pm,
+	bootloader.pm, Xconfig/test.pm, harddrake/data.pm, Xconfig/monitor.pm,
+	network/adsl.pm, fsedit.pm, modules.pm, network/tools.pm,
+	network/isdn_consts.pm, install_any.pm, printer/printerdrake.pm,
+	timezone.pm, harddrake/ui.pm, c/stuff.pm: perl_checker adaptations
+
+2002/11/27  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakgw: 
+	  - Gtk2 port
+	  - perl_checker fixes
+
+	* standalone/drakbug: 
+	  - Gtk2 port
+	  - one perl_checker fix
+
+	* standalone/mousedrake: restore previous behaviour and exit early only in
+	cancel case
+	fix bad interaction between mcc & mousedrake.
+	interactive already take care of it through my_gtk...
+
+2002/11/26  gbeauchesne
+
+	* install_any.pm: Only all.img is currently used on x86-64, ia64 and ppc.
+	Therefore, don't
+	complain nor try to stat some cdrom.img on first CD.
+
+2002/11/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* unused/demo-frozen-bubble.patch: forgot to commit it (.cvsignore
+	containing * doesn't help)
+
+	* ugtk2.pm: fix typo (gtkstring_size) thx to perl checker
+	fix shadow bug due to wrong extraction of allocation data
+	two small fixes
+	add
+
+	* Makefile: ugtk2.pm is temporarily not in drakxtools but in perl-GTK2
+
+2002/11/26  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* lang.pm: changed values for console font when en_US is chosen
+
+	* share/po/pt.po, share/po/pt_BR.po: Updated Portuguese files
+
+2002/11/26  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm, standalone.pm: no need to call common::backtrace(), use
+	directly backtrace() (was it written that way to workaround a bug in old
+	perl_checker?)
+
+	* ugtk2.pm: make perl_checker happy
+
+	* diskdrake/removable_gtk.pm: fix undeclared variable
+
+2002/11/26  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer/main.pm: simplify some stuff
+
+	* harddrake/data.pm: fix eating too much items
+
+	* modules.pm, printer/detect.pm, run_program.pm, services.pm: perl_checker
+	fixes
+
+	* printer/printerdrake.pm: miaouh
+	simplify
+
+2002/11/25  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: assume any hardware is found (forget to commit).
+
+	* rescue/tree/etc/oem-all: synced with latest change to HP version (and
+	now HP is in CVS).
+
+	* network/netconnect.pm: removed old code (commented out).
+
+	* diskdrake/interactive.pm: revert previous change useless (another
+	problem).
+	added a trailing true value for perl being happy.
+
+	* network/ethernet.pm: add support ADIModem.
+	removed reference to ...->{nb_cards} no more used.
+	removed 2 labels and 2 gotos by a very simple while, dam's is really
+	great
+	sometimes ;-)
+
+	* network/adsl.pm: add support for Sagem USB Modem (for free.fr ;-))
+
+	* network/network.pm: added is_domain_name that checks validity of a
+	domain name.
+
+	* detect_devices.pm: add getSagem() to detect Sagem USB ADSL Modem.
+
+	* install_any.pm: fixes perl-checker importation of bug, getFile is
+	complex for perl newbies, do
+	not rely on perl-checker for trying to "fix" it else it won't run
+	anymore ;-)
+	make it work (changed *F => *GETFILE and added a return) else perl has
+	some
+	problem using it as reference to file handle.
+
+	* mdk-stage1/dietlibc/include/sys/mount.h: fixes for new kernel headers
+	(It should problably be kernel-headers to be
+	modified but it is *much* faster to modify yoyotte's works).
+
+2002/11/25  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: fix typo (openInstallLog *must* return the filehandle)
+	don't use filehandle *pkgs::LOG, use a my'ed $LOG
+	since we use the "fileno", perl doesn't know we're still using the
+	filehandle, and so closes it, and :-(
+
+	* network/netconnect.pm: in network::netconnect::main(), declare @l as it
+	should be. But the code is really wrong, it NEEDS fixing
+	$modem is redefined 2 lines below its first declaration. this first
+	declaration is useless (??)
+
+	* standalone/diskdrake: oops, didn't see titi modified option handling
+	fix handling of options --expert and --testing
+
+	* install_any.pm: use a scalar instead of a typeglob (let typeglobs be
+	deprecated!)
+
+	* lang.pm: fix handling of "all" languages selected
+
+	* network/isdn.pm: since $mouse is undefined, replace it with undef (??)
+
+	* diskdrake/interactive.pm: make perl_checker happy
+
+	* network/tools.pm: 
+	  - $up was my-ed inside the if-then block though it was used outside
+	the block (hint: buggy code)
+	  - my @country as it should be
+
+2002/11/25  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone.pm: 
+	  - simplify --embedded handling
+	  - stricter matching on --no-autoc
+
+	* ugtk.pm: 
+	  - simplify mcc stuff
+	  - prevent bad stacking of right icons in mcc at startup
+
+	* detect_devices.pm: remove dobles
+
+	* my_gtk.pm: warn about broken programs that misuse my_gtk
+	display in mcc when embedded only when ready to interact with the user
+
+	* harddrake/ui.pm: interactive->exit call my_gtk->exit which destroy the
+	window
+
+	* common.pm, standalone/drakbug, standalone/drakbug_report:
+	s/mdk_rel/mandrake_release/
+	consolidate some stuff from standalone tools & mcc into mdk_rel()
+
+2002/11/22  François Pons  <fpons@mandrakesoft.com>
+
+	* mouse.pm: incorporate 8.2 HP fixes back in cooker.
+
+2002/11/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakautoinst: use ask_warn when I should, and remove a one
+	year old debug statement (???)
+
+2002/11/21  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/net_monitor: switch latest tools that still manually handle
+	embedding
+	to use my_gtk
+	  - perl_checker fixes
+	  - use my_gtk to transparently handle embedding
+
+	* standalone/drakproxy: this one requires any
+
+	* standalone/drakbug: 
+	  - Gtk::Gdk::ImlibImage is not needed
+	  - perl_checker fixes
+	  - fix interactive exit (s/in/$in/ ->exit)
+
+	* standalone/drakfont, standalone/drakconnect, standalone/drakTermServ,
+	standalone/drakgw: switch latest tools that still manually handle
+	embedding
+	to use my_gtk
+
+	* standalone/drakbackup: switch latest tools that still manually handle
+	embedding
+	to use my_gtk
+	remove dead code about option managment which is
+	obsoleted by standalone
+
+2002/11/20  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: hide the "please wait" at the latest stage
+
+	* ugtk.pm: 
+	  - api change for latest harddrake
+	  - s/$x ne ''/$x/
+
+	* security/msec.pm: simplify
+	cleanups
+
+	* printer/printerdrake.pm: cleanups
+	update to new security::level scheme
+
+	* standalone/drakbackup: message_noconf_box() and message_underdevel()
+	were quite
+	identical.  let consolidate them
+	message_noselect_box() and message_noselect_what_box() were just
+	identical (but for their label).
+	let consolidate this
+	send_mail_pb() and client_ftp_pb() were just identical (modulo their
+	label)
+	kill heavy duplication in get_cd_info()
+	perl_checker fixes
+	  - don't gratuitously copy a 70 lines help text with typo changes,
+	translators will kill us
+	  - use strict, fix it
+	s/$x ne (0|'')/$x/
+
+	* standalone/logdrake: do not use print_hello() callback, anyway it does
+	not exists (but in
+	drakfloppy ...)
+	  - logdrake does not need any
+	  - use ugtk for gtkcolor & co
+	  - perl_checker fixes
+
+	* standalone/draksec, standalone/service_harddrake, standalone/drakgw,
+	standalone/draksound: perl_checker fixes
+
+	* standalone/draksplash: perl_checker fixes
+	  - fixes for "use strict" (still some work to do since some variables
+	are created through ${ $x.$y }
+	  - use my_gtk :
+	  o clean code
+	  o transparently manage embedding
+	
+	  - perl_checker fixes
+
+	* standalone/drakproxy, standalone/drakupdate_fstab: fix blind copyright
+	copy
+
+	* interactive/stdio.pm, standalone/drakbug, standalone/drakTermServ: s/$x
+	ne (0|'')/$x/
+
+	* standalone/drakfloppy: perl_checker fixes
+	more perl_checker fixes
+	  - don't require unused modules
+	  - use my_gtk to transparently handle embedding
+	  - fixes for strict mode
+	  - fixes for perl_checker (more to come after lunch)
+
+	* bootlook.pm: this is a module, not a program
+
+2002/11/19  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, network/ethernet.pm, share/po/az.po, share/po/zh_TW.po,
+	standalone/drakconnect, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: default dhcp client is dhcp-client
+
+2002/11/19  gbeauchesne
+
+	* mdk-stage1/log.c: Don't forget to va_end() what was va_copy()'ed.
+
+2002/11/19  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* keyboard.pm, share/keyboards.tar.bz2: Added Malayalam keyboard
+
+	* share/po/fi.po: updated Finnish file
+
+2002/11/19  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* security/main.pm, any.pm, security/level.pm, install_steps.pm: 
+	  - fix duplication of sec level setting:
+	merge any::get_secure_level() with
+	  secure::msec::get_secure_level()
+	  - move security level functions from secure::msec
+	  to secure::level
+	  - uses secure::level in install_steps
+	  - fix duplication of security level labels
+	  - draksec: use same strings in drakx, got nice
+	  translations
+	  - get_default_checks(): make it more readable
+
+	* mouse.pm: perldoc: explain basic usage of mouse.pm, regarding
+	problems that show up in early interaction between
+	harddrake::data and mouse
+
+	* harddrake/ui.pm: 
+	  - remove debugging code
+	  - document menu building
+	  - add option menu check boxes to prevent (slowly) detecting
+	printers and modems
+	  - remove warnings on usb devices
+	  - explains more cpu bugs
+	  - eventually fix --testing effect
+	  --testing handling was erronously reverted
+
+	* security/msec.pm: 
+	  - fix duplication of sec level setting:
+	merge any::get_secure_level() with
+	  secure::msec::get_secure_level()
+	  - move security level functions from secure::msec
+	  to secure::level
+	  - uses secure::level in install_steps
+	  - fix duplication of security level labels
+	  - draksec: use same strings in drakx, got nice
+	  translations
+	  - get_default_checks(): make it more readable
+	previous example in perldoc was buggy;
+	put one that really works
+
+	* diskdrake/hd_gtk.pm, diskdrake/interactive.pm: make perldoc working
+
+	* harddrake/data.pm: don't display two times some usb mice
+
+	* help.pm: one can now alter settings there
+
+2002/11/18  Pixel  <pixel@mandrakesoft.com>
+
+	* network/netconnect.pm, Xconfig/card.pm, bootlook.pm, printer/main.pm,
+	printer/detect.pm, Xconfig/monitor.pm, network/adsl.pm, standalone.pm,
+	pkgs.pm, harddrake/sound.pm, printer/office.pm, network/isdn.pm,
+	printer/printerdrake.pm, printer/gimp.pm, harddrake/ui.pm: make
+	perl_checker happy
+
+2002/11/18  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/net_monitor, standalone/drakfont: drakbug, drakfont,
+	drakperm, draksplash, drakxtv, harddrake2,
+	net_monitor : final update for common cli options/help manager
+	update copyright years
+
+	* harddrake/TODO: final switch of drakbackup, logdrake and scannerdrake
+	to new option scheme
+
+	* standalone/adduserdrake, standalone/drakxservices, standalone/livedrake,
+	standalone/keyboarddrake, standalone/drakboot, standalone/mousedrake,
+	standalone/drakconnect, standalone/draksound: 
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+
+	* standalone/draksplash, standalone/harddrake2, standalone/drakbug,
+	standalone/drakperm: drakbug, drakfont, drakperm, draksplash, drakxtv,
+	harddrake2,
+	net_monitor : final update for common cli options/help manager
+
+	* drakxtools.spec: 9.1-0.2dmk
+
+	* standalone/drakautoinst, standalone/printerdrake, standalone/XFdrake,
+	standalone/drakgw: 
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+	update copyright years
+
+	* standalone/drakfloppy: 
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+	remove old dead commented i18n code that kept being copied around
+
+	* standalone/diskdrake: final switch of drakbackup, logdrake and
+	scannerdrake
+	to new option scheme
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+	update copyright years
+
+	* standalone/logdrake: final switch of drakbackup, logdrake and
+	scannerdrake
+	to new option scheme
+	update copyright years
+	  - clean code sot that it runs under "use strict"
+	  - simplify date command construction, this is basic perl :-(
+	  - kill dead old commented code to handle i18n instead of relying on
+	common shared modules
+	remove old dead commented i18n code that kept being copied around
+
+	* modparm.pm, modules/parameters.pm, modules/interactive.pm, any.pm:
+	rename modparm as modules::parameters
+
+	* standalone.pm: drakbug, drakfont, drakperm, draksplash, drakxtv,
+	harddrake2,
+	net_monitor : final update for common cli options/help manager
+	typo fix
+	switch drakTermServ to new option scheme
+	rename modparm as modules::parameters
+	final switch of drakbackup, logdrake and scannerdrake
+	to new option scheme
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+
+	* standalone/drakxtv: drakbug, drakfont, drakperm, draksplash, drakxtv,
+	harddrake2,
+	net_monitor : final update for common cli options/help manager
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+
+	* bootlook.pm: switch to new help/options scheme
+	update copyright years
+
+	* harddrake/ui.pm: 
+	  - standalone.pm :
+	o make it be 'use strict' aware
+	  o factorize options managment in one place
+	  - standalone tools :
+	  o they all now support -h|--help -v|--version, ...
+	  o they can add their own options to %standalone::usages
+	  - harddrake : use std --testing/$::testing rather than its own
+	  --test option
+	simplify code though my_gtk::gtkcolor
+
+	* standalone/drakTermServ: switch drakTermServ to new option scheme
+
+	* standalone/drakbackup, standalone/scannerdrake: final switch of
+	drakbackup, logdrake and scannerdrake
+	to new option scheme
+	update copyright years
+
+	* scanner.pm, standalone/drakproxy, security/msec.pm,
+	printer/printerdrake.pm: update copyright years
+
+2002/11/17  alus
+
+	* share/po/pl.po: fix
+
+2002/11/16  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/pt.po: updated Portuguese and Chinese files
+
+2002/11/15  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm, run_program.pm, interactive.pm, c.pm, ftp.pm:
+	s/wantarray/wantarray()/
+
+2002/11/15  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* Xconfig/monitor.pm: perl_checker fix
+
+	* harddrake/data.pm: s/usbvideo/usbvision/
+
+	* standalone/drakxtv: typo fix
+
+	* printer/printerdrake.pm: 
+	  - more cleanups
+	  - don't display messages if we're not going to remove/install some
+	packages
+	cleanups
+	cleanups
+	printerdrake::install_spooler() : fix heavy duplication of code
+	by using %spoolers data structure (function shrunked by 66%)
+	consolidate some stuff into printer::data::spoolers{XXX}{alternatives}
+	so that all alternatives get centralized in one data structure
+	cleanups
+
+	* printer/data.pm: printerdrake::install_spooler() : fix heavy duplication
+	of code
+	by using %spoolers data structure (function shrunked by 66%)
+	consolidate some stuff into printer::data::spoolers{XXX}{alternatives}
+	so that all alternatives get centralized in one data structure
+
+	* security/main.pm: 
+	  - use run_program rather than raw system
+	  - kill useless show_msec_help()
+	  - kill commented remanant code of help buttons
+	  - add tooltip with default values on combos & entries
+	  - log about security administrator changes only when we do some
+	  - factorize some code into new_editable_combo() and
+	set_default_tip()
+
+	* Makefile.config, drakxtools.spec, harddrake/sound.pm,
+	Makefile.drakxtools: 
+	  - add missing printer directory
+	  - bump version to 9.1 like most of our packages
+
+2002/11/14  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ro.po: updated Romanian file
+
+	* standalone/drakfont: Make drakfont use ttmkfdir again, as it recognizes
+	more encodings,
+	use of parameter "-u" of ttmkfdir to always output unicode entries,
+	call xftcache to create/update the Xftcache files (used by Xft),
+	rewrite fonts.dir (with ttmkfdir) when removing a ttf file so it no
+	longer appears on the font list, and execute "xset fp rehash" after
+	adding/removing fonts, so the font list used by X server is
+	synchronized.
+
+2002/11/14  Pixel  <pixel@mandrakesoft.com>
+
+	* printer/cups.pm, bootlook.pm, network/network.pm, resize_fat/main.pm,
+	printer/office.pm, partition_table/dos.pm, scanner.pm, unused/scsi.pm,
+	my_gtk.pm, swap.pm, install_steps_interactive.pm, Xconfig/xfreeX.pm,
+	network/smb.pm, devices.pm, crypto.pm, commands.pm, printer/gimp.pm,
+	any.pm, install_steps_gtk.pm, printer/main.pm, printer/detect.pm,
+	interactive/stdio.pm, interactive/newt.pm, fs.pm,
+	resize_fat/dir_entry.pm, ugtk.pm, run_program.pm, bootloader.pm,
+	steps.pm, harddrake/data.pm, diskdrake/hd_gtk.pm, interactive/gtk.pm,
+	detect_devices.pm, network/tools.pm, install_any.pm,
+	printer/printerdrake.pm, harddrake/ui.pm: 
+	  - add/remove spaces to make perl_checker happy
+	  - remove redundant parentheses
+	  - add some parentheses for clarity
+
+	* partition_table/mac.pm, ftp.pm, pkgs.pm: make perl_checker happy
+	  - add/remove spaces to make perl_checker happy
+	  - remove redundant parentheses
+	  - add some parentheses for clarity
+
+	* partition_table/gpt.pm, partition_table/raw.pm, partition_table.pm: make
+	perl_checker happy
+
+2002/11/14  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/v4l.pm: resync with bttv-0.7.100 and saa7134-0.2.2snapshot
+
+	* drakxtools.spec: 1.1.12-1mdk
+
+	* security/main.pm: 
+	  - kill unused myexit()
+	  - perl_checker fixes
+
+	* printer/main.pm, printer/data.pm, printer/STATUS, printer/office.pm,
+	printer/gimp.pm: 
+	  - printer::data : export all data structures
+	  - cleanups
+	  - all code is now runnable in strict mode
+
+	* security/msec.pm: 
+	  - perl_checker fixes
+	  - clean code
+	  - simplify config_function()
+
+	* harddrake/ui.pm: explain the detect() vs new() delayed gui construction
+	when embedded
+	display port for network printers too
+
+2002/11/13  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sk.po, share/po/ru.po: updated Slovak and Russian files
+
+2002/11/13  Pixel  <pixel@mandrakesoft.com>
+
+	* printer/common.pm: fix syntax error
+
+	* Xconfig/various.pm, http.pm, network/network.pm, network/modem.pm,
+	resize_fat/main.pm, install_gtk.pm, interactive.pm, my_gtk.pm, mouse.pm,
+	printer/data.pm, devices.pm, lang.pm, install2.pm, install_steps_gtk.pm,
+	interactive/http.pm, partition_table/mac.pm, pkgs.pm,
+	interactive/newt.pm, network/ethernet.pm, standalone/XFdrake, steps.pm,
+	harddrake/data.pm, keyboard.pm, network/adsl.pm, fsedit.pm,
+	install_any.pm, harddrake/ui.pm: add/remove spaces to make perl_checker
+	happy
+
+	* bootlook.pm, printer/office.pm, scanner.pm, install_steps.pm,
+	network/isdn.pm, install_steps_interactive.pm, network/netconnect.pm,
+	harddrake/v4l.pm, printer/main.pm, harddrake/sound.pm, ugtk.pm,
+	network/tools.pm, printer/printerdrake.pm: add/remove spaces to make
+	perl_checker happy
+	add/remove spaces to make perl_checker happy
+
+2002/11/13  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer/printerdrake.pm: simplify install_spooler() but there's still
+	lot of duplication there
+	(some work for tomorow)
+	  - final switch to $::prefix
+	  - simplify main::get_copiable_queues(), main::setcupslink()
+	  - s/unless (X ne Y)/if (X eq Y)/
+	  - set_usermode() : ensure we add the line if it didn't exists
+
+	* harddrake/ui.pm: display floppy driver type as well as mouse type
+
+	* printer/office.pm: fix files lookup
+	printer::common: export function
+
+	* printer/gimp.pm: don't reinvent the wheel, use common
+
+	* detect_devices.pm: fix vendor/model spliting when there's neither space
+	nor separator
+
+	* printer/common.pm: printer::common: export function
+
+	* printer/main.pm: 
+	  - final switch to $::prefix
+	  - simplify main::get_copiable_queues(), main::setcupslink()
+	  - s/unless (X ne Y)/if (X eq Y)/
+	  - set_usermode() : ensure we add the line if it didn't exists
+	  - set_usermode() : don't reinvent the wheel, use substInFile
+	  - get_usermode() : ditto, use getVarsFromSh
+
+	* drakxtools.spec: pixel neither know how to update cvs nor comitting its
+	changes
+
+2002/11/12  erwan
+
+	* mdk-stage1/network.c, mdk-stage1/stage1.h: Cleaning old stuff
+
+2002/11/12  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+2002/11/12  Pixel  <pixel@mandrakesoft.com>
+
+	* security/main.pm, bootlook.pm, printer/main.pm, printer/detect.pm,
+	partition_table/mac.pm, diskdrake/interactive.pm, pkgs.pm, services.pm,
+	printer/office.pm, ugtk.pm, run_program.pm,
+	install_steps_auto_install.pm, bootloader.pm, standalone/XFdrake,
+	network/netconnect.pm, lang.pm, install2.pm, modules.pm, commands.pm,
+	printer/printerdrake.pm, printer/gimp.pm, partition_table.pm: add/remove
+	some spaces to make perl_checker happy
+
+	* diskdrake/removable_gtk.pm: add "use common" for N()
+
+2002/11/12  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer/main.pm: kill set_prefix()
+	printer related modules cleaning :
+	  - create the printer/ hierarchy
+	  - split services related stuff into services.pm & printer::services,
+	
+	  - move things that've nothing to do with printers into common.pm
+	  (alternatives, permissions, ...)
+	
+	  - move eveything related to cups, gimp-print, detection,
+	  {star,open}office to the corresponding splited printer:: module
+	
+	  - big consolidation of printer::office (it was obvious there were tons
+	  of duplication between staroffice and openoffice managment)
+	
+	  - move other stuff into printer::main, printer::common,
+	
+	status : print.pm has been heavily splited (now one can begin to
+	understand the little bits).
+	printerdrake still needs to be splited/cleaned and eventually removed
+	since printer/printerdrake modules separation is not understandable by
+	other people
+	
+	till, in printer::gimp, $lprcommand is neither declared nor setted
+	nowhere.  idem in mdk9.0 ...
+
+	* security/main.pm: fix _() -> N() conversion
+
+	* install_steps_interactive.pm: resync with latest printerdrake
+
+	* printer/printerdrake.pm: fix getSNMPModel() location
+	printer related modules cleaning :
+	  - create the printer/ hierarchy
+	  - split services related stuff into services.pm & printer::services,
+	
+	  - move things that've nothing to do with printers into common.pm
+	  (alternatives, permissions, ...)
+	
+	  - move eveything related to cups, gimp-print, detection,
+	  {star,open}office to the corresponding splited printer:: module
+	
+	  - big consolidation of printer::office (it was obvious there were tons
+	  of duplication between staroffice and openoffice managment)
+	
+	  - move other stuff into printer::main, printer::common,
+	
+	status : print.pm has been heavily splited (now one can begin to
+	understand the little bits).
+	printerdrake still needs to be splited/cleaned and eventually removed
+	since printer/printerdrake modules separation is not understandable by
+	other people
+	
+	till, in printer::gimp, $lprcommand is neither declared nor setted
+	nowhere.  idem in mdk9.0 ...
+
+	* drakxtools.spec: 1.1.12-1mdk
+
+	* printer/cups.pm, printer/detect.pm, printer/common.pm,
+	standalone/printerdrake, services.pm, printer/office.pm,
+	printer/default.pm, printer.pm, printer/data.pm, common.pm,
+	printer/services.pm, printerdrake.pm, printer/gimp.pm: printer related
+	modules cleaning :
+	  - create the printer/ hierarchy
+	  - split services related stuff into services.pm & printer::services,
+	
+	  - move things that've nothing to do with printers into common.pm
+	  (alternatives, permissions, ...)
+	
+	  - move eveything related to cups, gimp-print, detection,
+	  {star,open}office to the corresponding splited printer:: module
+	
+	  - big consolidation of printer::office (it was obvious there were tons
+	  of duplication between staroffice and openoffice managment)
+	
+	  - move other stuff into printer::main, printer::common,
+	
+	status : print.pm has been heavily splited (now one can begin to
+	understand the little bits).
+	printerdrake still needs to be splited/cleaned and eventually removed
+	since printer/printerdrake modules separation is not understandable by
+	other people
+	
+	till, in printer::gimp, $lprcommand is neither declared nor setted
+	nowhere.  idem in mdk9.0 ...
+
+	* standalone/drakxtv: don't offer to configure kernel for usbvision (no
+	option for now)
+	handle devices managed by usbvision too
+
+	* install_steps.pm: update for new printerdrake
+
+	* harddrake/data.pm: resync with printerdrake
+	handle devices managed by usbvision too
+	exclude more usb mice from unknown devices
+
+2002/11/11  alus
+
+	* share/po/pl.po: updated
+
+2002/11/11  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po, share/po/ru.po: updated Russian and Vietnamese files
+
+2002/11/11  Pixel  <pixel@mandrakesoft.com>
+
+	* security/msec.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+	  - use "foreach" instead of "for" in list context
+	  - use "for" instead of "foreach" when used a la C
+	various small syntax enhancements to please perl_checker
+
+	* partition_table/sun.pm: 
+	  - use "foreach" instead of "for" in list context
+	  - use "for" instead of "foreach" when used a la C
+
+	* Xconfig/card.pm, bootlook.pm, my_gtk.pm, network/netconnect.pm,
+	harddrake/data.pm, network/tools.pm, install_any.pm, security/main.pm,
+	network/isdn.pm, harddrake/ui.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+
+	* detect_devices.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+	  - do not use "foreach $var (...) {...}" use "foreach my $var (...)
+	{...}" instead
+	(only pb are functions called in {...} that could use $var, none found
+	except in commands.pm)
+	  - various small syntax enhancements to please perl_checker
+
+	* partition_table/mac.pm: 
+	  - do not use "foreach $var (...) {...}" use "foreach my $var (...)
+	{...}" instead
+	(only pb are functions called in {...} that could use $var, none found
+	except in commands.pm)
+	  - various small syntax enhancements to please perl_checker
+
+	* pkgs.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	  - do not use "foreach $var (...) {...}" use "foreach my $var (...)
+	{...}" instead
+	(only pb are functions called in {...} that could use $var, none found
+	except in commands.pm)
+	  - various small syntax enhancements to please perl_checker
+
+	* network/adsl.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+	replace qq{...} with qq(...)
+
+	* network/network.pm, mouse.pm, standalone.pm, network/drakfirewall.pm,
+	partition_table.pm, partition_table/bsd.pm, ugtk.pm, Xconfig/monitor.pm,
+	modules.pm, network/shorewall.pm, network/modem.pm, resize_fat/main.pm,
+	resize_fat/any.pm, install_gtk.pm, unused/scsi.pm,
+	resize_fat/directory.pm, lang.pm, devices.pm, harddrake/v4l.pm, any.pm,
+	install_steps_gtk.pm, ftp.pm, services.pm, harddrake/sound.pm,
+	Xconfig/test.pm, steps.pm, keyboard.pm, interactive/gtk.pm,
+	partition_table/lvm_PV.pm, network/isdn_consts.pm: add or remove spaces
+	where need to please perl_checker
+
+	* standalone/drakfloppy: don't use <*> for globbing, use all or glob_
+
+	* standalone/logdrake: replace q@...@ with q(...) or here_doc
+
+	* interactive/stdio.pm, common.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	various small syntax enhancements to please perl_checker
+
+	* http.pm, install_steps.pm, interactive/newt.pm, fs.pm, diskdrake/dav.pm:
+	
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+
+	* resize_fat/fat.pm: 
+	  - use "foreach" instead of "for" in list context
+	  - use "for" instead of "foreach" when used a la C
+	various small syntax enhancements to please perl_checker
+
+	* standalone/draksplash, raid.pm, Xconfig/xfreeX.pm,
+	partition_table/raw.pm: various small syntax enhancements to please
+	perl_checker
+
+	* install2.pm: add or remove spaces where need to please perl_checker
+	replace availableMemory with availableMemory()
+
+	* scanner.pm, commands.pm: add or remove spaces where need to please
+	perl_checker
+	  - do not use "foreach $var (...) {...}" use "foreach my $var (...)
+	{...}" instead
+	(only pb are functions called in {...} that could use $var, none found
+	except in commands.pm)
+	  - various small syntax enhancements to please perl_checker
+
+	* install_steps_interactive.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+	replace availableMemory with availableMemory()
+
+	* network/ethernet.pm: add or remove spaces where need to please
+	perl_checker
+	various small syntax enhancements to please perl_checker
+
+	* printerdrake.pm, printer.pm: 
+	  - replace ... =~ 'foo'  with  ... =~ /foo/
+	  - remove unneeded parentheses for things like ... if (...)
+	add or remove spaces where need to please perl_checker
+	  - use "foreach" instead of "for" in list context
+	  - use "for" instead of "foreach" when used a la C
+	  - do not use "foreach $var (...) {...}" use "foreach my $var (...)
+	{...}" instead
+	(only pb are functions called in {...} that could use $var, none found
+	except in commands.pm)
+	  - various small syntax enhancements to please perl_checker
+
+2002/11/10  gbeauchesne
+
+	* mdk-stage1/minilibc.c: Fix implementation of signal() for x86-64, adjust
+	for new kernel-headers
+
+2002/11/10  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive/http.pm: don't return a typeglob ref, return the typeglob
+	(reference to typeglobs are
+	soft references which doesn't increment the ref count)
+
+	* network/tools.pm: don't return a typeglob ref, return the typeglob
+	(reference to typeglobs are
+	soft references which doesn't increment the ref count) (thanks to Gerard
+	Patel
+	for the precise bug report)
+
+	* standalone/draksplash, standalone/drakperm, standalone/drakbug,
+	bootlook.pm, standalone/harddrake2, standalone/printerdrake,
+	standalone/logdrake, standalone/drakfloppy, standalone/localedrake:
+	ensure "common" is imported to have N()
+
+2002/11/09  Pixel  <pixel@mandrakesoft.com>
+
+	* proxy.pm: fix typo
+
+	* network/tools.pm: 
+	  - do not use q{...} to please perl_checker
+	  - use <<'EOF' instead
+	  - at the same time, fix the "\n" at the beginning of the generated
+	script
+
+	* harddrake/data.pm: make perl_checker happy
+
+2002/11/08  Pixel  <pixel@mandrakesoft.com>
+
+	* printer.pm: fix my typos
+
+	* my_gtk.pm: normalize
+
+2002/11/07  erwan
+
+	* mdk-stage1/stage1-data/stage1-with-kadeploy.tar.bz2,
+	mdk-stage1/network.c, mdk-stage1/stage1.h, mdk-stage1/url.c: SCSI
+	Support is now activated
+
+	* rescue/Makefile: Adding missing link for test in tree/usr/bin
+
+	* rescue/list, rescue/list.i386: SCSI support now activated
+
+2002/11/07  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* lang.pm: Added definition of default font for Thai
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/nl.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/lv.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/hu.po: updated
+	pot file
+
+	* share/rpmsrate: Added dependences for greek font and urw-fonts for
+	cyrillic
+
+2002/11/07  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* detect_devices.pm: 
+	  - getCPUs() : fix cpu fields parsing
+	  - harddrake::detect :
+	o describe most cpu fields
+	  o print value of skipped fields
+	perl checker fixes
+	  - harddrake : don't display modem when there're none
+	  - getModem() :
+	       o simplify
+	       o remove unused variables
+	  - getSerialModem() : indent
+
+	* harddrake/ui.pm: 
+	  - getCPUs() : fix cpu fields parsing
+	  - harddrake::detect :
+	o describe most cpu fields
+	  o print value of skipped fields
+	  - describe cpu frequency
+	  - only display help topics related to currently displayed fields in
+	  right framea
+	  - if no device selected, display a message explaining the help dialog
+	  - simplify the unknow driver case for color choice
+	  - only display fields we described
+	perl checker fixes
+	  - add help for some cpu items
+	  - only display choosen items
+	  - remove a dead statement
+
+	* drakxtools.spec: 1.1.11-1mdk
+
+2002/11/06  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem-all: add extra partition support as primary/logical
+	with configurable size and fs.
+	allow configurable min_size, def_size, trigger_size, inst_size,
+	swap_size.
+
+2002/11/06  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table.pm, install_any.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	replace complex "unless"s with "if"s
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* printerdrake.pm: replace "for my ..." with "foreach my ..."
+	replace complex "unless"s with "if"s
+	remove unneeded parentheses on the right side of infix if/foreach/unless
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* partition_table/raw.pm: remove unneeded parentheses on the right side of
+	infix if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* harddrake/data.pm, install2.pm, standalone/service_harddrake,
+	standalone/scannerdrake: make perl_checker happy
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* network/netconnect.pm, diskdrake/interactive.pm, network/isdn.pm:
+	replace complex "unless"s with "if"s
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* standalone/draksplash, bootlook.pm, share/advertising/14-mdkexpert.pl,
+	standalone/logdrake, share/advertising/17-mdkclub.pl, interactive.pm,
+	my_gtk.pm, share/advertising/11-mdkstore.pl,
+	share/advertising/02-community.pl, share/advertising/01-thanks.pl,
+	mouse.pm, standalone/keyboarddrake, standalone/drakboot,
+	share/po/DrakX.pot, standalone.pm, lvm.pm, standalone/drakTermServ,
+	standalone/net_monitor, share/advertising/05-games.pl,
+	network/drakfirewall.pm, standalone/mousedrake, Xconfig/main.pm,
+	install_steps_newt.pm, standalone/drakbackup, diskdrake/smbnfs_gtk.pm,
+	share/advertising/09-server.pl, share/advertising/04-multimedia.pl,
+	standalone/printerdrake, share/advertising/13-mdkcampus.pl,
+	install_steps_auto_install.pm, standalone/drakconnect,
+	standalone/drakbug, diskdrake/hd_gtk.pm,
+	share/advertising/07-desktop.pl, Xconfig/monitor.pm, network/adsl.pm,
+	proxy.pm, modules.pm, share/advertising/10-mnf.pl, network/shorewall.pm,
+	share/advertising/15-mdkexpert-corporate.pl,
+	share/advertising/08-development.pl, share/advertising/06-mcc.pl,
+	standalone/draksound, standalone/drakxtv, security/main.pm,
+	Xconfig/various.pm, network/modem.pm, help.pm,
+	diskdrake/removable_gtk.pm, install_gtk.pm, diskdrake/removable.pm,
+	standalone/drakautoinst, share/po/b_dump_strings.pm, modparm.pm,
+	install_steps_stdio.pm, Xconfig/xfreeX.pm, standalone/livedrake,
+	share/advertising/03-internet.pl, standalone/harddrake2,
+	harddrake/v4l.pm, modules/interactive.pm, crypto.pm,
+	install_interactive.pm, share/advertising/12-mdkstore.pl,
+	standalone/localedrake, loopback.pm, any.pm, interactive/http.pm,
+	interactive/stdio.pm, standalone/drakfloppy, services.pm,
+	interactive/newt.pm, share/po/Makefile, fs.pm, standalone/drakfont,
+	network/ethernet.pm, Xconfig/resolution_and_depth.pm, standalone/drakgw,
+	steps.pm, keyboard.pm, diskdrake/dav.pm, standalone/drakperm, fsedit.pm,
+	common.pm, share/po/fake_c.pl, harddrake/ui.pm: replace "_" with "N" and
+	"__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* install_steps.pm: replace complex "unless"s with "if"s
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* bootloader.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	cleanup get_of_dev (aka ofpath)
+	replace complex "unless"s with "if"s
+	remove unneeded parentheses on the right side of infix if/foreach/unless
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* network/network.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	(write_resolv_conf): much cleanup (originally it was meant to introduce
+	cat_ and output, but it ended up with a complete rewrite :)
+	replace complex "unless"s with "if"s
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* scanner.pm: make perl_checker happy
+	make perl_checker happy
+
+	* commands.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	(cp): use cp_af
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+
+	* Xconfig/test.pm: please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* standalone/diskdrake, network/nfs.pm: make perl_checker happy
+
+	* Xconfig/card.pm: when needVideoRam, don't take the raw value
+	VideoRam_probed,
+	better take a known value <= VideoRam_probed
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* Xconfig/xfree4.pm: please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+
+	* log.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+
+	* detect_devices.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	make perl_checker happy
+	replace complex "unless"s with "if"s
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+
+	* ugtk.pm: make perl_checker happy
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* install_steps_interactive.pm, harddrake/sound.pm: make perl_checker
+	happy
+	replace complex "unless"s with "if"s
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* standalone/XFdrake: fix typo
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* raid.pm, network/tools.pm, install_steps_gtk.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* printer.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	replace "for my ..." with "foreach my ..."
+	remove unneeded parentheses on the right side of infix if/foreach/unless
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+	* pkgs.pm: 
+	  - have "local *FILEHANDLE" before each "open FILEHANDLE, ..."
+	  - use some "cat_" and "output" where possible
+	please perl_checker:
+	  - local'ize $_ before doing while (<...>)
+	  - use "foreach" instead of "for"
+	  - remove unneeded parentheses on the right side of infix
+	if/foreach/unless
+	replace "_" with "N" and "__" with "N_"
+	rationale:
+	  - currently, we use _("xxx") as a shorthand for gettext("xxx"). It
+	also used to call xgettext with --keyword=_
+	
+	  - alas, function &_ is global and not by package (notice esp. that _
+	is not exported in common.pm)
+	
+	  - this lead to big ugly pb with packages defining their own &_,
+	overriding common.pm's &_
+	
+	  - a fix is to set @::textdomains to add a new domain (the default
+	being "libDrakX")
+	
+	but relying on the global "_" is still dangerous!
+
+2002/11/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: 1.1.10-mdk
+
+	* harddrake/sound.pm: fix for modules.pm not exporting
+	category2modules_and_description
+
+2002/11/05  erwan
+
+	* rescue/tree/etc/rc.sysinit: modified rc.sysinit for ka
+
+2002/11/05  gbeauchesne
+
+	* c/smp.c: Revert last change
+	Add generic cpu detection on x86-64 and IA-64, based on
+	sysconf(_SC_NPROCESSORS_ONLN)
+
+	* detect_devices.pm: Detect SMP more easily if we have APIC stuff capable
+
+2002/11/05  Pixel  <pixel@mandrakesoft.com>
+
+	* devices.pm: add /dev/ubd/0, /dev/ubd/1... support (thanks to Brian
+	Murrell)
+
+	* mouse.pm (xmouse2xId): ensure weird ids are ignored
+	use find_index instead of map_index
+
+	* interactive/newt.pm: 
+	  - fix dialog boxes using a scrollbar
+	  - cleanup
+	use each_index instead of map_index when the return value is not used
+
+	* interactive.pm: 
+	  - do not handle "format"ing in interactive for combos
+	  - do it in interactive::gtk instead (that way, "val" is back"format"ed
+	in callbacks as wanted)
+	  - die when editable combos are used with non-strings (like arrays or
+	hashes)
+
+	* partition_table.pm: 
+	  - isUBD can tell wether it is an ubd partition
+	  - isSpecial is true for ubd partitions
+
+	* fs.pm (format_ext2): better error message when it is called from
+	format_ext3
+	(thanks to Brian Murrell)
+
+	* diskdrake/interactive.pm, fsedit.pm: introduce a new flag:
+	getting_rid_of_readonly_allowed. It is set when the partition table
+	badly handled by diskdrake, but we are still allowed to wipe the
+	partition table and start
+	with something new.
+
+	* interactive/gtk.pm: 
+	  - do not handle "format"ing in interactive for combos
+	  - do it in interactive::gtk instead (that way, "val" is back"format"ed
+	in callbacks as wanted)
+	  - die when editable combos are used with non-strings (like arrays or
+	hashes)
+	use each_index instead of map_index when the return value is not used
+
+	* install2.pm: basic uml_install support (thanks to Brian Murrell)
+	use each_index instead of map_index when the return value is not used
+
+	* interactive/http.pm, interactive/stdio.pm, ugtk.pm, raid.pm,
+	bootloader.pm: use each_index instead of map_index when the return value
+	is not used
+
+	* Newt/Newt.xs: 
+	  - fix dialog boxes using a scrollbar
+	  - cleanup
+
+	* services.pm: fix the use of a non-bounded regexp to check services (fix
+	"nfs" being marked
+	on whereas it is "nfslock" which is on)
+
+2002/11/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* tools/ppc/mkINSTALLCD: Update PPC boot CD creation.
+
+	* mdk-stage1/init.c: PPC TIOCSCTTY changed to 0x540E
+
+2002/11/05  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* drakxtools.spec: newt rebuild
+
+2002/11/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sk.po: updated Slovak file
+
+2002/11/04  Pixel  <pixel@mandrakesoft.com>
+
+	* keyboard.pm, Xconfig/xfreeX.pm, Xconfig/parse.pm,
+	standalone/keyboarddrake: add XkbCompat "group_led" for all keyboards
+	where a group layout switching is used
+
+	* Xconfig/xfree.pm: have an empty configuration when a config file is
+	buggy
+
+2002/11/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer.pm: typo fixes
+
+	* drakxtools.spec: 1.1.10-2mdk
+
+2002/11/01  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ru.po, share/po/pt_BR.po: updated Russian and Portuguese files
+
+2002/10/31  erwan
+
+	* mdk-stage1/stage1.c, mdk-stage1/network.c, mdk-stage1/tools.c,
+	mdk-stage1/tools.h, mdk-stage1/url.h, mdk-stage1/url.c: Including
+	ka-deploy for stage 2
+
+	* mdk-stage1/stage1-data/stage1-with-kadeploy.tar.bz2: Including ka-deploy
+	for stage 2
+	Adding missing file (stage1-with-kadeploy)
+
+2002/10/30  erwan
+
+	* mdk-stage1/stage1.c, mdk-stage1/network.c, mdk-stage1/stage1.h,
+	mdk-stage1/network.h: Applying patch from 8.2, ka.img is working fine in
+	old mode
+
+2002/10/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po: updated Portuguese file
+
+2002/10/29  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* bootloader.pm, rescue/list.ppc: Reflect changes in yaboot package.
+
+2002/10/28  alus
+
+	* share/po/pl.po: updated
+	updated translation
+
+2002/10/28  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/modem.pm: add sub winmodemConfigure
+
+	* network/netconnect.pm: few reworks for winmodem detection
+
+	* detect_devices.pm: s#$_->{driver} eq
+	'Bad:www.linmodems.org'#$_->{driver} =~ /www.linmodems.org/# to fit with
+	ldetect
+
+2002/10/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ro.po: Updated Romanian and Vietnamese files
+
+2002/10/28  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (preConfigureTimezone): don't set UTC in beginner mode if
+	there is no windows
+
+2002/10/28  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: typo in comments: Josep L. Guallar-Esteve
+	<jlguallar@computer.org>
+
+2002/10/28  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: add new drivers
+
+2002/10/25  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem-all: reduced version of oem script which allow
+	installing in oem mode but
+	without restricting language and without installing any packages.
+	all package are copied to disk, ie this is an automated hd install
+	builder.
+
+2002/10/25  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/zh_CN.po, share/po/vi.po: updated Chinese and Vietnamese files
+
+2002/10/24  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/ta.po,
+	share/po/fr.po, share/po/it.po, share/po/nl.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/cs.po, share/po/bg.po, share/po/lv.po, share/po/hu.po: Updated
+	pot file
+
+2002/10/23  Pixel  <pixel@mandrakesoft.com>
+
+	* network/netconnect.pm, install_steps_newt.pm, harddrake/sound.pm: make
+	perl_checker happy: replace PKG::f with PKG::f()
+
+2002/10/23  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: nono changes for stupid perl_checker whose maintainer
+	don't want to fix deficienties
+	reindent for lord pix
+
+	* harddrake/sound.pm: do a perl_checker pass after pixel one since he only
+	do half the work
+	reindent for lord pix
+
+	* ugtk.pm, printer.pm, network/adsl.pm, printerdrake.pm: perl_checker
+	fixes
+
+	* harddrake/v4l.pm, harddrake/ui.pm: reindent for lord pix
+
+	* detect_devices.pm: fix "poulpy sux"
+
+	* Xconfig/resolution_and_depth.pm: fix pixel code
+
+2002/10/18  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* detect_devices.pm: change dumb return values s/@pci_modems,
+	$serial_modem/$serial_modem, @pci_modems/ (thanks to pixel)
+
+	* network/netconnect.pm: remove useless 'pop'
+	change dumb return values s/@pci_modems, $serial_modem/$serial_modem,
+	@pci_modems/ (thanks to pixel)
+
+2002/10/17  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* harddrake/sound.pm: titi almost sux (he helped me that's why I can't say
+	titi sux :p)
+
+2002/10/17  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm, interactive/gtk.pm, network/modem.pm, Xconfig/monitor.pm,
+	pkgs.pm, interactive/newt.pm, install_steps.pm,
+	Xconfig/resolution_and_depth.pm, install_steps_interactive.pm: make new
+	perl_checker happy: replacing PKG::f by PKG::f()
+
+	* network/netconnect.pm: "=head" doc must end with "=cut"
+
+2002/10/17  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* printer.pm: consolidate more stuff into %spoolers
+	start to consolidate %spoolers as a data structure
+	  - printerdrake::auto_detect(local, net, smb):
+	o split into local_detect, net_detect, net_smb_detect
+	  o detect: return all printers
+	  - printer: consolidate all *help_output into help_output
+
+	* detect_devices.pm: add some comments to getCPUs
+
+	* printerdrake.pm: setup_common: consolidate regexp
+	  - printerdrake::auto_detect(local, net, smb):
+	o split into local_detect, net_detect, net_smb_detect
+	  o detect: return all printers
+	  - printer: consolidate all *help_output into help_output
+
+	* network/netconnect.pm: document network::netconnect::detect()
+
+	* harddrake/data.pm: 
+	  - printerdrake::auto_detect(local, net, smb):
+	o split into local_detect, net_detect, net_smb_detect
+	  o detect: return all printers
+	  - printer: consolidate all *help_output into help_output
+
+2002/10/16  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/netconnect.pm: 
+	  - winmodem detection fix
+
+2002/10/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* my_gtk.pm: fix dams suckiness breaking install2 --test
+
+2002/10/16  Pixel  <pixel@mandrakesoft.com>
+
+	* patch/patch-da.pl, patch/patch-IMPS2.pl: 
+	  - fix for bad da .mo charset
+	  - ugly hack to allow IMPS2 switch to work
+
+	* c/stuff.xs.pl: initIMPS2: use /dev/mouse instead of /dev/cdrom (!)
+
+2002/10/16  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: don't print empty help for fields without any help
+	  - alphabetically sort help items
+	  - add help for some cpu fields
+	fix Gtk::CTree:insert_node inversing devices order
+	  -add cpus detection
+	  - update todo list
+	  - perl_checker fix
+
+	* standalone/drakfont: bit me!
+
+	* detect_devices.pm: getCPUs() : fix multiples cpu detection
+	  -add cpus detection
+	  - update todo list
+	  - perl_checker fix
+
+	* harddrake/data.pm: display cpu name (eg "Pentium") too in harddrake gui
+	display "$vendor cpu number $id" for cpus in harddrake gui
+	miaouh
+	use code factored in detect_devices for modem detection
+	  -add cpus detection
+	  - update todo list
+	  - perl_checker fix
+
+	* drakxtools.spec: 1.1.10-1mdk
+	buildrequires: libext2fs-devel
+
+	* harddrake/v4l.pm, harddrake/TODO: 
+	  -add cpus detection
+	  - update todo list
+	  - perl_checker fix
+
+2002/10/15  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* detect_devices.pm: add Pioneer to vendors list
+
+	* harddrake/data.pm: display again unknown category (spoted by florent
+	beranger)
+
+2002/10/14  François Pons  <fpons@mandrakesoft.com>
+
+	* rescue/tree/etc/oem: remove initrd images before umounting and exiting.
+
+2002/10/14  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+2002/10/14  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm, install_any.pm: Hide password to browse W2k
+	servers. (Buchan Milne).
+	Domain name to all caps in smb.conf. (Buchan Milne).
+
+	* standalone/drakTermServ: Finish thin client setup option.
+
+2002/10/14  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - fix typos
+	  - when something is eating io bandwith, drakbug is very slow to scroll
+	  the menu, since on each item selection, it does rpm db
+	  access. solution :
+	  o cache rpm result in %packages
+	
+	  o only call rpm & which if nothing is cached
+	
+	  - if there's the selected package isn't installed, just print "package
+	  not installed" (and translate that)
+
+2002/10/12  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Read/Write thin client configuration.
+	Add draktermserv config to enable/disable thin clients.
+	Update documentation.
+
+2002/10/11  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: fix speedtouch detection
+
+2002/10/11  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ca.po, share/po/pt.po, share/po/DrakX.pot: updated Catalan and
+	Portuguese files
+
+2002/10/11  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Dynamic IP pool for client machines.
+	Don't require image for PCI clients.
+	Perl_checker fixes.
+
+2002/10/10  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/adsl.pm: notify if speedtouch is detected or not
+
+	* network/netconnect.pm: add a warning window for winmodems
+
+	* detect_devices.pm, network/modem.pm: 
+	  - move serial modem detection to detect_devices.pm
+	  - add speedtouch USB detection
+	  - add winmodem detection
+
+2002/10/10  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: Correct typo in create boot ISO code
+	Add note in help about optional net boot image entry for PCI cards
+
+2002/10/09  gbeauchesne
+
+	* mdk-stage1/log.c: ISO C standard as to say about va_list on 7.15 [#3]
+	If  access  to  the varying arguments is desired, the called
+	       function shall declare an object (referred to as ap in  this
+	       subclause) having type va_list.  The object ap may be passed
+	       as an argument to another function; if that function invokes
+	       the  va_arg  macro with parameter ap, the value of ap in the
+	       calling function is indeterminate and shall be passed to the
+	       va_end macro prior to any further reference to ap.199)
+	Which interprets to do reuse a va_list that was already processed.
+	Instead, use a copy. This fixes crashes on x86-64 and debugging
+	feasible, since logging is now available. ;-)
+
+	* mdk-stage1/minilibc.h, mdk-stage1/minilibc.c: Add support for x86-64 to
+	minilibc. But we don't really use it yet, as glibc
+	requirements for stage1 undoubtedly make images already bigger. So let
+	have
+	glibc init there too. ;-)
+
+	* bootloader.pm: I surely don't want nor expect grub and loadlin to work
+	on x86-64.
+
+	* share/list.x86_64: Update list for perl mods and XF86 4.2.1 support
+
+	* tools/aewm-drakx/misc.c: Apply FredL change from HEAD
+
+	* mdk-stage1/disk.c: Use standard memset() instead of BSD-ish bzero().
+
+	* mdk-stage1/Makefile, mdk-stage1/Makefile.common: Add x86-64, use glibc
+	in init and stage1 as dietlibc is not working enough
+	and minilibc for init doesn't seem to let umounting take place at the
+	end
+	of installation.
+
+	* fs.pm: SYS_umount does not exist on modern kernels and architectures
+	like x86-64 :)
+
+	* mdk-stage1/rescue-gui.c: lib64 support
+
+	* tools/aewm-drakx/client.c: Fix get/set_wm_state(), we have to get the
+	same data (size) that was set.
+
+	* mdk-stage1/init.c: Add support for lib64 architectures (x86-64, ppc64,
+	etc.). Aka native
+	libraries are in */lib64 there.
+
+	* install_any.pm: Let's try a real bash prior to defaulting to perl'ish
+	/bin/sh?
+
+	* Xconfig/card.pm: Default to XF4 on x86-64 too
+
+	* install_steps_gtk.pm: Yeah, stuck with XFree86 4.X server on x86-64 too.
+
+	* partition_table.pm: Supported journalised FS on x86-64 are ReiserFS and
+	ext3fs for now. Though,
+	I haven't tested reiserfs and don't expect it to work before next kernel
+	update.
+
+	* mdk-stage1/insmod-modutils/util/sys_oim.c,
+	mdk-stage1/insmod-modutils/obj/obj_common.c,
+	mdk-stage1/insmod-modutils/include/obj.h,
+	mdk-stage1/insmod-modutils/util/xsystem.c,
+	mdk-stage1/insmod-modutils/include/util.h,
+	mdk-stage1/insmod-modutils/include/version.h,
+	mdk-stage1/insmod-modutils/util/sys_cm.c,
+	mdk-stage1/insmod-modutils/obj/obj_s390.c,
+	mdk-stage1/insmod-modutils/include/elf_sparc64.h,
+	mdk-stage1/insmod-modutils/include/elf_ppc.h,
+	mdk-stage1/insmod-modutils/insmod.c,
+	mdk-stage1/insmod-modutils/include/kallsyms.h,
+	mdk-stage1/insmod-modutils/include/elf_arm.h,
+	mdk-stage1/insmod-modutils/include/module.h,
+	mdk-stage1/insmod-modutils/util/xmalloc.c,
+	mdk-stage1/insmod-modutils/util/snap_shot.c,
+	mdk-stage1/insmod-modutils/include/kerneld.h,
+	mdk-stage1/insmod-modutils/util/sys_qm.c,
+	mdk-stage1/insmod-modutils/obj/obj_load.c,
+	mdk-stage1/insmod-modutils/obj/obj_alpha.c,
+	mdk-stage1/insmod-modutils/obj/obj_x86_64.c,
+	mdk-stage1/insmod-modutils/include/config.h,
+	mdk-stage1/insmod-modutils/Makefile,
+	mdk-stage1/insmod-modutils/obj/obj_gpl_license.c,
+	mdk-stage1/insmod-modutils/obj/obj_i386.c,
+	mdk-stage1/insmod-modutils/obj/obj_mips.c,
+	mdk-stage1/insmod-modutils/include/elf_alpha.h,
+	mdk-stage1/insmod-modutils/include/elf_s390.h,
+	mdk-stage1/insmod-modutils/util/config.c,
+	mdk-stage1/insmod-modutils/util/sys_dm.c,
+	mdk-stage1/insmod-modutils/include/elf_x86_64.h,
+	mdk-stage1/insmod-modutils/include/elf_m68k.h,
+	mdk-stage1/insmod-modutils/obj/obj_kallsyms.c,
+	mdk-stage1/insmod-modutils/include/elf_i386.h,
+	mdk-stage1/insmod-modutils/util/xstrcat.c,
+	mdk-stage1/insmod-modutils/obj/obj_arm.c,
+	mdk-stage1/insmod-modutils/obj/obj_m68k.c,
+	mdk-stage1/insmod-modutils/util/sys_nim.c,
+	mdk-stage1/insmod-modutils/obj/Makefile,
+	mdk-stage1/insmod-modutils/obj/obj_hppa64.c,
+	mdk-stage1/insmod-modutils/util/arch64.c,
+	mdk-stage1/insmod-modutils/obj/obj_hppa.c,
+	mdk-stage1/insmod-modutils/util/sys_gks.c,
+	mdk-stage1/insmod-modutils/include/elf_mips.h,
+	mdk-stage1/insmod-modutils/util/logger.c,
+	mdk-stage1/insmod-modutils/obj/obj_ppc.c,
+	mdk-stage1/insmod-modutils/util/xrealloc.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc.c,
+	mdk-stage1/insmod-modutils/util/alias.h,
+	mdk-stage1/insmod-modutils/util/xstrdup.c,
+	mdk-stage1/insmod-modutils/include/elf_sparc.h,
+	mdk-stage1/insmod-modutils/obj/obj_ia64.c,
+	mdk-stage1/insmod-modutils/obj/obj_sparc64.c,
+	mdk-stage1/insmod-modutils/obj/obj_reloc.c: Update to modutils 2.4.19
+	with x86-64 support and other fixes
+
+	* mdk-stage1/frontend.h, mdk-stage1/stdio-frontend.c: Hint compiler about
+	unused arguments and don't make it yell in that case. As,
+	we do use -Werror along with -Wall stuff.
+
+	* mdk-stage1/init-libc-headers.h: <sys/ioctl.h> is needed
+
+	* install_gtk.pm: Somehow, "recent" DrakX changes mutated driver into
+	Driver and card->type
+	into card->BoardName
+
+	* printerdrake.pm, any.pm: lib64 fixes
+
+	* proxy.pm: wgetrc is in /etc not /usr/lib
+
+2002/10/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/ui.pm: don't use ugtk directly
+
+2002/10/08  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* tools/aewm-drakx/misc.c: removed client removal
+
+2002/10/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ro.po: updated Romanian file
+
+2002/10/02  alus
+
+	* share/po/pl.po: some changes
+
+2002/10/02  François Pons  <fpons@mandrakesoft.com>
+
+	* patch/patch-oem-9.0.pl, patch/rpmsrate.oem-9.0-staroffice,
+	patch/rpmsrate.oem-9.0-openoffice: patch necessary for oem to work
+	nicely and the two rpmsrate that allow
+	CD of 700MB to be used.
+
+2002/10/02  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install2.pm: try to fix my fix for blank
+
+	* modules.pm: try to fix my fix for blank
+	try to make the install work in "blank" mode (aka fix pixel
+	sucked when changed modules.pm code, not handling blank mode)
+
+	* mdk-stage1/Makefile: cooker
+
+	* mdk-stage1/stage1.c: do not detect/configure pcmcia stuff when "noauto"
+	param
+
+2002/10/02  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* patch/patch-nforce.pl: update from oem patch
+	fix nforce (from francois oem patch)
+
+	* docs/9.0_errata.txt: miaou
+	i810 crash when using XRender on vt switch (see fredc for further
+	information) (fixed in cvs & rh's xfree86)
+	kernel : snd-via686 is said to produce white noise; add workaround
+	nforce audio bug
+	drakconf bug has been workarounded
+
+2002/10/01  dam's  <dams@idm.fr>
+
+	* ugtk.pm: forking ugtk, sorry guys. reverted last patch
+	cleaned, readded needed hack, removed mdk specific functions, added
+	libconf GUI, WARNING, create_dialog API changed
+
+	* my_gtk.pm: mdk icon_path are added here
+
+2002/10/01  François Pons  <fpons@mandrakesoft.com>
+
+	* install_steps.pm: fixed oem images management not working at all!
+
+2002/10/01  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* docs/9.0_errata.txt: add 3 bugs:
+	  - drakfont: stat64 syscall blocks drakfont on ntfs partitions
+	  - XFree86: X can corrupt sound when overusing pci bus
+	(PciRetry fix it)
+	  - some people reports stops on reboot on "illegal seek" (having /usr
+	  and / on the same fs "fix" it)
+
+	* drakxtools.spec: harddrake-ui doesn't need the same obsoletes/provides
+	as harddrake,
+	else we may require harddrake-ui on update (thus XFree86 ...)
+
+2002/09/30  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* docs/9.0_errata.txt: 
+	  - first draft for all bugs/glitches/inconsistencies in 9.0. Developers
+	are welcomed to fill it, read it and fix.
+
+2002/09/30  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: added possible fix for noauto: flag of hdlist not
+	generating good list file.
+
+2002/09/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Danish file
+
+	* share/po/id.po, share/po/ro.po: Updated Romanian and Indonesian files
+
+2002/09/30  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: drop "notail" when filesystem is not reiserfs
+
+2002/09/30  Till Kamppeter  <till@mandrakesoft.com>
+
+	* docs/9.0_errata.txt: "Best Grayscale" on HP DJ 6xx/Apollo.
+	Several bugs found.
+
+2002/09/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/da.po: updated Latvian file; corrected Danish file
+	corrected encoding
+
+	* share/po/lv.po: updated Latvian file; corrected Danish file
+
+2002/09/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* docs/README: refine info on blank.img
+
+2002/09/26  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* network/network.pm: workaround situation when /etc/resolv.conf is an
+	absolute link to /etc/ppp/resolv.conf or whatever
+
+	* mdk-stage1/dhcp.c, mdk-stage1/network.c: try to not save the hostname
+	answered by the dhcp server
+
+2002/09/25  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: log install class selection
+
+2002/09/25  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/eu.po: updated Basque file
+
+	* share/po/tr.po, share/po/cs.po: updated Turkish and Czech files
+
+2002/09/25  Pixel  <pixel@mandrakesoft.com>
+
+	* any.pm: do not allow to create user "root" (thanks to Eric Fernandez)
+
+2002/09/25  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/sound.pm: handle nvaudio too
+
+2002/09/24  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* any.pm: change load_category__prompt_for_more dying 'already displayed'
+	in return
+
+	* network/ethernet.pm: Fix configureNetwork to fit with new
+	any::load_category_prompt_for_more behavior
+
+2002/09/24  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/zh_TW.po, share/po/pt.po: updated Chinese and Portuguese files
+
+2002/09/24  Pixel  <pixel@mandrakesoft.com>
+
+	* raid.pm: also create a raidtab if it doesn't exist (occurs when / has
+	been formatted)
+
+	* detect_devices.pm: fix raidAutoStartRaidtab crushing /etc/raidtab
+
+	* patch/patch-raidtab.pl: also create a raidtab if it doesn't exist
+	(occurs when / has been formatted)
+	fix raidAutoStartRaidtab crushing /etc/raidtab
+
+2002/09/24  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* ugtk.pm: dams fix enable to get rid of the infamous ugly gtk timeout
+	from dams:
+	remove his ugly hack for mcc which altered the
+	scrolledwindow's "bordure" to hide it.
+	this used to be done through a gtk timer (hance
+	the ugly flash on first display of notebook pages)
+	now createScrolledWindow take a new optional argument
+	that enable to hide the border the right way
+	thanks dams
+	fix expansion of widgets
+	(eg see draksound help window behaviour on resizing)
+
+	* harddrake/TODO, harddrake/data.pm: move usb video devices to webcam
+	category
+
+	* security/main.pm: remember to factorize this with rpmdrake's wait
+	messages in my_gtk
+	remove "bogus periodic check 2" from periodic checks page
+	let simplify
+
+	* harddrake/ui.pm: add a few comments
+	split harddrake part that configure a module into modules::interactive
+	split devices listing ("detection") part into its own function
+	(detect) for readability
+
+	* Makefile.config, modules/interactive.pm: split harddrake part that
+	configure a module into modules::interactive
+
+	* security/msec.pm: ignore_list is useless
+
+	* share/po/br.po: update
+
+2002/09/23  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: fix NULL Gateway IP checking
+
+2002/09/23  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_interactive.pm: tellAboutProprietaryModules: use formatAlaTeX
+
+	* rescue/devices.pl: add st devices
+
+2002/09/23  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/es.po: updated Spanish file
+
+	* share/po/ru.po: updated Russian file
+
+	* share/po/id.po, share/po/zh_CN.po, share/po/pt.po: updated Indonesian,
+	Portuguese and Chinese files
+
+	* keyboard.pm: Made Lithuanian numeric row keyboard bi-mode
+
+2002/09/23  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: Really fix daemon mode issue.
+	Fix daemon mode bug.
+
+2002/09/23  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: move vim-enhanced in X 4
+	fix nforce version
+
+2002/09/22  alus
+
+	* share/po/pl.po: No... Changes few days before release...
+
+2002/09/22  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/cy.po, share/po/id.po, share/po/lv.po, share/po/vi.po,
+	share/po/sk.po, share/po/ru.po, share/po/hu.po: updated Welsh,
+	Hungarian, Indonesian, Latvian, Russian, Slovak and Vietnamese
+
+2002/09/22  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: fix url
+
+2002/09/21  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: add a small sentence to the license in
+	order to solve a negociation with
+	Thomson about the MP3 patents.
+
 2002/09/22  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_interactive.pm: fix url
@@ -3947,7 +7352,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.758 2002/09/21 23:20:58 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.759 2002/09/22 00:31:27 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
