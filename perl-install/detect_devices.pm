@@ -55,7 +55,7 @@ sub cdroms() {
 }
 sub floppies() {
     my @ide = map { $_->{device} } ls120s() and modules::load("ide-floppy");
-    my @scsi, map { $_->{device} } usbfdus();
+    my @scsi = map { $_->{device} } usbfdus();
     (@ide, @scsi, grep { tryOpen($_) } qw(fd0 fd1));
 }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
