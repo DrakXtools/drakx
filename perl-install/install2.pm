@@ -561,11 +561,15 @@ sub main {
     }
     install_any::clean_postinstall_rpms();
     install_any::log_sizes($o);
-    install_any::ejectCdrom();
     install_any::remove_advertising($o);
-
     install_any::write_fstab($o);
     modules::write_conf($o->{prefix});
+
+    #- mainly for auto_install's
+    run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
+    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
+
+    install_any::ejectCdrom();
 
     #- to ensure linuxconf doesn't cry against those files being in the future
     foreach ('/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config') {
@@ -578,10 +582,6 @@ sub main {
     install_steps::cleanIfFailedUpgrade($o);
 
     -e "$o->{prefix}/usr/sbin/urpmi.update" or eval { rm_rf("$o->{prefix}/var/lib/urpmi") };
-
-    #- mainly for auto_install's
-    run_program::run("bash", "-c", $o->{postInstallNonRooted}) if $o->{postInstallNonRooted};
-    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- have the really bleeding edge ddebug.log
     eval { cp_af("/tmp/ddebug.log", "$o->{prefix}/root") };
