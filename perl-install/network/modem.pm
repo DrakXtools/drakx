@@ -18,7 +18,8 @@ sub get_user_home() {
     my $home;
     if ($ENV{USER} ne "root") {
         #- kdesu case
-        $home = (find { $_->[0] eq $ENV{USER} } list_passwd())->[7];
+        my $user = find { $_->[0] eq $ENV{USER} } list_passwd();
+        $home = $user->[7] if $user;
     }
     $home ||= $ENV{HOME}; #- consolehelper case
     $home;
