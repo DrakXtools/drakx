@@ -622,9 +622,6 @@ static enum return_type intf_get_http_proxy(struct interface_info * intf)
 	if (results == RETURN_OK) {
 		intf->http_proxy_host = strdup(answers[0]);
 		intf->http_proxy_port = strdup(answers[1]);
-	} else {
-		intf->http_proxy_host = "";
-		intf->http_proxy_port = "";
 	}
 
 	return results;
@@ -660,6 +657,9 @@ static enum return_type intf_select_and_up(char **http_proxy_host, char **http_p
 	results = bringup_networking(sel_intf);
 
 	if (results == RETURN_OK) {
+		intf->http_proxy_host = "";
+		intf->http_proxy_port = "";
+
 		if (http_proxy_host && http_proxy_port) {
 			intf_get_http_proxy(intf);
 			*http_proxy_host = intf->http_proxy_host;
