@@ -18,7 +18,7 @@ my $raisedwindow = 0;
 my $onstartupfile = "$ENV{HOME}/.net_applet";
 add_icon_path("/usr/share/libDrakX/pixmaps/");
 # Allow multiple instances, but only one per user:
-my @pids =  `ps -u $ENV{USER} | grep net_applet`;
+my @pids =  `ps -u $ENV{USER}` =~ /net_applet/;
 @pids > 1 and die "net_applet already running\n";
 my $prog_name = "/usr/bin/net_applet";
 my $current_md5 = md5file($prog_name);
