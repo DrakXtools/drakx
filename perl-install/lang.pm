@@ -562,6 +562,11 @@ my %IM_config =
             XIM_PROGRAM => 'scim -d',
             XMODIFIERS => '@im=SCIM',
            },
+   skim => {
+            GTK_IM_MODULE => 'scim',
+            XIM_PROGRAM => 'skim -d',
+            XMODIFIERS => '@im=SCIM',
+           },
    uim => {
            GTK_IM_MODULE => 'uim-anthy',
            XIM => 'uim-anthy',
