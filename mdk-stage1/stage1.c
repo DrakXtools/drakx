@@ -469,6 +469,9 @@ int mandrake_move_post(void)
         }
         fclose(f);
         
+        // in case we didn't mount any clp, because gzloop.o is not available later in /lib/modules
+	my_insmod("gzloop", ANY_DRIVER_TYPE, NULL);
+        
         // hardcoded :(
         if (!access(TOTEM_LOCATION, R_OK)) {
                 if (scall(symlink("/image_totem/usr", SLASH_LOCATION "/usr"), "symlink"))
