@@ -337,7 +337,7 @@ sub setPackages($) {
 				   !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
 				   !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
 	    push @gl, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.
-	    push @gl, "spacecup", "chromium", "tuxracer";
+	    push @gl, "spacecup", "chromium", "tuxracer", "openuniverse";
 	}
 	$_->{values} = [ map { $_ + 60 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @gl;
     } else {
