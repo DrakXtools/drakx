@@ -245,7 +245,7 @@ cat > $RPM_BUILD_ROOT%_menudir/net_applet <<EOF
         title="NetApplet"\
         longtitle="Network monitoring applet"\
         command="/usr/bin/net_applet"\
-        icon="connected.png"
+        icon="/usr/share/libDrakX/pixmaps/connected.png"
 EOF
 
 cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
