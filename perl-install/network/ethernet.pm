@@ -60,7 +60,6 @@ ifdown $netc->{NET_DEVICE}
 sub configure_lan {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkIP');
-    require Data::Dumper;
     configureNetwork($netc, $intf, $first_time) or return;
     configureNetwork2($in, $prefix, $netc, $intf);
     if ($::isStandalone and ($::expert or $in->ask_yesorno(_("Network configuration"),
