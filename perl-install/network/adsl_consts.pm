@@ -25,10 +25,26 @@ our %adsl_data = (
                   # method : PPPoA, pppoe or static
                   # please forward updates to http://forum.eagle-usb.org
                   # order alphabetically by country (in English) / ISP (local language)
+                  N("Argentina") . "|Speedy" =>
+                  {
+                   vpi => 1,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
                   N("Austria") . "|Any" =>
                   {
                    vpi => 8,
                    vci => 30,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
+                  N("Austria") . "|AON" =>
+                  {
+                   vpi => 1,
+                   vci => 20,
                    Encapsulation => 6,
                    method => 'pppoa',
                   },
@@ -300,6 +316,22 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
+                  N("Lithuania") . "|Lietuvos Telekomas" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 1,
+                   method => 'pppoe',
+                  },
+
+                  N("Morrocco") . "|Maroc Telecom" =>
+                  {
+                   vpi => 8,
+                   vci => 23,
+                   Encapsulation => 6,
+                   method => 'pppoa',
+                  },
+
                   N("Netherlands") . "|KPN" =>
                   {
                    vpi => 8,
@@ -388,6 +420,14 @@ our %adsl_data = (
                    dnsServer2 => '195.186.4.108',
                    dnsServer3 => '195.186.4.109',
                    method => 'pppoa',
+                  },
+
+                  N("Thailand") . "|Asianet" =>
+                  {
+                   vpi => 0,
+                   vci => 64,
+                   Encapsulation => 1,
+                   method => 'pppoe',
                   },
 
                   N("United Kingdom") . "|Tiscali UK " =>
