@@ -5,7 +5,7 @@ use common ":common";
 
 sub get {
     my ($meta_class) = @_;
-    my %compssUsersDescr;
+    my @l;
 
     local *F;
     open F, "../compssUsers$meta_class" or return; #die "can't open file ../compssUsers$meta_class";
@@ -17,13 +17,12 @@ sub get {
 	    /^(.*?)\s*\[icon=(.*?)\](.*)/  and $_ = "$1$3", $icon  = $2;
 	    /^(.*?)\s*\[path=(.*?)\](.*)/  and $_ = "$1$3", $path  = $2;
 	    /^(.*?)\s*\[descr=(.*?)\](.*)/ and $_ = "$1$3", $descr = $2;
-	    $compssUsersDescr{$_} = $descr; 
-	    $compssUsersDescr{$descr} = $path; 
+	    push @l, $_, $descr, $path;
 	}
     }
     close F;
 
-    %compssUsersDescr;
+    @l;
 }
 
 foreach (uniq(get(''), get('.desktop'))) {
