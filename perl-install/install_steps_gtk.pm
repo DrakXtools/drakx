@@ -46,7 +46,6 @@ sub new($$) {
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{mouse}{wacom}[0], $Driver);
 
 	    mkdir '/var/log' if !-d '/var/log';
-	    local $SIG{CHLD} = sub { $ok = 0 if waitpid(-1, c::WNOHANG()) > 0 };
 
 	    my @options = (
 	      if_(arch() !~ /^sparc/ && arch() ne 'ppc' && $server ne 'Xnest', 
@@ -58,14 +57,18 @@ sub new($$) {
 	    push @options, '-fp', '/usr/X11R6/lib/X11/fonts:unscaled' if $server =~ /Xsun|Xpmac/;
 	    push @options, '-ac', '-geometry', $o->{vga16} ? '640x480' : '800x600' if $server eq 'Xnest';
 
-	    unless (fork()) {
+	    if (!fork()) {
+		c::setsid();
 		exec $server, @options or exit 1;
 	    }
+	    my $nb;
 	    foreach (1..60) {
 		sleep 1;
-		log::l("Server died"), return 0 if !$ok;
-		if (c::Xtest($wanted_DISPLAY)) {
+		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
+		$nb++ if c::Xtest($wanted_DISPLAY);
+		if ($nb > 2) { #- one succeeded test is not enough :-(
 		    $ugtk2::force_focus = 1;
+		    log::l("AFAIK X server is up");
 		    return 1;
 		}
 	    }
