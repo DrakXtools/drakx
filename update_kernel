@@ -46,13 +46,28 @@ function create_modules() {
 }
 
 [ -e $ALL_KERNELS/.main ] && main=$(cat $ALL_KERNELS/.main)
+
+rpm=$(rpm -qp --qf '%{name}' /RPMS/kernel-BOOT-*.rpm | perl -pe 's/kernel-BOOT-(.*)\.(.*)/$1-${2}BOOT/')
+if [ -n "$rpm" -a ! -e $ALL_KERNELS/$rpm ]; then
+    rm -rf $ALL_KERNELS/$main
+    cd $ALL_KERNELS
+    rm -rf $rpm ; mkdir $rpm
+    cd $rpm
+    rpm2cpio /RPMS/kernel-BOOT-*.rpm | cpio -id
+    find -type f -name "*.o.gz" | xargs gunzip
+    cd ../..
+
+    for dir in /tftpboot /var/lib/tftpboot; do
+	rm -f $dir/{vmlinuz,network.rdz}
+    done
+fi 
+
 [ -n "$main" -a -e $ALL_KERNELS/$main ] || {
-    pushd . >/dev/null
     cd $ALL_KERNELS
     main=$(echo 2.* | sed 's/.* //')
     echo "Choosing $main"
     echo $main > .main
-    popd >/dev/null
+    cd ..
 }
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
@@ -114,18 +129,3 @@ for i in $ALL_KERNELS/*; do
 	    fi
 	) || exit 1
 done
-
-
-install_kernel() {
- v=2.4.17
- vr=8mdk
- rpm=kernel-BOOT-${v}.${vr}-1-1mdk.i586.rpm
- vv=${v}-${vr}BOOT
- rm -rf all.kernels/$(cat all.kernels/.main)
- (cd /tmp ; rm -f kernel-BOOT-* ; wget https://kenobi.mandrakesoft.com/~chmou/kernel/BOOT/$rpm)
- cd ~/gi/all.kernels ; rm -rf $vv ; mkdir $vv ; cd $vv ; rpm2cpio /tmp/$rpm | cpio -id
- cd ~/gi ; ./update_kernel ; rm -f images/network.rdz ; ./make_boot_img images/network.rdz network 
- /bin/cp -f all.kernels/$vv/boot/vmlinu* /var/lib/tftpboot/vmlinuz
- /bin/cp -f images/network.rdz-$vv /var/lib/tftpboot/network.rdz
- /bin/cp -f ~/gi/all.modules/modules.cz-$vv /export/Mandrake/mdkinst/lib
-}
