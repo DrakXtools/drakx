@@ -86,7 +86,7 @@ sub acceptLicense {
 		    interactive_help_id => 'acceptLicense',
 		    callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
 		  },
-		  [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list' } ]) or die 'already displayed';
+		  [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list' } ]);
 }
 
 #------------------------------------------------------------------------------

@@ -485,6 +485,7 @@ sub l2pango_font {
     if (common::usingRamdisk()) {
 	if ($charsets{$charset}[0] !~ /lat|koi|UniCyr/) {
 	    install_any::remove_bigseldom_used();
+	    unlink glob_('/usr/share/langs/*');  #- remove langs images
 	    my @generic_fontfiles = qw(/usr/X11R6/lib/X11/fonts/12x13mdk.pcf.gz /usr/X11R6/lib/X11/fonts/18x18mdk.pcf.gz);
 	    #- need to unlink first because the files actually exist (and are void); they must exist
 	    #- because if not, when gtk starts, pango will recompute its cache file and exclude them
