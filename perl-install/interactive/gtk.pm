@@ -578,7 +578,11 @@ sub ask_fromW {
     my $advanced_total_size = $total_size - $always_total_size;
 
 
-    my $pack = create_box_with_title($mainw, @{$common->{messages}});
+    #my $pack = create_box_with_title($mainw, @{$common->{messages}});
+    #- FIXME need to fix the above line as no scroll bars are done,
+    my ($messages_title) = @{$common->{messages}};
+    my $pack = create_box_with_title($mainw, length($messages_title) > 300 ? substr($messages_title, 0, 300)."\n... need scrollbar fixes here" : $messages_title);
+
     my ($totalwidth, $totalheight) = (0, $mainw->{box_size});
 
     my $set_default_size = sub {
