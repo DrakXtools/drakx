@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+my $prefix = '/tmp/live_tree';
+my $boot_prefix = '/tmp/live_tree_boot';
+my $file_list = 'data/boot.list';
+
+my @list = chomp_(cat_($file_list));
+
+if (@ARGV && $ARGV[0] eq '-u') {
+    -d $boot_prefix or die "$boot_prefix doesn't exist";
+
+    foreach my $dest (@list) {
+	my $orig = $dest;
+	$orig =~ s|^$prefix|$boot_prefix|;
+
+	next if !-e $orig;
+
+	if (-e $dest && -s $dest != -s $orig) {
+	    warn "ERROR: $dest already exist, skipping\n";
+	} else {
+	    unlink $dest or die "removing $dest failed: $!\n";
+	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+	}
+    }
+    rmdir($_) foreach reverse(chomp_(`find $boot_prefix -type d`));
+
+    if (-e $boot_prefix) {
+	foreach my $dest (chomp_(`find $prefix -type l`)) {
+	    my $orig = readlink($dest) or next;
+	    $orig =~ s!/image_boot/!$boot_prefix/! or next;
+
+	    unlink $dest or die "removing $dest failed: $!\n";
+	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";	    
+	}
+	rmdir($_) foreach reverse(chomp_(`find $boot_prefix -type d`));
+    }
+    if (-e $boot_prefix) {
+	print "still there:\n";
+	system('find', $boot_prefix);
+    }
+
+} else {
+    -e $boot_prefix and die "you can't make_live_tree_boot since one already exists
+Maybe you should remove it first with 'make_live_tree_boot -u'\n";
+
+    foreach my $orig (@list) {
+	my $dest = $orig;
+	$dest =~ s|^$prefix|$boot_prefix|;
+
+	my $link = $orig;
+	$link =~ s|^$prefix|/image_boot|;
+
+	mkdir_p(dirname($dest));
+	rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
+
+	symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
+    }
+}

@@ -56,10 +56,22 @@ install: build
 	sudo rm -f $(DEST_LIVETREE)/lock
 
 
+live_tree_boot:
+	./make_live_tree_boot
+	$(MAKE) /tmp/live_tree_boot.clp
+
+un_live_tree_boot:
+	./make_live_tree_boot -u
+
 xwait: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
 
 clean:
 	rm -f xwait
 
-# mkisofs -D -U -r $(DEST_LIVETREE) | create_compressed_fs - 65536 $(DEST_LIVETREE).clp 2000 2>/dev/null
+%.clp: %
+	if [ -e $<.sort ]; then \
+	mkisofs -r -sort $<.sort $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	else \
+	mkisofs -r $< | create_compressed_fs - 65536 $@ 2000 2>/dev/null ; \
+	fi
