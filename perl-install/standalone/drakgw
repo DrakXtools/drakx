@@ -57,7 +57,6 @@ sub start_daemons()
     close DRAKGW_SETUP;
 }
 
-
 sub stop_daemons()
 {
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
@@ -69,6 +68,20 @@ sub stop_daemons()
     local *DRAKGW_SETUP; open DRAKGW_SETUP, ">$drakgw_setup" or die "Can't open $drakgw_setup";
     print DRAKGW_SETUP "INET_SHARING=disabled\n";
     close DRAKGW_SETUP;
+}
+
+sub install_rpm($)
+{
+    $in->suspend;
+    system("urpmi --auto --best-output $_[0]");
+    $in->resume;
+}
+
+sub fatal_quit($)
+{
+    (defined $wait_configuring) and (undef $wait_configuring);
+    $in->ask_warn('', $_[0]);
+    $in->exit(-1);
 }
 
 
@@ -255,7 +268,7 @@ my @chain_rules;
 #- **********************************
 #- * 2nd step: configure
 
-my $wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting servers..."));
+$wait_configuring = $in->wait_message('Configuring...', _("Configuring scripts, installing software, starting servers..."));
 
 #- setup the /etc/sysconfig/network-script/ script
 
@@ -278,8 +291,8 @@ close IFCFG;
 #- install and setup the FORWARD and MASQ stuff with IPCHAINS
 
 my $f = "/sbin/ipchains";
--e $f or system("urpmi --auto ipchains");
--e $f or ($in->ask_warn('', _("Could not install ipchains RPM with urpmi.")) and $in->exit(0));
+-e $f or install_rpm("ipchains");
+-e $f or fatal_quit(_("Could not install ipchains RPM with urpmi."));
 
 if (-f "/etc/rc.d/rc.firewall")
 {
@@ -428,7 +441,7 @@ close SYSCONF_NETWORK;
 #- install and setup the DHCP server
 
 $f = "/usr/sbin/dhcpd";
--e $f or system("urpmi --auto dhcp");
+-e $f or install_rpm("dhcp");
 -e $f or ($in->ask_warn('', _("Could not install dhcp RPM with urpmi.")) and $in->exit(0));
 
 -f $dhcpd_conf and rename($dhcpd_conf, "$dhcpd_conf.old");
@@ -452,7 +465,7 @@ close DHCPDCONF;
 
 #- put the interface for the dhcp server in linuxconf config, for the /etc script of dhcpd
 
--f $conf_linuxconf or system("urpmi --auto linuxconf");
+-f $conf_linuxconf or install_rpm("linuxconf");
 -f $conf_linuxconf or ($in->ask_warn('', _("Could not install linuxconf RPM with urpmi.")) and $in->exit(0));
 
 open CONF_LINUXCONF, "$conf_linuxconf" or die "Can't open $conf_linuxconf";
@@ -468,11 +481,11 @@ close CONF_LINUXCONF;
 #- install the BIND and caching nameserver stuff
 
 $f = "/usr/sbin/named";
--e $f or system("urpmi --auto bind");
+-e $f or install_rpm("bind");
 -e $f or ($in->ask_warn('', _("Could not install bind RPM with urpmi.")) and $in->exit(0));
 
 $f = "/var/named/named.local";
--e $f or system("urpmi --auto caching-nameserver");
+-e $f or install_rpm("caching-nameserver");
 -e $f or ($in->ask_warn('', _("Could not install caching-nameserver RPM with urpmi.")) and $in->exit(0));
 
 
