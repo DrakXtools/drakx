@@ -376,7 +376,7 @@ sub _create_dialog {
     my $dialog = gtknew('Dialog', title => $title, 
 			position_policy => 'center-on-parent', # center-on-parent does not work
 			modal => 1,
-			%$options,
+			%$options, allow_unknown_options => 1,
 			);
     may_set_icon($dialog, $wm_icon || $::Wizard_pix_up || "wiz_default_up.png");
     $dialog;

@@ -111,7 +111,7 @@ sub _gtk {
     }
 
     delete $opts{$_} foreach @known_opts;
-    if (%opts) {
+    if (%opts && !$opts{allow_unknown_options}) {
 	internal_error("$action $class: unknown option(s) " . join(', ', keys %opts));
     }
     $w;
@@ -404,6 +404,8 @@ sub _gtk__Dialog {
 	$w->set_transient_for(delete $opts->{transient_for}) if exists $opts->{transient_for};
 	$w->set_position(delete $opts->{position_policy}) if exists $opts->{position_policy};
     }
+    $w->set_title(delete $opts->{title}) if exists $opts->{title};
+
     $w;
 }
 
