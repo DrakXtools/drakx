@@ -36,6 +36,8 @@ sub good_choice {
 sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
 
+    add2hash_($common, { ok => _("Ok"), cancel => _("Cancel") }) if !exists $common->{ok};
+
 ask_fromW_begin:
 
     my $already_entries = 0;

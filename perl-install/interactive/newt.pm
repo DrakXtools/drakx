@@ -167,8 +167,13 @@ sub ask_fromW {
 	    $grid;
 	}
     };
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar(simplify_string($common->{ok} || _("Ok")), 
-							if_($common->{cancel}, simplify_string($common->{cancel})));
+
+    my ($b1, $b2) = map { simplify_string($_) }
+      (exists $common->{ok} ? 
+       ($common->{ok}, $common->{cancel}) :
+       ($::isWizard ? _("Next") : _("Ok"), $common->{cancel} || ($::isWizard ? _("<- Previous") : _("Cancel"))));
+    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($::isWizard ? ($b2, $b1) : ($b1, $b2));
+    ($ok, $cancel) = ($cancel, $ok) if $::isWizard;
 
     my $form = Newt::Component::Form(\undef, '', 0);
     my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@widgets == 0, @{$common->{messages}})), $listg, $buttons);
