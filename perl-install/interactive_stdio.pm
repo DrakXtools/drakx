@@ -118,7 +118,7 @@ ask_fromW_begin:
     $predo_widget->($_) foreach (@$l);
     if (listlength(@$l) > 30) {
 	my $ll = listlength(@$l);
-	print _("=> There are many things to choose from ($ll).\n");
+	print _("=> There are many things to choose from (%s).\n", $ll);
 ask_fromW_handle_verylonglist:
 	print _(
 "Please choose the first number of the 10-range you wish to edit,
