@@ -41,6 +41,7 @@ my %fields =
      "fpu" => [ N("Is FPU present"), N("yes means the processor has an arithmetic coprocessor")],
      "fpu_exception" => [ N("Does FPU have an irq vector"), N("yes means the arithmetic coprocessor has an exception vector attached")],
      "f00f_bug" => [N("F00f bug"), N("Early pentium were buggy and freeze when decoding the F00F instruction")],
+      "info" => [N("Floppy format"), N("Format of floppies the drive accept")],
      "level" => [N("Level"), N("Sub generation of the cpu")],
      "media_type" => [ N("Media class"), N("class of hardware device")],
      "Model" => [N("Model"), N("hard disk model")],
@@ -50,6 +51,7 @@ my %fields =
      "name" => [ N("Name"), "the name of the cpu"],
      "processor" => [ N("Processor ID"), N("the number of the processor")],
      "stepping" => [ N("Model stepping"), N("Stepping of the cpu (sub model (generation) number)") ],
+     "type" => [ N("Type"), N("The type of bus on which the mouse is connected")],
      "Vendor" => [ N("Vendor"), N("the vendor name of the device")],
      "vendor_id" => [ N("Vendor"), N("the vendor name of the processor")]
      );
