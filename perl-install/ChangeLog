@@ -1,3 +1,164 @@
+2002/02/22  dam's  <damien@mandrakesoft.com>
+
+	* share/advertising/02-internet.pl, share/advertising/07-server.pl,
+	share/advertising/11-consul.pl, share/advertising/09-MDKcampus.pl,
+	share/advertising/01-gnu.pl, share/advertising/13-Nvert.pl,
+	share/advertising/06-user.pl, share/advertising/10-MDKexpert.pl,
+	share/advertising/04-develop.pl, share/advertising/05-contcenter.pl,
+	share/advertising/12-MDKstore.pl, share/advertising/03-graphic.pl,
+	share/advertising/08-games.pl: corrected advertising text
+
+	* share/po/fr.po: corrected bad translation
+
+	* my_gtk.pm: corrected icon paths
+
+2002/02/22  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* standalone/drakgw: exit the pur_gtk version after launching the wizard
+	version
+
+	* any.pm: better rephrasing
+	change name and description of security levels
+
+	* share/rpmsrate: powermanga: 2 -> 3
+
+2002/02/22  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/DrakX.pot: updated Danish file
+
+	* lang.pm: start of support of kde fonts
+	fixed some keyboard names
+
+	* keyboard.pm: fixed some keyboard names
+	added the two ?win_toggle choices
+	some info useful for keyboard handling
+
+	* share/keyboards.tar.bz2: fixed some keyboard names
+
+	* share/po/hu.po: updated hungarian file
+
+2002/02/22  Pixel  <pixel@mandrakesoft.com>
+
+	* pkgs.pm: even smarted process to kill selection
+
+	* lang.pm: fix 2 entries in charset2kde_font
+	  - remove non needed entries in lang2country
+	  - fix syntax errors
+	  - rename kdefont in charset2kde_font
+	  - much cleanup
+	use invalid instead of unknown for errors when checking
+	put back the less deep langs
+	have the tree less deep (esp. nicer when not displaying UTF-8 entries)
+	not translating in console installs (esp. newt) when the font is missing
+	restrict the langs displayed to non utf8 during install
+	fix warning message
+	disable perl warnings when checking
+	make perl_checker happy
+
+	* devices.pm: add atibm (thanks to Robin Pollard)
+
+	* bootloader.pm: put ignore-table to disable lilo's partition table
+	checking
+	(esp. the checking of the CHS geometry vs linear geometry)
+
+	* Xconfigurator_consts.pm: fix syntax typo
+
+	* Makefile: 
+	  - exclude urpm from perl_checker
+	  - add checking keyboard.pm
+
+	* install_steps_interactive.pm, install2.pm, install_steps.pm: not
+	translating in console installs (esp. newt) when the font is missing
+
+	* keyboard.pm: use invalid instead of unknown for errors when checking
+	change the message
+	disable perl warnings when checking
+	  - add checks for the various data structures
+	  - fix another typo for usb2drakxkbd
+	fix typo
+
+	* share/rpmsrate: add procmail in SYSTEM 4
+	add samba-doc samba-winbind samba-swat
+
+	* Xconfigurator.pm: workaround set_active failing
+
+	* any.pm: use the setupBootloader help instead of setupBootloaderGeneral
+	restrict the langs displayed to non utf8 during install
+
+2002/02/22  tvignaud
+
+	* standalone/drakxtv: update TODO list;
+	explain what is HRC
+
+	* share/po/fr.po: further translations
+	update french translation
+
+2002/02/21  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: corrected icon list
+
+2002/02/21  fabman
+
+	* share/po/es.po: updated spanish po file
+
+2002/02/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/rpmsrate: spacecup no more exists
+	armagetron is nice, no use to install gltron as well
+	autoconf2.5 and automake1.5
+
+	* interactive.pm: when not in X and needs su, use consolehelper now
+	use consolehelper when no "kdeinit: kwin" process
+	is running
+
+2002/02/21  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/DrakX.pot, share/po/es.po, share/po/fr.po, share/po/bg.po,
+	share/po/ga.po, share/po/sr.po, share/po/de.po, share/po/et.po,
+	share/po/tr.po, share/po/eu.po, share/po/az.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/hr.po, share/po/ko.po, share/po/cy.po,
+	share/po/nl.po, share/po/ja.po, share/po/wa.po, share/po/sv.po,
+	share/po/is.po, share/po/Makefile, share/po/hu.po, share/po/it.po,
+	share/po/id.po, share/po/pl.po, share/po/no.po, share/po/fi.po,
+	share/po/th.po, share/po/el.po, share/po/sk.po, share/po/lt.po,
+	share/po/ar.po, share/po/sl.po, share/po/vi.po, share/po/br.po,
+	share/po/ca.po, share/po/gl.po, share/po/lv.po, share/po/uk.po,
+	share/po/eo.po, share/po/ro.po, share/po/bs.po, share/po/da.po,
+	share/po/zh_TW.po, share/po/cs.po, share/po/af.po: updated pot file
+
+2002/02/21  Pixel  <pixel@mandrakesoft.com>
+
+	* lvm.pm, install_any.pm: ensure lvm tools don't need to be all installed
+	at the same time
+
+	* lang.pm, tools/make_mdkinst_stage2: LC_COLLATE and LC_CTYPE are
+	getFile'd (cuz they are big, causing the .cz2 to be *big*)
+
+	* share/rpmsrate: add kinput2-wnn4
+
+2002/02/21  siegel
+
+	* share/po/de.po: update
+
+2002/02/21  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Removed "Manual configuration" button when "Local
+	Printer" dialog is started from the queue modification menu (Recommended
+	mode).
+	Improved matching of printer names resulting from auto-detection with
+	names in the database.
+
+2002/02/21  tvignaud
+
+	* share/po/fr.po: final batch of typos fixes (next time, please run a
+	check speller)
+	fix more typos
+	update french translation;
+	fix typos
+
+	* diskdrake/interactive.pm: shorter displayed message
+
 2002/02/21  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet: changed button label
