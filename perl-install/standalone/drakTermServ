@@ -41,6 +41,7 @@ use Gtk;
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+use strict;
 
 use interactive;
 use my_gtk qw(:helpers :wrappers);
@@ -782,6 +783,7 @@ sub maintain_clients {
 	}
 	
 	my $check_thin;
+	my $check_allow_thin;
 	my $is_thin = 0;
 			 
 	gtkpack($status_box,
@@ -845,8 +847,19 @@ sub maintain_clients {
 						}),
 					gtksignal_connect(new Gtk::Button(_("<-- Edit Client")), clicked => 
 						sub { $entry_host->set_text($client);
-							#FIXME - how to get the tree branches?
-							
+								$entry_mac->set_text($clients{$client}{hardware});
+								$entry_ip->set_text($clients{$client}{address});
+								my $type = $clients{$client}{type};
+								if ($type eq "thin") {
+									$check_thin->set_active(1);
+								} else {
+									$check_thin->set_active(0);
+								}	
+								$entry_nbi->entry->set_text($clients{$client}{filename});
+								my $result = delclient(0, $client);
+								if ($result eq 0) {
+									$tree_clients->remove_items($tree_clients->selection);
+								}
 						}),
 					gtksignal_connect(new Gtk::Button(_("Delete Client")), clicked => 
 						sub { my $result = delclient(0, $client);
@@ -867,6 +880,27 @@ sub maintain_clients {
 	gtksignal_connect($check_allow_thin, clicked => 
 		sub { invbool \$thin_clients;
 			$check_thin->set_sensitive($thin_clients);
+			# we need to change some system files to allow the thin clients
+			# to access the server - enabling xdmcp and modify hosts.deny/hosts.allow for some security
+			# we also need to set runlevel to 5 and restart the display manager
+			if ($thin_clients eq 1) {
+				`perl -pi -e 's/id:3:initdefault:/id:5:initdefault:/' /etc/inittab`;
+				`perl -pi -e 's/\! DisplayManager.requestPort:/DisplayManager.requestPort:/' /etc/X11/xdm/xdm-config`;
+				`perl -pi -e 's/Enable=false/Enable=true/' /usr/share/config/kdm/kdmrc`;
+				# This file had 2 "Enable=" entries, one for xdmcp and one for debug
+				change_gdm_xdmcp("true");
+				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+				# just xdmcp in hosts.allow is enough for xdm & kdm, but gdm doesn't work - x11 doesn't help either
+				update_hosts_allow("enable");
+			} else {
+				`perl -pi -e 's/id:5:initdefault:/id:3:initdefault:/' /etc/inittab`;
+				`perl -pi -e 's/DisplayManager.requestPort:/\! DisplayManager.requestPort:/' /etc/X11/xdm/xdm-config`;
+				`perl -pi -e 's/Enable=true/Enable=false/' /usr/share/config/kdm/kdmrc`;
+				change_gdm_xdmcp("false");
+				standalone::explanations("Modified files /etc/inittab, /etc/X11/xdm/xdm-config, /usr/share/config/kdm/kdmrc, /etc/X11/gdm/gdm.conf");
+				update_hosts_allow("disable");
+			}
+			$in->ask_warn('',_("Need to restart the Display Manager for full changes to take effect. \n(service dm restart - at the console)"));
 		}
 	);
 	$central_widget = \$client_box;
@@ -1430,6 +1464,63 @@ sub delclient {
 	if ($cmd_line == 1){
 		print "$hostname not found...\n" if (!$host_found);
 		return;
+	}	
+}
+
+sub change_gdm_xdmcp {
+	my ($enable) = @_;
+	my @conf_data = cat_("/etc/X11/gdm/gdm.conf");
+	for (my $i = 0; $i < @conf_data; $i++) {
+		$conf_data[$i] =~ s/^Enable\=false/Enable\=true/ if ($enable eq "true");
+		$conf_data[$i] =~ s/^Enable\=true/Enable\=false/ if ($enable eq "false");
+		# bail here so we don't alter the debug setting
+		if ($conf_data[$i] eq "[debug]\n") {
+			output("/etc/X11/gdm/gdm.conf", @conf_data);
+			last;
+		}
+	}		
+}
+
+sub update_hosts_allow {
+	my ($mode) = @_;
+	my $ip = get_ip_from_sys();
+	my @values = split(/\./, $ip);
+	my $subnet = $values[0] . "." . $values[1] . "." . $values[2] . ".";
+	if ($mode eq "enable") {
+		my $has_all = `grep ALL /etc/hosts.allow`;
+		if ($has_all) {
+			$in->ask_warn('',_("/etc/hosts.allow and /etc/hosts.deny already configured - not changed"));
+			return;
+		}
+		if (!$has_all) {
+			standalone::explanations("Modified file /etc/hosts.allow");
+			append_to_file("/etc/hosts.allow", "ALL:\t$subnet\n");
+		}
+		$has_all = `grep ALL /etc/hosts.deny`;
+		if (!$has_all) {
+			standalone::explanations("Modified file /etc/hosts.deny");
+			append_to_file("/etc/hosts.deny", "ALL:\tALL\n");
+		}
+	}
+	if ($mode eq "disable") {
+		my @allow = cat_("/etc/hosts.allow");
+		for (my $i = 0; $i < @allow; $i++) {
+			if ($allow[$i] =~ /^ALL:\t$subnet/) {
+				splice(@allow, $i, 1);
+				standalone::explanations("Modified file /etc/hosts.allow");
+				output("/etc/hosts.allow", @allow);
+				last;
+			}
+		}
+		my @deny = cat_("/etc/hosts.deny");
+		for (my $i = 0; $i < @deny; $i++) {
+			if ($deny[$i] =~ /^ALL:\tALL/) {
+				splice(@deny, $i, 1);
+				standalone::explanations("Modified file /etc/hosts.deny");
+				output("/etc/hosts.deny", @deny);
+				last;
+			}
+		}
 	}	
 }
 
