@@ -665,7 +665,7 @@ sub computeGroupSize {
 	}
 	join("\t", map { join('&&', @$_) } @r);
     }
-    my (%group, %memo);
+    my (%group, %memo, $slowpart_counter);
 
     foreach my $p (@{$packages->{depslist}}) {
 	my @flags = $p->rflags;
@@ -688,16 +688,27 @@ sub computeGroupSize {
 
 		my $pkg = $packages->{depslist}[$id];
 		foreach ($pkg->requires_nosense) {
-		    my ($candidate_id, $prefer_id);
-		    foreach (keys %{$packages->{provides}{$_} || {}}) {
-			my $ppkg = $packages->{depslist}[$_] or next;
-			$ppkg->flag_available and $prefer_id = $candidate_id = undef, last;
-			exists $preferred{$ppkg->name} and $prefer_id = $_;
-			$ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
-			$candidate_id = $_;
-		    }
-		    if (defined $prefer_id || defined $candidate_id) {
-			push @l2, defined $prefer_id ? $prefer_id : $candidate_id;
+		    my @choices = keys %{$packages->{provides}{$_} || {}};
+		    if (@choices <= 1) {
+			push @l2, @choices;
+		    } elsif (! find { exists $newSelection{$_} } @choices) {
+			my ($candidate_id, $prefer_id);
+			foreach (@choices) {
+			    ++$slowpart_counter;
+			    my $ppkg = $packages->{depslist}[$_] or next;
+			    $ppkg->flag_available and $prefer_id = $candidate_id = undef, last;
+			    exists $preferred{$ppkg->name} and $prefer_id = $_;
+			    $ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
+			    foreach my $l ($ppkg->requires_nosense) {
+				/locales-/ or next;
+				my $pppkg = packageByName($packages, $l) or next;
+				$pppkg->flag_available and $prefer_id ||= $_;
+			    }
+			    $candidate_id = $_;
+			}
+			if (defined $prefer_id || defined $candidate_id) {
+			    push @l2, defined $prefer_id ? $prefer_id : $candidate_id;
+			}
 		    }
 		}
 	    }
