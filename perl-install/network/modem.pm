@@ -249,7 +249,7 @@ sub ppp_choose {
 
 #- TODO: add choice between hcf/hsf/lt ?
 sub winmodemConfigure {
-    my ($in, $netc) = @_;
+    my ($in, $netcnx, $mouse, $netc, $intf) = @_;
     my %relocations = ( ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem') );
     my $type;
     
@@ -263,8 +263,19 @@ sub winmodemConfigure {
     $type || $in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
 Take a look at http://www.linmodems.org")) && return 1;
     my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
-    $e =~ /rpm/ ? $in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type) : return 1;
-    1;
+    if ($e =~ /rpm/) {
+	if ($in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type)) {
+	    unless ($::isInstall) {
+		#- fallback to modem configuration (beware to never allow test it).
+		$netcnx->{type} = 'modem';
+		$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
+		return configure($in, $netcnx, $mouse, $netc, $intf);
+	    }
+	} else {
+	    return 0;
+	}
+    }
+    return 1;
 }
 
 1;
