@@ -788,11 +788,17 @@ sub updateModulesFromFloppy {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($o) = @_;
-    require network::network;
     require network::ethernet;
     modules::load_category($o->{modules_conf}, network::ethernet::get_eth_categories());
-    network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
-    $o->SUPER::configureNetwork;
+
+    if ($o->{meta_class} eq 'firewall') {
+	require network::netconnect;
+	network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+    } else {
+	require network::network;
+	network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
+	$o->SUPER::configureNetwork;
+    }
 }
 
 #------------------------------------------------------------------------------
