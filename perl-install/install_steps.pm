@@ -936,7 +936,7 @@ sub configureXAfter {
     if ($o->{X}{bios_vga_mode}) {
 	install_any::setupFB($o, $o->{X}{bios_vga_mode}) or do {
 	    log::l("disabling automatic start-up of X11 if any as setup framebuffer failed");
-	    any::runlevel($o->{prefix}, 3); #- disable automatic start-up of X11 on error.
+	    any::runlevel(3); #- disable automatic start-up of X11 on error.
 	};
     }
     if ($o->{X}{default_depth} >= 16 && $o->{X}{resolution_wanted} >= 1024) {
