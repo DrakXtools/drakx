@@ -157,7 +157,7 @@ sub subpart_from_wild_device_name {
 	    }
 	    $dev =~ s!/(tmp|u?dev)/!!;
 
-	    if (my ($is_devfs, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
+	    if (my (undef, $part_number) = $dev =~ m!/(disc|part(\d+))$!) {
 		$part{part_number} = $part_number if $part_number;
 		$part{devfs_device} = $dev;
 	    } else {
