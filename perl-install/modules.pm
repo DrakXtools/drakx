@@ -37,7 +37,7 @@ sub load {
 	my ($name, @options) = ref($_) ? @$_ : $_;
 	$options{$name} = \@options;
 	my @l = dependencies_closure($name);
-	if (c::kernel_version() =~ /^\@2.6/) {
+	if (c::kernel_version() =~ /^\Q2.6/) {
 	    push @l, "$1-hcd" if $name =~ /(uhci|ohci)/; # usb-uhci, uhci, usb-ohci are deprecated in 2.6
 	}
 	@l;
