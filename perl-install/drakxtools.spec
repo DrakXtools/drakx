@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
-Version: 10
-Release: 57mdk
+Version: 10.1
+Release: 0.1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,21 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.1mdk
+- diskdrake: fix Compaq Smart Array support (pixel)
+- drakauth: misc (vincent)
+- drakbackup, drakTermServ: fix crashes on append_set (stew)
+- drakbug: (daouda)
+  o scroll down text while typing
+  o many cleanups
+  o stable releases are 'Official' and 'Community'
+- explanations: only log succesfull renamings
+- harddrake GUI: do not automatically configure removable media but
+  use diskdrake
+- modules: read modutils or module-init-tools config depending on
+  which kernel is run (pixel)
+- net_monitor: save/restore options
+
 * Wed Jul 21 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-57mdk
 - drakauth (vincent):
   o restart services if needed
