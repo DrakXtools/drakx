@@ -462,9 +462,10 @@ sub create_box_with_title($@) {
 }
 
 sub createScrolledWindow {
-    my ($W) = @_;
+    my ($W, $policy) = @_;
     my $w = new Gtk::ScrolledWindow(undef, undef);
-    $w->set_policy('automatic', 'automatic');
+    $policy ||= [ 'automatic', 'automatic'];
+    $w->set_policy(@{$policy});
     member(ref $W, qw(Gtk::CList Gtk::CTree Gtk::Text)) ?
       $w->add($W) :
       $w->add_with_viewport($W);

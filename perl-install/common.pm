@@ -130,6 +130,14 @@ sub expand_symlinks_but_simple {
 
 sub sync { &MDK::Common::System::sync }
 
+# Group the list by n. Returns a reference of lists of length n
+sub group_n_lm {
+    my $n = shift;
+    my @l;
+    push @l, [ splice(@_, 0, $n) ] while (@_);
+    @l
+}
+
 #-######################################################################################
 #- Wonderful perl :(
 #-######################################################################################
