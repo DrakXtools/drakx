@@ -1493,27 +1493,46 @@ sub remove($$) {
 
 sub selected_leaves {
     my ($packages) = @_;
-    my (%l, %m);
-    $l{$_->[$FILE]} = 1 foreach grep { packageFlagSelected($_) && !packageFlagBase($_) } @{$packages->{depslist}};
+    my %l;
 
+    #- initialize l with all id, not couting base package.
+    foreach my $id (0 .. $#{$packages->{depslist}}) {
+	my $pkg = $packages->{depslist}[$id];
+	packageSelectedOrInstalled($pkg) && !packageFlagBase($pkg) or next;
+	$l{$id} = 1;
+    }
 
-    do {
-	%m = %l;
-
-      N: foreach my $p (@{$packages->{depslist}}) {
-	    foreach (packageProvides($p)) {
-		if ($l{$_->[$FILE]}) {
-		    delete $l{$p->[$FILE]};
-		    next N;
+    foreach my $id (keys %l) {
+	#- when a package is in a choice, increase its value in hash l, because
+	#- it has to be examined before when we will select them later.
+	#- NB: this number may be computed before to save time.
+	foreach (packageDepsId($packages->{depslist}[$id])) {
+	    if (/\|/) {
+		foreach (split '\|') {
+		    exists $l{$_} or next;
+		    $l{$_} > 1 + $l{$id} or $l{$_} = 1 + $l{$id};
 		}
 	    }
 	}
-    } until (%m == %l);
+    }
 
-    [ map {
-	my @l; $l[$FILE] = $_;
-	packageName(\@l);
-    } grep { $l{$_} } keys %l ];
+    #- at this level, we can remove selected packages that are already
+    #- required by other, but we have to sort according to choice usage.
+    foreach my $id (sort { $l{$b} <=> $l{$a} || $b <=> $a } keys %l) {
+	#- do not count already deleted id, else cycles will be removed.
+	$l{$id} or next;
+
+	foreach (packageDepsId($packages->{depslist}[$id])) {
+	    #- choices need no more to be examined, this has been done above.
+	    /\|/ and next;
+	    #- improve value of this one, so it will be selected before.
+	    $l{$id} < $l{$_} and $l{$id} = $l{$_};
+	    $l{$_} = 0;
+	}
+    }
+
+    #- now sort again according to decrementing value, and gives packages name.
+    [ map { packageName($packages->{depslist}[$_]) } sort { $l{$b} <=> $l{$a} } grep { $l{$_} > 0 } keys %l ];
 }
 
 
