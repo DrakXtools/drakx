@@ -201,7 +201,7 @@ sub cardConfigurationAuto() {
 }
 
 sub cardConfiguration(;$$$) {
-    my ($card, $noauto, $allowFB) = @_;
+    my ($card, $noauto, $cardOptions) = @_;
     $card ||= {};
 
     updateCardAccordingName($card, $card->{type}) if $card->{type}; #- try to get info from given type
@@ -245,9 +245,9 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 	add2hash($card, $cards[0]) unless $card->{server} || $noauto;
 	delete $card->{cards}; delete $card->{Xinerama};
     }
-    $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
+    $card->{server} = 'FBDev' unless !$cardOptions->{allowFB} || $card->{server} || $card->{type} || $noauto;
     $card->{type} = cardName2RealName($in->ask_from_treelist(_("Graphic card"), _("Select a graphic card"), '|', ['Other|Unlisted', readCardsNames()])) unless $card->{type} || $card->{server};
-    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
+    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $cardOptions->{allowFB} ? \@allservers : \@allbutfbservers ) or return if $card->{type} eq 'Other|Unlisted';
 
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
@@ -283,6 +283,9 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				     $card->{identifier} =~ /SiS.*6C?236/ ||
 				     $card->{identifier} =~ /SiS.*630/ ||
 				     $card->{identifier} =~ /Radeon /); #- 16bits preferable ?
+    #- 3D acceleration configuration for XFree 4.0 using NVIDIA driver (TNT, TN2 and GeForce cards only).
+    $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{type} =~ /RIVA TNT/ ||
+							       $card->{type} =~ /GeForce/);
 
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
@@ -302,21 +305,21 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
     #- basic installation, use of XFree 4.0 or XFree 3.3.
     my ($xf4_ver, $xf3_ver) = ("4.0.3", "3.3.6");
     my $xf3_tc = { text => _("XFree %s", $xf3_ver),
-		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = ''; $card->{use_xf4} = '';
+		   code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = ''; $card->{use_xf4} = '';
 				 log::l("Using XFree $xf3_ver") } };
     my $msg = _("Which configuration of XFree do you want to have?");
     my @choices = $card->{use_xf4} ? (if_($card->{prefer_xf3}, $xf3_tc),
 				      #- hack for Matrox driver where there are undefined reference if no DRI!
 				      if_($card->{identifier} !~ /Matrox.* G[24][05]0/ && (!$card->{prefer_xf3} || $::expert), 
 					  { text => _("XFree %s", $xf4_ver),
-					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = '';
+					    code => sub { $card->{Utah_glx} = $card->{DRI_glx} = $card->{NVIDIA_glx} = '';
 							  log::l("Using XFree $xf4_ver") } }),
 				      if_(!$card->{prefer_xf3} && $::expert, $xf3_tc)) : $xf3_tc;
 
     #- try to figure if 3D acceleration is supported
     #- by XFree 3.3 but not XFree 4.0 then ask user to keep XFree 3.3 ?
     if ($card->{Utah_glx}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_glx} && !$card->{prefer_xf3} ?
+	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
 _("Your card can have 3D hardware acceleration support with XFree %s.", $xf3_ver)) . "\n\n\n" . $msg;
@@ -339,7 +342,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf4_ver) . "\
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration, currenlty
     #- this is with Utah GLX and so, it can provide a way of testing.
     if ($::expert && $card->{Utah_glx_EXPERIMENTAL}) {
-	$msg = ($card->{use_xf4} && !$card->{DRI_glx} && !$card->{prefer_xf3} ?
+	$msg = ($card->{use_xf4} && !($card->{DRI_glx} || $card->{NVIDIA_glx}) && !$card->{prefer_xf3} ?
 _("Your card can have 3D hardware acceleration support but only with XFree %s,
 NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.
 Your card is supported by XFree %s which may have a better support in 2D.", $xf3_ver, $xf4_ver) :
@@ -351,7 +354,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
     }
 
     #- ask the expert user to enable or not hardware acceleration support.
-    if ($card->{use_xf4} && $card->{DRI_glx}) {
+    if ($card->{use_xf4} && ($card->{DRI_glx} || $card->{NVIDIA_glx})) {
 	$msg = _("Your card can have 3D hardware acceleration support with XFree %s.", $xf4_ver) . "\n\n\n" . $msg;
 	$::expert or @choices = (); #- keep all user by default with XFree 4.0 including 3D acceleration.
 	unshift @choices, { text => _("XFree %s with 3D hardware acceleration", $xf4_ver),
@@ -376,6 +379,8 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	push @l, 'Glide_V5' if $card->{identifier} =~ /Voodoo 5/;
 	push @l, 'Glide_V3-DRI' if $card->{identifier} =~ /Voodoo (3|Banshee)/;
 	push @l, 'XFree86-glide-module' if $card->{identifier} =~ /Voodoo/;
+    } elsif ($card->{NVIDIA_glx}) {
+	push @l, @{$cardOptions->{allowNVIDIA_rpms}};
     }
     if ($card->{Utah_glx}) {
 	push @l, 'Mesa' if !$card->{use_xf4};
@@ -383,6 +388,16 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 
     -x "$prefix$card->{prog}" or $install && $install->($card->{use_xf4} ? 'XFree86-server' : "XFree86-$card->{server}", @l);
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
+
+    #- make sure everything is correct at this point, packages have really been installed
+    #- and driver and GLX extension is present.
+    if ($card->{NVIDIA_glx} && !$card->{DRI_glx} && (-e "$prefix/usr/X11R6/lib/modules/drivers/nvidia_drv.o" &&
+						     -e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so")) {
+	log::l("Using specific NVIDIA driver and GLX extensions");
+	$card->{driver} = 'nvidia';
+    } else {
+	$card->{NVIDIA_glx} = '';
+    }
 
     delete $card->{depth}{32} if $card->{type} =~ /S3 Trio3D|SiS/;
     $card->{options}{sw_cursor} = 1 if $card->{type} =~ /S3 Trio3D|SiS 6326/;
@@ -1036,10 +1051,20 @@ Section "Module"
 
     Load	"dbe"
 );
-    print G qq(
+    if ($o->{card}{DRI_glx}) {
+	print G qq(
     Load	"glx"
     Load	"dri"
-) if $o->{card}{DRI_glx};
+);
+    } elsif ($o->{card}{NVIDIA_glx}) {
+	print G qq(
+# This loads the NVIDIA GLX extension module.
+# IT IS IMPORTANT TO KEEP NAME AS FULL PATH TO libglx.so ELSE
+# IT WILL LOAD XFree86 glx module and the server will crash.
+
+    Load        "/usr/X11R6/lib/modules/extensions/libglx.so"
+);
+    }
     print G qq(
 
 # This loads the miscellaneous extensions module, and disables
@@ -1320,8 +1345,8 @@ sub show_info {
 
 #- Program entry point.
 sub main {
-    my ($o, $allowFB);
-    ($prefix, $o, $in, $allowFB, $install) = @_;
+    my ($o, $cardOptions);
+    ($prefix, $o, $in, $cardOptions, $install) = @_;
     $o ||= {};
 
     XF86check_link('');
@@ -1330,7 +1355,7 @@ sub main {
     {
 	my $w = $in->wait_message('', _("Preparing X-Window configuration"), 1);
 
-	$o->{card} = cardConfiguration($o->{card}, $::noauto, $allowFB);
+	$o->{card} = cardConfiguration($o->{card}, $::noauto, $cardOptions);
 
 	$o->{monitor} = monitorConfiguration($o->{monitor}, $o->{card}{server} eq 'FBDev');
     }
@@ -1354,7 +1379,7 @@ sub main {
 		    { format => sub { $_[0][0] }, val => \$f,
 		      list => [
 	   [ _("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() } ],
-           [ _("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $allowFB) } ],
+           [ _("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto', $cardOptions) } ],
                     if_($::expert, 
            [ _("Change Server options") => sub { optionsConfiguration($o) } ]),
 	   [ _("Change Resolution") => sub { resolutionsConfiguration($o) } ],

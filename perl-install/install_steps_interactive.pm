@@ -1063,7 +1063,10 @@ sub configureX {
       local $::auto = !$::expert && !$clicked;
 
       symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-      Xconfigurator::main($o->{prefix}, $o->{X}, $o, $o->{allowFB}, sub { $o->pkg_install(@_) });
+      Xconfigurator::main($o->{prefix}, $o->{X}, $o,
+			  { allowFB          => $o->{allowFB},
+			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
+			  }, sub { $o->pkg_install(@_) });
     }
     $o->configureXAfter;
 }

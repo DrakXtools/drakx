@@ -58,8 +58,31 @@ begin:
 Xconfig::getinfo($i);
 Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
 
+my $allowNVIDIA_rpms;
+eval {
+    my (%list, %select);
+    local *F;
+    open F, "grep NVIDIA /var/lib/urpmi/depslist.ordered |";
+    while (<F>) {
+	/(.*)-([^-]*)-([^-]*)\s+/ and $list{$1} = 1;
+    }
+    close F;
+    if ($list{NVIDIA_GLX}) {
+	my ($version, $release, $ext) = `uname -r` =~ /([^-]*)-([^-]*mdk)(\S*)/;
+	$ext and $ext = "-$ext";
+	$list{"NVIDIA_kernel-$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
+	$select{"NVIDIA_kernel-$version-$release$ext"} = 1;
+	foreach (`rpm -q kernel kernel-smp kernel-entreprise kernel22 kernel22-smp kernel22-secure`) {
+	    ($ext, $version, $release) = /kernel[^-]*(-[^-]*)-([^-]*)-([^-]*mdk)/;
+	    $list{"NVIDIA_kernel-$version-$release$ext"} and $select{"NVIDIA_kernel-$version-$release$ext"} = 1;
+	}
+	$allowNVIDIA_rpms = [ keys(%select), "NVIDIA_GLX" ];
+    }
+};
+
 $::isEmbedded and kill USR2, $::CCPID;
-Xconfigurator::main('', $i, $in, 0, sub { $in->standalone::pkgs_install(@_) });
+Xconfigurator::main('', $i, $in, { allowFB          => 0,
+				   allowNVIDIA_rpms => $allowNVIDIA_rpms }, sub { $in->standalone::pkgs_install(@_) });
 !$::isEmbedded and $in->exit(0);
 kill USR1, $::CCPID;
 goto begin;
