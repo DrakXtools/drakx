@@ -12,37 +12,37 @@ use printer::cups;
 # ------------------------------------------------------------------
 
 
-our %suites =
-    (
-     'Star Office' => {
-	 'make' => \&makestarofficeprinterentry,
-	 'file_name' => '^(.*)/share/psprint/psprint.conf$',
-	 'param' => ["Generic Printer", "Command="],
-	 'perl' => "/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/",
-	 'files' => [qw(/usr/lib/*/share/xp3/Xpdefaults
-		       /usr/local/lib/*/share/xp3/Xpdefaults
-		       /usr/local/*/share/xp3/Xpdefaults
-		       /opt/*/share/xp3/Xpdefaults)]
-
-	 },
-     'OpenOffice.Org' => {
-	 'make' => \&makeopenofficeprinterentry,
-	 'file_name' => '^(.*)/share/xp3/Xpdefaults$',
-	 'param' => ["ports", "default_queue="],
-	 'perl' => "usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/",
-	 'files' => [qw(/usr/lib/*/share/psprint/psprint.conf
-		       /usr/local/lib/*/share/psprint/psprint.conf
-		       /usr/local/*/share/psprint/psprint.conf
-		       /opt/*/share/psprint/psprint.conf)]
-	 }
-     );
+our $suites = {
+    'OpenOffice.Org' => {
+	'make' => \&makeopenofficeprinterentry,
+	'remove' => \&removeopenofficeprinterentry,
+	'file_name' => '^(.*)/share/psprint/psprint.conf$',
+	'param' => ["Generic Printer", "Command="],
+	'perl' => "/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/",
+	'files' => ["/usr/lib/*/share/psprint/psprint.conf",
+		    "/usr/local/lib/*/share/psprint/psprint.conf",
+		    "/usr/local/*/share/psprint/psprint.conf",
+		    "/opt/*/share/psprint/psprint.conf"],
+    },
+    'Star Office' => {
+	'make' => \&makestarofficeprinterentry,
+	'remove' => \&removestarofficeprinterentry,
+	'file_name' => '^(.*)/share/xp3/Xpdefaults$',
+	'param' => ["ports", "default_queue="],
+	'perl' => "/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/",
+	'files' => ["/usr/lib/*/share/xp3/Xpdefaults",
+		    "/usr/local/lib/*/share/xp3/Xpdefaults",
+		    "/usr/local/*/share/xp3/Xpdefaults",
+		    "/opt/*/share/xp3/Xpdefaults"],
+    }
+};
 
 sub configureoffice {
     my ($suite, $printer) = @_;
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites{$suite}{file_name}!;
+    $configfilename =~ m!$suites->{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
@@ -66,7 +66,10 @@ sub configureoffice {
 		      "http://$server:631/printers/$queue.ppd"));
 	    }
 	    if (-r "$::prefix/etc/foomatic/$queue.ppd") {
-		$configfilecontent = $suites{$suite}{make}($printer, $queue, $configprefix, $configfilecontent);
+		$configfilecontent =
+		    $suites->{$suite}{make}($printer, $queue, 
+					    $configprefix,
+					    $configfilecontent);
 	    }
 	}
     }
@@ -74,7 +77,6 @@ sub configureoffice {
     foreach my $queue (keys(%{$printer->{configured}})) {
 	# Check if we have a PPD file
 	if (! -r "$::prefix/etc/foomatic/$queue.ppd") {
-         # Only set up this printer if there's a PPD file
 	    if (-r "$::prefix/etc/cups/ppd/$queue.ppd") {
 		# If we have a PPD file in the CUPS config dir, link to it
 		run_program::rooted($::prefix, 
@@ -87,16 +89,25 @@ sub configureoffice {
 				    "ln", "-sf",
 				    "/usr/share/postscript/ppd/$queue.ppd",
 				    "/etc/foomatic/$queue.ppd");
+	    } else {
+		# No PPD file at all? We cannot set up this printer
+		next;
 	    }
 	}
 	$configfilecontent = 
-	    $suites{$suite}{make}($printer, $queue, $configprefix, $configfilecontent);
+	    $suites->{$suite}{make}($printer, $queue, $configprefix,
+				    $configfilecontent);
     }
     # Patch PostScript output to print Euro symbol correctly also for
     # the "Generic Printer"
-    my @parameters = $suites{$suite}{param};
-    $configfilecontent = removeentry(@parameters, $configfilecontent);
-    $configfilecontent = addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $spoolers{$printer->{SPOOLER}}{print_command}, $configfilecontent);
+    my @parameters = @{$suites->{$suite}{param}};
+    $configfilecontent = removeentry($parameters[0], $parameters[1],
+				     $configfilecontent);
+    $configfilecontent =
+	addentry($parameters[0],
+		 $parameters[1] . $suites->{$suite}{perl} . 
+		 $spoolers{$printer->{SPOOLER}}{print_command},
+		 $configfilecontent);
     # Write back Star Office configuration file
     return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
@@ -106,7 +117,7 @@ sub add_cups_remote_to_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites{$suite}{file_name}!;
+    $configfilename =~ m!$suites->{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
@@ -134,11 +145,12 @@ sub add_cups_remote_to_office {
 	    }
 	    # Does the file exist and is it not an error message?
 	    if (-r "$::prefix/etc/foomatic/$queue.ppd" &&
-		cat_("$::prefix/etc/foomatic/$queue.ppd") =~ /^\*PPD-Adobe/) {
+		cat_("$::prefix/etc/foomatic/$queue.ppd") =~
+		/^\*PPD-Adobe/) {
 		$configfilecontent = 
-		    $suites{$suite}{make}($printer, $queue,
-					       $configprefix,
-					       $configfilecontent);
+		    $suites->{$suite}{make}($printer, $queue,
+					    $configprefix,
+					    $configfilecontent);
 	    } else {
 		unlink "$::prefix/etc/foomatic/$queue.ppd";
 		return 0;
@@ -155,14 +167,14 @@ sub remove_printer_from_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites{$suite}{file_name}!;
+    $configfilename =~ m!$suites->{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entry
-    $configfilecontent = 
-	removestarofficeprinterentry($printer, $queue, $configprefix,
-				     $configfilecontent);
+    $configfilecontent =
+	$suites->{$suite}{remove}($printer, $queue, $configprefix,
+				  $configfilecontent);
     # Write back Star Office configuration file
     return eval { output("$::prefix$configfilename", $configfilecontent) };
 }
@@ -172,14 +184,15 @@ sub remove_local_printers_from_office {
     # Do we have Star Office installed?
     my $configfilename = find_config_file($suite);
     return 1 unless $configfilename;
-    $configfilename =~ m!$suites{$suite}{file_name}!;
+    $configfilename =~ m!$suites->{$suite}{file_name}!;
     my $configprefix = $1;
     # Load Star Office printer config file
     my $configfilecontent = cat_("$::prefix$configfilename");
     # Remove the printer entries
     foreach my $queue (keys(%{$printer->{configured}})) {
 	$configfilecontent = 
-	    removestarofficeprinterentry($printer, $queue, $configprefix, $configfilecontent);
+	    $suites->{$suite}{remove}($printer, $queue, $configprefix,
+				      $configfilecontent);
     }
     # Write back Star Office configuration file
     return eval { output("$::prefix$configfilename", $configfilecontent) };
@@ -338,14 +351,14 @@ sub removeopenofficeprinterentry {
 
 sub find_config_file {
     my ($suite) = @_;
-    my $configfilenames = $suites{$suite}{files};
+    my $configfilenames = $suites->{$suite}{files};
     foreach my $configfilename (@$configfilenames) {
 	local *F;
 	if (open F, "ls -r $::prefix$configfilename 2> /dev/null |") {
 	    my $filename = <F>;
 	    close F;
 	    if ($filename) {
-		    $filename =~ s/^$::prefix// if $::prefix;
+		$filename =~ s/^$::prefix// if $::prefix;
 		# Work around a bug in the "ls" of "busybox". During
 		# installation it outputs the mask given on the command line
 		# instead of nothing when the mask does not match any file
