@@ -4,7 +4,7 @@ PMSFILES = $(wildcard $(ALLPMS:%=../../%))
 
 # temporarly don't include those po files
 # (too low translation percentage)
-#POFILES = $(shell ls *.po|grep -v '\(ga.po\|is.po\|sl.po\)')
+POFILES = $(shell ls *.po|grep -v '\(ga.po\|is.po\|sl.po\)')
 
 MOFILES = $(POFILES:%.po=%.mo)
 LANGS = $(POFILES:%.po=%)
