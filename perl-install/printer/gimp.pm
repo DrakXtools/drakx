@@ -265,6 +265,7 @@ sub addentry {
 	    $sectionfound = 1 if /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
 	    if (!/^\s*$/ && !/^\s*;/) {
+          $_ = "$entry\n$_";
 		$entryinserted = 1;
 		last;
 	    }
@@ -289,15 +290,17 @@ sub removeentry {
     my $sectionfound;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	$_ = "$_\n";
 	if (!$sectionfound) {
 	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
 	} else {
 	    last if /^\s*Printer\s*:\s*.*\s*$/; # Next section
-         last if /^\s*$entry/;
+         if (/^\s*$entry/) {
+             $_ = "";
+             last;
+         }
 	}
     }
-    return join "", @lines;
+    return join "\n", @lines;
 }
 
 sub removeprinter {
@@ -305,14 +308,17 @@ sub removeprinter {
     my $sectionfound;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	$_ = "$_\n";
 	if (!$sectionfound) {
-	    $sectionfound = /^\s*Printer\s*:\s*($section)\s*$/;
+	    if (/^\s*Printer\s*:\s*($section)\s*$/) {
+             $_ = "";
+             $sectionfound = 1;
+         }
 	} else {
 	    last if /^\s*Printer\s*:\s*.*\s*$/; # Next section
+         $_ = "";
 	}
     }
-    return join "", @lines;
+    return join "\n", @lines;
 }
 
 sub isprinterconfigured {
