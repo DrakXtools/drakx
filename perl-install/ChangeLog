@@ -16,6 +16,24 @@
 	newtListboxAddEntry)
 	(newtListboxAddEntry): data is now a SV
 
+2001/01/26  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (installPackages): prepare for advertising...
+
+	* interactive_newt.pm (ask_from_entries_refW): major rework for new
+	format, still need work
+	(ask_from_entries_refW): use NEWT_FLAG_PASSWORD (aka 1<<11) instead of
+	NEWT_FLAG_HIDDEN
+	(myTextbox): wrap the text if needed
+	(myTextbox): use a vertical scrollbar if needed
+
+	* Newt/Newt.xs (newtFormAddGrid): new name for
+	newtGridAddComponentsToForm, swap
+	parameters for much better understanding
+	(newtListboxGetCurrent): returns a SV (together with
+	newtListboxAddEntry)
+	(newtListboxAddEntry): data is now a SV
+
 2001/01/25  dam's  <damien@mandrakesoft.com>
 
 	* install2.pm: disable steps 'packages choice', 'configure X', and
