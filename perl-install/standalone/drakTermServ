@@ -870,10 +870,10 @@ sub dhcpd_config {
 				gtkadd($box_name_servers),
 			),
 			0, gtkadd(new Gtk::VBox(0,0),
-				new Gtk::Label("dhcpd Server Configuration\n\n
+				new Gtk::Label(_("dhcpd Server Configuration\n\n
 					Most of these values were extracted
 					from your running system.  You can
-					modify as needed."),
+					modify as needed.")),
 				gtksignal_connect(new Gtk::Button(_("Write Config")), clicked => 
 						sub { write_dhcpd_config(
 							$entry_subnet->get_text(),
@@ -1072,13 +1072,10 @@ sub toggle_chkconfig {
 
 sub service_change {
 	my ($service, $command, $buff_index) = @_;
-	system("/sbin/service $service $command > /tmp/drakTSservice.status 2>&1");
+	system("BOOTUP=serial /sbin/service $service $command > /tmp/drakTSservice.status 2>&1");
 	open(STATUS, "/tmp/drakTSservice.status");
 	while(<STATUS>) {
-		my ($phrase, $result) = split(':',$_);
-		$result = "[ OK ]" if ($result =~ /OK/);
-		$result = "[ FAIL ]" if ($result =~ /FAIL/);
-		$buff[$buff_index] = "\t$phrase:\t\t\t" . $result . "\n";
+		$buff[$buff_index] = "\t$_";
 		$buff_index++;
 	}
 	close STATUS;
