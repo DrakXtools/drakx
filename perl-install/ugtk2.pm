@@ -722,7 +722,7 @@ sub new {
     $o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient};
     
 
-    $o->{pop_it} ||= $pop_it || $::WizardTable && listlength($::WizardTable->get_children);
+    $o->{pop_it} ||= $pop_it || $::WizardTable && listlength($::WizardTable->get_children) > ($::isInstall ? 0 : 1);
 
     if ($::isWizard && !$o->{pop_it}) {
 	$o->{isWizard} = 1;
