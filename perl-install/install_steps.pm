@@ -392,10 +392,13 @@ sub pppConfig {
     install_any::pkg_install($o, "ppp");
 
     my %toreplace;
-    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain);
-    $toreplace{kpppauth} = ${{ 'Script-based' => 0, PAP => 1, 'Terminal-based' => 2, CHAP => 3, }}{$o->{modem}{auth}}; #'
-    $toreplace{phone} =~ s/[^\d]//g;
+    $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
+    $toreplace{kpppauth} = ${{ 'Script-based' => 0, 'PAP' => 1, 'Terminal-based' => 2, 'CHAP' => 3, }}{$o->{modem}{auth}};
+    $toreplace{phone} =~ s/\D//g;
     $toreplace{dnsserver} = join '', map { "$o->{modem}{$_}," } "dns1", "dns2";
+
+    #- using peerdns or dns1,dns2 avoid writing a /etc/resolv.conf file.
+    $toreplace{peerdns} = "yes";
 
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
@@ -420,13 +423,6 @@ sub pppConfig {
 	template2file("/usr/share/ifcfg-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
 	template2file("/usr/share/chat-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
     } #- no CHAP currently.
-
-    #- build /etc/resolv.conf according to ppp configuration since there is no other network configuration.
-    open F, ">$o->{prefix}/etc/resolv.conf" or die "Can't open $o->{prefix}/etc/resolv.conf $!";
-    print F "domain $o->{modem}{domain}\n";
-    print F "nameserver $o->{modem}{dns1}\n" if $o->{modem}{dns1};
-    print F "nameserver $o->{modem}{dns2}\n" if $o->{modem}{dns2};
-    close F;
 
     install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
 

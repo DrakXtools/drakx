@@ -370,7 +370,7 @@ sub doInstallStep {
 }
 #------------------------------------------------------------------------------
 sub miscellaneous {
-    $o->miscellaneous($_[0]); 
+    $o->miscellaneous($_[0]);
 
     addToBeDone {
 	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
@@ -402,7 +402,7 @@ sub configureNetwork {
 	add2hash($o->{netc}, network::read_conf("$o->{prefix}/etc/sysconfig/network")) if -r "$o->{prefix}/etc/sysconfig/network";
 	add2hash($o->{netc}, network::read_resolv_conf("$o->{prefix}/etc/resolv.conf")) if -r "$o->{prefix}/etc/resolv.conf";
 	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
-	    if (/ifcfg-(\w+)/) {
+	    if (/ifcfg-(\w+)/ && $1 !~ /^ppp/) {
 		push @{$o->{intf}}, { getVarsFromSh("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
 	    }
 	}
@@ -624,6 +624,7 @@ sub main {
     }
     $::o = $o = $o_;
 
+    #- get stage1 network configuration if any.
     $o->{netc} = network::read_conf("/tmp/network");
     if (my ($file) = glob_('/tmp/ifcfg-*')) {
 	log::l("found network config file $file");

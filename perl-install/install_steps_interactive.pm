@@ -502,8 +502,10 @@ _("Login ID") => \$m->{login},
 _("Password") => { val => \$m->{passwd}, hidden => 1 },
 _("Authentication") => { val => \$m->{auth}, list => [ __("PAP"), __("CHAP"), __("Terminal-based"), __("Script-based") ] },
 _("Domain name") => \$m->{domain},
+$::expert ? (
 _("First DNS Server") => \$m->{dns1},
 _("Second DNS Server") => \$m->{dns2},
+) : (),
     ]);
 }
 
