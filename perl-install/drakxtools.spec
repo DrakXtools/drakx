@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.22mdk
+Release: 0.23mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Feb 10 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.23mdk
+- printerdrake (till):
+  o add automatic setup of HP printers with HPLIP
+  o fixes for embedded mode
+- drakconnect:
+  o add support for ACP (Mwave) modems
+  o fix stepping back from lan interface step with ndiswrapper
+  o fix ndiswrapper installing
+- interactive layer: fix selecting a file (eg: ndiswrapper's drivers)
+- hardware support:
+  o detect & load modules for:
+    * toshiba driver for some laptops
+    * some multiport serial cards
+    * DVB
+    * joysticks
+  o add support for multiple different AGP controllers
+  o handle a few more special serial ports
+
 * Wed Feb  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.22mdk
 - localedrake: switch arabic font for KDE from "Roya" to "Terafik"
   that supports ascii glyphs (pablo)
