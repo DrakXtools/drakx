@@ -535,7 +535,7 @@ sub pur_gtk_mode {
     }
     $window1->{rwindow}->set_border_width(10);
     my $vbox1 = new Gtk2::VBox(0,0);
-    $window1->{rwindow}->add($vbox1);
+    $window1->{window}->add($vbox1);
     my $hbox1 = new Gtk2::HBox(0,0);
     $vbox1->pack_start($hbox1,1,1,0);
     my $label1 = new Gtk2::Label(
