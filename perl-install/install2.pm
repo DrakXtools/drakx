@@ -279,9 +279,9 @@ $o = $::o = {
 #		   { mntpoint => "/usr",  size => 400 << 11, type => 0x83, growable => 1 }, 
 #	     ],
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
-    lang         => 'us',
+    lang         => 'fr_FR',
     isUpgrade    => 0,
-    installClass => 'beginner',
+    installClass => 'expert',
     timezone => {
                    timezone => "Europe/Paris",
                    GMT      => 1,

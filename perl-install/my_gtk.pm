@@ -193,7 +193,9 @@ sub create_box_with_title($@) {
 sub createScrolledWindow($) {
     my $w = new Gtk::ScrolledWindow(undef, undef);
     $w->set_policy('automatic', 'automatic');
-    $w->add_with_viewport($_[0]);
+    member(ref $_[0], qw(Gtk::CList)) ?
+      $w->add($_[0]) :
+      $w->add_with_viewport($_[0]);
     $_[0]->show;
     $w
 }
@@ -271,18 +273,18 @@ sub _create_window($$) {
 	my $new = sub {
 	    my $w = new Gtk::DrawingArea;
 	    $w->set_usize($border, $border);
+	    $w->set_events(['exposure_mask']);
 	    $w->signal_connect_after(expose_event => 
-                sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); }
-            );
-	    $w->show;
+		sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); 1 }
+	    );
 	    $w;
 	};
 
-	$t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
-	$t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
-	$t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
-	$t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
-	$t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
+	 $t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
+	 $t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
+	 $t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
+	 $t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
+	 $t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
 
 	gtkadd($w, $t);
     }
@@ -332,77 +334,64 @@ sub _ask_from_entry($$@) {
 	  );
     $entry->grab_focus();
 }
+
 sub _ask_from_list($$$$) {
     my ($o, $messages, $l, $def) = @_;
-    my $list = new Gtk::List();
+    my $list = new Gtk::CList(1);
     my ($first_time, $starting_word) = (1, '');
-    my (@widgets, $timeout);
-    $list->signal_connect(select_child => sub {
-	$o->{retval} = $l->[$list->child_position($_[1])];
-	Gtk->main_quit;
-    });
-    map_index {
-	my ($i) = @_;
-	$def = $i if $_ eq $def;
-	my $w = new Gtk::ListItem($_);
-	my $id = $w->signal_connect(key_press_event => sub {
-             my ($w, $e) = @_;
-	     my $c = chr $e->{keyval};
-	
-	     Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-	
-	     if ($e->{keyval} >= 0x100) {
-		   if ($c eq "\r" || $c eq "\x8d") {
-		       $list->select_item($i);
-		   }
-		   $starting_word = '';
-	     } else {
-		   my $curr = $i + bool($starting_word eq '' || $starting_word eq $c);
-		   $starting_word .= $c unless $starting_word eq $c;
-	
-		   my $j; for ($j = 0; $j < @$l; $j++) {
-		       $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
-		   }
-		   $j == @$l ?
-		     $starting_word = '' :
-		     $widgets[($j + $curr) % @$l]->grab_focus;
-	
-		   $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
-	     }
-	     1;
-	});
-#	push @::ask_from_list_widgets, $w; # hack!! to not get SIGSEGV
-	push @widgets, $w;
-    } @$l;
-#    $scroll_win->set_policy("automatic","automatic");
-#    my $scroll_win = @widgets > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list;
-    gtkadd($list, @widgets);
-#    $list->set_selection_mode("extended");
-    my $scroll_win = do {
-	if (@widgets > 15) {
-	    my $win = createScrolledWindow($list);
-	    gtkset_usize($win, 200, 280);
-	    $list->set_focus_vadjustment($win->get_vadjustment);
-	    $list->set_focus_hadjustment($win->get_hadjustment);
-#	    my $adj = create_adjustment(45,0,200);
-#	    $win->set_hadjustment($adj);
-#	    my $adj = $win->get_vadjustment;
-#	    $adj->set_value(45200);
-#	    $list->set_focus_vadjustment(new Gtk::Adjustment(45));
-#	    $widgets[$def]->visible(1);
-#	    $list->set_focus_child($widgets[$def]);
-#           $list->select_item($def);
-#	    $widgets[$def]->toggle_focus_row();
-	    $win;
-	} else {
-	    $list;
-	}
+    my (@widgets, $timeout, $curr);
+
+    my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
+    my $select = sub { 
+	$list->focus_row($_[0]); 
+	$list->select_row($_[0], 0);
+	$list->moveto($_[0], 0, 0.5, 0);
     };
+
+    $list->signal_connect(button_release_event => $leave);
+    $list->signal_connect(select_row => sub {
+	my ($w, $row, undef, $e) = @_;
+	$curr = $row;
+    });
+    $list->signal_connect(key_press_event => sub {
+        my ($w, $e) = @_;
+	my $c = chr $e->{keyval};
+
+	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+	
+	if ($e->{keyval} >= 0x100) {
+	    &$leave if $c eq "\r" || $c eq "\x8d";
+	    $starting_word = '';
+	} else {
+	    &$leave if $c eq ' ';
+
+	    $curr++ if $starting_word eq '' || $starting_word eq $c;
+	    $starting_word .= $c unless $starting_word eq $c;
+	
+	    my $j; for ($j = 0; $j < @$l; $j++) {
+		 $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
+	    }
+	    $j == @$l ?
+	      $starting_word = '' :
+	      &$select(($j + $curr) % @$l);
+	
+	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	}
+	1;
+    });
+    $list->set_selection_mode('browse');
+
     gtkadd($o->{window}, 
 	   gtkpack($o->create_box_with_title(@$messages), 
-		   $scroll_win));
-    $widgets[$def]->grab_focus;
+		   @$l > 15 ? gtkset_usize(createScrolledWindow($list), 200, 280) : $list));
 
+    $o->sync; # otherwise the moveto is not done
+    map_index {
+	$list->append($_);
+	&$select($::i) if $def && $_ eq $def; 
+    } @$l;
+
+    $list->grab_focus;
 }
 
 sub _ask_warn($@) {
@@ -447,4 +436,62 @@ sub _ask_file($$) {
 #    $w
 #}
 
-
+#-sub _ask_from_list($$$$) {
+#-    my ($o, $messages, $l, $def) = @_;
+#-    my $list = new Gtk::List();
+#-    my ($first_time, $starting_word) = (1, '');
+#-    my (@widgets, $timeout);
+#-    $list->signal_connect(select_child => sub {
+#-	  $o->{retval} = $l->[$list->child_position($_[1])];
+#-	  Gtk->main_quit;
+#-    });
+#-    map_index {
+#-	  my ($i) = @_;
+#-	  $def = $i if $_ eq $def;
+#-	  my $w = new Gtk::ListItem($_);
+#-	  my $id = $w->signal_connect(key_press_event => sub {
+#-	       my ($w, $e) = @_;
+#-	       my $c = chr $e->{keyval};
+#-	  
+#-	       Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+#-	  
+#-	       if ($e->{keyval} >= 0x100) {
+#-		     if ($c eq "\r" || $c eq "\x8d") {
+#-			 $list->select_item($i);
+#-		     }
+#-		     $starting_word = '';
+#-	       } else {
+#-		     my $curr = $i + bool($starting_word eq '' || $starting_word eq $c);
+#-		     $starting_word .= $c unless $starting_word eq $c;
+#-	  
+#-		     my $j; for ($j = 0; $j < @$l; $j++) {
+#-			 $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
+#-		     }
+#-		     $j == @$l ?
+#-		       $starting_word = '' :
+#-		       $widgets[($j + $curr) % @$l]->grab_focus;
+#-	  
+#-		     $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+#-	       }
+#-	       1;
+#-	  });
+#-	  push @widgets, $w;
+#-    } @$l;
+#-    gtkadd($list, @widgets);
+#-    my $scroll_win = do {
+#-	  if (@$l > 15) {
+#-	      my $win = createScrolledWindow($list);
+#-	      gtkset_usize($win, 200, 280);
+#-	      $list->set_focus_vadjustment($win->get_vadjustment);
+#-	      $list->set_focus_hadjustment($win->get_hadjustment);
+#-	      $win;
+#-	  } else {
+#-	      $list;
+#-	  }
+#-    };
+#-    gtkadd($o->{window}, 
+#-	     gtkpack($o->create_box_with_title(@$messages), 
+#-		     $scroll_win));
+#-    $widgets[$def]->grab_focus;
+#-
+#-}
