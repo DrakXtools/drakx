@@ -46,7 +46,7 @@ void finish_frontend(void)
 static void get_any_response(void)
 {
 	unsigned char t;
-	printf("> Press <enter> to proceed.");
+	printf(" (press <enter> to proceed)");
 	fflush(stdout);
 	read(0, &t, 1);
 	fcntl(0, F_SETFL, O_NONBLOCK);
@@ -247,12 +247,38 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 	char ** sav_elems = elems;
 	int i, j;
 
-	printf("> %s\n(0) Cancel\n", msg);
-	i = 1;
+	i = 0;
 	while (elems && *elems) {
-		printf("(%d) %s\n", i, *elems);
 		i++;
 		elems++;
+	}
+
+	if (i < 10) {
+		printf("> %s\n(0) Cancel\n", msg);
+		for (j=0; j<i; j++)
+			printf("(%d) %s\n", j+1, sav_elems[j]);
+	}
+	else {
+		printf("> %s\n( 0) Cancel\n", msg);
+		if (i < 20)
+			for (j=0; j<i; j++)
+				printf("(%2d) %s\n", j+1, sav_elems[j]);
+		else {
+			if (i < 40)
+				for (j=0; j<i-1; j += 2)
+					printf("(%2d) %-34s (%2d) %s\n", j+1, sav_elems[j], j+2, sav_elems[j+1]);
+			else
+				for (j=0; j<i-3; j += 4)
+					printf("(%2d) %-14s (%2d) %-14s (%2d) %-14s (%2d) %s\n",
+					       j+1, sav_elems[j], j+2, sav_elems[j+1], j+3, sav_elems[j+2], j+4, sav_elems[j+3]);
+			if (j < i) {
+				while (j < i) {
+					printf("(%2d) %-14s ", j+1, sav_elems[j]);
+					j++;
+				}
+				printf("\n");
+			}
+		}
 	}
 
 	printf("? "); 
@@ -262,7 +288,7 @@ enum return_type ask_from_list(char *msg, char ** elems, char ** choice)
 	if (j == 0)
 		return RETURN_BACK;
 
-	if (j >= 1 && j < i) {
+	if (j >= 1 && j <= i) {
 		*choice = strdup(sav_elems[j-1]);
 		return RETURN_OK;
 	}
