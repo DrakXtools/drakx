@@ -150,10 +150,6 @@ symlinkf('/var/lib/xkb', "$::prefix/etc/X11/xkb/compiled");
 #- Xsession wants to start first-time
 unlink "$::prefix/usr/X11R6/bin/drakfw";
 
-substInFile {
-    s|startkde\b|startkde_move|;
-} "$::prefix/etc/X11/wmsession.d/01KDE";
-
 
     #- KDE
 

@@ -653,7 +653,7 @@ sub install2::startMove {
         $ENV{XDM_MANAGED} = '/var/run/rebootctl,maysd,mayfn,sched';  #- for reboot/halt availability of "logout" by kde
         $ENV{GDMSESSION} = 1;  #- disable ~/.xsession-errors in Xsession (waste of usb key writes)
         chdir;
-	exec '/etc/X11/Xsession', 'KDE';  #- call it with KDE parameter to keep background
+	exec 'startkde_move';
     } else {
 	exec 'xwait', '-permanent' or c::_exit(0);
     }
