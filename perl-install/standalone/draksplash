@@ -448,7 +448,7 @@ sub make_boot_frame() {
 	$boot_conf_frame{widgets}{button}{pc}->signal_connect(clicked => sub {
 		my $color = gtkshow(Gtk2::ColorSelectionDialog->new(N("ProgressBar color selection")));
 		my @rgb = map { hex($_)/255 } ($1, $2, $3) if $theme{boot_conf}{pc} =~ m/0x(.{2})(.{2})(.{2})/;
-		$color->colorsel->set_current_color(Gtk2::Gdk::Color->new(@rgb));
+		$color->colorsel->set_current_color(gtkcolor(@rgb));
 		$color->cancel_button->signal_connect(clicked => sub { $color->destroy });
 		$color->ok_button->signal_connect(clicked => sub {
 			my $colour = $color->colorsel->get_current_color;
