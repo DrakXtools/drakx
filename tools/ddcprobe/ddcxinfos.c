@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 	printf(hmin ? "%d-%d kHz HorizSync\n" : "\n", hmin, hmax);
 	printf(vmin ? "%d-%d Hz VertRefresh\n" : "\n", vmin, vmax);
 
-	{ 
+	if (edid->max_size_horizontal != 127 && edid->max_size_vertical != 127) { 
 	  char manufacturer[4];
 	  double size = sqrt(SQR(edid->max_size_horizontal) + 
 			     SQR(edid->max_size_vertical)) / 2.54;
