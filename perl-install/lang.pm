@@ -158,10 +158,12 @@ sub list_langs {
     $options{exclude_non_installed} ? grep { -e "/usr/share/locale/" . l2locale($_) . "/LC_CTYPE" } @l : @l;
 }
 
+sub text_direction_rtl() {
 #-PO: the string "default:LTR" can be translated *ONLY* as "default:LTR"
 #-PO: or as "default:RTL", depending if your language is written from
 #-PO: left to right, or from right to left; any other string is wrong.
-sub text_direction_rtl() { N("default:LTR") eq "default:RTL" }
+       	N("default:LTR") eq "default:RTL"
+}
 
 
 #- key: country name (that should be YY in xx_YY locale)
