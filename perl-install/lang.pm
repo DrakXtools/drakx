@@ -1040,7 +1040,7 @@ sub write {
                                         )
                                       );
         } elsif (@packages) {
-            log::explanations("Installing IM packages: ", join(', '), @packages);
+            log::explanations("Installing IM packages: ", join(', ', @packages));
             do_pkgs_standalone->new->install(@packages);
         }
     }
