@@ -27,7 +27,7 @@ use ugtk2 qw(:helpers :wrappers :ask :create);
 use run_program;
 use security::level;
 use security::msec;
-use security::help qw(help);
+use security::help;
 
 $MODE = 'basic';
 $0 =~ /draksec-firewall$/ and $MODE = 'firewall';
