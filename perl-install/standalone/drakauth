@@ -21,7 +21,7 @@ my $authentication = {}; # TODO
 my $kind = authentication::to_kind($authentication);
 
 main:
-$in->ask_from(N("Authentication"), authentication::kind2description($_),
+$in->ask_from(N("Authentication"), authentication::kind2description(),
 	      [ 
 	       { label => N("Authentication"), val => \$kind, type => 'list' , list => [ authentication::kinds() ], format => \&authentication::kind2name },
 	      ]) or $in->exit;
