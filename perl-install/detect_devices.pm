@@ -464,7 +464,7 @@ sub getSerialModem {
 sub getModem {
     my ($modules_conf) = @_;
     getSerialModem($modules_conf, {}), matching_driver__regexp('www\.linmodems\.org'),
-      grep { member($_->{driver}, qw(snd-atiixp-modem snd-intel8x0m)) } probeall();
+      matching_driver(qw(snd-atiixp-modem snd-intel8x0m));
 }
 
 sub getSpeedtouch() {
@@ -476,7 +476,7 @@ sub getBewan() {
     
 }
 sub getSagem() {
-    grep { member($_->{driver}, qw(adiusbadsl eagle-usb)) } probeall();
+    matching_driver(qw(adiusbadsl eagle-usb));
 }
 
 # generate from the following from eci driver sources:
@@ -693,6 +693,12 @@ sub matching_driver__regexp {
     my ($regexp) = @_;
     grep { $_->{driver} =~ /$regexp/i } probeall();
 }
+
+sub matching_driver {
+    my (@list) = @_;
+    grep { member($_->{driver}, @list) } probeall();
+}
+
 sub stringlist() { 
     map {
 	sprintf("%-16s: %s%s%s", 
