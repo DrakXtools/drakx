@@ -341,6 +341,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
     * be aware of internet service -> regular ifcfg files
   o misc fixes (especially regarding sagem ADSL modems)
 - harddrake service: really autoconf TV cards
+- more synaptics fixes (blino)
 
 * Mon Sep  6 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.22mdk
 - diskdrake (pixel):
