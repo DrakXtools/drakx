@@ -530,7 +530,7 @@ sub check_mntpoint {
     die _("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
     die _("You can't use an encrypted file system for mount point %s", $mntpoint)
-      if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var));
+      if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
     loopback::check_circular_mounts($hd, $part, $all_hds);
