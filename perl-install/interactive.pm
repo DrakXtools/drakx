@@ -154,7 +154,7 @@ sub ask_okcancel_ {
 	$common->{focus_cancel} = !$b_def;
     	ask_from_no_check($o, $common, []);
     } else {
-	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ $o->ok, $o->cancel ], $b_def ? "Ok" : "Cancel") eq "Ok";
+	ask_from_listf_raw($o, $common, sub { translate($_[0]) }, [ $o->ok, $o->cancel ], $b_def ? $o->ok : "Cancel") eq $o->ok;
     }
 }
 
