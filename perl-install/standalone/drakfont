@@ -255,7 +255,7 @@ sub search_windows_font {
     }
     if(!@font_list) {
 	print "[35mdrakfont:: could not find any font in /win*/fonts [0m\n";
-	$interactive and display_error(_("could not find any font in /win*/fonts"));
+	$interactive and display_error(_("could not find any font in your mounted partitions"));
 	return 0;
     }
     1;
