@@ -10,7 +10,7 @@ my ($arch) = $Config{archname} =~ /(.*?)-/;
 rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
-my $default_append = "ramdisk_size=128000 root=/dev/ram3";
+my $default_append = "ramdisk_size=128000";
 # full acpi support for x86_64, enough acpi support for x86 ht, no acpi for others
 my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "" : "acpi=off";
 my $default_vga = "vga=788";
@@ -198,12 +198,12 @@ sub entries_append {
 	vga16 => "vga16",
 	text => "text",
 	patch => "patch $default_vga",
-	rescue => "rescue rw",
+	rescue => "rescue",
     );
     my @entries = (
         (map { $_->[0] => "$automatic $default_acpi $_->[1]" } group_by2(@simple_entries)),
 	acpi => "$automatic $default_vga",
-	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom $default_vga $default_acpi rescue oem rw",),
+	if_(member($type, "cdrom", "all"), oem => "automatic=method:cdrom $default_vga $default_acpi rescue oem",),
         if_($type eq "all", all => "pcmcia $default_vga $default_acpi"),
     );
 
@@ -313,14 +313,12 @@ timeout=50
 
 image=vmlinux
         label=linux
-        root=/dev/ram3
         initrd=$type.rdz
         append=" ramdisk_size=120000"
         read-only
 
 image=vmlinux
         label=rescue
-        root=/dev/ram3
         initrd=$type.rdz
         append=" rescue ramdisk_size=120000"
 "));
@@ -369,44 +367,44 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append="ramdisk_size=128000 root=/dev/ram3"
+  append="ramdisk_size=128000"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append="ramdisk_size=128000 text root=/dev/ram3"
+  append="ramdisk_size=128000 text"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append="ramdisk_size=128000 expert root=/dev/ram3"
+  append="ramdisk_size=128000 expert"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append="ramdisk_size=128000 ks root=/dev/ram3"
+  append="ramdisk_size=128000 ks"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=rescue
   initrd=/$boot/live.rdz
-  append="ramdisk_size=128000 rescue rw root=/dev/ram3"
+  append="ramdisk_size=128000 rescue"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append="ramdisk_size=128000 root=/dev/ram3"
+  append="ramdisk_size=128000"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append="ramdisk_size=128000 text root=/dev/ram3"
+  append="ramdisk_size=128000 text"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append="ramdisk_size=128000 expert root=/dev/ram3"
+  append="ramdisk_size=128000 expert"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append="ramdisk_size=128000 ks root=/dev/ram3"
+  append="ramdisk_size=128000 ks"
 image[sun4u]=/$boot/vmlinux64
   label=rescue
   initrd=/$boot/live64.rdz
-  append="ramdisk_size=128000 rescue rw root=/dev/ram3"
+  append="ramdisk_size=128000 rescue"
 "));
 
 	output("$dir/$boot/README", "
@@ -452,7 +450,7 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append="ramdisk_size=128000 $type root=/dev/ram3"
+  append="ramdisk_size=128000 $type"
 "));
 	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V 'DrakX boot disk'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
@@ -570,98 +568,84 @@ message=/boot/yaboot.msg
 
 image = /boot/vmlinux
     label = install-gui
-    root = /dev/ram3
     initrd = /boot/all.gz
     initrd-size = 34000
     append = " ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = install-gui-power4
-    root = /dev/ram3
     initrd = /boot/all-power4.gz
     initrd-size = 34000
     append = " ramdisk_size=128000"
 
 image = /boot/vmlinux
     label = install-text
-    root = /dev/ram3
     initrd = /boot/all.gz
     initrd-size = 34000
     append = " text video=ofonly ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = install-text-power4
-    root = /dev/ram3
     initrd = /boot/all-power4.gz
     initrd-size = 34000
     append = " text video=ofonly ramdisk_size=128000"
 
 image = /boot/vmlinux
     label = install-gui-old
-    root = /dev/ram3
     initrd = /boot/all.gz
     initrd-size = 34000
     append = " gui-old video=ofonly ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = install-gui-old-power4
-    root = /dev/ram3
     initrd = /boot/all-power4.gz
     initrd-size = 34000
     append = " gui-old video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = install-net
-    root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
     append = " video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux-power4
     label = install-net-power4
-    root = /dev/ram3
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
     append = " video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = install-net-text
-    root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
     append = " text video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux-power4
     label = install-net-text-power4
-    root = /dev/ram3
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
     append = " text video=ofonly ramdisk_size=128000"
 
 image = /boot/vmlinux
     label = rescue
-    root = /dev/ram3
     initrd = /boot/all.gz
     initrd-size = 34000
     append = " rescue video=ofonly ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = rescue-power4
-    root = /dev/ram3
     initrd = /boot/all-power4.gz
     initrd-size = 34000
     append = " rescue video=ofonly ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = rescue-net
-    root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
     append = " rescue video=ofonly ramdisk_size=128000" 
 
 image = enet:0,vmlinux-power4
     label = rescue-net-power4
-    root = /dev/ram3
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
     append = " rescue video=ofonly ramdisk_size=128000" 
