@@ -696,15 +696,19 @@ sub mount {
 		die "fsck.jfs failed" if $err & 0xfc00;
 	    };
 	} elsif ($fs eq 'ext2' || $fs eq 'ext3' && $::isInstall) {
-	    foreach ('-a', '-y') {
-		run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
-		my $err = $?;
-		if ($err & 0x0100) { log::l("fsck corrected partition $dev") }
-		if ($err & 0xfeff) {
-		    my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
-		    $_ eq '-y' ? die($txt) : cdie($txt);
-		} else {
-		    last;
+	    if (!$rdonly) {
+		foreach ('-a', '-y') {
+		    run_program::raw({ timeout => 60 * 60 }, "fsck.ext2", $_, $dev);
+		    my $err = $?;
+		    if ($err & 0x0100) {
+			log::l("fsck corrected partition $dev");
+		    }
+		    if ($err & 0xfeff) {
+			my $txt = sprintf("fsck failed on %s with exit code %d or signal %d", $dev, $err >> 8, $err & 255);
+			$_ eq '-y' ? die($txt) : cdie($txt);
+		    } else {
+			last;
+		    }
 		}
 	    }
 	    # really mount as ext2 during install for speed up
