@@ -36,9 +36,9 @@ my ($lg, $instpath, $ancpath, $package) = ctxhelp::path2help($opt, $idlabel);
 
 my $wm = any::running_window_manager();
 my %launchhelp = (
-		  'kwin' => sub { system("konqueror " . $ancpath . "&") },
+		  'kwin' => sub { system("webclient-kde " . $ancpath . "&") },
 		  'gnome-session' => sub { system("yelp ghelp://" . $ancpath . "&") },
-		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
+		  'other' => sub { my $browser = $ENV{BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla konqueror epiphany galeon) or $in->ask_warn('drakhelp', N("No browser is installed on your system, Please install one if you want to browse the help system"));
 				   log::explanations("Loading help system : $ancpath");
 				   system("$browser " . $ancpath . "&") 
 			       }
