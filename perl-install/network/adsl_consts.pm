@@ -206,7 +206,7 @@ our %adsl_data = (
                    dnsServer3 => '80.58.0.97',
                    method => 'pppoe',
                   },
-                  N("Spain") . "|Telefonica ip fija" =>
+                  N("Spain") . "|Telefónica ip fija" =>
                   {
                    vpi => 8,
                    vci => 20,
