@@ -30,6 +30,12 @@ sub install {
     $ret;
 }
 
+sub what_provides {
+    my ($o, $name) = @;
+    my ($what) = split '\n', `urpmq '$name' 2>/dev/null`;
+    split '\|', $what;
+}
+
 sub is_installed {
     my ($o, @l) = @_;
     system('rpm', '-q', @l) == 0;
