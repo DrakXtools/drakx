@@ -263,6 +263,7 @@ sub selectInstallClass {
     if ($installMode = $o->selectInstallClass1($verifInstallClass,
 					       first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
 					       exists $o->{isUpgrade} ? [] : [ __("Install"), __("Upgrade"), __("Upgrade packages only") ], $installMode)) {
+	log::l("install class: $installMode");
 	$o->{isUpgrade} = $installMode =~ /Upgrade/;
 	$o->{keepConfiguration} = $installMode =~ /packages only/;
     }
@@ -1031,8 +1032,13 @@ sub summary {
 { label => _("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
     (map { 
-{ label => _("Sound card"), val => $_->{description} } 
-     } @sound_cards),
+        my $device = $_;
+	   { label => _("Sound card"), val => $_->{description}, clicked => sub {
+		  require harddrake::sound; 
+		  harddrake::sound::config($o, $device)
+		  }
+	   }
+    } @sound_cards),
     if_($isa_sound_card, { label => _("Sound card"), clicked => $isa_sound_card }), 
     (map {
 	my $driver = $_->{driver};
