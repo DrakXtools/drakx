@@ -95,6 +95,12 @@ sub format_reiserfs($@) {
     run_program::run("mkreiserfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "reiserfs", $dev);
 }
 
+sub format_xfs($@) {
+    my ($dev, @options) = @_;
+
+    run_program::run("mkxfs", "-f", "-q", @options, devices::make($dev)) or die _("%s formatting of %s failed", "xfs", $dev);
+}
+
 sub format_dos($@) {
     my ($dev, @options) = @_;
 
@@ -120,6 +126,8 @@ sub real_format_part {
 	format_ext2($part->{device}, @options);
     } elsif (isReiserfs($part)) {
         format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
+    } elsif (isXfs($part)) {
+        format_xfs($part->{device}, @options);
     } elsif (isDos($part)) {
         format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
@@ -206,6 +214,8 @@ sub mount($$$;$) {
 	    eval { modules::load('msdos') } if $@; #- otherwise msdos...
 	} elsif ($fs eq 'ufs') {
 	    eval { modules::load('ufs') };
+	} elsif ($fs eq 'xfs') {
+	    eval { modules::load('xfs') };
 	} elsif ($fs eq 'reiserfs') {
 	    #- could be better if we knew if there is a /boot or not
 	    #- without knowing it, / is forced to be mounted with notail

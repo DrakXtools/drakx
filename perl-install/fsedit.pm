@@ -44,6 +44,7 @@ my @partitions_signatures = (
     [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x183, 0x10034, "ReIsErFs" ],
     [ 0x183, 0x10034, "ReIsEr2Fs" ],
+    [ 0x283, 0, 'XFSB', 0x200, 'XAGF', 0x400, 'XAGI' ],
     [ 0x82, 4086, "SWAP-SPACE" ],
     [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
