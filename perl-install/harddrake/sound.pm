@@ -169,9 +169,16 @@ sub switch {
     if ($alternative) {
         my $new_driver = $alternative->[0];
         if ($new_driver eq 'unknown') {
-            $in->ask_warn(N("No alternative driver"),
+            $in->ask_from(N("No alternative driver"),
                           N("There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\"",
-                            $device->{description}, $driver));
+                            $device->{description}, $driver),
+                          [
+                           {
+                            val => N("Let me pick any driver"), disabled => sub {},
+                            clicked => sub { &choose_any_driver($in, $driver, $device->{description}); goto end }
+                           },
+                          ]
+                         );
         } elsif ($in->ask_from(N("Sound configuration"),
                                N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
                                  $device->{description}) .
@@ -204,7 +211,11 @@ To use alsa, one can either use:
                                 {
                                     val => N("Trouble shooting"), disabled => sub {},
                                     clicked => sub { &trouble($in) }
-                                }
+                                },
+                                {
+                                    val => N("Let me pick any driver"), disabled => sub {},
+                                 clicked => sub { &choose_any_driver($in, $driver, $device->{description}) }
+                                },
                                 ]))
         {
             return if $new_driver eq $driver;
@@ -225,6 +236,7 @@ The new \"%s\" driver'll only be used on next bootstrap.", $driver, $new_driver)
                       N("The \"%s\" driver for your sound card is unlisted"),
                       $driver);
     }
+  end:
 }
 
 sub config {
@@ -256,6 +268,23 @@ initlevel 3
 
 - \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.
 ")));
+}
+
+sub choose_any_driver {
+    my ($in, $driver, $card) = @_;
+    my $old_driver = $driver;
+    if ($in->ask_from(N("Choosing an arbitratry driver"),
+                      formatAlaTeX(N("If you really think that you know which driver is the right one for your card
+you can pick one in the above list.
+
+The current driver for your \"%s\" sound card is \"%s\" ", $card, $driver)),
+                      [
+                       { label => N("Driver:"), val => \$driver, list => [ category2modules("multimedia/sound") ], type => 'combo', default => $driver, sort =>1, separator => '|' },
+                      ]
+                     )) {
+        
+        do_switch($old_driver, $driver);
+    }
 }
 
 
