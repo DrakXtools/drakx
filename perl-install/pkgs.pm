@@ -422,13 +422,13 @@ sub psUsingHdlist {
 	    $block .= $_;
 	    if ($inside_block =~ /E/) {
 		push @{$m->{pubkey}}, { block => $block, content => $content };
-		$block = $content = '';
-		next;
+		$block = $content = undef;
+	    } else {
+		#- now compute content (for finding the right key).
+		chomp;
+		/^$/ and $content = '';
+		defined $content and $content .= $_;
 	    }
-	    #- now compute content (for finding the right key).
-	    chomp;
-	    my $inside_content = /^$/ ... /^-----END PGP PUBLIC KEY BLOCK-----$/;
-	    $inside_content > 1 and $content .= $_;
 	}
     }
 
