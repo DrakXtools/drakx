@@ -65,17 +65,16 @@ our %spoolers = ('pdq' => {
 			  },
 		 'lpd' => {
                         'print_command' => 'lpr-lpd',
-			'print_gui' => 'gpr',
+			'print_gui' => 'lpr-lpd',
 			'long_name' => N("LPD - Line Printer Daemon"),
                         'short_name' => N("LPD"),
                         'boot_spooler' => 'lpd',
                         'service' => 'lpd',
 			'local_queues' => 1,
-                        'packages2add' => [ [qw(lpr net-tools gpr a2ps ImageMagick)],
+                        'packages2add' => [ [qw(lpr net-tools a2ps ImageMagick)],
                                             [qw(/usr/sbin/lpf
                                                 /usr/sbin/lpd
                                                 /sbin/ifconfig
-                                                /usr/bin/gpr
                                                 /usr/bin/a2ps
                                                 /usr/bin/convert)] ],
                         'packages2rm' => [ 'LPRng', '/usr/lib/filters/lpf' ],
@@ -88,17 +87,16 @@ our %spoolers = ('pdq' => {
 		    },
 		 'lprng' => {
 		     'print_command' => 'lpr-lpd',
-		     'print_gui' => 'gpr',
+		     'print_gui' => 'lpr-lpd',
 		     'long_name' => N("LPRng - LPR New Generation"),
 		     'short_name' => N("LPRng"),
 		     'boot_spooler' => 'lpd',
 		     'service' => 'lpd',
 		     'local_queues' => 1,
-		     'packages2add' => [ [qw(LPRng net-tools gpr a2ps ImageMagick)],
+		     'packages2add' => [ [qw(LPRng net-tools a2ps ImageMagick)],
 					 [qw(/usr/lib/filters/lpf
 					     /usr/sbin/lpd
 					     /sbin/ifconfig
-					     /usr/bin/gpr
 					     /usr/bin/a2ps
 					     /usr/bin/convert)] ],
 		     'packages2rm' => [ 'lpr', '/usr/sbin/lpf' ],
