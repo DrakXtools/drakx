@@ -354,9 +354,11 @@ sub setPackages {
 }
 
 sub setDefaultPackages {
-    my ($o) = @_;
+    my ($o, $clean) = @_;
 
-    delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
+    if ($clean) {
+	delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
+    }
 
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
@@ -372,14 +374,17 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
     push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
 
-    if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
-    }
-    if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
-	#- by default, choose:
-	$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-	$o->{compssUsersChoice}{$_} = 1 
-	  foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+    #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
+    unless ($clean) {
+	if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
+	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
+	}
+	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
+	    #- by default, choose:
+	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+	    $o->{compssUsersChoice}{$_} = 1 
+	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+	}
     }
     $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
     $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
