@@ -1,3 +1,313 @@
+2003/01/30  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive.pm (helper_separator_tree_to_tree): this new function helps
+	transforming a
+	flag {list} to a tree, using {separator}
+
+	* Newt/Newt.xs, interactive/newt.pm: basic treelist handling (it leaks
+	memory, but who cares, compared to gtk :)
+
+2003/01/29  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/drakpxe: fixed perl_checker
+
+	* network/netconnect.pm: fixed some perl_checker
+
+2003/01/29  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/da.po, share/po/pt.po: updated Portuguese and Danish files
+
+	* keyboard.pm, lang.pm: switched some languages to UTF-8 (they use ascii
+	only, so it shouldn't
+	be noticed); changed a keyboard name to match name used by XFree86
+
+2003/01/29  Pixel  <pixel@mandrakesoft.com>
+
+	* share/list: ntfsresize feature added (not tested!)
+
+	* detect_devices.pm, raid.pm: software raid (mdX) can go up to md31
+
+	* diskdrake/hd_gtk.pm: don't set $::main_window during install
+
+	* diskdrake/interactive.pm: fix various resize pbs:
+	  - write partition table *before* resizing when partition is enlarged
+	  - debug ntfsresize
+	dumpe2fs call cleanup
+	ntfsresize feature added (not tested!)
+
+	* fsedit.pm: handle mdX where X >= 10 (it should fix bug #1129)
+
+2003/01/29  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: 
+	  - Automatic non-interactive installation of local print queues.
+	  - Standard and advanced options selected by option groups in PPD.
+	  - Fixed bug of "CUPS + GIMP-Print" drivers being preferred against
+	"Foomatic + gimp-print" drivers in beginners mode.
+	  - Foomatic package installation adapted to Foomatic 2.9.x.
+
+2003/01/29  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/logdrake: logdrake is a special case as for embedding in mcc
+	since it can be embedded
+	twice: one as explanation viewer and one a log search tool.
+	so we must handly ask mcc to display us ...
+
+	* detect_devices.pm (getIDE) don't provide information when we don't have
+	it (vendor, description)
+	(getModem) it always return an empy hash, thus confusing harddrake
+
+	* harddrake/data.pm: fix doble detection of pci modems
+	restore cd/dvd burners detection
+
+	* standalone/harddrake2: print badly managed devices' drivers in red
+
+2003/01/28  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* interactive/gtk.pm: fixes unresponsive keyboard
+
+2003/01/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/pt.po, share/po/DrakX.pot: updated Portuguese file
+
+	* share/po/fi.po, share/po/he.po: updated Finnish and Hebrew files
+
+2003/01/28  Pixel  <pixel@mandrakesoft.com>
+
+	* Newt/Newt.xs, interactive/newt.pm: cleanup use of flags
+	simplify API (always -1,-1 for left,top when creating widget, it means
+	auto-placement)
+
+	* any.pm: log configured dvds for better post-debugging
+
+	* diskdrake/interactive.pm: for resize2fs, don't multiply by 512 *then*
+	divide by $block_size, better
+	divide by ($block_size / 512)
+
+2003/01/28  Till Kamppeter  <till@mandrakesoft.com>
+
+	* share/rpmsrate: Take into account the new splitting of the Foomatic
+	packages.
+
+	* printer/main.pm, printer/printerdrake.pm: More stuff for non-interactive
+	printer configuration:
+	  - Added find_new_printer() function to find local printers which are
+	not
+	configured yet
+	  - Fixed Titi's bugs which messed up list of auto-detected printers
+	  - Corrected text in the dialog for changing the printer connection
+	type
+	  (for local printer connections).
+	  - Allow switching to expert mode during installation (the installation
+	has
+	  no global expert mode any more.
+
+2003/01/28  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone.pm: s/version name/version number/ (Christophe Combelles)
+	typo fix in logdrake usage help (spoted by Christophe Combelles)
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/bs.po, share/po/ro.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sq.po, share/po/nl.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/lv.po,
+	share/po/cs.po, share/po/bg.po, share/po/el.po, share/po/hu.po: typo fix
+	in logdrake usage help (spoted by Christophe Combelles)
+
+	* interactive.pm, ugtk2.pm, ugtk.pm, interactive/gtk.pm, common.pm:
+	cleaning the utf8 support stuff:
+	  - consolidate check_for_xserver() to check for x11 access
+	  - introduce prepare_gtk2() to do what gtk+2 needs, so that
+	  tools that're not part of drakxtools (aka: rpmdrake, mcc, ...) can
+	just do :
+	
+	  unshift @::textdomains, 'drakconf';  prepare_gtk2();
+
+	* harddrake/TODO: update
+
+	* drakxtools.spec: 9.1-0.17mdk
+
+2003/01/27  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* standalone/drakfont: 
+	  - progress bars works
+	  - change sucky About box
+	  - wipeout commented code
+	  - remove ugly borders when embedded
+
+2003/01/27  florin
+
+	* standalone/drakgw: typo rename, not renamef
+
+2003/01/27  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mouse.pm: fix missing pointer_ungrab so that after testing mouse during
+	install we can move the mouse pointer everywhere
+
+	* interactive/gtk.pm: since return values of callbacks are now
+	non-ignored, we need to
+	return 0 to the expose_event when displaying wait message so that
+	gdk really does the exposure :)
+
+2003/01/27  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/vi.po: updated po file
+
+2003/01/27  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive/newt.pm: don't blindly truncate strings to size 40 in
+	simplify_string
+
+2003/01/27  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: Adapted printerdrake to
+	Foomatic 2.9.x, bug fix for use of native PPDs in recommended mode, bug
+	fixes in association between detected printers and existing queues.
+
+2003/01/27  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* modules.pm: fix latest source of "unlisted modules" in draksound:
+	modules::get_alias() was able to give "module " instead of only "module"
+	beacause modules::read_conf() split the line on space with a maximum of
+	3
+	splited elements.
+	i choose to strip terminal spaces and btw terminal comments.
+	i did not choose to do not put a limit to split since it's usefull for
+	some
+	cases.
+
+	* standalone/drakbug: force drakbug to be runnable in strict mode
+
+	* drakxtools.spec: 9.1-0.16mdk
+	9.1-0.15mdk
+	reput back perl-gtk-0.7 dependancy because of drakfloppy and
+	net_monitor
+
+	* standalone/drakxtv: this patch enable doc team to take snapshot of
+	drakxtv even if they do not
+	have any card:
+	  - running "/usr/sbin/drakxtv" will enable to take snapshot of error
+	message
+	when xawtv wasn't installed by the drakx installer
+	  - running "/usr/sbin/drakxtv --testing" will emulate a fake dummy tv
+	card
+	  so that one is able to take snapshots of configuring a tv card
+
+	* Makefile: roll back (mcc!=gi)
+	remove warnings in package
+
+	* standalone/draksec: it's useless to import %security::help::help since
+	it's already
+	exported by our
+
+	* ugtk2.pm: remove debugging statement
+	let mcc pack tables behave smoother, so that all columns of mcc tables
+	behave
+	like last column of drakx's pack tables
+	don't sent USR2 to mcc for logdrake;
+	logdrake is handled differently since it's a special case.
+	else on first execution of an embedded app, we take two USR2 (one from
+	the
+	embedded app and one from logdrake, which is bad)
+
+	* standalone/drakfloppy, interactive.pm, standalone/net_monitor: strip
+	authentification out of interactive->vnew into common.pm
+	This enable apps that still use gtk+-1.2 via my_gtk to still work when
+	they only need interactive->vnew('su') just to get root capabilities.
+	Indeed, interactive load ugtk if it has access to the X server, which
+	make my_gtk and ugtk fight for the cpu forever... which is bad imho...
+	drakfloppy and net_monitor were converted to use it and are now usuable
+	again
+	("i leave ...  again" commit).
+	
+	it would also enable to complete spec 64 by enabling rpmdrake
+	to use kdesu under kde and consolehelper under gnome.
+	rpmdrake is indeed the last program to not behave like
+	the running desktop to get root capability.
+	
+	unless someone is against this, i'll convert the mcc and all other gtk+
+	pure
+	tools to do not use anymore interactive just to get root capability.
+	
+	
+	btw, i fixed the infamous SECTOR_SIZE warning...
+
+	* diskdrake/hd_gtk.pm, interactive/gtk.pm: diskdrake: when non embedded,
+	ensure sub window are modal
+	all other drakx tool can be fixed the same way
+
+	* share/po/Makefile: since fpons don't care about fixing drakxtools build
+	broken by
+	drakpxe, let remove drakpxe from translatable files
+
+	* standalone/logdrake: cosmetic fix for embedded mode:
+	don't display "wait while parsing" window when embedded
+	fix logdrake behaviour in mcc where logdrake would only log
+	the first process.
+	another (rare indeed) case of a bug introduced because perl_checker
+	wanted us to localize a file handle :-(
+
+	* common.pm (require_root_capability): having extracted it from
+	interactive enable
+	to further simplify it
+	strip authentification out of interactive->vnew into common.pm
+	This enable apps that still use gtk+-1.2 via my_gtk to still work when
+	they only need interactive->vnew('su') just to get root capabilities.
+	Indeed, interactive load ugtk if it has access to the X server, which
+	make my_gtk and ugtk fight for the cpu forever... which is bad imho...
+	drakfloppy and net_monitor were converted to use it and are now usuable
+	again
+	("i leave ...  again" commit).
+	
+	it would also enable to complete spec 64 by enabling rpmdrake
+	to use kdesu under kde and consolehelper under gnome.
+	rpmdrake is indeed the last program to not behave like
+	the running desktop to get root capability.
+	
+	unless someone is against this, i'll convert the mcc and all other gtk+
+	pure
+	tools to do not use anymore interactive just to get root capability.
+	
+	
+	btw, i fixed the infamous SECTOR_SIZE warning...
+
+	* standalone/harddrake2: make interactive help window be modal, aka
+	transcient for main ugtk2
+	window
+	perl_checker fix
+	use new help system
+
+	* network/netconnect.pm: let drakconnect be less verbose: aka explain
+	rename of old configuration files
+	if that had been already done
+
+	* standalone/drakhelp: 
+	  - strict mode
+	  - we need at least 1 argument, and only one
+
+2003/01/26  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/es.po, share/po/zh_CN.po: updated Spanish and Chinese files
+
+	* share/po/et.po: updated Estonian file
+
+2003/01/25  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/sq.po: updated po file
+
+2003/01/24  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm (ask_browse_tree_info): better look when embedded in a smaller
+	window
+
 2003/01/24  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* detect_devices.pm: get back serial modem detection
@@ -8912,7 +9222,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.772 2003/01/24 14:29:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.773 2003/01/24 22:22:04 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
