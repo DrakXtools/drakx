@@ -321,28 +321,25 @@ sub remove_fonts {
     my @toto;
     -e $drakfont_dir . "/remove"  || mkdir_p($drakfont_dir."/remove");
     foreach my $i (@font_list) {
-      $_ = $i;
-      if ( /.pfb$/ || /.pfm$/ || /.pfa$/ ) {
-	system ("cp $_ $drakfont_dir/remove ");
-      }
-      else {
-	rm_rf($i);
-      }
-      #	print "nom complet : ".$i."\n";
-      $i =~ s/\/\w*\.\w*//gi;
-      grep ( $i, (@list_dir)) or push @list_dir, $i;
-      #	print "nom rep     : " . $_."\n" foreach @list_dir;
+	$_ = $i;
+	if ( /.pfb$/ || /.pfm$/ || /.pfa$/ ) {
+	    system ("cp $_ $drakfont_dir/remove ");
+	} else {
+	    rm_rf($i);
+	}
+	$i =~ s/\/\w*\.\w*//gi;
+	grep ( $i, (@list_dir)) or push @list_dir, $i;
     }
     -e "/usr/share/ghostscript" and  remove_gs_fonts();
     foreach my $i (@list_dir) {
-      if (listlength all("$i") < 3)  {
-	# remove this directory of the de fontpath
-	system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
-      } else {
-	#	    # do type1inst in this path
-	system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
-      }
-  }
+	if (listlength all("$i") < 3)  {
+	    # remove this directory of the de fontpath
+	    system("chkfontpath -r $i") or print "PERL::system command failed during chkfontpath\n";
+	} else {
+	    #	    # do type1inst in this path
+	    system("cd $i && type1inst") or print "PERL::system command failed during cd or type1inst\n";
+	}
+    }
     system ("/etc/rc.d/init.d/xfs restart");
     -e "/usr/share/ghostscript" and  rm_rf("$drakfont_dir/remove");
 }
