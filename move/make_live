@@ -154,5 +154,10 @@ if (!-e "$::prefix/usr/share/speedtouch/mgmt.o") {
 
 #- CD-based applications
 substInFile {
-    s|.*command="$_".*|| foreach qw(kaudiocreator kscd k3b);
+    foreach my $app (qw(kaudiocreator kscd k3b)) {
+        s|.*command="$app".*||;
+    }
 } "$::prefix/usr/lib/menu/simplified/mandrake_desk";
+
+#- Xsession wants to start first-time
+unlink "$::prefix/usr/X11R6/bin/drakfw";
