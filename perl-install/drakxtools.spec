@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 20mdk
+Release: 21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Mar  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-21mdk
+- drakconnect: add australia in adsl providers db (#5056)
+- support cryptoloop and aes when using encryption on kernel 2.6 (pixel)
+
 * Wed Mar  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-20mdk
 - drakbackup: use preferred conf file read/write method (stew)
 - drakconnect: hide dns settings by default when using dhcp
