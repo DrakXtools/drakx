@@ -4,16 +4,6 @@ use common qw(:common);
 
 %steps = (
 selectLanguage =>
-# __("
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-#      Quelques sites de recherche :
-# 
-#"),
 __("Choose preferred language for install and system usage."),
 
 selectKeyboard =>

@@ -46,7 +46,7 @@ my %keyboards = (
  "gr" => [ __("Greek"),          "gr-8859_7",   "gr" ],
  "hu" => [ __("Hungarian"),      "hu-latin2",   "hu" ],
  "il" => [ __("Israeli"),        "il-8859_8",   "il" ],
- "il" => [ __("Israeli (Phonetic)"),"hebrew",   "il_phonetic" ],
+ "il_phonetic" => [ __("Israeli (Phonetic)"),"hebrew",   "il_phonetic" ],
  "is" => [ __("Icelandic"),      "is-latin1",   "is" ],
  "it" => [ __("Italian"),        "it-latin1",   "it" ],
  "la" => [ __("Latin American"), "la-latin1",   "la" ],
@@ -59,7 +59,7 @@ my %keyboards = (
  "pt" => [ __("Portuguese"),     "pt-latin1",   "pt" ],
  "qc" => [ __("Canadian (Quebec)"), "qc-latin1","ca_enhanced" ],
  "ru" => [ __("Russian"),        "ru4",         "ru" ],
- "ru" => [ __("Russian (Yawerty)"),"ru-yawerty","ru_yawerty" ],
+ "ru_yawerty" => [ __("Russian (Yawerty)"),"ru-yawerty","ru_yawerty" ],
  "se" => [ __("Swedish"),        "se-latin1",   "se_SE" ],
  "si" => [ __("Slovenian"),      "slovene",     "si" ],
  "sk" => [ __("Slovakian"),      "sk-qwertz",   "czsk" ],
@@ -79,7 +79,8 @@ my %keyboards = (
 sub list { map { $_->[0] } values %keyboards }
 sub xmodmaps { keys %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
-sub keyboard2xkb { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
+sub keyboard2kmap { $keyboards{$_[0]} && $keyboards{$_[0]}[1] }
+sub keyboard2xkb  { $keyboards{$_[0]} && $keyboards{$_[0]}[2] }
 sub text2keyboard {
     my ($t) = @_;
     while (my ($k, $v) = each %keyboards) {
@@ -88,10 +89,6 @@ sub text2keyboard {
     die "unknown keyboard $t";
 }
 
-sub kmap($) {
-    my ($keyboard) = @_;
-    ($keyboards{$keyboard} || [])->[1];
-}
 
 sub lang2keyboard($) {
     local ($_) = @_;
@@ -140,11 +137,10 @@ sub setup($) {
     }
 }
 
-sub write($$) {
-    my ($prefix, $keyboard) = @_;
+sub write($$;$) {
+    my ($prefix, $keyboard, $isNotDelete) = @_;
 
-    setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => kmap($keyboard), BACKSPACE => "Delete" });
-
+    setVarsInSh("$prefix/etc/sysconfig/keyboard", { KEYTABLE => keyboard2kmap($keyboard), $isNotDelete ? () : (BACKSPACE => "Delete") });
     run_program::rooted($prefix, "dumpkeys > /etc/sysconfig/console/default.kmap") or die "dumpkeys failed";
 }
 
@@ -152,7 +148,7 @@ sub read($) {
     my ($prefix) = @_;
 
     my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
-    map { kmap($_) eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
+    map { keyboard2kmap($_) eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
 }
 
 #-######################################################################################

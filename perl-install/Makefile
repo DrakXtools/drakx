@@ -33,7 +33,7 @@ tar-drakxtools: clean
 	$(MAKE) -C ../tools clean
 	cd .. ; rm -rf drakxtools ; cp -af perl-install drakxtools ; cp -af tools/ddcprobe drakxtools	
 	cd ../drakxtools ; rm -rf install* ForMakefile.pm pkgs.pm ftp.pm t.pm standalone/CVS ; mv Makefile.drakxtools Makefile ; mv -f standalone/* .
-	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake mousedrake lspcidrake printerdrake *.pm)
+	cd .. ; tar cfy drakxtools.tar.bz2 --exclude CVS $(patsubst %,drakxtools/%,Makefile MonitorsDB Newt c ddcprobe po pci_probing resize_fat diskdrake diskdrake.rc XFdrake mousedrake lspcidrake printerdrake keyboarddrake *.pm)
 	cd .. ; rm -rf drakxtools
 
 $(DIRS):

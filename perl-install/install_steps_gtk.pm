@@ -640,10 +640,10 @@ sub create_help_window {
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
 #-		    0, $b,
-		    1, createScrolledWindow($w_help = new Gtk::XmHTML)));
-#-		    1, createScrolledWindow($w_help = new Gtk::Text)));
-    $w_help->source($o->{step} ? translate($o->{steps}{$o->{step}}{help}) : '');
-#-    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($o->{steps}{$o->{step}}{help})) : '');
+#-		    1, createScrolledWindow($w_help = new Gtk::XmHTML)));
+		    1, createScrolledWindow($w_help = new Gtk::Text)));
+#-    $w_help->source($o->{step} ? translate($o->{steps}{$o->{step}}{help}) : '');
+    gtktext_insert($w_help, $o->{step} ? formatAlaTeX(translate($o->{steps}{$o->{step}}{help})) : '');
 
     $w->show;
     $o->{help_window} = $w;

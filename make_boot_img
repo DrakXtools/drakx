@@ -85,7 +85,11 @@ sub msg_boot_img {
     my ($mnt, $img) = @_;
 
     __ "$sudo umount $mnt 2>/dev/null";
-    _ "bunzip2 -c $instdir/installinit/msgboot.img.bz2 > $img";
+    if ($type eq "hd") {
+	_ "bunzip2 -c $instdir/installinit/msgboot.img.bz2 > $img";
+    } else {
+	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo.img.bz2 > $img";
+    }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz";
     initrd("${mnt}2", "$mnt/$type.rdz");

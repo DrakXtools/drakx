@@ -43,8 +43,8 @@ modules::write_conf("/etc/conf.modules") if $mouse->{device} eq "usbmouse" && !$
 my $f = "/etc/X11/XF86Config";
 substInFile {
     if (/^Section "Pointer"/ .. /^EndSection/) {
-	s|^(\s*Protocol\s+).*|$1 "$mouse->{XMOUSETYPE}"|;
-	s|^(\s*Device\s+).*|$1 "/dev/mouse"|;
+	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+	s|^(\s*Device\s+).*|$1"/dev/mouse"|;
     }
 } $f if -e $f && !$::testing;
 

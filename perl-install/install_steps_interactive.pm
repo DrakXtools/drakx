@@ -64,7 +64,7 @@ sub selectLanguage($) {
 sub selectKeyboard($) {
     my ($o) = @_;
     $o->{keyboard} =
-      keyboard::text2keyboard($o->ask_from_list_("Keyboard",
+      keyboard::text2keyboard($o->ask_from_list_(_("Keyboard"),
 						 _("What is your keyboard layout?"),
 						 [ keyboard::list() ],
 						 keyboard::keyboard2text($o->{keyboard})));

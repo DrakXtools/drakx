@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+
+use lib qw(/usr/lib/libDrakX);
+
+
+use interactive;
+use keyboard;
+use Xconfigurator_consts;
+use common qw(:system);
+
+local $_ = join '', @ARGV;
+
+/-h/ and die "usage: keyboarddrake [--expert]\n";
+
+$::expert = /--expert/;
+$::isStandalone = 1;
+
+my $in = vnew interactive;
+
+my $keyboard = keyboard::text2keyboard(
+      $in->ask_from_list_(_("Keyboard"),
+			  _("What is your keyboard layout?"),
+			  [ keyboard::list() ],
+			  keyboard::keyboard2text(keyboard::read(''))));
+
+my $isNotDelete = $::expert && !$in->ask_yesorno("BackSpace", "Do you want the BackSpace to return Delete in console?", 1);
+
+my $kmap = keyboard::keyboard2kmap($keyboard);
+`loadkeys $kmap`;
+
+my $xkb = keyboard::keyboard2xkb($keyboard);
+`setxkbmap $xkb`;
+
+my $f = "/etc/X11/XF86Config";
+substInFile {
+    if (/^Section "Keyboard"/ .. /^EndSection/) {
+	s|^(\s*XkbLayout\s+).*|$1"$xkb"| 
+	  and $_ .= join '', map { "    $_\n" } @{$xkb_options{$xkb} || []};
+	s,^(\s*(XkbVariant|XkbOptions)\s+).*,,; # remove existing one
+    }
+} $f if -e $f && !$::testing;
+
+keyboard::write('', $keyboard, $isNotDelete);
+
+exec 'true' if ref($in) =~ /gtk/; #- workaround for perl-GTK

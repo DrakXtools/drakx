@@ -39,6 +39,7 @@ sub new($) {
 }
 
 sub vnew {
+    require c;
     if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
 	require interactive_gtk;
 	interactive_gtk->new;
