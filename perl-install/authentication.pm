@@ -13,7 +13,7 @@ sub kind2description {
 }
 sub to_kind {
     my ($authentication) = @_;
-    (find { $authentication->{$_} } kinds()) || 'local';
+    (find { defined $authentication->{$_} } kinds()) || 'local';
 }
 
 sub ask_parameters {
