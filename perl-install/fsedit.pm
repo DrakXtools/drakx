@@ -295,8 +295,8 @@ sub read_proc_partitions {
 	    $part->{rootDevice} = $devfs2normal{dirname($part->{dev}) . '/disc'};
 	} else {
 	    $dev = $part->{dev};
-	    foreach my $hd (@$hds) {
-		$part->{rootDevice} = $hd->{device} if $part->{dev} =~ /^$hd->{device}./;
+	    if (my $hd = find { $part->{dev} =~ /^$_->{device}./ } @$hds) {
+		$part->{rootDevice} = $hd->{device};
 	    }
 	}
 	undef $prev_part if $prev_part && ($prev_part->{rootDevice} || '') ne ($part->{rootDevice} || '');
