@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 18mdk
+Release: 19mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Oct  5 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-19mdk
+- drakconnect: 
+  o ADSL DB (baud):
+    * add a few new ADSL ISPs
+    * fix wrong VCI which wasn't in hexa for brazililan Velox/Telemar ISP
+  o manage interface (blino:
+    * recompute NETWORK and BROADCAST fiels
+    * use both type and device name in non-ethernet interfaces list
+    * do not crash if BOOTPROTO is empty, use 'none' by default (#11899)
+
 * Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-18mdk
 - drakconnect: do not lose GATEWAYDEV if it is a non wireless one and
   a static wireless card is configured (and vice versa) (blino)
