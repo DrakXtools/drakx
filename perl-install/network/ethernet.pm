@@ -7,7 +7,7 @@ use detect_devices;
 use common;
 use run_program;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(configureNetwork conf_network_card conf_network_card_backend go_ethernet);

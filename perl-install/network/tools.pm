@@ -3,7 +3,7 @@ package network::tools;
 use common;
 use run_program;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $prefix $install $disconnect_file $connect_prog);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 connected disconnected);

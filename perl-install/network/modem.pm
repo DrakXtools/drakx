@@ -7,7 +7,7 @@ use detect_devices;
 use mouse;
 use network::tools;
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(pppConfig modem_detect_backend);

@@ -17,7 +17,7 @@ use commands;
 #require Data::Dumper;
 
 use network::tools;
-use globals "network", qw($in $prefix $install $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file $connect_prog);
 
 
 #- intro is called only in standalone.
@@ -84,7 +84,7 @@ sub detect {
 
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $install, $first_time, $direct_fr) = @_;
-    globals::init(
+    MDK::Common::Globals::init(
 		  in => $in,
 		  prefix => $prefix,
 		  install => $install,

@@ -6,7 +6,7 @@ use network::tools;
 use network::ethernet;
 
 use vars qw(@ISA @EXPORT);
-use globals "network", qw($in $prefix $install $connect_file $disconnect_file);
+use MDK::Common::Globals "network", qw($in $prefix $install $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_ask_info adsl_detect adsl_conf adsl_conf_backend);
