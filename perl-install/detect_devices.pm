@@ -16,7 +16,6 @@ use c;
 #-#####################################################################################
 #- Globals
 #-#####################################################################################
-my @netdevices = map { my $l = $_; map { "$l$_" } (0..3) } qw(eth tr fddi plip);
 my %serialprobe;
 
 #-######################################################################################
@@ -418,7 +417,7 @@ sub getSagem() {
 }
 
 sub getNet() {
-    grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) } @netdevices;
+    grep { /^(eth|fddi|plip|tr|wifi|wlan)/ } c::getNetInterfaces();
 }
 
 #sub getISDN() {
