@@ -418,11 +418,19 @@ sub create_fontsel {
 }
 
 sub display_error {
-    my $message = @_;
+    my ($message) = @_;
     my $label;
+    my $error_box;
     ${$central_widget}->destroy();
-    gtkpack($font_box, $label = new Gtk::Label($message));
-    $central_widget = \$message;
+    gtkpack($font_box,
+	    $error_box = gtkpack_(new Gtk::VBox(0,0),
+		  1, new Gtk::Label($message),
+		  0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+			    gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
+			   ),
+				 )
+	   );
+    $central_widget = \$error_box;
 }
 
 sub interactive_mode {
@@ -486,12 +494,12 @@ sub license {
     my $text = new Gtk::Text(undef, undef);
     my $license_box;
     gtkpack($font_box,
-	    $license_box = gtkpack_(new Gtk::VBox(0,0),
+	    $license_box = gtkpack_(new Gtk::VBox(0,10),
 	       1, gtkpack_(new Gtk::HBox(0,0),
 			   1, gtktext_insert(gtkset_editable($text, 1), "Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts using the normal way. In rare cases, bogus fonts may hang up your X Server.\n-You can install the fonts with strong verification. In this case, bogus fonts won't be installed, but some useable fonts won't be too.\n\nIf you have many fonts, or exotic fonts, I recommend strong verification mode."),
 			   0, new Gtk::VScrollbar($text->vadj),
 			  ),
-	       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -end),
+	       0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
 			 gtksignal_connect(new Gtk::Button(_("OK")), clicked => sub { ${$central_widget}->destroy(); import_status() }),
 			 gtksignal_connect(new Gtk::Button(_("Cancel")), clicked => sub { ${$central_widget}->destroy(); create_fontsel() }),
 			),
