@@ -849,7 +849,7 @@ sub new {
 		    }
 		    0;
 		});
-	    } else {
+	    } elsif (!$::isEmbedded) {
 		my $draw1 = Gtk2::DrawingArea->new;
 		$draw1->set_size_request(540, 100);
 		my $draw2 = Gtk2::DrawingArea->new;
