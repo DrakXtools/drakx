@@ -11,7 +11,6 @@ use c;
 
 
 my $pagesize = c::getpagesize();
-my $signature_page = "\0" x $pagesize;
 
 # Maximum allowable number of pages in one swap.
 # From 2.2.0 onwards, this depends on how many offset bits
@@ -34,10 +33,10 @@ sub kernel_greater_or_equal($$$) {
 }
 
 sub check_blocks {
-    my ($fd, $version, $nbpages) = @_;
+    my ($fd, $version, $nbpages, $signature_page) = @_;
     my ($last_read_ok, $badpages) = (0, 0);
     my ($buffer);
-    my $badpages_field_v1 = \substr($signature_page, psizeof($signature_format_v1));
+    my $badpages_field_v1 = \substr($$signature_page, psizeof($signature_format_v1));
 
     for (my $i = 0; $i < $nbpages; $i++) {
 
@@ -50,7 +49,7 @@ sub check_blocks {
 	    }
 	    $badpages++;
 	}
-	vec($signature_page, $i, 1) = to_bool($last_read_ok) if $version == 0;
+	vec($$signature_page, $i, 1) = to_bool($last_read_ok) if $version == 0;
     }
 
     #- TODO: add interface
@@ -62,6 +61,7 @@ sub check_blocks {
 sub make($;$) {
     my ($devicename, $checkBlocks) = @_;
     my $badpages = 0;
+    my $signature_page = "\0" x $pagesize;
     my ($version, $maxpages);
 
     $devicename = devices::make($devicename);
@@ -93,12 +93,12 @@ sub make($;$) {
     }
 
     if ($checkBlocks) {
-	$badpages = check_blocks(*F, $version, $nbpages);
+	$badpages = check_blocks(*F, $version, $nbpages, \$signature_page);
     } elsif ($version == 0) {
 	for (my $i = 0; $i < $nbpages; $i++) { vec($signature_page, $i, 1) = 1 }
     }
 
-    $version == 0 and !vec($signature_page, 0, 1) and die "bad block on first page";
+    $version == 0 && !vec($signature_page, 0, 1) and die "bad block on first page";
     vec($signature_page, 0, 1) = 0;
 
     $version == 1 and MDK::Common::DataStructure::strcpy($signature_page, pack($signature_format_v1, $version, $nbpages - 1, $badpages));
