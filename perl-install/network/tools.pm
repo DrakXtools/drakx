@@ -236,33 +236,17 @@ sub find_matching_interface {
     } sort keys %$intf;
 }
 
-#- returns first dhcp interface started on boot
-sub get_default_ethernet_dhcp_interface {
-    my ($intf) = @_;
-    find { /^eth\d+/ && text2bool($intf->{$_}{ONBOOT}) && $intf->{$_}{BOOTPROTO} eq 'dhcp' } sort keys %$intf;
-}
-
-#- returns first ppp interface started on boot
-sub get_default_ppp_interface {
-    my ($intf) = @_;
-    find { /^ppp\d+/ && text2bool($intf->{$_}{ONBOOT}) } sort keys %$intf;
-}
-
-#- returns ippp interface dialed on boot
-sub get_default_ippp_interface {
-    my ($intf) = @_;
-    find { /^ippp\d+/ && (text2bool($intf->{$_}{ONBOOT}) || text2bool($intf->{$_}{DIAL_ON_IFUP})) } sort keys %$intf;
-}
-
 #- returns gateway interface if found
 sub get_default_gateway_interface {
     my ($netc, $intf) = @_;
+    my @intfs = sort keys %$intf;
     `$::prefix/sbin/ip route show` =~ /^default.*\s+dev\s+(\S+)/m && $1 ||
     $netc->{GATEWAYDEV} ||
     $netc->{GATEWAY} && find_matching_interface($intf, $netc->{GATEWAY}) ||
-    get_default_ethernet_dhcp_interface($intf) ||
-    get_default_ppp_interface($intf) ||
-    get_default_ippp_interface($intf);
+    find { get_interface_type($intf->{$_}) eq 'adsl' } @intfs ||
+    find { get_interface_type($intf->{$_}) eq 'isdn' && text2bool($intf->{$_}{DIAL_ON_IFUP}) } @intfs ||
+    find { get_interface_type($intf->{$_}) eq 'modem' } @intfs ||
+    find { get_interface_type($intf->{$_}) eq 'ethernet' && $intf->{$_}{BOOTPROTO} eq 'dhcp' } @intfs;
 }
 
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
