@@ -12,6 +12,11 @@ use my_gtk qw(:helpers :wrappers);
 
 1;
 
+sub new {
+    $::windowheight ||= 400 if $::isStandalone;
+    goto &interactive::new;
+}
+
 #-#- redefine ask_warn
 #-sub ask_warn {
 #-    my $o = shift;

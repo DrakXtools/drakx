@@ -283,7 +283,7 @@ sub load_po($) {
 	$f = commands::install_cpio("$f/po", "$lang.po");
     }
     local *F;
-    unless (-e $f) {
+    unless ($f && -e $f) {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
 	if (-e $f) {
 	    open F, "bzip2 -dc $f 2>/dev/null |";

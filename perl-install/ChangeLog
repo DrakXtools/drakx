@@ -1,5 +1,8 @@
 2000-02-24  Pixel  <pixel@mandrakesoft.com>
 
+	* interactive_gtk.pm (new): added the "new" method to initialize
+	windowheight for isStandalone
+
 	* install_steps_gtk.pm (new): returns undef in case no X server
 	works	
 
@@ -7,7 +10,7 @@
 	to here
 	* install2.pm (main): fix the $SIG{SEGV} handler
 	* install2.pm (main): added a "try again" in text install if the
-	new fails
+	"new" fails
 
 	* install_steps_interactive.pm (createBootdisk): fix an error for
 	non fdX choice of floppy drive
