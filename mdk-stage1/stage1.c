@@ -416,8 +416,7 @@ int mandrake_move_post(void)
 
         {
                 FILE * from, * to;
-                size_t quantity __attribute__((aligned(16)));
-                size_t overall __attribute__((aligned(16))) = 0;
+                size_t quantity __attribute__((aligned(16))), overall = 0;
                 char buf[4096] __attribute__((aligned(4096)));
 
                 log_message("move: copying live_tree_boot.clp to tmpfs");
