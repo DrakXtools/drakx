@@ -40,7 +40,7 @@ sub update_kernel_from_repository {
     my $rpm_wildcard = 'kernel-' . ($is_BOOT ? 'BOOT-' : '') . $main_ver . '*.rpm';
     my ($kernel_rpm) = my @kernels = glob("$RPMS/$rpm_wildcard");
     @kernels <= 1 or die "more than one kernel match $rpm_wildcard";
-    @kernels >= 1 or die "no kernel match $rpm_wildcard";
+    @kernels >= 1 or return; # die "no kernel match $rpm_wildcard";
 
     install_kernel($kernel_rpm, 1);
 }
