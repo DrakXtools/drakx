@@ -348,6 +348,16 @@ char * guess_netmask(char * ip_addr)
 }
 
 
+char * guess_domain_from_hostname(char *hostname) {
+	char *domain = strchr(strdup(hostname), '.');
+	if (!domain || domain[1] == '\0') {
+		log_message("unable to guess domain from hostname: %s", hostname);
+		return NULL;
+	}
+	return domain + 1; /* skip '.' */
+}
+
+
 static void static_ip_callback(char ** strings)
 {
 	struct in_addr addr;
@@ -481,24 +491,31 @@ static enum return_type configure_network(struct interface_info * intf)
 	if (dnshostname) {
 		if (intf->boot_proto == BOOTPROTO_STATIC)
 			hostname = strdup(dnshostname);
-		domain = strchr(strdup(dnshostname), '.') + 1;
-		log_message("got hostname and domain from dns entry, %s and %s", dnshostname, domain);
-		return RETURN_OK;
-	}
-
-	log_message("reverse name lookup on self failed");
+		domain = guess_domain_from_hostname(dnshostname);
+		if (domain) {
+			log_message("got hostname and domain from dns entry, %s and %s", dnshostname, domain);
+			return RETURN_OK;
+		}
+	} else
+		log_message("reverse name lookup on self failed");
 
 	if (domain)
 		return RETURN_OK;
 
+	dnshostname = NULL;
 	if (dns_server.s_addr != 0) {
 		wait_message("Trying to resolve dns...");
 		dnshostname = mygethostbyaddr(inet_ntoa(dns_server));
 		remove_wait_message();
-	}
+		if (dnshostname) {
+			log_message("got DNS fullname, %s", dnshostname);
+			domain = guess_domain_from_hostname(dnshostname);
+		} else
+			log_message("reverse name lookup on DNS failed");
+	} else
+		log_message("no DNS, unable to guess domain");
 
-	if (dnshostname) {
-		domain = strchr(strdup(dnshostname), '.') + 1;
+	if (domain) {
 		log_message("got domain from DNS fullname, %s", domain);
 	} else {
 		enum return_type results;
@@ -506,8 +523,6 @@ static enum return_type configure_network(struct interface_info * intf)
 		char * questions_auto[] = { "hostname", "domain" };
 		static char ** answers = NULL;
 		char * boulet;
-		
-		log_message("reverse name lookup on DNS failed");
 		
 		results = ask_from_entries_auto("I could not guess hostname and domain name; please fill in this information. "
 						"Valid answers are for example: `mybox' for hostname and `mynetwork.com' for "
