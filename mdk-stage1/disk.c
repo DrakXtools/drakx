@@ -133,7 +133,7 @@ enum return_type disk_prepare(void)
 	int i, count = 0;
 	enum return_type results;
 
-	my_insmod("sd_mod");
+	my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL);
 	
 	get_medias(DISK, &medias, &medias_models);
 

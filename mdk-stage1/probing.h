@@ -35,7 +35,7 @@ struct media_info {
 
 enum media_query_type { QUERY_NAME, QUERY_MODEL };
 
-enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES };
+enum driver_type { SCSI_ADAPTERS, NETWORK_DEVICES, ANY_DRIVER_TYPE };
 
 
 void probe_that_type(enum driver_type type);

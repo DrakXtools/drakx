@@ -79,8 +79,8 @@ enum return_type cdrom_prepare(void)
 	int i, count = 0;
 	enum return_type results;
 
-	my_insmod("ide-cd");
-	my_insmod("sr_mod");
+	my_insmod("ide-cd", ANY_DRIVER_TYPE, NULL);
+	my_insmod("sr_mod", ANY_DRIVER_TYPE, NULL);
 	
 	get_medias(CDROM, &medias, &medias_models);
 

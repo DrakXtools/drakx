@@ -49,7 +49,7 @@ static int ensure_archive_opened(void)
 /* unarchive and insmod given module
  * WARNING: module must not contain the trailing ".o"
  */
-static int insmod_archived_file(const char * mod_name, char * params)
+static int insmod_archived_file(const char * mod_name, char * options)
 {
 	char module_name[50];
 	char final_name[50] = "/tmp/";
@@ -71,7 +71,7 @@ static int insmod_archived_file(const char * mod_name, char * params)
 	strcat(final_name, mod_name);
 	strcat(final_name, ".o");
 
-	rc = insmod_call(final_name, params);
+	rc = insmod_call(final_name, options);
 	if (rc)
 		log_message("\tfailed.");
 	unlink(final_name); /* sucking no space left on device */
@@ -167,7 +167,33 @@ int load_modules_dependencies(void)
 }
 
 
-static int insmod_with_deps(const char * mod_name)
+static void add_modules_conf(char * str)
+{
+	static char data[500] = "";
+	char * target = "/etc/modules.conf";
+	int fd;
+
+	if (strlen(data) + strlen(str) >= sizeof(data))
+		return;
+
+	strcat(data, str);
+	strcat(data, "\n");
+
+	fd = open(target, O_CREAT|O_WRONLY|O_TRUNC, 00660);
+	
+	if (fd == -1) {
+		log_perror(str);
+		return;
+	}
+
+	if (write(fd, data, strlen(data) + 1) != strlen(data) + 1)
+		log_perror(str);
+
+	close(fd);
+}
+
+
+static int insmod_with_deps(const char * mod_name, char * options)
 {
 	struct module_deps_elem * dep;
 
@@ -180,45 +206,90 @@ static int insmod_with_deps(const char * mod_name)
 		while (*one_dep) {
 			/* here, we can fail but we don't care, if the error is
 			 * important, the desired module will fail also */
-			insmod_with_deps(*one_dep);
+			insmod_with_deps(*one_dep, NULL);
 			one_dep++;
 		}
 	}
 
 	log_message("needs %s", mod_name);
-	return insmod_archived_file(mod_name, NULL);
+	return insmod_archived_file(mod_name, options);
 }
 
 
-int my_insmod(const char * mod_name)
+int my_insmod(const char * mod_name, enum driver_type type, char * options)
 {
+	char alias[500];
 	int i;
+#ifndef DISABLE_MEDIAS
+	static int number_scsi = 0;
+#endif
+#ifndef DISABLE_NETWORK
+	char ** net_devices = NULL; /* fucking compiler */
+	if (type == NETWORK_DEVICES)
+		net_devices = get_net_devices();
+#endif
 	log_message("have to insmod %s", mod_name);
 
 	if (IS_TESTING)
 		return 0;
 
-	i = insmod_with_deps(mod_name);
-	if (i == 0)
+	i = insmod_with_deps(mod_name, options);
+	if (i == 0) {
 		log_message("\tsucceeded %s.", mod_name);
+#ifndef DISABLE_MEDIAS
+		if (type == SCSI_ADAPTERS) {
+			if (number_scsi > 0)
+				sprintf(alias, "alias scsi_hostadapter%d %s", number_scsi, mod_name);
+			else
+				sprintf(alias, "alias scsi_hostadapter %s", mod_name);
+			number_scsi++;
+			add_modules_conf(alias);
+		}
+#endif
+#ifndef DISABLE_NETWORK
+		if (type == NETWORK_DEVICES) {
+			char ** new_net_devices = get_net_devices();
+			while (new_net_devices && *new_net_devices) {
+				char ** ptr = net_devices;
+				while (ptr && *ptr) {
+					if (!strcmp(*new_net_devices, *ptr))
+						goto already_present;
+					ptr++;
+				}
+				sprintf(alias, "alias %s %s", *new_net_devices, mod_name);
+				add_modules_conf(alias);
+				log_message("NET: %s", alias);
+			already_present:
+				new_net_devices++;
+			}
+		}
+#endif
+	}
 	return i;
 
 }
 
-enum return_type insmod_with_params(char * mod)
+static enum return_type insmod_with_options(char * mod, enum driver_type type)
 {
 	char * questions[] = { "Options", NULL };
 	char ** answers;
 	enum return_type results;
+	char options[500] = "options ";
 
 	results = ask_from_entries("Please enter the parameters to give to the kernel:", questions, &answers, 24);
 	if (results != RETURN_OK)
 		return results;
 
-	if (insmod_archived_file(mod, answers[0])) {
+	strcat(options, mod);
+	strcat(options, " ");
+	strcat(options, answers[0]); // because my_insmod will eventually modify the string
+
+	if (my_insmod(mod, type, answers[0]))  {
 		error_message("Insmod failed.");
 		return RETURN_ERROR;
 	}
+
+	add_modules_conf(options);
 
 	return RETURN_OK;
 }
@@ -248,13 +319,13 @@ enum return_type ask_insmod(enum driver_type type)
 
 	if (results == RETURN_OK) {
 		choice[strlen(choice)-2] = '\0'; /* remove trailing .o */
-		if (my_insmod(choice)) {
+		if (my_insmod(choice, type, NULL)) {
 			enum return_type results;
 			unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
 
 			results = ask_yes_no("Insmod failed.\nTry with parameters?");
 			if (results == RETURN_OK)
-				return insmod_with_params(choice);
+				return insmod_with_options(choice, type);
 			return RETURN_ERROR;
 		} else
 			return RETURN_OK;

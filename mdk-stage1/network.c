@@ -396,7 +396,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
 	static struct interface_info loopback;
 	enum { BRINGUP_NET, BRINGUP_CONF, BRINGUP_DONE } step = BRINGUP_NET;
 	
-	my_insmod("af_packet");
+	my_insmod("af_packet", ANY_DRIVER_TYPE, NULL);
 
 //	if (intf->is_up == 1)
 //		log_message("interface already up (with IP %s)", inet_ntoa(intf->ip));

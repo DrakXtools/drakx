@@ -100,7 +100,7 @@ void probe_that_type(enum driver_type type)
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
 						wait_message("Installing %s", pcidb[i].name);
-						my_insmod(pcidb[i].module);
+						my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
 						remove_wait_message();
 					}
 #endif
@@ -108,7 +108,7 @@ void probe_that_type(enum driver_type type)
 					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
 						info_message("Found %s", pcidb[i].name);
-						my_insmod(pcidb[i].module);
+						my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL);
 					}
 #endif
 				}
@@ -376,6 +376,7 @@ int net_device_available(char * device) {
 		close(s);
 		return 0;
 	}
+	close(s);
 	return 1;
 }
 
@@ -394,15 +395,14 @@ char ** get_net_devices(void)
 	int i = 0;
 	static int already_probed = 0;
 
-	if (!already_probed)
+	if (!already_probed) {
+		already_probed = 1; /* cut off loop brought by: probe_that_type => my_insmod => get_net_devices */
 		probe_that_type(NETWORK_DEVICES);
-	already_probed = 1;
+	}
 
 	while (ptr && *ptr) {
-		if (net_device_available(*ptr)) {
-			log_message("NET: %s is available", *ptr);
+		if (net_device_available(*ptr))
 			tmp[i++] = strdup(*ptr);
-		}
 		ptr++;
 	}
 	tmp[i++] = NULL;

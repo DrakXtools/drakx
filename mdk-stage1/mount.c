@@ -139,16 +139,16 @@ int my_mount(char *dev, char *location, char *fs)
 
 #ifndef DISABLE_MEDIAS
 	if (!strcmp(fs, "vfat")) {
-		my_insmod("vfat");
+		my_insmod("vfat", ANY_DRIVER_TYPE, NULL);
 		opts = "check=relaxed";
 	}
 
 	if (!strcmp(fs, "reiserfs")) {
-		my_insmod("reiserfs");
+		my_insmod("reiserfs", ANY_DRIVER_TYPE, NULL);
 	}
 
 	if (!strcmp(fs, "iso9660")) {
-		my_insmod("isofs");
+		my_insmod("isofs", ANY_DRIVER_TYPE, NULL);
 		flags |= MS_RDONLY;
 	}
 #endif
@@ -157,7 +157,7 @@ int my_mount(char *dev, char *location, char *fs)
 	if (!strcmp(fs, "nfs")) {
 		int flags = 0;
 
-		my_insmod("nfs");
+		my_insmod("nfs", ANY_DRIVER_TYPE, NULL);
 		flags |= MS_RDONLY;
 
 		log_message("preparing nfsmount for %s", dev);

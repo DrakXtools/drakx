@@ -19,7 +19,7 @@
 #include "probing.h"
 
 int load_modules_dependencies(void);
-int my_insmod(const char * mod_name);
+int my_insmod(const char * mod_name, enum driver_type type, char * options);
 
 enum return_type ask_insmod(enum driver_type);
 
