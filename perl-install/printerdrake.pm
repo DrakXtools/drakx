@@ -2011,14 +2011,75 @@ sub print_testpages {
     my $photo = 0;
     my $ascii = 0;
     my $res2 = 0;
+    my $oldstandard = 1;
+    my $oldaltletter = 0;
+    my $oldalta4 = 0;
+    my $oldphoto = 0;
+    my $oldascii = 0;
+    my $oldres2 = 0;
     my $res1 = $in->ask_from_
 	({ title => _("Test pages"),
 	   messages => _("Please select the test pages you want to print.
 Note: the photo test page can take a rather long time to get printed and on laser printers with too low memory it can even not come out. In most cases it is enough to print the standard test page."),
-          cancel => ((!$printer->{NEW}) ?
-		     _("Cancel") : ($::isWizard ? _("<- Previous") : 
-				    _("No test pages"))),
-          ok => ($::isWizard ? _("Next ->") : _("Print"))},
+	   cancel => ((!$printer->{NEW}) ?
+		       _("Cancel") : ($::isWizard ? _("<- Previous") : 
+				      _("No test pages"))),
+	   ok => ($::isWizard ? _("Next ->") : _("Print")),
+	   callbacks => {
+	       changed => sub {
+		   if ($oldres2 ne $res2) {
+		       if ($res2) {
+			   $standard = 0;
+			   $altletter = 0;
+			   $alta4 = 0;
+			   $photo = 0;
+			   $ascii = 0;
+			   $oldstandard = 0;
+			   $oldaltletter = 0;
+			   $oldalta4 = 0;
+			   $oldphoto = 0;
+			   $oldascii = 0;
+		       }
+		       $oldres2 = $res2;
+		   }
+		   if ($oldstandard ne $standard) {
+		       if ($standard) {
+			   $res2 = 0;
+			   $oldres2 = 0;
+		       }
+		       $oldstandard = $standard;
+		   }
+		   if ($oldaltletter ne $altletter) {
+		       if ($altletter) {
+			   $res2 = 0;
+			   $oldres2 = 0;
+		       }
+		       $oldaltletter = $altletter;
+		   }
+		   if ($oldalta4 ne $alta4) {
+		       if ($alta4) {
+			   $res2 = 0;
+			   $oldres2 = 0;
+		       }
+		       $oldalta4 = $alta4;
+		   }
+		   if ($oldphoto ne $photo) {
+		       if ($photo) {
+			   $res2 = 0;
+			   $oldres2 = 0;
+		       }
+		       $oldphoto = $photo;
+		   }
+		   if ($oldascii ne $ascii) {
+		       if ($ascii) {
+			   $res2 = 0;
+			   $oldres2 = 0;
+		       }
+		       $oldascii = $ascii;
+		   }
+		   return 0;
+	       }
+	   }},
 	 [
 	  { text => _("Standard test page"), type => 'bool',
 	    val => \$standard },
@@ -2050,7 +2111,7 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    my $asciitestpage = "/usr/share/printer-testpages/testpage.asc";
 	    my @testpages;
 	    # Install the filter to convert the photo test page to PS
-	    if (($photo) && (!$::testing) &&
+	    if (($printer->{SPOOLER} ne "cups") && ($photo) && (!$::testing) &&
 		(!printer::files_exist((qw(/usr/bin/convert))))) {
 		$in->do_pkgs->install('ImageMagick');
 	    }

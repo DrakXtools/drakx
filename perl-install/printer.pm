@@ -1526,10 +1526,19 @@ sub print_pages($@) {
 	# Only text and PostScript can be printed directly with all spoolers,
 	# images must be treated seperately
 	if ($page =~ /\.jpg$/) {
-	    system(($::testing ? $prefix : "chroot $prefix/ ") .
-		   "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
-		   ($::testing ? $prefix : "chroot $prefix/ ") .
-		   "$lpr -s $printer->{SPOOLER} -P $queue");
+	    if ($printer->{SPOOLER} ne "cups") {
+		# Use "convert" from ImageMagick for non-CUPS spoolers
+		system(($::testing ? $prefix : "chroot $prefix/ ") .
+		       "/usr/bin/convert $page -page 427x654+100+65 PS:- | " .
+		       ($::testing ? $prefix : "chroot $prefix/ ") .
+		       "$lpr -s $printer->{SPOOLER} -P $queue");
+	    } else {
+		# Use CUPS's internal image converter with CUPS, tell it
+		# to let the image occupy 90% of the page size (so nothing
+		# gets cut off by unprintable borders)
+		run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
+				    "-P", $queue, "-o", "scaling=90", $page);
+	    }		
 	} else {
 	    run_program::rooted($prefix, $lpr, "-s", $printer->{SPOOLER},
 				"-P", $queue, $page);
