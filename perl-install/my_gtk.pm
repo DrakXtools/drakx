@@ -219,7 +219,6 @@ sub gtkpowerpack {
 		$attr{$i} = 0
 	    }
 	}
-print "expand : $attr{expand}, fill : $attr{fill}, padding : $attr{padding}, pack_end : $attr{pack_end}\n";
 
 	#- Get and pack the widget (create it if necessary when it is a label...)
 	my $widget = ref($_[0]) ? shift : new Gtk::Label(shift);
