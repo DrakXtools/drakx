@@ -234,11 +234,6 @@ usb_probe()
     }
     pciusb_free(entries);
 
-char*
-crypt_md5(pw, salt)
-  char *pw
-  char *salt
-
 unsigned int
 getpagesize()
 

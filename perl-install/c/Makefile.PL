@@ -9,9 +9,9 @@ WriteMakefile(
     'NAME'	=> 'stuff',
     'OPTIMIZE'  => '-Os',
     'MAKEFILE'  => 'Makefile_c',
-    'OBJECT'    => 'stuff.o smp.o md5.o md5_crypt.o sbus.o silo.o',
+    'OBJECT'    => 'stuff.o smp.o sbus.o silo.o',
     'VERSION_FROM' => 'stuff.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
-    'DEFINE'	=> '-DHIGHFIRST -D"MD5Name(x)=x"',     # e.g., '-DHAVE_SOMETHING' 
+    'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
     'INC'	=> '-I/usr/include/rpm `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
 );
