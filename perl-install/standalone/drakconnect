@@ -86,7 +86,7 @@ my $button_del = new Gtk2::Button(N("Del profile..."));
 $button_del->signal_connect(clicked => sub {
 				my $dialog = _create_dialog(N("Delete profile"));
 				$dialog->vbox->pack_start(new Gtk2::Label(N("Profile to delete:")),1,1,0);
-				my $combo_dialog = new Gtk2::Option_menu;
+				my $combo_dialog = new Gtk2::OptionMenu;
 				$combo_dialog->set_popdown_strings(grep { ! /default/ } network::netconnect::get_profiles());
 				$dialog->vbox->pack_start($combo_dialog,1,1,0);
 				my $bbox_dialog = new Gtk2::HButtonBox;
