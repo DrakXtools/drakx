@@ -186,7 +186,7 @@ sub get_subwizard {
                              );
       
       my $offer_to_connect = sub {
-	  return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
+          return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
           return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
           return "end";
       };
