@@ -717,11 +717,11 @@ sub load_category__prompt {
     require modules::parameters;
     my @parameters = modules::parameters::parameters($module);
     if (@parameters && $in->ask_from_list_('',
-N("In some cases, the %s driver needs to have extra information to work
+formatAlaTeX(N("In some cases, the %s driver needs to have extra information to work
 properly, although it normally works fine without. Would you like to specify
 extra options for it or allow the driver to probe your machine for the
 information it needs? Occasionally, probing will hang a computer, but it should
-not cause any damage.", $module_descr), [ N_("Autoprobe"), N_("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
+not cause any damage.", $module_descr)), [ N_("Autoprobe"), N_("Specify options") ], 'Autoprobe') ne 'Autoprobe') {
 	$options = load_module__ask_options($in, $module_descr, \@parameters) or return;
     }
     while (1) {
