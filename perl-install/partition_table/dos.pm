@@ -20,39 +20,159 @@ my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeo
 
 sub hasExtended { 1 }
 
+sub geometry_to_string {
+    my ($geom) = @_;
+    "$geom->{cylinders}/$geom->{heads}/$geom->{sectors}";
+}
+
 sub last_usable_sector { 
     my ($hd) = @_;
     #- do not use totalsectors, see gi/docs/Partition-ends-after-end-of-disk.txt for more
     $hd->{geom}{sectors} * $hd->{geom}{heads} * $hd->{geom}{cylinders};
 }
 
-sub compute_CHS($$) {
-    my ($hd, $e) = @_;
-    my @l = qw(cyl head sec);
-    @$e{map { "start_$_" } @l} = $e->{start} || $e->{type} ? CHS2rawCHS($hd, sector2CHS($hd, $e->{start})) : (0,0,0);
-    @$e{map { "end_$_"   } @l} = $e->{start} || $e->{type} ? CHS2rawCHS($hd, sector2CHS($hd, $e->{start} + $e->{size} - 1)) : (0,0,0);
-    1;
+sub get_rawCHS {
+    my ($part) = @_;
+    [ $part->{start_cyl}, $part->{start_head}, $part->{start_sec} ],
+      [ $part->{end_cyl}, $part->{end_head}, $part->{end_sec} ];
+}
+sub set_rawCHS {
+    my ($part, $raw_chs_start, $raw_chs_end) = @_;   
+    ($part->{start_cyl}, $part->{start_head}, $part->{start_sec}) = @$raw_chs_start;
+    ($part->{end_cyl}, $part->{end_head}, $part->{end_sec}) = @$raw_chs_end;
+}
+
+sub compute_CHS {
+    my ($hd, $part) = @_;
+    my ($chs_start, $chs_end) = CHS_from_part_linear($hd->{geom}, $part);
+    set_rawCHS($part, $chs_start ? CHS2rawCHS($hd->{geom}, $chs_start) : [0,0,0], 
+	              $chs_end ? CHS2rawCHS($hd->{geom}, $chs_end) : [0,0,0]);
+}
+
+sub CHS_from_part_rawCHS {
+    my ($part) = @_;
+
+    $part->{start} || $part->{type} or return;
+
+    my ($raw_chs_start, $raw_chs_end) = get_rawCHS($part);
+    rawCHS2CHS($raw_chs_start), rawCHS2CHS($raw_chs_end);
+}
+
+sub CHS_from_part_linear {
+    my ($geom, $part) = @_;
+
+    $part->{start} || $part->{type} or return;
+
+    sector2CHS($geom, $part->{start}), sector2CHS($geom, $part->{start} + $part->{size} - 1);
+}
+
+sub rawCHS2CHS {
+    my ($chs) = @_;
+    my ($c, $h, $s) = @$chs;
+    [ $c | (($s & 0xc0) << 2), $h, ($s & 0x3f) - 1 ];
 }
 
 sub CHS2rawCHS {
-    my ($hd, $chs) = @_;
+    my ($geom, $chs) = @_;
     my ($c, $h, $s) = @$chs;
     if ($c > 1023) {
 	#- no way to have a #cylinder >= 1024
 	$c = 1023;
-	$h = $hd->{geom}{heads} - 1;
-	$s = $hd->{geom}{sectors} - 1;
+	$h = $geom->{heads} - 1;
+	$s = $geom->{sectors} - 1;
     }
-    ($c & 0xff, $h, ($s + 1) | (($c >> 2) & 0xc0));
+    [ $c & 0xff, $h, ($s + 1) | (($c >> 2) & 0xc0) ];
 }
 
 # returns (cylinder, head, sector)
 sub sector2CHS {
-    my ($hd, $start) = @_;
+    my ($geom, $start) = @_;
     my ($s, $h);
-    ($start, $s) = divide($start, $hd->{geom}{sectors});
-    ($start, $h) = divide($start, $hd->{geom}{heads});
+    ($start, $s) = divide($start, $geom->{sectors});
+    ($start, $h) = divide($start, $geom->{heads});
     [ $start, $h, $s ];
+}
+
+sub is_geometry_valid_for_the_partition_table {
+    my ($hd, $geom, $no_log) = @_;
+
+    every {
+	my ($chs_start_v1, $chs_end_v1) = map { join(',', @$_) } CHS_from_part_rawCHS($_) or next;
+	my ($chs_start_v2, $chs_end_v2) = map { join(',', @$_) } map { [ min($_->[0], 1023), $_->[1], $_->[2] ] } CHS_from_part_linear($geom, $_);
+	if (!$no_log) {
+	    $chs_start_v1 eq $chs_start_v2 or log::l("check_geometry_using_the_partition_table failed for ($_->{device}, $_->{start}): $chs_start_v1 vs $chs_start_v2 with geometry " . geometry_to_string($geom));
+	    $chs_end_v1 eq $chs_end_v2 or log::l("check_geometry_using_the_partition_table failed for ($_->{device}, " . ($_->{start} + $_->{size} - 1) . "): $chs_end_v1 vs $chs_end_v2 with geometry " . geometry_to_string($geom));
+	}
+	$chs_start_v1 eq $chs_start_v2 && $chs_end_v1 eq $chs_end_v2;
+    } @{$hd->{primary}{normal} || []};
+}
+
+#- from parted, thanks!
+my @valid_nb_sectors = (63, 61, 48, 32, 16);
+my @valid_nb_heads = (255, 192, 128, 96, 64, 61, 32, 17, 16);
+
+sub guess_geometry_from_partition_table {
+    my ($hd) = @_;
+
+    my @chss = map { CHS_from_part_rawCHS($_) } @{$hd->{primary}{normal} || []} or return { empty => 1 };
+    my ($nb_heads, $nb_sectors) = (max(map { $_->[1] } @chss) + 1, max(map { $_->[2] } @chss) + 1);    
+    my $geom = { sectors => $nb_sectors, heads => $nb_heads };
+    partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
+    log::l("guess_geometry_from_partition_table $hd->{device}: " . geometry_to_string($geom));
+
+    member($geom->{heads}, @valid_nb_heads) && member($geom->{sectors}, @valid_nb_sectors) or return { invalid => 1 };
+    $geom;
+}
+
+sub try_every_geometry {
+    my ($hd) = @_;
+
+    my $geom = {};
+    foreach (@valid_nb_sectors) {
+	$geom->{sectors} = $_;
+	foreach (@valid_nb_heads) {
+	    $geom->{heads} = $_;
+	    if (is_geometry_valid_for_the_partition_table($hd, $geom, 1)) {
+		partition_table::raw::compute_nb_cylinders($geom, $hd->{totalsectors});
+		log::l("try_every_geometry $hd->{device}: found " . geometry_to_string($geom));
+		return $geom;
+	    }
+	}
+    }
+    log::l("$hd->{device}: argh! no geometry exists for this partition table");
+    undef;
+}
+
+sub set_best_geometry_for_the_partition_table {
+    my ($hd) = @_;
+
+    my $guessed_geom = guess_geometry_from_partition_table($hd);
+    if ($guessed_geom->{empty}) {
+	log::l("$hd->{device}: would need looking at BIOS info to find out geometry");
+	return;
+    } 
+    if ($guessed_geom->{invalid}) {
+	log::l("$hd->{device}: no valid geometry guessed from partition table");
+	$guessed_geom = try_every_geometry($hd) or return;
+    }
+    
+    if ($guessed_geom->{heads} == $hd->{geom}{heads} && $guessed_geom->{sectors} == $hd->{geom}{sectors}) {
+	# cool!
+    } else {
+	my $default_ok = is_geometry_valid_for_the_partition_table($hd, $hd->{geom}, 0);
+	my $guessed_ok = is_geometry_valid_for_the_partition_table($hd, $guessed_geom, 0);
+	if ($default_ok && $guessed_ok) {
+	    #- oh my!?
+	    log::l("$hd->{device}: both guessed and default are valid??? " . geometry_to_string($hd->{geom}) . " vs " . geometry_to_string($guessed_geom));	    
+	} elsif ($default_ok) {
+	    log::l("$hd->{device}: keeping default geometry " . geometry_to_string($hd->{geom}));	    
+	} elsif ($guessed_ok) {
+	    log::l("$hd->{device}: using guessed geometry " . geometry_to_string($guessed_geom) . " instead of " . geometry_to_string($hd->{geom}));
+	    put_in_hash($hd->{geom}, $guessed_geom);
+	} else {
+	    log::l("$hd->{device}: argh! no valid geometry found");	    
+	}
+    }
 }
 
 sub read {

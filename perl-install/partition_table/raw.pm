@@ -45,6 +45,7 @@ sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }
 sub typeOfMBR_($) { typeFromMagic($_[0], @MBR_signatures) }
 
 sub hasExtended { 0 }
+sub set_best_geometry_for_the_partition_table {}
 
 sub cylinder_size($) {
     my ($hd) = @_;
@@ -88,6 +89,11 @@ sub adjustEnd($$) {
     $part->{size} > 0 or internal_error("adjustEnd get a too small partition to handle correctly");
 }
 
+sub compute_nb_cylinders {
+    my ($geom, $totalsectors) = @_;
+    $geom->{cylinders} = int $totalsectors / $geom->{heads} / $geom->{sectors};
+}
+
 sub get_geometry($) {
     my ($dev) = @_;
     my $g = "";
@@ -100,7 +106,7 @@ sub get_geometry($) {
     my $total;
     #- $geom{cylinders} is no good (only a ushort, that means less than 2^16 => at best 512MB)
     if ($total = c::total_sectors(fileno $F)) {
-	$geom{cylinders} = int $total / $geom{heads} / $geom{sectors};
+	compute_nb_cylinders(\%geom, $total);
     } else {
 	$total = $geom{heads} * $geom{sectors} * $geom{cylinders}
     }

@@ -546,6 +546,8 @@ sub read {
 
     assign_device_numbers($hd);
     remove_empty_extended($hd);
+
+    $hd->set_best_geometry_for_the_partition_table;
     1;
 }
 
