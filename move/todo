@@ -33,6 +33,9 @@ services:
         more generally: do we want to keep settings of services
         permanent, if yes we need to hack utmp/sysv/init stuff
 
+        - chkconfig --del everything
+        - use level 5 and use it by hand at startup
+
 need to list things to remove in MCC (drakgw, etc -> things that
 have not the necessary packages and we don't want to provide)
 
