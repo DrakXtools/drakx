@@ -232,9 +232,11 @@ sub search {
 }
 
 local *F;
+my $timer;
 
 sub parse_file {
-  my ($file, $descr) = @_;;
+  local *F = *F;
+  my ($file, $descr) = @_;
 
   $file =~ s/\.gz$//;
   my ($pbar, $win_pb);
@@ -298,13 +300,11 @@ sub parse_file {
       local $_;
       while (<F>) {}; #to prevent to output the file twice..
 #      $log_text->set_point($log_text->get_length());
-      my $timer = Gtk2->timeout_add(1000, \&input_callback);
+      $timer ||= Gtk2->timeout_add(1000, sub {
+                                       logcolorize($_) while <F>;
+                                       seek F, 0, 1;
+                                   });
   }     
-}
-
-sub input_callback  {
-    logcolorize($_) while <F>;
-    seek F, 0, 1;
 }
 
 
