@@ -139,7 +139,7 @@ $Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
 						$options.="&kernel=$k";
 						$options.="&mdkrelease=$r";
 						print "$bugzilla_url"."?"."$options" ."\n";
-						connect_bugzilla("$bugzilla_url/wizard?"."$options") });
+						connect_bugzilla("$bugzilla_url"."?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
