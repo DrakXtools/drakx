@@ -311,59 +311,6 @@ void unmount_filesystems(void)
 	}
 }
 
-
-void disable_swap(void)
-{
-	int fd;
-	char buf[4096];
-	int i;
-	char * start;
-	char * chptr;
-	
-	printf("disabling swap...\n");
-
-	fd = open("/proc/swaps", O_RDONLY, 0);
-	if (fd < 0) {
-		print_warning("failed to open /proc/swaps");
-		return;
-	}
-
-	/* read all data at once */
-	i = read(fd, buf, sizeof(buf) - 1);
-	close(fd);
-	if (i < 0) {
-		print_warning("failed to read /proc/swaps");
-		return;
-	}
-	buf[i] = '\0';
-
-	start = buf;
-	while (*start) {
-		/* move to next line */
-		while (*start != '\n' && *start) start++;
-		if (!*start) return;
-
-		/* first char of new line */
-		start++;
-		if (*start != '/') return;
-
-		/* build up an ASCIIZ filename */
-		chptr = start;
-		while (*chptr && *chptr != ' ') chptr++;
-		if (!(*chptr)) return;
-		*chptr = '\0';
-
-		/* call swapoff */
-		printf("swapoff %s", start);
-		if (swapoff(start))
-			printf(" failed (%d)\n", errno);
-		else
-			printf(" succeeded\n");
-
-		start = chptr + 1;
-	}
-}
-
 int is_rescue()
 {
 	int fd, size;
@@ -501,7 +448,6 @@ int main(int argc, char **argv)
 	sleep(2);
 	printf("done\n");
 
-	disable_swap();
 	unmount_filesystems();
 
 	if (!abnormal_termination) {
