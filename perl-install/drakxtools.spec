@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.21mdk
+Release: 0.22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,13 +310,30 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Jul 24 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.22mdk
+- drakautoinst, drakper, draksound, and many other tools: use option
+  menus instead of combo boxes when the user is selecting from a fixed
+  set of options
+- drakboot: hide non working splash stuff
+- drakperm:
+  o sanitize gui (upcased labels, understandable labels, ...)
+  o settings dialog:
+    * localize all fields
+    * add tips for all check boxes
+    * use std button layout in settings dialog
+    * use stock icons on rule toolbar and in in settings dialog
+  o use stock icons on rule toolbar
+- net_monitor: fix crash on profile change due to netconnect api
+  change
+
 * Wed Jul 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.21mdk
 - drakbackup: misc fixes (stew)
 - drakboot: configured directly gdm & kdm
 - drakconnect: fix #4050
 - drakfont: fix #1679 & #3673
 - drakgw:
-  o fix not being able to step backward
+  o fix not being
+ able to step backward
   o fix canceling resulting in broken dhcp config
   o make --testing option being usefull
 - drakhelp: fix no help for de/it/ru locales (daouda)
