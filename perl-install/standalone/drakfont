@@ -155,7 +155,6 @@ sub search_windows_font {
 }
 
 
-
 sub is_a_font {
     local $_ = $_[0];
     /.ttf$/i || /.pfa$/i || /.pfb$/i || /.pcf$/i || /.pcf.gz$/i;
@@ -192,17 +191,12 @@ sub search_dir_font_uninstall {
     my @font_list_tmp = ();
     my $fn = $_;
     if ( -d $fn ) { 
-	foreach my $i (all($fn)) { 
-	    if (($i =~ /.ttf$/i)	|| ($i =~ /.pfa$/i) || ($i =~ /.pfb$/i)	|| ($i =~ /.pcf$/i) || ($i =~ /.pcf.gz$/i)) {
-		push @font_list_tmp, "$i";
-	    }
+	foreach my $i (all($fn)) {
+	    if (is_a_font($i)) { push @font_list_tmp, "$i"; }
 	}
     }
-    else {
-	if (($fn =~ /.ttf$/i) || ($fn =~ /.pfa$/i) || ($fn =~ /.pfb$/i) || ($fn =~ /.pcf$/i) || ($fn =~ /.pcf.gz$/i)) {
-	    push @font_list_tmp, "$fn";
-	}
-    }
+    else { if (is_a_font($fn)) { push @font_list_tmp, "$fn"; }
+       }
     foreach my $i (@installed_fonts_full_path) {
 	foreach my $j (@font_list_tmp) {
 	    if ( $i =~ /$j/) { push @font_list, "$i" ;}
@@ -215,6 +209,15 @@ sub search_dir_font_uninstall {
 sub print_list { print "Font(s) to Install :\n\n"; print "$_\n" foreach (@font_list) }
 
 sub put_font_dir {
+    mkdir_p($drakfont_dir);
+    cp_af(@font_list, $drakfont_dir);
+    system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
+    # xlsfonts | less pour verifier l'installation des polices.
+}
+
+
+sub remove_fonts {
+#    rm_rf(@)
     mkdir_p($drakfont_dir);
     cp_af(@font_list, $drakfont_dir);
     system ("cd $drakfont_dir && type1inst  && chkfontpath -a $drakfont_dir");
@@ -239,7 +242,6 @@ sub backend_mod {
 	print "\n...............The End...................\n";
     }
 
-    #TODO : test directly @install
     if (@install) {
 	print ".......Install Specifics Fonts...........\n\n";
 	search_installed_fonts();
