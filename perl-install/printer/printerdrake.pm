@@ -2189,17 +2189,9 @@ sub print_testpages {
     my ($printer, $in, $upNetwork) = @_;
     $in->set_help('printTestPages') if $::isInstall;
     # print test pages
-    my $standard = 1;
-    my $altletter = 0;
-    my $alta4 = 0;
-    my $photo = 0;
-    my $ascii = 0;
     my $res2 = 0;
-    my $oldstandard = 1;
-    my $oldaltletter = 0;
-    my $oldalta4 = 0;
-    my $oldphoto = 0;
-    my $oldascii = 0;
+    my %options = (alta4 => 0, altletter => 0, ascii => 0, photo => 0, standard => 1);
+    my %old_options = (alta4 => 0, altletter => 0, ascii => 0, photo => 0, standard => 1);
     my $oldres2 = 0;
     my $res1 = $in->ask_from_(
 	 { title => N("Test pages"),
@@ -2213,74 +2205,42 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	       changed => sub {
 		   if ($oldres2 ne $res2) {
 		       if ($res2) {
-			   $standard = 0;
-			   $altletter = 0;
-			   $alta4 = 0;
-			   $photo = 0;
-			   $ascii = 0;
-			   $oldstandard = 0;
-			   $oldaltletter = 0;
-			   $oldalta4 = 0;
-			   $oldphoto = 0;
-			   $oldascii = 0;
+				 foreach my $opt (keys %options) {
+					$options{$opt} = 0;
+					$old_options{$opt} = 0;
+				 }
 		       }
 		       $oldres2 = $res2;
 		   }
-		   if ($oldstandard ne $standard) {
-		       if ($standard) {
-			   $res2 = 0;
-			   $oldres2 = 0;
-		       }
-		       $oldstandard = $standard;
-		   }
-		   if ($oldaltletter ne $altletter) {
-		       if ($altletter) {
-			   $res2 = 0;
-			   $oldres2 = 0;
-		       }
-		       $oldaltletter = $altletter;
-		   }
-		   if ($oldalta4 ne $alta4) {
-		       if ($alta4) {
-			   $res2 = 0;
-			   $oldres2 = 0;
-		       }
-		       $oldalta4 = $alta4;
-		   }
-		   if ($oldphoto ne $photo) {
-		       if ($photo) {
-			   $res2 = 0;
-			   $oldres2 = 0;
-		       }
-		       $oldphoto = $photo;
-		   }
-		   if ($oldascii ne $ascii) {
-		       if ($ascii) {
-			   $res2 = 0;
-			   $oldres2 = 0;
-		       }
-		       $oldascii = $ascii;
+		   foreach my $opt (keys %options) {
+			  if ($old_options{$opt} ne $options{$opt}) {
+				 if ($options{$opt}) {
+					$res2 = 0;
+					$oldres2 = 0;
+				 }
+				 $old_options{standard} = $options{standard};
+			  }
 		   }
 		   return 0;
 	       }
 	   } },
 	 [
 	  { text => N("Standard test page"), type => 'bool',
-	    val => \$standard },
+	    val => \$options{standard} },
 	  if_($::expert,
 	   { text => N("Alternative test page (Letter)"), type => 'bool', 
-	     val => \$altletter }),
+	     val => \$options{altletter} }),
 	  if_($::expert,
 	   { text => N("Alternative test page (A4)"), type => 'bool', 
-	     val => \$alta4 }), 
-	  { text => N("Photo test page"), type => 'bool', val => \$photo },
+	     val => \$options{alta4} }), 
+	  { text => N("Photo test page"), type => 'bool', val => \$options{photo} },
 	  #{ text => N("Plain text test page"), type => 'bool',
-	  #  val => \$ascii }
+	  #  val => \$options{ascii} }
 	  if_($::isWizard,
 	   { text => N("Do not print any test page"), type => 'bool', 
 	     val => \$res2 })
 	  ]);
-    $res2 = 1 if !($standard || $altletter || $alta4 || $photo || $ascii);
+    $res2 = 1 if !($options{standard} || $options{altletter} || $options{alta4} || $options{photo} || $options{ascii});
     if ($res1 && !$res2) {
 	my @lpq_output;
 	{
@@ -2295,16 +2255,16 @@ Note: the photo test page can take a rather long time to get printed and on lase
 	    my $asciitestpage = "/usr/share/printer-testpages/testpage.asc";
 	    my @testpages;
 	    # Install the filter to convert the photo test page to PS
-	    if ($printer->{SPOOLER} ne "cups" && $photo && !$::testing &&
+	    if ($printer->{SPOOLER} ne "cups" && $options{photo} && !$::testing &&
 		!files_exist('/usr/bin/convert')) {
 		$in->do_pkgs->install('ImageMagick');
 	    }
 	    # set up list of pages to print
-	    $standard && push @testpages, $stdtestpage;
-	    $altletter && push @testpages, $altlttestpage;
-	    $alta4 && push @testpages, $alta4testpage;
-	    $photo && push @testpages, $phototestpage;
-	    $ascii && push @testpages, $asciitestpage;
+	    $options{standard} && push @testpages, $stdtestpage;
+	    $options{altletter} && push @testpages, $altlttestpage;
+	    $options{alta4} && push @testpages, $alta4testpage;
+	    $options{photo} && push @testpages, $phototestpage;
+	    $options{ascii} && push @testpages, $asciitestpage;
 	    # print the stuff
 	    @lpq_output = printer::main::print_pages($printer, @testpages);
 	}
