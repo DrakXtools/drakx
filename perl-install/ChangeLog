@@ -1,3 +1,144 @@
+2003/02/11  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* Makefile.drakxtools: don't take lang subdir in pixmap
+
+2003/02/11  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_gtk.pm: format-a-la-tex the message telling that the
+	system is low on resources
+
+	* install_steps.pm: try to fix the $o->{lang} compat
+	have compatibility with old $o->{lang} for not breaking existing auto
+	install files
+
+	* install_any.pm: reflect lang->locale changes in saving auto_inst.cfg
+	file
+
+	* lang.pm: no need to duplicate LC_MONETARY
+	thx perl checko
+	have compatibility with old $o->{lang} for not breaking existing auto
+	install files
+
+	* Makefile.drakxtools: have localedrake in /usr/bin rather than /usr/sbin
+	(#1407)
+
+	* share/gen_locales.pl: update to changes in lang.pm
+
+2003/02/11  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/lsnetdrake: 
+	  - ensure log::l's don't appear on stderr
+	  - catch authentification errors
+
+	* keyboard.pm: for GRP_TOGGLE'd keyboard layouts, have "us,XX" instead of
+	simply "XX"
+	(to have previous XFree's behaviour)
+
+	* fsedit.pm, partition_table.pm: handle 0x7 partition table id specially
+	since it can be both hpfs or ntfs.
+	so adding 0x107 being really ntfs. hopefully this change won't break too
+	much things
+	(but things were already broken, since it assigned a mount point with
+	type ntfs to
+	some hpfs partitions) (fixes bug #1455)
+
+	* partition_table/raw.pm: add "OS/2 boot manager" (see bug #1338)
+
+	* share/diskdrake.rc: 
+	  - have the "Windows" button blue
+	  - set xthickness = 1 and ythickness = 1 for buttons
+	(so that non-colored buttons have the same feelings with the upcoming
+	new
+	  theme)
+
+	* Xconfig/card.pm: don't set AGPMode (see bug #707)
+
+2003/02/11  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* bootlook.pm: stop:
+	  - copying stude && useless trace around
+	  - reinventing the wheel: kill parse_etc_passwd() and use list_users()
+	instead
+
+	* standalone/harddrake2: no frame in standalone mode
+
+	* standalone/drakperm: smoother gui
+	  - further ugtk2 cleanups
+	  - (row_setting_dialog) : fix implosion
+	phase 1 of drakperm clean up through ugtk2
+	  - gtk2 port of dialogs (poulpy)
+	  - one callback cleanup (me):
+	o enforce strict mode (aka kill jonathanries) and introuce
+	    a permission data structure.
+	  o no need to keep global references on widget we pack through
+	    symbolic references; this is only namespace pollution
+
+2003/02/10  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* standalone/drakbug: 
+	  - help link can be non local (http, www connnections).
+
+	* standalone/drakhelp: 
+	  - s/link/path/
+	  - http connections handled.
+
+2003/02/10  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* network/netconnect.pm: reworded network restart string
+
+	* network/ethernet.pm: added a text to describe the Zeroconf host name
+	field
+
+	* network/network.pm: corrected option handling and added hotplug checkbox
+
+2003/02/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_steps_interactive.pm: perl checko
+
+	* tools/make_mdkinst_stage2: count space needed for the filesystem so that
+	we don't end up with 3 mbytes of free space if /tmp was ext3
+
+	* interactive/gtk.pm: two fixes thx to perl_checker, one among them being
+	very important :)
+	when displaying images in treeview, unref pixbufs right after their use
+	so that we try to save some memory
+
+	* lang.pm: perl checko files
+
+2003/02/10  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ar.po: updated Arabic file
+
+2003/02/10  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm: ck hptraid, but discard the insmod error for it
+	small cleanup
+
+	* bootloader.pm: in lilo.conf, "unsafe" is incompatible with "table=..."
+	(fixes bug #1382)
+
+	* fs.pm, diskdrake/interactive.pm, install_steps_interactive.pm: 
+	  - more precise message when formatting / fsck'ing / mounting
+	partitions
+	  - hide passwords (for smb)
+
+2003/02/10  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* network/netconnect.pm, network/network.pm, network/ethernet.pm:
+	perl_checker fixes
+
+	* ugtk2.pm: 
+	  - sort functions by name in export tags
+	  - (gtkset_name) introduce it for mcc and reuse it in
+	create_box_with_title()
+
+	* harddrake/sound.pm: cs4239 is managed by both "ad1848" and "snd-cs4236"
+
+2003/02/09  Pixel  <pixel@mandrakesoft.com>
+
+	* install_gtk.pm: do translate "System installation" and "System
+	configuration" in steps window
+
 2003/02/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
 	* mdk-stage1/init.c: when probing that we're in testing mode, print out
@@ -10033,7 +10174,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.778 2003/02/04 20:59:57 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.779 2003/02/08 22:41:49 gc Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
