@@ -91,6 +91,7 @@ sub exit { exit($_[0]) }
 #-######################################################################################
 sub ask_warn {
     my ($o, $title, $message) = @_;
+    local $::isWizard=0;
     ask_from_listf_no_check($o, $title, $message, undef, [ _("Ok") ]);
 }
 
