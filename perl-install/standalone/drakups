@@ -23,7 +23,7 @@ my ($w, $in); # GUI
 my %indexes;
 
 
-sub writeconf {
+sub writeconf() {
     info_dialog(N("Warning"), "Write support for users is incomplete\n\nIt lacks some support for some extra fields that would be lost else");
     log::explanations("Updating NUT configuration accordingly");
     $struct->writeConf($files{devices});
@@ -32,7 +32,7 @@ sub writeconf {
     $users->writeConf($files{users});
 }
 
-sub readDriversList {
+sub readDriversList() {
     my (%ups, @ups);
     local $_;
     foreach (cat_(first(glob("/usr/share/doc/nut-*/docs/driver.list")))) {
@@ -87,7 +87,7 @@ Do you want to autodetect UPS devices connected to this machine or to manually s
                                end => 1,
                                pre => sub {
                                    local $::isWizard;
-                                   my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
+                                   my $_wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
                                    # UPS autoconfig:
                                    detect_devices::probeSerialDevices() if !$::testing;
                                    @new_devices = ();
@@ -206,19 +206,19 @@ sub edit_row {
 }
 
 
-sub add_callback() {
-    my ($model, $list, $getindex) = @_;
+sub add_callback {
+    my ($model, $_list, $_getindex) = @_;
     edit_row($model);
 }
 
-sub edit_callback() {
+sub edit_callback {
     my ($model, $list) = @_;
     my ($iter) = $list->get_selection->get_selected;
     return unless $iter;
     edit_row($model, $iter);
 }
 
-sub del_callback() {
+sub del_callback {
     my ($model, $list) = @_;
     my (undef, $iter) = $list->get_selection->get_selected;
     my $removed_idx = $list->get($iter, 0); # 1st column is index
