@@ -93,20 +93,25 @@ sub init {
 
 drakx_stuff:
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
+    $o->{steps}{handleMoveKey} = { reachable => 1, text => "Handle Move Key" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard startMove) ];
+    $o->{orderedSteps} = [ qw(selectLanguage handleMoveKey acceptLicense selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
 sub lomount_clp {
-    my ($name) = @_;
+    my ($name, $needed_file) = @_;
     my ($clp, $dir) = ("/image_raw/live_tree_$name.clp", "/image_$name");
+
+    -e "$dir$needed_file" and return;
 
     if (! -e $clp || cat_('/proc/cmdline') =~ /\blive\b/) {
 	symlink "/image_raw/live_tree_$name", $dir;
 	return;
     }
+
+    log::l("lomount_clp: lomounting $name");
 
     mkdir_p($dir);
     my $dev = devices::find_free_loop();
@@ -114,9 +119,18 @@ sub lomount_clp {
     run_program::run('mount', '-r', $dev, $dir);
 }
 
+sub install2::handleMoveKey {
+    my $o = $::o;
+
+    lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
+}
+
 sub install2::startMove {
     my $o = $::o;
     
+    #- just in case
+    lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
+
     if (cat_('/proc/cmdline') =~ /\buser=(\w+)/) {
 	$o->{users} = [ { name => $1 } ];
     } else {

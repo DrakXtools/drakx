@@ -65,6 +65,7 @@ live_tree_boot:
 	$(MAKE) /tmp/live_tree_always.clp
 	$(MAKE) /tmp/live_tree_boot.clp
 	$(MAKE) /tmp/live_tree_totem.clp
+	$(MAKE) $(patsubst %, /tmp/live_tree_always_i18n_%.clp, $(LANG_FILES))
 
 live_tree_boot_all:
 	cd /tmp/live_tree ; find -type l | cpio -pd /tmp/live_tree_boot_all

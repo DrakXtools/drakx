@@ -3,6 +3,7 @@
 use MDK::Common;
 
 my $prefix = '/tmp/live_tree';
+my @ALLOWED_LANGS = split(' ', first(cat_('move.pm') =~ /ALLOWED_LANGS = qw\((.*)\)/));
 
 sub create_light_tree {
     my ($live_name, $list) = @_;
@@ -107,6 +108,7 @@ sub remove_light_tree {
 my @always_list = chomp_(cat_('data/always.list'));
 my @boot_list_orig = chomp_(cat_('data/boot.list'));
 my @totem_list_orig = chomp_(cat_('data/totem.list'));
+my @always_i18n_list = chomp_(cat_('data/always_i18n.list'));
 
 @always_list = uniq(@always_list, intersection(\@boot_list_orig, \@totem_list_orig));
 
@@ -116,10 +118,17 @@ my @totem_list = difference2(\@totem_list_orig, \@always_list);
 remove_light_tree('always', \@always_list);
 remove_light_tree('boot', \@boot_list);
 remove_light_tree('totem', \@totem_list);
+foreach my $lang (@ALLOWED_LANGS) {
+    remove_light_tree("always_i18n_$lang", []);
+}
 
 if (!@ARGV) {
     create_light_tree('always', \@always_list);    
     create_light_tree('boot', \@boot_list);    
     create_light_tree('totem', \@totem_list);    
+    foreach my $lang (@ALLOWED_LANGS) {
+	my @list = map { my $s = $_; $s =~ s/__LANG__/$lang/; if_(-e $s, $s) } @always_i18n_list;
+	create_light_tree("always_i18n_$lang", \@list);
+    }
     create_totem_links('totem', \@totem_list_orig);
 }
