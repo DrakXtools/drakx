@@ -1,7 +1,14 @@
 #!/bin/bash
 
 ok=0
+lastdate0=0
 while [ "$ok" == 0 -a ! -s /var/run/rebootctl ]; do
+    lastdate1=$lastdate0
+    lastdate0=`date +%s`
+    if [ `expr $lastdate0 - $lastdate1` -lt 10 ]; then
+        echo "X server respawning too fast :("
+        exit 1
+    fi
     X $@
     ok=$?
 done
