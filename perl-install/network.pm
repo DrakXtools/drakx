@@ -158,7 +158,7 @@ sub findIntf {
     $l;
 }
 #PAD \s* a la fin
-my $ip_regexp = qr/(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+my $ip_regexp = qr/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 sub is_ip {
     my ($ip) = @_;
     return 0 unless $ip =~ $ip_regexp;

@@ -419,19 +419,12 @@ sub configure_queue($) {
     %fieldname = ();
     $fieldname{gsdevice}       = $dbentry->{GSDRIVER};
     $fieldname{papersize}      = $entry->{PAPERSIZE} ? $entry->{PAPERSIZE} : "letter";
-    $fieldname{resolution}     = $entry->{RESOLUTION}; #-($entry->{RESOLUTION} eq "Default") ? "Default" : "";
+    $fieldname{resolution}     = $entry->{RESOLUTION};
     $fieldname{color}          = $entry->{BITSPERPIXEL} ne "Default" &&
       (($dbentry->{GSDRIVER} ne "uniprint" && "-dBitsPerPixel=") . $entry->{BITSPERPIXEL});
-#-      do {
-#-	  if ($dbentry->{GSDRIVER} ne "uniprint") {
-#-	      ($entry->{BITSPERPIXEL} eq "Default") ? "-dBitsPerPixel=Default" : "";
-#-	  } else {
-#-	      $entry->{BITSPERPIXEL};
-#-	  }
-#-      };
     $fieldname{reversepages}   = "NO";
     $fieldname{extragsoptions} = "";
-    $fieldname{pssendeof}      = ($dbentry->{GSDRIVER} ne "POSTSCRIPT") ? "NO" : "YES";
+    $fieldname{pssendeof}      = $entry->{AUTOSENDEOF} ? ($dbentry->{GSDRIVER} eq "POSTSCRIPT" ? "YES" : "NO") : "NO";
     $fieldname{nup}            = "1";
     $fieldname{rtlftmar}       = "18";
     $fieldname{topbotmar}      = "18";
@@ -442,7 +435,7 @@ sub configure_queue($) {
     %fieldname = ();
     $fieldname{textonlyoptions} = "";
     $fieldname{crlftrans}       = $entry->{CRLF} ? "YES" : "";
-    $fieldname{textsendeof}     = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "NO" : "YES";
+    $fieldname{textsendeof}     = $entry->{AUTOSENDEOF} ? ($dbentry->{GSDRIVER} eq "POSTSCRIPT" ? "NO" : "YES") : "NO";
     create_config_file($filein, $file, %fieldname);
 
     if ($entry->{TYPE} eq "SMB") {

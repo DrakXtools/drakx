@@ -457,7 +457,6 @@ on that server which jobs should be placed in."),
 					    [_("Remote hostname:"), _("Remote queue")],
 					    [\$o->{printer}{REMOTEHOST}, \$o->{printer}{REMOTEQUEUE}],
 					   );
-
     } elsif ($o->{printer}{TYPE} eq "SMB") {
 	return if !$o->ask_from_entries_ref(
 	    _("SMB (Windows 9x/NT) Printer Options"),
@@ -481,6 +480,7 @@ applicable user name, password, and workgroup information."),
 		 return 0;
 	     },
 					   );
+	install_any::pkg_install($o, 'samba') unless $::testing;
     } elsif ($o->{printer}{TYPE} eq "NCP") {
 	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
 	    _("To print to a NetWare printer, you need to provide the
@@ -492,6 +492,7 @@ wish to access and any applicable user name and password."),
 	    [\$o->{printer}{NCPHOST}, \$o->{printer}{NCPQUEUE},
 	     \$o->{printer}{NCPUSER}, {val => \$o->{printer}{NCPPASSWD}, hidden => 1}],
 					   );
+	install_any::pkg_install($o, 'ncpfs') unless $::testing;
     }
 
     my $action;
@@ -531,10 +532,11 @@ wish to access and any applicable user name and password."),
 
 	$o->ask_from_entries_refH('', _("Printer options"), [
 _("Paper Size") => { val => \$o->{printer}{PAPERSIZE}, type => 'list', , not_edit => !$::expert, list => \@printer::papersize_type },
-@list_res ? (
+_("Eject page after job?") => { val => \$o->{printer}{AUTOSENDEOF}, type => 'bool' },
+$#list_res > 0 ? (
 _("Resolution") => { val => \$o->{printer}{RESOLUTION}, type => 'list', , not_edit => !$::expert, list => \@res } ) : (),
 _("Fix stair-stepping text?") => { val => \$o->{printer}{CRLF}, type => "bool" },
-@list_col ? (
+$#list_col > 0 ? (
 $is_uniprint ? (
 _("Uniprint driver options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ) : (
 _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list', , not_edit => !$::expert, list => \@col } ), ) : ()
