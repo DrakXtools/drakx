@@ -590,7 +590,6 @@ sub miscellaneousNetwork {
 sub setup_thiskind {
     my ($in, $type, $auto, $at_least_one) = @_;
 
-    return if arch() eq "ppc";
     my @l = setup_thiskind_backend ($type, $auto, $at_least_one, sub { my $w = wait_load_module($in, $type, @_); } );
 
     if (!$::noauto) {
