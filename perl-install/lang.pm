@@ -30,7 +30,7 @@ my %languages = my @languages = (
 'en_IE' => [ 'English|Ireland',		'iso-8859-15','en', 'en_IE:en_GB:en' ],
 'en_US.UTF-8'=> [ 'English|UTF-8',	'utf_15',     'en', 'en_US:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
-  'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
+'ar_EG.UTF-8'=> [ 'Arabic',		'utf_ar',     'ar', 'ar' ],
 #'az_AZ.ISO-8859-9E'=> [ 'Azeri (Latin)','iso-8859-9e','az', 'az:tr' ],
 'az_AZ.UTF-8'=> [ 'Azeri (Latin)',	'utf_az',     'az', 'az:tr' ],
   'be'  => [ 'Belarussian (CP1251)',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
@@ -42,8 +42,8 @@ my %languages = my @languages = (
   'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
 'ca_ES' => [ 'Catalan',			'iso-8859-15','ca', 'ca:es_ES:es' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
-  'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
-'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh) (UTF-8)','utf_14',   'cy', 'cy:en_GB:en' ],
+#  'cy'  => [ 'Cymraeg (Welsh)','iso-8859-14','cy', 'cy:en_GB:en' ],
+'cy_GB.UTF-8'=> [ 'Cymraeg (Welsh)',	'utf_14',   'cy', 'cy:en_GB:en' ],
   'da'  => [ 'Danish',			'iso-8859-15', 'da', 'da' ],		
 'de_AT' => [ 'German|Austria',		'iso-8859-15','de', 'de_AT:de' ],
 'de_BE' => [ 'German|Belgium',		'iso-8859-15','de', 'de_BE:de' ],
@@ -51,8 +51,7 @@ my %languages = my @languages = (
 'de_DE' => [ 'German|Germany',		'iso-8859-15','de', 'de_DE:de' ],
   'el'  => [ 'Greek',        'iso-8859-7', 'el', 'el' ],
 'el_GR.UTF-8'=> [ 'Greek (UTF-8)',        'utf_el',     'el', 'el' ],
-  'eo'  => [ 'Esperanto (UTF-8)',		'iso-8859-3', 'eo', 'eo' ],
-'eo_XX.UTF-8'=> [ 'Esperanto (UTF-8)',	'utf_3',      'eo', 'eo' ],
+  'eo'  => [ 'Esperanto',		'utf_3',      'eo', 'eo' ],
 'es_AR' => [ 'Spanish|Argentina',	'iso-8859-1', 'es', 'es_AR:es_UY:es:es_ES' ],
 'es_ES' => [ 'Spanish|Spain (modern sorting)',	'iso-8859-15', 'es', 'es_ES:es' ],
 'es@tradicional' => [ 'Spanish|Spain (traditional sorting)', 'iso-8859-15', 'es', 'es' ],
@@ -60,7 +59,7 @@ my %languages = my @languages = (
 'es_MX' => [ 'Spanish|Mexico',	'iso-8859-1', 'es', 'es_MX:es:es_ES' ],
   'et'  => [ 'Estonian',		'iso-8859-15','et', 'et' ],
 'eu_ES' => [ 'Euskara (Basque)','iso-8859-15', 'eu', 'eu' ],
-#-'fa'  => [ 'Farsi (Iranian)',		'isiri-3342', 'fa', 'fa' ],
+'fa_IR.UTF-8'=> [ 'Farsi (Iranian)',		'utf_fa', 'fa', 'fa' ],
 'fi_FI' => [ 'Finnish (Suomi)',	'iso-8859-15','fi', 'fi' ],
 #-'fo'  => [ 'Faroese',			'iso-8859-1', 'fo', 'fo' ],
 'fr_BE' => [ 'French|Belgium',	'iso-8859-15','fr', 'fr_BE:fr' ],
@@ -73,8 +72,8 @@ my %languages = my @languages = (
 'gl_ES' => [ 'Galego (Galician)','iso-8859-15','gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
 #-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
-  'he'  => [ 'Hebrew',	'iso-8859-8', 'he', 'he:iw_IL' ],
-'he_IL.UTF-8'=> [ 'Hebrew (UTF-8)',	'utf_he',     'he', 'he:iw_IL' ],
+#  'he'  => [ 'Hebrew',	'iso-8859-8', 'he', 'he:iw_IL' ],
+'he_IL.UTF-8'=> [ 'Hebrew',		'utf_he',     'he', 'he:iw_IL' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
 #'hy_AM.ARMSCII-8'=> [ 'Armenian|ARMSCII-8','armscii-8','hy','hy' ],
@@ -97,8 +96,8 @@ my %languages = my @languages = (
   'lt'  => [ 'Lithuanian',		'iso-8859-13','lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13','lv', 'lv' ],   
   'mi'	=> [ 'Maori',			'iso-8859-13','mi', 'mi' ],
-  'mk'  => [ 'Macedonian (Cyrillic)','iso-8859-5', 'mk', 'mk' ],
-'mk_MK.UTF-8'=> [ 'Macedonian (Cyrillic) (UTF-8)','utf_1251',   'mk', 'mk' ],
+# 'mk'  => [ 'Macedonian (Cyrillic)','iso-8859-5', 'mk', 'mk' ],
+'mk_MK.UTF-8'=> [ 'Macedonian (Cyrillic)','utf_1251',   'mk', 'mk' ],
   'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
 # 'mt'  => [ 'Maltese|ISO-8859-3',	'iso-8859-3', 'mt', 'mt' ],
 'mt_MT.UTF-8'=> [ 'Maltese',	'utf_3',      'mt', 'mt' ],
@@ -121,13 +120,15 @@ my %languages = my @languages = (
 'ru_RU.UTF-8' => [ 'Russian|UTF-8',	'utf_1251',   'ru', 'ru_RU:ru' ],
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
-  'sp'  => [ 'Serbian|Cyrillic (ISO-8859-5)','iso-8859-5', 'sp', 'sp:sr' ],
-'sp_YU.CP1251'=> [ 'Serbian|Cyrillic (CP1251)','cp1251',    'sp', 'sp:sr' ],
-'sp_YU.UTF-8'=> [ 'Serbian|Cyrillic (UTF-8)','utf_1251',   'sp', 'sp:sr' ],
+#  'sp'  => [ 'Serbian|Cyrillic (ISO-8859-5)','iso-8859-5', 'sp', 'sp:sr' ],
+#'sp_YU.CP1251'=> [ 'Serbian|Cyrillic (CP1251)','cp1251',    'sp', 'sp:sr' ],
+'sp_YU.UTF-8'=> [ 'Serbian|Cyrillic','utf_1251',   'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian|Latin (ISO-8859-2)','iso-8859-2','sr', 'sr' ],
 'sr_YU.UTF-8'=> [ 'Serbian|Latin (UTF-8)',	'utf_2',      'sr', 'sr' ],
   'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
 # there is no tamil font curently; so set DrakX encoding to utf_1
+# note: most of the gnome translations for tamil are broken (using bad
+# encoding)
 'ta_IN.UTF-8'=> [ 'Tamil',		'utf_1',      'ta', 'ta' ],
 'tg_TJ.UTF-8'=> [ 'Tajik',		'utf_koi',    'tg', 'tg' ],
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
@@ -139,9 +140,9 @@ my %languages = my @languages = (
 'uk_UA.CP1251'=> [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
 'uk_UA.UTF-8'=> [ 'Ukrainian|UTF-8',	'utf_1251',   'uk', 'uk_UA:uk' ],
   'uz'  => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
-'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'tcvn',     'vi', 'vi' ],
-'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi', 'vi' ],
-'vi_VN.UTF-8' => [ 'Vietnamese|UTF-8',  'utf_vi',   'vi', 'vi' ],
+#'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'tcvn',     'vi', 'vi' ],
+#'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi', 'vi' ],
+'vi_VN.UTF-8' => [ 'Vietnamese',  'utf_vi',   'vi', 'vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 # NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
@@ -244,27 +245,6 @@ my %xim = (
   'vi_VN.VISCII' => {
 	XIM_PROGRAM => 'xvnkb',
   },
-## xvnkb don't work in utf-8
-# 'vi_VN.UTF-8' => {
-#	XIM_PROGRAM => 'xvnkb',
-# },
-  # right to left languages only work properly on console
-  'ar' => {
-	X11_NOT_LOCALIZED => "yes",
-  },
-  'fa' => {
-	X11_NOT_LOCALIZED => "yes",
-  },
-# KDE has some "mirrored" translations
-#  'he' => {
-#	X11_NOT_LOCALIZED => "yes",
-#  },
-  'ur' => {
-	X11_NOT_LOCALIZED => "yes",
-  },
-  'yi' => {
-	X11_NOT_LOCALIZED => "yes",
-  },
 );
 
 sub std2 { "-*-*-medium-r-normal-*-$_[1]-*-*-*-*-*-$_[0]" }
@@ -313,6 +293,8 @@ my %charsets = (
 #-#- (and gtk support isn't done yet)
   "iso-8859-6" => [ "iso06.f16",	"iso06",	"trivial.trans",
     "iso8859-6", "864", std_("iso8859-6") ],
+  "utf_ar" => [ "iso06.f16",	"iso06",	"trivial.trans",
+    "utf8", "864", std_("iso8859-6") ],
   "iso-8859-7" => [ "iso07.f16",	undef,	"iso07",
 	"iso8859-7", "869", std_("iso8859-7") ],
   "utf_el" => [ "iso07.f16",	undef,		"iso07",
@@ -384,6 +366,8 @@ my %charsets = (
 #- (and gtk support isn't done yet)
 #  "isiri-3342" => [ undef,		undef,		"trivial.trans",
 #	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
+  "utf_fa" => [ undef,			undef,		"trivial.trans",
+	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 #  "tscii-0" => [ "tamil",		undef,		"trivial.trans",
 #	undef, undef, "-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
   "unicode" => [ undef,			undef,		"trivial.trans",
