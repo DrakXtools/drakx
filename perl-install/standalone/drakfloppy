@@ -297,10 +297,9 @@ sub build_it() {
         err_dialog(N("Error"), N("There is no medium or it is write-protected for device %s.\nPlease insert one.", $device_combo->entry->get_text), { cancel => 1 }) ? goto test : return 0;
     }
   
-    local *STATUS;
-    open STATUS, $co or do { err_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
-    my $log = join('', <STATUS>);
-    if (close STATUS) {
+    open(my $STATUS, $co) or do { err_dialog(N("Error"), N("Unable to fork: %s", $!)); return };
+    my $log = join('', <$STATUS>);
+    if (close $STATUS) {
         info_dialog(N("Floppy creation completed"), N("The creation of the boot floppy has been successfully completed \n"));
         ugtk2->exit;
     } else {
