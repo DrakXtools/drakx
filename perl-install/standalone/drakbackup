@@ -1198,7 +1198,6 @@ sub build_backup_files() {
     my $tar_cmd_sys;
     my $tar_cmd_user;
     my $tar_cmd_other;
-    my $base_sys_exist = 0;
     my @dir_content;
 	my $incr;
 	my $find_args = "! -type d";
@@ -1243,8 +1242,7 @@ sub build_backup_files() {
 	$backupignore && -f "/etc/.backupignore" and $tar_cmd_sys .= " -X /etc/.backupignore";
 	
     -d $save_path and @dir_content = all($save_path);
-    any { /^backup_base_sys/ } @dir_content and $base_sys_exist = 1;
-
+ 
     if ($where_hd && !$daemon || $daemon) {
 	  $interactive and progress($pbar, $plabel, 0.5, N("Backup system files..."));
 	  if ($backup_sys) {
@@ -3348,13 +3346,12 @@ sub restore_step_user() {
 
 sub restore_step_sys() {
     my $restore_step_sys;
-	my $check_backup_before;
     my $combo_restore_step_sys = new Gtk2::OptionMenu();
     $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
 			1, new Gtk2::VBox(0,10),
-			0, $check_backup_before = new Gtk2::CheckButton(N("Backup the system files before:")),
+			0, new Gtk2::CheckButton(N("Backup the system files before:")),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, N("please choose the date to restore"),
 				0, $combo_restore_step_sys,
