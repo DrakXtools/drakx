@@ -31,8 +31,7 @@ sub readCardsDB {
     my ($file) = @_;
     my ($card, %cards);
 
-    local *F;
-    open F, $file or die "file $file not found";
+    my $F = common::openFileMaybeCompressed($file);
 
     my ($lineno, $cmd, $val) = 0;
     my $fs = {
@@ -64,7 +63,7 @@ sub readCardsDB {
     };
 
     local $_;
-    while (<F>) { $lineno++;
+    while (<$F>) { $lineno++;
 	s/\s+$//;
 	/^#/ and next;
 	/^$/ and next;
@@ -80,15 +79,12 @@ sub readCardsDB {
 }
 sub readCardsNames {
     my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
-    local *F; open F, $file or die "can't find $file\n";
-    map { (split '=>')[0] } grep { !/^#/ } <F>;
+    map { (split '=>')[0] } grep { !/^#/ } catMaybeCompressed($file);
 }
 sub cardName2RealName {
-    my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
     my ($name) = @_;
-    local *F; open F, $file or die "can't find $file\n";
-    local $_;
-    while (<F>) { 
+    my $file = "$ENV{SHARE_PATH}/ldetect-lst/CardsNames";
+    foreach (catMaybeCompressed($file)) {
 	chop;
 	next if /^#/;	  
 	my ($name_, $real) = split '=>';
@@ -110,9 +106,9 @@ sub readMonitorsDB {
 
     %monitors and return;
 
-    local *F; open F, $file or die "can't open monitors database ($file): $!";
+    my $F = common::openFileMaybeCompressed($file);
     local $_;
-    my $lineno = 0; while (<F>) {
+    my $lineno = 0; while (<$F>) {
 	$lineno++;
 	s/\s+$//;
 	/^#/ and next;
