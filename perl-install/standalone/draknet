@@ -42,7 +42,7 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 
 #$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
-my $in = vnew interactive('su');
+my $in = vnew interactive('su', 'network');
 
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 require Gtk;
