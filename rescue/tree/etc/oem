@@ -552,8 +552,10 @@ foreach my $medium (@media) {
     foreach (@{$packer->{files}}) {
 	$packer->{data}{$_}[0] eq 'f' or next;
 	my ($fullname, $file) = /([^:]*):(.*)/ ? ($1, "$2.rpm") : ($_, "$_.rpm");
-	$files{$fullname} = $file;
-	$rpms{$file} = $medium->{rpmsdir};
+	$files{$fullname} = "$medium->{rpmsdir}/$file";
+	#- convert %{ARCH} to effective arch of the given package.
+	my ($arch) = $fullname =~ /\.([^\.\-]*)$/;
+	$files{$fullname} =~ s|%{ARCH}|$arch|g;
     }
 }
 
@@ -562,7 +564,9 @@ system "rpm", "--root", "/mnt", "--initdb";
 
 #- copy and install from each cd image.
 foreach my $medium (@media) {
-    while ($cd && ! -d "/cdrom/$medium->{rpmsdir}") {
+    my $rpmsidr = $medium->{rpmsdir};
+    $rpmsdir =~ s|%{ARCH}.*||; #- only for checking directory presence...
+    while ($cd && ! -d "/cdrom/$rpmsdir") {
 	system "unmount", "/dev/$cd";
 	system "eject", "/dev/$cd";
 	print "Please insert the cdrom labeled \"$medium->{descr}\"\n  and press [enter] when done\n";
@@ -571,15 +575,18 @@ foreach my $medium (@media) {
     }
 
     print "Copying packages from medium labeled \"$medium->{descr}\" to hard disk\n";
-    system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
     foreach my $pkg (@{$packages->{depslist}}) {
 	$files{rpm_fullname($pkg)} or next;
-	my $file = "/cdrom/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
+	my ($arch) = rpm_fullname($pkg) =~ /\.([^\.\-]*)$/;
+	$rpmsdir = $medium->{rpmsdir};
+	$rpmsdir =~ s|%{ARCH}|$arch|g;
+	system "mkdir", "-p", "/hd/$rpmsdir";
+	my $file = "/cdrom/" . $files{rpm_fullname($pkg)};
 	if (-e $file) {
 	    print "  copying " . rpm_fullname($pkg) . "\n";
-	    system "cp", "-a", $file, "/hd/$medium->{rpmsdir}";
+	    system "cp", "-a", $file, "/hd/$rpmsdir";
 	    if (rpm_fullname($pkg) =~ /mandrake-release/) {
-		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
+		system "rpm", "-Uvh", "--root", "/mnt", "--nodeps", "--force", "/hd/" . $files{rpm_fullname($pkg)};
 	    }
 	}
     }
