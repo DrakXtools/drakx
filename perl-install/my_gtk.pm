@@ -9,7 +9,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    helpers => [ qw(create_okcancel createScrolledWindow may_createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
+    helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
     wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
@@ -162,11 +162,12 @@ sub gtkput {
     $w
 }
 
-sub gtktext_insert($$) {
+sub gtktext_insert {
     my ($w, $t) = @_;
     $w->freeze;
     $w->backward_delete($w->get_length);
-    $w->insert(undef, undef, undef, "$t\n"); #- needs \n otherwise in case of one line text the beginning is not shown (even with the vadj->set_value)
+    $w->insert(undef, undef, undef, $t); 
+    #- DEPRECATED? needs \n otherwise in case of one line text the beginning is not shown (even with the vadj->set_value)
     $w->set_word_wrap(1);
 #-    $w->vadj->set_value(0);
     $w->thaw;
@@ -254,18 +255,25 @@ sub create_okcancel {
 sub create_box_with_title($@) {
     my $o = shift;
 
+    
     my $nb_lines = map { split "\n" } @_;
-    $o->{box} = (@_ <= 2 && $nb_lines > 4) ?
-      gtkpack(new Gtk::VBox(0,0),
-	      gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @_)), 400, min(250, $nb_lines * 20))) :
-      gtkpack_(new Gtk::VBox(0,0),
+    $o->{box} = new Gtk::VBox(0,0);
+    if (@_ <= 2 && $nb_lines > 4) {
+	my $font = $o->{box}->style->font;
+	chomp(my $text = join("\n", @_));
+	my $scroll = createScrolledWindow(gtktext_insert(new Gtk::Text, $text));
+	$scroll->set_usize(400, min(250, $nb_lines * ($font->ascent + $font->descent) + 7));
+	gtkpack__($o->{box}, $scroll);
+    } else {
+	gtkpack($o->{box},
 	       (map {
 		   my $w = ref $_ ? $_ : new Gtk::Label($_);
 		   $w->set_name("Title");
-		   0, $w;
+		   $w;
 	       } map { ref $_ ? $_ : warp_text($_) } @_),
-	       0, new Gtk::HSeparator,
+	       new Gtk::HSeparator,
 	      );
+    }
 }
 
 sub createScrolledWindow {
@@ -278,11 +286,6 @@ sub createScrolledWindow {
     $W->can("set_focus_vadjustment") and $W->set_focus_vadjustment($w->get_vadjustment);
     $W->show;
     $w
-}
-
-sub may_createScrolledWindow {
-    my ($bool, $list, $width, $height) = @_;
-    $bool ? gtkset_usize(createScrolledWindow($list), $width, $height) : $list;
 }
 
 sub create_menu($@) {
@@ -315,21 +318,22 @@ sub create_adjustment($$$) {
 }
 
 sub create_packtable($@) {
-    my $options = shift;
+    my ($options, @l) = @_;
     my $w = new Gtk::Table(0, 0, $options->{homogeneous} || 0);
     map_index {
-	my ($i) = @_;
+	my ($i, $l) = ($_[0], $_);
 	map_index {
 	    my ($j) = @_;
-	    if (defined $_) {
+	    if ($_) {
 		ref $_ or $_ = new Gtk::Label($_);
-		$options->{no_expand} ?
+		$j != $#$l ?
 		  $w->attach($_, $j, $j + 1, $i, $i + 1, 'fill', 'fill', 5, 0) :
-		  $w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
+		  $w->attach_raw($_, $j, $j + 1, $i, $i + 1, 1|5, ref($_) eq 'Gtk::ScrolledWindow' ? 1|5 : 0, 0, 0);
+#		  $w->attach_defaults($_, $j, $j + 1, $i, $i + 1);
 		$_->show;
 	    }
-	} @$_;
-    } @_;
+	} @$l;
+    } @l;
     $w->set_col_spacings($options->{col_spacings} || 0);
     $w->set_row_spacings($options->{row_spacings} || 0);
     $w
@@ -574,7 +578,7 @@ sub _ask_from_list {
     gtkadd($o->{window},
 	   gtkpack($o->create_box_with_title(@$messages),
 		   gtkpack_(new Gtk::VBox(0,7),
-			    1, may_createScrolledWindow(@$l > 15, $list, 200, min(350, $::windowheight - 60)),
+			    1, createScrolledWindow($list),
 			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
 		  ));
     $o->show; #- otherwise the moveto is not done
