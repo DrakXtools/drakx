@@ -40,7 +40,7 @@ cd .. ; rm -rf .tmp2
 perl -I../.. ../gen_locales.pl || exit 1
 
 
-for i in common C en_US.UTF-8 iso8859-1 ja ko tscii-0 zh_CN zh_TW.big5 ; do
+for i in common C en_US.UTF-8 iso8859-1 ja ko zh_CN zh_TW.big5 ; do
     cp -a /usr/X11R6/lib/X11/locale/$i usr/X11R6/lib/X11/locale
 done
 
