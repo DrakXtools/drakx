@@ -141,10 +141,10 @@ defaultroute
     write_cnx_script($netc, "isdn",
 "/sbin/route del default
 /sbin/ifup ippp0
-/sbin/isdnctrl dial ippp0
+/usr/sbin/isdnctrl dial ippp0
 " . if_($isdn->{speed} =~ /128/, "service ibod restart
 "),
-"/sbin/isdnctrl hangup ippp0
+"/usr/sbin/isdnctrl hangup ippp0
 /sbin/ifdown ippp0
 "  . if_($isdn->{speed} =~ /128/, "service ibod stop
 "), $netc->{isdntype});
