@@ -312,7 +312,6 @@ sub _gtk__ComboBox {
 	if (my $text_ref = delete $opts->{text_ref}) {
 	    my $set = sub {
 		my $val = may_apply($w->{format}, $$text_ref);
-		warn "setting $val\n";
 		eval { $w->set_active(find_index { $_ eq $val } @{$w->{formatted_list}}) };
 	    };
 	    $w->signal_connect(changed => sub {
