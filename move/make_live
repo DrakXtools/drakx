@@ -136,7 +136,7 @@ run_program::rooted($::prefix, 'fc-cache');  #- generate cache in all directorie
     #- system
 
 # de-complexify, use the default on any arch
-eval { rm_rf("$::prefix$_") } foreach '/lib/i686', '/lib/tls', '/usr/lib/tls', '/usr/X11R6/lib/tls', '/usr/X11R6/lib/modules/extensions/tls';
+eval { rm_rf("$::prefix$_") } foreach '/lib/i686', '/lib/tls', '/usr/lib/tls', '/usr/X11R6/lib/tls', '/usr/X11R6/lib/modules/extensions/tls', '/usr/X11R6/lib/modules/dri/tls';
 
 eval { config_X_proprietary_drivers() };
 
