@@ -134,7 +134,7 @@ sub getFile {
 	if ($f =~ m|^http://|) {
 	    require http;
 	    http::getFile($f);
-	} elsif ($method =~ /crypto/i) {
+	} elsif ($method =~ /crypto|update/i) {
 	    require crypto;
 	    crypto::getFile($f);
 	} elsif ($::o->{method} eq "ftp") {
@@ -195,7 +195,7 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{$boot_medium});
+    pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums});
     cp_af((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 
     log::l("copying Auto Install Floppy");
@@ -517,7 +517,7 @@ sub install_urpmi {
     #- rare case where urpmi cannot be installed (no hd install path).
     $method eq 'disk' && !hdInstallPath() and return;
 
-    my @cfg = map_index {
+    my @cfg = map {
 	my $name = $_->{fakemedium};
 
 	local *LIST;
@@ -525,11 +525,11 @@ sub install_urpmi {
 	open LIST, ">$prefix/var/lib/urpmi/list.$name" or log::l("failed to write list.$name");
 	umask $mask;
 
-	my $dir = ${{ nfs => "file://mnt/nfs", 
-                      disk => "file:/" . hdInstallPath(),
-		      ftp => $ENV{URLPREFIX},
-		      http => $ENV{URLPREFIX},
-		      cdrom => "removable://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
+	my $dir = ($_->{prefix} || ${{ nfs => "file://mnt/nfs", 
+				       disk => "file:/" . hdInstallPath(),
+				       ftp => $ENV{URLPREFIX},
+				       http => $ENV{URLPREFIX},
+				       cdrom => "removable://mnt/cdrom" }}{$method}) . "/$_->{rpmsdir}";
 
 	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
 	print LIST "$dir/$_\n" foreach chomp_(<FILES>);
@@ -548,7 +548,7 @@ sub install_urpmi {
 }
 
 ";
-    } values %$mediums;
+    } sort { $a->{medium} <=> $b->{medium} } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 
     #- automatically build all synthesis files.

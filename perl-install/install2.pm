@@ -260,6 +260,11 @@ sub installCrypto {
     installStepsCall($o, $auto, 'installCrypto');
 }
 #------------------------------------------------------------------------------
+sub installUpdates {
+    my ($clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'installUpdates');
+}
+#------------------------------------------------------------------------------
 sub configureServices {
     my ($clicked, $ent_number, $auto) = @_;
     installStepsCall($o, $auto, 'configureServices', $clicked);

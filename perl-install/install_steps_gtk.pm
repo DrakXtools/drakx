@@ -335,7 +335,7 @@ sub reallyChooseGroups {
 
 
 sub choosePackagesTree {
-    my ($o, $packages) = @_;
+    my ($o, $packages, $limit_to_medium) = @_;
 
     my $available = install_any::getAvailableSpace($o);
     my $availableCorrected = pkgs::invCorrectSize($available / sqr(1024)) * sqr(1024);
@@ -356,6 +356,7 @@ sub choosePackagesTree {
 				my ($add_node, $flat) = @_;
 				if ($flat) {
 				    foreach (sort keys %{$packages->{names}}) {
+					!$limit_to_medium || pkgs::packageMedium($packages, $_) == $limit_to_medium or next;
 					$add_node->($_, undef);
 				    }
 				} else {
@@ -364,6 +365,7 @@ sub choosePackagesTree {
 					#$fl{$_} = $o->{compssUsersChoice}{$_} foreach @{$o->{compssUsers}{$root}{flags}}; #- FEATURE:improve choce of packages...
 					$fl{$_} = 1 foreach @{$o->{compssUsers}{$root}{flags}};
 					foreach my $p (values %{$packages->{names}}) {
+					    !$limit_to_medium || pkgs::packageMedium($packages, $p) == $limit_to_medium or next;
 					    my ($rate, @flags) = pkgs::packageRateRFlags($p);
 					    next if !($rate && grep { grep { !/^!/ && $fl{$_} } split('\|\|') } @flags);
 					    $rate >= 3 ?
@@ -378,7 +380,7 @@ sub choosePackagesTree {
 			    },
 			    get_info => sub {
 				my $p = pkgs::packageByName($packages, $_[0]) or return '';
-				pkgs::extractHeaders($o->{prefix}, [$p], pkgs::packageMedium($packages, $p));
+				pkgs::extractHeaders($o->{prefix}, [$p], $packages->{mediums});
 				pkgs::packageHeader($p) or die;
 
 				my $imp = translate($pkgs::compssListDesc{pkgs::packageFlagBase($p) ?

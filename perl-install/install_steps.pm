@@ -589,6 +589,16 @@ sub installCrypto {
     $o->pkg_install(@{$u->{packages}});
 }
 
+sub installUpates {
+    my ($o) = @_;
+    my $u = $o->{updates} or return; $u->{updates} && $u->{packages} or return;
+
+    upNetwork($o);
+    require crypto;
+    my @crypto_packages = crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror});
+    $o->pkg_install(@{$u->{packages}});
+}
+
 sub summary {
     my ($o) = @_;
     configureTimezone($o);

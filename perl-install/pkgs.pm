@@ -129,16 +129,25 @@ sub cleanHeaders {
 }
 
 #- get all headers from an hdlist file.
-sub extractHeaders($$$) {
-    my ($prefix, $pkgs, $medium) = @_;
+sub extractHeaders {
+    my ($prefix, $pkgs, $media) = @_;
+    my %medium2pkgs;
 
     cleanHeaders($prefix);
 
-    eval {
-	require packdrake;
-	my $packer = new packdrake("/tmp/$medium->{hdlist}", quiet => 1);
-	$packer->extract_archive("$prefix/tmp/headers", map { packageHeaderFile($_) } @$pkgs);
-    };
+    foreach (@$pkgs) {
+	push @{$medium2pkgs{$_->[$MEDIUM]} ||= []}, $_;
+    }
+
+    foreach (values %medium2pkgs) {
+	my $medium = $media->{$_->[0][$MEDIUM]}; #- the first one is a valid package pointing to right medium to use.
+
+	eval {
+	    require packdrake;
+	    my $packer = new packdrake("/tmp/$medium->{hdlist}", quiet => 1);
+	    $packer->extract_archive("$prefix/tmp/headers", map { packageHeaderFile($_) } @$_);
+	};
+    }
 
     foreach (@$pkgs) {
 	my $f = "$prefix/tmp/headers/". packageHeaderFile($_);
@@ -404,6 +413,7 @@ sub psUsingHdlists {
 sub psUsingHdlist {
     my ($prefix, $method, $packages, $hdlist, $medium, $rpmsdir, $descr, $selected, $fhdlist) = @_;
     my $fakemedium = "$descr ($method$medium)";
+    my ($relocated, $ignored) = (0, 0);
     log::l("trying to read $hdlist for medium $medium");
 
     #- if the medium already exist, use it.
@@ -438,27 +448,38 @@ sub psUsingHdlist {
 	my $packer = new packdrake($newf, quiet => 1);
 	foreach (@{$packer->{files}}) {
 	    $packer->{data}{$_}[0] eq 'f' or next;
-	    ++$packages->{count}; #- take care of this one, so that desplist will be clean with index of package.
 	    my $pkg = [ (undef) x 8 ]; $pkg->[$FILE] = $_; $pkg->[$MEDIUM] = $medium;
 	    my $specific_arch = packageArch($pkg);
 	    if (!$specific_arch || MDK::Common::System::compat_arch($specific_arch)) {
 		my $old_pkg = $packages->{names}{packageName($pkg)};
 		if ($old_pkg) {
-		    if (packageVersion($pkg) eq packageVersion($old_pkg) && packageRelease($pkg) eq packageRelease($old_pkg)) {
-			if (MDK::Common::System::better_arch($specific_arch, packageArch($old_pkg))) {
-			    log::l("replacing old package with package $_ with better arch: $specific_arch");
-			    $packages->{names}{packageName($pkg)} = $pkg;
-			} else {
-			    log::l("keeping old package against package $_ with worse arch");
+		    my $epo_compare = 0; #- NO EPOCH AVAILABLE TODO packageEpoch($pkg) <=> packageEpoch($old_pkg);
+		    my $ver_compare = $epo_compare == 0 && versionCompare(packageVersion($pkg), packageVersion($old_pkg));
+		    my $rel_compare = $ver_compare == 0 && versionCompare(packageRelease($pkg), packageRelease($old_pkg));
+		    if ($epo_compare > 0  || $ver_compare > 0 || $rel_compare > 0 ||
+			$epo_compare == 0 && $ver_compare == 0 && $rel_compare == 0 &&
+			MDK::Common::System::better_arch($specific_arch, packageArch($old_pkg))) {
+			log::l("replacing old package $old_pkg->[$FILE] with package $pkg->[$FILE]");
+			foreach ($FILE, $MEDIUM) { #- TODO KEEP OLD PARAMETER
+			    $old_pkg->[$_] = $pkg->[$_];
 			}
+			packageFreeHeader($old_pkg);
+			if (packageFlagInstalled($old_pkg)) {
+			    packageSetFlagInstalled($old_pkg, 0);
+			    selectPackage($packages, $old_pkg);
+			}
+			++$relocated;
 		    } else {
-		        log::l("ignoring package $_ already present in distribution with different version or release");
+			log::l("no need to replace previous package $old_pkg->[$FILE] with newer package $pkg->[$FILE]");
+			++$ignored;
 		    }
 		} else {
 		    $packages->{names}{packageName($pkg)} = $pkg;
+		    ++$packages->{count}; #- take care of this one, so that desplist will be clean with index of package.
 		}
 	    } else {
 	        log::l("ignoring package $_ with incompatible arch: $specific_arch");
+		++$ignored;
 	    }
 	}
     };
@@ -466,8 +487,10 @@ sub psUsingHdlist {
     #- update maximal index.
     $m->{max} = $packages->{count} - 1;
     $m->{max} >= $m->{min} or die "nothing found while parsing $newf";
-    log::l("read " . ($m->{max} - $m->{min} + 1) . " headers in $hdlist");
-    1;
+    $relocated > 0 and log::l("relocated $relocated headers in $hdlist");
+    $ignored > 0 and log::l("ignored $ignored headers in $hdlist");
+    log::l("read " . ($m->{max} - $m->{min} + 1) . " new headers in $hdlist");
+    $m;
 }
 
 sub getOtherDeps($$) {
@@ -1327,13 +1350,17 @@ sub install($$$;$$) {
 	}
 
 	#- extract headers for parent as they are used by callback.
-	extractHeaders($prefix, \@transToInstall, $media->{$medium});
+	extractHeaders($prefix, \@transToInstall, $media);
 
 	if ($media->{$medium}{method} eq 'cdrom') {
+	    #- extract packages to make sure the getFile below to force
+	    #- accessing medium will not be redirected to updates.
+	    my @origin = grep { $_->[$MEDIUM] == $media->{$medium} } @transToInstall;
+
 	    #- reset file descriptor open for main process but
 	    #- make sure error trying to change from hdlist are
 	    #- trown from main process too.
-	    install_any::getFile(packageFile($transToInstall[0]), $media->{$transToInstall[0][$MEDIUM]}{descr});
+	    @origin and install_any::getFile(packageFile($origin[0]), $media->{$origin[0][$MEDIUM]}{descr});
 	}
 	#- and make sure there are no staling open file descriptor too (before forking)!
 	install_any::getFile('XXX');

@@ -538,13 +538,15 @@ sub chooseSizeToInstall {
     min($def, $availableC * 0.7);
 }
 sub choosePackagesTree {
-    my ($o, $packages) = @_;
+    my ($o, $packages, $limit_to_medium) = @_;
 
     $o->ask_many_from_list('', _("Choose the packages you want to install"),
 			   {
 			    list => [ 
-				      map { pkgs::packageByName($packages, $_) }
-				      keys %{$packages->{names}} ],
+				     map { pkgs::packageByName($packages, $_) }
+				     $limit_to_medium ?
+				     (grep { pkgs::packageMedium($packages, $_) == $limit_to_medium } keys %{$packages->{names}}) :
+				     (keys %{$packages->{names}}) ],
 			    value => \&pkgs::packageFlagSelected,
 			    label => \&pkgs::packageName,
 			    sort => 1,
@@ -866,16 +868,66 @@ USA")) || return;
     #- bring all interface up for installing crypto packages.
     install_interactive::upNetwork($o);
 
-    my @packages = do {
+    my $update_medium = do {
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
       crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
     };
-    $u->{packages} = $o->ask_many_from_list('', _("Please choose the packages you want to install."), { list => \@packages, values => $u->{packages} }) or return;
-    $o->pkg_install(@{$u->{packages}});
+
+    if ($update_medium) {
+	$o->choosePackagesTree($o->{packages}, $update_medium);
+	$o->pkg_install();
+    }
 
     #- stop interface using ppp only.
     install_interactive::downNetwork($o, 'pppOnly');
 }
+
+sub installUpdates {
+    my ($o) = @_;
+    my $u = $o->{updates} ||= {};
+    
+    $o->hasNetwork or return;
+
+    is_empty_hash_ref($u) and $o->ask_yesorno('', 
+_("You have now the possibility to download updated packages that have
+been released after the distribution has been made available.
+
+You will get security fixes or bug fixes, but you need to have an
+Internet connection configured to proceed.
+
+Do you want to continue ?")) || return;
+
+    #- bring all interface up for installing crypto packages.
+    install_interactive::upNetwork($o);
+
+    require crypto;
+    eval {
+	my @mirrors = do { my $w = $o->wait_message('',
+						    _("Contacting Mandrake Linux web site to get the list of available mirrors"));
+			   crypto::mirrors() };
+	$u->{mirror} = $o->ask_from_treelistf('', 
+					      _("Choose a mirror from which to get the packages"), 
+					      '|',
+					      \&crypto::mirror2text,
+					      \@mirrors,
+					      $u->{mirror});
+    };
+    return if $@;
+
+    my $update_medium = do {
+      my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
+      crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
+    };
+
+    if ($update_medium) {
+	$o->choosePackagesTree($o->{packages}, $update_medium);
+	$o->pkg_install();
+    }
+ 
+    #- stop interface using ppp only.
+    install_interactive::downNetwork($o, 'pppOnly');
+}
+
 
 #------------------------------------------------------------------------------
 sub configureTimezone {

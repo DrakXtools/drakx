@@ -24,6 +24,7 @@ use common;
   setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages", 'rootpasswd' ],
   addUser            => [ __("Add a user"), 1, 1, '', "installPackages", 'user' ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions", 'network' ],
+  installUpdates     => [ __("Install system updates"), 1, 1, '',  ["installPackages", "configureNetwork"], '' ],
   summary            => [ __("Summary"), 1, 0, '', "installPackages", 'summary' ],
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages", 'services' ],
   setupBootloader    => [ __("Install bootloader"), 1, 0, '', "installPackages", 'bootloader' ],

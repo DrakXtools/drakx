@@ -10,15 +10,16 @@ sub getFile {
     local($^W) = 0;
 
     my ($url) = @_;
+    $sock->close if $sock;
+    $url =~ m|/XXX$| and return; #- force closing connection.
+
     my ($host, $port, $path) = $url =~ m,^http://([^/:]+)(?::(\d+))?(/\S*)?$,;
     $host = network::resolv($host);
 
-    $sock->close if $sock;
-    $url =~ m|/XXX$| and return; #- force closing connection.
     $sock = IO::Socket::INET->new(PeerAddr => $host,
 				  PeerPort => $port || 80,
 				  Proto    => 'tcp',
-				  Timeout  => 60) or die "can't connect ";
+				  Timeout  => 60) or die "can't connect $@";
     $sock->autoflush;
     print $sock join("\015\012" =>
 		     "GET $path HTTP/1.0",
