@@ -531,7 +531,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME};
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
-    any { $_->{BOOTPROTO} =~ /^dhcp$/ } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
+    any { $_->{BOOTPROTO} eq "dhcp" } values %$intf and $in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
     $in->do_pkgs->install(qw(zcip tmdns));
     $netc->{ZEROCONF_HOSTNAME} and write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});      
     any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
