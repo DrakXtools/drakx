@@ -624,6 +624,7 @@ sub mygtk2::MagicWindow::AUTOLOAD {
 
     my ($s1, $s2) = $meth eq 'show'
               ? ('real_window', 'child') :
+            $meth eq 'get' && $args[0] eq 'window-position' ||
             $w->{pop_it} && ($meth eq 'destroy' || $meth eq 'hide') ||
 	    $for_real_window{$meth} ||
             !$w->{child}->can($meth)
