@@ -259,7 +259,8 @@ sub get_autologin {
     my ($prefix, $o) = @_;
     my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
     $o->{autologin} ||= $l{USER};
-    $o->{desktop} ||= map { chomp; $_ } cat_("$prefix/etc/sysconfig/desktop");
+    %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
+    $o->{desktop} ||= $l{DESKTOP};
 }
 
 sub set_autologin {
