@@ -154,6 +154,9 @@ sub rationalize {
     if ($part->{fs_type} ne 'reiserfs') {
 	$options->{notail} = 0;
     }
+    if (!fs::type::can_be_one_of_those_fs_types($part, 'vfat', 'smbfs', 'iso9660', 'udf')) {
+	delete $options->{'codepage='};
+    }
 
     &pack($part, $options, $unknown);
 }
