@@ -109,7 +109,7 @@ sub ask_fromW_real {
 
     my $label_width;
     my $get_label_width = sub {
-	$label_width ||= max (map { length($_->{label}) } @l);
+	$label_width ||= max(map { length($_->{label}) } @l);
     };
 
     my $set_all = sub {
