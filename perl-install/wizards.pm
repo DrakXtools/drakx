@@ -154,7 +154,7 @@ sub process {
         my $name = ref($page->{name}) ? $page->{name}->() : $page->{name};
         my %yesno = (yes => N("Yes"), no => N("No"));
         my $yes;
-        $data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ] } ] if $page->{type} eq "yesorno";
+        $data2 = [ { val => \$yes, type => 'list', list => [ values %yesno ], gtk => { use_boxradio => 1 } } ] if $page->{type} eq "yesorno";
         my $a = $in->ask_from_({ title => $o->{name}, 
                                  messages => $name, 
                                  callbacks => { map { $_ => $page->{$_} || $default_callback{$_} } qw(focus_out complete) },
