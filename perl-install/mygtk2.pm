@@ -482,7 +482,7 @@ sub _gtk__MagicWindow {
 	}
 
 	gtkadd($::WizardTable, children_loose => [ $sub_child ]);
-	$w = $::WizardWindow;
+	$w = $sub_child;
     }
     $w;
 }
