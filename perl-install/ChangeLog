@@ -1,3 +1,141 @@
+2005/04/01  JosÈ JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: jorge
+
+2005/04/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/cdrom.c, mdk-stage1/disk.c: try to load ide-generic as
+	fallback when no disk or cdrom is found
+
+	* mouse.pm: configure wacom devices with synaptics touchpads too
+
+2005/04/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* Makefile, pixmaps/langs/lang-pa_IN.png, share/fonts.tar.bz2, lang.pm:
+	Added font for gurmukhi script (used by pa_IN translation);
+	enabled pa_IN, and define the font for KDE
+
+	* share/po/nb.po, share/po/id.po, share/po/sk.po, share/po/ru.po,
+	share/po/is.po, share/po/sl.po, share/po/de.po, share/po/cs.po,
+	share/po/hu.po: updated Slovenian file;
+	run msgmerge on all *.po files
+
+	* share/po/az.po, share/po/sv.po, share/po/ca.po: updated Swedish and
+	Italian files; small fixes in Azeri and Catalan files
+
+	* share/po/it.po: updated Italian file
+	updated Swedish and Italian files; small fixes in Azeri and Catalan
+	files
+
+	* share/po/cy.po: updated Welsh file
+
+2005/04/01  Per ÿyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Last minute strings:)
+
+2005/04/01  pjetur
+
+	* share/po/is.po: Small fuzzy fixes
+
+2005/04/01  pmaryanov
+
+	* share/po/ru.po: s/”Ã’÷¬/”≈“◊…”/
+
+2005/04/01  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Sort CDs according to CD numbers, not alphabetically
+
+	* install_steps_gtk.pm: Actually remove multiple Mini-CD media for
+	deselection
+	When presenting the list of media to deselect, group by CDs even when
+	using the
+	mini ISO
+
+2005/04/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: one more item in 10.2-18mdk
+	10.2-18mdk
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/mn.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/Makefile,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/nl.po,
+	share/po/tl.po, share/po/de.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: add 3 new strings
+	from diskdrake
+
+	* share/po/fr.po: add 3 new strings from diskdrake
+	fix truncated message (#13989)
+
+	* harddrake/data.pm: fix harddrake crash
+
+2005/03/31  marco
+
+	* share/po/it.po: fix
+	fix
+
+2005/03/31  Olivier Blin <oblin at mandrakesoft.com>
+
+	* c/stuff.xs.pl: add enable_net_device
+
+	* network/netconnect.pm: add some comment for post 10.2
+	do not use ifplugd for wireless cards (and don't allow users to enable
+	it for wireless cards in drakconnect)
+
+	* detect_devices.pm: enable ethernet interfaces during detection (fix
+	Ralink wireless detection)
+
+2005/03/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tr.po: small changes
+
+	* share/po/az.po: some Azeri changes from Max Payne
+	small changes
+
+	* share/po/es.po: updated Spanish file
+
+	* share/po/cy.po: updated Welsh file
+
+2005/03/31  Per ÿyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Updates from Eskild Hustvedt:)
+
+2005/03/31  pmaryanov
+
+	* share/po/ru.po: fixed drakperm:24 and drakperm:23
+
+2005/03/31  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: useSupermount is no more a boolean, don't let
+	the "More" dialog box set it to 1 when it is magicdev
+
+	* standalone/drakauth, authentication.pm: don't display description for
+	non proposed authentication kinds
+
+	* lang.pm: better locale-policy.fdi (bugzilla #15025)
+
+2005/03/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/harddrake2: do not try to install packages that are not
+	availlable (#15106)
+	do no try to install too generic hw packages (#15101)
+
+	* drakxtools.spec: 10.2-17mdk
+
+	* detect_devices.pm: do not detect joystics as UPSes
+
 2005/03/31  Frederic Crozat  <fcrozat at mandrakesoft.com>
 
 	* share/rpmsrate: Add gpdf and eog to GNOME packages
@@ -47914,7 +48052,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1025 2005/03/24 15:32:29 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1026 2005/03/31 15:50:28 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
