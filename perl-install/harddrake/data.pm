@@ -13,7 +13,8 @@ my @devices = detect_devices::probeall();
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown() {
     grep { $_->{media_type} !~ /BRIDGE|class\|Mouse|DISPLAY|Hub|MEMORY_RAM|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|NETWORK|Printer|SERIAL_(USB|SMBUS)|STORAGE_(IDE|OTHER|SCSI)|tape/
-	       && $_->{driver} !~ /^(ISDN|mod_quickcam|ohci1394|scanner|usbvision)$|Mouse:USB|class\|Mouse|Removable:zip|megaraid|nvnet|www.linmodems.org/
+	       && member($_->{driver}, qw(cpia_usb cyber2000fb forcedeth ibmcam megaraid mod_quickcam nvnet ohci1394 ov511 ov518_decomp scanner ultracam usbvideo usbvision))
+	       && $_->{driver} !~ /^ISDN|Mouse:USB|Removable:zip|class\|Mouse|www.linmodems.org/
 	       && $_->{type} ne 'network'
 	       && $_->{description} !~ /Alcatel|ADSL Modem/
 	   } @devices;
@@ -53,7 +54,10 @@ our @tree =
      [ "TV", , N("Tvcard"), "tv.png", "/usr/bin/XawTV", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} eq 'PCI' || $_->{driver} eq 'usbvision' } @devices }, 0 ],     
      [ "MULTIMEDIA_OTHER", , N("Other MultiMedia devices"), "multimedia.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_OTHER/ } @devices }, 0 ],
      [ "AUDIO", , N("Soundcard"), "sound.png", "$sbindir/draksound", sub { grep { $_->{media_type} =~ /MULTIMEDIA_AUDIO/ } @devices }, 0 ],
-     [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || $_->{driver} eq 'mod_quickcam' } @devices }, 0 ],
+     [ "WEBCAM", , N("Webcam"), "webcam.png", "", sub { 
+           grep { $_->{media_type} =~ /MULTIMEDIA_VIDEO/ && $_->{bus} ne 'PCI' || 
+                    member($_->{driver}, qw(cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp ultracam usbvideo)) } @devices },
+       0 ],
      [ "CPU", , N("Processors"), "cpu.png", "", sub { detect_devices::getCPUs() }, 0 ],
      [ "ETHERNET", , N("Ethernetcard"), "hw_network.png", "$sbindir/drakconnect", sub {
          #- generic NIC detection for USB seems broken (class, subclass, 
