@@ -270,6 +270,7 @@ initlevel 3
 
 sub get_any_driver_entry {
     my ($in, $driver, $device) = @_;
+    return () if $::isInstall;
     +{
         val => N("Let me pick any driver"), disabled => sub {},
         clicked => sub {
