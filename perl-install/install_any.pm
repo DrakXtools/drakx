@@ -627,13 +627,10 @@ sub setupFB {
     $vga ||= 785; #- assume at least 640x480x16.
 
     require bootloader;
-    #- update bootloader entries with vga, all kernel are now framebuffer.
-    foreach (qw(vmlinuz vmlinuz-secure vmlinuz-smp vmlinuz-hack)) {
-	if (my $e = bootloader::get("/boot/$_", $o->{bootloader})) {
-	    $e->{vga} = $vga;
-	}
+    foreach (@{$o->{bootloader}{entries}}) {
+	$_->{vga} = $vga if $_->{vga}; #- replace existing vga= with
     }
-    bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
+    bootloader::install($o->{bootloader}, $o->{all_hds}{hds});
     1;
 }
 
