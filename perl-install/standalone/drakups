@@ -157,6 +157,7 @@ Please fill in its name, its driver and its port.", $model, $vendor);
 
     $config->{$name}{driver} = $driver;
     $config->{$name}{port} = $port;
+    $models{ups}->append_set(1 => $name, 2 => $driver, 3 => $port);
 
     log::explanations(qq(Configuring "$name" UPS));
 }
