@@ -312,7 +312,7 @@ sub unpack_langs {
 sub write_langs {
     my ($prefix, $langs) = @_;
     symlink "$prefix/etc/rpm", "/etc/rpm" if $prefix;
-    substInFile { s/%_install_langs//; $_ .= "%_install_langs $langs\n" if eof } "$prefix/etc/rpm/macros";
+    substInFile { s/%_install_langs.*//; $_ .= "%_install_langs $langs\n" if eof } "$prefix/etc/rpm/macros";
 }
 
 sub write { 
