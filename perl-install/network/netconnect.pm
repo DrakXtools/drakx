@@ -89,7 +89,7 @@ sub get_subwizard {
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
-      my ($adsl_type, $adsl_device, @adsl_devices);
+      my ($adsl_type, $adsl_device, @adsl_devices, $adsl_failed, $adsl_answer);
       my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
@@ -537,10 +537,71 @@ killall pppd
                         return 'adsl_unsupported_eci' if $adsl_device eq 'eci';
                         $netconnect::need_restart_network = member($adsl_device, qw(speedtouch eci));
                         $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
+                        if ($adsl_device eq 'speedtouch' && !$::testing) {
+                            $in->do_pkgs->what_provides("speedtouch_mgmt") and 
+                              $in->do_pkgs->ensure_is_installed('speedtouch_mgmt', '/usr/share/speedtouch/mgmt.o', 'auto');
+                            return 'adsl_speedtouch_firmware' if ! -e "$prefix/usr/share/speedtouch/mgmt.o";
+                        }
                         return 'adsl_protocol';
                     },
                    },
 
+
+                   adsl_speedtouch_firmware =>
+                   {
+                    name => N("You need the Alcatel microcode.
+You can provide it now via a floppy or your windows partition,
+or skip and do it later."),
+                    data => [ { label => "", val => \$adsl_answer, type => "list",
+                                list => [ N("Use a floppy"), N("Use my Windows partition"), N("Do it later") ], }
+                            ],
+                    post => sub {
+                        my $destination = "$prefix/usr/share/speedtouch/";
+                        my ($file, $source, $mounted);
+                        if ($adsl_answer eq N("Use a floppy")) {
+                            $mounted = 1;
+                            $file = 'mgmt.o';
+                            ($source, $adsl_failed) = network::tools::use_floppy($file);
+                        } elsif ($adsl_answer eq N("Use my Windows partition")) {
+                            $file = 'alcaudsl.sys';
+                            ($source, $adsl_failed) = network::tools::use_windows();
+                        }
+                        return "adsl_no_firmawre" if $adsl_answer eq N("Do it later");
+
+                        my $_b = before_leaving { fs::umount('/mnt') } if $mounted;
+                        if (!$adsl_failed) {
+                            if (-e "$source/$file") { 
+                                cp_af("$source/$file", $destination) if !$::testing;
+                            } else {
+                                $adsl_failed = N("Firmware copy failed, file %s not found", $file);
+                            }
+                        }
+                        log::explanations($adsl_failed || "Firmware copy $file in $destination succeeded");
+                        -e "$destination/alcaudsl.sys" and rename "$destination/alcaudsl.sys", "$destination/mgmt.o";
+
+                        # kept translations b/c we may want to reuse it later:
+                        N("Firmware copy succeeded");
+                        return $adsl_failed ? 'adsl_copy_firmware_failled' : 'adsl_protocol';
+                    },
+                   },
+
+
+                   adsl_copy_firmware_failled =>
+                   {
+                    name => sub { $adsl_failed },
+                    next => 'adsl_protocol',
+                   },
+
+                   
+                   "adsl_no_firmawre" =>
+                   {
+                    name => N("You need the Alcatel microcode.
+Download it at:
+%s
+and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.net/speedtouch/speedtouch-20011007.tar.bz2'),
+                    next => "adsl_protocol",
+                   },
+         
 
                    adsl_protocol =>
                    {
@@ -677,6 +738,12 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
+                        write_cnx_script($netc, "cable", qq(
+/sbin/ifup $netc->{NET_DEVICE}
+),
+                                                  qq(
+/sbin/ifdown $netc->{NET_DEVICE}
+), $netcnx->{type}) if $netcnx->{type} eq 'cable';
 
                         return is_wireless_intf($module) ? "wireless" : "static_hostname";
                     },
@@ -781,7 +848,6 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
-                        
                         $netc->{dnsServer} ||= dns($intf->{IPADDR});
                         $gateway_ex = gateway($intf->{IPADDR});
                         #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
@@ -815,20 +881,6 @@ You may also enter the IP address of the gateway if you have one."),
                             $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
                             return 1;
                         }
-                    },
-                    #post => $handle_multiple_cnx,
-                    next => "zeroconf",
-                   },
-                   
-                   dhcp_hostname => 
-                   {
-                   },
-                   
-                   zeroconf => 
-                   {
-                    name => N("Enter a Zeroconf host name which will be the one that your machine will get back to other machines on the network:"),
-                    data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
-                    complete => sub {
                         if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
                             $in->ask_warn(N("Error"), N("Zeroconf host name must not contain a ."));
                             return 1;
@@ -836,6 +888,7 @@ You may also enter the IP address of the gateway if you have one."),
                     },
                     post => $handle_multiple_cnx,
                    },
+                   
                    
                    multiple_internet_cnx => 
                    {
