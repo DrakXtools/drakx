@@ -88,7 +88,6 @@ sub ask_for_X_restart {
 	return;
     }
 
-    return if $::auto;
     $in->ask_okcancel('', N("You need to log out and back in again for changes to take effect"), 1) or return;
 
     if (fork()) {
