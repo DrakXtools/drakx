@@ -137,7 +137,10 @@ sync
 
                   speedtouch =>
                   {
-                   start => '/usr/sbin/modem_run -k -n 2 -f /usr/share/speedtouch/mgmt.o',
+                   start => qq(
+modprobe speedtch
+/usr/bin/speedtouch-start
+),
                    overide_script => 1,
                    server => {
                               pppoa => qq("/usr/sbin/pppoa3 -c")
