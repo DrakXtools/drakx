@@ -1333,6 +1333,7 @@ sub get_path_str {
     $path->to_string;
 }
 
+package Gtk2::TreeView;
 # likewise gtk-1.2 function
 sub toggle_expansion {
     my ($self, $path, $open_all) = @_;
