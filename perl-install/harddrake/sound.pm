@@ -176,22 +176,12 @@ sub switch {
                            &get_any_driver_entry($in, $driver, $device),
                           ]
                          );
-        } elsif ($in->ask_from(N("Sound configuration"),
-                               N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
-                                 $device->{description}) .
-                               N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
-                               [
-                                { 
-                                    label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
-                                    format => sub {
-                                        my %des = modules::category2modules_and_description('multimedia/sound');
-                                        "$_[0] (" . $des{$_[0]} . ')';
-                                    },
-                                    allow_empty_list => 1,
-                                },
-                                {
-                                    val => N("Help"), disabled => sub {},
-                                    clicked => sub {  
+        } elsif ($in->ask_from_({ title => N("Sound configuration"),
+                                  messages => 
+				  N("Here you can select an alternative driver (either OSS or ALSA) for your sound card (%s).",
+				    $device->{description}) .
+				  N("\n\nYour card currently use the %s\"%s\" driver (default driver for your card is \"%s\")", ($driver =~ /^snd-/ ? "ALSA " : "OSS "), $driver, $device->{driver}),
+				  interactive_help => sub {  
                                         $in->ask_warn(N("Switching between ALSA and OSS help"),
                                                       N("OSS (Open Sound System) was the first sound API. It's an OS independant sound API (it's available on most unices systems) but it's a very basic and limited API.
 What's more, OSS drivers all reinvent the wheel.
@@ -203,7 +193,16 @@ To use alsa, one can either use:
 - the old compatibility OSS api
 - the new ALSA api that provides many enhanced features but requires using the ALSA library.
 "))
-                                        }
+                                        },
+				},
+                               [
+                                { 
+                                    label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1,
+                                    format => sub {
+                                        my %des = modules::category2modules_and_description('multimedia/sound');
+                                        "$_[0] (" . $des{$_[0]} . ')';
+                                    },
+                                    allow_empty_list => 1,
                                 },
                                 {
                                     val => N("Trouble shooting"), disabled => sub {},
