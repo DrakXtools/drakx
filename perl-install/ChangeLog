@@ -1,3 +1,17 @@
+2000-03-05  Pixel  <pixel@mandrakesoft.com>
+
+	* my_gtk.pm (_ask_from_list): replace focus_row with set_focus_row
+	(tis the Gtk-Perl 0.7002 was of doing)
+
+2000-03-04  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (write_conf): add ide-floppy to the modprobes of
+	post-install supermount
+
+2000-03-03  Pixel  <pixel@mandrakesoft.com>
+
+	* commands.pm (ps): add RSS to ps command
+
 2000-03-02 Adam Lebsack <adam@mandrakesoft.com>
 
 	* mouse.pm: added mac mouse detection to mouse::detect.
@@ -14,6 +28,10 @@
 	installation of packages as extract_archive need a true file].
 
 2000-03-01  Pixel  <pixel@mandrakesoft.com>
+
+	* lilo.pm (install_grub): creation
+
+	* network.pm (write_interface_conf): ONBOOT = !pcmcia
 
 	* install_steps_gtk.pm (new): more intelligent SIGCHLD handler
 

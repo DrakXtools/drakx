@@ -459,7 +459,7 @@ sub _ask_from_list {
 
     my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
     my $select = sub {
-	$list->focus_row($_[0]);
+	$list->set_focus_row($_[0]);
 	$list->select_row($_[0], 0);
 	$list->moveto($_[0], 0, 0.5, 0);
     };
