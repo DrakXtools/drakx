@@ -308,7 +308,7 @@ sub psUpdateHdlistsDeps {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
-	m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+	m/^\s*(?:noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
 	my ($hdlist, $rpmsdir, $descr) = ($1, $2, $3);
 
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
@@ -341,11 +341,11 @@ sub psUsingHdlists {
 	chomp;
 	s/\s*#.*$//;
 	/^\s*$/ and next;
-	m/^\s*(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
+	m/^\s*(noauto:)?(hdlist\S*\.cz2?)\s+(\S+)\s*(.*)$/ or die "invalid hdlist description \"$_\" in hdlists file";
 
 	#- make sure the first medium is always selected!
 	#- by default select all image.
-	psUsingHdlist($prefix, $method, $packages, $1, $medium, $2, $3, 1);
+	psUsingHdlist($prefix, $method, $packages, $2, $medium, $3, $4, !$1);
 
 	++$medium;
     }
@@ -374,6 +374,7 @@ sub psUsingHdlist {
 #					      min        => $packages->{count},
 #					      max        => -1, #- will be updated after reading current hdlist.
 					      selected   => $selected, #- default value is only CD1, it is really the minimal.
+					      ignored    => !$selected, #- keep track of ignored medium by DrakX.
 					    };
 
     #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
@@ -398,15 +399,19 @@ sub psUsingHdlist {
     $method eq 'cdrom' && $medium > 1 && !common::usingRamdisk() and return;
 
     #- parse synthesis (if available) of directly hdlist (with packing).
-    if (-s $newsf) {
-	($m->{start}, $m->{end}) = $packages->parse_synthesis($newsf);
-    } elsif (-s $newf) {
-	($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, 1);
+    if ($m->{ignored}) {
+	log::l("ignoring packages in $hdlist");
     } else {
-	die "fatal: no hdlist nor synthesis to read for $fakemedium";
+	if (-s $newsf) {
+	    ($m->{start}, $m->{end}) = $packages->parse_synthesis($newsf);
+	} elsif (-s $newf) {
+	    ($m->{start}, $m->{end}) = $packages->parse_hdlist($newf, 1);
+	} else {
+	    die "fatal: no hdlist nor synthesis to read for $fakemedium";
+	}
+	$m->{start} > $m->{end} and die "fatal: nothing read in hdlist or synthesis for $fakemedium";
+	log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist");
     }
-    $m->{start} > $m->{end} and die "fatal: nothing read in hdlist or synthesis for $fakemedium";
-    log::l("read " . ($m->{end} - $m->{start} + 1) . " packages in $hdlist");
     $m;
 }
 
