@@ -494,6 +494,7 @@ sub main {
 	    class     => sub { $o->{installClass} = $v },
 	    fclass    => sub { $o->{installClass} = $v; push @auto, 'selectInstallClass' },
 	    desktop   => sub { $o->{meta_class} = 'desktop' },
+	    firewall  => sub { $o->{meta_class} = 'firewall'; push @auto, 'selectInstallClass'},
 	    lnx4win   => sub { $o->{lnx4win} = 1 },
 	    readonly  => sub { $o->{partitioning}{readonly} = $v ne "0" },
 	    display   => sub { $o->{display} = $v },
@@ -605,6 +606,7 @@ sub main {
     my $VERSION = cat__(install_any::getFile("VERSION")) or do { print "VERSION file missing\n"; sleep 5 };
     $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
     $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
+    $o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
     if ($o->{meta_class} eq 'desktop') {
 	$o->{installClass} = 'normal';
     }
