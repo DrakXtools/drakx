@@ -286,7 +286,7 @@ sub setPackages($) {
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
 	my @l = ();
-	push @l, "kapm" if $o->{pcmcia};
+	push @l, "kapm", "kcmlaptop" if $o->{pcmcia};
 	require pci_probing::main;
 	push @l, "Device3Dfx", "Glide_V3", "XFree86-glide-module" if pci_probing::main::matching_desc('Voodoo');
 	require timezone;
