@@ -339,8 +339,10 @@ sub formatPartitions {
 sub choosePackages {
     $o->setPackages if $_[1] == 1;
     $o->selectPackagesToUpgrade($o) if $o->{isUpgrade} && $_[1] == 1;
-    $o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
-    do { $o->{packages}{$_}{selected} = 1 foreach @{$o->{base}} } unless $o->{isUpgrade}; #- already done.
+    unless ($o->{isUpgrade}) {
+	$o->choosePackages($o->{packages}, $o->{compss}, $o->{compssUsers}, $_[1] == 1);
+	$o->{packages}{$_}{selected} = 1 foreach @{$o->{base}}; #- already done by selectPackagesToUpgrade.
+    }
 }
 
 #------------------------------------------------------------------------------

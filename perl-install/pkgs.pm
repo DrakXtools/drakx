@@ -318,11 +318,13 @@ sub init_db {
     c::rpmErrorSetCallback(fileno LOG);
 #-    c::rpmSetVeryVerbose();
 
-    log::l("reading /usr/lib/rpm/rpmrc");
-    c::rpmReadConfigFiles() or die "can't read rpm config files";
-    log::l("\tdone");
+#    log::l("reading /usr/lib/rpm/rpmrc");
+#    c::rpmReadConfigFiles() or die "can't read rpm config files";
+#    log::l("\tdone");
 
-    $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
+    $isUpgrade and c::rpmdbRebuild($prefix) || die "rebuilding of rpm database failed: ", c::rpmErrorString();
+    c::rpmdbInit($prefix, 0644) || die "creation of rpm database failed: ", c::rpmErrorString();
+#-    $isUpgrade ? c::rpmdbRebuild($prefix) : c::rpmdbInit($prefix, 0644) or die "creation/rebuilding of rpm database failed: ", c::rpmErrorString();
 }
 
 sub done_db {
@@ -447,6 +449,7 @@ sub selectPackagesToUpgrade($$$) {
 
     #- close db, job finished !
     c::rpmdbClose($db);
+    log::l("done selecting packages to upgrade");
 }
 
 sub install($$) {
@@ -486,7 +489,7 @@ sub install($$) {
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };
 
-    log::ld("starting installation: ", $nb, " packages, ", $total, " bytes");
+    log::l("starting installation: ", $nb, " packages, ", $total, " bytes");
 
     #- !! do not translate these messages, they are used when catched (cf install_steps_gtk)
     my $callbackOpen = sub {

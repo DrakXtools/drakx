@@ -233,7 +233,7 @@ sub searchAndMount4Upgrade {
     }
     is_empty_array_ref($found) and die _("No root partition found");
 	
-    log::l("Found root partition : $root->{device}");
+    log::l("found root partition : $root->{device}");
 
     #- test if the partition has to be fschecked and remounted rw.
     if ($root->{realMntpoint}) {
