@@ -53,6 +53,7 @@ qq(
 qq(
 /sbin/ifdown $netc->{NET_DEVICE}
 ));
+    1;
 }
 
 sub configure_lan {
