@@ -34,6 +34,8 @@ s!(require|use) ugtk.*!!g;
 
 # obsoletes methods||functions :
 s!set_usize!set_size_request!g;
+s!gtkset_set_border_width!gtkset_border_width!g;
+s!border_width!set_border_width!g;
 s!-(end|spread|extended|start|single)!'\1'!g;
 s!createScrolledWindow!create_scrolled_window!g;
 # quite a lot less usefull with gtk+2 but who knows... :
