@@ -206,8 +206,12 @@ sub choose_gtk {
     my $chosen_Depth = $default_resolution->{Depth};
     my $chosen_res = { X => $default_resolution->{X} || 640, Y => $default_resolution->{Y} };
 
-    my %x_res2depth; push @{$x_res2depth{$_->{X}}}, $_->{Depth} foreach @resolutions;
-    my %depth2x_res; push @{$depth2x_res{$_->{Depth}}}, $_->{X} foreach @resolutions;
+    my $filter_on_Depth = sub {
+	grep { $_->{Depth} == $chosen_Depth } @_;
+    };
+    my $filter_on_res = sub {
+	grep { $_->{X} == $chosen_res->{X} && $_->{Y} == $chosen_res->{Y} } @_;
+    };
 
     require ugtk2;
     mygtk2->import;
@@ -221,7 +225,7 @@ sub choose_gtk {
 	#- for the other, use the biggest smaller
 	foreach my $x_res (uniq map { $_->{X} } @resolutions) {
 	    my $x_res_ = max(grep { $_ <= $x_res } @l);
-	    $h{$x_res} ||= $h{$x_res_};
+	    $h{$x_res} ||= $h{$x_res_} || $h{640};
 	}
 	%h;
     };
@@ -229,13 +233,12 @@ sub choose_gtk {
     my $depth_combo = gtknew('ComboBox', width => 220, 
 			     text_ref => \$chosen_Depth,
 			     format => sub { translate($depth2text{$_[0]}) },
-			     list => [ ikeys %depth2x_res ],
+			     list => [ uniq(sort_numbers(map { $_->{Depth} } @resolutions)) ],
 			     changed => sub {
-				 if (!member($chosen_res->{X}, @{$depth2x_res{$chosen_Depth}})) {
-				     my $X = max(@{$depth2x_res{$chosen_Depth}});
-				     #- take one
-				     my $one = find { $_->{X} eq $X } @resolutions;
-				     gtkval_modify(\$chosen_res, $one);
+				 my @matching_Depth = $filter_on_Depth->(@resolutions);
+				 if (!$filter_on_res->(@matching_Depth)) {
+				     my ($res) = sort { $b->{X} <=> $a->{X} } @matching_Depth;
+				     gtkval_modify(\$chosen_res, $res);
 				 }
 			     });
     my $res2text = sub { "$_[0]{X}x$_[0]{Y}" };
@@ -244,8 +247,9 @@ sub choose_gtk {
 			   format => $res2text,
 			   list => [ uniq_ { $res2text->($_) } sort { $a->{X} <=> $b->{X} } @resolutions ],
 			   changed => sub {
-			       if (!member($chosen_Depth, @{$x_res2depth{$chosen_res->{X}}})) {
-				   gtkval_modify(\$chosen_Depth, max(@{$x_res2depth{$chosen_res->{X}}}));
+			       my @matching_res = $filter_on_res->(@resolutions);
+			       if (!$filter_on_Depth->(@matching_res)) {
+				   gtkval_modify(\$chosen_Depth, max(map { $_->{Depth} } @matching_res));
 			       }
 			   });
     my $pix_colors = gtknew('Image', 
