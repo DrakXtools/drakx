@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-05-15 03:58+0200\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -350,6 +350,11 @@ msgstr ""
 msgid "Malaysia"
 msgstr "Malaysia"
 
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Netværket skal være genstartet. Ønsker du at genstarte det?"
+
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Swiss (French layout)"
@@ -366,9 +371,9 @@ msgid "Webcam"
 msgstr "Webcam"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "size of the (second level) cpu cache"
-msgstr "Størrelse på (andet niveau) cpu-mellemlagret"
+msgstr "størrelse på (andet niveau) cpu-mellemlagret"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -1413,7 +1418,7 @@ msgid "Interface"
 msgstr "Grænseflade"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -1457,7 +1462,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"beskrivelse af valgmuligheder:\n"
+"Beskrivelse af valgmuligheder:\n"
 "\n"
 " - Lav sikkerhedskopi af systemfiler:\n"
 "       \n"
@@ -1478,8 +1483,10 @@ msgstr ""
 " - Lav sikkerhedskopi af andre filer: \n"
 "\n"
 "\tDenne mulighed lader dig tilføje mere data som skal gemmes.\n"
-"\tMed denne sikkerhedskopieringsmåde er det ikke muligt i øjeblikket \n"
-"\tat vælge inkrementalbackup.\t\t\n"
+"\tHvis du ønsker at tilføje individuelle filer, så vælg dem fra \n"
+"\t'Filer'-vinduet til højre. Ønsker du at tilføje et katalog, kan du \n"
+"\tklikke på det i 'Katalog'-vinduet til venstre, og så klikke 'O.k.' \n"
+"\tuden at vælge nogen filer. \n"
 " \n"
 " - Inkrementalbackupper:\n"
 "\n"
@@ -1491,6 +1498,12 @@ msgstr ""
 "\tHvis du ikke har valgt denne mulighed vil alle gamle\n"
 "\tsikkerhedskopier blive slettet før hver sikkerhedskopiering.    \n"
 "\n"
+" - Forskelsbackupper:\n"
+" \n"
+"\tEn forskelsbackup vil i stedet for at sammenligne ændringer med den \n"
+"\tforegående inkrementalbakup altid sammenligne med den første fulde \n"
+"\tsikkerhedskopi. Denne metode tillader en at genskabe den fulde \n"
+"\t sikkerhedskopi, og derefter blot forskellene fra en bestemt dato.\n"
 "\n"
 
 #: ../../security/help.pm:1
@@ -1780,11 +1793,6 @@ msgstr ""
 "Vil du lave en opstartsdiskette til dit system?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB printer \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1806,9 +1814,9 @@ msgid "Start at boot"
 msgstr "Start ved opstart"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental Backups"
-msgstr "Brug inkrementalbackup (overskriv ikke gamle sikkerhedskopier)"
+msgstr "Brug inkrementalbackup"
 
 #: ../../any.pm:1
 #, c-format
@@ -1824,6 +1832,11 @@ msgstr "Joystick"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1915,11 +1928,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Lav ny sikkerhedskopi før genskabning (kun for inkrementalbackupper)."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Printer på parallel port \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2083,11 +2091,6 @@ msgstr ""
 "Vælg det diskdrev som du vil slette for at installere din nye Mandrake Linux "
 "partition. Vær forsigtig, alle data som er på denne partition vil gå tabt og "
 "vil ikke kunne genskabes!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " på parallelport \\#%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2489,9 +2492,9 @@ msgstr ""
 "\n"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "information level that can be obtained through the cpuid instruction"
-msgstr "Informationsniveau som kan opnås via cpuid-instruktionen"
+msgstr "informationsniveau som kan opnås via cpuid-instruktionen"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3163,6 +3166,11 @@ msgstr "Start X-vinduessystemet efter opstart"
 msgid "hourly"
 msgstr "timeligt"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Højre alt-tast"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3215,6 +3223,45 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Konfigurerer programmer..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Velkommen til guiden for printerinstallation\n"
+"\n"
+"Denne guide lader dig installere printere sluttet til denne maskine, direkte "
+"til netværket eller til en ekstern Windows-maskine.\n"
+"\n"
+"Hvis du har printere sluttet til denne maskine, så tilslut og tænd dem nu så "
+"de kan identificeres automatisk. Netværksprinterne og Windows-maskinerne "
+"skal også være tilsluttede og tændte.\n"
+"\n"
+"Bemærk at det tager længere tid at identificere netværksprintere end at "
+"identificere lokalt tilsluttede printere. Så deaktivér autoidentifikation af "
+"netværksprintere og/eller printere sluttede til Windows-maskiner hvis du "
+"ikke har brug for dette.\n"
+"\n"
+"Klik på \"Næste\" hvis du er klar og på \"Annullér\" hvis du ikke vil "
+"installere printere nu."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3224,31 +3271,6 @@ msgstr "Normal modemforbindelse"
 #, c-format
 msgid "File Selection"
 msgstr "Valg af filer"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Hvilken ISDN-konfigurering foretrækker du?\n"
-"\n"
-"* Den gamle konfiguration bruger isdn4net. Det har stærke\n"
-"  værktøjer, men det er vanskeligt at konfigurere for en nybegynder,\n"
-"  og er ikke standardbaseret.\n"
-"\n"
-"' Det nye konfigurationsværktøj er enklere at forstå,\n"
-"  mere standardiseret, men med færre værktøjer.\n"
-"\n"
-"Vi anbefaler den nye konfiguration.\n"
-"\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3957,6 +3979,11 @@ msgstr "Skanner"
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "Advarsel: afprøvning af dette grafikkort kan få din maskine til at fryse"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Kort IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4830,13 +4857,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Disketteformat"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4886,15 +4906,15 @@ msgid "Cape Verde"
 msgstr "Kap Verde"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr "Om denne processor har Cyrix 6x86 Coma-fejlen eller ej"
+msgstr "om denne processor har Cyrix 6x86 Coma-fejlen eller ej"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"Tidlige pentiummer var fejlbehæftede og frøs vwd afkodning af bytekoden F00F"
+"tidlige pentiummer var fejlbehæftede og frøs ved afkodning af bytekoden F00F"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4936,11 +4956,6 @@ msgstr "Monterer partition %s"
 #, c-format
 msgid "User name"
 msgstr "Brugernavn"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Ny konfiguration (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5375,6 +5390,11 @@ msgstr "Libyen"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurerer skript, installerer programmel, starter servere..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Printer på parallel port #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5409,6 +5429,11 @@ msgstr ""
 "Argumenter: (arg)\n"
 "\n"
 "Aktivér/deaktivér libsafe hvis libsafe findes på systemet."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB-printer \\/#%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5673,6 +5698,11 @@ msgstr ""
 "\n"
 "Der findes en ukendt printer direkte tilsluttet til dit system"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Højre alt-tast"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5708,11 +5738,6 @@ msgstr "Tjekkiet"
 msgid "Egypt"
 msgstr "Egypten"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Gammel konfiguration (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5738,6 +5763,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Undertryk midlertidige filer"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Tillykke, netværks- og internetkonfigurationen er færdig.\n"
+"Konfigurationen vil nu blive anvendt på dit system.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6097,9 +6132,9 @@ msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS-drevbogstav: %s (bare et gæt)\n"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select the files or directories and click on 'OK'"
-msgstr "Vælg filerne eller katalogerne og klik på 'Tilføj'"
+msgstr "Vælg filerne eller katalogerne og klik på 'O.k.'"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6112,9 +6147,9 @@ msgid "omit scsi modules"
 msgstr "undgå scsi-moduler"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
-msgstr "Processorens familie (fx 6 for i686-klasse)"
+msgstr "processorens familie (fx 6 for i686-klasse)"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -6559,6 +6594,11 @@ msgstr "Profil der skal slettes:"
 msgid "Local measure"
 msgstr "Lokal måling"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6589,13 +6629,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6653,46 +6693,6 @@ msgstr "Bangladesh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japan (kabel)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Velkommen til guiden for printerinstallation\n"
-"\n"
-"Denne guide lader dig installere printere sluttet til denne maskine, direkte "
-"til netværket eller til en ekstern Windows-maskine.\n"
-"\n"
-"Hvis du har printere sluttet til denne maskine, så tilslut og tænd dem nu så "
-"de kan identificeres automatisk. Netværksprinterne og Windows-maskinerne "
-"skal også være tilsluttede og tændte.\n"
-"\n"
-"Bemærk at det tager længere tid at identificere netværksprintere end at "
-"identificere lokalt tilsluttede printere. Så deaktivér autoidentifikation af "
-"netværksprintere og/eller printere sluttede til Windows-maskiner hvis du "
-"ikke har brug for dette.\n"
-"\n"
-"Klik på \"Næste\" hvis du er klar og på \"Annullér\" hvis du ikke vil "
-"installere printere nu."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7514,6 +7514,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Standardindstillinger for printer"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8221,11 +8229,6 @@ msgstr ""
 " Din rapport blev ikke sendt.\n"
 " Konfigurér venligst sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", multi-funktions-enhed på parallel port \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8413,9 +8416,9 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Knap '%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Vent venligst"
@@ -8624,6 +8627,11 @@ msgstr "Første DNS-server (valgfri)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Alternaltivt kan duangive et enhedsnavn/filnavn på inddatalinjen"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Russisk (Fonetisk)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8946,9 +8954,9 @@ msgid "NoVideo"
 msgstr "Ingen video"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
-msgstr "Dette felt beskriver enheden"
+msgstr "dette felt beskriver enheden"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9026,9 +9034,9 @@ msgid "Choose the window manager to run:"
 msgstr "Vælg den vindueshåndtering du ønsker at benytte:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "sub generation of the cpu"
-msgstr "Undergeneration af cpu'en"
+msgstr "undergeneration af cpu'en"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -9308,9 +9316,9 @@ msgid "Netherlands"
 msgstr "Holland"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "Sender filer..."
+msgstr "Sender filer via FTP"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9713,7 +9721,7 @@ msgstr ""
 "til at starte ved opstart"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
@@ -9822,6 +9830,11 @@ msgstr "nummeret på processoren"
 msgid "Hardware clock set to GMT"
 msgstr "Maskin-ur sat til GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Ønsker du at afprøve konfigurationen?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9837,15 +9850,21 @@ msgstr "Angiv hvilken port din printer er forbundet til."
 msgid "Change Cd-Rom"
 msgstr "Skift cdrom"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Hvilken konfiguration af XFree ønsker du?"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Paraguay"
 msgstr "Paraguay"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
-msgstr "Brug inkrementalbackup (overskriv ikke gamle sikkerhedskopier)"
+msgstr ""
+"Brug inkremental/forskels-backup (overskriv ikke gamle sikkerhedskopier)"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10238,7 +10257,8 @@ msgstr "Fravælg installerede skrifttyper"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Annullér"
@@ -10370,6 +10390,11 @@ msgstr "Amerikansk (internaltionalt)"
 msgid "Not installed"
 msgstr "Ikke installeret"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Begge taster samtidigt"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10458,11 +10483,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Netværk via FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Russisk (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11214,6 +11234,11 @@ msgstr "Du kan ikke fravælge denne pakke. Den skal opgraderes"
 msgid "Loading from floppy"
 msgstr "Indlæser fra diskette"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11316,6 +11341,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Skift type"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB printer #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11465,7 +11495,7 @@ msgstr ""
 "partition?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -11496,7 +11526,7 @@ msgid ""
 "      \n"
 "\n"
 msgstr ""
-"beskrivelse af valgmuligheder:\n"
+"Beskrivelse af valgmuligheder:\n"
 "\n"
 " På dette trin vil Drakbackup lade dig ændre:\n"
 "\n"
@@ -11515,7 +11545,7 @@ msgstr ""
 "      \n"
 " - Måden for .backupignore:\n"
 "\n"
-"      som med cvs vil Drakbackup ignorere alle referencer\n"
+"      Som med cvs vil Drakbackup ignorere alle referencer\n"
 "      indeholdt i .backupignore-filer i hvert katalog.\n"
 "      fx: \n"
 "         #> cat .backupignore\n"
@@ -11582,15 +11612,15 @@ msgstr "Ved opstart"
 msgid "Bus identification"
 msgstr "Bus-identifikation"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Lav gerne en sikkerhedkopi af dine data først"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikansk"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Lav gerne en sikkerhedkopi af dine data først"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12021,7 +12051,7 @@ msgstr "Intet tv-kort genkendt!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Valg"
@@ -12049,9 +12079,9 @@ msgstr ""
 "virke. Din opsætning af forbindelsestype vil blive ignoreret af driveren."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr "Processorens generation ( fx 8 for PentiumIII,...)"
+msgstr "processorens generation (fx 8 for PentiumIII,...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12664,6 +12694,11 @@ msgstr "Loopback-filnavn: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Adresse på DNS-server skal have formatet 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Ekstern kontrol"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13307,7 +13342,7 @@ msgid "Reselect correct fonts"
 msgstr "Genvælg korrekte skrifttyper"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Options Description:\n"
 "\n"
@@ -13317,7 +13352,7 @@ msgid ""
 "drive before sending it to the server.\n"
 "\n"
 msgstr ""
-"beskrivelse af valgmuligheder:\n"
+"Beskrivelse af valgmuligheder:\n"
 "\n"
 "Vær forsigtig når du bruger ftp-backup, fordi kun \n"
 "sikkerhedskopier som er opbygget allerede bliver sendt til serveren.\n"
@@ -13364,14 +13399,14 @@ msgstr ""
 "       XFdrake opløsning"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Auto-opdagelse af printere"
+msgstr "Skrivebeskyttelse"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "Kunne ikke finde nogen skrifttyper.\n"
+msgstr "Du har ikke valgt nogen skrifttyper."
 
 #: ../../steps.pm:1
 #, c-format
@@ -13493,20 +13528,20 @@ msgstr ""
 "\n"
 "Aktivér/deaktivér msec timevise sikkerhedskontrol."
 
-#: ../../standalone/drakfont:1
-#, fuzzy, c-format
-msgid "%s fonts conversion"
-msgstr "Konvertering af pfm-skrifttyper"
-
-#: ../../standalone/harddrake2:1
-#, fuzzy, c-format
-msgid "the type of bus on which the mouse is connected"
-msgstr "Bustypen som musen er forbundet til"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Uganda"
 msgstr "Uganda"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "%s fonts conversion"
+msgstr "Konvertering af %s-skrifttyper"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the type of bus on which the mouse is connected"
+msgstr "bustypen som musen er forbundet til"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13699,10 +13734,10 @@ msgstr "Vælg et andet medie at genskabe fra"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Software Manager"
-msgstr "Programmeladministration"
+msgstr "Programadministration"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Restore Description:\n"
 " \n"
@@ -13731,7 +13766,7 @@ msgid ""
 "\trestore the base and then the differential from a certain date.\n"
 "\n"
 msgstr ""
-"beskrivelse af genskabelse:\n"
+"Beskrivelse af genskabelse:\n"
 " \n"
 "Kun den nyeste dato vil blive brugt fordi med inkrementalbackup \n"
 "er det nødvendigt at genskabe hver gammel sikkerhedskopi én for én.\n"
@@ -13750,7 +13785,12 @@ msgstr ""
 "\tHvis du ikke har valgt denne mulighed vil alle gamle\n"
 "\tsikkerhedskopier blive slettet før hver sikkerhedskopiering.    \n"
 "\n"
-"\n"
+" - Forskelsbackupper:\n"
+" \n"
+"\tEn forskelsbackup vil i stedet for at sammenligne ændringer med den \n"
+"\tforegående inkrementalbakup altid sammenligne med den første fulde \n"
+"\tsikkerhedskopi. Denne metode tillader en at genskabe den fulde \n"
+"\t sikkerhedskopi, og derefter blot forskellene fra en bestemt dato.\n"
 "\n"
 
 #: ../../interactive/stdio.pm:1
@@ -13927,6 +13967,11 @@ msgstr "\tSikkerhedskopiering bruger tar og gzip\n"
 msgid "2 MB"
 msgstr "2 Mb"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Begge taster samtidigt"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -13973,6 +14018,11 @@ msgid ""
 msgstr ""
 "Frek bør have endelsen k, M or G (for eksempel, \"2.46G\" for 2.46 GHz "
 "frekvens), eller tilføj nok '0'."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", multi-funktions-enhed på parallel port #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14621,9 +14671,9 @@ msgid "Raw printer"
 msgstr "Rå printer"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
-msgstr "Officielt producentnavn på processoren"
+msgstr "officielt producentnavn på processoren"
 
 #: ../../Xconfig/monitor.pm:1 ../../standalone/harddrake2:1
 #, c-format
@@ -14687,17 +14737,6 @@ msgid ""
 msgstr ""
 "For at dele din viden og hjælpe med at bygge Linux-værktøjer kan du være med "
 "i diskussionsfora som du finder på vores 'Samfunds'-netsider."
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Tillykke, netværks- og internetkonfigurationen er færdig.\n"
-"Konfigurationen vil nu blive anvendt på dit system.\n"
-"\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14769,6 +14808,11 @@ msgstr "slet"
 #, c-format
 msgid "here if no."
 msgstr "Her hvis ikke."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Hjælp"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14927,6 +14971,7 @@ msgstr "Filippinerne"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "O.k."
@@ -14970,6 +15015,32 @@ msgstr ""
 "Tilføj hér de CUPS-servere hvis prontere du ønsker at bruge. Du behøver kun "
 "gøre dette, hvis serverne ikke rundkaster deres printerinformation på "
 "lokalnetværket."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Velkommen til guiden for printerinstallation\n"
+"\n"
+"Denne guide lader dig installere printere sluttet til denne maskine.\n"
+"\n"
+"Hvis du har printere sluttet til denne maskine, så tilslut og tænd dem nu så "
+"de kan identificeres automatisk.\n"
+"\n"
+"Klik på \"Næste\" hvis du er klar og på \"Annullér\" hvis du ikke vil "
+"installere printere nu."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15411,8 +15482,9 @@ msgstr ", printer \"%s\" på server \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Fejl"
@@ -15472,15 +15544,15 @@ msgid "mount failed: "
 msgstr "montering mislykkedes: "
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
 "GNU/Linux-kernen skal køre en bergningsløkke ved opstaten for at "
-"initialisere en tidstæller. Dets resultat lagres som bogomips som en måde at "
-"måle hastigheden på cpu'en."
+"initialisere en tidstæller. Dets resultat lagres som bogomips, hvilket er en "
+"måde at måle hastigheden på cpu'en."
 
 #: ../../any.pm:1
 #, c-format
@@ -16383,6 +16455,11 @@ msgstr "Led efter beskadigede blokke?"
 msgid "Other MultiMedia devices"
 msgstr "Andre multimedie-enheder"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printer"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17068,6 +17145,11 @@ msgstr "Opret opstartsdiskette"
 msgid "Solomon Islands"
 msgstr "Salomonøerne"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Test musen"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17166,6 +17248,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(har allerede tilføjet %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Systemopstarterens installation"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17374,9 +17461,9 @@ msgid "Apache World Wide Web Server"
 msgstr "Apache World Wide Web Server"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr "Serie af processoren (undermodel- (generations) nummer)"
+msgstr "serie af processoren (undermodel- (generations) nummer)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17597,6 +17684,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Genskab alle sikkerhedskopier"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " på parallelport #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17713,6 +17805,11 @@ msgstr "Diverse"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Højre alt-tast"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17915,9 +18012,9 @@ msgid "Please enter the directory to save:"
 msgstr "Indtast kataloget der skal gemmes:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
-msgstr "Disketteformater som drevet accepterer"
+msgstr "disketteformater som drevet accepterer"
 
 #: ../../raid.pm:1
 #, c-format
@@ -17939,11 +18036,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Tilsluttet"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB-printer \\/#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18291,6 +18383,11 @@ msgstr "Acceptér bruger"
 msgid "Server"
 msgstr "Server"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Venstre Windows-tast"
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
@@ -18336,7 +18433,7 @@ msgstr "Leder efter pakker der allerede er installeret..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Brug forskelsbackupper"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -19240,7 +19337,7 @@ msgid "Delay before booting the default image"
 msgstr "Ventetid før opstart af forvalgt styresystem"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -19274,7 +19371,7 @@ msgid ""
 msgstr ""
 "\n"
 " Copyright © 2001-2002 ved MandrakeSoft \n"
-"\tDUPONT Sebastien (oprindelige version)\n"
+"\tDUPONT Sebastien (oprindelig version)\n"
 "        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " Dette program er frit programmel; du kan redistribuere det og/eller ændre\n"
@@ -19631,6 +19728,35 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Værktøjssæt til at læse samt sende post og nyheder, og til at browse på "
 "nettet"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Hvilken ISDN-konfigurering foretrækker du?\n"
+#~ "\n"
+#~ "* Den gamle konfiguration bruger isdn4net. Det har stærke\n"
+#~ "  værktøjer, men det er vanskeligt at konfigurere for en nybegynder,\n"
+#~ "  og er ikke standardbaseret.\n"
+#~ "\n"
+#~ "' Det nye konfigurationsværktøj er enklere at forstå,\n"
+#~ "  mere standardiseret, men med færre værktøjer.\n"
+#~ "\n"
+#~ "Vi anbefaler den nye konfiguration.\n"
+#~ "\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Ny konfiguration (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Gammel konfiguration (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Internetforbindelse & -konfiguration"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-cy2\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-03-12 19:36-0000\n"
 "Last-Translator: Rhoslyn Prys <rhoslyn.prys@meddal.org.uk>\n"
 "Language-Team: Cymraeg <rhoslyn.prys@meddal.org.uk>\n"
@@ -347,6 +347,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Rhaid i'r rhwydwaith gael ei ailgychwyn.  Ydych chi am ei ailgychwyn?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1809,11 +1814,6 @@ msgstr ""
 "greu disg cychwyn ar gyfer eich system?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", argraffydd USB \\#\"%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1853,6 +1853,11 @@ msgstr "Ffon hud"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1946,11 +1951,6 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Gwnewch cadw wrth gefn newydd cyn adfer ( ar gyfer cadw wrth gefn cynyddol "
 "yn unig )"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Argraffydd ar borth paralel \\#\"%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2114,11 +2114,6 @@ msgstr ""
 "Dewiswch y ddisg galed rydych am ei ddileu er mwy n gosod eich rhaniad\n"
 "Mandrake Linux newydd. Byddwch ofalus, bydd yr holl ddata sydd arno'n\n"
 "cael ei ddileu ac ni fydd modd ei adfer!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " ar borth paralel \\#\"%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -3207,6 +3202,11 @@ msgstr "Cychwyn yr amgylchedd graffigol wrth gychwyn eich system"
 msgid "hourly"
 msgstr "bob awr"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Bysell Alt dde"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3259,6 +3259,46 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Ffurfweddi'u rhaglenni"
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Croeso i'r Dewin Gosod Argraffydd\n"
+"\n"
+"Bydd y dewin yn eich cynorthwyo i osod argraffydd(ion) sydd wedi eu cysylltu "
+"â'r cyfrifiadur  hwn,yn gysylltiedig â'r rhwydwaith neu i beiriant Windows "
+"pell.\n"
+"\n"
+"Os oes gennych argraffydd(ion) yn gysylltiedig â'r peiriant, cysylltwch nhw "
+"â'r peiriant a'u troi nhw mlaen fel bod modd awtoganfod. Hefyd rhaid i "
+"argraffydd(ion) rhwydwaith a'ch peiriannau Windows fod wedi eu cysylltu ac "
+"ymlaen.\n"
+"\n"
+"Sylwer bod awtoganfod argraffyddion ar rwydwaith yn cymryd mwy o amser nag "
+"awtoganfod argraffyddion sy'n gysylltiedig â'r peiriant hwn. Felly, "
+"diffoddwch awto ganfod rhwydwaith pan nad oes mo'i angen.\n"
+"\n"
+"Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
+"eich argraffydd(ion) ar hyn o bryd."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3268,30 +3308,6 @@ msgstr "Cysylltiad  modem arferol"
 #, c-format
 msgid "File Selection"
 msgstr "Dewis ffeiliau"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Pa ffurfweddiad IDSN sy'n well gennych?\n"
-"\n"
-"* Mae'r Hen ffurfweddiad yn defnyddio isdn4net. Mae'n\n"
-"  cynnwys offer pwerus ond mae'n anodd ei ffurfweddi ac nid\n"
-"yw'n safonol. \n"
-"\n"
-" *Mae'r ffurfweddiad Newydd yn haws i'w ddeall, yn fwy safonol\n"
-"  ond mae ganddo llai o offer.\n"
-"\n"
-"Rydym yn argymell y ffurfweddiad ysgafn.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -4002,6 +4018,11 @@ msgstr "Sganiwr"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Rhybudd: gall profi'r cerdyn graffeg hwn rewi eich cyfrifiadur"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "IO'r Cerdyn"
 
 #: ../../any.pm:1
 #, c-format
@@ -4884,13 +4905,6 @@ msgstr "Mewngofnodi'n awtomatig ar gyfer un defnyddiwr."
 msgid "Floppy format"
 msgstr "Fformatio disg meddal"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4989,11 +5003,6 @@ msgstr "Yn fformatio rhaniad %s"
 #, c-format
 msgid "User name"
 msgstr "Enw defnyddiwr"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Ffurfweddiad newydd (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5439,6 +5448,11 @@ msgstr "Libya"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Ffurfweddio sgriptiau, gosod meddalwedd, cychwyn gwasanaethwyr..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Argraffydd ar borth paralel #\"%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5473,6 +5487,11 @@ msgstr ""
 "Ymresymiadau: (arg)\n"
 "\n"
 "Galluogi/Analluogi libsafe os yw ar y system."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "Argraffydd USB #\"%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5738,6 +5757,11 @@ msgstr ""
 "\n"
 "Mae un argraffydd anhysbys wedi ei gysylltu'n uniongyrchol â'ch system"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Bysell Alt dde"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5773,11 +5797,6 @@ msgstr "Gweriniaeth Tsiec"
 msgid "Egypt"
 msgstr "Yr Aifft"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Hen ffurfweddiad (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5803,6 +5822,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Llethu Ffeiliau Dros dro"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Llongyfarchiadau, mae ffurfweddiad y rhwydwaith a'r Rhyngrwyd wedi gorffen\n"
+"Bydd y ffurfweddiad yn cael ei osod ar eich system\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6642,6 +6671,11 @@ msgstr "Proffil i'w ddileu:"
 msgid "Local measure"
 msgstr "Mesur lleol"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6672,13 +6706,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6736,47 +6770,6 @@ msgstr "Bangladesh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Siapan (cable)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Croeso i'r Dewin Gosod Argraffydd\n"
-"\n"
-"Bydd y dewin yn eich cynorthwyo i osod argraffydd(ion) sydd wedi eu cysylltu "
-"â'r cyfrifiadur  hwn,yn gysylltiedig â'r rhwydwaith neu i beiriant Windows "
-"pell.\n"
-"\n"
-"Os oes gennych argraffydd(ion) yn gysylltiedig â'r peiriant, cysylltwch nhw "
-"â'r peiriant a'u troi nhw mlaen fel bod modd awtoganfod. Hefyd rhaid i "
-"argraffydd(ion) rhwydwaith a'ch peiriannau Windows fod wedi eu cysylltu ac "
-"ymlaen.\n"
-"\n"
-"Sylwer bod awtoganfod argraffyddion ar rwydwaith yn cymryd mwy o amser nag "
-"awtoganfod argraffyddion sy'n gysylltiedig â'r peiriant hwn. Felly, "
-"diffoddwch awto ganfod rhwydwaith pan nad oes mo'i angen.\n"
-"\n"
-"Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
-"eich argraffydd(ion) ar hyn o bryd."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7604,6 +7597,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Gosod yr Argraffydd Rhagosodedig"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8305,11 +8306,6 @@ msgstr ""
 " chafodd eich adroddiad e-bost mo'i anfon\n"
 " Ffurfweddwch eich sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", dyfais amlbwrpas ar borth paralel \\#\"%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8496,9 +8492,9 @@ msgstr "Gwybodaeth:"
 msgid "Button `%s': %s"
 msgstr "Botwm '%s'.%s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Arhoswch"
@@ -8707,6 +8703,11 @@ msgstr "Gwasanaethwr DNS Cyntaf (dewisol)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Yn lle hynny, rhowch enw dyfais/ffeil ar y ninell mewnbwn"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Rwsiaidd (Ffonetig)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9903,6 +9904,11 @@ msgstr "rhif y prosesydd"
 msgid "Hardware clock set to GMT"
 msgstr "Cloc caledwedd wedi ei osod i GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Ydych chi eisiau profi'r ffurfweddiad?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9917,6 +9923,11 @@ msgstr "Dewiswch y porth mae'r argraffydd wedi cysylltu iddo."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Newid CD-Rom"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Pa ffurfweddiad XFree hoffech ei gael?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10325,7 +10336,8 @@ msgstr "Tynnu ffontiau wedi eu gosod"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Diddymu"
@@ -10458,6 +10470,11 @@ msgstr "Bysellfwrdd UDA (rhyngwladol)"
 msgid "Not installed"
 msgstr "Heb ei osod"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Y ddwy fysell Shift gyda'i gilydd"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10546,11 +10563,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Rhwydwaith drwy FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Rwsiaidd (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11308,6 +11320,11 @@ msgstr "Does dim mod dad-ddewis y pecyn hwn. Rhaid ei ddiweddaru"
 msgid "Loading from floppy"
 msgstr "Llwytho o ddisg meddal"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Systemau  Llygoden"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11411,6 +11428,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Newid y math"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", argraffydd USB #\"%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11674,15 +11696,15 @@ msgstr "Cychwyn"
 msgid "Bus identification"
 msgstr "Dynodiad bws"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Gwnewch gopi wrth gefn o'ch data yn gyntaf"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatican"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Gwnewch gopi wrth gefn o'ch data yn gyntaf"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12125,7 +12147,7 @@ msgstr "Heb ganfod Cerdyn Teledu!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Dewisiadau"
@@ -12769,6 +12791,11 @@ msgstr "Enw ffeil cylch-ôl"
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Dylai cyfeiriad DNS fod mewn fformat  1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Rheoli o Bell"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13599,6 +13626,11 @@ msgstr ""
 "\n"
 "Galluogi/Analluogi gwiriad diogelwch msec bob awr."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13608,11 +13640,6 @@ msgstr "trosi ffontiau pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Math o fws mae eich llygoden wedi cysylltu iddi"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14038,6 +14065,11 @@ msgstr "\tBydd Cadw wrth Gefn yn defnyddio tar a gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Y ddwy fysell Shift gyda'i gilydd"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14085,6 +14117,11 @@ msgid ""
 msgstr ""
 "Dylai Frqu gael rhagosodiad k, M neu G (ee \"2.46G\" am donfedd 2.46 GHz ), "
 "neu ychwanegu '0' (sero)."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", dyfais amlbwrpas ar borth paralel #\"%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14802,17 +14839,6 @@ msgstr ""
 "chynorthwywch eraill drwy ymuno yn y grwpiau trafod niferus sydd i'w cael yn "
 "ein tudalennau gwe \"Cymuned\""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Llongyfarchiadau, mae ffurfweddiad y rhwydwaith a'r Rhyngrwyd wedi gorffen\n"
-"Bydd y ffurfweddiad yn cael ei osod ar eich system\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14881,6 +14907,11 @@ msgstr "dileu"
 #, c-format
 msgid "here if no."
 msgstr "yma os nad."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Cymorth"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -15039,6 +15070,7 @@ msgstr "Philippines"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Iawn"
@@ -15081,6 +15113,33 @@ msgstr ""
 "Ychwanegwch y gwasanaethwyr CUPS yr argraffwyr rydych am eu defnyddio. Bydd "
 "angen gwneud hyn dim ond os nad yw'r gwasanaethwyr yn darlledu eu gwybodaeth "
 "argraffu i'r rhwydwaith leol."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Croeso i'r Dewin Gosod Argraffydd\n"
+"\n"
+"Bydd y dewin yn eich cynorthwyo i osod argraffydd(ion) sydd wedi eu cysylltu "
+"â'r cyfrifiadur  hwn,\n"
+"\n"
+"Os oes gennych argraffydd(ion) yn gysylltiedig â'r peiriant, cysylltwch nhw "
+"â'r peiriant a'u troi nhw mlaen fel bod modd awtoganfod.\n"
+"\n"
+"Cliciwch \"Nesaf\" pan ydych yn barod, a \"Diddymu\" os nad ydych am osod "
+"eich argraffydd(ion) ar hyn o bryd."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15527,8 +15586,9 @@ msgstr ", argraffydd \"%s\" ar wasanaethwr \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Gwall"
@@ -16499,6 +16559,11 @@ msgstr "Gwirio blociau gwallus?"
 msgid "Other MultiMedia devices"
 msgstr "Dyfeisiau AmlGyfrwng eraill"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Argraffydd"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17191,6 +17256,11 @@ msgstr "Creu disg cychwyn"
 msgid "Solomon Islands"
 msgstr "Solomon Islands"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Profwch y llygoden"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17290,6 +17360,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(wedi ychwanegu %s yn barod)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Gosodiad Bootloader"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17725,6 +17800,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Adfer pob cadw wrth gefn"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " ar borth paralel #\"%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17841,6 +17921,11 @@ msgstr "Amrywiol"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Bysell Alt dde"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18066,11 +18151,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Wedi cysylltu"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "Argraffydd USB \\#\"%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18417,6 +18497,11 @@ msgstr "Derbyn defnyddiwr"
 #, c-format
 msgid "Server"
 msgstr "Gwasanaethwr"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Bysell \"Windows\" chwith"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19766,6 +19851,34 @@ msgstr ""
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Casgliad o offer i ddarllen ac anfon e-bost a newyddion ac i bori'r We"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Pa ffurfweddiad IDSN sy'n well gennych?\n"
+#~ "\n"
+#~ "* Mae'r Hen ffurfweddiad yn defnyddio isdn4net. Mae'n\n"
+#~ "  cynnwys offer pwerus ond mae'n anodd ei ffurfweddi ac nid\n"
+#~ "yw'n safonol. \n"
+#~ "\n"
+#~ " *Mae'r ffurfweddiad Newydd yn haws i'w ddeall, yn fwy safonol\n"
+#~ "  ond mae ganddo llai o offer.\n"
+#~ "\n"
+#~ "Rydym yn argymell y ffurfweddiad ysgafn.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Ffurfweddiad newydd (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Hen ffurfweddiad (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Cysylltiad â'r rhyngrwyd a'i ffurfweddiad "

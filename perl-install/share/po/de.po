@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-de\n"
-"POT-Creation-Date: 2003-05-20 12:43+0200\n"
-"PO-Revision-Date: 2003-05-18 23:07+0000\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"PO-Revision-Date: 2003-05-29 23:36+0200\n"
 "Last-Translator: Sebastian Deutscher <sebastian_deutscher@web.de>\n"
-"Language-Team: german <cooker-i18n@linux-mandrake.com>\n"
+"Language-Team: german <<cooker-i18n@linux-mandrake.com>>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -347,6 +347,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malaysia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Das Netzwerk muss neu gestartet werden. Soll ich es neu starten?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -3097,6 +3102,11 @@ msgstr "Arbeitsoberfläche nach dem Hochfahren automatisch starten "
 msgid "hourly"
 msgstr "stündlich"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "AltGr-Taste"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3143,6 +3153,45 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Konfiguriere Anwendungen ..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Willkommen zum Druckerassistenten\n"
+"\n"
+"Dieser Assistent möchte Ihnen helfen, Ihre(n) lokalen und Netzwerkdrucker "
+"sowie Drucker an Windows-Rechnern im lokalen Netz zu konfigurieren.\n"
+"\n"
+"Falls Sie Drucker haben, die direkt mit dem Rechner verbunden sind, stellen "
+"Sie sicher, dass diese richtig angeschlossen und eingeschaltet sind. Ebenso "
+"müssen die Netzwerkdrucker bzw. Windows-Rechner eingeschaltet sein.\n"
+"\n"
+"Es sei angemerkt, dass die Erkennung von Netzwerkdruckern etwas länger "
+"dauert, als das Finden von Druckern, die direkt an Ihrem Rechner hängen. Sie "
+"sollten daher diesen Punkt ausschalten, sofern Sie nur direkt am Rechner "
+"hängende Drucker verwenden wollen.\n"
+"\n"
+"Betätigen Sie die Schaltfläche „Weiter“, wenn Sie soweit sind, bzw. "
+"„Abbrechen“, wenn Sie keine Drucker konfigurieren wollen."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3152,31 +3201,6 @@ msgstr "Normale Modem-Verbindung"
 #, c-format
 msgid "File Selection"
 msgstr "Dateiauswahl"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Welche ISDN-Konfiguration bevorzugen Sie?\n"
-"\n"
-"* Die alte Konfiguration verwendet „isdn4net“. Sie \n"
-"  enthält mächtigere Werkzeuge, ist jedoch komplizierter \n"
-"  einzurichten und nicht voll standardkonform.\n"
-"\n"
-"* Die neue Konfiguration mit „isdn-light“ ist \n"
-"  verständlicher und standardkonformer, sie enthält \n"
-"  jedoch weniger Werkzeuge.\n"
-"\n"
-"Wir empfehlen die „isdn-light“ Variante.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3872,6 +3896,11 @@ msgstr "Scanner"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Warnung: Testen dieser Grafikkarte kann Ihren Rechner anhalten"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Karten-E/A"
 
 #: ../../any.pm:1
 #, c-format
@@ -4753,13 +4782,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Diskettenformat"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4858,11 +4880,6 @@ msgstr "Partition „%s“ einhängen"
 #, c-format
 msgid "User name"
 msgstr "Benutzername"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Neue Konfiguration (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5610,6 +5627,11 @@ msgstr ""
 "\n"
 "Ich konnte einen unbekannten Drucker direkt an Ihrem Rechner finden."
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "AltGr-Taste"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5644,11 +5666,6 @@ msgstr "Tschechische Republik"
 #, c-format
 msgid "Egypt"
 msgstr "Ägypten"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Alte Konfiguration (isdn4net)"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -6520,6 +6537,11 @@ msgstr "Zu löschendes Profil: "
 msgid "Local measure"
 msgstr "Lokale Messung"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6550,13 +6572,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6617,46 +6639,6 @@ msgstr "Bangladesch"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japan (Kabel)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Willkommen zum Druckerassistenten\n"
-"\n"
-"Dieser Assistent möchte Ihnen helfen, Ihre(n) lokalen und Netzwerkdrucker "
-"sowie Drucker an Windows-Rechnern im lokalen Netz zu konfigurieren.\n"
-"\n"
-"Falls Sie Drucker haben, die direkt mit dem Rechner verbunden sind, stellen "
-"Sie sicher, dass diese richtig angeschlossen und eingeschaltet sind. Ebenso "
-"müssen die Netzwerkdrucker bzw. Windows-Rechner eingeschaltet sein.\n"
-"\n"
-"Es sei angemerkt, dass die Erkennung von Netzwerkdruckern etwas länger "
-"dauert, als das Finden von Druckern, die direkt an Ihrem Rechner hängen. Sie "
-"sollten daher diesen Punkt ausschalten, sofern Sie nur direkt am Rechner "
-"hängende Drucker verwenden wollen.\n"
-"\n"
-"Betätigen Sie die Schaltfläche „Weiter“, wenn Sie soweit sind, bzw. "
-"„Abbrechen“, wenn Sie keine Drucker konfigurieren wollen."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7483,6 +7465,14 @@ msgstr ""
 #, c-format
 msgid "Printer default settings"
 msgstr "Standard-Einstellungen des Druckers"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
 
 #: ../../mouse.pm:1
 #, c-format
@@ -8378,8 +8368,8 @@ msgid "Button `%s': %s"
 msgstr "Schaltfläche „%s“: %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Bitte warten"
@@ -8594,6 +8584,11 @@ msgid ""
 msgstr ""
 "Alternativ können Sie einen Geräte- oder Dateinamen in der Eingabezeile "
 "angeben"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Russland (Phonetisch)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9790,6 +9785,11 @@ msgstr "die Nummer des Prozessors"
 msgid "Hardware clock set to GMT"
 msgstr "Hardware-Uhr liefert GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Möchten Sie die vorgenommenen Einstellungen prüfen?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -10217,7 +10217,8 @@ msgstr "Auswahl installierter Schriftarten zurücksetzen"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Abbrechen "
@@ -10351,6 +10352,11 @@ msgstr "Vereinigte Staaten von Amerika (international)"
 msgid "Not installed"
 msgstr "Nicht installiert"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Beide Umschalttasten gleichzeitig"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10440,11 +10446,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t- Netzwerk per FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Russland (YaWERTY)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11197,6 +11198,11 @@ msgstr ""
 #, c-format
 msgid "Loading from floppy"
 msgstr "Laden von Diskette ..."
+
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -11995,7 +12001,7 @@ msgstr "Keine TV-Karte gefunden!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Optionen"
@@ -12625,6 +12631,11 @@ msgstr "Name der Loopback-Datei: "
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr ""
 "Die IP-Adresse des DNS-Servers sollte etwa die Form „192.168.1.42“ haben!"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Fernsteuerung"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13460,6 +13471,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13469,11 +13485,6 @@ msgstr "pfm-Schriftkonvertierung"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Der Typ des Busses, an dem die Maus angeschlossen ist."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13924,6 +13935,11 @@ msgstr "\tSicherungen verwenden „tar“ und „gzip“\n"
 #, c-format
 msgid "2 MB"
 msgstr "2 MB"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Beide Umschalttasten gleichzeitig"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -14776,6 +14792,11 @@ msgstr "löschen"
 msgid "here if no."
 msgstr "Hier, falls nicht."
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Hilfe"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "DHCP host name"
@@ -14933,6 +14954,7 @@ msgstr "Philippinen"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -14976,6 +14998,33 @@ msgstr ""
 "Fügen Sie hier die CUPS-Server hinzu, deren Drucker Sie verwenden wollen. "
 "Sie müssen dies jedoch nur tun, wenn die Server ihre Druckerinformationen "
 "nicht ins lokale Netzwerk senden (broadcast)."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Willkommen zum Druckerassistenten\n"
+"\n"
+"Dieser Assistent möchte Ihnen helfen, Ihre(n) lokalen Drucker zu "
+"konfigurieren.\n"
+"\n"
+"Falls Sie Drucker haben, die direkt mit dem Rechner verbunden sind, stellen "
+"Sie sicher, dass diese richtig angeschlossen und eingeschaltet sind.\n"
+"\n"
+"Betätigen Sie die Schaltfläche „Weiter“, wenn Sie soweit sind, bzw. "
+"„Abbrechen“, wenn Sie keine Drucker konfigurieren wollen."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15421,8 +15470,9 @@ msgstr ", Drucker „%s“, auf Server „%s“"
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Fehler"
@@ -15758,7 +15808,7 @@ msgstr "Drucker-Server"
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from the Internet complete."
-msgstr "Verbindungstrennung erfolgt."
+msgstr "Verbindungstrennung gelungen."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15937,7 +15987,7 @@ msgstr "Alle Kernel erstellen -->"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
+msgstr "Wenn auf \"Ja\" gesetzt, werden Dateien ohne Eigentümer gemeldet."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -16397,9 +16447,9 @@ msgid "Other MultiMedia devices"
 msgstr "Andere Multimedia-Geräte"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "burner"
-msgstr "Drucker"
+msgstr "Brenner"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -16507,7 +16557,7 @@ msgid "Bouvet Island"
 msgstr "Bouvet-Insel"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Wenn kein Port angegeben wird, wird Port 631 als Vorgabe genommen."
 
@@ -16705,9 +16755,9 @@ msgid "Hardware probing in progress"
 msgstr "Hardwareerkennung läuft"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Net Device"
-msgstr "xinetd"
+msgstr "Netz-Gerät:"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -16974,7 +17024,7 @@ msgstr "Mayotte (Frankreich)"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Creating auto install floppy..."
-msgstr "Erstellen einer Auto-Installationsdiskette"
+msgstr "Erstelle eine Auto-Installationsdiskette"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17004,7 +17054,7 @@ msgstr "SysLog"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create catalog!"
-msgstr ""
+msgstr "Ich kann den Katalog nicht erstellen!"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -17055,7 +17105,7 @@ msgstr "Konfiguration der Internetverbindung"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Scanning for TV channels"
-msgstr "Sendersuche"
+msgstr "Sendersuche..."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -17085,7 +17135,7 @@ msgstr "Assistent..."
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
 msgid "Services: %d activated for %d registered"
-msgstr "Dienste: %d aktiviert von %d registrierten."
+msgstr "Dienste: %d aktiviert von %d registrierten"
 
 #: ../../any.pm:1
 #, c-format
@@ -17096,6 +17146,11 @@ msgstr "Startdiskette erstellen"
 #, c-format
 msgid "Solomon Islands"
 msgstr "Solomon-Inseln"
+
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Bitte testen Sie Ihre Maus"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -17200,9 +17255,9 @@ msgid "(already added %s)"
 msgstr "(%s wurde bereits hinzugefügt)"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader installation in progress"
-msgstr "Installation des Betriebssystemstarters"
+msgstr "Installation des Bootloaders ..."
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17345,7 +17400,7 @@ msgstr ""
 " alle Daten auf allen Partitionen löschen, weil er unvorsichtigerweise auf\n"
 " die Partitionen selber zugegriffen hat!\n"
 "\n"
-"Das Passwort sollte eine Mischung aus alphanumerischen Zeichen sein und\n"
+"Das Passwort sollte eine Mischung aus alphanummerischen Zeichen sein und\n"
 "mindestens 8 Zeichen lang. Es sollte niemals irgendwo aufgeschrieben\n"
 "werden.\n"
 "\n"
@@ -17425,7 +17480,7 @@ msgstr "Apache Web-Server"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
-msgstr ""
+msgstr "Stepping der CPU (Submodell (Generations)-Nummer)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17457,7 +17512,7 @@ msgstr "Georgien"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Reading data of installed printers..."
-msgstr "Lese Daten installierter Drucker ..."
+msgstr "Lese Daten der installierten Drucker ..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17483,7 +17538,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Please Wait... Applying the configuration"
-msgstr "Einen Moment ... ich richte die Konfiguration ein"
+msgstr "Einen Moment ... Ich richte die Konfiguration ein"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -17497,7 +17552,7 @@ msgstr "Einen Moment ... ich richte die Konfiguration ein"
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Welcome to GRUB the operating system chooser!"
-msgstr "Willkommen zum Betriebssystemstarter GRUB!"
+msgstr "Willkommen zum Bootloader GRUB!"
 
 #: ../../bootloader.pm:1
 #, c-format
@@ -17641,7 +17696,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"                    DrakBackup Report-Details\n"
+"                    DrakBackup-Report-Details\n"
 "\n"
 
 #: ../../standalone/drakbackup:1
@@ -17650,7 +17705,7 @@ msgid "Restore all backups"
 msgstr "Alle Sicherungen wiederherstellen"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " on parallel port #%s"
 msgstr " an Parallelport \\#%s"
 
@@ -17702,7 +17757,7 @@ msgstr "Zugriff auf X-Programme"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Berechnung der Größe der Windows-Partition"
+msgstr "Berechne die Größe der Windows-Partition"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #: ../../standalone/drakxtv:1
@@ -17770,6 +17825,11 @@ msgstr "Verschiedene"
 #, c-format
 msgid "Zip"
 msgstr "ZIP"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "AltGr-Taste"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17870,7 +17930,7 @@ msgstr ""
 "\n"
 "Wenn Sie das wünschen, schließen Sie bitte Ihren Fernseher an die "
 "Grafikkarte an, bevor Sie den Rechner neu starten.\n"
-"Wählen Sie „TV-Ausgang“ im Betriebssystemstarter.\n"
+"Wählen Sie „TV-Ausgang“ im Bootloader.\n"
 "\n"
 "Haben Sie einen solchen Ausgang und wollen Sie ihn verwenden?"
 
@@ -17916,7 +17976,7 @@ msgstr ""
 "einer Firewall):\n"
 "\n"
 "Drucken Sie über ein Benutzerkonto ohne Passwort auf Ihrem Windows-Server, "
-"zum Beispiel über das „GUEST“-Benutzerkonto oder über ein speziell zum "
+"zum Beispiel über das „GAST“-Benutzerkonto oder über ein speziell zum "
 "Drucken eingerichtetes Benutzerkonto. Entfernen Sie nicht den Passwortschutz "
 "von einem persönlichen Benutzerkonto oder vom Administratorkonto.\n"
 "\n"
@@ -17968,7 +18028,7 @@ msgstr ""
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Graphical interface at startup"
-msgstr "X zur Startzeit"
+msgstr "Grafikumgebung zur Startzeit"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17983,7 +18043,7 @@ msgstr ""
 #: ../../raid.pm:1
 #, c-format
 msgid "Not enough partitions for RAID level %d\n"
-msgstr "Nicht genügend Partitionen für RAID Level %d\n"
+msgstr "Nicht genügend Partitionen für RAID-Level %d\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17993,7 +18053,7 @@ msgid ""
 "it."
 msgstr ""
 "Die folgenden Drucker sind bereits eingerichtet. Führen Sie einen "
-"Doppelklick auf einem aus, um ihn zu ändern, als Standarddrucker zu "
+"Doppelklick auf einen aus, um ihn zu ändern, als Standarddrucker zu "
 "verwenden oder Informationen über ihn zu erhalten."
 
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
@@ -18100,6 +18160,8 @@ msgstr ""
 msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
+"Kein CD oder DVD-Abbild gefunden, bitte kopieren Sie die "
+"Installationprogramme und rpm-Dateien."
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -18115,7 +18177,7 @@ msgstr "Speichern"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is unsupported"
-msgstr "Der Scanner „%s“ wird nicht unterstützt"
+msgstr "Der Scanner „%s“ wird NICHT unterstützt"
 
 #: ../../services.pm:1
 #, c-format
@@ -18151,12 +18213,12 @@ msgstr "Israel"
 #: ../../lang.pm:1
 #, c-format
 msgid "French Guiana"
-msgstr "Französisch Guiana"
+msgstr "Französisch-Guiana"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "default:LTR"
-msgstr "default:LTR"
+msgstr "Standard:LTR"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -18166,7 +18228,7 @@ msgstr "eine Regel hinzufügen"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "A command line must be entered!"
-msgstr "Eine Kommandozeile muss eigegeben werden!"
+msgstr "Eine Kommandozeile muss eingegeben werden!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18200,7 +18262,7 @@ msgid ""
 "good."
 msgstr ""
 "Damit dies mit einem Windows 2000-Domänen-Controller funktioniert, muss der "
-"Administrator Folgendes ausführen: „C:\\>net localgroup \"Pre-Windows 2000 "
+"Administrator folgendes ausführen: „C:\\>net localgroup \"Pre-Windows 2000 "
 "Compatible Access\" everyone /add“. Anschließend muss der Server neu "
 "gestartet werden.\n"
 "Damit Sie Ihren Mandrake Linux-Rechner zur Windows(TM)-Domäne hinzufügen "
@@ -18227,12 +18289,15 @@ msgid "Use network connection to backup"
 msgstr "Netzwerkverbindung zur Datensicherung verwenden"
 
 #: ../../security/help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Arguments: (arg)\n"
 "\n"
 " Enable/Disable sulogin(8) in single user level."
 msgstr ""
+"Argumente: (arg)\n"
+"\n"
+" Enable/Disable sulogin(8) in single user level."
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/de/drakx-chapter.xml
@@ -18309,8 +18374,8 @@ msgstr ""
 "wichtigsten Dienste auswählen, die auf Ihren Rechner installiert werden\n"
 "sollen.\n"
 "\n"
-" * „%s“: Wählen Sie hier Ihre bevorzugte grafische Arbeitsoberfläche. Wenn\n"
-"Sie eine grafische Oberfläche verwenden wollen, so müssen Sie hier\n"
+" * „%s“: Wählen Sie hier Ihre bevorzugte grafische Arbeitsfläche. Wenn\n"
+"Sie eine grafische Umgebung verwenden wollen, so müssen Sie hier\n"
 "zumindest eine Gruppe auswählen.\n"
 "\n"
 "Wenn Sie die Maus über eine Gruppe bewegen, erhalten Sie einen kurzen\n"
@@ -18349,6 +18414,11 @@ msgstr "Benutzer akzeptieren"
 msgid "Server"
 msgstr "Server"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Linke „Windows“-Taste"
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
@@ -18384,7 +18454,7 @@ msgstr "Die IP-Adresse des Gateways sollte etwa die Form „192.168.1.42“ habe
 msgid ""
 "\"%s\" based winmodem detected, do you want to install needed software ?"
 msgstr ""
-"\"%s\" basiertes Winmodem erkannt.Wollen Sie die notwendige Software "
+"\"%s\" basiertes Winmodem erkannt. Wollen Sie die notwendige Software "
 "installieren?"
 
 #: ../../install_steps_interactive.pm:1
@@ -18395,7 +18465,7 @@ msgstr "Suche nach bereits installierten Paketen ..."
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Differential Backups"
-msgstr ""
+msgstr "Differentielles Backup verwenden"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18425,12 +18495,11 @@ msgid ""
 "-You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"Stellen Sie sicher, das Sie das Recht haben, die Schriftarten die Sie \n"
-"in Ihr System einbinden wollen, zu verwenden.\n"
+"Bevor Sie irgendwelche Schriftarten installieren, müssen Sie das Recht "
+"haben, diese zu verwenden und zu installieren.\n"
 "\n"
 "- Sie können die Schriftarten auf normalem Weg einbinden. In seltenen "
-"Fällen \n"
-"können defekte Schriftarten den X-Server lahmlegen."
+"Fällenkönnen defekte Schriftarten den X-Server lahmlegen."
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/de/drakx-chapter.xml
@@ -18468,7 +18537,7 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot ist ein Betriebssystemstarter für NewWorld MacIntosh Rechner. \n"
+"Yaboot ist ein Bootloader für NewWorld MacIntosh Rechner. \n"
 "Er kann sowohl GNU/Linux als auch MacOS oder MacOS X starten, falls diese\n"
 "auf Ihrem Rechner installiert sind. Normalerweise werden diese "
 "Betriebssysteme\n"
@@ -18499,9 +18568,8 @@ msgstr ""
 " * Start von OF erlauben?: Markieren dieses Punktes erlaubt es Ihnen an der\n"
 "ersten Eingabeaufforderung \"N\" für den Open Firmware Start zu wählen.\n"
 "\n"
-" * Standard-BS: Hiermit stellen Sie ein, welches Betriebssystem nach Ablauf "
-"der\n"
-"Open-Firmware-Verzögerung automatisch gestartet werden soll."
+" * Standard-BS: Hiermit stellen Sie ein, welches Betriebssystem nach Ablauf\n"
+"der Open-Firmware-Verzögerung automatisch gestartet werden soll."
 
 #: ../../mouse.pm:1
 #, c-format
@@ -18543,7 +18611,7 @@ msgstr "Netzwerk konfigurieren"
 #: ../../any.pm:1
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "Wo soll der Betriebssystemstarter installiert werden?"
+msgstr "Wo soll der Bootloader installiert werden?"
 
 # DO NOT BOTHER TO MODIFY HERE, SEE:
 # cvs.mandrakesoft.com:/cooker/doc/manualB/modules/de/drakx-chapter.xml
@@ -18605,7 +18673,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "Der %s wird nicht von dieser Version von Mandrake Linux unterstützt."
+msgstr "Der %s wird von dieser Mandrake Linux-Version NICHT unterstützt."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18632,10 +18700,11 @@ msgstr "Sind Sie sicher, dass Sie mit diesem Rechner drucken wollen?\n"
 msgid "New devfs device"
 msgstr "Neues DevFS-Gerät"
 
+# spawn=laichen?????????????
 #: ../../standalone/drakbackup:1
-#, c-format
+#, fuzzy, c-format
 msgid "ERROR: Cannot spawn %s."
-msgstr ""
+msgstr "FEHLER: Kann auf %s nicht zugreifen."
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -18712,7 +18781,7 @@ msgstr "Bereite Installation vor"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Edit selected host/network"
-msgstr "Änderung der markierten Rechner/Netzwerke"
+msgstr "Markierte Rechner/Netzwerke bearbeiten"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -18727,12 +18796,12 @@ msgstr "Nauru"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "True Type fonts installation"
-msgstr "Installation von TrueType-Schriften"
+msgstr "Installation von TrueType-Schriftarten"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Auto-detect printers connected directly to the local network"
-msgstr "Selbsterkennung von Druckern, die im lokalen Netzwerk hängen"
+msgstr "Drucker automatisch erkennen, die im lokalen Netzwerk hängen"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18748,7 +18817,7 @@ msgstr "Festplattenmodell"
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr ""
-"Sie können kein logisches LVM Medium für den Einhängepunkt %s verwenden."
+"Sie können kein logisches LVM-Medium für den Einhängepunkt %s verwenden."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -18758,7 +18827,7 @@ msgstr "Windows-Schriftarten verwenden"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Mouse Systems"
-msgstr "Mouse Systems"
+msgstr "Mouse-Systeme"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18783,10 +18852,10 @@ msgstr "Server hinzufügen"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remote printer name"
-msgstr "Name des Netzwerkdruckers"
+msgstr "Name des entfernten Druckers"
 
 #: ../../share/advertising/10-security.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MandrakeSoft has designed exclusive tools to create the most secured Linux "
 "version ever: Draksec, a system security management tool, and a strong "
@@ -18825,7 +18894,7 @@ msgstr "Bitte geben Sie das Verzeichnis an, in dem die Sicherungskopien liegen"
 #: ../../security/level.pm:1
 #, c-format
 msgid "Please choose the desired security level"
-msgstr "Wählen Sie Ihre Sicherheitsebene"
+msgstr "Wählen Sie die gewünschte Sicherheitsebene"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18842,7 +18911,7 @@ msgstr ", USB-Drucker"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Choose the applications that will support the fonts:"
-msgstr "Wählen Sie die Programme, die die Schriften verwenden sollen:"
+msgstr "Wählen Sie die Programme, die die Schriftarten verwenden sollen:"
 
 #: ../../steps.pm:1
 #, c-format
@@ -18863,7 +18932,7 @@ msgstr "Herzlichen Glückwunsch!"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Use owner id for execution"
-msgstr "Eigentümer-ID zur Ausführung benutzen"
+msgstr "Eigentümer ID zur Ausführung benutzen"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -18928,7 +18997,7 @@ msgstr "Deutschland (ohne Akzenttasten)"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Transferring %s..."
-msgstr "Übertragen von „%s“ ..."
+msgstr "Übertrage „%s“ ..."
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
@@ -19008,7 +19077,7 @@ msgstr "Passwort behalten"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
-msgstr "Teilen der Internetverbindung ist nun eingeschaltet."
+msgstr "Die Internetverbindungsfreigabe ist nun eingeschaltet."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19066,7 +19135,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"                      DrakBackup Report \n"
+"                      DrakBackup-Report \n"
 "\n"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -19153,7 +19222,7 @@ msgstr "Drucken/Scannen mit „%s“"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "omit raid modules"
-msgstr " RAID-Module weglassen "
+msgstr " RAID-Module weglassen"
 
 #: ../../services.pm:1
 #, c-format
@@ -19183,6 +19252,8 @@ msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
 msgstr ""
+"Wenn Sie ein Gerät auswählen, werden im rechten Rahmen die Geräte-"
+"Informationen angezeigt (\"Informationen\")."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -19210,7 +19281,7 @@ msgstr "Möchten Sie den Drucker „%s“ wirklich entfernen?"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "I can't find any room for installing"
-msgstr "Ich finde nicht genug Platz für die Installation."
+msgstr "Ich finde nicht genug Platz für die Installation"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19225,8 +19296,7 @@ msgid ""
 "\n"
 msgstr ""
 "Sie haben verschiedene Varianten eingerichtet, sich mit dem\n"
-"Internet zu verbinden. Bitte wählen Sie, welche Verbindungsart\n"
-"ich versuchen soll.\n"
+"Internet zu verbinden. Bitte wählen Sie eine aus.\n"
 "\n"
 
 #: ../../diskdrake/interactive.pm:1
@@ -19240,9 +19310,8 @@ msgid ""
 "I have detected an ISDN PCI card, but I don't know its type. Please select a "
 "PCI card on the next screen."
 msgstr ""
-"Ich habe eine PCI-ISDN-Karte gefunden, \n"
-"kenne sie jedoch nicht. Bitte helfen Sie mir,\n"
-"indem Sie im nächsten Menü eine auswählen."
+"Ich habe eine PCI-ISDN-Karte gefunden, kenne sie jedoch nicht. Bitte helfen "
+"Sie mir, indem Sie im nächsten Menü eine auswählen."
 
 #: ../../any.pm:1
 #, c-format
@@ -19472,11 +19541,15 @@ msgid ""
 "into your system with the X Window System running and supports running\n"
 "several different X sessions on your local machine at the same time."
 msgstr ""
+"Der X11-Display-Manager erlaubt das grafische Anmelden\n"
+"an das System, sowie das gleichzeitige Ausführen mehrerer verschiedener \n"
+"lokaler X-Sitzungen."
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run the daily security checks."
 msgstr ""
+"Wenn auf \"Ja\" gesetzt, werden täglich Sicherheitschecks durchgeführt."
 
 #: ../../lang.pm:1
 #, c-format
@@ -19498,7 +19571,7 @@ msgstr "Dvorak (USA)"
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
 msgstr ""
-"Der physikalische Bus, an dem sich das Gerät befindet (etwa: PCI, USB, ...)"
+"der physikalische Bus, an dem sich das Gerät befindet (etwa: PCI, USB, ...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19539,7 +19612,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Game station"
-msgstr "Spiel-Station"
+msgstr "Spiele-Station"
 
 #: ../../share/compssUsers:999
 msgid "Amusement programs: arcade, boards, strategy, etc"
@@ -19547,7 +19620,7 @@ msgstr "Spiele: Arcade-, Brett-, Strategiespiele, usw."
 
 #: ../../share/compssUsers:999
 msgid "Multimedia station"
-msgstr "Multimediarechner"
+msgstr "Multimedia-Station"
 
 #: ../../share/compssUsers:999
 msgid "Sound and video playing/editing programs"
@@ -19556,7 +19629,7 @@ msgstr "Sound- und Video-Player/Editoren"
 #
 #: ../../share/compssUsers:999
 msgid "Internet station"
-msgstr "Internetrechner"
+msgstr "Internet-Station"
 
 #: ../../share/compssUsers:999
 msgid ""
@@ -19608,7 +19681,7 @@ msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
 msgstr ""
-"Das K Desktop Environment, die Standard-Arbeitsoberfläche mit einer Sammlung "
+"Das K Desktop Environment, die Standard-Arbeitsfläche mit einer Sammlung "
 "zugehöriger Programme"
 
 #: ../../share/compssUsers:999
@@ -19620,11 +19693,11 @@ msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr ""
-"Eine grafische Oberfläche mit anwenderfreundlichen Anwendungen und Werkzeugen"
+"Eine grafische Umgebung mit anwenderfreundlichen Anwendungen und Werkzeugen"
 
 #: ../../share/compssUsers:999
 msgid "Other Graphical Desktops"
-msgstr "Andere grafische Arbeitsoberflächen"
+msgstr "Andere grafische Arbeitsflächen"
 
 #: ../../share/compssUsers:999
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
@@ -19688,7 +19761,7 @@ msgstr "DNS/NIS"
 
 #: ../../share/compssUsers:999
 msgid "Domain Name and Network Information Server"
-msgstr "Domänen- (DNS) und Netzwerk-Informationsserver (NIS)"
+msgstr "Domänen- (DNS) und Netzwerk-Informations-Server (NIS)"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer server"
@@ -19703,6 +19776,75 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Programme um E-Mails und News zu lesen und zu versenden und um im Internet "
 "zu surfen"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Welche ISDN-Konfiguration bevorzugen Sie?\n"
+#~ "\n"
+#~ "* Die alte Konfiguration verwendet „isdn4net“. Sie \n"
+#~ "  enthält mächtigere Werkzeuge, ist jedoch komplizierter \n"
+#~ "  einzurichten und nicht voll standardkonform.\n"
+#~ "\n"
+#~ "* Die neue Konfiguration mit „isdn-light“ ist \n"
+#~ "  verständlicher und standardkonformer, sie enthält \n"
+#~ "  jedoch weniger Werkzeuge.\n"
+#~ "\n"
+#~ "Wir empfehlen die „isdn-light“ Variante.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Neue Konfiguration (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Alte Konfiguration (isdn4net)"
+
+#~ msgid ""
+#~ "\n"
+#~ "Welcome to the Printer Setup Wizard\n"
+#~ "\n"
+#~ "This wizard will help you to install your printer(s) connected to this "
+#~ "computer, connected directly to the network or to a remote Windows "
+#~ "machine.\n"
+#~ "\n"
+#~ "If you have printer(s) connected to this machine, Please plug it/them in "
+#~ "on this computer and turn it/them on so that it/they can be auto-"
+#~ "detected. Also your network printer(s) and your Windows machines must be "
+#~ "connected and turned on.\n"
+#~ "\n"
+#~ "Note that auto-detecting printers on the network takes longer than the "
+#~ "auto-detection of only the printers connected to this machine. So turn "
+#~ "off the auto-detection of network and/or Windows-hosted printers when you "
+#~ "don't need it.\n"
+#~ "\n"
+#~ " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not "
+#~ "want to set up your printer(s) now."
+#~ msgstr ""
+#~ "\n"
+#~ "Willkommen zum Druckerassistenten\n"
+#~ "\n"
+#~ "Dieser Assistent möchte Ihnen helfen, Ihre(n) lokalen und Netzwerkdrucker "
+#~ "sowie Drucker an Windows-Rechnern im lokalen Netz zu konfigurieren.\n"
+#~ "\n"
+#~ "Falls Sie Drucker haben, die direkt mit dem Rechner verbunden sind, "
+#~ "stellen Sie sicher, dass diese richtig angeschlossen und eingeschaltet "
+#~ "sind. Ebenso müssen die Netzwerkdrucker bzw. Windows-Rechner "
+#~ "eingeschaltet sein.\n"
+#~ "\n"
+#~ "Es sei angemerkt, dass die Erkennung von Netzwerkdruckern etwas länger "
+#~ "dauert, als das Finden von Druckern, die direkt an Ihrem Rechner hängen. "
+#~ "Sie sollten daher diesen Punkt ausschalten, sofern Sie nur direkt am "
+#~ "Rechner hängende Drucker verwenden wollen.\n"
+#~ "\n"
+#~ "Betätigen Sie die Schaltfläche „Weiter“, wenn Sie soweit sind, bzw. "
+#~ "„Abbrechen“, wenn Sie keine Drucker konfigurieren wollen."
 
 #~ msgid ""
 #~ "Congratulations, the network and Internet configuration is finished.\n"

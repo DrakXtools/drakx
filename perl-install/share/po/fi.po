@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - MDK Release 9.2\n"
-"POT-Creation-Date: 2003-05-20 12:43+0200\n"
-"PO-Revision-Date: 2003-05-18 21:31+0300\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
+"PO-Revision-Date: 2003-05-27 23:36+0300\n"
 "Last-Translator: Thomas Backlund <tmb@iki.fi>\n"
 "Language-Team: Finnish <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -352,6 +352,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malesia"
+
+#: ../../standalone/drakedm:1
+#, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Muutos on tehty, haluatko käynnistää dm palvelun uudelleen ?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1993,9 +1998,9 @@ msgid "El Salvador"
 msgstr "El Salvador"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "DVD"
-msgstr "DVD-ROM"
+msgstr "DVD"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -3355,6 +3360,11 @@ msgstr "Käytä X-Window-järjestelmää"
 msgid "hourly"
 msgstr "tunneittain"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Right Shift key"
+msgstr "Oikea Shift näppäin"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3408,6 +3418,44 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Asetetaan ohjelmia..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Tervetuloa Tulostimen asetusvelhoon\n"
+"\n"
+"Tämä velho auttaa sinua asentamaan paikallisesti liitetyn, suoraan verkkoon "
+"liitetyn tai Windows etäkoneeseen liitetyn tulostimen (tulostimia).\n"
+"\n"
+"Jos sinulla on paikallisesti liitetty tulostin (tulostimia), varmista että "
+"se/ne on kytketty päälle jotta se/ne voidaan tunnistaa automaattisesti. Myös "
+"verkkotulostin (tulostimet) ja Windows kone(et) pitää olla päällä.\n"
+"\n"
+"Huomaa että tulostimen tunnistaminen verkosta kestää kauemmin kuin "
+"paikallisten tulostimien tunnistus. Eli poista verkkotulostimien ja/tai "
+"Windows-tulostimien tunnistus, jos et tarvitse niitä.\n"
+"\n"
+"Paina \"Seuraava\" kun haluat jatkaa tai \"Peruuta\" jos et halua asettaa "
+"tulostinta (tulostimia) nyt."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3417,29 +3465,6 @@ msgstr "Tavallinen modeemiyhteys"
 #, c-format
 msgid "File Selection"
 msgstr "Tiedostojen valinta"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Mitä ISDN-asetuksia haluat käyttää?\n"
-"\n"
-"* Vanha asetusjärjestelmä käyttää isdn4net:iä. Se sisältää tehokkaat\n"
-"  työkalut, mutta on vaikea asettaa, eikä se ole standardi.\n"
-"\n"
-"* Uusi asetusjärjestelmä on helpompi ymmärtää, enemmän käytössä,\n"
-"  mutta se sisältää vähemmän työkaluja.\n"
-"\n"
-"Suositus on käyttää uutta ja kevyempää asetusjärjestelmää.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -4155,6 +4180,11 @@ msgstr "Kuvanlukija"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Varoitus: näytönohjaimesi testaaminen voi jumiuttaa tietokoneen"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Bad Ip"
+msgstr "Virheellinen lp"
 
 #: ../../any.pm:1
 #, c-format
@@ -5035,15 +5065,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Levykkeen muoto"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-"WP lipuke rekisterissä CD0 pakottaa kirjoitussuojan muistisivun tasolla, "
-"jolloin sallitaan prosessoria estää ytimen käyttöä"
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -5145,11 +5166,6 @@ msgstr "Liitetään osiota %s"
 #, c-format
 msgid "User name"
 msgstr "Käyttäjätunnus"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Uusi kokoonpano (isdn-kevyt)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5590,9 +5606,9 @@ msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Asetan komentotiedostot, asennan ohjelmistot, käynnistän palvelimet..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on parallel port #%s"
-msgstr "Tulostin rinnakkaisportissa \\#%s"
+msgstr "Tulostin rinnakkaisportissa #%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5630,9 +5646,9 @@ msgstr ""
 "Ota käyttöön / poista käytöstä libsafe jos se löytyy järjestelmästä."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer #%s"
-msgstr "USB-tulostin \\#%s"
+msgstr "USB-tulostin #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5894,6 +5910,11 @@ msgstr ""
 "\n"
 "Löytyy yksi tuntematon tulostin joka on kytketty suoraan koneeseesi"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Right Control key"
+msgstr "Oikea Control näppäin"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5929,11 +5950,6 @@ msgstr "Tsekin tasavalta"
 msgid "Egypt"
 msgstr "Egypti"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Vanha kokoonpano (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5962,14 +5978,13 @@ msgid "Suppress Temporary Files"
 msgstr "Poista väliaikaistiedostot"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
 "\n"
 msgstr ""
 "Onnittelut, verkko- ja Internetyhteyksien asetus on valmis.\n"
 "\n"
-"Asetukset otetaan nyt käyttöön järjestelmässä.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6799,6 +6814,11 @@ msgstr "Valitse poistettava profiili:"
 msgid "Local measure"
 msgstr "Paikallinen mitta"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr "Varoitus: IP osoite %s on yleensä varattu !"
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6829,13 +6849,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6894,45 +6914,6 @@ msgstr "Bangladesh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japani (kaapeli)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Tervetuloa Tulostimen asetusvelhoon\n"
-"\n"
-"Tämä velho auttaa sinua asentamaan paikallisesti liitetyn, suoraan verkkoon "
-"liitetyn tai Windows etäkoneeseen liitetyn tulostimen (tulostimia).\n"
-"\n"
-"Jos sinulla on paikallisesti liitetty tulostin (tulostimia), varmista että "
-"se/ne on kytketty päälle jotta se/ne voidaan tunnistaa automaattisesti. Myös "
-"verkkotulostin (tulostimet) ja Windows kone(et) pitää olla päällä.\n"
-"\n"
-"Huomaa että tulostimen tunnistaminen verkosta kestää kauemmin kuin "
-"paikallisten tulostimien tunnistus. Eli poista verkkotulostimien ja/tai "
-"Windows-tulostimien tunnistus, jos et tarvitse niitä.\n"
-"\n"
-"Paina \"Seuraava\" kun haluat jatkaa tai \"Peruuta\" jos et halua asettaa "
-"tulostinta (tulostimia) nyt."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7756,6 +7737,17 @@ msgstr ""
 #, c-format
 msgid "Printer default settings"
 msgstr "Tulostimen oletusasetuksia"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+"WP lipuke rekisterissä CR0 pakottaa kirjoitussuojan muistisivun tasolla, "
+"jolloin sallitaan prosessorin estää tarkistamattomat ytimen käyttäjämuistin  "
+"käytöt (eli tämä on virhesuoja)"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -8655,8 +8647,8 @@ msgid "Button `%s': %s"
 msgstr "Painike '%s': %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Odota hetki"
@@ -8873,6 +8865,11 @@ msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Vaihtoehtoisesti voit syöttää laitteen tai tiedoston nimen syöteriville"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Venäjä (Foneettinen)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -10075,6 +10072,11 @@ msgstr "prosessorin numero"
 msgid "Hardware clock set to GMT"
 msgstr "Laitteistokello asetettu GMT-aikaan"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Haluatko kokeilla asetuksia?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -10091,9 +10093,9 @@ msgid "Change Cd-Rom"
 msgstr "Vaihda CD-levyä"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "Mitä versiota XFree-palvelimesta haluat käyttää?"
+msgstr "Asetukset ovat tehty, haluatko ottaa ne käyttöön ?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10504,7 +10506,8 @@ msgstr "Poista asennettujen kirjasimien valinta"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Peruuta"
@@ -10639,6 +10642,11 @@ msgstr "US näppäimistö (kansainvälinen)"
 msgid "Not installed"
 msgstr "Ei asennettu"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Molemmat Alt näppäimet samanaikaisesti"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10727,11 +10735,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Verkkoon käyttäen FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Venäjä (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11485,6 +11488,11 @@ msgstr "Et voi poistaa tämän paketin valintaa. Paketti pitää päivittää."
 msgid "Loading from floppy"
 msgstr "Ladataan levykkeeltä"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11588,9 +11596,9 @@ msgid "Change type"
 msgstr "Muuta tyyppiä"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer #%s"
-msgstr ", USB tulostin \\#%s"
+msgstr ", USB tulostin #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -12315,7 +12323,7 @@ msgstr "Yhtäkään TV-korttia ei löydetty."
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Optiot"
@@ -12958,6 +12966,11 @@ msgstr "Loopback tiedostonimi: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS palvelimen osoite pitää olla muotoa 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Control key"
+msgstr "Vasen Control näppäin"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13797,6 +13810,11 @@ msgstr ""
 "\n"
 "Ota käyttöön / poista käytöstä msec turvallisuustarkistukset joka tunti."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "%s fonts conversion"
@@ -13806,11 +13824,6 @@ msgstr "%s kirjasinten muunnos"
 #, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Väylätyyppi johon hiiri on liitetty"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14237,6 +14250,11 @@ msgstr "\tVarmuuskopiot käyttävät: tar ja gzip\n"
 msgid "2 MB"
 msgstr "2 Mt"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Molemmat Control näppäimet samanaikaisesti"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14287,9 +14305,9 @@ msgstr ""
 "on 2.46 GHz) tai sinun pitää lisätä riittävästi '0' (nollia) loppuun."
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", multi-function device on parallel port #%s"
-msgstr ", monikäyttölaite rinnakkaisportissa \\#%s"
+msgstr ", monikäyttölaite rinnakkaisportissa #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -15082,6 +15100,11 @@ msgstr "poista"
 msgid "here if no."
 msgstr "tähän jos et ole."
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "help"
+msgstr "apua"
+
 #: ../../network/network.pm:1
 #, c-format
 msgid "DHCP host name"
@@ -15240,6 +15263,7 @@ msgstr "Filippiinit"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -15283,6 +15307,33 @@ msgstr ""
 "Lisää tähän CUPS-palvelimet, joiden tulostimia haluat käyttää. Sinun "
 "tarvitsee tehdä tämä vain mikäli palvelimet eivät lähetä tulostintietojaan "
 "paikallisverkkoon."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Tervetuloa Tulostimen asetusvelhoon\n"
+"\n"
+"Tämä velho auttaa sinua asentamaan paikallisesti liitetyn tulostimen "
+"(tulostimia).\n"
+"\n"
+"Jos sinulla on paikallisesti liitetty tulostin (tulostimia), varmista että "
+"se/ne on kytketty päälle jotta se/ne voidaan tunnistaa automaattisesti.\n"
+"\n"
+"Paina \"Seuraava\" kun haluat jatkaa tai \"Peruuta\" jos et halua asettaa "
+"tulostinta (tulostimia) nyt."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15736,8 +15787,9 @@ msgstr ", tulostin \"%s\" palvelimella \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Virhe"
@@ -16713,9 +16765,9 @@ msgid "Other MultiMedia devices"
 msgstr "Muu multimedialaite"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "burner"
-msgstr "Tulostin"
+msgstr "poltin"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -17406,6 +17458,11 @@ msgstr "Luo käynnistyslevyke"
 msgid "Solomon Islands"
 msgstr "Salomonsaaret"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Testaa hiiri"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17506,9 +17563,9 @@ msgid "(already added %s)"
 msgstr "(lisätty jo: %s)"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader installation in progress"
-msgstr "Käyttöjärjestelmän lataajan asennus"
+msgstr "Käyttöjärjestelmän lataajan asennus käynnissä"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17945,9 +18002,9 @@ msgid "Restore all backups"
 msgstr "Palauta kaikki varmuuskopiot"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " on parallel port #%s"
-msgstr " rinnakkaisliitännässä \\#%s"
+msgstr " rinnakkaisliitännässä #%s"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -18065,6 +18122,11 @@ msgstr "Useita"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Alt key"
+msgstr "Oikea Alt näppäin"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18638,6 +18700,11 @@ msgstr "Hyväksy käyttäjä"
 #, c-format
 msgid "Server"
 msgstr "Palvelin"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Shift key"
+msgstr "Vasen Shift näppäin"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19988,6 +20055,40 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen sekä Internetissä "
 "surffailuun"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Mitä ISDN-asetuksia haluat käyttää?\n"
+#~ "\n"
+#~ "* Vanha asetusjärjestelmä käyttää isdn4net:iä. Se sisältää tehokkaat\n"
+#~ "  työkalut, mutta on vaikea asettaa, eikä se ole standardi.\n"
+#~ "\n"
+#~ "* Uusi asetusjärjestelmä on helpompi ymmärtää, enemmän käytössä,\n"
+#~ "  mutta se sisältää vähemmän työkaluja.\n"
+#~ "\n"
+#~ "Suositus on käyttää uutta ja kevyempää asetusjärjestelmää.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Uusi kokoonpano (isdn-kevyt)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Vanha kokoonpano (isdn4net)"
+
+#~ msgid ""
+#~ "the WP flag in the CR0 register enforce write proctection at the memory "
+#~ "page level, thus enabling the processor to prevent kernel accesses)"
+#~ msgstr ""
+#~ "WP lipuke rekisterissä CD0 pakottaa kirjoitussuojan muistisivun tasolla, "
+#~ "jolloin sallitaan prosessoria estää ytimen käyttöä"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Internetyhteyden muodostus ja asetukset"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2002-10-10 3:34+0200\n"
 "Last-Translator: Raül Cambeiro <rulet@menta.net>\n"
 "Language-Team: Catalan <traddrake@softcatala.org>\n"
@@ -351,6 +351,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malàisia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Cal instal·lar el paquet %s. Voleu instal·lar-lo?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1690,11 +1695,6 @@ msgstr ""
 "sistema?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ", USB printer \\#%s"
-msgstr ", impressora USB \\/*%s"
-
 #
 #: ../../keyboard.pm:1
 #, c-format
@@ -1737,6 +1737,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1834,11 +1839,6 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Fes una nova còpia de seguretat abans de restaurar (només per les còpies "
 "incrementals.)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Impressora en el port paral·lel \\/*%s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -2001,11 +2001,6 @@ msgstr ""
 "Escolliu el disc dur que voleu buidar per instal·lar la nova partició Linux\n"
 "Mandrake. Aneu amb compte, se'n perdran totes les dades i no es podran\n"
 "recuperar!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid " on parallel port \\#%s"
-msgstr " en port paral·lel \\/*%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -3124,6 +3119,11 @@ msgstr "Executa la interfície gràfica en iniciar el sistema"
 msgid "hourly"
 msgstr "cada hora"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Tecla d'Alternativa Gràfica"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3172,6 +3172,46 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "S'estan configurant les aplicacions..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Benvingut a l'auxiliar de configuració de la impressora\n"
+"\n"
+"Aquest auxiliar us ajudarà a instal·lar les impressores connectades "
+"directament a l'ordinador, o a la xarxa, o a una màquina Windows remota.\n"
+"\n"
+"Si teniu impressores connectades a aquesta màquina, endolleu-les i engegueu-"
+"les per tal de poder-les detectar automàticament. Engegueu també les "
+"impressores de xarxa i les màquines Windows que tenen impressores "
+"connectades.\n"
+"\n"
+"Noteu que la detecció automàtica d'impressores de la xarxa local triga més "
+"que la detecció d'impressores connectades directament a la màquina. Seria "
+"millor que desactivéssiu la detecció automàtica d'impressores en xarxa o en "
+"màquina Windows si no la necessiteu.\n"
+"\n"
+"Feu clic a \"Següent\" quan estigueu preparat, o a \"Cancel·la\" si no voleu "
+"configurar ara les impressores."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3182,29 +3222,6 @@ msgstr "Connexió normal per mòdem"
 #, c-format
 msgid "File Selection"
 msgstr "Selecció de fitxers"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Quina configuració XDSI preferiu?\n"
-"\n"
-"* La configuració antiga usa isdn4net. Conté eines molt\n"
-"  potents, però és difícil de configurar, i no és estàndard.\n"
-"\n"
-"* La nova configuració és més fàcil d'entendre, més\n"
-"  estàndard, però té menys eines.\n"
-"\n"
-"Nosaltres recomanen la nova configuració senzilla (isdn-light).\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3924,6 +3941,11 @@ msgstr "Seleccioneu un escàner"
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "Avís: la comprovació d'aquesta targeta gràfica pot penjar-vos l'ordinador"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "E/S de la Targeta"
 
 #: ../../any.pm:1
 #, c-format
@@ -4804,13 +4826,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Formata"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #
 #: ../../standalone/drakfont:1
 #, c-format
@@ -4911,12 +4926,6 @@ msgstr "S'està formatant la partició %s"
 #, c-format
 msgid "User name"
 msgstr "Nom d'usuari"
-
-#
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Nova configuració (isdn-light)!"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5376,6 +5385,11 @@ msgstr ""
 "S'estan configurant les seqüències, instal·lant el programari, iniciant els "
 "servidors..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Impressora en el port paral·lel \\/*%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5407,6 +5421,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "Impressora USB \\/*%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5665,6 +5684,11 @@ msgstr ""
 "\n"
 "Hi ha una impressora desconeguda connectada directament a l'ordinador."
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Tecla d'Alternativa Gràfica"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5701,12 +5725,6 @@ msgstr "República Txeca"
 msgid "Egypt"
 msgstr "Egipte"
 
-#
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Configuració antiga (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5734,6 +5752,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Suprimeix els fitxers temporals"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Felicitats, la configuració de xarxa i Internet ha finalitzat.\n"
+"Ara s'aplicarà la configuració al sistema.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6583,6 +6611,11 @@ msgstr "Perfil a suprimir:"
 msgid "Local measure"
 msgstr "Fitxers locals"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6613,13 +6646,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benín"
+msgid "Uruguay"
+msgstr "Uruguai"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguai"
+msgid "Benin"
+msgstr "Benín"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6682,47 +6715,6 @@ msgstr "Bangla Desh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japó (cable)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Benvingut a l'auxiliar de configuració de la impressora\n"
-"\n"
-"Aquest auxiliar us ajudarà a instal·lar les impressores connectades "
-"directament a l'ordinador, o a la xarxa, o a una màquina Windows remota.\n"
-"\n"
-"Si teniu impressores connectades a aquesta màquina, endolleu-les i engegueu-"
-"les per tal de poder-les detectar automàticament. Engegueu també les "
-"impressores de xarxa i les màquines Windows que tenen impressores "
-"connectades.\n"
-"\n"
-"Noteu que la detecció automàtica d'impressores de la xarxa local triga més "
-"que la detecció d'impressores connectades directament a la màquina. Seria "
-"millor que desactivéssiu la detecció automàtica d'impressores en xarxa o en "
-"màquina Windows si no la necessiteu.\n"
-"\n"
-"Feu clic a \"Següent\" quan estigueu preparat, o a \"Cancel·la\" si no voleu "
-"configurar ara les impressores."
 
 #
 #: ../../standalone/drakfont:1
@@ -7524,6 +7516,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Selecció del model d'impressora"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8232,11 +8232,6 @@ msgstr ""
 "  El vostre informe no ha estat enviat.\n"
 "  Si us plau configureu el sendmail"
 
-#: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", dispositiu multifunció en port paral·lel \\/*%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8424,9 +8419,9 @@ msgstr "Informació: "
 msgid "Button `%s': %s"
 msgstr "Botó '%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Espereu si us plau"
@@ -8647,6 +8642,11 @@ msgid ""
 msgstr ""
 "Escolliu el port al qual està connectada la impressora o escriviu el nom de "
 "dispositiu/nom de fitxer en la línia d'entrada"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Rus (fonètic)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9893,6 +9893,11 @@ msgstr "el color de la barra de progrés"
 msgid "Hardware clock set to GMT"
 msgstr "El rellotge del vostre ordinador està regulat per GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Voleu comprovar la configuració?"
+
 #
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9910,6 +9915,11 @@ msgstr ""
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Canvieu el CD-ROM"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Quina configuració de l'XFree voleu tenir?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10330,7 +10340,8 @@ msgstr "Desselecciona les fonts instal·lades"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -10473,6 +10484,11 @@ msgstr "Teclat Estats Units (internacional)"
 msgid "Not installed"
 msgstr "No instal·lat"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Les dues tecles de Majúscules simultàniament"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10557,11 +10573,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Xarxa per FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Rus (Yawerty)"
 
 #
 #: ../../printer/printerdrake.pm:1
@@ -11333,6 +11344,11 @@ msgstr "No podeu desseleccionar aquest paquet; s'ha d'actualitzar"
 msgid "Loading from floppy"
 msgstr "S'està carregant des del disquet"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11439,6 +11455,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Canvia el tipus"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr ", impressora USB \\/*%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11707,16 +11728,16 @@ msgstr "En arrencar"
 msgid "Bus identification"
 msgstr "Identificació del bus"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Si us plau, feu primer una còpia de seguretat de les vostres dades"
-
 #
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "Letó"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Si us plau, feu primer una còpia de seguretat de les vostres dades"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12166,7 +12187,7 @@ msgstr "No s'ha detectat cap targeta de TV!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opcions"
@@ -12804,6 +12825,11 @@ msgstr "Nom del fitxer de loopback: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "L'adreça del servidor DNS ha d'estar en format 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Control Remot"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -13624,6 +13650,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13633,11 +13664,6 @@ msgstr "conversió de fonts pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Si us plau, seleccioneu el port sèrie a què està connectat el ratolí."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13999,6 +14025,11 @@ msgstr "\tLes còpies de seguretat utilitzen tar i gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Les dues tecles de Majúscules simultàniament"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14039,6 +14070,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", dispositiu multifunció en port paral·lel \\/*%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14718,17 +14754,6 @@ msgstr ""
 "apunteu-vos als fòrums de discussió que trobareu a les nostres pàgines de la "
 "\"Comunitat\""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Felicitats, la configuració de xarxa i Internet ha finalitzat.\n"
-"Ara s'aplicarà la configuració al sistema.\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14781,6 +14806,12 @@ msgstr "suprimeix"
 #, c-format
 msgid "here if no."
 msgstr "aquí si no."
+
+#
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Ajuda"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -14937,6 +14968,7 @@ msgstr "Filipines"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "D'acord"
@@ -14978,6 +15010,33 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Benvingut a l'auxiliar de configuració de la impressora\n"
+"\n"
+"Aquest auxiliar us ajudarà a instal·lar les impressores connectades a aquest "
+"ordinador.\n"
+"\n"
+"Si teniu impressores connectades a aquesta màquina, endolleu-les i engegueu-"
+"les per tal de poder-les detectar automàticament.\n"
+"\n"
+"Feu clic a \"Següent\" quan estigueu preparat, o a \"Cancel·la\" si no voleu "
+"configurar ara les impressores."
 
 #
 #: ../../standalone/drakbackup:1
@@ -15434,8 +15493,9 @@ msgstr ", impressora \"%s\", en el servidor \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Error"
@@ -16429,6 +16489,11 @@ msgstr "Voleu comprovar els blocs incorrectes?"
 msgid "Other MultiMedia devices"
 msgstr "Altres suports"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Impressora"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -17132,6 +17197,11 @@ msgstr "Crea un disc d'arrencada"
 msgid "Solomon Islands"
 msgstr "Illes Salomó"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Si us plau, comproveu el ratolí."
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17235,6 +17305,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(ja s'ha afegit %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Instal·lació del carregador de l'arrencada"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17691,6 +17766,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Restaura totes les còpies de seguretat"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr " en port paral·lel \\/*%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17811,6 +17891,11 @@ msgstr "Diversos"
 #, c-format
 msgid "Zip"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Tecla d'Alternativa Gràfica"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18038,11 +18123,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Connectat"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "Impressora USB \\/*%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18408,6 +18488,11 @@ msgstr "Accepta l'usuari"
 #, c-format
 msgid "Server"
 msgstr "Servidor"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Tecla de \"Windows\" Esquerra"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19744,6 +19829,35 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Conjunt d'eines per llegir i enviar correu i notícies (pine, mutt, tin...) i "
 "per navegar pel Web"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Quina configuració XDSI preferiu?\n"
+#~ "\n"
+#~ "* La configuració antiga usa isdn4net. Conté eines molt\n"
+#~ "  potents, però és difícil de configurar, i no és estàndard.\n"
+#~ "\n"
+#~ "* La nova configuració és més fàcil d'entendre, més\n"
+#~ "  estàndard, però té menys eines.\n"
+#~ "\n"
+#~ "Nosaltres recomanen la nova configuració senzilla (isdn-light).\n"
+
+#
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Nova configuració (isdn-light)!"
+
+#
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Configuració antiga (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Connexió i configuració d'Internet"

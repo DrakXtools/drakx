@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-bg\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-04-26 15:27+0300\n"
 "Last-Translator: Boyan Ivanov <boyan17@bulgaria.com>\n"
 "Language-Team: Bulgarian\n"
@@ -343,6 +343,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Малайзия"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Мрежата се нуждае от престартиране. Искате ли да я престартирам?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1573,11 +1578,6 @@ msgstr ""
 "случаи на срив. Искате ли да създам bootdisk за системата ви ?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB принтер \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1617,6 +1617,11 @@ msgstr "Джойстик"
 #, c-format
 msgid "El Salvador"
 msgstr "Ел Салвадор"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1710,11 +1715,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Пример на паралелен порт \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1873,11 +1873,6 @@ msgstr ""
 "инсталирам новия ви Mandrake Linux дял. Внимание, всички данни на него ще "
 "бъдат загубени\n"
 "и няма да могат да се възстановят."
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " на паралелен порт \\#%s"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -2915,6 +2910,11 @@ msgstr "Пусни X-Window системата при стартиране"
 msgid "hourly"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Десен Alt клавиш"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2961,6 +2961,38 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Настройка на приложения..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Добре дошли на Магьосника за конфигуриране на Принтер\n"
+"\n"
+"Тай ще ви помогне да инсталирате вашите принтери свързани към компютъра.\n"
+"\n"
+"Ако имате принтер(и) свързани към тази машина, включете ги, така че те да "
+"могат да се конфигурират автоматично.\n"
+"\n"
+"Цъкнете на \"Следващо\" когато сте готови, и на \"Прекъсва\" ако не искате "
+"да настройвате принтерите сега."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2970,29 +3002,6 @@ msgstr "Обикновена модемна връзка"
 #, c-format
 msgid "File Selection"
 msgstr "Избор на файл"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Коя ISDN настройка предпочитате ?\n"
-"\n"
-"* Старата настройка използва isdn4net. Съдържа мощни инструменти\n"
-"  но е капризна за настройка и не е стандартна.\n"
-"\n"
-"* Новата настройка е по-лесна за разбиране, по стандартна,\n"
-"  но с по-малко инструменти.\n"
-"\n"
-"Препоръчваме ви олекотената настройка.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3374,7 +3383,7 @@ msgid "Russian"
 msgstr "Руска"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "Йордания"
 
@@ -3648,6 +3657,11 @@ msgstr "Скенер"
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "Внимание: тестването на тази графична карта може да замрази компютъра ви"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "IO на картата"
 
 #: ../../any.pm:1
 #, c-format
@@ -4441,13 +4455,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Форматира флопи"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "Generic Printers"
@@ -4541,11 +4548,6 @@ msgstr "Форматира дял %s"
 #, c-format
 msgid "User name"
 msgstr "Потребителско име"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Нова настройка (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4967,6 +4969,11 @@ msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
 "Настройващи скриптове, инсталиране на софтуер, стартиране на сървъри..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Пример на паралелен порт #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4996,6 +5003,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB принтер #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5230,6 +5242,11 @@ msgstr ""
 "\n"
 "Има един неизвестен принтер включен към вашата систенма"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Десен Alt клавиш"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5265,11 +5282,6 @@ msgstr "Чешка Република"
 msgid "Egypt"
 msgstr "Египет"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Стара настройка (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5296,6 +5308,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Поздравления, мрежовате и Интернет настройката е завършена.\n"
+"\n"
+"Настройките ще бъдат приложени към системата ви.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6063,6 +6085,11 @@ msgstr "Профил за изтриване:"
 msgid "Local measure"
 msgstr "Локално измерване"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6093,13 +6120,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Бенин"
+msgid "Uruguay"
+msgstr "Уругвай"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Уругвай"
+msgid "Benin"
+msgstr "Бенин"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6155,29 +6182,6 @@ msgstr "Бангладеш"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (cable)"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -6947,6 +6951,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Избор модел на принтера"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7608,11 +7620,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", многофункционално устройство на на паралелен порт \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7793,9 +7800,9 @@ msgstr "Информация: "
 msgid "Button `%s': %s"
 msgstr "Бутон `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Моля изчакайте"
@@ -8001,6 +8008,11 @@ msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Алтернативно, вие може да зададете име на устройство/файл в изходния ред"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Руска (фонетична)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9151,6 +9163,11 @@ msgstr "номерът на процесора"
 msgid "Hardware clock set to GMT"
 msgstr "Хадруерният ви часовник е настроен по GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Искате ли да тествате настройките?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9165,6 +9182,11 @@ msgstr "Моля, изберете порт към който свързан принтера ви."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Смяна на CD-ROM"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Коя настройка на XFree искате да имате ?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9574,7 +9596,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Отказ"
@@ -9708,6 +9731,11 @@ msgstr "US клавиатура (международна)"
 msgid "Not installed"
 msgstr "Не е инсталиран"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Двата Shift клавиша едновременно"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9794,11 +9822,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Руска (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10497,6 +10520,11 @@ msgstr "Не можете да изключите този пакет. Той трябва да бъде обновен"
 msgid "Loading from floppy"
 msgstr "Зареждане от дискета"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -10593,6 +10621,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Промяни типа"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB принтер #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -10827,15 +10860,15 @@ msgstr "При зареждане"
 msgid "Bus identification"
 msgstr "Идентификация на шина"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Първо създайте backup на своите данни"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Ватикана"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Първо създайте backup на своите данни"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11243,7 +11276,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Опции"
@@ -11860,6 +11893,11 @@ msgstr "Име на loopback файла: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS сървъра трябва да бъде във формат 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Отдалечен контрол"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12613,6 +12651,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Уганда"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "%s fonts conversion"
@@ -12622,11 +12665,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Моля, изберете типа на шината към която е свързана мишката ви."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Уганда"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12954,6 +12992,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 МБ"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Двата Shift клавиша едновременно"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12992,6 +13035,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", многофункционално устройство на на паралелен порт #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -13643,17 +13691,6 @@ msgid ""
 "discussion forums on our \"Community\" webpages."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Поздравления, мрежовате и Интернет настройката е завършена.\n"
-"\n"
-"Настройките ще бъдат приложени към системата ви.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -13704,6 +13741,11 @@ msgstr "изтрива"
 #, c-format
 msgid "here if no."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Помощ"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -13862,6 +13904,7 @@ msgstr "Филипини"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -13902,6 +13945,32 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Добре дошли на Магьосника за конфигуриране на Принтер\n"
+"\n"
+"Тай ще ви помогне да инсталирате вашите принтери свързани към компютъра.\n"
+"\n"
+"Ако имате принтер(и) свързани към тази машина, включете ги, така че те да "
+"могат да се конфигурират автоматично.\n"
+"\n"
+"Цъкнете на \"Следващо\" когато сте готови, и на \"Прекъсва\" ако не искате "
+"да настройвате принтерите сега."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14349,8 +14418,9 @@ msgstr ", принтер \"%s\" на сървър \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Грешка"
@@ -15279,6 +15349,11 @@ msgstr "Проверка за лоши сектори ?"
 msgid "Other MultiMedia devices"
 msgstr "Друга мултимедийни устройства"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Принтер"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -15961,6 +16036,11 @@ msgstr "Създаване на boot-дискета"
 msgid "Solomon Islands"
 msgstr "Соломонови Острови"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Моля, пробвайте мишката си"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -16051,6 +16131,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(вече прибавих %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Инсталация на Bootloader"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -16447,6 +16532,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr ""
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " на паралелен порт #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -16561,6 +16651,11 @@ msgstr "Различни"
 #, c-format
 msgid "Zip"
 msgstr "Zip устройство"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Десен Alt клавиш"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16746,11 +16841,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Свързан"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB принтер \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17067,6 +17157,11 @@ msgstr "Приеми потребител"
 #, c-format
 msgid "Server"
 msgstr "Сървър"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Ляв \"Windows\" клавиш"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -18307,6 +18402,33 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Набор от инструменти за четене и изпращане на поща и новини (pine, mutt, "
 "tin..) и за обикаляне из Мрежата"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Коя ISDN настройка предпочитате ?\n"
+#~ "\n"
+#~ "* Старата настройка използва isdn4net. Съдържа мощни инструменти\n"
+#~ "  но е капризна за настройка и не е стандартна.\n"
+#~ "\n"
+#~ "* Новата настройка е по-лесна за разбиране, по стандартна,\n"
+#~ "  но с по-малко инструменти.\n"
+#~ "\n"
+#~ "Препоръчваме ви олекотената настройка.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Нова настройка (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Стара настройка (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Интернет връзка и настройка"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-03-12 21:32+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -348,6 +348,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malajzia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "A hálózatot újra kell indítani. Szeretné újraindítani?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1842,11 +1847,6 @@ msgstr ""
 "rendszerhiba után. Szeretne most indítólemezt készíteni a rendszerhez?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", %s. USB nyomtató"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1886,6 +1886,11 @@ msgstr "Botkormány"
 #, c-format
 msgid "El Salvador"
 msgstr "Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1978,11 +1983,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Új mentés készítése visszatöltés elõtt (csak inkrementális mentéshez)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Nyomtató ezen a párhuzamos porton: \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2146,11 +2146,6 @@ msgstr ""
 "Válassza ki azt a lemezt, amelyet törölni szeretne a Mandrake Linux\n"
 "telepítéséhez. Figyelem! A lemezen található adatok elvesznek, és\n"
 "késõbb nem nyerhetõk vissza!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " ezen a párhuzamos porton: \\#%s"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -3263,6 +3258,11 @@ msgstr "Rendszerindításkor induljon el a grafikus környezet"
 msgid "hourly"
 msgstr "óránként"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Jobb Alt gomb"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3317,6 +3317,47 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Alkalmazások beállítása..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Üdvözli a nyomtatóbeállító varázsló.\n"
+"\n"
+"A varázsló segítséget nyújt a számítógéphez csatlakoztatott, a hálózaton "
+"keresztül elérhetõ és a távoli windowsos gépekre csatlakoztatott nyomtatók "
+"telepítéséhez.\n"
+"\n"
+"Ha van nyomtató csatlakoztatva ehhez a számítógéphez, kapcsolja be azt, hogy "
+"felderíthetõ legyen a típusa. A hálózati nyomtatókat és az azokhoz "
+"kapcsolódó esetleges windowsos számítógépeket is be kell kapcsolni - a "
+"nyomtatókat a megfelelõ géphez csatlakoztatva.\n"
+"\n"
+"A helyi és a hálózati nyomtatók felderítése együttesen több idõt vesz "
+"igénybe, mint csak a helyi nyomtatóké, ezért ha nincs szükség a hálózati "
+"nyomtatókra, akkor kapcsolja ki a hálózati és/vagy a windowsos gépre "
+"csatlakozó nyomtatók felderítését.\n"
+"\n"
+"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
+"kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3326,29 +3367,6 @@ msgstr "Normál modemes kapcsolat"
 #, c-format
 msgid "File Selection"
 msgstr "Fájlkijelölés"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Milyen típusú ISDN-beállításokat szeretne használni?\n"
-"\n"
-"  - A régi típusú beállítás az isdn4net-re épül. Ez igen hatékony\n"
-"eszközöket tartalmaz, de beállítása nehézkes, és nem szabványos.\n"
-"\n"
-"  - Az új típusú beállítás könnyen átlátható, szabványos,\n"
-"de kevesebb segédeszköz tartozik hozzá.\n"
-"\n"
-"Ha nincs kizáró ok, akkor inkább az utóbbit válassza.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -4068,6 +4086,11 @@ msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "Figyelmeztetés: a grafikus kártya tesztelése esetleg a gép lefagyásához is "
 "vezethet."
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Kártya IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4951,13 +4974,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Floppyformátum"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -5058,11 +5074,6 @@ msgstr "A(z) %s partíció csatolása"
 #, c-format
 msgid "User name"
 msgstr "Felhasználónév"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Új beállítás (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5509,6 +5520,11 @@ msgstr "Líbia"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Beállítószkriptek, szoftvertelepítés, szerverek indítása..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Nyomtató ezen a párhuzamos porton: #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5543,6 +5559,11 @@ msgstr ""
 "Argumentumok: (arg)\n"
 "\n"
 "A libsafe bekapcsolása/kikapcsolása, amennyiben megtalálható a rendszeren."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "%s. USB nyomtató"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5810,6 +5831,11 @@ msgstr ""
 "\n"
 "Egy ismeretlen nyomtató közvetlenül csatlakozik a géphez"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Jobb Alt gomb"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5845,11 +5871,6 @@ msgstr "Cseh Köztársaság"
 msgid "Egypt"
 msgstr "Egyiptom"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Régi beállítás (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5875,6 +5896,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Átmeneti fájlok elhagyása"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Gratulálunk! A hálózat és az internet-hozzáférés beállítása befejezõdött.\n"
+"\n"
+"Most érvényesítem az új beállításokat.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6712,6 +6743,11 @@ msgstr "A törölni kívánt profil:"
 msgid "Local measure"
 msgstr "Helyi mérés"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6742,13 +6778,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6808,48 +6844,6 @@ msgstr "Banglades"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japán (kábel)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Üdvözli a nyomtatóbeállító varázsló.\n"
-"\n"
-"A varázsló segítséget nyújt a számítógéphez csatlakoztatott, a hálózaton "
-"keresztül elérhetõ és a távoli windowsos gépekre csatlakoztatott nyomtatók "
-"telepítéséhez.\n"
-"\n"
-"Ha van nyomtató csatlakoztatva ehhez a számítógéphez, kapcsolja be azt, hogy "
-"felderíthetõ legyen a típusa. A hálózati nyomtatókat és az azokhoz "
-"kapcsolódó esetleges windowsos számítógépeket is be kell kapcsolni - a "
-"nyomtatókat a megfelelõ géphez csatlakoztatva.\n"
-"\n"
-"A helyi és a hálózati nyomtatók felderítése együttesen több idõt vesz "
-"igénybe, mint csak a helyi nyomtatóké, ezért ha nincs szükség a hálózati "
-"nyomtatókra, akkor kapcsolja ki a hálózati és/vagy a windowsos gépre "
-"csatlakozó nyomtatók felderítését.\n"
-"\n"
-"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
-"kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7684,6 +7678,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Alapértelmezett nyomtatóbeállítások"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8402,11 +8404,6 @@ msgstr ""
 "  A jelentés nem lett elküldve.\n"
 "  Ellenõrizze a sendmail beállítását."
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", többfunkciós eszköz ezen a párhuzamos porton: \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8596,9 +8593,9 @@ msgstr "Információ: "
 msgid "Button `%s': %s"
 msgstr "\"%s\" gomb: %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Egy kis türelmet kérek"
@@ -8808,6 +8805,11 @@ msgstr "Elsõdleges DNS-kiszolgáló (nem kötelezõ)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr "Ehelyett megadhat egy eszköznevet illetve fájlnevet a beviteli sorban"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "orosz (fonetikus)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -10020,6 +10022,11 @@ msgstr "A processzor száma"
 msgid "Hardware clock set to GMT"
 msgstr "A gép órája GMT-idõt mutat"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Ki szeretné próbálni a beállításokat?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -10034,6 +10041,11 @@ msgstr "Válassza ki, melyik portra van csatlakoztatva a nyomtató."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Cserélje ki a CD-t"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Melyik XFree-t szeretné használni?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10442,7 +10454,8 @@ msgstr "Telepített betûtípusok kijelölésének törlése"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Mégsem"
@@ -10574,6 +10587,11 @@ msgstr "USA-billentyûzet (nemzetközi)"
 msgid "Not installed"
 msgstr "Nincs telepítve"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "A két Shift gomb egyszerre"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10662,11 +10680,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Hálózat FTP-vel\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "orosz (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11429,6 +11442,11 @@ msgstr ""
 msgid "Loading from floppy"
 msgstr "Betöltés floppyról"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11532,6 +11550,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "A típus megváltoztatása"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", %s. USB nyomtató"
 
 #: ../../any.pm:1
 #, c-format
@@ -11798,15 +11821,15 @@ msgstr "Indításkor"
 msgid "Bus identification"
 msgstr "Busz-azonosítás"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Elõször készítsen biztonsági mentést az adatokról"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikán"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Elõször készítsen biztonsági mentést az adatokról"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12257,7 +12280,7 @@ msgstr "Tévékártya nem található."
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Beállítások"
@@ -12902,6 +12925,11 @@ msgstr "A loopback fájl neve: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "A DNS-kiszolgáló címének formátuma 1.2.3.4 legyen"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Távirányítás"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13742,6 +13770,11 @@ msgstr ""
 "\n"
 "Az msec óránkénti biztonsági ellenõrzéseinek bekapcsolása/kikapcsolása."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13751,11 +13784,6 @@ msgstr "pfm betûtípusok konvertálása"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Az egér által használt busz típusa"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14181,6 +14209,11 @@ msgstr "\ttar és gzip használata a mentésekhez\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "A két Shift gomb egyszerre"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14230,6 +14263,11 @@ msgid ""
 msgstr ""
 "A frekvencia k, M vagy G utótagot kaphat (például a \"2,46G\" 2,46 GHz-es "
 "frekvenciát jelöl), vagy ehelyett ki lehet írni a nullákat."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", többfunkciós eszköz ezen a párhuzamos porton: #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14960,17 +14998,6 @@ msgstr ""
 "fejlesztéséhez - csatlakozzon a közösségi (\"Community\") weblapjainkon "
 "található fórumokhoz"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Gratulálunk! A hálózat és az internet-hozzáférés beállítása befejezõdött.\n"
-"\n"
-"Most érvényesítem az új beállításokat.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -15040,6 +15067,11 @@ msgstr "törlés"
 #, c-format
 msgid "here if no."
 msgstr "ide, ha nem"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Segítség"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -15199,6 +15231,7 @@ msgstr "Fülöp-szigetek"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -15242,6 +15275,33 @@ msgstr ""
 "Adja meg azon CUPS-kiszolgálók azonosítóját, amelyek nyomtatóit használni "
 "szeretné. Ezt csak akkor kell megtennie, ha a kiszolgálók nem tudatják a "
 "helyi hálózat gépeivel a nyomtatóinformációikat."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Üdvözli a nyomtatóbeállító varázsló.\n"
+"\n"
+"A varázsló segítséget nyújt a számítógéphez csatlakoztatott nyomtatók "
+"telepítéséhez.\n"
+"\n"
+"Ha van nyomtató csatlakoztatva ehhez a számítógéphez, kapcsolja be azt, hogy "
+"felderíthetõ legyen a típusa.\n"
+"\n"
+"A folytatáshoz kattintson a \"Következõ\" gombra. Ha viszont most nem "
+"kívánja telepíteni a nyomtatókat, akkor a \"Mégsem\" gombra kattintson."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15700,8 +15760,9 @@ msgstr ", nyomtató: \"%s\" ezen a kiszolgálón: \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Hiba"
@@ -16674,6 +16735,11 @@ msgstr "Ellenõrizzem a rossz blokkokat?"
 msgid "Other MultiMedia devices"
 msgstr "Egyéb multimédia-eszközök"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Nyomtató"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17368,6 +17434,11 @@ msgstr "Indítólemez készítése"
 msgid "Solomon Islands"
 msgstr "Salamon-szigetek"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Az egér letesztelése"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17468,6 +17539,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(már fel van véve: %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "A rendszerindító program telepítése"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17909,6 +17985,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Az összes mentés visszatöltése"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " ezen a párhuzamos porton: #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -18025,6 +18106,11 @@ msgstr "Vegyes"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Jobb Alt gomb"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18250,11 +18336,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Csatlakozva"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "%s. USB nyomtató"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18602,6 +18683,11 @@ msgstr "Név elfogadása"
 #, c-format
 msgid "Server"
 msgstr "Kiszolgáló"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Bal \"Windows\" gomb"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19954,6 +20040,33 @@ msgstr "NFS-, SMB-, proxy- és SSH-kiszolgáló"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Milyen típusú ISDN-beállításokat szeretne használni?\n"
+#~ "\n"
+#~ "  - A régi típusú beállítás az isdn4net-re épül. Ez igen hatékony\n"
+#~ "eszközöket tartalmaz, de beállítása nehézkes, és nem szabványos.\n"
+#~ "\n"
+#~ "  - Az új típusú beállítás könnyen átlátható, szabványos,\n"
+#~ "de kevesebb segédeszköz tartozik hozzá.\n"
+#~ "\n"
+#~ "Ha nincs kizáró ok, akkor inkább az utóbbit válassza.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Új beállítás (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Régi beállítás (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Az internetkapcsolat beállítása"

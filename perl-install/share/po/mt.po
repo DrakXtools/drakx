@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-mt\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2002-09-12 17:24CET\n"
 "Last-Translator: Ramon Casha <ramon.casha@linux.org.mt>\n"
 "Language-Team: Maltese <mt@li.org>\n"
@@ -342,6 +342,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malażja"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Irid jiġi nstallat il-pakkett %s. Tridni ninstallah?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1528,11 +1533,6 @@ msgstr ""
 "Tixtieq toħloq bootdisk għas-sistema tiegħek?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ", USB printer \\#%s"
-msgstr ", printer USB \\/*%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1572,6 +1572,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1666,11 +1671,6 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Agħmel kopja tas-sigurtà ġdid qabel tirrestawra (għal kopji tas-sigurtà "
 "inkrementali biss)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Printer fuq port parallel \\/*%s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1828,11 +1828,6 @@ msgstr ""
 "Agħżel liema ħard disk trid tħassar biex tinstalla l-partizzjonijiet tal-\n"
 "Mandrake Linux fuqha. Oqgħod attent, l-informazzjoni kollha fuq din id-\n"
 "diska jintilef u ma jkunx jista' jinġab lura!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid " on parallel port \\#%s"
-msgstr " fuq port parallel \\/*%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2876,6 +2871,11 @@ msgstr "Ħaddem X-Windows malli titla'"
 msgid "hourly"
 msgstr "kull siegħa"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Buttuna Alt leminija"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2922,6 +2922,46 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Qed nikkonfigura programmi..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Merħba għas-saħħar tal-printers\n"
+"\n"
+"Dan is-saħħar jgħinek tinstalla printer(s) imqabbda direttament ma' dan il-"
+"kompjuter, imqabbda direttament man-network, jew imqabbda ma' kompjuters "
+"Windows remoti.\n"
+"\n"
+"Jekk għandek printer(s) imqabbad direttament ma' dan il-kompjuter, jekk "
+"jogħġbok ixgħelu issa u ara li mqabbad sew, ħalli dan jingħaraf "
+"awtomatikament. Bl-istess mod, jekk għandek printers man-network jew fuq "
+"kompjuters bil-Windows, dawn iridu jkunu mqabbdin u mixgħula.\n"
+"\n"
+"Innota li l-għarfien awtomatiku ta' printers fuq in-network idum iżjed mill-"
+"għarfien ta' printers imqabbda lokalment, għalhekk itfi l-għarfien "
+"awtomatiku ta' printers fuq in-network jew fuq Windows jekk taf li m'hemmx.\n"
+"\n"
+"Agħfas \"Li jmiss\" meta tlesti, jew \"Ikkanċella\" jekk ma tridx tissettja "
+"printers għalissa."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2931,30 +2971,6 @@ msgstr "Konnessjoni b'modem normali"
 #, c-format
 msgid "File Selection"
 msgstr "Għażla ta' fajls"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"X'tip ta' konfigurazzjoni ISDN trid?\n"
-"\n"
-"* Il-konfigurazzjoni antika tuża isdn4net. Fiha għodda\n"
-"b'saħħithom imma tista' tkun diffiċli biex tissettjaha\n"
-"u m'hix standard.\n"
-"\n"
-"* Il-konfigurazzjoni l-ġdida hija iżjed faċli tifhimha,\n"
-"iżjed standard, imma fiha inqas għodda.\n"
-"\n"
-"Aħna nirrakkomandaw il-konfigurazzjoni ġdida.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3646,6 +3662,11 @@ msgstr "Agħżel skaner"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Twissija: it-test ta' din il-kard grafika jista' jwaħħal il-kompjuter"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "IO tal-kard"
 
 #: ../../any.pm:1
 #, c-format
@@ -4450,13 +4471,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Formattja"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4555,11 +4569,6 @@ msgstr "Qed nifformattja partizzjoni %s"
 #, c-format
 msgid "User name"
 msgstr "Isem tal-user"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Konfigurazzjoni ġdida (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4993,6 +5002,11 @@ msgstr "Liberja"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Qed nikkonfigura scripts, ninstalla softwer u ntella' servers..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Printer fuq port parallel \\/*%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5024,6 +5038,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "Printer USB \\/*%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5277,6 +5296,11 @@ msgstr ""
 "\n"
 "Hemm printer wieħed mhux magħruf imqabbad direttament mal-kompjuter"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Buttuna Alt leminija"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5312,11 +5336,6 @@ msgstr "Repubblika Ċeka"
 msgid "Egypt"
 msgstr "Eġittu"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Konfigurazzjoni antika (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5343,6 +5362,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Issopprimi fajls temporanji"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Prosit! Il-konfigurazzjoni tan-network u l-internet lesti.\n"
+"Din il-konfigurazzjoni issa se tiġi applikata għas-sistema.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6165,6 +6194,11 @@ msgstr "Profil xi tħassar:"
 msgid "Local measure"
 msgstr "Fajls lokali"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6191,13 +6225,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Urugwaj"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Urugwaj"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6258,47 +6292,6 @@ msgstr "Bangladexx"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Ġappun (cable)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Merħba għas-saħħar tal-printers\n"
-"\n"
-"Dan is-saħħar jgħinek tinstalla printer(s) imqabbda direttament ma' dan il-"
-"kompjuter, imqabbda direttament man-network, jew imqabbda ma' kompjuters "
-"Windows remoti.\n"
-"\n"
-"Jekk għandek printer(s) imqabbad direttament ma' dan il-kompjuter, jekk "
-"jogħġbok ixgħelu issa u ara li mqabbad sew, ħalli dan jingħaraf "
-"awtomatikament. Bl-istess mod, jekk għandek printers man-network jew fuq "
-"kompjuters bil-Windows, dawn iridu jkunu mqabbdin u mixgħula.\n"
-"\n"
-"Innota li l-għarfien awtomatiku ta' printers fuq in-network idum iżjed mill-"
-"għarfien ta' printers imqabbda lokalment, għalhekk itfi l-għarfien "
-"awtomatiku ta' printers fuq in-network jew fuq Windows jekk taf li m'hemmx.\n"
-"\n"
-"Agħfas \"Li jmiss\" meta tlesti, jew \"Ikkanċella\" jekk ma tridx tissettja "
-"printers għalissa."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7088,6 +7081,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Għażla tal-mudell tal-printer"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7781,11 +7782,6 @@ msgstr ""
 "  ir-rapport ma ntbagħatx.\n"
 "  Jekk jogħġbok ikkonfigura s-sendmail"
 
-#: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", apparat multi-funzjoni fuq port parallel \\/*%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7965,9 +7961,9 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Buttuna \"%s\": %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Stenna ftit"
@@ -8179,6 +8175,11 @@ msgid ""
 msgstr ""
 "Jekk jogħġbok agħżel il-port fejn huwa mqabbad il-printer, jew agħżel isem "
 "ta' port/fajl fil-linja ta' kmand."
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Russu (fonetiku)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9372,6 +9373,11 @@ msgstr "kulur tal-kaxxa tal-progress"
 msgid "Hardware clock set to GMT"
 msgstr "Arloġġ tal-kompjuter issettjat GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Trid tittestja din il-konfigurazzjoni?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9386,6 +9392,11 @@ msgstr "Jekk jogħġbok agħżel il-port ma' fejn hu mqabbad il-printer."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Ibdel is-CD"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Liema konfigurazzjoni ta' XFree trid li jkollok?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9791,7 +9802,8 @@ msgstr "Neħħi l-marka minn fonts installati"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Ikkanċella"
@@ -9925,6 +9937,11 @@ msgstr "Tastiera US (internazzjonali)"
 msgid "Not installed"
 msgstr "Mhux installat"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Iż-żewġ buttuni \"shift\" flimkien"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10009,11 +10026,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Network bl-FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Russu (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10752,6 +10764,11 @@ msgstr "Ma tistax tneħħi l-għażla minn dan il-pakkett. Irid jiġi aġġornat
 msgid "Loading from floppy"
 msgstr "Qed tinqara' l-flopi"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -10857,6 +10874,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Ibdel tip"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr ", printer USB \\/*%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11120,15 +11142,15 @@ msgstr "Malli tixgħel"
 msgid "Bus identification"
 msgstr "Identifikazzjoni tal-bus"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Ħu kopja tad-data kollha qabel tkompli"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "Latvjan"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Ħu kopja tad-data kollha qabel tkompli"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11570,7 +11592,7 @@ msgstr "Ebda kard TV ma nstabet!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Għażliet"
@@ -12185,6 +12207,11 @@ msgstr "Isem ta' fajl għal loopback: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "L-indirizz tas-server DNS irid ikun fil-format 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Kontroll remot"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -12976,6 +13003,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -12985,11 +13017,6 @@ msgstr "Konverżjoni ta' fonts pfm"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Jekk jogħġbok agħżel il-port serjali li miegħu hemm imqabbad il-maws."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13344,6 +13371,11 @@ msgstr "\tKopji tas-sigurtà jużaw tar u gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Iż-żewġ buttuni \"shift\" flimkien"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -13382,6 +13414,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", apparat multi-funzjoni fuq port parallel \\/*%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14034,17 +14071,6 @@ msgstr ""
 "Linux, ingħaqad mal-forums ta' diskussjonijiet li ssib fuq il-paġni tagħna "
 "tal-komunità."
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Prosit! Il-konfigurazzjoni tan-network u l-internet lesti.\n"
-"Din il-konfigurazzjoni issa se tiġi applikata għas-sistema.\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14094,6 +14120,11 @@ msgstr "ħassar"
 #, c-format
 msgid "here if no."
 msgstr "Klikkja hawn jekk m'intix ċert."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Għajnuna"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -14249,6 +14280,7 @@ msgstr "Filippini"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -14289,6 +14321,39 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Merħba għas-saħħar tal-printers\n"
+"\n"
+"Dan is-saħħar jgħinek tinstalla printer(s) imqabbda direttament ma' dan il-"
+"kompjuter jew imqabbda direttament man-network.\n"
+"\n"
+"Jekk għandek printer(s) imqabbad direttament ma' dan il-kompjuter, jekk "
+"jogħġbok ixgħelu issa u ara li mqabbad sew, ħalli dan jingħaraf "
+"awtomatikament. Bl-istess mod, jekk għandek printers man-network,  dawn "
+"iridu jkunu mqabbdin u mixgħula.\n"
+"\n"
+"Innota li l-għarfien awtomatiku ta' printers fuq in-network idum iżjed mill-"
+"għarfien ta' printers imqabbda lokalment, għalhekk itfi l-għarfien "
+"awtomatiku ta' printers fuq in-network jekk m'hemmx.\n"
+"\n"
+"Agħfas \"Li jmiss\" meta tlesti, jew \"Ikkanċella\" jekk ma tridx tissettja "
+"printers għalissa."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14731,8 +14796,9 @@ msgstr ", printer \"%s\" fuq server \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Problema"
@@ -15684,6 +15750,11 @@ msgstr "Trid tiċċekkja għal blokki ħżiena?"
 msgid "Other MultiMedia devices"
 msgstr "Media oħrajn"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printer"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -16375,6 +16446,11 @@ msgstr "Oħloq \"boot disk\""
 msgid "Solomon Islands"
 msgstr "Gżejjer Solomon"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Jekk jogħġbok ittestja l-maws"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -16474,6 +16550,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s diġà miżjud)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Installazzjoni tal-bootloader"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -16909,6 +16990,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Irrestawra l-kopji tas-sigurtà kollha"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr " fuq port parallel \\/*%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17025,6 +17111,11 @@ msgstr "Varji"
 #, c-format
 msgid "Zip"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Buttuna Alt leminija"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17244,11 +17335,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Imqabbad"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "Printer USB \\/*%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17597,6 +17683,11 @@ msgstr "Aċċetta user"
 #, c-format
 msgid "Server"
 msgstr "Server"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Buttuna \"Windows\" tax-xellug"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -18852,6 +18943,34 @@ msgstr "Servers NFS, SMB, Proxy, ssh"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Sett għodda biex taqra u tibgħat imejl u \"news\", u biex tibbrawżja l-web"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "X'tip ta' konfigurazzjoni ISDN trid?\n"
+#~ "\n"
+#~ "* Il-konfigurazzjoni antika tuża isdn4net. Fiha għodda\n"
+#~ "b'saħħithom imma tista' tkun diffiċli biex tissettjaha\n"
+#~ "u m'hix standard.\n"
+#~ "\n"
+#~ "* Il-konfigurazzjoni l-ġdida hija iżjed faċli tifhimha,\n"
+#~ "iżjed standard, imma fiha inqas għodda.\n"
+#~ "\n"
+#~ "Aħna nirrakkomandaw il-konfigurazzjoni ġdida.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Konfigurazzjoni ġdida (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Konfigurazzjoni antika (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Konfigurazzjoni u konnessjoni tal-internet"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2002-09-27 17:45+0200\n"
 "Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
 "Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
@@ -339,6 +339,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malaizija"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Nepiecieðams instalçt pakotni %s. Vai vçlaties to instalçt?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1410,11 +1415,6 @@ msgstr ""
 "izveidot jûsu sistçmai pielâgotu sâknçðanas disketi?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB printeris \\/*%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1454,6 +1454,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "Salvadora"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1548,11 +1553,6 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 "Veiciet jaunu dublçðanu pirms atjaunoðanas (tikai papildinoðâm rezerves "
 "kopijâm.)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Printeris uz paralçlâ porta \\/*%s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1710,11 +1710,6 @@ msgstr ""
 "Norâdiet cieto disku, ko vçlaties izdzçst, lai izveidotu jaunu\n"
 "Mandrake Linux sadaïu. Esiet uzmanîgi, jo visi diskâ esoðie dati\n"
 "pazudîs un nebûs atjaunojami."
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid " on parallel port \\#%s"
-msgstr " uz paralelâ porta \\/*%s"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -2714,6 +2709,11 @@ msgstr "Palaist X-Window sistçmu sâknçðanas laikâ"
 msgid "hourly"
 msgstr "ik stundu"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Labais Alt taustiòs"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2760,6 +2760,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Konfigurçju aplikâcijas..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2769,20 +2791,6 @@ msgstr "Parasts modçma savienojums"
 #, c-format
 msgid "File Selection"
 msgstr "Failu izvçle"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3448,6 +3456,11 @@ msgstr "Izvçlieties skeneri"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Brîdinâjums: ðîs grafiskâs kartes izmçìinâðana var uzkârt datoru"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Kartes IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4244,13 +4257,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Formatçt"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4348,11 +4354,6 @@ msgstr "Formatçju sadaïu %s"
 #, c-format
 msgid "User name"
 msgstr "Lietotâja vârds"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Jauna konfigurâcija (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4780,6 +4781,11 @@ msgstr "Libçrija"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Tiek konfigurçti skripti, instalçtas programmas, startçti serveri..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Printeris uz paralçlâ porta \\/*%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4811,6 +4817,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "USB printeris \\/*%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5046,6 +5057,11 @@ msgstr ""
 "\n"
 "Jûsu sistçmai ir tieði pievienots viens nezinâms printeris"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Labais Alt taustiòs"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5081,11 +5097,6 @@ msgstr "Èehijas Republika"
 msgid "Egypt"
 msgstr "Çìipte"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Veca konfigurâcija (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5112,6 +5123,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Apsveicu, tîkla un Internet konfigurçðana ir pabeigta.\n"
+"Konfigurâcija tagad tiks lietota uz Jûsu datora.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5857,6 +5878,11 @@ msgstr "Dzçðamais profils:"
 msgid "Local measure"
 msgstr "Lokâlie faili"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5887,13 +5913,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benina"
+msgid "Uruguay"
+msgstr "Urugvaja"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Urugvaja"
+msgid "Benin"
+msgstr "Benina"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5949,29 +5975,6 @@ msgstr "Bangladeða"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japan (cable)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6727,6 +6730,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Printera modeïa izvçle"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7406,11 +7417,6 @@ msgstr ""
 " Jûsu ziòojuma vçstule netika nosûtîta.\n"
 " Lûdzu, nokonfigurçjiet sendmail"
 
-#: ../../printer/main.pm:1
-#, fuzzy, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", daudzfunkcionâla ierîce pie paralçlâ porta \\/*%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7588,9 +7594,9 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Poga `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Lûdzu uzgaidiet"
@@ -7803,6 +7809,11 @@ msgid ""
 msgstr ""
 "Lûdzu, izvçlieties portu, pie kura Jûsu printeris ir pieslçgts, vai ievadiet "
 "ierîces/faila vârdu ievades rindâ"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Krievijas (fonçtiskâ)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8939,6 +8950,11 @@ msgstr "ierîces pârdevçja nosaukums"
 msgid "Hardware clock set to GMT"
 msgstr "Datora pulkstenis iestatîts râdît GMT laiku"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Vai vçlaties izmçìinât ðo konfigurâciju?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -8953,6 +8969,11 @@ msgstr "Lûdzu norâdiet portu, kuram ir pievienots printeris."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Nomainiet Cd-Rom"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Kuru XFree konfigurâciju izvçlaties?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9356,7 +9377,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Atcelt"
@@ -9489,6 +9511,11 @@ msgstr "ASV tastatûra (starptautiskâ)"
 msgid "Not installed"
 msgstr "Nav instalçts"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Abi Shift taustiòi vienlaicîgi"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9570,11 +9597,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Tîkls ar FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Krievijas (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10249,6 +10271,11 @@ msgstr "Jûs nevarat atteikties no ðîs pakotnes. To ir nepiecieðams uzlabot"
 msgid "Loading from floppy"
 msgstr "Ielâdçju no disketes"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -10346,6 +10373,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Mainît tipu"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ", USB printer #%s"
+msgstr ", USB printeris \\/*%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -10573,15 +10605,15 @@ msgstr "Sâknçðanas laikâ"
 msgid "Bus identification"
 msgstr "Kopnes identifikâcija"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Vispirms izveidojiet datu rezerves kopiju"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "Latvieðu"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Vispirms izveidojiet datu rezerves kopiju"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10975,7 +11007,7 @@ msgstr "Nav atrasta TV karte!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opcijas"
@@ -11586,6 +11618,11 @@ msgstr "Loopback faila vârds: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS servera adreses formâtam jâbût 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Attâlinâta kontrole"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -12347,6 +12384,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -12356,11 +12398,6 @@ msgstr "pfm fontu konvertçðana"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Lûdzu izvçlieties, ar kuru seriâlo portu ir saslçgta pele."
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12690,6 +12727,11 @@ msgstr "\tDublçðanai izmantot tar un gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Abi Shift taustiòi vienlaicîgi"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12728,6 +12770,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", daudzfunkcionâla ierîce pie paralçlâ porta \\/*%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -13379,17 +13426,6 @@ msgstr ""
 "Lai dalîtos ar pieredzi un palîdzçtu veidot Linux rîkus, pievienojieties "
 "diskusiju forumiem, kurus varat atrast \"Kopienas\" web lapâs."
 
-#: ../../network/netconnect.pm:1
-#, fuzzy, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Apsveicu, tîkla un Internet konfigurçðana ir pabeigta.\n"
-"Konfigurâcija tagad tiks lietota uz Jûsu datora.\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -13439,6 +13475,11 @@ msgstr "dzçst"
 #, c-format
 msgid "here if no."
 msgstr "ðeit, ja nç."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Palîdzîba"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -13594,6 +13635,7 @@ msgstr "Filipînas"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Labi"
@@ -13633,6 +13675,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -14078,8 +14136,9 @@ msgstr ", printeris \"%s\" pie servera \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Kïûda"
@@ -15013,6 +15072,11 @@ msgstr "Pârbaudît sliktos blokus?"
 msgid "Other MultiMedia devices"
 msgstr "Cits mçdijs"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printeris"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -15670,6 +15734,11 @@ msgstr "Sistçmdisketes radîðana"
 msgid "Solomon Islands"
 msgstr "Zâlamana salas"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Lûdzu notestçjiet peli"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -15757,6 +15826,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(jau pievienots %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Sâknçtâja instalçðana"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -16156,6 +16230,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Atjaunot visas rezerves kopijas"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid " on parallel port #%s"
+msgstr " uz paralelâ porta \\/*%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -16272,6 +16351,11 @@ msgstr "Daþâdi"
 #, c-format
 msgid "Zip"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Labais Alt taustiòs"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16473,11 +16557,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Savienots"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "USB printeris \\/*%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16755,6 +16834,11 @@ msgstr "Apstiprinât lietotâju"
 #, c-format
 msgid "Server"
 msgstr "Serveris"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Kreisais \"Windows\" taustiòð"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -17992,6 +18076,12 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Rîku komplekts, lai lasîtu un sûtîtu pastu vai jaunumus (pine, mutt, tin..) "
 "un pârlûkotu Tîmekli"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Jauna konfigurâcija (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Veca konfigurâcija (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Interneta savienojums un konfigurâcija"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2001-09-10 14:24GMT+7\n"
 "Last-Translator: Wachara Chinsettawong <wachara@yahoo.com>\n"
 "Language-Team: Thai <th@li.org>\n"
@@ -327,6 +327,13 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr ""
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr ""
+"แพกเกจนี้จำเป็นต้องถูก upgrade\n"
+"คุณแน่ใจว่าจะไม่เลือกมันหรือ"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1486,11 +1493,6 @@ msgstr ""
 "คืนระบบจากความผิดพลาดได้ด้วย คุณต้องการจะสร้างแผ่นบูตหรือไม่? \n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ""
-
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
 msgid "Latvian"
@@ -1529,6 +1531,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
 msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
@@ -1619,11 +1626,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "ชื่อของเครื่องพิมพ์"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1779,11 +1781,6 @@ msgstr ""
 "เลือก harddisk ที่ต้องการลบและลง Mandrake Linux\n"
 "ควรระวังเป็นอย่างมากดพราะว่าข้อมูลทุกอย่างจะถูกลบ\n"
 "และจะไม่สามารถกู้คืนได้"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2664,6 +2661,11 @@ msgstr "รัน X-Window เมื่อเริ่มทำงาน"
 msgid "hourly"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Right Shift key"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2710,6 +2712,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "การคอนฟิกเครื่องพิมพ์"
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2719,20 +2743,6 @@ msgstr "การติดต่อโดยใช้ Modem ธรรมดา"
 #, fuzzy, c-format
 msgid "File Selection"
 msgstr "เลือกกลุ่มแพ็คเก็จ"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3367,6 +3377,11 @@ msgstr "เลือกกราฟฟิคการ์ด"
 #, fuzzy, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "ระวัง การทดสอบการ์ดแสดงผลอาจทำให้คอมพิวเตอร์หยุดการทำงาน"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Card IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4138,13 +4153,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "ฟอร์แมต"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "Generic Printers"
@@ -4233,11 +4241,6 @@ msgstr "ฟอร์แมตพาร์ติชั่น %s"
 #, c-format
 msgid "User name"
 msgstr "ชื่อผู้ใช้"
-
-#: ../../network/isdn.pm:1
-#, fuzzy, c-format
-msgid "New configuration (isdn-light)"
-msgstr "ตรวจพบคอนฟิกของ Firewall"
 
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
@@ -4588,6 +4591,11 @@ msgstr ""
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "กำลังปรับแต่ง scripts ติดตั้งโปรแกรม และเริ่มทำงาน servers..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "ชื่อของเครื่องพิมพ์"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4617,6 +4625,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "ไม่มีเครื่องพิมพ์"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -4849,6 +4862,11 @@ msgid ""
 "There is one unknown printer directly connected to your system"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "เครื่องพิมพ์แบบรีโมท"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -4865,9 +4883,9 @@ msgid "Sorry, we support only 2.4 kernels."
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Romanian (qwerty)"
-msgstr "รัสเซีย (Yawerty)"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4883,11 +4901,6 @@ msgstr "สาธารณรัฐเช็ค"
 #, fuzzy, c-format
 msgid "Egypt"
 msgstr "ว่าง"
-
-#: ../../network/isdn.pm:1
-#, fuzzy, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "ตรวจพบคอนฟิกของ Firewall"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -4915,6 +4928,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"การปรับแต่ง internet/network เรียบร้อยแล้ว\n"
+"\n"
+"ค่าต่างๆจะถูกนำไปใช้เดี๋ยวนี้\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5006,9 +5029,9 @@ msgid "Currently, no alternative possibility is available"
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Romanian (qwertz)"
-msgstr "รัสเซีย (Yawerty)"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -5623,6 +5646,11 @@ msgstr "profile ที่ต้องการลบ:"
 msgid "Local measure"
 msgstr "เครื่องพิมพ์โลคอล (ต่อติดกับตัวเครื่อง)"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5648,14 +5676,14 @@ msgid ""
 msgstr ""
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
-msgid "Benin"
-msgstr "เบลเยี่ยม"
-
-#: ../../lang.pm:1
 #, c-format
 msgid "Uruguay"
 msgstr ""
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Benin"
+msgstr "เบลเยี่ยม"
 
 #: ../../standalone/drakperm:1
 #, fuzzy, c-format
@@ -5710,29 +5738,6 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (cable)"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -6441,6 +6446,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "เลือกการเชื่อมต่อกับเครื่องพิมพ์"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7083,11 +7096,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7258,9 +7266,9 @@ msgstr "ข้อมูล: "
 msgid "Button `%s': %s"
 msgstr "พาร์ติชั่น %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "โปรดรอสักครู่"
@@ -7452,6 +7460,11 @@ msgstr "เซิรฟ์เวอร์ DNS เครื่องแรก (op
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "รัสเซีย (โฟเนติค)"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -8533,6 +8546,11 @@ msgstr ""
 msgid "Hardware clock set to GMT"
 msgstr "คุณต้องการให้เซ็ตนาฬิกาฮาร์ดแวร์เป็น GMT?"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "คุณต้องการทดสอบการคอนฟิกหรือไม่"
+
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "Give a file name"
@@ -8547,6 +8565,11 @@ msgstr "คุณต้องการให้โมเด็มของคุ
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "เปลี่ยน CD-ROM"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "XFree ชนิดใหนที่คุณต้องการมี"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8908,7 +8931,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -9036,6 +9060,11 @@ msgstr "คีย์บอร์ดอเมริกัน (นานาชา�
 msgid "Not installed"
 msgstr "ออกจากการติดตั้ง"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Alt keys simultaneously"
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9116,11 +9145,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "รัสเซีย (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -9773,6 +9797,11 @@ msgstr "คุณไม่สามารถไม่เลือกแพกเ
 msgid "Loading from floppy"
 msgstr "เรียกคืนจากแผ่นฟล้อปปี้"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -9867,6 +9896,11 @@ msgstr "SILO"
 #, fuzzy, c-format
 msgid "Change type"
 msgstr "เปลี่ยนประเภทพาร์ติชั่น"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -10091,15 +10125,15 @@ msgstr "ขณะ boot"
 msgid "Bus identification"
 msgstr "การตรวจสอบสิทธิ์การใช้งาน"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "กรุณาทำ backup ก่อน"
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "ตำแหน่ง"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "กรุณาทำ backup ก่อน"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10469,7 +10503,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, fuzzy, c-format
 msgid "Options"
 msgstr "/Options/ทดลอง"
@@ -11063,6 +11097,11 @@ msgstr "ชื่อ Loopback file: "
 #, fuzzy, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "ค่าของ IP ควรอยู่ในรูปแบบ 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "เครื่องพิมพ์แบบรีโมท"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -11794,6 +11833,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "Uganda"
+msgstr "Update"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "%s fonts conversion"
@@ -11803,11 +11847,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "เม้าส์ของคุณต่อเข้ากับพอร์ตอนุกรมใด"
-
-#: ../../lang.pm:1
-#, fuzzy, c-format
-msgid "Uganda"
-msgstr "Update"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12126,6 +12165,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Control keys simultaneously"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12163,6 +12207,11 @@ msgstr "กำลังตรวจสอบอุปกรณ์..."
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
 msgstr ""
 
 #: ../../mouse.pm:1
@@ -12769,17 +12818,6 @@ msgid ""
 "discussion forums on our \"Community\" webpages."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"การปรับแต่ง internet/network เรียบร้อยแล้ว\n"
-"\n"
-"ค่าต่างๆจะถูกนำไปใช้เดี๋ยวนี้\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -12829,6 +12867,11 @@ msgstr "ลบ"
 #, c-format
 msgid "here if no."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "ความช่วยเหลือ"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -12984,6 +13027,7 @@ msgstr ""
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "ตกลง"
@@ -13021,6 +13065,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13438,8 +13498,9 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "ผิดพลาด"
@@ -14336,6 +14397,11 @@ msgstr "ตรวจสอบ bad blocks"
 msgid "Other MultiMedia devices"
 msgstr "อื่นๆ"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "เครื่องพิมพ์"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -14950,6 +15016,11 @@ msgstr "สร้างแผ่นบูต"
 msgid "Solomon Islands"
 msgstr ""
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "กรุณาทดสอบเม้าส์"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -15036,6 +15107,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(เพิ่ม %s เรียบร้อยแล้ว)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "การติดตั้ง Bootloader"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15418,6 +15494,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr ""
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -15531,6 +15612,11 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Alt key"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -15712,11 +15798,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "เชื่อมต่ออยู่"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "ไม่มีเครื่องพิมพ์"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15987,6 +16068,11 @@ msgstr "ยอมรับผู้ใช้"
 #, c-format
 msgid "Server"
 msgstr "เซิร์ฟเวอร์"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Shift key"
+msgstr ""
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -17186,6 +17272,14 @@ msgstr ""
 #, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "เครื่องมือในการอ่านและส่ง mail และ news (pine, mutt, tin..) และท่องอินเตอร์เน็ต"
+
+#, fuzzy
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "ตรวจพบคอนฟิกของ Firewall"
+
+#, fuzzy
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "ตรวจพบคอนฟิกของ Firewall"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "การเชื่อมต่อ Internet และการปรับแต่ง"

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2000-08-24 12:00-0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -316,6 +316,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Malaysia"
+msgstr ""
+
+#: ../../standalone/drakedm:1
+#, c-format
+msgid "The change is done, do you want to restart the dm service ?"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -1343,11 +1348,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ""
-
 #: ../../keyboard.pm:1
 #, fuzzy, c-format
 msgid "Latvian"
@@ -1387,6 +1387,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "An tSalvadóir"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1472,11 +1477,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Óstainm Printéir"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1625,11 +1625,6 @@ msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandrake Linux partition. Be careful, all data present on this partition\n"
 "will be lost and will not be recoverable!"
-msgstr ""
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
 msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
@@ -2494,6 +2489,11 @@ msgstr ""
 msgid "hourly"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Right Shift key"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2540,6 +2540,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Cumraigh printéir"
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, fuzzy, c-format
 msgid "Normal modem connection"
@@ -2549,20 +2571,6 @@ msgstr "Cumraigh nasc ghréasán"
 #, fuzzy, c-format
 msgid "File Selection"
 msgstr "Roghnú Grúpa Pacáistí"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3185,6 +3193,11 @@ msgstr "Roghnaigh carta grafachach"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "I/A Carta"
 
 #: ../../any.pm:1
 #, c-format
@@ -3943,13 +3956,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Formáidigh"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "Generic Printers"
@@ -4038,11 +4044,6 @@ msgstr "Ag formáidiú rann %s"
 #, c-format
 msgid "User name"
 msgstr "Ainm úsáideora"
-
-#: ../../network/isdn.pm:1
-#, fuzzy, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Cumraíocht Gréasánú"
 
 #: ../../standalone/drakbug:1
 #, fuzzy, c-format
@@ -4393,6 +4394,11 @@ msgstr ""
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Óstainm Printéir"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4422,6 +4428,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "Gan  Printéir"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -4647,6 +4658,11 @@ msgid ""
 "There is one unknown printer directly connected to your system"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Scríos Printéir"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -4682,11 +4698,6 @@ msgstr "An Phoblacht nc tSeic"
 msgid "Egypt"
 msgstr "An Éigipt"
 
-#: ../../network/isdn.pm:1
-#, fuzzy, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Éirigh  as cumraíocht"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -4711,6 +4722,13 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Suppress Temporary Files"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -5414,6 +5432,11 @@ msgstr ""
 msgid "Local measure"
 msgstr "Chomaid Áitiúl"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5440,12 +5463,12 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
+msgid "Uruguay"
 msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
+msgid "Benin"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -5498,29 +5521,6 @@ msgstr "An Bhanglaidéis"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (cable)"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakfont:1
@@ -6227,6 +6227,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Nasc Printéir"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, fuzzy, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -6863,11 +6871,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7031,9 +7034,9 @@ msgstr "Eolas"
 msgid "Button `%s': %s"
 msgstr "Roghnachais: %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Fan tamall"
@@ -7213,6 +7216,11 @@ msgstr "Cead Freastalaí DNS"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Russian (Phonetic)"
+msgstr "Bulgáiris"
 
 #: ../../standalone/drakTermServ:1
 #, fuzzy, c-format
@@ -8262,6 +8270,11 @@ msgstr ""
 msgid "Hardware clock set to GMT"
 msgstr "An bhfuil an clog cruaearrach ar GMT?"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "An bhfuil tú ag iarraidh an cumraíocht a thrial?"
+
 #: ../../diskdrake/interactive.pm:1
 #, fuzzy, c-format
 msgid "Give a file name"
@@ -8276,6 +8289,11 @@ msgstr "Cén cinéal luchóg atá agat?"
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Athraigh CD-ROM"
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -8634,7 +8652,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Cealaigh"
@@ -8756,6 +8775,11 @@ msgstr "Mearchlár US (idirnaisiúnta)"
 msgid "Not installed"
 msgstr "Eirigh as Feistiú"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Alt keys simultaneously"
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -8832,11 +8856,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Rúisis (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -9479,6 +9498,11 @@ msgstr ""
 msgid "Loading from floppy"
 msgstr "Aisig ó dhiosca flapach"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -9569,6 +9593,11 @@ msgstr "SILO"
 #, fuzzy, c-format
 msgid "Change type"
 msgstr "Athraigh cineál ranna"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -9769,15 +9798,15 @@ msgstr "Ar Tús"
 msgid "Bus identification"
 msgstr "Deimniú"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr ""
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "Áit"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10142,7 +10171,7 @@ msgstr ""
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Roghnachais"
@@ -10698,6 +10727,11 @@ msgstr ""
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Scríos Printéir"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -11427,6 +11461,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr ""
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "%s fonts conversion"
@@ -11436,11 +11475,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "2 cnaipí"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11757,6 +11791,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Control keys simultaneously"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -11794,6 +11833,11 @@ msgstr "Scríos Printéir"
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
 msgstr ""
 
 #: ../../mouse.pm:1
@@ -12394,14 +12438,6 @@ msgid ""
 "discussion forums on our \"Community\" webpages."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -12451,6 +12487,11 @@ msgstr "Scríos"
 #, c-format
 msgid "here if no."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "/C_úidiú"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -12606,6 +12647,7 @@ msgstr ""
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ceart go Leor"
@@ -12643,6 +12685,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13050,8 +13108,9 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Earráid"
@@ -13937,6 +13996,11 @@ msgstr ""
 msgid "Other MultiMedia devices"
 msgstr "Eile"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printéir"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -14545,6 +14609,11 @@ msgstr "Cruthaigh an diosca "
 msgid "Solomon Islands"
 msgstr ""
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Teastáil an luchóg, le do thoil"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -14631,6 +14700,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr ""
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Feistiú cód tosnaithe"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15011,6 +15085,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr ""
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -15121,6 +15200,11 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Alt key"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -15300,11 +15384,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Connected"
 msgstr "Ainm Nasc"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "Gan  Printéir"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15575,6 +15654,11 @@ msgstr ""
 #, c-format
 msgid "Server"
 msgstr "Freastalaí"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Shift key"
+msgstr ""
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -16758,6 +16842,17 @@ msgstr ""
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
+
+#~ msgid "Russian (Yawerty)"
+#~ msgstr "Rúisis (Yawerty)"
+
+#, fuzzy
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Cumraíocht Gréasánú"
+
+#, fuzzy
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Éirigh  as cumraíocht"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Nasc na hIdirlíon agus cumraíocht"

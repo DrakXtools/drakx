@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-04-22 04:07--100\n"
 "Last-Translator: Tibor Pittich <Tibor.Pittich@phuture.sk>\n"
 "Language-Team: Slovak <i18n@mandrake.sk>\n"
@@ -346,6 +346,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malajzia"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Je potrebné reštartovať sieť. Želáte si to?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1811,11 +1816,6 @@ msgstr ""
 "systém?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB tlačiareň \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1855,6 +1855,11 @@ msgstr "Joystick"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1947,11 +1952,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Pred obnovou urobiť novú zálohu (iba pre prírastkové zálohovanie)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Tlačiareň na paralelnom porte \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2115,11 +2115,6 @@ msgstr ""
 "Vyberte si pevný disk, ktorý chcete vymazať aby ste mohli vytvoriť\n"
 "nový Mandrake Linux oddiel. Buďte opatrní, všetky údaje ktoré sa tam\n"
 "nachádzajú budú vymazané a nebude možnosť ich obnoviť!!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " na paralelnom porte \\#%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -3219,6 +3214,11 @@ msgstr "Spustiť grafické rozhranie po štarte systému"
 msgid "hourly"
 msgstr "každú hodinu"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "pravý Alt kláves"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3272,6 +3272,44 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Konfigurácia aplikácii..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Vitajte v sprievodcovi nastavením tlačiarne\n"
+"\n"
+"Tento sprievodca Vám pomôže nainštalovať Vašu tlačiareň(ne) pripojené k "
+"počítaču, priamo, po sieti, alebo na vzdialených Windows staniciach.\n"
+"\n"
+"Ak máte tlačiareň(ne) pripojenú(né) k tomuto počítaču zapnite ju a mala by "
+"byť automaticky zdetekovaná. Rovnako aj sieťová tlačiareň(tlačiarne) a "
+"Windows počítač(e) ku ktorým je pripojená by mali byť pripojené a zapnuté.\n"
+"\n"
+"Autodetekcia tlačiarní v sieti môže trvať dhšie oproti autodetekcii "
+"lokálnych tlačiarní pripojených priamo k počítaču. Ak si neželáte "
+"autodetekciu sieťových tlačiarní, vypnite túto možnosť.\n"
+"\n"
+" Kliknite na \"Ďalej\" ak ste pripravení, alebo na \"Zrušiť\" ak si neželáte "
+"teraz nastaviť tlačiareň(tlačiarne) teraz."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3281,29 +3319,6 @@ msgstr "Normálne modemové pripojenie"
 #, c-format
 msgid "File Selection"
 msgstr "Výber súborov"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Ktorý typ nastavenia ISDN uprednostníte?\n"
-"\n"
-"* Starý typ používa isdn4net. Obsahuje silné nástroje, ale\n"
-"  ťažko sa nastavuje.\n"
-"\n"
-"* Nový typ je jednoduchšie pochopiteľný, ale obsahuje menej\n"
-"  nástrojov.\n"
-"\n"
-"Doporučujeme použiť nový typ nastavenia ISDN.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -4008,6 +4023,11 @@ msgstr "Skener"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Varovanie: testovanie tejto karty môže zastaviť Váš systém"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "IO karty"
 
 #: ../../any.pm:1
 #, c-format
@@ -4887,13 +4907,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Formát diskety"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4992,11 +5005,6 @@ msgstr "Pripájam oddiel %s"
 #, c-format
 msgid "User name"
 msgstr "Používateľské meno"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Nová konfigurácia (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5451,6 +5459,11 @@ msgstr "Líbia"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Konfigurácia skriptov, inštalovanie programov, štart serverov..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Tlačiareň na paralelnom porte #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5485,6 +5498,11 @@ msgstr ""
 "Argument: (hodnota)\n"
 "\n"
 "Povoliť/Zakázať knižnicu libsafe ak je prítomná vo Vašom systéme."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB tlačiareň #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5747,6 +5765,11 @@ msgstr ""
 "\n"
 "Je tu neznáma tlačiareň, ktorá je pripojená k Vášmu systému"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "pravý Alt kláves"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5765,7 +5788,7 @@ msgstr "Prepáčte, ale podporujeme len 2.4 kernely."
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwerty)"
-msgstr "Románska (Yawerty)"
+msgstr "Románska (qwerty)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5781,11 +5804,6 @@ msgstr "Česká republika"
 #, c-format
 msgid "Egypt"
 msgstr "Egypt"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Stará konfigurácia (isdn4net)"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -5812,6 +5830,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Ignorovať pracovné súbory"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Gratulujeme. Nastavenie siete a pripojenia k Internetu je dokončené\n"
+"Nastavenie bude teraz aplikované na Váš systém.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5920,7 +5948,7 @@ msgstr "Momentálne nie sú možné žiadne alternatívy"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwertz)"
-msgstr "Románska (Yawerty)"
+msgstr "Románska (qwertz)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -6635,6 +6663,11 @@ msgstr "Zmena profilu:"
 msgid "Local measure"
 msgstr "Lokálne meranie"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6665,13 +6698,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6730,45 +6763,6 @@ msgstr "Bangladéš"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japonsko (kábel)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Vitajte v sprievodcovi nastavením tlačiarne\n"
-"\n"
-"Tento sprievodca Vám pomôže nainštalovať Vašu tlačiareň(ne) pripojené k "
-"počítaču, priamo, po sieti, alebo na vzdialených Windows staniciach.\n"
-"\n"
-"Ak máte tlačiareň(ne) pripojenú(né) k tomuto počítaču zapnite ju a mala by "
-"byť automaticky zdetekovaná. Rovnako aj sieťová tlačiareň(tlačiarne) a "
-"Windows počítač(e) ku ktorým je pripojená by mali byť pripojené a zapnuté.\n"
-"\n"
-"Autodetekcia tlačiarní v sieti môže trvať dhšie oproti autodetekcii "
-"lokálnych tlačiarní pripojených priamo k počítaču. Ak si neželáte "
-"autodetekciu sieťových tlačiarní, vypnite túto možnosť.\n"
-"\n"
-" Kliknite na \"Ďalej\" ak ste pripravení, alebo na \"Zrušiť\" ak si neželáte "
-"teraz nastaviť tlačiareň(tlačiarne) teraz."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7587,6 +7581,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Štandardné nastavenie tlačiarne"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8296,11 +8298,6 @@ msgstr ""
 "  Váš report nebol odoslaný\n"
 "  Prosím nastavte sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", viacúčelové zariadenie na paralelnom porte \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8491,9 +8488,9 @@ msgstr "Informácie:"
 msgid "Button `%s': %s"
 msgstr "Tlačítko `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Prosím čakajte"
@@ -8704,6 +8701,11 @@ msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
 "Alternatívne môžte špecifikovať meno zariadenia/súboru vo vstupnom políčku"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Ruská (fonetická)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9908,6 +9910,11 @@ msgstr "číslo procesora"
 msgid "Hardware clock set to GMT"
 msgstr "Hardvérové hodiny nastavené na GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Chcete otestovať konfiguráciu?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9922,6 +9929,11 @@ msgstr "Prosím, zvoľte, na ktorý port je pripojená Vaša tlačiareň."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Vymeň CD"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Akú konfiguráciu XFree chcete mať?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10326,7 +10338,8 @@ msgstr "Odznačiť nainštalované fonty"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Zrušiť"
@@ -10458,6 +10471,11 @@ msgstr "US klávesnica (medzinárodná)"
 msgid "Not installed"
 msgstr "Nenainštalované"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "obidve Shift klávesy naraz"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10546,11 +10564,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Sieť cez FTP.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Ruská (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11309,6 +11322,11 @@ msgstr "Nemôžete odznačiť tento balík. Musíte pridať novú verziu"
 msgid "Loading from floppy"
 msgstr "Nahrávam z diskety"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11409,6 +11427,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Zmeňte typ"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB tlačiareň #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11678,15 +11701,15 @@ msgstr "Spustiť pri štarte"
 msgid "Bus identification"
 msgstr "Identifikácia zbernice"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Prosím, najprv si za zazálohujte Vaše údaje"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikán"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Prosím, najprv si za zazálohujte Vaše údaje"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12122,7 +12145,7 @@ msgstr "TV karta nebola nájdená!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Parametre"
@@ -12759,6 +12782,11 @@ msgstr "Meno súboru spätnej slučky: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Adresa DNS servera musí byť vo formáte 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Vzdialená správa"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13597,6 +13625,11 @@ msgstr ""
 "\n"
 "Povoliť/Zakázať bezpečnostné kontroly msec každú hodinu."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13606,11 +13639,6 @@ msgstr "prevod pfm fontov"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Typ zbernice, kam je pripojená myš"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14035,6 +14063,11 @@ msgstr "\tZálohovanie používa tar a gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "obidve Shift klávesy naraz"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14083,6 +14116,11 @@ msgid ""
 msgstr ""
 "Frekvencia má mať príponu k, M alebo G (napríklad \"2.46G\" pre frekvenciu "
 "2.46 GHz) alebo pridajte adekvátny počet '0' (núl)."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", viacúčelové zariadenie na paralelnom porte #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14813,17 +14851,6 @@ msgstr ""
 "učte, alebo pomáhajte iným v mnohých diskusných skupinách, ktoré môžete "
 "nájsť na našich stránkach \"Komunita\""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Gratulujeme. Nastavenie siete a pripojenia k Internetu je dokončené\n"
-"Nastavenie bude teraz aplikované na Váš systém.\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14899,6 +14926,11 @@ msgstr "vymazať"
 #, c-format
 msgid "here if no."
 msgstr "sem ak nie"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Pomoc"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -15057,6 +15089,7 @@ msgstr "Filipíny"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "OK"
@@ -15098,6 +15131,33 @@ msgid ""
 msgstr ""
 "Pridajte sem CUPS server, ktorého tlačiarne chcete používať. Toto je "
 "potrebné iba vtedy, ak server neoznamuje informácie o sebe do lokálnej siete."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Vitajte v sprievodcovi nastavením tlačiarne\n"
+"\n"
+"Tento sprievodca Vám pomôže nainštalovať Vašu tlačiareň(ne) pripojené k "
+"tomuto počítaču.\n"
+"\n"
+"Ak máte tlačiareň(ne) pripojenú(né) k tomuto počítaču pripojte ju prosím, "
+"zapnite a mala by byť automaticky zdetekovaná.\n"
+"\n"
+"Kliknite na \"Ďalej\" ak ste pripravení alebo na \"Zrušiť\" ak si neželáte "
+"nastaviť tlačiareň(tlačiarne) teraz."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15539,8 +15599,9 @@ msgstr ", tlačiareň \"%s\" na serveri \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Chyba"
@@ -16513,6 +16574,11 @@ msgstr "Kontrola chybných blokov?"
 msgid "Other MultiMedia devices"
 msgstr "Iné multimediálne zariadenie"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Tlačiareň"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17207,6 +17273,11 @@ msgstr "Vytvoriť štartovaciu disketu"
 msgid "Solomon Islands"
 msgstr "Solomon ostrovy"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Prosím otestujte myš."
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17305,6 +17376,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(už pridaný %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Inštalácia zavádzača"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17742,6 +17818,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Obnov všetky zálohy"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " na paralelnom porte #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17858,6 +17939,11 @@ msgstr "Rozdielne"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "pravý Alt kláves"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18081,11 +18167,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Pripojený."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB tlačiareň \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18441,6 +18522,11 @@ msgstr "Akceptuj používateľa"
 #, c-format
 msgid "Server"
 msgstr "Server"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Ľavý \"Windows\" kláves"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19789,6 +19875,33 @@ msgstr "NFS server, SMB server, Proxy server, SSH server"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Nástroje na čítanie a posielanie emailov a správ do news, prehliadanie www"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Ktorý typ nastavenia ISDN uprednostníte?\n"
+#~ "\n"
+#~ "* Starý typ používa isdn4net. Obsahuje silné nástroje, ale\n"
+#~ "  ťažko sa nastavuje.\n"
+#~ "\n"
+#~ "* Nový typ je jednoduchšie pochopiteľný, ale obsahuje menej\n"
+#~ "  nástrojov.\n"
+#~ "\n"
+#~ "Doporučujeme použiť nový typ nastavenia ISDN.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Nová konfigurácia (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Stará konfigurácia (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Pripojenie a konfigurácia Internetu"

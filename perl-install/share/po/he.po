@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-he\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-05-09 12:37+0000\n"
 "Last-Translator: nadav mavor <nadav@mavor.com>\n"
 "Language-Team: Hebrew\n"
@@ -327,6 +327,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "מלזיה"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "הרשת צריכה לאתחל מחדש. האם ברצונך לתת לה להתאתחל?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1368,11 +1373,6 @@ msgstr ""
 "האם ברצונך ליצור דיסקט אתחול של המערכת שלך?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", מדפסת USB \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1412,6 +1412,11 @@ msgstr ""
 #, c-format
 msgid "El Salvador"
 msgstr "אל סלבדור"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
+msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1500,11 +1505,6 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -1664,11 +1664,6 @@ msgstr ""
 "בחר את הדיסק הקשיח שאתה רוצה למחוק על מנת להתקין את \n"
 "לינוקס מנדרייק זהירות ! כול המידע שנימצע על המחיצה \n"
 "ימחק ולא תהיא אפשרות לשחזר אותו !!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr "על פורט פרלאלי \\#%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2547,6 +2542,11 @@ msgstr "הפעל את הסביבה הגרפית כאשר המערכת שלך מ�
 msgid "hourly"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "מקש Alt הימני"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2593,6 +2593,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "מגדיר יישומים..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2601,20 +2623,6 @@ msgstr "חיבור מודם רגיל"
 #: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
 #, c-format
 msgid "File Selection"
-msgstr ""
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
 msgstr ""
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
@@ -3247,6 +3255,11 @@ msgstr "סורק"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "אזהרה: בדיקת כרטיס המסך הזה עלולה לתקוע לך את המחשב"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Bad Ip"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -4024,13 +4037,6 @@ msgstr "יש אפשרות לכך שכשהמחשב יעלה הוא יכנס או�
 msgid "Floppy format"
 msgstr "פירמוט דיסקט"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4120,11 +4126,6 @@ msgstr "מחבר מחיצה - %s"
 #, c-format
 msgid "User name"
 msgstr "שם משתמש"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "הגדרה חדשה (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4477,6 +4478,11 @@ msgstr "ליבריה"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr ""
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4505,6 +4511,11 @@ msgid ""
 "Arguments: (arg)\n"
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -4740,6 +4751,11 @@ msgstr ""
 "\n"
 "יש מדפסת אחת לא ידועה המחוברת למערכת שלך"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "מקש Alt הימני"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -4775,11 +4791,6 @@ msgstr "הרפובליקה הצ~כית"
 msgid "Egypt"
 msgstr "מצריים"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "הגדרה ישנה (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -4801,6 +4812,13 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Suppress Temporary Files"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -5521,6 +5539,11 @@ msgstr ""
 msgid "Local measure"
 msgstr "מדד מקומי"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5547,13 +5570,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "בינן(דהומיי)"
+msgid "Uruguay"
+msgstr "אורוגוואי"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "אורוגוואי"
+msgid "Benin"
+msgstr "בינן(דהומיי)"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5608,29 +5631,6 @@ msgstr "בנגלדש"
 #, c-format
 msgid "Japan (cable)"
 msgstr "יפן (כבלים)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6358,6 +6358,14 @@ msgstr "האם ברצונך לאפשר הדפסה במדפסות הרשת הפנ
 msgid "Printer default settings"
 msgstr "הגדרות ברירת מחדל עבור המדפסת"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7011,11 +7019,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7181,9 +7184,9 @@ msgstr "מידע:"
 msgid "Button `%s': %s"
 msgstr "כפתור `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "נא להמתין"
@@ -7371,6 +7374,11 @@ msgstr "שרת DNS ראשון (אופציה)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "רוסית (Phonetic)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8461,6 +8469,11 @@ msgstr "מספר המעבד"
 msgid "Hardware clock set to GMT"
 msgstr "שעון מערכת מוגדר לGNT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "האם ברצונך לבדוק את ההגדרות?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -8475,6 +8488,11 @@ msgstr ""
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "החלפת Cd-Rom"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "אלו הגדרות של XFree ברצונך לקבל?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8835,7 +8853,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "ביטול"
@@ -8960,6 +8979,11 @@ msgstr "מקלדת ארה\"ב (בינלאומית)"
 msgid "Not installed"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "שני מקשי הShift באותו הזמן"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9040,11 +9064,6 @@ msgstr "באפשרותך גם להחליט אם סורקים על מחשבים �
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "רוסית (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9725,6 +9744,11 @@ msgstr "אי אפשר לבטל את בחירת חבילה זו, שידרוגה �
 msgid "Loading from floppy"
 msgstr "טוען מהדיסקט"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "מערכות עכבר"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -9823,6 +9847,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "שינוי סוג"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", מדפסת USB #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -10029,15 +10058,15 @@ msgstr "בזמן אתחול"
 msgid "Bus identification"
 msgstr "זיהוי Bus"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "נא לגבות את המידע שלך קודם לכן"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "ותיקן"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "נא לגבות את המידע שלך קודם לכן"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10404,7 +10433,7 @@ msgstr "לא זוהה כרטיס טלוויזיה"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "אפשריות"
@@ -10981,6 +11010,11 @@ msgstr ""
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "מקש \"חלונות\" השמאלי"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11745,6 +11779,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "אוגנדה"
+
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "%s fonts conversion"
@@ -11754,11 +11793,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "מספר המקשים שיש לעכבר"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "אוגנדה"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12084,6 +12118,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "שני מקשי הShift באותו הזמן"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12126,6 +12165,11 @@ msgstr "תצוגה מקדימה..."
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
 msgstr ""
 
 #: ../../mouse.pm:1
@@ -12739,14 +12783,6 @@ msgstr ""
 "כדי לשתף מידע ולבנות תוכנות ללינוקס, הצטרפו אל פורומי הדיונים שלנו על דפי ה"
 "\"קהילה\" שלנו."
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -12796,6 +12832,11 @@ msgstr "למחוק"
 #, c-format
 msgid "here if no."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "עזרה"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -12951,6 +12992,7 @@ msgstr "הפיליפינים"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "אישור"
@@ -12988,6 +13030,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13407,8 +13465,9 @@ msgstr ", מדפסת \"%s\"  על שרת \"%s\" "
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "שגיאה"
@@ -14312,6 +14371,11 @@ msgstr "לבדוק בלוקים עם שגיאות?"
 msgid "Other MultiMedia devices"
 msgstr ""
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "מדפסת"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -14930,6 +14994,11 @@ msgstr "יצירת דיסקט אתחול"
 msgid "Solomon Islands"
 msgstr "איי שלמה"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "נא לבדוק את העכבר"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -15016,6 +15085,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "כבר נוסף %s"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "התקנת מאתחל המערכת"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15390,6 +15464,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr ""
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr "על פורט פרלאלי #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -15501,6 +15580,11 @@ msgstr "מתקדם"
 #, c-format
 msgid "Zip"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "מקש Alt הימני"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15683,11 +15767,6 @@ msgstr ""
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Connected"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -15959,6 +16038,11 @@ msgstr "קבלת משתמש"
 #, c-format
 msgid "Server"
 msgstr "שרת"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "מקש \"חלונות\" השמאלי"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -17169,6 +17253,12 @@ msgstr "שרת NFS, שרת SMB, שרת Proxy, שרת ssh"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "סט כלים לקריאה וכתיבת דואל וחדשות  (pine, mutt, tin..) ולגלישה באינטרנט"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "הגדרה חדשה (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "הגדרה ישנה (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "חיבור אינטרנט והגדרות"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2002-09-09 09:08+0900\n"
 "Last-Translator: Jaegeum Cze <baedaron@hanafos.com>\n"
 "Language-Team: Korean <beadaron@hanafos.com>\n"
@@ -331,6 +331,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "말레이시아"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "팩키지 %s가 필요합니다. 설치하겠습니까?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1385,11 +1390,6 @@ msgstr ""
 "만드시겠습니까?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ""
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1428,6 +1428,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "El Salvador"
+msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "DVD"
 msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
@@ -1519,11 +1524,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "프린터 호스트명 또는 IP"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
@@ -1681,11 +1681,6 @@ msgstr ""
 "맨드레이크 리눅스 파티션을 만들기 위해서 삭제할 하드디스클르 선택하세요.\n"
 "주의:\n"
 "디스크상의 모든 데이터는 손실되며, 영원히 복구가 불가능해 집니다!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr ""
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2684,6 +2679,11 @@ msgstr "시작할 때 X-Window 실행"
 msgid "hourly"
 msgstr "매시"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Right Shift key"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2730,6 +2730,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "프로그램 설정 중 ..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2739,30 +2761,6 @@ msgstr "일반 모뎀 연결"
 #, c-format
 msgid "File Selection"
 msgstr "파일 선택"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"어떤 ISDN 설정 방식을 선호하십니까?\n"
-"\n"
-"* 기존의 설정은 ISDN4NET을 사용합니다. 강력하지만 초보자에겐\n"
-"  어렵고 또한 표준이 아닙니다.\n"
-"\n"
-"* 새로운 설정은 쉽고 보다 표준적이지만, 강력한 도구는 디소\n"
-"  부족합니다.\n"
-"\n"
-"「ISDN-LIGHT」를 추천합니다.\n"
-"\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3408,6 +3406,11 @@ msgstr "스캐너 선택"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "카드 IO"
 
 #: ../../any.pm:1
 #, c-format
@@ -4188,13 +4191,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "포맷"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4286,11 +4282,6 @@ msgstr "%s 파티션 포맷중"
 #, c-format
 msgid "User name"
 msgstr "사용자명"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "새로운 설정 (ISDN-LIGHT)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4704,6 +4695,11 @@ msgstr "라이베리아"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "스크립트 설정 중, 소프트웨어 설치 중, 서버 시작 중..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "프린터 호스트명 또는 IP"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4733,6 +4729,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "프린터 없음"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -4963,6 +4964,11 @@ msgid ""
 "There is one unknown printer directly connected to your system"
 msgstr ""
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "원격 제어"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -4998,11 +5004,6 @@ msgstr "체코 공화국"
 msgid "Egypt"
 msgstr "이집트"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "기존의 설정 (ISDN4NET)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5029,6 +5030,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "임시 파일 은폐"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"축하합니다. 네트웍/인터넷 설정이 완료되었습니다.\n"
+"\n"
+"이제 설정이 시스템에 적용될 것입니다.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5780,6 +5791,11 @@ msgstr "지울 프로파일"
 msgid "Local measure"
 msgstr "지역 파일들"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5806,13 +5822,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr ""
+msgid "Uruguay"
+msgstr "우루과이"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "우루과이"
+msgid "Benin"
+msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5868,29 +5884,6 @@ msgstr "방글라데시"
 #, c-format
 msgid "Japan (cable)"
 msgstr "일본 (케이블)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6622,6 +6615,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "프린터 모델 선택"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7275,11 +7276,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7450,9 +7446,9 @@ msgstr "정보: "
 msgid "Button `%s': %s"
 msgstr "버튼 「%s」: %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "기다려 주세요"
@@ -7659,6 +7655,11 @@ msgstr "첫번째 DNS 서버 (옵션)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "러시아 (음성학)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8787,6 +8788,11 @@ msgstr ""
 msgid "Hardware clock set to GMT"
 msgstr "하드웨어 시계 GMT 설정"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "이 설정을 테스트해 보시겠습니까?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -8801,6 +8807,11 @@ msgstr "프린터가 연결된 포트를 선택하세요."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "CDROM 바꾸기"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "어느 XFree 설정을 선택하시겠습니까?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9197,7 +9208,8 @@ msgstr "설치된 폰트 선택 해제"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "취소"
@@ -9329,6 +9341,11 @@ msgstr "US 키보드 (국제)"
 msgid "Not installed"
 msgstr "설치되지 않았습니다."
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Alt keys simultaneously"
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -9409,11 +9426,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "러시아 (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10103,6 +10115,11 @@ msgstr "이 팩키지를 선택해제할수 없습니다. 반드시 업그레이드되어야 합니다."
 msgid "Loading from floppy"
 msgstr "플로피에서 읽는 중"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "마우스 시스템"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -10201,6 +10218,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "유형 변경"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -10423,15 +10445,15 @@ msgstr "자동실행"
 msgid "Bus identification"
 msgstr "버스 아이디"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "먼저 데이터를 백업하세요."
-
 #: ../../lang.pm:1
 #, fuzzy, c-format
 msgid "Vatican"
 msgstr "라트바아"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "먼저 데이터를 백업하세요."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10806,7 +10828,7 @@ msgstr "TV 카드를 찾을 수 없습니다!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "옵션들"
@@ -11395,6 +11417,11 @@ msgstr "루프백 파일 이름: "
 #, fuzzy, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "IP 주소는 1.2.3.4과 같은 형식이어야 합니다."
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "원격 제어"
 
 #: ../../lang.pm:1
 #, fuzzy, c-format
@@ -12132,6 +12159,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "우간다"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -12141,11 +12173,6 @@ msgstr "pfm 폰트 변환"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "어떤 시리얼 포트에 마우스가 연결되어 있나요?"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "우간다"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12471,6 +12498,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Both Control keys simultaneously"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12508,6 +12540,11 @@ msgstr "미리보기 생성 중 ..."
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
 msgstr ""
 
 #: ../../mouse.pm:1
@@ -13151,17 +13188,6 @@ msgid ""
 "discussion forums on our \"Community\" webpages."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"축하합니다. 네트웍/인터넷 설정이 완료되었습니다.\n"
-"\n"
-"이제 설정이 시스템에 적용될 것입니다.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -13211,6 +13237,11 @@ msgstr "삭제"
 #, c-format
 msgid "here if no."
 msgstr "그렇지 않다면, 여기를 누르세요."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "도움말"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -13366,6 +13397,7 @@ msgstr "필리핀"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "확인"
@@ -13405,6 +13437,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13826,8 +13874,9 @@ msgstr ""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "오류"
@@ -14743,6 +14792,11 @@ msgstr "배드 블럭 검사를 합니까?"
 msgid "Other MultiMedia devices"
 msgstr "다른 매체"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "프린터"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "No remote machines"
@@ -15388,6 +15442,11 @@ msgstr "부트디스크 제작"
 msgid "Solomon Islands"
 msgstr ""
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "마우스를 테스트하세요."
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -15474,6 +15533,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(이미 %s는(은) 추가되었습니다.)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "부트로더 설치"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15867,6 +15931,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "모든 백업 복구"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -15980,6 +16049,11 @@ msgstr "다양한"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
+msgstr ""
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Alt key"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -16165,11 +16239,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "연결됨"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "프린터 없음"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16478,6 +16547,11 @@ msgstr "사용자 허가"
 #, c-format
 msgid "Server"
 msgstr "서버"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Left Shift key"
+msgstr ""
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -17691,6 +17765,34 @@ msgstr "NFS 서버, 삼바 서버, 프락시 서버, SSH 서버"
 #, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "메일/뉴스를 일고 보내며 웹검색을 위한 도구모음(pine, mutt, tin...)"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "어떤 ISDN 설정 방식을 선호하십니까?\n"
+#~ "\n"
+#~ "* 기존의 설정은 ISDN4NET을 사용합니다. 강력하지만 초보자에겐\n"
+#~ "  어렵고 또한 표준이 아닙니다.\n"
+#~ "\n"
+#~ "* 새로운 설정은 쉽고 보다 표준적이지만, 강력한 도구는 디소\n"
+#~ "  부족합니다.\n"
+#~ "\n"
+#~ "「ISDN-LIGHT」를 추천합니다.\n"
+#~ "\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "새로운 설정 (ISDN-LIGHT)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "기존의 설정 (ISDN4NET)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "인터넷 연결 & 설정"

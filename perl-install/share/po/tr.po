@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-03-18 18:15+0200\n"
 "Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -350,6 +350,11 @@ msgstr "Bu seçenekle /etc dizininizin herhangi bir sürümünü geri alabilirsi
 #, c-format
 msgid "Malaysia"
 msgstr "Malezya"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Ağ'ın yeniden başlatılması gerekiyor. Yeniden başlatmak ister misiniz?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1616,11 +1621,6 @@ msgstr ""
 "Açılış disketi oluşturmak istiyor musunuz?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB yazıcı \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1660,6 +1660,11 @@ msgstr "Oyun Çubuğu"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1752,11 +1757,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Geri almadan önce yeni yedekleme yapılsın (sadece fark yedeklemesinde)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Paralel port \\/*%s üzerindeki yazıcı"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1914,11 +1914,6 @@ msgstr ""
 "Lütfen yeni Mandrake Linux disk bölümünüzü kurmak için silmek istediğiniz\n"
 "sabit diski seçin. Üzerindeki tüm verilerin yok olacağını ve geriye dönüşün\n"
 "mümkün olmayacağını unutmayın!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " paralel port \\#%s üstündeki"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -2972,6 +2967,11 @@ msgstr "Grafiksel ortam açılışta çalıştırılsın"
 msgid "hourly"
 msgstr "saatlik"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "AltGr tuşu"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3018,6 +3018,45 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Uygulamalar yapılandırılıyor..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Yazıcı Ayarları Sihirbazına Hoş Geldiniz\n"
+"\n"
+"Bu sihirbaz, makinanıza, ağa doğrudan veya uzak bir Windows makinasına bağlı "
+"yazıcıları kurmanızda size yardım edecek.\n"
+"\n"
+"Eğer bu makinaya bağlı yazıcı(ları)nız varsa, bilgisayarınıza takın ve "
+"çalıştırın. Böylece otomatik olarak tanınabilir(ler). Ayrıca ağ yazı(ları)"
+"nız ve Windows makinalarınızın da bağlı ve çalışır durumda olmaları "
+"gerekir.\n"
+"\n"
+"Ağdaki yazıcıları tanımanın bu makinaya bağlı yazıcıların tanınmasından daha "
+"uzun süreceğini unutmayın. Bu yüzden eğer gerekmiyorsa ağda bulunan ve/veya "
+"Windows'a bağlı yazıcıların otomatik tanınmasını iptal edin.\n"
+"\n"
+" Hazır olduğunuzda \"İleri\"ye veya yazıcı(ları)nızı şimdi kurmak "
+"istemiyorsanız \"İptal\"e basın."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3027,29 +3066,6 @@ msgstr "Normal modem bağlantısı"
 #, c-format
 msgid "File Selection"
 msgstr "Dosya Seçimi"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Hangi ISDN yapılandırmasını tercih edersiniz?\n"
-"\n"
-" * \"Eski\" yapılandırma isdn4net kullanır. Güçlü araçlar\n"
-"   içermesine rağmen yapılandırma zor olabilir ve standart değildir.\n"
-"\n"
-" * \"Yeni\" yapılandırmanın anlaşılması daha kolay, daha standart\n"
-"   ancak daha az araç içerir.\n"
-"\n"
-"Size hangisi kolay geliyorsa o yapılandırmayı seçmeniz önerilir.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3734,6 +3750,11 @@ msgstr "Tarayıcı"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Uyarı: Bu grafik kartı denenilirken makinanız kilitlenebilir"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Kartın IO değeri"
 
 #: ../../any.pm:1
 #, c-format
@@ -4581,13 +4602,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Disket biçimi"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4688,11 +4702,6 @@ msgstr "%s bölümü bağlanıyor"
 #, c-format
 msgid "User name"
 msgstr "Kullanıcı adı"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Yeni yapılandırma (isdn-hafif)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5134,6 +5143,11 @@ msgstr "Libya"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Betikler ayarlanıyor, yazılım kuruluyor, sunucular başlatılıyor..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Paralel port \\/*%s üzerindeki yazıcı"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5165,6 +5179,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "USB printer #%s"
+msgstr "USB yazıcı \\/*%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5419,6 +5438,11 @@ msgstr ""
 "\n"
 "Bir adet bilinmeyen yazıcı bilgisayarınıza doğrudan bağlı"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "AltGr tuşu"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5454,11 +5478,6 @@ msgstr "Çek Cumhuriyeti"
 msgid "Egypt"
 msgstr "Mısır"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Eski yapılandırma (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5485,6 +5504,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Geçici dosyaları engelle"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Tebrikler, ağ ve internet yapılandırmasını tamamladınız.\n"
+"\n"
+"Şimdi bu yapılandırma sisteminize uygulanacak.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6308,6 +6337,11 @@ msgstr "Silinecek Profil:"
 msgid "Local measure"
 msgstr "Yerel oran"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6338,13 +6372,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Uruguay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Uruguay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6404,46 +6438,6 @@ msgstr "Bangladeş"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japonya (kablo)"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Yazıcı Ayarları Sihirbazına Hoş Geldiniz\n"
-"\n"
-"Bu sihirbaz, makinanıza, ağa doğrudan veya uzak bir Windows makinasına bağlı "
-"yazıcıları kurmanızda size yardım edecek.\n"
-"\n"
-"Eğer bu makinaya bağlı yazıcı(ları)nız varsa, bilgisayarınıza takın ve "
-"çalıştırın. Böylece otomatik olarak tanınabilir(ler). Ayrıca ağ yazı(ları)"
-"nız ve Windows makinalarınızın da bağlı ve çalışır durumda olmaları "
-"gerekir.\n"
-"\n"
-"Ağdaki yazıcıları tanımanın bu makinaya bağlı yazıcıların tanınmasından daha "
-"uzun süreceğini unutmayın. Bu yüzden eğer gerekmiyorsa ağda bulunan ve/veya "
-"Windows'a bağlı yazıcıların otomatik tanınmasını iptal edin.\n"
-"\n"
-" Hazır olduğunuzda \"İleri\"ye veya yazıcı(ları)nızı şimdi kurmak "
-"istemiyorsanız \"İptal\"e basın."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7252,6 +7246,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Öntanımlı yazıcı ayarları"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -7938,11 +7940,6 @@ msgstr ""
 "  Rapor iletiniz gönderilemedi.\n"
 "  Lütfen sendmail'ı yapılandırın"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", paralel port \\#%s üzerindeki çok işlevli aygıt"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8123,9 +8120,9 @@ msgstr "Bilgi: "
 msgid "Button `%s': %s"
 msgstr "Düğme `%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Lütfen bekleyin"
@@ -8334,6 +8331,11 @@ msgid ""
 msgstr ""
 "Lütfen yazıcınızın bağlı olduğu portu seçiniz ya da aygıt/dosya ismi vererek "
 "belirtiniz."
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Rusça (Fonetik)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9514,6 +9516,11 @@ msgstr "işlemci sayısı"
 msgid "Hardware clock set to GMT"
 msgstr "Donanım saati GMT'ye göre ayarlansın"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Yapılandırmanızı denemek ister misiniz?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9528,6 +9535,11 @@ msgstr "Lütfen yazıcınızın bağlı olduğu portu seçiniz."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Cd-rom'u değiştir"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Hangi XFree86 yapılandırmasını kullanmak istiyorsunuz?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9938,7 +9950,8 @@ msgstr "Yüklü yazı tiplerini seçimden çıkar"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "İptal"
@@ -10071,6 +10084,11 @@ msgstr "Amerikan (US) klavye (uluslararası)"
 msgid "Not installed"
 msgstr "Kurulmadı"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "İki shift tuşu birlikte"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10156,11 +10174,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-FTP ile Ağ.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Rusça (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10903,6 +10916,11 @@ msgstr "Bu paketi seçimlerinizden çıkaramazsınız. Güncellenmek zorunda"
 msgid "Loading from floppy"
 msgstr "Disketten yükleniyor"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11006,6 +11024,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Türünü değiştir"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB yazıcı #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11267,15 +11290,15 @@ msgstr "Önyüklemede"
 msgid "Bus identification"
 msgstr "Veriyolu tanımlaması"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Önce verinizin yedeğini alınız"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikan"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Önce verinizin yedeğini alınız"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11723,7 +11746,7 @@ msgstr "TV kartı bulunamadı."
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Seçenekler"
@@ -12352,6 +12375,11 @@ msgstr "Loopback dosya ismi: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS sunucu adresi 1.2.3.4 biçimide olmalıdır"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Uzaktan Yönetim"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13149,6 +13177,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13158,11 +13191,6 @@ msgstr "pfm dönüşümü"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Farenizin bağlı olduğu veri yolunu giriniz (örn: /dev/aux)"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13517,6 +13545,11 @@ msgstr "\tYedeklerde tar ve gzip kullanılsın\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "İki shift tuşu birlikte"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -13555,6 +13588,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", paralel port #%s üzerindeki çok işlevli aygıt"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14215,17 +14253,6 @@ msgstr ""
 "istiyorsanız, \"Community\" sayfalarımızda bulunan tartışma gruplarına "
 "katılın."
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Tebrikler, ağ ve internet yapılandırmasını tamamladınız.\n"
-"\n"
-"Şimdi bu yapılandırma sisteminize uygulanacak.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14275,6 +14302,11 @@ msgstr "sil"
 #, c-format
 msgid "here if no."
 msgstr "aksi takdirde buraya tıklayın."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Yardım"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14430,6 +14462,7 @@ msgstr "Filipinler"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Tamam"
@@ -14470,6 +14503,33 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Yazıcı Ayarları Sihirbazına Hoş Geldiniz\n"
+"\n"
+"Bu sihirbaz bilgisayarınıza bağlı yazıcı(ları)nızın kurulumda size yardımcı "
+"olacak.\n"
+"\n"
+"Eğer bu makinaya bağlı yazıcı(ları)nız varsa, bilgisayarınıza takın ve "
+"çalıştırın. Böylece otomatik olarak tanınabilir(ler).\n"
+"\n"
+" Hazır olduğunuzda \"İleri\"ye veya yazıcı(ları)nızı şimdi kurmak "
+"istemiyorsanız \"İptal\"e basın."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14913,8 +14973,9 @@ msgstr ", \"%2$s\" sunucusundaki \"%1$s\" adlı yazıcı"
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Hata"
@@ -15862,6 +15923,11 @@ msgstr "Hatalı bloklar sınansın mı?"
 msgid "Other MultiMedia devices"
 msgstr "Diğer Çoklu Ortam aygıtları"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Yazıcı"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -16543,6 +16609,11 @@ msgstr "Açılış Disketi Oluştur"
 msgid "Solomon Islands"
 msgstr "Solomon Adaları"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Lütfen farenizi deneyin"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -16640,6 +16711,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(%s zaten ekli)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Önyükleyici kurulumu"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17071,6 +17147,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Tüm yedekler geri alınsın"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " paralel port #%s üstündeki"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17187,6 +17268,11 @@ msgstr "Çeşitli"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "AltGr tuşu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17409,11 +17495,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Bağlanıldı"
-
-#: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
-msgid "USB printer \\#%s"
-msgstr "USB yazıcı \\/*%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17756,6 +17837,11 @@ msgstr "Kullanıcıyı kabul et"
 #, c-format
 msgid "Server"
 msgstr "Sunucu"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Sol \"Windows\" tuşu"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19071,6 +19157,33 @@ msgstr "NFS sunucusu, SMB sunucusu, Vekil Sunucu, ssh Sunucu"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Webde dolaşmak , posta , haber okumak ve yollamak için araçları ayarla"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Hangi ISDN yapılandırmasını tercih edersiniz?\n"
+#~ "\n"
+#~ " * \"Eski\" yapılandırma isdn4net kullanır. Güçlü araçlar\n"
+#~ "   içermesine rağmen yapılandırma zor olabilir ve standart değildir.\n"
+#~ "\n"
+#~ " * \"Yeni\" yapılandırmanın anlaşılması daha kolay, daha standart\n"
+#~ "   ancak daha az araç içerir.\n"
+#~ "\n"
+#~ "Size hangisi kolay geliyorsa o yapılandırmayı seçmeniz önerilir.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Yeni yapılandırma (isdn-hafif)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Eski yapılandırma (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "İnternet bağlantısı ve yapılandırması"

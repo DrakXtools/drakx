@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-03-15 18:00--800\n"
 "Last-Translator: Vedran Ljubović <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <lokal-subscribe@lugbih.org>\n"
@@ -346,6 +346,11 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malezija"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr "Potrebno je restartovati mrežu. Želite li je restartovati?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1704,11 +1709,6 @@ msgstr ""
 "sistemske kvarove. Želite li napraviti boot disketu za vaš sistem?\n"
 "%s"
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB štampač \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1748,6 +1748,11 @@ msgstr "Joystick"
 #, c-format
 msgid "El Salvador"
 msgstr "El Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1840,11 +1845,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "Izvrši novi backup prije vraćanja (samo za inkrementalni backup.)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "Štampač na paralelnom portu \\#%s"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2010,11 +2010,6 @@ msgstr ""
 "Linux particiju. Budite pažljivi, svi podaci koji se nalaze na njemu će "
 "biti\n"
 "izgubljeni i neće se moći vratiti!"
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " na paralelnom portu \\#%s"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -3121,6 +3116,11 @@ msgstr "Pokreni X-Window sistem na startu"
 msgid "hourly"
 msgstr "svakog sata"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "Desna Alt tipka"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -3174,6 +3174,44 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Podešavam aplikacije..."
 
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Dobro došli u Čarobnjak za podešavanje štampača\n"
+"\n"
+"Ovaj čarobnjak će vam pomoći da instalirate štampače spojene na ovaj "
+"računar, na mrežu ili na udaljeni Windows računar\n"
+"\n"
+"Ako imate štampač spojen na ovaj računar, molim priključite ga na računar i "
+"upalite ga kako bi bio auto-prepoznat. Takođe mrežni štampači i Windows "
+"računari moraju biti povezani i upaljeni.\n"
+"\n"
+"Obratite pažnju da detekcija mrežnih štampača traje duže nego detekcija "
+"štampača spojenih na ovaj računar. Stoga ugasite detekciju mrežnih štampača "
+"i/ili Windows štampača ako vam ona nije potrebna.\n"
+"\n"
+"Kliknite na \"Dalje\" kada budete spremni, ili na \"Odustani\" ako ne želite "
+"podesiti štampač sada."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -3183,29 +3221,6 @@ msgstr "Normalna modemska konekcija"
 #, c-format
 msgid "File Selection"
 msgstr "Izbor datoteka"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
-"Koju ISDN konfiguraciju želite?\n"
-"\n"
-"* Stara konfiguracija koristi isdn4net. On sadrži moćne alate,\n"
-"  ali ga je teško podesiti i nije standardiziran.\n"
-"\n"
-"* Novu konfiguraciju je lakše razumjeti, standardnija je,\n"
-"  ali ima manje alata.\n"
-"\n"
-"Preporučujemo light konfiguraciju.\n"
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3915,6 +3930,11 @@ msgstr "Skener"
 #, c-format
 msgid "Warning: testing this graphic card may freeze your computer"
 msgstr "Upozorenje: testiranje ove grafičke karte može zalediti računar"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "IO kartice"
 
 #: ../../any.pm:1
 #, c-format
@@ -4784,13 +4804,6 @@ msgstr "Mogu podesiti vaš računar da automatski prijavi jednog korisnika."
 msgid "Floppy format"
 msgstr "Format diskete"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4890,11 +4903,6 @@ msgstr "Montiram particiju %s"
 #, c-format
 msgid "User name"
 msgstr "Korisničko ime"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr "Nova konfiguracija (isdn-light)"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -5337,6 +5345,11 @@ msgstr "Libija"
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Podešavam skripte, instaliram software, pokrećem servere..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "Štampač na paralelnom portu #%s"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5371,6 +5384,11 @@ msgstr ""
 "Arguments: (arg)\n"
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB štampač #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5636,6 +5654,11 @@ msgstr ""
 "\n"
 "Na vaš sistem je direktno spojen jedan nepoznat štampač"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "Desna Alt tipka"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -5671,11 +5694,6 @@ msgstr "Češka"
 msgid "Egypt"
 msgstr "Egipat"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr "Stara konfiguracija (isdn4net)"
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -5701,6 +5719,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr "Onemogući privremene datoteke"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Čestitamo, podešavanje mreže i interneta je završeno.\n"
+"\n"
+"Sada će ova konfiguracija biti primjenjena na vaš sistem.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6529,6 +6557,11 @@ msgstr "Profil za brisanje:"
 msgid "Local measure"
 msgstr "Lokalne mjere"
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -6559,13 +6592,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Urugvaj"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Urugvaj"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -6624,45 +6657,6 @@ msgstr "Bangladeš"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Japan (kablovska)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
-"\n"
-"Dobro došli u Čarobnjak za podešavanje štampača\n"
-"\n"
-"Ovaj čarobnjak će vam pomoći da instalirate štampače spojene na ovaj "
-"računar, na mrežu ili na udaljeni Windows računar\n"
-"\n"
-"Ako imate štampač spojen na ovaj računar, molim priključite ga na računar i "
-"upalite ga kako bi bio auto-prepoznat. Takođe mrežni štampači i Windows "
-"računari moraju biti povezani i upaljeni.\n"
-"\n"
-"Obratite pažnju da detekcija mrežnih štampača traje duže nego detekcija "
-"štampača spojenih na ovaj računar. Stoga ugasite detekciju mrežnih štampača "
-"i/ili Windows štampača ako vam ona nije potrebna.\n"
-"\n"
-"Kliknite na \"Dalje\" kada budete spremni, ili na \"Odustani\" ako ne želite "
-"podesiti štampač sada."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7495,6 +7489,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Podrazumjevane postavke štampača"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -8200,11 +8202,6 @@ msgstr ""
 "  Vaš mail izvještaj nije poslan.\n"
 "  Molim podesite sendmail"
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", višenamjenski uređaj na paralelnom portu \\#%s"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -8392,9 +8389,9 @@ msgstr "Info: "
 msgid "Button `%s': %s"
 msgstr "Dugme '%s': %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Molimo sačekajte"
@@ -8608,6 +8605,11 @@ msgid ""
 msgstr ""
 "Alternativno, možete nasvesti naziv uređaja / naziv datoteke na ulaznoj "
 "liniji"
+
+#: ../../keyboard.pm:1
+#, c-format
+msgid "Russian (Phonetic)"
+msgstr "Ruska (fonetska)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9819,6 +9821,11 @@ msgstr "broj procesora"
 msgid "Hardware clock set to GMT"
 msgstr "Hardverski sat podešen na GMT"
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Želite li testirati konfiguraciju?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -9833,6 +9840,11 @@ msgstr "Molimo izaberite na koji port je priključen vaš štampač."
 #, c-format
 msgid "Change Cd-Rom"
 msgstr "Promijenite CD-ROM"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
+msgstr "Koju konfiguraciju XFree želite imati?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10240,7 +10252,8 @@ msgstr "Isključi instalirane fontove"
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Odustani"
@@ -10374,6 +10387,11 @@ msgstr "US tastatura (međunarodna)"
 msgid "Not installed"
 msgstr "Nije instaliran"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Obje Shift tipke istovremeno"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -10462,11 +10480,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr "\t-Mrežu preko FTPa.\n"
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Ruska (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11224,6 +11237,11 @@ msgstr "Ne možete isključiti ovaj paket. On mora biti unaprijeđen"
 msgid "Loading from floppy"
 msgstr "Učitavam sa diskete"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Mouse Systems"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -11326,6 +11344,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Promijeni tip"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB štampač #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -11592,15 +11615,15 @@ msgstr "Prilikom boota"
 msgid "Bus identification"
 msgstr "Identifikacija sabirnice (busa)"
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr "Molim najprije napravite backup vaših podataka"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikan"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr "Molim najprije napravite backup vaših podataka"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12045,7 +12068,7 @@ msgstr "Nije detektovana TV kartica!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr "Opcije"
@@ -12685,6 +12708,11 @@ msgstr "Naziv loopback datoteke: "
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Adresa DNS servera treba biti u formatu 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Udaljena kontrola"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13525,6 +13553,11 @@ msgstr ""
 "\n"
 "Enable/Disable msec hourly security check."
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -13534,11 +13567,6 @@ msgstr "pfm fonts konverzija"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Vrsta sabirnice na koju je spojen miš"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13971,6 +13999,11 @@ msgstr "\tBackupi koriste tar i gzip\n"
 msgid "2 MB"
 msgstr "2 MB"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Obje Shift tipke istovremeno"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -14017,6 +14050,11 @@ msgid ""
 msgstr ""
 "Frekvencija bi trebala imati završetak k, M ili G (na primjer, \"2.46G\" za "
 "frekvenciju 2.46 GHz) ili dodajte odgovarajući broj nula (0)."
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", višenamjenski uređaj na paralelnom portu #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -14688,17 +14726,6 @@ msgstr ""
 "Podijelite vaše znanje i pomozite izgradnju Linux softvera, pridružite se "
 "diskusijskim grupama na našim \"Community\" stranicama."
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Čestitamo, podešavanje mreže i interneta je završeno.\n"
-"\n"
-"Sada će ova konfiguracija biti primjenjena na vaš sistem.\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -14774,6 +14801,11 @@ msgstr "obriši"
 #, c-format
 msgid "here if no."
 msgstr "ovdje ako ne."
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Pomoć"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -14932,6 +14964,7 @@ msgstr "Filipini"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -14975,6 +15008,33 @@ msgstr ""
 "Ovdje dodajte CUPS servere čije štampače želite koristiti. Ovo trebate "
 "raditi samo ako serveri ne broadcast-uju informacije o njihovim štampačima "
 "cijeloj lokalnoj mreži."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+"\n"
+"Dobro došli u Čarobnjak za podešavanje štampača\n"
+"\n"
+"Ovaj čarobnjak će vam pomoći da instalirate štampače spojene na ovaj "
+"računar.\n"
+"\n"
+"Ako imate štampač spojen na ovaj računar, molim priključite ga na računar i "
+"upalite ga kako bi bio auto-prepoznat.\n"
+"\n"
+"Kliknite na \"Dalje\" kada budete spremni, ili na \"Odustani\" ako ne želite "
+"podesiti štampač sada."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15420,8 +15480,9 @@ msgstr ", štampač \"%s\" na serveru \"%s\""
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Greška"
@@ -16387,6 +16448,11 @@ msgstr "Provjeri loše blokove?"
 msgid "Other MultiMedia devices"
 msgstr "Drugi multimedijalni uređaj"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Štampač"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -17079,6 +17145,11 @@ msgstr "Napravite boot disketu"
 msgid "Solomon Islands"
 msgstr "Solomonska ostrva"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Molimo testirajte miš"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -17178,6 +17249,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(već dodan %s)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Instalacija bootloadera"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17612,6 +17688,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr "Vrati sve backupe"
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " na paralelnom portu #%s"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -17728,6 +17809,11 @@ msgstr "Razni"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "Desna Alt tipka"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17952,11 +18038,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Konektovan"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB štampač \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18302,6 +18383,11 @@ msgstr "Prihvati korisnika"
 #, c-format
 msgid "Server"
 msgstr "Server"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Lijeva \"Windows\" tipka"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -19646,6 +19732,33 @@ msgstr "NFS server, SMB server, Proxy server, ssh server"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Skup alata za čitanje i slanje pošte i news-a i pregledanje Weba"
+
+#~ msgid ""
+#~ "Which ISDN configuration do you prefer?\n"
+#~ "\n"
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
+#~ msgstr ""
+#~ "Koju ISDN konfiguraciju želite?\n"
+#~ "\n"
+#~ "* Stara konfiguracija koristi isdn4net. On sadrži moćne alate,\n"
+#~ "  ali ga je teško podesiti i nije standardiziran.\n"
+#~ "\n"
+#~ "* Novu konfiguraciju je lakše razumjeti, standardnija je,\n"
+#~ "  ali ima manje alata.\n"
+#~ "\n"
+#~ "Preporučujemo light konfiguraciju.\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "Nova konfiguracija (isdn-light)"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "Stara konfiguracija (isdn4net)"
 
 #~ msgid "Internet connection & configuration"
 #~ msgstr "Internet konekcija & podešavanje"

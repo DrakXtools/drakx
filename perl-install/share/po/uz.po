@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drakxtools-newt 1.1.9\n"
-"POT-Creation-Date: 2003-05-16 14:13+0200\n"
+"POT-Creation-Date: 2003-05-31 11:34+0200\n"
 "PO-Revision-Date: 2003-03-05 22:31+0000\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -324,6 +324,13 @@ msgstr ""
 #, c-format
 msgid "Malaysia"
 msgstr "Malayziya"
+
+#: ../../standalone/drakedm:1
+#, fuzzy, c-format
+msgid "The change is done, do you want to restart the dm service ?"
+msgstr ""
+"Tarmoqni boshqadan ishga tushirish kerak. Uni boshqadan ishga tushirishni "
+"istaysizmi?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1351,11 +1358,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid ", USB printer \\#%s"
-msgstr ", USB printer \\#%s"
-
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latvian"
@@ -1395,6 +1397,11 @@ msgstr "Joystik"
 #, c-format
 msgid "El Salvador"
 msgstr "Salvador"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "DVD"
+msgstr "DVD-ROM"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1478,11 +1485,6 @@ msgstr ""
 #, c-format
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer on parallel port \\#%s"
-msgstr "\\#%s parallel portidagi printer"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1632,11 +1634,6 @@ msgid ""
 "Mandrake Linux partition. Be careful, all data present on this partition\n"
 "will be lost and will not be recoverable!"
 msgstr ""
-
-#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid " on parallel port \\#%s"
-msgstr " \\#%s parallel portida"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -2510,6 +2507,11 @@ msgstr ""
 msgid "hourly"
 msgstr "har soat"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Shift key"
+msgstr "O'ng Alt tugmasi"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
@@ -2556,6 +2558,28 @@ msgstr ""
 msgid "Configuring applications..."
 msgstr "Dasturlarni moslayapman"
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer, connected directly to the network or to a remote Windows machine.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected. Also your network printer(s) and your Windows "
+"machines must be connected and turned on.\n"
+"\n"
+"Note that auto-detecting printers on the network takes longer than the auto-"
+"detection of only the printers connected to this machine. So turn off the "
+"auto-detection of network and/or Windows-hosted printers when you don't need "
+"it.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2565,20 +2589,6 @@ msgstr "Modem orqali oddiy ulanish"
 #, c-format
 msgid "File Selection"
 msgstr "Fayl tanlash"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid ""
-"Which ISDN configuration do you prefer?\n"
-"\n"
-"* The Old configuration uses isdn4net. It contains powerful\n"
-"  tools, but is tricky to configure, and not standard.\n"
-"\n"
-"* The New configuration is easier to understand, more\n"
-"  standard, but with less tools.\n"
-"\n"
-"We recommand the light configuration.\n"
-msgstr ""
 
 #: ../../help.pm:1 ../../printer/cups.pm:1 ../../printer/data.pm:1
 #, c-format
@@ -3211,6 +3221,11 @@ msgid "Warning: testing this graphic card may freeze your computer"
 msgstr ""
 "Ogohnoma: bu grafik kartani sinab ko'rish kompyuterni qotib qolishiga olib "
 "kelishi mumkin"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "Bad Ip"
+msgstr "Kartaning IO-si"
 
 #: ../../any.pm:1
 #, c-format
@@ -3971,13 +3986,6 @@ msgstr ""
 msgid "Floppy format"
 msgstr "Disketning formati"
 
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid ""
-"the WP flag in the CR0 register enforce write proctection at the memory page "
-"level, thus enabling the processor to prevent kernel accesses)"
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Generic Printers"
@@ -4066,11 +4074,6 @@ msgstr "Disk qismini (%s) ulayapman"
 #, c-format
 msgid "User name"
 msgstr "Foydalanuvchi"
-
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "New configuration (isdn-light)"
-msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -4423,6 +4426,11 @@ msgstr ""
 "Skriptlarni moslayapman, dasturlarni o'rnatayapman, serverlarni ishga "
 "tushirayapman..."
 
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer on parallel port #%s"
+msgstr "#%s parallel portidagi printer"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4452,6 +4460,11 @@ msgid ""
 "\n"
 "Enable/Disable libsafe if libsafe is found on the system."
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "USB printer #%s"
+msgstr "USB printer #%s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -4681,6 +4694,11 @@ msgstr ""
 "\n"
 "Bitta noma'lum printer sistemangizga to'g'ridan-to'g'ri ulangan."
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Right Control key"
+msgstr "O'ng Alt tugmasi"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Zambia"
@@ -4716,11 +4734,6 @@ msgstr "Chex Respublikasi"
 msgid "Egypt"
 msgstr "Misr"
 
-#: ../../network/isdn.pm:1
-#, c-format
-msgid "Old configuration (isdn4net)"
-msgstr ""
-
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Sound card"
@@ -4743,6 +4756,16 @@ msgstr ""
 #, c-format
 msgid "Suppress Temporary Files"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid ""
+"Congratulations, the network and Internet configuration is finished.\n"
+"\n"
+msgstr ""
+"Tabriklaymiz, tarmoqni va Internetni moslash tugadi.\n"
+"Hozir moslamalar sistemangizga qo'llaniladi.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5450,6 +5473,11 @@ msgstr ""
 msgid "Local measure"
 msgstr ""
 
+#: ../../network/network.pm:1
+#, c-format
+msgid "Warning : IP address %s is usually reserved !"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "busmouse"
@@ -5476,13 +5504,13 @@ msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Benin"
-msgstr "Benin"
+msgid "Uruguay"
+msgstr "Urugvay"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "Uruguay"
-msgstr "Urugvay"
+msgid "Benin"
+msgstr "Benin"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5538,29 +5566,6 @@ msgstr "Bangladesh"
 #, c-format
 msgid "Japan (cable)"
 msgstr "Yaponiya (kabel)"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"\n"
-"Welcome to the Printer Setup Wizard\n"
-"\n"
-"This wizard will help you to install your printer(s) connected to this "
-"computer, connected directly to the network or to a remote Windows machine.\n"
-"\n"
-"If you have printer(s) connected to this machine, Please plug it/them in on "
-"this computer and turn it/them on so that it/they can be auto-detected. Also "
-"your network printer(s) and your Windows machines must be connected and "
-"turned on.\n"
-"\n"
-"Note that auto-detecting printers on the network takes longer than the auto-"
-"detection of only the printers connected to this machine. So turn off the "
-"auto-detection of network and/or Windows-hosted printers when you don't need "
-"it.\n"
-"\n"
-" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
-"to set up your printer(s) now."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6268,6 +6273,14 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Printerning modelini tanlash"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid ""
+"the WP flag in the CR0 register of the cpu enforce write proctection at the "
+"memory page level, thus enabling the processor to prevent unchecked kernel "
+"accesses to user memory (aka this is a bug guard)"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
@@ -6908,11 +6921,6 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
-#: ../../printer/main.pm:1
-#, c-format
-msgid ", multi-function device on parallel port \\#%s"
-msgstr ", ko'p amalli uskuna \\#%s parallel portida"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid ""
@@ -7076,9 +7084,9 @@ msgstr "Ma'lumot: "
 msgid "Button `%s': %s"
 msgstr "Tugma \"%s\": %s"
 
-#: ../../interactive.pm:1 ../../harddrake/sound.pm:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
+#: ../../standalone/drakbug:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Iltimos kutib turing"
@@ -7258,6 +7266,11 @@ msgstr "Birinchi DNS serveri (tanlab bo'ladi)"
 msgid ""
 "Alternatively, you can specify a device name/file name in the input line"
 msgstr ""
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Russian (Phonetic)"
+msgstr "Bolgarcha (fonetik)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8310,6 +8323,11 @@ msgstr "Protsessorlar soni"
 msgid "Hardware clock set to GMT"
 msgstr ""
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "Do you want to start a new configuration ?"
+msgstr "Moslamalarni sinab ko'rishni istaysizmi?"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Give a file name"
@@ -8323,6 +8341,11 @@ msgstr "Iltimos printeringiz ulangan portni tanlang."
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Change Cd-Rom"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Configuration is complete, do you want to apply settings ?"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -8682,7 +8705,8 @@ msgstr ""
 #: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/drakgw:1 ../../standalone/draksec:1
-#: ../../standalone/logdrake:1 ../../standalone/net_monitor:1
+#: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
+#: ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr "Bekor qilish"
@@ -8804,6 +8828,11 @@ msgstr ""
 msgid "Not installed"
 msgstr "O'rnatilmagan"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Alt keys simultaneously"
+msgstr "Bir vaqtda ikkala Shift tugmalari"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
@@ -8880,11 +8909,6 @@ msgstr ""
 #, c-format
 msgid "\t-Network by FTP.\n"
 msgstr ""
-
-#: ../../keyboard.pm:1
-#, c-format
-msgid "Russian (Yawerty)"
-msgstr "Ruscha (Yawerty)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9531,6 +9555,11 @@ msgstr ""
 msgid "Loading from floppy"
 msgstr "Disketdan yuklayapman"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Mouse test"
+msgstr "Sichqonning turi: %s\n"
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid ""
@@ -9623,6 +9652,11 @@ msgstr "SILO"
 #, c-format
 msgid "Change type"
 msgstr "Turini o'zgartirish"
+
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ", USB printer #%s"
+msgstr ", USB printer #%s"
 
 #: ../../any.pm:1
 #, c-format
@@ -9823,15 +9857,15 @@ msgstr ""
 msgid "Bus identification"
 msgstr ""
 
-#: ../../diskdrake/hd_gtk.pm:1
-#, c-format
-msgid "Please make a backup of your data first"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Vatican"
 msgstr "Vatikan"
+
+#: ../../diskdrake/hd_gtk.pm:1
+#, c-format
+msgid "Please make a backup of your data first"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -10197,7 +10231,7 @@ msgstr "TV karta topilmadi!"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
 msgstr ""
@@ -10762,6 +10796,11 @@ msgstr ""
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS serverning manzili quyidagi formatda bo'lishi shart: 1.2.3.4"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Control key"
+msgstr "Uzoqdan boshqarish"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11495,6 +11534,11 @@ msgid ""
 "Enable/Disable msec hourly security check."
 msgstr ""
 
+#: ../../lang.pm:1
+#, c-format
+msgid "Uganda"
+msgstr "Uganda"
+
 #: ../../standalone/drakfont:1
 #, fuzzy, c-format
 msgid "%s fonts conversion"
@@ -11504,11 +11548,6 @@ msgstr "Shriftlarni aylantirish"
 #, fuzzy, c-format
 msgid "the type of bus on which the mouse is connected"
 msgstr "Protsessorlar soni"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "Uganda"
-msgstr "Uganda"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11832,6 +11871,11 @@ msgstr ""
 msgid "2 MB"
 msgstr "2 Mb"
 
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Both Control keys simultaneously"
+msgstr "Bir vaqtda ikkala Shift tugmalari"
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -11870,6 +11914,11 @@ msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
 "frequency), or add enough '0' (zeroes)."
 msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid ", multi-function device on parallel port #%s"
+msgstr ", ko'p amalli uskuna #%s parallel portida"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -12473,17 +12522,6 @@ msgid ""
 "discussion forums on our \"Community\" webpages."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid ""
-"Congratulations, the network and Internet configuration is finished.\n"
-"The configuration will now be applied to your system.\n"
-"\n"
-msgstr ""
-"Tabriklaymiz, tarmoqni va Internetni moslash tugadi.\n"
-"Hozir moslamalar sistemangizga qo'llaniladi.\n"
-"\n"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Hard drive.\n"
@@ -12533,6 +12571,11 @@ msgstr "O'chirish"
 #, c-format
 msgid "here if no."
 msgstr ""
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "help"
+msgstr "Yordam"
 
 #: ../../network/network.pm:1
 #, fuzzy, c-format
@@ -12688,6 +12731,7 @@ msgstr "Filippin"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1
 #: ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../standalone/mousedrake:1
 #, c-format
 msgid "Ok"
 msgstr "Ok"
@@ -12725,6 +12769,22 @@ msgid ""
 "Add here the CUPS servers whose printers you want to use. You only need to "
 "do this if the servers do not broadcast their printer information into the "
 "local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"\n"
+"Welcome to the Printer Setup Wizard\n"
+"\n"
+"This wizard will help you to install your printer(s) connected to this "
+"computer.\n"
+"\n"
+"Please plug in and turn on all printers connected to this machine so that it/"
+"they can be auto-detected.\n"
+"\n"
+" Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
+"to set up your printer(s) now."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13130,8 +13190,9 @@ msgstr ", \"%s\" serverdagi \"%s\" printer"
 #: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
+#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Error"
 msgstr "Xato"
@@ -14021,6 +14082,11 @@ msgstr ""
 msgid "Other MultiMedia devices"
 msgstr "Boshqa multimedia uskunalar"
 
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "burner"
+msgstr "Printer"
+
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "No remote machines"
@@ -14631,6 +14697,11 @@ msgstr "Yuklash diskini yaratish"
 msgid "Solomon Islands"
 msgstr "Solomon Orollari"
 
+#: ../../standalone/mousedrake:1
+#, fuzzy, c-format
+msgid "Please test your mouse:"
+msgstr "Iltimos sichqonni sinab ko'ring"
+
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "(module %s)"
@@ -14717,6 +14788,11 @@ msgstr ""
 #, c-format
 msgid "(already added %s)"
 msgstr "(allaqachon %s qo'shilgan)"
+
+#: ../../any.pm:1
+#, fuzzy, c-format
+msgid "Bootloader installation in progress"
+msgstr "Aniqlash ketayapti"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -15093,6 +15169,11 @@ msgstr ""
 msgid "Restore all backups"
 msgstr ""
 
+#: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid " on parallel port #%s"
+msgstr " #%s parallel portida"
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
@@ -15204,6 +15285,11 @@ msgstr "Har xil"
 #, c-format
 msgid "Zip"
 msgstr "Zip"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Alt key"
+msgstr "O'ng Alt tugmasi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15384,11 +15470,6 @@ msgstr ""
 #, c-format
 msgid "Connected"
 msgstr "Ulangan"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "USB printer \\#%s"
-msgstr "USB printer \\#%s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15659,6 +15740,11 @@ msgstr "Foydalanuvchini qabul qilish"
 #, c-format
 msgid "Server"
 msgstr "Server"
+
+#: ../../keyboard.pm:1
+#, fuzzy, c-format
+msgid "Left Shift key"
+msgstr "Chap \"Windows\" tugmasi"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
