@@ -84,7 +84,7 @@ sub new_nonedit_combo {
 
 sub new_wrapped_label {
     my ($label) = @_;
-    my $w = Gtk2::Label->new($label);
+    my $w = gtkset_justify(Gtk2::Label->new($label), 'left');
     $w->set_line_wrap(1);
     $w;
 }
@@ -106,7 +106,7 @@ my %inv_translations = map { translate($_) => $_ } N_("ALL"), N_("LOCAL"), N_("N
 my %translations = reverse %inv_translations;
 
 sub to_i18n { map { $translations{$_} || $_ } @_ }
-sub from_i18n { $inv_translations{$_->[0]} }
+sub from_i18n { $inv_translations{$_[0]} || $_[0] }
 
 ############################ MAIN WINDOW ###################################
 # Set different options to Gtk2::Window
@@ -177,7 +177,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                                $values{$i} = new Gtk2::Entry();
                                                                                                $entry = $values{$i};
                                                                                            }
-                                                                                           $entry->set_text($msec->get_function_value($i));
+                                                                                           $entry->set_text(to_i18n($msec->get_function_value($i)));
                                                                                            set_help_tip($entry, $default, $i);
                                                                                            [ new_wrapped_label($fields{$i} || $i), $values{$i} ];
                                                                                        } sort $msec->list_functions($domain))))),
@@ -237,7 +237,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
                                     log::explanations("Setting msec functions related to $domain");
                                     foreach my $key (keys %{$options_values{$domain}}) {
                                         my $opt = $options_values{$domain}{$key};
-                                        $msec->set_function($key, from_i18n($opt =~ /Combo/ ? $opt->entry->get_text : $opt->get_text));
+                                        $msec->set_function($key, from_i18n($opt->get_text));
                                     }
                                 }
                                 $msec->apply_functions;
