@@ -23,7 +23,8 @@ use log;
 #-######################################################################################
 sub read_conf {
     my ($file) = @_;
-    { getVarsFromSh($file) }
+    my %netc = getVarsFromSh($file);
+    \%netc;
 }
 
 sub read_resolv_conf {
