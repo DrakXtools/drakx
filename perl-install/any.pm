@@ -620,7 +620,10 @@ sub autologin {
     my @wm = split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
-    if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
+    if (member('KDE', @wm) && @users == 1 && $o->{meta_class} eq 'discovery') {
+	$o->{desktop} = 'KDE';
+	$o->{autologin} = $users[0];
+    } elsif (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
 	my $use_autologin = @users == 1;
 
 	$in->ask_from_(
