@@ -82,7 +82,7 @@ sub handle_virtual_key() {
 
 sub setup_userconf {
     my ($o) = @_;
-    if (!@{$o->{users}} && `getent passwd 501` =~ /([^:]+):/) {
+    if (is_empty_array_ref($o->{users}) && `getent passwd 501` =~ /([^:]+):/) {
         log::l("passwd/501 is $1");
         $o->{users} = [ { name => $1 } ];
 	$ENV{HOME} = "/home/$1"; #- used by lang::read()  :-/
@@ -159,8 +159,7 @@ sub init {
     }
 
     #- free up stage1 memory
-    eval { fs::umount('/stage1/proc/bus/usb') };
-    fs::umount($_) foreach qw(/stage1/proc /stage1);
+    eval { fs::umount($_) } foreach qw(/stage1/proc/bus/usb /stage1/proc /stage1);
 
     #- devfsd needed for devices accessed by old names
     fs::mount("none", "/dev", "devfs", 0);
@@ -207,7 +206,7 @@ drakx_stuff:
                            qw(initGraphical verifyKey startMove)
                          : $using_existing_user_config ?
                            qw(initGraphical autoSelectLanguage verifyKey selectMouse selectKeyboard configMove startMove)
-                         : qw(initGraphical selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
+                         : qw(initGraphical selectLanguage acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
     #- don't use shadow passwords since pwconv overwrites /etc/shadow hence contents will be lost for usb key
@@ -250,6 +249,7 @@ sub install2::autoSelectLanguage {
 sub install2::handleI18NClp {
     my $o = $::o;
 
+    log::l("move: handleI18NClp");
     lomount_clp("i18n_$o->{locale}{lang}", '/usr');
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 }
@@ -604,7 +604,16 @@ sub install2::initGraphical {
     $xdim > 1600 and $xdim = 1600;
     run_program::run('qiv', '--root', "/image/move/BOOT-$xdim-MOVE.jpg");
     
+    undef *install_steps_interactive::errorInStep;
     *install_steps_interactive::errorInStep = \&errorInStep;
+
+    my $gtk_charsetChanged = \&install_steps_gtk::charsetChanged;
+    undef *install_steps_gtk::charsetChanged;
+    *install_steps_gtk::charsetChanged = sub {
+	log::l("move: charsetChanged");
+	install2::handleI18NClp();
+	&$gtk_charsetChanged;
+    };
 }
 
 sub install2::startMove {
