@@ -200,7 +200,7 @@ sub kernelVersion {
     if (my $link = (arch() !~ /ppc/) ?
 	readlink("$o->{prefix}/boot/vmlinuz") :
 	readlink("$o->{prefix}/boot/vmlinux")) {
-	$link =~ first(/-(.*mdk)/);
+	first($link =~ /-(.*mdk)/);
     } else {
 	require pkgs;
 	my $p = pkgs::packageByName($o->{packages}, "kernel");
