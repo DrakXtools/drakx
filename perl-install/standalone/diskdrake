@@ -110,7 +110,6 @@ if ($type eq 'list-hd') {
 } elsif ($type eq 'dav') {
     require diskdrake::dav;
     diskdrake::dav::main($in, $all_hds);
-    $::isEmbedded = $isEmbedded;
 } else {
     $in->ask_warn('', "Sorry only a gtk frontend is available") if !$in->isa('interactive::gtk');
     require diskdrake::smbnfs_gtk;
