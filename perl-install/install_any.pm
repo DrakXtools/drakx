@@ -479,10 +479,13 @@ sub unlockCdrom(;$) {
 sub ejectCdrom(;$) {
     my ($cdrom) = @_;
     getFile("XXX"); #- close still opened filehandle
-    $cdrom or cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image), and $cdrom = $1;
-    my $f = eval { $cdrom && detect_devices::tryOpen($cdrom) } or return;
-    eval { fs::umount("/tmp/image") };
-    ioctl $f, c::CDROMEJECT(), 1;
+    $cdrom ||= $1 if cat_("/proc/mounts") =~ m,(/(?:dev|tmp)/\S+)\s+(?:/mnt/cdrom|/tmp/image),;
+    if ($cdrom) {
+	#- umount BEFORE opening the cdrom device otherwise the umount will
+	#- D state if the cdrom is already removed
+	eval { fs::umount("/tmp/image") };
+	eval { ioctl detect_devices::tryOpen($cdrom), c::CDROMEJECT(), 1 };	
+    }
 }
 
 sub setupFB {
