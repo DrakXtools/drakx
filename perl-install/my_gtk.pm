@@ -204,7 +204,7 @@ sub create_box_with_title($@) {
     my $o = shift;
 
     my $nb_lines = map { split "\n" } @_;
-    $o->{box} = (@_ <= 2 && $nb_lines > 3) ?
+    $o->{box} = (@_ <= 2 && $nb_lines > 4) ?
       gtkpack(new Gtk::VBox(0,0),
 	      gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @_)), 400, min(250, $nb_lines * 20))) :
       gtkpack_(new Gtk::VBox(0,0),

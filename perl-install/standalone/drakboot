@@ -12,13 +12,16 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakboot\n";
+/-h/ and die "usage: drakboot [--expert]\n";
 
+$::expert = /-expert/;
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
 
 my $bootloader = lilo::read('', '/etc/lilo.conf');
+local ($_) = `detectloader`;
+$bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
 
 my $hds = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
 my $fstab = [ fsedit::get_fstab(@$hds) ];
@@ -27,11 +30,9 @@ fs::get_mntpoints_from_fstab($fstab);
 ask:
 any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
 
-eval { lilo::install('', $bootloader) };
-my $err = $@;
-eval { lilo::install_grub('', $bootloader, $fstab, $hds) };
+eval { lilo::install('', $bootloader, $fstab, $hds) };
 
-if ($err && $@) {
+if ($@) {
     $in->ask_warn('', 
 		 [ _("Installation of LILO failed. The following error occured:"),
 		   grep { !/^Warning:/ } cat_("/tmp/.error") ]);

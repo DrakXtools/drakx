@@ -226,7 +226,7 @@ sub getAvailableSpace {
     do { $_->{mntpoint} eq '/'    and return int($_->{size} * 512 / 1.07) } foreach @{$o->{fstab}};
 
     if ($::testing) {
-	my $nb = 1350;
+	my $nb = 650;
 	log::l("taking ${nb}MB for testing");
 	return $nb << 20;
     }
@@ -499,7 +499,7 @@ sub setupFB {
 		#- nothing done, fall through linux-fb.
 	    } else {
 		$e->{vga} = $vga;
-		lilo::install($o->{prefix}, $o->{bootloader});
+		lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
 		return 1;
 	    }
 	}
@@ -511,7 +511,7 @@ sub setupFB {
 			  vga => $vga,
 			 })) {
 	$o->{bootloader}{default} = 'linux-fb';
-	lilo::install($o->{prefix}, $o->{bootloader});
+	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     } else {
 	log::l("unable to install kernel with frame buffer support, disabling");
 	return 0;

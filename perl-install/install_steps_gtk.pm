@@ -175,7 +175,7 @@ sub selectMouse {
     $o->SUPER::selectMouse($force);
 
     my $dev = $o->{mouse}{device};
-    if ($old_dev ne $dev && $dev =~ /ttyS/) {
+    if ($old_dev ne $dev && $dev =~ /ttyS/ && !$::testing) {
 	log::l("telling X server to use another mouse");
 	eval { commands::modprobe("serial") };
 	symlinkf($dev, "/dev/mouse");
@@ -295,25 +295,39 @@ _("Choose the sizes"),
 
 #------------------------------------------------------------------------------
 sub chooseSizeToInstall {
-    my ($o, $packages, $min_size, $max_size) = @_;
+    my ($o, $packages, $min_size, $max_size_, $available, $individual) = @_;
+    my $enough = $available > $max_size_;
+    my $max_size = min($max_size_, $available * 0.9);
+    my $percentage = int 100 * $max_size / $max_size_;
+    print "$min_size, $max_size_, $available, $max_size\n";
 
     #- don't ask anything if the difference between min and max is too small
-    return $max_size if $min_size && $max_size / $min_size < 1.01;
+#    return $max_size if $min_size && $max_size / $min_size < 1.01;
 
-    my ($min, $max) = map { pkgs::correctSize($_ / sqr(1024)) } $min_size, $max_size;
-    log::l("choosing size to install between $min and $max (really between $min_size and $max_size)");
+    log::l("choosing size to install between $min_size and $max_size");
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($max, $min, $max);
+    my $adj = create_adjustment($percentage, $min_size * 100 / $max_size_, $percentage);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
+    my $val;
 
     gtkadd($w->{window},
 	  gtkpack(new Gtk::VBox(0,20),
-_("Now that you've selected desired groups, please choose 
-how many packages you want, ranging from minimal to full 
-installation of each selected groups.") .
-		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose them more specificaly in the next step") : ''),
-		 create_packtable({ col_spacings => 10 },
-				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
+		  _("The total size for the groups you have selected is approximately %d MB.\n", pkgs::correctSize($max_size_ / sqr(1024))) .
+		  ($enough ?
+_("If you wish to install less than this size,
+select the percentage of packages that you want to install.
+
+A low percentage will install only the most important packages;
+a percentage of 100% will install all selected packages.") : 
+_("You have space on your disk for only %d%% of these packages.
+
+If you wish to install less than this,
+select the percentage of packages that you want to install.
+A low percentage will install only the most important packages;
+a percentage of %d%% will install as many packages as possible.", $percentage + 1, $percentage + 1))
+. ($individual ? "\n\n" . _("You will be able to choose them more specifically in the next step.") : ''),
+		 create_packtable({},
+				  [ _("Percentage of packages to install") . '  ', $spin, "%", ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
 			       ),
 		 create_okcancel($w)
@@ -321,7 +335,7 @@ installation of each selected groups.") .
 	 );
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });
     $spin->grab_focus();
-    $w->main and pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024);
+    $w->main and $spin->get_value_as_int / 100 * $max_size;
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;

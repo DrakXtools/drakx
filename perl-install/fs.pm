@@ -349,7 +349,12 @@ sub write_fstab($;$$) {
 
     require fsedit;
     unshift @to_add,
-      map {
+      grep { 
+	  my $b = !exists $new{$_->[0]} && !exists $new{$_->[1]};
+	  #- keep in mind the new line for fstab.
+	  @new{@$_[0,1]} = undef;
+	  $b
+      } map {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
 	  $options = $_->{options} || $options;
 
@@ -371,16 +376,12 @@ sub write_fstab($;$$) {
 
 	  add_options($options, "loop") if isLoopback($_) && !isSwap($_); #- no need for loop option for swap files
 
-	  #- keep in mind the new line for fstab.
-	  @new{($_->{mntpoint}, $dev)} = undef;
-
 	  eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
 	  mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
 
 	  [ $dev, $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
-      } grep { $_->{mntpoint} && type2fs($_->{type}) && 
-	       ! exists $new{$_->{mntpoint}} && ! exists $new{"/dev/$_->{device}"} } @$fstab;
+      } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
 
     push @to_add,
       grep { !exists $new{$_->[0]} && !exists $new{$_->[1]} }
@@ -390,7 +391,6 @@ sub write_fstab($;$$) {
     local *F;
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
     print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
-    log::l("fstab: ", join(" ", @$_)) foreach sort { $a->[1] cmp $b->[1] } @to_add;
 }
 
 sub merge_fstabs {

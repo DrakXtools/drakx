@@ -7,7 +7,7 @@ use vars qw(@users);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system :file);
+use common qw(:common :system :file :functional);
 use commands;
 use detect_devices;
 use fsedit;
@@ -69,7 +69,11 @@ sub setupBootloader {
     } elsif ($more || !$::beginner) {
 	$in->set_help("setupBootloaderGeneral") unless $::isStandalone;
 
-	$::expert and $in->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
+	my @m = keys %{$b->{methods}};
+	$::expert and $in->ask_many_from_list_ref('', _("Which bootloader(s) do you want to use?"), 
+						  [ @m ], [ map { \$b->{methods}{$_} } @m ]) || return;
+	#- at least one method
+	grep_each { $::b } %{$b->{methods}} or return;
 
 	my @l = (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },

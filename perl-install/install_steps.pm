@@ -741,14 +741,8 @@ sub setupBootloader($) {
 	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
     } elsif (arch() =~ /^sparc/) {
         silo::install($o->{prefix}, $o->{bootloader});
-    } elsif ($o->{lnx4win}) {
-	local $o->{bootloader}{boot} = first(grep { loopback::carryRootLoopback($_) } @{$o->{fstab}});
-        eval { lilo::install_loadlin($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
     } else {
-        eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
-	my $err = $@;
-        eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds}) };
-	die $err if $@ && $err;
+	lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds});
     }
 }
 

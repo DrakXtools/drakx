@@ -379,7 +379,7 @@ sub load {
     } else {
 	$conf{$name}{loaded} and return;
 
-	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
+#-	$type ||= ($drivers{$name} || { type => 'unknown'})->{type};
 
 	eval { load($_, 'prereq') } foreach @{$deps{$name}};
 	load_raw($name, @options);

@@ -123,20 +123,15 @@ partitions, particularly if they contain files or data you wish to keep.
 Typically retained are /home and /usr/local."),
 
 choosePackages =>
- __("You may now select the packages you wish to install.
+ __("You may now select the group of packages you wish to
+install or upgrade.
 
-
-First you can select group of package to install or upgrade. After that
-you can select more packages according to the total size you wish to
-select.
-
-
-If you are in expert mode, you can select packages individually.
-Please note that some packages require the installation of others.
-These are referred to as package dependencies. The packages you select,
-and the packages they require will be automatically selected for
-install. It is impossible to install a package without installing all
-of its dependencies."),
+DrakX will then check whether you have enough room to install them all. If not,
+it will warn you about it. If you want to go on anyway, it will proceed onto
+the installation of all selected groups but will drop some packages of lesser
+interest. If you scroll down the bottom of the list and check the option
+\"Select packages individually\", you will be able to do so, indeed, but you'll
+have to browse through more than 1000 packages..."),
 
 doInstallStep =>
  __("The packages selected are now being installed. This operation

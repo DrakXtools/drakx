@@ -281,16 +281,16 @@ sub choosePackages {
 	my $min_mark = 1;
 	my @l = values %{$packages->[0]};
 	my @flags = map { pkgs::packageFlagSelected($_) } @l;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $available, $o->{installClass});
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
 	my $max_size = pkgs::selectedSize($packages);
 	mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
 
-	if (!$::beginner && $max_size > $available) {
-	    $o->ask_okcancel('', 
-_("You need %dMB for a full install of the groups you selected.
-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
-	}
-	my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, min($max_size, $available * 0.9)) or goto &choosePackages;
+#-	  if (!$::beginner && $max_size > $available) {
+#-	      $o->ask_okcancel('', 
+#-_("You need %dMB for a full install of the groups you selected.
+#-You can go on anyway, but be warned that you won't get all packages", $max_size / sqr(1024)), 1) or goto &choosePackages
+#-	  }
+	my $size2install = $::beginner && $first_time ? $available * 0.7 : $o->chooseSizeToInstall($packages, $min_size, $max_size, $available, $individual) or goto &choosePackages;
 
 	($o->{packages_}{ind}) = 
 	  pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, $size2install, $o->{installClass});
@@ -299,8 +299,8 @@ You can go on anyway, but be warned that you won't get all packages", $max_size 
 }
 
 sub chooseSizeToInstall {
-    my ($o, $packages, $min, $max) = @_;
-    install_any::getAvailableSpace($o) * 0.7;
+    my ($o, $packages, $min, $max, $available) = @_;
+    $available * 0.7;
 }
 sub choosePackagesTree {}
 
