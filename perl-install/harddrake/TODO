@@ -2,32 +2,28 @@
 
 * Harddrake TODO:
 ** fixes
-*** SCSI: get vendor string
 *** timeout on dialogs in service
 
 ** wishes
-*** move all drakx tools into just a small one-liner that uses real <tool>.pm
-    so that harddrake and mcc reduces their memory usage pattern and
-    be faster (the next fast step will be to use perl6/parrot)
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
 **** different modes:
+***** expert mode only if dadou agree with this idea
 ***** neuneu => automatic config in service (ie for mouse/video card/...)
 ***** expert => run config tools
 
 *** mode neuneu/expert => automatic/tools
 
-** voir dadou -> interface
-
-* FAIRE VALIDER -> dadou (interface), -> qa (scénarios de test)
+** validation:
+*** see dadou (GUI)
+*** & qa team (test cases)
 
 ** missing
 *** window with sliders so that we can resize
 *** check4modem
 *** config module (module options configuration button) => expert only
 *** embedded mode
-*** mode expert => oui/non (cf dadou)
-*** add updfstab
+*** add updfstab as in kudzu
 *** make all drakx tools a simple one-liner that call right module so that
     harddrake2 and mcc can load these tools without more ram eater
 *** enable the user to force a module (isa, isapnp, ...)
@@ -39,12 +35,13 @@
     }
 
 
-** ensure scannerdrake use is ok (=> yvounet)
 
 * Postponed
 ** use fbgtk+2 when booting on fbcon for smoother GUI
-*** pixel, convert perl-GTK to gtk+2 :-)
-
+*** fpons, convert perl-GTK to gtk+2 :-)
+** move all drakx tools into just a small one-liner that uses real <tool>.pm
+    so that harddrake and mcc reduces their memory usage pattern and
+    be faster (the next fast step will be to use perl6/parrot)
 ** for to send a message for unknown hardware to install@mandrakesoft.com
 *** use drakbugreport ?
 
@@ -55,16 +52,11 @@
 
 
 * / no hope / useless :
-** Once we've swtiched to perl-5.8, consider doing:
-    use Storable;
-    retrieve %oldconfig
-    store %config, $previous_conf;
-
 ** enable a string to be passed as detector; in that case, do ourself the =~
 ** alter detect_devices in order to only probe one time
 ** detect *ALL* mouses if more than one (mousedrake?)
 
-**  in Mandrake 9.0 :
+**  deeper data structure in Mandrake 9.1 :
 
     "Mass storage" => (Floppy,
 				   Disk,
