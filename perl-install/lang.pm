@@ -55,6 +55,7 @@ my %languages = (
   'ru'  => [ 'Russian',   		'koi8-r',     'ru', 'ru' ],
   'sk'  => [ 'Slovak',    		'iso-8859-2', 'sk', 'sk' ],
 #- 'sr' => [ 'Serbian',			'iso-8859-5', 'sr', 'sr:sp' ],
+  'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
   'uk'  => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
@@ -71,38 +72,39 @@ sub std_ { std2($_[0], 100), std2($_[0], 100) }
 sub std  { std2($_[0], 100), std2($_[0],  80) }
 
 my %charsets = (
-  "armscii-8"  => [ "arm8",			"armscii8", std_("armscii-8") ],
+  "armscii-8"  => [ "arm8",		"armscii8", std_("armscii-8") ],
 #- chinese needs special console driver for text mode
-  "Big5"       => [ "?????",                    "????",
+  "Big5"       => [ "?????",            "????",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-big5-0" ],
-  "gb2312"     => [ "?????",                    "????",
+  "gb2312"     => [ "?????",            "????",
         "-isas-song ti-medium-r-normal--16-*-*-*-*-*-gb2312.1980-0" ],
-  "iso-8859-1" => [ "lat0-sun16",		"iso15", std("iso8859-1") ],
-  "iso-8859-2" => [ "lat2-sun16",		"iso02", std("iso8859-2") ],
-  "iso-8859-3" => [ "iso03.f16",		"iso03", std_("iso8859-3") ],
-  "iso-8859-4" => [ "lat4u-16",		        "iso04", std_("iso8859-4") ],
-  "iso-8859-5" => [ "iso05.f16",		"iso05", std("iso8859-5") ],
+  "iso-8859-1" => [ "lat0-sun16",	"iso15", std("iso8859-1") ],
+  "iso-8859-2" => [ "lat2-sun16",	"iso02", std("iso8859-2") ],
+  "iso-8859-3" => [ "iso03.f16",	"iso03", std_("iso8859-3") ],
+  "iso-8859-4" => [ "lat4u-16",		"iso04", std_("iso8859-4") ],
+  "iso-8859-5" => [ "iso05.f16",	"iso05", std("iso8859-5") ],
 #- arabic needs special console driver for text mode [acon]
 #- (and gtk support isn't done yet)
-  "iso-8859-6" => [ "iso06.f16",		"iso06", std_("iso8859-6") ],
-  "iso-8859-7" => [ "iso07.f16",		"iso07", std_("iso8859-7") ],
+  "iso-8859-6" => [ "iso06.f16",	"iso06", std_("iso8859-6") ],
+  "iso-8859-7" => [ "iso07.f16",	"iso07", std_("iso8859-7") ],
 #- hebrew needs special console driver for text mode (none yet)
 #- (and gtk support isn't done yet)
-  "iso-8859-8" => [ "iso08.f16",		"iso08", std_("iso8859-8") ],
-  "iso-8859-9" => [ "lat5-16",		        "iso09", std("iso8859-9") ],
-  "iso-8859-13" => [ "??????",			"?????", std_("iso8859-13") ],
-  "iso-8859-14" => [ "??????",			"?????", std_("iso8859-14") ],
-  "iso-8859-15" => [ "lat0-sun16",		"iso15", std("iso8859-15") ],
+  "iso-8859-8" => [ "iso08.f16",	"iso08", std_("iso8859-8") ],
+  "iso-8859-9" => [ "lat5-16",		"iso09", std("iso8859-9") ],
+  "iso-8859-13" => [ "??????",		"?????", std_("iso8859-13") ],
+  "iso-8859-14" => [ "??????",		"?????", std_("iso8859-14") ],
+  "iso-8859-15" => [ "lat0-sun16",	"iso15", std("iso8859-15") ],
 #- japanese needs special console driver for text mode [kon2]
-  "jisx0208"   => [ "????",			"????", 
+  "jisx0208"   => [ "????",		"????", 
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
-  "koi8-r"     => [ "Cyr_a8x16",		"koi2alt", std("koi8-r") ],
-  "koi8-u"     => [ "ruscii_8x16",		"koi2alt", std("koi8-u") ],
+  "koi8-r"     => [ "Cyr_a8x16",	"koi2alt", std("koi8-r") ],
+  "koi8-u"     => [ "ruscii_8x16",	"koi2alt", std("koi8-u") ],
 #- korean needs special console driver for text mode
-  "ksc5601"    => [ "?????",                    "?????",
+  "ksc5601"    => [ "?????",            "?????",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],
-  "tcvn"       => [ "tcvn8x16",		        "tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
-  "viscii"     => [ "viscii10-8x16",	        "viscii",
+  "tis620"     => [ "????",		"????", std2("tis620.2533-1",120) ],
+  "tcvn"       => [ "tcvn8x16",		"tcvn", std2("tcvn-5712", 130), std2("tcvn-5712", 100) ],
+  "viscii"     => [ "viscii10-8x16",	"viscii",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-viscii1.1-1" ],
 );
 
