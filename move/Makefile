@@ -4,7 +4,7 @@ DEST_STAGE2 = $(DEST_LIVETREE)/usr/bin/stage2
 
 ISO = /BIG/mdkmove.iso
 
-DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles README.adding.more.files
+DATA_FILES = devices symlinks directories-to-create etcfiles all-etcfiles keyfiles
 PROGRAM_FILES = etc-monitorer.pl
 LANG_FILES = $(shell perl -ne 'print $$1 if /ALLOWED_LANGS = qw\((.*)\)/' move.pm)
 
