@@ -1224,8 +1224,10 @@ try to force installation even if that destroys the first partition?"));
 sub miscellaneous {
     my ($o, $_clicked) = @_;
 
-    require security::level;
-    security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
+    if ($o->{meta_class} ne 'desktop') {
+	require security::level;
+	security::level::level_choose($o, \$o->{security}, \$o->{libsafe}, \$o->{security_user});
+    }
 
     install_steps::miscellaneous($o);
 }
