@@ -552,6 +552,10 @@ sub install($$$) {
     my ($prefix, $isUpgrade, $toInstall) = @_;
     my %packages;
 
+    foreach my $p (@$toInstall) {
+	print "$p->{name}\n";
+    }
+
     return if $::g_auto_install;
 
     log::l("reading /usr/lib/rpm/rpmrc");

@@ -36,8 +36,13 @@ $::skiptest = /--skiptest/;
 $::testing = /--testing/;
 $::isStandalone = 1;
 
+system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
+
 my $in = vnew interactive('su');
 
-Xconfigurator::main('', Xconfig::getinfo(), $in, 0, sub { `urpmi --auto XFree86-$_[0]` });
+my $i = $0 =~ Xdrakres ? Xconfig::getinfoFromXF86Config() : {};
+Xconfig::getinfo($i);
+
+Xconfigurator::main('', $i, $in, 0, sub { system("urpmi --auto XFree86-$_[0]") });
 
 $in->exit(0);

@@ -29,6 +29,7 @@ use detect_devices;
 use run_program;
 
 use install_steps;
+use install_steps_interactive;
 
 #-######################################################################################
 #- Steps table
@@ -49,7 +50,7 @@ my (%installSteps, @orderedInstallSteps);
   partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectPath"] ],
+  doInstallStep      => [ __("Install system"), 1, -1, ''],#, ["formatPartitions", "selectPath"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
@@ -449,7 +450,7 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
+    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("ERROR: $err") };
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
@@ -601,13 +602,11 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-#-    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 1;
 
-    output("$o->{prefix}/tmp/secure.DrakX",
-	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
-	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
+    local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-    unlink "$o->{prefix}/tmp/secure.DrakX";
+
+    chmod 0755, map { "$o->{prefix}/etc/X11/$_" } qw(xdm/Xsession xinit/xinitrc);
 
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 

@@ -43,9 +43,9 @@ sub vnew {
     $su = $su eq "su";
     require c;
     if (c::Xtest($ENV{DISPLAY} ||= ":0")) {
-	if ($su && $>) {
+	if ($su) {
 	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	    exec "kdesu", "-c", "$0 @ARGV";	    
+	    $> and exec "kdesu", "-c", "$0 @ARGV";	    
 	}
 	require interactive_gtk;
 	interactive_gtk->new;
@@ -61,6 +61,8 @@ sub vnew {
     }
 }
 
+sub suspend {}
+sub resume {}
 sub end {}
 sub exit { exit($_[0]) }
 

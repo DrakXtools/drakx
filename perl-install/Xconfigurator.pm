@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
+use vars qw($in $install $resolution_wanted @window_managers @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions %serversdriver @svgaservers @accelservers @allbutfbservers @allservers %vgamodes %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines @options %xkb_options);
 
 use pci_probing::main;
 use common qw(:common :file :functional :system);
@@ -155,18 +155,20 @@ sub cardConfiguration(;$$$) {
     undef $card->{type} unless $card->{server}; #- bad type as we can't find the server
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
     $card->{server} = 'FBDev' unless !$allowFB || $card->{server} || $card->{type} || $noauto;
-    $card->{type} = $in->ask_from_list('', _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
-    undef $card->{type}, $card->{server} = $in->ask_from_list('', _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
+    $card->{type} = $in->ask_from_list(_("Graphic card"), _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
+    undef $card->{type}, $card->{server} = $in->ask_from_list(_("X server"), _("Choose a X server"), $allowFB ? \@allservers : \@allbutfbservers ) if $card->{type} eq "Unlisted";
 
     add2hash($card, $cards{$card->{type}}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
     $card->{prog} = "/usr/X11R6/bin/XF86_$card->{server}";
 
-    -x "$prefix$card->{prog}" or $install && &$install($card->{server});
+    -x "$prefix$card->{prog}" or $install && do {
+	$in->suspend;
+	&$install($card->{server});
+	$in->resume;
+    };
     -x "$prefix$card->{prog}" or die "server $card->{server} is not available (should be in $prefix$card->{prog})";
-
-    symlinkf "../..$card->{prog}", "$prefix/etc/X11/X" unless $::testing;
 
     unless ($card->{type}) {
 	$card->{flags}{noclockprobe} = member($card->{server}, qw(I128 S3 S3V Mach64));
@@ -215,7 +217,7 @@ sub monitorConfiguration(;$$) {
 
 	readMonitorsDB(-e "MonitorsDB" ? "MonitorsDB" : "/usr/X11R6/lib/X11/MonitorsDB");
 
-	add2hash($monitor, { type => $in->ask_from_list('', _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
+	add2hash($monitor, { type => $in->ask_from_list(_("Monitor"), _("Choose a monitor"), ['Unlisted', keys %monitors]) }) unless $monitor->{type};
 	if ($monitor->{type} eq 'Unlisted') {
 	    $in->ask_from_entries_ref('',
 _("The two critical parameters are the vertical refresh rate, which is the rate
@@ -274,9 +276,8 @@ sub testFinalConfig($;$$) {
     $o->{card}{depth} or
       $in->ask_warn('', _("Resolutions not chosen yet")), return;
 
-    rename("$prefix/etc/X11/XF86Config", "$prefix/etc/X11/XF86Config.old") || die "unable to make a backup of XF86Config" unless $::testing;
-
-    write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/etc/X11/XF86Config");
+    my $f = "/etc/X11/XF86Config.test";
+    write_XF86Config($o, $::testing ? $tmpconfig : "$prefix/$f");
 
     $skiptest || $o->{card}{server} eq 'FBDev' and return 1; #- avoid testing since untestable without reboot.
 
@@ -295,10 +296,10 @@ sub testFinalConfig($;$$) {
     my $pid;
     unless ($pid = fork) {
 	open STDERR, ">$f_err";
-	my @l = "X";
-	@l = ($o->{card}{prog}, "-xf86config", $tmpconfig) if $::testing;
 	chroot $prefix if $prefix;
-	exec @l, ":9" or c::_exit(0);
+	exec $o->{card}{prog}, 
+	  "-xf86config", $::testing ? $tmpconfig : $f, 
+	  ":9" or c::_exit(0);
     }
 
     do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());
@@ -476,7 +477,7 @@ sub chooseResolutions($$;$) {
     my ($card, $chosen_depth, $chosen_w) = @_;
 
     my $best_w;
-    local $_ = $in->ask_from_list('', "", 
+    local $_ = $in->ask_from_list(_("Resolutions"), "", 
 				  [ map_each { map { "$_->[0]x$_->[1] ${main::a}bpp" } @$::b } %{$card->{depth}} ]) or return;
     reverse /(\d+)x\S+ (\d+)/;
 }
@@ -768,7 +769,7 @@ sub main {
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },
 	   __("Quit") => sub { $quit = 1 },
         );
-	my $f = $in->ask_from_list_([''],
+	my $f = $in->ask_from_list_(['XFdrake'],
 				 _("What do you want to do?"),
 				 [ grep { !ref } @c ]);
 	eval { &{$c{$f}} };
@@ -777,14 +778,35 @@ sub main {
     }
 
     if ($ok) {
-	if ($::isStandalone && !-t STDIN) {
-	    if (`pidof kwm` > 0 && $in->ask_okcancel('', _("Please relog into KDE to activate the changes"), 1)) {
-		system("kwmcom logout");
-		exec qw(nohup perl -e), q{
-		  for (my $nb = 10; $nb && `pidof kwm` > 0; $nb--) { sleep 1 }
-		  system("killall X") unless `pidof kwm` > 0;
-                };
+	unless ($::testing) {
+	    my $f = "$prefix/etc/X11/XF86Config";
+	    rename $f, "$f.old" or die "unable to make a backup of XF86Config";
+	    rename "$f.test", $f;
+
+	    symlinkf "../..$o->{card}{prog}", "$prefix/etc/X11/X";
+	}    
+
+	if ($::isStandalone && $0 =~ /Xdrakres/) {
+	    my $found;
+	    foreach (@window_managers) {
+		if (`pidof $_` > 0) {
+		    if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst $_), 1)) {
+			system("kwmcom logout") if /kwm/;
+
+			open STDIN, "</dev/zero";
+			open STDOUT, ">/dev/null";
+			open STDERR, ">&STDERR";
+			c::setsid();
+		        exec qw(perl -e), q{
+                          my $wm = shift;
+  		          for (my $nb = 30; $nb && `pidof $wm` > 0; $nb--) { sleep 1 }
+  		          system("killall X") unless `pidof $wm` > 0;
+  		        }, $_;
+		    }
+		    $found = 1; last;
+		}
 	    }
+	    $in->ask_warn('', _("Please log out and then use Ctrl-Alt-BackSpace")) unless $found;
 	} else {
 	    my $run = $o->{xdm} || $::auto || $in->ask_yesorno(_("X at startup"),
 _("I can set up your computer to automatically start X upon booting.

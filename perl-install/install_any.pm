@@ -123,7 +123,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "kernel-smp" if $o->{security} <= 3 && detect_devices::hasSMP(); #- no need for kernel-smp if we have kernel-secure which is smp
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "apmd" if $o->{pcmcia};
-	push @{$o->{default_packages}}, "raidtools" if !is_empty_hash_ref($o->{raid});
+	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 
 	pkgs::getDeps($o->{packages});
 

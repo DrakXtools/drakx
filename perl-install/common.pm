@@ -91,7 +91,7 @@ sub mode { my @l = stat $_[0] or die "unable to get mode of file $_[0]: $!\n"; $
 sub psizeof { length pack $_[0] }
 
 sub touch {
-    my $f = shift;
+    my ($f) = @_;
     unless (-e $f) {
 	local *F;
 	open F, ">$f";
@@ -244,14 +244,14 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 
 sub translate {
     my ($s) = @_;
-#- $ENV{LANG} in first place until load_po can handle multiple locales
-    my ($lang) = $ENV{LANG} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
+    my ($lang) = $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LC_ALL} || $ENV{LANG} || 'en';
 
-    require 'lang.pm';
-    lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
-    $po::I18N::{$lang} or return $s;
-    my $l = *{$po::I18N::{$lang}};
-    $l->{$s} || $s;
+    require lang;
+    foreach (split ':', $lang) {
+	lang::load_po($_) unless defined $po::I18N::{$_};
+	return ${$po::I18N::{$_}}{$s} || $s if %{$po::I18N::{$_}};
+    }
+    $s;
 }
 
 sub untranslate($@) {
@@ -364,9 +364,19 @@ sub template2file($$%) {
 
 sub substInFile(&@) {
     my $f = shift;
-    local @ARGV = @_ or return;
-    local ($^I, $_) = '';
-    while (<>) { &$f($_); print }
+    foreach my $file (@_) {
+	if (-e $file) {
+	    local @ARGV = $file;
+	    local ($^I, $_) = '';
+	    while (<>) { &$f($_); print }
+	} else {
+	    local *F; my $old = select F; # that way eof return true
+	    local $_ = '';
+	    &$f($_);
+	    select $old;
+	    output($file, $_);
+	}
+    }
 }
 
 sub best_match {

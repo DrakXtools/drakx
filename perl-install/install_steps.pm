@@ -272,8 +272,14 @@ sub afterInstallPackages($) {
 			    "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
     }
 
+    my $msec = "$o->{prefix}/etc/security/msec";
+    substInFile { s/^audio\n//; $_ .= "audio\n" if eof } "$msec/group.conf" if -d $msec;
+
     my $p = $o->{packages}{urpmi};
-    install_any::install_urpmi($o->{prefix}, $o->{method}) if $p && $p->{selected};
+    if ($p && $p->{selected}) {
+	install_any::install_urpmi($o->{prefix}, $o->{method});
+	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
+    }
 }
 
 #------------------------------------------------------------------------------
@@ -475,21 +481,23 @@ sub addUser($) {
     open F, ">> $p/etc/group" or die "can't append to group file: $!";
     print F "$_->{name}:x:$_->{gid}:\n" foreach @l;
 
-    foreach (@l) {
-	if (! -d "$p$_->{home}") {
+    foreach my $u (@l) {
+	if (! -d "$p$u->{home}") {
 	    my $mode = $o->{security} < 2 ? 0755 : 0750;
-	    eval { commands::cp("-f", "$p/etc/skel", "$p$_->{home}") };
+	    eval { commands::cp("-f", "$p/etc/skel", "$p$u->{home}") };
 	    if ($@) {
-		log::l("copying of skel failed: $@"); mkdir("$p$_->{home}", $mode); 
+		log::l("copying of skel failed: $@"); mkdir("$p$u->{home}", $mode); 
 	    } else {
-		chmod $mode, "$p$_->{home}";
+		chmod $mode, "$p$u->{home}";
 	    }
 	}
-	commands::chown_("-r", "$_->{uid}.$_->{gid}", "$p$_->{home}")
-	    if $_->{uid} != $_->{oldu} || $_->{gid} != $_->{oldg};
+	commands::chown_("-r", "$u->{uid}.$u->{gid}", "$p$u->{home}")
+	    if $u->{uid} != $u->{oldu} || $u->{gid} != $u->{oldg};
 
-	run_program::rooted($p, "usermod", "-G", "urpmi", $_->{name}) if $o->{security} < 3;
+	my $msec = "$o->{prefix}/etc/security/msec";
+	substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
     }
+    run_program::rooted($o->{prefix}, "/etc/security/msec/init-sh/grpuser.sh --refresh");
 }
 
 #------------------------------------------------------------------------------

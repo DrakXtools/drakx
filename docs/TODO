@@ -1,24 +1,20 @@
-in draksec, (and maybe others) have --expert as default if /etc/sysconfig/system has TYPE=expert
+DrakConf
 
 bug in users: mandrake user is added twice in strange installs
 
-bug in upgrade: install from hda1:/usr/local/blah with hda1:/
-
-in XFdrake, testing should not overwrite /etc/X11/XF86Config
-
 rpmdrake proposition for cdrom labels
-
-(pix) hwiz and supermount and eject :(
-
-(pix) bug: usermod -G urpmi a not done (full install)
-
-bug in XFdrake in install, cancel in choose Card do not close the window
 
 standalone applications for configuration (netdrake, authentificationconf, soundcard)
 
-msec custom
+bug in diskdrake:
+in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
+in the middle, remove the first one. Result hda5 at the end and bug.
 
 --------------------------------------------------------------------------------
+
+bug in upgrade: install from hda1:/usr/local/blah with hda1:/
+
+msec custom
 
 install apmd on laptops?? (maybe ask emcweb@btinernet.com (see alix))
 
@@ -180,3 +176,15 @@ suggested partition tables must be better foreach installClass
 
 (done,pix)bug in adduserdrake: missing pwconv in md5
 (done,pix)correct the default value of draksec (cp draksec)
+(done,pix)in draksec, (and maybe others) have --expert as default if /etc/sysconfig/system has TYPE=expert
+
+(done,pix)bug in XFdrake in install, cancel in choose Card do not close the window
+
+(done,pix)in XFdrake, testing should not overwrite /etc/X11/XF86Config
+
+(done,pix) hwiz and supermount and eject :(
+
+(done(replaced by msec's),pix) bug: usermod -G urpmi a not done (full install)
+
+(done,pix)perl and .ph's
+

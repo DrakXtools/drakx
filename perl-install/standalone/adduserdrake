@@ -16,10 +16,10 @@ $::isStandalone = 1;
 my $in = vnew interactive('su');
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
-my @shells = map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
+my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
 my $isMD5 = cat_("/etc/pam.d/passwd") =~ /md5/;
 my $isShadow = cat_("/etc/pam.d/passwd") =~ /shadow/;
-my $security = $ENV{SECURITY_LEVEL};
+my $security = $ENV{SECURE_LEVEL};
 
 new:
 if ($in->ask_from_entries_refH(
@@ -62,6 +62,10 @@ if ($in->ask_from_entries_refH(
     } "/etc/passwd";
 
     system("pwconv") if $isShadow;
+
+    my $msec = "/etc/security/msec";
+    substInFile { s/^$u->{name}\n//; $_ .= "$u->{name}\n" if eof } "$msec/user.conf" if -d $msec;
+    system("$msec/init-sh/grpuser.sh --refresh");
      
     $u = {};
     goto new;

@@ -120,7 +120,7 @@ EOF
     }
 }
 
-sub make($$) {
+sub make {
     my ($raid, $part) = @_;
     is($_) and make($raid, $_) foreach @{$part->{disks}};
     my $dev = devices::make($part->{device});

@@ -63,8 +63,11 @@ newtFinished()
 void
 newtCls()
 
-#void
-#newtSuspend()
+void
+newtSuspend()
+
+void
+newtResume()
 
 int
 newtCenteredWindow(width,height,title)
@@ -232,94 +235,28 @@ newtListbox(left,top,height,flags)
 	int height;
 	int flags;
 
-void *
+char *
 newtListboxGetCurrent(co)
 	Newt::Component co;
 
 void
-newtListboxSetCurrent(co,num)
-	Newt::Component co;
-	int num;
-
-void
 newtListboxSetCurrentByKey(co,key)
 	Newt::Component co;
-	void * key;
-
-void
-newtListboxSetText(co,num,text)
-	Newt::Component co;
-	int num;
-	const char * text;
-
-void
-newtListboxSetEntry(co,num,text)
-	Newt::Component co;
-	int num;
-	const char * text;
+	char * key;
 
 void
 newtListboxSetWidth(co,width)
 	Newt::Component co;
 	int width;
 
-# return the data passed to AddEntry 
-void
-newtListboxSetData(co,num,data)
-	Newt::Component co;
-	int num;
-	void * data;
-
 int
 newtListboxAddEntry(co,text,data)
 	Newt::Component co;
 	const char * text;
-	const void * data;
-
-# Send the key to insert after, or NULL to insert at the top 
-int
-newtListboxInsertEntry(co,text,data,key)
-	Newt::Component co;
-	const char * text;
-	const void * data;
-	void * key;
-
-int
-newtListboxDeleteEntry(co,data)
-	Newt::Component co;
-	void * data;
-
-# removes all entries from listbox
-void
-newtListboxClear(co)
-	Newt::Component co;
-
-void
-newtListboxGetEntry(co,num,text,data)
-	Newt::Component co;
-	int num;
-	char * text;
-	void * data;
-	PPCODE:
-	{
-		newtListboxGetEntry(co, num, &text, data);
-	}
-
-# Returns an array of data pointers from items, last element is NULL 
-void *
-newtListboxGetSelection(co,numitems)
-	Newt::Component co;
-	int *numitems;
-
-void
-newtListboxClearSelection(co)
-	Newt::Component co;
-
-void
-newtListboxSelectItem(co,key,sense)
-	Newt::Component co;
-        void *key
-	enum newtFlagsSense sense;
+CODE:
+	RETVAL = newtListboxAddEntry(co, text, text);
+OUTPUT:
+	RETVAL
 
 Newt::Component
 newtTextboxReflowed(left,top,text,width,flexDown,flexUp,flags)

@@ -3,7 +3,7 @@ package install_steps_interactive;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA $global_wait);
+use vars qw(@ISA);
 
 @ISA = qw(install_steps);
 
@@ -233,7 +233,7 @@ sub choosePackages {
     $o->ask_many_from_list_ref('',
 			       _("Package Group Selection"),
 			       [ @$compssUsersSorted ],
-			       [ map { \$o->{compssUsersChoice}{$_} } keys %$compssUsers ]
+			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted ]
 			       );
     while (my ($k, $v) = each %{$o->{compssUsersChoice}}) {
 	$v or next;
@@ -820,7 +820,7 @@ consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
 
-    $global_wait = $o->wait_message('', _("Shutting down"));
+    $::global_wait = $o->wait_message('', _("Shutting down"));
 
     $o->SUPER::exitInstall;
 }

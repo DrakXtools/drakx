@@ -208,15 +208,21 @@ sub load_po($) {
     my ($s, $from, $to, $state, $fuzzy);
 
     $s .= "package po::I18N;\n";
-    $s .= "\%$lang = (";
+    $s .= "no strict;\n";
+    $s .= "\%{'$lang'} = (";
 
-#-  $lang = substr($lang, 0, 2);
     my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
     unless (-e $f) {
 	-e ($f = "$_") and last foreach @INC;
 	$f = commands::install_cpio("$f/po", "$lang.po");
     }
-    local *F; open F, $f; #- not returning here help avoiding reading the same multiple times.
+    local *F;
+    unless (-e $f) {
+	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
+	open F, "bzip2 -dc $f 2>/dev/null |";
+    } else {
+	open F, $f; #- not returning here help avoiding reading the same multiple times.
+    }
     foreach (<F>) {
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;

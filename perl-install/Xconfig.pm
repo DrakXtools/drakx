@@ -23,8 +23,7 @@ sub keymap_translate {
 
 
 sub getinfo {
-    my $o = {};
-#    getinfoFromXF86Config($o);
+    my $o = shift || {};
     getinfoFromDDC($o);
     getinfoFromSysconfig($o);
 

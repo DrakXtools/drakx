@@ -12,6 +12,8 @@ use common qw(:common);
 $resolution_wanted = "1024x768";
 @resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1600x1200);
 
+@window_managers = qw(icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce);
+
 %serversdriver = (
     'SVGA'      => "svga",
     'Rage128'   => "svga",

@@ -24,6 +24,8 @@ sub new() {
     bless {}, $_[0];
 }
 
+sub suspend { Newt::Suspend }
+sub resume { Newt::Resume }
 sub end() { Newt::Finished }
 sub exit() { end; exit($_[0]) }
 END { end() }
@@ -143,12 +145,12 @@ sub ask_from_entries_refW {
     my @updates_inv = mapn {
 	 my ($w, $ref) = @_;
 	 my $val = ${$ref->{val}};
-	 sub { 
-	     $ref->{type} eq "bool" ? 
+	 sub {
+	     $ref->{type} eq "bool" ?
 	       $w->CheckboxSetValue(checkval($val)) :
 	     $ref->{type} eq "list" ?
 	       $w->ListboxSetCurrentByKey($val) :
-	       $w->EntrySet($val, 1);	       
+	       $w->EntrySet($val, 1);
 	 };
     } \@widgets, $val;
 
@@ -156,7 +158,7 @@ sub ask_from_entries_refW {
 
     my $grid = Newt::Grid::CreateGrid(3, int @$l);
     map_index {
-	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_)}, 0, 0, 0, 0, 1, 0);
+	$grid->GridSetField(0, $::i, 1, ${Newt::Component::Label(-1, -1, $_)}, 0, 0, 1, 0, 1, 0);
 	$grid->GridSetField(1, $::i, 1, ${$widgets[$::i]}, 0, 0, 0, 0, 1, 0);
     } @$l;
 

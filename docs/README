@@ -188,3 +188,31 @@ module out of /lib/modules/modules.cpio.bz2 in /tmp. Then it calls insmod_.
 
 /usr/bin/insmod_ is the real prog (which you usually find in /sbin/). You need
 to give it the complete path.
+
+********************************************************************************
+* Making screenshots ***********************************************************
+********************************************************************************
+you can use Xnest and export the install display. The problem is to get the
+proper fonts. One solution is:
+- modify your /etc/X11/fs/config: 
+- move /usr/X11R6/lib/X11/fonts to /usr/X11R6/lib/X11/fonts2
+- tell xfs to take this into account
+- install DrakX's fonts in /usr/X11R6/lib/X11/fonts/misc
+- makes Xnest happy by adding the directories it needs
+- launch Xnest
+- do a network install giving ``linux display=YOUR_IP:1''
+- takes the screenshots!!
+
+perl -pi -e 's|(/usr/X11R6/lib/X11/fonts)|${1}2|' /etc/X11/fs/config
+cd /usr/X11R6/lib/X11 ; mv fonts fonts2
+killall -USR1 xfs
+(
+  cd /usr/X11R6/lib/X11
+  mkdir fonts
+  cp -a $MIRROR_ROOT/Mandrake/mdkinst/usr/X11R6/lib/X11/fonts misc
+  for i in 100dpi 75dpi Speedo TrueType Type1; do ln -s misc $i; done
+)
+Xnest -name Xnest -geometry 640x480 :1 &
+
+# with DISPLAY=:0
+xwd -name Xnest | convert - screenshot.png
