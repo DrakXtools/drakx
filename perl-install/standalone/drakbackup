@@ -4102,7 +4102,7 @@ sub install_rpm {
 			0, N("The following packages need to be installed:\n") . join(' ', @list_of_rpm_to_install),
 			0, Gtk2::HSeparator->new,
 			0, gtksignal_connect(Gtk2::Button->new(N("Install")), clicked => sub {  
-				my $installed = system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
+				my $installed = system("/usr/sbin/urpmi --auto @list_of_rpm_to_install"); 
 				if ($installed == 0) {
 					destroy_widget();
 					$calling_widget->($previous);
