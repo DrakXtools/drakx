@@ -224,6 +224,8 @@ sub spawnShell {
     open STDERR, ">&F" or die '';
     close F;
 
+    print any::drakx_version(), "\n";
+
     c::setsid();
 
     ioctl(STDIN, c::TIOCSCTTY(), 0) or warn "could not set new controlling tty: $!";
@@ -309,7 +311,7 @@ sub setPackages {
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
 
-	foreach (map { substr($_, 0, 2) } @{$o->{langs}}) {
+	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    push @{$o->{default_packages}}, pkgs::packageByName($o->{packages}, "locales-$_") || next;
 	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
 	}
