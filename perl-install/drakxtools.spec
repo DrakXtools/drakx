@@ -340,6 +340,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %changelog
 * Wed Sep 15 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-9mdk
+- drakconnect:
+  o don't create empty pppoe.conf if the package isn't installed
+  o load modules and run start programs
 - bootloader-config: fix crash when when removing some break entries (pixel)
 - keyboarddrake, XFdrake: better turkish support (pablo)
 
