@@ -70,7 +70,7 @@ our %l = (
   ################################################################################
   disk => 
   {
-    ide => [ qw(aec62xx cs5520 cs5530 rz1000 sc1200 slc90e66 triflex trm290) ],
+    ide => [ qw(aec62xx cs5520 cs5530 delkin_cb rz1000 sc1200 slc90e66 triflex trm290) ],
     scsi => [
       if_(arch() =~ /ppc/, qw(mesh mac53c94)),
       if_(arch() =~ /^sparc/, qw(qlogicpti)),
