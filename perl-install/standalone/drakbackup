@@ -336,9 +336,9 @@ sub explain_conf {
 	print "REMEMBER_PASS             Remember password on remote host in config file.\n";
 	print "USER_KEYS                 Ssh keys are already setup for communicating with remote host.\n";
 	print "DRAK_KEYS                 Use special drakbackup generated host keys.\n";
-	print "                             (requires perl-Expect, disabled).\n";
+	print "                             (requires perl-Expect).\n";
 	print "USE_EXPECT                Use expect to do the whole scp transfer, without keys.\n";
-	print "                             (requires perl-Expect, disabled).\n";
+	print "                             (requires perl-Expect).\n";
 	print "LOGIN=                    Remote host login name.\n";
 	print "PASSWD=                   Password on remote host (if REMEMBER_PASS is enabled).\n";
 	print "DAEMON_MEDIA=             Daemon mode backup via given media.\n";
@@ -766,11 +766,6 @@ sub ftp_client {
     return(0);
 }
 
-#- this is just here to get around Expect for the moment
-#sub exp_continue {
-#	return(0);
-#}
-
 sub do_expect {
 
 	#- Sort of a general purpose expect routine, we use it to backup files to
@@ -779,12 +774,12 @@ sub do_expect {
 	
 	my ($mode, $filename) = @_;
 		
-	#- move this to the top? - problem is need for perl-Expect (in contribs)
-
-#- temporarily disabled - back on Sep 4 2002 - perl-Expect moved to main
-	use Expect;
-#show_warning("w", __("Sorry, perl-Expect is not installed/enabled. To use\nthis feature, install perl-Expect and comment lines 772-774,\n as well as 788,789. Then uncomment line 787.")); 
-#return(1);
+	eval { require Expect; 1 };
+	
+	if ($@ ne '') {
+		$log_buff .= "perl-Expect not installed!";
+		return(1); 	
+	}
 
 	#- for debugging set to 1
 	$Expect::Exp_Internal = 0;
@@ -839,11 +834,11 @@ sub do_expect {
 				$spawn_ok = 1;
 				my $fh = shift;
 				$fh->send("$passwd_user\n");
-				exp_continue } ],
-			[ '-re', 'please try again', sub { $bad_passwd = 1; exp_continue } ],
-			[ '-re', 'Permission denied', sub { $no_perm = 1; exp_continue } ],
-			[ '-re', 'No such file or directory', sub { $bad_dir = 1; exp_continue } ],
-#			[ '-re', '%', sub { update_scp_progress(); exp_continue; } ],
+				Expect::exp_continue() } ],
+			[ '-re', 'please try again', sub { $bad_passwd = 1; Expect::exp_continue() } ],
+			[ '-re', 'Permission denied', sub { $no_perm = 1; Expect::exp_continue() } ],
+			[ '-re', 'No such file or directory', sub { $bad_dir = 1; Expect::exp_continue() } ],
+#			[ '-re', '%', sub { update_scp_progress(); Expect::exp_continue(); } ],
 			[ eof => sub {
 					if (!$spawn_ok) { show_warning("f", _("No password prompt on %s at port %s", $host_name, $scp_port)) }					
 					if ($bad_passwd) { show_warning("f", _("Bad password on %s", $host_name)) }
@@ -4253,7 +4248,7 @@ sub install_rpm {
 			0, _("The following packages need to be installed:\n @list_of_rpm_to_install"),
 				0, new Gtk::HSeparator,
 				0, gtksignal_connect(new Gtk::Button(_("Install")), clicked => sub {  
-					system("urpmi --X @list_of_rpm_to_install"); 
+					system("/usr/sbin/urpmi --X @list_of_rpm_to_install"); 
 					${$central_widget}->destroy();
 					$previous_widget->();		  
 				}),
