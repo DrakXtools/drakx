@@ -69,21 +69,26 @@ If you don't know, choose 'use pppoe'"), $l) or return;
     1;
 }
 
-sub adsl_ask_info {
+sub adsl_probe_info {
     my ($adsl, $netc, $_intf, $adsl_type) = @_;
     my $pppoe_file = "$prefix/etc/ppp/pppoe.conf";
     my $pptp_file = "$prefix/etc/sysconfig/network-scripts/net_cnx_up";
-    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if $adsl_type =~ /pppoe/ && -f $pppoe_file;
+    my %pppoe_conf; %pppoe_conf = getVarsFromSh($pppoe_file) if (! defined $adsl_type || $adsl_type =~ /pppoe/) && -f $pppoe_file;
     my $login = $pppoe_conf{USER};
     foreach (qw(/etc/ppp/peers/adsl /etc/ppp/options /etc/ppp/options.adsl)) {
 	($login) = map { if_(/^user\s+\"([^\"]+)\"/, $1) } cat_("$prefix/$_") if !$login && -r "$prefix/$_";
     }
-    ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if $adsl_type =~ /pptp/ && -r $pptp_file;
+    ($login) = map { if_(/\sname\s+([^ \n]+)/, $1) } cat_($pptp_file) if (! defined $adsl_type || $adsl_type =~ /pptp/) && -r $pptp_file;
     my $passwd = passwd_by_login($login);
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
     add2hash($netc, { dnsServer2 => $pppoe_conf{DNS1}, dnsServer3 => $pppoe_conf{DNS2}, DOMAINNAME2 => '' });
     add2hash($adsl, { login => $login, passwd => $passwd, passwd2 => '' });
+}
+
+sub adsl_ask_info {
+    my ($adsl, $netc, $intf, $adsl_type) = @_;
+    adsl_probe_info($adsl, $netc, $intf, $adsl_type);
     ask_info2($adsl, $netc);
 }
 
