@@ -23,9 +23,7 @@ sub choose_printer_type {
 			    _("How is the printer connected?") .
 			    ($printer->{SPOOLER} eq "cups" ?
 			     _("
-Printers on remote CUPS servers you do not have to configure
-here; these printers will be automatically detected. Please
-select \"Printer on remote CUPS server\" in this case.") : ()),
+Printers on remote CUPS servers you do not have to configure here; these printers will be automatically detected.") : ()),
 			    [ printer::printer_type($printer) ],
 			    $printer->{str_type},
 			    ) or return 0;
@@ -102,25 +100,9 @@ sub setup_remote_cups_server {
 
 	if ($in->ask_from_
 	    ({ title => _("Remote CUPS server"),
-	       messages => _("With remote CUPS servers, you do not have to configure any 
-printer here; CUPS servers inform your machine automatically
-about their printers. All printers known to your machine
-currently are listed in the \"Default printer\" field. Choose
-the default printer for your machine there and click the
-\"Apply/Re-read printers\" button. Click the same button to
-refresh the list (it can take up to 30 seconds after the start
-of CUPS until all remote printers are visible).
-When your CUPS server is in a different network, you have to 
-give the CUPS server IP address and optionally the port number
-to get the printer information from the server, otherwise leave
-these fields blank.") .
+	       messages => _("With remote CUPS servers, you do not have to configure any printer here; CUPS servers inform your machine automatically about their printers. All printers known to your machine currently are listed in the \"Default printer\" field. Choose the default printer for your machine there and click the \"Apply/Re-read printers\" button. Click the same button to refresh the list (it can take up to 30 seconds after the start of CUPS until all remote printers are visible). When your CUPS server is in a different network, you have to give the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
               ($::expert ? _("
-Normally, CUPS is automatically configured according to your
-network environment, so that you can access the printers on the
-CUPS servers in your local network. If this does not work 
-correctly, turn off \"Automatic CUPS configuration\" and edit
-your file /etc/cups/cupsd.conf manually. Do not forget to restart
-CUPS afterwards (command: \"service cups restart\").") : ()),
+Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").") : ()),
               cancel => _("Close"),
               ok => _("Apply/Re-read printers"),
 	      callbacks => { complete => sub {
@@ -422,9 +404,7 @@ sub setup_lpd {
     }
 
     return if !$in->ask_from(_("Remote lpd Printer Options"),
-_("To use a remote lpd printer, you need to supply
-the hostname of the printer server and the printer name
-on that server."), [
+_("To use a remote lpd printer, you need to supply the hostname of the printer server and the printer name on that server."), [
 { label => _("Remote host name"), val => \$remotehost },
 { label => _("Remote printer name"), val => \$remotequeue } ],
 complete => sub {
@@ -502,11 +482,7 @@ sub setup_smb {
     }
 
     return if !$in->ask_from(_("SMB (Windows 9x/NT) Printer Options"),
-_("To print to a SMB printer, you need to provide the
-SMB host name (Note! It may be different from its
-TCP/IP hostname!) and possibly the IP address of the print server, as
-well as the share name for the printer you wish to access and any
-applicable user name, password, and workgroup information."), [
+_("To print to a SMB printer, you need to provide the SMB host name (Note! It may be different from its TCP/IP hostname!) and possibly the IP address of the print server, as well as the share name for the printer you wish to access and any applicable user name, password, and workgroup information."), [
 { label => _("SMB server host"), val => \$smbserver },
 { label => _("SMB server IP"), val => \$smbserverip },
 { label => _("Share name"), val => \$smbshare },
@@ -583,10 +559,7 @@ sub setup_ncp {
     }
 
     return if !$in->ask_from(_("NetWare Printer Options"),
-_("To print on a NetWare printer, you need to provide the
-NetWare print server name (Note! it may be different from its
-TCP/IP hostname!) as well as the print queue name for the printer you
-wish to access and any applicable user name and password."), [
+_("To print on a NetWare printer, you need to provide the NetWare print server name (Note! it may be different from its TCP/IP hostname!) as well as the print queue name for the printer you wish to access and any applicable user name and password."), [
 { label => _("Printer Server"), val => \$ncpserver },
 { label => _("Print Queue Name"), val => \$ncpqueue },
 { label => _("User name"), val => \$ncpuser },
@@ -636,12 +609,8 @@ sub setup_socket {
 	$remoteport = "9100";
     }
 
-    return if !$in->ask_from(_("Socket Printer Options"),
-_("To print to a socket printer, you need to provide the
-host name of the printer and optionally the port number.
-On HP JetDirect servers the port number is usually 9100,
-on other servers it can vary. See the manual of your
-hardware."), [
+    return if !$in->ask_from(_("TCP/Socket Printer Options"),
+_("To print to a TCP or socket printer, you need to provide the host name of the printer and optionally the port number. On HP JetDirect servers the port number is usually 9100, on other servers it can vary. See the manual of your hardware."), [
 { label => _("Printer host name"), val => \$remotehost },
 { label => _("Port"), val => \$remoteport } ],
 complete => sub {
@@ -791,9 +760,7 @@ sub choose_printer_name {
 	   },
 		      },
 	   messages =>
-_("Every printer needs a name (for example lp).
-The Description and Location fields do not need 
-to be filled in. They are comments for the users.") }, 
+_("Every printer needs a name (for example \"printer\"). The Description and Location fields do not need to be filled in. They are comments for the users.") }, 
 	 [ { label => _("Name of printer"), val => \$printer->{currentqueue}{'queue'} },
 	   { label => _("Description"), val => \$printer->{currentqueue}{'desc'} },
 	   { label => _("Location"), val => \$printer->{currentqueue}{'loc'} },
@@ -911,11 +878,7 @@ sub choose_model {
 							 _("Which printer model do you have?") .
 							 _("
 
-Please check whether Printerdrake did the 
-auto-detection of your printer model
-correctly. Search the correct model in the
-list when the cursor is standing on a 
-wrong model or on \"Raw printer\"."), '|',
+Please check whether Printerdrake did the auto-detection of your printer model correctly. Search the correct model in the list when the cursor is standing on a wrong model or on \"Raw printer\"."), '|',
 							 [ keys %printer::thedb ], $printer->{DBENTRY}));
 
 }
@@ -990,13 +953,7 @@ sub get_printer_info {
 		    if ($printer->{currentqueue}{'connect'} ne 
 			'file:/dev/lp0') {
 			$in->ask_warn(_("OKI winprinter configuration"),
-				      _("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they
-work only when connected to the first parallel port. When
-your printer is connected to another port or to a print
-server box please connect the printer to the first parallel
-port before you print a test page. Otherwise the printer
-will not work. Your connection type setting will be ignored
-by the driver."));
+				      _("You are configuring an OKI laser winprinter. These printers\nuse a very special communication protocol and therefore they work only when connected to the first parallel port. When your printer is connected to another port or to a print server box please connect the printer to the first parallel port before you print a test page. Otherwise the printer will not work. Your connection type setting will be ignored by the driver."));
 		    }
 		    $printer->{currentqueue}{'connect'} = 'file:/dev/null';
 		    # Start the oki4daemon
@@ -1040,10 +997,7 @@ by the driver."));
 			    " -o Port=USB3";
 		    } else {
 			$in->ask_warn(_("Lexmark inkjet configuration"),
-				      _("The inkjet printer drivers provided by Lexmark only support
-local printers, no printers on remote machines or print server
-boxes. Please connect your printer to a local port or
-configure it on the machine where it is connected to."));
+				      _("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
 			return 0;
 		    }
 		    # Set device permissions
@@ -1070,18 +1024,7 @@ configure it on the machine where it is connected to."));
 			# Driver installation failed, probably we do not have
 			# the commercial CDs
 			$in->ask_warn(_("Lexmark inkjet configuration"),
-				      _("To be able to print with your Lexmark inkjet and this
-configuration, you need the inkjet printer drivers
-provided by Lexmark (http://www.lexmark.com/). Go to
-the US site and click on the \"Drivers\" button. Then
-choose your model and afterwards \"Linux\" as
-operating system. The drivers come as RPM packages
-or shell scripts with interactive graphical installation.
-You do not need to do this configuration by the
-graphical frontends. Cancel directly after the license
-agreement. Then print printhead alignment pages with
-\"lexmarkmaintain\" and adjust the head alignment
-settings with this program."));
+				      _("To be able to print with your Lexmark inkjet and this configuration, you need the inkjet printer drivers provided by Lexmark (http://www.lexmark.com/). Go to the US site and click on the \"Drivers\" button. Then choose your model and afterwards \"Linux\" as operating system. The drivers come as RPM packages or shell scripts with interactive graphical installation. You do not need to do this configuration by the graphical frontends. Cancel directly after the license agreement. Then print printhead alignment pages with \"lexmarkmaintain\" and adjust the head alignment settings with this program."));
 		    }
 		}
 		$printer->{ARGS} = printer::read_foomatic_options($printer);
@@ -1115,6 +1058,88 @@ settings with this program."));
 
 sub setup_options {
     my ($printer, $in) = @_;
+    my @simple_options = 
+	("PageSize",        # Media properties
+	 "MediaType",
+	 "Form",
+	 "InputSlot",       # Trays
+	 "Tray",
+	 "OutBin",
+	 "OutputBin",
+	 "FaceUp",
+	 "FaceDown",
+	 "Collate",
+	 "Manual",
+	 "ManualFeed",
+	 "Manualfeed",
+	 "ManualFeeder",
+	 "Feeder",
+	 "Duplex",          # Double-sided printing
+	 "Binding",
+	 "Tumble",
+	 "DoubleSided",
+	 "Resolution",      # Resolution/Quality
+	 "GSResolution",
+	 "JCLResolution",
+	 "Quality",
+	 "PrintQuality",
+	 "PrintoutQuality",
+	 "QualityType",
+	 "ImageType",
+	 "InkType",         # Colour/Gray/BW, 4-ink/6-ink
+	 "Mode",
+	 "OutputMode",
+	 "OutputType",
+	 "ColorMode",
+	 "PrintingMode",
+	 "Monochrome",
+	 "BlackOnly",
+	 "Grayscale",
+	 "GrayScale",
+	 "Colour",
+	 "Color",
+	 "Gamma",           # Lighter/Darker
+	 "GammaCorrection",
+	 "GammaGeneral",
+	 "MasterGamma",
+	 "StpGamma",
+	 "EconoMode",       # Ink/Toner saving
+	 "Economode",
+	 "TonerSaving",
+	 "JCLEconomode",
+	 "HPNup",           # Other useful options
+	 "InstalledMemory", # Laser printer hardware config
+	 "Option1",
+	 "Option2",
+	 "Option3",
+	 "Option4",
+	 "Option5",
+	 "Option6",
+	 "Option7",
+	 "Option8",
+	 "Option9",
+	 "Option10",
+	 "Option11",
+	 "Option12",
+	 "Option13",
+	 "Option14",
+	 "Option15",
+	 "Option16",
+	 "Option17",
+	 "Option18",
+	 "Option19",
+	 "Option20",
+	 "Option21",
+	 "Option22",
+	 "Option23",
+	 "Option24",
+	 "Option25",
+	 "Option26",
+	 "Option27",
+	 "Option28",
+	 "Option29",
+	 "Option30"
+	 );
     $in->set_help('setupOptions') if $::isInstall;
     if (($printer->{currentqueue}{'printer'}) || # We have a Foomatic queue
 	($printer->{currentqueue}{'ppd'})) { # We have a CUPS+PPD queue
@@ -1142,7 +1167,9 @@ sub setup_options {
 		     { label => $printer->{ARGS}[$i]{'comment'}, 
 		       val => \$userinputs[$i], 
 		       not_edit => 1,
-		       list => \@{$choicelists[$i]} });
+		       list => \@{$choicelists[$i]},
+		       advanced => !member($printer->{ARGS}[$i]{'name'},
+					   @simple_options) });
 	    } elsif ($printer->{ARGS}[$i]{'type'} eq 'bool') {
 		# boolean option
 		push(@choicelists, [$printer->{ARGS}[$i]{'name'}, 
@@ -1153,7 +1180,9 @@ sub setup_options {
 		     { label => $printer->{ARGS}[$i]{'comment'},
 		       val => \$userinputs[$i],
 		       not_edit => 1,
-		       list => \@{$choicelists[$i]} });
+		       list => \@{$choicelists[$i]},
+		       advanced => !member($printer->{ARGS}[$i]{'name'},
+					   @simple_options) });
 	    } else {
 		# numerical option
 		push(@choicelists, []);
@@ -1163,10 +1192,12 @@ sub setup_options {
 		     { label => $printer->{ARGS}[$i]{'comment'} . 
 			   " ($printer->{ARGS}[$i]{'min'} ... " .
 			       "$printer->{ARGS}[$i]{'max'})",
-			       #type => 'range',
-			       #min => $printer->{ARGS}[$i]{'min'},
-			       #max => $printer->{ARGS}[$i]{'max'},
-			       val => \$userinputs[$i] } );
+			   #type => 'range',
+			   #min => $printer->{ARGS}[$i]{'min'},
+			   #max => $printer->{ARGS}[$i]{'max'},
+			   val => \$userinputs[$i],
+			   advanced => !member($printer->{ARGS}[$i]{'name'},
+					       @simple_options) });
 	    }
 	}
 	# Show the options dialog. The call-back function does a
@@ -1203,10 +1234,8 @@ sub setup_options {
 	return 0 if !$in->ask_from
 	    ($windowtitle,
 	     _("Printer default settings
-You should make sure that the page size and the
-ink type (if available) are set correctly. Note
-that with a very high printout quality printing
-can get substantially slower."),
+
+You should make sure that the page size and the ink type/printing mode (if available) and also the hardware configuration of laser printers (memory, duplex unit, extra trays) are set correctly. Note that with a very high printout quality/resolution printing can get substantially slower."),
 	     \@widgets,
 	     complete => sub {
 		 my $i;
@@ -1277,9 +1306,7 @@ sub print_testpages {
     if ($in->ask_from_
 	({ title => _("Test pages"),
 	   messages => _("Please select the test pages you want to print.
-Note: the photo test page can take a rather long time to get printed
-and on laser printers with too low memory it can even not come out.
-In most cases it is enough to print the standard test page."),
+Note: the photo test page can take a rather long time to get printed and on laser printers with too low memory it can even not come out. In most cases it is enough to print the standard test page."),
           cancel => ((($printer->{configured}{$printer->{OLD_QUEUE}}) ||
 		      (!$printer->{configured}{$printer->{QUEUE}})) ?
 		     _("Cancel") : _("No test pages")),
@@ -1473,28 +1500,18 @@ sub copy_queues_from {
     if ($noninteractive ||
 	$in->ask_from_
 	({ title => _("Transfer printer configuration"),
-	   messages => _("You can copy the printer configuration which you have done 
-for the spooler %s to %s, your current spooler. All the
-configuration data (printer name, description, location, 
-connection type, and default option settings) is overtaken,
-but jobs will not be transferred.
-Not all queues can be transferred due to the following 
-reasons:
+	   messages => _("You can copy the printer configuration which you have done for the spooler %s to %s, your current spooler. All the configuration data (printer name, description, location, connection type, and default option settings) is overtaken, but jobs will not be transferred.
+Not all queues can be transferred due to the following reasons:
 ", $oldspoolerstr, $newspoolerstr) .
-($newspooler eq "cups" ? _("CUPS does not support printers on Novell servers or printers
-sending the data into a free-formed command.
+($newspooler eq "cups" ? _("CUPS does not support printers on Novell servers or printers sending the data into a free-formed command.
 ") :
- ($newspooler eq "pdq" ? _("PDQ only supports local printers, remote LPD printers, and
-Socket/TCP printers.
+ ($newspooler eq "pdq" ? _("PDQ only supports local printers, remote LPD printers, and Socket/TCP printers.
 ") :
   _("LPD and LPRng do not support IPP printers.
 "))) .
-_("In addition, queues not created with this program or
-\"foomatic-configure\" cannot be transferred.") .
+_("In addition, queues not created with this program or \"foomatic-configure\" cannot be transferred.") .
 ($oldspooler eq "cups" ? _("
-Also printers configured with the PPD files provided by
-their manufacturers or with native CUPS drivers can not be
-transferred.") : ()) . _("
+Also printers configured with the PPD files provided by their manufacturers or with native CUPS drivers cannot be transferred.") : ()) . _("
 Mark the printers which you want to transfer and click 
 \"Transfer\"."),
 	   cancel => _("Do not transfer printers"),
@@ -1546,9 +1563,7 @@ You can also type a new name or skip this printer.",
 			if (($noninteractive) ||
 			    ($in->ask_yesorno
 			     (_("Transfer printer configuration"),
-			      _("You have transferred your former default printer (\"%s\"),
-Should it be also the default printer under the
-new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
+			      _("You have transferred your former default printer (\"%s\"), Should it be also the default printer under the new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
 			    $printer->{DEFAULT} = $newqueue;
 			    printer::set_default_printer($printer);
 			}
@@ -1590,11 +1605,7 @@ sub check_network {
 	while (!$go_on) {
 	    my $choice = _("Configure the network now");
 	    if ($in->ask_from(_("Network functionality not configured"),
-			      _("You are going to configure a remote printer. This needs working
-network access, but your network is not configured yet. If you
-go on without network configuration, you will not be able to use
-the printer which you are configuring now. How do you want 
-to proceed?"),
+			      _("You are going to configure a remote printer. This needs working network access, but your network is not configured yet. If you go on without network configuration, you will not be able to use the printer which you are configuring now. How do you want to proceed?"),
 			      [ { val => \$choice, type => 'list',
 				  list => [ _("Configure the network now"),
 					    _("Go on without configuring the network") ]} ] )) {
@@ -1630,17 +1641,8 @@ to proceed?"),
     if (!start_network($in)) {
 	$in->ask_warn(_("Configuration of a remote printer"), 
 ($::isInstall ?
-_("The network configuration done during the installation 
-cannot be started now. Please check whether the network
-gets accessable after booting your system and correct the
-configuration using the Mandrake Control Center, section
-\"Network & Internet\"/\"Connection\", and afterwards set
-up the printer, also using the Mandrake Control Center,
-section \"Hardware\"/\"Printer\"") :
-_("The network access was not running and could not be 
-started. Please check your configuration and your 
-hardware. Then try to configure your remote printer
-again.")));
+_("The network configuration done during the installation cannot be started now. Please check whether the network gets accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
+_("The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again.")));
 	return 0;
     }
 
@@ -1684,18 +1686,11 @@ sub security_check {
     # operation of installing the spooler if he disagrees.
     my $securitystr = ($security == 4 ? _("high") : _("paranoid"));
     if ($in->ask_yesorno(_("Installing a printing system in the %s security level", $securitystr),
-			 _("You are about to install the printing system %s on
-a system running in the %s security level.
+			 _("You are about to install the printing system %s on a system running in the %s security level.
 
-This printing system runs a daemon (background process)
-which waits for print jobs and handles them. This daemon
-is also accessable by remote machines through the network
-and so it is a possible point for attacks. Therefore only
-a few selected daemons are started by default in this
-security level.
+This printing system runs a daemon (background process) which waits for print jobs and handles them. This daemon is also accessable by remote machines through the network and so it is a possible point for attacks. Therefore only a few selected daemons are started by default in this security level.
 
-Do you really want to configure printing on this
-machine?",
+Do you really want to configure printing on this machine?",
 			   $printer::shortspooler_inv{$spooler},
 			   $securitystr))) {
         printer::add_spooler_to_security_level($spooler, $security);
@@ -1719,15 +1714,11 @@ sub start_spooler_on_boot {
     $in->set_help('startSpoolerOnBoot') if $::isInstall;
     if (!printer::service_starts_on_boot($service)) {
 	if ($in->ask_yesorno(_("Starting the printing system at boot time"),
-			     _("The printing system (%s) will not be started automatically
-when the machine is booted.
+			     _("The printing system (%s) will not be started automatically when the machine is booted.
 
-It is possible that the automatic starting was turned off 
-by changing to a higher security level, because the printing
-system is a potential point for attacks.
+It is possible that the automatic starting was turned off by changing to a higher security level, because the printing system is a potential point for attacks.
 
-Do you want to have the automatic starting of the printing
-system turned on again?",
+Do you want to have the automatic starting of the printing system turned on again?",
 		       $printer::shortspooler_inv{$printer->{SPOOLER}}))) {
 	    printer::start_service_on_boot($service);
 	}
@@ -1941,7 +1932,7 @@ sub main {
     }
 
     # Control variables for the main loop
-    my ($menuchoice, $cursorpos, $queue, $continue, $newqueue, $editqueue, $expertswitch, $menushown) = ('', '', $defaultprname, 1, 0, 0, 0, 0);
+    my ($menuchoice, $cursorpos, $queue, $continue, $newqueue, $editqueue, $expertswitch, $menushown) = ('', '::', $defaultprname, 1, 0, 0, 0, 0);
     # Cursor position in queue modification window
     my $modify = _("Printer options");
     while ($continue) {
@@ -2012,6 +2003,32 @@ sub main {
 		    # on the question is not asked any more but the menu
 		    # is shown directly after having done an operation.
 		    $menushown = 1;
+		    # Initialize the cursor position
+		    #print "##### |$cursorpos|$printer->{DEFAULT}|\n";
+		    if (($cursorpos eq "::") && 
+			($printer->{DEFAULT}) &&
+			($printer->{DEFAULT} ne "")) {
+			if ($printer->{configured}{$printer->{DEFAULT}}) {
+			    $cursorpos = 
+				$printer->{configured}{$printer->{DEFAULT}}{'queuedata'}{'menuentry'} . _(" (Default)");
+			} elsif ($printer->{SPOOLER} eq "cups") {
+			    ($cursorpos) = 
+				grep { $_ =~ /!$printer->{DEFAULT}:[^!]*$/ }
+			    printer::get_cups_remote_queues($printer);
+			}
+		    }
+		    # Generate the list of available printers
+		    my @printerlist = 
+			( (sort((map {$printer->{configured}{$_}{'queuedata'}{'menuentry'} 
+				      . ($_ eq $printer->{DEFAULT} ?
+					 _(" (Default)") : ())}
+				 keys(%{$printer->{configured}
+					|| {}})),
+				($printer->{SPOOLER} eq "cups" ?
+				 printer::get_cups_remote_queues($printer)
+				 : ())))
+			  );
+		    my $noprinters = ($#printerlist < 0);
 		    # Position the cursor where it were before (in case
 		    # a button was pressed).
 		    $menuchoice = $cursorpos;
@@ -2019,47 +2036,42 @@ sub main {
 		    $in->ask_from_(
 			{title => _("Printerdrake"),
 			 messages =>
-			     _("The following printers are configured. Double-click on one of them to modify it, to set it as default, or to get information about it."),
-			 cancel => ($::isInstall ? 
-				    ('') : ($::expert ? 
-				  _("Normal Mode") : _("Expert Mode"))),
+			     ($noprinters ? "" :
+			      _("The following printers are configured. Double-click on one of them to modify it, to set it as default, or to get information about it.")),
+			 cancel => (""),
 			 ok => (""),
 			},
 			# List the queues
-			[ { val => \$menuchoice, format => \&translate,
-			    sort => 0, separator => "!", tree_expanded => 1,
-			    quit_if_double_click => 1,
-		        list => [ (sort((map {$printer->{configured}{$_}{'queuedata'}{'menuentry'} 
-					     . ($_ eq $printer->{DEFAULT} ?
-						_(" (Default)") : ())}
-					 keys(%{$printer->{configured}
-						|| {}})),
-					  ($printer->{SPOOLER} eq "cups" ?
-					   printer::get_cups_remote_queues($printer)
-					   : ()))),
-			# CUPS makes available remote printers automatically
-			#($printer->{SPOOLER} eq "cups" ?
-			# ($::expert ? _("Printer(s) on remote CUPS server(s)"):
-			#  _("Printer(s) on remote server(s)")) : ()),
-			# Button to add a new queue
-			#_("Add printer"),
-		        # In expert mode we can change the spooler
-		        #($::expert ?
-		        # ( $spoolerentry .
-		        #   $printer::spooler_inv{$printer->{SPOOLER}} ) : ()),
-		        # Bored by configuring your printers, get out of here!
-		        #_("Done") 
-				  ] },
+			[ ($noprinters ? () :
+			   { val => \$menuchoice, format => \&translate,
+			     sort => 0, separator => "!",tree_expanded => 1,
+			     quit_if_double_click => 1,allow_empty_list =>1,
+			     list => \@printerlist }),
 			  { clicked_may_quit =>
-			    sub { $menuchoice = "\@addprinter"; 1; },
+			    sub { 
+				# Save the cursor position
+				$cursorpos = $menuchoice;
+				$menuchoice = "\@addprinter";
+				1; 
+			    },
 			    val => _("Add a new printer") },
 			  ( $printer->{SPOOLER} eq "cups" ?
 			    { clicked_may_quit =>
-				  sub { $menuchoice = "\@refresh"; 1; },
+				  sub { 
+				      # Save the cursor position
+				      $cursorpos = $menuchoice;
+				      $menuchoice = "\@refresh";
+				      1;
+				  },
 				  val => _("Refresh printer list (to get all remote CUPS printers visible)") } : ()),
 			  ( $::expert ?
 			    { clicked_may_quit =>
-				  sub { $menuchoice = "\@spooler"; 1; },
+				  sub {
+				      # Save the cursor position
+				      $cursorpos = $menuchoice;
+				      $menuchoice = "\@spooler";
+				      1;
+				  },
 				  val => _("Configure printing system") } :
 			    ()),
 			  ( !$::isInstall ?
@@ -2083,6 +2095,7 @@ sub main {
 			# structure between expert/normal mode.
 			my $w = $in->wait_message('', _("Reading printer data ..."));
 			printer::read_configured_queues($printer);
+			$cursorpos = "::";
 			next;
 		    }
 		} else {
@@ -2107,12 +2120,6 @@ sub main {
 		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
 		    next;
 		}
-		# Make available printers on remote CUPS servers (CUPS only).
-		#if (($queue eq _("Printer(s) on remote CUPS server(s)")) ||
-		#    ($queue eq _("Printer(s) on remote server(s)"))) {
-		#    setup_remote_cups_server($printer, $in);
-		#    next;
-		#}
 		# Rip the queue name out of the chosen menu entry
 		if ($menuchoice =~ /!([^\s!:]+):[^!]*$/) {
 		    $queue = $1;
@@ -2166,6 +2173,10 @@ sub main {
 	    setup_options($printer, $in) or next;
 	    configure_queue($printer, $in);
 	    setasdefault($printer, $in);
+	    $cursorpos = 
+		$printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
+		($printer->{QUEUE} eq $printer->{DEFAULT} ? 
+		 _(" (Default)") : ());
 	    if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) { 
 		$continue = ($::expert || !$::isInstall || $menushown ||
 			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
@@ -2196,7 +2207,7 @@ sub main {
 	    } else {
 		# The parameters of a remote CUPS queue cannot be changed,
 		# so we can simply take the menu entry.
-		$menuchoice =~ /!([^!]+)$/;
+		$cursorpos =~ /!([^!]+)$/;
 		$infoline = $1;
 	    }
 	    if ($in->ask_from_
@@ -2319,9 +2330,32 @@ What do you want to modify on this printer?",
 					$printer->{DEFAULT} = "";
 				    }
 				}
+				# Let the main menu cursor go to the default
+				# position
+				$cursorpos = "::";
 			    }
 			}
 		    }		
+		}
+		# Make sure that the cursor is still at the same position
+		# in the main menu when one has modified something on the
+		# current printer
+		if (($printer->{QUEUE}) && ($printer->{QUEUE} ne "")) {
+		    if ($printer->{configured}{$printer->{QUEUE}}) {
+			$cursorpos = 
+			    $printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
+			    ($printer->{QUEUE} eq $printer->{DEFAULT} ? 
+			     _(" (Default)") : ());
+		    } else {
+			my $s1 = _(" (Default)");
+			my $s2 = $s1;
+			$s2 =~ s/\(/\\\(/;
+			$s2 =~ s/\)/\\\)/;
+			if (($printer->{QUEUE} eq $printer->{DEFAULT}) &&
+			    ($cursorpos !~ /$s2/)) {
+			    $cursorpos .= $s1;
+			}
+		    }
 		}
 	    } else {
 		$editqueue = 0;
@@ -2347,6 +2381,9 @@ What do you want to modify on this printer?",
 	    if ($item ne "queuedata") {
 		delete($printer->{configured}{$queue}{$item});
 	    }
+	}
+	if ($printer->{configured}{$queue}{'queuedata'}{'menuentry'}) {
+	    delete($printer->{configured}{$queue}{'queuedata'}{'menuentry'});
 	}
     }
     delete($printer->{OLD_QUEUE});

@@ -41,7 +41,7 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
     _("Remote printer")                             => "REMOTE",
     _("Printer on remote CUPS server")              => "CUPS",
     _("Printer on remote lpd server")               => "LPD",
-    _("Network printer (socket)")                   => "SOCKET",
+    _("Network printer (TCP/Socket)")               => "SOCKET",
     _("Printer on SMB/Windows 95/98/NT server")     => "SMB",
     _("Printer on NetWare server")                  => "NCP",
     _("Enter a printer device URI")                 => "URI",
@@ -68,13 +68,9 @@ sub spooler {
 sub printer_type($) {
     my ($printer) = @_;
     for ($printer->{SPOOLER}) {
-	# In the case of CUPS as spooler only present the "Remote CUPS
-	# server" option when one adds a new printer, not when one modifies
-	# an already configured one.
 	/cups/ && return @printer_type_inv{qw(LOCAL), 
-			 $printer->{configured}{$printer->{OLD_QUEUE}} ?
-			     () : qw(CUPS), qw(LPD SOCKET SMB), 
-			     $::expert ? qw(URI) : ()};
+					   qw(LPD SOCKET SMB), 
+					   $::expert ? qw(URI) : ()};
 	/lpd/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP),
 					   $::expert ? qw(POSTPIPE URI) : ()};
 	/lprng/  && return @printer_type_inv{qw(LOCAL LPD SOCKET SMB NCP),
@@ -448,7 +444,7 @@ sub make_menuentry {
     my $spooler = $shortspooler_inv{$printer->{SPOOLER}};
     my $connect = $printer->{configured}{$queue}{'queuedata'}{'connect'};
     my $localremote;
-    if ($connect =~ m!^file:!) {
+    if (($connect =~ m!^file:!) || ($connect =~ m!^ptal:!)) {
 	$localremote = _("Local Printers");
     } else {
 	$localremote = _("Remote Printers");
@@ -467,7 +463,7 @@ sub make_menuentry {
     } elsif ($connect =~ m!^lpd://([^/]+)/([^/]+)/?$!) {
 	$connection = _("on LPD server \"%s\", printer \"%s\"", $2, $1);
     } elsif ($connect =~ m!^socket://([^/:]+):([^/:]+)/?$!) {
-	$connection = _(", TCP/IP host \"%s\", port \"%s\"", $1, $2);
+	$connection = _(", TCP/IP host \"%s\", port %s", $1, $2);
     } elsif (($connect =~ m!^smb://([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*/([^/\@]+)/([^/\@]+)/?$!) ||
 	     ($connect =~ m!^smb://.*\@([^/\@]+)/([^/\@]+)/?$!)) {
@@ -479,7 +475,7 @@ sub make_menuentry {
     } elsif ($connect =~ m!^postpipe:(.+)$!) {
 	$connection = _(", using command %s", $1);
     } else {
-	$connection = "";
+	$connection = ($::expert ? ", URI: $connect" : "");
     }
     my $sep = "!";
     $printer->{configured}{$queue}{'queuedata'}{'menuentry'} = 
@@ -1124,6 +1120,11 @@ sub configure_queue($) {
         {};
     copy_printer_params($printer->{currentqueue},
       $printer->{configured}{$printer->{currentqueue}{'queue'}}{'queuedata'});
+    # Construct an entry line for tree view in main window of
+    # printerdrake
+    make_menuentry($printer, $printer->{currentqueue}{'queue'});
+
+    # Store the default option settings
     $printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} = {};
     if ($printer->{currentqueue}{foomatic}) {
 	my $tmp = $printer->{OLD_QUEUE};
@@ -1135,9 +1136,6 @@ sub configure_queue($) {
 	$printer->{configured}{$printer->{currentqueue}{'queue'}}{'args'} =
 	    read_cups_options($printer->{currentqueue}{'queue'});
     }
-    # Construct an entry line for tree view in main window of
-    # printerdrake
-    make_menuentry($printer, $printer->{currentqueue}{'queue'});
     # Clean up
     delete($printer->{ARGS});
     $printer->{OLD_CHOICE} = "";
