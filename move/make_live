@@ -135,4 +135,4 @@ substInFile {
 } "$::prefix/etc/rc.d/init.d/$_" foreach qw(xfs dm devfsd syslog);
 
 #- we're not using sysv init, we need to replace these
-output("$::prefix/sbin/$_", "#!/bin/sh\nhalt_reboot"), chmod(0755, "/sbin/$_") foreach qw(halt reboot);
+output("$::prefix/sbin/$_", "#!/bin/sh\nhalt_reboot"), chmod(0755, "$::prefix/sbin/$_") foreach qw(halt reboot);
