@@ -140,7 +140,7 @@ sub boot_img_alpha {
     _ "$mke2fs $img";
     _ "/sbin/e2writeboot $img /boot/bootlx";
     _ "$sudo mount -t ext2 $img $mnt -o loop";
-    _ "cp -f vmlinux.gz $mnt";
+    _ "cp -f vmlinux.gz $mnt" if $type !~ /blank/;
     -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
 
     mkdir "$mnt/etc", 0777;
