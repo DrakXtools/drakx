@@ -556,20 +556,34 @@ sub chooseGroups {
 
 	int $total_size;
     };
-    my %val;
-    foreach (@groups) {
-	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}};
-    }
+    my %val = map {
+	$_ => ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}}
+    } @groups;
+
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my ($all, $size_text, $old_size, $path);
-    my $update_size = sub { 
+    my ($all, $old_size);
+    my $size_to_display = sub { 
 	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
 
 	#- if a profile is deselected, deselect everything (easier than deselecting the profile packages)
 	$old_size > $size and install_any::unselectMostPackages($o);
 	$old_size = $size;
-	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
-    }; &$update_size;
+	_("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
+    };
+
+    $o->reallyChooseGroups($size_to_display, $individual, \%val) or return;
+
+    $o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
+    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
+    1;
+}
+
+sub reallyChooseGroups {
+    my ($o, $size_to_display, $individual, $val) = @_;
+
+    my $size_text = &$size_to_display;
+
+    my ($path, $all);
     $o->ask_from_entries_refH('', _("Package Group Selection"), [
                            { val => \$size_text, type => 'label' }, {},
 			   (map {; 
@@ -578,7 +592,7 @@ sub chooseGroups {
 				 if_($old ne $path, { val => $path }),
 				 {
 			     help => translate($o->{compssUsers}{$_}{descr}),
-			     val => \$val{$_},
+			     val => \$val->{$_},
 			     type => 'bool',
 			     icon => do {
 				 my $f = "/usr/share/icons/" . ($o->{compssUsers}{$_}{icons} || 'default');
@@ -588,17 +602,15 @@ sub chooseGroups {
 			     },
 			     disabled => sub { $all },
 			     text => translate($o->{compssUsers}{$_}{label}),# . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
-			   } } @groups),
+			   } } @{$o->{compssUsersSorted}}),
 			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
 			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
-			  ], changed => $update_size) or return;
+			  ], changed => sub { $size_text = &$size_to_display }) or return;
+
     if ($all) {
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } @groups;
-    } else {
-	$o->{compssUsersChoice}{$_} = 0 foreach map { @{$compssUsers->{$_}{flags}} } grep { !$val{$_} } keys %val;
-	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } grep {  $val{$_} } keys %val;
+	$val->{$_} = 1 foreach keys %$val;
     }
-    1;
+    1;    
 }
 
 sub chooseCD {
