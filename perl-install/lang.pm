@@ -548,13 +548,13 @@ sub charset2kde_charset {
 #- font+size for different charsets; the field [0] is the default,
 #- others are overrridens for fixed(1), toolbar(2), menu(3) and taskbar(4)
 my %charset2kde_font = (
+  'C' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-1'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-2'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-9'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-15' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'utf_1'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'utf_2'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
-  'utf_9'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'utf_15'      => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'gb2312' => [ "default-ming,16" ],
   'jisx0208' => [ "misc-fixed,14", "wadalab-gothic,13" ],
@@ -889,6 +889,10 @@ sub check {
     $warn->("unused entry $_ in \%xim") foreach difference2([ keys %xim ], [ list() ]);
 
     # consolefonts are checked during build via console_font_files()
+
+    if (my @l = difference2([ 'default', keys %charsets ], [ keys %charset2kde_font ])) {
+	$warn->("no kde font for charset " . join(" ", @l));
+    }
 
     if (my @l = grep { lang2country($_) eq 'C' } list()) {
 	$warn->("no country for langs " . join(" ", @l));
