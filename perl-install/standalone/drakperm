@@ -1,11 +1,12 @@
 #!/usr/bin/perl 
 
 use strict;
+
 use lib qw(/usr/lib/libDrakX);
 use standalone;
 
 use common;
-use ugtk2 qw(:helpers );
+use ugtk2 qw(:helpers :wrappers);
 use interactive;
 
 my $in = 'interactive'->vnew('su', 'default');
@@ -32,37 +33,38 @@ my $prec_txt = $default_perm_level;
 my $w = ugtk2->new('drakperm');
 my $W = $w->{window};
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-my $scroll 		= new Gtk2::ScrolledWindow;
-my $tree_model = Gtk2::TreeStore->new(map { Gtk2::GType->STRING } 1..4);
-my $Perm_list = Gtk2::TreeView->new_with_model($tree_model);
+my $scroll = new Gtk2::ScrolledWindow;
+my $treeModel = Gtk2::TreeStore->new((Gtk2::GType->STRING) x 4);
+my $permList = Gtk2::TreeView->new_with_model($treeModel);
 
 my @column_sizes = (150, 100, 100, 15, -1);
 
 each_index {
     my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i);
     $col->set_min_width($column_sizes[$::i]);
-    $Perm_list->append_column($col);
+    $permList->append_column($col);
 } (N("path"), N("user"), N("group"), N("permissions"));
 
 
-#TV $Perm_list->set_shadow_type('out');
+#TV $permList->set_shadow_type('out');
 
-my $vb				= new Gtk2::VBox(0,5);
+my $vb = new Gtk2::VBox(0,5);
 my $select_box = new Gtk2::HBox(0,5);
 my $action_box = new Gtk2::HBox(0,5);
 my $up_down_box = new Gtk2::HBox(0,5);
-my $B_quit		= new Gtk2::Button('quit');
-my $B_sav			= new Gtk2::Button('save');
-my $B_up			= new Gtk2::Button(N("Up"));
-my $B_del			= new Gtk2::Button(N("delete"));
-my $B_edit		= new Gtk2::Button(N("edit"));
-my $B_down		= new Gtk2::Button(N("Down"));
-my $B_add			= new Gtk2::Button(N("add a rule"));
+my $B_quit = new Gtk2::Button(N("quit"));
+my $B_sav = new Gtk2::Button(N("save"));
+my $B_up = new Gtk2::Button(N("Up"));
+my $B_del = new Gtk2::Button(N("delete"));
+my $B_edit = new Gtk2::Button(N("edit"));
+my $B_down = new Gtk2::Button(N("Down"));
+my $B_add = new Gtk2::Button(N("add a rule"));
 my $label_perm = new Gtk2::Label(N("select perm file to see/edit"));
 my $combo_perm = new Gtk2::Combo;
-my $tips			= new Gtk2::Tooltips;
-my $pres			= new Gtk2::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
-my $F					= new Gtk2::Frame;
+my $tips = new Gtk2::Tooltips;
+my $pres = new Gtk2::Label(N("Drakperm is used to see files to use in order to fix permissions, owners, and groups via msec.\nYou can also edit your own rules which will owerwrite the default rules."));
+my $F = new Gtk2::Frame;
+
 #- widgets settings
 $combo_perm->set_popdown_strings(sort(keys %perm));
 
@@ -74,52 +76,51 @@ $tips->set_tip($B_del, N("Delete selected rule"));
 
 #- signal management
 $W->signal_connect(delete_event => sub { ugtk2->exit });
-$Perm_list->signal_connect( select_row => \&row_setting_data);
-#$Perm_list->signal_connect( unselect_row => sub { undef(%CURENT)});
-$B_sav->signal_connect( clicked => \&save_perm);
-$B_quit->signal_connect( clicked => sub { ugtk2->exit });
-$B_edit->signal_connect( clicked => \&row_setting_dialog);
-$B_add->signal_connect( clicked  => sub {
-                            use Data::Dumper; print Dumper($rows_cnt);
-
-		$Perm_list->insert( $rows_cnt , '');
-          $tree_model->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
-		$Perm_list->select_row($rows_cnt , 0);
-		&row_setting_dialog;
-		$rows_cnt++;
-	});
-$B_del->signal_connect( clicked => sub {
-		$Perm_list->remove(${$CURENT{clicked}}{row});
-		$rows_cnt--;
-		$modified++;
-	});
-$B_down->signal_connect( clicked => sub {
-		my $row = ${$CURENT{clicked}}{row};
-		$Perm_list->row_move($row, $row+1);
-		$Perm_list->unselect_all;
-		$Perm_list->select_row($row+1,0);
-		$CURENT{clicked}{row} = $row+1;
-	});
-$B_up->signal_connect( clicked => sub {
-		my $row = ${$CURENT{clicked}}{row};
-		$Perm_list->row_move($row, $row-1);
-		$Perm_list->unselect_all;
-		$Perm_list->select_row($row-1,0);
-		$CURENT{clicked}{row} = $row-1;
-	});
+$permList->signal_connect(select_row => \&row_setting_data);
+#$permList->signal_connect( unselect_row => sub { undef(%CURENT)});
+$B_sav->signal_connect(clicked => \&save_perm);
+$B_quit->signal_connect(clicked => sub { ugtk2->exit });
+$B_edit->signal_connect(clicked => \&row_setting_dialog);
+$B_add->signal_connect(clicked  => sub {
+			    #$permList->insert( $rows_cnt , '');
+			    $treeModel->append_set(undef, [ 0 => 'NEW', 1 => '-', 2 => '-', 3 => '-' ]);
+			    #$permList->($rows_cnt , 0);
+			    &row_setting_dialog;
+			    $rows_cnt++;
+			});
+$B_del->signal_connect(clicked => sub {
+			    
+			    $permList->remove(${$CURENT{clicked}}{row});
+			    $rows_cnt--;
+			    $modified++;
+			});
+$B_down->signal_connect(clicked => sub {
+			     my $row = ${$CURENT{clicked}}{row};
+			     $permList->row_move($row, $row+1);
+			     $permList->unselect_all;
+			     $permList->select_row($row+1,0);
+			     $CURENT{clicked}{row} = $row+1;
+			 });
+$B_up->signal_connect(clicked => sub {
+			   my $row = ${$CURENT{clicked}}{row};
+			   $permList->row_move($row, $row-1);
+			   $permList->unselect_all;
+			   $permList->select_row($row-1,0);
+			   $CURENT{clicked}{row} = $row-1;
+		       });
 my $combo_sig = $combo_perm->entry->signal_connect( changed => sub { &display_perm($combo_perm->entry->get_text , @_) });
-$Perm_list->signal_connect( button_press_event => sub { 
-		$editable or return 0;
-		my (undef, $event) = @_;
-		&row_setting_dialog if $event->type eq '2button_press';
-	});
+$permList->signal_connect( button_press_event => sub { 
+				$editable or return 0;
+				my (undef, $event) = @_;
+				&row_setting_dialog if $event->type eq '2button_press';
+			    });
 
 #Viewing management
 $select_box->add($label_perm);
 $select_box->add($combo_perm);
 
-$scroll->add($Perm_list);
-$scroll->set_policy('automatic', 'automatic');
+$scroll->add($permList);
+#$scroll->set_policy('automatic', 'automatic');
 
 
 foreach ($B_up, $B_down, $B_add, $B_del, $B_edit) {
@@ -143,7 +144,7 @@ $W->add($vb_);
 $W->show_all;
 $w->{rwindow}->set_position('center') unless $::isEmbedded;
 
-&display_perm($default_perm_level);
+display_perm($default_perm_level);
 $combo_perm->entry->set_text($default_perm_level);
 
 #- Gtk loop start here 
@@ -155,247 +156,245 @@ ugtk2->exit;
 
 #- Built in functions
 sub check_save {
-	$modified or return 0;
-	my $sav_ = $in->ask_okcancel('Warning', 'your changed will be lost do you wish to continue?');
-	$sav_ 
-		and $modified = 0;
-	return $sav_;	
+    $modified or return 0;
+    my $sav_ = $in->ask_okcancel('Warning', 'your changed will be lost do you wish to continue?');
+    $sav_ 
+      and $modified = 0;
+    return $sav_;	
 }
 
-#- Desc => set the Perm_list CList with the appropriate value
+#- Desc => set the permList CList with the appropriate value
 sub display_perm {
-	my $perm_level = shift @_;
-	my $file = $perm{$perm_level};
-	my $sav_ = &check_save;
-	my $i = 0;
-	if ($modified && ! $sav_) {
-		$combo_perm->entry->signal_handler_block($combo_sig);
-		$combo_perm->entry->set_text($prec_txt);
-		$combo_perm->entry->signal_handler_unblock($combo_sig);
-		return 0;
-	}
+    my $perm_level = shift @_;
+    my $file = $perm{$perm_level};
+    my $sav_ = &check_save;
+    my $i = 0;
+    if ($modified && ! $sav_) {
+	$combo_perm->entry->signal_handler_block($combo_sig);
+	$combo_perm->entry->set_text($prec_txt);
+	$combo_perm->entry->signal_handler_unblock($combo_sig);
+	return 0;
+    }
 
-	$editable = $perm_level =~ /^level \d/ ? 0 : 1;
+    $editable = $perm_level =~ /^level \d/ ? 0 : 1;
 	
-	$tree_model->clear();
-     local *F;
-	open F, $file;
-     local $_;
-	while (<F>) {
-         next unless m/^([^#]\S+)\s+([^.\s]+)(\.(\S+))?\s+(\d+)/;
-         $tree_model->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
-     }
-	close F;
-	$up_down_box->set_sensitive($editable);
+    $treeModel->clear();
+    local *F;
+    open F, $file;
+    local $_;
+    while (<F>) {
+	next unless m/^([^#]\S+)\s+([^.\s]+)(\.(\S+))?\s+(\d+)/;
+	$treeModel->append_set(undef, [ 0 => $1, 1 => $2, 2 => $4, 3 => $5 ]);
+    }
+    close F;
+    $up_down_box->set_sensitive($editable);
 	
-	$rows_cnt = $i;
-	$prec_txt = $perm_level;
-	undef(%CURENT);
+    $rows_cnt = $i;
+    $prec_txt = $perm_level;
+    undef(%CURENT);
 }
 
 #- Desc => save the perm.local file if modification made
 sub save_perm {
-	$modified or return 0;
-     local *F;
-	open F, '>'.$local_path.'perm.local' or die("F CHIER BORDEL");
-	foreach my $i (0..$rows_cnt) {
-		my $line = $Perm_list->get_text($i, 0) . "\t" . $Perm_list->get_text($i,1) . ($Perm_list->get_text($i,2) ? "." . $Perm_list->get_text($i,2) : "") . "\t" . $Perm_list->get_text($i,3) . "\n";
-		print F $line;
-	}
-	close F;
-	$modified = 0;
+    $modified or return 0;
+    local *F;
+    open F, '>'.$local_path.'perm.local' or die("F CHIER BORDEL");
+    foreach my $i (0..$rows_cnt) {
+	my $line = $permList->get_text($i, 0) . "\t" . $permList->get_text($i,1) . ($permList->get_text($i,2) ? "." . $permList->get_text($i,2) : "") . "\t" . $permList->get_text($i,3) . "\n";
+	print F $line;
+    }
+    close F;
+    $modified = 0;
 }
 #- on list selection we get all data concerning the current selection
 sub row_setting_data {
-	my (undef, $row, $column, undef ) = @_;
-	%CURENT = ('clicked' => {'row' => $row,
-                              'col' => $column
-                             },
-                'data' => [ $Perm_list->get_text($row,0),
-                            $Perm_list->get_text( $row,1),
-                            $Perm_list->get_text( $row,2),
-                            $Perm_list->get_text( $row,3),
-                          ]);
-	#print(%{$CURENT{'clicked'}});print("\n");
+    my (undef, $row, $column, undef ) = @_;
+    %CURENT = ('clicked' => {'row' => $row,
+			     'col' => $column
+			    },
+	       'data' => [ $permList->get_text($row,0),
+			   $permList->get_text( $row,1),
+			   $permList->get_text( $row,2),
+			   $permList->get_text( $row,3),
+			 ]);
+    #print(%{$CURENT{'clicked'}});print("\n");
 }
 
+my %perms;
 #- Desc  => Here is the complete subwindow for rule settings
 sub row_setting_dialog {
-	
-	$editable or return 0;
-	
-	my $row = ${$CURENT{clicked}}{row};
-	
-	#- dlg widgets declaration
-	my $dlg 		= new Gtk2::Dialog();
-	my $ok 		= new Gtk2::Button('ok');
-	my $cancel 	= new Gtk2::Button('cancel');
-	my $browse	= new Gtk2::Button(N("browse"));
-	my $users 	= new Gtk2::Combo;
-	my $groups	= new Gtk2::Combo;
-	my $file		= new Gtk2::Entry;
-	my $file_hbox  = new Gtk2::HBox(0,5);
-	my $usr_hbox   = new Gtk2::HBox(0,5);
-	my $usr_vbox   = new Gtk2::VBox(0,5);
-	my $usr_check  = new Gtk2::CheckButton(N("Current user"));
-	my @rights	= ('user', 'group', 'other');
-	my @check	     = ('', 'read', 'write', 'execute');
-	my $hb_rights  = new Gtk2::HBox(0,15);
-	my $vb_rights  = new Gtk2::VBox(0,15);
-	my $F_rights	= new Gtk2::Frame(N("Permissions"));
-	my $F_path	= new Gtk2::Frame(N("Path"));
-	my $F_usr		= new Gtk2::Frame(N("Property"));
-	my $vb_specials = new Gtk2::VBox(0,5);
-	my $sticky	= new Gtk2::CheckButton(N("sticky-bit"));
-	my $suid	= new Gtk2::CheckButton(N("Set-UID"));
-	my $gid	= new Gtk2::CheckButton(N("Set-GID"));
-	my $rght = ${$CURENT{data}}[3];
-	my $s = length($rght) == 4 ? substr($rght,0,1) : 0;
-	my $user  = $s ? substr($rght,1,1) : substr($rght,0,1);
-	my $group = $s ? substr($rght,2,1) : substr($rght,1,1);
-	my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
-	foreach (@check) {
-		$vb_rights->add(new Gtk2::Label($_));
-	}
-	$hb_rights->add($vb_rights);
-	foreach my $r (@rights) {
-		%{$r} = &get_right(${$r});
-		${'_vb'.$r} = new Gtk2::VBox(0,5);
-		${'_vb'.$r}->add(new Gtk2::Label($r));
-		foreach my $c (@check) {
-			$c eq '' and next;
-               ${ $r . "_$c" } = Gtk2::CheckButton->new;
-               ${$r}{$c} and ${ $r . "_$c" }->set_active(1);
-               ${"_vb$r"}->add(${ $r . "_$c" });
-		}
-		$hb_rights->add(${'_vb'.$r});
-	}
-	
-	$vb_specials->add(new Gtk2::Label(' '));
-	$vb_specials->add($suid);
-	$vb_specials->add($gid);
-	$vb_specials->add($sticky);
-	$hb_rights->add($vb_specials);
-	
-	#- dlg widgets settings
-	my %s_right = &get_right($s);
-	$s_right{execute} and $sticky->set_active(1);
-	$s_right{write} and $gid->set_active(1);
-	$s_right{read} and $suid->set_active(1);
-	
-	$file->set_text(${$CURENT{data}}[0]);
+    $editable or return 0;
+    
+    my ($treeStore, $iter) = $permList->get_selection->get_selected;
+    
+    #- dlg widgets declaration
+    my $dlg		= new Gtk2::Dialog();
+    my $ok 		= new Gtk2::Button('ok');
+    my $cancel 	= new Gtk2::Button('cancel');
+    my $browse	= new Gtk2::Button(N("browse"));
+    my $users 	= new Gtk2::Combo;
+    my $groups	= new Gtk2::Combo;
+    my $file		= new Gtk2::Entry;
+    my $file_hbox  = new Gtk2::HBox(0,5);
+    my $usr_hbox   = new Gtk2::HBox(0,5);
+    my $usr_vbox   = new Gtk2::VBox(0,5);
+    my $usr_check  = new Gtk2::CheckButton(N("Current user"));
+    my $hb_rights  = new Gtk2::HBox(0,15);
+    my $vb_rights  = new Gtk2::VBox(0,15);
+    my $F_rights	= new Gtk2::Frame(N("Permissions"));
+    my $F_path	= new Gtk2::Frame(N("Path"));
+    my $F_usr		= new Gtk2::Frame(N("Property"));
+    my $vb_specials = new Gtk2::VBox(0,5);
+    my $sticky	= new Gtk2::CheckButton(N("sticky-bit"));
+    my $suid	= new Gtk2::CheckButton(N("Set-UID"));
+    my $gid	= new Gtk2::CheckButton(N("Set-GID"));
+    my $rght = ${$CURENT{data}}[3];
+    my $s = length($rght) == 4 ? substr($rght,0,1) : 0;
+    my $user  = $s ? substr($rght,1,1) : substr($rght,0,1);
+    my $group = $s ? substr($rght,2,1) : substr($rght,1,1);
+    my $other = $s ? substr($rght,3,1) : substr($rght,2,1);
 
-	$users->set_popdown_strings(&get_user_or_group('users'));
-	$users->entry->set_text(${$CURENT{data}}[1]);
-	$users->entry->set_editable(0);
+    my %rights = (user => $user, group => $group, other => $other);
+    my @check	= ('', 'read', 'write', 'execute');
+
+    $vb_rights->add(new Gtk2::Label($_)) foreach @check;
+    $hb_rights->add($vb_rights);
+
+    foreach my $r (keys %rights) {
+	$perms{$r} = get_right($rights{$r});
+	my $vbox = gtkadd(Gtk2::VBox->new(0,5), Gtk2::Label->new($r));
+	foreach my $c (@check) {
+	    $c eq '' and next;
+	    my $check = Gtk2::CheckButton->new;
+	    $perms{$r}{$c} and $check->set_active(1);
+	    $vbox->add($check);
+	}
+	$hb_rights->add($vbox);
+    }
+    
+    $vb_specials->add(new Gtk2::Label(' '));
+    $vb_specials->add($suid);
+    $vb_specials->add($gid);
+    $vb_specials->add($sticky);
+    $hb_rights->add($vb_specials);
 	
-	$groups->set_popdown_strings(&get_user_or_group);
-	$groups->entry->set_text(${$CURENT{data}}[2]);
-	$groups->entry->set_editable(0);
-	$dlg->set_policy(0,0,1);
-	$dlg->set_modal(1);
+    #- dlg widgets settings
+    my %s_right = &get_right($s);
+    $s_right{execute} and $sticky->set_active(1);
+    $s_right{write} and $gid->set_active(1);
+    $s_right{read} and $suid->set_active(1);
+	
+    $file->set_text(${$CURENT{data}}[0]);
+
+    $users->set_popdown_strings(&get_user_or_group('users'));
+    $users->entry->set_text(${$CURENT{data}}[1]);
+    $users->entry->set_editable(0);
+	
+    $groups->set_popdown_strings(&get_user_or_group);
+    $groups->entry->set_text(${$CURENT{data}}[2]);
+    $groups->entry->set_editable(0);
+#    $dlg->set_policy(0,0,1);
+    $dlg->set_modal(1);
 
 	
-	if (${$CURENT{data}}[1] eq 'current') {
-		$usr_check->set_active(1);
-		$groups->set_sensitive(0);
-		$users->set_sensitive(0);
-	}
+    if (${$CURENT{data}}[1] eq 'current') {
+	$usr_check->set_active(1);
+	$groups->set_sensitive(0);
+	$users->set_sensitive(0);
+    }
 	
-	$tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
-	$tips->set_tip($suid, N("Use owner id for execution"));
-	$tips->set_tip($gid, N("Use group id for execution"));
-	$tips->set_tip($usr_check, N("when checked, owner and group won't be changed"));
+    $tips->set_tip($sticky, N("Used for directory:\n only owner of directory or file in this directory can delete it"));
+    $tips->set_tip($suid, N("Use owner id for execution"));
+    $tips->set_tip($gid, N("Use group id for execution"));
+    $tips->set_tip($usr_check, N("when checked, owner and group won't be changed"));
 	
-	#- event management
-	$cancel->signal_connect( clicked => sub { $dlg->destroy });
-	$browse->signal_connect( clicked => sub {
-			my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
-			$file_dlg->set_modal(1);
-			$file_dlg->show;
-			$file_dlg->set_filename($file->get_text);
-			$file_dlg->cancel_button->signal_connect( clicked => sub { $file_dlg->destroy });
-			$file_dlg->ok_button->signal_connect( clicked => sub {
-					$file->set_text($file_dlg->get_filename);
-					$file_dlg->destroy;
-				});
+    #- event management
+    $cancel->signal_connect( clicked => sub { $dlg->destroy });
+    $browse->signal_connect( clicked => sub {
+				 my $file_dlg = new Gtk2::FileSelection(N("Path selection"));
+				 $file_dlg->set_modal(1);
+				 $file_dlg->show;
+				 $file_dlg->set_filename($file->get_text);
+				 $file_dlg->cancel_button->signal_connect( clicked => sub { $file_dlg->destroy });
+				 $file_dlg->ok_button->signal_connect( clicked => sub {
+									   $file->set_text($file_dlg->get_filename);
+									   $file_dlg->destroy;
+								       });
 			
-		});
-	$ok->signal_connect( clicked => sub {
-			$Perm_list->set_text($row, 0, $file->get_text);
-               if ($usr_check->get_active) {
-                    $Perm_list->set_text($row, 1, 'current');
-                    $Perm_list->set_text($row, 2, '');
-               } else {
-                    $Perm_list->set_text($row, 1, $users->entry->get_text);
-                    $Perm_list->set_text($row, 2, $groups->entry->get_text);
-               }
-               #- mod calculation
-               #$user  = ($user_read->get_active  ? 4 : 0)+($user_write->get_active ? 2 : 0)+($user_execute->get_active ? 1 : 0);
-               #$group = ($group_read->get_active ? 4 : 0)+($group_write->get_active ? 2 : 0)+($group_execute->get_active ? 1 : 0);
-               #$other = ($other_read->get_active ? 4 : 0)+($other_write->get_active ? 2 : 0)+($other_execute->get_active ? 1 : 0);
-               my $s     = ($sticky->get_active ? 1 : 0)   + ($suid->get_active ? 4 : 0)      + ($gid->get_active ? 2 : 0);
-               $Perm_list->set_text($row,3, ($s || '') . $user . $group . $other);
-			$dlg->destroy;
-			$modified++;
-		});
-	$usr_check->signal_connect( clicked => sub {
-         my $bool = $usr_check->get_active; 
-         $groups->set_sensitive($bool);
-         $users->set_sensitive($bool);
-		});
+			     });
+    $ok->signal_connect( clicked => sub {
+			     $treeModel->append_set($iter, [ 0 => $file->get_text ]);
+			     if ($usr_check->get_active) {
+				 $treeModel->append_set($iter, [ 1 => 'current' ]);
+				 $treeModel->append_set($iter, [ 2 => '' ]);
+			     } else {
+				 $treeModel->append_set($iter, [ 1 => $users->entry->get_text ]);
+				 $treeModel->append_set($iter, [ 2 => $groups->entry->get_text ]);
+			     }
+			     #- mod calculation
+			     #$user  = ($perms{user}{read}->get_active  ? 4 : 0)+($perms{user}{write}->get_active ? 2 : 0)+($perms{user}{execute}->get_active ? 1 : 0);
+			     #$group = ($perms{group}{read}->get_active ? 4 : 0)+($perms{group}{write}->get_active ? 2 : 0)+($perms{group}{execute}->get_active ? 1 : 0);
+			     #$other = ($perms{other}{read}->get_active ? 4 : 0)+($perms{other}{write}->get_active ? 2 : 0)+($perms{other}{execute}->get_active ? 1 : 0);
+			     my $s     = ($sticky->get_active ? 1 : 0)   + ($suid->get_active ? 4 : 0)      + ($gid->get_active ? 2 : 0);
+			     $treeModel->append_set($iter, [ 3 => ($s || '') . $user . $group . $other ]);
+			     $dlg->destroy;
+			     $modified++;
+			 });
+    $usr_check->signal_connect( clicked => sub {
+				    my $bool = $usr_check->get_active; 
+				    $groups->set_sensitive($bool);
+				    $users->set_sensitive($bool);
+				});
 	
-	#- dlg widgets placement
-	$file_hbox->add($file);
-	$file_hbox->add($browse);
+    #- dlg widgets placement
+    $file_hbox->add($file);
+    $file_hbox->add($browse);
 	
-	$usr_vbox->add($usr_check);
-	$usr_vbox->add($usr_hbox);
+    $usr_vbox->add($usr_check);
+    $usr_vbox->add($usr_hbox);
 	
-	$usr_hbox->add(new Gtk2::Label(N("user :")));
-	$usr_hbox->add($users);
-	$usr_hbox->add(new Gtk2::Label(N("group :")));
-	$usr_hbox->add($groups);
+    $usr_hbox->add(new Gtk2::Label(N("user :")));
+    $usr_hbox->add($users);
+    $usr_hbox->add(new Gtk2::Label(N("group :")));
+    $usr_hbox->add($groups);
 	
-	$F_path->add($file_hbox);
-	$F_rights->add($hb_rights);
-	$F_usr->add($usr_vbox);
+    $F_path->add($file_hbox);
+    $F_rights->add($hb_rights);
+    $F_usr->add($usr_vbox);
 	
-	$dlg->vbox->add($F_path);
-	$dlg->vbox->add($F_usr);
-	$dlg->vbox->add($F_rights);
+    $dlg->vbox->add($F_path);
+    $dlg->vbox->add($F_usr);
+    $dlg->vbox->add($F_rights);
 	
-	$dlg->action_area->add($ok);
-	$dlg->action_area->add($cancel);
+    $dlg->action_area->add($ok);
+    $dlg->action_area->add($cancel);
 	
-	$dlg->show_all;
+    $dlg->show_all;
 
 }
 
 #- Desc  => return an array of the available users on the machine
 sub get_user_or_group {
-	my $what = @_;
-	my @users;
-     local *F;
-	$what eq 'users' 
-		and	open F, '/etc/passwd'
-		or	open F, '/etc/group';
+    my $what = @_;
+    my @users;
+    local *F;
+    open F, $what eq 'users' ? '/etc/passwd': '/etc/group';
 	
-     local $_;
-	while (<F>) {
-		m/^([^#:]+):[^:]+:[^:]+:/ or next;
-		push @users, $1;
-     }
-	close F;
-	return sort(@users);
+    local $_;
+    while (<F>) {
+	m/^([^#:]+):[^:]+:[^:]+:/ or next;
+	push @users, $1;
+    }
+    close F;
+    return sort(@users);
 }
 
 #- Desc  => return hash of boolean value for read write and execution permission from a value between 0 - 7
 sub get_right {
-	my $right	= shift @_;
-	my %rght	= ('read' => 0, 'write' => 0, 'execute' => 0);
-	$right - 4 >= 0 and $rght{read}=1 and $right = $right-4;
-	$right - 2 >= 0 and $rght{write}=1 and $right = $right-2;
-	$right - 1 >= 0 and $rght{execute}=1 and $right = $right-1;
-	return %rght;
+    my $right	= shift @_;
+    my %rght	= ('read' => 0, 'write' => 0, 'execute' => 0);
+    $right - 4 >= 0 and $rght{read}=1 and $right = $right-4;
+    $right - 2 >= 0 and $rght{write}=1 and $right = $right-2;
+    $right - 1 >= 0 and $rght{execute}=1 and $right = $right-1;
+    return %rght;
 }
