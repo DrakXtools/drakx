@@ -1,5 +1,13 @@
 2002/02/05  Pixel  <pixel@mandrakesoft.com>
 
+	* bootloader.pm: fix "help lilo when there is hdd with no hdc drive"
+
+	* Xconfigurator.pm: testFinalConfig now always returns true if test is
+	skipped because of a bad_card (back to the old behaviour, this was no
+	good (the aim is to enable changing the monitor when test is skipped))
+
+2002/02/05  Pixel  <pixel@mandrakesoft.com>
+
 	* install_steps.pm: log the "chkconfig --del gpm" when there is a serial
 	mouse
 
