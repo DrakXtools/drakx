@@ -76,15 +76,20 @@ sub basic_seclevel_explanations() {
     use Gtk2::Pango;
     my %common_opts = ('left-margin' => '10', 'right-margin' => '10');
     gtktext_insert($text, [ map  {
-        if (my ($title, $str) = m!<span foreground="royalblue3">(.*)</span>(.*)!) {
-            if_($title, [ $title, { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, %common_opts } ]),
-              if_($str, [ $str . "\n\n", \%common_opts ]);
+        if (s!^/span>!!) {
+            [ $_, \%common_opts ];
+        } elsif (s!span !!) {
+            my %tags = %common_opts;
+            while (s!(\w+?)="(\w+?)"!!) {
+                $tags{weight} ||= Gtk2::Pango->PANGO_WEIGHT_BOLD if $1 eq 'foreground';
+                $tags{$1} = $2;
+            }
+            s/^>//;
+            [ $_, \%tags ];
         } else {
-            if_($_, [ "$_\n\n", \%common_opts ]);
-    }
-      } split("\n",
-
-                             formatAlaTeX(
+            [ $_, \%common_opts ];
+        }
+    } split("<", formatAlaTeX(
 #-PO: Do not alter the <span ..> and </span> tags.
 #-PO: Translate the security levels (Poor, Standard, High, Higher and Paranoid) in the same way, you translated these individuals words.
 #-PO: keep the doble empty lines between sections, this is formated a la LaTeX.
