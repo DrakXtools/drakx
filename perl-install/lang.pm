@@ -645,11 +645,11 @@ sub write {
     setVarsInSh($prefix . ($user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
 
     update_gnomekderc($prefix . ($user_only ? "$ENV{HOME}/.kde" : '/usr') . '/share/config/kdeglobals',
-		      Locale => { 
+		      Locale => (
 				 Charset => charset2kde_charset(lang2charset($lang)),
 				 Country => lang2country($lang),
 				 Language => lang2kde_lang($lang),
-				});
+				));
 }
 
 sub load_mo {
