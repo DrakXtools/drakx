@@ -132,11 +132,11 @@ my @line_bad = ("DENY", "lost", "shutting", "dead", "DHCP_NAK", "failure;", "Una
 my @daemons = ("named");
 
 # Now define what we want to use when:
-my $col_good = $green;
-my $col_warn = $yellow;
-my $col_bad  = $red;
-my $col_note = $purple;
-my $col = $cyan;
+my $col_good = 'green4';
+my $col_warn = 'yellow4';
+my $col_bad = 'red';
+my $col_note = 'purple';
+my $col = 'darkcyan';
 
 ######### font and colors end
 
@@ -171,12 +171,11 @@ gtkadd($my_win->{window},
 						    gtkpack_(new Gtk2::HBox(0,0),
 							     1, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Choose file")),2),
 								       gtkpack (gtkset_border_width(new Gtk2::VBox(0,0),0),
-										map { 
-										    $toggle{$_} = gtksignal_connect(new Gtk2::CheckButton($files{$_}{desc}), 
-														    clicked => sub {
-															$refcount_search++; 
-															gtkset_sensitive($yy, $refcount_search);
-														    }) } keys %files,
+										map { $toggle{$_} = gtksignal_connect(new Gtk2::CheckButton($files{$_}{desc}), 
+														      clicked => sub {
+															  $refcount_search++; 
+															  gtkset_sensitive($yy,$refcount_search);
+														      }) } keys %files,
 										)
 								       ),
 							     0, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Calendar")),2),
@@ -317,30 +316,30 @@ sub logcolorize {
     my $timestamp = $::isExplain ? $2 : $1;
     my @rec = split;
 
-    log_output($timestamp,  { %b, 'foreground-gdk' => $cyan }); # date & time if any...
+    log_output($timestamp,  { %b, 'foreground' => 'darkcyan' }); # date & time if any...
     # BUG: $col hasn't yet be reseted
-    $::isExplain or log_output("$rec[0] ",  { %b, 'foreground-gdk' => $rec[0] eq $h ? $blue : $col });  # hostname
+    $::isExplain or log_output("$rec[0] ",  { %b, 'foreground' => $rec[0] eq $h ? 'blue' : $col });  # hostname
     
     if ($rec[1] eq "last") {
-	log_output(" last message repeated ",  { %n, 'foreground-gdk' => $green });
-	log_output($rec[4],  { %b, 'foreground-gdk' => $green });
-	log_output(" times\n",  { %n, 'foreground-gdk' => $green });
+	log_output(" last message repeated ",  { %n, 'foreground' => 'green' });
+	log_output($rec[4],  { %b, 'foreground' => 'green' });
+	log_output(" times\n",  { %n, 'foreground' => 'green' });
 	return;
     }
     # Extract PID if present
     if ($rec[1] =~ /\[(\d+)\]\:/) {
 	my($pid) = $1;
 	$rec[1] =~ s/\[$1\]\://;
-	log_output($rec[1] . "[",  { %n, 'foreground-gdk' => $green });
-	log_output($pid,  { %b, 'foreground-gdk' => $black });
-	log_output("]: ",  { %n, 'foreground-gdk' => $green });
+	log_output($rec[1] . "[",  { %n, 'foreground' => 'green' });
+	log_output($pid,  { %b, 'foreground' => 'black' });
+	log_output("]: ",  { %n, 'foreground' => 'green' });
     }
     else {
-	log_output($rec[1] . " ",  { %n, 'foreground-gdk' => $green });
+	log_output($rec[1] . " ",  { %n, 'foreground' => 'green' });
     }
 
     foreach my $therest (2 .. $#rec) {
-	$col = $cyan;
+	$col = 'darkcyan';
 
 	# Check for keywords to highlight
 	foreach (@word_good) { $col = $col_good if $_ eq $rec[$therest] }
@@ -353,9 +352,9 @@ sub logcolorize {
  	#foreach (@line_warn) { $col = $col_warn if $_ eq $rec[$therest] }
 	#foreach (@line_bad)  { $col = $col_bad  if $_ eq $rec[$therest] }
  	
-	log_output("$rec[$therest] ",  { %n, 'foreground-gdk' => $col });
+	log_output("$rec[$therest] ",  { %n, 'foreground' => $col });
     }
-    log_output("\n",  { %n, 'foreground-gdk' => $black });
+    log_output("\n",  { %n, 'foreground' => 'black' });
 }
 
 
