@@ -35,11 +35,17 @@ if ($curr_kernel ne $prev_kernel) {
 
 if (find { $_->{driver} =~ /Card:NVIDIA/ } detect_devices::probeall()) {
     if (find { -e join('', "/lib/modules/", c::kernel_version(), "/kernel/drivers/$_") }  map { ("video/$_", "char/$_") } qw(NVdriver nvidia.o nvidia.o.gz nvidia.ko nvidia.ko.gz)) {
-        #log::explanations("switch XFree86 driver from nv to nvidia");
-        #substInFile { s!Driver "nv.*"!Driver "nvidia"!g; s!#*( Load.*glx)!\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+        # substInFile {
+        #    log::explanations("switch XFree86 driver from nv to nvidia") if /Driver "nv"/;
+        #    s!Driver "nv.*"!Driver "nvidia"!g;
+        #    s!#*( Load.*glx)!\1!g;
+        # } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     } else {
-        log::explanations("switch XFree86 driver from nvidia to nv");
-        substInFile { s!Driver "nv.*"!Driver "nv"!g; s!([^#]Load.*glx)!#\1!g } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
+        substInFile { 
+            log::explanations("switch XFree86 driver from nvidia to nv") if /Driver "nv.+"/;
+            s!Driver "nv.*"!Driver "nv"!g; 
+            s!([^#]Load.*glx)!#\1!g;
+        } $_ foreach "/etc/X11/XF86Config-4", "/etc/X11/XF86Config";
     }
 }
 
