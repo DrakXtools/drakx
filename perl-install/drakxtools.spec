@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Nov 12 2004 Rafael Garcia-Suarez <rgarciasuarez@mandrakesoft.com> 10.2-0.2mdk
+- Rebuild for new perl
+
 * Wed Nov 10 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.1mdk
 - drakauth: add SmartCard authentication (pixel)
 - drakbackup: advise user about anacron (stew, anthill #1134)
