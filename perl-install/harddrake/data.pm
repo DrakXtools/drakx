@@ -12,7 +12,7 @@ my @devices = detect_devices::probeall(1);
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') && $_->{type} ne 'network'} @devices;
+    grep { ($_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|Printer|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO|OTHER)|STORAGE_(IDE|SCSI|OTHER)|BRIDGE|NETWORK/) && ($_->{driver} ne 'scanner') && $_->{type} ne 'network' && $_->{driver} !~ /Mouse:USB|/} @devices;
 }
 
 
@@ -69,7 +69,10 @@ our @tree =
 	 sub { 
 		require scanner; scanner::detect() }, 0 ],
 	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { 
-	    require mouse; &mouse::detect() } , 1 ],
+	    require mouse;
+	    require modules;
+	    modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';
+	    &mouse::detect() } , 1 ],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}, 0 ],
 
 	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub { grep { $_->{media_type} =~ 'STORAGE_(IDE|OTHER)' } @devices}, 0 ],

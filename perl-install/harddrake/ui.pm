@@ -176,7 +176,7 @@ sub new {
 	   my ($Ident, $title, $icon, $configurator, $detector) = @$_;
 	   next if (ref($detector) ne "CODE"); #skip class witouth detector
 	   print _("Probing %s class\n", $Ident);
-	   next if $Ident =~ /(MODEM|PRINTER|MOUSE)/ && "@ARGV" =~ /test/;
+	   next if $Ident =~ /(MODEM|PRINTER)/ && "@ARGV" =~ /test/;
 	   my @devices = &$detector;
 	   next if (!listlength(@devices)); # Skip empty class (no devices)
 	   my $hw_class_tree = $tree->insert_node(undef, undef, [$title], 5, (gtkcreate_png($icon)) x 2, 0, ($title =~ /Unknown/ ? 0 : 1));
