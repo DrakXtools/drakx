@@ -16,7 +16,7 @@ for i in CP1251 CP1255 CP1256 ISO-8859-13 ISO-8859-14 ISO-8859-15 ISO-8859-2 ISO
 done
 
 rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
-for i in hy ja ko ta th vi zh_CN.GB2312 zh_TW.Big5 ; do
+for i in hy ja ko ta th vi ; do
     ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
     rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
     f=usr/share/locale/$i/LC_CTYPE
@@ -25,6 +25,21 @@ for i in hy ja ko ta th vi zh_CN.GB2312 zh_TW.Big5 ; do
     rm -rf *
 done
 cd .. ; rm -rf .tmp2
+
+# special case for chineese (why is it needed?)
+rm -rf .tmp2 ; mkdir .tmp2 ; cd .tmp2
+for i in zh_CN.GB2312 zh_TW.Big5 ; do
+    ii=locales-`echo $i | sed 's/\(..\).*/\1/'`
+    rpm2cpio /RPMS/$ii-*.rpm | cpio -id --quiet
+    for f in LC_ADDRESS LC_COLLATE LC_CTYPE LC_IDENTIFICATION LC_MEASUREMENT LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE LC_TIME LC_MESSAGES/SYS_LC_MESSAGES ; do
+	f=usr/share/locale/$i/$f
+	[ -e $f ] || { echo missing $f in package $ii ; exit 1 ; }
+	cp -f $f ../$f
+    done
+    rm -rf *
+done
+cd .. ; rm -rf .tmp2
+
 
 tar cfj ../locales.tar.bz2 usr
 
