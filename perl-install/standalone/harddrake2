@@ -352,8 +352,6 @@ sub strip_first_underscore {
     join '', map { s/_//; $_ } @_;
 }
 
-sub strip_first_slash { print "PROCESS \"$_\" => "; s!/!!; print "\"$_\"\n"; $_ }
-
 sub rename_field {
     my ($dev, $field, $new_field) = @_;
     if ($dev->{$field}) {
