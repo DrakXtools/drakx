@@ -121,7 +121,6 @@ I cannot set up this connection type.")) and return;
 #-  $intf->{$device}->{NETWORK} : $netadr
 #-  $intf->{$device}->{ONBOOT} : "yes"
 #- $netc output:
-#-  $netc->{nb_cards} : nb of ethernet cards
 #-  $netc->{NET_DEVICE} : this is used to indicate that this eth card is used to connect to internet : $device
 #- output:
 #-  $all_cards : a list of a list ( [eth1, module1], ... , [ethn, modulen]). Pass the ethx as $interface in further call.
@@ -131,7 +130,6 @@ sub conf_network_card_backend {
     #-type =static or dhcp
     if (!$interface) {
 	my @all_cards = detect_devices::getNet();
-	$netc->{nb_cards} = @all_cards;
 
 	my @devs = detect_devices::pcmcia_probe();
 	modules::mergein_conf("$prefix/etc/modules.conf");
