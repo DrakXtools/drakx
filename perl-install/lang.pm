@@ -435,12 +435,13 @@ sub load_po {
     }
     local $_;
     while (<$F>) {
-	/^msgstr/ and $state = 1;
-	/^msgid/  && !$fuzzy and $state = 2;
+	/^msgstr/ and $state = 'msgstr';
+	/^msgid/  && !$fuzzy and $state = 'msgid';
 	s/@/\\@/g;
 
-	if (/^(#|$)/ && $state != 3) {
-	    $state = 3;
+	if (/^(#|$)/ && $state != 'between') {
+	    $state = 'between';
+	    $to = c::iconv($to, $lang::charset, c::standard_charset());
 	    if (my @l = $to =~ /%(\d+)\$/g) {
 		$to =~ s/%(\d+)\$/%/g;
 		$to = qq([ "$to", ) . join(",", map { $_ - 1 } @l) . " ],";
@@ -448,14 +449,14 @@ sub load_po {
 		$to = qq("$to");
 	    }
 	    if ($from) {
-		$s .= qq("$from" => ) . c::iconv($to, $lang::charset, c::standard_charset()) . ",\n";
+		$s .= qq("$from" => $to,\n);
 	    } elsif ($to =~ /charset=([\w-]+)/) {
 		$lang::charset = $1;
 	    }
 	    $from = $to = '';
 	}
-	$to .= (/"(.*)"/)[0] if $state == 1;
-	$from .= (/"(.*)"/)[0] if $state == 2;
+	$to .= (/"(.*)"/)[0] if $state == 'msgstr';
+	$from .= (/"(.*)"/)[0] if $state == 'msgid';
 
 	$fuzzy = /^#, fuzzy/;
     }
