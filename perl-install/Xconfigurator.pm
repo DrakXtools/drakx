@@ -9,6 +9,7 @@ use common qw(:common :file :functional :system);
 use log;
 use run_program;
 use Xconfigurator_consts;
+use sbus_probing::main;
 use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
@@ -414,7 +415,7 @@ You can switch if off if you want, you'll hear a beep when it's over"), 1) or re
 
     #- restore the virtual console
     setVirtual($vt);
-    print "\a"; #- beeeep!
+    local $| = 1; print "\a"; #- beeeep!
 }
 
 sub autoDefaultDepth($$) {

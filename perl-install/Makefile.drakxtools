@@ -21,6 +21,7 @@ $(DIRS):
 
 install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(BINX11DEST) $(LIBX11DEST) $(LIBDEST)/po $(DIRS:%=$(LIBDEST)/%)
+	install -d $(LIBDEST)/sbus_probing
 	install $(STANDALONEPMS) $(SBINDEST)
 	mv -f $(SBINDEST)/lspcidrake $(BINDEST)
 	install -s ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
@@ -33,6 +34,7 @@ install:
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c
 	install -m 644 $(patsubst %,pci_probing/%.pm,main pcitable pci_class) $(LIBDEST)/pci_probing
+	install -m 644 $(patsubst %,sbus_probing/%.pm,main) $(LIBDEST)/sbus_probing
 	install -m 644 $(patsubst %,resize_fat/%.pm,main any boot_sector c_rewritten dir_entry directory fat info_sector io) $(LIBDEST)/resize_fat
 	cp -rf auto icons $(LIBDEST)
 	bzip2 -9 $(LIBDEST)/po/*.po

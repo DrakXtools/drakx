@@ -22,7 +22,7 @@ use log;
 
 
 @important_types = ('Linux native', 'Linux swap', 'Win98 FAT32');
-@important_types2 = ('ReiserFS', 'Linux RAID');
+@important_types2 = (arch() =~ /i.86/ ? 'ReiserFS' : (), 'Linux RAID');
 
 @fields2save = qw(primary extended totalsectors);
 
@@ -32,9 +32,9 @@ my %types = (
 arch() =~ /^ppc/ ? (
   0x401	=> 'Apple Partition',
   0x402	=> 'Apple HFS Partition',
-) : (
+) : arch() =~ /^i.86/ ? (
   0x183 => 'ReiserFS',
-), arch() =~ /^sparc/ ? (
+) : arch() =~ /^sparc/ ? (
   0x1 => 'SunOS boot',
   0x2 => 'SunOS root',
   0x3 => 'SunOS swap',
@@ -345,7 +345,8 @@ sub get_normal_parts($) {
 sub get_holes($) {
     my ($hd) = @_;
 
-    my $start = 1;
+    my $start = arch() eq "alpha" ? 2048 : 1;
+
     map {
 	my $current = $start;
 	$start = $_->{start} + $_->{size};
