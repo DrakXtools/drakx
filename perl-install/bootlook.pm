@@ -39,7 +39,6 @@ my @usernames = list_users();
 
 my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
-my $a_mode = -e "/etc/aurora/Monitor" ? 1 : 0;
 my $auto_mode = any::get_autologin();
 my $inmain = 0;
 my $lilogrub = chomp_(`detectloader -q`);
@@ -66,13 +65,7 @@ $user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin}
 my $desktop_combo = new Gtk2::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
 $desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
-my $a_c_button = new Gtk2::RadioButton(N("NewStyle Categorizing Monitor"));
-my $a_h_button = new Gtk2::RadioButton(N("NewStyle Monitor"), $a_c_button);
-my $a_v_button = new Gtk2::RadioButton(N("Traditional Monitor"), $a_c_button);
-my $a_g_button = new Gtk2::RadioButton(N("Traditional Gtk+ Monitor"),$a_c_button);
-my $a_button = new Gtk2::CheckButton(N("Launch Aurora at boot time"));
-my $a_box = new Gtk2::VBox(0, 0);
-my $x_box = new Gtk2::VBox(0, 0);
+
 my $disp_mode = arch() =~ /ppc/ ? N("Yaboot mode") : N("Lilo/grub mode");
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
@@ -236,104 +229,67 @@ Launch \"lilo\" as root in command line to complete LiLo theme installation."));
 		      $error ? N("Theme installation failed!") : N("LiLo and Bootsplash themes installation successfull"));
 });
 
+my $x_box;
+
 gtkadd($window,
        gtkpack__(my $global_vbox = new Gtk2::VBox(0,0),
-		  gtkadd(new Gtk2::Frame($disp_mode),
-#			  gtkpack__(new Gtk2::VBox(0,0),
+                 gtkadd(new Gtk2::Frame($disp_mode),
+                        #			  gtkpack__(new Gtk2::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk2::HBox(0, 0),5),
-					      1, N("You are currently using %s as your boot manager.
+                                  1, N("You are currently using %s as your boot manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
-					      0, gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => $::lilo_choice),
-					     )),
-#				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
-#				   )
+                                  0, gtksignal_connect(new Gtk2::Button(N("Configure")), clicked => $::lilo_choice),
+                                 )),
+                        #				    "" #we need some place under the button -- replaced by gtkset_border_width( for the moment
+                        #				   )
 				     
-			 ),
-                #Splash Selector
-                gtkadd(my $thm_frame = new Gtk2::Frame( N("Splash selection")),
-                       gtkpack__(gtkset_border_width(new Gtk2::HBox(0,5),5),
-                                 gtkpack__(new Gtk2::VBox(0,5),
-                                           N("Themes"),
-                                           $combo{thms},
-                                           N("\nSelect the theme for\nlilo and bootsplash,\nyou can choose\nthem separately"),
-                                           $logo_thm),
-                                 gtkpack__(new Gtk2::VBox(0,5),
-                                           N("Lilo screen"),
-                                           $combo{lilo},
-                                           $lilo_pic,
-					   $B_create),
-                                 gtkpack__(new Gtk2::VBox(0,5),
-                                           N("Bootsplash"),
-                                           $combo{boot},
-                                           $boot_pic,
-                                           $thm_button))
-                      ),
+                       ),
+                 #Splash Selector
+                 gtkadd(my $thm_frame = new Gtk2::Frame( N("Splash selection")),
+                        gtkpack__(gtkset_border_width(new Gtk2::HBox(0,5),5),
+                                  gtkpack__(new Gtk2::VBox(0,5),
+                                            N("Themes"),
+                                            $combo{thms},
+                                            N("\nSelect the theme for\nlilo and bootsplash,\nyou can choose\nthem separately"),
+                                            $logo_thm),
+                                  gtkpack__(new Gtk2::VBox(0,5),
+                                            N("Lilo screen"),
+                                            $combo{lilo},
+                                            $lilo_pic,
+                                            $B_create),
+                                  gtkpack__(new Gtk2::VBox(0,5),
+                                            N("Bootsplash"),
+                                            $combo{boot},
+                                            $boot_pic,
+                                            $thm_button))
+                       ),
 
-		  # aurora
-# 		  gtkadd (new Gtk2::Frame (N("Boot mode")),
-# 			  gtkpack__ (new Gtk2::HBox(0,0),
-# 				     gtkpack__ (new Gtk2::VBox(0, 5),
-# 						gtksignal_connect ($a_button, clicked => sub {
-# 								       if ($inmain) {
-# 									   $a_box->set_sensitive(!$a_mode);
-# 									   $a_mode = !$a_mode;
-# 									   if ($a_mode) {
-# 									       $pixmap->set($c_pixmap, $c_mask) if $a_c_button->get_active();
-# 									       $pixmap->set($h_pixmap, $h_mask) if $a_h_button->get_active();
-# 									       $pixmap->set($v_pixmap, $v_mask) if $a_v_button->get_active();
-# 									       $pixmap->set($g_pixmap, $g_mask) if $a_g_button->get_active();
-# 									   } else {
-# 									       $pixmap->set($t_pixmap, $t_mask);
-# 									   }
-# 										   }
-# 								   }),
-# 						gtkpack__ (gtkset_sensitive ($a_box, $a_mode),
-# 							    gtksignal_connect ($a_c_button,clicked => sub{$pixmap->set($c_pixmap, $c_mask)}),
-# 							    gtksignal_connect ($a_h_button,clicked => sub{$pixmap->set($h_pixmap, $h_mask)}),
-# 							    gtksignal_connect ($a_v_button,clicked => sub{$pixmap->set($v_pixmap, $v_mask)}),
-# 							    gtksignal_connect ($a_g_button,clicked => sub{$pixmap->set($g_pixmap, $g_mask)})
-# 							  )
-# 					      ),
-# 				     gtkpack__ (new Gtk2::HBox(0,0), $pixmap)
-# 				    )
-# 			 ),
-		  # X
-		  gtkadd(new Gtk2::Frame(N("System mode")),
-			  gtkpack__(new Gtk2::VBox(0, 5),
-				     gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
-							   $x_box->set_sensitive(!$x_mode);
-							   $x_mode = !$x_mode;
-						       }),
-				     gtkpack__(gtkset_sensitive($x_box, $x_mode),
-						gtkset_active(my $x_no_button  = new Gtk2::RadioButton(N("No, I don't want autologin")), !$auto_mode->{autologin}),
-						gtkpack__(new Gtk2::HBox(0, 10),
-							   gtkset_active(my $x_yes_button = new Gtk2::RadioButton((N("Yes, I want autologin with this (user, desktop)")), $x_no_button), $auto_mode->{autologin}),
-							   gtkpack__(new Gtk2::VBox(0, 10),
-								     $user_combo,
-								     $desktop_combo
-								     )
-							  )
-					       )
-				    )
-			 ),
-		 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'end'),
-			 gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { Xconfig::various::runlevel($x_mode ? 5 : 3); updateAutologin(); updateAurora(); ugtk2->exit(0) }),
-			 gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { ugtk2->exit(0) })
-			)
-	       )
+                 gtkadd(new Gtk2::Frame(N("System mode")),
+                        gtkpack__(new Gtk2::VBox(0, 5),
+                                  gtksignal_connect(gtkset_active(new Gtk2::CheckButton(N("Launch the graphical environment when your system starts")), $x_mode), clicked => sub {
+                                                        $x_box->set_sensitive(!$x_mode);
+                                                        $x_mode = !$x_mode;
+                                                    }),
+                                  gtkpack__(gtkset_sensitive($x_box = Gtk2::HBox->new(0, 0), $x_mode),
+                                            gtkpack__(Gtk2::VBox->new(0, 0),
+                                                      gtkradio((N("Yes, I want autologin with this (user, desktop)")) x 2, N("No, I don't want autologin")),
+                                                     ),
+                                            gtkpack__(new Gtk2::VBox(0, 10),
+                                                      $user_combo,
+                                                      $desktop_combo
+                                                     )
+                                           )
+                                 )
+                       ),
+                 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'end'),
+                        gtksignal_connect(new Gtk2::Button(N("OK")), clicked => sub { 
+                                              Xconfig::various::runlevel($x_mode ? 5 : 3);
+                                              ugtk2->exit(0);
+                                          }),
+                        gtksignal_connect(new Gtk2::Button(N("Cancel")), clicked => sub { ugtk2->exit(0) })
+                       )
+                )
       );
-
-#$a_button->set_active($a_mode); # up == false == "0"
-#if ($a_mode) {
-#    my $a = readlink "/etc/aurora/Monitor";
-#    $a =~ s#/lib/aurora/Monitors/##;
-#    if ($a eq "NewStyle-Categorizing-WsLib") { $a_c_button->set_active(1); $pixmap->set($c_pixmap, $c_mask) }
-#    if ($a eq "NewStyle-WsLib") { $a_h_button->set_active(1);  $pixmap->set($h_pixmap, $h_mask) }
-#    if ($a eq "Traditional-WsLib") { $a_v_button->set_active(1); $pixmap->set($v_pixmap, $v_mask) }  
-#    if ($a eq "Traditional-Gtk+") { $a_g_button->set_active(1); $pixmap->set($g_pixmap, $g_mask) }
-#} else {
-##    $pixmap->set($t_pixmap, $t_mask);
-#}
 
 $window->show_all();
 $no_bootsplash and $thm_frame->hide();
@@ -349,36 +305,6 @@ Gtk2->exit(0);
 
 sub get_wm {
     @winm = split(' ', `/usr/sbin/chksession -l`);
-}
-
-#-------------------------------------------------------------
-# aurora functions
-#-------------------------------------------------------------
-
-
-
-sub updateAurora {
-    if ($a_mode) {
-        if ($a_c_button->get_active()) {
-            symlinkf("/lib/aurora/Monitors/NewStyle-Categorizing-WsLib",    "/etc/aurora/Monitor");
-            $in->do_pkgs->install(q(Aurora-Monitor-NewStyle-Categorizing-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-Categorizing-WsLib");
-        }
-        if ($a_h_button->get_active()) {
-            symlinkf("/lib/aurora/Monitors/NewStyle-WsLib",    "/etc/aurora/Monitor");
-            $in->do_pkgs->install(q(Aurora-Monitor-NewStyle-WsLib)) if !(-e "/lib/aurora/Monitors/NewStyle-WsLib");
-        }
-        if ($a_v_button->get_active()) {
-            symlinkf("/lib/aurora/Monitors/Traditional-WsLib", "/etc/aurora/Monitor");
-            $in->do_pkgs->install(q(Aurora-Monitor-Traditional-WsLib)) if !(-e "/lib/aurora/Monitors/Traditional-WsLib");
-        }
-        if ($a_g_button->get_active()) {
-            symlinkf("/lib/aurora/Monitors/Traditional-Gtk+",  "/etc/aurora/Monitor");
-            $in->do_pkgs->install(q(Aurora-Monitor-Traditional-Gtk+)) if !(-e "/lib/aurora/Monitors/Traditional-Gtk+");
-	}
-    } else {
-	unlink "/etc/aurora/Monitor";
-    }
-    
 }
 
 #-------------------------------------------------------------
