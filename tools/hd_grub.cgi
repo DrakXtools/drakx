@@ -94,7 +94,7 @@ sub print_form {
 				  })),
        ),
       p(),
-      ul("Please enter the directory containing the Mandrakelinux Distribution.",
+      ul("Please enter the directory containing the Mandrakelinux Distribution (relative to the partition chosen above)",
 	 li(textfield(-name => 'directory', -default => '/cooker/i586', size => 40)),
 	 ),
       p(submit(-name => 'Go')),
