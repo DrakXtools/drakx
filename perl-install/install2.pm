@@ -372,7 +372,6 @@ sub main {
 		       require install_steps_auto_install;
 		       install_steps_auto_install::errorInStep();
 		   };
-    $ENV{SHARE_PATH} ||= "/usr/share";
     $ENV{PERL_BADLANG} = 1;
 
     $::isInstall = 1;
@@ -436,6 +435,13 @@ sub main {
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	}}{lc $n}; &$f if $f;
     } %cmdline;
+
+    if ($::testing) {
+	$ENV{SHARE_PATH} ||= "/export/Mandrake/mdkinst/usr/share";
+	$ENV{SHARE_PATH} = "/usr/share" if !-e $ENV{SHARE_PATH};
+    } else {
+	$ENV{SHARE_PATH} ||= "/usr/share";
+    }
 
     undef $::auto_install if $cfg;
     if ($::g_auto_install) {
