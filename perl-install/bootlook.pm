@@ -26,7 +26,6 @@ use Gtk::Gdk::Pixbuf;
 use Config;
 Gtk->int;
 use POSIX;
-use lib qw(/usr/lib/libDrakX);
 use interactive;
 use standalone;
 use any;
