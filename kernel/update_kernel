@@ -40,10 +40,12 @@ function create_modules_mar() {
     $GIBASEDIR/kernel/strip_modules *.o 2>/dev/null
     echo "done"
 
-    echo -n "packdrake $kern: "
-    ls *.o | packdrake -b9s "modules.cz" 400000
-    echo "done"
-    mv modules.cz ../modules.cz-$kern
+    if [ -z "$MOVE" ]; then
+        echo -n "packdrake $kern: "
+        ls *.o | packdrake -b9s "modules.cz" 400000
+        echo "done"
+        mv modules.cz ../modules.cz-$kern
+    fi
     for i in network network_gigabit_usb network_gigabit network_usb cdrom hd hdcdrom_usb pcmcia all; do
         eval "modules=\$${i}_modules_raw"
         modules_with_deps=`perl -I $GIBASEDIR/kernel $GIBASEDIR/kernel/dependencies.pl modules.dep $modules`
