@@ -1,3 +1,38 @@
+2001/03/08  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected bad pci number -> string
+
+2001/03/08  Pixel  <pixel@mandrakesoft.com>
+
+	* tools/i386/netboot/stage2.3c90x, tools/i386/netboot/grub: new versions
+	(without mem=)
+
+2001/03/07  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: corrected default focus after detection
+	don't test adsl if net install
+
+2001/03/07  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (add_alias): remove the alias block-major-11 as it's
+	overriding the
+	default alias to sr_mod, and is uneeded with scsi_hostadapter being
+	added
+	to /etc/modules.conf
+
+	* share/rpmsrate: lower heartbeat
+
+2001/03/07  sbenedict
+
+	* help.pm: * perl-install/help.pm  - typo in yaboot help
+
+	* any.pm: * perl-install/any.pm - fixed two $l vs. @l references -
+	bootloader menu, need image/boot in rec mode PPC
+	CVl:
+	----------------------------------------------------------------------
+
+	* devices.pm: * perl-install/devices.pm - add adbmouse
+
 2001/03/07  dam's  <damien@mandrakesoft.com>
 
 	* standalone/draknet: not use common anymore, uses gtkpng, cosmetic chages
