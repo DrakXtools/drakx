@@ -326,8 +326,19 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Wed Aug  4 2004 Daouda LO <daouda@mandrakesoft.com> 10.1-0.3mdk
-- automatically launch net_applet for KDE, GNOME and IceWM 
+* Tue Aug  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.3mdk
+- draksec: sanitize GUI:
+  o upcase fields values
+  o fix spacing issues
+- localedrake:
+  o fix current IM setting reading
+  o reset IM setting when switching to a new IM
+  o support nabi input method too
+- net_applet: automatic launch for KDE, GNOME and IceWM (daouda)
+- misc typo fixes
+- diskdrake: fix LMV resizing (anthill #994) (pixel)
+- service_harddrake: fix nuking x.org config on 2.4.x <-> 2.6.x kernel
+  switch (#10487) (pixel)
 
 * Fri Jul 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.2mdk
 - drakbackup (stew):
