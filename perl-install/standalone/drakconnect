@@ -683,7 +683,7 @@ sub save_notebook {
             return 0;
         }
         if (!is_ip($intf->{NETMASK})) {
-            $in->ask_warn(N("Error"), N("Netmask address should be in format 255.255.224.0"));
+            $in->ask_warn(N("Error"), N("Netmask should be in format 255.255.224.0"));
             return 0;
         }
     }

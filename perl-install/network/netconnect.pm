@@ -1054,7 +1054,7 @@ notation (for example, 1.2.3.4).")),
                             return 1, 0;
                         }
                         if (!is_ip($ethntf->{NETMASK})) {
-                            $in->ask_warn(N("Error"), N("Netmask address should be in format 255.255.224.0"));
+                            $in->ask_warn(N("Error"), N("Netmask should be in format 255.255.224.0"));
                             return 1, 1;
                         }
                         if (is_ip_forbidden($ethntf->{IPADDR})) {
