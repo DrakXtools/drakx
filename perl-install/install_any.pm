@@ -539,7 +539,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto security modem useSupermount); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse wacom netc timezone superuser intf keyboard mkbootdisk users installClass partitioning isUpgrade manualFstab nomouseprobe crypto security modem useSupermount autoExitInstall); #- TODO modules bootloader 
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);

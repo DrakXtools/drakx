@@ -64,7 +64,6 @@ sub create {
     eval { commands::mkdir_("-p", dirname($f)) };
 
     log::l("creating loopback file $f ($part->{size} sectors)");
-    unlink $f;
 
     local *F;
     sysopen F, $f, 2 | c::O_CREAT() or die "failed to create loopback file";

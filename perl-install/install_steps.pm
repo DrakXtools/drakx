@@ -127,7 +127,7 @@ sub doPartitionDisks {
 	        grep { isFat($_) } fsedit::get_fstab(@{$o->{hds}}) or die "wow, lnx4win with no fat partitions! hard times :(";
 	my $real_part = @l > 1 && $o->doPartitionDisksLnx4winDev(\@l) || $l[0];
 
-	my $handle = loopback::inspect($real_part) or die _("This partition can't be used for loopback");
+	my $handle = loopback::inspect($real_part, '', 'rw') or die _("This partition can't be used for loopback");
 	my $size = loopback::getFree($handle->{dir}, $real_part); 
 
 	my $max_linux = 1000 << 11; $max_linux *= 10 if $::expert;
@@ -138,7 +138,9 @@ sub doPartitionDisks {
 	$root->{size} = min($size - $swap->{size} - $min_freewin, $max_linux);
 
 	$o->doPartitionDisksLnx4winSize(\$root->{size}, \$swap->{size}, $size - 2 * $swap->{size}, 2 * $swap->{size});
-	    
+
+	unlink "$handle->{dir}$_" foreach "/lnx4win/swapfile", "/lnx4win/linuxsys.img";
+
 	push @{$real_part->{loopback}}, $root, $swap;	
     } else {
 	partition_table::write($_) foreach @$hds;
@@ -300,6 +302,9 @@ Consoles 1,3,4,7 may also contain interesting information";
 
     #- call update-menus at the end of package installation
     run_program::rooted($o->{prefix}, "update-menus");
+
+    #- mainly for auto_install's
+    run_program::rooted($o->{prefix}, "sh", "-c", $o->{postInstall}) if $o->{postInstall};
 
     #- create /etc/sysconfig/desktop file according to user choice and presence of /usr/bin/kdm or /usr/bin/gdm.
     my $f = "$o->{prefix}/etc/sysconfig/desktop";

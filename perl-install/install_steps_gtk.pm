@@ -783,7 +783,7 @@ sub init_sizes() {
 }
 
 #------------------------------------------------------------------------------
-sub createXconf($$$) {
+sub createXconf {
     my ($file, $mouse_type, $mouse_dev, $wacom_dev) = @_;
 
     devices::make("/dev/kdb") if arch() =~ /^sparc/; #- used by Xsun style server.

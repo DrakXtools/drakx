@@ -330,7 +330,7 @@ sub formatPartitions {
 
     my $d = "/initrd/loopfs/lnx4win";
     if (-d $d) {
-	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe);
+	install_any::getAndSaveFile("lnx4win/$_", "$d/$_") foreach qw(loadlin.exe linux.pif lnx4win.exe lnx4win.ico);
     }
 
     #-noatime option for ext2 fs on laptops (do not wake up the hd)
