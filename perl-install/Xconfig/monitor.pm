@@ -178,7 +178,7 @@ sub is_valid {
 
 sub probe {
     my ($o_card_Driver) = @_;
-    probe_DDC() || probe_using_X($o_card_Driver) || probe_DMI();
+    probe_DDC() || probe_DMI() || probe_using_X($o_card_Driver);
 }
 
 sub probe_DDC() {
