@@ -301,8 +301,8 @@ Normally they are correctly detected during installation. If you don't
 see yours detected, you can add one or more now.
 
 
-If you won't everybody can assess at one of them, you can remove it now
-(a boot disk will be needed to boot it)."),
+If you don't want that everybody can access at one of them, you can remove\n"
+it now (a boot disk will be needed to boot it)."),
 
 setupBootloaderGeneral =>
  __("LILO main options are:
