@@ -143,6 +143,12 @@ sub real_main {
           } else { $module = "" }
       };
 
+      my $is_hotplug_blacklisted = sub {
+          bool2yesno($is_wireless ||
+                     member($module, qw(b44 forcedeth madwifi_pci)) ||
+                     find { $_->{device} eq $ntf_name } detect_devices::pcmcia_probe());
+      };
+
       my %adsl_devices = (
                           speedtouch => N("Alcatel speedtouch USB modem"),
                           sagem => N("Sagem USB modem"),
@@ -770,10 +776,12 @@ If you don't know, choose 'use pppoe'"),
                              ],
                     post => sub {
                         $netcnx->{type} = 'adsl';
+                        # blacklist bogus driver, enable ifplugd support else:
+                        $find_lan_module->();
+                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
                         # process static/dhcp ethernet devices:
                         if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dhcp';
-                            $find_lan_module->();
                             return 'lan_intf';
                         }
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
@@ -891,9 +899,7 @@ Modifying the fields below will override this configuration."),
                                                                                                       map { $_->{device} } detect_devices::pcmcia_probe()));
                         $needhostname = $ethntf->{NEEDHOSTNAME} !~ /no/; 
                         # blacklist bogus driver, enable ifplugd support else:
-                        my @devs = detect_devices::pcmcia_probe();
-                        $ethntf->{MII_NOT_SUPPORTED} ||= bool2yesno($is_wireless || member($module, qw(b44 forcedeth madwifi_pci))
-                                                                    || find { $_->{device} eq $ntf_name } @devs);
+                        $ethntf->{MII_NOT_SUPPORTED} ||= $is_hotplug_blacklisted->();
                         $hotplug = !text2bool($ethntf->{MII_NOT_SUPPORTED});
                         $track_network_id = $::isStandalone && $ethntf->{HWADDR} || detect_devices::isLaptop();
                         delete $ethntf->{NETWORK};
