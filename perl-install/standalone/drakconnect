@@ -396,10 +396,10 @@ sub build_notebook {
 				      ),
 			     ),
 			 ));
-	$dialing_mode_radio[0]->signal_connect('toggled' => sub { $gui->{intf_radio}{dialing_mode} = 'auto'; $apply->() });
-	$dialing_mode_radio[1]->signal_connect('toggled' => sub { $gui->{intf_radio}{dialing_mode} = 'static'; $apply->() });
-	$speed_radio[0]->signal_connect('toggled' => sub { $gui->{intf_radio}{speed} = '64'; $apply->() });
-	$speed_radio[1]->signal_connect('toggled' => sub { $gui->{intf_radio}{speed} = '128'; $apply->() });
+	$dialing_mode_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'auto'; $apply->() });
+	$dialing_mode_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{dialing_mode} = 'static'; $apply->() });
+	$speed_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '64'; $apply->() });
+	$speed_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{speed} = '128'; $apply->() });
 	$gui->{intf_bool}{ONBOOT}->set_active($intf->{ONBOOT} eq 'yes' ? 1 : 0);
 	$gui->{intf_bool}{MII_NOT_SUPPORTED}->set_active($intf->{MII_NOT_SUPPORTED} eq 'no' ? 1 : 0);
 	$gui->{intf_bool}{HWADDR}->set_active($intf->{HWADDR});
@@ -453,8 +453,8 @@ sub build_notebook {
 							N("Protocol for the rest of the world\nNo D-Channel (leased lines)")),
 			 ),
 	       );
-	$protocol_radio[0]->signal_connect('toggled' => sub { $gui->{intf_radio}{protocol} = 2; $apply->() });
-	$protocol_radio[1]->signal_connect('toggled' => sub { $gui->{intf_radio}{protocol} = 3; $apply->() });
+	$protocol_radio[0]->signal_connect(toggled => sub { $gui->{intf_radio}{protocol} = 2; $apply->() });
+	$protocol_radio[1]->signal_connect(toggled => sub { $gui->{intf_radio}{protocol} = 3; $apply->() });
     }
     
     if ($intf->{pages}{N("Informations")}) {
