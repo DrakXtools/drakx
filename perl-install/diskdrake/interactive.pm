@@ -1208,3 +1208,5 @@ sub choose_encrypt_key {
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
     ]) && $encrypt_key;
 }
+
+1;
