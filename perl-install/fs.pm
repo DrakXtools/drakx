@@ -42,7 +42,7 @@ sub read_fstab {
 	}
 
 	if ($dev =~ m,/(tmp|dev)/,) {
-	    if (readlink($dev) !~ m|/|) {
+	    if (readlink($dev) =~ m|^[^/]+$|) {
 		$dev = readlink($dev);
 	    } else {
 		$dev =~ s,/(tmp|dev)/,,;
@@ -93,6 +93,10 @@ sub merge_info_from_mtab {
     my @l2 = map { read_fstab($_) } '/etc/mtab', '/proc/mounts';
 
     foreach (@l1, @l2) {
+	if ($::isInstall && $_->{mntpoint} eq '/tmp/hdimage') {
+	    $_->{real_mntpoint} = delete $_->{mntpoint};
+	    $_->{mntpoint} = "/mnt/hd"; #- remap for hd install.
+	}
 	$_->{isMounted} = $_->{isFormatted} = 1;
 	delete $_->{options};
     } 
@@ -565,6 +569,15 @@ sub mount_part {
     #- root carrier's link can't be mounted
     loopback::carryRootCreateSymlink($part, $prefix);
 
+    if ($part->{isMounted} && $part->{real_mntpoint}) {
+	log::l("remounting partition on $prefix$part->{mntpoint} instead of $part->{real_mntpoint}");
+	umount($part->{real_mntpoint});
+	rmdir $part->{real_mntpoint};
+	symlinkf "$prefix$part->{mntpoint}", $part->{real_mntpoint};
+	delete $part->{real_mntpoint};
+	$part->{isMounted} = 0;
+    }
+
     return if $part->{isMounted};
 
     unless ($::testing) {
@@ -591,7 +604,7 @@ sub mount_part {
 sub umount_part {
     my ($part, $prefix) = @_;
 
-    $part->{isMounted} or return;
+    $part->{isMounted} || $part->{real_mntpoint} or return;
 
     unless ($::testing) {
 	if (isSwap($part)) {
