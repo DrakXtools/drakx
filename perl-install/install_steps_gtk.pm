@@ -266,8 +266,9 @@ sub choosePackages {
 
     if ($::beginner) {	
 	require pkgs;
-	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+	pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, install_any::getAvailableSpace($o) * 0.7, $o->{installClass}, $o->{lang}, $o->{isUpgrade});
     } else {
+	pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 90, $o->{installClass}) unless $::expert || $o->{isUpgrade};
 	install_steps_interactive::choosePackages(@_);
 	chooseSizeToInstall(@_);
 	choosePackagesTree(@_) if $::expert;
@@ -278,7 +279,7 @@ sub chooseSizeToInstall {
     my $availableSpace = int(install_any::getAvailableSpace($o) / sqr(1024));
     my $current = pkgs::correctSize((sum map { $_->{size} } grep { $_->{selected} } values %$packages) / sqr(1024));
     my $w = my_gtk->new('');
-    my $adj = create_adjustment($current * 1.3, $current, $availableSpace);
+    my $adj = create_adjustment($current * 1.2, $current, $availableSpace);
     my $spin = gtkset_usize(new Gtk::SpinButton($adj, 0, 0), 100, 0);
 
     gtkadd($w->{window},
@@ -297,9 +298,9 @@ sub chooseSizeToInstall {
     $w->main or return;
 
     ($o->{packages_}{ind}, $o->{packages_}{select_level}) = 
-      pkgs::setSelectedFromCompssList($o->{compssListLevels}, $o->{packages}, 
-				      pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
-				      $o->{installClass}, $o->{lang}, $o->{isUpgrade});
+      pkgs::setSelectedFromCompssList_($o->{compssListLevels}, $o->{packages}, 
+				       pkgs::invCorrectSize($spin->get_value_as_int) * sqr(1024), 
+				       $o->{installClass}, $o->{lang}, $o->{isUpgrade});
 }
 sub choosePackagesTree {
     my ($o, $packages, $compss, $compssUsers) = @_;

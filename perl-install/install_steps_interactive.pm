@@ -599,7 +599,7 @@ _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bo
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
-$o->{security} >= 4 ? () : (
+$o->{security} < 4 ? () : (
 _("Password") => { val => \$b->{password}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
 )

@@ -595,8 +595,13 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 1;    
+    substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 1;
+
+    output("$o->{prefix}/tmp/secure.DrakX",
+	   "DRAKX_PASSWORD=$o->{lilo}{password}\n",
+	   'DRAKX_USERS="', join(" ", map { $_->{name} } @{$o->{users} || []}), qq("\n));
     run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
+#    unlink "$o->{prefix}/tmp/secure.DrakX";
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');

@@ -23,6 +23,7 @@ my @MBR_signatures = (
     [ 'DocsBoot', 0x148, 'DocsBoot' ],
     [ 'system_commander', 0x1ad, "SYSCMNDRSYS" ],
     [ 'Be Os', 0x24, 'Boot Manager' ],
+    [ 'TimO', 0, 'IBM Thinkpad hibernation partition' ],
     [ 'os2', 0x1c2, "\xA" ],
     [ 'dos', 0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
     [ 'dos', 0x60, "\xBB\x00\x7C\xB8\x01\x02\x57\xCD\x13\x5F\x73\x0C\x33\xC0\xCD\x13" ], #- nt's

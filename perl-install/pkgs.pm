@@ -275,12 +275,23 @@ sub isLangSensitive($$) {
 }
 
 sub setSelectedFromCompssList($$$$$$) {
-    my ($compssListLevels, $packages, $size, $install_class, $lang, $isUpgrade) = @_;
+    my ($compssListLevels, $packages, $level, $install_class) = @_;
+    my ($ind);
+
+    map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
+
+    foreach (allpackages($packages)) {
+	&select($packages, $_) if $_->{values}[$ind] >= $level;
+    }
+}
+
+sub setSelectedFromCompssList_($$$$$$) {
+    my ($compssListLevels, $packages, $size, $install_class, $isUpgrade) = @_;
     my ($level, $ind) = 100;
 
     my @packages = allpackages($packages);
     my @places = do {
-	map_index { $ind = $::i if $_ eq $install_class } @{$compssListLevels};
+	map_index { $ind = $::i if $_ eq $install_class } @$compssListLevels;
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
 	my @values = map { $_->{values}[$ind] } @packages;

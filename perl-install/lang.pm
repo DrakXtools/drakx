@@ -183,7 +183,6 @@ sub write {
 
 sub load_po($) {
     my ($lang) = @_;
-#-  my @lang = split ':', $lang;
     my ($s, $from, $to, $state, $fuzzy);
 
 

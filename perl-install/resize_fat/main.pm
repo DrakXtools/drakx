@@ -164,6 +164,7 @@ sub resize {
     $resize_fat::isFAT32 and eval { resize_fat::info_sector::write($fs) }; #- doesn't matter if this fails - its pretty useless!
 
     sync();
+    close $fs->{fd};
     log::l("resize_fat: done");
 }
 

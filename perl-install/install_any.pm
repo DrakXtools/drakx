@@ -405,7 +405,10 @@ sub g_auto_install(;$) {
 
     if (my $card = $::o->{X}{card}) {
 	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
-	$o->{X}{card}{resolution_wanted} ||= join "x", @{$card->{depth}{$card->{default_depth}}[0]} if $card->{depth};
+	if ($card->{default_depth} and my $depth = $card->{depth}{$card->{default_depth}}) {
+	    $depth ||= [];
+	    $o->{X}{card}{resolution_wanted} ||= join "x", @{$depth->[0]} unless is_empty_array_ref($depth->[0]);
+	}
     }
 
 #-    local $o->{partitioning}{clearall} = 1;
