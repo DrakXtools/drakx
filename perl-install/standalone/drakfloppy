@@ -167,7 +167,7 @@ $window->{window}->add(
                                                                                            Gtk2::HBox->new(0, 0),
                                                                                            5),
                                                                        30, 75),
-                                                   1, $output = Gtk2::TextView->new,
+                                                   1, $output = gtkset_editable(Gtk2::TextView->new, 0),
                                                   ),
                                          ),
                                 0, gtkpack__(new Gtk2::HBox(0, 0),
@@ -246,6 +246,7 @@ sub expand_tree {
     my ($tree, $parent_iter, $path) = @_;
     my $dir   = $tree_model->get($parent_iter, 1);
     my $child = $tree_model->iter_children($parent_iter);
+    print "($tree, $parent_iter, $path, $dir, $child)\n";
     return if !$child;
 
     #- hackish: if first child has '' as name, then we need to expand on the fly
