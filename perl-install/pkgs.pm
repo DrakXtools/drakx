@@ -576,14 +576,15 @@ sub read_rpmsrate_raw {
 		if (member('PRINTER', @$flags)) {
 		    push @need_to_copy, $name;
 		}
+		my @new_flags = @$flags;
 		if (my $previous = $flags{$name}) {
 		    my @common = intersection($flags, $previous);
 		    my @diff1 = difference2($flags, \@common);
 		    my @diff2 = difference2($previous, \@common);
 		    if (!@diff1 || !@diff2) {
-			@$flags = @common;
+			@new_flags = @common;
 		    } elsif (@diff1 == 1 && @diff2 == 1) {
-			@$flags = (@common, join('||', $diff1[0], $diff2[0]));
+			@new_flags = (@common, join('||', $diff1[0], $diff2[0]));
 		    } else {
 			log::l("can not handle complicate flags for packages appearing twice ($name)");
 			$fatal_error++;
@@ -591,7 +592,7 @@ sub read_rpmsrate_raw {
 		    log::l("package $name appearing twice with different rates ($rate != " . $rates{$name} . ")") if $rate != $rates{$name};
 		}
 		$rates{$name} = $rate;
-		$flags{$name} = $flags;
+		$flags{$name} = \@new_flags;
 	    }
 	    push @l, @l2;
 	} else {
