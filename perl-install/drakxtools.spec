@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 49mdk
+Release: 50mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -288,14 +288,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Tue Sep 17 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-50mdk
+- draksec:
+	o add ignore option to pull-down list
+	o remove not anymore used libsafe option
+
 * Tue Sep 17 2002 Warly <warly@mandrakesoft.com> 1.1.9-49mdk
 - printerdrake fix for webfetch
 
 * Mon Sep 16 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-48mdk
 - fix die wizcancel in non wizard mode (dams sucks?)
 
-* Fri Sep 13 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-47mdk
-- obsoletes drakfloppy
+* Sat Sep 14 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-47mdk
+- fix printerdrake network scanning for printers/print servers hangs
+  on with firewalled machines (till)
+- fix printerdrake curl dependancy break urpmi (till)
+- obsoletes drakfloppy (daouda)
 
 * Thu Sep 12 2002 Damien Chaumette <dchaumette@mandrakesoft.com> 1.1.9-46mdk
 - fix broken net_monitor
