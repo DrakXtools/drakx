@@ -128,14 +128,14 @@ sub raw_to_string {
 #- refine the data structure for easier use
 #-###############################################################################
 my %kind_names = (
-    Pointer  => [ qw(Protocol Device Emulate3Buttons Emulate3Timeout) ],
-    Mouse    => [ qw(DeviceName Protocol Device AlwaysCore Emulate3Buttons Emulate3Timeout) ], # Subsection in XInput
+    Pointer  => [ qw(Protocol Device Emulate3Buttons Emulate3Timeout EmulateWheel EmulateWheelButton) ],
+    Mouse    => [ qw(DeviceName Protocol Device AlwaysCore Emulate3Buttons Emulate3Timeout EmulateWheel EmulateWheelButton) ], # Subsection in XInput
     Keyboard => [ qw(Protocol Driver XkbModel XkbLayout XkbDisable) ],
     Monitor  => [ qw(Identifier VendorName ModelName HorizSync VertRefresh) ],
     Device   => [ qw(Identifier VendorName BoardName Chipset Driver VideoRam Screen BusID DPMS power_saver) ],
     Display  => [ qw(Depth Modes Virtual) ], # Subsection in Device
     Screen   => [ qw(Identifier Driver Device Monitor DefaultColorDepth) ],
-    InputDevice => [ qw(Identifier Driver Protocol Device Type Mode XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout) ],
+    InputDevice => [ qw(Identifier Driver Protocol Device Type Mode XkbModel XkbLayout XkbDisable Emulate3Buttons Emulate3Timeout EmulateWheel EmulateWheelButton) ],
     WacomCursor => [ qw(Port) ], #-\
     WacomStylus => [ qw(Port) ], #--> Port must be first
     WacomEraser => [ qw(Port) ], #-/
