@@ -326,7 +326,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix some bugs in ISDN configuration
   o warn than speedtouch only works with 2.4.x kernels for now
   o fix "manage interface" that broke speedtouch configuration
-  o blacklist bcm4400 for ifplugd
+  o blacklist b44 for ifplugd
 - drakboot blacklist again Savage gfx cards, they're broken again with
   lilo
 
