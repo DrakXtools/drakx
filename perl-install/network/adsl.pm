@@ -344,7 +344,9 @@ user "$adsl->{login}"
 ONBOOT=no
 TYPE=$kind
 METRIC=$metric
-));    
+));
+    #- remove file used with sagem for dhcp/static connections
+    unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");
 
     #- set vpi, vci and encapsulation parameters for sagem
     sagem_set_parameters($netc) if $adsl_device eq 'sagem';
