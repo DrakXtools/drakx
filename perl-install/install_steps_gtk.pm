@@ -663,10 +663,11 @@ sub create_steps_window {
 			my $step_name = $_;
 			my $step = $o->{steps}{$_};
 			my $darea = new Gtk::DrawingArea;
+			my $in_button;
 			my $draw_pix = sub {
 			    my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm($darea->window,
 									   $darea->style->bg('normal'),
-									   $_[1]) or die;
+									   $_[0]) or die;
 			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
 							 $pixmap, 0, 0,
 							 ($darea->allocation->[2]-$PIX_W)/2,
@@ -681,12 +682,12 @@ sub create_steps_window {
 			};
 			$darea->set_usize($PIX_W,$PIX_H);
 			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
-			$darea->signal_connect(expose_event => $draw_pix, $f->(''));
+			$darea->signal_connect(expose_event => sub { $draw_pix->($f->('')) });
 			if ($step->{reachable}) {
-			    $darea->signal_connect(enter_notify_event => $draw_pix, $f->('-on'));
-			    $darea->signal_connect(leave_notify_event => $draw_pix, $f->(''));
-			    $darea->signal_connect(button_press_event => $draw_pix, $f->('-click'));
-			    $darea->signal_connect(button_release_event => sub { die "setstep $step_name\n" });
+			    $darea->signal_connect(enter_notify_event => sub { $in_button=1; $draw_pix->($f->('-on')); });
+			    $darea->signal_connect(leave_notify_event => sub { undef $in_button; $draw_pix->($f->('')); });
+			    $darea->signal_connect(button_press_event => sub { $draw_pix->($f->('-click')); });
+			    $darea->signal_connect(button_release_event => sub { $in_button && die "setstep $step_name\n" });
 			}
 			gtkpack_(new Gtk::HBox(0,5), 0, $darea, 0, new Gtk::Label(translate($step->{text})));
 		    } grep {
