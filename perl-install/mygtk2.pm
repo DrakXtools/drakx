@@ -74,7 +74,7 @@ my %refs;
 
 sub gtkval_register {
     my ($w, $ref, $sub) = @_;
-    $w->{_ref} = $ref;
+    push @{$w->{_ref}}, $ref;
     $w->signal_connect(destroy => sub { 
 	delete $refs{$ref}{$w};
 	delete $refs{$ref} if !%{$refs{$ref}};
@@ -83,7 +83,11 @@ sub gtkval_register {
 }
 sub gtkval_modify {
     my ($ref, $val, @to_skip) = @_;
+    my $prev = "$ref";
     $$ref = $val;
+    if ($prev ne "$ref") {
+	internal_error();
+    }
     foreach (map { @$_ } values %{$refs{$ref} || {}}) {	
 	my ($f, @para) = @$_;
 	$f->(@para) if !member($f, @to_skip);
@@ -327,10 +331,22 @@ sub _gtk__ComboBox {
 	$w->{format} = delete $opts->{format} if exists $opts->{format};
 
     }
-    if (exists $opts->{list}) {
-	$w->{list} = delete $opts->{list};
+    my $set_list = sub {
 	$w->{formatted_list} = $w->{format} ? [ map { $w->{format}($_) } @{$w->{list}} ] : $w->{list};
+	$w->get_model->clear;
 	$w->append_text($_) foreach @{$w->{formatted_list}};
+    };
+    if (my $list_ref = delete $opts->{list_ref}) {
+	!$opts->{list} or internal_error("both list and list_ref");
+	my $set = sub {
+	    $w->{list} = $$list_ref;
+	    $set_list->();
+	};
+	gtkval_register($w, $list_ref, $set);
+	$set->();
+    } elsif (exists $opts->{list}) {
+	$w->{list} = delete $opts->{list};
+	$set_list->();
     }
 
     if ($action eq 'gtknew') {
