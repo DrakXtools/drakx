@@ -391,24 +391,30 @@ sub getTVcards() {
 }
 
 sub getSerialModem {
-    my ($modem, $o_mouse) = @_;
+    my ($o_mouse) = @_;
     my $mouse = $o_mouse || {};
     $mouse->{device} = readlink "/dev/mouse";
     my $serdev = arch() =~ /ppc/ ? "macserial" : "serial";
     eval { modules::load($serdev) };
 
-    probeSerialDevices();
-    foreach (map { "ttyS$_" } (0..7)) {
-	next if $mouse->{device} =~ /$_/;
-	next unless -e "/dev/$_";
-	hasModem("/dev/$_") and $modem->{device} = $_, last;
-    }
+    my @modems;
 
-    #- add an alias for macserial on PPC
-    modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
+    probeSerialDevices();
+    foreach my $port (map { "ttyS$_" } (0..7)) {
+	next if $mouse->{device} =~ /$port/;
+     my $device = "/dev/$port";
+	next unless -e $device && hasModem($device);
+     push @modems, $serialprobe{$device};
+    }
     my @devs = pcmcia_probe();
-    foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
-    $modem;
+    foreach my $modem (@modems) {
+        $modem->{device} = $modem->{DEVICE};
+        delete $modem->{DEVICE};
+        #- add an alias for macserial on PPC
+        modules::add_alias('serial', $serdev) if arch() =~ /ppc/ && $modem->{device};
+        foreach (@devs) { $_->{type} =~ /serial/ and $modem->{device} = $_->{device} }
+    }
+    @modems;
 }
 
 sub getModem() {
