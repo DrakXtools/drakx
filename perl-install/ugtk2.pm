@@ -842,7 +842,7 @@ sub new {
     if ($o->{pop_it}) {
 	$o->{rwindow} = _create_window(
 	    title => $title, 
-	    position_policy => $force_center || $o->{force_center} ? 'center_always' : 'center-on-parent',
+	    position_policy => $force_center ? 'center_always' : 'center-on-parent',
 	    modal => $grab || $o->{grab} || $o->{modal},
 	    if_(!$::isInstall, icon => wm_icon()),
 	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
