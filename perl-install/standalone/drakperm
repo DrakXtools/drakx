@@ -328,7 +328,7 @@ sub row_setting_dialog {
                        gtkpack(gtkset_border_width(Gtk2::HBox->new, 3),
                                gtkadd(Gtk2::VBox->new,
                                       Gtk2::Label->new(""),
-                                      map { gtkset_tip($tips, Gtk2::Label->new($checks{$_}{label}), $checks{$_}{tip}) } @rights,
+                                      map { Gtk2::Label->new($checks{$_}{label}) } @rights,
                                      ),
                                (map {
                                    my $owner = $_;
