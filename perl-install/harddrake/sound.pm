@@ -2,7 +2,6 @@ package harddrake::sound;
 # lists filled with Danny Tholen help, enhanced by Thierry Vignaud
 #
 # No ALSA for OSS's 
-#    o tv cards: btaudio,
 #    o isa cards: msnd_pinnacle, pas2, 
 #    o pci cards: ad1889, sam9407
 # No OSS for ALSA's
@@ -34,6 +33,7 @@ our %alsa2oss =
      "snd-als4000" => [ "unknown" ],
      "snd-azt2320" => [ "unknown" ], # isa
      "snd-azt3328" => [ "unknown" ], # isa
+     "snd-bt87x"   => [ "btaudio" ],
      "snd-cmi8330" => [ "sb" ], # isa
      "snd-cmipci"  => [ "cmpci" ],
      "snd-cs4231"  => [ "unknown" ], # isa
@@ -90,7 +90,7 @@ our %oss2alsa =
      "audigy"  => [ "snd-emu10k1" ],
      "audio" => [ "snd-usb-audio" ], # usb
      "awe_wave" => [ "snd-sbawe" ],
-     "btaudio" => [ "unknown" ],
+     "btaudio" => [ "snd-bt87x" ],
      "cmpci"   => [ "snd-cmipci" ],
      "cs4232"  => [ "snd-cs4232" ],
      "cs4281"  => [ "snd-cs4281" ],
