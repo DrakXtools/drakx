@@ -127,6 +127,9 @@ int ensure_dev_exists(char *dev)
 		minor = 8 * charstar_to_int(ptr+1);
 		ptr = strchr(ptr, 'p');
 		minor += charstar_to_int(ptr+1);
+        } else if (ptr_begins_static_str(name, "cloop")) {
+		major = 240;
+		minor = name[5] - '0';
 	} else {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;

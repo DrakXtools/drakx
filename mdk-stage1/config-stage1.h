@@ -33,7 +33,8 @@
 
 #ifdef MANDRAKE_MOVE
 #define DISTRIB_NAME "Mandrake Move"
-#define IMAGE_LOCATION   "/sysroot/image"
+#define IMAGE_LOCATION   "/sysroot/image_raw"
+#define IMAGE_LOCATION_REAL "/sysroot/image"
 #define SLASH_LOCATION   "/sysroot"
 #define LIVE_LOCATION_REL "/image"
 #else

@@ -48,7 +48,7 @@ static int mount_that_cd_device(char * dev_name)
 static int test_that_cd()
 {
 #ifdef MANDRAKE_MOVE
-        return access(IMAGE_LOCATION "/usr/bin/runstage2", R_OK);
+        return access(IMAGE_LOCATION "/live_tree.clp", R_OK);
 #else
 	return access(IMAGE_LOCATION LIVE_LOCATION, R_OK);
 #endif
@@ -73,6 +73,10 @@ static enum return_type do_with_device(char * dev_name, char * dev_model)
 #ifndef MANDRAKE_MOVE
 	if (IS_SPECIAL_STAGE2 || ramdisk_possible())
 		load_ramdisk(); /* we don't care about return code, we'll do it live if we failed */
+#else
+        my_insmod("cloop", ANY_DRIVER_TYPE, "file=" IMAGE_LOCATION "/live_tree.clp");
+	if (my_mount("/dev/cloop0", IMAGE_LOCATION_REAL, "iso9660", 0))
+		stg1_error_message("Could not mount compressed loopback :(.");
 #endif
 
 	if (IS_RESCUE)
