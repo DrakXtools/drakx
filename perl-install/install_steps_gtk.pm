@@ -61,9 +61,15 @@ sub new($$) {
 		c::setsid();
 		exec $server, @options or c::_exit(1);
 	    }
+
+	    #- wait for the server to start
+	    foreach (1..5) {
+		sleep 1;
+		last if fuzzy_pidofs(qr/\b$server\b/);
+		log::l("$server still not running, trying again");
+	    }
 	    my $nb;
 	    foreach (1..60) {
-		sleep 1;
 		log::l("Server died"), return 0 if !fuzzy_pidofs(qr/\b$server\b/);
 		$nb++ if xf86misc::main::Xtest($wanted_DISPLAY);
 		if ($nb > 2) { #- one succeeded test is not enough :-(
@@ -71,6 +77,7 @@ sub new($$) {
 		    log::l("AFAIK X server is up");
 		    return 1;
 		}
+		sleep 1;
 	    }
 	    log::l("Timeout!!");
 	    0;
