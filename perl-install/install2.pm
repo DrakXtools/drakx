@@ -113,7 +113,7 @@ sub setupSCSI {
     my ($clicked, $_ent_number, $auto) = @_;
 
     if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install) {
-	-s modules::cz_file() or die N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
+	-s modules::cz_file() or die \N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
 
     installStepsCall($o, $auto, 'setupSCSI', $clicked);
@@ -167,7 +167,7 @@ sub formatPartitions {
     if ($want_root_formated) {
 	foreach ('/usr') {
 	    my $part = fsedit::mntpoint2part($_, $o->{fstab}) or next;
-	    $part->{toFormat} or die N("You must also format %s", $_);
+	    $part->{toFormat} or die \N("You must also format %s", $_);
 	}
     }
     installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) if !$::testing;
@@ -323,7 +323,7 @@ sub start_i810fb {
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") if $err !~ /^find_index failed/ };
+    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: ", ref($err) eq 'SCALAR' ? $$err : $err) if $err !~ /^find_index failed/ };
     $SIG{SEGV} = sub { 
 	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
 	$o->ask_warn('', $msg);
@@ -592,6 +592,7 @@ sub main {
 	$o->kill_action;
 	$clicked = 0;
 	if ($err) {
+	    ref($err) eq 'SCALAR' and $err = $$err;
 	    local $_ = $err;
 	    $o->kill_action;
 	    if (!/^already displayed/) {

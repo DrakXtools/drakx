@@ -255,7 +255,7 @@ sub create_automatic_notebooks {
 	my $b = $_->{marked} or $notebook_widget->remove_page($::i);
 	$b;
     } @notebook;
-    @notebook or die N("No hard drives found");
+    @notebook or die \N("No hard drives found");
 }
 
 ################################################################################

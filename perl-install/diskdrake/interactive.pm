@@ -1050,7 +1050,7 @@ sub write_partitions {
     if (!$::testing) {
 	partition_table::write($hd);
     }
-    $hd->{rebootNeeded} and die N("You'll need to reboot before the modification can take place");
+    $hd->{rebootNeeded} and die \N("You'll need to reboot before the modification can take place");
     1;
 }
 

@@ -506,8 +506,8 @@ sub get_root { &get_root_ || {} }
 #- do this before modifying $part->{type}
 sub check_type {
     my ($type, $_hd, $part) = @_;
-    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
-    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
+    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die \N("You can't use JFS for partitions smaller than 16MB");
+    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die \N("You can't use ReiserFS for partitions smaller than 32MB");
 }
 
 sub package_needed_for_partition_type {
@@ -526,18 +526,18 @@ sub check_mntpoint {
     my ($mntpoint, $hd, $part, $all_hds) = @_;
 
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
-    $mntpoint =~ m|^/| or die N("Mount points must begin with a leading /");
-    $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die N("There is already a partition with mount point %s\n", $mntpoint);
+    $mntpoint =~ m|^/| or die \N("Mount points must begin with a leading /");
+    $mntpoint ne $part->{mntpoint} && has_mntpoint($mntpoint, $all_hds) and die \N("There is already a partition with mount point %s\n", $mntpoint);
 
     die "raid / with no /boot" 
       if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
-    die N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
+    die \N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($hd);
-    die N("This directory should remain within the root filesystem")
+    die \N("This directory should remain within the root filesystem")
       if member($mntpoint, qw(/bin /dev /etc /lib /sbin /root /mnt));
-    die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
+    die \N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueFS($part) && member($mntpoint, qw(/ /home /tmp /usr /var));
-    die N("You can't use an encrypted file system for mount point %s", $mntpoint)
+    die \N("You can't use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 
     local $part->{mntpoint} = $mntpoint;
@@ -598,9 +598,9 @@ sub auto_allocate {
     if ($before == listlength(fsedit::get_all_fstab($all_hds))) {
 	# find out why auto_allocate failed
 	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions_) {
-	    die N("Not enough free space for auto-allocating");
+	    die \N("Not enough free space for auto-allocating");
 	} else {
-	    die N("Nothing to do");
+	    die \N("Nothing to do");
 	}
     }
 }
@@ -693,7 +693,7 @@ sub move {
 
     local (*F, *G);
     sysopen F, $hd->{file}, 0 or die '';
-    sysopen G, $hd2->{file}, 2 or die N("Error opening %s for writing: %s", $hd2->{file}, $!);
+    sysopen G, $hd2->{file}, 2 or die \N("Error opening %s for writing: %s", $hd2->{file}, $!);
 
     my $base = $part1->{start};
     my $base2 = $part2->{start};

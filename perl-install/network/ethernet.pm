@@ -164,7 +164,7 @@ sub configureNetwork {
     my ($netc, $intf, $_first_time) = @_;
     local $_;
     modules::interactive::load_category($in, 'network/main|gigabit|usb|pcmcia', !$::expert, 1) or return;
-    my @l = detect_devices::getNet() or die N("no network card found");
+    my @l = detect_devices::getNet() or die \N("no network card found");
     my @all_cards = conf_network_card_backend($netc, $intf);
 
   configureNetwork_step_1:

@@ -29,7 +29,7 @@ sub check_circular_mounts {
     my $check; $check = sub {
 	my ($part, @seen) = @_;
 	push @seen, $part->{mntpoint} || return;
-	@seen > 1 && $part->{mntpoint} eq $base_mntpoint and die N("Circular mounts %s\n", join(", ", @seen));
+	@seen > 1 && $part->{mntpoint} eq $base_mntpoint and die \N("Circular mounts %s\n", join(", ", @seen));
 	if (my $part = fs::up_mount_point($part->{mntpoint}, $fstab)) {
 	    #- '/' carrier is a special case, it will be mounted first
 	    $check->($part, @seen) if !carryRootLoopback($part);

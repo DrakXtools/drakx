@@ -1032,7 +1032,7 @@ N_("The highlighted entry will be booted automatically in %d seconds."),
 );
    
     my $e = "$::prefix/boot/.enough_space";
-    output $e, 1; -s $e or die N("not enough room in /boot");
+    output $e, 1; -s $e or die \N("not enough room in /boot");
     unlink $e;
     $f;
 }
@@ -1060,7 +1060,7 @@ sub install {
     my ($bootloader, $fstab, $hds) = @_;
 
     if (my $p = find { $bootloader->{boot} eq "/dev/$_->{device}" } @$fstab) {
-	die N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
+	die \N("You can't install the bootloader on a %s partition\n", partition_table::type2fs($p))
 	  if isThisFs('xfs', $p);
     }
     $bootloader->{keytable} = keytable($bootloader->{keytable});

@@ -150,7 +150,7 @@ sub partitionWizardSolutions {
 		    };
 		    $pkg->new($part->{device}, devices::make($part->{device}));
 		};
-		$@ and die N("The FAT resizer is unable to handle your partition, 
+		$@ and die \N("The FAT resizer is unable to handle your partition, 
 the following error occured: %s", formatError($@));
 		my $min_win = do {
 		    my $_w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
@@ -160,7 +160,7 @@ the following error occured: %s", formatError($@));
 		#- this save at least a cylinder (less than 8Mb).
 		$min_win += partition_table::raw::cylinder_size($hd);
 
-		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
+		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die \N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
 		$o->ask_okcancel('', N("WARNING!
 
 DrakX will now resize your Windows partition. Be careful:
@@ -186,7 +186,7 @@ When sure, press Ok.")) or return;
 		};
 		if (my $err = $@) {
 		    $part->{size} = $oldsize;
-		    die N("FAT resizing failed: %s", formatError($err));
+		    die \N("FAT resizing failed: %s", formatError($err));
 		}
 
 		$part->{isFormatted} = 1;

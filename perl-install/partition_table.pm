@@ -678,7 +678,7 @@ sub add_primary {
 }
 
 sub add_extended {
-    arch() =~ /^sparc|ppc/ and die N("Extended partition not supported on this platform");
+    arch() =~ /^sparc|ppc/ and die \N("Extended partition not supported on this platform");
 
     my ($hd, $part, $extended_type) = @_;
     $extended_type =~ s/Extended_?//;
@@ -778,16 +778,16 @@ sub load {
     my ($hd, $file, $force) = @_;
 
     local *F;
-    open F, $file or die N("Error reading file %s", $file);
+    open F, $file or die \N("Error reading file %s", $file);
 
     my $h;
     {
 	local $/ = "\0";
 	eval <F>;
     }
-    $@ and die N("Restoring from file %s failed: %s", $file, $@);
+    $@ and die \N("Restoring from file %s failed: %s", $file, $@);
 
-    ref($h) eq 'ARRAY' or die N("Bad backup file");
+    ref($h) eq 'ARRAY' or die \N("Bad backup file");
 
     my %h; @h{@fields2save} = @$h;
 
@@ -807,5 +807,5 @@ sub save {
     my @h = @{$hd}{@fields2save};
     require Data::Dumper;
     eval { output($file, Data::Dumper->Dump([\@h], ['$h']), "\0") }
-      or die N("Error writing to file %s", $file);
+      or die \N("Error writing to file %s", $file);
 }

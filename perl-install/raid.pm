@@ -34,7 +34,7 @@ sub new {
 
 sub add {
     my ($raids, $part, $nb) = @_; $nb = nb($nb);
-    $raids->[$nb]{isMounted} and die N("Can't add a partition to _formatted_ RAID md%d", $nb);
+    $raids->[$nb]{isMounted} and die \N("Can't add a partition to _formatted_ RAID md%d", $nb);
     inactivate_and_dirty($raids->[$nb]);
     $part->{notFormatted} = 1; $part->{isFormatted} = 0;
     $part->{raid} = $nb;
@@ -152,7 +152,7 @@ sub verify {
     my ($raids) = @_;
     $raids or return;
     foreach (grep { $_ } @$raids) {
-	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die N("Not enough partitions for RAID level %d\n", $_->{level});
+	@{$_->{disks}} >= ($_->{level} =~ /4|5/ ? 3 : 2) or die \N("Not enough partitions for RAID level %d\n", $_->{level});
     }
 }
 

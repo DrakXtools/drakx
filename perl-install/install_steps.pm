@@ -184,7 +184,7 @@ sub doPartitionDisksAfter {
     }
     
     if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{all_hds})) {
-	die N("You must have a FAT partition mounted in /boot/efi");
+	die \N("You must have a FAT partition mounted in /boot/efi");
     }
 
     if ($o->{partitioning}{use_existing_root}) {
@@ -219,7 +219,7 @@ sub ask_mntpoint_s {
 
 	next if !$m || $m eq 'swap'; #- there may be a lot of swap.
 
-	$m{$m} and die N("Duplicate mount point %s", $m);
+	$m{$m} and die \N("Duplicate mount point %s", $m);
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext3
@@ -388,7 +388,7 @@ sub afterInstallPackages($) {
 
     return if $::g_auto_install;
 
-    die N("Some important packages didn't get installed properly.
+    die \N("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
 Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
 ") if any { m|read failed: Input/output error| } cat_("$o->{prefix}/root/drakx/install.log");
@@ -565,7 +565,7 @@ GridHeight=70
 	my @l = detect_devices::floppies_dev();
 
 	foreach (qw(blank updatemodules)) {
-	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die N("No floppy drive available");
+	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die \N("No floppy drive available");
 	}
 
 	$o->{blank} and $o->copyKernelFromFloppy();

@@ -107,7 +107,7 @@ sub get_ports {
 sub set_ports {
     my ($in, $disabled, $ports) = @_;
 
-    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die N("No network card");
+    my $shorewall = network::shorewall::read() || network::shorewall::default_interfaces() or die \N("No network card");
 
     if (!$disabled || -x "$::prefix/sbin/shorewall") {
 	$in->do_pkgs->ensure_is_installed('shorewall', '/sbin/shorewall', $::isInstall) or return;

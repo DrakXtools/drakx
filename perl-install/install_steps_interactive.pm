@@ -233,7 +233,7 @@ sub ask_mntpoint_s { #- }{}
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
     @fstab = @$fstab if @fstab == 0;
-    die N("No partition available") if @fstab == 0;
+    die \N("No partition available") if @fstab == 0;
 
     {
 	my $_w = $o->wait_message('', N("Scanning partitions to find mount points"));
@@ -347,7 +347,7 @@ sub formatMountPartitions {
 	$o->ask_yesorno('', N("Failed to check filesystem %s. Do you want to repair the errors? (beware, you can loose data)", $1), 1);
     };
     undef $w; #- help perl (otherwise wait_message stays forever in newt)
-    die N("Not enough swap space to fulfill installation, please add some") if availableMemory() < 40 * 1024;
+    die \N("Not enough swap space to fulfill installation, please add some") if availableMemory() < 40 * 1024;
 }
 
 #------------------------------------------------------------------------------

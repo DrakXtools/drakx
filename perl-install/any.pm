@@ -111,7 +111,7 @@ because XFS needs a very large driver).") : ''))) or return;
     }
 
     my $floppy_dev;
-    my @l = detect_devices::floppies_dev() or die N("Sorry, no floppy drive available");
+    my @l = detect_devices::floppies_dev() or die \N("Sorry, no floppy drive available");
     my %l = (
 	     'fd0'  => N("First floppy drive"),
 	     'fd1'  => N("Second floppy drive"),
