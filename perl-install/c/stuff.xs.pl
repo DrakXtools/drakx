@@ -471,6 +471,25 @@ isNetDeviceWirelessAware(device)
   RETVAL
 
 
+int enable_net_device(device)
+  char * device
+  CODE:
+    struct ifreq ifr;
+    int err;
+    int s = socket(AF_INET, SOCK_DGRAM, 0);
+
+    strncpy(ifr.ifr_name, device, IFNAMSIZ);
+    err = ioctl(s, SIOCGIFFLAGS, &ifr);
+    if (!err && !(ifr.ifr_flags & IFF_UP)) {
+        ifr.ifr_flags |= IFF_UP;
+        err = ioctl(s, SIOCSIFFLAGS, &ifr);
+    }
+    if (err)
+        perror("SIOCSIFFLAGS");
+    RETVAL = err;
+  OUTPUT:
+    RETVAL
+
 void
 get_netdevices()
   PPCODE:
