@@ -23,6 +23,7 @@ sub init {
     mkdir_p "/etc/$_" foreach qw(X11);
     touch '/etc/modules.conf';
     symlinkf "/proc/mounts", "/etc/mtab";
+    mkdir_p $_ foreach qw(/etc/rpm /etc/sysconfig /etc/sysconfig/console/consoletrans /etc/sysconfig/console/consolefonts);
  
     #- ro things
     symlinkf "/image/etc/$_", "/etc/$_" 
@@ -46,18 +47,30 @@ sub init {
     modules::load_category('multimedia/sound');
 
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
+    $o->{orderedSteps_orig} = $o->{orderedSteps};
     $o->{orderedSteps} = [ qw(selectLanguage acceptLicense selectMouse selectKeyboard startMove) ];
     
     member($_, @ALLOWED_LANGS) or delete $lang::langs{$_} foreach keys %lang::langs;
 }
 
 sub install2::startMove {
-    my ($o) = @_;
+    my $o = $::o;
 
     require install_any;
     install_any::write_fstab($o);
     modules::write_conf('');
     detect_devices::install_addons('');
+
+    foreach my $step (@{$o->{orderedSteps_orig}}) {
+        next if member($step, @{$o->{orderedSteps}});
+        while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
+            log::l("doing remaining toBeDone for undone step $step");
+            eval { &$f() };
+            $o->ask_warn(N("Error"), [
+N("An error occurred, but I don't know how to handle it nicely.
+Continue at your own risk."), formatError($@) ]) if $@;
+        }
+    }
 
     $::WizardWindow->destroy;
     require ugtk2;
