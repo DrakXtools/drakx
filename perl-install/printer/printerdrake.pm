@@ -2485,7 +2485,7 @@ sub choose_printer_name {
 	       local $::isWizard = 0;
 	       if ($printer->{configured}{$printer->{currentqueue}{queue}}
 		   && $printer->{currentqueue}{queue} ne $default && 
-		   !$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists, do you really want to overwrite its configuration?",
+		   !$in->ask_yesorno(N("Warning"), N("The printer \"%s\" already exists,\ndo you really want to overwrite its configuration?",
 						     $printer->{currentqueue}{queue}),
 				     0)) {
 		   return 1, 0; # Let the user correct the name
