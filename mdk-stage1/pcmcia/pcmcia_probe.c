@@ -187,7 +187,10 @@ static int i365_probe(void)
 	log_message("PCMCIA: probing for Intel PCIC (ISA)..");
     
 	sock = done = 0;
-	ioperm(i365_base, 4, 1);
+	if (ioperm(i365_base, 4, 1)) {
+		log_perror("PCMCIA: ioperm");
+		return -1;
+	}
 	ioperm(0x80, 1, 1);
 	for (; sock < 2; sock++) {
 		val = i365_get(sock, I365_IDENT);
@@ -344,7 +347,11 @@ static int tcic_probe(void)
 
 	log_message("PCMCIA: probing for Databook TCIC-2 (ISA)..");
     
-	ioperm(TCIC_BASE, 16, 1);
+	if (ioperm(TCIC_BASE, 16, 1)) {
+		log_perror("PCMCIA: ioperm");
+		return -1;
+	}
+
 	ioperm(0x80, 1, 1);
 	sock = tcic_probe_at(TCIC_BASE);
     

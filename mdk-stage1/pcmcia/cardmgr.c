@@ -133,6 +133,7 @@ static int lookup_dev(char *name)
 	if (f == NULL)
 		return -errno;
 	while (fgets(s, 32, f) != NULL) {
+		bzero(t, 32);
 		if (sscanf(s, "%d %s", &n, t) == 2)
 			if (strcmp(name, t) == 0)
 				break;
@@ -146,10 +147,9 @@ static int lookup_dev(char *name)
 
 static int open_dev(dev_t dev, int mode)
 {
-	char *fn;
+	char * fn = "/tmp/cardmgr_tmp";
 	int fd;
-	if ((fn = tmpnam(NULL)) == NULL)
-		return -1;
+	unlink(fn);
 	if (mknod(fn, mode, dev) != 0)
 		return -1;
 	fd = open(fn, (mode&S_IWRITE) ? O_RDWR : O_RDONLY);
