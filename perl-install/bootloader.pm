@@ -426,36 +426,35 @@ sub get_kernels_and_labels() {
     
     require pkgs;
     @kernels = 
-      sort { c::rpmvercmp($b->[1], $a->[1]) || $weights{$a->[2]} <=> $weights{$b->[2]} } 
-      grep { -d "$::prefix/lib/modules/$_->[0]" }
+      sort { c::rpmvercmp($b->{version}, $a->{version}) || $weights{$a->{ext}} <=> $weights{$b->{ext}} } 
+      grep { -d "$::prefix/lib/modules/$_->{complete_version}" }
       map {
-	  if (my ($version, $ext) = /vmlinuz-((?:[\-.\d]*(?:mdk)?)*)(.*)/) {
-	      [ "$version$ext", $version, $ext ];
-	  } else {
-	      log::l("non recognised kernel name $_");
-	      ();
-	  }
+	  s/vmlinuz-//;
+	  { complete_version => $_, /(.*mdk)(.*)/ ? (ext => $2, version => $1) : (version => $_) };
       } @kernels;
 
     my %majors;
     foreach (@kernels) {
-	push @{$majors{$1}}, $_ if $_->[1] =~ /^(2\.\d+)/
+	push @{$majors{$1}}, $_ if $_->{version} =~ /^(2\.\d+)/
     }
     while (my ($major, $l) = each %majors) {
-	$l->[0][1] = $major if @$l == 1;
+	$l->[0]{version} = $major if @$l == 1;
     }
 
+    if (-e "$::prefix/usr/lib/lsb") {
+	my ($kernel_24, $other) = partition { $_->{ext} eq '' && $_->{version} =~ /^\Q2.4/ } @kernels;
+	@kernels = (@$kernel_24, @$other);
+    }
     my %labels;
     foreach (@kernels) {
-	my ($complete_version, $version, $ext) = @$_;
 	my $label = '';
 	if (exists $labels{$label}) {
-	    $label = "-$ext";
-	    if (!$ext || $labels{$label}) {
-		$label = "-$version$ext";
-	    }
+	    $label = '-' . $_->{ext} if $_->{ext};
 	}
-	$labels{$label} = $complete_version;
+	if (exists $labels{$label}) {
+	    $label = '-' . $_->{version} . $_->{ext};
+	}
+	$labels{$label} = $_->{complete_version};
     }
     %labels;
 }
