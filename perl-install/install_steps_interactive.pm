@@ -1036,7 +1036,7 @@ sub summary {
 		   messages => _("Summary"),
 		   cancel   => '',
 		  }, [
-{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o->{prefix}, $o->{mouse}); &$format_mouse } },
+{ label => _("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}); &$format_mouse } },
 { label => _("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
 { label => _("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => _("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },

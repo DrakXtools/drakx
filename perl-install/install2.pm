@@ -100,7 +100,7 @@ sub selectMouse {
 
     installStepsCall($o, $auto, 'selectMouse', !$first_time || $clicked);
 
-    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages' if !$o->{isUpgrade} || $clicked;
+    addToBeDone { mouse::write($o, $o->{mouse}) } 'installPackages' if !$o->{isUpgrade} || $clicked;
 }
 
 #------------------------------------------------------------------------------
