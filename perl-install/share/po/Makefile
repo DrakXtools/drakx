@@ -22,7 +22,7 @@ DrakX.pot: $(PMSFILES)
 	$(MAKE) $(PMSCFILES);
 	xgettext -F -n --add-comments='-PO' --keyword=_ --keyword=__ -o $@ $(PMSCFILES)
 	rm $(PMSCFILES)
-	./i18n_compssUsers 2>/dev/null >> $@
+	perl i18n_compssUsers 2>/dev/null >> $@
 
 $(PMSCFILES): %_.c: %
 	perl -pe 's|^(__?\()| $$1|; s,(^|[^\$$])#([^+].*),\1/*\2*\/,; s|$$|\\n\\|' $< > $@
