@@ -192,7 +192,7 @@ sub parse_etc_passwd
     do {
 	@user_info = getpwent();
 	($uname, $uid) = @user_info[0,2];
-         push (@usernames, $uname) if ($uid > 500);
+	push (@usernames, $uname) if ($uid > 500) and !($uname eq "nobody");
     } while (@user_info);
 }
 
