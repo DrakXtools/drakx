@@ -38,7 +38,7 @@ sub del_loop {
     run_program::run("losetup", "-d", $dev);
 }
 sub find_free_loop() {
-    foreach (0..7) {
+    foreach (0..255) {
 	my $dev = make("loop$_");
 	sysopen(my $F, $dev, 2) or next;
 	!ioctl($F, c::LOOP_GET_STATUS(), my $_tmp) && $! == 6 or next; #- 6 == ENXIO

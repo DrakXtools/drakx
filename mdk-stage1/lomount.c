@@ -119,12 +119,12 @@ set_loop (const char *device, const char *file, int gz)
 
 char* find_free_loop()
 {
-        char ldev[] = "/dev/loop0";
 	struct loop_info loopinfo;
         int i;
-        for (i=0; i<8; i++) {
+        for (i=0; i<256; i++) {
                 int fd;
-                ldev[strlen(ldev)-1] = '0' + i;
+		char ldev[100];
+		sprintf(ldev, "/dev/loop%d", i);
                 ensure_dev_exists(ldev);
                 fd = open(ldev, O_RDONLY);
                 if (!ioctl(fd, LOOP_GET_STATUS, &loopinfo)) {
@@ -171,7 +171,7 @@ lomount(char *loopfile, char *where, char **dev, int gz)
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
-	my_insmod("loop", ANY_DRIVER_TYPE, NULL, 1);
+	my_insmod("loop", ANY_DRIVER_TYPE, "max_loop=256", 1);
 
         if (!(loopdev = find_free_loop())) {
 		log_message("could not find a free loop");
