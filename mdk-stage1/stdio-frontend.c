@@ -57,7 +57,8 @@ static void get_any_response(void)
 static int get_int_response(void)
 {
 	char s[50];
-	int j = 0, i = 0; /* (0) tied to Cancel */
+	int j = 0;
+	unsigned int i = 0; /* (0) tied to Cancel */
 	fflush(stdout);
 	read(0, &(s[i++]), 1);
 	fcntl(0, F_SETFL, O_NONBLOCK);
@@ -330,7 +331,7 @@ enum return_type ask_yes_no(char *msg)
 }
 
 
-enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size, void (*callback_func)(char ** strings))
+enum return_type ask_from_entries(char *msg, char ** questions, char *** answers, int entry_size __attribute__ ((unused)), void (*callback_func)(char ** strings) __attribute__ ((unused)))
 {
 	int j, i = 0;
 	char ** already_answers = NULL;
