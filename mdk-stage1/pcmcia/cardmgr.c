@@ -683,7 +683,7 @@ static void adjust_resources(void)
 				sprintf(tmp, "irq %u", al->adj.resource.irq.IRQ);
 				break;
 			}
-			log_message("CM: could not adjust resource: %s: %m", tmp);
+			log_message("CM: could not adjust resource: %s: %s", tmp, strerror(errno));
 		}
 	}
 }

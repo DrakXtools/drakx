@@ -113,7 +113,7 @@ INIT_LIBC = $(DIETLIBC_LIBC)
 endif
 
 
-BINS = init #stage1-full
+BINS = init stage1-full
 
 ifeq (i386, $(ARCH))
 BINS += stage1-cdrom stage1-disk stage1-network
@@ -127,7 +127,9 @@ endif
 
 
 ifeq (i386,$(ARCH))
-PCMCIA_LIB = pcmcia/libpcmcia.a
+GLIBC_PCMCIA_LIB = pcmcia/libpcmcia.a
+DIETLIBC_PCMCIA_LIB = $(subst .a,-DIET.a,$(GLIBC_PCMCIA_LIB))
+PCMCIA_LIB = $($(L)_PCMCIA_LIB)
 PCMCIA_DEFS = -DENABLE_PCMCIA
 endif
 
@@ -155,7 +157,7 @@ stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) 
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-full: $(STAGE1OBJS) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB)
+stage1-full: $(STAGE1OBJS) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
@@ -173,7 +175,7 @@ $(INITOBJS): %.o: %.c
 	$(COMPILE) $(INIT_DEFS) -c $<
 
 .c.o: .depend
-	$(COMPILE) $(GLIBC_INCLUDES) $(PCMCIA_DEFS) -c $<
+	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $<
 
 
 clean: 
