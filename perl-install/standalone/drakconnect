@@ -650,6 +650,8 @@ sub del_intf() {
       $in->ask_warn(N("Error"), N("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
       $in->exit(0);
     }
+    @all_cards = network::ethernet::get_eth_cards($modules_conf);
+    my %ethernet_names = network::ethernet::get_eth_cards_names($modules_conf, @all_cards);
     my $wiz =
       {
        defaultimage => "drakconnect.png",
@@ -659,7 +661,13 @@ sub del_intf() {
                              no_back => 1,
                              name => N("Select the network interface to remove:"),
                              data =>  [ { label => N("Net Device"), val => \$intf2delete, allow_empty_list => 1,
-                                          list => [ keys %$intf, grep { -f "/etc/ppp/peers/$_" } qw(adsl isdn) ], } ],
+                                          list => [ keys %$intf ],
+                                          format => sub {
+                                              my $type = network::tools::get_interface_type($intf->{$_[0]});
+                                              $ethernet_names{$_[0]} || ($type ? "$type ($_[0])" : $_[0])
+                                            }
+                                        }
+                                      ],
                              post => sub {
                                  !$::testing and eval {
                                      if (member($intf2delete, qw(adsl modem))) {
