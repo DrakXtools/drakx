@@ -8,8 +8,9 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 sub pkgs_install {
     my ($in, @l) = @_;
     $in->suspend;
-    system('urpmi --auto --best-output ' . join(' ', @l));
+    my $ret = system('urpmi --auto --best-output ' . join(' ', @l));
     $in->resume;
+    $ret;
 }
 
 1;
