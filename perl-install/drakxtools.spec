@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 25mdk
+Release: 26mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -321,6 +321,37 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar 23 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-26mdk
+- diskdrake: tag removable medias as noauto in fstab (pixel)
+  file (#9076)
+- drakboot: add nolapic support option (planel)
+- drakclock (Robert Vojta, #9141):
+  o display current timezone
+  o sort servers
+- drakclock, drakperm: GUI fixes (Robert Vojta: #9141, #9153)
+- drakconnect:
+  o complain louder about supported kernels for ISDN cards
+  o enable to delete ADSL and ISDN connections
+  o do not complain anymore about kernel when using bewan adsl modems
+    since they works now with 2.6.x kernels
+  o do write drakconnect config file when there's only one configured
+    interface (#8998)
+- drakgw: fix drakgw removing MII_NOT_SUPPORTED parameter from ifcfg
+- drakTermServ: fix button layout
+- drakxtv:
+  o read current configuration (Scott Mazur)
+  o fix setting options for bttv instead of saa7134 (#5612)
+  o fix saa7134 detection (#5612)
+  o fix wiping out /etc/modules.conf (Scott Mazur)
+  o default canada-cable to NTSC (Scott Mazur)
+  o handle tv cards managed by cx88 and saa7134 (#9112)
+  o use right device (#3193)
+  o offer to set the user to config (#3193)
+  o sync with 2.6.3-4mdk
+- firewall: do not write the REDIRECT squid rules if one has only one
+  NIC connected to the net zone (florin)
+- keyboarddrake: az, tr and tr_f needs XkbOptions 'caps:shift' (pixel)
+- logdrake: fix non first searches (#9115)
 
 * Fri Mar 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-25mdk
 - add missing icons for localedrake menu entry (dadou)
