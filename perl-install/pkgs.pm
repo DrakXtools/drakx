@@ -392,6 +392,7 @@ sub psUsingHdlist {
 	      fakemedium => $fakemedium,
 	      selected   => $selected, #- default value is only CD1, it is really the minimal.
 	      ignored    => !$selected, #- keep track of ignored medium by DrakX.
+	      pubkey     => [], #- all pubkey block here
 	    };
 
     #- copy hdlist file directly to urpmi directory, this will be used
@@ -409,6 +410,25 @@ sub psUsingHdlist {
 	install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist", $newsf);
 	$m->{synthesis_hdlist_size} = -s $newsf; #- keep track of size for post-check.
 	-s $newsf > 0 or unlink $newsf;
+    }
+
+    #- get all keys corresponding in the right pubkey file,
+    #- they will be added in rpmdb later if not found.
+    my $pubkey = install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
+    my ($block, $content);
+    foreach (<$pubkey>) {
+	my $inside_block = /^-----BEGIN PGP PUBLIC KEY BLOCK-----$/ ... /^-----END PGP PUBLIC KEY BLOCK-----$/;
+	if ($inside_block) {
+	    $block .= $_;
+	    if ($inside_block =~ /E/) {
+		push @{$m->{pubkey}}, { block => $block, content => $content };
+		$block = $content = '';
+	    }
+	    #- now compute content (for finding the right key).
+	    chomp;
+	    my $inside_content = /^$/ ... /^-----END PGP PUBLIC KEY BLOCK-----$/;
+	    $inside_content > 1 and $content .= $_;
+	}
     }
 
     #- integrate medium in media list, only here to avoid download error (update) to be propagated.
