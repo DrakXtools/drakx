@@ -1,14 +1,13 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.9
-Release: 14mdk
+Release: 15mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
 Conflicts: drakconf < 0.96-10mdk
-BuildRequires:        e2fsprogs-devel
 BuildRequires:        gcc
 BuildRequires:        gettext
 BuildRequires:        gtk+-devel
@@ -85,6 +84,8 @@ drakfont: import some fonts in the system.
 drakgw: internet connection sharing
 
 drakproxy: proxies configuration
+
+draksound: sound card configuration
 
 draksplash: bootsplash themes creation
 
@@ -261,6 +262,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Wed Aug 21 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-15mdk
+- add draksound
+- mousedrake: default usbmouse link to input/mice rather than
+  input/mouse0, thus giving support for multiple mouse, wacom tables,
+  ...
+
 * Wed Aug 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-14mdk
 - fix dangling waiting watch mousecursor (well, please test!)
 - adding draksplash (nathan)
@@ -1020,7 +1027,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 * Mon Apr  9 2001 Yves Duret <yduret@mandrakesoft.com> 1.1.5-82mdk
 - snap as always
 
-* Mon Apr  9 2001 Yves Duret <yduret@mandraksoft.com> 1.1.5-81mdk
+* Mon Apr  9 2001 Yves Duret <yduret@mandrakesoft.com> 1.1.5-81mdk
 - snaphshot again and again
 
 * Mon Apr  9 2001 dam's <damien@mandrakesoft.com> 1.1.5-80mdk
