@@ -40,7 +40,7 @@ autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/boot
 #	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
-	cp -f vmlinuz {cdrom,network,all,other}.rdz $(ROOTDEST)/boot
+	cp -f vmlinuz {hd,hdreiser,cdrom,network,all,other}.rdz $(ROOTDEST)/boot
 	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
 endif
 
