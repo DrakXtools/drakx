@@ -531,6 +531,7 @@ system "rpm", "--root", "/mnt", "--initdb";
 my (%files, %rpms);
 
 #- copy and install from each cd image.
+require packdrake;
 foreach my $medium (@media) {
     my $packer = new packdrake("/cdrom/Mandrake/base/$medium->{hdlist}");
     foreach (@{$packer->{files}}) {
