@@ -109,6 +109,8 @@ sub process {
         my $data = defined $page->{data} ? ref $page->{data} ? $page->{data} : [ { label => '' } ] : [ { label => '' } ];
         my $data2;
         foreach my $d (@$data) {
+            $d->{val} = ${$d->{val_ref}} if $d->{val_ref};
+            $d->{list} = $d->{list_ref} if $d->{list_ref};
             if ($d->{boolean_list}) { 
                 my $i;
                 foreach (@{$d->{boolean_list}}) { 
