@@ -48,6 +48,7 @@ our %langs = (
 'fi' =>    [ 'Finnish (Suomi)',     'Suomi',             'fi_FI', '1    ', 'iso-8859-15' ],
 'fo' =>    [ 'Faroese',             'Foroyskt',          'fo_FO', '1    ', 'iso-8859-1' ],
 'fr' =>    [ 'French',              'Francais',          'fr_FR', '1 345', 'iso-8859-15' ],
+#'fur' =>    [ 'Furlan',             'Furlan',            'fur_IT', '1    ', 'iso-8859-15', 'fur:it_IT:it' ],
 'ga' =>    [ 'Gaelic (Irish)',      'Gaeilge',           'ga_IE', '1    ', 'iso-8859-15', 'ga:en_IE:en_GB:en' ],
 #'gd' =>   [ 'Gaelic (Scottish)',   'Gaidhlig',          'gd_GB', '1    ', 'utf_lat8',    'gd:en_GB:en' ],
 'gl' =>    [ 'Galician',            'Galego',            'gl_ES', '1    ', 'iso-8859-15', 'gl:es_ES:es:pt:pt_BR' ],
@@ -128,7 +129,7 @@ our %langs = (
 #- locale not done yet
 #'wen' =>   [ 'Sorbian',             'XX Sorbian',       'wen_XX', '1    ', 'iso-8859-1' ],
 'xh' =>    [ 'Xhosa',               'IsiXhosa',          'xh_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
-'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1   5', 'utf_he' ],
+'yi' =>    [ 'Yiddish',             'AA Yidish',         'yi_US', '1    ', 'utf_he' ],
 'zh_CN' => [ 'Chinese Simplified',  'ZZ ZhongWen',       'zh_CN', ' 2   ', 'gb2312',      'zh_CN.GB2312:zh_CN:zh' ],
 'zh_TW' => [ 'Chinese Traditional', 'ZZ ZhongWen',       'zh_TW', ' 2   ', 'Big5',        'zh_TW.Big5:zh_TW:zh_HK:zh' ],
 'zu' =>    [ 'Zulu',                 'IsiZulu',          'zu_ZA', '  3  ', 'iso-8859-1', 'xh:en_ZA' ],
