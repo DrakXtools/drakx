@@ -19,6 +19,7 @@ sub new {
     my ($raids, %opts) = @_;
     my $md_part = { %opts };
     add2hash_($md_part, { 'chunk-size' => '64', disks => [], 
+			  fs_type => 'ext3',
 			  device => 'md' . int(@$raids), 
 			  notFormatted => 1, level => 1 });
     push @$raids, $md_part;
