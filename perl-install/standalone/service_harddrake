@@ -7,6 +7,7 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use common;
 use interactive;
 use harddrake::data;
+use modules;
 use Storable qw(store retrieve);
 
 my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
@@ -14,6 +15,8 @@ my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 60
 my $last_boot_config = $hw_sysconfdir."/previous_hw";
 
 $last_boot_config .= '_X11' if $invert_do_it;
+
+modules::mergein_conf('/etc/modules.conf');
 
 # first run ? if not read old hw config
 my $previous_config = -f $last_boot_config && -s $last_boot_config ? Storable::retrieve($last_boot_config) : {};
@@ -72,4 +75,9 @@ foreach (@harddrake::data::tree) {
 # output new hw config
 log::explanations("created file $last_boot_config");
 Storable::store(\%config, $last_boot_config);
+
+# automatic sound slots configuration
+harddrake::sound::configure_sound_slots();
+modules::write_conf();
+
 $in->exit(0);
