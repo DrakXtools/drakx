@@ -511,7 +511,7 @@ sub chooseGroups {
     $o->ask_many_from_list('', _("Package Group Selection"),
 			   { list => \@groups, 
 			     help => sub { translate($o->{compssUsersDescr}{$_}) },
-			     ref => sub { \$val{$_} },
+			     val => sub { \$val{$_} },
 			     icon2f => sub { 
 				 my $f = "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default');
 				 -e "$f.xpm" or $f .= "_section";
@@ -520,8 +520,8 @@ sub chooseGroups {
 			     },
 			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
 			   },
-			   if_($o->{meta_class} eq 'desktop', { list => [ _("All") ], ref => sub { \$all }, shadow => 0 }),
-			   if_($individual, { list => [ _("Individual package selection") ], ref => sub { $individual } }),
+			   if_($o->{meta_class} eq 'desktop', { list => [ _("All") ], val => sub { \$all }, shadow => 0 }),
+			   if_($individual, { list => [ _("Individual package selection") ], val => sub { \$individual } }),
 			  ) or return;
     if ($all) {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}} } @{$o->{compssUsersSorted}};
