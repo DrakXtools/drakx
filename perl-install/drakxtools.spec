@@ -8,7 +8,7 @@ License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK >= 0.6123, perl-GTK-GdkImlib, perl-GTK-GdkPixbuf, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
 Conflicts: drakconf < 0.96-10mdk 
-BuildRequires: gettext, gtk+-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel
+BuildRequires: gettext, gtk+-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel, libext2fs-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
