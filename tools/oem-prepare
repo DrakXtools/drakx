@@ -188,7 +188,7 @@ sub select_packages {
     #- package that have to selected here as a bonus for oem install.
     foreach (qw(cups cups-drivers a2ps drakprofile draksync numlock icewm-light
 		Mesa Mesa-demos alsa alsa-utils curl
-                glibc vim-minimal kernel
+                glibc vim-minimal kernel gcc-cpp
 	       ), exists $options{server} ? qw(openldap-migration openldap-clients pam_ldap) : ()) {
 	my $pkg = pkgs::packageByName($o->{packages}, $_);
 	$pkg and pkgs::selectPackage($o->{packages}, $pkg);
