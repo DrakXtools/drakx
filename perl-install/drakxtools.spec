@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -357,6 +357,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Feb  9 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.21mdk
+- drakboot: fix ACPI checkbox (pixel, #13335)
+- drakkeyboard: synchronized keyboards with X11 (pablo)
+- harddrake service: prevent adding spurious empty lines at end of
+  /etc/hotplub/blacklist on stop
+- printerdrake: updates
+
 * Tue Feb  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-0.20mdk
 - drakconnect (blino):
   o add basic ndiswrapper support
