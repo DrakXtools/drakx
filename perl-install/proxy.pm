@@ -61,8 +61,8 @@ sub main {
 		    { label => _("port"), val => \$proxy_cfg->{ftp_port} }
 		  ],
 		  complete => sub {
-		      if ($proxy_cfg->{ftp_url} && $proxy_cfg->{ftp_url} !~ /^ftp:/) {
-			  $in->ask_warn('', _("Url should begin with 'ftp:'"));
+		      if ($proxy_cfg->{ftp_url} && $proxy_cfg->{ftp_url} !~ /^(ftp|http):/) {
+			  $in->ask_warn('', _("Url should begin with 'ftp:' or 'http:'"));
 			  return (1,0);
 		      }
 		      if ($proxy_cfg->{ftp_port} && $proxy_cfg->{ftp_port} !~ /^\d+$/) {
