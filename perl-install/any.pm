@@ -604,9 +604,20 @@ sub autologin {
 sub selectLanguage {
     my ($in, $lang, $langs_) = @_;
     my $langs = $langs_ || {};
-    my @langs = lang::list(exclude_non_necessary_utf8 => $::isInstall, 
-			   exclude_non_installed_langs => !$::isInstall,
-			  );
+    #- can't use images after install since the install theme is inverse video :/
+    my $using_images = $in->isa('interactive::gtk') && $::isInstall;
+
+    #- to create the default value, use the first location for that value :/
+    $lang = first(lang::l2location($lang))."|$lang";
+
+    my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
+    my $listval2val = sub { $_[0] =~ /\|(.*)/; $1 };
+
+    my @langs = map { my $l = $_; map { [ "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs(exclude_non_installed => !$::isInstall);
+    #- since gtk version will use images (function image2f) we need to sort differently
+    my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
+    @langs = map { $_->[0] } sort { $a->[1] cmp $b->[1] || $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
+
     $in->ask_from_(
 	{ messages => N("Please choose a language to use."),
 	  title => 'language choice',
@@ -614,21 +625,54 @@ sub selectLanguage {
 	  advanced_messages => formatAlaTeX(N("Mandrake Linux can support multiple languages. Select
 the languages you would like to install. They will be available
 when your installation is complete and you restart your system.")),
-	  callbacks => {
-	      advanced => sub { $langs->{$lang} = 1 },
-	  },
+	  callbacks => { advanced => sub { $langs->{$listval2val->($lang)} = 1 } }
 	},
 	[ { val => \$lang, separator => '|', 
-	    format => \&lang::lang2text, list => \@langs },
+	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
+	    format => sub { $_[0] =~ /(.*\|)(.*)/; $1.lang::l2name($2) },
+	    list => \@langs, sort => 0 },
 	    if_($langs_, (map {
-	       { val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
-		 text => $_->[1], advanced => 1,
-	       } 
-	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
-	  { val => \$langs->{all}, type => 'bool', text => N("All"), advanced => 1 }),
+		{ val => \$langs->{$_->[0]}, type => 'bool', disabled => sub { $langs->{all} },
+		  text => $_->[1], advanced => 1,
+		  image => "langs/lang-$_->[0]",
+		} 
+	    } sort { $a->[1] cmp $b->[1] } map { [ $_, $sort_func->($_) ] } lang::list_langs()),
+		{ val => \$langs->{all}, type => 'bool', text => N("All"), advanced => 1 },
+		if_($::isInstall,
+		    { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }))
 	]) or return;
-    $langs->{$lang} = 1;
-    $lang;
+    $langs->{$listval2val->($lang)} = 1;
+
+    #- convert to the default locale for asked language
+    $listval2val->($lang);
+}
+
+sub selectCountry {
+    my ($o, $locale) = @_;
+
+    my $country = $locale->{country};
+    my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
+    my @best = uniq map { if_((/^\Q$locale->{lang}/ || substr($_, 0, 2) eq substr($locale->{lang}, 0, 2))
+			      && /.._(..)/, $1) } @lang::locales;
+    @best == 1 and @best = ();
+
+    my ($other, $ext_country);
+    member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
+    $o->ask_from_(
+		  { title => N("Country"), 
+		    messages => N("Please choose your country."),
+		    advanced_messages => N("Here is the full list of available countries"),
+		    advanced_label => N("More"),
+		    advanced_state => $ext_country && scalar(@best),
+		    callbacks => { changed => sub { $other = $_[0] == 1 } },
+		  },
+		  [ if_(@best, { val => \$country, type => 'list', format => \&lang::c2name,
+				 list => \@best, sort => 1 }),
+		    { val => \$ext_country, type => 'list', format => \&lang::c2name,
+		      list => [ difference2(\@countries, \@best) ], advanced => @best }
+		  ]) or return;
+
+    $locale->{country} = $other || !@best ? $ext_country : $country;
 }
 
 sub write_passwd_user {

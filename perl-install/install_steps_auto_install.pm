@@ -107,7 +107,7 @@ sub errorInStep {
 sub selectLanguage {
     my ($o) = @_;
     $o->install_steps::selectLanguage;
-    lang::load_console_font($o->{lang});
+    lang::load_console_font($o->{locale});
 }
 
 sub installPackages {

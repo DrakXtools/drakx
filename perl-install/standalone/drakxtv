@@ -71,33 +71,32 @@ You can install it by typing \"urpmi xawtv\" as root, in a console.")));
 		   );
 #   Info: HRC means "Harmonically Related Carrier"
 
-	   # default to pal since most people use that
-	   $norm = "PAL";
 		  my %countries =
 			 (
-			  "ar" => [ "argentina" ],
-			  "au" => [ "australia" ],
-			  "(br|fr)" => ["france", "SECAM"],
-			  "ca" => [ "canada-cable" ],
-			  "(ga|ie)" => [ "ireland" ],
-			  "it" => [ "italy" ],
-			  "jp" => [ "japan-bcast", "NTSC-JP" ],
-			  "nz" => [ "newzealand" ],
-			  "(at|be|ch|de|eu|gb|se)" => [ "europe-west" ],
-			  "us" => [ "us-bcast", "NTSC" ],
-			  "za" => [ "southafrica" ],
-			  "(zh|TW|Big5|CN.GB2312|CN)" => [ "china-bcast" ]
+			  "AR" => [ "argentina" ],
+			  "AU" => [ "australia" ],
+			  "FR" => [ "france", "SECAM"],
+			  "CA" => [ "canada-cable" ],
+			  "IE" => [ "ireland" ],
+			  "IT" => [ "italy" ],
+			  "JP" => [ "japan-bcast", "NTSC-JP" ],
+			  "NZ" => [ "newzealand" ],
+			  "AT|BE|CH|DE|ES|GB|SE" => [ "europe-west" ],
+			  "US" => [ "us-bcast", "NTSC" ],
+			  "ZA" => [ "southafrica" ],
+			  "CN|TW" => [ "china-bcast" ]
 			  );
 
-		  ($_) = lang::read('', $>);
-		  foreach my $i (keys %countries) {
-			 if (/($i|$i.UTF-8)$/i) {
-				my $tbl = $countries{$i};
-				$ftable_id = $tbl->[0];
-				$norm = $tbl->[1] if $tbl->[1];
-			 }
+	          my $tbl;
+		  my $locale = lang::read('', $>);
+	          $locale->{country} =~ /$_/ and $tbl = $countries{$_} foreach keys %countries;
+	          if ($tbl) {
+		      $ftable_id = $tbl->[0];
+		      $norm = $tbl->[1] if $tbl->[1];
 		  }
-		  log::l("[drakxtv] guess lang=>$_, norm=>$norm, area=>$ftable_id");
+	          # default to pal since most people use that
+	          $norm ||= "PAL";
+		  log::l("[drakxtv] guess country=>$locale->{country}, norm=>$norm, area=>$ftable_id");
 
 	   if ($in->ask_from("TVdrake", N("Please,\ntype in your tv norm and country"),
                           [

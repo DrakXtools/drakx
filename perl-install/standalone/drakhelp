@@ -15,11 +15,11 @@ die "Usage: drakhelp <help_path>" if @ARGV != 1;
 
 my $in = interactive->vnew;
 
-my $lang = lang::lang2LANG(lang::read('',$>)) || 'en';
-if (!member($lang, qw(de en es fr it ru))) { $lang = 'en' };
-my $path_to_help = "/usr/share/doc/mandrake/" . $lang . "/";
+my $locale = lang::read('', $>);
+if (!member($locale->{lang}, qw(de en es fr it ru))) { $locale->{lang} = 'en' };
+my $path_to_help = "/usr/share/doc/mandrake/" . $locale->{lang} . "/";
 
--d $path_to_help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $lang);
+-d $path_to_help or $in->do_pkgs->install('mandrake_doc-drakxtools-' . $locale->{lang});
 
 if ((my $wm = any::running_window_manager()) eq 'kwin') {
     system("mdklaunchhelp " . $path_to_help . $ARGV[0] . "&");

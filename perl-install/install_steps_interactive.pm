@@ -54,7 +54,7 @@ sub charsetChanged {}
 sub selectLanguage {
     my ($o) = @_;
 
-    $o->{lang} = any::selectLanguage($o, $o->{lang}, $o->{langs} ||= {});
+    $o->{locale}{lang} = any::selectLanguage($o, $o->{locale}{lang}, $o->{locale}{langs} ||= {});
     install_steps::selectLanguage($o);
 
     $o->charsetChanged;
@@ -68,7 +68,7 @@ that it is listed means there is some support for it anyway.
 That is, once GNU/Linux will be installed, you will be able to at
 least read and write in that language; and possibly more (various
 fonts, spell checkers, various programs translated etc. that
-varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo();
+varies from language to language).")) if $o->{locale}{lang} !~ /^en/ && !lang::load_mo();
     } else {
 	#- no need to have this in po since it is never translated
 	$o->ask_warn('', "The characters of your language can't be displayed in console,
@@ -93,9 +93,9 @@ sub selectKeyboard {
     my ($o, $clicked) = @_;
 
     my $from_usb = keyboard::from_usb();
-    my $l = keyboard::lang2keyboards(lang::langs($o->{langs}));
+    my $l = keyboard::lang2keyboards(lang::langs($o->{locale}{langs}));
 
-    if ($::expert || $clicked || !($from_usb || @$l && $l->[0][1] >= 90) || listlength(lang::langs($o->{langs})) > 1) {
+    if ($::expert || $clicked || !($from_usb || @$l && $l->[0][1] >= 90) || listlength(lang::langs($o->{locale}{langs})) > 1) {
 	add2hash($o->{keyboard}, $from_usb);
 	my @best = uniq($from_usb ? $from_usb->{KEYBOARD} : (), (map { $_->[0] } @$l), 'us_intl');
 
@@ -802,6 +802,7 @@ sub configureTimezone {
 	$o->{timezone}{ntp} = '';
     }
     install_steps::configureTimezone($o);
+    1;
 }
 
 #------------------------------------------------------------------------------
@@ -824,6 +825,23 @@ sub summary {
     my $mouse_name;
     my $format_mouse = sub { $mouse_name = translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) };
     &$format_mouse;
+
+    my $timezone_manually_set;
+    my $timezone_name = $o->{timezone}{timezone};  #- I want to update it from the country callback
+
+    my $country_name;
+    my $format_country = sub { $country_name = lang::c2name($o->{locale}{country}) };
+    &$format_country;
+    my $change_country = sub {
+	any::selectCountry($o, $o->{locale}) or return;
+	lang::write($o->{prefix}, $o->{locale});
+	&$format_country;
+	if (!$timezone_manually_set) {
+	    delete $o->{timezone};
+	    install_any::preConfigureTimezone($o);  #- now we can precise the timezone thanks to the country
+	    $timezone_name = $o->{timezone}{timezone};
+	}
+    };
 
     #- format printer description in a better way
     my $format_printers = sub {
@@ -861,13 +879,14 @@ sub summary {
 		  }, [
 { label => N("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}); &$format_mouse } },
 { label => N("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
-{ label => N("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
+{ label => N("Country"), val => \$country_name, clicked => sub { $change_country->() } },
+{ label => N("Timezone"), val => \$timezone_name, clicked => sub { my $ok = $o->configureTimezone(1); $timezone_manually_set ||= $ok; $timezone_name = $o->{timezone}{timezone} } },
 { label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
 { label => N("Bootloader"), val => \$o->{bootloader}, clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) }, format => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" } },
 { label => N("Graphical interface"), val => \$o->{raw_X}, clicked => sub { configureX($o, 'expert') }, format => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") } },
 { label => N("Network"), val => \$o->{netcnx}{type}, format => sub { $_[0] || N("not configured") }, clicked => sub { 
       require network::netconnect;
-      network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, $o->{lang} eq "fr_FR" && $o->{keyboard}{KEYBOARD} eq "fr", 1);
+      network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
   } },
     (map { 
         my $device = $_;
@@ -917,9 +936,7 @@ sub configurePrinter {
     my $printer = $o->{printer} ||= {};
     eval { add2hash($printer, printer::main::getinfo($o->{prefix})) };
 
-    $printer->{PAPERSIZE} = ($o->{lang} =~ /^en_US/ || 
-                             $o->{lang} =~ /^en_CA/ || 
-                             $o->{lang} =~ /^fr_CA/) ? 'Letter' : 'A4';
+    $printer->{PAPERSIZE} = ($o->{locale}{lang} eq 'en_US' || $o->{locale}{country} eq 'CA') ? 'Letter' : 'A4';
     printer::printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
 }

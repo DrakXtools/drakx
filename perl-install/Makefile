@@ -7,7 +7,7 @@ include Makefile.config
 
 POFILES   = $(shell ls share/po/*.po)
 MOFILES   = $(POFILES:%.po=%.mo)
-DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config apps.net_monitor ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps standalone/interactive_http rpcinfo-flushed.c standalone/service_harddrake.sh
+DISTFILES = *.pm $(PMS_DIRS) Makefile Makefile.config apps.net_monitor ddcprobe drakxtools.spec pam.net_monitor serial_probe share/po share/diskdrake.rc $(STANDALONEPMS) standalone/icons pixmaps pixmaps/langs standalone/interactive_http rpcinfo-flushed.c standalone/service_harddrake.sh
 OTHERS     = $(OTHERDIRS) $(OTHERFILES)
 OTHERDIRS  = tools/ddcprobe tools/serial_probe
 OTHERFILES = tools/rpcinfo-flushed.c
@@ -163,7 +163,7 @@ endif
 
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	-cd share ; cp -f *.png *.xpm $(DEST)/usr/share
-	-cd pixmaps ; cp -f *.png *.xpm $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
+	-cd pixmaps ; cp -af *.png *.xpm langs $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 

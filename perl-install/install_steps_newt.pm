@@ -52,7 +52,7 @@ sub exitInstall {
 sub selectLanguage {
     my ($o) = @_;
     $o->SUPER::selectLanguage;
-    lang::load_console_font($o->{lang});
+    lang::load_console_font($o->{locale});
 }
 
 

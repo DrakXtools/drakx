@@ -34,37 +34,18 @@ my %lang2keyboard =
   'cs'  => 'cz_qwerty:70 cz:50',
   'cy'  => 'uk:90',
   'da'  => 'dk:90',
-  'de'  => 'de_nodeadkeys:70 de:50',
-'de_AT' => 'de_nodeadkeys:70 de:50',
-'de_BE' => 'be:70 de_nodeadkeys:60 de:50',
-'de_CH' => 'ch_de:70 ch_fr:25 de_nodeadkeys:20 de:15',
-'de_DE' => 'de_nodeadkeys:70 de:50', 
-'de_LU' => 'de_nodeadkeys:70 de:50 fr:40 be:35', 
+  'de'  => 'de_nodeadkeys:70 de:50 be:50 ch_de:50',
   'el'  => 'gr:90',
   'en'  => 'us:90 us_intl:50',
-'en_US' => 'us:90 us_intl:50',
-'en_AU' => 'uk:70 us:60 us_intl:50',
-'en_CA' => 'qc:60 us:50 uk:40 us_intl:30',
-'en_GB' => 'uk:89 us:60 us_intl:50',
-'en_IE' => 'uk:89 us:60 us_intl:50',
-'en_NZ' => 'uk:70 us:60 us_intl:50',
-'en_ZA' => 'us:80 uk:50 us_intl:40',
+'en_US' => 'us:89 us_intl:50 qc:50 uk:50',
+'en_GB' => 'uk:89 us:60 us_intl:50 us:50',
   'eo'  => 'us_intl:89 dvorak:20',
   'es'  => 'es:85 la:80 us_intl:50',
-'es@tr' => 'es:85 la:80 us_intl:50',
-'es_AR' => 'la:80 us_intl:50 es:20',
-'es_ES' => 'es:90',
-'es_MX' => 'la:80 us_intl:50 es:20',
   'et'  => 'ee:90',
   'eu'  => 'es:89 fr:15',
   'fa'  => 'ir:90',
   'fi'  => 'fi:90',
-  'fr'  => 'fr:90',
-'fr_BE' => 'be:85 fr:5',
-'fr_CA' => 'qc:85 fr:5',
-'fr_CH' => 'ch_fr:70 ch_de:15 fr:10',
-'fr_FR' => 'fr:90',
-'fr_LU' => 'fr:70 de_nodeadkeys:50 de:40 be:35', 
+  'fr'  => 'fr:89 qc:85 be:85 ch_fr:70',
   'ga'  => 'uk:90',
   'gd'  => 'uk:90',
   'gl'  => 'es:90',
@@ -78,9 +59,7 @@ my %lang2keyboard =
   'id'  => 'us:90 us_intl:20',
   'is'  => 'is:90',
   'iu'  => 'iu:90',
-  'it'  => 'it:90',
-'it_CH' => 'ch_fr:80 ch_de:60 it:50',
-'it_IT' => 'it:90',
+  'it'  => 'it:89 ch_fr:50 ch_de:50',
   'ja'  => 'jp:80 us:50 us_intl:20',
   'ka'  => 'ge_la:80 ge_ru:50',
   'kl'  => 'dk:80 us_intl:30',
@@ -98,8 +77,7 @@ my %lang2keyboard =
   'mt'  => 'mt:55 mt_us:35 us_intl:10',
   'my'  => 'mm:90',
   'nb'  => 'no:85 dvorak_no:10',
-'nl_BE' => 'be:80 nl:10 us_intl:5',
-'nl_NL' => 'us_intl:80 nl:15 us:10 uk:5',
+  'nl'  => 'us_intl:80: be:70 nl:10 us:5',
   'nn'  => 'no:85 dvorak_no:10',
   'no'  => 'no:85 dvorak_no:10',
   'oc'  => 'fr:90',
@@ -108,21 +86,15 @@ my %lang2keyboard =
   'pl'  => 'pl:80 pl2:60',
   'pp'  => 'br:80 la:20 pt:10 us_intl:30',
 'pt_BR' => 'br:80 la:20 pt:10 us_intl:30',
-'pt_PT' => 'pt:80',
+  'pt'  => 'pt:80',
   'ro'  => 'ro2:80 ro:40 us_intl:10',
-  'ru'  => 'ru:85 ru_yawerty:80',
-'ru_RU' => 'ru:85 ru_yawerty:80',
-'ru_UA' => 'ua:50 ru:40 ru_yawerty:30',
+  'ru'  => 'ru:85 ru_yawerty:80 ua:50',
   'sk'  => 'sk_qwerty:80 sk:70',
   'sl'  => 'si:80 hr:50',
   'sp'  => 'sr:80',
-'sp_YU' => 'sr:80',
   'sq'  => 'al:80',
   'sr'  => 'yu:80',
-'sr_YU' => 'yu:80',
-  'sv'  => 'se:85 fi:30 dvorak_se:10',
-'sv_FI' => 'fi:85 sv:20',
-'sv_SE' => 'se:85 fi:20',
+  'sv'  => 'se:85 fi:30 dvorak_se:10 sv:10',
   'ta'  => 'tscii:80 tml:20',
   'tg'  => 'tj:80 ru_yawerty:40',
   'th'  => 'th:90',
@@ -133,7 +105,6 @@ my %lang2keyboard =
   'vi'  => 'vn:80 us:60 us_intl:50',
   'wa'  => 'be:85 fr:5',
 'zh_CN' => 'us:60',
-'zh_HK' => 'us:60',
 'zh_TW' => 'us:60',
 );
 
@@ -371,6 +342,7 @@ sub lang2keyboards {
 }
 sub lang2keyboard {
     my ($l) = @_;
+
     my $kb = lang2keyboards($l)->[0][0];
     { KEYBOARD => $keyboards{$kb} ? $kb : 'us' }; #- handle incorrect keyboard mapping to us.
 }
@@ -525,10 +497,10 @@ sub check {
 	$not_ok = 1;
     };
 
-    if (my @l = grep { is_empty_array_ref(lang2keyboards($_)) } lang::list()) {
+    if (my @l = grep { is_empty_array_ref(lang2keyboards($_)) } lang::list_langs()) {
 	$warn->("no keyboard for langs " . join(" ", @l));
     }
-    foreach my $lang (lang::list()) {
+    foreach my $lang (lang::list_langs()) {
 	my $l = lang2keyboards($lang);
 	foreach (@$l) {
 	    0 <= $_->[1] && $_->[1] <= 100 or $err->("invalid value $_->[1] in $lang2keyboard{$lang} for $lang in \%lang2keyboard keyboard.pm");

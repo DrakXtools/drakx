@@ -88,31 +88,36 @@ sub set_help { 1 }
 #------------------------------------------------------------------------------
 sub selectLanguage {
     my ($o) = @_;
-    lang::set($o->{lang}, !$o->isa('interactive::gtk'));
-    $o->{langs} ||= { $o->{lang} => 1 };
+    lang::set($o->{locale}{lang}, !$o->isa('interactive::gtk'));
+    $o->{locale}{langs} ||= { $o->{locale}{lang} => 1 };
 
-    log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{langs}));
+    if (!exists $o->{locale}{country}) {
+	lang::l2locale($o->{locale}{lang}) =~ /^.._(..)/;
+	$o->{locale}{country} = $1;
+    }
+
+    log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{locale}{langs}));
 
     #- for auto_install compatibility with old $o->{keyboard} containing directly $o->{keyboard}{KEYBOARD}
     $o->{keyboard} = { KEYBOARD => $o->{keyboard} } if $o->{keyboard} && !ref($o->{keyboard});
 
     if (!$o->{keyboard} || $o->{keyboard}{unsafe}) {
-	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{lang});
+	$o->{keyboard} = keyboard::from_usb() || keyboard::lang2keyboard($o->{locale}{lang});
 	$o->{keyboard}{unsafe} = 1;
 	keyboard::setup($o->{keyboard}) if !$::live;
     }
 
     addToBeDone {
-	lang::write_langs($o->{prefix}, $o->{langs});
+	lang::write_langs($o->{prefix}, $o->{locale}{langs});
     } 'formatPartitions' unless $::g_auto_install;
     addToBeDone {
-	lang::write($o->{prefix}, $o->{lang});
+	lang::write($o->{prefix}, $o->{locale});
     } 'installPackages' unless $::g_auto_install;
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($o) = @_;
-    $o->{keyboard}{KBCHARSET} = lang::lang2charset($o->{lang});
+    $o->{keyboard}{KBCHARSET} = lang::l2charset($o->{locale}{lang});
     keyboard::setup($o->{keyboard});
 
     addToBeDone {
@@ -165,7 +170,7 @@ sub doPartitionDisksAfter {
     }
 
     fs::set_removable_mntpoints($o->{all_hds});
-    fs::set_all_default_options($o->{all_hds}, $o->{useSupermount}, $o->{security}, lang::fs_options($o->{lang}))
+    fs::set_all_default_options($o->{all_hds}, $o->{useSupermount}, $o->{security}, lang::fs_options($o->{locale}))
 	if !$o->{isUpgrade};
 
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
@@ -454,14 +459,14 @@ EOF
 
     $o->install_urpmi;
 
-    if ($o->{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
+    if ($o->{locale}{lang} =~ /^(zh_TW|th|vi|be|bg)/) {
 	#- skip since we don't have the right font (it badly fails at least for zh_TW)
-    } elsif (my $LANG = lang::lang2LANG($o->{lang})) {
-	my $kde_charset = lang::charset2kde_charset(lang::lang2charset($o->{lang}));
+    } else {
+	my $kde_charset = lang::charset2kde_charset(lang::l2charset($o->{locale}{lang}));
 	my $welcome = c::to_utf8(N("Welcome to %s", '%n'));
 	substInFile { 
 	    s/^(GreetString)=.*/$1=$welcome/;
-	    s/^(Language)=.*/$1=$LANG/;
+	    s/^(Language)=.*/$1=$o->{locale}{lang}/;
 	    if (!member($kde_charset, 'iso8859-1', 'iso8859-15')) { 
 		#- don't keep the default for those
 		s/^(StdFont)=.*/$1=*,12,5,$kde_charset,50,0/;

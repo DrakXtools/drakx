@@ -39,7 +39,7 @@ $o = $::o = {
 #-    packages   => [ qw() ],
     partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0 }, #-, readonly => 0 },
     authentication => { md5 => 1, shadow => 1 },
-    lang         => 'en_US',
+    locale         => { lang => 'en_US' },
 #-    isUpgrade    => 0,
     toRemove     => [],
     toSave       => [],
@@ -366,8 +366,8 @@ sub main {
 	my ($n, $v) = @_;
 	my $f = ${{
 	    oem       => sub { $::oem = $v },
-	    lang      => sub { $o->{lang} = $v },
-	    flang     => sub { $o->{lang} = $v; push @auto, 'selectLanguage' },
+	    lang      => sub { $o->{locale}{lang} = $v },
+	    flang     => sub { $o->{locale}{lang} = $v; push @auto, 'selectLanguage' },
 	    method    => sub { $o->{method} = $v },
 	    pcmcia    => sub { $o->{pcmcia} = $v },
 	    vga16     => sub { $o->{vga16} = $v },
@@ -539,7 +539,7 @@ sub main {
     #- needed very early for install_steps_gtk
     eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
 
-    $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
+    $o->{locale}{lang} = lang::set($o->{locale}{lang}) if $o->{locale}{lang} ne 'en_US'; #- mainly for defcfg
 
     start_i810fb();
 

@@ -285,7 +285,7 @@ sub preConfigureTimezone {
     #- can't be done in install cuz' timeconfig %post creates funny things
     add2hash($o->{timezone}, timezone::read()) if $o->{isUpgrade};
 
-    $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
+    $o->{timezone}{timezone} ||= timezone::bestTimezone($o->{locale}{country});
 
     my $utc = every { !isFat_or_NTFS($_) } @{$o->{fstab}};
     my $ntp = timezone::ntp_server($o->{prefix});
@@ -358,7 +358,6 @@ sub setDefaultPackages {
 		$o->{compssUsersChoice}{$_} = 1 foreach 'X', 'MONITORING', 'NETWORKING_REMOTE_ACCESS_SERVER';
 	    } else {
 		$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-		$o->{lang} eq 'eu_ES' and $o->{compssUsersChoice}{KDE} = 0;
 		$o->{compssUsersChoice}{$_} = 1
 		  foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 	    }
@@ -393,15 +392,15 @@ sub setDefaultPackages {
       detect_devices::matching_desc('[nN]Vidia.*Quadro');
 
 
-    foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
+    foreach (lang::langs($o->{locale}{langs})) {
 	pkgs::packageByName($o->{packages}, "locales-$_") or next;
 	push @{$o->{default_packages}}, "locales-$_";
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
     }
-    foreach (lang::langsLANGUAGE($o->{langs})) {
+    foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
 	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
     }
-    $o->{compssUsersChoice}{'CHARSET"' . lang::lang2charset($o->{lang}) . '"'} = 1;
+    $o->{compssUsersChoice}{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
 }
 
 sub unselectMostPackages {
@@ -1046,7 +1045,7 @@ sub copy_advertising {
 
     my $f;
     my $source_dir = "Mandrake/share/advertising";
-    foreach ("." . $o->{lang}, "." . substr($o->{lang},0,2), '') {
+    foreach ("." . $o->{locale}{lang}, "." . substr($o->{locale}{lang},0,2), '') {
 	$f = getFile("$source_dir$_/list") or next;
 	$source_dir = "$source_dir$_";
     }

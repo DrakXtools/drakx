@@ -34,7 +34,7 @@ sub leavingStep {
 sub selectLanguage {
     my ($o, $first_time) = @_;
     $o->SUPER::selectLanguage($first_time);
-    lang::load_console_font($o->{lang});
+    lang::load_console_font($o->{locale});
 }
 
 1;
