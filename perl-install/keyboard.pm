@@ -535,13 +535,14 @@ sub write {
     $keyboard->{KEYTABLE} = keyboard2kmap($keyboard);
 
     setVarsInSh("$::prefix/etc/sysconfig/keyboard", $keyboard);
-    run_program::rooted($::prefix, 'dumpkeys', '>', '/etc/sysconfig/console/default.kmap') or log::l("dumpkeys failed");
     if (arch() =~ /ppc/) {
 	my $s = "dev.mac_hid.keyboard_sends_linux_keycodes = 1\n";
 	substInFile { 
             $_ = '' if /^\Qdev.mac_hid.keyboard_sends_linux_keycodes/;
             $_ .= $s if eof;
         } "$::prefix/etc/sysctl.conf";
+    } else {
+	run_program::rooted($::prefix, 'dumpkeys', '>', '/etc/sysconfig/console/default.kmap') or log::l("dumpkeys failed");
     }
 }
 
