@@ -74,10 +74,16 @@ foreach (keyboard::loadkeys_files()) {
 }
 
 my $perl_version = join ".", unpack "C3", $^V;
-@files = map { chomp; s/PERL_VERSION/$perl_version/g; s|/LIB/|/$lib/|g; $_ } (cat_("list"), cat_(`../tools/specific_arch list`));
-@files = `ls -d @files`; 
-$? == 0 or exit 1;
-
+my @bad;
+@files = map { 
+    chomp;
+    s/PERL_VERSION/$perl_version/g;
+    s|/LIB/|/$lib/|g;
+    my @l = glob($_) or push @bad, $_;
+    m|\*.*/| && @l != 1 and die "multiple match for $_\n";
+    @l;
+} (cat_("list"), cat_(`../tools/specific_arch list`));
+@bad and die "files missing\n" . join("\n", @bad) . "\n";
 install_l(@files);
 
 foreach (cat_("aliases")) {
