@@ -107,9 +107,23 @@ sub ask {
 			    });
     my $W = my_gtk->new(_("Resolution"));
     my ($x, $y, $w_popup);
+    my $nopop = sub { $w_popup and $w_popup->destroy };
+    my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup=new Gtk::Window (-popup),
+        				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
+        				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
+        					   gtkset_justify(new Gtk::Label($_[0]), 0))),
+        					   button_press_event => sub { $nopop->() }
+		      ))), $x, $y) };
+    my $update_service = sub {
+		my $started = -e "/var/lock/subsys/$_[0]";
+                my $action = $started ? "stop" : "start";
+                $_[1]->set($started ? _("running") : _("stopped"));
+                $started, $action;
+    };
     gtkadd($W->{window}, gtkadd(my $b = new Gtk::EventBox(), gtkpack_($W->create_box_with_title(_("Services and deamons")),
 	1, gtkset_usize(createScrolledWindow(create_packtable({ col_spacings => 10, row_spacings => 3 },
 	    map {
+                my $service = $_;
         	my $infos_old = description($_, $prefix);
 		my $infos;
 		while ($infos_old =~ s/(.{40})//) {
@@ -117,26 +131,31 @@ sub ask {
 		    $infos .= "$1\n$2";
                 }
                 $infos .= $infos_old;
-                $infos ||= "No additionnal information\n about this service, sorry.";
-        	my $stopped = `service $_ status` =~ /stop/;
-		my $started = `service $_ status` =~ /running/;
-		my $state; $started && -e "/var/lock/subsys/$_" and $state="running";
-		$stopped and $state="running";
-		$state ||= "unknown";
-		my $w;
+                $infos ||= _("No additionnal information\nabout this service, sorry.");
+		my $l = new Gtk::Label();
+                my ($started, $action) = $update_service->($service, gtkset_justify($l, 0));
 		[ gtkpack__(new Gtk::HBox(0,0), $_),
-		  gtkpack__(new Gtk::HBox(0,0), $state),
-		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button("Infos"), clicked => sub {
-                          $w_popup and $w_popup->destroy;
-			  gtkmove(gtkshow(gtkadd($w_popup=new Gtk::Window (-popup),
-        				       gtksignal_connect(gtkadd(new Gtk::EventBox(),
-        				           gtkadd(gtkset_shadow_type(new Gtk::Frame, 'etched_out'),
-        					   gtkset_justify(new Gtk::Label($infos), 0))),
-        					   button_press_event => sub { $w_popup->destroy; }
-		      ))), $x, $y);}))
+		  gtkpack__(new Gtk::HBox(0,0), $l),
+		  gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button("Infos"), clicked => sub { $display->($infos) })),
+                  gtkpack__(new Gtk::HBox(0,0), gtkset_active(gtksignal_connect(
+                          new Gtk::CheckButton(_("On boot")),
+                          clicked => sub { if ($_[0]->active) {
+                                               "@$on_services" =~ /$service/ or push(@$on_services,$service)
+                                           } else {
+                                               @$on_services = grep(!/$service/, @$on_services)
+                                        }}), "@$on_services" =~ /$service/ )),
+		  map { my $a = $_;
+                      gtkpack__(new Gtk::HBox(0,0), gtksignal_connect(new Gtk::Button(_($a)),
+                          clicked => sub { my $c = "service $service " . lc($a); local $_=`$c`; s/\033\[[^mG]*[mG]//g;
+                                           ($started, $action) = $update_service->($service, $l);
+                                           $display->($_);
+                                         }
+                      )) } ("Start", "Stop","Restart")
 		]
 	    }
-            @$l)), 450, 400)))
+            @$l)), 500, 400),
+            0, gtkpack(gtkset_border_width(new Gtk::HBox(0,0),5), $W->create_okcancel)
+            ))
 	  );
     $b->set_events(["pointer_motion_mask"]);
     $b->signal_connect( motion_notify_event => sub { my ($w, $e) = @_;
@@ -144,6 +163,7 @@ sub ask {
                                                                $x = $e->{'x'}+$ox; $y = $e->{'y'}+$oy; });
     $b->signal_connect( button_press_event => sub { $w_popup and $w_popup->destroy;});
     $W->main or return;
+    ($l, $on_services);
 }
 
 sub doit {
