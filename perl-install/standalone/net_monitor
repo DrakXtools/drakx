@@ -32,6 +32,7 @@ use common;
 use network::netconnect;
 use network::tools;
 use MDK::Common::Globals "network", qw($in);
+use POSIX;
 
 if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
 my $force = "@ARGV" =~ /--force/;
@@ -142,6 +143,22 @@ Glib::Source->remove($time_tag2);
 $time_tag2 = Glib::Timeout->add(20000, \&update);
 
 connection() if $connect && !$isconnected || $disconnect && $isconnected;
+
+my $tool_pid;
+
+$SIG{CHLD} = sub {
+    my $child_pid;
+    do { 
+        $child_pid = waitpid(-1, POSIX::WNOHANG);
+        if ($tool_pid eq $child_pid) {
+            undef $tool_pid;
+            $button_connect->set_sensitive(1);
+            $button_close->set_sensitive(1);
+        }
+    } while $child_pid > 0;
+};
+
+
 $window1->main;
 ugtk2->exit(0);
 
@@ -236,9 +253,9 @@ sub connection() {
     gtkflush();
 
     if ($wasconnected == 1) {
-        stop_connection();
+        $tool_pid = stop_connection();
     } else {
-        start_connection();
+        $tool_pid = start_connection();
     }
 }
 
