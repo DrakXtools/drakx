@@ -7,7 +7,15 @@ use log;
 
 1;
 
-sub run($@) { rooted('', @_) }
+sub run_or_die {
+    my ($name, @args) = @_;
+    run($name, @args) or die "$name failed\n";
+}
+sub rooted_or_die {
+    my ($root, $name, @args) = @_;
+    rooted($root, $name, @args) or die "$name failed\n";
+}
+sub run { rooted('', @_) }
 
 sub rooted {
     my ($root, $name, @args) = @_;
