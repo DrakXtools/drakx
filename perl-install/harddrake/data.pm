@@ -379,7 +379,7 @@ our @tree =
       icon => "hw_mouse.png",
       configurator => "$sbindir/mousedrake",
       detector => sub {
-          f(grep { $_->{driver} =~ /^Mouse:|^Tablet!/ } @devices),
+          f(grep { $_->{driver} =~ /^Mouse:|^Tablet:/ } @devices),
             grep { $_->{bus} ne 'usb' && $_->{driver} =~ /mouse/ } detect_devices::getInputDevices();
       },
       checked_on_boot => 1,
