@@ -347,7 +347,10 @@ you select the option \"Automatic IP\" below.
   \"IP address\". If you don't know or are not sure if you need to select this option, ask your network administrator."),
 
 configureNetworkHost => __("You may now enter your host name if needed. If you
-don't know or are not sure what to enter, ask yout network administrator."),
+don't know or are not sure what to enter, ask your network administrator."),
+
+configureNetworkHostDHCP => __("You may now enter your host name if needed. If you
+don't know or are not sure what to enter, leave blank."),
 
 configureNetworkISP =>
  __("You may now enter dialup options. If you're not sure what to enter, the

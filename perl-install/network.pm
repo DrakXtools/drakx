@@ -267,6 +267,7 @@ sub configureNetwork {
     #-	  }
     if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
 	my $dhcp_hostname = $netc->{HOSTNAME};
+	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from_entries_ref(_("Configuring network"),
 _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
@@ -328,6 +329,7 @@ sub configureNetworkNet {
     $netc->{dnsServer} ||= dns($intf->{IPADDR});
     $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
 
+    $::isInstall and $in->set_help('configureNetworkHost');
     $in->ask_from_entries_refH(_("Configuring network"),
 _("Please enter your host name.
 Your host name should be a fully-qualified host name,
@@ -344,7 +346,7 @@ You may also enter the IP address of the gateway if you have one"),
 sub miscellaneousNetwork {
     my ($in, $clicked) = @_;
     my $u = $::o->{miscellaneous} ||= {};
-    $::isStandalone or $in->set_help('configureNetworkProxy');
+    $::isInstall and $in->set_help('configureNetworkProxy');
     !$::beginner || $clicked and $in->ask_from_entries_ref('',
        _("Proxies configuration"),
        [ _("HTTP proxy"),
