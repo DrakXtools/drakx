@@ -98,9 +98,8 @@ sub exitInstall {
     my ($o, $alldone) = @_;
     return if $o->{autoExitInstall};
 
-    if ($graphical) {
-	my $O = bless $o, "install_steps_gtk";
-	$O->exitInstall($alldone);
+    if ($o->{interactive}) {
+	(bless $o, "install_steps_$o->{interactive}")->exitInstall($alldone);
     } else {
 	install_steps::exitInstall($o);
 	print "\a";
