@@ -10,7 +10,7 @@ use common;
 use modules;
 
 
-sub parameters {
+sub raw_parameters {
   my ($module) = @_;
 
   my $modinfo = '/sbin/modinfo';
@@ -46,6 +46,16 @@ sub parameters {
       }
       #- print "STILL HAVE ($_)\n" if $_;
 
+      push @parameters, [ $name, $1, $description, $min, $max, $is_a_number ];
+  }
+  @parameters;
+}
+
+sub parameters {
+  my ($module) = @_;
+  my @parameters ;
+  foreach (raw_parameters($module)) {
+    my ($name, $format_, $description, $min, $max, $is_a_number) = @$_;
       my $format =
 	$min == 1 && $max == 1 ?
 	  ($is_a_number ? _("a number") : '') :
