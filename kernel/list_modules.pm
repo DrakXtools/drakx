@@ -186,7 +186,7 @@ our %l = (
       qw(linear raid0 raid1 raid5 lvm-mod multipath dm-mod),
     ],
     mouse => [
-      qw(busmouse msbusmouse logibusmouse pcips2 qpmouse serial synclinkmp atixlmouse),
+      qw(busmouse msbusmouse logibusmouse pcips2 qpmouse generic_serial synclinkmp atixlmouse),
       if_(arch() =~ /ppc/, 'macserial'),
       qw(hid mousedev usbhid usbmouse),
     ],
