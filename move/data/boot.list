@@ -79,6 +79,7 @@
 /tmp/live_tree/etc/services
 /tmp/live_tree/etc/shells
 /tmp/live_tree/etc/sudoers
+/tmp/live_tree/etc/syslog.conf
 /tmp/live_tree/lib/i686
 /tmp/live_tree/lib/ld-2.3.2.so
 /tmp/live_tree/lib/libcom_err.so.2.1
@@ -114,6 +115,7 @@
 /tmp/live_tree/sbin/consoletype
 /tmp/live_tree/sbin/devfsd
 /tmp/live_tree/sbin/hotplug
+/tmp/live_tree/sbin/ifconfig
 /tmp/live_tree/sbin/init
 /tmp/live_tree/sbin/initlog
 /tmp/live_tree/sbin/insmod-24
@@ -186,11 +188,9 @@
 /tmp/live_tree/usr/bin/dirname
 /tmp/live_tree/usr/bin/dumpkeys
 /tmp/live_tree/usr/bin/kab2kabc
-/tmp/live_tree/usr/bin/kalarmd
 /tmp/live_tree/usr/bin/kde-config
 /tmp/live_tree/usr/bin/kdeinit
 /tmp/live_tree/usr/bin/killall
-/tmp/live_tree/usr/bin/korgac
 /tmp/live_tree/usr/bin/krootwarning
 /tmp/live_tree/usr/bin/ksplash
 /tmp/live_tree/usr/bin/kwrapper
@@ -279,8 +279,6 @@
 /tmp/live_tree/usr/lib/kicker.so
 /tmp/live_tree/usr/lib/klauncher.la
 /tmp/live_tree/usr/lib/klauncher.so
-/tmp/live_tree/usr/lib/klipper.la
-/tmp/live_tree/usr/lib/klipper.so
 /tmp/live_tree/usr/lib/knotify.la
 /tmp/live_tree/usr/lib/knotify.so
 /tmp/live_tree/usr/lib/ksmserver.la
@@ -313,7 +311,7 @@
 /tmp/live_tree/usr/lib/libDrakX/modules/interactive.pm
 /tmp/live_tree/usr/lib/libDrakX/mouse.pm
 /tmp/live_tree/usr/lib/libDrakX/network.pm
-/tmp/live_tree/usr/lib/libDrakX/network/network.pm
+/tmp/live_tree/usr/lib/libDrakX/network
 /tmp/live_tree/usr/lib/libDrakX/partition_table.pm
 /tmp/live_tree/usr/lib/libDrakX/partition_table/raw.pm
 /tmp/live_tree/usr/lib/libDrakX/printer
@@ -357,7 +355,6 @@
 /tmp/live_tree/usr/lib/libgtk-x11-2.0.so.0.200.4
 /tmp/live_tree/usr/lib/libjpeg.so.62.0.0
 /tmp/live_tree/usr/lib/libkabc.so.1.1.0
-/tmp/live_tree/usr/lib/libkalarmd.so.0.0.0
 /tmp/live_tree/usr/lib/libkcal.so.2.0.0
 /tmp/live_tree/usr/lib/libkdecore.so.4.1.0
 /tmp/live_tree/usr/lib/libkdefx.so.4.1.0
@@ -449,6 +446,7 @@
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/DataStructure.pm
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/File.pm
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/Func.pm
+/tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/Globals.pm
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/Math.pm
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/String.pm
 /tmp/live_tree/usr/lib/perl5/vendor_perl/5.8.1/MDK/Common/System.pm
@@ -608,24 +606,22 @@
 /tmp/live_tree/usr/share/config/kcookiejarrc
 /tmp/live_tree/usr/share/config/kdebug.areas
 /tmp/live_tree/usr/share/config/kdebugrc
+/tmp/live_tree/usr/share/config/kdedrc
 /tmp/live_tree/usr/share/config/kdeglobals
 /tmp/live_tree/usr/share/config/kdeprintrc
 /tmp/live_tree/usr/share/config/kdesktoprc
 /tmp/live_tree/usr/share/config/kdm/kdmrc
 /tmp/live_tree/usr/share/config/khotkeysrc
 /tmp/live_tree/usr/share/config/kickerrc
-/tmp/live_tree/usr/share/config/klipperrc
 /tmp/live_tree/usr/share/config/konsolerc
 /tmp/live_tree/usr/share/config/krootwarningrc
 /tmp/live_tree/usr/share/config/kwritedrc
-/tmp/live_tree/usr/share/icons/crystalsvg/128x128/apps/klipper.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/about_kde.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/configure.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/contents.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/exit.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/history_clear.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kicker.png
-/tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/klipper.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kmail.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kmenu.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/konqueror.png
