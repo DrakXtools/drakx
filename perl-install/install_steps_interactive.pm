@@ -637,7 +637,7 @@ sub chooseCD {
     }
 
     if (install_any::method_is_from_ISO_images($o->{method})) {
-        $mediumsDescr{$_} = defined(install_any::find_ISO_image_labelled($_)) || 0 foreach (@mediumsDescr);
+        $mediumsDescr{$_} = defined(install_any::find_ISO_image_labelled($_)) || 0 foreach @mediumsDescr;
     } elsif ($method eq "cdrom") {
         #- if no other medium available or a poor beginner, we are choosing for him!
         #- note first CD is always selected and should not be unselected!
