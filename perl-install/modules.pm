@@ -95,7 +95,7 @@ sub load_category {
 	eval { load([ $_->{driver}, $_->{options} ]) };
 	$_->{error} = $@;
 
-	!($@ && $_->{try});
+	!($_->{error} && $_->{try});
     } probe_category($category, $probe_type),
       map { { driver => $_, description => $_, try => 1 } } @try_modules;
 }
