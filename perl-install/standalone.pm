@@ -118,7 +118,7 @@ foreach (@ARGV) {
 	version();
 	exit(0);
     } elsif (/^--embedded$/) {
-	($::XID, $::CCPID) = splice @ARGV, $i, 2;
+	$::XID = splice @ARGV, $i, 1;
 	$::isEmbedded = 1;
     } elsif (/^--expert$/) {
 	$::expert = 1;

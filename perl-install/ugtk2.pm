@@ -734,7 +734,7 @@ add_icon_path(@icon_paths,
 # launch the main loop. Use $o->{retval} to indicate that the window needs
 # to terminate.
 # Set $::isWizard to have a wizard appearance.
-# Set $::isEmbedded, $::CCPID and $::XID so that the window will plug.
+# Set $::isEmbedded and $::XID so that the window will plug.
 
 sub new {
     my ($type, $title, %opts) = @_;
