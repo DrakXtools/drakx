@@ -80,14 +80,13 @@ so the messages will be displayed in english during installation") if $ENV{LANGU
 sub acceptLicense {
     my ($o) = @_;
 
-    my $r = $o->ask_from_list_(N("License agreement"), 
-			       formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()), 
-			       [ N_("Accept"), N_("Refuse") ], "Refuse") or die 'already displayed';
+    my $r = 'Refuse';
 
-    if ($r ne "Accept") {
-	$o->ask_yesorno('', N("Are you sure you refuse the licence?"), 1) and $o->exit;
-	acceptLicense($o);
-    }
+    $o->ask_from_({ title => N("License agreement"), 
+		    messages => formatAlaTeX(install_messages::main_license() . "\n\n\n" . install_messages::warning_about_patents()), 
+		    callbacks => { ok_disabled => sub { $r eq 'Refuse' } },
+		  },
+		  [ { list => [ N_("Accept"), N_("Refuse") ], val => \$r, type => 'list' } ]) or die 'already displayed';
 }
 
 #------------------------------------------------------------------------------
