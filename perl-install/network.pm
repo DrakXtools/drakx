@@ -306,24 +306,24 @@ You may also enter the IP address of the gateway if you have one"),
 }
 
 
-sub configureNetwork2 {
-    my ($in, $prefix, $netc, $intf) = @_;
-    my $etc = "$prefix/etc";
+  sub configureNetwork2 {
+      my ($in, $prefix, $netc, $intf) = @_;
+      my $etc = "$prefix/etc";
 
-    write_conf("$etc/sysconfig/network", $netc);
-    write_resolv_conf("$etc/resolv.conf", $netc);
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$intf};
-    add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } @{$intf});
-    sethostname($netc) unless $::testing;
-    addDefaultRoute($netc) unless $::testing;
+      write_conf("$etc/sysconfig/network", $netc);
+      write_resolv_conf("$etc/resolv.conf", $netc);
+      write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach @{$intf};
+      add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } @{$intf});
+      sethostname($netc) unless $::testing;
+      addDefaultRoute($netc) unless $::testing;
 
-    $in->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$intf};
-    # Handle also pump (this is still in initscripts no?)
-    $in->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$intf};
-    #-res_init();		#- reinit the resolver so DNS changes take affect
+      $in->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$intf};
+      # Handle also pump (this is still in initscripts no?)
+      $in->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$intf};
+      #-res_init();		#- reinit the resolver so DNS changes take affect
 
-    any::miscellaneousNetwork($in, $prefix);
-}
+      any::miscellaneousNetwork($in, $prefix);
+  }
 
 
 sub configureNetworkIntf {
