@@ -143,9 +143,9 @@ sub gtkcolor($$$) {
     my ($r, $g, $b) = @_;
 
     my $color = bless {}, 'Gtk::Gdk::Color';
-    $color->red  ($r << 8);
-    $color->green($g << 8);
-    $color->blue ($b << 8);
+    $color->red  ($r);
+    $color->green($g);
+    $color->blue ($b);
     gtkroot()->get_colormap->color_alloc($color);
 }
 
@@ -289,7 +289,7 @@ sub _create_window($$) {
     my $f = new Gtk::Frame(undef);
     $w->set_name("Title");
 
-    if ($::isStandalone || $o->{no_border}) {
+    if ($::isStandalone || $o->{no_border} || 1) {
 	gtkadd($w, $f);
     } else {
 	my $t = new Gtk::Table(0, 0, 0);

@@ -14,12 +14,24 @@ use c;
 
 $size_correction_ratio = 1.04;
 
-1;
-
+my @skip_list = qw(
+XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
+XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
+XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
+MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
+hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
+hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
+);#)
 
 sub Package {
     my ($packages, $name) = @_;
     $packages->{$name} or log::l("unknown package `$name'") && undef;
+}
+
+sub allpackages {
+    my ($packages) = @_;
+    my %skip_list; @skip_list{@skip_list} = ();
+    grep { !exists $skip_list{$_->{name}} } values %$packages;
 }
 
 sub select($$;$) {
@@ -221,7 +233,9 @@ sub setSelectedFromCompssList($$$$$) {
 	defined $ind or log::l("unknown install class $install_class in compssList"), return;
 
 	my @values = map { $_->{values}[$ind] } @packages;
-	sort { $values[$b] <=> $values[$a] } 0 .. $#packages;
+	sort { $values[$b] <=> $values[$a] } 
+	  grep { $packages[$_]->{values}[$ind] } #- remove null values (won't get installed)
+	    0 .. $#packages;
     };
     foreach (@places) {
 	my $p = $packages[$_];
@@ -320,3 +334,5 @@ sub install($$) {
 
     $_->{installed} = 1 foreach @$toInstall;
 }
+
+1;

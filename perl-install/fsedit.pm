@@ -55,7 +55,7 @@ sub hds($$) {
 
 	eval { partition_table::read($hd, $flags->{clearall}) };
 	if ($@) {
-	    &cdie($@) unless $flags->{eraseBadPartitions};
+	    cdie($@) unless $flags->{eraseBadPartitions};
 	    partition_table_raw::zero_MBR($hd);
 	}
 	push @hds, $hd;

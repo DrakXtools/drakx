@@ -579,15 +579,19 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	my $c = $o->ask_from_list_('', 
 _("Here are the following entries in lilo
 You can add some more or change the existent ones."),
-		[ (map_each{ "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}), __("Add"), __("Done") ],
+		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
 	);
 	$c eq "Done" and last;
 
-	if ($c eq "Add") { }
+	my $e = {};
+	my $name = '';
 
-	my ($name) = $c =~ /\((.*?)\)/;
-	my $e = $b->{entries}{$name};
-	my $default = $e->{label} eq $b->{default};
+	if ($c ne "Add") { 
+	    ($name) = $c =~ /\((.*?)\)/;
+	    $e = $b->{entries}{$name};
+	}
+	my $old_name = $name;
+	my $default = my $old_default = $e->{label} eq $b->{default};
 	    
 	my @l;
 	if ($e->{type} eq "image") { 
@@ -602,6 +606,7 @@ _("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
 	} else {
 	    @l = ( 
 _("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Table") => { val => \$e->{table}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}} ], not_edit => !$::expert },
 _("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
 	    );
 	    @l = @l[0..1] if $::beginner;
@@ -618,7 +623,10 @@ _("Default") => { val => \$default, type => 'bool' },
 				 [ grep_index {  odd($::i) } @l ],
 				 ) or return;
 
-	$b->{default} = $default && $e->{label};
+	$b->{default} = $old_default ^ $default ? $default && $e->{label} : $b->{default};
+
+	delete $b->{entries}{$old_name};
+	$b->{entries}{$name} = $e;
     }
     $o->SUPER::setupBootloader;
 }
@@ -637,7 +645,7 @@ Remove the boot media and press return to reboot.
 For information on fixes which are available for this release of Linux Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
-install chapter of the Official Linux Mandrake User's Guide."));
+install chapter of the Official Linux Mandrake User's Guide.")) if $alldone;
 }
 
 

@@ -183,12 +183,14 @@ sub catch_cdie(&&) {
     &$f();
 }
 
-sub cdie {
-    $@ = join '', @_;
+sub cdie($;&) {
+    print "JJJJ\n";
+    my ($err, $f) = @_;
     foreach (@common::cdie_catches) {
-	&{$_}(@_) and return;
+	$@ = $err;
+	&{$_}(\$err) and return;
     }
-    die join '', @_;
+    die $err;
 }
 
 sub all {

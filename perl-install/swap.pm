@@ -74,7 +74,7 @@ sub make($;$) {
 	$version = 1;
     }
 
-    $nbpages >= 10 or die "swap area needs to be at least " . 10 * $pagesize >> 10 . "kB";
+    $nbpages >= 10 or die "swap area needs to be at least " . (10 * $pagesize >> 10) . "kB";
 
     -b $devicename or $checkBlocks = 0;
     my $rdev = (stat $devicename)[6];# or log::l("stat of $devicename failed: $!");
