@@ -1,5 +1,48 @@
 2001/01/11  Pixel  <pixel@mandrakesoft.com>
 
+	* interactive_gtk.pm (ask_from_entries_refW): apply "format" on label when
+	icon is missing for iconlist
+	(ask_from_entries_refW): handle "canceled" callback. Permits to overrule
+	the cancel.
+
+	* install_steps.pm (configureX): call directly $o->pkg_install, no need to
+	add 'XFree86-' at
+	the beginning
+	(addUser): use any::write_passwd_user
+	(setRootPassword): use any::write_passwd_user
+	(configureX): fix bad $install given to Xconfigurator::main
+
+	* any.pm (write_passwd_user): add or update an entry in /etc/passwd
+	(ask_users): created, interactively ask users to add (used in
+	adduserdrake
+	and install)
+	(allocUsers, addUsers): changed the prototype
+	(setupBootloader): grep out fat partitions for the "Boot device"
+	propositions (people are too stupid)
+
+	* my_gtk.pm (main): third argument is a function to call before leaving in
+	case of
+	"cancel" clicked.
+
+	* install_any.pm (g_auto_install): deep copy of $o->{users} because we're
+	modifying it
+
+	* install_steps_interactive.pm (addUser): use any::ask_users
+
+	* standalone/adduserdrake: use any::ask_users
+
+	* Xconfig.pm (getinfoFromDDC): removed devices::make("/dev/zero") (now in
+	install2::main)
+
+	* install2.pm (main): move devices::make("/dev/zero") needed by ddcxinfos
+	here
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): "canceled"
+	callback defaults
+	to "sub { 0 }"
+
+2001/01/11  Pixel  <pixel@mandrakesoft.com>
+
 	* Xconfigurator.pm (autologin): moved to package any
 
 	* interactive_gtk.pm (ask_from_entries_refW): apply "format" on label when
