@@ -11,6 +11,7 @@ use log;
 
 
 my %conf;
+my $scsi = 0;
 my %deps = ();
 
 
@@ -242,7 +243,7 @@ sub text2driver($) {
 sub load($;$@) {
     my ($name, $type, @options) = @_;
 
-    $conf{'scsi_hostadapter' . ($conf{scsi}++ || '')}{alias} = $name 
+    $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name 
       if $type eq 'scsi';
 
     if ($::testing) {
@@ -301,20 +302,19 @@ sub load_deps($) {
     }
 }
 
-sub read_conf {
-    my ($file) = @_;
+sub read_conf($;$) {
+    my ($file, $scsi) = @_;
     my %c;
-    $c{scsi} = 0;
 
     foreach (cat_($file)) {
 	do {
 	    $c{$2}{$1} = $3;
-	    $c{scsi} = max($c{scsi}, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x;
+	    $$scsi = max($$scsi, $1 || 0) if /^\s*alias\s+scsi_hostadapter (\d*)/x && $scsi;
 	} if /^\s*(\S+)\s+(\S+)\s+(.*?)\s*$/;
     }
     # cheating here: not handling aliases of aliases
     while (my ($k, $v) = each %c) {
-	$c{scsi} ||= $v->{scsi_hostadapter};
+	$$scsi ||= $v->{scsi_hostadapter} if $scsi;
 	if (my $a = $v->{alias}) {
 	    local $c{$a}{alias};
 	    add2hash($c{$a}, $v);
@@ -325,7 +325,7 @@ sub read_conf {
 
 sub write_conf {
     my ($file) = @_;
-    my %written = read_conf($file);
+    my (undef, %written) = read_conf($file);
 
     local *F;
     open F, ">> $file" or die("cannot write module config file $file: $!\n");
@@ -338,7 +338,7 @@ sub write_conf {
 }
 
 sub get_stage1_conf { 
-    %conf = read_conf($_[0]);
+    %conf = read_conf($_[0], \$scsi);
     $conf{parport_lowlevel}{alias} ||= "parport_pc";
     $conf{pcmcia_core}{"pre-install"} ||= "/etc/rc.d/init.d/pcmcia start";    
     $conf{plip}{"pre-install"} ||= "modprobe parport_pc ; echo 7 > /proc/parport/0/irq";
@@ -356,7 +356,7 @@ sub load_thiskind($;&) {
 	$drivers{$mod} or log::l("module $mod not in install table"), next;
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f; 
-	load($mod);
+	load($mod, $type);
     }
     @devs;
 }

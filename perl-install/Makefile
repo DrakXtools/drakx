@@ -10,7 +10,7 @@ DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL        = perl
 LOCALFILES  = $(PERL) mouseconfig
 DIRS        = po pci_probing
-EXCLUDE     = $(LOCALFILES) boot.img xmodmap keymaps consolefonts install
+EXCLUDE     = $(LOCALFILES) boot.img keymaps consolefonts install
 RPMS        = $(wildcard $(ROOTDEST)/Mandrake/RPMS/*.rpm)
 CFLAGS	    = -Wall
 override CFLAGS  += -pipe
@@ -106,6 +106,7 @@ get_needed_files: $(SO_FILES)
 	install -d $(DEST)/usr/bin
 	install -d $(DEST)/usr/lib
 	install -d $(DEST)/usr/share
+	install -d $(DEST)/usr/share/xmodmap
 	install -d $(ROOTDEST)/Mandrake/base
 	install -s $(LOCALFILES) $(DEST)/usr/bin
 
@@ -135,7 +136,8 @@ get_needed_files: $(SO_FILES)
 	cd /usr/X11R6/lib/X11/fonts/75dpi ; cp -a fonts.* helvR* $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
 	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
 
-	cp -a xmodmap $(DEST)/usr/share
+	perl -I. -Ic -Ic/blib/arch -Mkeyboard -e 'foreach (keyboard::xmodmaps()) { `cp /usr/share/xmodmap/xmodmap.$$_ $(DEST)/usr/share/xmodmap` }'
+
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
 	cp MonitorsDB $(DEST)/usr/share

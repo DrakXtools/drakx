@@ -61,6 +61,7 @@ my %keyboards = (
 );
 
 sub list { map { $_->[0] } values %keyboards }
+sub xmodmaps { map { $_->[2] } values %keyboards }
 sub keyboard2text { $keyboards{$_[0]} && $keyboards{$_[0]}[0] }
 sub text2keyboard {
     my ($t) = @_;
