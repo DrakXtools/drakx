@@ -17,6 +17,10 @@ use run_program;
 use modules;
 use log;
 
+sub drakx_version { 
+    sprintf "DrakX v%s built %s", $::testing ? ('TEST', scalar gmtime()) : (split('/', cat_("/usr/share/VERSION")))[2,3];
+}
+
 sub facesdir {
     my ($prefix) = @_;
     "$prefix/usr/share/faces/";
