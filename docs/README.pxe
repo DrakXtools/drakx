@@ -1,0 +1,142 @@
+Here is a short description to configure a PXE server using dhcpd and tftpd.
+This allows a network boot for your ethernet card conforming to the Interl
+PXE specification.
+
+********************************************************************************
+**********                       General overview                   ************
+********************************************************************************
+
+You need a dhcp server and a tftp server on one or two machines to allow the 
+network boot. We are not using a PXE server to achieve this as it is not
+mandatory. 
+You can install tftp-server and dhcp-server package from the Mandrake
+distribution for example.
+
+On the server machine at 192.168.2.1, you will find a "/etc/dhcpd.conf" sample
+file written by Florin Grad <florin@mandrakesoft.com>, where "mydomain.com" is
+assumed to be your domain name, and 192.168.1.1 a name server. All install are
+done on subnet 192.168.2.0.
+
+All the files that will be downloaded by the tftp daemon are located under 
+"/tftpboot" :
+  "/tftpboot/pxelinux.0" is a program that is loaded directly by the machine
+                         where a network boot will be done, this program comes
+                         from the SYSLINUX package by H. Peter Anvin. (look at
+                         http://syslinux.zytor.com/pxe.php for more information)
+  "/tftpboot/pxelinux.cfg/" is a directory where all configuration file for
+                         pxelinux.0 will be found, pxelinux.0 will download
+                         these file by itself. It searches first for a file
+                         named accordind to the machine IP address in
+			 hexadecimal, for example for 192.168.2.20, it
+			 looks for "C0A80214" first, then "C0A8021" and so
+			 on down to "C0", "C" and "default".
+  "/tftpboot/network.rdz" is the standard network initrd for Mandrake installation.
+  "/tftpboot/vmlinuz"    is the boot kernel for installation.
+  "/tftpboot/help.msg"   is the message displayed by pxelinux.0, note that currently
+                         graphical message (as for install using SYSLINUX 1.48 with
+                         graphic patch by Mandrake) is not supported.
+
+All file "network.rdz", "vmlinuz", "help.msg" can be found by mounting "network.img",
+or the network floppy disk used for install, "pxelinux.cfg" is just an adaptation
+of the file found on the "network.img" called "syslinux.cfg" but without the reference
+to boot.msg (as it is not currently supported).
+
+Update network configuration for your needs and start dhcp server on the machine and
+tftp server and this should work.
+
+********************************************************************************
+* /etc/dhcpd.conf **************************************************************
+********************************************************************************
+ddns-update-style ad-hoc;
+
+authoritative;
+
+option space PXE;
+option PXE.mtftp-ip code 1 = ip-address;
+option PXE.mtftp-cport code 2 = unsigned integer 16;
+option PXE.mtftp-sport code 3 = unsigned integer 16;
+option PXE.mtftp-tmout code 4 = unsigned integer 8;
+option PXE.mtftp-delay code 5 = unsigned integer 8;
+option PXE.discovery-control code 6 = unsigned integer 8;
+option PXE.discovery-mcast-addr code 7 = ip-address;
+
+default-lease-time 28800;
+max-lease-time 86400;
+
+option domain-name "mydomain.com";
+option domain-name-servers 192.168.1.1;
+
+class "PXE" {
+  match if substring(option vendor-class-identifier, 0, 9) = "PXEClient";
+  option vendor-class-identifier "PXEClient";
+
+  vendor-option-space PXE;
+  option PXE.mtftp-ip 0.0.0.0;
+  next-server 192.168.2.1; #tftp server location
+
+  filename "pxelinux.0";          # standard TFTP
+
+}
+
+shared-network "mynetwork" {
+  subnet 192.168.2.0 netmask 255.255.255.0 {
+    option subnet-mask 255.255.255.0;
+    option routers 192.168.2.1;
+
+    ddns-domainname = "mydomain.com";
+
+    pool {
+      range 192.168.2.10 192.168.2.20;
+      allow members of "PXE";
+    }
+  } 
+}
+********************************************************************************
+* /tftpboot/pxelinux.cfg/default ***********************************************
+********************************************************************************
+default linux
+prompt 1
+timeout 72
+display help.msg
+label linux
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 vga=788
+label vgalo
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 vga=785
+label vgahi
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 vga=791
+label vga16
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 vga16
+label text
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 text
+label patch
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 patch vga=788
+label expert
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 expert vga=788
+label rescue
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 rescue rw
+label lnx4win
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  root=/dev/ram3 lnx4win vga=788
+label preinst
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
+label oem
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz automatic=method:cdrom root=/dev/ram3 rescue oem rw
+label auto
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=network.rdz  auto_install=Mandrake/base/auto_inst.cfg.pl
+********************************************************************************
+* Usefull linkst ***************************************************************
+********************************************************************************
+
+http://syslinux.zytor.com/pxe.php
+http://www.kano.org.uk/projects/pxe/
