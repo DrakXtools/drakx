@@ -1,3 +1,109 @@
+2002/08/06  alus
+
+	* share/po/pl.po: updated translation
+
+2002/08/06  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* network/tools.pm: 
+	  - set the vpi vci correctly according to selected country.
+
+2002/08/06  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: added log to follow dead lock to check what may cause it).
+
+2002/08/06  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: add warly,jgotti
+
+2002/08/06  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* bootlook.pm: add standalone::explanations for bootsplash configuration
+
+2002/08/06  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/rpmsrate: Increased the level of "yudit"; it's one of the editors
+	with best utf-8
+	support, so very useful to have.
+
+	* share/po/fr.po, share/po/wa.po: updated French and Walloon files
+	Put _() around two strings in security level choosing
+
+	* share/po/DrakX.pot: updated French and Walloon files
+
+	* any.pm, share/po/pl.po: Put _() around two strings in security level
+	choosing
+
+2002/08/06  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/xfree3.pm, Xconfig/xfreeX.pm, Xconfig/xfree4.pm,
+	Xconfig/parse.pm: make wacom config work
+
+	* bootloader.pm (get_kernels_and_labels): only take kernels for which we
+	have the corresponding /lib/modules/VERSION (otherwise mkinitrd will
+	fail)
+
+	* run_program.pm (raw): new function allowing special options like
+	{timeout}
+
+	* fsedit.pm: 
+	  - add /tmp in %suggestions for server partitioning
+	  - tweak some ratio's in %suggestions
+
+	* any.pm (ddcxinfos): use the new run_program::raw with a 20s timeout to
+	workaround ddcxinfos going wild using 100% system CPU
+
+	* detect_devices.pm, my_gtk.pm, install_any.pm: make perl_checker happy
+
+	* standalone.pm: add "use run_program" as needed
+
+2002/08/06  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakTermServ: typo, change /etc/exports explanation in help
+
+2002/08/06  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: make perl_checker happier :-)
+	  - dont detect undef devices
+	detect modem too
+	  - rename scanner::findScannerUsbport  as scanner::detect
+	as in mouse.pm
+	  - scanner::detect : detect SCSI scanners too
+
+	* drakxtools.spec: log changes
+
+	* network/modem.pm: nobody pass the second argument of
+	network::modem::modem_detect_backend() so let simplify it
+
+	* standalone/scannerdrake: 
+	  - rename scanner::findScannerUsbport  as scanner::detect
+	as in mouse.pm
+	  - scanner::detect : detect SCSI scanners too
+
+	* ugtk.pm: remove old references to rectangle drawing around mcc icons
+
+	* scanner.pm: make perl_checker happier :-)
+	  - dont detect undef devices
+	  - rename scanner::findScannerUsbport  as scanner::detect
+	as in mouse.pm
+	  - scanner::detect : detect SCSI scanners too
+
+2002/08/05  Pixel  <pixel@mandrakesoft.com>
+
+	* share/list: switch to thread-multi
+
+	* any.pm, mouse.pm: do the job of devfsd in case devfsd doesn't do it
+
+	* drakxtools.spec: rebuild for perl thread-multi
+
+	* rescue/list.sparc, rescue/list.x86_64, rescue/list.i386,
+	rescue/list.ia64, rescue/list, rescue/list.alpha, rescue/list.ppc: 
+	  - adapt to thread-multi
+	  - packdrake.pm is now out of arch dir
+
+2002/08/05  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_any.pm: smbpasswd call deferred with addToBeDone
+
 2002/08/05  alus
 
 	* share/po/pl.po: removed unused strings
