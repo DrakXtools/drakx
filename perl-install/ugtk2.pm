@@ -1623,7 +1623,7 @@ sub new {
     my ($_class, $icon, $text) = @_;
 
     my $darea = Gtk2::DrawingArea->new;
-    $darea->set_size_request(-1, 100);
+    $darea->set_size_request(-1, 75);
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string(common::N("_banner font:\nSans 14")));
     $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
     $darea->{text} = $text;
