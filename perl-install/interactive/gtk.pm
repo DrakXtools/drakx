@@ -653,7 +653,7 @@ sub ask_fromW {
 			 my $message = $common->{interactive_help}->() or return;
 			 $o->ask_warn(N("Help"), $message);
 		     }, 1 ]);
-    if ($::expert && any { $_->{advanced} } @$l) {
+    if ($::expert && any { $_->{advanced} } @$l2) {
         $common->{advanced_state} = 1;
         $advanced_button->[0] = $common->{advanced_label_close};
     }
