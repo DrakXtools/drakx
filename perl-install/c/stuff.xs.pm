@@ -280,7 +280,7 @@ hasNetDevice(device)
     strcpy(req.ifr_name, device);
 
     RETVAL = ioctl(s, SIOCGIFFLAGS, &req) == 0;
-    if (!RETVAL) close(s);
+    close(s);
   OUTPUT:
   RETVAL
 
