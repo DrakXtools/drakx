@@ -1,3 +1,68 @@
+2004/08/18  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: restrict the wait message (so that it's dead when an error
+	message is displayed)
+	fix typo
+	fix typos
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+	create install_acpi_pkgs() and use it for auto_installs
+
+	* standalone/drakboot, install_steps_interactive.pm: 
+	  - any::setupBootloader() used to call bootloader::install() whereas
+	install_steps_interactive::setupBootloader() could call it once again
+	(but this code seems dead though)
+	  - create any::installBootloader() out of what was done in the end of
+	any::setupBootloader() but also in  install_steps_interactive and
+	drakboot (which handled the error that could occur in
+	bootloader::install())
+
+	* install_steps_gtk.pm: hide $release_notes_scroll by default, it's
+	visually cleaner
+
+	* ugtk2.pm: fix blino sucks
+
+	* detect_devices.pm: perl_checker compliance
+
+	* install_steps.pm: force ACPI on a laptop with recent bios
+	create install_acpi_pkgs() and use it for auto_installs
+
+2004/08/18  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* ugtk2.pm: Make the status field optional in treeviews
+
+2004/08/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm, any.pm: fix default IM setting when switching language
+
+	* harddrake/data.pm: add PCMCIA controllers class
+
+	* drakxtools.spec: 10.1-0.10mdk
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/uk.po,
+	share/po/mn.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/uz@Latn.po: merge in s/%d/%s/ fix in net_applet's message
+
 2004/08/18  Olivier Blin <oblin at mandrakesoft.com>
 
 	* harddrake/data.pm: use network::ethernet::get_eth_categories in ethernet
@@ -35575,7 +35640,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.948 2004/08/17 01:34:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.949 2004/08/18 09:58:12 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
