@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
 "POT-Creation-Date: 2005-02-24 14:10+0100\n"
-"PO-Revision-Date: 2005-03-06 21:56+0800\n"
+"PO-Revision-Date: 2005-03-16 23:53+0800\n"
 "Last-Translator: Shiva Huang <shivahuang@gmail.com>\n"
 "Language-Team: Traditional Chinese <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1642,16 +1642,16 @@ msgid ""
 "wait for default boot.\n"
 "\n"
 msgstr ""
-"歡迎來到作業系統選擇器!\n"
+"歡迎使用作業系統選擇程式！\n"
 "\n"
-"由上面的清單選擇一個作業系統或\n"
-"等待預設開機.\n"
+"請由上面的清單中選擇一個作業系統或者\n"
+"稍待由預設的作業系統開機。\n"
 "\n"
 
 #: bootloader.pm:815
 #, c-format
 msgid "LILO with graphical menu"
-msgstr "LILO 圖形介面菜單"
+msgstr "LILO 圖形介面選單"
 
 #: bootloader.pm:816
 #, c-format
@@ -1676,26 +1676,26 @@ msgstr "/boot 沒有足夠的空間"
 #: bootloader.pm:1295
 #, c-format
 msgid "You can not install the bootloader on a %s partition\n"
-msgstr "您不能把開機載入器安裝在 %s 分割區上\n"
+msgstr "您不能把開機載入程式安裝在 %s 分割區上\n"
 
 #: bootloader.pm:1340
 #, c-format
 msgid ""
 "Your bootloader configuration must be updated because partition has been "
 "renumbered"
-msgstr "您的開機載入器設定必須要更新因為分割區已經被重新編號"
+msgstr "因為您的分割區被重新編號過，所以開機載入程式的設定必須更新"
 
 #: bootloader.pm:1355
 #, c-format
 msgid ""
 "The bootloader can not be installed correctly. You have to boot rescue and "
 "choose \"%s\""
-msgstr "開機載入器不能被正確的安裝. 你必須以 rescue 開機且選擇 \"%s\""
+msgstr "開機載入程式無法正確安裝。您必須以 rescue 開機並選擇 \"%s\""
 
 #: bootloader.pm:1356
 #, c-format
 msgid "Re-install Boot Loader"
-msgstr "重新安裝開機載入器"
+msgstr "重新安裝開機載入程式"
 
 #: common.pm:125
 #, c-format
@@ -1889,18 +1889,18 @@ msgstr "URL 格式必須為 http:// 或是 https://"
 #: diskdrake/dav.pm:109
 #, c-format
 msgid "Server: "
-msgstr "伺服器:"
+msgstr "伺服器："
 
 #: diskdrake/dav.pm:110 diskdrake/interactive.pm:504
 #: diskdrake/interactive.pm:1166 diskdrake/interactive.pm:1241
 #, c-format
 msgid "Mount point: "
-msgstr "掛載點:"
+msgstr "掛載點："
 
 #: diskdrake/dav.pm:111 diskdrake/interactive.pm:1248
 #, c-format
 msgid "Options: %s"
-msgstr "選項: %s"
+msgstr "選項： %s"
 
 #: diskdrake/hd_gtk.pm:95
 #, c-format
@@ -1914,13 +1914,13 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"如果你打算使用 aboot 程式的話, 請注意您至少需要在於磁碟最前端保留一塊可用的空"
+"如果您打算使用 aboot 程式的話，請注意您至少需要在磁碟最前端保留一塊可用的空"
 "間 (2048 扇區就足夠了)"
 
 #: diskdrake/hd_gtk.pm:155 help.pm:530
 #, c-format
 msgid "Wizard"
-msgstr "巫師"
+msgstr "精靈"
 
 #: diskdrake/hd_gtk.pm:188
 #, c-format
@@ -1934,9 +1934,9 @@ msgid ""
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"您有一個很大的 Microsoft Windows 分割區.\n"
+"您有一個很大的 Microsoft Windows 分割區。\n"
 "建議您先重新改變這個分割區的大小\n"
-"(點選它, 然後按 \"重新改變大小\")"
+"(點選它，然後按 \"重新改變大小\")"
 
 #: diskdrake/hd_gtk.pm:194
 #, c-format
@@ -1982,7 +1982,7 @@ msgstr "HFS"
 #: diskdrake/hd_gtk.pm:338
 #, c-format
 msgid "Windows"
-msgstr "視窗"
+msgstr "Windows"
 
 #: diskdrake/hd_gtk.pm:339 install_steps_gtk.pm:284 mouse.pm:168
 #: services.pm:162 standalone/drakbackup:1609 standalone/drakperm:250
@@ -1998,7 +1998,7 @@ msgstr "空白"
 #: diskdrake/hd_gtk.pm:343
 #, c-format
 msgid "Filesystem types:"
-msgstr "檔案系統格式:"
+msgstr "檔案系統格式："
 
 #: diskdrake/hd_gtk.pm:360 diskdrake/hd_gtk.pm:362 diskdrake/hd_gtk.pm:368
 #, c-format
@@ -2063,7 +2063,7 @@ msgstr "切換到專家模式"
 #: diskdrake/interactive.pm:272
 #, c-format
 msgid "Continue anyway?"
-msgstr "不管如何都要繼續嗎?"
+msgstr "無論如何都要繼續嗎？"
 
 #: diskdrake/interactive.pm:275
 #, c-format
@@ -2081,17 +2081,17 @@ msgstr "不儲存就離開"
 #: diskdrake/interactive.pm:282
 #, c-format
 msgid "Quit without writing the partition table?"
-msgstr "放棄寫入硬碟分割表就離開?"
+msgstr "放棄寫入硬碟分割表就離開？"
 
 #: diskdrake/interactive.pm:287
 #, c-format
 msgid "Do you want to save /etc/fstab modifications"
-msgstr "您想要儲存 /etc/fstab 檔案的修改嗎?"
+msgstr "您想要儲存對 /etc/fstab 檔案的修改嗎？"
 
 #: diskdrake/interactive.pm:294 install_steps_interactive.pm:329
 #, c-format
 msgid "You need to reboot for the partition table modifications to take place"
-msgstr "您須要重新開機以使更動過的硬碟分割表生效"
+msgstr "您必須重新開機以使更動過的硬碟分割表生效"
 
 #: diskdrake/interactive.pm:307 help.pm:530
 #, c-format
@@ -2129,7 +2129,7 @@ msgstr "我無法再新增任何分割區了"
 msgid ""
 "To have more partitions, please delete one to be able to create an extended "
 "partition"
-msgstr "需要有更多的分割區的話, 請刪除一個主分割區以建立延伸分割區"
+msgstr "需要有更多的分割區的話，請刪除一個主分割區以建立延伸分割區"
 
 #: diskdrake/interactive.pm:359 help.pm:530
 #, c-format
@@ -2168,7 +2168,7 @@ msgid ""
 "Still continue?"
 msgstr ""
 "備份的硬碟分割表有不一樣的大小\n"
-"還要繼續?"
+"要繼續嗎？"
 
 #: diskdrake/interactive.pm:417
 #, c-format
@@ -2228,7 +2228,7 @@ msgstr "建立新的分割區"
 #: diskdrake/interactive.pm:500
 #, c-format
 msgid "Start sector: "
-msgstr "開始的磁區:"
+msgstr "開始的磁區："
 
 #: diskdrake/interactive.pm:502 diskdrake/interactive.pm:899
 #, c-format
@@ -2238,17 +2238,17 @@ msgstr "大小 (MB):"
 #: diskdrake/interactive.pm:503 diskdrake/interactive.pm:900
 #, c-format
 msgid "Filesystem type: "
-msgstr "檔案系統格式:"
+msgstr "檔案系統格式："
 
 #: diskdrake/interactive.pm:508
 #, c-format
 msgid "Preference: "
-msgstr "偏好設定:"
+msgstr "偏好設定："
 
 #: diskdrake/interactive.pm:511
 #, c-format
 msgid "Logical volume name "
-msgstr "邏輯容量名稱"
+msgstr "邏輯磁區名稱"
 
 #: diskdrake/interactive.pm:541
 #, c-format
@@ -2258,19 +2258,19 @@ msgid ""
 "First remove a primary partition and create an extended partition."
 msgstr ""
 "您無法建立新的分割區\n"
-"(因為你達到主分割區的最大值).\n"
-"您需要先移除一個主分割區然後建立一個延伸分割區."
+"(因為您已經達到主分割區的最大值)。\n"
+"您需要先移除一個主分割區然後建立一個延伸分割區。"
 
 #: diskdrake/interactive.pm:571
 #, c-format
 msgid "Remove the loopback file?"
-msgstr "移除 loopback 檔案?"
+msgstr "移除 loopback 檔案？"
 
 #: diskdrake/interactive.pm:590
 #, c-format
 msgid ""
 "After changing type of partition %s, all data on this partition will be lost"
-msgstr "改變分割區 %s 的格式以後, 所有在這個分割區上的資料都會遺失"
+msgstr "改變分割區 %s 的格式以後，所有在這個分割區上的資料都會遺失"
 
 #: diskdrake/interactive.pm:602
 #, c-format
@@ -2280,7 +2280,7 @@ msgstr "改變分割區格式"
 #: diskdrake/interactive.pm:603 diskdrake/removable.pm:47
 #, c-format
 msgid "Which filesystem do you want?"
-msgstr "您要用那一種檔案系統?"
+msgstr "您要用那一種檔案系統？"
 
 #: diskdrake/interactive.pm:611
 #, c-format
@@ -2290,12 +2290,12 @@ msgstr "由 ext2 正在切換到 ext3"
 #: diskdrake/interactive.pm:640
 #, c-format
 msgid "Where do you want to mount the loopback file %s?"
-msgstr "您要把 loopback 檔案 %s 掛載在那裡?"
+msgstr "您要把 loopback 檔案 %s 掛載在那裡？"
 
 #: diskdrake/interactive.pm:641
 #, c-format
 msgid "Where do you want to mount device %s?"
-msgstr "您要把這個裝置 %s 掛載在那裡 ?"
+msgstr "您要把這個裝置 %s 掛載在那裡？"
 
 #: diskdrake/interactive.pm:646
 #, c-format
@@ -2303,13 +2303,13 @@ msgid ""
 "Can not unset mount point as this partition is used for loop back.\n"
 "Remove the loopback first"
 msgstr ""
-"因為這個分割區被用作 loop back 使用, 所以無法解除\n"
-"這個掛載點. 請先取消 loopback 的設定"
+"因為這個分割區被用作 loop back 使用，所以無法解除\n"
+"這個掛載點。請先取消 loopback 的設定"
 
 #: diskdrake/interactive.pm:671
 #, c-format
 msgid "Where do you want to mount %s?"
-msgstr "您要將 %s 掛載在那裡?"
+msgstr "您要將 %s 掛載在那裡？"
 
 #: diskdrake/interactive.pm:695 diskdrake/interactive.pm:774
 #: install_interactive.pm:156 install_interactive.pm:188
@@ -2320,7 +2320,7 @@ msgstr "正在重設大小"
 #: diskdrake/interactive.pm:695
 #, c-format
 msgid "Computing FAT filesystem bounds"
-msgstr "正在計算 fat 分割區的邊界"
+msgstr "正在計算 FAT 分割區的邊界"
 
 #: diskdrake/interactive.pm:731
 #, c-format
@@ -2335,7 +2335,7 @@ msgstr "所有在這個分割區上的資料都應該先經過備份"
 #: diskdrake/interactive.pm:738
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
-msgstr "在改變分割區 %s 的大小以後, 所有在這個分割區上的資料都會遺失"
+msgstr "在改變分割區 %s 的大小以後，所有在這個分割區上的資料都會遺失"
 
 #: diskdrake/interactive.pm:743
 #, c-format
@@ -2345,7 +2345,7 @@ msgstr "選取新的大小"
 #: diskdrake/interactive.pm:744
 #, c-format
 msgid "New size in MB: "
-msgstr "新大小 (MB):"
+msgstr "新大小 (MB)："
 
 #: diskdrake/interactive.pm:787 install_interactive.pm:196
 #, c-format
@@ -2372,7 +2372,7 @@ msgstr "選取一個已經存在的 LVM 以加入"
 #: diskdrake/interactive.pm:848
 #, c-format
 msgid "LVM name?"
-msgstr "LVM 名稱?"
+msgstr "LVM 名稱？"
 
 #: diskdrake/interactive.pm:884
 #, c-format
@@ -2387,7 +2387,7 @@ msgstr "Loopback"
 #: diskdrake/interactive.pm:898
 #, c-format
 msgid "Loopback file name: "
-msgstr "Loopback 檔案名稱:"
+msgstr "Loopback 檔案名稱："
 
 #: diskdrake/interactive.pm:903
 #, c-format
@@ -2397,12 +2397,12 @@ msgstr "輸入一個檔案名稱"
 #: diskdrake/interactive.pm:906
 #, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr "檔案已被用來作為其他的 loopback, 請選擇其他檔案"
+msgstr "檔案已被用來作為其他的 loopback，請選擇其他檔案"
 
 #: diskdrake/interactive.pm:907
 #, c-format
 msgid "File already exists. Use it?"
-msgstr "檔案已經存在了. 要使用它嗎?"
+msgstr "檔案已經存在了。要使用它嗎？"
 
 #: diskdrake/interactive.pm:930
 #, c-format
@@ -2432,12 +2432,12 @@ msgstr "組塊大小以 Kib 計量"
 #: diskdrake/interactive.pm:1021
 #, c-format
 msgid "Be careful: this operation is dangerous."
-msgstr "請小心: 這個工作很危險."
+msgstr "請小心：這個動作很危險。"
 
 #: diskdrake/interactive.pm:1036
 #, c-format
 msgid "What type of partitioning?"
-msgstr "以那種形式分割?"
+msgstr "以那種形式分割？"
 
 #: diskdrake/interactive.pm:1074
 #, c-format
@@ -2447,12 +2447,12 @@ msgstr "您需要重新開機以便於讓異動的設定生效"
 #: diskdrake/interactive.pm:1083
 #, c-format
 msgid "Partition table of drive %s is going to be written to disk!"
-msgstr "正在準備將要寫入磁碟 %s 的硬碟分割表!"
+msgstr "正在準備將要寫入磁碟 %s 的硬碟分割表！"
 
 #: diskdrake/interactive.pm:1096
 #, c-format
 msgid "After formatting partition %s, all data on this partition will be lost"
-msgstr "在對分割區 %s 進行格式化的動作以後, 所有在這個分割區上的資料都會遺失"
+msgstr "在對分割區 %s 進行格式化的動作以後，所有在這個分割區上的資料都會遺失"
 
 #: diskdrake/interactive.pm:1112
 #, c-format
@@ -2501,12 +2501,12 @@ msgstr "分割區已經重新編號："
 #: diskdrake/interactive.pm:1167 diskdrake/interactive.pm:1226
 #, c-format
 msgid "Device: "
-msgstr "裝置:"
+msgstr "裝置："
 
 #: diskdrake/interactive.pm:1168
 #, c-format
 msgid "Devfs name: "
-msgstr "Devfs 名稱:"
+msgstr "Devfs 名稱："
 
 #: diskdrake/interactive.pm:1169
 #, c-format
@@ -2516,33 +2516,33 @@ msgstr "磁區標籤：\""
 #: diskdrake/interactive.pm:1170
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "DOS 磁碟代號: %s (只是一個猜測)\n"
+msgstr "DOS 磁碟代號：%s (猜測值)\n"
 
 #: diskdrake/interactive.pm:1174 diskdrake/interactive.pm:1183
 #: diskdrake/interactive.pm:1244
 #, c-format
 msgid "Type: "
-msgstr "格式:"
+msgstr "格式："
 
 #: diskdrake/interactive.pm:1178 install_steps_gtk.pm:296
 #, c-format
 msgid "Name: "
-msgstr "名稱: "
+msgstr "名稱："
 
 #: diskdrake/interactive.pm:1185
 #, c-format
 msgid "Start: sector %s\n"
-msgstr "開始: %s 扇區\n"
+msgstr "始於：第 %s 扇區\n"
 
 #: diskdrake/interactive.pm:1186
 #, c-format
 msgid "Size: %s"
-msgstr "大小: %s"
+msgstr "大小：%s"
 
 #: diskdrake/interactive.pm:1188
 #, c-format
 msgid ", %s sectors"
-msgstr ", %s 扇區"
+msgstr "，%s 扇區"
 
 #: diskdrake/interactive.pm:1190
 #, c-format
@@ -2580,7 +2580,7 @@ msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr ""
-"loopback 檔案:\n"
+"loopback 檔案：\n"
 "   %s\n"
 
 #: diskdrake/interactive.pm:1198
@@ -2590,7 +2590,7 @@ msgid ""
 "    (for MS-DOS boot, not for lilo)\n"
 msgstr ""
 "預設開機的分割區\n"
-"    (給 MS-DOS 開機程式用的, 跟 lilo 無關)\n"
+"    (給 MS-DOS 開機程式用的，跟 lilo 無關)\n"
 
 #: diskdrake/interactive.pm:1200
 #, c-format
@@ -2610,7 +2610,7 @@ msgstr "磁碟陣列-磁碟 %s\n"
 #: diskdrake/interactive.pm:1204
 #, c-format
 msgid "Loopback file name: %s"
-msgstr "Loopback 檔案名稱:  %s"
+msgstr "Loopback 檔案名稱： %s"
 
 #: diskdrake/interactive.pm:1207
 #, c-format
@@ -2621,9 +2621,9 @@ msgid ""
 "probably leave it alone.\n"
 msgstr ""
 "\n"
-"可能是這樣的, 這個分割區\n"
+"可能是這樣的，這個分割區\n"
 "是透過驅動程式產生出來的\n"
-"您應該不要去異動這個分割區資料.\n"
+"您應該不要去異動這個分割區資料。\n"
 
 #: diskdrake/interactive.pm:1210
 #, c-format
@@ -2634,8 +2634,8 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 "\n"
-"這個特殊分割區用來作為 \n"
-"雙重開機使用的.\n"
+"這個特殊分割區是用來作為\n"
+"雙重開機使用的。\n"
 
 #: diskdrake/interactive.pm:1227
 #, c-format
@@ -2645,17 +2645,17 @@ msgstr "唯讀"
 #: diskdrake/interactive.pm:1228
 #, c-format
 msgid "Size: %s\n"
-msgstr "大小: %s\n"
+msgstr "大小：%s\n"
 
 #: diskdrake/interactive.pm:1229
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
-msgstr "幾何: %s 磁柱, %s 讀寫頭, %s 扇區\n"
+msgstr "幾何：%s 磁柱，%s 讀寫頭，%s 扇區\n"
 
 #: diskdrake/interactive.pm:1230
 #, c-format
 msgid "Info: "
-msgstr "資訊:"
+msgstr "資訊："
 
 #: diskdrake/interactive.pm:1231
 #, c-format
@@ -2665,7 +2665,7 @@ msgstr "LVM-磁碟 %s\n"
 #: diskdrake/interactive.pm:1232
 #, c-format
 msgid "Partition table type: %s\n"
-msgstr "硬碟分割表形式: %s\n"
+msgstr "硬碟分割表形式：%s\n"
 
 #: diskdrake/interactive.pm:1233
 #, c-format
@@ -2685,7 +2685,7 @@ msgstr "選擇您檔案系統所使用的加密金鑰"
 #: diskdrake/interactive.pm:1269
 #, c-format
 msgid "This encryption key is too simple (must be at least %d characters long)"
-msgstr "這個加密金鑰太簡單了 (一定至少要有 %d 個字元才行)"
+msgstr "這個加密金鑰太簡單了 (至少要有 %d 個字元才行)"
 
 #: diskdrake/interactive.pm:1270
 #, c-format
@@ -2732,7 +2732,8 @@ msgstr "另外一個"
 #, c-format
 msgid ""
 "Please enter your username, password and domain name to access this host."
-msgstr "請輸入你的使用者名稱, 密碼以及網域名稱, 以便於能夠連線存取這個主機"
+msgstr ""
+"請輸入你的使用者名稱，密碼以及網域名稱，以便於能夠連線存取這個主機。"
 
 #: diskdrake/smbnfs_gtk.pm:179 standalone/drakbackup:3494
 #, c-format
@@ -2752,7 +2753,7 @@ msgstr "搜尋新的伺服器"
 #: do_pkgs.pm:16 do_pkgs.pm:31
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
-msgstr "這個套件 %s 需要安裝上, 您要安裝它嗎?"
+msgstr "需要安裝 %s 這個套件，您要安裝它嗎？"
 
 #: do_pkgs.pm:21 do_pkgs.pm:36
 #, c-format
@@ -2787,7 +2788,7 @@ msgstr "檢查 %s"
 #: fs.pm:553 partition_table.pm:391
 #, c-format
 msgid "error unmounting %s: %s"
-msgstr "卸下 %s 的掛載時發生錯誤: %s"
+msgstr "卸下 %s 的掛載時發生錯誤：%s"
 
 #: fs.pm:585
 #, c-format
@@ -2852,7 +2853,7 @@ msgstr ""
 #: fs/mount_options.pm:128
 #, c-format
 msgid "Mount the file system read-only."
-msgstr "以唯讀方式掛載檔案系統."
+msgstr "以唯讀方式掛載檔案系統。"
 
 #: fs/mount_options.pm:130
 #, c-format
@@ -2869,20 +2870,20 @@ msgid ""
 "(unless overridden by subsequent options, as in the option line\n"
 "user,exec,dev,suid )."
 msgstr ""
-"允許一般使用者掛載檔案系統.\n"
-"掛載的使用者名稱會被寫入 mtab 以至於他可以再次卸載檔案系統.\n"
-"這個選項意旨 noexec, nosuid, and nodev 選項\n"
-"(除非被以下選項制伏, 像是選項行 user,exec,dev,suid 選項)."
+"允許一般使用者掛載檔案系統。\n"
+"掛載的使用者名稱會被寫入 mtab 因此他可以卸載檔案系統。\n"
+"這個選項套用了 noexec、nosuid 以及 nodev 的參數\n"
+"(除非被以下參數複寫，例如選項行 user、exec、dev、suid 參數)。"
 
 #: fs/mount_options.pm:142
 #, c-format
 msgid "Give write access to ordinary users"
-msgstr "給寫入權限給一般使用者"
+msgstr "授予寫入權限給一般使用者"
 
 #: fs/mount_options.pm:144
 #, c-format
 msgid "Give read-only access to ordinary users"
-msgstr "給唯讀權限給一般使用者"
+msgstr "授予唯讀權限給一般使用者"
 
 #: fs/type.pm:370
 #, c-format
@@ -2897,7 +2898,7 @@ msgstr "小於 32MB 的分割區不能使用 ReiserFS 格式"
 #: fsedit.pm:25
 #, c-format
 msgid "with /usr"
-msgstr ""
+msgstr "掛載為 /usr"
 
 #: fsedit.pm:30
 #, c-format
@@ -2938,14 +2939,14 @@ msgid ""
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"你已經選擇了一塊軟體磁碟陣列的分割區當作為根分割區 (/) 的掛載點.\n"
-"沒有 /boot 分割區, 開機載入器不可能處理這種情況.\n"
+"你已經選擇了一塊軟體磁碟陣列的分割區當作為根分割區 (/) 的掛載點。\n"
+"沒有 /boot 分割區，開機載入程式不可能處理這種情況。\n"
 "請確定會增加一個 /boot 分割區"
 
 #: fsedit.pm:408
 #, c-format
 msgid "You can not use a LVM Logical Volume for mount point %s"
-msgstr "您不能使用 LVM Logical Volume 來最為 %s 的掛載點"
+msgstr "您不能使用 LVM Logical Volume 來作為 %s 的掛載點"
 
 #: fsedit.pm:410
 #, c-format
@@ -2954,8 +2955,8 @@ msgid ""
 "The bootloader is not able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"你已經選擇了一塊 LVM Logical Volume 當作為根分割區 (/) 的掛載點.\n"
-"沒有 /boot 分割區, 開機載入器不可能處理這種情況.\n"
+"你已經選擇了一塊 LVM Logical Volume 當作為根分割區 (/) 的掛載點。\n"
+"沒有 /boot 分割區，開機載入程式不可能處理這種情況。\n"
 "請確定會增加一個 /boot 分割區"
 
 #: fsedit.pm:413
@@ -2976,17 +2977,17 @@ msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"您需要一個真正的檔案系統 (ext2/ext3, reiserfs, xfs 或是 jfs) 來放這個掛載點\n"
+"您需要一個真正的檔案系統 (ext2/ext3、reiserfs、xfs 或是 jfs) 來放這個掛載點\n"
 
 #: fsedit.pm:424
 #, c-format
 msgid "You can not use an encrypted file system for mount point %s"
-msgstr "您不能使用加密過的檔案系統來最為 %s 的掛載點"
+msgstr "您不能使用加密過的檔案系統來作為 %s 的掛載點"
 
 #: fsedit.pm:485
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "沒有足夠的空間能夠自動配置"
+msgstr "沒有足夠的空間來進行自動配置"
 
 #: fsedit.pm:487
 #, c-format
@@ -3245,7 +3246,7 @@ msgstr ""
 #: harddrake/sound.pm:257 harddrake/sound.pm:342 standalone/drakups:146
 #, c-format
 msgid "Driver:"
-msgstr "驅動程式:"
+msgstr "驅動程式："
 
 #: harddrake/sound.pm:262
 #, c-format
@@ -3289,7 +3290,7 @@ msgstr "無開放原始碼的驅動程式"
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
-msgstr "您的音效卡 (%s) 沒有自由的驅動程式, 但是有專利的驅動程式於 \"%s\"."
+msgstr "您的音效卡 (%s) 沒有自由的驅動程式，但是有私有的驅動程式於 \"%s\"."
 
 #: harddrake/sound.pm:282
 #, c-format
@@ -4219,7 +4220,7 @@ msgid ""
 msgstr ""
 "整個安裝步驟到這裡代表您安裝已經完成了且 GNU/Linux 系統準備好被使用.\n"
 "只要點選 \"%s\" 來重新啟動系統. 別忘了移除安裝媒介 (光碟或軟片).\n"
-"於您的電腦完成硬體測試後您第一個見到的是開機載入器選單,\n"
+"於您的電腦完成硬體測試後您第一個見到的是開機載入程式選單,\n"
 "給您開始那個作業系統的選擇\n"
 " \"%s\" 按鈕顯示另兩個按鈕到:\n"
 "\n"
@@ -4779,7 +4780,7 @@ msgstr ""
 "某些情況下, 滾輪滑鼠不能被自動偵測, 所以您將需要從清單中選擇您的滑鼠.\n"
 "確定選擇一個對應於您的滑鼠連接的埠的一項. 選擇一個滑鼠且按下 \"%s\" 鍵後,\n"
 "一個滑鼠影像將顯示在螢幕上.\n"
-" 捲動滑鼠滾輪以確定它正確被激活. 當您滾動\n"
+" 請捲動滑鼠滾輪以確定它正確被驅動. 當您滾動\n"
 "滑鼠滾輪, 您將看見螢幕上滾動滾輪移動.\n"
 " 測試按鍵且檢查滑鼠指標當您移動\n"
 "您的滑鼠時在螢幕上移動."
@@ -6494,12 +6495,12 @@ msgstr "安全性"
 #: install_steps_interactive.pm:1100
 #, c-format
 msgid "activated"
-msgstr "被激活"
+msgstr "以啟動"
 
 #: install_steps_interactive.pm:1100
 #, c-format
 msgid "disabled"
-msgstr "被禁用"
+msgstr "已停用"
 
 #: install_steps_interactive.pm:1109
 #, c-format
@@ -9134,12 +9135,12 @@ msgstr "請測試滑鼠"
 #: mouse.pm:548
 #, c-format
 msgid "To activate the mouse,"
-msgstr "為了激活您的滑鼠"
+msgstr "為了驅動您的滑鼠"
 
 #: mouse.pm:549
 #, c-format
 msgid "MOVE YOUR WHEEL!"
-msgstr "移動您的滾輪!"
+msgstr "請滾動您的滾輪！"
 
 #: network/adsl.pm:19
 #, c-format
