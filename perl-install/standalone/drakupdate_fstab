@@ -145,7 +145,7 @@ sub main {
 	    print STDERR "Already in fstab\n" if $::testing;
 	    return;
 	}
-	my $useSupermount = ${{ getVarsFromSh('/etc/sysconfig/dynamic') }}{SUPERMOUNT} eq 'no' ? '' : 'magicdev';
+	my $useSupermount = ${{ getVarsFromSh('/etc/sysconfig/dynamic') }}{SUPERMOUNT} eq 'yes' ? 'magicdev' : '';
 	set_options($part, $useSupermount);
 	set_mount_point($part, $fstab) or return;
 	
