@@ -431,7 +431,7 @@ sub computeSize {
 
     my $free_space = all_free_space($all_hds);
     my @l = my @L = grep { 
-	if (!has_mntpoint($_->{mntpoint}, $all_hds) && $free_space >= $_->{size}) {
+	if ($free_space >= $_->{size}) {
 	    $free_space -= $_->{size};
 	    1;
 	} else { 0 } } @$suggestions;
@@ -466,19 +466,22 @@ sub suggest_part {
 
     my $has_swap = any { isSwap($_) } get_all_fstab($all_hds);
 
+    my @local_suggestions =
+      grep { !has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
+      grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
+	@$suggestions;
+
     my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
-      grep { !has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
-      grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
       grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
-	@$suggestions or return;
+	@local_suggestions;
 
     defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
     $part->{type} = $best->{type} if !(isTrueFS($best) && isTrueFS($part));
-    $part->{size} = computeSize($part, $best, $all_hds, $suggestions);
+    $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
     foreach ('options', 'lv_name') {
 	$part->{$_} = $best->{$_} if $best->{$_};
     }
