@@ -411,6 +411,7 @@ sub ask_fromW {
 	    if ($e->{image}) {
 		$w = gtkadd(Gtk2::CheckButton->new, gtkshow(gtkcreate_img($e->{image})));
 	    } else {
+		warn "\"text\" member should have been used instead of \"label\" one at:\n", common::backtrace(), "\n" if $e->{label};
 		$w = Gtk2::CheckButton->new($e->{text});
 	    }
 	    $w->signal_connect(clicked => $changed);
