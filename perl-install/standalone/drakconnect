@@ -185,15 +185,13 @@ ugtk2->exit(0);
 sub manage {
     my ($netc, $netcnx, $intf) = @_;
 
-    my $gui = {};
-    my ($interface_menu, $selected);
+    my ($gui, $config) = ({}, {});
+    my ($interface_menu, $selected, $apply_button);
     my $window = ugtk2->new('Manage Connection');
     my $notebook = Gtk2::Notebook->new;
     $notebook->set_property('show-tabs', 0);
     $notebook->set_property('show-border', 0);
-    my $apply_button;
   
-    my $config = {};
     eval(cat_('/etc/sysconfig/drakconnect'));
 
     @all_cards = network::ethernet::get_eth_cards();
