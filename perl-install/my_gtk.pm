@@ -277,14 +277,15 @@ sub _create_window($$) {
 	    $w->signal_connect_after(expose_event => 
 		sub { $w->window->draw_rectangle($w->style->black_gc, 1, 0, 0, @{$w->allocation}[2,3]); 1 }
 	    );
+	    $w->show;
 	    $w;
 	};
-
-	 $t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
-	 $t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
-	 $t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
-	 $t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
-	 $t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
+	
+	$t->attach(&$new(), 0, 1, 0, 3, [],              , ["expand","fill"], 0, 0);
+	$t->attach(&$new(), 1, 2, 0, 1, ["expand","fill"], [],                0, 0);
+	$t->attach($f,      1, 2, 1, 2, ["expand","fill"], ["expand","fill"], 0, 0);
+	$t->attach(&$new(), 1, 2, 2, 3, ["expand","fill"], [],                0, 0);
+	$t->attach(&$new(), 2, 3, 0, 3, [],                ["expand","fill"], 0, 0);
 
 	gtkadd($w, $t);
     }
