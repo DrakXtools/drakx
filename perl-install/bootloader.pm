@@ -986,10 +986,6 @@ sub install_yaboot {
 }
 sub when_config_changed_yaboot {
     my ($bootloader) = @_;
-    if ($bootloader->{boot}) {
-	my $of_dev = get_of_dev($bootloader->{boot});
-	output("$::prefix/tmp/of_boot_dev", "$of_dev\n");
-    }
     $::testing and return;
     if (defined $install_steps_interactive::new_bootstrap) {
 	run_program::run("hformat", $bootloader->{boot}) or die "hformat failed";
