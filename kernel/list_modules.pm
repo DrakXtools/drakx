@@ -129,7 +129,7 @@ our %l = (
   {
     sound => [
       if_(arch() =~ /ppc/, qw(dmasound_pmac snd-powermac)),
-      if_(arch() =~ /sparc/, qw(snd-sun-amd7930 snd-sun-cs4231),
+      if_(arch() =~ /sparc/, qw(snd-sun-amd7930 snd-sun-cs4231)),
       if_(arch() !~ /^sparc/,
           qw(ad1816 ad1848 ad1889 ali5455 audigy audio awe_wave cmpci cs4232 cs4281 cs46xx),
           qw(emu10k1 es1370 es1371 esssolo1 forte gus i810_audio ice1712 kahlua mad16 maestro),
