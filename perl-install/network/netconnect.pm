@@ -173,7 +173,7 @@ sub real_main {
                               3 => N("CHAP"),
                               4 => N("PAP/CHAP"),
                              );
-      
+
       my $offer_to_connect = sub {
           return "ask_connect_now" if $netc->{internet_cnx_choice} eq 'adsl' && $adsl_devices{$ntf_name};
           return "ask_connect_now" if member($netc->{internet_cnx_choice}, qw(modem isdn));
@@ -181,6 +181,15 @@ sub real_main {
       };
     
       my $after_start_on_boot_step = sub {
+          if ($netc->{internet_cnx_choice}) {
+              write_cnx_script($netc);
+              $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type} if $netc->{internet_cnx_choice};
+              write_initscript();
+          } else {
+              undef $netc->{NET_DEVICE};
+          }
+          network::network::configureNetwork2($in, $::prefix, $netc, $intf);
+          $network_configured = 1;
           return "restart" if $need_restart_network && $::isStandalone && !$::expert;
           return $offer_to_connect->();
       };
@@ -1136,16 +1145,6 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                     post => sub {
                         my ($res) = @_;
                         $netc->{at_boot} = $res;
-                        if ($res) {
-                            write_cnx_script($netc);
-                            $netcnx->{type} = $netc->{internet_cnx}{$netc->{internet_cnx_choice}}{type} if $netc->{internet_cnx_choice};
-                            write_initscript();
-                        } else {
-                            undef $netc->{NET_DEVICE};
-                        }
-                        
-                        network::network::configureNetwork2($in, $::prefix, $netc, $intf);
-                        $network_configured = 1;
                         return $after_start_on_boot_step->();
                     },
                    },
