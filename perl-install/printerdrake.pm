@@ -31,7 +31,7 @@ Printers on remote CUPS servers you do not have to configure here; these printer
     1;
 }
 
-sub setup_remote_cups_server {
+sub config_cups {
     my ($printer, $in) = @_;
 
     local $::isWizard = 0;
@@ -47,132 +47,78 @@ sub setup_remote_cups_server {
     # Return value: 0 when nothing was changed ("Apply" never pressed), 1
     # when "Apply" was at least pressed once.
     my $retvalue = 0;
-    while (1) {
-	# Read CUPS config file
-	my @cupsd_conf = printer::read_cupsd_conf();
-	foreach (@cupsd_conf) {
-	    /^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
-	}
-	$server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
-	# Read printer list
-	my @queuelist = printer::read_cups_printer_list($printer);
-	if ($#queuelist >=0) {
-	    if ($printer->{DEFAULT} eq '') {
-		$default = printer::get_default_printer($printer);
-		if ($default) {
-		    # If a CUPS system has only remote printers and no default
-		    # printer defined, it defines the first printer whose
-		    # broadcast signal appeared after the start of the CUPS
-		    # daemon, so on every start another printer gets the
-		    # default printer. To avoid this, make sure that the
-		    # default printer is defined.
-		    $printer->{DEFAULT} = $default;
-		    printer::set_default_printer($printer);
-		}
-	    } else {
-		$default = $printer->{DEFAULT};
-	    }
-	    my $queue;
-	    for $queue (@queuelist) {
-		if ($queue =~ /^\s*$default/) {
-		    $default = $queue;
-		}
-	    }
-	    # The default printer setting should not be "None" when there
-	    # are printers
-	    if ($default eq _("None")) {
-		$default = _("Choose a default printer!");
-	    }
-	} else {
-	    push(@queuelist, _("None"));
-	    $default = _("None");
-	}
-	#- Did we have automatic or manual configuration mode for CUPS
-	$autoconf = printer::get_cups_autoconf();
-	#- Remember the server/port/autoconf settings to check whether the user
-        #- has changed them.
-	my $oldserver = $server;
-	my $oldport = $port;
-	my $oldautoconf = $autoconf;
-
-        #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
-	#- according to new settings. There are no other point where such
-	#- information is written in this file.
-
-	if ($in->ask_from_
-	    ({ title => _("Remote CUPS server"),
-	       messages => _("With remote CUPS servers, you do not have to configure any printer here; CUPS servers inform your machine automatically about their printers. All printers known to your machine currently are listed in the \"Default printer\" field. Choose the default printer for your machine there and click the \"Apply/Re-read printers\" button. Click the same button to refresh the list (it can take up to 30 seconds after the start of CUPS until all remote printers are visible). When your CUPS server is in a different network, you have to give the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
-              ($::expert ? _("
+    # Read CUPS config file
+    my @cupsd_conf = printer::read_cupsd_conf();
+    foreach (@cupsd_conf) {
+	/^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
+    }
+    $server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
+    #- Did we have automatic or manual configuration mode for CUPS
+    $autoconf = printer::get_cups_autoconf();
+    #- Remember the server/port/autoconf settings to check whether the user
+    #- has changed them.
+    my $oldserver = $server;
+    my $oldport = $port;
+    my $oldautoconf = $autoconf;
+    
+    #- then ask user for this combination and rewrite /etc/cups/cupsd.conf
+    #- according to new settings. There are no other point where such
+    #- information is written in this file.
+    
+    if ($in->ask_from_
+	({ title => ($::expert ? _("CUPS configuration") :
+		     _("Specify CUPS server")),
+	   messages => _("To get access to printers on remote CUPS servers in your local network you do not have to configure anything; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. When your CUPS server is not in your local network, you have to enter the CUPS server IP address and optionally the port number to get the printer information from the server, otherwise leave these fields blank.") .
+	       ($::expert ? "\n" . _("
 Normally, CUPS is automatically configured according to your network environment, so that you can access the printers on the CUPS servers in your local network. If this does not work correctly, turn off \"Automatic CUPS configuration\" and edit your file /etc/cups/cupsd.conf manually. Do not forget to restart CUPS afterwards (command: \"service cups restart\").") : ()),
-              cancel => _("Close"),
-              ok => _("Apply/Re-read printers"),
-	      callbacks => { complete => sub {
-		 unless (!$server || network::is_ip($server)) {
-		     $in->ask_warn('', 
-			_("The IP address should look like 192.168.1.20"));
-		     return (1,0);
-		 }
-		 if ($port !~ /^\d*$/) {
-		     $in->ask_warn('',
-			_("The port number should be an integer!"));
-		     return (1,1);
-		 }
-		 return 0;
-	     } }
-	   },
-	     [	
-		{ label => _("Default printer"), val => \$default,
-		  not_edit => 0, list => \@queuelist},
-		#{ label => _("Default printer") },
-		#{ val => \$default,
-		#  format => \&translate, not_edit => 0, list => \@queuelist},
+	   callbacks => { complete => sub {
+	       unless (!$server || network::is_ip($server)) {
+		   $in->ask_warn('', _("The IP address should look like 192.168.1.20"));
+		   return (1,0);
+	       }
+	       if ($port !~ /^\d*$/) {
+		   $in->ask_warn('', _("The port number should be an integer!"));
+		   return (1,1);
+	       }
+	       return 0;
+	   } }
+       },
+	 [	
 		{ label => _("CUPS server IP"), val => \$server },
 		{ label => _("Port"), val => \$port },
 		($::expert ?
-		{ text => _("Automatic CUPS configuration"), type => 'bool',
-		  val => \$autoconf } : ()),
-		]
-	     )) {
-	    # We have clicked "Apply/Re-read"
-	    $retvalue = 1;
-	    # Set default printer
-	    if ($default =~ /^\s*([^\s\(\)]+)\s*\(/) {
-		$default = $1;
-	    }
-	    if (($default ne _("None")) &&
-		($default ne _("Choose a default printer!"))) {
-		$printer->{DEFAULT} = $default;
-	        printer::set_default_printer($printer);
-	    }
-	    # Set BrowsePoll line
-	    if (($server ne $oldserver) || ($port ne $oldport)) {
-		$server && $port and $server = "$server:$port";
-		if ($server) {
-		    @cupsd_conf = 
-			map { $server and 
+		 { text => _("Automatic CUPS configuration"), type => 'bool',
+		   val => \$autoconf } : ()),
+	 ]
+	 )) {
+	# We have clicked "OK"
+	$retvalue = 1;
+	# Set BrowsePoll line
+	if (($server ne $oldserver) || ($port ne $oldport)) {
+	    $server && $port and $server = "$server:$port";
+	    if ($server) {
+		@cupsd_conf = 
+		    map { $server and 
 			      s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and
-				  $server = '';
-			      $_ } @cupsd_conf;
-		    $server and push @cupsd_conf, "\nBrowsePoll $server\n";
-		} else {
-		    @cupsd_conf = 
-			map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
-			      $_ } @cupsd_conf;
-		}
-	        printer::write_cupsd_conf(@cupsd_conf);
+			      $server = '';
+			  $_ } @cupsd_conf;
+		$server and push @cupsd_conf, "\nBrowsePoll $server\n";
+	    } else {
+		@cupsd_conf = 
+		    map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/;
+			  $_ } @cupsd_conf;
 	    }
-	    # Set auto-configuration state
-	    if ($autoconf != $oldautoconf) {
-	        printer::set_cups_autoconf($autoconf);
-	    }
-	} else {
-	    last;
+	    printer::write_cupsd_conf(@cupsd_conf);
 	}
+	# Set auto-configuration state
+	if ($autoconf != $oldautoconf) {
+	    printer::set_cups_autoconf($autoconf);
+	}
+	# Save user settings for auto-install
+	$printer->{BROWSEPOLLADDR} = $server;
+	$printer->{BROWSEPOLLPORT} = $port;
+	$printer->{MANUALCUPSCONFIG} = 1 - $autoconf;
     }
-    # Save user settings for auto-install
-    $printer->{BROWSEPOLLADDR} = $server;
-    $printer->{BROWSEPOLLPORT} = $port;
-    $printer->{MANUALCUPSCONFIG} = 1 - $autoconf;
     return $retvalue;
 }
 
@@ -2447,14 +2393,23 @@ sub main {
 			    },
 			    val => _("Add a new printer") },
 			  ( $printer->{SPOOLER} eq "cups" ?
-			    { clicked_may_quit =>
-				  sub { 
-				      # Save the cursor position
-				      $cursorpos = $menuchoice;
-				      $menuchoice = "\@refresh";
-				      1;
-				  },
-				  val => _("Refresh printer list (to display all available remote CUPS printers)") } : ()),
+			    ({ clicked_may_quit =>
+				   sub { 
+				       # Save the cursor position
+				       $cursorpos = $menuchoice;
+				       $menuchoice = "\@refresh";
+				       1;
+				   },
+			       val => _("Refresh printer list (to display all available remote CUPS printers)") },
+			     { clicked_may_quit =>
+				   sub { 
+				       # Save the cursor position
+				       $cursorpos = $menuchoice;
+				       $menuchoice = "\@cupsconfig";
+				       1;
+				   },
+			       val => ($::expert ? _("CUPS configuration") :
+				       _("Specify CUPS server")) }) : ()),
 			  ( $::expert ?
 			    { clicked_may_quit =>
 				  sub {
@@ -2463,7 +2418,7 @@ sub main {
 				      $menuchoice = "\@spooler";
 				      1;
 				  },
-				  val => _("Configure printing system") } :
+				  val => _("Change the printing system") } :
 			    ()),
 			  ( !$::isInstall ?
 			    { clicked_may_quit =>
@@ -2498,6 +2453,11 @@ sub main {
 		if ($menuchoice eq "\@refresh") {
 		    next;
 		}
+		# Configure CUPS
+		if ($menuchoice eq "\@cupsconfig") {
+		    config_cups($printer, $in);
+		    next;
+		}
 	        # Determine a default name for a new printer queue
 		if ($menuchoice eq "\@addprinter") {
 		    $newqueue = 1;
@@ -2506,7 +2466,7 @@ sub main {
 		    my $i = ''; while ($i < 150) { last unless exists $queues{"$defaultprname$i"}; ++$i; }
 		    $queue = "$defaultprname$i";
 		}
-		# Function to switch to another spooler chosen
+		# Function to switch to another spooler
 		if ($menuchoice eq "\@spooler") {
 		    $printer->{SPOOLER} = setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
 		    next;
@@ -2569,11 +2529,6 @@ sub main {
 		  step_1:
 		    !$::expert or choose_printer_type($printer, $in) or
 			goto step_0;
-		    if ($printer->{TYPE} eq 'CUPS') {
-			setup_remote_cups_server($printer, $in);
-			$continue = ($::expert || !$::isInstall || $menushown ||
-				     $in->ask_yesorno('',_("Do you want to configure another printer?")));
-		    }
 		  step_2:
 		    setup_printer_connection($printer, $in) or do {
 			goto step_1 if $::expert;
@@ -2637,11 +2592,6 @@ sub main {
 	    } else {
 		$printer->{TYPE} = "LOCAL";
 		!$::expert or choose_printer_type($printer, $in) or next;
-		if ($printer->{TYPE} eq 'CUPS') {
-		    setup_remote_cups_server($printer, $in);
-		    $continue = ($::expert || !$::isInstall || $menushown ||
-				 $in->ask_yesorno('',_("Do you want to configure another printer?")));
-		}
 		#- Cancelling the printer connection type window
 		#- should not restart printerdrake in recommended mode,
 		#- it is the first dialog of the sequence there and
