@@ -1,10 +1,10 @@
-Well here is a little description of what panoramix needs to work in comparison
+Well here is a little description of what DrakX needs to work in comparison
 to the standard newt install.
 
 ********************************************************************************
 * CVS **************************************************************************
 ********************************************************************************
-Like all good free software, panoramix is in CVS :)
+Like all good free software, DrakX is in CVS :)
 
 You can access it using:
 % export CVSROOT=:pserver:anoncvs@linux-mandrake.com:/home/cvs/cooker
@@ -40,12 +40,13 @@ First he are the different things needed :
 
 Mandrake/base/hdlist
 	table of rpm's headers. 
-	! Need to be remade when Mandrake/RPMS changes !
+	! Need to be remade when Mandrake/RPMS changes (with ``misc/genhdlist .'') !
 
 Mandrake/base/depslist
 	for each packages, tell which package it depends on. Also contains the
 	size for some (obscure) bloody reasons.
 	! Need to be remade when Mandrake/RPMS changes !
+	(with ``misc/gendepslist -h Mandrake/base/depslist Mandrake/base/hdlist'') 
 
 Mandrake/base/compss
 	obsoletes comps. It store packages in different categories, a bit like
@@ -70,7 +71,7 @@ Mandrake/base/mdkinst_stage2.gz
 	See ``Ramdisk or not'' below for more.
 
 images/gi_*.img
-	boot images to use with panoramix. Use:
+	boot images to use with DrakX. Use:
 	- gi_hd for hard-disk install
 	- gi_cdrom for cdrom install
 	- gi_network for ftp/nfs install
@@ -116,7 +117,7 @@ set to developer (!)...
 * po translation files *********************************************************
 ********************************************************************************
 DrakX uses .po files for its translation. A script takes the different
-strings out of the .pm files. It generates the panoramix.pot file which contains
+strings out of the .pm files. It generates the DrakX.pot file which contains
 all the english strings to translate.
 To add a new language, you just have to add it to lang.pm (if it's not there
 already) and put the .po in the perl-install/po directory (see ``Ramdisk or
@@ -134,11 +135,11 @@ gi_pcmcia disk.
 ********************************************************************************
 * Ramdisk or not ***************************************************************
 ********************************************************************************
-The panoramix install is much bigger than the newt one. So the ramdisk which was
+The DrakX install is much bigger than the newt one. So the ramdisk which was
 used is getting big, and costs a lot in memory 
 (eg: the mdkinst_stage2 is 14MB - 23/09/99)
 
-|       | newt    | panoramix
+|       | newt    | DrakX
 |-------+---------+----------------------------------------------------------
 | nfs   | live    | live
 | ftp   | ramdisk | ramdisk

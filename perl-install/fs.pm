@@ -186,8 +186,9 @@ sub umount_all($;$) {
 }
 
 #- do some stuff before calling write_fstab
-sub write($$) {
-    my ($prefix, $fstab) = @_;
+sub write($$$) {
+    my ($prefix, $fstab, $manualFstab) = @_;
+    $fstab = [ @{$fstab||[]}, @{$manualFstab||[]} ];
 
     log::l("resetting /etc/mtab");
     local *F;
@@ -228,7 +229,7 @@ sub write_fstab($;$$) {
 	  $options ||= $_->{options};
 
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
-	  isNfs($_) and ($dir, $options) = ('', 'ro');
+	  isNfs($_) and $dir = '', $options ||= 'ro,rsize=8192,wsize=8192';
 
 	  #- keep in mind the new line for fstab.
 	  @new{($_->{mntpoint}, $_->{"$dir$_->{device}"})} = undef;

@@ -308,6 +308,10 @@ sub partitionDisks {
     }
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}, $o->{raid}) ];
     fsedit::get_root($o->{fstab}) or die _("Partitioning failed: no root filesystem");
+
+    cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/rhimage nfs| &&
+      !grep { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{manualFstab} || []} and
+	push @{$o->{manualFstab}}, { type => "nfs", mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,rsize=8192,wsize=8192" };
 }
 
 sub formatPartitions {
@@ -345,7 +349,7 @@ sub doInstallStep {
 
     #- some packages need such files for proper installation.
     install_any::write_ldsoconf($o->{prefix});
-    fs::write($o->{prefix}, $o->{fstab});
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
 
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
@@ -480,14 +484,19 @@ sub main {
 	    newt      => sub { $o->{interactive} = "newt" },
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio"},
-#	    ks        => sub { $::auto_install = 1; $cfg = $v; },
-#	    kickstart => sub { $::auto_install = 1; $cfg = $v; },
-	    auto_install => sub { $::auto_install = 1; $cfg = $v; },
+	    ks        => sub { $::auto_install = 1 },
+	    kickstart => sub { $::auto_install = 1 },
+	    auto_install => sub { $::auto_install = 1 },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	}}{lc $n}; &$f if $f;
     } %cmdline;    
+
+    if ($::g_auto_install) {
+	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
+	symlinkf $root, "/tmp/rhimage" or die "unable to create link /tmp/rhimage";
+    }
 
     unlink "/sbin/insmod"  unless $::testing;
     unlink "/modules/pcmcia_core.o" unless $::testing; #- always use module from archive.
@@ -518,7 +527,13 @@ sub main {
 
     if ($::auto_install) {
 	require 'install_steps_auto_install.pm';
-    } else {
+	eval { $o = $::o = install_any::loadO($o, "floppy") };
+	if ($@) {
+	    log::l("error using auto_install, continuing");
+	    $::auto_install = undef;
+	}
+    }
+    unless ($::auto_install) {
 	$o->{interactive} ||= 'gtk';
 	require"install_steps_$o->{interactive}.pm";
     }
@@ -588,7 +603,7 @@ sub main {
     }
     substInFile { s|/sbin/mingetty tty1.*|/bin/bash --login| } "$o->{prefix}/etc/inittab" if $o->{security} < 1;
 
-    fs::write($o->{prefix}, $o->{fstab});
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};

@@ -228,6 +228,9 @@ sub afterInstallPackages($) {
     run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     $o->pcmciaConfig();
+
+    my $p = $o->{packages}{urpmi};
+    install_any::install_urpmi($o->{prefix}, $o->{method}) if $p && $p->{selected};
 }
 
 #------------------------------------------------------------------------------
@@ -412,6 +415,8 @@ sub addUser($) {
 	}
 	commands::chown_("-r", "$_->{uid}.$_->{gid}", "$p$_->{home}")
 	    if $_->{uid} != $_->{oldu} || $_->{gid} != $_->{oldg};
+
+	run_program::rooted($p, "usermod", "-G", "urpmi", $_->{name}) if $o->{security} < 3;
     }
 }
 

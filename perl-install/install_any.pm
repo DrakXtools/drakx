@@ -375,7 +375,7 @@ sub setupFB {
     1;
 }
 
-sub auto_inst_file() { "$::o->{prefix}/root/auto_inst.cfg.pl" }
+sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::o->{prefix}/root") . "/auto_inst.cfg.pl" }
 
 sub g_auto_install(;$) {
     my ($f) = @_; $f ||= auto_inst_file;
@@ -386,7 +386,7 @@ sub g_auto_install(;$) {
     my @fields = qw(mntpoint type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
-    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning); #- TODO modules bootloader 
+    exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentification printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade X manualFstab); #- TODO modules bootloader 
 
 #-    local $o->{partitioning}{clearall} = 1;
 
@@ -407,9 +407,12 @@ sub loadO {
 	    $f = "/mnt/$f";
 	}
 	-e $f or $f .= ".pl";
+
+	my $b = before_leaving {
+	    fs::umount("/mnt") unless $::testing;
+	    modules::unload($_) foreach qw(vfat fat);
+	};
 	$o = loadO($O, $f);
-	fs::umount("/mnt") unless $::testing;
-	modules::unload($_) foreach qw(vfat fat);
     } else {
 	-e $f or $f .= ".pl";
 	{
@@ -436,3 +439,32 @@ sub fsck_option() {
     my $y = $::o->{security} < 3 && $::beginner ? "-y " : "";
     substInFile { s/^(\s*fsckoptions="?)(-y )?/$1$y/ } "$::o->{prefix}/etc/rc.d/rc.sysinit";
 }
+
+sub install_urpmi {
+    my ($prefix, $method) = @_;
+
+    (my $name = _("installation_cd")) =~ s/\s/_/g; #- in case translators are too good :-/
+
+    my $f = "$prefix/etc/urpmi/hdlist.$name";
+    {
+	my $fd = getFile("hdlist") or return;
+	local *OUT;
+	open OUT, ">$f" or log::l("failed to write $f"), return;
+	local $/ = \ (16 * 1024);
+	print OUT foreach <$fd>;
+    }
+    {
+	local *LIST;
+	open LIST, ">$prefix/etc/urpmi/list.$name" or log::l("failed to write list.$name"), return;
+
+	my $dir = ${{ nfs => "file://mnt/nfs", 
+		      ftp => $ENV{URLPREFIX}, 
+		      cdrom => "removable_cdrom_1://mnt/cdrom" }}{$method};
+	local *FILES; open FILES, "hdlist2files $f|";
+	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
+	close FILES or die "hdlist2files failed";
+    }
+    run_program::rooted($prefix, "urpmi.update");
+}
+
+1;

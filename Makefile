@@ -11,12 +11,12 @@ install: build
 	cp -f $(BOOT_IMG) $(ROOTDEST)/images ; rm $(ROOTDEST)/images/*_ks.img
 	make -C perl-install full_stage2
 
-build: dirs $(BOOT_IMG)
+build: $(BOOT_IMG)
 
 dirs:
 	for i in $(DIRS); do make -C $$i; done
 
-$(BOOT_IMG): modules
+$(BOOT_IMG): modules dirs
 	make dirs
 	./make_boot_img $@ $(@:gi_%.img=%)
 

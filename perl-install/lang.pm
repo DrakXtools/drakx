@@ -97,7 +97,7 @@ my %charsets = (
   "jisx0208"   => [ "????",			"????", 
 	"-*-*-*-*-*-*-*-*-*-*-*-*-jisx*.*-0" ],
   "koi8-r"     => [ "Cyr_a8x16",		"koi2alt", std("koi8-r") ],
-  "koi8-u"     => [ "ruscii_8x16",		"koi2alt", std("koi2-u") ],
+  "koi8-u"     => [ "ruscii_8x16",		"koi2alt", std("koi8-u") ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ "?????",                    "?????",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-ksc5601.1987-*" ],

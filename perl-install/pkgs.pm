@@ -18,7 +18,7 @@ XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
 XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs kernel-BOOT
 MySQL MySQL_GPL mod_php3 midgard postfix metroess metrotmpl
 hackkernel hackkernel-BOOT hackkernel-fb hackkernel-headers
-hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb
+hackkernel-pcmcia-cs hackkernel-smp hackkernel-smp-fb autoirpm
 );
 
 my @preferred = qw(
