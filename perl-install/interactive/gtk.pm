@@ -162,17 +162,19 @@ sub create_treeview_tree {
     $tree->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 2));
     $tree->set_headers_visible(0);
 
-    my @to_unref;
-    $tree->signal_connect(destroy => sub { $_->unref foreach @to_unref });
-    my $build_value = sub {
-	if (exists $e->{image2f}) {
+    my ($build_value, $clean_image);
+    if (exists $e->{image2f}) {
+	my $to_unref;
+	$build_value = sub {
 	    my ($text, $image) = $e->{image2f}->($_[0]);
 	    [ $text  ? (0 => $text) : (),
-	      $image ? (1 => do { push @to_unref, my $img = gtkcreate_pixbuf($image); $img }) : () ];
-	} else {
-	    [ 0 => $_[0] ];
-	}
-    };
+	      $image ? (1 => my $to_unref = gtkcreate_pixbuf($image)) : () ];
+	};
+	$clean_image = sub { $to_unref and $to_unref->unref };
+    } else {
+	$build_value = sub { [ 0 => $_[0] ] };
+	$clean_image = sub {};
+    }
 
     my (%wtree, %wleaves, $size, $selected_via_click);
     my $parent; $parent = sub {
@@ -181,6 +183,7 @@ sub create_treeview_tree {
 	foreach (split $sep, $_[0]) {
 	    $wtree{"$s$_$e->{separator}"} ||= 
 	      $tree_model->append_set($s ? $parent->($s) : undef, $build_value->($_));
+	    $clean_image->();
 	    $size++ if !$s;
 	    $s .= "$_$e->{separator}";
 	}
@@ -192,6 +195,7 @@ sub create_treeview_tree {
     mapn {
 	my ($root, $leaf) = $_[0] =~ /(.*)$sep(.+)/ ? ($1, $2) : ('', $_[0]);
 	my $iter = $tree_model->append_set($parent->($root), $build_value->($leaf));
+	$clean_image->();
 	my $pathstr = $tree_model->get_path_str($iter);
 	$iter->free;
 	$precomp{$pathstr} = { value => $leaf, fullvalue => $_[0], listvalue => $_[1] };
