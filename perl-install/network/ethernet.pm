@@ -1,5 +1,6 @@
 package network::ethernet;
 
+use strict;
 use network::network;
 use modules;
 use modules::interactive;
@@ -186,7 +187,6 @@ sub configureNetwork {
     if ($last->{BOOTPROTO} =~ /dhcp|bootp|zeroconf/) {
 	$netc->{minus_one} = 1;
 	$netc->{DHCP} = 1;
-	my $dhcp_hostname = $netc->{HOSTNAME};
 	$::isInstall and $in->set_help('configureNetworkHostDHCP');
 	$in->ask_from(N("Configuring network"),
 N("Please enter your host name if you know it.
