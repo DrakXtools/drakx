@@ -29,10 +29,11 @@ use netconnect;
 use c;
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
-
+$::isWizard = "@ARGV" =~ /--wizard/;
 print "EMBED\n" if $::isEmbedded;
 print "XID : $::XID\n";
 print "CCPID :  $::CCPID\n";
+print "wiz : $::isWizard\n";
 
 local $_ = join '', @ARGV;
 
@@ -41,8 +42,8 @@ local $_ = join '', @ARGV;
 my $netcnx = {};
 my $netc = {};
 my $intf = {};
+my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan' );
 
-$::isWizard = 1;
 $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 #$::force_xf3 = /-xf3/;
 #$::beginner = /-beginner/;
@@ -58,8 +59,8 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-#goto dd;
-my $window1 = new Gtk::Window -toplevel;
+$::isEmbedded or goto dd;
+my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
 $window1->set_title(_("Network configuration"));
@@ -72,13 +73,15 @@ $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 my $combo1 = new Gtk::Combo;
 $combo1->set_popdown_strings ("default", "maison", "travail" );
 $combo1->entry->set_editable(0);
+$combo1->entry->set_text("default");
 $combo1->entry->signal_connect( 'changed', sub { print "CHANGED\n" });#\&configure_net );
 $hbox1->pack_start($combo1,0,0,0);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
 $hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
 chop (my $hostname = `hostname`);
-$hbox2->pack_start(new Gtk::Label($hostname),0,0,0);
+my $label_host = new Gtk::Label($hostname);
+$hbox2->pack_start($label_host,0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
@@ -135,21 +138,39 @@ $table2->attach($label13, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label14 = new Gtk::Label(_("not connected"));
 $table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
+my $bbox1 = new Gtk::HButtonBox;
+$vbox1->pack_start($bbox1,0,0,0);
+$bbox1->set_layout(-end);
+my $button_ok = new Gtk::Button "OK";
+$button_ok->signal_connect ( clicked => sub { kill(USR1, $::CCPID) });
+$bbox1->add($button_ok);
+my $button_cancel = new Gtk::Button "Cancel";
+$button_cancel->signal_connect ( clicked => sub {
+				     $combo1->entry->set_text("default");
+				     kill(USR1, $::CCPID);
+				     chop (my $h = `hostname`);
+				     $label_host->set ($h);
+				     $label4->set($netcnx->{type});
+				     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
+				     kill(USR1, $::CCPID);
+				 });
+$bbox1->add($button_cancel);
 
 $window1->show_all();
 Gtk->main;
 
 dd:
 
-netconnect::intro('', $netcnx, $in, sub {});#\&standalone::pkgs_install);
+netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {});#\&standalone::pkgs_install);
 $in->exit(0);
 
 sub configure_net {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
     my $cnx={};
-    $cnx=$netcnx->{netcnx->{type}};
+    $cnx=$netcnx->{$netcnx->{type}};
     my $auto_detect={};
     my $window = new Gtk::Window -toplevel;
+    $window->set_policy (1, 1, 1);
     $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
     $window->set_position(1);
     $window->set_title(_("Internet connection configuration"));
@@ -173,10 +194,8 @@ sub configure_net {
 
     my $frame1 = new Gtk::Frame (_("Parameters"));
     $vbox1->pack_start($frame1,1,1,0);
-    my $table2 = new Gtk::Table (14,2, 0);
-    $table2->set_row_spacings(5);
-    $table2->set_col_spacings(5);
-    $frame1->add($table2);
+    my $vbox2 = new Gtk::VBox(0,0);
+    $frame1->add($vbox2);
     my $i=0;
     foreach ([_("Card IRQ"), \$cnx->{irq}],
 	     [_("Card mem (DMA)"), \$cnx->{mem}],
@@ -190,18 +209,39 @@ sub configure_net {
 	     [_("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
 	     [_("Account Login (user name)"), \$cnx->{login}],
 	     [_("Account Password"), \$cnx->{passwd}],
-	     [_("Gateway"), \$netc->{GATEWAY}]) {
-	$infos[2*$i]=new Gtk::Label($_->[0]);
-  	$table2->attach($infos[2*$i], 0, 1, $i+1, $i+2, 'fill', 'fill',0,0);
-  	$infos[2*$i+1]=new Gtk::Entry();
+	     [_("Dialing mode"), $cnx->{dialing_mode}, [ "auto", "manual"] ],
+	     [_("Gateway"), \$netc->{GATEWAY}],
+	     [_("Connection name"), \$modem->{connection} ],
+	     [_("Phone number"), \$modem->{phone} ],
+	     [_("Login ID"), \$modem->{login} ],
+	     [_("Password"), \$modem->{passwd} ],
+	     [_("Authentication"), \$modem->{auth}, [ _("PAP"), _("Terminal-based"), _("Script-based") ] ],
+	     [_("Domain name"), \$modem->{domain} ],
+	     [_("First DNS Server"), \$modem->{dns1} ],
+	     [_("Second DNS Server"), \$modem->{dns2} ]) {
+	$infos[2*$i]=new Gtk::HBox(0,0);
+	my $l=new Gtk::Label($_->[0]);
+	$l->set_justify('left');
+	$infos[2*$i]->pack_start($l,1,1,0);
+	$vbox2->pack_start($infos[2*$i],0,0,0);
+  	if (defined $_->[2]) {
+	    my $c=new Gtk::Combo();
+	    $c->set_popdown_strings(@{$_->[2]});
+	    $infos[2*$i+1]=$c->entry;
+	    $infos[2*$i+1]->set_editable(0);
+	    $infos[2*$i]->pack_start($c,0,0,0);
+	} else {
+	    $infos[2*$i+1]=new Gtk::Entry();
+	    $infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
+	}
 	$infos[2*$i+1]->set_text(${$_->[1]});
-  	$table2->attach($infos[2*$i+1], 1, 2, $i+1, $i+2, 'fill', 'fill',0,0);
   	$i++;
     }
     my @mask;
-    @mask = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1) if $netcnx->{type} eq 'lan';
-    @mask = (0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} ne 'pci';
-    @mask = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} eq 'isa';
+    $netcnx->{type}='isdn_internal';
+    @mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'lan';
+    @mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} ne 'pci';
+    @mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} eq 'isa';
     $vbox1->pack_start(new Gtk::HSeparator,0,0,5);
 
 
@@ -209,18 +249,21 @@ sub configure_net {
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
     my $button_ok = new Gtk::Button "OK";
+    $button_ok->signal_connect ( clicked => sub { Gtk->main_quit });
     $bbox1->add($button_ok);
     my $button_cancel = new Gtk::Button "Cancel";
     $bbox1->add($button_cancel);
 
+    $window->set_modal(1);
     $window->show_all();
     $i=0;
     foreach (@mask) {
 	print "$_\n";
-	if ($_) { $infos[2*$i]->show; $infos[2*$i+1]->show }
-	else { $infos[2*$i]->hide; $infos[2*$i+1]->hide }
+	if ($_) { $infos[2*$i]->show }
+	else { $infos[2*$i]->hide; }
 	$i++;
     }
+    $window->set_position('center_always');
     Gtk->main;
 
 }
