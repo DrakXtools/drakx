@@ -132,12 +132,12 @@ $Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
 $hbx->pack_start($Close_Button,0,0,0);
 
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { my $options = "mdkwizard=1";
+$Report_Button->signal_connect(clicked => sub { my $options = "mdkbugreport=1";
 						$options.="&incident=1" if $incident;
 						$p = $package->get_text(); $k=$kernel_rel->get_text(); ($r =parse_release()) =~ s/\s//;
 						$options.="&package=$p" if $p =~ /rpm/;
 						$options.="&kernel=$k";
-						$options.="&mdkrelease=$r";
+						$options.="&version=$r";
 						print "$bugzilla_url"."?"."$options" ."\n";
 						connect_bugzilla("$bugzilla_url"."?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
