@@ -1,14 +1,14 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.4mdk
+Release: 0.5mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-GTK2 >= 0.0.cvs.2002.12.11.1, XFree86-100dpi-fonts, XFree86-75dpi-fonts, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.44-4mdk, perl-MDK-Common >= 1.0.3-12mdk
 Conflicts: drakconf < 9.1-0.4mdk 
-BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel, libext2fs-devel
+BuildRequires: gettext, libgtk+-x11-2.0-devel, ldetect-devel, ncurses-devel, newt-devel, perl-devel, libext2fs-devel, perl-MDK-Common-devel
 BuildRoot: %_tmppath/%name-buildroot
 Provides: draksec
 Obsoletes: draksec
@@ -288,6 +288,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Dec 30 2002 Stefan van der Eijk <stefan@eijk.nu> 9.1-0.5mdk
+- BuildRequires: perl-MDK-Common-devel
+
 * Thu Dec 19 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.4mdk
 - gtk+2 snapshot
 
