@@ -595,8 +595,8 @@ sub install_urpmi {
 	    push @cfg, "$qname " . ($need_list ? "" : $qdir) . " {
   hdlist: hdlist.$name.cz
   with_hdlist: $with" . ($need_list ? "
-  list: list.$name" : "") . (keys(%{$_->{key_ids}}) && "
-  key-ids: " . join(',', keys(%{$_->{key_ids}}))) . ($dir =~ /removable:/ && "
+  list: list.$name" : "") . (keys(%{$_->{key_ids}}) ? "
+  key-ids: " . join(',', keys(%{$_->{key_ids}})) : "") . ($dir =~ /removable:/ && "
   removable: /dev/cdrom") . "
   update" . "
 }
