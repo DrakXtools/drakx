@@ -397,9 +397,10 @@ sub g_auto_install(;$) {
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(lang autoSCSI authentication printer mouse netc timezone superuser intf keyboard mkbootdisk base users installClass partitioning isUpgrade manualFstab nomouseprobe); #- TODO modules bootloader 
 
-    my $card = $::o->{X}{card};
-    $o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
-    $o->{X}{card}{resolution_wanted} = join "x", @{$card->{depth}{$card->{default_depth}}[0]};
+    if (my $card = $::o->{X}{card}) {
+	$o->{X}{card}{$_} = $card->{$_} foreach qw(default_depth);
+	$o->{X}{card}{resolution_wanted} = join "x", @{$card->{depth}{$card->{default_depth}}[0]};
+    }
 
 #-    local $o->{partitioning}{clearall} = 1;
 

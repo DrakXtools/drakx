@@ -16,7 +16,7 @@ $(DIRS):
 
 install:
 	install -d $(BINDEST) $(ETCDEST) $(SBINDEST) $(LIBDEST) $(X11DEST) $(DIRS:%=$(LIBDEST)/%)
-	install diskdrake XFdrake mousedrake lspcidrake $(SBINDEST)
+	install diskdrake XFdrake mousedrake lspcidrake printerdrake $(SBINDEST)
 	install -s ddcprobe/ddcxinfos $(SBINDEST)
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
