@@ -423,9 +423,11 @@ sub psUsingHdlists {
 	];
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
-    my ($finalhdlists, $copy_rpms_on_disk);
-    ($finalhdlists, $copy_rpms_on_disk) = $o->deselectFoundMedia(\@hdlists) if $deselectionAllowed && !defined $o_initialmedium;
-    @hdlists = @$finalhdlists;
+    my $copy_rpms_on_disk = 0;
+    if ($deselectionAllowed && !defined $o_initialmedium) {
+	(my $finalhdlists, $copy_rpms_on_disk) = $o->deselectFoundMedia(\@hdlists);
+	@hdlists = @$finalhdlists;
+    }
 
     foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
