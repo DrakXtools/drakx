@@ -16,7 +16,7 @@ use common;
   setupSCSI          => [ N_("Hard drive detection"), 1, 0, '', '', 'harddrive' ],
   selectInstallClass => [ N_("Select installation class"), 1, 1, '', '', '' ],
   selectKeyboard     => [ N_("Choose your keyboard"), 1, 1, '', "selectInstallClass", 'keyboard' ],
-  miscellaneous      => [ N_("Security"), 1, 1, '!$::expert', '', 'security' ],
+  miscellaneous      => [ N_("Security"), 1, 1, '', '', 'security' ],
   doPartitionDisks   => [ N_("Setup filesystems"), 1, 0, '', "selectInstallClass", 'partition' ],
   formatPartitions   => [ N_("Format partitions"), 1, -1, '$o->{isUpgrade}', "doPartitionDisks", 'partition' ],
   choosePackages     => [ N_("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions", 'partition' ],
