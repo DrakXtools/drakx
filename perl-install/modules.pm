@@ -318,7 +318,7 @@ sub write_conf() {
     }
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
-    push @l, grep { detect_devices::matching_driver('^$_$') } qw(bttv cx8800 saa7134);
+    push @l, grep { detect_devices::matching_driver("^$_\$") } qw(bttv cx8800 saa7134);
     my @l_26 = @l;
     if (my ($agp) = probe_category('various/agpgart')) {
 	push @l_26, $agp->{driver};
