@@ -4069,7 +4069,7 @@ msgid "Total size: %d / %d MB"
 msgstr "Укупна величина: %d / %d MB"
 
 #: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Next ->"
 msgstr "Следeћи  ->"
@@ -4769,11 +4769,6 @@ msgstr "Изаберите  распоред тастатуре."
 #, c-format
 msgid "License agreement"
 msgstr "ЛИценцирани уговор"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Do you really want to leave the installation?"
-msgstr "Да ли заиста хоћете да прекинете инсталацију?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5561,7 +5556,7 @@ msgstr "Инфо"
 msgid "Is this correct?"
 msgstr "Да ли је ово исправно ?"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "Краj"
@@ -6569,13 +6564,6 @@ msgstr ""
 "%s"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Крај"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -6601,6 +6589,13 @@ msgstr "Монитор"
 #, c-format
 msgid "Graphic Card"
 msgstr "Графичка картица"
+
+#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Крај"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -8067,10 +8062,10 @@ msgstr "Непознати|CPH05X (bt878) [многи произвођачи]"
 msgid "Auto-detect"
 msgstr "Ауто-детекциjа"
 
-#: ../../interactive/newt.pm:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Next"
-msgstr "Следећи"
+#: ../../interactive/newt.pm:1
+#, fuzzy, c-format
+msgid "Do"
+msgstr "Доле"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -13093,6 +13088,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Next"
+msgstr "Следећи"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Previous"
 msgstr "Претходни"
 
@@ -15488,7 +15488,7 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Дeљeње интернет конекциjе jе тренутно омогућено "
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "Жалим, али подржани су само 2.4 кернели."
@@ -15579,12 +15579,12 @@ msgstr "Избриши одабрано правило"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Down selected rule one level"
+msgid "Move selected rule down one level"
 msgstr "Спусти одабрано правило за један ниво"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Up selected rule one level"
+msgid "Move selected rule up one level"
 msgstr "Подигни одабрано правило за један ниво"
 
 #: ../../standalone/drakperm:1
@@ -15678,7 +15678,7 @@ msgstr "Периодичне провере"
 #, c-format
 msgid ""
 "The following options can be set to customize your\n"
-"system security. If you need explanations, click on Help.\n"
+"system security. If you need an explanation, click on Help.\n"
 msgstr ""
 "СЛедеће опције се могу поставити да подесе ваш\n"
 "сигурносни систем. Уколико вам треба објашњење, кликните на помоћ.\n"
@@ -15823,7 +15823,7 @@ msgstr "Избор боје за траку која приказује стање напредовања"
 
 #: ../../standalone/draksplash:1
 #, c-format
-msgid "This theme haven't yet any bootsplash in %s !"
+msgid "This theme does not yet have a bootsplash in %s !"
 msgstr "Ова тема нема ниједан bootsplash у %s !"
 
 #: ../../standalone/draksplash:1
@@ -15873,7 +15873,7 @@ msgstr "боја траке са приказом напретка"
 
 #: ../../standalone/draksplash:1
 #, c-format
-msgid "the heigth of the progress bar"
+msgid "the height of the progress bar"
 msgstr "висина траке са приказом напретка"
 
 #: ../../standalone/draksplash:1
@@ -15950,7 +15950,7 @@ msgstr "креирање првог корака"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
-"package 'ImageMagick' is required for correct working.\n"
+"package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
 "пакет 'ImageMagick' је потребан да правилан рад.\n"
@@ -16170,10 +16170,9 @@ msgid "secondary"
 msgstr "секундарно"
 
 #: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Click on a device in the left tree in order to get its information displayed "
-"here."
+"Click on a device in the left tree in order to display its information here."
 msgstr "Кликните на уређај у левом стаблу да би овде приказали информације."
 
 #: ../../standalone/harddrake2:1
@@ -16246,10 +16245,10 @@ msgid "/_Report Bug"
 msgstr "/_Пријавите Баг"
 
 #: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Once you've selected a device, you'll be able to see explanations on fields "
-"displayed on the right frame (\"Information\")"
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
 msgstr ""
 "Када једном изаберете уређај, моћи ћете да видите објашњење на пољима "
 "приказаним у десном оквиру  (\"Информације\")"
@@ -16424,7 +16423,7 @@ msgstr "Halt bug"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Early pentium were buggy and freezed when decoding the F00F bytecode"
+msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 "Први pentium процесори су били баговити и блокирали су рад при ддекодирању "
 "F00F bytecode"
@@ -16458,7 +16457,7 @@ msgstr "да је FPU присутан"
 #, c-format
 msgid ""
 "Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the attended precision when performing a "
+"processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
 "Рани Intel Pentium чипови су имали грешку у floating тачки процесора који "
@@ -16482,7 +16481,7 @@ msgstr "Заставе"
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "the module of the GNU/Linux kernel that handle that device"
+msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "модул GNU/Linux кернела који управља тим уређајем"
 
 #: ../../standalone/harddrake2:1
@@ -16491,8 +16490,8 @@ msgid "Module"
 msgstr "Модул"
 
 #: ../../standalone/harddrake2:1
-#, c-format
-msgid "new dinamic device name generated by incore kernel devfs"
+#, fuzzy, c-format
+msgid "new dinamic device name generated by core kernel devfs"
 msgstr "ново динамичко име уређаја генерисано од стране incore kernel devfs"
 
 #: ../../standalone/harddrake2:1
@@ -16587,10 +16586,10 @@ msgid "Location on the bus"
 msgstr "Локација на бусу"
 
 #: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"- PCI and USB devices: this list the vendor, device, subvendor and subdevice "
-"PCI/USB ids"
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
 msgstr ""
 "- PCI и USB уређаји : ово приказује произвођача, уређај, подпроизвођача и "
 "бројеве PCI/USB уређаја"
@@ -16601,9 +16600,9 @@ msgid "Bus identification"
 msgstr "Идентификација буса"
 
 #: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"The GNU/Linux kernel needs to do run a calculation loop at boot time to "
+"The GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
@@ -16707,9 +16706,10 @@ msgid "load setting"
 msgstr "учитај поставку"
 
 #: ../../standalone/logdrake:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"You will receive an alert if one of the selected services is no more running"
+"You will receive an alert if one of the selected services is no longer "
+"running"
 msgstr "Огласиће се аларм уколико један од изабраних сервиса нијевише активан"
 
 #: ../../standalone/logdrake:1
@@ -16825,7 +16825,7 @@ msgstr "тражи"
 
 #: ../../standalone/logdrake:1
 #, c-format
-msgid "Mandrake Tools Explanations"
+msgid "Mandrake Tools Explanation"
 msgstr "Mandrake Алати за објашњења"
 
 #: ../../standalone/logdrake:1
@@ -16905,7 +16905,7 @@ msgstr "Да имитирам рад 3 тастера?"
 
 #: ../../standalone/mousedrake:1
 #, c-format
-msgid "Please, choose the type of your mouse."
+msgid "Please choose your mouse type."
 msgstr "Изаберитe тип миша"
 
 #: ../../standalone/net_monitor:1
@@ -16978,22 +16978,22 @@ msgstr "Повезивање завршено."
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet complete."
+msgid "Disconnection from the Internet complete."
 msgstr "Дисконектовање за Интернета завршено."
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet failed."
+msgid "Disconnection from the Internet failed."
 msgstr "Дисконектовање са Интернета није успело."
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Connecting to Internet "
+msgid "Connecting to the Internet "
 msgstr "Повезивање на Интернет"
 
 #: ../../standalone/net_monitor:1
-#, c-format
-msgid "Disconnecting from Internet "
+#, fuzzy, c-format
+msgid "Disconnecting from the Internet "
 msgstr "Дисконектовање са Интернета"
 
 #: ../../standalone/net_monitor:1
@@ -17072,7 +17072,7 @@ msgstr "изаберите уређај"
 #, c-format
 msgid ""
 "Scannerdrake was not able to detect your %s scanner.\n"
-"Please select the device where your scanner is plugged"
+"Please select the device where your scanner is attached"
 msgstr ""
 "Scannerdrake није могао да детектује ваш %s скенер.\n"
 "Изаберите порт на који је ваш скенер прикључен"
@@ -17483,8 +17483,11 @@ msgid "Personal Finance"
 msgstr "Личне финансиje"
 
 #: ../../share/compssUsers:999
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Programs to manage your finances, such as gnucash"
 msgstr "Програми за управљaње вaшим финансиjамa, као што jе gnucash"
+
+#~ msgid "Do you really want to leave the installation?"
+#~ msgstr "Да ли заиста хоћете да прекинете инсталацију?"
 
 #~ msgid "Are you sure you refuse the licence?"
 #~ msgstr "Да ли сте сигурни да одбијате лиценцу?"

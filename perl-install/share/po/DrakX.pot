@@ -2148,7 +2148,7 @@ msgstr ""
 msgid "System installation"
 msgstr ""
 
-#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/draksec:1
+#: ../../install_gtk.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/draksec:1
 #, c-format
 msgid "Ok"
 msgstr ""
@@ -2688,7 +2688,7 @@ msgstr ""
 msgid "Total size: %d / %d MB"
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../Xconfig/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Next ->"
 msgstr ""
@@ -3312,11 +3312,6 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "License agreement"
-msgstr ""
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Do you really want to leave the installation?"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -4092,7 +4087,7 @@ msgstr ""
 msgid "Is this correct?"
 msgstr ""
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr ""
@@ -4908,11 +4903,6 @@ msgid ""
 "%s"
 msgstr ""
 
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "Quit"
-msgstr ""
-
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Options"
@@ -4936,6 +4926,11 @@ msgstr ""
 #: ../../Xconfig/main.pm:1
 #, c-format
 msgid "Graphic Card"
+msgstr ""
+
+#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "Quit"
 msgstr ""
 
 #: ../../Xconfig/monitor.pm:1
@@ -6302,9 +6297,9 @@ msgstr ""
 msgid "Auto-detect"
 msgstr ""
 
-#: ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
+#: ../../interactive/newt.pm:1
 #, c-format
-msgid "Next"
+msgid "Do"
 msgstr ""
 
 #: ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1
@@ -10278,6 +10273,11 @@ msgid ""
 "  Please configure sendmail"
 msgstr ""
 
+#: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
+#, c-format
+msgid "Next"
+msgstr ""
+
 #: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Previous"
@@ -12480,7 +12480,7 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr ""
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
 msgstr ""
@@ -12569,12 +12569,12 @@ msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Down selected rule one level"
+msgid "Move selected rule down one level"
 msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Up selected rule one level"
+msgid "Move selected rule up one level"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -12663,7 +12663,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The following options can be set to customize your\n"
-"system security. If you need explanations, click on Help.\n"
+"system security. If you need an explanation, click on Help.\n"
 ""
 msgstr ""
 
@@ -12765,7 +12765,7 @@ msgstr ""
 
 #: ../../standalone/draksplash:1 ../../standalone/draksplash:1
 #, c-format
-msgid "This theme haven't yet any bootsplash in %s !"
+msgid "This theme does not yet have a bootsplash in %s !"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -12815,7 +12815,7 @@ msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
-msgid "the heigth of the progress bar"
+msgid "the height of the progress bar"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -12884,7 +12884,7 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
-"package 'ImageMagick' is required for correct working.\n"
+"package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
 
@@ -13081,7 +13081,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Click on a device in the left tree in order to get its information displayed here."
+msgid "Click on a device in the left tree in order to display its information here."
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13153,7 +13153,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Once you've selected a device, you'll be able to see explanations on fields displayed on the right frame (\"Information\")"
+msgid "Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13321,7 +13321,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Early pentium were buggy and freezed when decoding the F00F bytecode"
+msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13351,7 +13351,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Early Intel Pentium chips manufactured have a bug in their floating point processor which did not achieve the attended precision when performing a Floating point DIVision (FDIV)"
+msgid "Early Intel Pentium chips manufactured have a bug in their floating point processor which did not achieve the required precision when performing a Floating point DIVision (FDIV)"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13371,7 +13371,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "the module of the GNU/Linux kernel that handle that device"
+msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13381,7 +13381,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "new dinamic device name generated by incore kernel devfs"
+msgid "new dinamic device name generated by core kernel devfs"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13469,7 +13469,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "- PCI and USB devices: this list the vendor, device, subvendor and subdevice PCI/USB ids"
+msgid "- PCI and USB devices: this lists the vendor, device, subvendor and subdevice PCI/USB ids"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13479,7 +13479,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "The GNU/Linux kernel needs to do run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu."
+msgid "The GNU/Linux kernel needs to run a calculation loop at boot time to initialize a timer counter.  Its result is stored as bogomips as a way to \"benchmark\" the cpu."
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13578,7 +13578,7 @@ msgstr ""
 
 #: ../../standalone/logdrake:1
 #, c-format
-msgid "You will receive an alert if one of the selected services is no more running"
+msgid "You will receive an alert if one of the selected services is no longer running"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -13692,7 +13692,7 @@ msgstr ""
 
 #: ../../standalone/logdrake:1
 #, c-format
-msgid "Mandrake Tools Explanations"
+msgid "Mandrake Tools Explanation"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -13772,7 +13772,7 @@ msgstr ""
 
 #: ../../standalone/mousedrake:1
 #, c-format
-msgid "Please, choose the type of your mouse."
+msgid "Please choose your mouse type."
 msgstr ""
 
 #: ../../standalone/net_monitor:1
@@ -13839,22 +13839,22 @@ msgstr ""
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet complete."
+msgid "Disconnection from the Internet complete."
 msgstr ""
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet failed."
+msgid "Disconnection from the Internet failed."
 msgstr ""
 
 #: ../../standalone/net_monitor:1 ../../standalone/net_monitor:1
 #, c-format
-msgid "Connecting to Internet "
+msgid "Connecting to the Internet "
 msgstr ""
 
 #: ../../standalone/net_monitor:1 ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnecting from Internet "
+msgid "Disconnecting from the Internet "
 msgstr ""
 
 #: ../../standalone/net_monitor:1
@@ -13925,7 +13925,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Scannerdrake was not able to detect your %s scanner.\n"
-"Please select the device where your scanner is plugged"
+"Please select the device where your scanner is attached"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -14305,5 +14305,5 @@ msgid "Personal Finance"
 msgstr ""
 
 #: ../../share/compssUsers:999
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Programs to manage your finances, such as gnucash"
 msgstr ""

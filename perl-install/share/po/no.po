@@ -3493,7 +3493,7 @@ msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
 #: ../../install_steps_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1
-#: ../../Xconfig/main.pm:1 ../../printer/printerdrake.pm:1
+#: ../../interactive/newt.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Next ->"
 msgstr "Neste ->"
@@ -4181,11 +4181,6 @@ msgstr "Vennligst velg tastatur-oppsettet ditt."
 #, c-format
 msgid "License agreement"
 msgstr "License agreement"
-
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "Do you really want to leave the installation?"
-msgstr "Ønsker du virkelig å forlate installasjonen?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4973,7 +4968,7 @@ msgstr "Info"
 msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
-#: ../../my_gtk.pm:1 ../../ugtk2.pm:1
+#: ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../interactive/newt.pm:1
 #, c-format
 msgid "Finish"
 msgstr "Avslutt"
@@ -5905,13 +5900,6 @@ msgstr ""
 "%s"
 
 #: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
-#: ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#, c-format
-msgid "Quit"
-msgstr "Avslutt"
-
-#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/removable.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -5937,6 +5925,13 @@ msgstr "Monitor"
 #, c-format
 msgid "Graphic Card"
 msgstr "Grafikk-kort"
+
+#: ../../Xconfig/main.pm:1 ../../diskdrake/dav.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/draksplash:1
+#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
+#, c-format
+msgid "Quit"
+msgstr "Avslutt"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -7361,10 +7356,10 @@ msgstr "Ukjent|CPH05X (bt878) [mange leverandører]"
 msgid "Auto-detect"
 msgstr "Automatisk detektering"
 
-#: ../../interactive/newt.pm:1 ../../standalone/drakbackup:1
-#, c-format
-msgid "Next"
-msgstr "Neste"
+#: ../../interactive/newt.pm:1
+#, fuzzy, c-format
+msgid "Do"
+msgstr "Ferdig"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11906,6 +11901,11 @@ msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
+msgid "Next"
+msgstr "Neste"
+
+#: ../../standalone/drakbackup:1
+#, c-format
 msgid "Previous"
 msgstr "Forrige"
 
@@ -14120,7 +14120,7 @@ msgstr ""
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Deling av Internett tilkobling er slått på"
 
-#: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../standalone/drakgw:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
 msgstr ""
@@ -14209,12 +14209,12 @@ msgstr "Fjern inngang"
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Down selected rule one level"
+msgid "Move selected rule down one level"
 msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
-msgid "Up selected rule one level"
+msgid "Move selected rule up one level"
 msgstr ""
 
 #: ../../standalone/drakperm:1
@@ -14304,7 +14304,7 @@ msgstr ""
 #, c-format
 msgid ""
 "The following options can be set to customize your\n"
-"system security. If you need explanations, click on Help.\n"
+"system security. If you need an explanation, click on Help.\n"
 msgstr ""
 
 #: ../../standalone/draksec:1
@@ -14413,7 +14413,7 @@ msgstr "Skrivervalg"
 
 #: ../../standalone/draksplash:1
 #, c-format
-msgid "This theme haven't yet any bootsplash in %s !"
+msgid "This theme does not yet have a bootsplash in %s !"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -14463,7 +14463,7 @@ msgstr ""
 
 #: ../../standalone/draksplash:1
 #, c-format
-msgid "the heigth of the progress bar"
+msgid "the height of the progress bar"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -14532,7 +14532,7 @@ msgstr "Lage oppstartsdiskett(er)"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid ""
-"package 'ImageMagick' is required for correct working.\n"
+"package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
 
@@ -14730,8 +14730,7 @@ msgstr "sekundær"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"Click on a device in the left tree in order to get its information displayed "
-"here."
+"Click on a device in the left tree in order to display its information here."
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -14806,8 +14805,8 @@ msgstr "/_Rapporter feil"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"Once you've selected a device, you'll be able to see explanations on fields "
-"displayed on the right frame (\"Information\")"
+"Once you've selected a device, you'll be able to see the device information "
+"in fields displayed on the right frame (\"Information\")"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -14978,7 +14977,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "Early pentium were buggy and freezed when decoding the F00F bytecode"
+msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -15010,7 +15009,7 @@ msgstr ""
 #, c-format
 msgid ""
 "Early Intel Pentium chips manufactured have a bug in their floating point "
-"processor which did not achieve the attended precision when performing a "
+"processor which did not achieve the required precision when performing a "
 "Floating point DIVision (FDIV)"
 msgstr ""
 
@@ -15031,7 +15030,7 @@ msgstr ""
 
 #: ../../standalone/harddrake2:1
 #, c-format
-msgid "the module of the GNU/Linux kernel that handle that device"
+msgid "the module of the GNU/Linux kernel that handles the device"
 msgstr "modulen til GNU/Linux kjernen som håndterer den enheten"
 
 #: ../../standalone/harddrake2:1
@@ -15040,8 +15039,8 @@ msgid "Module"
 msgstr "Modul"
 
 #: ../../standalone/harddrake2:1
-#, c-format
-msgid "new dinamic device name generated by incore kernel devfs"
+#, fuzzy, c-format
+msgid "new dinamic device name generated by core kernel devfs"
 msgstr "nytt dynamisk enhetsnavn generert av incore kjerne devfs"
 
 #: ../../standalone/harddrake2:1
@@ -15134,10 +15133,10 @@ msgid "Location on the bus"
 msgstr "Lokasjon på bussen"
 
 #: ../../standalone/harddrake2:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"- PCI and USB devices: this list the vendor, device, subvendor and subdevice "
-"PCI/USB ids"
+"- PCI and USB devices: this lists the vendor, device, subvendor and "
+"subdevice PCI/USB ids"
 msgstr ""
 "- PCI og USB enheter: dette oppgir leverandør, enhet, underleverandør og "
 "underenhet PCI/USB ids"
@@ -15150,7 +15149,7 @@ msgstr "Buss identifikasjon"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The GNU/Linux kernel needs to do run a calculation loop at boot time to "
+"The GNU/Linux kernel needs to run a calculation loop at boot time to "
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
@@ -15254,7 +15253,8 @@ msgstr "Formatering"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid ""
-"You will receive an alert if one of the selected services is no more running"
+"You will receive an alert if one of the selected services is no longer "
+"running"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -15371,7 +15371,7 @@ msgstr "søk"
 
 #: ../../standalone/logdrake:1
 #, c-format
-msgid "Mandrake Tools Explanations"
+msgid "Mandrake Tools Explanation"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -15451,7 +15451,7 @@ msgstr "Emulere tredje knapp?"
 
 #: ../../standalone/mousedrake:1
 #, c-format
-msgid "Please, choose the type of your mouse."
+msgid "Please choose your mouse type."
 msgstr "Vennligst velg din musetype."
 
 #: ../../standalone/net_monitor:1
@@ -15520,22 +15520,22 @@ msgstr "Oppkoblingshastighet"
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet complete."
+msgid "Disconnection from the Internet complete."
 msgstr ""
 
 #: ../../standalone/net_monitor:1
 #, c-format
-msgid "Disconnection from Internet failed."
+msgid "Disconnection from the Internet failed."
 msgstr ""
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
-msgid "Connecting to Internet "
+msgid "Connecting to the Internet "
 msgstr "Koble opp mot Internett"
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
-msgid "Disconnecting from Internet "
+msgid "Disconnecting from the Internet "
 msgstr "Koble opp mot Internett"
 
 #: ../../standalone/net_monitor:1
@@ -15608,7 +15608,7 @@ msgstr "Oppstartsenhet"
 #, c-format
 msgid ""
 "Scannerdrake was not able to detect your %s scanner.\n"
-"Please select the device where your scanner is plugged"
+"Please select the device where your scanner is attached"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -16013,8 +16013,11 @@ msgid "Personal Finance"
 msgstr "Personlig finans"
 
 #: ../../share/compssUsers:999
-msgid "Programs to manage your finance, such as gnucash"
+msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "Do you really want to leave the installation?"
+#~ msgstr "Ønsker du virkelig å forlate installasjonen?"
 
 #, fuzzy
 #~ msgid "Upgrade partition %s"
