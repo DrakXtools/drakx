@@ -217,7 +217,7 @@ sub check_kernel_module_packages {
 	eval {
 	    my ($version, $release, $ext) = c::kernel_version() =~ /([^-]*)-([^-]*mdk)(\S*)/;
 	    $ext and $ext = "-$ext";
-	    $list{"$base_name$version-$release$ext"} or die "no NVIDIA kernel for current kernel";
+	    $list{"$base_name$version-$release$ext"} or die "no $base_name for current kernel";
 	    $select{"$base_name$version-$release$ext"} = 1;
 	    foreach (`rpm -qa kernel*`) {
 		($ext, $version, $release) = /kernel[^-]*(-smp|-enterprise|-secure)?(\d+\.\d+\.\d+)\.([^\-]+mdk)$/;
