@@ -579,7 +579,9 @@ sub About() {
              -r "$pixdir/about-printerdrake.png" ?
              (0, Gtk2::Image->new_from_file("$pixdir/about-printerdrake.png")) :
                (1, gtkset_markup(Gtk2::Label->new, 
-                                 qq(<span weight="bold" size="x-large">) . N("Printer Management \n") . $us->{VERSION} . "</span>"),
+                                 qq(<span weight="bold" size="x-large">) .
+                                   #-PO: here %s is the version number
+                                   N("Printer Management %s", $us->{VERSION}) . "</span>"),
             ),
 	     1, $list,
 	    );
