@@ -770,6 +770,7 @@ sub configureXBefore {
 
     require Xconfig;
     Xconfig::getinfoFromDDC($o->{X});
+    Xconfig::getinfoFromXF86Config($o->{X}, $o->{prefix}); #- take default from here at least.
 
     #- keep this here if the package has to be updated.
     $o->pkg_install("XFree86");
