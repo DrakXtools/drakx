@@ -26,9 +26,9 @@ UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 
 
-.PHONY: dirs rescue $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
+.PHONY: dirs $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
 
-install: build autoboot
+install: build autoboot rescue
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
 ifeq (alpha,$(ARCH))
