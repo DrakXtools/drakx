@@ -23,11 +23,11 @@ sub new {
     bless {}, $_[0];
 }
 
-sub enter_console() { Newt::Suspend() }
-sub leave_console() { Newt::Resume() }
-sub suspend() { Newt::Suspend() }
-sub resume() { Newt::Resume() }
-sub end() { Newt::Finished() }
+sub enter_console { Newt::Suspend() }
+sub leave_console { Newt::Resume() }
+sub suspend { Newt::Suspend() }
+sub resume { Newt::Resume() }
+sub end { Newt::Finished() }
 sub exit { end(); exit($_[1]) }
 END { end() }
 

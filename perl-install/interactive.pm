@@ -112,11 +112,11 @@ sub vnew {
     interactive::newt->new;
 }
 
-sub enter_console() {}
-sub leave_console() {}
-sub suspend() {}
-sub resume() {}
-sub end() {}
+sub enter_console {}
+sub leave_console {}
+sub suspend {}
+sub resume {}
+sub end {}
 sub exit { exit($_[0]) }
 
 #-######################################################################################

@@ -41,7 +41,7 @@ sub new {
     bless {}, $_[0];
 }
 
-sub end() { 
+sub end { 
     -e $pipe_r or return; # don't run this twice
     my $q = CGI->new;
     cont_stdout("Exit");
@@ -93,7 +93,7 @@ sub ask_fromW {
 	} else {
 	    print $e->{hidden} ?
 	      $q->password_field('-name' => "w$::i", '-default' => ${$e->{val}}) :
-	      $q->textfield(     '-name' => "w$::i", '-default' => ${$e->{val}});
+		   $q->textfield('-name' => "w$::i", '-default' => ${$e->{val}});
 	}
 
 	print "</td></tr>\n";
