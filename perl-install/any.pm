@@ -1023,6 +1023,25 @@ sub ask_window_manager_to_logout {
     1;
 }
 
+sub ask_window_manager_to_logout_then_do {
+    my ($wm, $pid, $action) = @_;
+    if (fork()) {
+	any::ask_window_manager_to_logout($wm);
+	return;
+    }
+    
+    open STDIN, "</dev/zero";
+    open STDOUT, ">/dev/null";
+    open STDERR, ">&STDERR";
+    c::setsid();
+    exec 'perl', '-e', q(
+	my ($wm, $pid) = @ARGV;
+	my $nb;
+	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
+	system($action) if $nb;
+    ), $wm, $pid;
+}
+
 sub alloc_raw_device {
     my ($prefix, $device) = @_;
     my $used = 0;

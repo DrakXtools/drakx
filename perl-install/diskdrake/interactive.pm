@@ -1282,21 +1282,7 @@ sub tell_wm_and_reboot() {
     if (!$wm) {
 	system('reboot');
     } else {    
-	if (fork()) {
-	    any::ask_window_manager_to_logout($wm);
-	    return;
-	}
-    
-	open STDIN, "</dev/zero";
-	open STDOUT, ">/dev/null";
-	open STDERR, ">&STDERR";
-	c::setsid();
-	exec 'perl', '-e', q(
-	    my ($wm, $pid) = @ARGV;
-	    my $nb;
-	    for ($nb = 20; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
-	    exec 'reboot' if $nb;
-	), $wm, $pid;
+	any::ask_window_manager_to_logout_then_do($wm, $pid, 'reboot');
     }
 }
 
