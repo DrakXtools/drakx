@@ -75,7 +75,7 @@ sub custom_id {
     my ($device, $str) = @_;
     defined($device->{device}) ? $device->{device} :
 	(defined($device->{processor}) ? 
-	 "$device->{vendor_id} " . _("cpu number ") . $device->{processor} :
+	 "$device->{vendor_id} $device->{name} " . _("cpu number ") . $device->{processor} :
 	 (defined($device->{description}) ? $device->{description} : $str));
 }
 
