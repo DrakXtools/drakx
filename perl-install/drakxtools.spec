@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.2mdk
+Release: 0.3mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -220,9 +220,17 @@ cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2 <<EOF
 exec /usr/share/harddrake/service_harddrake X11
 EOF
 
+cat > $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/net_applet <<EOF
+#!/bin/sh
+DESKTOP=$1
+case $DESKTOP in
+   KDE|GNOME|IceWM) exec /usr/bin/net_applet;;
+esac
+EOF
+
 mv $RPM_BUILD_ROOT%_sbindir/service_harddrake_confirm $RPM_BUILD_ROOT%_datadir/harddrake/confirm
 
-chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/harddrake2}
+chmod +x $RPM_BUILD_ROOT{%_datadir/harddrake/*,%_sysconfdir/X11/xinit.d/{harddrake2,net_applet}}
 # temporary fix until we reenable this feature
 rm -f $RPM_BUILD_ROOT%_sysconfdir/X11/xinit.d/harddrake2
 
@@ -286,7 +294,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
-/usr/share/autostart/net_applet.desktop
 /usr/X11R6/bin/*
 
 %files -n harddrake
@@ -318,6 +325,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug  4 2004 Daouda LO <daouda@mandrakesoft.com> 10.1-0.3mdk
+- automatically launch net_applet for KDE, GNOME and IceWM 
+
 * Fri Jul 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.2mdk
 - drakbackup (stew):
   o fixes Anthill #1009 and #1010 (DVD recording, disk quota)
