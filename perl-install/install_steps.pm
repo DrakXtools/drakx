@@ -659,6 +659,8 @@ sub configurePrinter {
 	$o->installPackages($o->{packages});
 
 	require printer;
+	eval { add2hash($o->{printer}, printer::getinfo($o->{prefix})) }; #- get existing configuration.
+	printer::read_printer_db(); #- load printer db, else configuration will fails.
 	foreach (keys %{$o->{printer}{configured} || {}}) {
 	    log::l("configuring printer queue $_->{queue}");
 	    printer::copy_printer_params($_, $o->{printer});

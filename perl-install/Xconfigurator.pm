@@ -44,7 +44,7 @@ sub readCardsDB {
 	CHIPSET => sub {
 	    $card->{chipset} = $val;
 	    $card->{flags}{needChipset} = 1 if $val eq 'GeForce DDR';
-	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128));
+	    $card->{flags}{needVideoRam} = 1 if member($val, qw(mgag10 mgag200 RIVA128 SiS6326));
 	},
 	SERVER => sub { $card->{server} = $val; },
 	DRIVER => sub { $card->{driver} = $val; },
