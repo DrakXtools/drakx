@@ -15,25 +15,26 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 	my $dest = $orig;
 	$dest =~ s|^$prefix|$light_prefix|;
 
+	my $dir = dirname($dest);
+	mkdir_p($dir);
+
 	if (-l $orig) {
-	    system('cp', '-a', $orig, $dest);
+	    symlink readlink($orig), $dest;
 	} else {
 	    my $link = $orig;
 	    $link =~ s|^$prefix|/image_$live_name|;
 
-	    mkdir_p(dirname($dest));
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
-
 	    symlink $link, $orig or die "symlinking from $dest to $orig failed: $!\n";
 	}
     }
 
     if ($live_name eq 'totem') {
-	foreach my $dir ('/usr/share', '/usr/lib', '/usr/bin', '/usr') {
-	    foreach my $f (all("$prefix$dir")) {
-		my $file = "$prefix$dir/$f";
-		my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image$dir/$f";
-		symlink $link, "$light_prefix$dir/$f";
+	foreach my $dir (chomp_(`cd $light_prefix ; find usr -type d`)) {
+	    foreach my $f (all("$prefix/$dir")) {
+		my $file = "$prefix/$dir/$f";
+		my $link = readlink($file) =~ /^\w/ ? readlink($file) : "/image/$dir/$f";
+		symlink $link, "$light_prefix/$dir/$f";
 	    }
 	}
     }
