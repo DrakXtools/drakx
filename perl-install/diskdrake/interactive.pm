@@ -1126,7 +1126,7 @@ sub warn_if_renumbered {
     my @l = map { 
 	my ($old, $new) = @$_;
 	N("partition %s is now known as %s", $old, $new) } @$l;
-    $in->ask_warn('', join("\n", 'Partitions have been renumbered: ', @l));
+    $in->ask_warn('', join("\n", N("Partitions have been renumbered: "), @l));
 }
 
 #- unit of $mb is mega bytes, min and max are in sectors, this
