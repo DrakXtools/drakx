@@ -1181,14 +1181,14 @@ It is not necessary on most networks."),
                     pre => sub {
                         $intf->{ippp0} ||= { DEVICE => "ippp0" }; # we want the ifcfg-ippp0 file to be written
                         @isdn_dial_methods = ({ name => N("Automatically at boot"),
-                                                ONBOOT => 1, DIAL_ON_BOOT => 1 },
+                                                ONBOOT => 1, DIAL_ON_IFUP => 1 },
                                               { name => N("By using Net Applet in the system tray"),
-                                                ONBOOT => 0, DIAL_ON_BOOT => 1 },
+                                                ONBOOT => 0, DIAL_ON_IFUP => 1 },
                                               { name => N("Manually (the interface would still be activated at boot)"),
-                                               ONBOOT => 1, DIAL_ON_BOOT => 0 });
+                                               ONBOOT => 1, DIAL_ON_IFUP => 0 });
                         my $method =  find {
                             $_->{ONBOOT} eq text2bool($intf->{ippp0}{ONBOOT}) &&
-                              $_->{DIAL_ON_BOOT} eq text2bool($intf->{ippp0}{DIAL_ON_BOOT})
+                              $_->{DIAL_ON_IFUP} eq text2bool($intf->{ippp0}{DIAL_ON_IFUP})
                         } @isdn_dial_methods;
                         #- use net_applet by default
                         $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
@@ -1199,7 +1199,7 @@ It is not necessary on most networks."),
                     },
                     post => sub {
                         my $method = find { $_->{name} eq $isdn->{dial_method} } @isdn_dial_methods;
-                        $intf->{ippp0}{$_} = bool2yesno($method->{$_}) foreach qw(ONBOOT DIAL_ON_BOOT);
+                        $intf->{ippp0}{$_} = bool2yesno($method->{$_}) foreach qw(ONBOOT DIAL_ON_IFUP);
                         return $after_start_on_boot_step->();
                     },
                    },
