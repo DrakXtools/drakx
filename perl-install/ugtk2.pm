@@ -944,7 +944,6 @@ sub new {
 	}
 	$::WizardWindow->set_title($title);
 	$::WizardWindow->show_all;
-	flush();
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
     $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
