@@ -501,7 +501,12 @@ sub ask_fromW {
 	$mainw->sync; #- for $set_all below (mainly for the set of clist)
 	$set_all->(); #- must be done when showing advanced lists (to center selected value)
     };
-    my $advanced_button = [ $common->{advanced_label}, sub { $set_advanced->(!$advanced) } ];
+    my $advanced_button = [ $common->{advanced_label}, 
+			    sub { 
+				my ($w) = @_;
+				$set_advanced->(!$advanced);
+				$w->child->set($advanced ? $common->{advanced_label_close} : $common->{advanced_label});
+			    } ];
 
     my $create_widgets = sub {
 	my $w = create_packtable({}, map { [($_->{icon_w}, $_->{e}{label}, $_->{real_w})]} @_);
@@ -522,7 +527,7 @@ sub ask_fromW {
     my $pack = gtkpack_(create_box_with_title($mainw, @{$common->{messages}}),
 		   1, $create_widgets->(@widgets_always),
 		   if_($common->{ok} || $::isWizard, 
-		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @$l2 ? $advanced_button : ())));
+		       0, $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', if_(@$l2, $advanced_button))));
     my @adv = map { warp_text($_) } @{$common->{advanced_messages}};
     $always_total_size += $mainw->{box_size};
     $advanced_pack = 
