@@ -31,6 +31,7 @@ struct part {
   string options        # 'defaults', 'noauto'
   string device_windobe # 'C', 'D' ...
   string encrypt_key    # [0-9A-Za-z./]{20,}
+  string comment        # comment to have in fstab
 
   bool isMounted
 

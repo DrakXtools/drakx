@@ -20,8 +20,25 @@ use loopback;
 sub read_fstab {
     my ($prefix, $file, $all_options) = @_;
 
+    my %comments;
+    my $comment;
+    my @l = grep {
+	if (/^\s*#/) {
+	    $comment .= chomp_($_) . "\n";
+	    0;
+	} else {
+	    $comments{$_} = $comment if $comment;
+	    $comment = '';
+	    1;
+	}
+    } cat_("$prefix$file");
+
+    #- attach comments at the end of fstab to the previous line
+    $comments{$l[-1]} = $comment if $comment;
+
     map {
 	my ($dev, $mntpoint, $type, $options, $freq, $passno) = split;
+	my $comment = $comments{$_};
 
 	$options = 'defaults' if $options eq 'rw'; # clean-up for mtab read
 
@@ -48,7 +65,11 @@ sub read_fstab {
 	$mntpoint =~ s/\\040/ /g;
 	$dev =~ s/\\040/ /g;
 
-	my $h = { device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
+	my $h = { 
+		 device => $dev, mntpoint => $mntpoint, type => $type, 
+		 options => $options, comment => $comment,
+		 if_($all_options, freq => $freq, passno => $passno),
+		};
 
 	($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
 
@@ -77,9 +98,8 @@ sub read_fstab {
 	    }
 	}
 
-
 	$h;
-    } cat_("$prefix$file");
+    } @l;
 }
 
 sub merge_fstabs {
@@ -231,13 +251,13 @@ sub prepare_write_fstab {
 		($dev, $type) = ($mntpoint, 'supermount');
 	    }
 
-	    [ $dev, $mntpoint, $type, $options || 'defaults', $freq, $passno ];
+	    [ $mntpoint, $_->{comment} . join(' ', $dev, $mntpoint, $type, $options || 'defaults', $freq, $passno) . "\n" ];
 	} else {
 	    ()
 	}
     } grep { $_->{device} && ($_->{mntpoint} || $_->{real_mntpoint}) && $_->{type} } (@l1, @l2);
 
-    join('', map { join(' ', @$_) . "\n" } sort { $a->[1] cmp $b->[1] } @l), \@smb_credentials;
+    join('', map { $_->[1] } sort { $a->[0] cmp $b->[0] } @l), \@smb_credentials;
 }
 
 sub fstab_to_string {
