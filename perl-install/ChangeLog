@@ -1,3 +1,195 @@
+2004/02/17  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/17  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/ipsec.pm: one can now start from scratch with ipsec.conf
+	fix the ";" mark in the Security Policies Section
+
+	* standalone/drakvpn: one can now start an ipsec.conf file from scratch
+	add the ask_info3 function
+
+2004/02/17  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/stage1.c, mdk-stage1/frontend-common.c,
+	mdk-stage1/stdio-frontend.c, mdk-stage1/newt-frontend.c: when available,
+	always load usb interface, as soon as possible, should help usb mouse
+	detection in stage2 which otherwise timeouts
+
+2004/02/17  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/br.po,
+	share/po/th.po, share/po/sl.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/mn.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/lt.po, share/po/he.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/nb.po,
+	share/po/bs.po, share/po/uz.po, share/po/ro.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/hi.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/nl.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/de.po, share/po/eo.po, share/po/lv.po,
+	share/po/el.po, share/po/cs.po, share/po/bg.po, share/po/hu.po,
+	share/po/uz@Latn.po: updated pot file
+
+2004/02/17  Pixel  <pixel at mandrakesoft.com>
+
+	* mouse.pm: detection defaults on automatic choices
+	fix mouse detect() on kernel 2.4
+
+	* bootloader.pm: remove bad entries after reading existing conf file
+	log where the bootloader is installed
+
+	* interactive/newt.pm: don't have a scroll inside a scroll which causes
+	display pbs.
+	alas it doesn't fix the "Tab" navigation when having a global scroll + a
+	Listbox. You have to use the right arrow to exit the Listbox
+
+2004/02/17  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: Added warnings to clearly tell the user when
+	there is no network access.
+	Removed printer list button whenthere is no network also in expert mode.
+
+	* printer/detect.pm: Fixed problem that not used parallel ports were
+	detected as printers.
+
+2004/02/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/icons/drakfont.png, standalone/drakfont,
+	standalone/icons/drakfont.620x57.png: switch drakfont to new banner
+	style
+
+	* harddrake/data.pm: really fix doble blanked ISDN detection
+
+	* share/po/Changelog: kill no more used file
+
+	* standalone/drakvpn (ask_info3) really use parameters...
+	consolidate strings
+
+	* share/po/fr.po: update
+
+	* network/netconnect.pm: sort lan protocols
+
+	* drakxtools.spec: fix changelog
+	10-0.17mdk
+
+2004/02/16  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Nothing special
+	Partially updated file
+
+2004/02/16  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: move check_field's ask_warn() to save_notebook()
+	check gateway entry
+
+2004/02/16  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/02/16  Florin Grad  <florin at mandrakesoft.com>
+
+	* standalone/drakvpn: do not test the translated chains anymore
+
+2004/02/16  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/url.c: fix buggy redhat code exhausted only in -Os which
+	corrupted
+	memory and gave wrong results for download file size in FTP/HTTP
+	installs
+
+2004/02/16  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* network/netconnect.pm, standalone/drakvpn, standalone/drakboot: typo
+	fixes
+
+	* share/po/ms.po, share/po/sk.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/th.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/nb.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/br.po, share/po/sl.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/fr.po, share/po/ta.po, share/po/vi.po, share/po/nl.po,
+	share/po/de.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+	* network/ipsec.pm: removed N() around of a non-translatable string
+
+2004/02/16  Pixel  <pixel at mandrakesoft.com>
+
+	* install_steps_interactive.pm: keep current authentication kind, even if
+	not completly accepted
+	network::shorewall::read without silent is nasty, since it doesn't only
+	read,
+	it prompts the user. So each time the summary updates the data, it
+	prompts
+	(when you have more than one card and no firewall configured)
+
+	* authentication.pm: keep current authentication kind, even if not
+	completly accepted
+
+2004/02/16  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/detect.pm: Recognize parallel printers also when they miss the
+	"CLASS:PRINTER;" in their device ID string (ex: Brother HL-720, bug
+	#7753).
+
+2004/02/16  tsdgeos
+
+	* share/po/ca.po: Today's worjk
+
+2004/02/16  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakpxe, standalone/drakgw: do not abuse global namespace
+
+	* network/netconnect.pm: fix automatically found "...2" dns when network
+	is done
+	show a more precise error messages when no wireless cards were found
+	eagle was renamed as eagle-usb
+	minor poulpe cleanup
+	explain about DNS (#7908)
+
+	* standalone/drakclock: let's look better when embedded
+
+	* standalone/drakvpn (ask_info2) list valid values in a pull-down menu
+	(ask_info2) introduce it in order to share one more step
+	(ask_info) introduce it in order to share some code
+	PFS group only accept 3 distinct values
+	more user friendly labels
+	do not list twice the same elements in list...
+	try to have better names
+	do not put " = " in translated messages
+	add hints
+	do not abuse global namespace
+
+	* standalone/drakautoinst: typo fix
+	do not abuse global namespace
+
+	* authentication.pm (to_kind) try harder to find out if some auth method
+	already had been choosed
+
+	* share/po/fr.po: update
+	beautify string
+
+	* install_steps_interactive.pm (setRootPassword) do not reset auth method
+	when pressing "previous" in next step
+
 2004/02/16  David Baudens  <baudens at mandrakesoft.com>
 
 	* share/advertising/list: Removed on Pixel's request (will use list-dwd
@@ -26274,7 +26466,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.872 2004/02/13 18:45:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.873 2004/02/16 11:53:00 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
