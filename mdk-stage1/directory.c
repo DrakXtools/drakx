@@ -181,7 +181,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 		if (readlink(IMAGE_LOCATION LIVE_LOCATION "/usr/bin/runinstall2", &p, 1) != 1) {
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
-				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
+				      "Another solution is to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
 			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_ERROR;
