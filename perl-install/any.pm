@@ -99,6 +99,12 @@ sub setupBootloader {
     eval { run_program::rooted($::prefix, 'lilo', '-u') } if $::isInstall && !$::o->{isUpgrade} && -e "$::prefix/etc/lilo.conf" && glob("$::prefix/boot/boot.*");
 
     bootloader::install($b, $all_hds);
+
+    if (my $acpi = bootloader::get_append($b, 'acpi')) {
+	if (!member($acpi, 'off', 'ht')) {
+	    $in->do_pkgs->install('acpi', 'acpid') if !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")
+	}
+    }    
 }
 
 

@@ -688,12 +688,6 @@ sub summary {
 
 sub summaryAfter {
     my ($o) = @_;
-
-    require bootloader;
-    my $acpi = bootloader::get_append($o->{bootloader}, 'acpi');
-    if (!member($acpi, 'off', 'ht') && !(-x "$::prefix/usr/bin/acpi" && -x "$::prefix/usr/sbin/acpid")) {
-	$o->do_pkgs->install(qw(acpi acpid));
-    }
 }
 
 #------------------------------------------------------------------------------
