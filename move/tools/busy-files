@@ -1,0 +1,9 @@
+#!/usr/bin/perl
+
+use MDK::Common;
+
+print "$_\n" foreach uniq (map {
+    grep {
+	$_ && !m!^(/proc/|/dev/|pipe:|socket:)!;
+    } map { readlink($_) } "/proc/$_/exe", glob_("/proc/$_/fd/*");
+} grep { $_ ne $$ && /^(\d+)$/ } all('/proc'));
