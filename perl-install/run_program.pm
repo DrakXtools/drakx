@@ -54,7 +54,7 @@ sub raw {
     $root ? ($root .= '/') : ($root = '');
     if (!$root && !$::isStandalone) {
 	require install_any;
-	install_any::check_prog(ref($name) ? $name->[0] : $name);
+	install_any::check_prog($real_name);
     }
     
     $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
