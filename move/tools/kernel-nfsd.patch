@@ -1,6 +1,6 @@
---- linux-2.4.22/fs/nfsd/vfs.c.pix	2003-10-17 16:27:36.000000000 +0200
-+++ linux-2.4.22/fs/nfsd/vfs.c	2003-10-24 17:36:58.000000000 +0200
-@@ -418,6 +418,41 @@
+--- linux-2.6.3/fs/nfsd/vfs.c.pix	2004-02-18 04:57:29.000000000 +0100
++++ linux-2.6.3/fs/nfsd/vfs.c	2004-04-05 15:56:35.423508058 +0200
+@@ -444,6 +444,41 @@
  
  
  
@@ -42,16 +42,16 @@
  /*
   * Open an existing file or directory.
   * The access argument indicates the type of open (read/write/lock)
-@@ -489,6 +524,8 @@
- 			atomic_dec(&filp->f_count);
- 		}
- 	}
+@@ -502,6 +537,8 @@
+ 	} else if (access & MAY_WRITE)
+ 		put_write_access(inode);
+ 
 +	if (err == 0) printk_debug_file_access(rqstp, dentry);
 +
  out_nfserr:
  	if (err)
  		err = nfserrno(err);
-@@ -1101,6 +1138,7 @@
+@@ -1156,6 +1193,7 @@
  		goto out_nfserr;
  	*lenp = err;
  	err = 0;
