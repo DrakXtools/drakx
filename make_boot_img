@@ -633,6 +633,7 @@ sub isolinux {
 	_ "lilo-bmp2mdk mode:0x103 progress:397,190,14,12,64+35 clear:600,800,64+33 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg";
     }
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
+    _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
     output "isolinux/isolinux.cfg", "
 default linux
 prompt 1
@@ -650,7 +651,10 @@ F2 advanced.msg
 "label alt$::i
   kernel alt$::i/vmlinuz
   append initrd=alt$::i/all.rdz $default_append $default_acpi $default_vga
-" } @kernels);
+" } @kernels) .
+"label memtest
+  kernel test/memtest.bin
+";
 
     output "isolinux/help.msg", (-e "isolinux/boot.msg" && pack "C*", 0x0E, 0x80, 0x03, 0x00) .
 "
@@ -695,6 +699,7 @@ The following options may be added on the command line :
  o  0fpatch07 to use a patch from the floppy (file named 09patch.pl07).
  o  0fauto_install=floppy07 to enable auto_install using 09auto_inst.cfg07 file on the
     floppy.
+ o  0fmemtest07 to test your computer RAM for faulty memory modules.
 
 You can choose the following kernels :
 " . join('', map_index { " o  0falt$::i07 is kernel $_\n" } @kernels) . "
