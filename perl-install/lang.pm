@@ -200,17 +200,17 @@ sub standard_locale {
     
 sub getlocale_for_lang {
     my ($lang, $country, $utf8) = @_;
-    standard_locale(@_) || l2locale($lang).($utf8 ? '.UTF-8' : '');
+    standard_locale($lang, $country, $utf8) || l2locale($lang).($utf8 ? '.UTF-8' : '');
 }
 
 sub getlocale_for_country {
     my ($lang, $country, $utf8) = @_;
-    standard_locale(@_) || c2locale($country).($utf8 ? '.UTF-8' : '');
+    standard_locale($lang, $country, $utf8) || c2locale($country).($utf8 ? '.UTF-8' : '');
 }
 
 sub getLANGUAGE {
     my ($lang, $country, $utf8) = @_;
-    l2language($lang) || join(':', uniq(getlocale_for_lang(@_), $lang, if_($lang =~ /^(..)_/, $1)));
+    l2language($lang) || join(':', uniq(getlocale_for_lang($lang, $country, $utf8), $lang, if_($lang =~ /^(..)_/, $1)));
 }
 
 my %xim = (
@@ -745,15 +745,6 @@ sub fs_options {
 	my ($iocharset, $codepage) = @$c[3..4];
 	$iocharset, $codepage;
     }
-}
-
-sub charset {
-    my ($lang, $prefix) = @_;
-    my $l = lang2LANG($lang);
-    foreach (cat_("$prefix/usr/X11R6/lib/X11/locale/locale.alias")) {
-	/$l:\s+.*\.(\S+)/ and return $1;
-    }
-    $l =~ /.*\.(\S+)/ and return $1;
 }
 
 sub during_install__l2charset {
