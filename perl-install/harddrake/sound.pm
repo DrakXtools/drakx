@@ -142,7 +142,7 @@ sub get_alternative {
 
 sub do_switch {
     my ($in, $old_driver, $new_driver, $index) = @_;
-    my $wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
+    my $_wait = $in->wait_message(N("Please wait"), N("Please Wait... Applying the configuration"));
     log::explanations("removing old $old_driver\n");
     rooted("service sound stop") unless $blacklisted;
     rooted("service alsa stop") if $old_driver =~ /^snd-/ && !$blacklisted;
