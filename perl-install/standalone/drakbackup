@@ -48,12 +48,36 @@
 # 	/etc/drakconf/drakbackup/drakbakup.conf
 #
 #________________________________________________________________
+#
+#  backup files formats:
+#	
+#	no incremental backup:
+#			backup_sys_date_hour.tar.*
+#			backup_user_toto_date_hour.tar.*
+#			backup_other_date_hour.tar.*
+#
+#	first incremental backup: (if backup_base* does not exist )
+#
+#			backup_base_sys_date_hour.tar.*
+#			backup_base_user_toto_date_hour.tar.*
+#			backup_base_other_date_hour.tar.*
+#			
+#	other incremental backup: (if backup_base* already exist )
+#
+#			backup_incr_sys_date_hour.tar.*
+#			backup_incr_user_toto_date_hour.tar.*
+#			backup_incr_other_date_hour.tar.*
+#
+#________________________________________________________________
 # 
 # REQUIRE:      cron if daemon
 #               cdrecord & mkisofs
+#		ftp
+#		ssh-askpass
 #
 # PBS persistants:
 #		selection des sources a inclure dans le backup cd. 
+#		et dans le restore_step_user
 #
 #
 # WARNING:      ne pas ecraser les fichiers /etc/passwd fstab 
@@ -61,29 +85,39 @@
 #
 #
 # TODO:
-#		- replace alors incremental selectionne.
-#		- l.380 incremental: date -> si deja existe faire find -m ... | tar ...
-#		- non incremental: date + supprime old avant le backup
-#		- ftp choose port to use ftp connexions
-#		- send mail with results.
-#		- use quota.
-#		- placer README dans $save_path -> prevenir des danger de supprimer la premier version
-#               - ssh & rsync -> expect or .identity.pub/authorized_keys 
-#	        - calcul disk space.
-#	        - backend : --resore_all, --restore_sys, --restore_users
+#		1- tar -cvf tarfilename --after-date="sept 1, 2000" /home
+#		   l.380 incremental: date -> si deja existe faire find -m ... | tar ...
+#		   non incremental: date + supprime old avant le backup
+#		3 - add port for ftp backup.
+#		4 - change NET::FTP to ftp cmds.  
+#		5 - add icons (win & lin) on adv_what_all.
+#	        6 - calcul disk space.
+#		   use quota.
+#               7 - ssh & rsync -> expect or .identity.pub/authorized_keys 
+#		8 - write on cd
+#		9 - cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
+#		10- total backup.( all partitions wanted, windows partitions for example!)
+#		    dump use for total backup.
+#		11- send mail with results.
+#		12- custom deamon
+#		13- placer README dans $save_path -> prevenir des danger de supprimer la premier version
+#		    explain configuration file variables (mainly for non X users)
+#		14- webdav
+#	        15- backend : --resore_all, --restore_sys, --restore_users
 #			  --build_cd_autoinst 	
 #			  --backup_now --backup_default_now
-#		- boot floppy disk
-#		- webdav
-#		- rsync
-#		- cd writer detection  -> cdrw: /sys/dev/cdrom/info  /scsi/host0/bus0/target4/lun0 
-#		- write on cd
-#		- total backup.( all partitions wanted, windows partitions for example!)
-#		- custom deamon
-#		- build autoboot with backup and install cd 
-#		- use .backupignore like on CVS
+#		16- taoe device1
+#		17- cpio use !!
+#		18- boot floppy disk (with dialog)
+#		19- build autoboot with backup and install cd 
+#		20- use .backupignore like on CVS
+#
 #		               
 # DONE TODAY:
+#		- gi for other media during restore. hd-> ok 
+#		- backend for build backup update and support 
+#		  incremental backups.	
+#		- real incremental backup 		
 #________________________________________________________________
 
 
@@ -154,6 +188,7 @@ my $next_widget;
 my $system_state;
 my $restore_state;
 my $save_path_entry;
+my $restore_find_path_entry;
 my $pbar;
 my $pbar1;
 my $pbar2;
@@ -166,6 +201,10 @@ my $label_tail;
 my @user_list_to_build_on_cd = (); 
 my $restore_path = "/";
 my $restore_other_path = 0;
+my $restore_other_src;
+my $path_to_find_restore;
+my $other_media_hd;
+
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -401,52 +440,92 @@ sub ftp_client {
 sub build_backup_files {
     my $path_name;
     my $tar_cmd;
+    my $more_recent;
+    my $tar_cmd_sys;
+    my $tar_cmd_user;
+    my $tar_cmd_other;
     my $tar_ext;
     my $vartemp;
+    my $base_sys_exist = 0;
+    my $base_user_exist = 0;
+    my $base_other_exist = 0;
+    my @list_temp = ();
     my @list_other_;
-
-#   $where_net_ftp
+    my @dir_content = ();
 
     the_time();    
     -d  $save_path or mkdir_p($save_path);
-    if ($comp_mode) { $tar_cmd = "tar cvp --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
+    if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
     else { $tar_cmd = "tar cvzp "; $tar_ext = "tar.gz"}
+    $tar_cmd_sys = $tar_cmd;
+    $tar_cmd_user = $tar_cmd;
+    $tar_cmd_other = $tar_cmd;
+    $no_critical_sys and $tar_cmd_sys .= "--exclude passwd --exclude fstab --exclude group";
+    $what_no_browser and $tar_cmd_user .= "--exclude NewCache --exclude Cache --exclude cache";
+
+    @dir_content = all($save_path);
+    grep (/backup_base_sys/, @dir_content) and $base_sys_exist = 1;
+    grep (/backup_base_other/, @dir_content) and $base_other_exist = 1;
+
+# fixme use incremental backup   
+#tar -cvf tarfilename --after-date="sept 1, 2000" /home
+# tar -cf archive.tar --newer="`date -r file`" /home
+# algo: liste des fichiers du meme nom, on prend le dernier puis on applique le tar ci-dessus.
+# faire fonctions qui retourne le plus recent element.
+
     if ($where_hd) {
-	print "backup_sys @sys_files\n";
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
-	print "$save_path/backup_sys_\n";
-	$backup_sys_versions or system("rm -f $save_path/backup_sys*");
 	if ($backup_sys) { 
-	    $no_critical_sys or system("$tar_cmd -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
-	    $no_critical_sys and system("$tar_cmd --exclude passwd --exclude fstab --exclude group  -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+	    if ($backup_sys_versions) {
+		if (grep(/backup\_incr\_sys/, @dir_content)) { 
+		    @list_temp = sort (grep(/backup\_incr\_sys/, @dir_content));
+		    $more_recent = pop @list_temp;
+		}
+		else { $more_recent = grep(/backup\_base\_sys/, @dir_content); }
+		$base_sys_exist or   system("$tar_cmd_sys -f $save_path/backup_base_sys$the_time.$tar_ext @sys_files");
+		$base_sys_exist and  system("$tar_cmd_sys -f $save_path/backup_incr_sys$the_time.$tar_ext --after-date=\"`date -r $more_recent`\" -no-recursion  @sys_files");
+	    } else {
+		system("cd $save_path && rm -f backup_sys* backup_base_sys* backup_incr_sys*");
+		system("$tar_cmd_sys -f $save_path/backup_sys$the_time.$tar_ext @sys_files");
+	    }
 	}
+
 	$interactive and progress($pbar, 0.5, _("Backup system files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup files..."));
-	print "backup_other @list_other\n";
+
 	if (@list_other) {
-	    $backup_other_versions or system("rm -f $save_path/backup_other*");
-	    system("$tar_cmd -f $save_path/backup_other$the_time.$tar_ext @list_other");
-	    foreach (@list_other) {
-		push @list_other_, $_ . "\n";
+	    if ($backup_other_versions) {
+		$base_other_exist or  system("$tar_cmd_other -f $save_path/backup_base_other$the_time.$tar_ext @list_other");
+		$base_other_exist and system("$tar_cmd_other -f $save_path/backup_incr_other$the_time.$tar_ext @list_other");
+	    } else {
+		system("cd $save_path && rm -f backup_other* backup_base_other* backup_incr_other*");
+		system("$tar_cmd_other -f $save_path/backup_other$the_time.$tar_ext @list_other");
 	    }
+	    foreach (@list_other) { push @list_other_, $_ . "\n"; }
 	    output_p( $save_path . '/list_other', @list_other_);    
- 	}
+	}
+	
 	$interactive and progress($pbar1, 1, _("Backup User files..."));
 	$interactive and progress($pbar3, 0.3, _("Hard Disk Backup Progress..."));
+	
 	if ($backup_user) {
 	    foreach (@user_list) {
-		$vartemp = $_;
+		if (grep (/backup_base_user_$_/, @dir_content)) {  $base_user_exist = 1; }
+		else { $base_user_exist = 0; }
 		$path_name = return_path($_);
-		print "path of user: $path_name\n";
-		print "the time:".$the_time."\n";
-		$backup_user_versions or system("rm -f $save_path/backup_user_$vartemp*");
-		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
-		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$vartemp$the_time.$tar_ext $path_name");
+		if ($backup_user_versions) {
+		    $base_user_exist or  system("$tar_cmd_user -f $save_path/backup_base_user_$_$the_time.$tar_ext $path_name");
+		    $base_user_exist and system("$tar_cmd_user -f $save_path/backup_incr_user_$_$the_time.$tar_ext $path_name");
+		} else {
+		    system("cd $save_path && rm -f backup_user_$_* backup_base_user_$_* backup_incr_user_$_*");
+		    system("$tar_cmd_user -f $save_path/backup_user_$_$the_time.$tar_ext $path_name");
+		}
 	    }
 	}
 	$interactive and progress($pbar2, 1, _("Backup Other files..."));
 	$interactive and progress($pbar3, 0.4, _("Hard Disk Backup files..."));
     }
+
     if ($where_net_ssh) {
 #  $res = Net::SSLeay::write($ssl, $msg);  # Perl knows how long $msg is
 #         die_if_ssl_error("ssl write");
@@ -462,6 +541,8 @@ sub build_backup_files {
     if ($where_net_ftp) { }
     if ($where_cd) {	
     }
+    print "liste content: $_\n" foreach @dir_content;
+    print "\n\n\n\n\n $more_recent \n\n\n";
 }
 
 sub list_remove {
@@ -491,6 +572,18 @@ sub filedialog_where_hd {
     $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
     $file_dialog->show();
 }
+
+sub filedialog_restore_find_path {
+    my $file_dialog;
+
+    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("File Selection")), destroy => sub { $file_dialog->destroy(); } );
+    $file_dialog->ok_button->signal_connect(clicked => sub { 
+	$restore_find_path_entry->set_text($file_dialog->get_filename()); 
+	$file_dialog->destroy() });
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
+    $file_dialog->show();
+}
+
 
 sub filedialog {
     my $file_dialog;
@@ -616,6 +709,46 @@ sub advanced_what_other {
     $up_box->show_all();
 }
 
+sub advanced_what_entire_sys{
+    my $box_what;
+    
+    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user");
+    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u");
+    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader");
+
+    gtkpack($advanced_box,
+	    $box_what = gtkpack_(new Gtk::HBox(0, 15),
+				 1, new Gtk::VBox(0, 5),
+				 1, gtkpack_(new Gtk::VBox(0, 15),	
+					  1, new Gtk::VBox(0, 5),
+					  1, gtksignal_connect(my $button_what_other = new Gtk::Button(), 
+							       clicked => sub { ${$central_widget}->destroy(); message_underdevel(); }),
+					  1, gtksignal_connect(my $button_what_all = new Gtk::Button(), 
+							       clicked => sub { ${$central_widget}->destroy(); message_underdevel(); }),
+					  1, new Gtk::VBox(0, 5),
+					  ),
+				 1, new Gtk::VBox(0, 5),	
+				 ),
+	    );
+    $button_what_other->add(gtkpack(new Gtk::HBox(0,10),
+				  new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
+				  new Gtk::Label(_(" Linux ")),
+				  new Gtk::HBox(0, 5)
+				  ));
+    $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
+				   new Gtk::Pixmap($pix_user_map, $pix_user_mask),
+				   new Gtk::Label(_(" Windows (FAT32) ")),
+				   new Gtk::HBox(0, 5)
+				   ));
+    $custom_help = "";
+    $current_widget = \&advanced_what_entire_sys;
+    $previous_widget =\&advanced_what;
+    $central_widget = \$box_what;
+    $up_box->show_all();
+}
+
+
+
 sub advanced_what{
     my $box_what;
     
@@ -629,13 +762,13 @@ sub advanced_what{
 				 1, gtkpack_(new Gtk::VBox(0, 15),	
 					  1, new Gtk::VBox(0, 5),
 					  1, gtksignal_connect(my $button_what_sys = new Gtk::Button(), 
-							       clicked => sub { $box_what->destroy(); advanced_what_sys(); }),
+							    clicked => sub { $box_what->destroy(); advanced_what_sys(); }),
 					  1, gtksignal_connect(my $button_what_user = new Gtk::Button(), 
-							       clicked => sub { ${$central_widget}->destroy(); advanced_what_user();}),
+							    clicked => sub { ${$central_widget}->destroy(); advanced_what_user();}),
 					  1, gtksignal_connect(my $button_what_other = new Gtk::Button(), 
-							       clicked => sub { ${$central_widget}->destroy(); advanced_what_other(); }),
+							    clicked => sub { ${$central_widget}->destroy(); advanced_what_other(); }),
 					  1, gtksignal_connect(my $button_what_all = new Gtk::Button(), 
-							       clicked => sub { ${$central_widget}->destroy(); message_underdevel(); }),
+							    clicked => sub { ${$central_widget}->destroy(); advanced_what_entire_sys(); }),
 					  1, new Gtk::VBox(0, 5),
 					  ),
 				 1, new Gtk::VBox(0, 5),	
@@ -658,7 +791,7 @@ sub advanced_what{
 				    ));
     $button_what_all->add(gtkpack(new Gtk::HBox(0,10),
 				    new Gtk::Pixmap($pix_other_map, $pix_other_mask),
-				    new Gtk::Label(_(" All ")),
+				    new Gtk::Label(_(" A Entire System  ")),
 				    new Gtk::HBox(0, 5)
 				    ));
     $custom_help = "";
@@ -1296,10 +1429,15 @@ sub wizard   {
 ################################################  RESTORE  ################################################  
 
 sub find_backup_to_restore {
+	# fixme: 
+	# faire test existance cd
+	# faire reponse si non existance de  $path_to_find_restore
+
     my @list_backup_tmp;
     my @user_backuped_tmp;
+
     @user_backuped = ();
-    -d $save_path and my @list_backup = all($save_path);
+    -d $path_to_find_restore and my @list_backup = all($path_to_find_restore);
     if (grep /^backup_other/, @list_backup) {$other_backuped = 1;}
     if (grep /^backup_sys/, @list_backup) {$sys_backuped = 1;}
     foreach (grep /^backup_user_/, @list_backup) {
@@ -1316,20 +1454,20 @@ sub find_backup_to_restore {
 
 sub do_restore_backend {
     my $untar_cmd;
-    if (grep /tar.gz$/, all($save_path)) { $untar_cmd = 0; } 
+    if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
     else { $untar_cmd = 1; } 
     if ($restore_user)  { 
-	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $save_path/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
+	$untar_cmd or system(" echo 'user: $_' && cd /tmp &&  tar xfz  $path_to_find_restore/backup_user_$_.tar.gz -C $restore_path") foreach @user_list_to_restore;
 # fixme verifier next line.
-	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $save_path/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
+	$untar_cmd and system("echo 'user: $_' && cd /tmp &&  /usr/bin/bzip2 -cd $path_to_find_restore/backup_user_$_.tar.bz2 | tar xf -C $restore_path ") foreach @user_list_to_restore;
     }
     if ($restore_sys)   { 
-	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $save_path/backup_sys.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $save_path/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+	$untar_cmd or system("echo backup_sys  && cd /tmp && tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
+	$untar_cmd and system("echo backup_sys cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
     }
     if ($restore_other) { 
-	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $save_path/backup_other.tar.gz  -C $restore_path ");
-	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $save_path/backup_other.tar.bz2  | tar xf -C $restore_path ");
+	$untar_cmd or system("echo backup_other && cd /tmp && tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
+	$untar_cmd and system("echo backup_other && cd /tmp && /usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
     }
     print "End of restore\n";
 }
@@ -1365,7 +1503,7 @@ sub restore_state {
     }
     if ($restore_other) { 
 	$restore_state .= "- Restore Other Files: \n";
-	-f "$save_path/list_other" and $restore_state .= "\t\t$_\n" foreach split( "\n", cat_("$save_path/list_other")); 
+	-f "$path_to_find_restore/list_other" and $restore_state .= "\t\t$_\n" foreach split( "\n", cat_("$path_to_find_restore/list_other")); 
     }
     if ($restore_other_path) {
 	$restore_state .= "- Path to Restore: $restore_path \n";
@@ -1403,7 +1541,7 @@ sub restore_step_other {
 					  1, createScrolledWindow(gtkpack(new Gtk::VBox(0,0),
 									  gtkadd(new Gtk::Frame(_("Backup of other files content.")),
 										 gtkpack(new Gtk::VBox(0,10),
-											 cat_("$save_path/list_other"),
+											 cat_("$path_to_find_restore/list_other"),
 											 ),
 										 ),
 									  ),
@@ -1498,9 +1636,156 @@ sub restore_step_sys {
     $up_box->show_all();
 }
 
+sub restore_other_media_hd {
+    my ($previous_function) = @_,
+    my $box_where_hd;
+    my $button;
+    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("filedialog");
+    
+    gtkpack($advanced_box,
+	    $box_where_hd = gtkpack_(new Gtk::VBox(0, 6),
+	 0, new Gtk::HSeparator,
+	 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
+	 0, new Gtk::HSeparator,
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please entrer the directory to save: ")), $where_hd ),
+		     1, new Gtk::VBox(0, 6),
+		     0, gtkset_usize(gtkset_sensitive($save_path_entry = new Gtk::Entry(), $where_hd), 152, 20),
+		     0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
+			 filedialog_where_hd();}), $where_hd ),
+		     ),
+	 0, new Gtk::VBox(0, 6),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please entrer the maximum size\n allowed for Drakbackup ")),  $where_hd ),
+		     1, new Gtk::VBox(0, 6),
+		     0, gtkset_usize(gtkset_sensitive(my $spinner = new Gtk::SpinButton( $adj, 0, 0), $where_hd ), 200, 20),
+		     ),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     1, new Gtk::VBox(0, 6),
+		     0, gtkset_sensitive(my $check_where_hd_quota = new Gtk::CheckButton( _(" Use quota for backup files.")), $where_hd ),
+		     0, new Gtk::VBox(0, 6),
+		     ),
+	 ),
+	    );
+    foreach ([$check_where_hd_quota, \$hd_quota]) {
+	my $ref = $_->[1];
+	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { ${$ref} = ${$ref} ? 0 : 1; })
+	}
+    gtksignal_connect(gtkset_active($check_where_hd, $where_hd), toggled => sub { 
+	$where_hd = $where_hd ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
+    $custom_help = "";
+    $button->add(gtkpack(new Gtk::HBox(0,10), new Gtk::Pixmap($pix_fs_map, $pix_fs_mask)));
+    $save_path_entry->set_text( $save_path );
+    $save_path_entry->signal_connect( 'changed', sub { $save_path = $save_path_entry->get_text()});
+    $current_widget = \&advanced_where_hd;
+    if ($previous_function) { $previous_widget =\&$previous_function; }
+    else { $previous_widget =\&advanced_where; }
+    $central_widget = \$box_where_hd;
+    $up_box->show_all();
+}
+
+sub restore_find_net {
+    my ($previous_function) = @_,
+    my $box_where_net;
+    
+    gtkpack($advanced_box,
+	    $box_where_net = gtkpack_(new Gtk::HBox(0, 15),
+				      1, new Gtk::VBox(0, 5),
+				      1, gtkpack_(new Gtk::VBox(0, 15),	
+						  1, new Gtk::VBox(0, 5),
+						  1, new Gtk::VBox(0,10),
+						  1, gtksignal_connect(new Gtk::Button(_(" FTP Connexion")), clicked => sub { 
+						      $box_where_net->destroy(); 
+						      if ($previous_function ) {
+							  advanced_where_net_ftp(\&$previous_function);
+						      } else {
+							  advanced_where_net_ftp();
+						      }}),
+						  1, gtksignal_connect(new Gtk::Button(_(" Secure Connexion ")),  clicked => sub {
+						      $box_where_net->destroy(); 
+						      if ($previous_function ) {
+							  advanced_where_net_ssh(\&$previous_function);
+						      } else {
+							  advanced_where_net_ssh();
+						      }}),
+						  1, new Gtk::VBox(0, 5),
+						  1, new Gtk::VBox(0,10),
+						  ),
+				      1, new Gtk::VBox(0, 5),	
+				      ),
+	    );
+    if ($previous_function) { $previous_widget =\&$previous_function; }
+    else { $previous_widget =\&advanced_where; }
+    $custom_help = "";
+    $current_widget = \&advanced_where_net;
+    $central_widget = \$box_where_net;
+    $up_box->show_all();
+}
+
+
+sub restore_other_media {
+    my $box_find_restore;
+    my $button;
+    my $adj = new Gtk::Adjustment 550.0, 1.0, 10000.0, 1.0, 5.0, 0.0;
+    my ($pix_fs_map, $pix_fs_mask) = gtkcreate_png("filedialog");
+    
+    gtkpack($advanced_box,
+	    $box_find_restore = gtkpack_(new Gtk::VBox(0, 6),
+	 0, new Gtk::HSeparator,
+	 0, my $check_other_media_hd = new Gtk::CheckButton( _(" Use Hard Disk to find backups") ),
+	 0, gtkpack_(new Gtk::HBox(0,10),
+		     0, gtkset_sensitive(new Gtk::Label(_("Please entrer the directory to find backup ")), $other_media_hd ),
+		     1, new Gtk::VBox(0, 6),
+		     0, gtkset_usize(gtkset_sensitive($restore_find_path_entry = new Gtk::Entry(), $other_media_hd), 152, 20),
+		     0, gtkset_sensitive($button = gtksignal_connect(new Gtk::Button(),  clicked => sub {
+			 filedialog_restore_find_path();}), $other_media_hd ),
+		     ),
+	 1, new Gtk::VBox(0, 6),
+	 0, new Gtk::HSeparator,
+	 0, my $check_other_media_net = new Gtk::CheckButton( _(" Use Network to find backups") ),
+	 0, new Gtk::VBox(0, 6),
+	 1, gtkpack(new Gtk::HBox(0,10),
+		     new Gtk::VBox(0, 6),
+		     gtkset_sensitive(gtksignal_connect(new Gtk::Button("Network"),  clicked => sub {
+			 ${$central_widget}->destroy();
+			 restore_find_net(\&restore_other_media);}), !$other_media_hd ),
+		     new Gtk::VBox(0, 6),
+		     ),
+	 1, new Gtk::VBox(0, 6),
+					 
+	 0, new Gtk::HSeparator,
+
+
+	 0, new Gtk::VBox(0, 6),
+	 ),
+	    );
+    gtksignal_connect(gtkset_active($check_other_media_hd, $other_media_hd), toggled => sub { 
+	$other_media_hd = $other_media_hd ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
+    gtksignal_connect(gtkset_active($check_other_media_net, !$other_media_hd), toggled => sub { 
+	$other_media_hd = $other_media_hd ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
+    $button->add(gtkpack(new Gtk::HBox(0,10), new Gtk::Pixmap($pix_fs_map, $pix_fs_mask)));
+    $restore_find_path_entry->set_text( $path_to_find_restore );
+    $restore_find_path_entry->signal_connect( 'changed', sub { $path_to_find_restore = $restore_find_path_entry->get_text()});
+    $current_widget = \&restore_other_media;
+    $central_widget = \$box_find_restore;
+    $previous_widget =\&restore_step2; 
+    $custom_help = "other_media";
+    $up_box->show_all();
+}
+
+
 sub restore_step2 {
     my $retore_step2;
-    my $restore_other_src;# = 0;
 
     gtkpack($advanced_box,
 	    $retore_step2 = gtkpack_(new Gtk::VBox(0,10),
@@ -1512,7 +1797,7 @@ sub restore_step2 {
 					0, gtkset_sensitive(gtksignal_connect(new Gtk::Button(_("Other Media")),
 									      clicked => sub {
 										  ${$central_widget}->destroy();
-#										  advanced_where_hd(\&wizard_step2);
+										  restore_other_media();
 									      }), $restore_other_src ),
 						 ),
 				     0, my $check_restore_sys = new Gtk::CheckButton(_("Restore system")),
@@ -1528,7 +1813,6 @@ sub restore_step2 {
 	    );
     foreach  ([$check_restore_sys, \$restore_sys], 
 	      [$check_restore_user, \$restore_user],
-	      [$check_restore_other_src, \$restore_other_src],
 	      [$check_restore_other, \$restore_other]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
@@ -1545,11 +1829,11 @@ sub restore_step2 {
 	${$central_widget}->destroy();
 	$current_widget->();
     });
-#     gtksignal_connect(gtkset_active($check_restore_other_src, $restore_other_src), toggled => sub {
-# 	$restore_other_src = $restore_other_src ? 0 : 1;
-# 	${$central_widget}->destroy();
-# 	$current_widget->();
-#     });
+    gtksignal_connect(gtkset_active($check_restore_other_src, $restore_other_src), toggled => sub {
+	$restore_other_src = $restore_other_src ? 0 : 1;
+	${$central_widget}->destroy();
+	$current_widget->();
+    });
     if (!$restore_sys && !$restore_user && !$restore_other) { $next_widget = \&message_norestore_box; }
     elsif ($restore_sys && $backup_sys_versions) { $next_widget = \&restore_step_sys; }
     elsif ($restore_user) { $next_widget = \&restore_step_user;}
@@ -1570,6 +1854,7 @@ sub restore_box {
     my $check_restore_sys;
     my $check_restore_user;
     my $check_restore_other;
+    $path_to_find_restore = $save_path;
     find_backup_to_restore();
     button_box_restore_main();
 
@@ -1911,7 +2196,6 @@ sub message_underdevel {
 			    1, new Gtk::VBox(0, 5),	
 			    ),
 	   );
-    button_box_restore_main();
     $central_widget = \$box2;
     $up_box->show_all();    
 }
@@ -2594,4 +2878,249 @@ Drakbacup allow to restore the system (etc, var files)
 # $t->login($username, $passwd); 
 # my @lines = $t->cmd("/ma/commande/a/executer");
 # print join(' ',@lines); 
+
+# _____________________________________________________________ DOCS2
+
+
+# Linux backups HOWTO1
+
+# Add***jbw
+# Audience: All???
+
+# /Add***jbw
+# Jerry Winegarden
+# Revised 4-04-00
+
+# Revised***jbw
+
+# There are several utilities that can be used for backups under Linux. Which is the best? 
+# There isn't any one utility that is best. It depends on the media to which you are backing up, 
+# whether you are backing up just one machine or several over the network, and what you intend to 
+# do with the backup. There are both free utilities which come standard with a Red Hat Linux 
+# installation and third-party packages (some free, others not).
+
+# /Revised***jbw
+# List of backup utilities
+
+# Add***jbw
+# Standard Red Hat Linux (GNU) backup utilities
+
+# /Add***jbw
+
+#     *
+
+#       tar 2
+#     *
+
+#       dump
+
+#       Add***jbw
+#     * rdump
+
+#       /Add***jbw
+#     *
+
+#       cpio
+#     *
+
+#       (There are others: sharutil,find + dd, cp) 3
+
+# Add***jbw
+
+# Third-party backup packages
+
+#     * BRU
+#     * Networker
+#     * Matt: These two are just placeholders - I need to get a proper list (I've got saved email that 
+# lists some - just had time to look thru them yet)
+
+# /Add***jbw
+
+# There are different types of backups:
+
+#     *
+
+#       full 4
+#     *
+
+#       incremental
+
+#       Add***jbw
+#     * partial
+#     * local
+#     * remote (network)
+
+#       /Add***jbw
+
+# Add***jbw
+# Full backups
+
+# Full backups are intended to be a complete backup of every file. Users should not be logged in during a 
+# full backup so that files are not left open for writing and thus somehow not included in a full backup.
+
+# Partial backups
+
+# Partial backups include only a specified set of files or directories.
+
+# Incremental backups
+
+# Incremental backups are intended to backup only files that have changed since a previous backup. 
+# A common backup scheme is to do a full backup on the weekend when no one is in the office, with 
+# incremental backups being done each night of the things that changed that day. Incremental backups 
+# can even be added to the same tape, without rewinding. To restore a file from backup that was
+#  changed recently, it is often quicker to find the most recent version on an incremental tape backup
+#  than to have to search all the way through all the files on a long full backup tape. Thus, full
+#  backups tend to be done once a week only with incrementals in between.
+
+# /Add***jbw
+
+# Delete***jbw
+
+# /Delete***jbw
+
+# tar
+
+# tar ("tape archive" isn't just for tapes) is the most commonly used
+# backup utility. 5
+
+# To produce a backup of a directory to a file on the disk (e.g. in /tmp):
+
+# tar cvf /tmp/foo.tar .     (output file by default is /dev/tape, so
+#                                 the output file name must be specified
+#                                 with the f option; here, /tmp/foo.tar)
+                                
+#                            c option = Create archive (wrap it up
+#                                         into a "tar archive")
+
+#                            v option = "verbose" - messages to screen
+#                                         when reading/writing each file
+
+#                            f option = specify output file name
+
+#                            /tmp/foo.tar = output file name specified
+
+#                           .  = source directory to create archive of
+#                                 (wraps up everything under the 
+#                                 current directory)
+
+# addition of the "z" option will gzip the output file to compress it into gzip format:
+
+# tar cvzf /tmp/foo.tar.gz
+
+# To move a directory:
+
+# cd fromdir; tar cvf - . | (cd todir; tar xvf -)
+
+# To unpack an archive of a directory:
+
+# cd destdir; tar xvf /tmp/foo.tar 6
+
+# Further tar options:
+
+#     *
+
+#       x option = eXtract archive
+#       it will unpack it into the current default dir (so, first: cd destdir)
+#     *
+
+#       v option = verbose
+#       Can be included with any other options (good to always include this flag)
+#     *
+
+#       f option + file name = specify the INPUT file name
+#       (the name of the archive file being extracted).
+
+# "Incremental" backup with tar:
+
+# tar -cvf tarfilename --after-date="sept 1, 2000" /home
+
+# Add***jbw
+
+# dump
+
+# Dump is used to backup complete file systems, such as /, /home, or whatever file systems you have 
+# defined. (File systems are listed in the file: /etc/fstab). Dump works on one file system at a time.
+
+# Dump has the concept of a dump "level", which is indicated by a non-negative integer, usually 0-6. 
+# Level 0 dumps would be a full backup (of the specified file systems, which might be partial or 
+# complete depending on whether all file systems are specified). Level 1 and higher dumps are used 
+# for "incremental" backups. A level 1 dump will backup files which have changed (been "touched") 
+# since the last level 0 dump. A level 2 dump will backup anything changed since the last level 1 
+# dump. This scheme can be used to produce a full backup on weekend (level 0 dump), followed by 
+# a level n dump, where n is the day of the week (Monday = 1).
+
+# The other important dump parameter is "-f", which refers to the "file" or device to dump to. 
+# Thus, the dump backup of a file system can be written to a disk drive (in another file system) 
+# or to a tape drive or a zip drive. In the case of a tape drive, the file name is the special 
+# character device name: /dev/rmt0 or /dev/nrmt0 ("no-rewind" tape device) or /dev/tape or whatever 
+# the device name of your tape drive.
+
+# A dump is performed as follows:
+
+# dump -0f /dev/rmt0 /filesystemname
+
+# (full backup)
+
+# or,
+
+# dump -2f /dev/nrmt0 /filesystemname
+
+# (incremental, level 2 backup to the no-rewind tape device (don't rewind the tape before or after writing. 
+# Just add the backup to the existing tape. This is often done to have incremental backups added to the same tape).
+
+# To extract files from a dump backup, use the utility: restore
+
+# Restores can be done "interactively":
+
+# restore -i
+
+# Dump/restore to be continued...
+
+# cpio
+# CPIO is another system backup utility. The rpm package installation utility actually uses cpio 
+# format to package software for system installation.
+
+# CPIO - to be continued
+
+# 1This actually reads like, not a "backups HOWTO", but a "backups using tar HOWTO". You mention
+#  other archiving utilities, but don't explain how to use them, and also don't explain why tar
+#  is used in this document instead of the others.
+
+# ***jbw: I haven't gotten around to writing the details on how to for dump, cpio. Sorry. I'll work
+#  on it. This doc is definitely not just a tar howto (heh, I use dump myself, most often, even 
+# though some duluggers call dump "evil" under linux).
+
+# 2What does each utility do? Sure, tar means "tape archiver", which is alluded to later; what about the others?
+
+# 3Is this a list that is incomplete, and the author will add to it later? Why the ellipsis?
+# ***jbw - Right! List is incomplete and to be finished later. I did add to the list, parenthetically,
+#  but I didn't describe those additions. (e.g. find + dd is a two-step method: find ... | dd ...)
+
+# 4It would be helpful to explain the difference between the two. For example:
+# A full backup makes an archive of the entire contents of a user's... hard drive? Filesystem? Home directory?
+# An incremental backup only includes those parts of the... hard drive? Filesystem? Home directory? ...which 
+# have changed since the last time a backup was made.
+
+# ***jbw
+
+# I added the paragraphs describing full, partial, and incremental backups, and I explained the strategy of 
+# how they are used (full once a week, incrementals every night) and why such a strategy is used (easier to 
+# find one file to be restored from an incremental backup tape, which will have many fewer files written).
+
+# 5Any particular reason this section is pre-formatted?
+# YES!!! As with anything that's sort of a "man page" or a real, live, .conf file, it's often done with
+
+# tag.  That is quite intentional to 
+# get things formatted in an easily readable format without too much work! 
+# The 
+
+# tag is intentional here.  It is even desirable here, 
+# WITHOUT quot or footnote or other tags!!!  It's sort of comparable to
+# getting a screen shot to show exactly how something is seen.
+
+
+# 6This is the only part of the HOWTO that actually shows "HOW TO" do something. Even so, the reasons 
+# why you'd want to do this aren't explained.
+
+
 
