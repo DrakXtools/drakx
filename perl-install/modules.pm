@@ -743,7 +743,7 @@ sub read_stage1_conf {
 }
 
 sub load_thiskind {
-    my ($type, $f) = @_;
+    my ($type, $f, $probe_type) = @_;
 
     #- get_that_type returns the PCMCIA cards. It doesn't know they are already
     #- loaded, so:
@@ -766,12 +766,12 @@ sub load_thiskind {
 	$_->{error} = $@;
 
 	!($@ && $_->{try});
-    } get_that_type($type), 
+    } get_that_type($type, $probe_type),
       map {; { driver => $_, description => $_, try => 1 } } @try_modules;
 }
 
 sub get_that_type {
-    my ($type) = @_;
+    my ($type, $probe_type) = @_;
 
     grep {
 	if ($type eq 'isdn') {
@@ -788,7 +788,7 @@ sub get_that_type {
 		my $l = $drivers{$_->{driver}};
 		($_->{type} =~ /$type/ || $l && $l->{type} =~ /$type/) && detect_devices::check($_);
 	}
-    } detect_devices::probeall('');
+    } detect_devices::probeall($probe_type);
 }
 
 sub load_ide {
