@@ -1,3 +1,135 @@
+2002/07/09  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: have MDK::Common's in TAGS
+
+	* detect_devices.pm: rewrite getSCSI, now handling scanners
+
+	* share/list: adapt to new perl 5.8.0
+
+	* common.pm, modparm.pm: move join_lines to common
+
+2002/07/09  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/TODO: fix boot freeze on hw change: initscript was running us
+	with stdout
+	redirected to /dev/null; just use a small sh wrapper to fix it
+	update
+
+	* standalone/service_harddrake.sh: 
+	  - redirect stderr
+	  - remove old commented stuff
+	fix boot freeze on hw change: initscript was running us with stdout
+	redirected to /dev/null; just use a small sh wrapper to fix it
+
+	* Makefile.drakxtools: fix boot freeze on hw change: initscript was
+	running us with stdout
+	redirected to /dev/null; just use a small sh wrapper to fix it
+
+	* standalone/service_harddrake: 
+	  - configurator got displayed
+	  - move timeout around configurator asking (still not 100% ok)
+	time out after 200 seconds
+	fix boot freeze on hw change: initscript was running us with stdout
+	redirected to /dev/null; just use a small sh wrapper to fix it
+
+	* drakxtools.spec: fix url
+	add harddrake service wrapper
+	really final changes
+	final batch of changes for -3mdk ?
+	fix boot freeze on hw change: initscript was running us with stdout
+	redirected to /dev/null; just use a small sh wrapper to fix it
+
+	* Makefile.config: add harddrake service wrapper to installed files
+
+	* harddrake/ui.pm: 
+	  - add channel: primary/slave for eide deivces
+	  - get rid of ->{set,get}_user_data
+	ensure we don't mix scsi and pci devices
+
+	* harddrake/bttv.pm: log only if options set
+	typo fix
+	only log explanations in standalone mode
+
+	* share/po/Makefile: fake make so that its builtin rule to create file
+	from file.sh doesn't
+	nuke service_harddrake with it wrapper
+
+2002/07/08  daouda
+
+	* standalone/drakbug: 
+	  - detect package automatically when app is chosen
+
+2002/07/08  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: create the list_modules symlink
+	make test_pms should now work (was pb with list_modules.pm)
+
+	* install_steps.pm, any.pm: mtools config so that "mdir a:" accesses the
+	usb floppy if one is there
+
+	* diskdrake/hd_gtk.pm: do not display "Clear all" (and the other per kind
+	buttons) for the raid tab
+
+	* install_steps_interactive.pm: in case the licence is refused, ask for
+	confirmation
+
+	* diskdrake/interactive.pm: make Clear_all work on a LVM VG
+	make Clear_all remove partitions from raids
+
+2002/07/08  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/TODO: remove fixed stuff
+
+	* Makefile.drakxtools: s/PHONY/.PHONY/
+	  - simplifications
+	  - harddrake support is complete
+
+	* drakxtools.spec: update
+	fix post: add start argument
+	service changes batch for 2mdk
+	rpmlint fixes
+	parrallel build
+	1.1.8-2mdk
+	  - enhance descriptions
+	  - various spec clean
+	split-up between harddrake and harddrake-ui
+	complete changelog
+	  - obsoletes/provides libdetect-lst, libdetect-lst-devel, detect,
+	detect-lst
+	  - don't restart harddrake on install
+	  - some stuff moved into Makefile.drakxtools
+	  - fix harddrake menu entry
+	  - fix build
+
+	* harddrake/data.pm: cache @devices so that hw probe is only done once
+
+	* standalone/harddrake2: no need to 'use strict' in "binary"
+
+	* standalone/service_harddrake: 
+	  - only work on start
+	  - add "please wait" message
+	  - really don't cry when no previous config
+	skip configuration on firt run
+	skip hw classes without configurator (which'll have a configurator
+	after porting updfstab)
+
+	* harddrake/ui.pm: 
+	  - rehide "run config tool" button when it has been displayed in
+	another hw class
+	don't display "run config tool" button if no configurator availlable
+	  - center the main window
+	  - remove drakx decorations
+	mice:
+	  - s/nbuttons/Number of buttons/
+	  - delete qw(MOUSETYPE XMOUSETYPE unsafe)
+	don't delete info field in normal path
+	  - eide devices: split up info field into vendor and model fields
+	  - complete help
+	hummm ... eide: 0->master, 1->slave :-(
+	  - remove save_report menu entry, this is done by service_harddrake
+	  - move $in declaration near where it's used
+	eide hard disks : print master/slave for bus_location
+
 2002/07/08  daouda
 
 	* Makefile.config: 
