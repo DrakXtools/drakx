@@ -286,7 +286,6 @@ sub setupBootloader__entries {
 	my $default = my $old_default = $e->{label} eq $b->{default};
 	my $vga = Xconfig::resolution_and_depth::from_bios($e->{vga});
 	my $netprofile = bootloader::get_append($b, 'PROFILE');
-	bootloader::remove_append_dict($b, 'PROFILE'); #- hide PROFILE option in 'append' text entry
 
 	my @l;
 	if ($e->{type} eq "image") { 
@@ -337,7 +336,7 @@ sub setupBootloader__entries {
 
 	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
 	$e->{vga} = ref($vga) ? $vga->{bios} : $vga;
-	bootloader::set_append($b, 'PROFILE', $netprofile) if $netprofile;
+	bootloader::set_append($b, PROFILE => $netprofile);
 	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
 	1;
     };

@@ -508,13 +508,6 @@ sub remove_append_simple {
 	@$simple = grep { $_ ne $key } @$simple;
     });
 }
-sub remove_append_dict {
-    my ($b, $key) = @_;
-    modify_append($b, sub {
-	my ($simple, $_dict) = @_;
-        @$_dict = grep { $_->[0] ne $key } @$_dict;
-    });
-}
 sub set_append {
     my $has_val = @_ > 2;
     my ($b, $key, $val) = @_;
