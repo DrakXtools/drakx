@@ -198,6 +198,7 @@ sub choosePartitionsToFormat($$) {
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
 
     $_->{toFormat} ||= $_->{toFormatUnsure} foreach @l;
+    log::l("preparing to format $_->{mntpoint}") foreach grep { $_->{toFormat} } @l;
 
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { isSwap($_) ? type2name($_->{type}) . " ($_->{device})" : $_->{mntpoint} } @l ],
