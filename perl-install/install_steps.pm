@@ -503,7 +503,8 @@ GridHeight=70
     #- fix bad update-alternatives that may occurs after upgrade (but let them for install too).
     if (-d "$o->{prefix}/etc/alternatives") {
 	foreach (all("$o->{prefix}/etc/alternatives")) {
-	    -e "$o->{prefix}/etc/alternatives/$_" and next;
+	    my $l = readlink "$o->{prefix}/etc/alternatives/$_";
+	    -e ($l =~ m|^/| ? "$o->{prefix}$l" : "$o->{prefix}/etc/alternatives/$_") and next;
 	    log::l("fixing broken alternative $_");
 	    run_program::rooted($o->{prefix}, "update-alternatives", "--auto", $_);
 	}
