@@ -63,20 +63,9 @@ sub load_rc {
 
 }
 
-sub default_theme {
-    my ($o) = @_;
-    $o->{meta_class} eq 'desktop' ? 'blue' :
-      $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
-      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
-}
-
 #------------------------------------------------------------------------------
-sub install_theme {
+sub load_font {
     my ($o) = @_;
-
-    $o->{theme} ||= default_theme($o);
-    load_rc($o, "themes-$o->{theme}");
-
     Gtk2::Rc->parse_string(q(
 style "default-font" 
 {
@@ -85,6 +74,22 @@ style "default-font"
 widget "*" style "default-font"
 
 ));
+}
+
+#------------------------------------------------------------------------------
+sub default_theme {
+    my ($o) = @_;
+    $o->{meta_class} eq 'desktop' ? 'blue' :
+      $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
+      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
+}
+
+sub install_theme {
+    my ($o) = @_;
+
+    $o->{theme} ||= default_theme($o);
+    load_rc($o, "themes-$o->{theme}");
+    load_font($o);
     gtkset_background(@background) unless $::live; #- || testing;
 }
 
