@@ -27,6 +27,8 @@ You can find some information about them at: %s", join(", ", @l))) if @l;
 sub partition_with_diskdrake {
     my ($o, $hds, $nowizard) = @_;
     my $ok; 
+
+    $o->set_help('partition_with_diskdrake');
     do {
 	$ok = 1;
 	require diskdrake;
@@ -98,7 +100,9 @@ sub partitionWizardSolutions {
 	$solutions{resize_fat} = 
 	  [ 6 - @fats, _("Use the free space on the Windows partition"),
 	    sub {
+		$o->set_help('resizeFATChoose');
 		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table_raw::description, \@ok_forloopback) or return;
+		$o->set_help('resizeFATWait');
 		my $w = $o->wait_message(_("Resizing"), _("Computing Windows filesystem bounds"));
 		my $resize_fat = eval { resize_fat::main->new($part->{device}, devices::make($part->{device})) };
 		$@ and die _("The FAT resizer is unable to handle your partition, 
@@ -143,8 +147,10 @@ When sure, press Ok.")) or return;
 	$solutions{wipe_drive} =
 	  [ 10, fsedit::is_one_big_fat($hds) ? _("Remove Windows(TM)") : _("Erase entire disk"), 
 	    sub {
+		$o->set_help('takeOverHdChoose');
 		my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
 					    \&partition_table_raw::description, $hds) or return;
+		$o->set_help('takeOverHdConfirm');
 		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table_raw::description($hd))) or return;
 		partition_table_raw::zero_MBR($hd);
 		fsedit::auto_allocate($hds, $o->{partitions});
@@ -176,6 +182,8 @@ When you are done, don't forget to save using `w'", partition_table_raw::descrip
 
 sub partitionWizard {
     my ($o, $nodiskdrake) = @_;
+
+    $o->set_help('doPartitionDisks');
 
     my %solutions = partitionWizardSolutions($o, $o->{hds}, $o->{fstab}, $o->{partitioning}{readonly});
     %solutions = (loopback => $solutions{loopback}) if $o->{lnx4win};

@@ -28,7 +28,6 @@ my @suggestions = (
   { mntpoint => "/home",    size =>  50 << 11, type => 0x83, ratio => 3 },
   { mntpoint => "/var",     size => 200 << 11, type => 0x83, ratio => 1, maxsize =>1000 << 11 },
   { mntpoint => "/tmp",     size =>  50 << 11, type => 0x83, ratio => 3, maxsize => 500 << 11 },
-  { mntpoint => "/mnt/iso", size => 700 << 11, type => 0x83 },
 );
 my @suggestions_mntpoints = ( "/root/", arch() =~ /sparc/ ? "/mnt/sunos" : "/mnt/windows" );
 

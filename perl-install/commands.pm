@@ -583,6 +583,7 @@ sub bug {
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog"),
+      header("ddcxinfos"), `ddcxinfos`,
       header("ddebug.log"), cat_("/tmp/ddebug.log"),
       header("install.log"), cat_("/mnt/root/install.log"),
       ;

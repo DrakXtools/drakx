@@ -65,9 +65,12 @@ will be installed, you will be able to at least read and write in that
 language; and possibly more (various fonts, spell checkers, various programs
 translated etc. that varies from language to language).") if $o->{lang} !~ /^en/ && translate("_I18N_");
     
-    $o->{useless_thing_accepted} = $o->ask_from_list_('', 
-						      "License - no warranty", 
-						      [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit unless $o->{useless_thing_accepted};
+    unless ($o->{useless_thing_accepted}) {
+	$o->set_help('license');
+	$o->{useless_thing_accepted} = $o->ask_from_list_('', 
+							  "License - no warranty", 
+							  [ __("Accept"), __("Refuse") ], "Accept") eq "Accept" or $o->exit;
+    }
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard($) {
@@ -81,6 +84,7 @@ sub selectKeyboard($) {
     delete $o->{keyboard_unsafe};
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
+	$o->set_help('selectLangs');
 	$o->{langs} ||= [];
 	my $all = $o->{langs}[0] eq 'all';
 	$o->{langs} = $o->ask_many_from_list('',
@@ -200,15 +204,18 @@ sub setupSCSI {
 
 sub ask_mntpoint_s {
     my ($o, $fstab) = @_;
+    $o->set_help('ask_mntpoint_s');
+
     my @fstab = grep { isTrueFS($_) } @$fstab;
     @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
     @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
 
-
-    install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
-    log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
-
+    {
+	my $w = $o->wait_message('', _("Scanning partitions to find mount points"));
+	install_any::suggest_mount_points($o->{hds}, $o->{prefix}, 'uniq');
+	log::l("default mntpoint $_->{mntpoint} $_->{device}") foreach @fstab;
+    }
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
     } else {
@@ -299,9 +306,10 @@ sub choosePartitionsToFormat($$) {
     #- ok now we can really set toFormat
     $_->{toFormat} = 1 foreach @$toFormat;
 
-    $o->ask_many_from_list('', _("Check bad blocks?"),
+    my @m = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
+    @m && $o->ask_many_from_list('', _("Check bad blocks?"),
         { 
-          list => [ grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l ],
+          list => \@m,
           label => $name2label,
 	  ref => sub { \$_->{toFormatCheck} },
         }) or goto &choosePartitionsToFormat if $::expert;
@@ -377,6 +385,7 @@ sub choosePackages {
 		    $l[2] > $l[1] + 200 or splice(@l, 1, 1); #- not worth proposing too alike stuff
 		    $l[1] > $l[0] + 100 or splice(@l, 0, 1);
 		}
+		$o->set_help('empty');
 		$o->ask_from_listf('', _("Select the size you want to install"), sub { _ ($text[$_[1]], $_[0]) }, \@l, $l[1]) * sqr(1024);
 	    } else {
 		$o->chooseSizeToInstall($packages, $min_size, $max_size, $availableC, $individual) || goto &choosePackages;
@@ -588,6 +597,7 @@ sub configureTimezone {
 
     require timezone;
     $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
+    $o->set_help('configureTimezoneGMT');
     $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
     install_steps::configureTimezone($o, $f);
 }
@@ -625,11 +635,13 @@ sub configurePrinter {
     #- in case this has not be detected above.
     $::expert or $o->{printer}{mode} ||= 'CUPS';
     if ($::expert || !$o->{printer}{mode}) {
+	$o->set_help('configurePrinterSystem');
 	$o->{printer}{mode} = $o->ask_from_list_([''], _("Which printing system do you want to use?"),
 						 [ 'CUPS', 'lpr', __("None") ],
 						);
 	$o->{printer}{want} = $o->{printer}{mode} ne 'None';
 	$o->{printer}{want} or $o->{printer}{mode} = undef, return;
+	$o->set_help('configurePrinter');
     }
 
     $o->{printer}{PAPERSIZE} = $o->{lang} eq 'en' ? 'letter' : 'a4';

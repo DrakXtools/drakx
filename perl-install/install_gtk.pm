@@ -426,7 +426,9 @@ sub test_mouse {
     $w->sync; # HACK
     $draw_rect->(1, 0, [ 0, 0, $width, $height]);
     $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
-    $draw_text->(_("Move your wheel!"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $draw_text->(_("To activate the mouse,"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $draw_text->(_("MOVE YOUR WHEEL!"),     2 * $bh + 20) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+ 
     $paintButton->($_, 0) foreach 0..2;
     $w->{cancel}->grab_focus;
 #    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });

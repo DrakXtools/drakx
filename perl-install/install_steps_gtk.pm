@@ -243,6 +243,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
 sub choosePackagesTree {
     my ($o, $packages, $compss) = @_;
 
+    $o->set_help('choosePackagesTree');
     my ($curr, $parent, $info_widget, $w_size, $go, $idle, $flat, $auto_deps);
     my (%wtree, %ptree);
 
