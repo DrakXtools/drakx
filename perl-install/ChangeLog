@@ -1,5 +1,96 @@
 2001/09/12  dam's  <damien@mandrakesoft.com>
 
+	* my_gtk.pm: typo
+	new color for shadow
+	corrected shadow handling
+	no shadow if liveupdate
+
+	* share/help.png: new help
+
+	* mouse.pm: removed debug code
+
+	* network/tools.pm, network/netconnect.pm, network/ethernet.pm,
+	network/isdn.pm, network/adsl.pm, network/modem.pm: new default
+	connection handling
+
+	* standalone.pm: added wait message while installing package
+
+2001/09/12  daouda
+
+	* standalone/drakbug_report: add Mandrake release section
+
+2001/09/12  fcrozat
+
+	* share/rpmsrate: Fix gnome install
+
+2001/09/12  François Pons  <fpons@mandrakesoft.com>
+
+	* install2.pm: removed obsolete --nocpi flag for install2.
+	avoid probing usb device (for mouse) if --noauto is given.
+
+	* install_steps.pm: disabled frame buffer for most of the SiS display card
+	except SiS 630.
+
+	* Xconfigurator.pm: added MGA G550 as always having two head.
+
+	* live_install2: fix when switching perl version.
+
+	* live_install: use system perl instead.
+
+2001/09/12  gbeauchesne
+
+	* share/list.ia64, share/list, share/list.i386: 
+	  - list (/sbin/mkfs.jfs, /sbin/mkfs.xfs): Move to...
+	  - list.i386: ... Here.
+	  - list.ia64: Updates.
+
+2001/09/12  odin
+
+	* share/po/fr.po: updated fr.po
+
+2001/09/12  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/zh_CN.po, share/po/fi.po, share/po/DrakX.pot,
+	share/po/es.po, share/po/fr.po, share/po/bg.po, share/po/de.po,
+	share/po/et.po, share/po/el.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/hr.po, share/po/vi.po, share/po/ca.po,
+	share/po/gl.po, share/po/eo.po, share/po/help_xml2pm.pl, share/po/wa.po,
+	share/po/da.po, share/po/zh_TW.po, share/po/cs.po, share/po/hu.po,
+	share/po/it.po, share/po/af.po: updated pot file
+
+	* help.pm: new version with [ and ]
+
+	* lang.pm: commented out utf-8 russian locale, for now
+
+2001/09/12  Pixel  <pixel@mandrakesoft.com>
+
+	* standalone/lsnetdrake: fix typo
+	added wonderful lsnetdrake
+
+	* modules.pm, install2.pm: display error when the kernel mismatch the
+	modules
+
+	* docs/README: explain how to get the boot kernels
+
+	* install_steps_gtk.pm (choosePackagesTree): translate the categories
+
+	* standalone/drakbug_report: cleanup
+
+	* bootloader.pm (suggest): no "quiet" boot for smp and enterprise kernels
+	(suggest): no "quiet" boot for smp and enterprise kernels
+	allow grub even for more than 800MB
+
+	* Makefile.drakxtools, Makefile.config: added wonderful lsnetdrake
+
+2001/09/12  siegel
+
+	* share/po/de.po: new & shiny verion
+
+	* share/po/help_xml2pm.pl: fixed silly error
+	added keycap patch
+
+2001/09/12  dam's  <damien@mandrakesoft.com>
+
 	* my_gtk.pm: corrected shadow handling
 	no shadow if liveupdate
 	table undef corrected
