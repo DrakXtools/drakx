@@ -50,7 +50,7 @@ sub detect_timezone() {
 		       'America/New_York' => N("United States"),
 		       'Europe/London' => N("United Kingdom") 
 		      );
-    my %tm_parse = MDK::Common::System::getVarsFromSh('/etc/sysconfig/clock');
+    my %tm_parse = MDK::Common::System::getVarsFromSh("$::prefix/etc/sysconfig/clock");
     my @country;
     foreach (keys %tmz2country) {
 	if ($_ eq $tm_parse{ZONE}) {
@@ -89,10 +89,10 @@ sub real_main {
       my ($module, $auto_ip, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
-      my $db_path = "/usr/share/apps/kppp/Provider";
+      my $db_path = "$::prefix/usr/share/apps/kppp/Provider";
       my (%countries, @isp, $country, $provider, $old_provider);
       my $config = {};
-      eval(cat_('/etc/sysconfig/drakconnect'));
+      eval(cat_("$::prefix/etc/sysconfig/drakconnect"));
 
       my %wireless_mode = (N("Ad-hoc") => "Ad-hoc", 
                            N("Managed") => "Managed", 
@@ -469,9 +469,9 @@ Take a look at http://www.linmodems.org"),
                         my $type;
 
                         my %pkgs2path = (
-                                         hcfpcimodem => '/usr/sbin/hcfpciconfig',
-                                         hsflinmodem => '/usr/sbin/hsfconfig',
-                                         ltmodem => '/etc/devfs/conf.d/ltmodem.conf',
+                                         hcfpcimodem => "$::prefix/usr/sbin/hcfpciconfig",
+                                         hsflinmodem => "$::prefix/usr/sbin/hsfconfig",
+                                         ltmodem => "$::prefix/etc/devfs/conf.d/ltmodem.conf",
                                         );
                         
                         my %devices = (ltmodem => '/dev/ttyS14',
@@ -617,7 +617,7 @@ killall pppd
                     post => sub {
                         network::modem::ppp_configure($in, $modem);
                         $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
-                        $in->do_pkgs->install('kdenetwork-kppp') if !-e '/usr/bin/kppp';
+                        $in->do_pkgs->ensure_is_installed('kdenetwork-kppp', '/usr/bin/kppp');
                         $handle_multiple_cnx->();
                     },
                    },
@@ -644,8 +644,8 @@ killall pppd
                     post => sub {
                         my %packages = (
                                         'eci'        => [ 'eciadsl', 'missing' ],
-                                        'sagem'      => [ 'eagle-usb',  '/usr/sbin/eaglectrl' ],
-                                        'speedtouch' => [ 'speedtouch', '/usr/share/speedtouch/speedtouch.sh' ],
+                                        'sagem'      => [ 'eagle-usb',  "$::prefix/usr/sbin/eaglectrl" ],
+                                        'speedtouch' => [ 'speedtouch', "$::prefix/usr/share/speedtouch/speedtouch.sh" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
                         $in->do_pkgs->install($packages{$ntf_name}->[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
@@ -896,7 +896,7 @@ Modifying the fields below will override this configuration."),
                         delete $ethntf->{NETWORK};
                         delete $ethntf->{BROADCAST};
                         @fields = qw(IPADDR NETMASK);
-                        $netc->{dhcp_client} ||= (find { -x "/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
+                        $netc->{dhcp_client} ||= (find { -x "$::prefix/sbin/$_" } qw(dhclient dhcpcd pump dhcpxd)) || "dhcp-client";
                         $netc->{dhcp_client} = "dhcp-client" if $netc->{dhcp_client} eq "dhclient";
                     },
                     name => sub { join('', 
@@ -1312,7 +1312,7 @@ fi
     }
     output_with_perm("$::prefix$network::tools::connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
-    $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
+    $netcnx->{type} =~ /adsl/ or run_program::rooted($::prefix, "/chkconfig --del adsl 2> /dev/null");
 
     if ($::isInstall && $::o->{security} >= 3) {
 	require network::drakfirewall;
@@ -1372,7 +1372,7 @@ sub load_conf {
 
 sub get_net_device() {
     my $connect_file = $network::tools::connect_file;
-    my $network_file = "/etc/sysconfig/network";
+    my $network_file = "$::prefix/etc/sysconfig/network";
 		if (cat_("$::prefix$connect_file") =~ /ifup/) {
   		if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1))
 		} elsif (cat_("$::prefix$connect_file") =~ /network/) {
