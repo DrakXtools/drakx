@@ -337,7 +337,7 @@ our @tree =
       icon => "usb.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} eq 'SERIAL_USB' } @devices) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {

@@ -117,6 +117,9 @@ foreach my $hw_class (@harddrake::data::tree) {
     } elsif ($Ident eq "AGP") {
         # add agpgart modules to modprobe.preload if needed:
         $modules_conf->write;
+    } elsif ($Ident eq "USB_CONTROLLER") {
+        modules::load_category($modules_conf, 'bus/usb');
+        $modules_conf->write;
     } elsif ($Ident eq "VIDEO") {
         require harddrake::autoconf;
         harddrake::autoconf::xconf($modules_conf, {});
