@@ -137,10 +137,13 @@ sub new_nonedit_combo {
     Gtk2::ComboBox->new_with_strings([ to_i18n(@$string_list) ], to_i18n($o_default_value));
 }
 
+my $tip;
+
 sub set_help_tip {
      my ($entry, $default, $opt) = @_;
      my $help = $security::help::help{$opt};
-     gtkset_tip(Gtk2::Tooltips->new, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", to_i18n($default)));
+     my $tips ||= Gtk2::Tooltips->new;
+     gtkset_tip($tips, $entry, formatAlaTeX($help) . "\n" . N("(default value: %s)", to_i18n($default)));
 }
 
 my $msec = new security::msec;
