@@ -80,7 +80,7 @@
 
 
 use Gtk;
-use lib qw(..);
+use lib qw(/usr/lib/libDrakX );
 use interactive;
 use standalone;
 use my_gtk qw(:helpers :wrappers);
@@ -531,9 +531,7 @@ sub display_error {
 sub interactive_mode {
     my $font_sel;
     $interactive = 1;
-    
     init Gtk;
-    
     my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
     $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
     $window1->set_position(1);
@@ -575,8 +573,7 @@ sub interactive_mode {
     $central_widget = \$font_sel;
     $window1->show_all;
     $window1->realize;
-    $window1->show_all();
-    
+    $window1->show_all();    
     Gtk->main;
     Gtk->exit(0);
 }
