@@ -11,6 +11,7 @@ use steps;
 use common;
 use install_any qw(:all);
 use install_steps;
+use install_any;
 use lang;
 use keyboard;
 use mouse;
@@ -484,6 +485,15 @@ sub main {
  	log::l("switching to newt install cuz not enough memory");
  	$o->{interactive} = "newt";
     }
+
+    if (my ($s) = cat_("/proc/cmdline") =~ /brltty=(\S*)/) {
+	my ($driver, $device, $table) = split(',', $s);
+	$table = "text.$table.tbl" if $table !~ /\.tbl$/;
+	log::l("brltty option $driver $device $table");
+	$o->{brltty} = { driver => $driver, device => $device, table => $table };
+	$o->{interactive} = 'newt';
+    }
+
     # perl_checker: require install_steps_gtk
     # perl_checker: require install_steps_newt
     # perl_checker: require install_steps_stdio
@@ -505,6 +515,26 @@ sub main {
 
     #- needed very early for install_steps_gtk
     eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
+
+    #- need to be after oo-izing $o
+    if ($o->{brltty}) {
+	symlink "/tmp/stage2/$_", $_ foreach "/etc/brltty";
+	if (common::usingRamdisk()) {
+	    install_any::remove_unused(0);
+	    mkdir '/tmp/stage2/etc/brltty';
+	    mkdir '/lib/brltty';
+	    install_any::getAndSaveFile("/etc/brltty/$o->{brltty}{table}", "/tmp/stage2/etc/brltty/$o->{brltty}{table}") if $o->{brltty}{table};
+	    install_any::getAndSaveFile("/lib/brltty/libbrlttyb$o->{brltty}{driver}.so") or do {
+		warn("Braille driver $o->{brltty}{driver} for BRLTTY was not found.\n",
+		     "Press ENTER to continue.\n");
+		<STDIN>;
+	    };
+	    install_any::getAndSaveFile("/usr/bin/brltty");
+	    chmod 0755, "/usr/bin/brltty";
+	}
+	devices::make("vcsa");
+	run_program::run("brltty");
+    }
 
     $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 

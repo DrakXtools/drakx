@@ -444,6 +444,14 @@ Consoles 1,3,4,7 may also contain interesting information";
 		     "$o->{prefix}/etc/skel/Desktop/Autostart/kapm.kdelnk") };
     }
 
+    if ($o->{brltty}) {
+	output("$o->{prefix}/etc/brltty.conf", <<EOF);
+braille-driver $o->{brltty}{driver}
+braille-device $o->{brltty}{device}
+text-table $o->{brltty}{table}
+EOF
+    }
+
     $o->install_urpmi;
 
     if ($o->{lang} =~ /^(zh_TW|th|vi|be|bg)/) {

@@ -42,6 +42,7 @@ rm -f `ls --sort=size $STAGE2TMP/lib/modules.cz-* | perl -ne 'print if $i++'`
 rm -f $STAGE2TMP/usr/bin/{pv*,vg*,lv*} $STAGE2TMP/lib/liblvm*
 rm -f $STAGE2TMP/usr/bin/{resize_reiserfs,fsck.jfs}
 rm -f $STAGE2TMP/usr/X11R6/lib/X11/fonts/{12x13mdk,18x18mdk}.pcf*
+rm -rf $STAGE2TMP{/usr/bin/brltty,/etc/brltty,/lib/brltty}
 rm -rf $STAGE2TMP/usr/share/locale_special
 
 (   # only keeping UTF-8
@@ -74,4 +75,4 @@ rmdir $MNTPOINT
 
 echo bzipping $STAGE2
 
-bzip2 -f -9 $STAGE2
+bzip2 -v -f -9 $STAGE2

@@ -338,6 +338,7 @@ sub setDefaultPackages {
 	delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
     }
 
+    push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
     push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
     push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
     push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
@@ -1114,7 +1115,7 @@ sub check_prog {
 
 sub remove_unused {
     $::testing and return;
-    if ($::o->isa('interactive::gtk')) {
+    if (@_ ? $_[0] : $::o->isa('interactive::gtk')) {
 	unlink glob_("/lib/lib$_*") foreach qw(slang newt);
 	unlink "/usr/bin/perl-install/auto/Newt/Newt.so";
     } else {
