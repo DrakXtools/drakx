@@ -344,14 +344,18 @@ sub main($$$$;$) {
 	    $queue = $printer->{want} || $in->ask_yesorno(_("Printer"),
 							  _("Would you like to configure a printer?"), 0) ? 'lp' : 'Done';
 	} else {
-	    $in->ask_from_entries_refH_powered(
-		{
-		 messages =>
+	    unless (%{$printer->{configured} || {}} == ()) {
+		$in->ask_from_entries_refH_powered(
+						   {
+						    messages =>
 _("Here are the following print queues.
 You can add some more or change the existing ones."),
-		 ok => '',
-		}, [ { val => \$queue, format => \&translate, list => [ (sort keys %{$printer->{configured} || {}}), __("Add"), __("Done") ] } ]
-            );
+						    ok => '',
+						   }, [ { val => \$queue, format => \&translate,
+							  list => [ (sort keys %{$printer->{configured} || {}}),
+								    __("Add"), __("Done") ] } ]
+						  );
+	    } else { $queue = 'Add' } #- as there are no printer already configured, Add one automatically.
 	    if ($queue eq 'Add') {
 		my %queues; @queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
 		my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
