@@ -70,6 +70,7 @@ my %l2t = (
 'Spanish (Spain)' => 'Europe/Madrid',
 'Swedish (Finland)' => 'Europe/Helsinki',
 'Swedish (Sweden)' => 'Europe/Stockholm',
+'Thai (Thailand)' => 'Asia/Bangkok',
 'Turkish (Turkey)' => 'Europe/Istanbul',
 'Ukrainian (Ukraine)' => 'Europe/Kiev',
 'Walon (Belgium)' => 'Europe/Brussels',
