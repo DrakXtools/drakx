@@ -835,7 +835,7 @@ sub langs_selected {
     my ($locale) = @_; 
     #- adding the UTF-8 flag (if not forced) depends on the selected languages
     $locale->{utf8} ||= l2charset($locale->{lang}) =~ /utf|unicode/
-			|| (uniq map { l2charset($_) } langs($locale->{langs})) > 1;
+			|| (uniq(grep { $_ ne 'C' } map { l2charset($_) } langs($locale->{langs}))) > 1;
 }
 
 sub pack_langs { 

@@ -103,7 +103,7 @@ sub selectLanguage {
     }
 
     lang::langs_selected($o->{locale});
-    log::l("selectLanguage: pack_langs ", lang::pack_langs($o->{locale}{langs}));
+    log::l("selectLanguage: pack_langs: ", lang::pack_langs($o->{locale}{langs}), " utf8-flag: ", to_bool($o->{locale}{utf8}));
 
     #- for auto_install compatibility with old $o->{keyboard} containing directly $o->{keyboard}{KEYBOARD}
     $o->{keyboard} = { KEYBOARD => $o->{keyboard} } if $o->{keyboard} && !ref($o->{keyboard});
