@@ -5,7 +5,7 @@ DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
-EXCLUDE = $(LOCALFILES) boot-hd.img keymaps xmodmaps consolefonts install
+EXCLUDE = $(LOCALFILES) boot.img keymaps xmodmaps consolefonts install
 
 .PHONY: all po tags install clean verify_c
 
@@ -17,7 +17,7 @@ tags:
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
 	$(MAKE) -C po clean
-	rm -f c/c.xs install1_hd
+	rm -f c/c.xs install1_hd gendepslist
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
