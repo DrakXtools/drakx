@@ -1238,9 +1238,6 @@ sub miscellaneous {
     my ($o, $clicked) = @_;
 
     any::choose_security_level($o, \$o->{security}, \$o->{libsafe}) or return;
-
-    any::config_libsafe($o->{prefix}, $o->{libsafe});
-    
     install_steps::miscellaneous($o);
 }
 
