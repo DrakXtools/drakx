@@ -142,7 +142,7 @@ my %files = (
 );
 
 my $yy = gtkset_sensitive(gtksignal_connect(new Gtk2::Button(N("search")) , clicked => \&search),0);
-print "widget is $yy\n";
+
 my $log_text = gtktext_insert(Gtk2::TextView->new, [ [ '' ] ]);
 
 my $log_buf = $log_text->get_buffer;
@@ -169,7 +169,6 @@ gtkadd($my_win->{window},
 										map { $toggle{$_} = gtksignal_connect(new Gtk2::CheckButton($files{$_}{desc}), 
 														      clicked => sub {
 															  $refcount_search++; 
-                                                                             print "widget is $yy\n";
 															  gtkset_sensitive($yy, $refcount_search);
 														      }) } keys %files,
 										)
