@@ -588,12 +588,6 @@ void finish_preparing(void)
                 write(fd, "Killed\n", 7);
                 close(fd);
         }
-
-        /* load usb interface as soon as possible, helps usb mouse detection in stage2
-         * (blino) do not probe it so soon, wait for the Move images to be mounted
-         *         or else usb drivers won't be automatically loaded at boot with Move
-         */
-	probe_that_type(USB_CONTROLLERS, BUS_USB);
 }
 
 int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
@@ -636,6 +630,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		handle_pcmcia();
 #endif
         
+        /* load usb interface as soon as possible, helps usb mouse detection in stage2 */
+	probe_that_type(USB_CONTROLLERS, BUS_USB);
+
 	if (IS_CHANGEDISK)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
 				  "Please change your disk, and insert the Installation disk.");
