@@ -1,3 +1,282 @@
+2002/08/01  alus
+
+	* share/po/pl.po: updated translation
+
+2002/08/01  dam's <dams@idm.fr>
+
+	* ugtk.pm: removed fonctions typage
+
+2002/08/01  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/netconnect.pm, network/adsl.pm: 
+	  - First ECI adsl support step
+
+2002/08/01  gbeauchesne
+
+	* rescue/make_rescue_img: While stripping libraries, note that we may need
+	to have both /lib and
+	/lib64 on biarch systems.
+	  - MDK::Common'ize for arch() support
+	  - Don't grab /lib/i686/ libraries
+	  - Update list to use LIB which expands to either lib64 or lib
+
+	* rescue/list.x86_64: Add x86_64-specific filelist
+
+	* docs/HACKING: Add /bin/mknod to command list of sudoers
+
+	* mdk-stage1/disk.c: Add missing includes, <string.h> for bzero()
+
+	* rescue/list: 
+	  - MDK::Common'ize for arch() support
+	  - Don't grab /lib/i686/ libraries
+	  - Update list to use LIB which expands to either lib64 or lib
+
+2002/08/01  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/base.png, share/selected.png, share/rpm-semiselected.png,
+	share/rpm-installed.png, share/rpm-unselected.png, share/installed.png,
+	share/rpm-base.png, share/semiselected.png, share/unselected.png,
+	share/rpm-selected.png: change some png files names according to
+	simplification of
+	gtkcreate_png call of new my_gtk.pm
+
+	* drakxtools.spec, ugtk.pm, my_gtk.pm: commit according to 1.1.9-1mdk of
+	drakxtools, and especially:
+	  - integrate patches in my_gtk and ugtk for new rpmdrake:
+	  - [ugtk] add "gtkentry" so that we can create an entry and set
+	    initial value in one call
+	  - [my_gtk::main] don't set the events, to fix keyboard focus
+	    problem in entries when embedded
+	  - [my_gtk::_create_window] add $::noBorder, to not have a frame
+	    in the main window, so that it's possible to end up with
+	    windows with no border
+	  - [my_gtk] add ask_dir which is a ask_file with only the dir list
+	  - [my_gtk] add ask_browse_tree_info to the export tags, and:
+	  - add support for parents with no leaves, so that then we can
+	    partially build the trees (for speedup)
+	  - add "delete_all" and "delete_category" callbacks
+	  - use Gtk::CList::clear when removing all the nodes, much
+	    speedup
+
+2002/08/01  jgotti
+
+	* bootlook.pm: 
+	  - add splash theme section
+
+	* pixmaps/nosplash_thumb.png: add pixmap for drakboot
+
+2002/08/01  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/hu.po: updated Hungarian file
+
+	* share/po/vi.po: updated vietnamese file
+
+2002/08/01  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm: drop keyboard unsafe when not unsafe
+	anymore
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+	* any.pm: 
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+	get rid of some $prefix parameter passing (using $::prefix where needed
+	instead)
+
+	* Xconfig/various.pm: finish tvout configuration
+
+	* ugtk.pm, my_gtk.pm: move back Gtk->init to "new" and "gtkroot"
+	make perl_checker happy
+
+	* Xconfig/parse.pm: 
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+	BusID needs a string (thanks to Florent BERANGER)
+
+	* standalone.pm: don't display a wait_message in newt, but do suspend
+
+	* install_any.pm: get rid of some $prefix parameter passing
+
+	* pkgs.pm, fsedit.pm: get rid of some $prefix parameter passing (using
+	$::prefix where needed instead)
+
+	* loopback.pm (prepare_boot): use $::prefix
+
+	* interactive/gtk.pm: fix the many warnings when {icon} is not given
+
+	* Xconfig/resolution_and_depth.pm: in newt, have the resolutions sorted by
+	resolution size (wilplizgg)
+
+	* install_steps.pm: 
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+	get rid of some $prefix parameter passing
+	get rid of some $prefix parameter passing (using $::prefix where needed
+	instead)
+	bootloader::suggest uses a hash for its options
+
+	* .perl_checker: tune perl_checker
+
+	* Xconfig/xfreeX.pm, standalone/keyboarddrake, install2.pm,
+	Xconfig/default.pm, commands.pm, printerdrake.pm: 
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+	* keyboard.pm: don't have "unsafe" in /etc/sysconfig/keyboard
+	  - the old $o->{keyboard} is now $o->{keyboard}{KEYBOARD}
+	  - KBCHARSET is $o->{keyboard}{KBCHARSET}
+	  - isNotDelete is $o->{keyboard}{BACKSPACE} (as written in
+	sysconfig/keyboard)
+	  - add GRP_TOGGLE which gives XkbOptions "grp:GRP_TOGGLE"
+	  - add dialog box to choose GRP_TOGGLE
+
+	* bootloader.pm (duplicate_kernel_entry): added
+	get rid of some $prefix parameter passing (using $::prefix where needed
+	instead)
+	bootloader::suggest uses a hash for its options
+
+2002/08/01  Till Kamppeter  <till@mandrakesoft.com>
+
+	* share/rpmsrate: Added new packages needed by printerdrake.
+
+	* printerdrake.pm: Let packages "nmap" and "scli" get installed by
+	printerdrake.
+	Printer model auto-detection for ethernet-connected printers when
+	setting up TCP/Socket, remote LPD, IPP, or HTTP printers.
+	Continued work on scanning the local network for printers.
+	In "setup_local()": Renamed variable "@parport" to "@autodetected".
+	Do not let list of auto-detected printers get sorted alphabetically, it
+	should stay sorted by ports.
+	Fixed typo in file name in "check_network()".
+
+2002/08/01  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* diskdrake/smbnfs_gtk.pm: perl_checker fix
+
+	* drakxtools.spec: drakconf is dead
+	17mdk: stage 1
+	my_gtk:
+	  - splitup it into my_gtk and ugtk as done by dams
+	  - resync with dams
+	  - increase the icon blinkage from 50ms to 100ms
+	%postun -n harddrake: return 0 when nothing has to be done
+
+	* ugtk.pm: we already require perl-GTK-GdkImLib so temporary disable
+	Gtk::Gdk::Pixbuf support, thus removing all gdk/gtk warnings
+	remove INFO warnings
+	my_gtk:
+	  - splitup it into my_gtk and ugtk as done by dams
+	  - resync with dams
+	  - increase the icon blinkage from 50ms to 100ms
+
+	* my_gtk.pm: my_gtk:
+	  - splitup it into my_gtk and ugtk as done by dams
+	  - resync with dams
+	  - increase the icon blinkage from 50ms to 100ms
+
+	* tinyfirewall.pm: kill stupide style
+	perl_checker fixes
+
+	* standalone/harddrake2: export license
+	move embedded and standalone managment from harddrake::ui to
+	standalone/harddrake2
+
+	* harddrake/TODO: update
+	move embedded and standalone managment from harddrake::ui to
+	standalone/harddrake2
+
+	* harddrake/ui.pm: update
+	add_icon_path is exported in :various
+	perl_checker fixes
+	perl_checker fixes
+	  - workaround for the busy mouse cursor set by
+	gtkset_mousecursor_wait() in my_gtk::destroy
+	  - remove debugging prints
+	
+	  - don't handle "$::isEmbedded ? kill('USR1', $::CCPID) :
+	  Gtk->exit(0);", it's done by interactive->exit()
+	export license
+	move embedded and standalone managment from harddrake::ui to
+	standalone/harddrake2
+
+	* standalone/logdrake, harddrake/bttv.pm, standalone/drakconnect,
+	standalone/drakbug, standalone/tinyfirewall, standalone/scannerdrake,
+	standalone/drakxtv: perl_checker fixes
+
+	* standalone/drakxconf: remove obsolote file
+
+	* Makefile.config: drakconf is dead
+
+	* tools/cvslog2changelog.pl: use new dam's email
+
+	* scanner.pm, harddrake/data.pm: perl_checker fixes
+	perl_checker fixes
+
+2002/07/31  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/card.pm, Xconfig/main.pm: 
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	(still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+
+	* bootlook.pm, network/network.pm, resize_fat/main.pm,
+	network/netconnect.pm, Xconfig/xfreeX.pm, diskdrake/interactive.pm,
+	network/ethernet.pm, printer.pm, detect_devices.pm,
+	resize_fat/info_sector.pm, install_any.pm: make perl_checker happy again
+	(replacing "{xx}->{yy}" by "{xx}{yy}")
+
+	* any.pm (devfssymlinkf): when creating a symlink on the system, use devfs
+	name if devfs is mounted
+
+	* standalone/logdrake, standalone/draksec, standalone/drakxservices,
+	standalone/drakautoinst, standalone/drakproxy, standalone/tinyfirewall,
+	standalone/keyboarddrake, standalone/drakboot, standalone.pm,
+	standalone/drakTermServ, standalone/net_monitor, standalone/diskdrake,
+	standalone/mousedrake, standalone/drakbackup, standalone/printerdrake,
+	standalone/drakfloppy, standalone/drakfont, standalone/drakconnect,
+	standalone/drakgw, standalone/scannerdrake, standalone/drakxtv: Handle
+	parsing --embedded command line in standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+
+	* standalone/XFdrake: Handle parsing --embedded command line in
+	standalone.pm
+	=> allows to remove the somewhat mythical
+	$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	  (still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+
+	* Xconfig/various.pm: make perl_checker happy again (replacing
+	"{xx}->{yy}" by "{xx}{yy}")
+	  - add non-wizard ability to XFdrake
+	  - first part of ATI TVout support
+	(still needs patching initscript, and adding an entry in bootloader)
+	  (and testing of course :)
+
 2002/07/31  Christian Belisle  <cbelisle@mandrakesoft.com>
 
 	* security/msec.pm: 
