@@ -36,11 +36,11 @@ use run_program;
 my @installStepsFields = qw(text redoable onError needs entered reachable toBeDone help next done);
 my @installSteps = (
   selectLanguage     => [ __("Choose your language"), 1, 1 ],
-  selectPath         => [ __("Choose install or upgrade"), 0, 0 ],
-  selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],
+  selectInstallClass => [ __("Select installation class"), 1, 1 ],
+  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],
+  selectPath         => [ __("Choose install or upgrade"), 0, 0, "selectInstallClass" ],
   selectMouse        => [ __("Configure mouse"), 1, 1 ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],
-  setupSCSI          => [ __("Setup SCSI"), 1, 0 ],
   partitionDisks     => [ __("Setup filesystems"), 1, 0 ],
   formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],
@@ -138,12 +138,12 @@ $o = $::o = {
 
     timezone => {
 #-                   timezone => "Europe/Paris",
-                   GMT      => 1,
+#-                   GMT      => 1,
                 },
     printer => {
-                 want     => 1,
+                 want     => 0,
                  complete => 0,
-                 str_type => $printer::printer_type[0],
+                 str_type => $printer::printer_type_default,
                  QUEUE    => "lp",
                  SPOOLDIR => "/var/spool/lpd/lp",
                  DBENTRY  => "DeskJet670",
@@ -209,16 +209,24 @@ sub selectLanguage {
 
 #------------------------------------------------------------------------------
 sub selectMouse {
-    $o->selectMouse($_[0]);
-    addToBeDone { mouse::write($o->{mouse}, $o->{prefix}); } 'formatPartitions';
+    my ($clicked) = $_[0];
+
+    $o->{mouse} or $o->{mouse} = {};
+    add2hash($o->{mouse}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
+
+    $o->selectMouse($clicked);
+    addToBeDone { mouse::write($o->{prefix}, $o->{mouse}); } 'formatPartitions';
 }
 
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked) = $_[0];
-    return if $::beginner && !$clicked;
 
-    $o->selectKeyboard;
+    return unless $o->{isUpgrade} || !$::beginner || $clicked;
+
+    $o->{keyboard} = (keyboard::read($o->{prefix}))[0] if $o->{isUpgrade} && !$clicked && !$o->{keyboard};
+    $o->selectKeyboard if !$::beginner || $clicked;
+
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
 	keyboard::write($o->{prefix}, $o->{keyboard});
@@ -226,7 +234,88 @@ sub selectKeyboard {
 }
 
 #------------------------------------------------------------------------------
-sub selectPath { $o->selectPath; }
+sub selectPath {
+    $o->selectPath;
+
+    if ($o->{isUpgrade}) {
+	#- try to find the partition where the system is installed if beginner
+	#- else ask the user the right partition, and test it after.
+	unless ($o->{hds}) {
+	    $o->{drives} = [ detect_devices::hds() ];
+	    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
+	      sub { 1; };
+
+	    unless (@{$o->{hds}} > 0) {
+		$o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
+	    }
+	}
+
+	my @normal_partitions = fsedit::get_fstab(@{$o->{hds}});
+
+	fs::check_mounted([@normal_partitions]);
+
+	#- get all ext2 partition that may be root partition.
+	my %partitions_lookup;
+	my @partitions = map {
+	    $partitions_lookup{$_->{device}} = $_;
+	    type2fs($_->{type}) eq 'ext2' ? $_->{device} : (); } @normal_partitions;
+
+	my $root;
+	my $root_partition;
+	my $selected_partition;
+	do {
+	    if ($selected_partition->{mntpoint} && !$selected_partition->{currentMntpoint}) {
+		$o->ask_warn(_("Information"), "$selected_partition->{device}" . _(" : This is not a root partition, try again."))
+		  unless $::beginner;
+		log::l("umounting non root partition $selected_partition->{device}");
+		eval { fs::umount_part($selected_partition); };
+		$selected_partition->{mntpoint} = '';
+		$selected_partition->{mntreadonly} = undef;
+	    }
+
+	    $root_partition = $::beginner ? $partitions[0] : $o->selectRootPartition(@partitions);
+	    $selected_partition = $partitions_lookup{$root_partition};
+
+	    unless ($root = $selected_partition->{currentMntpoint}) {
+		$selected_partition->{mntpoint} = $root = $o->{prefix};
+		$selected_partition->{mntreadonly} = 1;
+		log::l("trying to mount root partition $root_partition");
+		eval { fs::mount_part($selected_partition); };
+	    }
+
+	    #- avoid testing twice a partition.
+	    for my $i (0..$#partitions) {
+		splice @partitions, $i, 1 if $partitions[$i] eq $root_partition;
+	    }
+	} until $root && -d "$root/etc/sysconfig" && -r "$root/etc/fstab" || !(scalar @partitions);
+
+	
+	if ($root && -d "$root/etc/sysconfig" && -r "$root/etc/fstab") {
+	    $o->ask_warn(_("Information"), _("Found root partition : ") . $root_partition);
+	    $o->{prefix} = $root;
+	    $o->{fstab} = \@normal_partitions;
+
+	    #- test if the partition has to be fschecked and remounted rw.
+	    if ($selected_partition->{mntpoint} && !$selected_partition->{currentMntpoint}) {
+		my @fstab = fs::read_fstab("$root/etc/fstab");
+
+		eval { fs::umount_part($selected_partition); };
+		$selected_partition->{mntpoint} = '';
+		$selected_partition->{mntreadonly} = undef;
+
+		foreach (@fstab) {
+		    if ($selected_partition = $partitions_lookup{$_->{device}}) {
+			$selected_partition->{mntpoint} = $_->{mntpoint};
+		    }
+		}
+		#- TODO fsck, create check_mount_all ?
+		fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+	    }
+	} else {
+	    $o->ask_warn(_("Error"), _("No root partition found"));
+	}
+    }
+}
 
 #------------------------------------------------------------------------------
 sub selectInstallClass {
@@ -250,6 +339,8 @@ sub setupSCSI {
 
 #------------------------------------------------------------------------------
 sub partitionDisks {
+    return if ($o->{isUpgrade});
+
     unless ($o->{hds}) {
 	$o->{drives} = [ detect_devices::hds() ];
 	$o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
@@ -291,6 +382,8 @@ I'll try to go on blanking bad partitions"));
 }
 
 sub formatPartitions {
+    return if ($o->{isUpgrade});
+
     $o->choosePartitionsToFormat($o->{fstab});
 
     unless ($::testing) {
@@ -321,6 +414,18 @@ sub doInstallStep {
 #------------------------------------------------------------------------------
 sub configureNetwork {
     my ($clicked, $entered) = @_;
+
+    if ($o->{isUpgrade} && !$clicked) {
+	$o->{netc} or $o->{netc} = {};
+	add2hash($o->{netc}, { network::read_conf("$o->{prefix}/etc/sysconfig/network") });
+	add2hash($o->{netc}, { network::read_resolv_conf("$o->{prefix}/etc/resolv.conf") });
+	foreach (all("$o->{prefix}/etc/sysconfig/network-scripts")) {
+	    if (/ifcfg-(\w*)/) {
+		push @{$o->{intf}}, { network::read_conf("$o->{prefix}/etc/sysconfig/network-scripts/$_") };
+	    }
+	}
+    }
+
     $o->configureNetwork($entered == 1 && !$clicked)
 }
 #------------------------------------------------------------------------------
@@ -330,6 +435,9 @@ sub configureTimezone {
     my $f = "$o->{prefix}/etc/sysconfig/clock";
     return if ((-s $f) || 0) > 0 && $_[1] == 1 && !$clicked && !$::testing;
 
+    add2hash($o->{timezone}, { timezone::read($f) }) if $o->{isUpgrade} && !$clicked;
+    $o->{timezone}{GMT} = 1 unless exists $o->{timezone}{GMT}; #- take GMT by default if nothing else.
+
     $o->timeConfig($f);
 }
 #------------------------------------------------------------------------------
@@ -337,9 +445,15 @@ sub configureServices { $o->servicesConfig  }
 #------------------------------------------------------------------------------
 sub configurePrinter  { $o->printerConfig   }
 #------------------------------------------------------------------------------
-sub setRootPassword   { $o->setRootPassword }
+sub setRootPassword {
+    return if ($o->{isUpgrade});
+
+    $o->setRootPassword;
+}
 #------------------------------------------------------------------------------
 sub addUser {
+    return if ($o->{isUpgrade});
+
     $o->addUser;
 
     addToBeDone {

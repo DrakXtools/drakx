@@ -140,18 +140,10 @@ sub write($$) {
 }
 
 sub read($) {
-    my ($file) = @_;
+    my ($prefix) = @_;
 
-    local *F;
-    open F, "$file" or die "failed to read keyboard configuration";
-
-    foreach (<F>) {
-	($_) = /^KEYTABLE=(.*)/ or log::l("unrecognized entry in keyboard configuration file ($_)"), next;
-	s/^\s*"(.*)"\s*$/$1/;
-	s/\.[^.]*//; #- remove extension
-	return basename($_);
-    }
-    die "empty keyboard configuration file";
+    my %keyf = getVarsFromSh("$prefix/etc/sysconfig/keyboard");
+    map { kmap($_) eq $keyf{KEYTABLE} ? $_ : (); } keys %keyboards;
 }
 
 #-######################################################################################

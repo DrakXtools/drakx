@@ -65,10 +65,15 @@ sub serial_ports_names2dev {
     /(\w+)/;
 }
 
-sub read($) { getVarsFromSh $_[0]; }
+sub read($) {
+    my ($prefix) = @_;
+    my %mouse = getVarsFromSh "$prefix/etc/sysconfig/mouse";
+    $mouse{device} = readlink "$prefix/dev/mouse" or log::l("reading $prefix/dev/mouse symlink failed");
+    %mouse;
+}
 
 sub write($;$) {
-    my ($mouse, $prefix) = @_;
+    my ($prefix, $mouse) = @_;
     local $mouse->{FULLNAME} = qq("$mouse->{FULLNAME}");
     setVarsInSh("$prefix/etc/sysconfig/mouse", $mouse, qw(MOUSETYPE XMOUSETYPE FULLNAME XEMU3));
     symlink $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");

@@ -39,7 +39,7 @@ sub check_mounted($) {
     open H, "/proc/swaps";
     foreach (<F>, <G>, <H>) {
 	foreach my $p (@$fstab) {
-	    /$p->{device}\s/ and $p->{isMounted} = $p->{isFormatted} = 1;
+	    /$p->{device}\s+([^\s]*)\s+/ and $p->{currentMntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
 	}
     }
 }
@@ -130,6 +130,7 @@ sub mount($$$;$) {
 #- takes the mount point to umount (can also be the device)
 sub umount($) {
     my ($mntpoint) = @_;
+    log::l("calling umount($mntpoint)");
     syscall_('umount', $mntpoint) or die _("error unmounting %s: %s", $mntpoint, "$!");
 
     my @mtab = cat_('/etc/mtab'); #- don't care about error, if we can't read, we won't manage to write... (and mess mtab)
@@ -147,7 +148,8 @@ sub mount_part($;$) {
 	swap::swapon($part->{device});
     } else {
 	$part->{mntpoint} or die "missing mount point";
-	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), 0);
+	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}),
+	      $part->{mntreadonly} ? 1 : 0);
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
@@ -251,4 +253,21 @@ sub write_fstab($;$$) {
 	print F $_;
     }
     print F join(" ", @$_), "\n" foreach @to_add;
+}
+
+sub check_mount_all_fstab($;$) {
+    my ($fstab, $prefix) = @_;
+    $prefix ||= '';
+
+    foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
+	#- avoid unwanted mount in fstab.
+	next if ($_->{device} =~ /none/ || $_->{type} =~ /nfs|smbfs|ncpfs|proc/ || $_->{options} =~ /noauto|ro/);
+
+	#- TODO fsck
+
+	eval { mount(devices::make($_->{device}), $prefix . $_->{mntpoint}, $_->{type}, 0); };
+	if ($@) {
+	    log::l("unable to mount partition $_->{device} on $prefix/$_->{mntpoint}");
+	}
+    }
 }

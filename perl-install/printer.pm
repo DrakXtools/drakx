@@ -28,7 +28,7 @@ use strict;
 =cut
 
 #-#####################################################################################
-use vars qw(%thedb %printer_type %printer_type_inv @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
+use vars qw(%thedb %printer_type %printer_type_inv $printer_type_default @papersize_type %fields $spooldir @entries_db_short @entry_db_description %descr_to_db %db_to_descr);
 #-#####################################################################################
 
 =head2 Imports
@@ -246,6 +246,7 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
     "NetWare"           => "NCP",
 );
 %printer_type_inv = reverse %printer_type;
+$printer_type_default = "local";
 
 %fields = (
     STANDARD => [qw(QUEUE SPOOLDIR IF)],

@@ -9,7 +9,7 @@ clean:
 
 $(POFILES): panoramix.pot
 	cp -f $@ $@t
-	msgmerge $@t $< > $@
+	msgmerge $@t $< > $@ || true
 	rm $@t
 
 panoramix.pot: $(PMSFILES)

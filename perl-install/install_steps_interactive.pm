@@ -75,7 +75,16 @@ sub selectPath($) {
 			 [ __("Install"), __("Upgrade") ],
 			 $o->{isUpgrade} ? "Upgrade" : "Install") eq "Upgrade";
     install_steps::selectPath($o);
-
+}
+#------------------------------------------------------------------------------
+sub selectRootPartition($@) {
+    my ($o,@partitions) = @_;
+    $o->{upgradeRootPartition} =
+      $o->ask_from_list_(_("Root Partition"),
+			 _("What is the root partition of your system?"),
+			 [ @partitions ], $o->{upgradeRootPartitions});
+#- TODO check choice, then mount partition in $o->{prefix} and autodetect.
+#-    install_steps::selectRootPartition($o);
 }
 #------------------------------------------------------------------------------
 sub selectInstallClass($@) {
@@ -167,7 +176,7 @@ sub configureNetwork($) {
 			_("Do you want to configure LAN (not dialup) networking for your installed system?")) or $r = "Don't";
     }
 
-    if ($r =~ /^Don't/) {
+    if ($r =~ /^Don\'t/) {
 	$o->{netc}{NETWORKING} = "false";
     } elsif ($r !~ /^Keep/) {
 	$o->setup_thiskind('net', !$::expert, 1);

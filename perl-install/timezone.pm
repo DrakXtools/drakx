@@ -17,6 +17,13 @@ sub getTimeZones {
     @l;
 }
 
+sub read ($) {
+    my ($f) = @_;
+    my %t = getVarsFromSh($f) or die "cannot open file $f: $!";
+
+    ("timezone", $t{ZONE}, "GMT", text2bool($t{GMT}));
+}
+
 sub write($$$) {
     my ($prefix, $t, $f) = @_;
 

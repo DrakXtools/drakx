@@ -271,8 +271,13 @@ sub get_stage1_conf {
 sub load_thiskind($;&) {
     my ($type, $f) = @_;
 
-    my @devs = pci_probing::main::probe($type);
-    log::l("pci probe found " . scalar @devs . " $type devices");
+    my @pcidevs = pci_probing::main::probe($type);
+    log::l("pci probe found " . scalar @pcidevs . " $type devices");
+
+    my @pcmciadevs = get_pcmcia_devices($type);
+    log::l("pcmcia probe found " . scalar @pcmciadevs . " $type devices");
+
+    my @devs = (@pcidevs, @pcmciadevs);
 
     my %devs; foreach (@devs) {
 	my ($text, $mod) = @$_;
@@ -281,6 +286,26 @@ sub load_thiskind($;&) {
 	log::l("found driver for $mod");
 	&$f($text, $mod) if $f;
 	load($mod, $type);
+    }
+    @devs;
+}
+
+sub get_pcmcia_devices($) {
+    my ($type) = @_;
+    my $file = "/var/run/stab";
+    my @devs;
+    my $module;
+    my $desc;
+
+    local *F;
+    open F, $file or return; #- no pcmcia is not an error.
+    while (<F>) {
+	$desc = $1 if /^Socket\s+\d+:\s+(.*)/;
+	$module = $1 if /^\d+\s+$type[^\s]*\s+([^\s]+)/;
+	if ($desc && $module) {
+	    push @devs, [ $desc, $module ];
+	    $desc = $module = undef;
+	}
     }
     @devs;
 }

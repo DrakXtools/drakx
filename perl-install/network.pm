@@ -22,6 +22,21 @@ sub read_conf {
     \%netc;
 }
 
+sub read_resolv_conf {
+    my ($file) = @_;
+    my %netc;
+    my @l;
+
+    local *F;
+    open F, $file or die "cannot open $file: $!";
+    foreach (<F>) {
+	push @l, $1 if (/^\s*nameserver\s+([^\s]+)/);
+    }
+
+    $netc{$_} = shift @l foreach qw(dnsServer dnsServer2 dnsServer3);
+    \%netc;
+}
+
 sub read_interface_conf {
     my ($file) = @_;
     my %intf = getVarsFromSh($file) or die "cannot open file $file: $!";
