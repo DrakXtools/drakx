@@ -1052,6 +1052,14 @@ sub getHds {
 	}
     }
 
+    {
+	my @nt = grep { isNT($_) && isNT({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+	log::l("nt parts: ", join ",", map { $_->{device} } @nt) if @nt;
+	my $i; foreach (@nt) {
+	    $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/nt" . ($i++ ? $i : '');
+	}
+    }
+
     my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
     if (@sunos) {
 	my $v = '';
