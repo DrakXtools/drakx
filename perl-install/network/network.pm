@@ -145,7 +145,7 @@ sub write_interface_conf {
     $intf->{HWADDR} &&= $mac_address; #- set HWADDR to MAC address if required
 
     #- write interface MAC address in iftab (if any)
-    substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\t$mac_address\n) if eof } "$::prefix/etc/iftab" if $mac_address;
+    substInFile { s/^$intf->{DEVICE}\s+.*\n//; $_ .= qq($intf->{DEVICE}\tmac $mac_address\n) if eof } "$::prefix/etc/iftab" if $mac_address;
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
