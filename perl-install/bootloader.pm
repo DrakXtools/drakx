@@ -615,7 +615,7 @@ sub sanitize_ver {
     my ($string) = @_;
 
     my ($name, $main_version, undef, $extraversion, $rest) = 
-      $string =~ m!(.*)(\d+\.\d+\.\d+)(-((?:pre|rc)\d+))?(.*)!;
+      $string =~ m!^(.*?-)(\d+(?:\.\d+)*)(-((?:pre|rc)\d+))?(.*)$!;
 
     if (my ($mdkver, $cpu, $nproc, $mem) = $rest =~ m|-(.+)-(.+)-(.+)-(.+)|) {
 	$rest = "$cpu$nproc$mem-$mdkver";
