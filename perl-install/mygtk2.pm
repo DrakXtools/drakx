@@ -129,9 +129,11 @@ sub _gtk_any_Button {
     }
 
     if (!$w) {
-	$w = $opts->{image} || !exists $opts->{text} ? "Gtk2::$class"->new :
-	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_label(delete $opts->{text}) :
-	    "Gtk2::$class"->new_with_mnemonic(delete $opts->{text});
+	$w = $opts->{image} ? "Gtk2::$class"->new :
+	  delete $opts->{mnemonic} ? "Gtk2::$class"->new_with_mnemonic(delete $opts->{text} || '') :
+	    "Gtk2::$class"->new_with_label(delete $opts->{text} || '');
+
+	$w->{format} = delete $opts->{format} if exists $opts->{format};
     }
 
     if (my $image = delete $opts->{image}) {
@@ -140,6 +142,14 @@ sub _gtk_any_Button {
     }
     $w->set_sensitive(delete $opts->{sensitive}) if exists $opts->{sensitive};
     $w->set_relief(delete $opts->{relief}) if exists $opts->{relief};
+
+    if (my $text_ref = delete $opts->{text_ref}) {
+	my $set = sub {
+	    eval { $w->set_label(may_apply($w->{format}, $$text_ref)) };
+	};
+	gtkval_register($w, $text_ref, $set);
+	$set->();
+    }
 
     if ($class eq 'Button') {
 	$w->signal_connect(clicked => delete $opts->{clicked}) if exists $opts->{clicked};
@@ -209,6 +219,16 @@ sub _gtk__HScale {
 sub _gtk__VSeparator { &_gtk_any_simple }
 sub _gtk__HSeparator { &_gtk_any_simple }
 sub _gtk__Calendar   { &_gtk_any_simple }
+
+sub _gtk__DrawingArea {
+    my ($w, $opts) = @_;
+
+    if (!$w) {
+	$w = Gtk2::DrawingArea->new;
+    }
+    $w->signal_connect(expose_event => delete $opts->{expose_event}) if exists $opts->{expose_event};
+    $w;
+}
 
 sub _gtk__Pixbuf {
     my ($w, $opts) = @_;
