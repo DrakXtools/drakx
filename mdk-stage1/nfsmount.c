@@ -219,10 +219,10 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 				      total_timeout);
 		if (clnt_stat != RPC_SUCCESS) {
 			if (errno != ECONNREFUSED) {
-				clnt_perror(mclient, "mount");
+				log_message(clnt_sperror(mclient, "mount"));
 				goto fail;	/* don't retry */
 			}
-			clnt_perror(mclient, "mount");
+			log_message(clnt_sperror(mclient, "mount"));
 			auth_destroy(mclient->cl_auth);
 			clnt_destroy(mclient);
 			mclient = 0;
@@ -242,11 +242,11 @@ int nfsmount_prepare(const char *spec, int *flags, char **mount_opts)
 
 	fsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 	if (fsock < 0) {
-		perror("nfs socket");
+		log_perror("nfs socket");
 		goto fail;
 	}
 	if (bindresvport(fsock, 0) < 0) {
-		perror("nfs bindresvport");
+		log_perror("nfs bindresvport");
 		goto fail;
 	}
 	server_addr.sin_port = PMAPPORT;

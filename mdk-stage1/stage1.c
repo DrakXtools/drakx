@@ -101,7 +101,7 @@ static void spawn_shell(void)
 			close(fd);
 			setsid();
 			if (ioctl(0, TIOCSCTTY, NULL))
-				perror("could not set new controlling tty");
+				log_perror("could not set new controlling tty");
 
 			execl(shell_name, shell_name, NULL);
 			log_message("execl of %s failed: %s", shell_name, strerror(errno));
