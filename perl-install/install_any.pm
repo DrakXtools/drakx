@@ -295,6 +295,7 @@ sub setPackages($) {
 
 	#- some program that may be crazy on some conditions (hack waiting for Aurora to work if no fb).
 	$o->{allowFB} && (!detect_devices::matching_desc('Rage LT') &&
+			  !detect_devices::matching_desc('SiS') &&
 			  !detect_devices::matching_desc('Rage Mobility'))
 	  or push @pkgs::skip_list, 'Aurora';
 
