@@ -633,7 +633,7 @@ sub selectLanguage {
 	$lang = first(lang::l2location($lang))."|$lang";
 	
 	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
-	my $listval2val = sub { $_[0] =~ /\|(.*)/; $1 };
+	my $listval2val = sub { $1 if $_[0] =~ /\|(.*)/ };
 
 	my @langs = map { my $l = $_; map { [ "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs();
 	#- since gtk version will use images (function image2f) we need to sort differently
@@ -649,7 +649,7 @@ when your installation is complete and you restart your system.")),
 	$in->ask_from_($common,
 	[ { val => \$lang, separator => '|', 
 	    if_($using_images, image2f => sub { $name2l{$_[0]} =~ /^[a-z]/ ? ('', "langs/lang-$name2l{$_[0]}") : $_[0] }),
-	    format => sub { $_[0] =~ /(.*\|)(.*)/; $1.lang::l2name($2) },
+	    format => sub { $1.lang::l2name($2) if $_[0] =~ /(.*\|)(.*)/ },
 	    list => \@langs, sort => 0 },
 	    if_($langs_, if_($::isInstall,
 			     { val => \$in->{locale}{utf8}, type => 'bool', text => N("Use Unicode by default"), advanced => 1 }),
