@@ -96,6 +96,7 @@ our %l = (
       qw(aic7xxx aic7xxx_old aic79xx pci2000 qlogicisp sym53c8xx lpfc lpfcdd), # ncr53c8xx
     ],
     sata => [
+      # note that ata_piix manage RAID devices on ICH6R
       qw(ahci ata_piix sata_nv sata_promise sata_qstor sata_sil sata_sis sata_svw sata_sx4 sata_uli sata_via sata_vsc sx8),
     ],
     hardware_raid => [
