@@ -61,7 +61,6 @@ live_tree_boot:
 	./make_live_tree_boot
 	$(MAKE) /tmp/live_tree_always.clp
 	$(MAKE) /tmp/live_tree_boot.clp
-	$(MAKE) /tmp/live_tree.clp
 
 live_tree_boot_all:
 	cd /tmp/live_tree ; find -type l | cpio -pd /tmp/live_tree_boot_all
