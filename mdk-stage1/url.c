@@ -391,6 +391,16 @@ int ftp_end_data_command(int sock)
 }
 
 
+char *str_ftp_error(int error)
+{
+	return error == FTPERR_PASSIVE_ERROR ? "error with passive connection" :
+	       error == FTPERR_FAILED_CONNECT ? "couldn't connect to server" :
+	       error == FTPERR_FILE_NOT_FOUND ? "file not found" :
+	       error == FTPERR_BAD_SERVER_RESPONSE ? "bad server response (server too busy?)" :
+	       NULL;
+}
+
+
 int http_download_file(char * hostname, char * remotename, int * size, char * proxyprotocol, char * proxyname, char * proxyport)
 {
 	char * buf;

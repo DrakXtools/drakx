@@ -999,17 +999,9 @@ enum return_type ftp_prepare(void)
 		}
 
 		if (fd < 0) {
-			log_message("FTP: error get %d", fd);
-			if (fd == FTPERR_PASSIVE_ERROR)
-				stg1_error_message("Error: error with passive connection.");
-			else if (fd == FTPERR_FAILED_CONNECT)
-				stg1_error_message("Error: couldn't connect to server.");
-			else if (fd == FTPERR_FILE_NOT_FOUND)
-				stg1_error_message("Error: file not found (%s).", location_full);
-			else if (fd == FTPERR_BAD_SERVER_RESPONSE)
-				stg1_error_message("Error: bad server response (server too busy?).");
-			else
-				stg1_error_message("Error: couldn't retrieve Installation program.");
+			char *msg = str_ftp_error(fd);
+			log_message("FTP: error get %d for remote file %s", fd, location_full);
+			stg1_error_message("Error: %s.", msg ? msg : "couldn't retrieve Installation program");
 			results = RETURN_BACK;
 			continue;
 		}
