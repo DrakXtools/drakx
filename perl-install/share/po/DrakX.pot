@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-02-23 13:19+0100\n"
+"POT-Creation-Date: 2002-02-24 19:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -220,7 +220,7 @@ msgstr ""
 msgid "XFree86 server: %s"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2414
+#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2421
 #: ../../standalone/draknet_.c:275 ../../standalone/draknet_.c:278
 msgid "Expert Mode"
 msgstr ""
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Test again"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2417
+#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2424
 #: ../../standalone/logdrake_.c:217
 msgid "Quit"
 msgstr ""
@@ -1197,7 +1197,7 @@ msgstr ""
 #: ../../standalone/drakbackup_.c:2318 ../../standalone/drakbackup_.c:2336
 #: ../../standalone/drakbackup_.c:2384 ../../standalone/drakbackup_.c:2404
 #: ../../standalone/drakbackup_.c:2423 ../../standalone/drakfont_.c:747
-#: ../../standalone/drakgw_.c:711 ../../standalone/draknet_.c:116
+#: ../../standalone/drakgw_.c:712 ../../standalone/draknet_.c:116
 #: ../../standalone/draknet_.c:148 ../../standalone/draknet_.c:290
 #: ../../standalone/draknet_.c:537 ../../standalone/draknet_.c:679
 #: ../../standalone/logdrake_.c:217 ../../standalone/logdrake_.c:498
@@ -2037,17 +2037,14 @@ msgstr ""
 msgid "I don't know how to format %s in type %s"
 msgstr ""
 
-#: ../../fs.pm_.c:611
-msgid "mount failed"
+#: ../../fs.pm_.c:611 ../../fs.pm_.c:640 ../../fs.pm_.c:646
+#, c-format
+msgid "mounting partition %s in directory %s failed"
 msgstr ""
 
 #: ../../fs.pm_.c:631
 #, c-format
 msgid "fsck failed with exit code %d or signal %d"
-msgstr ""
-
-#: ../../fs.pm_.c:640 ../../fs.pm_.c:646 ../../partition_table.pm_.c:600
-msgid "mount failed: "
 msgstr ""
 
 #: ../../fs.pm_.c:661 ../../partition_table.pm_.c:596
@@ -4127,7 +4124,7 @@ msgid "Timezone"
 msgstr ""
 
 #: ../../install_steps_interactive.pm_.c:1034 ../../printerdrake.pm_.c:2238
-#: ../../printerdrake.pm_.c:2309
+#: ../../printerdrake.pm_.c:2316
 msgid "Printer"
 msgstr ""
 
@@ -5559,6 +5556,10 @@ msgstr ""
 msgid "Account Password"
 msgstr ""
 
+#: ../../partition_table.pm_.c:600
+msgid "mount failed: "
+msgstr ""
+
 #: ../../partition_table.pm_.c:664
 msgid "Extended partition not supported on this platform"
 msgstr ""
@@ -5680,7 +5681,7 @@ msgid "Pipe job into a command"
 msgstr ""
 
 #: ../../printer.pm_.c:497 ../../printer.pm_.c:688 ../../printer.pm_.c:1010
-#: ../../printerdrake.pm_.c:1647 ../../printerdrake.pm_.c:2667
+#: ../../printerdrake.pm_.c:1647 ../../printerdrake.pm_.c:2674
 msgid "Unknown model"
 msgstr ""
 
@@ -5767,10 +5768,10 @@ msgstr ""
 msgid "On CUPS server \"%s\""
 msgstr ""
 
-#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2346
-#: ../../printerdrake.pm_.c:2357 ../../printerdrake.pm_.c:2553
-#: ../../printerdrake.pm_.c:2607 ../../printerdrake.pm_.c:2634
-#: ../../printerdrake.pm_.c:2783 ../../printerdrake.pm_.c:2785
+#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2364 ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2614 ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2790 ../../printerdrake.pm_.c:2792
 msgid " (Default)"
 msgstr ""
 
@@ -5824,7 +5825,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:107 ../../printerdrake.pm_.c:1720
 #: ../../printerdrake.pm_.c:1726 ../../printerdrake.pm_.c:1727
-#: ../../printerdrake.pm_.c:1728 ../../printerdrake.pm_.c:2653
+#: ../../printerdrake.pm_.c:1728 ../../printerdrake.pm_.c:2660
 #: ../../standalone/drakbackup_.c:753 ../../standalone/drakbackup_.c:2445
 #: ../../standalone/drakfont_.c:577 ../../standalone/drakfont_.c:771
 msgid "Close"
@@ -5842,7 +5843,7 @@ msgstr ""
 msgid "The port number should be an integer!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2744
+#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2751
 msgid "Default printer"
 msgstr ""
 
@@ -5866,8 +5867,8 @@ msgstr ""
 msgid "Test ports"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2390
-#: ../../printerdrake.pm_.c:2495
+#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2397
+#: ../../printerdrake.pm_.c:2502
 msgid "Add a new printer"
 msgstr ""
 
@@ -6378,7 +6379,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1649 ../../printerdrake.pm_.c:2669
+#: ../../printerdrake.pm_.c:1649 ../../printerdrake.pm_.c:2676
 msgid "Raw printer"
 msgstr ""
 
@@ -6511,7 +6512,7 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:1776 ../../printerdrake.pm_.c:2183
-#: ../../printerdrake.pm_.c:2429 ../../standalone/printerdrake_.c:49
+#: ../../printerdrake.pm_.c:2436 ../../standalone/printerdrake_.c:49
 msgid "Reading printer data ..."
 msgstr ""
 
@@ -6741,8 +6742,8 @@ msgstr ""
 msgid "Installing Foomatic ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2271 ../../printerdrake.pm_.c:2303
-#: ../../printerdrake.pm_.c:2670 ../../printerdrake.pm_.c:2737
+#: ../../printerdrake.pm_.c:2271 ../../printerdrake.pm_.c:2310
+#: ../../printerdrake.pm_.c:2677 ../../printerdrake.pm_.c:2744
 msgid "Printer options"
 msgstr ""
 
@@ -6750,106 +6751,110 @@ msgstr ""
 msgid "Preparing PrinterDrake ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2310
+#: ../../printerdrake.pm_.c:2297 ../../printerdrake.pm_.c:2813
+msgid "Configuring applications..."
+msgstr ""
+
+#: ../../printerdrake.pm_.c:2317
 msgid "Would you like to configure printing?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2329
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2370
+#: ../../printerdrake.pm_.c:2377
 msgid "Printerdrake"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2380
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
 "it."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2399
+#: ../../printerdrake.pm_.c:2406
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2408
+#: ../../printerdrake.pm_.c:2415
 msgid "Configure printing system"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2413 ../../standalone/draknet_.c:278
+#: ../../printerdrake.pm_.c:2420 ../../standalone/draknet_.c:278
 msgid "Normal Mode"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2517 ../../printerdrake.pm_.c:2560
-#: ../../printerdrake.pm_.c:2577 ../../printerdrake.pm_.c:2612
-#: ../../printerdrake.pm_.c:2800
+#: ../../printerdrake.pm_.c:2524 ../../printerdrake.pm_.c:2567
+#: ../../printerdrake.pm_.c:2584 ../../printerdrake.pm_.c:2619
+#: ../../printerdrake.pm_.c:2807
 msgid "Do you want to configure another printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2648
+#: ../../printerdrake.pm_.c:2655
 msgid "Modify printer configuration"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2650
+#: ../../printerdrake.pm_.c:2657
 #, c-format
 msgid ""
 "Printer %s\n"
 "What do you want to modify on this printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2654
+#: ../../printerdrake.pm_.c:2661
 msgid "Do it!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2711
+#: ../../printerdrake.pm_.c:2666 ../../printerdrake.pm_.c:2718
 msgid "Printer connection type"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2660 ../../printerdrake.pm_.c:2715
+#: ../../printerdrake.pm_.c:2667 ../../printerdrake.pm_.c:2722
 msgid "Printer name, description, location"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2662 ../../printerdrake.pm_.c:2730
+#: ../../printerdrake.pm_.c:2669 ../../printerdrake.pm_.c:2737
 msgid "Printer manufacturer, model, driver"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2663 ../../printerdrake.pm_.c:2731
+#: ../../printerdrake.pm_.c:2670 ../../printerdrake.pm_.c:2738
 msgid "Printer manufacturer, model"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2672 ../../printerdrake.pm_.c:2741
+#: ../../printerdrake.pm_.c:2679 ../../printerdrake.pm_.c:2748
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2673 ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2680 ../../printerdrake.pm_.c:2753
 msgid "Print test pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2674 ../../printerdrake.pm_.c:2748
+#: ../../printerdrake.pm_.c:2681 ../../printerdrake.pm_.c:2755
 msgid "Know how to use this printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2676 ../../printerdrake.pm_.c:2750
+#: ../../printerdrake.pm_.c:2683 ../../printerdrake.pm_.c:2757
 msgid "Remove printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2720
+#: ../../printerdrake.pm_.c:2727
 #, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2745
+#: ../../printerdrake.pm_.c:2752
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2752
+#: ../../printerdrake.pm_.c:2759
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2754
+#: ../../printerdrake.pm_.c:2761
 #, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr ""
@@ -9760,4 +9765,43 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
+msgstr ""
+#: tinyfirewall:155
+msgid "No I don't need DHCP"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Yes I need DHCP"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "No I don't need NTP"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Yes I need NTP"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Don't Save"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Save & Quit"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Firewall Configuration Wizard"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "No (firewall this off from the internet)"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Yes (allow this through the firewall)"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Please Wait... Verifying installed packages"
 msgstr ""

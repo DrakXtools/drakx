@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2002-02-23 13:19+0100\n"
+"POT-Creation-Date: 2002-02-24 19:58+0100\n"
 "PO-Revision-Date: 2001-08-12 13:12GMT+1\n"
 "Last-Translator: Toma Jankovic <tomaja@net.yu>\n"
 "Language-Team: SERBIAN <office@mandrake.co.yu>\n"
@@ -243,7 +243,7 @@ msgstr "Графичка картица: %s"
 msgid "XFree86 server: %s"
 msgstr "XFree86 сервер: %s"
 
-#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2414
+#: ../../Xconfigurator.pm_.c:878 ../../printerdrake.pm_.c:2421
 #: ../../standalone/draknet_.c:275 ../../standalone/draknet_.c:278
 msgid "Expert Mode"
 msgstr "Експертни мод"
@@ -353,7 +353,7 @@ msgstr "Прикажи информације"
 msgid "Test again"
 msgstr "Тестирај поново"
 
-#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2417
+#: ../../Xconfigurator.pm_.c:1553 ../../printerdrake.pm_.c:2424
 #: ../../standalone/logdrake_.c:217
 msgid "Quit"
 msgstr "Крај"
@@ -1314,7 +1314,7 @@ msgstr "У реду"
 #: ../../standalone/drakbackup_.c:2318 ../../standalone/drakbackup_.c:2336
 #: ../../standalone/drakbackup_.c:2384 ../../standalone/drakbackup_.c:2404
 #: ../../standalone/drakbackup_.c:2423 ../../standalone/drakfont_.c:747
-#: ../../standalone/drakgw_.c:711 ../../standalone/draknet_.c:116
+#: ../../standalone/drakgw_.c:712 ../../standalone/draknet_.c:116
 #: ../../standalone/draknet_.c:148 ../../standalone/draknet_.c:290
 #: ../../standalone/draknet_.c:537 ../../standalone/draknet_.c:679
 #: ../../standalone/logdrake_.c:217 ../../standalone/logdrake_.c:498
@@ -2221,18 +2221,15 @@ msgstr "%s Форматирање  %s није успело"
 msgid "I don't know how to format %s in type %s"
 msgstr "не знам како да форматирам %s у типу %s"
 
-#: ../../fs.pm_.c:611
-msgid "mount failed"
-msgstr "монтирање није успело"
+#: ../../fs.pm_.c:611 ../../fs.pm_.c:640 ../../fs.pm_.c:646
+#, c-format
+msgid "mounting partition %s in directory %s failed"
+msgstr ""
 
 #: ../../fs.pm_.c:631
 #, c-format
 msgid "fsck failed with exit code %d or signal %d"
 msgstr "fsck провера није успела са кодом %d или сигналом %d"
-
-#: ../../fs.pm_.c:640 ../../fs.pm_.c:646 ../../partition_table.pm_.c:600
-msgid "mount failed: "
-msgstr "монтирање није успело: "
 
 #: ../../fs.pm_.c:661 ../../partition_table.pm_.c:596
 #, c-format
@@ -5058,7 +5055,7 @@ msgid "Timezone"
 msgstr "Временска зонa"
 
 #: ../../install_steps_interactive.pm_.c:1034 ../../printerdrake.pm_.c:2238
-#: ../../printerdrake.pm_.c:2309
+#: ../../printerdrake.pm_.c:2316
 msgid "Printer"
 msgstr "Штампач"
 
@@ -6630,6 +6627,10 @@ msgstr "Логовaње за рaчун (корисничко име)"
 msgid "Account Password"
 msgstr "Лозинка за рaчун"
 
+#: ../../partition_table.pm_.c:600
+msgid "mount failed: "
+msgstr "монтирање није успело: "
+
 #: ../../partition_table.pm_.c:664
 msgid "Extended partition not supported on this platform"
 msgstr "Extended партициjа ниjе подржана на овоj платформи"
@@ -6763,7 +6764,7 @@ msgid "Pipe job into a command"
 msgstr "Убаци у команду"
 
 #: ../../printer.pm_.c:497 ../../printer.pm_.c:688 ../../printer.pm_.c:1010
-#: ../../printerdrake.pm_.c:1647 ../../printerdrake.pm_.c:2667
+#: ../../printerdrake.pm_.c:1647 ../../printerdrake.pm_.c:2674
 msgid "Unknown model"
 msgstr ""
 
@@ -6852,10 +6853,10 @@ msgstr ""
 msgid "On CUPS server \"%s\""
 msgstr "SMB сервер IP:"
 
-#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2346
-#: ../../printerdrake.pm_.c:2357 ../../printerdrake.pm_.c:2553
-#: ../../printerdrake.pm_.c:2607 ../../printerdrake.pm_.c:2634
-#: ../../printerdrake.pm_.c:2783 ../../printerdrake.pm_.c:2785
+#: ../../printer.pm_.c:867 ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2364 ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2614 ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2790 ../../printerdrake.pm_.c:2792
 msgid " (Default)"
 msgstr " (Подразумевано)"
 
@@ -6916,7 +6917,7 @@ msgstr ""
 
 #: ../../printerdrake.pm_.c:107 ../../printerdrake.pm_.c:1720
 #: ../../printerdrake.pm_.c:1726 ../../printerdrake.pm_.c:1727
-#: ../../printerdrake.pm_.c:1728 ../../printerdrake.pm_.c:2653
+#: ../../printerdrake.pm_.c:1728 ../../printerdrake.pm_.c:2660
 #: ../../standalone/drakbackup_.c:753 ../../standalone/drakbackup_.c:2445
 #: ../../standalone/drakfont_.c:577 ../../standalone/drakfont_.c:771
 msgid "Close"
@@ -6937,7 +6938,7 @@ msgstr "IP адреса треба да буде у формату 1.2.3.4"
 msgid "The port number should be an integer!"
 msgstr "Броj порта би требао да буде нумерички броj"
 
-#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2744
+#: ../../printerdrake.pm_.c:124 ../../printerdrake.pm_.c:2751
 #, fuzzy
 msgid "Default printer"
 msgstr "Локални  штампач"
@@ -6964,8 +6965,8 @@ msgstr "Детектуjем  урeђаje..."
 msgid "Test ports"
 msgstr "Тестирање портова"
 
-#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2390
-#: ../../printerdrake.pm_.c:2495
+#: ../../printerdrake.pm_.c:221 ../../printerdrake.pm_.c:2397
+#: ../../printerdrake.pm_.c:2502
 #, fuzzy
 msgid "Add a new printer"
 msgstr "Додајте штампач"
@@ -7537,7 +7538,7 @@ msgstr ""
 msgid "Did it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:1649 ../../printerdrake.pm_.c:2669
+#: ../../printerdrake.pm_.c:1649 ../../printerdrake.pm_.c:2676
 #, fuzzy
 msgid "Raw printer"
 msgstr "Без штампачa"
@@ -7672,7 +7673,7 @@ msgid ""
 msgstr ""
 
 #: ../../printerdrake.pm_.c:1776 ../../printerdrake.pm_.c:2183
-#: ../../printerdrake.pm_.c:2429 ../../standalone/printerdrake_.c:49
+#: ../../printerdrake.pm_.c:2436 ../../standalone/printerdrake_.c:49
 msgid "Reading printer data ..."
 msgstr ""
 
@@ -7915,8 +7916,8 @@ msgstr "Подеси штампач"
 msgid "Installing Foomatic ..."
 msgstr "Инсталирам пакет %s"
 
-#: ../../printerdrake.pm_.c:2271 ../../printerdrake.pm_.c:2303
-#: ../../printerdrake.pm_.c:2670 ../../printerdrake.pm_.c:2737
+#: ../../printerdrake.pm_.c:2271 ../../printerdrake.pm_.c:2310
+#: ../../printerdrake.pm_.c:2677 ../../printerdrake.pm_.c:2744
 msgid "Printer options"
 msgstr "Опције штампача"
 
@@ -7924,20 +7925,25 @@ msgstr "Опције штампача"
 msgid "Preparing PrinterDrake ..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2310
+#: ../../printerdrake.pm_.c:2297 ../../printerdrake.pm_.c:2813
+#, fuzzy
+msgid "Configuring applications..."
+msgstr "Подеси штампач"
+
+#: ../../printerdrake.pm_.c:2317
 msgid "Would you like to configure printing?"
 msgstr "Да ли бисте да подесите штампач?"
 
-#: ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2329
 msgid "Printing system: "
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2370
+#: ../../printerdrake.pm_.c:2377
 #, fuzzy
 msgid "Printerdrake"
 msgstr "штампaч"
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2380
 #, fuzzy
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
@@ -7947,95 +7953,95 @@ msgstr ""
 "Ово су постављне опције.\n"
 "Можете додати нове или изменити старе."
 
-#: ../../printerdrake.pm_.c:2399
+#: ../../printerdrake.pm_.c:2406
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2408
+#: ../../printerdrake.pm_.c:2415
 #, fuzzy
 msgid "Configure printing system"
 msgstr "Подеси мрежу"
 
-#: ../../printerdrake.pm_.c:2413 ../../standalone/draknet_.c:278
+#: ../../printerdrake.pm_.c:2420 ../../standalone/draknet_.c:278
 msgid "Normal Mode"
 msgstr "Нормални Мод"
 
-#: ../../printerdrake.pm_.c:2517 ../../printerdrake.pm_.c:2560
-#: ../../printerdrake.pm_.c:2577 ../../printerdrake.pm_.c:2612
-#: ../../printerdrake.pm_.c:2800
+#: ../../printerdrake.pm_.c:2524 ../../printerdrake.pm_.c:2567
+#: ../../printerdrake.pm_.c:2584 ../../printerdrake.pm_.c:2619
+#: ../../printerdrake.pm_.c:2807
 #, fuzzy
 msgid "Do you want to configure another printer?"
 msgstr "Да ли хоћете да тестирате конфигурацију?"
 
-#: ../../printerdrake.pm_.c:2648
+#: ../../printerdrake.pm_.c:2655
 #, fuzzy
 msgid "Modify printer configuration"
 msgstr "Конфигурација интернетa"
 
-#: ../../printerdrake.pm_.c:2650
+#: ../../printerdrake.pm_.c:2657
 #, fuzzy, c-format
 msgid ""
 "Printer %s\n"
 "What do you want to modify on this printer?"
 msgstr "Да ли хоћете да тестирате конфигурацију?"
 
-#: ../../printerdrake.pm_.c:2654
+#: ../../printerdrake.pm_.c:2661
 msgid "Do it!"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2659 ../../printerdrake.pm_.c:2711
+#: ../../printerdrake.pm_.c:2666 ../../printerdrake.pm_.c:2718
 #, fuzzy
 msgid "Printer connection type"
 msgstr "Интернет конекциjа"
 
-#: ../../printerdrake.pm_.c:2660 ../../printerdrake.pm_.c:2715
+#: ../../printerdrake.pm_.c:2667 ../../printerdrake.pm_.c:2722
 #, fuzzy
 msgid "Printer name, description, location"
 msgstr "Селекција модела штампача"
 
-#: ../../printerdrake.pm_.c:2662 ../../printerdrake.pm_.c:2730
+#: ../../printerdrake.pm_.c:2669 ../../printerdrake.pm_.c:2737
 msgid "Printer manufacturer, model, driver"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2663 ../../printerdrake.pm_.c:2731
+#: ../../printerdrake.pm_.c:2670 ../../printerdrake.pm_.c:2738
 msgid "Printer manufacturer, model"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2672 ../../printerdrake.pm_.c:2741
+#: ../../printerdrake.pm_.c:2679 ../../printerdrake.pm_.c:2748
 msgid "Set this printer as the default"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2673 ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2680 ../../printerdrake.pm_.c:2753
 #, fuzzy
 msgid "Print test pages"
 msgstr "Штампам тест стран(ице)у..."
 
-#: ../../printerdrake.pm_.c:2674 ../../printerdrake.pm_.c:2748
+#: ../../printerdrake.pm_.c:2681 ../../printerdrake.pm_.c:2755
 #, fuzzy
 msgid "Know how to use this printer"
 msgstr "Да ли хоћете да тестирате конфигурацију?"
 
-#: ../../printerdrake.pm_.c:2676 ../../printerdrake.pm_.c:2750
+#: ../../printerdrake.pm_.c:2683 ../../printerdrake.pm_.c:2757
 #, fuzzy
 msgid "Remove printer"
 msgstr "Удаљени штампaч"
 
-#: ../../printerdrake.pm_.c:2720
+#: ../../printerdrake.pm_.c:2727
 #, fuzzy, c-format
 msgid "Removing old printer \"%s\" ..."
 msgstr "Удаљени штампaч"
 
-#: ../../printerdrake.pm_.c:2745
+#: ../../printerdrake.pm_.c:2752
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:2752
+#: ../../printerdrake.pm_.c:2759
 #, fuzzy, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Да ли хоћете да рестартуjeте мрежe?"
 
-#: ../../printerdrake.pm_.c:2754
+#: ../../printerdrake.pm_.c:2761
 #, fuzzy, c-format
 msgid "Removing printer \"%s\" ..."
 msgstr "Удаљени штампaч"
@@ -11297,6 +11303,52 @@ msgstr "Мултимедиja - CD пржeње"
 msgid "Scientific Workstation"
 msgstr "Научнa радна станицa"
 
+#: tinyfirewall:155
+msgid "No I don't need DHCP"
+msgstr "Не, мени нетреба DHCP"
+
+#: tinyfirewall:155
+#, fuzzy
+msgid "Yes I need DHCP"
+msgstr "Не, мени нетреба DHCP"
+
+#: tinyfirewall:155
+msgid "No I don't need NTP"
+msgstr "Не, мени нетреба NTP"
+
+#: tinyfirewall:155
+#, fuzzy
+msgid "Yes I need NTP"
+msgstr "Не, мени нетреба NTP"
+
+#: tinyfirewall:155
+msgid "Don't Save"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Save & Quit"
+msgstr ""
+
+#: tinyfirewall:155
+msgid "Firewall Configuration Wizard"
+msgstr "чаробњак за подешавање Firewall-a"
+
+#: tinyfirewall:155
+msgid "No (firewall this off from the internet)"
+msgstr "Не (уколинте firewall са овога)"
+
+#: tinyfirewall:155
+msgid "Yes (allow this through the firewall)"
+msgstr "Да (поставите ово кроз firewall)"
+
+#: tinyfirewall:155
+#, fuzzy
+msgid "Please Wait... Verifying installed packages"
+msgstr "Сaмо моменат, припремам инсталацију"
+
+#~ msgid "mount failed"
+#~ msgstr "монтирање није успело"
+
 #~ msgid "Low"
 #~ msgstr "Мала"
 
@@ -12970,21 +13022,6 @@ msgstr "Научнa радна станицa"
 
 #~ msgid "Mail information"
 #~ msgstr "Информације о ел.пошти"
-
-#~ msgid "No I don't need DHCP"
-#~ msgstr "Не, мени нетреба DHCP"
-
-#~ msgid "No I don't need NTP"
-#~ msgstr "Не, мени нетреба NTP"
-
-#~ msgid "No (firewall this off from the internet)"
-#~ msgstr "Не (уколинте firewall са овога)"
-
-#~ msgid "Yes (allow this through the firewall)"
-#~ msgstr "Да (поставите ово кроз firewall)"
-
-#~ msgid "Firewall Configuration Wizard"
-#~ msgstr "чаробњак за подешавање Firewall-a"
 
 #~ msgid "Miscellaneous"
 #~ msgstr "Разне опције"
