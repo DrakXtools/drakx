@@ -2,8 +2,11 @@
 
 use MDK::Common;
 
+my $prefix = '/tmp/live_tree';
+
 sub create_light_tree {
-    my ($live_name, $prefix, $light_prefix, $list) = @_;
+    my ($live_name, $list) = @_;
+    my $light_prefix = $prefix . '_' . $live_name;
 
     -e $light_prefix and die "you can't make_live_tree_boot since one already exists
 Maybe you should remove it first with 'make_live_tree_boot -u'\n";
@@ -23,7 +26,8 @@ Maybe you should remove it first with 'make_live_tree_boot -u'\n";
 }
 
 sub remove_light_tree {
-    my ($live_name, $prefix, $light_prefix, $list) = @_;
+    my ($live_name, $list) = @_;
+    my $light_prefix = $prefix . '_' . $live_name;
 
     -d $light_prefix or return;
 
@@ -61,17 +65,15 @@ sub remove_light_tree {
     }
 }
 
-my $prefix = '/tmp/live_tree';
-my ($boot_prefix, $always_prefix) = ('/tmp/live_tree_boot', '/tmp/live_tree_always');
-my @boot_list = chomp_(cat_('data/boot.list'));
 my @always_list = chomp_(cat_('data/always.list'));
+my @boot_list = chomp_(cat_('data/boot.list'));
 
 @boot_list = difference2(\@boot_list, \@always_list);
 
-remove_light_tree('boot', $prefix, $boot_prefix, \@boot_list);
-remove_light_tree('always', $prefix, $always_prefix, \@always_list);
+remove_light_tree('always', \@always_list);
+remove_light_tree('boot', \@boot_list);
 
 if (!@ARGV) {
-    create_light_tree('boot', $prefix, $boot_prefix, \@boot_list);    
-    create_light_tree('always', $prefix, $always_prefix, \@always_list);    
+    create_light_tree('always', \@always_list);    
+    create_light_tree('boot', \@boot_list);    
 }
