@@ -938,12 +938,12 @@ sub devfssymlinkf {
     #- example: $of is mouse, $if is usbmouse, $devfs_if is input/mouse0
 
     output_p("$::prefix/etc/devfs/conf.d/$of.conf", 
-"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL symlink $devfs_if $of
+"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL mksymlink $devfs_if $of
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 ");
 
     output_p("$::prefix/etc/devfs/conf.d/$if.conf", 
-"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL symlink $devfs_if $if
+"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL mksymlink $devfs_if $if
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $if
 ") if $devfs_if ne $if;
 
