@@ -997,7 +997,7 @@ sub generateAutoInstFloppy {
 #+    $o->ask_yesorno('', 
 #+_("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
 
-    $o->ask_warn('', _("Insert a blank floppy in drive %s", $floppy));
+    $o->ask_okcancel('', _("Insert a blank floppy in drive %s", $floppy), 1) or return;
 
     my $dev = devices::make($floppy);
 
