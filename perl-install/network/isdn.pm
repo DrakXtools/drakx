@@ -196,7 +196,7 @@ sub isdn_ask {
     my ($isdn, $netc, $label) = @_;
     
     #- ISDN card already detected
-    if (!$::Expert && defined $netc->{autodetect}{isdn}{card_type}) {
+    if (!$::expert && defined $netc->{autodetect}{isdn}{card_type}) {
 	$in->ask_yesorno(_("ISDN Configuration"), _("Found \"$netc->{autodetect}{isdn}{description}\" interface do you want to use it ?"), 1) or return;
 	$isdn->{$_} = $netc->{autodetect}{isdn}{$_} foreach qw(description vendor id card_type driver type mem io io0 io1 irq firmware);
 	goto isdn_ask_step_3;
