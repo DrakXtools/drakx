@@ -444,8 +444,7 @@ sub getUPS() {
     my $hiddev_find_application = sub {
         my ($fd, $usage) = @_;
         my ($i, $ret) = 0;
-        # HIDIOCAPPLICATION from /usr/include/linux/hiddev.h:
-        do { $i++ } while ($ret = ioctl($fd, 0x4802, $i)) && $ret != $usage;
+        do { $i++ } while ($ret = ioctl($fd, c::HIDIOCAPPLICATION(), $i)) && $ret != $usage;
         return $ret == $usage ? 1 : 0;
     };
 
