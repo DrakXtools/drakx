@@ -234,6 +234,8 @@ sub reallyChooseGroups {
 			   1, gtkpack_(Gtk2::HBox->new(0, 0),
 			        $o->{meta_class} eq 'server' ? (
 				   1, gtkpack(Gtk2::VBox->new(0, 0), 
+					   $entries_in_path->('Workstation'),
+					   '',
 					   $entries_in_path->('Server'),
 					  ),
 				   1, gtkpack(Gtk2::VBox->new(0, 0), 
