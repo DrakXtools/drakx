@@ -278,7 +278,7 @@ sub setupBootloader__general {
 }
 
 sub setupBootloader__entries {
-    my ($in, $b, $all_hds, $fstab) = @_;
+    my ($in, $b, $_all_hds, $fstab) = @_;
 
     my $Modify = sub {
 	my ($e) = @_;
