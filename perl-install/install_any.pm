@@ -115,7 +115,6 @@ sub setPackages($$) {
 	$_->{selected} = 0 foreach values %{$o->{packages}};
     } else {
 	my $useHdlist = $o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
-	$useHdlist = 0;
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
@@ -240,7 +239,7 @@ sub searchAndMount4Upgrade {
 
     #- test if the partition has to be fschecked and remounted rw.
     if ($root->{realMntpoint}) {
-	($o->{prefix}, $root->{mntpoint}) = ($root->{mntpoint}, '/');
+	($o->{prefix}, $root->{mntpoint}) = ($root->{realMntpoint}, '/');
     } else {
 	delete $root->{mntpoint};
 	($Parts{$_->{device}} || {})->{mntpoint} = $_->{mntpoint} foreach @$found;
