@@ -80,5 +80,5 @@ _ "$sudo rm -rf $tmp";
 _ "$sudo umount $rescue";
 _ "rmdir $mnt";
 
-_ "echo gzipping $rescue";
-_ "gzip -f -9 $rescue";
+_ "echo bzipping $rescue";
+_ "bzip2 -f -9 $rescue";

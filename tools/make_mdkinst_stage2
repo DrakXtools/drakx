@@ -69,6 +69,6 @@ df $MNTPOINT
 $SUDO umount $STAGE2
 rmdir $MNTPOINT
 
-echo gzipping $STAGE2
+echo bzipping $STAGE2
 
-gzip -f -9 $STAGE2
+bzip2 -f -9 $STAGE2
