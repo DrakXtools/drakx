@@ -582,73 +582,73 @@ image = /boot/vmlinux
     label = install-text
     initrd = /boot/all.gz
     initrd-size = 34000
-    append = " text video=ofonly ramdisk_size=128000"
+    append = " text ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = install-text-power4
     initrd = /boot/all-power4.gz
     initrd-size = 34000
-    append = " text video=ofonly ramdisk_size=128000"
+    append = " text ramdisk_size=128000"
 
 image = /boot/vmlinux
     label = install-gui-old
     initrd = /boot/all.gz
     initrd-size = 34000
-    append = " gui-old video=ofonly ramdisk_size=128000"
+    append = " gui-old ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = install-gui-old-power4
     initrd = /boot/all-power4.gz
     initrd-size = 34000
-    append = " gui-old video=ofonly ramdisk_size=128000"
+    append = " gui-old ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = install-net
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " video=ofonly ramdisk_size=128000"
+    append = " ramdisk_size=128000"
 
 image = enet:0,vmlinux-power4
     label = install-net-power4
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
-    append = " video=ofonly ramdisk_size=128000"
+    append = " ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = install-net-text
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " text video=ofonly ramdisk_size=128000"
+    append = " text ramdisk_size=128000"
 
 image = enet:0,vmlinux-power4
     label = install-net-text-power4
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
-    append = " text video=ofonly ramdisk_size=128000"
+    append = " text ramdisk_size=128000"
 
 image = /boot/vmlinux
     label = rescue
     initrd = /boot/all.gz
     initrd-size = 34000
-    append = " rescue video=ofonly ramdisk_size=128000"
+    append = " rescue ramdisk_size=128000"
 
 image = /boot/vmlinux-power4
     label = rescue-power4
     initrd = /boot/all-power4.gz
     initrd-size = 34000
-    append = " rescue video=ofonly ramdisk_size=128000"
+    append = " rescue ramdisk_size=128000"
 
 image = enet:0,vmlinux
     label = rescue-net
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = " rescue video=ofonly ramdisk_size=128000" 
+    append = " rescue ramdisk_size=128000" 
 
 image = enet:0,vmlinux-power4
     label = rescue-net-power4
     initrd = enet:0,all-power4.gz
     initrd-size = 34000
-    append = " rescue video=ofonly ramdisk_size=128000" 
+    append = " rescue ramdisk_size=128000" 
 ');
 
 	output("$dir/$boot/yaboot.msg", '
