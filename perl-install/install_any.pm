@@ -656,9 +656,14 @@ sub g_auto_install {
     $_ = { %{$_ || {}} }, delete @$_{qw(oldu oldg password password2)} foreach $o->{superuser}, @{$o->{users} || []};
     
     require Data::Dumper;
-    join('',
-	   "# You should always check the syntax with 'perl -cw auto_inst.cfg.pl' before testing\n",
-	   Data::Dumper->Dump([$o], ['$o']), if_($replay, 
+    join('', 
+"#!/usr/bin/perl -cw
+#
+# You should check the syntax of this file before using it in an auto-install.  You
+# can do this with 'perl -cw auto_inst.cfg.pl' or by executing this file (note the
+# '#!/usr/bin/perl -cw' on the first line).
+", 
+	 Data::Dumper->Dump([$o], ['$o']), if_($replay, 
 qq(\npackage install_steps_auto_install;), q(
 $graphical = 1;
 push @graphical_steps, 'doPartitionDisks', 'choosePartitionsToFormat', 'formatMountPartitions';
