@@ -53,9 +53,10 @@ sub mirrors() {
 	my $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
 
 	local $SIG{ALRM} = sub { die "timeout" };
-	alarm 60; 
+	alarm 60;
+	my $type = $o->{distro_type} || 'updates';
 	foreach (<$f>) {
-	    my ($arch, $url, $dir) = m|updates([^:]*):ftp://([^/]*)(/\S*)| or next;
+	    my ($arch, $url, $dir) = m|$type([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
 		log::l("ignoring updates from $url because of incompatible arch: $arch"), next;
 	    my $land = N("United States");

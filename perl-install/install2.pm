@@ -570,6 +570,8 @@ sub main {
 	$o->{meta_class} = 'download' if $VERSION =~ /download/i;
 	$o->{meta_class} = 'firewall' if $VERSION =~ /firewall/i;
 	$o->{meta_class} = 'server' if $VERSION =~ /server|prosuite/i;
+	$o->{distro_type} = 'community' if $VERSION =~ /community/i;
+	$o->{distro_type} = 'cooker' if $VERSION =~ /cooker/i;
     }
     $o->{meta_class} eq 'discovery' and $o->{meta_class} = 'desktop';
     if ($::oem) {
