@@ -279,7 +279,7 @@ sub row_setting_dialog {
     $groups->set_popdown_strings(&get_user_or_group);
     $groups->entry->set_text($model->get($iter, 3)) if $iter;
 
-    my $id_box = gtkadd(Gtk2::HBox->new(0,5),
+    my $id_box = gtkadd(Gtk2::HBox->new,
                         Gtk2::Label->new(N("User :")),
                         $users,
                         Gtk2::Label->new(N("Group :")),
@@ -312,27 +312,27 @@ sub row_setting_dialog {
 
     gtkpack_($dlg->vbox,
              0, gtkadd(Gtk2::Frame->new(N("Path")),
-                       gtkpack_(Gtk2::HBox->new(0,5),
+                       gtkpack_(gtkset_border_width(Gtk2::HBox->new, 3),
                                 1, $file,
                                 0, $browse
                                )
                       ),
              0, gtkadd(Gtk2::Frame->new(N("Property")),
-                       gtkadd(Gtk2::VBox->new(0,5),
+                       gtkadd(gtkset_border_width(Gtk2::VBox->new, 3),
                               $usr_check,
                               $id_box,
                              ),
                       ),
              1, gtkadd(Gtk2::Frame->new(N("Permissions")),
-                       gtkpack(Gtk2::HBox->new(0,15),
-                               gtkadd(Gtk2::VBox->new(0,15),
+                       gtkpack(gtkset_border_width(Gtk2::HBox->new, 3),
+                               gtkadd(Gtk2::VBox->new,
                                       Gtk2::Label->new(""),
                                       map { gtkset_tip($tips, Gtk2::Label->new($checks{$_}{label}), $checks{$_}{tip}) } @rights,
                                      ),
                                (map {
                                    my $owner = $_;
                                    $perms{$owner} = { get_right($rights{$owner}) };
-                                   my $vbox = gtkadd(Gtk2::VBox->new(0,5), 
+                                   my $vbox = gtkadd(Gtk2::VBox->new, 
                                                      Gtk2::Label->new($rights_labels{$owner}),
                                                      map {
                                                          my $c = $_;
@@ -347,7 +347,7 @@ sub row_setting_dialog {
                                    
                                    $vbox;
                                } @owners),
-                               gtkpack(Gtk2::VBox->new(0,5),
+                               gtkpack(Gtk2::VBox->new,
                                        Gtk2::Label->new(' '),
                                        map { $perms{$_} = gtkset_tip($tips, Gtk2::CheckButton->new($checks{$_}{label}), $checks{$_}{tip}) } @bits,
                                       ),
