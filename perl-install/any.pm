@@ -1035,7 +1035,7 @@ sub ask_window_manager_to_logout_then_do {
     open STDERR, ">&STDERR";
     c::setsid();
     exec 'perl', '-e', q(
-	my ($wm, $pid) = @ARGV;
+	my ($wm, $pid, $action) = @ARGV;
 	my $nb;
 	for ($nb = 30; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
 	system($action) if $nb;
