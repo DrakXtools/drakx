@@ -1,3 +1,11 @@
+2000-02-18  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm (createXconf): added /dev/ (X wants
+	"/dev/psaux" and not "psaux")
+
+	* diskdrake.pm (Create): show start sector even for non-expert on
+	non-i386
+
 2000-02-16  Pixel  <pixel@mandrakesoft.com>
 
 	* mouse.pm (detect): add defaults to serial mouse

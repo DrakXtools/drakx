@@ -191,7 +191,7 @@ sub new($$) {
 		0;
 	    };
 	    my @servers = qw(FBDev VGA16); #-)
-	    @servers = qw(FBDev 3DLabs TGA) if arch() eq "alpha";
+	    @servers = qw(3DLabs) if arch() eq "alpha";
 	    @servers = qw(Mach64) if arch() =~ /^sparc/;
 
 	    foreach (@servers) {
@@ -838,7 +838,7 @@ EndSection
 
 Section "Pointer"
    Protocol    "$mouse_type"
-   Device      "$mouse_dev"
+   Device      "/dev/$mouse_dev"
    Emulate3Buttons
    Emulate3Timeout    50
 EndSection

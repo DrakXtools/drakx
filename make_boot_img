@@ -109,24 +109,21 @@ label rescue
 
 sub boot_img_alpha {
     my ($mnt, $img) = @_;
-    my $sizek = int ((-s "vmlinux.gz") / 1024 + 130);
 
     __ "$sudo umount $mnt 2>/dev/null";
-    _ "dd if=/dev/zero of=$img bs=1k count=$sizek";
+    _ "dd if=/dev/zero of=$img bs=1k count=1440";
     _ "$mke2fs $img";
     _ "/sbin/e2writeboot $img /boot/bootlx";
     _ "$sudo mount -t ext2 $img $mnt -o loop";
     _ "cp -f vmlinux.gz $mnt";
-    -f "$type.rdz" or initrd("${mnt}2", "$type.rdz");
+    -f "$type.rdz" ? _ "cp -f $type.rdz $mnt" : initrd("${mnt}2", "$mnt/$type.rdz");
 
     mkdir "$mnt/etc", 0777;
     output("$mnt/etc/aboot.conf", 
-"0:vmlinux.gz load_ramdisk=1 prompt_ramdisk=0 ramdisk_start=$sizek root=/dev/fd0 mdkinst rw ramdisk=32000
+"0:vmlinux.gz initrd=$type.rdz mdkinst rw ramdisk=32000
 ");
     _ "sync";
     _ "df $mnt";
-    __ "$sudo umount $mnt 2>/dev/null";
-    _ "cat $type.rdz >> $img";
 }
 
 sub boot_img_sparc {

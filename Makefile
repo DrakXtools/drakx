@@ -31,6 +31,11 @@ AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
 install: build autoboot
 	for i in images misc Mandrake Mandrake/base; do install -d $(ROOTDEST)/$$i ; done
 	cp -f $(RELEASE_BOOT_IMG) $(ROOTDEST)/images
+ifeq (alpha,$(ARCH))
+	cp -f $(BOOT_RDZ) $(ROOTDEST)/boot
+	cp -f vmlinux.gz $(ROOTDEST)/boot/instboot.gz
+	make -C tools/$(ARCH)/cd install ROOTDEST=$(ROOTDEST)
+endif
 	make -C perl-install full_stage2
 
 build: $(BOOT_IMG)
