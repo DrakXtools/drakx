@@ -42,11 +42,8 @@ sub make($) {
     if (m,^(.*/(?:dev|tmp))/(.*),) {
 	$_ = $2;
     } else {
-	#- lnx4win use a plain swap file, should not assume a leading /tmp or /dev.
-	unless (-f $file) {
-	    $file = "/tmp/$_";
-	    -e $file or $file = "/dev/$_";
-	}
+	-e $file or $file = "/tmp/$_";
+	-e $file or $file = "/dev/$_";
     }
     -e $file and return $file; #- assume nobody takes fun at creating files named as device
 

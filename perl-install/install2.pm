@@ -622,7 +622,7 @@ sub main {
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();
 
-    eval { modules::load($_) } foreach qw(ide-probe ide-disk sd_mod af_packet);
+    eval { modules::load($_, 'prereq') } foreach qw(ide-probe ide-disk sd_mod af_packet);
     install_any::lnx4win_preinstall() if $o->{lnx4win};
 
     #-the main cycle
