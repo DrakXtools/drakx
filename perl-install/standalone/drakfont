@@ -96,7 +96,6 @@ foreach (@ARGV) {
 print "app : @application\n";
 print "install : @install\n";
 print "uninstall : @uninstall\n";
-#print "xx $xlsfonts\n";
 
 my $xfs_conffile = '/etc/X11/fs/config';
 my $drakfont_dir = '/home/seb/new_drackfont';
@@ -168,6 +167,8 @@ sub search_windows_font {
     1;
 }
 
+
+
 sub search_dir_font {
     my @font_list_tmp = ();
     my @font_list_tmpp = ();
@@ -185,8 +186,11 @@ sub search_dir_font {
 			    !grep /$i/, (@installed_fonts) and push @font_list, "$fn$i";
 			}
 		    }
-		    else { push @font_list, @font_list_tmp;
-		       }
+		    else { 
+			foreach my $i (@font_list_tmp) {
+			    grep /$i/, @font_list or  push @font_list, $fn."/".$i;
+			}
+		    }
 		}
 	    }
 	}
@@ -272,7 +276,6 @@ sub interactive_mode {
 }
 
 
-#   install & uninstall a revoir 
-#   au niveau du passage de paramettre
-#   un grep comme avant (qui ne sert pas a rien)
+
+#   faire la gestion des applications + printer
 #   faire une valeure de retour pour toutes les fonctions
