@@ -250,6 +250,32 @@ sub ask_from_entries {
       undef;
 }
 
+sub ask_from__add_modify_remove {
+    my ($o, $title, $message, $l, %callback) = @_;
+    die "ask_from__add_modify_remove only handles one item" if @$l != 1;
+
+    if ($o->can('ask_from__add_modify_removeW')) {
+	ask_from__add_modify_removeW($o, $title, $message, $l, %callback);
+    } else {
+	my $e = $l->[0];
+	my $chosen_element;
+	put_in_hash($e, { allow_empty_list => 1, val => \$chosen_element, type => 'list' });
+
+	while (1) {
+	    my $c;
+	    my @l = (@$l, 
+		     map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } 
+		       N_("Add"), if_(@{$e->{list}} > 0, N_("Modify"), N_("Remove")));
+	    $o->ask_from_({ title => $title, messages => $message, callbacks => \%callback }, \@l);
+
+	    return 1 if $c eq 'Done';
+
+	    $callback{$c}->($chosen_element);
+	}
+    }
+}
+
+
 #- can get a hash of callback: focus_out changed and complete
 #- moreove if you pass a hash with a field list -> combo
 #- if you pass a hash with a field hidden -> emulate stty -echo

@@ -233,45 +233,10 @@ On which drive are you booting?"), \&partition_table::description, $hds) or goto
 
     $ask_per_entries or return 1;
 
-    while (1) {
-	$in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
-	my ($c, $e);
-	$in->ask_from_(
-		{
-		 messages => 
-N("Here are the entries on your boot menu so far.
-You can add some more or change the existing ones."),
-		 ok => '',
-},
-		[ { val => \$e, type => 'combo', format => sub {
-		    my ($e) = @_;
-		    ref $e ? 
-		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
-		      translate($e);
-		}, list => [ @{$b->{entries}} ], allow_empty_list => 1 },
-		  (map { my $s = $_; { val => translate($_), clicked_may_quit => sub { $c = $s; 1 } } } (if_(@{$b->{entries}} > 0, N_("Modify")), N_("Add"), N_("Done"))),
-		]
-	);
-	!$c || $c eq "Done" and last;
+    $in->set_help(arch() =~ /sparc/ ? 'setupSILOAddEntry' : arch() =~ /ppc/ ? 'setupYabootAddEntry' : 'setupBootloaderAddEntry') unless $::isStandalone;
 
-	if ($c eq "Add") {
-	    my @labels = map { $_->{label} } @{$b->{entries}};
-	    my $prefix;
-	    if ($in->ask_from_list_('', N("Which type of entry do you want to add?"),
-				    [ N_("Linux"), arch() =~ /sparc/ ? N_("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
-				   N_("Other OS (MacOS...)") : N_("Other OS (windows...)") ]
-				   ) eq "Linux") {
-		$e = { type => 'image',
-		       root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
-		     };
-		$prefix = "linux";
-	    } else {
-		$e = { type => 'other' };
-		$prefix = arch() =~ /sparc/ ? "sunos" : arch() =~ /ppc/ ? "macos" : "windows";
-	    }
-	    $e->{label} = $prefix;
-	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
-	}
+    my $Modify = sub {
+	my ($e) = @_;
 	my $default = my $old_default = $e->{label} eq $b->{default};
 
 	my @l;
@@ -297,15 +262,15 @@ if_(arch() !~ /sparc|ppc|ia64/,
 	    );
 	    @l = $l[0] unless $::expert;
 	}
-if (arch() !~ /ppc/) {
-	@l = (
-{ label => N("Label"), val => \$e->{label} },
-@l,
-{ label => N("Default"), val => \$default, type => 'bool' },
-	);
-} else {
-        unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
-	if ($e->{type} eq "image") {
+	if (arch() !~ /ppc/) {
+	    @l = (
+		  { label => N("Label"), val => \$e->{label} },
+		  @l,
+		  { label => N("Default"), val => \$default, type => 'bool' },
+		 );
+	} else {
+	    unshift @l, { label => N("Label"), val => \$e->{label}, list => ['macos', 'macosx', 'darwin'] };
+	    if ($e->{type} eq "image") {
 		@l = ({ label => N("Label"), val => \$e->{label} },
 		$::expert ? @l[1..4] : (@l[1..2], { label => N("Append"), val => \$e->{append} }),
 		if_($::expert, { label => N("Initrd-size"), val => \$e->{initrdsize}, list => [ '', '4096', '8192', '16384', '24576' ] }),
@@ -313,30 +278,64 @@ if (arch() !~ /ppc/) {
 		{ label => N("NoVideo"), val => \$e->{novideo}, type => 'bool' },
 		{ label => N("Default"), val => \$default, type => 'bool' }
 		);
+	    }
 	}
-}
 
-	if ($in->ask_from_(
+	$in->ask_from_(
 	    { 
-	     if_($c ne "Add", cancel => N("Remove entry")),
 	     callbacks => {
 	       complete => sub {
 		   $e->{label} or $in->ask_warn('', N("Empty label not allowed")), return 1;
 		   $e->{kernel_or_dev} or $in->ask_warn('', $e->{type} eq 'image' ? N("You must specify a kernel image") : N("You must specify a root partition")), return 1;
 		   member(lc $e->{label}, map { lc $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', N("This label is already used")), return 1;
 		   0;
-	       } } }, \@l)) {
-	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
-	    require bootloader;
-	    bootloader::configure_entry($e); #- hack to make sure initrd file are built.
+	       } } }, \@l) or return;
 
-	    push @{$b->{entries}}, $e if $c eq "Add";
+	$b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};
+	require bootloader;
+	bootloader::configure_entry($e); #- hack to make sure initrd file are built.
+	1;
+    };
+
+    my $Add = sub {
+	my @labels = map { $_->{label} } @{$b->{entries}};
+	my ($e, $prefix);
+	if ($in->ask_from_list_('', N("Which type of entry do you want to add?"),
+				[ N_("Linux"), arch() =~ /sparc/ ? N_("Other OS (SunOS...)") : arch() =~ /ppc/ ? 
+				  N_("Other OS (MacOS...)") : N_("Other OS (windows...)") ]
+			       ) eq "Linux") {
+	    $e = { type => 'image',
+		   root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
+		 };
+	    $prefix = "linux";
 	} else {
-	    delete $b->{default} if $b->{default} eq $e->{label};
-	    @{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
+	    $e = { type => 'other' };
+	    $prefix = arch() =~ /sparc/ ? "sunos" : arch() =~ /ppc/ ? "macos" : "windows";
 	}
-    }
-    1;
+	$e->{label} = $prefix;
+	for (my $nb = 0; member($e->{label}, @labels); $nb++) {
+	    $e->{label} = "$prefix-$nb";
+	}
+	$Modify->($e) or return;
+	push @{$b->{entries}}, $e;
+    };
+
+    my $Remove = sub {
+	my ($e) = @_;
+	delete $b->{default} if $b->{default} eq $e->{label};
+	@{$b->{entries}} = grep { $_ != $e } @{$b->{entries}};
+    };
+
+    $in->ask_from__add_modify_remove('',
+N("Here are the entries on your boot menu so far.
+You can add some more or change the existing ones."), [ { 
+        format => sub {
+	    my ($e) = @_;
+	    ref $e ? 
+	      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
+		translate($e);
+	}, list => $b->{entries},
+    } ], Add => $Add, Modify => $Modify, Remove => $Remove);
 }
 
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
