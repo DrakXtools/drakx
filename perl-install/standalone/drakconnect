@@ -56,7 +56,7 @@ $::Wizard_pix_up = "wiz_drakconnect.png";
 MDK::Common::Globals::init(in => $in);
 
 local $_ = join '', @ARGV;
-/--skip-wizard/ and manage($netc, $netcnx, $intf);
+/--skip-wizard/ and manage($netc, $intf);
 /--add/ and add_intf();
 /--del/ and del_intf();
 if (/--install/) {
@@ -183,9 +183,9 @@ $window1->main;
 ugtk2->exit(0);
 
 sub manage {
-    my ($netc, $netcnx, $intf) = @_;
+    my ($netc, $intf) = @_;
 
-    my ($gui, $config) = ({}, {});
+    my $p = {};
     my ($interface_menu, $selected, $apply_button);
     my $window = ugtk2->new('Manage Connection');
     my $notebook = Gtk2::Notebook->new;
@@ -195,17 +195,17 @@ sub manage {
     eval(cat_('/etc/sysconfig/drakconnect'));
 
     my %name = network::ethernet::get_eth_cards_names(network::ethernet::get_eth_cards);
-    $config->{$_} = { kind => $_ } foreach keys %name;
+    $p->{$_} = { kind => $_ } foreach keys %name;
     foreach (keys %$intf) {
-	/^ippp/ and $config->{isdn} = { kind => $_ };
-	/^ppp0/ and $config->{modem} = { kind => $_ };
+	/^ippp/ and $p->{isdn} = { kind => $_ };
+	/^ppp0/ and $p->{modem} = { kind => $_ };
     };
         
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
 										$selected = $interface_menu->get_text;
-										$notebook->set_current_page($gui->{$config->{$selected}{kind}}{index});
+										$notebook->set_current_page($p->{$selected}{gui}{index});
 									    },
 									   ),
 				     1, $notebook,
@@ -214,7 +214,7 @@ sub manage {
                                              cancel_clicked => sub { $window->destroy; Gtk2->main_quit },
                                              ok_clicked => sub {
                                                  if ($apply_button->get_property('sensitive')) {
-                                                     save($netc, $netcnx, $intf, $gui, $apply_button);
+                                                     save($netc, $p, $apply_button);
 						 }
 						 $window->destroy;
 						 Gtk2->main_quit;
@@ -222,21 +222,21 @@ sub manage {
                                             },
                                             undef, undef, '',
                                             [ N("Help"), sub { exec("drakhelp --id internet-connection") unless fork() } ],
-                                            [ N("Apply"), sub { save($netc, $netcnx, $intf, $gui, $apply_button) } ],
+                                            [ N("Apply"), sub { save($netc, $p, $apply_button) } ],
                                            ),
 					       ),
 				    );
     $apply_button = $oc->{buttons}{N("Apply")};
 
     each_index {
-	my ($name, $interface, $protocol) = ($_, $config->{$_}{kind}, $config->{$_}{protocol});
-	$gui->{$interface}{index} = $::i;
-	build_tree($netc, $intf->{$interface} ||= {}, $name, $interface, $protocol);
-	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $apply_button, $name, $interface);
-	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
-    } (sort keys %$config);
+	my ($name, $interface, $protocol) = ($_, $p->{$_}{kind}, $p->{$_}{protocol});
+	$p->{$name}{gui}{index} = $::i;
+	build_tree($netc, $p->{$name}{intf} = $intf->{$name} || {}, $name, $interface, $protocol);
+	build_notebook($netc, $p->{$name}{intf}, $p->{$name}{gui}, $apply_button, $name, $interface);
+	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $p->{$name}{gui}{notebook}));
+    } (sort keys %$p);
 
-    $interface_menu->set_popdown_strings(sort keys %$config);
+    $interface_menu->set_popdown_strings(sort keys %$p);
     $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
@@ -496,13 +496,14 @@ sub populate_notebook {
 }
 
 sub save {
-    my ($netc, $netcnx, $intf, $gui, $apply_button) = @_;
- 
-    foreach (keys %$intf) {
-	save_notebook($netc, $intf->{$_}, $gui->{$_}) or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return;
-	$intf->{$_}{save} and $intf->{$_}{save}->();
+    my ($netc, $p, $apply_button) = @_;
+
+    foreach (keys %$p) {
+	save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4")) and return;
+	$p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
     }
-    apply($netc, $netcnx, $intf, $apply_button);
+    system("/etc/rc.d/init.d/network restart");
+    $apply_button->set_sensitive(0);
 }
 
 sub save_notebook {
@@ -610,15 +611,10 @@ sub update_list() {
 }
 
 sub apply {
-    my ($netc, $netcnx, $intf, $button_apply) = @_;
-    
-    network::network::sethostname($netc) if is_dynamic_ip($intf);
-    
-    network::network::configureNetwork2($in, '', $netc, $intf);
-    $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    $netcnx->{type} !~ /adsl_p/ and system("/etc/rc.d/init.d/network restart");
+    my ($netc, $intf) = @_;
 
-    $button_apply->set_sensitive(0);
+    network::network::sethostname($netc) if is_dynamic_ip($intf);   
+    network::network::configureNetwork2($in, '', $netc, {$intf->{DEVICE} => $intf });
 }
 
 sub ethisup { `LC_ALL=C LANGUAGE=C /sbin/ifconfig $_[0]` =~ /inet/ }
