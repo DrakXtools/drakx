@@ -12,7 +12,7 @@ stuff: %: %.xs
 
 clean:
 	test ! -e Makefile_c || $(MAKE) -f Makefile_c clean
-	rm -f *~ *.o stuff.xs pcmcia_probe.c
+	rm -f *~ *.o stuff.xs probe.c
 
 stuff.xs: %: %.pl
 	rm -f $@
