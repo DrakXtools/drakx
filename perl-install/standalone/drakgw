@@ -20,7 +20,7 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 
-use strict;
+
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
@@ -251,11 +251,13 @@ I am about to setup your Local Area Network with that adapter.", $format->($devi
     defined $device or quit_global($in, 0);
 }
 log::explanations("Choosing network device: $device");
+my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
 
-my $server_ip = network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
+my $server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
+print $server_ip."->1\n";
 my $lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : "192.168.1.0";
-my $nameserver_ip = network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
-my $netmask = network::network::read_dhcpd_conf()->{subnet_mask}[0] ||= "255.255.255.0";
+my $nameserver_ip = network::network::read_resolv_conf_raw()->{nameserver}[0] ||=  network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
+my $netmask = $conf->{NETMASK} ||= network::network::read_dhcpd_conf()->{subnet_mask}[0] ||= "255.255.255.0";
 my $start_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[0] ||= "16";
 my $end_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[1] ||= "253";
 my $default_lease = network::network::read_dhcpd_conf()->{max_lease_time}[0] ||= "21600";
@@ -268,7 +270,6 @@ if (any { /$device/ } @configured_devices) {
   step_warning_already_conf:
     my $auto = N("Yes");
 		my $_dhcp_details = N("Yes");
-    my $conf = network::read_interface_conf("/etc/sysconfig/network-scripts/ifcfg-$device");
 		
     $in->ask_from(N("Network interface already configured"),
 		  N("Warning, the network adapter (%s) is already configured.
@@ -288,8 +289,9 @@ Driver: %s", $device, $conf->{NETWORK}, $conf->{IPADDR}, $conf->{BOOTPROTO}, $al
     
     if ($auto ne N("Yes")) {
 	$reconf_dhcp_server_intf = 0;
-	$server_ip = network::network::read_dhcpd_conf()->{option_routers}[0] ||= $conf->{IPADDR} ||= "192.168.1.1";
-	$nameserver_ip = network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= $conf->{IPADDR} ||= "192.168.1.1";
+	$server_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{option_routers}[0] ||= "192.168.1.1";
+	print $server_ip."->2\n";
+	$nameserver_ip = $conf->{IPADDR} ||= network::network::read_dhcpd_conf()->{domain_name_servers}[0] ||= "192.168.1.1";
 	$lan_address = $server_ip =~ m/(.*)\.(.*)/ && $1 ? "$1.0" : $conf->{NETWORK};
 	$in->ask_from('',
 		      N("I can keep your current configuration and assume you already set up a DHCP server; in that case please verify I correctly read the Network that you use for your local network; I will not reconfigure it and I will not touch your DHCP server configuration.
