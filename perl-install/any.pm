@@ -660,7 +660,8 @@ sub load_category__prompt_for_more {
 
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
-	my $r = $in->ask_from_list_('', $msg, $opt, "No") or die 'already displayed';
+	#my $r = $in->ask_from_list_('', $msg, $opt, "No") or die 'already displayed';
+	my $r = $in->ask_from_list_('', $msg, $opt, "No") or return;
 	if ($r eq "No") { return @l }
 	if ($r eq "Yes") {
 	    push @l, load_category__prompt($in, $category) || next;
