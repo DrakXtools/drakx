@@ -79,7 +79,11 @@ sub mkbootdisk($$$;$) {
     modules::load_multi(arch() =~ /sparc/ ? 'romfs' : (), 'loop');
     my @l = qw(mkbootdisk --noprompt); 
     push @l, "--appendargs", $append if $append;
-    push @l, "--bios", 0, if $dev !~ /fd/;
+    if ($dev =~ /fd/) {
+	devices::make($dev . 'H1440');
+    } else {
+	push @l, "--bios", 0, if $dev !~ /fd/;
+    }
     run_program::rooted($prefix, @l, "--device", "/dev/$dev", $kernelVersion) or die "mkbootdisk failed";
 }
 
