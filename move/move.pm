@@ -404,8 +404,9 @@ sub install2::startMove {
     run_program::run('pam_console_apply');
 
     if (cat_('/proc/mounts') =~ m|\s/home\s|) {
-        run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
         output '/var/lib/machine_ident', machine_ident();
+        run_program::run('/usr/bin/etc-monitorer.pl', $_) foreach uniq map { dirname($_) } chomp_(`find /etc -type f`);
+        run_program::raw({ detach => 1 }, '/usr/bin/dnotify', '-MCR', '/etc', '-r', '-e', '/usr/bin/etc-monitorer.pl', '{}') or die "dnotify not found!";
     }
 
     #- allow user customisation of startup through /etc/rc.d/rc.local
