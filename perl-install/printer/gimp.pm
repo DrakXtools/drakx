@@ -230,11 +230,11 @@ sub findconfigfiles {
 		    next if -f $dir && ! -d $dir;
 		    if (! -d "$::prefix$dir") {
 			eval { mkdir_p("$::prefix$dir") } or next;
-			set_permissions($dir, "$uid.$gid") or next;
+               run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", $dir) or next;
 		    }
 		    if (! -f "$::prefix$homedir/$file") {
 			eval { output("$::prefix$homedir/$file", "#PRINTRCv1 written by GIMP-PRINT 4.2.2 - 13 Sep 2002\n") } or next;
-			set_permissions("$homedir/$file", "$uid.$gid") or next;
+               run_program::rooted($::prefix, "/bin/chown", "$uid.$gid", "$homedir/$file") or next;
 		    }
 		    push @filestotreat, "$homedir/$file";
 		}
