@@ -258,6 +258,7 @@ sub check_for_xserver() {
 }
 
 sub is_xbox() {
+    require detect_devices;
     any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } detect_devices::pci_probe();
 }
 
