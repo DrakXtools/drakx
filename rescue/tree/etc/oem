@@ -530,7 +530,6 @@ system "rpm", "--root", "/mnt", "--initdb";
 #- keep in mind all the rpm files available (according to hdlists).
 my (%files, %rpms);
 
-#- copy and install from each cd image.
 require packdrake;
 foreach my $medium (@media) {
     my $packer = new packdrake("/cdrom/Mandrake/base/$medium->{hdlist}");
@@ -540,7 +539,10 @@ foreach my $medium (@media) {
 	$files{$fullname} = $file;
 	$rpms{$file} = $medium->{rpmsdir};
     }
+}
 
+#- copy and install from each cd image.
+foreach my $medium (@media) {
     while ($cd && ! -d "/cdrom/$medium->{rpmsdir}") {
 	system "unmount", "/dev/$cd";
 	system "eject", "/dev/$cd";
@@ -552,6 +554,7 @@ foreach my $medium (@media) {
     print "Copying packages from medium labeled \"$medium->{descr}\" to hard disk\n";
     system "mkdir", "-p", "/hd/$medium->{rpmsdir}";
     foreach my $pkg (@{$packages->{depslist}}) {
+	$files{rpm_fullname($pkg)} or next;
 	$pkg->{closure} && !$pkg->{selected} or next;
 	my $file = "/cdrom/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	if (-e $file) {
@@ -563,6 +566,7 @@ foreach my $medium (@media) {
 
     print "Installing packages from medium labeled \"$medium->{descr}\"\n";
     if (my $pkg = pkgs::packageByName($packages, 'glibc')) { #- HACK FOR GLIBC
+	$files{rpm_fullname($pkg)} or die "no glibc package found";
 	if (delete $pkg->{selected}) {
 	    my $file = "/cdrom/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	    if (-e $file) {
@@ -574,6 +578,7 @@ foreach my $medium (@media) {
     }
     my @files;
     foreach my $pkg (@{$packages->{depslist}}) {
+	$files{rpm_fullname($pkg)} or next;
 	$pkg->{selected} or next;
 	my $file = "/cdrom/$medium->{rpmsdir}/" . $files{rpm_fullname($pkg)};
 	if (-e $file) {
