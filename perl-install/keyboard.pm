@@ -23,6 +23,7 @@ my $KMAP_MAGIC = 0x8B39C07F;
 my %lang2keyboard =
 (
   'af' => 'us_intl',
+  'be' => 'by',
   'bg' => 'bg',
   'br' => 'fr',
   'ca' => 'es',
@@ -111,6 +112,7 @@ arch() =~ /^ppc/ ? (
  "be" => [ __("Belgian"),        "be-latin1",   "be" ],
  "bg" => [ __("Bulgarian"),      "bg",          "bg" ],
  "br" => [ __("Brazilian (ABNT-2)"),      "br-abnt2",    "br" ],
+ "by" => [ __("Belarusian"),      "by-cp1251",  "byru" ],
  "ch_de" => [ __("Swiss (German layout)"), "sg-latin1", "de_CH" ],
  "ch_fr" => [ __("Swiss (French layout)"), "fr_CH-latin1", "fr_CH" ],
  "cz" => [ __("Czech"),          "cz-latin2",   "czsk(cz_us_qwertz)" ],
