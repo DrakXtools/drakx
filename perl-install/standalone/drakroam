@@ -23,6 +23,8 @@ require ugtk2;
 ugtk2->import(qw(:wrappers :create));
 use Gtk2::SimpleList;
 use common;
+use run_program;
+
 require_root_capability();
 
 # global settings
@@ -161,10 +163,7 @@ sub UpdateAll {
 }
 
 sub UpdateRoaming() {
-	my $status = "off";
-	open(my $PS, "ps -A |") or die("Can't open ps\n");
-	any { /wlandetect$/ } <$PS> and $status = "on";
-	close $PS;
+	my $status = any { /wlandetect$/ } run_program::get_stdout("ps", "-A") ? "on" : "off";
 	$RoamStatus->set_text("Roaming: $status");
 }
 
@@ -175,27 +174,25 @@ sub UpdateStatus() {
 	my $CurrentMode = "";
 	my $CurrentWEP = "";
 	my $CurrentSignal = "-";
+     my @output;
 	print("Updating\n");
-	open(my $IWSTATUS, "$IWConfig 2>/dev/null |") or die("Can't run iwconfig\n");
+     @output = run_program::get_stdout($IWConfig);
      local $_;
-	while (<$IWSTATUS>) {
+	foreach (@output) {
 		if (/ESSID:"(\S*)"/) { $CurrentNet = $1 }
 		if (/Mode:(\S*)\s/) { $CurrentMode = $1 }
 		if (/key:(\S*)\s/) { $CurrentWEP = $1 }
 		if (m!Quality:(\S*)/!) { $CurrentSignal = $1 }
 	}
-	close $IWSTATUS;
-	open(my $IFSTATUS, "$IFConfig $device |") or die("Can't run ifconfig\n");
-	while (<$IFSTATUS>) {
+     @output = run_program::get_stdout($IFConfig, $device);
+	foreach (@output) {
 		if (/inet addr:(\S*)\s/) { $CurrentIP = $1 }
 	}
-	close $IFSTATUS;
-	open(my $ROUTE, "$route |") or die("Can't run route\n");
-	while (<$ROUTE>) {
+     @output = run_program::get_stdout($route);
+	foreach (@output) {
 		if (/default\s*(\S*)\s/) { $CurrentGW = $1 }
 		else { $CurrentGW = "---.---.---.---" }
 	}
-	close $ROUTE;
 	$NetLabel->set_text("Net: $CurrentNet");
         $ModeLabel->set_text("Mode: $CurrentMode");
 	$IpLabel->set_text("IP: $CurrentIP");
@@ -206,11 +203,9 @@ sub UpdateStatus() {
 
 sub UpdateAvailable() {
 	print("Running iwlist\n");
-	open(my $LIST, "$IWList scan 2>/dev/null |") or die("Can't run iwlist");
 	@{$AvailableList->{data}} = ();
      my ($mode, $wep, $signal, $essid);
-     local $_;
-	while (<$LIST>) {
+     foreach (run_program::get_stdout($IWList, "scan")) {
 		if (/([^ ]+)([ \t]+)Scan completed :/) { $device = $1 }
 		elsif (/([^ ]+)([ \t]+)No scan results/) { $device = $1 }
 		if (/ESSID:"(\S*)"/) {
@@ -225,7 +220,6 @@ sub UpdateAvailable() {
 			push @{$AvailableList->{data}}, [$essid, $mode, $wep, $signal];
 		}
 	}
-	close $LIST;
 }
 
 sub AddNet {
