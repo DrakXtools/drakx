@@ -431,8 +431,8 @@ sub test_mouse {
     $draw_text->(_("Move your wheel!"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
     $paintButton->($_, 0) foreach 0..2;
     $w->{cancel}->grab_focus;
-    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { undef $w->{retval}; Gtk->main_quit } 1 });
-    my $b = before_leaving { Gtk->timeout_remove($timeout) };
+#    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { log::l("timeout test_mouse"); undef $w->{retval}; Gtk->main_quit } 1 });
+#    my $b = before_leaving { log::l("removing timeout"); Gtk->timeout_remove($timeout) };
     $w->main;
 }
 

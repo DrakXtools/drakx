@@ -178,8 +178,6 @@ sub selectInstallClass1 {
 #------------------------------------------------------------------------------
 sub selectMouse {
     my ($o, $force) = @_;
-    my %old = %{$o->{mouse}};
-    $o->SUPER::selectMouse($force);
 
     my $set = sub {
 	my ($mouse) = @_;
@@ -187,15 +185,21 @@ sub selectMouse {
 	c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($mouse->{XMOUSETYPE}));
     };
 
-    if ($old{XMOUSETYPE} ne $o->{mouse}{XMOUSETYPE}) {
+    my %old = %{$o->{mouse}};
+    $o->SUPER::selectMouse($force);
+    $old{FULLNAME} eq $o->{mouse}{FULLNAME} && !$force and return;
+
+    while (1) {
 	log::l("telling X server to use another mouse");
 	eval { commands::modprobe("serial") } if $o->{mouse}{device} =~ /ttyS/;
 
-	$set->($o->{mouse}) unless $::testing;
-    }
-    if ($old{FULLNAME} ne $o->{mouse}{FULLNAME}) {
-	install_gtk::test_mouse($o->{mouse}) or goto &selectMouse;
-    }
+	if (!$::testing) {
+	    symlinkf($o->{mouse}{device}, "/dev/mouse");
+	    c::setMouseLive($ENV{DISPLAY}, mouse::xmouse2xId($o->{mouse}{XMOUSETYPE}));
+	}
+	install_gtk::test_mouse($o->{mouse}) and return;
+	$o->SUPER::selectMouse(1);
+    } 
 }
 
 #------------------------------------------------------------------------------
