@@ -2,6 +2,7 @@ package run_program; # $Id$
 
 use diagnostics;
 use strict;
+use c;
 
 use MDK::Common;
 use log;
