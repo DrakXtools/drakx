@@ -897,18 +897,18 @@ sub Options {
 
 { 
     no strict; 
-    *{"Toggle to normal mode"} = sub { $::expert = 0 };
-    *{"Toggle to expert mode"} = sub { $::expert = 1 };
-    *{"Clear all"} = *Clear_all;
-    *{"Auto allocate"} = *Auto_allocate;
-    *{"Mount point"} = *Mount_point;
-    *{"Modify RAID"} = *ModifyRAID;
-    *{"Add to RAID"} = *Add2RAID;
-    *{"Remove from RAID"} = *RemoveFromRAID; 
-    *{"Add to LVM"} = *Add2LVM;
-    *{"Remove from LVM"} = *RemoveFromLVM; 
-    *{"Use for loopback"} = *Loopback;
-    *{"Hard drive information"} = *Hd_info;
+    *{'Toggle to normal mode'} = sub { $::expert = 0 };
+    *{'Toggle to expert mode'} = sub { $::expert = 1 };
+    *{'Clear all'} = \&Clear_all;
+    *{'Auto allocate'} = \&Auto_allocate;
+    *{'Mount point'} = \&Mount_point;
+    *{'Modify RAID'} = \&ModifyRAID;
+    *{'Add to RAID'} = \&Add2RAID;
+    *{'Remove from RAID'} = \&RemoveFromRAID; 
+    *{'Add to LVM'} = \&Add2LVM;
+    *{'Remove from LVM'} = \&RemoveFromLVM; 
+    *{'Use for loopback'} = \&Loopback;
+    *{'Hard drive information'} = \&Hd_info;
 }
 
 
