@@ -696,13 +696,18 @@ sub mount {
 
     $dev = part2device('', $dev, $fs);
 
+    $fs ne 'skip' or log::l("not mounting $dev partition"), return;
+
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
-    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone) {
+    if (member($fs, 'smb', 'smbfs', 'nfs', 'davfs', 'ntfs') && $::isStandalone || $::move) {
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	system('mount', '-t', $fs, $dev, $where, if_($o_options, '-o', $o_options)) == 0 or die \N("mounting partition %s in directory %s failed", $dev, $where);
-	return; #- do not update mtab, already done by mount(8)
-    } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', 'devfs', @fs_modules)) {
+    } else {
+	my @types = ('ext2', 'proc', 'usbdevfs', 'iso9660', 'devfs', @fs_modules);
+
+	member($fs, @types) or log::l("skipping mounting $dev partition ($fs)"), return;
+
 	$where =~ s|/$||;
 
 	my $flag = c::MS_MGC_VAL();
@@ -751,13 +756,11 @@ sub mount {
 	log::l("calling mount($dev, $where, $fs, $flag, $mount_opt)");
 	$o_wait_message->(N("Mounting partition %s", $dev)) if $o_wait_message;
 	syscall_('mount', $dev, $where, $fs, $flag, $mount_opt) or die \(N("mounting partition %s in directory %s failed", $dev, $where) . " ($!)");
-    } else {
-	log::l("skipping mounting $fs partition");
-	return;
+    
+        eval { #- fail silently, /etc may be read-only
+	    append_to_file("/etc/mtab", "$dev $where $fs defaults 0 0\n");
+	};
     }
-    eval { #- fail silently, /etc must be read-only
-	append_to_file("/etc/mtab", "$dev $where $fs defaults 0 0\n");
-    };
 }
 
 #- takes the mount point to umount (can also be the device)
@@ -812,7 +815,7 @@ sub mount_part {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    my $dev = $part->{real_device} || $part->{device};
-	    mount($dev, $mntpoint, type2fs($part), $b_rdonly, $part->{options}, $o_wait_message);
+	    mount($dev, $mntpoint, type2fs($part, 'skip'), $b_rdonly, $part->{options}, $o_wait_message);
 	    rmdir "$mntpoint/lost+found";
 	}
     }
@@ -862,7 +865,7 @@ sub df {
 	return; #- won't even try!
     } else {
 	mkdir_p($dir);
-	eval { mount($part->{device}, $dir, type2fs($part), 'readonly') };
+	eval { mount($part->{device}, $dir, type2fs($part, 'skip'), 'readonly') };
 	if ($@) {
 	    $part->{notFormatted} = 1;
 	    $part->{isFormatted} = 0;

@@ -546,7 +546,7 @@ sub inspect {
 	$dir = '';
     } else {
 	mkdir $dir, 0700;
-	eval { fs::mount($part->{device}, $dir, type2fs($part), !$b_rw) };
+	eval { fs::mount($part->{device}, $dir, type2fs($part, 'skip'), !$b_rw) };
 	$@ and return;
     }
     my $h = before_leaving {
