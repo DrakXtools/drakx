@@ -251,6 +251,19 @@ sub key_installfiles {
     mkdir $key_sysconf;
     my $sysconf = "$key_sysconf/" . machine_ident();
 
+    my $copy_userinfo = sub {
+        my (@files) = @_;
+        my @etcpasswords = glob("$key_sysconf/*/etc/passwd");
+        if (@etcpasswords > 1) {
+            print "inconsistency: more than one /etc/passwd on key! can't proceed, please clean the key\n";
+            exit 1;
+        }
+        my ($path) = $etcpasswords[0] =~ m|(.*)/etc/passwd|;
+        run_program::run('cp', '-f', "$path$_", $_) foreach @files;
+        run_program::run('rm', '-f', $etcpasswords[0]);
+        return $etcpasswords[0];
+    };
+
     if (!-d $sysconf) {
         if ($mode eq 'full') {
             log::l("key_installfiles: installing config files in $sysconf");
@@ -271,13 +284,14 @@ sub key_installfiles {
         } else {
             #- not in full mode and no host directory, grab user config from first existing host directory if possible
             log::l("key_installfiles: only looking for user config files");
-            foreach (qw(/etc/passwd /etc/group /etc/sysconfig/i18n)) {
-                my $first_available = first(glob("$key_sysconf/*$_")) or next;
-                system("cp $first_available $_");
-            }
+            $copy_userinfo->(qw(/etc/passwd /etc/group /etc/sysconfig/i18n));
         }
     } else {
         log::l("key_installfiles: installing symlinks to key");
+        if (!-e "$sysconf/etc/passwd") {
+            log::l("key_installfiles: /etc/passwd not here, trying to copy from previous host boot");
+            $copy_userinfo->(qw(/etc/passwd /etc/group));
+        }
         foreach (chomp_(`find $sysconf -type f`)) {
             my ($path) = /^\Q$sysconf\E(.*)/;
             mkdir_p(dirname($path));
