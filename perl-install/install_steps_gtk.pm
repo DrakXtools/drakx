@@ -192,11 +192,9 @@ sub selectMouse {
 	eval { commands::modprobe("serial") } if $o->{mouse}{device} =~ /ttyS/;
 
 	$set->($o->{mouse}) unless $::testing;
-
-	install_gtk::test_mouse($o->{mouse}) and return;
-
-	$set->(\%old);
-	goto &selectMouse;
+    }
+    if ($old{FULLNAME} ne $o->{mouse}{FULLNAME}) {
+	install_gtk::test_mouse($o->{mouse}) or goto &selectMouse;
     }
 }
 

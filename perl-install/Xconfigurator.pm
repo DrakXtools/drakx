@@ -470,6 +470,7 @@ sub testFinalConfig($;$$) {
         Gtk->timeout_add(1000, sub {
 	    $text->set(_("Leaving in %d seconds", $time));
 	    $time-- or Gtk->main_quit;
+            1;
 	});
 
 	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);

@@ -43,7 +43,7 @@ my (%installSteps, @orderedInstallSteps);
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
-  selectMouse        => [ __("Configure mouse"), 1, 1, '$::beginner', "selectInstallClass" ],
+  selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, '$::beginner' ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '$o->{lnx4win}', "selectInstallClass" ],
@@ -273,7 +273,6 @@ sub selectInstallClass {
 sub doPartitionDisks {
     $::live and return;
     $o->{steps}{formatPartitions}{done} = 0;
-    $o->{steps}{doPartitionDisks}{done} = 0;
     $o->doPartitionDisksBefore;
     $o->doPartitionDisks;
     $o->doPartitionDisksAfter;
@@ -664,7 +663,12 @@ sub main {
 	while ($@) {
 	    local $_ = $@;
 	    $o->kill_action;
-	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
+	    if (/^setstep (.*)/) {
+		$o->{step} = $1;
+		$o->{steps}{$1}{done} = 0;
+		$clicked = 1;
+		redo MAIN;
+	    }
 	    /^theme_changed$/ and redo MAIN;
 	    unless (/^already displayed/ || /^ask_from_list cancel/) {
 		eval { $o->errorInStep($_) };

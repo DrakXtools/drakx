@@ -45,7 +45,8 @@ sub new {
 sub main($;$) {
     my ($o, $f) = @_;
     gtkset_mousecursor_normal();
-    my $idle = Gtk->timeout_add(1000, sub { gtkset_mousecursor_normal() });
+    my $timeout = Gtk->timeout_add(1000, sub { log::l("gtkset_mousecursor_normal"); gtkset_mousecursor_normal(); 1 });
+    my $b = before_leaving { Gtk->timeout_remove($timeout) };
     $o->show;
 
     do {
@@ -240,7 +241,7 @@ sub create_okcancel {
     $ok ||= $::isWizard ? _("Next ->") : _("Ok");
 
     my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), "clicked" => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
-    my $b2 = !$one && gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit });
+    my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { undef $w->{retval}; Gtk->main_quit });
     my @l = grep { $_ } $::isStandalone ? ($b2, $b1) : ($b1, $b2);
 
     $_->can_default($::isStandalone) foreach @l;

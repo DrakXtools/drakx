@@ -367,13 +367,14 @@ END
 sub test_mouse {
     my ($mouse) = @_;
 
-    my $w = my_gtk->new('');
+    my $w = my_gtk->new;
     my ($width, $height, $offset) = (210, 300, 25);
-    my ($bw, $bh) = ($width / 3, $height * 2 / 5);
+    my ($bw, $bh) = ($width / 3, $height / 3);
 
     gtkadd($w->{window}, 
 	   gtkpack(new Gtk::VBox(0,0),
 		   my $darea = gtkset_usize(new Gtk::DrawingArea, $width+1, $height+1),
+		   '',
 		   create_okcancel($w, '', '', "edge"),
 		  ),
 	  );
@@ -408,8 +409,11 @@ sub test_mouse {
 	my $w = $font->string_width($t);
 	$darea->window->draw_string($font, $darea->style->fg_gc('normal'), ($width - $w) / 2, $y, $t);
     };
+    my $default_time = 10;
+    my $time = $default_time;
     $darea->signal_connect(button_press_event => sub {
 			       my $b = $_[1]{button};
+			       $time = $default_time;
 			       $b >= 4 ?
 				 $paintWheel->($b == 4 ? -1 : 1) :
 				 $paintButton->($b - 1, 1);
@@ -422,10 +426,13 @@ sub test_mouse {
     $darea->set_events([ 'button_press_mask', 'button_release_mask' ]);
 
     $w->sync; # HACK
-    $draw_rect->(0, 1, [ 0, 0, $width, $height]);
+    $draw_rect->(1, 0, [ 0, 0, $width, $height]);
     $draw_text->(_("Please test the mouse"), 2 * $bh - 20);
-    $draw_text->(_("Move your wheel"), 2 * $bh) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
+    $draw_text->(_("Move your wheel!"), 2 * $bh + 10) if $mouse->{XMOUSETYPE} eq 'IMPS/2';
     $paintButton->($_, 0) foreach 0..2;
+    $w->{cancel}->grab_focus;
+    my $timeout = Gtk->timeout_add(1000, sub { if ($time-- == 0) { undef $w->{retval}; Gtk->main_quit } 1 });
+    my $b = before_leaving { Gtk->timeout_remove($timeout) };
     $w->main;
 }
 
