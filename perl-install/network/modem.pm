@@ -15,11 +15,7 @@ sub ppp_configure {
     $modem or return;
     $in->do_pkgs->install('ppp') if !$::testing;
     $in->do_pkgs->install('kdenetwork-kppp') if !$::testing &&$in->do_pkgs->is_installed('kdebase');
-    ppp_configure_raw($modem);
-}
 
-sub ppp_configure_raw {
-    my ($modem) = @_;
     any::devfssymlinkf($modem, 'modem') if $modem->{device} ne "/dev/modem";
 
     my %toreplace;
