@@ -105,18 +105,18 @@ my @menu_items =
      [ $menus{help}.N("/_Help"), undef, sub { unless (fork()) { exec("drakhelp Drakxtools-Guide.html/harddrake.html") } }, undef, '<CheckItem>' ],
      [ $menus{help}.N("/_Fields description"), undef, sub {
            if ($current_device) {
-               $in->ask_warn(N("Harddrake help"), 
+               create_dialog(N("Harddrake help"), 
                              N("Description of the fields:\n\n")
                              . join("\n\n", map { if_($fields{$_}[0], "$fields{$_}[0]: $fields{$_}[1]") } sort keys %$current_device))
            } else {
-               $in->ask_warn(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
+               create_dialog(N("Select a device !"), N("Once you've selected a device, you'll be able to see the device information in fields displayed on the right frame (\"Information\")"))
            }
        },
        undef, '<CheckItem>'
      ],
      [ $menus{help}.N("/_Report Bug"), undef, sub { unless (fork()) { exec("drakbug --report harddrake2 &") } }, undef, '<CheckItem>' ],
      [ $menus{help}.N("/_About..."), undef, sub {
-           $in->ask_warn(N("About Harddrake"), 
+           create_dialog(N("About Harddrake"), 
                          N("This is HardDrake, a Mandrake hardware configuration tool.\nVersion: %s
 Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::version) .
                          formatAlaTeX($::license));
@@ -124,7 +124,7 @@ Author: Thierry Vignaud <tvignaud\@mandrakesoft.com>\n\n", $harddrake::data::ver
      ]
     );
 
-$in = 'interactive'->vnew('su');
+$in = 'interactive'->vnew('su'); #require_root_capability();
 
 my $wait = $in->wait_message(N("Please wait"), N("Detection in progress"));
 gtkflush();

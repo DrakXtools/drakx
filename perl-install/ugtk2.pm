@@ -352,16 +352,17 @@ sub create_box_with_title {
     }
 }
 
-# drakfloppy / drakfont
+# drakfloppy / drakfont / harddrake2
 sub create_dialog {
-    my ($title, $label, $o_c) = @_;
+    my ($title, $label, $o_options) = @_;
     my $ret = 0;
     my $dialog = Gtk2::Dialog->new;
     $dialog->signal_connect(delete_event => sub { Gtk2->main_quit });
     $dialog->set_title($title);
     $dialog->set_border_width(10);
     $dialog->set_position('center-on-parent');  # center-on-parent doesn't work
-    $dialog->vbox->pack_start(Gtk2::Label->new($label), 1, 1, 0);
+    $dialog->vbox->pack_start(my $text = Gtk2::Label->new($label), 1, 1, 0);
+    $text->set_line_wrap(1);
 
     my $button = Gtk2::Button->new(N("OK"));
     $button->can_default(1);
@@ -369,7 +370,7 @@ sub create_dialog {
     $dialog->action_area->pack_start($button, 1, 1, 0);
     $button->grab_default;
 
-    if ($o_c) {
+    if ($o_options->{cancel}) {
 	my $button2 = Gtk2::Button->new(N("Cancel"));
 	$button2->signal_connect(clicked => sub { $ret = 0; $dialog->destroy; Gtk2->main_quit });
 	$button2->can_default(1);
