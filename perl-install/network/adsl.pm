@@ -6,7 +6,6 @@ use network::tools;
 use network::ethernet;
 use modules;
 use vars qw(@ISA @EXPORT);
-use MDK::Common::Globals "network", qw($in);
 
 @ISA = qw(Exporter);
 @EXPORT = qw(adsl_conf_backend);
@@ -94,7 +93,7 @@ sub adsl_detect() {
 }
 
 sub adsl_conf_backend {
-    my ($adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
+    my ($in, $adsl, $netc, $adsl_device, $adsl_type, $o_netcnx) = @_;
     # FIXME: should not be needed:
     defined $o_netcnx and $netc->{adsltype} = $o_netcnx->{type};
     $netc->{adsltype} ||= "adsl_$adsl_type";

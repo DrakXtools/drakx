@@ -703,7 +703,7 @@ If you don't know, choose 'use pppoe'"),
                         ],
                     },
                     post => sub {
-                        network::adsl::adsl_conf_backend($netcnx, $netc, $ntf_name, $adsl_type); #FIXME
+                        network::adsl::adsl_conf_backend($in, $netcnx, $netc, $ntf_name, $adsl_type); #FIXME
                         $handle_multiple_cnx->();
                     },
                    },
