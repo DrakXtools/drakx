@@ -279,7 +279,7 @@ sub check_for_xserver() {
 	$::xtest = 0;         
 	eval { 
 	    require xf86misc::main; 
-	    $::xtest = xf86misc::main::xtest($ENV{DISPLAY});
+	    $::xtest = xf86misc::main::Xtest($ENV{DISPLAY});
 	} if $ENV{DISPLAY};
     }
     return $::xtest;
