@@ -277,7 +277,7 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
 	push @{$o->{default_packages}}, "cdrecord" if detect_devices::getIDEBurners();
-	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound") =~ /^snd-card-/;
+	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
@@ -617,13 +617,15 @@ sub suggest_mount_points {
 	my $d = $handle->{dir};
 	my ($mnt) = grep { -e "$d/$l{$_}" } keys %l;
 	$mnt ||= (stat("$d/.bashrc"))[4] ? '/root' : '/home/user' . ++$user if -e "$d/.bashrc";
-
+	
 	$part->{mntpoint} = $mnt;
 
 	# try to find other mount points via fstab
 	fs::get_mntpoints_from_fstab(\@parts, $d) if $mnt eq '/';
     }
-    $_->{mntpoint} and fsedit::suggest_part($_, $hds) foreach @parts;
+    $_->{mntpoint} || fsedit::suggest_part($_, $hds) foreach @parts;
+
+    $_->{mntpoint} and log::l("suggest_mount_points: $_->{device} -> $_->{mntpoint}") foreach @parts;
 }
 
 #- mainly for finding the root partitions for upgrade

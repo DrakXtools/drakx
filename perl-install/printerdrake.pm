@@ -17,7 +17,7 @@ sub auto_detect {
     my ($in) = @_;
     {
 	my $w = $in->wait_message(_("Test ports"), _("Detecting devices..."));
-	detect_devices::probeUSB() and eval { modules::load("printer"); sleep(1); };
+	modules::get_alias("usb-interface") and eval { modules::load("printer"); sleep(1); };
 	eval { modules::load_multi("parport_pc", "parport_probe", "lp"); };
     }
     my $b = before_leaving { eval { modules::unload("parport_probe") } };

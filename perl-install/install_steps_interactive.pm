@@ -176,7 +176,7 @@ sub setupSCSI {
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
 	modules::load_ide();
     }
-    install_interactive::setup_thiskind($o, 'scsi|raid', $_[1], $_[2]);
+    install_interactive::setup_thiskind($o, 'scsi|disk', $_[1], $_[2]);
 }
 
 sub ask_mntpoint_s {
@@ -188,19 +188,13 @@ sub ask_mntpoint_s {
 
     if (@fstab == 1) {
 	$fstab[0]{mntpoint} = '/';
-    } elsif ($::beginner) {
-	my $e = $o->ask_from_listf('', 
-				   _("Please choose a partition to use as your root partition."), 
-				   \&partition_table_raw::description,
-				   \@fstab) or return;
-	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
-	$e->{mntpoint} = '/';
     } else {
+	install_any::suggest_mount_points($o->{hds}, $o->{prefix});
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
-				  { map { partition_table_raw::description($_) => 
+				  [ map { partition_table_raw::description($_) => 
 				            { val => \$_->{mntpoint}, list => [ '', fsedit::suggestions_mntpoint([]) ] }
-					} @fstab }) or return;
+					} @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
 }

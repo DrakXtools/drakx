@@ -609,6 +609,7 @@ sub main {
     mkdir $o->{prefix}, 0755;
 
     #- needed very early for install_steps_gtk
+    modules::load_thiskind("usb");
     eval { ($o->{mouse}, $o->{wacom}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     lang::set($o->{lang}) if $o->{lang} ne 'en'; #- mainly for defcfg

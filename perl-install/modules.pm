@@ -272,11 +272,12 @@ arch() !~ /^sparc/ ? (
   "serial" => "serial",
   "qpmouse" => "qpmouse",
   "atixlmouse" => "atixlmouse",
-
-  "usb-uhci", "USB (uhci)",
-  "usb-ohci", "USB (ohci)",
-  "usb-ohci-hcd", "USB (ohci-hcd)",
 ) : (),
+}],
+[ 'usb', {
+  "usb-uhci" => "USB (uhci)",
+  "usb-ohci" => "USB (ohci)",
+  "usb-ohci-hcd" => "USB (ohci-hcd)",
 }],
 [ 'fs', {
   "smbfs" => "Windows SMB",
@@ -381,7 +382,6 @@ sub load {
 	-d "/proc/scsi/usb" or return;
     }
     if ($type) {
-	add_alias('usb-interface', $name) if $type =~ /SERIAL_USB/i;
 	add_alias('scsi_hostadapter', $name), load('sd_mod') if $type =~ /scsi/ || $type eq $type_aliases{scsi};
     }
     $conf{$name}{options} = join " ", @options if @options;
@@ -532,7 +532,8 @@ sub load_thiskind {
 	!($@ && $_->{try});
     } get_that_type($type, $pcic),
       $type =~ /scsi/ && arch() !~ /sparc/ ? 
-	(map { +{ driver => $_, description => $_, try => 1 } } "usb-storage", "imm", "ppa") : ();
+	(map { +{ driver => $_, description => $_, try => 1 } } 
+	 get_alias("usb-interface") ? "usb-storage" : (), "imm", "ppa") : ();
 }
 
 sub get_that_type {

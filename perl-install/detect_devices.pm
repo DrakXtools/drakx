@@ -273,26 +273,6 @@ sub whatPrinterPort() {
     grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2 /dev/usb/lp0);
 }
 
-sub probeUSB {
-    require modules;
-    defined($usb_interface) and return $usb_interface;
-    arch() =~ /sparc/ and return $usb_interface = '';
-    if (($usb_interface) = grep { /usb-/ } map { $_->{driver} } probeall()) {
-	eval { modules::load($usb_interface, "SERIAL_USB") };
-	if ($@) {
-	    $usb_interface = '';
-	} else {
-	    eval {
-		modules::load("usbkbd");
-		modules::load("keybdev");
-	    };
-	}
-    } else {
-	$usb_interface = '';
-    }
-    $usb_interface;
-}
-
 sub probeSerialDevices {
     #- make sure the device are created before probing.
     foreach (0..3) { devices::make("/dev/ttyS$_") }
