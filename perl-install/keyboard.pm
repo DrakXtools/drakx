@@ -155,6 +155,7 @@ arch() =~ /^ppc/ ? (
 ),
 );
 
+
 #-######################################################################################
 #- Functions
 #-######################################################################################
@@ -171,6 +172,19 @@ sub text2keyboard {
     die "unknown keyboard $t";
 }
 
+sub loadkeys_files {
+    my $p = "/usr/lib/kbd/keymaps/i386/*";
+    my $post = ".kmap.gz";
+    my %trans = ("cz-latin2" => "cz-lat2");
+    my @l;
+    foreach (values %keyboards) {
+	local $_ = $trans{$_->[1]} || $_->[1];
+	my ($l) = glob("$p/$_$post");
+	$l or /(..)/ and ($l) = glob("$p/$1$post");
+	push @l, $l if $l;
+	print STDERR "unknown $_\n" if $_[0] && !$l;
+    }
+}
 
 sub lang2keyboard($) {
     local ($_) = @_;

@@ -524,17 +524,16 @@ sub readCompssList {
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	my ($name, @values) = split;
-	my $p = $packages->[0]{$name} or log::l("unknown entry $name (in compssList)"), next;
+	my $p = packageByName($packages, $name) or log::l("unknown entry $name (in compssList)"), next;
 	$p->{values} = \@values;
     }
 
     my %done;
     foreach (split ':', $ENV{RPM_INSTALL_LANG}) {
-	my $p = $packages->[0]{"locales-$_"} || {};
-	foreach ("locales-$_", @{$p->{provides} || []}, @{$by_lang{$_} || []}) {
-	    next if $done{$_}; $done{$_} = 1;
-	    my $p = $packages->[0]{$_} or next;
-	    $p->{values} = [ map { $_ + 90 } @{$p->{values} || [ (0) x @levels ]} ];
+	my $p = packageByName($packages, "locales-$_") or next;
+	foreach ($p, @{$p->{provides} || []}, map { packageByName($packages, $_) } @{$by_lang{$_} || []}) {
+	    next if !$_ || $done{$_}; $done{$_} = 1;
+	    $_->{values} = [ map { $_ + 90 } @{$_->{values} || [ (0) x @levels ]} ];
 	}
     }
     my $l = { map_index { $_ => $::i } @levels };

@@ -333,8 +333,7 @@ a percentage of %d%% will install as many packages as possible.", $percentage, $
 		)
 	 );
     $spin->signal_connect(changed => my $changed = sub { 
-	$val = $spin->get_value_as_int / 100 * $max_size;
-	log::l("val $val ", pkgs::correctSize($val / sqr(1024)));
+	$val = $spin->get_value_as_int / 100 * $max_size_;
 	$mb->set(sprintf("(%dMB)", pkgs::correctSize($val / sqr(1024)))); 
     }); &$changed();
     $spin->signal_connect(activate => sub { $w->{retval} = 1; Gtk->main_quit });

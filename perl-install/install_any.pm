@@ -252,8 +252,13 @@ sub setPackages($) {
 	push @{$o->{default_packages}}, "alsa" if modules::get_alias("sound") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
+
+	#- must be done after selecting base packages (to save memory)
+	pkgs::getProvides($o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{packages});
+	#- must be done after getProvides
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
 
@@ -264,12 +269,7 @@ sub setPackages($) {
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
-	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { $o->{packages}{$_} } @l;
-
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
-
-	#- must be done after selecting base packages (to save memory)
-	pkgs::getProvides($o->{packages});
+	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
     } else {
 	pkgs::unselectAllPackages($o->{packages});
