@@ -343,9 +343,11 @@ sub when_load {
 	add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
     }
-    add_alias('sound-slot-0', $name) if $category =~ /sound/;
     load('snd-pcm-oss') if $name =~ /^snd-/;
+    add_alias('sound-slot-0', $name) if $category =~ /sound/;
+    add_alias('ieee1394-controller', $name) if member($name, 'ohci1394');
     add_probeall('usb-interface', $name) if $name =~ /usb-[uo]hci/ || $name eq 'ehci-hcd';
+
     $conf{$name}{options} = join " ", @options if @options;
 }
 

@@ -129,6 +129,7 @@ sub setupSCSI {
     my ($o) = @_;
     modules::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
     modules::load_ide();
+    modules::load_category('bus/firewire');
     modules::load_category('disk/scsi|hardware_raid');
 }
 
