@@ -811,106 +811,149 @@ sub configureServices {
     install_steps::configureServices($o);
 }
 
-sub summary {
-    my ($o, $first_time) = @_;
-    require pkgs;
 
-    if ($first_time) {
-	#- auto-detection
-	$o->configurePrinter(0);
-	install_any::preConfigureTimezone($o);
-    }
-    my $mouse_name;
-    my $format_mouse = sub { $mouse_name = translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) };
-    &$format_mouse;
+sub summaryBefore {
+    my ($o) = @_;
 
-    my $timezone_manually_set;
-    my $timezone_name = $o->{timezone}{timezone};  #- I want to update it from the country callback
+    #- auto-detection
+    $o->configurePrinter(0);
+    install_any::preConfigureTimezone($o);
+}
 
-    my $country_name;
-    my $format_country = sub { $country_name = lang::c2name($o->{locale}{country}) };
-    &$format_country;
-    my $change_country = sub {
-	any::selectCountry($o, $o->{locale}) or return;
-	lang::write($o->{prefix}, $o->{locale});
-	&$format_country;
-	if (!$timezone_manually_set) {
-	    delete $o->{timezone};
-	    install_any::preConfigureTimezone($o);  #- now we can precise the timezone thanks to the country
-	    $timezone_name = $o->{timezone}{timezone};
-	}
-    };
+sub summary_prompt {
+    my ($o, $l) = @_;
 
-    #- format printer description in a better way
-    my $format_printers = sub {
-	my $printer = $o->{printer};
-	if (is_empty_hash_ref($printer->{configured})) {
-	    pkgs::packageByName($o->{packages}, 'cups')->flag_installed and return N("Remote CUPS server");
-	    return N("No printer");
-	}
-	foreach ($printer->{currentqueue},
-		 map { $_->{queuedata} } ($printer->{configured}{$printer->{DEFAULT}}, values %{$printer->{configured}})) {
-	    $_ && ($_->{make} || $_->{model}) and return "$_->{make} $_->{model}";
-	}
-	return N("Remote CUPS server"); #- fall back in case of something wrong.
-    };
-
-    my @sound_cards = detect_devices::getSoundDevices();
-
-    #- if no sound card are detected AND the user selected things needing a sound card,
-    #- propose a special case for ISA cards
-    my $isa_sound_card = 
-      !@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO}) &&
-	sub {
-	    if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
-		$o->do_pkgs->install('sndconfig');
-		$o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
-	    } else {
-		$o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
-	    }
-	};
-
-  summary:
+    ($_->{format}, $_->{val}) = ($_->{val}, '') foreach @$l;
+    
     $o->ask_from_({
 		   messages => N("Summary"),
 		   cancel   => '',
-		  }, [
-{ label => N("Mouse"), val => \$mouse_name, clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}); &$format_mouse } },
-{ label => N("Keyboard"), val => \$o->{keyboard}, clicked => sub { $o->selectKeyboard(1) }, format => sub { translate(keyboard::keyboard2text($_[0])) } },
-{ label => N("Country"), val => \$country_name, clicked => sub { $change_country->() } },
-{ label => N("Timezone"), val => \$timezone_name, clicked => sub { my $ok = $o->configureTimezone(1); $timezone_manually_set ||= $ok; $timezone_name = $o->{timezone}{timezone} } },
-{ label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
-{ label => N("Bootloader"), val => \$o->{bootloader}, clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) }, format => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" } },
-{ label => N("Graphical interface"), val => \$o->{raw_X}, clicked => sub { configureX($o, 'expert') }, format => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") } },
-{ label => N("Network"), val => \$o->{netcnx}{type}, format => sub { $_[0] || N("not configured") }, clicked => sub { 
-      require network::netconnect;
-      network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
-  } },
-    (map { 
-        my $device = $_;
-	   { label => N("Sound card"), val => $_->{description}, clicked => sub {
-		  require harddrake::sound; 
-		  harddrake::sound::config($o, $device)
-		  }
-	   }
-    } @sound_cards),
-    if_($isa_sound_card, { label => N("Sound card"), clicked => $isa_sound_card }), 
-    (map {
-	my $driver = $_->{driver};
-	{ label => N("TV card"), val => $_->{description}, clicked => sub { 
-	      require harddrake::v4l; 
-	      harddrake::v4l::config($o, $driver);
-	  }
-        }
-    } grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()),
-]);
+		  }, $l);
+}
 
-    if (!$o->{raw_X} && pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed) {
-	$o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"))
-	  or goto summary;
+sub summary {
+    my ($o) = @_;
+
+    my @l;
+    
+    push @l, { 
+	      label => N("Keyboard"), 
+	      val => sub { $o->{keyboard} && translate(keyboard::keyboard2text($o->{keyboard})) },
+	      clicked => sub { $o->selectKeyboard(1) },
+	     };
+    push @l, { 
+	      label => N("Mouse"),
+	      val => sub { translate($o->{mouse}{type}) . ' ' . translate($o->{mouse}{name}) },
+	      clicked => sub { $o->selectMouse(1); mouse::write($o, $o->{mouse}) },
+	     };
+
+    my $timezone_manually_set;
+    push @l, { 
+	      label => N("Timezone"),
+	      val => sub { $o->{timezone}{timezone} },
+	      clicked => sub { $timezone_manually_set ||= $o->configureTimezone(1) },
+	     };
+    
+    push @l, { 
+	      label => N("Country"),
+	      val => sub { lang::c2name($o->{locale}{country}) },
+	      clicked => sub {
+		  any::selectCountry($o, $o->{locale}) or return;
+		  lang::write($o->{prefix}, $o->{locale});
+		  if (!$timezone_manually_set) {
+		      delete $o->{timezone};
+		      install_any::preConfigureTimezone($o); #- now we can precise the timezone thanks to the country
+		  }
+	      },
+	     };
+
+    push @l, {
+	      label => N("Printer"),
+	      val => sub {
+		  if (is_empty_hash_ref($o->{printer}{configured})) {
+		      require pkgs;
+		      my $p = pkgs::packageByName($o->{packages}, 'cups');
+		      $p && $p->flag_installed ? N("Remote CUPS server") : N("No printer");
+		  } elsif (my $p = find { $_ && ($_->{make} || $_->{model}) }
+			     $o->{printer}{currentqueue},
+			     map { $_->{queuedata} } ($o->{printer}{configured}{$o->{printer}{DEFAULT}}, values %{$o->{printer}{configured}})) {
+		      "$p->{make} $p->{model}";
+		  } else {
+		      N("Remote CUPS server"); #- fall back in case of something wrong.
+		  }
+	      },
+	      clicked => sub { $o->configurePrinter(1) },
+	     };
+  
+    my @sound_cards = detect_devices::getSoundDevices();
+
+    foreach my $device (@sound_cards) {
+	push @l, { 
+		  label => N("Sound card"),
+		  val => sub { $device->{description} },
+		  clicked => sub {
+		      require harddrake::sound; 
+		      harddrake::sound::config($o, $device)
+		    },
+		 };
     }
 
-    install_steps::configureTimezone($o);  #- do not forget it.
+    #- if no sound card are detected AND the user selected things needing a sound card,
+    #- propose a special case for ISA cards
+    push @l, {
+	      label => N("Sound card"),
+	      clicked => sub {
+		  if ($o->ask_yesorno('', N("Do you have an ISA sound card?"))) {
+		      $o->do_pkgs->install('sndconfig');
+		      $o->ask_warn('', N("Run \"sndconfig\" after installation to configure your sound card"));
+		  } else {
+		      $o->ask_warn('', N("No sound card detected. Try \"harddrake\" after installation"));
+		  }
+	      },
+	     } if !@sound_cards && ($o->{compssUsersChoice}{GAMES} || $o->{compssUsersChoice}{AUDIO});
+
+    push @l, { 
+	      label => N("Bootloader"),
+	      val => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" },
+	      clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) },
+	     };
+
+    push @l, {
+	      label => N("Graphical interface"),
+	      val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") },
+	      clicked => sub { configureX($o, 'expert') }, 
+	     };
+
+    push @l, {
+	      label => N("Network"),
+	      val => sub { $o->{netcnx}{type} || N("not configured") },
+	      clicked => sub { 
+		  require network::netconnect;
+		  network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
+	      },
+	     };
+
+    foreach (grep { $_->{driver} =~ /(bttv|saa7134)/ } detect_devices::probeall()) {
+	my $driver = $_->{driver};
+	push @l, {
+		  label => N("TV card"),
+		  val => sub { $_->{description} }, 
+		  clicked => sub { 
+		      require harddrake::v4l; 
+		      harddrake::v4l::config($o, $driver);
+		  }
+		 };
+    }
+
+    while (1) {
+	$o->summary_prompt(\@l);
+
+	last if 
+	  $o->{raw_X} || !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
+	  $o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"));
+    }
+
+    install_steps::configureTimezone($o) if !$timezone_manually_set;  #- do not forget it.
 }
 
 #------------------------------------------------------------------------------

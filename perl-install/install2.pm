@@ -235,6 +235,7 @@ sub miscellaneous {
 #------------------------------------------------------------------------------
 sub summary {
     my ($_clicked, $ent_number, $auto) = @_;
+    installStepsCall($o, $auto, 'summaryBefore');
     installStepsCall($o, $auto, 'summary', $ent_number == 1);
 }
 #------------------------------------------------------------------------------

@@ -675,6 +675,8 @@ sub installUpdates {
     $o->install_urpmi;
 }
 
+sub summaryBefore {}
+
 sub summary {
     my ($o) = @_;
     configureTimezone($o);
