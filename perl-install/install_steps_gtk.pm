@@ -653,10 +653,10 @@ sub deselectFoundMedia {
 	    $cdlist{$1} ||= [];
 	    push @{$cdlist{$1}}, $i;
 	}
-	$mediumsize->{$_->[0]} == 0 and $totalsize = -1; #- don't check size, total medium size unknown
 	$totalsize >= 0 and $totalsize += $mediumsize->{$_->[0]};
 	++$i;
     }
+    $totalsize or $totalsize = -1; #- don't check size, total medium size unknown
     my @selection = (1) x @hdlist2;
     my $copy_rpms_on_disk = 0;
     my $ask_copy_rpms_on_disk = $o->{method} !~ /iso/i;
@@ -664,7 +664,6 @@ sub deselectFoundMedia {
     if ($ask_copy_rpms_on_disk && $totalsize >= 0) {
 	my (undef, $availvar) = install_any::getAvailableSpace_mounted('/var');
 	$availvar /= 1024; #- Mo
-	log::l("rpms totalsize=$totalsize");
 	$ask_copy_rpms_on_disk = $totalsize > $availvar * 0.6;
     }
     if ($ask_copy_rpms_on_disk) {
@@ -700,6 +699,7 @@ It will then continue from the hard drive and the packages will remain available
 	push @l2, $hdlists->[$_] foreach @{$corresp[$i]};
     }
     log::l("keeping media " . join ',', map { $_->[1] } @l2);
+    $o->{mediumsize} = $totalsize;
     (\@l2, $copy_rpms_on_disk);
 }
 

@@ -17,6 +17,7 @@ use MDK::Common::System;
 use common;
 use run_program;
 use fs::type;
+use fs::format;
 use partition_table;
 use devices;
 use fsedit;
@@ -638,6 +639,29 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    return 1;
 	}
     };
+    my $total = $o->{mediumsize};
+    log::l("totalsize=$total");
+    my $pid = fork();
+    if (!$pid && defined $pid) { #- child
+	my ($wait_w, $wait_message) = fs::format::wait_message($o); #- nb, this is only called when interactive
+	$wait_message->(N("Copying in progress"));
+	my $du = 0;
+	#- from commands.pm. TODO: factorize, possibly in MDK::Common.
+	my $f; $f = sub {
+	    my ($e) = @_;
+	    my $s = (lstat($e))[12];
+	    $s += sum(map { &$f($_) } glob_("$e/*")) if !-l _ && -d _;
+	    $s;
+	};
+	while (1) {
+	    my $s = $f->("$o->{prefix}/var/ftp/pub/Mandrakelinux/media") / 1024;
+	    $wait_message->('', $s, $total);
+	    sleep 1;
+	    last if $s > $total - 100;
+	}
+	undef $wait_w;
+	c::_exit(0);
+    }
     foreach my $k (pkgs::allMediums($o->{packages})) {
 	my $m = $o->{packages}{mediums}{$k};
 	if ($k != $current_medium) {
@@ -649,14 +673,15 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    $current_medium = $k;
 	}
 	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
-	my $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
-	eval { cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media") };
-	undef $wait_w;
+	eval {
+	    cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	};
 	log::l($@) if $@;
 	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
 	$m->{method} = 'disk';
 	$m->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
     }
+    kill 15, $pid;
     #- now the install will continue as 'disk'
     $o->{method} = 'disk';
     #- shoud be enough to fool errorOpeningFile
