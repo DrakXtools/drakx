@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.1mdk
+Release: 0.2mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -288,6 +288,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Nov 18 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.2mdk
+- more printerdrake redesign
+- more perl_checker fixes
+- standalone : provide a common cli options/help manager
+- logdrake : use my_gtk to transparently handle embedding and ease future gtk2 port
+- kill dead code
+
 * Fri Nov 15 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.1mdk
 - bump version
 - add missing printer/ directory
