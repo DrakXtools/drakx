@@ -276,6 +276,8 @@ sub afterInstallPackages($) {
     install_any::kdelang_postinstall($o->{prefix});
     log::l("updating kde icons according to available devices");
     install_any::kdeicons_postinstall($o->{prefix});
+
+    run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
 }
 
 #------------------------------------------------------------------------------
