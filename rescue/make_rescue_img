@@ -60,7 +60,7 @@ foreach (cat_("dirs")) {
 }
 _ "cp -a tree/* $tmp";
 _ "find $tmp -name 'CVS*' | xargs rm -rf";
-_ "perl devices.pl $tmp";
+_ "perl devices.pl $tmp/dev";
 
 install_raw(keyboard::loadkeys_files());
 foreach (keyboard::loadkeys_files()) {
