@@ -213,6 +213,10 @@ sub sethostname {
     my $text;
     syscall_("sethostname", $netc->{HOSTNAME}, length $netc->{HOSTNAME}) ? ($text="set sethostname to $netc->{HOSTNAME}") : ($text="sethostname failed: $!");
     log::explanations($text);
+
+    if (!$::isInstall) {
+      run_program::run("/usr/bin/run-parts", "--arg", $netc->{HOSTNAME}, "/etc/sysconfig/network-scripts/hostname.d");
+    }
 }
 
 sub resolv($) {
