@@ -791,7 +791,7 @@ sub miscellaneousBefore {
     $ENV{SECURE_LEVEL} = $o->{security};
     add2hash_ $o, { useSupermount => $o->{security} < 4 && arch() !~ /sparc/ && $o->{installClass} !~ /corporate|server/ };
 
-    cat_("/proc/cmdline") =~ /.mem=(\S+)/; #- if /^mem/, it means that's the value grub gave
+    cat_("/proc/cmdline") =~ /mem=(\S+)/;
     add2hash_($o->{miscellaneous} ||= {}, { numlock => !$o->{pcmcia}, $1 ? (memsize => $1) : () });
 }
 sub miscellaneous {
