@@ -392,7 +392,7 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
 
 sub create_pix_text {
-    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, [background (color or gdkpix), backsize x y], centered
+    #ref widget, txt, color_txt, [font], [width], [height], flag1, flag2, [background, backsize x y], centeredx, centeredy, bold
     my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back, $centeredx, $centeredy, $bold) = @_;
     my $color_background;
     my $backpix;
@@ -498,65 +498,86 @@ sub fill_tiled {
     }
 }
 
+my $j = 0;
 sub gtkicons_labels_widget {
     my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
 
     my @tab;
     my $i = 0;
+    my $cursor_hand = new Gtk::Gdk::Cursor 60;
+    my $cursor_normal = new Gtk::Gdk::Cursor 68;
     foreach (@$args) {
 	my $label = $_->[0];
 	my $exec = $_->[2];
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
-	my ($icon, undef) = gtkcreate_png($_->[1]);
-	$darea->signal_connect( size_allocate => sub {
-				    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
-				    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
-				});
+        my ($icon, undef) = gtkcreate_png($_->[1]);
+# 	$darea->signal_connect( size_allocate => sub {
+#				    print "SIZE_ALLOCATE\n";
+#				    undef $dbl_area;
+#  				    my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+#  				    ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
+# 				});
+	$darea->{state} = 0;
 	$darea->signal_connect(expose_event => sub {
-		   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
-		   if (!defined($dbl_area)) {
-		       my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
-								1, 0, $background, $x_back2, $y_back2, 1);
-		       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
-		       $darea->set_usize($dx, $dy);
-		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
-		       fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
-		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-					      $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
-		       $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
-					      $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
-		   }
-		   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-					       $dbl_area, 0, 0, 0, 0, $dx, $dy);
-		   ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
-	       });
+                  my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
+                  if (!defined($dbl_area) || $darea->{state} != $dbl_area->{state}) {
+		      my $state = $darea->{state};
+		      print "STATE : $state\n";
+                      my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
+                                                               1, 0, $background, $x_back2, $y_back2, 1, 0, $state);
+                      ($dx, $dy) = (max($width, $x_round), $y_round + $height);
+                      $darea->set_usize($dx, $dy);
+                      $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
+		      $dbl_area->{state} = $darea->{state};
+                      fill_tiled($darea, $dbl_area, $background, $x_back2, $y_back2, $dx, $dy);
+                      $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
+                                             $icon, 0, 0, ($dx - $icon_width)/2, 0, $icon_width, $icon_height);
+                      $dbl_area->draw_pixmap($darea->style->bg_gc('normal'),
+                                             $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
+                  }
+                  $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
+                                              $dbl_area, 0, 0, 0, 0, $dx, $dy);
+                  ($darea->{dx}, $darea->{dy}) = ($dx, $dy);
+              });
 	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
+	$darea->signal_connect( enter_notify_event => sub {
+				    if ($darea->{state} == 0) {
+					$darea->{state} = 1;
+					$darea->draw(undef);
+				    }
+				});
+	$darea->signal_connect( leave_notify_event => sub {
+				    if ($darea->{state} == 1) {
+					$darea->{state} = 0;
+					print "plop . " .  $darea->{state} . " | " . $dbl_area->{state} . "\n";
+					$darea->draw(undef);
+				    }
+				});
 	$darea->signal_connect( button_release_event => sub { system("$exec&") });
+	$darea->signal_connect( realize => sub { $darea->window->set_cursor($cursor_hand) });
 	$tab[$i] = $darea;
 	$i++;
     }
     my $fixed = new Gtk::Fixed;
-    $i = 0;
-    foreach (@tab) {
-	$fixed->put($_, 75, 65);
-	$i++;
-    }
     my $timeout;
+    foreach (@tab) { $fixed->put($_, 75, 65) }
     $fixed->signal_connect(expose_event => sub {
-			       my ($fx, $fy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
-			       defined($timeout) or $timeout = Gtk->timeout_add(100, sub {
-								 $fixed->move(@$_) foreach compute_icons($fx, $fy, 40, 30, 5, @tab);
-								 Gtk->timeout_remove($timeout);
-								 undef $timeout;
-								 0;
-							     });
+			       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
 			   });
-
-    $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
-    $i = 0;
+    $fixed->{nb} = $j;
+    $j++;
+    $fixed->signal_connect(realize => sub {
+		       $fixed->window->set_back_pixmap($background, 0);
+		       $fixed->move(@$_) foreach compute_icons($fixed->allocation->[2], $fixed->allocation->[3], 40, 30, 5, @tab);
+		   });
     $fixed->show_all();
-    $fixed;
+    my $w_ret = createScrolledWindow($fixed, ['automatic', 'always']);
+    my $timeout2 = Gtk->timeout_add(100, sub {
+				     $fixed->set_usize($w_ret->allocation->[2] - 22, 0);#$w->allocation->[3]);
+				     0;
+				 });
+    $w_ret;
 }
 
 sub compute_icons {
@@ -581,21 +602,21 @@ sub compute_icons {
     if ($line_size > $fx) {
 	$index = 0; $nb--; goto bcl_init;
     }
-    $nb and $line_up = ($fx-$line_size)/$nb;
+    $nb and $line_up = ($fx-$line_size)/($nb+2);
     $index += $nb+1;
     $index <= $#tab and goto bcl;
     my @ret;
     my $n = 0;
     my $y = $decy;
-    my $x = $decx/2;
+    my $x = $decx/2 + $line_up;
     foreach (0..$nb_sav) {
 	$ret[$_] = [$tab[$_], $x, $y];
 	$x += $dx2[$n] + $interstice + $line_up;
 	$n++;
 	if ($n > $nb) {
 	    $n = 0;
-	    $x = $decx/2;
-	    $y += $dy[$_+1];
+	    $x = $decx/2 + $line_up;
+	    $y += int($dy[$_+1]/5)*5;
 	}
     }
     @ret;
