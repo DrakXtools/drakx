@@ -41,7 +41,8 @@ use common;
 @allservers = keys(%serversdriver);
 
 @allbutfbdrivers = ((arch() =~ /^sparc/ ? qw(sunbw2 suncg14 suncg3 suncg6 sunffb sunleo suntcx) :
-		    qw(apm ark chips cirrus cyrix glide i128 i740 i810 imstt mga neomagic newport nv rendition
+		    qw(apm ark chips cirrus cyrix glide i128 i740 i810 imstt 
+                       mga neomagic newport nv rendition r128 radeon
                        s3 s3virge savage siliconmotion sis tdfx tga trident tseng vmware)), qw(ati glint vga));
 @alldrivers = (@allbutfbdrivers, 'fbdev', 'vesa');
 
@@ -101,7 +102,7 @@ sub bios_vga_modes {
    65536 => __("64 MB or more"),
 );
 
-$good_default_monitor = arch() !~ /ppc/ ? 'Generic|1600x1200 @ 70 Hz' :
+$good_default_monitor = arch() !~ /ppc/ ? 'Generic|1024x768 @ 70 Hz' :
   detect_devices::get_mac_model =~ /^iBook/ ? 'Apple|iBook 800x600' : 'Apple|iMac/PowerBook 1024x768';
 $low_default_monitor = 'Generic|800x600 @ 56 Hz';
 
