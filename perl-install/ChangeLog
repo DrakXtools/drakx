@@ -1,3 +1,249 @@
+2003/02/04  François Pons  <fpons@mandrakesoft.com>
+
+	* network/adsl.pm: fixed small typo.
+	add support for adiusbadsl 1.0.2 (using adictrl -i to find interface and
+	using
+	pppoa).
+
+2003/02/04  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/ar.po, share/po/tg.po, share/po/bs.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/fr.po, share/po/sq.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po, share/po/lv.po, share/po/hu.po: updated pot file
+
+2003/02/04  Pixel  <pixel@mandrakesoft.com>
+
+	* ugtk2.pm: don't ->set_modal during install
+
+	* devices.pm: add "vcsa" (for brltty)
+
+	* Makefile: add brltty help file
+	wildcard * in share/list allowed to match multiple files, but not
+	multiple directories
+
+	* install2.pm: fix typo
+	add brltty help file
+	brltty support
+
+	* tools/make_mdkinst_stage2, install_steps.pm, install_any.pm: brltty
+	support
+
+	* share/list: add brltty help file
+	brltty support
+
+	* share/rpmsrate: add brltty
+	move packages from 3 to 4 (fix bug #1265)
+
+2003/02/04  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: Use system configs when wrapped in mcc.
+
+2003/02/04  Till Kamppeter  <till@mandrakesoft.com>
+
+	* handle_configs.pm: 
+	  - "Out-sourced" functions for config file handling into
+	handle_configs.pm,
+	it is used by both printerdrake and scannerdrake.
+	  - Improvements and fixes on CUPS daemon configuration by printerdrake.
+
+	* printer/printerdrake.pm: Fixed auto-detection of a configured (but not
+	started) network.
+	  - "Out-sourced" functions for config file handling into
+	handle_configs.pm,
+	it is used by both printerdrake and scannerdrake.
+	  - Improvements and fixes on CUPS daemon configuration by printerdrake.
+
+	* printer/main.pm: Removed debug helper line.
+	  - "Out-sourced" functions for config file handling into
+	handle_configs.pm,
+	it is used by both printerdrake and scannerdrake.
+	  - Improvements and fixes on CUPS daemon configuration by printerdrake.
+
+2003/02/04  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/draksec: 
+	  - fix get_check_default() and get_function_default() description
+	  - fix "check states were not saved if their value did not change (thus
+	reverting it to default on disk)"
+	  - fix emebedding (no transcience when embedded)
+	  - fix "value get chop()-ed until it disapear and is reset to default"
+	  - log which security level is set and not only the switch
+	killing latest remanent parts of christian "yeah baby, i'm piggy"
+	work:
+	
+	  - functions and checks listing :
+	  o rename get_functions() as list_functions() and
+	    get_default_checks() as list_checks();   this is both
+	    more homogenous and enable one to separate them from the
+	    get_(check|function)_(value|default) function group
+	  o regroup them
+	  o over simplify list_functions(): leave functions listing to msec
+	    (aka /usr/share/msec/level.<LEVEL>, assuming share/msec.py is
+	    always up to date, just don't care reparsing python code (this is
+	    plain stupid);  if we cannot rely on msec, on who could we :-) ?
+	  o this allow to simplify msec gui so that we do not exclude stuff
+	    already excluded
+	  - remove config_check(), config_funtion(): replace them by:
+	  o set_check() and set_function() to store new values in data
+	    structure
+	  o apply_checks() and apply_functions() to save these new values,
+	    thus writing config files once and not twice the functions &
+	    checks count
+	now, we always have a help entry and a default value but when fredl
+	rename a
+	check and forgot to remove it from /var/lib/msec/security.conf like
+	CHECK_SUID_GROUP => CHECK_SGID, but hopefully, he'll fix msec
+
+	* share/theme-editor.pl: update theme editor to current libDrakX api
+
+	* drakxtools.spec: 9.1-0.22mdk
+
+	* security/msec.pm: perl_checker fix
+	  - fix get_check_default() and get_function_default() description
+	  - fix "check states were not saved if their value did not change (thus
+	reverting it to default on disk)"
+	  - fix emebedding (no transcience when embedded)
+	  - fix "value get chop()-ed until it disapear and is reset to default"
+	  - log which security level is set and not only the switch
+	killing latest remanent parts of christian "yeah baby, i'm piggy"
+	work:
+	
+	  - functions and checks listing :
+	  o rename get_functions() as list_functions() and
+	    get_default_checks() as list_checks();   this is both
+	    more homogenous and enable one to separate them from the
+	    get_(check|function)_(value|default) function group
+	  o regroup them
+	  o over simplify list_functions(): leave functions listing to msec
+	    (aka /usr/share/msec/level.<LEVEL>, assuming share/msec.py is
+	    always up to date, just don't care reparsing python code (this is
+	    plain stupid);  if we cannot rely on msec, on who could we :-) ?
+	  o this allow to simplify msec gui so that we do not exclude stuff
+	    already excluded
+	  - remove config_check(), config_funtion(): replace them by:
+	  o set_check() and set_function() to store new values in data
+	    structure
+	  o apply_checks() and apply_functions() to save these new values,
+	    thus writing config files once and not twice the functions &
+	    checks count
+
+	* standalone/harddrake2: adapt to new mandrake_doc-drakxtools-* packages
+
+2003/02/03  alus
+
+	* share/po/pl.po: Not too many entries in beta release?
+
+2003/02/03  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/network.pm: dhcp/zeroconf stuff
+
+2003/02/03  florin
+
+	* network/netconnect.pm: fix some drakgw behaviour
+
+2003/02/03  François Pons  <fpons@mandrakesoft.com>
+
+	* bootloader.pm: integrated chmouel fixes.
+
+2003/02/03  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/he.po, share/po/sp.po, share/po/cy.po, share/po/ca.po,
+	share/po/da.po, share/po/tg.po, share/po/bs.po, share/po/ro.po,
+	share/po/wa.po, share/po/is.po, share/po/af.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/ar.po: updated Arabic file
+	updated pot file
+
+2003/02/03  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pl, install_any.pm: do not eject cdrom when already removed
+	at the end of install (bug #1235)
+
+	* modules/parameters.pm: use run_program::get_stdout
+
+	* standalone/icons/smbnfs_mounted.png,
+	standalone/icons/smbnfs_default.png,
+	standalone/icons/smbnfs_has_mntpoint.png: have the background fully
+	transparent
+
+	* pkgs.pm: prefer mdkkdm over kdebase-kdm
+
+	* diskdrake/interactive.pm: make perl_checker happy
+
+	* diskdrake/smbnfs_gtk.pm: cleanup
+	port to Gtk2
+
+	* install_steps_gtk.pm: fix test mode install when Xnest is not there
+
+	* standalone/diskdrake: don't "use diskdrake::interactive", only require
+	it when needed
+
+	* Xconfig/test.pm: ensure the X test strings are translated
+
+	* interactive/newt.pm: fix typo (for treelist)
+
+	* standalone/keyboarddrake: make perl_checker happy
+	translate keyboard names
+
+	* install_steps.pm: remove yelp-pregenerate
+
+2003/02/03  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* standalone/draksec: 
+	  - msec was altered to produce help suitable for formatAlaTeX()
+	  - use formatAlaTeX() to have nicer tooltips
+
+	* docs/porting-ugtk: new obsolete func (thanks drakcronat)
+
+	* share/po/fr.po: typo fix
+
+	* security/msec.pm: 
+	  - consolidate file names
+	  - remove unused variables
+	  - rename get_(default|value as load_(default|value)s and alter them so
+	that config file are read only one time instead of one per option;
+	  data is stocked in package variable
+	  - thus get_default_checks() is quite a lot faster
+	  - alter get_(check|function)_(value|default) to use new data structure
+	  - fix check default reading
+	  - group default values reading and current values reading
+	what's left: do the same thing for writing tomorow
+
+	* security/help.pm: 
+	  - msec was altered to produce help suitable for formatAlaTeX()
+	  - use formatAlaTeX() to have nicer tooltips
+	auto-generated from msec/share/draksec_help.py libmsec and moved from
+	msec to here so that draksec help'll get translated
+	all changes must be done in soft/msec/share/libmsec.py !!!
+
+	* drakxtools.spec: 9.1-0.21mdk (to be continued by pouly)
+
+	* share/po/Makefile: remove drakpxe exception since fpons has at lease
+	fixed "fpons sucks"
+	in drakpxe
+
 2003/02/03  Damien Chaumette  <dchaumette@mandrakesoft.com>
 
 	* network/network.pm, network/ethernet.pm: 
@@ -9584,7 +9830,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.776 2003/01/31 16:30:43 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.777 2003/02/03 11:56:26 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
