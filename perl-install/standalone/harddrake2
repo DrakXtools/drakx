@@ -95,7 +95,7 @@ my %menu_options = (
 my @menu_items = 
     (
      [ N("/_File"), undef, undef, undef, '<Branch>' ],
-     [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<CheckItem>' ],
+     [ N("/_File").N("/_Quit"), N("<control>Q"), \&quit_global, undef, '<StockItem>', 'gtk-quit' ],
      [ join('', @{$menu_options{PRINTERS_DETECTION}}), undef, 
        sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->active }, undef, '<CheckItem>' ],
      [ join('', @{$menu_options{MODEMS_DETECTION}}), undef,
@@ -179,8 +179,8 @@ $w->{window}->add(gtkpack_(0, Gtk2::VBox->new(0, 0),
                            0, $statusbar = Gtk2::Statusbar->new,
                            if_($::isEmbedded, 0, gtkpack(create_hbox(),
                                                          gtksignal_connect(Gtk2::Button->new_from_stock('gtk-preferences'), 'event' => popup_menu($opt_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Help")), 'event' => popup_menu($help_menu), $menubar),
-                                                         gtksignal_connect(Gtk2::Button->new(N("Quit")),
+                                                         gtksignal_connect(Gtk2::Button->new('gtk-help'), 'event' => popup_menu($help_menu), $menubar),
+                                                         gtksignal_connect(Gtk2::Button->new_from_stock('gtk-Quit'),
                                                                            'clicked' => \&quit_global),
                                                          ),
                                )
