@@ -13,6 +13,16 @@ use Gtk2::SimpleList;
 
 use ugtk2 qw(:create :helpers :wrappers);
 
+my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
+                                      N("Date") => 'text',
+                                      N("Attacker") => 'text',
+                                      N("Attack type") => 'text',
+                                      N("Service") => 'text',
+                                      N("Network interface") => 'text',
+                                      N("Protocol") => 'text',
+                                  );
+$blacklist->get_selection->set_mode ('multiple');
+
 my $activefw = activefw->new(sub {
     my ($con, $msg) = @_;
     handle_blacklist($msg->get_args_list) if
@@ -24,17 +34,13 @@ my $activefw = activefw->new(sub {
       $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
       $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
       $msg->get_member eq "Clear";
-});
 
-my $blacklist = Gtk2::SimpleList->new(addr => 'hidden',
-                                      N("Date") => 'text',
-                                      N("Attacker") => 'text',
-                                      N("Attack type") => 'text',
-                                      N("Service") => 'text',
-                                      N("Network interface") => 'text',
-                                      N("Protocol") => 'text',
-                                  );
-$blacklist->get_selection->set_mode ('multiple');
+    handle_init() if
+      $msg->get_interface eq "com.mandrakesoft.activefirewall" &&
+      $msg->get_path eq "/com/mandrakesoft/activefirewall" &&
+      $msg->get_member eq "Init";
+});
+init_blacklist();
 
 my $w = ugtk2->new(N("Active Firewall : Blacklist"));
 gtkpack($w->{window},
@@ -49,12 +55,15 @@ gtkpack($w->{window},
                    ])
             ]),
         ]));
-init_blacklist();
 $w->show;
 Gtk2->main;
 
 ugtk2::exit(0);
 
+sub handle_init {
+    $activefw->find_daemon;
+    init_blacklist();
+}
 
 sub init_blacklist {
     my @packets = $activefw->get_blacklist;
