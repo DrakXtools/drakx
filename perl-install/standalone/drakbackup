@@ -2116,7 +2116,7 @@ sub advanced_when() {
 	#- drop down list of possible media - default to config value
     my $entry_media_type = Gtk2::ComboBox->new_text;
     $entry_media_type->set_popdown_strings(sort(@net_methods, @media_types));
-	$entry_media_type->entry->set_text($conf{DAEMON_MEDIA});
+	$entry_media_type->entry->set_text($conf{DAEMON_MEDIA}) if $conf{DAEMON_MEDIA};
 	
     gtkpack($advanced_box,
 		$box_when = gtkpack_(new Gtk2::VBox(0, 10),
