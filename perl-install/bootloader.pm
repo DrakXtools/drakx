@@ -1171,7 +1171,7 @@ sub write_grub {
 	}
 	my $f = "$::prefix/boot/grub/menu.lst";
 	log::l("writing grub config to $f");
-	output("/tmp$f", map { "$_\n" } @conf);
+	output($f, map { "$_\n" } @conf);
     }
     my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
     my ($stage1, $stage2, $menu_lst) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
