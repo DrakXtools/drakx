@@ -762,9 +762,6 @@ sub l2pango_font {
 sub set {
     my ($lang, $b_translate_for_console) = @_;
 
-    #- disable Arabic in install as no (free) fonts are available.
-    $lang eq 'ar' and $lang='en_US';
-
     exists $langs{$lang} or log::l("lang::set: trying to set to $lang but I don't know it!"), return;
 
     my $dir = "$ENV{SHARE_PATH}/locale";
