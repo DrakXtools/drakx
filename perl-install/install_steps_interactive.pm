@@ -838,9 +838,13 @@ You can add some more or change the existing ones."),
 	if ($c eq "Add") {
 	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
-
-	    $e = { type => 'image' };
-	    $prefix = "linux";
+	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"), [ __("Linux"), __("Other OS (SunOS...)") ]) eq "Linux") {
+		$e = { type => 'image' };
+		$prefix = "linux";
+	    } else {
+		$e = { type => 'other' };
+		$prefix = "sunos";
+	    }
 
 	    $e->{label} = $prefix;
 	    for (my $nb = 0; member($e->{label}, @labels); $nb++) { $e->{label} = "$prefix-$nb" }
