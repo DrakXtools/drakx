@@ -270,8 +270,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Tue Sep  3 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-31mdk
-- obsoletes/provides drakfloppy
+* Wed Sep  4 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-31mdk
+- (daouda) obsoletes/provides drakfloppy
+- snapshot for gtktext_insert with color/font capabilities (rpmdrake)
 
 * Tue Sep  3 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-30mdk
 - ugtk:
