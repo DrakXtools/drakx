@@ -859,7 +859,7 @@ sub setupBootloaderBefore {
     if (my ($acpi) = cat_("/proc/cmdline") =~ /\bacpi=(\w+)/) {
 	if ($acpi eq 'ht') {
 	    #- the user is using the default, which may not be the best
-	    my $year = detect_devices::dmidecode()->{BIOS_Year};
+	    my $year = detect_devices::computer_info()->{BIOS_Year};
 	    if (detect_devices::isLaptop() && $year >= 2002) {
 		log::l("forcing ACPI on a laptop with recent bios ($year)");
 		$acpi = 'on';
