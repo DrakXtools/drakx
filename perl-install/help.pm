@@ -878,10 +878,10 @@ Guide'' for more information on how to setup a new printer. The interface
 presented there is similar to the one used at installation time;
 
  * \"Sound card\": if a sound card is detected on your system, it will be
-displayed here. No modification possible at installation time;
+displayed here.
 
  * \"TV card\": if a TV card is detected on your system, it will be
-displayed here. No modification possible at installation time;
+displayed here.
 
  * \"ISDN card\": if an ISDN card is detected on your system, it will be
 displayed here. You can click on the button to change the parameters
