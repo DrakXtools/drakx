@@ -76,7 +76,8 @@ static enum return_type try_with_device(char *dev_name)
 
 	/* in testing mode, assume the partition is already mounted on IMAGE_LOCATION_DIR "hdimage" */
         if (!IS_TESTING && try_mount(choice, disk_own_mount)) {
-		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs).");
+		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs). "
+                                   "Make sure the partition has been cleanly unmounted.");
 		return try_with_device(dev_name);
 	}
 
