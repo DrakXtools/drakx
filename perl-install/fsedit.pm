@@ -525,7 +525,7 @@ sub check_mntpoint {
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
     $mntpoint =~ m|^/| or die \N("Mount points must begin with a leading /");
     $mntpoint =~ m|[\x7f-\xff]| and cdie \N("Mount points should contain only alphanumerical characters");
-    has_mntpoint($mntpoint, $all_hds) and die \N("There is already a partition with mount point %s\n", $mntpoint);
+    mntpoint2part($mntpoint, [ grep { $_ ne $part } get_really_all_fstab($all_hds) ]) and die \N("There is already a partition with mount point %s\n", $mntpoint);
 
     cdie \N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
