@@ -20,6 +20,12 @@ my $offset = $common::SECTORSIZE - length($magic) - $nb_primary * common::psizeo
 
 sub hasExtended { 1 }
 
+sub last_usable_sector { 
+    my ($hd) = @_;
+    #- do not use totalsectors, see gi/docs/Partition-ends-after-end-of-disk.txt for more
+    $hd->{geom}{sectors} * $hd->{geom}{heads} * $hd->{geom}{cylinders};
+}
+
 sub compute_CHS($$) {
     my ($hd, $e) = @_;
     my @l = qw(cyl head sec);
