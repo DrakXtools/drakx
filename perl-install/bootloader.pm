@@ -310,6 +310,18 @@ sub suggest_onmbr {
     ($onmbr, $unsafe);
 }
 
+sub allowed_boot_parts {
+    my ($bootloader, $all_hds) = @_;
+    (
+     @{$all_hds->{hds}},
+     if_($bootloader->{method} =~ /lilo/,
+	 grep { $_  && $_->{level} eq '1' } @{$all_hds->{raids}}
+	),
+     (grep { !isFat_or_NTFS($_) } fs::get::hds_fstab(@{$all_hds->{hds}})),
+     detect_devices::floppies(),
+    );
+}
+
 sub same_entries {
     my ($a, $b) = @_;
 
