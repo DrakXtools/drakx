@@ -412,7 +412,7 @@ sub load_raw {
 	    eval {
 		require fs; fs::mount('/proc/bus/usb', '/proc/bus/usb', 'usbdevfs');
 		#- ensure keyboard is working, the kernel must do the job the BIOS was doing
-		sleep 2;
+		sleep 4;
 		load("usbkbd", "keybdev") if detect_devices::usbKeyboards();
 	    }
 	}
