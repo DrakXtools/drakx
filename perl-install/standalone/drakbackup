@@ -1748,8 +1748,7 @@ sub advanced_where_cd {
 		$dev_codes{$cd_devices{$key}{rec_dev}} = $key; 
 	}
 	
-    my $combo_where_cd_device = Gtk2::ComboBox->new_with_strings(%cd_devices ? [ sort keys %dev_codes ] : \@no_devices);
-	
+    my $combo_where_cd_device = Gtk2::ComboBox->new_with_strings(%cd_devices ? [ sort keys %dev_codes ] : \@no_devices);	
     my $combo_where_cd_time = Gtk2::ComboBox->new_with_strings([ "650 MB", "700 MB", "750 MB", "800 MB", "4.7 GB" ]);
  
     gtkpack($advanced_box,
@@ -1823,10 +1822,10 @@ sub advanced_where_cd {
 		}
 	}); 	
     
-	$combo_where_cd_time->entry->set_text($conf{CD_TIME});
+	$combo_where_cd_time->entry->set_text($conf{CD_TIME}) if $conf{CD_TIME};
     $combo_where_cd_time->entry->signal_connect('changed', sub { $conf{CD_TIME} = $combo_where_cd_time->entry->get_text });
 
-	$combo_where_cd_device->entry->set_text($conf{CD_DEVICE});
+	$combo_where_cd_device->entry->set_text($conf{CD_DEVICE}) if $conf{CD_DEVICE};
 	$combo_where_cd_device->entry->signal_connect('changed', sub {
 		$conf{CD_DEVICE} = $combo_where_cd_device->entry->get_text;
 		$std_device = $dev_codes{$conf{CD_DEVICE}};
@@ -1933,7 +1932,7 @@ sub advanced_where_tape {
 		destroy_widget();
 		$current_widget->($previous_function);
     });
-    $combo_where_tape_device->entry->set_text($conf{TAPE_DEVICE});
+    $combo_where_tape_device->entry->set_text($conf{TAPE_DEVICE}) if $conf{TAPE_DEVICE};
 	$combo_where_tape_device->entry->signal_connect('changed', sub {
 		$conf{TAPE_DEVICE} = $combo_where_tape_device->entry->get_text;
 	}); 
@@ -2285,7 +2284,9 @@ sub wizard_step3() {
 	my $no_device = 1 if $conf{USE_CD} && $conf{CD_DEVICE} eq '' || $conf{USE_TAPE} && $conf{TAPE_DEVICE} eq '' || $conf{USE_NET} && $conf{NET_PROTO} eq '';
 	if ($no_device) {
 		show_warning("f", N("Backup destination not configured..."));
-		wizard_step2();
+		advanced_where_net_types(\&wizard_step2) if $conf{USE_NET};
+		advanced_where_cd(\&wizard_step2) if $conf{USE_CD};
+		advanced_where_tape(\&wizard_step2) if $conf{USE_TAPE};
 		return;
 	}
 	if (check_pkg_needs()) {
