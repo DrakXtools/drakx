@@ -41,13 +41,13 @@ sub rooted {
 sub raw {
     my ($options, $name, @args) = @_;
     my $root = $options->{root} || '';
-    my $str = ref($name) ? $name->[0] : $name;
+    my $real_name = ref($name) ? $name->[0] : $name;
 
     my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);
     ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
     ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
 
-    log::l("running: $str @args" . ($root ? " with root $root" : ""));
+    log::l("running: $real_name @args" . ($root ? " with root $root" : ""));
 
     return 1 if $root && $<;
 
@@ -79,7 +79,7 @@ sub raw {
 		alarm 0;
 	    };
 	    if ($@) {
-		log::l("ERROR: killing runaway process (process=$str, pid=$pid, args=@args, error=$@)");
+		log::l("ERROR: killing runaway process (process=$real_name, pid=$pid, args=@args, error=$@)");
 		kill 9, $pid;
 		return;
 	    }
@@ -126,7 +126,7 @@ sub raw {
 	    exec $name, @args;
 	};
 	if (!$ok) {
-	    log::l("exec of $str failed: $!");
+	    log::l("exec of $real_name failed: $!");
 	    c::_exit(128);
 	}
     }
