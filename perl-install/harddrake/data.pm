@@ -290,7 +290,7 @@ our @tree =
       string => N("(E)IDE/ATA controllers"),
       icon => "ide_hd.png",
       configurator => "",
-      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ || $_->{driver} eq '3w-xxxx' } @devices) },
+      detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ } @devices) },
       checked_on_boot => 1,
      },
 
