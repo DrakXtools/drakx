@@ -59,12 +59,7 @@ my $server_ip = get_ip_from_sys();
 my $changes_made = 0;
 my $client_cfg = "/etc/dhcpd.conf.etherboot.clients";
 my $tftpboot = "/var/lib/tftpboot";
-my @kernels = grep { /vmlinuz-/ } all("/boot");
-my $i = 0;
-foreach (@kernels) {
-	splice(@kernels, $i, 1) if -l "/boot/$_";
-	$i++;
-}
+my @kernels = grep { /vmlinuz-/ && ! -l "/boot/$_" } all("/boot");
 
 #- make sure terminal server and friends are installed
 my $ts = system("rpm -q terminal-server > /dev/null");
