@@ -84,7 +84,12 @@ sub disconnect_backend {
 
 sub bg_command_as_root {
     my ($name, @args) = @_;
-    run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @args);
+    #- FIXME: duplicate code from common::require_root_capability
+    if (check_for_xserver() && fuzzy_pidofs(qr/\bkwin\b/) > 0) {
+        run_program::raw({ detach => 1 }, "kdesu", "--ignorebutton", "-c", "$name @args");
+    } else {
+	run_program::raw({ detach => 1 }, [ 'consolehelper', $name ], @args);
+    }
 }
 
 sub start_interface {
