@@ -13,10 +13,10 @@ use MDK::Common::System qw(getVarsFromSh);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
-    my ($netc, $type, $up, $down, $type2) = @_;
-    if ($type) {
-	$netc->{internet_cnx}{$type}{$_->[0]} = $_->[1] foreach [$connect_file, $up], [$disconnect_file, $down];
-	$netc->{internet_cnx}{$type}{type} = $type2;
+    my ($netc, $o_type, $o_up, $o_down, $o_type2) = @_;
+    if ($o_type) {
+	$netc->{internet_cnx}{$o_type}{$_->[0]} = $_->[1] foreach [$connect_file, $o_up], [$disconnect_file, $o_down];
+	$netc->{internet_cnx}{$o_type}{type} = $o_type2;
     } else {
 	foreach ($connect_file, $disconnect_file) {
 	    output_with_perm("$prefix$_", 0755,

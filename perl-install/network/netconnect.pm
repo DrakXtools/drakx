@@ -115,19 +115,19 @@ sub init_globals {
 }
 
 sub main {
-    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $_direct_fr, $noauto) = @_;
+    my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $_direct_fr, $o_noauto) = @_;
     init_globals($in, $prefix);
     $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
     $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
     $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
-    network::network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
+    network::network::read_all_conf($prefix, $netc, $intf);
 
     modules::mergein_conf("$prefix/etc/modules.conf");
 
     my $direct_net_install;
     if ($first_time && $::isInstall && ($in->{method} eq "ftp" || $in->{method} eq "http" || $in->{method} eq "nfs")) {
-	!$::expert && !$noauto || $in->ask_okcancel(N("Network Configuration"),
+	!$::expert && !$o_noauto || $in->ask_okcancel(N("Network Configuration"),
 						    N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1) and do {
@@ -374,8 +374,8 @@ ADSLLogin=$adsl->{login}
 }
 
 sub set_profile {
-    my ($netcnx, $profile) = @_;
-    $profile ||= $netcnx->{PROFILE};
+    my ($netcnx, $o_profile) = @_;
+    my $profile = $o_profile || $netcnx->{PROFILE};
     $profile or return;
     my $f = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     -e ($f . "." . $profile) or return;

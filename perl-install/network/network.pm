@@ -253,7 +253,7 @@ sub is_domain_name {
 sub netmask {
     my ($ip) = @_;
     return "255.255.255.0" unless is_ip($ip);
-    $ip =~ $ip_regexp;
+    $ip =~ $ip_regexp or warn "IP_regexp failed\n" and return "255.255.255.0";
     if ($1 >= 1 && $1 < 127) {
 	"255.0.0.0";    #-1.0.0.0 to 127.0.0.0
     } elsif ($1  >= 128 && $1 <= 191) {
@@ -461,8 +461,9 @@ sub proxy_configure {
 }
 
 sub read_all_conf {
-    my ($prefix, $netc, $intf, $netcnx) = @_;
-    $netc ||= {}; $intf ||= {}; $netcnx ||= {};
+    my ($prefix, $netc, $intf, $o_netcnx) = @_;
+    $netc ||= {}; $intf ||= {};
+    my $netcnx = $o_netcnx || {};
     add2hash($netc, read_conf("$prefix/etc/sysconfig/network")) if -r "$prefix/etc/sysconfig/network";
     add2hash($netc, read_resolv_conf());
     add2hash($netc, read_tmdns_conf("$prefix/etc/tmdns.conf")) if -r "$prefix/etc/tmdns.conf";
