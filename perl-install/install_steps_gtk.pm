@@ -247,7 +247,7 @@ sub reallyChooseGroups {
 					   $entries_in_path->('Utilities'),
 					  ),
 				) : $o->{meta_class} eq 'desktop' ? (
-				   0, gtkpack(Gtk2::VBox->new(0, 0), 
+				   1, gtkpack(Gtk2::VBox->new(0, 0), 
 					   $entries_in_path->('Workstation'),
 					  ),
 				) : (
