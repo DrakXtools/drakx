@@ -253,17 +253,16 @@ sub selectPackage {
     #- is only used for unselection, not selection)
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
-    $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
-				 no_flag_update => $o_otherOnly, keep_state => $o_otherOnly,
-				 callback_choices => \&packageCallbackChoices);
+
+    my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
+					 callback_choices => \&packageCallbackChoices);
 
     if ($b_base || $o_otherOnly) {
-	foreach (keys %{$state->{selected}}) {
-	    my $p = $packages->{depslist}[$_] or next;
-	    #- if base is activated, propagate base flag to all selection.
-	    $b_base and $p->set_flag_base;
-	    $o_otherOnly and $o_otherOnly->{$_} = $state->{selected}{$_};
+	foreach (@l) {
+	    $b_base and $_->set_flag_base;
+	    $o_otherOnly and $o_otherOnly->{$_->id} = $_->flag_requested;
 	}
+	$o_otherOnly and $packages->disable_selected($packages->{rpmdb}, $state, @l);
     }
     1;
 }
@@ -277,8 +276,7 @@ sub unselectPackage($$;$) {
     $pkg->flag_selected or return;
 
     my $state = $packages->{state} ||= {};
-    $state->{unselected} = $o_otherOnly || {};
-    $packages->resolve_unrequested($packages->{rpmdb}, $state, { $pkg->id => undef }, no_flag_update => $o_otherOnly);
+    my @l = $packages->disable_selected($packages->{rpmdb}, $state, $pkg);
     1;
 }
 sub togglePackageSelection($$;$) {
@@ -296,28 +294,21 @@ sub unselectAllPackages($) {
     foreach (@{$packages->{depslist}}) {
 	if ($_->flag_base || $_->flag_installed && $_->flag_selected) {
 	    #- keep track of package that should be kept selected.
-	    $keep_selected{$_->id} = undef;
+	    $keep_selected{$_->id} = $_;
 	} else {
 	    #- deselect all packages except base or packages that need to be upgraded.
-	    $unselected{$_->id} = undef;
+	    $unselected{$_->id} = $_;
 	}
     }
     if (%unselected) {
 	my $state = $packages->{state} ||= {};
-	$packages->resolve_unrequested($packages->{rpmdb}, $state, \%unselected);
+	$packages->disable_selected($packages->{rpmdb}, $state, values %unselected);
 
-	my @l = keys %keep_selected;
-	foreach (@l) {
-	    my $pkg = $packages->{depslist}[$_] or next;
-	    if ($pkg->flag_available) {
-		delete $keep_selected{$_};
-	    } else {
-		log::l("unselectAllPackage unselected ".$pkg->fullname." which should be selected again");
+	if (my @l = $packages->resolve_requested($packages->{rpmdb}, $state, \%keep_selected,
+						 callback_choices => \&packageCallbackChoices)) {
+	    foreach (@l) {
+		log::l("unselectAllPackage unselected ".$_->fullname." which has been selected again");
 	    }
-	}
-	if (%keep_selected) {
-	    $packages->resolve_requested($packages->{rpmdb}, $state, \%keep_selected,
-					 callback_choices => \&packageCallbackChoices);
 	}
     }
 }
@@ -578,8 +569,8 @@ sub setSelectedFromCompssList {
 	my $state = $packages->{state} ||= {};
 	$state->{selected} = {};
 
-	$packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
-				     callback_choices => \&packageCallbackChoices);
+	my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $p) || {},
+					     callback_choices => \&packageCallbackChoices);
 
 	#- this enable an incremental total size.
 	my $old_nb = $nb;
@@ -590,7 +581,7 @@ sub setSelectedFromCompssList {
 	if ($max_size && $nb > $max_size) {
 	    $nb = $old_nb;
 	    $min_level = $p->rate;
-	    $packages->resolve_unrequested($packages->{rpmdb}, $state, $state->{selected});
+	    $packages->disable_selected($packages->{rpmdb}, $state, @l);
 	    last;
 	}
     }
