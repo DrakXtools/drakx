@@ -850,10 +850,7 @@ sub _create_window($$) {
     $w->signal_connect(key_press_event => sub {
 	my (undef, $event) = @_;
 	my $d = ${{ Gtk2::Gdk::Event::Key->Sym_F1  => 'help',
-		    Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot',
-		    Gtk2::Gdk::Event::Key->Sym_F5  => 'set_theme',
-	            Gtk2::Gdk::Event::Key->Sym_F12 => 'next',
-		    Gtk2::Gdk::Event::Key->Sym_F11 => 'previous' }}{$event->keyval};
+		    Gtk2::Gdk::Event::Key->Sym_F2  => 'screenshot' }}{$event->keyval};
 
 	if ($event->keyval == Gtk2::Gdk::Event::Key->Sym_Print) {             #- TEMP
 	    print STDERR "Sym Print\n";					      #- TEMP
@@ -867,8 +864,6 @@ sub _create_window($$) {
 	    install_gtk::create_big_help($::o);
 	} elsif ($::isInstall && $d eq 'screenshot') {
 	    common::take_screenshot($o);
-	} elsif ($::isInstall && $d eq 'set_theme') {
-	    $::setstep and die "set_theme\n"; #- set_theme is similar to setstep, don't raise one when not allowed to
 	} elsif (chr($event->keyval) eq 'e' && member('mod1-mask', @{$event->state})) {  #- alt-e
 	    log::l("Switching to " . ($::expert ? "beginner" : "expert"));
 	    $::expert = !$::expert;
