@@ -508,7 +508,7 @@ sub getBewan() {
     matching_desc__regexp('Bewan Systems\|.*ADSL|BEWAN ADSL USB');
 }
 sub getSagem() {
-    matching_driver(qw(adiusbadsl eagle-usb));
+    matching_driver('eagle-usb');
 }
 
 # generate from the following from eci driver sources:
