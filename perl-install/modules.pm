@@ -247,9 +247,7 @@ sub mergein_conf {
     }
 }
 
-sub write_conf {
-    my ($prefix) = @_;
-
+sub write_conf() {
     my $file = "$prefix/etc/modules.conf";
     rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
@@ -288,21 +286,22 @@ sub write_conf {
     my @l;
     push @l, 'scsi_hostadapter' if !is_empty_array_ref($conf{scsi_hostadapter}{probeall});
     push @l, 'bttv' if any { $_->{driver} eq 'bttv' } detect_devices::probeall();
-    append_to_etc_modules($prefix, @l);
+    append_to_modules_loaded_at_startup("$prefix/etc/modules", @l);
+    append_to_modules_loaded_at_startup("$prefix/etc/modprobe.preload", @l);
 
     #- use module-init-tools script for the moment
-    run_program::rooted($prefix, "/bin/sh", "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$prefix/etc/modprobe.conf";
+    run_program::rooted($::prefix, "/sbin/generate-modprobe.conf", ">", "/etc/modprobe.conf") if -e "$prefix/etc/modprobe.conf";
 }
 
-sub append_to_etc_modules {
-    my ($prefix, @l) = @_;
+sub append_to_modules_loaded_at_startup {
+    my ($file, @l) = @_;
     my $l = join '|', map { '^\s*'.$_.'\s*$' } @l;
-    log::l("to put in modules ", join(", ", @l));
+    log::l("to put in $file ", join(", ", @l));
 
     substInFile { 
 	$_ = '' if $l && /$l/;
 	$_ .= join '', map { "$_\n" } @l if eof;
-    } "$prefix/etc/modules";
+    } $file;
 }
 
 sub read_stage1_conf {
