@@ -834,7 +834,7 @@ sub report_bug {
       header("partitions"), cat_("/proc/partitions"),
       header("cpuinfo"), cat_("/proc/cpuinfo"),
       header("syslog"), cat_("/tmp/syslog") || cat_("$::prefix/var/log/syslog"),
-      header("ddcxinfos"), ddcxinfos(),
+      header("monitor_full_edid"), monitor_full_edid(),
       header("stage1.log"), cat_("/tmp/stage1.log") || cat_("$::prefix/root/drakx/stage1.log"),
       header("ddebug.log"), cat_("/tmp/ddebug.log") || cat_("$::prefix/root/drakx/ddebug.log"),
       header("install.log"), cat_("$::prefix/root/drakx/install.log"),
@@ -973,22 +973,27 @@ You can use userdrake to add a user to this group.")
     }
 }
 
-sub ddcxinfos() {
+sub monitor_full_edid() {
     return if $::noauto;
 
-    my @l;
-    run_program::raw({ timeout => 20 }, 'ddcxinfos', '>', \@l);
-    if ($::isInstall && -e "/tmp/ddcxinfos") {
-	my @l_old = cat_("/tmp/ddcxinfos");
-	if (@l < @l_old) {
-	    log::l("new ddcxinfos is worse, keeping the previous one");
-	    @l = @l_old;
-	} elsif (@l > @l_old) {
-	    log::l("new ddcxinfos is better, dropping the previous one");
+    my ($vbe, $edid);
+    run_program::raw({ timeout => 20 }, 'monitor-edid', '>', \$edid, '2>', \$vbe, '-v', '--perl');
+    if ($::isInstall) {
+	foreach (['edid', \$edid], ['vbe', \$vbe]) {
+	    my ($name, $val) = @$_;
+	    if (-e "/tmp/$name") {
+		my $old = cat_("/tmp/$name");
+		if (length($$val) < length($old)) {
+		    log::l("new $name is worse, keeping the previous one");
+		    $$val = $old;
+		} elsif (length($$val) > length($old)) {
+		    log::l("new $name is better, dropping the previous one");
+		}
+	    }
+	    output("/tmp/$name", $$val);
 	}
     }
-    output("/tmp/ddcxinfos", @l) if $::isInstall;
-    @l;
+    ($edid, $vbe);
 }
 
 sub running_window_manager() {

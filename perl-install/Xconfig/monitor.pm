@@ -64,7 +64,7 @@ sub configure_auto_install {
 	put_in_hash($monitor, $auto_install_monitor);
     } $monitors, $old_X->{monitors} if $old_X->{monitors};
 
-    if (!$monitors->[0]{HorizSync}) {
+    if (!$monitors->[0]{HorizSync} && !($monitors->[0]{VendorName} && $monitors->[0]{ModelName})) {
 	put_in_hash($monitors->[0], getinfoFromDDC());
     }
 
@@ -171,27 +171,23 @@ sub configure_automatic {
 }
 
 sub getinfoFromDDC() {
-    my ($VideoRam, @l) = any::ddcxinfos() or return;
+    my ($edid, $vbe) = any::monitor_full_edid() or return;
+    my $monitor = eval($edid);
 
-    my @Modes;
-    local $_;
-    while (($_ = shift @l) ne "\n") {
-	my ($depth, $x, $y) = split;
-	$depth = int(log($depth) / log(2)) if $depth;
-	
-	push @Modes, [ $x, $y, $depth ];
+    if ($vbe =~ /Memory: (\d+)k/) {
+	$monitor->{VideoRam_probed} = $1;
+    }
+    $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
+    foreach (@{$monitor->{detailed_timings} || []}) {
+	unshift @{$monitor->{ModeLine}},
+	  { val => $_->{ModeLine}, pre_comment => $_->{ModeLine_comment} . "\n" };
     }
 
-    my ($h, $v, $size, @_modes) = @l;
-    { 
-        VideoRam_probed => to_int($VideoRam),
-        HorizSync => first($h =~ /^(\S*)/), 
-        VertRefresh => first($v =~ /^(\S*)/),
-        size => to_float($size),
-        if_($size =~ /EISA ID=(\S*)/, EISA_ID => lc($1), VendorName => "Plug'n Play"),
-	#- not-used-anymore Modes => \@Modes,
-        #- not-used-anymore ModeLines => join('', @m),
-    };
+    if ($monitor->{EISA_ID}) {
+	$monitor->{VendorName} = "Plug'n Play";
+	$monitor->{ModelName} = $monitor->{monitor_name};
+    }
+    $monitor;
 }
 
 sub monitors_db() {

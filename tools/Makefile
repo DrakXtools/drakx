@@ -1,7 +1,7 @@
 include ../Makefile.config
 
 RPMS        = $(wildcard $(MAIN_RPMS_DIR)/*.rpm)
-DIRS	    = ddcprobe serial_probe
+DIRS	    = serial_probe
 CFLAGS      = -Wall
 
 ARCH := $(shell arch | egrep "(x86_64|sparc64|s390x)")
@@ -31,9 +31,6 @@ install:
 xhost+: %: %.c
 	$(CC) $(CFLAGS) $< -L/usr/X11R6/$(LIB_NAME) -lX11 -o $@
 
-ddcprobe/ddcxinfos:
-	$(MAKE) -C ddcprobe ddcxinfos
-
 clean: 
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -rf *~ xhost+ rpcinfo-flushed ddcprobe/ddcxinfos */*.o
+	rm -rf *~ xhost+ rpcinfo-flushed */*.o

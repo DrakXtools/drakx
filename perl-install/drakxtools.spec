@@ -24,6 +24,7 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 2:5.8.6-1mdk, urpmi >= 4.6.13, modutils >= 2.3.11, usermode-consoleonly >= 1.44-4mdk, msec >= 0.38-5mdk
 Requires: %{name}-backend = %version-%release
+Requires: monitor-edid
 Requires: netprofile
 Obsoletes: diskdrake kbdconfig mouseconfig printtool setuptool drakfloppy
 Provides: diskdrake, kbdconfig mouseconfig printtool setuptool, drakfloppy = %version-%release
@@ -107,9 +108,6 @@ them work both under XFree (graphical environment) and in console
 (text environment), allowing easy distant work.
 
 adduserdrake: help you adding a user
-
-ddcxinfos: get infos from the graphic card and print XF86Config
-modlines
 
 diskdrake: DiskDrake makes hard disk partitioning easier. It is
 graphical, simple and powerful. Different skill levels are available
@@ -206,7 +204,7 @@ dirs1="usr/lib/libDrakX usr/share/libDrakX"
 
 perl -ni -e '/activefw\.pm|clock|drak(backup|bug|clock|floppy|font|log|net_monitor|perm|printer|sec|splash|TermServ)|gtk|icons|logdrake|net_applet|net_monitor|pixmaps|printer|xf86misc|\.png$/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
-perl -ni -e 'm!lib/libDrakX|bootloader-config|fileshare|lsnetdrake|ddcxinfos|drakupdate_fstab|rpcinfo|serial_probe! && !/newt/i ? print STDERR $_ : print' %{name}.list 2> %{name}-backend.list
+perl -ni -e 'm!lib/libDrakX|bootloader-config|fileshare|lsnetdrake|drakupdate_fstab|rpcinfo|serial_probe! && !/newt/i ? print STDERR $_ : print' %{name}.list 2> %{name}-backend.list
 
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir

@@ -107,13 +107,13 @@ sub configure_FB_TVOUT {
     my $raw_X = Xconfig::default::configure($do_pkgs);
     return if is_empty_array_ref($raw_X);
 
-    $raw_X->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50) });
-    first($raw_X->get_Sections('Monitor'))->{ModeLine} = [ 
+    $raw_X->set_monitors({ HorizSync => '30-50', VertRefresh => ($use_FB_TVOUT->{norm} eq 'NTSC' ? 60 : 50),
+			   ModeLine => [ 
 	{ val => '"640x480"   29.50       640 675 678 944  480 530 535 625', pre_comment => "# PAL\n" },
 	{ val => '"800x600"   36.00       800 818 820 960  600 653 655 750' },
 	{ val => '"640x480"  28.195793   640 656 658 784  480 520 525 600', pre_comment => "# NTSC\n" },
 	{ val => '"800x600"  38.769241   800 812 814 880  600 646 649 735' },
-    ];
+    ] });
     $raw_X->set_devices({ Driver => 'fbdev' });
 
     my ($device) = $raw_X->get_devices;
