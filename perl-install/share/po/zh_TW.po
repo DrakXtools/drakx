@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
 "PO-Revision-Date: 2002-09-24 06:00+CST\n"
 "Last-Translator: Kenduest Lee <kenduest@i18n.linux.org.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -165,7 +165,7 @@ msgid "Gateway device"
 msgstr "閘道裝置"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced preferences"
 msgstr "進階選項"
 
@@ -175,7 +175,7 @@ msgid "Net Method:"
 msgstr "網路方式："
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernetcard"
 msgstr "Etnernet 介面卡"
 
@@ -184,7 +184,7 @@ msgstr "Etnernet 介面卡"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "參數"
@@ -210,7 +210,7 @@ msgid "Select installation class"
 msgstr "選擇安裝模式"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
@@ -271,7 +271,7 @@ msgid "CUPS configuration"
 msgstr "CUPS 組態"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Total progress"
 msgstr "全部進度"
 
@@ -302,7 +302,7 @@ msgstr ""
 "\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "yes"
 msgstr "是的"
 
@@ -366,7 +366,7 @@ msgid "Bulgarian (phonetic)"
 msgstr "保加利亞 (phonetic)"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP start ip"
 msgstr "DHCP 起始範圍"
 
@@ -376,7 +376,7 @@ msgid "256 kB"
 msgstr "256 kB"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Don't rewind tape after backup"
 msgstr "使用磁帶進行備份"
 
@@ -446,7 +446,7 @@ msgid "size of the (second level) cpu cache"
 msgstr ""
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
 msgstr "音效卡"
 
@@ -457,7 +457,7 @@ msgid "Month"
 msgstr "月"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for files to restore"
 msgstr "請選取要用來回存資料的裝置來源"
 
@@ -500,6 +500,11 @@ msgstr "匯流排"
 msgid "Iraq"
 msgstr "Iraq"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "connecting to %s ..."
+msgstr "連線到臭蟲發佈精靈 ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -540,6 +545,20 @@ msgstr "尋找已安裝字型"
 #, fuzzy, c-format
 msgid "Default desktop"
 msgstr "預設開機"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"要回報任何臭蟲問題，請點選回報的按鈕。\n"
+"系統將會開啟瀏覽器並連線到 %s\n"
+" 然後請找到適當的項目並輸入相關問題資訊，以便於將臭蟲問題送至主機通知發展人"
+"員。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -648,7 +667,7 @@ msgid "Advanced Configuration"
 msgstr "進階設定模式"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanning on your HP multi-function device"
 msgstr "，多功能裝置"
 
@@ -692,7 +711,7 @@ msgid "Restore Failed..."
 msgstr "回存失敗..."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _jazz drives"
 msgstr "自動偵測"
 
@@ -836,7 +855,7 @@ msgid ""
 msgstr "    左上方進度Bar的 x 軸坐標                      "
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Current interface configuration"
 msgstr "顯示目前網路介面組態設定"
 
@@ -879,7 +898,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
-msgstr ""
+msgstr "迫使 No APIC"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -887,7 +906,7 @@ msgid "This password is too short (it must be at least %d characters long)"
 msgstr "這個密碼太簡單了 (一定至少要有 %d 個字元才行)"
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "[keyboard]"
 msgstr "鍵盤"
 
@@ -979,12 +998,12 @@ msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find backups to restore...\n"
-msgstr "請選取要回存的資料..."
+msgstr "請選取要回存的資料...\n"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown"
 msgstr "未知的型號"
 
@@ -1012,6 +1031,36 @@ msgstr ""
 "其他的通訊協定 \n"
 "無 D-Channel (leased lines)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Option %s must be a number!"
@@ -1028,7 +1077,7 @@ msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The configuration of the printer will work fully automatically. If your "
 "printer was not correctly detected or if you prefer a customized printer "
@@ -1186,7 +1235,7 @@ msgid "Configure Internet Access..."
 msgstr "設定 internet 存取"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the time interval between each backup"
 msgstr ""
 "請輸入每一次備份的\n"
@@ -1228,7 +1277,7 @@ msgstr ""
 "(例如 1.2.3.4)。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
@@ -1238,7 +1287,7 @@ msgstr ""
 "所需要的套件時，會提示您放入所需要的光碟片。"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "When checked, owner and group won't be changed"
 msgstr "當該項目選取時，將無法另外選擇套用的擁有者與群組項目"
 
@@ -1265,7 +1314,7 @@ msgid "Svalbard and Jan Mayen Islands"
 msgstr "Svalbard and Jan Mayen Islands"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "No NIC selected!"
 msgstr "未選擇網路卡!"
 
@@ -1306,9 +1355,9 @@ msgid "Partition table of drive %s is going to be written to disk!"
 msgstr "準備寫入磁碟 %s 的硬碟分割表!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing HPOJ package..."
-msgstr "正在安裝套件..."
+msgstr "正在安裝套件(HPOJ)..."
 
 #: ../../any.pm:1
 #, c-format
@@ -1337,7 +1386,7 @@ msgstr ""
 "%s"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "                      DrakBackup Daemon Report\n"
@@ -1368,7 +1417,7 @@ msgid "Start at boot"
 msgstr "於開機時啟動"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use Incremental Backups"
 msgstr "使用遞增備份 (不會覆蓋舊有備份)"
 
@@ -1465,11 +1514,11 @@ msgid "Resizing"
 msgstr "正在重設大小"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter the maximum size\n"
 " allowed for Drakbackup (MB)"
-msgstr "請輸入備份允許最大的大小"
+msgstr "請輸入備份允許最大的大小 (MB)"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -1487,7 +1536,7 @@ msgid "Do new backup before restore (only for incremental backups.)"
 msgstr "在回存前進行新的備份動作 (只能夠用在遞增式備份時。)"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name"
 msgstr "名稱："
 
@@ -1537,7 +1586,7 @@ msgid "Phone number"
 msgstr "電話號碼"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
 msgstr "尚未有任何提供您使用的音效卡驅動程式 (%s)"
 
@@ -1588,7 +1637,7 @@ msgid "Harddrake2 version %s"
 msgstr "Harddrake2 版本 %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preferences"
 msgstr "設定值： "
 
@@ -1623,7 +1672,7 @@ msgid "Set-UID"
 msgstr "Set-UID"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Choose the hard drive you want to erase in order to install your new\n"
 "Mandrake Linux partition. Be careful, all data present on this partition\n"
@@ -1639,15 +1688,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Use the %c and %c keys for selecting which entry is highlighted."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "一般的兩鍵式滑鼠"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../lvm.pm:1
 #, c-format
@@ -1840,7 +1889,7 @@ msgstr "您的選擇? (預設為 %s) "
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "疑難排解"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1880,12 +1929,12 @@ msgid "         Restore Configuration       "
 msgstr "         回存組態設定       "
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
 msgstr "這樣子正確嗎？"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"%s\".\n"
@@ -1906,14 +1955,14 @@ msgid ""
 "for details about the configuration, or simply wait until your system is\n"
 "installed and use the program described there to configure your connection."
 msgstr ""
-"下面要進行網路的連線設定。若是您希望能夠有網路連線功能，請點選『確定』按鈕。"
-"下面的過程都會由程式自動偵測設定，若是無法自動偵測的話，請下面『使用自動偵"
-"測』的按鈕取消手動設定之。若是您不要設定網路的話，或者是希望事後再設定，請點"
-"選『取消』按鈕即可。\n"
+"下面要進行網路的連線設定。若是您希望能夠有網路連線功能，請點選『%s』按鈕。下"
+"面的過程都會由程式自動偵測設定，若是無法自動偵測的話，請下面『%s』的按鈕取消"
+"手動設定之。若是您不要設定網路的話，或者是希望事後再設定，請點選『%s』按鈕即"
+"可。\n"
 "\n"
 "『Mandrake-Linux』能夠在安裝時設定好 Internet 連線設定，其中包含像是傳統的 "
-"Modem 連線、IDSN Modem 連線、ADSL、Cable以及一般的 Lan 連線 (Ethernet) 功"
-"能。\n"
+"Modem 連線、ISDN Modem 連線、ADSL、Cable以及一般的 Lan 連線 (Ethernet) 弁遄"
+"C\n"
 "\n"
 "接下來畫面，請依照畫面相關指示輸入相關資料即可。若是您不確定您所需要填入的相"
 "關項目，建議請詢問您的網路管理者提供相關資訊。\n"
@@ -2200,7 +2249,7 @@ msgid "Please insert the Boot floppy used in drive %s"
 msgstr "請在 %s 磁碟機內插入一張可開機磁碟片"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local network(s)"
 msgstr "內部網路IP位址"
 
@@ -2210,7 +2259,7 @@ msgid "Remove Windows"
 msgstr "移除 Windows(TM)"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
@@ -2273,7 +2322,7 @@ msgstr ""
 "佇列名稱，以及適當的使用者帳號與密碼。"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "Netmask:"
 msgstr "網路遮罩"
 
@@ -2410,7 +2459,7 @@ msgid "Somalia"
 msgstr "Somalia"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No open source driver"
 msgstr "無已知的驅動程式"
 
@@ -2444,7 +2493,7 @@ msgid "European protocol (EDSS1)"
 msgstr "Europe 通訊協定 (EDSS1)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Delete"
 msgstr "刪除"
 
@@ -2569,7 +2618,7 @@ msgid "Tokelau"
 msgstr "Tokelau"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Matching"
 msgstr "相配的"
 
@@ -2640,9 +2689,9 @@ msgid "hourly"
 msgstr "每小時"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Right Shift key"
-msgstr "右方 Alt 按鍵"
+msgstr "右方 Shift 按鍵"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2688,7 +2737,7 @@ msgid "Configuring applications..."
 msgstr "正在設定應用程式..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -2739,7 +2788,7 @@ msgid "CUPS"
 msgstr "CUPS"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase tape before backup"
 msgstr "使用磁帶進行備份"
 
@@ -2762,6 +2811,23 @@ msgstr "根目錄分割區的大小 (MB)： "
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "這是一個必要的套件，您不可以選擇不要安裝這個套件"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2870,9 +2936,9 @@ msgid "Creating auto install floppy"
 msgstr "正在製作自動安裝磁片"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
-msgstr "安裝系統更新"
+msgstr "安裝升級"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -2926,7 +2992,7 @@ msgid "Mauritania"
 msgstr "Mauritania"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the Network that you use "
@@ -2966,7 +3032,7 @@ msgid "All primary partitions are used"
 msgstr "主分割區數目已經滿了"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "LPD server \"%s\", printer \"%s\""
 msgstr " 位於 LPD 主機 \"%s\"，印表機 \"%s\""
 
@@ -3020,9 +3086,9 @@ msgid "Provider phone number"
 msgstr "ISP 電話號碼"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Host %s"
-msgstr "主機名稱"
+msgstr "主機名稱 %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3151,7 +3217,7 @@ msgid "Russian"
 msgstr "俄羅斯"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "約旦"
 
@@ -3164,34 +3230,6 @@ msgstr "隱藏檔案"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "自動偵測本機印表機"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"您的系統並未安裝 XawTV 程式套件！\n"
-"\n"
-"\n"
-"如果您系統有安裝上電視卡，但是 DrakX 並未偵測到的話\n"
-"(一般可以由/etc/modules 檔案內是否包含 bttv 或是\n"
-"saa7134 項目判定之)，請執行\"lspcidrake -v -f\"\n"
-"然後將執行結果以標題為 \"Undeleted TV card\" 的信件寄到\n"
-"\"install\\@mandrakesoft.com\"\n"
-"。\n"
-"\n"
-"您現在可以開啟一個終端機程式，或者是在文字介面下，\n"
-"用 root 權限身份執行 \"urpmi xawtv\" 將該套件安裝上。"
 
 #: ../../any.pm:1
 #, c-format
@@ -3225,8 +3263,8 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
-"透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。其中像是: "
-"Web Server、Mail Server、Firewall、Router、Printer..."
+"透過 Mandrake 提供的設定機制，讓您的機器將具備強大的伺服器功能。\n"
+"其中像是: Web Server、Mail Server、Firewall、Router、Printer..."
 
 #: ../../security/level.pm:1
 #, c-format
@@ -3413,9 +3451,9 @@ msgid "NCP server name missing!"
 msgstr "NCP 伺服器名稱沒指定!"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "請選取滑鼠的形式。"
+msgstr "請選擇您的國家或地區。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3447,12 +3485,12 @@ msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
 msgstr "手動組態設定"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner"
 msgstr "選取您的掃描器"
 
@@ -3541,7 +3579,7 @@ msgid "Type: "
 msgstr "格式： "
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "<-- Edit Client"
 msgstr "<-- 刪除用戶端"
 
@@ -3587,7 +3625,7 @@ msgid "Add to RAID"
 msgstr "加入磁碟陣列"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -3695,14 +3733,14 @@ msgid "No floppy drive available!"
 msgstr "沒有可用的軟碟機"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "要獲得目前這台印表機可用的相關參數選項，或者是查看下面清單\n"
-"所顯示的項目，請點選點選『列印選項清單』按鈕。%s%s\n"
+"所顯示的項目，請點選點選『列印選項清單』按鈕。%s%s%s\n"
 "\n"
 
 #: ../../lang.pm:1
@@ -3757,6 +3795,19 @@ msgstr ""
 #, c-format
 msgid "Restore From Tape"
 msgstr "使用磁帶回存"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"要回報任何臭蟲問題，請點選回報的按鈕。\n"
+"系統將會開啟瀏覽器並連線到 %s\n"
+" 然後請找到適當的項目並輸入相關問題資訊，以便於將臭蟲問題送至主機通知發展人"
+"員。"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -3898,10 +3949,10 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "需要指定主機名稱、使用者與密碼！"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid "Insert floppy"
-msgstr "請在 %s 中插入磁碟片"
+msgstr "請插入一張磁片"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -4035,10 +4086,17 @@ msgstr "網路介面已經設定完成"
 msgid "Couldn't access the floppy!"
 msgstr "無法存取到軟碟"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "連線到臭蟲發佈精靈 ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4051,7 +4109,7 @@ msgid "Please click on a partition"
 msgstr "請點選一個分割區"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on HP JetDirect"
 msgstr "HP JetDirect 上的多功能裝置"
 
@@ -4222,6 +4280,11 @@ msgstr "接受"
 msgid "Description"
 msgstr "描述"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr ""
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Error opening %s for writing: %s"
@@ -4285,14 +4348,14 @@ msgstr ""
 "若是您修改下面欄位，將會凌越原本的設定。"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
 "現在能夠設定於開機後自動以某個使用者身份登入系統。\n"
 "您要使用這個功能嗎？"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy format"
 msgstr "格式化"
 
@@ -4302,7 +4365,7 @@ msgid "Generic Printers"
 msgstr "一般印表機"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Please choose the printer to which the print jobs should go or enter a "
 "device name/file name in the input line"
@@ -4314,9 +4377,9 @@ msgid "The scanners on this machine are available to other computers"
 msgstr ""
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "First sector of the root partition"
-msgstr "開機分割區的第一個磁區"
+msgstr "根分隔區的第一扇區"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4427,9 +4490,9 @@ msgstr ""
 "\n"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "正在複製 %s"
+msgstr "檢查 %s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4506,9 +4569,9 @@ msgstr ""
 "無法進行傳輸。"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake 硬體偵測設定"
+msgstr "硬體"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5134,7 +5197,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "右方 Alt 按鍵"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, fuzzy, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6178,6 +6241,22 @@ msgstr ""
 msgid "busmouse"
 msgstr "busmouse"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -6527,33 +6606,15 @@ msgstr "要建立的設定檔名稱 (新的設定檔會先由目前的設定檔複製內容過來)："
 msgid "Floppy"
 msgstr "開機片"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
 msgstr ""
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader"
-msgstr "要使用那個開機程式"
+msgstr "啟動引導"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -6648,7 +6709,7 @@ msgstr ""
 "copyright laws applicable to software programs.\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Expert mode"
 msgstr "專家模式"
 
@@ -6677,7 +6738,7 @@ msgstr "4 億色 (32 位元)"
 #: ../../steps.pm:1
 #, c-format
 msgid "License"
-msgstr ""
+msgstr "版權"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6911,7 +6972,7 @@ msgid "This label is already used"
 msgstr "這個標籤已經用過了"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -7003,7 +7064,7 @@ msgid ""
 msgstr "您可以選擇在安裝完成以後使用其他的語言"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Directory (or module) to put the backup on this host."
 msgstr "請輸入要備份到該主機的所在目錄名稱"
 
@@ -7130,6 +7191,11 @@ msgstr "Internet 連線分享"
 msgid "Choose file"
 msgstr "選取檔案"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "總結"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7157,7 +7223,7 @@ msgid ""
 msgstr "您要啟上面提及印表機列印服務，或者是使用內部網路內的印表機嗎？\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer default settings"
 msgstr "印表機型號選擇"
 
@@ -7203,6 +7269,17 @@ msgstr "French Southern Territories"
 #, fuzzy, c-format
 msgid "the vendor name of the processor"
 msgstr "裝置的廠商名稱"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7316,7 +7393,7 @@ msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts and Nevis"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
 msgstr "一般的三鍵式滑鼠"
 
@@ -7377,7 +7454,7 @@ msgid "TCP/IP host \"%s\", port %s"
 msgstr "，TCP/IP 主機 \"%s\"，連接埠 %s"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User :"
 msgstr "使用者："
 
@@ -7447,7 +7524,7 @@ msgid "Details"
 msgstr "詳細資訊"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "因為安全因素考量，現在將會切斷連線。"
 
@@ -7504,6 +7581,11 @@ msgstr "回存使用者檔案"
 #, fuzzy, c-format
 msgid "Encryption key for %s"
 msgstr "加密金鑰"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Do you want to recover your system?"
+msgstr "您要使用 aboot 嗎 ?"
 
 #: ../../services.pm:1
 #, c-format
@@ -7626,7 +7708,7 @@ msgid "Multi-function device on USB"
 msgstr "，位於 USB 的多功能裝置"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "With basic documentation"
 msgstr "包含基本的說明文件 (建議)"
 
@@ -7750,7 +7832,7 @@ msgid ""
 msgstr "因為硬碟空間不足，您不可以選取這個套件。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "generate auto-install floppy"
 msgstr "製作自動安裝磁片"
 
@@ -7861,8 +7943,8 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
-"Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，您可以上網瀏覽我"
-"們提供的線上電子商店穫得進一步資訊。"
+"Mandrake 提供了完整的 Linux 解決方案，並且包含我們各式商品，\n"
+"您可以上網瀏覽我們提供的線上電子商店穫得進一步資訊。"
 
 # calendar/gui/goto-dialog.glade.h:10
 #: ../../standalone/drakbackup:1
@@ -7939,6 +8021,11 @@ msgstr "設定 X 環境"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "Remove selected host/network"
@@ -8009,7 +8096,7 @@ msgid "Photo memory card access on your HP multi-function device"
 msgstr ""
 
 #: ../../share/advertising/09-mdksecure.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
@@ -8167,6 +8254,11 @@ msgstr ""
 "\n"
 "現在要進行這張網路卡與區域網路的連線組態設定。"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8176,6 +8268,11 @@ msgstr "最小安裝"
 #, c-format
 msgid "Ethiopia"
 msgstr "Ethiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8229,7 +8326,7 @@ msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr "無法執行 mkinitrd -f /boot/initrd-%s.img %s。"
 
 #: ../../install_any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have selected the following server(s): %s\n"
 "\n"
@@ -8327,7 +8424,7 @@ msgid "Floppy can be removed now"
 msgstr "請移開軟碟內的磁片"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Truly minimal install"
 msgstr "最小安裝"
 
@@ -8352,9 +8449,9 @@ msgid "Test of the configuration"
 msgstr "測試設定值"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing %s ..."
-msgstr "正在安裝套件..."
+msgstr "正在安裝套件 %s..."
 
 #: ../../help.pm:1
 #, c-format
@@ -8474,15 +8571,6 @@ msgstr "安裝類型"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "網路印表機 \"%s\"，位於 SMB/Windows 伺服器 \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Daemon (%s) 服務程式包含 :\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -8599,7 +8687,7 @@ msgstr "連接埠"
 #: ../../lang.pm:1
 #, c-format
 msgid "Spain"
-msgstr "西班牙"
+msgstr "Spain"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -8760,9 +8848,9 @@ msgid "Connection type: "
 msgstr "連線項目： "
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical interface"
-msgstr "開機時啟動 X 環境"
+msgstr "圖形介面"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8803,6 +8891,11 @@ msgstr "螢幕水平更新頻率： %s\n"
 #, c-format
 msgid "Path"
 msgstr "路徑"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8934,9 +9027,9 @@ msgstr ""
 "您需要一個真正的分割區 (ext2/ext3, reiserfs, xfs 或是 jfs) 來放這個掛載點\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "請輸入主機名稱或是 IP"
+msgstr "請輸入主機名稱或是 IP\n"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -8981,7 +9074,7 @@ msgid "Installing bootloader"
 msgstr "正在安裝開機程式"
 
 #: ../../standalone/drakautoinst:1
-#, fuzzy, c-format
+#, c-format
 msgid "replay"
 msgstr "重播"
 
@@ -9157,7 +9250,7 @@ msgid "Croatian"
 msgstr "克羅埃西亞"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use existing partition"
 msgstr "使用已經存在的分割區"
 
@@ -9220,9 +9313,9 @@ msgid "Root umask"
 msgstr "沒有密碼"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
-msgstr "開機片"
+msgstr "在軟碟機"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9300,7 +9393,7 @@ msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " 位於 Windows 主機 \"%s\"，分享名稱 \"%s\""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog is used to choose which services you wish to start at boot\n"
 "time.\n"
@@ -9371,18 +9464,6 @@ msgstr "重要的"
 #, c-format
 msgid "Total Progress"
 msgstr "全部進度"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -9515,6 +9596,26 @@ msgstr "您要用哪一個 XFree 設定 ?"
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr "使用遞增備份 (不會覆蓋舊有備份)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -9628,6 +9729,13 @@ msgid ""
 "x coordinate of text box\n"
 "in number of characters"
 msgstr "   字元文字方塊的 X 軸坐標                       "
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9836,7 +9944,7 @@ msgstr "LDAP 認證"
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
-msgstr ""
+msgstr "選擇任何驅動程式"
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
@@ -9921,6 +10029,16 @@ msgstr "需要輸入主機名稱"
 msgid "Unselect fonts installed"
 msgstr "反向選取已安裝字型"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "滾輪"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Submit kernel version"
+msgstr "核心版本"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -9941,11 +10059,6 @@ msgstr "取消"
 #, fuzzy, c-format
 msgid "Searching for configured scanners ..."
 msgstr "可用的印表機"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "滾輪"
 
 #: ../../harddrake/data.pm:1
 #, fuzzy, c-format
@@ -10014,6 +10127,11 @@ msgstr "預設開機"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "兩鍵模擬"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Please enter a package name."
+msgstr "請輸入使用者帳號"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10092,6 +10210,11 @@ msgid ""
 " Copyright (C) 2002 by MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+msgstr ""
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -10241,6 +10364,45 @@ msgstr "檔案系統加密金鑰"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Gujarati"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
 msgstr ""
 
 #: ../../interactive/stdio.pm:1
@@ -10553,45 +10715,6 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -10763,7 +10886,7 @@ msgid "Iceland"
 msgstr "Iceland"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet Configuration"
 msgstr "網路設定"
 
@@ -10828,7 +10951,7 @@ msgid "Set the user umask."
 msgstr "使用者"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
 "have been updated after the distribution was released. They may\n"
@@ -10984,23 +11107,11 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
 
 #: ../../services.pm:1
@@ -11036,7 +11147,7 @@ msgid "Change type"
 msgstr "改變分割區格式"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer #%s"
 msgstr "，USB 印表機  \\/*%s"
 
@@ -11172,8 +11283,8 @@ msgid ""
 "And, of course, push multimedia to its limits with the very latest software "
 "to play videos, audio files and to handle your images or photos."
 msgstr ""
-"Mandrake Linux 提供了讓您盡情發揮多媒體的需求，讓使用者能夠進行圖片的瀏覽、音"
-"樂的撥放、觀看電視"
+"Mandrake Linux 提供了讓您盡情發揮多媒體的需求，\n"
+"讓使用者能夠進行圖片的瀏覽、音樂的撥放、觀看電視"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11371,26 +11482,6 @@ msgstr "安裝 %s 套件發生錯誤"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "當系統負載超過該數值時，您將會收到警示通知"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"要回報任何臭蟲問題，請點選回報的按鈕。\n"
-"系統將會開啟瀏覽器並連線到 https://drakbug.mandrakesoft.com\n"
-" 然後請找到適當的項目並輸入相關問題資訊，以便於將臭蟲問題送至主機通知發展人"
-"員。\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Add a scanner manually"
@@ -11429,9 +11520,9 @@ msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "該區域網路並不是以 .0 結尾，放棄..."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "/ 分割區"
+msgstr "啟動"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11474,23 +11565,17 @@ msgstr ""
 "這裡將要選擇所要使用的列印服務系統項目，Mandrake Linux 這邊提供了三種供您選擇"
 "的項目。\n"
 "\n"
-" *『pdq』- pdq 其實就是「print, don't queue」的縮寫。一般這個列印服務程式能夠"
+" *『%s』- pdq 其實就是「print, don't queue」的縮寫。一般這個列印服務程式能夠"
 "在印表機是直接連結到本機電腦上很快速的列印，另外在小型簡單，而且速度不快的網"
 "路上來使用也相當便利。這個項目，包含下面可供選擇的列印系統，都可以事後使用 "
 "PrinterDrake 程式，然後使用專家模式就可以變更設定。\n"
 "\n"
-" *『CUPS』 - 「Common Unix Printing System」，這是一套個相當好的列印服務系"
-"統，對於直接連線安裝在本機上，或者是一般網路使用上都相當不錯。這個服務程式相"
-"當簡單，也能夠用使用 lpd 的 Server 端或者是 Client 端都能夠相容使用。這個程式"
-"提供許多功能機制，使用設定上也能夠像是「pdq」程式的簡單。如果您希望能夠讓 "
-"CUPS 能夠模擬「lpd」服務程式功能的話，您需要開啟「cups-lpd」這個服務程式。另"
-"外，它提供了圖形的介面能夠讓使用者選擇要列印的印表機，包含相關列印參數的調"
-"整。\n"
-"\n"
-" *『lprNG』 - 「line printer daemon New Generation」，這一套列印服務系統，與"
-"先前提到的項目都是具備差不多的功能，不過這個列印系統比較特殊的地方就是，因為"
-"它支援 IPX 協定，所以能夠把要列印的資料透過 Novell 網路印表機。列印出來如果您"
-"需要透過 Novell網路印表機進行列印的動作，您可以考慮使用這一套列印系統。"
+" *『%s』 - 「Common Unix Printing System」，這是一套個相當好的列印服務系統，"
+"對於直接連線安裝在本機上，或者是一般網路使用上都相當不錯。這個服務程式相當簡"
+"單，也能夠用使用 lpd 的 Server 端或者是 Client 端都能夠相容使用。這個程式提供"
+"許多功能機制，使用設定上也能夠像是「pdq」程式的簡單。如果您希望能夠讓 CUPS 能"
+"夠模擬「lpd」服務程式功能的話，您需要開啟「cups-lpd」這個服務程式。另外，它提"
+"供了圖形的介面能夠讓使用者選擇要列印的印表機，包含相關列印參數的調整。"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -11498,7 +11583,7 @@ msgid "\"Menu\" key"
 msgstr "\"選單\" 按鍵"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -11521,7 +11606,7 @@ msgstr "安全性管理者:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
@@ -11694,7 +11779,7 @@ msgstr ""
 "所發生一些事情。建議您一定要啟動 syslog 服務程式"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
 msgstr "未知|一般"
 
@@ -11863,11 +11948,6 @@ msgstr ""
 "這台 \"%s\" 印表機已經存在了，\n"
 "您確定要覆蓋這台印表機的組態設定嗎？"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "找不到可用的分割區"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -11877,6 +11957,11 @@ msgstr ""
 #, c-format
 msgid "Unselected All"
 msgstr "取消選取所有項目"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "找不到可用的分割區"
 
 #: ../../standalone/printerdrake:1
 #, fuzzy, c-format
@@ -11918,7 +12003,7 @@ msgstr "建立整個核心 -->"
 msgid "modem"
 msgstr "型號"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "歡迎來到 %s"
@@ -11992,6 +12077,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "不正確的 CD 片標籤，磁碟標籤名稱為 %s。"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Daemon (%s) 服務程式包含 :\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12117,7 +12211,7 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Choose your country"
-msgstr "選擇您的國家"
+msgstr "選擇您的國家或地區"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12127,26 +12221,6 @@ msgid ""
 msgstr ""
 "\n"
 "- 系統檔案:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -12357,9 +12431,9 @@ msgid "Parallel port #%s"
 msgstr "於並列埠上 \\/*%s"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level"
-msgstr "安全等級:"
+msgstr "安全層級"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12609,9 +12683,9 @@ msgid ""
 msgstr "    左上方進度Bar的 y 軸坐標                      "
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System installation"
-msgstr "SILO 安裝"
+msgstr "系統安裝"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12933,7 +13007,7 @@ msgstr ""
 msgid "Local Printer"
 msgstr "本機印表機"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, fuzzy, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "您要把這個裝置 %s 掛載在那裡 ?"
@@ -13037,36 +13111,6 @@ msgstr "滑鼠連接的位置： %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "重新選取正確的字型"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -13325,6 +13369,11 @@ msgstr "5月"
 msgid "Yaboot mode"
 msgstr "Yaboot 模式"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "一般的三鍵式滑鼠"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -13339,11 +13388,6 @@ msgstr ""
 "無法執行執行 lilo!\n"
 "請使用 root 身份在命令提示字元執行 \"lilo\" 程式，以便於完成 lilo 佈景的安"
 "裝。"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "一般的三鍵式滑鼠"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13664,23 +13708,6 @@ msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
 msgid "Select a scanner model"
@@ -13719,9 +13746,9 @@ msgid ""
 msgstr "網路介面尚未設定，請執行設定精靈"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System configuration"
-msgstr "警示設定"
+msgstr "系統整合"
 
 #: ../../any.pm:1 ../../security/l10n.pm:1
 #, c-format
@@ -13790,7 +13817,7 @@ msgstr ""
 "精靈或者是進階模式建立之。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Listed here are the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -14061,11 +14088,6 @@ msgstr "網域名稱"
 msgid "Sharing of local printers"
 msgstr "可用的印表機"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr ""
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -14075,6 +14097,11 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "可用的印表機"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "NO"
+msgstr "資訊"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14111,23 +14138,8 @@ msgstr ""
 "\n"
 "按確定繼續。"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface \"%s\""
 msgstr "介面 %s"
 
@@ -14226,9 +14238,9 @@ msgid "Launch userdrake"
 msgstr "啟動 userdrake"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "您要進行安裝或是升級？"
+msgstr "這是安裝或是升級?"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -14241,8 +14253,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"要獲得進一步開放源碼社群資訊與成為會員方式，包含學習、教學、求助與參與討論，"
-"請參考我們首頁上的 \"Community\" 網頁項目"
+"要獲得進一步開放源碼社群資訊與成為會員方式，包含學習、\n"
+"教學、求助與參與討論，請參考我們首頁上的 \"Community\" 網頁項目"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14392,7 +14404,7 @@ msgid "Logitech MouseMan"
 msgstr "Logitech Bus Mouse"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Removing %s ..."
 msgstr "正在移除 %s"
 
@@ -14518,7 +14530,7 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -14828,7 +14840,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, fuzzy, c-format
 msgid "USB printer"
-msgstr "，USB 印表機  \\/*%s"
+msgstr "，USB 印表機"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -14923,6 +14935,17 @@ msgstr "錯誤"
 #, fuzzy, c-format
 msgid "Refresh the list"
 msgstr "使用者列表"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15113,7 +15136,7 @@ msgid "device"
 msgstr "裝置設備"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory to save to:"
 msgstr "請輸入您要儲存的目錄名稱："
 
@@ -15386,9 +15409,9 @@ msgid "Up"
 msgstr "向上"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "防火牆/路由器"
+msgstr "防火牆"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -15476,12 +15499,17 @@ msgstr "一般"
 msgid "Cylinder %d to %d\n"
 msgstr "第 %d 磁柱到第 %d 磁柱\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "新設定檔 ..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr ""
@@ -15566,9 +15594,9 @@ msgid "Windows (FAT32)"
 msgstr "Windows (FAT32)"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "沒有密碼"
+msgstr "Root 密碼"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15629,9 +15657,9 @@ msgid "Use a floppy"
 msgstr "儲存設定到磁片"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable ACPI"
-msgstr "允許 CD 開機？"
+msgstr "啟用 ACPI"
 
 #: ../../fs.pm:1
 #, c-format
@@ -15779,6 +15807,8 @@ msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
 msgstr ""
+"用 Mozilla 或 Konqueror 在網上衝浪，用 Evolution 或 Kmail 閱讀郵件，用"
+"OpenOffice.org 創建您的文檔。"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -15990,7 +16020,7 @@ msgid "Unknown|Generic"
 msgstr "未知|一般"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -16008,13 +16038,13 @@ msgstr ""
 "件更新安裝。每一版 Linux 安裝套件發行後，若是遇到有相關套件有任何的安全性問題"
 "或者是臭蟲時，Linux 廠商都會發佈安全公告並釋放出相關更新套件提供給使用者安裝"
 "更新。為了確保您系統的安全，安裝程式能夠讓您在安裝好基本系統後，現在就立即透"
-"過網路連線取得更新套件進行安裝。若是您打算要安裝更新套件的話，請選擇「確"
-"定」，取消的話請選擇「否」。\n"
+"過網路連線取得更新套件進行安裝。若是您打算要安裝更新套件的話，請選擇「%s」，"
+"取消的話請選擇「%s」。\n"
 "\n"
-"當你選擇「確定」時，系統將會顯示可供更新的站台清單資訊讓您選擇，請您選擇一個"
-"離您比較靠近的站台。接下來安裝程式會連線到該站台取回相關更新資訊，到時候請選"
-"擇你要更新的項目，點選「安裝」取得要安裝更新的套件，或者是選擇「取消」放棄套"
-"件的更新。"
+"當你選擇「%s」時，系統將會顯示可供更新的站台清單資訊讓您選擇，請您選擇一個離"
+"您比較靠近的站台。接下來安裝程式會連線到該站台取回相關更新資訊，到時候請選擇"
+"你要更新的項目，點選「%s」取得要安裝更新的套件，或者是選擇「%s」放棄套件的更"
+"新。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16049,6 +16079,11 @@ msgstr "其他裝置"
 msgid "burner"
 msgstr "印表機"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid " (Default is all users)"
@@ -16060,7 +16095,7 @@ msgid "No remote machines"
 msgstr "(位於這個機器上)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Welcome to the Printer Setup Wizard\n"
@@ -16177,6 +16212,26 @@ msgstr "撥號選項"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -16311,7 +16366,7 @@ msgid "Your choice? (0/1, default `%s') "
 msgstr "您的選擇? (0/1，預設為 `%s') "
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -16349,10 +16404,10 @@ msgstr ""
 "當您要選擇要格式化的分割區時，請小心選擇，因為選錯的話，您的資料將會一去無"
 "回，再也無法救回來了，因此您要特別小心選擇。\n"
 "\n"
-"當您選擇好後，請點選『確定』，安裝程式會進行格式化的動作。\n"
+"當您選擇好後，請點選『%s』，安裝程式會進行格式化的動作。\n"
 "\n"
-"若是您點選了『取消』，那將會會到先前的操作步驟，繼續選擇要安裝的分割區，假設"
-"您點選了『進階』的項目後，將會提供是否要進行壞軌掃描動作的選項。"
+"若是您點選了『%s』，那將會會到先前的操作步驟，繼續選擇要安裝的分割區，假設您"
+"點選了『%s』的項目後，將會提供是否要進行壞軌掃描動作的選項。"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16393,7 +16448,7 @@ msgstr ""
 " (並列埠：/dev/lp0，/dev/lp1，...... 相當於 LPT1:，LPT2:....\n"
 "第一台 USB 印表機是：/dev/usb/lp0，第二台：/dev/usb/lp1)。"
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "下一步"
@@ -16583,7 +16638,7 @@ msgid "Adapter %s: %s"
 msgstr "介面卡 %s： %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot disk creation"
 msgstr "製作開機磁片"
 
@@ -16683,9 +16738,9 @@ msgid "Russia"
 msgstr "俄羅斯"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "列印"
+msgstr "分隔區"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -17181,14 +17236,6 @@ msgstr ""
 msgid "Please Wait... Applying the configuration"
 msgstr "請稍待... 正在套用該設定"
 
-# NOTE: this message will be displayed by grub at boot time; that is
-# using the BIOS font; that means cp437 charset on 99.99% of PC computers
-# out there. It is the nsuggested that for non latin languages an ascii
-# transliteration be used; or maybe the english text be used; as it is best
-#
-# The lines must fit on screen, aka length < 80
-# and only one line per string for the GRUB messages
-#
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
 #: ../../bootloader.pm:1
@@ -17677,7 +17724,7 @@ msgstr ""
 msgid "format of floppies supported by the drive"
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
@@ -17850,8 +17897,8 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
-"MandrakeSoft 的成功，來自於自由軟體的發展準則。Mandrake Linux許多新的功能與機"
-"制，都是來自於全世界 Linux 社群努力的共同成果。"
+"MandrakeSoft 的成功，來自於自由軟體的發展準則。Mandrake Linux\n"
+"許多新的功能與機制，都是來自於全世界 Linux 社群努力的共同成果。"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18291,6 +18338,11 @@ msgid ""
 "Do you agree to lose all the partitions?\n"
 msgstr ""
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Find Package"
+msgstr "%d 個套件"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -18405,6 +18457,24 @@ msgstr "區域網路設定"
 #, c-format
 msgid "hard disk model"
 msgstr "硬碟型號"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -18591,15 +18661,15 @@ msgstr "英式鍵盤"
 msgid "Unmount"
 msgstr "卸載"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "移除字型"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "移除字型"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18959,17 +19029,6 @@ msgstr "執行 \"%s\" 中 ..."
 #, c-format
 msgid "enable radio support"
 msgstr "開啟 radio 支援"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, fuzzy, c-format
@@ -19363,295 +19422,635 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "包含讀信、寫信以及閱讀網路論壇的工具 (pine、mutt、tin ..) 與及 web 瀏覽工具"
 
+#~ msgid "\t-CDROM.\n"
+#~ msgstr "\t-光碟機\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "\n"
+#~ "We are now going to configure the %s connection.\n"
+#~ "\n"
+#~ "\n"
+#~ "Press OK to continue."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "準備設定 %s 的連線。\n"
+#~ "\n"
+#~ "\n"
+#~ "按確定繼續。"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "To submit a bug report, click on the button report.\n"
+#~ "This will open  a web browser window  on https://drakbug.mandrakesoft."
+#~ "com\n"
+#~ " where you'll find a form to fill in.The information displayed above will "
+#~ "be \n"
+#~ "transferred to that server\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "要回報任何臭蟲問題，請點選回報的按鈕。\n"
+#~ "系統將會開啟瀏覽器並連線到 https://drakbug.mandrakesoft.com\n"
+#~ " 然後請找到適當的項目並輸入相關問題資訊，以便於將臭蟲問題送至主機通知發展"
+#~ "人員。\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "                      DrakBackup Daemon Report\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "                      DrakBackup 排程備份報表清單\n"
+#~ "\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "                      DrakBackup Report \n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "                      DrakBackup 報表清單 \n"
+#~ "\n"
+
+#~ msgid ""
+#~ "\n"
+#~ " Some errors during sendmail are caused by \n"
+#~ " a bad configuration of postfix. To solve it you have to\n"
+#~ " set myhostname or mydomain in /etc/postfix/main.cf\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "由於不正確的設定或是程式錯誤，導致信件無法正常發送\n"
+#~ "出去。請檢視您的 postfix 或者是 sendmail 設定組態。\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "- Daemon (%s) include:\n"
+#~ msgstr ""
+#~ "\n"
+#~ "- Daemon (%s) 服務程式包含 :\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Restore Backup Problems:\n"
+#~ "\n"
+#~ "During the restore step, Drakbackup will verify all your\n"
+#~ "backup files before restoring them.\n"
+#~ "Before the restore, Drakbackup will remove \n"
+#~ "your original directory, and you will loose all your \n"
+#~ "data. It is important to be careful and not modify the \n"
+#~ "backup data files by hand.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "回存備份發生錯誤:\n"
+#~ "\n"
+#~ "在回存資料過程中，DrakBackup 程式會檢視備份檔案是否\n"
+#~ "有毀壞，以便於確認回存的檔案正確無誤。\n"
+#~ "在回存之前，DrakBackup 程式會先移除要回存路徑內的\n"
+#~ "所有檔案目錄。請注意這一點，因此不要亂修改備份資料檔。\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "You can connect to the Internet or reconfigure your connection."
+#~ msgstr ""
+#~ "\n"
+#~ "您可以連線到 Internet 或者是重新設定您的連線。"
+
+#~ msgid ""
+#~ "\n"
+#~ "You can disconnect or reconfigure your connection."
+#~ msgstr ""
+#~ "\n"
+#~ "您可以切斷連線或者是重新設定您的連線。"
+
+#~ msgid ""
+#~ "\n"
+#~ "You can reconfigure your connection."
+#~ msgstr ""
+#~ "\n"
+#~ "您可以重新設定您的連線。"
+
+#~ msgid ""
+#~ "  Transfer  \n"
+#~ "Now"
+#~ msgstr ""
+#~ "  傳送    \n"
+#~ "現在"
+
 #~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#, fuzzy
-#~ msgid "Hostname configuration"
-#~ msgstr "警示設定"
+#~ msgid "Author:"
+#~ msgstr "作者："
 
-#, fuzzy
-#~ msgid "Hostname"
-#~ msgstr "主機名稱"
+#~ msgid "Backup %s to %s.old"
+#~ msgstr "將 %s 檔案備份至 %s.old"
 
-#~ msgid "Remote Printers"
-#~ msgstr "遠端印表機"
+#~ msgid "Backup system"
+#~ msgstr "備份系統資料"
 
-#~ msgid "Printing system: "
-#~ msgstr "列印系統："
+#~ msgid "CDROM / DVDROM"
+#~ msgstr "CDROM / DVDROM"
 
-#, fuzzy
-#~ msgid "Level 1"
-#~ msgstr "階層"
+#~ msgid "China (Hong Kong)"
+#~ msgstr "中國(香港)"
 
-#, fuzzy
-#~ msgid "Level 2"
-#~ msgstr "階層"
+#~ msgid ""
+#~ "Choose the hard drive you want to erase in order to install your new\n"
+#~ "Mandrake Linux partition. Be careful, all data present on it will be "
+#~ "lost\n"
+#~ "and will not be recoverable!"
+#~ msgstr ""
+#~ "選擇您希望用來安裝 Mandrake Linux 系統的硬碟。當你選擇好後，該顆硬碟上面所"
+#~ "有的資料將會被清除而無法挽救，請小心操作這個項目。"
 
-#, fuzzy
-#~ msgid "Level 3"
-#~ msgstr "階層"
+#~ msgid "Choose your country/region"
+#~ msgstr "選擇您的國家或地區"
 
-#, fuzzy
-#~ msgid "Level 4"
-#~ msgstr "階層"
+#~ msgid "Click here to launch the wizard ->"
+#~ msgstr "點選這裡啟動設定精靈 ->"
 
-#, fuzzy
-#~ msgid "Level 5"
-#~ msgstr "階層"
+#~ msgid "Configure the connection"
+#~ msgstr "連線設定"
 
-#, fuzzy
-#~ msgid "Insert floppy and press %s"
-#~ msgstr "請在 %s 中插入磁碟片"
+#~ msgid ""
+#~ "Congratulations, the network and Internet configuration is finished.\n"
+#~ "The configuration will now be applied to your system.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "恭喜 ! 網路設定組態已經設定完成了。\n"
+#~ "您的系統已經能夠使用該設定。\n"
+#~ "\n"
 
-#~ msgid "Load"
-#~ msgstr "載入"
+#~ msgid "Connect"
+#~ msgstr "連線"
 
-#, fuzzy
-#~ msgid "Bad Ip"
-#~ msgstr "介面卡 IO"
+#~ msgid "Copy %s to %s"
+#~ msgstr "正在複製 %s 至 %s"
+
+#~ msgid "Country"
+#~ msgstr "國家"
+
+#~ msgid ""
+#~ "Create/Transfer\n"
+#~ "backup keys for SSH"
+#~ msgstr ""
+#~ "建立/傳送\n"
+#~ "備份 SSH 的憑證檔案"
+
+#~ msgid "Disconnect"
+#~ msgstr "切斷連線"
+
+#~ msgid "Expert Area"
+#~ msgstr "專家區域"
+
+#~ msgid ""
+#~ "Failed to check filesystem %s. Do you want to repair the errors? (beware, "
+#~ "you can loose data)"
+#~ msgstr ""
+#~ "無法檢查該 %s 檔案系統，您要修復該錯誤嗎？(請注意，修復可能導致遺失資料)"
+
+#~ msgid ""
+#~ "Finally, you will be asked whether you want to see the graphical "
+#~ "interface\n"
+#~ "at boot. Note this question will be asked even if you chose not to test "
+#~ "the\n"
+#~ "configuration. Obviously, you want to answer \"No\" if your machine is "
+#~ "to\n"
+#~ "act as a server, or if you were not successful in getting the display\n"
+#~ "configured."
+#~ msgstr ""
+#~ "最後的時候，你應該會看到詢問您是否要在開機完成後\n"
+#~ "直接進入圖形登入介面。一般我們建議，若是您的電腦\n"
+#~ "是用來當作伺服器使用的話，這個項目可以選擇『否』，\n"
+#~ "因為一般 Server 伺服器並不跑 X 環境執行相關GUI圖形\n"
+#~ "介面軟體程式。"
+
+#~ msgid "Fonts conversion"
+#~ msgstr "字型轉換"
+
+#~ msgid "Harddrake2 version "
+#~ msgstr "Harddrake2 版本 "
+
+#~ msgid "Importance: %s\n"
+#~ msgstr "重要性： %s\n"
+
+#~ msgid "Internet connection & configuration"
+#~ msgstr "Intenet 連線與設定"
+
+#~ msgid "LiLo and Bootsplash themes installation successfull"
+#~ msgstr "lilo 與開機進度畫面的佈景檔案已經安裝成功"
+
+#~ msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
+#~ msgstr "執行 'kinird -f /boot/initrd-%s.img %s'。"
+
+#~ msgid ""
+#~ "More than one Microsoft partition has been detected on your hard drive.\n"
+#~ "Please choose the one you want to resize in order to install your new\n"
+#~ "Mandrake Linux operating system.\n"
+#~ "\n"
+#~ "Each partition is listed as follows: \"Linux name\", \"Windows name\"\n"
+#~ "\"Capacity\".\n"
+#~ "\n"
+#~ "\"Linux name\" is structured: \"hard drive type\", \"hard drive number"
+#~ "\",\n"
+#~ "\"partition number\" (for example, \"hda1\").\n"
+#~ "\n"
+#~ "\"Hard drive type\" is \"hd\" if your hard dive is an IDE hard drive and\n"
+#~ "\"sd\" if it is a SCSI hard drive.\n"
+#~ "\n"
+#~ "\"Hard drive number\" is always a letter after \"hd\" or \"sd\". With "
+#~ "IDE\n"
+#~ "hard drives:\n"
+#~ "\n"
+#~ " * \"a\" means \"master hard drive on the primary IDE controller\";\n"
+#~ "\n"
+#~ " * \"b\" means \"slave hard drive on the primary IDE controller\";\n"
+#~ "\n"
+#~ " * \"c\" means \"master hard drive on the secondary IDE controller\";\n"
+#~ "\n"
+#~ " * \"d\" means \"slave hard drive on the secondary IDE controller\".\n"
+#~ "\n"
+#~ "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
+#~ "\"second lowest SCSI ID\", etc.\n"
+#~ "\n"
+#~ "\"Windows name\" is the letter of your hard drive under Windows (the "
+#~ "first\n"
+#~ "disk or partition is called \"C:\")."
+#~ msgstr ""
+#~ "目前偵測到您的硬碟上有多個 Windows 分割區，請選擇您希望要縮小Windows的分割"
+#~ "區，以便於把空間挪出來安裝「Mandrake Linux」作業系統。\n"
+#~ "\n"
+#~ "每個分割區都列出了像是:『Linux 名稱』,『Windows 名稱』,『容量』。\n"
+#~ "\n"
+#~ "『Linux 名稱』是有結構性的:『硬碟型態』,『硬碟編號』,『分割區編號』(比方像"
+#~ "是: hda )。\n"
+#~ "\n"
+#~ "『硬碟型態』就是，若您使用的是 IDE 硬碟，會顯示「hd」, 若是SCSI硬碟的話，"
+#~ "就是顯示「sd」。\n"
+#~ "\n"
+#~ "『硬碟編號』就是在「hd」或者是「sd」後面的字母。以 IDE 硬碟裝置來說其意義"
+#~ "為:\n"
+#~ "\n"
+#~ " ＊「a」這是指「primary IDE controller 上第一台 (master) 硬碟」，\n"
+#~ "\n"
+#~ " ＊「b」這是指「primmary IDE controller 上第二台 (slave) 硬碟」，\n"
+#~ "\n"
+#~ " ＊「c」這是指「secondary IDE controller 上第一台 (master) 硬碟」，\n"
+#~ "\n"
+#~ " ＊「d」這是指「secondary IDE controller 上第二台 (slave) 硬碟」。\n"
+#~ "\n"
+#~ "以 SCSI 硬碟來說，「a」就是指「SCSI IDE 編號最小的那一台」, 「b」就是指"
+#~ "「SCSI IDE」編號為二的那一台硬碟」，然後依此類推下去.....\n"
+#~ "\n"
+#~ "「Windows 名稱」就是在 Windows 下的磁碟機代號名稱，比方像是「C:\\」。"
+
+#~ msgid "Name: %s\n"
+#~ msgstr "名稱： %s\n"
+
+#~ msgid "New configuration (isdn-light)"
+#~ msgstr "新的組態設定 (isdn-light)"
+
+#~ msgid "No CDR/DVDR in drive!"
+#~ msgstr "未放入 CDR/DVDR！"
+
+#~ msgid "Old configuration (isdn4net)"
+#~ msgstr "舊的組態設定 (isdn4net)"
+
+#~ msgid ""
+#~ "Other (not drakbackup)\n"
+#~ "keys in place already"
+#~ msgstr ""
+#~ "其他 (非 drakbackup)\n"
+#~ "認證憑證檔案已經存在"
 
 #~ msgid "Output"
 #~ msgstr "輸出"
 
+#~ msgid ""
+#~ "Please be sure that the cron daemon is included in your services. \n"
+#~ "\n"
+#~ "Note that currently all 'net' medias also use the hard drive."
+#~ msgstr ""
+#~ "請確定您系統有安裝並且有啟用 cron 排程服務程式。\n"
+#~ "\n"
+#~ "請注意目前所有 '網路' 媒介都會使用硬碟。"
+
+#~ msgid "Please check for multisession CD"
+#~ msgstr "如果您使用的是多區段的 CD 片，請選取該項目"
+
+#~ msgid "Please check if you are using CDRW media"
+#~ msgstr "如果您使用的是 CDRW 裝置，請選取該項目"
+
+#~ msgid "Please check if you are using a DVDR device"
+#~ msgstr "如果您使用的是 DVDR 裝置，請選取該項目"
+
+#~ msgid "Please check if you are using a DVDRAM device"
+#~ msgstr "如果您使用的是 DVDRAM 裝置，請選取該項目"
+
+#~ msgid "Please check if you want to eject your tape after the backup."
+#~ msgstr "如果您希望備份完成後自動退片，請選取該項目。"
+
+#~ msgid "Please check if you want to erase your RW media (1st Session)"
+#~ msgstr "如果您要先清除該讀寫媒介裝置上的資料 (1st Session)，請選取該項目"
+
+#~ msgid "Please check if you want to erase your tape before the backup."
+#~ msgstr "如果您要先清除磁帶原有資料，請選取該項目。"
+
+#~ msgid "Please check if you want to use the non-rewinding device."
+#~ msgstr "如果您要使用 non-rewinding 的裝置，請選取該項目。"
+
+#~ msgid ""
+#~ "Please choose the\n"
+#~ "media for backup."
+#~ msgstr "請選擇要用來備份的裝置"
+
+#~ msgid ""
+#~ "Please choose the time \n"
+#~ "interval between each backup"
+#~ msgstr ""
+#~ "請輸入每一次備份的\n"
+#~ "間隔時間"
+
+#~ msgid ""
+#~ "Please choose your CD/DVD device\n"
+#~ "(Press Enter to propogate settings to other fields.\n"
+#~ "This field isn't necessary, only a tool to fill in the form.)"
+#~ msgstr ""
+#~ "請選擇您要使用的 CD/DVD 裝置\n"
+#~ "(另外您可以另外輸入其他額外需要的參數欄位，\n"
+#~ "若是不需要指定，可以不需要填入數值。)"
+
+#~ msgid "Please choose your CD/DVD media size (Mb)"
+#~ msgstr "請選取您 CD/DVD 容量大小"
+
+#~ msgid "Please enter the device name to use for backup"
+#~ msgstr "請輸入您要用來備份使用的裝置名稱"
+
+#~ msgid ""
+#~ "Please enter the directory (or module) to\n"
+#~ " put the backup on this host."
+#~ msgstr "請輸入要備份到該主機的所在目錄名稱"
+
+#~ msgid "Please enter the directory to save to:"
+#~ msgstr "請輸入您要儲存的目錄名稱："
+
+#~ msgid "Please enter the directory to save:"
+#~ msgstr "請輸入您要儲存的目錄名稱："
+
+#~ msgid "Please enter the directory where backups are stored"
+#~ msgstr "請輸入備份資料所要回存的目錄"
+
+#~ msgid "Please enter the host name or IP."
+#~ msgstr "請輸入主機名稱或是 IP"
+
+#~ msgid ""
+#~ "Please enter the maximum size\n"
+#~ " allowed for Drakbackup"
+#~ msgstr "請輸入備份允許最大的大小"
+
+#~ msgid ""
+#~ "Please enter your CD Writer device name\n"
+#~ " ex: 0,1,0"
+#~ msgstr ""
+#~ "請輸入您的燒錄器裝置名稱\n"
+#~ "比方像是： 0,1,0"
+
+#~ msgid "Please enter your login"
+#~ msgstr "請輸入登入帳號"
+
+#~ msgid "Please enter your password"
+#~ msgstr "請輸入登入密碼"
+
 #~ msgid "Please relog into %s to activate the changes"
 #~ msgstr "請重新登入 %s 好讓變更生效"
 
-#~ msgid ""
-#~ "The following printers are configured. Double-click on a printer to "
-#~ "change its settings; to make it the default printer; to view information "
-#~ "about it; or to make a printer on a remote CUPS server available for Star "
-#~ "Office/OpenOffice.org/GIMP."
-#~ msgstr ""
-#~ "下列的印表機都已經設定過了，您可以點選其中一個項目，\n"
-#~ "可以查看內容資訊或者是修改內容設定，包含設定為預設印表機。\n"
-#~ "要檢視關於這台印表機的資訊，或者是設定讓這台印表機在\n"
-#~ "Star Office/OpenOffice.org/GIMP 內成一台可被使用的 CUPS 服務主機。"
+#~ msgid "Previous"
+#~ msgstr "上一步"
+
+#~ msgid "Printing system: "
+#~ msgstr "列印系統："
+
+#~ msgid "Region"
+#~ msgstr "區域"
+
+#~ msgid "Relaunch 'lilo'"
+#~ msgstr "執行執行 'lilo'"
+
+#~ msgid "Remote Printers"
+#~ msgstr "遠端印表機"
+
+#~ msgid "Russian (Yawerty)"
+#~ msgstr "俄羅斯 (Yawerty)"
+
+#~ msgid "Select the files or directories and click on 'Add'"
+#~ msgstr "選取檔案或者是目錄，然後點選 '加入'"
+
+#~ msgid "Size: %d KB\n"
+#~ msgstr "大小： %d KB\n"
+
+#~ msgid "Thank you for choosing Mandrake Linux 9.1"
+#~ msgstr "感謝您選擇 Mandrake Linux 9.1"
 
 #~ msgid ""
-#~ "Please enter your host name if you know it.\n"
-#~ "Some DHCP servers require the hostname to work.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''."
+#~ "This is HardDrake, a Mandrake hardware configuration tool.\n"
+#~ "Version:"
 #~ msgstr ""
-#~ "請輸入您的主機名稱，某些 DHCP 主機會要求有\n"
-#~ "主機名稱才能使用，您的主機名稱應該要是一個\n"
-#~ "合格主機全名 (FQDN)，如 「mybox.mylab.myco.com」。"
+#~ "這是 HardDrake 程式，Mandrake 所發展的硬體檢視設定工具。\n"
+#~ "版本："
 
-#~ msgid "DrakFloppy Error: %s"
-#~ msgstr "DrakFloppy 錯誤：%s"
-
-#~ msgid "Launch Aurora at boot time"
-#~ msgstr "開機時啟動 Aurora 圖形介面"
-
-#~ msgid "Traditional Gtk+ Monitor"
-#~ msgstr "Traditional Gtk+ Monitor"
-
-#~ msgid "Traditional Monitor"
-#~ msgstr "Traditional Monitor"
-
-#~ msgid "NewStyle Monitor"
-#~ msgstr "NewStyle Monitor"
-
-#~ msgid "NewStyle Categorizing Monitor"
-#~ msgstr "NewStyle Categorizing Monitor"
-
-#~ msgid "Secure Connection"
-#~ msgstr "安全連線"
-
-#~ msgid "FTP Connection"
-#~ msgstr "FTP 連線"
-
-#~ msgid "Mail/Groupware/News"
-#~ msgstr "郵件/群組軟體/新聞群組"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix MTA 軟體、INN 新聞群組軟體"
-
-#~ msgid "/Options"
-#~ msgstr "/選項 (O)"
+#~ msgid "Total progess"
+#~ msgstr "全部進度"
 
 #~ msgid ""
-#~ "The partition you've selected to add as root (/) is physically located "
-#~ "beyond\n"
-#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
-#~ "partition"
+#~ "Unable to properly close mkbootdisk: \n"
+#~ " %s \n"
+#~ " %s"
 #~ msgstr ""
-#~ "您選取作為根目錄 (/) 的分割區位置在硬碟的第 1024 個磁柱之後，\n"
-#~ "而且您也沒有設定 /root 分割區，假如您準備用 LILO 當開機程式的話，\n"
-#~ "記得要加入一個 /boot 分割區"
+#~ "無法正常關閉 mkbootdisk：\n"
+#~ " %s\n"
+#~ " %s"
+
+#~ msgid "Unkown driver"
+#~ msgstr "未知的驅動程式"
+
+#~ msgid "Use CD/DVDROM to backup"
+#~ msgstr "使用 CD/DVDROM 備份"
+
+#~ msgid "Use Incremental Backups  (do not replace old backups)"
+#~ msgstr "使用遞增備份 (不會覆蓋舊有備份)"
+
+#~ msgid "Use incremental backup  (do not replace old backups)"
+#~ msgstr "使用遞增備份 (不要覆蓋舊有備份)"
+
+#~ msgid "Version: %s\n"
+#~ msgstr "版本編號： %s\n"
 
 #~ msgid ""
-#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
-#~ "> 1024).\n"
-#~ "Either you use LILO and it won't work, or you don't use LILO and you "
-#~ "don't need /boot"
+#~ "WARNING!\n"
+#~ "\n"
+#~ "DrakX will now resize your Windows partition. Be careful:\n"
+#~ "this operation is dangerous. If you have not already done\n"
+#~ "so, you should first exit the installation, run scandisk\n"
+#~ "under Windows (and optionally run defrag), then restart the\n"
+#~ "installation. You should also backup your data.\n"
+#~ "When sure, press Ok."
 #~ msgstr ""
-#~ "不好意思，程式不接受在這個磁碟上建立 /boot 分割區的指令 (磁柱 > 1024).\n"
-#~ "因為 LILO 會失效導致無法開機；若您不用 LILO，根本不需要 /boot 分割區"
+#~ "警告!\n"
+#~ "\n"
+#~ "DrakX 現在要重定您 Windows 分割區的大小，請小心!! \n"
+#~ "這個動作是很危險的，請先離開安裝程式，在 Windows \n"
+#~ "底下執行 scandisk 跟 defrag 以後再來安裝 Linux，而且\n"
+#~ "最好先將 Windows 分割區底下的資料做好備份。確定都\n"
+#~ "沒問題以後，才按『確定』鈕。"
 
-#~ msgid "Do you want to configure another printer?"
-#~ msgstr "您還需要設定另外一台印表機嗎？"
-
-#~ msgid "Know how to use this printer"
-#~ msgstr "瞭解如何使用這台印表機"
-
-#~ msgid "Preparing Printerdrake..."
-#~ msgstr "正在準備 Printerdrake 印表機設定精靈..."
-
-#~ msgid "Reading printer data ..."
-#~ msgstr "讀取印表機資料 ..."
+#~ msgid "We are now going to configure the %s connection."
+#~ msgstr "準備設定 %s 的連線。"
 
 #~ msgid ""
-#~ "You must indicate where you wish to place the information required to "
-#~ "boot\n"
-#~ "GNU/Linux.\n"
+#~ "Which ISDN configuration do you prefer?\n"
 #~ "\n"
-#~ "Unless you know exactly what you are doing, choose \"First sector of "
-#~ "drive\n"
-#~ "(MBR)\"."
+#~ "* The Old configuration uses isdn4net. It contains powerful\n"
+#~ "  tools, but is tricky to configure, and not standard.\n"
+#~ "\n"
+#~ "* The New configuration is easier to understand, more\n"
+#~ "  standard, but with less tools.\n"
+#~ "\n"
+#~ "We recommand the light configuration.\n"
 #~ msgstr ""
-#~ "您必須要指定放 Linux 開機程式的位置。\n"
+#~ "您要使用那一種 ISDN 組態？\n"
 #~ "\n"
-#~ "除非您很清楚您在做什麼，否則都應該選取 \"硬碟的第一個磁區 (MBR)\"。"
+#~ "* 舊的組態設定是使用 isdn4net，它包含許多很好用的工具，但是\n"
+#~ "  但是這個程式很難設定，也不是很標準。\n"
+#~ "\n"
+#~ "* 新的組態設定比較容易了解，也更標準，只不過可用的工具會少一點。\n"
+#~ "\n"
+#~ "建議您使用 light 組態設定較佳。\n"
 
 #~ msgid ""
-#~ "DrakX now needs to know if you want to perform a default (\"Recommended"
-#~ "\")\n"
-#~ "installation or if you want to have greater control (\"Expert\") over "
-#~ "your\n"
-#~ "installation. You can also choose to do a new installation or upgrade "
-#~ "your\n"
-#~ "existing Mandrake Linux system:\n"
-#~ "\n"
-#~ " * \"Install\": completely wipes out the old system. However, depending "
-#~ "on\n"
-#~ "what is currently installed on your machine, you may be able to keep "
-#~ "some\n"
-#~ "old partitions (Linux or otherwise) unchanged;\n"
-#~ "\n"
-#~ " * \"Upgrade\": this installation class allows to simply update the\n"
-#~ "packages currently installed on your Mandrake Linux system. It keeps "
-#~ "your\n"
-#~ "hard drives' current partitions as well as user configurations. All "
-#~ "other\n"
-#~ "configuration steps remain available, similar to a normal installation;\n"
-#~ "\n"
-#~ " * \"Upgrade Packages Only\": this new installation class allows you to\n"
-#~ "upgrade an existing Mandrake Linux system while keeping all system\n"
-#~ "configurations unchanged. Adding new packages to the current "
-#~ "installation\n"
-#~ "is also possible.\n"
-#~ "\n"
-#~ "Upgrades should work fine on Mandrake Linux systems using version \"8.1"
-#~ "\"\n"
-#~ "or later.\n"
-#~ "\n"
-#~ "Depending on your GNU/Linux knowledge, select one of the following "
-#~ "choices:\n"
-#~ "\n"
-#~ " * Recommended: choose this if you have never installed a GNU/Linux\n"
-#~ "operating system. The installation will be very easy and you will only "
-#~ "be\n"
-#~ "asked a few questions;\n"
-#~ "\n"
-#~ " * Expert: if you have a good GNU/Linux understanding, you may wish to\n"
-#~ "perform a highly customized installation. Some of the decisions you will\n"
-#~ "have to make may be difficult if you do not have good GNU/Linux "
-#~ "knowledge,\n"
-#~ "so it is not recommended that those without a fair amount of experience\n"
-#~ "select this installation class."
+#~ "Which dhcp client do you want to use?\n"
+#~ "Default is dhcp-client."
 #~ msgstr ""
-#~ "這裡，您需要決定一個安裝的模式，比方你希望使用預設『建議值』或者是使用比較"
-#~ "有自主權『專家模式』模式進行安裝。當然，您也可以安裝一套全新的系統，或者是"
-#~ "將目前的『Mandrake Linux』系統更新：\n"
-#~ "\n"
-#~ " ＊「安裝」: 當您打算安裝一套全新的『Mandrake Linux』系統的話，可以選擇這"
-#~ "個項目。\n"
-#~ "\n"
-#~ " ＊ 「升級」: 當您的硬碟已經有安裝過舊版本的 Mandrake Linux系統的話，您可"
-#~ "以選擇這個項目。\n"
-#~ "\n"
-#~ " ＊「僅更新套件」: 只會更新相關程式套件，不會異動系統原本設定。\n"
-#~ "\n"
-#~ "依照您對於「GNU/Linux」的認識熟悉程度來看，您可以使用下面的模式來進行統的"
-#~ "安裝或者是升級的步驟:\n"
-#~ "\n"
-#~ " ＊ 建議值 : 如果您沒安裝過『GNU/Linux』作業系統，請選擇這個項目，整個安裝"
-#~ "過程將會相當輕鬆簡單，然後也只會問您幾個問題\n"
-#~ "就可以把整個系統安裝妥當。\n"
-#~ "\n"
-#~ " ＊ 自訂: 如果您本身有接觸過『Linux』系統，甚至對這個系統相當熟悉的話，您"
-#~ "可以選擇這個安裝模式。當您使用專家模式安裝時，安裝程式會讓您完全的操控整個"
-#~ "系統安裝步驟。使用該模式後，安裝過程陸續可能會出現很多問題要您去回答，若是"
-#~ "您不是很能夠駕馭這些詢問的話，建議您除非您知道您所選擇的項目代表意義為何，"
-#~ "要不然請使用預設值而不要再去選取相關設定項目。"
+#~ "您要使用哪一個 dhcp 使用端程式?\n"
+#~ "預設是用 dhcp-client"
 
-#~ msgid "Please be patient. This operation can take several minutes."
-#~ msgstr "請稍後，這個步驟能夠需要花費一些時間才能夠執行完畢。"
+#~ msgid "Wizard..."
+#~ msgstr "精靈..."
+
+#~ msgid "Write %s"
+#~ msgstr "寫入 %s"
 
 #~ msgid ""
-#~ "Your new Mandrake Linux operating system is currently being installed.\n"
-#~ "Depending on the number of packages you will be installing and the speed "
-#~ "of\n"
-#~ "your computer, this operation could take from a few minutes to a\n"
-#~ "significant amount of time.\n"
+#~ "XawTV isn't installed!\n"
 #~ "\n"
-#~ "Please be patient."
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
 #~ msgstr ""
-#~ "「Mandrake-Linux」已經開始進行安裝了。\n"
+#~ "您的系統並未安裝 XawTV 程式套件！\n"
 #~ "\n"
-#~ "安裝所需時間，將會依照您選擇安裝套件數量以及電腦的配備而有所不同。\n"
-#~ "再安裝這段時間，您可以去泡一杯茶或者是看看電視，等等再回來查看安裝進度。"
+#~ "\n"
+#~ "如果您系統有安裝上電視卡，但是 DrakX 並未偵測到的話\n"
+#~ "(一般可以由/etc/modules 檔案內是否包含 bttv 或是\n"
+#~ "saa7134 項目判定之)，請執行\"lspcidrake -v -f\"\n"
+#~ "然後將執行結果以標題為 \"Undeleted TV card\" 的信件寄到\n"
+#~ "\"install\\@mandrakesoft.com\"\n"
+#~ "。\n"
+#~ "\n"
+#~ "您現在可以開啟一個終端機程式，或者是在文字介面下，\n"
+#~ "用 root 權限身份執行 \"urpmi xawtv\" 將該套件安裝上。"
 
-#~ msgid ""
-#~ "X (for X Window System) is the heart of the GNU/Linux graphical "
-#~ "interface\n"
-#~ "on which all the graphical environments (KDE, GNOME, AfterStep,\n"
-#~ "WindowMaker, etc.) bundled with Mandrake Linux rely.\n"
-#~ "\n"
-#~ "You will be presented the list of available resolutions and color depth\n"
-#~ "available for your hardware. Choose the one that best suit your needs "
-#~ "(you\n"
-#~ "will be able to change that after installation though). When you are\n"
-#~ "satisfied with the sample shown in the monitor, click \"OK\". A window "
-#~ "will\n"
-#~ "then appear and ask you if you can see it.\n"
-#~ "\n"
-#~ "If you are doing an \"Expert\" installation, you will enter the X\n"
-#~ "configuration wizard. See the corresponding section of the manual for "
-#~ "more\n"
-#~ "information about this wizard.\n"
-#~ "\n"
-#~ "If you can see the message during the test, and answer \"Yes\", then "
-#~ "DrakX\n"
-#~ "will proceed to the next step. If you cannot see the message, it simply\n"
-#~ "means that the configuration was wrong and the test will automatically "
-#~ "end\n"
-#~ "after 10 seconds, restoring the screen. Refer then to the video\n"
-#~ "configuration section of the user guide for more information on how to\n"
-#~ "configure your display."
-#~ msgstr ""
-#~ "X (for X Window System)，X 環境是 Unix 系統下的一套GUI 圖形介面環境。在目"
-#~ "前您安裝使用的 Mandrake Linux 中，我們提供了可以在X上運作使用的整合是圖形"
-#~ "操作介面，比方像是 KDE、Gnome、AfterStep、WindowMaker 等。在這個地方，"
-#~ "DrakX 程式將會設定好啟動 X 所需要的組態環境。\n"
-#~ "\n"
-#~ "通常 DrakX 程式可以很聰明的偵測出系統硬體環境，除非您的系統硬體過於老舊或"
-#~ "者是太新了，要不然一般來說都可以很順利偵測設定好。當DrakX偵測完畢後，它會"
-#~ "啟動X環境進行顯示的動作，然後訊問您是否可以正確的看到螢幕顯示的畫面。\n"
-#~ "\n"
-#~ "若是你當初是使用 \"專家型\" 模式來安裝的話，安裝精靈程式將會待您進入教詳細"
-#~ "的設定過程。相關資訊您可以參考手冊上更進一步的說明。\n"
-#~ "當測試進入 X 環境時，若是顯示正確，你可以看到一個對話方塊詢問您是否滿意目"
-#~ "前的設定。當你選擇『Yes』確定後，DrakX程式將會繼續進行下面的步驟。若是進"
-#~ "入 X 環境測試時發生錯誤，你看不到任何螢幕輸入顯示，或者是在 10 秒的時間內"
-#~ "你沒有回應對話方塊訊問動作的話，測試會自行結束然後恢復切換到原本的畫面，你"
-#~ "可以再繼續選擇相關組態並測試直到沒問題等。"
+#~ msgid "You are currently connected to the Internet."
+#~ msgstr "您目前正連線到 Internet。"
 
-#~ msgid "Detecting devices ..."
-#~ msgstr "正在偵測裝置 ..."
+#~ msgid "You are not currently connected to the Internet."
+#~ msgstr "您目前尚未連線到 Internet。"
 
-#~ msgid "Test ports"
-#~ msgstr "測試連接埠"
+#~ msgid "across Network"
+#~ msgstr "透過網路"
+
+#~ msgid "activate now"
+#~ msgstr "立即啟動"
+
+#~ msgid "add a rule"
+#~ msgstr "新增規則"
+
+#~ msgid "boot disk creation"
+#~ msgstr "製作開機磁片"
+
+#~ msgid "connecting to Bugzilla wizard ..."
+#~ msgstr "連線到臭蟲發佈精靈 ..."
+
+#~ msgid "deactivate now"
+#~ msgstr "立即關閉"
+
+#~ msgid "delete"
+#~ msgstr "刪除"
+
+#~ msgid "edit"
+#~ msgstr "編輯"
+
+#~ msgid "files sending by FTP"
+#~ msgstr "透過 FTP 送出檔案中"
+
+#~ msgid "group"
+#~ msgstr "群組"
+
+#~ msgid "group :"
+#~ msgstr "群組："
+
+#~ msgid "kernel version"
+#~ msgstr "核心版本"
+
+#~ msgid "load setting"
+#~ msgstr "載入設定"
+
+#~ msgid "matching"
+#~ msgstr "相配的"
+
+#~ msgid "on CDROM"
+#~ msgstr "於 CDROM 裝置"
+
+#~ msgid "on Hard Drive"
+#~ msgstr "位於硬碟"
+
+#~ msgid "on Tape Device"
+#~ msgstr "於磁帶機裝置"
+
+#~ msgid "path"
+#~ msgstr "路徑"
+
+#~ msgid "permissions"
+#~ msgstr "權限"
+
+#~ msgid "pfm fonts conversion"
+#~ msgstr "pfm 字型轉換"
+
+#~ msgid "select perm file to see/edit"
+#~ msgstr "選取要查看編輯的檔案"
+
+#~ msgid "sticky-bit"
+#~ msgstr "Sticky-Bit"
+
+#~ msgid "ttf fonts conversion"
+#~ msgstr "ttf 字型轉換"
+
+#~ msgid "user"
+#~ msgstr "使用者"
+
+#~ msgid "user :"
+#~ msgstr "使用者："

@@ -1,14 +1,15 @@
+#
 # translation of DrakX-hu.po to Hungarian
 # Copyright (C) 2000-2001,2003 Free Software Foundation, Inc.
 # Emese Kovacs <emese@gnome.hu>, 2000-2001.
-# Arpad Biro <biro_arpad@yahoo.com>, 2000,2003
-# Tamas Szanto <tszanto@mol.hu>, 2001
+# Arpad Biro <biro_arpad@yahoo.com>, 2000,2003.
+# Tamas Szanto <tszanto@mol.hu>, 2001.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-hu\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-09 21:56+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-18 21:16+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
@@ -82,8 +83,8 @@ msgid ""
 "The backup partition table has not the same size\n"
 "Still continue?"
 msgstr ""
-"A partíciós tábla két példányának mérete eltér!\n"
-"Folytassam a mûveletet?"
+"A partíciós tábla két példányának mérete eltér.\n"
+"Mégis kívánja folytatni a mûveletet?"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -195,7 +196,7 @@ msgstr ""
 "Ha be van állítva: a jelentés ezen email-címre való küldése; máskülönben a\n"
 "rendszergazdának"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Paraméterek"
@@ -333,7 +334,7 @@ msgstr ""
 "Üdvözöljük a hálózatbeállító varázslóban.\n"
 "\n"
 "A hálózat és az internetkapcsolat beállítása következik.\n"
-"Törölje a kijelölést az opció mellõl, ha nem kér automatikus felismerést.\n"
+"Törölje a kijelölést az opció mellõl, ha nem kér automatikus felderítést.\n"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -513,6 +514,11 @@ msgstr "Busz"
 msgid "Iraq"
 msgstr "Irak"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "csatlakozás ehhez: %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -556,6 +562,20 @@ msgstr "Telepített betûtípusok keresése"
 #, c-format
 msgid "Default desktop"
 msgstr "Alapértelmezett munkaasztal"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
+"Ekkor megjelenik a(z) \"%s\" weboldal egy böngészõablakban,\n"
+"ahol egy kitöltendõ ûrlap lesz látható. A fenti információk el lesznek\n"
+"küldve azon kiszolgálónak."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1171,6 +1191,61 @@ msgstr ""
 "Protokoll a világ többi részén\n"
 "D csatorna nélkül (bérelt vonal)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tA DrakTermServ módosítja ezen fájlt az mkinitrd-net által\n"
+"        \tkészített képmásokkal való mûködéshez, továbbá módosítja a\n"
+"        \t/etc/dhcpd.conf fájl bejegyzéseit annak érdekében, hogy az\n"
+"        \tindítási képmások elérhetõk legyenek a lemez nélküli kliensek\n"
+"        \tszámára.\n"
+"\n"
+"        \tA tftp beállítási fájlja általában a következõképpen néz ki:\n"
+"\n"
+"        \tservice tftp\n"
+"        \t{\n"
+"        \t\tdisable         = no\n"
+"        \t\tsocket_type  = dgram\n"
+"        \t\tprotocol        = udp\n"
+"        \t\twait             = yes\n"
+"        \t\tuser             = root\n"
+"        \t\tserver          = /usr/sbin/in.tftpd\n"
+"        \t\tserver_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"\n"
+"        \tAz alapértelmezett értékeken a következõ módosítások lesznek\n"
+"        \tvégrehajtva: a \"disable\" jelzõ módosítása \"no\" (\"nem\")\n"
+"        \tértékre illetve a könyvtár útvonalának módosítása\n"
+"        \t/var/lib/tftpboot értékre (ahova az mkinitrd-net a képmásait\n"
+"        \thelyezi)."
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Option %s must be a number!"
@@ -1588,7 +1663,7 @@ msgstr "Az eszközt kezelõ linuxos kernelmodul"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Trying to rescue partition table"
-msgstr "Megpróbálom helyrehozni a partíciós táblát"
+msgstr "A partíciós tábla helyrehozásának megkísérlése..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1843,15 +1918,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "A(z) %c es a(z) %c billentyukkel lehet a bejegyzesek kozott lepegetni."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "A fájl végrehajtásának engedélyezése \"%s\" számára"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Általános 2 gombos egér"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "A fájl végrehajtásának engedélyezése \"%s\" számára"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2175,7 +2250,7 @@ msgstr "Beállítás a varázslóval"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Autoprobe"
-msgstr "Automatikus detektálás"
+msgstr "Automatikus felderítés"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -3100,6 +3175,35 @@ msgstr "Ez egy kötelezõ csomag, nem lehet megszüntetni a kijelölését"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Etherboot floppyk illetve CD-k létrehozása:\n"
+"        \tA lemez nélküli kliensgépeknek az indítási folyamat\n"
+"        \telindításához szükségük van NIC-beli ROM-képmásokra vagy egy\n"
+"        \tindítólemezre (floppy vagy CD). A DrakTermServ segítséget nyújt\n"
+"        \tezen képmások elkészítésében - a kliensgép hálózati kártyája\n"
+"        \talapján.\n"
+"\n"
+"        \tEgy alapvetõ példa egy indítási lemez kézzel való elkészítésére\n"
+"        \t(3Com 3c509 kártya esetére):\n"
+"\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Az Etherboot ISO fájl: %s"
 
@@ -3334,7 +3438,7 @@ msgstr ""
 #, c-format
 msgid "Automatic detection and configuration of hardware at boot."
 msgstr ""
-"A hardvereszközök automatikus felismerése és beállítása a rendszer "
+"A hardvereszközök automatikus felderítése és beállítása a rendszer "
 "indulásakor."
 
 #: ../../standalone/drakpxe:1
@@ -3488,8 +3592,8 @@ msgid ""
 "JetDirect servers the port number is usually 9100, on other servers it can "
 "vary. See the manual of your hardware."
 msgstr ""
-"Ahhoz, hogy egy TCP/socket-alapú nyomtatóra nyomtathasson, meg kell adnia a "
-"nyomtatóhoz tartozó gépnevet vagy IP-címet és opcionálisan a portszámot "
+"Ahhoz, hogy egy TCP-/aljazat-alapú nyomtatóra nyomtathasson, meg kell adnia "
+"a nyomtatóhoz tartozó gépnevet vagy IP-címet és opcionálisan a portszámot "
 "(alapértelmezés: 9100). HP JetDirect kiszolgálókon a port száma általában "
 "9100; más kiszolgálókon ez más érték lehet. A hardver kézikönyvében "
 "valószínûleg talál további információt."
@@ -3518,35 +3622,6 @@ msgstr "Fájlok elrejtése"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "A helyi nyomtatók automatikus felderítése"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"Az XawTV program nincsen telepítve.\n"
-"\n"
-"\n"
-"Ha Önnek van tévékártyája, de a telepítõ nem találta meg azt (azaz sem a\n"
-"bttv modul, sem pedig az saa7134 modul nem szerepel a \"/etc/modules\"\n"
-"fájlban) és nem telepítette az xawtv programot, abban az esetben kérjük,\n"
-"küldje el az \"lspcidrake -v -f\" parancs eredményét (kimenetét) a\n"
-"következõ címre: \"install\\@mandrakesoft.com\" a következõ tárggyal:\n"
-"\"undetected TV card\".\n"
-"\n"
-"\n"
-"A program telepítése elvégezhetõ rendszergazdaként \"urpmi xawtv\"\n"
-"parancsot kiadva a konzolon."
 
 #: ../../any.pm:1
 #, c-format
@@ -3814,9 +3889,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "A beállított lapolvasók listájának újragenerálása..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Kézi beállítás"
+msgstr "Modulbeállítás"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -4091,7 +4166,7 @@ msgstr "Szaúd-Arábia"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Continue anyway?"
-msgstr "Folytassam a mûveletet?"
+msgstr "Kívánja folytatni a mûveletet?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4140,6 +4215,18 @@ msgstr ""
 #, c-format
 msgid "Restore From Tape"
 msgstr "Visszatöltés szalagról"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
+"Ekkor megjelenik az Anthill weboldal egy böngészõablakban,\n"
+"ahol a fenti információk elküldhetõk hibabejelentésként."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -4303,7 +4390,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Meg kell adni egy gépnevet, egy felhasználónevet és egy jelszót."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Tegye be a floppyt"
@@ -4447,10 +4534,24 @@ msgstr "Hálózati csatoló már be lett állítva"
 msgid "Couldn't access the floppy!"
 msgstr "A floppy nem elérhetõ."
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "csatlakozás a Bugzilla varázslóhoz..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
+"Figyelmeztetés: A szabad szoftver nem feltétlenül szabadalommentes; "
+"bizonyos\n"
+"komponensekre esetleg vonatkozhatnak szabadalmak az Ön országában. Például\n"
+"az MP3-dekódolók használata esetén szükség lehet licencre (információ:\n"
+"http://www.mp3licensing.com). Ha nem biztos abban, hogy egy bizonyos\n"
+"szabadalom vonatkozik-e az Ön esetére, akkor vizsgálja meg az Ön országában\n"
+"érvényes törvényeket."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4636,6 +4737,11 @@ msgstr "Elfogadom"
 msgid "Description"
 msgstr "Leírás"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Adja meg az összefoglaló szöveget."
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Error opening %s for writing: %s"
@@ -4695,7 +4801,7 @@ msgid ""
 "Modifying the fields below will override this configuration."
 msgstr ""
 "Figyelmeztetés: Ez az eszköz már be lett állítva internet-hozzáféréshez.\n"
-"Elég elfogadni a már meglévõ beállításokat.\n"
+"Elég elfogadni a már meglevõ beállításokat.\n"
 "A lenti mezõk módosításával felül lehet bírálni a beállításokat."
 
 #: ../../any.pm:1
@@ -4854,7 +4960,7 @@ msgstr "%s ellenõrzése"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "TCP/Socket Printer Options"
-msgstr "TCP/socket-alapú nyomtatási beállítások"
+msgstr "TCP-/aljazat-alapú nyomtatási beállítások"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -5370,7 +5476,7 @@ msgstr "Tuvalu"
 #: ../../help.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Use auto detection"
-msgstr "Automatikus detektálás"
+msgstr "Automatikus felderítés"
 
 #: ../../services.pm:1
 #, c-format
@@ -5468,7 +5574,7 @@ msgstr ""
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected"
-msgstr "detektálva"
+msgstr "felismerve"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -5609,7 +5715,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Jobb Ctrl gomb"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6192,7 +6298,7 @@ msgstr "DOS-meghajtó betûjele: %s (ez csak egy tipp)\n"
 #: ../../lang.pm:1
 #, c-format
 msgid "Bahrain"
-msgstr "Bahrain"
+msgstr "Bahrein"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6766,6 +6872,30 @@ msgstr "Figyelem: a(z) %s IP-cím általában fenntartott."
 msgid "busmouse"
 msgstr "busmouse"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Etherboot-képes indítási fájlok létrehozása:\n"
+"        \tEgy kernel Etherboottal való indításához létre kell hozni egy\n"
+"        \tspeciális kernel-/initrd-képmást. A feladat jelentõs részét az\n"
+"        \tmkinitrd-net végzi el, a DrakTermServ pedig grafikus felületet\n"
+"        \tnyújt a képmásfájlok kezeléséhez illetve beállításához.\n"
+"        \tA /etc/dhcpd.conf.etherboot-pcimap.include fájl (amelyet a\n"
+"        \tdhcpd.conf fájl használ) létrehozásához minimum egy teljes\n"
+"        \tkernelhez létre kell hozni Etherboot-képmást."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -7143,37 +7273,6 @@ msgstr ""
 msgid "Floppy"
 msgstr "Floppy"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - A /etc/exports fájl kezelése:\n"
-"        \t\tA ClusterNFS lehetõvé teszi a gyökér-fájlrendszernek a lemez\n"
-"        \t\tnélküli kliensek számára való exportálását. A DrakTermServ\n"
-"        \t\telvégzi a megfelelõ módosítást annak érdekében, hogy a lemez\n"
-"        \t\tnélküli kliensek névtelenül elérhessék a gyökér-fájlrendszert.\n"
-"\n"
-"        \t\tA ClusterNFS exports-bejegyzése általában a következõképpen néz\n"
-"        \t\tki:\n"
-"\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              ALHÁLÓZAT/MASZK(rw,root_squash)\n"
-"\n"
-"        \t\tAz ALHÁLÓZAT/MASZK értéknek definiálva kell lenni a hálózaton."
-
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
@@ -7414,7 +7513,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
-msgstr "Automatikus nyomtatófelderítés (helyi, TCP/socket és SMB nyomtatók)"
+msgstr "Automatikus nyomtatófelderítés (helyi, TCP/aljazat és SMB nyomtatók)"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -7692,7 +7791,7 @@ msgstr ""
 #, c-format
 msgid "Directory (or module) to put the backup on this host."
 msgstr ""
-"A könyvtár (vagy modul), amelybe a mentésfájlok kerüljenek ezen a gépen."
+"A könyvtár (vagy modul), amelybe a mentésfájlok kerüljenek ezen a gépen"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -7702,7 +7801,7 @@ msgstr "Tartomány"
 #: ../../any.pm:1
 #, c-format
 msgid "Precise RAM size if needed (found %d MB)"
-msgstr "RAM-méret, ha szükséges (%d MB detektálva)"
+msgstr "RAM-méret, ha szükséges (felismert: %d MB)"
 
 #: ../../help.pm:1
 #, c-format
@@ -7768,7 +7867,7 @@ msgstr "Naplófigyelõ"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected on port %s"
-msgstr "detektálva ezen a porton: %s"
+msgstr "felismerve ezen a porton: %s"
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -7830,6 +7929,11 @@ msgstr "Internetkapcsolat megosztása"
 #, c-format
 msgid "Choose file"
 msgstr "Válasszon fájlt"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Összefoglalás: "
 
 #: ../../network/shorewall.pm:1
 #, c-format
@@ -7898,7 +8002,7 @@ msgstr "A kijelölt kiszolgáló eltávolítása"
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "Sagem (using dhcp) usb"
-msgstr "Sagem (dhcp-t használó) USB"
+msgstr "Sagem (DHCP-t használó) USB"
 
 # a déli féltekérõl van szó
 #: ../../lang.pm:1
@@ -7910,6 +8014,24 @@ msgstr "Déli francia területek"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "A processzor gyártójának neve"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - A(z) %s fájl kezelése:\n"
+"        \tHogy a felhasználók bejelentkezhessenek a rendszerbe egy lemez\n"
+"        \tnélküli kliensrõl, ahhoz át kell másolni a /etc/shadow fájlbeli\n"
+"        \tbejegyzésüket a(z) %s fájlba. A\n"
+"        \tDrakTermServ ebbõl a szempontból is segítséget nyújt: a\n"
+"        \tmegfelelõ rendszerfelhasználókat felveszi ezen fájlba illetve\n"
+"        \teltávolítja onnan."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8237,6 +8359,11 @@ msgstr "Felhasználók visszatöltése"
 msgid "Encryption key for %s"
 msgstr "Titkosítási kulcs ehhez: %s"
 
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Szeretné helyreállítani a rendszert?"
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -8376,7 +8503,7 @@ msgid ""
 "Then choose action ``Mount point'' and set it to `/'"
 msgstr ""
 "Feltétlenül kell lennie gyökérpartíciónak.\n"
-"Hozzon létre egy partíciót (vagy kattintson egy meglévõre).\n"
+"Hozzon létre egy partíciót (vagy kattintson egy meglevõre).\n"
 "Utána adja meg csatolási pontnak a \"/\"-t."
 
 #: ../../lang.pm:1
@@ -8688,6 +8815,11 @@ msgstr "/A _CUPS beállítása"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "lspci lista küldése"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8825,7 +8957,7 @@ msgstr "\"%s\" gomb: %s"
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
-msgstr "Egy kis türelmet kérek"
+msgstr "Kis türelmet..."
 
 #: ../../mouse.pm:1
 #, c-format
@@ -8845,8 +8977,7 @@ msgstr "A megadott IP-cím helytelen.\n"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please be sure that the cron daemon is included in your services."
-msgstr ""
-"Gyõzõdjön meg arról, hogy a cron szolgáltatás a szolgáltatások közt van."
+msgstr "Gyõzõdjön meg arról, hogy a cron szolgáltatás aktiválva van."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -8930,6 +9061,11 @@ msgstr ""
 "\n"
 "A helyi hálózat paraméterei ehhez a csatolóhoz lesznek beállítva."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "cpuinfo lista küldése"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8939,6 +9075,11 @@ msgstr "Minimális telepítés"
 #, c-format
 msgid "Ethiopia"
 msgstr "Etiópia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "IGEN"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9017,7 +9158,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Network printer (TCP/Socket)"
-msgstr "Hálózati nyomtató (TCP/socket-alapú)"
+msgstr "Hálózati nyomtató (TCP-/aljazat-alapú)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9282,15 +9423,6 @@ msgstr "A telepítés típusa"
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Nyomtató: \"%s\" ezen az SMB/Windows kiszolgálón: \"%s\""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Szolgáltatások (%s):\n"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -9617,6 +9749,11 @@ msgstr "A vízsz. frissítési frekvencia: %s\n"
 msgid "Path"
 msgstr "Útvonal"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "NEM TALÁLHATÓ"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -9761,7 +9898,7 @@ msgid ""
 "You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount "
 "point\n"
 msgstr ""
-"Valódi fájlrendszert (Ext2/Ext3, ReiserFS, XFS vagy JFS) kell használni "
+"Valódi fájlrendszert (Ext2, Ext3, ReiserFS, XFS vagy JFS) kell használni "
 "ennél a csatolási pontnál\n"
 
 #: ../../standalone/scannerdrake:1
@@ -9822,7 +9959,7 @@ msgstr "újrajátszás"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "detected %s"
-msgstr "detektálva: %s"
+msgstr "felismerve: %s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10229,25 +10366,6 @@ msgstr "fontos"
 msgid "Total Progress"
 msgstr "Elõrehaladás"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - A /etc/shadow\\$\\$KLIENS\\$\\$ fájl kezelése:\n"
-"        \t\tHogy a felhasználók bejelentkezhessenek a rendszerbe egy lemez\n"
-"        \t\tnélküli kliensrõl, ahhoz át kell másolni a /etc/shadow fájlbeli\n"
-"        \t\tbejegyzésüket a /etc/shadow\\$\\$KLIENS\\$\\$ fájlba. A\n"
-"        \t\tDrakTermServ ebbõl a szempontból is segítséget nyújt: a\n"
-"        \t\tmegfelelõ rendszerfelhasználókat felveszi ezen fájlba illetve\n"
-"        \t\teltávolítja onnan."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10317,7 +10435,7 @@ msgstr "Példák helyesen megadott IP-címekre:\n"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please choose the media for backup."
-msgstr "Adja meg a mentési médiumot."
+msgstr "Adja meg a mentési médiumot"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10379,6 +10497,41 @@ msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr ""
 "Inkrementális/differenciális mentések használata (a korábbi mentések nem "
 "lesznek felülírva)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - A /etc/dhcpd.conf fájl kezelése:\n"
+"        \tAhhoz, hogy a kliensek hálózatról indulhassanak, minden\n"
+"        \tklienshez szükséges egy dhcpd.conf-bejegyzés, amely IP-címet és\n"
+"        \thálózati indítási képmásokat rendel a géphez. A DrakTermServ\n"
+"        \tsegítséget nyújt ezen bejegyzések elkészítéséhez illetve\n"
+"        \teltávolításához.\n"
+"\n"
+"        \t(PCI-os kártyák esetén kihagyható a képmás - az Etherboot kérni\n"
+"        \tfogja a megfelelõ képmást. Figyelembe kell venni azt is, hogy\n"
+"        \tamikor az Etherboot a képmásokat keresi, olyan neveket vár,\n"
+"        \tmint például 'boot-3c59x.nbi', nem pedig\n"
+"        \t'boot-3c59x.2.4.19-16mdk.nbi'.)\n"
+"\n"
+"        \tEgy lemez nélküli klienshez való dhcpd.conf-részlet általában a\n"
+"        \tkövetkezõképpen néz ki:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -10498,6 +10651,15 @@ msgid ""
 msgstr ""
 "a szövegkeret x-koordinátája\n"
 "karakterszámban megadva"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Elképzelhetõ, hogy a LILO nem lesz telepíthetõ (mivel a LILO nem kezeli a "
+"több fizikai köteten levõ logikai köteteket)."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10798,6 +10960,16 @@ msgstr "Gépnév szükséges"
 msgid "Unselect fonts installed"
 msgstr "Telepített betûtípusok kijelölésének törlése"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Görgõs"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "A kernelverzió küldése"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10818,11 +10990,6 @@ msgstr "Mégsem"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Beállított lapolvasók keresése..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Görgõs"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10891,6 +11058,11 @@ msgstr "Alapértelmezés"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "A 2. gomb emulálása"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Adjon meg egy csomagnevet."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10974,6 +11146,11 @@ msgstr ""
 " Copyright (C) 2002, MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11141,6 +11318,80 @@ msgstr "Fájlrendszer-titkosítási kulcs"
 #, c-format
 msgid "Gujarati"
 msgstr "gudzsarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"        \tLehetõség van IP-címtartományok használatára (ahelyett, hogy\n"
+"        \tminden klienshez egy-egy meghatározott érték lenne\n"
+"        \thozzárendelve), viszont a rögzített címkiosztás használata\n"
+"        \telõsegíti a ClusterNFS által biztosított \"kliens-specifikus\n"
+"        \tbeállítási fájlok\" lehetõség használatát.\n"
+"\n"
+"        \tMegjegyzés: A \"#type\" bejegyzést csak a DrakTermServ\n"
+"        \thasználja. Egy kliens típusa \"thin\" (vékony kliens) vagy\n"
+"        \t\"fat\" (teljes értékû kliens) lehet. A vékony kliensek a\n"
+"        \tlegtöbb szoftvert a kiszolgálói oldalon futtatják (az xdmcp\n"
+"        \tsegítségével), a teljes értékû kliensek pedig a kliensoldalon.\n"
+"        \tLétezik egy speciális inittab a vékony kliensek számára:\n"
+"        \t\"%s\". Vékony kliensek\n"
+"        \thasználata esetén a következõ rendszerbeállítási fájlok\n"
+"        \tmódosításra kerülnek az xdmcp használatának érdekében:\n"
+"        \txdm-config, kdmrc, gdm.conf. Mivel az xdmcp használatának van\n"
+"        \tbiztonsági kockázata, ezért a hosts.deny és a hosts.allow\n"
+"        \tfájlok módosításra kerülnek a helyi alhálózathoz való\n"
+"        \thozzáférés korlátozása érdekében.\n"
+"\n"
+"        \tMegjegyzés: A \"#hdw_config\" bejegyzést szintén csak a\n"
+"        \tDrakTermServ használja. A kliensek beállítása 'true' ('igaz')\n"
+"        \tvagy 'false' ('hamis') lehet. A 'true' érték lehetõvé teszi a\n"
+"        \tkliensgépen való rendszergazdai bejelentkezést, továbbá a\n"
+"        \thangnak, az egérnek és az X grafikus rendszernek a 'drak'\n"
+"        \teszközök segítségével való helyi beállítását. Ezt az teszi\n"
+"        \tlehetõvé, hogy a rendszer különálló beállítási fájlokat hoz\n"
+"        \tlétre a kliens IP-címéhez rendelve, továbbá írható/olvasható\n"
+"        \tcsatolási pontokat hoz létre annak érdekében, hogy a kliens\n"
+"        \tmódosíthassa a fájlokat. Ha Ön megfelelõnek találja a\n"
+"        \tbeállításokat, megvonhatja a rendszergazdai bejelentkezési\n"
+"        \tjogokat a klienstõl.\n"
+"\n"
+"        \tMegjegyzés: Kliensek felvétele illetve módosítása után újra\n"
+"        \tkell indítani a kiszolgálót."
 
 # Number is used to designate approximately the range of entries
 # you wish to edit because all of them would not fit on-screen.
@@ -11471,80 +11722,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"        \t\tLehetõség van IP-címtartományok használatára (ahelyett, hogy\n"
-"        \t\tminden klienshez egy-egy meghatározott érték lenne\n"
-"        \t\thozzárendelve), viszont a rögzített címkiosztás használata\n"
-"        \t\telõsegíti a ClusterNFS által biztosított \"kliens-specifikus\n"
-"        \t\tbeállítási fájlok\" lehetõség használatát.\n"
-"\n"
-"        \t\tMegjegyzés: A \"#type\" bejegyzést csak a DrakTermServ\n"
-"        \t\thasználja. Egy kliens típusa \"thin\" (vékony kliens) vagy\n"
-"        \t\t\"fat\" (teljes értékû kliens) lehet. A vékony kliensek a\n"
-"        \t\tlegtöbb szoftvert a kiszolgálói oldalon futtatják (az xdmcp\n"
-"        \t\tsegítségével), a teljes értékû kliensek pedig a kliensoldalon.\n"
-"        \t\tLétezik egy speciális inittab a vékony kliensek számára:\n"
-"        \t\t\"/etc/inittab\\$\\$IP=kliens_ip\\$\\$\". Vékony kliensek\n"
-"        \t\thasználata esetén a következõ rendszerbeállítási fájlok\n"
-"        \t\tmódosításra kerülnek az xdmcp használatának érdekében:\n"
-"        \t\txdm-config, kdmrc, gdm.conf. Mivel az xdmcp használatának van\n"
-"        \t\tbiztonsági kockázata, ezért a hosts.deny és a hosts.allow\n"
-"        \t\tfájlok módosításra kerülnek a helyi alhálózathoz való\n"
-"        \t\thozzáférés korlátozása érdekében.\n"
-"\n"
-"        \t\tMegjegyzés: A \"#hdw_config\" bejegyzést szintén csak a\n"
-"        \t\tDrakTermServ használja. A kliensek beállítása 'true' ('igaz')\n"
-"        \t\tvagy 'false' ('hamis') lehet. A 'true' érték lehetõvé teszi a\n"
-"        \t\tkliensgépen való rendszergazdai bejelentkezést, továbbá a\n"
-"        \t\thangnak, az egérnek és az X grafikus rendszernek a 'drak'\n"
-"        \t\teszközök segítségével való helyi beállítását. Ezt az teszi\n"
-"        \t\tlehetõvé, hogy a rendszer különálló beállítási fájlokat hoz\n"
-"        \t\tlétre a kliens IP-címéhez rendelve, továbbá írható/olvasható\n"
-"        \t\tcsatolási pontokat hoz létre annak érdekében, hogy a kliens\n"
-"        \t\tmódosíthassa a fájlokat. Ha Ön megfelelõnek találja a\n"
-"        \t\tbeállításokat, megvonhatja a rendszergazdai bejelentkezési\n"
-"        \t\tjogokat a klienstõl.\n"
-"\n"
-"        \t\tMegjegyzés: Kliensek felvétele illetve módosítása után újra\n"
-"        \t\tkell indítani a kiszolgálót."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11962,39 +12139,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - A /etc/dhcpd.conf fájl kezelése:\n"
-"        \t\tAhhoz, hogy a kliensek hálózatról indulhassanak, minden\n"
-"        \t\tklienshez szükséges egy dhcpd.conf-bejegyzés, amely IP-címet és\n"
-"        \t\thálózati indítási képmásokat rendel a géphez. A DrakTermServ\n"
-"        \t\tsegítséget nyújt ezen bejegyzések elkészítéséhez illetve\n"
-"        \t\teltávolításához.\n"
-"\n"
-"        \t\t(PCI-os kártyák esetén kihagyható a képmás - az Etherboot kérni\n"
-"        \t\tfogja a megfelelõ képmást. Figyelembe kell venni azt is, hogy\n"
-"        \t\tamikor az Etherboot a képmásokat keresi, olyan neveket vár,\n"
-"        \t\tmint például 'boot-3c59x.nbi', nem pedig\n"
-"        \t\t'boot-3c59x.2.4.19-16mdk.nbi'.)\n"
-"\n"
-"        \t\tEgy lemez nélküli klienshez való dhcpd.conf-részlet általában a\n"
-"        \t\tkövetkezõképpen néz ki:"
+"Alkalmazásnév\n"
+"vagy teljes útvonal:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12319,7 +12471,7 @@ msgstr "Milyen típusú a nyomtató?"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add a new printer"
-msgstr "Nyomtató hozzáadása"
+msgstr "Nyomtató felvétele"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12390,27 +12542,6 @@ msgstr "A(z) %s csomag telepítésénél hiba történt"
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "A rendszer figyelmeztetést küld, ha a terhelés ezen értéknél magasabb"
-
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Hibajelentés küldéséhez kattintson a \"Bejelentés\" gombra.\n"
-"Ekkor megnyílik egy webes böngészõablak a https://drakbug.mandrakesoft.com\n"
-"címmel, ahol egy kitöltendõ ûrlap lesz látható. A fenti információk el "
-"lesznek\n"
-"küldve azon kiszolgálónak.\n"
-"\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -12551,7 +12682,7 @@ msgstr ""
 "A parancsértelmezõ várakozási idejének beállítása. A 0 érték jelentése:\n"
 "végtelen hosszúságú várakozási idõtartam."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "A firmware másolása megtörtént"
@@ -12929,11 +13060,6 @@ msgstr ""
 "\"%s\" nevû nyomtató már létezik,\n"
 "felül szeretné írni annak beállításait?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "Nincs elérhetõ partíció"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12943,6 +13069,11 @@ msgstr "A következõ gépeken levõ lapolvasók használata: "
 #, c-format
 msgid "Unselected All"
 msgstr "Kijelölések megszüntetése"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "Nincs elérhetõ partíció"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12984,7 +13115,7 @@ msgstr "Teljes kernel elkészítése -->"
 msgid "modem"
 msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Üdvözöljük - %s"
@@ -13059,13 +13190,22 @@ msgstr ""
 "Bizonyos esetekben a(z) %s meghajtóprogramnak további paraméterekre van\n"
 "szüksége a helyes mûködéshez. Szeretne további paramétereket megadni a\n"
 "meghajtóprogramnak, vagy hagyja, hogy az lekérdezze a szükséges\n"
-"információkat? Bizonyos körülmények esetén az automatikus detektálás\n"
+"információkat? Bizonyos körülmények esetén az automatikus felderítés\n"
 "a gép lefagyásához vezethet, de komolyabb kárt nem okozhat."
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Nem a megfelelõ címkéjû CD. A CD címkéje: %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Szolgáltatás (%s), ezzel:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13201,40 +13341,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Rendszerfájlok:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Kliensenkénti rendszerbeállítási fájlok:\n"
-"        \t\tClusterNFS esetén az összes lemez nélküli kliensnek lehetnek\n"
-"        \t\tsaját beállítási fájljai a kiszolgáló gyökér-fájlrendszerén. A\n"
-"        \t\tkliensek beállításainak helyi kezelése lehetõvé teszi a\n"
-"        \t\tkliensek számára a /etc/modules.conf, a /etc/sysconfig/mouse, a\n"
-"        \t\t/etc/sysconfig/keyboard és a hasonló fájlok kliensenkénti\n"
-"        \t\ttestreszabását.\n"
-"\n"
-"        \t\tMegjegyzés: A kliensbeállítások helyi kezelésének engedélyezése\n"
-"        \t\tlehetõvé teszi a terminálkiszolgálóra való rendszergazdai\n"
-"        \t\tbejelentkezést az összes olyan kliensgépen, amelyen ez be van\n"
-"        \t\tkapcsolva. Amikor a kliensgép már be van állítva, ki lehet\n"
-"        \t\tkapcsolni a helyi beállításokat (a beállítási fájlok\n"
-"        \t\tmegtartásával)."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -14101,7 +14207,7 @@ msgstr "Építse fel a Linux jövõjét!"
 msgid "Local Printer"
 msgstr "Helyi nyomtató"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "A floppy nem elérhetõ - a(z) %s eszköz csatolása nem sikerült."
@@ -14129,7 +14235,7 @@ msgstr "Hiba!"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "cable connection detected"
-msgstr "kábeles kapcsolat detektálva"
+msgstr "kábeles kapcsolat felismerve"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14205,61 +14311,6 @@ msgstr "Az egeret kezelõ eszköz: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Jó betûtípusok ismételt kiválasztása"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tA DrakTermServ módosítja ezen fájlt az mkinitrd-net által\n"
-"        \t\tkészített képmásokkal való mûködéshez, továbbá módosítja a\n"
-"        \t\t/etc/dhcpd.conf fájl bejegyzéseit annak érdekében, hogy az\n"
-"        \t\tindítási képmások elérhetõk legyenek a lemez nélküli kliensek\n"
-"        \t\tszámára.\n"
-"\n"
-"        \t\tA tftp beállítási fájlja általában a következõképpen néz ki:\n"
-"\n"
-"        \t\tservice tftp\n"
-"        \t\t{\n"
-"        \t\t\tdisable         = no\n"
-"        \t\t\tsocket_type  = dgram\n"
-"        \t\t\tprotocol        = udp\n"
-"        \t\t\twait             = yes\n"
-"        \t\t\tuser             = root\n"
-"        \t\t\tserver          = /usr/sbin/in.tftpd\n"
-"        \t\t\tserver_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"\n"
-"        \t\tAz alapértelmezett értékeken a következõ módosítások lesznek\n"
-"        \t\tvégrehajtva: a \"disable\" jelzõ módosítása \"no\" (\"nem\")\n"
-"        \t\tértékre illetve a könyvtár útvonalának módosítása\n"
-"        \t\t/var/lib/tftpboot értékre (ahova az mkinitrd-net a képmásait\n"
-"        \t\thelyezi)."
 
 #: ../../help.pm:1
 #, c-format
@@ -14592,6 +14643,11 @@ msgstr "Május"
 msgid "Yaboot mode"
 msgstr "Yaboot mód"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Általános 3 gombos egér"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14606,11 +14662,6 @@ msgstr ""
 "A LILO elindítása sikertelen.\n"
 "A LILO-téma telepítésének befejezéséhez adja ki parancssorban a \"lilo\"\n"
 "parancsot rendszergazdaként."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Általános 3 gombos egér"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14958,35 +15009,6 @@ msgid ""
 msgstr ""
 " --id <azonosító>      - a megadott azonosítócímkéjû HTML segítség "
 "betöltése\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Etherboot floppyk illetve CD-k létrehozása:\n"
-"        \t\tA lemez nélküli kliensgépeknek az indítási folyamat\n"
-"        \t\telindításához szükségük van NIC-beli ROM-képmásokra vagy egy\n"
-"        \t\tindítólemezre (floppy vagy CD). A DrakTermServ segítséget nyújt\n"
-"        \t\tezen képmások elkészítésében - a kliensgép hálózati kártyája\n"
-"        \t\talapján.\n"
-"\n"
-"        \t\tEgy alapvetõ példa egy indítási lemez kézzel való elkészítésére\n"
-"        \t\t(3Com 3c509 kártya esetére):\n"
-"\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15385,11 +15407,6 @@ msgstr "Tartománynév"
 msgid "Sharing of local printers"
 msgstr "Helyi nyomtatók megosztása"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15400,6 +15417,11 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "Az elérhetõ nyomtatók"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "NEM"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15435,29 +15457,6 @@ msgstr ""
 "\n"
 "\n"
 "A továbblépéshez nyomja meg a(z) \"%s\" gombot."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Etherboot-képes indítási fájlok létrehozása:\n"
-"        \t\tEgy kernel Etherboottal való indításához létre kell hozni egy\n"
-"        \t\tspeciális kernel-/initrd-képmást. A feladat jelentõs részét az\n"
-"        \t\tmkinitrd-net végzi el, a DrakTermServ pedig grafikus felületet\n"
-"        \t\tnyújt a képmásfájlok kezeléséhez illetve beállításához.\n"
-"        \t\tA /etc/dhcpd.conf.etherboot-pcimap.include fájl (amelyet a\n"
-"        \t\tdhcpd.conf fájl használ) létrehozásához minimum egy teljes\n"
-"        \t\tkernelhez létre kell hozni Etherboot-képmást."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15854,7 +15853,7 @@ msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
 msgstr ""
-"A PDQ csak a helyi nyomtatókat, a távoli LPD-nyomtatókat és a socket/TCP-"
+"A PDQ csak a helyi nyomtatókat, a távoli LPD-nyomtatókat és az aljazat-/TCP-"
 "alapú nyomtatókat támogatja.\n"
 
 #: ../../diskdrake/interactive.pm:1
@@ -15948,7 +15947,7 @@ msgstr ", nyomtató: \"%s\" ezen az SMB/Windows kiszolgálón: \"%s\""
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Go on anyway?"
-msgstr "Ettõl függetlenül folytassam?"
+msgstr "Kívánja folytatni ettõl függetlenül?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -16105,7 +16104,7 @@ msgstr "További opciók"
 #, c-format
 msgid "Delete Hard Drive tar files after backup to other media."
 msgstr ""
-"A merevlemezen levõ \"tar\" fájlok törlése más médiumra való mentés után."
+"A merevlemezen levõ \"tar\" fájlok törlése más médiumra való mentés után"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16300,6 +16299,22 @@ msgstr "HIBA"
 #, c-format
 msgid "Refresh the list"
 msgstr "A lista felfrissítése"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Kliensenkénti %s:\n"
+"        \tClusterNFS esetén az összes lemez nélküli kliensnek lehetnek\n"
+"        \tsaját beállítási fájljai a kiszolgáló gyökér-fájlrendszerén. A\n"
+"        \tkliensek beállításainak helyi kezelésével a DrakTermServ\n"
+"        \tsegítséget nyújt ezen fájlok elkészítéséhez."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16873,12 +16888,17 @@ msgstr "Általános"
 msgid "Cylinder %d to %d\n"
 msgstr "A(z) %d. cilindertõl a(z) %d.-ig\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "AZ ÖN SZÖVEGÉNEK HELYE"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Új profil..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "EGYIK SEM"
@@ -17469,6 +17489,11 @@ msgstr "Egyéb multimédia-eszközök"
 msgid "burner"
 msgstr "író"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Hibaleírás/rendszerinformáció"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17603,6 +17628,40 @@ msgstr "Modemes csatlakozás beállításai"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Ha nincs megadva port, akkor 631 lesz az alapértelmezett érték."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Kliensenkénti rendszerbeállítási fájlok:\n"
+"        \tClusterNFS esetén az összes lemez nélküli kliensnek lehetnek\n"
+"        \tsaját beállítási fájljai a kiszolgáló gyökér-fájlrendszerén. A\n"
+"        \tkliensek beállításainak helyi kezelése lehetõvé teszi a\n"
+"        \tkliensek számára a /etc/modules.conf, a /etc/sysconfig/mouse, a\n"
+"        \t/etc/sysconfig/keyboard és a hasonló fájlok kliensenkénti\n"
+"        \ttestreszabását.\n"
+"\n"
+"        \tMegjegyzés: A kliensbeállítások helyi kezelésének engedélyezése\n"
+"        \tlehetõvé teszi a terminálkiszolgálóra való rendszergazdai\n"
+"        \tbejelentkezést az összes olyan kliensgépen, amelyen ez be van\n"
+"        \tkapcsolva. Amikor a kliensgép már be van állítva, ki lehet\n"
+"        \tkapcsolni a helyi beállításokat (a beállítási fájlok\n"
+"        \tmegtartásával)."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17832,7 +17891,7 @@ msgstr ""
 "LPT2:, ...), elsõ USB nyomtató: /dev/usb/lp0, második USB nyomtató: /dev/usb/"
 "lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Következõ"
@@ -17945,7 +18004,7 @@ msgstr ""
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Please wait, preparing installation..."
-msgstr "Egy kis türelmet kérek; a telepítés elõkészítése folyik..."
+msgstr "Kis türelmet - a telepítés elõkészítése folyik..."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18136,7 +18195,7 @@ msgstr "Partícionálás"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ethernet card(s) detected"
-msgstr "Ethernet-kártya/kártyák detektálva"
+msgstr "Ethernet-kártya (vagy -kártyák) felismerve"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -18665,7 +18724,7 @@ msgstr "Ha igen, akkor a processzor rendelkezik aritmetikai társprocesszorral"
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Please Wait... Applying the configuration"
-msgstr "Egy kis türelmet kérek, végrehajtom a kért módosításokat"
+msgstr "Kis türelmet - a beállítások módosítása"
 
 # NOTE: this message will be displayed by grub at boot time; that is
 # using the BIOS font; that means cp437 charset on 99.99% of PC computers
@@ -19184,7 +19243,7 @@ msgstr " ADSL"
 msgid "format of floppies supported by the drive"
 msgstr "A meghajtó által támogatott adathordozó-formátum"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "A firmware másolása nem sikerült - %s nevû fájl nem található."
@@ -19902,6 +19961,11 @@ msgstr ""
 "\n"
 "Törölni szeretné az összes partíciót?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Csomag keresése"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -20016,6 +20080,37 @@ msgstr "A helyi hálózat beállítása"
 #, c-format
 msgid "hard disk model"
 msgstr "Merevlemez-modell"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - A /etc/exports fájl kezelése:\n"
+"        \tA ClusterNFS lehetõvé teszi a gyökér-fájlrendszernek a lemez\n"
+"        \tnélküli kliensek számára való exportálását. A DrakTermServ\n"
+"        \telvégzi a megfelelõ módosítást annak érdekében, hogy a lemez\n"
+"        \tnélküli kliensek névtelenül elérhessék a gyökér-fájlrendszert.\n"
+"\n"
+"        \tA ClusterNFS exports-bejegyzése általában a következõképpen néz\n"
+"        \tki:\n"
+"\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tALHÁLÓZAT/MASZK(rw,root_squash)\n"
+"\n"
+"        \tAz ALHÁLÓZAT/MASZK értéknek definiálva kell lenni a hálózaton."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -20192,7 +20287,7 @@ msgstr ""
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Time remaining "
-msgstr "Hátralévõ idõ "
+msgstr "Hátralevõ idõ "
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20205,15 +20300,15 @@ msgstr "angol (UK) billentyûzet"
 msgid "Unmount"
 msgstr "Leválasztás"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Betûtípusok eltávolítása"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Betûtípusok eltávolítása"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20530,7 +20625,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Add user"
-msgstr "Felhasználó hozzáadása"
+msgstr "Felhasználó felvétele"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -20589,22 +20684,6 @@ msgstr "\"%s\" végrehajtása..."
 #, c-format
 msgid "enable radio support"
 msgstr "Rádiótámogatás bekapcsolása"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Kliensenkénti /etc/X11/XF86Config-4\\$\\$IP-CÍM\\$\\$:\n"
-"        \t\tClusterNFS esetén az összes lemez nélküli kliensnek lehetnek\n"
-"        \t\tsaját beállítási fájljai a kiszolgáló gyökér-fájlrendszerén. A\n"
-"        \t\tkliensek beállításainak helyi kezelésével a DrakTermServ\n"
-"        \t\tsegítséget nyújt ezen fájlok elkészítéséhez."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20888,7 +20967,7 @@ msgstr "Multimédiás munkaállomás"
 
 #: ../../share/compssUsers:999
 msgid "Sound and video playing/editing programs"
-msgstr "Hang/videólejátszó és -szerkesztõ programok"
+msgstr "Lejátszó- és szerkesztõprogramok hang- és videóanyagokhoz"
 
 #: ../../share/compssUsers:999
 msgid "Internet station"
@@ -21036,6 +21115,33 @@ msgstr "NFS-, SMB-, proxy- és SSH-kiszolgáló"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
+
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "Az XawTV program nincsen telepítve.\n"
+#~ "\n"
+#~ "\n"
+#~ "Ha Önnek van tévékártyája, de a telepítõ nem találta meg azt (azaz sem a\n"
+#~ "bttv modul, sem pedig az saa7134 modul nem szerepel a \"/etc/modules\"\n"
+#~ "fájlban) és nem telepítette az xawtv programot, abban az esetben kérjük,\n"
+#~ "küldje el az \"lspcidrake -v -f\" parancs eredményét (kimenetét) a\n"
+#~ "következõ címre: \"install\\@mandrakesoft.com\" a következõ tárggyal:\n"
+#~ "\"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "A program telepítése elvégezhetõ rendszergazdaként \"urpmi xawtv\"\n"
+#~ "parancsot kiadva a konzolon."
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -21433,9 +21539,6 @@ msgstr "Eszközök levelezéshez, hírkezeléshez és a Web böngészéséhez"
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "Adja meg a gépnevet vagy az IP-címet."
-
-#~ msgid "Please enter your login"
-#~ msgstr "Adja meg a felhasználói nevét"
 
 #~ msgid ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"

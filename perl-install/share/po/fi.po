@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fi - MDK Release 9.2\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-08 17:13+0300\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-19 02:15+0300\n"
 "Last-Translator: Thomas Backlund <tmb@iki.fi>\n"
-"Language-Team: Finnish <fi@li.org>\n"
+"Language-Team: Finnish <cooker-i18n@mandrake-linux.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,13 +23,13 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr "Tarkistan osioita löytääkseni liitospisteet"
+msgstr "Tarkistetaan osioita liitospisteiden löytämiseksi"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
-"jos asetettu, tarkistetaan 'suid root' tiedostojen lisäykset/poistamiset."
+"jos 'kyllä', tarkistetaan 'suid root' tiedostojen lisäämiset/poistamiset."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -37,8 +37,8 @@ msgid ""
 "%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
 "0/1 for Local Config...\n"
 msgstr ""
-"%s: %s vaatii konenimi,MAC osoite, IP, nbi kuvake, 0/1 "
-"THIN_CLIENTasetukselle, 0/1 paikallisasetuksille...\n"
+"%s: %s vaatii konenimen, MAC-osoitteen, IP-osoitteen, nbi-kuvan, 0/1 "
+"THIN_CLIENT-asetukselle, 0/1 paikallisasetukselle...\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -56,8 +56,8 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
-"Erotusvarmistukset tallentavat ainoastaan muuttuneet tiedostot verrattuna "
-"edelliseen perusvarmistukseen."
+"Erotusvarmistukset tallentavat ainoastaan edellisen perusvarmistuksen "
+"jälkeen muuttuneet tai luodut tiedostot."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -70,9 +70,9 @@ msgid "Please insert floppy disk:"
 msgstr "Aseta levyke asemaan:"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "DrakTermServ"
-msgstr "drakTermServ yleiskuva"
+msgstr "DrakTermServ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -86,7 +86,7 @@ msgid ""
 "Still continue?"
 msgstr ""
 "Osiotaulun varmuuskopio ei ole saman kokoinen\n"
-"Jatka silti?"
+"Jatketaanko silti?"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -107,7 +107,7 @@ msgstr "Palauta osiotaulu"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure hostname..."
-msgstr "Aseta koneennimi..."
+msgstr "Aseta konenimi..."
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -163,7 +163,7 @@ msgid ""
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
-"Seuraavat tulostimet:\n"
+"Seuraavat tulostimet\n"
 "\n"
 "%s%s\n"
 "on kytketty suoraan koneeseesi"
@@ -196,9 +196,10 @@ msgstr "Verkkokortti"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr "jos asetettu, lähetä raportit tähän osoitteeseen, muuten root saa ne."
+msgstr ""
+"Jos asetettu, raportit lähetetään tähän osoitteeseen, muuten root saa ne."
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametrit"
@@ -229,7 +230,7 @@ msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
-"Järjestelmä ei näytä olevan yhdistynyt Internetiin.\n"
+"Järjestelmä ei näytä olevan yhteydessä Internetiin.\n"
 "Kokeile muuttaa Internet-asetuksia."
 
 #: ../../printer/printerdrake.pm:1
@@ -240,10 +241,10 @@ msgid ""
 "\n"
 "Do you really want to continue setting up this printer as you are doing now?"
 msgstr ""
-"Yhdistä tulostimesi Linux-palvelimeen ja salli Windows kone(et) yhdistää "
-"siihen asiakkaina.\n"
+"Yhdistä tulostimesi Linux-palvelimeen ja salli Windows-asiakkaiden käyttää "
+"sitä.\n"
 "\n"
-"Haluatko varmasti jatkaa asettamalla tulostinta tällä tavalla?"
+"Haluatko varmasti jatkaa asettamalla tulostimen tällä tavalla?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -266,13 +267,13 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
-"apmd:ta käytetään valvomaan paristojen tilaa ja raportoimaan siitä syslogin\n"
+"apmd:ta käytetään valvomaan akkujen tilaa ja raportoimaan siitä syslogin\n"
 "kautta. apmd:tä voidaan myös käyttää sulkemaan kone akkujen ollessa tyhjiä."
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use tape to backup"
-msgstr "Käytä nauhaa varmuuskopioinnissa"
+msgstr "Käytä nauhaa varmuuskopiointiin"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -282,7 +283,7 @@ msgstr "Seuraavat paketit asennetaan"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "CUPS configuration"
-msgstr "CUPS asetus"
+msgstr "CUPS asetukset"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -302,7 +303,7 @@ msgstr "Ei tarpeeksi tilaa uusien osioiden luomiseksi"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Moving"
-msgstr "Siirrän"
+msgstr "Siirretään"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -434,7 +435,7 @@ msgstr ""
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "The change is done, do you want to restart the dm service ?"
-msgstr "Muutos on tehty, haluatko käynnistää dm palvelun uudelleen ?"
+msgstr "Muutos on tehty, haluatko käynnistää palvelun dm uudelleen ?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -515,6 +516,11 @@ msgstr "Väylä"
 msgid "Iraq"
 msgstr "Irak"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "yhdistetään kohteeseen %s ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -558,6 +564,20 @@ msgstr "Etsi asennetut kirjasimet"
 #, c-format
 msgid "Default desktop"
 msgstr "Oletus työpöytä"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"Lähettääksesi virheraportin, paina \"Raportti\" painiketta.\n"
+"Tämä avaa webbiselaimen osoitteen: %s\n"
+"mistä löydät täytettävän lomakkeen. Yllä näytetyt tiedot lähetetään yllä\n"
+"mainitulle palvelimelle."
 
 #: ../../lang.pm:1
 #, c-format
@@ -701,7 +721,7 @@ msgid ""
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
 "Automaattinen ytimen otsikkotiedoston korjaus /boot-hakemistossa "
-"tiedostolle\n"
+"tiedostoille\n"
 "/usr/include/linux/{autoconf,versio}.h"
 
 #: ../../standalone/drakfloppy:1
@@ -848,51 +868,52 @@ msgstr ""
 "Johdanto\n"
 "\n"
 "\n"
-"HUOM!! Tämä on vapaasti suomennettu teksti Mandrake Linux \n"
-"jakelun lisenssiehdoista. Alkuperäinen teksti löytyy viimeisenä \n"
-"tältä sivulta!!\n"
+"HUOM!! Tämä on vapaasti suomennettu teksti Mandrake Linux -jakelun\n"
+"lisenssiehdoista. Alkuperäinen teksti löytyy tämän sivun lopusta.\n"
 "\n"
-"Käyttöjärjestelmään ja muihin Mandrake Linux jakelun eri osiin \n"
-"viitataan tästä eteenpäin nimellä \"Ohjelmisto\". Ohjelmisto \n"
-"sisältää, mutta ei rajoitu ainoastaan niihin, pakettien \n"
-"yhdistelmät, menetelmät, säännöt ja dokumentaatioon jotka \n"
-"kuuluvat käyttöjärjestelmään sekä Mandrake Linuxin jakeluun \n"
-"kuuluvat komponentit.\n"
+"Käyttöjärjestelmään ja muihin Mandrake Linux jakelun eri osiin viitataan\n"
+"tästä eteenpäin nimellä \"Ohjelmisto\". Ohjelmisto sisältää, mutta ei "
+"rajoitu\n"
+"ainoastaan niihin, pakettien yhdistelmät, menetelmät, säännöt ja\n"
+"dokumentaation jotka kuuluvat käyttöjärjestelmään sekä Mandrake Linux\n"
+"-jakeluun kuuluvat komponentit.\n"
 "\n"
 "\n"
 "\n"
 "1. Käyttöoikeussopimus (\"Lisenssi\")\n"
 "\n"
 "\n"
-"Ole hyvä ja lue tämä dokumentti huolellisesti. Tämä dokumentti \n"
-"on Lisenssisopimus sinun ja MandrakeSoft S.A.:n välillä ja koskee \n"
-"Ohjelmistoa. Asentamalla, kopioimalla tai käyttämällä Ohjelmistoa \n"
-"millä tavalla tahansa, annat nimenomaisen hyväksynnän ja suostut\n"
-"mukautumaan tämän Lisenssin sääntöihin ja ehtoihin. \n"
-"Jos et suostu johonkin osaan tästä Lisenssistä, sinulla ei ole lupaa\n"
-"asentaa, kopioida tai käyttää tätä Ohjelmistoa. Mitään yritystä asentaa,\n"
-"kopioida tai käyttää Ohjelmistoa tavalla, joka ei ole tämän Lisenssin\n"
-"sääntöjen ja ehtojen mukainen, ei hyväksytä ja sen kaltaiset yritykset\n"
-"päättää oikeutesi tämän Lisenssin alla välittömästi. Lisenssin päättyessä, \n"
-"sinun pitää välittömästi tuhota kaikki Ohjelmiston kopiot.\n"
+"Ole hyvä ja lue tämä dokumentti huolellisesti. Tämä dokumentti on Lisenssi-\n"
+"sopimus sinun ja MandrakeSoft S.A.:n välillä ja koskee Ohjelmistoa.\n"
+"Asentamalla, kopioimalla tai käyttämällä Ohjelmistoa millä tavalla tahansa,\n"
+"annat nimenomaisen hyväksynnän ja suostut mukautumaan tämän Lisenssin\n"
+"sääntöihin ja ehtoihin. Jos et suostu johonkin osaan tästä Lisenssistä,\n"
+"sinulla ei ole lupaa asentaa, kopioida tai käyttää tätä Ohjelmistoa. Mitään\n"
+"yritystä asentaa, kopioida tai käyttää Ohjelmistoa tavalla, joka ei ole "
+"tämän\n"
+"Lisenssin sääntöjen ja ehtojen mukainen, ei hyväksytä ja sen kaltaiset\n"
+"yritykset päättävät oikeutesi tämän Lisenssin alla välittömästi. Lisenssin\n"
+"päättyessä sinun pitää välittömästi tuhota kaikki Ohjelmiston kopiot.\n"
 "\n"
 "\n"
 "\n"
 "2. Rajoitettu Takuu\n"
 "\n"
 "\n"
-"Ohjelmisto ja sen mukana seuraavat dokumentaatiot tarjotaan \n"
-"sellaisenaan, ilman mitään takuita, voimassa olevan lain rajojen \n"
-"sisällä. Sikäli kuin takuuta ei voimassa olevan lain mukaan voi \n"
-"kiistää tai rajoittaa, MandrakeSoft S.A. ei missään nimessä ole \n"
-"vastuussa erikoisille, odottamattomille, välittömille tai välillisille \n"
-"vahingoille (sisältäen ilman rajoituksia vahingot menetetystä \n"
-"työstä, työn keskeytyksestä, taloudellisesta tappiosta, laillisista \n"
-"kustannuksista ja sakoista johtuen tuomioistuimen päätöksestä, \n"
-"tai minkä tahansa muun merkittävän tappion takia) jotka \n"
-"syntyvät käytöstä tai kyvyttömyydestä käyttää Ohjelmistoa, \n"
-"vaikka MandrakeSoft S.A.:lle on tiedotettu tällaisen vahingon \n"
-"mahdollisuuden tai tapahtuman olemassaolosta.\n"
+"Ohjelmisto ja sen mukana seuraavat dokumentaatiot tarjotaan sellaisenaan, "
+"ilman\n"
+"mitään takuita, voimassa olevan lain rajojen sisällä. Sikäli kuin takuuta "
+"ei\n"
+"voimassa olevan lain mukaan voi kiistää tai rajoittaa, MandrakeSoft S.A. ei\n"
+"missään nimessä ole vastuussa erikoisille, odottamattomille, välittömille "
+"tai\n"
+"välillisille vahingoille (sisältäen ilman rajoituksia vahingot menetetystä\n"
+"työstä, työn keskeytyksestä, taloudellisesta tappiosta, laillisista\n"
+"kustannuksista ja sakoista johtuen tuomioistuimen päätöksestä, tai minkä\n"
+"tahansa muun merkittävän tappion takia) jotka syntyvät käytöstä tai\n"
+"kyvyttömyydestä käyttää Ohjelmistoa, vaikka MandrakeSoft S.A.:lle on "
+"tiedotettu\n"
+"tällaisen vahingon mahdollisuuden tai tapahtuman olemassaolosta.\n"
 "\n"
 "\n"
 "RAJOITETTU VASTUU JOKA LIITTYY KIELLETTYJEN \n"
@@ -900,72 +921,78 @@ msgstr ""
 "MAISSA\n"
 "\n"
 "\n"
-"Sikäli kuin takuuta ei voimassa olevan lain mukaan voi kiistää \n"
-"tai rajoittaa, MandrakeSoft S.A. tai sen jakelijat sen ei missään \n"
-"nimessä ole vastuussa erikoisille, odottamattomille, välittömille \n"
-"tai välillisille vahingoille (sisältäen ilman rajoituksia vahingot \n"
-"menetetystä työstä, työn keskeytyksestä, taloudellisesta \n"
-"tappiosta, laillisista kustannuksista ja sakoista johtuen tuomio-\n"
-"istuimen päätöksestä, tai minkä tahansa muun merkittävän \n"
-"tappion takia) jotka syntyvät ohjelmisto-komponenttien \n"
-"hallussapidosta tai käytöstä tai syntyvät ohjelmisto-\n"
-"komponenttien lataamisesta joltakin Mandrake Linuxin \n"
-"sivustoista jotka ovat kiellettyjä tai rajoitettuja joissakin \n"
-"maissa paikallisen lain voimalla.\n"
+"Sikäli kuin takuuta ei voimassa olevan lain mukaan voi kiistää tai "
+"rajoittaa,\n"
+"MandrakeSoft S.A. tai sen jakelijat eivät missään nimessä ole vastuussa\n"
+"erikoisille, odottamattomille, välittömille tai välillisille vahingoille\n"
+"(sisältäen ilman rajoituksia vahingot menetetystä työstä, työn "
+"keskeytyksestä,\n"
+"taloudellisesta tappiosta, laillisista kustannuksista ja sakoista johtuen\n"
+"tuomioistuimen päätöksestä, tai minkä tahansa muun merkittävän tappion "
+"takia)\n"
+"jotka johtuvat ohjelmistokomponenttien hallussapidosta tai käytöstä tai\n"
+"jotka johtuvat ohjelmistokomponenttien lataamisesta joltakin Mandrake "
+"Linuxin\n"
+"sivustoilta, jotka ovat kiellettyjä tai rajoitettuja joissakin maissa\n"
+"paikallisen lain voimalla.\n"
 "\n"
-"Tämä rajoitettu vastuu koskee, muttei rajoitu, vahvaa \n"
-"salausta käyttäviä komponentteja jotka kuuluvat \n"
-"Ohjelmistoon.\n"
+"Tämä rajoitettu vastuu koskee, muttei rajoitu niihin, vahvaa salausta\n"
+"käyttäviä komponentteja jotka kuuluvat Ohjelmistoon.\n"
 "\n"
 "\n"
 "\n"
 "3. GPL Lisenssi ja samankaltaiset Lisenssit\n"
 "\n"
 "\n"
-"Ohjelmisto koostuu komponenteista joita ovat eri henkilöiden tai \n"
-"tahojen luomia. Suurinpaan osaan komponenteista sovelletaan GNU \n"
-"General Public Licence (Yleinen Julkinen Lisenssi, tästä \n"
-"eteenpäin \"GPL\") tai sen kaltaisten lisenssien ehtoja ja sääntöjä. \n"
-"Suurin osa näistä lisensseistä sallii sinun kopioida, sovittaa ja \n"
-"levittää eteenpäin komponentit joita ne koskee. Ole hyvä ja lue \n"
-"jokaisen komponentin lisenssin ehdot ja säännöt ennen kuin \n"
-"käytät sitä. Jokainen kysymys koskien komponentin lisenssiä \n"
-"pitäisi ohjata komponentin tekijälle MandrakeSoft:n sijasta. \n"
-"MandrakeSoft S.A.:n tekemiin ohjelmiin sovelletaan GPL \n"
-"Lisenssiä. MandrakeSoft S.A.:n tekemiin dokumentaatioihin \n"
-"sovelletaan erillistä lisenssiä. Lue dokumentaatiota \n"
-"saadaksesi lisää tietoa. \n"
+"Ohjelmisto koostuu komponenteista, jotka ovat eri henkilöiden tai tahojen\n"
+"luomia. Suurinpaan osaan komponenteista sovelletaan GNU General Public "
+"License\n"
+"(Yleinen Julkinen Lisenssi, tästä eteenpäin \"GPL\") tai sen kaltaisten\n"
+"lisenssien ehtoja ja sääntöjä. Suurin osa näistä lisensseistä sallii sinun\n"
+"kopioida, sovittaa ja levittää eteenpäin komponentteja joita ne koskevat. "
+"Ole\n"
+"hyvä ja lue jokaisen komponentin lisenssin ehdot ja säännöt ennen kuin "
+"käytät\n"
+"sitä. Jokainen kysymys koskien komponentin lisenssiä pitäisi ohjata "
+"komponentin\n"
+"tekijälle MandrakeSoftin sijasta. MandrakeSoft S.A.:n tekemiin ohjelmiin\n"
+"sovelletaan GPL-lisenssiä. MandrakeSoft S.A.:n tekemiin dokumentaatioihin\n"
+"sovelletaan erillistä lisenssiä. Lue dokumentaatiota saadaksesi lisää "
+"tietoa.\n"
 "\n"
 "\n"
 "\n"
 "4. Älyllisten Omaisuuksien Oikeudet\n"
 "\n"
 "\n"
-"Kaikki oikeudet Ohjelmiston komponentteihin kuuluvat niiden \n"
-"tekijöille, ja ovat suojattuja älyllisten omaisuuksien ja kopiointi- \n"
-"suojalailla, jotka koskevat ohjelmistoja. MandrakeSoft S.A. \n"
-"pidättää oikeuden muokata tai sovittaa Ohjelmistoa, joko \n"
-"kokonaan tai osittain, kaikilla tavoilla jokaiseen tarpeeseen. \n"
-"\"Mandrake\", \"Mandrake Linux\" ja kaikki niihin kuuluvat \n"
-"logot ovat MandrakeSoft S.A. rekisteröityjä tavaramerkkejä. \n"
+"Kaikki oikeudet Ohjelmiston komponentteihin kuuluvat niiden tekijöille, ja "
+"ne\n"
+"ovat suojattuja älyllisten omaisuuksien- ja kopiointisuojalailla, jotka\n"
+"koskevat ohjelmistoja. MandrakeSoft S.A. pidättää oikeuden muokata tai "
+"sovittaa\n"
+"Ohjelmistoa, joko kokonaan tai osittain, kaikilla tavoilla jokaiseen "
+"tarpeeseen.\n"
+"\"Mandrake\", \"Mandrake Linux\" ja kaikki niihin kuuluvat logot ovat\n"
+"MandrakeSoft S.A. rekisteröityjä tavaramerkkejä.\n"
 "\n"
 "\n"
 "\n"
 "5. Sovellettava laki.\n"
 "\n"
 "\n"
-"Jos ilmenee, että jokin osa tästä sopimuksesta on mitätön, \n"
-"laiton tai täytäntöönpanokelvoton, kyseinen osa poistetaan \n"
-"sopimuksesta. Sopimus säilyy muilta osin pätevänä ja \n"
-"täytäntöönpanokelpoisena ehtojensa mukaisesti. Tämän \n"
-"sopimuksen ehtoja ja sääntöjä sovelletaan Ranskan lain \n"
-"mukaan. Kaikki kiistat tämän Lisenssin ehdoista pyritään \n"
-"selvittämään tuomioistuimen ulkopuolella. Viimeisenä \n"
-"vaihtoehtona kiista luovutetaan soveltuvaan tuomioistuimeen \n"
+"Jos ilmenee, että jokin osa tästä sopimuksesta on mitätön, laiton tai\n"
+"täytäntöönpanokelvoton, kyseinen osa poistetaan sopimuksesta. Sopimus "
+"säilyy\n"
+"muilta osin pätevänä ja täytäntöönpanokelpoisena ehtojensa mukaisesti. "
+"Tämän\n"
+"sopimuksen ehtoja ja sääntöjä sovelletaan Ranskan lain mukaan. Kaikki "
+"kiistat\n"
+"tämän Lisenssin ehdoista pyritään selvittämään tuomioistuimen ulkopuolella.\n"
+"Viimeisenä vaihtoehtona kiista luovutetaan soveltuvaan tuomioistuimeen\n"
 "ratkaistavaksi Pariisissa - Ranskassa.\n"
 "\n"
-"Jos teillä on kysymyksiä tästä sopimuksesta, ole hyvä ja \n"
-"ottakaa yhteyttä MandrakeSoft S.A.:han.\n"
+"Jos teillä on kysymyksiä tästä sopimuksesta, olkaa hyvä ja ottakaa yhteyttä\n"
+"MandrakeSoft S.A.:iin.\n"
 "\n"
 "\n"
 "\n"
@@ -1103,7 +1130,7 @@ msgid ""
 "the progress bar x coordinate\n"
 "of its upper left corner"
 msgstr ""
-"edistymispalkin x-kordinaatti\n"
+"edistymispalkin x-koordinaatti\n"
 "(vasen yläkulma)"
 
 #: ../../standalone/drakgw:1
@@ -1128,7 +1155,7 @@ msgstr ""
 "\n"
 "Jos sinulla on ISA-kortti, seuraavien arvojen pitäisi olla oikeat.\n"
 "\n"
-"Jos sinulla on PCMCIA-kortti sinun täytyy tietää korttisi \"IRQ\" ja \"IO"
+"Jos sinulla on PCMCIA-kortti sinun täytyy tietää korttisi \"IRQ\" ja \"I/O"
 "\".\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -1240,9 +1267,10 @@ msgstr ""
 "Voit käyttää myös graafista käyttöliittymää \"xpdq\" optioiden asettamiseen "
 "ja tulostustöiden hallintaan.\n"
 "\n"
-"Jos käytät KDE työpöytäympäristöä sinulla on \"paniikkipainike\" kuvake "
+"Jos käytät KDE työpöytäympäristöä sinulla on \"paniikkipainike\", kuvake "
 "työpöydällä \"PYSÄYTÄ tulostus!\", joka pysäyttää kaikki tulostustyöt heti "
-"kun painat sitä. Tämä on hyödyllistä esimerkiksi kun paperi on tukossa.\n"
+"kun painat sitä. Tämä on hyödyllistä esimerkiksi kun tulodtimessa on "
+"paperitukos.\n"
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
@@ -1283,7 +1311,62 @@ msgid ""
 "No D-Channel (leased lines)"
 msgstr ""
 "Muun maailman käyttämä protokolla \n"
-"Ei D-kanavaa (vuokra-linjat)"
+"Ei D-kanavaa (vuokralinjat)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ asettaa tämän tiedoston toimimaan yhteistyössä "
+"mkinitrd-net:llä\n"
+"        \t\tluotujen kuvien kanssa ja tietueet /etc/dhcpd.conf tiedostossa "
+"jakamaan\n"
+"        \t\tkäynnistysluvan jokaiselle levyttömälle asiakkaalle.\n"
+"\n"
+"        \t\tTyypillinen tftp asetustiedosto näyttää tältä:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \t\tMuutokset täällä verrattuna vakioasennukseen on 'disable' lipun "
+"asettaminen\n"
+"        \t\t'no' tilaan ja hakemiston muuttaminen /var/lib/tftpboot, johon "
+"mkinitrd-net\n"
+"        \t\ttallentaa kuvat."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1384,12 +1467,12 @@ msgstr "Sveitsi"
 #: ../../lang.pm:1
 #, c-format
 msgid "Brunei Darussalam"
-msgstr "Brunei"
+msgstr "Brunei Darussalam"
 
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have any %s interfaces?"
-msgstr "Onko koneessa %s liityntää?"
+msgstr "Onko koneessa liitäntää %s?"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -1441,41 +1524,49 @@ msgid ""
 "security), choose the desired user and window manager, then click \"%s\".\n"
 "If you are not interested in this feature, uncheck the \"%s\" box."
 msgstr ""
-"GNU/Linux on monen käyttäjän järjestelmä ja tämä tarkoittaa että\n"
-"jokainen käyttäjä voi pitää omat asetukset, omat tiedostot jne. Voit\n"
-"lukea ``Starter Guide'':a saadaksesi lisätietoa tästä. Mutta \"root\"-\n"
-"käyttäjään, joka on järjestelmän ylläpitäjä, verrattuna käyttäjät, joita\n"
-"lisäät täällä, eivät pysty muuttamaan mitään muuta paitsi omia\n"
-"tiedostojaan ja asetuksiaan. Tällä tavalla suojataan järjestelmää\n"
-"erehdyksiltä tai tahallisilta muutoksilta, jotka vaikuttavat järjestelmään.\n"
-"Sinun pitää luoda ainakin yksi tavallinen käyttäjä itsellesi. Se on tili\n"
-"jota sinun kannattaa käyttää jokapäiväisessä työssäsi. Vaikkakin on\n"
-"kätevämpää kirjoittautua sisään \"root\"-tunnuksella, se on myös paljon\n"
-"vaarallisempaa! Pienikin virhe voi tarkoittaa ettei järjestelmäsi toimi\n"
+"GNU/Linux on monen käyttäjän järjestelmä ja tämä tarkoittaa että jokainen\n"
+"käyttäjä voi pitää omat asetukset, omat tiedostot jne. Voit lukea ``Starter\n"
+"Guide'':a saadaksesi lisätietoa tästä. Mutta \"root\"-käyttäjään, joka on\n"
+"järjestelmän ylläpitäjä, verrattuna käyttäjät, joita lisäät tässä, eivät "
+"pysty\n"
+"muuttamaan mitään muuta paitsi omia tiedostojaan ja asetuksiaan. Tällä "
+"tavalla\n"
+"suojataan järjestelmää erehdyksiltä tai tahallisilta muutoksilta, jotka\n"
+"vaikuttavat järjestelmään. Sinun pitää luoda ainakin yksi tavallinen "
+"käyttäjä\n"
+"itsellesi. Se on tili jota sinun kannattaa käyttää jokapäiväisessä "
+"työssäsi.\n"
+"Vaikkakin on kätevämpää kirjautua sisään \"root\"-tunnuksella, se on myös\n"
+"paljon vaarallisempaa! Pienikin virhe voi merkitä ettei järjestelmäsi toimi\n"
 "enää. Jos teet vakavan virheen tavallisena käyttäjänä, voit mahdollisesti\n"
 "menettää jotain tietoja, mutta et koko järjestelmää.\n"
 "\n"
 "Ensin sinun pitää antaa oikea nimesi. Tämä ei ole pakollista -- voithan\n"
-"kirjoittaa mitä tahansa. DrakX kopioi ensimmäisen kirjoittamasi sanan\n"
-"kenttään \"%s\". Tämä on se nimi jolla kyseinen käyttäjä kirjoittautuu\n"
-"järjestelmään. Voit muuttaa sitä halutessasi. Sinun pitää myös syöttää\n"
-"salasana. Tavallisen käyttäjän salasana ei ole niin kriittinen kuin\n"
-"\"root\"-tunnus turvallisuusnäkökulmasta, mutta tämä ei ole syy\n"
-"tietoturvan laiminlyömiseen: Onhan kysymys tiedostojesi turvasta.\n"
+"kirjoittaa mitä tahansa. DrakX kopioi ensimmäisen kirjoittamasi sanan "
+"kenttään\n"
+"\"%s\". Tämä on se nimi jolla kyseinen käyttäjä kirjautuu järjestelmään.\n"
+"Voit muuttaa sitä halutessasi. Sinun pitää myös syöttää salasana. "
+"Tavallisen\n"
+"käyttäjän salasana ei ole niin kriittinen kuin \"root\"-tunnus "
+"turvallisuus-\n"
+"näkökulmasta, mutta tämä ei ole syy tietoturvan laiminlyömiseen: Onhan "
+"kysymys\n"
+"tiedostojesi turvasta.\n"
 "\n"
-"Kun painat \"%s\", voit lisätä muita käyttäjiä. Lisää käyttäjä\n"
-"jokaiselle henkilölle jonka on tarkoitus käyttää tätä tietokonetta.\n"
-"Kun olet lisännyt kaikki haluamasi käyttäjät, valitse \"%s\".\n"
+"Kun painat \"%s\", voit lisätä muita käyttäjiä. Lisää käyttäjä jokaiselle\n"
+"henkilölle, jonka on tarkoitus käyttää tätä tietokonetta. Kun olet lisännyt\n"
+"kaikki haluamasi käyttäjät, valitse \"%s\".\n"
 "\n"
-"Jos painat \"%s\" painiketta voit muuttaa vakio\n"
-"\"komentotulkin\" kyseiselle käyttäjälle (vakiona bash).\n"
+"Jos painat \"%s\" painiketta voit muuttaa oletus-\"komentotulkin\" "
+"kyseiselle\n"
+"käyttäjälle (vakiona bash).\n"
 "\n"
-"Kun olet lisännyt kaikki käyttäjät, sinua pyydetään valitsemaan käyttäjä\n"
-"joka voi kirjoittautua automaattisesti järjestelmään kun kone käynnistyy.\n"
-"Jos olet kiinnostunut tästä ominaisuudesta (etkä paljon piittaa\n"
-"paikallisesta tietoturvasta), valitse haluttu käyttäjä ja "
-"ikkunointijärjestelmä,\n"
-"ja paina \"%s\". Jos et ole kiinnostunut tästä ominaisuudesta,\n"
+"Kun olet lisännyt kaikki käyttäjät, sinua pyydetään valitsemaan käyttäjä, "
+"joka\n"
+"voi kirjautua automaattisesti järjestelmään koneen käynnistyessä. Jos olet\n"
+"kiinnostunut tästä ominaisuudesta (etkä paljon piittaa paikallisesta tieto-\n"
+"turvasta), valitse haluttu käyttäjä ja ikkunointijärjestelmä, ja paina \"%s"
+"\". Jos et ole kiinnostunut tästä ominaisuudesta,\n"
 "poista valinta \"%s\""
 
 #: ../../standalone/drakconnect:1
@@ -1529,9 +1620,9 @@ msgid ""
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"Mandrake Linuxin asennus koostuu useasta CD-ROM-levystä. DrakX\n"
-"tietää, onko valittu paketti toisella CD:llä ja osaa syöttää nykyisen levyn\n"
-"ulos ja pyytää sinua asettamaan oikea levy tarvittaessa."
+"Mandrake Linuxin asennus koostuu useasta CD-ROM-levystä. DrakX tietää,\n"
+"onko valittu paketti toisella CD:llä ja osaa syöttää nykyisen levyn ulos\n"
+"ja pyytää sinua asettamaan oikean levyn tarvittaessa."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -1623,9 +1714,8 @@ msgstr ""
 "tavanomaisen käyttöjärjestelmälataajan apua. Tästä on hyötyä, jos et halua\n"
 "asentaa LILO:a (tai grubia) järjestelmääsi, toinen käyttöjärjestelmä "
 "poistaa\n"
-"LILO:n, tai LILO ei toimi laitteistossasi. Mukautettua käynnistyslevykettä "
-"voidaan\n"
-"käyttää myös Mandraken pelastuskuvan kanssa, jolloin vakavista\n"
+"LILO:n, tai LILO ei toimi laitteistossasi. Mukautettua käynnistyslevykettä\n"
+"voidaan käyttää myös Mandraken pelastuskuvan kanssa, jolloin vakavista\n"
 "järjestelmän virhetilanteista on helpompi toipua.\n"
 "Haluatko luoda käynnistyslevykkeen järjestelmääsi?\n"
 "%s"
@@ -1953,15 +2043,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "K~^Dyt~^D %c- ja %c-n~^Dpp~^Dimi~^D valitaksesi korostetun tietueen"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Salli \"%s\" suoritaa tiedostoa"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Yleinen 2-näppäiminen hiiri"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Salli \"%s\" suoritaa tiedostoa"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -3195,6 +3285,36 @@ msgstr "Tämä on pakollinen paketti, sitä ei voida poistaa valinnoista"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Luo etherboot levykkeet/CD:t:\n"
+"        \t\tLevyttömät asiakaskoneet tarvitsevat joko ROM-kuvat "
+"verkkokortissa, tai\n"
+"        \t\tkäynnistyslevykkeen tai CD:n käynnistämään käynnistysjakson. "
+"drakTermServ\n"
+"        \t\tauttaa näiden kuvien luonnissa, jotka perustuvat asiakaskoneiden "
+"verkkokorttiin.\n"
+"        \t\t\n"
+"        \t\tPerusesimerkki käynnistyslevykkeen luominen 3Com 3c509 "
+"verkkokortille:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Etherboot ISO-kuva on %s"
 
@@ -3611,33 +3731,6 @@ msgstr "Piilota tiedostot"
 msgid "Auto-detect printers connected to this machine"
 msgstr "Tunnista automaattisesti tähän koneeseen liitetyt tulostimet"
 
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV ei ole asennettuna!\n"
-"\n"
-"\n"
-"Jos sinulla on TV-kortti, mutta DrakX ei tunnistanut sitä (ei bttv eikä \n"
-"saa713 moduulia tiedostossa \"/etc/modules\") eikä asentanut xawtv:tä, \n"
-"lähetä \"lspcidrake -v -f\" tuloste osoitteeseen \"install\\@mandrakesoft."
-"com\n"
-"otsikolla \"undetected TV card\".\n"
-"\n"
-"\n"
-"Voit asentaa sen kirjoittamalla \"urpmi xawtv\" pääkäyttäjänä konsolissa."
-
 #: ../../any.pm:1
 #, c-format
 msgid "Sorry, no floppy drive available"
@@ -3905,9 +3998,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Luodaan asetettujen kuvanlukijoiden listaus uudelleen ..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Manuaalinen asettaminen"
+msgstr "Moduulien asettaminen"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -4226,6 +4319,18 @@ msgstr "/etc/hosts.allow ja /etc/hosts.deny on jo asetettu - ei muutoksia"
 msgid "Restore From Tape"
 msgstr "Palauta nauhalta"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"Lähettääksesi virheraportin, paina \"Raportti\" painiketta, joka avaa "
+"oletusselaimesi\n"
+"Anthill sivustoon jossa voit lähettää yllä mainittu tieto virheraporttina."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4384,7 +4489,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Verkkoaseman nimi, tunnus ja salasana tarvitaan!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Aseta levyke "
@@ -4528,10 +4633,36 @@ msgstr "Verkkoliitäntä on jo asetettu"
 msgid "Couldn't access the floppy!"
 msgstr "En voinut käyttää levykettä!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "yhdistetään Bugzilla velhoon ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
+"Varoitus: Voi olla ettei Vapaa Ohjelmisto on patenttivapaa, ja joitakin "
+"jakelussa\n"
+"olevia paketteja voi olla patenttien alaisuudessa maassasi. Esimerkiksi "
+"mukana\n"
+"olevat MP3-purkaajat voivat vaatia lisenssin jotta saisit käyttää sitä "
+"jatkuvasti\n"
+"(katso http://www.mp3licensing.com saadaaksesi lisää tietoa). Jos olet "
+"epävarma\n"
+"jos joku patentti koskee sinua, selvitä asiaa paikallisten viranomaisten "
+"kassa.\n"
+"\n"
+"\n"
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4717,6 +4848,11 @@ msgstr "Hyväksy"
 #, c-format
 msgid "Description"
 msgstr "Kuvaus"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Syötä tiivistelmä teksti."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5682,7 +5818,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Oikea Control näppäin"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6823,6 +6959,34 @@ msgstr "Varoitus: IP osoite %s on yleensä varattu !"
 msgid "busmouse"
 msgstr "väylähiiri"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Luo Etherbootia tukevia käynnistyskuvia:\n"
+"        \t\tYtimen käynnistämiseksi etherbootin kautta pitää luoda erityinen "
+"kernel/initrd\n"
+"        \t\t-kuva. mkinitrd-net tekee suuren osan tästä työstä ja "
+"drakTermServ on\n"
+"        \t\tainoastaan graafinen käyttöliittymä näiden kuvien hallintaan/"
+"räätälöintiin.\n"
+"        \t\tLuodaksesi tiedoston /etc/dhcpd.conf.etherboot-pcimap.include, "
+"jota\n"
+"        \t\tkutsutaan tiedostosta dhcpd.conf, sinun pitää luoda etherboot-"
+"kuva ainakin\n"
+"        \t\tyhdelle kernelille."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -7198,37 +7362,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Levyke"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Ylläpidä /etc/exports:\n"
-"        \t\tClusternfs sallii juuritiedostojärjestelmän jakoa levyttömille "
-"asiakkaille. drakTermServ\n"
-"        \t\tasettaa oikean tietueen anonyymikäytön sallimiseksi "
-"juuritiedostojärjestelmälle\n"
-"        \t\tlevyttömiltä asiakkailta.\n"
-"\n"
-"        \t\tTyypillinen exports tietue clusternfs:ille:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              ALIVERKKO/MASKI(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tmissä ALIVERKKO/MASKI vastaa verkkoasi."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7884,6 +8017,12 @@ msgstr "Internetyhteyden jakaminen"
 msgid "Choose file"
 msgstr "Valitse tiedosto"
 
+# Asennuksen sivuvalikko
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Yhteenveto: "
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7962,6 +8101,23 @@ msgstr "Ranskan eteläiset alueet"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "prosessorin valmistaja"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Ylläpidä %s:\n"
+"        \t\tJotta levyttömien asiakkaiden käyttäjät pystyvät kirjautumaan "
+"tähän järjestelmään,\n"
+"        \t\tniiden tietue /etc/shadow tiedostossa pitää kopioida tiedostoon\n"
+"        \t\t%s. drakTermServ auttaa tässä toimenpiteessä\n"
+"        \t\tlisäämällä tai poistamalla käyttäjiä tästä tiedostosta."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8288,6 +8444,11 @@ msgstr "Palauta käyttäjät"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Salausavain %s:lle"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Haluatko palauttaa järjestelmäsi?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8735,6 +8896,11 @@ msgstr "/_Aseta CUPS"
 msgid ", "
 msgstr ","
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "Lähetä lspci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8975,6 +9141,11 @@ msgstr ""
 "\n"
 "Valmistaudun asettamaan lähiverkkosi asetukset kyseiselle laitteelle."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "Lähetä cpuinfo"
+
 # Asennuksen sivuvalikko
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -8985,6 +9156,11 @@ msgstr "Minimaalinen asennus"
 #, c-format
 msgid "Ethiopia"
 msgstr "Etiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "KYLLÄ"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9331,15 +9507,6 @@ msgstr "Asennuksen tyyppi"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Tulostin \"%s\" SMB/Windows palvelimella \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Demoni (%s) sisältää :\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9662,6 +9829,11 @@ msgstr "Näytön vaakajuovataajuus: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Polku"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "EI LÖYTYNYT"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10265,25 +10437,6 @@ msgstr "tärkeä"
 msgid "Total Progress"
 msgstr "Kokonaisedistyminen"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Ylläpidä /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tJotta levyttömien asiakkaiden käyttäjät pystyvät kirjautumaan "
-"tähän järjestelmään,\n"
-"        \t\tniiden tietue /etc/shadow tiedostossa pitää kopioida tiedostoon\n"
-"        \t\t/etc/shadow\\$\\$CLIENTS\\$\\$. drakTermServ auttaa tässä "
-"toimenpiteessä\n"
-"        \t\tlisäämällä tai poistamalla käyttäjiä tästä tiedostosta."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10417,6 +10570,41 @@ msgstr ""
 "Käytä asteittaiset/erotus varmuuskopioita (älä korvaa vanhoja "
 "varmuuskopioita)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Ylläpidä /etc/dhcpd.conf:\n"
+"        \t\tVerkkokäynnistystä käyttävät asiakkaat tarvitsevat oman dhcpd."
+"conf tietueen,\n"
+"        \t\tjoka määrää IP-osoitteen ja verkkokäynnistyskuvan kyseiselle "
+"koneelle.\n"
+"        \t\tdrakTermServ auttaa näiden tietueiden luomisessa/poistamisessa.\n"
+"\t\t\t\n"
+"        \t\t(PCI-kortit voivat jättää kuvan asettamatta - etherboot pyytää "
+"oikean kuvan.\n"
+"        \t\tSinun kannattaisi myös harkita sitä että kun etherboot etsii "
+"kuvia, se\n"
+"        \t\todottaa nimiä kuten boot-3c59x.nbi, boot-3c59x.2.4.1-16mdk.nbi "
+"sijasta).\n"
+"\t\t\t \n"
+"        \t\tTyypillinen dhcpd.conf tietue levyttömälle asiakkaalle voi olla:"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10535,6 +10723,15 @@ msgid ""
 msgstr ""
 "tekstiruudun x-koordinaatti\n"
 "määrä merkeissä"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Et ehkä pysty asentamaan LILOa, koska lilo ei osaa käsitellä monista "
+"fyysisistä osioista koostuvia loogisia osioita."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10835,6 +11032,16 @@ msgstr "Koneen nimi vaaditaan"
 msgid "Unselect fonts installed"
 msgstr "Poista asennettujen kirjasimien valinta"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Rulla"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Lähetä ytimen versio"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10855,11 +11062,6 @@ msgstr "Peruuta"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Etsitään asetetut kuvanlukijat ..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Rulla"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10928,6 +11130,11 @@ msgstr "Oletus"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "2. näppäimen emulaatio"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Anna paketin nimi."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -11012,6 +11219,11 @@ msgstr ""
 " Copyright (C)2002 MandrakeSoft.\n"
 "\tStew Benedict <sbenedict\\@mandrakesoft.com>\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11181,6 +11393,69 @@ msgstr "Tiedostojärjestelmän salausavain"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\tVaikka voit käyttää IP-osoiteryhmää asiakaskoneelle räätälöidyn "
+"tietueen sijasta,\n"
+"\t\t\tkiinteiden osoitteiden määritysten käyttöä helpottaa ClusterNFS:n "
+"tarjoama\n"
+"\t\t\tasiakaskohtaisten asetustiedostojen käyttö.\n"
+"\t\t\t\n"
+"\t\t\tHuomaa: \"#type\" -tietue on ainoastaan drakTermServ:n käytössä. "
+"Asiakkaat voivat\n"
+"\t\t\tolla joko 'thin'- tai 'fat-tyyppisiä'. 'Thin' asiakkaat suorittavat "
+"suurimman osan\n"
+"\t\t\tohjelmista palvelimella xdmcp kautta, kun 'fat' asiakkaat suorittavat "
+"suurimman\n"
+"\t\t\tosan ohjelmista itse. Erikoinen inittab-tiedosto, %s on\n"
+"\t\t\tluotu 'thin' asiakkaille. Järjestelmän asetustiedostot xdm-config, "
+"kdmrc ja gdm.conf\n"
+"\t\t\tmuokataan xdmcp:n käyttämiseksi, jos 'thin' asiakkaita käytetään. "
+"Koska xdmcp:n\n"
+"\t\t\tkäytössä on turvallisuusongelmia, hosts.deny ja hosts.allow muokataan "
+"käytön\n"
+"\t\t\trajoittamiseen paikallisverkon aliverkolle.\n"
+"\t\t\t\n"
+"\t\t\tHuomaa: Sinun pitää pysäyttää/käynnistää palvelin asiakkaiden "
+"lisäämisen tai\n"
+"\t\t\tmuokkauksen jälkeen"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11505,70 +11780,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tVaikka voit käyttää IP-osoiteryhmää asiakaskoneelle räätälöidyn "
-"tietueen sijasta,\n"
-"\t\t\tkiinteiden osoitteiden määritysten käyttöä helpottaa ClusterNFS:n "
-"tarjoama\n"
-"\t\t\tasiakaskohtaisten asetustiedostojen käyttö.\n"
-"\t\t\t\n"
-"\t\t\tHuomaa: \"#type\" -tietue on ainoastaan drakTermServ:n käytössä. "
-"Asiakkaat voivat\n"
-"\t\t\tolla joko 'thin'- tai 'fat-tyyppisiä'. 'Thin' asiakkaat suorittavat "
-"suurimman osan\n"
-"\t\t\tohjelmista palvelimella xdmcp kautta, kun 'fat' asiakkaat suorittavat "
-"suurimman\n"
-"\t\t\tosan ohjelmista itse. Erikoinen inittab-tiedosto, /etc/inittab\\$\\"
-"$IP=client_ip\\$\\$ on\n"
-"\t\t\tluotu 'thin' asiakkaille. Järjestelmän asetustiedostot xdm-config, "
-"kdmrc ja gdm.conf\n"
-"\t\t\tmuokataan xdmcp:n käyttämiseksi, jos 'thin' asiakkaita käytetään. "
-"Koska xdmcp:n\n"
-"\t\t\tkäytössä on turvallisuusongelmia, hosts.deny ja hosts.allow muokataan "
-"käytön\n"
-"\t\t\trajoittamiseen paikallisverkon aliverkolle.\n"
-"\t\t\t\n"
-"\t\t\tHuomaa: Sinun pitää pysäyttää/käynnistää palvelin asiakkaiden "
-"lisäämisen tai\n"
-"\t\t\tmuokkauksen jälkeen"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11983,39 +12194,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - Ylläpidä /etc/dhcpd.conf:\n"
-"        \t\tVerkkokäynnistystä käyttävät asiakkaat tarvitsevat oman dhcpd."
-"conf tietueen,\n"
-"        \t\tjoka määrää IP-osoitteen ja verkkokäynnistyskuvan kyseiselle "
-"koneelle.\n"
-"        \t\tdrakTermServ auttaa näiden tietueiden luomisessa/poistamisessa.\n"
-"\t\t\t\n"
-"        \t\t(PCI-kortit voivat jättää kuvan asettamatta - etherboot pyytää "
-"oikean kuvan.\n"
-"        \t\tSinun kannattaisi myös harkita sitä että kun etherboot etsii "
-"kuvia, se\n"
-"        \t\todottaa nimiä kuten boot-3c59x.nbi, boot-3c59x.2.4.1-16mdk.nbi "
-"sijasta).\n"
-"\t\t\t \n"
-"        \t\tTyypillinen dhcpd.conf tietue levyttömälle asiakkaalle voi olla:"
+"Ohjelman nimi\n"
+"tai hakemistopolku:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12405,26 +12591,6 @@ msgstr "Ongelmia asennettaessa pakettia %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Saat hälytyksen jos kuorma on tätä arvoa suurempi"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Lähettääksesi virheraportin, paina \"Raportti\" painiketta.\n"
-"Tämä avaa webbiselaimen osoitteen: https://drakbug.mandrakesoft.com\n"
-"mistä löydät täytettävän lomakkeen. Yllä näytetyt tiedot lähetetään yllä\n"
-"mainitulle palvelimelle.\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12561,7 +12727,7 @@ msgstr "Turvallisuusylläpitäjä:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Asettaa komentotulkin aikaviiveen. Arvo 0 (nolla) poistaa aikaviiveen."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Firmwaren kopiointi onnistui"
@@ -12946,11 +13112,6 @@ msgstr ""
 "Tulostin \"%s\" on jo olemassa,\n"
 "haluatko todellakin korvata olemassa olevat asetukset?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "ei vapaita osioita"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12960,6 +13121,11 @@ msgstr "Käytä kuvanlukijoita koneissa: "
 #, c-format
 msgid "Unselected All"
 msgstr "Poista valinta kaikista"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "ei vapaita osioita"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -13002,7 +13168,7 @@ msgid "modem"
 msgstr "modeemi"
 
 # mat
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Tervetuloa %s:n"
@@ -13086,6 +13252,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Ei oikein nimetty CD. CD:n nimike on: %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Demoni (%s) sisältää :\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13222,43 +13397,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Järjestelmätiedostot:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Asiakaskohtaiset järjestelmän asetustiedostot:\n"
-"        \t\tClusternfs:n kautta, jokaisella levyttömällä asiakkaalla voi "
-"olla omat räätälöidyt\n"
-"        \t\tasetustiedostot palvelimen juuritiedostojärjestelmässä. "
-"Sallimalla paikallisen asiakaan\n"
-"\t\t\t\tlaitteistoasetukset, asiakkaat voivat muokata esimerkiksi /etc/"
-"modules.conf,\n"
-"        \t\t/etc/sysconfig/mouse, /etc/sysconfig/keyboard asiakaskohtaisina "
-"tiedostoina.\n"
-"\n"
-"\n"
-"        Huom! Paikallisten laitteistoasetuksien salliminen sallii root "
-"kirjautumista jokaisen\n"
-"        koneen terminaalipalvelimelle jossa tämä toiminto on käytössä.\n"
-"        Paikallinen asetus voidaan poistaa käytöstä kun kaikki asetukset on "
-"tehty, säästäen\n"
-"        mukautetut asetustiedostot."
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -14114,7 +14252,7 @@ msgstr "Rakenna Linuxin tulevaisuutta!"
 msgid "Local Printer"
 msgstr "Paikallinen tulostin"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Levykkeen käyttövirhe, en voi liittää %s"
@@ -14218,61 +14356,6 @@ msgstr "Hiiren laite: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Valitse uudelleen oikeat kirjasimet"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ asettaa tämän tiedoston toimimaan yhteistyössä "
-"mkinitrd-net:llä\n"
-"        \t\tluotujen kuvien kanssa ja tietueet /etc/dhcpd.conf tiedostossa "
-"jakamaan\n"
-"        \t\tkäynnistysluvan jokaiselle levyttömälle asiakkaalle.\n"
-"\n"
-"        \t\tTyypillinen tftp asetustiedosto näyttää tältä:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tMuutokset täällä verrattuna vakioasennukseen on 'disable' lipun "
-"asettaminen\n"
-"        \t\t'no' tilaan ja hakemiston muuttaminen /var/lib/tftpboot, johon "
-"mkinitrd-net\n"
-"        \t\ttallentaa kuvat."
 
 #: ../../help.pm:1
 #, c-format
@@ -14603,6 +14686,11 @@ msgstr "Toukokuu"
 msgid "Yaboot mode"
 msgstr "Yaboot-tila"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Yleinen 3-näppäinen hiiri"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14617,11 +14705,6 @@ msgstr ""
 "En voi suorittaa LiLoa uudelleen!\n"
 "Suorita \"LILO\" pääkäyttäjänä komentorivillä \n"
 "LILO teeman asennuksen viimeistelyyn."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Yleinen 3-näppäinen hiiri"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14966,36 +15049,6 @@ msgstr "Molemmat Shift näppäimet samanaikaisesti"
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr " --id <id_label>       - lataa html apusivu joka koskee id_label\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Luo etherboot levykkeet/CD:t:\n"
-"        \t\tLevyttömät asiakaskoneet tarvitsevat joko ROM-kuvat "
-"verkkokortissa, tai\n"
-"        \t\tkäynnistyslevykkeen tai CD:n käynnistämään käynnistysjakson. "
-"drakTermServ\n"
-"        \t\tauttaa näiden kuvien luonnissa, jotka perustuvat asiakaskoneiden "
-"verkkokorttiin.\n"
-"        \t\t\n"
-"        \t\tPerusesimerkki käynnistyslevykkeen luominen 3Com 3c509 "
-"verkkokortille:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15391,11 +15444,6 @@ msgstr "Verkkoalueen nimi"
 msgid "Sharing of local printers"
 msgstr "Paikallisten tulostimien jakaminen"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15405,6 +15453,11 @@ msgstr "Ota käyttöön / poista käytöstä libsafe jos se löytyy järjestelm�
 #, c-format
 msgid "Available printers"
 msgstr "Saatavilla olevat tulostimet"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "EI"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15438,33 +15491,6 @@ msgstr ""
 "\n"
 "\n"
 "Paina \"%s\" jatkaaksesi."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Luo Etherbootia tukevia käynnistyskuvia:\n"
-"        \t\tYtimen käynnistämiseksi etherbootin kautta pitää luoda erityinen "
-"kernel/initrd\n"
-"        \t\t-kuva. mkinitrd-net tekee suuren osan tästä työstä ja "
-"drakTermServ on\n"
-"        \t\tainoastaan graafinen käyttöliittymä näiden kuvien hallintaan/"
-"räätälöintiin.\n"
-"        \t\tLuodaksesi tiedoston /etc/dhcpd.conf.etherboot-pcimap.include, "
-"jota\n"
-"        \t\tkutsutaan tiedostosta dhcpd.conf, sinun pitää luoda etherboot-"
-"kuva ainakin\n"
-"        \t\tyhdelle kernelille."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16304,6 +16330,23 @@ msgstr "VAKAVA"
 msgid "Refresh the list"
 msgstr "Päivitä lista"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Asiakaskohtainen %s:\n"
+"        \t\tClusternfs:n kautta jokaisella levyttömällä asiakkaalla voi olla "
+"oma räätälöity\n"
+"        \t\tasetustiedosto palvelimen juuritiedostojärjestelmässä. "
+"Tulevaisuudessa\n"
+"        \t\tdrakTermServ auttaa näiden tiedostojen luomisessa."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16873,12 +16916,17 @@ msgstr "Yleinen"
 msgid "Cylinder %d to %d\n"
 msgstr "Sylinteristä %d sylinteriin %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "VIESTISI TÄÄLLÄ"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Uusi profiili..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "EI"
@@ -17470,6 +17518,11 @@ msgstr "Muu multimedialaite"
 msgid "burner"
 msgstr "poltin"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Vian kuvaus/Järjestelmätiedot"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17603,6 +17656,43 @@ msgstr "Soittoasetukset"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Jos porttia ei ole määritetty, käytetään oletusporttia 631"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Asiakaskohtaiset järjestelmän asetustiedostot:\n"
+"        \t\tClusternfs:n kautta, jokaisella levyttömällä asiakkaalla voi "
+"olla omat räätälöidyt\n"
+"        \t\tasetustiedostot palvelimen juuritiedostojärjestelmässä. "
+"Sallimalla paikallisen asiakaan\n"
+"\t\t\t\tlaitteistoasetukset, asiakkaat voivat muokata esimerkiksi /etc/"
+"modules.conf,\n"
+"        \t\t/etc/sysconfig/mouse, /etc/sysconfig/keyboard asiakaskohtaisina "
+"tiedostoina.\n"
+"\n"
+"\n"
+"        Huom! Paikallisten laitteistoasetuksien salliminen sallii root "
+"kirjautumista jokaisen\n"
+"        koneen terminaalipalvelimelle jossa tämä toiminto on käytössä.\n"
+"        Paikallinen asetus voidaan poistaa käytöstä kun kaikki asetukset on "
+"tehty, säästäen\n"
+"        mukautetut asetustiedostot."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17830,7 +17920,7 @@ msgstr ""
 " (Rinnakkaisportit: /dev/lp0, /dev/lp1, ..., vastaavat LPT1:, LPT2:, ..., 1. "
 "USB-tulostin: /dev/usb/lp0, 2. USB-tulostin: /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Seuraava"
@@ -19167,7 +19257,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "Levykkeiden eri muodot joita asema tukee"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Firmwaren kopiointi epäonnistui, tiedosto %s ei löytynyt"
@@ -19872,6 +19962,11 @@ msgstr ""
 "\n"
 "Hyväksytkö että kaikki virheelliset osiot poistetaan?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Etsi paketti"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19987,6 +20082,37 @@ msgstr "Lähiverkon asetukset"
 #, c-format
 msgid "hard disk model"
 msgstr "kovalevyn malli"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Ylläpidä /etc/exports:\n"
+"        \t\tClusternfs sallii juuritiedostojärjestelmän jakoa levyttömille "
+"asiakkaille. drakTermServ\n"
+"        \t\tasettaa oikean tietueen anonyymikäytön sallimiseksi "
+"juuritiedostojärjestelmälle\n"
+"        \t\tlevyttömiltä asiakkailta.\n"
+"\n"
+"        \t\tTyypillinen exports tietue clusternfs:ille:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t\t/home              ALIVERKKO/MASKI(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tmissä ALIVERKKO/MASKI vastaa verkkoasi."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -20176,15 +20302,15 @@ msgstr "UK näppäimistö"
 msgid "Unmount"
 msgstr "Irrota"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Poista kirjasimia"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Poista kirjasimia"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20562,23 +20688,6 @@ msgstr "Suoritetaan \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "ota radio-tuki käyttöön"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Asiakaskohtainen /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tClusternfs:n kautta jokaisella levyttömällä asiakkaalla voi olla "
-"oma räätälöity\n"
-"        \t\tasetustiedosto palvelimen juuritiedostojärjestelmässä. "
-"Tulevaisuudessa\n"
-"        \t\tdrakTermServ auttaa näiden tiedostojen luomisessa."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -21014,6 +21123,31 @@ msgstr ""
 "Valikoima työkaluja sähköpostin ja uutisryhmien lukemiseen sekä Internetissä "
 "surffailuun"
 
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTV ei ole asennettuna!\n"
+#~ "\n"
+#~ "\n"
+#~ "Jos sinulla on TV-kortti, mutta DrakX ei tunnistanut sitä (ei bttv eikä \n"
+#~ "saa713 moduulia tiedostossa \"/etc/modules\") eikä asentanut xawtv:tä, \n"
+#~ "lähetä \"lspcidrake -v -f\" tuloste osoitteeseen \"install\\@mandrakesoft."
+#~ "com\n"
+#~ "otsikolla \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "Voit asentaa sen kirjoittamalla \"urpmi xawtv\" pääkäyttäjänä konsolissa."
+
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 
@@ -21289,9 +21423,6 @@ msgstr ""
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "Syötä verkkoaseman nimi tai IP."
-
-#~ msgid "Please enter your login"
-#~ msgstr "Syötä käyttäjätunnuksesi"
 
 #~ msgid ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-ja\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
 "PO-Revision-Date: 2003-07-27 18:51+0900\n"
 "Last-Translator: UTUMI Hirosi <*>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -190,7 +190,7 @@ msgstr "イーサネットカード"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr "セットするとメールレポートをroot以外にこのEmailアドレスに送ります。"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "パラメータ"
@@ -507,6 +507,11 @@ msgstr "バス"
 msgid "Iraq"
 msgstr "イラク"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "connecting to %s ..."
+msgstr "Bugzillaウィザードに接続中.."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -549,6 +554,20 @@ msgstr "インストール済みフォントを検索"
 #, c-format
 msgid "Default desktop"
 msgstr "デフォルトのデスクトップ"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"バグを報告する際は「報告」をクリックしてください。\n"
+"ウェブブラウザが開いて %s が表示されます。\n"
+"そこに報告フォームがあるので記入してください。上に表示されている情報は\n"
+"このサーバに転送されます"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1136,6 +1155,36 @@ msgid ""
 msgstr ""
 "その他のプロトコル\n"
 "No D-Channel (leased lines)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1784,15 +1833,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "%c, %c キーを使って項目を選択してください"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "ファイルを実行するため%sを有効にする"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "汎用の２ボタンマウス"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "ファイルを実行するため%sを有効にする"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2996,6 +3045,23 @@ msgstr "これは必須パッケージです。選択を解除できません"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Etherboot ISOイメージは %s"
 
@@ -3401,32 +3467,6 @@ msgstr "ファイルを隠す"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "このマシンに接続しているプリンタを自動的に検出する"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTVをインストールしていません\n"
-"\n"
-"\n"
-"TVカードがあるのにDrakXが検出せず(/etc/modules にbttvもsaa7134\n"
-"モジュールもない)、xawtvもインストールしない場合は、\n"
-"lspcidrake -v -f の結果を install\\@mandrakesoft.com に\n"
-"subjectを undetected TV card と書いて送ってください。\n"
-"\n"
-"\n"
-"rootでコンソールに urpmi xawtv と入力すればインストールできます。"
 
 #: ../../any.pm:1
 #, c-format
@@ -4002,6 +4042,19 @@ msgstr "/etc/hosts.allow と /etc/hosts.deny は設定済みです - 変更し�
 msgid "Restore From Tape"
 msgstr "テープから復元"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"バグを報告する際は「報告」をクリックしてください。\n"
+"ウェブブラウザが開いて %s が表示されます。\n"
+"そこに報告フォームがあるので記入してください。上に表示されている情報は\n"
+"このサーバに転送されます"
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4158,7 +4211,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "ホスト名とユーザ名とパスワードが必要です"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, fuzzy, c-format
 msgid "Insert floppy"
 msgstr "フロッピーをドライブ %s に入れる"
@@ -4300,10 +4353,17 @@ msgstr "ネットワークインタフェースは設定済みです"
 msgid "Couldn't access the floppy!"
 msgstr "フロッピーにアクセスできません"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "Bugzillaウィザードに接続中.."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4486,6 +4546,11 @@ msgstr "承諾する"
 #, c-format
 msgid "Description"
 msgstr "説明"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Please enter summary text."
+msgstr "ログイン名を入力してください"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5431,7 +5496,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "右側のCtrlキー"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, fuzzy, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6537,6 +6602,22 @@ msgstr "警告: IPアドレス %s はたいてい予約されています"
 msgid "busmouse"
 msgstr "バスマウス"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -6915,24 +6996,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "フロッピー"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7546,6 +7609,11 @@ msgstr "インターネット接続の共有"
 msgid "Choose file"
 msgstr "ファイルを選択"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Summary: "
+msgstr "要約"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7619,6 +7687,17 @@ msgstr "南フランス領"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "プロセッサのベンダー名"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7936,6 +8015,11 @@ msgstr "ユーザを復元"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s の暗号鍵"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Do you want to recover your system?"
+msgstr "abootを使いますか？"
 
 #: ../../services.pm:1
 #, c-format
@@ -8375,6 +8459,11 @@ msgstr "Xを設定"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8609,6 +8698,11 @@ msgstr ""
 "\n"
 "このアダプタでLANを設定します。"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8618,6 +8712,11 @@ msgstr "最小インストール"
 #, c-format
 msgid "Ethiopia"
 msgstr "エチオピア"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8640,10 +8739,12 @@ msgstr ""
 "- eideデバイス: スレーブかマスターのデバイス\n"
 "- scsiデバイス: scsiバスとscsiデバイスのid"
 
+# Changed "total size" to "total", due to problem of available
+# space on screen.
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Total size: %d / %d MB"
-msgstr "合計サイズ: %d / %d MB"
+msgstr "合計: %d/%d MB"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -8946,15 +9047,6 @@ msgstr "インストールの種類"
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "プリンタ %s、SMB/Windowsサーバ %s"
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- デーモン(%s)が含むもの:\n"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -9276,6 +9368,11 @@ msgstr "モニタの水平周波数: %s\n"
 #, c-format
 msgid "Path"
 msgstr "パス"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9866,18 +9963,6 @@ msgstr "重要"
 msgid "Total Progress"
 msgstr "全体の進行状況"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10012,6 +10097,26 @@ msgstr "設定が完了しました。適用しますか？"
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr "積み重ね/比較バックアップ  (古いバックアップを残す)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10127,6 +10232,13 @@ msgid ""
 "x coordinate of text box\n"
 "in number of characters"
 msgstr "テキストボックスのx座標を文字数で"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10425,6 +10537,16 @@ msgstr "ホスト名が必要です"
 msgid "Unselect fonts installed"
 msgstr "インストール済みフォントを選択しない"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "ホイール"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Submit kernel version"
+msgstr "カーネルのバージョン"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10445,11 +10567,6 @@ msgstr "キャンセル"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "設定したスキャナを検索中.."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "ホイール"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10518,6 +10635,11 @@ msgstr "デフォルト"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "第２ボタンのエミュレーション"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Please enter a package name."
+msgstr "ユーザ名を入力してください"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10601,6 +10723,11 @@ msgstr ""
 " Copyright (C) 2002 by MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10766,6 +10893,45 @@ msgstr "ファイルシステムの暗号鍵"
 #, c-format
 msgid "Gujarati"
 msgstr "グジャラート"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11086,45 +11252,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11532,23 +11659,11 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
 
 #: ../../services.pm:1
@@ -11921,26 +12036,6 @@ msgstr "パッケージ %s のインストールで問題が発生"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "負荷がこの値より大きくなると警報が出ます"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"バグを報告する際は「報告」をクリックしてください。\n"
-"ウェブブラウザが開いて https://drakbug.mandrakesoft.com が表示されます。\n"
-"そこに報告フォームがあるので記入してください。上に表示されている情報は\n"
-"このサーバに転送されます\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12070,7 +12165,7 @@ msgstr "セキュリティ管理者:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "シェルのタイムアウトを設定。ゼロはタイムアウトなし"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
@@ -12435,11 +12530,6 @@ msgstr ""
 "プリンタ %s は既に存在しています。\n"
 "設定を上書きしますか？"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "利用可能なパーティションがありません"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12449,6 +12539,11 @@ msgstr "このホストのスキャナを共有する: "
 #, c-format
 msgid "Unselected All"
 msgstr "選択を解除"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "利用可能なパーティションがありません"
 
 #: ../../standalone/printerdrake:1
 #, fuzzy, c-format
@@ -12490,7 +12585,7 @@ msgstr "カーネル全体を構築 -->"
 msgid "modem"
 msgstr "モデム"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s へようこそ"
@@ -12568,6 +12663,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "CDのラベルが間違っています。このディスクは %s です。"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- デーモン(%s)が含むもの:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -12702,26 +12806,6 @@ msgid ""
 msgstr ""
 "\n"
 "- システムファイル:\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13560,7 +13644,7 @@ msgstr "Linuxの未来を創ろう!"
 msgid "Local Printer"
 msgstr "Local Printer"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, fuzzy, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "デバイス %s をどこにマウントしますか？"
@@ -13664,36 +13748,6 @@ msgstr "マウスデバイス: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "正しいフォントを再選択"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -14019,6 +14073,11 @@ msgstr "5 月"
 msgid "Yaboot mode"
 msgstr "Yabootモード"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "汎用の３ボタンマウス"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14033,11 +14092,6 @@ msgstr ""
 "LILOを再実行できません。\n"
 "rootになってコマンドラインで lilo を実行し、LILOのテーマをインストールしてく"
 "ださい。"
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "汎用の３ボタンマウス"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14378,23 +14432,6 @@ msgstr "左右のShiftを同時に押す"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -14786,11 +14823,6 @@ msgstr "ドメイン名"
 msgid "Sharing of local printers"
 msgstr "ローカルプリンタの共有"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -14800,6 +14832,11 @@ msgstr "libsafeがシステムにあるときはlibsafeを有効/無効にする
 #, c-format
 msgid "Available printers"
 msgstr "利用可能なプリンタ"
+
+#: ../../standalone/drakbackup:1
+#, fuzzy, c-format
+msgid "NO"
+msgstr "情報"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14833,21 +14870,6 @@ msgstr ""
 "\n"
 "\n"
 "「次」を押すと続けます。"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15667,6 +15689,17 @@ msgstr "致命的"
 msgid "Refresh the list"
 msgstr "リストを更新"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16233,12 +16266,17 @@ msgstr "汎用"
 msgid "Cylinder %d to %d\n"
 msgstr "シリンダ %d ?? %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "新しいプロファイル"
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "NONE"
@@ -16815,6 +16853,11 @@ msgstr "他のマルチメディアデバイス"
 msgid "burner"
 msgstr "ライタ"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
 msgid " (Default is all users)"
@@ -16946,6 +16989,26 @@ msgstr "ダイアルアップのオプション"
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "ポート番号を指定しない場合は631がデフォルトになります。"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17169,7 +17232,7 @@ msgstr ""
 " (パラレルポート: /dev/lp0, /dev/lp1, .., が LPT1:, LPT2:, .., １台目のUSBプ"
 "リンタ: /dev/usb/lp0, ２台目のUSBプリンタ: /dev/usb/lp1, ..)"
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "次へ"
@@ -18483,7 +18546,7 @@ msgstr " ADSL"
 msgid "format of floppies supported by the drive"
 msgstr "ドライブがサポートしているフロッピーの形式"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
@@ -19179,6 +19242,11 @@ msgstr ""
 "\n"
 "全パーティションを消去しますか？\n"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Find Package"
+msgstr "%d 個のパッケージ"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19293,6 +19361,24 @@ msgstr "LANの設定"
 #, c-format
 msgid "hard disk model"
 msgstr "ハードディスクのモデル"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -19478,15 +19564,15 @@ msgstr "イギリス式キーボード"
 msgid "Unmount"
 msgstr "アンマウント"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "フォントをアンインストール"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "フォントをアンインストール"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19860,17 +19946,6 @@ msgstr "%s を実行中.."
 #, c-format
 msgid "enable radio support"
 msgstr "ラジオサポートを有効にする"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20291,6 +20366,30 @@ msgstr "NFSサーバ,SMBサーバ,プロクシサーバ,SSHサーバ"
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラウズ用ツール"
 
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTVをインストールしていません\n"
+#~ "\n"
+#~ "\n"
+#~ "TVカードがあるのにDrakXが検出せず(/etc/modules にbttvもsaa7134\n"
+#~ "モジュールもない)、xawtvもインストールしない場合は、\n"
+#~ "lspcidrake -v -f の結果を install\\@mandrakesoft.com に\n"
+#~ "subjectを undetected TV card と書いて送ってください。\n"
+#~ "\n"
+#~ "\n"
+#~ "rootでコンソールに urpmi xawtv と入力すればインストールできます。"
+
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr ""
 #~ "adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-1,-*-fixed-medium-r-"
@@ -20553,9 +20652,6 @@ msgstr "メールとニュースの閲覧/送信ツールと、ウェブブラ�
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "ホスト名かIPを入力してください。"
-
-#~ msgid "Please enter your login"
-#~ msgstr "ログイン名を入力してください"
 
 #~ msgid ""
 #~ " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s"

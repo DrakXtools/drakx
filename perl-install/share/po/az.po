@@ -2,13 +2,13 @@
 # Copyright (C) 2000,2003 Free Software Foundation, Inc.
 # Copyright (c) 2000 MandrakeSoft
 # Vasif Ismailoglu MD<azerb_linux@hotmail.com> , 2000-2001
-# Mətin Əmirov <metin@karegen.com>, 2003
+# Mətin Əmirov <metin@karegen.com>, 2001-2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-az\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-09 10:18+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-18 13:19+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azərbaycan <gnome@azitt.com>\n"
 "MIME-Version: 1.0\n"
@@ -193,7 +193,7 @@ msgstr "Eternet Kartı"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr "Seçilibsə, poçtu bu ünvana göndər, edilməyibsə ali istifadəçiyə göndər"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametrlər"
@@ -235,7 +235,7 @@ msgid ""
 "\n"
 "Do you really want to continue setting up this printer as you are doing now?"
 msgstr ""
-"Çapçınızı bir Linux vericisinə bağlayıb Windows sistem(lər)ə ona alıcı "
+"Çapçınızı bir Linuks vericisinə bağlayıb Windows sistem(lər)ə ona alıcı "
 "olaraq bağlanmaya icazə ver.\n"
 "\n"
 "Həqiqətən də davam etmək istəyirsiniz?"
@@ -511,6 +511,11 @@ msgstr "Yol"
 msgid "Iraq"
 msgstr "İrak"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "%s ünvanına bağlanır ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -534,7 +539,7 @@ msgid ""
 "If your card is misdetected, you can force the right tuner and card types "
 "here. Just select your tv card parameters if needed."
 msgstr ""
-"Müasir televiziya kartlarının bir çoxu üçün, GNU/Linux çəyirdəyinin bttv "
+"Müasir televiziya kartlarının bir çoxu üçün, GNU/Linuks çəyirdəyinin bttv "
 "modulu düzgün parametrləri avtomatik tapır.\n"
 "Əgər kartınız tapıla bilməsə, buradan düzgün kart növünü seçə bilərsiniz. "
 "Lazım olanda televiziya kartınızın parametrlərini seçin."
@@ -553,6 +558,21 @@ msgstr "Qurulu yazı növlərini axtar"
 #, c-format
 msgid "Default desktop"
 msgstr "Əsas masa üstü"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"Xəta raportu göndərmək üçün, raport düyməsinə basın.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1114,9 +1134,9 @@ msgid "<control>Q"
 msgstr "<control>Q"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find backups to restore...\n"
-msgstr "Xahiş edirik ehtiyat nüsxəsi qeri yüklənəcək mə'lumatı seçin..."
+msgstr "Geri yüklənəcək ehtiyat nüsxələri tapıla bilmədi...\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1146,6 +1166,52 @@ msgid ""
 msgstr ""
 "Dünyanın geri qalanı üçün protokol \n"
 " D-Channel yoxdur (kiralıq xətlər)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ bu faylı mkinitrd-net'in yaratdığı əkslərləvə /etc/"
+"dhcpd.conf\n"
+"        \t\t ilə bərabər işləməsi üçün hər disksiz alıcı üçün quraşdıracaq \n"
+"        \t\tTipik quraşdırma faylı buna bənzəyir:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1404,7 +1470,7 @@ msgid ""
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"Mandrake Linux qurulumu müxtəlif CD'lər üstündə gəlir. DrakX\n"
+"Mandrake Linuks qurulumu müxtəlif CD'lər üstündə gəlir. DrakX\n"
 "seçili paketlərin hansı CD'də olduğunu bilir ona görə də lazım olanda\n"
 "hazırkı CD'ni çıxardıb sizdən lazım olan CD'ni daxil etməyi istəyəcək."
 
@@ -1567,7 +1633,7 @@ msgstr "Əsas olaraq Yunikod işlət"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
-msgstr "bu avadanlığı işlədən GNU/Linux çəyirdək modulu"
+msgstr "bu avadanlığı işlədən GNU/Linuks çəyirdək modulu"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1727,7 +1793,7 @@ msgstr "ABŞ (translasiya)"
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Use Xinerama extension"
-msgstr "Xinerama tərkib hissəsini işlət"
+msgstr "Xinerama uzantısını işlət"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1742,7 +1808,7 @@ msgstr "Qərvi Avropa"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On CD-R"
-msgstr "CDROM'da"
+msgstr "CD-R'da"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1754,9 +1820,9 @@ msgid ""
 "  --report          - program should be one of mandrake tools\n"
 "  --incident        - program should be one of mandrake tools"
 msgstr ""
-"[SEÇƏNƏKLƏR] [PROQRAM_ADI]\n"
+"[SEÇİMLƏR] [PROQRAM_ADI]\n"
 "\n"
-"SEÇƏNƏKLƏR:\n"
+"SEÇİMLƏR:\n"
 "  --help             - bu yardım ismarışını göstər.\n"
 "  --report          - proqram mandrake vasitələrindən biri olmalıdır\n"
 "  --incident        - proqram mandrake vasitələrindən biri olmalıdır"
@@ -1789,7 +1855,7 @@ msgstr "%s köçürülür"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Choose color"
-msgstr "Rəngi seçin"
+msgstr "Rəngi seç"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -1827,15 +1893,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Girisleri secmek ucun %c ve %c duymelerini istifade edin."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Faylı icra etmək üçün \"%s\"ı fəallaşdır"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Sıravi 2 Düyməli Siçan"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Faylı icra etmək üçün \"%s\"ı fəallaşdır"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2013,9 +2079,10 @@ msgstr ""
 "da qətiyyən unutmayın. Kompüteriniz üstündə həm Mandrake Linux həm də "
 "Microsoft\n"
 "Windows ƏS'lərini işlətmək istəyirsinizsə bu seçənəyi seçin. Unutmayın ki "
-"Microsoft Windows bölmənizin böyüklüyünü Windows altında da bəzi "
-"(PartitionMagic) proqramlar vasitəsi ilə\n"
-"dəyişdirə bilərsiniz.\n"
+"Microsoft\n"
+"Windows bölmənizin böyüklüyünü Windows altında da bəzi (PartitionMagic) "
+"proqramlar\n"
+"vasitəsi ilə dəyişdirə bilərsiniz.\n"
 "\n"
 "   Bu seçənəyi seçmədən əvvəl nəzərə alın ki bu əməliyyatdan sonra Microsoft "
 "Windows\n"
@@ -2023,7 +2090,7 @@ msgstr ""
 "\n"
 " * \"%s\": əgər sisteminizdəki bütün mövcud bölmələri silmək və yerinə\n"
 "Mandrake Linuks sistemini qurmaq istəyirsinizsə bu seçənəyi seçin.\n"
-"Diqqətli olun, ona görə ki seçiminizi təstiqlədikdən sonra geri ala "
+"Diqqətli olun, ona görə ki seçiminizi təsdiqlədikdən sonra geri ala "
 "bilməyəcəksiniz.\n"
 "\n"
 "   !! Əgər bu seçənəyi seçsəniz, diskinizdəki bütün mə'lumat "
@@ -2925,7 +2992,7 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Please wait, setting security options..."
-msgstr "Xahiş edirik, gözləyin təhlükəsizlik seçənəkləri tə'yin edilir..."
+msgstr "Xahiş edirik, gözləyin təhlükəsizlik seçimləri tə'yin edilir..."
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -3074,6 +3141,36 @@ msgstr "Kök bölməsi böyüklüyü (Mb): "
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Bu lazımlı bir paketdir, sistemdən çıxardıla bilməz"
+
+# needs editing (Metin)
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -3486,33 +3583,6 @@ msgstr "Faylları gizlət"
 msgid "Auto-detect printers connected to this machine"
 msgstr "Bu kompüterə bağlı olan çapçıları avtomatik aşkar et"
 
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV qurulu deyil!\n"
-"\n"
-"\n"
-"Əgər Televiziya kartınız varsa yalnız DrakX onu aşkar edə bilməyibsə\n"
-"və xawtv proqramını da qurmayıbsa, xahiş edirik, \"lspcidrake -v -f\"\n"
-"əmrinin nəticəsini \"install\\@mandrakesoft.com\" ünvanına, başlığa\n"
-"\"undetected TV card\" yazaraq yollayın.\n"
-"\n"
-"\n"
-"Proqramı konsolda ali istifadəçi olaraq \"urpmi xawtv\" əmrini verərək qura "
-"bilərsiniz."
-
 #: ../../any.pm:1
 #, c-format
 msgid "Sorry, no floppy drive available"
@@ -3547,14 +3617,14 @@ msgid ""
 "Transform your computer into a powerful Linux server: Web server, mail, "
 "firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
-"Kompüterinizi güclü bir Linux vericisinə dönüşdürün: Veb vericisi, poçt, "
+"Kompüterinizi güclü bir Linuks vericisinə dönüşdürün: Veb vericisi, poçt, "
 "atəş divarı, ötürücü, fayl və çap vericisi (v.s.) yalnız bir neçı tıqlama "
 "uzaqlığındadır!"
 
 #: ../../security/level.pm:1
 #, c-format
 msgid "DrakSec Basic Options"
-msgstr "DrakSec Bəsit Seçənəkləri"
+msgstr "DrakSec Əsas Seçimləri"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -3714,7 +3784,7 @@ msgstr "fəallaşdır"
 msgid ""
 "Contacting Mandrake Linux web site to get the list of available mirrors..."
 msgstr ""
-"Mövcud əkslərin siyahısını almaq üçün Mandrake Linux səhifəsi ilə təmas "
+"Mövcud əkslərin siyahısını almaq üçün Mandrake Linuks səhifəsi ilə təmas "
 "qurulur..."
 
 #: ../../network/netconnect.pm:1
@@ -3778,9 +3848,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Quraşdırılmış darayıcıların siyahısı yenidən yaradılır ..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Əllə quraşdırma"
+msgstr "Modul quraşdırması"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -3814,7 +3884,7 @@ msgstr "Krakerlərə xoşgəlmişsiniz"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Module options:"
-msgstr "Modul seçənəkləri:"
+msgstr "Modul seçimləri:"
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
@@ -3853,19 +3923,19 @@ msgid ""
 "Windows, run the ``defrag'' utility, then restart the Mandrake Linux "
 "installation."
 msgstr ""
-"Sizin Windows bölümü çox dağınıqdır. Daxiş edirik, əvvəlcə kompüterinizi "
+"Windows bölümünüz çox dağınıqdır. Daxiş edirik, əvvəlcə kompüterinizi "
 "Windows ilə açın, ''defrag'' vasitəsini işlədin, sonra Mandrake Linuks "
 "qurulumunu yenidən başladın."
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (Norwegian)"
-msgstr "Dvorak (Norveçcə)"
+msgstr "Dvorak (Norveç dili)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Hard Disk Backup Progress..."
-msgstr "Sabit Disk Ehtiyat Nüsxəsi Çıxartma Gedişatı Fəaliyyətdədir..."
+msgstr "Sabit Disk Ehtiyatlaması Fəaliyyətdədir..."
 
 #: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
 #, c-format
@@ -4014,7 +4084,7 @@ msgstr ""
 "seçimlə sistemi ``novideo'' modda əsas framebuffer dəstəyi ilə aça "
 "bilərsiniz.\n"
 "\n"
-" * Əsas: Bu seçənəklə Linuks sistemi əsas əməliyyat sistemi halına gətirə \n"
+" * Əsas: Bu seçimlə Linuks sistemi əsas əməliyyat sistemi halına gətirə \n"
 "bilərsiniz. Yaboot sorğu ekranında ENTER düyməsinə basmaqla Linuks sistemi\n"
 "açılacaqdır. Bu giriş ayrıca TAB ilə açılış seçkilərinə baxdığınız vaxt \n"
 "``*'' işarəti ilə işıqlandırılacaqdır."
@@ -4097,6 +4167,17 @@ msgstr ""
 #, c-format
 msgid "Restore From Tape"
 msgstr "Kasetdən Geri Yüklə"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"Xəta raportu göndərmək üçün, raport düyməsinə basın. Səyyarınız açılacaq və\n"
+"xəta raportu olaraq üstdəki mə'lumatı göndərə bıləcəyiniz səhifə açılacaq."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -4253,7 +4334,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Qovşaq adı, istifadəçi adı və şifrəyə ehtiyac var!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Disket daxil edin"
@@ -4398,10 +4479,17 @@ msgstr "Şəbəkə ara üzü onsuzda quraşdırılıb"
 msgid "Couldn't access the floppy!"
 msgstr "Disketə yetişə bilmədim!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "Bugzilla sehirbazına bağlanır ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4476,7 +4564,7 @@ msgstr ""
 "başqa internet xidmətcisini lazım gəldiyi zaman işa salır. İçində telnet, "
 "ftp, rsh və rlogin kimi proqramın olduğu xidmətləri işə salmaqla məs'uldur.\n"
 "inetd-ni sistemden çıxarmaq, onun məs'ul olduğu bütün xidmətləri\n"
-"rədd etmək mənasını daşıyır."
+"rədd etmək mə'nasını daşıyır."
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -4589,6 +4677,11 @@ msgstr "Qəbul Et"
 msgid "Description"
 msgstr "İzahat"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Xahiş edirik, icmal mətnini daxil edin."
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Error opening %s for writing: %s"
@@ -4699,7 +4792,7 @@ msgid ""
 "Please check all options that you need.\n"
 msgstr ""
 "\n"
-"Xahiş edirik, istədiyiniz bütün seçənəkləri seçin.\n"
+"Xahiş edirik, istədiyiniz bütün seçimləri seçin.\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -4743,7 +4836,7 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "/Options/Test"
-msgstr "/Seçənəklər/Sınaq"
+msgstr "/Seçimlər/Sınaq"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -4775,7 +4868,7 @@ msgstr "Userdrake"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
-msgstr "Linuks4Win'i qurmaq üçün hansı disk bölməsini istifadə edəcəksiniz?"
+msgstr "Linux4Win'i qurmaq üçün hansı disk bölməsini istifadə edəcəksiniz?"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -4986,7 +5079,7 @@ msgstr "Cığır ya da Modul məcburidir"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Advanced Options"
-msgstr "Ətraflı Seçənəklər"
+msgstr "Ətraflı Seçimlər"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5353,8 +5446,8 @@ msgid ""
 "technical support website:"
 msgstr ""
 "Online texnik dəstək veb saytında tanınan Mütəxəssis olaraq MandrakeSoft "
-"dəstək komandalarına və Linux Onli Cəmiyyətinə biliklərinizi bölüşmək və "
-"başqalarına yardımetmək üçün qoşulun:"
+"dəstək komandalarına və Linuks Online Cəmiyyətinə biliklərinizi bölüşmək və "
+"başqalarına yardım etmək üçün qoşulun:"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -5562,7 +5655,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Sağ Control düyməsi"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -5931,7 +6024,7 @@ msgstr "Belçika dili"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Do you have an ISA sound card?"
-msgstr "ISA səs kartınız var?"
+msgstr "Heç ISA səs kartınız var?"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -5997,7 +6090,7 @@ msgstr "Açılışda gecikmə müddəti"
 #: ../../any.pm:1
 #, c-format
 msgid "Restrict command line options"
-msgstr "Əmr sətiri seçənəklərini məhdudlaşdır"
+msgstr "Əmr sətiri seçimlərini məhdudlaşdır"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -6083,7 +6176,7 @@ msgstr "Model düzgündür"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "FAT resizing failed: %s"
-msgstr "FAT böyüklüyü dəyişdirilməsi bacarılmadı: %s"
+msgstr "FAT ölçüləndirilməsi bacarılmadı: %s"
 
 #: ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1
@@ -6129,7 +6222,7 @@ msgstr "Bu sistem"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "DOS drive letter: %s (just a guess)\n"
-msgstr "DOS sürücü hərfi: %s (sadəcə təxmini)\n"
+msgstr "DOS sürücü hərfi: %s (bir təxmindir)\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6159,9 +6252,9 @@ msgid ""
 "Click on Ok to keep your configuration, or cancel to reconfigure your "
 "Internet & Network connection.\n"
 msgstr ""
-"Şəbəkədən quraşdırması apardığınız üçün şəbəkəniz artıq qurulmuş olmalıdır.\n"
-"Şəbəkə/İnternet bağlantınızı yenidən quraşdırmaq üçün Oldu'ya yoxsa Ləğv "
-"et'ə basın.\n"
+"Şəbəkədən quraşdırması apardığınız üçün şəbəkəniz onsuzda quruludur.\n"
+"Qurğuları saxlamaq üçün Oldu'ya, İnternet və Şəbəkə qurğularınızı yenidən "
+"quraşdırmaq üçün isə Ləğv et'ə basın.\n"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -6179,7 +6272,7 @@ msgid ""
 "Here you can choose whether the printers connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
-"Burada siz, sisteminizə bağlı çapçıların uzaqdakı sistemlər və hansıları "
+"Burada, sisteminizə bağlı çapçıların uzaqdakı sistemlər və hansıları "
 "tərəfindən istifadə edilə biləcəyini tə'yin edə bilərsiniz."
 
 #: ../../keyboard.pm:1
@@ -6335,7 +6428,7 @@ msgstr "Necə bir XFree qurğusunu istəyirsiniz?"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "More"
-msgstr "Daha Çox"
+msgstr "Daha Çox Seçim"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6454,8 +6547,9 @@ msgid ""
 " Then type: shut-down\n"
 "At your next boot you should see the bootloader prompt."
 msgstr ""
-"Siz Open Fİrmware açılış avadanlığınızı açılış yükləyicisini\n"
-"fəallaşdırmaq üçün dəyişdirməli ola bilərsiniz. Əmr-Seçənək-O-F düymələrini\n"
+"Siz Open Firmware açılış avadanlığınızı açılış yükləyicisini\n"
+"fəallaşdırmaq üçün dəyişdirməli ola bilərsiniz. Command-Option-O-F "
+"düymələrini\n"
 " yenidən başlarkən basın və bunları girin:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
 " Sonra da bunları yazın: shut-down\n"
@@ -6576,7 +6670,7 @@ msgid ""
 "Loopback file(s):\n"
 "   %s\n"
 msgstr ""
-"Loopback faylı:\n"
+"Loopback fayl(lar)ı:\n"
 "   %s\n"
 
 #: ../../network/isdn.pm:1
@@ -6612,11 +6706,11 @@ msgstr ""
 "Avtomatik qurulum disketi yaradmaq üzrəsiniz. Bu xüsusiyyət biraz "
 "təhlükəlidir və diqqətlə istifadə edilməlidir.\n"
 "\n"
-"Bu xüsusiyyətlə, siz, daha əvvəl həyata keçirmiş olduğunuz qurulumu təkrar "
-"edə bilərsiniz.\n"
+"Bu xüsusiyyətlə, siz, daha əvvəl həyata keçirmiş olduğunuz qurulumun "
+"eynisini təkrarlaya bilərsiniz.\n"
 "\n"
 "Maksimal təhlükəsizlik səbəbi ilə, bolmələmə və şəkilləndirmə sistemi "
-"qurarkən necə qurğuladığınıza baxmayaraq heç vaxt təkrarlanmayacaq.\n"
+"qurarkən necə qurğuladığınıza baxmayaraq qətiyyən təkrarlanmayacaq.\n"
 "\n"
 "Davam etmək istəyirsiniz?"
 
@@ -6692,6 +6786,31 @@ msgstr "Xəbərdarlıq : %s IP ünvanı çox vaxt tutulmuş olur !"
 #, c-format
 msgid "busmouse"
 msgstr "busmouse"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Etherboot Dəstəkli Açılış Əksləri Yaradın:\n"
+"        \tÇəyirdəyi etherboot vasitəsi ilə açmaq üçün, xüsusi kernel/initrd "
+"əksi yaradılmalıdır.\n"
+"        \tmkinitrd-net bu işin əsas hissəsini həll edir və drakTermServ "
+"yalnız bu əksləri idarə\n"
+"        \tetmək/xüsusiləşdirmək üçün bir qrafiki ara üzdür. \n"
+"        \tdhcpd.conf faylı içində inlcude olaraq çağırılan \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include faylını yaratmaq üçün,\n"
+"        \tən az bir tam çəyirdək üçün etherboot əksləri yaratmalısınız."
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6918,12 +7037,12 @@ msgstr ""
 "Backup and Restore application\n"
 "\n"
 "--default             : əsas cərgələri qeyd et.\n"
-"--debug               : bütün xəta ayırma ismarışlarını göstər.\n"
-"--show-conf           : eht. nüsxəsi alınacaq fayl və cərgələrin siyahısı.\n"
-"--config-info         : quraşdırma faylı seçənəklərini başa sal (X "
-"istifadəçisi olmayanlar üçün).\n"
-"--daemon              : demon quraşdırmasını işlət. \n"
-"--help                : bu ismarışı göstər.\n"
+"--debug              : bütün xəta ayırma ismarışlarını göstər.\n"
+"--show-conf        : eht. nüsxəsi alınacaq fayl və cərgələrin siyahısı.\n"
+"--config-info        : quraşdırma faylı seçimlərini başa sal (X istifadəçisi "
+"olmayanlar üçün).\n"
+"--daemon            : demon quraşdırmasını işlət. \n"
+"--help                 : bu ismarışı göstər.\n"
 "--version             : buraxılış nömrəsini göstər.\n"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -6943,7 +7062,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-" Minnəttarlıqlar:\n"
+" Minnəttarlıq:\n"
 "\t- LTSP Layihəsi http://www.ltsp.org\n"
 "\t- Michael Brown <mbrown\\@fensystems.co.uk>\n"
 "\n"
@@ -6956,7 +7075,7 @@ msgstr "Vericilər üçün libsafe işlət"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Icelandic"
-msgstr "İzlandiya dili"
+msgstr "İslandiya dili"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7069,38 +7188,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Disket"
-
-# needs editing (Metin)
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7219,7 +7306,7 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
-"Linuks Virtual Verici, yüksək qabiliyyətli vericilər qurmaq üçün işlədilir."
+"Linux Virtual Server, yüksək qabiliyyətli vericilər qurmaq üçün işlədilir."
 
 #: ../../lang.pm:1
 #, c-format
@@ -7601,7 +7688,10 @@ msgid ""
 "Mandrake Linux can support multiple languages. Select\n"
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
-msgstr "Qurulumdan sonra istifadə edə biləcəyiniz başqa dillər seçə bilərsiniz"
+msgstr ""
+"Mandrake Linuks müxtəlif dilləri dəstəkləyir. Qurmaq istədiyiniz\n"
+"dilləri seçin. Onlar qurulum tamamlanandan və sistem yenidən\n"
+"başlayandan sonra istifadəyə hazır olacaqlar."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7749,6 +7839,11 @@ msgstr "İnternet Bağlantısı Bölüşdürülməsi"
 msgid "Choose file"
 msgstr "Fayl seç"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "İcmal:"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7827,6 +7922,24 @@ msgstr "Cənubi Fransız Sahələri"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "işlədicinin e'malatçısı"
+
+# needs editing (Metin)
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8143,6 +8256,11 @@ msgstr "İstifadəçiləri Geri Yüklə"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "%s üçün şifrələmə açarı"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Sisteminizi düzəltmək istəyirsiniz?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8505,8 +8623,8 @@ msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
 "other \"goodies\", are available on our e-store:"
 msgstr ""
-"E-dükkanımızda bir sıra Linux həlli və xüsusi təklif və məhsullarımızvə daha "
-"bir çox şey sizi gözləyir:"
+"E-dükkanımızda bir sıra Linuks həlli və xüsusi təklif və məhsullarımızın "
+"yanında daha bir çox şey sizi gözləyir:"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -8585,6 +8703,11 @@ msgstr "/_CUPS'u quraşdır"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "lspci'ni göndər"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8644,7 +8767,7 @@ msgid ""
 "(LAN)."
 msgstr ""
 "Kompüterınızi İnternet bağlantısını bölüşdürmək üçün quraşdırırsınız.\n"
-"Bu seçənəklə yerli şəbəkənizdəki başqa kompüterlər sizin İnternet "
+"Bu seçimlələ yerli şəbəkənizdəki başqa kompüterlər sizin İnternet "
 "bağlantınızdan faydalana biləcək.\n"
 "\n"
 "İrəli getmədən əvvəl drakconnect işlədərək Şəbəkə/İnternet bağlantınızı "
@@ -8669,7 +8792,7 @@ msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
 msgstr ""
-"Madrake Lunux dəstəyi olan ortaq seçmələrimizin yardımı ilə "
+"Madrake Lunuks dəstəyi olan ortaq seçmələrimizin yardımı ilə "
 "kompüterinizinişləmə keyfiyyətini artırın"
 
 #: ../../standalone/printerdrake:1
@@ -8822,6 +8945,11 @@ msgstr ""
 "\n"
 "Yerli Şəbəkə adapterinizi qurmaq üzərəyəm?"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "cpuinfo'nu göndər"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8831,6 +8959,11 @@ msgstr "Minimal qurulum"
 #, c-format
 msgid "Ethiopia"
 msgstr "Efiopiya"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "BƏLİ"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9068,7 +9201,7 @@ msgstr ""
 "verici\n"
 "seçilsə, sizə bu vericini həqiqətən də qurmaq istədiyinizi soruşan və "
 "sizdən\n"
-"təstiq istəyən pəncərə göstəriləcək. Əsas olaraq Mandrake Linuks bütün "
+"təsdiq istəyən pəncərə göstəriləcək. Əsas olaraq Mandrake Linuks bütün "
 "qurulu\n"
 "olan xidmətləri açılışda fəal edir. Distribusiyanın çıxdığı vaxt onların "
 "bilinən heç bir\n"
@@ -9183,15 +9316,6 @@ msgstr "Qurulum növü"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "\"%2$s\" SMB/Windows vericisi üstündəki \"%1$s\" çapçısı"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- (%s) demonu bunu daxil edir:\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9277,7 +9401,7 @@ msgstr "Sistemə yeni çapçı əlavə et"
 #: ../../any.pm:1
 #, c-format
 msgid "NoVideo"
-msgstr "NoVİdeo"
+msgstr "NoVideo"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9297,7 +9421,7 @@ msgstr "Yerli Çapçılar"
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "Installation image directory"
-msgstr "Qurulum görüntüsü cərgəsi"
+msgstr "Qurulum əksinin cərgəsi"
 
 #: ../../any.pm:1
 #, c-format
@@ -9322,17 +9446,17 @@ msgstr "yerli qurğu: %s"
 #: ../../any.pm:1
 #, c-format
 msgid "This user name has already been added"
-msgstr "Bu istifadəçi adı artıq vardır"
+msgstr "Bu istifadəçi adı onsuzda əlavə edilib"
 
 #: ../../interactive.pm:1
 #, c-format
 msgid "Choose a file"
-msgstr "Faylı seç"
+msgstr "Fayl seç"
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Apply"
-msgstr "Əlavə Et"
+msgstr "Tədbiq Et"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -9347,7 +9471,7 @@ msgstr "San Marino"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing currently disabled"
-msgstr "İnternet Bağlantısı Bölüşdürülməsi passivləşdirildi"
+msgstr "İnternet Bağlantısı Bölüşdürülməsi hazirda qeyri-fəaldır"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -9357,7 +9481,7 @@ msgstr "Belçika"
 #: ../../lang.pm:1
 #, c-format
 msgid "Kuwait"
-msgstr "Küveyt"
+msgstr "Kuveyt"
 
 #: ../../any.pm:1
 #, c-format
@@ -9372,7 +9496,7 @@ msgstr "Dekabr"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "sub generation of the cpu"
-msgstr "cpu'nun alt nəsli (sub generation)"
+msgstr "cpu'nun alt nəsli"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -9401,7 +9525,7 @@ msgstr "Pakistan"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "please wait, parsing file: %s"
-msgstr "xahiş edirik, gözləyin, fayl daranır: %s"
+msgstr "xahiş edirik gözləyin, fayl oxunur: %s"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9423,7 +9547,7 @@ msgstr ""
 "Lexmark mürəkkəb fıskırtmalı çapçını və qurğuları istifadə edərək çap "
 "etməküçün Lexmark (http://www.lexmark.com/) tərəfindən tə'yin edilən "
 "sürücülərəehtiyacınız var. \"Sürücülər\" bağlantısına tıqlayın. Modelinizi "
-"və sonra əməliyyat sistemi olaraq \"Linux\"u seçin. Sürücülər RPM paketi "
+"və sonra əməliyyat sistemi olaraq \"Linuks\"u seçin. Sürücülər RPM paketi "
 "vəya interaktiv qrafiki qurulumu olan qabıq skriptləridir. Bu quraşdırmanı "
 "qrafiki ara üzlə etməniz məcburi deyil. Lisenziya razılaşmasından sonra. "
 "birbaşa çıxın. Daha sonra \"lexmarkmain\" ilə çapçı başı hizalama "
@@ -9461,7 +9585,7 @@ msgstr "Loopback üçün Windows bölməsini işlət"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (typewriter)"
-msgstr "Ermenicə (yazı maşını)"
+msgstr "Ermenicə (yazı makinası)"
 
 #: ../../standalone/drakconnect:1 ../../standalone/net_monitor:1
 #, c-format
@@ -9471,7 +9595,7 @@ msgstr "Bağlantı növü:"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Graphical interface"
-msgstr "Qrafiki Ara Üz"
+msgstr "Qrafiki ara üz"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9512,6 +9636,11 @@ msgstr "Monitorun Şaquli Daraması: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Cığır"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "TAPILMADI"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9605,7 +9734,7 @@ msgstr "Çin (translasiya)"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use quota for backup files."
-msgstr "Ehtiyat nüsxəsi faylları üçün sərhəd (quota) qoy."
+msgstr "Ehtiyat nüsxəsi faylları üçün sərhəd qoy."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9777,7 +9906,7 @@ msgstr "Haiti"
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
-msgstr "Avadanlıqlar tanınır..."
+msgstr "Avadanlıqlar tapılır..."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9800,7 +9929,7 @@ msgstr ""
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Basic options"
-msgstr "Ana seçənəklər:"
+msgstr "Bəsit seçimlər:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9810,7 +9939,7 @@ msgstr "CPU adı"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Accept bogus IPv4 error messages"
-msgstr "Səhv IPv4 xəta ismarışlarını qəbul et"
+msgstr "Xətalı IPv4 xəta ismarışlarını qəbul et"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9889,7 +10018,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Croatian"
-msgstr "Xırvatca"
+msgstr "Xorvat dili"
 
 #: ../../help.pm:1
 #, c-format
@@ -10002,7 +10131,7 @@ msgstr "Bağlantı tamamlandı."
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Remove from RAID"
-msgstr "RAIDdən ayır"
+msgstr "RAID'dən ayır"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10022,7 +10151,7 @@ msgstr "ISDN Bağlantısı"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "CD-R / DVD-R"
-msgstr "CDROM / DVDROM"
+msgstr "CD-R / DVD-R"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -10104,7 +10233,7 @@ msgstr "MHz olaraq CPU tezliyi"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux Çapçı İdarəsi Vasitəsi"
+msgstr "Mandrake Linuks Çapçı İdarəsi Vasitəsi"
 
 #: ../../pkgs.pm:1
 #, c-format
@@ -10115,26 +10244,6 @@ msgstr "vacib"
 #, c-format
 msgid "Total Progress"
 msgstr "Ümumi İrəliləmə"
-
-# needs editing (Metin)
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
 
 #: ../../help.pm:1
 #, c-format
@@ -10267,6 +10376,39 @@ msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr ""
 "Artan/Diferensial Ehtiyatları İşlət  (köhnə ehtiyatları qətiyyən əvəz etmə)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - /etc/dhcpd.conf'u Saxla:\n"
+"        \t\tŞəbəkə açılış alıcılarına,hər alıcının IP ünvanı tə'yin edən "
+"dhcpd.conf giriçi mövcud olmalıdır\n"
+"        \t\tvə sistemə şəbəkə açılış əksləri üçün. drakTermServ bu girişləri "
+"yaratmaq/silmək üçün sizə yardım edir.\n"
+"\t\t\t\n"
+"        \t\t(PCI kartları əksi işlətməyə bilər - etherboot düzgün əksi "
+"istəyəcəkdir. Siz, eyni zamanda\n"
+"        \t\tetherboot'un əksləri axtarırkən, bu cür ad gözləyir:\n"
+"        \t\tboot-3c59x.nbi yalnız boot-3c59x.2.4.19-16mdk.nbi kimi YOX).\n"
+"\t\t\t \n"
+"        \t\tTipik dhcpd.conf stanza disksiz alıcıları dəstəkləyir və buna "
+"bənzəyir: "
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10385,6 +10527,15 @@ msgid ""
 msgstr ""
 "mətn qutusunun hərf\n"
 "ədədində x mövqeyi"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Lilo'nu qura bilməyəcəksiniz (ona görə ki, lilo, birdən çox PV üstündə LV'yə "
+"malik deyil)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10684,6 +10835,16 @@ msgstr "Qovşaq adı məcburidir"
 msgid "Unselect fonts installed"
 msgstr "Qurulu olan yazı növlərini seçmə"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Çərx"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Çəyirdək buraxılışını göndər"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10704,11 +10865,6 @@ msgstr "Ləğv Et"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Quraşdırılmış darayıvılar axtarılır ..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Çərx"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10778,6 +10934,11 @@ msgstr "Əsas"
 msgid "Button 2 Emulation"
 msgstr "Düymə 2 emulyasiyası"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Xahiş edirik, paket adını daxil edin."
+
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Run chkrootkit checks"
@@ -10806,7 +10967,7 @@ msgstr "X verici"
 #: ../../any.pm:1
 #, c-format
 msgid "Domain Admin User Name"
-msgstr "Domen Sahibi İstifadəçi Adı"
+msgstr "Domen İdarəçisinin İstifadəçi Adı"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -10831,7 +10992,7 @@ msgstr "Eyni zamanda iki Alt düyməsi"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "LAN connection"
-msgstr "Yerli Şəbəkə quraşdırılması"
+msgstr "LAN bağlantısı"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10841,7 +11002,7 @@ msgstr "/Fayl/-"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Italian"
-msgstr "İtalyanca"
+msgstr "İtalyan dili"
 
 #: ../../interactive.pm:1
 #, c-format
@@ -10857,9 +11018,14 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Təlif Hüququ (C) 2002 MandrakeSoft \n"
+" Tə'lif Hüququ (C) 2002 MandrakeSoft \n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -10874,7 +11040,7 @@ msgstr "pdq"
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO"
-msgstr "Kart IO"
+msgstr "Kart GÇ"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10890,8 +11056,8 @@ msgid ""
 "dual-booting your system.\n"
 msgstr ""
 "\n"
-"Bu, ikili açılış üçün xüsusi\n"
-"Bootstrap'dır.\n"
+"Bu, sisteminizin ikili açılışı üçün\n"
+"xüsusi Bootstrap bölməsidir.\n"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -10899,7 +11065,7 @@ msgid ""
 "Please choose for each step whether it will replay like your install, or it "
 "will be manual"
 msgstr ""
-"Xahiş edirik, addımın təkrarlanmasını yoxsa əllə yenidən seçilməsini hər "
+"Xahiş edirik, addımın təkrarlanmasını ya da əllə yenidən seçilməsini hər "
 "addım üçün ayrı ayrı seçin"
 
 #: ../../standalone/scannerdrake:1
@@ -10975,7 +11141,7 @@ msgstr "dərləmə vasitələrinə yetişmə"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to restore..."
-msgstr "Xahiş edirik, ehtiyat nüsxəsi geri yüklənəcək mə'lumatı seçin..."
+msgstr "Xahiş edirik, geri yüklənəcək mə'lumatı seçin..."
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -10984,8 +11150,9 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"Aboot istifadə etməyi istəyirsinizsə, boş disk sahəsi (2048 sektor bəsdir.)\n"
-"buraxmayı unutmayın."
+"Aboot istifadə etmək istəyirsinizsə, boş disk sahəsi (2048 sektor "
+"kifayətdir.)\n"
+"buraxmağı unutmayın."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11005,7 +11172,7 @@ msgstr "Nəyi"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "There was an error ordering packages:"
-msgstr "Paketləri istərkən bir xəta oldu:"
+msgstr "Paketləri istərkən xəta yarandı:"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -11026,6 +11193,80 @@ msgstr "Fayl sistemi şifrələmə açarı"
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati dili"
+
+# needs editing (Metin)
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11071,7 +11312,7 @@ msgstr "Qeyd ediləcək cərgəni daxil edin:"
 #: ../../services.pm:1
 #, c-format
 msgid "Printing"
-msgstr "Çap Etmə"
+msgstr "Çap"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11102,7 +11343,7 @@ msgstr "Fdisk istifadə et"
 #: ../../mouse.pm:1
 #, c-format
 msgid "MOVE YOUR WHEEL!"
-msgstr "ÇƏRXİ OYNADIN!"
+msgstr "SİÇANIN ÇƏRXİNİ OYNADIN!"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -11112,7 +11353,7 @@ msgstr "göndərilən:"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Automatic IP"
-msgstr "Avtomatlaşdırılmış IP"
+msgstr "Avtomatik IP"
 
 #: ../../help.pm:1
 #, c-format
@@ -11188,12 +11429,12 @@ msgstr "Moldova"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Kensington Thinking Mouse"
-msgstr "Kensington Thinking Mouse"
+msgstr "Kensington Thinking Siçanı"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configuration of a remote printer"
-msgstr "Uzaq çapçı quraşdırması"
+msgstr "Uzaq çapçının quraşdırması"
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
@@ -11243,7 +11484,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Quit without writing the partition table?"
-msgstr "Bölmə cədvəlini qeyd etmədən çıxılsın?"
+msgstr "Bölmə cədvəli qeyd edilmədən çıxılsın?"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -11253,7 +11494,7 @@ msgstr "Genius NetScroll"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On Hard Drive"
-msgstr "Sabit Disk üstündə"
+msgstr "Sabit Disk Üstündə"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -11278,7 +11519,7 @@ msgstr "Aşağıdakı paketlər qurulmalıdır:\n"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "service setting"
-msgstr "xidmət qurğuları"
+msgstr "xidmət qurğusu"
 
 #: ../../any.pm:1 ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
@@ -11298,7 +11539,7 @@ msgstr "Fayl başqa bir loopback tərəfindən istifadədədir, başqasını se�
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Read-only"
-msgstr "Ancaq oxuna bilən"
+msgstr "Sırf oxuna bilən"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -11340,7 +11581,7 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
-"Sisteminizdə səs kartı aşkar edilməyib. Xahiş edirik, Linux-dəstəkli səs "
+"Sisteminizdə səs kartı aşkar edilməyib. Xahiş edirik, Linuks dəstəkli səs "
 "kartının düzgün taxıldığını yoxlayın.\n"
 "\n"
 "\n"
@@ -11348,80 +11589,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-# needs editing (Metin)
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11654,7 +11821,7 @@ msgstr "Mütəxəssis Modu"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer options"
-msgstr "Çapçı seçənəkləri"
+msgstr "Çapçı seçimləri"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -11823,7 +11990,7 @@ msgid ""
 "Here are the entries on your boot menu so far.\n"
 "You can create additional entries or change the existing ones."
 msgstr ""
-"Buradakı bir birindən fərqli seçənəklərə yenilərini əlavə edə bilər,\n"
+"Buradakı bir birindən fərqli seçimlərə yenilərini əlavə edə bilər,\n"
 "ya da mövcud olanları dəyişdirə bilərsiniz."
 
 #: ../../help.pm:1
@@ -11836,37 +12003,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - /etc/dhcpd.conf'u Saxla:\n"
-"        \t\tŞəbəkə açılış alıcılarına,hər alıcının IP ünvanı tə'yin edən "
-"dhcpd.conf giriçi mövcud olmalıdır\n"
-"        \t\tvə sistemə şəbəkə açılış əksləri üçün. drakTermServ bu girişləri "
-"yaratmaq/silmək üçün sizə yardım edir.\n"
-"\t\t\t\n"
-"        \t\t(PCI kartları əksi işlətməyə bilər - etherboot düzgün əksi "
-"istəyəcəkdir. Siz, eyni zamanda\n"
-"        \t\tetherboot'un əksləri axtarırkən, bu cür ad gözləyir:\n"
-"        \t\tboot-3c59x.nbi yalnız boot-3c59x.2.4.19-16mdk.nbi kimi YOX).\n"
-"\t\t\t \n"
-"        \t\tTipik dhcpd.conf stanza disksiz alıcıları dəstəkləyir və buna "
-"bənzəyir: "
+"Tə'minat Adı\n"
+"ya da Tam Cığır:"
 
 #: ../../services.pm:1
 #, c-format
@@ -11958,7 +12102,7 @@ msgstr "Lazım olmayanda poçt göndərmə"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Your scanner(s) will not be available on the network."
-msgstr ""
+msgstr "Darayıcı(ları)nız şəbəkə üstündə istifadə edilə bilməyəcək."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12260,27 +12404,6 @@ msgstr "%s paketi qurulurkən xəta oldu"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Yük bu qiymətdən yüksək olarsa sizə xəbərdarlıq göndəriləcək"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Xəta raportu göndərmək üçün, raport düyməsinə basın.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12325,7 +12448,7 @@ msgstr "Açılış"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " and the CD is in the drive"
-msgstr ""
+msgstr " və CD'nin sürücüdə olduğunu yoxlayın"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -12412,7 +12535,7 @@ msgstr "Təhlükəsizlik İdarəçisi:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Qabıq vaxt dolmasını seç. Sıfır qiyməti vaxt dolması yoxdur deməkdir."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Firmware köçürülməsində müvəffəqiyyət"
@@ -12602,7 +12725,7 @@ msgstr "Televiziya Kartı Təsbit Edilmədi!"
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Options"
-msgstr "Seçənəklər"
+msgstr "Seçimlər"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12784,11 +12907,6 @@ msgstr ""
 "Çapçı \"%s\" onsuzda mövcuddur,\n"
 "həqiqətən də onun quraşdırmasının üstündən yazmaq istəyirsiniz?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "Uyğun bölmə mövcud deyil"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12798,6 +12916,11 @@ msgstr "Qovşaqlardakı darayıcıları işlət:"
 #, c-format
 msgid "Unselected All"
 msgstr "Seçili olmayan hamısını"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "Uyğun bölmə mövcud deyil"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12839,7 +12962,7 @@ msgstr "Bütöv Çəyirdəyi İnşa Et -->"
 msgid "modem"
 msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "%s Sisteminə Xoş Gəldiniz"
@@ -12922,6 +13045,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Düzgün CD adı deyil. CD'nin adı %s qoyulub."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Demon, %s bunun vasitəsi ilə:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13061,42 +13193,6 @@ msgstr ""
 "\n"
 "- Sistem Faylları:\n"
 
-# needs editing (Metin)
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Standalone Tools"
@@ -13153,6 +13249,9 @@ msgid ""
 "During installation, you will need to use the Right Control\n"
 "key to switch between the different keyboard layouts."
 msgstr ""
+"Bu qurğu qurulumdan sonra fəal olacaq.\n"
+"Qurulum sırasında, fərqli klaviatura düzülüşləri arasında\n"
+"keçmək üçün Sağ Control düyməsini istifadə etməlisiniz."
 
 #: ../../lang.pm:1
 #, c-format
@@ -13175,9 +13274,9 @@ msgid "Set this printer as the default"
 msgstr "Bu çapçını əsas tə'yin et"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "Bu qurğu doğrudur?"
+msgstr "%s çığırının düz olduğunu yoxlayın"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -13279,7 +13378,7 @@ msgstr "Örtüklər"
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Options: %s"
-msgstr "Seçənəklər: %s"
+msgstr "Seçimlər: %s"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -13748,6 +13847,8 @@ msgstr " enter `void' void giriçi üçün"
 #, c-format
 msgid "Backups on unmountable media - Use Catalog to restore"
 msgstr ""
+"Ehtiyatlar bağlana bilməyən mediya üstündədir - geri yükləmək üçün Kataloqu "
+"işlət"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13825,7 +13926,7 @@ msgid ""
 "near you. This option actually installs a time server that can used by\n"
 "other machines on your local network as well."
 msgstr ""
-"GNU/Linux vaxtı GMT (Greenwich Mean Time) ilə idarə edir və onu yerli\n"
+"GNU/Linuks vaxtı GMT (Greenwich Mean Time) ilə idarə edir və onu yerli\n"
 "vaxtı seçdiyiniz vaxt zolağına bağlı olaraq seçir. Əgər ana kartınızın "
 "saatı\n"
 "yerli saata quraşdırılıbsa, bunu, \"%s\"i seçərək qeyri-fəallaşdıra "
@@ -13946,7 +14047,7 @@ msgstr "Linuksun gələcəyini inşa edin!"
 msgid "Local Printer"
 msgstr "Yerli Çapçı"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Disketə icazə xətası, %s avadanlığı bağlana bilmədi"
@@ -14053,52 +14154,6 @@ msgstr "Siçan avadanlığı: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Düzgün yazı növlərini yenidən seç"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ bu faylı mkinitrd-net'in yaratdığı əkslərləvə /etc/"
-"dhcpd.conf\n"
-"        \t\t ilə bərabər işləməsi üçün hər disksiz alıcı üçün quraşdıracaq \n"
-"        \t\tTipik quraşdırma faylı buna bənzəyir:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}"
 
 #: ../../help.pm:1
 #, c-format
@@ -14435,6 +14490,11 @@ msgstr "May"
 msgid "Yaboot mode"
 msgstr "Yaboot modu"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Sıravi 3 Düyməli Siçan"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14449,11 +14509,6 @@ msgstr ""
 "LiLo yenidən başladıla bilmir!\n"
 "LiLo örtüyü qurulumunu tamamlamaq üçün ali istifadəçi olaraq əmr sətirinə "
 "\"lilo\" yazın."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Sıravi 3 Düyməli Siçan"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14560,9 +14615,9 @@ msgstr ""
 "olmamışdır."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "No devices found"
-msgstr "Rəsm tapıla bilmədi"
+msgstr "Heç bir avadanlıq tapıla bilmədi"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14673,7 +14728,7 @@ msgid ""
 "  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"
 msgstr ""
 "[SEÇİM]...\n"
-"  --no-confirmation      MandrakeUpdate modundabirinci təstiqləmə  sualını "
+"  --no-confirmation      MandrakeUpdate modundabirinci təsdiqləmə  sualını "
 "soruşma\n"
 "  --no-verify-rpm        paket imzalarını yoxlama\n"
 "  --changelog-first      izahat pəncərəsində fayl siyahısından əvvəl "
@@ -14752,7 +14807,7 @@ msgstr "Gürcü dili (\"Latın\" sırası)"
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr "Mandrake Linux Stratejik Ortaqları ilə ən yaxşı dərəcələrə malik olun"
+msgstr "Mandrake Linuks Stratejik Ortaqları ilə ən yaxşı dərəcələrə malik olun"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -14800,36 +14855,6 @@ msgid ""
 msgstr ""
 " --id <id_etiketi>       - id_label'a istiqamətləndirən html yardım "
 "səhifəsini yüklə\n"
-
-# needs editing (Metin)
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14892,8 +14917,8 @@ msgid ""
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux'un GNOME 2.4, KDE 3.1, Window Maker kimi mövcud 11 istifadəçi "
-"ara üzləri ilə kompüterinizi ehtiyaclarınıza tamamilə uyğunlaşdırın."
+"Mandrake Linuksun GNOME 2.4, KDE 3.1, Window Maker kimi mövcud 11 istifadəçi "
+"ara üzləri ilə kompüterinizi ehtiyaclarınıza tamamiylə uyğunlaşdırın."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15227,11 +15252,6 @@ msgstr "Domen adı"
 msgid "Sharing of local printers"
 msgstr "Yerli çapçıların bölüşülməsi"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15241,6 +15261,11 @@ msgstr "Sistemdə libsafe tapılsa, libsafe Fəal/Qeyri-Fəal edilsin."
 #, c-format
 msgid "Available printers"
 msgstr "Mövcud çapçılar"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr " XEYİR"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15274,30 +15299,6 @@ msgstr ""
 "\n"
 "\n"
 "Davam etmək üçün \"%s\" düyməsinə basın."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Etherboot DƏstəkli Açılış Əksləri Yaradın:\n"
-"        \t\tÇəyirdəyi etherboot vasitəsi ilə açmaq üçün, xüsusi kernel/"
-"initrd əksi yaradılmalıdır.\n"
-"        \t\tmkinitrd-net bu işin əsas hissəsini həll edir və drakTermServ "
-"yalnız bu əksləri idarə\n"
-"        \t\t etmək/xüsusiləşdirmək üçün bir qrafiki ara üzdür. \n"
-"        \t\tdhcpd.conf faylı içində inlcude olaraq çağırılan \n"
-"/etc/dhcpd.conf.etherboot-pcimap.include faylını yaratmaq üçün,\n"
-"        \t\tən az bir tam çəyirdək üçün etherboot əksləri yaratmalısınız."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15414,7 +15415,7 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
-"Öz biliklərinizi bölüşmək və Linux tə'minatları inşa etməkdə yardım etmək "
+"Öz biliklərinizi bölüşmək və Linuks tə'minatları inşa etməkdə yardım etmək "
 "üçün \"Community\" veb səhifələrindəki müzakirə forumlarına qoşulun."
 
 #: ../../standalone/drakbackup:1
@@ -16065,7 +16066,7 @@ msgid ""
 "terms in it, check the \"%s\" box. If not, simply turn off your computer."
 msgstr ""
 "Davam etmədən əvvəl, diqqətlə lisenziyanın qaydalarını oxumalısınız. O,\n"
-"bütün Mandrake Linux distribusiyasını əhatə edir. Əgər lisenziyadakı bütün\n"
+"bütün Mandrake Linuks distribusiyasını əhatə edir. Əgər lisenziyadakı bütün\n"
 "qaydalarla razısınızsa, qutusunu \"%s\" işarələyin. Əgər razı deyilsəniz, "
 "sadəcə olaraq kompüterinizi bağlayın."
 
@@ -16094,9 +16095,9 @@ msgid ""
 msgstr ""
 "drakfirewall quraşdırıcısı\n"
 "\n"
-"Bu, Linuks Mandrake sisteminiz üçün şəxsi bir firewall quraşdıracaqdır.\n"
-"Daha güclü və e'tibarlı sistem üçün xahiş edirik, xüsusi MandrakeSecurity "
-"Firewall buraxılışını tədqiq edin."
+"Bu, Linuks Mandrake sisteminiz üçün şəxsi bir atəş divarını quraşdıracaq.\n"
+"Daha güclü və e'tibarlı sistem üçün xahiş edirik, xüsusi MandrakeSecurity\n"
+"Firewall buraxılışı ilə maraqlanın."
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -16141,6 +16142,23 @@ msgstr "AĞIR"
 msgid "Refresh the list"
 msgstr "Siyahını təzələ"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Alıcı başına %s:\n"
+"        \t\tclusternfs ilə, hər disksiz alıcının vericinin kök fayl "
+"sistemində özünə məxsus\n"
+"        \t\tquraşdırma faylları ola bilər. Yerli alıcı "
+"avadanlığıquraşdırmasına icazə verərək, \n"
+"        \t\tdrakTermServ bu faylları yaratmaqda yardımçı olacaq."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16175,7 +16193,7 @@ msgstr ""
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Build the disk"
-msgstr "Diski yarat"
+msgstr "Diski inşa et"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16248,7 +16266,7 @@ msgstr "ttmkfdir fəaliyyətdədir, xahiş edirik, gözləyin..."
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Configure only card \"%s\"%s"
-msgstr "Ancaq \"%s\"%s kartını quraşdır"
+msgstr "Yalniz \"%s\"%s kartını quraşdır"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16272,7 +16290,7 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
-msgstr "Xidmətlərin quraşdırılması"
+msgstr "Xidmətləri quraşdır"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16291,13 +16309,13 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"GNU/Linux çəyirdəyi açılışda dönmə hesablaması yerinə gətirir və onun "
+"GNU/Linuks çəyirdəyi açılışda dönmə hesablaması yerinə gətirir və onun "
 "nəticələri cpu \"sür'ət yoxlaması\" edə bilmək üçün boqomips olaraq saxlanır."
 
 #: ../../any.pm:1
 #, c-format
 msgid "Image"
-msgstr "Görüntü"
+msgstr "Əks"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16322,7 +16340,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Selected All"
-msgstr "Hamısını Seç"
+msgstr "Hamısı Seçildi"
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -16342,7 +16360,7 @@ msgstr "avadanlıq"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Enter the directory to save to:"
-msgstr "Qeyd ediləcək cərgəni daxil edin:"
+msgstr "Qeyd cərgəsini daxil edin:"
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -16367,7 +16385,7 @@ msgstr "İyul"
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Prints into %s"
-msgstr "%s'na çap edir"
+msgstr "%s'a çap edir"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -16386,7 +16404,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Tamil (Typewriter-layout)"
-msgstr "Tamilcə (yazı maşını)"
+msgstr "Tamil dili (Yazı makinası düzülüşü)"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16443,7 +16461,7 @@ msgstr "NetWare Vericisi üstündəki çapçı"
 #: ../../any.pm:1
 #, c-format
 msgid "Give the ram size in MB"
-msgstr "Yaddaş miqdarını Mb cinsindən verin"
+msgstr "Yaddaş miqdarını MB cinsindən verin"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16458,7 +16476,7 @@ msgstr "İnternet bağlantısını tamamilə kəs."
 #: ../../any.pm:1
 #, c-format
 msgid "Real name"
-msgstr "Həqiqi adı"
+msgstr "Həqiqi ad"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16509,12 +16527,13 @@ msgstr "%s, %s üstündə tapıla bilmir"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Japanese 106 keys"
-msgstr "Yaponca 106 düyməli"
+msgstr "Yapon dili 106 düyməli"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Could not install the packages needed to share your scanner(s)."
 msgstr ""
+"Darayıcı(ları)nızı bölüşdürmək üçün lazım olan paket(lər) qurula bilmədi."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16559,7 +16578,7 @@ msgstr "Maldiv"
 #: ../../any.pm:1
 #, c-format
 msgid "compact"
-msgstr "bəsit"
+msgstr "kompakt"
 
 #: ../../common.pm:1
 #, c-format
@@ -16594,9 +16613,9 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
-"Mandrake Linux 9.2 sizə, kompüterinizi tamamilə idarə altına almaq və ondan "
-"ən ə'la keyfiyyəti almaq üçün Mandrake İdarə Mərkəzini daxil edir. "
-"Təhlükəsizlik səviyyəsi, avadanlıq (ekran, siçan, laviatura kimi), İnternet "
+"Mandrake Linuks 9.2 sizə, kompüterinizi tamamilə idarə altına almaq və ondan "
+"ən ə'la keyfiyyət əldə etmək üçün Mandrake İdarə Mərkəzini daxil edir. "
+"Təhlükəsizlik səviyyəsi, avadanlıq (ekran, siçan, klaviatura kimi), İnternet "
 "bağlantısı və daha bir çox səciyyəvi elementi buradan asanlıqla quraşdırın "
 "və xüsusiləşdirin! "
 
@@ -16683,17 +16702,17 @@ msgstr "Portuqaliya"
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have another one?"
-msgstr "Başqa var?"
+msgstr "Başqası var?"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", printing to %s"
-msgstr ", %s'na çap edilir"
+msgstr ", %s'a çap edilir"
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "Assign host name from DHCP address"
-msgstr "DHCP ünvanları üçün qovşaq adı tə'yin edin"
+msgstr "DHCP ünvanı üçün qovşaq adı tə'yin edin"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16710,12 +16729,17 @@ msgstr "Ümumi"
 msgid "Cylinder %d to %d\n"
 msgstr "Silindr %d'dən silindr %d'yə\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "BURADA MƏTNİNİZ YER ALACAQ"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Yeni profil..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "YOXDUR"
@@ -16728,7 +16752,7 @@ msgstr "Hansı diskə daşımaq istəyirsiniz?"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Display logo on Console"
-msgstr "Konsolda Loqonu Göstər"
+msgstr "Konsolda loqonu göstər"
 
 #: ../../any.pm:1
 #, c-format
@@ -16738,7 +16762,7 @@ msgstr "Windows Domeni"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Saami (norwegian)"
-msgstr "Saami (Norveçcə)"
+msgstr "Saami (Norveç dili)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16872,7 +16896,7 @@ msgstr "ACPI'ni Fəallaşdır"
 #: ../../fs.pm:1
 #, c-format
 msgid "Give write access to ordinary users"
-msgstr ""
+msgstr "Sıravi istifadəçilərə yazma səlahiyyəti ver"
 
 #: ../../help.pm:1
 #, c-format
@@ -16917,7 +16941,7 @@ msgstr "/_Sahənin izahatı"
 #: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid "Optimize your security by using Mandrake Linux"
-msgstr "Mandrake Linux istifadə edərək təhlükəsizliyinizi münasibləşdirin"
+msgstr "Mandrake Linuks istifadə edərək təhlükəsizliyinizi münasibləşdirin"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1
@@ -16933,17 +16957,17 @@ msgstr "Yardım"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Check if the network devices are in promiscuous mode"
-msgstr "Şəbəkə avadanlıqlarının nizamsız modda olduğunu yoxla"
+msgstr "Şəbəkə avadanlıqlarının nizamsız modda olub olmadığını yoxla"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Your personal phone number"
-msgstr "Sizin şəxsi telefon nömrəniz"
+msgstr "Şəxsi telefon nömrəniz"
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Which size do you want to keep for Windows on"
-msgstr "Hansı sektora daşımaq istəyirsiniz?"
+msgstr "Windows üçün hansı böyüklüyü saxlamaq istəyirsiniz"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16951,7 +16975,7 @@ msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
 msgstr ""
-"Sınaq səhifəsi çapçıya göndərildi.\n"
+"Sınaq səhifə(lər)si çapçıya göndərildi.\n"
 "Çapçının işləməyə başlaması üçün bir az vaxt lazım ola bilər.\n"
 
 #: ../../standalone/drakbackup:1
@@ -17005,7 +17029,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "SMB (Windows 9x/NT) Printer Options"
-msgstr "SMB (Windows 9x/NT) Çapçı Seçənəkləri"
+msgstr "SMB (Windows 9x/NT) Çapçı Seçimləri"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -17117,7 +17141,7 @@ msgstr "Dvorak"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose the new size"
-msgstr "Yeni böyüklük seçin"
+msgstr "Yeni böyüklüyü seçin"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17127,7 +17151,8 @@ msgstr "Mediya sinifi"
 #: ../../standalone/XFdrake:1
 #, c-format
 msgid "You need to log out and back in again for changes to take effect"
-msgstr "Dəyişikliklərin fəal olması üçün çıxış edib, yenidən girməlisiniz."
+msgstr ""
+"Dəyişikliklərin fəal olması üçün hesabdan çıxış edib, yenidən girməlisiniz."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17152,7 +17177,7 @@ msgstr "Qovşaq/şəbəkə əlavə et"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Scannerdrake will not be started now."
-msgstr ""
+msgstr "Scannerdrake indi başladılmayacaq."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17301,10 +17326,15 @@ msgstr "Digər Multimediya avadanlıqları"
 msgid "burner"
 msgstr "yazıcı"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Xəta İzahatı/Sistem Mə'lumatı"
+
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "Əsas istifadəçi"
+msgstr " (Əsası bütün istifadəçilərdir)"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -17348,7 +17378,7 @@ msgstr "Səlahiyyətləndirmə NIS"
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
-"``Əmr sətiri seçənəklərini məhdudlaşdır`` seçənəyi şifrəsiz bir işə yaramaz"
+"``Əmr sətiri seçimlərini məhdudlaşdır`` seçimi şifrəsiz bir işə yaramaz"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17408,7 +17438,7 @@ msgstr "Mövcud olan bütün uzaq CUPS çapçılarını göstər"
 #: ../../install_steps_newt.pm:1
 #, c-format
 msgid "Mandrake Linux Installation %s"
-msgstr "Linuks-Mandrake Qurulumu %s"
+msgstr "Mandrake Linuks Qurulumu %s"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -17418,7 +17448,7 @@ msgstr "Namə'lum sürücü"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
-msgstr "Thai klaviatura"
+msgstr "Tay klaviaturası"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17428,12 +17458,48 @@ msgstr "Buvet Adası"
 #: ../../network/modem.pm:1
 #, c-format
 msgid "Dialup options"
-msgstr "Çevirməli şəbəkə seçənəkləri"
+msgstr "Çevirmə seçimləri"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
 msgstr "Əgər qapı nömrəsi verilməszə, əsas olaraq 631 alınacaq."
+
+# needs editing (Metin)
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17446,8 +17512,10 @@ msgid ""
 msgstr ""
 "CD-Rom'u dəyişdirin!\n"
 "\n"
-"\"%s\" adlı CD-Rom'u sürücünüzə taxın və Oldu düyməsinə basın.\n"
-"Əgər CD-Rom əlinizdə deyilsə Ləğv Et düyməsinə basın."
+"Xahiş edirik, \"%s\" adlı CD-Rom'u sürücünüzə yerləşdirin və Oldu düyməsinə "
+"basın.\n"
+"Əgər CD-Rom əlinizdə deyilsə, bu CD-Rom'dan qurmamaq üçün Ləğv Et düyməsinə "
+"basın."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17457,7 +17525,7 @@ msgstr "Polyak dili"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Mandrake Online"
-msgstr "Mandrake Online"
+msgstr "Mandrake Onlayn"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17661,7 +17729,7 @@ msgstr ""
 " (Paralel Qapılar: /dev/lp0, /dev/lp1, ..., bunlara bərabərdir LPT1:, "
 "LPT2:, ..., 1ci USB çapçı: /dev/usb/lp0, 2ci USB çapçı: /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Sonrakı"
@@ -17754,7 +17822,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Mount options"
-msgstr "Bağlama seçənəkləri"
+msgstr "Bağlama seçimləri"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17990,7 +18058,7 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Not enough free space for auto-allocating"
-msgstr "Avtomatik yerləşdirmə üçün boş sahə yoxdur"
+msgstr "Avtomatik yerləşdirmə üçün kifayət qədər boş sahə yoxdur"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -18020,8 +18088,7 @@ msgstr "Qrup :"
 #, c-format
 msgid "After resizing partition %s, all data on this partition will be lost"
 msgstr ""
-"%s bölməsi böyüklüyü dəyişdirildirkdən sonra bu bölmədəki bütün mə'lumatlar "
-"itəcək"
+"%s bölməsinin ölçüləndirildikdən sonra bu bölmədəki bütün mə'lumatlar itəcək"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -18052,12 +18119,12 @@ msgstr "/_Haqqında..."
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bengali"
-msgstr "Benqalca"
+msgstr "Benqal dili"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Preference: "
-msgstr "Xüsusiyyətlər: "
+msgstr "Seçim: "
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -18092,12 +18159,12 @@ msgstr "İş qrupu"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer host name or IP"
-msgstr "Çapçı qovşaq adı ya da IP'si"
+msgstr "Çapçı qovşaq adı ya da IP"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Host Path or Module"
-msgstr "Qovşaq Cığır ya da Modulu "
+msgstr "Qovşaq Cığırı ya da Modul"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18107,7 +18174,7 @@ msgstr "Çapçı adı ancaq hərf, rəqəm və alt xətt daxil edə bilər"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Show current interface configuration"
-msgstr "Hazırkı ara üz quğularını göstər"
+msgstr "Hazırkı ara üz qurğusunu göstər"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -18410,7 +18477,7 @@ msgstr "Açılış Disketi"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Norwegian"
-msgstr "Norveçcə"
+msgstr "Norveç dili"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18994,7 +19061,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "sürücü tərəfindən dəstəklənən disket şəkli"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Firmware köçürülməsi bacarılmadı, %s faylı tapılmadı"
@@ -19093,7 +19160,7 @@ msgstr "Gürcü dili (\"Rus\" sırası)"
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Options"
-msgstr "/_Seçənəklər"
+msgstr "/_Seçimlər"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -19169,8 +19236,8 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
-"MandrakeSoft'n müvəffəqiyyəti Sərbəst Tə'minat prinsipinə bağlıdır. Yeni "
-"əməliyyat sisteminiz ümumdünya Linux Cəmiyyətinin birgə işinin nəticəsidir."
+"MandrakeSoft'un müvəffəqiyyəti Sərbəst Tə'minat prinsipinə bağlıdır. Yeni "
+"əməliyyat sisteminiz ümumdünya Linuks Cəmiyyətinin birgə işinin nəticəsidir."
 
 #: ../../lang.pm:1
 #, c-format
@@ -19443,13 +19510,13 @@ msgid ""
 "Linuxconf will sometimes arrange to perform various tasks\n"
 "at boot-time to maintain the system configuration."
 msgstr ""
-"Linuxconf sistem qurğularınızı idarə edən proqramları\n"
+"Linuxconf sistem qurğularınızı idarə edən proqramları,\n"
 "müxtəlif vəzifələri açılışda icra edər."
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "DVD-R device"
-msgstr "DVDR avadanlığı"
+msgstr "DVD-R avadanlığı"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -19465,9 +19532,10 @@ msgid ""
 "-You can install the fonts the normal way. In rare cases, bogus fonts may "
 "hang up your X Server."
 msgstr ""
-"-Yazı növlərini normal yolla qura bilərsiniz. Çox nadir də olsa, saxta və "
-"qondarma yazı növləri X Vericinizi dondura bilər. Bu vəziyyətdə, Ctrl+Alt"
-"+Backspace düymələrinə eyni anda basın."
+"Yazı növlərini normal yolla qura bilərsiniz. Çox nadir də olsa, saxta və "
+"qondarma yazı növləri\n"
+"X Vericinizi dondura bilər. Bu vəziyyətdə, Ctrl+Alt+Backspace düymələrinə "
+"eyni anda basın."
 
 #: ../../help.pm:1
 #, c-format
@@ -19687,6 +19755,11 @@ msgstr ""
 "\n"
 "Bütün bölmələri itirmək işinizə gəlir?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Paketi Tap"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19802,6 +19875,38 @@ msgstr "Yerli Şəbəkə (lAN) quraşdırılması"
 msgid "hard disk model"
 msgstr "sabit disk modeli"
 
+# needs editing (Metin)
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
@@ -19849,7 +19954,7 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"MandrakeSoft ən e'tibarlı Linux yaratmaq üçün ekskluziv vasitələri tərtib "
+"MandrakeSoft ən e'tibarlı Linuks yaratmaq üçün ekskluziv vasitələri tərtib "
 "edib: Draksec, sistem təhlükəsizliyi idarə vasitəsi və güclü atəş divarının "
 "birgə işi ilə, xaricdən müdaxilə və xaklanma təhlükəsi olduqca azalır."
 
@@ -19919,9 +20024,9 @@ msgid "Configure X"
 msgstr "X quraşdırılması"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Çad"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -19988,15 +20093,15 @@ msgstr "İngiliz (UK) klaviaturası"
 msgid "Unmount"
 msgstr "Ayır"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Yazı Növlərini Sil"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Yazı Növlərini Sil"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20330,6 +20435,8 @@ msgstr "Liberiya"
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
+"Scannderdrake ilə darayıcını quraşdırmaq üçün lazım olan paketlər qurula "
+"bilmədi."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -20372,23 +20479,6 @@ msgstr "\"%s\" icra edilir ..."
 #, c-format
 msgid "enable radio support"
 msgstr "radio dəstəyini fəallaşdır"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Alıcı başına /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tclusternfs ilə, hər disksiz alıcının vericinin kök fayl "
-"sistemində özünə məxsus\n"
-"        \t\tquraşdırma faylları ola bilər. Yerli alıcı "
-"avadanlığıquraşdırmasına icazə verərək, \n"
-"        \t\tdrakTermServ bu faylları yaratmaqda yardımçı olacaq."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -20556,12 +20646,12 @@ msgstr ""
 #: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid "Mandrake Linux 9.2: the ultimate development platform"
-msgstr "Mandrake Linuks: böyük inkişaf platformu"
+msgstr "Mandrake Linuks 9.2: böyük inkişaf platformu"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
-msgstr "%s modeli aşkar edildi"
+msgstr "Aşkar edilən model: %s"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -20605,6 +20695,8 @@ msgid ""
 " --doc <link>          - link to another web page ( for WM welcome "
 "frontend)\n"
 msgstr ""
+" --doc <körpü>       - başqa bir veb səhifəsinə körpü (WM xoş gəldin ara üzü "
+"üçün)\n"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20752,7 +20844,7 @@ msgstr "Sənədlər"
 
 #: ../../share/compssUsers:999
 msgid "Books and Howto's on Linux and Free Software"
-msgstr "Linuks və pulsuz proqram tə'minatıları Kitablar və Howtoları"
+msgstr "Linuks və sərbəst proqram tə'minatı haqqında Kitablar və Howtolar"
 
 #: ../../share/compssUsers:999
 msgid "LSB"
@@ -20760,7 +20852,7 @@ msgstr "LSB"
 
 #: ../../share/compssUsers:999
 msgid "Linux Standard Base. Third party applications support"
-msgstr "Linux Standartlar Bazası. Üçüncü partiya tə'minat dəstəyi"
+msgstr "Linux Standartları Bazası. Üçüncü partiya tə'minat dəstəyi"
 
 #: ../../share/compssUsers:999
 msgid "Web/FTP"
@@ -20768,7 +20860,7 @@ msgstr "Veb/FTP"
 
 #: ../../share/compssUsers:999
 msgid "Apache, Pro-ftpd"
-msgstr "Apache və Pro-ftpd"
+msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
 msgid "Mail"
@@ -20813,36 +20905,3 @@ msgstr "NFS vericisi, SMB vericisi, Vəkil vericisi, SSH verici"
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "Poçt və xəbər alıb göndərmək üçün və vebi gəzmək üçün vasitələr dəsti"
-
-#~ msgid "on CDROM"
-#~ msgstr "CDROM'da"
-
-#~ msgid "DVDR device"
-#~ msgstr "DVDR avadanlığı"
-
-#~ msgid "\t-CDROM.\n"
-#~ msgstr "\t-CDROM.\n"
-
-#~ msgid "across Network"
-#~ msgstr "Şəbəkə üstündə"
-
-#~ msgid "Backup system"
-#~ msgstr "Sistemin ehtiyat nüsxəsini çıxart"
-
-#~ msgid "Use CD/DVDROM to backup"
-#~ msgstr "Ehtiyatlama üçün CD/DVDROM işlət"
-
-#~ msgid "Error while parsing \"MODULES\" line from %s"
-#~ msgstr "%s'dan \"MODULES\"sətri oxunurkən xəta yarandı "
-
-#~ msgid "on Hard Drive"
-#~ msgstr "Sabit Disk üstündə"
-
-#~ msgid "CDROM / DVDROM"
-#~ msgstr "CDROM / DVDROM"
-
-#~ msgid "on Tape Device"
-#~ msgstr "Kaset avadanlığı üstündə"
-
-#~ msgid "No CDR/DVDR in drive!"
-#~ msgstr "Sürücüdə CDR/DVDR yoxdur!"
