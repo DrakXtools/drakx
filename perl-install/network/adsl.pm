@@ -20,10 +20,16 @@ sub configure {
     # 				   _("The most common way to connect with adsl is pppoe.
     # Some connections use pptp, a few ones use dhcp.
     # If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb"), __("ECI Hi-Focus")]) or return;
+    my @l = ( 
+	     [__("use pppoe"),
+	      __("use pptp"), 
+	      __("use dhcp"), 
+	      __("Alcatel speedtouch usb") . if_($netc->{autodetect}{adsl}{speedtouch}, " - detected")]
+	    );
     my $type = $in->ask_from_list_(_("Connect to the Internet"),
 				   _("The most common way to connect with adsl is pppoe.
 Some connections use pptp, a few ones use dhcp.
-If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("use dhcp"), __("Alcatel speedtouch usb")]) or return;
+If you don't know, choose 'use pppoe'"), @l) or return;
     $type =~ s/use //;
     if ($type eq 'pppoe') {
 	$in->do_pkgs->install("rp-$type");
@@ -74,19 +80,9 @@ sub adsl_ask_info {
     ask_info2($adsl, $netc);
 }
 
-#- adsl_detect : detect adsl modem on a given interface
-#- input :
-#-  $interface : interface where the modem is supposed to be connected : should be "ethx"
-#- output:
-#-  true/false : success|failed
 sub adsl_detect {
-    return 0;
-    my ($interface) = @_;
-    run_program::rooted($prefix, "ifconfig $interface 10.0.0.10 netmask 255.255.255.0");
-    my $ret = run_program::rooted($prefix, "/bin/ping -c 1 10.0.0.138  2> /dev/null");
-    run_program::rooted($prefix, "ifconfig $interface 0.0.0.0 netmask 255.255.255.0");
-    run_program::rooted($prefix, "/etc/init.d/network restart");
-    $ret;
+    my ($adsl) = @_;
+    $adsl->{speedtouch} = detect_devices::getSpeedtouch();    
 }
 
 sub adsl_conf {
