@@ -652,5 +652,33 @@ sub flush() {
     Gtk2->main_iteration while Gtk2->events_pending;
 }
 
+sub may_destroy {
+    my ($w) = @_;
+    $w->destroy if $w;
+}
+
+sub root_window() {
+    my $root if 0;
+    $root ||= Gtk2::Gdk->get_default_root_window;
+}
+
+sub rgb2color {
+    my ($r, $g, $b) = @_;
+    my $color = Gtk2::Gdk::Color->new($r, $g, $b);
+    root_window()->get_colormap->rgb_find_color($color);
+    $color;
+}
+
+sub set_root_window_background {
+    my ($r, $g, $b) = @_;
+    my $root = root_window();
+    my $gc = Gtk2::Gdk::GC->new($root);
+    my $color = rgb2color($r, $g, $b);
+    $gc->set_rgb_fg_color($color);
+    $root->set_background($color);
+    my ($w, $h) = $root->get_size;
+    $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
+}
+
 1;
 

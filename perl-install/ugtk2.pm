@@ -51,7 +51,7 @@ $border = 5;
 # variables, and second, to "see" directly in the code the user interface
 # you're building.
 
-sub gtkdestroy                { $_[0] and $_[0]->destroy }
+sub gtkdestroy                { mygtk2::may_destroy($_[0]) }
 sub gtkflush()                { mygtk2::flush() }
 sub gtkhide                   { $_[0]->hide; $_[0] }
 sub gtkmove                   { $_[0]->window->move($_[1], $_[2]); $_[0] }
@@ -146,10 +146,9 @@ sub gtkradio {
     map { gtkset_active($radio = Gtk2::RadioButton->new_with_label($radio ? $radio->get_group : undef, $_), $_ eq $def) } @_;
 }
 
-sub gtkroot() {
-    my $root if 0;
-    $root ||= Gtk2::Gdk->get_default_root_window;
-}
+sub gtkroot() { mygtk2::root_window() }
+sub gtkcolor { &mygtk2::rgb2color }
+sub gtkset_background { &mygtk2::set_root_window_background }
 
 sub gtkset_text {
     my ($w, $s) = @_;
@@ -812,24 +811,6 @@ sub wrap_paragraph {
     }
 
     return @lines;
-}
-
-sub gtkcolor {
-    my ($r, $g, $b) = @_;
-    my $color = Gtk2::Gdk::Color->new($r, $g, $b);
-    gtkroot()->get_colormap->rgb_find_color($color);
-    $color;
-}
-
-sub gtkset_background {
-    my ($r, $g, $b) = @_;
-    my $root = gtkroot();
-    my $gc = Gtk2::Gdk::GC->new($root);
-    my $color = gtkcolor($r, $g, $b);
-    $gc->set_rgb_fg_color($color);
-    $root->set_background($color);
-    my ($w, $h) = $root->get_size;
-    $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
 }
 
 
