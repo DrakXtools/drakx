@@ -1,4 +1,3 @@
-/tmp/live_tree/bin/basename
 /tmp/live_tree/bin/bash
 /tmp/live_tree/bin/chmod
 /tmp/live_tree/bin/cp
@@ -6,16 +5,15 @@
 /tmp/live_tree/bin/gawk
 /tmp/live_tree/bin/gettext
 /tmp/live_tree/bin/grep
+/tmp/live_tree/bin/gzip
 /tmp/live_tree/bin/id
 /tmp/live_tree/bin/loadkeys
 /tmp/live_tree/bin/ls
 /tmp/live_tree/bin/mkdir
 /tmp/live_tree/bin/rm
 /tmp/live_tree/bin/sed
-/tmp/live_tree/bin/su
 /tmp/live_tree/bin/touch
 /tmp/live_tree/bin/uname
-/tmp/live_tree/bin/zcat
 /tmp/live_tree/etc/DIR_COLORS
 /tmp/live_tree/etc/X11/fs
 /tmp/live_tree/etc/X11/xkb/compat/accessx
@@ -31,7 +29,6 @@
 /tmp/live_tree/etc/X11/xkb/rules/xfree86
 /tmp/live_tree/etc/X11/xkb/rules/xfree86.lst
 /tmp/live_tree/etc/X11/xkb/symbols/en_US
-/tmp/live_tree/etc/X11/xkb/symbols/fr
 /tmp/live_tree/etc/X11/xkb/symbols/gb
 /tmp/live_tree/etc/X11/xkb/symbols/iso9995-3
 /tmp/live_tree/etc/X11/xkb/symbols/srvr_ctrl
@@ -45,11 +42,7 @@
 /tmp/live_tree/etc/X11/xkb/xkbcomp
 /tmp/live_tree/etc/X11/xserver
 /tmp/live_tree/etc/bashrc
-/tmp/live_tree/etc/default
-/tmp/live_tree/etc/devfs
 /tmp/live_tree/etc/devfsd.conf
-/tmp/live_tree/etc/dynamic/scripts/functions.script
-/tmp/live_tree/etc/dynamic/scripts/part.script
 /tmp/live_tree/etc/fonts/fonts.conf
 /tmp/live_tree/etc/fonts/local.conf
 /tmp/live_tree/etc/group
@@ -60,7 +53,7 @@
 /tmp/live_tree/etc/modules.devfs
 /tmp/live_tree/etc/nsswitch.conf
 /tmp/live_tree/etc/pam.d/other
-/tmp/live_tree/etc/pam.d/su
+/tmp/live_tree/etc/pam.d/sudo
 /tmp/live_tree/etc/pam.d/system-auth
 /tmp/live_tree/etc/pam.d/xserver
 /tmp/live_tree/etc/pango/pango.modules
@@ -78,10 +71,15 @@
 /tmp/live_tree/etc/profile.d/tmpdir.sh
 /tmp/live_tree/etc/profile.d/xhost.sh
 /tmp/live_tree/etc/rc.d/init.d/functions
+/tmp/live_tree/etc/rc.d/init.d/syslog
 /tmp/live_tree/etc/rc.d/init.d/xfs
 /tmp/live_tree/etc/security/console.perms
 /tmp/live_tree/etc/security/fileshare.conf
-/tmp/live_tree/etc/security/limits.conf
+/tmp/live_tree/etc/security/pam_env.conf
+/tmp/live_tree/etc/services
+/tmp/live_tree/etc/shells
+/tmp/live_tree/etc/sudoers
+/tmp/live_tree/lib/i686
 /tmp/live_tree/lib/ld-2.3.2.so
 /tmp/live_tree/lib/libcom_err.so.2.1
 /tmp/live_tree/lib/libcrypt-2.3.2.so
@@ -113,31 +111,35 @@
 /tmp/live_tree/lib/security/pam_rootok.so
 /tmp/live_tree/lib/security/pam_stack.so
 /tmp/live_tree/lib/security/pam_unix.so
-/tmp/live_tree/lib/security/pam_xauth.so
 /tmp/live_tree/sbin/consoletype
 /tmp/live_tree/sbin/devfsd
 /tmp/live_tree/sbin/hotplug
 /tmp/live_tree/sbin/init
 /tmp/live_tree/sbin/initlog
 /tmp/live_tree/sbin/insmod-24
+/tmp/live_tree/sbin/klogd
+/tmp/live_tree/sbin/losetup
 /tmp/live_tree/sbin/minilogd
 /tmp/live_tree/sbin/modprobe-24
 /tmp/live_tree/sbin/pam_console_apply
-/tmp/live_tree/sbin/runlevel
 /tmp/live_tree/sbin/service
+/tmp/live_tree/sbin/syslogd
 /tmp/live_tree/usr/X11R6/bin/XFree86
 /tmp/live_tree/usr/X11R6/bin/Xwrapper
 /tmp/live_tree/usr/X11R6/bin/iceauth
 /tmp/live_tree/usr/X11R6/bin/setxkbmap
 /tmp/live_tree/usr/X11R6/bin/xfs
+/tmp/live_tree/usr/X11R6/bin/xmodmap
+/tmp/live_tree/usr/X11R6/bin/xrdb
 /tmp/live_tree/usr/X11R6/bin/xset
 /tmp/live_tree/usr/X11R6/bin/xsetroot
+/tmp/live_tree/usr/X11R6/lib/X11/XErrorDB
 /tmp/live_tree/usr/X11R6/lib/X11/XKeysymDB
 /tmp/live_tree/usr/X11R6/lib/X11/locale/C
 /tmp/live_tree/usr/X11R6/lib/X11/locale/compose.dir
-/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-15/Compose
-/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-15/XI18N_OBJS
-/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-15/XLC_LOCALE
+/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-1/Compose
+/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-1/XI18N_OBJS
+/tmp/live_tree/usr/X11R6/lib/X11/locale/iso8859-1/XLC_LOCALE
 /tmp/live_tree/usr/X11R6/lib/X11/locale/lib/common/ximcp.so.2
 /tmp/live_tree/usr/X11R6/lib/X11/locale/lib/common/xlcDef.so.2
 /tmp/live_tree/usr/X11R6/lib/X11/locale/lib/common/xomGeneric.so.2
@@ -153,11 +155,14 @@
 /tmp/live_tree/usr/X11R6/lib/libXfont.so.1.4
 /tmp/live_tree/usr/X11R6/lib/libXft.so.2.1
 /tmp/live_tree/usr/X11R6/lib/libXi.so.6.0
+/tmp/live_tree/usr/X11R6/lib/libXm.so.2.0.1
 /tmp/live_tree/usr/X11R6/lib/libXmu.so.6.2
 /tmp/live_tree/usr/X11R6/lib/libXmuu.so.1.0
+/tmp/live_tree/usr/X11R6/lib/libXp.so.6.2
 /tmp/live_tree/usr/X11R6/lib/libXrandr.so.2.0
 /tmp/live_tree/usr/X11R6/lib/libXrender.so.1.2
 /tmp/live_tree/usr/X11R6/lib/libXt.so.6.0
+/tmp/live_tree/usr/X11R6/lib/libXtst.so.6.1
 /tmp/live_tree/usr/X11R6/lib/libaudio.so.2.3
 /tmp/live_tree/usr/X11R6/lib/modules/drivers/linux
 /tmp/live_tree/usr/X11R6/lib/modules/drivers/nv_drv.o
@@ -173,6 +178,9 @@
 /tmp/live_tree/usr/X11R6/lib/modules/libvgahw.a
 /tmp/live_tree/usr/X11R6/lib/modules/libxaa.a
 /tmp/live_tree/usr/X11R6/lib/modules/linux/libint10.a
+/tmp/live_tree/usr/bin/artsd
+/tmp/live_tree/usr/bin/artswrapper
+/tmp/live_tree/usr/bin/cpp-3.3.1
 /tmp/live_tree/usr/bin/dcopserver_shutdown
 /tmp/live_tree/usr/bin/dircolors
 /tmp/live_tree/usr/bin/dirname
@@ -181,6 +189,7 @@
 /tmp/live_tree/usr/bin/kalarmd
 /tmp/live_tree/usr/bin/kde-config
 /tmp/live_tree/usr/bin/kdeinit
+/tmp/live_tree/usr/bin/killall
 /tmp/live_tree/usr/bin/korgac
 /tmp/live_tree/usr/bin/krootwarning
 /tmp/live_tree/usr/bin/ksplash
@@ -189,11 +198,14 @@
 /tmp/live_tree/usr/bin/locale
 /tmp/live_tree/usr/bin/mandrakegalaxy
 /tmp/live_tree/usr/bin/mandrakegalaxy.real
+/tmp/live_tree/usr/bin/mdk_move_loop
 /tmp/live_tree/usr/bin/mesg
+/tmp/live_tree/usr/bin/nspluginscan
 /tmp/live_tree/usr/bin/perl5.8.1
 /tmp/live_tree/usr/bin/runstage2.pl
 /tmp/live_tree/usr/bin/stage2
 /tmp/live_tree/usr/bin/startkde
+/tmp/live_tree/usr/bin/sudo
 /tmp/live_tree/usr/bin/suidperl
 /tmp/live_tree/usr/bin/test-windows-key
 /tmp/live_tree/usr/bin/tty
@@ -207,6 +219,9 @@
 /tmp/live_tree/usr/lib/gtk-2.0/2.2.0/engines/libgalaxy.so
 /tmp/live_tree/usr/lib/gtk-2.0/2.2.0/immodules/im-cedilla.so
 /tmp/live_tree/usr/lib/gtk-2.0/2.2.0/loaders/libpixbufloader-png.so
+/tmp/live_tree/usr/lib/kbd/consolefonts/lat0-16.psf.gz
+/tmp/live_tree/usr/lib/kbd/consoletrans/iso15.acm.gz
+/tmp/live_tree/usr/lib/kbd/consoletrans/iso15.sfm.gz
 /tmp/live_tree/usr/lib/kbuildsycoca.la
 /tmp/live_tree/usr/lib/kbuildsycoca.so
 /tmp/live_tree/usr/lib/kcminit.la
@@ -215,6 +230,26 @@
 /tmp/live_tree/usr/lib/kconf_update.so
 /tmp/live_tree/usr/lib/kde3/clock_panelapplet.la
 /tmp/live_tree/usr/lib/kde3/clock_panelapplet.so
+/tmp/live_tree/usr/lib/kde3/kcm_access.la
+/tmp/live_tree/usr/lib/kde3/kcm_access.so
+/tmp/live_tree/usr/lib/kde3/kcm_arts.la
+/tmp/live_tree/usr/lib/kde3/kcm_arts.so
+/tmp/live_tree/usr/lib/kde3/kcm_bell.la
+/tmp/live_tree/usr/lib/kde3/kcm_bell.so
+/tmp/live_tree/usr/lib/kde3/kcm_energy.la
+/tmp/live_tree/usr/lib/kde3/kcm_energy.so
+/tmp/live_tree/usr/lib/kde3/kcm_input.la
+/tmp/live_tree/usr/lib/kde3/kcm_input.so
+/tmp/live_tree/usr/lib/kde3/kcm_keyboard.la
+/tmp/live_tree/usr/lib/kde3/kcm_keyboard.so
+/tmp/live_tree/usr/lib/kde3/kcm_keys.la
+/tmp/live_tree/usr/lib/kde3/kcm_keys.so
+/tmp/live_tree/usr/lib/kde3/kcm_konqhtml.la
+/tmp/live_tree/usr/lib/kde3/kcm_konqhtml.so
+/tmp/live_tree/usr/lib/kde3/kcm_laptop.la
+/tmp/live_tree/usr/lib/kde3/kcm_laptop.so
+/tmp/live_tree/usr/lib/kde3/kcm_style.la
+/tmp/live_tree/usr/lib/kde3/kcm_style.so
 /tmp/live_tree/usr/lib/kde3/kded_kinetd.la
 /tmp/live_tree/usr/lib/kde3/kded_kinetd.so
 /tmp/live_tree/usr/lib/kde3/kded_mountwatcher.la
@@ -259,11 +294,13 @@
 /tmp/live_tree/usr/lib/libDrakX/c
 /tmp/live_tree/usr/lib/libDrakX/c.pm
 /tmp/live_tree/usr/lib/libDrakX/class_discard.pm
+/tmp/live_tree/usr/lib/libDrakX/commands.pm
 /tmp/live_tree/usr/lib/libDrakX/common.pm
 /tmp/live_tree/usr/lib/libDrakX/detect_devices.pm
 /tmp/live_tree/usr/lib/libDrakX/devices.pm
 /tmp/live_tree/usr/lib/libDrakX/fs.pm
 /tmp/live_tree/usr/lib/libDrakX/fsedit.pm
+/tmp/live_tree/usr/lib/libDrakX/handle_configs.pm
 /tmp/live_tree/usr/lib/libDrakX/harddrake/sound.pm
 /tmp/live_tree/usr/lib/libDrakX/interactive.pm
 /tmp/live_tree/usr/lib/libDrakX/interactive/gtk.pm
@@ -275,20 +312,32 @@
 /tmp/live_tree/usr/lib/libDrakX/modules.pm
 /tmp/live_tree/usr/lib/libDrakX/modules/interactive.pm
 /tmp/live_tree/usr/lib/libDrakX/mouse.pm
+/tmp/live_tree/usr/lib/libDrakX/network.pm
+/tmp/live_tree/usr/lib/libDrakX/network/network.pm
 /tmp/live_tree/usr/lib/libDrakX/partition_table.pm
 /tmp/live_tree/usr/lib/libDrakX/partition_table/raw.pm
+/tmp/live_tree/usr/lib/libDrakX/printer
 /tmp/live_tree/usr/lib/libDrakX/run_program.pm
 /tmp/live_tree/usr/lib/libDrakX/sbus_probing
+/tmp/live_tree/usr/lib/libDrakX/services.pm
 /tmp/live_tree/usr/lib/libDrakX/steps.pm
 /tmp/live_tree/usr/lib/libDrakX/swap.pm
+/tmp/live_tree/usr/lib/libDrakX/timezone.pm
 /tmp/live_tree/usr/lib/libDrakX/ugtk2.pm
 /tmp/live_tree/usr/lib/libart_lgpl_2.so.2.3.16
+/tmp/live_tree/usr/lib/libartsbuilder.la
+/tmp/live_tree/usr/lib/libartsbuilder.so.0.0.0
 /tmp/live_tree/usr/lib/libartsflow.so.1.0.0
 /tmp/live_tree/usr/lib/libartsflow_idl.so.1.0.0
 /tmp/live_tree/usr/lib/libartskde.so.1.1.0
+/tmp/live_tree/usr/lib/libartsmidi.la
+/tmp/live_tree/usr/lib/libartsmidi.so.0.0.0
+/tmp/live_tree/usr/lib/libartsmidi_idl.so.0.0.0
 /tmp/live_tree/usr/lib/libasound.so.2.0.0
 /tmp/live_tree/usr/lib/libatk-1.0.so.0.400.0
 /tmp/live_tree/usr/lib/libaudiofile.so.0.0.2
+/tmp/live_tree/usr/lib/libaudiofilearts.la
+/tmp/live_tree/usr/lib/libaudiofilearts.so
 /tmp/live_tree/usr/lib/libbz2.so.1.0.0
 /tmp/live_tree/usr/lib/libconsole.so.0.0.0
 /tmp/live_tree/usr/lib/libcrack.so.2.7
@@ -320,12 +369,14 @@
 /tmp/live_tree/usr/lib/libkio.so.4.1.0
 /tmp/live_tree/usr/lib/libkjs.so.1.0.0
 /tmp/live_tree/usr/lib/libkmedia2_idl.so.1.0.0
+/tmp/live_tree/usr/lib/libkmid.so.0.0.95
 /tmp/live_tree/usr/lib/libkonq.la
 /tmp/live_tree/usr/lib/libkonq.so.4.1.0
 /tmp/live_tree/usr/lib/libkparts.so.2.1.0
 /tmp/live_tree/usr/lib/libkutils.so.1.1.0
 /tmp/live_tree/usr/lib/libmad.so.0.2.0
 /tmp/live_tree/usr/lib/libmcop.so.1.0.0
+/tmp/live_tree/usr/lib/libmcop_mt.so.1.0.0
 /tmp/live_tree/usr/lib/libmng.so.1.0.0
 /tmp/live_tree/usr/lib/libogg.so.0.4.0
 /tmp/live_tree/usr/lib/libpango-1.0.so.0.200.5
@@ -347,6 +398,23 @@
 /tmp/live_tree/usr/lib/libvorbis.so.0.2.0
 /tmp/live_tree/usr/lib/libvorbisenc.so.2.0.0
 /tmp/live_tree/usr/lib/libvorbisfile.so.3.0.0
+/tmp/live_tree/usr/lib/mcop/Arts
+/tmp/live_tree/usr/lib/mcop/CDDAPlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/MP3PlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/NULLPlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/OGGPlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/SplayPlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/WAVPlayObject.mcopclass
+/tmp/live_tree/usr/lib/mcop/artsbuilder.mcopclass
+/tmp/live_tree/usr/lib/mcop/artsflow.mcopclass
+/tmp/live_tree/usr/lib/mcop/artsgui.mcopclass
+/tmp/live_tree/usr/lib/mcop/artsmidi.mcopclass
+/tmp/live_tree/usr/lib/mcop/artsmodules.mcopclass
+/tmp/live_tree/usr/lib/mcop/audiofilearts.mcopclass
+/tmp/live_tree/usr/lib/mcop/kmedia2.mcopclass
+/tmp/live_tree/usr/lib/mcop/soundserver.mcopclass
+/tmp/live_tree/usr/lib/mcop/x11globalcomm.mcopclass
+/tmp/live_tree/usr/lib/mcop/xinePlayObject.mcopclass
 /tmp/live_tree/usr/lib/pango/1.2.0/modules/pango-basic-xft.so
 /tmp/live_tree/usr/lib/perl5/5.8.1/AutoLoader.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/Carp.pm
@@ -356,17 +424,21 @@
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/Config.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/DynaLoader.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/File
+/tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/Socket.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/XSLoader.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/_h2ph_pre.ph
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/asm/unistd.ph
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/auto/File
+/tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/auto/Socket
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/bits/syscall.ph
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/lib.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/sys/syscall.ph
 /tmp/live_tree/usr/lib/perl5/5.8.1/i386-linux-thread-multi/syscall.ph
 /tmp/live_tree/usr/lib/perl5/5.8.1/overload.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/strict.pm
+/tmp/live_tree/usr/lib/perl5/5.8.1/unicore/Canonical.pl
 /tmp/live_tree/usr/lib/perl5/5.8.1/unicore/Exact.pl
+/tmp/live_tree/usr/lib/perl5/5.8.1/unicore/To/Lower.pl
 /tmp/live_tree/usr/lib/perl5/5.8.1/unicore/lib/SpacePer.pl
 /tmp/live_tree/usr/lib/perl5/5.8.1/utf8.pm
 /tmp/live_tree/usr/lib/perl5/5.8.1/utf8_heavy.pl
@@ -389,9 +461,115 @@
 /tmp/live_tree/usr/lib/qt3/lib/libqt-mt.so.3.1.2
 /tmp/live_tree/usr/sbin/ddcxinfos
 /tmp/live_tree/usr/sbin/fileshareset
-/tmp/live_tree/usr/sbin/useradd
+/tmp/live_tree/usr/sbin/pwconv
 /tmp/live_tree/usr/share/VERSION
 /tmp/live_tree/usr/share/application-registry/gnome-vfs.applications
+/tmp/live_tree/usr/share/applnk-mdk
+/tmp/live_tree/usr/share/applnk-mdk-simplified/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/Configure your computer.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/KControl.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/KFloppy.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/k3b.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/kdepasswd.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/kmix.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Administer your system/konsole.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/Listen to music files.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/Record sounds.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/Rip a CD.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/Watch videos.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Enjoy music & video/kscd.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Home.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Kfind.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play ArmageTron.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play Cannon Smash.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play Chromium.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play Frozen-Bubble.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play LBreakout.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Play games/Play Tuxracer.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/Help.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/Mandrake documentation in french.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/Mandrake documentation in german.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/Mandrake documentation in italian.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Read documentation/Mandrake documentation in spanish.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Create a presentation.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Create a spreadsheet.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Create a text document.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Create flowcharts and diagrams.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Manage your finances.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/Manage your projects.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/kaddressbook.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/kalarm.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/kfax.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/knotes.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use office tools/korganizer.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/Chat using AIM, ICQ, MSN, Yahoo, Winpopup.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/Chat using IRC.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/Dialog using video conference.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/KMail.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/KNode.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/Kppp.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/kbear.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/konqbrowser.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/Use the Internet/quanta.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/View, modify, or create graphics/.directory
+/tmp/live_tree/usr/share/applnk-mdk-simplified/View, modify, or create graphics/Manage, show and print your photos.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/View, modify, or create graphics/Manipulate pictures.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/View, modify, or create graphics/kooka.desktop
+/tmp/live_tree/usr/share/applnk-mdk-simplified/View, modify, or create graphics/ksnapshot.desktop
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_adsr.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_atan_saturate.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_autopanner.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_brickwall.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_bus.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_capture_wav.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_cdelay.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_cflanger.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_data.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_delay.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_dtmf1.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_equalizer.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_fm.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_freeverb.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_moog.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_multi_add.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_noise.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_pitchshift.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_play_wave.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_pscale.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_pulse.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_rc.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_record.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_sequence.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_shelve_cutoff.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_sine.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_softsaw.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_square.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_stereobeep.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_tremolo.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_tri.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/example_xfade.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_chirpdrum.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_deepdrum.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_full_square.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_hihat.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_neworgan.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_nokind.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_organ2.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_simple_sin.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_simple_square.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_simple_tri.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_slide.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_slide1.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_square.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/instrument_tri.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/template_Empty_Structure.arts
+/tmp/live_tree/usr/share/apps/artsbuilder/examples/template_Instrument.arts
 /tmp/live_tree/usr/share/apps/clockapplet
 /tmp/live_tree/usr/share/apps/kabc/plugins
 /tmp/live_tree/usr/share/apps/kalarmdgui
@@ -400,6 +578,7 @@
 /tmp/live_tree/usr/share/apps/kdesktop/directory.autostart
 /tmp/live_tree/usr/share/apps/kdesktop/directory.desktop
 /tmp/live_tree/usr/share/apps/kdesktop/directory.trash
+/tmp/live_tree/usr/share/apps/kdisplay/app-defaults
 /tmp/live_tree/usr/share/apps/khtml/css
 /tmp/live_tree/usr/share/apps/khtml/khtml.rc
 /tmp/live_tree/usr/share/apps/khtml/khtml_popupmenu.rc
@@ -432,6 +611,7 @@
 /tmp/live_tree/usr/share/config/kdeglobals
 /tmp/live_tree/usr/share/config/kdeprintrc
 /tmp/live_tree/usr/share/config/kdesktoprc
+/tmp/live_tree/usr/share/config/kdm/kdmrc
 /tmp/live_tree/usr/share/config/khotkeysrc
 /tmp/live_tree/usr/share/config/kickerrc
 /tmp/live_tree/usr/share/config/klipperrc
@@ -446,12 +626,16 @@
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/actions/history_clear.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kicker.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/klipper.png
+/tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kmail.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/kmenu.png
+/tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/konqueror.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/apps/korganizer.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/filesystems/desktop.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/filesystems/file_broken.png
 /tmp/live_tree/usr/share/icons/crystalsvg/16x16/mimetypes/unknown.png
+/tmp/live_tree/usr/share/icons/crystalsvg/32x32/apps/kmail.png
 /tmp/live_tree/usr/share/icons/crystalsvg/32x32/apps/kmenu.png
+/tmp/live_tree/usr/share/icons/crystalsvg/32x32/apps/konqueror.png
 /tmp/live_tree/usr/share/icons/crystalsvg/32x32/apps/xapp.png
 /tmp/live_tree/usr/share/icons/crystalsvg/32x32/devices/nfs_mount.png
 /tmp/live_tree/usr/share/icons/crystalsvg/32x32/filesystems/desktop.png
@@ -468,6 +652,11 @@
 /tmp/live_tree/usr/share/icons/large/mcc-mdk.png
 /tmp/live_tree/usr/share/icons/mandrakegalaxy.png
 /tmp/live_tree/usr/share/icons/mdk-hicolor
+/tmp/live_tree/usr/share/icons/mini/home-mdk.png
+/tmp/live_tree/usr/share/icons/mini/ooo_calc.png
+/tmp/live_tree/usr/share/icons/mini/ooo_writer.png
+/tmp/live_tree/usr/share/icons/ooo_calc.png
+/tmp/live_tree/usr/share/icons/ooo_writer.png
 /tmp/live_tree/usr/share/langs
 /tmp/live_tree/usr/share/ldetect-lst/Cards+
 /tmp/live_tree/usr/share/ldetect-lst/MonitorsDB
@@ -480,5 +669,6 @@
 /tmp/live_tree/usr/share/nautilus
 /tmp/live_tree/usr/share/services
 /tmp/live_tree/usr/share/servicetypes
+/tmp/live_tree/usr/share/sounds/KDE_Startup.wav
 /tmp/live_tree/usr/share/themes/Default/gtk-2.0
 /tmp/live_tree/usr/share/themes/Galaxy/gtk-2.0
