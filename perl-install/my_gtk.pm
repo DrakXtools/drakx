@@ -42,9 +42,9 @@ sub new {
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
     
     if ($::isWizard && !$my_gtk::pop_it) {
-	my $rc = "/etc/gtk/wizard.rc";
-	-r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
-	Gtk::Rc->parse($rc);
+	#- my $rc = "/etc/gtk/wizard.rc";
+	#- -r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
+	#- Gtk::Rc->parse($rc);
 	$o->{window} = new Gtk::VBox(0,0);
 	$o->{window}->set_border_width($::Wizard_splash ? 0 : 10);
 	$o->{rwindow} = $o->{window};
@@ -86,12 +86,12 @@ sub new {
 				       }
 				   });
 	    $::WizardTable->attach($draw1, 0, 2, 0, 1, 'fill', 'fill', 0, 0);
-	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
+	    #- $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
 	    $::WizardTable->set_usize(540,400);
 	    $::WizardWindow->show_all;
 	    flush();
 	}
-	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
+	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
     }
 
     $::isEmbedded && !$my_gtk::pop_it or return $o;
