@@ -552,7 +552,7 @@ sub configureNetwork2 {
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc) if ! $netc->{DHCP};
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
+    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} ne 'ppp0' } values %$intf;
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf) if $netc->{HOSTNAME} && !$netc->{DHCP};
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
 
