@@ -99,9 +99,11 @@ get_needed_files: $(DIRS) $(MOFILES)
 	install -d $(DEST)/etc
 	install -d $(DEST)/etc/sysconfig/network-scripts
 	install -d $(DEST)/lib
+	install -d $(DEST)/$(LIB)
 	install -d $(DEST)/bin
 	install -d $(DEST)/usr/bin
 	install -d $(DEST)/usr/lib
+	install -d $(DEST)/usr/$(LIB)
 	install -d $(DEST)/usr/share
 	install -d $(DEST)/usr/share/gtk
 	install -d $(DEST)/usr/share/xmodmap
@@ -123,6 +125,8 @@ endif
 	for i in `cat /tmp/list`; do \
 	    if (echo $$i | grep -q "lib/[^/]*\.so"); then \
 	      install -s $$i $(DEST)/lib; \
+	    elif (echo $$i | grep -q "lib64/[^/]*\.so"); then \
+	      install -s $$i $(DEST)/lib64; \
 	    else \
 	      d=$$i; \
 	      (echo $$d | grep -q "^[^/]") && d="$(REP4PMS)/$$d"; \
@@ -137,7 +141,7 @@ endif
 	      fi; \
 	    fi; \
 	done
-	mv -f $(DEST)/lib/libimlib-png.so $(DEST)/usr/lib
+	mv -f $(DEST)/$(LIB)/libimlib-png.so $(DEST)/usr/$(LIB)
 
 #	# transform xpm's in png's
 	for i in $(DEST)/usr/share/icons/*.xpm; do convert $$i $${i%xpm}png; rm $$i; done
