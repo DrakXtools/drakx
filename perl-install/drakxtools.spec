@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 16mdk
+Release: 17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-17mdk
+- logdrake mail alert: fix crash due to icon renaming
+
 * Mon Mar  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-16mdk
 - adduserdrake: default to "man" icon (pixel)
 - drakconnect manage interface: fix bootproto filling (#8498)
