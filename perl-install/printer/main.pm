@@ -3003,7 +3003,7 @@ sub devicefound {
 
 sub usbdevice {
     my ($usbid) = @_;
-    # Run "lsusb -vv¨ and search the given device to get its USB bus and
+    # Run "lsusb -vv" and search the given device to get its USB bus and
     # device numbers
     open(my $F, ($::testing ? "" : "chroot $::prefix/ ") .
 	'/bin/sh -c "export LC_ALL=C; lsusb -vv 2> /dev/null" |')
