@@ -127,3 +127,26 @@ sub raw {
     }
 
 }
+
+# run in background a sub that give back data through STDOUT a la run_program::get_stdout but w/ arbitrary perl code instead of external program
+package bg_command;
+
+sub new {
+    my ($class, $sub) = @_;
+    my $o = bless {}, $class;
+    if ($o->{pid} = open(my $fd, "-|")) {
+        $o->{fd} = $fd;
+        $o;
+    } else {
+        $sub->();
+        c::_exit(0);
+    }
+}
+
+sub DESTROY {
+    my ($o) = @_;
+    close $o->{fd} or warn "kid exited $?";
+    waitpid $o->{pid}, 0;
+}
+
+1;
