@@ -194,7 +194,6 @@ $window1->{window}->add(
                                                                                  local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                                  eval { # For wizcancel
                                                                                      configureNetworkNet($in, $netc, $intf, @all_cards);
-                                                                                     network::sethostname($intf);
                                                                                      $button_apply->set_sensitive(1);
                                                                                      update();
                                                                                  };
@@ -347,6 +346,7 @@ sub update_list() {
 
 sub apply() {
     $old_profile = $netcnx->{PROFILE} || "default";
+    network::sethostname($netc);
     network::netconnect::save_conf($netcnx);
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
