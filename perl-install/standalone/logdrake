@@ -166,7 +166,7 @@ gtkadd($my_win->{window},
 							      ),
 						    gtkpack_(new Gtk2::HBox(0,0),
 							     1, gtkadd(gtkset_border_width(new Gtk2::Frame(N("Choose file")),2),
-								       gtkpack (gtkset_border_width(Gtk2::VBox->new(0,0),0),
+								       gtkpack(gtkset_border_width(Gtk2::VBox->new(0,0),0),
 										map { $toggle{$_} = gtksignal_connect(new Gtk2::CheckButton($files{$_}{desc}), 
 														      clicked => sub {
 															  $refcount_search++; 
@@ -410,12 +410,12 @@ my $initdir = "/etc/init.d";
 		 };
     my @installed_d;
     foreach my $serv (keys %$service) {
-	-e "$initdir/$serv" && push (@installed_d, $serv);
+	-e "$initdir/$serv" && push @installed_d, $serv;
     }
   
     $in->ask_from(N("service setting"),
 		  N("You will receive an alert if one of the selected services is no longer running"),
-		  [ map { { label => $_, val => \${ $_ }, type => "bool", text => "$service->{ $_ }" } } @installed_d
+		  [ map { { label => $_, val => \${ $_ }, type => "bool", text => $service->{$_} } } @installed_d
 		  ]) or goto begin;
 
     $cron .= "#- check services\n";

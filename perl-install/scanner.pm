@@ -30,16 +30,16 @@ use detect_devices;
 use log;
 use handle_configs;
 
-my $_sanedir = "$::prefix/etc/sane.d";
-my $_scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
-$scannerDB = readScannerDB("$_scannerDBdir/ScannerDB");
+my $sanedir = "$::prefix/etc/sane.d";
+my $scannerDBdir = "$::prefix$ENV{SHARE_PATH}/ldetect-lst";
+my $scannerDB = readScannerDB("$scannerDBdir/ScannerDB");
 
 sub confScanner {
     my ($model, $port, $vendor, $product) = @_;
     $port ||= detect_devices::dev_is_devfs() ? "$::prefix/dev/usb/scanner0" : "$::prefix/dev/scanner";
     my $a = $scannerDB->{$model}{server};
     #print "file:[$a]\t[$model]\t[$port]\n| ", (join "\n| ", @{$scannerDB->{$model}{lines}}),"\n";
-    my @driverconf = cat_("$_sanedir/$a.conf");
+    my @driverconf = cat_("$sanedir/$a.conf");
     my @configlines = @{$scannerDB->{$model}{lines}};
     foreach my $line (@configlines) {
 	$line =~ s/\$DEVICE/$port/g if $port;
@@ -60,20 +60,21 @@ sub confScanner {
 	    handle_configs::set_directive(\@driverconf, $line, 1);
 	}
     }
-    output("$_sanedir/$a.conf", @driverconf);
+    output("$sanedir/$a.conf", @driverconf);
     add2dll($a);
 }
 
 sub add2dll {
-    return if member($_[0], chomp_(cat_("$_sanedir/dll.conf")));
-    my @dllconf = cat_("$_sanedir/dll.conf");
+    return if member($_[0], chomp_(cat_("$sanedir/dll.conf")));
+    my @dllconf = cat_("$sanedir/dll.conf");
     handle_configs::add_directive(\@dllconf, $_[0]);
-    output("$_sanedir/dll.conf", @dllconf);
+    output("$sanedir/dll.conf", @dllconf);
 }
 
 sub configured {
     my @res;
     # Run "scanimage -L", to find the scanners which are already working
+    local *LIST;
     open LIST, "LC_ALL=C scanimage -L |";
     while (my $line = <LIST>) {
 	if ($line =~ /^\s*device\s*\`([^\`\']+)\'\s+is\s+a\s+(\S.*)$/) {
@@ -101,6 +102,7 @@ sub detect {
     my @res;
     # Run "sane-find-scanner", this also detects USB scanners which only
     # work with libusb.
+    local *DETECT;
     open DETECT, "LC_ALL=C sane-find-scanner -q |";
     while (my $line = <DETECT>) {
 	my ($vendorid, $productid, $make, $model, $description, $port);
@@ -121,7 +123,7 @@ sub detect {
 	    if ($vendorid and $productid) {
 		# We have vendor and product ID, look up the scanner in
 		# the usbtable
-		foreach my $entry (cat_("$_scannerDBdir/usbtable")) {
+		foreach my $entry (cat_("$scannerDBdir/usbtable")) {
 		    if ($entry =~ 
 			/^\s*$vendorid\s+$productid\s+.*\"([^\"]+)\"\s*$/) {
 			$description = $1;
@@ -291,7 +293,7 @@ sub updateScannerDBfromUsbtable {
 }
 
 sub updateScannerDBfromSane {
-    my ($_sanesrcdir) = @_;
+    my ($sanesrcdir) = @_;
     substInFile { s/END// } "ScannerDB";
 
     my $to_add = "# generated from Sane by scannerdrake\n";
@@ -319,7 +321,7 @@ sub updateScannerDBfromSane {
     # Read templates for configuration file lines
     my %configlines;
     my $backend;
-    foreach my $line (cat_("$_scannerDBdir/scannerconfigs")) {
+    foreach my $line (cat_("$scannerDBdir/scannerconfigs")) {
 	chomp $line;
 	if ($line =~ /^\s*SERVER\s+(\S+)\s*$/) {
 	    $backend = $1;
@@ -328,7 +330,7 @@ sub updateScannerDBfromSane {
 	}
     }
 
-    foreach my $f (glob_("$_sanesrcdir/doc/descriptions/*.desc"), glob_("$_sanesrcdir/doc/descriptions-external/*.desc")) {
+    foreach my $f (glob_("$sanesrcdir/doc/descriptions/*.desc"), glob_("$sanesrcdir/doc/descriptions-external/*.desc")) {
 	my $F = common::openFileMaybeCompressed($f);
 	$to_add .= "\n# from $f";
 	my ($lineno, $cmd, $val) = 0;
