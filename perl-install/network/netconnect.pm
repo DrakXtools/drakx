@@ -933,7 +933,7 @@ notation (for example, 1.2.3.4).")),
                             $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
                             return 1, $bad[0];
                         }
-                        $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved !", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
+                        $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved!", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
                     },
                     focus_out => sub {
                         $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0]

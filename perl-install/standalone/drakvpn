@@ -97,7 +97,7 @@ N("The setup of a VPN connection has already been done.
 
 It's currently enabled.
 
-What would you like to do ?"),
+What would you like to do?"),
 				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
      # FIXME: reconfigure isn't handled
 	if ($r eq "disable") {
@@ -123,7 +123,7 @@ N("The setup of a VPN connection has already been done.
 
 It's currently disabled.
 
-What would you like to do ?"),
+What would you like to do?"),
 				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
      # FIXME: reconfigure isn't handled
 	if ($r eq "enable") {
@@ -293,13 +293,13 @@ my %messages = (ipsec => N("Security Policies"), racoon => N("IKE daemon racoon"
 
 if ($kernel_version > 2.5) {
 	$in->ask_from(N("Configuration file"),
-N("Configuration step !
+N("Configuration step!
 
 You need to define the Security Policies and then to 
 configure the automatic key exchange (IKE) daemon. 
 The KAME IKE daemon we're using is called 'racoon'.
 
-What would you like to configure ?\n"),
+What would you like to configure?\n"),
 		      [ { val => \$c, type => "list", list => [ keys %messages  ], format => sub { $messages{$_[0]} } } ]) or goto step_detectsetup;
 
 } else {
@@ -329,7 +329,7 @@ You can now:\n
   - display, add, edit, or remove sections, then
   - commit the changes
 
-What would you like to do ?\n", $ipsec_conf),
+What would you like to do?\n", $ipsec_conf),
 		[ N_("_:display here is a verb\nDisplay"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 my $existing_section = "";

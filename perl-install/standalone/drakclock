@@ -217,7 +217,7 @@ sub install_ntp() {
     $my_win->{window}->set_sensitive(0);
     if (warn_dialog(N("Warning"), N("We need to install ntp package\n to enable Network Time Protocol
 
-Do you want to install ntp ?"))) {
+Do you want to install ntp?"))) {
 	$in->do_pkgs->install('ntp');
     } else {
 	ntp_widget_state(0);
