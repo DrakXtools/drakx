@@ -660,7 +660,7 @@ sub ask_fromW {
     my $buttons_pack = ($common->{ok} || !exists $common->{ok}) && $mainw->create_okcancel($common->{ok}, $common->{cancel}, '', @help, if_(@$l2, $advanced_button));
 
     $pack->pack_start(gtkshow($always_pack), 1, 1, 0);
-    $advanced_pack = create_scrolled_window($advanced_pack, [ 'never', 'automatic' ], 'none') if !$::isEmbedded;
+    $advanced_pack = create_scrolled_window($advanced_pack, [ 'never', 'automatic' ], 'none') if !$mainw->{isEmbedded};
     $pack->pack_start($advanced_pack, 1, 1, 0) if @widgets_advanced;
     if ($buttons_pack) {
 	if ($::isWizard && !$mainw->{pop_it} && $::isInstall) {
@@ -669,7 +669,7 @@ sub ask_fromW {
 	}
 	$pack->pack_start(gtkshow($buttons_pack), 0, 0, 0);
     }
-    gtkadd($mainw->{window}, $::isEmbedded ? create_scrolled_window($pack, [ 'automatic', 'automatic' ], 'none') : $pack);
+    gtkadd($mainw->{window}, $mainw->{isEmbedded} ? create_scrolled_window($pack, [ 'automatic', 'automatic' ], 'none') : $pack);
     $set_default_size->() if $has_scroll_always;
     $set_advanced->($common->{advanced_state});
     
