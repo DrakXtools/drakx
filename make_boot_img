@@ -7,34 +7,35 @@ use MDK::Common;
 Config->import;
 my ($arch) = $Config{archname} =~ /(.*?)-/;
 
-($img, $type) = @ARGV;
+my ($img, $type) = @ARGV;
 
 # move stuff to new "kernel" directory
 -d 'kernel' or die "directory kernel is missing\n";
 rename 'all.kernels', 'kernel/all.kernels';
 rename 'all.modules', 'kernel/all.modules';
 
-$default_append = "ramdisk_size=128000 root=/dev/ram3";
+my $default_append = "ramdisk_size=128000 root=/dev/ram3";
 # full acpi support for amd64, enough acpi support for x86 ht, no acpi for others
-$default_acpi = ($arch =~ /i.86/ ? "acpi=ht" : ($arch =~ /x86_64/ ? "acpi=off" : "acpi=off"));
-$default_vga = "vga=788";
+my $default_acpi = $arch =~ /i.86/ ? "acpi=ht" : $arch =~ /x86_64/ ? "acpi=off" : "acpi=off";
+my $default_vga = "vga=788";
 
-$instdir = "mdk-stage1";
-$mnt = "/tmp/drakx_mnt";
-$mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
+my $instdir = "mdk-stage1";
+my $mnt = "/tmp/drakx_mnt";
+my $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
+my $sudo;
 if ($>) {
     $sudo = "sudo";
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
 }
 
-sub __ { print @_, "\n"; system(@_); }
-sub _ { __ @_; $? and die; }
+sub __ { print @_, "\n"; system(@_) }
+sub _ { __ @_; $? and die }
 
 _ "$sudo mkdir $mnt" unless -e $mnt;
 _ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
 
-$install = $ {{
+my $install = ${{
     all => "stage1-full",
     blank => "stage1-full",
     live => "stage1-full",
@@ -58,13 +59,19 @@ $install = $ {{
 }}{$type} or die;
 
 mkdir "images";
-chomp($main = `cat kernel/all.kernels/.main`);
+chomp(my $main = `cat kernel/all.kernels/.main`);
 
+if ($img =~ /hd_grub/) {
+    hd_grub($img);
+    exit 0;
+}
+
+my @kernels;
 if ($img =~ /blank|pcmcia/) {
     @kernels = $main;
 } else {
     @kernels = map { m|kernel/all.kernels/(.*)| } glob('kernel/all.kernels/*');
-    $img =~ /usb/ and @kernels = grep { $_ !~ /2\.2\.14/ } @kernels;  #- 2.2.14 is too old, usb support was not working properly
+    $img =~ /usb/ and @kernels = grep { !/2\.2\.14/ } @kernels;  #- 2.2.14 is too old, usb support was not working properly
 }
 
 foreach (@kernels) {
@@ -73,7 +80,7 @@ foreach (@kernels) {
     } else {
 	print STDERR "calling boot_img_$arch\n";
 	$::{"boot_img_$arch"}->($mnt, "$img-$_", glob("kernel/all.kernels/$_/boot/vmlinu*"));
-	rename("$img-$main", "$img");
+	rename("$img-$main", $img);
     }
 }
 if ($arch =~ /x86_64/ && $img =~ /all/) {
@@ -110,7 +117,7 @@ sub initrd {
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
     _ "$sudo tar xjC $mnt -f $tar";
-    symlinkf "/tmp/stage2/lib64", "$mnt/lib64" if ($arch =~ /x86_64/);
+    symlinkf "/tmp/stage2/lib64", "$mnt/lib64" if $arch =~ /x86_64/;
     install_stripped("$instdir/init", "$mnt/sbin");
     install_stripped("$instdir/$install", "$mnt/sbin/stage1");
 
@@ -131,7 +138,7 @@ sub initrd {
     my ($ext) = $img =~ /rdz-(.*)/ or die "bad initrd name ($img)";
     my $modz = "kernel/all.modules$I/$ext";
     if ($type !~ /blank/) {
-	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar" ;
+	_ "$sudo cp -f $modz/${ltype}_modules.mar $mnt/modules/modules$I.mar";
 	_ "$sudo cp -f $modz/modules.dep $mnt/modules/";
     }
     _ "$sudo umount $mnt";
@@ -149,11 +156,11 @@ sub entries_append {
     my ($type) = @_;
 
     my $automatic = "";
-    $automatic = "automatic=method:cdrom" if ($type eq "cdrom");
-    $automatic = "automatic=method:disk" if ($type eq "hd");
+    $automatic = "automatic=method:cdrom" if $type eq "cdrom";
+    $automatic = "automatic=method:disk" if $type eq "hd";
 
     my @simple_entries = (
-	linux => "$default_vga",
+	linux => $default_vga,
 	vgalo => "vga=785",
 	vgahi => "vga=791",
 	vga16 => "vga16",
@@ -269,7 +276,7 @@ sub boot_img_ia64 {
     _ "$sudo cp -f $kernel $mnt/vmlinux";
     _ "cp -f $rdz $mnt/$type.rdz";
     _ "$sudo cp -f tools/ia64/elilo.efi $mnt";
-	output("$mnt/elilo.conf", "
+	output("$mnt/elilo.conf", qq(
 prompt
 timeout=50
 
@@ -277,22 +284,22 @@ image=vmlinux
         label=linux
         root=/dev/ram3
         initrd=$type.rdz
-        append=\" ramdisk_size=120000\"
+        append=" ramdisk_size=120000"
         read-only
 
 image=vmlinux
         label=rescue
         root=/dev/ram3
         initrd=$type.rdz
-        append=\" rescue ramdisk_size=120000\"
-");
+        append=" rescue ramdisk_size=120000"
+"));
     _ "sync";
     _ "df $mnt";
 
 }
 
 sub boot_img_sparc {
-    my ($mnt, $img) = @_;
+    my ($mnt, $_img) = @_;
     if ($type =~ /^live(.*)/) {
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
@@ -303,73 +310,73 @@ sub boot_img_sparc {
 	_ "cp -f vmlinux$1 $dir/$boot/vmlinux$1";
 	-f "live$1.rdz" ? _ "cp -f live$1.rdz $dir/$boot" : initrd("${mnt}2", "$dir/$boot/live$1.rdz");
 
-	output("$dir/$boot/silo.conf", "
+	output("$dir/$boot/silo.conf", qq(
 partition=1
 default=linux
 timeout=100
 read-write
 message=/$boot/boot.msg
-image=\"cat /$boot/boot.msg\"
+image="cat /$boot/boot.msg"
   label=1
   single-key
-image=\"cat /$boot/general.msg\"
+image="cat /$boot/general.msg"
   label=2
   single-key
-image=\"cat /$boot/expert.msg\"
+image="cat /$boot/expert.msg"
   label=3
   single-key
-image=\"cat /$boot/rescue.msg\"
+image="cat /$boot/rescue.msg"
   label=4
   single-key
-image=\"cat /$boot/kickit.msg\"
+image="cat /$boot/kickit.msg"
   label=5
   single-key
-image=\"cat /$boot/param.msg\"
+image="cat /$boot/param.msg"
   label=6
   single-key
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=linux
   alias=install
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=128000 root=/dev/ram3\"
+  append="ramdisk_size=128000 root=/dev/ram3"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=text
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=128000 text root=/dev/ram3\"
+  append="ramdisk_size=128000 text root=/dev/ram3"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=expert
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=128000 expert root=/dev/ram3\"
+  append="ramdisk_size=128000 expert root=/dev/ram3"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=128000 ks root=/dev/ram3\"
+  append="ramdisk_size=128000 ks root=/dev/ram3"
 image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=rescue
   initrd=/$boot/live.rdz
-  append=\"ramdisk_size=128000 rescue rw root=/dev/ram3\"
+  append="ramdisk_size=128000 rescue rw root=/dev/ram3"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=128000 root=/dev/ram3\"
+  append="ramdisk_size=128000 root=/dev/ram3"
 image[sun4u]=/$boot/vmlinux64
   label=text
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=128000 text root=/dev/ram3\"
+  append="ramdisk_size=128000 text root=/dev/ram3"
 image[sun4u]=/$boot/vmlinux64
   label=expert
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=128000 expert root=/dev/ram3\"
+  append="ramdisk_size=128000 expert root=/dev/ram3"
 image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=128000 ks root=/dev/ram3\"
+  append="ramdisk_size=128000 ks root=/dev/ram3"
 image[sun4u]=/$boot/vmlinux64
   label=rescue
   initrd=/$boot/live64.rdz
-  append=\"ramdisk_size=128000 rescue rw root=/dev/ram3\"
-");
+  append="ramdisk_size=128000 rescue rw root=/dev/ram3"
+"));
 
 	output("$dir/$boot/README", "
 To Build a Bootable CD-ROM, try:
@@ -407,7 +414,7 @@ Welcome to Mandrake Linux 7.1
 Press <Enter> to install or upgrade a system 7mMandrake Linux7m
 ");
 
-	output("$dir/silo.conf", "
+	output("$dir/silo.conf", qq(
 partition=1
 default=linux
 timeout=100
@@ -416,9 +423,9 @@ message=/boot.msg
 image=/vmlinux$I.gz
   label=linux
   initrd=/$type.rdz
-  append=\"ramdisk_size=128000 $ltype root=/dev/ram3\"
-");
-	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V \'DrakX boot disk\'";
+  append="ramdisk_size=128000 $ltype root=/dev/ram3"
+"));
+	_ "genromfs -d $dir -f /dev/ram -A 2048,/.. -a 512 -V 'DrakX boot disk'";
 	_ "$sudo mount -t romfs /dev/ram $mnt";
 	_ "silo -r $mnt -F -i /fd.b -b /second.b -C /silo.conf";
 	_ "$sudo umount $mnt";
@@ -430,7 +437,7 @@ image=/vmlinux$I.gz
 }
 
 sub boot_img_ppc {
-    my (@kernels) = @_;
+    my (@_kernels) = @_;
 	#- hack to produce directly into /export the needed file for cdrom boot.
 	my $dir = "/export";
 	my $boot = "boot"; #- non-absolute pathname only!
@@ -448,7 +455,7 @@ sub boot_img_ppc {
     }
     _ "cp -f /usr/lib/yaboot/yaboot $dir/$boot/yaboot";
 	
-	output("$dir/$boot/ofboot.b", "<CHRP-BOOT>
+	output("$dir/$boot/ofboot.b", '<CHRP-BOOT>
 <COMPATIBLE>
 MacRISC
 </COMPATIBLE>
@@ -456,15 +463,15 @@ MacRISC
 Mandrake Linux PPC bootloader
 </DESCRIPTION>
 <BOOT-SCRIPT>
-\" screen\" output
+" screen" output
 dev screen
-\" \"(0000000000aa00aa0000aaaaaa0000aa00aaaa5500aaaaaa)\" drop 0 8 set-colors
-\" \"(5555555555ff55ff5555ffffff5555ff55ffffff55ffffff)\" drop 8 8 set-colors
+" "(0000000000aa00aa0000aaaaaa0000aa00aaaa5500aaaaaa)" drop 0 8 set-colors
+" "(5555555555ff55ff5555ffffff5555ff55ffffff55ffffff)" drop 8 8 set-colors
 device-end
 3 to foreground-color
 0 to background-color
-\" \"(0C)\" fb8-write drop
-\" Booting Mandrake Linux PPC...\" fb8-write drop 100 ms
+" "(0C)" fb8-write drop
+" Booting Mandrake Linux PPC..." fb8-write drop 100 ms
 boot cd:2,\\\\yaboot
 </BOOT-SCRIPT>
 <OS-BADGE-ICONS>
@@ -519,104 +526,104 @@ boot cd:2,\\\\yaboot
 000000FFFFFFFFFFFFFFFFFFFF000000
 </OS-BADGE-ICONS>
 </CHRP-BOOT>
-");
+');
 
-	output("$dir/$boot/yaboot.conf", "
-init-message = \"\\nWelcome to Mandrake Linux PPC!\\nHit <TAB> for boot options.\\n\\n\"
+	output("$dir/$boot/yaboot.conf", '
+init-message = "\nWelcome to Mandrake Linux PPC!\nHit <TAB> for boot options.\n\n"
 timeout = 150
 default = install-gui
-message=cd:,\\\\\\\\yaboot.msg
+message=cd:,\\\\yaboot.msg
 
-image = cd:,\\\\\\\\vmlinux
+image = cd:,\\\\vmlinux
     label = install-gui
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
+    initrd = cd:,\\\\all.gz
     initrd-size = 34000
 
-image = cd:,\\\\\\\\vmlinux-2.2
+image = cd:,\\\\vmlinux-2.2
     label = install-gui-2.2
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd = cd:,\\\\all-2.2.gz
     initrd-size = 34000
 
-image = cd:,\\\\\\\\vmlinux
+image = cd:,\\\\vmlinux
     label = install-text
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
+    initrd = cd:,\\\\all.gz
     initrd-size = 34000
-    append = \" text video=ofonly\"
+    append = " text video=ofonly"
 
-image = cd:,\\\\\\\\vmlinux-2.2
+image = cd:,\\\\vmlinux-2.2
     label = install-text-2.2
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd = cd:,\\\\all-2.2.gz
     initrd-size = 34000
-    append = \" text video=ofonly\"
+    append = " text video=ofonly"
 
-image = cd:,\\\\\\\\vmlinux
+image = cd:,\\\\vmlinux
     label = install-gui-old
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
+    initrd = cd:,\\\\all.gz
     initrd-size = 34000
-    append = \" gui-old video=ofonly\"
+    append = " gui-old video=ofonly"
 
-image = cd:,\\\\\\\\vmlinux-2.2
+image = cd:,\\\\vmlinux-2.2
     label = install-gui-old-2.2
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all-2.2.gz
+    initrd = cd:,\\\\all-2.2.gz
     initrd-size = 34000
-    append = \" gui-old video=ofonly\"
+    append = " gui-old video=ofonly"
 
 image = enet:0,vmlinux
     label = install-net
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = \" video=ofonly\"
+    append = " video=ofonly"
 
 image = enet:0,vmlinux-2.2
     label = install-net-2.2
     root = /dev/ram3
     initrd = enet:0,all-2.2.gz
     initrd-size = 34000
-    append = \" video=ofonly\"
+    append = " video=ofonly"
 	
 image = enet:0,vmlinux
     label = install-net-text
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = \" text video=ofonly\"
+    append = " text video=ofonly"
 
 image = enet:0,vmlinux-2.2
     label = install-net-text-2.2
     root = /dev/ram3
     initrd = enet:0,all-2.2.gz
     initrd-size = 34000
-    append = \" text video=ofonly\"
+    append = " text video=ofonly"
 	
-image = cd:,\\\\\\\\vmlinux
+image = cd:,\\\\vmlinux
     label = rescue
     root = /dev/ram3
-    initrd = cd:,\\\\\\\\all.gz
+    initrd = cd:,\\\\all.gz
     initrd-size = 34000
-    append = \" rescue video=ofonly\"    
+    append = " rescue video=ofonly"    
 
 image = enet:0,vmlinux
     label = rescue-net
     root = /dev/ram3
     initrd = enet:0,all.gz
     initrd-size = 34000
-    append = \" rescue video=ofonly\"    
-");
+    append = " rescue video=ofonly"    
+');
 
-	output("$dir/$boot/yaboot.msg", "
+	output("$dir/$boot/yaboot.msg", '
 Thanks for choosing Mandrake Linux PPC.  The following is a short
 explanation of the various options for booting the install CD.
 
-All options ending with \"2.2\" will use the 2.2.20-9mdkBOOT kernel.
+All options ending with "2.2" will use the 2.2.20-9mdkBOOT kernel.
 The default syntax with no suffix uses the 2.4.18-4mdkBOOT kernel.
-The default if you just hit enter is \"install-gui\".
+The default if you just hit enter is "install-gui".
 
 install-gui:        	uses XFree86 fbdev mode
 install-text:       	text based install
@@ -628,7 +635,7 @@ install-net-text:       text mode network install
 rescue:                 boots the rescue image
 rescue-net:             boots the rescue image from a network server
 
-");
+');
 
 }
 
@@ -720,4 +727,57 @@ You can choose the following kernels :
 " . (-e "isolinux/boot.msg" ?
      "0c[F1-Help] [F2-Advanced Help] [F3-Main]07" :
      "0c[F1-Help] [F2-Advanced Help]07") . "\n";
+}
+
+sub hd_grub {
+    my ($img) = @_;
+    my $mapfile = '/tmp/device.map.tmp';
+
+    my @grub_files = map { "/boot/grub/$_" } qw(stage1 stage2);
+    my $size = 40_000 + sum(map { -s $_ } @grub_files);
+
+    __ "$sudo umount $mnt 2>/dev/null";
+    _ "dd if=/dev/zero of=$img bs=1 count=$size";
+    _ "mkdosfs $img";
+    _ "$sudo mount -t vfat -o umask=0 $img $mnt -o loop";
+    _ "cp @grub_files $mnt";
+
+    output("$mnt/menu.lst", <<EOF);
+timeout 0
+default 0
+fallback 1
+
+title Mandrake Install
+
+root (hd0,0)
+kernel /cooker/isolinux/alt0/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk
+initrd /cooker/isolinux/alt0/all.rdz
+
+title Help
+
+pause To display the help, press <space> until you reach "HELP END"
+pause .
+pause To specify the location of your mirror of mandrake,
+pause choose "Mandrake Install", and press "e".
+pause Then change "root (hd0,0)". FYI:
+pause - (hd0,0) is the first partition on first bios hard drive (usually hda1)
+pause - (hd0,4) is the first extended partition (usually hda5)
+pause - (hd1,0) is the first partition on second bios hard drive
+pause Replace /cooker to suits the directory where your mirror is
+pause .
+pause HELP END
+EOF
+
+    _ "$sudo umount $mnt";
+
+    output($mapfile, "(fd0) $img\n");
+
+    open(my $G, "| grub --device-map=$mapfile --batch");
+    print $G <<EOF;
+root (fd0)
+install /stage1 d (fd0) /stage2 p /menu.lst
+quit
+EOF
+    close $G;
+    unlink $mapfile;
 }
