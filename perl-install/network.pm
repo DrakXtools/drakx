@@ -70,7 +70,11 @@ sub write_conf {
 		     FORWARD_IPV4 => "false",
 		     HOSTNAME => "localhost.localdomain",
 		    });
-    add2hash($netc, { DOMAINNAME => $netc->{HOSTNAME} =~ /\.(.*)/ });
+    print "-------------------\nDOMAINNAME : $netc->{DOMAINNAME}\n-------------------\n";
+    ($netc->{DOMAINNAME}) = ($netc->{HOSTNAME} =~ /\.(.*)/);
+
+    print "------------------\nHOSTNAME : $netc->{HOSTNAME}\n-------------------\n";
+    print "-------------------\nDOMAINNAME : $netc->{DOMAINNAME}\n-------------------\n";
 
     setVarsInSh($file, $netc, qw(NETWORKING FORWARD_IPV4 DHCP_HOSTNAME HOSTNAME DOMAINNAME GATEWAY GATEWAYDEV NISDOMAIN));
 }
@@ -320,8 +324,8 @@ notation (for example, 1.2.3.4).");
 			      $text,
 			     [ { label => _("IP address"), val => \$intf->{IPADDR} }, 
 			       { label => _("Netmask"),     val => \$intf->{NETMASK} },
-			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") } 
-			       member($module, @wireless_modules) ?
+			       { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
+			       if_(member($module, @wireless_modules),
 			       { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 			       { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
 			       { label => "WIRELESS_NWID", val => \$intf->{WIRELESS_NWID} },
@@ -334,7 +338,7 @@ notation (for example, 1.2.3.4).");
 			       { label => "WIRELESS_IWCONFIG", val => \$intf->{WIRELESS_IWCONFIG} },
 			       { label => "WIRELESS_IWSPY", val => \$intf->{WIRELESS_IWSPY} },
 			       { label => "WIRELESS_IWPRIV", val => \$intf->{WIRELESS_IWPRIV} }
-			       : ()
+			       ),
 			     ],
 			     complete => sub {
 				 $intf->{BOOTPROTO} = $pump ? "dhcp" : "static";
@@ -443,7 +447,7 @@ sub configureNetwork2 {
     my ($prefix, $netc, $intf, $install) = @_;
     my $etc = "$prefix/etc";
 
-    $netc->{wireless_eth} and $install->('wireless-tools')
+    $netc->{wireless_eth} and $install->('wireless-tools');
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_) foreach values %$intf;
