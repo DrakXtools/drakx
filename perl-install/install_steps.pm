@@ -158,7 +158,7 @@ sub setupSCSI {
     install_any::configure_pcmcia($o->{modules_conf}, $o->{pcmcia}) if $o->{pcmcia};
     modules::load(modules::category2modules('disk/cdrom'));
     modules::load_category($o->{modules_conf}, 'bus/firewire');
-    modules::load_category($o->{modules_conf}, 'disk/ide|scsi|hardware_raid|firewire');
+    modules::load_category($o->{modules_conf}, 'disk/ide|scsi|hardware_raid|sata|firewire');
 
     install_any::getHds($o);
 }

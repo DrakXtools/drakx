@@ -239,7 +239,7 @@ sub when_load {
 sub when_load_category {
     my ($conf, $name, $category) = @_;
 
-    if ($category =~ m,disk/(ide|scsi|hardware_raid|usb|firewire),) {
+    if ($category =~ m,disk/(ide|scsi|hardware_raid|sata|usb|firewire),) {
 	$conf->add_probeall('scsi_hostadapter', $name);
 	eval { load('sd_mod') };
     } elsif ($category eq 'bus/usb') {
