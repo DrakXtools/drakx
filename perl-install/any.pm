@@ -956,6 +956,19 @@ sub devfssymlinkf {
 UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 ");
 }
+sub devfs_rawdevice {
+    my ($o_if, $of, $prefix) = @_;
+
+    my $devfs_if = $o_if->{devfs_device};
+    $devfs_if ||= devices::to_devfs($o_if->{device});
+    $devfs_if ||= $o_if->{device};
+
+    output_p("$prefix/etc/devfs/conf.d/$of.conf", 
+"REGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script add /dev/$devfs_if /dev/$of
+UNREGISTER	^$devfs_if\$	EXECUTE /etc/dynamic/scripts/rawdevice.script del /dev/$of
+");
+}
+
 
 sub fileshare_config {
     my ($in, $type) = @_; #- $type is 'nfs', 'smb' or ''
@@ -1138,16 +1151,23 @@ sub alloc_raw_device {
 }
 
 sub config_dvd {
-    my ($prefix) = @_;
-    if (my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi()) {
-	log::l("configuring DVD");
-	#- create /dev/dvd symlink
-	each_index {
-	    devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
-	} @dvds;
-	if (my $raw_dev = alloc_raw_device($prefix, 'dvd')) {
-	    devfssymlinkf({ device => $raw_dev }, 'rdvd', $prefix);
-	}	
+    my ($prefix, $have_devfsd) = @_;
+
+    #- can't have both a devfs and a non-devfs config
+    #- the /etc/sysconfig/rawdevices solution gives errors with devfs
+
+    my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi() or return;
+
+    log::l("configuring DVD");
+    #- create /dev/dvd symlink
+    each_index {
+	devfssymlinkf($_, 'dvd' . ($::i ? $::i + 1 : ''), $prefix);
+	devfs_rawdevice($_, 'rdvd' . ($::i ? $::i + 1 : ''), $prefix) if $have_devfsd;
+    } @dvds;
+
+    if (!$have_devfsd) {
+	my $raw_dev = alloc_raw_device($prefix, 'dvd');
+	symlink($raw_dev, "$prefix/dev/rdvd");
     }
 }
 
