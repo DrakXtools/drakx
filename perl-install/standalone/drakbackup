@@ -84,7 +84,6 @@
 #
 #
 # TODO:
-#		  - remove user data before to restore it.
 #		4 - change NET::FTP to ftp cmds.  
 #		5 - add icons (win & lin) on adv_what_all.
 #	        6 - calcul disk space.
@@ -209,6 +208,7 @@ my $backup_bef_restore = 0;
 my $table;
 my @user_list_backuped = ();
 my @files_corrupted = ();
+my $remove_user_before_restore = 1;
 
 # config. FILES -> Default PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -216,7 +216,6 @@ my @user_list;
 my @list_other = () ;
 my $cfg_file = "/etc/drakxtools/drakbackup/drakbackup.conf";
 my $save_path = "/var/drakbackup";
-my $restore_path = "/tmp";
 my $comp_mode = 0;
 my $backup_sys = 1;
 my $backup_user = 1;
@@ -1700,12 +1699,28 @@ sub restore_aff_result {
 
 }
 
+sub return_path2 {
+    my ($username) = @_;
+    my $usr;
+    my $home_dir;
+    my $passwdfile = "/etc/passwd";
+    open (PASSWD, $passwdfile) or exit 1; 
+    while (defined(my $line = <PASSWD>)) {
+	chomp($line);
+	($usr,$home_dir) = (split(/:/, $line))[0,5];
+	last if ($usr eq $username); 
+    }
+    close (PASSWD);
+    return $home_dir;
+}
+
+
 sub restore_backend {
     my $untar_cmd;
     my $exist_problem = 0;
+    my $user_dir;
     if (grep /tar.gz$/, all($path_to_find_restore)) { $untar_cmd = 0; } 
     else { $untar_cmd = 1; }
-    
     if ($restore_user)  { 
 	if ($backup_user_versions) {
 	    select_user_data_to_restore();
@@ -1713,10 +1728,15 @@ sub restore_backend {
 		$exist_problem = 1;
 		restore_aff_backup_problems();
 	    } else {
-		foreach my $data_user_list (@user_list_to_restore) {
-#		    rm_rf(return_path($user)
-		    $untar_cmd or system(" tar xfz  $path_to_find_restore/$data_user_list -C $restore_path") ;
-		    $untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$data_user_list | tar xf -C $restore_path ") ;
+		foreach (@user_list_to_restore) {
+		    my ($tnom, $username, $theure2) = /^(\w+\_\w+\_user_)(.*)_(\d+\_\d+.*)$/;
+		    $DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
+		    if ($remove_user_before_restore) {
+			$user_dir = return_path2($username);
+			-d $user_dir and rm_rf($user_dir);
+		    }
+		    $untar_cmd or system(" tar xfz  $path_to_find_restore/$_ -C $restore_path") ;
+		    $untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ") ;
 		}
 	    }
 	}
@@ -2071,13 +2091,15 @@ sub restore_step2 {
 		     1, new Gtk::HBox(0,10),
 		     0, gtkset_sensitive(my $restore_path_entry = new Gtk::Entry(), $restore_other_path),
 		     ),
- 0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions  ),
+         0, gtkset_sensitive(my $check_backup_bef_restore = new Gtk::CheckButton(_("do new backup before restore (only for incremental backups.)")), $backup_sys_versions || $backup_user_versions  ),
+	 0, gtkset_sensitive(my $check_remove_user_dir = new Gtk::CheckButton(_("Remove users directories before restore.")), $sys_exist),
 	 1, new Gtk::VBox(0,10),
 	 ),
 	    );
     foreach  ([$check_restore_sys, \$restore_sys], 
 	      [$check_backup_bef_restore, \$backup_bef_restore],
 	      [$check_restore_user, \$restore_user],
+	      [$check_remove_user_dir, \$remove_user_before_restore ],
 	      [$check_restore_other, \$restore_other]) {
 	my $ref = $_->[1];
 	gtksignal_connect(gtkset_active($_->[0], ${$ref}), toggled => sub { 
