@@ -200,6 +200,10 @@ sub packagesOfMedium {
     my $medium = $packages->[2]{$mediumName};
     grep { $_->{medium} == $medium } @{$packages->[1]};
 }
+sub packagesToInstall {
+    my ($packages) = @_;
+    grep { pkgs::packageFlagSelected($_) && !pkgs::packageFlagInstalled($_) } values %{$packages->[0]};
+}
 
 #- selection, unselection of package.
 sub selectPackage($$;$$$) {
@@ -907,7 +911,7 @@ sub install($$$;$$) {
 	    c::rpmtransFree($trans);
 	};
 
-	c::rpmdepOrder($trans) or 
+	c::rpmdepOrder($trans) or
 	    cdie "error ordering package list: " . c::rpmErrorString(), sub {
 		&$close();
 		c::rpmdbClose($db);
@@ -918,6 +922,21 @@ sub install($$$;$$) {
 
 	my @probs = c::rpmRunTransactions($trans, $callbackOpen, $callbackClose, \&installCallback, 0);
 	log::l("rpmRunTransactions done");
+
+	my @badpkgs = map { $_->{file} } grep { !packageFlagInstalled($_) } @transToInstall;
+	@badpkgs > 0 and
+	  cdie _("The following packages have not been installed because of errors: %s", join("\n", @badpkgs)), sub {
+	      &$close();
+	      c::rpmdbClose($db);
+	  };
+	#- check for uninstalled package, avoid keeping them selected to avoid trying installing them
+	foreach (@transToInstall) {
+	    if (!packageFlagInstalled($_)) {
+		log::l("bad package $_->{file}");
+		packageSetFlagSelected($_, 0);
+	    }
+	}
+
 	&$close();
 	log::l("after close");
 	if (@probs) {

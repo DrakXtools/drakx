@@ -31,6 +31,9 @@ use log;
 #- package that have to be copied for proper installation (just to avoid changing cdrom)
 #- here XFree86 is copied entirey if not already installed, maybe better to copy only server.
 @needToCopy = qw(
+XFree86-8514 XFree86-AGX XFree86-Mach32 XFree86-Mach64 XFree86-Mach8 XFree86-Mono
+XFree86-P9000 XFree86-S3 XFree86-S3V XFree86-SVGA XFree86-W32 XFree86-I128
+XFree86-Sun XFree86-SunMono XFree86-Sun24 XFree86-3DLabs
 XFree86 dhcpxd pump ppp ypbind rhs-printfilters samba ncpfs kernel-fb
 );
 
@@ -61,6 +64,15 @@ sub relGetFile($) {
       "base/": "RPMS$asked_medium/";
     "Mandrake/$dir$_";
 }
+sub askChangeMedium($$) {
+    my ($method, $medium) = @_;
+    my $allow;
+    do {
+	local $::no_theme_change = 1; #- avoid changing theme here!
+	eval { $allow = changeMedium($method, $medium) };
+    } while ($@); #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
+    $allow;
+}
 sub errorOpeningFile($) {
     my ($file) = @_;
     $file eq 'XXX' and return; #- special case to force closing file after rpmlib transaction.
@@ -72,7 +84,7 @@ sub errorOpeningFile($) {
 	cat_("/proc/mounts") =~ m|(/tmp/\S+)\s+/tmp/rhimage| or return;
 	my $cdrom = $1;
 	ejectCdrom($cdrom);
-	while ($max > 0 && changeMedium($::o->{method}, $asked_medium)) {
+	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    eval { fs::mount($cdrom, "/tmp/rhimage", "iso9660", 'readonly') };
 	    my $getFile = getFile($file); $getFile and return $getFile;
@@ -81,7 +93,7 @@ sub errorOpeningFile($) {
 	    --$max;
 	}
     } else {
-	while ($max > 0 && changeMedium($::o->{method}, $asked_medium)) {
+	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    my $getFile = getFile($file); $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD image has been copied.
@@ -136,11 +148,13 @@ sub setup_postinstall_rpms($$) {
 
     require pkgs;
 
-    #- compute closure of unselected package that may be copied.
+    #- compute closure of unselected package that may be copied,
+    #- don't complain if package does not exists as it may happen
+    #- for the various architecture taken into account (X servers).
     my %toCopy;
     foreach (@needToCopy) {
 	my $pkg = pkgs::packageByName($packages, $_);
-	pkgs::selectPackage($packages, $pkg, 0, \%toCopy);
+	pkgs::selectPackage($packages, $pkg, 0, \%toCopy) if $pkg;
     }
 
     my @toCopy; push @toCopy, map { pkgs::packageByName($packages, $_) } keys %toCopy;

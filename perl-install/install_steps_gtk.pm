@@ -689,7 +689,8 @@ sub create_steps_window {
 			my $w = new Gtk::Button('');
 			$w->set_name($t);
 			$w->set_usize(0, 7);
-			gtksignal_connect($w, clicked => sub { 
+			gtksignal_connect($w, clicked => sub {
+			    $::no_theme_change and return; #- no theme wanted!
 			    $::setstep or return; #- just as setstep s
 			    install_theme($o, $t); die "theme_changed\n" 
 			});

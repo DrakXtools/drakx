@@ -357,6 +357,9 @@ sub choosePackages {
 
 	#- check pre-condition where base backage has to be selected.
 	pkgs::packageFlagSelected(pkgs::packageByName($o->{packages}, 'basesystem')) or die "basesystem package not selected";
+
+	#- check if there are package that need installation.
+	$o->{steps}{doInstallStep}{done} = 0 if $o->{steps}{doInstallStep}{done} && pkgs::packagesToInstall($o->{packages}) > 0;
     }
 }
 
