@@ -36,6 +36,13 @@ my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 );
 %shortspooler_inv = reverse %shortspooler;
 
+%lprcommand = (
+    "cups"   => "lpr-cups",
+    "lprng"  => "lpr-lpd",
+    "lpd"    => "lpr-lpd",
+    "pdq"    => "lpr-pdq"
+);
+
 %printer_type = (
     _("Local printer")                              => "LOCAL",
     _("Remote printer")                             => "REMOTE",
@@ -1687,7 +1694,7 @@ sub configurestaroffice {
 	("ports", "default_queue=", $configfilecontent);
     $configfilecontent = addentry
 	("ports",
-	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/lpr",
+	 "default_queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}}",
 	 $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
@@ -1752,7 +1759,7 @@ sub configureopenoffice {
 	("Generic Printer", "Command=", $configfilecontent);
     $configfilecontent = addentry
 	("Generic Printer", 
-	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/lpr",
+	 "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}}",
 	 $configfilecontent);
     # Write back OpenOffice.org configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
@@ -1932,7 +1939,7 @@ sub makestarofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry("ports", "$queue=", $configfile);
     $configfile = addentry("ports", 
-			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/lpr -P $queue",
+			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue",
 			   $configfile);
     # Make printer's section
     $configfile = addsection("$queue,PostScript,$queue", $configfile);
@@ -1999,7 +2006,7 @@ sub makeopenofficeprinterentry {
     # symbol correctly.
     $configfile = removeentry($queue, "Command=", $configfile);
     $configfile = addentry($queue, 
-			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/lpr -P $queue",
+			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$lprcommand{$printer->{SPOOLER}} -P $queue",
 			   $configfile);
     # "Comment" line 
     $configfile = removeentry($queue, "Comment=", $configfile);
