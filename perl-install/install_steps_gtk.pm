@@ -612,6 +612,7 @@ If you don't have it, press Cancel to avoid installation from this Cd-Rom.", $na
     catch_cdie { $install_result = $o->install_steps::installPackages($packages) }
       sub {
 	  log::l("catch_cdie: $@");
+          my $time = time();
 	  if ($@ =~ /^error ordering package list: (.*)/) {
 	      $o->ask_yesorno('', [
 N("There was an error ordering packages:"), $1, N("Go on anyway?") ], 1) and return 1;
@@ -622,6 +623,8 @@ N("There was an error installing packages:"), $1, N("Go on anyway?") ], 1) and r
 	      ${$_[0]} = "already displayed";
 	  }
 	  $w->destroy;
+          #- add the elapsed time (otherwise the predicted time will be rubbish)
+          $start_time += time() - $time;
 	  0;
       };
     if ($pkgs::cancel_install) {
