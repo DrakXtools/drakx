@@ -231,17 +231,34 @@ sub display_error {
 }
 
 sub interactive_mode() {
+	my $darea;
+	
     $window1 = ugtk2->new('drakTermServ');
     $window1->{rwindow}->signal_connect(delete_event => sub { ugtk2->exit(0) });
     unless ($::isEmbedded) {
         $window1->{rwindow}->set_position('center');
         $window1->{rwindow}->set_title(N("Mandrake Terminal Server Configuration"));
+		my $pixbuf_icon = gtkcreate_pixbuf("ic82-network-40");
+		$darea = Gtk2::DrawingArea->new;
+		$darea->set_size_request(540, 45);
+		$darea->modify_font(Gtk2::Pango::FontDescription->from_string('Sans Italic 24'));
+		my $layout = $darea->create_pango_layout(N("DrakTermServ"));
+    	$darea->signal_connect(realize => sub { 
+			set_back_pixbuf($darea, gtkcreate_pixbuf('title-tile')) 
+		});
+    	$darea->signal_connect(expose_event => sub {
+			my (undef, undef, $dx, $dy) = $darea->allocation->values;
+			$darea->window->draw_pixbuf($darea->style->white_gc, $pixbuf_icon, 0, 0, $dx - $pixbuf_icon->get_width, $dy - $pixbuf_icon->get_height, -1, -1, 'none', 0, 0);
+			my ($lx, $ly) = $layout->get_pixel_size;
+			$darea->window->draw_layout($darea->style->white_gc, ($dx-$lx)/2, ($dy-$ly)/2, $layout);
+			0;
+		});
     }
     $window1->{rwindow}->set_border_width(5);
 
     gtkadd($window1->{window},
 	   gtkpack_(gtkset_size_request(new Gtk2::VBox(0,2), 620, 400),
-		    if_(!$::isEmbedded, 0,  gtkcreate_img("drakTS.620x57")),
+		    if_(!$::isEmbedded, 0, $darea),
 		    1, gtkpack_(new Gtk2::HBox(0,2),
 				1, gtkpack_(new Gtk2::VBox(0,2),
 					    1, gtkpack($status_box = new Gtk2::VBox(0,5),
