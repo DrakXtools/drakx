@@ -1,3 +1,68 @@
+2002/07/22  Damien Chaumette  <dchaumette@mandrakesoft.com>
+
+	* network/tools.pm: hide password in adsl configuration
+
+2002/07/22  François Pons  <fpons@mandrakesoft.com>
+
+	* pkgs.pm: try avoiding infinite loop.
+
+2002/07/22  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/th.po, share/po/sl.po,
+	share/po/no.po, share/po/et.po, share/po/ja.po, share/po/hr.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/be.po,
+	share/po/uk.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/lt.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/bs.po, share/po/ro.po, share/po/wa.po,
+	share/po/is.po, share/po/af.po, share/po/az.po, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/pt.po, share/po/vi.po, share/po/fr.po,
+	share/po/it.po, share/po/nl.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/lv.po, share/po/hu.po: updated pot file
+
+	* share/po/cs.po: updated Czech file
+	updated pot file
+
+2002/07/22  Pixel  <pixel@mandrakesoft.com>
+
+	* c/Makefile, Newt/Makefile, resize_fat/Makefile: ensure things build as
+	they should when perl is upgraded on compilation box
+	(using a nice scheme: make || make)
+
+	* any.pm, mouse.pm, install2.pm, detect_devices.pm: when $::noauto,
+	hardwire no probing in detect_devices::probeall to ensure no probing is
+	never done
+
+	* help.pm, share/po/.cvsignore, share/po/Makefile, share/po/help-de.pot,
+	share/po/help-fr.pot, share/po/help-eu.pot, share/po/help-es.pot,
+	share/po/help-it.pot: 
+	  - update help.pm based on the xml manual
+	  - this fixes entities sticked together with no space in between
+	  - this also implies a few bad line-wrapping changes,
+	    but it needs to be done to have a clean state
+	    (we don't have one since 8.2beta where i updated things by hand)
+	  - put help-*.pot in CVS so that the files based on the xml manual can
+	be updated
+	  independently from DrakX.pot & .po's
+
+	* share/po/help_xml2pm.pl: 
+	  - use new PerlIO instead of iconv
+	  - transliterate by hand &ndash and &eacute
+	  - move "use utf8" at top
+	  - fix the spaces between entities
+	(eg: &company-microsoft; &os-windows; must not be MicrosoftWindows)
+
+2002/07/21  Pixel  <pixel@mandrakesoft.com>
+
+	* drakxtools.spec: new snapshot
+
+	* Xconfigurator.pm: fix multi-head auto-choosing in auto install
+
+	* install_any.pm: workaround "traverse_tag" pb in Resolve.pm
+	resolve_requested (is it ok??)
+
 2002/07/21  Pixel  <pixel@mandrakesoft.com>
 
 	* drakxtools.spec: new snapshot
