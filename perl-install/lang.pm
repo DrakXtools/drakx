@@ -75,15 +75,15 @@ my %languages = my @languages = (
 'he_IL.UTF-8' => [ 'Hebrew',		'iso-8859-8', 'he', 'he:iw_IL', 'UTF-8' ],
   'hr'  => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
   'hu'  => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
-#'hy_AM.ARMSCII-8'=> [ 'Armenian|ARMSCII-8','armscii-8','hy','hy' ],
-'hy_AM.UTF-8' => [ 'Armenian',     'armscii-8',     'hy', 'hy', 'UTF-8' ],
+#'hy_AM.ARMSCII-8'=> [ 'Armenian|ARMSCII-8','utf_hy','hy','hy' ],
+'hy_AM.UTF-8' => [ 'Armenian',     'utf_hy',     'hy', 'hy', 'UTF-8' ],
 #- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in_ID
 #- we catch the few catalog files still using the wrong code
   'id'  => [ 'Indonesian',		'iso-8859-1', 'id', 'id:in_ID' ],
   'is'  => [ 'Icelandic', 		'iso-8859-1', 'is', 'is' ],
 'it_CH' => [ 'Italian|Switzerland',	'iso-8859-15', 'it', 'it_IT:it' ],
 'it_IT' => [ 'Italian|Italy', 'iso-8859-15', 'it', 'it_IT:it' ],
-#-'iu'  => [ 'Inuktitut', 		'unicodeIU',  'iu', 'iu' ],
+#-'iu'  => [ 'Inuktitut', 		'utf_iu',  'iu', 'iu' ],
   'ja'  => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
 'ja_JP.UTF-8' => [ 'Japanese (UTF-8)',	'jisx0208',     'ja', 'ja_JP.ujis:ja', 'UTF-8' ],
 'ka_GE.UTF-8' => [ 'Georgian',  		'utf_ka',     'ka', 'ka', 'UTF-8' ],
@@ -91,7 +91,7 @@ my %languages = my @languages = (
   'ko'  => [ 'Korean',           'ksc5601',    'ko', 'ko' ],
 'ko_KR.UTF-8' => [ 'Korean (UTF-8)',       'ksc5601',     'ko', 'ko', 'UTF-8' ],
 #-'kw'	=> [ 'Cornish gaelic',		'iso-8859-14','kw', 'kw:en_GB:en' ],
-#-'lo'  => [ 'Laotian',			'mulelao-1',  'lo', 'lo' ],
+#-'lo'  => [ 'Laotian',			'utf_lo',  'lo', 'lo' ],
   'lt'  => [ 'Lithuanian',		'iso-8859-13', 'lt', 'lt' ],
   'lv'  => [ 'Latvian',			'iso-8859-13', 'lv', 'lv' ],   
   'mi'	=> [ 'Maori',			'iso-8859-13', 'mi', 'mi' ],
@@ -137,15 +137,15 @@ my %languages = my @languages = (
   'th'  => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8' => [ 'Thai (UTF-8)',         'tis620',     'th', 'th', 'UTF-8' ],
   'tr'  => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-#-'tt_RU.UTF-8' => [ 'Tatar',		'koi8-k',  'tt', 'tt' ],
+#-'tt_RU.UTF-8' => [ 'Tatar',		'utf_koi8-k',  'tt', 'tt' ],
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian|KOI8-U', 	'koi8-u',     'uk', 'uk_UA:uk' ],
 'uk_UA.CP1251' => [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
 'uk_UA.UTF-8' => [ 'Ukrainian|UTF-8',	'cp1251',   'uk', 'uk_UA:uk', 'UTF-8' ],
   'uz'  => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
-#'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'tcvn',     'vi', 'vi' ],
-#'vi_VN.VISCII' => [ 'Vietnamese|VISCII','viscii',   'vi', 'vi' ],
-'vi_VN.UTF-8' => [ 'Vietnamese',  'viscii',   'vi', 'vi', 'UTF-8' ],
+#'vi_VN.TCVN'  => [ 'Vietnamese|TCVN',   'utf_vi',     'vi', 'vi' ],
+#'vi_VN.VISCII' => [ 'Vietnamese|VISCII','utf_vi',   'vi', 'vi' ],
+'vi_VN.UTF-8' => [ 'Vietnamese',  'utf_vi',   'vi', 'vi', 'UTF-8' ],
   'wa'  => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 #- NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
@@ -256,7 +256,7 @@ sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 #- [4]: codepage parameter for mount (none if utf8)
 #- [5]: X11 fontset (for DrakX)
 my %charsets = (
-  "armscii-8"  => [ "arm8",		undef,	"armscii-8",
+  "utf_hy"  => [ "arm8",		undef,	"armscii-8",
 	 undef,	undef, std_("armscii-8") ],
 #- chinese needs special console driver for text mode
   "Big5"       => [ undef,		undef,		undef,
@@ -325,7 +325,7 @@ my %charsets = (
 	"tis-620", "874", std2("tis620.2533-1",12) ],
 #-  "tcvn"       => [ "tcvn8x16",		undef,		"tcvn",
 #-	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
-  "viscii"     => [ "tcvn8x16",	undef,	"viscii",
+  "utf_vi"     => [ "tcvn8x16",	undef,	"viscii",
 	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
 #- Tamil uses pseudo iso-8859-1 fonts
   "tscii" => [ "tamil",		undef,		"tscii-0",
@@ -375,7 +375,7 @@ my %lang2country = (
 );
 
 
-my @during_install__lang_having_their_LC_CTYPE = qw(ja ko th vi);
+my @during_install__lang_having_their_LC_CTYPE = qw(ja ko ta);
 
 #-######################################################################################
 #- Functions
@@ -520,13 +520,13 @@ my %charset2kde_font = (
   'gb2312' => [ "default-ming,16" ],
   'Big5' => [ "taipei-fixed,16" ],
   'tis620' => [ "misc-norasi,17", ],
-  'viscii' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
+  'utf_vi' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
   #- TSCII uses pseudo iso-8859-1 fonts, it is important to choose them
   #- correctly
   'tscii' => [ "tsc_avarangal,14", "tsc_avarangalfxd,10", "tsc_avarangal,12", ],
   #- the following should be changed to better defaults when better fonts
   #- get available
-  'armscii-8' => [ "clearlyu,17" ],
+  'utf_hy' => [ "clearlyu,17" ],
   'utf_ka' => [ "clearlyu,17" ],
   'default' => [ "misc-fixed,13", "misc-fixed,13", "misc-fixed,10", ],
 );
@@ -589,15 +589,15 @@ sub set {
 
 #- set all LC_* variables to a unique locale ("C"), and only redefine
 #- LC_CTYPE (for X11 choosing the fontset) and LANGUAGE (for the po files)
-	$ENV{$_} = 'en_US.UTF-8' foreach qw(LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
+	$ENV{$_} = 'C' foreach qw(LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION);
 
 #- use lang2LANG() to define LC_CTYPE, so DrakX will use a same encoding
 #- for all variations of a same language, eg both 'ru_RU.KOI8-R' and
 #- 'ru_RU.UTF-8' will be handled the same (as 'ru') by DrakX.
 #- that way DrakX only needs a reduced set of locale and fonts support.
 #- of course on the installed system they will be different.
-	$ENV{LC_CTYPE}  = 'en_US.UTF-8';
-	$ENV{LC_MESSAGES} = 'en_US.UTF-8';
+	$ENV{LC_CTYPE}  = lang2LANG($lang);
+	$ENV{LC_MESSAGES} = lang2LANG($lang);
 	$ENV{LANG}      = lang2LANG($lang);
 
 	if ($translate_for_console && $lang =~ /^(ko|ja|zh|th)/) {
@@ -833,10 +833,11 @@ sub during_install__lang2charset {
     return if member(lang2LANG($lang), @during_install__lang_having_their_LC_CTYPE);
 
     my ($c) = lang2charset($lang) or die "bad lang $lang\n";
-    $c = 'cp1251' if $c =~ /koi8-/;
-    $c = 'iso-8859-15' if member($c, 'iso-8859-1', 'C');
-    $c = 'UTF-8' if member($c, 'unicode', 'utf_ka');
-    $c = 'UTF-8' if member($c, 'armscii-8', 'iso-8859-9e', 'iso-8859-8', 'iso-8859-6'); #- BAD, need fixing
+    $c = 'UTF-8' if member($c, 'tis620', 'C');
+    $c = 'UTF-8' if $c =~ /koi8-/;
+    $c = 'UTF-8' if $c =~ /iso-8859/;
+    $c = 'UTF-8' if $c =~ /cp125/;
+    $c = 'UTF-8' if $c =~ /utf_/;
     uc($c);
 }
 
