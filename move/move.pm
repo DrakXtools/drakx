@@ -450,6 +450,8 @@ sub install2::configMove {
     modules::load_category('multimedia/sound');
     enable_service('sound');
 
+    detect_devices::isLaptop() or enable_service('numlock');
+
     $o->{useSupermount} = 1;
     fs::set_removable_mntpoints($o->{all_hds});    
     fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}));
