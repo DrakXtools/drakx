@@ -8,12 +8,21 @@ use interactive;
 use lang;
 use any;
 
-my $in = 'interactive'->vnew('su');
+my $in = 'interactive'->vnew;
 
-my ($lang, $langs) = lang::read();
+my $file = $> ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n';
+my ($lang, $langs) = lang::read('', $file);
+$langs = '' if $>;
 if ($lang = any::selectLanguage($in, $lang, $langs)) {
-    lang::write('', $lang);
-    lang::write_langs('', $langs);
+    lang::write('', $lang, $file, $>);
+    lang::write_langs('', $langs) if $langs;
+}
+
+if ($>) {
+    if (my $wm = any::running_window_manager()) {
+	$in->ask_warn('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1);
+	any::ask_window_manager_to_logout($wm);
+    }
 }
 
 $in->exit(0);
