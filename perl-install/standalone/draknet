@@ -20,7 +20,7 @@
 
 use Data::Dumper;
 use lib qw(/usr/lib/libDrakX);
-#use lib qw(..);
+use lib qw(..);
 
 use interactive;
 use standalone;
@@ -77,7 +77,7 @@ my $hbox1 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox1,1,1,0);
 $hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 my $combo1 = new Gtk::Combo;
-$combo1->set_popdown_strings (get_profiles() );
+$combo1->set_popdown_strings (netconnect::get_profiles() );
 my $old_profile=$netcnx->{PROFILE};
 $combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 $combo1->entry->set_editable(0);
@@ -105,7 +105,6 @@ $vbox_frame1->pack_start($table1,1,1,0);
 #attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
 $table1->attach(new Gtk::Label(_("Type:")), 0, 1, 0, 1, 'fill', 'fill',0,0);
-print "type : $netcnx->{type}\n";
 my $label4 = new Gtk::Label($netcnx->{type});
 $table1->attach($label4, 1, 2, 0, 1, 'fill', 'fill',0,0);
 my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
@@ -156,14 +155,6 @@ $vbox2->pack_start($clist1, 0, 0, 5);
 foreach (0..$#all_cards) {
 $clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 $clist1->set_selectable($_, 0);
-#    $table2->attach(new Gtk::Label(_("Network adaptater n°%s", $_+1) . " (eth$_):"), 0, 1, $i, $i+1, 'fill', 'fill',0,0);
-#    $table2->attach(new Gtk::Label($intf->{"eth${_}"}{IPADDR} . " (" . $intf->{"eth${_}"}{BOOTPROTO} . ")"), 1, 2, $i, $i+1, 'fill', 'fill',0,0);
-#    $netc->{NET_DEVICE} eq "eth$_" and $table2->attach( _("connected to internet by %s", $netcnx->{type}), 2, 3, $i, $i+1, 'fill', 'fill',0,0);
-    print "-----\n";
-    print $intf->{"eth${_}"}{DEVICE} . "\n";
-    print $intf->{"eth${_}"}{IPADDR} . "\n";
-    print $all_cards[$_]->[1] . "\n";
-    print "-----\n";
 }
 
 my $hbox3 = new Gtk::HBox(0,0);
@@ -193,7 +184,8 @@ $bbox1->set_layout(-end);
 my $button_wizard = new Gtk::Button "Wizard...";
 $button_wizard->signal_connect ( clicked => sub {
 				     $::isWizard = 1;
-				     netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
+				     system("draknet --wizard");
+# netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
 				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
 				 });
 $bbox1->add($button_wizard );
@@ -215,7 +207,6 @@ $button_cancel->signal_connect ( clicked => sub {
 				 });
 $bbox1->add($button_cancel);
 $combo1->entry->signal_connect( 'changed', sub {
-				    print "CHANGED\n";
 				    netconnect::set_profile('', $netcnx, $combo1->entry->get_text());
 				    netconnect::load_conf('', $netcnx, $netc, $intf);
 				    $netcnx->{$_}=$netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
@@ -225,6 +216,7 @@ $combo1->entry->signal_connect( 'changed', sub {
 
 $window1->show_all();
 Gtk->main;
+Gtk->exit(0);
 
 dd:
 netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
@@ -243,20 +235,6 @@ sub update {
 	$clist1->set_selectable($_, 0);
     }
     $clist1->thaw();
-}
-
-sub get_profiles {
-    my @a;
-    my $i=0;
-    foreach (glob("/etc/sysconfig/network-scripts/draknet_conf.*")) {
-	print "[$_]\n";
-	s/.*\.//;
-	print "$_\n";
-	$a[$i] = $_;
-	$i++;
-    }
-    @a;
-    #grep { s/.*?_//;}
 }
 
 sub quit_global {
@@ -314,7 +292,6 @@ sub configure_lan {
 	}
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
-	print "--eth$_\n";
 	my $hbox_local = new Gtk::HBox(0,0);
 	my $pix = new Gtk::Pixmap ($pix_eth_map, $pix_eth_mask);
 	$hbox_local->pack_start($pix,0,0,0);
@@ -329,7 +306,6 @@ sub configure_lan {
     $button_ok->signal_connect ( clicked => sub {
 				     my $i=0;
 				     foreach (@conf_data) {
-					 print ${$_->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
 					 ${$_->[1]}=$infos[2*$i+1]->get_text();
 					 $i++;
 				     }
@@ -446,8 +422,6 @@ sub configure_net {
 				     $i=0;
 				     foreach (@mask) {
 					 if ($_) {
-					     print $conf_data[$i]->[1] . "\n";
-					     print ${$conf_data[$i]->[1]} . " - " . $infos[2*$i+1]->get_text() . "\n";
 					     ${$conf_data[$i]->[1]}=$infos[2*$i+1]->get_text();
 					 }
 					 $i++;
