@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 1.1.8
-Release: 10mdk
+Release: 11mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -262,6 +262,16 @@ done
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Jul 25 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-11mdk
+- new XFdrake (pixel)
+- harddrake:
+	o devfs names
+	o scanner support;
+		* don't account scanners as unknown devices
+		* split scannerdrake:val into vendor and description
+		* don't display bogus "val:%HASH"
+- updated translations
+
 * Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-10mdk
 - harddrake :
 	o remove - between vendor and model for ibm eide disks
