@@ -752,7 +752,6 @@ sub gtkcreate_png {
     $f =~ m|.png$| or $f = "$f.png";
     if ($f !~ /\//) { -e "$_/$f" and $f = "$_/$f", last foreach icon_paths() }
     if ($use_pixbuf) {
-	print " - ugtk - INFO : rendering using gdkpixbuff\n";
 	my $pixbuf = Gtk::Gdk::Pixbuf->new_from_file($f) or die "gtkcreate_png: missing png file $f";
 	my ($width, $height) = ($pixbuf->get_width(), $pixbuf->get_height);
 	my $rw = gtkroot();
@@ -762,12 +761,10 @@ sub gtkcreate_png {
  	$pixbuf->render_threshold_alpha($bit, 0, 0, 0, 0, $width, $height, '127');
 	return ($pix, $bit);
     } elsif ($use_imlib) {
-	print " - ugtk - INFO : rendering using imlib1\n";
 	my $im = Gtk::Gdk::ImlibImage->load_image($f) or die "gtkcreate_png: missing png file $f";
 	$im->render($im->rgb_width, $im->rgb_height);
 	return ($im->move_image(), $im->move_mask);
     } else {
-	print " - ugtk - CRITICAL : no suitable library found\n";
 	die "gtkcreate_png: cannot find a suitable library for rendering png (imlib1 or gdk_pixbuf)";
     }
 }
