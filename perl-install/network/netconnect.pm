@@ -678,8 +678,8 @@ If you don't know, choose 'use pppoe'"),
                         # process static/dhcp ethernet devices:
                         if (!exists $adsl_devices{$ntf_name} && member($adsl_type, qw(manual dhcp))) {
                             $auto_ip = $adsl_type eq 'dhcp';
-                            $find_lan_module->();
                             $ethntf = $intf->{$ntf_name} ||= { DEVICE => $ntf_name };
+                            $find_lan_module->();
                             return 'lan_intf';
                         }
                         network::adsl::adsl_probe_info($netcnx, $netc, $adsl_type, $ntf_name);
