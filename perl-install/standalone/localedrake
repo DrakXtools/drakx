@@ -24,8 +24,8 @@ if ($ARGV[0] =~ /--kde_country=(.*)/) {
 	lang::write_langs('', $langs) if $langs;
 	if ($>) {
 	    if (my $wm = any::running_window_manager()) {
-		$in->ask_warn('', _("Please relog into %s to activate the changes", ucfirst (lc $wm)), 1);
-		any::ask_window_manager_to_logout($wm);
+		$in->ask_okcancel('', _("The change is done, but to be effective you must logout"), 1)
+		  && any::ask_window_manager_to_logout($wm);
 	    }
 	}
     }
