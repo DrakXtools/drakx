@@ -241,20 +241,45 @@ my %pll_lst =
 
 sub config {
     my ($in, $driver) = @_;
+
+    my $min_gbuffers = 2;
+    my $max_gbuffers = 32;
+
     my %conf = (gbuffers => 4, card => $default, tuner => -1, radio => 0, pll => -1);
+
+    my %cards_list = %{$cards_lst->{$driver}};
+    my %rvs_cards_list = reverse %cards_list;
+
+    # get the existing options (if there are any)
+    my $current = modules::get_options($driver);
+
+    foreach (split(/\s+/,$current)) {
+        $conf{$1} = $2 if /^(gbuffers|tuner|radio|pll)=(.+)/;
+        $conf{$1} = $rvs_cards_list{$2} if /^(card)=(.+)/;
+    }
+    
+    #Sanity checks on defaults
+    $conf{gbuffers} = max($min_gbuffers, $conf{gbuffers});
+    $conf{gbuffers} = min($max_gbuffers, $conf{gbuffers});
+    $conf{card}  = $default if !defined $cards_list{$conf{card}};
+    $conf{tuner} = -1 if !defined $tuners_lst{$conf{tuner}};
+    $conf{pll}   = -1 if !defined $pll_lst{$conf{tuner}};
+    $conf{radio} =  0 if $conf{radio} !~ /(0|1)/;
+
+
     if ($in->ask_from("BTTV configuration", N("For most modern TV cards, the bttv module of the GNU/Linux kernel just auto-detect the rights parameters.
 If your card is misdetected, you can force the right tuner and card types here. Just select your tv card parameters if needed."),
                       [
-                       { label => N("Card model:"), val => \$conf{card}, list => [keys %{$cards_lst->{$driver}}], type => 'combo', default => -1, sort =>1, separator => '|' },
+                       { label => N("Card model:"), val => \$conf{card}, list => [ keys %cards_list ], type => 'combo', default => -1, sort =>1, separator => '|' },
                        { label => N("Tuner type:"), val => \$conf{tuner}, list => [keys %tuners_lst], format => sub { $tuners_lst{$_[0]} }, sort => 1, separator => '|' },
-                       { label => N("Number of capture buffers:"), val => \$conf{gbuffers}, min => 2, max => 32, sort => 1, default => 0, type => 'range', advanced => 1, help => N("number of capture buffers for mmap'ed capture") },                    
+                       { label => N("Number of capture buffers:"), val => \$conf{gbuffers}, min => $min_gbuffers, max => $max_gbuffers, sort => 1, default => 0, type => 'range', advanced => 1, help => N("number of capture buffers for mmap'ed capture") },                    
                        if_($driver eq 'bttv',
                            { label => N("PLL setting:"), val => \$conf{pll}, list => [keys %pll_lst], format => sub { $pll_lst{$_[0]} }, sort => 1, default => 0, advanced =>1 },
                            { label => N("Radio support:"), val => \$conf{radio}, type => "bool", text => N("enable radio support") }),
                        ]
                       ))
     {
-        $conf{card} = $cards_lst->{$driver}{$conf{card}};
+        $conf{card} = $cards_list{$conf{card}};
 
         my $options = 
             'radio=' . ($conf{radio} ? 1 : 0) . ' ' .
