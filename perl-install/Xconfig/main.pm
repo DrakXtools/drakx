@@ -90,6 +90,11 @@ sub configure_chooser_raw {
 	    $X->{"modified_$field"} = 1;
 	    $modified = 1;
 	    $update_texts->();
+
+	    if (member($field, 'card', 'monitor')) {
+		Xconfig::screen::configure($raw_X, $X->{card});
+		$raw_X->set_resolution($X->{resolution}) if $X->{resolution};
+	    }
 	}
     };
 
@@ -102,11 +107,8 @@ sub configure_chooser_raw {
 		    { label => _("Monitor"), val => \$texts{monitor}, icon => "ic82-systemeplus-40", clicked => sub { 
 			  $may_set->('monitor', Xconfig::monitor::configure($in, $raw_X));
 		      } },
-		    { label => _("Resolution"), val => \$texts{resolution}, icon => "X", disabled => sub { !$X->{card} || !$X->{monitor} }, 
+		    { label => _("Resolution"), val => \$texts{resolution}, icon => "X", disabled => sub { !$X->{card} || !$X->{monitor} },
 		      clicked => sub {
-			  if (grep { delete $X->{"modified_$_"} } 'card', 'monitor') {
-			      Xconfig::screen::configure($raw_X, $X->{card});
-			  }
 			  $may_set->('resolution', Xconfig::resolution_and_depth::configure($in, $raw_X, $X->{card}, $X->{monitor}));
 		      } },
 		    { val => _("Test"), icon => "warning", disabled => sub { !$X->{card} || !$X->{monitor} || !$modified || !Xconfig::card::check_bad_card($X->{card}) },
