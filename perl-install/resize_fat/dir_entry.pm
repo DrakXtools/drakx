@@ -6,7 +6,7 @@ use strict;
 
 my $DELETED_FLAG      = 0xe5;
 
-my $READ_ONLY_ATTR    = 0x01;
+my $_READ_ONLY_ATTR   = 0x01;
 my $HIDDEN_ATTR       = 0x02;
 my $SYSTEM_ATTR       = 0x04;
 my $VOLUME_LABEL_ATTR = 0x08;

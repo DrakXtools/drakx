@@ -108,7 +108,7 @@ my %default_callback = (changed => sub {}, focus_out => sub {}, complete => sub 
 
 
 sub process {
-    my ($w, $o, $in) = @_;
+    my ($_w, $o, $in) = @_;
     local $::isWizard = 1;
     local $::Wizard_title = $o->{name} || $::Wizard_title;
     local $::Wizard_pix_up = $o->{defaultimage} || $::Wizard_pix_up;

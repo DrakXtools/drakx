@@ -13,7 +13,6 @@ use log;
 
 my $script_name = $ENV{INTERACTIVE_HTTP};
 my $no_header;
-my $uid;
 my $pipe_r = "/tmp/interactive_http_r";
 my $pipe_w = "/tmp/interactive_http_w";
 

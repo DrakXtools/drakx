@@ -25,7 +25,6 @@ my %typeToDos = (
   "Apple_UNIX_SVR2"     => 0x483,
   "Apple_Free"		=> 0x0,
 );
-my %typeFromDos = reverse %typeToDos;
 
 
 my ($bz_format, $bz_fields) = list2kv(

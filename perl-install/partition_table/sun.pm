@@ -34,7 +34,6 @@ $main_format = join '', @$main_format;
 
 my ($fields1, $fields2) = ([ qw(type flags) ], [ qw(start_cylinder size) ]);
 my ($format1, $format2) = ("xCxC", "N2");
-my ($size1, $size2) = map { psizeof($_) } ($format1, $format2);
 my $magic = 0xDABE;
 my $nb_primary = 8;
 my $offset = 0;
