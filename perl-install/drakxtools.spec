@@ -51,10 +51,10 @@ server. It works on console and under X :)
 It autodetects both monitor and video card if possible.
 
 diskdrake: The purpose of the DiskDrake project is to make hard disk
-partitioning easier. It is graphical, simple and powerful. Different skill
-levels are available (newbie, advanced user, expert). It's written entirely
-in Perl and Perl/Gtk. It uses resize_fat which is a perl rewrite of the work of
-Andrew Clausen (libresize).
+partitioning easier. It is graphical, simple and powerful. Different
+skill levels are available (newbie, advanced user, expert). It's
+written entirely in Perl and Perl/Gtk. It uses resize_fat which is a
+perl rewrite of the work of Andrew Clausen (libresize).
 
 drakbackup: backup and restore your system.
 
@@ -62,15 +62,15 @@ drakfont: import some fonts in the system.
 
 keyboarddrake: configures your keyboard (both console and X)
 
-lspcidrake: displays your pci information, *and* the corresponding kernel
-module.
+lspcidrake: displays your pci information, *and* the corresponding
+kernel module.
 
 mousedrake: configures and autodetects your mouse
 
 printerdrake: detects and configures your printer
 
-draknet: LAN/Internet connection configuration. It handles ethernet, ISDN, DSL,
-cable, modem.
+draknet: LAN/Internet connection configuration. It handles ethernet,
+ISDN, DSL, cable, modem.
 
 liveupdate: live update software.
 
@@ -110,9 +110,8 @@ cp pam.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/pam.d/net_monitor
 cp apps.net_monitor $RPM_BUILD_ROOT%{_sysconfdir}/security/console.apps/net_monitor
 
 dirs1="usr/lib/libDrakX usr/share/libDrakX"
-dirs2="$dirs1 usr/bin usr/sbin"
 (cd $RPM_BUILD_ROOT ; find $dirs2 ! -type d -printf "/%%p\n") > %{name}.list
-(cd $RPM_BUILD_ROOT ; find $dirs1   -type d -printf "%%%%dir /%%p\n") >> %{name}.list
+(cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
 perl -ni -e '/gtk|icons|pixmaps|XFdrake|bootlook|drakbackup|drakfont|logdrake|net_monitor/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
@@ -132,8 +131,6 @@ EOF
 
 %find_lang libDrakX
 
-# can't give 2 list of files, so add mo's to the list
-cat libDrakX.lang >> %{name}.list
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -170,7 +167,7 @@ done
 %clean_menus
 
 
-%files newt -f %{name}.list
+%files newt -f %{name}.list -f libDrakX.lang
 %defattr(-,root,root)
 %config(noreplace) /etc/security/fileshare.conf
 %doc diskdrake/diskdrake.html
