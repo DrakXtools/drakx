@@ -598,27 +598,27 @@ sub kdeicons_postinstall($) {
     foreach (<F>) {
 	if (/^\/dev\/(\S+)\s+\/mnt\/cdrom (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/cdrom.fsdev.kdelnk.in", "Desktop/Cd-Rom". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/zip (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/zip.fsdev.kdelnk.in", "Desktop/Zip". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/floppy (\d*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2 );
-	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/floppy.fsdev.kdelnk.in", "Desktop/Floppy". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/mnt\/cdrom (\d*)\s+\/mnt\/cdrom\d*\s+supermount/x) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/cdrom.kdelnk.in", "Desktop/Cd-Rom". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/mnt\/zip (\d*)\s+\/mnt\/zip\d*\s+supermount/x) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/zip.kdelnk.in", "Desktop/Zip". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/mnt\/floppy (\d*)\s+\/mnt\/floppy\d*\s+supermount/x) {
 	    my %toreplace = ( id => $1 );
-	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($2 && "_$2") ."kdelnk",
+	    template2userfile($prefix, "/usr/share/floppy.kdelnk.in", "Desktop/Floppy". ($2 && "_$2") .".kdelnk",
 			      1, %toreplace);
 	} elsif (/^\/dev\/(\S+)\s+\/mnt\/DOS_ (\S*)\s+/x) {
 	    my %toreplace = ( device => $1, id => $2, mntpoint => "/mnt/DOS_$2" );
