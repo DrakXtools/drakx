@@ -22,19 +22,18 @@ system('drvinst'); #- class2text seems broken, I can't detect easily only module
 
 print "\nPlease wait, trying to find your root device...\n";
 
-my $target = '/mnt/sysimage';
-(-d $target) or mkdir($target) or die "couldn't create $target\n";
+my $target = '/mnt';
+-d $target || mkdir($target) or die "couldn't create $target\n";
 
 
-my @parts = cat_('/proc/partitions');
-splice @parts, 0, 2; #- doesn't contain partitions
+my (undef, undef, @parts) = cat_('/proc/partitions');
 
 my @fstab;
 my $root;
 
-for my $dirtypart (@parts) {
-    next if $dirtypart !~ /^\s*\w+\s+\w+\s+\w+\s+(\w+)\s/;
-    my $dev = "/dev/$1";
+M: foreach (@parts) {
+    my $dev = (split)[3] or next;
+    $dev = "/dev/$dev";
 
     for my $fs ('ext2', 'reiserfs') {
 	my $where = $target;
@@ -43,26 +42,27 @@ for my $dirtypart (@parts) {
 		print "Found a probable root partition on $dev (type $fs)\n";
 		@fstab = cat_("$where/etc/fstab");
 		$root = $dev;
+		last M;
 	    } else {
-		system('umount', $where) and die "error unmounting $mntpoint: $!\n";
+		system('umount', $where) and die "error unmounting $where\n";
 	    }
 	    last;
 	}
     }
-    last if @fstab;
 }
 
 if ($root) {
     print "\nMounting other partition from fstab on $target...\n";
-    for my $fstabline (@fstab) {
-	my ($dev, $where, $type, $opts) = $fstabline =~ /^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s/;
-	next if (!$type || $dev eq 'none' || $where eq '/' || $type eq 'supermount' ||
-		 $type eq 'swap' || $type eq 'nfs' || $where =~ /cdrom/ ||
-		 $where =~ /floppy/ || $opts =~ /noauto/ || $where =~ /proc/ ||
-		 $where =~ /mnt\/zip/);
-	$opts = join(',', grep { !/codepage=/ && !/iocharset/ } split(/,/, $opts)); #- vfat opts, we don't have the modules in rescue
-	$where = "/mnt/sysimage$where";
-	(-d $where) or mkdir($where) or die "couldn't create $where\n";
+    foreach (@fstab) {
+	my ($dev, $where, $type, $opts) = split;
+	next if (!$type || $dev eq 'none' || $opts =~ /noauto/ ||
+                 $type =~ /^(supermount|swap|nfs)$/ ||
+                 $where eq '/' ||
+                 $where =~ m,proc|cdrom|floppy|/mnt/zip,
+		 );
+	$opts = join(',', grep { !/codepage=/ && !/iocharset/ } split(',', $opts)); #- vfat opts, we don't have the modules in rescue
+	$where = "$target$where";
+	-d $where || mkdir($where) or die "couldn't create $where\n";
 	print "Mounting $dev on $where type $type\n";
 	system("mount -t $type $dev $where -o $opts");
     }
@@ -74,6 +74,9 @@ if ($root) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.2  2001/06/10 22:41:21  prigaux
+#- pixelization (tested!)
+#-
 #- Revision 1.1  2001/06/10 21:08:33  gc
 #- - add 'guessmounts' that mimics RH's detecting of partitions when rescue starts
 #-
