@@ -352,6 +352,9 @@ sub write_on_pixmap {
     my ($pixmap, $x_pos, $y_pos, @text)=@_;
     my ($gdkpixmap, $gdkmask) = $pixmap->get();
     my ($width, $height) = (540, 250); #($pixmap->allocation->[2], $pixmap->allocation->[3]);
+    my $gc = Gtk::Gdk::GC->new(gtkroot());
+    $gc->set_foreground(gtkcolor(8448, 17664, 40191)); #- in hex : 33, 69, 157
+
     my $darea= new Gtk::DrawingArea();
     $darea->size($width, $height);
     $darea->set_usize($width, $height);
@@ -362,10 +365,10 @@ sub write_on_pixmap {
 	$style->font(Gtk::Gdk::Font->fontset_load(_("-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*")));
 	my $y_pos2= $y_pos;
   	foreach (@text) {
-  	    $gdkpixmap->draw_string($style->font, $darea->style->black_gc, $x_pos, $y_pos2, $_);
+  	    $gdkpixmap->draw_string($style->font, $gc, $x_pos, $y_pos2, $_);
   	    $y_pos2 += 20;
   	}
-	my $first_time=0;
+	$first_time=0;
     };
     $darea->signal_connect(expose_event => sub { $first_time and &$draw();
 						 $darea->window->draw_pixmap
