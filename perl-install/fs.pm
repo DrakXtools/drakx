@@ -453,7 +453,7 @@ sub set_default_options {
 
 	put_in_hash($options, {
 			       user => 1, noexec => 0,
-			      }) if !exists $part->{rootDevice}; # partition means no removable media
+			      }) if $is_removable;
 
 	put_in_hash($options, {
 			       'umask=0' => $security < 3, 'iocharset=' => $iocharset, 'codepage=' => $codepage,
