@@ -96,16 +96,23 @@ sub invCorrectSize { ($_[0] - $C) / $B }
 sub selectedSize {
     my ($packages) = @_;
     my $size = 0;
+    my %skip;
     #- take care of packages selected...
     foreach (@{$packages->{depslist}}) {
-	$_->flag_selected and $size += $_->size;
+	if ($_->flag_selected) {
+	    $size += $_->size;
+	    #- if a package is obsoleted with the same name it should
+	    #- have been selected, so a selected new package obsoletes
+	    #- all the old package.
+	    exists $skip{$_->name} and next; $skip{$_->name} = undef;
+	    $size -= $packages->{sizes}{$_->name};
+	}
     }
     #- but remove size of package being obsoleted or removed.
-    foreach (keys %{$packages->{state}{obsoleted}}) {
-	/(.*)\.[^\.]*$/ and $size -= $packages->{sizes}{$1};
-    }
-    foreach (keys %{$packages->{state}{ask_remove}}) {
-	$size -= $packages->{sizes}{$_};
+    foreach ((map { /(.*)\.[^\.]*$/ } keys %{$packages->{state}{obsoleted}}), keys %{$packages->{state}{ask_remove}}) {
+	my ($name) = /(.*)-[^\-]*-[^\-]*$/ or next;
+	exists $skip{$name} and next; $skip{$name} = undef;
+	$size -= $packages->{sizes}{$name};
     }
     $size;
 }
@@ -670,8 +677,9 @@ sub computeGroupSize {
 
 	#- determine the packages that will be selected when selecting $p.
 	#- make a fast selection (but potentially erroneous).
+	#- installed and upgrade flags must have been computed (see compute_installed_flags).
 	my %newSelection;
-	unless ($p->flag_available) {
+	unless ($p->flag_installed && !$p->flag_upgrade) {
 	    my @l2 = ($p->id);
 	    my $id;
 
@@ -684,16 +692,14 @@ sub computeGroupSize {
 		    my ($candidate_id, $prefer_id);
 		    foreach (keys %{$packages->{provides}{$_} || {}}) {
 			my $ppkg = $packages->{depslist}[$_] or next;
-			if ($ppkg->flag_available) {
-			    $candidate_id = undef;
-			    last;
-			} else {
-			    exists $preferred{$ppkg->name} and $prefer_id = $_;
-			    $ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
-			    $candidate_id = $_;
-			}
+			$ppkg->flag_installed && !$p->flag_upgrade and $prefer_id = $candidate_id = undef, last;
+			exists $preferred{$ppkg->name} and $prefer_id = $_;
+			$ppkg->name =~ /kernel-\d/ and $prefer_id ||= $_;
+			$candidate_id = $_;
 		    }
-		    push @l2, $prefer_id || $candidate_id;
+		    if (defined $prefer_id || defined $candidate_id) {
+			push @l2, defined $prefer_id ? $prefer_id : $candidate_id;
+		    }
 		}
 	    }
 	}
@@ -712,7 +718,7 @@ sub computeGroupSize {
     while (my ($k, $v) = each %group) {
 	my $pkg = packageByName($packages, $k) or next;
 	push @{$pkgs{$v}}, $k;
-	$sizes{$v} += $pkg->size;
+	$sizes{$v} += $pkg->size - $packages->{sizes}{$pkg->name};
     }
     log::l(sprintf "%s %dMB %s", $_, $sizes{$_} / sqr(1024), join(',', @{$pkgs{$_}})) foreach keys %sizes;
     \%sizes, \%pkgs;
@@ -790,11 +796,10 @@ sub selectPackagesAlreadyInstalled {
 
     log::l("computing installed flags and size of installed packages");
     $packages->{sizes} = $packages->compute_installed_flags($packages->{rpmdb});
-    ref $packages->{sizes} or $packages->{sizes} = {}; #- safe guard for right perl-URPM TO BE REMOVED SOON
 }
 
 sub selectPackagesToUpgrade {
-    my ($packages, $prefix, $base, $toRemove, $toSave) = @_;
+    my ($packages, $prefix) = @_;
 
     log::l("selecting packages to upgrade");
 
