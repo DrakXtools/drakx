@@ -223,8 +223,9 @@ done
 %postun -n harddrake-ui
 %clean_menus
 
-%triggerpostun -n harddrake -- harddrake <= 1.1.8-8mdk
-%_sbindir/convert-harddrake
+%postun -n harddrake
+file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
+	%_sbindir/convert-harddrake
 
 %files newt -f %name.list
 %defattr(-,root,root)
