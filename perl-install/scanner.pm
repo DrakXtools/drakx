@@ -18,7 +18,7 @@ package scanner;
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
 # pbs/TODO:
-# - no scsi support
+# - scsi mis-configuration
 # - devfs use dev_is_devfs()
 # - with 2 scanners same manufacturer -> will overwrite previous conf -> only 1 conf !!
 # - lp: see printerdrake
