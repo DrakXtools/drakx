@@ -46,7 +46,7 @@ our @tree =
      ["UNKNOWN","Unknown/Others", "unknown.png", "", \&unknown, 0 ],
 
      ["PRINTER","Printer", "hw_printer.png", "$sbindir/printerdrake", sub { 
-         require printerdrake; printerdrake::detect() }, 0 ],
+         require printer::detect; printer::detect::detect() }, 0 ],
      ["SCANNER","Scanner", "scanner.png", "$sbindir/scannerdrake", sub { 
          require scanner; scanner::detect() }, 0 ],
      ["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { 
