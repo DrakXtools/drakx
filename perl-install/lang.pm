@@ -21,7 +21,8 @@ my %languages = (
 'en_GB' => [ 'English (UK)',		'iso-8859-1', 'en', 'en_GB:en' ],
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
-  'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg' ],
+#- provide aliases for some not very standard names used in po files...
+  'bg'  => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:es:fr_FR:fr' ],
   'cs'  => [ 'Czech',			'iso-8859-2', 'cs', 'cs' ],
@@ -43,7 +44,7 @@ my %languages = (
 'fr_CA' => [ 'French (Canada)',		'iso-8859-1', 'fr', 'fr_CA:fr' ],
 'fr_FR' => [ 'French (France)',		'iso-8859-1', 'fr', 'fr_FR:fr' ],
   'ga'  => [ 'Gaeilge (Irish)',		'iso-8859-14','ga', 'ga:en_IE:en' ],
-#-'gd'  => [ 'Sottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
+#-'gd'  => [ 'Scottish gaelic',		'iso-8859-14','gd', 'gd:en_GB:en' ],
   'gl'  => [ 'Galician',		'iso-8859-1', 'gl', 'gl:es_ES:pt_PT:pt_BR:es:pt' ],
 #-'gv'	=> [ 'Manx gaelic',		'iso-8859-14','gv', 'gv:en_GB:en' ],
 #- 'iw' was the old code for hebrew language
