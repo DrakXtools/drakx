@@ -2856,7 +2856,7 @@ sub setup_default_spooler {
 	return;
     }
     if ($printer->{SPOOLER} ne $oldspooler) {
-	# Remove the local printers from Star Office/OpenOffice.org
+	# Remove the local printers from Star Office/OpenOffice.org/GIMP
 	printer::removelocalprintersfromapplications($printer);
 	# Get the queues of this spooler
 	{
@@ -3077,7 +3077,7 @@ sub main {
 			 messages =>
 			     ($noprinters ? "" :
 			      (($printer->{SPOOLER} eq "cups") ?
-			       _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star Office/OpenOffice.org.") :
+			       _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star Office/OpenOffice.org/GIMP.") :
 			       _("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."))),
 			 cancel => (""),
 			 ok => (""),
@@ -3398,8 +3398,8 @@ What do you want to modify on this printer?",
 				   (($queue ne $printer->{DEFAULT}) ?
 				    _("Set this printer as the default") : ()),
 				   ($printer->{configured}{$queue} ? () :
-				    (_("Add this printer to Star Office/OpenOffice.org"),
-				     _("Remove this printer from Star Office/OpenOffice.org"))),
+				    (_("Add this printer to Star Office/OpenOffice.org/GIMP"),
+				     _("Remove this printer from Star Office/OpenOffice.org/GIMP"))),
 				   _("Print test pages"),
 				   _("Know how to use this printer"),
 				   ($printer->{configured}{$queue} ?
@@ -3476,23 +3476,23 @@ What do you want to modify on this printer?",
 		    printer::set_default_printer($printer);
 		    $in->ask_warn(_("Default printer"),
 				  _("The printer \"%s\" is set as the default printer now.", $queue));
-		} elsif ($modify eq _("Add this printer to Star Office/OpenOffice.org")) {
+		} elsif ($modify eq _("Add this printer to Star Office/OpenOffice.org/GIMP")) {
 		    if (printer::addcupsremotetoapplications
 			($printer, $queue)) {
-			$in->ask_warn(_("Adding printer to Star Office/OpenOffice.org"),
-				      _("The printer \"%s\" was successfully added to Star Office/OpenOffice.org.", $queue));
+			$in->ask_warn(_("Adding printer to Star Office/OpenOffice.org/GIMP"),
+				      _("The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP.", $queue));
 		    } else {
-			$in->ask_warn(_("Adding printer to Star Office/OpenOffice.org"),
-				      _("Failed to add the printer \"%s\" to Star Office/OpenOffice.org.", $queue));
+			$in->ask_warn(_("Adding printer to Star Office/OpenOffice.org/GIMP"),
+				      _("Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP.", $queue));
 		    }
-		} elsif ($modify eq _("Remove this printer from Star Office/OpenOffice.org")) {
+		} elsif ($modify eq _("Remove this printer from Star Office/OpenOffice.org/GIMP")) {
 		    if (printer::removeprinterfromapplications
 			($printer, $queue)) {
-			$in->ask_warn(_("Removing printer from Star Office/OpenOffice.org"),
-				      _("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org.", $queue));
+			$in->ask_warn(_("Removing printer from Star Office/OpenOffice.org/GIMP"),
+				      _("The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/GIMP.", $queue));
 		    } else {
-			$in->ask_warn(_("Removing printer from Star Office/OpenOffice.org"),
-				      _("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org.", $queue));
+			$in->ask_warn(_("Removing printer from Star Office/OpenOffice.org/GIMP"),
+				      _("Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP.", $queue));
 		    }
 		} elsif ($modify eq _("Print test pages")) {
 		    print_testpages($printer, $in, $upNetwork);
