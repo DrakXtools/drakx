@@ -44,7 +44,7 @@ use Data::Dumper;
 
 =cut
 
-use common qw(:common :system);
+use common qw(:common :system :file);
 use commands;
 
 #-#####################################################################################
@@ -281,7 +281,7 @@ sub read_printer_db(;$) {
     %thedb and return;
 
     my %available_devices; #- keep only available devices in our database.
-    local *AVAIL; open AVAIL, "chroot ". ($prefix || '/') ." /usr/bin/gs --help |";
+    local *AVAIL; open AVAIL, (!$::testing && "chroot ") . "$prefix/usr/bin/gs --help |";
     foreach (<AVAIL>) {
 	if (/^Available devices:/ ... /^\S/) {
 	    @available_devices{split /\s+/, $_} = () if /^\s+/;
@@ -336,7 +336,6 @@ sub read_printer_db(;$) {
     @entry_db_description = map { $printer::thedb{$_}{DESCR} } @entries_db_short;
     %descr_to_db          = map { $printer::thedb{$_}{DESCR}, $_ } @entries_db_short;
     %db_to_descr          = reverse %descr_to_db;
-
 }
 
 
@@ -403,19 +402,22 @@ my $intro_printcap_test = "
 ";
 
 sub read_configured_queue($) {
-    my ($entry) = @_;
+    my ($printer) = @_;
     my $current = undef;
+    my $flush_current = sub {
+	if ($current) {
+	    add2hash($printer->{configured}{$current->{QUEUE}} ||= {}, $current);
+	    $current = undef;
+	}
+    };
 
     #- read /etc/printcap file.
-    local *PRINTCAP; open PRINTCAP, "$prefix/etc/printcap" or die "Can't open printcap file $!";
+    local *PRINTCAP; open PRINTCAP, "$prefix/etc/printcap" or die "Can't open $prefix/etc/printcap file: $!";
     foreach (<PRINTCAP>) {
 	chomp;
 	my $p = '(?:\{(.*?)\}|(\S+))';
 	if (/^##PRINTTOOL3##\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p\s+$p(?:\s+$p)?/) {
-	    if ($current) {
-		add2hash($entry->{configured}{$current->{QUEUE}} ||= {}, $current);
-		$current = undef;
-	    }
+	    &$flush_current;
 	    $current = {
 			TYPE => $1 || $2,
 			GSDRIVER => $3 || $4,
@@ -426,58 +428,104 @@ sub read_configured_queue($) {
 			BITSPERPIXEL => $13 || $14,
 			CRLF => $15 || $16,
 		       };
-	} elsif (/^([^:]*):\\/) {
-	    $current->{QUEUE} = $1;
-	} elsif (/^\s+:sd=([^:]*):\\/) {
-	    $current->{SPOOLDIR} = $1;
-	} elsif (/^\s+:lp=([^:]*):\\/) {
-	    $current->{DEVICE} = $1;
-	} elsif (/^\s+:rm=([^:]*):\\/) {
-	    $current->{REMOTEHOST} = $1;
-	} elsif (/^\s+:rp=([^:]*):\\/) {
-	    $current->{REMOTEQUEUE} = $1;
-	}
+	} elsif (/^\s*$/) { &$flush_current }
+	elsif (/^([^:]*):\\/) { $current->{QUEUE} = $1 }
+	if (/^\s+:(?:[^:]*:)*sd=([^:]*):/) { $current->{SPOOLDIR} = $1 }
+	if (/^\s+:(?:[^:]*:)*lp=([^:]*):\\/) { $current->{DEVICE} = $1 }
+	if (/^\s+:(?:[^:]*:)*rm=([^:]*):\\/) { $current->{REMOTEHOST} = $1 }
+	if (/^\s+:(?:[^:]*:)*rp=([^:]*):\\/) { $current->{REMOTEQUEUE} = $1 }
+	if (/^\s+:(?:[^:]*:)*af=([^:]*):\\/) { $current->{AF} = $1 }
+	if (/^\s+:(?:[^:]*:)*if=([^:]*):\\/) { $current->{IF} = $1 }
     }
-    if ($current) {
-	add2hash($entry->{configured}{$current->{QUEUE}} ||= {}, $current);
-	$current = undef;
+    close PRINTCAP;
+    &$flush_current;
+
+    #- parse general.cfg for any configured queue.
+    foreach (values %{$printer->{configured}}) {
+	my $entry = $_;
+	local *F; open F, "$prefix$entry->{SPOOLDIR}/general.cfg" or next;
+	foreach (<F>) {
+	    chomp;
+	    if (/^\s*(?:export\s+)PRINTER_TYPE=(.*?)\s*$/) { $entry->{TYPE} = $1 unless defined $entry->{TYPE} }
+	    elsif (/^\s*(?:export\s+)ASCII_TO_PS=(.*?)\s*$/) { $entry->{ASCII_TO_PS} = $1 eq 'YES' unless defined $entry->{ASCII_TO_PS} }
+	    elsif (/^\s*(?:export\s+)PAPER_SIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
+	}
+	close F;
+    }
+
+    #- parse postscript.cfg for any configured queue.
+    foreach (values %{$printer->{configured}}) {
+	my $entry = $_;
+	local *F; open F, "$prefix$entry->{SPOOLDIR}/postscript.cfg" or next;
+	foreach (<F>) {
+	    chomp;
+	    if (/^\s*(?:export\s+)GSDEVICE=(.*?)\s*$/) { $entry->{DBENTRY} = $thedb_gsdriver{$1}{ENTRY} unless defined $entry->{DBENTRY} }
+	    elsif (/^\s*(?:export\s+)RESOLUTION=(.*?)\s*$/) { $entry->{RESOLUTION} = $1 unless defined $entry->{RESOLUTION} }
+	    elsif (/^\s*(?:export\s+)COLOR=-dBitsPerPixel=(.*?)\s*$/) { $entry->{COLOR} = $1 unless defined $entry->{COLOR} }
+	    elsif (/^\s*(?:export\s+)COLOR=(.*?)\s*$/) { $entry->{COLOR} = $1 ? $1 : 'Default' unless defined $entry->{COLOR} }
+	    elsif (/^\s*(?:export\s+)PAPERSIZE=(.*?)\s*$/) { $entry->{PAPERSIZE} = $1 unless defined $entry->{PAPERSIZE} }
+	    elsif (/^\s*(?:export\s+)EXTRA_GS_OPTIONS=(.*?)\s*$/) { $entry->{EXTRA_GS_OPTIONS} = $1 unless defined $entry->{EXTRA_GS_OPTIONS}; $entry->{EXTRA_GS_OPTIONS} =~ s/^\"(.*)\"/$1/ }
+	    elsif (/^\s*(?:export\s+)REVERSE_ORDER=(.*?)\s*$/) { $entry->{REVERSE_ORDER} = $1 unless defined $entry->{REVERSE_ORDER} }
+	    elsif (/^\s*(?:export\s+)PS_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} eq 'PostScript' unless defined $entry->{AUTOSENDEOF} }
+	    elsif (/^\s*(?:export\s+)NUP=(.*?)\s*$/) { $entry->{NUP} = $1 unless defined $entry->{NUP} }
+	    elsif (/^\s*(?:export\s+)RTLFTMAR=(.*?)\s*$/) { $entry->{RTLFTMAR} = $1 unless defined $entry->{RTLFTMAR} }
+	    elsif (/^\s*(?:export\s+)TOPBOTMAR=(.*?)\s*$/) { $entry->{TOPBOTMAR} = $1 unless defined $entry->{TOPBOTMAR} }
+	}
+	close F;
+    }
+
+    #- parse textonly.cfg for any configured queue.
+    foreach (values %{$printer->{configured}}) {
+	my $entry = $_;
+	local *F; open F, "$prefix$entry->{SPOOLDIR}/textonly.cfg" or next;
+	foreach (<F>) {
+	    chomp;
+	    if (/^\s*(?:export\s+)TEXTONLYOPTIONS=(.*?)\s*$/) { $entry->{TEXTONLYOPTIONS} = $1 unless defined $entry->{TEXTONLYOPTIONS}; $entry->{TEXTONLYOPTIONS} =~ s/^\"(.*)\"/$1/ }
+	    elsif (/^\s*(?:export\s+)CRLFTRANS=(.*?)\s*$/) { $entry->{CRLF} = $1 eq 'YES' unless defined $entry->{CRLF} }
+	    elsif (/^\s*(?:export\s+)TEXT_SEND_EOF=(.*?)\s*$/) { $entry->{AUTOSENDEOF} = $1 eq 'YES' && $entry->{DBENTRY} ne 'PostScript' unless defined $entry->{AUTOSENDEOF} }
+	}
+	close F;
     }
 
     #- get extra parameters for SMB or NCP type queue.
-    foreach (values %{$entry->{configured}}) {
+    foreach (values %{$printer->{configured}}) {
 	if ($_->{TYPE} eq 'SMB') {
-	    my $config_file = "$prefix$_->{SPOOLDIR}/.config";
-	    local *F; open F, "$config_file" or die "Can't open $config_file $!";
+	    my $entry = $_;
+	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
+	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
 	    foreach (<F>) {
 		chomp;
 		if (/^\s*share='\\\\(.*?)\\(.*?)'/) {
-		    $_->{SMBHOST} = $1;
-		    $_->{SMBSHARE} = $2;
+		    $entry->{SMBHOST} = $1;
+		    $entry->{SMBSHARE} = $2;
 		} elsif (/^\s*hostip=(.*)/) {
-		    $_->{SMBHOSTIP} = $1;
+		    $entry->{SMBHOSTIP} = $1;
 		} elsif (/^\s*user='(.*)'/) {
-		    $_->{SMBUSER} = $1;
+		    $entry->{SMBUSER} = $1;
 		} elsif (/^\s*password='(.*)'/) {
-		    $_->{SMBPASSWD} = $1;
+		    $entry->{SMBPASSWD} = $1;
 		} elsif (/^\s*workgroup='(.*)'/) {
-		    $_->{SMBWORKGROUP} = $1;
+		    $entry->{SMBWORKGROUP} = $1;
 		}
 	    }
+	    close F;
 	} elsif ($_->{TYPE} eq 'NCP') {
-	    my $config_file = "$prefix$_->{SPOOLDIR}/.config";
-	    local *F; open F, "$config_file" or die "Can't open $config_file $!";
+	    my $entry = $_;
+	    my $config_file = "$prefix$entry->{SPOOLDIR}/.config";
+	    local *F; open F, "$config_file" or next; #die "Can't open $config_file $!";
 	    foreach (<F>) {
 		chomp;
 		if (/^\s*server=(.*)/) {
-		    $_->{NCPHOST} = $1;
+		    $entry->{NCPHOST} = $1;
 		} elsif (/^\s*user='(.*)'/) {
-		    $_->{NCPUSER} = $1;
+		    $entry->{NCPUSER} = $1;
 		} elsif (/^\s*password='(.*)'/) {
-		    $_->{NCPPASSWD} = $1;
+		    $entry->{NCPPASSWD} = $1;
 		} elsif (/^\s*queue='(.*)'/) {
-		    $_->{NCPQUEUE} = $1;
+		    $entry->{NCPQUEUE} = $1;
 		}
 	    }
+	    close F;
 	}
     }
 }
@@ -485,9 +533,9 @@ sub read_configured_queue($) {
 sub configure_queue($) {
     my ($entry) = @_;
 
-    $entry->{SPOOLDIR} ||= "$spooldir";
-    $entry->{IF}       ||= "$spooldir/$entry->{QUEUE}/filter";
-    $entry->{AF}       ||= "$spooldir/$entry->{QUEUE}/acct";
+    $entry->{SPOOLDIR} ||= "$spooldir/$entry->{QUEUE}";
+    $entry->{IF}       ||= "$entry->{SPOOLDIR}/filter";
+    $entry->{AF}       ||= "$entry->{SPOOLDIR}/acct";
 
     my $queue_path      = "$entry->{SPOOLDIR}";
     create_spool_dir($queue_path);
@@ -500,15 +548,15 @@ sub configure_queue($) {
     my %fieldname = ();
     my $dbentry = $thedb{($entry->{DBENTRY})} or die "no dbentry";
 
-
+    #- make general.cfg
     ($filein, $file) = &$get_name_file("general.cfg");
-    $fieldname{ascps_trans} = ($dbentry->{GSDRIVER} eq "POSTSCRIPT") ? "YES" : "NO";
+    $fieldname{ascps_trans} = $entry->{ASCII_TO_PS} ? "YES" : "NO";
     $fieldname{desiredto}   = ($dbentry->{GSDRIVER} ne "TEXT") ? "ps" : "asc";
     $fieldname{papersize}   = $entry->{PAPERSIZE} ? $entry->{PAPERSIZE} : "letter";
     $fieldname{printertype} = $entry->{TYPE};
     create_config_file($filein, $file, %fieldname);
 
-    #- successfully created general.cfg, now do postscript.cfg
+    #- now do postscript.cfg
     ($filein, $file) = &$get_name_file("postscript.cfg");
     %fieldname = ();
     $fieldname{gsdevice}       = $dbentry->{GSDRIVER};
@@ -516,18 +564,18 @@ sub configure_queue($) {
     $fieldname{resolution}     = $entry->{RESOLUTION};
     $fieldname{color}          = $entry->{BITSPERPIXEL} ne "Default" &&
       (($dbentry->{GSDRIVER} ne "uniprint" && "-dBitsPerPixel=") . $entry->{BITSPERPIXEL});
-    $fieldname{reversepages}   = "NO";
-    $fieldname{extragsoptions} = "";
+    $fieldname{reversepages}   = $entry->{REVERSE_ORDER} ? "YES" : "";
+    $fieldname{extragsoptions} = "\"$entry->{EXTRA_GS_OPTIONS}\"";
     $fieldname{pssendeof}      = $entry->{AUTOSENDEOF} ? ($dbentry->{GSDRIVER} eq "POSTSCRIPT" ? "YES" : "NO") : "NO";
-    $fieldname{nup}            = "1";
-    $fieldname{rtlftmar}       = "18";
-    $fieldname{topbotmar}      = "18";
+    $fieldname{nup}            = $entry->{NUP};
+    $fieldname{rtlftmar}       = $entry->{RTFLTMAR};
+    $fieldname{topbotmar}      = $entry->{TOPBOTMAR};
     create_config_file($filein, $file, %fieldname);
 
     #- finally, make textonly.cfg
     ($filein, $file) = &$get_name_file("textonly.cfg");
     %fieldname = ();
-    $fieldname{textonlyoptions} = "";
+    $fieldname{textonlyoptions} = "\"$entry->{TEXTONLYOPTIONS}\"";
     $fieldname{crlftrans}       = $entry->{CRLF} ? "YES" : "";
     $fieldname{textsendeof}     = $entry->{AUTOSENDEOF} ? ($dbentry->{GSDRIVER} eq "POSTSCRIPT" ? "NO" : "YES") : "NO";
     create_config_file($filein, $file, %fieldname);
@@ -589,15 +637,43 @@ sub configure_queue($) {
 	} else {
 	    #- (pcentry->Type == (PRINTER_SMB | PRINTER_NCP))
 	    print PRINTCAP "\t:lp=/dev/null:\\\n";
-	    print PRINTCAP "\t:af=$_->{SPOOLDIR}/acct\\\n";
+	    print PRINTCAP "\t:af=$_->{AF}\\\n";
 	}
 
 	#- cheating to get the input filter!
-	print PRINTCAP "\t:if=$_->{SPOOLDIR}/filter:\n";
+	print PRINTCAP "\t:if=$_->{IF}:\n";
 	print PRINTCAP "\n";
     }
 }
 
+sub restart_queue($) {
+    my ($queue) = @_;
+
+    #- restart lpd after cleaning the queue.
+    foreach (("/var/spool/lpd/$queue/lock", "/var/spool/lpd/lpd.lock")) {
+	my $pidlpd = (cat_("$prefix$_"))[0];
+	kill 'TERM', $pidlpd if $pidlpd;
+	unlink "$prefix$_";
+    }
+    require run_program;
+    run_program::rooted($prefix, "lprm", "-P$queue", "-"); sleep 1;
+    run_program::rooted($prefix, "lpd"); sleep 1;
+}
+
+sub print_pages($$@) {
+    my ($queue, @pages) = @_;
+
+    require run_program;
+    run_program::rooted($prefix, "lpr", "-P$queue", $_) foreach @pages;
+
+    sleep 5; #- allow lpr to send pages.
+    local *F;
+    open F, "chroot $prefix/ /usr/bin/lpq -P$queue |";
+    my @lpq_output = grep { !/^no entries/ && !(/^Rank\s+Owner/ .. /^\s*$/) } <F>;
+    close F;
+
+    @lpq_output;
+}
 
 #------------------------------------------------------------------------------
 #- interface function

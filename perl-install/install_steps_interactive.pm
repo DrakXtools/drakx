@@ -559,14 +559,10 @@ sub servicesConfig {
 #------------------------------------------------------------------------------
 sub printerConfig($) {
     my ($o) = @_;
-    $o->{printer}{want} =
-      $o->ask_yesorno(_("Printer"),
-		      _("Would you like to configure a printer?"),
-		      $o->{printer}{want});
-    return if !$o->{printer}{want};
 
     require printerdrake;
-    printerdrake::main($o->{prefix}, $o->{printer}, $o, sub { install_any::pkg_install($o, $_[0]) });
+    eval { add2hash($o->{printer}, printerdrake::getinfo($o->{prefix})) };
+    printerdrake::main($o->{printer}, $o, sub { install_any::pkg_install($o, $_[0]) });
 }
 
 #------------------------------------------------------------------------------
@@ -591,7 +587,7 @@ _("Use MD5 passwords") => { val => \$o->{authentication}{md5}, type => 'bool', t
   ) : (), $::beginner ? () : (
 _("Use NIS") => { val => \$o->{authentication}{NIS}, type => 'bool', text => _("yellow pages") },
   )
-			 ], 
+			 ],
 			 complete => sub {
 			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
 			     length $sup->{password} < 2 * $o->{security}
