@@ -1050,7 +1050,7 @@ sub log_sizes {
     my @df = MDK::Common::System::df($o->{prefix});
     log::l(sprintf "Installed: %s(df), %s(rpm)",
 	   formatXiB($df[0] - $df[1], 1024),
-	   formatXiB(sum(`$ENV{LD_LOADER} rpm --root $o->{prefix}/ -qa --queryformat "%{size}\n"`))) if -x "$o->{prefix}/bin/rpm";
+	   formatXiB(sum(run_program::rooted_get_stdout($o->{prefix}, 'rpm', '-qa', '--queryformat', '%{size}\n')))) if -x "$o->{prefix}/bin/rpm";
 }
 
 sub copy_advertising {
