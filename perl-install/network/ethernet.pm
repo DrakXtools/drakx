@@ -209,8 +209,7 @@ such as ``mybox.mylab.myco.com''."),
     } else {
 	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
     }
-    miscellaneousNetwork($in);
-    1;
+    miscellaneousNetwork($in) or goto configureNetwork_step_1;
 }
 
 1;
