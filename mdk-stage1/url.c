@@ -337,7 +337,7 @@ static int ftp_get_filesize(int sock, char * remotename)
 	}
 
 	ptr = buf;
-	while ((tot = read(fd, ptr, sizeof(buf) - (ptr - buf))) != 0)
+	while ((tot = read(fd, ptr, sizeof(buf) - (ptr - buf) - 1)) != 0)
 		ptr += tot;
 	*ptr = '\0';
 	close(fd);
