@@ -730,12 +730,37 @@ sub hasSMP() {
 }
 sub hasPCMCIA() { $::o->{pcmcia} } #- because /proc/pcmcia seems not to be present on 2.4 at least (or use /var/run/stab)
 
+sub dmidecode {
+    my (%l, $cat);
+
+    my $dmidecode_infos if 0;
+    
+    if (!$dmidecode_infos) {
+	foreach (run_program::get_stdout('dmidecode')) {
+	    if (/^\t\t(.*)/) {
+		$l{$cat} .= "$1\n";
+	    } elsif (my ($s) = /^\t(.*)/) {
+		next if $s =~ /^DMI type /;
+		$s =~ s/ Information$//;
+		$cat = $s;
+	    }
+	}
+	my $Chassis = $l{Chassis} =~ /^Type:\s*(\S+)/m && $1;
+	
+	$dmidecode_infos = { 
+	    isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
+	    if_($l{BIOS} =~ /^Release Date:.*?(\d{4})/m, BIOS_Year => $1),
+	};
+    }
+    $dmidecode_infos;
+}
+
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
 #- the following regexp to match graphics card apparently only used for such systems.
 sub isLaptop() {
     arch() =~ /ppc/ ? 
       get_mac_model() =~ /Book/ :
-      hasPCMCIA() 
+      dmidecode()->{isLaptop}
 	|| (matching_desc('C&T.*655[45]\d') || matching_desc('C&T.*68554') ||
 	    matching_desc('Neomagic.*Magic(Media|Graph)') ||
 	    matching_desc('ViRGE.MX') || matching_desc('S3.*Savage.*[IM]X') ||
