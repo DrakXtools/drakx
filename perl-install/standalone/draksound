@@ -19,7 +19,7 @@
 use lib qw(/usr/lib/libDrakX);
 
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
- 
+
 use strict;
 use interactive;
 use common;
@@ -31,8 +31,7 @@ my $in = 'interactive'->vnew('su');
 
 modules::mergein_conf();
 
-my @devices = grep { $_->{media_type} eq 'MULTIMEDIA_AUDIO' } detect_devices::probeall();
-if (@devices) {
+if (my @devices = modules::probe_category('multimedia/sound')) {
     # TODO: That need some work for multiples sound cards
     map_index {
 	   # allocate sound-slot in the same order as install2.pm
@@ -40,9 +39,9 @@ if (@devices) {
 	   my $driver = modules::get_alias("sound-slot-$::i");
 	   $driver = modules::get_alias($driver) if $driver =~ /sound-card/; # alsaconf ...
 	   $_->{current_driver} = $driver if $driver;
-        $_->{sound_slot_index} = $::i;
+	   $_->{sound_slot_index} = $::i;
 	   harddrake::sound::config($in, $_, $::i);
-	 } modules::probe_category('multimedia/sound');
+	 } @devices;
 } else {
     $in->ask_warn(N("No Sound Card detected!"), 
 			   formatAlaTeX(N("No Sound Card has been detected on your machine. Please verify that a Linux-supported Sound Card is correctly plugged in.
