@@ -10,7 +10,7 @@ our ($version, $sbindir, $bindir) = ("1.1.5", "/usr/sbin", "/usr/bin");
 
 # Update me each time you handle one more devices class (aka configurator)
 sub unknown {
-    grep { $_->{media_type} !~ /tape|DISPLAY|MULTIMEDIA_VIDEO|STORAGE_IDE|BRIDGE|NETWORK|MULTIMEDIA_AUDIO/ } detect_devices::probeall(1);
+    grep { $_->{media_type} !~ /tape|SERIAL_(USB|SMBUS)|DISPLAY|MULTIMEDIA_(VIDEO|AUDIO)|STORAGE_IDE|BRIDGE|NETWORK|MULTIMEDIA_AUDIO/ } detect_devices::probeall(1);
 }
 
 
@@ -49,7 +49,7 @@ our @tree =
 #	["","Modem", "Modem.png", "", \&detect_devices::getNet],
 #	["","Isdn", "", "", \&detect_devices::getNet]
 
-	["BRIDGE","Bridge", "memory.png", "", sub {grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
+	["BRIDGE","Bridge(s)", "memory.png", "", sub {grep { $_->{media_type} =~ 'BRIDGE' } @devices}],
 # 	["","Cpu", "cpu.png", "", sub {}],
 #	["","Memory", "memory.png", "", sub {}],
 	["UNKNOWN","Unknown/Others", "unknown.png", "" , \&unknown],
@@ -61,9 +61,10 @@ our @tree =
 	["MOUSE","Mouse", "hw_mouse.png", "$sbindir/mousedrake", sub { require mouse; &mouse::detect()}],
 	["JOYSTICK","Joystick", "joystick.png", "", sub {}],
 
-	["","Ideinterface", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
+	["ATA_STORAGE","(E)IDE/ATA controllers", "ide_hd.png", "", sub {grep { $_->{media_type} =~ 'STORAGE_IDE' } @devices}],
 #	["","Scsiinterface", "Scsiinterface.png", "", \&detect_devices::getSCSI],
-#	["","Usbinterface", "Usbinterface.png", "", \&detect_devices::usb_probe]
+	["USB_CONTROLLER","USB controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_USB' } @devices}],
+	["SMB_CONTROLLER","SMBus controllers", "usb.png", "", sub {grep { $_->{media_type} =~ 'SERIAL_SMBUS' } @devices}],
 	);
 
 
