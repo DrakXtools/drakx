@@ -792,7 +792,7 @@ static int choose_mirror_from_list(char *http_proxy_host, char *http_proxy_port,
 		}
 	} while (results == RETURN_ERROR);
 
-	return RETURN_ERROR;
+	return results;
 }
 
 
