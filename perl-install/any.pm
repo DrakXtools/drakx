@@ -683,7 +683,7 @@ sub selectLanguage {
 	my %name2l = map { lang::l2name($_) => $_ } lang::list_langs();
 	my $listval2val = sub { $_[0] =~ /\|(.*)/ ? $1 : $_[0] };
 
-	my @langs = map { my $l = $_; uniq_ { $_->[0] } map { [ ($::move ? $l : "$_|$l"), $_, $l ] } lang::l2location($l) } lang::list_langs();
+	my @langs = map { my $l = $_; uniq_ { $_->[0] } map { [ $::move ? $l : "$_|$l", $_, $l ] } lang::l2location($l) } lang::list_langs();
 	#- since gtk version will use images (function image2f) we need to sort differently
 	my $sort_func = $using_images ? \&lang::l2transliterated : \&lang::l2name;
 	@langs = map { $_->[0] } sort { $sort_func->($a->[2]) cmp $sort_func->($b->[2]) } @langs;
