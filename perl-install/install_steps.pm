@@ -255,8 +255,7 @@ sub choosePartitionsToFormat($$) {
 	$_->{mntpoint} or next;
 	
 	add2hash_($_, { toFormat => $_->{notFormatted} });
-        $_->{toFormatUnsure} = member($_->{mntpoint}, '/', '/usr');
-	$_->{toFormat} ||= $::recovery && delete $_->{toFormatUnsure};
+        $_->{$::recovery ? 'toFormat' : 'toFormatUnsure'} ||= member($_->{mntpoint}, '/', '/usr');
 
 	if (!$_->{toFormat}) {
 	    my $t = fsedit::typeOfPart($_->{device});
