@@ -189,6 +189,8 @@ I'll try to go on blanking bad partitions")) unless $o->{partitioning}{readonly}
 
     ($o->{hds}, $o->{fstab}, $ok2) = fsedit::verifyHds($o->{hds}, $o->{partitioning}{readonly}, $ok);
 
+    fs::check_mounted($o->{fstab});
+
     $o->ask_warn('', 
 _("DiskDrake failed to read correctly the partition table.
 Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
@@ -223,7 +225,7 @@ sub searchAndMount4Upgrade {
 	    eval { fs::umount_part($root, $o->{prefix}) };
 	}
 
-	last if is_empty_array_ref($found);
+	last unless is_empty_array_ref($found);
 
 	delete $root->{mntpoint};
 	$o->ask_warn(_("Information"), 
