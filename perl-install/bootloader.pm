@@ -612,7 +612,7 @@ sub method_choices {
         ),
     );
     my $prefered;
-    $prefered ||= 'grub' if $::isStandalone && run_program::rooted_get_stdout($::prefix, 'detectloader') =~ /GRUB/;
+    $prefered ||= 'grub' if $::isStandalone && detect_bootloader() =~ /GRUB/;
     $prefered ||= 'lilo-' . (member($bootloader->{install}, 'text', 'menu', 'graphic') ? $bootloader->{install} : 'graphic');
     my $default = exists $choices{$prefered} ? $prefered : first(keys %choices);
 
