@@ -1,3 +1,109 @@
+2004/10/06  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Bokmål file
+
+2004/10/06  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: fix regexp decompose_vmlinuz_name (broke with kernel
+	vmlinuz-2.6.8.1-12.1mdk)
+
+2004/10/06  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_auto_install.pm: Unneccessary in cooker
+
+2004/10/06  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: log one more change in 10.1-21mdk
+	10.1-21mdk
+
+	* detect_devices.pm (getUPS) fix detecting UPS devices
+
+2004/10/05  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* services.pm: fixed encoding problem with the output of start/stop init
+	scripts
+	(the output must be forced to utf-8 in order to have it displayed in
+	gtk2)
+
+2004/10/05  Pixel  <pixel at mandrakesoft.com>
+
+	* install_gtk.pm: no special theme for meta_class firewall
+	no special theme for meta_class firewall
+
+	* install_steps_interactive.pm: for meta_class firewall, call the general
+	netconnect function
+	don't warnAboutNaughtyServers if meta_class is firewall
+	for meta_class firewall, call the general netconnect function
+	don't warnAboutNaughtyServers if meta_class is firewall
+
+	* Makefile: remove bad uniq now unneeded
+	use TMPDIR
+
+	* Makefile.config: add TMPDIR
+
+	* install2.pm: don't install updates when meta_class is firewall
+	don't install updates when meta_class is firewall
+
+	* partition_table.pm: don't use devices::part_number(), otherwise it fails
+	with c0d0p* devices
+
+	* network/netconnect.pm: don't configure firewall after configuring
+	network during install
+	(in summary you can configure firewall directly)
+
+2004/10/05  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps_auto_install.pm: Add a dummy ask_yesorno for autoinstalls
+
+	* crypto.pm: Further normalization of updates directories.
+	New mirror structure for official updates
+
+2004/10/05  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2004/10/05  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* detect_devices.pm (getUPS) add proper support for "American Power
+	Conversion|Back-UPS"
+	(getUPS) fix port for MGE's USB UPSes
+	(getUPS) fix drivers
+	(getUPS) typo fix
+	(getUPS) detect "American Power Conversion" UPS too
+
+	* drakxtools.spec: 10.1-20mdk
+	10.1-19mdk
+
+	* standalone/drakups: in manual adding:
+	  - let's have unique UPS names in the list
+	  - fix reading driver from the list
+	write config in pure wizard mode
+	(writeconf) restart upsd daemon
+	install nut earlier
+	fix installing nut
+
+	* standalone/drakfont (font_choice) remove debug message
+	fix closing import dialog (#11052)
+
+	* ugtk2.pm (Gtk2::ComboBox->set_text) do not die in official release
+
+	* pkgs.pm (supplCDMountPoint) perl_checker cleanup
+
+	* standalone/drakconnect (save) applying changes can be quite time
+	expensive, especially with
+	ppp and wifi connections thus let's show the same "wait" dialog like
+	in the old interface
+
+	* network/adsl_consts.pm: add a few new ADSL ISP : Argentina (Speedy),
+	Austria (AON), Morrocco
+	(Maroc Telecom) and Thailand (Asianet) (baud)
+	fix wrong VCI which wasn't in hexa for brazililan Velox/Telemar ISP
+	(baud)
+
+2004/10/05  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: fix madwifi_kernel in madwifi-kernel
+
 2004/10/05  Pixel  <pixel at mandrakesoft.com>
 
 	* Makefile: remove bad uniq now unneeded
@@ -40591,7 +40697,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.979 2004/10/04 09:49:48 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.980 2004/10/05 02:49:33 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
