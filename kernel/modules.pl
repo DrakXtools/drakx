@@ -29,6 +29,7 @@ my @skip_modules_on_stage1 = (
   qw(sktr tmspci ibmtr abyss), # alt token ring
   qw(old_tulip rtl8139),
   qw(3c501 3c503 3c505 3c507 3c515), # unused, hopefully?
+  'ataraid',  # ad-hoc raid which is unsupported in stage1 anyway
   if_(arch() =~ /alpha|ppc/, qw(sb1000)),
   qw(
   tg3 r8169
