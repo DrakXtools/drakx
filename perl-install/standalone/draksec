@@ -26,7 +26,9 @@ my %m = reverse (my %l = (
 ));
 delete @l{0,1,5} unless $::expert;
 
-if (my $level = $in->ask_from_list('', _("Choose security level"), [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
+if (my $level = $in->ask_from_list('', 
+_("Choose security level"), 
+				   [ values %l ], $l{$ENV{SECURE_LEVEL}})) {
     my $w = $in->wait_message('', _("Setting security level"));
     $in->suspend;
 
