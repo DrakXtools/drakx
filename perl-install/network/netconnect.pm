@@ -854,6 +854,12 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
+                        write_cnx_script($netc, "cable", qq(
+/sbin/ifup $netc->{NET_DEVICE}
+),
+                                                  qq(
+/sbin/ifdown $netc->{NET_DEVICE}
+), $netcnx->{type}) if $netcnx->{type} eq 'cable';
 
                         return is_wireless_intf($module) ? "wireless" : "static_hostname";
                     },
