@@ -9,7 +9,7 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 use MDK::Common::System qw(getVarsFromSh);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected_bg disconnect_backend disconnected is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected type2interface write_cnx_script write_initscript write_secret_backend);
+@EXPORT = qw(ask_connect_now ask_info2 connect_backend connected connected_bg disconnect_backend is_dynamic_ip is_wireless_intf passwd_by_login read_providers_backend read_secret_backend test_connected write_cnx_script write_initscript write_secret_backend);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -140,35 +140,6 @@ sub ask_info2 {
     1;
 }
 
-sub detect_timezone() {
-    my %tmz2country = ( 
-		       'Europe/Paris' => N("France"),
-		       'Europe/Amsterdam' => N("Netherlands"),
-		       'Europe/Rome' => N("Italy"),
-		       'Europe/Brussels' => N("Belgium"), 
-		       'America/New_York' => N("United States"),
-		       'Europe/London' => N("United Kingdom") 
-		      );
-    my %tm_parse = MDK::Common::System::getVarsFromSh('/etc/sysconfig/clock');
-    my @country;
-    foreach (keys %tmz2country) {
-	if ($_ eq $tm_parse{ZONE}) {
-	    unshift @country, $tmz2country{$_};
-	} else { push @country, $tmz2country{$_} };
-    }
-    \@country;
-}
-
-sub type2interface {
-    my ($i) = @_;
-    $i =~ /$_->[0]/ and return $_->[1] foreach [ modem => 'ppp' ],
-					     [ isdn_internal => 'ippp' ],
-					     [ isdn_external => 'ppp' ],
-					     [ adsl => 'ppp' ],
-					     [ cable => 'eth' ],
-					     [ lan => 'eth' ];
-}
-
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
 
 my $kid_pipe;
@@ -228,9 +199,6 @@ sub connected2() {
                         print Net::Ping->new("icmp")->ping("mandrakesoft.com") ? 1 : 0;
                     });
 }
-
-sub disconnected() {}
-
 
 sub write_initscript() {
     $::testing and return;
