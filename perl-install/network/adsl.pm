@@ -248,9 +248,10 @@ defaultroute)
         
 	my $pty_option = $modems{$adsl_device}{server}{$adsl_type} && "pty $modems{$adsl_device}{server}{$adsl_type}";
 	my $plugin = $modems{$adsl_device}{plugin}{$adsl_type} && "plugin $modems{$adsl_device}{plugin}{$adsl_type}";
+	my $noipdefault = 'noipdefault' unless $adsl_type eq 'pptp';
 	output("$::prefix/etc/ppp/peers/ppp0",
 qq(noauth
-noipdefault
+$noipdefault
 $modems{$adsl_device}{ppp_options}
 kdebug 1
 nopcomp
