@@ -398,6 +398,7 @@ sub set_xfree_conf {
         Device => "/dev/$_->{device}",
         Protocol => $_->{XMOUSETYPE},
         Primary => $_ != $mouse->{auxmouse},
+        ALPS => $_->{ALPS},
     } } @$synaptics);
 }
 
