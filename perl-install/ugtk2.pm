@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
-                     gtkentry gtkexpand gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
+                     gtkentry gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkput gtkradio gtkresize gtkroot
                      gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_alignment gtkset_layout gtkset_markup
                      gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
@@ -90,7 +90,6 @@ sub gtkset_style              { $_[0]->set_style($_[1]); $_[0] }
 sub gtkset_size_request       { $_[0]->set_size_request($_[1], $_[2]); $_[0] }
 sub gtkshow                   { $_[0]->show; $_[0] }
 sub gtksize                   { $_[0]->size($_[1], $_[2]); $_[0] }
-sub gtkexpand                 { $_[0]->expand; $_[0] }
 sub gtkset_markup             { $_[0]->set_markup($_[1]); $_[0] }
 
 sub gtkadd {
