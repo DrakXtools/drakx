@@ -1096,7 +1096,7 @@ sub install($$$;$$) {
     loopback::save_boot($loop_boot);
 }
 
-sub remove($$) {
+sub remove {
     my ($prefix, $toRemove, $packages) = @_;
 
     return if $::g_auto_install || !@{$toRemove || []};
