@@ -26,7 +26,7 @@ our %l = (
         qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci),
         qw(sb1000 sis900 smc-ultra smc9194 starfire tlan tmspci tulip via-rhine),
         qw(wd winbond-840),
-	qw(fealnx 3c990fx),
+	qw(fealnx 3c990 3c990fx bcm4400),
         qw(skfp tc35815 lanstreamer farsync sdladrv orinoco_pci prism2_plx),
 
 	qw(iph5526), #- fibre channel

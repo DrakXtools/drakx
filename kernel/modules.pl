@@ -17,7 +17,7 @@ my %modules_only_for_all_img = (
   'network/main' => [
     qw(olympic acenic),
     qw(aironet4500_card com20020-pci hamachi starfire winbond-840),
-    qw(fealnx 3c990fx prism2_plx dgrs),
+    qw(fealnx 3c990 3c990fx prism2_plx dgrs),
 
     # token ring
     qw(tmspci ibmtr abyss),
