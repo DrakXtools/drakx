@@ -311,7 +311,8 @@ sub choosePackagesTree {
     my ($o, $packages) = @_;
 
     $o->set_help('choosePackagesTree');
-    my ($curr, $parent, $info_widget, $w_size, $go, $idle, $flat, $auto_deps);
+    my ($curr, $parent, $info_widget, $w_size, $go, $idle, $flat);
+    my $auto_deps = 1;
     my (%wtree, %ptree);
 
     my $w = my_gtk->new('');
@@ -456,7 +457,7 @@ sub choosePackagesTree {
 		return $o->ask_warn('', _("You can't select this package as there is not enough space left to install it"));
 	    }
 
-	    @l > @_ && !$auto_deps and $o->ask_okcancel('', [ $isSelection ? 
+	    @l > @_ && $auto_deps and $o->ask_okcancel('', [ $isSelection ? 
 							      _("The following packages are going to be installed") :
 							      _("The following packages are going to be removed"),
 							      join(", ", common::truncate_list(20, sort @l)) ], 1) || return;
