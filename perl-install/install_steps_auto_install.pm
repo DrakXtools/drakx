@@ -91,6 +91,10 @@ sub ask_warn {
     log::l(ref($_[1]) ? join " ", @{$_[1]} : $_[1]);
 }
 
+sub ask_yesorno {
+    1; #- yes
+}
+
 sub wait_message {
     my ($_o, $_title, $_message) = @_;
 }
