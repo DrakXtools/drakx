@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-08-26 16:49+0200\n"
+"POT-Creation-Date: 2003-08-27 17:44+0200\n"
 "PO-Revision-Date: 2003-08-24 16:37+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -1201,15 +1201,15 @@ msgstr "Рванда"
 msgid "Switzerland"
 msgstr "Швейцария"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Brunei Darussalam"
-msgstr "Бруней Доруссалом"
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have any %s interfaces?"
 msgstr "Сизда %s интерфейси борми?"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brunei Darussalam"
+msgstr "Бруней Доруссалом"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -9488,10 +9488,12 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
@@ -11299,6 +11301,17 @@ msgstr "модем"
 msgid "Welcome to %s"
 msgstr "%s'га марҳамат"
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU "
+"GPL.\n"
+"\n"
+"Usage: \n"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
@@ -12853,6 +12866,11 @@ msgstr "(шу компютерда)"
 msgid "Both Control keys simultaneously"
 msgstr "Бир вақтда иккала Ctrl тугмалари"
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid " --help                - display this help     \n"
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12978,6 +12996,12 @@ msgstr "яратишнинг биринчи босқичи"
 #, c-format
 msgid "Both Shift keys simultaneously"
 msgstr "Бир вақтда иккала Shift тугмалари"
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format

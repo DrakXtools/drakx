@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-08-26 16:49+0200\n"
+"POT-Creation-Date: 2003-08-27 17:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -994,14 +994,14 @@ msgstr ""
 msgid "Switzerland"
 msgstr ""
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Brunei Darussalam"
-msgstr ""
-
 #: ../../modules/interactive.pm:1
 #, c-format
 msgid "Do you have any %s interfaces?"
+msgstr ""
+
+#: ../../lang.pm:1
+#, c-format
+msgid "Brunei Darussalam"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -8734,7 +8734,7 @@ msgstr ""
 msgid "Unselect fonts installed"
 msgstr ""
 
-#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/drakgw:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/logdrake:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/drakgw:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/logdrake:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr ""
@@ -8786,10 +8786,12 @@ msgstr ""
 msgid ""
 "WARNING!\n"
 "\n"
-"DrakX will now resize your Windows partition. Be careful:\n"
-"this operation is dangerous. If you have not already done\n"
-"so, you should first exit the installation, run scandisk\n"
-"under Windows (and optionally run defrag), then restart the\n"
+"DrakX will now resize your Windows partition. Be careful: this\n"
+"operation is dangerous. If you have not already done so, you\n"
+"first need to exit the installation, run \"chkdsk c:\" from a\n"
+"Command Prompt under Windows (beware, running graphical program\n"
+"\"scandisk\" is not enough, be sure to use \"chkdsk\" in a\n"
+"Command Prompt!), optionally run defrag, then restart the\n"
 "installation. You should also backup your data.\n"
 "When sure, press Ok."
 msgstr ""
@@ -10491,6 +10493,17 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr ""
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" drakhelp 0.1\n"
+"Copyright (C) 2003 MandrakeSoft.\n"
+"This is free software and may be redistributed under the terms of the GNU GPL.\n"
+"\n"
+"Usage: \n"
+""
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Please insert the Update Modules floppy in drive %s"
@@ -11962,6 +11975,13 @@ msgstr ""
 msgid "Both Control keys simultaneously"
 msgstr ""
 
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --help                - display this help     \n"
+""
+msgstr ""
+
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -12074,6 +12094,13 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Shift keys simultaneously"
+msgstr ""
+
+#: ../../standalone/drakhelp:1
+#, c-format
+msgid ""
+" --id <id_label>       - load the html help page which refers to id_label\n"
+""
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -12814,7 +12841,7 @@ msgstr ""
 msgid "Philippines"
 msgstr ""
 
-#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../interactive.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../my_gtk.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr ""
