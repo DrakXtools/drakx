@@ -173,7 +173,6 @@ sub use_floppy {
 
 sub is_dynamic_ip {
   my ($intf) = @_;
-  print "called from\n", common::backtrace(), "\n";
   any { $_->{BOOTPROTO} !~ /^(none|static|)$/ } values %$intf;
 }
 
