@@ -41,7 +41,7 @@ my (%installSteps, @orderedInstallSteps);
   setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
   selectMouse        => [ __("Configure mouse"), 1, 1, '', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
-#-  miscellaneous      => [ __("Miscellaneous"), 1, 1, '!$::expert' ],
+  miscellaneous      => [ __("Miscellaneous"), 1, 1, 1 ],
   doPartitionDisks   => [ __("Setup filesystems"), 1, 0, '', "selectInstallClass" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "doPartitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, -2, '!$::expert', "formatPartitions" ],
@@ -266,17 +266,6 @@ sub miscellaneous {
             SECURITY => $o->{security},
 	    META_CLASS => $o->{meta_class} || 'PowerPack',
         });
-
-	my $f = "$o->{prefix}/etc/sysconfig/usb";
-	output $f,
-"USB=yes
-MOUSE=" . bool2yesno(detect_devices::usbMice()) . "
-KEYBOARD=" . bool2yesno(detect_devices::usbKeyboards()) . "
-STORAGE=" . bool2yesno(detect_devices::usbZips()) . "
-VISOR=no
-" if modules::get_alias("usb-interface") && ! -e $f;
-
-	install_any::fsck_option($o);
     } 'installPackages';
 }
 

@@ -947,7 +947,7 @@ try to force installation even if that destroys the first partition?"));
 }
 
 #- deprecated
-sub miscellaneous {
+sub __deprecated__miscellaneous {
     return; 
 
     my ($o, $clicked) = @_;
