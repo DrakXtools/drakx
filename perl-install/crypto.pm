@@ -126,7 +126,7 @@ sub getPackages {
 					    "Updates for Mandrake Linux 8.1", 1, getFile("base/hdlist.cz", $mirror)) and
 					      log::l("read updates hdlist");
     #- keep in mind where is the URL prefix used according to mirror (for install_any::install_urpmi).
-    $update_medium->{prefix} = dir($mirror);
+    $update_medium->{prefix} = "ftp://$mirror" . dir($mirror);
 
     return $update_medium;
 }
