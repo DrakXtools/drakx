@@ -544,7 +544,7 @@ sub main {
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
-	$o->{steps}{$o->{step}}{icon} and $o->{icon} = $o->{steps}{$o->{step}}{icon};
+	$o->{steps}{$o->{step}}{icon} && $o->{steps}{$o->{step}}{icon} != 'default' and $o->{icon} = $o->{steps}{$o->{step}}{icon};
 	eval {
 	    &{$install2::{$o->{step}}}($clicked || $o->{steps}{$o->{step}}{noauto},
 				       $o->{steps}{$o->{step}}{entered},
