@@ -19,45 +19,35 @@ local $_ = join '', @ARGV;
 
 
 sub pci_probe {
-    my @pci;
+    my @l;
     foreach (`/usr/bin/lspcidrake`) {
-	my %pci_entry;
-	if (/^(\S+)\s*: (.+) \[([^\]]+)/) {
-	    $pci_entry{driver} = $1;
-	    $pci_entry{description} = $2;
-	    $pci_entry{type} = $3;
-	} elsif (/^(\S+)\s*: (.+)/) {
-	    $pci_entry{driver} = $1;
-	    $pci_entry{description} = $2;
-	    $pci_entry{type} = "NOT_DEFINED";
-	} else {
-	    next;
-	}
-	push @pci, \%pci_entry;
+	push @l, do {
+	    if (/^(\S+)\s*: (.+) \[([^\]]+)/) {
+		{ driver => $1,  description => $2, type => $3 };
+	    } elsif (/^(\S+)\s*: (.+)/) {
+		{ driver => $1,  description => $2, type => 'NOT_DEFINED' };
+	    } else {
+		next;
+	    }
+	};
     }
-    \@pci;
+    @l;
 }
 
 sub install_module($$) {
     my ($driver, $descr) = @_;
     print "Installing driver $driver (for \"$descr\")\n";
-    system("/sbin/modprobe $driver") and print "\tfailed\n";
+    system("/sbin/modprobe", $driver) and print "\tfailed\n";
 }
 
 
 #- start
+foreach $card (pci_probe()) {
+    $card->{type} eq "DISPLAY_VGA" and next;
+    $card->{driver} eq "unknown" and next;
 
-my $pci = pci_probe();
-
-foreach $pci_card (@$pci) {
-
-    $pci_card->{type} eq "DISPLAY_VGA" and next;
-    $pci_card->{driver} eq "unknown" and next;
-
-    if ($#ARGV != -1) {
-	$pci_card->{type} =~ /$_/i and install_module($pci_card->{driver}, $pci_card->{description}) foreach (@ARGV);
-    } else {
-	install_module($pci_card->{driver}, $pci_card->{description});
+    if (!@ARGV || grep { $card->{type} =~ /$_/i } @ARGV) {
+	install_module($card->{driver}, $card->{description});
     }
 }
 
@@ -65,6 +55,9 @@ foreach $pci_card (@$pci) {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.2  2001/02/12 18:42:17  uid553
+#- pixelization
+#-
 #- Revision 1.1  2001/02/12 14:31:10  uid535
 #- - add lspci, lspcidrake, vim-minimal
 #- - better /etc/issue
