@@ -48,8 +48,8 @@ sub check_hard_drives {
 
     #- do not do anything if there are many partitions
     #- otherwise we may add main extended partitions
-    if ($name =~ s|/part\d+$||) {
-	my @parts = grep { /part/ } all($name);
+    if ($name =~ s!/(part|sd[:alpha:]?)\d+$!!) {
+	my @parts = grep { /^(part|sd[:alpha:]?)\d+$/ } all($name);
 	@parts <= 1;
     } else {
 	1;
