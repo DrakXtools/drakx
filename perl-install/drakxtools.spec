@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 17mdk
+Release: 18mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -369,6 +369,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Apr  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-18mdk
+- drakconnect: enable ethernet interfaces during detection, thus
+  fixing Ralink wireless detection (blino)
+- mousedrake: configure wacom devices with synaptics touchpads too
+  (blino)
+
 * Thu Mar 31 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-17mdk
 - drakconnect: do not use ifplugd for wireless cards (and don't allow
   to enable it) (blino)
