@@ -14,7 +14,7 @@ use MDK::Common::File;
 
 
 @ISA = qw(Exporter);
-@EXPORT = qw(get_info_providers_backend isdn_detect_backend isdn_get_cards isdn_get_info isdn_get_list isdn_read_config isdn_write_config isdn_write_config_backend read_providers_backend);
+@EXPORT = qw(get_info_providers_backend isdn_detect_backend isdn_get_cards isdn_read_config isdn_write_config isdn_write_config_backend read_providers_backend);
 
 
 sub isdn_write_config {
@@ -144,15 +144,6 @@ sub isdn_detect_backend() {
 	push @isdn, $isdn;
     } modules::probe_category('network/isdn');
     \@isdn;
-}
-
-sub isdn_get_list() {
-    map { $_->{description} } @isdndata;
-}
-
-sub isdn_get_info {
-    my ($desc) = @_;
-    find { $_->{description} eq $desc } @isdndata;
 }
 
 sub isdn_get_cards_by_type {
