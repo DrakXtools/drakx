@@ -34,7 +34,7 @@ my %modules_only_for_all_img = (
     #- still used, keeping them: qw(aha1542 sym53c416),
     qw(lpfcdd), #- HUGE!!
 
-    qw(dc395x dc395x_trm BusLogic fdomain),
+    qw(dc395x dc395x_trm dmx3191d BusLogic fdomain),
     qw(pci2220i eata eata_pio eata_dma),
     'aic7xxx_old', 'qlogicisp',
     'dtc',
