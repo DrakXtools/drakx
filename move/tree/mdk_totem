@@ -16,7 +16,7 @@ sub busy_pids_and_files() {
 	my @l2 = grep { $_ } map { (split)[5] } cat_("/proc/$_/maps");
 
 	if (my @l = grep { m!^/(image(_boot)?|cdrom/live_tree)/! } @l1, @l2) {
-	    my ($cmdline) = cat_("/proc/$_/cmdline") =~ /([^\0]*)/;
+	    my $cmdline = join(' ', split('\0', cat_("/proc/$_/cmdline")));
 	    my $exe = readlink("/proc/$_/exe");
 	    { pid => $_, cmdline => $cmdline, exe => $exe, files => [ sort(uniq(@l)) ] };
 	} else {
@@ -69,9 +69,10 @@ if (@busy) {
 
     my @progs = map { 
 	my $s = $_->{cmdline};
+	$s =~ s!^/usr/bin/perl\s+([^-]\S*).*!$1!;
 	$s =~ s!/.*/!!;
 	$s =~ s!^kdeinit:\s+(\S+).*!$1!;
-	$s =~ s!\s+--.*!!;
+	$s =~ s!\s.*!!;
 	$s;
     } @busy;
 
