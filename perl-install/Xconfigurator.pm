@@ -396,7 +396,10 @@ sub resolutionsConfiguration($$) {
     my $noauto = $option eq 'noauto';
 
     #- For the mono and vga16 server, no further configuration is required.
-    return if member($card->{server}, "Mono", "VGA16");
+    if (member($card->{server}, "Mono", "VGA16")) {
+	$card->{depth}{8} = [[ 640, 480 ]];
+	return;
+    }
 
     #- some of these guys hate to be poked               
     #- if we dont know then its at the user's discretion
