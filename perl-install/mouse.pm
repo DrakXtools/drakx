@@ -421,7 +421,9 @@ sub test_mouse_install {
     test_mouse($mouse, $w, $darea, $width, $height, $x_protocol_changed);
     $w->sync; # HACK
     Gtk2::Gdk->pointer_grab($vbox_grab->window, 1, 'pointer_motion_mask', $vbox_grab->window, undef, 0);
-    $w->main;
+    my $r = $w->main;
+    Gtk2::Gdk->pointer_ungrab(0);
+    $r;
 }
 
 sub test_mouse_standalone {
