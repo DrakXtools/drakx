@@ -509,7 +509,7 @@ sub main {
     } modules::probe_category('multimedia/sound');
 
     #- needed very early for install_steps_gtk
-    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse};
+    eval { $o->{mouse} = mouse::detect() } if !$o->{nomouseprobe} && !$o->{mouse} && !$::testing;
 
     $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 
