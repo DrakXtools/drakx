@@ -5,18 +5,19 @@ DEST = $(ROOTDEST)/Mandrake/instimage
 DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
+DIRS = po pci_probing
 EXCLUDE = $(LOCALFILES) boot.img keymaps xmodmaps consolefonts install
 
-.PHONY: all po tags install clean verify_c
+.PHONY: all $(DIRS) tags install clean verify_c
 
-all: $(SO_FILES) po install1_hd
+all: $(SO_FILES) $(DIRS) install1_hd
 
 tags:
 	etags -o - $(PMS) | perl2etags > TAGS
 
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
-	$(MAKE) -C po clean
+	for i in $(DIRS); do $(MAKE) -C $$i clean; done
 	rm -f c/c.xs install1_hd gendepslist
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
@@ -41,8 +42,8 @@ $(SO_FILES): c/c.xs
 install1_hd: install1_hd.c
 	$(CC) -static -Wall -o $@ $<
 
-po:
-	$(MAKE) -C po
+$(DIRS):
+	$(MAKE) -C $@
 
 test_pms: verify_c
 	perl2fcalls -excludec install2

@@ -4,15 +4,14 @@ use common qw(:common);
     uk => "gb", 
 );
 
-@depths = qw(8 15 16 24 32);
-
-%depths_text = (
-    __("256 colors") => 8,
-    __("32 thousand colors") => 15,
-    __("65 thousand colors") => 16,
-    __("16 millions of colors") => 24,
-    __("4 billions of colors") => 32,
+%depths = (
+      8 => __("256 colors"),
+     15 => __("32 thousand colors"),
+     16 => __("65 thousand colors"),
+     24 => __("16 millions of colors"),
+     32 => __("4 billions of colors"),
 );
+@depths = ikeys(%depths);
 
 $resolution_wanted = "1024x768";
 @resolutions = qw(640x480 800x600 1024x768 1152x864 1280x1024 1600x1200);

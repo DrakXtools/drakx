@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common => [ qw(_ __ min max sum bool member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
+    common => [ qw(_ __ min max sum bool ikeys member divide is_empty_array_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate) ],
     functional => [ qw(fold_left) ],
     file => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_) ],
@@ -30,6 +30,7 @@ sub first { $_[0] }
 sub second { $_[1] }
 sub top { $_[$#_] }
 sub uniq { my %l; @l{@_} = (); keys %l }
+sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
 sub add2hash { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
 sub dirname { @_ == 1 or die "usage: dirname <name>\n"; local $_ = shift; s|[^/]*/*\s*$||; s|(.)/*$|$1|; $_ || '.' }

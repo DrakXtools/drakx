@@ -19,12 +19,12 @@ sub ask_warn($$$) {
     ask_from_list($o, $title, $message, [ _("Ok") ]);
 }
 sub ask_yesorno($$$) {
-    my ($o, $title, $message) = @_;
-    ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ]) eq "Yes";
+    my ($o, $title, $message, $def) = @_;
+    ask_from_list_($o, $title, $message, [ __("Yes"), __("No") ], $def ? "No" : "Yes") eq "Yes";
 }
 sub ask_okcancel($$$) {
-    my ($o, $title, $message) = @_;
-    ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ]) eq "Ok";
+    my ($o, $title, $message, $def) = @_;
+    ask_from_list_($o, $title, $message, [ __("Ok"), __("Cancel") ], $def ? "Cancel" : "Ok") eq "Ok";
 }
 sub ask_from_list_($$$$;$) {
     my ($o, $title, $message, $l, $def) = @_;

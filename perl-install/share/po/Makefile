@@ -1,4 +1,4 @@
-PMSFILES = $(shell find .. -name "*.pm")
+PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po")
 POFILES = $(wildcard *.po)
 FROMPOFILES = $(POFILES:%.po=%.pm)
 

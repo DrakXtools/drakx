@@ -2,13 +2,14 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @resolutions @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths %depths @resolutions @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate @vsync_range %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
 
 use pci_probing::main;
 use common qw(:common :file);
 use log;
 
 use Xconfigurator_consts;
+use my_gtk qw(:wrappers);
 
 my $tmpconfig = "/tmp/Xconfig";
 
@@ -120,7 +121,7 @@ sub findLegalModes {
     my ($card) = @_;
     my $mem = $card->{memory} || 1000000;
 
-    foreach (@resolutions) {
+    foreach (reverse @resolutions) {
 	my ($h, $v) = split 'x';
 	
 	foreach $_ (@depths) {
@@ -230,7 +231,14 @@ sub testFinalConfig($) {
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
 	$my_gtk::force_focus = 1;
-	exit !interactive_gtk->new->ask_yesorno('', _("It this ok?"));
+        my $text = Gtk::Label->new;
+        my $time = 8;
+        Gtk->timeout_add(1000, sub {
+	    $text->set(_("(leaving in %d seconds)", $time));
+	    $time-- or Gtk->main_quit;
+	});
+
+	exit !interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 1);
     };
     my $rc = close F;
     kill 2, $pid;
@@ -241,8 +249,6 @@ sub testFinalConfig($) {
 sub autoResolutions($) {
     my ($o) = @_;
     my $card = $o->{card};
-
-    my $hres_wanted = first(split 'x', $o->{resolution_wanted});
 
     # For the mono and vga16 server, no further configuration is required.
     return if member($card->{server}, "Mono", "VGA16");
@@ -257,16 +263,27 @@ sub autoResolutions($) {
 	    delete $card->{depth}->{$_};
 	} else {
 	    $card->{clocklines} ||= $clocklines unless $card->{flags}->{noclockprobe};
-	    $card->{depth}->{$_} = $resolutions;
-
-	    $ok ||= $resolutions;
-	    my ($b) = sort { $b->[0] <=> $a->[0] } @$resolutions;
-
-	    # require $resolution_wanted, no matter what bpp this requires
-	    $card->{default_depth} = $_, last if $b->[0] >= $hres_wanted;
+	    $card->{depth}->{$_} = [ sort { $b->[0] <=> $a->[0] } @$resolutions ];
 	}
     }
-    $ok or die "no valid modes";
+}
+
+sub autoDefaultDepth($$) {
+    my ($card, $resolution_wanted) = @_;
+    my $wres_wanted = first(split 'x', $resolution_wanted);
+    my $depth = $card->{default_depth};
+
+    # unset default_depth if there is no resolution in this depth
+    undef $depth if $depth && !$card->{depth}->{$depth};
+    my $best = $depth;
+
+    while (my ($d, $r) = each %{$card->{depth}}) {
+	$depth = $depth ? max($depth, $d) : $d;
+
+	# try to have $resolution_wanted
+	$best = $best ? max($best, $d) : $d if $r->[0][0] >= $wres_wanted;
+    }
+    $card->{default_depth} = $best || $depth or die "no valid modes";
 }
 
 
@@ -311,12 +328,62 @@ Do you want to try?"))) {
 	# restore the virtual console
 	setVirtual($vt);
     }
-    my %l;
-    foreach ($card->{depth})
 
-    ask_from_list(_("Resolution"),
-		  _("Choose resolution and color depth"),
-		  [ ]);
+    autoDefaultDepth($card, $o->{resolution_wanted} || $resolution_wanted);
+
+
+    my $W = my_gtk->new(_("Resolution"));
+    my %txt2depth = reverse %depths;
+    my $chosen_depth = $card->{default_depth};
+    my $chosen_w = 9999999; # will be set by the combo callback
+    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
+
+    my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
+
+
+    while (my ($depth, $res) = each %{$card->{depth}}) {
+	foreach (@$res) {
+	    $w2h{$_->[0]} = $_->[1];
+	    push @{$w2depth{$_->[0]}}, $depth;
+	}
+    }
+    while (my ($w, $h) = each %w2h) {
+	my $V = $w . "x" . $h;
+	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
+	$r->signal_connect("clicked" => sub {
+			       $chosen_w = $w;
+			       unless (member($chosen_depth, @{$w2depth{$w}})) {
+				   $chosen_depth = max(@{$w2depth{$w}});
+				   &$set_depth();
+			       }
+			   });
+    }
+
+    gtkadd($W->{window},
+	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth")),
+		    1, gtkpack(new Gtk::HBox(0,20),
+			       $depth_combo = new Gtk::Combo,
+			       gtkpack_(new Gtk::VBox(0,0),
+					map { 0, $w2widget{$_} } ikeys(%w2widget),
+					),
+			       ),
+		    0, $W->create_okcancel,
+		    ));
+    $depth_combo->disable_activate;
+    $depth_combo->set_use_arrows_always(1);
+    $depth_combo->entry->set_editable(0);
+    $depth_combo->set_popdown_strings(map { translate($depths{$_}) } ikeys(%{$card->{depth}}));
+    $depth_combo->entry->signal_connect(changed => sub {
+       $chosen_depth = $txt2depth{untranslate($depth_combo->entry->get_text, keys %txt2depth)};
+       my $w = $card->{depth}->{$chosen_depth}->[0][0];
+       $chosen_w > $w and $w2widget{$chosen_w = $w}->set_active(1);
+    });
+    &$set_depth();
+    my $rc = $W->main;
+    
+    $card->{default_depth} = $chosen_depth;
+    $card->{depth}->{$chosen_depth} = [ grep { $_->[0] <= $chosen_w } @{$card->{depth}->{$chosen_depth}} ];
+    $rc;
 }
 
 
@@ -417,7 +484,7 @@ Section "Screen"
 );
 	print F "    DefaultColorDepth $defdepth\n" if $defdepth;
 
-        foreach (sort { $a <=> $b } keys %$depths) {
+        foreach (ikeys(%$depths)) {
 	    my $m = join(" ", 
 			 map { '"' . join("x", @$_) . '"' }
 			 sort { $b->[0] <=> $a->[0] } @{$depths->{$_}});
@@ -474,19 +541,17 @@ sub main {
     $in = $interact;
     $install = $install_pkg;
 
-    $o->{resolution_wanted} ||= $resolution_wanted;
-    
     XF86check_link();
 
     $o->{card} = cardConfiguration($o->{card});
 
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
-    resolutionsConfiguration($o);
+    my $ok = resolutionsConfiguration($o);
 
-    my $ok = testFinalConfig($o);
+    $ok &&= testFinalConfig($o);
+
     my $quit;
-
     until ($ok || $quit) {
 
 	my %c = my @c = (
