@@ -13,11 +13,14 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :system);
+use common qw(:common :system :functional);
 use commands;
 use run_program;
+use partition_table qw(:types);
+use fsedit;
 use detect_devices;
 use pkgs;
+use fs;
 use log;
 
 
@@ -111,7 +114,8 @@ sub setPackages($$) {
     if ($o->{packages}) {
 	$_->{selected} = 0 foreach values %{$o->{packages}};
     } else {
-	my $useHdlist = $o->{method} !~ /nfs|hd/;
+	my $useHdlist = $o->{method} !~ /nfs|hd/ || $o->{isUpgrade};
+	$useHdlist = 0;
 	eval { $o->{packages} = pkgs::psUsingHdlist() }  if $useHdlist;
 	$o->{packages} = pkgs::psUsingDirectory() if !$useHdlist || $@;
 
@@ -163,4 +167,80 @@ sub install_cpio($$) {
     mkdir $dir, 0755;
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/*");
     "$dir/$name";
+}
+
+sub getHds {
+    my ($o) = @_;
+    my ($ok, $ok2) = 1;
+
+  getHds: 
+    $o->{hds} = catch_cdie { fsedit::hds([ detect_devices::hds() ], $o->{partitioning}) }
+      sub {
+	$o->ask_warn(_("Error"),
+_("I can't read your partition table, it's too corrupted for me :(
+I'll try to go on blanking bad partitions")) unless $o->{partitioning}{readonly};
+	$ok = 0; 1 
+    };
+
+    if (is_empty_array_ref($o->{hds}) && $o->{autoSCSI}) {
+	$o->setupSCSI; #- ask for an unautodetected scsi card
+	goto getHds;
+    }
+
+    ($o->{hds}, $o->{fstab}, $ok2) = fsedit::verifyHds($o->{hds}, $o->{partitioning}{readonly}, $ok);
+
+    $o->ask_warn('', 
+_("DiskDrake failed to read correctly the partition table.
+Continue at your own risk!")) if !$ok2 && $ok;
+
+    $ok2;
+}
+
+sub searchAndMount4Upgrade {
+    my ($o) = @_;
+    my ($root, $found);
+
+    #- try to find the partition where the system is installed if beginner
+    #- else ask the user the right partition, and test it after.
+    getHds($o);
+
+    #- get all ext2 partition that may be root partition.
+    my %Parts = my %parts = map { $_->{device} => $_ } grep { isExt2($_->{type}) } @{$o->{fstab}};
+    while (%parts) {
+	my $root = $::beginner ? first(%parts) : $o->selectRootPartition(keys %parts);
+	$root = delete $parts{$root};
+
+	my $r; unless ($r = $root->{realMntpoint}) {
+	    $r = $o->{prefix};
+	    $root->{mntpoint} = "/"; 
+	    log::l("trying to mount root partition $root->{device}");
+	    eval { fs::mount_part($root, $o->{prefix}, 'readonly') };
+	}
+	my $found = -d "$r/etc/sysconfig" && [ fs::read_fstab("$root/etc/fstab") ];
+
+	unless ($root->{realMntpoint}) {
+	    log::l("umounting non root partition $root->{device}");
+	    eval { fs::umount_part($root) };
+	}
+
+	last if $found;
+
+	delete $root->{mntpoint};
+	$o->ask_warn(_("Information"), 
+		     _("%s: This is not a root partition, please select another one.", $root->{device})) unless $::beginner;
+	undef $root;
+    }
+    $root or die _("No root partition found");
+	
+    $o->ask_warn(_("Information"), _("Found root partition : %s", $root->{device}));
+    $o->{prefix} = $root->{mntpoint};
+
+    #- test if the partition has to be fschecked and remounted rw.
+    unless ($root->{realMntpoint}) {
+	delete $root->{mntpoint};
+	($Parts{$_->{device}} || {})->{mntpoint} = $_->{mntpoint} foreach @$found;
+
+	#- TODO fsck, create check_mount_all ?
+	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
+    }
 }

@@ -121,7 +121,7 @@ $o = $::o = {
     autoSCSI   => 0,
     mkbootdisk => 1, #- no mkbootdisk if 0 or undef,   find a floppy with 1
 #-    packages   => [ qw() ],
-    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0 },
+    partitioning => { clearall => 0, eraseBadPartitions => 0, auto_allocate => 0, autoformat => 0, readonly => 1 },
 #-    partitions => [
 #-		      { mntpoint => "/boot", size =>  16 << 11, type => 0x83 },
 #-		      { mntpoint => "/",     size => 256 << 11, type => 0x83 },
@@ -174,7 +174,7 @@ $o = $::o = {
 #-    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
 
 #-    keyboard => 'de',
-#    display => "192.168.1.19:1",
+#-    display => "192.168.1.19:1",
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
@@ -239,85 +239,7 @@ sub selectKeyboard {
 #------------------------------------------------------------------------------
 sub selectPath {
     $o->selectPath;
-
-    if ($o->{isUpgrade}) {
-	#- try to find the partition where the system is installed if beginner
-	#- else ask the user the right partition, and test it after.
-	unless ($o->{hds}) {
-	    $o->{drives} = [ detect_devices::hds() ];
-	    $o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
-	      sub { 1; };
-
-	    unless (@{$o->{hds}} > 0) {
-		$o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
-	    }
-	}
-
-	my @normal_partitions = fsedit::get_fstab(@{$o->{hds}});
-
-	fs::check_mounted([@normal_partitions]);
-
-	#- get all ext2 partition that may be root partition.
-	my %partitions_lookup;
-	my @partitions = map {
-	    $partitions_lookup{$_->{device}} = $_;
-	    type2fs($_->{type}) eq 'ext2' ? $_->{device} : (); } @normal_partitions;
-
-	my $root;
-	my $root_partition;
-	my $selected_partition;
-	do {
-	    if ($selected_partition->{mntpoint} && !$selected_partition->{currentMntpoint}) {
-		$o->ask_warn(_("Information"), "$selected_partition->{device}" . _(" : This is not a root partition, please select another one."))
-		  unless $::beginner;
-		log::l("umounting non root partition $selected_partition->{device}");
-		eval { fs::umount_part($selected_partition); };
-		$selected_partition->{mntpoint} = '';
-		$selected_partition->{mntreadonly} = undef;
-	    }
-
-	    $root_partition = $::beginner ? $partitions[0] : $o->selectRootPartition(@partitions);
-	    $selected_partition = $partitions_lookup{$root_partition};
-
-	    unless ($root = $selected_partition->{currentMntpoint}) {
-		$selected_partition->{mntpoint} = $root = $o->{prefix};
-		$selected_partition->{mntreadonly} = 1;
-		log::l("trying to mount root partition $root_partition");
-		eval { fs::mount_part($selected_partition); };
-	    }
-
-	    #- avoid testing twice a partition.
-	    for my $i (0..$#partitions) {
-		splice @partitions, $i, 1 if $partitions[$i] eq $root_partition;
-	    }
-	} until $root && -d "$root/etc/sysconfig" && -r "$root/etc/fstab" || !(scalar @partitions);
-
-	
-	if ($root && -d "$root/etc/sysconfig" && -r "$root/etc/fstab") {
-	    $o->ask_warn(_("Information"), _("Found root partition : ") . $root_partition);
-	    $o->{prefix} = $root;
-	    $o->{fstab} = \@normal_partitions;
-
-	    #- test if the partition has to be fschecked and remounted rw.
-	    if ($selected_partition->{mntpoint} && !$selected_partition->{currentMntpoint}) {
-		my @fstab = fs::read_fstab("$root/etc/fstab");
-
-		eval { fs::umount_part($selected_partition); };
-		$selected_partition->{mntpoint} = '';
-		$selected_partition->{mntreadonly} = undef;
-
-		foreach (@fstab) {
-		    if ($selected_partition = $partitions_lookup{$_->{device}}) {
-			$selected_partition->{mntpoint} = $_->{mntpoint};
-		    }
-		}
-		#- TODO fsck, create check_mount_all ?
-		fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
-	    }
-	} else {
-	    $o->ask_warn(_("Error"), _("No root partition found"));
-	}
-    }
+    install_any::searchAndMount4Upgrade($o) if $o->{isUpgrade};
 }
 
 #------------------------------------------------------------------------------
@@ -327,7 +249,6 @@ sub selectInstallClass {
     $::expert   = $o->{installClass} eq "expert";
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
-    $o->{partitioning}{auto_allocate} ||= -1 if $::beginner;
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{doInstallStep}{done}) {
         $o->setPackages(\@install_classes);
@@ -347,43 +268,27 @@ sub setupSCSI {
 sub partitionDisks {
     return if ($o->{isUpgrade});
 
-    unless ($o->{hds}) {
-	$o->{drives} = [ detect_devices::hds() ];
-	$o->{hds} = catch_cdie { fsedit::hds($o->{drives}, $o->{partitioning}) }
-	  sub {
-	      $o->ask_warn(_("Error"),
-_("I can't read your partition table, it's too corrupted for me :(
-I'll try to go on blanking bad partitions"));
-	      $o->{partitioning}{auto_allocate} = 0;
-	      1;
-	  };
+    $::o->{steps}{formatPartitions}{done} = 0;
+    fs::umount_all($o->{fstab}, $o->{prefix}) if $o->{fstab};
 
-	unless (@{$o->{hds}} > 0) {
-	    $o->setupSCSI if $o->{autoSCSI}; #- ask for an unautodetected scsi card
-	}
-    }
-    if (@{$o->{hds}} == 0) { #- no way
-	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
-    }
+    my $ok = is_empty_array_ref($o->{hds}) ? install_any::getHds($o) : 1;
+    my $auto = $ok && !$o->{partitioning}{readonly} &&
+	($o->{partitioning}{auto_allocate} || $::beginner && fsedit::get_fstab(@{$o->{hds}}) < 4);
 
-    $o->{partitioning}{auto_allocate} = 0 
-      if $o->{partitioning}{auto_allocate} == -1 && fsedit::get_fstab(@{$o->{hds}}) >= 4;
+    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $auto;
 
-    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if 
-      $o->{partitioning}{auto_allocate} && ($o->{partitioning}{auto_allocate} != -1 || $::beginner);
-
-    if ($o->{partitioning}{auto_allocated} = ($::beginner && fsedit::get_root_($o->{hds}) && $_[1] == 1)) {
-	install_steps::doPartitionDisks($o, $o->{hds});	
+    if ($auto && fsedit::get_root_($o->{hds}) && $_[1] == 1) {
+	#- we have a root partition, that's enough :)
+	$o->install_steps::doPartitionDisks($o->{hds});	
+    } elsif ($o->{partitioning}{readonly}) {
+	$o->ask_mntpoint_s($o->{fstab});
     } else {
 	$o->doPartitionDisks($o->{hds});
     }
-
     unless ($::testing) {
 	$o->rebootNeeded foreach grep { $_->{rebootNeeded} } @{$o->{hds}};
     }
-
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
-
     fsedit::get_root($o->{fstab}) or die _("Partitioning failed: no root filesystem");
 }
 

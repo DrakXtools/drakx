@@ -17,6 +17,7 @@ use pci_probing::main;
 use install_any;
 use detect_devices;
 use timezone;
+use fsedit;
 use network;
 use mouse;
 use modules;
@@ -78,11 +79,11 @@ sub selectPath($) {
 }
 #------------------------------------------------------------------------------
 sub selectRootPartition($@) {
-    my ($o,@partitions) = @_;
+    my ($o, @parts) = @_;
     $o->{upgradeRootPartition} =
-      $o->ask_from_list_(_("Root Partition"),
-			 _("What is the root partition (/) of your system?"),
-			 [ @partitions ]);
+      $o->ask_from_list(_("Root Partition"),
+			_("What is the root partition (/) of your system?"),
+			[ @parts ], $o->{upgradeRootPartition});
 #- TODO check choice, then mount partition in $o->{prefix} and autodetect.
 #-    install_steps::selectRootPartition($o);
 }
@@ -117,6 +118,37 @@ sub selectMouse {
 }
 #------------------------------------------------------------------------------
 sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1], $_[2]) }
+
+sub ask_mntpoint_s {
+    my ($o, $fstab) = @_;
+    my @fstab = grep { isExt2($_) } @$fstab;
+    @fstab = grep { !isSwap($_) } @$fstab if @fstab == 0;
+    @fstab = @$fstab if @fstab == 0;
+    die _("no available partitions") if @fstab == 0;
+    
+    if (@fstab == 1) {
+	$fstab[0]->{mntpoint} = '/';
+    } elsif ($::beginner) {
+	my %l; $l{"$_->{device} " . _("(%dMb)", $_->{size} / 1024 / 2)} = $_ foreach @fstab;
+	my $e = $o->ask_from_list('', 
+				  _("Which partition do you want to use as your root partition"), 
+				  [ keys %l ]);
+	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
+	$l{$e}{mntpoint} = '/';
+    } else {
+	$o->ask_from_entries_ref('', 
+				 _("Choose the mount points"),
+				 [ map { $_->{device} } @fstab ],
+				 [ map { \$_->{mntpoint} } @fstab ]);
+    }
+    #- assure type is at least ext2
+    (fsedit::get_root($fstab) || {})->{type} = 0x83;
+
+    $_->{mntpoint} && $_->{mntpoint} =~ m|^/| 
+      && !isDos($_) && !isWin($_) 
+	and $_->{type} = 0x83 foreach @$fstab;
+}
+
 #------------------------------------------------------------------------------
 sub rebootNeeded($) {
     my ($o) = @_;
@@ -130,6 +162,7 @@ sub choosePartitionsToFormat($$) {
     $o->SUPER::choosePartitionsToFormat($fstab);
 
     my @l = grep { $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
+    $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
     return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
 
@@ -300,7 +333,7 @@ name and directory should be used for this queue?"),
     $o->{printer}{str_type} =
       $o->ask_from_list_(_("Select Printer Connection"),
 			 _("How is the printer connected?"),
-			 [keys %printer::printer_type],
+			 [ keys %printer::printer_type ],
 			 ${$o->{printer}}{str_type},
 			);
     $o->{printer}{TYPE} = $printer::printer_type{$o->{printer}{str_type}};
@@ -308,7 +341,7 @@ name and directory should be used for this queue?"),
     if ($o->{printer}{TYPE} eq "LOCAL") {
 	{
 	    my $w = $o->wait_message(_("Test ports"), _("Detecting devices..."));
-	    eval { modules::load("lp");modules::load("parport_probe"); };
+	    eval { modules::load("parport_pc"); modules::load("parport_probe"); modules::load("lp"); };
 	}
 
 	my @port = ();
@@ -601,7 +634,7 @@ You can add some more or change the existent ones."),
 	);
 	$c eq "Done" and last;
 
-	my $e = {};
+	my $e = { type => 'other' };
 	my $name = '';
 
 	if ($c ne "Add") { 
@@ -679,7 +712,18 @@ install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone;
 #-######################################################################################
 #- Misc Steps Functions
 #-######################################################################################
-sub loadModule {
+
+#--------------------------------------------------------------------------------
+sub wait_load_module {
+    my ($o, $type, $text, $module) = @_;
+    $o->wait_message('',
+		     [ _("Installing driver for %s card %s", $type, $text),
+		       $::beginner ? () : _("(module %s)", $module)
+		     ]);
+}
+
+
+sub load_module {
     my ($o, $type) = @_;
     my @options;
 
@@ -713,7 +757,10 @@ For instance, ``io=0x300 irq=7''", $l),
 				);
 	}
     }
-    eval { modules::load($m, $type, @options) };
+    eval { 
+	my $w = wait_load_module($o, $type, $l, $m);
+	modules::load($m, $type, @options);
+    };
     if ($@) {
 	$o->ask_yesorno('',
 _("Loading module %s failed.
@@ -726,13 +773,11 @@ Do you want to try again with other parameters?", $l), 1) or return;
 #------------------------------------------------------------------------------
 sub load_thiskind {
     my ($o, $type) = @_;
-    my ($pcmcia, $w) = $o->{pcmcia} unless $::expert && modules::pcmcia_need_config($o->{pcmcia}) && $o->ask_yesorno('', _("Skip PCMCIA probing", 1));
-    modules::load_thiskind($type, sub {
-			       $w = $o->wait_message('',
-						     [ _("Installing driver for %s card %s", $type, $_->[0]),
-						       $::beginner ? () : _("(module %s)", $_->[1])
-						     ]);
-			   }, $pcmcia);
+    my $w; #- needed to make the wait_message stay alive
+    my $pcmcia = $o->{pcmcia}
+      unless $::expert && modules::pcmcia_need_config($o->{pcmcia}) && 
+	     $o->ask_yesorno('', _("Skip PCMCIA probing", 1));
+    modules::load_thiskind($type, sub { $w = wait_load_module($o, $type, @_) }, $pcmcia);
 }
 
 #------------------------------------------------------------------------------
@@ -752,7 +797,7 @@ sub setup_thiskind {
 	$r = $o->ask_from_list_('', $msg, $opt, "No") unless $at_least_one && @l == 0;
 	if ($r eq "No") { return }
 	elsif ($r eq "Yes") {
-	    my @r = $o->loadModule($type) or return;
+	    my @r = $o->load_module($type) or return;
 	    push @l, \@r;
 	} else {
 	    $o->ask_warn('', [ pci_probing::main::list() ]);

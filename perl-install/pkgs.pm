@@ -116,7 +116,7 @@ sub psUsingDirectory() {
 
     log::l("scanning $dirname for packages");
     foreach (all("$dirname")) {
-	my ($name, $version, $release) = /(.*)-([^-]+)-([^-.]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
+	my ($name, $version, $release) = /(.*)-([^-]+)-([^-]+)\.[^.]+\.rpm/ or log::l("skipping $_"), next;
 
 	$packages{$name} = {
             name => $name, version => $version, release => $release,
@@ -151,7 +151,7 @@ sub psUsingHdlist() {
 }
 
 sub chop_version($) {
-    first($_[0] =~ /(.*)-[^-]+-[^-.]+/) || $_[0];
+    first($_[0] =~ /(.*)-[^-]+-[^-]+/) || $_[0];
 }
 
 sub getDeps($) {
@@ -420,6 +420,7 @@ sub install($$) {
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release},
 			       c::headerGetEntry(getHeader($p), 'arch');
+	print $p->{file}, "\n";
 	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, $p->{name} !~ /kernel/); #- TODO: replace `named kernel' by `provides kernel'
 #	c::rpmtransAddPackage($trans, getHeader($p), $p->{file}, 1); #- TODO: replace `named kernel' by `provides kernel'
 	$nb++;

@@ -423,7 +423,7 @@ sub chooseResolutions($$;$) {
 					),
 			       ),
 		    0, gtkadd($W->create_okcancel,
-			      gtksignal_connect(new Gtk::Button('Show all'), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
+			      gtksignal_connect(new Gtk::Button(_("Show all")), clicked => sub { $W->{retval} = 1; $chosen_w = 0; Gtk->main_quit })),
 		    ));
     $depth_combo->disable_activate;
     $depth_combo->set_use_arrows_always(1);

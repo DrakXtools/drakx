@@ -115,8 +115,10 @@ sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
     $_->{mntpoint} = "swap" foreach grep { isSwap($_) } @$fstab;
-    $_->{toFormat} = $_->{mntpoint} &&
-      ($_->{notFormatted} || $o->{partitioning}{autoformat}) foreach @$fstab;
+    $_->{toFormat} = $_->{mntpoint} && 
+      (fsedit::typeOfPart($_->{device}) != $_->{type} ||
+       $_->{notFormatted} || 
+       $o->{partitioning}{autoformat}) foreach @$fstab;
 }
 
 sub formatPartitions {

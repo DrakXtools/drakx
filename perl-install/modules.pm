@@ -2,6 +2,7 @@ package modules;
 
 use diagnostics;
 use strict;
+use vars qw(%loaded);
 
 use common qw(:common :file);
 use pci_probing::main;
@@ -11,6 +12,7 @@ use log;
 
 
 my %conf;
+my %loaded; #- array of loaded modules for each types (scsi/net/...)
 my $scsi = 0;
 my %deps = ();
 
@@ -168,6 +170,7 @@ sub load($;$@) {
 	load($_, 'prereq') foreach @{$deps{$name}};
 	load_raw($name, @options);
     }
+    push @{$loaded{$type}}, $name;
 
     $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name
       if $type && $type eq 'scsi';
@@ -287,7 +290,7 @@ sub load_thiskind($;&$) {
 	&$f($text, $mod) if $f;
 	load($mod, $type);
     }
-    @devs;
+    @devs, map { [ $_, $_ ] } @{$loaded{$type} || []};
 }
 
 sub pcmcia_need_config($) {
@@ -333,5 +336,3 @@ sub get_pcmcia_devices($$) {
 #-    removeModule($m[0]);
 #-    1;
 #-}
-
-

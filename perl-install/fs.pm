@@ -3,7 +3,7 @@ package fs;
 use diagnostics;
 use strict;
 
-use common qw(:common :file :system);
+use common qw(:common :file :system :functional);
 use log;
 use devices;
 use partition_table qw(:types);
@@ -15,7 +15,6 @@ use commands;
 use modules;
 
 1;
-
 
 sub read_fstab($) {
     my ($file) = @_;
@@ -39,7 +38,7 @@ sub check_mounted($) {
     open H, "/proc/swaps";
     foreach (<F>, <G>, <H>) {
 	foreach my $p (@$fstab) {
-	    /$p->{device}\s+([^\s]*)\s+/ and $p->{currentMntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
+	    /$p->{device}\s+([^\s]*)\s+/ and $p->{realMntpoint} = $1, $p->{isMounted} = $p->{isFormatted} = 1;
 	}
     }
 }
@@ -139,8 +138,8 @@ sub umount($) {
     foreach (@mtab) { print F $_ unless /(^|\s)$mntpoint\s/; }
 }
 
-sub mount_part($;$) {
-    my ($part, $prefix) = @_;
+sub mount_part($;$$) {
+    my ($part, $prefix, $rdonly) = @_;
 
     $part->{isMounted} and return;
 
@@ -148,8 +147,7 @@ sub mount_part($;$) {
 	swap::swapon($part->{device});
     } else {
 	$part->{mntpoint} or die "missing mount point";
-	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}),
-	      $part->{mntreadonly} ? 1 : 0);
+	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
@@ -189,36 +187,29 @@ sub umount_all($;$) {
 #- do some stuff before calling write_fstab
 sub write($$) {
     my ($prefix, $fstab) = @_;
-    my @cd_drives = detect_devices::cdroms();
-
-    log::l("scanning /proc/mounts for iso9660 filesystems");
-    unshift @cd_drives, grep { $_->{type} eq 'iso9660' } read_fstab("/proc/mounts");
-    log::l("found cdrom drive(s) " . join(', ', map { $_->{device} } @cd_drives));
-
-    #- cd-rom rooted installs have the cdrom mounted on /dev/root which
-    #- is not what we want to symlink to /dev/cdrom.
-    my $cddev = first(grep { $_ ne 'root' } map { $_->{device} } @cd_drives);
 
     log::l("resetting /etc/mtab");
     local *F;
     open F, "> $prefix/etc/mtab" or die "error resetting $prefix/etc/mtab";
 
-    if ($cddev) {
-	mkdir "$prefix/mnt/cdrom", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom: $!");
-	symlink $cddev, "$prefix/dev/cdrom" or log::l("failed to symlink $prefix/dev/cdrom: $!");
-    }
-    write_fstab($fstab, $prefix, $cddev);
-
-    return if $::g_auto_install;
-
-    devices::make "$prefix/dev/$_->{device}" foreach grep { $_->{device} && !isNfs($_) } @$fstab;
+    my @to_add = (
+       [ split ' ', '/dev/fd0 /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ],
+       [ split ' ', 'none /proc proc defaults 0 0' ],
+       [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ],
+       map_index {
+	   my $i = $::i ? $::i + 1 : '';
+	   mkdir "$prefix/mnt/cdrom$i", 0755 or log::l("failed to mkdir $prefix/mnt/cdrom$i: $!");
+	   symlink $_->{device}, "$prefix/dev/cdrom$i" or log::l("failed to symlink $prefix/dev/cdrom$i: $!");
+	   [ "/dev/cdrom$i", "/mnt/cdrom$i", "auto", "user,noauto,nosuid,exec,nodev,ro", 0, 0 ];
+       } detect_devices::cdroms());
+    write_fstab($fstab, $prefix, @to_add);
 }
 
 sub write_fstab($;$$) {
-    my ($fstab, $prefix, $cddev) = @_;
+    my ($fstab, $prefix, @to_add) = @_;
     $prefix ||= '';
 
-    my @to_add =
+    unshift @to_add,
       map {
 	  my ($dir, $options, $freq, $passno) = qw(/dev/ defaults 0 0);
 	  $options ||= $_->{options};
@@ -226,16 +217,11 @@ sub write_fstab($;$$) {
 	  isExt2($_) and ($freq, $passno) = (1, ($_->{mntpoint} eq '/') ? 1 : 2);
 	  isNfs($_) and ($dir, $options) = ('', 'ro');
 
+	  devices::make("$prefix/$dir$_->{device}") if $_->{device} && $dir;
+
 	  [ "$dir$_->{device}", $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
 
       } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
-
-    {
-      push @to_add, [ split ' ', '/dev/fd0 /mnt/floppy auto sync,user,noauto,nosuid,nodev,unhide 0 0' ];
-      push @to_add, [ split ' ', '/dev/cdrom /mnt/cdrom auto user,noauto,nosuid,exec,nodev,ro 0 0' ] if $cddev;
-      push @to_add, [ split ' ', 'none /proc proc defaults 0 0' ];
-      push @to_add, [ split ' ', 'none /dev/pts devpts mode=0620 0 0' ];
-    }
 
     #- get the list of devices and mntpoint
     my @new = grep { $_ ne 'none' } map { @$_[0,1] } @to_add;

@@ -3,7 +3,7 @@ package partition_table_raw;
 use diagnostics;
 use strict;
 
-use common qw(:common :system);
+use common qw(:common :system :file);
 use devices;
 use c;
 
@@ -19,6 +19,8 @@ my @MBR_signatures = (
     [ 'lilo', 0x6,  "LILO" ],
     [ 'dos',  0xa0, "\x25\x03\x4E\x02\xCD\x13" ],
 );
+
+sub typeOfMBR($) { typeFromMagic(devices::make($_[0]), @MBR_signatures) }
 
 sub compute_CHS($$) {
     my ($hd, $e) = @_;
@@ -112,19 +114,6 @@ sub zero_MBR($) {
     delete $hd->{extended};
 }
 
-sub typeOfMBR($) {
-    my $dev = devices::make($_[0]);
-    local *F; sysopen F, $dev, 0 or return;
-
-    my $tmp;
-    foreach (@MBR_signatures) {
-	my ($name, $offset, $signature) = @$_;
-	sysseek(F, $offset, 0) or next;
-	sysread(F, $tmp, length $signature);
-	$tmp eq $signature and return $name;
-    }
-    undef;
-}
 
 sub isFatFormatted($) {
     my $dev = devices::make($_[0]);

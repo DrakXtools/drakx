@@ -6,11 +6,14 @@ use strict;
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :constant :functional);
+use common qw(:common :constant :functional :file);
 use partition_table qw(:types);
 use partition_table_raw;
+use detect_devices;
 use Data::Dumper;
+use fsedit;
 use devices;
+use fs;
 use log;
 
 #-#####################################################################################
@@ -28,6 +31,13 @@ my @suggestions = (
 );
 my @suggestions_mntpoints = qw(/mnt/dos);
 
+
+my @partitions_signatures = (
+    [ 0x83, 0x438, "\xEF\x53" ],
+    [ 0x82, 4086, "SWAP-SPACE" ],
+);
+
+sub typeOfPart($) { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
 
 #-######################################################################################
 #- Functions
@@ -61,6 +71,21 @@ sub hds($$) {
 	push @hds, $hd;
     }
     [ @hds ];
+}
+
+sub readProcPartitions {
+    my ($hds) = @_;
+    my @parts;
+    foreach (cat_("/proc/partitions")) {
+	my (undef, undef, $size, $device) = split;
+	next if $size eq "1"; #- extended partitions
+	foreach (@$hds) {
+	    push @parts, { start => 0, size => $size * 2, device => $device, 
+			   type => typeOfPart($device), rootDevice => $_->{device} 
+			 } if $device =~ /^$_->{device}./;
+	}
+    }
+    @parts;
 }
 
 sub get_fstab(@) {
@@ -327,6 +352,30 @@ sub rescuept($) {
 
 	partition_table::add($hd, $_, ($b ? 'Extended' : 'Primary'), 1);
     }
+}
+
+sub verifyHds {
+    my ($hds, $readonly, $ok) = @_;
+
+    if (is_empty_array_ref($hds)) { #- no way
+	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
+    }
+
+    my @parts = readProcPartitions($hds);
+    $ok &&= @parts == listlength(get_fstab(@$hds));
+
+    if ($readonly && !$ok) {
+	log::l("using /proc/partitions as diskdrake failed :(");
+	foreach my $hd (@$hds) {
+	    $hd->{primary} = [ grep { $hd->{device} eq $_->{rootDevice} } @parts ];
+	    delete $hd->{extended};
+	}
+    }
+    my $fstab = [ get_fstab(@$hds) ];
+    if (is_empty_array_ref($fstab) && $readonly) {
+	die _("You don't have any partitions!");
+    }
+    ($hds, $fstab, $ok);
 }
 
 #-######################################################################################

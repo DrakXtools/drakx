@@ -8,7 +8,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 %EXPORT_TAGS = (
     common     => [ qw(__ even odd min max sqr sum sign product bool listlength bool2text text2bool to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
     functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
-    file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
+    file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode typeFromMagic) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
 );
@@ -352,6 +352,20 @@ sub bestMatchSentence2 {
 	$best = $count, $bestSentence = $_ if $count > $best;
     }
     $bestSentence;
+}
+
+sub typeFromMagic($@) {
+    my $f = shift;
+    local *F; sysopen F, $f, 0 or return;
+
+    my $tmp;
+    foreach (@_) {
+	my ($name, $offset, $signature) = @$_;
+	sysseek(F, $offset, 0) or next;
+	sysread(F, $tmp, length $signature);
+	$tmp eq $signature and return $name;
+    }
+    undef;
 }
 
 

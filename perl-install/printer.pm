@@ -44,6 +44,7 @@ use Data::Dumper;
 
 =cut
 
+use common qw(:common);
 use commands;
 
 #-#####################################################################################
@@ -240,13 +241,13 @@ my $PRINTER_FILTER_DIR = "/usr/lib/rhs/rhs-printfilters";
 #-#####################################################################################
 
 %printer_type = (
-    "local"             => "LOCAL",
-    "Remote lpd"        => "REMOTE",
-    "SMB/Windows 95/NT" => "SMB",
-    "NetWare"           => "NCP",
+    __("Local printer")     => "LOCAL",
+    __("Remote lpd")        => "REMOTE",
+    __("SMB/Windows 95/NT") => "SMB",
+    __("NetWare")           => "NCP",
 );
 %printer_type_inv = reverse %printer_type;
-$printer_type_default = "local";
+$printer_type_default = "Local printer";
 
 %fields = (
     STANDARD => [qw(QUEUE SPOOLDIR IF)],

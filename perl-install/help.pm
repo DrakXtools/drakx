@@ -193,10 +193,9 @@ and its own \"home directory\", in which these preferences are
 stored.
 
 
-First of all, create an account for yourself! Even if you will be
-the only user of the machine, you may NOT connect as root for daily
-use of the system: it's a very high security risk. Making the
-system unusable is very often a typo away.
+First of all, create an account for yourself! Even if you will be the only user
+of the machine, you may NOT connect as root for daily use of the system: it's a
+very high security risk. Making the system unusable is very often a typo away.
 
 
 Therefore, you should connect to the system using the user account
@@ -425,10 +424,9 @@ and its own \"home directory\", in which these preferences are
 stored.
 
 
-First of all, create an account for yourself! Even if you will be
-the only user of the machine, you may NOT connect as root for daily
-use of the system: it's a very high security risk. Making the
-system unusable is very often a typo away.
+First of all, create an account for yourself! Even if you will be the only user
+of the machine, you may NOT connect as root for daily use of the system: it's a
+very high security risk. Making the system unusable is very often a typo away.
 
 
 Therefore, you should connect to the system using the user account

@@ -170,7 +170,7 @@ as_root:
 	chmod a+w /mnt/initrd
 
 full_stage2: $(BASE)/depslist $(BASE)/hdlist
-	rm -rf $(DEST)
+	sudo rm -rf $(DEST)
 	mkdir -p $(DEST)
 	$(MAKE) get_needed_files 
 	$(MAKE) stage2
