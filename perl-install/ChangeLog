@@ -1,3 +1,402 @@
+2004/09/01  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: fixed/added some laptop entries
+
+2004/09/01  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: Updated POT file
+
+2004/09/01  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/09/01  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: add notconfigured state
+
+	* share/rpmsrate: add xawtv in TV section, install ati.2 for ATI cards
+	only
+
+	* standalone/drakboot: do not crash if default autologin or default
+	desktop doesn't exist
+
+	* standalone/service_harddrake: write modules conf files if a tv card is
+	detected
+
+	* mdk-stage1/init.c: drop non-standard tld (localdomain)
+
+	* standalone/net_monitor: fix stupid error
+
+	* network/network.pm: symlink resolv.conf in install root, so that it
+	works for dhcp too
+	write /etc/resolv.conf in install root
+
+	* network/tools.pm: revert titi fix, do not return random interface if
+	internet connection
+	is not configured
+	do not use find over grep, just find
+
+2004/09/01  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/fonts.tar.bz2: fixed fonts.cache-1 file so that the tamil font no
+	longer claims it
+	support western languages.
+	modified the fonts.conf file so that a subset of the "sans" alias list
+	is copied into the "serif" and "monospace" aliases list, before the
+	listing
+	of problematic fonts, hoping it will solve bug #10937
+	(apparently the problem is that input fields want a monospace font,
+	there is no latin monospace font, and a rando font is used, the tamil
+	one having wrong glyphs at some latin1 positions)
+
+2004/09/01  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* lang.pm: Fix syntax error
+
+	* any.pm: Fix generation of urpmi.cfg when doing a disk install from a
+	live tree
+
+	* share/rpmsrate: remove duplicated entry for nut-server
+
+	* install_any.pm: perl_checker cleanup
+	ensure install_interactive is loaded
+	When adding a networked supplementary media, configure the network if
+	needed. Install basesystem for this purpose.
+
+	* Makefile: Split into a new target mdkinst_stage2
+
+2004/09/01  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed bug of printerdrake trying to install the virtual package
+	"scanner-gui" during installation (when a multi-function device from HP
+	is present).
+
+2004/09/01  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/net_applet: perl_checker cleanups
+
+	* standalone/harddrake2: enable harddrake2 to properly adapt to theme
+	changes and the like
+
+	* share/rpmsrate: enable SCIM for Amharic language
+
+	* standalone/drakclock: unbreak drakclock
+
+	* network/tools.pm (get_internet_connection) if no default route exits,
+	take first route in order
+	to not have strange messages in net_appletb
+
+	* drakxtools.spec: 10.1-0.18mdk
+
+	* lang.pm: enable SCIM for Amharic language
+	typo fix
+	simplify
+
+	* detect_devices.pm (getBewan) reuse ematching_desc__regexp()
+
+	* standalone/drakautoinst (create_notebook) follow the same parameter
+	order as gtkappend_page() use and
+	as C/Gtk+ does
+
+	* ugtk2.pm (create_notebook) follow the same parameter order as
+	gtkappend_page() use and
+	as C/Gtk+ does
+	(create_notebook) give meaningfull name to variables
+
+2004/09/01  Warly  <warly at mandrakesoft.com>
+
+	* standalone/drakclock: initialize  and  so that motion_event correctly
+	handle the mouse moves
+	Repaint the calendar (especially when the day changed)
+	Make the hour tick shorter
+	Check if the ntpdate command succeed or not, do not quit if it fails
+	Only apply the date command again if ntp mode is not selected
+	Do not perform a date command when ntpdate has just been called
+
+2004/08/31  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated a part of
+
+2004/08/31  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: ads #25: use translation from Marketing and not one
+	which come from nowhere
+	Close <b> in ads #28
+
+2004/08/31  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* harddrake/data.pm: added initial support for UPS
+
+	* detect_devices.pm: please perl_checker
+	simplify UPS detection and report the needed info for harddrake
+
+	* share/rpmsrate: added kuickshow and supertux
+
+2004/08/31  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/shorewall.pm: use the loc zone in policy only if the loc
+	interface exists
+
+2004/08/31  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: Updated POT file
+
+2004/08/31  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* share/advertising/README, share/advertising/corpo-server-03.png,
+	share/advertising/corpo-desk-10.pl,
+	share/advertising/corpo-server-09.png, share/advertising/list-cpd,
+	share/advertising/corpo-server-06.pl,
+	share/advertising/corpo-server-01.pl,
+	share/advertising/corpo-desk-01.png,
+	share/advertising/corpo-desk-05-a.pl,
+	share/advertising/corpo-desk-09.png,
+	share/advertising/corpo-desk-05-a.png,
+	share/advertising/corpo-desk-06-a.pl,
+	share/advertising/corpo-desk-06.png, share/advertising/corpo-desk-02.pl,
+	share/advertising/corpo-desk-06-b.pl,
+	share/advertising/corpo-server-08.pl,
+	share/advertising/corpo-desk-05-b.png,
+	share/advertising/corpo-server-02.pl,
+	share/advertising/corpo-server-10.png,
+	share/advertising/corpo-server-10.pl,
+	share/advertising/corpo-server-05.pl,
+	share/advertising/corpo-server-08.png, share/advertising/list-cps,
+	share/advertising/corpo-desk-03.png,
+	share/advertising/corpo-server-06.png,
+	share/advertising/corpo-desk-07.pl,
+	share/advertising/corpo-server-07.pl,
+	share/advertising/corpo-desk-04.pl, share/advertising/corpo-desk-09.pl,
+	share/advertising/corpo-server-05.png,
+	share/advertising/corpo-server-02.png,
+	share/advertising/corpo-desk-05.png,
+	share/advertising/corpo-desk-02.png, share/advertising/corpo-desk-05.pl,
+	share/advertising/corpo-desk-06.pl, share/advertising/corpo-desk-08.png,
+	share/advertising/corpo-server-04.pl,
+	share/advertising/corpo-desk-07.png,
+	share/advertising/corpo-server-09.pl,
+	share/advertising/corpo-server-07.png,
+	share/advertising/corpo-desk-04.png,
+	share/advertising/corpo-server-01.png,
+	share/advertising/corpo-desk-03.pl,
+	share/advertising/corpo-desk-06-b.png,
+	share/advertising/corpo-desk-05-b.pl,
+	share/advertising/corpo-desk-10.png,
+	share/advertising/corpo-server-04.png,
+	share/advertising/corpo-desk-01.pl,
+	share/advertising/corpo-desk-06-a.png,
+	share/advertising/corpo-desk-08.pl,
+	share/advertising/corpo-server-03.pl: Corporate material
+
+2004/08/31  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: dia zero
+	melo
+
+2004/08/31  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet (is_running) enhance regexp, use any
+
+2004/08/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* lang.pm: make CONSOLE_NOT_LOCALIZED written to i18n file
+
+	* share/po/nl.po, share/po/id.po, share/po/lt.po, share/po/cy.po,
+	share/po/et.po, share/po/da.po, share/po/mt.po, share/po/uz@Latn.po:
+	updated Welsh and Estonian files; fixed some errors due to automatic
+	replacements.
+
+2004/08/31  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_steps.pm, install_any.pm, install_steps_interactive.pm: Support
+	for unselecting some media before the install (begin.)
+
+	* pkgs.pm: Remove dead code
+	Support for unselecting some media before the install (begin.)
+
+	* share/rpmsrate: Remove duplicate entries in rpmsrate
+
+	* share/po/fr.po: French grammar fix
+
+2004/08/31  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/data.pm: 
+	  - Let xpp also be installed when in daemon-less CUPS client mode.
+
+2004/08/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect (build_notebook) fix crashes (#11100)
+
+	* share/rpmsrate: install nut-server for MGE's UPS
+
+	* standalone/net_applet (is_running) make it work
+	(is_running) try harder
+	(is_running) ignore our own process ... (brown paper bag bug)
+
+2004/08/30  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: part updated
+
+2004/08/30  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/advertising/25.png: New image
+
+2004/08/30  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* standalone/net_applet: 
+	  - no need to run net-monitor with '--testing'
+	  - launch net_monitor in background
+	  - typo
+	  - avoid duplication
+	  - s/and/or/ (oblin)
+	  - launch net_monitor once (test if there's a running net_monitor
+	before)
+
+2004/08/30  Frederic Lepied  <flepied at mandrakesoft.com>
+
+	* share/rpmsrate: added smartmontools
+
+2004/08/30  Funda Wang <fundawang at linux.net.cn>
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/08/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/tools.pm, standalone/net_monitor: move start_interface and
+	stop_interface from net_monitor to network::tools, use it in net_monitor
+	and net_applet
+
+	* network/netconnect.pm: adsl_conf_backend needs $intf now
+	NET_DEVICE is the ethernet interface for pptp too
+
+	* standalone/net_applet: move start_interface and stop_interface from
+	net_monitor to network::tools, use it in net_monitor and net_applet
+	allow to connect/disconnect from net_applet
+	is_running returns a boolean which would never be > 1
+
+	* network/adsl.pm: write ifcfg files for NET_DEVICE if it's ethernet
+	(pptp, pppoe)
+
+2004/08/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/br.po, share/po/sl.po, share/po/nn.po,
+	share/po/tr.po, share/po/mt.po, share/po/ga.po, share/po/mn.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/az.po, share/po/pt.po, share/po/fr.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+	updated pot file
+
+	* standalone/printerdrake: fixed use of N()
+
+	* share/po/it.po: updated Italian file
+	updated pot file
+	updated pot file
+
+2004/08/30  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: Fix support for suppl. CDs with hdlists file
+
+2004/08/30  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/printerdrake.pm: 
+	  - Fixed duplicate translatable strings.
+	  - Added column to show whether the printers are enabled or disables to
+	the list of available print queues in the main window.
+	  - Added command to the edit-printer window to enable and disable print
+	queues.
+	  - Fixed bug of "--expert" command line option of printerdrake not
+	working.
+
+	* printer/cups.pm, printer/main.pm, standalone/printerdrake: 
+	  - Added column to show whether the printers are enabled or disables to
+	the list of available print queues in the main window.
+	  - Added command to the edit-printer window to enable and disable print
+	queues.
+	  - Fixed bug of "--expert" command line option of printerdrake not
+	working.
+
+2004/08/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.17mdk
+
+	* share/po/br.po: update
+	typo fixes (Arpad Biro <biro_arpad@yahoo.com>)
+
+	* standalone/drakclock: fix layout so that NTP frame is not badly cut on
+	small resolution (#10971)
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, standalone/drakvpn, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/he.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/ltg.po, share/po/nb.po, share/po/ky.po,
+	share/po/uz.po, share/po/ro.po, share/po/zh_TW.po,
+	standalone/drakconnect, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sl.po, share/po/nn.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/mn.po, share/po/uk.po,
+	share/po/am.po, share/po/lt.po, share/po/cy.po, share/po/tg.po,
+	share/po/bs.po, share/po/fur.po, share/po/mk.po, share/po/wa.po,
+	share/po/is.po, share/po/hi.po, share/po/af.po, share/po/az.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/bg.po,
+	share/po/cs.po, share/po/el.po, share/po/uz@Latn.po: typo fixes (Arpad
+	Biro <biro_arpad@yahoo.com>)
+
+	* share/po/fr.po: minor update
+	update
+	typo fixes (Arpad Biro <biro_arpad@yahoo.com>)
+
 2004/08/30  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/drakupdate_fstab: do not restrict "many partitions" test to
@@ -36766,7 +37165,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.953 2004/08/27 09:00:34 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.954 2004/08/30 05:13:10 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
