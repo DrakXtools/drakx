@@ -494,7 +494,7 @@ killall pppd
                          { label => N("Domain name"), val => \$modem->{domain}, disabled => $modem_dyn_dns },
                          { label => N("First DNS Server (optional)"), val => \$modem->{dns1}, disabled => $modem_dyn_dns },
                          { label => N("Second DNS Server (optional)"), val => \$modem->{dns2}, disabled => $modem_dyn_dns },
-                         { label => N("Set hostname from IP"), val => \$modem->{AutoName}, disabled => $modem_dyn_dns },
+                         { label => N("Set hostname from IP"), val => \$modem->{AutoName}, type => 'bool', disabled => $modem_dyn_dns },
                         ];
                     },
                     next => "ppp_gateway",
