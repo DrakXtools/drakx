@@ -1475,7 +1475,7 @@ sub install_spooler {
 	    printer::restart_service("lpd");
 	    # Should it be started at boot time?
 	    start_spooler_on_boot($printer, $in, "lpd");
-	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	    # Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...
 	    printer::set_alternative("lpr","/usr/bin/lpr-lpd");
 	    printer::set_alternative("lpq","/usr/bin/lpq-lpd");
 	    printer::set_alternative("lprm","/usr/bin/lprm-lpd");
@@ -1491,7 +1491,7 @@ sub install_spooler {
 	    }
 	    # PDQ has no daemon, so nothing needs to be started
 
-	    # Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
+	    # Set the PDQ tools as defaults for "lpr", "lpq", "lprm", ...
 	    printer::set_alternative("lpr","/usr/bin/lpr-pdq");
 	    printer::set_alternative("lpq","/usr/bin/lpq-foomatic");
 	    printer::set_alternative("lprm","/usr/bin/lprm-foomatic");
@@ -1576,9 +1576,10 @@ sub main {
 
     }
 
-    # If we have chosen a spooler, install it.
+    # If we have chosen a spooler, install it and mark it as the default.
     if (($printer->{SPOOLER}) && ($printer->{SPOOLER} ne '')) {
 	if (!install_spooler($printer, $in)) {return;}
+        printer::set_default_spooler($printer);
     }
 
     # Control variables for the main loop
