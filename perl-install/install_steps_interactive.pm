@@ -771,7 +771,7 @@ contain security or bug fixes.
 To download these packages, you will need to have a working Internet 
 connection.
 
-Do you want to install the updates ?")),
+Do you want to install the updates?")),
 			   interactive_help_id => 'installUpdates',
 					       }) or return;
     }

@@ -260,7 +260,7 @@ sub real_main {
                     data => \@connection_list,
                     post => sub {
                         $is_wireless = $cnx_type eq N("Wireless connection");
-                        #- why read again the net_conf here ?
+                        #- why read again the net_conf here?
                         read_net_conf($netcnx, $netc, $intf) if $::isInstall;  # :-(
                         $type = $netcnx->{type} = $connections{$cnx_type};
                         if ($type eq 'cable') {
@@ -841,7 +841,7 @@ You can find a driver on http://eciadsl.flashtux.org/"),
                    {
                     name => N("WARNING: this device has been previously configured to connect to the Internet.
 Modifying the fields below will override this configuration.
-Do you really want to reconfigure this device ?"),
+Do you really want to reconfigure this device?"),
                     type => "yesorno",
                     default => "no",
                     post => sub {
