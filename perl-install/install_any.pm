@@ -965,7 +965,7 @@ sub getHds {
     fs::add2all_hds($all_hds, @{$o->{manualFstab}});
 
     $o->{all_hds} = $all_hds;
-    $o->{fstab} = [ fsedit::get_all_fstab($all_hds) ];
+    $o->{fstab} = [ fsedit::get_really_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
     my @win = grep { isFat_or_NTFS($_) && isFat_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
