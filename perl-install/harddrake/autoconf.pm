@@ -19,9 +19,9 @@ sub xconf {
 }
 
 sub network_conf {
-    my ($o) = @_;
+    my ($obj) = @_;
     require network::network;
-    network::network::easy_dhcp($o->{modules_conf}, $o->{netc}, $o->{intf}) and $o->{netcnx}{type} = 'lan';
+    network::network::easy_dhcp($obj->{modules_conf}, $obj->{netc}, $obj->{intf}) and $obj->{netcnx}{type} = 'lan';
 }
 
 1;
