@@ -3,7 +3,7 @@ package crypto; # $Id$
 use diagnostics;
 use strict;
 
-use vars qw(%url2land %land2tzs %static_mirrors %mirrors);
+use vars qw($o %url2land %land2tzs %static_mirrors %mirrors);
 
 use MDK::Common::System;
 use common;
