@@ -127,7 +127,7 @@ sub connected_bg {
   	if (defined($a = <F>)) {
 	    close($kid_pipe) || warn "kid exited $?";
 	    undef $kid_pipe;
-	    print STDERR "debug - hostname result : $a\n"
+	    print STDERR "debug - hostname result : $a\n";
 	    $$ref = $a;
   	}
     } else { $kid_pipe = connected2() }
