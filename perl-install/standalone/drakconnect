@@ -283,7 +283,10 @@ sub build_notebook {
 	gtkpack_($gui->{sheet}{N("TCP/IP")} = Gtk2::VBox->new(0,0),
 		 if_($interface =~ /eth/, 
 		      0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
-								     changed => sub { $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}; $apply->() },
+								     changed => sub { 
+							      foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
+								  $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0)
+							      }; $apply->() },
 								    ),
 		     ),
 		 1, gtkpack(Gtk2::HBox->new(0,0),
@@ -321,8 +324,11 @@ sub build_notebook {
 				    ),
 			   ),
 		);
-	$interface =~ /eth/ ? $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) : delete $gui->{intf}{BOOTPROTO};
-	$interface !~ /eth/ and $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+	if ($interface =~ /eth/) { $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) } 
+	else {
+	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
+	    delete $gui->{intf}{BOOTPROTO};
+	}
 	!$intf->{IPADDR} and ($intf->{IPADDR}, $gui->{active}, $intf->{NETMASK}) = get_intf_ip($interface);
 	$gui->{netc}{$_}->set_text($netc->{$_}) foreach keys %{$gui->{netc}};
     }
