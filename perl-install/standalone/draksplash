@@ -502,7 +502,7 @@ sub show_prev {
 	 or $prev_canvas = new Gtk2::DrawingArea() and $prev_window->add($prev_canvas);
  $prev_canvas->set_size_request($theme{res}{w}, $theme{res}{h});
  $prev_canvas->signal_connect(expose_event => sub {
-     $prev_canvas->window->draw_pixmap($prev_canvas->style->bg_gc('normal'),$prev_pix,0,0,0,0, $theme{res}{w}, $theme{res}{h});
+     $prev_pic->render_to_drawable($prev_canvas->window, $prev_canvas->style->fg_gc('normal'),0,0,0,0, $theme{res}{w}, $theme{res}{h}, 'normal', 0, 0);
      $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true,$txt_tl_x, $txt_tl_y,$txt_width,$txt_height);
      $prev_canvas->window->draw_rectangle($prev_canvas->style->black_gc, $true, $prog_tl_x,$prog_tl_y,$prog_width, $prog_height);
  });
