@@ -7,6 +7,7 @@ use lib qw(/usr/bin/perl-install .);
 use common;
 use commands;
 
+$::isInstall = 1;
 my $progname = basename($0);
 
 eval {
