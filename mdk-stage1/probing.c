@@ -40,6 +40,7 @@
 #include <net/if.h>
 #include <sys/ioctl.h>
 #include <sys/mount.h>
+#include <pci/pci.h>
 #include "stage1.h"
 
 #include "log.h"
@@ -223,51 +224,80 @@ void probe_that_type(enum driver_type type, enum media_bus bus __attribute__ ((u
 
 		while (1) {
 			unsigned int i;
-			unsigned short vendor, device, subvendor, subdevice, devbusfn;
-			subvendor = 0xFFFF;
+			unsigned short vendor, device, subvendor, subdevice, class_, class_prog, devbusfn;
+			const char *name, *module;
 
 			if (!fgets(buf, sizeof(buf), f)) break;
-		
+	
 			sscanf(buf, "%hx %x", &devbusfn, &i);
 			device = i;
 			vendor = i >> 16;
- 
+
+			{
+				int bus = devbusfn >> 8;
+				int device_p = (devbusfn & 0xff) >> 3;
+				int function = (devbusfn & 0xff) & 0x07;
+				char file[100];
+				int sf;
+				sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
+				if ((sf = open(file, O_RDONLY)) == -1) {
+					log_message("PCI: could not open file for full probe (%s)", file);
+					continue;
+				}
+				if (read(sf, buf, 48) == -1) {
+					log_message("PCI: could not read 48 bytes from %s", file);
+					close(sf);
+					continue;
+				}
+				close(sf);
+				memcpy(&class_prog, buf+9, 1);
+				memcpy(&class_, buf+10, 2);
+				memcpy(&subvendor, buf+44, 2);
+				memcpy(&subdevice, buf+46, 2);
+			}
+
+			/* special rules below must be in sync with ldetect/pci.c */
+
+			if (class_ == PCI_CLASS_SERIAL_USB) {
+				/* taken from kudzu's pci.c */
+				module = 
+					class_prog == 0 ? "usb-uhci" : 
+					class_prog == 0x10 ? "usb-ohci" :
+					class_prog == 0x20 ? "ehci-hcd" : NULL;
+				if (module) {
+					name = "USB Controller";
+					goto found_pci_device;
+				}
+			}
+			if (class_ == PCI_CLASS_SERIAL_FIREWIRE) {
+				/* taken from kudzu's pci.c */
+				if (class_prog == 0x10) {
+					module = strdup("ohci1394");
+					name = "Firewire Controller";
+					goto found_pci_device;
+				}
+			}
+
 			for (i = 0; i < len_full; i++)
 				if (pcidb_full[i].vendor == vendor && pcidb_full[i].device == device) {
-					if (subvendor == 0xFFFF) {
-						int bus = devbusfn >> 8;
-						int device_p = (devbusfn & 0xff) >> 3;
-						int function = (devbusfn & 0xff) & 0x07;
-						char file[100];
-						int sf;
-						log_message("PCI: device %04x %04x needs full pci probe", vendor, device);
-						sprintf(file, "/proc/bus/pci/%02x/%02x.%d", bus, device_p, function);
-						if ((sf = open(file, O_RDONLY)) == -1) {
-							log_message("PCI: could not open file for full probe (%s)", file);
-							continue;
-						}
-                                                if (read(sf, buf, 48) == -1) {
-							log_message("PCI: could not read 48 bytes from %s", file);
-                                                        close(sf);
-							continue;
-						}
-						close(sf);
-						memcpy(&subvendor, buf+44, 2);
-						memcpy(&subdevice, buf+46, 2);
-						log_message("PCI: device is actually %04x %04x %04x %04x", vendor, device, subvendor, subdevice);
-					}
 					if (pcidb_full[i].subvendor == subvendor && pcidb_full[i].subdevice == subdevice) {
-						discovered_device(type, vendor, device, subvendor, subdevice, pcidb_full[i].name, pcidb_full[i].module);
-						goto next_pci_device;
+						name = pcidb_full[i].name;
+						module = pcidb_full[i].module;
+						goto found_pci_device;
 					}
 				}
 			
 			for (i = 0; i < len; i++)
 				if (pcidb[i].vendor == vendor && pcidb[i].device == device) {
-					discovered_device(type, vendor, device, 0xFFFF, 0xFFFF, pcidb[i].name, pcidb[i].module);
-					goto next_pci_device;
+					name = pcidb[i].name;
+					module = pcidb[i].module;
+					goto found_pci_device;
 				}
-		next_pci_device:;
+
+			continue;
+
+		found_pci_device:
+			discovered_device(type, vendor, device, subvendor, subdevice, name, module);
 		}
 	end_pci_probe:;
 		if (f)
