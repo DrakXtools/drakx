@@ -31,6 +31,7 @@ install:
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
+	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 
 	install -m 644 *.pm $(LIBDEST)
 	install -m 644 network/*.pm $(NETLIBDEST)
