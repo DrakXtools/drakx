@@ -5,7 +5,7 @@ use MDK::Common;
 use utf8;
 
 my $help;
-my $dir = "doc/manual/literal/drakx";
+my $dir = "doc/manualB/modules";
 my $xsltproc = "/usr/bin/xsltproc";
 
 if ( ! -x "$xsltproc" ){
@@ -13,13 +13,18 @@ if ( ! -x "$xsltproc" ){
     print "so type \"urpmi libxslt-proc\" please.\n";
     exit 1;
 }
-my @langs = grep { /^..$/ && -e "$dir/$_/drakx-help.xml" } all($dir) or die "no XML help found in $dir\n";
+my @langs = grep { !/ru|pt/ } grep { /^..$/ && -e "$dir/$_/drakx-chapter.xml" } all($dir) or die "no XML help found in $dir\n";
 
 my %helps = map {
     my $lang = $_;
+    my $file = "$dir/$lang/drakx_full.xml";
+    my $template_file = "$dir/$lang/drakx.xml";
+    
+    output($template_file, do { (my $s = $template) =~ s/__LANG__/$lang/g; $s });
+    system("$xsltproc id.xsl $template_file > $file") == 0 or die "$xsltproc id.xsl $template_file failed\n";
+    
     my $p = new XML::Parser(Style => 'Tree');
-    open F, "$xsltproc id.xsl $dir/$lang/drakx-help.xml|";
-    my $tree = $p->parse(*F);
+    my $tree = $p->parsefile($file);
 
     $lang => rewrite2(rewrite1(@$tree), $lang);
 } @langs;
@@ -35,7 +40,7 @@ foreach my $lang (keys %helps) {
     print F "\n";
     foreach my $id (keys %{$helps{$lang}}) {
 	$base->{$id} or die "$lang:$id doesn't exist in english\n";
-	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/doc/manual/literal/drakx/$lang/drakx-help.xml\n);
+	print F qq(# DO NOT BOTHER TO MODIFY HERE, SEE:\n# cvs.mandrakesoft.com:/cooker/$dir/$lang/drakx-chapter.xml\n);
 	print F qq(msgid ""\n");
 	print F join(qq(\\n"\n"), split "\n", $base->{$id});
 	print F qq("\nmsgstr ""\n");
@@ -47,6 +52,15 @@ unlink(".memdump");
 
 sub save_help {
     my ($help) = @_;
+
+    #- HACK, don't let this one disappear
+    $help->{configureXxdm} = 
+'Finally, you will be asked whether you want to see the graphical interface
+at boot. Note this question will be asked even if you chose not to test the
+configuration. Obviously, you want to answer \"No\" if your machine is to
+act as a server, or if you were not successful in getting the display
+configured.';
+
     local *F;
     open F, ">:encoding(ascii)", "../../help.pm";
     print F q{package help;
@@ -60,10 +74,11 @@ use common;
 %steps = (
 empty => '',
 };
-    print F qq(
-$_ => 
-__("$help->{$_}"),
-) foreach sort keys %$help;
+    foreach (sort keys %$help) {
+	my $s = to_ascii($help->{$_});
+	print STDERR "Writing id=$_\n";
+	print F qq(\n$_ => \n__("$s"),\n);
+    }
     print F ");\n";
 }
 
@@ -79,7 +94,7 @@ sub rewrite1 {
 	    foreach ($tree) {
 		s/\s+/ /gs;
 		s/"/\\"/g;
-		tr/\x{2013}\x{00e9}/-e/;
+		s/\x{2013}/-/g;
 	    }
 	    push @l, $tree
 	} elsif ($tag eq 'screen') {
@@ -135,6 +150,7 @@ sub rewrite2 {
 sub rewrite2_ {
     my ($tree) = @_;
     ref($tree) or return $tree;
+    !$tree->{attr}{condition} || $tree->{attr}{condition} !~ /no-inline-help/ or return '';
 
     my $text = do {
 	my @l = map { rewrite2_($_) } @{$tree->{children}};
@@ -187,12 +203,15 @@ sub rewrite2_ {
 	# ignored tags
 	$text;
     } elsif (member($tree->{tag},
-		    'title', 'article', 'primary', 'secondary', 
-		    'indexterm', 
+		    qw(title article primary secondary indexterm revnumber
+                       date authorinitials revision revhistory chapterinfo
+                       imagedata imageobject mediaobject figure
+                       book chapter)
 		   )) {
 	# dropped tags
 	'';
-    } elsif ($tree->{tag} eq 'sect1') {
+    } elsif ($tree->{tag} =~ /sect[12]/) {
+	my $id = $tree->{attr}{id} && $tree->{attr}{id} =~ /drakxid-(.*)/ ? $1 : return;
 	$text =~ s/^\s+//;
 
 	my @footnotes = map { 
@@ -200,12 +219,12 @@ sub rewrite2_ {
 	    $s =~ s/^\s+//;
 	    "(*) $s";
 	} find('footnote', $tree);
-	$help->{$tree->{attr}{id}} = aerate($text . join('', @footnotes));
+	$help->{$id} = aerate($text . join('', @footnotes));
 	'';
     } elsif ($tree->{tag} eq 'screen') {
 	qq(\n$text\n);
     } else {
-	die "unknown tag $tree->{tag}\n";
+	warn "unknown tag $tree->{tag}\n";
     }
 }
 
@@ -215,4 +234,70 @@ sub aerate {
     #- which cause msgmerge to add a lot of fuzzy
     my $s2 = join("\n\n", map { join("\n", warp_text($_, 75)) } split "\n", $s);
     $s2;
+}
+
+sub to_ascii {
+    local $_ = $_[0];
+    tr[ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]
+      [AAAAAAACEEEEIIIIDNOOOOOxOUUUUY_aaaaaaaceeeeiiiionooooo_ouuuuy_y];
+    s/\x81//g; #- why is this needed???
+    s/ß/ss/g;
+    $_;
+}
+
+BEGIN {
+    $template = <<'EOF';
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"/usr/share/sgml/docbook/xml-dtd-4.1.2/docbookx.dtd"[
+
+<!ENTITY drakx-chapter SYSTEM 'drakx-chapter.xml'>
+
+<!ENTITY % params.ent SYSTEM "../../manuals/Starter/__LANG__/params.ent">
+%params.ent;
+<!ENTITY % strings.ent SYSTEM "../../manuals/Starter/__LANG__/strings.ent">
+%strings.ent;
+
+<!ENTITY step-only-for-expert "">
+
+<!ENTITY % acronym-list SYSTEM "../../entities/__LANG__/acronym_list.ent" >
+%acronym-list;
+<!ENTITY % button-list SYSTEM "../../entities/__LANG__/button_list.ent" >
+%button-list;
+<!ENTITY % companies SYSTEM "../../entities/__LANG__/companies.ent" >
+%companies;
+<!ENTITY % icon-list SYSTEM "../../entities/__LANG__/icon_list.ent" >
+%icon-list;
+<!ENTITY % menu-list SYSTEM "../../entities/__LANG__/menu_list.ent" >
+%menu-list;
+<!ENTITY % tab-list SYSTEM "../../entities/__LANG__/tab_list.ent" >
+%tab-list;
+<!ENTITY % tech SYSTEM "../../entities/__LANG__/tech.ent" >
+%tech;
+<!ENTITY % text-field-list SYSTEM "../../entities/__LANG__/text_field_list.ent" >
+%text-field-list;
+<!ENTITY % titles SYSTEM "../../entities/__LANG__/titles.ent" >
+%titles;
+<!ENTITY % typo SYSTEM "../../entities/__LANG__/typo.ent" >
+%typo;
+<!ENTITY % common SYSTEM "../../entities/common.ent" >
+%common;
+<!ENTITY % common-acronyms SYSTEM "../../entities/common_acronyms.ent" >
+%common-acronyms;
+<!ENTITY % prog-list SYSTEM "../../entities/prog_list.ent" >
+%prog-list;
+
+<!ENTITY lang '__LANG__'>
+
+]>
+
+<book>
+  <title>DrakX Documentation</title>
+
+  &drakx-chapter;
+
+</book>
+EOF
+
 }
