@@ -7,7 +7,7 @@ sub kinds {
     my $no_para = @_ == 0;
     my ($meta_class) = @_;
     my $allow_AD = $no_para || $meta_class =~ /corporate/;
-    ('local', 'LDAP', 'NIS', 'winbind', if_($allow_AD, 'AD', 'SMBKRB'));
+    ('local', 'LDAP', 'NIS', 'SmartCard', 'winbind', if_($allow_AD, 'AD', 'SMBKRB'));
 }
 
 sub kind2name {
@@ -15,7 +15,8 @@ sub kind2name {
     # Keep the following strings in sync with kind2description ones!!!
     ${{ local => N("Local file"), 
     LDAP => N("LDAP"), 
-    NIS => N("NIS"), 
+    NIS => N("NIS"),
+    SmartCard => N("Smart Card"),
     winbind => N("Windows Domain"), 
     AD => N("Active Directory with SFU"),
     SMBKRB => N("Active Directory with Winbind") }}{$kind};
@@ -146,7 +147,9 @@ sub set {
 
     sshd_config_UsePAM($kind ne 'local');
 
-    if ($kind eq 'LDAP') {
+    if ($kind eq 'SmartCard') {
+	set_pam_authentication('castella');
+    } elsif ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
 	my $domain = $netc->{LDAPDOMAIN} || do {
@@ -295,7 +298,7 @@ sub set {
 
 
 sub pam_modules() {
-    'pam_ldap', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir';
+    'pam_ldap', 'pam_castella', 'pam_winbind', 'pam_krb5', 'pam_mkhomedir';
 }
 sub pam_module_from_path { 
     $_[0] && $_[0] =~ m|(/lib/security/)?(pam_.*)\.so| && $2;
@@ -324,11 +327,15 @@ sub set_pam_authentication {
     
     my %special = (
 	auth => \@authentication_kinds,
-	account => \@authentication_kinds,
+	account => [ difference2(\@authentication_kinds, [ 'castella' ]) ],
 	password => [ intersection(\@authentication_kinds, [ 'ldap', 'krb5' ]) ],
     );
     my %before_first = (
-	session => intersection(\@authentication_kinds, [ 'winbind', 'krb5','ldap' ]) ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') : '',
+	session => 
+	  intersection(\@authentication_kinds, [ 'winbind', 'krb5','ldap' ]) 
+	    ? pam_format_line('session', 'optional', 'pam_mkhomedir', 'skel=/etc/skel/', 'umask=0022') :
+	  member('castella', @authentication_kinds)
+	    ? pam_format_line('session', 'optional', 'pam_castella') : '',
     );
     my %after_deny = (
 	session => member('krb5', @authentication_kinds) ? pam_format_line('session', 'optional', 'pam_krb5') : '',
@@ -347,7 +354,7 @@ sub set_pam_authentication {
 		  $type eq 'account' ? qw(use_first_pass) : @{[]};
 		@para = difference2(\@para, \@para_for_last);
 
-		my ($before, $after) = partition { $_ eq 'krb5' } @{$special{$type}};
+		my ($before, $after) = partition { member($_, 'krb5', 'castella') } @{$special{$type}};
 		my @l = ((map { [ "pam_$_" ] } @$before),
 			 [ 'pam_unix', @para ],
 			 (map { [ "pam_$_" ] } @$after),
