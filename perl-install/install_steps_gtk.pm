@@ -170,9 +170,9 @@ sub selectLanguage {
     $o->SUPER::selectLanguage;
   
     $o->ask_warn('',
-N("Your system is low on resources. You may have some problem installing
+formatAlaTeX(N("Your system is low on resources. You may have some problem installing
 Mandrake Linux. If that occurs, you can try a text install instead. For this,
-press `F1' when booting on CDROM, then enter `text'.")) if $first_time && availableRamMB() < 70; # 70MB
+press `F1' when booting on CDROM, then enter `text'."))) if $first_time && availableRamMB() < 70; # 70MB
 
 }
 
