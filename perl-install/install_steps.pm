@@ -118,10 +118,10 @@ sub selectLanguage {
 
     addToBeDone {
 	lang::write_langs($o->{prefix}, $o->{locale}{langs});
-    } 'formatPartitions' unless $::g_auto_install;
+    } 'formatPartitions';
     addToBeDone {
 	lang::write($o->{prefix}, $o->{locale});
-    } 'installPackages' unless $::g_auto_install;
+    } 'installPackages';
 }
 #------------------------------------------------------------------------------
 sub selectKeyboard {
@@ -131,7 +131,7 @@ sub selectKeyboard {
 
     addToBeDone {
 	keyboard::write($o->{keyboard});
-    } 'installPackages' if !$::g_auto_install && (!$o->{isUpgrade} || !$o->{keyboard}{unsafe});
+    } 'installPackages' if !$o->{isUpgrade} || !$o->{keyboard}{unsafe};
 
     if ($o->{raw_X}) {
 	require Xconfig::default;
@@ -387,7 +387,7 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
     any::writeandclean_ldsoconf($o->{prefix});
     delete $ENV{DURING_INSTALL};
-    run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
+    run_program::rooted_or_die($o->{prefix}, 'ldconfig');
     log::l("Install took: ", formatTimeRaw(time() - $time));
     install_any::log_sizes($o);
     scalar(@toInstall); #- return number of packages installed.
@@ -395,8 +395,6 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-
-    return if $::g_auto_install;
 
     die \N("Some important packages didn't get installed properly.
 Either your cdrom drive or your cdrom is defective.
@@ -859,7 +857,6 @@ sub setupBootloaderBefore {
 
 sub setupBootloader {
     my ($o) = @_;
-    return if $::g_auto_install;
 
     require bootloader;
     bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});

@@ -114,7 +114,7 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $_ent_number, $auto) = @_;
 
-    if (!$::live && !$::g_auto_install && !$o->{blank} && !$::testing && !$::uml_install) {
+    if (!$o->{blank} && !$::testing && !$::uml_install) {
 	-d '/lib/modules/' . c::kernel_version() ||
 	  -s modules::cz_file() or die \N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
@@ -273,7 +273,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 sub setupBootloader {
     my ($_clicked, $ent_number, $auto) = @_;
-    return if $::g_auto_install || $::uml_install;
+    return if $::uml_install;
 
     modules::write_conf();
 
@@ -335,7 +335,7 @@ sub main {
     $::isInstall = 1;
     $::isWizard = 1;
     $::no_ugtk_init = 1;
-    $::expert = $::g_auto_install = 0;
+    $::expert = 0;
 
 #-    c::unlimit_core() unless $::testing;
 
@@ -393,7 +393,6 @@ sub main {
 	    useless_thing_accepted => sub { $o->{useless_thing_accepted} = 1 },
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
-	    g_auto_install => sub { $::testing = $::g_auto_install = 1; $o->{partitioning}{auto_allocate} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
 	    blank         => sub { $o->{blank} = $::blank = 1 },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
@@ -409,11 +408,6 @@ sub main {
     }
 
     undef $::auto_install if $cfg;
-    if ($::g_auto_install) {
-	(my $root = `/bin/pwd`) =~ s|(/[^/]*){5}$||;
-	symlinkf $root, "/tmp/image" or die "unable to create link /tmp/image";
-	$o->{method} ||= "cdrom";
-    }
     if (!$::testing && !$::live) {
 	symlink "rhimage", "/tmp/image"; #- for compatibility with old stage1
 	unlink $_ foreach "/modules/modules.mar", "/sbin/stage1";
@@ -434,7 +428,7 @@ sub main {
 
     #-  make sure we don't pick up any gunk from the outside world
     my $remote_path = "$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path" unless $::g_auto_install;
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$remote_path";
 
     eval { spawnShell() };
 

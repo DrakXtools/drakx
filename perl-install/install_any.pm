@@ -643,7 +643,7 @@ sub kdemove_desktop_file {
 #-###############################################################################
 #- auto_install stuff
 #-###############################################################################
-sub auto_inst_file() { ($::g_auto_install ? "/tmp" : "$::prefix/root/drakx") . "/auto_inst.cfg.pl" }
+sub auto_inst_file() { "$::prefix/root/drakx/auto_inst.cfg.pl" }
 
 sub report_bug {
     my ($prefix) = @_;

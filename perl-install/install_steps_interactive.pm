@@ -821,7 +821,7 @@ sub configureTimezone {
     my ($o, $clicked) = @_;
 
     require timezone;
-    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone}) || return;
+    $o->{timezone}{timezone} = $o->ask_from_treelist('', N("Which is your timezone?"), '/', [ timezone::getTimeZones($o->{prefix}) ], $o->{timezone}{timezone}) || return;
 
     my $ntp = to_bool($o->{timezone}{ntp});
     $o->ask_from_({ interactive_help_id => 'configureTimezoneGMT' }, [
@@ -1300,7 +1300,7 @@ You may prefer to replay the installation.
 	       }, advanced => 1 },
 	 { val => \ (my $_t2 = N("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
 	]
-	) if $alldone && !$::g_auto_install;
+	) if $alldone;
 }
 
 

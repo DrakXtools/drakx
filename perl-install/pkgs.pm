@@ -939,7 +939,7 @@ sub install($$$;$$) {
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
 
-    return if $::g_auto_install || !scalar(@$toInstall);
+    return if !@$toInstall;
 
     #- for root loopback'ed /boot
     my $loop_boot = loopback::prepare_boot();
@@ -1159,7 +1159,7 @@ sub remove {
 
     delete $packages->{rpmdb}; #- make sure rpmdb is closed before.
 
-    return if $::g_auto_install || !@{$toRemove || []};
+    return if !@{$toRemove || []};
 
     my $db = rpmDbOpenForInstall($prefix) or die "error opening RPM database: ", c::rpmErrorString();
     my $trans = $db->create_transaction($prefix);
