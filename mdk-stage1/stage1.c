@@ -230,8 +230,6 @@ static void expert_third_party_modules(void)
 	if (results != RETURN_OK)
 		return;
 
-	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
-
 	if (my_mount(floppy_device(), floppy_mount_location, "ext2", 0) == -1) {
 		stg1_error_message("I can't find a Linux ext2 floppy in first floppy drive.");
 		return expert_third_party_modules();

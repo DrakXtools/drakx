@@ -35,6 +35,8 @@
 #include <sys/poll.h>
 #include <errno.h>
 #include <sys/utsname.h>
+#include <sys/ioctl.h>
+#include <linux/fd.h>
 #include "stage1.h"
 #include "log.h"
 #include "mount.h"
@@ -480,6 +482,26 @@ int kernel_version(void)
 char * floppy_device(void)
 {
         char ** names, ** models;
+	my_insmod("floppy", ANY_DRIVER_TYPE, NULL, 0);
+        int fd = open("/dev/fd0", O_RDONLY|O_NONBLOCK);
+        if (fd != -1) {
+                char drivtyp[17];
+                if (!ioctl(fd, FDGETDRVTYP, (void *)drivtyp)) {
+                        struct floppy_drive_struct ds;
+                        log_message("/dev/fd0 type: %s", drivtyp);
+                        if (!ioctl(fd, FDPOLLDRVSTAT, &ds)) {
+                                log_message("\ttrack: %d", ds.track);
+                                if (ds.track >= 0) {
+                                        close(fd);
+                                        return "/dev/fd0";
+                                }
+                        }
+                } else {
+                        log_perror("can't FDGETDRVTYP /dev/fd0");
+                }
+                close(fd);
+        }
+        log_message("seems that you don't have a regular floppy drive");
         my_insmod("sd_mod", ANY_DRIVER_TYPE, NULL, 0);
 	get_medias(FLOPPY, &names, &models, BUS_ANY);
 	if (names && *names)
