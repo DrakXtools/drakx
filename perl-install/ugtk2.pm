@@ -478,26 +478,40 @@ sub create_packtable {
     $w
 }
 
+my $wm_is_kde;
 sub create_okcancel {
     my ($w, $o_ok, $o_cancel, $o_spread, @other) = @_;
-    my $wizard_buttons = $::isWizard && !$w->{pop_it};
-    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $wizard_buttons ? N("<- Previous") : N("Cancel");
-    my $ok = defined $o_ok ? $o_ok : $wizard_buttons ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
-    my $b1 = gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
-    my $b2 = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
-    gtksignal_connect($w->{wizcancel} = Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $wizard_buttons && !$::isInstall;
-    my @l = grep { $_ } $wizard_buttons ? (if_(!$::isInstall, $w->{wizcancel}), 
-                                           if_(!$::Wizard_no_previous, $b2), $b1) : ($::isInstall ? ($b1, $b2) : $b2, $b1);
+    # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
+    # extra buttons have the following structure [ label, handler, is_first ]
+    local $::isWizard = $::isWizard && !$w->{pop_it};
+    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $::isWizard ? N("<- Previous") : N("Cancel");
+    my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
+    my $bok = $ok && gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
+    my $bprev = $cancel && gtksignal_connect($w->{cancel} = Gtk2::Button->new($cancel), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
+    $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
+    if (!defined $wm_is_kde) {
+        require any;
+        $wm_is_kde = $::isInstall || any::running_window_manager() eq "kwin" || 0;
+    }
     my @l2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep {  $_->[2] } @other;
     my @r2 = map { gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[1]) } grep { !$_->[2] } @other;
+    # we put space to group buttons in two packs (but if there's only one when not in wizard mode)
+    my @extras = (@l2, @r2, if_($::isWizard || $ok && $cancel, Gtk2::Label->new));
+    my @l; # buttons list
+    if ($::isWizard) {
+        # wizard mode: order is cancel/extras/white/prev/next
+        push @l, if_(!$::isInstall, $w->{wizcancel}), @extras, if_(!$::Wizard_no_previous, $bprev), $bok;
+    } else { 
+        # normal mode: cancel/ok button follow current desktop's HIG
+    my @extras = (@l2, @r2, if_($ok && $cancel, Gtk2::Label->new)); # space buttons but if there's only one
+        push @l, $wm_is_kde ? ($bok, @extras, $bprev) : ($bprev, @extras, $bok);
+    }
 
     my $box = create_hbox($o_spread || "edge");
     
-    $box->pack_start($_, 0, 0, 1) foreach @l2;
-    $box->pack_end($_, 0, 0, 1) foreach uniq(@r2, @l);
-    foreach (@l2, @r2, @l) {
-	$_->show;
-	$_->can_default($wizard_buttons);
+    foreach (grep { $_ } @l) {
+        $box->pack_start(gtkshow($_), 0, 0, 1);
+        $_->can_default($::isWizard);
     }
     $box;
 }
