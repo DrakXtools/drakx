@@ -888,7 +888,7 @@ notation (for example, 1.2.3.4).")),
                              { label => N("RTS/CTS"), val => \$ethntf->{WIRELESS_RTS},
                                help => N("RTS/CTS adds a handshake before each packet transmission to make sure that the
 channel is clear. This adds overhead, but increase performance in case of hidden
-nodes or large number of active nodes. This parameters set the size of the
+nodes or large number of active nodes. This parameter sets the size of the
 smallest packet for which the node sends RTS, a value equal to the maximum
 packet size disable the scheme. You may also set this parameter to auto, fixed
 or off.")
