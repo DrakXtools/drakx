@@ -392,7 +392,8 @@ sub card_config {
     if (!$card->{server} && !$card->{driver} && !$noauto) {
 	my @cards = probe_cards();
 
-	my $card_ = multi_head_choose($in, $noauto, @cards) or return;
+	my $card_ = $in->isa('class_discard') ? $cards[0] :
+	            multi_head_choose($in, $noauto, @cards) or return;
 	put_in_hash($card, $card_);
 
 	$card->{server} = 'FBDev' if $cardOptions->{allowFB} && !$card->{server} && !$card->{driver};
@@ -915,7 +916,7 @@ sub resolutionsConfiguration {
     #- there could be a problem.
     #- memory in KB is approximated by $x_res*$dpeth/14 which is little less
     #- than memory really used, (correct factor is 13.65333 for w/h ratio of 1.33333).
-    if (!$x_res || $auto && ref($in) !~ /class_discard/ && ($x_res < 1024 && ($card->{VideoRam} / ($x_res * $depth / 14)) > 2)) {
+    if (!$x_res || $auto && !$in->isa('class_discard') && ($x_res < 1024 && ($card->{VideoRam} / ($x_res * $depth / 14)) > 2)) {
 	delete $card->{depth};
 	return resolutionsConfiguration($in, $X);
     }
