@@ -1087,7 +1087,8 @@ You may also enter the IP address of the gateway if you have one."),
                     name => N("The network needs to be restarted. Do you want to restart it ?"),
                     # data => [ { label => N("Connection:"), val => \$type, type => 'list', list => [ sort values %l ] }, ],
                     post => sub {
-                        if (!$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
+                        my ($a) = @_;
+                        if ($a && !$::testing && !run_program::rooted($::prefix, "/etc/rc.d/init.d/network restart")) {
                             $success = 0;
                             $in->ask_okcancel(N("Network Configuration"), 
                                               N("A problem occured while restarting the network: \n\n%s", `/etc/rc.d/init.d/network restart`), 0);
