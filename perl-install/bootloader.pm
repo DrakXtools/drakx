@@ -25,7 +25,7 @@ use modules;
 #- Functions
 #-#####################################################################################
 my $vmlinuz_regexp = 'vmlinuz|win4lin';
-my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*)-(\d+\.\d+.*)/;
+my $decompose_vmlinuz_name = qr/((?:$vmlinuz_regexp).*?)-(\d+\.\d+.*)/;
 
 sub expand_vmlinuz_symlink {
     my ($vmlinuz) = @_;
