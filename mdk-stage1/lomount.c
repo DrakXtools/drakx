@@ -115,24 +115,26 @@ set_loop (const char *device, const char *file, int gz)
 }
 
 
-char* find_free_loop(void)
+char* find_free_loop(int chloop)
 {
         char loopdev[] = "/dev/loop0";
+        char chloopdev[] = "/dev/chloop0";
+        char * ldev = chloop ? chloopdev : loopdev;        
 	struct loop_info loopinfo;
         int i;
         for (i=0; i<8; i++) {
                 int fd;
-                loopdev[9] = '0' + i;
-                ensure_dev_exists(loopdev);
-                fd = open(loopdev, O_RDONLY);
+                ldev[strlen(ldev)-1] = '0' + i;
+                ensure_dev_exists(ldev);
+                fd = open(ldev, O_RDONLY);
                 if (!ioctl(fd, LOOP_GET_STATUS, &loopinfo)) {
                         close(fd);
                         continue;
                 }
                 if (errno == ENXIO) {
-                        log_message("%s is available", loopdev);
+                        log_message("%s is available", ldev);
                         close(fd);
-                        return strdup(loopdev);
+                        return strdup(ldev);
                 } else {
                         log_perror("LOOP_GET_STATUS(unexpected error)");
                         close(fd);
@@ -165,17 +167,19 @@ lomount(char *loopfile, char *where, char **dev, int gz)
   
 	long int flag;
         char * loopdev;
+        int chloop = 0;
 
 	flag = MS_MGC_VAL;
 	flag |= MS_RDONLY;
 
 #ifdef MANDRAKE_MOVE
 	my_insmod("change_loop", ANY_DRIVER_TYPE, NULL);
+        chloop = 1;
 #else
 	my_insmod("loop", ANY_DRIVER_TYPE, NULL);
 #endif
 
-        if (!(loopdev = find_free_loop())) {
+        if (!(loopdev = find_free_loop(chloop))) {
 		log_message("could not find a free loop");
 		return 1;
         }

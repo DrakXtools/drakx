@@ -241,6 +241,7 @@ void doklog()
 void del_loops(void) 
 {
         char loopdev[] = "/dev/loop0";
+        char chloopdev[] = "/dev/chloop0";
         int i;
         for (i=0; i<8; i++) {
                 int fd;
@@ -249,6 +250,13 @@ void del_loops(void)
                 if (fd > 0) {
                         if (!ioctl(fd, LOOP_CLR_FD, 0))
                                 printf("\t%s\n", loopdev);
+                        close(fd);
+                }
+                chloopdev[11] = '0' + i;
+                fd = open(chloopdev, O_RDONLY, 0);
+                if (fd > 0) {
+                        if (!ioctl(fd, LOOP_CLR_FD, 0))
+                                printf("\t%s\n", chloopdev);
                         close(fd);
                 }
         }

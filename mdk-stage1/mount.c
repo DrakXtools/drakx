@@ -130,6 +130,9 @@ int ensure_dev_exists(const char * dev)
 	} else if (ptr_begins_static_str(name, "loop")) {
 		major = 7;
 		minor = name[4] - '0';
+	} else if (ptr_begins_static_str(name, "chloop")) {
+		major = 100;
+		minor = name[6] - '0';
 	} else {
 		log_message("I don't know how to create device %s, please post bugreport to me!", dev);
 		return -1;
