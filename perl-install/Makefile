@@ -195,7 +195,7 @@ endif
 
 	clean-rpmsrate $(MEDIA_INFO_DEST)/rpmsrate $(MAIN_RPMS_DIR)
 
-	for i in ../kernel/modules.description ../kernel/all.modules/modules.cz*; do cp -f $$i $(DEST)/lib/; done
+	cp -f ../kernel/{modules.description,all.modules/modules.cz*} $(DEST)/lib/
 
 	$(MAKE) -C share/po install SUDO= NAME=libDrakX LOCALEDIR=$(DEST)/usr/share/locale_special
 
