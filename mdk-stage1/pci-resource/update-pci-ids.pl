@@ -3,9 +3,9 @@
 use lib "../../perl-install";
 
 use common qw(:common);
-require '../../../soft/ldetect-lst/convert/merge2pcitable.pl';
+require '/usr/bin/merge2pcitable.pl';
 
-my $drivers = read_pcitable("../../../soft/ldetect-lst/lst/pcitable");
+my $drivers = read_pcitable("/usr/share/ldetect-lst/pcitable");
 
 
 print '
