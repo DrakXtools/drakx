@@ -919,7 +919,6 @@ Do you want to install the updates ?"))) || return;
     };
 
     if ($update_medium) {
-	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
 	if ($o->choosePackagesTree($o->{packages}, $update_medium)) {
 	    $o->pkg_install;
 	} else {
