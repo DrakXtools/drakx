@@ -73,14 +73,23 @@ sub bg_command_as_root {
     }
 }
 
+sub user_run_interface_command {
+    my ($command, $intf) = @_;
+    if (system("usernetctl $intf report") == 0) {
+        run_program::run("$command $intf &");
+    } else {
+        bg_command_as_root($command, $intf);
+    }
+}
+
 sub start_interface {
     my ($intf) = @_;
-    bg_command_as_root('/sbin/ifup', $intf);
+    user_run_interface_command('/sbin/ifup', $intf);
 }
 
 sub stop_interface {
     my ($intf) = @_;
-    bg_command_as_root('/sbin/ifdown', $intf);
+    user_run_interface_command('/sbin/ifdown', $intf);
 }
 
 sub connected() { gethostbyname("mandrakesoft.com") ? 1 : 0 }
