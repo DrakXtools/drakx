@@ -409,7 +409,7 @@ my $initdir = "/etc/init.d";
 		  webmin => N("Webmin Service"),
 		  xinetd => N("Xinetd Service")
 		 };
-    my @installed_d;
+    my @installed_d = ();
     foreach my $serv (keys %$service) {
 	-e "$initdir/$serv" && push @installed_d, $serv;
     }
