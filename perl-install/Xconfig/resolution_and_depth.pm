@@ -209,7 +209,7 @@ sub choose_gtk {
     my $W = my_gtk->new(_("Resolution"));
 
     my %monitor_images_x_res = do {
-	my @l = qw(640 800 1024 1280);
+	my @l = qw(640 800 1024 1280 1400 1600 1920 2048);
 	my %h = map { $_ => [ gtkcreate_png("monitor-$_.png") ] } @l;
 
 	#- for the other, use the biggest smaller
