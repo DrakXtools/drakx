@@ -28,6 +28,7 @@ use run_program;
 use security::level;
 use security::msec;
 use security::help;
+use security::l10n;
 
 #$MODE = 'basic';
 #$0 =~ /draksec-firewall$/ and $MODE = 'firewall';
@@ -36,7 +37,7 @@ use security::help;
 #/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
 
-my $w;
+my ($w, %fields);
 
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
@@ -76,8 +77,8 @@ Security Administrator:
 sub new_editable_combo {
     my ($string_list, $o_default_value) = @_;
     my $w = new Gtk2::OptionMenu();
-    $w->set_popdown_strings(@$string_list) unless is_empty_array_ref $string_list;
-    $w->entry->set_text($o_default_value) if $o_default_value;
+    $w->set_popdown_strings(to_i18n(@$string_list)) unless is_empty_array_ref $string_list;
+    $w->entry->set_text(to_i18n($o_default_value)) if $o_default_value;
     $w;
 }
 
@@ -90,6 +91,15 @@ sub set_help_tip {
 my $msec = new security::msec;
 $w = ugtk2->new('draksec');
 my $window = $w->{window};
+
+%fields = security::l10n::fields();
+
+############################    I18N     ###################################
+my %inv_translations = map { translate($_) => $_ } N_("ALL"), N_("LOCAL"), N_("N_ON_E"), N_("default"), N_("default"), N_("ignore"), N_("no"), N_("yes");
+my %translations = reverse %inv_translations;
+
+sub to_i18n { map { $translations{$_} || $_ } @_ }
+sub from_i18n { $inv_translations{$_->[0]} }
 
 ############################ MAIN WINDOW ###################################
 # Set different options to Gtk2::Window
@@ -162,7 +172,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text($msec->get_function_value($i));
                                                                                            set_help_tip($entry, $default, $i);
-                                                                                           [ new Gtk2::Label($i), $values{$i} ];
+                                                                                           [ Gtk2::Label->new($fields{$i} || $i), $values{$i} ];
                                                                                        } sort $msec->list_functions($domain))))),
                            new Gtk2::Label($label));
     $options_values{$domain} = \%values;
@@ -179,7 +189,7 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                                        $security_checks_value{$i} = new_editable_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($i));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($i), $i);
-                                                                                       [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
+                                                                                       [ gtkshow(new Gtk2::Label($fields{$i} || translate($i))), $security_checks_value{$i} ];
                                                                                    } sort $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
@@ -212,7 +222,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
 
                                 log::explanations("Setting security periodic checks");
                                 foreach my $key (keys %security_checks_value) {
-                                    $msec->set_check($key, $security_checks_value{$key}->entry->get_text);
+                                    $msec->set_check($key, from_i18n($security_checks_value{$key}->entry->get_text));
                                 }
                                 $msec->apply_checks;
 
@@ -220,7 +230,7 @@ my $bok = gtksignal_connect(Gtk2::Button->new_from_stock('gtk-ok'),
                                     log::explanations("Setting msec functions related to $domain");
                                     foreach my $key (keys %{$options_values{$domain}}) {
                                         my $opt = $options_values{$domain}{$key};
-                                        $msec->set_function($key, $opt =~ /Combo/ ? $opt->entry->get_text : $opt->get_text);
+                                        $msec->set_function($key, from_i18n($opt =~ /Combo/ ? $opt->entry->get_text : $opt->get_text));
                                     }
                                 }
                                 $msec->apply_functions;
