@@ -544,10 +544,14 @@ sub charset2kde_charset {
 #- font+size for different charsets; the field [0] is the default,
 #- others are overrridens for fixed(1), toolbar(2), menu(3) and taskbar(4)
 my %charset2kde_font = (
-  'iso-8859-1' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
-  'iso-8859-2' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
-  'iso-8859-9' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-1'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-2'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'iso-8859-9'  => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'iso-8859-15' => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'utf_1'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'utf_2'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'utf_9'       => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
+  'utf_15'      => [ "adobe-helvetica,12", "courier,10", "adobe-helvetica,11" ],
   'gb2312' => [ "default-ming,16" ],
   'jisx0208' => [ "misc-fixed,14", "wadalab-gothic,13" ],
   'ksc5601' => [ "daewoo-gothic,16" ],
@@ -562,7 +566,7 @@ sub charset2kde_font {
     my ($charset, $type) = @_;
     my $kdecharset = charset2kde_charset($charset);
     
-    my $font = $charset2kde_font{$charset} || $charset2kde_font{def};
+    my $font = $charset2kde_font{$charset} || $charset2kde_font{default};
     my $r = $font->[$type] || $font->[0];
 
     #- the format is "font-name,size,5,kdecharset,0,0" I have no idea of the
