@@ -175,7 +175,7 @@ $user_combo->set_popdown_strings(parse_etc_passwd());
 my $desktop_combo = new Gtk::Combo;
 $user_dedans->pack_start($x_yes_button, 0, 0, 0);
 $user_dedans->pack_start($user_combo, 0, 0, 0);
-$user_dedans->pack_start($desktop_combo, 0, 0, 0);
+#$user_dedans->pack_start($desktop_combo, 0, 0, 0);
 $x_box->pack_start ($user_dedans, 0, 0, 0);
 
 $x_box->set_sensitive(!$x_mode);
@@ -246,7 +246,7 @@ sub get_main_menu {
 #-------------------------------------------------------------
 
 sub isAutologin {
-    ${{ getVarsFromSh("/etc/sysconfig/autologin") }}{AUTOLOGIN} eq 'yes';
+    ${{ common::getVarsFromSh("/etc/sysconfig/autologin") }}{AUTOLOGIN} eq 'yes';
 }
 
 sub updateAutologin
