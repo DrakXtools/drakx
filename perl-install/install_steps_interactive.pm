@@ -140,7 +140,7 @@ MandrakeSoft S.A. will, in no circumstances and to the extent permitted by law, 
 incidental, direct or indirect damages whatsoever (including without limitation damages for loss of 
 business, interruption of business, financial loss, legal fees and penalties resulting from a court 
 judgment, or any other consequential loss) arising out of  the use or inability to use the Software 
-Products, even if MandrakeSoft S.A. has been advised of the possibility or occurance of such 
+Products, even if MandrakeSoft S.A. has been advised of the possibility or occurence of such 
 damages.
 
 LIMITED LIABILITY LINKED TO POSSESSING OR USING PROHIBITED SOFTWARE IN SOME COUNTRIES
