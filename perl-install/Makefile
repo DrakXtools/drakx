@@ -263,5 +263,5 @@ nuke_perl:
 
 dont_run_directly_stage2:
 	rm -f $(DEST)/usr/bin/runinstall2
-	echo -e '#!/bin/sh\n\nexec "/usr/bin/sh"' > $(DEST)/usr/bin/runinstall2
+	echo -e '#!/bin/sh\n\nexec /usr/bin/busybox sh' > $(DEST)/usr/bin/runinstall2
 	chmod a+x $(DEST)/usr/bin/runinstall2
