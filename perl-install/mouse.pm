@@ -347,7 +347,7 @@ sub set_xfree_conf {
     my @mice = map {
 	{
 	    Protocol => $_->{XMOUSETYPE},
-	    Device => "/dev/$_->{device}",
+	    Device => "/dev/mouse",
 	    if_($_->{nbuttons} > 3, ZAxisMapping => [ $_->{nbuttons} > 5 ? '6 7' : '4 5' ]),
 	    if_($_->{nbuttons} < 3, Emulate3Buttons => undef, Emulate3Timeout => 50),
 	    if_($_->{EMULATEWHEEL}, Emulate3Buttons => undef, Emulate3Timeout => 50, EmulateWheel => undef, EmulateWheelButton => 2),
@@ -410,6 +410,23 @@ sub write_conf {
     my $xfree_conf = Xconfig::xfree->read;
     set_xfree_conf($mouse, $xfree_conf, $b_keep_auxmouse_unchanged);
     $xfree_conf->write;
+}
+
+sub change_mouse_live {
+    my ($mouse, $old) = @_;
+
+    my $xId = xmouse2xId($mouse->{XMOUSETYPE});
+    $old->{device} ne $mouse->{device} || $xId != xmouse2xId($old->{XMOUSETYPE}) or return;
+
+    log::l("telling X server to use another mouse ($mouse->{XMOUSETYPE}, $xId)");
+    eval { modules::load('serial') } if $mouse->{device} =~ /ttyS/;
+
+    if (!$::testing) {
+	devices::make($mouse->{device});
+	symlinkf($mouse->{device}, "/dev/mouse");
+	c::setMouseLive($ENV{DISPLAY}, $xId, $mouse->{nbuttons} < 3);
+    }
+    1;
 }
 
 sub test_mouse_install {
