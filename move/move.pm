@@ -106,6 +106,7 @@ sub init {
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
 
     modules::load_category('multimedia/sound');
+    run_program::run('service', 'sound', 'start');
 
     system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
