@@ -47,7 +47,7 @@ sub get {
 }
 sub get_label {
     my ($label, $bootloader) = @_;
-    $_->{label} && $_->{label} eq $label and return $_ foreach @{$bootloader->{entries}};
+    $_->{label} && substr($_->{label}, 0, 15) eq substr($label, 0, 15) and return $_ foreach @{$bootloader->{entries}};
     undef;
 }
 
@@ -121,6 +121,11 @@ sub read() {
 	$b{timeout} = $b{timeout} / 10 if $b{timeout};
 	$b{message} = cat_("$::prefix$b{message}") if $b{message};
     }
+
+    #- cleanup duplicate labels (in case file is corrupted)
+    my %seen;
+    @{$b{entries}} = grep { !$seen{$_->{label}}++ } @{$b{entries}};
+
     \%b;
 }
 
@@ -159,15 +164,18 @@ sub add_entry {
     foreach my $label ($v->{label}, map { 'old' . $_ . '_' . $v->{label} } ('', 2..10)) {
 	my $conflicting = get_label($label, $bootloader);
 
+	$to_add->{label} = $label;
+
 	if ($conflicting) {
 	    #- replacing $conflicting with $to_add
-	    $to_add->{label} = $label;
 	    @{$bootloader->{entries}} = map { $_ == $conflicting ? $to_add : $_ } @{$bootloader->{entries}};
-	}
-	if (!$conflicting || same_entries($conflicting, $to_add)) {
+	} else {
 	    #- we have found an unused label
-	    $to_add->{label} = $label;
 	    push @{$bootloader->{entries}}, $to_add;
+	}
+
+	if (!$conflicting || same_entries($conflicting, $to_add)) {
+	    log::l("current labels: " . join(" ", map { $_->{label} } @{$bootloader->{entries}}));
 	    return $v;
 	}
 	$to_add = $conflicting;
