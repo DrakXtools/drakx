@@ -408,7 +408,8 @@ DOMAINNAME2=$netc->{DOMAINNAME2}"
 	      ["$prefix/etc/ppp/ioptions2B", "iop2B"],
 	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
-	      ["$prefix/etc/resolv.com", "resolv"],
+	      ["$prefix/etc/resolv.conf", "resolv"],
+	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
 	    ) {
 	my $file = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $a;
 	-e ($_->[0]) and commands::cp("-f", $_->[0], $file) and chmod 0755, $file;
@@ -432,6 +433,7 @@ sub set_profile {
 	      ["$prefix/etc/isdn/isdn1B.conf", "isdn1B"],
 	      ["$prefix/etc/isdn/isdn2B.conf", "isdn2B"],
 	      ["$prefix/etc/resolv.conf", "resolv"],
+	      ["$prefix/etc/ppp/peers/adsl", "speedtouch"],
 	    ) {
 	my $c = "$prefix/etc/sysconfig/network-scripts/net_" . $_->[1] . "." . $profile;
 	-e ($c) and commands::cp("-f", $c, $_->[0]);
@@ -444,7 +446,7 @@ sub del_profile {
     $profile eq "default" and return;
     print "deleting $profile\n";
     commands::rm("-f", "$prefix/etc/sysconfig/network-scripts/draknet_conf." . $profile);
-    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv}." . $profile));
+    commands::rm("-f", glob_("$prefix/etc/sysconfig/network-scripts/net_{up,down,prog,iop1B,iop2B,isdn1B,isdn2B,resolv,speedtouch}." . $profile));
 }
 
 sub add_profile {

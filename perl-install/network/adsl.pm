@@ -47,7 +47,7 @@ If you don't know, choose 'use pppoe'"), [__("use pppoe"), __("use pptp"), __("u
 	$in->do_pkgs->install(qw(speedtouch));
 	$netcnx->{type} = "adsl_$type";
 	$netcnx->{"adsl_$type"} = {};
-	$netcnx->{"adsl_$type"}{vcivpi} = '';
+	$netcnx->{"adsl_$type"}{vpivci} = '';
 	adsl_conf($netcnx->{"adsl_$type"}, $netc, $intf, $type) or goto conf_adsl_step1;
     }
     1;
@@ -90,13 +90,13 @@ sub adsl_conf_backend {
     my ($adsl, $netc, $adsl_type) = @_;
 
     output("$prefix/etc/ppp/options",
-"lock
+'lock
 noipdefault
 persist
 noauth
 usepeerdns
 defaultroute
-") if $adsl_type =~ /pptp|pppoe|speedtouch/;
+') if $adsl_type =~ /pptp|pppoe|speedtouch/;
 
     write_secret_backend($adsl->{login}, $adsl->{passwd});
 
@@ -105,6 +105,27 @@ defaultroute
 	    s/ETH=.*\n/ETH=$netc->{NET_DEVICE}\n/;
 	    s/USER=.*\n/USER=$adsl->{login}\n/;
 	} "$prefix/etc/ppp/pppoe.conf";
+    }
+
+    if ($adsl_type eq 'speedtouch') {
+	$netc->{vpivci} =~ /(\d+)\.(\d+)/;
+	output("$prefix/etc/ppp/peers/adsl", 
+qq{noauth
+noipdefault
+pty "/usr/bin/pppoa2 -vpi $1 -vci $2"
+sync
+noaccomp
+nopcomp
+noccp
+novj
+holdoff 4
+maxfail 25
+persist
+usepeerdns
+$USERLINE
+defaultroute
+user "$adsl->{login}"
+});
     }
 
     if ($adsl_type eq 'pptp') {
