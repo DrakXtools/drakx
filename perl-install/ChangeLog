@@ -1,3 +1,265 @@
+2002/08/29  baudens
+
+	* share/advertising/09-MDKcampus_icon.png,
+	share/advertising/12-MDKstore_icon.png, share/advertising/00-thanks.png,
+	share/advertising/10-MDKexpert.png, share/advertising/06-user.png,
+	share/advertising/03-graphic_icon.png, share/advertising/03-graphic.png,
+	share/advertising/13-Nvert.png, share/advertising/04-develop_icon.png,
+	share/advertising/12-MDKstore.png,
+	share/advertising/05-contcenter_icon.png,
+	share/advertising/02-internet_icon.png,
+	share/advertising/02-internet.png, share/advertising/08-games.png,
+	share/advertising/11-consul.png, share/advertising/06-user_icon.png,
+	share/advertising/07-server.png, share/advertising/04-develop.png,
+	share/advertising/10-MDKexpert_icon.png,
+	share/advertising/07-server_icon.png,
+	share/advertising/08-games_icon.png, share/advertising/01-gnu.png,
+	share/advertising/05-contcenter.png, share/advertising/09-MDKcampus.png:
+	Remove old images
+
+	* share/advertising/07-desktop.png, share/advertising/14-mdkexpert.png,
+	share/advertising/01-thanks.png, share/advertising/02-community.png,
+	share/advertising/11-mdkstore.png, share/advertising/12-mdkstore.png,
+	share/advertising/04-multimedia.png, share/advertising/05-games.png,
+	share/advertising/03-internet.png, share/advertising/06-mcc.png,
+	share/advertising/13-mdkcampus.png, share/advertising/10-mnf.png,
+	share/advertising/16-thanks.png,
+	share/advertising/15-mdkexpert-corporate.png,
+	share/advertising/09-server.png, share/advertising/08-development.png:
+	New images
+
+	* share/advertising/05-contcenter.pl, share/advertising/09-MDKcampus.pl,
+	share/advertising/08-games.pl, share/advertising/11-consul.pl,
+	share/advertising/07-server.pl, share/advertising/01-gnu.pl,
+	share/advertising/03-graphic.pl, share/advertising/02-internet.pl,
+	share/advertising/00-thanks.pl, share/advertising/04-develop.pl,
+	share/advertising/06-user.pl, share/advertising/12-MDKstore.pl,
+	share/advertising/13-Nvert.pl, share/advertising/10-MDKexpert.pl: Remove
+	old texts
+
+	* share/advertising/02-community.pl, share/advertising/01-thanks.pl,
+	share/advertising/05-games.pl, share/advertising/09-server.pl,
+	share/advertising/04-multimedia.pl, share/advertising/07-desktop.pl,
+	share/advertising/10-mnf.pl, share/advertising/08-development.pl,
+	share/advertising/06-mcc.pl, share/advertising/03-internet.pl: New text
+	(other will come later)
+
+2002/08/29  Daouda Lo  <daouda@mandrakesoft.com>
+
+	* network/adsl.pm: 
+	  - dns settings for pppoe
+	  - set DNS in adsl config.
+	  - update speedtouch link
+
+2002/08/29  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pcmcia_/probe.c: merge some code from pcmcia-cs-3.2.1 so that
+	some pci pcmcia driver
+	use i82365 rather than yenta_socket
+
+	* standalone/logdrake: in explain mode, don't display day and hostname to
+	have more
+	space for the rest
+
+	* drakxtools.spec: meuh
+	24mdk
+
+	* my_gtk.pm: ask_browse: display_info needs to be available for rpmdrake
+
+2002/08/29  Jonathan Gotti  <jgotti@mandrakesoft.com>
+
+	* drakperm: Gui for file permission in msec
+
+2002/08/29  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* standalone/drakfont, standalone/drakxtv: English typos (no space before
+	colon in English)
+
+	* share/po/es.po: updated po file
+	updated pot file
+
+	* share/po/sk.po, share/po/vi.po: updated Slovak and Vietnamese files
+	updated pot file
+
+	* share/po/id.po, share/po/ru.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/br.po, share/po/th.po, share/po/sl.po, share/po/no.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/tr.po,
+	share/po/mt.po, share/po/ga.po, share/po/be.po, share/po/uk.po,
+	share/po/ko.po, share/po/DrakX.pot, share/po/sv.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/bs.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po,
+	share/po/ta.po, share/po/fr.po, share/po/it.po, share/po/de.po,
+	share/po/eo.po, share/po/lv.po, share/po/cs.po, share/po/bg.po,
+	share/po/el.po, share/po/hu.po: updated pot file
+
+	* share/rpmsrate: removed ami-gnome (the package won't be in 9.0, as it
+	doesn't work
+	with Gnome2)
+
+	* harddrake/ui.pm: English typos (Quitter->Quit,
+	Informations->Information)
+	corrected English typos (no space before colon in English)
+
+	* share/po/cy.po, share/po/nl.po, share/po/eu.po: updated pot file
+	updated Welsh, Basque and Dutch files
+
+	* harddrake/v4l.pm, standalone/drakbackup: corrected English typos (no
+	space before colon in English)
+
+2002/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* share/keymaps.tar.bz2: now the only bad one is ro2
+
+	* share/po/help_update_english_only.pl: semi-automatic script allowing to
+	update help.pm without creating a hell lot of "fuzzy" in po's
+
+	* share/po/Makefile: workaround missing entities in spanish
+	adapt to new manual cvs dirs
+
+	* share/po/help_xml2pm.pl: 
+	  - fix missing to_ascii on english part in help-xx.pot
+	  - ignore drakxid's in a language but not in english
+	  - adapt to new manualB xml help
+	  - fix tr/// causing havoc in french accents (and other)
+
+	* install2.pm (formatPartitions): create /dev/null as soon as possible on
+	to be installed system
+
+	* detect_devices.pm (isRemovableDrive): usb with class "Floppy (UFI)" are
+	removable even if they are not media_type fd
+	(isRemovableUsb): using "Floppy (UFI)" usb media_type is no good, use
+	magical usb2removable instead
+	(usb_description2removable): more entries
+	(suggest_mount_point): use new function usb2removable
+
+	* share/po/help-eu.pot: not available anymore (=> use the i18n from eu.po)
+
+	* help.pm: update help from xml
+
+	* standalone/drakupdate_fstab: fix check_hard_drives
+	in --auto, print the mount points add/removed for use in hotplug
+	  - add option --auto
+	  - when --auto, ignore actions on partitions when the drive has
+	extended partitions
+
+	* devices.pm: allow creation of "/dev/null" device
+
+	* share/po/sk.po, share/po/gl.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/et.po, share/po/ja.po, share/po/hr.po, share/po/be.po,
+	share/po/ko.po, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/da.po, share/po/ca.po, share/po/ar.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po, share/po/eu.po,
+	share/po/lv.po, share/po/hu.po, share/po/id.po, share/po/ru.po,
+	share/po/no.po, share/po/sl.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/uk.po, share/po/lt.po, share/po/cy.po,
+	share/po/sp.po, share/po/bs.po, share/po/wa.po, share/po/is.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/ta.po,
+	share/po/vi.po, share/po/nl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po: automatic update to new help.pm (so that
+	no fuzzy appears)
+
+	* share/po/help-de.pot, share/po/help-it.pot, share/po/help-fr.pot,
+	share/po/help-es.pot: 
+	  - re-update help-xx.pot after fixing bad drakxid's in xml files
+	  - update xx.po's using help-xx.pot
+	=> at last, DrakX help is now in sync with xml files :)
+	update help from xml
+
+	* install_steps_gtk.pm: rpm description & group are in utf8, so use
+	c::from_utf8
+
+	* standalone/drakgw: drakgw now needs shorewall, so install shorewall if
+	needed (fix bug reported by Erwan)
+
+	* share/po/it.po, share/po/es.po, share/po/fr.po, share/po/de.po: 
+	  - re-update help-xx.pot after fixing bad drakxid's in xml files
+	  - update xx.po's using help-xx.pot
+	=> at last, DrakX help is now in sync with xml files :)
+	automatic update to new help.pm (so that no fuzzy appears)
+
+2002/08/29  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* standalone/drakbackup: GUI feedback during restore.
+
+2002/08/29  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm: s/||/or/ between commands, the high-precedence "||" lead to
+	problems sometimes.
+
+2002/08/29  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: move STORAGE_OTHER devices in ata controllers (aka
+	pseudo raid controllers
+	ala pdc)
+
+	* standalone/logdrake: add a scroll bar in embedded mode for mcc
+
+	* standalone/service_harddrake, harddrake/TODO: 25mdk
+
+	* harddrake/ui.pm: embedded mode: exit on "quit" click
+
+	* drakxtools.spec: harddrake service:
+	  - Prereq: rpm-helper
+	  - fix init-script-without-chkconfig-{post,preun}
+	  - s/perl -w/perl/
+	  - don't use diags and strict
+	gc must how learn to commit
+	25mdk
+
+2002/08/28  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/th.po: fixed Project-Id line
+
+	* share/po/tr.po: updated Turkish file
+
+	* share/po/bs.po, share/po/ru.po, share/po/gl.po, share/po/pt_BR.po,
+	share/po/sl.po, share/po/af.po, share/po/az.po, share/po/ja.po,
+	share/po/ga.po, share/po/uk.po, share/po/ko.po, share/po/sr.po,
+	share/po/pl.po, share/po/fi.po, share/po/lt.po, share/po/sp.po,
+	share/po/cy.po, share/po/ca.po, share/po/da.po, share/po/eo.po,
+	share/po/lv.po, share/po/cs.po, share/po/bg.po, share/po/el.po,
+	share/po/ar.po: fixed Project-Id header
+
+2002/08/28  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/card.pm: 
+	  - ensure prefer_xf3 is never set when {server} is missing
+	  - don't propose xfree3 when no {server} for the card
+	  - don't propose xfree4 when no {Driver} for the card
+
+	* detect_devices.pm: 
+	  - why did hds() did return removable drives in standalone? changing
+	this (this was written in 1999 so no good reason must stand)
+	  - remove the ugly isFloppyOrHD
+	  - new function get_usb_storage_info which magically links
+	/proc/scsi/scsi entries to /proc/bus/usb/devices & usbtable one :)
+	  - new function usb_description2removable which tries to categorize the
+	removables
+	  - new function removables returning various things
+	  - new function isRemovableUsb using usb class
+	  - new function isFloppyUsb using the usbtable "Removable:floppy"
+	  - suggest_mount_point use "Removable:xxx" entries from usbtable, or
+	usb_description2removable()
+
+	* drakxtools.spec: 
+	  - drakupdate_fstab first appearance
+	  - remind me to teach titi how to commit
+
+	* Makefile.config, standalone/drakupdate_fstab: new prog drakupdate_fstab
+
+	* fs.pm: use add2hash_ for setting "username=%" otherwise it causes havoc
+	in auto_install's manualFstab
+	  - read_fstab, write_fstab: add the possibility to not change
+	credentials
+	  - use detect_devices::removables()
+
+2002/08/28  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Added automatical configuration of the
+	printers in the GIMP.
+
 2002/08/28  Daouda Lo  <daouda@mandrakesoft.com>
 
 	* standalone/logdrake: 
@@ -895,7 +1157,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.728 2002/08/27 22:19:06 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.729 2002/08/28 23:06:44 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
