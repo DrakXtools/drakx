@@ -325,7 +325,7 @@ my $choice = $section_names[0] if $section_names[0];
 my $d = $in->ask_from_list(N("%s entries", $ipsec_conf),
 N("The %s file contents
 is divided into sections.\n
-You can now :\n
+You can now:\n
   - display, add, edit, or remove sections, then
   - commit the changes
 
@@ -367,7 +367,7 @@ if ($kernel_version < 2.5) {
 	
 my $e = $in->ask_from_list_(N("ipsec.conf entries"),
 N("The %s file contains different sections.\n
-Here is its skeleton :	'config setup' 
+Here is its skeleton:	'config setup' 
 					'conn default' 
 					'normal1'
 					'normal2' \n
@@ -685,7 +685,7 @@ my $choice = $section_names[0] if $section_names[0];
 my $d = $in->ask_from_list_(N("%s entries", $racoon_conf),
 N("The racoon.conf file configuration.\n
 The contents of this file is divided into sections.
-You can now :
+You can now:
   - display \t\t (display the file contents)
   - add	\t\t (add one section)
   - edit \t\t\t (modify parameters of an existing section)
@@ -727,7 +727,7 @@ step_add_section_racoon:
 
 my $e = $in->ask_from_list_(N("racoonf.conf entries"),
 N("The 'add' sections step.\n
-Here below is the racoon.conf file skeleton :
+Here below is the racoon.conf file skeleton:
 \t'path'
 \t'remote'
 \t'sainfo' \n
@@ -929,7 +929,7 @@ source_id and destination_id are constructed like:
 
 	address address [/ prefix] [[port]] ul_proto
 
-Examples : \n
+Examples: \n
 sainfo anonymous (accepts connections from anywhere)
 	leave blank this entry if you want anonymous
 
@@ -947,7 +947,7 @@ source_id and destination_id are constructed like:
 
 	address address [/ prefix] [[port]] ul_proto
 
-Examples : \n
+Examples: \n
 sainfo anonymous (accepts connections from anywhere)
 	leave blank this entry if you want anonymous
 
@@ -962,7 +962,7 @@ source_id and destination_id are constructed like:
 
 	address address [/ prefix] [[port]] ul_proto
 
-Examples : \n
+Examples: \n
 sainfo anonymous (accepts connections from anywhere)
 	leave blank this entry if you want anonymous
 
@@ -980,7 +980,7 @@ source_id and destination_id are constructed like:
 
 	address address [/ prefix] [[port]] ul_proto
 
-Examples : \n
+Examples: \n
 sainfo anonymous (accepts connections from anywhere)
 	leave blank this entry if you want anonymous
 
@@ -1000,7 +1000,7 @@ accepted, and the attribute(s) will be not proposed to
 the peer if you do not specify it(them).  They can be
 individually specified in each proposal.
 
-Examples : \n
+Examples: \n
         lifetime time 1 min;    # sec,min,hour
         lifetime time 1 min;    # sec,min,hour
         lifetime time 30 sec;
@@ -1018,7 +1018,7 @@ accepted, and the attribute(s) will be not proposed to
 the peer if you do not specify it(them).  They can be
 individually specified in each proposal.
 
-Examples : \n
+Examples: \n
         lifetime time 1 min;    # sec,min,hour
         lifetime time 1 min;    # sec,min,hour
         lifetime time 30 sec;
@@ -1046,7 +1046,7 @@ specifies the parameters for IKE phase 1 for each remote node.
 The default port is 500.  If anonymous is specified, the state-
 ments apply to all peers which do not match any other remote
 directive.\n
-Examples : \n
+Examples: \n
 remote anonymous
 remote ::1 [8000]") },
                      { label => N("Exchange mode"), val => \$main_remote_section->{2}[1],
@@ -1109,7 +1109,7 @@ they are used like:
 		the type is an ASN.1 distinguished name.  If
 		string is omitted, racoon(8) will get DN from
 		Subject field in the certificate.\n
-Examples : \n
+Examples: \n
 my_identifier user_fqdn \"myemail\@mydomain.com\"") },
                      { label => N("Peers identifier"), val => \$main_remote_section->{9}[1], type => 'entry' },
                      { label => N("Proposal"), val => \$proposal_remote_section->{1}[0], list => [ 'proposal' ], allow_empty_list => 1 },
