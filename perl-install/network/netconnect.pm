@@ -661,6 +661,7 @@ killall pppd
                                         'speedtouch' => [ 'speedtouch', "$::prefix/usr/share/speedtouch/speedtouch.sh" ],
                                        );
                         return 'adsl_unsupported_eci' if $ntf_name eq 'eci';
+                        # FIXME: check that the package installation succeeds, else retry or abort
                         $in->do_pkgs->install($packages{$ntf_name}[0]) if $packages{$ntf_name} && !-e $packages{$ntf_name}->[1];
                         if ($ntf_name eq 'speedtouch') {
                             $in->do_pkgs->ensure_is_installed_if_available('speedtouch_mgmt', "$::prefix/usr/share/speedtouch/mgmt.o");
