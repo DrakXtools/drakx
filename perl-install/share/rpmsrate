@@ -186,7 +186,8 @@ NETWORKING_MAIL
   1 exmh sylpheed fetchmail-daemon fetchmailconf
 NETWORKING_MAIL_SERVER
   5 postfix 
-  4 mailman 
+  4 mailman
+  3 imap
 
 NETWORKING_NEWS
   5 GNOME pan
@@ -201,7 +202,7 @@ NETWORKING_OTHER
 NETWORKING_OTHER_SERVER
   3 dhcp-server gated timed ntp
 
-  3 intimed mcserv nscd imap pidentd
+  3 intimed mcserv nscd pidentd
     rdate bootparamd 
     cleanfeed ucd-snmp leafnode
     cvsweb nut-server
