@@ -468,10 +468,8 @@ sub set_autologin {
       setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
       log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
   }
-  setVarsInSh("$::prefix/etc/sysconfig/autologin",
-	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx.autologin" });
-  run_program::rooted($::prefix, "/bin/chmod", 644, "$::prefix/etc/sysconfig/autologin")
-    or log::l("warning: unable to set \"$::prefix/etc/sysconfig/autologin\" permissions");
+  setVarsInShMode("$::prefix/etc/sysconfig/autologin", 0644,
+		  { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx.autologin" });
   log::l("cat $::prefix/etc/sysconfig/autologin ($user):\n", cat_("$::prefix/etc/sysconfig/autologin"));
 }
 
