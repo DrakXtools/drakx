@@ -449,7 +449,8 @@ sub configureNetwork2 {
         } else {
             #- disable zeroconf
             require services;
-            -f "/etc/rc.d/init.d/$_" and services::do_not_start_service_on_boot($_) foreach qw(tmdns zcip)
+            -f "/etc/rc.d/init.d/$_" and services::do_not_start_service_on_boot($_) foreach qw(tmdns zcip);
+            -f "$etc/tmdns.conf" and write_zeroconf("$etc/tmdns.conf", '');
         }
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
     }
