@@ -39,8 +39,7 @@ install:
 	install -m 644 network/*.pm $(NETLIBDEST)
 	install -m 644 security/*.pm $(SECURITYDEST)
 	install -m 644 pixmaps/* $(PIXDIR)
-	install -m 644 share/diskdrake.rc $(ETCDEST)
-	install -m 644 share/wizard.rc $(ETCDEST)
+	install -m 644 share/diskdrake.rc $(DATADIR)/$(NAME)
 
 	install -d $(PREFIX)/etc/security
 	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf

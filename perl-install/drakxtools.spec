@@ -175,7 +175,6 @@ done
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
-%config(noreplace) /etc/gtk/*.rc
 %config(noreplace) %{_sysconfdir}/pam.d/net_monitor
 %config(noreplace) %{_sysconfdir}/security/console.apps/net_monitor
 /usr/X11R6/bin/*
