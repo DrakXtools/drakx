@@ -195,7 +195,7 @@ sub allowNVIDIA_rpms {
 	foreach (keys %{$packages->{names}}) {
 	    my ($ext, $version, $release) = /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d.*?)\.(\d+mdk))?$/ or next;
 	    my $p = pkgs::packageByName($packages, $_);
-	    pkgs::packageSelectedOrInstalled($p) or next;
+	    $p->flag_available or next;
 	    $version or ($version, $release) = ($p->version, $p->release);
 	    my $name = "NVIDIA_kernel-$version-$release$ext";
 	    pkgs::packageByName($packages, $name) or return;
@@ -299,11 +299,14 @@ sub preConfigureTimezone {
 }
 
 sub setPackages {
-    my ($o) = @_;
+    my ($o, $rebuild_needed) = @_;
 
     require pkgs;
-    if (!$o->{packages} || is_empty_hash_ref($o->{packages}{names})) {
+    if (!$o->{packages} || is_empty_hash_ref($o->{packages}{depslist})) {
 	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
+
+	#- open rpm db according to right mode needed.
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix}, $rebuild_needed);
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages},
@@ -322,6 +325,9 @@ sub setPackages {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
 	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method}, $o->{packages});
+
+	#- open rpm db (always without rebuilding db, it should be false at this point).
+	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen($o->{prefix});
     }
 }
 
