@@ -1,5 +1,85 @@
 2001/04/09  dam's  <damien@mandrakesoft.com>
 
+	* tinyfirewall.pm: corrected
+
+	* standalone.pm: install function now returns the return value of the
+	system.
+
+	* netconnect.pm: corrected buggy cable
+	removed buggy modem screen repetition
+
+2001/04/09  François Pons  <fpons@mandrakesoft.com>
+
+	* standalone/mousedrake: fixed mousedrake (with interactive.pm fixes
+	applied).
+	fixed cancel support.
+	added conditional restart of gpm on mouse configuration change.
+
+	* fs.pm: removed notail option for reiserfs.
+
+	* standalone/keyboarddrake: fixed exit on cancel (should cause trouble in
+	DrakConf only).
+
+	* install_any.pm: added missing package to copy.
+
+	* rescue/tree/etc/oem: fixes of grub installation using hd.img
+	fix the fix for loopback mounting of hd.img.
+	fixed hd.img access right.
+	make kernel22 installed for every oem install...
+	moved some package to closure instead of installed.
+	added some missing packages.
+	added nolock option for nfsmount.
+	added missing package to copy.
+
+2001/04/09  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/init.c: fix Traktopel Maxim thanks to Kevin Lawton
+
+	* mdk-stage1/Makefile: 8.0beta -> 8.0rc
+
+	* standalone/drakgw: fix for when there is an already existing rc.firewall
+	complies with old format of drakgw so that upgrades will work
+
+	* rescue/tree/etc/oem: fix english thanks to Kevin
+
+2001/04/09  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* any.pm: changed  ISO_8859-1 TO ISO-8859-1
+
+2001/04/09  Pixel  <pixel@mandrakesoft.com>
+
+	* c/stuff.xs.pm, install_steps.pm, any.pm: create to_utf8 from po strings,
+	use it for kdm message
+
+	* interactive.pm (ask_from_treelistf): make it behaves correctly when
+	"cancel" is clicked
+
+	* Xconfigurator_consts.pm, Xconfig.pm, Xconfigurator.pm: handle XkbModel
+	(especially for abnt2 (br))
+
+	* install2.pm (main): sets umask (seems like default one is no more 022,
+	kernel change?)
+	(main): log the umask
+
+	* devices.pm (entry): add hd[ijkl]*
+
+	* bootloader.pm (install_lilo): better handling of map-drive (there's not
+	always only 2 disks!)
+
+	* lang.pm (load_po): sets $lang::charset to the charset used in the po
+
+2001/04/09  siegel
+
+	* share/po/de.po: fixes
+
+2001/04/09  yduret
+
+	* standalone/drakboot: added lilo/grub
+
+	* bootlook.pm: added lilo/grub mode
+
+2001/04/09  dam's  <damien@mandrakesoft.com>
+
 	* modules.pm: removed use install_any
 
 	* tinyfirewall.pm: corrected
