@@ -57,6 +57,8 @@ install_pms: $(DIRS)
 	chmod a+x $(DESTREP4PMS)/live_install*
 
 get_needed_files: $(DIRS) $(MOFILES)
+	$(MAKE) -C share
+
 #	export PERL_INSTALL_TEST=1 ; strace -f -e trace=file -o '| grep -v "(No such file or directory)" | sed -e "s/[^\"]*\"//" -e "s/\".*//" | grep "^/" | grep -v -e "^/tmp" -e "^/home" -e "^/proc" -e "^/var" -e "^/dev" -e "^/etc" -e "^/usr/lib/rpm" > /tmp/list ' $(PERL) -d install2 < /dev/null
 	eval `perl -V:version`; \
 	cat share/list `../tools/specific_arch share/list` | \
