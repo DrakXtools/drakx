@@ -152,7 +152,7 @@ if ("@ARGV" =~ /--version/) {
 
 # Backend Options.
 # make this global for status screen      
-my $window1;
+my ($window1, $my_win);
 my $central_widget;
 my $previous_widget;
 my $current_widget;
@@ -4641,11 +4641,13 @@ sub interactive_mode_box {
 sub interactive_mode {
     $interactive = 1;
     my $box;
-    $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
-    init Gtk;
-    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
-    $window1->set_position(1);
-    $window1->set_title(_("Drakbackup"));
+    $my_win = my_gtk->new('drakbackup');
+    $window1 = $my_win->{window};
+    unless ($::isEmbedded) {
+	   $my_win->{rwindow}->signal_connect (delete_event => sub { Gtk->exit(0) });
+	   $my_win->{rwindow}->set_position(1);
+	   $my_win->{rwindow}->set_title(_("Drakbackup"));
+    }
     my ($pix_u_map, $pix_u_mask) = gtkcreate_png("drakbackup.540x57");
     read_conf_file();     
 
@@ -4678,8 +4680,8 @@ sub interactive_mode {
     $window1->show_all;
     $window1->realize;
     $window1->show_all();    
-    Gtk->main;
-    Gtk->exit(0);
+    $my_win->main;
+    $my_win->exit(0);
 }
 
 ################################################  HELP & ABOUT  ################################################  
