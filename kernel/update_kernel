@@ -87,6 +87,7 @@ fi
 #- allow specifying a kernel file on commandline (./update_kernel /RPMS/kernel-2.4.22.10mdk-1-1mdk.i586.rpm 2.4.22-10mdk)
 if [ -n "$1" ]; then
     rpm=$1
+    [ $rpm = ${rpm#/} ] && rpm=`pwd`/$rpm
 elif [ "$ARCH" == "ia64" ] || [ "$ARCH" == "ppc" ]; then
     rpm=$RPMS/kernel-[0-9]*.rpm
 else 
