@@ -40,8 +40,8 @@ $window1->set_policy(0, 0, 0);
 $window1->set_border_width(5);
 #$::isEmbedded or $window1->set_usize(500, 400);
 
-my @anim;
-($anim[$_]->[0], $anim[$_]->[1]) = gtkcreate_png("/usr/share/icons/anim_" . ($_ + 1) . ".png") foreach (0..9);
+my $colorr = my_gtk::gtkcolor(50400, 655, 20000);
+my $colort = my_gtk::gtkcolor(55400, 65400, 655);
 my $isconnected=0;
 my @interfaces;
 my $monitor = {};
@@ -53,8 +53,10 @@ gtkadd($window1,
 			    0, gtkpack_(new Gtk::VBox(0,5),
 					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
-				      gtkpack__(new Gtk::HBox(0,0), _("Sending Speed : "), my $label_st = new Gtk::Label("")),
-				      gtkpack__(new Gtk::HBox(0,0), _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
+							    gtkpack__(new Gtk::HBox(0,0),
+								      _("Sending Speed : "), my $label_st = new Gtk::Label("")),
+							    gtkpack__(new Gtk::HBox(0,0),
+								      _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
 							   )
 						 ),
 					0, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
@@ -65,13 +67,18 @@ gtkadd($window1,
 		0, my $statusbar = new Gtk::Statusbar
 	       )
       );
+$window1->realize;
+my $gct = new Gtk::Gdk::GC($window1->window);
+$gct->set_foreground($colort);
+my $gcr = new Gtk::Gdk::GC($window1->window);
+$gcr->set_foreground($colorr);
 my ($pix_c_map, $pix_c_mask) = gtkcreate_png("net_c.png");
 my ($pix_d_map, $pix_d_mask) = gtkcreate_png("net_d.png");
 $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
 				   my $pix_c = new Gtk::Pixmap($pix_d_map, $pix_d_mask),
 				   my $label_c = new Gtk::Label(_("Connect to internet"))
 				  ));
-$statusbar->push(1, "Not connected");
+$statusbar->push(1, _("Not connected"));
 $window1->show_all();
 $window1->set_policy (1, 1, 1);
 update();
@@ -83,58 +90,43 @@ Gtk->main;
 Gtk->exit(0);
 
 sub connection {
-    my $dialog = new Gtk::Dialog();
-    $dialog->set_position(1);
-    $dialog->vbox->set_border_width(10);
-    my $darea1= new Gtk::DrawingArea();
-    $darea1->size(350,12);
-    $darea1->set_usize(350,12);
-    gtkpack_($dialog->vbox,
-	     0, $isconnected ? _("Deconnecting from internet ...") : _("Connecting to internet ..."),
-	     1, my $frame = gtkadd(gtkset_shadow_type(new Gtk::Frame(""), 'etched_out'),
-						  $darea1)
-	    );
-    my $bbox_dialog = new Gtk::HButtonBox;
-    $dialog->action_area->add($bbox_dialog);
-    $bbox_dialog->set_layout(-spread);
-    my $button_ok = gtksignal_connect(new Gtk::Button (_("OK")), clicked => sub {
-					  $dialog->set_modal(0);
-					  $dialog->destroy;
-					  update();
-				      });
-    $button_ok->set_sensitive(0);
-    $bbox_dialog->add($button_ok );
-    $dialog->show_all;
-    $dialog->set_modal(1);
-    $darea1->realize();
-    my $anim_nb=0;
+    my $isconnected2 = $isconnected;
+    $button_connect->set_sensitive(0);
+    $statusbar->pop(1);
+    $statusbar->push(1, $isconnected2 ? _("Disconnecting from internet ") : _("Connecting to internet "));
+    my $nb_point=1;
     my $tag = Gtk->timeout_add(100, sub {
-				   $darea1->window->draw_pixmap
-				     ($darea1->style->white_gc,
-				      $anim[$anim_nb]->[0], 0, 0,
-				      ($darea1->allocation->[2]-340)/2, ($darea1->allocation->[3]-15)/2,
-				      350, 13);
-				   $anim_nb++;
-				   $anim_nb > 9 and $anim_nb=0;
+				   $statusbar->pop(1);
+				   $statusbar->push(1, ($isconnected2 ? _("Disconnecting from internet ") : _("Connecting to internet "))
+						    . join('', map { "." } (1..$nb_point)));
+				   $nb_point++;
 				   1;
 			       });
     my $netc = {};
     my $tag2 = Gtk->timeout_add(7000, sub {
 				    Gtk->timeout_remove($tag);
-				    $frame->destroy;
-				    gtkpack_($dialog->vbox,
-					     1, $isconnected ? ( netconnect::connected('', $netc) ?
-								 _("Deconnection from internet failed.") :
-								 _("Deconnection from internet complete.")) :
-					     ( netconnect::connected('', $netc) ?
-					       _("Connection complete.") :
-					       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
-					    );
-				    $dialog->vbox->show_all;
-				    $button_ok->set_sensitive(1);
+				    $statusbar->pop(1);
+				    $statusbar->push(1, $isconnected2 ? ( netconnect::connected('', $netc) ?
+									  _("Disconnection from internet failed.") :
+									  _("Disconnection from internet complete.")) :
+						     ( netconnect::connected('', $netc) ?
+						       _("Connection complete.") :
+						       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
+						    );
+				    my $tag3 = Gtk->timeout_add(10000, sub {
+					    $statusbar->pop(1);
+					    $statusbar->push(1, netconnect::connected('', $netc) ? _("Connected") : _("Not connected"));
+					    0;
+					});
+				    $button_connect->set_sensitive(1);
 				    0;
 				});
-    $isconnected ? netconnect::disconnect_backend('') : netconnect::connect_backend('');
+    Gtk->main_iteration while Gtk->events_pending;
+    my $pid;
+    unless ($pid = fork) {
+	die (_("cannot fork: ") . $~) unless defined $pid;
+	exec( $isconnected2 ? "/etc/sysconfig/network-scripts/net_cnx_down" : "/etc/sysconfig/network-scripts/net_cnx_up");
+    }
 }
 
 sub rescan {
@@ -191,12 +183,20 @@ sub update {
 	    $notebook->append_page(gtkshow(my $page = gtkpack_(new Gtk::VBox(0,0),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
 							    gtksize(my $darea = $monitor->{$intf}{darea} = new Gtk::DrawingArea(),300, 150)),
-					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
+					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
+							    gtksize(my $dareat = new Gtk::DrawingArea(),15, 15),
 							    _("sent : "), $labelt = new Gtk::Label("0")),
-					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,0), 5),
+					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
+							    gtksize(my $darear = new Gtk::DrawingArea(),15, 15),
 							    _("received : "), $labelr = new Gtk::Label(_("0"))),
 					   )),
 				   new Gtk::Label($intf));
+	    $dareat->signal_connect( expose_event => sub {
+					 $dareat->window->draw_rectangle ($gct, 1, 0, 0, 15, 15);
+				     });
+	    $darear->signal_connect( expose_event => sub {
+					 $darear->window->draw_rectangle ($gcr, 1, 0, 0, 15, 15);
+				     });
 	    $notebook->set_page($notebook->page_num($page));
 	    $monitor->{$intf}{page}=($notebook->page_num($page));
 	    $monitor->{$intf}{pixmap_db} = new Gtk::Gdk::Pixmap($darea->window, 300, 150);
@@ -220,6 +220,8 @@ sub update {
     if(netconnect::connected('', $netc) == !$isconnected) {
 	$isconnected = $isconnected ? 0 : 1;
 	$label_c->set($isconnected ? _("Disconnect") : _("Connect"));
+	$statusbar->pop(1);
+	$statusbar->push(1, netconnect::connected('', $netc) ? _("Connected") : _("Not connected"));
 	$isconnected ? $pix_c->set($pix_c_map, $pix_c_mask) : $pix_c->set($pix_d_map, $pix_d_mask);
     }
     1;
@@ -241,12 +243,10 @@ sub draw_monitor {
     }
     my $ech = $maxr + $maxt;
     $ech == 0 and $ech = 1;
-    my $colorr = my_gtk::gtkcolor(50400, 655, 20000);
-    my $gcr = new Gtk::Gdk::GC($o->{darea}->window);
-    $gcr->set_foreground($colorr);
-    my $colort = my_gtk::gtkcolor(55400, 65400, 655);
-    my $gct = new Gtk::Gdk::GC($o->{darea}->window);
-    $gct->set_foreground($colort);
+#    my $gcr = new Gtk::Gdk::GC($o->{darea}->window);
+#    $gcr->set_foreground($colorr);
+#    my $gct = new Gtk::Gdk::GC($o->{darea}->window);
+#    $gct->set_foreground($colort);
     my $step=50;
     foreach (@{$o->{stack_t}}) {
 	$o->{pixmap_db}->draw_rectangle($gct, 1, $step, 0, 1, $_*150/$ech);
