@@ -182,11 +182,11 @@ sub install {
 }
 
 sub ensure_is_installed {
-    my ($o, $pkg, $file, $auto) = @_;
+    my ($o, $pkg, $file, $b_auto) = @_;
 
     if (! -e $file) {
 	$o->{in}->ask_okcancel('', N("The package %s needs to be installed. Do you want to install it?", $pkg), 1) 
-	  or return if !$auto;
+	  or return if !$b_auto;
 	$o->{in}->do_pkgs->install($pkg);
     }
     if (! -e $file) {
