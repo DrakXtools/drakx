@@ -1,3 +1,5 @@
+# translation of DrakX.po to Icelandic
+# translation of DrakX-is_n.po to Icelandic
 # translation of DrakX-is.po to Icelandic
 # Translation file for Mandrake graphic install, DrakX
 # Copyright (C) 1999,2003 Free Software Foundation, Inc.
@@ -9,15 +11,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-is\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-03-10 10:18GMT\n"
+"Project-Id-Version: DrakX\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-18 10:44GMT\n"
 "Last-Translator: Pjetur G. Hjaltason <pjetur@pjetur.net>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -28,6 +30,7 @@ msgstr "Leita á disksneiðum að tengipunktum"
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
 msgstr ""
+"ef hakað er við, þá er fylgst með breytingum á forritum sem keyra sem rót."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -35,16 +38,18 @@ msgid ""
 "%s: %s requires hostname, MAC address, IP, nbi-image, 0/1 for THIN_CLIENT, "
 "0/1 for Local Config...\n"
 msgstr ""
+"%s: %s þarfnast vélarnafns, MAC addressu, IP, nbi-image, 0/1 fyrir "
+"THIN_CLIENT, 0/1 fyirr Local Config...\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Configuration changed - restart clusternfs/dhcpd?"
-msgstr ""
+msgstr "Stillingum breytt - endurræsa clusternfs/dhcpd?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t\tErase=%s"
-msgstr ""
+msgstr "\t\tEyða=%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -52,6 +57,8 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
+"Mismuna-afrit geymir aðeins skrár sem hafa breytst eða eru nýjar frá "
+"upprunalegu 'grunn' afriti."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -98,9 +105,9 @@ msgid "Restore partition table"
 msgstr "Endurheimta sneiðatöflunna"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure hostname..."
-msgstr "Tilgreindu mús"
+msgstr "Stilla vélarnafn..."
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -118,6 +125,8 @@ msgid ""
 "The current security level is %s\n"
 "Select permissions to see/edit"
 msgstr ""
+"Núverandi öryggisþrep er %s\n"
+"veldu heimildir til að skoða/breyta"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -137,6 +146,9 @@ msgid ""
 "Also printers configured with the PPD files provided by their manufacturers "
 "or with native CUPS drivers cannot be transferred."
 msgstr ""
+"\n"
+"Einnig er ekki hægt að flytja prentara sem eru skilgreindir með PPD skrám "
+"frá framleiðanda eða prentara með eigin CUPS reklum."
 
 #: ../../lang.pm:1
 #, c-format
@@ -167,14 +179,14 @@ msgid "Gateway device"
 msgstr "Gátt (tækið)"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Advanced preferences"
-msgstr "Ítarlegri Valkostir"
+msgstr "Ítarlegri valkostir"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Net Method:"
-msgstr ""
+msgstr "Net aðferð:"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -184,17 +196,17 @@ msgstr "Netkort"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "If set, send the mail report to this email address else send it to root"
-msgstr ""
+msgstr "ef sett, senda skýrslu með pósti til þessa vistfangs - annars til root"
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Viðföng"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "no"
-msgstr "Upplýsingar"
+msgstr "nei"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -228,6 +240,11 @@ msgid ""
 "\n"
 "Do you really want to continue setting up this printer as you are doing now?"
 msgstr ""
+"Tendgdu prentarann þinn við Linux miðlarann og láttu Windows vél(arnar) "
+"tengjast honum sem biðlarar.\n"
+"\n"
+"Viltu í alvöru halda áfram að setja upp þennan prentara eins og þú ert að "
+"gera núna?"
 
 #: ../../lang.pm:1
 #, c-format
@@ -242,7 +259,7 @@ msgstr "Villa við að skrifa í skrána %s"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Report check result to syslog"
-msgstr ""
+msgstr "Skrifa athuganir í kerfisannál"
 
 #: ../../services.pm:1
 #, c-format
@@ -250,11 +267,14 @@ msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
 msgstr ""
+"apmd er notaður til að fylgjast með stöðu rafhlöðu og skrá í kerfisannál.\n"
+"Einnig er hægt að nota hann til að slökkva á tölvu þegar rafhlaða er að "
+"tæmast."
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use tape to backup"
-msgstr ""
+msgstr "Nota segulband til afritatöku"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -267,9 +287,9 @@ msgid "CUPS configuration"
 msgstr "CUPS uppsetning"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Total progress"
-msgstr "Framvinda alls"
+msgstr "Heildarframvinda"
 
 #: ../../lang.pm:1
 #, c-format
@@ -293,16 +313,19 @@ msgid ""
 "Drakbackup activities via %s:\n"
 "\n"
 msgstr ""
+"\n"
+"Drakbackup aðgerðir um %s:\n"
+"\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "yes"
 msgstr "Já"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -312,11 +335,15 @@ msgid ""
 "We are about to configure your internet/network connection.\n"
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
+"Velkomin(n) að net-leiðbeinandanum.\n"
+"\n"
+"Við ætlum nú að setja upp internet/net tengingu.\n"
+"Ef þú vilt ekki láta leita sjálfkrafa af-hakaðu þá við gátreitinn.\n"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../../lang.pm:1
 #, c-format
@@ -344,9 +371,9 @@ msgid "No CD device defined!"
 msgstr "Ekkert CD tæki valið!"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "\tUse .backupignore files\n"
-msgstr "Nota kvóta fyrir afritaskrár."
+msgstr "\tNota .backupignore skrár\n"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -356,7 +383,7 @@ msgstr "Búlgarskt (hljóðfræðilegt)"
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "The DHCP start ip"
-msgstr ""
+msgstr "Fyrsta IP-tala DHCP"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -366,7 +393,7 @@ msgstr "256 kB"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Don't rewind tape after backup"
-msgstr ""
+msgstr "Ekki spóla segulband til baka eftir afritun"
 
 #: ../../any.pm:1
 #, c-format
@@ -403,11 +430,13 @@ msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
 msgstr ""
+"Með þessum valkosti munt þú geta endurheimt allar útgáfur\n"
+" af /etc möppunni þinni."
 
 #: ../../standalone/drakedm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The change is done, do you want to restart the dm service ?"
-msgstr "Það þarf að endurræsa netið, viltu endurræsa það núna?"
+msgstr "Breytingum er lokið, viltu endurræsa dm þjónustuna núna?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -430,7 +459,7 @@ msgid "Webcam"
 msgstr "Vefmyndavél"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "size of the (second level) cpu cache"
 msgstr "Stærð á (annars þreps) skyndiminni örgjörva"
 
@@ -440,14 +469,14 @@ msgid "Soundcard"
 msgstr "Hljóðkort"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Month"
-msgstr "Tengipunktur"
+msgstr "Mánuður"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for files to restore"
-msgstr "Gefðu upp dagsetningu sem á að endurheimta"
+msgstr "Leita að skrám til að endurheimta"
 
 #: ../../lang.pm:1
 #, c-format
@@ -460,6 +489,8 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
+"Til að prenta skrá frá skipanalínunni (skjáglugga) notaðu skipunina \"%s "
+"<skrá>\".\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -467,9 +498,9 @@ msgid "Level %s\n"
 msgstr "Stig %s\n"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syriac (phonetic)"
-msgstr "Armenskt (hljóðfræðilegt)"
+msgstr "Sýrlenskt (hljóðfræðilegt)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -485,6 +516,11 @@ msgstr "Braut"
 #, c-format
 msgid "Iraq"
 msgstr "Írak"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "tengist %s..."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -525,9 +561,19 @@ msgid "Search installed fonts"
 msgstr ""
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default desktop"
-msgstr "Sjálfgefið"
+msgstr "Sjálfgefið skjáborð"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -613,9 +659,9 @@ msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " á Novell miðlara \"%s\", prentari \"%s\""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Name"
-msgstr "Heiti prentraðar"
+msgstr "Heiti prentara"
 
 # ## skrytid
 #: ../../standalone/drakfloppy:1
@@ -811,9 +857,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default user"
-msgstr "Sjálfgefinn prentari"
+msgstr "Sjálfgefinn notandi"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -992,6 +1038,36 @@ msgid ""
 "No D-Channel (leased lines)"
 msgstr "Samskiptaregla til tengingar við umheiminn"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Option %s must be a number!"
@@ -1033,9 +1109,9 @@ msgid "Interface"
 msgstr "Tengi"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multisession CD"
-msgstr "Margmiðlunar-vinnustöð"
+msgstr "Viðbætanleg CD-lota"
 
 #: ../../modules/parameters.pm:1
 #, c-format
@@ -1093,9 +1169,9 @@ msgid "Do you have any %s interfaces?"
 msgstr "Eru einhver %s tengi í tölvunni?"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must be root to read configuration file. \n"
-msgstr "Afrita nú frá stillingaskrá"
+msgstr "Þú verður að vera kerfisstjóri til að lesa stillingaskrá. \n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1149,9 +1225,9 @@ msgid "Configure Internet Access..."
 msgstr "Stilla Internet aðgengi..."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the time interval between each backup"
-msgstr "Veldu miðil\\ fyrir afrit."
+msgstr "Vinsamlega veldu tímabil milli afrita."
 
 #: ../../crypto.pm:1 ../../lang.pm:1
 #, c-format
@@ -1159,7 +1235,7 @@ msgid "Norway"
 msgstr "Noregur"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete profile"
 msgstr "Eyða sniði..."
 
@@ -1207,7 +1283,7 @@ msgstr "Búlgaría"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Tuesday"
-msgstr "Þriðjudagur"
+msgstr "þriðjudagur"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -1337,9 +1413,9 @@ msgid "Joystick"
 msgstr "Gleðigandur"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "DVD"
-msgstr "DVD-ROM"
+msgstr "DVD"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1518,7 +1594,7 @@ msgstr "Vestur Evrópa"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On CD-R"
-msgstr "á geisladisk"
+msgstr "Á geisladisk"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -1537,9 +1613,9 @@ msgid "Harddrake2 version %s"
 msgstr "Harddrake2 útgáfa %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Preferences"
-msgstr "Valkostur:"
+msgstr "Valkostir"
 
 #: ../../lang.pm:1
 #, c-format
@@ -1562,7 +1638,7 @@ msgid "Choose color"
 msgstr "Veldu lit"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syriac"
 msgstr "Sýrland"
 
@@ -1578,6 +1654,9 @@ msgid ""
 "Mandrake Linux partition. Be careful, all data present on this partition\n"
 "will be lost and will not be recoverable!"
 msgstr ""
+"Veldu harða diskinn sem þú vilt hreinsa allt af til að setja upp nýja\n"
+"Mandrake Linux disksneið.  Varúð, öllum gögnum á disknum verður\n"
+"eytt, og það er ekki hægt að sækja þau aftur!"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -1586,15 +1665,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Notaðu %c og %c lyklana til að velja hvaða færsla er upplýst."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Almenn 2 hnappa mús"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../lvm.pm:1
 #, c-format
@@ -1865,9 +1944,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/cups.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on other machines"
-msgstr "Stilla nettengingu"
+msgstr "Stillt á öðrum vélum"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1931,7 +2010,7 @@ msgstr "Kerfi"
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Do you want to use this feature?"
-msgstr "Viltu nota þennan fídus?"
+msgstr "Viltu nota þennan eiginleika?"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2076,9 +2155,9 @@ msgid "Local network(s)"
 msgstr "Staðbundið(n) net"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Windows"
-msgstr "Fjarlægja Windows(TM)"
+msgstr "Fjarlægja Windows"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -2298,9 +2377,9 @@ msgid "European protocol (EDSS1)"
 msgstr "Evrópskan samskiptastaðal (EDSSI)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Delete"
-msgstr "Eyða"
+msgstr "/_Eyða"
 
 #: ../../any.pm:1
 #, c-format
@@ -2318,9 +2397,9 @@ msgid "Please enter your email address below "
 msgstr "Vinsamlega gefðu upp netfang þitt "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Monitoring"
-msgstr "Netstillingar"
+msgstr "Neteftirlit"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -2418,9 +2497,9 @@ msgid "Tokelau"
 msgstr "Tokelau"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Matching"
-msgstr "passar við"
+msgstr "Passar við"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2486,9 +2565,9 @@ msgid "hourly"
 msgstr "hverri klst"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Right Shift key"
-msgstr "Hægri Alt lykill"
+msgstr "Hægri Shift lykill"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2571,9 +2650,9 @@ msgid "CUPS"
 msgstr "CUPS"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase tape before backup"
-msgstr "Nota kvóta fyrir afritaskrár."
+msgstr "Þurka út af segulbandi fyrir afritun"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -2594,6 +2673,23 @@ msgstr "Stærð rótardisksneiðar í MB: "
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Þessi pakki verður að vera uppsettur, þú getur ekki afvalið hann"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2652,11 +2748,13 @@ msgid "Package Group Selection"
 msgstr "Val á pakkahóp"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Allow local hardware\n"
 "configuration."
-msgstr "Sjálfvirk enduruppsetning"
+msgstr ""
+"Leyfa uppsetningu á\n"
+"þessum vélbúnaði"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2784,9 +2882,9 @@ msgid "All primary partitions are used"
 msgstr "Allar aðal-skráarsneiðar eru í notkun"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "LPD server \"%s\", printer \"%s\""
-msgstr " á LPD þjóni \"%s\", prentari \"%s\""
+msgstr "LPD þjónn \"%s\", prentari \"%s\""
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -2803,9 +2901,9 @@ msgid "Automatic detection and configuration of hardware at boot."
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "Uppsetning"
+msgstr "Stillingar uppsetningarmiðlara"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -2941,9 +3039,9 @@ msgstr ""
 "eru tiltækir á kerfinu þínu\n"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on parallel port #%s"
-msgstr "Prentari á raðtengi - port #%s"
+msgstr "Margþætt tæki á á raðtengi - port \\#%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2978,22 +3076,6 @@ msgstr "Fela skrár"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "Finna sjálfkrafa staðværa prentara"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -3052,9 +3134,9 @@ msgid "Romania"
 msgstr "Rúmenía"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group"
-msgstr "hópur"
+msgstr "Hópur"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3120,9 +3202,9 @@ msgid "Horizontal refresh rate"
 msgstr "Lárétt tíðni"
 
 #: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit"
-msgstr "Hætta"
+msgstr "Sýsl"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -3238,9 +3320,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Endurgeri lista af uppsettum myndskönnum ..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Handvikr uppsetning"
+msgstr "Uppsetning eininga"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -3294,9 +3376,9 @@ msgid "No password prompt on %s at port %s"
 msgstr ""
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kensington Thinking Mouse with Wheel emulation"
-msgstr "Kensington Thinking Mouse"
+msgstr "Kensington Thinking Mouse með skrunhermi"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -3499,6 +3581,15 @@ msgstr ""
 msgid "Restore From Tape"
 msgstr "Endurheimta frá segulbandi"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -3543,9 +3634,9 @@ msgid "See hardware info"
 msgstr "Skoðaðu vélbúnaðarupplýsingar"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Day"
-msgstr "Maí"
+msgstr "Dagur"
 
 #: ../../any.pm:1
 #, c-format
@@ -3637,10 +3728,10 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr ""
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid "Insert floppy"
-msgstr "Settu tóman diskling í drif %s"
+msgstr "Settu diskling í drif"
 
 #: ../../diskdrake/dav.pm:1
 #, c-format
@@ -3760,9 +3851,9 @@ msgid "Start: sector %s\n"
 msgstr "Byrja: geiri %s\n"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "No Mask"
-msgstr "Skemmdur pakki"
+msgstr "Engin sía"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -3772,12 +3863,19 @@ msgstr "Nettenging þegar uppsett"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Couldn't access the floppy!"
-msgstr ""
+msgstr "Enginn aðgangur að disklingadrifi"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "tengist bugzilla álfi..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -3880,9 +3978,9 @@ msgid "Mount points must begin with a leading /"
 msgstr "Heiti tengipunkta verða að byrja á /."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD device"
-msgstr "Gefðu upp stærð CD/DVD diska (Mb)"
+msgstr "Veldu CD/DVD tæki"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -3932,9 +4030,9 @@ msgid ""
 msgstr ""
 
 #: ../../diskdrake/dav.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please enter the WebDAV server URL"
-msgstr "Hvernig mús ertu með?"
+msgstr "Vinsamlega gefið upp WebDAV slóð miðlara"
 
 #: ../../lang.pm:1
 #, c-format
@@ -3952,6 +4050,11 @@ msgstr "Samþykkja"
 #, c-format
 msgid "Description"
 msgstr "Lýsing"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Sláðu inn stutta lýsingu."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -4001,7 +4104,7 @@ msgstr "Fjartengdur prentari"
 #: ../../any.pm:1
 #, c-format
 msgid "Please choose a language to use."
-msgstr "Vinsamlega veldu land til að nota."
+msgstr "Vinsamlega veldu tungumál sem á að nota."
 
 #: ../../network/network.pm:1
 #, c-format
@@ -4067,17 +4170,17 @@ msgid "Cape Verde"
 msgstr "Grænhöfðaeyjar"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "Hvort þessi örgjörvi er haldinn Cyrix 6x86 Coma villunni"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Loading printer configuration... Please wait"
-msgstr "Breyta prentarastillingum"
+msgstr "Hleð inn prentarastillingum... Augnablik"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
 "Eldri pentium örgjörvar voru gallaðir og frusu þegar þeir þýddu F00F "
@@ -4137,9 +4240,9 @@ msgid "Test pages"
 msgstr "Prufusíður"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logical volume name "
-msgstr "Staðvær mæling"
+msgstr "Nafn lógiskrar disksneiðar"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4164,7 +4267,7 @@ msgid "Card mem (DMA)"
 msgstr "Kortminni (DMA)"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from Internet "
 msgstr "Aftengjast frá Internetinu "
 
@@ -4241,9 +4344,9 @@ msgid "United States"
 msgstr "Bandaríkin"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "Notendur"
+msgstr "Umask notenda"
 
 #: ../../any.pm:1
 #, c-format
@@ -4335,9 +4438,9 @@ msgid "Advanced Options"
 msgstr "Ítarlegri Valkostir"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "View Configuration"
-msgstr "Stillingar"
+msgstr "Skoða stillingar"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4469,6 +4572,8 @@ msgid ""
 "The per-user sharing uses the group \"fileshare\". \n"
 "You can use userdrake to add a user to this group."
 msgstr ""
+"Netmiðlun einstakra notanda notar hópinn \"fileshare\". \n"
+"Þú getur notað userdrake til að bæta notendum í þennan hóp."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -4504,7 +4609,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on parallel port #%s"
-msgstr "Prentari á raðtengi - port #%s"
+msgstr "Prentari á raðtengi - port \\#%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4589,9 +4694,9 @@ msgid ""
 msgstr ""
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No password aging for"
-msgstr "Ekkert lykilorð"
+msgstr "Enginn öldrun á lykilorði fyrir"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -4615,7 +4720,7 @@ msgstr "Austur Tímor"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On Tape Device"
-msgstr "á segulband"
+msgstr "Áá segulband"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4625,14 +4730,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Login name"
-msgstr "Nafn léns"
+msgstr "Notandanafn"
 
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Report unowned files"
-msgstr ""
+msgstr "Tilkynna skrár án eiganda"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -4700,9 +4805,9 @@ msgid "Removing %s"
 msgstr "Fjarlægi %s"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found...\n"
-msgstr "Engin letur fundust"
+msgstr "%s fannst ekki...\n"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -4733,9 +4838,9 @@ msgid "Congo (Brazzaville)"
 msgstr "Kongó (brassaville)"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Read"
-msgstr "Ritvarið"
+msgstr "Lesa"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -4775,16 +4880,17 @@ msgid ""
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Right Control key"
-msgstr "Hægri Alt lykill"
+msgstr "Hægri Ctrl lykill"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
 "press %s"
-msgstr "Settu tóman FAT forsniðinn diskling í drif %s"
+msgstr ""
+"Settu FAT forsniðinn diskling í drif %s með %s í rótarmöppu og ýttu á %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4849,13 +4955,12 @@ msgid "Suppress Temporary Files"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
 "\n"
 msgstr ""
 "Til hamingju, staðarnets og Internets uppsetningu er lokið.\n"
-"Uppsetnigin verður nú gerð virk.\n"
 "\n"
 
 #: ../../diskdrake/interactive.pm:1
@@ -4984,9 +5089,9 @@ msgid "Kiribati"
 msgstr "Kiribati"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech Mouse (serial, old C7 type) with Wheel emulation"
-msgstr "Logitech mús (raðtengd, gömul C7 tegund)"
+msgstr "Logitech mús (raðtengd, gömul C7 tegund) með skrunhermi"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5283,7 +5388,7 @@ msgid "omit scsi modules"
 msgstr "sleppa scsi einingum"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "family of the cpu (eg: 6 for i686 class)"
 msgstr "Fjölskylda örgjörva (þ.e. 6 fyrir i686)"
 
@@ -5333,9 +5438,9 @@ msgstr ""
 "/Windows) og NCP (NetWare) tengingar."
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Launch the wizard"
-msgstr "Ræsa userdrake"
+msgstr "Ræsa leiðbeinandann"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -5343,9 +5448,9 @@ msgid "Tvcard"
 msgstr "Sjónvarpskort"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Toggle between normal/expert mode"
-msgstr "Fara í venjulegan ham"
+msgstr "Víxla milli venjulegs/sérfræðings-hams"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -5353,9 +5458,9 @@ msgid "Size"
 msgstr "Stærð"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "GRUB"
-msgstr "GB"
+msgstr "GRUB"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5461,9 +5566,9 @@ msgstr ""
 "þá ættir þú að velja lægra öryggisþrep"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server Name"
-msgstr "Þjónn: "
+msgstr "Nafn þjóns"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -5486,9 +5591,14 @@ msgid ""
 "\n"
 "On which drive are you booting?"
 msgstr ""
+"Þú ákvaðst að setja ræsiforritið á disksneið.\n"
+"Þetta gefur til kynna að þú hafir nú þegar ræsiforrit á harða disknum sem þú "
+"ræsir af (t.d. System Commander).\n"
+"\n"
+"Af hvaða disk ræsir þú?"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -5503,12 +5613,15 @@ msgid ""
 msgstr ""
 "AÐVÖRUN\n"
 "\n"
-"DrakX þarf núna að endurgera Windows sneiðina. Athugið:\n"
-"Þetta getur haft alvarlegar afleiðingar í för með sér.\n"
-"Ef þú ert ekki búin(n) að því, þá ættir þú fyrst að\n"
-"keyra scandisk (og jafnvel líka defrag) á þessa sneið og\n"
-"taka síðan afrit af gögnunum þínum.\n"
-"Sláðu á 'Í lagi' til að halda áfram."
+"DrakX ætlar nú að breyta stærð Windows sneiðarinnar. Athugið:\n"
+"Þetta getur verið hættulegt. Ef þú ert ekki búin(n) að því, þá ættir þú "
+"fyrst að\n"
+"hætta við uppsetninguna, keyra \"chkdsk c:\" frá skipanalínunni (DOS)\n"
+"(Varúð: það er ekki nóg að keyra grafíska forritið \"scandisk\", verið \n"
+"viss um að nota \"chkdisk\" úr skipanalínunni!),\n"
+"Þið gætuð einnig keyrt defrag.  Endurræsið síðan uppsetninguna\n"
+"Þú ættir einnig að taka afrit af gögnunum þínum.\n"
+"Þegar þú ert viss, sláðu á \"Í lagi\" til að halda áfram."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5590,7 +5703,7 @@ msgstr ""
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Country / Region"
-msgstr "Land"
+msgstr "Land / Svæði"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -5682,9 +5795,9 @@ msgid ""
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Telugu"
-msgstr "Tokelau"
+msgstr "Telugu"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -5699,12 +5812,12 @@ msgstr ""
 "Kortið þitt notar rekilinn %s\"%s\" (sjálfgefið fyrir kortið þitt er \"%s\")"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "Post Uninstall"
-msgstr "Hætta innsetningu"
+msgstr "Eftirvinnsla"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to Internet "
 msgstr "Tengjast internetinu "
 
@@ -5719,9 +5832,9 @@ msgid "Cpuid level"
 msgstr "Örgjörvaþrep"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Novell server \"%s\", printer \"%s\""
-msgstr " á Novell miðlara \"%s\", prentari \"%s\""
+msgstr "Novell miðlari \"%s\", prentari \"%s\""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5752,6 +5865,22 @@ msgstr ""
 #, c-format
 msgid "busmouse"
 msgstr "busmús"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -5792,9 +5921,9 @@ msgid "Benin"
 msgstr "Benín"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "SMB/Windows server \"%s\", share \"%s\""
-msgstr " á SMB/Windows miðlara \"%s\", sameign \"%s\""
+msgstr "SMB/Windows miðlari \"%s\", sameign \"%s\""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -5812,9 +5941,9 @@ msgid "Monitor: %s\n"
 msgstr "Skjár: %s\n"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom & system settings"
-msgstr "Sérsniðin disksneiðing"
+msgstr "Sérsniðin kerfisuppsetning"
 
 #: ../../partition_table/raw.pm:1
 #, c-format
@@ -5879,7 +6008,7 @@ msgstr "Sérsniðin endurheimt"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Saturday"
-msgstr "Laugardagur"
+msgstr "laugardagur"
 
 #: ../../help.pm:1
 #, c-format
@@ -5891,9 +6020,9 @@ msgid ""
 msgstr ""
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the root umask."
-msgstr "Rótar-lykilorð"
+msgstr "Ákveða Umask rótar"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6067,9 +6196,9 @@ msgid ""
 msgstr "Þú fært póst ef ein af eftirfarandi þjónustum eru ekki lengur keyrandi"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Weekday"
-msgstr "Miðvikudagur"
+msgstr "Vikudag"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6102,24 +6231,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Disklingadrif"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6157,9 +6268,9 @@ msgid "Name Servers:"
 msgstr "Nafnaþjónar:"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Minute"
-msgstr "1 mínútu"
+msgstr "Mínúta"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -6195,14 +6306,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Expert mode"
-msgstr "F. sérfræðinga"
+msgstr "/_F. sérfræðinga"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
-msgstr ""
+msgstr "Fjarlægja þennan prentara frá Star Office/OpenOffice.org/GIMP"
 
 #: ../../services.pm:1
 #, c-format
@@ -6328,9 +6439,9 @@ msgid "Polish (qwerty layout)"
 msgstr "Pólskt (qwerty)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Add Printer"
-msgstr "Prentari"
+msgstr "/_Bæta við Prentara"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6525,6 +6636,9 @@ msgid ""
 "the languages you would like to install. They will be available\n"
 "when your installation is complete and you restart your system."
 msgstr ""
+"Mandrake linux getur stutt mörg tungumál.  Veldu tungumál\n"
+"sem þú vilt setja upp stuðning fyrir.  Þau verða tiltæk þegar\n"
+"uppsetningu er lokið. og þú endurræsir kerfið."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6605,9 +6719,9 @@ msgid "Graphics card: %s\n"
 msgstr "Skjákort: %s\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Set as _Default"
-msgstr " (Sjálfgefið)"
+msgstr "/Setja sem _Sjálfgefið"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -6620,9 +6734,9 @@ msgid "Yaboot"
 msgstr "Yaboot"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech CC Series with Wheel emulation"
-msgstr "Logitech CC Series"
+msgstr "Logitech CC Series með skrunhermi"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -6654,6 +6768,11 @@ msgstr "Samnýting Internets tengingar"
 msgid "Choose file"
 msgstr "Veldu skrá"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Lýsing: "
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -6662,9 +6781,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printing/Photo Card Access on \"%s\""
-msgstr "Keyri upp netið"
+msgstr "Prentun/Mynda-korts aðgangur á \"%s\""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -6725,6 +6844,17 @@ msgstr "Frönsku suðureyjar"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "örgjörvanafn framleiðanda"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6810,7 +6940,7 @@ msgid "Network interface"
 msgstr "Nettengi"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnection from Internet failed."
 msgstr "Aftenging frá Internetinu mistókst."
 
@@ -6840,9 +6970,9 @@ msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts og Nevis"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Generic 3 Button Mouse with Wheel emulation"
-msgstr "Almenn þriggja hnappa mús"
+msgstr "Almenn þriggja hnappa mús með skrunhermi"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -6866,9 +6996,9 @@ msgid "You can't use JFS for partitions smaller than 16MB"
 msgstr "Þú getur ekki notað JFS á disksneiðar minni en 16MB"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Erase your RW media (1st Session)"
-msgstr "Krossaðu hér við ef þú vilt eyða gögnum á RW miðli (1. sinn)"
+msgstr "Eyða gögnum á RW miðli (1. sinn)"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -6893,14 +7023,14 @@ msgstr ""
 "Reyndu að breyta einhverjum stillingum"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "TCP/IP host \"%s\", port %s"
-msgstr ", TCP/IP vél \"%s\", gátt %s"
+msgstr "TCP/IP vél \"%s\", gátt %s"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User :"
-msgstr "Notand i:"
+msgstr "Notandi :"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7001,12 +7131,12 @@ msgid "Mounted\n"
 msgstr "Tengdur\n"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS"
-msgstr "Stilla X"
+msgstr "Stilla CUPS"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical Interface"
 msgstr "Grafískt viðmót"
 
@@ -7016,9 +7146,14 @@ msgid "Restore Users"
 msgstr "Endurheimta notendur"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "Mismunandi lykilorð"
+msgstr "Dulritunarlykill fyrir %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Viltu endurbyggja kerfið þitt?"
 
 #: ../../services.pm:1
 #, c-format
@@ -7103,14 +7238,14 @@ msgid "Canada (cable)"
 msgstr "Kanada (kapal)"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy creation completed"
-msgstr "Tenging uppsett."
+msgstr "Disklingur tilbúinn"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Upgrade"
-msgstr "Uppfæra %s"
+msgstr "Uppfæra"
 
 #: ../../help.pm:1
 #, c-format
@@ -7137,9 +7272,9 @@ msgid "Multi-function device on USB"
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "With basic documentation"
-msgstr "Með grunn handbókum (mælt með!)"
+msgstr "Með grunn handbókum"
 
 #: ../../services.pm:1
 #, c-format
@@ -7215,9 +7350,9 @@ msgid ""
 msgstr ""
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "3 buttons with Wheel emulation"
-msgstr "Hnappahermir"
+msgstr "3 hnappar með skrunhermi"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -7261,7 +7396,7 @@ msgid ""
 msgstr "Þú getur ekki valið þennan pakka því það er ekki nægilegt pláss"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "generate auto-install floppy"
 msgstr "Búa til diskling fyrir sjálfvirka uppsetningu"
 
@@ -7286,14 +7421,14 @@ msgid "Malawi"
 msgstr "Malaví"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "local config: false"
-msgstr "Staðbundnar skrár"
+msgstr "Staðbundin uppsetning: nei"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System settings"
-msgstr "Sérsniðin disksneiðing"
+msgstr "Kerfisvalkostir"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7413,9 +7548,9 @@ msgid "Swap"
 msgstr "Diskminni"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom settings"
-msgstr "Sérsniðin disksneiðing"
+msgstr "Sérsniðnar stillingar"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7433,14 +7568,19 @@ msgid "Printer on SMB/Windows 95/98/NT server"
 msgstr "Prentari á SMB/Windows 95/98/NT miðlara"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Configure CUPS"
-msgstr "Stilla X"
+msgstr "/Stilla _CUPS"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
 msgstr ", "
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7457,9 +7597,9 @@ msgstr ""
 "annarrar."
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uzbek (cyrillic)"
-msgstr "Serbneskt (kýrílskt)"
+msgstr "Úsbeskt (kýrílskt)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -7472,9 +7612,9 @@ msgstr ""
 "milli mismunandi lykilboðsuppsetninga (t.d íslenskt/enskt)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Netstillingar"
+msgstr "Netstillingar útskifanlegra tækja"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -7519,9 +7659,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Authors: "
-msgstr "Höfundur:"
+msgstr "Höfundar: "
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -7539,9 +7679,9 @@ msgid "Latin American"
 msgstr "Suður amerískt"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Breyta prentkerfinu"
+msgstr "Japanskur prenthamur"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7592,9 +7732,9 @@ msgid "Ethernet Card"
 msgstr "Ethernet-kort"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delete selected printer"
-msgstr "Eyða valinni reglu"
+msgstr "Eyða völdum prentara"
 
 #: ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -7608,7 +7748,7 @@ msgid "Install"
 msgstr "Innsetning"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"%s\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"%s\", you will not be able\n"
@@ -7618,12 +7758,12 @@ msgid ""
 "Click on \"%s\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Smelltu á \"Næsta ->\" ef þú vilt eyða öllum gögnum og disksneiðum\n"
-"á þesum harða disk.  Varúð! Eftir að þú hefur smellt á \"Næsta ->\", getur\n"
+"Smelltu á \"%s\" ef þú vilt eyða öllum gögnum og disksneiðum\n"
+"á þesum harða disk.  Varúð! Eftir að þú hefur smellt á \"%s\", getur\n"
 "þú ekki endurheimt nein gögn eða disksneiðar sem eru nú á þessum diski,\n"
 "Þar með talin Windows gögn.\n"
 "\n"
-"Smelltu á \"<-Fyrri\" til að stöðva þessa aðgerð án þess að tapa gögnum\n"
+"Smelltu á \"%s\" til að stöðva þessa aðgerð án þess að tapa gögnum\n"
 "og disksneiðum sem nú eru á þessum harða diski."
 
 #: ../../steps.pm:1
@@ -7659,6 +7799,11 @@ msgid ""
 "I am about to setup your Local Area Network with that adapter."
 msgstr ""
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -7668,6 +7813,11 @@ msgstr "Minimal uppsetning"
 #, c-format
 msgid "Ethiopia"
 msgstr "Eþíópía"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -7776,7 +7926,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Russian (Phonetic)"
-msgstr "Rússneskt (hljóðfr.)"
+msgstr "Rússneskt (hljóðfræðilegt)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -7809,9 +7959,9 @@ msgid "Floppy can be removed now"
 msgstr "Það má fjarlægja diskling núna"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Truly minimal install"
-msgstr "Minimal uppsetning"
+msgstr "Alger lágmarksuppsetning"
 
 #: ../../lang.pm:1
 #, c-format
@@ -7951,13 +8101,6 @@ msgstr "Tegund uppsetningar"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Prentari á \"%s\" SMB/Windows 95/98/NT \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -7988,11 +8131,13 @@ msgid ""
 "Want to know more and to contribute to the Open Source community? Get "
 "involved in the Free Software world!"
 msgstr ""
+"Viltu vita meira um opinn hugbúnað? Taktu þátt í verkefnum frjáls hugbúnaðar "
+"um allan heim!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please select data to backup..."
-msgstr ""
+msgstr "Veldu gögn sem skal afrita..."
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -8034,9 +8179,9 @@ msgid "High"
 msgstr "Hátt"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a new printer to the system"
-msgstr "Bæta við reglu aftast"
+msgstr "Bæta við nýjum prentara við kerfið"
 
 #: ../../any.pm:1
 #, c-format
@@ -8044,14 +8189,14 @@ msgid "NoVideo"
 msgstr "NoVideo"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "this field describes the device"
 msgstr "Þetta svæði lýsir tækinu"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
-msgstr ""
+msgstr "Bæta prentara við Star Office/OpenOffice.org/GIMP"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8134,7 +8279,7 @@ msgid "December"
 msgstr "Desember"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "sub generation of the cpu"
 msgstr "Undir-flokkur örgjörva"
 
@@ -8168,9 +8313,9 @@ msgid "please wait, parsing file: %s"
 msgstr "Augnablik vinn úr skrá: %s"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Importance: "
-msgstr "Mikilvægi: %s\n"
+msgstr "Mikilvægi: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8264,6 +8409,11 @@ msgstr "Lárétt tíðni skjás: %s\n"
 msgid "Path"
 msgstr "Slóð"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -8322,6 +8472,11 @@ msgid ""
 "\n"
 "\"Custom\" permit a per-user granularity.\n"
 msgstr ""
+"viltu leyfa notendum að miðla sínum möppum?\n"
+"Ef þú leyfir þetta þá geta notendur einfaldlega smellt á \"Sameign\" í "
+"Konqueror og Nautilus.\n"
+"\n"
+"\"Sérsniðið\" leyfir að stilla fyrir hvern notanda.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -8370,7 +8525,7 @@ msgstr ""
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid "Welcome to the Open Source world."
-msgstr ""
+msgstr "Velkomin(n) í heim opins hugbúnaðar"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8397,9 +8552,9 @@ msgid "Netherlands"
 msgstr "Holland"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending files by FTP"
-msgstr "Sendi skrár..."
+msgstr "Sendi skrár með FTP"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8515,9 +8670,9 @@ msgstr ""
 "\n"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "Basic options"
-msgstr "DrakSec grunnvalkostir"
+msgstr "Grunnvalkostir"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8609,9 +8764,9 @@ msgid "Croatian"
 msgstr "Króatískt"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use existing partition"
-msgstr "Nota núverandi disksneiðar"
+msgstr "Nota núverandi disksneið"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -8638,9 +8793,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "CUPS prentari samnýtingarstillingar"
+msgstr "CUPS prentarastillingar"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -8663,9 +8818,9 @@ msgid "Domain Name:"
 msgstr "Nafn léns:"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root umask"
-msgstr "Rótar-lykilorð"
+msgstr "Rótar-umask"
 
 #: ../../any.pm:1
 #, c-format
@@ -8788,7 +8943,7 @@ msgstr ""
 "þegar kerfi er ræst."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "the CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
@@ -8798,9 +8953,9 @@ msgstr ""
 "örgjörvinn getur framkvæmt á sekúndu)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake Linux Printer Management Tool"
-msgstr "Mandrake Linux innsetning %s"
+msgstr "Mandrake Linux prentara-stjórntæki"
 
 #: ../../pkgs.pm:1
 #, c-format
@@ -8810,19 +8965,7 @@ msgstr "áríðandi"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Total Progress"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
+msgstr "Heildarframvinda"
 
 #: ../../help.pm:1
 #, c-format
@@ -8876,9 +9019,9 @@ msgid "Examples for correct IPs:\n"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the media for backup."
-msgstr "Veldu miðil\\ fyrir afrit."
+msgstr "Veldu miðil fyrir afrit."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -8903,7 +9046,7 @@ msgid "Hardware clock set to GMT"
 msgstr "Tölvuklukkan stillt á GMT"
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to start a new configuration ?"
 msgstr "Viltu prófa stillingarnar?"
 
@@ -8928,13 +9071,33 @@ msgid "Paraguay"
 msgstr "Paragvæ"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuration is complete, do you want to apply settings ?"
-msgstr "Hvaða uppsetningu af XFree viltu nota?"
+msgstr "Uppsetningu lokið, viltu virkja stillingar?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
 msgstr ""
 
 #: ../../harddrake/sound.pm:1
@@ -9025,9 +9188,9 @@ msgid "Enable \"%s\" to read the file"
 msgstr ""
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "Veldu aðgerð"
+msgstr "Veldu myndskrá"
 
 #: ../../network/shorewall.pm:1
 #, c-format
@@ -9047,6 +9210,13 @@ msgid ""
 msgstr ""
 "x hnit textaglugga\n"
 "í fjölda stafa"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -9068,7 +9238,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use CD-R/DVD-R to backup"
-msgstr ""
+msgstr "Nota CD-R/DVD-R til afritatöku"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9111,9 +9281,9 @@ msgid "32 MB"
 msgstr "32 MB"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "type: thin"
-msgstr "tegund: %s"
+msgstr "tegund: þunn"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -9208,9 +9378,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "custom"
-msgstr "Sérsniðið"
+msgstr "sérsniðið"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9312,6 +9482,16 @@ msgstr "Þörf er á vélarheiti"
 msgid "Unselect fonts installed"
 msgstr ""
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Hjól"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Senda kjarnaútgáfu"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -9332,11 +9512,6 @@ msgstr "Hætta við"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Leita að uppsettum myndskönnum..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Hjól"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9374,9 +9549,9 @@ msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "Að hvaða þjónustum viltu leyfa Internetaðgang?"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Type"
-msgstr "Tegund tengingar: "
+msgstr "Tengitegund"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9405,6 +9580,11 @@ msgstr "Sjálfgefið"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Tveggja hnappa hermir"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Vinsamlega sláðu inn pakkanafn."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9452,9 +9632,9 @@ msgid "Not installed"
 msgstr "Ekki settur inn"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Both Alt keys simultaneously"
-msgstr "Báðir Shift lyklar samtímis"
+msgstr "Báðir Alt lyklar samtímis"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9484,6 +9664,11 @@ msgid ""
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
 msgstr ""
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9631,6 +9816,45 @@ msgstr "Dulritunarlykill skráakerfis"
 msgid "Gujarati"
 msgstr "Gujarati"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -9666,7 +9890,7 @@ msgid "Removable media automounting"
 msgstr "Sjálfvirk tenging aukatækja"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory to save:"
 msgstr "Gefðu upp möppu til vistunar:"
 
@@ -9776,9 +10000,9 @@ msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "Slóð ætti að byrja á 'ftp' eða 'http'"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Oriya"
-msgstr "Sýrland"
+msgstr "Oriya"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -9822,7 +10046,7 @@ msgstr "Genius NetScroll"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On Hard Drive"
-msgstr "á harðan disk"
+msgstr "Á harðan disk"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -9913,45 +10137,6 @@ msgstr ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -9975,7 +10160,7 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Execute"
-msgstr ""
+msgstr "Keyra"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10117,9 +10302,9 @@ msgid "Iceland"
 msgstr "Ísland"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet Configuration"
-msgstr "Netstillingar"
+msgstr "Staðarnets og Internet stillingar"
 
 #: ../../common.pm:1
 #, c-format
@@ -10177,9 +10362,9 @@ msgid "Backup your System files. (/etc directory)"
 msgstr ""
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user umask."
-msgstr "Notendur"
+msgstr "Setja umask notenda"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -10241,15 +10426,15 @@ msgid ""
 "%s\n"
 "and copy the mgmt.o in /usr/share/speedtouch"
 msgstr ""
-"Þú þarft alcatel míkrókóða uppfærslu.\n"
-"sæktu hana á\n"
+"Þú þarft Alcatel míkrókóða uppfærslu.\n"
+"sæktu hana á:\n"
 "%s\n"
 "og afritaðu mgmt.o á /usr/share/speedtouch"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hour"
-msgstr "Hondúras"
+msgstr "Klukkustund:"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10287,9 +10472,9 @@ msgid "Slovenia"
 msgstr "Slóvenía"
 
 #: ../../standalone/mousedrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mouse test"
-msgstr "Mouse Systems"
+msgstr "Músaprófun"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10339,23 +10524,11 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
 
 #: ../../services.pm:1
@@ -10497,9 +10670,9 @@ msgid ""
 msgstr ""
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "Kjarna ræsibið:"
+msgstr "Tímamörk skeljar"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10614,9 +10787,9 @@ msgid "Boot ISO"
 msgstr ""
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firmware needed"
-msgstr "ef þörf"
+msgstr "Vélbúnaðar er þörf"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10713,28 +10886,15 @@ msgstr "Vandræði við að setja inn pakka %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Þú færð póst ef álag er hærra en þetta gildi"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
 msgstr "Bæta við myndskanna handvirkt"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Refresh"
-msgstr "Neita"
+msgstr "Endurnýja"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -10747,11 +10907,9 @@ msgid "Yes, I want autologin with this (user, desktop)"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restore Selected"
-msgstr ""
-"Endurheimta valdar\n"
-"Skrár"
+msgstr "Endurheimta val"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10832,7 +10990,7 @@ msgstr "Öryggisfulltrúi:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
@@ -10877,9 +11035,9 @@ msgid "Save packages selection"
 msgstr "Vista val á pakkahóp"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Actions"
-msgstr "/_Valkostir"
+msgstr "/_Aðgerðir"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -10934,9 +11092,9 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Size: "
-msgstr "Stærð: %s"
+msgstr "Stærð: "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11029,7 +11187,7 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
 msgstr "Ætt örgjörva (þ.e. 8 fyrir PentiumIII,...)"
 
@@ -11149,11 +11307,6 @@ msgid ""
 "do you really want to overwrite its configuration?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "Engin tiltæk disksneið"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -11164,10 +11317,15 @@ msgstr "Nota myndskanna á vélum: "
 msgid "Unselected All"
 msgstr ""
 
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "Engin tiltæk disksneið"
+
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management \n"
-msgstr "Miðlun prentara"
+msgstr "Stjórnun prentara \n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11200,11 +11358,11 @@ msgid "Build Whole Kernel -->"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "modem"
-msgstr "Módald"
+msgstr "mótald"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkomin(n) að %s"
@@ -11277,6 +11435,13 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -11366,9 +11531,9 @@ msgid "Automatic time synchronization (using NTP)"
 msgstr "Sjálfvirk tímastilling (með NTP)"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use my Windows partition"
-msgstr "Breyta stærð Windows skráarkerfis"
+msgstr "Nota Windows disksneið"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -11402,26 +11567,6 @@ msgstr "Veldu þér land"
 msgid ""
 "\n"
 "- System Files:\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -11502,9 +11647,9 @@ msgid "Set this printer as the default"
 msgstr "Setja þennan prentara sjálfgefinn"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "Er þetta rétt stilling?"
+msgstr "Staðfestið að %s sé rétt slóð"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11579,9 +11724,9 @@ msgid "<- Previous"
 msgstr "<- Fyrri"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer Now"
-msgstr "Flutningur"
+msgstr "Flytja núna"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11589,9 +11734,9 @@ msgid "Set root password and network authentication methods"
 msgstr ""
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Internet Connection Sharing configuration"
-msgstr "Veldu prenttengingu"
+msgstr "Stillingar á samnýtingu Internets tengingar"
 
 #: ../../ugtk2.pm:1
 #, c-format
@@ -11609,11 +11754,13 @@ msgid "Options: %s"
 msgstr "Valkostir: %s"
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
 "Click on Configure to launch the setup wizard."
-msgstr "Veldu prenttengingu"
+msgstr ""
+"Þú notar nú %s sem ræsistjóra.\n"
+"Smelltu á Stilla til að ræsa leiðbeinanda."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11626,14 +11773,14 @@ msgid "Saint Helena"
 msgstr "Saint Helena"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Parallel port #%s"
-msgstr " á raðtengi - port #%s"
+msgstr "Raðtengi - port #%s"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Security Level"
-msgstr "Öryggisstig"
+msgstr "Öryggisþrep"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11707,9 +11854,9 @@ msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Vistfang DNS-þjóns á að vera á sniðinu 1.2.3.4"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Left Control key"
-msgstr "Fjarstýring"
+msgstr "Vinstri Ctrl lykill"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11739,7 +11886,7 @@ msgstr "CapsLock lykill"
 #: ../../steps.pm:1
 #, c-format
 msgid "Install bootloader"
-msgstr "Setja inn ræsihlaðara"
+msgstr "Setja inn ræsistjóra"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12038,12 +12185,12 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "January"
-msgstr "Janúar"
+msgstr "janúar"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Password history length"
-msgstr "Þetta lykilorð er of einfalt"
+msgstr "Lengd lykilorðssögu"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -12082,9 +12229,9 @@ msgid "%s on %s"
 msgstr "%s á %s"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid remote root login."
-msgstr "Allar aðrar vélar"
+msgstr "Leyfa/banna root instimplun yfir net"
 
 #: ../../help.pm:1
 #, c-format
@@ -12111,12 +12258,12 @@ msgstr "Hvert er þitt tímabelti?"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Can't create log file!"
-msgstr ""
+msgstr "Get ekki búið til annál!"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use .backupignore files"
-msgstr "Nota kvóta fyrir afritaskrár."
+msgstr "Nota .backupignore skrár"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12184,7 +12331,7 @@ msgid "Hostname: "
 msgstr "Vélarnafn: "
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a rule"
 msgstr "Bæta við reglu"
 
@@ -12203,10 +12350,10 @@ msgstr ""
 msgid "Local Printer"
 msgstr "Staðbundinn prentari"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid "Floppy access error, unable to mount device %s"
-msgstr "Hvar viltu tengja tæki %s?"
+msgstr "Diskettuvilla, get ekki tengt %s"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12305,36 +12452,6 @@ msgstr "Mús: %s\n"
 msgid "Reselect correct fonts"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -12347,9 +12464,9 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/13-mdkexpert_corporate.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "MandrakeExpert Corporate"
-msgstr "snillingur"
+msgstr "MandrakeExpert Corporate"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12363,14 +12480,14 @@ msgstr ""
 "       XFdrake resolution"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Finna prentara sjálfkrafa"
+msgstr "Ritvörn"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "Fjarlægja valda vél"
+msgstr "Þú hefur ekki valið neitt letur"
 
 #: ../../steps.pm:1
 #, c-format
@@ -12507,9 +12624,9 @@ msgid "%s fonts conversion"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "Við hvaða braut er músin þín tengd?"
+msgstr "tegund brautar sem músin þín er tengd"
 
 #: ../../help.pm:1
 #, c-format
@@ -12575,6 +12692,65 @@ msgid ""
 "on your machine. If you plan to use this machine as a server it's a good\n"
 "idea to review this setup."
 msgstr ""
+"As a review, DrakX will present a summary of various information it has\n"
+"about your system. Depending on your installed hardware, you may have some\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"%s\" button to change\n"
+"that.\n"
+"\n"
+" * \"%s\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"%s\": check the current country selection. If you are not in this\n"
+"country, click on the \"%s\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"%s\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"%s\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"%s\" button here if\n"
+"this is not correct.\n"
+"\n"
+" * \"%s\": check the current mouse configuration and click on the button\n"
+"to change it if necessary.\n"
+"\n"
+" * \"%s\": clicking on the \"%s\" button will open the printer\n"
+"configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+"Guide'' for more information on how to setup a new printer. The interface\n"
+"presented there is similar to the one used during installation.\n"
+"\n"
+" * \"%s\": if a sound card is detected on your system, it is\n"
+"displayed here. If you notice the sound card displayed is not the one that\n"
+"is actually present on your system, you can click on the button and choose\n"
+"another driver.\n"
+"\n"
+" * \"%s\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"%s\" to reconfigure your graphical interface.\n"
+"\n"
+" * \"%s\": if a TV card is detected on your system, it is displayed\n"
+"here. If you have a TV card and it is not detected, click on \"%s\"\n"
+"to try to configure it manually.\n"
+"\n"
+" * \"%s\": if an ISDN card is detected on your system, it will be\n"
+"displayed here. You can click on \"%s\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"%s\": Ef þú vilt stilla Internet eða aðrar nettengingar núna.\n"
+"\n"
+" * \"%s\": hér getur þú endurstillt öryggisþrep sem þú settir áður\n"
+"í fyrra þrepi ().\n"
+"\n"
+" * \"%s\": ef þú ætlar að tengja vélina þína Internetinu, þá er\n"
+"góð hugmynd að vernda vélina þína með því að setja upp eldvvegg.\n"
+"Lestu viðeigandi kafla í um uppsetningu eldveggs í ``Starter Guide''.\n"
+"\n"
+" * \"%s\": ef þú villt breyta stillingum ræsistjóra, smelltu á\n"
+"þennan hnapp. Þetta ætti þó ekki að gera nema af kunnugum.\n"
+"\n"
+" * \"%s\": hér getur þú fínstillt hvaða þjónustur verða ræstar á\n"
+"tölvunni þinni. Ef þú ætlar að nota þessa vél sem miðlara þá er góð\n"
+"hugmynd að fara vel yfir þessa uppsetningu."
 
 #: ../../lang.pm:1
 #, c-format
@@ -12584,12 +12760,17 @@ msgstr "Kómoros"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "May"
-msgstr "Maí"
+msgstr "maí"
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Yaboot mode"
 msgstr "Yaboot hamur"
+
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Almenn þriggja hnappa mús"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -12602,11 +12783,6 @@ msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Almenn þriggja hnappa mús"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12690,9 +12866,9 @@ msgid "This password is too simple"
 msgstr "Þetta lykilorð er of einfalt"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Setja upp þjónustur"
+msgstr "Chkconfig fylgi msec reglum"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -12708,9 +12884,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "No devices found"
-msgstr "fann engan ræsikjarna"
+msgstr "Fann enginn tæki"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12780,9 +12956,9 @@ msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set as default"
-msgstr "sjálfgefið"
+msgstr "Setja sem sjálfgefið"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12790,19 +12966,19 @@ msgid "2 MB"
 msgstr "2 MB"
 
 #: ../../printer/main.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on this machine"
-msgstr "(á þessarri vél)"
+msgstr "Uppsettur á þessarri vél"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Both Control keys simultaneously"
-msgstr "Báðir Shift lyklar samtímis"
+msgstr "Báðir Ctrl lyklar samtímis"
 
 #: ../../standalone/drakhelp:1
 #, c-format
 msgid " --help                - display this help     \n"
-msgstr ""
+msgstr " --help                - Sýnir þessa hjálp     \n"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12847,9 +13023,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "ignore"
-msgstr "Singapúr"
+msgstr "hunsa"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12866,7 +13042,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on parallel port #%s"
-msgstr ""
+msgstr ", margþætt tæki á á raðtengi - port \\#%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -12931,23 +13107,6 @@ msgstr "Báðir Shift lyklar samtímis"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -13168,9 +13327,9 @@ msgid "Add"
 msgstr "Bæta við"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "No Internet Connection Sharing has ever been configured."
-msgstr "Veldu prenttengingu"
+msgstr "Samnýting internets hefur aldrei verið uppsett."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13238,14 +13397,14 @@ msgid "parse all fonts"
 msgstr ""
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "Allar aðrar vélar"
+msgstr "Leyfa/banna beina root instimplun"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid " Accept/Refuse broadcasted icmp echo."
-msgstr ""
+msgstr " Leufa/hafna útvörpun á 'icmp echo'"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -13299,11 +13458,6 @@ msgstr "Nafn léns"
 msgid "Sharing of local printers"
 msgstr "Deila staðbundnum prenturum"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -13313,6 +13467,11 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "Tiltækir prentarar"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "NEI"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -13335,35 +13494,17 @@ msgid "The default lease (in seconds)"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "We are now going to configure the %s connection.\n"
 "\n"
 "\n"
 "Press \"%s\" to continue."
 msgstr ""
-"\n"
-"\n"
-"\n"
 "Við ætlum nú að fara að stilla tenginguna %s.\n"
 "\n"
 "\n"
-"Ýttu á 'Í lagi' til að halda áfram."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
+"Ýttu á \"%s\" til að halda áfram."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -13408,7 +13549,7 @@ msgid "Raw printer"
 msgstr "Hrár prentari"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
 msgstr "Uppgefið örgjörvanafn framleiðanda"
 
@@ -13453,9 +13594,9 @@ msgid "Installing"
 msgstr "Set inn"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech MouseMan with Wheel emulation"
-msgstr "Logitech MouseMan"
+msgstr "Logitech MouseMan með skrunhermi"
 
 #: ../../any.pm:1
 #, c-format
@@ -13468,9 +13609,9 @@ msgid "Is this an install or an upgrade?"
 msgstr "Er þetta innsetning eða uppfærsla?"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "ISDN card"
-msgstr "Innvært ISDN mótald"
+msgstr "ISDN spjald"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -13478,6 +13619,8 @@ msgid ""
 "To share your own knowledge and help build Linux software, join our "
 "discussion forums on our \"Community\" webpages."
 msgstr ""
+"Til að deila þekkingu þinni og hjálpa til við að byggja Linux tól, taktu þá "
+"þátt í umræðum sem þú finnur á \"Almenningi\" okkar."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13592,7 +13735,7 @@ msgid "Guadeloupe"
 msgstr "Gvadalúp"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kannada"
 msgstr "Kanada"
 
@@ -13682,9 +13825,9 @@ msgid "April"
 msgstr "Apríl"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Deactivate now"
-msgstr "aftengja núna"
+msgstr "Aftengja núna"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -14043,9 +14186,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer"
-msgstr ", USB prentari"
+msgstr "USB prentari"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -14131,9 +14274,20 @@ msgid "FATAL"
 msgstr "BANVÆNT"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Refresh the list"
-msgstr "Fjarlægja síðasta hlut"
+msgstr "Uppfæra lista"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -14321,7 +14475,7 @@ msgid "device"
 msgstr "tæki"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory to save to:"
 msgstr "Gefðu upp möppu til vistunar:"
 
@@ -14346,9 +14500,9 @@ msgid "July"
 msgstr "Júlí"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Prints into %s"
-msgstr ", prenta á %s"
+msgstr "Prenta á %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14425,10 +14579,10 @@ msgstr "Sláðu inn vinnsluminni í MB"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Friday"
-msgstr "Föstudagur"
+msgstr "föstudagur"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnection from Internet complete."
 msgstr "Aftengingu frá Internetinu lokið"
 
@@ -14544,9 +14698,9 @@ msgid "1 minute"
 msgstr "1 mínútu"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "type: fat"
-msgstr "tegund: %s"
+msgstr "tegund: fat"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14677,12 +14831,17 @@ msgstr "Almenn"
 msgid "Cylinder %d to %d\n"
 msgstr "Sívalningur %d til %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Nýtt snið..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr ""
@@ -14703,9 +14862,9 @@ msgid "Windows Domain"
 msgstr "Windows Lén"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Saami (norwegian)"
-msgstr "Dvorak (Norskt)"
+msgstr "Saami (Norskt)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -14777,17 +14936,17 @@ msgid "Build All Kernels -->"
 msgstr "Byggja alla kjarna -->"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "DVDRAM device"
-msgstr "tæki"
+msgstr "DVDRAM tæki"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
+msgstr "ef sett já, þá tilkynna skrár án eiganda."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "<span foreground=\"royalblue3\">Version:</span> %s\n"
@@ -14796,7 +14955,10 @@ msgid ""
 "\n"
 msgstr ""
 "Þetta er HardDrake, vélbúnaðarstillitól Mandrake.\n"
-"Útgáfa:"
+"<span foreground=\"royalblue3\">Útgáfa:</span> %s\n"
+"<span foreground=\"royalblue3\">Höfundur:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -14805,14 +14967,14 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
-"Þú hefur ekkert diskminni\n"
+"Þú hefur enga diskminnis-sneið\n"
 "\n"
 "Halda samt áfram?"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Version: "
-msgstr "Útgáfa: %s\n"
+msgstr "Útgáfa: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14825,9 +14987,9 @@ msgid "Suriname"
 msgstr "Súrinam"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use a floppy"
-msgstr "Vista á diskling"
+msgstr "Nota diskling"
 
 #: ../../any.pm:1
 #, c-format
@@ -14837,12 +14999,12 @@ msgstr "Virkja ACPI"
 #: ../../fs.pm:1
 #, c-format
 msgid "Give write access to ordinary users"
-msgstr ""
+msgstr "Veita skrifleyfi til venjulegra notenda"
 
 #: ../../help.pm:1
 #, c-format
 msgid "Graphical Environment"
-msgstr "Myndrænt umhverfi"
+msgstr "Grafískt viðmót"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14923,9 +15085,9 @@ msgid "Username required"
 msgstr "Notandanafns er þörf"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Device"
-msgstr "Tæki: "
+msgstr "Tæki"
 
 #: ../../help.pm:1
 #, c-format
@@ -14985,9 +15147,9 @@ msgid "Print test pages"
 msgstr "Prenta út prufublaðsíðu(r)"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Activate now"
-msgstr "virkja núna"
+msgstr "Virkja núna"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -15019,9 +15181,9 @@ msgid "Periodic Checks"
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "Uppsetning"
+msgstr "PXE þjónsuppsetning"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15223,14 +15385,19 @@ msgid "Other MultiMedia devices"
 msgstr "Önnur margmiðlunartæki"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "burner"
-msgstr "Prentari"
+msgstr "Brennari"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "Sjálfgefinn prentari"
+msgstr " (Sjálfgefið er allir notendur)"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -15296,9 +15463,9 @@ msgid "Card IO_1"
 msgstr "Kort IO_1"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search:"
-msgstr "leita"
+msgstr "Leita:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15311,9 +15478,9 @@ msgid "Routers:"
 msgstr "Beinar:"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write"
-msgstr "Skrifa %s"
+msgstr "Skrifa"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15350,6 +15517,26 @@ msgstr "Innhringistillingar"
 msgid "If no port is given, 631 will be taken as default."
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid ""
@@ -15376,9 +15563,9 @@ msgid "\t-Network by webdav.\n"
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", multi-function device on a parallel port"
-msgstr "Prentari á raðtengi - port #%s"
+msgstr ", margþætt tæki á raðtengi"
 
 #: ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
@@ -15424,14 +15611,14 @@ msgid "Save on floppy"
 msgstr "Vista á diskling"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Check open ports"
-msgstr "fundin á tengi %s"
+msgstr "Athuga opin port"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected printer"
-msgstr "Breyta völdum prentara"
+msgstr "Sýsla með valinn prentara"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15516,9 +15703,9 @@ msgid "Czech (QWERTY)"
 msgstr "Tékkneskt (QWERTY)"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow X Window connections"
-msgstr "Winmodem tenging"
+msgstr "Leyfa X Window tengingar"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -15544,7 +15731,7 @@ msgstr ""
 " (hliðtengd port: /dev/lp0, /dev/lp1, ..., samsvarar LPT1:, LPT2:, ..., 1. "
 "USB prentari: /dev/usb/lp0, 2.USB prentari: /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Næsta"
@@ -15601,6 +15788,10 @@ msgid ""
 "\n"
 "Do you really want to remove these packages?\n"
 msgstr ""
+"Eftrfarandi pakkar verða fjarlægðir til að uppfærsla takist eðlilega: %s\n"
+"\n"
+"\n"
+"Viltu í alvöru fjarlægja þessa pakka?\n"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15692,14 +15883,14 @@ msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Host name or IP."
-msgstr "Heiti vélar"
+msgstr "Heiti vélar eða IP."
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Edit"
-msgstr "Hætta"
+msgstr "/_Sýsl"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -15727,14 +15918,14 @@ msgid "Adapter %s: %s"
 msgstr "Kort %s: %s"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot disk creation"
-msgstr "búa til ræsidisk"
+msgstr "Búa til ræsidisk"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Monday"
-msgstr "Mánudagur"
+msgstr "mánudagur"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -15747,9 +15938,9 @@ msgid "if set to yes, check files/directories writable by everybody."
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "authentication"
-msgstr "Auðkenning"
+msgstr "auðkenning"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15776,16 +15967,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Editable"
-msgstr "aftengja"
+msgstr "Breytanlegt"
 
 #: ../../network/ethernet.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
-msgstr ""
-"Hvaða dhcp biðlara viltu nota?\n"
-"sjálfgefið er dhcp-biðlari"
+msgstr "Hvaða dhcp biðlara viltu nota? (sjálfgefið er dhcp-client)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -15803,9 +15992,9 @@ msgid "Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%d KB\n"
-msgstr "Stærð: %d KB\n"
+msgstr "%d KB\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -15876,9 +16065,9 @@ msgstr ""
 "rekill framleiðanda á \"%s\"."
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Group :"
-msgstr "hópur :"
+msgstr "Hópur :"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15937,9 +16126,9 @@ msgid "Solomon Islands"
 msgstr "Salómon eyjar"
 
 #: ../../standalone/mousedrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please test your mouse:"
-msgstr "Vinsamlega prófaðu músina"
+msgstr "Vinsamlega prófaðu músina:"
 
 #: ../../modules/interactive.pm:1
 #, c-format
@@ -15972,9 +16161,9 @@ msgid "Show current interface configuration"
 msgstr "Sýna núverandi uppsetningar tengis"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add Printer"
-msgstr "Prentari"
+msgstr "Bæta við prentara"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16041,14 +16230,14 @@ msgid "(already added %s)"
 msgstr "(%s er nú þegar til)"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Bootloader installation in progress"
-msgstr "Uppsetning ræsistjóra"
+msgstr "Er að setja upp ræsistjóra"
 
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", using command %s"
-msgstr " nota skipun %s"
+msgstr ", nota skipun %s"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16093,7 +16282,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Here is the full list of available countries"
-msgstr "Hér er listi af mögulegum löndum"
+msgstr "Hér er listi af tiltækum löndum"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16201,9 +16390,9 @@ msgid "The following printer was auto-detected. "
 msgstr "Eftirfarandi prentari fannst. "
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uses command %s"
-msgstr " nota skipun %s"
+msgstr "Notar skipun %s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16226,7 +16415,7 @@ msgid "Apache World Wide Web Server"
 msgstr "Apache World Wide Web miðlari"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "stepping of the cpu (sub model (generation) number)"
 msgstr "Stig örgjörvans (undirtegundar (útgáfu) númer)"
 
@@ -16337,9 +16526,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "IP vistfang á að vera á sniðinu 1.2.3.4"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS printing system"
-msgstr "Breyta prentkerfinu"
+msgstr "Breyta CUPS prentkerfinu"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16509,9 +16698,9 @@ msgid "access to X programs"
 msgstr "aðgengi að X forritum"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Búa til nýja disksneið"
+msgstr "Reikna stærð Windows disksneiðar"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -16586,14 +16775,14 @@ msgid "Zip"
 msgstr "Zip"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Left Alt key"
-msgstr "Hægri Alt lykill"
+msgstr "Vinstri Alt lykill"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Load setting"
-msgstr "álagsstillingar"
+msgstr "Álagsstillingar"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16605,9 +16794,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set selected printer as the default printer"
-msgstr "Setja þennan prentara sjálfgefinn"
+msgstr "Setja valinn prentara sem sjálfgefinn"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16663,9 +16852,9 @@ msgid "Panama"
 msgstr "Panama"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "Can't open %s!"
-msgstr "Finn ekki %s á %s"
+msgstr "Get ekki opnað %s!"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -16747,11 +16936,11 @@ msgid " adsl"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
-msgstr "Forsnið sem eru studd af disklingadrifinu"
+msgstr "forsnið sem eru studd af disklingadrifinu"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
@@ -16762,9 +16951,9 @@ msgid "Not enough partitions for RAID level %d\n"
 msgstr "Ekki nógu margar disksneiðar fyrir RAID %d\n"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "local config: true"
-msgstr "Ekki stillt"
+msgstr "Staðbundin uppsetning: já"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16864,6 +17053,11 @@ msgid ""
 "creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
 "because XFS needs a very large driver)."
 msgstr ""
+"\n"
+"\n"
+"(AÐVÖRUN! þú ert að nota XFS fyrir rótarsneiðina,\n"
+"sennilega er ekki hægt að búa til 1.44 Mb ræsidiskling\n"
+"því XFS rekillinn er mjög stór),"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16879,9 +17073,9 @@ msgid ""
 msgstr ""
 
 #: ../../share/advertising/04-configuration.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "Sel stillingar"
+msgstr "Mandrake Uppsetningartól"
 
 #: ../../standalone/drakbackup:1 ../../standalone/logdrake:1
 #, c-format
@@ -16929,7 +17123,7 @@ msgstr "Franska Gínea"
 #: ../../lang.pm:1
 #, c-format
 msgid "default:LTR"
-msgstr "default:LTR"
+msgstr "Sjálfgefið:LTR"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16984,9 +17178,9 @@ msgid "Use network connection to backup"
 msgstr "Nota nettengingu til afritunar"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kernel version"
-msgstr "kjarna útgáfa"
+msgstr "Kjarna útgáfa"
 
 #: ../../help.pm:1
 #, c-format
@@ -17052,14 +17246,14 @@ msgid "Server"
 msgstr "Þjónn"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Left Shift key"
-msgstr "Vinstri \"Windows\" lykill"
+msgstr "Vinstri Shift lykill"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " local network"
-msgstr "Staðbundið(n) net"
+msgstr " staðarnet"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -17069,12 +17263,12 @@ msgstr "Rangt val, reyndu aftur\n"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Syslog reports to console 12"
-msgstr ""
+msgstr "Kerfisannáll er skráður á skjá 12"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search new servers"
-msgstr "Leita að þjónum"
+msgstr "Leita að nýjum þjónum"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17130,9 +17324,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "DVD-R device"
-msgstr "tæki"
+msgstr "DVD-R tæki"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17205,7 +17399,7 @@ msgid "No mouse"
 msgstr "Engin mús"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose your CD/DVD media size (MB)"
 msgstr "Gefðu upp stærð CD/DVD diska (Mb)"
 
@@ -17273,9 +17467,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "Það er ekki stuðningur fyrir %s í þessari útgáfu af Mandrake Linux"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
-msgstr "Segulband"
+msgstr "segulband"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17308,13 +17502,18 @@ msgid ""
 "Do you agree to lose all the partitions?\n"
 msgstr ""
 "Ég get ekki lesið disksneiðatöflu þína á tæki %s, hún er of skemmd fyrir "
-"mig :-(\n"
+"mig :(\n"
 "Ég mun reyna að halda áfram með því að hreinsa skemmdar disksneiðar \n"
 "(Öll gögn tapast!). Önnur lausn er að láta DrakX ekki breyta "
 "disksneiðatöflunni\n"
-"(villan er%s)\n"
+"(villan er %s)\n"
 "\n"
 "Viltu eyða öllum þessum disksneiðum?\n"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Finna pakka"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17337,14 +17536,14 @@ msgid "Boot Style Configuration"
 msgstr "Uppsetning ræsistíls"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic time synchronization"
-msgstr "Sjálfvirk tímastilling (með NTP)"
+msgstr "Sjálfvirk tímastilling"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Backup files not found at %s."
-msgstr ""
+msgstr "Afrita skrár fundust ekki á %s."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17430,6 +17629,24 @@ msgstr "Staðarnets-uppsetning"
 #, c-format
 msgid "hard disk model"
 msgstr "tegund harðs disks"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -17541,9 +17758,9 @@ msgid "Configure X"
 msgstr "Stilla X"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Chad"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17562,9 +17779,9 @@ msgid "Use owner id for execution"
 msgstr ""
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow remote root login"
-msgstr "Allar aðrar vélar"
+msgstr "Leyfa root innstimplun yfir net"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17606,15 +17823,15 @@ msgstr "Breskt lyklaborð"
 msgid "Unmount"
 msgstr "Aftengja"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Fjarlægji letur"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Fjarlægji letur"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17640,7 +17857,7 @@ msgstr "32 þúsund litir (15 bits)"
 #, c-format
 msgid ""
 "You can export using NFS or Samba. Please select which you'd like to use."
-msgstr ""
+msgstr "Þú getur miðlað með NFS eða Samba. Veldu hvort þú vilt nota."
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17708,9 +17925,9 @@ msgid ""
 msgstr ""
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " cable"
-msgstr "Tafla"
+msgstr " kapall"
 
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
@@ -17743,9 +17960,9 @@ msgid "Papua New Guinea"
 msgstr "Papúa Nýja-Gínea"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on a parallel port"
-msgstr "Prentari á raðtengi - port #%s"
+msgstr "Margþætt tæki á raðtengi"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17753,9 +17970,9 @@ msgid "Serbian (cyrillic)"
 msgstr "Serbneskt (kýrílskt)"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enter the directory where backups are stored"
-msgstr "Gefðu upp möppu til vistunar:"
+msgstr "Gefðu upp möppu þar sem afrit eru vistuð"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17842,7 +18059,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Sunday"
-msgstr "Sunnudagur"
+msgstr "sunnudagur"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17978,17 +18195,6 @@ msgstr "Keyri \"%s\"..."
 msgid "enable radio support"
 msgstr "virkja útvarps stuðning"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Scanner sharing to hosts: "
@@ -18010,7 +18216,7 @@ msgid "Do not transfer printers"
 msgstr "Ekki flytja prentara"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Delay before booting the default image"
 msgstr "Töf áður en sjálfgefin ræsing byrjar"
 
@@ -18377,11 +18583,9 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-þjónn, SMB-þjónn, Proxy-þjónn ssh-þjónn"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
-"Tól og tæki til að lesa og senda póst og fréttir (pine, mutt,tin...) og til "
-"að flakka á vefnum"
+"Tól og tæki til að lesa og senda póst og fréttir og til að flakka á vefnum"
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
@@ -18389,13 +18593,11 @@ msgstr ""
 #~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
 
-#, fuzzy
 #~ msgid "Hostname configuration"
-#~ msgstr "Kerfisstillingar"
+#~ msgstr "Stilla nafn á vél"
 
-#, fuzzy
 #~ msgid "Hostname"
-#~ msgstr "Heiti vélar"
+#~ msgstr "Vélarheiti"
 
 #~ msgid "Remote Printers"
 #~ msgstr "Fjartengdir prentarar"
@@ -18403,37 +18605,29 @@ msgstr ""
 #~ msgid "Printing system: "
 #~ msgstr "Prentkerfi:"
 
-#, fuzzy
 #~ msgid "Level 1"
-#~ msgstr "Stig"
+#~ msgstr "Þrep 1"
 
-#, fuzzy
 #~ msgid "Level 2"
-#~ msgstr "Stig"
+#~ msgstr "Þrep 2"
 
-#, fuzzy
 #~ msgid "Level 3"
-#~ msgstr "Stig"
+#~ msgstr "Þrep 3"
 
-#, fuzzy
 #~ msgid "Level 4"
-#~ msgstr "Stig"
+#~ msgstr "Þrep 4"
 
-#, fuzzy
 #~ msgid "Level 5"
-#~ msgstr "Stig"
+#~ msgstr "Þrep 5"
 
-#, fuzzy
 #~ msgid "Insert floppy and press %s"
-#~ msgstr "Settu tóman diskling í drif %s"
+#~ msgstr "Settu inn diskling og ýttu á %s"
 
-#, fuzzy
 #~ msgid "Load"
-#~ msgstr "Pólland"
+#~ msgstr "Hlaða"
 
-#, fuzzy
 #~ msgid "Bad Ip"
-#~ msgstr "Kort IO"
+#~ msgstr "Slæm Ip"
 
 #~ msgid "Output"
 #~ msgstr "Úttak"
@@ -18455,9 +18649,6 @@ msgstr ""
 
 #~ msgid "Please enter the host name or IP."
 #~ msgstr "Sláðu inn nafn vélar eða IP."
-
-#~ msgid "Please enter your login"
-#~ msgstr "Sláðu inn notandanafn"
 
 #~ msgid "edit"
 #~ msgstr "sýsl"
