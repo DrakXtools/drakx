@@ -176,7 +176,9 @@ sub sync_rpms {
 	if ($target->{$_}) {
 	    if (version_compare($source->{$_}{version}, $target->{$_}{version}) > 0 ||
 		version_compare($source->{$_}{version}, $target->{$_}{version}) == 0 && 
-		version_compare($source->{$_}{release}, $target->{$_}{release}) > 0) {
+		(version_compare($source->{$_}{release}, $target->{$_}{release}) > 0 ||
+		 version_compare($source->{$_}{release}, $target->{$_}{release}) == 0 &&
+		 -s "$source->{$_}{dir}/$source->{$_}{file}" != -s "$target->{$_}{dir}/$target->{$_}{file}")) {
 		if ($flag->{verbose}) {
 		    print "updating $target->{$_}{dir}/$target->{$_}{file} with newer version $source->{$_}{file}\n";
 		}
