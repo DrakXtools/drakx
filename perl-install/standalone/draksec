@@ -40,7 +40,7 @@ my $w;
 
 # factorize this with rpmdrake and harddrake2
 sub wait_msg {
-    my $mainw = ugtk2->new('wait', ( modal => 1, transient => $w->{rwindow}));
+    my $mainw = ugtk2->new('wait', (modal => 1, if_(!$::isEmbedded, transient => $w->{rwindow})));
     my $label = new Gtk2::Label($_[0]);
     $mainw->{window}->add($label);
     $mainw->{window}->show_all;
@@ -178,7 +178,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            $entry->set_text($msec->get_function_value($i));
                                                                                            set_help_tip($entry, $default, $i);
                                                                                            [ new Gtk2::Label($i), $values{$i} ];
-                                                                                       } sort $msec->get_functions($domain))))),
+                                                                                       } sort $msec->list_functions($domain))))),
                            new Gtk2::Label($label));
     $options_values{$domain} = \%values;
 }
@@ -190,16 +190,14 @@ $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0,
                                                                0, new Gtk2::Label($help_msg),
                                                                1, create_packtable($common_opts,
                                                                                    map {
-                                                                                       unless (member(qw(MAIL_WARN MAIL_USER), $_)) {
-                                                                                           my $i = $_;
-                                                                                           $security_checks_value{$i} = new_editable_combo();
-                                                                                           my $entry = $security_checks_value{$i}->entry;
-                                                                                           set_help_tip($entry, $msec->get_check_default($i), $i);
-                                                                                           $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
-                                                                                           $entry->set_text($msec->get_check_value($i));
-                                                                                           [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
-                                                                                       } else { undef }
-                                                                                   } sort $msec->get_default_checks)))),
+                                                                                       my $i = $_;
+                                                                                       $security_checks_value{$i} = new_editable_combo();
+                                                                                       my $entry = $security_checks_value{$i}->entry;
+                                                                                       set_help_tip($entry, $msec->get_check_default($i), $i);
+                                                                                       $security_checks_value{$i}->set_popdown_strings(qw(yes no default));
+                                                                                       $entry->set_text($msec->get_check_value($i));
+                                                                                       [ gtkshow(new Gtk2::Label(translate($i))), $security_checks_value{$i} ];
+                                                                                   } sort $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
 
@@ -215,34 +213,34 @@ my $bok = gtksignal_connect(new Gtk2::Button(N("Ok")),
 
                                 if ($seclevel_value ne security::level::get_string()) {
                                     $w = wait_msg(N("Please wait, setting security level..."));
-                                    log::explanations("Setting security level");
+                                    log::explanations("Setting security level to $seclevel_value");
                                     security::level::set($seclevel_value);
                                     remove_wait_msg($w);
                                 }
 
                                 $w = wait_msg(N("Please wait, setting security options..."));
                                 log::explanations("Setting security administrator option");
-                                $msec->config_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
+                                $msec->set_check('MAIL_WARN', $secadmin_check_value == 1 ? 'yes' : 'no');
 
                                 if ($secadmin_value ne $msec->get_check_value('MAIL_USER') && $secadmin_check_value) {
                                     log::explanations("Setting security administrator contact");
-                                      $msec->config_check('MAIL_USER', $secadmin_value);
+                                      $msec->set_check('MAIL_USER', $secadmin_value);
                                   }
 
                                 log::explanations("Setting security periodic checks");
                                 foreach my $key (keys %security_checks_value) {
-                                    if ($security_checks_value{$key}->entry->get_text() ne $msec->get_check_value($key)) {
-                                        $msec->config_check($key, $security_checks_value{$key}->entry->get_text());
-                                    }
+                                    $msec->set_check($key, $security_checks_value{$key}->entry->get_text());
                                 }
+                                $msec->apply_checks;
 
                                 foreach my $domain (keys %options_values) {
                                     log::explanations("Setting msec functions related to $domain");
-                                      foreach my $key (keys %{$options_values{$domain}}) {
-                                          my $opt = $options_values{$domain}{$key};
-                                          $msec->config_function($key, $opt =~ /Combo/ ? $opt->entry->get_text() : $opt->get_text());
-                                      }
-                                  }
+                                    foreach my $key (keys %{$options_values{$domain}}) {
+                                        my $opt = $options_values{$domain}{$key};
+                                        $msec->set_function($key, $opt =~ /Combo/ ? $opt->entry->get_text() : $opt->get_text());
+                                    }
+                                }
+                                $msec->apply_functions;
                                 log::explanations("Applying msec changes");
                                 run_program::rooted($::prefix, "/usr/sbin/msec");
 

@@ -12,9 +12,6 @@ my $check_file    = "$::prefix/etc/security/msec/security.conf";
 my $curr_sec_file = "$::prefix/var/lib/msec/security.conf";
 my $options_file  = "$::prefix/etc/security/msec/level.local";
 
-# ***********************************************
-#              PRIVATE FUNCTIONS
-# ***********************************************
 
 my $num_level;
 
@@ -50,7 +47,6 @@ sub load_defaults {
 
 # get_XXX_default(function) -
 #   return the default of the function|check passed in argument.
-#   If no default is set, return "default".
 
 sub get_check_default {
     my ($msec, $check) = @_;
@@ -77,9 +73,9 @@ sub load_values {
     do { print "BACKTRACE:\n", backtrace(), "\n"; die 'wrong category' } unless $separator;
     map {
         my ($opt, $val) = split /$separator/;
-        $val =~ s/[()]//g;
-        chop $opt if $separator eq '\(';   # $opt =~ s/ //g if $separator eq '\(';
         chop $val;
+        $val =~ s/[()]//g;
+        chop $opt if $separator eq '\(';  # $opt =~ s/ //g if $separator eq '\(';
         $opt => $val;
     } cat_($item_file);
 }
@@ -103,15 +99,19 @@ sub get_check_value {
 
 
 
-# ***********************************************
-#         FUNCTIONS (level.local) RELATED
-# ***********************************************
+#-------------------------------------------------------------
+# get list of functions
 
-# get_functions() -
-#   return a list of functions handled by level.local (see
-#   man mseclib for more info).
-sub get_functions {
-    my (undef, $category) = @_;
+# list_(functions|checks) -
+#   return a list of functions|checks handled by level.local|security.conf
+
+sub list_checks {
+    my ($msec) = @_;
+    map { if_(!member($_, qw(MAIL_WARN MAIL_USER)), $_) } keys %{$msec->{checks}{default}};
+}
+
+sub list_functions {
+    my ($msec, $category) = @_;
     my @functions;
 
     ## TODO handle 3 last functions here so they can be removed from this list
@@ -129,55 +129,58 @@ sub get_functions {
                          enable_sulogin password_aging password_history password_length set_root_umask
                          set_shell_history_size set_shell_timeout set_user_umask)]);
 
-    my $file = "$::prefix/usr/share/msec/mseclib.py";
-    my $function;
-
-    # read mseclib.py to get each function's name and if it's
-    # not in the ignore list, add it to the returned list.
-    foreach (cat_($file)) {
-        if (/^def/) {
-            (undef, $function) = split / /;
-            ($function, undef) = split(/\(/, $function);
-            if (!member($function, @ignore_list) && member($function, @{$options{$category}})) {
-                push(@functions, $function)
-            }
-        }
-    }
-
-    @functions;
+    # get all function names; filter out those which are in the ignore
+    # list, return what lefts.
+    map { if_(!member($_, @ignore_list) && member($_, @{$options{$category}}), $_) } keys %{$msec->{functions}{default}};
 }
 
-# config_function(function, value) -
-#   Apply the configuration to 'prefix'/etc/security/msec/level.local
-sub config_function {
-    my (undef, $function, $value) = @_;
 
-    substInFile { s/^$function.*\n// } $options_file;
-    append_to_file($options_file, "$function ($value)") if $value ne 'default';
+#-------------------------------------------------------------
+# set back checks|functions values
+
+sub set_function {
+    my ($msec, $function, $value) = @_;
+    $msec->{functions}{value}{$function} = $value;
 }
 
-# ***********************************************
-#     PERIODIC CHECKS (security.conf) RELATED
-# ***********************************************
+sub set_check {
+    my ($msec, $check, $value) = @_;
+    $msec->{checks}{value}{$check} = $value;
+}
 
-# get_default_checks() -
-#   return a list of periodic checks handled by security.conf
-sub get_default_checks {
+
+#-------------------------------------------------------------
+# apply configuration
+
+# config_(check|function)(check|function, value) -
+#   Apply the configuration to 'prefix'/etc/security/msec/security.conf||/etc/security/msec/level.local
+
+sub apply_functions {
     my ($msec) = @_;
-    keys %{$msec->{checks}{default}};
+    my @list = ($msec->list_functions('system'), $msec->list_functions('network'));
+    substInFile {
+        foreach my $function (@list) { s/^$function.*\n// }
+        if (eof) {
+            print "\n", join("\n", map { 
+                my $value = $msec->get_function_value($_);
+                if_($value ne 'default', "$_ ($value)");
+            } @list);
+        }
+    } $options_file;
 }
 
-
-
-# config_check(check, value)
-#   Apply the configuration to "$::prefix"/etc/security/msec/security.conf
-sub config_check {
-    my (undef, $check, $value) = @_;
-    if ($value eq 'default') {
-	   substInFile { s/^$check.*\n// } $check_file;
-    } else {
-	   setVarsInSh($check_file, { $check => $value });
-    }
+sub apply_checks {
+    my ($msec) = @_;
+    my @list =  $msec->list_checks;
+    substInFile {
+        foreach my $check (@list) { s/^$check.*\n// }
+        if (eof) {
+            print "\n", join("\n", map { 
+                my $value = $msec->get_check_value($_);
+                if_($value ne 'default', $_ . '=' . $value);
+            } @list), "\n";
+        }
+    } $check_file;
 }
 
 sub new { 
@@ -185,8 +188,8 @@ sub new {
     my $thing = {};
     $thing->{checks}{default}    = { load_defaults('checks') };
     $thing->{functions}{default} = { load_defaults('functions') };
-    $thing->{functions}{value} = { load_values('functions') };
-    $thing->{checks}{value}    = { load_values('checks') };
+    $thing->{functions}{value}   = { load_values('functions') };
+    $thing->{checks}{value}      = { load_values('checks') };
     bless $thing, $type;
 }
 
