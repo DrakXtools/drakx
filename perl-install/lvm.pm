@@ -72,7 +72,7 @@ sub vg_add {
 	run_program::run('vgremove', $old_name);	
     }
     my $dev = expand_symlinks(devices::make($part->{device}));
-    run_program::run_or_die('pvcreate', $dev);
+    run_program::run_or_die('pvcreate', '-y', '-ff', $dev);
     my $prog = run_program::run('vgdisplay', $part->{lvm}) ? 'vgextend' : 'vgcreate';
     run_program::run_or_die($prog, $part->{lvm}, $dev);
 }
@@ -105,6 +105,8 @@ sub lv_create {
     my $nb = 1 + max(map { basename($_->{device}) } @$list);
     $lv->{device} = "/dev/$lvm->{LVMname}/$nb";
     run_program::run_or_die('lvcreate', '--size', int($lv->{size} / 2) . 'k', '-n', $nb, $lvm->{LVMname});
+    $lv->{notFormatted} = 1;
+    $lv->{isFormatted} = 0;
     push @$list, $lv;
 }
 
