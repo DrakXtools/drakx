@@ -30,7 +30,6 @@ print '
 #include <net/route.h>
 
 #include <libldetect.h>
-#include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <X11/extensions/xf86misc.h>
 #include <term.h>
@@ -56,7 +55,8 @@ void rpmError_callback(void) {
 
 ';
 
-print '
+$ENV{C_DRAKX} and print '
+#include <gdk/gdkx.h>
 
 void initIMPS2() {
   unsigned char imps2_s1[] = { 243, 200, 243, 100, 243, 80, };
@@ -72,7 +72,9 @@ void initIMPS2() {
   tcflush (fd, TCIFLUSH);
   tcdrain(fd);
 }
+';
 
+print '
 long long llseek(int fd, long long offset,  int whence);
 
 MODULE = c::stuff		PACKAGE = c::stuff
@@ -93,7 +95,9 @@ Xtest(display)
   waitpid(pid, &RETVAL, 0);
   OUTPUT:
   RETVAL
+';
 
+$ENV{C_DRAKX} and print '
 void
 setMouseLive(display, type, emulate3buttons)
   char *display
@@ -120,7 +124,9 @@ XSetInputFocus(window)
   int window
   CODE:
   XSetInputFocus(GDK_DISPLAY(), window, RevertToParent, CurrentTime);
+';
 
+print '
 int
 KTYP(x)
   int x
@@ -237,33 +243,6 @@ usb_probe()
 
 unsigned int
 getpagesize()
-
-int
-loadFont(fontFile)
-  char *fontFile
-  CODE:
-    char font[8192];
-    unsigned short map[E_TABSZ];
-    struct unimapdesc d;
-    struct unimapinit u;
-    struct unipair desc[2048];
-    int rc = 0;
-
-	int fd = open(fontFile, O_RDONLY);
-	read(fd, font, sizeof(font));
-	read(fd, map, sizeof(map));
-        read(fd, &d.entry_ct, sizeof(d.entry_ct));
-        d.entries = desc;
-        read(fd, desc, d.entry_ct * sizeof(desc[0]));
-	close(fd);
-
-	rc = ioctl(1, PIO_FONT, font);
-	rc = ioctl(1, PIO_UNIMAPCLR, &u) || rc;
-	rc = ioctl(1, PIO_UNIMAP, &d) || rc;
-	rc = ioctl(1, PIO_UNISCRNMAP, map) || rc;
-        RETVAL = rc == 0;
-     OUTPUT:
-     RETVAL
 
 int
 hasNetDevice(device)
