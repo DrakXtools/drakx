@@ -45,7 +45,7 @@ struct partition_detection_anchor {
 static int seek_and_compare(int fd, struct partition_detection_anchor anch)
 {
 	char buf[500];
-	int count;
+	size_t count;
 	if (lseek(fd, anch.offset, SEEK_SET) == (off_t)-1) {
 		log_perror("seek failed");
 		return -1;
@@ -70,13 +70,13 @@ static const char * detect_partition_type(char * dev)
 		struct partition_detection_anchor anchor2;
 	};
 	struct partition_detection_info partitions_signatures[] = { 
-		{ "Linux Swap", { 4086, "SWAP-SPACE" }, { 0, NULL } },
-		{ "Linux Swap", { 4086, "SWAPSPACE2" }, { 0, NULL } },
-		{ "Ext2", { 0x438, "\x53\xEF" }, { 0, NULL } },
-		{ "ReiserFS", { 0x10034, "ReIsErFs" }, { 0, NULL } },
-		{ "ReiserFS", { 0x10034, "ReIsEr2Fs" }, { 0, NULL } },
+		{ "Linux Swap", { 4086, "SWAP-SPACE" }, { 0, NULL }, { 0, NULL } },
+		{ "Linux Swap", { 4086, "SWAPSPACE2" }, { 0, NULL }, { 0, NULL } },
+		{ "Ext2", { 0x438, "\x53\xEF" }, { 0, NULL }, { 0, NULL } },
+		{ "ReiserFS", { 0x10034, "ReIsErFs" }, { 0, NULL }, { 0, NULL } },
+		{ "ReiserFS", { 0x10034, "ReIsEr2Fs" }, { 0, NULL }, { 0, NULL } },
 		{ "XFS", { 0, "XFSB" }, { 0x200, "XAGF" }, { 0x400, "XAGI" } },
-		{ "JFS", { 0x8000, "JFS1" }, { 0, NULL } },
+		{ "JFS", { 0x8000, "JFS1" }, { 0, NULL }, { 0, NULL } },
 		{ "NTFS", { 0x1FE, "\x55\xAA" }, { 0x3, "NTFS" }, { 0, NULL } },
 		{ "FAT32", { 0x1FE, "\x55\xAA" }, { 0x52, "FAT32" }, { 0, NULL } },
 		{ "FAT", { 0x1FE, "\x55\xAA" }, { 0x36, "FAT" }, { 0, NULL } },

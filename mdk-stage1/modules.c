@@ -95,7 +95,7 @@ static int load_modules_dependencies(void)
 	
 	fstat(fd, &s);
 	buf = alloca(s.st_size + 1);
-	if (read(fd, buf, s.st_size) != s.st_size) {
+	if (read(fd, buf, s.st_size) != (ssize_t)s.st_size) {
 		log_perror(deps_file);
 		return -1;
 	}
@@ -190,7 +190,7 @@ static void add_modules_conf(char * str)
 		return;
 	}
 
-	if (write(fd, data, strlen(data) + 1) != strlen(data) + 1)
+	if (write(fd, data, strlen(data) + 1) != (ssize_t) (strlen(data) + 1))
 		log_perror(str);
 
 	close(fd);
@@ -239,7 +239,11 @@ static enum insmod_return insmod_with_deps(const char * mod_name, char * options
 }
 
 
+#ifndef DISABLE_NETWORK
 enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char * options)
+#else
+enum insmod_return my_insmod(const char * mod_name, enum driver_type type __attribute__ ((unused)), char * options)
+#endif
 {
 	int i;
 #ifndef DISABLE_NETWORK

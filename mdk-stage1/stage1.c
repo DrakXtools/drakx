@@ -266,9 +266,9 @@ static void expert_third_party_modules(void)
 }
 
 
+#ifdef ENABLE_PCMCIA
 static void handle_pcmcia(char ** pcmcia_adapter)
 {
-#ifdef ENABLE_PCMCIA
 	char buf[50];
 	int fd = open("/proc/version", O_RDONLY);
 	int size;
@@ -299,8 +299,8 @@ static void handle_pcmcia(char ** pcmcia_adapter)
 
 	if (IS_EXPERT)
 		expert_third_party_modules();
-#endif
 }
+#endif
 
 
 /************************************************************
@@ -374,12 +374,14 @@ static enum return_type method_select_and_prepare(void)
 }
 
 
-int main(int argc, char **argv, char **env)
+int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)), char **env)
 {
 	enum return_type ret;
 	char ** argptr;
 	char * stage2_args[30];
+#ifdef ENABLE_PCMCIA
 	char * pcmcia_adapter = NULL;
+#endif
 
 	if (getpid() > 50)
 		set_param(MODE_TESTING);
@@ -400,7 +402,9 @@ int main(int argc, char **argv, char **env)
 	if (IS_UPDATEMODULES)
 		update_modules();
 
+#ifdef ENABLE_PCMCIA
 	handle_pcmcia(&pcmcia_adapter);
+#endif
 
 	if (IS_CHANGEDISK)
 		stg1_info_message("You are starting the installation with an alternate booting method. "
@@ -440,10 +444,12 @@ int main(int argc, char **argv, char **env)
 	*argptr++ = "/usr/bin/runinstall2";
 	*argptr++ = "--method";
 	*argptr++ = method_name;
+#ifdef ENABLE_PCMCIA
 	if (pcmcia_adapter) {
 		*argptr++ = "--pcmcia";
 		*argptr++ = pcmcia_adapter;
 	}
+#endif
 	if (disable_modules)
 		*argptr++ = "--blank";
 	if (stage2_kickstart) {

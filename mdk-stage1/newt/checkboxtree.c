@@ -233,7 +233,7 @@ int newtCheckboxTreeAddArray(newtComponent co,
 
     i = 4 + (3 * item->depth);
 
-    if ((strlen(text) + i + ct->pad) > co->width) {
+    if ((strlen(text) + i + ct->pad) > (size_t)co->width) {
 	co->width = strlen(text) + i + ct->pad;
     }
 
@@ -669,7 +669,7 @@ void newtCheckboxTreeSetEntry(newtComponent co, const void * data, const char * 
 
     i = 4 + (3 * item->depth);
 
-    if ((strlen(text) + i + ct->pad) > co->width) {
+    if ((strlen(text) + i + ct->pad) > (size_t)co->width) {
 	co->width = strlen(text) + i + ct->pad;
     }
 

@@ -329,11 +329,11 @@ static int get_vendor_code(struct bootp_request * bresp, unsigned char option, v
 }
 
 
-static int currticks(void)
+static unsigned long currticks(void)
 {
 	struct timeval tv;
-	long csecs;
-	int ticks_per_csec, ticks_per_usec;
+	unsigned long csecs;
+	unsigned long ticks_per_csec, ticks_per_usec;
 	
 	/* Note: 18.2 ticks/sec.  */
 	
@@ -422,7 +422,7 @@ static int handle_transaction(int s, struct bootp_request * breq, struct bootp_r
 			}
 			
 			/* We need to do some basic sanity checking of the header */
-			if (j < (sizeof(*ip_hdr) + sizeof(*udp_hdr)))
+			if (j < (signed)(sizeof(*ip_hdr) + sizeof(*udp_hdr)))
 				continue;
 			
 			ip_hdr = (void *) eth_packet;

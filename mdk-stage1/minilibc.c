@@ -24,7 +24,7 @@
 
 #include "minilibc.h"
 
-int atexit (void (*__func) (void))
+int atexit (void (*__func) (void) __attribute__ ((unused)))
 {
 	return 0;
 }
@@ -39,24 +39,24 @@ void exit()
 char ** _environ = NULL;
 int errno = 0;
 
-void _init (int __status)
+void _init (int __status __attribute__ ((unused)))
 {
 }
 
-void __libc_init_first (int __status)
+void __libc_init_first (int __status __attribute__ ((unused)))
 {
 }
 
 int __libc_start_main (int (*main) (int, char **, char **), int argc,
-		       char **argv, void (*init) (void), void (*fini) (void),
-		       void (*rtld_fini) (void), void *stack_end)
+		       char **argv, void (*init) (void) __attribute__ ((unused)), void (*fini) (void) __attribute__ ((unused)),
+		       void (*rtld_fini) (void) __attribute__ ((unused)), void *stack_end __attribute__ ((unused)))
 {
 	exit ((*main) (argc, argv, NULL));
 	/* never get here */
 	return 0;
 }
 
-void _fini (int __status)
+void _fini (int __status __attribute__ ((unused)))
 {
 }
 

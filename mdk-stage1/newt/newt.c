@@ -129,7 +129,7 @@ void newtSetSuspendCallback(newtSuspendCallback cb, void * data) {
     suspendCallbackData = data;
 }
 
-static void handleSigwinch(int signum) {
+static void handleSigwinch(int signum __attribute__ ((unused))) {
     needResize = 1;
 }
 
@@ -561,8 +561,8 @@ void newtDelay(int usecs) {
     select(0, &set, &set, &set, &tv);
 }
 
-struct eventResult newtDefaultEventHandler(newtComponent c,
-					   struct event ev) {
+struct eventResult newtDefaultEventHandler(newtComponent c __attribute__ ((unused)),
+					   struct event ev __attribute__ ((unused))) {
     struct eventResult er;
 
     er.result = ER_IGNORED;

@@ -142,7 +142,7 @@ static int ftp_command(int sock, char * command, char * param)
 	
 	strcat(buf, "\r\n");
      
-	if (write(sock, buf, strlen(buf)) != strlen(buf)) {
+	if (write(sock, buf, strlen(buf)) != (ssize_t)strlen(buf)) {
 		return FTPERR_SERVER_IO_ERROR;
 	}
 

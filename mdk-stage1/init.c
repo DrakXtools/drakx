@@ -331,7 +331,7 @@ void unmount_filesystems(void)
 
 int exit_value_rescue = 66;
 
-int main(int argc, char **argv)
+int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused)))
 {
 	pid_t installpid, childpid;
 	int wait_status;

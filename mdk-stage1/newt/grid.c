@@ -244,7 +244,7 @@ void newtGridWrappedWindow(newtGrid grid, char * title) {
     int width, height, offset = 0;
 
     newtGridGetSize(grid, &width, &height);
-    if (width < strlen(title) + 2) {
+    if ((size_t)width < strlen(title) + 2) {
 	offset = ((strlen(title) + 2) - width) / 2; 
 	width = strlen(title) + 2;
     }

@@ -64,7 +64,7 @@ int newtTextboxGetNumLines(newtComponent co) {
 }
 
 newtComponent newtTextboxReflowed(int left, int top, char * text, int width,
-				  int flexDown, int flexUp, int flags) {
+				  int flexDown, int flexUp, int flags __attribute__ ((unused))) {
     newtComponent co;
     char * reflowedText;
     int actWidth, actHeight;

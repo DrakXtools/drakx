@@ -38,7 +38,7 @@ endif
 ifeq (ppc, $(ARCH))
 CFLAGS = -Os -pipe -Wall -fomit-frame-pointer
 else
-CFLAGS = -Os -pipe -Wall -Werror -fomit-frame-pointer
+CFLAGS = -Os -pipe -Wall -Werror -W -fomit-frame-pointer
 endif
 
 DIETLIBC_INCLUDES = -I$(top_dir)/dietlibc/include -I. -I$(top_dir)/bzlib

@@ -228,7 +228,7 @@ static struct eventResult entryEvent(newtComponent co,
 	case EV_MOUSE:
 	    if ((ev.u.mouse.type == MOUSE_BUTTON_DOWN) &&
 		(en->flags ^ NEWT_FLAG_HIDDEN)) {
-		if (strlen(en->buf) >= ev.u.mouse.x - co->left) {
+		if (strlen(en->buf) >= (size_t) (ev.u.mouse.x - co->left)) {
 		    en->cursorPosition = ev.u.mouse.x - co->left;
 		    newtGotorc(co->top,
 			       co->left +(en->cursorPosition - en->firstChar));

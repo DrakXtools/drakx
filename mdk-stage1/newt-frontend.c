@@ -233,7 +233,7 @@ enum return_type ask_yes_no(char *msg)
 
 static void (*callback_real_function)(char ** strings) = NULL;
 
-static void default_callback(newtComponent co, void * data)
+static void default_callback(newtComponent co __attribute__ ((unused)), void * data)
 {
 	newtComponent * entries = data;
 	char * strings[50], ** ptr;

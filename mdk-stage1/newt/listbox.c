@@ -297,7 +297,7 @@ void newtListboxSetEntry(newtComponent co, int num, const char * text) {
 	free(item->text);
 	item->text = strdup(text);
     }
-    if (li->userHasSetWidth == 0 && strlen(text) > li->curWidth) {
+    if (li->userHasSetWidth == 0 && strlen(text) > (size_t)li->curWidth) {
 	updateWidth(co, li, strlen(text));
     }
 
@@ -329,7 +329,7 @@ int newtListboxAppendEntry(newtComponent co, const char * text,
 	item = li->boxItems = malloc(sizeof(struct items));
     }
 
-    if (!li->userHasSetWidth && text && (strlen(text) > li->curWidth))
+    if (!li->userHasSetWidth && text && (strlen(text) > (size_t)li->curWidth))
 	updateWidth(co, li, strlen(text));
 
     item->text = strdup(text); item->data = data; item->next = NULL;
@@ -369,7 +369,7 @@ int newtListboxInsertEntry(newtComponent co, const char * text,
 	item->next = NULL;
     }
 
-    if (!li->userHasSetWidth && text && (strlen(text) > li->curWidth))
+    if (!li->userHasSetWidth && text && (strlen(text) > (size_t)li->curWidth))
 	updateWidth(co, li, strlen(text));
 
     item->text = strdup(text?text:"(null)"); item->data = data;

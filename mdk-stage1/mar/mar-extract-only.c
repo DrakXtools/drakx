@@ -159,7 +159,8 @@ mar_extract_file(char *mar_filename, char *filename_to_extract, char *dest_dir)
 			char garb_buf[4096];
 			char *buf;
 			char *dest_file;
-			int fd, i;
+			int fd;
+			size_t i;
 			dest_file = (char *) alloca(strlen(dest_dir) + strlen(filename_to_extract) + 1);
 			strcpy(dest_file, dest_dir);
 			strcat(dest_file, filename_to_extract);

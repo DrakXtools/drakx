@@ -103,7 +103,7 @@ mar_create_file(char *dest_file, char **files)
 			current_offset_filetable += sizeof(int);
 			
 			/* data_raw_data */
-			if (fread(&temp_marfile_buffer[current_delta_rawdata + filetable_size], 1, fsize, f) != fsize)
+			if (fread(&temp_marfile_buffer[current_delta_rawdata + filetable_size], 1, fsize, f) != (size_t)fsize)
 			{
 				perror(files[filenum]);
 				return -1;
