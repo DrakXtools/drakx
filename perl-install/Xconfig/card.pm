@@ -360,6 +360,7 @@ sub install_server {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{Driver} = 'nvidia';
 	$card->{DRI_GLX_SPECIAL} = 1;
+	$card->{Options_xfree4}{IgnoreEDID} = 1;
     }
     if ($card->{Driver2} eq 'fglrx' &&
 	-e "$::prefix/usr/X11R6/lib/modules/dri/fglrx_dri.so" &&
