@@ -141,7 +141,8 @@ sync
 sync
 noaccomp),
                    aliases => [
-                               ['speedtch', 'off'], # disable kernel driver, we use userland stuff but for firmware upload
+                               # disable kernel driver, we use userland stuff but for firmware upload
+                               if_(c::kernel_version() =~ /^\Q2.4/, ['speedtch', 'off']),
                                ['char-major-108', 'ppp_generic'],
                                ['tty-ldisc-3', 'ppp_async'],
                                ['tty-ldisc-13', 'n_hdlc'],
