@@ -20,7 +20,7 @@ my @mouses_fields = qw(nbuttons MOUSETYPE XMOUSETYPE name);
 my %mice = 
  arch() =~ /^sparc/ ? 
 (
- 'sunmouse' =>
+ __('SunMouse') =>
  [ [ 'sunmouse' ],
    [ [ 3, 'sun', 'sun', __("Sun - Mouse") ]
    ]]
@@ -44,7 +44,7 @@ my %mice =
      [ 5, 'ps/2', 'IMPS/2', __("Wheel") ],
    ]],
 
- __("serial") =>
+ __("Serial") =>
  [ [ map { "ttyS$_" } 0..3 ],
    [ [ 2, 'Microsoft', 'Microsoft', __("Generic 2 Button Mouse") ],
      [ 3, 'Microsoft', 'Microsoft', __("Generic 3 Button Mouse") ],
@@ -61,13 +61,13 @@ my %mice =
      [ 3, 'Microsoft', 'ThinkingMouse', __("Kensington Thinking Mouse") ],
    ]],
 
- 'busmouse' =>
+ __('BusMouse') =>
  [ [ arch() eq 'ppc' ? 'adbmouse' : ('atibm', 'inportbm', 'logibm') ],
    [ [ 2, 'Busmouse', 'BusMouse', __("2 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', __("3 buttons") ],
    ]],
 
- 'none' =>
+ '[' . _('No bus') . ']' =>
  [ [ 'none' ],
    [ [ 0, 'none', 'Microsoft', __("No mouse") ],
    ]],
@@ -122,7 +122,7 @@ sub fullnames {
 		my $l = raw2mouse($type, $_);
 		"$type|$l->{name}";
 	    } else { 
-		$type .= "|[" . _("Other");
+		$type .= "|[" . _("Other") . "]";
 		'';
 	    }
 	} @{$::b->[1]}
