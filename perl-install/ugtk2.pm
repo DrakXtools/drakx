@@ -440,9 +440,9 @@ sub create_packtable {
     my ($options, @l) = @_;
     my $w = Gtk2::Table->new(0, 0, $options->{homogeneous} || 0);
     each_index {
-	my ($i, $l) = ($_[0], $_);
+	my ($i, $l) = ($::i, $_);
 	each_index {
-	    my ($j) = @_;
+	    my $j = $::i;
 	    if ($_) {
 		ref $_ or $_ = Gtk2::Label->new($_);
 		$j != $#$l && !$options->{mcc} ?
@@ -991,7 +991,7 @@ sub _ask_file {
 
 sub _ask_dir {
     my ($o) = @_;
-    my $f = _ask_file(@_);
+    my $f = &_ask_file;
     $f->file_list->get_parent->hide;
     $f->selection_entry->get_parent->hide;
     $f->ok_button->signal_connect(clicked => sub {
