@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 1mdk
+Release: 2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -291,13 +291,29 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Thu Feb 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-2mdk
+- logdrake: fix #1829
+- translation updates
+- scannerdrake:fix embedding
+- drakxtv: workaround a drakx bug which don't always add bttv to
+  /etc/modules (fix #)
+- printerdrake:
+  o fix embedding
+  o hide the icon when embedded to get more space
+  o various improvements (till)
+- drakfont: fc-cache enhancement (pablo)
+- drakTermServ: fix #1774, #1775 (stew)
+- newt bindind: better trees managment on console (pixel)
+- diskdrake fixes (pixel)
+- xfdrake: log failure sources (pixel)
+
 * Tue Feb 18 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-1mdk
 - fix "nothing to edit" in drakperm (#1769)
 - fix draksec help
 - drakedm: fix badly generated config file by 3rd party progs
 - i18n fixes (pablo, gc)
 - scannerdrake updates (till)
-- diskdrake fixes (pixel)
+- diskdrake fixes: raid, ... (pixel)
 - printerdrake fixes (till)
 - drakconnect fix (poulpy)
 
