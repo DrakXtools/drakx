@@ -105,6 +105,28 @@ enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, ch
 	}
 }
 
+enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** elems_comments, char ** choice, char * auto_param, char ** elems_auto)
+{
+	if (!IS_AUTOMATIC)
+		return ask_from_list_comments(msg, elems, elems_comments, choice);
+	else {
+		char ** sav_elems = elems;
+		char * tmp = get_auto_value(auto_param);
+		while (elems && *elems) {
+			if (!strcmp(tmp, *elems_auto)) {
+				*choice = *elems;
+				log_message("AUTOMATIC: parameter %s for %s means returning %s", tmp, auto_param, *elems);
+				return RETURN_OK;
+			}
+			elems++;
+			elems_auto++;
+		}
+		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+		return ask_from_list_comments(msg, sav_elems, elems_comments, choice);
+	}
+}
+
+
 enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto)
 {
 	if (!IS_AUTOMATIC)

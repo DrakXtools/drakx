@@ -31,6 +31,7 @@
 enum return_type { RETURN_OK, RETURN_BACK, RETURN_ERROR };
 
 extern char * method_name;
+extern char * interactive_fifo;
 
 #define MODE_TESTING        (1 << 0)
 #define MODE_EXPERT         (1 << 1)

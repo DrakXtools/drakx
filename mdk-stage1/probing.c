@@ -64,6 +64,53 @@ static void warning_insmod_failed(void)
 	error_message("Warning, installation of driver failed.");
 }
 
+#ifndef DISABLE_NETWORK
+struct net_description_elem
+{
+	char * intf_name;
+	char * intf_description;
+};
+static struct net_description_elem net_descriptions[50];
+static int net_descr_number = 0;
+static char * intf_descr_for_discover = NULL;
+static char * net_intf_too_early_name[50]; /* for modules providing more than one net intf */
+static int net_intf_too_early_number = 0;
+static int net_intf_too_early_ptr = 0;
+
+void prepare_intf_descr(const char * intf_descr)
+{
+	intf_descr_for_discover = strdup(intf_descr);
+}
+
+void net_discovered_interface(char * intf_name)
+{
+	if (!intf_descr_for_discover) {
+		net_intf_too_early_name[net_intf_too_early_number++] = strdup(intf_name);
+		return;
+	}
+	if (!intf_name) {
+		if (net_intf_too_early_ptr >= net_intf_too_early_number) {
+			log_message("NET: was expecting another network interface (broken net module?)");
+			return;
+		}
+		net_descriptions[net_descr_number].intf_name = net_intf_too_early_name[net_intf_too_early_ptr++];
+	}
+	else
+		net_descriptions[net_descr_number].intf_name = strdup(intf_name);
+	net_descriptions[net_descr_number].intf_description = strdup(intf_descr_for_discover);
+	intf_descr_for_discover = NULL;
+	net_descr_number++;
+}
+
+char * get_net_intf_description(char * intf_name)
+{
+	int i;
+	for (i = 0; i < net_descr_number ; i++)
+		if (!strcmp(net_descriptions[i].intf_name, intf_name))
+			return net_descriptions[i].intf_description;
+	return strdup("unknown");
+}
+#endif
 
 static void probe_that_type(enum driver_type type)
 {
@@ -126,8 +173,11 @@ static void probe_that_type(enum driver_type type)
 					if (type == NETWORK_DEVICES) {
 						/* insmod is quick, let's use the info message */
 						info_message("Found %s", pcidb[i].name);
+						prepare_intf_descr(pcidb[i].name);
 						if (my_insmod(pcidb[i].module, NETWORK_DEVICES, NULL))
 							warning_insmod_failed();
+						if (intf_descr_for_discover) /* for modules providing more than one net intf */
+							net_discovered_interface(NULL);
 					}
 #endif
 				}

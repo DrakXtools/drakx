@@ -39,13 +39,13 @@
 #include "tools.h"
 
 
-static struct param_elem * params;
+static struct param_elem params[50];
+static int param_number = 0;
 
 void process_cmdline(void)
 {
 	char buf[512];
-	int fd, size, i, p;
-	struct param_elem tmp_params[50];
+	int fd, size, i;
 	
 	log_message("opening /proc/cmdline... ");
 	
@@ -58,7 +58,7 @@ void process_cmdline(void)
 
 	log_message("\t%s", buf);
 
-	i = 0; p = 0;
+	i = 0;
 	while (buf[i] != '\0') {
 		char *name, *value = NULL;
 		int j = i;
@@ -80,8 +80,9 @@ void process_cmdline(void)
 			value[i-k] = '\0';
 		}
 
-		tmp_params[p].name = name;
-		tmp_params[p].value = value;
+		params[param_number].name = name;
+		params[param_number].value = value;
+		param_number++;
 		if (!strcmp(name, "expert")) set_param(MODE_EXPERT);
 		if (!strcmp(name, "rescue")) set_param(MODE_RESCUE);
 		if (!strcmp(name, "special_stage2")) set_param(MODE_SPECIAL_STAGE2);
@@ -89,24 +90,12 @@ void process_cmdline(void)
 			set_param(MODE_AUTOMATIC);
 			grab_automatic_params(value);
 		}
-		p++;
 		if (buf[i] == '\0')
 			break;
 		i++;
 	}
 	
-	if (IS_RESCUE) {
-		tmp_params[p].name = "special_stage2";
-		tmp_params[p].value = "rescue";
-		p++;
-		set_param(MODE_SPECIAL_STAGE2);
-	}
-
-	tmp_params[p++].name = NULL;
-
-	params = memdup(tmp_params, sizeof(struct param_elem) * p);
-
-	log_message("\tgot %d args", p-1);
+	log_message("\tgot %d args", param_number);
 }
 
 
@@ -114,29 +103,71 @@ int stage1_mode = 0;
 
 int get_param(int i)
 {
+#ifdef SPAWN_INTERACTIVE
+	static int fd = 0;
+	char buf[5000];
+	char * ptr;
+	int nb;
+
+	if (fd <= 0) {
+		fd = open(interactive_fifo, O_RDONLY);
+		if (fd == -1)
+			return (stage1_mode & i);
+		fcntl(fd, F_SETFL, O_NONBLOCK);
+	}
+
+	if (fd > 0) {
+		if ((nb = read(fd, buf, sizeof(buf))) > 0) {
+			buf[nb] = '\0';
+			ptr = buf;
+			while ((ptr = strstr(ptr, "+ "))) {
+				if (!strncmp(ptr+2, "expert", 6)) set_param(MODE_EXPERT);
+				if (!strncmp(ptr+2, "rescue", 6)) set_param(MODE_RESCUE);
+				ptr++;
+			}
+			ptr = buf;
+			while ((ptr = strstr(ptr, "- "))) {
+				if (!strncmp(ptr+2, "expert", 6)) unset_param(MODE_EXPERT);
+				if (!strncmp(ptr+2, "rescue", 6)) unset_param(MODE_RESCUE);
+				ptr++;
+			}
+		}
+	}
+#endif
+
 	return (stage1_mode & i);
 }
 
 char * get_param_valued(char *param_name)
 {
-	struct param_elem * ptr = params;
-
-	while (ptr->name) {
-		if (!strcmp(ptr->name, param_name))
-			return ptr->value;
-		ptr++;
-	}
+	int i;
+	for (i = 0; i < param_number ; i++)
+		if (!strcmp(params[i].name, param_name))
+			return params[i].value;
 
 	return NULL;
 }
 
+void set_param_valued(char *param_name, char *param_value)
+{
+	params[param_number].name = param_name;
+	params[param_number].value = param_value;
+	param_number++;
+}
+
 void set_param(int i)
 {
+	log_message("setting param %d", i);
 	stage1_mode |= i;
+	if (i == MODE_RESCUE) {
+		set_param_valued("special_stage2", "rescue");
+		set_param(MODE_SPECIAL_STAGE2);
+	}
 }
 
 void unset_param(int i)
 {
+	log_message("unsetting param %d", i);
 	stage1_mode &= ~i;
 }
 

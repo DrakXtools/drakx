@@ -26,6 +26,7 @@
 void grab_automatic_params(char * line);
 
 enum return_type ask_from_list_auto(char *msg, char ** elems, char ** choice, char * auto_param, char ** elems_auto);
+enum return_type ask_from_list_comments_auto(char *msg, char ** elems, char ** elems_comments, char ** choice, char * auto_param, char ** elems_auto);
 enum return_type ask_from_entries_auto(char *msg, char ** questions, char *** answers, int entry_size, char ** questions_auto);
 
 #endif

@@ -267,6 +267,8 @@ int my_insmod(const char * mod_name, enum driver_type type, char * options)
 				sprintf(alias, "alias %s %s", *new_net_devices, mod_name);
 				add_modules_conf(alias);
 				log_message("NET: %s", alias);
+				net_discovered_interface(*new_net_devices);
+				
 			already_present:
 				new_net_devices++;
 			}

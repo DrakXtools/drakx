@@ -502,6 +502,7 @@ static enum return_type bringup_networking(struct interface_info * intf)
 static char * interface_select(void)
 {
 	char ** interfaces, ** ptr;
+	char * descriptions[50];
 	char * choice;
 	int i, count = 0;
 	enum return_type results;
@@ -525,7 +526,14 @@ static char * interface_select(void)
 	if (count == 1)
 		return *interfaces;
 
-	results = ask_from_list_auto("Please choose the NET device to use for the installation.", interfaces, &choice, "interface", interfaces);
+	i = 0;
+	while (interfaces[i]) {
+		descriptions[i] = get_net_intf_description(interfaces[i]);
+		i++;
+	}
+
+	results = ask_from_list_comments_auto("Please choose the NET device to use for the installation.",
+					      interfaces, descriptions, &choice, "interface", interfaces);
 
 	if (results != RETURN_OK)
 		return NULL;

@@ -28,6 +28,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <signal.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -75,13 +76,11 @@ void fatal_error(char *msg)
 }
 
 
-
 /* spawns a shell on console #2 */
 static void spawn_shell(void)
 {
 #ifdef SPAWN_SHELL
 	int fd;
-	pid_t pid;
 	char * shell_name = "/sbin/sash";
 
 	log_message("spawning a shell");
@@ -97,7 +96,7 @@ static void spawn_shell(void)
 			return;
 		}
 		
-		if (!(pid = fork())) {
+		if (!fork()) {
 			dup2(fd, 0);
 			dup2(fd, 1);
 			dup2(fd, 2);
@@ -109,6 +108,65 @@ static void spawn_shell(void)
 
 			execl(shell_name, shell_name, NULL);
 			log_message("execl of %s failed: %s", shell_name, strerror(errno));
+		}
+		
+		close(fd);
+	}
+#endif
+}
+
+
+char * interactive_fifo = "/tmp/stage1-fifo";
+static pid_t interactive_pid = 0;
+
+/* spawns my small interactive on console #6 */
+static void spawn_interactive(void)
+{
+#ifdef SPAWN_INTERACTIVE
+	int fd;
+	char * dev = "/dev/tty6";
+
+	log_message("spawning my interactive on %s", dev);
+
+	if (!IS_TESTING) {
+		fd = open(dev, O_RDWR);
+		if (fd == -1) {
+			log_message("cannot open %s -- no interactive", dev);
+			return;
+		}
+
+		if (mkfifo(interactive_fifo, O_RDWR)) {
+			log_message("cannot create fifo -- no interactive");
+			return;
+		}
+		
+		if (!(interactive_pid = fork())) {
+			int fif_out;
+
+			dup2(fd, 0);
+			dup2(fd, 1);
+			dup2(fd, 2);
+			
+			close(fd);
+			setsid();
+			if (ioctl(0, TIOCSCTTY, NULL))
+				log_perror("could not set new controlling tty");
+
+			fif_out = open(interactive_fifo, O_WRONLY);
+			printf("Please enter your command (availables: [+,-] [rescue,expert]).\n");
+				
+			while (1) {
+				char s[50];
+				int i = 0;
+				printf("? ");
+				fflush(stdout);
+				read(0, &(s[i++]), 1);
+				fcntl(0, F_SETFL, O_NONBLOCK);
+				while (read(0, &(s[i++]), 1) > 0 && i < sizeof(s));
+				fcntl(0, F_SETFL, 0);
+				write(fif_out, s, i-2);
+				printf("Ok.\n");
+			}
 		}
 		
 		close(fd);
@@ -271,6 +329,8 @@ int main(int argc, char **argv, char **env)
 	if (getpid() > 50)
 		set_param(MODE_TESTING);
 
+	spawn_interactive();
+
 	open_log();
 	log_message("welcome to the " DISTRIB_NAME " install (stage1, version " VERSION " built " __DATE__ " " __TIME__")");
 	process_cmdline();
@@ -297,6 +357,9 @@ int main(int argc, char **argv, char **env)
 			fatal_error("symlink to " STAGE2_LOCATION " failed");
 	}
 
+	if (interactive_pid != 0)
+		kill(interactive_pid, 9);
+
 	if (IS_RESCUE) {
 		int fd = open("/proc/sys/kernel/real-root-dev", O_RDWR);
 #ifdef __sparc__
@@ -305,7 +368,7 @@ int main(int argc, char **argv, char **env)
 		write(fd, "0x103", sizeof("0x103")); /* ram3 */
 #endif
 		close(fd);
-		return 0;
+		return 1;
 	}
 
 	if (IS_TESTING)

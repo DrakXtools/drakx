@@ -311,17 +311,6 @@ void unmount_filesystems(void)
 	}
 }
 
-int is_rescue()
-{
-	int fd, size;
-	char buf[512];
-	if ((fd = open("/proc/cmdline", O_RDONLY, 0)) == -1)
-		fatal_error("could not open /proc/cmdline");
-	size = read(fd, buf, sizeof(buf));
-	buf[size-1] = 0;
-	close(fd);
-	return (strstr(buf, "rescue") != NULL);
-}
 
 int main(int argc, char **argv)
 {
@@ -420,13 +409,13 @@ int main(int argc, char **argv)
 			end_stage2 = 1;
 	}
 
-	if (!WIFEXITED(wait_status) || WEXITSTATUS(wait_status)) {
+	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != 1)) {
 		printf("install exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
 		abnormal_termination = 1;
-	} else if (is_rescue()) {
+	} else if (WIFEXITED(wait_status) && WEXITSTATUS(wait_status) == 1) {
 		kill(klog_pid, 9);
 		printf("exiting stage1-initializer -- giving hand to rescue\n");
 		return 0;
