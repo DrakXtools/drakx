@@ -1396,7 +1396,7 @@ sub get_net_device() {
 }
 
 sub read_net_conf {
-    my ($_prefix, $netcnx, $netc) = @_;
+    my (undef, $netcnx, $netc) = @_;
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
     $netcnx->{$netcnx->{type}} ||= {};
 }
