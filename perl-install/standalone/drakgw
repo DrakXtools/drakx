@@ -32,7 +32,6 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
-!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
 $::Wizard_pix_up = "wiz_drakgw.png";
 $::Wizard_title = _("Internet Connection Sharing");
 $::direct = /-direct/;
@@ -55,6 +54,8 @@ log::l("[drakgw] kernel_version $kernel_version");
 $kernel_version eq '2.2' || $kernel_version eq '2.4' or die "Only for 2.2 or 2.4 kernels.\n";
 
 my $in = 'interactive'->vnew('su', 'default');
+
+!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
 
 pur_gtk_mode() if $::isEmbedded && ref($in) =~ /gtk/;
 
@@ -664,6 +665,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.54  2001/09/18 20:36:20  damien
+#- debug
+#-
 #- Revision 1.53  2001/09/12 10:57:01  damien
 #- corrected wizard mode in newt mode
 #-
