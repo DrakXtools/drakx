@@ -771,7 +771,7 @@ sub addUser {
     any::addUsers($p, $users);
 
     $o->pkg_install("autologin") if $o->{autologin};
-    any::set_autologin($p, $o->{autologin}, $o->{desktop});
+    any::set_autologin($o->{autologin}, $o->{desktop});
 
     install_any::setAuthentication($o);
 

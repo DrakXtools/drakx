@@ -1159,8 +1159,8 @@ sub addUser {
     if ($o->{security} >= 1 || $clicked) {
 	any::ask_users($o->{prefix}, $o, $o->{users}, $o->{security});
     }
-    any::get_autologin($o->{prefix}, $o);
-    any::autologin($o->{prefix}, $o, $o);
+    any::get_autologin($o);
+    any::autologin($o, $o);
 
     install_steps::addUser($o);
 }

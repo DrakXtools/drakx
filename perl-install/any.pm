@@ -358,25 +358,25 @@ sub pack_passwd {
 }
 
 sub get_autologin {
-    my ($prefix, $o) = @_;
-    my %l = getVarsFromSh("$prefix/etc/sysconfig/autologin");
+    my ($o) = @_;
+    my %l = getVarsFromSh("$::prefix/etc/sysconfig/autologin");
     $o->{autologin} ||= text2bool($l{AUTOLOGIN}) && $l{USER};
-    %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
+    %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
     $o->{desktop} ||= $l{DESKTOP};
 }
 
 sub set_autologin {
-  my ($prefix, $user, $desktop) = @_;
+  my ($user, $desktop) = @_;
 
   if ($user) {
-      my %l = getVarsFromSh("$prefix/etc/sysconfig/desktop");
+      my %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
       $l{DESKTOP} = $desktop;
-      setVarsInSh("$prefix/etc/sysconfig/desktop", \%l);
-      log::l("cat $prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$prefix/etc/sysconfig/desktop"));
+      setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
+      log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
   }
-  setVarsInSh("$prefix/etc/sysconfig/autologin",
+  setVarsInSh("$::prefix/etc/sysconfig/autologin",
 	      { USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => "/usr/X11R6/bin/startx" });
-  log::l("cat $prefix/etc/sysconfig/autologin ($user):\n", cat_("$prefix/etc/sysconfig/autologin"));
+  log::l("cat $::prefix/etc/sysconfig/autologin ($user):\n", cat_("$::prefix/etc/sysconfig/autologin"));
 }
 
 sub rotate_log {
@@ -800,9 +800,9 @@ sub ask_users {
 }
 
 sub autologin {
-    my ($prefix, $o, $in) = @_;
+    my ($o, $in) = @_;
 
-    my @wm = split(' ', run_program::rooted_get_stdout($prefix, '/usr/sbin/chksession', '-l'));
+    my @wm = split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
     my @users = map { $_->{name} } @{$o->{users} || []};
 
     if (@wm > 1 && @users && !$o->{authentication}{NIS} && $o->{security} <= 2) {
