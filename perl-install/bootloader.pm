@@ -47,7 +47,7 @@ sub get {
 }
 sub get_label {
     my ($label, $bootloader) = @_;
-    $_->{label} && substr($_->{label}, 0, 15) eq substr($label, 0, 15) and return $_ foreach @{$bootloader->{entries}};
+    $_->{label} && lc(substr($_->{label}, 0, 15)) eq lc(substr($label, 0, 15)) and return $_ foreach @{$bootloader->{entries}};
     undef;
 }
 
@@ -117,7 +117,14 @@ sub read() {
     }
     if (arch() !~ /ppc/) {
 	delete $b{timeout} unless $b{prompt};
-	$_->{append} =~ s/^\s*"?(.*?)"?\s*$/$1/ foreach \%b, @{$b{entries}};
+	sub remove_quotes_and_spaces {
+	    local ($_) = @_;
+	    s/^\s*//; s/\s*$//;
+	    s/^"(.*?)"$/$1/;
+	    $_;
+	}
+	$_->{append} = remove_quotes_and_spaces($_->{append}) foreach \%b, @{$b{entries}};
+	$_->{label}  = remove_quotes_and_spaces($_->{label})  foreach @{$b{entries}};
 	$b{timeout} = $b{timeout} / 10 if $b{timeout};
 	$b{message} = cat_("$::prefix$b{message}") if $b{message};
     }
@@ -745,8 +752,7 @@ sub install_silo {
 sub make_label_lilo_compatible {
     my ($label) = @_; 
     $label = substr($label, 0, 15); #- lilo doesn't handle more than 15 char long labels
-    $label =~ s/\s/_/g; #- lilo doesn't like spaces
-    $label;
+    qq("$label");
 }
 
 sub write_lilo_conf {
