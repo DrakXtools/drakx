@@ -324,11 +324,11 @@ sub change_color {
     $doit ? $colorsel->get_current_color : $color;
 }
 
-my ($echr, $echt);
-$echr = $echt = $height;
+my ($scale_r, $scale_t);
+$scale_r = $scale_t = $height;
 
-sub scale_tranmistted($) { $_[0] * $echt }
-sub scale_received($) { $_[0] * $echr }
+sub scale_tranmistted($) { $_[0] * $scale_t }
+sub scale_received($) { $_[0] * $scale_r }
 
 sub update() {
      if (!$during_connection) {
@@ -464,8 +464,8 @@ sub draw_monitor {
         $graph_maxr = $maxr;
         $graph_maxt = $maxt;
     }
-    $echr = ($height/2) / max($graph_maxr, 1);
-    $echt = ($height/2) / max($graph_maxt, 1);
+    $scale_r = ($height/2) / max($graph_maxr, 1);
+    $scale_t = ($height/2) / max($graph_maxt, 1);
 
     my $step = $left_border - 1;
     foreach (@{$o->{stack_t}}) {
@@ -539,10 +539,10 @@ sub draw_monitor {
 	$pixmap->draw_line($gcl, $left_border, $i, $width, $i);
 	my ($gc2, $text);
         if ($i > max($grid_interval, $use_same_scale ? $pix_maxt : $height/2)) {
-	    $text = formatXiB(($height-$i)/$echr);
+	    $text = formatXiB(($height-$i)/$scale_r);
 	    $gc2 = $gcr;
         } else {
-	    $text = formatXiB($i/$echt);
+	    $text = formatXiB($i/$scale_t);
 	    $gc2 = $gct;
         }
         $pixmap->draw_layout($gc2, 45-string_width($darea->{$intf}, $text), $i-5, $darea->{$intf}->create_pango_layout($text));
