@@ -528,28 +528,10 @@ GridHeight=70
     #- call update-menus at the end of package installation
     push @{$o->{waitpids}}, run_program::raw({ root => $o->{prefix}, detach => 1 }, "update-menus", "-n");
 
-    if ($o->{blank} || $o->{updatemodules}) {
-	my @l = detect_devices::floppies_dev();
-
-	foreach (qw(blank updatemodules)) {
-	    $o->{$_} eq "1" and $o->{$_} = $l[0] || die N("No floppy drive available");
-	}
-
-	$o->{blank} and $o->copyKernelFromFloppy;
-	$o->{updatemodules} and $o->updateModulesFromFloppy;
+    if ($o->{updatemodules}) {
+	$o->{updatemodules} = detect_devices::floppy() or die N("No floppy drive available");
+	$o->updateModulesFromFloppy;
     }
-}
-
-sub copyKernelFromFloppy {
-    my ($o) = @_;
-    return if $::testing || !$o->{blank};
-
-    fs::mount($o->{blank}, "/floppy", "vfat", 0);
-    eval { cp_af("/floppy/vmlinuz", "$o->{prefix}/boot/vmlinuz-default") };
-    if ($@) {
-	log::l("copying of /floppy/vmlinuz from blank modified disk failed: $@");
-    }
-    fs::umount("/floppy");
 }
 
 sub install_urpmi {

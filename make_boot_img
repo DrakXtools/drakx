@@ -112,7 +112,7 @@ sub initrd {
 	install_stripped("$instdir/$install", "$mnt/sbin/stage1");
     }
 
-    if (member($type, qw(network network_gigabit_usb all blank))) {
+    if (member($type, qw(network network_gigabit_usb all))) {
 	install_stripped("$instdir/ppp/pppd-bin", "$mnt/sbin/pppd");
 	install_stripped("$instdir/rp-pppoe/pppoe-bin", "$mnt/sbin/pppoe");
 	_ "$sudo mknod $mnt/dev/ppp c 108 0";

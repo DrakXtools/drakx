@@ -114,7 +114,7 @@ sub selectMouse {
 sub setupSCSI {
     my ($clicked, $_ent_number, $auto) = @_;
 
-    if (!$o->{blank} && !$::testing && !$::uml_install) {
+    if (!$::testing && !$::uml_install) {
 	-d '/lib/modules/' . c::kernel_version() ||
 	  -s modules::cz_file() or die N("Can't access kernel modules corresponding to your kernel (file %s is missing), this generally means your boot floppy in not in sync with the Installation medium (please create a newer boot floppy)", modules::cz_file());
     }
@@ -409,7 +409,6 @@ sub main {
 	    alawindows => sub { $o->{security} = 0; $o->{partitioning}{clearall} = 1; $o->{bootloader}{crushMbr} = 1 },
 	    fdisk => sub { $o->{partitioning}{fdisk} = 1 },
 	    nomouseprobe => sub { $o->{nomouseprobe} = $v },
-	    blank         => sub { $o->{blank} = $::blank = 1 },
 	    updatemodules => sub { $o->{updatemodules} = 1 },
 	    move  => sub { $::move = 1 },
 	}}{lc $n}; &$f if $f;

@@ -77,7 +77,7 @@ sub load {
     };
     my @network_devices = $network_module ? detect_devices::getNet() : ();
 
-    if ($::testing || $::blank) {
+    if ($::testing) {
 	log::l("i would load module $_ (" . join(" ", @{$options{$_}}) . ")") foreach @l;
     } elsif ($::isStandalone || $::move) {
 	run_program::run('/sbin/modprobe', $_, @{$options{$_}}) 

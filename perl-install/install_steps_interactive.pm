@@ -722,12 +722,6 @@ sub afterInstallPackages($) {
     $o->SUPER::afterInstallPackages;
 }
 
-sub copyKernelFromFloppy {
-    my ($o) = @_;
-    $o->ask_okcancel('', N("Please insert the Boot floppy used in drive %s", $o->{blank}), 1) or return;
-    $o->SUPER::copyKernelFromFloppy;
-}
-
 sub updateModulesFromFloppy {
     my ($o) = @_;
     $o->ask_okcancel('', N("Please insert the Update Modules floppy in drive %s", $o->{updatemodules}), 1) or return;
