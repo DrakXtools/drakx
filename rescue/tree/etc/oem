@@ -28,8 +28,10 @@ mkdir /cdrom ; mount -r -t iso9660 $cd /cdrom
 
 if grep -q " fr" /cdrom/VERSION; then
   lang=fr
+  flang=fr_FR
 else
   lang=en
+  flang=en_US
 fi
 echo "Found lang $lang"
 
@@ -54,6 +56,9 @@ echo "Copying installation on hard drive"
 cp -a /boot /cdrom/boot /hd
 mkdir -p /hd/Mandrake /hd/Mandrake/RPMS
 cp -a /cdrom/Mandrake/base /cdrom/Mandrake/mdkinst /hd/Mandrake
+
+perl -pi -e "s/^(kernel .*)/\1 flang=$flang/" /hd/boot/grub/menu.lst
+
 for i in `/etc/closurepkgs /hd/Mandrake/base/depslist.ordered /hd/Mandrake/base/compssList $lang | grep C: | cut -d: -f2`; do
     [ -e /cdrom/Mandrake/RPMS/$i.*.rpm ] && cp -a /cdrom/Mandrake/RPMS/$i.*.rpm /hd/Mandrake/RPMS
 done
