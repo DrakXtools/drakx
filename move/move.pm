@@ -13,7 +13,7 @@ use lang;
 use Digest::MD5 qw(md5_hex);
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
-our $using_existing_config;
+our ($using_existing_user_config, $using_existing_host_config);
 
 sub symlinkf_short {
     my ($dest, $file) = @_;
@@ -110,21 +110,30 @@ sub init {
     eval { modules::load('usb-storage', 'sd_mod') };
     install_steps::setupSCSI($o);
     system('sysctl -w kernel.hotplug="/sbin/hotplug"');
+
     key_mount($o);
     key_installfiles('simple');
     if (`getent passwd 501` =~ /([^:]+):/) {
         $o->{users} = [ { name => $1 } ];
-        $using_existing_config = 1;
+        print "Using existing user configuration\n";
+        $using_existing_user_config = 1;
+    }
+    if (-f '/etc/X11/XF86Config') {
+        print "Using existing host configuration\n";
+        $using_existing_host_config = 1;
     }
 
 drakx_stuff:
+    $o->{steps}{autoSelectLanguage} = { reachable => 1, text => "Automatic Language Selection" };
     $o->{steps}{handleI18NClp} = { reachable => 1, text => "Handle I18N CLP" };
     $o->{steps}{verifyKey} = { reachable => 1, text => "Verify Key" };
     $o->{steps}{configMove} = { reachable => 1, text => "Configure Move" };
     $o->{steps}{startMove} = { reachable => 1, text => "Start Move" };
     $o->{orderedSteps_orig} = $o->{orderedSteps};
-    $o->{orderedSteps} = [ $using_existing_config ?
+    $o->{orderedSteps} = [ $using_existing_host_config ?
                            qw(handleI18NClp startMove)
+                         : $using_existing_user_config ?
+                           qw(autoSelectLanguage handleI18NClp verifyKey selectMouse selectKeyboard configMove startMove)
                          : qw(selectLanguage handleI18NClp acceptLicense verifyKey selectMouse selectKeyboard configMove startMove) ];
     $o->{steps}{first} = $o->{orderedSteps}[0];
 
@@ -151,6 +160,13 @@ sub lomount_clp {
     my $dev = devices::find_free_loop();
     run_program::run('losetup', '-r', '-e', 'gz', $dev, $clp);
     run_program::run('mount', '-r', $dev, $dir);
+}
+
+sub install2::autoSelectLanguage {
+    my $o = $::o;
+
+    $o->{locale} = lang::read('', 0);
+    install_steps::selectLanguage($o);
 }
 
 sub install2::handleI18NClp {
@@ -194,21 +210,28 @@ sub key_installfiles {
     my $sysconf = '/home/.sysconf/' . machine_ident();
 
     if (!-d $sysconf || cat_('/proc/cmdline') =~ /\bcleankey\b/) {
-        $mode eq 'full' or return;
-        eval { rm_rf $sysconf };
-        mkdir $sysconf;
-        foreach (chomp_(cat_('/image/move/keyfiles'))) {
-            my $target_dir = "$sysconf/" . dirname($_);
-            mkdir_p($target_dir);
-            if (/\*$/) {
-                system("cp $_ $target_dir");
-                symlinkf("$sysconf$_", $_) foreach glob($_);
-            } else {
-                system("cp $_ $sysconf$_");
-                symlinkf("$sysconf$_", $_);
+        if ($mode eq 'full') {
+            eval { rm_rf $sysconf };
+            mkdir $sysconf;
+            foreach (chomp_(cat_('/image/move/keyfiles'))) {
+                my $target_dir = "$sysconf/" . dirname($_);
+                mkdir_p($target_dir);
+                if (/\*$/) {
+                    system("cp $_ $target_dir");
+                    symlinkf("$sysconf$_", $_) foreach glob($_);
+                } else {
+                    system("cp $_ $sysconf$_");
+                    symlinkf("$sysconf$_", $_);
+                }
+            }
+            system("cp /image/move/README.adding.more.files /home/.sysconf");
+        } else {
+            #- not in full mode and no host directory, grab user config from first existing host directory if possible
+            foreach (qw(/etc/passwd /etc/group /etc/sysconfig/i18n)) {
+                my $first_available = first(glob("/home/.sysconf/*$_")) or next;
+                system("cp $first_available $_");
             }
         }
-        system("cp /image/move/README.adding.more.files /home/.sysconf");
     } else {
         foreach (chomp_(`find $sysconf -type f`)) {
             my ($path) = /^\Q$sysconf\E(.*)/;
@@ -277,17 +300,19 @@ sub install2::configMove {
     #- just in case
     lomount_clp("always_i18n_$o->{locale}{lang}", '/usr');
 
-    if (cat_('/proc/cmdline') =~ /\buser=(\w+)/) {
-        $o->{users} = [ { name => $1 } ];
-    } else {
-        require any;
-        any::ask_user_one($o, $o->{users} ||= [], $o->{security},
-                          additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
+    if (!$using_existing_user_config) {
+        if (cat_('/proc/cmdline') =~ /\buser=(\w+)/) {
+            $o->{users} = [ { name => $1 } ];
+        } else {
+            require any;
+            any::ask_user_one($o, $o->{users} ||= [], $o->{security},
+                              additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
+        }
+        #- force uid/gid to 501 as it was used when mounting key, addUser may choose 502 when key already holds user data
+        put_in_hash($o->{users}[0], { uid => 501, gid => 501 });
+        require install_steps;
+        install_steps::addUser($o);
     }
-    #- force uid/gid to 501 as it was used when mounting key, addUser may choose 502 when key already holds user data
-    put_in_hash($o->{users}[0], { uid => 501, gid => 501 });
-    require install_steps;
-    install_steps::addUser($o);
 
     my $wait = $o->wait_message(N("Auto configuration"), N("Please wait, detecting and configuring devices..."));
 
@@ -400,20 +425,17 @@ sub install2::startMove {
 sub automatic_xconf {
     my ($o) = @_;
 
-    if ($using_existing_config) {
-        print "MandrakeMove is using existing host configuration\n";
-
-    } else {
-        log::l('automatic XFree configuration');
+    $using_existing_host_config and return;
+    
+    log::l('automatic XFree configuration');
         
-        require Xconfig::default;
-        $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
-        
-        require Xconfig::main;
-        require class_discard;
-        Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
-                                                         { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
-    }
+    require Xconfig::default;
+    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
+    
+    require Xconfig::main;
+    require class_discard;
+    Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
+                                                     { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
 }
 
 
