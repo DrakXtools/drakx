@@ -44,7 +44,8 @@ sub check_hard_drives {
     #- do not do anything if there are many partitions
     #- otherwise we may add main extended partitions
     if ($name =~ s|/part\d+$||) {
-	grep { /part/ } all($name) <= 1;
+	my @parts = grep { /part/ } all($name);
+	@parts <= 1;
     } else {
 	1;
     }
