@@ -32,7 +32,8 @@ function create_modules() {
     /sbin/depmod -F $kernel_path/boot/System.map* -e *.o | perl -pe 's/\\\n//' \
 	| perl -ne 's/\.o//g; s/[ \t]+/ /g; print if /: /' > modules.dep
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
-    ls *.o | packdrake -b9s "../modules.cz-$kern" 400000
+    ls *.o | packdrake -b9s "modules.cz" 400000
+    mv modules.cz ../modules.cz-$kern
     create_marfile network_modules.mar  $NETWORK_MODULES $GENERIC_MODULES
     create_marfile cdrom_modules.mar    $CDROM_MODULES $GENERIC_MODULES
     create_marfile hd_modules.mar       $HD_MODULES $GENERIC_MODULES
