@@ -213,7 +213,7 @@ sub getFile {
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if $rel !~ m,^/, && (!$postinstall_rpms || !-e $f2);
 	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
-	    my $F; open($F, $f2) && $F or do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); undef }
+	    my $F; open($F, $f2) ? $F : do { $f2 !~ /XXX/ and log::l("Can't open $f2: $!"); undef }
 	}
     } || errorOpeningFile($f);
 }
@@ -1281,7 +1281,21 @@ sub use_root_part {
     my ($all_hds, $part, $prefix) = @_;
     {
 	my $handle = any::inspect($part, $prefix) or die;
-	fs::get_info_from_fstab($all_hds, $handle->{dir});
+
+	my @l = fs::read_fstab($handle->{dir}, '/etc/fstab', 'keep_default');
+
+	my $root = fs::get::root_(\@l);
+	if (!fsedit::is_same_hd($root, $part)) {
+	    log::l("warning: fstab says root partition is $root->{device}, whereas we were reading fstab from $part->{device}");
+	    my ($old, $new) = map { my $s = $_->{device}; $s =~ s/\d+$//; $s } ($root, $part);
+	    if ($old && $new) {
+		log::l("replacing $old with $new");
+		$_->{device} =~ s!^\Q$old!$new! foreach @l;
+		log::l("l contains: $_->{device} $_->{mntpoint}") foreach @l;
+	    }
+	}
+	fs::add2all_hds($all_hds, @l);
+	log::l("fstab is now: $_->{device} $_->{mntpoint}") foreach fs::get::fstab($all_hds);
     }
     isSwap($_) and $_->{mntpoint} = 'swap' foreach fs::get::really_all_fstab($all_hds); #- use all available swap.
 }

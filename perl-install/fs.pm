@@ -236,10 +236,9 @@ sub merge_info_from_fstab {
     merge_fstabs($loose, $fstab, @l);
 }
 
-# - when using "$loose", it does not merge in type&options from the fstab
 sub get_info_from_fstab {
-    my ($all_hds, $prefix) = @_;
-    my @l = read_fstab($prefix, '/etc/fstab', 'keep_default');
+    my ($all_hds) = @_;
+    my @l = read_fstab('/etc/fstab', 'keep_default');
     add2all_hds($all_hds, @l)
 }
 

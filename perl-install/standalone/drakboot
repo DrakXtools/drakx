@@ -43,7 +43,7 @@ my $in = 'interactive'->vnew('su');
 
 my $all_hds = fsedit::get_hds();
 fs::get_raw_hds('', $all_hds);
-fs::get_info_from_fstab($all_hds, '');
+fs::get_info_from_fstab($all_hds);
 my $fstab = [ fs::get::fstab($all_hds) ];
 my $bootloader = bootloader::read($fstab);
 

@@ -75,7 +75,7 @@ my $all_hds = fsedit::get_hds({}, $in);
 
 fs::get_raw_hds('', $all_hds);
 
-fs::get_info_from_fstab($all_hds, '');
+fs::get_info_from_fstab($all_hds);
 fs::merge_info_from_mtab([ fs::get::really_all_fstab($all_hds) ]);
 
 $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
