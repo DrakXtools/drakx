@@ -40,6 +40,9 @@ sub read_fstab {
 		    1;
 		}
 	    } split(',', $options));
+	} elsif ($type eq 'smb') {
+	    # prefering type "smbfs" over "smb"
+	    $type = 'smbfs';
 	}
 	my $h = { device => $dev, mntpoint => $mntpoint, type => $type, options => $options, if_($all_options, freq => $freq, passno => $passno) };
 
@@ -88,7 +91,7 @@ sub add2all_hds {
     foreach (@l) {
 	my $s = 
 	    isNfs($_) ? 'nfss' :
-	    isThisFs('smbfs', $_) || isThisFs('smb', $_) ? 'smbs' :
+	    isThisFs('smbfs', $_) ? 'smbs' :
 	    'special';
 	push @{$all_hds->{$s}}, $_;
     }
@@ -564,15 +567,15 @@ sub formatMount_all {
 }
 
 sub mount {
-    my ($dev, $where, $fs, $rdonly) = @_;
-    log::l("mounting $dev on $where as type $fs");
+    my ($dev, $where, $fs, $rdonly, $options) = @_;
+    log::l("mounting $dev on $where as type $fs, options $options");
 
     -d $where or mkdir_p($where);
 
     my @fs_modules = qw(vfat hfs romfs ufs reiserfs xfs jfs ext3);
 
-    if (member($fs, 'smb', 'nfs') && $::isStandalone) {
-	system('mount', $dev, $where) == 0 or die _("mount failed");
+    if (member($fs, 'smb', 'smbfs', 'nfs') && $::isStandalone) {
+	system('mount', $dev, $where, '-o', $options) == 0 or die _("mount failed");
 	return; #- do not update mtab, already done by mount(8)
     } elsif (member($fs, 'ext2', 'proc', 'usbdevfs', 'iso9660', @fs_modules)) {
 	$dev = devices::make($dev) if $fs ne 'proc' && $fs ne 'usbdevfs';
@@ -664,7 +667,7 @@ sub mount_part {
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
-	    mount($dev, $mntpoint, type2fs($part), $rdonly);
+	    mount($dev, $mntpoint, type2fs($part), $rdonly, $part->{options});
 	    rmdir "$mntpoint/lost+found";
 	}
     }
