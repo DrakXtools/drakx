@@ -574,7 +574,13 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	spawn_shell();
 #endif
 	init_modules_insmoding();
-	init_frontend("Welcome to " DISTRIB_NAME " (" VERSION ") " __DATE__ " " __TIME__);
+	init_frontend("Welcome to " DISTRIB_NAME
+#ifdef MANDRAKE_MOVE
+                      ", "
+#else
+                      " (" VERSION ") "
+#endif
+                      __DATE__ " " __TIME__);
 
 	if (IS_EXPERT)
 		expert_third_party_modules();
