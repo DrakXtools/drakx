@@ -418,7 +418,7 @@ sub psUsingHdlist {
     if (!$o_fhdlist || $o_pubkey) {
 	$m->{pubkey} = $o_pubkey;
 	unless ($m->{pubkey}) {
-	    my $pubkey = $o_fpubkey || install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
+	    my $pubkey = install_any::getFile("Mandrake/base/pubkey" . ($hdlist =~ /hdlist(\S*)\.cz2?/ && $1));
 	    $m->{pubkey} = [ $packages->parse_armored_file($pubkey) ];
 	}
     }
