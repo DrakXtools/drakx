@@ -9,7 +9,7 @@ use network;
 use POSIX qw(tmpnam);
 my @messages = (_("tinyfirewall configurator
 
-This configures a personal firewall for this Linux Mandrake machine.
+This configures a personal firewall for this Mandrake Linux machine.
 For a powerful dedicated firewall solution, please look to the
 specialized MandrakeSecurity Firewall distribution."),
 _("We'll now ask you questions about which services you'd like to allow

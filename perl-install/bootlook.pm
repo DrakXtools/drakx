@@ -213,14 +213,14 @@ $global_vbox->pack_start ($x_main_frame, 1, 1, 0);
 
 #deush : hability to choose the runlevel.
 my $runl_hbox = new Gtk::HBox;
-my $runl_button5 = new Gtk::RadioButton _("5");
-my $runl_button1 = new Gtk::RadioButton _("1"), $runl_button5;
+my $runl_button5 = new Gtk::RadioButton ("5");
+my $runl_button1 = new Gtk::RadioButton ("1"), $runl_button5;
 $runl_hbox->pack_start($runl_button1, 0, 0, 0);
-my $runl_button2 = new Gtk::RadioButton _("2"), $runl_button5;
+my $runl_button2 = new Gtk::RadioButton ("2"), $runl_button5;
 $runl_hbox->pack_start($runl_button2, 0, 0, 0);
-my $runl_button3 = new Gtk::RadioButton _("3"), $runl_button5;
+my $runl_button3 = new Gtk::RadioButton ("3"), $runl_button5;
 $runl_hbox->pack_start($runl_button3, 0, 0, 0);
-my $runl_button4 = new Gtk::RadioButton _("4"), $runl_button5;
+my $runl_button4 = new Gtk::RadioButton ("4"), $runl_button5;
 $runl_hbox->pack_start($runl_button4, 0, 0, 0);
 
 $runl_hbox->pack_start($runl_button5, 0, 0, 0);

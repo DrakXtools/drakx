@@ -86,10 +86,10 @@ sub selectLanguage {
 	$o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
 _("Introduction
 
-The operating system and the different components available in the Linux-Mandrake distribution 
+The operating system and the different components available in the Mandrake Linux distribution 
 shall be called the \"Software Products\" hereafter. The Software Products include, but are not 
 restricted to, the set of programs, methods, rules and documentation related to the operating 
-system and the different components of the Linux-Mandrake distribution.
+system and the different components of the Mandrake Linux distribution.
 
 
 1. License Agreement
@@ -124,7 +124,7 @@ liable for any special, incidental, direct or indirect damages whatsoever (inclu
 limitation damages for loss of business, interruption of business, financial loss, legal fees 
 and penalties resulting from a court judgment, or any other consequential loss) arising out 
 of the possession and use of software components or arising out of  downloading software components 
-from one of Linux-Mandrake sites  which are prohibited or restricted in some countries by local laws.
+from one of Mandrake Linux sites  which are prohibited or restricted in some countries by local laws.
 This limited liability applies to, but is not restricted to, the strong cryptography components 
 included in the Software Products.
 
@@ -148,7 +148,7 @@ All rights to the components of the Software Products belong to their respective
 protected by intellectual property and copyright laws applicable to software programs.
 MandrakeSoft S.A. reserves its rights to modify or adapt the Software Products, as a whole or in 
 parts, by all means and for all purposes.
-\"Mandrake\", \"Linux-Mandrake\" and associated logos are trademarks of MandrakeSoft S.A.  
+\"Mandrake\", \"Mandrake Linux\" and associated logos are trademarks of MandrakeSoft S.A.  
 
 
 5. Governing Laws 
@@ -1167,11 +1167,11 @@ Do you really want to quit now?"), 0);
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
-For information on fixes which are available for this release of Linux-Mandrake,
-consult the Errata available from http://www.linux-mandrake.com/.
+For information on fixes which are available for this release of Mandrake Linux,
+consult the Errata available from http://www.mandrakelinux.com/.
 
 Information on configuring your system is available in the post
-install chapter of the Official Linux-Mandrake User's Guide."),
+install chapter of the Official Mandrake Linux User's Guide."),
 	 cancel => '',
 	},      
 	[

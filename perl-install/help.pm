@@ -27,15 +27,15 @@ beginning of installation) will be available after installation, please chose
 them in list above. If you want select all, you just need to select \"All\"."),
 
 selectInstallClass =>
- __("Please choose \"Install\" if there are no previous version of Linux-Mandrake
+ __("Please choose \"Install\" if there are no previous version of Mandrake Linux
 installed or if you wish to use several operating systems.
 
 
-Please choose \"Update\" if you wish to update an already installed version of Linux-Mandrake.
+Please choose \"Update\" if you wish to update an already installed version of Mandrake Linux.
 
 
 Depend of your knowledge in GNU/Linux, you can choose one of the following levels to install or update your
-Linux-Mandrake operating system:
+Mandrake Linux operating system:
 
 	* Recommended: if you have never installed a GNU/Linux operating system choose this. Installation will be
 	  be very easy and you will be asked only on few questions.
@@ -106,10 +106,10 @@ manufacturer's Web site (if you have Internet access) or from Microsoft Windows
 
 doPartitionDisks => 
  __("At this point, you need to choose where to install your
-Linux-Mandrake operating system on your hard drive. If it is empty or if an
+Mandrake Linux operating system on your hard drive. If it is empty or if an
 existing operating system uses all the space available on it, you need to
 partition it. Basically, partitioning a hard drive consists of logically
-dividing it to create space to install your new Linux-Mandrake system.
+dividing it to create space to install your new Mandrake Linux system.
 
 
 Because the effects of the partitioning process are usually irreversible,
@@ -136,7 +136,7 @@ configuration, several solutions can be available:
 
 
 	* Erase entire disk: if you want delete all data and all partitions present on your hard drive and replace them by
-	  your new Linux-Mandrake system, you can choose this option. Be careful with this solution, you will not be
+	  your new Mandrake Linux system, you can choose this option. Be careful with this solution, you will not be
 	  able to revert your choice after confirmation.
 
 
@@ -144,7 +144,7 @@ configuration, several solutions can be available:
 	  all space available on it, you have to create free space for Linux data. To do that you can delete your
 	  Microsoft Windows partition and data (see \"Erase entire disk\" or \"Expert mode\" solutions) or resize your
 	  Microsoft Windows partition. Resizing can be performed without loss of any data. This solution is
-	  recommended if you want use both Linux-Mandrake and Microsoft Windows on same computer.
+	  recommended if you want use both Mandrake Linux and Microsoft Windows on same computer.
 
 
 	  Before choosing this solution, please understand that the size of your Microsoft
@@ -158,7 +158,7 @@ configuration, several solutions can be available:
 
 partition_with_diskdrake => 
  __("At this point, you need to choose what
-partition(s) to use to install your new Linux-Mandrake system. If partitions
+partition(s) to use to install your new Mandrake Linux system. If partitions
 have been already defined (from a previous installation of GNU/Linux or from
 another partitioning tool), you can use existing partitions. In other cases,
 hard drive partitions must be defined.
@@ -256,7 +256,7 @@ With SCSI hard drives, a \"a\" means \"primary hard drive\", a \"b\" means \"sec
 
 takeOverHdChoose => 
  __("Choose the hard drive you want to erase to install your
-new Linux-Mandrake partition. Be careful, all data present on it will be lost
+new Mandrake Linux partition. Be careful, all data present on it will be lost
 and will not be recoverable."),
 
 takeOverHdConfirm => 
@@ -272,7 +272,7 @@ partitions present on this hard drive."),
 resizeFATChoose => 
  __("More than one Microsoft Windows partition have been
 detected on your hard drive. Please choose the one you want resize to install
-your new Linux-Mandrake operating system.
+your new Mandrake Linux operating system.
 
 
 For information, each partition is listed as follow; \"Linux name\", \"Windows
@@ -329,7 +329,7 @@ Click on \"OK\" when you are ready to format partitions.
 
 
 Click on \"Cancel\" if you want to choose other partitions to install your new
-Linux-Mandrake operating system."),
+Mandrake Linux operating system."),
 
 choosePackages => 
  __("You may now select the group of packages you wish to
@@ -366,7 +366,7 @@ none of those CDs, click Cancel. If only some CDs are missing, unselect them,
 then click Ok."),
 
 installPackages => 
- __("Your new Linux-Mandrake operating system is currently being
+ __("Your new Mandrake Linux operating system is currently being
 installed. This operation should take a few minutes (it depends on size you
 choose to install and the speed of your computer).
 
@@ -499,10 +499,10 @@ CUPS and LPR.
 
 CUPS is a new, powerful and flexible printing system for Unix systems (CUPS
 means \"Common Unix Printing System\"). It is the default printing system in
-Linux-Mandrake.
+Mandrake Linux.
 
 
-LPR is the old printing system used in previous Linux-Mandrake distributions.
+LPR is the old printing system used in previous Mandrake Linux distributions.
 
 
 If you don't have printer, click on \"None\"."),
@@ -588,7 +588,7 @@ Please see its documentation if you don't know what choose here.
 You will be able to test your configuration in next step and you will be able to modify it if it doesn't work as you want."),
 
 setRootPassword => 
- __("You can now enter the root password for your Linux-Mandrake system.
+ __("You can now enter the root password for your Mandrake Linux system.
 The password must be entered twice to verify that both password entries are identical.
 
 
@@ -843,7 +843,7 @@ miscellaneous =>
 exitInstall =>
  __("Your system is going to reboot.
 
-After rebooting, your new Linux Mandrake system will load automatically.
+After rebooting, your new Mandrake Linux system will load automatically.
 If you want to boot into another existing operating system, please read
 the additional instructions."),
 );
@@ -906,7 +906,7 @@ the additional instructions."),
 #-
 #-partitionDisks =>
 #- __("In this stage, you may choose what partition(s) use to install your
-#-Linux-Mandrake system."),
+#-Mandrake Linux system."),
 #-
 #-#At this point, hard drive partitions must be defined. (Unless you
 #-#are overwriting a previous install of GNU/Linux and have already defined
@@ -984,7 +984,7 @@ the additional instructions."),
 #-panel.
 #-
 #-
-#-If you install a Linux-Mandrake system on a machine which is part
+#-If you install a Mandrake Linux system on a machine which is part
 #-of an already existing network, the network administrator will
 #-have given you all necessary information (IP address, network
 #-submask or netmask for short, and hostname). If you're setting
@@ -1021,7 +1021,7 @@ the additional instructions."),
 #-for a NetWare printer, except that you need no workgroup information."),
 #-
 #-setRootPassword =>
-#- __("You must now enter the root password for your Linux-Mandrake
+#- __("You must now enter the root password for your Mandrake Linux
 #-system. The password must be entered twice to verify that both
 #-password entries are identical.
 #-
