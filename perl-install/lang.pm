@@ -273,6 +273,14 @@ my %charsets = (
 	"utf8", undef, "-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
 
+my %bigfonts = (
+    Big5     => 'taipei16.pcf.gz',
+    gb2312   => 'gb16fs.pcf.gz',
+    jisx0208 => 'k14.pcf.gz',
+    ksc5601  => 'baekmuk_gulim_h_14.pcf.gz',
+    unicode  => 'cu12.pcf.gz',
+);
+
 #-######################################################################################
 #- Functions
 #-######################################################################################
@@ -414,30 +422,20 @@ sub load_po {
 
     my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;
 
-    local *F;
-    my $pid;
+    my $F;
     unless ($f && -e $f) {
 	-e ($f = "$_/po/$lang.po.bz2") and last foreach @INC;
 	if (-e $f) {
-	    open F, "$ENV{LD_LOADER} bzip2 -dc $f 2>/dev/null |";
+	    open $F, "$ENV{LD_LOADER} bzip2 -dc $f 2>/dev/null |";
 	} else {
-	    -e ($f = "$_/po.cz2") and last foreach @INC;
-	    log::l("trying to load $lang.po from $f");
-	    #open F, "packdrake -x $f '' $lang.po 2>/dev/null |";
-	    unless ($pid = open F, "-|") {
-		eval {
-		    require packdrake;
-		    my $packer = new packdrake($f);
-		    $packer->extract_archive(undef, "$lang.po");
-		};
-		c::_exit(0);
-	    }
+	    require install_any;
+	    $F = install_any::getFile("Mandrake/mdkinst/usr/bin/perl-install/po/$lang.po");
 	}
     } else {
-	open F, $f; #- not returning here help avoiding reading the same multiple times.
+	open $F, $f; #- not returning here help avoiding reading the same multiple times.
     }
     local $_;
-    while (<F>) {
+    while (<$F>) {
 	/^msgstr/ and $state = 1;
 	/^msgid/  && !$fuzzy and $state = 2;
 	s/@/\\@/g;
@@ -465,7 +463,6 @@ sub load_po {
     $s .= ");";
     no strict "vars";
     eval $s;
-    $pid and waitpid $pid, 0;
     !$@;
 }
 
@@ -510,6 +507,14 @@ sub get_x_fontset {
 
     my $l = $languages{$lang}  or return;
     my $c = $charsets{$l->[1]} or return;
+    if (my $f = $bigfonts{$l->[1]}) {
+	my $dir = "/usr/X11R6/lib/X11/fonts";
+	if (! -e "$dir/$f" && $::isInstall) {
+	    unlink "$dir/$_" foreach values %bigfonts;
+	    install_any::remove_bigseldom_used ();
+	    install_any::getAndSaveFile ("$dir/$f");
+	}
+    }
     my ($big, $small) = @$c[5..6];
     ($big, $small) = $big->($size) if ref $big;
     ($big, $small);
