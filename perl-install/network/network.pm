@@ -446,7 +446,11 @@ sub configureNetwork2 {
             $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
             $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
             write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME}); 
-        } else { run_program::rooted($::prefix, "chkconfig", "--del", $_) foreach qw(tmdns zcip) }  # disable zeroconf
+        } else {
+            #- disable zeroconf
+            require services;
+            -f "/etc/rc.d/init.d/$_" and services::do_not_start_service_on_boot($_) foreach qw(tmdns zcip)
+        }
         any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf and $in->do_pkgs->install('pump');
     }
 }
