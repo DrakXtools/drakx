@@ -696,6 +696,8 @@ sub automatic_xconf {
                                                          { allowNVIDIA_rpms => sub { [] }, allowATI_rpms => sub { [] }, allowFB => $o->{allowFB} });
     }
 
+    modules::load_category('various/agpgart'); 
+
     my ($Driver) = cat_('/etc/X11/XF86Config-4') =~ /Section "Device".*Driver\s*"(.*?)"/s;
     if ($Driver eq 'nvidia') {
         modules::load('nvidia');
