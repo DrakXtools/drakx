@@ -52,7 +52,7 @@ sub config_cups {
     local $::isWizard = 0;
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
     $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     my $queue = $printer->{OLD_QUEUE};
@@ -170,14 +170,20 @@ sub auto_detect {
 }
 
 sub wizard_welcome {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
     my $ret;
     my $autodetectlocal = 0;
     my $autodetectnetwork = 0;
     my $autodetectsmb = 0;
+    # If networking is configured, start it, but don't ask the user to
+    # configure networking.
+    if (!check_network($printer, $in, $upNetwork, 1)) { return 0 };
+    my $havelocalnetworks = (printer::getIPsInLocalNetworks() != ());
     $autodetectlocal = 1 if ($printer->{AUTODETECTLOCAL});
-    $autodetectnetwork = 1 if ($printer->{AUTODETECTNETWORK});
-    $autodetectsmb = 1 if ($printer->{AUTODETECTSMB});
+    $autodetectnetwork = 1 if ($printer->{AUTODETECTNETWORK} &&
+			       $havelocalnetworks);
+    $autodetectsmb = 1 if ($printer->{AUTODETECTSMB} &&
+			   $havelocalnetworks);
     if ($in) {
 	eval {
 	    if ($::expert) {
@@ -192,33 +198,50 @@ It asks you for all necessary information to set up the printer and gives you ac
 	    } else {
 		$ret = $in->ask_from_
 		    ({title => _("Add a new printer"),
-		      messages => ($printer->{SPOOLER} ne "pdq" ? _("
+		      messages => ($printer->{SPOOLER} ne "pdq" ? 
+				   ($havelocalnetworks ? _("
 Welcome to the Printer Setup Wizard
 
 This wizard will help you to install your printer(s) connected to this computer, connected directly to the network or to a remote Windows machine.
 
-If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that they can be auto-detected. Also your network printer(s) and you Windows machines must be connected and turned on.
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) and you Windows machines must be connected and turned on.
 
 Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network and/or Windows-hosted printers when you don't need it.
 
  Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.") : _("
 Welcome to the Printer Setup Wizard
 
+This wizard will help you to install your printer(s) connected to this computer.
+
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
+
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.")) : 
+				   ($havelocalnetworks ? _("
+Welcome to the Printer Setup Wizard
+
 This wizard will help you to install your printer(s) connected to this computer or connected directly to the network.
 
-If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that they can be auto-detected. Also your network printer(s) must be connected and turned on.
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected. Also your network printer(s) must be connected and turned on.
 
 Note that auto-detecting printers on the network takes longer than the auto-detection of only the printers connected to this machine. So turn off the auto-detection of network printers when you don't need it.
 
- Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now."))},
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.") : _("
+Welcome to the Printer Setup Wizard
+
+This wizard will help you to install your printer(s) connected to this computer.
+
+If you have printer(s) connected to this machine, Please plug it/them in on this computer and turn it/them on so that it/they can be auto-detected.
+
+ Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.")))},
 		     [
 		      { text => _("Auto-detect printers connected to this machine"), type => 'bool',
 			val => \$autodetectlocal},
-		      { text => _("Auto-detect printers connected directly to the local network"), type => 'bool',
-			val => \$autodetectnetwork},
-		      ($printer->{SPOOLER} ne "pdq" ?
-		       { text => _("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
-			 val => \$autodetectsmb } : ())
+		      ($havelocalnetworks ?
+		       ({ text => _("Auto-detect printers connected directly to the local network"), type => 'bool',
+			  val => \$autodetectnetwork},
+			($printer->{SPOOLER} ne "pdq" ?
+			 { text => _("Auto-detect printers connected to machines running Microsoft Windows"), type => 'bool',
+			   val => \$autodetectsmb } : ())) : ())
 		      ]);
 		if ($autodetectlocal) {
 		    $printer->{AUTODETECTLOCAL} = 1;
@@ -270,7 +293,7 @@ sub setup_local_autoscan {
     # If the user requested auto-detection of remote printers, check
     # whether the network functionality is configured and running
     if ($printer->{AUTODETECTNETWORK} || $printer->{AUTODETECTSMB}) {
-	if (!check_network($printer, $in, $upNetwork)) { return 0 };
+	if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
     }
 
     my @autodetected;
@@ -278,7 +301,7 @@ sub setup_local_autoscan {
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
 	if ((!$::testing) &&
-	    ($printer->{AUTODETECTSMB}) &&
+	    (!$expert_or_modify) && ($printer->{AUTODETECTSMB}) &&
 	    (!printer::files_exist((qw(/usr/bin/smbclient))))) {
 	    $in->do_pkgs->install('samba-client');
 	}
@@ -560,7 +583,7 @@ sub setup_lpd {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
     $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
@@ -631,7 +654,7 @@ sub setup_smb {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
     $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
@@ -682,6 +705,10 @@ sub setup_smb {
     my $oldmenuchoice = "";
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
+	if ((!$::testing) &&
+	    (!printer::files_exist((qw(/usr/bin/smbclient))))) {
+	    $in->do_pkgs->install('samba-client');
+	}
 	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
 	@autodetected = auto_detect(0, 0, 1);
 	for my $p (@autodetected) {
@@ -819,7 +846,7 @@ sub setup_ncp {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
     $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
@@ -889,7 +916,7 @@ sub setup_socket {
 
     # Check whether the network functionality is configured and
     # running
-    if (!check_network($printer, $in, $upNetwork)) { return 0 };
+    if (!check_network($printer, $in, $upNetwork, 0)) { return 0 };
 
     $in->set_help('setupSocket') if $::isInstall;
 
@@ -1077,8 +1104,8 @@ complete => sub {
     );
 
     # Non-local printer, check network and abort if no network available
-    if (($printer->{currentqueue}{connect} !~ m!^file:/!) &&
-        (!check_network($printer, $in, $upNetwork))) { return 0 };
+    if (($printer->{currentqueue}{connect} !~ m!^(file|ptal):/!) &&
+        (!check_network($printer, $in, $upNetwork, 0))) { return 0 };
 
     # If the chosen protocol needs additional software, install it.
 
@@ -2343,7 +2370,7 @@ sub check_network {
     # that the network is up and running so that the remote printer is
     # reachable.
 
-    my ($printer, $in, $upNetwork) = @_;
+    my ($printer, $in, $upNetwork, $dontconfigure) = @_;
 
     # Any additional dialogs caused by this subroutine should appear as
     # extra windows and not embedded in the "Add printer" wizard.
@@ -2355,7 +2382,8 @@ sub check_network {
     # (otherwise the network is not configured yet and drakconnect has to be
     # started)
 
-    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
+    if ((!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) &&
+	(!$dontconfigure)) {
 	my $go_on = 0;
 	while (!$go_on) {
 	    my $choice = _("Configure the network now");
@@ -2393,7 +2421,7 @@ sub check_network {
     if (printer::network_running()) { return 1 }
 
     # The network is configured now, start it.
-    if (!start_network($in, $upNetwork)) {
+    if ((!start_network($in, $upNetwork)) && (!$dontconfigure)) {
 	$in->ask_warn(_("Configuration of a remote printer"), 
 ($::isInstall ?
 _("The network configuration done during the installation cannot be started now. Please check whether the network gets accessable after booting your system and correct the configuration using the Mandrake Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the Mandrake Control Center, section \"Hardware\"/\"Printer\"") :
@@ -3021,7 +3049,7 @@ sub main {
 		# Wizard welcome screen
 		$::Wizard_no_previous = 1;
 		undef $::Wizard_no_cancel; undef $::Wizard_finished;
-		wizard_welcome($printer, $in) or do {
+		wizard_welcome($printer, $in, $upNetwork) or do {
 		    wizard_close($in, 0);
 		    next;
 		};
@@ -3097,6 +3125,7 @@ sub main {
 		wizard_close($in, 0) if ($@ =~ /wizcancel/);
 	    } else {
 		$::expert or $printer->{TYPE} = "LOCAL";
+		$::expert or wizard_welcome($printer, $in, $upNetwork) or next;
 		!$::expert or choose_printer_type($printer, $in) or next;
 		#- Cancelling the printer connection type window
 		#- should not restart printerdrake in recommended mode,
@@ -3104,11 +3133,10 @@ sub main {
 		#- the "Add printer" sequence should be stopped when there
 		#- are no local printers. In expert mode this is the second
 		#- dialog of the sequence.
-		$continue = 1 if ($::expert || !$::isInstall);
+		$continue = 1;
 		setup_printer_connection($printer, $in, $upNetwork) or next;
 		#- Cancelling one of the following dialogs should
 		#- restart printerdrake
-		$continue = 1;
 		if (($::expert) or ($printer->{MANUAL}) or
 		    ($printer->{MORETHANONE})) {
 		    choose_printer_name($printer, $in) or next;
