@@ -1178,11 +1178,14 @@ sub config_dvd {
 
 sub config_mtools {
     my ($prefix) = @_;
+    my $file = "$prefix/etc/mtools.conf";
+    -e $file or return;
+
     my ($f1, $f2) = detect_devices::floppies_dev();
     substInFile {
 	s|drive a: file="(.*?)"|drive a: file="/dev/$f1"|;
 	s|drive b: file="(.*?)"|drive b: file="/dev/$f2"| if $f2;
-    } "$prefix/etc/mtools.conf"
+    } $file;
 }
 
 1;
