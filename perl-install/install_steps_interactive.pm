@@ -1178,15 +1178,6 @@ sub configurePrinter {
     printer::printerdrake::main($printer, $o, $clicked, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
 }
-
-sub cleanupPrinter {
-    my ($o) = @_;
-    #- Clean up $o->{printer} so that the records for an auto-installation
-    #- contain only the important stuff
-    return if !defined($o->{printer});
-    require printer::printerdrake;
-    printer::printerdrake::final_cleanup($o->{printer});
-}
     
 #------------------------------------------------------------------------------
 sub setRootPassword {

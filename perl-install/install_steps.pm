@@ -721,8 +721,11 @@ sub configurePrinter {
 			     if_($o->do_pkgs->is_installed('gimp'), 'gimpprint'));
     };
     if ($@ =~ /rpm not found/) {
-	$o->cleanupPrinter;
-	log::l($@);
+	log::l("ERROR: $@");
+	if ($o->{printer}) {
+	    require printer::printerdrake;
+	    printer::printerdrake::final_cleanup($o->{printer});
+	}
 	return;
     }
 
