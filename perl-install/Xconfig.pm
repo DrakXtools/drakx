@@ -1,6 +1,7 @@
 package Xconfig;
 
 use common qw(:common :file :system);
+use mouse;
 
 # otherwise uses the rule substr($keymap, 0, 2)
 my %keymap_translate = (
@@ -17,18 +18,14 @@ sub keymap_translate {
 
 
 sub getinfo {
-    my $o = {};
+    my $o = { monitor => { hsyncrange => "30-54" } };
 #    getinfoFromXF86Config($o);
     getinfoFromDDC($o);
     getinfoFromSysconfig($o);
-    $o->{mouse}{emulate3buttons} = 1;
 
-    unless ($o->{mouse}{XMOUSETYPE}) {
-	my ($type, $dev) = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-	$o->{mouse}{XMOUSETYPE} ||= $type;
-	$o->{mouse}{device} ||= "/dev/$dev";
-    }
-    $o->{mouse}{device} ||= "/dev/mouse" if -e "/dev/mouse";
+    add2hash($o->{mouse}, mouse::detect()) unless $o->{mouse}{XMOUSETYPE};
+
+    $o->{mouse}{device} ||= "mouse" if -e "/dev/mouse";
     $o;
 }
 
@@ -45,7 +42,7 @@ sub getinfoFromXF86Config {
 	    $o->{keyboard}{xkb_keymap} ||= $1 if /^\s*XkbLayout\s+"(.*?)"/;
 	} elsif (/^Section "Pointer"/ .. /^EndSection/) {
 	    $o->{mouse}{XMOUSETYPE} ||= $1 if /^\s*Protocol\s+"(.*?)"/;
-	    $o->{mouse}{device} ||= $1 if /^\s*Device\s+"(.*?)"/;
+	    $o->{mouse}{device} ||= $1 if m|^\s*Device\s+"/dev/(.*?)"|;
 	} elsif (my $i = /^Section "Device"/ .. /^EndSection/) {
 	    if ($i = 1 && $c{type} && $c{type} ne "Generic VGA") {
 		add2hash($o->{card} ||= {}, \%c);
@@ -81,9 +78,9 @@ sub getinfoFromXF86Config {
 
 sub getinfoFromSysconfig {
     my $o = shift || {};
-    if (my %mouse = getVarsFromSh "/etc/sysconfig/mouse") {
-	$o->{mouse}{XMOUSETYPE} ||= $mouse{XMOUSETYPE};
-    }
+
+    add2hash($o->{mouse}, mouse::read("/etc/sysconfig/mouse"));
+
     if (my %keyboard = getVarsFromSh "/etc/sysconfig/keyboard") {
 	$keyboard{KEYTABLE} or last;
 	$o->{keyboard}{xkb_keymap} ||= keymap_translate($keyboard{KEYTABLE});
@@ -98,7 +95,7 @@ sub getinfoFromDDC {
     my ($m, @l) = `ddcxinfos`;
     $? == 0 or return $o;
 
-    $o->{card}{memory} = to_int($m);
+    $o->{card}{memory} ||= to_int($m);
     while (($_ = shift @l) ne "\n") {
 	my ($depth, $x, $y) = split;
 	$depth = int(log($depth) / log(2));
@@ -107,11 +104,12 @@ sub getinfoFromDDC {
 	    push @{$o->{card}{depth}{32}}, [ $x, $y ] if $depth == 24;
 	}
     }
-    my ($h, $v, @m) = @l;
+    my ($h, $v, $size, @m) = @l;
 
     chop $h; chop $v;
     $O->{hsyncrange} ||= $h;
     $O->{vsyncrange} ||= $v;
-    $O->{modelines} ||= join '', @l;
+    $O->{size} ||= to_float($size);
+    $O->{modelines} ||= join '', @m;
     $o;
 }

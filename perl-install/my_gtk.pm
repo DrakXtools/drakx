@@ -38,7 +38,8 @@ sub main($;$) {
     my ($o, $f) = @_;
     $o->show;
 
-    do { 
+    do {
+	local $::setstep = 1;
 	Gtk->main 
     } while ($o->{retval} && $f && !&$f());
     $o->destroy;
@@ -377,8 +378,9 @@ sub _ask_from_list($$$$) {
 	    $curr++ if $starting_word eq '' || $starting_word eq $c;
 	    $starting_word .= $c unless $starting_word eq $c;
 	
+	    my $word = quotemeta $starting_word;
 	    my $j; for ($j = 0; $j < @$l; $j++) {
-		 $l->[($j + $curr) % @$l] =~ /^$starting_word/i and last;
+		 $l->[($j + $curr) % @$l] =~ /^$word/i and last;
 	    }
 	    $j == @$l ?
 	      $starting_word = '' :

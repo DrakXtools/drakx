@@ -18,6 +18,7 @@ use install_any;
 use detect_devices;
 use timezone;
 use network;
+use mouse;
 use modules;
 use lang;
 use pkgs;
@@ -87,7 +88,26 @@ sub selectInstallClass($@) {
 }
 
 #------------------------------------------------------------------------------
-sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1]) }
+sub selectMouse {
+    my ($o, $force) = @_;
+
+    my $name = $o->{mouse}{FULLNAME};
+    if (!$name || $::expert || $force) {
+	$name = $o->ask_from_list_('', _("Which mouse do you have"), [ mouse::names() ], $name);
+	$o->{mouse} = mouse::name2mouse($name);
+    }
+    my $b = $o->{mouse}{nbuttons} < 3;
+    $o->{mouse}{XEMU3} = 'yes' if $::expert && $o->ask_yesorno('', _("Emulate third button"), $b) || $b;
+
+    $o->{mouse}{device} = mouse::serial_ports_names2dev(
+	$o->ask_from_list(_("Mouse Port"),
+			  _("Which serial port is your mouse connected to?"),
+			  [ mouse::serial_ports_names() ])) if $o->{mouse}{device} eq "ttyS";
+
+    $o->SUPER::selectMouse;
+}
+#------------------------------------------------------------------------------
+sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1], $_[2]) }
 #------------------------------------------------------------------------------
 sub rebootNeeded($) {
     my ($o) = @_;
@@ -123,9 +143,6 @@ sub setPackages {
     my $w = $o->wait_message('', _("Searching for available packages"));
     $o->SUPER::setPackages($install_classes);
 }
-
-#------------------------------------------------------------------------------
-#-mouse
 
 #------------------------------------------------------------------------------
 sub configureNetwork($) {
@@ -617,7 +634,7 @@ sub load_thiskind {
 #------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
-    my @l = $o->load_thiskind($type);
+    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', "Skip $type pci probe", 0);
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	my $msg = @l ?
@@ -627,14 +644,15 @@ sub setup_thiskind {
 	    
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;
-	my $r = $o->ask_from_list_('', $msg, $opt);
-	$r eq "No" and return;
-	if ($r eq "Yes") {
+	my $r = "Yes";
+	$r = $o->ask_from_list_('', $msg, $opt) unless $at_least_one && @l == 0;
+	if ($r eq "No") { return }
+	elsif ($r eq "Yes") {
 	    my @r = $o->loadModule($type) or return;
 	    push @l, \@r;
 	} else {
-	     $o->ask_warn('', [ pci_probing::main::list() ]);
-	 }
+	    $o->ask_warn('', [ pci_probing::main::list() ]);
+	}
     }
 }
 

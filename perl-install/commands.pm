@@ -40,9 +40,10 @@ sub rmdir_ { foreach (@_) { rmdir $_ or die "rmdir: can't remove $_\n" } }
 sub lsmod { print "Module                  Size  Used by\n"; cat("/proc/modules"); }
 
 sub grep_ { 
-    my ($h, $v) = getopts(\@_, qw(hv));
+    my ($h, $v, $i) = getopts(\@_, qw(hvi));
     @_ == 0 || $h and die "usage: grep <regexp> [files...]\n";
     my $r = shift;
+    $r = qr/$r/i if $i;
     @ARGV = @_; (/$r/ ? $v || print : $v && print) while <> 
 }
 

@@ -16,6 +16,25 @@ $resolution_wanted = "1024x768";
 @accelservers = qw(S3 Mach32 Mach8 8514 P9000 AGX W32 Mach64 I128 S3V 3DLabs);
 @allservers = (qw(Mono VGA16), @svgaservers, @accelservers);
 
+{ #- @monitorSize2resolution
+    my %l = my @l = ( #- size in inch
+	13 => "640x480",
+	14 => "800x600",
+	15 => "800x600",
+	16 => "1024x768",
+	17 => "1152x864",
+	18 => "1280x1024",
+	19 => "1280x1024",
+        20 => "1600x1200",
+    );
+    for (my $i = 0; $i < $l[0]; $i++) {
+	$monitorSize2resolution[$i] = $l[1];
+    }
+    while (my ($s, $r) = each %l) {
+	$monitorSize2resolution[$s] = $r;
+    }
+}
+
 %videomemory = (
     __("256 kb") => 256, 
     __("512 kb") => 512, 
@@ -59,6 +78,14 @@ $resolution_wanted = "1024x768";
 	"31.5-94.0",
 );
 
+%min_hsync4wres = (
+	 640 => 31.5,
+	 800 => 35.1,
+	1024 => 35.5,
+	1152 => 44.0,
+	1280 => 51.0,
+	1600 => 75.0,
+);
 
 #- * Screen/video card configuration. 
 %ramdacs = (

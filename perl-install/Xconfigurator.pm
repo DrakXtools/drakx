@@ -2,10 +2,10 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @hsyncranges @vsyncranges %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
 
 use pci_probing::main;
-use common qw(:common :file);
+use common qw(:common :file :functional);
 use log;
 
 use Xconfigurator_consts;
@@ -125,12 +125,18 @@ sub rewriteInittab {
 }
 
 sub keepOnlyLegalModes {
-    my ($card) = @_;
-    my $mem = 1024 * ($card->{memory} || return);
+    my ($card, $monitor) = @_;
+    my $mem = 1024 * ($card->{memory} || 99999);
+    my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
-	@$res = grep { $mem >= product(@$_, $depth / 8)	} @$res;
+	@$res = grep { 
+	    $mem >= product(@$_, $depth / 8) &&
+	    $hsync >= ($min_hsync4wres{$_->[0]} || 0)
+	} @$res;
+	delete $card->{depth}{$depth} if @$res == 0;
     }
+    
 }
 
 sub cardConfigurationAuto() {
@@ -217,6 +223,8 @@ sub testConfig($) {
 
     write_XF86Config($o, $tmpconfig);
 
+    unlink "/tmp/.X9-lock";
+
     local *F;
     open F, "$prefix$o->{card}{prog} :9 -probeonly -pn -xf86config $tmpconfig 2>&1 |";
     foreach (<F>) {
@@ -252,6 +260,8 @@ sub testFinalConfig($;$) {
     $auto 
       or $in->ask_yesorno(_("Test configuration"), _("Do you want to test the configuration?"))
       or return 1;
+
+    unlink "$prefix/tmp/.X9-lock";
 
     my $pid; unless ($pid = fork) {
 	my @l = "X";
@@ -330,8 +340,7 @@ You can switch if off if you want, you'll hear a beep when it's over")) or retur
 }
 
 sub autoDefaultDepth($$) {
-    my ($card, $resolution_wanted) = @_;
-    my ($wres_wanted) = split 'x', $resolution_wanted;
+    my ($card, $wres_wanted) = @_;
     my ($best, $depth);
 
     while (my ($d, $r) = each %{$card->{depth}}) {
@@ -343,13 +352,17 @@ sub autoDefaultDepth($$) {
     $best || $depth or die "no valid modes";
 }
 
-sub chooseResolutions($$) {
-    my ($card, $chosen_depth) = @_;
+sub autoDefaultResolution(;$) {
+    my $size = round(shift || 14); #- assume a small monitor (size is in inch)
+    $monitorSize2resolution[$size] || 
+      $monitorSize2resolution[$#monitorSize2resolution]; #- no corresponding resolution for this size. It means a big monitor, take biggest we have
+}
 
+sub chooseResolutions($$;$) {
+    my ($card, $chosen_depth, $chosen_w) = @_;
     my $W = my_gtk->new(_("Resolution"));
     my %txt2depth = reverse %depths;
-    my $chosen_w = 9999999; #- will be set by the combo callback
-    my ($r, $depth_combo, %w2depth, %w2h, %w2widget);
+    my ($r, $best_w, $depth_combo, %w2depth, %w2h, %w2widget);
 
     my $set_depth = sub { $depth_combo->entry->set_text(translate($depths{$chosen_depth})) };
 
@@ -361,11 +374,15 @@ sub chooseResolutions($$) {
 	foreach (@$res) {
 	    $w2h{$_->[0]} = $_->[1];
 	    push @{$w2depth{$_->[0]}}, $depth;
+
+	    $best_w = max($_->[0], $best_w) if $_->[0] <= $chosen_w;
 	}
     }
+    $chosen_w = $best_w;
     while (my ($w, $h) = each %w2h) {
 	my $V = $w . "x" . $h;
 	$w2widget{$w} = $r = new Gtk::RadioButton($r ? ($V, $r) : $V);
+	&$set($r) if $chosen_w == $w;
 	$r->signal_connect("clicked" => sub {
 			       $ignore and return;
 			       $chosen_w = $w;
@@ -397,18 +414,16 @@ sub chooseResolutions($$) {
        $chosen_w > $w and &$set($w2widget{$chosen_w = $w});
     });
     &$set_depth();
+    $W->{ok}->grab_focus;
 
     $W->main or return;
     ($chosen_depth, $chosen_w);
 }
 
 
-sub resolutionsConfiguration($$) {
-    my ($o, $option) = @_;
+sub resolutionsConfiguration($%) {
+    my ($o, %options) = @_;
     my $card = $o->{card};
-    my $auto = $option eq 'auto';
-    my $nowarning = $auto || $option eq 'nowarning';
-    my $noauto = $option eq 'noauto';
 
     #- For the mono and vga16 server, no further configuration is required.
     if (member($card->{server}, "Mono", "VGA16")) {
@@ -445,35 +460,38 @@ sub resolutionsConfiguration($$) {
 	$card->{depth}{$_} = [ map { [ split "x" ] } @resolutions ] 
 	  foreach @depths;
 
-	if ($nowarning || (!$noauto && $in->ask_okcancel(_("Automatic resolutions"), 
+	unless ($options{noauto}) {
+	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"), 
 _("I can try to find the available resolutions (eg: 800x600).
 Alas it can freeze sometimes
-Do you want to try?")))) {
-	    autoResolutions($o, $nowarning);
-	    is_empty_hash_ref($card->{depth}) and $in->ask_warn('', 
+Do you want to try?"))) {
+		autoResolutions($o, $options{nowarning});
+		is_empty_hash_ref($card->{depth}) and $in->ask_warn('', 
 _("No valid modes found
 Try with another video card or monitor")), return;
+	    }
 	}
     }
 
     #- sort resolutions in each depth
     foreach (values %{$card->{depth}}) {
-	my $i;
+	my $i = 0;
 	@$_ = grep { first($i != $_->[0], $i = $_->[0]) }
 	  sort { $b->[0] <=> $a->[0] } @$_;
     }
 
-    #- remove unusable resolutions (based on the video memory size)
-    keepOnlyLegalModes($card);
+    #- remove unusable resolutions (based on the video memory size and the monitor hsync rate)
+    keepOnlyLegalModes($card, $o->{monitor});
 
-    my $res = $o->{resolution_wanted} || $resolution_wanted;
-    my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $res) };
+    my $res = $o->{resolution_wanted} || autoDefaultResolution($o->{monitor}{size});
+    my $wres = first(split 'x', $res);
+    my $depth = eval { $card->{default_depth} || autoDefaultDepth($card, $wres) };
 
-    $auto or ($depth, $res) = chooseResolutions($card, $depth) or return;
+    $options{auto} or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
 
-    unless ($res) {
+    unless ($wres) {
 	delete $card->{depth};
-	return resolutionsConfiguration($o, 'noauto');
+	return resolutionsConfiguration($o, noauto => 1);
     }
 
     #- needed in auto mode when all has been provided by the user
@@ -481,7 +499,7 @@ Try with another video card or monitor")), return;
 
     #- remove all biggest resolution (keep the small ones for ctl-alt-+)
     #- otherwise there'll be a virtual screen :(
-    $card->{depth}{$depth} = [ grep { $_->[0] <= $res } @{$card->{depth}{$depth}} ];
+    $card->{depth}{$depth} = [ grep { $_->[0] <= $wres } @{$card->{depth}{$depth}} ];
     $card->{default_depth} = $depth;
     1;
 }
@@ -510,15 +528,15 @@ sub write_XF86Config {
     $O = $o->{mouse};
     print F $pointersection_text1;
     print F qq(    Protocol    "$O->{XMOUSETYPE}"\n);
-    print F qq(    Device      "$O->{device}"\n);
+    print F qq(    Device      "/dev/$O->{device}"\n);
     #- this will enable the "wheel" or "knob" functionality if the mouse supports it 
     print F "    ZAxisMapping 4 5\n" if
       member($O->{XMOUSETYPE}, qw(IntelliMouse IMPS/2 ThinkingMousePS/2 NetScrollPS/2 NetMousePS/2 MouseManPlusPS/2));
 
     print F $pointersection_text2;
-    print F "#" unless $O->{emulate3buttons};
+    print F "#" unless $O->{XEMU3};
     print F "    Emulate3Buttons\n";
-    print F "#" unless $O->{emulate3buttons};
+    print F "#" unless $O->{XEMU3};
     print F "    Emulate3Timeout    50\n\n";
     print F "# ChordMiddle is an option for some 3-button Logitech mice\n\n";
     print F "#" unless $O->{chordmiddle};
@@ -593,7 +611,7 @@ Section "Screen"
 	    print F qq(    EndSubsection\n);
 	}
 	print F "EndSection\n";
-    };
+    }; #-"
     
     #- SVGA screen section.
     print F qq(
@@ -660,7 +678,7 @@ sub main {
 
     $o->{monitor} = monitorConfiguration($o->{monitor});
 
-    my $ok = resolutionsConfiguration($o, $::auto && 'auto' || $::noauto && 'noauto' || '');
+    my $ok = resolutionsConfiguration($o, auto => $::auto, noauto => $::noauto);
     
     $ok &&= testFinalConfig($o, $::auto);
 
@@ -670,10 +688,10 @@ sub main {
 	my %c = my @c = (
 	   __("Change Monitor") => sub { $o->{monitor} = monitorConfiguration() },
            __("Change Graphic card") => sub { $o->{card} = cardConfiguration('', 'noauto') },
-	   __("Change Resolution") => sub { resolutionsConfiguration($o, 'noauto') },
+	   __("Change Resolution") => sub { resolutionsConfiguration($o, noauto => 1) },
 	   __("Automatical resolutions search") => sub { 
 	       delete $o->{card}{depth};
-	       resolutionsConfiguration($o, 'nowarning');
+	       resolutionsConfiguration($o, nowarning => 1);
 	   },
 	   __("Show information") => sub { show_info($o) },
 	   __("Test again") => sub { $ok = testFinalConfig($o, 1) },

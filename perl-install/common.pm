@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sum sign product bool listlength bool2text to_int ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round_up round_down first second top uniq translate untranslate warp_text) ],
+    common     => [ qw(__ min max sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text) ],
     functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -46,7 +46,8 @@ sub first { $_[0] }
 sub second { $_[1] }
 sub top { $_[$#_] }
 sub uniq { my %l; @l{@_} = (); keys %l }
-sub to_int { $_[0] =~ /(\d+)/; $1 }
+sub to_int { $_[0] =~ /(\d*)/; $1 }
+sub to_float { $_[0] =~ /(\d*(\.\d*)?)/; $1 }
 sub ikeys { my %l = @_; sort { $a <=> $b } keys %l }
 sub add2hash { my ($a, $b) = @_; while (my ($k, $v) = each %{$b || {}}) { $a->{$k} ||= $v } }
 sub member { my $e = shift; foreach (@_) { $e eq $_ and return 1 } 0 }
@@ -59,6 +60,7 @@ sub strcpy { substr($_[0], $_[2] || 0, length $_[1]) = $_[1] }
 sub cat_ { local *F; open F, $_[0] or $_[1] ? die "cat of file $_[0] failed: $!\n" : return; my @l = <F>; wantarray ? @l : join '', @l }
 sub chop_ { map { my $l = $_; chomp $l; $l } @_ }
 sub divide { my $d = int $_[0] / $_[1]; wantarray ? ($d, $_[0] % $_[1]) : $d }
+sub round { int ($_[0] + 0.5) }
 sub round_up { my ($i, $r) = @_; $i += $r - ($i + $r - 1) % $r - 1; }
 sub round_down { my ($i, $r) = @_; $i -= $i % $r; }
 sub is_empty_array_ref { my $a = shift; !defined $a || @$a == 0 }

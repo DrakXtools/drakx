@@ -275,7 +275,6 @@ sub install {
 
     foreach my $p (@$toInstall) {
 	eval { getHeader($p) }; $@ and next;
-	$p->{installed} = 1;
 	$p->{file} ||= sprintf "%s-%s-%s.%s.rpm",
 	                       $p->{name}, $p->{version}, $p->{release}, 
 			       c::headerGetEntry(getHeader($p), 'arch');
@@ -313,4 +312,6 @@ sub install {
     c::rpmtransFree($trans); 
     c::rpmdbClose($db);
     log::l("rpm database closed");
+
+    $_->{installed} = 1 foreach @$toInstall;
 }

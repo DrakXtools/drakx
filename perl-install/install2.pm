@@ -16,6 +16,7 @@ use help;
 use network;
 use lang;
 use keyboard;
+use mouse;
 use fs;
 use fsedit;
 use devices;
@@ -36,13 +37,13 @@ my @installSteps = (
   selectLanguage     => [ __("Choose your language"), 1, 1 ],                                
   selectPath         => [ __("Choose install or upgrade"), 0, 0 ],                           
   selectInstallClass => [ __("Select installation class"), 1, 1, "selectPath" ],             
+  selectMouse        => [ __("Configure mouse"), 1, 1 ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1 ],                                
   setupSCSI          => [ __("Setup SCSI"), 1, 0 ],	                                     
   partitionDisks     => [ __("Setup filesystems"), 1, 0 ],                                   
   formatPartitions   => [ __("Format partitions"), 1, -1, "partitionDisks" ],                
   choosePackages     => [ __("Choose packages to install"), 1, 1, "selectInstallClass" ],    
   doInstallStep      => [ __("Install system"), 1, -1, ["formatPartitions", "selectPath"] ], 
-  configureMouse     => [ __("Configure mouse"), 1, 1, "formatPartitions" ],                 
   configureNetwork   => [ __("Configure networking"), 1, 1, "formatPartitions" ],            
   configureTimezone  => [ __("Configure timezone"), 1, 1, "doInstallStep" ],                 
 #-  configureServices => [ __("Configure services"), 0, 0 ],                                  
@@ -205,6 +206,12 @@ sub selectLanguage {
 }
 
 #------------------------------------------------------------------------------
+sub selectMouse { 
+    $o->selectMouse($_[0]);
+    addToBeDone { mouse::write($o->{mouse}, $o->{prefix}); } 'formatPartitions';
+}
+
+#------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($clicked) = $_[0];
     return if $::beginner && !$clicked;
@@ -240,7 +247,7 @@ sub setupSCSI {
     my ($clicked) = $_[0];
     $o->{autoSCSI} ||= $::beginner;
 
-    $o->setupSCSI($o->{autoSCSI} && !$clicked);
+    $o->setupSCSI($o->{autoSCSI} && !$clicked, $clicked);
 }
 
 #------------------------------------------------------------------------------
@@ -305,8 +312,6 @@ sub doInstallStep {
     $o->afterInstallPackages;
 }
 
-#------------------------------------------------------------------------------
-sub configureMouse { $o->mouseConfig }
 #------------------------------------------------------------------------------
 sub configureNetwork { 
     my ($clicked, $entered) = @_;
@@ -432,7 +437,7 @@ sub main {
     $ENV{LD_LIBRARY_PATH} = "";
 
     #- needed very early for install_steps_graphical
-    $o->{mouse} = install_any::mouse_detect() unless $::testing || $o->{mouse};
+    $o->{mouse} ||= mouse::detect() unless $::testing;
 
     $::o = $o = $::auto_install ? 
       install_steps->new($o) : 
@@ -455,7 +460,7 @@ sub main {
     MAIN: for ($o->{step} = $o->{steps}{first};; $o->{step} = getNextStep()) {
 	$o->{steps}{$o->{step}}{entered}++;
 	$o->enteringStep($o->{step});
-	eval { 
+	eval {
 	    &{$install2::{$o->{step}}}($clicked, $o->{steps}{$o->{step}}{entered});
 	};
 	$o->kill_action;

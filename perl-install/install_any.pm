@@ -86,12 +86,6 @@ sub spawnShell {
     exec {"/bin/sh"} "-/bin/sh" or log::l("exec of /bin/sh failed: $!");
 }
 
-sub mouse_detect() {
-    my %l;
-    @l{qw(MOUSETYPE XMOUSETYPE DEVICE)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
-    \%l;
-}
-
 sub shells($) {
     my ($o) = @_;
     my @l = grep { -x "$o->{prefix}$_" } @{$o->{shells}};

@@ -266,9 +266,7 @@ $spooldir       = "/var/spool/lpd";
 
 #-#####################################################################################
 
-sub set_prefix($) {
-    ($prefix) = @_;
-}
+sub set_prefix($) { $prefix = $_[0]; }
 #-*****************************************************************************
 #- read function
 #-*****************************************************************************
@@ -276,19 +274,17 @@ sub set_prefix($) {
 #- Read the printer database from dbpath into memory
 #------------------------------------------------------------------------------
 sub read_printer_db(;$) {
-    my ($dbpath) = @_;
-    
-    $dbpath = $prefix . ($dbpath || $PRINTER_DB_FILE);
+    my $dbpath = $prefix . ($_[0] || $PRINTER_DB_FILE);
 
     %thedb and return;
 
     local *DBPATH;		#-don't have to do close
-    open DBPATH, "<$dbpath" or die "An error has occurred on $dbpath : $!";
+    open DBPATH, $dbpath or die "An error has occurred on $dbpath : $!";
       
     while (<DBPATH>) {
 	if (/^StartEntry:\s(\w*)/) {
 	    my $entryname = $1;
-	    my $entry = {};
+	    my $entry;
 	      
 	    $entry->{ENTRY} = $entryname;
 	      
@@ -363,7 +359,7 @@ sub create_config_file($$%) {
     
     #-TODO my $oldmask = umask 0755;
 
-    open IN , "<$in"  or die "Can't open $in $!";
+    open IN , $in  or die "Can't open $in $!";
     if ($::testing) {
 	*OUT = *STDOUT
     } else {
@@ -396,7 +392,7 @@ sub copy_master_filter($) {
 #- given a PrintCap Entry, create the spool dir and special 
 #- rhs-printfilters related config files which are required
 #------------------------------------------------------------------------------
-my $intro_printcap_test="
+my $intro_printcap_test = "
 #
 # Please don't edit this file directly unless you know what you are doing!
 # Look at the printcap(5) man page for more info.
