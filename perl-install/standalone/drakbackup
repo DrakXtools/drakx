@@ -3065,7 +3065,8 @@ sub restore_step2() {
     my $sys_exist;
     my $user_exist;
 	local $_;
-	
+	destroy_widget();
+
 	my $restore_info_path = $conf{PATH_TO_SAVE};
 	$restore_info_path = $path_to_find_restore if $conf{USE_HD} || $conf{USE_CD};
 	my $info_prefix = "backup";
@@ -3275,7 +3276,8 @@ sub catalog_restore {
 	my $cat_entry;
 	my @restore_files;
 	my $restore_path_entry;
-		
+	destroy_widget();
+	
 	#- catalog info in tree view
 	my $model = Gtk2::TreeStore->new("Glib::String");
 	my $tree_catalog = Gtk2::TreeView->new_with_model($model);
