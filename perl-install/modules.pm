@@ -374,7 +374,6 @@ sub load {
     my ($name, $type, @options) = @_;
 
     if ($::testing) {
-	print join ",", @options, "\n";
 	log::l("i try to install $name module (@options)");
     } else {
 	$conf{$name}{loaded} and return;

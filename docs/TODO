@@ -7,6 +7,56 @@ should be available to fix bogus partition table, writing enabled only when
 partition is Ok (fixme? allow primary partition inside extended one, but with
 warning on diskdrake startup, made them as warning ?).
 
+-features-------------------------------------------------------------------------------
+in 640x480 install box is to small (cuz of 'Cancel' button beeing added)
+
+handle NT (add entry for it in lilo, put it in fstab)
+
+(NEED 7.1) auto-install for corporate, very important (need consolidation).
+
+(7.1 or later) clean SCSI CDROM autoboot.
+stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
+
+(7.1)install in 800x600
+- need handling of both 640x480 (mostly for VGA16) and 800x600
+
+(7.1)better help for partitioning in newbie
+
+(7.1) rewrite crypto stuff
+crypto: add a cancel & progress bar while downloading
+error handling (like reading hdlist)
+(7.1)progression bar on crypto.
+
+(7.1)Improved network configuration (PPP and/or Ethernet)
+PPPoE install and configuration (SuSE includes it, DHCP-like)
+(7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
+(7.1) improve printerdrake to at least have the same functionalities as printtool.
+
+(7.1, other persons)rescue: 
+- small modification for stage1 to get the rescue stage2
+- create a stage2 with many tools (fdisk, bash...)
+the rescue could be on another cd (if multi-cd)
+! care must be taken about modules (if ide is in module...)
+
+----
+(7.2 or later)horizontal sub-steps
+
+(7.2 or later)diskdrake in text mode
+
+(?) paride in stage1
+stage1 & network: add ability to choose the network interface to use
+
+(?) msec custom
+
+(?)firewall configuration (instant firewalling?)
+
+(?)widget for displaying fdisk (dindinx)
+add fdisk using the zvt widget (taken in gnome-libs)
+
+(?)help in some configuration files.
+
+ability to add nfs/weird_fs entries in fstab
+
 -to test--------------------------------------------------------------------------------
 tree for choosing monitors (buggy?)
 
@@ -25,56 +75,7 @@ bug if ide-scsi, no more hdX, but scd0 (aka sr0)
 
 check on update for conf.modules and modules.conf !
 
--features-------------------------------------------------------------------------------
-in 640x480 install box is to small (cuz of 'Cancel' button beeing added)
-
-handle NT (add entry for it in lilo, put it in fstab)
-
-(NEED 7.1) auto-install for corporate, very important (need consolidation).
-
-(7.1 or later) clean SCSI CDROM autoboot.
-stage1 & cdrom: add ability in expert to choose the scsi cdrom drive to use
-
-(7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
-(7.1)install in 800x600
-- need handling of both 640x480 (mostly for VGA16) and 800x600
-
-(7.1)better help for partitioning in newbie
-(7.1 or later?)help in some configuration files.
-
-(7.1) rewrite crypto stuff
-crypto: add a cancel & progress bar while downloading
-error handling (like reading hdlist)
-(7.1)progression bar on crypto.
-
-(7.1)Improved network configuration (PPP and/or Ethernet)
-PPPoE install and configuration (SuSE includes it, DHCP-like)
-(7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
-(7.1) improve printerdrake to at least have the same functionalities as printtool.
-
-(7.2 or later)horizontal sub-steps
-
-(7.2 or later)diskdrake in text mode
-
-(7.1 or later)widget for displaying fdisk (dindinx)
-(see above)add fdisk using the zvt widget (taken in gnome-libs)
-
-(7.1, other persons)rescue: 
-- small modification for stage1 to get the rescue stage2
-- create a stage2 with many tools (fdisk, bash...)
-the rescue could be on another cd (if multi-cd)
-! care must be taken about modules (if ide is in module...)
-
-----
-(?) paride in stage1
-stage1 & network: add ability to choose the network interface to use
-
-(?) msec custom
-
-(?)firewall configuration (instant firewalling?)
-
-ability to add nfs/weird_fs entries in fstab
-
+with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
 
 -easy fixes-----------------------------------------------------------------------------
 rpmdrake proposition for cdrom labels
@@ -83,8 +84,6 @@ use option nocheck to mount for upgrades
 
 -fixes needing thinking-----------------------------------------------------------------
 bug: changing mem= in miscellaneous doesn't modify lilo conf if you backtrack
-
-with /usr, /usr/local and /usr/local/e mount points i get an error at step mounting local filesystems
 
 ask network configuration only if NIC found?
 
@@ -101,9 +100,6 @@ better timeout handling for network installs
 
 handle not enough room for update
 (fpons)verify the free space is big enough.
-
-missing feature in lilo configuration: can't give hda2 with /boot/vmlinuz if
-already hda1 with /boot/vmlinuz
 
 the XFdrake test does not handle the fontset
 
@@ -493,3 +489,8 @@ in the middle, remove the first one. Result hda5 at the end and bug.
 (done,pix,7.1)individual package selection: double click is tiring...
 
 (done,fpons,7.1) sparc ehancement, avoid V7+ machine target (div and mul not in v7 standard)
+
+(done,fpons,7.1)syslinux in graphical mode to be improved for heavily bogus BIOSes.
+
+(done,pix)missing feature in lilo configuration: can't give hda2 with /boot/vmlinuz if
+already hda1 with /boot/vmlinuz

@@ -67,7 +67,7 @@ sub hasSCSI() {
     foreach (<F>) {
 	/devices: none/ and log::l("no scsi devices are available"), return 0;
     }
-    log::l("scsi devices are available");
+#-    log::l("scsi devices are available");
     1;
 }
 sub hasIDE() { -e "/proc/ide" }

@@ -22,7 +22,7 @@
 # DiskDrake is also based upon the libfdisk and the install from Red Hat Software
 
 
-use lib "."; #qw(/usr/lib/libDrakX);
+use lib qw(/usr/lib/libDrakX);
 use common qw(:common :functional);
 use diskdrake;
 use interactive_gtk;
@@ -62,7 +62,7 @@ my $hds =
 I'll try to go on blanking bad partitions"), $err]);
     };
 
-$SIG{__DIE__} = sub { chomp $_[0]; log::l("ERROR: $_[0]") };
+$SIG{__DIE__} = sub { chomp (my $m = $_[0]); log::l("ERROR: $m") };
 my $fstab = [ fsedit::get_fstab(@$hds) ];
  
 fs::get_mntpoints_from_fstab($fstab);

@@ -11,7 +11,7 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: draxconf\n";
+/-h/ and die "usage: drakxconf\n";
 
 $::isStandalone = 1;
 
@@ -20,7 +20,7 @@ my $in = vnew interactive('su');
 my $choice = $in->ask_from_list("drakxconf",
 _("Choose the tool you want to use"),
 [ grep { my $prog = $_; int grep { -x "$_/$prog" } split ":", $ENV{PATH} }
-  qw(XFdrake adduserdrake diskdrake drakxservices keyboarddrake mousedrake netdrake printerdrake draksec) ]) or c::_exit(0); #- workaround for perl-GTK
+  qw(XFdrake adduserdrake diskdrake drakxservices keyboarddrake mousedrake netdrake printerdrake draksec drakboot) ]) or c::_exit(0); #- workaround for perl-GTK
 
 $in->end;
 

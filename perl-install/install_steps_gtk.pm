@@ -414,7 +414,7 @@ sub choosePackagesTree {
     
     my ($root, $leaf);
     foreach (sort keys %{$packages->[0]}) {
-	$add_node->($_, 'all');
+	$add_node->($_, 'all')->hide;
     }
     foreach (sort @$compss) {
 	($root, $leaf) = m|(.*)/(.+)|o or ($root, $leaf) = ('', $_);

@@ -125,8 +125,8 @@ total_sectors(fd)
   int fd
   CODE:
   {
-    struct hd_driveid s;
-    RETVAL = ioctl(fd, HDIO_GET_IDENTITY, &s) == 0 ? s.lba_capacity : 0;
+    long s;
+    RETVAL = ioctl(fd, BLKGETSIZE, &s) == 0 ? s : 0;
   }
   OUTPUT:
   RETVAL

@@ -682,7 +682,7 @@ sub setupBootloader($) {
         eval { lilo::install($o->{prefix}, $o->{bootloader}, $o->{fstab}) };
 	my $err = $@;
         eval { lilo::install_grub($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{hds}) };
-	die $err if $@;
+	die $err if $@ && $err;
     }
 }
 
