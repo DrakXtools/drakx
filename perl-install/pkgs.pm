@@ -175,7 +175,8 @@ sub readCompssList($) {
 	if (/(.*):$/) {
 	    $compssList{$1} = $list = [];
 	} else {
-	    my $p = $packages->{$_} or log::l("unknown package $_ (in compss)"), next;	    
+	    chomp;
+	    my $p = $packages->{$_} or log::l("unknown package $_ (in compssList)"), next;	    
 	    push @$list, $p;
 	}
     }
@@ -183,10 +184,11 @@ sub readCompssList($) {
 }
 
 sub verif_lang($$) {
-    local $_ = shift;
-    my $lang = shift;
+    my ($p, $lang) = @_;
     local $SIG{__DIE__} = 'none';
-    /-([^-]*)$/ && ($1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@);
+    $p->{options} =~ /l/ or return 1;
+    $p->{name} =~ /-([^-]*)$/ or return 1;
+    !($1 eq $lang || eval { lang::text2lang($1) eq $lang } && !$@);
 }
 
 sub setShowFromCompss($$$) {
@@ -198,7 +200,7 @@ sub setShowFromCompss($$$) {
 	$c->{show} = bool($c->{options} =~ /($l|\*)/);
 	foreach my $p (@{$c->{packages}}) {
 	    local $_ = $p->{options};
-	    $p->{show} = /$l|\*/ && (!/l/ || verif_lang($p->{name}, $lang));
+	    $p->{show} = /$l|\*/ && verif_lang($p, $lang);
 	}
     }
 }
@@ -208,9 +210,7 @@ sub setSelectedFromCompssList($$$$$) {
     
     my $l = $compssList->{$install_class} or log::l("no $_ entry in compssList"), return;
     foreach (@$l) {
-	local $_ = $_->{options};
-	/l/ && !verif_lang($_->{name}, $lang) and next;
-
+	verif_lang($_, $lang) or next;
 	&select($packages, $_);
 
 	my $nb = 0; foreach (values %$packages) {

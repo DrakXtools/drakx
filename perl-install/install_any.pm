@@ -18,7 +18,7 @@ use log;
 1;
 
 sub relGetFile($) {
-    local $_ = member($_[0], qw(compss depslist hdlist)) ? "base" : "RPMS";
+    local $_ = member($_[0], qw(compss compssList depslist hdlist)) ? "base" : "RPMS";
     $_ = "Mandrake/$_/$_[0]";
     s/i386/i586/;
     $_;
@@ -98,7 +98,7 @@ sub setPackages {
 
     pkgs::setShowFromCompss($o->{compss}, $o->{installClass}, $o->{lang});
     #PIXEL
-    my $size = 10;
+    my $size = 100 << 20;
     pkgs::setSelectedFromCompssList($o->{compssList}, $o->{packages},$size , $o->{installClass}, $o->{lang});
 }
 

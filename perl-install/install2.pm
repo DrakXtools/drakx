@@ -262,6 +262,8 @@ $o = $::o = {
     steps        => \%installSteps,        
     orderedSteps => \@orderedInstallSteps, 
 
+    installClass => "beginner",
+
     base => [ qw(basesystem initscripts console-tools mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools crontabs dev e2fsprogs ed etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
 # for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #    user => { name => 'foo', password => 'bar', home => '/home/foo', shell => '/bin/bash', realname => 'really, it is foo' },
@@ -375,7 +377,7 @@ sub choosePackages {
 }
 
 sub doInstallStep {
-    install_any::setPackages($o) unless $_[1];
+    install_any::setPackages($o) unless $_[1]; # FIXME
     $o->beforeInstallPackages;
     $o->installPackages($o->{packages});
     $o->afterInstallPackages;

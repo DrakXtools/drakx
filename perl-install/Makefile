@@ -139,7 +139,7 @@ get_needed_files: $(SO_FILES)
 	cp -a consolefonts $(DEST)/usr/share
 	cp MonitorsDB $(DEST)/usr/share
 	cp logo-mandrake.xpm $(DEST)/usr/share
-	cp compss $(ROOTDEST)/Mandrake/base
+	cp compss compssList $(ROOTDEST)/Mandrake/base
 
 	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/
 
