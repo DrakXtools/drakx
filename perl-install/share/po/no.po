@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: panoramix VERSION\n"
-"POT-Creation-Date: 1999-08-29 14:19+0200\n"
+"POT-Creation-Date: 1999-08-31 18:02+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -18,15 +18,16 @@ msgid "Choose a graphic card"
 msgstr "Velg et grafikk-kort"
 
 #: ../Xconfigurator.pm_.c:179
-msgid "Give your graphic card memory size"
-msgstr "Oppgi hvor mye minne grafikk-kortet ditt har"
+msgid "Select the memory size of your graphic card"
+msgstr ""
 
 #: ../Xconfigurator.pm_.c:192
 msgid "Choose a monitor"
 msgstr "Velg en monitor"
 
 #: ../Xconfigurator.pm_.c:224
-msgid "Monitor not configured yet"
+#, fuzzy
+msgid "Monitor not configured"
 msgstr "Monitoren er ikke konfigurert ennå"
 
 #: ../Xconfigurator.pm_.c:227
@@ -38,7 +39,8 @@ msgid "Resolutions not chosen yet"
 msgstr "Oppløsninger er ikke valgt ennå"
 
 #: ../Xconfigurator.pm_.c:237
-msgid "Do you want to test configuration?"
+#, fuzzy
+msgid "Do you want to test the configuration?"
 msgstr "Vil du teste konfigurasjonen?"
 
 #: ../Xconfigurator.pm_.c:237
@@ -513,7 +515,7 @@ msgid "all data on this partition will be lost"
 msgstr "alle data på denne partisjonen vil gå tapt"
 
 #: ../diskdrake.pm_.c:136 ../install_steps.pm_.c:74
-#: ../install_steps_interactive.pm_.c:24
+#: ../install_steps_interactive.pm_.c:26
 msgid "Error"
 msgstr "Feil"
 
@@ -526,8 +528,8 @@ msgid "Device: "
 msgstr "Enhet: "
 
 #: ../diskdrake.pm_.c:159
-#, c-format
-msgid "DOS letter: %s (just a guess)\n"
+#, fuzzy, c-format
+msgid "DOS drive letter: %s (just a guess)\n"
 msgstr "DOS bokstav: %s (bare en gjetning)\n"
 
 #: ../diskdrake.pm_.c:160 ../diskdrake.pm_.c:183
@@ -596,24 +598,13 @@ msgstr "Montere"
 msgid "Active"
 msgstr "Aktiv"
 
-#: ../diskdrake.pm_.c:290
-msgid ""
-"You're adding a root partition far on the drive (on a cylinder > 1024),\n"
-"and you have no /boot partition. So if you plan to use lilo (the boot "
-"manager),\n"
-"be careful to add a /boot partition"
-msgstr ""
-"Du er i ferd med å legge til en rotpartisjon langt ute på disken (på en\n"
-"sylinder > 1024), og du har ingen /boot partisjon. Så hvis du planlegger å "
-"bruke lilo (oppstartshåndtereren), så være forsiktig når du legger til\n"
-"en /boot partisjon."
-
 #: ../diskdrake.pm_.c:304
 msgid "Leave without saving"
 msgstr "Slutt uten å lagre"
 
 #: ../diskdrake.pm_.c:304
-msgid "Quit program without writing partition table?"
+#, fuzzy
+msgid "Quit program without writing the partition table?"
 msgstr "Avslutte programmet uten å skrive partisjonstabell?"
 
 #: ../diskdrake.pm_.c:319
@@ -769,6 +760,10 @@ msgid "Choose preferred language for install and system usage."
 msgstr ""
 
 #: ../install2.pm_.c:30
+msgid "Choose on the list of keyboards, the one corresponding to yours"
+msgstr ""
+
+#: ../install2.pm_.c:33
 #, fuzzy
 msgid ""
 "Choose \"Installation\" if there are no previous versions of Linux\n"
@@ -785,7 +780,7 @@ msgstr ""
 "(Venice), 5.2 (Leeloo), 5.3 (Festen) eller\n"
 " 6.0 (Venus)."
 
-#: ../install2.pm_.c:37
+#: ../install2.pm_.c:40
 msgid ""
 "Select:\n"
 "  - Beginner: If you have not installed Linux before, or wish to install\n"
@@ -812,10 +807,11 @@ msgstr ""
 "opprettholde\n"
 "kontrollen over installasjonen så er dette valget for deg."
 
-#: ../install2.pm_.c:50
+#: ../install2.pm_.c:53
+#, fuzzy
 msgid ""
 "The system did not detect a SCSI card. If you have one (or several)\n"
-"click on \"Yes\" and choose the module(s) to be tested. Otherwise, \n"
+"click on \"Yes\" and choose the module\\(s) to be tested. Otherwise, \n"
 "select \"No\".\n"
 "\n"
 "If you don't know if your computer has SCSI interfaces, consult the\n"
@@ -834,7 +830,7 @@ msgstr ""
 "under \"System\"\n"
 " i \"Kontrollpanelet\"."
 
-#: ../install2.pm_.c:60
+#: ../install2.pm_.c:63
 msgid ""
 "At this point, hard drive partitions must be defined. (Unless you\n"
 "are overwriting a previous install of Linux and have already defined\n"
@@ -849,7 +845,7 @@ msgid ""
 "be. Consult the documentation and take your time before proceeding."
 msgstr ""
 
-#: ../install2.pm_.c:73
+#: ../install2.pm_.c:76
 msgid ""
 "Any partitions that have been newly defined must be formatted for\n"
 "use. At this time, you may wish to re-format some pre-existing\n"
@@ -864,7 +860,7 @@ msgstr ""
 "hvis de inneholder data som\n"
 "du ønsker å beholde (typiske tilfeller: / home and / usr/local)."
 
-#: ../install2.pm_.c:80
+#: ../install2.pm_.c:83
 msgid ""
 "You may now select the packages you wish to install.\n"
 "\n"
@@ -891,7 +887,7 @@ msgstr ""
 "sone \"Infos\"\n"
 "funnet over knappene til bekreftelse/valg/fjern valg."
 
-#: ../install2.pm_.c:93
+#: ../install2.pm_.c:96
 msgid ""
 "The packages selected are now being installed. This operation\n"
 "should only take a few minutes."
@@ -899,13 +895,13 @@ msgstr ""
 "Pakkene som er valgt blir nå installert på systemet ditt. Dette tar bare "
 "noen få minutter."
 
-#: ../install2.pm_.c:97 ../install2.pm_.c:100 ../install2.pm_.c:103
-#: ../install2.pm_.c:106 ../install2.pm_.c:109 ../install2.pm_.c:141
-#: ../install2.pm_.c:156 ../install2.pm_.c:185
+#: ../install2.pm_.c:100 ../install2.pm_.c:103 ../install2.pm_.c:106
+#: ../install2.pm_.c:109 ../install2.pm_.c:112 ../install2.pm_.c:144
+#: ../install2.pm_.c:159 ../install2.pm_.c:189
 msgid "Help"
 msgstr "Hjelp"
 
-#: ../install2.pm_.c:112
+#: ../install2.pm_.c:115
 msgid ""
 "An administrator password for your Linux system must now be\n"
 "assigned. The password must be entered twice to verify that both\n"
@@ -924,7 +920,7 @@ msgid ""
 "\"password\", type the password that was created here."
 msgstr ""
 
-#: ../install2.pm_.c:129
+#: ../install2.pm_.c:132
 msgid ""
 "You can now authorize one or more people to use your Linux\n"
 "system. Each user account will have their own customizable environment.\n"
@@ -938,7 +934,7 @@ msgid ""
 "accomplished from a regular user account."
 msgstr ""
 
-#: ../install2.pm_.c:144
+#: ../install2.pm_.c:147
 #, fuzzy
 msgid ""
 "You need to indicate where you wish\n"
@@ -952,7 +948,7 @@ msgstr ""
 "Med mindre du vet akkurat hva du gjør, velg alltid \"Første sektor av "
 "disken\"."
 
-#: ../install2.pm_.c:151
+#: ../install2.pm_.c:154
 msgid ""
 "It is now time to configure the video card and monitor\n"
 "configuration for the X windows Graphic User Interface (GUI). First\n"
@@ -960,103 +956,98 @@ msgid ""
 "your selections if necessary."
 msgstr ""
 
-#: ../install2.pm_.c:162
+#: ../install2.pm_.c:165
 msgid "Choose your language"
 msgstr "Velg språk"
 
-#: ../install2.pm_.c:163
+#: ../install2.pm_.c:166
 msgid "Choose install or upgrade"
 msgstr "Velg installering eller oppgradering"
 
-#: ../install2.pm_.c:164
+#: ../install2.pm_.c:167
 msgid "Select installation class"
 msgstr "Velg installasjonsklasse"
 
-#: ../install2.pm_.c:165
+#: ../install2.pm_.c:168
+#, fuzzy
+msgid "Choose your keyboard"
+msgstr "Velg språk"
+
+#: ../install2.pm_.c:169
 msgid "Setup SCSI"
 msgstr "Oppsett SCSI"
 
-#: ../install2.pm_.c:166
+#: ../install2.pm_.c:170
 msgid "Setup filesystems"
 msgstr "Oppsett filsystemer"
 
-#: ../install2.pm_.c:167
+#: ../install2.pm_.c:171
 msgid "Format partitions"
 msgstr "Formater partisjoner"
 
-#: ../install2.pm_.c:168
+#: ../install2.pm_.c:172
 msgid "Choose packages to install"
 msgstr "Velg pakker for installering"
 
-#: ../install2.pm_.c:169
+#: ../install2.pm_.c:173
 msgid "Install system"
 msgstr "Installer systemet"
 
-#: ../install2.pm_.c:170
-#, fuzzy
-msgid "Configure mouse"
-msgstr "Konfigurer X"
-
-#: ../install2.pm_.c:171
+#: ../install2.pm_.c:175
 msgid "Configure networking"
 msgstr "Konfigurer nettverk"
 
-#: ../install2.pm_.c:172
+#: ../install2.pm_.c:176
 #, fuzzy
 msgid "Configure timezone"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:173
-#, fuzzy
-msgid "Configure services"
-msgstr "Konfigurer X"
-
-#: ../install2.pm_.c:174
+#: ../install2.pm_.c:178
 #, fuzzy
 msgid "Configure printer"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:175 ../install_steps_graphical.pm_.c:407
+#: ../install2.pm_.c:179 ../install_steps_graphical.pm_.c:434
 msgid "Set root password"
 msgstr "Sett root passord"
 
-#: ../install2.pm_.c:176
+#: ../install2.pm_.c:180
 msgid "Add a user"
 msgstr "Legg til en bruker"
 
-#: ../install2.pm_.c:177
+#: ../install2.pm_.c:181
 msgid "Create bootdisk"
 msgstr "Opprett oppstartdiskett"
 
-#: ../install2.pm_.c:178
+#: ../install2.pm_.c:182
 msgid "Install bootloader"
 msgstr "Installer oppstartslaster"
 
-#: ../install2.pm_.c:179
+#: ../install2.pm_.c:183
 msgid "Configure X"
 msgstr "Konfigurer X"
 
-#: ../install2.pm_.c:180
+#: ../install2.pm_.c:184
 msgid "Exit install"
 msgstr "Gå ut av installering"
 
-#: ../install2.pm_.c:194
+#: ../install2.pm_.c:198
 msgid "beginner"
 msgstr "nybegynner"
 
-#: ../install2.pm_.c:194
+#: ../install2.pm_.c:198
 msgid "developer"
 msgstr "utvikler"
 
-#: ../install2.pm_.c:194
+#: ../install2.pm_.c:198
 msgid "expert"
 msgstr "ekspert"
 
-#: ../install2.pm_.c:194
+#: ../install2.pm_.c:198
 msgid "server"
 msgstr "tjener"
 
-#: ../install2.pm_.c:275
+#: ../install2.pm_.c:290
 msgid ""
 "An error has occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
@@ -1064,224 +1055,266 @@ msgstr ""
 "En feil har oppstått - ingen gyldige enheter ble funnet for å opprette nye "
 "filsystemer. Vennligst sjekk maskinvaren din for årsaken til dette problemet"
 
-#: ../install2.pm_.c:290
+#: ../install2.pm_.c:305
 msgid "partitioning failed: no root filesystem"
 msgstr "partisjonering feilet: intet root filsystem"
 
-#: ../install_steps.pm_.c:229
+#: ../install_steps.pm_.c:246
 msgid "no floppy available"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:205
+#: ../install_steps_graphical.pm_.c:196
 msgid "Hide"
 msgstr "Gjem"
 
-#: ../install_steps_graphical.pm_.c:205
+#: ../install_steps_graphical.pm_.c:196
 msgid "Show All"
 msgstr "Vis alle"
 
-#: ../install_steps_graphical.pm_.c:209
+#: ../install_steps_graphical.pm_.c:200
 msgid "Select All"
 msgstr "Velg alle"
 
-#: ../install_steps_graphical.pm_.c:209
+#: ../install_steps_graphical.pm_.c:200
 msgid "Unselect All"
 msgstr "Fjern alle"
 
-#: ../install_steps_graphical.pm_.c:273
+#: ../install_steps_graphical.pm_.c:264
 msgid "Choose the packages you want to install"
 msgstr "Velg pakker du ønsker å installere"
 
-#: ../install_steps_graphical.pm_.c:284
+#: ../install_steps_graphical.pm_.c:275
 msgid " Mb"
 msgstr "Mb"
 
-#: ../install_steps_graphical.pm_.c:284
+#: ../install_steps_graphical.pm_.c:275
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../install_steps_graphical.pm_.c:285
+#: ../install_steps_graphical.pm_.c:276
 msgid "Info"
 msgstr ""
 
-#: ../install_steps_graphical.pm_.c:313
+#: ../install_steps_graphical.pm_.c:304
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../install_steps_graphical.pm_.c:319
+#: ../install_steps_graphical.pm_.c:310
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../install_steps_graphical.pm_.c:321
+#: ../install_steps_graphical.pm_.c:312
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../install_steps_graphical.pm_.c:322
+#: ../install_steps_graphical.pm_.c:313
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../install_steps_graphical.pm_.c:327
+#: ../install_steps_graphical.pm_.c:318
 msgid "preparing installation"
 msgstr "forbereder installasjon"
 
-#: ../install_steps_graphical.pm_.c:348
+#: ../install_steps_graphical.pm_.c:339
 #, c-format
 msgid "installing package %s"
 msgstr "installerer pakke %s"
 
-#: ../install_steps_graphical.pm_.c:378
+#: ../install_steps_graphical.pm_.c:370
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Konfigurerer nettverks-enhet %s"
 
-#: ../install_steps_graphical.pm_.c:386
+#: ../install_steps_graphical.pm_.c:378
 msgid "IP address:"
 msgstr "IP adresse:"
 
-#: ../install_steps_graphical.pm_.c:387
+#: ../install_steps_graphical.pm_.c:379
 msgid "Netmask:"
 msgstr "Nettmaske:"
 
-#: ../install_steps_graphical.pm_.c:411 ../install_steps_graphical.pm_.c:437
+#: ../install_steps_graphical.pm_.c:388
+msgid "IP address should but in format 1.2.3.4"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:401
+#, fuzzy
+msgid "Configuring network"
+msgstr "Konfigurer nettverk"
+
+#: ../install_steps_graphical.pm_.c:409
+#, fuzzy
+msgid "Host name:"
+msgstr "Brukernavn"
+
+#: ../install_steps_graphical.pm_.c:410
+#, fuzzy
+msgid "DNS server:"
+msgstr "tjener"
+
+#: ../install_steps_graphical.pm_.c:411
+msgid "Gateway:"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:412
+msgid "Gateway device:"
+msgstr ""
+
+#: ../install_steps_graphical.pm_.c:437 ../install_steps_graphical.pm_.c:464
 msgid "Password"
 msgstr "Passord"
 
-#: ../install_steps_graphical.pm_.c:412 ../install_steps_graphical.pm_.c:438
+#: ../install_steps_graphical.pm_.c:438 ../install_steps_graphical.pm_.c:465
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
-#: ../install_steps_graphical.pm_.c:420 ../install_steps_graphical.pm_.c:453
+#: ../install_steps_graphical.pm_.c:447 ../install_steps_graphical.pm_.c:480
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../install_steps_graphical.pm_.c:420 ../install_steps_graphical.pm_.c:453
+#: ../install_steps_graphical.pm_.c:447 ../install_steps_graphical.pm_.c:480
 msgid "You must enter the same password"
 msgstr "Du må skrive inn det samme passordet"
 
-#: ../install_steps_graphical.pm_.c:421
+#: ../install_steps_graphical.pm_.c:448
 msgid "This password is too simple"
 msgstr "Dette passordet er for enkelt"
 
-#: ../install_steps_graphical.pm_.c:432
+#: ../install_steps_graphical.pm_.c:459
 msgid "Add user"
 msgstr "Legg til bruker"
 
-#: ../install_steps_graphical.pm_.c:436
+#: ../install_steps_graphical.pm_.c:463
 msgid "User name"
 msgstr "Brukernavn"
 
-#: ../install_steps_graphical.pm_.c:439
+#: ../install_steps_graphical.pm_.c:466
 msgid "Real name"
 msgstr "Virkelig navn"
 
-#: ../install_steps_graphical.pm_.c:440
+#: ../install_steps_graphical.pm_.c:467
 msgid "Shell"
 msgstr "Skall"
 
-#: ../install_steps_graphical.pm_.c:455
+#: ../install_steps_graphical.pm_.c:482
 msgid "Please give a user name"
 msgstr "Vennligst oppgi et brukernavn"
 
-#: ../install_steps_graphical.pm_.c:456
-msgid "The user name must contain only letters, numbers, `-' and `_'"
+#: ../install_steps_graphical.pm_.c:483
+#, fuzzy
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
 msgstr "Brukernavnet kan kun inneholde bokstaver, tall, `-' og `_'"
 
-#: ../install_steps_interactive.pm_.c:24
+#: ../install_steps_interactive.pm_.c:26
 msgid "An error occurred"
 msgstr "En feil oppsto"
 
-#: ../install_steps_interactive.pm_.c:31
+#: ../install_steps_interactive.pm_.c:33
 msgid "Which language do you want?"
 msgstr "Hvilket språk ønsker du?"
 
-#: ../install_steps_interactive.pm_.c:37
+#: ../install_steps_interactive.pm_.c:41
+#, fuzzy
+msgid "Which keyboard do you have?"
+msgstr "Hvilken sektor vil du flytte til?"
+
+#: ../install_steps_interactive.pm_.c:48
 msgid "Install/Upgrade"
 msgstr "Installer/Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:38
-msgid "Is it an install or an upgrade?"
+#: ../install_steps_interactive.pm_.c:49
+#, fuzzy
+msgid "Is this an install or an upgrade?"
 msgstr "Er det en installasjon eller en oppgradering?"
 
-#: ../install_steps_interactive.pm_.c:39
+#: ../install_steps_interactive.pm_.c:50
 msgid "Install"
 msgstr "Installer"
 
-#: ../install_steps_interactive.pm_.c:39
+#: ../install_steps_interactive.pm_.c:50
 msgid "Upgrade"
 msgstr "Oppgrader"
 
-#: ../install_steps_interactive.pm_.c:45
+#: ../install_steps_interactive.pm_.c:56
 msgid "Install Class"
 msgstr "Installeringsklasse"
 
-#: ../install_steps_interactive.pm_.c:46
+#: ../install_steps_interactive.pm_.c:57
 msgid "What type of user will you have?"
 msgstr "Hva slags brukertype vil du ha?"
 
-#: ../install_steps_interactive.pm_.c:55
+#: ../install_steps_interactive.pm_.c:66
 #, c-format
 msgid "Installing driver for scsi card %s"
 msgstr "Installerer driver for scsi-kort %s"
 
-#: ../install_steps_interactive.pm_.c:56
+#: ../install_steps_interactive.pm_.c:67
 #, c-format
 msgid "(module %s)"
 msgstr "(modul %s)"
 
-#: ../install_steps_interactive.pm_.c:65
+#: ../install_steps_interactive.pm_.c:76
 msgid " scsi interfaces"
 msgstr " scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:65
+#: ../install_steps_interactive.pm_.c:76
 msgid "Found "
 msgstr "Funnet "
 
-#: ../install_steps_interactive.pm_.c:66
+#: ../install_steps_interactive.pm_.c:77
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../install_steps_interactive.pm_.c:67
+#: ../install_steps_interactive.pm_.c:78
 msgid "Do you have an scsi interface?"
 msgstr "Har du et scsi grensesnitt"
 
-#: ../install_steps_interactive.pm_.c:69
+#: ../install_steps_interactive.pm_.c:80
 msgid "What scsi card have you?"
 msgstr "Hva slags scsi-kort har du?"
 
-#: ../install_steps_interactive.pm_.c:78
+#: ../install_steps_interactive.pm_.c:89
 msgid "You need to reboot for the partition table modifications to take place"
 msgstr ""
 "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen "
 "skal tre i kraft"
 
-#: ../install_steps_interactive.pm_.c:88
+#: ../install_steps_interactive.pm_.c:99
 msgid "Choose the partitions you want to format"
 msgstr "Velg de partisjonene du ønsker å formatere"
 
-#: ../install_steps_interactive.pm_.c:99
+#: ../install_steps_interactive.pm_.c:110
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
 
-#: ../install_steps_interactive.pm_.c:112
+#: ../install_steps_interactive.pm_.c:123
 msgid "Keep the current IP configuration"
 msgstr "Behold nåværende IP-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:113
+#: ../install_steps_interactive.pm_.c:124
 msgid "Reconfigure network now"
 msgstr "Rekonfigurer nettverket nå"
 
-#: ../install_steps_interactive.pm_.c:114
+#: ../install_steps_interactive.pm_.c:125
 msgid "Don't set up networking"
 msgstr "Ikke sett opp nettverk"
 
-#: ../install_steps_interactive.pm_.c:116
+#: ../install_steps_interactive.pm_.c:127
+#: ../install_steps_interactive.pm_.c:133
 msgid "Network Configuration"
 msgstr "Nettverks-konfigurasjon"
 
-#: ../install_steps_interactive.pm_.c:117
+#: ../install_steps_interactive.pm_.c:128
 msgid "LAN networking has already been configured. Do you want to:"
 msgstr "LAN nettverket har allerede blitt konfigurert. Vil du:"
+
+#: ../install_steps_interactive.pm_.c:134
+msgid ""
+"Do you want to configure LAN (not dialup) networking for your installed "
+"system?"
+msgstr ""
 
 #: ../install_steps_stdio.pm_.c:21
 #, c-format
@@ -1310,8 +1343,8 @@ msgid "Please wait"
 msgstr "Vennligst vent"
 
 #: ../interactive_stdio.pm_.c:34
-#, c-format
-msgid "Ambiguity (%s) be more precise\n"
+#, fuzzy, c-format
+msgid "Ambiguity (%s), be more precise\n"
 msgstr "Tvetydig (%s) vær mere presis\n"
 
 #: ../interactive_stdio.pm_.c:35 ../interactive_stdio.pm_.c:50
@@ -1333,6 +1366,128 @@ msgstr "Ditt valg? (standard %s) "
 #, c-format
 msgid "Your choice? (default %s  enter `none' for none) "
 msgstr "Ditt valg? (standard %s  trykk `none' for ingen) "
+
+#: ../keyboard.pm_.c:27
+msgid "Belgian"
+msgstr ""
+
+#: ../keyboard.pm_.c:28
+msgid "Bulgarian"
+msgstr ""
+
+#: ../keyboard.pm_.c:29
+msgid "Czech"
+msgstr ""
+
+#: ../keyboard.pm_.c:30
+msgid "German"
+msgstr ""
+
+#: ../keyboard.pm_.c:31
+msgid "Danish"
+msgstr ""
+
+#: ../keyboard.pm_.c:32
+msgid "Dvorak"
+msgstr ""
+
+#: ../keyboard.pm_.c:33
+msgid "Finnish"
+msgstr ""
+
+#: ../keyboard.pm_.c:34
+msgid "French"
+msgstr ""
+
+#: ../keyboard.pm_.c:38
+msgid "Greek"
+msgstr ""
+
+#: ../keyboard.pm_.c:39
+msgid "Hungarian"
+msgstr ""
+
+#: ../keyboard.pm_.c:40
+#, fuzzy
+msgid "Israelian"
+msgstr "Installerer"
+
+#: ../keyboard.pm_.c:41
+msgid "Icelandic"
+msgstr ""
+
+#: ../keyboard.pm_.c:42
+#, fuzzy
+msgid "Italian"
+msgstr "Installerer"
+
+#: ../keyboard.pm_.c:43
+msgid "Latin American"
+msgstr ""
+
+#: ../keyboard.pm_.c:44
+msgid "Dutch"
+msgstr ""
+
+#: ../keyboard.pm_.c:45
+msgid "Norwegian"
+msgstr ""
+
+#: ../keyboard.pm_.c:46
+msgid "Polish"
+msgstr ""
+
+#: ../keyboard.pm_.c:47
+msgid "Portuguese"
+msgstr ""
+
+#: ../keyboard.pm_.c:48
+msgid "Canadian (Quebec)"
+msgstr ""
+
+#: ../keyboard.pm_.c:49
+msgid "Russian"
+msgstr ""
+
+#: ../keyboard.pm_.c:50
+msgid "Swedish"
+msgstr ""
+
+#: ../keyboard.pm_.c:51
+msgid "Swiss (french layout)"
+msgstr ""
+
+#: ../keyboard.pm_.c:52
+msgid "Swiss (german layout)"
+msgstr ""
+
+#: ../keyboard.pm_.c:53
+msgid "Slovenian"
+msgstr ""
+
+#: ../keyboard.pm_.c:54
+msgid "Slovakian"
+msgstr ""
+
+#: ../keyboard.pm_.c:57
+msgid "Turkish (traditional \"F\" model)"
+msgstr ""
+
+#: ../keyboard.pm_.c:58
+msgid "Turkish (modern \"Q\" model)"
+msgstr ""
+
+#: ../keyboard.pm_.c:59
+msgid "UK keyboard"
+msgstr ""
+
+#: ../keyboard.pm_.c:60
+msgid "US keyboard"
+msgstr ""
+
+#: ../keyboard.pm_.c:61
+msgid "Yugoslavian (latin layout)"
+msgstr ""
 
 #: ../my_gtk.pm_.c:316
 msgid "Is it ok?"
@@ -1356,6 +1511,28 @@ msgstr "Dårlig backup-fil"
 #, c-format
 msgid "Error writing to file %s"
 msgstr "Feil ved skriving til fil %s"
+
+#~ msgid "Give your graphic card memory size"
+#~ msgstr "Oppgi hvor mye minne grafikk-kortet ditt har"
+
+#~ msgid ""
+#~ "You're adding a root partition far on the drive (on a cylinder > 1024),\n"
+#~ "and you have no /boot partition. So if you plan to use lilo (the boot "
+#~ "manager),\n"
+#~ "be careful to add a /boot partition"
+#~ msgstr ""
+#~ "Du er i ferd med å legge til en rotpartisjon langt ute på disken (på en\n"
+#~ "sylinder > 1024), og du har ingen /boot partisjon. Så hvis du planlegger å "
+#~ "bruke lilo (oppstartshåndtereren), så være forsiktig når du legger til\n"
+#~ "en /boot partisjon."
+
+#, fuzzy
+#~ msgid "Configure mouse"
+#~ msgstr "Konfigurer X"
+
+#, fuzzy
+#~ msgid "Configure services"
+#~ msgstr "Konfigurer X"
 
 #~ msgid ""
 #~ "Choose the language which you approved. This one govern the language's "

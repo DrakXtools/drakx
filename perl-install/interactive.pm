@@ -27,7 +27,8 @@ use common qw(:common :functional);
 
 1;
 
-sub new($$) {
+
+sub new($) {
     my ($type) = @_;
 
     bless {}, ref $type || $type;
