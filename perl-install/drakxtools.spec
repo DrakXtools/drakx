@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 15mdk
+Release: 16mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -317,6 +317,16 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Mar  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-16mdk
+- adduserdrake: default to "man" icon (pixel)
+- drakconnect manage interface: fix bootproto filling (#8498)
+- harddrake2: update icons
+- printerdrake (till):
+  o do not configure the GIMP-Print plug-in on more than 50 users (#6423)
+  o fix no "ptal:/..." in manual device URI list (#8483)
+- scannerdrake (till): fix firmware not found by "gt68xx" SANE backend
+  (#7242)
+
 * Mon Mar  1 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-15mdk
 - left align labels
 - drakfirewall: remove the masq zone and add policies, rules only if
