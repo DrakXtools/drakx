@@ -930,7 +930,7 @@ sub new {
 }
 sub set_main_window_size {
     my ($o) = @_;
-    my ($width, $height) = $::isInstall ? (576, 418) : $o->{isWizard} ? (540, 360) : (600, 400);
+    my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $o->{isWizard} ? (540, 360) : (600, 400);
     $o->{window}->set_size_request($width, $height);
 }
 
