@@ -830,7 +830,7 @@ sub summaryBefore {
 }
 
 sub summary_prompt {
-    my ($o, $l) = @_;
+    my ($o, $l, $check_complete) = @_;
 
     ($_->{format}, $_->{val}) = ($_->{val}, '') foreach @$l;
     
@@ -838,6 +838,7 @@ sub summary_prompt {
 		   messages => N("Summary"),
 		   interactive_help_id => 'summary',
 		   cancel   => '',
+		   callbacks => { complete => sub { !$check_complete->() } },
 		  }, $l);
 }
 
@@ -956,13 +957,38 @@ sub summary {
 	      },
 	     };
 
-    while (1) {
-	$o->summary_prompt(\@l);
+    push @l, {
+	      label => N("Firewall"),
+	      val => sub { 
+		  require network::shorewall;
+		  my $shorewall = network::shorewall::read();
+		  $shorewall && !$shorewall->{disabled} ? N("activated") : N("disabled");
+	      },
+	      clicked => sub { 
+		  require network::drakfirewall;
+		  network::drakfirewall::main($o, $o->{security} <= 3);
+	      },
+	     } if detect_devices::getNet();
 
-	last if 
-	  $o->{raw_X} || !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
-	  $o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"));
-    }
+    push @l, {
+	      label => N("Services"),
+	      val => sub {
+		  require services;
+		  my ($l, $activated) = services::services();
+		  N("Services: %d activated for %d registered", int(@$activated), int(@$l));
+	      },
+	      clicked => sub { 
+		  require services;
+		  $o->{services} = services::ask($o) and services::doit($o, $o->{services});
+	      },
+	     };
+
+    my $check_complete = sub {
+	$o->{raw_X} || !pkgs::packageByName($o->{packages}, 'XFree86')->flag_installed ||
+	$o->ask_yesorno('', N("You have not configured X. Are you sure you really want this?"));
+    };
+
+    $o->summary_prompt(\@l, $check_complete);
 
     install_steps::configureTimezone($o) if !$timezone_manually_set;  #- do not forget it.
 }
