@@ -1476,13 +1476,13 @@ sub setup_socket {
     my ($uri, $remotehost, $remoteport);
     my $queue = $printer->{OLD_QUEUE};
     if ($printer->{configured}{$queue} &&
-	$printer->{currentqueue}{connect} =~  m!^(socket:|ptal:/hpjd:)!) {
+	$printer->{currentqueue}{connect} =~  m!^(socket:|ptal://?hpjd:)!) {
 	$uri = $printer->{currentqueue}{connect};
 	if ($uri =~ m!^ptal:!) {
-	    if ($uri =~ m!^ptal:/hpjd:([^/:]+):([0-9]+)/?\s*$!) {
+	    if ($uri =~ m!^ptal://?hpjd:([^/:]+):([0-9]+)/?\s*$!) {
 		my $ptalport = $2 - 9100;
 		($remotehost, $remoteport) = ($1, $ptalport);
-	    } elsif ($uri =~ m!^ptal:/hpjd:([^/:]+)\s*$!) {
+	    } elsif ($uri =~ m!^ptal://?hpjd:([^/:]+)\s*$!) {
 		($remotehost, $remoteport) = ($1, 9100);
 	    }
 	} else {
@@ -1528,7 +1528,7 @@ sub setup_socket {
 	    $menuentries->{$a} cmp $menuentries->{$b};
 	} keys(%$menuentries);
 	if ($printer->{configured}{$queue} &&
-	    $printer->{currentqueue}{connect} =~ m!^(socket:|ptal:/hpjd:)! &&
+	    $printer->{currentqueue}{connect} =~ m!^(socket:|ptal://?hpjd:)! &&
 	    $menuchoice eq "") {
 	    my $menustr;
 	    if ($printer->{currentqueue}{make}) {
@@ -1852,7 +1852,7 @@ sub setup_common {
 		if (!$printer->{noninteractive}) {
 		    my $text = "";
 		    # Inform user about how to scan with his MF device
-		    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
+		    $text = scanner_help($makemodel, "ptal://$ptaldevice");
 		    if ($text) {
 			undef $w;
 			$in->ask_warn
@@ -1861,7 +1861,7 @@ sub setup_common {
 		    }
 		    # Inform user about how to access photo cards with his 
 		    # MF device
-		    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
+		    $text = photocard_help($makemodel, "ptal://$ptaldevice");
 		    if ($text) {
 			undef $w;
 			$in->ask_warn(N("Photo memory card access on your HP multi-function device"),
@@ -1869,7 +1869,7 @@ sub setup_common {
 		    }
 		}
 		# make the DeviceURI from $ptaldevice.
-		$printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
+		$printer->{currentqueue}{connect} = "ptal://" . $ptaldevice;
 	    } else {
 		# make the DeviceURI from $device.
 		$printer->{currentqueue}{connect} = $device;
@@ -3006,7 +3006,7 @@ N("To know about the options available for the current printer read either the l
 
 sub scanner_help {
     my ($makemodel, $deviceuri) = @_;
-    if ($deviceuri =~ m!^ptal:/(.*)$!) {
+    if ($deviceuri =~ m!^ptal://?(.*?)$!) {
 	my $ptaldevice = $1;
 	if ($makemodel !~ /HP\s+PhotoSmart/i &&
 	    $makemodel !~ /HP\s+LaserJet\s+2200/i) {
@@ -3024,7 +3024,7 @@ Do not use \"scannerdrake\" for this device!",
 
 sub photocard_help {
     my ($makemodel, $deviceuri) = @_;
-    if ($deviceuri =~ m!^ptal:/(.*)$!) {
+    if ($deviceuri =~ m!^ptal://?(.*?)$!) {
 	my $ptaldevice = $1;
 	if (($makemodel =~ /HP\s+PhotoSmart/i ||
 	     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||

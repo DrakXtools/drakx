@@ -322,7 +322,7 @@ sub make_menuentry {
     my $connect = $printer->{configured}{$queue}{queuedata}{connect};
     my $localremote;
     if ($connect =~ m!^(file|parallel|usb|serial):! || 
-	$connect =~ m!^ptal:/mlc:! ||
+	$connect =~ m!^ptal://?mlc:! ||
 	$connect =~ m!^mtink:!) {
 	$localremote = N("Local Printers");
     } else {
@@ -339,7 +339,7 @@ sub make_menuentry {
 	$connection = N(", USB printer #%s", $number);
     } elsif ($connect =~ m!^usb://!) {
 	$connection = N(", USB printer");
-    } elsif ($connect =~ m!^ptal:/(.+)$!) {
+    } elsif ($connect =~ m!^ptal://?(.+?)$!) {
 	my $ptaldevice = $1;
 	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
 	    my $number = $1;
@@ -1993,10 +1993,10 @@ sub autodetectionentry_for_uri {
 		return $p;
 	    }
 	}
-    } elsif ($uri =~ m!^ptal:/mlc:!) {
+    } elsif ($uri =~ m!^ptal://?mlc:!) {
 	# HP multi-function device (controlled by HPOJ)
 	my $ptaldevice = $uri;
-	$ptaldevice =~ s!^ptal:/mlc:!!;
+	$ptaldevice =~ s!^ptal://?mlc:!!;
 	if ($ptaldevice =~ /^par:(\d+)$/) {
 	    my $device = "/dev/lp$1";
 	    foreach my $p (@autodetected) {
