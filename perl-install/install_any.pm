@@ -62,6 +62,7 @@ sub relGetFile($) {
     if (my ($arch) = m|\.([^\.]*)\.rpm$|) {
 	$_ = "$::o->{packages}{mediums}{$asked_medium}{rpmsdir}/$_";
 	s/%{ARCH}/$arch/g;
+	s,^/+,,g;
     }
     $_;
 }
@@ -178,7 +179,7 @@ sub errorOpeningFile($) {
     $::o->{packages}{mediums}{$asked_medium}{selected} = undef;
 
     #- on cancel, we can expect the current medium to be undefined too,
-    #- this enable remounting if selecting a package back.
+    #- this enables remounting if selecting a package back.
     $current_medium = 'unknown';
 
     return;
@@ -197,7 +198,7 @@ sub getFile {
 	    crypto::getFile($f);
 	} elsif ($current_method eq "ftp") {
 	    require ftp;
-	    ftp::getFile($rel);
+	    ftp::getFile($rel, @{ $::o->{packages}{mediums}{$asked_medium}{ftp_prefix} || [] });
 	} elsif ($current_method eq "http") {
 	    require http;
 	    http::getFile(($ENV{URLPREFIX} || $o_altroot) . "/$rel");
@@ -208,7 +209,7 @@ sub getFile {
 	    my $f2 = "$postinstall_rpms/$f";
 	    $o_altroot ||= '/tmp/image';
 	    $f2 = "$o_altroot/$rel" if !$postinstall_rpms || !-e $f2;
-	    $f2 = $rel if $rel =~ m!^/! && !-e $f2; #- not a relative path
+	    #- $f2 = "/$rel" if !$::o->{packages}{mediums}{$asked_medium}{rpmsdir} && !-e $f2; #- not a relative path, should not be necessary with new media layout
 	    my $F; open($F, $f2) && $F;
 	}
     } || errorOpeningFile($f);
@@ -448,6 +449,10 @@ sub selectSupplMedia {
 	    if ($supplmedium) {
 		log::l("read suppl hdlist (via $suppl_method)");
 		$supplmedium->{prefix} = $url; #- for install_urpmi
+		if ($suppl_method eq 'ftp') {
+		    $url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!;
+		    $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
+		}
 		$supplmedium->{selected} = 1;
 		$supplmedium->{method} = $suppl_method;
 		$supplmedium->{with_hdlist} = 'media_info/hdlist.cz'; #- for install_urpmi
