@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-09-11 13:59+0200\n"
-"PO-Revision-Date: 2002-09-11 20:06GMT\n"
+"POT-Creation-Date: 2002-09-12 13:54+0200\n"
+"PO-Revision-Date: 2002-09-12 18:18GMT\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -193,7 +193,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: ../../Xconfig/main.pm_.c:122 ../../diskdrake/dav.pm_.c:28
-#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3155
+#: ../../harddrake/ui.pm_.c:96 ../../printerdrake.pm_.c:3184
 #: ../../standalone/draksplash_.c:122 ../../standalone/logdrake_.c:224
 msgid "Quit"
 msgstr "Konec"
@@ -297,13 +297,13 @@ msgid "Graphics card: %s"
 msgstr "Grafická karta: %s"
 
 #: ../../Xconfig/resolution_and_depth.pm_.c:268 ../../any.pm_.c:1019
-#: ../../bootlook.pm_.c:343 ../../diskdrake/smbnfs_gtk.pm_.c:87
+#: ../../bootlook.pm_.c:344 ../../diskdrake/smbnfs_gtk.pm_.c:87
 #: ../../install_steps_gtk.pm_.c:406 ../../install_steps_gtk.pm_.c:464
 #: ../../interactive.pm_.c:142 ../../interactive.pm_.c:354
 #: ../../interactive/http.pm_.c:105 ../../interactive/newt.pm_.c:195
 #: ../../interactive/stdio.pm_.c:39 ../../interactive/stdio.pm_.c:143
 #: ../../my_gtk.pm_.c:158 ../../my_gtk.pm_.c:162 ../../my_gtk.pm_.c:287
-#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2124
+#: ../../network/netconnect.pm_.c:42 ../../printerdrake.pm_.c:2150
 #: ../../security/main.pm_.c:295 ../../standalone/drakautoinst_.c:203
 #: ../../standalone/drakbackup_.c:3928 ../../standalone/drakbackup_.c:3961
 #: ../../standalone/drakbackup_.c:3987 ../../standalone/drakbackup_.c:4014
@@ -313,7 +313,7 @@ msgstr "Grafická karta: %s"
 #: ../../standalone/drakconnect_.c:147 ../../standalone/drakconnect_.c:289
 #: ../../standalone/drakconnect_.c:537 ../../standalone/drakconnect_.c:679
 #: ../../standalone/drakfloppy_.c:234 ../../standalone/drakfont_.c:970
-#: ../../standalone/drakgw_.c:536 ../../standalone/logdrake_.c:224
+#: ../../standalone/drakgw_.c:532 ../../standalone/logdrake_.c:224
 #: ../../ugtk.pm_.c:296
 msgid "Cancel"
 msgstr "Zru¹it"
@@ -614,7 +614,7 @@ msgstr "Pøidat"
 #: ../../any.pm_.c:258 ../../any.pm_.c:777 ../../diskdrake/dav.pm_.c:68
 #: ../../diskdrake/hd_gtk.pm_.c:153 ../../diskdrake/removable.pm_.c:27
 #: ../../diskdrake/smbnfs_gtk.pm_.c:88 ../../interactive/http.pm_.c:153
-#: ../../printerdrake.pm_.c:3155 ../../standalone/drakbackup_.c:2774
+#: ../../printerdrake.pm_.c:3184 ../../standalone/drakbackup_.c:2774
 msgid "Done"
 msgstr "Hotovo"
 
@@ -1262,21 +1262,25 @@ msgid "Install themes"
 msgstr "Instalovat témata"
 
 #: ../../bootlook.pm_.c:147
-msgid "Display theme under console"
-msgstr "Zobrazit téma na konzoli"
+msgid ""
+"Display theme\n"
+"under console"
+msgstr ""
+"Zobrazit téma\n"
+"na konzoli"
 
 #: ../../bootlook.pm_.c:148
 msgid "Create new theme"
 msgstr "Vytvoøit nové téma"
 
-#: ../../bootlook.pm_.c:192
+#: ../../bootlook.pm_.c:193
 #, c-format
 msgid "Backup %s to %s.old"
 msgstr "Zálohuji %s do %s.old"
 
-#: ../../bootlook.pm_.c:193 ../../bootlook.pm_.c:196 ../../bootlook.pm_.c:199
-#: ../../bootlook.pm_.c:229 ../../bootlook.pm_.c:231 ../../bootlook.pm_.c:241
-#: ../../bootlook.pm_.c:250 ../../bootlook.pm_.c:257
+#: ../../bootlook.pm_.c:194 ../../bootlook.pm_.c:197 ../../bootlook.pm_.c:200
+#: ../../bootlook.pm_.c:230 ../../bootlook.pm_.c:232 ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:251 ../../bootlook.pm_.c:258
 #: ../../diskdrake/dav.pm_.c:77 ../../diskdrake/hd_gtk.pm_.c:116
 #: ../../diskdrake/interactive.pm_.c:340 ../../diskdrake/interactive.pm_.c:355
 #: ../../diskdrake/interactive.pm_.c:469 ../../diskdrake/interactive.pm_.c:474
@@ -1287,33 +1291,33 @@ msgstr "Zálohuji %s do %s.old"
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../bootlook.pm_.c:193
+#: ../../bootlook.pm_.c:194
 msgid "unable to backup lilo message"
 msgstr "nelze zazálohovat zprávu lilo"
 
-#: ../../bootlook.pm_.c:195
+#: ../../bootlook.pm_.c:196
 #, c-format
 msgid "Copy %s to %s"
 msgstr "Kopíruji %s do %s"
 
-#: ../../bootlook.pm_.c:196
+#: ../../bootlook.pm_.c:197
 msgid "can't change lilo message"
 msgstr "nelze zmìnit zprávu lilo"
 
-#: ../../bootlook.pm_.c:199
+#: ../../bootlook.pm_.c:200
 msgid "Lilo message not found"
 msgstr "Zpráva LiLo nebyla nalezena"
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 msgid "Can't write /etc/sysconfig/bootsplash."
 msgstr "Nelze zapsat soubor /etc/sysconfig/bootsplash."
 
-#: ../../bootlook.pm_.c:229
+#: ../../bootlook.pm_.c:230
 #, c-format
 msgid "Write %s"
 msgstr "Zapsat %s"
 
-#: ../../bootlook.pm_.c:231
+#: ../../bootlook.pm_.c:232
 msgid ""
 "Can't write /etc/sysconfig/bootsplash\n"
 "File not found."
@@ -1321,17 +1325,17 @@ msgstr ""
 "Nelze zapsat soubor /etc/sysconfig/bootsplash\n"
 "Soubor nebyl nalezen."
 
-#: ../../bootlook.pm_.c:242
+#: ../../bootlook.pm_.c:243
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
 msgstr "Nelze spustit mkinitrd -f /boot/initrd-%s.img %s."
 
-#: ../../bootlook.pm_.c:245
+#: ../../bootlook.pm_.c:246
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 msgstr "Provést initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 
-#: ../../bootlook.pm_.c:251
+#: ../../bootlook.pm_.c:252
 msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
@@ -1340,24 +1344,24 @@ msgstr ""
 "Chcete-li dokonèit instalaci tématu pro LiLo, spus»te na pøíkazové øádce "
 "\"lilo\" jako u¾ivatel root."
 
-#: ../../bootlook.pm_.c:255
+#: ../../bootlook.pm_.c:256
 msgid "Relaunch 'lilo'"
 msgstr "Znovu spustit 'lilo'"
 
-#: ../../bootlook.pm_.c:257 ../../standalone/draksplash_.c:165
+#: ../../bootlook.pm_.c:258 ../../standalone/draksplash_.c:165
 #: ../../standalone/draksplash_.c:329 ../../standalone/draksplash_.c:456
 msgid "Notice"
 msgstr "Poznámka"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "LiLo and Bootsplash themes installation successfull"
 msgstr "Instalace témat pro LiLo a Bootsplash provedena úspì¹nì!"
 
-#: ../../bootlook.pm_.c:258
+#: ../../bootlook.pm_.c:259
 msgid "Theme installation failed!"
 msgstr "Instalace témata selhala!"
 
-#: ../../bootlook.pm_.c:266
+#: ../../bootlook.pm_.c:267
 #, c-format
 msgid ""
 "You are currently using %s as your boot manager.\n"
@@ -1366,24 +1370,24 @@ msgstr ""
 "Jako správce zavádìní nyní pou¾íváte %s.\n"
 "Pokud chcete spustit prùvodce nastavením, klepnìte na Nastavit."
 
-#: ../../bootlook.pm_.c:268 ../../standalone/drakbackup_.c:2429
+#: ../../bootlook.pm_.c:269 ../../standalone/drakbackup_.c:2429
 #: ../../standalone/drakbackup_.c:2439 ../../standalone/drakbackup_.c:2449
-#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:530
+#: ../../standalone/drakbackup_.c:2457 ../../standalone/drakgw_.c:526
 msgid "Configure"
 msgstr "Nastavit"
 
-#: ../../bootlook.pm_.c:275
+#: ../../bootlook.pm_.c:276
 msgid "Splash selection"
 msgstr "Výbìr zavádìcího obrázku"
 
-#: ../../bootlook.pm_.c:278
+#: ../../bootlook.pm_.c:279
 msgid "Themes"
 msgstr "Témata"
 
-#: ../../bootlook.pm_.c:280
+#: ../../bootlook.pm_.c:281
 msgid ""
 "\n"
-"Select a theme for\n"
+"Select theme for\n"
 "lilo and bootsplash,\n"
 "you can choose\n"
 "them separatly"
@@ -1394,31 +1398,31 @@ msgstr ""
 "mù¾ete je vybrat\n"
 "ka¾dé zvlá¹»"
 
-#: ../../bootlook.pm_.c:283
+#: ../../bootlook.pm_.c:284
 msgid "Lilo screen"
 msgstr "Obrazovka LiLo"
 
-#: ../../bootlook.pm_.c:288
+#: ../../bootlook.pm_.c:289
 msgid "Bootsplash"
 msgstr "Bootsplash"
 
-#: ../../bootlook.pm_.c:323
+#: ../../bootlook.pm_.c:324
 msgid "System mode"
 msgstr "Systémový re¾im"
 
-#: ../../bootlook.pm_.c:325
+#: ../../bootlook.pm_.c:326
 msgid "Launch the graphical environment when your system starts"
 msgstr "Spustit grafické prostøedí pøi startu systému"
 
-#: ../../bootlook.pm_.c:330
+#: ../../bootlook.pm_.c:331
 msgid "No, I don't want autologin"
 msgstr "Ne, nechci automatické pøihlá¹ení"
 
-#: ../../bootlook.pm_.c:332
+#: ../../bootlook.pm_.c:333
 msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Ano, chci automatické pøihlá¹ení s tímto (u¾ivatelem, desktopem)"
 
-#: ../../bootlook.pm_.c:342 ../../network/netconnect.pm_.c:97
+#: ../../bootlook.pm_.c:343 ../../network/netconnect.pm_.c:97
 #: ../../standalone/drakTermServ_.c:173 ../../standalone/drakTermServ_.c:300
 #: ../../standalone/drakTermServ_.c:405 ../../standalone/drakbackup_.c:4193
 #: ../../standalone/drakbackup_.c:4956 ../../standalone/drakconnect_.c:108
@@ -1431,46 +1435,46 @@ msgstr "Ano, chci automatické pøihlá¹ení s tímto (u¾ivatelem, desktopem)"
 msgid "OK"
 msgstr "OK"
 
-#: ../../bootlook.pm_.c:402
+#: ../../bootlook.pm_.c:403
 #, c-format
 msgid "can not open /etc/inittab for reading: %s"
 msgstr "nelze otevøít /etc/inittab pro ètení: %s"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "GB"
 msgstr "GB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "KB"
 msgstr "KB"
 
-#: ../../common.pm_.c:94
+#: ../../common.pm_.c:99
 msgid "MB"
 msgstr "MB"
 
-#: ../../common.pm_.c:102
+#: ../../common.pm_.c:107
 msgid "TB"
 msgstr "TB"
 
-#: ../../common.pm_.c:110
+#: ../../common.pm_.c:115
 #, c-format
 msgid "%d minutes"
 msgstr "%d minut(y)"
 
-#: ../../common.pm_.c:112
+#: ../../common.pm_.c:117
 msgid "1 minute"
 msgstr "1 minuta"
 
-#: ../../common.pm_.c:114
+#: ../../common.pm_.c:119
 #, c-format
 msgid "%d seconds"
 msgstr "%d sekund"
 
-#: ../../common.pm_.c:159
+#: ../../common.pm_.c:164
 msgid "Can't make screenshots before partitioning"
 msgstr "Nelze provést sejmutí obrazovky pøed rozdìlením diskù"
 
-#: ../../common.pm_.c:166
+#: ../../common.pm_.c:171
 #, c-format
 msgid "Screenshots will be available after install in %s"
 msgstr "Sejmuté obrazovky budou dostupné po instalaci v adresáøi %s"
@@ -2672,7 +2676,7 @@ msgstr "Tøída médií"
 msgid "class of hardware device"
 msgstr "tøída hardwarového zaøízení"
 
-#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1517
+#: ../../harddrake/ui.pm_.c:23 ../../printerdrake.pm_.c:1543
 msgid "Description"
 msgstr "Popis"
 
@@ -5996,8 +6000,8 @@ msgstr "My¹"
 msgid "Timezone"
 msgstr "Èasová zóna"
 
-#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2937
-#: ../../printerdrake.pm_.c:3026
+#: ../../install_steps_interactive.pm_.c:1023 ../../printerdrake.pm_.c:2966
+#: ../../printerdrake.pm_.c:3055
 msgid "Printer"
 msgstr "Tiskárna"
 
@@ -6159,7 +6163,7 @@ msgstr "první mechaniky"
 msgid "Second floppy drive"
 msgstr "druhé mechaniky"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2470
+#: ../../install_steps_interactive.pm_.c:1179 ../../printerdrake.pm_.c:2496
 msgid "Skip"
 msgstr "Pøeskoèit"
 
@@ -6385,12 +6389,12 @@ msgstr "Vyberte soubor"
 msgid "Advanced"
 msgstr "Roz¹íøení"
 
-#: ../../interactive.pm_.c:321
+#: ../../interactive.pm_.c:321 ../../security/main.pm_.c:220
 msgid "Basic"
 msgstr "Základní"
 
 #: ../../interactive/newt.pm_.c:195 ../../my_gtk.pm_.c:158
-#: ../../printerdrake.pm_.c:2124
+#: ../../printerdrake.pm_.c:2150
 msgid "<- Previous"
 msgstr "<- Pøedchozí"
 
@@ -6998,7 +7002,7 @@ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-2,*-r-*"
 msgid "Finish"
 msgstr "Ukonèit"
 
-#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2126
+#: ../../my_gtk.pm_.c:159 ../../printerdrake.pm_.c:2152
 msgid "Next ->"
 msgstr "Dal¹í ->"
 
@@ -7135,7 +7139,7 @@ msgstr ""
 "Ve va¹em poèítaèi nebyl nalezen ¾ádný sí»ový adaptér.\n"
 "Nemohu nastavit typ spojení."
 
-#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:240
+#: ../../network/ethernet.pm_.c:92 ../../standalone/drakgw_.c:236
 msgid "Choose the network interface"
 msgstr "Zvolte sí»ové rozhraní"
 
@@ -7474,7 +7478,7 @@ msgstr "Zvolte profil pro nastavení"
 msgid "Use auto detection"
 msgstr "Pou¾ít autodetekci"
 
-#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3151
+#: ../../network/netconnect.pm_.c:168 ../../printerdrake.pm_.c:3180
 #: ../../standalone/drakconnect_.c:274 ../../standalone/drakconnect_.c:277
 #: ../../standalone/drakfloppy_.c:145
 msgid "Expert Mode"
@@ -7903,7 +7907,7 @@ msgstr "LPD - Démon pro tiskárny"
 msgid "PDQ - Print, Don't Queue"
 msgstr "PDQ - Tisk bez ukládání do fronty"
 
-#: ../../printer.pm_.c:34 ../../printer.pm_.c:1125
+#: ../../printer.pm_.c:34 ../../printer.pm_.c:1134
 msgid "CUPS"
 msgstr "CUPS"
 
@@ -7955,102 +7959,102 @@ msgstr "Zadejte URI tiskového zaøízení"
 msgid "Pipe job into a command"
 msgstr "Poslat tiskovou úlohu do pøíkazu"
 
-#: ../../printer.pm_.c:324 ../../printer.pm_.c:366 ../../printer.pm_.c:533
+#: ../../printer.pm_.c:328 ../../printer.pm_.c:370 ../../printer.pm_.c:542
 msgid "Unknown Model"
 msgstr "Neznámý model"
 
-#: ../../printer.pm_.c:735 ../../printer.pm_.c:926 ../../printer.pm_.c:1318
-#: ../../printerdrake.pm_.c:2260 ../../printerdrake.pm_.c:3414
+#: ../../printer.pm_.c:744 ../../printer.pm_.c:935 ../../printer.pm_.c:1327
+#: ../../printerdrake.pm_.c:2286 ../../printerdrake.pm_.c:3443
 msgid "Unknown model"
 msgstr "Neznámý model"
 
-#: ../../printer.pm_.c:763
+#: ../../printer.pm_.c:772
 msgid "Local Printers"
 msgstr "Místní tiskárny"
 
-#: ../../printer.pm_.c:765 ../../printer.pm_.c:1126
+#: ../../printer.pm_.c:774 ../../printer.pm_.c:1135
 msgid "Remote Printers"
 msgstr "Vzdálené tiskárny"
 
-#: ../../printer.pm_.c:772 ../../printerdrake.pm_.c:404
+#: ../../printer.pm_.c:781 ../../printerdrake.pm_.c:404
 #, c-format
 msgid " on parallel port \\/*%s"
 msgstr " na paralelním portu \\/*%s"
 
-#: ../../printer.pm_.c:775 ../../printerdrake.pm_.c:406
+#: ../../printer.pm_.c:784 ../../printerdrake.pm_.c:406
 #, c-format
 msgid ", USB printer \\/*%s"
 msgstr ", USB tiskárna \\/*%s"
 
-#: ../../printer.pm_.c:780
+#: ../../printer.pm_.c:789
 #, c-format
 msgid ", multi-function device on parallel port \\/*%s"
 msgstr ", multifunkèní na paralelním portu \\/*%s"
 
-#: ../../printer.pm_.c:783
+#: ../../printer.pm_.c:792
 msgid ", multi-function device on USB"
 msgstr ", multifunkèní zaøízení na USB"
 
-#: ../../printer.pm_.c:785
+#: ../../printer.pm_.c:794
 msgid ", multi-function device on HP JetDirect"
 msgstr ", multifunkèní zaøízení na HP JetDirect"
 
-#: ../../printer.pm_.c:787
+#: ../../printer.pm_.c:796
 msgid ", multi-function device"
 msgstr ", multifunkèní zaøízení"
 
-#: ../../printer.pm_.c:790
+#: ../../printer.pm_.c:799
 #, c-format
 msgid ", printing to %s"
 msgstr ", pøi tisku na %s"
 
-#: ../../printer.pm_.c:792
+#: ../../printer.pm_.c:801
 #, c-format
 msgid " on LPD server \"%s\", printer \"%s\""
 msgstr " na serveru LPD \"%s\", tiskárna \"%s\""
 
-#: ../../printer.pm_.c:794
+#: ../../printer.pm_.c:803
 #, c-format
 msgid ", TCP/IP host \"%s\", port %s"
 msgstr ", TCP/IP hostitel \"%s\", port %s"
 
-#: ../../printer.pm_.c:798
+#: ../../printer.pm_.c:807
 #, c-format
 msgid " on SMB/Windows server \"%s\", share \"%s\""
 msgstr " na serveru SMB/Windows \"%s\", sdílená jako \"%s\""
 
-#: ../../printer.pm_.c:802
+#: ../../printer.pm_.c:811
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
 msgstr " na serveru Novell \"%s\", tiskárna \"%s\""
 
-#: ../../printer.pm_.c:804
+#: ../../printer.pm_.c:813
 #, c-format
 msgid ", using command %s"
 msgstr ", pou¾ívá pøíkaz %s"
 
-#: ../../printer.pm_.c:923 ../../printerdrake.pm_.c:1656
+#: ../../printer.pm_.c:932 ../../printerdrake.pm_.c:1682
 msgid "Raw printer (No driver)"
 msgstr "Pøímý tisk (bez ovladaèe)"
 
-#: ../../printer.pm_.c:1095
+#: ../../printer.pm_.c:1104
 #, c-format
 msgid "(on %s)"
 msgstr "(na %s)"
 
-#: ../../printer.pm_.c:1097
+#: ../../printer.pm_.c:1106
 msgid "(on this machine)"
 msgstr "(na tomto poèítaèi)"
 
-#: ../../printer.pm_.c:1122
+#: ../../printer.pm_.c:1131
 #, c-format
 msgid "On CUPS server \"%s\""
 msgstr "Na serveru CUPS \"%s\""
 
-#: ../../printer.pm_.c:1128 ../../printerdrake.pm_.c:3071
-#: ../../printerdrake.pm_.c:3082 ../../printerdrake.pm_.c:3303
-#: ../../printerdrake.pm_.c:3355 ../../printerdrake.pm_.c:3381
-#: ../../printerdrake.pm_.c:3556 ../../printerdrake.pm_.c:3558
+#: ../../printer.pm_.c:1137 ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3111 ../../printerdrake.pm_.c:3332
+#: ../../printerdrake.pm_.c:3384 ../../printerdrake.pm_.c:3410
+#: ../../printerdrake.pm_.c:3585 ../../printerdrake.pm_.c:3587
 msgid " (Default)"
 msgstr " (Výchozí)"
 
@@ -8076,11 +8080,11 @@ msgstr ""
 msgid "Printer auto-detection (Local, TCP/Socket, and SMB printers)"
 msgstr "Autodetekce tiskárny (lokální, TCP/soket, a tiskárny SMB)"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3135
+#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:3164
 msgid "CUPS configuration"
 msgstr "Nastavení CUPS"
 
-#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3136
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:3165
 msgid "Specify CUPS server"
 msgstr "Zadejte CUPS server"
 
@@ -8138,19 +8142,19 @@ msgid "Automatic CUPS configuration"
 msgstr "Automatické nastavení pro CUPS"
 
 #: ../../printerdrake.pm_.c:177 ../../printerdrake.pm_.c:247
-#: ../../printerdrake.pm_.c:1529 ../../printerdrake.pm_.c:1533
-#: ../../printerdrake.pm_.c:1651 ../../printerdrake.pm_.c:2203
-#: ../../printerdrake.pm_.c:2356 ../../printerdrake.pm_.c:2415
-#: ../../printerdrake.pm_.c:2488 ../../printerdrake.pm_.c:2509
-#: ../../printerdrake.pm_.c:2699 ../../printerdrake.pm_.c:2740
-#: ../../printerdrake.pm_.c:2745 ../../printerdrake.pm_.c:2779
-#: ../../printerdrake.pm_.c:2784 ../../printerdrake.pm_.c:2821
-#: ../../printerdrake.pm_.c:2874 ../../printerdrake.pm_.c:2894
-#: ../../printerdrake.pm_.c:2908 ../../printerdrake.pm_.c:2942
-#: ../../printerdrake.pm_.c:2988 ../../printerdrake.pm_.c:3006
-#: ../../printerdrake.pm_.c:3095 ../../printerdrake.pm_.c:3169
-#: ../../printerdrake.pm_.c:3471 ../../printerdrake.pm_.c:3526
-#: ../../printerdrake.pm_.c:3579 ../../standalone/printerdrake_.c:57
+#: ../../printerdrake.pm_.c:1555 ../../printerdrake.pm_.c:1559
+#: ../../printerdrake.pm_.c:1677 ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2382 ../../printerdrake.pm_.c:2441
+#: ../../printerdrake.pm_.c:2514 ../../printerdrake.pm_.c:2535
+#: ../../printerdrake.pm_.c:2728 ../../printerdrake.pm_.c:2769
+#: ../../printerdrake.pm_.c:2774 ../../printerdrake.pm_.c:2808
+#: ../../printerdrake.pm_.c:2813 ../../printerdrake.pm_.c:2850
+#: ../../printerdrake.pm_.c:2903 ../../printerdrake.pm_.c:2923
+#: ../../printerdrake.pm_.c:2937 ../../printerdrake.pm_.c:2971
+#: ../../printerdrake.pm_.c:3017 ../../printerdrake.pm_.c:3035
+#: ../../printerdrake.pm_.c:3124 ../../printerdrake.pm_.c:3198
+#: ../../printerdrake.pm_.c:3500 ../../printerdrake.pm_.c:3555
+#: ../../printerdrake.pm_.c:3608 ../../standalone/printerdrake_.c:57
 msgid "Printerdrake"
 msgstr "PrinterDrake"
 
@@ -8267,7 +8271,7 @@ msgstr ""
 "nainstalovat dal¹ích %d MB potøebného software."
 
 #: ../../printerdrake.pm_.c:269 ../../printerdrake.pm_.c:278
-#: ../../printerdrake.pm_.c:3117 ../../printerdrake.pm_.c:3242
+#: ../../printerdrake.pm_.c:3146 ../../printerdrake.pm_.c:3271
 msgid "Add a new printer"
 msgstr "Pøidat novou tiskárnu"
 
@@ -8828,7 +8832,7 @@ msgstr ""
 msgid "A valid URI must be entered!"
 msgstr "Musí být zadáno správné URI!"
 
-#: ../../printerdrake.pm_.c:1515
+#: ../../printerdrake.pm_.c:1541
 msgid ""
 "Every printer needs a name (for example \"printer\"). The Description and "
 "Location fields do not need to be filled in. They are comments for the users."
@@ -8836,27 +8840,27 @@ msgstr ""
 "Ka¾dá tiskárna potøebuje název (napø. \"tiskarna\"). Popis a umístìní nemusí "
 "být vyplnìny. Jsou to komentáøe pouze pro u¾ivatele."
 
-#: ../../printerdrake.pm_.c:1516
+#: ../../printerdrake.pm_.c:1542
 msgid "Name of printer"
 msgstr "Název tiskárny"
 
-#: ../../printerdrake.pm_.c:1518
+#: ../../printerdrake.pm_.c:1544
 msgid "Location"
 msgstr "Umístìní"
 
-#: ../../printerdrake.pm_.c:1530 ../../printerdrake.pm_.c:1652
+#: ../../printerdrake.pm_.c:1556 ../../printerdrake.pm_.c:1678
 msgid "Reading printer database..."
 msgstr "Naèítám databázi tiskáren ..."
 
-#: ../../printerdrake.pm_.c:1534
+#: ../../printerdrake.pm_.c:1560
 msgid "Preparing printer database..."
 msgstr "Naèítám databázi tiskáren ..."
 
-#: ../../printerdrake.pm_.c:1631
+#: ../../printerdrake.pm_.c:1657
 msgid "Your printer model"
 msgstr "Model tiskárny"
 
-#: ../../printerdrake.pm_.c:1632
+#: ../../printerdrake.pm_.c:1658
 #, c-format
 msgid ""
 "Printerdrake has compared the model name resulting from the printer auto-"
@@ -8881,24 +8885,24 @@ msgstr ""
 "\n"
 "%s"
 
-#: ../../printerdrake.pm_.c:1637 ../../printerdrake.pm_.c:1640
+#: ../../printerdrake.pm_.c:1663 ../../printerdrake.pm_.c:1666
 msgid "The model is correct"
 msgstr "Zvolený model je správný"
 
-#: ../../printerdrake.pm_.c:1638 ../../printerdrake.pm_.c:1639
-#: ../../printerdrake.pm_.c:1642
+#: ../../printerdrake.pm_.c:1664 ../../printerdrake.pm_.c:1665
+#: ../../printerdrake.pm_.c:1668
 msgid "Select model manually"
 msgstr "Vybrat model ruènì"
 
-#: ../../printerdrake.pm_.c:1659
+#: ../../printerdrake.pm_.c:1685
 msgid "Printer model selection"
 msgstr "Výbìr modelu tiskárny"
 
-#: ../../printerdrake.pm_.c:1660
+#: ../../printerdrake.pm_.c:1686
 msgid "Which printer model do you have?"
 msgstr "Jaký model tiskárny máte?"
 
-#: ../../printerdrake.pm_.c:1661
+#: ../../printerdrake.pm_.c:1687
 msgid ""
 "\n"
 "\n"
@@ -8912,7 +8916,7 @@ msgstr ""
 "správnì. Pokud je vyznaèen nesprávný model, mù¾ete ho zmìnit výbìrem ze "
 "seznamu nebo zvolte \"Raw printer\"."
 
-#: ../../printerdrake.pm_.c:1664
+#: ../../printerdrake.pm_.c:1690
 msgid ""
 "If your printer is not listed, choose a compatible (see printer manual) or a "
 "similar one."
@@ -8920,11 +8924,11 @@ msgstr ""
 "Pokud není tiskárna v seznamu, vyberte kompatibilní nebo podobný model "
 "(podívejte se do manuálu)"
 
-#: ../../printerdrake.pm_.c:1741
+#: ../../printerdrake.pm_.c:1767
 msgid "OKI winprinter configuration"
 msgstr "Nastavení pro OKI win-tiskárnu"
 
-#: ../../printerdrake.pm_.c:1742
+#: ../../printerdrake.pm_.c:1768
 msgid ""
 "You are configuring an OKI laser winprinter. These printers\n"
 "use a very special communication protocol and therefore they work only when "
@@ -8939,11 +8943,11 @@ msgstr ""
 "port, nebo se tiskne pøes server, pøipojte tiskárnu na první paralelní port. "
 "Jinak tisk nebude pracovat. Typ pøipojení bude ovladaè ignorovat."
 
-#: ../../printerdrake.pm_.c:1785 ../../printerdrake.pm_.c:1812
+#: ../../printerdrake.pm_.c:1811 ../../printerdrake.pm_.c:1838
 msgid "Lexmark inkjet configuration"
 msgstr "Nastavení inkoustové tiskárny Lexmark"
 
-#: ../../printerdrake.pm_.c:1786
+#: ../../printerdrake.pm_.c:1812
 msgid ""
 "The inkjet printer drivers provided by Lexmark only support local printers, "
 "no printers on remote machines or print server boxes. Please connect your "
@@ -8955,7 +8959,7 @@ msgstr ""
 "tiskárnu na lokální port nebo ji nastavte na tom poèítaèi, ke kterému bude "
 "pøipojena."
 
-#: ../../printerdrake.pm_.c:1813
+#: ../../printerdrake.pm_.c:1839
 msgid ""
 "To be able to print with your Lexmark inkjet and this configuration, you "
 "need the inkjet printer drivers provided by Lexmark (http://www.lexmark."
@@ -8976,11 +8980,11 @@ msgstr ""
 "tiskových hlav programem \"lexmarkmaintain\" a nastavit zarovnání tiskové "
 "hlavy pomocí tohoto programu."
 
-#: ../../printerdrake.pm_.c:1816
+#: ../../printerdrake.pm_.c:1842
 msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
 msgstr "Laserová tiskárna GDI pou¾ívající formát Zenographics ZJ-Stream"
 
-#: ../../printerdrake.pm_.c:1817
+#: ../../printerdrake.pm_.c:1843
 msgid ""
 "Your printer belongs to the group of GDI laser printers (winprinters) sold "
 "by different manufacturers which uses the Zenographics ZJ-stream raster "
@@ -9021,7 +9025,7 @@ msgstr ""
 "První pøíkaz mù¾e zadat i bì¾ný u¾ivatel, druhý mù¾e provést pouze u¾ivatel "
 "root. Poté, co vý¹e uvedené provedete, mù¾ete normálnì tisknout.\n"
 
-#: ../../printerdrake.pm_.c:2040
+#: ../../printerdrake.pm_.c:2066
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -9037,22 +9041,22 @@ msgstr ""
 "podavaè) jsou nastaveny správnì. Pøi tisku ve velmi vysoké kvalitì/rozli¹ení "
 "bude tisk zøejmì pomalej¹í."
 
-#: ../../printerdrake.pm_.c:2049
+#: ../../printerdrake.pm_.c:2075
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Hodnota %s musí být celé èíslo!"
 
-#: ../../printerdrake.pm_.c:2053
+#: ../../printerdrake.pm_.c:2079
 #, c-format
 msgid "Option %s must be a number!"
 msgstr "Hodnota %s musí být èíslo!"
 
-#: ../../printerdrake.pm_.c:2058
+#: ../../printerdrake.pm_.c:2084
 #, c-format
 msgid "Option %s out of range!"
 msgstr "Hodnota %s je mimo rozsah!"
 
-#: ../../printerdrake.pm_.c:2097
+#: ../../printerdrake.pm_.c:2123
 #, c-format
 msgid ""
 "Do you want to set this printer (\"%s\")\n"
@@ -9061,11 +9065,11 @@ msgstr ""
 "Chcete opravdu nastavit tiskárnu \"%s\"\n"
 "jako výchozí?"
 
-#: ../../printerdrake.pm_.c:2120
+#: ../../printerdrake.pm_.c:2146
 msgid "Test pages"
 msgstr "Testovací stránka"
 
-#: ../../printerdrake.pm_.c:2121
+#: ../../printerdrake.pm_.c:2147
 msgid ""
 "Please select the test pages you want to print.\n"
 "Note: the photo test page can take a rather long time to get printed and on "
@@ -9077,39 +9081,39 @@ msgstr ""
 "se na tiskárnì s málo pamìtí nemusí podaøit vùbec. Ve vìt¹inì pøípadù staèí "
 "vytisknout bì¾nou testovací stránku."
 
-#: ../../printerdrake.pm_.c:2125
+#: ../../printerdrake.pm_.c:2151
 msgid "No test pages"
 msgstr "Bez testovací stránky"
 
-#: ../../printerdrake.pm_.c:2126
+#: ../../printerdrake.pm_.c:2152
 msgid "Print"
 msgstr "Tisk"
 
-#: ../../printerdrake.pm_.c:2183
+#: ../../printerdrake.pm_.c:2209
 msgid "Standard test page"
 msgstr "Standardní testovací stránka"
 
-#: ../../printerdrake.pm_.c:2186
+#: ../../printerdrake.pm_.c:2212
 msgid "Alternative test page (Letter)"
 msgstr "Alternativní testovací stránka (Letter)"
 
-#: ../../printerdrake.pm_.c:2189
+#: ../../printerdrake.pm_.c:2215
 msgid "Alternative test page (A4)"
 msgstr "Alternativní testovací stránka (A4)"
 
-#: ../../printerdrake.pm_.c:2191
+#: ../../printerdrake.pm_.c:2217
 msgid "Photo test page"
 msgstr "Testovací stránka s fotografií"
 
-#: ../../printerdrake.pm_.c:2195
+#: ../../printerdrake.pm_.c:2221
 msgid "Do not print any test page"
 msgstr "Netisknout testovací stránku"
 
-#: ../../printerdrake.pm_.c:2204 ../../printerdrake.pm_.c:2357
+#: ../../printerdrake.pm_.c:2230 ../../printerdrake.pm_.c:2383
 msgid "Printing test page(s)..."
 msgstr "Tisknu testovací stránku(y)"
 
-#: ../../printerdrake.pm_.c:2229
+#: ../../printerdrake.pm_.c:2255
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer.\n"
@@ -9124,7 +9128,7 @@ msgstr ""
 "%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2233
+#: ../../printerdrake.pm_.c:2259
 msgid ""
 "Test page(s) have been sent to the printer.\n"
 "It may take some time before the printer starts.\n"
@@ -9132,15 +9136,15 @@ msgstr ""
 "Zku¹ební stránka byl poslána na tiskárnu.\n"
 "Mù¾e chvilku trvat ne¾ zaène tisk.\n"
 
-#: ../../printerdrake.pm_.c:2240
+#: ../../printerdrake.pm_.c:2266
 msgid "Did it work properly?"
 msgstr "Probìhl tisk správnì ?"
 
-#: ../../printerdrake.pm_.c:2262 ../../printerdrake.pm_.c:3416
+#: ../../printerdrake.pm_.c:2288 ../../printerdrake.pm_.c:3445
 msgid "Raw printer"
 msgstr "Pøímý tisk na tiskárnu"
 
-#: ../../printerdrake.pm_.c:2288
+#: ../../printerdrake.pm_.c:2314
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) you can either use "
@@ -9153,7 +9157,7 @@ msgstr ""
 "<soubor>\". Grafické nástroje umo¾òují jednodu¹e vybrat tiskárny a mìnit "
 "jejich parametry.\n"
 
-#: ../../printerdrake.pm_.c:2290
+#: ../../printerdrake.pm_.c:2316
 msgid ""
 "These commands you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications, but here do not supply the file name "
@@ -9163,8 +9167,8 @@ msgstr ""
 "vìt¹inì aplikací, ale nezadává se zde název souboru, které je poka¾dé jiné v "
 "závislosti na dané aplikaci.\n"
 
-#: ../../printerdrake.pm_.c:2293 ../../printerdrake.pm_.c:2310
-#: ../../printerdrake.pm_.c:2320
+#: ../../printerdrake.pm_.c:2319 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2346
 #, c-format
 msgid ""
 "\n"
@@ -9177,7 +9181,7 @@ msgstr ""
 "Jednodu¹e zadejte potøebné nastavení do pøíkazové øádky, napø. \"%s<soubor>"
 "\". "
 
-#: ../../printerdrake.pm_.c:2296 ../../printerdrake.pm_.c:2336
+#: ../../printerdrake.pm_.c:2322 ../../printerdrake.pm_.c:2362
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
@@ -9188,7 +9192,7 @@ msgstr ""
 "klepnìte na tlaèítko \"Mo¾nosti tiskárny\".%s%s\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2300
+#: ../../printerdrake.pm_.c:2326
 msgid ""
 "Here is a list of the available printing options for the current printer:\n"
 "\n"
@@ -9196,7 +9200,7 @@ msgstr ""
 "Zde je seznam dostupných voleb pro nastavení tisku pro aktuální tiskárnu:\n"
 "\n"
 
-#: ../../printerdrake.pm_.c:2305 ../../printerdrake.pm_.c:2315
+#: ../../printerdrake.pm_.c:2331 ../../printerdrake.pm_.c:2341
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -9205,8 +9209,8 @@ msgstr ""
 "Pro vyti¹tìní souboru z pøíkazové øádky (v terminálovém oknì) pou¾ijte "
 "pøíkaz \"%s <soubor>\".\n"
 
-#: ../../printerdrake.pm_.c:2307 ../../printerdrake.pm_.c:2317
-#: ../../printerdrake.pm_.c:2327
+#: ../../printerdrake.pm_.c:2333 ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2353
 msgid ""
 "This command you can also use in the \"Printing command\" field of the "
 "printing dialogs of many applications. But here do not supply the file name "
@@ -9216,7 +9220,7 @@ msgstr ""
 "vìt¹inì aplikací, ale nezadává se zde název souboru, které je poka¾dé jiné v "
 "závislosti na dané aplikaci.\n"
 
-#: ../../printerdrake.pm_.c:2312 ../../printerdrake.pm_.c:2322
+#: ../../printerdrake.pm_.c:2338 ../../printerdrake.pm_.c:2348
 msgid ""
 "To get a list of the options available for the current printer click on the "
 "\"Print option list\" button."
@@ -9224,7 +9228,7 @@ msgstr ""
 "V¹echny mo¾nosti tisku pro souèasnou tiskárnu jsou zobrazeny ní¾e, nebo "
 "klepnìte na tlaèítko \"Mo¾nosti tiskárny\"."
 
-#: ../../printerdrake.pm_.c:2325
+#: ../../printerdrake.pm_.c:2351
 #, c-format
 msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
@@ -9233,7 +9237,7 @@ msgstr ""
 "Pro vyti¹tìní souboru z pøíkazové øádky (v terminálovém oknì) pou¾ijte "
 "pøíkaz \"%s <soubor>\" nebo \"%s <soubor>\".\n"
 
-#: ../../printerdrake.pm_.c:2329
+#: ../../printerdrake.pm_.c:2355
 msgid ""
 "You can also use the graphical interface \"xpdq\" for setting options and "
 "handling printing jobs.\n"
@@ -9248,7 +9252,7 @@ msgstr ""
 "pojmenovanou \"STOP Printer!\", který po kliknutí ihned zastaví v¹echny "
 "tiskové úlohy. To je vhodné tøeba pro pøípady uvíznutí papíru.\n"
 
-#: ../../printerdrake.pm_.c:2333
+#: ../../printerdrake.pm_.c:2359
 #, c-format
 msgid ""
 "\n"
@@ -9261,40 +9265,40 @@ msgstr ""
 "Jednodu¹e zadejte potøebné nastavení do pøíkazové øádky, napø. \"%s <soubor>"
 "\".\n"
 
-#: ../../printerdrake.pm_.c:2343
+#: ../../printerdrake.pm_.c:2369
 #, c-format
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Tisk/Skenování/Foto karty na \"%s\""
 
-#: ../../printerdrake.pm_.c:2344
+#: ../../printerdrake.pm_.c:2370
 #, c-format
 msgid "Printing/Scanning on \"%s\""
 msgstr "Tisk/Skenování na \"%s\""
 
-#: ../../printerdrake.pm_.c:2346
+#: ../../printerdrake.pm_.c:2372
 #, c-format
 msgid "Printing/Photo Card Access on \"%s\""
 msgstr "Tisk/Pøístup k foto kartám na \"%s\""
 
-#: ../../printerdrake.pm_.c:2347
+#: ../../printerdrake.pm_.c:2373
 #, c-format
 msgid "Printing on the printer \"%s\""
 msgstr "Tisknu na tiskárnu \"%s\""
 
-#: ../../printerdrake.pm_.c:2350 ../../printerdrake.pm_.c:2353
-#: ../../printerdrake.pm_.c:2354 ../../printerdrake.pm_.c:2355
-#: ../../printerdrake.pm_.c:3400 ../../standalone/drakTermServ_.c:248
+#: ../../printerdrake.pm_.c:2376 ../../printerdrake.pm_.c:2379
+#: ../../printerdrake.pm_.c:2380 ../../printerdrake.pm_.c:2381
+#: ../../printerdrake.pm_.c:3429 ../../standalone/drakTermServ_.c:248
 #: ../../standalone/drakbackup_.c:1562 ../../standalone/drakbackup_.c:4210
 #: ../../standalone/drakbug_.c:130 ../../standalone/drakfont_.c:705
 #: ../../standalone/drakfont_.c:1014
 msgid "Close"
 msgstr "Zavøít"
 
-#: ../../printerdrake.pm_.c:2353
+#: ../../printerdrake.pm_.c:2379
 msgid "Print option list"
 msgstr "Mo¾nosti tiskárny"
 
-#: ../../printerdrake.pm_.c:2373
+#: ../../printerdrake.pm_.c:2399
 #, c-format
 msgid ""
 "Your multi-function device was configured automatically to be able to scan. "
@@ -9317,7 +9321,7 @@ msgstr ""
 "\n"
 "Nepou¾ívejte pro toto zaøízení \"scannerdrake\"!"
 
-#: ../../printerdrake.pm_.c:2394
+#: ../../printerdrake.pm_.c:2420
 msgid ""
 "Your printer was configured automatically to give you access to the photo "
 "card drives from your PC. Now you can access your photo cards using the "
@@ -9339,17 +9343,17 @@ msgstr ""
 "\"MtoolsFM\" mù¾ete pøepínat mezi písmeny zaøízení pomocí políèka v pravém "
 "horním rohu ka¾dého výètu souborù."
 
-#: ../../printerdrake.pm_.c:2416 ../../printerdrake.pm_.c:2875
-#: ../../printerdrake.pm_.c:3170
+#: ../../printerdrake.pm_.c:2442 ../../printerdrake.pm_.c:2904
+#: ../../printerdrake.pm_.c:3199
 msgid "Reading printer data..."
 msgstr "Naèítám data k tisku ..."
 
-#: ../../printerdrake.pm_.c:2436 ../../printerdrake.pm_.c:2464
-#: ../../printerdrake.pm_.c:2499
+#: ../../printerdrake.pm_.c:2462 ../../printerdrake.pm_.c:2490
+#: ../../printerdrake.pm_.c:2525
 msgid "Transfer printer configuration"
 msgstr "Pøenést konfiguraci tiskárny"
 
-#: ../../printerdrake.pm_.c:2437
+#: ../../printerdrake.pm_.c:2463
 #, c-format
 msgid ""
 "You can copy the printer configuration which you have done for the spooler %"
@@ -9364,7 +9368,7 @@ msgstr ""
 "ale tiskové úlohy nebudou pøeneseny.\n"
 "Ne v¹echny fronty lze pøenést z následujích dùvodù:\n"
 
-#: ../../printerdrake.pm_.c:2440
+#: ../../printerdrake.pm_.c:2466
 msgid ""
 "CUPS does not support printers on Novell servers or printers sending the "
 "data into a free-formed command.\n"
@@ -9372,7 +9376,7 @@ msgstr ""
 "CUPS nepodporuje tiskárny na serverech Novell nebo tiskárny, které posílají "
 "data na skupinu pøíkazù.\n"
 
-#: ../../printerdrake.pm_.c:2442
+#: ../../printerdrake.pm_.c:2468
 msgid ""
 "PDQ only supports local printers, remote LPD printers, and Socket/TCP "
 "printers.\n"
@@ -9380,11 +9384,11 @@ msgstr ""
 "PDQ podporuje pouze místní tiskárny, vzdálené tiskárny LPD a tisk na "
 "tiskárny pøes sokety/TCP.\n"
 
-#: ../../printerdrake.pm_.c:2444
+#: ../../printerdrake.pm_.c:2470
 msgid "LPD and LPRng do not support IPP printers.\n"
 msgstr "LPD ani LprNG nepodporují IPP tiskárny.\n"
 
-#: ../../printerdrake.pm_.c:2446
+#: ../../printerdrake.pm_.c:2472
 msgid ""
 "In addition, queues not created with this program or \"foomatic-configure\" "
 "cannot be transferred."
@@ -9392,7 +9396,7 @@ msgstr ""
 "Tiskové fronty, které nebyly vytvoøeny tímto programem nebo pøes \"foomatic-"
 "configure\" nelze pøenést."
 
-#: ../../printerdrake.pm_.c:2447
+#: ../../printerdrake.pm_.c:2473
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers "
@@ -9402,7 +9406,7 @@ msgstr ""
 "Také tiskárny pou¾ívající PPD soubory od jejich výrobcù nebo tiskárny s "
 "nativními ovladaèi pro CUPS nelze pøenést."
 
-#: ../../printerdrake.pm_.c:2448
+#: ../../printerdrake.pm_.c:2474
 msgid ""
 "\n"
 "Mark the printers which you want to transfer and click \n"
@@ -9411,15 +9415,15 @@ msgstr ""
 "\n"
 "Oznaète tiskárnu, kterou chcete pøenést a stisknìte \"Pøenést\"."
 
-#: ../../printerdrake.pm_.c:2451
+#: ../../printerdrake.pm_.c:2477
 msgid "Do not transfer printers"
 msgstr "Nepøená¹et tiskárny"
 
-#: ../../printerdrake.pm_.c:2452 ../../printerdrake.pm_.c:2469
+#: ../../printerdrake.pm_.c:2478 ../../printerdrake.pm_.c:2495
 msgid "Transfer"
 msgstr "Pøenést"
 
-#: ../../printerdrake.pm_.c:2465
+#: ../../printerdrake.pm_.c:2491
 #, c-format
 msgid ""
 "A printer named \"%s\" already exists under %s. \n"
@@ -9430,11 +9434,11 @@ msgstr ""
 "Kliknìte na \"Pøenést\" pro pøepsání.\n"
 "Také mù¾ete napsat nový název nebo ji pøeskoèit."
 
-#: ../../printerdrake.pm_.c:2473
+#: ../../printerdrake.pm_.c:2499
 msgid "Name of printer should contain only letters, numbers and the underscore"
 msgstr "Název fronty mù¾e obsahovat pouze písmena, èíslice a podtr¾ítko"
 
-#: ../../printerdrake.pm_.c:2478
+#: ../../printerdrake.pm_.c:2504
 #, c-format
 msgid ""
 "The printer \"%s\" already exists,\n"
@@ -9443,16 +9447,16 @@ msgstr ""
 "Tiskárna s názvem %s ji¾ existuje,\n"
 "chcete opravdu pøepsat její konfiguraci?"
 
-#: ../../printerdrake.pm_.c:2486
+#: ../../printerdrake.pm_.c:2512
 msgid "New printer name"
 msgstr "Nový název tiskárny"
 
-#: ../../printerdrake.pm_.c:2489
+#: ../../printerdrake.pm_.c:2515
 #, c-format
 msgid "Transferring %s..."
 msgstr "Pøená¹ím %s ..."
 
-#: ../../printerdrake.pm_.c:2500
+#: ../../printerdrake.pm_.c:2526
 #, c-format
 msgid ""
 "You have transferred your former default printer (\"%s\"), Should it be also "
@@ -9461,29 +9465,29 @@ msgstr ""
 "Byla pøenesena výchozí tiskárna (\"%s\"). Má se nastavit jako výchozí také "
 "na vzdáleném tiskovém systému %s?"
 
-#: ../../printerdrake.pm_.c:2510
+#: ../../printerdrake.pm_.c:2536
 msgid "Refreshing printer data..."
 msgstr "Obèerstvuji tisková data ...."
 
-#: ../../printerdrake.pm_.c:2518 ../../printerdrake.pm_.c:2590
-#: ../../printerdrake.pm_.c:2602
+#: ../../printerdrake.pm_.c:2544 ../../printerdrake.pm_.c:2619
+#: ../../printerdrake.pm_.c:2631
 msgid "Configuration of a remote printer"
 msgstr "Nastavení vzdálené tiskárny"
 
-#: ../../printerdrake.pm_.c:2519
+#: ../../printerdrake.pm_.c:2545
 msgid "Starting network..."
 msgstr "Spou¹tím sí» ...."
 
-#: ../../printerdrake.pm_.c:2554 ../../printerdrake.pm_.c:2558
-#: ../../printerdrake.pm_.c:2560
+#: ../../printerdrake.pm_.c:2580 ../../printerdrake.pm_.c:2584
+#: ../../printerdrake.pm_.c:2586
 msgid "Configure the network now"
 msgstr "Nastavit sí» nyní"
 
-#: ../../printerdrake.pm_.c:2555
+#: ../../printerdrake.pm_.c:2581
 msgid "Network functionality not configured"
 msgstr "Sí» není nastavena"
 
-#: ../../printerdrake.pm_.c:2556
+#: ../../printerdrake.pm_.c:2582
 msgid ""
 "You are going to configure a remote printer. This needs working network "
 "access, but your network is not configured yet. If you go on without network "
@@ -9494,11 +9498,11 @@ msgstr ""
 "spojení, ale sí» není zatím nastavena. Pokud budete pokraèovat bez nastavení "
 "sítì, nebude mo¾né pou¾ít tiskárnu, kterou po¾adujete. Jak chcete pokraèovat?"
 
-#: ../../printerdrake.pm_.c:2559
+#: ../../printerdrake.pm_.c:2585
 msgid "Go on without configuring the network"
 msgstr "Pokraèovat bez nastavení sítì"
 
-#: ../../printerdrake.pm_.c:2592
+#: ../../printerdrake.pm_.c:2621
 msgid ""
 "The network configuration done during the installation cannot be started "
 "now. Please check whether the network gets accessable after booting your "
@@ -9512,7 +9516,7 @@ msgstr ""
 "Mandrake, v sekci \"Sí» a Internet\"/\"Pøipojení\" a následnì nastavte "
 "tiskárnu také v øídícím centru v sekci \"Hardware\"/\"Tiskárna\""
 
-#: ../../printerdrake.pm_.c:2593
+#: ../../printerdrake.pm_.c:2622
 msgid ""
 "The network access was not running and could not be started. Please check "
 "your configuration and your hardware. Then try to configure your remote "
@@ -9521,24 +9525,24 @@ msgstr ""
 "Sí» nefunguje a nelze ji spustit. Prosím zkontrolujte nastavení hardware. "
 "Pak se opìt pokuste provést nastavení vzdálené tiskárny."
 
-#: ../../printerdrake.pm_.c:2603
+#: ../../printerdrake.pm_.c:2632
 msgid "Restarting printing system..."
 msgstr "Restartuji tiskový systém ..."
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2670
 msgid "high"
 msgstr "vysoká"
 
-#: ../../printerdrake.pm_.c:2641
+#: ../../printerdrake.pm_.c:2670
 msgid "paranoid"
 msgstr "paranoidní"
 
-#: ../../printerdrake.pm_.c:2642
+#: ../../printerdrake.pm_.c:2671
 #, c-format
 msgid "Installing a printing system in the %s security level"
 msgstr "Instaluji tiskový systém v bezpeènostní úrovni %s"
 
-#: ../../printerdrake.pm_.c:2643
+#: ../../printerdrake.pm_.c:2672
 #, c-format
 msgid ""
 "You are about to install the printing system %s on a system running in the %"
@@ -9563,11 +9567,11 @@ msgstr ""
 "\n"
 "Chcete opravdu nastavit tiskový systém na tomto poèítaèi?"
 
-#: ../../printerdrake.pm_.c:2675
+#: ../../printerdrake.pm_.c:2704
 msgid "Starting the printing system at boot time"
 msgstr "Spustit tiskový systém pøi startu systému"
 
-#: ../../printerdrake.pm_.c:2676
+#: ../../printerdrake.pm_.c:2705
 #, c-format
 msgid ""
 "The printing system (%s) will not be started automatically when the machine "
@@ -9587,59 +9591,59 @@ msgstr ""
 "\n"
 "Chcete nastavit zpìt automatický start tiskového systému?"
 
-#: ../../printerdrake.pm_.c:2700 ../../printerdrake.pm_.c:2741
-#: ../../printerdrake.pm_.c:2780 ../../printerdrake.pm_.c:2822
-#: ../../printerdrake.pm_.c:2943
+#: ../../printerdrake.pm_.c:2729 ../../printerdrake.pm_.c:2770
+#: ../../printerdrake.pm_.c:2809 ../../printerdrake.pm_.c:2851
+#: ../../printerdrake.pm_.c:2972
 msgid "Checking installed software..."
 msgstr "Ovìøují nainstalovaný software..."
 
-#: ../../printerdrake.pm_.c:2746
+#: ../../printerdrake.pm_.c:2775
 msgid "Removing LPRng..."
 msgstr "Odebírám LprNG..."
 
-#: ../../printerdrake.pm_.c:2785
+#: ../../printerdrake.pm_.c:2814
 msgid "Removing LPD..."
 msgstr "Odebírám LPD..."
 
-#: ../../printerdrake.pm_.c:2858
+#: ../../printerdrake.pm_.c:2887
 msgid "Select Printer Spooler"
 msgstr "Zvolte tiskový systém pro tiskárnu"
 
-#: ../../printerdrake.pm_.c:2859
+#: ../../printerdrake.pm_.c:2888
 msgid "Which printing system (spooler) do you want to use?"
 msgstr "Který tiskový systém chcete pou¾ít pro tisk?"
 
-#: ../../printerdrake.pm_.c:2895
+#: ../../printerdrake.pm_.c:2924
 #, c-format
 msgid "Configuring printer \"%s\"..."
 msgstr "Nastavuji tiskárnu \"%s\"..."
 
-#: ../../printerdrake.pm_.c:2909
+#: ../../printerdrake.pm_.c:2938
 msgid "Installing Foomatic..."
 msgstr "Instaluji Foomatic ..."
 
-#: ../../printerdrake.pm_.c:2979 ../../printerdrake.pm_.c:3020
-#: ../../printerdrake.pm_.c:3417 ../../printerdrake.pm_.c:3490
+#: ../../printerdrake.pm_.c:3008 ../../printerdrake.pm_.c:3049
+#: ../../printerdrake.pm_.c:3446 ../../printerdrake.pm_.c:3519
 msgid "Printer options"
 msgstr "Mo¾nosti tiskárny"
 
-#: ../../printerdrake.pm_.c:2989
+#: ../../printerdrake.pm_.c:3018
 msgid "Preparing Printerdrake..."
 msgstr "Pøipravuji PrinterDrake...."
 
-#: ../../printerdrake.pm_.c:3007 ../../printerdrake.pm_.c:3580
+#: ../../printerdrake.pm_.c:3036 ../../printerdrake.pm_.c:3609
 msgid "Configuring applications..."
 msgstr "Nastavování aplikací..."
 
-#: ../../printerdrake.pm_.c:3027
+#: ../../printerdrake.pm_.c:3056
 msgid "Would you like to configure printing?"
 msgstr "Chtìli byste nastavit tiskárnu?"
 
-#: ../../printerdrake.pm_.c:3039
+#: ../../printerdrake.pm_.c:3068
 msgid "Printing system: "
 msgstr "Tiskový systém: "
 
-#: ../../printerdrake.pm_.c:3099
+#: ../../printerdrake.pm_.c:3128
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; to view information about it; "
@@ -9651,7 +9655,7 @@ msgstr ""
 "nastavit na vzdáleném CUPS serveru pro vyu¾ití v aplikaci Star Office/"
 "OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3100
+#: ../../printerdrake.pm_.c:3129
 msgid ""
 "The following printers are configured. Double-click on a printer to change "
 "its settings; to make it the default printer; or to view information about "
@@ -9660,28 +9664,28 @@ msgstr ""
 "Jsou nastaveny následující tiskárny. Dvojitým kliknutím na ka¾dou z nich je "
 "mo¾né je modifikovat, nastavit jako výchozí nebo o nich získat informace."
 
-#: ../../printerdrake.pm_.c:3127
+#: ../../printerdrake.pm_.c:3156
 msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Obnovit seznam tiskáren (pro získání v¹ech vzdálených CUPS tiskáren)"
 
-#: ../../printerdrake.pm_.c:3145
+#: ../../printerdrake.pm_.c:3174
 msgid "Change the printing system"
 msgstr "Zmìna tiskového systému"
 
-#: ../../printerdrake.pm_.c:3150 ../../standalone/drakconnect_.c:277
+#: ../../printerdrake.pm_.c:3179 ../../standalone/drakconnect_.c:277
 msgid "Normal Mode"
 msgstr "Normání re¾im"
 
-#: ../../printerdrake.pm_.c:3310 ../../printerdrake.pm_.c:3360
-#: ../../printerdrake.pm_.c:3573
+#: ../../printerdrake.pm_.c:3339 ../../printerdrake.pm_.c:3389
+#: ../../printerdrake.pm_.c:3602
 msgid "Do you want to configure another printer?"
 msgstr "Chcete nastavit dal¹í tiskárnu?"
 
-#: ../../printerdrake.pm_.c:3395
+#: ../../printerdrake.pm_.c:3424
 msgid "Modify printer configuration"
 msgstr "Zmìnit nastavení tiskárny"
 
-#: ../../printerdrake.pm_.c:3397
+#: ../../printerdrake.pm_.c:3426
 #, c-format
 msgid ""
 "Printer %s\n"
@@ -9690,86 +9694,86 @@ msgstr ""
 "Tiskárna %s\n"
 "Co chcete zmìnit na této tiskárnì?"
 
-#: ../../printerdrake.pm_.c:3401
+#: ../../printerdrake.pm_.c:3430
 msgid "Do it!"
 msgstr "Provést!"
 
-#: ../../printerdrake.pm_.c:3406 ../../printerdrake.pm_.c:3461
+#: ../../printerdrake.pm_.c:3435 ../../printerdrake.pm_.c:3490
 msgid "Printer connection type"
 msgstr "Typ pøipojení pro tiskárnu"
 
-#: ../../printerdrake.pm_.c:3407 ../../printerdrake.pm_.c:3465
+#: ../../printerdrake.pm_.c:3436 ../../printerdrake.pm_.c:3494
 msgid "Printer name, description, location"
 msgstr "Název tiskárny, popis, umístìní"
 
-#: ../../printerdrake.pm_.c:3409 ../../printerdrake.pm_.c:3483
+#: ../../printerdrake.pm_.c:3438 ../../printerdrake.pm_.c:3512
 msgid "Printer manufacturer, model, driver"
 msgstr "Výrobce tiskárny, model, ovladaè"
 
-#: ../../printerdrake.pm_.c:3410 ../../printerdrake.pm_.c:3484
+#: ../../printerdrake.pm_.c:3439 ../../printerdrake.pm_.c:3513
 msgid "Printer manufacturer, model"
 msgstr "Výrobce tiskárny, model"
 
-#: ../../printerdrake.pm_.c:3419 ../../printerdrake.pm_.c:3494
+#: ../../printerdrake.pm_.c:3448 ../../printerdrake.pm_.c:3523
 msgid "Set this printer as the default"
 msgstr "Nastavit tuto tiskárnu jako výchozí"
 
-#: ../../printerdrake.pm_.c:3421 ../../printerdrake.pm_.c:3499
+#: ../../printerdrake.pm_.c:3450 ../../printerdrake.pm_.c:3528
 msgid "Add this printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Pøidat tuto tiskárnu do Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3422 ../../printerdrake.pm_.c:3508
+#: ../../printerdrake.pm_.c:3451 ../../printerdrake.pm_.c:3537
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Odebrat tiskárnu ze Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3423 ../../printerdrake.pm_.c:3517
+#: ../../printerdrake.pm_.c:3452 ../../printerdrake.pm_.c:3546
 msgid "Print test pages"
 msgstr "Tisk testovacích stránek"
 
-#: ../../printerdrake.pm_.c:3424 ../../printerdrake.pm_.c:3519
+#: ../../printerdrake.pm_.c:3453 ../../printerdrake.pm_.c:3548
 msgid "Know how to use this printer"
 msgstr "Nápovìda pro tisk na této tiskárnì"
 
-#: ../../printerdrake.pm_.c:3426 ../../printerdrake.pm_.c:3521
+#: ../../printerdrake.pm_.c:3455 ../../printerdrake.pm_.c:3550
 msgid "Remove printer"
 msgstr "Odebrat tiskárnu"
 
-#: ../../printerdrake.pm_.c:3472
+#: ../../printerdrake.pm_.c:3501
 #, c-format
 msgid "Removing old printer \"%s\"..."
 msgstr "Odebírám starou tiskárnu \"%s\"..."
 
-#: ../../printerdrake.pm_.c:3497
+#: ../../printerdrake.pm_.c:3526
 msgid "Default printer"
 msgstr "Výchozí tiskárna"
 
-#: ../../printerdrake.pm_.c:3498
+#: ../../printerdrake.pm_.c:3527
 #, c-format
 msgid "The printer \"%s\" is set as the default printer now."
 msgstr "Tiskárna \"%s\" je nyní nastavena jako výchozí."
 
-#: ../../printerdrake.pm_.c:3502 ../../printerdrake.pm_.c:3505
+#: ../../printerdrake.pm_.c:3531 ../../printerdrake.pm_.c:3534
 msgid "Adding printer to Star Office/OpenOffice.org/GIMP"
 msgstr "Pøidávám tiskárnu do Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3503
+#: ../../printerdrake.pm_.c:3532
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully added to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Tiskárna \"%s\" byla úspì¹nì pøidána do Star Office/OpenOffice.org/GIMP."
 
-#: ../../printerdrake.pm_.c:3506
+#: ../../printerdrake.pm_.c:3535
 #, c-format
 msgid "Failed to add the printer \"%s\" to Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Pøidání tiskárny \"%s\" do Star Office/OpenOffice.org/GIMP se nezdaøilo."
 
-#: ../../printerdrake.pm_.c:3511 ../../printerdrake.pm_.c:3514
+#: ../../printerdrake.pm_.c:3540 ../../printerdrake.pm_.c:3543
 msgid "Removing printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Odebírám tiskárnu ze Star Office/OpenOffice.org/GIMP"
 
-#: ../../printerdrake.pm_.c:3512
+#: ../../printerdrake.pm_.c:3541
 #, c-format
 msgid ""
 "The printer \"%s\" was successfully removed from Star Office/OpenOffice.org/"
@@ -9778,19 +9782,19 @@ msgstr ""
 "Tiskárna \"%s\" byla úspì¹nì odebrána z aplikace Star Office/OpenOffice.org/"
 "GIMP."
 
-#: ../../printerdrake.pm_.c:3515
+#: ../../printerdrake.pm_.c:3544
 #, c-format
 msgid ""
 "Failed to remove the printer \"%s\" from Star Office/OpenOffice.org/GIMP."
 msgstr ""
 "Odebrání tiskárny \"%s\" ze Star Office/OpenOffice.org/GIMP se nezdaøilo."
 
-#: ../../printerdrake.pm_.c:3523
+#: ../../printerdrake.pm_.c:3552
 #, c-format
 msgid "Do you really want to remove the printer \"%s\"?"
 msgstr "Chcete opravdu odebrat tiskárnu \"%s\"?"
 
-#: ../../printerdrake.pm_.c:3527
+#: ../../printerdrake.pm_.c:3556
 #, c-format
 msgid "Removing printer \"%s\"..."
 msgstr "Odebírám tiskárnu \"%s\"..."
@@ -9891,6 +9895,53 @@ msgstr "mkraid neuspìl (mo¾ná, ¾e chybí raidtools?)"
 msgid "Not enough partitions for RAID level %d\n"
 msgstr "Není dostatek oddílù pro RAID úrovnì %d\n"
 
+#: ../../security/main.pm_.c:35
+msgid ""
+"Standard: This is the standard security recommended for a computer that will "
+"be used to connect\n"
+"               to the Internet as a client.\n"
+"\n"
+"High:       There are already some restrictions, and more automatic checks "
+"are run every night.\n"
+"\n"
+"Higher:    The security is now high enough to use the system as a server "
+"which can accept\n"
+"              connections from many clients. If your machine is only a "
+"client on the Internet, you\n"
+"\t      should choose a lower level.\n"
+"\n"
+"Paranoid:  This is similar to the previous level, but the system is entirely "
+"closed and security\n"
+"                features are at their maximum\n"
+"\n"
+"Security Administrator:\n"
+"               If the 'Security Alerts' option is set, security alerts will "
+"be sent to this user (username or\n"
+"\t       email)"
+msgstr ""
+"Standardní: Bì¾né zabezpeèení doporuèené pro poèítaè, který bude pøipojen k "
+"síti\n"
+"               Internet jako klient.\n"
+"\n"
+"Vysoká:    Jsou ji¾ zavedena nìkterá omezení, a ka¾dou noc je spu¹tìno více "
+"automatických kontrol.\n"
+"\n"
+"Vy¹¹í:     Úroveò zabezpeèení je nyní dostateènì vysoká, aby bylo mo¾né "
+"pou¾ít\n"
+"              systém jako server, který pøijímá po¾adavky od mnoha klientù. "
+"Pokud je vá¹\n"
+"\t      poèítaè pøipojen k Internetu jen jako klient, mìli byste zvolit "
+"ni¾¹í úroveò.\n"
+"\n"
+"Paranoidní: Podobná pøedchozí úrovni, ale systém je zcela uzavøen a úroveò "
+"zabezpeèení\n"
+"                je na svém maximu.\n"
+"\n"
+"Správce bezpeènosti:\n"
+"               Pokud je zapnuta volba 'Bezpeènostní varování', budou "
+"bezpeènostní varování zasílána tomuto u¾ivateli (u¾ivatelské jméno nebo\n"
+"\t       email)"
+
 #: ../../security/main.pm_.c:66
 msgid "Security Level:"
 msgstr "Úroveò zabezpeèení:"
@@ -9916,6 +9967,18 @@ msgid ""
 msgstr ""
 "Nastavením následujících voleb lze upravit zabezpeèení va¹eho\n"
 "systému. Pokud potøebujete poradit, stisknìte tlaèítko Nápovìda.\n"
+
+#: ../../security/main.pm_.c:226
+msgid "Network Options"
+msgstr "Volby sítì"
+
+#: ../../security/main.pm_.c:235
+msgid "System Options"
+msgstr "Systémové volby"
+
+#: ../../security/main.pm_.c:242
+msgid "Periodic Checks"
+msgstr "Pravidelné kontroly"
 
 #: ../../security/main.pm_.c:256
 msgid "Please wait, setting security level..."
@@ -10769,7 +10832,7 @@ msgstr ""
 "\n"
 "Parametry pro automatickou instalaci jsou pøístupné v sekci nalevo"
 
-#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:484
+#: ../../standalone/drakautoinst_.c:239 ../../standalone/drakgw_.c:480
 #: ../../standalone/scannerdrake_.c:119
 msgid "Congratulations!"
 msgstr "Gratuluji!"
@@ -12997,19 +13060,19 @@ msgstr "Odebrat fonty ze systému"
 msgid "Post Uninstall"
 msgstr "Nastavení po odebrání"
 
-#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:188
+#: ../../standalone/drakgw_.c:43 ../../standalone/drakgw_.c:184
 msgid "Internet Connection Sharing"
 msgstr "Sdílení Internetového Pøipojení"
 
-#: ../../standalone/drakgw_.c:119
+#: ../../standalone/drakgw_.c:115
 msgid "Sorry, we support only 2.4 kernels."
 msgstr "Omlouváme se, ale podporujeme pouze jádra øady 2.4."
 
-#: ../../standalone/drakgw_.c:130
+#: ../../standalone/drakgw_.c:126
 msgid "Internet Connection Sharing currently enabled"
 msgstr "Sdílení Internetového pøipojení je zapnuto"
 
-#: ../../standalone/drakgw_.c:131
+#: ../../standalone/drakgw_.c:127
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently enabled.\n"
@@ -13021,31 +13084,31 @@ msgstr ""
 "\n"
 "Co chcete dále dìlat?"
 
-#: ../../standalone/drakgw_.c:135
+#: ../../standalone/drakgw_.c:131
 msgid "disable"
 msgstr "vypnout"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "dismiss"
 msgstr "odmítnout"
 
-#: ../../standalone/drakgw_.c:135 ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:131 ../../standalone/drakgw_.c:156
 msgid "reconfigure"
 msgstr "pøekonfigurovat"
 
-#: ../../standalone/drakgw_.c:138
+#: ../../standalone/drakgw_.c:134
 msgid "Disabling servers..."
 msgstr "Zakazuji servery..."
 
-#: ../../standalone/drakgw_.c:146
+#: ../../standalone/drakgw_.c:142
 msgid "Internet connection sharing is now disabled."
 msgstr "Sdílení Internetového pøipojení je nyní vypnuto."
 
-#: ../../standalone/drakgw_.c:155
+#: ../../standalone/drakgw_.c:151
 msgid "Internet Connection Sharing currently disabled"
 msgstr "Sdílení Internetového pøipojení je vypnuto"
 
-#: ../../standalone/drakgw_.c:156
+#: ../../standalone/drakgw_.c:152
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
@@ -13057,19 +13120,19 @@ msgstr ""
 "\n"
 "Co chcete dále dìlat?"
 
-#: ../../standalone/drakgw_.c:160
+#: ../../standalone/drakgw_.c:156
 msgid "enable"
 msgstr "povolit"
 
-#: ../../standalone/drakgw_.c:167
+#: ../../standalone/drakgw_.c:163
 msgid "Enabling servers..."
 msgstr "Povoluji servery..."
 
-#: ../../standalone/drakgw_.c:172
+#: ../../standalone/drakgw_.c:168
 msgid "Internet connection sharing is now enabled."
 msgstr "Sdílení Internetového pøipojení je nyní zapnuto."
 
-#: ../../standalone/drakgw_.c:189
+#: ../../standalone/drakgw_.c:185
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -13084,21 +13147,21 @@ msgstr ""
 "\n"
 "Pozn.: potøebujete vyhrazený sí»ový adaptér pro nastavení lokální sítì (LAN)."
 
-#: ../../standalone/drakgw_.c:215
+#: ../../standalone/drakgw_.c:211
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Rozhraní %s (pou¾ívá modul %s)"
 
-#: ../../standalone/drakgw_.c:216
+#: ../../standalone/drakgw_.c:212
 #, c-format
 msgid "Interface %s"
 msgstr "Rozhraní %s"
 
-#: ../../standalone/drakgw_.c:224
+#: ../../standalone/drakgw_.c:220
 msgid "No network adapter on your system!"
 msgstr "Ve va¹em systému není ¾ádný sí»ový adaptér!"
 
-#: ../../standalone/drakgw_.c:225
+#: ../../standalone/drakgw_.c:221
 msgid ""
 "No ethernet network adapter has been detected on your system. Please run the "
 "hardware configuration tool."
@@ -13106,11 +13169,11 @@ msgstr ""
 "Ve va¹em poèítaèi nebyl nalezen ¾ádný sí»ový adaptér. Spus»te prosím program "
 "pro nastavení hardware."
 
-#: ../../standalone/drakgw_.c:231
+#: ../../standalone/drakgw_.c:227
 msgid "Network interface"
 msgstr "Sí»ové rozhraní"
 
-#: ../../standalone/drakgw_.c:232
+#: ../../standalone/drakgw_.c:228
 #, c-format
 msgid ""
 "There is only one configured network adapter on your system:\n"
@@ -13125,17 +13188,17 @@ msgstr ""
 "\n"
 "Na tomto adaptéru bude nastavena lokální sí»."
 
-#: ../../standalone/drakgw_.c:241
+#: ../../standalone/drakgw_.c:237
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
 msgstr "Prosím zvolte si, ke kterému sí»ovému adaptéru bude pøipojena LAN."
 
-#: ../../standalone/drakgw_.c:259
+#: ../../standalone/drakgw_.c:255
 msgid "Network interface already configured"
 msgstr "Sí»ové rozhraní je ji¾ nastaveno"
 
-#: ../../standalone/drakgw_.c:260
+#: ../../standalone/drakgw_.c:256
 #, c-format
 msgid ""
 "Warning, the network adapter (%s) is already configured.\n"
@@ -13150,15 +13213,15 @@ msgstr ""
 "\n"
 "Lze to také provést ruènì, ale musíte vìdìt, co dìláte."
 
-#: ../../standalone/drakgw_.c:265
+#: ../../standalone/drakgw_.c:261
 msgid "Automatic reconfiguration"
 msgstr "Automatické pøenastavení"
 
-#: ../../standalone/drakgw_.c:266
+#: ../../standalone/drakgw_.c:262
 msgid "Show current interface configuration"
 msgstr "Zobrazit aktuální nastavení rozhraní"
 
-#: ../../standalone/drakgw_.c:268
+#: ../../standalone/drakgw_.c:264
 #, c-format
 msgid ""
 "Current configuration of `%s':\n"
@@ -13175,7 +13238,7 @@ msgstr ""
 "IP atributy: %s\n"
 "Ovladaè: %s"
 
-#: ../../standalone/drakgw_.c:280
+#: ../../standalone/drakgw_.c:276
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the C-Class Network that "
@@ -13194,41 +13257,41 @@ msgstr ""
 "potøeby.\n"
 "\n"
 
-#: ../../standalone/drakgw_.c:285
+#: ../../standalone/drakgw_.c:281
 msgid "C-Class Local Network"
 msgstr "Lokální sí»"
 
-#: ../../standalone/drakgw_.c:286
+#: ../../standalone/drakgw_.c:282
 msgid "(This) DHCP Server IP"
 msgstr "Adresa DHCP serveru"
 
-#: ../../standalone/drakgw_.c:287
+#: ../../standalone/drakgw_.c:283
 msgid "Re-configure interface and DHCP server"
 msgstr "Pøenastavení rozhraní a DHCP serveru"
 
-#: ../../standalone/drakgw_.c:294
+#: ../../standalone/drakgw_.c:290
 msgid "The Local Network did not finish with `.0', bailing out."
 msgstr "Èíslo lokální sítì nekonèí na .0, zkou¹ím znovu."
 
-#: ../../standalone/drakgw_.c:305
+#: ../../standalone/drakgw_.c:301
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr "Na¹el jsem mo¾ný konflikt v souèasném nastavení LAN adresy pro %s!\n"
 
-#: ../../standalone/drakgw_.c:315
+#: ../../standalone/drakgw_.c:311
 msgid "Configuring..."
 msgstr "Nastavuji..."
 
-#: ../../standalone/drakgw_.c:316
+#: ../../standalone/drakgw_.c:312
 msgid "Configuring scripts, installing software, starting servers..."
 msgstr "Nastavuji skripty, instaluji software, startuji servery..."
 
-#: ../../standalone/drakgw_.c:352
+#: ../../standalone/drakgw_.c:348
 #, c-format
 msgid "Problems installing package %s"
 msgstr "Problém s instalací balíèku %s"
 
-#: ../../standalone/drakgw_.c:485
+#: ../../standalone/drakgw_.c:481
 msgid ""
 "Everything has been configured.\n"
 "You may now share Internet connection with other computers on your Local "
@@ -13238,23 +13301,23 @@ msgstr ""
 "Nyní lze pou¾ít tento poèítaè pro sdílení pøipojení k Internetu pro va¹i "
 "lokální sí», která pou¾ívá automatickou konfiguraci sítì (DHCP)."
 
-#: ../../standalone/drakgw_.c:504
+#: ../../standalone/drakgw_.c:500
 msgid "The setup has already been done, but it's currently disabled."
 msgstr "Nastavení ji¾ bylo provedeno, ale nyní je vypnuto."
 
-#: ../../standalone/drakgw_.c:505
+#: ../../standalone/drakgw_.c:501
 msgid "The setup has already been done, and it's currently enabled."
 msgstr "Nastavení ji¾ bylo provedeno, nyní je povoleno."
 
-#: ../../standalone/drakgw_.c:506
+#: ../../standalone/drakgw_.c:502
 msgid "No Internet Connection Sharing has ever been configured."
 msgstr "Není nastaveno ¾ádné sdílení Internetového pøipojení."
 
-#: ../../standalone/drakgw_.c:511
+#: ../../standalone/drakgw_.c:507
 msgid "Internet connection sharing configuration"
 msgstr "Nastavení sdílení pøipojení k Internetu"
 
-#: ../../standalone/drakgw_.c:518
+#: ../../standalone/drakgw_.c:514
 #, c-format
 msgid ""
 "Welcome to the Internet Connection Sharing utility!\n"
@@ -14366,32 +14429,3 @@ msgstr "Multimédia - vypalování CD"
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
 msgstr "Vìdecká stanice"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.0 provides you with 11 user interfaces which can be "
-#~ "fully modified: KDE 3, Gnome 2, WindowMaker, ..."
-#~ msgstr ""
-#~ "Distribuce Mandrake Linux 9.0 vám poskytuje 11 u¾ivatelských rozhraní, "
-#~ "které lze plnì upravovat: KDE 3, GNOME 2, WindowMaker, ..."
-
-#~ msgid ""
-#~ "Transform your machine into a powerful Linux server in a few clicks of "
-#~ "your mouse: Web server, mail, firewall, router, file and print server, ..."
-#~ msgstr ""
-#~ "Vá¹ poèítaè lze nìkolika kliknutími my¹i zmìnit na velmi výkonný Linuxový "
-#~ "server: webový server, po¹tovní server, firewall, router, souborový a "
-#~ "tiskový server, ..."
-
-#~ msgid ""
-#~ "This firewall product includes network features which allow you to "
-#~ "fulfill all your security needs"
-#~ msgstr ""
-#~ "Tento produkt pro firewall v sobì zahrnuje sí»ové funkce, které uspokojí "
-#~ "v¹echny va¹e potøeby pøi zabezpeèení va¹í sítì."
-
-#~ msgid ""
-#~ "Our full range of Linux solutions, as well as special offers on products "
-#~ "and other \"goodies\", are available online on our e-store:"
-#~ msgstr ""
-#~ "Ná¹ elektronický obchod nabízí ucelenou øadu na¹ich Linuxových øe¹ení, "
-#~ "stejnì jako speciální nabídky na¹ich produktù a dal¹í \"lahùdky\":"
