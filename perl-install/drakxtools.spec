@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 46mdk
+Release: 47mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -313,6 +313,17 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Jun 22 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-47mdk
+- add net_applet (daouda)
+- drakconnect: update ADSL ISP database (baud <baud123@tuxfamily.org>):
+  o default to pppoa method whenever encapsulation is 6 (PPPoA VCmux),
+  o default to pppoe method whenever encapsulation is 1 (PPPoE LLC)
+  o add new ISP entries : Belgium ADSL Office, Brasil (4 ISP),
+    Bulgaria ISDN/POTS, Greece, Switzerland BlueWin / Swisscom Telecom
+    Italia/Office Users, Turboline Austria Telstra,
+- harddrake2: do not display version number in title bar
+- shorewall configuration: accept from fw to loc (florin)
+
 * Mon Jun 21 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-46mdk
 - harddrake service:
   o do not uselessy fork shells
