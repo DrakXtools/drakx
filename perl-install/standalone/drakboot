@@ -32,15 +32,15 @@ sub lilo_choice
     local ($_) = `detectloader`;
     $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
     
-    my ($hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
-    my $fstab = [ fsedit::get_fstab(@$hds) ];
+    my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
+    my $fstab = [ fsedit::get_all_fstab(@$all_hds) ];
     fs::merge_info_from_fstab($fstab);
     
     $::expert=1;
     
   ask:
-    any::setupBootloader($in, $bootloader, $hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
-    eval { bootloader::install('', $bootloader, $fstab, $hds) };
+    any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or $in->exit(0);
+    eval { bootloader::install('', $bootloader, $fstab, $all_hds->{hds}) };
 
     if ($@) {
 	$in->ask_warn('', 
