@@ -94,19 +94,17 @@ STAGE1_NETWORK_LIBS = $(top_dir)/dietlibc/bin-$(ARCH)/librpc.a
 endif
 
 ifeq (GLIBC, $(L))
-STAGE1_NETWORK_LIBS =
+STAGE1_NETWORK_LIBS = /usr/lib/libresolv.a
 endif
 
  #- stage1 itself
 STAGE1SRC = stage1.c log.c tools.c modules.c probing.c mount.c automatic.c frontend-common.c
 CDROMSRC = cdrom.c
 DISKSRC = disk.c lomount.c
-NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c
+NETWORKSRC = network.c nfsmount.c dhcp.c url.c dns.c adsl.c
 
 ALLSRC = $(INITSRC) $(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC)
 
-
-STAGE1OBJS = $(subst .c,.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
 
 
 STAGE1OBJS-CDROM = $(subst .c,-CDROM.o,$(STAGE1SRC) $(CDROMSRC))
@@ -122,6 +120,9 @@ DISK_DEFS = -DDISABLE_CDROM -DDISABLE_NETWORK
 STAGE1OBJS-NETWORK = $(subst .c,-NETWORK.o,$(STAGE1SRC) $(NETWORKSRC))
 
 NETWORK_DEFS = -DDISABLE_CDROM -DDISABLE_DISK
+
+
+STAGE1OBJS-FULL = $(subst .c,-FULL.o,$(STAGE1SRC) $(CDROMSRC) $(DISKSRC) $(NETWORKSRC))
 
 
 ifeq (i386, $(ARCH))
@@ -183,10 +184,13 @@ stage1-network: $(STAGE1OBJS-NETWORK) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) 
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
-stage1-full: $(STAGE1OBJS) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
+stage1-full: $(STAGE1OBJS-FULL) $(STAGE1_OWN_LIBS) $(STAGE1_NETWORK_LIBS) $(FRONTEND_LINK) $(PCMCIA_LIB) $(STAGE1_LIBC)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $^
 	$(STRIPCMD) $@
 
+
+$(INITOBJS): %.o: %.c
+	$(COMPILE) $(INIT_DEFS) -c $<
 
 $(STAGE1OBJS-CDROM): %-CDROM.o: %.c .depend
 	$(COMPILE) $(INCLUDES) $(CDROM_DEFS) -c $< -o $@
@@ -197,11 +201,11 @@ $(STAGE1OBJS-DISK): %-DISK.o: %.c .depend
 $(STAGE1OBJS-NETWORK): %-NETWORK.o: %.c .depend
 	$(COMPILE) $(INCLUDES) $(NETWORK_DEFS) -c $< -o $@
 
-$(INITOBJS): %.o: %.c
-	$(COMPILE) $(INIT_DEFS) -c $<
+$(STAGE1OBJS-FULL): %-FULL.o: %.c .depend
+	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $< -o $@
 
 .c.o: .depend
-	$(COMPILE) $(INCLUDES) $(PCMCIA_DEFS) -c $<
+	$(COMPILE) $(INCLUDES) -c $<
 
 
 clean: 
