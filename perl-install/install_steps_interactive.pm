@@ -102,12 +102,14 @@ varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo()
 	$o->ask_warn('', "The characters of your language can't be displayed in console,
 so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
+}
     
 sub acceptLicence {
     my ($o) = @_;
-    unless ($o->{useless_thing_accepted}) {
-	$o->set_help('license');
-	$o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
+    return if $o->{useless_thing_accepted};
+
+    $o->set_help('license');
+    $o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
 _("Introduction
 
 The operating system and the different components available in the Mandrake Linux distribution 
@@ -184,9 +186,11 @@ The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
 For any question on this document, please contact MandrakeSoft S.A.  
-")), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" or $o->exit;
-    }
-}
+")), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" and return;
+
+    $o->ask_yesorno('', _("Are you sure you refuse the licence?"), 1) and $o->exit;
+
+    &acceptLicence;
 }
 
 #------------------------------------------------------------------------------
