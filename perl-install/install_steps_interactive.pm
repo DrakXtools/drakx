@@ -449,7 +449,6 @@ sub choosePackages {
     my $b = pkgs::saveSelected($packages);
     pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $def_mark, 0);
     my $def_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
-    pkgs::computeGroupSize($packages, $min_mark);
     my $level = pkgs::setSelectedFromCompssList($packages, { map { $_ => 1 } map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}} }, $min_mark, 0);
     my $max_size = pkgs::selectedSize($packages) + 1; #- avoid division by zero.
     pkgs::restoreSelected($b);
@@ -517,37 +516,51 @@ sub choosePackagesTree {
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $min_level, $individual, $max_size) = @_;
 
-    my %size;
-#    my $base = pkgs::selectedSize($packages);
-#    foreach (@{$o->{compssUsersSorted}}) {
-#	 my $b = pkgs::saveSelected($packages);
-#	 pkgs::packageRate($_) < $min_level or pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
-#	 $size{$_} = pkgs::selectedSize($packages) - $base;
-#	 pkgs::restoreSelected($b);
-#    }
-
+    my $system_size = pkgs::selectedSize($packages);
+    my $sizes = pkgs::computeGroupSize($packages, $min_level);
+    my $compute_size = sub {
+	my %flags; @flags{@_} = ();
+	my $total_size;
+	A: while (my ($k, $size) = each %$sizes) {
+	    Or: foreach (split "\t", $k) {
+		  foreach (split "&&") {
+		      exists $flags{$_} or next Or;
+		  }
+		  $total_size += $size;
+		  next A;
+	      }
+	  }
+	int $total_size;
+    };
     my @groups = @{$o->{compssUsersSorted}};
     my %val;
     foreach (@groups) {
 	$val{$_} = ! grep { ! $o->{compssUsersChoice}{$_} } @{$compssUsers->{$_}{flags}};
     }
 #    @groups = grep { $size{$_} = round_down($size{$_} / sqr(1024), 10) } @groups; #- don't display the empty or small one (eg: because all packages are below $min_level)
-    my $all;
-    $o->ask_many_from_list('', _("Package Group Selection"),
-			   { list => \@groups, 
-			     help => sub { translate($o->{compssUsers}{$_}{descr}) },
-			     val => sub { \$val{$_} },
-			     icon2f => sub { 
+    my ($all, $size_text);
+    my $update_size = sub { 
+	my $size = $system_size + $compute_size->(map { @{$compssUsers->{$_}{flags}} } grep { $val{$_} } @groups);
+	$size_text = _("Selected size %d%s", pkgs::correctSize($size / sqr(1024)), _("MB"));
+    }; &$update_size;
+    $o->ask_from_entries_refH('', _("Package Group Selection"), [
+                           { val => \$size_text, type => 'label' },
+			   (map {; {
+			     help => translate($o->{compssUsers}{$_}{descr}),
+			     val => \$val{$_},
+			     type => 'bool',
+			     icon2f => sub {
 				 my $f = "/usr/share/icons/" . ($o->{compssUsers}{$_}{icons} || 'default');
 				 -e "$f.png" or $f .= "_section";
 				 -e "$f.png" or $f = '/usr/share/icons/default_section';
 				 "$f.png";
 			     },
-			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
-			   },
-			   if_($o->{meta_class} eq 'desktop', { list => [ _("All") ], val => sub { \$all }, shadow => 0 }),
-			   if_($individual, { list => [ _("Individual package selection") ], val => sub { $individual }, advanced => 1 }),
-			  ) or return;
+			     disabled => sub { $all },
+			     text => translate($_) . sprintf(" (%d%s)", $compute_size->(@{$compssUsers->{$_}{flags}}) / sqr(1024), _("MB")),
+			   } } @groups),
+			   if_($o->{meta_class} eq 'desktop', { text => _("All"), val => \$all, type => 'bool' }),
+			   if_($individual, { text => _("Individual package selection"), val => $individual, advanced => 1, type => 'bool' }),
+			  ], changed => $update_size) or return;
     if ($all) {
 	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$compssUsers->{$_}{flags}} } @{$o->{compssUsersSorted}};
     } else {
