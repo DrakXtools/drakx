@@ -159,14 +159,14 @@ my %languages = my @languages = (
 @languages = map { $_->[0] } group_by2(@languages);
 
 my %xim = (
-# 'zh_TW.Big5' => { 
-#	ENC => 'big5',
-#	XIM => 'xcin',
-#	XIM_PROGRAM => 'xcin',
-#	XMODIFIERS => '"@im=xcin"',
-#	CONSOLE_NOT_LOCALIZED => 'yes',
-# },
-  'zh_TW.Big5' => {
+  'zh_TW.Big5' => { 
+ 	ENC => 'big5',
+ 	XIM => 'xcin',
+ 	XIM_PROGRAM => 'xcin',
+ 	XMODIFIERS => '"@im=xcin"',
+ 	CONSOLE_NOT_LOCALIZED => 'yes',
+  },
+  'zh_TW.Big5@chinput' => {
 	ENC => 'big5',
 	XIM => 'Chinput',
 	XIM_PROGRAM => 'chinput',
