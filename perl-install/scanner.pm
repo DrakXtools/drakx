@@ -56,6 +56,7 @@ sub detect {
     foreach (grep { $_->{driver} =~ /scanner/ } detect_devices::usb_probe()) {
 	#my ($manufacturer, $model) = split '\|', $_->{description};
 	#$_->{description} =~ s/Hewlett[-\s_]Packard/HP/;
+	$_->{description} =~ s/Seiko\s+Epson/Epson/i;
 	push @res, { port => "/dev/usb/scanner$i", val => { #CLASS => 'SCANNER',
 							    #MODEL => $model,
 							    #MANUFACTURER => $manufacturer,
@@ -66,6 +67,7 @@ sub detect {
 	++$i;
     }
     foreach (grep { $_->{media_type} =~ /scanner/ } detect_devices::getSCSI()) {
+	   $_->{info} =~ s/Seiko\s+Epson/Epson/i;
 	   push @res, { port => "/dev/sg", 
 				 val => { DESCRIPTION => $_->{info} },
 	   };
@@ -85,10 +87,13 @@ sub readScannerDB {
     my $fs = {
         LINE => sub { push @{$card->{lines}}, $val },
 	NAME => sub {
-	    $cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
+	    #$cards{$card->{type}} = $card if ($card and !$card->{flags}{unsupported});
+	    $cards{$card->{type}} = $card if ($card);
+	    $val =~ s/Seiko\s+Epson/Epson/i;
 	    $card = { type => $val };
 	},
 	SEE => sub {
+	    $val =~ s/Seiko\s+Epson/Epson/i;
 	    my $c = $cards{$val} or die "Error in database, invalid reference $val at line $lineno";
 
 	    push @{$card->{lines}}, @{$c->{lines} || []};

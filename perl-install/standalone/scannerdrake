@@ -49,6 +49,10 @@ sub auto {
 	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
+	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
+		$in->ask_warn('scannerdrake', _("The %s is not supported by this version of Mandrake Linux.", $name));
+		return;
+	    }
 	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configure it?",$name,$_->{port}),1) or manual();
 	    tryConfScanner($name, $_->{port});
 	} else {
@@ -60,15 +64,23 @@ sub auto {
 sub manual {
     my $s = $in->ask_from_treelist('scannerdrake', _("Select a scanner"), '|', [' None', keys %$scanner::scannerDB], '') or return;
     return if $s eq ' None';
+    if ($scanner::scannerDB->{$s}{flags}{unsupported}) {
+	$in->ask_warn('scannerdrake', _("The %s is not supported by this version of Mandrake Linux.", $s));
+	return;
+    }
     tryConfScanner($s);
 }
 
 sub dynamic {
     @f = scanner::detect();
     foreach (@f) { 
-	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
+	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
+	    if ($scanner::scannerDB->{$name}{flags}{unsupported}) {
+		$in->ask_warn('scannerdrake', _("The %s is not supported by this version of Mandrake Linux.", $name));
+		return;
+	    }
 	    scanner::confScanner($name, $_->{port}) unless ($scanner::scannerDB->{$model}{flags}{unsupported});
 	}
     }
