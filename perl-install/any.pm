@@ -62,7 +62,7 @@ sub setupBootloader {
 	$in->set_help('setupBootloaderBeginner') unless $::isStandalone;
 	my $boot = $hds->[0]{device};
 	my $onmbr = "/dev/$boot" eq $b->{boot};
-	$b->{boot} = "/dev/" . ($in->ask_from_list_(_("LILO Installation"),
+	$b->{boot} = "/dev/" . ($in->ask_from_list_(_("LILO/grub Installation"),
 					_("Where do you want to install the bootloader?"),
 					\@l, $l[!$onmbr]) eq $l[0] 
 					  ? $boot : fsedit::get_root($fstab, 'boot')->{device});

@@ -123,8 +123,8 @@ endif
 	cd share ; cp -a themes $(DEST)/usr/share/gtk
 	cd share ; cp compssUsers compssList $(ROOTDEST)/Mandrake/base
 
-	if [ -f "../modules/modules.cz2" ]; then \
-		cp -f ../modules/modules.cz2 $(DEST)/lib/; \
+	if [ -f ../modules/modules.cz* ]; then \
+		cp -f ../modules/modules.cz* $(DEST)/lib/; \
 	else \
 		cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/; \
 		install -d $(DEST)/lib/modules; \

@@ -331,7 +331,7 @@ setupBootloader =>
  (primary master IDE disk) or \"/dev/sda\" (first SCSI disk)."),
 
 setupBootloaderAddEntry =>
- __("LILO (the LInux LOader) can boot Linux and other operating systems.
+ __("LILO (the LInux LOader) or grub can boot Linux and other operating systems.
 Normally they are correctly detected during installation. If you don't
 see yours detected, you can add one or more now.
 
@@ -340,26 +340,10 @@ If you don't want that everybody could access at one of them, you can remove
 it now (a boot disk will be needed to boot it)."),
 
 setupBootloaderGeneral =>
- __("LILO main options are:
+ __("LILO and grub main options are:
   - Boot device: Sets the name of the device (e.g. a hard disk
 partition) that contains the boot sector. Unless you know specifically
 otherwise, choose \"/dev/hda\".
-
-
-  - Linear: Generate linear sector addresses instead of
-sector/head/cylinder addresses. Linear addresses are translated at run
-time and do not depend on disk geometry. Note that boot disks may not be
-portable if \"linear\" is used, because the BIOS service to determine the
-disk geometry does not work reliably for floppy  disks. When using
-\"linear\" with large disks, /sbin/lilo may generate references to
-inaccessible disk areas, because 3D sector addresses are not known
-before boot time.
-
-
-  - Compact: Tries to merge read requests for adjacent sectors into a
-single read request. This drastically reduces load time and keeps the
-map smaller. Using \"compact\" is especially recommended when booting from
-a floppy disk.
 
 
   - Delay before booting default image: Specifies the number in tenths

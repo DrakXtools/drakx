@@ -491,12 +491,12 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
-#    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
-#			$o->ask_warn('', $msg);
-#			setVirtual(1);
-#			require install_steps_auto_install;
-#			install_steps_auto_install::errorInStep();
-#		    };
+    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
+		       $o->ask_warn('', $msg);
+		       setVirtual(1);
+		       require install_steps_auto_install;
+		       install_steps_auto_install::errorInStep();
+		   };
     $ENV{SHARE_PATH} ||= "/usr/share";
     $ENV{DURING_INSTALL} = 1;
 

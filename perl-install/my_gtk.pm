@@ -203,9 +203,10 @@ sub create_okcancel($;$$) {
 sub create_box_with_title($@) {
     my $o = shift;
 
-    $o->{box} = (@_ <= 2 && (map { split "\n" } @_) > 6) ?
+    my $nb_lines = map { split "\n" } @_;
+    $o->{box} = (@_ <= 2 && $nb_lines > 3) ?
       gtkpack(new Gtk::VBox(0,0),
-	      gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @_)), 400, 250)) :
+	      gtkset_usize(createScrolledWindow(gtktext_insert(new Gtk::Text, join "\n", @_)), 400, min(250, $nb_lines * 20))) :
       gtkpack_(new Gtk::VBox(0,0),
 	       (map {
 		   my $w = ref $_ ? $_ : new Gtk::Label($_);

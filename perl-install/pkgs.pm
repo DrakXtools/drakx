@@ -870,7 +870,6 @@ sub install($$$;$$) {
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { packageSetFlagInstalled(delete $packages{$_[0]}, 1) };
-    my $callbackInstall = sub { &installCallback };
 
     #- do not modify/translate the message used with installCallback since
     #- these are keys during progressing installation, or change in other
@@ -988,7 +987,6 @@ sub install($$$;$$) {
 	c::headerFree(delete $_->{header}) foreach @transToInstall;
 	cleanHeaders($prefix);
 
-	#- check for uninstalled package, avoid keeping them selected to avoid trying installing them again!
 	if (my @badpkgs = grep { !packageFlagInstalled($_) } @transToInstall) {
 	    foreach (@badpkgs) {
 		log::l("bad package $_->{file}");
@@ -997,6 +995,8 @@ sub install($$$;$$) {
 	    cdie "error installing package list: " . join("\n", map { $_->{file} } @badpkgs);
 	}
     } while ($nb > 0 && !$pkgs::cancel_install);
+
+    cleanHeaders($prefix);
 
     loopback::save_boot($loop_boot);
 }

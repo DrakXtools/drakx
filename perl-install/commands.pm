@@ -423,8 +423,9 @@ sub insmod {
 	$_ = $1 if m@.*/([^/]*)\.o@;
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
-	    if (-e "/lib/modules.cz2") {
-		run_program::run("extract_archive /lib/modules.cz2 /tmp $_.o");
+	    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
+	    if (-e $cz) {
+		run_program::run("extract_archive $cz /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
 		run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
 	    } else {

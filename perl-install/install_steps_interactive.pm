@@ -710,7 +710,7 @@ sub createBootdisk {
 	$o->ask_yesorno('',
 			_("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
-LILO on your system, or another operating system removes LILO, or LILO doesn't
+LILO (or grub) on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?"), 

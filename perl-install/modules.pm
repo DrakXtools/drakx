@@ -401,7 +401,8 @@ sub load_multi {
 
     $::testing and log::l("i would install modules @l"), return;
 
-    run_program::run("extract_archive", "/lib/modules.cz2", "/tmp", map { "$_.o" } @l);
+    my $cz = "/lib/modules.cz"; -e $cz or $cz .= "2";
+    run_program::run("extract_archive", $cz, "/tmp", map { "$_.o" } @l);
     run_program::run(["insmod_", "insmod"], "/tmp/$_.o") and $conf{$_}{loaded} = 1 foreach @l;
     unlink map { "/tmp/$_.o" } @l;
 }

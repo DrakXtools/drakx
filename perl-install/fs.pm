@@ -390,6 +390,7 @@ sub write_fstab($;$$) {
     local *F;
     open F, "> $prefix/etc/fstab" or die "error writing $prefix/etc/fstab";
     print F join(" ", @$_), "\n" foreach sort { $a->[1] cmp $b->[1] } @to_add;
+    log::l("fstab: ", join(" ", @$_)) foreach sort { $a->[1] cmp $b->[1] } @to_add;
 }
 
 sub merge_fstabs {

@@ -359,6 +359,7 @@ sub choosePackagesTree {
     my $pix_base     = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-base.xpm") ];
     my $pix_selected = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-selected.xpm") ];
     my $pix_unselect = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-unselected.xpm") ];
+    my $pix_installed= [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-installed.xpm") ];
 
     my $parent; $parent = sub {
 	if (my $w = $wtree{$_[0]}) { return $w }
@@ -374,7 +375,7 @@ sub choosePackagesTree {
 	my $node = $tree->insert_node($parent->($root), undef, [$leaf, '', ''], 5, (undef) x 4, 1, 0);
 	my $p = $packages->[0]{$leaf} or return;
 	$p->{medium}{selected} or return;
-	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : $pix_unselect;
+	my $pix = pkgs::packageFlagBase($p) ? $pix_base : pkgs::packageFlagSelected($p) ? $pix_selected : pkgs::packageFlagInstalled($p) ? $pix_installed : $pix_unselect;
 	$tree->node_set_pixmap($node, 1, $pix->[0], $pix->[1]);
 	push @{$ptree{$leaf}}, $node;
     };
@@ -443,6 +444,10 @@ sub choosePackagesTree {
 	    $tree->toggle_expansion($curr);
 	} else {
 	    my $p = $packages->[0]{$curr} or return;
+	    if (pkgs::packageFlagBase($p)) {
+		$o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
+		return;
+	    }
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {
 		@l > 1 && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be installed/removed"), join(", ", sort @l) ], 1) || return;
@@ -454,7 +459,7 @@ sub choosePackagesTree {
 		}
 		&$update_size;
 	    } else {
-		$o->ask_warn('', _("This is a mandatory package, it can't be unselected"));
+		$o->ask_warn('', _("You can't unselect this package"));
 	    }
 	}
     };

@@ -260,7 +260,7 @@ sub write {
     add2hash $h, { LC_MONETARY => $lang };
     add2hash $h, { LC_TIME => $lang };
     if (my $l = $languages{$lang}) {
-	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_LANG_INSTALL => $l->[3] };
+	add2hash $h, { LANG => $l->[2], LANGUAGE => $l->[3], RPM_INSTALL_LANG => $l->[3] };
 
 	my $c = $charsets{$l->[1] || ''};
 	if ($c && $c->[0] && $c->[1]) {	    
