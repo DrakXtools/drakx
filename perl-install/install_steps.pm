@@ -331,7 +331,7 @@ sub beforeInstallPackages {
 
 sub pkg_install {
     my ($o, @l) = @_;
-    log::l("selecting packages");
+    log::l("selecting packages ".join(" ", @l));
     require pkgs;
     if ($::testing) {
 	log::l("selecting package \"$_\"") foreach @l;
