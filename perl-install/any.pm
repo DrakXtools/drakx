@@ -669,7 +669,7 @@ when your installation is complete and you restart your system.")),
 }
 
 sub selectCountry {
-    my ($o, $locale) = @_;
+    my ($in, $locale) = @_;
 
     my $country = $locale->{country};
     my @countries = lang::list_countries(exclude_non_installed => !$::isInstall);
@@ -682,7 +682,7 @@ sub selectCountry {
 
     my ($other, $ext_country);
     member($country, @best) or ($ext_country, $country) = ($country, $ext_country);
-    $o->ask_from_(
+    $in->ask_from_(
 		  { title => N("Country / Region"), 
 		    messages => N("Please choose your country."),
 		    interactive_help_id => 'selectCountry',
