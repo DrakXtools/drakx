@@ -77,7 +77,7 @@ sub detect_timezone() {
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connection_steps, %connections, %rconnections, @connection_list);
-      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $modem, $isdn, $isdn_type, $adsl_type, $need_restart_network);
+      my ($modem, $ntf_name, $ipadr, $netadr, $gateway_ex, $up, $modem, $isdn, $isdn_type, $adsl_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -108,6 +108,8 @@ sub detect_timezone() {
       $netc->{autodetection} = 0;
       $netc->{autodetect} = {};
 
+      my $first_modem = sub { first(grep { $_->{device} =~ m!^/dev! } values %{$netc->{autodetect}{modem}}) };
+
       my $next_cnx_step = sub {
           my $next = $connection_steps{$cnx_type};
           # FIXME: we want this in standalone mode too:
@@ -116,17 +118,6 @@ sub detect_timezone() {
               return 1 < scalar(keys %{$netc->{internet_cnx}}) ? "multiple_internet_cnx" : $connection_steps{multiple_internet_cnx};
           }
           return $next;
-      };
-
-      my $ppp_first_step = sub {
-          $mouse ||= {};
-          $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-          write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
-                           q(ifdown ppp0
-killall pppd
-), $netcnx->{type});
-          my $need_to_ask = $modem->{device} || !$netc->{autodetect}{winmodem};
-          return $need_to_ask ? "choose_serial_port" : "ppp_choose";
       };
 
       my $handle_multiple_cnx = sub {
@@ -180,7 +171,8 @@ If you don't want to use the auto detection, deselect the checkbox.
                         my @connections = 
                           (
                            [ #-PO: here, "(detected)" string will be appended to eg "ADSL connection"
-                            N("Modem connection"), N("(detected on port %s)", $netc->{autodetect}{modem}), "modem" ],
+                            N("Modem connection"), N("(detected on port %s)", join('', map { if_($_->{device}, $_->{device}) }
+                                                                                   values %{$netc->{autodetect}{modem}})), "modem" ],
                            [ N("ISDN connection"),  N("(detected %s)", join(', ', map { $_->{description} } values %{$netc->{autodetect}{isdn}})), "isdn" ],
                            [ N("ADSL connection"),  N("(detected)"), "adsl" ],
                            [ N("Cable connection"), N("(detected)"), "cable" ],
@@ -350,12 +342,12 @@ If you don't want to use the auto detection, deselect the checkbox.
                         } else {
                             detect($netc->{autodetect}, 'modem') if !$::isInstall && !$netc->{autodetection};
                             $netc->{isdntype} = 'isdn_external';
-                            $netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
+                            $netcnx->{isdn_external}{device} = $first_modem->();
                             $netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
-                            return &$ppp_first_step->();
+                            return "ppp_choose";
                         };
 
                     },
@@ -389,47 +381,6 @@ If you don't want to use the auto detection, deselect the checkbox.
                     }
                    },
 
-                   winmodem => 
-                   {
-                    pre => sub {
-                        my ($in, $netcnx, $mouse, $netc) = @_;
-                        my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
-                        my $type;
-                        
-                        detect($netc->{autodetect}, 'lan') if !$::isInstall && !$netc->{autodetection};
-                        $netc->{autodetect}{winmodem} or ($in->ask_warn(N("Warning"), N("You don't have any winmodem")) ? return 1 : $in->exit(0));
-                        
-                        foreach (keys %{$netc->{autodetect}{winmodem}}) {
-                            /Hcf/ and $type = "hcfpcimodem";
-                            /Hsf/ and $type = "hsflinmodem";
-                            /LT/  and $type = "ltmodem";
-                            $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
-                        }
-                        
-                        $type or ($in->ask_warn(N("Warning"), N("Your modem isn't supported by the system.
-Take a look at http://www.linmodems.org")) ? return 1 : $in->exit(0));
-                        my $e = $in->ask_from_list(N("Title"), N("\"%s\" based winmodem detected, do you want to install needed software ?", $type), [N("Install rpm"), N("Do nothing")]) or return 0;
-                        if ($e =~ /rpm/) {
-                            if ($in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type)) {
-                                unless ($::isInstall) {
-		#- fallback to modem configuration (beware to never allow test it).
-                                    $netcnx->{type} = 'modem';
-                                    #$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
-                                    return configure($in, $netcnx, $mouse, $netc);
-                                }
-                            } else {
-                                return 0;
-                            }
-                        }
-                        return 1;
-                    },
-                   },
-
-                   no_winmodem =>
-                   {
-                    name => N("Warning") . "\n\n" . N("You don't have any winmodem"),
-                   },
-
                    no_supported_winmodem =>
                    {
                     name => N("Warning") . "\n\n" . N("Your modem isn't supported by the system.
@@ -438,15 +389,77 @@ Take a look at http://www.linmodems.org"),
                    },
 
 
-
-
                    modem =>
                    {
                     pre => sub {
                         detect($netc->{autodetect}, 'modem') if !$::isInstall;
                         $netcnx->{type} = 'modem';
-                        my $modem = $netcnx->{$netcnx->{type}};
-                        $modem->{device} = $netc->{autodetect}{modem};
+                    },
+                    name => N("Select the modem to configure:"),
+                    data => sub {
+                        [ { label => N("Modem"), type => "list", val => \$modem, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
+                    },
+                    post => sub {
+                        $mouse ||= {};
+                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
+                        write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"), q(
+ifdown ppp0
+killall pppd
+), $netcnx->{type});
+                        $ntf_name = $netc->{autodetect}{modem}{$modem}{device} || $netc->{autodetect}{modem}{$modem}{description};
+                        print "Interface is $ntf_name\n";
+
+                        return "ppp_choose" if $ntf_name =~ m!^/dev/!;
+                        return "choose_serial_port" if !$ntf_name;
+
+                        my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
+                        my $type;
+                        
+                        detect($netc->{autodetect}, 'lan') if !$::isInstall && !$netc->{autodetection};
+                        
+                        foreach (map { $_->{description} } values %{$netc->{autodetect}{modem}}) {
+                            /Hcf/ and $type = "hcfpcimodem";
+                            /Hsf/ and $type = "hsflinmodem";
+                            /LT/  and $type = "ltmodem";
+                            $relocations{$type} || $type && $in->do_pkgs->what_provides($type) or $type = undef;
+                        }
+                        
+                        return "no_supported_winmodem" if !$type;
+
+                        $in->do_pkgs->install($relocations{$type} ? @{$relocations{$type}} : $type);
+
+                        #$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
+
+                        #- fallback to modem configuration (beware to never allow test it).
+                        return "ppp_choose";
+                    },
+                   },
+
+                   
+                   choose_serial_port =>
+                   {
+                    pre => sub {
+                        $mouse ||= {};
+                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
+                    },
+                    
+                    name => N("Please choose which serial port your modem is connected to."),
+                    interactive_help_id => 'selectSerialPort',
+                    data => [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
+                                list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
+                        
+                    next => "ppp_choose",
+                   },
+
+                   ppp_choose =>
+                   {
+                    pre => sub {
+                        write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
+                                         q(ifdown ppp0
+killall pppd
+), $netcnx->{type});
+                        $modem = $netcnx->{$netcnx->{type}};
+                        $modem->{device} = $first_modem->();
                         my %l = getVarsFromSh("$::prefix/usr/share/config/kppprc");
                         $modem->{connection} = $l{Name};
                         $modem->{domain} = $l{Domain};
@@ -462,38 +475,6 @@ Take a look at http://www.linmodems.org"),
                         foreach (@$secret) {
                             $modem->{passwd} = $_->{passwd} if $_->{login} eq $modem->{login};
                         }
-                    },
-                    name => N("Select the modem to configure:"),
-                    data => sub {
-                        [ { label => N("Modem"), type => "list", val => \$ntf_name, list => [ grep { $_ } $netc->{autodetect}{modem}, values %{$netc->{autodetect}{winmodem}} ], allow_empty_list => 1 } ],
-                    },
-                    post => $ppp_first_step,
-                   },
-
-                   # FIXME: only if $need_to_ask
-                   choose_serial_port =>
-                   {
-                    pre => sub {
-                        $mouse ||= {};
-                        $mouse->{device} ||= readlink "$::prefix/dev/mouse";
-                        write_cnx_script($netc, "modem", join("\n", if_($::testing, "/sbin/route del default"), "ifup ppp0"),
-                                         q(ifdown ppp0
-killall pppd
-), $netcnx->{type});
-                        my $need_to_ask = $modem->{device} || !$netc->{autodetect}{winmodem};
-                    },
-                    
-                    name => N("Please choose which serial port your modem is connected to."),
-                    interactive_help_id => 'selectSerialPort',
-                    data => [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
-                                list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
-                        
-                    next => "ppp_choose",
-                   },
-
-                   ppp_choose =>
-                   {
-                    pre => sub {
                         #my $secret = network::tools::read_secret_backend();
                         #my @cnx_list = map { $_->{server} } @$secret;
                     },
