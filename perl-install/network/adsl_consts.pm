@@ -111,6 +111,7 @@ our %adsl_data = (
                   {
                    vpi => 8,
                    vci => 23,
+                   Encapsulation => 6,
                    dnsServer2 => '213.36.80.1',
                    dnsServer3 => '213.36.80.2',
                    method => 'pppoa',
