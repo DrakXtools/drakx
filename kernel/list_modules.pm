@@ -23,7 +23,7 @@ our %l = (
         qw(defxx orinoco_plx), # most unused
         qw(depca dgrs dmfe e100 e1000 e2100 eepro eepro100 eexpress epic100 eth16i),
         qw(ewrk3 hamachi hp hp-plus hp100 ibmtr),
-        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 olympic pcnet32 plip rcpci), #old_tulip 
+        qw(lance natsemi ne ne2k-pci ni5010 ni52 ni65 nvnet olympic pcnet32 plip rcpci), #old_tulip 
         qw(sb1000 sis900 sk98lin smc-ultra smc9194 starfire tg3 tlan tmspci tulip via-rhine), #sktr 
         qw(wd winbond-840 yellowfin ns83820),
 
