@@ -205,7 +205,11 @@ our @tree =
           require list_modules;
           require network::ethernet;
           my @net_modules = list_modules::category2modules(network::ethernet::get_eth_categories());
-          f(grep { member($_->{driver}, @net_modules) } @devices);
+          f(grep {
+              $_->{media_type} && $_->{media_type} =~ /^NETWORK/
+                || $_->{type} && $_->{type} eq 'network'
+                  ||  member($_->{driver}, @net_modules);
+          } @devices);
       },
       checked_on_boot => 0,
      },
