@@ -180,6 +180,7 @@ sub cardConfigurationAuto() {
 		       foreach (1..$dup) {
 			   my $card = {};
 			   add2hash($card, $orig);
+			   $card->{screen} = $_ - 1;
 			   push @result, $card;
 		       }
 		       @result;
@@ -190,11 +191,11 @@ sub cardConfigurationAuto() {
     #- make sure no type are already used, duplicate both screen
     #- and rename type (because used as id).
     if (@cards > 1) {
-	my $screen = 0;
+	my $card = 1;
 	foreach (@cards) {
 	    updateCardAccordingName($_, $_->{type}) if $_->{type};
-	    $_->{screen} = $screen++;
-	    $_->{type} = "$_->{type} $screen";
+	    $_->{type} = "$_->{type} $card";
+	    $card++;
 	}
     }
     #- in case of only one cards, remove all busid reference, this will avoid
