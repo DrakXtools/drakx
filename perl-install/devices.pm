@@ -8,9 +8,6 @@ use run_program;
 use log;
 use c;
 
-1;
-
-
 sub size($) {
     local *F;
     sysopen F, $_[0], 0 or log::l("open $_[0]: $!"), return 0;
@@ -156,3 +153,5 @@ sub make($) {
 
     $file;
 }
+
+1;

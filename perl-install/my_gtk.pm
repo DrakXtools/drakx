@@ -25,8 +25,6 @@ use common;
 my $forgetTime = 1000; #- in milli-seconds
 $border = 5;
 
-1;
-
 #-###############################################################################
 #- OO stuff
 #-###############################################################################
@@ -45,7 +43,7 @@ sub new {
     push @interactive::objects, $o if !$opts{no_interactive_objects};
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
-
+    
     if ($::isWizard && !$my_gtk::pop_it) {
 	my $rc = "/etc/gtk/wizard.rc";
 	-r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
@@ -178,6 +176,7 @@ sub gtkpack__($@) {
     my $box = shift;
     gtkpack_($box, map {; 0, $_ } @_);
 }
+
 sub gtkpack_($@) {
     my $box = shift;
     for (my $i = 0; $i < @_; $i += 2) {
@@ -768,6 +767,8 @@ sub _ask_file {
     $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });
     $f->hide_fileop_buttons;
 }
+
+1;
 
 #-###############################################################################
 #- rubbish

@@ -15,8 +15,6 @@ my %keymap_translate = (
 );
 
 
-1;
-
 sub keymap_translate {
     $keymap_translate{$_[0]} || substr($_[0], 0, 2);
 }
@@ -214,3 +212,5 @@ sub getinfoFromDDC {
     $O->{modelines} ||= join '', @m;
     $o;
 }
+
+1;
