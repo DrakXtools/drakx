@@ -486,13 +486,7 @@ sub set_thm_values() {
 }
 
 
-my ($prev_pic, $prev_canvas);
-
 #- Desc  => destroy properly all widget of preview window
-sub kill_preview() {
-		$prev_window->destroy; undef($prev_window);
-		undef($prev_pic);
-}
 #- Desc  => create a new window with a preview of splash screen
 #- Args  => $img_file (str) full path to preview file
 sub show_prev {
@@ -501,6 +495,7 @@ sub show_prev {
  $prev_window->set_title(
                          #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
                          N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
+ my $prev_pic;
  eval { $prev_pic = gtkcreate_pixbuf($img_file) };
  if (my $err = $@) {
      err_dialog(N("Error"),
@@ -513,9 +508,11 @@ sub show_prev {
 
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
  $prev_window->add(Gtk2::Image->new_from_pixbuf($prev_pic));
- $prev_window->signal_connect(delete_event => \&kill_preview);
+ $prev_window->signal_connect(delete_event => sub {
+                                  $prev_window->destroy; undef($prev_window);
+                                  undef($prev_pic);
+                              });
  $prev_window->show_all;
- 
 }
 
 #- Desc  => define the max size of boot's scales
