@@ -120,6 +120,9 @@ Select permissions to see/edit", $default_perm_level)),
                                                                    [ N("Delete"), N("Delete selected rule"), \&del_callback ], 
                                                                    [ N("Edit"), N("Edit current rule"), \&edit_callback ])),
                                     0, gtkpack(Gtk2::HButtonBox->new,
+                                               gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => 
+                                                                 sub { unless (fork()) { exec("drakhelp --id drakperm") } }),
+                                               Gtk2::Label->new(""),
                                                gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { ugtk2->exit }),
                                                gtksignal_connect(Gtk2::Button->new(N("Ok")), clicked => \&save_perm),
                               )
