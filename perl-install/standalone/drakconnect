@@ -37,6 +37,7 @@ use modules;
 use network::isdn;
 use network::adsl;
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
+use POSIX ":sys_wait_h";
 
 my $xpm_path = "/usr/share/libDrakX/pixmaps";
 local $_ = join '', @ARGV;
@@ -59,7 +60,7 @@ MDK::Common::Globals::init(
 	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
 	     );
 
-$::isEmbedded && ref($in) =~ /gtk/ or goto dd;
+#$::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 
 require ugtk2;
 ugtk2->import(qw(:helpers :wrappers :create));
@@ -164,17 +165,20 @@ each_index {
     $list->append_column(my $col = Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1));
     $col->set_sort_column_id($::i);
 } (N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
+my $wizard_pid;
 $list->signal_connect(button_press_event => sub { 
                           my (undef, $event) = @_;
                           my (undef, $iter) = $list->get_selection->get_selected;
                           return unless $iter;
-                          configure_lan() if $event->type eq '2button-press';
+                          configure_lan() if $event->type eq '2button-press' && !$wizard_pid;
                       });
 
 
 update_list();
 
 my ($bbox0, $label_host, $int_state, $button_expert);
+
+my ($lan_button, $wiz_button, $int_button);
 
 $window1->{window}->add(
                         gtkpack_(Gtk2::VBox->new(0,10),
@@ -205,7 +209,7 @@ $window1->{window}->add(
                                                                            5),
                                                     0, $warning_label1,
                                                     0, gtkpack(Gtk2::HButtonBox->new,
-                                                               gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
+                                                               $int_button = gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
                                                                                  clicked => sub { configure_net('', $netcnx, $netc, $intf) }),
                                                                $int_connect,
                                                               ),
@@ -216,26 +220,25 @@ $window1->{window}->add(
                                                     0, $list,
                                                     0, new Gtk2::HBox(0,0),
                                                     0, gtkpack_(new Gtk2::HBox(0, 0),
-                                                                0, gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
-                                                                                     clicked => \&configure_lan),
+                                                                0, $lan_button = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
+                                                                                                   clicked => \&configure_lan),
                                                                ),
                                                     )
                                            ),
                                  0, gtkadd(Gtk2::HButtonBox->new,
-                                           gtksignal_connect(Gtk2::Button->new(N("Launch the wizard")),
-                                                             clicked => sub {
-                                                                 system("drakconnect&");
-								 #- reload everything...
-								 $netcnx = {}; $netc = {}; $intf = {};
-								 network::netconnect::read_net_conf('', $netcnx, $netc);
-								 modules::load_category('net');
-								 @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
-								 network::netconnect::load_conf($netcnx, $netc, $intf);
-								 network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
-                                                                 $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($combo1->entry->get_text || "default"));
-                                                                 update();
-                                                             }),
-                                           ),
+                                           $wiz_button = gtksignal_connect(Gtk2::Button->new(N("Launch the wizard")),
+                                                                           clicked => sub {
+                                                                               my $err = $$;
+                                                                               $wizard_pid = fork();
+                                                                               if (defined $wizard_pid) {
+                                                                                   # immediate exit, else forked gtk+ object destructors will badly catch up parent drakconnect
+                                                                                   !$wizard_pid and do { exec("drakconnect") or POSIX::_exit(1) };
+                                                                                   sensitive_buttons(0);
+                                                                               } else {
+                                                                                   error_dialog(N("Unable to fork: %s", "$!"));
+                                                                               }
+                                                                           }),
+                                          ),
                                  0, Gtk2::HSeparator->new,
                                  0, $bbox0 = gtkpack(Gtk2::HButtonBox->new,
                                                      gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { 
@@ -269,6 +272,28 @@ $combo1->signal_connect(realize => sub {
                                                                $button_apply->set_sensitive(1);
                                                            });
 });
+
+sub sensitive_buttons {
+    $_->set_sensitive(0) foreach $lan_button, $wiz_button, $int_button;
+}
+
+
+$SIG{CHLD} = sub {
+    my $child = waitpid(-1, POSIX::WNOHANG);
+    return if !($wizard_pid && $child eq $wizard_pid);
+    undef $wizard_pid;
+    sensitive_buttons(1);
+    #- reload everything...
+    $netcnx = {}; $netc = {}; $intf = {};
+    network::netconnect::read_net_conf('', $netcnx, $netc);
+    modules::load_category('net');
+    @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
+    network::netconnect::load_conf($netcnx, $netc, $intf);
+    network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
+    $combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . ($combo1->entry->get_text || "default"));
+    update();
+};
+
 
 $window1->{rwindow}->show_all;
 gtkflush();
