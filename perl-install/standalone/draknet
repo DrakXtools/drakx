@@ -56,7 +56,7 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-#goto dd;
+goto dd;
 my $window1 = new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -75,7 +75,8 @@ $hbox1->pack_start($combo1,0,0,0);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
 $hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
-$hbox2->pack_start(new Gtk::Label("petite.mandrakesoft.com"),0,0,0);
+chop (my $hostname = `hostname`);
+$hbox2->pack_start(new Gtk::Label($hostname),0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
@@ -106,7 +107,6 @@ $button1->signal_connect( 'clicked', \&configure_net );
 
 my $button2 = new Gtk::Button(_("Connect..."));
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
-
 
 my $separator2 = new Gtk::HSeparator;
 $vbox1->pack_start($separator2,1,1,5);

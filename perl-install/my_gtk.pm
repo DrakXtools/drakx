@@ -41,6 +41,33 @@ sub new {
     $o->{rwindow}->set_position('center_always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if $my_gtk::grab || $o->{grab};
 
+    if ($::isWizard) {
+	my $rc = "/etc/gtk/wizard.rc";
+	-r $rc or $rc = dirname(__FILE__) . "/wizard.rc";
+	Gtk::Rc->parse($rc);
+	$o->{window} = new Gtk::VBox(0,0);
+	$o->{window}->set_border_width(10);
+	$o->{rwindow} = $o->{window};
+	if (!defined($::WizardWindow)) {
+	    $::WizardWindow = new Gtk::Window;
+	    $::WizardWindow->set_position('center_always');
+	    $::WizardTable = new Gtk::Table(2, 2, 0);
+	    $::WizardWindow->add($::WizardTable);
+	    my $draw1 = new Gtk::DrawingArea;
+	    $draw1->set_usize(50,50);
+	    my $draw2 = new Gtk::DrawingArea;
+	    $draw1->set_usize(50,50);
+	    my $draw3 = new Gtk::DrawingArea;
+	    $draw1->set_usize(50,50);
+	    $::WizardTable->attach($draw1, 0, 1, 0, 1, 'fill', 'fill', 0, 0);
+	    $::WizardTable->attach($draw2, 0, 1, 1, 2, 'fill', 'fill', 0, 0);
+	    $::WizardTable->attach($draw3, 1, 2, 0, 1, 'fill', 'fill', 0, 0);
+	    $::WizardWindow->show_all;
+	    my_gtk::flush();
+	}
+	$::WizardTable->attach($o->{window}, 1, 2, 1, 2, {'fill', 'expand'}, {'fill', 'expand'}, 0, 0);
+    }
+
     $::isEmbedded or return $o;
     $o->{window} = new Gtk::VBox(0,0);
     $o->{rwindow} = $o->{window};
@@ -248,12 +275,12 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub create_okcancel {
     my ($w, $ok, $cancel, $spread, @other) = @_;
     my $one = ($ok xor $cancel);
-    $spread ||= $::isWizard ? "edge" : "spread";
-    $ok ||= $::isWizard ? _("Next ->") : _("Ok");
-
-    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $::isWizard or $w->{retval} = 1; Gtk->main_quit });
+    $spread ||= $::isWizard ? "end" : "spread";
+    $ok ||= _("Ok");
+    $::isWizard and $ok = _("Next ->");
+    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
-    my @l = grep { $_ } $::isWizard ? ($b2, $b1) : ($b1, $b2);
+    my @l = grep { $_ } ($b1, $b2);
     push @l, map { gtksignal_connect(new Gtk::Button($_->[0]), clicked => $_->[1]) } @other;
 
     $_->can_default($::isWizard) foreach @l;

@@ -33,6 +33,12 @@ use fs;
 use log;
 use c;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+
+print "EMBED\n" if $::isEmbedded;
+print "XID : $::XID\n";
+print "CCPID :  $::CCPID\n";
+
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: diskdrake [--expert] [--testing]\n";
