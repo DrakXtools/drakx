@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 0.14mdk
+Release: 0.15mdk
 Url: http://www.linux-mandrake.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -290,6 +290,32 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
+* Mon Jan 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-0.15mdk
+- diskdrake:
+  o make sub window be modal
+  o fix text mode (pixel)
+- drakconnect: 
+  o don't log actions not done
+  o fix modem detection (poulpy)
+  o cleanups (poulpy, pixel)
+- draksound: remove last source of "unlisted driver" because of hand
+  edited /etc/modules.conf
+- drakxtv: add test mode
+- fix encoding conversions for non latin1 (gc)
+- harddrake2:
+  o use new help system
+  o make sub window be modal
+  o configure sound slots on bootstrapping
+- logdrake:
+  o don't display "wait while parsing" window when embedded in mcc
+  o log all drakx tools (not only the first one)
+- mousedrake: cleanups (pixel, gc)
+- printerdrake: updates for new foomatic (till)
+- requires old perl-gtk for drakfloppy and net_monitor which works
+  again
+- translation updates (pablo)
+- xfdrake: various fixes (pixel)
+
 * Fri Jan 24 2003 Damien Chaumette <dchaumette@mandrakesoft.com> 9.1-0.14mdk
 - drakconnect :
   o get back serial modem detection
