@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use utf8;
+
 $width = 556;
 $height = 303;
 

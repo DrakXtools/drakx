@@ -290,7 +290,6 @@ sub set_scale_values() {
 
 #- Desc  => check if this theme is available in the current resolution else
 #-	    change the current resolution or display a ask_warn box
-#- Args  => ø
 #- return=> (bool)
 sub thm_in_this_res {
   my ($check_res) = @_;
@@ -311,7 +310,6 @@ sub which_res_exist() {
 }	
 
 #- Desc  => retrieve all installed theme
-#- Args  => ø
 #- Return=> @arr of available theme
 sub giv_exist_thm() {
   chdir($thm_path);
