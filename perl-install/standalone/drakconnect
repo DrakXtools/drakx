@@ -39,18 +39,12 @@ use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_pro
 
 my $xpm_path = "/usr/share/libDrakX/pixmaps";
 local $_ = join '', @ARGV;
-$::isWizard = /--wizard/;
 
-my $netcnx = {};
-my $netc = {};
-my $intf = {};
+my ($netcnx, $netc, $intf)  = ({}, {}, {});
 my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
 
-#$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
-
 my $in = 'interactive'->vnew('su');
-!$::isEmbedded && $in->isa('interactive::gtk') and $::isWizard = 1;
-#$::isWizard = 0;
+!$::isEmbedded and $in->isa('interactive::gtk');
 $::Wizard_pix_up = "wiz_drakconnect.png";
 $::Wizard_title = "Network & Internet Configuration";
 
@@ -65,6 +59,7 @@ MDK::Common::Globals::init(
 	     );
 
 $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
+
 require ugtk2;
 import ugtk2 qw(:helpers :wrappers :create);
 my $expert_mode = 0;
@@ -144,21 +139,12 @@ $button_new->signal_connect(clicked => sub {
 				$combo1->entry->set_text(-e "/etc/sysconfig/network-scripts/drakconnect_conf." . $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
 				$combo1->set_popdown_strings(network::netconnect::get_profiles());
 			    });
-my $hostname = chomp_(`hostname`);
 
-#attach(table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
-#$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
+my $hostname = chomp_(`hostname`);
 my $type_label = new Gtk2::Label($netcnx->{type});
 my $int_label = new Gtk2::Label($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
 my $interface_name = new Gtk2::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 my $isconnected = -1;
-#-sub connected_local {
-#-    print "in connected local\n";
-#-    my $w = $in->wait_message('', N("Testing your connection..."), 1);
-#-    gtkflush();
-#-    $isconnected = connected();
-#-}
-
 my $warning_label1 = new Gtk2::Label("");
 my $int_connect = new Gtk2::Button(N("Wait please"));
 $int_connect->set_sensitive(0);
@@ -175,20 +161,13 @@ $int_connect->signal_connect(clicked => sub {
     update2();
 });
 
-
 my $button_internet = gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
                                 clicked => sub { configure_net('', $netcnx, $netc, $intf) });
-
 
 my $tree_model = Gtk2::TreeStore->new(Gtk2::GType->OBJECT, map { Gtk2::GType->STRING } 2..6);
 my $list = Gtk2::TreeView->new_with_model($tree_model);
 $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
 each_index { $list->append_column(Gtk2::TreeViewColumn->new_with_attributes($_, Gtk2::CellRendererText->new, 'text' => $::i + 1)) } (N("Interface"), N("IP address"), N("Protocol"), N("Driver"), N("State"));
-
-#TV $list->set_column_auto_resize($_,1) foreach (0..4);
-#TV $list->column_titles_passive();
-#TV $list->set_shadow_type('etched_out');
-#$scrolled1->add_with_viewport($table2);
 
 my $ip_regexp = qr/(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/;
 
@@ -240,8 +219,7 @@ $window1->{window}->add(
                                            Gtk2::Label->new(N("Click here to launch the wizard ->")),
                                            gtksignal_connect(Gtk2::Button->new(N("Wizard...")),
                                                              clicked => sub {
-                                                                 $::isWizard = 1;
-                                                                 system("drakconnect --wizard");
+                                                                 system("drakconnect");
 								 #- reload everything...
 								 $netcnx = {}; $netc = {}; $intf = {};
 								 network::netconnect::read_net_conf('', $netcnx, $netc);
@@ -257,9 +235,6 @@ $window1->{window}->add(
                                  0, gtkset_layout($bbox0 = new Gtk2::HButtonBox, 'end')
                                  ),
                         );
-
-
-#$bbox0->set_border_width(5);
 
 my $button_expert = new Gtk2::Button(N("Expert Mode"));
 $button_expert->signal_connect(clicked => sub {
@@ -314,16 +289,17 @@ $window1->main;
 ugtk2->exit(0);
 
 dd:
-network::netconnect::intro('', $netcnx, $in);
+$::isWizard = 1;
+network::netconnect::main('', $netcnx, $in);
 $in->exit(0);
 
-sub build_list {
+sub build_list() {
     foreach my $i (0..$#all_cards) {
 	my ($ip, $state);
 	if (-x "/sbin/ifconfig") {
 	    local $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$i"`;
-	    /inet addr\:$ip_regexp/;
-         $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
+	    /inet addr\:$ip_regexp/ or warn "Bad Ip\n";
+	    $ip = if_($1 && $2 && $3, "$1.$2.$3.$4");
 	    $_ = `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig`;
 	    $state = /eth$i/ ? "up" : "down";
 	} else { 
@@ -331,17 +307,16 @@ sub build_list {
             $state = "n/a";
         }
         $tree_model->append_set(undef, [ map_index { $::i => $_ } (gtkcreate_pixbuf("eth_card_mini2.png"), "eth$i", $ip , $intf->{"eth$i"}{BOOTPROTO}, $all_cards[$i][1], $state) ])->free;
-#TV	$list->set_selectable($i, 0);
     }
 }
 
-sub apply {
+sub apply() {
     $old_profile = $netcnx->{PROFILE} || "default";
     network::netconnect::save_conf($netcnx, $netc, $intf);
 
-    $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}}, '');
-    $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, 1, $netc, $netcnx); #$light
-    $netcnx->{type} eq 'isdn_external' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}}, '');
+    $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
+    $netcnx->{type} eq 'isdn_internal' and network::isdn::isdn_write_config_backend($netcnx->{$netcnx->{type}}, $netc, $netcnx); #$light
+    $netcnx->{type} eq 'isdn_external' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}});
     my $a = $netcnx->{type};
     $a =~ s/adsl_//;
     $netcnx->{type} =~ /adsl/ and network::adsl::adsl_conf_backend($netcnx->{$netcnx->{type}}, $netc, $a, $netcnx);
@@ -356,16 +331,14 @@ sub apply {
 sub ethisup { `LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig` =~ /eth$_[0]/ }
 
 my $to_update;
-sub update {
+sub update() {
     my $h = chomp_(`hostname`);
     $label_host->set($h);
     $type_label->set($netcnx->{type});
     $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $interface_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
-#TV    $list->window->freeze();
     $tree_model->clear;
     build_list();
-#TV    $list->window->thaw();
     $button_del->set_sensitive(network::netconnect::get_profiles() > 1);
     return 1 if $isconnected == -1;
     $int_state->set($isconnected ? N("Connected") : N("Not connected"));
@@ -381,7 +354,7 @@ sub in_ifconfig {
     `/sbin/ifconfig` =~ /$intf/;
 }
 
-sub update2 {
+sub update2() {
     undef $to_update;
     connected_bg(\$to_update);
     if (defined $to_update) {
@@ -400,7 +373,7 @@ sub update2 {
     1;
 }
 
-sub quit_global {
+sub quit_global() {
     ugtk2->exit(0);
 }
 
@@ -506,7 +479,6 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 		${$_->[1]} = $infos[2*$::i+1]->get_text();
 	    } @{$card_tab[2*$_+1]};
 	    if ($intf->{"eth$_"}{BOOTPROTO} eq "dhcp") {
-		my $entry = $intf->{"eth$_"};
 		delete @{$intf->{"eth$_"}}{qw(IPADDR NETWORK NETMASK BROADCAST)};
 	    }
 	}
@@ -581,7 +553,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     #- duplicated code (waiting for 9.1 to be out to merge everything correctly, avoid bug elsewhere).
     if ($netcnx->{type} =~ /adsl/) {
 	require network::adsl;
-	network::adsl::adsl_probe_info($cnx, $netc, $intf, undef);
+	network::adsl::adsl_probe_info($cnx, $netc, $intf);
     }
     my @conf_data = ([ N("Card IRQ"), \$cnx->{irq} ],
 		     [ N("Card mem (DMA)"), \$cnx->{mem} ],
@@ -669,7 +641,7 @@ Create one first by clicking on 'Configure'")),1,1,0);
     Gtk2->main;
 }
 
-sub new_dialog {
+sub new_dialog() {
     my $dialog = new Gtk2::Dialog();
     $dialog->set_position('center-on-parent');
     $dialog->vbox->set_border_width(10);
