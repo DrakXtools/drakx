@@ -272,8 +272,7 @@ sub get_interface_status {
 #- returns (gateway_interface, interface is up, gateway address, dns server address)
 sub get_internet_connection {
     my ($netc, $intf, $o_gw_intf) = @_;
-    my ($gw_intf, $is_up, $gw_address);
-    $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
+    my $gw_intf = $o_gw_intf || get_default_gateway_interface($netc, $intf) or return;
     return $gw_intf, get_interface_status($gw_intf), $netc->{dnsServer};
 }
 
