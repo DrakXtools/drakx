@@ -116,7 +116,11 @@ foreach my $hw_class (@harddrake::data::tree) {
     }
 
     next if $is_globetrotter && !$hw_class->{automatic};
-    next unless -x first(split /\s+/, $configurator_pool[0]);
+    next unless $configurator_pool[0];
+    if (!-x first(split /\s+/, $configurator_pool[0])) {
+        log::explanations(qw(skip $Ident configuration sincecannot "$configurator" isn't executable));
+        next;
+    }
     my ($pid, $no, $res);
     if (!$hw_class->{automatic}) {
         $SIG{ALRM} = sub { $no = 1; kill 15, $pid };
