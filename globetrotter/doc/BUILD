@@ -22,7 +22,7 @@ lftp -u a,a ftp://kameha:/~/../nplanel/rpm/prop/RPMS/i586/
 - run "gendistrib --noclean /export"
 - plug the LaCie disk
 - check out the whole gi cvs module
-- run "make c" in gi/perl-install
+- run "C_DRAKX=1 make c" in gi/perl-install
 - go into gi/globetrotter
 - run make_live --partition --format --install --post in order to
   prepare the disk
