@@ -219,12 +219,12 @@ sub packageRequest {
 
 sub packageCallbackChoices {
     my ($urpm, $_db, $state, $choices) = @_;
-    if (my $prefer = find { exists $preferred{$_->name} } @$choices) {
+    if (my $prefer = find { $_->arch ne 'src' && exists $preferred{$_->name} } @$choices) {
 	$prefer;
     } else {
 	my @l = grep {
 	    #- or if a kernel has to be chosen, chose the basic one.
-	    $_->name =~ /kernel-\d/ and return $_;
+	    $_->arch ne 'src' && $_->name =~ /kernel-\d/ and return $_;
 
 	    #- or even if a package requires a specific locales which
 	    #- is already selected.
