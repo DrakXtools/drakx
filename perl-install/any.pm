@@ -43,7 +43,7 @@ sub addKdmIcon {
     eval { cp_af(facesdir() . $icon . ".png", $dest) } if $icon;
 }
 
-sub allocUsers {
+sub alloc_user_faces {
     my ($users) = @_;
     my @m = my @l = facesnames();
     foreach (grep { !$_->{icon} || $_->{icon} eq "automagic" } @$users) {
@@ -56,7 +56,7 @@ sub allocUsers {
 sub addUsers {
     my ($users) = @_;
 
-    allocUsers($users);
+    alloc_user_faces($users);
     foreach my $u (@$users) {
 	run_program::rooted($::prefix, "usermod", "-G", join(",", @{$u->{groups}}), $u->{name}) if !is_empty_array_ref($u->{groups});
 	addKdmIcon($u->{name}, delete $u->{auto_icon} || $u->{icon});
