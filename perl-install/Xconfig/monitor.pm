@@ -73,7 +73,7 @@ sub configure_auto_install {
 	if (!configure_automatic($monitor, $monitors_db)) {
 	    good_default_monitor() =~ /(.*)\|(.*)/ or internal_error("bad good_default_monitor");
 	    put_in_hash($monitor, { VendorName => $1, ModelName => $2 });
-	    configure_automatic($monitor, $monitors_db) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorDB");
+	    configure_automatic($monitor, $monitors_db) or internal_error("good_default_monitor (" . good_default_monitor()  . ") is unknown in MonitorsDB");
 	}
     }
     $raw_X->set_monitors(@$monitors);
