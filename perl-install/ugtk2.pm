@@ -877,15 +877,15 @@ sub new {
 	    }
 	}
 	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => 10);
-	set_main_window_size($o);
+	set_main_window_size($o->{window});
 	gtkpack($::WizardTable, $o->{window});
     }
     $o;
 }
 sub set_main_window_size {
-    my ($o) = @_;
+    my ($window) = @_;
     my ($width, $height) = $::isInstall ? ($::real_windowwidth, $::real_windowheight) : $::isWizard ? (540, 360) : (600, 400);
-    $o->{window}->set_size_request($width, $height);
+    $window->set_size_request($width, $height);
 }
 
 sub main {
