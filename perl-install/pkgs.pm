@@ -1656,12 +1656,17 @@ sub selected_leaves {
 sub naughtyServers {
     my ($packages) = @_;
 
-    my @old = qw(
+    my @old_81 = qw(
 freeswan
-jabber
+);
+    my @old_82 = qw(
+vnc-server
+postgresql-server
+mon
 );
     # boa ??
-    my @sure = qw(
+    my @new_80 = qw(
+jabber
 FreeWnn
 MySQL
 am-utils
@@ -1674,12 +1679,10 @@ finger-server
 imap
 leafnode
 lpr
-mon
 ntp
 openssh-server
 pidentd
 postfix
-postgresql-server
 proftpd
 rwall
 rwho
@@ -1690,18 +1693,31 @@ ypbind
 ); # nfs-utils-clients portmap
    # X server
 
-  my @new = qw(
+    my @new_81 = qw(
 apache-mod_perl
 ftp-server-krb5
 mcserv
-mysql
 samba
 telnet-server-krb5
-vnc-server
 ypserv
 );
 
-    my @naughtyServers = (@new, @sure);
+    my @new_82 = qw(
+LPRng
+bind
+fam
+httpd-naat
+ibod
+inn
+netatalk
+nfs-utils
+rusers-server
+samba-swat
+tftp-server
+ucd-snmp
+);
+
+    my @naughtyServers = (@new_80, @new_81, @new_82);
 
     grep {
 	my $p = packageByName($packages, $_);
