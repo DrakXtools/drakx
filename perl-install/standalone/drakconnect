@@ -479,7 +479,7 @@ sub build_notebook {
 
 	my %auth_methods = map_index { $::i => $_ } N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"), N("PAP/CHAP");
 	$gui->{intf}{auth}->set_popdown_strings(sort values %auth_methods);
-	$gui->{intf}{auth}->set_text($auth_methods{$intf->{Authentication}});
+	$gui->{intf}{auth}->set_text($auth_methods{$intf->{Authentication}}) if $auth_methods{$intf->{Authentication}};
 	$gui->{intf}{passwd}->set_visibility(0);
     }
 
@@ -588,8 +588,14 @@ sub build_notebook {
         next if !$intf->{$_};
         # special case b/c of translation:
         next if member($_, qw(BOOTPROTO ));
-        warn qq(processing "$_"\n);
-        $gui->{intf}{$_}->set_text($intf->{$_});
+        if ($_ eq "FlowControl") {
+            # kppp is writing translated strings :-( (eg: s/Software/Logiciel/):
+            # (let's hope that all translations use 'CRTSCTS' and 'XON/OFF' as substring)
+            $gui->{intf}{$_}->set_text('Hardware [CRTSCTS]') if $intf->{$_} =~ /CRTSCTS/;
+            $gui->{intf}{$_}->set_text('Software [XON/XOFF]') if $intf->{$_} =~ m!XON/XOFF!;
+        } else {
+            $gui->{intf}{$_}->set_text($intf->{$_});
+        }
     }
 
     $gui->{notebook} = Gtk2::Notebook->new;
