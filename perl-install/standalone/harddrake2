@@ -30,7 +30,7 @@ my %fields =
 - eide devices: the device is either a slave or a master device
 - scsi devices: the scsi bus and the scsi device ids") ],
      "cache size" => [ N("Cache size"), N("Size of the (second level) cpu cache") ],
-     "coma_bug" => [ N("Coma bug:"), N("Does this cpu has Cyrix 6x86 Coma bug ?") ],
+     "coma_bug" => [ N("Coma bug"), N("Does this cpu has Cyrix 6x86 Coma bug ?") ],
      "cpu family" => [ N("Cpuid family"), N("Family of the cpu (eg: 6 for i686 class)") ],
      "cpuid level" => [ N("Cpuid level"), N("Information level that can be obtained through the cpuid instruction") ],
      "cpu MHz" => [ N("Frequency (MHz)"), N("The cpu frequency in Mhz (Mega herz which in first approximation may be coarsely assimilated to number of instructions the cpu is able to execute per second)") ],
@@ -175,7 +175,7 @@ my $selection = gtksignal_connect($tree->get_selection(), 'changed' => sub {
         
         if ($current_device) {
             gtktext_insert($text, [ map  {
-                if_($fields{$_}[0], [ $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3' } ],
+                if_($fields{$_}[0], [ $fields{$_}[0] . ": ", { 'foreground' => 'royalblue3', 'weight' => Gtk2::Pango->WEIGHT_BOLD } ],
                     [ "$current_device->{$_}\n\n", { 'foreground' => ($_ eq 'driver' && $current_device->{$_} eq 'unknown' ? 'indian red' : 'black') } ])
                 } sort keys %$current_device ]);
 
