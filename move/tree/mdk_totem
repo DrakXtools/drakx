@@ -109,6 +109,7 @@ my $totem_pid = $$;
 
 if (my $pid = fork()) {
     $ENV{MDKMOVE} = $pid;
+    $ENV{G_BROKEN_FILENAMES} = 1;
     exec 'totem';
 } else {
     exec 'sudo', 'mdk_behind_totem', 
