@@ -1,39 +1,48 @@
-Office [icon=office] [descr=Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc]
-	Office
+     # --- Workstation
 
-Internet [icon=networking] [descr=Set of tools for mail, news, web, file transfer, and chat]
-	Networking
+Office Workstation [icon=office] [path=Workstation] [descr=Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, gnumeric), pdf viewers, etc]
+	OFFICE
+	SPELLCHECK
+	PUBLISHING
+	PIM
+	ARCHIVING
 
-Games [icon=amusement] [descr=Amusement programs: arcade, boards, strategy, etc]
-	Games
+Game station [icon=arcade] [path=Workstation] [descr=Amusement programs: arcade, boards, strategy, etc]
+	GAMES
 
-Multimedia - Graphics [icon=graphics] [descr=Graphics programs such as The Gimp]
-	Graphics
+Audio station [icon=multimedia] [path=Workstation] [descr=Sound playing/editing programs]
+	AUDIO
 
-Multimedia - Sound [icon=multimedia] [descr=Audio-related tools: mp3 or midi players, mixers, etc]
-	Sound
+Video station [icon=multimedia] [path=Workstation] [descr=Video playing programs]
+	VIDEO
 
-Multimedia - Video [icon=video] [descr=Video players and editors]
-	Video
+Graphic station [icon=multimedia] [path=Workstation] [descr=Graphics programs]
+	GRAPHICS
 
-Multimedia - CD Burning [icon=cd_burning] [descr=Tools to create and burn CD's]
-	Archiving/Cd burning
+Internet station [icon=networking] [path=Workstation] [descr=Set of tools to read and send mail and news and to browse the Web]
+	NETWORKING_WWW
+	NETWORKING_MAIL
+	NETWORKING_NEWS
+	COMMUNICATIONS
+	NETWORKING_CHAT
+	NETWORKING_FILE_TRANSFER
+	NETWORKING_IRC
+	NETWORKING_INSTANT_MESSAGING
+	NETWORKING_DNS
 
-More Graphical Desktops (Gnome, IceWM) [icon=windowmanager] [descr=Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc]
-	Graphical desktop/GNOME
-	Graphical desktop/Sawmill
-	Graphical desktop/Icewm
-	+XFree86-75dpi-fonts
-	+fonts-ttf-west_european
+Network Computer (client) [icon=terminals] [path=Workstation] [descr=Clients for different protocols including ssh]
+	NETWORKING_REMOTE_ACCESS
+	NETWORKING_FILE
 
-Personal Information Management [icon=remote_access] [descr=Tools for your Palm Pilot or your Visor]
-	+jpilot
-	+pilot-link
-	+kde-pim
-	+gnome-pim
-	+gnome-pim-conduits
+Configuration [icon=configuration] [path=Workstation] [descr=Tools to ease the configuration of your computer]
+	CONFIG
 
-Personal Finance [icon=sciences] [descr=Programs to manage your finances, such as gnucash]
-	+gnucash
-	+MoneyDance
+     # --- Graphical Environment
 
+KDE Workstation [icon=kde] [path=Graphical Environment] [descr=The K Desktop Environment, the basic graphical environment with a collection of accompanying tools]
+	KDE
+	X
+
+Gnome Workstation [icon=gnome] [path=Graphical Environment] [descr=A graphical environment with user-friendly set of applications and desktop tools]
+	GNOME
+	X
