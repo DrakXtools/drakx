@@ -987,17 +987,15 @@ sub configureX {
 }
 
 #------------------------------------------------------------------------------
-sub generateAutoInstFloppy($) {
+sub generateAutoInstFloppy {
     my ($o) = @_;
-    $::expert || $::g_auto_install or return;
 
     my $floppy = detect_devices::floppy();
-    $o->ask_yesorno('', 
-_("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
+#+    $o->ask_yesorno('', 
+#+_("Do you want to generate an auto install floppy for linux replication?"), $floppy) or return;
 
     $o->ask_warn('', _("Insert a blank floppy in drive %s", $floppy));
 
-    require commands;
     my $dev = devices::make($floppy);
 
     my $image = $o->{pcmcia} ? "pcmcia" :
@@ -1014,6 +1012,7 @@ _("Do you want to generate an auto install floppy for linux replication?"), $flo
         install_any::getAndSaveFile("images/$image.img", $imagefile) or log::l("failed to write $dev"), return;
         devices::make($_) foreach qw(/dev/loop6 /dev/ram);
 
+	require commands;
         run_program::run("losetup", "/dev/loop6", $imagefile);
         fs::mount("/dev/loop6", $mountdir, "romfs", 'readonly');
         commands::cp("-f", $mountdir, $workdir);
@@ -1073,7 +1072,9 @@ Do you really want to quit now?"), 0);
 
     $o->exit unless $alldone;
 
-    $o->ask_warn('',
+    $o->ask_from_entries_refH_powered_no_check(
+	{
+	 messages =>
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
 
@@ -1081,7 +1082,15 @@ For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
-install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
+install chapter of the Official Linux-Mandrake User's Guide.")
+	},
+	[
+	 if_($::expert,
+	     { val => \ (my $t1 = _("Generate auto install floppy")), clicked => sub { $o->generateAutoInstFloppy }, advanced => 1 },
+	     { val => \ (my $t2 = _("Save packages selection")), clicked => sub { install_any::g_default_packages($o) }, advanced => 1 },
+	 ),
+	]
+	) if $alldone && !$::g_auto_install;
 }
 
 
