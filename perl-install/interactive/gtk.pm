@@ -609,7 +609,7 @@ sub ask_fromW {
                   ($_->{real_w}->isa("Gtk2::ScrolledWindow") || $_->{real_w}->get_data('must_grow') ? 1 : 0), 
                    $_->{real_w}->isa("Gtk2::CheckButton") && !$_->{icon_w} && !$_->{e}{label} ?
                      $_->{real_w} : gtkpack_(Gtk2::HBox->new,
-                                             0, $_->{icon_w},
+                                             if_($_->{icon_w}, 0, $_->{icon_w}),
                                              0, gtkadd_widget($label_sizegrp, $_->{e}{label}),
                                              1, gtkadd_widget($realw_sizegrp, $_->{real_w}),
                                             );
