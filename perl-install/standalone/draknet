@@ -223,7 +223,7 @@ foreach (0..$#all_cards) {
     if (-e "/sbin/ifconfig") {
 	local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
 	/inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
-    } else { $intf->{"eth$_"}{IPADDR} }
+    } else { $ip=$intf->{"eth$_"}{IPADDR} }
     $clist1->append($_+1, "eth$_", $ip , $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
     $clist1->set_selectable($_, 0);
 }
@@ -342,7 +342,7 @@ sub update {
 	if (-e "/sbin/ifconfig") {
 	    local $_=`LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /sbin/ifconfig "eth$_"`;
 	    /inet addr\:$ip_regexp/; $ip = "$1.$2.$3.$4";
-	} else { $intf->{"eth$_"}{IPADDR} }
+	} else { $ip=$intf->{"eth$_"}{IPADDR} }
 	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	$clist1->set_selectable($_, 0);
     }
