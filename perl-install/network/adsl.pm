@@ -219,7 +219,7 @@ user "$adsl->{login}"
 		];
 	
 	my $answer = $in->ask_from_list_(N("Firmware needed"),
-					 N("You need the alcatel microcode.
+					 N("You need the Alcatel microcode.
 You can provide it now via a floppy or your windows partition,
 or skip and do it later."), $l) or return;
 	
