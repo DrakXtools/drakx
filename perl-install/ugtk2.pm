@@ -539,21 +539,28 @@ sub gtktext_append { gtktext_insert(@_, { 'append' => 1 }) }
 #                               ... ]);
 sub gtktext_insert {
     my ($textview, $t, $opts) = @_;
+    my $buffer = $textview->get_buffer;
     if (ref($t) eq 'ARRAY') {
-	my $buffer = $textview->get_buffer;
 	$opts->{append} or $buffer->set_text('', -1);
 	foreach my $token (@$t) {
+            my ($iter1, $iter2);
 	    my $c = $buffer->get_char_count;
-	    $buffer->insert($buffer->get_end_iter, $token->[0], -1);
+	    $buffer->insert($iter1 = $buffer->get_end_iter, $token->[0], -1);
+            $iter1->free;
 	    if ($token->[1]) {
 		my $tag = $buffer->create_tag(undef);
 		$tag->set(%{$token->[1]});
-		$buffer->apply_tag($tag, $buffer->get_iter_at_offset($c), $buffer->get_end_iter);
+		$buffer->apply_tag($tag, $iter1 = $buffer->get_iter_at_offset($c), $iter2 = $buffer->get_end_iter);
+                $iter1->free; $iter2->free;
 	    }
 	}
     } else {
-	$textview->get_buffer->set_text($t, -1);
+	$buffer->set_text($t, -1);
     }
+    #- the following lines are needed to move the cursor mark to the beginning, so that if the
+    #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
+    $buffer->move_mark_by_name('selection_bound', my $beg = $buffer->get_start_iter); $beg->free;
+    $buffer->move_mark_by_name('insert',          my $end = $buffer->get_start_iter); $end->free;
     $textview->set_wrap_mode($opts->{wrap_mode} || 'word');
     $textview->set_editable($opts->{editable} || 0);
     $textview->set_cursor_visible($opts->{visible} || 0);
