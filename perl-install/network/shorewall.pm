@@ -66,9 +66,6 @@ sub default_interfaces {
 	defined $card_netconnect and log::l("[drakgw] Information from netconnect: ignore card $card_netconnect");
 
 	my @l = detect_devices::getNet() or return;
-	if (@l == 1) {
-	$conf{net_interface} = $l[0];
-    } else {
 	$in->ask_from('',
                       N("Please enter the name of the interface connected to the internet.              
                 
@@ -77,26 +74,21 @@ Examples:
                 eth0, or eth1 for cable connection, 
                 ippp+ for a isdn connection.
 ", $card_netconnect),
-      [ { label => N("Net Device"), val => \$card_netconnect, type => 'entry' } ]);
-	put_in_hash($conf ||= {}, {
-	   net_interface => $card_netconnect,
-   });
+                   [ { label => N("Net Device"), val => \$card_netconnect, list => \@l } ]);
 	$conf{net_interface} = $card_netconnect;
 	#$conf{net_interface} = network::netconnect::get_net_device() || $l[0];
 	$conf{loc_interface} = [  grep { $_ ne $conf{net_interface} } @l ];
-    }
-    \%conf;
+     \%conf;
 }
 
 sub read {
     my ($in, $mode) = @_;
-    my %conf = { disabled => !glob_("$::prefix/etc/rc3.d/S*shorewall") };
-
-    $conf{ports} = 
-      join(' ', map { 
-	  my $e = $_;
-	  map { "$_/$e->[3]" } split(',', $e->[4]);
-      } grep { $_->[0] eq 'ACCEPT' && $_->[1] eq 'net' } get_config_file('rules'));
+    my %conf = (disabled => !glob_("$::prefix/etc/rc3.d/S*shorewall"),
+                ports => join(' ', map {
+                    my $e = $_;
+                    map { "$_/$e->[3]" } split(',', $e->[4]);
+                } grep { $_->[0] eq 'ACCEPT' && $_->[1] eq 'net' } get_config_file('rules'))
+               );
 
     if (my ($e) = get_config_file('masq')) {
 	$conf{masquerade}{subnet} = $e->[1] if $e->[1];
