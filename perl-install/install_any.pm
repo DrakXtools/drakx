@@ -304,6 +304,14 @@ sub setPackages {
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
 
+	#- set kernel-2.4xxx in group LSB
+	foreach (grep { $_->[1] eq '' && $_->[2] =~ /^\Q2.4/ } pkgs::packages2kernels($o->{packages})) {
+	    my $pkg = $_->[0];
+	    $pkg->rate and internal_error("package " . $pkg->name . " should not have a rate");
+	    $pkg->set_rate(5);
+	    $pkg->set_rflags('LSB');
+	}
+
 	#- preselect default_packages and compssUsersChoices.
 	setDefaultPackages($o);
 	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
