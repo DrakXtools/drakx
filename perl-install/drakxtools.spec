@@ -1,8 +1,8 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.1
-Release: 25mdk
-Url: http://www.mandrakelinux.com/en/drakx.php3
+Release: 26mdk
+Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
@@ -303,6 +303,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Mar 16 2003 Warly <warly@mandrakesoft.com> 9.1-25mdk
+- do a correct cvs up of all gi before (me sux)
+
 * Sat Mar 15 2003 Warly <warly@mandrakesoft.com> 9.1-25mdk
 - fix drakperm fatal error in editable mode
 
