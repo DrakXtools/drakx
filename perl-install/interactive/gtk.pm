@@ -661,7 +661,7 @@ sub ask_fromW {
     }
     gtkadd($mainw->{window}, $pack);
     $set_default_size->() if $has_scroll_always;
-    $set_advanced->($common->{advanced_state});
+    $set_advanced->($common->{advanced_state} || $::expert);
     
     my $widget_to_focus =
       $common->{focus_cancel} ? $mainw->{cancel} :
