@@ -556,7 +556,7 @@ ensure that the laws of his/their jurisdiction allow him/them to download, stock
 and/or use these software.
 
 In addition customer and/or end user shall particularly be aware to not infringe
-the laws of his/their jurisdiction. Should customer and/or end user do not
+the laws of his/their jurisdiction. Should customer and/or end user not
 respect the provision of these applicable laws, he/they will incure serious
 sanctions.
 
