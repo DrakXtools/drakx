@@ -40,12 +40,18 @@ sub create_boxradio {
     my $boxradio = gtkpack2__(new Gtk::VBox(0, 0),
 			      my @radios = gtkradio(@l, ''));
     $boxradio->show;
+    my $tips = new Gtk::Tooltips;
     mapn {
 	my ($txt, $w) = @_;
 	$w->signal_connect(clicked => sub {
  	    ${$e->{val}} = $txt;
 	    &$changed;
         });
+	if ($e->{help}) {
+	    $tips->set_tip($w,
+			   ref($e->{help}) eq 'HASH' ? $e->{help}{$txt} :
+			   ref($e->{help}) eq 'CODE' ? $e->{help}($txt) : $e->{help});
+	}
     } $e->{list}, \@radios;
 
     $boxradio, sub {
