@@ -124,6 +124,9 @@ while ($b) {
 
     $b = 1 if s/create_packtable\(\{($re)\},/my $s = prepost_chomp($1); "gtknew('Table', " . ($s ? "$s, " : '') . "children => ["/e;
 
+    $b = 1 if s/gtkcreate_img\(($re)\)/gtknew('Image', file => $1)/;
+    $b = 1 if s/gtkcreate_pixbuf\(($re)\)/gtknew('Pixbuf', file => $1)/;
+
     $b = 1 if s/(gtkadd|gtkpack_{0,2})\(($assign?gtknew\('[HV](?:Button)?Box'$re)\),/"$2, " . $pack{$1} . " => ["/e;
 
     $b = 1 if s/(\$\w+)->set_label\(($re)\)/gtkset($1, text => $2)/;
@@ -176,6 +179,8 @@ sub dorepl_new {
 	if (!$s) {
 	    if ($f =~ /^gtkset_(relief|sensitive|shadow_type|modal|border_width|layout|editable)$/) {
 		$s = "$pre, $1 => ";
+	    } elsif ($f eq 'gtkset_name') {
+		$s = "$pre, widget_name => ";
 	    } elsif ($f eq 'gtkset_size_request') {
 		if ($after =~ /($re)\s*,\s*($re)\)(.*)/s) {
 		    $s = $pre . ($1 && $1 ne '-1' ? ", width => $1" : '') . ($2 && $2 ne '-1' ? ", height => $2" : '') . ')';
@@ -191,6 +196,8 @@ sub dorepl_new {
 }
 
 sub dorepl {
+    s/gtkdestroy\(/mygtk2::may_destroy(/ ||
+    s/gtkset_background\(/mygtk2::set_root_window_background(/ ||
     s/gtkset_tip\($re,\s*($re),\s*($re)\)/gtkset($1, tip => $2)/ ||
     s/gtkset_size_request\(($re),\s*($re), ($re)\)/"gtkset($1" . ($2 && $2 ne '-1' ? ", width => $2" : '') . ($3 && $3 ne '-1'  ? ", height => $3" : '') . ')'/e ||
     s/gtkset_(modal)\(($re),\s*($re)\)/gtkset($2, $1 => $3)/ ||
