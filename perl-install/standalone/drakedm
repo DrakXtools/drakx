@@ -57,7 +57,6 @@ several different X sessions on your local machine at the same time.")),
                                ]
                               )
    ) {
-    log::explanations("modified file $cfg_file");
     ! -x $dm{$dm}[1] and do { $in->do_pkgs->ensure_is_installed($dm{$dm}[2], $dm{$dm}[1]) or goto start };
     substInFile {
         s/^(DISPLAYMANAGER)=.*(\n|)//;
