@@ -164,7 +164,7 @@ static void probe_that_type(enum driver_type type)
 #ifndef DISABLE_MEDIAS
 					if (type == SCSI_ADAPTERS) {
 						/* insmod takes time, let's use the wait message */
-						wait_message("Installing: %s", pcidb[i].name);
+						wait_message("Installing driver for SCSI adapter:\n \n%s", pcidb[i].name);
 						garb = my_insmod(pcidb[i].module, SCSI_ADAPTERS, NULL);
 						remove_wait_message();
 						warning_insmod_failed(garb);

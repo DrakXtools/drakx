@@ -78,11 +78,12 @@ void info_message(char *msg, ...)
 
 void wait_message(char *msg, ...)
 {
-	int width = 8;
-	int height = 3;
+	int width, height;
 	char * title = "Please wait...";
 	newtComponent c, f;
+	newtGrid grid;
 	char * buf = NULL;
+	char * flowed;
 	int size = 0;
 	int i = 0;
 	va_list args;
@@ -94,19 +95,23 @@ void wait_message(char *msg, ...)
 		if (buf) free(buf);
 		buf = malloc(size);
 		i = vsnprintf(buf, size, msg, args);
-		width += i;
-	} while (i == size);
+	} while (i >= size || i == -1);
+
+	flowed = newtReflowText(buf, 60, 5, 5, &width, &height);
 	
 	va_end(args);
 	
-	newtCenteredWindow(width, height, title);
+	c = newtTextbox(-1, -1, width, height, NEWT_TEXTBOX_WRAP);
+	newtTextboxSetText(c, flowed);
 
-	c = newtTextbox(1, 1, width - 2, height - 2, NEWT_TEXTBOX_WRAP);
-	newtTextboxSetText(c, buf);
-	f = newtForm(NULL, NULL, 0);
+	grid = newtCreateGrid(1, 1);
+	newtGridSetField(grid, 0, 0, NEWT_GRID_COMPONENT, c, 0, 0, 0, 0, 0, 0);
+	newtGridWrappedWindow(grid, title);
 
+	free(flowed);
 	free(buf);
 
+	f = newtForm(NULL, NULL, 0);
 	newtFormAddComponent(f, c);
 
 	newtDrawForm(f);
