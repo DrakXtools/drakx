@@ -1179,6 +1179,25 @@ sub ensure_is_installed {
     1;
 }
 
+sub check_kernel_module_packages {
+    my ($do, $base_name, $ext_name) = @_;
+
+    if (!$ext_name || pkgs::packageByName($do->{o}{packages}, $ext_name)) {
+	my @rpms;
+	foreach my $p (@{$do->{o}{packages}{depslist}}) {
+	    my ($ext, $version, $release) = $p->name =~ /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d+\.\d+\.\d+)\.(\d+mdk))?$/
+	      or next;
+	    $p->flag_available or next;
+	    $version or ($version, $release) = ($p->version, $p->release);
+	    my $name = "$base_name$version-$release$ext";
+	    pkgs::packageByName($do->{o}{packages}, $name) or next;
+	    push @rpms, $name;
+	}
+	@rpms > 0 and return [ @rpms, if_($ext_name, $ext_name) ];
+    }
+    return undef;
+}
+
 sub what_provides {
     my ($do, $name) = @_;
     map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
