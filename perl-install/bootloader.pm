@@ -389,6 +389,9 @@ wait %d seconds for default boot.
 sub suggest_floppy {
     my ($bootloader) = @_;
 
+    my $floppy = detect_devices::floppy() or return;
+    $floppy eq 'fd0' or log::l("suggest_floppy: not adding $floppy"), return;
+
     add_entry($bootloader->{entries},
       {
        type => 'other',
