@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"POT-Creation-Date: 2003-11-12 15:20+0100\n"
 "PO-Revision-Date: 2003-09-10 23:11+0200\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -272,11 +272,6 @@ msgstr "CUPS'ни мослаш"
 msgid "Total progress"
 msgstr "Синов бетлари"
 
-#: ../../lang.pm:1
-#, c-format
-msgid "Hong Kong"
-msgstr "Гонконг"
-
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Not enough free space to allocate new partitions"
@@ -346,6 +341,24 @@ msgstr "Танланган компютерни тузатиш"
 #, c-format
 msgid "No CD device defined!"
 msgstr "Компакт-диск ускунаси аниқланмаган!"
+
+#: ../../network/shorewall.pm:1
+#, fuzzy, c-format
+msgid ""
+"Please enter the name of the interface connected to the "
+"internet.              \n"
+"                \n"
+"Examples:\n"
+"                ppp+ for modem or DSL connections, \n"
+"                eth0, or eth1 for cable connection, \n"
+"                ippp+ for a isdn connection.\n"
+msgstr ""
+"Илтимос Интернетга уланган интерфейсни кўрсатинг.\n"
+"\n"
+"Масалан:\n"
+"\t\tppp+ модем ёки DSL орқали уланиш учун,\n"
+"\t\teth0 ёки eth1 кабел орқали уланиш учун,\n"
+"\t\tippp+ ISDN орқали уланиш учун.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -428,6 +441,11 @@ msgstr "Август"
 msgid "mkraid failed (maybe raidtools are missing?)"
 msgstr ""
 "mkraid буйруғи муваффақиятсиз тугади (балки raidtools дастури етишмаяпти?)."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "FTP server"
+msgstr "NTP сервери"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -694,11 +712,6 @@ msgstr "агар керак бўлса"
 #, c-format
 msgid "Restore Failed..."
 msgstr "Тиклаш муваффақиятсиз тугади"
-
-#: ../../standalone/harddrake2:1
-#, c-format
-msgid "/Autodetect _jaz drives"
-msgstr "/_Jaz ускуналарини авто-аниқлаш"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1560,6 +1573,11 @@ msgstr ""
 #, c-format
 msgid "Name: "
 msgstr "Номи: "
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "up"
+msgstr ""
 
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
@@ -3564,6 +3582,11 @@ msgstr "Сичқонча"
 msgid "not enough room in /boot"
 msgstr "/boot директориясида етарли жой йўқ"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "trying to promote %s"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Liechtenstein"
@@ -3972,15 +3995,15 @@ msgstr "ISA / PCMCIA"
 msgid "About"
 msgstr "Ҳақида"
 
-#: ../../network/network.pm:1
-#, c-format
-msgid "Proxies configuration"
-msgstr "Проксиларни мослаш"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "GlidePoint"
 msgstr "GlidePoint"
+
+#: ../../network/network.pm:1
+#, c-format
+msgid "Proxies configuration"
+msgstr "Проксиларни мослаш"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4122,6 +4145,11 @@ msgstr "Улаш нуқталари \"/\" белгиси билан бошлан
 #, c-format
 msgid "Choose your CD/DVD device"
 msgstr "Компакт-диск/DVD ускунасини танланг (Мб)"
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "CUPS server"
+msgstr "DNS сервери"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4377,6 +4405,11 @@ msgstr "Userdrake"
 #, c-format
 msgid "Which partition do you want to use for Linux4Win?"
 msgstr "Linux4Win учун дискнинг қайси қисмини ишлатмоқчисиз?"
+
+#: ../../install_steps_gtk.pm:1
+#, fuzzy, c-format
+msgid "due to missing %s"
+msgstr "kdesu дастури етишмаяпти"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -5147,11 +5180,6 @@ msgid ""
 msgstr ""
 "Мавзуларни\n"
 "консолда кўрсатиш"
-
-#: ../../standalone/net_monitor:1
-#, c-format
-msgid "Statistics"
-msgstr "Статистика"
 
 #: ../../printer/cups.pm:1
 #, c-format
@@ -6157,15 +6185,15 @@ msgstr ""
 msgid "Set the root umask."
 msgstr "root учун махфий сўз"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Script-based"
-msgstr "Скриптда асосланган"
-
 #: ../../install_any.pm:1 ../../partition_table.pm:1
 #, c-format
 msgid "Error reading file %s"
 msgstr "%s файлини ўқишда хато рўй берди"
+
+#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Script-based"
+msgstr "Скриптда асосланган"
 
 #: ../../harddrake/v4l.pm:1
 #, c-format
@@ -6889,15 +6917,15 @@ msgstr "Yaboot"
 msgid "Logitech CC Series with Wheel emulation"
 msgstr ""
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Splash selection"
-msgstr "Splash' ни танлаш"
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
 msgstr ""
+
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Splash selection"
+msgstr "Splash' ни танлаш"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -6953,6 +6981,11 @@ msgstr ""
 msgid "Printer default settings"
 msgstr "Принтернинг андоза мосламалари"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic PS2 Wheel Mouse"
+msgstr "Ғилдиракли андоза PS2 сичқонча"
+
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
@@ -6960,11 +6993,6 @@ msgid ""
 "memory page level, thus enabling the processor to prevent unchecked kernel "
 "accesses to user memory (aka this is a bug guard)"
 msgstr ""
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic PS2 Wheel Mouse"
-msgstr "Ғилдиракли андоза PS2 сичқонча"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7515,15 +7543,15 @@ msgstr "Ёпишқоқ бит"
 msgid "Other Media"
 msgstr "Бошқа маълумот ташувчиси"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Backup system files"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech MouseMan+"
 msgstr "Logitech MouseMan+"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Backup system files"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8896,6 +8924,11 @@ msgstr "Бошқа портлар"
 msgid "number of capture buffers for mmap'ed capture"
 msgstr ""
 
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid " - detected"
+msgstr "топилди"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
@@ -9546,6 +9579,11 @@ msgstr "Файлнинг таркиби"
 msgid "Authentication LDAP"
 msgstr "Тасдиқловчи LDAP"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "in order to keep %s"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
@@ -9840,10 +9878,10 @@ msgstr ""
 msgid "Card IO"
 msgstr "Картанинг IO'си"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "when checked, owner and group won't be changed"
-msgstr "белгиланса, эгаси ва гурҳ ўзгартирилмайди"
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Samba server"
+msgstr "Самба сервери"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -9915,6 +9953,11 @@ msgstr ""
 #, c-format
 msgid "access to compilation tools"
 msgstr ""
+
+#: ../../standalone/net_monitor:1
+#, fuzzy, c-format
+msgid "Global statistics"
+msgstr "Статистика"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -10914,6 +10957,11 @@ msgstr "Ватикан"
 #, c-format
 msgid "Please make a backup of your data first"
 msgstr "Илтимос аввало маълумотларингиздан захира нусха олинг"
+
+#: ../../harddrake/data.pm:1
+#, c-format
+msgid "ADSL adapters"
+msgstr ""
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -12654,6 +12702,11 @@ msgstr ""
 "Дискнинг %s қисмининг турини ўзгартиришдан кегин ундаги ҳамма маълумот "
 "йўқолади"
 
+#: ../../harddrake/data.pm:1
+#, fuzzy, c-format
+msgid "ISDN adapters"
+msgstr "ISDN karta"
+
 #: ../../common.pm:1
 #, c-format
 msgid "%d seconds"
@@ -13040,6 +13093,11 @@ msgstr "Жазоир"
 msgid "Restore Via Network"
 msgstr "Тармоқ орқали тиклаш"
 
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Use tar and bzip2 (rather than tar and gzip)"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Initrd-size"
@@ -13398,17 +13456,17 @@ msgstr ""
 msgid "Estonia"
 msgstr "Эстония"
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Choose the host on which the local scanners should be made available:"
-msgstr ""
-
 #: ../../partition_table.pm:1
 #, c-format
 msgid ""
 "You have a hole in your partition table but I can't use it.\n"
 "The only solution is to move your primary partitions to have the hole next "
 "to the extended partitions."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13815,6 +13873,11 @@ msgstr "DHCP'нинг пастги чегараси"
 #, c-format
 msgid "Unsafe"
 msgstr "Хавфли"
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "SSH server"
+msgstr "SSH сервери"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14358,6 +14421,11 @@ msgstr "Танланган компютерни олиб ташлаш"
 msgid "Network configuration"
 msgstr "Тармоқни мослаш"
 
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "/Autodetect _jaz drives"
+msgstr "/_Jaz ускуналарини авто-аниқлаш"
+
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
@@ -14466,11 +14534,12 @@ msgstr ", \"%s\" принтер \"%s\" серверда"
 msgid "Note that currently all 'net' media also use the hard drive."
 msgstr ""
 
-#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1
-#: ../../install_steps.pm:1 ../../diskdrake/dav.pm:1
+#: ../../fsedit.pm:1 ../../install_steps.pm:1
+#: ../../install_steps_interactive.pm:1 ../../diskdrake/dav.pm:1
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
-#: ../../standalone/drakboot:1 ../../standalone/drakbug:1
+#: ../../standalone/drakauth:1 ../../standalone/drakboot:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
 #: ../../standalone/draksplash:1
 #, c-format
@@ -14514,6 +14583,11 @@ msgid ""
 "What do you want to do?"
 msgstr ""
 
+#: ../../partition_table.pm:1
+#, c-format
+msgid "mount failed: "
+msgstr "улаш муваффақиятсиз тугади: "
+
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
@@ -14523,11 +14597,6 @@ msgstr "Хизматларни мослаш"
 #, c-format
 msgid "Broadcast Address:"
 msgstr ""
-
-#: ../../partition_table.pm:1
-#, c-format
-msgid "mount failed: "
-msgstr "улаш муваффақиятсиз тугади: "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -15838,7 +15907,7 @@ msgstr "X Windows уланишларга рухсат этиш"
 msgid "Hardware probing in progress"
 msgstr "Асбоб-ускуналарни аниқлаш кетаяпти"
 
-#: ../../standalone/drakgw:1
+#: ../../network/shorewall.pm:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Тармоқ ускунаси"
@@ -15904,6 +15973,11 @@ msgstr ""
 "ўрнатишни тугатиш учун \"ImageMagick\" пакети керак.\n"
 "\"ImageMagick\" пакетини ўрнатиш учун \"Ок\"ни ёки чиқиш учун \"Бекор қилиш"
 "\"ни босинг."
+
+#: ../../network/drakfirewall.pm:1
+#, fuzzy, c-format
+msgid "Telnet server"
+msgstr "X сервери"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16219,6 +16293,11 @@ msgstr "Интернетга уланишни мослаш"
 msgid "Add the name as an exception to the handling of password aging by msec."
 msgstr ""
 
+#: ../../network/isdn.pm:1
+#, fuzzy, c-format
+msgid "USB"
+msgstr "LSB"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Scanning for TV channels"
@@ -16278,6 +16357,11 @@ msgstr "Ишчи гуруҳ"
 #, c-format
 msgid "Printer host name or IP"
 msgstr "Компютернинг номи ёки IP рақами"
+
+#: ../../standalone/drakconnect:1
+#, fuzzy, c-format
+msgid "down"
+msgstr "Тайёр"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16673,6 +16757,11 @@ msgstr "Бандни қўшиш"
 #, c-format
 msgid "The printers on this machine are available to other computers"
 msgstr "Бошқа компютерлар шу компютердаги принтерлардан фойдаланиши мумкин"
+
+#: ../../lang.pm:1
+#, fuzzy, c-format
+msgid "China (Hong Kong)"
+msgstr "Гонконг"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -18048,6 +18137,11 @@ msgstr ""
 msgid "Remember this password"
 msgstr "Бу махфий сўзни эслаб қолиш"
 
+#: ../../install_steps_gtk.pm:1
+#, c-format
+msgid "due to unsatisfied %s"
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now enabled."
@@ -18589,9 +18683,10 @@ msgid "Internet station"
 msgstr "Интернет станция"
 
 #: ../../share/compssUsers:999
+#, fuzzy
 msgid ""
-"Set of tools to read and send mail and news (pine, mutt, tin..) and to "
-"browse the Web"
+"Set of tools to read and send mail and news (mutt, tin..) and to browse the "
+"Web"
 msgstr ""
 "Хат-хабар ва янгиликларни ўқиш ва жўнатиш (pine, mutt, tin...) ва Интернетни "
 "кўриш воситалар тўплами."
@@ -18732,6 +18827,9 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Хат-хабар ва янгиликларни ўқиш ва жўнатиш ва Интернетни кўриш воситалар "
 "тўплами."
+
+#~ msgid "when checked, owner and group won't be changed"
+#~ msgstr "белгиланса, эгаси ва гурҳ ўзгартирилмайди"
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-33-*-*-*-p-*-iso8859-*,*-r-*"
