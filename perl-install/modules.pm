@@ -111,7 +111,7 @@ sub load_category {
 
     my @try_modules = (
       if_($category =~ /scsi/,
-	  if_(arch() !~ /ppc/, 'imm', 'ppa'),
+	  if_(arch() !~ /ppc/, 'parport_pc', 'imm', 'ppa'),
 	  if_(detect_devices::usbStorage(), 'usb-storage'),
       ),
       if_(arch() =~ /ppc/, 
@@ -418,6 +418,11 @@ sub when_load {
     $conf{$name}{options} = join " ", @options if @options;
 
     if (my $category = module2category($name)) {
+	if (c::kernel_version() =~ /^\Q2.6/ && member($name, 'imm', 'ppa') 
+	    && ! -d "/proc/sys/dev/parport/parport0/devices/$name") {
+	    unload($name);
+	    undef $category;
+	}
 	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
 	    add_probeall('scsi_hostadapter', $name);
 	    eval { load('sd_mod') };
