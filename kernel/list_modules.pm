@@ -52,7 +52,7 @@ our %l = (
     wireless => [
       qw(acx100_pci airo airo_cs aironet4500_cs aironet_cs at76c503-rfmd atmel_cs atmel_pci hostap_pci hostap_plx),
       qw(ipw2100 ipw2200 madwifi_pci netwave_cs orinoco orinoco_cs orinoco_pci orinoco_plx),
-      qw(prism2_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs),
+      qw(prism2_pci prism2_usb prism54 ray_cs usbvnet_rfmd vt_ar5k wavelan_cs wvlan_cs rt2500),
       if_(arch() =~ /ppc/, qw(airport)),
     ],
     isdn => [
@@ -148,7 +148,7 @@ our %l = (
           qw(snd-ymfpci sonicvibes sscape trident via82cxxx_audio wavefront ymfpci),
       ),
     ],
-    tv => [ qw(bt878 bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo) ],
+    tv => [ qw(bt878 bttv cpia_usb cyber2000fb ibmcam mod_quickcam ov511 ov518_decomp pwc saa7134 ultracam usbvideo usbvision) ],
     photo => [ qw(dc2xx mdc800) ],
     radio => [ qw(radio-maxiradio) ],
     scanner => [ qw(scanner microtek) ],
