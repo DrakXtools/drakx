@@ -1,3 +1,149 @@
+2001/03/17  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/insmod-busybox/utility.c: fix insmod calling realloc(0,0) to
+	work with dietlibc
+
+	* mdk-stage1/insmod-busybox/Makefile: also build standalone insmod-DIET
+	for testing purposes..
+
+	* mdk-stage1/mkinitrd_helper/Makefile: bump version to 1.0.1 for new
+	mkinitrd package release
+
+	* mdk-stage1/stdio-frontend.c: handle left and right arrow keys, in
+	editing ask_from_entries in stdio mode
+
+2001/03/17  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/keyboards.tar.bz2: Added a Korean keyboard, fixed bug in Japanese
+	keyboard
+
+	* keyboard.pm: Added choice of Korean keyboard
+
+2001/03/17  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm (write_langs): in case of empty %_install_langs, don't write it
+
+	* install_steps.pm (pkg_install_if_requires_satisfied): better logging
+
+	* share/rpmsrate: add gpm & evolution
+
+2001/03/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/pci-resource/Makefile: refine deps
+
+	* mdk-stage1/mkinitrd_helper/mkinitrd_helper.c, mdk-stage1/Makefile,
+	mdk-stage1/mkinitrd_helper/Makefile: write down mkinitrd_helper
+
+	* mdk-stage1/insmod-busybox/insmod.c: force load
+
+2001/03/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm (setPackages): set flag "TV" when bttv hardware is there
+
+	* share/compssUsers, share/rpmsrate: move out TV from VIDEO
+
+	* diskdrake.pm (Type): fix the code verifying size >32 for reiserfs
+
+	* modules.pm (write_conf): better logging
+
+	* c/stuff.xs.pm: add from_utf8
+
+	* c/stuff.pm (headerGetEntry): use from_utf8 on group, summary and
+	description
+
+2001/03/16  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* tools/ppc/magic, tools/ppc/mkhybrid-1.12b5.4, tools/ppc/convert,
+	tools/ppc/yaboot, tools/ppc/mapping: gi/tools/ppc/convert, magic,
+	mapping, mkhybrid-1.12b5.4, yaboot - re-add - my bad
+	gi/tools/ppc/convert, magic, mapping, mkhybrid-1.12b5.4, yaboot -
+	remove/re-add - did not use -kb switch - thx Pixel
+
+2001/03/15  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: SiS card are no more prefered for XF3.
+	added standalone support to prefer XF3 or XF4 to
+	keep current used server version.
+
+	* standalone/XFdrake: remove duplicate begin label.
+	take care of existing configuration.
+
+2001/03/15  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* modules.pm: skip dc395x_trm on stage1
+	dc395x_trm is back in 2.4
+
+	* share/compssUsers: try to enhance
+
+2001/03/15  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/az.po: updated Azeri file
+
+2001/03/15  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator_consts.pm, Xconfigurator.pm: andre@node1583e.a2000.nl says
+	this is not needed anymore :)
+
+2001/03/15  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* tools/ppc/magic, tools/ppc/convert, tools/ppc/iboot,
+	tools/ppc/mkINSTALLCD, tools/ppc/mkhybrid-1.12b5.4, tools/ppc/yaboot,
+	tools/ppc/mapping: gi/tools/ppc/convert, magic, mapping, mkINSTALLCD,
+	mkhybrid-1.12b5.4, yaboot: create PPC CD
+
+	* install_steps_interactive.pm, detect_devices.pm, bootloader.pm:
+	bootloader.pm, detect_devices.pm, install_steps_interactive.pm: changed
+	temporary file read/write per Pixel
+
+	* Xconfigurator.pm: force 1024x768 on Powerbook
+
+	* tools/ppc/README: README: README for creating PPC boot CD
+
+2001/03/14  dam's  <damien@mandrakesoft.com>
+
+	* netconnect.pm: changed label + profile before types..
+
+2001/03/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/be.po, share/po/sp.po, share/po/pt.po,
+	share/po/i18n_compssUsers, share/po/DrakX.pot, share/po/es.po,
+	share/po/fr.po, share/po/bg.po, share/po/ga.po, share/po/sr.po,
+	share/po/de.po, share/po/et.po, share/po/tr.po, share/po/eu.po,
+	share/po/az.po, share/po/ru.po, share/po/pt_BR.po, share/po/hr.po,
+	share/po/ko.po, share/po/cy.po, share/po/nl.po, share/po/ja.po,
+	share/po/wa.po, share/po/sv.po, share/po/is.po, share/po/hu.po,
+	share/po/zh_TW.Big5.po, share/po/it.po, share/po/id.po, share/po/pl.po,
+	share/po/fi.po, share/po/no.po, share/po/zh_CN.GB2312.po,
+	share/po/th.po, share/po/el.po, share/po/Changelog, share/po/sk.po,
+	share/po/lt.po, share/po/sl.po, share/po/br.po, share/po/ca.po,
+	share/po/gl.po, share/po/lv.po, share/po/uk.po, share/po/eo.po,
+	share/po/ro.po, share/po/da.po, share/po/cs.po, share/po/af.po:
+	corrected the script and updated po files
+
+2001/03/14  Pixel  <pixel@mandrakesoft.com>
+
+	* share/compssUsers: keep only one Development entry
+
+	* install_steps_gtk.pm, pkgs.pm: fix the compssUsers interpretation
+
+	* bootlook.pm: fix for perl2fcalls
+
+	* install_steps_interactive.pm (chooseGroups): disable the size display as
+	it is wrong (for the beta2)
+
+2001/03/14  Stew Benedict  <sbenedict@mandrakesoft.com>
+
+	* install_steps_interactive.pm, install_steps_gtk.pm,
+	partition_table_mac.pm, bootloader.pm: fix bootstrap partition
+	creation/tracking
+	allow Xpmac to launch in 2 modes based on cmdline
+
+2001/03/14  siegel
+
+	* share/po/de.po: new german version
+
 2001/03/14  dam's  <damien@mandrakesoft.com>
 
 	* netconnect.pm: changed label + profile before types..
