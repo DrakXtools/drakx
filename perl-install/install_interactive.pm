@@ -139,6 +139,7 @@ sub partitionWizardSolutions {
 	    sub {
 		$o->set_help('resizeFATChoose');
 		my $part = $o->ask_from_listf('', N("Which partition do you want to resize?"), \&partition_table::description, \@ok_for_resize_fat) or return;
+		my $hd = fsedit::part2hd($part, $all_hds);
 		$o->set_help('resizeFATWait');
 		my $resize_fat = eval {
 		    my $pkg = isFat($part) ? do { 
@@ -156,6 +157,10 @@ the following error occured: %s", $@);
 		    my $w = $o->wait_message(N("Resizing"), N("Computing the size of the Windows partition"));
 		    $resize_fat->min_size;
 		};
+		#- make sure that even after normalizing the size to cylinder boundaries, the minimun will be saved,
+		#- this save at least a cylinder (less than 8Mb).
+		$min_win += partition_table::raw::cylinder_size($hd);
+
 		$part->{size} > $min_linux + $min_swap + $min_freewin + $min_win or die N("Your Windows partition is too fragmented. Please reboot your computer under Windows, run the ``defrag'' utility, then restart the Mandrake Linux installation.");
 		$o->ask_okcancel('', N("WARNING!
 
@@ -174,7 +179,6 @@ When sure, press Ok.")) or return;
 		my $oldsize = $part->{size};
 		$part->{size} = from_Mb($mb_size, $min_win, $part->{size});
 
-		my $hd = fsedit::part2hd($part, $all_hds);
 		$hd->adjustEnd($part);
 
 		eval { 
