@@ -303,8 +303,11 @@ if (!$::isEmbedded) {
 
 #------------------------------------------------------------------
 # main window:
+
+my $_msg = N("Welcome to the UPS configuration tools");
+
 $w->{window}->add(gtkpack_(Gtk2::VBox->new,
-                           0, Gtk2::Label->new(N("Welcome to the UPS configuration tools")),
+                           0, Gtk2::Banner->new('drakups', N("DrakUPS")),
                            1, my $nb = Gtk2::Notebook->new,
                            0, create_okcancel( my $oc = 
                                                {
