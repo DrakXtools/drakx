@@ -609,7 +609,7 @@ sub setRootPassword {
 		 $o->{installClass} =~ "server" || $::expert ? "setRootPasswordMd5" : (),
 		 $::beginner ? () : "setRootPasswordNIS");
 
-    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 ? () : _("No password")],
+    $o->ask_from_entries_refH([_("Set root password"), _("Ok"), $o->{security} > 2 || $::corporate ? () : _("No password")],
 			 [ _("Set root password"), 
 			   $::beginner ? "\n" .
 _("(a user ``mandrake'' with password ``mandrake'' has been automatically added)") : ()

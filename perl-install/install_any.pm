@@ -259,6 +259,7 @@ sub setPackages($) {
 
 	my @l = ();
 	push @l, "kapm" if $o->{pcmcia};
+	push @l, "Device3Dfx", "Glide_V3" if pci_probing::main::matching_desc('Voodoo');
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
