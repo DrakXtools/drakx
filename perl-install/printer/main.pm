@@ -635,8 +635,7 @@ sub lpstat_v {
 	} else {
 	    ();
 	}
-#    } run_program::rooted_get_stdout($::prefix, 'lpstat', '-v');
-    } run_program::rooted_get_stdout($::prefix, 'cat', '/tmp/t');
+    } run_program::rooted_get_stdout($::prefix, 'lpstat', '-v');
 }
 
 sub read_cups_printer_list {
