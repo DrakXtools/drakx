@@ -111,7 +111,7 @@ $file = "$::prefix$file" if !-e $file;
 
 sub get_info_providers_backend {
     my ($isdn, $_netc, $name) = @_;
-    $name eq 'Unlisted - edit manually' and return;
+    $name eq N("Unlisted - edit manually") and return;
     foreach (catMaybeCompressed($file)) {
 	chop;
 	my ($name_, $phone, $real, $dns1, $dns2) = split '=>';
