@@ -56,7 +56,6 @@ sub getinfoFromXF86Config {
 	    $c{device} ||= $1 if /^\s*Option\s+"Device"\s+"\/dev\/(.*?)"/;
 	    $c{chordmiddle} ||= $1 if /^\s*Option\s+"ChordMiddle"\s+"\/dev\/(.*?)"/;
 	    $c{nbuttons}   = 2 if /^\s*Option\s+"Emulate3Buttons"\s+/;
-	    $c{nbuttons} ||= 3 if /^\s*#\s*Option\s+"Emulate3Buttons"\s+/;
 	    $c{nbuttons} ||= 5 if /^\s*#\s*Option\s+"ZAxisMapping"\s.*5/;
 	    $c{nbuttons}   = 7 if /^\s*#\s*Option\s+"ZAxisMapping"\s.*7/;
 
@@ -103,7 +102,6 @@ sub getinfoFromXF86Config {
 	    $mouse{cleardtrrts} ||= 1 if m/^\s*ClearRTS\s+/;
 	    $mouse{chordmiddle} ||= 1 if m/^\s*ChordMiddle\s+/;
 	    $mouse{nbuttons}   = 2 if m/^\s*Emulate3Buttons\s+/;
-	    $mouse{nbuttons} ||= 3 if m/^\s*#\s*Emulate3Buttons\s+/;
 	    $mouse{nbuttons} ||= 5 if m/^\s*ZAxisMapping\s.*5/;
 	    $mouse{nbuttons}   = 7 if m/^\s*ZAxisMapping\s.*7/;
 	} elsif (/^Section "XInput"/ .. /^EndSection/) {
@@ -161,6 +159,10 @@ sub getinfoFromXF86Config {
     if (my @depth = keys %{$card{depth}}) {
 	$o->{card}{suggest_wres} = ($card{depth}{$o->{card}{suggest_depth} || $depth[0]}[0][0]);
     }
+
+    #- final clean-up.
+    $mouse{nbuttons} ||= 3; #- when no tag found, this is because there is 3 buttons.
+    mouse::update_type_name(\%mouse); #- allow getting fullname (type|name).
 
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
