@@ -1,3 +1,81 @@
+2004/03/19  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: adapt to devfs (?) naming which breaks compatibility
+	(bugzilla #9029)
+
+	* ugtk2.pm: 
+	  - fix _find_imgfile()
+	  - cleanup
+
+	* install_steps.pm: devfs=mount is the default for kernel 2.6 (what about
+	2.4 ?), so one need
+	devfs=nomount when devfsd is not installed
+
+2004/03/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm (switch) perl_checker fix
+
+	* network/netconnect.pm: eagle-usb maintainers ask not to fill dns by
+	default because ppp will
+	return better one through peerdns option
+	dnsX were renamed as dnsServerX+1 long time ago and are managed one
+	step earlier
+
+2004/03/18  David Baudens  <baudens at mandrakesoft.com>
+
+	* standalone/icons/localedrake-32.png,
+	standalone/icons/localedrake-48.png, drakxtools.spec,
+	standalone/icons/localedrake-16.png, Makefile.drakxtools: Add icons for
+	localedrake menu entry
+
+	* share/rpmsrate: Add kdegraphics-common in GRAPHICS section
+
+2004/03/18  marco
+
+	* share/po/it.po: successivo -> avanti
+
+2004/03/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po: updated Filipino file
+
+2004/03/18  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: new helper function may_set_icon that takes care of missing
+	wiz_default_up during install
+
+	* partition_table/dos.pm: not guessing a geometry when default_ok is no
+	big deal
+
+2004/03/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/sound.pm: install alsa-utils if needed (#6288)
+
+	* network/adsl.pm: only kill pppoa for sagem modem (eg for bewan, we use
+	pppoa plugin for
+	ppp)
+	fix bewan support by providing an ad-how /etc/ppp/options
+
+	* standalone/icons/drakups.png: use mdk icon for drakups
+
+	* network/netconnect.pm: fix obvious wrong lookup (at install time, we
+	must check installed
+	root fs instead of /)
+	always offer to restart adsl connections
+	only warn about 2.4.x kernel for bewan modem
+	only warn about the fact we need 2.4.x kernel when we're under 2.6.x
+
+	* Makefile.config: reput back drakups
+
+	* share/rpmsrate: install kernel-2.4.x for pci modems whose binary driver
+	isn't ported
+	on 2.6.x
+
+2004/03/18  Warly  <warly at mandrakesoft.com>
+
+	* share/rpmsrate: move the DRIVER part from INSTALL to SYSTEM
+	fix speedtouch-mgm -> mgmt
+	fix bad indentation
+
 2004/03/18  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* lang.pm: Gnome Low-Saxon translations use "nds_DE", putting it on
@@ -29431,7 +29509,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.912 2004/03/17 16:51:36 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.913 2004/03/18 10:50:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
