@@ -1164,7 +1164,7 @@ sub install {
 }
 
 sub what_provides {
-    my ($do, $name) = @;
+    my ($do, $name) = @_;
     map { $do->{o}{packages}{depslist}[$_]->name } keys %{$do->{o}{packages}{provides}{$name} || {}};
 }
 
