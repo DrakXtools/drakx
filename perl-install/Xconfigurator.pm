@@ -957,7 +957,7 @@ sub write_XF86Config {
     }
 
     #- write wacom device support.
-    foreach (@{$o->{wacom}}) {
+    foreach (1 .. @{$o->{wacom}}) {
 	my $dev = "/dev/" . $o->{wacom}[$_-1];
 	print F $dev =~ /input\/event/ ? qq(
 Section "XInput"
