@@ -513,5 +513,6 @@ sub save() {
     $::isWizard = 0;
     my $y = $in->ask_filename({ title => N("Save as.."), directory => "/root", save => 1 }) or return;
     my $buf = $log_text->get_buffer;
-    output($y, $buf->get_text(($buf->get_bounds), 0));
+    my ($start, $end) = $buf->get_bounds;
+    output($y, $buf->get_text($start, $end, 0));
 }
