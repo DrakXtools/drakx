@@ -133,8 +133,6 @@ On which drive are you booting?"), \&partition_table::description, $hds) or retu
 sub setupBootloader__mbr_or_not {
     my ($in, $b, $hds, $fstab) = @_;
 
-    my @l = (N_("First sector of drive (MBR)"), N_("First sector of boot partition"));
-
     $in->set_help('setupBootloaderBeginner') if !$::isStandalone;
     if (arch() =~ /ppc/) {
 	if (defined $partition_table::mac::bootstrap_part) {
@@ -144,16 +142,27 @@ sub setupBootloader__mbr_or_not {
 	    die "no bootstrap partition - yaboot.conf creation failed";
 	}
     } else {
-	my $boot = $hds->[0]{device};
-	my $use_partition = arch() =~ /sparc/ ? $b->{use_partition} : "/dev/$boot" ne $b->{boot};
+	my $floppy = detect_devices::floppy();
+
+	my @l = (
+		 [ N("First sector of drive (MBR)") => '/dev/' . $hds->[0]{device} ],
+		 [ N("First sector of boot partition") => '/dev/' . fsedit::get_root($fstab, 'boot')->{device} ],
+		     if_($floppy, 
+                 [ N("On Floppy") => "/dev/$floppy" ],
+		     ),
+		 [ N("Skip") => '' ],
+		);
+
+	my $default = arch() =~ /sparc/ ? ($b->{use_partition} ? $l[1] : $l[0]) : 
+	                                  find { $_->[1] eq $b->{boot} } @l;
 	$in->ask_from(arch() =~ /sparc/ ? N("SILO Installation") : N("LILO/grub Installation"),
 		      N("Where do you want to install the bootloader?"),
-		      [ { val => \$use_partition, list => [ 0, 1 ], format => sub { translate($l[$_[0]]) } } ]) or return;
-	if (arch() =~ /sparc/) {
-	    $b->{use_partition} = $use_partition;
-	}  else {
-	    my $new_boot = "/dev/" . ($use_partition ? fsedit::get_root($fstab, 'boot')->{device} : $boot);
+		      [ { val => \$default, list => \@l, format => sub { $_[0][0] }, type => 'list' } ]);
+	my $new_boot = $default->[1] or return;
 
+	if (arch() =~ /sparc/) {
+	    $b->{use_partition} = $new_boot eq $l[1][1];
+	}  else {
 	    #- remove bios mapping if the user changed the boot device
 	    delete $b->{bios} if $new_boot ne $b->{boot};
 
