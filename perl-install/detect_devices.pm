@@ -206,12 +206,23 @@ sub whatPrinterPort() {
     grep { tryWrite($_)} qw(/dev/lp0 /dev/lp1 /dev/lp2);
 }
 
-sub hasModem($) {
-    my ($device) = @_;
+sub probe_device($) {
+    my $device = devices::make($_[0]);
     my %probe;
-    local *F; open F, "pnp_serial $device |";
+
+    #- TODO cache hash result of probe according to device.
+    local *F;
+    open F, "pnp_serial $device 2>/dev/null |" if $device =~ /ttyS/;
+
     foreach (<F>) { $probe{$1} = $2 if /^\s+(.*?)\s*:\s*\"(.*)\"\s*$/ }
-    $probe{CLASS} =~ /Modem/i && $probe{DESCRIPTION};
+    log::l("probing $device find class: $probe{CLASS}");
+
+    \%probe;
+}
+
+sub hasModem($) {
+    my $probe = probe_device($_[0]);
+    $probe->{CLASS} =~ /MODEM/i && $probe->{DESCRIPTION};
 }
 
 sub hasMousePS2() {

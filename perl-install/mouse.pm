@@ -86,13 +86,36 @@ sub write($;$) {
     symlinkf $mouse->{device}, "$prefix/dev/mouse" or log::l("creating $prefix/dev/mouse symlink failed");
 }
 
+sub mouseconfig {
+    my ($t, $mouse);
+
+    foreach (0..1) { #- probe only ttyS0 and ttyS1.
+	$t = detect_devices::probe_device(devices::make("/dev/ttyS$_"));
+	if ($t->{CLASS} =~ /MOUSE/i) {
+	    $t->{MFG} ||= $t->{MANUFACTURER};
+
+	    $mouse = name2mouse("Microsoft IntelliMouse (serial)") if $t->{MFG} eq 'MSH' && $t->{MODEL} eq '0001';
+	    $mouse = name2mouse("Logitech MouseMan/FirstMouse (serial)") if $t->{MFG} eq 'LGI' && $t->{MODEL} =~ /^80/;
+	    $mouse = name2mouse("Genius NetMouse (serial)") if $t->{MFG} eq 'KYE' && $t->{MODEL} eq '0003';
+
+	    $mouse ||= name2mouse("Generic Mouse (serial)"); #- generic by default.
+	    $mouse->{device} = "ttyS$_";
+	    last;
+	}
+    }
+    $mouse;
+}
+
 sub detect() {
     detect_devices::hasMousePS2 and return name2mouse("Generic Mouse (PS/2)");
 
-    my %l;
     eval { commands::modprobe("serial") };
-    @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
+    my $r; $r = mouseconfig(); return $r if $r;
     modules::unload("serial");
+    #- my %l;
+    #- eval { commands::modprobe("serial") };
+    #- @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
+    #- modules::unload("serial");
 
     if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
 	eval { modules::load($c->[1], 'usbmouse') };
