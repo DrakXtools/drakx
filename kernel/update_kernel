@@ -51,7 +51,7 @@ function create_modules() {
         perl -ni -e 's|/\S+/([^/]+)\.k?o(\.gz)|$1|g; print if /: /' modules.dep
     fi
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
-    perl -pi -e 's/(vfat: fat)/$1 nls_cp437/' modules.dep
+    perl -pi -e 's/(vfat: fat)/$1 nls_cp437 nls_iso8859-1/' modules.dep
 
     if build_kernel_is_26; then
 	/sbin/modinfo $objects | perl -lne 'print "$name\t$1" if $name && /^description:\s*(.*)/; $name = $1 if m!^filename:\s*(.*)\.k?o!' > modules.description
