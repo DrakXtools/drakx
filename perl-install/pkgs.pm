@@ -252,7 +252,6 @@ sub selectPackage {
     #- when value is true, may be selected when value is false (this
     #- is only used for unselection, not selection)
     my $state = $packages->{state} ||= {};
-    $state->{selected} = {};
 
     my @l = $packages->resolve_requested($packages->{rpmdb}, $state, packageRequest($packages, $pkg) || {},
 					 callback_choices => \&packageCallbackChoices);
@@ -997,7 +996,7 @@ sub install($$$;$$) {
 			  foreach @transToInstall;
 		    }
 
-		    $trans->order or die "error ordering package list: " . c::rpmErrorString();
+		    #$trans->order or die "error ordering package list: " . c::rpmErrorString();
 		    $trans->set_script_fd(fileno $LOG);
 
 		    log::l("rpm transactions start");
