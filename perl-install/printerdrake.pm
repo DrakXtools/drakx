@@ -155,18 +155,24 @@ sub setup_printer_connection {
     return $done;
 }
 
-sub auto_detect {
-    my ($local, $network, $smb) = @_;
-    if ($local) {
-	modules::get_probeall("usb-interface") and eval { modules::load("printer") };
-	eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
-	eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
-    }
-    my $b = before_leaving { eval { modules::unload("parport_probe") } }
-    if $local;
-    my @res = (($local ? detect_devices::whatPrinter() : ()), 
-	       ($network || $smb ? printer::whatNetPrinter($network,$smb) : ()));
-    @res;
+sub local_detect {
+    modules::get_probeall("usb-interface") and eval { modules::load("printer") };
+    eval { modules::unload(qw(lp parport_pc parport_probe parport)) }; #- on kernel 2.4 parport has to be unloaded to probe again
+    eval { modules::load(qw(parport_pc lp parport_probe)) }; #- take care as not available on 2.4 kernel (silent error).
+    my $b = before_leaving { eval { modules::unload("parport_probe") } };
+    detect_devices::whatPrinter();
+}
+
+sub net_detect {
+    printer::whatNetPrinter(1, 0)
+}
+
+sub net_smb_detect {
+    printer::whatNetPrinter(0, 1)
+}
+
+sub detect {
+    local_detect(), net_detect(), net_smb_detect();
 }
 
 sub first_time_dialog {
@@ -178,7 +184,7 @@ sub first_time_dialog {
 			      _("Checking your system..."));
 
     # Auto-detect local printers
-    my @autodetected = auto_detect (1, 0, 0);
+    my @autodetected = local_detect();
     my @printerlist;
     my $localprinterspresent;
     if (@autodetected == ()) {
@@ -401,12 +407,9 @@ sub setup_local_autoscan {
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
 	printer::stop_service("hpoj");
-	@autodetected = auto_detect($expert_or_modify ||
-				    $printer->{AUTODETECTLOCAL},
-				    !$expert_or_modify && 
-				    $printer->{AUTODETECTNETWORK},
-				    !$expert_or_modify && 
-				    $printer->{AUTODETECTSMB});
+	@autodetected = ($expert_or_modify || $printer->{AUTODETECTLOCAL})    and local_detect,
+				 (!$expert_or_modify && $printer->{AUTODETECTNETWORK}) and net_detect,
+				 (!$expert_or_modify && $printer->{AUTODETECTSMB})     and net_smb_detect;
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = ($#autodetected > 0);
@@ -803,7 +806,7 @@ sub setup_smb {
 	    $in->do_pkgs->install('samba-client');
 	}
 	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
-	@autodetected = auto_detect(0, 0, 1);
+	@autodetected = net_smb_detect();
 	for my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^smb://([^/:]+)/([^/:]+)$!;
@@ -1043,7 +1046,7 @@ sub setup_socket {
     if ($printer->{AUTODETECT}) {
 	$autodetect = 1;
 	my $w = $in->wait_message(_("Printer auto-detection"), _("Scanning network..."));
-	@autodetected = auto_detect(0, 1, 0);
+	@autodetected = net_detect();
 	for my $p (@autodetected) {
 	    my $menustr;
 	    $p->{port} =~ m!^socket://([^:]+):(\d+)$!;
@@ -2340,11 +2343,11 @@ The \"%s\" command also allows to modify the option settings for a particular pr
 (!$cupsremote ?
  _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::lphelp_output($printer) : 
+", $scanning, $photocard) . printer::help_output($printer, 'lp') : 
  $scanning . $photocard .
  _("Here is a list of the available printing options for the current printer:
 
-") . printer::lphelp_output($printer)) : $scanning . $photocard);
+") . printer::help_output($printer, 'lp')) : $scanning . $photocard);
     } elsif ($spooler eq "lprng") {
 	$dialogtext =
 _("To print a file from the command line (terminal window) use the command \"%s <file>\".
@@ -2380,7 +2383,7 @@ The \"%s\" and \"%s\" commands also allow to modify the option settings for a pa
 ", "pdq", "lpr", ($queue ne $default ? "pdq -P $queue -aoption=setting -oswitch" : "pdq -aoption=setting -oswitch")) .
 _("To know about the options available for the current printer read either the list shown below or click on the \"Print option list\" button.%s%s
 
-", $scanning, $photocard) . printer::pdqhelp_output($printer) :
+", $scanning, $photocard) . printer::help_output($printer, 'pdq') :
  $scanning . $photocard);
     }
     my $windowtitle = ($scanning ?

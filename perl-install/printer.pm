@@ -1685,30 +1685,22 @@ sub print_pages($@) {
     @lpq_output;
 }
 
-sub lphelp_output {
-    my ($printer) = @_;
+sub help_output {
+    my ($printer, $spooler) = @_;
+    my %spoolers = ('lpq' => {
+                              'help' => "/usr/bin/lphelp %s |"
+                     },
+                    'lp' => {
+                            'help' => "/usr/bin/pdq -h -P %s 2>&1 |"
+                     }
+                );
     my $queue = $printer->{QUEUE};
-    my $lphelp = "/usr/bin/lphelp";
 
     local *F; 
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . "$lphelp $queue |";
+    open F, ($::testing ? $prefix : "chroot $prefix/ ") . sprintf($spoolers{$spooler}{help}, $queue);
     $helptext = join("", <F>);
     close F;
-    if (!$helptext || ($helptext eq "")) {
-	$helptext = "Option list not available!\n";
-    }
-    return $helptext;
-}
-
-sub pdqhelp_output {
-    my ($printer) = @_;
-    my $queue = $printer->{QUEUE};
-    my $pdq = "/usr/bin/pdq";
-
-    local *F; 
-    open F, ($::testing ? $prefix : "chroot $prefix/ ") . "$pdq -h -P $queue  2>&1 |";
-    $helptext = join("", <F>);
-    close F;
+    $helptext = "Option list not available!\n"; if ($spooler eq 'lpq' && (!$helptext || ($helptext eq "")));
     return $helptext;
 }
 
