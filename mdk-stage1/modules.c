@@ -173,7 +173,7 @@ void init_modules_insmoding(void)
 
 static void add_modules_conf(char * str)
 {
-	static char data[500] = "";
+	static char data[5000] = "";
 	char * target = "/etc/modules.conf";
 	int fd;
 
@@ -268,17 +268,6 @@ enum insmod_return my_insmod(const char * mod_name, enum driver_type type, char 
 	i = insmod_with_deps(mod_name, options);
 	if (i == 0) {
 		log_message("\tsucceeded %s", mod_name);
-#ifndef DISABLE_MEDIAS
-		if (type == SCSI_ADAPTERS) {
-			if (number_scsi > 0)
-				sprintf(alias, "alias scsi_hostadapter%d %s", number_scsi, mod_name);
-			else
-				sprintf(alias, "alias scsi_hostadapter %s", mod_name);
-			number_scsi++;
-			add_modules_conf(alias);
-			log_message("SCSI: %s", alias);
-		}
-#endif
 #ifndef DISABLE_NETWORK
 		if (type == NETWORK_DEVICES) {
 			char ** new_net_devices = get_net_devices();
