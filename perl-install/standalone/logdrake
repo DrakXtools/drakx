@@ -360,7 +360,7 @@ sub logcolorize {
 
 #    log_output (Gtk2::TextView, [ [ ... ] ])
 sub log_output {
-    gtktext_insert($log_text, [ \@_ ], undef, 1);
+    gtktext_insert($log_text, [ \@_ ], { 'append' => 1 });
 }
 
 

@@ -497,10 +497,10 @@ sub gtkcreate_pixbuf {
 #		                [ 'third', { 'font' => 'Serif 15', ... } ],
 #                               ... ]);
 sub gtktext_insert {
-    my ($textview, $t, $opts, $append) = @_;
+    my ($textview, $t, $opts) = @_;
     if (ref($t) eq 'ARRAY') {
 	my $buffer = $textview->get_buffer;
-	$buffer->set_text('', -1) unless $append;
+	$buffer->set_text('', -1) unless $opts->{append};
 	foreach my $token (@$t) {
 	    my $c = $buffer->get_char_count;
 	    $buffer->insert($buffer->get_end_iter, $token->[0], -1);
@@ -534,7 +534,6 @@ sub gtkfontinfo {
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
 	no strict;
 	my $func = "get_$_";
-	print "TOTO: ", $metrics->$func, "\n";;
 	$fontinfo{$_} = PANGO_PIXELS($metrics->$func);
     }
     $metrics->unref;
