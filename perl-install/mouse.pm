@@ -101,7 +101,7 @@ sub list { @mouses }
 sub name2mouse {
     my ($name) = @_;
     foreach (@mouses) {
-	return { %$_ } if $name eq $_->{FULLNAME};
+	$name eq $_->{FULLNAME} and return $_;
     }
     die "$name not found";
 }
@@ -167,7 +167,7 @@ sub detect() {
         return name2mouse("Apple ADB Mouse");
     }
 
-    detect_devices::hasMousePS2 and return { unsafe => 1, %{name2mouse("Generic Mouse (PS/2)")} };
+    detect_devices::hasMousePS2 and return { %{name2mouse("Generic Mouse (PS/2)")}, unsafe => 1 };
 
     eval { commands::modprobe("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
@@ -186,6 +186,7 @@ sub detect() {
 	modules::unload("usbmouse");
     }
 
-    #- defaults to generic ttyS0
-    { device => "ttyS0", unsafe => 1, %{name2mouse("Generic Mouse (serial)")} };
+    #- defaults to generic serial mouse on ttyS0.
+    #- Oops? using return let return a hash ref, if not using it, it return a list directly :-)
+    return { %{name2mouse("Generic Mouse (serial)")}, device => "ttyS0", unsafe => 1 };
 }

@@ -24,16 +24,16 @@ xhost+: %: %.c
 ddcprobe/ddcxinfos:
 	$(MAKE) -C ddcprobe ddcxinfos
 
-$(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz2
+$(BASE)/compss: $(BASE)/hdlists $(BASE)/hdlist.cz
 	./gencompss `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' ` > $@ 
 
-$(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz2
+$(BASE)/depslist: $(BASE)/hdlists $(BASE)/hdlist.cz
 	gendepslist2 -o $@ `cat $< | perl -pe 's|^(\S*).*|'$(BASE)'/$$1|' `
 
 $(BASE)/filelist: $(RPMS)
 	genfilelist $(ROOTDEST)/Mandrake/RPMS* >$@
 
-$(BASE)/hdlist.cz2: $(BASE)/hdlists $(RPMS)
+$(BASE)/hdlist.cz: $(BASE)/hdlists $(RPMS)
 	genhdlists --noclean --distrib $(ROOTDEST)
 
 clean: 

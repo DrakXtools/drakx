@@ -290,7 +290,7 @@ sub setPackages($) {
 	#- must be done after selecting base packages (to save memory)
 	pkgs::getProvides($o->{packages});
 
-	$o->{compss} = pkgs::readCompss($o->{packages});
+	$o->{compss} = pkgs::readCompss($o->{prefix}, $o->{packages});
 	#- must be done after getProvides
 	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{packages}, $o->{compss});
@@ -304,7 +304,8 @@ sub setPackages($) {
 	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
     } else {
-	#- this has to be done to make sure the hdlist files and depslist file are present.
+	#- this has to be done to make sure necessary files for urpmi are
+	#- present.
 	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
 
 	#- remove upgrade flag with selection one. TOCHECK

@@ -127,10 +127,11 @@ sub setup_gsdriver($$$;$) {
     do {
 	$printer->{DBENTRY} ||= $printer::thedb_gsdriver{$printer->{GSDRIVER}}{ENTRY};
 	eval { $printer->{DBENTRY} = $printer::descr_to_db{
-	    $in->ask_from_list_with_help_(_("Configure Printer"),
+#	    $in->ask_from_list_with_help_(_("Configure Printer"), #- tempory sucks TODO
+	    $in->ask_from_list_(_("Configure Printer"),
 					  _("What type of printer do you have?"),
 					  [ @printer::entry_db_description ],
-					  { %printer::descr_to_help },
+				#	  { %printer::descr_to_help },
 					  $printer::db_to_descr{$printer->{DBENTRY}},
 					 )
 			       };

@@ -182,7 +182,7 @@ sub setup_thiskind {
 
     if ($allow_probe) {
 	@l = $o->load_thiskind($type);
-	if (my @err = grep { $_->{error} } map { $_->{error} } @l) {
+	if (my @err = grep { $_ } map { $_->{error} } @l) {
 	    $o->ask_warn('', join("\n", @err));
 	}
 	return @l if $auto && (@l || !$at_least_one);

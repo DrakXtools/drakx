@@ -399,16 +399,17 @@ sub psUpdateHdlistsDeps {
 	#- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
 	#- for getting header of package during installation or after by urpmi.
 	my $fakemedium = $method . $medium;
-	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
+	my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2" . ($hdlist =~ /\.cz2/ && "2");
 	-e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
 	install_any::getAndSaveFile($hdlist, $newf) or die "no $hdlist found";
 	symlinkf $newf, "/tmp/$hdlist";
 	++$medium;
     }
 
-    #- this is necessary for urpmi, but also as hdlist are copied here,
-    #- we can make consistent the directory.
-    install_any::getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
+    #- this is necessary for urpmi.
+    install_any::getAndSaveFile("depslist.ordered", "$prefix/var/lib/urpmi/depslist.ordered");
+    install_any::getAndSaveFile("provides", "$prefix/var/lib/urpmi/provides");
+    install_any::getAndSaveFile("compss", "$prefix/var/lib/urpmi/compss");
 }
 
 sub psUsingHdlists {
@@ -461,7 +462,7 @@ sub psUsingHdlist {
 
     #- copy hdlist file directly to $prefix/var/lib/urpmi, this will be used
     #- for getting header of package during installation or after by urpmi.
-    my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz2";
+    my $newf = "$prefix/var/lib/urpmi/hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2");
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
     install_any::getAndSaveFile($fhdlist || $hdlist, $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
@@ -549,11 +550,9 @@ sub getOtherDeps($$) {
 sub getDeps($) {
     my ($prefix, $packages) = @_;
 
-    #- this is necessary for urpmi, but also as hdlist are copied here,
-    #- we can make consistent the directory.
-    install_any::getAndSaveFile("depslist", "$prefix/var/lib/urpmi/depslist");
-
-    my $f = install_any::getFile("depslist.ordered") or die "can't find dependencies list";
+    #- this is necessary for urpmi.
+    install_any::getAndSaveFile("depslist.ordered", "$prefix/var/lib/urpmi/depslist.ordered");
+    install_any::getAndSaveFile("provides", "$prefix/var/lib/urpmi/provides");
 
     #- beware of heavily mismatching depslist.ordered file against hdlist files.
     my $mismatch = 0;
@@ -562,7 +561,9 @@ sub getDeps($) {
     #- cross reference to be resolved on id (think of loop requires)
     #- provides should be updated after base flag has been set to save
     #- memory.
-    foreach (<$f>) {
+    local *F;
+    open F, "$prefix/var/lib/urpmi/depslist.ordered" or die "cann't find dependancies list";
+    foreach (<F>) {
 	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
 	my $pkg = $packages->[0]{$name};
 
@@ -612,11 +613,15 @@ sub getProvides($) {
 }
 
 sub readCompss {
-    my ($packages) = @_;
+    my ($prefix, $packages) = @_;
     my ($p, @compss);
 
-    my $f = install_any::getFile("compss") or die "can't find compss";
-    foreach (<$f>) {
+    #- this is necessary for urpmi.
+    install_any::getAndSaveFile("compss", "$prefix/var/lib/urpmi/compss");
+
+    local *F;
+    open F, "$prefix/var/lib/urpmi/compss" or die "can't find compss";
+    foreach (<F>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
 

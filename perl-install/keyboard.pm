@@ -263,7 +263,7 @@ sub setup($) {
 	load(cat_($f));
     } else {
 	local *F;
-	open F, "extract_archive $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].kmap |";
+	open F, "packdrake -x $ENV{SHARE_PATH}/keymaps.cz2 '' $o->[1].kmap |";
 	local $/ = undef;
 	eval { load(<F>) };
     }
