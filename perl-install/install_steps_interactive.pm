@@ -497,12 +497,12 @@ wish to access and any applicable user name and password."),
     }
 
     my $action;
-    my @action = qw(ascii ps change done);
+    my @action = qw(ascii ps both done);
     my %action = (
-		  ascii  => _("Print test ascii page"),
-		  ps     => _("Print test postscript page"),
-		  change => _("Change printer"),
-		  done   => _("Done"),
+		  ascii  => _("Yes, print ascii page"),
+		  ps     => _("Yes, print postscript page"),
+		  both   => _("Yes, print both pages"),
+		  done   => _("No"),
 		 );
 
     do {
@@ -548,27 +548,30 @@ _("Color depth options") => { val => \$o->{printer}{BITSPERPIXEL}, type => 'list
 	$o->{printer}{complete} = 1;
 	install_steps::printerConfig($o);
 	$o->{printer}{complete} = 0;
-	do {
-	    $action = ${{reverse %action}}{$o->ask_from_list('', _("What do you want to do"),
-							     [ map { $action{$_} } @action ], $action{'done'})};
+	
+	$action = ${{reverse %action}}{$o->ask_from_list('', _("Do you want to test the printer?"),
+							 [ map { $action{$_} } @action ], $action{'done'})};
 
-	    my $pidlpd;
-	    my $testpage = ($action eq 'ascii' && ".asc" ||
-			    $action eq 'ps' && (($o->{printer}{PAPERSIZE} eq 'a4' && "-a4") .".ps"));
-	    $testpage = $testpage && "/usr/lib/rhs/rhs-printfilters/testpage$testpage";
+	my $pidlpd;
+	my @testpages;
+	push @testpages, "/usr/lib/rhs/rhs-printfilters/testpage.asc"
+	  if $action eq "ascii" || $action eq "both";
+	push @testpages, "/usr/lib/rhs/rhs-printfilters/testpage". ($o->{printer}{PAPERSIZE} eq 'a4' && '-a4') .".ps"
+	  if $action eq "ps" || $action eq "both";
 
-	    if ($testpage) {
-		#- restart lpd with blank spool queue.
-		foreach (("/var/spool/lpd/$o->{printer}{QUEUE}/lock", "/var/spool/lpd/lpd.lock")) {
-		    $pidlpd = (cat_("$o->{prefix}$_"))[0]; kill 'TERM', $pidlpd if $pidlpd;
-		    unlink "$o->{prefix}$_";
-		}
-		run_program::rooted($o->{prefix}, "lprm", "-P$o->{printer}{QUEUE}", "-"); sleep 1;
-		run_program::rooted($o->{prefix}, "lpd"); sleep 1;
-
-		run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $testpage);
+	if (@testpages) {
+	    #- restart lpd with blank spool queue.
+	    foreach (("/var/spool/lpd/$o->{printer}{QUEUE}/lock", "/var/spool/lpd/lpd.lock")) {
+		$pidlpd = (cat_("$o->{prefix}$_"))[0]; kill 'TERM', $pidlpd if $pidlpd;
+		unlink "$o->{prefix}$_";
 	    }
-	} while ($action ne 'change' && $action ne 'done');
+	    run_program::rooted($o->{prefix}, "lprm", "-P$o->{printer}{QUEUE}", "-"); sleep 1;
+	    run_program::rooted($o->{prefix}, "lpd"); sleep 1;
+
+	    run_program::rooted($o->{prefix}, "lpr", "-P$o->{printer}{QUEUE}", $_) foreach @testpages;
+
+	    $action = $o->ask_yesorno('', _("Is it correct?"), 1) ? 'done' : 'change';
+	}
     } while ($action ne 'done');
     $o->{printer}{complete} = 1;
 }
