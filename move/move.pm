@@ -12,6 +12,14 @@ use lang;
 
 my @ALLOWED_LANGS = qw(en_US fr es it de);
 
+sub symlinkf_short {
+    my ($dest, $file) = @_;
+    if (my $l = readlink $dest) {
+	$dest = $l if $l =~ m!^/!;
+    }
+    symlinkf($dest, $file);
+}
+
 #- run very soon at stage2 start, setup things on tmpfs rw / that
 #- were not necessary to start stage2 itself (there were setup
 #- by stage1 of course)
@@ -33,12 +41,12 @@ sub init {
     system("cp -R /image/etc/cups/* /etc/cups");
  
     #- ro things
-    symlinkf "/image/etc/$_", "/etc/$_" 
+    symlinkf_short("/image/etc/$_", "/etc/$_")
       foreach qw(alternatives shadow man.config services shells pam.d security inputrc ld.so.conf 
                  DIR_COLORS bashrc profile profile.d rc.d init.d devfsd.conf gtk-2.0 pango fonts modules.devfs 
                  dynamic gnome-vfs-2.0 gnome-vfs-mime-magic gtk gconf menu menu-methods nsswitch.conf default login.defs 
                  skel ld.so.cache openoffice xinetd.d);
-    symlinkf "/image/etc/X11/$_", "/etc/X11/$_"
+    symlinkf_short("/image/etc/X11/$_", "/etc/X11/$_")
       foreach qw(encodings.dir app-defaults applnk fs lbxproxy proxymngr rstart wmsession.d xinit.d xinit xkb xserver xsm);
 
     #- create remaining /etc and /var subdirectories if not already copied or symlinked,
