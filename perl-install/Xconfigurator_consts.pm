@@ -11,8 +11,7 @@ use common;
 );
 @depths = ikeys(%depths);
 
-@resolutions        = qw(640x480 800x600 1024x768 1152x864 1280x1024           1600x1200 1920x1440 2048x1536);
-@resolutions_laptop = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200 1920x1440 2048x1536);
+@resolutions        = qw(640x480 800x600 1024x768 1152x864 1280x1024 1400x1050 1600x1200 1920x1440 2048x1536);
 
 @window_managers = ('kdeinit: kwin', qw(gnome-session icewm wmaker kwm afterstep fvwm fvwm2 fvwm95 mwm twm enlightenment xfce blackbox sawfish));
 
@@ -157,7 +156,10 @@ $low_default_monitor = "Super VGA, 800x600 at 56 Hz";
 	1024 => 35.5,
 	1152 => 44.0,
 	1280 => 51.0,
+	1400 => 65.5,
 	1600 => 75.0,
+	1920 => 90.0,
+	2048 => 136.5,
 );
 
 
@@ -670,15 +672,6 @@ ModeLine "768x576"     50.00  768  832  846 1000   576  590  595  630
 # 768x576 @ 100 Hz, 61.6 kHz hsync
 ModeLine "768x576"     63.07  768  800  960 1024   576  578  590  616
 
-# 1400x1050 @ 30 Hz, 33 kHz hsync
-ModeLine "1400x1050"   59.93 1400 1416 1704 1816  1050 1050 1055 1097
-# 1400x1050 @ 51 Hz, 56 kHz hsync
-ModeLine "1400x1050"  107.00 1400 1464 1784 1912  1050 1052 1064 1090
-# 1400x1050 @ 59 Hz, 63.8 kHz hsync
-ModeLine "1400x1050"  122.00 1400 1464 1784 1912  1050 1052 1064 1090 -HSync -VSync
-# 1400x1050 @ 60 Hz, 65.4 kHz hsync
-ModeLine "1400x1050"  125.04 1400 1464 1784 1912  1050 1052 1064 1090
-
 ';
 $modelines_text_apple = '
 Section "Modes"
@@ -750,6 +743,8 @@ Modeline "1024x768"    85    1024 1032 1152 1360   768  784  787  823
 Modeline  "1152x864"   92    1152 1208 1368 1474   864  865  875  895
 # 1280x1024 @ 61 Hz, 64.2 kHz hsync
 Modeline "1280x1024"  110    1280 1328 1512 1712  1024 1025 1028 1054
+# 1400x1050 @ 60 Hz, 65.5 kHz
+ModeLine "1400x1050" 122.0 1400 1488 1640 1880   1050 1052 1064 1082 +HSync +VSync
 
 # 1024x768 @ 85 Hz, 70.24 kHz hsync
 Modeline "1024x768"   98.9  1024 1056 1216 1408   768 782 788 822 -HSync -VSync
@@ -770,6 +765,8 @@ Modeline "1280x1024"  135    1280 1312 1456 1712  1024 1027 1030 1064
 Modeline "1024x768"   115.5  1024 1056 1248 1440  768  771  781  802 -HSync -VSync
 # 1280x1024 @ 76 Hz, 81.13 kHz hsync
 Modeline "1280x1024"  135    1280 1312 1416 1664  1024 1027 1030 1064
+# 1400x1050 @ 75 Hz, 82.2 kHz hsync
+ModeLine "1400x1050" 155.8   1400 1464 1784 1912  1050 1052 1064 1090 +HSync +VSync
 
 # 1600x1200 @ 70 Hz, 87.50 kHz hsync
 Modeline "1600x1200"  189    1600 1664 1856 2160  1200 1201 1204 1250 -HSync -VSync
@@ -781,6 +778,8 @@ Modeline "1280x1024"  157.5  1280 1344 1504 1728  1024 1025 1028 1072 +HSync +VS
 Modeline "1600x1200"  202.5  1600 1664 1856 2160  1200 1201 1204 1250 +HSync +VSync
 # 1600x1200 @ 85 Hz, 105.77 kHz hsync
 Modeline "1600x1200"  220    1600 1616 1808 2080  1200 1204 1207 1244 +HSync +VSync
+# 1600x1200 @ 85 Hz, 106.3 kHz hsync
+ModeLine "1600x1200" 229.5   1600 1664 1856 2160  1200 1201 1204 1250 +HSync +VSync
 # 1280x1024 @ 100 Hz, 107.16 kHz hsync
 Modeline "1280x1024"  181.75 1280 1312 1440 1696  1024 1031 1046 1072 -HSync -VSync
 
@@ -789,10 +788,16 @@ ModeLine "1800X1440"  230    1800 1896 2088 2392 1440 1441 1444 1490 +HSync +VSy
 # 1800x1440 @ 70Hz, 104.52 kHz hsync
 ModeLine "1800X1440"  250    1800 1896 2088 2392 1440 1441 1444 1490 +HSync +VSync
 
+# 1920x1440 @ 60 Hz, 90.0 kHz hsync
+ModeLine "1920x1440"  234.0  1920 2048 2256 2600 1440 1441 1444 1500 -HSync +VSync
+# 1920x1440 @ 75 Hz, 112.5kHz hsync
+ModeLine "1920x1440"  297.0  1920 2064 2288 2640 1440 1441 1444 1500 -HSync +VSync
+
 # 512x384 @ 78 Hz, 31.50 kHz hsync
 Modeline "512x384"    20.160 512  528  592  640   384  385  388  404 -HSync -VSync
 # 512x384 @ 85 Hz, 34.38 kHz hsync
 Modeline "512x384"    22     512  528  592  640   384  385  388  404 -HSync -VSync
+
 
 # Low-res Doublescan modes
 # If your chipset does not support doublescan, you get a \'squashed\'
