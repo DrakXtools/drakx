@@ -72,7 +72,7 @@ sub create_user {
 	    }
 	}
 	require authentication;
-	run_program::rooted($::prefix, 
+	run_program::raw({ root => $::prefix, sensitive_arguments => 1 },
 			    'adduser', 
 			    '-p', authentication::user_crypted_passwd($u, $isMD5),
 			    if_($uid, '-u', $uid), if_($gid, '-g', $gid), 
