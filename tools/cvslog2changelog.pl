@@ -96,6 +96,7 @@ BEGIN {
               'gb'      => 'Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>',
               'gbeauchesne' => 'Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>',
               'gc'      => 'Guillaume Cottenceau  <gc at mandrakesoft.com>',
+              'hilbert' => '(Hilbert) <h at mandrake.org>',
               'install' => 'DrakX  <install at mandrakesoft.com>',
               'jdanjou'  => 'Julien Danjou',
               'jjorge'  => 'José JORGE <jjorge at free.fr>',
