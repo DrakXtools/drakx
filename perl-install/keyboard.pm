@@ -308,7 +308,9 @@ arch() =~ /^sparc/ ? (
  "th_pat" => [ N_("_: keyboard\nThai (Pattachote)"), "us",       "th_pat", 1 ],
 # TODO: console map
 # NOTE: we define a triple layout here
-"tifinagh" => [ N_("_: keyboard\nTifinagh (+latin/arabic)"), "us", "fr,tifinagh,ar(azerty)", 1 ],
+# NOTE: this is the "phonetic" layout, not standard moroccan
+# layout (the standard is still in proposal mode)
+"tifinagh" => [ N_("_: keyboard\nTifinagh (+latin/arabic)"), "us", "fr,tifinagh(phonetic),ar(azerty)", 1 ],
 # TODO: console map
  "tj" => [ N_("_: keyboard\nTajik"),         "ru4",             "tj",    1 ],
 # TODO: console map
