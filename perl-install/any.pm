@@ -575,7 +575,7 @@ sub setup_thiskind_backend {
     my @l;
     if (!$::noauto) {
 	@l = modules::load_thiskind($type, $wait_function );
-	return @l;# DAMS SUCKERY if $auto && (@l || !$at_least_one);
+	return @l;# sorry to be a sucker, pixel... :)
     }
 }
 
