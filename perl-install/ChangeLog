@@ -1,3 +1,55 @@
+2004/09/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po: corrected typo
+
+2004/09/29  Pixel  <pixel at mandrakesoft.com>
+
+	* partition_table/raw.pm, fsedit.pm: don't die when failing to open a
+	device (to get its geometry), skip it instead
+	(as used to be done before partition_table::raw::get_geometries() was
+	introduced)
+
+	* interactive/gtk.pm: 
+	  - disable the new gtk smart search which display an entry box
+	  - fix return value of key_press_event for some cases
+	(otherwise arrow keys do not work)
+
+	* any.pm: add raid-extra-boot=mbr when installing on mdX (bugzilla #11699)
+
+	* modules.pm: fix titi sux
+
+	* install_steps.pm: ensure gdk loaders, gtk immodules and pango modules
+	lists are correct
+
+2004/09/29  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: install_urpmi now writes a names file for each media
+
+2004/09/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* lang.pm (write) fix setting fonts at install time
+
+	* modules.pm (write_preload_conf) simplify
+	(write_preload_conf) preload nvram on laptops
+
+	* standalone.pm (version) print translated usage message (#5657)
+
+	* share/po/br.po: update
+
+2004/09/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: test if IP address is already used for static
+	interfaces
+	(do not test for sagem DSL devices since it may use many ifcfg files)
+
+2004/09/28  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: More logs on install_urpmi
+
+2004/09/28  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
 2004/09/28  Frederic Lepied  <flepied at mandrakesoft.com>
 
 	* share/rpmsrate: madwifi_pci => ath_pci
@@ -40144,7 +40196,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.974 2004/09/28 02:51:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.975 2004/09/28 08:51:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
