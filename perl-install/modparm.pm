@@ -34,7 +34,7 @@ sub get_options_name($) {
       if ($f == 1 && $g == 1) {
 	  $c = _('1 character)');
       } else {
-	  $c = _("$f-$g %s)", 'characters');
+	  $c = sprintf("$f-$g %s)", _('characters'));
       }
       s/array \(min = \d+, max = \d+\)/$c/;
       if (/parm:\s+(.+)/) {
