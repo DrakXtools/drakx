@@ -27,6 +27,9 @@ sub interactive::do_pkgs {
 
 sub install {
     my ($o, @l) = @_;
+
+    return 1 if is_installed($o, @l);
+
     my $wait;
     if ($o->{in}->isa('interactive::newt')) {
 	$o->{in}->suspend;
@@ -52,7 +55,7 @@ sub what_provides {
 
 sub is_installed {
     my ($o, @l) = @_;
-    system('rpm', '-q', @l) == 0;
+    run_program::run('rpm', '>', '/dev/null', '-q', @l);
 }
 
 sub remove {
