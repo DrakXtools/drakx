@@ -60,7 +60,7 @@ sub configureNetwork {
     goto &install_steps::configureNetwork;
 }
 
-sub enteringStep($$$) {
+sub enteringStep {
     my ($o, $step) = @_;
     print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
     $o->SUPER::enteringStep($step);
