@@ -25,9 +25,6 @@ UPLOAD_DEST = $(UPLOAD_DEST_)/cooker
 UPLOAD_DEST_CONTRIB = $(UPLOAD_DEST_)/contrib
 UPLOAD_SPARC_DEST = /mnt/BIG/distrib/sparc
 
-AUTOBOOT = $(ROOTDEST)/dosutils/autoboot/mdkinst
-
-
 .PHONY: dirs $(FLOPPY_IMG) install network_ks.rdz pcmcia_ks.rdz
 
 install: build autoboot rescue
@@ -55,13 +52,9 @@ ifeq (i386,$(ARCH))
 	cp -f cdrom.rdz $(ROOTDEST)/lnx4win/initrd.gz
 	/usr/sbin/rdev -v $(ROOTDEST)/lnx4win/vmlinuz 788
 
-	install -d $(AUTOBOOT)
-	cp -f vmlinuz $(AUTOBOOT)
-	cp -f hd.rdz $(AUTOBOOT)/initrd.hd
-	cp -f cdrom.rdz $(AUTOBOOT)/initrd.cd
-	cp -f pcmcia.rdz $(AUTOBOOT)/initrd.pc
-	cp -f network.rdz $(AUTOBOOT)/initrd.nt
-	/usr/sbin/rdev -v $(AUTOBOOT)/vmlinuz 788
+	install -d $(ROOTDEST)/boot
+	cp -f vmlinuz {hd,cdrom,pcmcia,network}.rdz $(ROOTDEST)/boot
+	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
 endif
 
 dirs:
@@ -101,7 +94,7 @@ upload: clean install
 	function upload() { rsync -qSavz --verbose --exclude '*~' -e ssh --delete $(ROOTDEST)/$$1/$$2 mandrake@kenobi:/c/cooker/$$1; } ;\
 	upload Mandrake/mdkinst '' ;\
 	upload Mandrake/base {compss*,mdkinst_stage2.gz,rescue_stage2.gz} ;\
-	upload dosutils/autoboot/mdkinst {initrd.*,vmlinuz} ;\
+	upload boot '' ;\
 	upload lnx4win {initrd.gz,vmlinuz} ;\
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo 

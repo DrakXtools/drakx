@@ -121,6 +121,9 @@ label expert
 label rescue
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $type rescue rw
+label oem
+  kernel vmlinuz
+  append ramdisk_size=32000 initrd=cdrom.rdz cdrom rescue oem rw
 label auto
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz $type auto_install=auto_inst.cfg.pl
