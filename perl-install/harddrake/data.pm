@@ -194,7 +194,7 @@ our @tree =
       configurator => "$sbindir/drakconnect",
       detector => sub {
           #- generic NIC detection for USB seems broken (class, subclass, 
-          #- protocol report are not accurate) so I'll need to verify against
+          #- protocol reported are not accurate) so we match network adapters against
           #- known drivers :-(
           require list_modules;
           my @net_modules = list_modules::category2modules('network/gigabit|main|pcmcia|usb|wireless');
