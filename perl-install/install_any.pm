@@ -737,16 +737,17 @@ sub default_packages {
     push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
     push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
-    if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
+    my $dmi_System = detect_devices::dmidecode_category('System');
+    my $dmi_BIOS = detect_devices::dmidecode_category('BIOS');
+    if ($dmi_System->{Manufacturer} =~ /Dell Computer/ && $dmi_System->{'Product Name'} =~ /Inspiron|Latitude/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('i8k');
         push @l, "i8kutils";
     }
-    if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
+    if ($dmi_System->{Manufacturer} =~ /TOSHIBA/ && $dmi_BIOS->{Vendor} =~ /TOSHIBA/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('toshiba');
         push @l, "toshutils";
     }
-    if ($dmi{BIOS}{Vendor} eq 'COMPAL' && $dmi{BIOS}{Characteristics} =~ /Function key-initiated network boot is supported/) {
+    if ($dmi_BIOS->{Vendor} eq 'COMPAL' && $dmi_BIOS->{Characteristics} =~ /Function key-initiated network boot is supported/) {
         modules::append_to_modules_loaded_at_startup_for_all_kernels('acerhk');
     }
 

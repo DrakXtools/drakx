@@ -794,34 +794,38 @@ my (@dmis, $dmidecode_already_runned);
 
 # we return a list b/c several DMIs have the same name:
 sub dmidecode() {
-	return @dmis if $dmidecode_already_runned;
+    return @dmis if $dmidecode_already_runned;
 
-	foreach (run_program::get_stdout('dmidecode')) {
-	    if (/^\t\t(.*)/) {
-		$dmis[-1]{string} .= "$1\n";
-		$dmis[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
-	    } elsif (my ($s) = /^\t(.*)/) {
-		next if $s =~ /^DMI type /;
-		$s =~ s/ Information$//;
-		push @dmis, { name => $s };
-	    }
+    foreach (run_program::get_stdout('dmidecode')) {
+	if (/^\t\t(.*)/) {
+	    $dmis[-1]{string} .= "$1\n";
+	    $dmis[-1]{$1} = $2 if /^\t\t(.*): (.*)$/;
+	} elsif (my ($s) = /^\t(.*)/) {
+	    next if $s =~ /^DMI type /;
+	    $s =~ s/ Information$//;
+	    push @dmis, { name => $s };
 	}
-     $dmidecode_already_runned = 1;
+    }
+    $dmidecode_already_runned = 1;
     @dmis;
+}
+sub dmidecode_category {
+    my ($cat) = @_;
+    my @l = find { $_->{name} eq $cat } dmidecode();
+    wantarray() ? @l : $l[0] || {};
 }
 
 sub computer_info() {
-     my @l = dmidecode();
-	my $chassis = (find { $_->{name} eq 'Chassis' } @l) || { string => '' };
-	my $Chassis = $chassis->{string} =~ /^Type:\s*(\S+)/m && $1;
-	my $BIOS = (find { $_->{name} eq 'BIOS' } @l) || { string => '' };
-	my $BIOS_Year = $BIOS->{string} =~ m!^Release Date:.*?(\d{4})!m && $1 ||
-	                $BIOS->{string} =~ m!^Release Date:.*?\d\d/\d\d/(\d\d)!m && "20$1";
+     my $Chassis = dmidecode_category('Chassis')->{Type} =~ /(\S+)/ && $1;
+
+     my $date = dmidecode_category('BIOS')->{'Release Date'} || '';
+     my $BIOS_Year = $date =~ m!(\d{4})! && $1 ||
+	             $date =~ m!\d\d/\d\d/(\d\d)! && "20$1";
 	
-	+{ 
-	    isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
-	    if_($BIOS_Year, BIOS_Year => $BIOS_Year),
-	};
+     +{ 
+	 isLaptop => member($Chassis, 'Portable', 'Laptop', 'Notebook', 'Sub Notebook', 'Docking Station'),
+	 if_($BIOS_Year, BIOS_Year => $BIOS_Year),
+     };
 }
 
 #- try to detect a laptop, we assume pcmcia service is an indication of a laptop or
