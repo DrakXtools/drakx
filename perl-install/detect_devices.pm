@@ -52,12 +52,19 @@ sub zips()        {
 
 sub floppies() {
     require modules;
-    eval { modules::load("floppy") } if $::isInstall;
-    my @fds = $@ ? () : map {
-	my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
-	if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info });
-    } qw(0 1);
-
+    my @fds;
+    my @dmis = dmidecode();
+    # do not try to load floppy if there's no floppy drive:
+    if (!@dmis || find { $_->{'Internal Reference Designator'} eq 'FLOPPY' && $_->{name} eq 'Port Connector' } @dmis) {
+        eval { modules::load("floppy") if $::isInstall };
+        if (!$@) {
+            @fds = map {
+                my $info = (!dev_is_devfs() || -e "/dev/fd$_") && c::floppy_info(devices::make("fd$_"));
+                if_($info && $info ne '(null)', { device => "fd$_", devfs_device => "floppy/$_", media_type => 'fd', info => $info });
+            } qw(0 1);
+        }
+    }
+        
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
