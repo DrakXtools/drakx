@@ -44,7 +44,7 @@ our %adsl_data = (
                    method => 'pppoa',
                   },
 
-                  N("France") . "|Free non dégroupé 512/128" =>
+                  N("France") . "|Free non dégroupé 512/128 & 1024/128" =>
                   { 
                    vpi => 8, 
                    vci => 23,
@@ -258,6 +258,5 @@ our %adsl_data = (
                   },
                  );
 
-$adsl_data{N("France") . "|Free non dégroupé 1024/128"} = $adsl_data{N("France") . "|Free non dégroupé 512/128"};
 
 1;
