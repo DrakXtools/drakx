@@ -292,7 +292,8 @@ sub parse_file {
 sub text_append {
     my ($textview, $t, %opts) = @_;
     my $buffer = $textview->get_buffer;
-    my %gtk_tags;
+    $buffer->{tags} ||= {};
+    my $gtk_tags = $buffer->{tags};
     if (ref($t) eq 'ARRAY') {
         foreach my $token (@$t) {
             my $iter1 = $buffer->get_end_iter;
@@ -302,8 +303,8 @@ sub text_append {
             }
             if ($token->[1]) {
                 my $tag = $token->[1];
-                $gtk_tags{$tag} ||= $buffer->create_tag($tag, %{$tags{$token->[1]}});
-                $buffer->insert_with_tags($iter1, $token->[0], $gtk_tags{$tag});
+                $gtk_tags->{$tag} ||= $buffer->create_tag($tag, %{$tags{$token->[1]}});
+                $buffer->insert_with_tags($iter1, $token->[0], $gtk_tags->{$tag});
             } else {
                 $buffer->insert($iter1, $token->[0]);
             }
