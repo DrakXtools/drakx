@@ -180,9 +180,7 @@ cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
 EOF
 
 cat > $RPM_BUILD_ROOT%_sbindir/convert-harddrake <<EOF
-#!/usr/bin/perl -w
-use diagnostics;
-use strict;
+#!/usr/bin/perl
 use Storable;
  
 my \$last_boot_config = "/etc/sysconfig/harddrake2/previous_hw";
