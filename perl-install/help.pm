@@ -878,7 +878,7 @@ correspond. Hence, you may need to click on the \"Timezone\" button in
 order to configure the clock according to the time zone you are in;
 
  * \"Printer\": clicking on the \"No Printer\" button will open the printer
-configuration wizard. Consult the correpsonding chapter of the ``User
+configuration wizard. Consult the corresponding chapter of the ``User
 Guide'' for more information on how to setup a new printer. The interface
 presented there is similar to the one used during installation;
 
