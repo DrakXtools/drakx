@@ -30,6 +30,9 @@ sub writeconf() {
 
     log::explanations("Updating NUT users configuration accordingly");
     $users->writeConf($files{users});
+
+    require services;
+    services::restart("upsd");
 }
 
 sub readDriversList() {
