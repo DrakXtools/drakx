@@ -354,8 +354,6 @@ enum return_type load_ramdisk_fd(int ramdisk_fd, int size)
 	if (my_mount(ramdisk, STAGE2_LOCATION, "ext2", 1))
 		return RETURN_ERROR;
 
-	set_param(MODE_RAMDISK);
-
 	if (IS_RESCUE) {
 		save_stuff_for_rescue();
 		if (umount(STAGE2_LOCATION)) {
