@@ -302,7 +302,11 @@ sub pkg_install {
     my ($o, @l) = @_;
     log::l("selecting packages");
     require pkgs;
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
+    if ($::testing) {
+	log::l("selecting package \"$_\"") foreach @l;
+    } else {
+	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || die "$_ rpm not found") foreach @l;
+    }
     my @toInstall = pkgs::packagesToInstall($o->{packages});
     if (@toInstall) {
 	log::l("installing packages");
