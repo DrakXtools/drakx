@@ -160,6 +160,9 @@ sub general_action_box {
 sub per_kind_action_box {
     my ($box, $kind) = @_;
     $_->widget->destroy foreach $box->children;
+
+    $kind->{type} =~ /hd|lvm/ or return;
+
     foreach my $s (diskdrake::interactive::hd_possible_actions($in, kind2hd($kind), $all_hds)) {
 	gtkadd($box, 
 	       gtksignal_connect(new Gtk::Button(translate($s)),
