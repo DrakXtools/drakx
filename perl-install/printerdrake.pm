@@ -36,7 +36,11 @@ sub setup_local($$$) {
 	$_->{val}{DESCRIPTION} and push @str, _("A printer, model \"%s\", has been detected on ",
 						$_->{val}{DESCRIPTION}) . $_->{port};
     }
-    @port = detect_devices::whatPrinterPort();
+    if ($::expert || !@str) {
+	@port = detect_devices::whatPrinterPort();
+    } else {
+	@port = map { $_->{port} } grep { $_->{val}{DESCRIPTION} } @parport;
+    }
     $printer->{DEVICE} = $port[0] if $port[0];
 
     if ($in) {
