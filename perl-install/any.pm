@@ -204,7 +204,7 @@ sub setupBootloader__mbr_or_not {
 
 	my @l = (
 		 [ N("First sector of drive (MBR)") => '/dev/' . $hds->[0]{device} ],
-		 [ N("First sector of boot partition") => '/dev/' . fsedit::get_root($fstab, 'boot')->{device} ],
+		 [ N("First sector of the root partition") => '/dev/' . fsedit::get_root($fstab, 'boot')->{device} ],
 		     if_($floppy, 
                  [ N("On Floppy") => "/dev/$floppy" ],
 		     ),
