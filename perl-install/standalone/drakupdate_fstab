@@ -64,6 +64,7 @@ sub device_name_to_entry {
     my ($e, $nb);
     if ((my $devfs_prefix, $nb) = $name =~ m,(.*)/(?:cd|disc|part(\d+))$,) {
 	$e = find { $_->{devfs_prefix} eq $devfs_prefix } @l;
+        $e->{devfs_prefix} ||= $devfs_prefix;
     } else {
 	if ($e = find { $name eq $_->{device} } @l) {
 	    $nb = '';
