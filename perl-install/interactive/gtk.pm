@@ -283,7 +283,7 @@ sub create_treeview_tree {
     });
     $tree->signal_connect(button_press_event => sub {
 	$selected_via_click = 1;
-	&$double_click if !$tree_model->iter_has_child($curr) && $double_click;
+	&$double_click if $curr && !$tree_model->iter_has_child($curr) && $double_click;
     });
 
     $tree, sub {
