@@ -3233,6 +3233,42 @@ sub get_printer_info {
     1;
 }
 
+sub unhexify {
+    # Replace hex notation for unprintable characters in PPD files
+    # by the actual characters ex: "<0A>" --> chr(hex("0A"))
+    # Taken from Foomatic
+    my ($input) = @_;
+    my $output = "";
+    my $hexmode = 0;
+    my $firstdigit = "";
+    for (my $i = 0; $i < length($input); $i ++) {
+	my $c = substr($input, $i, 1);
+	if ($hexmode) {
+	    if ($c eq ">") {
+		# End of hex string
+		$hexmode = 0;
+	    } elsif ($c =~ /^[0-9a-fA-F]$/) {
+		# Hexadecimal digit, two of them give a character
+		if ($firstdigit ne "") {
+		    $output .= chr(hex("$firstdigit$c"));
+		    $firstdigit = "";
+		} else {
+		    $firstdigit = $c;
+		}
+	    }
+	} else {
+	    if ($c eq "<") {
+		# Beginning of hex string
+		$hexmode = 1;
+	    } else {
+		# Normal character
+		$output .= $c;
+	    }
+	}
+    }
+    return $output;
+}
+
 sub setup_options {
     my ($printer, $in) = @_;
     my @simple_options = 
@@ -3358,8 +3394,9 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		$oldgroup[$advanced] = $printer->{ARGS}[$i]{group};
 		if ($printer->{ARGS}[$i]{group}) {
 		    push(@widgets,
-			 { val => 
-			   join(" / ", @{$printer->{ARGS}[$i]{grouptrans}}),
+			 { val => unhexify
+			       (join(" / ", 
+				     @{$printer->{ARGS}[$i]{grouptrans}})),
 			   advanced => $advanced });
 		}
 	    }
@@ -3368,14 +3405,14 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		$choicelists[$i] = [];
 		$shortchoicelists[$i] = [];
 		foreach my $choice (@{$printer->{ARGS}[$i]{vals}}) {
-		    push(@{$choicelists[$i]}, $choice->{comment});
+		    push(@{$choicelists[$i]}, unhexify($choice->{comment}));
 		    push(@{$shortchoicelists[$i]}, $choice->{value});
 		    if ($choice->{value} eq $optshortdefault) {
-			$userinputs[$i] = $choice->{comment};
+			$userinputs[$i] = unhexify($choice->{comment});
 		    }
 		}
 		push(@widgets,
-		     { label => $printer->{ARGS}[$i]{comment}, 
+		     { label => unhexify($printer->{ARGS}[$i]{comment}), 
 		       val => \$userinputs[$i], 
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
@@ -3396,7 +3433,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		     "1" : "0");
 		$userinputs[$i] = $choicelists[$i][1-$numdefault];
 		push(@widgets,
-		     { label => $printer->{ARGS}[$i]{comment},
+		     { label => unhexify($printer->{ARGS}[$i]{comment}),
 		       val => \$userinputs[$i],
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
@@ -3409,7 +3446,7 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		$shortchoicelists[$i] = [];
 		$userinputs[$i] = $optshortdefault;
 		push(@widgets,
-		     { label => $printer->{ARGS}[$i]{comment} . 
+		     { label => unhexify($printer->{ARGS}[$i]{comment}) . 
 			   " ($printer->{ARGS}[$i]{min}... " .
 			       "$printer->{ARGS}[$i]{max})",
 			   #type => 'range',
@@ -3462,15 +3499,15 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		     for ($i = 0; $i <= $#{$printer->{ARGS}}; $i++) {
 			 if ($printer->{ARGS}[$i]{type} eq 'int' || $printer->{ARGS}[$i]{type} eq 'float') {
 			     if ($printer->{ARGS}[$i]{type} eq 'int' && $userinputs[$i] !~ /^[\-\+]?[0-9]+$/) {
-				 $in->ask_warn(N("Error"), N("Option %s must be an integer number!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s must be an integer number!", unhexify($printer->{ARGS}[$i]{comment})));
 				 return 1, $i;
 			     }
 			     if ($printer->{ARGS}[$i]{type} eq 'float' && $userinputs[$i] !~ /^[\-\+]?[0-9\.]+$/) {
-				 $in->ask_warn(N("Error"), N("Option %s must be a number!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s must be a number!", unhexify($printer->{ARGS}[$i]{comment})));
 				 return 1, $i;
 			     }
 			     if ($userinputs[$i] < $printer->{ARGS}[$i]{min} || $userinputs[$i] > $printer->{ARGS}[$i]{max}) {
-				 $in->ask_warn(N("Error"), N("Option %s out of range!", $printer->{ARGS}[$i]{comment}));
+				 $in->ask_warn(N("Error"), N("Option %s out of range!", unhexify($printer->{ARGS}[$i]{comment})));
 				 return 1, $i;
 			     }
 			 }
