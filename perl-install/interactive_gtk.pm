@@ -51,28 +51,6 @@ sub ask_from_list_with_helpW {
 	$::isWizard and my $pixmap = new Gtk::Pixmap( gtkcreate_xpm($w->{window}, $::wizard_xpm)) || die "pixmap $! not found.";
 	if ($::isWizard) {
 	    gtkset_usize($w->{rwindow}, 500, 400);
-#	    my $rc = "/etc/gtk/draknet.rc";
-#	    -r $rc or $rc = common::dirname(__FILE__) . "/draknet.rc";
-#	    Gtk::Rc->parse($rc) ;
-#	    my $style = $w->{rwindow}->style->copy();
-#	    $style->bg_pixmap(0);
-#  	    $style->bg_pixmap(1);
-#  	    $style->bg_pixmap(2);
-#  	    $style->bg_pixmap(3);
-#  	    $style->bg_pixmap(4);
-#  	    $style->bg(0, $style->white());
-#  	    $style->bg(1, $style->white());
-#  	    $style->bg(2, $style->white());
-#  	    $style->bg(3, $style->white());
-#  	    $style->bg(4, $style->white());
-#  	    $style->bg_gc(0, $style->white_gc);
-#  	    $style->bg_gc(1, $style->white_gc);
-#  	    $style->bg_gc(2, $style->white_gc);
-#  	    $style->bg_gc(3, $style->white_gc);
-#  	    $style->bg_gc(4, $style->white_gc);
-	    #	$style->engine = undef;
-	    #	$style->rc_style = undef;
-#	    $w->{rwindow}->set_style($style);
 	}
 	gtkadd($w->{window},
 	       gtkpack2_(create_box_with_title($w, @$messages),
@@ -93,22 +71,6 @@ sub ask_from_list_with_helpW {
 			 $::isWizard ? (0, $w->create_okcancel()) : (),
 			),
 	      );
-#	gtk_widget_set_style(EventBox2, style);
-#          {
-#  	  nowizard:
-#  	    gtkadd($w->{window},
-#  		   gtkpack(create_box_with_title($w, @$messages),
-#  			   gtkadd(@$l < 3 && sum(map { length $_ } @$l) < 60 ? create_hbox() : create_vbox(),
-#  				  map {
-#  				      $b = new Gtk::Button($_);
-#  				      $b->signal_connect(clicked => [ $f, $_ ]);
-#  				      $tips->set_tip($b, $help->{$_}) if $help && $help->{$_};
-#  				      $_ eq $def and $defW = $b;
-#  				      $b;
-#  				  } @$l, ),
-#  			  ),
-#  		  );
-#       }
 
 	$defW->grab_focus if $defW;
 	$r = $w->main;
