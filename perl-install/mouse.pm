@@ -170,10 +170,15 @@ sub fullname2mouse {
     my ($fname, %opts) = @_;
     my ($type, @l) = split '\|', $fname;
     my ($name) = pop @l;
+  search:
     $opts{device} ||= $mice{$type}[0][0];
     foreach (@{$mice{$type}[1]}) {
 	my $l = raw2mouse($type, $_);
 	$name eq $l->{name} and return { %$l, %opts };
+    }
+    if ($name eq '1 Button') {
+	$name = "Generic 2 Button Mouse";
+	goto search;
     }
     die "$fname not found ($type, $name)";
 }
