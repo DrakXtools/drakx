@@ -484,7 +484,7 @@ sub lookup_field {
 
 sub titleFormat {
     my ($title) = @_;
-    [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, size => 14 * Gtk2::Pango->PANGO_SCALE } ];
+    [ $title . "\n", { 'weight' => Gtk2::Pango->PANGO_WEIGHT_BOLD, scale => Gtk2::Pango->PANGO_SCALE_LARGE } ];
 }
 
 sub rename_field {
