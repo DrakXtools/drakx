@@ -1,3 +1,44 @@
+2002/08/30  baudens
+
+	* share/advertising/list: Temporary fix
+
+2002/08/30  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* install_steps_newt.pm: Added text for translators
+
+	* share/po/nl.po, share/po/cy.po, share/po/eu.po, share/po/cs.po: updated
+	po files
+
+2002/08/30  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfig/resolution_and_depth.pm: fix typo (choosing the Flat Panel
+	resolution by default)
+
+2002/08/30  Warly  <warly@mandrakesoft.com>
+
+	* share/logo-mandrake.png: rc1
+
+2002/08/29  Pixel  <pixel@mandrakesoft.com>
+
+	* share/keymaps.tar.bz2: now the only bad one is ro2
+
+	* share/po/it.po, share/po/help-fr.pot, share/po/help-de.pot,
+	share/po/es.po, share/po/de.po, share/po/help-es.pot,
+	share/po/help-it.pot, share/po/fr.po: 
+	  - re-update help-xx.pot after fixing bad drakxid's in xml files
+	  - update xx.po's using help-xx.pot
+	=> at last, DrakX help is now in sync with xml files :)
+
+	* pixmaps/printer-mdk.png: re-adding with -kb
+	removing for re-adding with -kb
+
+	* detect_devices.pm (isRemovableDrive): usb with class "Floppy (UFI)" are
+	removable even if they are not media_type fd
+
+	* share/po/help_xml2pm.pl: 
+	  - fix missing to_ascii on english part in help-xx.pot
+	  - ignore drakxid's in a language but not in english
+
 2002/08/29  baudens
 
 	* share/advertising/09-MDKcampus_icon.png,
@@ -1157,7 +1198,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.729 2002/08/28 23:06:44 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.730 2002/08/29 23:22:59 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
