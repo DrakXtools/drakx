@@ -855,7 +855,7 @@ sub write_yaboot {
 
 	if ($bootloader->{boot}) {
 	    push @conf, "boot=$bootloader->{boot}";
-	    push @conf, "ofboot=", get_of_dev($bootloader->{boot})
+	    push @conf, "ofboot=" . get_of_dev($bootloader->{boot})
 	} else {
 	    die "no bootstrap partition defined."
 	}
@@ -878,7 +878,7 @@ sub write_yaboot {
 		    $of_dev = get_of_dev($_->{root});    			
 		    push @conf, "$_->{type}=$of_dev,$_->{kernel_or_dev}";
 		}
-		push @conf, "\tlabel=", make_label_lilo_compatible($_->{label});
+		push @conf, "\tlabel=" . make_label_lilo_compatible($_->{label});
 		push @conf, "\troot=$_->{root}";
 		if ($boot !~ /$_->{root}/ && $boot) {
 		    push @conf, "\tinitrd=$of_dev," . substr($_->{initrd}, 5) if $_->{initrd};
