@@ -60,6 +60,8 @@ void vlog_message(const char * s, va_list args)
 void log_message(const char * s, ...)
 {
 	va_list args;
+        if (!s)
+                return;
 	va_start(args, s);
 	vlog_message(s, args);
 	va_end(args);
