@@ -352,7 +352,8 @@ user "$adsl->{login}"
 ONBOOT=no
 TYPE=$kind
 METRIC=$metric
-));
+)) unless member($adsl_type, qw(manual dhcp));
+
     #- remove file used with sagem for dhcp/static connections
     unlink("$::prefix/etc/sysconfig/network-scripts/ifcfg-sagem");
 
