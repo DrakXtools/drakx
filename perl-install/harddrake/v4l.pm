@@ -2,7 +2,6 @@ package harddrake::v4l;
 
 use strict;
 
-use standalone;
 use interactive;
 use detect_devices;
 use lang;
@@ -226,7 +225,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
 	     join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers));
 	   if ($options) {
 		  log::l("[harddrake::bttv] $options");
-		    standalone::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
+#		    standalone::explanations("modified file /etc/modules.conf ($options)") if $::isStandalone;
 		    modules::set_options("bttv", $options);
 		}
 	 }
