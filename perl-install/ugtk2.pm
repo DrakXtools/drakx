@@ -737,9 +737,6 @@ sub new {
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     while (my $e = shift @tempory::objects) { $e->destroy }
-    foreach (@interactive::objects) {
-#	$_->{rwindow}->set_modal(0) if $_->{rwindow}->can('set_modal');      FIXME
-    }
     push @interactive::objects, $o if !$opts{no_interactive_objects};
     $o->{rwindow}->set_position('center-always') if $::isStandalone;
     $o->{rwindow}->set_modal(1) if ($grab || $o->{grab} || $o->{modal}) && !$::isInstall;
