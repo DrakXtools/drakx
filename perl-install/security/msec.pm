@@ -60,7 +60,7 @@ sub load_values {
 
 sub get_function_value {
     my ($msec, $function) = @_;
-    $msec->{functions}{value}{$function} || "default";
+    exists $msec->{functions}{value}{$function} ? $msec->{functions}{value}{$function} : "default";
 }
 
 sub get_check_value {
