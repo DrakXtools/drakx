@@ -25,7 +25,7 @@ my %languages = (
 #-'a3'  => [ 'Azeri (cyrillic)',	'koi8-c',     'a3', 'a3' ],
 'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
-'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
+'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251:bg_BG' ],
   'br'  => [ 'Brezhoneg',		'iso-8859-1', 'br', 'br:fr_FR:fr' ],
 #-'bs'  => [ 'Bosnian',			'iso-8859-2', 'bs', 'bs:hr:sr' ],
   'ca'  => [ 'Catalan',			'iso-8859-1', 'ca', 'ca:es_ES:es:fr_FR:fr' ],
@@ -74,9 +74,9 @@ my %languages = (
 #-'ms'  => [ 'Malay',			'iso-8859-1', 'ms', 'ms' ],
   'nl'  => [ 'Dutch (Netherlands)',	'iso-8859-1', 'nl', 'nl_NL:nl' ],
 # 'nb' is the new locale name in glibc 2.2
-  'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:nb:no@nynorsk:no_NY' ],
+  'no'  => [ 'Norwegian (Bokmaal)',	'iso-8859-1', 'no', 'no:nb:ny:no@nynorsk:no_NY' ],
 # no_NY is used by KDE (but not standard); 'ny' is the new locale in glibc 2.2
-'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:ny:no_NY:no' ],
+  'ny'	=> [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'ny:no@nynorsk:no_NY:no:nb' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
 #-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph:tl' ],
@@ -90,9 +90,7 @@ my %languages = (
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
-#-'sv@traditionell' => [ 'Swedish (traditional sorting [V = W])','iso-8859-1', 'sv', 'sv' ],
-#-'sv@ny' => [ 'Swedish (new sorting [V != W])','iso-8859-1', 'sv', 'sv' ],
-  'sv'  => [ 'Swedish','iso-8859-1', 'sv', 'sv' ],
+  'sv'  => [ 'Swedish',			'iso-8859-1', 'sv', 'sv' ],
 #-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'tg'	=> [ 'Tajik',			'koi8-c',     'tg', 'tg' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
@@ -101,13 +99,13 @@ my %languages = (
 #-'ur'	=> [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian', 		'koi8-u',     'uk', 'uk_UA:uk' ],
   'vi'  => [ 'Vietnamese (TCVN)',       'tcvn',       'vi',
-					'vi_VN.tcvn:vi_VN.tcvn-5712:vi' ],
-'vi_VN.viscii' => [ 'Vietnamese (VISCII)','viscii',   'vi',
-				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1:vi' ],
+					'vi_VN.TCVN:vi_VN.TCVN-5712:vi_VN.tcvn:vi' ],
+'vi_VN.VISCII' => [ 'Vietnamese (VISCII)','viscii',   'vi',
+				        'vi_VN.VISCII:vi_VN.viscii:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh' ],
-'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
+'zh_CN.GB2312' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
 );
 
 my %xim = (
@@ -301,14 +299,14 @@ sub set {
 sub pack_langs { 
     my ($l) = @_; 
     member('all', @$l) ? 'all' :
-      join ':', uniq(map { substr($languages{$_}[2], 0, 2) } @$l);
+      join ':', uniq(map { $languages{$_}[2] } @$l);
 }
 
 sub unpack_langs {
     my ($langs) = @_;
     [ 
      $langs eq 'all' ?
-     map { substr($_->[2], 0, 2) } values %languages :
+     map { $_->[2] } values %languages :
      split(':', $langs)
     ];
 }
