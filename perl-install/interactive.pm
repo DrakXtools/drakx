@@ -257,7 +257,7 @@ sub ask_from__add_modify_remove {
     $callback{$_} or internal_error("missing callback $_") foreach qw(Add Modify Remove);
 
     if ($o->can('ask_from__add_modify_removeW')) {
-	ask_from__add_modify_removeW($o, $title, $message, $l, %callback);
+	$o->ask_from__add_modify_removeW($title, $message, $l, %callback);
     } else {
 	my $e = $l->[0];
 	my $chosen_element;
