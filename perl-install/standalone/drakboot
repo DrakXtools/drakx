@@ -219,11 +219,10 @@ sub lilo_choice() {
 
   ask:
     eval { any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) };
-    my $loader = arch() =~ /ppc/ ? "Yaboot" : "LILO";
     my $err = $@;
     if ($err) {
         $in->ask_warn('', 
-                      [ N("Installation of %s failed. The following error occured:", $loader), $err ]);
+                      [ N("Installation of %s failed. The following error occured:", bootloader::detect_bootloader()), $err ]);
         goto ask;
     }
 }
