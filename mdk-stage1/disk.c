@@ -193,7 +193,7 @@ static enum return_type try_with_device(char *dev_name)
 	static char ** answers_location = NULL;
 	char location_full[500];
 
-	char * disk_own_mount = SLASH_LOCATION "/tmp/hdimage";
+	char * disk_own_mount = IMAGE_LOCATION_DIR "hdimage";
 
 	char * parts[50];
 	char * parts_comments[50];
@@ -219,7 +219,7 @@ static enum return_type try_with_device(char *dev_name)
                         return results;
         }
 
-	/* in testing mode, assume the partition is already mounted on SLASH_LOCATION "/tmp/hdimage" */
+	/* in testing mode, assume the partition is already mounted on IMAGE_LOCATION_DIR "hdimage" */
         if (!IS_TESTING && try_mount(choice, disk_own_mount)) {
 		stg1_error_message("I can't find a valid filesystem (tried: ext2, vfat, ntfs, reiserfs).");
 		return try_with_device(dev_name);

@@ -850,7 +850,7 @@ enum return_type nfs_prepare(void)
 	char * questions[] = { "NFS server name", DISTRIB_NAME " directory", NULL };
 	char * questions_auto[] = { "server", "directory", NULL };
 	static char ** answers = NULL;
-	char * nfs_own_mount = SLASH_LOCATION "/tmp/nfsimage";
+	char * nfs_own_mount = IMAGE_LOCATION_DIR "nfsimage";
 	char * nfsmount_location;
 	enum return_type results = intf_select_and_up(NULL, NULL);
 
