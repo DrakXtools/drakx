@@ -379,7 +379,7 @@ sub multi_head_choices {
     my ($want_Xinerama, @cards) = @_;
     my @choices;
 
-    my $has_multi_head = @cards > 1 || $cards[0]{MULTI_HEAD} > 1;
+    my $has_multi_head = @cards > 1 || @cards && $cards[0]{MULTI_HEAD} > 1;
     my $disable_multi_head = any { 
 	$_->{Driver} or log::l("found card $_->{description} not supported by XF4, disabling multi-head support");
 	!$_->{Driver};
