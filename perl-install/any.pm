@@ -200,6 +200,7 @@ sub setupBootloader__general {
     my $profiles = bootloader::has_profiles($b);
     my $prev_force_acpi = my $force_acpi = bootloader::get_append($b, 'acpi') !~ /off|ht/;
     my $prev_force_noapic = my $force_noapic = bootloader::get_append($b, 'noapic');
+    my $prev_force_nolapic = my $force_nolapic = bootloader::get_append($b, 'nolapic');
     my $memsize = bootloader::get_append($b, 'mem');
     my $prev_clean_tmp = my $clean_tmp = any { $_->{mntpoint} eq '/tmp' } @{$all_hds->{special} ||= []};
     my $prev_boot = $b->{boot};
@@ -227,7 +228,10 @@ sub setupBootloader__general {
 		),
             { label => N("Delay before booting default image"), val => \$b->{timeout} },
             { text => N("Enable ACPI"), val => \$force_acpi, type => 'bool' },
-            { text => N("Force No APIC"), val => \$force_noapic, type => 'bool' },
+		if_(!$force_nolapic,
+            { text => N("Force No APIC"), val => \$force_noapic, type => 'bool' }, 
+	        ),
+            { text => N("Force No Local APIC"), val => \$force_nolapic, type => 'bool' },
 		if_($security >= 4 || $b->{password} || $b->{restricted},
             { label => N("Password"), val => \$b->{password}, hidden => 1 },
             { label => N("Password (again)"), val => \$b->{password2}, hidden => 1 },
@@ -269,6 +273,9 @@ sub setupBootloader__general {
     }
     if ($prev_force_noapic != $force_noapic) {
 	($force_noapic ? \&bootloader::set_append : \&bootloader::remove_append_simple)->($b, 'noapic');
+    }
+    if ($prev_force_nolapic != $force_nolapic) {
+	($force_nolapic ? \&bootloader::set_append : \&bootloader::remove_append_simple)->($b, 'nolapic');
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
