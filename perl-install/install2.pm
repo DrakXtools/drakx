@@ -327,9 +327,9 @@ sub start_i810fb {
     log::l("trying to load i810fb module with xres <$xres> (vga was <$vga>)");
     eval {
 	any::ddcxinfos(); # keep the result otherwise ddcxinfos doesn't return good results afterwards
-	modules::load('i810fb', undef,
-		      ("xres=$xres", 'hsync1=32', 'hsync2=48', 'vsync1=50', 'vsync2=70',  #- this sucking i810fb does not accept floating point numbers in hsync!
-		       'vram=2', 'bpp=16', 'accel=1', 'mtrr=1', 'hwcur=1', 'xcon=4'));
+	modules::load([ 'i810fb',
+			"xres=$xres", 'hsync1=32', 'hsync2=48', 'vsync1=50', 'vsync2=70',  #- this sucking i810fb does not accept floating point numbers in hsync!
+			 'vram=2', 'bpp=16', 'accel=1', 'mtrr=1', 'hwcur=1', 'xcon=4' ]);
     };
 }
 
@@ -452,7 +452,7 @@ sub main {
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : $::live ? "" : "/mnt";
     mkdir $o->{prefix}, 0755;
 
-    modules::load_deps(($::testing ? ".." : "") . "/modules/modules.dep");
+    modules::load_dependencies(($::testing ? ".." : "") . "/modules/modules.dep");
     modules::read_stage1_conf($_) foreach "/tmp/conf.modules", "/etc/modules.conf";
     modules::read_already_loaded();
 
@@ -504,7 +504,7 @@ sub main {
     require"install_steps_$o->{interactive}.pm" if $o->{interactive}; #- no space to skip perl2fcalls
 
     #- needed before accessing floppy (in case of usb floppy)
-    $::noauto or modules::load_thiskind("usb"); 
+    $::noauto or modules::load_category('bus/usb'); 
 
     #- patch should be read after defcfg in order to take precedance.
     eval { $o = $::o = install_any::loadO($o, $cfg) } if $cfg;
@@ -514,7 +514,7 @@ sub main {
 
     map_index {
 	modules::add_alias("sound-slot-$::i", $_->{driver});
-    } modules::get_that_type('sound');
+    } modules::probe_category('multimedia/sound');
 
     #- needed very early for install_steps_gtk
     eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};

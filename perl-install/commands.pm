@@ -78,7 +78,7 @@ sub mount {
 
     require fs;
     require modules;
-    modules::load_deps("/modules/modules.dep");
+    modules::load_dependencies("/modules/modules.dep");
     fs::mount($dev, $where, $fs, $r);
 }
 
@@ -442,7 +442,7 @@ sub modprobe {
     $h || @_ == 0 and die "usage: modprobe <module> [options]\n";
     my $name = shift;
     require modules;
-    modules::load_deps("/modules/modules.dep");
+    modules::load_dependencies("/modules/modules.dep");
     modules::load($name, '', @_);
 }
 

@@ -266,13 +266,13 @@ sub detect() {
 	if (modules::get_alias("usb-interface")) {
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l("found usb mouse $_->{driver} $_->{description} ($_->{type})") foreach @l;
-		eval { modules::load($_) foreach qw(hid mousedev usbmouse) };
+		eval { modules::load(qw(hid mousedev usbmouse)) };
 		if (!$@ && detect_devices::tryOpen("usbmouse")) {
 		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Generic");
 		    $auxmouse and $mouse->{auxmouse} = $auxmouse; #- for laptop, we kept the PS/2 as secondary (symbolic).
 		    return $mouse;
 		}
-		eval { modules::unload($_) foreach qw(usbmouse mousedev hid) };
+		eval { modules::unload(qw(usbmouse mousedev hid)) };
 	    }
 	}
 	$auxmouse;
@@ -282,13 +282,13 @@ sub detect() {
 	my $keep_mouse;
 	if (my (@l) = detect_devices::usbWacom()) {
 	    log::l("found usb wacom $_->{driver} $_->{description} ($_->{type})") foreach @l;
-	    eval { modules::load("wacom"); modules::load("evdev"); };
+	    eval { modules::load("wacom", "evdev"); };
 	    unless ($@) {
 		foreach (0..$#l) {
 		    detect_devices::tryOpen("input/event$_") and $keep_mouse = 1, push @wacom, "input/event$_";
 		}
 	    }
-	    $keep_mouse or eval { modules::unload("evdev"); modules::unload("wacom"); };
+	    $keep_mouse or eval { modules::unload("evdev", "wacom"); };
 	}
     }
 
@@ -324,7 +324,7 @@ sub detect() {
 	#- we *must* find out if there really is no usb, otherwise the box may
 	#- not be accessible via the keyboard (if the keyboard is USB)
 	#- the only way to know this is to make a full pci probe
-	modules::load_thiskind("usb", '', 'unsafe'); 
+	modules::load_category('bus/usb', '', 'unsafe'); 
 	if (my $mouse = $fast_mouse_probe->()) {
 	    return $mouse;
 	}

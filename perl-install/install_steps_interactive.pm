@@ -290,10 +290,10 @@ sub selectMouse {
     }
     
     if ($o->{mouse}{device} eq "usbmouse") {
-	any::setup_thiskind($o, 'usb', !$::expert, 1, $o->{pcmcia});
+	any::load_category($o, 'bus/usb', !$::expert, 1, $o->{pcmcia});
 	eval { 
 	    devices::make("usbmouse");
-	    modules::load($_) foreach qw(hid mousedev usbmouse);
+	    modules::load(qw(hid mousedev usbmouse));
 	};
     }
 
@@ -314,9 +314,9 @@ sub setupSCSI {
     }
     { 
 	my $w = $o->wait_message(_("IDE"), _("Configuring IDE"));
-	modules::load_ide();
+	modules::load_category('disk/cdrom');
     }
-    any::setup_thiskind($o, 'scsi|disk', !$::expert && !$clicked, 0, $o->{pcmcia});
+    any::load_category($o, 'disk/scsi|hardware_raid', !$::expert && !$clicked, 0, $o->{pcmcia});
 
     install_interactive::tellAboutProprietaryModules($o) if !$clicked;
 }
@@ -998,7 +998,7 @@ sub summary {
 	return _("Remote CUPS server"); #- fall back in case of something wrong.
     };
 
-    my @sound_cards = arch() !~ /ppc/ ? modules::get_that_type('sound') : modules::load_thiskind('sound');
+    my @sound_cards = (arch() =~ /ppc/ ? \&modules::load_category : \&modules::probe_category)->('multimedia/sound');
 
     #- if no sound card are detected AND the user selected things needing a sound card,
     #- propose a special case for ISA cards

@@ -125,7 +125,7 @@ sub setupSCSI {
     my ($o) = @_;
     modules::configure_pcmcia($o->{pcmcia}) if $o->{pcmcia};
     modules::load_ide();
-    modules::load_thiskind('scsi|disk');
+    modules::load_category('disk/scsi|hardware_raid');
 }
 
 #------------------------------------------------------------------------------
@@ -1013,7 +1013,7 @@ sub upNetwork {
 	    network::netconnect::start_internet($o);
 	    return 1;
 	} elsif (!$pppAvoided) {
-	    eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
+	    eval { modules::load(qw(serial ppp bsd_comp ppp_deflate)) };
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	    require network::netconnect;
 	    network::netconnect::start_internet($o);
@@ -1038,7 +1038,7 @@ sub downNetwork {
 	    require network::netconnect;
 	    network::netconnect::stop_internet($o);
 	    run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "stop");
-	    eval { modules::unload($_) foreach qw(ppp_deflate bsd_comp ppp serial) };
+	    eval { modules::unload(qw(ppp_deflate bsd_comp ppp serial)) };
 	    return 1;
 	}
     }

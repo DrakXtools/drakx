@@ -69,7 +69,7 @@ sub mkinitrd($$$) {
 sub mkbootdisk($$$;$) {
     my ($prefix, $kernelVersion, $dev, $append) = @_;
 
-    modules::load_multi(arch() =~ /sparc/ ? 'romfs' : (), 'loop');
+    modules::load(if_(arch() =~ /sparc/, 'romfs'), 'loop');
     my @l = qw(mkbootdisk --noprompt); 
     push @l, "--appendargs", $append if $append;
     eval { modules::load('vfat') };

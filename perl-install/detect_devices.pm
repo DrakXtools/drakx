@@ -239,15 +239,6 @@ sub getATARAID {
 }
 
 sub getNet() {
-#      my @a;
-#      foreach (@netdevices) {
-#  	$::isStandalone && /plip/ and next;
-#  	print (" hhhhh $_ \n");
-#  	/ippp/ and run_program::rooted("", "/sbin/isdnctrl addif $_");
-#  	c::hasNetDevice($_) and push @a, $_;
-#      }
-#      /ippp/ and run_program::rooted("", "/sbin/isdnctrl delif $_") foreach @netdevices;
-#      @a;
     grep { !(($::isStandalone || $::live) && /plip/) && c::hasNetDevice($_) } @netdevices;
 }
 
@@ -344,7 +335,7 @@ sub stringlist {
 sub check {
     my ($l) = @_;
     my $ok = $l->{driver} !~ /(unknown|ignore)/;
-    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail install\@mandrakesoft.com)");
+    $ok or log::l("skipping $l->{description}, no module available (if you know one, please mail cooker\@mandrakesoft.com)");
     $ok
 }
 
@@ -579,7 +570,7 @@ sub raidAutoStart {
     my %personalities = ( '1' => 'linear', '2' => 'raid0', '3' => 'raid1', '4' => 'raid5' );
     raidAutoStartIoctl() or log::l("warning, RAID_AUTORUN not supported by kernel"), return;
     if (my @needed_perso = map { if_(/^kmod: failed.*md-personality-(.)/, $personalities{$1}) } syslog()) {
-	log::l("RAID: autostart needs personality from $_"), eval { modules::load($_) } foreach @needed_perso;
+	log::l("RAID: autostart needs personality from $_"), eval { modules::load(@needed_perso) };
 	return raidAutoStartIoctl();
     } else {
 	1;

@@ -67,7 +67,7 @@ use log;
 
 sub configureNetwork {
     my ($o) = @_;
-    modules::load_thiskind('net');
+    modules::load_category('network/main|usb');
     goto &install_steps::configureNetwork;
 }
 

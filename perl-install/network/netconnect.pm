@@ -69,7 +69,7 @@ sub detect {
     $auto_detect->{isdn}{$_}=$isdn->{$_} foreach qw(description vendor id driver card_type type);
     $auto_detect->{isdn}{description} =~ s/.*\|//;
 
-    any::setup_thiskind_backend('net', undef);
+    modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
     my @all_cards = conf_network_card_backend (undef, undef, undef, undef, undef, undef);
@@ -334,7 +334,7 @@ fi
 
 #-    if ($netc->{NET_DEVICE} and $netc->{NETWORKING} ne 'no' and $::isStandalone and $::expert) {
 #-	  exists $netc->{nb_cards} or do {
-#-	      any::setup_thiskind($in, 'net', !$::expert, 1);
+#-	      any::load_category($in, 'network/main|usb', !$::expert, 1);
 #-	      $netc->{nb_cards} = listlength(detect_devices::getNet());
 #-	  };
 #-	  ($netc->{nb_cards} - $netc->{minus_one} - (get_net_device($prefix) =~ /eth.+/ ? 1 : 0) > 0) and $in->ask_okcancel(_("Network Configuration"),
@@ -355,7 +355,7 @@ sub save_conf {
     $netcnx->{type} =~ /adsl/ and $adsl=$netcnx->{$netcnx->{type}};
     $netcnx->{type} eq 'isdn_external' || $netcnx->{type} eq 'modem' and $modem=$netcnx->{$netcnx->{type}};
     $netcnx->{type} eq 'isdn_internal' and $isdn=$netcnx->{$netcnx->{type}};
-    any::setup_thiskind_backend('net', undef);
+    modules::load_category('network/main|usb');
     require network::ethernet;
     network::ethernet->import;
     my @all_cards = conf_network_card_backend ($netc, $intf, undef, undef, undef, undef);

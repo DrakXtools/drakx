@@ -359,7 +359,7 @@ sub setDefaultPackages {
 	    }
 	}
     }
-    $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
+    $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
     $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
     $o->{compssUsersChoice}{SYSTEM} = 1;
     $o->{compssUsersChoice}{DOCS} = !$o->{excludedocs};
@@ -823,7 +823,7 @@ sub loadO {
 
 	my $b = before_leaving {
 	    fs::umount("/mnt") unless $::testing;
-	    modules::unload($_) foreach qw(vfat fat);
+	    modules::unload(qw(vfat fat));
 	};
 	$o = loadO($O, $f);
     } else {
