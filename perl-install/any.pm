@@ -1006,23 +1006,6 @@ sub running_window_manager() {
     undef;
 }
 
-sub launch_browser_with_wm {
-    my ($link) = @_;
-    my $browser = $ENV{BROWSER} || $ENV{HELP_BROWSER} || find { -x "/usr/bin/$_" } qw(mozilla-firefox mozilla konqueror epiphany galeon);
-    my %h = (
-	     'kwin' => "webclient-kde",
-	     'gnome-session' => "webclient-gnome",
-	     'other' => $browser,
-	    );
-    my $wm = any::running_window_manager();
-    $wm = 'other' if !member($wm, 'kwin', 'gnome-session');
-    my $cmd = $h{$wm} or return;
-    $cmd .= " $link";
-    log::l("Loading URL: $link");
-    system("$cmd &");
-    1;
-}
-
 sub ask_window_manager_to_logout {
     my ($wm) = @_;
     
