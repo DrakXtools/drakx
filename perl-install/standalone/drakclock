@@ -17,7 +17,6 @@ my $radius;
 my ($dRadians_hour, $dRadians_min, $dRadians_sec);
 my $Radian;
 my $timer;
-my ($midx, $midy);
 my $first = 1;
 my $its_reset = 0;
 
@@ -198,8 +197,6 @@ $spinner_s->signal_connect(activate => \&spinned);
 $spinner_s->signal_connect(scroll_event => \&spinned);
 $spinner_s->signal_connect(button_release_event => \&spinned);
 
-$my_win->{window}->show_all;
-
 gtkflush();
 
 my $is24 = $h_old > 12;
@@ -210,6 +207,8 @@ $button_reset->set_sensitive(0);
 $timer = Glib::Timeout->add(120, \&update_time);
 
 $drawing_area->show;
+$my_win->{window}->show_all;
+my ($midx, $midy) = ($drawing_area->allocation->width/2, $drawing_area->allocation->height/2);
 $my_win->main;
 ugtk2->exit(0);
 
