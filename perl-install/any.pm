@@ -787,7 +787,8 @@ sub selectLanguage {
 	       } 
 	   } sort { $a->[1] cmp $b->[1] } map { [ $_, lang::lang2text($_) ] } lang::list()),
 	  { val => \$langs->{all}, type => 'bool', text => _("All"), advanced => 1 }
-	]) and $lang;
+	]) or return;
+    $lang;
 }
 
 sub write_passwd_user {
