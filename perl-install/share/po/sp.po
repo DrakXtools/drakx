@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-03-24 13:11+0100\n"
+"POT-Creation-Date: 2000-03-25 20:30+0100\n"
 "PO-Revision-Date: 1999-08-09 16:39+0200\n"
 "Last-Translator: Jankovic Tomislav <tomaja@net.yu>\n"
 "Language-Team: Serbian (cyrillic)\n"
@@ -594,7 +594,7 @@ msgstr ""
 msgid "Be careful: this operation is dangerous."
 msgstr ""
 
-#: ../../diskdrake.pm_.c:196 ../../install_any.pm_.c:242
+#: ../../diskdrake.pm_.c:196 ../../install_any.pm_.c:241
 #: ../../install_steps.pm_.c:73 ../../install_steps_interactive.pm_.c:40
 #: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
 #: ../../standalone/rpmdrake_.c:304
@@ -873,12 +873,12 @@ msgstr "Табела партиция за драјв %s ће бити записана на диск!"
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Морате рестартовати рачунар да би се измене извршиле"
 
-#: ../../diskdrake.pm_.c:560 ../../install_steps_gtk.pm_.c:286
+#: ../../diskdrake.pm_.c:560 ../../install_steps_gtk.pm_.c:287
 msgid "Computing fat filesystem bounds"
 msgstr "Прорачунавам границе FAT фајл-система"
 
 #: ../../diskdrake.pm_.c:560 ../../diskdrake.pm_.c:609
-#: ../../install_steps_gtk.pm_.c:286
+#: ../../install_steps_gtk.pm_.c:287
 msgid "Resizing"
 msgstr "Промена величине (resizing)"
 
@@ -897,7 +897,7 @@ msgid "Choose the new size"
 msgstr "Изаберите нову величину"
 
 #: ../../diskdrake.pm_.c:588 ../../install_steps_graphical.pm_.c:287
-#: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:352
 msgid "MB"
 msgstr "MB"
 
@@ -1903,7 +1903,7 @@ msgstr ""
 "За ово, креирајте партицију (или кликните на постојећу).\n"
 "Затим изаберите \"Тачка монтирања\" и подесите на `/'"
 
-#: ../../install_any.pm_.c:243 ../../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:242 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -1911,7 +1911,7 @@ msgstr ""
 "Не могу прочитати табелу партиция, много је искварена за мене :(\n"
 "Покушаћу даље заобилазећи лоше партиције"
 
-#: ../../install_any.pm_.c:259
+#: ../../install_any.pm_.c:258
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -1919,65 +1919,30 @@ msgstr ""
 "DiskDrake не може да исправно прочита табелу партиция.\n"
 "Даљи наставак иде на ваш ризик !"
 
-#: ../../install_any.pm_.c:269
+#: ../../install_any.pm_.c:268
 msgid "Searching root partition."
 msgstr "Тражим root партицију."
 
-#: ../../install_any.pm_.c:298
+#: ../../install_any.pm_.c:297
 msgid "Information"
 msgstr "Информације"
 
-#: ../../install_any.pm_.c:299
+#: ../../install_any.pm_.c:298
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr "%s: Ово није root партиция, изаберите неку другу."
 
-#: ../../install_any.pm_.c:301
+#: ../../install_any.pm_.c:300
 msgid "No root partition found"
 msgstr "Нема root партиције"
 
-#: ../../install_any.pm_.c:338
+#: ../../install_any.pm_.c:337
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Није могућ пренос без NIS домена"
 
-#: ../../install_any.pm_.c:521
+#: ../../install_any.pm_.c:519
 msgid "Error reading file $f"
 msgstr "Грешка код отварања фајла $f"
-
-#: ../../install_any.pm_.c:763
-msgid ""
-"Linux does not yet fully support ultra dma 66.\n"
-"As a work-around i can make a custom floppy giving access the hard drive on "
-"ide2 and ide3"
-msgstr ""
-
-#: ../../install_any.pm_.c:788
-#, fuzzy
-msgid ""
-"Enter a floppy to create an HTP enabled boot\n"
-"(all data on floppy will be lost)"
-msgstr ""
-"Убаците дискету у уређај\n"
-"Сви подаци на дискети ће бити избрисани !"
-
-#: ../../install_any.pm_.c:791 ../../install_steps_interactive.pm_.c:695
-msgid "Creating bootdisk"
-msgstr "Креирам стартни диск..."
-
-#: ../../install_any.pm_.c:805
-msgid "It is necessary to restart installation booting on the floppy"
-msgstr ""
-
-#: ../../install_any.pm_.c:806
-msgid "It is necessary to restart installation with the new parameters"
-msgstr ""
-
-#: ../../install_any.pm_.c:810
-#, c-format
-msgid ""
-"Failed to create an HTP boot floppy.\n"
-"You may have to restart installation and give ``%s'' at the prompt"
-msgstr ""
 
 #: ../../install_steps.pm_.c:74
 msgid ""
@@ -1987,32 +1952,32 @@ msgstr ""
 "Грешка, али незнам како да је разрешим.\n"
 "Наставите на ваш ризик!"
 
-#: ../../install_steps.pm_.c:138
+#: ../../install_steps.pm_.c:142
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Дупла тачка монтирања %s"
 
-#: ../../install_steps.pm_.c:299
+#: ../../install_steps.pm_.c:303
 #, fuzzy, c-format
 msgid "Welcome to %s"
 msgstr "Доброшли код Crackers-а"
 
-#: ../../install_steps.pm_.c:573
+#: ../../install_steps.pm_.c:577
 msgid "No floppy drive available"
 msgstr "Неприступачан floppy уређај"
 
-#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:238
+#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:239
 #: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Покрећем корак `%s'\n"
 
-#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:327
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:328
 #, fuzzy
 msgid "You must have a swap partition"
 msgstr "Морате имати swap партицију да бисте наставили са инсталацијом."
 
-#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:329
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:330
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -2022,7 +1987,7 @@ msgstr ""
 "\n"
 "Свеједно наставити даље ?"
 
-#: ../../install_steps_graphical.pm_.c:287 ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_graphical.pm_.c:287 ../../install_steps_gtk.pm_.c:352
 msgid "Choose the size you want to install"
 msgstr "Изаберите величину компоненти за инсталацију"
 
@@ -2030,63 +1995,63 @@ msgstr "Изаберите величину компоненти за инсталацију"
 msgid "Total size: "
 msgstr "Укупна величина: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:433
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:434
 #: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "Верзия: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:434
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:435
 #: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Величина: %d KB\n"
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:375
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:376
 msgid "Choose the packages you want to install"
 msgstr "Изабери пакете за инсталацију"
 
-#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:378
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:379
 msgid "Info"
 msgstr "Инфо"
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:383
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:384
 #: ../../install_steps_interactive.pm_.c:92 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Инсталирај"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:498
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:499
 #: ../../install_steps_interactive.pm_.c:325
 msgid "Installing"
 msgstr "Инсталирам"
 
-#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:505
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:506
 msgid "Please wait, "
 msgstr "Молим сачекајте"
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:507
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:508
 msgid "Time remaining "
 msgstr "Преостало време"
 
-#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:508
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:509
 msgid "Total time "
 msgstr "Укупно време"
 
-#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:517
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:518
 #: ../../install_steps_interactive.pm_.c:325
 msgid "Preparing installation"
 msgstr "Припремам инсталацију"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:532
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:533
 #, c-format
 msgid "Installing package %s"
 msgstr "Инсталирам пакет %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:580
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:581
 msgid "Go on anyway?"
 msgstr "Свеједно наставити даље ?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:580
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:581
 msgid "There was an error ordering packages:"
 msgstr "Грешка у листи пакета:"
 
@@ -2095,7 +2060,7 @@ msgstr "Грешка у листи пакета:"
 msgid "Use existing configuration for X11?"
 msgstr "Да користим постојећу конфигурацију за X11 ?"
 
-#: ../../install_steps_gtk.pm_.c:291
+#: ../../install_steps_gtk.pm_.c:292
 msgid ""
 "WARNING!\n"
 "\n"
@@ -2114,76 +2079,76 @@ msgstr ""
 "података.\n"
 "Ако сте сигурни, притисните \"У реду\"."
 
-#: ../../install_steps_gtk.pm_.c:310
+#: ../../install_steps_gtk.pm_.c:311
 msgid "Automatic resizing failed"
 msgstr "Аутоматска измена величине неуспела"
 
-#: ../../install_steps_gtk.pm_.c:346
+#: ../../install_steps_gtk.pm_.c:347
 msgid ""
 "Now that you've selected desired groups, please choose \n"
 "how many packages you want, ranging from minimal to full \n"
 "installation of each selected groups."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:349
+#: ../../install_steps_gtk.pm_.c:350
 msgid "You will be able to choose more precisely in next step"
 msgstr "Моћи ћете да прецизније бирате у следецем кораку"
 
-#: ../../install_steps_gtk.pm_.c:432
+#: ../../install_steps_gtk.pm_.c:433
 #, fuzzy
 msgid "Bad package"
 msgstr "%d пакета"
 
-#: ../../install_steps_gtk.pm_.c:435
+#: ../../install_steps_gtk.pm_.c:436
 #, c-format
 msgid "Importance: %s\n"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:456
+#: ../../install_steps_gtk.pm_.c:457
 #, fuzzy, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Укупна величина: "
 
-#: ../../install_steps_gtk.pm_.c:468
+#: ../../install_steps_gtk.pm_.c:469
 #, fuzzy
 msgid "The following packages are going to be install/removed"
 msgstr "Пакети за инсталацију"
 
-#: ../../install_steps_gtk.pm_.c:477
+#: ../../install_steps_gtk.pm_.c:478
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:501
+#: ../../install_steps_gtk.pm_.c:502
 msgid "Estimating"
 msgstr "Процењујем"
 
-#: ../../install_steps_gtk.pm_.c:514 ../../interactive.pm_.c:84
+#: ../../install_steps_gtk.pm_.c:515 ../../interactive.pm_.c:84
 #: ../../interactive.pm_.c:195 ../../interactive_newt.pm_.c:50
 #: ../../interactive_newt.pm_.c:97 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:195 ../../my_gtk.pm_.c:435
 msgid "Cancel"
 msgstr "Обустави"
 
-#: ../../install_steps_gtk.pm_.c:527
+#: ../../install_steps_gtk.pm_.c:528
 #, c-format
 msgid "%d packages"
 msgstr "%d пакета"
 
-#: ../../install_steps_gtk.pm_.c:527
+#: ../../install_steps_gtk.pm_.c:528
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../../install_steps_gtk.pm_.c:557
+#: ../../install_steps_gtk.pm_.c:558
 #, fuzzy
 msgid "Installation CD /*1"
 msgstr "LILO инсталация"
 
-#: ../../install_steps_gtk.pm_.c:559
+#: ../../install_steps_gtk.pm_.c:560
 #, fuzzy, c-format
 msgid "Installation CD /*%s"
 msgstr "LILO инсталация"
 
-#: ../../install_steps_gtk.pm_.c:562
+#: ../../install_steps_gtk.pm_.c:563
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -2193,7 +2158,7 @@ msgid ""
 "If you don't have it press Cancel to avoid installation from this Cd-Rom."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:568
+#: ../../install_steps_gtk.pm_.c:569
 #, c-format
 msgid ""
 "Update installation image!\n"
@@ -2205,7 +2170,7 @@ msgid ""
 "to avoid installation from this Cd-Rom image."
 msgstr ""
 
-#: ../../install_steps_gtk.pm_.c:643 ../../install_steps_interactive.pm_.c:581
+#: ../../install_steps_gtk.pm_.c:644 ../../install_steps_interactive.pm_.c:581
 #: ../../install_steps_interactive.pm_.c:802
 #: ../../install_steps_interactive.pm_.c:911 ../../interactive.pm_.c:74
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:196
@@ -2806,6 +2771,10 @@ msgstr "Изабрерите floppy уређај који ћете користит за креирање старне дискете"
 msgid "Insert a floppy in drive %s"
 msgstr "Убаците празну дискету у уређај %s"
 
+#: ../../install_steps_interactive.pm_.c:695
+msgid "Creating bootdisk"
+msgstr "Креирам стартни диск..."
+
 #: ../../install_steps_interactive.pm_.c:707
 msgid "First sector of boot partition"
 msgstr "Први сектор стартне партиције"
@@ -3092,7 +3061,7 @@ msgid "Can't use supermount in high security level"
 msgstr "Подешавање сигурносног нивоа"
 
 #: ../../install_steps_interactive.pm_.c:1042
-#: ../../install_steps_interactive.pm_.c:1165
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Try to find PCI devices?"
 msgstr "Да ли да тражим PCI уређаје ?"
 
@@ -3212,31 +3181,40 @@ msgstr "Конфигуришем PCMCIA картице..."
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:1175
+#: ../../install_steps_interactive.pm_.c:1159
+#, fuzzy
+msgid "Configuring IDE"
+msgstr "Тестирање конфигурације"
+
+#: ../../install_steps_interactive.pm_.c:1159
+msgid "IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1181
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Пронађен %s %s интерфејс"
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "Do you have another one?"
 msgstr "Да ли имате још један?"
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1183
 #, c-format
 msgid "Do you have any %s interface?"
 msgstr "Имате ли још %s интерфејса?"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1185 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:434 ../../printerdrake.pm_.c:118
 msgid "No"
 msgstr "Не"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1185 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:434
 msgid "Yes"
 msgstr "Да"
 
-#: ../../install_steps_interactive.pm_.c:1180
+#: ../../install_steps_interactive.pm_.c:1186
 msgid "See hardware info"
 msgstr "Погледај информације о хардверу"
 
@@ -4421,6 +4399,14 @@ msgstr ""
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter a floppy to create an HTP enabled boot\n"
+#~ "(all data on floppy will be lost)"
+#~ msgstr ""
+#~ "Убаците дискету у уређај\n"
+#~ "Сви подаци на дискети ће бити избрисани !"
 
 #~ msgid "User name:"
 #~ msgstr "Корисничко имe:"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-03-24 13:11+0100\n"
+"POT-Creation-Date: 2000-03-25 20:30+0100\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -596,7 +596,7 @@ msgid "Be careful: this operation is dangerous."
 msgstr "Vær forsiktig: denne operasjonen er farlig."
 
 # #: ../install_steps_interactive.pm_.c:37
-#: ../../diskdrake.pm_.c:196 ../../install_any.pm_.c:242
+#: ../../diskdrake.pm_.c:196 ../../install_any.pm_.c:241
 #: ../../install_steps.pm_.c:73 ../../install_steps_interactive.pm_.c:40
 #: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
 #: ../../standalone/rpmdrake_.c:304
@@ -885,12 +885,12 @@ msgstr "Partisjonstabellen på disk %s blir nå skrevet til disk!"
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Du må starte maskinen på nytt for at modifiseringene skal tre i kraft"
 
-#: ../../diskdrake.pm_.c:560 ../../install_steps_gtk.pm_.c:286
+#: ../../diskdrake.pm_.c:560 ../../install_steps_gtk.pm_.c:287
 msgid "Computing fat filesystem bounds"
 msgstr "Beregner fat filsystemgrense"
 
 #: ../../diskdrake.pm_.c:560 ../../diskdrake.pm_.c:609
-#: ../../install_steps_gtk.pm_.c:286
+#: ../../install_steps_gtk.pm_.c:287
 msgid "Resizing"
 msgstr "Endrer størrelse"
 
@@ -910,7 +910,7 @@ msgid "Choose the new size"
 msgstr "Velg den nye størrelsen"
 
 #: ../../diskdrake.pm_.c:588 ../../install_steps_graphical.pm_.c:287
-#: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_graphical.pm_.c:334 ../../install_steps_gtk.pm_.c:352
 msgid "MB"
 msgstr "MB"
 
@@ -1973,7 +1973,7 @@ msgstr ""
 "Opprett en partisjon for dette (eller klikk på en eksisterende).\n"
 "Velg så ``Monteringspunkt'' og  sett dette til `/'"
 
-#: ../../install_any.pm_.c:243 ../../standalone/diskdrake_.c:61
+#: ../../install_any.pm_.c:242 ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
 "I'll try to go on blanking bad partitions"
@@ -1981,7 +1981,7 @@ msgstr ""
 "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
 "Jeg vil førsøke å blanke ut dårlige partisjoner"
 
-#: ../../install_any.pm_.c:259
+#: ../../install_any.pm_.c:258
 msgid ""
 "DiskDrake failed to read correctly the partition table.\n"
 "Continue at your own risk!"
@@ -1989,70 +1989,30 @@ msgstr ""
 "DiskDrake klarte ikke å lese partisjonstabellen korrekt.\n"
 "Fortsett på eget ansvar!"
 
-#: ../../install_any.pm_.c:269
+#: ../../install_any.pm_.c:268
 msgid "Searching root partition."
 msgstr "Søker root-partisjon."
 
-#: ../../install_any.pm_.c:298
+#: ../../install_any.pm_.c:297
 msgid "Information"
 msgstr "Informasjon"
 
-#: ../../install_any.pm_.c:299
+#: ../../install_any.pm_.c:298
 #, c-format
 msgid "%s: This is not a root partition, please select another one."
 msgstr "%s: Dette er ikke en root-partisjon, vennligst velg en annen."
 
-#: ../../install_any.pm_.c:301
+#: ../../install_any.pm_.c:300
 msgid "No root partition found"
 msgstr "Ingen root-partisjon funnet"
 
-#: ../../install_any.pm_.c:338
+#: ../../install_any.pm_.c:337
 msgid "Can't use broadcast with no NIS domain"
 msgstr "Kan ikke bruke broadcast uten NIS-domene"
 
-#: ../../install_any.pm_.c:521
+#: ../../install_any.pm_.c:519
 msgid "Error reading file $f"
 msgstr "Feil ved lesing av fil $f"
-
-#: ../../install_any.pm_.c:763
-msgid ""
-"Linux does not yet fully support ultra dma 66.\n"
-"As a work-around i can make a custom floppy giving access the hard drive on "
-"ide2 and ide3"
-msgstr ""
-"Linux støtter ennå ikke ultra dma 66 fullt ut.\n"
-"Som en løsning kan jeg lage en diskett som gir tilgang til harddisken på "
-"ide2 og ide3"
-
-#: ../../install_any.pm_.c:788
-msgid ""
-"Enter a floppy to create an HTP enabled boot\n"
-"(all data on floppy will be lost)"
-msgstr ""
-"Sett inn en diskett for å opprette en oppstart med HTP slått på\n"
-"(Alle data på disketten vil gå tapt)"
-
-#: ../../install_any.pm_.c:791 ../../install_steps_interactive.pm_.c:695
-msgid "Creating bootdisk"
-msgstr "Oppretter oppstartdiskett"
-
-#: ../../install_any.pm_.c:805
-msgid "It is necessary to restart installation booting on the floppy"
-msgstr "Det er nødvendig å starte installasjonen igjen fra disketten"
-
-#: ../../install_any.pm_.c:806
-msgid "It is necessary to restart installation with the new parameters"
-msgstr ""
-"Det er nødvendig å starte installasjonen igjen med de de nye parameterene"
-
-#: ../../install_any.pm_.c:810
-#, c-format
-msgid ""
-"Failed to create an HTP boot floppy.\n"
-"You may have to restart installation and give ``%s'' at the prompt"
-msgstr ""
-"Oppretting av HTP oppstartsdiskett mislykket.\n"
-"Du må muligens starte installasjonen igjen og gi ``%s'' ved klartegnet"
 
 #: ../../install_steps.pm_.c:74
 msgid ""
@@ -2063,31 +2023,31 @@ msgstr ""
 "pen måte.\n"
 "Fortsett på eget ansvar."
 
-#: ../../install_steps.pm_.c:138
+#: ../../install_steps.pm_.c:142
 #, c-format
 msgid "Duplicate mount point %s"
 msgstr "Dupliser monteringspunkt %s"
 
-#: ../../install_steps.pm_.c:299
+#: ../../install_steps.pm_.c:303
 #, c-format
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:573
+#: ../../install_steps.pm_.c:577
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
-#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:238
+#: ../../install_steps_auto_install.pm_.c:18 ../../install_steps_gtk.pm_.c:239
 #: ../../install_steps_stdio.pm_.c:26
 #, c-format
 msgid "Entering step `%s'\n"
 msgstr "Entrer trinn `%s'\n"
 
-#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:327
+#: ../../install_steps_graphical.pm_.c:259 ../../install_steps_gtk.pm_.c:328
 msgid "You must have a swap partition"
 msgstr "Du må ha en vekslingspartisjon"
 
-#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:329
+#: ../../install_steps_graphical.pm_.c:261 ../../install_steps_gtk.pm_.c:330
 msgid ""
 "You don't have a swap partition\n"
 "\n"
@@ -2097,7 +2057,7 @@ msgstr ""
 "\n"
 "Fortsette likevel?"
 
-#: ../../install_steps_graphical.pm_.c:287 ../../install_steps_gtk.pm_.c:351
+#: ../../install_steps_graphical.pm_.c:287 ../../install_steps_gtk.pm_.c:352
 msgid "Choose the size you want to install"
 msgstr "Velg størrelsen du ønsker å installere"
 
@@ -2105,63 +2065,63 @@ msgstr "Velg størrelsen du ønsker å installere"
 msgid "Total size: "
 msgstr "Total størrelse: "
 
-#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:433
+#: ../../install_steps_graphical.pm_.c:346 ../../install_steps_gtk.pm_.c:434
 #: ../../standalone/rpmdrake_.c:136
 #, c-format
 msgid "Version: %s\n"
 msgstr "Versjon: %s\n"
 
-#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:434
+#: ../../install_steps_graphical.pm_.c:347 ../../install_steps_gtk.pm_.c:435
 #: ../../standalone/rpmdrake_.c:137
 #, c-format
 msgid "Size: %d KB\n"
 msgstr "Størrelse: %d KB\n"
 
-#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:375
+#: ../../install_steps_graphical.pm_.c:462 ../../install_steps_gtk.pm_.c:376
 msgid "Choose the packages you want to install"
 msgstr "Velg pakkene du ønsker å installere"
 
-#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:378
+#: ../../install_steps_graphical.pm_.c:465 ../../install_steps_gtk.pm_.c:379
 msgid "Info"
 msgstr "Info"
 
-#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:383
+#: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:384
 #: ../../install_steps_interactive.pm_.c:92 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Installer"
 
-#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:498
+#: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:499
 #: ../../install_steps_interactive.pm_.c:325
 msgid "Installing"
 msgstr "Installerer"
 
-#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:505
+#: ../../install_steps_graphical.pm_.c:499 ../../install_steps_gtk.pm_.c:506
 msgid "Please wait, "
 msgstr "Vennligst vent, "
 
-#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:507
+#: ../../install_steps_graphical.pm_.c:501 ../../install_steps_gtk.pm_.c:508
 msgid "Time remaining "
 msgstr "Tid som gjenstår "
 
-#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:508
+#: ../../install_steps_graphical.pm_.c:502 ../../install_steps_gtk.pm_.c:509
 msgid "Total time "
 msgstr "Total tid "
 
-#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:517
+#: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:518
 #: ../../install_steps_interactive.pm_.c:325
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
-#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:532
+#: ../../install_steps_graphical.pm_.c:528 ../../install_steps_gtk.pm_.c:533
 #, c-format
 msgid "Installing package %s"
 msgstr "Installerer pakke %s"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:580
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:581
 msgid "Go on anyway?"
 msgstr "Fortsette uansett?"
 
-#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:580
+#: ../../install_steps_graphical.pm_.c:553 ../../install_steps_gtk.pm_.c:581
 msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
@@ -2170,7 +2130,7 @@ msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
-#: ../../install_steps_gtk.pm_.c:291
+#: ../../install_steps_gtk.pm_.c:292
 msgid ""
 "WARNING!\n"
 "\n"
@@ -2191,11 +2151,11 @@ msgstr ""
 "dine data.\n"
 "Når du er sikker, trykk Ok."
 
-#: ../../install_steps_gtk.pm_.c:310
+#: ../../install_steps_gtk.pm_.c:311
 msgid "Automatic resizing failed"
 msgstr "Automatisk endring av størrelse mislykket"
 
-#: ../../install_steps_gtk.pm_.c:346
+#: ../../install_steps_gtk.pm_.c:347
 msgid ""
 "Now that you've selected desired groups, please choose \n"
 "how many packages you want, ranging from minimal to full \n"
@@ -2205,62 +2165,62 @@ msgstr ""
 "hvor mange pakker du ønsker, fra minimal til full \n"
 "installasjon av hver valgte gruppe."
 
-#: ../../install_steps_gtk.pm_.c:349
+#: ../../install_steps_gtk.pm_.c:350
 msgid "You will be able to choose more precisely in next step"
 msgstr "Du vil kunne velge mere presist i neste trinn"
 
-#: ../../install_steps_gtk.pm_.c:432
+#: ../../install_steps_gtk.pm_.c:433
 msgid "Bad package"
 msgstr "Dårlig pakke"
 
-#: ../../install_steps_gtk.pm_.c:435
+#: ../../install_steps_gtk.pm_.c:436
 #, c-format
 msgid "Importance: %s\n"
 msgstr "Viktighet: %s\n"
 
-#: ../../install_steps_gtk.pm_.c:456
+#: ../../install_steps_gtk.pm_.c:457
 #, c-format
 msgid "Total size: %d / %d MB"
 msgstr "Total størrelse: %d / %d MB"
 
-#: ../../install_steps_gtk.pm_.c:468
+#: ../../install_steps_gtk.pm_.c:469
 msgid "The following packages are going to be install/removed"
 msgstr "Følgende pakker vil bli installert/fjernet"
 
-#: ../../install_steps_gtk.pm_.c:477
+#: ../../install_steps_gtk.pm_.c:478
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Dette er en bestemt pakke, den kan ikke fjernes"
 
-#: ../../install_steps_gtk.pm_.c:501
+#: ../../install_steps_gtk.pm_.c:502
 msgid "Estimating"
 msgstr "Beregner"
 
-#: ../../install_steps_gtk.pm_.c:514 ../../interactive.pm_.c:84
+#: ../../install_steps_gtk.pm_.c:515 ../../interactive.pm_.c:84
 #: ../../interactive.pm_.c:195 ../../interactive_newt.pm_.c:50
 #: ../../interactive_newt.pm_.c:97 ../../interactive_stdio.pm_.c:27
 #: ../../my_gtk.pm_.c:195 ../../my_gtk.pm_.c:435
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../../install_steps_gtk.pm_.c:527
+#: ../../install_steps_gtk.pm_.c:528
 #, c-format
 msgid "%d packages"
 msgstr "%d pakker"
 
-#: ../../install_steps_gtk.pm_.c:527
+#: ../../install_steps_gtk.pm_.c:528
 msgid ", %U MB"
 msgstr ", %U MB"
 
-#: ../../install_steps_gtk.pm_.c:557
+#: ../../install_steps_gtk.pm_.c:558
 msgid "Installation CD /*1"
 msgstr "Installasjons-CD /*1"
 
-#: ../../install_steps_gtk.pm_.c:559
+#: ../../install_steps_gtk.pm_.c:560
 #, c-format
 msgid "Installation CD /*%s"
 msgstr "Installasjons-CD /*%s"
 
-#: ../../install_steps_gtk.pm_.c:562
+#: ../../install_steps_gtk.pm_.c:563
 #, c-format
 msgid ""
 "Change your Cd-Rom!\n"
@@ -2275,7 +2235,7 @@ msgstr ""
 "ferdig.\n"
 "Hvis du ikke har den trykk Avbryt for å unngå installasjon fra denne CD'en."
 
-#: ../../install_steps_gtk.pm_.c:568
+#: ../../install_steps_gtk.pm_.c:569
 #, c-format
 msgid ""
 "Update installation image!\n"
@@ -2294,7 +2254,7 @@ msgstr ""
 "trykk Avbryt\n"
 "for å unngå installasjon fra dette CD-rom bildet."
 
-#: ../../install_steps_gtk.pm_.c:643 ../../install_steps_interactive.pm_.c:581
+#: ../../install_steps_gtk.pm_.c:644 ../../install_steps_interactive.pm_.c:581
 #: ../../install_steps_interactive.pm_.c:802
 #: ../../install_steps_interactive.pm_.c:911 ../../interactive.pm_.c:74
 #: ../../interactive.pm_.c:84 ../../interactive.pm_.c:196
@@ -2933,6 +2893,10 @@ msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
 msgid "Insert a floppy in drive %s"
 msgstr "Sett inn en diskett i stasjon %s"
 
+#: ../../install_steps_interactive.pm_.c:695
+msgid "Creating bootdisk"
+msgstr "Oppretter oppstartdiskett"
+
 #: ../../install_steps_interactive.pm_.c:707
 msgid "First sector of boot partition"
 msgstr "Første sektor av oppstartspartisjon"
@@ -3211,7 +3175,7 @@ msgid "Can't use supermount in high security level"
 msgstr "Kan ikke bruke supermount i høyt sikkerhetsnivå"
 
 #: ../../install_steps_interactive.pm_.c:1042
-#: ../../install_steps_interactive.pm_.c:1165
+#: ../../install_steps_interactive.pm_.c:1156
 msgid "Try to find PCI devices?"
 msgstr "Prøve å finne PCI-enheter?"
 
@@ -3334,31 +3298,40 @@ msgstr "Konfigurerer PCMCIA kort..."
 msgid "PCMCIA"
 msgstr "PCMCIA"
 
-#: ../../install_steps_interactive.pm_.c:1175
+#: ../../install_steps_interactive.pm_.c:1159
+#, fuzzy
+msgid "Configuring IDE"
+msgstr "Konfigurasjon"
+
+#: ../../install_steps_interactive.pm_.c:1159
+msgid "IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:1181
 #, c-format
 msgid "Found %s %s interfaces"
 msgstr "Fant %s %s grensesnitt"
 
-#: ../../install_steps_interactive.pm_.c:1176
+#: ../../install_steps_interactive.pm_.c:1182
 msgid "Do you have another one?"
 msgstr "Har du enda ett?"
 
-#: ../../install_steps_interactive.pm_.c:1177
+#: ../../install_steps_interactive.pm_.c:1183
 #, c-format
 msgid "Do you have any %s interface?"
 msgstr "Har du noen %s grensesnitt?"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1185 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:434 ../../printerdrake.pm_.c:118
 msgid "No"
 msgstr "Nei"
 
-#: ../../install_steps_interactive.pm_.c:1179 ../../interactive.pm_.c:79
+#: ../../install_steps_interactive.pm_.c:1185 ../../interactive.pm_.c:79
 #: ../../my_gtk.pm_.c:434
 msgid "Yes"
 msgstr "Ja"
 
-#: ../../install_steps_interactive.pm_.c:1180
+#: ../../install_steps_interactive.pm_.c:1186
 msgid "See hardware info"
 msgstr "Se maskinvareinfo"
 
@@ -4564,6 +4537,36 @@ msgstr "Finner tillatelser"
 #: ../../standalone/rpmdrake_.c:360
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
+
+#~ msgid ""
+#~ "Linux does not yet fully support ultra dma 66.\n"
+#~ "As a work-around i can make a custom floppy giving access the hard drive on "
+#~ "ide2 and ide3"
+#~ msgstr ""
+#~ "Linux støtter ennå ikke ultra dma 66 fullt ut.\n"
+#~ "Som en løsning kan jeg lage en diskett som gir tilgang til harddisken på "
+#~ "ide2 og ide3"
+
+#~ msgid ""
+#~ "Enter a floppy to create an HTP enabled boot\n"
+#~ "(all data on floppy will be lost)"
+#~ msgstr ""
+#~ "Sett inn en diskett for å opprette en oppstart med HTP slått på\n"
+#~ "(Alle data på disketten vil gå tapt)"
+
+#~ msgid "It is necessary to restart installation booting on the floppy"
+#~ msgstr "Det er nødvendig å starte installasjonen igjen fra disketten"
+
+#~ msgid "It is necessary to restart installation with the new parameters"
+#~ msgstr ""
+#~ "Det er nødvendig å starte installasjonen igjen med de de nye parameterene"
+
+#~ msgid ""
+#~ "Failed to create an HTP boot floppy.\n"
+#~ "You may have to restart installation and give ``%s'' at the prompt"
+#~ msgstr ""
+#~ "Oppretting av HTP oppstartsdiskett mislykket.\n"
+#~ "Du må muligens starte installasjonen igjen og gi ``%s'' ved klartegnet"
 
 #~ msgid "User name:"
 #~ msgstr "Brukernavn:"
