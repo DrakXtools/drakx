@@ -181,36 +181,36 @@ sub ask_from_treelistW($$$$;$) {
 }
 
 
-
-sub ask_many_from_list_refH {
-    my ($o, $title, $message, @l) = @_;
-    $o->ask_many_from_list_ref($title, $message, map { [ keys %$_ ], [ values %$_ ] } @l);
-}
-sub ask_many_from_list_ref {
-    my ($o, $title, $message, @l) = @_;
-    $o->ask_many_from_list_with_help_ref($title, [ deref($message) ], map { ($_->[0], [], $_->[1]) } combine(2, @l));
-}
-sub ask_many_from_list_with_help_ref {
-    my ($o, $title, $message, @l) = @_;
-    my @L = grep { @{$_->[0]} } combine(3, @l) or return 1;
-    $o->ask_many_from_list_with_help_refW($title, [ deref($message) ], @L);
-}
-
 sub ask_many_from_list {
-    my ($o, $title, $message, $l, $def) = @_;
+    my ($o, $title, $message, @l) = @_;
+    @l = grep { @{$_->{list}} } @l or return '';
+    foreach my $h (@l) {
+	$h->{labels} ||= [ map { $h->{label} ? $h->{label}->($_) : $_ } @{$h->{list}} ];
 
-    my $val = [ map { my $i = $_; \$i } @$def ];
+	if ($h->{sort}) {
+	    my @places = sort { $h->{labels}[$b] <=> $h->{labels}[$a] } 0 .. $#{$h->{labels}};
+	    $h->{labels} = [ map { $h->{labels}[$_] } @places ];
+	    $h->{list}   = [ map { $h->{list}[$_] } @places ];
+	}
+	$h->{ref} = [ map { 
+	    $h->{ref} ? $h->{ref}->($_) : do {
+		my $i = 
+		  $h->{value} ? $h->{value}->($_) : 
+		    $h->{values} ? member($_, @{$h->{values}}) : 0;
+		\$i;
+	    };
+	} @{$h->{list}} ];
 
-    $o->ask_many_from_list_ref($title, $message, $l, $val) ?
-      [ map { $$_ } @$val ] : undef;
-}
-sub ask_many_from_list_with_help {
-    my ($o, $title, $message, $l, $help, $def) = @_;
+	$h->{help} = $h->{help} ? [ map { $h->{help}->($_) } @{$h->{list}} ] : [];
+	$h->{icons} = $h->{icon2f} ? [ map { $h->{icon2f}->($_) } @{$h->{list}} ] : [];
+    }
+    $o->ask_many_from_listW($title, [ deref($message) ], @l) or return;
 
-    my $val = [ map { my $i = $_; \$i } @$def ];
-
-    $o->ask_many_from_list_with_help_ref($title, $message, $l, $help, $val) ?
-      [ map { $$_ } @$val ] : undef;
+    @l = map {
+	my $h = $_;
+	[ grep_index { ${$h->{ref}[$::i]} } @{$h->{list}} ];
+    } @l;
+    wantarray ? @l : $l[0];
 }
 
 sub ask_from_entry {

@@ -82,40 +82,47 @@ xfs => __("Starts and stops the X Font Server at boot time and shutdown."),
     $s;
 }
 
+#- returns: 
+#--- the listref of installed services
+#--- the listref of "on" services
 sub services {
     my ($prefix) = @_;
     my $cmd = $prefix ? "chroot $prefix" : "";
     my @l = map { [ /(\S+)/, /:on/ ] } sort `LANGUAGE=C $cmd chkconfig --list`;
-    [ map { $_->[0] } @l ], [ map { $_->[1] } @l ];
+    [ map { $_->[0] } @l ], [ mapgrep { $_->[1], $_->[0] } @l ];
 }
 
 sub ask {
     my ($in, $prefix) = @_;
-    my ($l, $before) = services($prefix);
-    my $after = $in->ask_many_from_list_with_help("drakxservices",
-						  _("Choose which services should be automatically started at boot time"),
-						  $l, [ map { description($_, $prefix) } @$l ], $before) or return;
-    [ grep_index { $after->[$::i] } @$l ];
+    my ($l, $on_services) = services($prefix);
+    $in->ask_many_from_list("drakxservices",
+			    _("Choose which services should be automatically started at boot time"),
+			    {
+			     list => $l,
+			     help => sub { description($_, $prefix) },
+			     values => $on_services,
+			     sort => 1,
+			    });
 }
 
 sub doit {
     my ($in, $on_services, $prefix) = @_;
-    my ($l, $before) = services($prefix);
+    my ($l, $was_on_services) = services($prefix);
     
-    mapn { 
-	my ($name, $before) = @_;
-	my $after = member($name, @$on_services);
+    foreach (@$l) {
+	my $before = member($_, @$was_on_services);
+	my $after = member($_, @$on_services);
 	if ($before != $after) {
-	    my $script = "/etc/rc.d/init.d/$name";
-	    run_program::rooted($prefix, "chkconfig", $after ? "--add" : "--del", $name);
+	    my $script = "/etc/rc.d/init.d/$_";
+	    run_program::rooted($prefix, "chkconfig", $after ? "--add" : "--del", $_);
 	    if ($after && cat_("$prefix$script") =~ /^#\s+chkconfig:\s+-/m) {
-		run_program::rooted($prefix, "chkconfig", "--level", "35", $name, "on");
+		run_program::rooted($prefix, "chkconfig", "--level", "35", $_, "on");
 	    }
 	    if (!$after && $::isStandalone) {
 		run_program::rooted($prefix, $script, "stop");
 	    }
 	}
-    } $l, $before;
+    }
 }
 
 

@@ -452,6 +452,7 @@ sub main {
     $ENV{SHARE_PATH} ||= "/usr/share";
     $ENV{PERL_BADLANG} = 1;
 
+    $::isInstall = 1;
     $::beginner = $::expert = $::g_auto_install = 0;
 
 #-    c::unlimit_core() unless $::testing;
@@ -620,7 +621,9 @@ sub main {
 	$o->{interactive} = "newt";
 	require install_steps_newt;
     }
-    $o->{meta_class} = 'desktop' if cat__(install_any::getFile("VERSION")) =~ /desktop/i;
+    my $VERSION = cat__(install_any::getFile("VERSION"));
+    $o->{lnx4win} = 1 if $VERSION =~ /lnx4win/i;
+    $o->{meta_class} = 'desktop' if $VERSION =~ /desktop/i;
     if ($o->{meta_class} eq 'desktop') {
 	$o->{installClass} = 'normal';
 	push @auto, 'selectInstallClass';

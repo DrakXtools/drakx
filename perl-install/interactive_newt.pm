@@ -79,10 +79,9 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, @lists) = @_;
-    my ($list) = map { $_->[0] } @lists;
-    my ($val)  = map { $_->[2] } @lists;
+sub ask_many_from_listW {
+    my ($o, $title, $messages, $l) = @_;
+    my ($list, $val) = ($l->{labels}, $l->{ref});
     my $height = min(int @$list, 18);
     
     my $sb = Newt::Component::VerticalScrollbar(-1, -1, $height, 9, 10);

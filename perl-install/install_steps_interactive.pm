@@ -1,4 +1,3 @@
-
 package install_steps_interactive; # $Id$
 
 
@@ -82,12 +81,18 @@ sub selectKeyboard($) {
     delete $o->{keyboard_unsafe};
 
     if ($::expert && ref($o) !~ /newt/) { #- newt is buggy with big windows :-(
-	my %langs; $langs{$_} = 1 foreach @{$o->{langs}};
-	my @l = sort { $a->[0] cmp $b->[0] } map { [ lang::lang2text($_) || $_, \$langs{$_} ] } lang::list();
-	$o->ask_many_from_list_ref('', 
-		_("You can choose other languages that will be available after install"),
-		[ map { $_->[0] } @l ], [ map { $_->[1] } @l ], [ 'All' ], [ \$langs{all} ]) or goto &selectKeyboard;
-	$o->{langs} = $langs{all} ? [ 'all' ] : [ grep { $langs{$_} } keys %langs ];
+	$o->{langs} ||= [];
+	my $all = $o->{langs}[0] eq 'all';
+	$o->{langs} = $o->ask_many_from_list('',
+			       _("You can choose other languages that will be available after install"),			       
+			       {
+				list => [ lang::list() ],
+				label => sub { lang::lang2text($_) },
+				values => $o->{langs},
+				sort => 1,				
+			       },
+			       { list => ['all'], label => sub { _("All") }, ref => sub { \$all }, shadow => 0 }) or goto &selectKeyboard;
+	$o->{langs} = [ 'all' ] if $all;
     }
     install_steps::selectKeyboard($o);
 }
@@ -277,28 +282,29 @@ sub choosePartitionsToFormat($$) {
 	       } @$fstab;
     $_->{toFormat} = 1 foreach grep {  $::beginner && isSwap($_) } @$fstab;
 
-    return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
+    return if @l == 0 || $::beginner && 0 == grep { ! $_->{toFormat} } @l;
+
+    my $name2label = sub { 
+        sprintf("%s   %s", isSwap($_) ? type2name($_->{type}) : $_->{mntpoint},
+			   isLoopback($_) ? $::expert && loopback::file($_) : partition_table_raw::description($_));
+    };
 
     #- keep it temporary until the guy has accepted
-    my %toFormat = map { $_ => $_->{toFormat} || $_->{toFormatUnsure} } @l;
-
-    my %label;
-    $label{$_} = sprintf("%s   %s", 
-			 isSwap($_) ? type2name($_->{type}) : $_->{mntpoint}, 
-			 isLoopback($_) ? 
-                             $::expert && loopback::file($_) : 
-                             partition_table_raw::description($_)) foreach @l;
-
-    $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
-			       [ map { $label{$_} } @l ],
-			       [ map { \$toFormat{$_} } @l ]) or die "already displayed";
+    my $toFormat = $o->ask_many_from_list('', _("Choose the partitions you want to format"), 
+        {
+          list => \@l,
+          label => $name2label,
+          value => sub { $_->{toFormat} || $_->{toFormatUnsure} },
+        }) or die "already displayed";
     #- ok now we can really set toFormat
-    $_->{toFormat} = $toFormat{$_} foreach @l;
+    $_->{toFormat} = 1 foreach @$toFormat;
 
-    @l = grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l;
-    $o->ask_many_from_list_ref('', _("Check bad blocks?"),
-			       [ map { $label{$_} } @l ],
-			       [ map { \$_->{toFormatCheck} } @l ]) or goto &choosePartitionsToFormat if $::expert;
+    $o->ask_many_from_list('', _("Check bad blocks?"),
+        { 
+          list => [ grep { $_->{toFormat} && !isLoopback($_) && !isReiserfs($_) } @l ],
+          label => $name2label,
+	  ref => sub { \$_->{toFormatCheck} },
+        }) or goto &choosePartitionsToFormat if $::expert;
 }
 
 
@@ -347,7 +353,12 @@ sub choosePackages {
     #- avoid reselection of package if individual selection is requested and this is not the first time.
     if (1 || $first_time || !$individual) {
 	my $min_mark = $::beginner ? 10 : $::expert ? 0 : 1;
-	my ($size, $level) = pkgs::fakeSetSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+
+	my $b = pkgs::saveSelected($packages);
+	my (undef, $level) = pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $min_mark, 0, $o->{installClass});
+	my $size = pkgs::selectedSize($packages);
+	pkgs::restoreSelected($b);
+
 	my $max_size = 1 + $size; #- avoid division by zero.
 	
 	my $size2install = min($availableC, do {
@@ -390,13 +401,27 @@ sub choosePackagesTree {}
 sub chooseGroups {
     my ($o, $packages, $compssUsers, $compssUsersSorted, $individual) = @_;
 
-    $o->ask_many_from_list_ref('',
-			       _("Package Group Selection"),
-			       [ @$compssUsersSorted, _("Miscellaneous") ],
-			       [ map { \$o->{compssUsersChoice}{$_} } @$compssUsersSorted, "Miscellaneous" ],
-			       $individual ? ([  _("Individual package selection") ], [ $individual ]) : (),
-			      ) or goto &chooseGroups;
-
+    my %size;
+    my $base = pkgs::selectedSize($packages);
+    foreach (@$compssUsersSorted) {
+	my $b = pkgs::saveSelected($packages);
+	pkgs::selectPackage($packages, $_) foreach @{$compssUsers->{$_}};
+	$size{$_} = pkgs::selectedSize($packages) - $base;
+	pkgs::restoreSelected($b);
+    }
+    my @groups = (@$compssUsersSorted, $o->{meta_class} eq 'desktop' ? () : __("Miscellaneous"));
+    my $all;
+    $o->ask_many_from_list('', _("Package Group Selection"),
+			   { list => \@groups, 
+			     ref => sub { \$o->{compssUsersChoice}{$_} },
+			     label => sub { $size{$_} ? sprintf "$_  (%d%s)", round_down($size{$_} / sqr(1024), 10), _("MB") : translate($_) }, 
+			   },
+			   $o->{meta_class} eq 'desktop' ? { list => [ _("All") ], ref => sub { \$all }, shadow => 0 } : (),
+			   $individual ? { list => [ _("Individual package selection") ], ref => sub { $individual } } : (),
+			  ) or goto &chooseGroups;
+    if ($all) {
+	$o->{compssUsersChoice}{$_} = 1 foreach @$compssUsersSorted, "Miscellaneous";
+    }
     unless ($o->{compssUsersChoice}{Miscellaneous}) {
 	my %l;
 	$l{@{$compssUsers->{$_}}} = () foreach @$compssUsersSorted;
@@ -439,15 +464,17 @@ sub chooseCD {
     }
 
     $o->set_help('chooseCD');
-    $o->ask_many_from_list_ref('',
-			       _("If you have all the CDs in the list below, click Ok.
+    $o->ask_many_from_list('',
+			   _("If you have all the CDs in the list below, click Ok.
 If you have none of those CDs, click Cancel.
 If only some CDs are missing, unselect them, then click Ok."),
-			       [ map { _("Cd-Rom labeled \"%s\"", $_) } @mediumsDescr ],
-			       [ map { \$mediumsDescr{$_} } @mediumsDescr ]
-			      ) or do {
-				  map { $mediumsDescr{$_} = 0 } @mediumsDescr; #- force unselection of other CDs.
-			      };
+			   {
+			    list => \@mediumsDescr,
+			    label => sub { _("Cd-Rom labeled \"%s\"", $_) },
+			    ref => sub { \$mediumsDescr{$_} },
+			   }) or do {
+			       map { $mediumsDescr{$_} = 0 } @mediumsDescr; #- force unselection of other CDs.
+			   };
     $o->set_help('choosePackages');
 
     #- restore true selection of medium (which may have been grouped together)
@@ -547,10 +574,8 @@ USA")) || return;
       my $w = $o->wait_message('', _("Contacting the mirror to get the list of available packages"));
       crypto::getPackages($o->{prefix}, $o->{packages}, $u->{mirror}); #- make sure $o->{packages} is defined when testing
     };
-    my %h; $h{$_} = 1 foreach @{$u->{packages} || []};
-    $o->ask_many_from_list_ref('', _("Please choose the packages you want to install."), 
-			       \@packages, [ map { \$h{$_} } @packages ]) or return;
-    $o->pkg_install(@{$u->{packages} = [ grep { $h{$_} } @packages ]});
+    $u->{packages} = $o->ask_many_from_list('', _("Please choose the packages you want to install."), { list => \@packages, values => $u->{packages} }) or return;
+    $o->pkg_install(@{$u->{packages}});
 
     #- stop interface using ppp only.
     install_interactive::downNetwork($o, 'pppOnly');

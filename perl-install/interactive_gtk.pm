@@ -24,6 +24,7 @@ sub resume {}
 
 sub exit { 
     gtkset_mousecursor_normal(); #- for restoring a normal in any case on standalone
+    my_gtk::flush();
     c::_exit($_[0]) #- workaround 
 }
 
@@ -201,26 +202,34 @@ sub ask_from_treelistW {
     $w->main or die "ask_from_list cancel";
 }
 
-sub ask_many_from_list_with_help_refW {
-    my ($o, $title, $messages, @L) = @_;
+sub ask_many_from_listW {
+    my ($o, $title, $messages, @l) = @_;
     my $w = my_gtk->new('', %$o);
+    $w->sync; # for XPM's creation
+
     my $tips = new Gtk::Tooltips;
-    my @boxes = map {
+    my @boxes; @boxes = map {
 	my $l = $_;
 	my $box = gtkpack(new Gtk::VBox(0,0),
 		map_index {
 		    my $i = $::i;
+
 		    my $o = Gtk::CheckButton->new($_);
-		    $tips->set_tip($o, $l->[1][$i]) if $l->[1][$i];
-		    $o->set_active(${$l->[2][$i]});
-		    $o->signal_connect(clicked => sub { invbool $l->[2][$i] });
-		    $o;
-		} @{$l->[0]});
-	@{$l->[0]} > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box;
-    } @L;
+		    $tips->set_tip($o, $l->{help}[$i]) if $l->{help}[$i];
+		    $o->set_active(${$l->{ref}[$i]});
+		    $o->signal_connect(clicked => sub { 
+		        my $v = invbool($l->{ref}[$i]);
+			$boxes[$l->{shadow}]->set_sensitive(!$v) if exists $l->{shadow};
+		    });
+
+		    my $f = $l->{icons}[$i];
+		    -e $f ? gtkpack_(new Gtk::HBox(0,0), 0, new Gtk::Pixmap(gtkcreate_xpm($w->{window}, $f)), 1, $o) : $o;
+		} @{$l->{labels}});
+	@{$l->{labels}} > 11 ? gtkset_usize(createScrolledWindow($box), 0, 250) : $box;
+    } @l;
     gtkadd($w->{window},
 	   gtkpack_(create_box_with_title($w, @$messages),
-		    (map {; 1, $_ } @boxes),
+		    (map {; 1, $_, 0, '' } @boxes),
 		    0, $w->create_okcancel,
 		   )
 	  );

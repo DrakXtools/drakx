@@ -140,7 +140,7 @@ label oem
   append ramdisk_size=32000 initrd=all.rdz cdrom rescue oem rw
 label auto
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=auto_inst.cfg.pl
+  append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz vga=788

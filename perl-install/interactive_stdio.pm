@@ -56,8 +56,9 @@ sub ask_from_listW {
     }
 }
 
-sub ask_many_from_list_refW {
-    my ($o, $title, $messages, $list, $val) = @_;
+sub ask_many_from_listW {
+    my ($o, $title, $messages, $l) = @_;
+    my ($list, $val) = ($l->{labels}, $l->{ref});
     my @defaults;
     print map { "$_\n" } @$messages;
     my $n = 0; foreach (@$list) {

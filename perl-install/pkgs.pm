@@ -734,14 +734,15 @@ sub setSelectedFromCompssList {
 
 #- usefull to know the size it would take for a given min_level/max_size
 #- just saves the selected packages, call setSelectedFromCompssList and restores the selected packages
-sub fakeSetSelectedFromCompssList {
-    my ($compssListLevels, $packages, $min_level, $max_size, $install_class) = @_;
+sub saveSelected {
+    my ($packages) = @_;
     my @l = values %{$packages->[0]};
     my @flags = map { pkgs::packageFlagSelected($_) } @l;
-    my (undef, $level) = setSelectedFromCompssList($compssListLevels, $packages, $min_level, $max_size, $install_class);
-    my $size = pkgs::selectedSize($packages);
-    mapn { pkgs::packageSetFlagSelected(@_) } \@l, \@flags;
-    $size, $level;
+    [ $packages, \@l, \@flags ];
+}
+sub restoreSelected {
+    my ($packages, $l, $flags) = @{$_[0]};
+    mapn { pkgs::packageSetFlagSelected(@_) } $l, $flags;
 }
 
 

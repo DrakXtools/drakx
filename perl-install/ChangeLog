@@ -7,9 +7,19 @@
 
 	* netconnect.pm (get_net_device): try to fix it..
 
-2000-09-22  DrakX <install@linux-mandrake.com>
+2000-09-22  Pixel  <pixel@mandrakesoft.com>
 
-	* snapshot uploaded
+	* install_steps_interactive.pm (selectKeyboard,
+	choosePartitionsToFormat, chooseCD, installCrypto): use new ask_many_from_list
+	(): 
+
+	* interactive.pm (ask_many_from_list): now only ask_many_from_list
+	exists, obsoleting ask_many_from_list_ref and
+	ask_many_from_list_with_help. More flexible and nicer
+	* interactive_newt.pm (ask_many_from_listW): adapted to new
+	calling type
+	* interactive_gtk.pm (ask_many_from_listW): adapted to new calling
+	type, handle 'shadow' and 'icon2f'
 
 2000-09-22  Pixel  <pixel@mandrakesoft.com>
 
@@ -29,9 +39,15 @@
 	* run_program.pm (rooted): don't redirect the stdout and stderr to
 	ddebug.log if not $::isInstall
 
+	* log.pm (l): log on stdout/stderr if !isInstall and !isStandalone
+
 	* modules.pm (load_raw): redirect stderr to tty5
 
 	* install2.pm (main): set variable $::isInstall
+
+2000-09-22  DrakX <install@linux-mandrake.com>
+
+	* snapshot uploaded
 
 2000-09-22  Guillaume Cottenceau  <gc@mandrakesoft.com>
 

@@ -182,8 +182,8 @@ sub cardConfiguration(;$$$) {
     updateCardAccordingName($card, $card->{type}) if $card->{type};
     add2hash($card, { vendor => "Unknown", board => "Unknown" });
 
-    $card->{memory} = 4096,  delete $card->{depth} if $card->{memory} <= 1024 && $card->{driver} eq "i810";
-    $card->{memory} = 16384, delete $card->{depth} if $card->{memory} <= 1024 && $card->{chipset} =~ /PERMEDIA/;
+    $card->{memory} = 4096,  delete $card->{depth} if $card->{driver} eq 'i810';
+    $card->{memory} = 16384, delete $card->{depth} if $card->{chipset} =~ /PERMEDIA/ && $card->{memory} <= 1024;
 
     #- 3D acceleration configuration for XFree 3.3 using Utah-GLX.
     $card->{Utah_glx} = ($card->{identifier} =~ /Matrox.* G[24]00/ || #- 8bpp does not work.
@@ -310,7 +310,7 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 	$card->{type} =~ /Intel 810/ and ($card->{flags}{needVideoRam}, $card->{memory}) = ('fakeVideoRam', 16384);
     }
 
-    if (!$::isStandalone && $card->{driver} eq "i810") {
+    if (!$::isStandalone && $card->{driver} eq 'i810') {
 	require modules;
 	eval { modules::load("agpgart"); };
     }
@@ -413,6 +413,9 @@ sub testFinalConfig {
     $bad_card ||= $o->{card}{use_xf4}; #- TODO obsoleted to check, when using fbdev of XFree 4.0!
     log::l("the graphic card does not like X in framebuffer") if $bad_card;
 
+    my $verybad_card = $o->{card}{driver} eq 'i810';
+    $verybad_card and return 1;
+
     my $mesg = _("Do you want to test the configuration?");
     my $def = 1;
     if ($bad_card && !$::isStandalone) {
@@ -486,7 +489,7 @@ sub testFinalConfig {
             1;
 	});
 
-        my $background = "/usr/share/pixmaps/backgrounds/mandrake/XFdrake-image-test.jpg";
+        my $background = "/usr/share/pixmaps/backgrounds/linux-mandrake/XFdrake-image-test.jpg";
         my $qiv = "/usr/bin/qiv";
         -r "} . $prefix . q{/$background" && -x "} . $prefix . q{/$qiv" and
             system(($::testing ? "} . $prefix . q{" : "chroot } . $prefix . q{/ ") . "$qiv -y $background");
@@ -1084,6 +1087,7 @@ Current configuration is:
 	    foreach (@window_managers) {
 		if (`pidof "$_"` > 0) {
 		    if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst $_), 1)) {
+			fork and $in->exit;
 			system("kwmcom logout") if /kwm/;
 			system("dcop kdesktop default logout") if /kwin/;
 			system("save-session --kill") if /gnome-session/;
