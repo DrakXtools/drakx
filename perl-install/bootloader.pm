@@ -613,8 +613,8 @@ sub install_lilo ($$) {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
 	    (my $part, $file) = fsedit::file2part($prefix, $fstab, $file);
-#	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } @$hds;
-	    my %hds = map_index { $_ => "hd$::i" } sort map { $_->{device} } map { @{$_->{primary}{normal}}, map {$_->{normal} } @{$_->{extended} || []} } @$hds;
+	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
+	      sort { isFat($b) <=> isFat($a) || $a->{device} cmp $b->{device} } get_fstab(@$hds);
 	    %hds->{$part->{device}} . ":" . $file;
 	} else {
 	    $file
