@@ -106,7 +106,7 @@ sub selectInstallClass($@) {
     my ($o, @classes) = @_;
     my %c = my @c = (
       $::corporate ? () : (
-	_("Recommended") => "beginner",
+	_("Automated") => "beginner",
       ),
 	_("Customized")  => "specific",
 	_("Expert")	 => "expert",

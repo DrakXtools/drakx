@@ -20,7 +20,7 @@ or 7.0 (Air).
 
 Select:
 
-  - Recommended: If you have never installed Linux before, choose this. NOTE:
+  - Automated (recommended): If you have never installed Linux before, choose this. NOTE:
     networking will not be configured during installation, use \"LinuxConf\"
     to configure it after the install completes.
 
