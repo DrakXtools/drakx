@@ -526,9 +526,9 @@ sub chooseGroups {
 			     val => sub { \$val{$_} },
 			     icon2f => sub { 
 				 my $f = "/usr/share/icons/" . ($o->{compssUsersIcons}{$_} || 'default');
-				 -e "$f.xpm" or $f .= "_section";
-				 -e "$f.xpm" or $f = '/usr/share/icons/default_section';
-				 "$f.xpm";
+				 -e "$f.png" or $f .= "_section";
+				 -e "$f.png" or $f = '/usr/share/icons/default_section';
+				 "$f.png";
 			     },
 			     label => sub { translate($_) . ($size{$_} ? sprintf " (%d%s)", $size{$_}, _("MB") : '') },
 			   },

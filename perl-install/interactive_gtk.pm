@@ -314,7 +314,7 @@ sub ask_from_entries_refW {
 		gtkdestroy($e->{icon});
 		my $f = $e->{icon2f}->($_[0]);
 		$e->{icon} = -e $f ?
-		    gtkxpm($mainw->{window}, $f) :
+		    gtkpng($f) :
 		    new Gtk::Label(may_apply($e->{format}, $_[0]));
 		$w->add($e->{icon});
 		$e->{icon}->show;
@@ -388,7 +388,7 @@ sub ask_from_entries_refW {
     
 	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand,
 	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
-	  icon_w => -e $e->{icon} ? gtkxpm($mainw->{window}, $e->{icon}) : '' };
+	  icon_w => -e $e->{icon} ? gtkpng($e->{icon}) : '' };
     };
     @widgets_always   = map_index { $create_widget->($_, $::i      ) } @$l;
     @widgets_advanced = map_index { $create_widget->($_, $::i + @$l) } @$l2;

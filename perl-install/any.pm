@@ -28,11 +28,15 @@ sub face2xpm {
     my ($face, $prefix) = @_;
     facesdir($prefix) . $face . ".xpm";
 }
+sub face2png {
+    my ($face, $prefix) = @_;
+    facesdir($prefix) . $face . ".png";
+}
 sub facesnames {
     my ($prefix) = @_;
     my $dir = facesdir($prefix);
     my @l = grep { /^[A-Z]/ } all($dir);
-    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } @l ? @l : all($dir);
+    grep { -e "$dir/$_.png" } map { /(.*)\.xpm/ } (@l ? @l : all($dir));
 }
 
 sub addKdmIcon {
@@ -675,7 +679,7 @@ sub ask_users {
             { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
             { label => _("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
 	      if_($security <= 3,
-	    { label => _("Icon"), val => \$u->{icon}, list => [ facesnames($prefix) ], icon2f => sub { face2xpm($_[0], $prefix) }, format => \&translate },
+	    { label => _("Icon"), val => \$u->{icon}, list => [ facesnames($prefix) ], icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
            ],
         ) or return;

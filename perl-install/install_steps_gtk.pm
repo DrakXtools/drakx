@@ -283,18 +283,18 @@ sub choosePackagesTree {
     $go->grab_focus;
     $w->{rwindow}->show_all;
 
-    my $pix_base     = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-base.xpm") ];
-    my $pix_selected = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-selected.xpm") ];
-    my $pix_unselect = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-unselected.xpm") ];
-    my $pix_semisele = [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-semiselected.xpm") ];
-    my $pix_installed= [ gtkcreate_xpm($w->{window}, "$ENV{SHARE_PATH}/rpm-installed.xpm") ];
+    my $pix_base     = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-base.png") ];
+    my $pix_selected = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-selected.png") ];
+    my $pix_unselect = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-unselected.png") ];
+    my $pix_semisele = [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-semiselected.png") ];
+    my $pix_installed= [ gtkcreate_png("$ENV{SHARE_PATH}/rpm-installed.png") ];
 
     my $add_parent; $add_parent = sub {
 	$_[0] or return undef;
 	if (my $w = $wtree{$_[0]}) { return $w }
 	my $s; foreach (split '/', $_[0]) {
 	    my $s2 = $s ? "$s/$_" : $_;
-	    $wtree{$s2} ||= do {	     
+	    $wtree{$s2} ||= do {
 		my $n = $tree->insert_node($s ? $add_parent->($s) : undef, undef, [$_, '', ''], 5, (undef) x 4, 0, 0);
 		$n;
 	    };
@@ -343,7 +343,7 @@ sub choosePackagesTree {
       );
     $toolbar->set_button_relief("none");
     foreach (grep_index { $::i % 2 == 0 } @toolbar) {
-	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkxpm($tree, "$ENV{SHARE_PATH}/$_.xpm")),
+	gtksignal_connect($toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkpng("$ENV{SHARE_PATH}/$_.png")),
 			  clicked => $toolbar{$_}[1]);
     }
     $toolbar->set_style("icons");

@@ -10,13 +10,14 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkpng gtkcreate_xpm gtkcreate_png) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
 use Gtk;
+use Gtk::Gdk::ImlibImage;
 use c;
 use log;
 use common qw(:common :functional :file);
@@ -33,6 +34,7 @@ sub new {
     my ($type, $title, %opts) = @_;
 
     Gtk->init;
+    init Gtk::Gdk::ImlibImage;
     Gtk->set_locale;
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
@@ -262,14 +264,20 @@ sub gtkctree_children {
     @l;
 }
 
-sub gtkcreate_xpm { 
-    my ($w, $f) = @_; 
+sub gtkcreate_xpm {
+    my ($w, $f) = @_;
     my @l = Gtk::Gdk::Pixmap->create_from_xpm($w->window, $w->style->bg('normal'), $f) or die "gtkcreate_xpm: missing pixmap file $f";
     @l;
 }
+sub gtkcreate_png {
+    my ($f) = @_;
+    my $im = load_image Gtk::Gdk::ImlibImage("$f");
+    $im->render($im->rgb_width, $im->rgb_height);
+    ($im->move_image(), $im->move_mask);
+}
 sub xpm_d { my $w = shift; Gtk::Gdk::Pixmap->create_from_xpm_d($w->window, undef, @_) }
 sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
-
+sub gtkpng { new Gtk::Pixmap (gtkcreate_png(@_)) }
 #-###############################################################################
 #- createXXX functions
 

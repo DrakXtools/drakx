@@ -102,7 +102,7 @@ sub create_help_window {
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
 	$w->sync;
     }
-    my $pixmap = gtkxpm($w->{window}, "$ENV{SHARE_PATH}/help.xpm");
+    my $pixmap = gtkpng("$ENV{SHARE_PATH}/help.png");
     gtkadd($w->{window},
 	   gtkpack_(new Gtk::HBox(0,-2),
 		    0, gtkadd(gtksignal_connect(new Gtk::Button, clicked => sub { create_big_help($o) }), $pixmap),
@@ -137,11 +137,9 @@ sub create_steps_window {
 			my $darea = new Gtk::DrawingArea;
 			my $in_button;
 			my $draw_pix = sub {
-			    my $pixmap = Gtk::Gdk::Pixmap->create_from_xpm($darea->window,
-									   $darea->style->bg('normal'),
-									   $_[0]) or die;
+			    my ($map, $mask) = gtkcreate_png($_[0]);
 			    $darea->window->draw_pixmap ($darea->style->bg_gc('normal'),
-							 $pixmap, 0, 0,
+							 $map, 0, 0,
 							 ($darea->allocation->[2]-$PIX_W)/2 + ($o->{meta_class} eq 'firewall' ? 3 : 0),
 							 ($darea->allocation->[3]-$PIX_H)/2,
 							 $PIX_W , $PIX_H );
@@ -150,7 +148,7 @@ sub create_steps_window {
 			my $f = sub { 
 			    my ($type) = @_;
 			    my $color = $step->{done} ? 'green' : $step->{entered} ? 'orange' : 'red';
-			    "$ENV{SHARE_PATH}/step-$color$type.xpm";
+			    "$ENV{SHARE_PATH}/step-$color$type.png";
 			};
 			$darea->set_usize($PIX_W+($o->{meta_class} eq 'firewall' ? 3 : 0),$PIX_H);
 			$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
@@ -190,10 +188,10 @@ sub create_logo_window {
     $w->{rwindow}->set_usize($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
     $w->show;
-    my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.xpm" : "logo-mandrake.xpm";
-    $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.xpm";
+    my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.png" : "logo-mandrake.png";
+    $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.png";
     -r $file or $file = "$ENV{SHARE_PATH}/$file";
-    -r $file and gtkadd($w->{window}, gtkxpm($w->{window}, $file));
+    -r $file and gtkadd($w->{window}, gtkpng($file));
     $o->{logo_window} = $w;
 }
 
