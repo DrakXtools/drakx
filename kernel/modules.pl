@@ -34,6 +34,7 @@ my @skip_modules_on_stage1 = (
   3w-xxxx pci2220i qla2x00 i2o_block
   eata_pio eata_dma
   qla2200 qla2300
+  iph5526
   ),
   'AM53C974', # deprecated by tmscsim
   qw(ac3200 at1700 atp ni5010 ni52 ni65),  #- unused from Jeff
