@@ -2563,6 +2563,9 @@ sub setup_options {
     if ($printer->{currentqueue}{printer} || # We have a Foomatic queue
 	$printer->{currentqueue}{ppd}) { # We have a CUPS+PPD queue
 	# Set up the widgets for the option dialog
+	my $helptext = N("Printer default settings
+
+You should make sure that the page size and the ink type/printing mode (if available) and also the hardware configuration of laser printers (memory, duplex unit, extra trays) are set correctly. Note that with a very high printout quality/resolution printing can get substantially slower.");
 	my @widgets;
 	my @userinputs;
 	my @choicelists;
@@ -2607,7 +2610,8 @@ sub setup_options {
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
 		       sort => 0,
-		       advanced => $advanced })
+		       advanced => $advanced,
+		       help => $helptext })
 		    if ($printer->{ARGS}[$i]{name} ne 'PageRegion');
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
@@ -2627,7 +2631,8 @@ sub setup_options {
 		       not_edit => 1,
 		       list => \@{$choicelists[$i]},
 		       sort => 0,
-		       advanced => $advanced });
+		       advanced => $advanced,
+		       help => $helptext });
 	    } else {
 		# numerical option
 		push(@choicelists, []);
@@ -2641,7 +2646,8 @@ sub setup_options {
 			   #min => $printer->{ARGS}[$i]{min},
 			   #max => $printer->{ARGS}[$i]{max},
 			   val => \$userinputs[$i],
-			   advanced => $advanced });
+			   advanced => $advanced,
+			   help => $helptext });
 	    }
 	}
 	# Show the options dialog. The call-back function does a
@@ -2681,9 +2687,7 @@ sub setup_options {
 	    (!$printer->{noninteractive})) {
 	    return 0 if !$in->ask_from(
 		 $windowtitle,
-		 N("Printer default settings
-
-You should make sure that the page size and the ink type/printing mode (if available) and also the hardware configuration of laser printers (memory, duplex unit, extra trays) are set correctly. Note that with a very high printout quality/resolution printing can get substantially slower."),
+		 N("Printer default settings"),
 		 \@widgets,
 		 complete => sub {
 		     my $i;
@@ -3630,11 +3634,7 @@ sub main {
 		# Show the main dialog
 		$in->ask_from_({ 
 		    title => N("Printerdrake"),
-		    messages =>
-			($noprinters ? "" :
-			 ($printer->{SPOOLER} eq "cups" ?
-			  N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; to view information about it; or to make a printer on a remote CUPS server available for Star Office/OpenOffice.org/GIMP.") :
-			  N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."))),
+		    messages => N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."),
 		    cancel => (""),
 		    ok => ("")},
 		    # List the queues
