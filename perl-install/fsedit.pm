@@ -43,6 +43,7 @@ my @suggestions_mntpoints = (
 my @partitions_signatures = (
     [ 0x83, 0x438, "\x53\xEF" ],
     [ 0x183, 0x10034, "ReIsErFs" ],
+    [ 0x183, 0x10034, "ReIsEr2Fs" ],
     [ 0x82, 4086, "SWAP-SPACE" ],
     [ 0x7,  0x1FE, "\x55\xAA", 0x3, "NTFS" ],
     [ 0xc,  0x1FE, "\x55\xAA", 0x52, "FAT32" ],
@@ -58,7 +59,7 @@ sub typeOfPart { typeFromMagic(devices::make($_[0]), @partitions_signatures) }
 #-######################################################################################
 sub hds {
     my ($drives, $flags) = @_;
-    my @hds;
+    my (@hds, @lvms);
     my $rc;
 
     foreach (@$drives) {
@@ -83,9 +84,27 @@ sub hds {
 	    my $type = typeOfPart($_->{device});
 	    $_->{type} = $type if $type > 0x100;
 	}
+	
+	if (my @lvms = grep { isLVM($_) } partition_table::get_normal_parts($hd)) {
+	    require lvm;
+	    foreach (@lvms) {
+		my $name = lvm::get_vg($_) or next;
+		my ($lvm) = grep { $_->{LVMname} eq $name } @hds;
+		if (!$lvm) {
+		    $lvm = bless { disks => [], LVMname => $name, level => 'linear' }, 'lvm';
+		    lvm::update_size($lvm);
+		    lvm::get_lvs($lvm);
+		    push @lvms, $lvm;
+		}
+		$_->{lvm} = $name;
+		push @{$lvm->{disks}}, $_;
+	    }
+	}
+
+
 	push @hds, $hd;
     }
-    [ @hds ];
+    \@hds, \@lvms;
 }
 
 sub readProcPartitions {
@@ -279,7 +298,12 @@ sub add($$$;$) {
       $options->{force} || check_mntpoint($part->{mntpoint}, $hd, $part, $hds);
 
     delete $part->{maxsize};
-    partition_table::add($hd, $part, $options->{primaryOrExtended});
+
+    if (isLVMBased($hd)) {
+	lvm::lv_create($hd, $part);
+    } else {
+	partition_table::add($hd, $part, $options->{primaryOrExtended});
+    }
 }
 
 sub allocatePartitions($$) {
