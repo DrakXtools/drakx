@@ -1,13 +1,13 @@
 #!/usr/bin/perl
 
-open F, '| /usr/sbin/sendmail -f devel@mandrakesoft.com';
+open F, '|/usr/sbin/sendmail -oi -t';
 
 chomp($ver = <STDIN>);
 
 print F 
 q(Subject: [DrakX] DrakX snapshot #), $ver, q( uploaded
-From: devel@mandrakesoft.com
-To: changelog@linux-mandrake.com, install@mandrakesoft.com
+From: DrakX Builder Robot <devel@mandrakesoft.com>
+To: changelog@linux-mandrake.com
 Reply-To: install@mandrakesoft.com
 
 );
