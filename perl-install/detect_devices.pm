@@ -323,16 +323,13 @@ sub pci_probe {
 sub usb_probe {
     -e "/proc/bus/usb/devices" or return ();
 
-    my @l = add_addons($usbtable_addons, map {
+    add_addons($usbtable_addons, map {
 	my %l;
 	@l{qw(vendor id media_type driver description)} = split "\t";
 	$l{$_} = hex $l{$_} foreach qw(vendor id);
 	$l{bus} = 'USB';
 	\%l
     } c::usb_probe());
-    use Data::Dumper;
-    log::l(Dumper \@l, backtrace());
-    @l;
 }
 
 sub pcmcia_probe {
