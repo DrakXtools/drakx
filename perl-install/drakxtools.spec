@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.35mdk
+Release: 1mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Aug 25 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-1mdk
+- drakfloppy: make it CJK aware
+- drakTermServ: add /etc/modules for local hardware config (stew)
+- fix #4579: drakconnect not working on console (poulpy)
+- printerdrake: misc fixes (till)
+
 * Sat Aug 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.35mdk
 - drakperm:
   o add new rules at top
