@@ -182,10 +182,11 @@ my $ttf2pt1      = '/usr/sbin/ttf2pt1';
 my $pfm2afm      = '/usr/sbin/pfm2afm';
 my $type1inst    = '/usr/sbin/type1inst';
 my $chkfontpath  = '/usr/sbin/chkfontpath';
+# mkttfdir only knows about iso-8859-1, using ttmkfdir instead
 my $mkttfdir     = '/usr/X11R6/bin/mkttfdir';
+my $ttmkfdir     = '/usr/sbin/ttmkfdir';
+my $xftcache     = '/usr/X11R6/bin/xftcache';
 my $ghostscript;
-
-#my $ttmkfdir = '/usr/sbin/ttmkfdir';
 
 # Global lists, just to manipulate it easily.
 # my @font_list                    => list of fonts to install.
@@ -389,9 +390,10 @@ sub put_font_dir {
         $interactive
           and progress( $pbar2, 0.20, N("please wait during ttmkfdir...") );
 
-        #	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
         my $ttfdir = $drakfont_dir . "/ttf";
-        `$mkttfdir $ttfdir`;
+	# mkttfdir only knows about iso-8859-1, using ttmkfdir -u instead -- pablo
+        #`$mkttfdir $ttfdir`;
+       	system ("cd $ttfdir && $xftcache . && $ttmkfdir -u > fonts.dir");
         $interactive and progress( $pbar2, 0.10, N("True Type install done") );
         my $update_chkfontpath = "$chkfontpath -a $drakfont_dir/ttf";
 
@@ -415,7 +417,8 @@ sub put_font_dir {
             system(
 "cd $drakfont_dir/tmp/Type1 && mv *.pfm *.gsf *.afm *.pfb ../../Type1 "
             );
-            system("cd $drakfont_dir/Type1 && $type1inst");
+            my $type1dir = $drakfont_dir . "/Type1";
+            system("cd $type1dir && $xftcache . && $type1inst");
             $interactive
               and progress( $pbar2, 0.05, N("Ghostscript referencing") );
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
@@ -438,7 +441,8 @@ sub put_font_dir {
             system(
 "cd $drakfont_dir/tmp/Type1 && mv *.pfm *.afm *.gsf *.pfb ../../Type1 "
             );
-            system("cd $drakfont_dir/Type1 && $type1inst");
+            my $type1dir = $drakfont_dir . "/Type1";
+            system("cd $type1dir && $xftcache . && $type1inst");
             $interactive
               and progress( $pbar2, 0.05, N("Ghostscript referencing") );
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
@@ -461,12 +465,13 @@ sub put_font_dir {
             }
             system("cd $drakfont_dir/tmp/tmp && mv  *.afm ../Type1");
             system("cd $drakfont_dir/tmp/Type1 && mv *.afm ../../Type1 ");
-            system("cd $drakfont_dir/Type1 && $type1inst");
+            my $type1dir = $drakfont_dir . "/Type1";
+            system("cd $type1dir && $xftcache . && $type1inst");
             $interactive and progress( $pbar2, 0.14, N("type1inst building") );
             $update_chkfontpath .= "; $chkfontpath -a $drakfont_dir/Type1";
         }
 
-        $interactive and progress( $pbar2, 0.01, N("done") );
+        $interactive and progress( $pbar2, 1, N("done") );
         $interactive
           and progress( $pbar3, 0.25, N("Suppress temporary Files") );
         rm_rf("$drakfont_dir/tmp/");
@@ -477,6 +482,7 @@ sub put_font_dir {
         #	system ($restart_xfs);
         #	system('kill -USR1 `/sbin/pidof xfs` 2&1>/dev/null');
         system('/etc/rc.d/init.d/xfs restart');
+	system('xset fp rehash');
         $interactive and progress( $pbar3, 0.30, N("done") );
     }
 }
@@ -511,7 +517,14 @@ sub remove_fonts {
             system("mv $_ $drakfont_dir/remove ");
         }
         else {
-            rm_rf($i);
+	    if ( /.ttf$/ ) {
+		rm_rf($_);
+		# rebuild of the fonts.dir and xftcache files
+       		system("cd `dirname $_` && $xftcache . && $ttmkfdir -u > fonts.dir");
+	    }
+            else {
+                rm_rf($i);
+            }
         }
         $i =~ s/\/\w*\.\w*//gi;
         grep ( $i, (@list_dir) ) or push @list_dir, $i;
@@ -534,6 +547,7 @@ sub remove_fonts {
     }
     $interactive and progress( $pbar2, 0.01, N("xfs restart") );
     system("/etc/rc.d/init.d/xfs restart");
+    system('xset fp rehash');
     -e "/usr/share/ghostscript" and rm_rf("$drakfont_dir/remove");
     $interactive and progress( $pbar2, 0.01, N("done") );
 }
