@@ -1,32 +1,12 @@
 2000-09-24  Pixel  <pixel@mandrakesoft.com>
 
-	* fs.pm (umount): remove the ending "/" in the mntpoint. Otherwise
-	the mtab updating fails to update properly
+	* commands.pm (bug): use first floppy drive instead of fd0 hard
+	coded (nice for LS120's)
 
-2000-09-23  Pixel  <pixel@mandrakesoft.com>
-
-	* partition_table.pm (active): set the hd dirty
-
-	* services.pm (services): patched to handle xinetd sub-services
-
-	* install2.pm (formatPartitions): unset choosePackages done, so
-	that choosePackages is done again
-
-	* install_steps.pm (doPartitionDisksBefore): close pkgs::LOG and
-	umount /mnt/proc so that going back to partitioning doesn't fail
-	because /mnt can't be umounted.
-	umount_all twice after a sleep (HACK)
-
-	* pkgs.pm: updated $A, $B and $C for 7.2 (used by correctSize and
-	invCorrectSize)	
-
-2000-09-23  dam's  <damien@mandrakesoft.com>
-
-	* netconnect.pm (isdn_detect): log NET_DEVICE when isdn too.
-
-2000-09-23  DrakX <install@linux-mandrake.com>
-
-	* snapshot uploaded
+	* install_steps_gtk.pm (selectMouse): if device changed, do the
+	test	
+	* standalone/mousedrake: fix for serial mice
+	* install_steps_interactive.pm (selectMouse): fix for serial mice
 
 2000-09-23  dam's  <damien@mandrakesoft.com>
 

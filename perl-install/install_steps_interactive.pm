@@ -164,7 +164,7 @@ sub selectMouse {
 			       sub { join '|', map { translate($_) } split '\|', $_[0] },
 			       [ mouse::fullnames ], $prev)) if $force;
 
-    if ($force && $o->{mouse}{device} eq "ttyS") {
+    if ($force && $o->{mouse}{type} eq 'serial') {
 	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = 
 	  $o->ask_from_listf(_("Mouse Port"),

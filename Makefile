@@ -94,7 +94,7 @@ upload: clean install
 	for i in $(RELEASE_BOOT_IMG); do upload images $$i; done ;\
 	echo
 
-	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | mail -s 'new DrakX snapshot' changelog@linux-mandrake.com install@linux-mandrake.com
+	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | tools/mailchangelog
 	tools/addchangelog perl-install/ChangeLog 'snapshot uploaded'
 	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
 
