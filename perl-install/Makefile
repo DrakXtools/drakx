@@ -24,7 +24,7 @@ TAGS: $(ALLPMS)
 
 clean:
 	for i in $(DIRS) share/po; do $(MAKE) -C $$i clean; done;:
-	rm -rf auto ../drakxtools.tar.bz2
+	rm -rf auto ../drakxtools.tar.bz2 *.bak
 	find . -name "*~" -o -name ".#*" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 check:
@@ -223,7 +223,7 @@ buildrpm:
 	rpm -ta ../$(PACKAGE)-$(PKGVERSION).tar.bz2
 
 buildsrpm:
-	rpm -ts ../$(PACKAGE)-$(PKGVERSION).tar.bz2
+	rpm -ts --nodeps ../$(PACKAGE)-$(PKGVERSION).tar.bz2
 
 # rules to build a distributable rpm
 
