@@ -56,6 +56,7 @@ if ($img =~ /blank|other|pcmcia/) {
     @kernels = $main;
 } else {
     @kernels = map { m|all.kernels/(.*)| } glob('all.kernels/*');
+    $img =~ /usb/ and @kernels = grep { $_ !~ /2\.2\.14/ } @kernels;  #- 2.2.14 is too old, usb support was not working properly
 }
 
 foreach (@kernels) {
