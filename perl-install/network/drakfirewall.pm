@@ -126,7 +126,7 @@ sub default_ports {
 
 sub get_ports() {
     my $shorewall = network::shorewall::read() or return;
-    \$shorewall->{ports};
+    $shorewall->{ports};
 }
 
 sub set_ports {
@@ -153,7 +153,7 @@ sub get_conf {
     if ($o_ports) {
 	$disabled, from_ports($o_ports);
     } elsif (my $shorewall = network::shorewall::read()) {
-	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
+	$shorewall->{disabled}, from_ports($shorewall->{ports});
     } else {
 	$in->ask_okcancel('', N("drakfirewall configurator
 
