@@ -288,6 +288,13 @@ sub real_main {
 
                    isdn =>
                    {
+                    name => N("ISDN configuration has not yet be ported to new wizard layer"),
+                    end => 1,
+                   },
+
+                   
+                   isdn_real =>
+                   {
                     pre=> sub {
                         detect($netc->{autodetect}, 'isdn');
                         # FIXME: offer to pick any card from values %{$netc->{autodetect}{isdn}}
