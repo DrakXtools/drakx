@@ -1,8 +1,7 @@
 #!/bin/sh
 
 type=$1
-[ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c59x)" ; exit 1; }
-[ -z "$type" ] && type=3c90x
+[ -z "$type" ] && { echo "usage: $0 <network card type> (eg: 3c90x)" ; exit 1; }
 
 [ -e menu.lst ] || { echo "missing file menu.lst, create one based on menu.lst.example"; exit 1; }
 
