@@ -1,7 +1,7 @@
 package modules; # $Id$
 
 use strict;
-use vars qw(%conf %mappings_24_26 %mappings_26_24);
+use vars qw(%conf);
 
 use common;
 use detect_devices;
@@ -25,28 +25,26 @@ sub category2modules_and_description {
     map { $_ => $modules_descriptions{$_} } category2modules($categories);
 }
 
-%mappings_24_26 = ("usb-ohci" => "ohci-hcd",
-                   "usb-uhci" => "uhci-hcd",
-                   "uhci" => "uhci-hcd",
-                   "printer" => "usblp",
-                   "bcm4400" => "b44",
-                   "3c559" => "3c359",
-                   "3c90x" => "3c59x",
-                   "dc395x_trm" => "dc395x");
-%mappings_26_24 = reverse %mappings_24_26;
+my %mappings_24_26 = (
+    "usb-ohci" => "ohci-hcd",
+    "usb-uhci" => "uhci-hcd",
+    "uhci" => "uhci-hcd",
+    "printer" => "usblp",
+    "bcm4400" => "b44",
+    "3c559" => "3c359",
+    "3c90x" => "3c59x",
+    "dc395x_trm" => "dc395x",
+);
+my %mappings_26_24 = reverse %mappings_24_26;
+$mappings_26_24{'uhci-hdc'} = 'usb-uhci';
+
 sub mapping_24_26 {
-    return map { c::kernel_version() =~ /^\Q2.6/ ? $mappings_24_26{$_} || $_ : $_ } @_;
+    my ($modname) = @_;
+    c::kernel_version() =~ /^\Q2.6/ && $mappings_24_26{$modname} || $modname;
 }
 sub mapping_26_24 {
     my ($modname) = @_;
-    if (c::kernel_version() =~ /^\Q2.6/) {
-        if ($modname eq 'uhci-hcd') {
-            return 'usb-uhci';
-        } else {
-            return $mappings_26_24{$modname} || $modname;
-        }
-    }
-    $modname;
+    c::kernel_version() =~ /^\Q2.6/ && $mappings_26_24{$modname} || $modname;
 }
 
 #-###############################################################################
