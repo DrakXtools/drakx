@@ -315,6 +315,11 @@ sub afterInstallPackages($) {
 
     return if $::g_auto_install;
 
+    die _("Some important packages didn't get installed properly.
+Either your cdrom drive or your cdrom is defective.
+Check the cdrom on an installed computer using \"rpm -qpl Mandrake/RPMS/*.rpm\"
+") if grep { m|read failed: Input/output error| } cat_("$o->{prefix}/root/install.log");
+
     -x "$o->{prefix}/usr/bin/dumpkeys" or $::testing or die 
 "Some important packages didn't get installed properly.
 
