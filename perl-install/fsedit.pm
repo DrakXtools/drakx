@@ -221,17 +221,19 @@ sub hds {
 	      foreach partition_table::get_normal_parts($hd);
 	}
 
+	my @parts = partition_table::get_normal_parts($hd);
+
 	# special case for Various type
-	$_->{pt_type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{pt_type} == 0x100 } partition_table::get_normal_parts($hd);
+	$_->{pt_type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{pt_type} == 0x100 } @parts;
 
 	#- special case for type overloading (eg: reiserfs is 0x183)
-	foreach (grep { isExt2($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } partition_table::get_normal_parts($hd)) {
+	foreach (grep { isExt2($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } @parts) {
 	    my $wanted_pt_type = $_->{pt_type} == 0x17 ? 0x7 : $_->{pt_type};
 	    my $pt_type = typeOfPart($_->{device});
 	    $_->{pt_type} = $pt_type if ($pt_type & 0xff) == $wanted_pt_type || $pt_type && $hd->isa('partition_table::gpt');
 	}
 	
-	foreach (partition_table::get_normal_parts($hd)) {
+	foreach (@parts) {
 	    my $label =
 	      member(type2fs($_), qw(ext2 ext3)) ?
 		c::get_ext2_label(devices::make($_->{device})) :
@@ -240,7 +242,7 @@ sub hds {
 	}
 
 	if ($hd->{usb_media_type}) {
-	    $_->{is_removable} = 1 foreach partition_table::get_normal_parts($hd);
+	    $_->{is_removable} = 1 foreach @parts;
 	}
 
 	push @hds, $hd;
