@@ -42,6 +42,11 @@ sub raw {
     my ($options, $name, @args) = @_;
     my $root = $options->{root} || '';
     my $str = ref($name) ? $name->[0] : $name;
+
+    my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);
+    ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
+    ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
+
     log::l("running: $str @args" . ($root ? " with root $root" : ""));
 
     return 1 if $root && $<;
@@ -51,11 +56,6 @@ sub raw {
 	require install_any;
 	install_any::check_prog(ref($name) ? $name->[0] : $name);
     }
-
-
-    my ($stdout_raw, $stdout_mode, $stderr_raw, $stderr_mode);
-    ($stdout_mode, $stdout_raw, @args) = @args if $args[0] =~ /^>>?$/;
-    ($stderr_mode, $stderr_raw, @args) = @args if $args[0] =~ /^2>>?$/;
     
     $ENV{HOME} || $::isInstall or $ENV{HOME} = '/root';
     my $stdout = $stdout_raw && (ref($stdout_raw) ? "$ENV{HOME}/tmp/.drakx-stdout.$$" : "$root$stdout_raw");
