@@ -1118,7 +1118,10 @@ N("Last but not least you can also type in your DNS server IP addresses."),
                    
                    zeroconf => 
                    {
-                    name => N("Enter a Zeroconf host name which will be the one that your machine will get back to other machines on the network:"),
+                    name => N("If desired, enter a Zeroconf hostname.
+This is the name your machine will use to advertise any of
+its shared resources that are not managed by the network.
+It is not necessary on most networks."),
                     data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
                     complete => sub {
                         if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
