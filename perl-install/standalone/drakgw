@@ -178,22 +178,19 @@ my $interface;
 if ($#all_cards == -1)
 {
     $in->ask_warn(_("No network adapter on your system!"), 
-		  _("No ethernet network adapter is currently configured on your ".
-		    "system. Please run the hardware configuration tool."));
+		  _("No ethernet network adapter is currently configured on your system. Please run the hardware configuration tool."));
     $in->exit(0);
 }
 elsif ($#all_cards == 0)
 {
     $interface = $all_cards[0];
     $in->ask_okcancel(_("Network interface"),
-		      _("There is only one configured network adapter on your system:\n\n$interface\n\n".
-			"Would you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
+		      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
 }
 else
 {
     $interface = $in->ask_from_list(_("Choose the network interface"),
-				    _("Please choose what network adapter will be connected to your\n".
-				      "Local Area Network."),
+				    _("Please choose what network adapter will be connected\nto your Local Area Network."),
 				    \@all_cards,
 				    );
     defined $interface or $in->exit(0);
