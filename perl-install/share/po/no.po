@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-no\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-03-05 22:11+0100\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-06 20:59+0100\n"
 "Last-Translator: Per Øyvind Karlsen <peroyvind@sintrax.net>\n"
 "Language-Team: Norsk Bokmål <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -1448,6 +1448,29 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\")."
 msgstr ""
+"LILO og grub er oppstartslastere for GNU/Linux. Vanligvis er dette trinnet\n"
+"helt automatisk. DrakX vil analysere oppstartssektoren på harddisken og\n"
+"bli satt opp ut fra det som finnes der.\n"
+"\n"
+" * Hvis en oppstartssektor for Windows blir funnet, vil den erstatte denne "
+"med\n"
+"en grub eller LILO oppstartsektor. På denne måten kan du laste enten\n"
+"GNU/Linux eller et annet operativsystem.\n"
+"\n"
+" * Hvis en oppstartsektor for grub eller LILO blir funnet, vil den bli "
+"erstattet\n"
+"med en ny.\n"
+"\n"
+"Dersom det ikke er mulig å avgjøre dette automatisk, vil DrakX spørre deg "
+"hvor\n"
+"oppstartslasteren skal installeres.\n"
+"\n"
+"\"Oppstartsenhet\": I de fleste tilfeller vli du ikke ønske å endre på\n"
+"standardvalget (\"Første sektor av harddisk (MBR)\"), men hvis du "
+"foretrekker\n"
+"det, kan oppstartslasteren installeres på en annen harddisk, eller til og "
+"med\n"
+"på en diskett (\"På diskett\"). "
 
 #: ../../help.pm:1
 #, c-format
@@ -1769,6 +1792,18 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
+"Avhengig av standardspråket du har valgt, vil DrakX automatisk velge\n"
+"et tastaturoppsett. I enkelte tilfeller kan det være at du ikke har et \n"
+"tastatur som korresponderer med det språket du har valgt som standard.\n"
+"For eksempel, dersom du er en engelsktalende sveistsisk person, kan\n"
+"det være at du har et sveitsisk tastatur. I slike tilfeller vil dette\n"
+"installasjonstrinnet la deg velge et passende tastatur fra en liste.\n"
+"\n"
+"Klikk på \"Mer\" knappen for å få en liste over støttede tastatur.\n"
+"\n"
+"HVis du velger et tastatur som ikke er basert på det latinske alfabetet,\n"
+"vil den neste dialogen tillate at du setter opp en tastekombinasjon\n"
+"som vil bytte mellom latin og ikke-latinsk tastaturoppsett."
 
 #: ../../help.pm:1
 #, c-format
@@ -1794,6 +1829,29 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Dette trinnet blir bare aktivert dersom det blir funnet en eksisterende\n"
+"GNU/Linux partisjon på maskinen din.\n"
+"\n"
+"DrakX trenger å vite om du vil utføre en ny installasjon eller en "
+"oppgradering\n"
+"av et eksisterende Mandrake Linux system.\n"
+"\n"
+" * \"Installer\": Dette vil stort sett slette hele det gamle systemet. "
+"Dersom du\n"
+"ønsker å forandre hvordan harddiskene blir partisjonert, eller forandre på\n"
+"filsystemene, bør du velge dette. Avhengig av hvordan du partisjonerer kan\n"
+"eventuelt noen av de gamle dataene beholdes. \n"
+"\n"
+" * \"Oppgrader\": Denne installasjonsklassen lar deg oppgradere pakkene som\n"
+"er installert på ditt nåværende Mandrake Linux system. Dine nåværende\n"
+"partisjoner og brukerdata blir ikke berørt. De fleste andre "
+"konfigurasjonstrinn\n"
+"forblir tilgjengelige, i likhet med en standard installasjon.\n"
+"\n"
+"\"Oppgrader\" valget skal fungere på Mandrake Linux systemer som kjører\n"
+"versjon 8.1 eller nyere. Oppgradering av versjoner tidligere enn 8.1 er "
+"ikke\n"
+"anbefalt. "
 
 #: ../../help.pm:1
 #, c-format
@@ -1803,6 +1861,11 @@ msgid ""
 "country is not in the first list shown, click the \"More\" button to get\n"
 "the complete country list."
 msgstr ""
+"\"Land\": Sjekk ditt valg av land. Dersom du ikke befinner deg i dette "
+"landet,\n"
+"Klikk på \"Konfigurer\" knappen og velg et annet. Dersom ditt lanf ikke er "
+"i\n"
+"den første lista, klikk \"Mer\" knappen for å få den fullstendige lista. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2064,6 +2127,18 @@ msgid ""
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
 "the selected package(s), or \"Cancel\" to abort."
 msgstr ""
+"Når du installerer Mandrake Linux, er det sannsynlig at enkelte pakker\n"
+"er blitt oppdatert siden denne versjonen ble sluppet. noen feil kan ha\n"
+"blitt fikset, eller sikkerhetsproblemer løst. For at du skal få utnytte\n"
+"disse forbedringene kan du nå laste dem ned fra internett. Velg \"Ja\"\n"
+"dersom du har en fungerende internettforbindelse, eller \"Nei\" dersom\n"
+"du heller vil installere oppdateringene senere.\n"
+"\n"
+"Når du velger \"Ja\" får du en liste over tjenere som oppdateringene kan\n"
+"lastes ned fra. Velg den som er nærmest deg. Et pakkevalgstre vil da \n"
+"dukke opp. Gå gjennom valgene, og klikk \"Installer\" for å hente og\n"
+"installere de valgte pakkene. Du kan også klikke \"Avbryt\" for å avbryte\n"
+"dette trinnet. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2093,6 +2168,27 @@ msgid ""
 "Click on \"Advanced\" if you wish to select partitions that will be checked\n"
 "for bad blocks on the disk."
 msgstr ""
+"Nye partisjoner må formateres før de kan brukes (formatering betyr\n"
+"å lage et filsystem).\n"
+"\n"
+"På dette tidspunktet kan dte hende du ønsker å reformatere enkelte\n"
+"eksisterende partisjoner for å slette data på disse. Hvis du ønsker å\n"
+"gjøre dette, kan du velge disse partisjonene også.\n"
+"\n"
+"Legg merke til at det ikke er nødvendig å formatere alle eksisterende\n"
+"partisjoner. Du må reformatere partisjonene som skal inneholde\n"
+"operativsystemet (som \"(\", \"/usr\" eller \"/var\"), men du trenger ikke\n"
+"reformatere partisjoner som inneholder data du vil beholde\n"
+"(typisk \"/home\").\n"
+"\n"
+"Vær forsiktig når du velger partisjoner. Etter formatering vil alle data\n"
+"på de valgte partisjonene bli slettet uten at du kan hente dataene\n"
+"tilbake.\n"
+"\n"
+"Klikk \"Neste ->\" når du er klar til å formatere partisjonene.\n"
+"\n"
+"Klikk \"<- Forrige\" om du vil velge andre partisjoner for din installasjon\n"
+"av Mandrake Linux. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2128,6 +2224,41 @@ msgid ""
 "(*) You need a FAT-formatted floppy (to create one under GNU/Linux, type\n"
 "\"mformat a:\")"
 msgstr ""
+"Sånn! Installasjonen er nå ferdig og ditt flunkende nye GNU/Linux system\n"
+"er nå klart til bruk. Klikk \"Neste\" for å restarte systemet. Det første du "
+"vil\n"
+"se etter at maskinen er ferdig med oppstartstesteneer oppstartslasterens\n"
+"meny, som lar deg velge hvilket operativsystem du vil starte.\n"
+"\n"
+"\"Avansert\" knappen vil vise to nye knapper:\n"
+"\n"
+" * \"Lag autoinstallasjonsdiskett\": For å lage en installasjonsdiskett som\n"
+"automatisk vil utføre en installasjon uten operatørhjelp, helt lik den\n"
+"installasjonen du nettopp har utført.\n"
+"\n"
+"   To knapper vil være tilgjengelige etter at denne trykkes:\n"
+"\n"
+"    * \"Replay\": Dette er en delvis automatisert installasjon. "
+"Partisjonering er\n"
+"den eneste interaktive prosedyren.\n"
+"\n"
+"    * \"Automatisert\": Dette er en fullstendig automatisert installasjon.\n"
+"Harddisken vil bli helt overskrevet, og alle data vil bli overskrevet.\n"
+"\n"
+"   Denne funksjonen er nyttig når du skal installere et antall identiske "
+"maskiner.\n"
+"Se Auto-installasjonsavsnittet på våre vevsider for mer informasjon.\n"
+"\n"
+" * \"Lagre pakkevalg\" (*): Lagrer en liste over pakkene som er blitt "
+"installert\n"
+"under denne installasjonen. For å benytte denne lista under en annen\n"
+"installasjon, sett inn disketten og start installasjonen. Når "
+"kommandopromptet\n"
+"kommer opp, trykk på F1-tasten og skriv: \"linux defcfg=\"floppy\" <<\n"
+"\n"
+"(*) Du trenger en FAT-formatert diskett (for å lage en under GNU/Linux, "
+"skriv\n"
+"\"mformat a:\". "
 
 #: ../../help.pm:1
 #, c-format
@@ -2204,6 +2335,11 @@ msgid ""
 "act as a server, or if you were not successful in getting the display\n"
 "configured."
 msgstr ""
+"Til slutt vil du bli spurt om du ønsker å starte det grafiske grensesnittet\n"
+"når maskinen starter. Dette spørsmålet vil bli stilt selv om du velger å\n"
+"ikke teste konfigurasjonen til det grafiske grensesnittet. Du vil selvsagt\n"
+"ønske å svare \"Nei\" dersom maskinen skal fungere som tjener, eller\n"
+"hvis du ikke kunne konfigurere det grafiske grensesnittet."
 
 #: ../../help.pm:1
 #, c-format
@@ -2212,6 +2348,10 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"I tilfelle det er flere tjenere tilgjengelig for ditt kort, enten med eller "
+"uten\n"
+"3D-akselerasjon, blir du så spurt om å velge den tjeneren som best\n"
+"passer dine behov."
 
 #: ../../help.pm:1
 #, c-format
@@ -2223,6 +2363,12 @@ msgid ""
 "able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Oppløsning\n"
+"\n"
+"   Du kan her velge oppløsning og fargedybde blant de som er tilgjengelige\n"
+"for din maskinvare. Velg den du syns best passer til dine behov (Du kan\n"
+"forandre dette etter installasjon). En prøve av den valgte konfigurasjonen\n"
+"er vist i skjermen. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2233,6 +2379,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Skjerm\n"
+"\n"
+"   Installasjonsrutinen kan vanligvis automatisk detektere og sette opp\n"
+"skjermen som er koblet til maskinen din. Dersom dette ikke fungerer, kan\n"
+"du velge fra denne lista hvilken skjerm du har. "
 
 #: ../../help.pm:1
 #, c-format
@@ -2289,6 +2440,65 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"X (X Window System) er hjertet i GNU/Linux sitt grafiske grensesnitt som\n"
+"alle de grafiske miljøene (KDE, GNOME Afterstep, Windowmaker etc)\n"
+"som følger med GNU/Linux er avhengige av.\n"
+"\n"
+"Du vil få en liste med forkjellige parameter som kan forandres for å få et\n"
+"optimalt grafisk grensesnitt.\n"
+"\n"
+"Skjermkort\n"
+"   Installasjonsrutinen kan vanligvis detektere og konfigurere skjermkortet\n"
+"som er installert i din maskin. Dersom dette ikke er mulig, kan du velge \n"
+"kortet fra denne listen manuelt.\n"
+"\n"
+"   I tilfelle det er flere tjenere tilgjengelig for ditt kort, med eller "
+"uten\n"
+"3D-akselerasjon, vil du så kunne velge den tjeneren som best passer\n"
+"dine behov.\n"
+"\n"
+"\n"
+"\n"
+"Skjerm\n"
+"\n"
+"Installasjonsrutinen kan normalt detektere og konfigurere skjermen som\n"
+"er koblet til skjermkortet. Hvis dette ikke er mulig, kan du velge fra "
+"listen\n"
+"hvilken skjerm du har.\n"
+"\n"
+"\n"
+"\n"
+"Oppløsning\n"
+"\n"
+"  Her kan du velge hvilke oppløsninger og fargedybder du vil bruke fra de "
+"som\n"
+"er tilgjengelige for din maskinvare. Velg den kombinasjonen som best passer\n"
+"dine behov (Du kan forandre dette etter installasjon). En prøve av den "
+"valgte\n"
+"konfigurasjonen vil vises i skjermen,\n"
+"\n"
+"\n"
+"\n"
+"   Systemet vil forsøke å starte det grafiske grensesnittet i den valgte\n"
+"oppløsningen. Dersom du kan se meldingen som vises under teste og \n"
+"svarer \"Ja\" Vil DrakX fortsette til neste trinn. Hvis du ikke kan se "
+"meldingen\n"
+"betyr det at en del av konfigurasjonen er gal, og testen vil avsluttes etter "
+"12\n"
+"sekunder. Du vil da bli tatt tilbake til menyen. Forandre innstillingene til "
+"du får\n"
+"et oppsett som fungerer. \n"
+"\n"
+"\n"
+"\n"
+"Valg\n"
+"\n"
+"   Her kan du velge om du vil at maskinen automatisk skal starte det "
+"grafiske\n"
+"grensesnittet når maskinen starter. Du vil selvsagt ikke ønske å gjøre "
+"dette\n"
+"dersom maskinen skal fungere som en tjener, eller om du ikke klarte å\n"
+"konfigurere det grafiske grensesnittet."
 
 #: ../../help.pm:1
 #, c-format
@@ -2456,7 +2666,7 @@ msgstr ""
 "diskett."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2510,55 +2720,68 @@ msgid ""
 "updating an existing system."
 msgstr ""
 "Det er nå på tide å spesifisere hvilke programmer du ønsker å installere på\n"
-"systemet ditt. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, og "
-"det er ikke meningen at du skal kunne navnet på samtlige.\n"
-"\n"
-"Hvis du utfører en standard installasjon fra CDROM, vil du først bli bedt "
-"om\n"
-"å spesifisere de CDene du har for øyeblikket (kun i ekspertmodus). Sjekk "
-"CDene\n"
-"og velg de bokser som tilsvarer de CDer som du har klare for installasjon.\n"
-"Klikk \"OK\" når du er klar til å fortsette.\n"
+"systemet ditt. Det er tusenvis av pakker tilgjengelig for Mandrake Linux, "
+"for\n"
+"å gjøre det enklere å håndtere pakkene så har de blitt plassert i grupper "
+"med\n"
+"lignende applikasjoner.\n"
 "\n"
 "Pakkene er delt inn i grupper som korresponderer til typisk bruk av din "
 "maskin\n"
-"Gruppene er igjen delt inn i fire seksjoner:\n"
+"Mandrake Linux har fire forhåndsdefinerte installasjoner tilgjengelige. Du "
+"kan\n"
+"tenke på disse installasjonsklassene som kontainere for forskjellige "
+"pakker.\n"
+"Du kan mikse og matche applikasjoner fra forskjellige kontainere, så en\n"
+"``Arbeidsstasjon''-installasjon kan fortsatt ha applikasjoner fra\n"
+"``Utvikling''-kontainer installert.\n"
 "\n"
 " * \"Arbeidsstasjon\": hvis du planlagger å bruke din maskin som "
 "arbeidsstasjon, velg\n"
-"en eller flere av de tilhørende grupper.\n"
+"en eller flere av applikasjonene som er i arbeidsstasjon-kontaineren.\n"
 "\n"
-" * \"Utvikling\": hvis maskinen skal brukes til programmering, velg ønskede "
-"grupper.\n"
+" * \"Utvikling\": hvis maskinen skal brukes til programmering, velg de "
+"ønskede\n"
+"pakkene fra kontaineren.\n"
 "\n"
-" * \"Server\": Hvis maskinen skal brukes som server, vil du kunne velge\n"
-"hvilke av de mest vanlige tjenester som du ønsker installert på\n"
-"maskinen.\n"
+" * \"Server\": hvis maskinen skal brukes som server, velg vilke av de mest "
+"vanlige\n"
+"tjenester som du ønsker installert på din maskin.\n"
 "\n"
-" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønskede\n"
-"grafiske miljø. Du må velge minst ett hvis du ønsker å ha en grafisk\n"
-"arbeidsstasjon!\n"
+" * \"Grafisk miljø\": til slutt, det er her du kan velge ditt ønskede "
+"grafiske miljø. Du\n"
+"må velge minst ett hvis du ønsker å ha ett grafisk grensesnitt "
+"tilgjengelig.\n"
 "\n"
 "Ved å flytte musepekeren over et gruppenavn vil en kort forklarende tekst\n"
 "dukke opp over den gruppen. Hvis du ønsker å ikke velge noen grupper under\n"
 "installasjon (og du ikke oppgraderer), så vil en dialog spørre deg om hva\n"
 "slags minimal installasjon du ønsker:\n"
 "\n"
-"* \"Med X\" For en minste installasjon med X-tjener inkludert;\n"
+"* \"Med X\": installer så minimalt antall pakker som mulig for å ha et "
+"fungerende\n"
+"grafisk skrivebrod.\n"
 "\n"
-" * \"With basic documentation\" Installerer basesystemet pluss standard\n"
+" * \"Med grunnleggende dokumentasjon\": installerer basesystemet pluss "
+"standard\n"
 "verktøy og dokumentasjon for disse. Denne installasjonen passer til å sette\n"
 "opp en server.\n"
 "\n"
-" * \"Truly minimal install\" vil installere minimum som er nødvendig for å\n"
-"Linux systemet opp og gå, kun kommandolinje. Denne installasjonen er på\n"
-"rundt 65Mb.\n"
+" * \"Virkelig minimal installasjon\" vil installere det absolutte minimum "
+"som er\n"
+"nødvendig for å få Linux systemet opp og gå. Med denne installasjonen så vil "
+"du\n"
+"kun ha et kommandolinje-grensesnitt. Denne installasjonen er på 65 "
+"megabyte.\n"
 "\n"
-"Du kan merke av \"Individual package selection\" boksen, som er nyttig\n"
-"hvis du kjenner til pakkene som blir tilbydt eller hvis du ønsker å ha\n"
-"total kontroll over hva som vil bli installert.\n"
+"Du kan sjekke av \"Individuelt pakkevalg\" boksen, som er nyttig hvis du "
+"kjenner\n"
+"til pakkene som blir tilbydt eller hvis du ønsker å ha total kontroll over "
+"hva som\n"
+"vil bli installert.\n"
 "\n"
-"Hvis du startet installasjonen i \"Upgrade\" modus, kan du velge vekk alle\n"
+"Hvis du startet installasjonen i \"Oppgrader\"-modus, kan du velge vekk "
+"alle\n"
 "grupper for å unngå å installere noen nye pakker. Dette er nyttig for\n"
 "reparasjon eller oppdatering av et eksisterende system."
 
@@ -4403,6 +4626,11 @@ msgstr "Port mus"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Vennligst velg din musetype."
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "Krypteringsnøkkel"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9242,11 +9470,6 @@ msgstr "Konfigurerer nettverk"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "ingen nettverkskort funnet"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
@@ -12887,13 +13110,13 @@ msgstr "Velkommen til Crackers"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Velkommen til åpen kilde verdenen"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -12904,190 +13127,150 @@ msgstr "Takk for at du valgte Mandrake Linux 9.1"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
 msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Bli involvert i verdenen av Gratis Programvare"
+msgid "Build the future of Linux!"
+msgstr ""
 
-#: ../../share/advertising/03-internet.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Få tak i det meste fra internett"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
 
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Push multimedia to its limits!"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr ""
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
 
-#: ../../share/advertising/05-games.pl:1
-#, c-format
-msgid "Games"
-msgstr "Spill"
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Mandrake Terminalserver konfigurasjon"
 
-#: ../../share/advertising/06-mcc.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "Mandrake Control Center"
-msgstr "Mandrake kontrollpanel"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Brukergrensesnitt"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Turn your computer into a reliable server"
 msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Utvikling forenklet"
-
-#: ../../share/advertising/09-server.pl:1
-#, c-format
-msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
-msgstr ""
-
-#: ../../share/advertising/09-server.pl:1
-#, c-format
-msgid "Turn your machine into a reliable server"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr ""
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr ""
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
-msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
-msgstr ""
-
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
-msgid "Strategic partners"
-msgstr ""
-
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
+msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+msgid "Optimize your security by using Mandrake Linux"
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr ""
+
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid ""
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
+msgstr ""
+
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
+
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13095,50 +13278,34 @@ msgid ""
 "technical support website:"
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Bli en MandrakeExpert"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Bedrift"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr ""
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -15465,6 +15632,11 @@ msgstr "Veiviseren for første kjøring"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Mandrake kontrollpanel"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrake bugrapporterings verktøy"
 
@@ -15928,7 +16100,7 @@ msgstr "StarOffice"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript"
-msgstr ""
+msgstr "Ghostscript"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15987,12 +16159,12 @@ msgstr "Avanserte valg"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Uninstall Fonts"
-msgstr ""
+msgstr "Avinstaller skrifttyper"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Get Windows Fonts"
-msgstr ""
+msgstr "Få tak i Windows skrifttyper"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16017,7 +16189,7 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Restart XFS"
-msgstr ""
+msgstr "Restart XFS"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16027,37 +16199,37 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "type1inst building"
-msgstr ""
+msgstr "type1inst bygger"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "pfm fonts conversion"
-msgstr ""
+msgstr "pfm skrifttyper konvertering"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "ttf fonts conversion"
-msgstr ""
+msgstr "ttf skrifttype konvertering"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Ghostscript referencing"
-msgstr ""
+msgstr "Ghostscript referering"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Fonts conversion"
-msgstr ""
+msgstr "Skrifttype konvertering"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "True Type install done"
-msgstr ""
+msgstr "True Type installasjon ferdig"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "please wait during ttmkfdir..."
-msgstr ""
+msgstr "vennligst vent mens ttmkfdir..."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16072,22 +16244,22 @@ msgstr "Skrifttype-kopiering"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search for fonts in installed list"
-msgstr ""
+msgstr "Søk etter skrifttyper i listen over installerte"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font.\n"
-msgstr ""
+msgstr "kunne ikke finne noen skrifttyper.\n"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Reselect correct fonts"
-msgstr ""
+msgstr "Velg korrekte skrifttyper på nytt"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "could not find any font in your mounted partitions"
-msgstr ""
+msgstr "kunne ikke finne noen skrifttyper på dine monterte partisjoner"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16102,12 +16274,12 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Unselect fonts installed"
-msgstr ""
+msgstr "Velg vekk skrifttyper som er installert"
 
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search installed fonts"
-msgstr ""
+msgstr "Søk igjennom installerte skrifttyper"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16178,32 +16350,32 @@ msgstr "Mulig LAN-adresse konflikt funnet i konfigurasjonen til %s!\n"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The Local Network did not finish with `.0', bailing out."
-msgstr ""
+msgstr "Det lokale nettverket sluttet ikke med `.0', hopper ut."
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Re-configure interface and DHCP server"
-msgstr ""
+msgstr "Omkonfigurer grensesnitt og DHCP-tjener"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The maximum lease (in seconds)"
-msgstr ""
+msgstr "Maksimum leieavtale (i sekunder)"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
-msgstr ""
+msgstr "Standard leieavtal (i sekunder)"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP end range"
-msgstr ""
+msgstr "DHCP slutt rekken"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP start range"
-msgstr ""
+msgstr "DHCP start rekken"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16229,6 +16401,11 @@ msgid ""
 "If you don't know the meaning of an option, simply leave it as it is.\n"
 "\n"
 msgstr ""
+"DHCP-tjener konfigurasjon.\n"
+"\n"
+"Her kan du velge forskjellige valg for DHCP-tjener konfigurasjonen.\n"
+"HVis du ikke vet hva en opsjon gjør, bare la den være som den er.\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16250,6 +16427,19 @@ msgid ""
 "for you.\n"
 "\n"
 msgstr ""
+"Jeg kan beholde den gjeldende konfigurasjonen og anta at du allerede har "
+"satt opp DHCP-tjener; i det tilfellet så sjekk at jeg leser av riktig "
+"nettverket som du\n"
+"bruker som ditt lokale; jeg vil ikke omkonfigurere det og jeg vil ikke røre "
+"ditt DHCP-tjener konfigurasjon.\n"
+"\n"
+"Standard DNS-serveren som blir satt opp er den hurtiglagrende navneserveren "
+"konfigurerert for din brannmur. Du kan feks. bytte den med din egen ISP sin "
+"DNS IP.\n"
+"\t\t      \n"
+"Ellers så kan jeg omkonfigurere ditt grensesnitt og (om)konfigurere en DHCP-"
+"tjenerfor deg.\n"
+"\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16261,6 +16451,12 @@ msgid ""
 "IP attribution: %s\n"
 "Driver: %s"
 msgstr ""
+"Gjeldende konfigurasjon av `%s':\n"
+"\n"
+"Nettverk: %s\n"
+"IP-adresse: %s\n"
+"IP-attributer: %s\n"
+"Driver: %s"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16275,7 +16471,7 @@ msgstr "Vis gjeldende grensesnittkonfigurasjon"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "No (experts only)"
-msgstr ""
+msgstr "Nei (bare eksperter)"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16291,6 +16487,11 @@ msgid ""
 "\n"
 "You can do it manually but you need to know what you're doing."
 msgstr ""
+"Advarsel, nettverkadapteren (%s) er allerede konfigurert.\n"
+"\n"
+"Vil du rekonfigurere den automatisk?\n"
+"\n"
+"Du kan gjøre manuelt, men da må du vite hva du driver med."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16365,6 +16566,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Vennligst skriv inn navnet på grensesnittet som er koblet til internett.\n"
+"\n"
+"Eksempler:\n"
+"\t\tppp+ for modem eller DSL-tilkoblinger, \n"
+"\t\teth0 eller eth1 for kabeltilkobling, \n"
+"\t\tippp+ for isdntilkobling.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16474,7 +16681,7 @@ msgstr "Deling av Internett tilkobling er slått på"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
-msgstr ""
+msgstr "Beklager, vi støtter bare 2.4-kjerner."
 
 #: ../../standalone/drakhelp:1
 #, c-format
@@ -16488,7 +16695,7 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Path"
-msgstr ""
+msgstr "Filbane"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16508,7 +16715,7 @@ msgstr "Filbane valg"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "when checked, owner and group won't be changed"
-msgstr ""
+msgstr "når sjekket, så vil ikke eier og gruppe bli forandret"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16526,21 +16733,23 @@ msgid ""
 "Used for directory:\n"
 " only owner of directory or file in this directory can delete it"
 msgstr ""
+"Brukt for katalog:\n"
+" bare eiere av katalogen eller filen i denne katalogen kan slette den"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-GID"
-msgstr ""
+msgstr "Set-GID"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Set-UID"
-msgstr ""
+msgstr "Set-UID"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "sticky-bit"
-msgstr ""
+msgstr "sticky-bit"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16560,17 +16769,17 @@ msgstr "Gjeldende bruker"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "browse"
-msgstr ""
+msgstr "utforsk"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Edit current rule"
-msgstr ""
+msgstr "Rediger gjeldende regel"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "edit"
-msgstr ""
+msgstr "rediger"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16595,7 +16804,7 @@ msgstr "legg til en regel"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Move selected rule down one level"
-msgstr ""
+msgstr "Velg valgte regel ned et nivå"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16605,17 +16814,17 @@ msgstr "Ned"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Move selected rule up one level"
-msgstr ""
+msgstr "Velg valgte regel opp et nivå"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Up"
-msgstr ""
+msgstr "Opp"
 
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "select perm file to see/edit"
-msgstr ""
+msgstr "velg rettighetsfil for å se/redigere"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16624,6 +16833,9 @@ msgid ""
 "and groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
+"Drakperm brukes for å se filer for å fikse rettigheter, eiere, og grupper "
+"via msec.\n"
+"Du kan også redigere dine egne regler som vil overskrive standardregler."
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -16643,7 +16855,7 @@ msgstr "bruker"
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "path"
-msgstr ""
+msgstr "filbane"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16783,7 +16995,7 @@ msgstr "Vennligst vent, setter sikkerhetsnivå..."
 #: ../../standalone/draksec:1
 #, c-format
 msgid "Periodic Checks"
-msgstr ""
+msgstr "Periodiske sjekker"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16801,6 +17013,8 @@ msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need an explanation, look at the help tooltip.\n"
 msgstr ""
+"De følgende opsjonene kan bli satt for å skreddersy din egen\n"
+"systemsikkerhet. Hvis du trenger en forklaring, se på hjelpetipset.\n"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -16847,6 +17061,27 @@ msgid ""
 "be sent to this user (username or\n"
 "            email)"
 msgstr ""
+"Standard: Dette standdardsikkerhetsnivået er anbefalt for maskiner som "
+"vilbli brukt for å koble\n"
+"               til internett som en klient.\n"
+"\n"
+"Høyt:       Det er allerede noen restriksjoner, og flere automatiske "
+"sjekkerblir kjørt hver natt.\n"
+"\n"
+"Høyere:    Sikkerheten er nå høy nok for å kunne bruke systemet som en "
+"serversom kan motta\n"
+"              tilkoblinger fra mange klienter. Hvis maskinen bare er "
+"enklient på internett, så\n"
+"           du velge et lavere sikkerhetsnivå.\n"
+"\n"
+"Paranoid:  Dette er lignende det forrige nivået, men systemet er "
+"fulllstendig stengt og sikkerhetsfinessene\n"
+"                er på deres maksimale\n"
+"\n"
+"Sikkerhetsadministrator:\n"
+"               Hvis 'Sikkerhetsadvarsler' opsjonen er satt, så vil "
+"sikkerhetsadvarsler bli sendt til denne brukeren (brukernavn eller\n"
+"            epost)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -16857,6 +17092,11 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig "
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Merk: hvis du har et ISA PnP lydkort, så må du bruke sndconfig-programmet. "
+"Bare skriv \"sndconfig\" i et konsoll."
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -16870,6 +17110,14 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
+"Inget lydkort har blitt oppdaget på din maskin. Vennligst sjekk at et\n"
+"Linux-støttet lydkort er riktig installert.\n"
+"\n"
+"\n"
+"Du kan besøke vår maskinvaredatabase på:\n"
+"\n"
+"\n"
+"http://www.linux-mandrake.com/en/hardware.php3"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -16879,7 +17127,7 @@ msgstr "Inget lydkort oppdaget!"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "%s BootSplash (%s) preview"
-msgstr ""
+msgstr "%s BootSplash (%s) forhåndsvisning"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16899,16 +17147,21 @@ msgstr "Framgangsviser fargevalg"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "This theme does not yet have a bootsplash in %s !"
-msgstr ""
+msgstr "Dette temaet har ikke fått noen bootsplash i %s ennå !"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "saving Bootsplash theme..."
-msgstr ""
+msgstr "lagrer bootsplash-tema..."
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "velg bildefil"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "velg bildefil"
 
 #: ../../standalone/draksplash:1
@@ -16919,12 +17172,12 @@ msgstr "Konfigurer bootsplash bilde"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Make kernel message quiet by default"
-msgstr ""
+msgstr "Gjør kjerne-meldinger stille som standard"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Display logo on Console"
-msgstr ""
+msgstr "Vis logo på konsolet"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16944,17 +17197,17 @@ msgstr "Forhåndsvisning"
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "the color of the progress bar"
-msgstr ""
+msgstr "fargen på framgangsbaren"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "the height of the progress bar"
-msgstr ""
+msgstr "høyden på framgangsviseren"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "the width of the progress bar"
-msgstr ""
+msgstr "bredden på framgangsviseren"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16962,6 +17215,8 @@ msgid ""
 "the progress bar y coordinate\n"
 "of its upper left corner"
 msgstr ""
+"framgangsbarens y-koordinat\n"
+"i dens venstre øverste hjørne"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16969,16 +17224,18 @@ msgid ""
 "the progress bar x coordinate\n"
 "of its upper left corner"
 msgstr ""
+"framgangsbarens x-koordinat\n"
+"i dens venstre øverste hjørne"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "text box height"
-msgstr ""
+msgstr "tekstboks høyde"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "text width"
-msgstr ""
+msgstr "tekstbredde"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16986,6 +17243,8 @@ msgid ""
 "y coordinate of text box\n"
 "in number of characters"
 msgstr ""
+"y-koordinat for tekst­-boks\n"
+"i nummer av tegn"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -16993,11 +17252,13 @@ msgid ""
 "x coordinate of text box\n"
 "in number of characters"
 msgstr ""
+"x-koordinat for tekst­-boks\n"
+"i nummer av tegn"
 
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "Browse"
-msgstr ""
+msgstr "Utforsk"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17020,6 +17281,9 @@ msgid ""
 "package 'ImageMagick' is required to be able to complete configuration.\n"
 "Click \"Ok\" to install 'ImageMagick' or \"Cancel\" to quit"
 msgstr ""
+"pakken 'ImageMagick' trengs for å kunne fullføre konfigurasjonen.\n"
+"Klikk \"Ok\" for å installere 'ImageMagick' eller klikk \"Avbryt\" for å "
+"avslutte"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17033,26 +17297,34 @@ msgid ""
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
+"Inget TV-kort har blitt oppdaget på din maskin. Vennligst sjekk at du\n"
+"har et Linux-støttet Video/TV-kort riktig installert.\n"
+"\n"
+"\n"
+"Du kan besøke vår maskinvaredatabase på:\n"
+"\n"
+"\n"
+"http://www.linux-mandrake.com/en/hardware.php3"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "No TV Card detected!"
-msgstr ""
+msgstr "Inget TV-kort oppdaget!"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Now, you can run xawtv (under X Window!) !\n"
-msgstr ""
+msgstr "Nå kan du kjøre xawtv (under X Windows!) !\n"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Have a nice day!"
-msgstr ""
+msgstr "Ha en fin dag!"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "XawTV isn't installed!"
-msgstr ""
+msgstr "XawTV er ikke installert!"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17062,22 +17334,22 @@ msgstr "Det var en feil under søking etter TV-kanaler"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Scanning for TV channels"
-msgstr ""
+msgstr "Søker etter tv-kanaler"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Scanning for TV channels in progress ..."
-msgstr ""
+msgstr "Søk etter tv-kanaler underveis ..."
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Area:"
-msgstr ""
+msgstr "Område:"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "TV norm:"
-msgstr ""
+msgstr "TV standard:"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17085,11 +17357,13 @@ msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
+"Vennligst,\n"
+"skriv inn din tv standard og land"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Australian Optus cable TV"
-msgstr ""
+msgstr "Australsk Optus kabeltv"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17104,27 +17378,27 @@ msgstr "Frankrike [SECAM]"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "East Europe"
-msgstr ""
+msgstr "Øst Europa"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "West Europe"
-msgstr ""
+msgstr "Vest Europa"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "China (broadcast)"
-msgstr ""
+msgstr "Kina (kringkastning)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (cable)"
-msgstr ""
+msgstr "Japan (kabel)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (broadcast)"
-msgstr ""
+msgstr "Japan (kringkastning)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17134,17 +17408,17 @@ msgstr "Kanada (Quebec)"
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable-hrc)"
-msgstr ""
+msgstr "USA (kabel-hrc)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
-msgstr ""
+msgstr "USA (kabel)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (broadcast)"
-msgstr ""
+msgstr "USA (kringkastning)"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17161,6 +17435,16 @@ msgid ""
 "\n"
 "You can install it by typing \"urpmi xawtv\" as root, in a console."
 msgstr ""
+"XawTV er ikke installert!\n"
+"\n"
+"\n"
+"Hvis du har et TV-kort, men DrakX aldri oppdaget det (ingen bttv eller\n"
+"saa7134  modul i \"/etc/modules\") eller ikke isntallerte xawtv, vennligst\n"
+" send resultatet av \"lspcidrak -v -f\" til \"install\\@mandrakesoft.com\"\n"
+"med emnet \"undetected TV card\"(på engelsk).\n"
+"\n"
+"\n"
+"Du kan installere det ved å skrive \"urpmi xawtv\" som root, i et konsoll."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17176,7 +17460,7 @@ msgstr "sekundær"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
-msgstr ""
+msgstr "Klikk på en enhet i det venstre treet for å vise dens informasjon her."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17258,6 +17542,8 @@ msgid ""
 "Once you've selected a device, you'll be able to see the device information "
 "in fields displayed on the right frame (\"Information\")"
 msgstr ""
+"Når du har valg en enhet, så kan du se informasjon om den i feltet i den "
+"høyre rammen (\"Informasjon\")"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17584,12 +17870,12 @@ msgstr "Kommafeil"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
+msgstr "spesielle egenskaper for enheten (brenne mulighet og/eller DVD-støtte)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "Diskkapasitet"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18078,12 +18364,12 @@ msgstr "Leser data fra installerte skrivere..."
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Name/IP address of host:"
-msgstr ""
+msgstr "Navn/IP-adresse på vert"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Denne verten er allerede i listen, den kan ikke bli lagt til igjen.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18099,6 +18385,7 @@ msgstr "Du må spesifisere vertsnavn eller en IP.\n"
 #, c-format
 msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
+"Velg verten som de(n) lokale scanneren(e) skal bli gjort tilgjengelig for:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18128,7 +18415,7 @@ msgstr "Legg til vert"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
+msgstr "Dette er maskinene som scanneren skal kunne bli brukt fra:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18146,16 +18433,18 @@ msgid ""
 "These are the machines on which the locally connected scanner(s) should be "
 "available:"
 msgstr ""
+"Dette er maskiner som de(n) lokalt tilkoblede scanneren(e) skal være "
+"tilgjengelig for:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Bruk scannere på verter: "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Bruk scannere på fjerne maskiner"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18165,7 +18454,7 @@ msgstr "Scanner deler til verter: "
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
+msgstr "Scannerne på denne maskinen er tilgjengelig for andre maskiner"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18173,6 +18462,8 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
+"Du kan også velge om fjernskannere kan bli gjort tilgjengelige på denne "
+"maskinen."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18180,11 +18471,13 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
+"Her kan du velge om scannerne tilkoblet denne maskinen skal være "
+"tilgjengelige for andre maskiner og for hvilke."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
-msgstr ""
+msgstr "Re-genererer liste over konfigurerte scannere ..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18215,6 +18508,7 @@ msgstr "Søk for nye scannere"
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
 msgstr ""
+"Det ble ikke funnet noen scannere som er tilgjengelig på ditt system.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18276,7 +18570,7 @@ msgstr "Oppdag automisk tilgjengelige porter"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
-msgstr ""
+msgstr "(Merk: Parallellporter kan ikke bli automatisk oppdaget)"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18311,7 +18605,7 @@ msgstr "Port: %s"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18321,7 +18615,7 @@ msgstr "Oppdaget modell %s"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid " ("
-msgstr ""
+msgstr " ("
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18419,7 +18713,7 @@ msgstr "Vitenskaplig arbeidsstasjon"
 
 #: ../../share/compssUsers:999
 msgid "Scientific applications such as gnuplot"
-msgstr ""
+msgstr "Vitenskapsapplikasjoner som gnuplot"
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
@@ -18545,6 +18839,10 @@ msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Sett med verktøy for e-post, nyheter, web, filoverføring og chat"
 
 #: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Spill"
+
+#: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
 msgstr "Multimedia - Grafikk"
 
@@ -18599,6 +18897,18 @@ msgstr "Personlig økonomi"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmer for å håndtere dine finanser, så som gnucash"
+
+#~ msgid "no network card found"
+#~ msgstr "ingen nettverkskort funnet"
+
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Få tak i det meste fra internett"
+
+#~ msgid "User interfaces"
+#~ msgstr "Brukergrensesnitt"
+
+#~ msgid "Development simplified"
+#~ msgstr "Utvikling forenklet"
 
 #~ msgid ""
 #~ "As a review, DrakX will present a summary of various information it has\n"

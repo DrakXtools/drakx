@@ -1,4 +1,4 @@
-# Russian translation of drakbootdisk messages
+# Russian translation of drakX messages
 # Copyright (C) 2002,2003 Free Software Foundation, Inc.
 # Pavel Maryanov <acid_jack@ukr.net>, 2002
 # Alice Lafox <alice@lafox.com.ua>, 2003
@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-27 22:34+0200\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-04 00:00+0200\n"
 "Last-Translator: Alice Lafox <alice@lafox.com.ua>\n"
 "Language-Team: russian <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr "Нет общего доступа"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "More"
-msgstr "Дополнительно"
+msgstr "Больше"
 
 #: ../../any.pm:1
 #, c-format
@@ -372,7 +372,7 @@ msgstr "Размер initrd"
 #: ../../any.pm:1
 #, c-format
 msgid "Append"
-msgstr "Добавить"
+msgstr "Дополнение"
 
 #: ../../any.pm:1
 #, c-format
@@ -469,7 +469,7 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Give the ram size in MB"
-msgstr "Укажите объем RAM в МБ"
+msgstr "Укажите объем RAM в MB"
 
 #: ../../any.pm:1
 #, c-format
@@ -514,7 +514,7 @@ msgstr "Включить ACPI"
 #: ../../any.pm:1
 #, c-format
 msgid "Delay before booting default image"
-msgstr "Задержка перед загрузкой образа по умолчанию"
+msgstr "Пауза перед загрузкой образа по умолчанию"
 
 #: ../../any.pm:1
 #, c-format
@@ -654,7 +654,7 @@ msgstr ""
 "\n"
 "\n"
 "(ПРЕДУПРЕЖДЕНИЕ! Вы используете XFS для своего корневого раздела,\n"
-"создание загрузочной дискеты на 1.44 Мб, скорее всего, завершится\n"
+"создание загрузочной дискеты на 1.44 MB, скорее всего, завершится\n"
 "неудачей, потому что для XFS нужен очень большой драйвер)."
 
 #: ../../any.pm:1
@@ -766,10 +766,10 @@ msgid ""
 "wait %d seconds for default boot.\n"
 "\n"
 msgstr ""
-"Добро пожаловать в диспетчер операционной системы %s!\n"
+"Welcome to %s the operating system chooser!\n"
 "\n"
-"Выберите операционную систему из списка или\n"
-"подождите %d секунд для загрузки системы по умолчанию.\n"
+"Choose an operating system from the list above or\n"
+"wait %d seconds for default boot.\n"
 "\n"
 
 #: ../../common.pm:1
@@ -810,22 +810,22 @@ msgstr "%d минут"
 #: ../../common.pm:1
 #, c-format
 msgid "TB"
-msgstr "ТБ"
+msgstr "TB"
 
 #: ../../common.pm:1
 #, c-format
 msgid "GB"
-msgstr "ГБ"
+msgstr "GB"
 
 #: ../../common.pm:1
 #, c-format
 msgid "MB"
-msgstr "МБ"
+msgstr "MB"
 
 #: ../../common.pm:1
 #, c-format
 msgid "KB"
-msgstr "КБ"
+msgstr "KB"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -922,7 +922,7 @@ msgstr ""
 #: ../../fsedit.pm:1
 #, c-format
 msgid "This directory should remain within the root filesystem"
-msgstr "Эта директория должна оставаться в пределах корневой файловой системы"
+msgstr "Этот каталог должен оставаться в пределах корневой файловой системы"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1020,7 +1020,7 @@ msgstr "ошибка размонтирования %s: %s"
 #: ../../fs.pm:1
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "монтирование раздела %s к директории %s завершилось неудачно"
+msgstr "монтирование раздела %s в каталог %s завершилось неудачно"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1050,7 +1050,7 @@ msgstr "Не знаю как форматировать %s с типом %s"
 #: ../../fs.pm:1
 #, c-format
 msgid "%s formatting of %s failed"
-msgstr "создание файловой системы %s на %s завершилось неудачно"
+msgstr "%s форматирование %s завершилось неудачно"
 
 #: ../../help.pm:1
 #, c-format
@@ -1087,100 +1087,66 @@ msgstr ""
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"В качестве обзора DrakX представит сводку имеющейся у него различной\n"
-"информации о вашей системе. В зависимости от установленного у вас\n"
-"оборудования вы можете увидеть все или некоторые из следующих пунктов:\n"
-"\n"
-" * \"Мышь\": проверьте текущую настройку мыши и нажмите на кнопку если\n"
-"необходимо ее изменить.\n"
-"\n"
-" * \"Клавиатура\": проверьте текущую настройку раскладки клавиатуры и\n"
-"нажмите на кнопку если необходимо ее изменить.\n"
-"\n"
-" * \"Страна\": проверьте текущий выбор страны. Если вы находитесь не в\n"
-" этой стране, нажмите на кнопку и выберите другую\n"
-"\n"
-" * \"Часовой пояс\": DrakX по умолчанию выбирает ваш часовой пояс на\n"
-"основании выбранного вами языка. Но опять же, как и при выборе клавиатуры,\n"
-"вы можете не находиться в стране, которой соответствует выбранный язык.\n"
-"Поэтому, возможно вам понадобится нажать на кнопку \"Часовой пояс\", чтобы\n"
-" настроить часы согласно требуемому часовому поясу.\n"
-"\n"
-" * \"Принтер\": нажав на кнопку \"Принтер отсутствует\", вы запустите\n"
-"мастер настройки принтера. Ознакомьтесь с соответствующей главой "
-"``Стартового\n"
-"руководства пользователя'' для получения дополнительной информации о\n"
-"том, как установить новый принтер. Представленный здесь интерфейс похож\n"
-"на интерфейс, используемый во время установки;\n"
-"\n"
-" * \"Загрузчик\": если вы желаете изменить конфигурацию загрузчика,\n"
-"нажмите на эту кнопку. Эта опция предназначена для опытных пользователей.\n"
-"\n"
-" * \"Графический интерфейс\": по умолчанию DrakX настраивает ваш "
-"графический\n"
-"интерфейс на разрешение \"800x600\". Если вас это не устраивает, нажмите на\n"
-"кнопку чтобы перенастроить ваш графический интерфейс.\n"
-"\n"
-" * \"Сеть\": Если вы хотите настроить доступ в Интернет или локальную сеть \n"
-" прямо сейчас, вы можете сделать это, нажав на эту кнопку.\n"
-"\n"
-" * \"Звуковая карта\": если в вашей системе была обнаружена звуковая карта,\n"
-"она будет здесь показана. Если вы увидите, что показанная звуковая карта\n"
-"не соответствует тому, что у вас есть в системе, вы можете нажать на кнопку\n"
-"и выбрать другой драйвер\n"
-"\n"
-" * \"TV-карта\": если в вашей системе была обнаружена ТВ-карта, она будет\n"
-"здесь показана. Если у вас есть TV-карта, но она не была определена,\n"
-"нажмите на кнопку и попробуйте настроить ее вручную\n"
-"\n"
-" * \"ISDN-карта\": если в вашей системе была обнаружена ISDN-карта, она\n"
-"будет здесь показана. Вы можете нажать на кнопку для изменения связанных с\n"
-"ней параметров."
 
 #: ../../help.pm:1
 #, c-format
@@ -1230,36 +1196,37 @@ msgid ""
 "Firmware Delay expires."
 msgstr ""
 "Yaboot является начальным загрузчиком для оборудования NewWorld MacIntosh.\n"
-"Он в состоянии загрузить GNU/Linux, MacOS или MacOSX, если таковые имеются\n"
-"на вашем компьютере. Обычно эти операционные системы правильно определяются\n"
-"и устанавливаются. Если это не так, вы можете вручную добавить пункт на\n"
-"этом экране. Будьте внимательны при выборе правильных параметров.\n"
+" и используется для загрузки GNU/Linux, MacOS или MacOSX. Обычно MacOS и\n"
+"MacOSX корректно определяются и инсталлируются в меню начального "
+"загрузчика.\n"
+"Если это не так, вы можете вручную добавить пункт на этом экране. Будьте \n"
+"внимательны при выборе корректных параметров\n"
 "\n"
 "Главные параметры Yaboot:\n"
 "\n"
-" * Сообщение инициализации: простое текстовое сообщение, показываемое\n"
+" * Init Message: простое текстовое сообщение, показываемое\n"
 "перед приглашением загрузчика.\n"
 "\n"
-" * Загрузочное устройство: показывает, куда вы хотите поместить информацию,\n"
+" * Boot Device: показывает, куда вы хотите поместить информацию,\n"
 "требующуюся для загрузки GNU/Linux. Обычно сначала вы устанавливаете раздел\n"
 "bootstrap, содержащий эту информацию.\n"
 "\n"
-" * Задержка Open Firmware: в отличие от LILO у yaboot имеются две\n"
-"задержки. Первая задержка измеряется в секундах, и на этом этапе вы можете\n"
+" * Open Firmware Delay: в отличие от LILO у yaboot имеются две\n"
+"паузы. Первая пауза измеряется в секундах, и на этом этапе вы можете\n"
 "выбирать между CD, OF-загрузкой, MacOS или Linux;\n"
 "\n"
-" * Таймаут при загрузке ядра: этот таймаут похож на задержку загрузки LILO.\n"
-"После выбора Linux у вас будет эта задержка в 0.1 секунды перед тем, как\n"
+" * Kernel Boot Timeout: этот таймаут похож на паузу загрузки LILO.\n"
+"После выбора Linux у вас будет пауза в 0.1 секунды перед тем, как\n"
 "будет выбрано ваше описание ядра по умолчанию.\n"
 "\n"
-" * Включить загрузку с CD?: выбор этого параметра позволит вам ввести\n"
+" * Enable CD Boot?: выбор этого параметра позволит вам ввести\n"
 "``C'' для загрузки с компакт-диска в первом приглашении загрузчика.\n"
 "\n"
-" * Включить загрузку OF?: выбор этого параметра позволит вам ввести ``N''\n"
+" * Enable OF Boot?: выбор этого параметра позволит вам ввести ``N''\n"
 "для загрузки Open Firmware в первом приглашении загрузчика.\n"
 "\n"
-" * ОС по умолчанию: вы можете выбрать ОС, которая будет загружаться по\n"
-"умолчанию по истечении времени задержки Open Firmware."
+" * Default OS: вы можете выбрать ОС, которая будет загружаться по\n"
+"умолчанию по истечении паузы Open Firmware Delay."
 
 #: ../../help.pm:1
 #, c-format
@@ -1313,7 +1280,7 @@ msgstr ""
 "Вы можете добавить в yaboot дополнительные пункты для других операционных\n"
 "систем, альтернативных ядер или для аварийного загрузочного образа.\n"
 "\n"
-"Для других ОС, пункт содержит только метку и раздел \"root\".\n"
+"Для других ОС пункт содержит только метку и раздел \"root\".\n"
 "\n"
 "Для Linux существует несколько возможных параметров:\n"
 "\n"
@@ -1325,7 +1292,7 @@ msgstr ""
 "\n"
 " * Root: устройство \"root\" или ``/'' для установки вашего Linux;\n"
 "\n"
-" * Добавить: на оборудовании Apple опция добавления к ядру довольно часто\n"
+" * Дополнение: на оборудовании Apple опция добавления к ядру довольно часто\n"
 "используется чтобы помочь при инициализации видеооборудования или чтобы\n"
 "включить на клавиатуре эмуляцию кнопок мыши для часто отсутствующих на\n"
 "стандартных мышах Apple 2-й и 3-й кнопок. Ниже представлено несколько\n"
@@ -1338,11 +1305,11 @@ msgstr ""
 "\n"
 " * Initrd: эта опция может быть использована либо для загрузки первичных\n"
 "модулей пока недоступно загрузочное устройство, либо для загрузки образа\n"
-"ram-диска в случае аварийной загрузки.\n"
+"ramdisk в случае аварийной загрузки.\n"
 "\n"
-" * Initrd-size: по умолчанию размер ram-диска, как правило, составляет\n"
-"4096 Кбайт. Если вам необходимо разместить большой ram-диск, может быть\n"
-"использована эта опция;\n"
+" * Initrd-size: по умолчанию размер ramdisk, как правило, составляет\n"
+"4096 Кбайт. Если вам необходимо разместить ramdisk больше, чем задано по\n"
+"умолчанию, может быть использована эта опция.\n"
 "\n"
 " * Чтение-запись: обычно раздел \"root\" сначала поднимается только для\n"
 "чтения, чтобы разрешить проверку файловой системы перед тем, как система\n"
@@ -1350,7 +1317,7 @@ msgstr ""
 "\n"
 " * NoVideo: если видеооборудование Apple окажется исключительно\n"
 "проблематичным, вы можете выбрать эту опцию для загрузки в режиме ``без\n"
-"видео'' с родной поддержкой буфера кадров;\n"
+"видео'' с родной поддержкой frame buffer;\n"
 "\n"
 " * По умолчанию: выбирает этот пункт как выбор Linux по умолчанию,\n"
 "выбираемый простым нажатием на ENTER в строке приглашения yaboot. Этот\n"
@@ -1358,19 +1325,14 @@ msgstr ""
 "варианты загрузки."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1411,7 +1373,7 @@ msgstr ""
 "прийдется вручную настроить драйвер."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1421,7 +1383,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1446,7 +1408,7 @@ msgstr ""
 " * \"pdq\" - что означает ``печатать, не ставить в очередь'' - это вариант,\n"
 "если вы напрямую подключены к своему принтеру, вы хотите избежать проблем\n"
 "с зажевыванием бумаги, и у вас нет сетевых принтеров. (\"pdq\"  сможет\n"
-"правиться только с очень простыми реализациями сетей и является для них\n"
+"cправиться только с очень простыми реализациями сетей и является для них\n"
 "довольно медленным.) Рекомендуется использовать \"pdq \" в случае, если вы\n"
 "только начинаете свой путь в GNU/Linux.\n"
 "\n"
@@ -1466,7 +1428,7 @@ msgstr ""
 "Управления Mandrake и нажав на кнопку эксперт."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1485,59 +1447,11 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"На установочном компакт-диске Mandrake Linux имеется аварийный режим. Вы\n"
-"можете получить к нему доступ, загрузившись с компакт-диска, нажмите\n"
-"клавишу >>F1<< при загрузке и введите в строке приглашения >>rescue<<.\n"
-"Но в этом случае ваш компьютер не может загрузиться с компакт-диска, вы\n"
-"должны вернуться на этот этап за справкой, по крайней мере, в двух\n"
-"ситуациях:\n"
-"\n"
-" * при установке начального загрузчика, DrakX перезапишет загрузочный\n"
-"сектор (MBR) вашего главного диска (пока вы не будет использовать другой\n"
-"менеджер загрузки), чтобы позволить вам загрузить Windows или GNU/Linux\n"
-"(подразумевается, что в вашей системе есть Windows). Если вам понадобится\n"
-"переустановить Windows, процесс установки Microsoft перезапишет загрузочный\n"
-"сектор, и тогда вы не сможете загрузить GNU/Linux!\n"
-"\n"
-" * если возникнет проблема и вы не сможете загрузить GNU/Linux с жесткого\n"
-"диска, эта дискета будет подразумевать только загрузку GNU/Linux. На ней\n"
-"содержится минимальное количество системных утилит для восстановления\n"
-"системы, завалившейся в результате отключения питания, неудачной ошибки\n"
-"при вводе, ошибки пароля и любой другой причины.\n"
-"\n"
-"Когда вы перейдете на этот этап, вам будет предложено вставить в дисковод\n"
-"дискету. Дискета должна быть чистой и не содержать нужной вам информации.\n"
-"Вы не должны ее форматировать, DrakX полностью перезапишет всю дискету."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1554,22 +1468,22 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"После того, как вы настроили главные параметры начального загрузчика, будет\n"
+"После того, как вы настроите главные параметры начального загрузчика, будет\n"
 "показан список вариантов загрузки, доступных при загрузке.\n"
 "\n"
-"Если на вашей машине установлена еще одна операционная система, она будет\n"
-"автоматически добавлена в меню загрузки. Здесь вы можете более тонко\n"
-"настроить существующие параметры. Выберите пункт и нажмите \"Изменить\",\n"
-"чтобы изменить или удалить его; \"Добавить\" добавляет новый пункт;\n"
-"и \"Готово\" переходит на следующий этап установки.\n"
+"Если на вашей машине установлены другие операционные системы, они будут\n"
+"автоматически добавлены в меню загрузки. Вы можете более тонко настроить\n"
+"существующие параметры, нажав \"Добавить\" для создания нового пункта;\n"
+"выбрав пункт и нажав \"Изменить\" или \"Удалить\" чтобы изменить или\n"
+"удалить его. \"OK\" подтверждает ваши изменения.\n"
 "\n"
-"Вы также можете захотеть не предоставлять никому доступ к этим другим\n"
-"операционным системам. В этом случае вы может удалить соответствующие\n"
-"пункты. Но тогда вам понадобится загрузочная дискета для того, чтобы\n"
-"загрузить эти операционные системы!"
+"Вы также можете захотеть не предоставлять доступ к остальным операционным\n"
+"системам тому, кто доберется до консоли и перезагрузит машину. В этом\n"
+"случае вы можете удалить соответствующие пункты, но тогда вам понадобится\n"
+"загрузочная дискета для того, чтобы загрузить эти операционные системы!"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1598,37 +1512,30 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO и grub являются начальными загрузчиками GNU/Linux. Этот этап зачастую\n"
-"является полностью автоматическим. Фактически DrakX анализирует\n"
-"загрузочный сектор и действует в зависимости от того, что он там найдет:\n"
-"\n"
-" * если найден загрузочный сектор Windows, он заменит его на загрузочный\n"
-"сектор grub/LILO. Таким образом, вы будете в состоянии загружать либо\n"
-"GNU/Linux, либо другую ОС;\n"
-"\n"
-" * если найден загрузочный сектор LILO, он заменит его на новый.\n"
-"Если DrakX не уверен, он покажет диалог с различными опциями.\n"
+"Этот диалог позволяет тонко настроить параметры начального загрузчика:\n"
 "\n"
 " * \"Используемый начальный загрузчик\": у вас есть три варианта:\n"
 "    * \"GRUB\": если вы предпочитаете grub (текстовое меню).\n"
 "\n"
-"    * \"LILO с графическим меню\": если вы предпочитаете LILO со своим\n"
-"графическим интерфейсом.\n"
-"    * \"LILO с текстовым меню\": если вы предпочитаете LILO со своим\n"
+"    * \"LILO с текстовым меню\": если вы предпочитаете LILO со его\n"
 "интерфейсом текстового меню.\n"
+"\n"
+"    * \"LILO с графическим меню\": если вы предпочитаете LILO со его\n"
+"графическим интерфейсом.\n"
 "\n"
 " * \"Загрузочное устройство\": в большинстве случаев вам не надо изменять\n"
 "значение по умолчанию (\"/dev/hda\"), но если вы хотите, начальный\n"
 "загрузчик может быть установлен на второй жесткий диск (\"/dev/hdb\") или\n"
 "даже на дискету (\"/dev/fd0\").\n"
 "\n"
-" * \"Задержка перед загрузкой образа по умолчанию\": при перезагрузке\n"
+" * \"Пауза перед загрузкой образа по умолчанию\": при перезагрузке\n"
 "компьютера это пауза, предоставляемая пользователю для выбора из меню\n"
 "начального загрузчика другого пункта, отличающегося от загружаемого по\n"
 "умолчанию.\n"
 "\n"
 "!! Будьте осторожны, если вы решите не устанавливать начальный загрузчик\n"
-"(выбрав сейчас \"Отмену\") вы должны обеспечить возможность загрузки своей\n"
+"(выбрав сейчас \"Пропустить\"), вы должны обеспечить возможность загрузки "
+"своей\n"
 "системы Mandrake Linux! Также убедитесь, что вы знаете, что делаете, перед\n"
 "тем как изменять какую-либо опцию. !!\n"
 "\n"
@@ -1637,7 +1544,7 @@ msgstr ""
 "пользователя."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -1674,41 +1581,41 @@ msgid ""
 "have \"No password\", if your computer won't be connected to the Internet,\n"
 "and if you trust anybody having access to it."
 msgstr ""
-"Это самая важная для безопасности вашей системы GNU/Linux точка принятия\n"
-"решения: вы должны ввести пароль \"root'a\". \"root\" является системным\n"
-"администратором, и он единственный авторизован для выполнения обновлений,\n"
-"добавления пользователей, изменения конфигурации всей системы и так далее.\n"
-"Короче говоря, \"root\" может сделать все, что угодно! Вот почему вы\n"
-"должны выбрать пароль, который трудно угадать - DrakX сообщит вам, если он\n"
-"слишком прост. Как вы видите, пароль можно и не вводить, но мы настоятельно\n"
-"советуем вам не делать этого, хотя бы по одной причине: не думайте, что,\n"
-"если вы загрузили GNU/Linux, то ваши другие операционные системы\n"
-"застрахованы от ошибок. Потому как \"root\" может обойти все ограничения\n"
-"и неумышленно удалить всю информацию на разделах, небрежно получив к ним\n"
-"доступ, важно, чтобы ему самому было трудно стать \"root'ом\".\n"
+"Это самое важное решение в деле безопасности вашей системы GNU/Linux: вы\n"
+"должны ввести   пароль \"root\". \"Root\" является администратором системы\n"
+"и только он имеет право производить обновления, добавлять пользователей,\n"
+"изменять конфигурацию системы и так далее. Короче говоря, \"root\" может\n"
+"все! Вот поэтому вы должны придумать пароль, который трудно подобрать.\n"
+"DrakX сообщит вам, если пароль слишком прост. Как вы видите, можно\n"
+"вообще не вводить пароль, но мы серьезно советуем вам этого не делать по\n"
+"одной простой причине: не думайте, что если вы загрузили GNU/Linux, то\n"
+"ваши остальные операционные системы защищены от ошибок. Так как \"root\"\n"
+"может переступить все ограничения и непреднамеренно стереть все данные\n"
+"на разделах диска, обращаясь небрежно с разделами, то очень важно, чтобы\n"
+"стать \"root\" было трудно.\n"
 "\n"
-"Пароль должен быть смесью алфавитно-цифровых символов и длиной как минимум\n"
-"в 8 символов. Никогда не записывайте пароль \"root'a\" - так очень просто\n"
-"подвернуть систему опасности.\n"
+"Пароль должен быть сочетанием цифровых и буквенных символов и иметь\n"
+"длину не менее 8 символов. Никогда не записывайте пароль \"root\" --\n"
+"это делает очень легкой возможность скомпрометировать систему.\n"
 "\n"
-"Однако, пожалуйста, не делайте пароль слишком длинным или сложным, потому\n"
-"что вы должны запомнить его без особого напряжения.\n"
+"Однако, пожалуйста не делайте пароль слишком длинным или слишком\n"
+"сложным, потому что вы должны его без особых усилий запомнить.\n"
 "\n"
-"Пароль не будет отображаться на экране, когда вы будете вводить его.\n"
-"Поэтому вы должны ввести пароль дважды, чтобы уменьшить вероятность ошибки\n"
-"при вводе. Если случится так, что вы при вводе совершите две одни и те же\n"
-"ошибки, то вы должны будете использовать этот ``неправильный'' пароль при\n"
-"первом входе в систему.\n"
+"Пароль не будет отображаться на экране так же, как вы его вводите. \n"
+"Кроме того, вам прийдется повторить ввод пароля, чтобы предупредить\n"
+"возможность опечатки. Если случится так, что вы опечатались дважды,\n"
+"тогда этот ``неверный'' пароль прийдется использовать при первой загрузке.\n"
 "\n"
-"В режиме Эксперта вам будет задан вопрос, если вы будете подключаться к\n"
-"серверу аутентификации типа NIS или LDAP.\n"
+"Если вы желаете, чтобы доступ к этому компьютеру контролировался\n"
+"сервером аутентификации, нажмите на кнопку \"Дополнительно\".\n"
 "\n"
-"Если ваша сеть использует протокол LDAP (или NIS) для аутентификации,\n"
-"выберите \"LDAP\" или \"NIS\" в качестве аутентификации. Если вы не знаете,\n"
-"спросите у своего сетевого администратора.\n"
+"Если ваша сеть использует LDAP, NIS, или PDC Windows Domain сервисы\n"
+"аутентификации, выберите соответствующий тип \"аутентификации\". Если не\n"
+"знаете, спросите своего администратора сети. \n"
 "\n"
-"Если ваш компьютер не подключен ни к одной администрируемой сети, вам\n"
-"потребуется выбрать \"Локальные файлы\" для аутентификации."
+"Если у вас возникли проблемы с запоминанием паролей, вы можете выбрать\n"
+"опцию \"Без пароля\", если ваш компьютер не будет подключаться к Интернет и\n"
+"если вы доверяете всем доступ к машине."
 
 #: ../../help.pm:1
 #, c-format
@@ -1720,7 +1627,7 @@ msgstr ""
 "Windows соответствует ttyS0 в GNU/Linux."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1747,24 +1654,30 @@ msgid ""
 "the buttons and check that the mouse pointer moves on-screen as you move\n"
 "your mouse."
 msgstr ""
-"DrakX обычно сам определяет количество кнопок на вашей мыши. Если это не\n"
-"так, он сделает предположение, что у вас двухкнопочная мышь, и настроит ее\n"
-"для эмуляции третьей кнопки. DrakX автоматически распознает тип\n"
-"подключенной мыши: PS/2, USB или последовательная.\n"
-"Если вы захотите выбрать другой тип мыши, выберите соответствующий тип из\n"
-"предложенного списка.\n"
+"Обычно у  DrakX не возникает проблем с определением количества кнопок\n"
+"вашей мыши. Если все-таки это не получается, тогда он рассматривает вашу\n"
+"мышь как двух-кнопочную и настроит эмуляцию трех кнопок. Третья кнопка\n"
+"двухкнопочной мыши может быть ``нажата'' одновременным нажатием на левую\n"
+"и правую кнопку. DrakX автоматически узнает какой интерфейс использует\n"
+"ваша мышь:PS/2, serial или USB\n"
 "\n"
-"Если вы выберите мышь, отличающуюся от мыши по умолчанию, будет показан\n"
-"экран для проверки. Используйте кнопки и колесико, чтобы проверить\n"
-"правильность их настройки. Если мышь работает некорректно, нажмите на\n"
-"пробел или [Enter] для \"Отмены\" и выберите еще раз.\n"
+"Если по каким-либо причинам вы желаете указать другой тип мыши, выберите \n"
+"нужную из предоставленного списка.\n"
 "\n"
-"Мыши с колесиком иногда не обнаруживаются автоматически. Вам понадобится\n"
-"вручную выбрать их из списка. Убедитесь, что вы правильно выбрали порт, к\n"
-"которому подключена ваша мышь. После того, как вы нажмете на кнопку \"ОК\",\n"
-"будет показано изображение мыши. Вам надо будет прокрутить колесико своей\n"
-"мыши, чтобы убедится в правильности его работы. Затем проверьте все кнопки\n"
-"и движения мыши."
+"Если вы выбираете другую мышь, отличную от выбранной по умолчанию, появится\n"
+"тестовый экран. Понажимайте кнопки и покрутите колесико для проверки\n"
+"правильности настроек и того, что мышь работает корректно. Если мышь ведет\n"
+"себя неверно, нажмите пробел или клавишу [Return] чтобы отменить\n"
+"тестирование и вернуться к списку мышей\n"
+"\n"
+"Мыши с колесиками иногда автоматически не определяются. В этом случае вам\n"
+"прийдется выбрать свою мышь из списка. Проверьте, что вы правильно  выбрали\n"
+"порт подключения мыши. Когда быдет выбрана мышь и нажата кнопка\n"
+" \"Далее ->\", появится картинка с изображением мыши. Покрутите колесико\n"
+"мыши для проверки того, что все работает правильно. Как только вы увидите,\n"
+"что колесико на экране движется синхронно с движениями настоящего колесика,\n"
+"проверьте работу кнопок и движение курсора, который должен двигаться по\n"
+"экрану соответственно вашим перемещениям мыши."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1780,34 +1693,43 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Первым шагом является выбор предпочитаемого языка.\n"
+"Ваш выбор предпочитаемого языка повлияет на язык документации, сам\n"
+"инсталлятор и систему в целом. Выберите сначала регион, в котором\n"
+"вы находитесь, затем язык на котором вы говорите.\n"
 "\n"
-"Пожалуйста, выберите предпочитаемый язык для установки и использования в\n"
-"системе.\n"
+"По нажатию на кнопку \"Дополнительно\" вы сможете выбрать другие языки,\n"
+"которые можно установить на вашей рабочей станции, установив таким\n"
+"образом имеющие отношение к языку файлы системной документации\n"
+"и приложения. Например, если у вас в системе будут работать пользователи\n"
+"из Испании, выберите в дереве \"English\" как основной,  и \"Espanol\"\n"
+"в дополнительном разделе.\n"
 "\n"
-"Нажав на кнопку \"Дополнительно\", вы сможете выбрать другие языки, которые\n"
-"будут установлены на вашу рабочую станцию. При выборе других языков будут\n"
-"установлены файлы этого языка, необходимые для системной документации и\n"
-"приложений. Например, если вы будете предоставлять на своей машине хостинг\n"
-"для пользователей из Испании, выберите из дерева русский в качестве\n"
-"главного языка и в разделе Дополнительно поставьте галочку напротив\n"
-"\"Испанская|Испания\".\n"
+"Заметим, что вы не ограничены в выборе дополнительных языков. Как только\n"
+"вы закончите выбор дополнительных локалей, нажмите \"Next ->\" чтобы\n"
+"продолжить.\n"
 "\n"
-"Помните, что может быть установлено несколько языков. После того, как вы\n"
-"выберите какие-либо дополнительные региональные специфики, нажмите на\n"
-"кнопку \"ОК\" для продолжения."
+"Для переключения между различными установленными языками в вашей системе\n"
+"вы можете запускать команду \"/usr/sbin/localedrake\" с правами \"root\"\n"
+"чтобы изменить язык для всей системы. Запуск этой команды с правами\n"
+"обычного пользователя позволит изменить настройки языка для данного\n"
+"конкретного пользователя."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -1825,21 +1747,21 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"Обычно DrakX правильно выбирает для вас клавиатуру (в зависимости от\n"
-"выбранного вами языка). Однако у вас может отсутствовать клавиатура, точно\n"
-"соответствующая вашему языку: например, если вы русскоязычный украинец,\n"
-"вам все-таки может понадобиться русская клавиатура. Или, если вы говорите\n"
-"по-английски, а находитесь в Квебеке, вы может оказаться в такой же\n"
-"ситуации. В обоих случаях вы должны будете вернуться на этот этап установки\n"
-"и выбрать из списка соответствующую клавиатуру.\n"
+"В зависимости от языка по умолчанию, который вы выбрали раньше, DrakX\n"
+"автоматически подберет определенную конфигурацию клавиатуры. Однако,\n"
+"у вас может и не быть клавиатуры,  которая точно соответствует вашему\n"
+"языку: например, если швейцарец, говорящий по-английски, у вас может\n"
+"быть швейцарская клавиатура. Или вы говорите по-английски, но живете\n"
+"в Квебеке, вы можете попасть в подобную в ситуацию, когда ваш родной\n"
+"язык и клавиатура не совпадают. В любом случае, этот шаг установки\n"
+"позволит вам выбрать подходящую клавиатуру из списка.\n"
 "\n"
-"Нажмите на кнопку \"Дополнительно\", чтобы увидеть полный список\n"
-"поддерживаемых клавиатур.\n"
+"Нажмите кнопку \"Больше\" чтобы получить полный список поддерживаемых\n"
+" клавиатур.\n"
 "\n"
-"Если вы выберете раскладку клавиатуры, основанную на нелатинском алфавите,\n"
-"в следующем диалоге вам будет задан вопрос для выбора комбинации клавиш,\n"
-"которая будет осуществлять переключение между латинской и нелатинской\n"
-"раскладками клавиатуры."
+"Если вы выбираете раскладку клавиатуры, основанную на не-латинском\n"
+"алфавите, следующее диалоговое окно позволит вам выбрать сочетание\n"
+"клавиш для переключения между латинской и не-латинской раскладками."
 
 #: ../../help.pm:1
 #, c-format
@@ -1865,13 +1787,38 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"Этот шаг появляется только если на вашей машине найден старый раздел\n"
+"GNU/Linux.\n"
+"\n"
+"DrakX теперь должен узнать хотите ли вы провести новую установку или\n"
+"обновление существующей системы Mandrake Linux:\n"
+"\n"
+" * \"Установка\": В большинстве случаев этот вариант приведет к уничтожению\n"
+"старой системы.  Если вы желаете изменить разделы вашего жесткого диска,\n"
+"или изменить файловую систему, вы должны выбрать этот пункт. Однако, в\n"
+"зависимости  от того, как разбит ваш диск, вы возможно сможете сохранить\n"
+"от перезаписи некоторые свои данные.\n"
+"\n"
+" * \"Обновление\": этот класс установки позволит вам обновить пакеты,\n"
+"установленные в вашей системе Mandrake Linux. Текущая схема разделов диска "
+"и\n"
+"пользовательские данные останутся нетронутыми. Большинство других шагов\n"
+"будут доступны, как и при стандартной установке.\n"
+"\n"
+"Выбор варианта \"Обновление\" будет неплохо работать на системах Mandrake\n"
+"Linux начиная с \"8.1\" и выше. Проведение обновления на системах Mandrake\n"
+"Linux старше \"8.1\" не рекомендуется."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
+"\"Страна\": проверьте текущий выбор страны. Если вы находитесь не в этой\n"
+"стране, нажмите на кнопку и выберите другую. "
 
 #: ../../help.pm:1
 #, c-format
@@ -1937,7 +1884,7 @@ msgstr ""
 "(первый диск или раздел называется \"C:\")."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to choose which partition(s) will be used for the\n"
 "installation of your Mandrake Linux system. If partitions have already been\n"
@@ -2031,7 +1978,7 @@ msgstr ""
 " * \"Разместить автоматически\": эта опция позволяет автоматически создать\n"
 "разделы ext3 и swap на свободном пространстве вашего жесткого диска;\n"
 "\n"
-"\"Дополнительно\": предоставляет доступ к дополнительным возможностям:\n"
+"\"Больше\": предоставляет доступ к дополнительным возможностям:\n"
 "\n"
 " * \"Сохранить таблицу разделов\": сохраняет таблицу разделов на дискету.\n"
 "Полезно для последующего восстановления таблицы разделов, если это\n"
@@ -2043,10 +1990,11 @@ msgstr ""
 " * \"Спасти таблицу разделов\": если ваша таблица разделов повреждена, вы\n"
 "можете попытаться восстановить ее, используя эту опцию. Пожалуйста, будьте\n"
 "осторожны и помните, что восстановление может завершиться неудачей;\n"
-" * \"Перезагрузить таблицу разделов\": отменяет все изменения и загружает\n"
-"вашу исходную таблицу разделов;\n"
 "\n"
-" * \"Автоматическое монтирование съемных устройств\": убрав галочку с этой\n"
+" * \"Перезагрузить таблицу разделов\": отменяет все изменения и загружает\n"
+"исходную таблицу разделов;\n"
+"\n"
+" * \"Автомонтирование съемных носителей\": убрав галочку с этой\n"
 "опции, вы заставите пользователей вручную монтировать и размонтировать\n"
 "съемные накопители, такие как дискеты и компакт-диски;\n"
 "\n"
@@ -2054,7 +2002,7 @@ msgstr ""
 "для разметки своего жесткого диска. Она рекомендуется, если вы слабо\n"
 "разбираетесь в разметке жестких дисков.\n"
 "\n"
-" * \"Отмена\": используйте эту опцию для отмены своих изменений;\n"
+" * \"Отменить действие\": используйте эту опцию для отмены своих изменений;\n"
 "\n"
 " * \"Переключится в режим нормальный/эксперта\": разрешает дополнительные\n"
 "действия над разделами (тип, опции, формат) и выводит дополнительную\n"
@@ -2062,6 +2010,10 @@ msgstr ""
 "\n"
 " * \"Готово\": когда вы закончите разметку своего жесткого диска, это\n"
 "сохранит ваши изменения на диск.\n"
+"\n"
+"При определении размера раздела вы можете установить размер раздела, "
+"используя\n"
+"клавиши со стрелками на вашей клавиатуре.\n"
 "\n"
 "Примечание: вы можете перейти к любой опции, используя клавиатуру.\n"
 "Переходите по разделам, используя [Tab] и стрелки [Вверх/Вниз].\n"
@@ -2075,7 +2027,7 @@ msgstr ""
 " * Ctrl-m, чтобы установить точку монтирования.\n"
 "\n"
 "Для получения информации о типах различных доступных файловых систем, "
-"пожалуйста, прочтите главу ext2FS из ``Руководства пользователя''.\n"
+"пожалуйста, прочтите главу ext2FS из ``Справочного руководства''.\n"
 "\n"
 "Если вы выполняете установку на машину PPC, вам понадобится создать\n"
 "небольшой раздел HFS 'bootstrap' по крайней мере, 1МБ, который будет\n"
@@ -2091,21 +2043,19 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
-"Теперь настало время выбрать желаемый для этой машины уровень безопасности.\n"
-"Как правило, чем больше машина подвергается опасности, и чем больше важна\n"
-"хранящаяся на ней информация, тем выше должен быть уровень безопасности.\n"
-"Однако более высокий уровень безопасности в основном достигается в\n"
-"зависимости от простоты использования. Обратитесь к главе \"msec\"\n"
+"На этом этапе DrakX позволит вам выбрать для машины желаемый уровень\n"
+"безопасности. Как правило, уровень безопасности должен быть выше, если на\n"
+"машине содержатся критические данные или машина непосредственно подключена\n"
+"к Интернет. Однако, более высокий уровень безопасности в общем случае\n"
+"достигается в обмен на удобство использования. Обратитесь к главе \"msec\"\n"
 "``Руководства пользователя'' для получения дополнительной информации о том,\n"
 "что означают эти уровни.\n"
 "\n"
-"Если вы не знаете, что выбрать, оставьте значение по умолчанию."
+"Если вы не знаете, что выбрать, оставьте значение по умолчанию. "
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2113,14 +2063,14 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 "Во время установки Mandrake Linux, желательно, чтобы некоторые пакеты были\n"
 "обновлены со времени выхода исходного релиза. Может быть, были исправлены\n"
@@ -2132,10 +2082,10 @@ msgstr ""
 "При выборе \"Да\" будет показан список мест, из которых могут быть получены\n"
 "обновления. Затем появится дерево выбора пакетов: выберите необходимые\n"
 "и нажмите \"Установить\", чтобы получить и установить выбранные пакеты, или\n"
-"на \"Отмену\", чтобы прервать установку."
+"\"Отмена\", чтобы прервать установку."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2167,20 +2117,21 @@ msgstr ""
 "\n"
 "На этот раз вы можете переформатировать некоторые уже существующие разделы,\n"
 "чтобы стереть всю находящуюся на них информацию. Если вы пожелаете это\n"
-"сделать, пожалуйста, выберите эти разделыn\n"
-"Пожалуйста, запомните, что нет необходимости переформатировать все ранее\n"
-"существовавшие разделы. Вы должны переформатировать разделы, содержащие\n"
-"операционную систему (такие как \"/\", \"/usr\" or \"/var\")), но вы не\n"
-"должны переформатировать разделы, содержащие данные, которые вы хотите\n"
-"оставить (зачастую это \"/home\").\n"
+"сделать, пожалуйста, выберите эти разделы\n"
+"\n"
+"Пожалуйста, имейте в виду, что нет необходимости переформатировать все\n"
+"ранее существовавшие разделы. Вы должны переформатировать разделы,\n"
+" содержащие операционную систему (такие как \"/\", \"/usr\" or \"/var\")),\n"
+" но вам не обязательно переформатировать разделы, содержащие данные,\n"
+"которые вы хотит оставить (зачастую это \"/home\").\n"
 "\n"
 "Пожалуйста, будьте осторожны, когда выбираете разделы. После форматирования\n"
 "все данные на этих разделах будут удалены и ни один из них восстановить вы\n"
 "не сможете.\n"
 "\n"
-"Нажмите на \"ОК\", когда будете готовы форматировать разделы.\n"
+"Нажмите \"Далее ->\", когда будете готовы форматировать разделы.\n"
 "\n"
-"Нажмите на \"Отмену\", если хотите выбрать другой раздел для установки\n"
+"Нажмите на \"<- Назад\", если хотите выбрать другой раздел для установки\n"
 "своей новой операционной системы Mandrake Linux.\n"
 "\n"
 "Нажмите на \"Дополнительно\", если вы хотите выбрать разделы, которые\n"
@@ -2195,7 +2146,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2220,10 +2171,13 @@ msgid ""
 "(*) You need a FAT-formatted floppy (to create one under GNU/Linux, type\n"
 "\"mformat a:\")"
 msgstr ""
-"Ну вот и все. Теперь установка завершена и ваша система GNU/Linux готова\n"
-"к использованию. Просто нажмите \"ОК\" для перезагрузки системы. Вы можете\n"
-"загрузить GNU/Linux или Windows, как вам захочется (если вы используете\n"
-"двойную загрузку), как только ваш компьютер снова загрузится.\n"
+"И вот вы здесь. Инсталляция теперь завершена и ваша система GNU/Linux "
+"готова\n"
+"к использованию. Просто нажмите \"Далее ->\", чтобы перезагрузить систему.\n"
+"Первое, что вы увидите после того, как ваш компьютер закончит тестирование\n"
+"оборудования, это меню начального загрузчика, предоставляющее вам выбор "
+"какую\n"
+"операционную систему загрузить.\n"
 "\n"
 "Кнопка \"Дополнительно\" (только в режиме Эксперта) покажет еще две кнопки:\n"
 "\n"
@@ -2238,6 +2192,7 @@ msgstr ""
 "\n"
 "    * \"Автоматически\". Полностью автоматическая установка: жесткий диск\n"
 "полностью перезаписывается, все данные теряются.\n"
+"\n"
 "Эта возможность очень удобна при установке на большое число похожих машин.\n"
 "Смотрите раздел Auto install на нашем веб-сайте;\n"
 "\n"
@@ -2281,7 +2236,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2306,136 +2261,83 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
-"В этом пункте вам необходимо выбрать, куда на своем жестком диске вы хотите\n"
-"установить операционную систему Mandrake Linux. Если ваш жесткий диск пуст\n"
-"или если существующая операционная система использует все доступное\n"
-"пространство, вам понадобится разметить его. По сути, разметка жесткого\n"
-"диска заключается в его логическом делении, чтобы создать пространство для\n"
+"На этом шаге вам прийдется решить куда вы хотите установить операционную\n"
+"систему Mandrake Linux на вашем жестком диске. Если ваш жесткий диск пуст\n"
+"или существующая операционная система на нем занимает все дисковое\n"
+"пространство, вам прийдется диск переразбить. Разделение диска в основном\n"
+"состоит в том, чтобы логически выделить на нем свободное  пространство для\n"
 "установки вашей новой системы Mandrake Linux.\n"
 "\n"
-"Поскольку результаты процесса разметки обычно необратимы, разметка может\n"
-"быть пугающей и напряженной, если вы неопытный пользователь. К счастью есть\n"
-"мастер, который упрощает этот процесс. Перед началом, пожалуйста, изучите\n"
-"руководство и запаситесь временем.\n"
+"Поскольку разделение диска обычно необратимый процесс, и может привести к\n"
+"потере данных, если на диске уже есть установленная операционная система, "
+"то\n"
+"для начинающего пользователя это несколько напряженный и пугающий момент.\n"
+"К счастью, в DrakX существует мастер, упрощающий этот процесс. Пожалуйста\n"
+"проконсультируйтесь с руководством перед началом и не торопитесь.\n"
 "\n"
-"Если ваша установка запущена в режиме Эксперта, вы войдете в DiskDrake -\n"
-"сервисную программу разметки Mandrake Linux -, которая позволит вам тонко\n"
-"настроить свои разделы. Смотрите раздел DiskDrake в ``Руководстве\n"
-"пользователя''. В интерфейсе установки вы можете использовать мастера,\n"
-"как здесь описано, нажав на кнопку диалога \"Мастер\".\n"
-"\n"
-"Если разделы уже были определены из предыдущей установки или из другой\n"
-"сервисной программы разметки, тогда просто нужно выберите их для установки\n"
-"своей системы Linux.\n"
-"\n"
-"Если разделы не определены, вам необходимо создать их, используя мастер.\n"
 "В зависимости от конфигурации вашего жесткого диска, доступно несколько\n"
-"опций:\n"
+"параметров:\n"
 "\n"
-" * \"Использовать свободное пространство\": эта опция просто приводит к\n"
-"автоматической разметке ваших пустых дисков. В дальнейшем вам не будет\n"
-"задано ни одного вопроса.\n"
-" * \"Использовать существующий раздел\": мастер обнаружил один или\n"
-"несколько существующих разделов Linux на вашем жестком диске. Если вы\n"
-"хотите их использовать, выберите эту опцию. Затем вам будет предложено\n"
-"выбрать точки монтирования, связанные с каждым из разделов. По умолчанию\n"
-"выбраны унаследованные точки монтирования, и, как правило, вы должны их\n"
-"оставить.\n"
+" * \"Использовать свободное место\": эта опция означает автоматическое\n"
+"разделение пустого диска(ов). Если вы выбираете эту опцию, то далее "
+"вопросов\n"
+"задаваться не будет\n"
 "\n"
-" * \"Использовать свободное пространство на разделе Windows\": если на вашем "
-"жестком диске установлена Microsoft Windows, и она занимает все\n"
-"доступное на нем место, вы должны создать раздел для данных Linux. Для\n"
-"этого вы можете удалить свой раздел Microsoft Windows и данные (смотрите\n"
-"варианты ``Стереть весь диск'' или ``Режим эксперта'') или измените размер\n"
-"своего раздела Microsoft Windows. Изменение размера может быть выполнено\n"
-"без потери каких-либо данных, обеспеченной предварительной дефрагментацией\n"
-"раздела Windows. Резервирование своих данных все же не помешает...\n"
-"Этот вариант рекомендуется, если вы хотите использовать Mandrake Linux\n"
-"и Microsoft Windows на одном компьютере.\n"
+" * \"Использовать существующие разделы\": мастер определил наличие\n"
+"существующих разделов Linux на вашем жестком диске. Если вы собираетесь их\n"
+"использовать, выберите эту опцию. Вас попросят указать точки монтирования\n"
+"для каждого раздела. По умолчанию выбираются правильные точки монтирования\n"
+"и вы можете вообще их не менять.\n"
 "\n"
-"Перед тем, как выбрать эту опцию, пожалуйста, поймите, что после этой\n"
-"процедуры размер вашего раздела Microsoft Windows будет меньше, чем в\n"
-"настоящий момент. У вас останется меньше свободного места под Microsoft\n"
-"Windows для хранения своих данных или для установки нового программного\n"
-"обеспечения.\n"
+"* \"Использовать свободное место на разделе Windows\": если на вашем\n"
+"жестком диске установлена и занимает все доступное место Microsoft Windows,\n"
+"вам нужно будет создать свободное место для данных Linux. Чтобы это "
+"сделать,\n"
+"вы можете удалить ваш Microsoft Windows раздел и данные (см. решение\n"
+"``Очистить весь диск'') или изменить размер раздела FAT Microsoft Windows.\n"
+"Изменение размера может проводиться  без потери данных, особенно если вы\n"
+"предварительно провели дефрагментацию раздела Windows и там используется\n"
+"формат FAT. Резервное копирование ваших данных настойчиво рекомендуется.\n"
+"Рекомендуем выбрать эту опцию, если вы собираетесь использовать Mandrake\n"
+"Linux и Microsoft Windows на одном компьютере.\n"
 "\n"
-" * \"Стереть весь диск\": если вы хотите удалить все данные и все разделы,\n"
-"имеющиеся на вашем жестком диске и заменить их своей новой системой\n"
-"Mandrake Linux, выберите эту опцию. Будьте осторожны с этим выбором, потому\n"
-"что после подтверждения вы будете не в состоянии вернуть все назад.\n"
+"Перед тем, как выбрать эту опцию, вы должны осознать, что размер вашего\n"
+"раздела Microsoft Windows станет меньше, чем теперь. У вас будет меньше\n"
+"свободного места под Microsoft Windows для хранения данных и инсталляции\n"
+"новых программ\n"
 "\n"
-"!! Если вы выберете эту опцию, все данные на вашем диске будут потеряны. !!\n"
+" * \"Очистить весь диск\": выберите эту опцию, если вы хотите удалить все\n"
+"данные на всех разделах вашего жесткого диска и заменить их новой системой\n"
+"Mandrake Linux. Будьте осторожны в этом решении, потому что после\n"
+"подтверждения вы не сможете вернуть все как было назад.\n"
 "\n"
-" * \"Удалить Windows\": это просто сотрет все с диска и начнет чистую\n"
-"установку, разметив все с нуля. Все данные на вашем диске будут потеряны.\n"
-"!! Если вы выберете эту опцию, все данные на вашем диске будут потеряны. !!\n"
+"   !! Если вы выбираете эту опцию, все данные на вашем жестком диске будут\n"
+"   утеряны. !!\n"
 "\n"
-" * \"Режим эксперта\": выберите эту опцию, если вы хотите вручную разметить\n"
-"свой жесткий диск. Будьте осторожны - это очень мощный, но опасный выбор.\n"
-"Вы очень легко можете потерять все свои данные. Поэтому не выбирайте его,\n"
-"пока вы не будете знать, что вы делаете. Чтобы узнать, как использовать\n"
-"применяемую здесь утилиту DiskDrake, обратитесь к разделу ``Управление\n"
-"своими разделами'' в ``Руководстве пользователя''."
-
-#: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
+" * \"Удалить Windows\": эта опция позволит просто удалить всю информацию на\n"
+" диске и начать создание разделов диска на пустом месте. Вся информация на\n"
+" вашем диске будет утеряна.\n"
 "\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
+"   !! Если вы выберете эту опцию, все данные на вашем диске будут "
+"потеряны. !!\n"
 "\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"На установочном компакт-диске Mandrake Linux имеется аварийный режим. Вы\n"
-"можете получить к нему доступ, загрузившись с компакт-диска, нажмите\n"
-"клавишу >>F1<< при загрузке и введите в строке приглашения >>rescue<<.\n"
-"Но в этом случае ваш компьютер не может загрузиться с компакт-диска, вы\n"
-"должны вернуться на этот этап за справкой, по крайней мере, в двух\n"
-"ситуациях:\n"
-"\n"
-" * при установке начального загрузчика, DrakX перезапишет загрузочный\n"
-"сектор (MBR) вашего главного диска (пока вы не будет использовать другой\n"
-"менеджер загрузки), чтобы позволить вам загрузить Windows или GNU/Linux\n"
-"(подразумевается, что в вашей системе есть Windows). Если вам понадобится\n"
-"переустановить Windows, процесс установки Microsoft перезапишет загрузочный\n"
-"сектор, и тогда вы не сможете загрузить GNU/Linux!\n"
-"\n"
-" * если возникнет проблема и вы не сможете загрузить GNU/Linux с жесткого\n"
-"диска, эта дискета будет подразумевать только загрузку GNU/Linux. На ней\n"
-"содержится минимальное количество системных утилит для восстановления\n"
-"системы, завалившейся в результате отключения питания, неудачной ошибки\n"
-"при вводе, ошибки пароля и любой другой причины.\n"
-"\n"
-"Когда вы перейдете на этот этап, вам будет предложено вставить в дисковод\n"
-"дискету. Дискета должна быть чистой и не содержать нужной вам информации.\n"
-"Вы не должны ее форматировать, DrakX полностью перезапишет всю дискету."
+" * \"Ручная разметка диска\": выберите эту опцию, если вы желаете разбить "
+"ваш\n"
+"диск вручную. Будьте осторожны, это мощная и одновременно опасная "
+"возможность.\n"
+"Вы запросто можете потерять все данные. Поэтому выбор этой опции "
+"рекомендуется\n"
+"только если вы уже делали что либо подобное и имеете некоторый опыт. Чтобы\n"
+"узнать, как использовать утилиту DiskDrake, обратитесь к разделу\n"
+"``Управление разделами диска'' книги ``Стартовое руководство пользователя.''"
 
 #: ../../help.pm:1
 #, c-format
@@ -2459,6 +2361,9 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"В случае, когда для вашей карты доступны различные сервера, с 3D ускорением\n"
+"и без, вам предложат выбрать какой сервер больше соответствует вашим\n"
+"потребностям."
 
 #: ../../help.pm:1
 #, c-format
@@ -2470,6 +2375,12 @@ msgid ""
 "able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"Разрешение\n"
+"\n"
+"   Здесь вы можете выбрать разрешение и глубину цвета из того, что доступно\n"
+"для вашего оборудования. Выберите то, что вам больше подходит (вы сможете\n"
+"это изменить после инсталляции). Пример выбранной конфигурации отображается\n"
+"на мониторе."
 
 #: ../../help.pm:1
 #, c-format
@@ -2480,6 +2391,11 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"Монитор\n"
+"\n"
+"   Инсталлятор обычно может автоматически определить и настроить монитор,\n"
+"подключенный к вашей машине. Если ему это не удалось, вы можете\n"
+"самостоятельно выбрать ваш монитор из списка."
 
 #: ../../help.pm:1
 #, c-format
@@ -2536,6 +2452,59 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"X (для системы X Window) это основа графического интерфейса GNU/Linux,\n"
+"на котором базируются все графические среды (KDE, GNOME, AfterStep,\n"
+"WindowMaker, и т.д..), входящие в Mandrake Linux.\n"
+"\n"
+"Вам будет представлен список различных параметров для получения\n"
+"оптимального графического отображения: Видеокарта\n"
+"\n"
+"   Инсталлятор обычно автоматически определяет и настраивает видеокарту,\n"
+"установленную в вашей машине. Если это не так, вы можете выбрать в этом\n"
+"списке карту, которая у вас действительно установлена.\n"
+"\n"
+"В случае, когда для вашей карты доступны различные сервера, с 3D ускорением\n"
+"и без, вам предложат выбрать какой сервер больше соответствует вашим\n"
+"потребностям.\n"
+"\n"
+"\n"
+"\n"
+"Монитор\n"
+"\n"
+"   Инсталлятор обычно может автоматически определить и настроить монитор,\n"
+"подключенный к вашей машине. Если ему это не удалось, вы можете\n"
+"самостоятельно выбрать ваш монитор из списка.\n"
+"\n"
+"\n"
+"\n"
+"Разрешение\n"
+"\n"
+"   Здесь вы можете выбрать разрешение и глубину цвета из того, что доступно\n"
+"для вашего оборудования. Выберите то, что вам больше подходит (вы сможете\n"
+"это изменить после инсталляции). Пример выбранной конфигурации отображается\n"
+"на мониторе.\n"
+"\n"
+"\n"
+"\n"
+"Проверить\n"
+"\n"
+"   система попытается открыть графический экран в выбранном разрешении.\n"
+"Если вы сможете увидеть сообщение во время проверки и ответить \"Да\",\n"
+"тогда DrakX перейдет к следующему шагу. Если вы не увидите сообщения,\n"
+"это значит, что часть определенной автоматически конфигурации была неверна\n"
+"и проверка автоматически завершится через 12 секунд, вернув вас в меню.\n"
+"Поправьте настройки и проверьте заново, пока вы не получите корректное\n"
+"графическое изображение.\n"
+"\n"
+"\n"
+"\n"
+"Параметры\n"
+"\n"
+"    Здесь вы можете настроить вашу машину на автоматическую загрузку в\n"
+"графическом интерфейсе. Очевидно, что вам следует выбрать \"Нет\", если "
+"ваша\n"
+"машина будет работать в качестве сервера или вам не удалось настроить\n"
+"графический режим."
 
 #: ../../help.pm:1
 #, c-format
@@ -2550,9 +2519,18 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Видеокарта\n"
+"\n"
+"Инсталлятор обычно автоматически определяет и настраивает видеокарту,\n"
+"установленную в вашей машине. Если это не так, вы можете выбрать в этом\n"
+"списке карту, которая у вас действительно установлена.\n"
+"\n"
+"В случае, когда для вашей карты доступны различные сервера, с 3D ускорением\n"
+"и без, вам предложат выбрать какой сервер больше соответствует вашим\n"
+"потребностям."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2567,24 +2545,26 @@ msgid ""
 "choose a time server located near you. This option actually installs a time\n"
 "server that can used by other machines on your local network."
 msgstr ""
-"GNU/Linux управляет временем по Гринвичу (GMT) и переводит его в местное\n"
-"время, соответствующее выбранному вами временному поясу. Тем не менее,nможно "
-"отключить эту опцию, сняв флажок с \"Аппаратные часы выставлены\n"
-"по Гринвичу\", тогда аппаратные часы будут совпадать с системными. Это\n"
-"полезно, когда машина является ведущим сервером для другой операционной\n"
-"системы типа Windows.\n"
+"GNU/Linux управляет временем в GMT (Greenwich Mean Time) и транслирует его\n"
+"в локальное согласно выбранного вами часового пояса. Если часы на вашей\n"
+"материнской плате установлены в локальное время,  вы можете деактивировать\n"
+"это, убрав выбор \"Аппаратные часы выставлены по GMT\", что позволит\n"
+"GNU/Linux помнить, что системные часы и аппаратные часы принадлежат разным\n"
+"часовым поясам.  Это полезно в случае, когда на машине размещена другая\n"
+"операционная система типа Windows\n"
 "\n"
 "Опция \"Автоматическая синхронизация времени\" будет автоматически\n"
-"регулировать часы, подключаясь к удаленному серверу времени в Интернете.nИз "
-"предложенного списка выберите ближайший к вам сервер. Естественно,\n"
-"у вас должно быть активизировано подключение к Интернету для работы этой\n"
-"опции. На самом деле она установит на вашу машину сервер времени, который\n"
-"может быть по желанию использован другими машинами в вашей локальной сети."
+"подстраивать часы, соединяясь с удаленным сервером в Интернет. Естественно,\n"
+"чтобы это работало,  вам необходимо соединение с Интернет. Лучше всего\n"
+"выбрать ближайший к вам сервер времени. Эта опция устанавливает на вашу\n"
+"машину сервер времени, который опционально может использоваться другими\n"
+"машинами в вашей локальной сети."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2600,11 +2580,12 @@ msgid ""
 "enabled on a server. In general, select only the services you really need.\n"
 "!!"
 msgstr ""
-"Теперь вы можете выбрать сервисы, которые будут запускаться при загрузке.\n"
+"Этот шаг используется для выбора сервисов, которые будут запускаться при\n"
+"загрузке.\n"
 "\n"
-"Здесь представлены все сервисы, доступные в данной установке. Внимательно\n"
-"просмотрите их и снимите флажки с тех, которые не всегда нужны во время\n"
-"загрузки.\n"
+"DrakX предоставит список всех сервисов, доступных в данной установке.\n"
+"Внимательно просмотрите их и снимите флажки с тех, которые не всегда нужны\n"
+"во время загрузки.\n"
 "\n"
 "Вы можете получить короткую справочную информацию о сервисе, выбрав его из\n"
 "списка. Однако, если вы не уверены в том, полезен ли этот сервис или нет,\n"
@@ -2618,16 +2599,20 @@ msgstr ""
 "!!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"Принтер\": по нажатию на кнопку \"Принтера нет\" откроется мастер\n"
+"настройки принтера. Прочитайте соответствующую главу в книге ``Стартовое\n"
+"руководство пользователя'', чтобы узнать как установить новый принтер.\n"
+"Представленный там интерфейс подобен используемому в процессе установки."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2650,29 +2635,27 @@ msgid ""
 msgstr ""
 "Теперь вы можете настроить свое подключение к Интернету/сети. Если\n"
 "вы хотите подключить свой компьютер к Интернету или к локальной сети,\n"
-"нажмите \"ОК\". Будет запущено автоматическое определение сетевых устройств\n"
-"и модема. Если это определение завершится неудачно, в следующий раз снимите\n"
-"галочку \"Использовать автоматическое определение\". Вы можете также не\n"
+"нажмите \"Далее ->\". Будет запущено автоматическое определение сетевых\n"
+"устройств и модема. Если это определение завершится неудачно, в следующий\n"
+"раз уберите выбор \"Использовать автоопределение\". Вы можете также не\n"
 "настраивать сеть или сделать это позже; в этом случае, просто нажмите на\n"
 "кнопку \"Отмена\".\n"
 "\n"
 "Доступные соединения: традиционный модем, ISDN-модем, ADSL-соединение,\n"
-"кабельный модем и, наконец, простое подключение к ЛВС (Ethernet).\n"
+"кабельный модем и, наконец, простое подключение к LAN (Ethernet).\n"
 "\n"
 "Здесь мы не будем подробно описывать каждую настройку. Просто убедитесь,\n"
-"что вы получили все необходимые данные у провайдера услуг Интернета или\n"
-"системного администратора.\n"
+"что вы получили все необходимые данные, как то IP адрес, шлюз по умолчанию,\n"
+"DNS сервера и тд. у провайдера услуг Интернета (ISP) или системного\n"
+"администратора.\n"
 "\n"
 "Вы можете обратиться за справкой к главе ``Руководства пользователя''\n"
 "о подключении к Интернету с подробным описанием настройки, или просто\n"
 "подождать, пока система установится, и использовать описанную там\n"
-"программу, чтобы настроить свое подключение.\n"
-"\n"
-"Если вы хотите настроить сеть позже, после установки, или, если вы\n"
-"закончили настраивать свое сетевое соединение, нажмите \"Отмена\"."
+"программу, чтобы настроить свое подключение."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2708,23 +2691,17 @@ msgid ""
 "end of another installation. See the second tip of last step on how to\n"
 "create such a floppy."
 msgstr ""
-"Наконец, в зависимости от того, самостоятельно вы выбираете пакеты или нет,\n"
+"Если вы сообщили инсталлятору, что вы собираетесь отдельно выбрать пакеты,\n"
 "вам будет представлено дерево, содержащее все пакеты, классифицированные по\n"
 "группам и подгруппам. Просматривая дерево, вы можете выбирать целые группы,\n"
 "подгруппы или отдельные пакеты.\n"
 "\n"
 "Всякий раз, когда вы выбираете в дереве пакет, справа появляется описание.\n"
-"Когда вы закончите выбор, щелкните на кнопку \"Установить\", которая\n"
-"запустит процесс установки. В зависимости от быстродействия вашего\n"
-"аппаратного обеспечения и количества устанавливаемых пакетов процесс может\n"
-"занять значительный промежуток времени. Предполагаемое время, необходимое\n"
-"для полной установки, отображается на экране, чтобы помочь вам прикинуть:\n"
-"\"А не стоит ли сходить выпить чашечку кофе?\"\n"
 "\n"
 "!! Если был выбран пакет сервера, намеренно или потому, что он был частью\n"
 "всей группы, вам потребуется подтвердить, что вы действительно хотите\n"
 "использовать эти устанавливаемые серверы. В Mandrake Linux все\n"
-"устанавливаемые серверы по умолчанию запускаются во время загрузки. Даже,\n"
+"устанавливаемые серверы по умолчанию запускаются во время загрузки. Даже\n"
 "если они безопасны и не содержат известных на время включения в дистрибутив\n"
 "проблем, может случиться, что будут обнаружены дыры в безопасности после\n"
 "выпуска финальной версии Mandrake Linux. Если вы не знаете, для чего\n"
@@ -2732,11 +2709,15 @@ msgstr ""
 "\"Нет\". Щелкнув на \"Да\", вы установите перечисленные сервисы и они по\n"
 "умолчанию будут запускаться автоматически. !!\n"
 "\n"
-"Опция \"Автоматические зависимости\" просто отключает сообщение\n"
-"с предупреждением, которое появляется всякий раз, когда инсталлятор\n"
-"автоматически выбирает пакет. Это происходит потому, что он определил,\n"
-"что для успешного завершения установки требуется удовлетворить зависимости\n"
-"пакета.\n"
+"Опция \"Автоматические зависимости\" запрещает показ диалога "
+"предупреждения,\n"
+"который появляется при автоматическом выборе пакетов инсталлятором.\n"
+"Некоторые пакеты имеют взаимосвязь друг с другом, поэтому инсталлятору "
+"может\n"
+"потребоваться установить некоторые другие программы. Инсталлятор сам "
+"определит\n"
+"какие пакеты нужны для удовлетворения зависимостей, чтобы успешно выполнить\n"
+"установку.\n"
 "\n"
 "Маленький значок дискеты в конце списка позволит загрузить список пакетов,\n"
 "выбранных во время предыдущей установки. После нажатия на этот значок,\n"
@@ -2745,7 +2726,7 @@ msgstr ""
 "дискету."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2798,71 +2779,70 @@ msgid ""
 "groups to avoid installing any new package. This is useful for repairing or\n"
 "updating an existing system."
 msgstr ""
-"Теперь настало время выбрать программы, которые вы желаете установить в \n"
-"свою систему. Существуют тысячи доступных пакетов для Mandrake Linux и вам\n"
-"вовсе необязательно знать их все.\n"
+"Теперь настало время определить, какие программы вы хотите установить на\n"
+"вашу систему. С Mandrake Linux поставляются тысячи пакетов и для упрощения\n"
+"выбора они разбиты на группы.\n"
 "\n"
-"Если вы выполняете стандартную установку с компакт-диска, от вас сначала\n"
-"потребуется указать компакт-диски, которые есть у имеются (только в режиме\n"
-"Эксперта). Проверьте метки на дисках и отметьте галочками пункты,\n"
-"соответствующие имеющимся у вас установочными компакт-дискам. Когда вы\n"
-"будете готовы продолжать, нажмите \"ОК\".\n"
+"Пакеты сортированы по группам, которые соответствуют специфике "
+"использования\n"
+"вашей машины. В Mandrake Linux имеется четыре предопределенных варианта\n"
+"установки. Вы можете рассматривать эти варианты установки как наборы\n"
+"различных пакетов. Вы можете объединять приложения из различных наборов,\n"
+"например к варианту установки ``Рабочая станция'' могут быть добавлены\n"
+"приложения из набора ``Разработка''.\n"
 "\n"
-"Пакеты отсортированы по группам согласно повседневному использованию\n"
-"вашей машины. Сами группы делятся на четыре раздела:\n"
+" * \"Рабочая станция\": если вы собираетесь использовать машину как рабочую\n"
+"станцию, выберите одну или несколько соответствующих групп из набора "
+"рабочей\n"
+"станции.\n"
 "\n"
-" * \"Рабочая станция\": если вы планируете использовать свою машину\n"
-"в качестве рабочей станции, выберите одну или несколько соответствующих\n"
-"групп;\n"
+" * \"Разработка\": если вы собираетесь заняться программированием, выберите\n"
+"соответствующие пакеты из набора.\n"
 "\n"
-" * \"Разработка\": если ваша машина используется для программирования,\n"
-"выберите нужные группы;\n"
+" * \"Сервер\": если ваша машина будет работать сервером, выберите какие\n"
+"сервисы установить на нее.\n"
 "\n"
-" * \"Сервер\": если ваша машина предназначена исполнять роль сервера,\n"
-"вы сможете выбрать для установки на свою машину наиболее общие сервисы;\n"
+" * \"Графическая среда\": здесь вам нужно выбрать предпочитаемую\n"
+"графическую среду. Хотя бы одна из них должна быть выбрана, если вы хотите\n"
+"работать в графическом интерфейсе.\n"
 "\n"
-" * \"Графическая оболочка\": здесь, наконец, вы сможете выбрать\n"
-"желаемую графическую оболочку. Должна быть выбрана по крайней мере одна,\n"
-"если вы хотите иметь рабочую станцию с графическим интерфейсом!\n"
+"При наведении курсора мыши на имя группы будет показываться короткое\n"
+"пояснение о данной группе. Если вы не выберете ни одной группы в процессе\n"
+"выполнения обычной инсталляции (в противоположность upgrade), появится\n"
+"диалог с различными опциями для минимальной инсталляции:\n"
 "\n"
-"При наведении мыши на название группы появится короткий пояснительный текст\n"
-"об этой группе. Если снимете выделение со всех групп при выполнении\n"
-"очередной установки (в отличие от обновления), всплывет диалог,\n"
-"предлагающий различные варианты минимальной установки:\n"
+" * \"Вместе с Х\": инсталлировать минимальный набор пакетов, необходимых\n"
+"для работы графического рабочего стола.\n"
 "\n"
-" * \"Вместе с Х\": установит минимум пакетов, необходимых для работы\n"
-"графического рабочего стола;\n"
+" * \"С основной документацией\": установить основную систему плюс базовые\n"
+"утилиты и документацию к ним. Эта инсталляция подходит для установки\n"
+"сервера.\n"
 "\n"
-" * \"С основной документацией\": устанавливает базовую систему плюс\n"
-"основные утилиты и документацию к ним. Этот вариант подходит для\n"
-"установки сервера;\n"
+" * \"Действительно минимальная установка\": будет установлен самый\n"
+"необходимый минимум пакетов для работы Linux системы. В это варианте в\n"
+"сможете работать только в режиме командной строки. Общий размер этой \n"
+"установки занимает 65 мегабайт.\n"
 "\n"
-" * \"Действительно минимальная установка\": установит до предела минимально\n"
-"необходимое, чтобы получить рабочую систему Linux с командной строкой.\n"
-"Эта установка требует около 65 Мб дискового пространства.\n"
-"\n"
-"Вы можете установить флажок \"Самостоятельный выбор пакетов\", который\n"
-"полезен, если знакомы с предлагаемыми пакетами, или, если вы желаете\n"
-"получить полный контроль над тем, что будет установлено.\n"
-"\n"
-"Если вы начали установку в режиме \"Обновление\", вы можете снять выделение\n"
-"со всех групп, чтобы избежать установки каких-либо новых пакетов.\n"
-"Это полезно для восстановления или обновления существующей системы."
+"Вы можете отметить пункт \"Выбор отдельных пакетов\", который очень полезен\n"
+"если вы хорошо знаете предлагаемые пакеты или если вы хотите иметь полный\n"
+"контроль над тем, что будет устанавливаться.\n"
+"Если вы начали инсталляцию в режиме \"Upgrade\", вы можете убрать выбор\n"
+"всех групп, чтобы предотвратить инсталляцию какого-либо нового пакета. Это\n"
+"полезно в случае восстановления или обновления существующей системы."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"Дистрибутив Mandrake Linux поставляется на нескольких компакт-дисках. DrakX\n"
-"сам определит, если выбранный пакет находится на другом компакт-диске, "
-"извлечет\n"
-"текущий диск и попросит вас вставить требуемый."
+"Дистрибутив Mandrake Linux поставляется на нескольких компакт-дисках.\n"
+"DrakX сам определит, если выбранный пакет находится на другом\n"
+"компакт-диске, извлечет текущий диск и попросит вас вставить требуемый."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -2894,15 +2874,15 @@ msgid ""
 "With SCSI hard drives, an \"a\" means \"lowest SCSI ID\", a \"b\" means\n"
 "\"second lowest SCSI ID\", etc."
 msgstr ""
-"Выше перечисленное является существующими разделами Linux, обнаруженными на\n"
+"Здесь перечислены существующие разделы Linux, которые обнаружены на\n"
 "вашем жестком диске. Вы можете оставить изменения, произведенные мастером,\n"
 "они подходят для наиболее общих установок. Если вы производите какие-либо\n"
 "изменения, вам по крайней мере понадобится указать корневой раздел (\"/\").\n"
 "Не выбирайте слишком маленький раздел, иначе вы не сможете установить\n"
 "достаточное количество программного обеспечения. Если вы захотите хранить\n"
-"свои данные на отдельном разделе вам также потребуется создать раздел для\n"
-"\"/home\" (это возможно лишь в том случае, если у вас есть более одного|"
-"nраздела Linux).\n"
+"свои данные на отдельном разделе, вам также потребуется создать раздел\n"
+"\"/home\" (это возможно лишь в том случае, если у вас есть более одного\n"
+"раздела Linux).\n"
 "\n"
 "Каждый раздел заносится в список в следующем виде: \"Название\",\n"
 "\"Емкость\".\n"
@@ -2917,19 +2897,19 @@ msgstr ""
 "или \"sd\".\n"
 "Для IDE-дисков:\n"
 "\n"
-"   * \"a\" означает \"ведущий диск на первичном IDE-контроллере\",\n"
+"   * \"a\" означает \"master диск на первичном IDE-контроллере\",\n"
 "\n"
-"   * \"b\" означает \"подчиненный диск на первичном IDE-контроллере\",\n"
+"   * \"b\" означает \"slave диск на первичном IDE-контроллере\",\n"
 "\n"
-"   * \"c\" означает \"ведущий диск на вторичном IDE-контроллере\",\n"
+"   * \"c\" означает \"master диск на вторичном IDE-контроллере\",\n"
 "\n"
-"   * \"d\" означает \"подчиненный диск на вторичном IDE-контроллере\".\n"
+"   * \"d\" означает \"slave диск на вторичном IDE-контроллере\".\n"
 "\n"
 "Для SCSI-дисков, \"a\" означает \"первый снизу SCSI ID\", \"b\" означает\n"
 "\"второй снизу SCSI ID\", и т.д."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -2971,7 +2951,7 @@ msgid ""
 msgstr ""
 "GNU/Linux является многопользовательской системой, а это означает, что\n"
 "каждый пользователь может иметь свои собственные настройки, свои\n"
-"собственные файлы и так далее. Вы можете прочитать ``Руководство\n"
+"собственные файлы и так далее. Вы можете прочитать ``Стартовое руководство\n"
 "пользователя'', чтобы узнать больше. Но в отличие от \"root'а\", который\n"
 "является администратором, пользователи, которых вы здесь добавите, не будут\n"
 "иметь права изменять что-либо, кроме их собственных файлов и их собственной\n"
@@ -2995,24 +2975,31 @@ msgstr ""
 "Если вы щелкните на \"Принять пользователя\", тогда вы сможете добавить их\n"
 "столько, сколько вам нужно. Добавьте пользователя для каждого из своих\n"
 "друзей: своего отца или сестры, например. Когда вы закончите добавление\n"
-"всех нужных вам пользователей, выберите \"Готово\"./nЩелкнув по кнопке "
-"\"Дополнительно\", вам будет позволено изменить\n"
-"\"командный процессор\", используемый по умолчанию для этого пользователя\n"
-"(по умолчанию это bash)."
+"всех нужных вам пользователей, выберите \"Далее ->\".\n"
+"\n"
+"Щелкнув по кнопке \"Дополнительно\", вы сможете изменить \"shell\"\n"
+"по умолчанию для этого пользователя(по умолчанию это bash).\n"
+"\n"
+"После того, как все пользователи будут добавлены, вам предложат выбрать\n"
+"пользователя, под которым можно будет автоматически входить в систему\n"
+"после загрузки. Если вас интересует эта возможность (и вас не заботит\n"
+"локальная безопасность), выберите выберите необходимого пользователя и\n"
+"оконный менеджер, затем нажмите \"Далее ->\". Если вам не нужна эта\n"
+"возможность, снимите галочку с пункта \"Хотите использовать эту\n"
+"возможность?\"."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
 "terms in it, check the \"Accept\" box. If not, simply turn off your\n"
 "computer."
 msgstr ""
-"Перед тем, как продолжить, вы должны внимательно прочитать условия\n"
-"лицензии. Она распространяется на весь дистрибутив Mandrake Linux, и если\n"
-"вы не согласны с ее условиями, нажмите на кнопку \"Отказаться\", которая\n"
-"немедленно прекратит установку. Для продолжения установки нажмите на\n"
-"кнопку \"Принять\"."
+"Прежде чем продолжить, вы должны внимательно прочитать условия лицензии.\n"
+"Лицензия распространяется на весь дистрибутив Mandrake Linux. Если вы\n"
+"согласны со всеми условиями лицензии, отметьте пункт \"Принять\".\n"
+"Если нет - просто выключите свой компьютер"
 
 #: ../../install2.pm:1
 #, c-format
@@ -3208,6 +3195,9 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"Для гарантии целостности данных после изменения размера \n"
+"раздела(ов), проверка файловой системы будет запущена при\n"
+"следующей загрузке в Windows(TM)"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3301,12 +3291,12 @@ msgstr ""
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Swap partition size in MB: "
-msgstr "Размер раздела swap в МБ: "
+msgstr "Размер раздела swap в MB: "
 
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Root partition size in MB: "
-msgstr "Размер корневого раздела в МБ: "
+msgstr "Размер корневого раздела в MB: "
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3331,7 +3321,7 @@ msgstr "Нет существующих для использования разделов"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Use existing partitions"
-msgstr "Использовать существующий раздел"
+msgstr "Использовать существующие разделы"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3413,9 +3403,9 @@ msgstr ""
 "Официального Руководства Пользователя Mandrake Linux."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr " http://www.mandrakelinux.com/en/90errata.php3"
+msgstr " http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -3743,7 +3733,7 @@ msgstr "Произошла ошибка при установке пакетов:"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "There was an error ordering packages:"
-msgstr "Произошла ошибка при расстановке пакетов:"
+msgstr "Произошла ошибка при получении пакетов:"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3783,9 +3773,9 @@ msgid "%d packages"
 msgstr "%d пакетов"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Подробности"
+msgstr "Подробности отсутствуют"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -3905,7 +3895,7 @@ msgstr "Важность: %s\n"
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Size: %d KB\n"
-msgstr "Размер: %d КБ\n"
+msgstr "Размер: %d KB\n"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -3931,7 +3921,7 @@ msgstr "Другие"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Total size: %d / %d MB"
-msgstr "Общий объем: %d / %d МБ"
+msgstr "Общий объем: %d / %d MB"
 
 #: ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../my_gtk.pm:1
 #: ../../ugtk2.pm:1 ../../interactive/newt.pm:1
@@ -3943,7 +3933,7 @@ msgstr "Далее ->"
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Individual package selection"
-msgstr "Самостоятельный выбор пакетов"
+msgstr "Выбор отдельных пакетов"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -3992,7 +3982,7 @@ msgstr ""
 "полностью скопирует жесткий диск!!\n"
 "(предназначается для установки на другой компьютер).\n"
 "\n"
-"Вы можете захотеть повторить установку.\n"
+"Вы можете предпочесть повторить установку.\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4037,10 +4027,10 @@ msgid ""
 msgstr ""
 "Возможно, вам необходимо сменить свое загрузочное устройство\n"
 " Open Firmware, чтобы заработал начальный загрузчик. Если вы не видите\n"
-" приглашения начального загрузчика при перезагрузке, при перезагрузке\n"
-" нажмите и удерживайте Command-Option-O-F и введите:\n"
+" приглашения начального загрузчика при перезагрузке, нажмите и\n"
+" удерживайте Command-Option-O-F при перезагрузке и введите:\n"
 " setenv boot-device %s,\\\\:tbxi\n"
-" Затем введите: shut-down\n"
+" Затем напишите: shut-down\n"
 "При следующей загрузке вы должны увидеть приглашение начального загрузчика."
 
 #: ../../install_steps_interactive.pm:1
@@ -4134,7 +4124,7 @@ msgstr ""
 "в домене не работает, запустите 'smbpasswd -j ДОМЕН -U ПОЛЬЗОВАТЕЛЬ%%"
 "ПАРОЛЬ', используя домен и имя_пользователя/пароль своей Windows(tm), после "
 "загрузки системы.\n"
-"Команда 'wbinfo -t' проверит, надежна ли тайность вашей аутентификации."
+"Команда 'wbinfo -t' проверит, насколько секретна ваша аутентификация."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4196,7 +4186,7 @@ msgstr "Этот пароль слишком прост (его длина должна быть не менее %d символов)"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
-msgstr "Пароль отсутствует"
+msgstr "Без пароля"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4224,30 +4214,36 @@ msgstr "Сервисы"
 msgid "System"
 msgstr "Система"
 
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "%s on %s"
+msgstr "%s (Порт %s)"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Bootloader"
 msgstr "Начальный загрузчик"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Root"
+msgstr "Boot"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "отключить"
+msgstr "отключено"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "включить немедленно"
+msgstr "активировано"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Файервол/Маршрутизатор"
+msgstr "Файервол"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4255,9 +4251,9 @@ msgid "Security"
 msgstr "Безопасность"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level"
-msgstr "Уровень безопасности:"
+msgstr "Уровень безопасности"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4265,9 +4261,9 @@ msgid "Network"
 msgstr "Сеть"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Сетевой интерфейс"
+msgstr "Сеть и Интернет"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4275,14 +4271,14 @@ msgid "Graphical interface"
 msgstr "Графический интерфейс"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Оборудование"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "TV card"
-msgstr "ТВ-карта"
+msgstr "TV карта"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4295,7 +4291,7 @@ msgstr ""
 #, c-format
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
-"Запустите \"sndconfig\" после установки, чтобы настроить свою звуковую карту"
+"Запустите \"sndconfig\" после установки, чтобы настроить вашу звуковую карту"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4315,7 +4311,7 @@ msgstr "Удаленный сервер CUPS"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No printer"
-msgstr "Принтер отсутствует"
+msgstr "Принтера нет"
 
 #: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
 #: ../../printer/printerdrake.pm:1
@@ -4356,7 +4352,7 @@ msgstr "Автоматическая синхронизация времени (используя NTP)"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Hardware clock set to GMT"
-msgstr "Аппаратные часы выставлены по Гринвичу"
+msgstr "Аппаратные часы выставлены по GMT"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4364,14 +4360,14 @@ msgid "Which is your timezone?"
 msgstr "Какой у вас часовой пояс?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Хотите настроить печать?"
+msgstr "Вы хотели бы попробовать снова?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Невозможно разветвить: %s"
+msgstr "Невозможно соединиться с зеркалом %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4471,7 +4467,7 @@ msgstr "Действительно минимальная установка (в особенности нет urpmi)"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With basic documentation (recommended!)"
-msgstr "С базовой документацией (рекомендуется!)"
+msgstr "С основной документацией (рекомендуется!)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4667,6 +4663,11 @@ msgstr "Порт мыши"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Пожалуйста, выберите тип вашей мыши"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "Ключ шифрования"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5262,7 +5263,7 @@ msgstr "Азербайджанская (латинская)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Arabic"
-msgstr ""
+msgstr "Арабская"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5310,9 +5311,9 @@ msgid "South Africa"
 msgstr "Южная Африка"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "последовательная"
+msgstr "Сербия"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5330,9 +5331,9 @@ msgid "Samoa"
 msgstr "Самоа"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
-msgstr "Острова Уоллеса и Футана"
+msgstr "Уоллес и Футана"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5340,7 +5341,7 @@ msgid "Vanuatu"
 msgstr "Вануату"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Вьетнам"
 
@@ -5365,9 +5366,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Винсент и Гренадины"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Латвийская"
+msgstr "Ватикан"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5400,9 +5401,9 @@ msgid "Tanzania"
 msgstr "Танзания"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Тайланд"
+msgstr "Тайвань"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5480,9 +5481,9 @@ msgid "Swaziland"
 msgstr "Свазиленд"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syria"
-msgstr "Суринам"
+msgstr "Сирия"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5570,9 +5571,9 @@ msgid "Rwanda"
 msgstr "Руанда"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Русская"
+msgstr "Россия"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5605,9 +5606,9 @@ msgid "Portugal"
 msgstr "Португалия"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Выбор пути"
+msgstr "Палестина"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5815,9 +5816,9 @@ msgid "Morocco"
 msgstr "Марокко"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Либерия"
+msgstr "Ливия"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5865,9 +5866,9 @@ msgid "Lebanon"
 msgstr "Лебанон"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laos"
-msgstr "Логи"
+msgstr "Лаос"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5885,9 +5886,9 @@ msgid "Kuwait"
 msgstr "Кувейт"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Дополнительно"
+msgstr "Корея"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5930,7 +5931,7 @@ msgid "Japan"
 msgstr "Япония"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "Иордания"
 
@@ -5945,9 +5946,9 @@ msgid "Iceland"
 msgstr "Исландия"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Ирак"
+msgstr "Иран"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6000,9 +6001,9 @@ msgid "Honduras"
 msgstr "Гондурас"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
-msgstr "Остров Херда и острова МакДональда"
+msgstr "Острова Херда и МакДональда"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6030,7 +6031,7 @@ msgid "Guatemala"
 msgstr "Гватемала"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Южная Джорджия и Южные Сандвичевы острова "
 
@@ -6425,9 +6426,9 @@ msgid "Afghanistan"
 msgstr "Афганистан"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "default:LTR"
-msgstr "по умолчанию"
+msgstr "по умолчанию:LTR"
 
 #: ../../loopback.pm:1
 #, c-format
@@ -6605,7 +6606,7 @@ msgstr "Мышь Sun"
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
-msgstr "Переключение между простым и отсортированным по группам списками"
+msgstr "Переключение между простым и сортированным по группам списками"
 
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -6615,7 +6616,7 @@ msgstr "Свернуть дерево"
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Expand Tree"
-msgstr "Развернуть дерева"
+msgstr "Развернуть дерево"
 
 #: ../../my_gtk.pm:1 ../../services.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -6661,12 +6662,12 @@ msgstr ""
 #: ../../partition_table.pm:1
 #, c-format
 msgid "Extended partition not supported on this platform"
-msgstr "Расширенные разделы не поддерживаются на этой платформе"
+msgstr "Раздел Extended не поддерживается на этой платформе"
 
 #: ../../partition_table.pm:1
 #, c-format
 msgid "mount failed: "
-msgstr "монтирование завершилось неудачей: "
+msgstr "монтирование не удалось: "
 
 #: ../../pkgs.pm:1
 #, c-format
@@ -6849,13 +6850,14 @@ msgstr ""
 "для сложных сетей необходимы более сложные протоколы маршрутизации."
 
 #: ../../services.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Assign raw devices to block devices (such as hard drive\n"
 "partitions), for the use of applications such as Oracle or DVD players"
 msgstr ""
 "Назначает raw-устройства block-устройствам (таким как разделы\n"
-"жесткого диска) для использования такими приложениями, как Oracle"
+"жесткого диска) для использования такими приложениями, как Oracle или\n"
+"DVD проигрыватели"
 
 #: ../../services.pm:1
 #, c-format
@@ -6872,8 +6874,8 @@ msgid ""
 "Postfix is a Mail Transport Agent, which is the program that moves mail from "
 "one machine to another."
 msgstr ""
-"Postfix является Агентом доставки почты, представляющим собой программу, "
-"которая переправляет почту с одной машины на другую."
+"Postfix это Агент доставки почты, программа которая переправляет почту с "
+"одной машины на другую."
 
 #: ../../services.pm:1
 #, c-format
@@ -6950,8 +6952,8 @@ msgid ""
 "Mounts and unmounts all Network File System (NFS), SMB (Lan\n"
 "Manager/Windows), and NCP (NetWare) mount points."
 msgstr ""
-"Монтирует и размонтирует все точки монтирования сетевых файловых систем\n"
-"(NFS), SMB (LanManager/Windows) и NCP (NetWare)."
+"Монтирует и размонтирует все точки монтирования сетевых\n"
+"файловых систем(NFS), SMB (LanManager/Windows) и NCP (NetWare)."
 
 #: ../../services.pm:1
 #, c-format
@@ -6968,7 +6970,7 @@ msgid ""
 "Linux Virtual Server, used to build a high-performance and highly\n"
 "available server."
 msgstr ""
-"Виртуальный Сервер Linux, используемый для создания высокопроизводительных\n"
+"Виртуальный Сервер Linux, используется для создания высокопроизводительных\n"
 "и широкодоступных серверов."
 
 #: ../../services.pm:1
@@ -7141,13 +7143,13 @@ msgstr ""
 "       разрешение XFdrake"
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
-"[--manual] [--device=устройство] [--update-sane=каталог_описания_sane] [--"
-"update-usbtable] [--dynamic=устройство]"
+"[--manual] [--device=устройство] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=устройство]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7238,7 +7240,7 @@ msgstr ""
 "(требуется имя пользователя)\n"
 "--addclient      : добавить клиентскую машину в MTS (требуется MAC-адрес, "
 "IP, имя образа nbi)\n"
-"--delclient      : добавить клиентскую машину из MTS (требуется MAC-адрес, "
+"--delclient      : удалить клиентскую машину из MTS (требуется MAC-адрес, "
 "IP, имя образа nbi)"
 
 #: ../../standalone.pm:1
@@ -7351,7 +7353,7 @@ msgid "Exit install"
 msgstr "Завершение установки"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
 msgstr "Установка обновлений"
 
@@ -7378,12 +7380,12 @@ msgstr "Настройка сети"
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
-msgstr "Добавл. пользователя"
+msgstr "Добавление пользователя"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "Пароль отсутствует"
+msgstr "Пароль Root"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7398,7 +7400,7 @@ msgstr "Выбор пакетов"
 #: ../../steps.pm:1
 #, c-format
 msgid "Format partitions"
-msgstr "форматирование разделов"
+msgstr "Форматирование разделов"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7577,47 +7579,47 @@ msgstr "X-сервер"
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "64 MB or more"
-msgstr "64 МБ или больше"
+msgstr "64 MB или больше"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "32 MB"
-msgstr "32 МБ"
+msgstr "32 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "16 MB"
-msgstr "16 МБ"
+msgstr "16 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "8 MB"
-msgstr "8 МБ"
+msgstr "8 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "4 MB"
-msgstr "4 МБ"
+msgstr "4 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "2 MB"
-msgstr "2 МБ"
+msgstr "2 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "1 MB"
-msgstr "1 МБ"
+msgstr "1 MB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "512 kB"
-msgstr "512 кБ"
+msgstr "512 kB"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "256 kB"
-msgstr "256 кБ"
+msgstr "256 kB"
 
 #: ../../Xconfig/main.pm:1
 #, c-format
@@ -7825,7 +7827,7 @@ msgid ""
 "Would you like XFree to start when you reboot?"
 msgstr ""
 "Можно настроить ваш компьютер на автоматический запуск графического\n"
-"интерфейса (XFree) во время загрузке. Хотите, чтобы XFree запускался при "
+"интерфейса (XFree) во время загрузки. Хотите чтобы XFree запускался при "
 "перезагрузке?"
 
 #: ../../Xconfig/various.pm:1
@@ -8341,7 +8343,7 @@ msgstr "Осторожно: эта операция опасна."
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "chunk size"
-msgstr "размер chunk"
+msgstr "размер куска"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8386,7 +8388,7 @@ msgstr "Тип файловой системы: "
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Size in MB: "
-msgstr "Размер в МБ: "
+msgstr "Размер в MB: "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8456,7 +8458,7 @@ msgstr "Переместить"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "New size in MB: "
-msgstr "Новый размер в МБ: "
+msgstr "Новый размер в MB: "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8643,7 +8645,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Removable media automounting"
-msgstr "Автомонтирование съемных накопителей"
+msgstr "Автомонтирование съемных носителей"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8732,7 +8734,7 @@ msgstr "Переключиться в нормальный режим"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Undo"
-msgstr "Возврат"
+msgstr "Отменить действие"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8818,9 +8820,9 @@ msgid "SCSI controllers"
 msgstr "Контроллеры SCSI"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewire controllers"
-msgstr "Контроллеры USB"
+msgstr "Контроллеры Firewire"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8860,7 +8862,7 @@ msgstr "Карта ethernet"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Processors"
-msgstr "Процессора"
+msgstr "Процессоры"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8988,7 +8990,7 @@ msgstr ""
 "- \"/sbin/lsmod\" позволит вам проверить загружен ли модуль (драйвер)\n"
 "\n"
 "- \"/sbin/chkconfig --list sound\" и \"/sbin/chkconfig --list alsa\"\n"
-"сообщит вам были сервисы sound и alsa перенастроены для запуска\n"
+"сообщит вам были сервисы sound и alsa настроены для запуска\n"
 "на initlevel 3 или нет\n"
 "\n"
 "- \"aumix -q\" сообщит вам включена громкость звука или нет\n"
@@ -8999,7 +9001,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Sound trouble shooting"
-msgstr "Поиск и устранение неисправностей со звуком"
+msgstr "Решение проблем со звуком"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9562,7 +9564,7 @@ msgstr "Веб-сервер"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
+msgstr "Имя хоста Zeroconf не должно содержать a ."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9582,6 +9584,10 @@ msgid ""
 "Enter a Zeroconf host name without any dot if you don't\n"
 "want to use the default host name."
 msgstr ""
+"\n"
+"\n"
+"Введите имя хоста Zeroconf без точек, если вы не\n"
+"хотите использовать имя хоста по умолчанию."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9590,16 +9596,11 @@ msgstr "Настройка сети"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "сетевая карта не найдена"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
 "Пожалуйста, выберите сетевой адаптер, который вы хотите использовать для "
-"подключения к Интернету?"
+"подключения к Интернету."
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
 #: ../../standalone/drakpxe:1
@@ -9614,7 +9615,7 @@ msgid ""
 "I cannot set up this connection type."
 msgstr ""
 "В вашей системе не был обнаружен сетевой адаптер ethernet.\n"
-"Я не могу установить такой тип соединения."
+"Я не могу установить этот тип соединения."
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -9906,7 +9907,7 @@ msgid ""
 "After this is done, we recommend that you restart your X environment to "
 "avoid any hostname-related problems."
 msgstr ""
-"После этого мы рекомендуем перезапустить свою оболочку Х, чтобы избежать "
+"После этого мы рекомендуем перезапустить свою среду Х, чтобы избежать "
 "проблем, связанных со сменой имени хоста."
 
 #: ../../network/netconnect.pm:1
@@ -9916,7 +9917,7 @@ msgid ""
 "The configuration will now be applied to your system.\n"
 "\n"
 msgstr ""
-"Поздравляем, настройка сети и подключения к Интернету завершена.\n"
+"Поздравляем, настройка сети и подключения к Интернет завершена.\n"
 "\n"
 "Сейчас конфигурация будет применена к вашей системе.\n"
 
@@ -9932,9 +9933,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Пакет %s должен быть установлен. Хотите установить его?"
+msgstr "Нужно перезапустить сеть. Вы хотите перезапустить ее?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9949,7 +9950,7 @@ msgstr "Хотите ли вы запускать подключение при загрузке?"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internet connection"
-msgstr "Подключение к Интернету"
+msgstr "Подключение к Интернет"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10051,10 +10052,10 @@ msgid ""
 "We are about to configure your internet/network connection.\n"
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
-"Добро пожаловать в Мастер настройки сети.\n"
+"Добро пожаловать в Мастер настройки Сети.\n"
 "\n"
 "Сейчас мы настроим ваше подключение к Интернету и/или локальной сети.\n"
-"Если вы не хотите использовать автоопределение, снимите галочку.\n"
+"Если вы не хотите использовать автоопределение, уберите выбор опции.\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10142,17 +10143,17 @@ msgid ""
 "You can disconnect or reconfigure your connection."
 msgstr ""
 "\n"
-"Вы можете отключиться или перенастроить свое соединение."
+"Вы можете отключить или перенастроить свое соединение."
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "You are currently connected to the Internet."
-msgstr "В данный момент вы подключены к Интернету."
+msgstr "В данный момент вы подключены к Интернет."
 
 #: ../../network/network.pm:1
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
-msgstr "Url должен начинаться с 'ftp:' или 'http:'"
+msgstr "URL должен начинаться с 'ftp:' или 'http:'"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10209,8 +10210,8 @@ msgid ""
 msgstr ""
 "Пожалуйста, введите имя своего хоста.\n"
 "Имя вашего хоста должно быть полностью определенным именем\n"
-"хоста, таким как ``mybox.mylab.myco.com''.Вы можете также ввести IP-адрес "
-"шлюза, если он у вас есть"
+"хоста, таким как ``mybox.mylab.myco.com''. Вы можете также \n"
+"ввести IP-адрес шлюза, если он у вас есть"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10241,14 +10242,14 @@ msgid "Start at boot"
 msgstr "Запускать при загрузке"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Пожалуйста, введите имя хоста или IP"
+msgstr "Определить имя хоста из DHCP адреса"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Мониторинг сети"
+msgstr "Network Hotplugging"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10256,15 +10257,15 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Использовать id сетевой карты (полезно для ноутбуков)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Имя хоста"
+msgstr "Имя хоста DHCP"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Netmask"
-msgstr "Сетевая маска"
+msgstr "Маска сети"
 
 #: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakconnect:1
@@ -10432,7 +10433,7 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "For security reasons, it will be disconnected now."
-msgstr "По соображениям безопасности, сейчас соединение будет разорвано."
+msgstr "Из соображений безопасности, соединение сейчас будет разорвано."
 
 #: ../../network/tools.pm:1
 #, c-format
@@ -10542,9 +10543,9 @@ msgid "Unknown model"
 msgstr "Неизвестная модель"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Port %s)"
-msgstr "Порт"
+msgstr "%s (Порт %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10878,10 +10879,9 @@ msgstr ""
 "Обновить список принтеров (отобразить все доступные удаленные принтеры CUPS)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Display all available remote CUPS printers"
-msgstr ""
-"Обновить список принтеров (отобразить все доступные удаленные принтеры CUPS)"
+msgstr "Вывести все доступные удаленные принтеры CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10891,21 +10891,8 @@ msgid ""
 "it."
 msgstr ""
 "Настроены следующие принтеры. Дважды щелкните на принтере, чтобы изменить "
-"его настройки; сделать его принтером по умолчанию; просмотреть информацию о "
-"нем"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"Настроены следующие принтеры. Щелкните дважды на принтере, чтобы изменить "
-"его настройки; сделать его используемым по умолчанию; просмотреть информацию "
-"о нем; или сделать принтер на удаленном сервере CUPS доступным для Star "
-"Office/OpenOffice.org/GIMP."
+"его настройки; сделать его принтером по умолчанию; или просмотреть "
+"информацию  о нем"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10948,9 +10935,9 @@ msgid "Select Printer Spooler"
 msgstr "Выберите спулер принтера"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Setting Default Printer..."
-msgstr "Принтер по умолчанию"
+msgstr "Устанавливается принтер по умолчанию..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11045,9 +11032,9 @@ msgid ""
 "your configuration and your hardware. Then try to configure your remote "
 "printer again."
 msgstr ""
-"Доступ к сети не был предоставлен и не мог быть запущен. Пожалуйста, "
-"проверьте свою конфигурацию и оборудование. Затем снова попытайтесь "
-"настроить свой удаленный принтер."
+"Доступ к сети не выполнялся и не может быть запущен. Пожалуйста, проверьте "
+"свою конфигурацию и оборудование. Затем снова попытайтесь настроить свой "
+"удаленный принтер."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11059,7 +11046,7 @@ msgid ""
 "printer, also using the Mandrake Control Center, section \"Hardware\"/"
 "\"Printer\""
 msgstr ""
-"Сети, настроенная во время установки, не может быть сейчас запущена. "
+"Сеть, настроенная во время установки, не может быть сейчас запущена. "
 "Пожалуйста, проверьте, будет ли доступна сеть после загрузки вашей системы и "
 "подправьте конфигурацию при помощи Центра управления Mandrake, раздел \"Сеть "
 "& Интернет\"/\"Подключение\", а затем установите принтер, также при помощи "
@@ -11542,6 +11529,11 @@ msgstr "Параметр %s должен быть числом!"
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Параметр %s должен быть целым числом!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer default settings"
+msgstr "Установки принтера по умолчанию"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12555,9 +12547,9 @@ msgid "("
 msgstr "("
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer ..."
-msgstr "Настраивается принтер \"%s\"..."
+msgstr "Настраивается принтер ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12571,7 +12563,7 @@ msgid ""
 "additional software will be installed."
 msgstr ""
 "ПРИМЕЧАНИЕ: в зависимости от модели принтера и системы печати будет "
-"установлено до %d МБ дополнительного программного обеспечения."
+"установлено до %d MB дополнительного программного обеспечения."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12681,14 +12673,14 @@ msgid "Checking your system..."
 msgstr "Проверяется ваша система..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "Перезапуск XFS"
+msgstr "Перезапускается CUPS..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "This server is already in the list, it cannot be added again.\n"
-msgstr "Этот хост/сеть уже есть в списке, он не может быть добавлен еще раз.\n"
+msgstr "Этот сервер уже есть в списке, он не может быть добавлен снова.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12696,14 +12688,14 @@ msgid "Examples for correct IPs:\n"
 msgstr "Примеры правильных IP:\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Введен неправильный IP хоста/сети.\n"
+msgstr "Введен неправильный IP.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server IP missing!"
-msgstr "Отсутствует имя сервера NCP!"
+msgstr "Отсутствует IP сервера!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12712,24 +12704,24 @@ msgstr ""
 "Введите IP адрес и порт хоста, принтеры которого вы хотите использовать."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accessing printers on remote CUPS servers"
-msgstr "Принтер на удаленном сервере CUPS"
+msgstr "Получение доступа к принтерам на удаленных серверах CUPS"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected server"
-msgstr "Удалить выбранные"
+msgstr "Удалить выбранный сервер"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected server"
-msgstr "обнаружено %s"
+msgstr "Редактировать выбранный сервер"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add server"
-msgstr "Добавить пользователя"
+msgstr "Добавить сервер"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12738,6 +12730,9 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+"Добавьте здесь сервера CUPS, чьи принтера вы хотите использовать. Вам "
+"прийдется это делать только если сервера не передают информацию о своих "
+"принтерах в локальную сеть."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12831,7 +12826,7 @@ msgid "Automatic correction of CUPS configuration"
 msgstr "Автоматическая корректировка настройки CUPS"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
@@ -12842,23 +12837,24 @@ msgid ""
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
 msgstr ""
-"Чтобы получит доступ к принтерам на удаленных серверах CUPS в вашей "
-"локальной сети, вам не нужно ничего настраивать; серверы CUPS автоматически "
+"Чтобы получить доступ к принтерам на удаленных серверах CUPS в вашей "
+"локальной сети, вам нужно только включить опцию \"Автоматически "
+"искатьдоступные принтеры на удаленных машинах\"; серверы CUPS автоматически "
 "сообщат вашей машине о своих принтерах. Все принтеры, известные на данный "
 "момент вашей машине, перечислены в разделе \"Удаленные принтеры\" в главном "
 "окне Printerdrake. Когда сервер CUPS находится на в вашей локальной сети, вы "
 "должны ввести IP-адрес и, возможно, номер порта, чтобы получить с сервера "
-"информацию о принтере, в противном случае оставьте эти поля пустыми."
+"информацию о принтере."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "None"
-msgstr "Готово"
+msgstr "Отсутствует"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Additional CUPS servers: "
-msgstr "на сервере CUPS \"%s\""
+msgstr "Дополнительные сервера CUPS"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -12878,7 +12874,7 @@ msgstr "Общий доступ к принтеру с хостов/сетей:"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr "Автоматически найти доступные принтеры на удаленных машинах"
+msgstr "Автоматически искать доступные принтеры на удаленных машинах"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13040,11 +13036,13 @@ msgid "if set to yes, report check result to syslog."
 msgstr "если установлено yes, сообщает о результате проверки в syslog."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "if set to yes, check for empty passwords, for no password in /etc/shadow and "
 "for users with the 0 id other than root."
-msgstr "если установлено yes, проверяет пустые пароли в /etc/shadow."
+msgstr ""
+"если установлено в yes, проверяет на пустые пароли, отсутствие паролей в /"
+"etc/shadow и пользователей с id 0, отличных от root"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13545,7 +13543,7 @@ msgstr ""
 #: ../../security/level.pm:1
 #, c-format
 msgid "Paranoid"
-msgstr "Параноидальной"
+msgstr "Параноидальный"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -13565,14 +13563,14 @@ msgstr "Низкий"
 #: ../../security/level.pm:1
 #, c-format
 msgid "Welcome To Crackers"
-msgstr "Добро пожаловать, взломщики"
+msgstr "Добро пожаловать в Кракеры"
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "Своим успехом MandrakeSoft обязан принципам Открытого программного "
 "обеспечения. Ваша новая операционная система является результатом совместной "
@@ -13580,7 +13578,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Добро пожаловать в мир Открытых исходных текстов"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -13591,8 +13589,8 @@ msgstr "Благодарим вас за то, что выбрали Mandrake Linux 9.1"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "Познакомьтесь с сообществом Открытых исходных текстов и станьте его членом. "
 "Изучайте, учите и помогайте другим, присоединившись к обсуждениям на "
@@ -13601,216 +13599,159 @@ msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Хотите узнать больше о сообществе Открытых исходных текстов?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"Хотите узнать больше о сообществе Открытых исходных текстов? Погрузитесь в "
+"мир Открытого программного обеспечения!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Погрузитесь в мир Открытого программного обеспечения"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mandrake Linux 9.1 выбрал для вас наилучшее программное обеспечение. "
-"Занимайтесь серфингом по просторам паутины и просматривайте анимации при "
-"помощи Mozilla и Konqueror, или читайте свою почту и управляйте своей личной "
-"информацией при помощи Evolution и Kmail."
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Извлеките максимум возможностей из Интернета"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 позволяет вам использовать самое свежее программное "
 "обеспечение для воспроизведения аудиофайлов, редактирования и управления "
 "своими изображениями или фотографиями и просмотра видео"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "Выжмите из своего оборудования мультимедиа все до предела!"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "Откройте самые современные графические и мультимедийные инструменты!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 предлагает наилучшие игры с Открытыми исходными тестами - "
-"аркады, экшены, карты, спортивные, стратегии, ..."
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "Игры"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Mandrake Linux 9.1 предоставляет мощные инструменты для полной настройки и "
-"наладки вашей машины"
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Центр управления Mandrake"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Настройка сервера терминала Mandrake"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1 предоставляет вам 11 интерфейсов пользователя, которые "
 "могут быть полностью изменены: KDE 3, Gnome 2, WindowMaker, ..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Интерфейс пользователя"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Используйте всю силу компилятора GNU gcc 3, а также наилучшие среды "
-"разработки Исходных текстов"
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 является уникальной платформой для разработки"
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Разработка упрощена"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Превратите свою машину в мощный сервер всего лишь несколькими щелчками мыши: "
 "веб-сервер, электронная почта, брандмауэр, маршрутизатор, файловый сервер и "
 "сервер печати, ..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Превратите свою машину в надежный сервер"
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "Этот продукт доступен на веб-сайте MandrakeStore"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"Файервол обеспечен сетевыми возможностями, которые позволят вам применить "
-"все необходимые меры безопасности"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"Пакет MandrakeSecurity включает в себя программный продукт Multi Network "
-"Firewall (M.N.F.)"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Оптимизируйте свою безопасность"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "Полный диапазон решений Linux, а также специальные предложения по продуктам "
 "и 'goodies' доступны в нашем онлайновом электронном магазине"
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "Официальный магазин MandrakeSoft"
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
+#: ../../share/advertising/09-mdksecure.pl:1
+#, fuzzy, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 "MandrakeSoft бок о бок работает с рядом компаний, предлагающих "
 "профессиональные решения, совместимые с Mandrake Linux; список этих "
 "партнеров доступен в MandrakeStore"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "Стратегические партнеры"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"Учитесь ли в онлайне или посредством нашей сети обучающих партнеров, "
-"программа Mandrake-Campus подготовит вас к общепризнанной программе "
-"сертификации LPI (всемирная профессиональная техническая сертификация)"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Подтвердите свое знание Linux"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Оптимизируйте свою безопасность"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "Этот продукт доступен на веб-сайте MandrakeStore"
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"Программа обучения была создана для удовлетворения потребностей "
-"пользователей и экспертов (сетевых и системных администраторов)"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "Откройте учебную программу MandrakeSoft'а - Linux-Campus"
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13821,21 +13762,21 @@ msgstr ""
 "онлайне, чтобы поделиться своими знаниями и помочь другим, став признанным "
 "Экспертом на веб-сайте онлайновой технической поддержки:"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 "Найдите решение для своих задач при помощи комплекса онлайновой поддержки "
 "MandrakeSoft"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Станьте экспертом Mandrake"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -13844,39 +13785,17 @@ msgstr ""
 "Все инциденты будут рассмотрены одним из квалифицированных технических "
 "экспертов из MandrakeSoft"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 "Онлайновый комплекс для удовлетворения потребностей специфической поддержки "
 "компаний"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Корпорация MandrakeExpert"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"MandrakeClub и Корпоративный клуб Mandrake были созданы для деловых и\n"
-"частных пользователей Mandrake Linux, которые хотят непосредственно\n"
-"поддержать свой любимый дистрибутив Linux, получая при этом особые\n"
-"привилегии. Если вы довольны нашими продуктами, если ваша компания\n"
-"извлекает выгоду из наших продуктов в борьбе с конкурентами, если вы\n"
-"хотите поддержать разработку Mandrake Linux, вступайте в MandrakeClub!"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "Откройте MandrakeClub и Корпоративный клуб Mandrake"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -16525,6 +16444,11 @@ msgstr "Первоначальный мастер"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Центр управления Mandrake"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Утилита создания отчета об ошибке Mandrake"
 
@@ -17009,7 +16933,7 @@ msgid "Choose the applications that will support the fonts:"
 msgstr "Выберите приложения, которые будут поддерживать шрифты :"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -17043,7 +16967,8 @@ msgid ""
 msgstr ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
-"\tDUPONT Sebastien sdupont\\@mandrakesoft.com\n"
+"\tDUPONT Sebastien (original version)\n"
+"        CHAUMETTE Damien <dchaumette\\@mandrakesoft.com>\n"
 "\n"
 " Эта программа является открытым программным обеспечением; вы можете\n"
 " распространять ее дальше и/или изменять ее при условии соблюдения GNU\n"
@@ -17057,7 +16982,9 @@ msgstr ""
 ".\n"
 " Вы должны были получить копию GNU General Public License вместе с этой\n"
 " программой; если нет - напишите в Free Software Foundation, Inc.,\n"
-" 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA. Благодарности:\n"
+" 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n"
+"\n"
+"Благодарности:\n"
 "    -  pfm2afm:   \n"
 "\t автор Ken Borgendale:\n"
 "\t    Конвертирование Windows-файла .pfm  в .afm (Adobe Font Metrics)\n"
@@ -17067,8 +16994,6 @@ msgstr ""
 "    -  ttf2pt1:   \n"
 "\t  авторы Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Конвертирует файлы шрифтов ttf в шрифты afm и pfb\n"
-"\n"
-"\n"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -17485,6 +17410,22 @@ msgid "Interface %s (using module %s)"
 msgstr "Интерфейс %s (использующий модуль %s)"
 
 #: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Сервис Xinetd"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
@@ -17866,7 +17807,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -17874,17 +17815,17 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Вы собираетесь установить на свой компьютер сервер PXE в качестве сервера "
-"DHCP\n"
-"и сервера TFTP для создания сервера установки.\n"
-"Благодаря этой возможности, другие компьютеры в вашей локальной сети можно "
-"будет устанавливать с этого компьютера.\n"
+"Вы собираетесь установить на свой компьютер сервер PXE в качестве DHCP "
+"сервера\n"
+"и сервер TFTP для создания сервера установки.\n"
+"Благодаря этой возможности другие компьютеры в вашей локальной сети смогут "
+"проводить инсталляцию с этого компьютера.\n"
 "\n"
-"Убедитесь, что вы уже настроили доступ к свей Сети/Интранету при помощи "
+"Убедитесь, что вы уже настроили доступ к Сети/Интернет при помощи "
 "drakconnect перед тем, как продолжить.\n"
 "\n"
 "Примечание: вам необходим отдельный сетевой адаптер для настройки локальной "
-"вычислительной сети (ЛВС)."
+"сети (LAN)."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17952,7 +17893,7 @@ msgid "(default value: %s)"
 msgstr "(значение по умолчанию: %s)"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17976,27 +17917,27 @@ msgid ""
 "be sent to this user (username or\n"
 "            email)"
 msgstr ""
-"Стандартный: это стандартный уровень безопасности, рекомендуемый для\n"
-"             компьютера, который будет использоваться для подключения\n"
-"             к Интернету в качестве клиента.\n"
+"Стандартный: это стандартный уровень безопасности, рекомендуемый для "
+"компьютера, который будет использоваться для подключения\n"
+"             к Интернет в качестве клиента.\n"
 "\n"
-"Высокий:     здесь уже присутствуют некоторые ограничения, а также\n"
-"             дополнительные автоматические проверки, выполняемые каждую\n"
-"             ночь.\n"
+"Высокий:     Здесь уже присутствуют некоторые ограничения, а "
+"такжедополнительные автоматические проверки, выполняемые каждую ночь.\n"
 "\n"
-"Повышенный:  безопасность теперь достаточно высока для использования машины\n"
-"             в качестве сервера, который может принимать подключения от\n"
-"             многочисленных клиентов. Если ваша машина является только\n"
-"             клиентом Интернета, вы \tдолжны использовать более низкий\n"
-"             уровень.\n"
+"Повышенный:  Безопасность теперь достаточно высока для использования машиныв "
+"качестве сервера, который может принимать\n"
+"             подключения от многочисленных клиентов. Если ваша машина "
+"является только клиентом Интернета, вы \n"
+"             должны использовать более низкий уровень.\n"
 "\n"
-"Параноидальный: похож на предыдущий уровень, но система полностью закрыта\n"
-"             и возможности безопасности используются по максимуму.\n"
+"Параноидальный: похож на предыдущий уровень, но система полностью\n"
+"закрыта и\n"
+"             возможности безопасности используются по максимуму.\n"
 "\n"
 "Администратор по безопасности:\n"
-"             если установлена опция 'Предупреждения о безопасности',\n"
-"             предупреждения о безопасности будут отправляться этому\n"
-"             пользователю (имя пользователя или \temail)"
+"             если установлена опция 'Предупреждения о безопасности',"
+"предупреждения о безопасности будут отправляться этому\n"
+"             пользователю (имя пользователя или email)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -18072,6 +18013,11 @@ msgstr "сохраняется тема Bootsplash..."
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "выберите файл образа"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "выберите файл образа"
 
 #: ../../standalone/draksplash:1
@@ -18373,14 +18319,14 @@ msgstr ""
 "Щелкните на устройство из дерева слева, чтобы увидеть здесь информацию о нем."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown"
-msgstr "Неизвестная модель"
+msgstr "Unknown"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "unknown"
-msgstr "Неизвестная модель"
+msgstr "unknown"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18428,7 +18374,7 @@ msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "Version:"
 msgstr ""
-"Это HardDrake - инструментальное средство Mandrake настройки оборудования.\n"
+"Это HardDrake - инструмент настройки оборудования Mandrake.\n"
 "Версия:"
 
 #: ../../standalone/harddrake2:1
@@ -18551,8 +18497,18 @@ msgstr "порт сетевого принтера"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "the name of the CPU"
+msgstr "название CPU"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Name"
 msgstr "Имя"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the number of buttons the mouse has"
+msgstr "количество кнопок, имеющихся у мыши"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18725,12 +18681,12 @@ msgstr "Это поле описывает устройство"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
-"Частота процессора в МГц (мегагерцах, которые в первом приближении могут "
-"быть грубо приравнены к числу выполняемых процессором инструкций в секунду)"
+"Частота CPU в MHz (мегагерцах, которые в первом приближении могут быть грубо "
+"приравнены к числу выполняемых процессором инструкций в секунду)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18770,12 +18726,12 @@ msgstr "Ошибка запятой"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
+msgstr "специальные возможности драйвера (умение выжигать или поддержка DVD)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "Емкость устройства"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -19261,14 +19217,14 @@ msgid "Network Monitoring"
 msgstr "Мониторинг сети"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data of installed printers..."
-msgstr "Выполняется поиск новых принтеров..."
+msgstr "Читаются данные установленных принтеров..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Name/IP address of host:"
-msgstr "Пул динамических IP-адресов:"
+msgstr "Имя/IP адрес хоста:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19276,14 +19232,14 @@ msgid "This host is already in the list, it cannot be added again.\n"
 msgstr "Этот хост уже есть в списке, его нельзя добавить снова.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Выберите сканер"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Пожалуйста, введите имя хоста или IP"
+msgstr "Вы должны ввести имя хоста или IP адрес.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19291,29 +19247,29 @@ msgid "Choose the host on which the local scanners should be made available:"
 msgstr "Выберите хост, на котором должны быть доступны локальные сканеры"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Доступные принтеры"
+msgstr "Общий доступ к локальным сканерам"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(на этой машине)"
+msgstr "Эта машина"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Удалить выбранные"
+msgstr "Удалить выбранный хост"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "обнаружено %s"
+msgstr "Редактировать выбранный хост"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Добавить пользователя"
+msgstr "Добавить хост"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19321,14 +19277,14 @@ msgid "These are the machines from which the scanners should be used:"
 msgstr "Машины на которых должны использоваться сканеры:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Использовать свободное место"
+msgstr "Использование удаленных сканеров"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "(на этой машине)"
+msgstr "Все удаленные машины"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19350,9 +19306,9 @@ msgid "Use scanners on remote computers"
 msgstr "Использовать сканеры на удаленных компьютерах"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Совместное использование файлов"
+msgstr "Общий доступ к сканеру для хостов:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19365,6 +19321,8 @@ msgid ""
 "You can also decide here whether scanners on remote machines should be made "
 "available on this machine."
 msgstr ""
+"Вы также можете решить здесь какие сканеры на удаленных машинах должны быть "
+"доступны на этой машине"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19372,6 +19330,8 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessable by remote machines and by which remote machines."
 msgstr ""
+"Здесь вы можете выбрать какие сканеры, подсоединенные к данной машине должны "
+"быть доступны для удаленных машин и для каких именно удаленных машин."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19379,56 +19339,60 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Пересоздание списка настроенных сканеров ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new scanners ..."
-msgstr "Доступные принтеры"
+msgstr "Поиск новых сканеров ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for configured scanners ..."
-msgstr "Доступные принтеры"
+msgstr "Поиск настроенных сканеров ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing"
-msgstr "Совместное использование файлов"
+msgstr "Общий доступ к сканеру"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a scanner manually"
-msgstr "Выбрать пользователя вручную"
+msgstr "Добавить сканер вручную"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for new scanners"
-msgstr "Доступные принтеры"
+msgstr "Поиск новых сканеров"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr "Не найдены принтеры, непосредственно подключенные к вашей машине."
+msgstr "Не найдены сканеры, доступные в вашей системе.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanner\n"
 "\n"
 "%s\n"
 "is available on your system.\n"
 msgstr ""
+"Следующий сканер\n"
 "\n"
-"К вашей системе непосредственно подключен один неизвестный принтер"
+"%s\n"
+"доступен в вашей системе.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanners\n"
 "\n"
 "%s\n"
 "are available on your system.\n"
 msgstr ""
+"Следующие сканеры\n"
 "\n"
-"К вашей системе непосредственно подключен один неизвестный принтер"
+"%s\n"
+"доступны в вашей системе.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19447,21 +19411,19 @@ msgid "choose device"
 msgstr "выберите устройство"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake не смог определить ваш сканер %s.\n"
-"Пожалуйста, выберите устройство, через которое подключен ваш сканер"
+msgstr "Пожалуйста выберите устройство, к которому подключен ваш %s"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for scanners ..."
-msgstr "Доступные принтеры"
+msgstr "Поиск сканеров ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Auto-detect available ports"
-msgstr "/Автоопределение принтеров"
+msgstr "Авто-определение доступных портов"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19485,9 +19447,9 @@ msgid "The %s is unsupported"
 msgstr "%s не поддерживается"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s не поддерживается этой версией Mandrake Linux."
+msgstr "%s не поддерживается данной версией Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19495,9 +19457,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s не поддерживается этой версией Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Port: %s"
-msgstr "Порт"
+msgstr "Порт: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19505,9 +19467,9 @@ msgid ", "
 msgstr ", "
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Detected model: %s"
-msgstr "Обнаружена модель: %s %s"
+msgstr "Обнаружена модель: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19515,9 +19477,9 @@ msgid " ("
 msgstr " ("
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a scanner model"
-msgstr "Выберите сканер"
+msgstr "Выберите модель сканера"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -19629,12 +19591,12 @@ msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
 msgstr ""
-"K Desktop Environment, основная графическая оболочка с коллекцией "
+"K Desktop Environment, основная графическая среда с коллекцией "
 "сопроводительных сервисных программ"
 
 #: ../../share/compssUsers:999
 msgid "Graphical Environment"
-msgstr "Графическая оболочка"
+msgstr "Графическая среда"
 
 #: ../../share/compssUsers:999
 msgid "Gnome Workstation"
@@ -19645,12 +19607,12 @@ msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
 msgstr ""
-"Графическая оболочка с удобным для пользователя набором приложений и "
-"сервисных программ рабочего стола"
+"Графическая среда с удобным для пользователя набором приложений и сервисных "
+"программ рабочего стола"
 
 #: ../../share/compssUsers:999
 msgid "Other Graphical Desktops"
-msgstr "Другие графические оболочки"
+msgstr "Другие графические рабочие столы"
 
 #: ../../share/compssUsers:999
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
@@ -19689,12 +19651,10 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Mail"
-msgstr "Мали"
+msgstr "Почта"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Postfix mail server"
 msgstr "Почтовый сервер Postfix"
 
@@ -19738,6 +19698,10 @@ msgstr "Офис"
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr ""
 "Набор сервисных программ для почты, новостей, web, пересылки файлов и чата"
+
+#: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Игры"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
@@ -19795,6 +19759,426 @@ msgstr "Личные финансы"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Программы для управления финансами, такие как gnucash"
+
+#~ msgid "no network card found"
+#~ msgstr "сетевая карта не найдена"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 выбрал для вас наилучшее программное обеспечение. "
+#~ "Занимайтесь серфингом по просторам паутины и просматривайте анимации при "
+#~ "помощи Mozilla и Konqueror, или читайте свою почту и управляйте своей "
+#~ "личной информацией при помощи Evolution и Kmail."
+
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Извлеките максимум возможностей из Интернета"
+
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "Выжмите из своего оборудования мультимедиа все до предела!"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr ""
+#~ "Откройте самые современные графические и мультимедийные инструменты!"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 предлагает наилучшие игры с Открытыми исходными "
+#~ "тестами - аркады, экшены, карты, спортивные, стратегии, ..."
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 предоставляет мощные инструменты для полной настройки "
+#~ "и наладки вашей машины"
+
+#~ msgid "User interfaces"
+#~ msgstr "Интерфейс пользователя"
+
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr ""
+#~ "Используйте всю силу компилятора GNU gcc 3, а также наилучшие среды "
+#~ "разработки Исходных текстов"
+
+#~ msgid "Development simplified"
+#~ msgstr "Разработка упрощена"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "Файервол обеспечен сетевыми возможностями, которые позволят вам применить "
+#~ "все необходимые меры безопасности"
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "Пакет MandrakeSecurity включает в себя программный продукт Multi Network "
+#~ "Firewall (M.N.F.)"
+
+#~ msgid "Strategic partners"
+#~ msgstr "Стратегические партнеры"
+
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "Учитесь ли в онлайне или посредством нашей сети обучающих партнеров, "
+#~ "программа Mandrake-Campus подготовит вас к общепризнанной программе "
+#~ "сертификации LPI (всемирная профессиональная техническая сертификация)"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Подтвердите свое знание Linux"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "Программа обучения была создана для удовлетворения потребностей "
+#~ "пользователей и экспертов (сетевых и системных администраторов)"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "Откройте учебную программу MandrakeSoft'а - Linux-Campus"
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "MandrakeClub и Корпоративный клуб Mandrake были созданы для деловых и\n"
+#~ "частных пользователей Mandrake Linux, которые хотят непосредственно\n"
+#~ "поддержать свой любимый дистрибутив Linux, получая при этом особые\n"
+#~ "привилегии. Если вы довольны нашими продуктами, если ваша компания\n"
+#~ "извлекает выгоду из наших продуктов в борьбе с конкурентами, если вы\n"
+#~ "хотите поддержать разработку Mandrake Linux, вступайте в MandrakeClub!"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "Откройте MandrakeClub и Корпоративный клуб Mandrake"
+
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in a country to which the chosen language\n"
+#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your graphical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "В качестве обзора DrakX представит сводку имеющейся у него различной\n"
+#~ "информации о вашей системе. В зависимости от установленного у вас\n"
+#~ "оборудования вы можете увидеть все или некоторые из следующих пунктов:\n"
+#~ "\n"
+#~ " * \"Мышь\": проверьте текущую настройку мыши и нажмите на кнопку если\n"
+#~ "необходимо ее изменить.\n"
+#~ "\n"
+#~ " * \"Клавиатура\": проверьте текущую настройку раскладки клавиатуры и\n"
+#~ "нажмите на кнопку если необходимо ее изменить.\n"
+#~ "\n"
+#~ " * \"Страна\": проверьте текущий выбор страны. Если вы находитесь не в\n"
+#~ " этой стране, нажмите на кнопку и выберите другую\n"
+#~ "\n"
+#~ " * \"Часовой пояс\": DrakX по умолчанию выбирает ваш часовой пояс на\n"
+#~ "основании выбранного вами языка. Но опять же, как и при выборе "
+#~ "клавиатуры,\n"
+#~ "вы можете не находиться в стране, которой соответствует выбранный язык.\n"
+#~ "Поэтому, возможно вам понадобится нажать на кнопку \"Часовой пояс\", "
+#~ "чтобы\n"
+#~ " настроить часы согласно требуемому часовому поясу.\n"
+#~ "\n"
+#~ " * \"Принтер\": нажав на кнопку \"Принтер отсутствует\", вы запустите\n"
+#~ "мастер настройки принтера. Ознакомьтесь с соответствующей главой\n"
+#~ "``Стартового руководства пользователя'' для получения дополнительной\n"
+#~ "информации о том, как установить новый принтер. Представленный здесь\n"
+#~ "интерфейс похож на интерфейс, используемый во время установки;\n"
+#~ "\n"
+#~ " * \"Начальный загрузчик\": если вы желаете изменить конфигурацию\n"
+#~ "начального загрузчика, нажмите на эту кнопку. Эта опция предназначена "
+#~ "для\n"
+#~ "опытных пользователей.\n"
+#~ "\n"
+#~ " * \"Графический интерфейс\": по умолчанию DrakX настраивает ваш "
+#~ "графический\n"
+#~ "интерфейс на разрешение \"800x600\". Если вас это не устраивает, нажмите "
+#~ "на\n"
+#~ "кнопку чтобы перенастроить ваш графический интерфейс.\n"
+#~ "\n"
+#~ " * \"Сеть\": Если вы хотите настроить доступ в Интернет или локальную "
+#~ "сеть \n"
+#~ " прямо сейчас, вы можете сделать это, нажав на эту кнопку.\n"
+#~ "\n"
+#~ " * \"Звуковая карта\": если в вашей системе была обнаружена звуковая "
+#~ "карта,\n"
+#~ "она будет здесь показана. Если вы увидите, что показанная звуковая карта\n"
+#~ "не соответствует тому, что у вас есть в системе, вы можете нажать на "
+#~ "кнопку\n"
+#~ "и выбрать другой драйвер\n"
+#~ "\n"
+#~ " * \"TV-карта\": если в вашей системе была обнаружена TV-карта, она "
+#~ "будет\n"
+#~ "здесь показана. Если у вас есть TV-карта, но она не была определена,\n"
+#~ "нажмите на кнопку и попробуйте настроить ее вручную\n"
+#~ "\n"
+#~ " * \"ISDN-карта\": если в вашей системе обнаружена ISDN-карта, она\n"
+#~ "будет здесь показана. Вы можете нажать на кнопку для изменения связанных "
+#~ "с\n"
+#~ "ней параметров."
+
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "LILO и grub это начальные загрузчики GNU/Linux. Этот шаг обычно "
+#~ "полностью\n"
+#~ "автоматизирован. DrakX проанализирует загрузочный (boot) сектор диска и\n"
+#~ "будет действовать согласно тому, что он там найдет:\n"
+#~ "\n"
+#~ " * если найден загрузочный сектор Windows, он заменит его на загрузочный\n"
+#~ "сектор grub/LILO. Следовательно, вы сможете загружать и GNU/Linux или\n"
+#~ "другую ОС.\n"
+#~ "\n"
+#~ " * если найден boot сектор grub или LILO, он заменит его на новый.\n"
+#~ "\n"
+#~ "Если возникают сомнения, DrakX спросит вас куда разместить начальный\n"
+#~ "загрузчик\n"
+#~ "\n"
+#~ "\"Загрузочное устройство\": в большинстве случаев вам не нужно менять\n"
+#~ "выбранную по умолчанию опцию(\"Первый сектор диска (MBR)\"), но если вы\n"
+#~ "желаете, загрузчик может быть установлен на второй жесткий диск\n"
+#~ "(\"/dev/hdb\"), или даже на дискету (\"On Floppy\").\n"
+#~ "\n"
+#~ "Отметив \"Создать загрузочный диск\" вы сможете иметь загрузочный "
+#~ "носитель\n"
+#~ "под рукой.\n"
+#~ "\n"
+#~ "На установочном компакт-диске Mandrake Linux имеется аварийный режим. Вы\n"
+#~ "можете получить к нему доступ, загрузившись с компакт-диска: нажмите\n"
+#~ "клавишу >>F1<< при загрузке и введите в строке приглашения >>rescue<<.\n"
+#~ "Однако если ваш компьютер не может загрузиться с компакт-диска, "
+#~ "появляются\n"
+#~ "по крайней мере 2 ситуации, когда наличие загрузочной дискеты критично:\n"
+#~ "\n"
+#~ " * при установке начального загрузчика DrakX перезапишет загрузочный "
+#~ "сектор\n"
+#~ "(MBR) вашего основного диска (пока вы не воспользуетесь другим "
+#~ "менеджером\n"
+#~ "загрузки), что позволит загружать либо Windows либо GNU/Linux (если в "
+#~ "вашей\n"
+#~ "системе есть Windows). Если вам потребуется переустановить Windows, "
+#~ "процесс\n"
+#~ "установки Microsoft перезапишет загрузочный сектор и вы не сможете "
+#~ "больше\n"
+#~ "запустить GNU/Linux!\n"
+#~ "\n"
+#~ " * если возникнет проблема и вы не сможете загрузить GNU/Linux с "
+#~ "жесткого\n"
+#~ "диска, эта дискета станет единственным способом загрузить GNU/Linux. На "
+#~ "ней\n"
+#~ "имеется несколько системных утилит для восстановления системы, которая\n"
+#~ "перестала работать из-за толчков по питанию, неудачно введенной ошибки,\n"
+#~ "забытого пароля root или по иным причинам.\n"
+#~ "\n"
+#~ "Если вы ответите \"Да\", вас попросят вставить дискету в дисковод. "
+#~ "Дискета\n"
+#~ "должна быть чистой или содержать неважные данные - DrakX отформатирует "
+#~ "ее\n"
+#~ "и перезапишет полностью."
+
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Отметив \"Создать загрузочный диск\" вы сможете иметь загрузочный "
+#~ "носитель\n"
+#~ "под рукой.\n"
+#~ "\n"
+#~ "На установочном компакт-диске Mandrake Linux имеется аварийный режим. Вы\n"
+#~ "можете получить к нему доступ, загрузившись с компакт-диска, нажмите\n"
+#~ "клавишу >>F1<< при загрузке и введите в строке приглашения >>rescue<<.\n"
+#~ "Но в этом случае ваш компьютер не может загрузиться с компакт-диска, вы\n"
+#~ "должны вернуться на этот этап за справкой, по крайней мере, в двух\n"
+#~ "ситуациях:\n"
+#~ "\n"
+#~ " * при установке начального загрузчика, DrakX перезапишет загрузочный\n"
+#~ "сектор (MBR) вашего главного диска (пока вы не будет использовать другой\n"
+#~ "менеджер загрузки), чтобы позволить вам загрузить Windows или GNU/Linux\n"
+#~ "(подразумевается, что в вашей системе есть Windows). Если вам "
+#~ "понадобится\n"
+#~ "переустановить Windows, процесс установки Microsoft перезапишет "
+#~ "загрузочный\n"
+#~ "сектор, и тогда вы не сможете загрузить GNU/Linux!\n"
+#~ "\n"
+#~ " * если возникнет проблема и вы не сможете загрузить GNU/Linux с "
+#~ "жесткого\n"
+#~ "диска, эта дискета будет подразумевать только загрузку GNU/Linux. На ней\n"
+#~ "содержится минимальное количество системных утилит для восстановления\n"
+#~ "системы, завалившейся в результате отключения питания, неудачной ошибки\n"
+#~ "при вводе, ошибки пароля и любой другой причины.\n"
+#~ "\n"
+#~ "Если вы ответите \"Да\", вам будет предложено вставить дискету в "
+#~ "дисковод\n"
+#~ "Дискета должна быть чистой и не содержать нужной вам информации - DrakX\n"
+#~ "отформатирует и полностью перезапишет всю дискету."
+
+#~ msgid ""
+#~ "The following printers are configured. Double-click on a printer to "
+#~ "change its settings; to make it the default printer; to view information "
+#~ "about it; or to make a printer on a remote CUPS server available for Star "
+#~ "Office/OpenOffice.org/GIMP."
+#~ msgstr ""
+#~ "Настроены следующие принтеры. Щелкните дважды на принтере, чтобы изменить "
+#~ "его настройки; сделать его используемым по умолчанию; просмотреть "
+#~ "информацию о нем; или сделать принтер на удаленном сервере CUPS доступным "
+#~ "для Star Office/OpenOffice.org/GIMP."
 
 #~ msgid ""
 #~ "Please enter your host name if you know it.\n"
@@ -21814,7 +22198,7 @@ msgstr "Программы для управления финансами, такие как gnucash"
 #~ " * \"Действительно минимальная установка\": установит до предела "
 #~ "минимально\n"
 #~ "необходимое, чтобы получить рабочую систему Linux с командной строкой.\n"
-#~ "Эта установка требует около 65 Мб дискового пространства.\n"
+#~ "Эта установка требует около 65 MB дискового пространства.\n"
 #~ "\n"
 #~ "Вы можете установить флажок \"Самостоятельный выбор пакетов\", который\n"
 #~ "полезен, если знакомы с предлагаемыми пакетами, или, если вы желаете\n"

@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-27 17:22-0000\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-04 08:55-0000\n"
 "Last-Translator: Rhoslyn Prys <rhoslyn.prys@meddal.org.uk>\n"
-"Language-Team: Cymraeg <cy@li.org>\n"
+"Language-Team: Cymraeg <rhoslyn.prys@meddal.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,7 +20,7 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 "Mae'r rhannu yn ôl defnyddiwr yn defnyddio grwp \"rhannu ffeiliau\" .\n"
-"Mae modd defnyddio userdrake i ychwanegu defnyddiwr i'r grwp."
+"Mae modd defnyddio userdrake i ychwanegu defnyddiwr i'r grwp. "
 
 #: ../../any.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
@@ -89,7 +89,7 @@ msgstr "Caniatáu pob defnyddiwr"
 #: ../../any.pm:1
 #, c-format
 msgid "No sharing"
-msgstr "Dim rhannu"
+msgstr "Peidio rhannu"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/interactive.pm:1
@@ -783,12 +783,12 @@ msgstr "kdesu ar goll"
 #: ../../common.pm:1
 #, c-format
 msgid "Screenshots will be available after install in %s"
-msgstr "Bydd lluniau o'r sgrin ar gael ar ôl gosod yn %s"
+msgstr "Bydd lluniau o'r sgrîn ar gael ar ôl gosod yn %s"
 
 #: ../../common.pm:1
 #, c-format
 msgid "Can't make screenshots before partitioning"
-msgstr "Meth creu lluniau o'r sgrin cyn rhannu"
+msgstr "Meth creu lluniau o'r sgrîn cyn rhannu"
 
 #: ../../common.pm:1
 #, c-format
@@ -1083,93 +1083,66 @@ msgstr ""
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"I adolygu, bydd DrakX yn cyflwyno crynodeb amrywiol wybodaeth\n"
-"ynghylch eich peiriant. Yn ddibynnol ar eich caledwedd, mae'n bosibl fod\n"
-"gwnnych chai o'r rhain:\n"
-"\n"
-" *\"Llygoden\": gwirio ffurfweddiad presennol y llygoden a chliciwch ar y\n"
-" botwm a dewis un arall.\n"
-"\n"
-" *\"Bysellfwrdd\" gwirio ffurfweddiad presennol y bysellfwrdd a chliciwch\n"
-"ar y  botwm a'i newid.\n"
-"\n"
-" *\"Cylchfa amser\" Mae DrakX, yn dyfalu eich cylchfa amser o'r iaith\n"
-"rydych wedi ei dewis. Eto fel gyda bysellfwrdd efallai nad ydych yn y wlad\n"
-"sy'n cyfateb i'r  dewis iaith. Felly, mae'n bosibl y bydd angen i chi glicio "
-"arfotwm \"Cylchfa amser\" i ffurfweddi'r cloc yn ôl y gylchfa amser "
-"rydychynddi.\n"
-"\n"
-" *\"Argraffydd\": bydd clicio ar y botwm \"Dim argraffydd\" yn agor y\n"
-"dewin ffurfweddi. Darllenwch y bennod berthnasol o'r 'Starter Guide'\n"
-"am wybodaeth ar sut mae gosod yr argraffydd. Mae'r rhyngwyneb yno'n\n"
-"debyg i'r un sy'n cael ei ddefnyddio wrth osod y system.\n"
-"\n"
-" * \"Cychwynnydd\": os hoffech newid ffurfweddiad eich cychwynnydd,\n"
-"cliciwch y botwm. Ar gyfer defnyddwyr uwch yn unig.\n"
-"\n"
-" * \"Rhyngwyneb Graffigol\": Mae DraKX yn gosod eich rhyngwyneb i\n"
-"gydraniad \"800x600\". Os nad yw hynny'n addas cliciwch y botwm\n"
-"i ailffurfweddu eich rhyngwyneb graffigol.\n"
-"\n"
-" * \"Rhwydwaith\": Os hoffech chi ffurfweddu eich rhwydwaith\n"
-"Rhyngrwyd neu lleol cliciwch y botwm.\n"
-"\n"
-" *\"Cerdyn sain\": os oes cerdyn sain yn cael ei ganfod ar eich system, bydd "
-"yn\n"
-"cael ei ddangos yma. Nid oes modd creu newidiadau adeg y gosodiad.\n"
-"\n"
-" *\"Cerdyn teledu\": os oes cerdyn teledu yn cael ei ganfod ar eich system, "
-"bydd\n"
-" yn cael ei ddangos yma. Nid oes modd creu newidiadau adeg y gosodiad.\n"
-"\n"
-" *\"Cerdyn IDSN\":os oes cerdyn IDSN yn cael ei ganfod ar eich system, bydd\n"
-" yn cael ei ddangos yma. Mae modd clicio ar y botwm i newid y paramedrau\n"
-" cysylltiedig."
 
 #: ../../help.pm:1
 #, c-format
@@ -1353,19 +1326,14 @@ msgstr ""
 " bwyso ar [Tab] i weld dewisiadau'r cychwyn."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1403,7 +1371,7 @@ msgstr ""
 " chi ffurfweddu'r gyrrwr gyda llaw. "
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1413,7 +1381,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1480,83 +1448,8 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"Mae LILO a grub yn gychwynwyr ar gyfer GNU/Linux. Fel rheol mae'r cam\n"
-"yma'n gwbl awtomatig. Mae DrakX yn dadansoddi'r adran gychwyn ac yn\n"
-"gweithredu ar yr hyn mae'n ei ganfod yma:\n"
-"\n"
-" *os yw'n canfod adran gychwyn Windows mae'n gosod adran cychwyn\n"
-"grub/LILO yno yn ei le. Felly bydd modd i chi gychwyn un ai GNU/Linux\n"
-"neu system weithredu arall.\n"
-"\n"
-" *os fydd yn canfod adran gychwyn grub neu LILO, bydd yn gosod un mwy\n"
-"diweddar yn ei le.\n"
-"\n"
-"Os oes amheuaeth, bydd DrakX yn dangos blwch deialog gyda dewisiadau.\n"
-"\n"
-" * \"Dyfais cychwyn\": yn y rhan fwyaf o achosion ni fyddwch yn newid\n"
-"y rhagosodedig (\"/Adran Gyntaf y gyrrwr (MBR)\"), ond os yw'n well "
-"gennych,\n"
-"gall y cychwynnwr gael ei osod ar yr ail ddisg caled (\"/dev/hdb\"), neu hyd "
-"yn\n"
-"oed ar ddisg meddal (\"Ar Ddisg Meddal\")\n"
-"\n"
-"Mae ticio \"Creu disg cychwyn\" yn caniatau i chi gael cyfrwng achub wrth "
-"law\n"
-"ar gyfer argyfyngau.\n"
-"\n"
-"Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
-"gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a theipio\n"
-" >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru cychwyn\n"
-"drwy'r CD-ROM dylech ddod yn ôl i'r cam hwn am gymorth mewn o leiaf dwy "
-"sefyllfa:\n"
-"\n"
-" *wrth lwytho'r llwythwr cychwyn, bydd DrakX yn ailysgrifennu'r adran bwtio "
-"[MBR]\n"
-"ar eich prif ddisg [oni bai eich bod yn defnyddio rheolwr cychwyn arall] fel "
-"eich bod\n"
-"yn medru cychwyn yn Windows neu GNU/Linux [gan gymryd bod gennych Windows\n"
-"ar eich system]. Os fyddwch angen ailosod Windows, bydd proses osod "
-"Microsoft yn\n"
-"ail ysgrifennu'r adran bwtio, ac felly ni fydd modd i chi gychwyn GNU/"
-"Linux!\n"
-"\n"
-" * os oes anhawster yn codi ac nid ydych yn medru cychwyn GNU/Linux o'r "
-"ddisg\n"
-"caled, y ddisg feddal fydd yr unig ffordd i gychwyn GNU/Linux.Mae'n cynnwys\n"
-"nifer dda o offer i adfer y system, gwall teipio anffodus, camdeipio "
-"cyfrinair neu\n"
-"rhesymau eraill\n"
-"\n"
-"Os ddywedwch \"Iawn\", bydd gofyn i chi roi disg meddal yn y gyrrwr Rhaid \n"
-"ei fod yn wag neu bod dim o werth arno - bydd DrakX yn fformatio'r ddisg\n"
-"a'i ailysgrifennu."
 
 #: ../../help.pm:1
 #, c-format
@@ -1800,14 +1693,14 @@ msgstr ""
 "mae wedi ei gysylltu iddo. Wedi i chi wasgu'r botwm \"Nesaf ->\" bydd "
 "delwedd\n"
 "llygoden yn cael ei ddangos. Bydd angen i chi symud olwyn y llygoden iddo \n"
-"weithio'n gywir. Wrth i chi wedl yr olwyn sgroli ar y sgrin yn symud wrth i "
+"weithio'n gywir. Wrth i chi wedl yr olwyn sgroli ar y sgrîn yn symud wrth i "
 "chi droi'r\n"
 "olwyn, profwch y botymau a gwirio fod cyfeirydd y llygoden yn symud ar y "
 "sgrin\n"
 "wrth i chi symud eich l;lygoden."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1820,9 +1713,14 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1934,10 +1832,12 @@ msgstr ""
 "fersiynau cyn Mandrake Linux \"8.1\" yn cael ei gymeradwyo."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
 "\"Gwlad\":gwiriwch y dewis gwlad. Os nad ydych yn y wlad hon\n"
 "cliciwch y botwm a dewis un arall."
@@ -2160,15 +2060,13 @@ msgstr ""
 " sefyllfaoedd cychwyn argyfyngus!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -2182,19 +2080,19 @@ msgstr ""
 "Os nad ydych yn siwr beth i'w ddewis, dewiswch y rhagosodedig."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 "Ar yr adeg pan fyddwch yn gosod Mandrake Linux, mae'n debygol y bydd\n"
 "rhai pecynnau wedi eu diweddaru ers y rhyddhad cychwynnol. Bydd rhai \n"
@@ -2263,7 +2161,7 @@ msgstr ""
 "gwallus ar y ddisg."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2271,7 +2169,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2323,7 +2221,7 @@ msgstr ""
 " *\"Cadw'r dewis o becynnau\": mae hyn yn cadw'r dewis o becynnau wnaed\n"
 "cynt. Yna wrth wneud gosodiad arall, rhowch ddisg meddal yn y gyrrwr a "
 "rhedeg\n"
-"y gosodiad gan fynd i'r sgrin cymorth drwy wasgu'r fysell [F1], a chyflwyno\n"
+"y gosodiad gan fynd i'r sgrîn cymorth drwy wasgu'r fysell [F1], a chyflwyno\n"
 ">>linux defcfg=\"disg meddal\"<<.\n"
 "\n"
 "(*) Bydd angen disg meddal wedi ei fformatio fel FAT (i greu un yn GNU/"
@@ -2331,7 +2229,7 @@ msgstr ""
 "teipiwch \"mformat a:\")"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2362,7 +2260,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2387,13 +2285,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "Yn awr mae angen i chi ddewis lle ar eich disg caled i osod eich\n"
 "system weithredu Linux Mandrake. Os yw eich disg caled yn wag neu\n"
@@ -2456,65 +2354,6 @@ msgstr ""
 "beth\n"
 "ydych yn ei wneud.. Am rhagor o wybodaeth ar sut i ddefnyddio DiskDrake, \n"
 "darllennwch adran \"Managing your Partitions\" yn y \"Starter Guide\"."
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"Mae ticio |2Creu disg meddal cychwyn\" yn caniatáu i chi gael cyfrwng\n"
-"achub wrth law.\n"
-"\n"
-"Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
-"gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a theipio\n"
-" >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru cychwyn\n"
-"drwy'r CD-ROM dylech ddod yn ôl i'r cam hwn am gymorth mewn o leiaf dwy "
-"sefyllfa:\n"
-"\n"
-" *wrth lwytho'r llwythwr cychwyn, bydd DrakX yn ailysgrifennu'r adran bwtio "
-"[MBR]\n"
-"ar eich prif ddisg [oni bai eich bod yn defnyddio rheolwr cychwyn arall] fel "
-"eich bod\n"
-"yn medru cychwyn yn Windows neu GNU/Linux [gan gymryd bod gennych Windows\n"
-"ar eich system]. Os fyddwch angen ailosod Windows, bydd proses osod "
-"Microsoft yn\n"
-"ail ysgrifennu'r adran bwtio, ac felly ni fydd modd i chi gychwyn GNU/"
-"Linux!\n"
-"\n"
-" * os oes anhawster yn codi ac nid ydych yn medru cychwyn GNU/Linux o'r "
-"ddisg\n"
-"caled, y ddisg feddal fydd yr unig ffordd i gychwyn GNU/Linux.Mae'n cynnwys\n"
-"nifer dda o offer i adfer y system, gwall teipio anffodus, camdeipio "
-"cyfrinair neu\n"
-"rhesymau eraill\n"
-"\n"
-"Pan fyddwch yn clicio \"Iawn\"yma, bydd gofyn i chi rhoi disg meddal yn\n"
-"y gyrrwr. Rhaid i'r ddisg fod yn wag neu fod dim gwahaniaeth colli'r data\n"
-"arno.Does dim angen ei fformatio gan y bydd DrakX yn ailysgrifennu'r holl "
-"ddisg."
 
 #: ../../help.pm:1
 #, c-format
@@ -2728,9 +2567,10 @@ msgstr ""
 "rhwydwaith."
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2769,9 +2609,9 @@ msgstr ""
 "!!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
@@ -3187,7 +3027,7 @@ msgid ""
 "An error occurred - no valid devices were found on which to create new "
 "filesystems. Please check your hardware for the cause of this problem"
 msgstr ""
-"Digwyddodd gwall - ni chanfyddwyd dyfeisiadau dilys i greu systemau ffeil "
+"Digwyddodd gwall - ni chanfyddwyd dyfeisiau dilys i greu systemau ffeil "
 "arnynt. Gwiriwch eich caledwedd am ffynhonnell yr anhawster."
 
 #: ../../install_any.pm:1 ../../partition_table.pm:1
@@ -3272,12 +3112,12 @@ msgstr ""
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System configuration"
-msgstr "Ffurfweddiad y system"
+msgstr "Ffurfweddu'r system"
 
 #: ../../install_gtk.pm:1
 #, c-format
 msgid "System installation"
-msgstr "Gosodiad system"
+msgstr "Gosod y system"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3949,7 +3789,7 @@ msgstr "Manylion"
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Please wait, preparing installation..."
-msgstr "Arhoswch, paratoi'r gosodiad"
+msgstr "Arhoswch, paratoi i osod"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4375,6 +4215,12 @@ msgstr "Gwasanaethau"
 msgid "System"
 msgstr "System"
 
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "%s on %s"
+msgstr "%s(Porth %s)"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Bootloader"
@@ -4512,14 +4358,14 @@ msgid "Which is your timezone?"
 msgstr "Pa un yw eich parth amser?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Dewis gwael, ceisiwch eto\n"
+msgstr "Hoffech chi geisio eto?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Methu fforchio: %s"
+msgstr "Methu canfod drych: %s."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4812,6 +4658,11 @@ msgid "Please choose your type of mouse."
 msgstr "Dewiswch math eich llygoden"
 
 #: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "Allwedd amgryptio"
+
+#: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Upgrade %s"
 msgstr "Diweddaru %s"
@@ -4819,7 +4670,7 @@ msgstr "Diweddaru %s"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Is this an install or an upgrade?"
-msgstr "Gosodiad neu diweddariad?"
+msgstr "Gosod neu ddiweddaru?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4860,7 +4711,7 @@ msgstr "Digwyddodd gwall"
 msgid ""
 "  <Tab>/<Alt-Tab> between elements  | <Space> selects | <F12> next screen "
 msgstr ""
-"  <Tab>/<Alt-Tab> rhwng elfennau  | <Space> yn dewis | <F12> y sgrin nesaf "
+"  <Tab>/<Alt-Tab> rhwng elfennau  | <Space> yn dewis | <F12> y sgrînnesaf "
 
 #: ../../install_steps_newt.pm:1
 #, c-format
@@ -7493,12 +7344,12 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Exit install"
-msgstr "Gadael gosod"
+msgstr "Gorffen"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Install updates"
-msgstr "Gosod diweddariadau"
+msgstr "Diweddariadau"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7513,7 +7364,7 @@ msgstr "Ffurfweddu X"
 #: ../../steps.pm:1
 #, c-format
 msgid "Install bootloader"
-msgstr "Gosod llwythwr cychwyn"
+msgstr "Gosod cychwynnwr"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7533,7 +7384,7 @@ msgstr "Cyfrinair gwraidd"
 #: ../../steps.pm:1
 #, c-format
 msgid "Install system"
-msgstr "System osod"
+msgstr "Gosod y system"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7548,7 +7399,7 @@ msgstr "Fformatio rhaniadau"
 #: ../../steps.pm:1
 #, c-format
 msgid "Partitioning"
-msgstr "Rhannu"
+msgstr "Creu Rhanniadau"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7826,7 +7677,7 @@ msgid ""
 " If in doubt, choose a conservative setting."
 msgstr ""
 "Y ddau baramedr pwysig yw'r raddfa adnewyddu fertigol, sef y raddfa mae'r\n"
-"holl sgrin yn cael ei adnewyddu, ac yn fwyaf pwysig y raddfa cydamseru\n"
+"holl sgrîn yn cael ei adnewyddu, ac yn fwyaf pwysig y raddfa cydamseru\n"
 "llorweddol, sef y raddfa mae'r llinellau sganio'n cael eu dangos.\n"
 "\n"
 "Mae'n BWYSIG IAWN nad ydych yn enwi monitor gyda graddfa cydamseru\n"
@@ -8959,9 +8810,9 @@ msgid "SCSI controllers"
 msgstr "Rheolyddion SCSI"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewire controllers"
-msgstr "Rheolyddion USB"
+msgstr "Rheolyddion firewire"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9735,11 +9586,6 @@ msgstr "Ffurfweddu'r rhwydwaith"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "heb ganfod cerdyn rhwydwaith"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
@@ -9772,7 +9618,7 @@ msgstr ""
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
-msgstr "Heb ganfod cerdyn PCI ISDN. Dewiswch un o'r sgrin nesaf."
+msgstr "Heb ganfod cerdyn PCI ISDN. Dewiswch un o'r sgrîn nesaf."
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9781,7 +9627,7 @@ msgid ""
 "PCI card on the next screen."
 msgstr ""
 "Rwyf wedi canfod cerdyn IDSN, ond nid wyf yn gwybod pa fath. Dewiswch un "
-"cerdyn PCI ar y sgrin nesaf."
+"cerdyn PCI ar y sgrîn nesaf."
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9813,7 +9659,7 @@ msgid ""
 "card.\n"
 msgstr ""
 "\n"
-"Os oes gennych gerdyn, dylai'r gwerthoedd ar y sgrin nesaf fod yn gywir.\n"
+"Os oes gennych gerdyn, dylai'r gwerthoedd ar y sgrîn nesaf fod yn gywir.\n"
 "\n"
 "Os oes gennych gerdyn PCMCIA, rhaid i chi wybod irq ac io eich cerdyn.\n"
 
@@ -10167,7 +10013,7 @@ msgstr "Cysylltiad  modem arferol"
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Detecting devices..."
-msgstr "Canfod dyfeisiadau..."
+msgstr "Canfod dyfeisiau..."
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
@@ -10384,9 +10230,9 @@ msgid "Start at boot"
 msgstr "Cychwyn y peiriant"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Rhowch enw'r gwesteiwr neu'r cyfeiriad IP.\n"
+msgstr "Rhowch enw'r gwesteiwr o'r cyfeiriad DHCP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10399,9 +10245,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Dilynnwch cyfernod cerdyn rhwydwaith (defnyddiol ar gyfer gliniadur)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Enw gwesteiwr"
+msgstr "Enw gwesteiwr DHCP"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -11038,19 +10884,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"Mae'r argraffyddion canlynol wedi eu ffurfweddu. Cliciwch ar un i newid ei "
-"osodiadau; ei wneud yn argraffydd rhagosodedig; i edrych am wybodaeth "
-"amdano; neu i wneud argraffydd CUPS pell ar gael ar gyfer Star Office/"
-"OpenOffice.org/GIMP."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Printing system: "
 msgstr "System argraffu."
 
@@ -11489,7 +11322,7 @@ msgstr ""
 "a thrin gwaith argraffu.\n"
 "\n"
 "Os ydych yn defnyddio KDE fel amgylchedd pen bwrdd mae gennych \"botwm "
-"argyfwng\", eicon ar y pen bwrdd, wedi ei labelu \"Atal yr Argraffydd!\", "
+"argyfwng\", eicon ar y bwrdd gwaith, wedi ei labelu \"Atal yr Argraffydd!\", "
 "fydd yn stopio 'r holl waith argraffu'n syth pan fyddwch yn ei glicio. Mae "
 "hyn yn ddefnyddiol pan fydd y papur wedi mynd yn sownd, ag ati.\n"
 
@@ -11686,6 +11519,11 @@ msgstr "Rhaid i ddewis %s fod yn gyfanrif"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Printer default settings"
+msgstr "Gosod yr Argraffydd Rhagosodedig"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -11879,7 +11717,7 @@ msgstr ""
 "Gall y dewis fod yn anghywir, yn arbennig os nad yw eich argraffydd yn cael "
 "ei enwi yn y gronfa ddata. Felly, edrychwch i weld â yw'r dewis yn gywir a "
 "chliciwch \"Model cywir\" os yw ac os nad yw, cliciwch \" Dewiswch y model "
-"gyda llaw\" fel bo modd i chi ddewis eich argraffydd gyda llaw ar y sgrin "
+"gyda llaw\" fel bo modd i chi ddewis eich argraffydd gyda llaw ar y sgrîn "
 "nesaf.\n"
 "\n"
 "Ar gyfer eich argraffydd mae Printerdrake wedi canfod\n"
@@ -12180,7 +12018,7 @@ msgstr ""
 "cael ei osod mewn testun plaen ar y llinell orchymyn y cleient Samba sy'n "
 "cael ei ddefnyddio i anfon gwaith argraffu i'r gwasanaethwr Windows. Felly "
 "mae'n bosibl i bob defnyddiwr ar y peiriant i arddangos y cyfrinair ar y "
-"sgrin drwy'r gorchymyn \"ps auxwww\".\n"
+"sgrîn drwy'r gorchymyn \"ps auxwww\".\n"
 "\n"
 "Rydym yn argymell eich bod yn defnyddio un o'r dulliau gwahanol hyn ( yn yr "
 "holl achosion hyn, rhaid i chi wneud yn siwr mae dim ond peiriannau o'ch "
@@ -12657,7 +12495,7 @@ msgstr ""
 "gyrwyr a mathau o gysylltiadau argraffyddion."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -12666,8 +12504,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Nid oedd Printerdrake yn adnabod eich argraffydd. Dewiswch yr un cywir o'r "
-"rhestr."
+"Nid oedd Printerdrake yn medru adnabod eich argraffydd %s. Dewiswch yr un "
+"cywir o'r rhestr."
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -13151,8 +12989,7 @@ msgstr "os wedi ei osod i iawn,  gwirio yn erbyn y gronfa ddata rpm."
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
 msgstr ""
-"os wedi ei osod i iawn, gwirio os yw'r dyfeisiadau rhwydwaith mewn modd "
-"cymysg"
+"os wedi ei osod i iawn, gwirio os yw'r dyfeisiau rhwydwaith mewn modd cymysg"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13710,8 +13547,8 @@ msgstr "Croeso i Crackers"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "Mae llwyddiant MandrakeSoft yn seiliedig ar egwyddor Meddalwedd Rhydd. Mae "
 "eich system weithredu newydd yn ganlyniad gwaith cydweithredol ar ran y "
@@ -13719,7 +13556,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Croeso i fyd Cod Agored"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -13730,8 +13567,8 @@ msgstr "Diolch am ddewis Mandrake Linux 9.1"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "Dewch i adnabod y gymuned Cod Agored a dewch yn aelod. Dysgwch, addysgwch a "
 "chynorthwywch eraill drwy ymuno yn y grwpiau trafod niferus sydd i'w cael yn "
@@ -13739,215 +13576,159 @@ msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Hoffech chi wybod mwy am y gymuned Cod Agored?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"Hoffech chi wybod mwy am y gymuned Cod Agored? Ymunwch â byd Meddalwedd "
+"Rhydd!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Ymunwch â byd Meddalwedd Rhydd"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mae Mandrake Linux 9.1 yn cynnig y feddalwedd orau i chi. Syrffiwch y we a "
-"gwylio animeddiadau gyda Mozilla a Konqueror, cyfnewid e-bost a threfnu eich "
-"gwybodaeth gyda Evolution a Kmail."
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Cael y mwyaf o'r Rhyngrwyd"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mae Mandrake Linux 9.1 yn caniatáu i chi ddefnyddio'r feddalwedd ddiweddaraf "
 "i chwarae ffeiliau cerddoriaeth a sain, golygu a threfnu eich delweddau, "
 "lluniau a fideo."
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "Gyrrwch dechnegau aml-gyfrwng i'w eithaf!"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "Darganfyddwch yr offer graffigol ac amlgyfrwng mwyaf diweddar!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mae Mandrake Linux 9.1 yn darparu'r gemau Cod Agored gorau - arcêd,  antur, "
-"strategaeth..."
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "Gemau"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Canolfan Rheoli Mandrake Linux 9.1 yw'r lleoliad canolog ar gyfer llunio a "
-"ffurfio eich peiriant"
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Canolfan Rheoli Mandrake"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Ffurfweddiad Gwasanaethwr Terfynell Mandrake"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mae Mandrake Linux 9.1 yn darparu 11 rhyngwyneb defnyddiwr y mae modd eu "
 "newid yn helaeth:  KDE 3, Gnome 2, WindowMaker, ..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Rhyngwynebau defnyddwyr"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Defnyddiwch rym grynhowr gcc 3 GNU yn ogystal ag amgylcheddau datblygiadol "
-"Cod Agored gorau oll"
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 yw'r platfform datblygu gorau"
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Symleiddio datblygiad"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Trowch eich peiriant i fod yn wasanaethwr pwerus gydag ychydig gliciau ar "
 "eich llygoden: gwasanaethwyr gwe, e-bost, mur gwarchod, llwybrydd, "
 "gwasanaethwr ffeil ac argraffu..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Trowch eich peiriant i fod yn wasanaethwr dibynadwy"
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "Mae'r cynnyrch ar gael ar safle gwe MandrakeStore"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"Mae'r mur cadarn hwn yn cynnwys nodwedd rhwydwaith i'ch galluogi i gyflawni "
-"eich anghenion diogelwch i gyd"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"Mae'r casgliad MandrakeSecurity'n cynnwys Multi Network Firewall (M.N.F.)"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Y diogelwch mwyaf"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "Mae amrediad eang o ddarpariaeth Linux, yn ogystal â chynigion arbennig ar "
 "gynnyrch a 'difyrrwch', ar gael ar-lein yn ein e-siop"
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "Y siop MandrakeSoft swyddogol"
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
+#: ../../share/advertising/09-mdksecure.pl:1
+#, fuzzy, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 "Mane Mandrake Linux yn cydweithio gyda dewis o gwmniau yn cynnig atebion "
 "proffesiynnol sy'n cydweddu â Mandrake Linux Mae rhestr o 'r partneriaid hyn "
 "i'w cael yn MandrakeStore"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "Partneriaid strategol"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"P'un a'i rydych yn dewis dysgu eich hun arlein neu drwy gyfrwng ein "
-"rhwydwaith o bartneriaid hyfforddi, mae catalog Linux-Campus yn eich paratoi "
-"ar gyfer rhaglen dystiedig LPI cydnabyddedig (tystysgrif technegol "
-"proffesiynnol byd-eang)"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Mynnwch dystysgrifo eich hun gyda Linux"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Y diogelwch mwyaf"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "Mae'r cynnyrch ar gael ar safle gwe MandrakeStore"
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"Mae'r rhaglen hyfforddiant yma wedi ei greu i ymateb i anghenion y "
-"defnyddiwr a'r arbennigwr (Gweinyddwyr Rhwydwaith a System0"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "Mae catalog hyfforddiant MandrakeSoft i'w gael yn Linux-Campus"
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13958,21 +13739,21 @@ msgstr ""
 "eich gwybodaeth ac i helpu eraill drwy ddod yn Arbenigwr cydnabyddedig ar y "
 "safle cefnogaeth dechnegol."
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 "Dewch o hyd i ateb eich anhawsterau drwy blatfform cefnogaeth ar-lein "
 "MandrakeSoft."
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Dewch yn MandrakeExpert"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -13981,36 +13762,15 @@ msgstr ""
 "Bydd pob digwyddiad yn cael ei archwilio gan arbenigwr technegol "
 "MandrakeSoft cymwysedig"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr "Platfform arlein i ymateb i anghenion cefnogaeth penodol cwmni"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corfforaethol"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"Crewyd MandrakeClub a MandrakeCorporateClub ar gyfer defnyddwyr preifat a "
-"busnes Mandrake Linux fyddai'n hoffi cefnogi eu hoff ddosbarthiad Linux "
-"tra'n derbyn breintiau arbennig. Os ydych yn mwynhau ein cynnyrch, os yw "
-"eich cwmni'n manteisio o'n cynnyrch i gael y blaen ar eraill, os hoffech "
-"gefnogi datblygiad Linux mandrake, yna ymunwch â MandrakeClub!"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "Darganfyddwch MandrakeClub a'r mandrake Corporate Club"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -16354,7 +16114,7 @@ msgstr "Croeso Cychwyn"
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Lilo screen"
-msgstr "Sgrin Lilo"
+msgstr "Sgrîn Lilo"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -16379,7 +16139,7 @@ msgstr "Themâu"
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Splash selection"
-msgstr "Dewis sgrin croeso"
+msgstr "Dewis sgrîn croeso"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -16645,6 +16405,11 @@ msgstr "Offeryn Cydamseru"
 #, c-format
 msgid "First Time Wizard"
 msgstr "Dewin Tro Cyntaf"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Mandrake Control Center"
+msgstr "Canolfan Rheoli Mandrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -17610,6 +17375,22 @@ msgid "Interface %s (using module %s)"
 msgstr "Rhyngwyneb %s (gan ddefnyddio modiwl %s)"
 
 #: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Gwasanaeth Xinetd"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
@@ -17987,7 +17768,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -18192,6 +17973,11 @@ msgstr "cadw thema Croeso cychwyn..."
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "dewis ffeil delwedd"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "dewis ffeil delwedd"
 
 #: ../../standalone/draksplash:1
@@ -18669,8 +18455,18 @@ msgstr "porth argraffydd rhwydwaith"
 
 #: ../../standalone/harddrake2:1
 #, c-format
+msgid "the name of the CPU"
+msgstr "enw'r prosesydd"
+
+#: ../../standalone/harddrake2:1
+#, c-format
 msgid "Name"
 msgstr "Enw"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the number of buttons the mouse has"
+msgstr "nifer y botymau sydd gan y llygoden"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18842,7 +18638,7 @@ msgstr "Mae'r maes yn disgrifio'r ddyfais"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr "Amledd y cpu mewn MHz (y nifer o gyfarwyddiadau'r eiliad)"
@@ -19857,6 +19653,10 @@ msgstr ""
 "sgwrsio"
 
 #: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Gemau"
+
+#: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
 msgstr "Aml-gyfrwng - Graffig"
 
@@ -19912,19 +19712,400 @@ msgstr "Cyllid Personol"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Rhaglenni i reoli eich cyllid, fel gnucash"
 
+#~ msgid "no network card found"
+#~ msgstr "heb ganfod cerdyn rhwydwaith"
+
 #~ msgid ""
-#~ "Please enter your host name if you know it.\n"
-#~ "Some DHCP servers require the hostname to work.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''."
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
 #~ msgstr ""
-#~ "Rhowch eich enw gwesteiwr os ydych yn gwybod\n"
-#~ "beth ydyw Mae rhai gwasanaethwyr angen gwybod\n"
-#~ "yr enw gwesteiwr i weithio. Dylai eich enw gwesteiwr\n"
-#~ "fod yn enw cymhwysol llawn megis \"fymlwch.fynesg.fyco.com\""
+#~ "Mae Mandrake Linux 9.1 yn cynnig y feddalwedd orau i chi. Syrffiwch y we "
+#~ "a gwylio animeddiadau gyda Mozilla a Konqueror, cyfnewid e-bost a threfnu "
+#~ "eich gwybodaeth gyda Evolution a Kmail."
 
-#~ msgid "DrakFloppy Error: %s"
-#~ msgstr "Gwall Drakfloppy: %s"
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Cael y mwyaf o'r Rhyngrwyd"
 
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "Gyrrwch dechnegau aml-gyfrwng i'w eithaf!"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "Darganfyddwch yr offer graffigol ac amlgyfrwng mwyaf diweddar!"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mae Mandrake Linux 9.1 yn darparu'r gemau Cod Agored gorau - arcêd,  "
+#~ "antur, strategaeth..."
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Canolfan Rheoli Mandrake Linux 9.1 yw'r lleoliad canolog ar gyfer llunio "
+#~ "a ffurfio eich peiriant"
+
+#~ msgid "User interfaces"
+#~ msgstr "Rhyngwynebau defnyddwyr"
+
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr ""
+#~ "Defnyddiwch rym grynhowr gcc 3 GNU yn ogystal ag amgylcheddau "
+#~ "datblygiadol Cod Agored gorau oll"
+
+#~ msgid "Development simplified"
+#~ msgstr "Symleiddio datblygiad"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "Mae'r mur cadarn hwn yn cynnwys nodwedd rhwydwaith i'ch galluogi i "
+#~ "gyflawni eich anghenion diogelwch i gyd"
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "Mae'r casgliad MandrakeSecurity'n cynnwys Multi Network Firewall (M.N.F.)"
+
+#~ msgid "Strategic partners"
+#~ msgstr "Partneriaid strategol"
+
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "P'un a'i rydych yn dewis dysgu eich hun arlein neu drwy gyfrwng ein "
+#~ "rhwydwaith o bartneriaid hyfforddi, mae catalog Linux-Campus yn eich "
+#~ "paratoi ar gyfer rhaglen dystiedig LPI cydnabyddedig (tystysgrif "
+#~ "technegol proffesiynnol byd-eang)"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Mynnwch dystysgrifo eich hun gyda Linux"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "Mae'r rhaglen hyfforddiant yma wedi ei greu i ymateb i anghenion y "
+#~ "defnyddiwr a'r arbennigwr (Gweinyddwyr Rhwydwaith a System0"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "Mae catalog hyfforddiant MandrakeSoft i'w gael yn Linux-Campus"
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "Crewyd MandrakeClub a MandrakeCorporateClub ar gyfer defnyddwyr preifat a "
+#~ "busnes Mandrake Linux fyddai'n hoffi cefnogi eu hoff ddosbarthiad Linux "
+#~ "tra'n derbyn breintiau arbennig. Os ydych yn mwynhau ein cynnyrch, os yw "
+#~ "eich cwmni'n manteisio o'n cynnyrch i gael y blaen ar eraill, os hoffech "
+#~ "gefnogi datblygiad Linux mandrake, yna ymunwch â MandrakeClub!"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "Darganfyddwch MandrakeClub a'r mandrake Corporate Club"
+
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in a country to which the chosen language\n"
+#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your graphical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "I adolygu, bydd DrakX yn cyflwyno crynodeb amrywiol wybodaeth\n"
+#~ "ynghylch eich peiriant. Yn ddibynnol ar eich caledwedd, mae'n bosibl fod\n"
+#~ "gwnnych chai o'r rhain:\n"
+#~ "\n"
+#~ " *\"Llygoden\": gwirio ffurfweddiad presennol y llygoden a chliciwch ar "
+#~ "y\n"
+#~ " botwm a dewis un arall.\n"
+#~ "\n"
+#~ " *\"Bysellfwrdd\" gwirio ffurfweddiad presennol y bysellfwrdd a "
+#~ "chliciwch\n"
+#~ "ar y  botwm a'i newid.\n"
+#~ "\n"
+#~ " *\"Cylchfa amser\" Mae DrakX, yn dyfalu eich cylchfa amser o'r iaith\n"
+#~ "rydych wedi ei dewis. Eto fel gyda bysellfwrdd efallai nad ydych yn y "
+#~ "wlad\n"
+#~ "sy'n cyfateb i'r  dewis iaith. Felly, mae'n bosibl y bydd angen i chi "
+#~ "glicio arfotwm \"Cylchfa amser\" i ffurfweddi'r cloc yn ôl y gylchfa "
+#~ "amser rydychynddi.\n"
+#~ "\n"
+#~ " *\"Argraffydd\": bydd clicio ar y botwm \"Dim argraffydd\" yn agor y\n"
+#~ "dewin ffurfweddi. Darllenwch y bennod berthnasol o'r 'Starter Guide'\n"
+#~ "am wybodaeth ar sut mae gosod yr argraffydd. Mae'r rhyngwyneb yno'n\n"
+#~ "debyg i'r un sy'n cael ei ddefnyddio wrth osod y system.\n"
+#~ "\n"
+#~ " * \"Cychwynnydd\": os hoffech newid ffurfweddiad eich cychwynnydd,\n"
+#~ "cliciwch y botwm. Ar gyfer defnyddwyr uwch yn unig.\n"
+#~ "\n"
+#~ " * \"Rhyngwyneb Graffigol\": Mae DraKX yn gosod eich rhyngwyneb i\n"
+#~ "gydraniad \"800x600\". Os nad yw hynny'n addas cliciwch y botwm\n"
+#~ "i ailffurfweddu eich rhyngwyneb graffigol.\n"
+#~ "\n"
+#~ " * \"Rhwydwaith\": Os hoffech chi ffurfweddu eich rhwydwaith\n"
+#~ "Rhyngrwyd neu lleol cliciwch y botwm.\n"
+#~ "\n"
+#~ " *\"Cerdyn sain\": os oes cerdyn sain yn cael ei ganfod ar eich system, "
+#~ "bydd yn\n"
+#~ "cael ei ddangos yma. Nid oes modd creu newidiadau adeg y gosodiad.\n"
+#~ "\n"
+#~ " *\"Cerdyn teledu\": os oes cerdyn teledu yn cael ei ganfod ar eich "
+#~ "system, bydd\n"
+#~ " yn cael ei ddangos yma. Nid oes modd creu newidiadau adeg y gosodiad.\n"
+#~ "\n"
+#~ " *\"Cerdyn IDSN\":os oes cerdyn IDSN yn cael ei ganfod ar eich system, "
+#~ "bydd\n"
+#~ " yn cael ei ddangos yma. Mae modd clicio ar y botwm i newid y paramedrau\n"
+#~ " cysylltiedig."
+
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mae LILO a grub yn gychwynwyr ar gyfer GNU/Linux. Fel rheol mae'r cam\n"
+#~ "yma'n gwbl awtomatig. Mae DrakX yn dadansoddi'r adran gychwyn ac yn\n"
+#~ "gweithredu ar yr hyn mae'n ei ganfod yma:\n"
+#~ "\n"
+#~ " *os yw'n canfod adran gychwyn Windows mae'n gosod adran cychwyn\n"
+#~ "grub/LILO yno yn ei le. Felly bydd modd i chi gychwyn un ai GNU/Linux\n"
+#~ "neu system weithredu arall.\n"
+#~ "\n"
+#~ " *os fydd yn canfod adran gychwyn grub neu LILO, bydd yn gosod un mwy\n"
+#~ "diweddar yn ei le.\n"
+#~ "\n"
+#~ "Os oes amheuaeth, bydd DrakX yn dangos blwch deialog gyda dewisiadau.\n"
+#~ "\n"
+#~ " * \"Dyfais cychwyn\": yn y rhan fwyaf o achosion ni fyddwch yn newid\n"
+#~ "y rhagosodedig (\"/Adran Gyntaf y gyrrwr (MBR)\"), ond os yw'n well "
+#~ "gennych,\n"
+#~ "gall y cychwynnwr gael ei osod ar yr ail ddisg caled (\"/dev/hdb\"), neu "
+#~ "hyd yn\n"
+#~ "oed ar ddisg meddal (\"Ar Ddisg Meddal\")\n"
+#~ "\n"
+#~ "Mae ticio \"Creu disg cychwyn\" yn caniatau i chi gael cyfrwng achub wrth "
+#~ "law\n"
+#~ "ar gyfer argyfyngau.\n"
+#~ "\n"
+#~ "Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
+#~ "gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a "
+#~ "theipio\n"
+#~ " >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru "
+#~ "cychwyn\n"
+#~ "drwy'r CD-ROM dylech ddod yn ôl i'r cam hwn am gymorth mewn o leiaf dwy "
+#~ "sefyllfa:\n"
+#~ "\n"
+#~ " *wrth lwytho'r llwythwr cychwyn, bydd DrakX yn ailysgrifennu'r adran "
+#~ "bwtio [MBR]\n"
+#~ "ar eich prif ddisg [oni bai eich bod yn defnyddio rheolwr cychwyn arall] "
+#~ "fel eich bod\n"
+#~ "yn medru cychwyn yn Windows neu GNU/Linux [gan gymryd bod gennych "
+#~ "Windows\n"
+#~ "ar eich system]. Os fyddwch angen ailosod Windows, bydd proses osod "
+#~ "Microsoft yn\n"
+#~ "ail ysgrifennu'r adran bwtio, ac felly ni fydd modd i chi gychwyn GNU/"
+#~ "Linux!\n"
+#~ "\n"
+#~ " * os oes anhawster yn codi ac nid ydych yn medru cychwyn GNU/Linux o'r "
+#~ "ddisg\n"
+#~ "caled, y ddisg feddal fydd yr unig ffordd i gychwyn GNU/Linux.Mae'n "
+#~ "cynnwys\n"
+#~ "nifer dda o offer i adfer y system, gwall teipio anffodus, camdeipio "
+#~ "cyfrinair neu\n"
+#~ "rhesymau eraill\n"
+#~ "\n"
+#~ "Os ddywedwch \"Iawn\", bydd gofyn i chi roi disg meddal yn y gyrrwr "
+#~ "Rhaid \n"
+#~ "ei fod yn wag neu bod dim o werth arno - bydd DrakX yn fformatio'r ddisg\n"
+#~ "a'i ailysgrifennu."
+
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mae ticio |2Creu disg meddal cychwyn\" yn caniatáu i chi gael cyfrwng\n"
+#~ "achub wrth law.\n"
+#~ "\n"
+#~ "Mae gan yr CD-ROM Mandrake Linux modd achub. Gallwch ei gyrraedd drwy\n"
+#~ "gychwyn y peiriant o'r CD-ROM, gwasgu'r fysell >>F1<< o'r cychwyn a "
+#~ "theipio\n"
+#~ " >>rescue<<wrth yr anogwr. Ond os nad yw eich cyfrifiadur yn medru "
+#~ "cychwyn\n"
+#~ "drwy'r CD-ROM dylech ddod yn ôl i'r cam hwn am gymorth mewn o leiaf dwy "
+#~ "sefyllfa:\n"
+#~ "\n"
+#~ " *wrth lwytho'r llwythwr cychwyn, bydd DrakX yn ailysgrifennu'r adran "
+#~ "bwtio [MBR]\n"
+#~ "ar eich prif ddisg [oni bai eich bod yn defnyddio rheolwr cychwyn arall] "
+#~ "fel eich bod\n"
+#~ "yn medru cychwyn yn Windows neu GNU/Linux [gan gymryd bod gennych "
+#~ "Windows\n"
+#~ "ar eich system]. Os fyddwch angen ailosod Windows, bydd proses osod "
+#~ "Microsoft yn\n"
+#~ "ail ysgrifennu'r adran bwtio, ac felly ni fydd modd i chi gychwyn GNU/"
+#~ "Linux!\n"
+#~ "\n"
+#~ " * os oes anhawster yn codi ac nid ydych yn medru cychwyn GNU/Linux o'r "
+#~ "ddisg\n"
+#~ "caled, y ddisg feddal fydd yr unig ffordd i gychwyn GNU/Linux.Mae'n "
+#~ "cynnwys\n"
+#~ "nifer dda o offer i adfer y system, gwall teipio anffodus, camdeipio "
+#~ "cyfrinair neu\n"
+#~ "rhesymau eraill\n"
+#~ "\n"
+#~ "Pan fyddwch yn clicio \"Iawn\"yma, bydd gofyn i chi rhoi disg meddal yn\n"
+#~ "y gyrrwr. Rhaid i'r ddisg fod yn wag neu fod dim gwahaniaeth colli'r "
+#~ "data\n"
+#~ "arno.Does dim angen ei fformatio gan y bydd DrakX yn ailysgrifennu'r holl "
+#~ "ddisg."

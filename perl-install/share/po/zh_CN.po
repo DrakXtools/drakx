@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 9.1\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-24 03:55+0800\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-01 12:24+0800\n"
 "Last-Translator: Funda Wang <mandrake@en2china.com>\n"
 "Language-Team: Mandrake Internationalization Team <cooker-i18n@linux-"
 "mandrake.com>\n"
@@ -553,7 +553,7 @@ msgstr "SILO 安装"
 #: ../../any.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Skip"
-msgstr "略过"
+msgstr "跳过"
 
 #: ../../any.pm:1
 #, c-format
@@ -1064,85 +1064,66 @@ msgstr ""
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"为了给您一个清晰的认识，DrakX 将会在此列出有关您系统的各种信息。根据您所安\n"
-"装的硬件不同，您可能看到以下几种或全部项目：\n"
-"\n"
-" * “鼠标”：检查现在的鼠标配置，必要的话单击按钮进行更改。\n"
-"\n"
-" * “键盘”：检查现在的键盘配置，必要的话单击按钮进行更改。\n"
-"\n"
-" * “国家/地区”：检查现在的国家/地区选择。如果您并不位于该国家/地区，请单\n"
-"击按钮来选择另外一个国家/地区。\n"
-"\n"
-" * “时区”：默认情况下，DrakX 会根据您选择的主要语言猜测您所在的时区。但\n"
-"是，就像您可以在此选择键盘一样，您可能选择使用中文但并不在中国。此时，您就\n"
-"可能需要单击“时区”按钮来配置正确时区的时钟。\n"
-"\n"
-" * “打印机”：单击“无打印机”按钮会启动打印机设置向导。请参看“初学者指\n"
-"南”来阅读关于如何设置打印机的更多信息。在此所显示的界面和安装时所使用的界\n"
-"面十分类似。\n"
-"\n"
-" * “启动程序”：如果您想要更改您的启动程序配置，请单击该按钮。建议只有高\n"
-"级用户才使用该功能。\n"
-"\n"
-" * “图形界面”：默认情况下，DrakX 会将您的图形界面配置为“800x600”的分辨\n"
-"率。如果您需要调整的话，请单击该按钮重新配置您的图形界面。\n"
-"\n"
-" * “网络”：如果您想要现在配置您的 Internet 或局域网，就可以单击该按钮。\n"
-"\n"
-" * “声卡”：如果发现您的系统有声卡，就会在此显示出来。如果您觉得在此显示\n"
-"的声卡与您实际拥有的声卡不符的话，就可以单击该按钮选择其它的驱动程序。\n"
-"\n"
-" * “电视卡”：如果发现您的系统有电视卡，就会在此显示出来。如果您有电视卡，\n"
-"但并未被检测出来，请单击该按钮尝试手动进行配置。\n"
-"\n"
-" * “ISDN 卡”：如果发现您的系统有 ISDN 卡，就会在此显示出来。您可以单击按\n"
-"钮来修改有关参数。"
 
 #: ../../help.pm:1
 #, c-format
@@ -1293,7 +1274,7 @@ msgstr ""
 " * Initrd：这个选项或者是用来在启动设备可用之前加载初始模块，或者在紧急的\n"
 "启动状况中用来加载一个 ramdisk 内存文件系统。\n"
 "\n"
-" * Initrd-size：缺省的 ramdisk 大小一般是 4,096 字节。 如果您需要分配一个\n"
+" * Initrd-size：默认的 ramdisk 大小一般是 4,096 字节。 如果您需要分配一个\n"
 "大的 ramdisk，可以使用这个选项。\n"
 "\n"
 " * Read-write：通常“root”分区最初是以只读方式加载的，以便在系统真正开始\n"
@@ -1302,7 +1283,7 @@ msgstr ""
 " * NoVideo：假如苹果的视频设备引起的问题太多，您可以选择这个选项，这样可以\n"
 "用“novideo”模式启动，使用内建的帧缓冲支持。\n"
 "\n"
-" * Default: 把这个条目设置成缺省的 Linux 选择，在 yaboot 提示行按 ENTER 就\n"
+" * Default: 把这个条目设置成默认的 Linux 选择，在 yaboot 提示行按 ENTER 就\n"
 "可以进入。如果您按 [Tab] 列出所有启动选项这个条目前面会标记一个“*”。"
 
 #: ../../help.pm:1
@@ -1312,13 +1293,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1330,26 +1306,20 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"DrakX 将要尝试寻找您系统中安装的 IDE 设备。它还会搜索您系统中所有的 PCI SCSI "
-"卡。\n"
-"如果 DrakX 找到了 SCSI 卡，它会自动安装合适的驱动程序。\n"
+"DrakX 将会首先检测您系统中所安装的 IDE 设备。它还会搜索您系统中所有的 PCI\n"
+"SCSI 适配卡。如果 DrakX 发现了 SCSI 适配卡，它会自动安装合适的驱动程序。\n"
 "\n"
-"硬件检测未必总能发现每个设备，因此，DrakX 会请您确认是否安装了 PCI SCSI 卡。"
-"如果您知道您的机器里安装了 SCSI 卡，请单击 “是”。 \n"
-"您需要从显示出的列表中挑选您的卡。 如果您没有 SCSI 卡，请单击 “否”。\n"
-"如果您也不清楚，请选择，“查看硬件信息”，查看您的机器上硬件检测的结果，\n"
-"然后选择“确认”。\n"
-"检查硬件清单之后，单击 “确认” 按钮回到 SCSI 卡的问题。\n"
+"硬件检测未必总能发现每个设备，因此 DrakX 会请您确认是否安装了 PCI SCSI 卡。\n"
+"单击“是”后将显示可供选择的 SCSI 适配卡类型。如果您的计算机上没有 SCSI 适\n"
+"配卡，请选择“否”。如果您不确定的话，您可以选择“查看硬件信息”然后单击\n"
+"“下一步”来检查计算机中的硬件列表。请仔细查看硬件列表，然后单击“下一步”\n"
+"就可以回到 SCSI 适配卡的界面。\n"
 "\n"
-"如果您不得不手工挑选驱动程序，DrakX 将提问您是否要指定特别的参数。\n"
-"您最好让 DrakX 去探测硬件以确定特定硬件初始化需要的特别参数。 \n"
-"这个办法通常可以奏效。\n"
+"如果您一定要手动指定 PCI SCSI 适配卡，DrakX 将提问您是否要指定特别的参数。\n"
+"您最好让 DrakX 去检测硬件，这样有助于获得初始化适配卡所需的选项。大多数情况\n"
+"下，DrakX 将会顺利通过这一步。\n"
 "\n"
-"如果 DrakX 检测参数不成功，您只好自己提供驱动程序参数。\n"
-"请查看“用户指南”，（第三章 收集硬件信息）。那里提供了一些获取有关信息的方"
-"法，如查看硬件文档，\n"
-" 浏览制造商的网站（如果您有办法上网）或从 Windows 中获取有关的信息\n"
-"（如果您曾经能在 Windows 中使用有关硬件）。"
+"如果 DrakX 无法检测到适当的参数，就只好劳驾您亲自配置驱动程序了。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1362,7 +1332,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1379,34 +1349,27 @@ msgid ""
 "system you may change it by running PrinterDrake from the Mandrake Control\n"
 "Center and clicking the expert button."
 msgstr ""
-"我们在这里选择一个打印系统。其它操作系统一般提供\n"
-"一个，而 Mandrake Linux 提供了三种。\n"
+"现在应该为您的计算机选择打印系统了。其它的操作系统也许只提供了一种选择，但\n"
+"Mandrake Linux 提供了两种。每种打印系统都能够在不同的配置中大展身手。\n"
 "\n"
-" * “pdq” - 这是“不排队的打印”系统，如果您\n"
-"的打印机直接连接在这个电脑上，而且您不需要网络\n"
-"打印服务，就选择这种。它不能很快的处理网络打印。\n"
-"如果这是您第一次使用 GNU/Linux，就选“pdq”。\n"
-"安装之后，如果您想修改设置，请运行\n"
-"Mandrake 控制中心的 PrinterDrake 打印机设置。\n"
-"并单击专家模式。\n"
+" * “pdq”- 这是“不排队打印”缩写系统。如果您的打印机是直接连接在这台电脑\n"
+"上的，您也不会打印太多的任务，更不会使用网络打印机，那么请选择本系统。\n"
+"(“pdp”只能应付极为简单的网络情况，而且在网络中使用也很慢。)如果您从来没有\n"
+"使用过 GNU/Linux，那么推荐您使用“pdq”。\n"
 "\n"
-" * “CUPS” - “通用 Unix 打印系统”，不论是打印到\n"
-"本地打印机还是打印到地球另一面的网络打印机，这个系统都能胜任。\n"
-"它设置简单，可以作为老式“lpd”打印系统的服务器和客户机。\n"
-"它和以前的系统兼容。它有众多的功能，可它的基本设置\n"
-"和“pdq”一样简单。如果您想\n"
-"模拟一个“lpd”服务器，您必须启动“cups-lpd”后台服务。\n"
-"它的图形界面可以处理打印并选择打印机选项。\n"
+" * “CUPS”-“通用 Unix 打印系统”，不论是打印到本地打印机，还是打印到地球\n"
+"另一面的网络打印机，本系统都能完全胜任。它配置简单，甚至可以作为老式“lpd”\n"
+"打印系统的服务器和客户机。所以即便是老得掉牙的操作系统需要打印服务的话，都\n"
+"可以顺畅的应用本系统。尽管它的功能十分强大，可它的基本设置仍然和“pdq”一样\n"
+"简单。如果您想模拟一台“lpd”服务器，不要忘了打开“cups-lpd”守护程序。\n"
+"“CUPS”还包括一个图形界面，可用来打印或选择打印机选项，以及管理打印机。\n"
 "\n"
-" * “lprNG” - “新一代 lpr”。这个系统和其它系统\n"
-"能做的事情几乎一样，但是它还能够用\n"
-"连接在 Novell 网络上的打印机打印，因为它支持 IPX 协议，\n"
-"而且它的输出可以直接用于命令输入。如果您需要使用 Novell\n"
-"或者想不通过单独的管道指令而把打印结果传递给另一个程序，使用 lprNG。\n"
-"否则，CUPS 更合适因为它比较简单，在网络上也工作得更好。"
+"如果您现在进行了选择，但稍后又发现您并不喜欢所选择的打印系统，可以轻松修"
+"改。\n"
+"只需从 Mandrake 控制中心中选择 PrinterDrake，然后单击专家按钮。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1425,53 +1388,11 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"Mandrake Linux CD-ROM 有内置的急救功能. 如果您用光盘启动机器,\n"
-"在开机画面按 >>F1<< 键, 然后在提示处输入 >>rescue<<, 就会进入急救模式.\n"
-"万一您的机器不能从光盘启动, 至少有两种情况 您可以回到这一步得到帮助:\n"
-"\n"
-" * 在安装开机引导程序时, DrakX 会重写您的主硬盘的主引导记录(MBR)\n"
-"(除非您使用其它开机引导程序) 以便您选择要启动的操作系统(假设您的\n"
-"电脑也安装了其他操作系统), 万一某天您需要重新安装 Windows,\n"
-"Microsoft 的安装程序会清除主引导记录, 结果您将无法进入 GNU/Linux!\n"
-"\n"
-" * 假如出了什么问题, 您的 GNU/Linux 无法从硬盘启动, \n"
-"这个引导软盘是您启动 GNU/Linux 的唯一途径.\n"
-"它包含了各种有用的工具, 可以修复因为停电, 忘记口令,\n"
-"不幸的错误命令, 口令中的打字错误等等原因造成的系统崩溃.\n"
-"\n"
-"如果您选择“是”, 会提示您在软盘驱动器中放一片软盘. \n"
-"您使用的软盘必须是空的或者您不再需要上面的数据.\n"
-"DrakX 会重写整个盘片, 所以您不必事先格式化."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1488,17 +1409,19 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO（LInux LOader 的缩写）和 Grub 是开机启动程序：开机时，它们可以引导\n"
-"您系统里的 GNU/Linux 或其他操作系统。\n"
-"通常它能正确的发现和安装系统中的其他操作系统。如果不是这样，您可以在这个界面"
-"手工添加新的项目。请仔细选择正确的参数。\n"
+"在您配置了常规的启动引导程序参数之后，这里所列出的启动选项将会在启动的时候\n"
+"显示出来。\n"
 "\n"
-"您可能不希望让每个人使用这里列出的其他操作系统。您只要把有关的项目删除就好"
-"了。\n"
-"不过您需要先准备那些其它操作系统的启动盘，才能在需要的时候引导它们。"
+"如果在您的计算机上安装了其它的操作系统，DrakX 会自动将其添加到启动菜单中。\n"
+"如果您想要调整已有的选项，可以单击“添加”创建新项；选中一项，然后单击“修\n"
+"改”或“删除”可执行相应操作。“确定”代表您同意所作的修改。\n"
+"\n"
+"您可能不想让可访问控制台并重新启动计算机的任何人访问其它操作系统。您可以在\n"
+"此删除操作系统的对应选项，就可以在启动引导程序菜单中删除该项。但是，您必须\n"
+"有启动盘才能在需要的时候启动其它操作系统。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog allows to finely tune your bootloader:\n"
 "\n"
@@ -1527,57 +1450,30 @@ msgid ""
 "Clicking the \"Advanced\" button in this dialog will offer advanced options\n"
 "that are reserved for the expert user."
 msgstr ""
-"LILO 和 grub 是 GNU/Linux 开机引导程序。这个步骤通常是\n"
-"全自动的。DrakX 会分析磁盘的引导扇区，并根据\n"
-"发现的内容自动设置：\n"
-"\n"
-" * 如果发现 Windows 引导扇区，它会用 grub/LILO 引导扇区\n"
-"替换它。这样您将能够引导 GNU/Linux 和\n"
-"其他操作系统；\n"
-"\n"
-" * 如果发现 grub 或 LILO 引导扇区，它会用一个新的\n"
-"替换它。\n"
-"\n"
-"如果不确定，DrakX 会提示各种可能的选项。\n"
+"此对话框允许调整您的启动引导程序。\n"
 "\n"
 " * “要使用的引导程序”：有三个选择：\n"
 "\n"
-"    * “GRUB”：如果喜欢 grub（文本菜单）。\n"
+"    * “GRUB”：如果您喜欢 grub（文本菜单）。\n"
 "\n"
-"    * “LILO 图形菜单”：如果喜欢 LILO 和\n"
-"它的图形界面。\n"
+"    * “LILO 文本菜单”：如果您喜欢 LILO 的文本菜单界面。\n"
 "\n"
-"    * “LILO 文本菜单”：如果喜欢 LILO 和 \n"
-"文本界面菜单。\n"
+"    * “LILO 图形菜单”：如果您喜欢 LILO 的图形菜单界面。\n"
 "\n"
-" * “启动设备”：通常您不需要改变缺省的启动设备\n"
-"（“/dev/hda”），可是您也可以把引导程序安装在\n"
-"第二个硬盘（“/dev/hdb”），甚至是软盘（“/dev/fd0”）\n"
-"上。\n"
+" * “启动设备”：通常您不需要更改默认的启动设备（“/dev/hda”）。但是，如果\n"
+"您愿意，也可以把引导程序安装在第二个硬盘上（“/dev/hdb”），甚至是一张软盘\n"
+"（“/dev/fd0”）上。\n"
 "\n"
-" * “引导缺省镜像之前等候”：当重新启动系统时，\n"
-"留给用户指定的时间 - 在开机引导程序的菜单里，\n"
-"选择除了缺省设置以外的其它项目。\n"
+" * “引导默认镜像之前的延迟”：当启动或重新启动系统时，会在控制台中留给用户\n"
+"指定的时间，以便可以选择除默认值外的其它启动选项。\n"
 "\n"
-"！！注意：如果您在这里选择不安装开机引导程序“选\n"
-"“取消”），您必须准备其它方法引导您的 Mandrake\n"
-"Linux 系统！如果要修改任何选项，一定要清楚\n"
-"您在做什么！！\n"
+"！！注意：如果您在这里选择不安装开机引导程序（选“跳过”），您必须准备其它\n"
+"方法引导您的 Mandrake Linux 系统！不管修改任何选项，一定要清楚您在做什么！\n"
 "\n"
-"单击“高级”按钮可以使用更多的\n"
-"选项，只有专家用户会需要它们。\n"
-"\n"
-"设置完通用的开机引导程序选项之后，会再次\n"
-"开机时可以选择的选项。\n"
-"\n"
-"如果您的电脑还安装有其它的操作系统，它会自动被\n"
-"添加到开机菜单。您可以在这里细调已有的选项。\n"
-"先选中一个条目，单击“修改”可以修改或删除它；\n"
-"“添加”创建一个新条目；而“完成” 将进入\n"
-"下一个安装步骤。"
+"单击此对话框中的“高级”按钮可为专家用户提供高级的选项。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is the most crucial decision point for the security of your GNU/Linux\n"
 "system: you have to enter the \"root\" password. \"Root\" is the system\n"
@@ -1614,39 +1510,31 @@ msgid ""
 "have \"No password\", if your computer won't be connected to the Internet,\n"
 "and if you trust anybody having access to it."
 msgstr ""
-"下一个步骤对您的系统安全非常重要：您将输入“root”密码。\n"
-"“root”就是系统管理员，也是唯一有权进行升级软件、添加用户、\n"
-"改变全面系统设置等等任务的人。简单说，“root” 可以\n"
-"做任何事情！因此您必须选择一个别人无法猜到的密码 -\n"
-"如果您输入的口令太简单 DrakX 会提醒您。当然，您可以\n"
-"选择不输入密码，不过我们强烈建议您不要那样做。\n"
-"只有一个原因：不要以为您能启动 GNU/Linux 就可以避免\n"
-"一切系统失误。既然“root”能不受任何限制\n"
-"并且可能因为无意的错误操作破坏系统中所有的数据，\n"
-"显然应该防止有人太容易的成为\n"
-"“root”。\n"
+"您的 GNU/Linux 系统是否安全，现在真的是最关键的一刻：您必须输入“root”密\n"
+"码。“Root”就是系统管理员，也是唯一有权限进行升级、添加用户、更改整个系统\n"
+"配置等任务的人。简单的说，“root”无所不能！这就是为什么您的密码必须很难被\n"
+"别人猜到的原因 - 别担心，如果您的密码太简单的话，DrakX 会提醒您的。正如您\n"
+"所看到的一样，您不必非得输入密码，但是我们强烈建议您设置一个密码。如果您操\n"
+"作不当的话，GNU/Linux 和其它所有的操作系统一样易于损坏。由于“root”可以逾\n"
+"越所有限制，并且无意间就可删除分区上的所有数据。所以，当个“root”应该非常\n"
+"麻烦才对。\n"
 "\n"
-"密码应该至少有 8 个字符，混合使用字母和数字\n"
-"千万不要把“root”密码写下来 - 如果别人看到\n"
-"会很容易危害您的系统。\n"
+"密码应该至少有 8 个字符，并且混合使用字母和数字。绝对不要把“root”的密码写\n"
+"下来 - 这样的密码形同虚设，系统坏了可别怪我没提醒你。\n"
 "\n"
-"另外，也不要把密码编得太长、太复杂。\n"
-"一定要让自己能随时记得住。\n"
+"另外，也不要把密码编得太长、太复杂，否则您自己可能都会忘了。\n"
 "\n"
-"您输入密码时屏幕上不会显示。所以您必须\n"
-"输入密码两次，以减少打字错误的可能。\n"
-"如果您两次都犯了同样的错误，系统不会发现\n"
-"您第一次登录时一定要使用同样的“错误”密码。\n"
+"您输入密码时屏幕上不会显示。为了减少“盲”打造成的打字错误，您需要输入密码\n"
+"两次。如果碰巧您两次都犯了相同的打字错误，那么这个“错误”的密码将会在您第\n"
+"一次登录时生效。\n"
 "\n"
-"在专家模式中，会询问您是否要连接认证服务器\n"
-"如 NIS 或 LDAP。\n"
+"如果您想要访问本机时被认证服务器所验证，请单击“高级”按钮。\n"
 "\n"
-"如果您的网络使用 LDAP（或 NIS）协议进行认证，\n"
-"选择“LDAP”（或“NIS”）。如果不能确定，\n"
-"询问网络管理员。\n"
+"如果您的网络使用 LDAP、NIS 或 PDC Windows 域认证服务，请选择对应的“认证”\n"
+"类型。如果您无法确定，请咨询您的网络管理员。\n"
 "\n"
-"如果您的电脑没有和网络连接，您可以选择\n"
-"使用“本地文件”认证。"
+"如果您曾经遇到过遗忘密码的困扰，您可以选择“没有密码”。当然，这意味着您的\n"
+"电脑不会连接到 Internet，而且您相信可以访问本机的任何人。"
 
 #: ../../help.pm:1
 #, c-format
@@ -1658,7 +1546,7 @@ msgstr ""
 "MS Windows 里的 COM1，在 GNU/Linux 里面叫做 ttyS0。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usually, DrakX has no problems detecting the number of buttons on your\n"
 "mouse. If it does, it assumes you have a two-button mouse and will\n"
@@ -1685,13 +1573,20 @@ msgid ""
 "the buttons and check that the mouse pointer moves on-screen as you move\n"
 "your mouse."
 msgstr ""
-"DrakX 通常能检测您的鼠标有多少按键。如果没有检测到，它假设您有两键鼠标，\n"
-"并设置模拟第三键。DrakX 会自动分辨 PS/2、串口或 USB 鼠标。\n"
+"通常情况下，DrakX 能够正确检测您所使用鼠标的按键数目。如果没有检测失败，它\n"
+"会假设您有两键鼠标，并设置模拟第三键。激活第三键的方法是同时按下左右鼠标按\n"
+"钮。DrakX 会自动分辨 PS/2、串口或 USB 鼠标。\n"
 "\n"
-"您可以从列表中选择您使用的鼠标。\n"
+"如果您想要指定不同类型的鼠标，请从列表中选择您使用的鼠标。\n"
 "\n"
-"如果您选择的不是缺省设置，会出现测试窗口，您可以按各个按键和滚轮，确认\n"
-"设置正确，如果鼠标不正常工作，按空格键或 [Return] 可以“取消”然后重新选择。"
+"如果您选择的不是默认设置，会出现测试窗口。您可以按各个按键和滚轮，以便确认\n"
+"设置正确。如果鼠标工作不正常，按空格或回车键可以取消测试并返回到选项清单。\n"
+"\n"
+"可能有些时候滚轮鼠标无法自动检测，这时您可能需要从列表中选择鼠标。请确定您\n"
+"所选的接口类型正确。选择一种鼠标后，请单击“下一步 ->”按钮，屏幕上将会出现\n"
+"鼠标的图像。试着滚动鼠标滚轮，这样可以确认选择是否正确。只要您看到了屏幕上\n"
+"的滚轮和您的滚动方向一样，并且按钮工作也正确，移动鼠标则指针也随之移动，那\n"
+"么就算配置完成了。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1707,26 +1602,36 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"请选择您想要在安装和平常操作系统时使用的语言。\n"
+"您对首选语言的选择将影响文档、安装程序和系统的语言设定。请先选择您所在的地\n"
+"区，然后选择您说的语言。\n"
 "\n"
-"单击“高级”按钮选择其它要安装的语言。选择其它语言将安装该语言的文档和相关的"
-"程序文件。\n"
-"例如，您在树图中选择了简体中文作为主要语言，在高级选择中还可以选择繁体中"
-"文。\n"
+"单击“高级”按钮将允许您选择要在您的系统中安装的其它语言，因此也会安装对应\n"
+"语言的系统文档和应用程序。例如，如果希望在计算机上同时为说英语的人服务，那\n"
+"么请选择简体中文作为默认语言，然后从高级区中选择“English”。\n"
 "\n"
-"您可以选择多种附加的语言和地区设置，单击“确认”继续。"
+"请注意，您可以选择多种额外的语言。一旦您选中了所有的额外区域设置，就可以单\n"
+"击“下一步->”按钮继续。\n"
+"\n"
+"如果您想要在系统中所安装的不同语言之间切换，您可以用“root”身份调用\n"
+"“/usr/sbin/localedrake”命令，这样就可以改变整个系统所用的语言。如果是普\n"
+"通用户执行的话，则只会影响特定用户的语言设置。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Depending on the default language you chose in Section , DrakX will\n"
 "automatically select a particular type of keyboard configuration. However,\n"
@@ -1744,10 +1649,15 @@ msgid ""
 "dialog will allow you to choose the key binding that will switch the\n"
 "keyboard between the Latin and non-Latin layouts."
 msgstr ""
-"通常，DrakX 根据您选择的语言选择配置合适的键盘。\n"
-"如果您的键盘并不严格符合语言的要求，您可以从列表中选择需要的键盘。\n"
+"DrakX 会根据您所选择的默认语言自动选择对应的键盘配置。但是，您可能想要选择\n"
+"与您的语言不同的键盘：例如，如果您是一个讲英语的瑞士人，您可能用的就是瑞士\n"
+"键盘。又或者，您说英语，但您住在魁北克，您也会发现您的语言和键盘并不相符。\n"
+"不管是那种情况，这一安装步骤将会允许您从列表中选择对应的键盘。\n"
 "\n"
-"单击“更多”按钮将列出所有支持的键盘。"
+"单击“更多”按钮将列出所有支持的键盘。\n"
+"\n"
+"如果您选择的键盘布局基于非拉丁字母，下个对话框将允许您选择在拉丁和非拉丁布\n"
+"局之间切换所用的快捷键。"
 
 #: ../../help.pm:1
 #, c-format
@@ -1773,13 +1683,30 @@ msgid ""
 "running version \"8.1\" or later. Performing an Upgrade on versions prior\n"
 "to Mandrake Linux version \"8.1\" is not recommended."
 msgstr ""
+"仅当在您的机器上发现了旧的 GNU/Linux 分区时此步骤才会被激活。\n"
+"\n"
+"DrakX 现在需要知道您是想要执行新安装还是升级已有的 Mandrake Linux 系统：\n"
+"\n"
+" *“安装”：这种情况下，这将完全删除旧的系统。如果您想要更改您的硬盘分区，\n"
+"或者想要更改文件系统，您就应该使用此选项。但是，根据您的分区方案不同，您仍\n"
+"然可以保留您的部分数据不被覆盖。\n"
+"\n"
+" *“升级”：这一安装级别将会允许您升级您的 Mandrake Linux 系统中目前已经安\n"
+"装的软件包。这样就不会更改您目前的分区方案和用户数据。大多数配置步骤仍然可\n"
+"用，就和标准安装差不多。\n"
+"\n"
+"使用“升级”选项适用于 Mandrake Linux 系统版本“8.1”或更高版本。我们并不\n"
+"推荐您在先于“8.1”版本之前的 Mandrake Linux 上执行升级。"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
+"“国家”：检查目前的国家选择。如果您并不在此国家，请单击按钮然后另外选择。"
 
 #: ../../help.pm:1
 #, c-format
@@ -1979,9 +1906,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -1999,14 +1924,14 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 "在您安装 Mandrake Linux 的这个时候，很可能有些软件包在发行之后已经更新。\n"
 "有些故障已经被修正，有些问题已经被解决。为了利用这些更新，您最好从互联网\n"
@@ -2070,7 +1995,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2150,7 +2075,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2175,13 +2100,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "这里, 您需要在硬盘上选择用来安装 Mandrake Linux 操作系统的位置.\n"
 "如果磁盘是空的, 或者现存的操作系统使用了磁盘上的全部空间, 您需要\n"
@@ -2231,52 +2156,6 @@ msgstr ""
 "  您可能轻易的毁坏所有的数据. 如果您不清楚请不要使用它.."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"Mandrake Linux CD-ROM 有内置的急救功能. 如果您用光盘启动机器,\n"
-"在开机画面按 >>F1<< 键, 然后在提示处输入 >>rescue<<, 就会进入急救模式.\n"
-"万一您的机器不能从光盘启动, 至少有两种情况 您可以回到这一步得到帮助:\n"
-"\n"
-" * 在安装开机引导程序时, DrakX 会重写您的主硬盘的主引导记录(MBR)\n"
-"(除非您使用其它开机引导程序) 以便您选择要启动的操作系统(假设您的\n"
-"电脑也安装了其他操作系统), 万一某天您需要重新安装 Windows,\n"
-"Microsoft 的安装程序会清除主引导记录, 结果您将无法进入 GNU/Linux!\n"
-"\n"
-" * 假如出了什么问题, 您的 GNU/Linux 无法从硬盘启动, \n"
-"这个引导软盘是您启动 GNU/Linux 的唯一途径.\n"
-"它包含了各种有用的工具, 可以修复因为停电, 忘记口令,\n"
-"不幸的错误命令, 口令中的打字错误等等原因造成的系统崩溃.\n"
-"\n"
-"如果您选择“是”, 会提示您在软盘驱动器中放一片软盘. \n"
-"您使用的软盘必须是空的或者您不再需要上面的数据.\n"
-"DrakX 会重写整个盘片, 所以您不必事先格式化."
-
-#: ../../help.pm:1
 #, c-format
 msgid ""
 "Finally, you will be asked whether you want to see the graphical interface\n"
@@ -2285,10 +2164,9 @@ msgid ""
 "act as a server, or if you were not successful in getting the display\n"
 "configured."
 msgstr ""
-"最后, 您会被问开机是否进入图形界面。注意即使您没有选择测试配置, 也会提出这个"
-"问题\n"
-"显然, 如果这个机器将作为服务器, 或者您的显示配置还没有成功, 您应该选"
-"择“否”。"
+"最后，安装程序会询问您是否想要在启动的时候就进入图形界面。请注意，即使您没\n"
+"有选择测试配置，也会提出这个问题。显然，如果本机将用作服务器，或者您的显示\n"
+"配置还没有成功，您应该选择“否”。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2297,6 +2175,8 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"如果您的显示卡支持不同的服务器，为了选择是否要启用 3D 加速，您应该在这里选\n"
+"择符合您需要的服务器。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2308,6 +2188,10 @@ msgid ""
 "able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
+"分辨率\n"
+"\n"
+"    您可以在此选择分辨率和颜色深度，但您的硬件要支持。请选择最适合您需要的\n"
+"选项(您在安装完成之后仍可进行修改)。所选配置的例子会显示在显示器上。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2318,6 +2202,10 @@ msgid ""
 "monitor connected to your machine. If it is not the case, you can choose in\n"
 "this list the monitor you actually own."
 msgstr ""
+"显示器\n"
+"\n"
+"    安装程序通常可以自动检测并配置连接到计算机上的显示器。如果不幸您的显示\n"
+"器未被检测出来，您可以在此列表中选择您所实际使用的显示器。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2374,6 +2262,45 @@ msgid ""
 "\"No\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
 msgstr ""
+"X (代表 X 窗口系统)是 GNU/Linux 图形界面的核心部分。Mandrake Linux 捆绑的\n"
+"所有图形环境（KDE、GNOME、AfterStep、WindowMake 等等）都依赖于该系统。\n"
+"\n"
+"您将会看到不同的参数列表，以便进行图形显示选项的更改。其中包括：显示卡\n"
+"\n"
+"    安装程序通常可以自动检测并配置连接到计算机上的显示卡。如果不幸您的显示\n"
+"卡未被检测出来，您可以在此列表中选择您所实际使用的显示卡。\n"
+"\n"
+"    如果您的显示卡支持不同的服务器，为了选择是否要启用 3D 加速，您应该在这\n"
+"里选择符合您需要的服务器。\n"
+"\n"
+"\n"
+"\n"
+"显示器\n"
+"\n"
+"    安装程序通常可以自动检测并配置连接到计算机上的显示器。如果不幸您的显示\n"
+"器未被检测出来，您可以在此列表中选择您所实际使用的显示器。\n"
+"\n"
+"\n"
+"\n"
+"分辨率\n"
+"\n"
+"    您可以在此选择分辨率和颜色深度，但您的硬件要支持。请选择最适合您需要的\n"
+"选项(您在安装完成之后仍可进行修改)。所选配置的例子会显示在显示器上。\n"
+"\n"
+"\n"
+"\n"
+"测试\n"
+"\n"
+"    系统将会以所选的分辨率打开图形屏幕。如果您在测试时可以看到提示，请回答\n"
+"“是”，DrakX 就会执行安装的下一步骤。如果您看不到任何提示，这意味着自动检\n"
+"测的某一部分不正确，测试将会在 12 秒后自动结束，这将被您带回菜单。请更改设\n"
+"置，知道您能够看到正确的图形显示为止。\n"
+"\n"
+"\n"
+"\n"
+"选项\n"
+"    您可以在此选择是否想要在计算机启动的时候就切换到图形界面。显然，如果本\n"
+"机将用作服务器，或者您的显示配置还没有成功，您应该选择“否”。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2388,6 +2315,13 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"显示卡\n"
+"\n"
+"    安装程序通常可以自动检测并配置连接到计算机上的显示卡。如果不幸您的显示\n"
+"卡未被检测出来，您可以在此列表中选择您所实际使用的显示卡。\n"
+"\n"
+"    如果您的显示卡支持不同的服务器，为了选择是否要启用 3D 加速，您应该在这\n"
+"里选择符合您需要的服务器。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2417,7 +2351,8 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2440,20 +2375,23 @@ msgstr ""
 "\n"
 "移动您的鼠标到选项上面会弹出帮助提示, 解释这个服务的作用.\n"
 "不过, 如果您不确定某一个服务到底是否需要,\n"
-"保留缺省设置会比较安全.\n"
+"保留默认设置会比较安全.\n"
 "\n"
 "!! 如果您的机器将作为服务器, 在这一步请格外小心: 请不要启动任何\n"
 "您不需要的服务. 请注意某些服务对服务器有潜在的危险.通常, 只选择您确实要使用的"
 "那些服务.!!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"“打印机”：单击“无打印机”按钮将打开打印机配置向导。请参看“新手指南”中\n"
+"对应部分，其中包含如何设置新打印机的详细信息。在此显示的界面与安装时的界面\n"
+"十分类似。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2548,7 +2486,7 @@ msgstr ""
 "的问题\n"
 "但是有可能在这个版本的 Mandrake Linux 完成之后发现新的安全漏洞。\n"
 "如果您不太清楚有关的服务器软件包有什么作用, 或者为什么要安装它, 请点"
-"击“否”。如果单击“是”列出的服务器软件将被安装, 并且缺省会启动这些服"
+"击“否”。如果单击“是”列出的服务器软件将被安装, 并且默认会启动这些服"
 "务 ！！\n"
 "\n"
 " “自动依赖性”选项在安装程序自动选择需要的软件包时不会提出警告。\n"
@@ -2771,7 +2709,7 @@ msgstr ""
 "输入的第一个单词\n"
 "放到 “用户名”栏目里。这将是这个用户以后登录系统是使用的名字。您也可以修改"
 "它。\n"
-"之后, 您要输入一个口令。非特权(普通)用户的口令不象“root”的口令那样对系统安"
+"之后, 您要输入一个密码。非特权(普通)用户的密码不象“root”的密码那样对系统安"
 "全至关重要,\n"
 "然而没有理由忽略它; 您毕竟希望保护自己的文件。\n"
 "\n"
@@ -2781,7 +2719,7 @@ msgstr ""
 "全做好之后, 单击“完成”。\n"
 "\n"
 "单击“高级”按钮允许您修改用户的“shell-命令解释程序”\n"
-"(缺省设置是 bash )。"
+"(默认设置是 bash )。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2981,6 +2919,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"为了保证更改分区大小之后的数据完整性，在您下次启动进入 Windows(TM) 时可能\n"
+"会自动运行文件系统检查。"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -3807,7 +3747,7 @@ msgstr "准备启动引导程序..."
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Domain Admin Password"
-msgstr "域管理员口令"
+msgstr "域管理员密码"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3843,10 +3783,10 @@ msgstr ""
 "为了在 W2K PDC 服务器的环境中正常使用, 您可能得请 W2K 管理员 运行“C:\\>net "
 "localgroup \"Pre-Windows 2000 Compatible Access\" everyone /add”并重启服务"
 "器。\n"
-"您还需要一个域管理员的用户名/口令以便把这个机器添加到 Windows(TM) 域。\n"
+"您还需要一个域管理员的用户名/密码以便把这个机器添加到 Windows(TM) 域。\n"
 "如果网络还没有启用, Drakx 会在网络设置步骤之后尝试加入域。\n"
 "如果这个设置因为什么失败了而且域认证不起作用, 启动系统之后运行“smbpasswd -j "
-"域名 -U 用户%%口令”填入您的 Windows(tm) 域名和管理员的用户名/口令。\n"
+"域名 -U 用户%%密码”填入您的 Windows(tm) 域名和管理员的用户名/密码。\n"
 "命令“wbinfo -t”会测试您的认证密码是否完好。"
 
 #: ../../install_steps_interactive.pm:1
@@ -3903,23 +3843,23 @@ msgstr "认证"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "This password is too short (it must be at least %d characters long)"
-msgstr "这个口令太简单了 (至少要有 %d 个字符)"
+msgstr "这个密码太简单了 (至少要有 %d 个字符)"
 
 #. -PO: keep this short or else the buttons will not fit in the window
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "No password"
-msgstr "没有口令"
+msgstr "没有密码"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
-msgstr "超级用户口令"
+msgstr "超级用户密码"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "You have not configured X. Are you sure you really want this?"
-msgstr ""
+msgstr "您还没有配置过 X。您真的想要这样吗？"
 
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #, c-format
@@ -3936,6 +3876,12 @@ msgstr "服务"
 #, c-format
 msgid "System"
 msgstr "系统"
+
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "%s on %s"
+msgstr "%s (端口 %s)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4361,6 +4307,11 @@ msgstr "鼠标端口"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "请选择您的鼠标类型。"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "加密密钥"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7031,7 +6982,7 @@ msgstr "增加用户"
 #: ../../steps.pm:1
 #, c-format
 msgid "Root password"
-msgstr "Root 口令"
+msgstr "Root 密码"
 
 #: ../../steps.pm:1
 #, c-format
@@ -8397,7 +8348,7 @@ msgstr "用户名"
 #, c-format
 msgid ""
 "Please enter your username, password and domain name to access this host."
-msgstr "要访问此主机, 请输入您的用户名, 口令和域名"
+msgstr "要访问此主机, 请输入您的用户名, 密码和域名"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -8417,7 +8368,7 @@ msgstr "哪个用户名"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Can't login using username %s (bad password?)"
-msgstr "不能使用用户名 %s 登录 (口令错误?)"
+msgstr "不能使用用户名 %s 登录 (密码错误?)"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8574,7 +8525,7 @@ msgid "Choosing an arbitratry driver"
 msgstr "选择其它驱动"
 
 #: ../../harddrake/sound.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The classic bug sound tester is to run the following commands:\n"
 "\n"
@@ -8601,7 +8552,7 @@ msgstr ""
 "\n"
 "- “lspcidrake -v | fgrep AUDIO”将会告诉您您的声卡默认使用哪种驱动程序\n"
 "\n"
-"- “grep sound-slot /etc/modules.conf”将会告诉您声卡目前使用的驱动程序\n"
+"- “grep snd-slot /etc/modules.conf”将会告诉您声卡目前使用的驱动程序\n"
 "\n"
 "- “/sbin/lsmod”允许您检查该驱动程序是否已经装入\n"
 "\n"
@@ -9050,9 +9001,9 @@ msgid "Connect to the Internet"
 msgstr "连接到互联网"
 
 #: ../../network/adsl.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid "Sagem (using pppoa) usb"
-msgstr "Sagem (使用 pppoa) USB"
+msgstr "Sagem (使用 pppoe) USB"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9195,11 +9146,6 @@ msgstr ""
 #, c-format
 msgid "Configuring network"
 msgstr "正在配置网络"
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid "no network card found"
-msgstr "找不到网卡"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -9919,7 +9865,7 @@ msgstr "发现防火墙配置!"
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
-msgstr "帐户口令"
+msgstr "帐户密码"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10472,19 +10418,6 @@ msgid ""
 msgstr ""
 "下列打印机已配置。双击打印机可更改其设置、将其设为默认打印机；或者查看相关信"
 "息。"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"下列打印机已配置。\n"
-"在打印机名称上双击可以修改它的设置; 把它设置成默认打印机; 查看它的信息;\n"
-"或者让 Star Office/OpenOffice.org/GIMP 能在远程 CUPS 服务器的打印机上打印文"
-"档。"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11070,6 +11003,11 @@ msgid "Option %s must be an integer number!"
 msgstr "选项 %s 必须是整数!"
 
 #: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer default settings"
+msgstr "打印机型号选择"
+
+#: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "Printer default settings\n"
@@ -11476,7 +11414,7 @@ msgid ""
 "name and password."
 msgstr ""
 "如果您要使用的是 NetWare 打印机, 您需要说明主机的 NetWare 名字 (注意! \n"
-"可能与它的 TCP/IP 主机名不同), 以及有权访问打印机的用户名和口令, \n"
+"可能与它的 TCP/IP 主机名不同), 以及有权访问打印机的用户名和密码, \n"
 "当然还有打印机的打印队列名。"
 
 #: ../../printer/printerdrake.pm:1
@@ -11531,15 +11469,15 @@ msgid ""
 "type in Printerdrake.\n"
 "\n"
 msgstr ""
-"您将要配置使用 Windows 帐户和口令的打印。由于 Samba 客户软件的体系缺陷, 口令"
+"您将要配置使用 Windows 帐户和密码的打印。由于 Samba 客户软件的体系缺陷, 密码"
 "将以明文 出现在 Samba 向 Windows 服务器发送打印任务 的命令行中。所以这个系统"
-"的所有用户都可以 用下列命令看到口令,“ps auxwww”。\n"
+"的所有用户都可以 用下列命令看到密码,“ps auxwww”。\n"
 "\n"
 "我们建议您使用下面列出的替代方法之一 (所有情况 中您必须设法保证只有您的本地网"
 "络的计算机 可以访问您的 Windows 服务器, 例如使用防火墙):\n"
 "\n"
-"使用 Windows 服务器上没有口令的帐户, 如“GUEST”帐户 或者打印专用的帐户。不要"
-"清除一个普通用户的口令保护,或者取消管理员用户的口令。\n"
+"使用 Windows 服务器上没有密码的帐户, 如“GUEST”帐户 或者打印专用的帐户。不要"
+"清除一个普通用户的密码保护,或者取消管理员用户的密码。\n"
 "\n"
 "在您的 Windows 服务器上设置打印机支持 LPD 协议。然后在这个电脑上用打印机配置"
 "向导按照“%s”连接方式 配置打印机。\n"
@@ -11591,7 +11529,7 @@ msgid ""
 " If the desired printer was auto-detected, simply choose it from the list "
 "and then add user name, password, and/or workgroup if needed."
 msgstr ""
-"如果自动检测发现了想要的打印机, 只要从列表中选择它, 然后添加用户名, 口令, 以"
+"如果自动检测发现了想要的打印机, 只要从列表中选择它, 然后添加用户名, 密码, 以"
 "及可能需要的网络组名。"
 
 #: ../../printer/printerdrake.pm:1
@@ -11605,7 +11543,7 @@ msgstr ""
 "如果您要使用的是 SMB 打印机 (就是 Windows 9x/NT 网络共享打印机),\n"
 "您需要说明主机的 SMB 名字 (注意! 是您在 Windows 网络\n"
 "邻居里看到的主机名, 可能与它的 TCP/IP 主机名不同,), 可能还需要它的 IP 地址,\n"
-"以及有权访问打印机的用户名, 工作组和口令, 当然还有打印机的共享名。"
+"以及有权访问打印机的用户名, 工作组和密码, 当然还有打印机的共享名。"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12126,9 +12064,9 @@ msgid "Checking your system..."
 msgstr "正在检查您的系统..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "重新启动 XFS"
+msgstr "正在重新启动 CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12283,6 +12221,11 @@ msgid ""
 "address(es) and optionally the port number(s) here to get the printer "
 "information from the server(s)."
 msgstr ""
+"要访问局域网中远程 CUPS 服务器上的打印机，您只需打开“自动查找远程计算机上\n"
+"可用的打印机”选项；CUPS 服务器会自动通知您的计算机有关打印机的信息。目前\n"
+"您计算机上可用的打印机都会列在 Printerdrake 的“远程打印机”栏中。如果您的\n"
+"CUPS 服务器不在您的局域网中，您就需要在此输入 IP 地址以及可选的端口号。这\n"
+"样才能获得服务器的打印机信息。"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12401,12 +12344,12 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of sgid files."
-msgstr "如果设为 yes，在 sgid 文件中检查添加/删除。"
+msgstr "如果设为 yes，就会在 sgid 文件中检查添加/删除。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check open ports."
-msgstr "如果设为 yes，检查打开的端口。"
+msgstr "如果设为 yes，就会检查打开的端口。"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12417,47 +12360,47 @@ msgstr "如果设置，发送邮件报告到这个邮箱地址，或者发给 root。"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result by mail."
-msgstr "如果设为 yes，通过邮件报告检测结果。"
+msgstr "如果设为 yes，就会通过邮件报告检测结果。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check files/directories writable by everybody."
-msgstr "如果设为 yes，每个人都检查可写的文件/文件夹。"
+msgstr "如果设为 yes，就会每个人都检查可写的文件/文件夹。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, reports check result to tty."
-msgstr "如果设为 yes，给 tty 报告检测结果。"
+msgstr "如果设为 yes，就会给 tty 报告检测结果。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run some checks against the rpm database."
-msgstr "如果设为 yes，用和 rpm 数据库冲突的方式进行一些检查。"
+msgstr "如果设为 yes，就会用和 rpm 数据库冲突的方式进行一些检查。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "如果设为 yes，检查网络设备是否工作在混乱状态下。"
+msgstr "如果设为 yes，就会检查网络设备是否工作在混乱状态下。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run chkrootkit checks."
-msgstr "如果设为 yes，运行 chkrootkit 检查。"
+msgstr "如果设为 yes，就会运行 chkrootkit 检查。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check permissions of files in the users' home."
-msgstr "如果设为 yes，在用户 home 里检查文件的允许权限。"
+msgstr "如果设为 yes，就会在用户 home 里检查文件的允许权限。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
+msgstr "如果设为 yes，就会检查 suid root 文件的添加/删除。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr ""
+msgstr "如果设为 yes，就会将检查结果报告给系统日志。"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12465,26 +12408,28 @@ msgid ""
 "if set to yes, check for empty passwords, for no password in /etc/shadow and "
 "for users with the 0 id other than root."
 msgstr ""
+"如果设为 yes，就会检查 /etc/shadow 中没有密码，以及并非 root 但 id 为 0 的用"
+"户。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, run the daily security checks."
-msgstr ""
+msgstr "如果设为 yes，就会运行每日安全检查。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, verify checksum of the suid/sgid files."
-msgstr ""
+msgstr "如果设为 yes，就会校验 suid/sgid 文件的校验和。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check empty password in /etc/shadow."
-msgstr ""
+msgstr "如果设为 yes，就会 /etc/shadow 中的空密码。"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report unowned files."
-msgstr ""
+msgstr "如果设为 yes，就会报告无主文件。"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12828,7 +12773,7 @@ msgstr ""
 msgid ""
 "Passwords are now enabled, but use as a networked computer is still not "
 "recommended."
-msgstr "启用了口令检查功能。但是仍不建议用于联网的电脑。"
+msgstr "启用了密码检查功能。但是仍不建议用于联网的电脑。"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12839,7 +12784,7 @@ msgid ""
 msgstr ""
 "这一级别应慎重使用。它是您的系统使用更简单, 然而也更脆弱:\n"
 "假如这台机器将要和其它机器联网或者接入互联网, 绝对不要采用这个级别。\n"
-"这个级别连基本的口令检查也没有。"
+"这个级别连基本的密码检查也没有。"
 
 #: ../../security/level.pm:1
 #, c-format
@@ -12870,15 +12815,15 @@ msgstr "欢迎入侵者"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "MandrakeSoft 的成功植根于自由软件的原则。您的新操作系统是全世界 Linux 社团合"
 "作的成果"
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "欢迎进入开放源代码世界"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -12889,265 +12834,198 @@ msgstr "感谢您选择 Mandrake Linux 9.1"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "想与别人分享您的知识, 并帮助创造更好的 Linux 工具吗? 请加入我们的论坛。在“社"
 "区”网页可以找到它"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "想更多了解开放源代码社团?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr "想更多了解开放源代码社团? 加入自由软件的世界"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "加入自由软件的世界"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mandrake Linux 9.1 为您挑选了最好的软件。Mozilla 和 Konquerro 帮您网上冲浪和"
-"欣赏动画, Evolution 和 Kmail 帮您收发电子邮件并管理您的个人信息"
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "充分利用互联网资源"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 使用最新的软件来播放音乐和音频文件,编辑和组织您的图像和照"
 "片, 播放电视和影片"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "把多媒体推向极致!"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "尝试最新的图象和多媒体工具!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 包括了最好的开放源码游戏 - 闯关, 动作, 纸牌, 体育, 策略..."
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "游戏"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Mandrake Linux 9.1 提供了强大的工具, 可以全面按照您的要求配置您的系统。"
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Mandrake 控制中心"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Mandrake 终端服务器配置"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1 提供 11 种可以全面定制的用户界面: KDE 3, Gnome 2, "
 "WindowMaker..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "用户界面"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
-msgstr "利用 GNU gcc 3 编译器的强大力量, 还有最棒的开放源码开发环境"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 是最终的开发平台"
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "简化您的开发"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "鼠标点几点, 您的机器就能变成一台强大的 Linux 服务器: 提供网站服务, 电子邮件, "
 "防火墙, 路由器, 文件及打印服务, ..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "把您的机器变成可靠运行的服务器"
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "此产品可以从 MandrakeStore 网站获得"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr "这个防火墙产品提供的网络功能将满足您所有的安全性要求"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr "MandrakeSecurity 系列包括多网络防火墙 (M.N.F.)产品"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "安全最优化"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "全套的 Linux 解决方案, 各种特别促销的产品和好玩意儿, 就在我们的在线商店："
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "MandrakeSoft 专卖店"
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
+#: ../../share/advertising/09-mdksecure.pl:1
+#, fuzzy, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 "MandrakeSoft 与一些经过挑选的公司合作, 提供与 Mandrake Linux 兼容的专业解决方"
 "案; 在 MandrakeStore 可以找到这些合作伙伴"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "战略合作伙伴"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"不论您选择在线自学或者参加我们的培训伙伴网络的课程,  Linux-Campus 课程帮助您"
-"为参加著名的 LPI 认证计划(全球的专业技术认证)做好准备"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "获得您的 Linux 认证"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "安全最优化"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "此产品可以从 MandrakeStore 网站获得"
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"应广大最终用户和专家(网络和系统管理员)的要求, MandrakeSoft 创立了新的培训计划"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "MandrakeSoft 的培训课程 Linux-Campus"
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
 "your knowledge and help others by becoming a recognized Expert on the online "
 "technical support website:"
 msgstr ""
-"在线加入 MandrakeSoft 支持队伍和 Linux 社团, 分享您的知识, 帮助他人,在 "
-"MandrakeSoft 的在线技术支持网站, 您可以成为众人瞩目的专家:"
+"在线加入 MandrakeSoft 支持队伍和 Linux 社团，分享您的知识，帮助他人，成为"
+"MandrakeSoft 在线技术支持网站中备受瞩目的专家，就在："
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr "MandrakeSoft 的在线支持平台帮助您找到解决问题的方法"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "成为 Mandrake 专家"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr "专职的 MandrakeSoft 技术专家会负责处理每个事件。"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr "专为响应企业的特殊要求提供专业服务的在线支持平台"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert 企业版"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"MandrakeClub 俱乐部和 Mandrake 企业俱乐部是为 Mandrake Linux 的个人和企业用户"
-"创建的，加入俱乐部，可以直接支持您最喜爱的 Linux 发行版，并获得会员的特别优"
-"惠。如果您喜欢我们的产品, 如果您的公司因为使用我们的产品而获得了竞争优势, 为"
-"了支持 Mandrake Linux 的开发, 请加入MandrakeClub！"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "探索 MandrakeClub 俱乐部和 Mandrake 企业俱乐部"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -13688,7 +13566,7 @@ msgstr "网络启动磁盘镜像"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot Floppy/ISO"
-msgstr "Etherboot Floppy/ISO"
+msgstr "Etherboot 软盘/ISO"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13837,13 +13715,11 @@ msgid ""
 "backup data files by hand.\n"
 msgstr ""
 "\n"
-"备份恢复问题:\n"
+"备份恢复问题：\n"
 "\n"
-"在恢复步骤中, Drakbackup 会\n"
-"删除您原来的的目录, 您所有的数据\n"
-"会丢失. 请格外小心, \n"
-"一定不要手工修改备份数据文件。\n"
-".\n"
+"在恢复步骤中，Drakbackup 会在恢复之前校验您所备份的所有文件。\n"
+"在恢复之前，Drakbackup 将会删除您原来的目录，您所有的数据都将\n"
+"会丢失。所以请格外小心，一定不要手工修改备份数据文件。\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13858,9 +13734,9 @@ msgid ""
 msgstr ""
 "选项描述:\n"
 "\n"
-"请小心使用 ftp 备份, 因为发送到服务器的只能是 \n"
-"已经完成的备份.\n"
-"所以目前, 您需要先在硬盘上进行备份, \n"
+"请小心使用 ftp 备份，因为发送到服务器的只能是\n"
+"已经完成的备份。\n"
+"所以，目前您需要先在硬盘上进行备份，\n"
 "然后把它传到服务器。\n"
 "\n"
 
@@ -14244,7 +14120,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14294,7 +14170,7 @@ msgstr "下一步"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Previous"
-msgstr "前一步"
+msgstr "上一步"
 
 #: ../../standalone/drakbackup:1 ../../standalone/drakperm:1
 #: ../../standalone/logdrake:1
@@ -14365,7 +14241,7 @@ msgstr "需要用户名"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Password required"
-msgstr "需要口令"
+msgstr "需要密码"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14547,17 +14423,17 @@ msgstr "可恢复的用户清单 (每个用户最近的数据是重要的)"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "OK to restore the other files."
-msgstr "OK 将恢复其它文件"
+msgstr "即将恢复其它文件。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "         Restore Configuration       "
-msgstr "        恢复的配置       "
+msgstr "        恢复配置       "
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "          Successfuly Restored on %s       "
-msgstr "\t成功的恢复到 %s       "
+msgstr "          成功的恢复到 %s       "
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14595,17 +14471,17 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "No configuration, please click Wizard or Advanced.\n"
-msgstr "没有配置, 请选择向导或高级。\n"
+msgstr "没有配置，请选择向导或高级。\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Network by webdav.\n"
-msgstr "\t-网络 通过webdav。\n"
+msgstr "\t-网络通过webdav。\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Network by rsync.\n"
-msgstr "\t-网络 通过 rsync。\n"
+msgstr "\t-网络通过 rsync。\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15007,17 +14883,17 @@ msgstr "使用 CD/DVDROM 备份"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Need hostname, username and password!"
-msgstr "需要 主机名, 用户名, 和口令!"
+msgstr "需要主机名、用户名和密码!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Remember this password"
-msgstr "记住口令"
+msgstr "记住密码"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Please enter your password"
-msgstr "请输入您的口令"
+msgstr "请输入您的密码"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15150,7 +15026,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Select the files or directories and click on 'Add'"
-msgstr "选择文件或目录, 然后单击“增加”"
+msgstr "选择文件或目录，然后单击“增加”"
 
 #: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
 #, c-format
@@ -15305,11 +15181,11 @@ msgid ""
 "without being prompted for a password."
 msgstr ""
 "迁移成功\n"
-"要验证您可以登录到服务器, 请运行:\n"
+"要验证您可以登录到服务器，请运行:\n"
 "\n"
 "ssh -i %s %s\\@%s\n"
 "\n"
-"这样不会提问口令."
+"这样不会提问密码。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15329,12 +15205,12 @@ msgstr "没有权限把 %s 迁移到 %s"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Bad password on %s"
-msgstr "%s 口令无效"
+msgstr "%s 密码无效"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "No password prompt on %s at port %s"
-msgstr "%s 上的端口 %s 没有口令提示"
+msgstr "%s 上的端口 %s 没有密码提示"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15344,7 +15220,7 @@ msgstr "错误: 无法进行 %s。"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "This may take a moment to generate the keys."
-msgstr "生成一个钥匙需要一些时间。"
+msgstr "生成密钥需要一些时间。"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15478,8 +15354,8 @@ msgid ""
 "You are currently using %s as your boot manager.\n"
 "Click on Configure to launch the setup wizard."
 msgstr ""
-"您目前使用 %s 作为开机程序管理器。\n"
-"单击“设置”按钮运行设置向导。"
+"您目前使用 %s 作为启动管理器。\n"
+"单击“配置”按钮运行设置向导。"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -15684,7 +15560,7 @@ msgstr "配置向导"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Userdrake"
-msgstr "Userdrake魔力用户管理"
+msgstr "Userdrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -15699,7 +15575,7 @@ msgstr "Urpmi"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Software Manager"
-msgstr "软件管理员"
+msgstr "软件管理器"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -15735,6 +15611,11 @@ msgstr "同步工具"
 #, c-format
 msgid "First Time Wizard"
 msgstr "初次使用向导"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Mandrake Control Center"
+msgstr "Mandrake 控制中心"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -15796,7 +15677,7 @@ msgid ""
 "This interface has not been configured yet.\n"
 "Launch the configuration wizard in the main window"
 msgstr ""
-"这个接口还没有配置过。\n"
+"这块网卡还没有配置过。\n"
 "从主窗口启动配置向导"
 
 #: ../../standalone/drakconnect:1
@@ -15873,7 +15754,7 @@ msgstr "已连接"
 msgid ""
 "Warning, another Internet connection has been detected, maybe using your "
 "network"
-msgstr "警告, 检测到另外的互联网连接, 可能是通过本地网络"
+msgstr "警告，检测到另外的互联网连接，可能是通过本地网络"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -16176,7 +16057,7 @@ msgstr "安装列表"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Select the font file or directory and click on 'Add'"
-msgstr "选择字体文件或目录, 然后单击“添加”"
+msgstr "选择字体文件或目录，然后单击“添加”"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16189,7 +16070,7 @@ msgid ""
 msgstr ""
 "安装任何字体之前请确认您有权利在自己的系统安装和使用它。\n"
 "\n"
-"-通常字体安装可以正常进行。但有罕见的例外, 有问题的字体会使 X 挂住。"
+"-通常字体安装可以正常进行。但有罕见的例外，有问题的字体会使 X 挂住。"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16310,7 +16191,7 @@ msgstr "获得 Windows 字体"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Import Fonts"
-msgstr "字体导入"
+msgstr "导入字体"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16320,7 +16201,7 @@ msgstr "完成"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "xfs restart"
-msgstr "xfs restart"
+msgstr "重新启动 xfs"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -16420,7 +16301,7 @@ msgstr "不选已安装的文件"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Search installed fonts"
-msgstr "查找已安装的字体"
+msgstr "搜索已安装的字体"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16491,12 +16372,12 @@ msgstr "在当前的 %s 配置中发现可能的 LAN 地址冲突! \n"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The Local Network did not finish with `.0', bailing out."
-msgstr "本地网络没有以`.0'结束, 已经修改"
+msgstr "本地网络没有以“.0”结束，已经修改。"
 
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Re-configure interface and DHCP server"
-msgstr "重新配置网络界面和 DHCP "
+msgstr "重新配置网卡和 DHCP 服务器"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16683,6 +16564,22 @@ msgstr "网卡 %s"
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "网卡 %s (使用 %s 模块)"
+
+#: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Xinetd 服务器"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17045,13 +16942,13 @@ msgid "Please choose which network interface will be used for the dhcp server."
 msgstr "请选择哪个网卡将用于 DHCP 服务器。"
 
 #: ../../standalone/drakpxe:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You are about to configure your computer to install a PXE server as a DHCP "
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -17247,6 +17144,11 @@ msgid "choose image file"
 msgstr "选择图像文件"
 
 #: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
+msgstr "选择图像文件"
+
+#: ../../standalone/draksplash:1
 #, c-format
 msgid "Configure bootsplash picture"
 msgstr "配置开机画面图片"
@@ -17429,8 +17331,8 @@ msgid ""
 "Please,\n"
 "type in your tv norm and country"
 msgstr ""
-"请输入, \n"
-"您的电视制式和国家"
+"现在，\n"
+"请输入您的电视制式和国家"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -17516,7 +17418,7 @@ msgstr ""
 "标题写“undetected TV card”，\n"
 "\n"
 "\n"
-"您可以作为 root 从控制台运行“urpmi xawtv”来安装它."
+"您可以作为 root 从控制台运行“urpmi xawtv”来安装它。"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17710,9 +17612,19 @@ msgid "network printer port"
 msgstr "网络打印机端口"
 
 #: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the name of the CPU"
+msgstr "设备的厂家名称"
+
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Name"
 msgstr "名称"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the number of buttons the mouse has"
+msgstr "处理器编号"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17879,7 +17791,7 @@ msgstr "此处描述了设备"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -17923,12 +17835,12 @@ msgstr "Coma错误"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
+msgstr "驱动器的特殊能力(烧录能力和/或 DVD 支持)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "驱动器能力"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17999,7 +17911,7 @@ msgstr "通道"
 #, c-format
 msgid ""
 "this is the physical bus on which the device is plugged (eg: PCI, USB, ...)"
-msgstr "设备所插在的物理总线 (例如: PCI, USB, ...)"
+msgstr "设备所插在的物理总线（例如：PCI，USB，...)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18029,7 +17941,7 @@ msgstr "请选择您使用的键盘布局。"
 #: ../../standalone/livedrake:1
 #, c-format
 msgid "Unable to start live upgrade !!!\n"
-msgstr "无法开始在线升级 !!!\n"
+msgstr "无法开始在线升级!!!\n"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -18037,8 +17949,8 @@ msgid ""
 "Please insert the Installation Cd-Rom in your drive and press Ok when done.\n"
 "If you don't have it, press Cancel to avoid live upgrade."
 msgstr ""
-"请在驱动器中插入安装光盘, 然后单击“确定”。\n"
-"如果您没有这张光盘, 请单击“取消”, 放弃在线升级。"
+"请在驱动器中插入安装光盘，然后单击“确定”。\n"
+"如果您没有这张光盘，请单击“取消”，放弃在线升级。"
 
 #: ../../standalone/livedrake:1
 #, c-format
@@ -18048,7 +17960,7 @@ msgstr "换光盘"
 #: ../../standalone/localedrake:1
 #, c-format
 msgid "The change is done, but to be effective you must logout"
-msgstr "修改已经完成, 不过您必须退出登录修改才会生效"
+msgstr "修改已经完成，不过您必须退出登录修改才会生效"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -18671,7 +18583,7 @@ msgstr "扫描仪数据库中没有 %s, 要手工配置它吗?"
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "发现 %s 连接在 %s 上, 是否配置它?"
+msgstr "发现 %s 连接在 %s 上，是否自动配置它?"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -18697,8 +18609,7 @@ msgid ""
 "Office programs: wordprocessors (kword, abiword), spreadsheets (kspread, "
 "gnumeric), pdf viewers, etc"
 msgstr ""
-"办公程序: 字处理 (kword, abiword), 电子表格(kspread,gnumeric) pdf 阅读器, 等"
-"等"
+"办公程序：字处理（kword、abiword），电子表格（kspread、gnumeric）pdf 阅读器等"
 
 #: ../../share/compssUsers:999
 msgid "Workstation"
@@ -18710,7 +18621,7 @@ msgstr "游戏工作站"
 
 #: ../../share/compssUsers:999
 msgid "Amusement programs: arcade, boards, strategy, etc"
-msgstr "游戏程序: 街机, 棋盘, 战略 等等"
+msgstr "游戏程序：街机、棋盘、战略等等"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia station"
@@ -18722,21 +18633,21 @@ msgstr "声音和视频播放/编辑程序"
 
 #: ../../share/compssUsers:999
 msgid "Internet station"
-msgstr "互联网工作站"
+msgstr "Internet 工作站"
 
 #: ../../share/compssUsers:999
 msgid ""
 "Set of tools to read and send mail and news (pine, mutt, tin..) and to "
 "browse the Web"
-msgstr "上网工具, 如收发电子邮件及新闻组 (pine, mutt, tin..) , 浏览网站"
+msgstr "上网工具，如收发电子邮件及新闻组（pine, mutt, tin..），浏览网站"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer (client)"
-msgstr "网络计算机 (客户端)"
+msgstr "网络计算机（客户端）"
 
 #: ../../share/compssUsers:999
 msgid "Clients for different protocols including ssh"
-msgstr "ssh等协议客户端"
+msgstr "SSH 等协议客户端"
 
 #: ../../share/compssUsers:999
 msgid "Configuration"
@@ -18744,7 +18655,7 @@ msgstr "配置"
 
 #: ../../share/compssUsers:999
 msgid "Tools to ease the configuration of your computer"
-msgstr "简化配置的工具"
+msgstr "简化计算机配置的工具"
 
 #: ../../share/compssUsers:999
 msgid "Scientific Workstation"
@@ -18760,7 +18671,7 @@ msgstr "控制台工具"
 
 #: ../../share/compssUsers:999
 msgid "Editors, shells, file tools, terminals"
-msgstr "编辑器, shell, 文件工具, 终端"
+msgstr "编辑器，shell，文件工具，终端"
 
 #: ../../share/compssUsers:999
 msgid "KDE Workstation"
@@ -18770,7 +18681,7 @@ msgstr "KDE 工作站"
 msgid ""
 "The K Desktop Environment, the basic graphical environment with a collection "
 "of accompanying tools"
-msgstr "KDE 桌面环境, 基本的图形环境和一组配套的工具"
+msgstr "KDE 桌面环境，基本的图形环境和一组配套的工具"
 
 #: ../../share/compssUsers:999
 msgid "Graphical Environment"
@@ -18784,7 +18695,7 @@ msgstr "Gnome 工作站"
 msgid ""
 "A graphical environment with user-friendly set of applications and desktop "
 "tools"
-msgstr "配备了用户友善的应用与桌面工具的图形桌面环境"
+msgstr "配备了用户友善的应用程序与桌面工具的图形环境"
 
 #: ../../share/compssUsers:999
 msgid "Other Graphical Desktops"
@@ -18792,7 +18703,7 @@ msgstr "其它图形桌面"
 
 #: ../../share/compssUsers:999
 msgid "Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Icewm, Window Maker, Enlightenment, Fvwm, 等"
+msgstr "Icewm, Window Maker, Enlightenment, Fvwm 等"
 
 #: ../../share/compssUsers:999
 msgid "Development"
@@ -18800,7 +18711,7 @@ msgstr "开发平台"
 
 #: ../../share/compssUsers:999
 msgid "C and C++ development libraries, programs and include files"
-msgstr "C和C++开发库, 程序及头文件"
+msgstr "C和C++开发库，程序及头文件"
 
 #: ../../share/compssUsers:999
 msgid "Documentation"
@@ -18816,7 +18727,7 @@ msgstr "LSB"
 
 #: ../../share/compssUsers:999
 msgid "Linux Standard Base. Third party applications support"
-msgstr "Linux Standard Base. 第三方应用程序支持"
+msgstr "Linux Standard Base。第三方应用程序支持"
 
 #: ../../share/compssUsers:999
 msgid "Web/FTP"
@@ -18824,17 +18735,15 @@ msgstr "Web/FTP"
 
 #: ../../share/compssUsers:999
 msgid "Apache, Pro-ftpd"
-msgstr "Apache和 Pro-ftpd"
+msgstr "Apache 和 Pro-ftpd"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Mail"
-msgstr "马里"
+msgstr "邮件"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Postfix mail server"
-msgstr "Postfix 邮件服务"
+msgstr "Postfix 邮件服务器"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -18842,7 +18751,7 @@ msgstr "数据库"
 
 #: ../../share/compssUsers:999
 msgid "PostgreSQL or MySQL database server"
-msgstr "PostgreSQL或 MySQL 数据库服务"
+msgstr "PostgreSQL 或 MySQL 数据库服务"
 
 #: ../../share/compssUsers:999
 msgid "Firewall/Router"
@@ -18850,7 +18759,7 @@ msgstr "防火墙/路由器"
 
 #: ../../share/compssUsers:999
 msgid "Internet gateway"
-msgstr "互联网网关"
+msgstr "Internet 网关"
 
 #: ../../share/compssUsers:999
 msgid "DNS/NIS "
@@ -18862,11 +18771,11 @@ msgstr "域名和网络信息服务 DNS/NIS"
 
 #: ../../share/compssUsers:999
 msgid "Network Computer server"
-msgstr "网络文件服务器"
+msgstr "网络计算机 NC 服务器"
 
 #: ../../share/compssUsers:999
 msgid "NFS server, SMB server, Proxy server, ssh server"
-msgstr "NFS 文件服务器, SMB 文件服务器, SSH 文件服务器, 代理服务器"
+msgstr "NFS 服务器，SMB 服务器，代理服务器，SSH 服务器"
 
 #: ../../share/compssUsers:999
 msgid "Office"
@@ -18874,7 +18783,11 @@ msgstr "办公"
 
 #: ../../share/compssUsers:999
 msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "一组用于邮件, 新闻, 文件传输, 聊天的工具"
+msgstr "一组用于邮件、新闻、浏览、文件传输和聊天的工具"
+
+#: ../../share/compssUsers:999
+msgid "Games"
+msgstr "游戏"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
@@ -18882,7 +18795,7 @@ msgstr "多媒体 - 图形"
 
 #: ../../share/compssUsers:999
 msgid "Graphics programs such as The Gimp"
-msgstr "图像处理 程序 如 Gimp"
+msgstr "图像处理程序，如 Gimp"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Sound"
@@ -18890,7 +18803,7 @@ msgstr "多媒体 - 声音"
 
 #: ../../share/compssUsers:999
 msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "有关音频的工具: mp3 和 midi 播放器, 混音器等 "
+msgstr "有关音频的工具：mp3 和 midi 播放器，混音器等 "
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Video"
@@ -18898,7 +18811,7 @@ msgstr "多媒体 - 视频"
 
 #: ../../share/compssUsers:999
 msgid "Video players and editors"
-msgstr "视频播放和编辑"
+msgstr "视频播放器和编辑器"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - CD Burning"
@@ -18914,7 +18827,7 @@ msgstr "更多的图形桌面 (Gnome, IceWM)"
 
 #: ../../share/compssUsers:999
 msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, 等"
+msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm 等"
 
 #: ../../share/compssUsers:999
 msgid "Personal Information Management"
@@ -18922,7 +18835,7 @@ msgstr "个人信息管理"
 
 #: ../../share/compssUsers:999
 msgid "Tools for your Palm Pilot or your Visor"
-msgstr "配合 Palm Pilot, Visor 等手持设备的工具"
+msgstr "配合 Palm Pilot 或 Visor 等掌上电脑的工具"
 
 #: ../../share/compssUsers:999
 msgid "Personal Finance"
@@ -18930,51 +18843,375 @@ msgstr "个人财务"
 
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
-msgstr "用于管理您的财务, 如 gnucash"
+msgstr "用于管理您财务的程序，如 gnucash"
+
+#~ msgid "no network card found"
+#~ msgstr "找不到网卡"
 
 #~ msgid ""
-#~ "Please enter your host name if you know it.\n"
-#~ "Some DHCP servers require the hostname to work.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''."
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
 #~ msgstr ""
-#~ "如果您知道, 就请输入您的主机名字\n"
-#~ "有些 DHCP 服务器需要主机名称才能工作.\n"
-#~ "您的主机名称必需是个完全限定主机名字, \n"
-#~ "例如“mybox.mylab.myco.com”"
+#~ "Mandrake Linux 9.1 为您挑选了最好的软件。Mozilla 和 Konquerro 帮您网上冲浪"
+#~ "和欣赏动画, Evolution 和 Kmail 帮您收发电子邮件并管理您的个人信息"
 
-#~ msgid "DrakFloppy Error: %s"
-#~ msgstr "DrakFloppy 错误: %s"
+#~ msgid "Get the most from the Internet"
+#~ msgstr "充分利用互联网资源"
 
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "把多媒体推向极致!"
 
-#~ msgid "Launch Aurora at boot time"
-#~ msgstr "启动时运行 Aurora"
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "尝试最新的图象和多媒体工具!"
 
-#~ msgid "Traditional Gtk+ Monitor"
-#~ msgstr "传统 Gtk+ 显示器"
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 包括了最好的开放源码游戏 - 闯关, 动作, 纸牌, 体育, 策"
+#~ "略..."
 
-#~ msgid "Traditional Monitor"
-#~ msgstr "传统显示器"
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 提供了强大的工具, 可以全面按照您的要求配置您的系统。"
 
-#~ msgid "NewStyle Monitor"
-#~ msgstr "新型显示器"
+#~ msgid "User interfaces"
+#~ msgstr "用户界面"
 
-#~ msgid "NewStyle Categorizing Monitor"
-#~ msgstr "新型归类显示器"
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr "利用 GNU gcc 3 编译器的强大力量, 还有最棒的开放源码开发环境"
 
-#~ msgid "Secure Connection"
-#~ msgstr "加密连接"
+#~ msgid "Development simplified"
+#~ msgstr "简化您的开发"
 
-#~ msgid "FTP Connection"
-#~ msgstr "FTP 连接"
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr "这个防火墙产品提供的网络功能将满足您所有的安全性要求"
 
-#~ msgid "Mail/Groupware/News"
-#~ msgstr "邮件/组件/新闻"
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr "MandrakeSecurity 系列包括多网络防火墙 (M.N.F.)产品"
 
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Postfix邮件服务, Inn 新闻组服务"
+#~ msgid "Strategic partners"
+#~ msgstr "战略合作伙伴"
 
-#~ msgid "Format of floppies the drive accept"
-#~ msgstr "驱动器接受的软盘格式"
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "不论您选择在线自学或者参加我们的培训伙伴网络的课程,  Linux-Campus 课程帮助"
+#~ "您为参加著名的 LPI 认证计划(全球的专业技术认证)做好准备"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "获得您的 Linux 认证"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "应广大最终用户和专家(网络和系统管理员)的要求，MandrakeSoft 创立了新的培训"
+#~ "计划"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "MandrakeSoft 的培训课程 Linux-Campus"
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "MandrakeClub 俱乐部和 Mandrake 企业俱乐部是为 Mandrake Linux 的个人和企业"
+#~ "用户创建的，加入俱乐部，可以直接支持您最喜爱的 Linux 发行版，并获得会员的"
+#~ "特别优惠。如果您喜欢我们的产品，如果您的公司因为使用我们的产品而获得了竞争"
+#~ "优势，为了支持 Mandrake Linux 的开发，请加入 MandrakeClub！"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "探索 MandrakeClub 俱乐部和 Mandrake 企业俱乐部"
+
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in a country to which the chosen language\n"
+#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your graphical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "为了给您一个清晰的认识，DrakX 将会在此列出有关您系统的各种信息。根据您所"
+#~ "安\n"
+#~ "装的硬件不同，您可能看到以下几种或全部项目：\n"
+#~ "\n"
+#~ " * “鼠标”：检查现在的鼠标配置，必要的话单击按钮进行更改。\n"
+#~ "\n"
+#~ " * “键盘”：检查现在的键盘配置，必要的话单击按钮进行更改。\n"
+#~ "\n"
+#~ " * “国家/地区”：检查现在的国家/地区选择。如果您并不位于该国家/地区，请"
+#~ "单\n"
+#~ "击按钮来选择另外一个国家/地区。\n"
+#~ "\n"
+#~ " * “时区”：默认情况下，DrakX 会根据您选择的主要语言猜测您所在的时区。"
+#~ "但\n"
+#~ "是，就像您可以在此选择键盘一样，您可能选择使用中文但并不在中国。此时，您"
+#~ "就\n"
+#~ "可能需要单击“时区”按钮来配置正确时区的时钟。\n"
+#~ "\n"
+#~ " * “打印机”：单击“无打印机”按钮会启动打印机设置向导。请参看“初学者"
+#~ "指\n"
+#~ "南”来阅读关于如何设置打印机的更多信息。在此所显示的界面和安装时所使用的"
+#~ "界\n"
+#~ "面十分类似。\n"
+#~ "\n"
+#~ " * “启动程序”：如果您想要更改您的启动程序配置，请单击该按钮。建议只有"
+#~ "高\n"
+#~ "级用户才使用该功能。\n"
+#~ "\n"
+#~ " * “图形界面”：默认情况下，DrakX 会将您的图形界面配置为“800x600”的分"
+#~ "辨\n"
+#~ "率。如果您需要调整的话，请单击该按钮重新配置您的图形界面。\n"
+#~ "\n"
+#~ " * “网络”：如果您想要现在配置您的 Internet 或局域网，就可以单击该按"
+#~ "钮。\n"
+#~ "\n"
+#~ " * “声卡”：如果发现您的系统有声卡，就会在此显示出来。如果您觉得在此显"
+#~ "示\n"
+#~ "的声卡与您实际拥有的声卡不符的话，就可以单击该按钮选择其它的驱动程序。\n"
+#~ "\n"
+#~ " * “电视卡”：如果发现您的系统有电视卡，就会在此显示出来。如果您有电视"
+#~ "卡，\n"
+#~ "但并未被检测出来，请单击该按钮尝试手动进行配置。\n"
+#~ "\n"
+#~ " * “ISDN 卡”：如果发现您的系统有 ISDN 卡，就会在此显示出来。您可以单击"
+#~ "按\n"
+#~ "钮来修改有关参数。"
+
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "LILO 和 grub 都是 GNU/Linux 的启动引导程序。通常情况下，这一步骤是完全自"
+#~ "动\n"
+#~ "化的。DrakX 会分析磁盘的引导扇区，然后执行如下操作：\n"
+#~ "\n"
+#~ "* 如果发现了 Windows 引导扇区，则会将其替换为 grub/LILO 引导扇区。这样，"
+#~ "您\n"
+#~ "就可以选择装入 GNU/Linux 还是其它的操作系统。\n"
+#~ "\n"
+#~ "* 如果发现了 grub 或者 LILO 引导扇区，那么就将其替换为新的引导扇区。\n"
+#~ "\n"
+#~ "如果无法做出决定的话，DrakX 会询问您将引导程序放在哪里。\n"
+#~ "\n"
+#~ "“引导设备”：在大多数情况下，请不要更改默认值(“驱动器第一个扇区"
+#~ "(MBR)”)。\n"
+#~ "但是，如果您愿意，启动引导程序可以安装在第二个硬盘上(“/dev/hdb”)，甚至"
+#~ "软\n"
+#~ "盘上。\n"
+#~ "\n"
+#~ "选中“创建启动盘”，您就可以立即制作一张可引导的急救盘。\n"
+#~ "\n"
+#~ "Mandrake Linux 光盘有内置的急救功能。如果您用光盘启动机器，请在出现开机画"
+#~ "面\n"
+#~ "时按 >>F1<< 键，然后在提示处输入 >>rescue<<，就会进入急救模式。如果您的计"
+#~ "算\n"
+#~ "无法从光盘启动，那么至少可能出现两种情况，但拥有一张启动软盘是至关重要"
+#~ "的：\n"
+#~ "\n"
+#~ " * 在安装启动引导程序时，DrakX 会重写您主硬盘的引导扇区(MBR)，除非您使用"
+#~ "其\n"
+#~ "它的启动管理程序。这样您才可以选择要启动 Windows 还是 GNU/Linux(假设您的"
+#~ "计\n"
+#~ "算机中安装了 Windows)。如果万一某天您需要重新安装 Windows，Microsoft 的安"
+#~ "装\n"
+#~ "程序将会重写引导扇区，这样您就无法再进入 GNU/Linux 了！\n"
+#~ "\n"
+#~ " * 假如出了什么问题，您无法从硬盘启动 GNU/Linux，那么唯一可启动 GNU/"
+#~ "Linux\n"
+#~ "的途径就是软盘。其中包含了一组系统工具，可帮助您修复由于电源故障、输错命"
+#~ "令、\n"
+#~ "遗忘 root 密码或其它任何原因导致的系统故障。\n"
+#~ "\n"
+#~ "如果您选择“是”的话，您就需要在驱动器中插入一张磁盘。该磁盘必须是空盘，"
+#~ "或\n"
+#~ "者没有保存重要数据。因为 DrakX 会格式化该磁盘并重写整张磁盘。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mandrake Linux CD-ROM 有内置的急救功能. 如果您用光盘启动机器,\n"
+#~ "在开机画面按 >>F1<< 键, 然后在提示处输入 >>rescue<<, 就会进入急救模式.\n"
+#~ "万一您的机器不能从光盘启动, 至少有两种情况 您可以回到这一步得到帮助:\n"
+#~ "\n"
+#~ " * 在安装开机引导程序时, DrakX 会重写您的主硬盘的主引导记录(MBR)\n"
+#~ "(除非您使用其它开机引导程序) 以便您选择要启动的操作系统(假设您的\n"
+#~ "电脑也安装了其他操作系统), 万一某天您需要重新安装 Windows,\n"
+#~ "Microsoft 的安装程序会清除主引导记录, 结果您将无法进入 GNU/Linux!\n"
+#~ "\n"
+#~ " * 假如出了什么问题, 您的 GNU/Linux 无法从硬盘启动, \n"
+#~ "这个引导软盘是您启动 GNU/Linux 的唯一途径.\n"
+#~ "它包含了各种有用的工具, 可以修复因为停电, 忘记密码,\n"
+#~ "不幸的错误命令, 密码中的打字错误等等原因造成的系统崩溃.\n"
+#~ "\n"
+#~ "如果您选择“是”, 会提示您在软盘驱动器中放一片软盘. \n"
+#~ "您使用的软盘必须是空的或者您不再需要上面的数据.\n"
+#~ "DrakX 会重写整个盘片, 所以您不必事先格式化."
+
+#~ msgid ""
+#~ "The following printers are configured. Double-click on a printer to "
+#~ "change its settings; to make it the default printer; to view information "
+#~ "about it; or to make a printer on a remote CUPS server available for Star "
+#~ "Office/OpenOffice.org/GIMP."
+#~ msgstr ""
+#~ "下列打印机已配置。\n"
+#~ "在打印机名称上双击可以修改它的设置; 把它设置成默认打印机; 查看它的信息;\n"
+#~ "或者让 Star Office/OpenOffice.org/GIMP 能在远程 CUPS 服务器的打印机上打印"
+#~ "文档。"

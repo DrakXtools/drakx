@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
 "PO-Revision-Date: 2002-09-27 17:45+0200\n"
 "Last-Translator: Raivo Saars <spaiks@inbox.lv>\n"
 "Language-Team: Latvian <ll10nt@listes.murds.lv>\n"
@@ -1122,50 +1122,65 @@ msgstr ""
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1269,13 +1284,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1320,7 +1330,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1358,32 +1368,7 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1537,9 +1522,14 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1609,7 +1599,9 @@ msgstr ""
 #, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1830,9 +1822,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -1851,14 +1841,14 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1919,7 +1909,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -1977,7 +1967,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2002,13 +1992,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "Paðlaik jums ir jâizvçlas, kur uz cietâ diska instalçt Mandrake Linux\n"
 "operçtâjsistçmu. Ja disks ir tukðs vai cita operçtâjsistçma aizòem visu\n"
@@ -2071,35 +2061,6 @@ msgstr ""
 "  uzmanîgi, izveloties ðo risinâjumu. Tas ir ar plaðâm iespçjâm, bet ïoti "
 "bîstams. Jûs varat pazaudçt\n"
 "  visus datus, tâpçc izvçlieties tikai tad, ja zinat, ko darât."
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -2235,7 +2196,8 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2267,7 +2229,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
@@ -3593,6 +3555,12 @@ msgstr "Servisi"
 msgid "System"
 msgstr "Sistçma"
 
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "%s on %s"
+msgstr "Ports"
+
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Bootloader"
@@ -4027,6 +3995,11 @@ msgstr "Peles ports"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Lûdzu izvçlieties jûsu peles tipu."
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "Ðifrçðanas atslçga"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -8794,11 +8767,6 @@ msgstr "Konfigurçju tîklu"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "tîkla karte nav atrasta"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
@@ -10079,19 +10047,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"Ir konfigurçti sekojoði printeri. Ar dubultklikðíi izvçlieties printeri, lai "
-"nomainîtu tâ uzstâdîjumus, padarîtu to par noklusçto printeri, apskatîtos "
-"informâciju par to vai printeri uz attâla CUPS servera padarîtu pieejamu "
-"Star Office/OpenOffice.org/GIMP."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Printing system: "
 msgstr "Drukas sistçma:"
 
@@ -10639,6 +10594,11 @@ msgstr "Opcijai %s ir jâbût skaitlim!"
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "Opcijai %s ir jâbût veselam skaitlim!"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer default settings"
+msgstr "Printera modeïa izvçle"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12355,13 +12315,13 @@ msgstr "Sveiciens hakeriem"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Esiet sveicinâti atvçrtâ koda pasaulç"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -12372,214 +12332,162 @@ msgstr "Paldies, ka izvçlçjâties Mandrake Linux 9.1"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "Lai dalîtos ar pieredzi un palîdzçtu veidot Linux rîkus, pievienojieties "
 "diskusiju forumiem, kurus varat atrast \"Kopienas\" web lapâs."
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Gribat uzzinât vairâk par Atvçrtâ Koda kopienu?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"Gribat uzzinât vairâk par Atvçrtâ Koda kopienu? Iesaistieties Brîvâs "
+"Programmatûras pasaulç!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Iesaistieties Brîvâs Programmatûras pasaulç"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mandrake Linux 9.1 ir izvçlçjies labâko programmatûru priekð Jums. Sçrfojiet "
-"Web un apskatiet animâcijas ar Mozilla un Konqueror, jeb lasiet pastu un "
-"uzturiet personâlo informâciju ar Evolution un Kmail"
 
-#: ../../share/advertising/03-internet.pl:1
-#, fuzzy, c-format
-msgid "Get the most from the Internet"
-msgstr "Paòemiet vislabâko no Internet"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 ïauj Jums lietot paðu pçdçjo programmnodroðinâjumu, lai "
 "atskaòotu audio failus, rediìçtu un uzturçtu attçlus jeb fotogrâfijas, un "
 "apskatîtu video"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr ""
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "Atklâjiet vismûsdienîgâkos grafiskos un multimçdiju rîkus!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 nodroðina labâkâs Atvçrtâ Koda spçles - arkâdes. "
-"darbîbas, stratçìijas, ..."
 
-#
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "Spçles"
+msgid "MandrakeSoft has selected the best software for you"
+msgstr ""
 
-#: ../../share/advertising/06-mcc.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
-"Mandrake Linux 9.1 nodroðina spçcîgu rîku, lai pilnîbâ pielâgotu un "
-"konfigurçtu Jûsu datoru"
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Mandrake kontroles centrs"
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Mandrake terminâïu servera konfigurâcija"
 
-#: ../../share/advertising/07-desktop.pl:1
-#, c-format
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1 nodroðina Jûs ar 11 lietotâja saskarnçm, kas var tikt "
 "pilnîbâ izmainîtas: KDE 3, Gnome 2, WindowMaker, ..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Lietotâja interfeisi"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Izmantojiet GNU gcc 3 compilçtâja un citu labâko Atvçrtâ Koda izstrâdâðanas "
-"vidu pilnu spçku"
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 ir maksimâla izstrâdâðanas platforma"
 
-#
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Vienkârðota izstrâde"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Pârveidojiet Jûsu datoru par spçcîgu Linux serveri ar daþiem peles "
 "klikðíiem. Web serveris, pasta serveris, ugunsmûris, marðrutçtâjs, failu un "
 "printeru serveris, ..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Pârvçrtiet Jûsu datoru par droðu serveri"
 
-#: ../../share/advertising/10-mnf.pl:1
-#, fuzzy, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "Ðis produkts ir pieejams MandrakeStore Web vietâ"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"Ugunsmûra produkts ietver tîkla iespçjas, kas ïauj Jums îstenot Jûsu "
-"droðîbas vajadzîbas"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"MandrakeSecurity diapazons ietver Multi Network Firewall (M.N.F.) produktu"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Optimizçt droðîbu"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "Oficiâlais MandrakeSoft veikals"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "Stratçìiskie partneri"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Sertificçjieties par Linux"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Optimizçt droðîbu"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
-#, c-format
-msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
-msgstr ""
-
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, fuzzy, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "Atklâjiet sev MandrakeSoft's apmâcîbas katalogu Linux-Campus"
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "Ðis produkts ir pieejams MandrakeStore Web vietâ"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid ""
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
+msgstr ""
+
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
+
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -12587,21 +12495,21 @@ msgid ""
 "technical support website:"
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 "Atrodiet risinâjumus Jûsu problçmâm caur MandrakeSoft tieðsaistes atbalsta "
 "platformu"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Kïûstiet par MandrakeEkspertu"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -12609,33 +12517,17 @@ msgid ""
 msgstr ""
 "Visiem incidentiem sekos viens kvalificçts MandrakeSoft tehniskais eksperts."
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 "Tieðsaistes platforma, lai atbildçtu uz kompânijas specifiskâm atbalsta "
 "vajadzîbâm."
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert Corporate"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "Atkâjiet MandrakeClub un Mandrake korporatîvo klubu"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -14968,6 +14860,11 @@ msgstr "Pirmâs reizes meistars"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Mandrake kontroles centrs"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrake kïûdu ziòojuma rîks"
 
@@ -15879,6 +15776,22 @@ msgid "Interface %s (using module %s)"
 msgstr "Saskarne %s (lietojot moduli %s)"
 
 #: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Xinetd serviss"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
@@ -16231,7 +16144,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -16402,6 +16315,11 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "izvçlieties attçla failu"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "izvçlieties attçla failu"
 
 #: ../../standalone/draksplash:1
@@ -16865,8 +16783,18 @@ msgstr ", tîkla printeris \"%s\", ports %s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
+msgid "the name of the CPU"
+msgstr "ierîces pârdevçja nosaukums"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
 msgid "Name"
 msgstr "Vârds: "
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the number of buttons the mouse has"
+msgstr "ierîces pârdevçja nosaukums"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17031,7 +16959,7 @@ msgstr "ðis lauks apraksta iekârtu"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -18035,6 +17963,11 @@ msgstr "Rîki pastam, jaunumiem, tîmeklim, failu saòemðanai un èatam"
 
 #
 #: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Spçles"
+
+#
+#: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
 msgstr "Multimçdiji - Grafika"
 
@@ -18092,6 +18025,90 @@ msgstr "Personîgâs finanses"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programmas jûsu finanðu pârvaldîðanai, piemçram, gnucach"
+
+#~ msgid "no network card found"
+#~ msgstr "tîkla karte nav atrasta"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 ir izvçlçjies labâko programmatûru priekð Jums. "
+#~ "Sçrfojiet Web un apskatiet animâcijas ar Mozilla un Konqueror, jeb lasiet "
+#~ "pastu un uzturiet personâlo informâciju ar Evolution un Kmail"
+
+#, fuzzy
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Paòemiet vislabâko no Internet"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "Atklâjiet vismûsdienîgâkos grafiskos un multimçdiju rîkus!"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 nodroðina labâkâs Atvçrtâ Koda spçles - arkâdes. "
+#~ "darbîbas, stratçìijas, ..."
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 nodroðina spçcîgu rîku, lai pilnîbâ pielâgotu un "
+#~ "konfigurçtu Jûsu datoru"
+
+#~ msgid "User interfaces"
+#~ msgstr "Lietotâja interfeisi"
+
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr ""
+#~ "Izmantojiet GNU gcc 3 compilçtâja un citu labâko Atvçrtâ Koda "
+#~ "izstrâdâðanas vidu pilnu spçku"
+
+#
+#~ msgid "Development simplified"
+#~ msgstr "Vienkârðota izstrâde"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "Ugunsmûra produkts ietver tîkla iespçjas, kas ïauj Jums îstenot Jûsu "
+#~ "droðîbas vajadzîbas"
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "MandrakeSecurity diapazons ietver Multi Network Firewall (M.N.F.) produktu"
+
+#~ msgid "Strategic partners"
+#~ msgstr "Stratçìiskie partneri"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Sertificçjieties par Linux"
+
+#, fuzzy
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "Atklâjiet sev MandrakeSoft's apmâcîbas katalogu Linux-Campus"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "Atkâjiet MandrakeClub un Mandrake korporatîvo klubu"
+
+#~ msgid ""
+#~ "The following printers are configured. Double-click on a printer to "
+#~ "change its settings; to make it the default printer; to view information "
+#~ "about it; or to make a printer on a remote CUPS server available for Star "
+#~ "Office/OpenOffice.org/GIMP."
+#~ msgstr ""
+#~ "Ir konfigurçti sekojoði printeri. Ar dubultklikðíi izvçlieties printeri, "
+#~ "lai nomainîtu tâ uzstâdîjumus, padarîtu to par noklusçto printeri, "
+#~ "apskatîtos informâciju par to vai printeri uz attâla CUPS servera "
+#~ "padarîtu pieejamu Star Office/OpenOffice.org/GIMP."
 
 #~ msgid ""
 #~ "Please enter your host name if you know it.\n"

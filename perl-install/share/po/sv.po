@@ -8,15 +8,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: DrakX-sv\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-22 21:02+0100\n"
-"Last-Translator: Mattias Newzella <newzella@linux.nu>\n"
+"Project-Id-Version: DrakX\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-06 00:19+0200\n"
+"Last-Translator: Magnus Björklöf <bjorklof@nic.fi>\n"
 "Language-Team: svenska <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.2\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -25,7 +25,7 @@ msgid ""
 "You can use userdrake to add a user to this group."
 msgstr ""
 "Utdelning per användare använder gruppen \"fileshare\". \n"
-"Använd userdrake för att lägga till användare i denna grupp."
+"Använd Userdrake för att lägga till användare i denna grupp."
 
 #: ../../any.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
@@ -948,11 +948,9 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Det finns redan en partition med monteringspunkt %s\n"
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr ""
-"Skrivarnamnet får bara innehålla bokstäver, siffror och "
-"understrykningsstreck."
+msgstr "Monteringspunkter får bara innehålla alfanumeriska tecken"
 
 #
 #: ../../fsedit.pm:1
@@ -1090,98 +1088,70 @@ msgstr ""
 "finns på disken kommer att gå förlorad och kommer inte att kunna återställas."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"Här presenteras olika parametrar rörande datorn. Beroende på\n"
-"installerad hårdvara ser du alla eller några av följande poster:\n"
-"\n"
-" * \"Mus\": kontrollera aktuell muskonfiguration och om nödvändigt klicka\n"
-"på knappen för att ändra.\n"
-"\n"
-" * \"Tangentbord\": kontrollera aktuell tangentbordsuppsättning och om\n"
-"nödvändigt klicka på knappen för att ändra.\n"
-"\n"
-" * \"Land\": kontrollera valet av land. Om du inte finns i detta land, "
-"clicka.\n"
-"på knappen och välj ett annat.\n"
-" * \"Tidszon\": DrakX antar vilken tidszon du har, utifrån det\n"
-"språk du har valt. Men här gäller samma sak som vid val av tangentbord,\n"
-"du kanske inte befinner dig i det land som motsvarar det språk du har valt.\n"
-"Därför kan du behöva klicka på Tidszon för att anpassa\n"
-"klockan efter din tidszon.\n"
-"\n"
-" * \"Skrivare\": om du klickar på \"Ingen skrivare\" startar skrivarguiden.\n"
-"Se motsvarande kapitel i \"Starter Guide\" för mer information om hur du\n"
-"ska göra för att installera en ny skrivare. Gränssnittet som visas där\n"
-"liknar det som används vid installationen.\n"
-"\n"
-" * \"Starthanterare\": clicka på denna knapp om du vill ändra på\n"
-"inställningarna för din starthanterare. Detta är endast för avancerade\n"
-"användare.\n"
-"\n"
-" * \"Grafiskt gränssnitt\": som standard konfigureras ditt grafiska\n"
-"gränssnitt med upplösningen \"800x600\". Klicka på knappen om\n"
-"du vill ändra detta.\n"
-"\n"
-" * \"Nätverk\": om du vill konfigurera din Internet- eller lokala\n"
-"nätverksanslutning så kan du göra det genom att klicka på knappen.\n"
-" * \"Ljudkort\": om ett ljudkort identifierats i datorn visas det här.\n"
-"Om du märker att det ljudkort som visas inte är det samma som finns\n"
-"i din dator så kan du klicka på knappen för att välja en annan drivrutin.\n"
-"\n"
-" * \"TV-kort\": om ett TV-kort identifierats i datorn visas det här. Om du\n"
-"har ett TV-kort som inte identifierats automatiskt kan du klicka på knappen\n"
-"för att konfigurera det manuellt.\n"
-"\n"
-" * \"ISDN-kort\": om ett ISDN-kort identifierats i datorn visas det här.\n"
-"Du kan klicka på knappen för att ändra dess parametrar."
 
 #: ../../help.pm:1
 #, c-format
@@ -1196,7 +1166,7 @@ msgstr ""
 "i din dator så kan du klicka på knappen för att välja en annan drivrutin."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1257,11 +1227,12 @@ msgstr ""
 " * Enable OF Boot?: genom att välja detta alternativ kan du välja \"N\" för\n"
 "\"Open Firmware\" vid första startprompten.\n"
 "\n"
-"* Default OS: du kan välja vilket OS som ska starta som standard när\n"
+"* Default OS: du kan välja vilket operativsystem som ska starta som standard "
+"när\n"
 "\"Open Firmware\"-fördröjningen är över."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can add additional entries in yaboot for other operating systems,\n"
 "alternate kernels, or for an emergency boot image.\n"
@@ -1363,13 +1334,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1385,23 +1351,14 @@ msgstr ""
 "leta efter PCI SCSI-kort på systemet. Om DrakX hittar ett SCSI-kort\n"
 "och känner till rätt drivrutin, kommer kortet att installeras automatiskt.\n"
 "\n"
-"Eftersom hårdvaruidentifieringen inte alltid hittar all hårdvara, kommer du "
-"att\n"
-"få frågan om det finns något PCI SCSI-kort i systemet. Klicka på \"Ja\" om "
-"du\n"
-"vet att ett SCSI-kort finns i datorn. Du kommer att få se en lista\n"
-"med SCSI-kort där du kan välja ett specifikt kort. Klicka \"Nej\" om du\n"
-"inte har någon SCSI-hårdvara. Om du är osäker kan du markera \"Visa\n"
-"hårdvaruinformation\" och klicka på Nästa -> så visas en lista över vilken "
-"hårdvara\n"
-"som hittats i datorn. Undersök listan och klicka sedan på  Nästa -> för att\n"
-"återgå till SCSI-gränssnittsfrågan.\n"
+"Eftersom hårdvaruidentifieringen inte alltid hittar all hårdvara, kan du\n"
+"bli tvungen att ange din hårdvara för hand.\n"
 "\n"
 "Om du blir tvungen att manuellt specificera ditt kort kommer DrakX att\n"
 "fråga om du vill ange alternativ för det. Du bör tillåta DrakX att själv\n"
 "undersöka hårdvaran efter alternativ. Detta fungerar oftast bra.\n"
 "\n"
-"Om inte, kommer du att behöva ange alternativ för drivrutinen."
+"Om inte, kommer du att behöva konfigurera drivrutinen manuellt."
 
 #: ../../help.pm:1
 #, c-format
@@ -1414,7 +1371,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1446,9 +1403,8 @@ msgstr ""
 "agera som en server eller klient för det gamla skrivarsystemet \"lpd\", det\n"
 "är alltså kompatibelt med gamla skrivarsystem. CUPS kan utföra många "
 "tricks,\n"
-"men den grundläggande installationen är nästan lika enkel som med \"pdq\". "
-"Om\n"
-"du ska använda CUPS för att emulera en \"lpd\"-server måste du aktivera\n"
+"men den grundläggande installationen är nästan lika enkel som med \"pdq\".\n"
+"Om du ska använda CUPS för att emulera en \"lpd\"-server måste du aktivera\n"
 "demonen \"cups-lpd\". CUPS har grafiska gränssnitt för utskrift och för att\n"
 "välja olika utskriftsalternativ.\n"
 "\n"
@@ -1458,7 +1414,7 @@ msgstr ""
 "knappen Expert."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1477,58 +1433,8 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"Mandrake Linux cd-skiva har ett inbyggt reparationssläge. Du kan komma åt\n"
-"det genom att starta från cd-skivan och sedan trycka på tangenten >>F1<<\n"
-"vid uppstart och skriva >>rescue<< vid prompten. Om datorn inte kan\n"
-"starta från cd-skiva bör du komma tillbaka till det här steget i åtminstone\n"
-"två situationer:\n"
-"\n"
-" * när starthanteraren installeras kommer DrakX att skriva över\n"
-"startsektorn (MBR) på huvuddisken (om du inte använder en annan\n"
-"starthanterare) så att du kan starta antingen Windows eller GNU/Linux\n"
-"(om du har Windows installerat på datorn). Om du blir tvungen att "
-"installera\n"
-"om Windows så kommer Microsofts installationsprogram att skriva över "
-"startsektorn\n"
-"vilket leder till att du inte kan starta GNU/Linux.\n"
-"\n"
-" * om ett problem uppstår så att du inte kan starta GNU/Linux från\n"
-"hårddisken kommer den här disketten att vara det enda sättet att starta\n"
-"GNU/Linux. Den innehåller ett antal systemverktyg som kan användas för att\n"
-"återställa ett system som kraschat på grund av strömavbrott, en olycklig\n"
-"felstavning, en felskrivning i ett lösenord eller av någon annan anledning.\n"
-"\n"
-"När du klickar på det här steget kommer du att bli ombedd att stoppa in en\n"
-"diskett i diskettstationen. Disketten som du stoppar in måste vara tom\n"
-"eller inte innehålla någon data som du vill ha kvar. Du behöver inte\n"
-"formatera den eftersom DrakX kommer att skriva om hela disketten."
 
 #: ../../help.pm:1
 #, c-format
@@ -1767,9 +1673,14 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1779,6 +1690,7 @@ msgstr ""
 "Det språk du väljer kommer att påverka språket i dokumentationen, "
 "installationsprogrammet och systemet i allmänhet. Välj först den region du "
 "bor i och sedan det språk som du talar.\n"
+"\n"
 "Om du klickar på Avancerat kan du välja andra språk som du vill\n"
 "ha installerade på datorn. Genom att välja andra språk så kommer\n"
 "språkspecifika filer för systemdokumentation och program att installeras.\n"
@@ -1787,8 +1699,14 @@ msgstr ""
 "avancerade sektionen, klicka på den ruta som motsvarar\n"
 "\"Spanska|Spanien\".\n"
 "\n"
-"Observera att flera språk kan installeras. Så fort du har valt alla\n"
-"ytterligare språk, klicka på Nästa -> för att fortsätta.\n"
+"Observera att flera språk kan installeras. Du kan t.o.m. installera dem\n"
+"alla genom att välja \"Alla språk\"-rutan. Om du väljer stöd för ett språk\n"
+"betyder det att översättningar, typsnitt, stavkontroll etc. för språket\n"
+"kommer att installeras. Dessutom låter \"Använd Unicode som standard\"\n"
+"rutan dig att tvinga systemet att använda unicode (UTF-8). Notera dock\n"
+"att detta är en experimentell funktion. Om du väljer olika språk som kräver\n"
+"olika kodning så kommer unicodestödet att installeras i vilket fall som "
+"helst.\n"
 "\n"
 "För att välja mellan de olika spåken installerade på ditt system kan du\n"
 " starta kommandot \"/usr/sbin/localedrake\" som root för att ändra spåket\n"
@@ -1859,11 +1777,14 @@ msgstr ""
 #, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
-" * \"Land\": kontrollera valet av land. Om du inte finns i detta land, "
-"clicka.\n"
-"på knappen och välj ett annat."
+" * \"Land\": kontrollera valet av land. Om du inte finns i detta land,\n"
+"klicka på \"Konfigurera\"-knappen och välj ett annat. Om ditt land\n"
+"inte finns i den första listan som visas, klicka på \"Mera\" för att få\n"
+"den kompletta listan på länder."
 
 #: ../../help.pm:1
 #, c-format
@@ -2090,9 +2011,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -2100,41 +2019,39 @@ msgstr ""
 "datorn. En tumregel är att ju mer tillgänglig en dator är och ju viktigare\n"
 "dess data är, desto högre bör säkerhetsnivån vara.\n"
 "Det bör dock nämnas att nivån på säkerheten påverkar hur lättanvänd\n"
-"datorn blir. Se msec-kapitlet i \"`Command Line Manual\" för mer "
-"information\n"
-"om de olika säkerhetsnivåerna.\n"
-"\n"
+"datorn blir.\n"
 "Om du inte är säker på vad du ska välja, behåll det förvalda alternativet."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 "Sedan denna version av Mandrake Linux gavs ut är det troligt att\n"
 "några paket har uppdaterats. Fel kan ha rättats till och\n"
 "säkerhetsrelaterade problem kan ha lösts. För att du ska kunna ta\n"
 "del av dessa uppdateringar ges du nu möjligheten att ladda ner dem\n"
-"från Internet. Välj \"Ja\" om du har en aktiv Internetuppkoppling, eller\n"
+"från Internet. Välj \"Ja\" om du har en fungerande Internetuppkoppling, "
+"eller\n"
 "\"Nej\" om du vill installera uppdaterade paket senare.\n"
 "\n"
 "När du väljer \"Ja\" visas en lista på ställen som det går att hämta\n"
 "paketen från. Välj det som ligger närmast dig. Sedan visas en\n"
-"en trädvy där det går att välja paket. Gå igenom valen och klicka sedan\n"
+"trädvy där det går att välja paket. Gå igenom valen och klicka sedan\n"
 "på \"Installera\" för att ta emot, eller \"Avbryt\" för att avbryta."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Any partitions that have been newly defined must be formatted for use\n"
 "(formatting means creating a file system).\n"
@@ -2177,16 +2094,16 @@ msgstr ""
 "Var försiktig när du väljer partitioner, för efter formatering kommer all\n"
 "data att vara raderat och du kommer inte att kunna återskapa någonting.\n"
 "\n"
-"Klicka på OK när du är redo att formatera partitionerna.\n"
+"Klicka på Nästa när du är redo att formatera partitionerna.\n"
 "\n"
-"Klicka på Avbryt om du vill välja andra partitioner att installera ditt\n"
+"Klicka på Föregående om du vill välja andra partitioner att installera ditt\n"
 "nya Mandrake Linux-system på.\n"
 "\n"
 "Klicka på Avancerat för att välja på vilka partitioner du vill leta\n"
 "efter felaktiga block."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2194,7 +2111,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2220,10 +2137,9 @@ msgid ""
 "\"mformat a:\")"
 msgstr ""
 "Installationen är nu färdig och GNU/Linux-systemet är klart\n"
-"att användas. Klicka bara på \"OK\" för att starta om systemet. Du kan "
-"starta\n"
-"GNU/Linux eller Windows, beroende på vilket du vill använda (om du har\n"
-"dubbla operativsystem), så fort datorn har startat upp.\n"
+"att användas. Klicka på Nästa för att starta om systemet. Det\n"
+"första du bör se efter det att datorn har gjort hårdvarutesterna är\n"
+"startmenyn där du kan välja vilket operativsystem du vill starta.\n"
 "\n"
 "Knappen Avancerat visar ytterligare två knappar som är till för att:\n"
 "\n"
@@ -2252,7 +2168,7 @@ msgstr ""
 "skriv \"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2283,7 +2199,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2308,13 +2224,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "Nu måste du välja var på hårddisken du vill installera Mandrake\n"
 "Linux. Om den är tom eller om ett befintligt operativsystem använder\n"
@@ -2327,22 +2243,10 @@ msgstr ""
 "Denna guide förenklar processen. Innan du börjar, titta i manualen\n"
 "och ta den tid du behöver.\n"
 "\n"
-"Om du installerar i Expert-läget kommer du in i Mandrake Linux\n"
-"partitionsverktyg: Diskdrake. Detta program låter dig finjustera\n"
-"partitionerna. Se kapitlet om Diskdrake i manualen. I gränssnittet för\n"
-"installation kan du starta den guide som det står om här genom att\n"
-"klicka på knappen \"Guide\".\n"
+"Beroende på hårddiskkonfigurationen är flera alternativ tillgängliga:\n"
 "\n"
-"Om partitioner redan är definierade (från en tidigare installation eller av\n"
-"ett annat partitionsverktyg) behöver du bara välja dem du vill använda\n"
-"för att installera Linux-systemet.\n"
-"\n"
-"Om partitioner inte redan har definierats, behöver du skapa dem genom\n"
-"att använda guiden. Beroende på hårddiskkonfiguration, kommer flera\n"
-"alternativ att finnas tillgängliga:\n"
-"\n"
-" * \"Använd ledigt utrymme\": det här leder till en automatisk\n"
-"partitionering av den tomma disken. Du kommer inte att få några fler "
+" \"Använd ledigt utrymme\": det här leder till en automatisk\n"
+"partitionering av den tomma disken. Du kommer inte att få några fler\n"
 "frågor.\n"
 "\n"
 " * \"Använd existerande partition\": guiden har hittat en eller flera\n"
@@ -2354,93 +2258,39 @@ msgstr ""
 " * \"Använd ledigt utrymme på Windows-partitionen\": Om Microsoft Windows\n"
 "är installerat på hårddisken och tar upp allt tillgängligt utrymme, måste\n"
 "du skapa ledigt utrymme för Linux-data. För att göra det kan du ta bort\n"
-"Microsoft Windows-partitionen och datat (se lösningarna \"Radera hela\n"
-"hårddisken\" eller \"Expert-läge\") eller ändra storlek på Microsoft\n"
-"Windows-partitionen. Ändring av storlek kan utföras utan att förlora data,\n"
-"under förutsättning att du nyligen defragmenterat Windows-partitionen.\n"
-"Du rekommenderas också att säkerhetskopiera datat på Windows-partitionen.\n"
-"Denna lösning rekommenderas om du vill använda både Mandrake Linux\n"
-"och Microsoft Windows på samma dator.\n"
+"Microsoft Windows-partitionen och datat (se lösningen \"Radera hela\n"
+"hårddisken\") eller ändra storlek på Microsoft Windows-partitionen.\n"
+"Ändring av storlek kan utföras utan att förlora data, under förutsättning\n"
+"att du nyligen defragmenterat Windows-partitionen och att den använder.\n"
+"formatet FAT. Du rekommenderas också att säkerhetskopiera datat på\n"
+"Windows-partitionen. Denna lösning rekommenderas om du vill använda\n"
+"både Mandrake Linux och Microsoft Windows på samma dator.\n"
 "\n"
 "   Innan du väljer denna lösning måste du förstå att storleken på\n"
-"Microsoft Windows-partitionen kommer att bli mindre än den är för "
-"närvarande.\n"
-"Det betyder att du kommer att ha mindre utrymme under Microsoft Windows för\n"
-"att lagra data eller installera ny mjukvara.\n"
+"Microsoft Windows-partitionen kommer att bli mindre än den är för\n"
+"närvarande. Det betyder att du kommer att ha mindre utrymme under\n"
+"Microsoft Windows för att lagra data eller installera ny mjukvara.\n"
 "\n"
 " * \"Rensa hela hårddisken\": Om du vill ta bort alla data och alla\n"
 "partitioner som finns på hårddisken och ersätta dem med ditt nya\n"
 "Mandrake Linux-system, väljer du detta alternativ. Var försiktig med\n"
 "detta alternativ eftersom du kan inte ångra dig efteråt.\n"
 "\n"
-"   Om du väljer detta alternativ kommer alla data på disken att försvinna.\n"
+"   Om du väljer detta alternativ kommer alla data på disken att tas bort.\n"
 "\n"
 " * \"Ta bort Windows\": tar helt enkelt bort allt på disken och startar en\n"
 "fräsch partitionering från grunden. Alla data på disken kommer att tas\n"
 "bort.\n"
 "\n"
-"   Om du väljer detta alternativ kommer all data på disken att försvinna.\n"
+"   Om du väljer detta alternativ kommer all data på disken att tas bort.\n"
 "\n"
-" * \"Expert-läge\": välj detta alternativ om du vill partitionera\n"
+" * \"Egen diskpartitionering\": välj detta alternativ om du vill "
+"partitionera\n"
 "hårddisken manuellt. Var försiktig - det är ett kraftfullt men farligt\n"
 "alternativ. Du kan väldigt enkelt förlora allt data. Därför, välj\n"
 "inte detta om du inte är helt säker på vad du gör. För att veta hur du ska\n"
 "använda Diskdrake-verktyget som används här, se kapitlet \"Managing Your\n"
 "Partitions\" i \"Starter Guide\"."
-
-#: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"Mandrake Linux cd-skiva har ett inbyggt reparationssläge. Du kan komma åt\n"
-"det genom att starta från cd-skivan och sedan trycka på tangenten >>F1<<\n"
-"vid uppstart och skriva >>rescue<< vid prompten. Om datorn inte kan\n"
-"starta från cd-skiva bör du komma tillbaka till det här steget i åtminstone\n"
-"två situationer:\n"
-"\n"
-" * när starthanteraren installeras kommer DrakX att skriva över\n"
-"startsektorn (MBR) på huvuddisken (om du inte använder en annan\n"
-"starthanterare) så att du kan starta antingen Windows eller GNU/Linux\n"
-"(om du har Windows installerat på datorn). Om du blir tvungen att "
-"installera\n"
-"om Windows så kommer Microsofts installationsprogram att skriva över "
-"startsektorn\n"
-"vilket leder till att du inte kan starta GNU/Linux.\n"
-"\n"
-" * om ett problem uppstår så att du inte kan starta GNU/Linux från\n"
-"hårddisken kommer den här disketten att vara det enda sättet att starta\n"
-"GNU/Linux. Den innehåller ett antal systemverktyg som kan användas för att\n"
-"återställa ett system som kraschat på grund av strömavbrott, en olycklig\n"
-"felstavning, en felskrivning i ett lösenord eller av någon annan anledning.\n"
-"\n"
-"När du klickar på det här steget kommer du att bli ombedd att stoppa in en\n"
-"diskett i diskettstationen. Disketten som du stoppar in måste vara tom\n"
-"eller inte innehålla någon data som du vill ha kvar. Du behöver inte\n"
-"formatera den eftersom DrakX kommer att skriva om hela disketten."
 
 #: ../../help.pm:1
 #, c-format
@@ -2571,9 +2421,18 @@ msgid ""
 "without 3D acceleration, you are then proposed to choose the server that\n"
 "best suits your needs."
 msgstr ""
+"Grafikkort\n"
+"\n"
+"   Installationsprogrammet kan vanligtvis automatiskt identifiera och\n"
+"konfigurera grafikkortet i datorn. Om det misslyckas kan du välja\n"
+"det korrekta kortet i den här listan.\n"
+"\n"
+"   Om olika servrar finns tillgängliga för ditt kort, utan eller\n"
+"med 3D-acceleration, väljer du den server som bäst passar dina\n"
+"behov."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it to\n"
 "local time according to the time zone you selected. If the clock on your\n"
@@ -2602,9 +2461,10 @@ msgstr ""
 "önskas, användas av andra datorer i ditt lokala nätverk."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2623,7 +2483,7 @@ msgstr ""
 "Välj vilka tjänster du vill starta vid uppstart.\n"
 "\n"
 "Här visas alla tjänster tillgängliga med den aktuella installationen.\n"
-"Titta igenom dem och avmarkera dem du inte behöver vid uppstart.\n"
+"Titta igenom dem och avmarkera dem du inte behöver vid start.\n"
 "\n"
 "Du kan få en kort förklaringstext om en tjänst genom att välja den\n"
 "specifika tjänsten. Om du är osäker på om en tjänst är användabar eller\n"
@@ -2637,18 +2497,18 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
-" * \"Skrivare\": om du klickar på \"Ingen skrivare\" startar skrivarguiden.\n"
+"\"Skrivare\": om du klickar på \"Konfigurera\" startar skrivarguiden.\n"
 "Se motsvarande kapitel i \"Starter Guide\" för mer information om hur du\n"
 "ska göra för att installera en ny skrivare. Gränssnittet som visas där\n"
 "liknar det som används vid installationen."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will now set up your Internet/network connection. If you wish to\n"
 "connect your computer to the Internet or to a local network, click \"Next\n"
@@ -2670,8 +2530,8 @@ msgid ""
 "installed and use the program described there to configure your connection."
 msgstr ""
 "Du ska nu ställa in din Internet/nätverksanslutning. Om du har som avsikt\n"
-"att ansluta datorn till Internet eller till ett lokalt nätverk, klicka \"OK"
-"\"\n"
+"att ansluta datorn till Internet eller till ett lokalt nätverk, klicka "
+"\"Nästa\".\n"
 "Det startar den automatiska sökningen efter nätverksenheter och modem.\n"
 "Om sökningen misslyckas, avmarkera \"Använd automatisk identifiering\". Du\n"
 "kan också välja att inte konfigurera nätverket vid denna tidpunkt, klicka\n"
@@ -2680,22 +2540,17 @@ msgstr ""
 "Möjliga anslutningar är: vanligt modem, ISDN-modem, ADSL-anslutning,\n"
 "kabelmodem och slutligen vanlig LAN-anslutning (Ethernet).\n"
 "\n"
-"Vi går inte igenom varje anslutning i detalj. Se bara till att du har den "
-"information\n"
-"som du fått från din Internetleverantör eller administratör till hands.\n"
+"Vi går inte igenom varje anslutning i detalj. Se bara till att du har den\n"
+"information (IP-adresss, standard-gateway, DNS-servrar, etc.) som du har\n"
+"fått från din Internetleverantör eller administratör till hands.\n"
 "\n"
-"Du kan läsa kapitlet om Internetanslutning i manualen för en djupare "
-"genomgång\n"
-"om konfigurationen, eller helt enkelt vänta tills systemet är installerat "
-"och\n"
-"sedan använda programmet som det står om i manualen för att anpassa din "
-"anslutning.\n"
-"\n"
-"Om du vill konfigurera nätverket senare eller är klar med din anslutning\n"
-"klicka på \"Avbryt\". "
+"Du kan läsa kapitlet om Internetanslutning i manualen för en djupare\n"
+"genomgång om konfigurationen, eller helt enkelt vänta tills systemet\n"
+"är installerat och sedan använda programmet som det står om i manualen\n"
+"för att anpassa din anslutning."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you told the installer that you wanted to individually select packages,\n"
 "it will present a tree containing all packages classified by groups and\n"
@@ -2731,18 +2586,12 @@ msgid ""
 "end of another installation. See the second tip of last step on how to\n"
 "create such a floppy."
 msgstr ""
-"Slutligen, beroende på om du väljer att installera enskilda paket eller\n"
-"inte, kommer du att få se ett träd innehållande alla paket klassificerade\n"
-"efter grupper och undergrupper. Om du bläddrar i trädet kan du välja hela\n"
-"grupper, undergrupper, eller enskilda paket.\n"
+"Beroende på om du valde att installera enskilda paket eller inte, kommer du\n"
+"att få se ett träd innehållande alla paket klassificerade efter grupper och\n"
+"undergrupper. Om du bläddrar i trädet kan du välja hela grupper,\n"
+"undergrupper eller enskilda paket.\n"
 "\n"
 "När du väljer ett paket i trädet, visas en beskrivning till höger.\n"
-"När du har valt klart, klicka på Installera. Då kommer själva\n"
-"installationen att starta. Beroende på hastigheten på hårdvaran och\n"
-"på hur många paket som ska installeras kan det här processen ta en stund.\n"
-"En uppskattad återstående tid visas på skärmen för att visa dig ungefär hur\n"
-"lång tid som är kvar av installationen, du kanske hinner gå och dricka en\n"
-"kopp kaffe.\n"
 "\n"
 "Om det skulle visa sig att ett serverpaket har valts antingen\n"
 "oavsiktligt eller om det var med i en hel grupp, kommer du att få bekräfta\n"
@@ -2757,16 +2606,20 @@ msgstr ""
 "varningsdialogrutan som visas när installationsprogrammet automatiskt\n"
 "väljer ett paket. Detta inträffar därför att det har upptäckts att ett\n"
 "beroende med ett annat paket måste tillfredsställas för att detta paket\n"
-"ska kunna installeras ordentligt.\n"
+"ska kunna installeras ordentligt. Installationsprogrammet kan\n"
+"avgöra vilka paket som krävs för att lösa ett beroende.\n"
 "\n"
 "Den lilla diskettikonen i slutet på listan låter dig ladda en paketlista\n"
-"som du kan ha gjort vid en tidigare installation. När du klickar på den\n"
-"ikonen kommer du att bli ombedd om att stoppa i en diskett som du\n"
-"tidigare kan ha skapat vid slutet av en annan installation. Se det andra\n"
-"tipset i det sista steget hur du gör för att skapa en sådan diskett."
+"som du kan ha gjort vid en tidigare installation. Detta är användbart\n"
+"om du har ett antal datorer som ska ha en likadan konfiguration.\n"
+"När du klickar på den ikonen kommer du att bli ombedd om att stoppa i\n"
+"en diskett som du tidigare kan ha skapat vid slutet av en annan "
+"installation.\n"
+"Se det andra tipset i det sista steget hur du gör för att skapa en sådan "
+"diskett."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "It is now time to specify which programs you wish to install on your\n"
 "system. There are thousands of packages available for Mandrake Linux, and\n"
@@ -2821,26 +2674,27 @@ msgid ""
 msgstr ""
 "Det är nu dags att ange vilka program du vill installera på\n"
 "systemet. Det finns flera tusen paket tillgängliga för Mandrake Linux och\n"
-"det är inte meningen att du ska känna till alla.\n"
-"\n"
-"Om du utför en standardinstallation från cd kommer du först att\n"
-"få ange vilka cd-skivor du har till hands (endast i Expert-läge).\n"
-"Kontrollera cd-skivornas etiketter och markera rutorna som\n"
-"motsvarar de cd-skivor du har. Klicka \"OK\" när du är klar.\n"
+"för att det ska bli enklare att hantera paketen har de placerats i grupper\n"
+"om liknande program.\n"
 "\n"
 "Paketen är sorterade i grupper som motsvarar olika användningsområden\n"
-"för din dator. Grupperna är i sig sorterade i fyra sektioner:\n"
+"för din dator. Mandrke Linux har fyra fördefinierade installationer "
+"tillgängliga.\n"
+"Du kan se på dessa installationsklasser som containrar fö olika paket.\n"
+"Du kan blanda program från olika containrar så att t ex en "
+"arbetsstationsinstallation\n"
+"fortfarande kan ha program från containern Utveckling installerade.\n"
 "\n"
 " * \"Arbetsstation\": om du ska använda datorn som arbetsstation,\n"
-"välj en eller flera av de motsvarande grupperna.\n"
+"välj en eller flera av de motsvarande containrarna.\n"
 "\n"
 "* \"Utveckling\": om datorn ska användas för programmering välj de\n"
-"önskade grupperna.\n"
+"önskade containrarna.\n"
 "\n"
 "* \"Server\": om datorn ska användas som server, kan du här\n"
 "välja de mest vanliga tjänsterna som du vill ha installerade på den.\n"
 "\n"
-" * \"Grafisk miljö\": slutligen, här väljer du den grafiska miljö som du\n"
+" * \"Grafisk miljö\": här väljer du den grafiska miljö som du\n"
 "vill använda. Välj åtminstone en om du vill ha ett grafiskt gränssnitt på\n"
 "din arbetsstation.\n"
 "\n"
@@ -2856,10 +2710,9 @@ msgstr ""
 "grundläggande verktyg och dess dokumentation. Denna installation lämpar\n"
 "sig för en server.\n"
 "\n"
-"* \"Minimal installation\": Installerar det absolut minsta antalet paket "
-"som\n"
-"behövs för ett Linux-system, utan några grafiska system. Denna installation\n"
-"är ca 65Mb stor.\n"
+"* \"Minimal installation\": Installerar det absolut minsta antalet paket\n"
+"som behövs för ett Linux-system, utan några grafiska system. Denna\n"
+"installation är ca 65Mb stor.\n"
 "\n"
 "Du kan markera \"Välj enskilda paket\" som är användbart om du vet vilka\n"
 "paket du vill ha installerade eller om du vill ha fullständig kontroll över\n"
@@ -2881,7 +2734,7 @@ msgstr ""
 "den aktuella cd:n och be dig sätta in en annan om det blir nödvändigt."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Here are Listed the existing Linux partitions detected on your hard drive.\n"
 "You can keep the choices made by the wizard, since they are good for most\n"
@@ -2918,7 +2771,8 @@ msgstr ""
 "vanliga installationer. Om du gör några ändringar måste du åtminstone\n"
 "definiera en rotpartition (\"/\"). Välj inte en för liten partition för\n"
 "då kommer du inte kunna installera tillräckligt med mjukvara. Om du vill\n"
-"lagra din data på en separat partition, behöver du också skapa en partition\n"
+"lagra dina data på en separat partition, behöver du också skapa en "
+"partition\n"
 "för /home (endast möjligt om du har mer än en Linux-partition tillgänglig).\n"
 "\n"
 "Varje partition listas som följer: \"Namn\", \"Kapacitet\".\n"
@@ -2945,7 +2799,7 @@ msgstr ""
 "\"andra lägsta SCSI-ID\", etc."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "GNU/Linux is a multi-user system, meaning each user can have their own\n"
 "preferences, their own files and so on. You can read the ``Starter Guide''\n"
@@ -3014,7 +2868,15 @@ msgstr ""
 "användare som du vill ha, välj Klar.\n"
 "\n"
 "Om du klickar på Avancerat kan du ändra det förvalda \"skalet\"\n"
-"för den användaren (bash är förvalt)."
+"för den användaren (bash är förvalt).\n"
+"\n"
+"När du är färdig med att sätta till alla användare, kommer du att få välja\n"
+"en användare som kan logga in automatiskt på systemet då datorn\n"
+"startar upp. Om du är intresserad av den funktionen (och du inte bryr\n"
+"dig speciellt mycket om lokal säkerhet), välj den önskade användaren\n"
+"och fönsterhanteraren och klicka sedan på \"Nästa ->\". Om du inte är\n"
+"intresserad av denna funktion, kryssa av rutan \"Vill du använda\n"
+"denna funktion?\""
 
 #: ../../help.pm:1
 #, c-format
@@ -3220,6 +3082,8 @@ msgid ""
 "To ensure data integrity after resizing the partition(s), \n"
 "filesystem checks will be run on your next boot into Windows(TM)"
 msgstr ""
+"För att säkerställa dataintegritet efter storleksändring av partitioner \n"
+"kommer filsystemskontroller att köras vid nästa Windows(TM)-start."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -4220,6 +4084,12 @@ msgstr "Tjänster"
 msgid "System"
 msgstr "System"
 
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "%s on %s"
+msgstr "%s på %s"
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Bootloader"
@@ -4357,14 +4227,14 @@ msgid "Which is your timezone?"
 msgstr "Vilken är din tidszon?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Felaktigt val, försök igen.\n"
+msgstr "Vill du försöka igen?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Kan inte dela: %s"
+msgstr "Kan inte kontakta spegeln %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4660,6 +4530,11 @@ msgstr "Musport"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "Välj mustyp."
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "Krypteringsnyckel"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7131,6 +7006,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [allt]\n"
+"       XFdrake [--noauto] skärm\n"
+"       XFdrake-upplösning"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7138,6 +7016,8 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7173,7 +7053,7 @@ msgstr ""
 #: ../../standalone.pm:1
 #, c-format
 msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
-msgstr ""
+msgstr "[--file=minfil] [--word=mittord] [--explain=reguttryck] [--alert]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7197,6 +7077,20 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
+"[FLAGGOR]...\n"
+"konfiguration av Mandrakes terminalserver\n"
+"--enable         : aktivera MTS\n"
+"--disable        : inaktivera MTS\n"
+"--start          : starta MTS\n"
+"--stop           : stoppa MTS\n"
+"--adduser        : lägg till en befintlig användare till MTS (kräver "
+"användarnamn)\n"
+"--deluser        : ta bort en befintlig användare från MTS (kräver "
+"användarnamn)\n"
+"--addclient      : lägg till en klientdator till MTS (kräver MAC-adress, IP, "
+"nbi-avbildsnamn)\n"
+"--delclient      : ta bort en klientdator från MTS (kräver MAC-adress, IP, "
+"nbi-avbildsnamn)"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -8942,13 +8836,13 @@ msgid "No known driver"
 msgstr "Ingen känd drivrutin"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
 msgstr ""
-"Det finns ingen känd alternativ OSS/ALSA-drivrutin för ljudkortet (%s) som "
-"för närvarande använder \"%s\""
+"Det finns ingen fri drivrutin för ljudkortet (%s), men det finns en sluten "
+"på \"%s\"."
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9126,9 +9020,9 @@ msgid "Auto-detect"
 msgstr "Automatisk identifiering"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Ner"
+msgstr "Gör"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -9510,11 +9404,6 @@ msgstr ""
 #, c-format
 msgid "Configuring network"
 msgstr "Konfigurera nätverket"
-
-#: ../../network/ethernet.pm:1
-#, c-format
-msgid "no network card found"
-msgstr "inget nätverkskort kunde hittas"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -10165,12 +10054,12 @@ msgstr "Nätverksövervakning"
 #: ../../network/network.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
-msgstr "Spåra nätverkskortets id (användbart för bärbara datorer)"
+msgstr "Spåra nätverkskortets ID (användbart för bärbara datorer)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Värddatornamn"
+msgstr "DHCP värddatornamn"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10803,19 +10692,6 @@ msgstr ""
 "Följande skrivare är inställda. Dubbelklicka på någon av dem för att ändra "
 "dess inställningar, för att använda den som standard eller för att få "
 "information om den."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"Följande skrivare är konfigurerade. Dubbelklicka på en skrivare för att "
-"ändra dess inställningar, göra den till standardskrivare, se information om "
-"den eller för att göra en fjärrskrivare på CUPS-server tillgänglig för Star/"
-"Open Office."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11453,6 +11329,11 @@ msgstr "Alternativet %s måste vara ett heltal."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Printer default settings"
+msgstr "Standard skrivarinställningar"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -11686,7 +11567,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Scanning on your HP multi-function device"
-msgstr ""
+msgstr "Bildläsning på HP-flerfunktionsenhet"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12553,9 +12434,9 @@ msgid "Checking your system..."
 msgstr "Kontrollerar systemet..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "Starta om XFS"
+msgstr "Startar om Cups..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12580,7 +12461,7 @@ msgstr "Server-IP saknas."
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
-msgstr ""
+msgstr "Ange IP-adress och port på värddatorn vars skrivare du vill använda."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12609,6 +12490,9 @@ msgid ""
 "do this if the servers do not broadcast their printer information into the "
 "local network."
 msgstr ""
+"Lägg till CUPS-servrarna vars skrivare du vill använda. Du behöver endast "
+"göra detta om dessa servrar inte sänder ut sin skrivarinformation på det "
+"lokala nätverket."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12808,6 +12692,9 @@ msgid ""
 "\n"
 "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
+"Argument: (val)\n"
+"\n"
+"Ange skalets tidsgräns. Värdet noll betyder ingen tidsgräns."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12816,6 +12703,9 @@ msgid ""
 "\n"
 "Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
+"Argument: (storlek)\n"
+"\n"
+"Ange skalkommandons historikstorlek. Värdet -1 betyder obegränsat."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12858,7 +12748,7 @@ msgstr "om ja, kör kontroller mot RPM-databasen."
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr ""
+msgstr "om ja, kontrollera om nätverksenheter är i läget \"promiscuous\"."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12881,11 +12771,13 @@ msgid "if set to yes, report check result to syslog."
 msgstr "om ja, rapportera kontrollresultat till syslog."
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "if set to yes, check for empty passwords, for no password in /etc/shadow and "
 "for users with the 0 id other than root."
-msgstr "om ja, kontrollera tomma lösenord i /etc/shadow."
+msgstr ""
+"om ja, kontrollera tomma lösenord, inga lösenord i /etc/shadow och om "
+"användare andra än root har ID 0."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12934,6 +12826,9 @@ msgid ""
 "\n"
 "Set the password history length to prevent password reuse."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Ange historiken på lösenordslängd för att förhindra lösenordsåteranvändning."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12959,6 +12854,9 @@ msgid ""
 "\n"
 " Enable/Disable sulogin(8) in single user level."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Aktivera/Inaktivera sulogin(8) på enanvändarnivå."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -12978,6 +12876,9 @@ msgid ""
 "\n"
 "Activate/Disable ethernet cards promiscuity check."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Aktivera/Inaktivera promiscuity-kontroll för Ethernet-kort."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13009,6 +12910,9 @@ msgid ""
 "\n"
 "Enable/Disable msec hourly security check."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Aktivera/Inaktivera msec-kontroll varje timme."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13039,6 +12943,9 @@ msgid ""
 "\n"
 "Enable/Disable IP spoofing protection."
 msgstr ""
+"Argument: (arg, underrätta=1)\n"
+"\n"
+"Aktivera/Inaktivera skydd för IP-förfalskning."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13109,6 +13016,10 @@ msgid ""
 "The argument specifies if clients are authorized to connect\n"
 "to the X server on the tcp port 6000 or not."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Argumentet specificerar om klienter har behörighet att ansluta\n"
+"till X-serverns TCP-port 6000 eller inte."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13128,6 +13039,9 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+"Tillåt/Förbjud listan över användare på inloggningshanterarna (KDM och GDM)."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13201,6 +13115,9 @@ msgid ""
 "\n"
 " Accept/Refuse broadcasted icmp echo."
 msgstr ""
+"Argument: (arg)\n"
+"\n"
+" Acceptera/Vägra utsända ICMP echo."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13338,8 +13255,8 @@ msgstr "Välkommen crackers!"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "Succén för MandrakeSoft bygger på principen fri mjukvara. Ditt nya "
 "operativsystem är resultatet av ett världsomspännande samarbete mellan "
@@ -13347,7 +13264,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Välkommen till de öppna källkodernas värld."
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -13358,223 +13275,164 @@ msgstr "Tack för att du valde Mandrake Linux 9.1."
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "Lär, lär ut och hjälp andra genom att delta i de många diskussionsgrupperna "
 "som finns på våra \"Community\"-sidor"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Vill du veta mer om öppen källkod?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr "Vill du veta mer om öppen källkod? Gå med i den fria mjukvarans värld!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Gå med i den fria mjukvarans värld."
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mandrake Linux 9.1 har valt ut de bästa programmen åt dig. Utforska Internet "
-"och se på animationer med Mozilla och Konqueror, skicka/ta emot e-post samt "
-"organisera din personliga information med Evolution och Kmail"
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Få ut det mesta av Internet"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 låter dig använda de senaste programmen för att spela "
 "musik- och ljudfiler, redigera och organisera bilder och foton, titta på TV "
 "och video och mycket mer"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "Pressa multimedia till dess gränser!"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "Upptäck de mest uppdaterade multimedia-verktygen!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 tillhandahåller de bästa spelen med öppen källkod. Arkad, "
-"action, kort, sport, strategi..."
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "Spel"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Mandrake Linux 9.1 tillhandahåller ett kraftfullt verktyg för att anpassa "
-"och konfigurera din dator."
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Mandrakes kontrollcentral"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Konfiguration av Mandrakes terminalserver"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1 tillhandahåller 11 användargränssnitt: KDE 3, Gnome 2, "
 "WindowMaker..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Användargränssnitt"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Upptäck kraften i GNU GCC 3-kompilatorn och använd de bästa öppna "
-"utvecklingsmiljöerna."
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 är den ultimata utvecklingsplattformen."
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Förenklad utveckling"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Förvandla datorn till en kraftfull server genom några musklick: webbserver, "
 "e-postserver, brandvägg, router, fil- och skrivarserver..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Gör din dator till en pålitlig server."
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "Produkten finns tillgänglig på MandrakeStores webbplats"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"Den här brandväggsprodukten innehåller nätverksfunktioner vilka låter dig "
-"uppfylla alla dina säkerhetsbehov."
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"Produktkatalogen MandrakeSecurity inkluderar produkten Multi Network "
-"Firewall (M.N.F.)."
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Optimera din säkerhet"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "Ett fullt utbud av Linux-lösningar, samt specialerbjudanden på produkter och "
 "annat \"godis\" återfinns i vår nätbutik."
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "Den officiella MandrakeSoft-butiken"
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
+#: ../../share/advertising/09-mdksecure.pl:1
+#, fuzzy, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 "MandrakeSoft arbetar tillsammans med ett antal företag som erbjuder "
 "professionella lösningar kompatibla med Mandrake Linux. En lista över dessa "
 "samarbetspartners finns tillgänglig på MandrakeStore"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "Strategiska samarbetspartners"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"Vare sig du väljer att lära dig själv online eller via vårt nätverk av "
-"utbildningspartners, förbereder kurskatalogen Linux-Campus dig för det "
-"erkända LPI-certificeringsprogrammet (världsomspännande professionell "
-"teknisk certifiering)"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Certifiera dig på Linux"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Optimera din säkerhet"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "Produkten finns tillgänglig på MandrakeStores webbplats"
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"Kursen har skapats för att fylla behoven för både slutanvändare och experter "
-"(nätverk- och systemadministratörer)"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "Upptäck MandrakeSofts kurskatalog Linux-Campus"
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13585,20 +13443,20 @@ msgstr ""
 "för att dela med dig av dina kunskaper och hjälpa andra genom att bli en "
 "erkänd expert på den tekniska supportwebbplatsen:"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 "Hitta lösningar på dina problem via MandrakeSofts online-supportplattform"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Bli en Mandrake-expert"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
@@ -13606,37 +13464,15 @@ msgid ""
 msgstr ""
 "Alla incidenter följs upp av en tekniskt kvalificerad MandrakeSoft-expert."
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr "En online-plattform för att bistå företag med specifika supportbehov"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "MandrakeExpert för företag"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"MandrakeClub och Mandrake Corporate Club skapades för företag och privata "
-"användare av Mandrake Linux som direkt vill stödja sin favorit-Linux-"
-"distribution och också få speciella privilegier. Om du tycker om våra "
-"produkter, om ditt företag drar fördel av våra produkter så att företaget "
-"går bättre och om du vill stödja utvecklingen av Mandrake Linux, gå med i "
-"MandrakeClub!"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "Upptäck MandrakeClub och Mandrake Corporate Club"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -14636,7 +14472,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16155,6 +15991,11 @@ msgstr "Första gången-guiden"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Mandrakes kontrollcentral"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Felrapporteringsverkyg för Mandrake"
 
@@ -16977,7 +16818,7 @@ msgid "Local Network adress"
 msgstr "Lokal nätverksadress"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "I can keep your current configuration and assume you already set up a DHCP "
 "server; in that case please verify I correctly read the Network that you use "
@@ -16992,10 +16833,13 @@ msgid ""
 "\n"
 msgstr ""
 "Vi kan behålla aktuell konfiguration och anta att du redan har satt upp en "
-"DHCP-server; om så är fallet, verifiera att C-klassnätverket som du använder "
-"på ditt lokala nätverk blev korrekt läst. Det kommer inte att konfigureras "
-"om och din konfiguration av DHCP-servern kommer inte att röras.\n"
+"DHCP-server; om så är fallet, verifiera att nätverket som du använder på "
+"ditt lokala nätverk blev korrekt läst. Det kommer inte att konfigureras om "
+"och din konfiguration av DHCP-servern kommer inte att röras.\n"
 "\n"
+"Den förvalda DNS-posten är den cachande namnservern konfigurerad på "
+"brandväggen. Du kan t ex ersätta den med din Internetleverantörs DNS IP.\n"
+"\t\t       \n"
 "Annars kan vi konfigurera om gränssnittet och konfigurera (om) en DHCP-"
 "server åt dig.\n"
 "\n"
@@ -17107,6 +16951,28 @@ msgstr "Gränssnitt %s"
 #, c-format
 msgid "Interface %s (using module %s)"
 msgstr "Gränssnitt %s (använder modul %s)"
+
+#: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Xinetd-tjänst"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+"Ange namnet på gränssnittet som är anslutet till internet.\n"
+"\n"
+"Expempel:\n"
+"\t\tppp+ för modem eller DSL-uppkopplingar, \n"
+"\t\teth0, eller eth1 för kabeluppkoppling, \n"
+"\t\tippp+ för ISDN-uppkoppling.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17461,6 +17327,11 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
+"DHCP-servern kommer att låta andra datorer starta med PXE i det angivna "
+"omfånget av adresser.\n"
+"\n"
+"Nätverksadressen är %s med nätmasken %s.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -17479,7 +17350,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -17680,6 +17551,11 @@ msgstr "sparar startskärmstema..."
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "välj avbildsfil"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "välj avbildsfil"
 
 #: ../../standalone/draksplash:1
@@ -18153,9 +18029,19 @@ msgid "network printer port"
 msgstr "nätverksskrivarport"
 
 #: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the name of the CPU"
+msgstr "tillverkarens namn på enheten"
+
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Name"
 msgstr "Namn"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the number of buttons the mouse has"
+msgstr "antal knappar som musen har"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18233,6 +18119,8 @@ msgstr "Avstängningsfel"
 #, c-format
 msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
+"Tidiga Pentium-processorer var felaktiga och låste sig vid avkodning av F00F-"
+"bytkod"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18252,7 +18140,7 @@ msgstr "Om FPU:n har en IRQ-vektor"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr ""
+msgstr "ja betyder att processorn har en aritmetisk hjälpprocessor"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18323,7 +18211,7 @@ msgstr "Det här fältet beskriver enheten"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -18336,7 +18224,7 @@ msgstr "Frekvens (MHz)"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Information level that can be obtained through the cpuid instruction"
-msgstr ""
+msgstr "Informationsnivå som kan tillhandahållas genom cpuid-instruktion"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18367,16 +18255,18 @@ msgstr "Coma-fel"
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
 msgstr ""
+"speciell kapacitet för drivrutinen (bränningstillgänglighet och/eller dvd-"
+"stöd)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "Enhetskapacitet"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Size of the (second level) cpu cache"
-msgstr ""
+msgstr "Storlek på processorcache (andra nivån)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18421,6 +18311,9 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
+"GNU/Linux-kärnan behöver köra en beräkningsslinga vid start för att initiera "
+"en tidsräknare. Resultatet sparas som \"bogomips\" för att på så sätt "
+"prestandatesta processorn."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18766,9 +18659,9 @@ msgid "sent: "
 msgstr "skickat: "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local measure"
-msgstr "Lokala filer"
+msgstr "Lokalt mått"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -19288,12 +19181,10 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Mail"
-msgstr "Mali"
+msgstr "E-post"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Postfix mail server"
 msgstr "E-postservern Postfix"
 
@@ -19337,6 +19228,10 @@ msgstr "Kontor"
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr ""
 "En samling verktyg för e-post, diskussioner, webb, filöverföring och chatt"
+
+#: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Spel"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
@@ -19394,6 +19289,393 @@ msgstr "Personlig ekonomi"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Program för att hantera din ekonomi, som till exempel Gnucash"
 
+#~ msgid "no network card found"
+#~ msgstr "inget nätverkskort kunde hittas"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 har valt ut de bästa programmen åt dig. Utforska "
+#~ "Internet och se på animationer med Mozilla och Konqueror, skicka/ta emot "
+#~ "e-post samt organisera din personliga information med Evolution och Kmail"
+
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Få ut det mesta av Internet"
+
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "Pressa multimedia till dess gränser!"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "Upptäck de mest uppdaterade multimedia-verktygen!"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 tillhandahåller de bästa spelen med öppen källkod. "
+#~ "Arkad, action, kort, sport, strategi..."
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 tillhandahåller ett kraftfullt verktyg för att anpassa "
+#~ "och konfigurera din dator."
+
+#~ msgid "User interfaces"
+#~ msgstr "Användargränssnitt"
+
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr ""
+#~ "Upptäck kraften i GNU GCC 3-kompilatorn och använd de bästa öppna "
+#~ "utvecklingsmiljöerna."
+
+#~ msgid "Development simplified"
+#~ msgstr "Förenklad utveckling"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "Den här brandväggsprodukten innehåller nätverksfunktioner vilka låter dig "
+#~ "uppfylla alla dina säkerhetsbehov."
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "Produktkatalogen MandrakeSecurity inkluderar produkten Multi Network "
+#~ "Firewall (M.N.F.)."
+
+#~ msgid "Strategic partners"
+#~ msgstr "Strategiska samarbetspartners"
+
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "Vare sig du väljer att lära dig själv online eller via vårt nätverk av "
+#~ "utbildningspartners, förbereder kurskatalogen Linux-Campus dig för det "
+#~ "erkända LPI-certificeringsprogrammet (världsomspännande professionell "
+#~ "teknisk certifiering)"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Certifiera dig på Linux"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "Kursen har skapats för att fylla behoven för både slutanvändare och "
+#~ "experter (nätverk- och systemadministratörer)"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "Upptäck MandrakeSofts kurskatalog Linux-Campus"
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "MandrakeClub och Mandrake Corporate Club skapades för företag och privata "
+#~ "användare av Mandrake Linux som direkt vill stödja sin favorit-Linux-"
+#~ "distribution och också få speciella privilegier. Om du tycker om våra "
+#~ "produkter, om ditt företag drar fördel av våra produkter så att företaget "
+#~ "går bättre och om du vill stödja utvecklingen av Mandrake Linux, gå med i "
+#~ "MandrakeClub!"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "Upptäck MandrakeClub och Mandrake Corporate Club"
+
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in a country to which the chosen language\n"
+#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your graphical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "Här presenteras olika parametrar rörande datorn. Beroende på\n"
+#~ "installerad hårdvara ser du alla eller några av följande poster:\n"
+#~ "\n"
+#~ " * \"Mus\": kontrollera aktuell muskonfiguration och om nödvändigt "
+#~ "klicka\n"
+#~ "på knappen för att ändra.\n"
+#~ "\n"
+#~ " * \"Tangentbord\": kontrollera aktuell tangentbordsuppsättning och om\n"
+#~ "nödvändigt klicka på knappen för att ändra.\n"
+#~ "\n"
+#~ " * \"Land\": kontrollera valet av land. Om du inte finns i detta land,\n"
+#~ "klicka på knappen och välj ett annat.\n"
+#~ "\n"
+#~ " * \"Tidszon\": DrakX antar vilken tidszon du har, utifrån det\n"
+#~ "språk du har valt. Men här gäller samma sak som vid val av tangentbord,\n"
+#~ "du kanske inte befinner dig i det land som motsvarar det språk du har "
+#~ "valt.\n"
+#~ "Därför kan du behöva klicka på Tidszon för att anpassa\n"
+#~ "klockan efter din tidszon.\n"
+#~ "\n"
+#~ " * \"Skrivare\": om du klickar på \"Ingen skrivare\" startar "
+#~ "skrivarguiden.\n"
+#~ "Se motsvarande kapitel i \"Starter Guide\" för mer information om hur du\n"
+#~ "ska göra för att installera en ny skrivare. Gränssnittet som visas där\n"
+#~ "liknar det som används vid installationen.\n"
+#~ "\n"
+#~ " * \"Starthanterare\": klicka på denna knapp om du vill ändra på\n"
+#~ "inställningarna för starthanteraren. Detta är endast för avancerade\n"
+#~ "användare.\n"
+#~ "\n"
+#~ " * \"Grafiskt gränssnitt\": som standard konfigureras ditt grafiska\n"
+#~ "gränssnitt med upplösningen \"800x600\". Klicka på knappen om\n"
+#~ "du vill ändra detta.\n"
+#~ "\n"
+#~ " * \"Nätverk\": om du vill konfigurera din Internet- eller lokala\n"
+#~ "nätverksanslutning så kan du göra det genom att klicka på knappen.\n"
+#~ "\n"
+#~ " * \"Ljudkort\": om ett ljudkort identifierats i datorn visas det här.\n"
+#~ "Om du märker att det ljudkort som visas inte är det samma som finns\n"
+#~ "i din dator så kan du klicka på knappen för att välja en annan "
+#~ "drivrutin.\n"
+#~ "\n"
+#~ " * \"TV-kort\": om ett TV-kort identifierats i datorn visas det här. Om "
+#~ "du\n"
+#~ "har ett TV-kort som inte identifierats automatiskt kan du klicka på "
+#~ "knappen\n"
+#~ "för att konfigurera det manuellt.\n"
+#~ "\n"
+#~ " * \"ISDN-kort\": om ett ISDN-kort identifierats i datorn visas det här.\n"
+#~ "Du kan klicka på knappen för att ändra dess parametrar."
+
+#, fuzzy
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mandrake Linux cd-skiva har ett inbyggt reparationssläge. Du kan komma "
+#~ "åt\n"
+#~ "det genom att starta från cd-skivan och sedan trycka på tangenten >>F1<<\n"
+#~ "vid uppstart och skriva >>rescue<< vid prompten. Om datorn inte kan\n"
+#~ "starta från cd-skiva bör du komma tillbaka till det här steget i "
+#~ "åtminstone\n"
+#~ "två situationer:\n"
+#~ "\n"
+#~ " * när starthanteraren installeras kommer DrakX att skriva över\n"
+#~ "startsektorn (MBR) på huvuddisken (om du inte använder en annan\n"
+#~ "starthanterare) så att du kan starta antingen Windows eller GNU/Linux\n"
+#~ "(om du har Windows installerat på datorn). Om du blir tvungen att "
+#~ "installera\n"
+#~ "om Windows så kommer Microsofts installationsprogram att skriva över "
+#~ "startsektorn\n"
+#~ "vilket leder till att du inte kan starta GNU/Linux.\n"
+#~ "\n"
+#~ " * om ett problem uppstår så att du inte kan starta GNU/Linux från\n"
+#~ "hårddisken kommer den här disketten att vara det enda sättet att starta\n"
+#~ "GNU/Linux. Den innehåller ett antal systemverktyg som kan användas för "
+#~ "att\n"
+#~ "återställa ett system som kraschat på grund av strömavbrott, en olycklig\n"
+#~ "felstavning, en felskrivning i ett lösenord eller av någon annan "
+#~ "anledning.\n"
+#~ "\n"
+#~ "När du klickar på det här steget kommer du att bli ombedd att stoppa in "
+#~ "en\n"
+#~ "diskett i diskettstationen. Disketten som du stoppar in måste vara tom\n"
+#~ "eller inte innehålla någon data som du vill ha kvar. Du behöver inte\n"
+#~ "formatera den eftersom DrakX kommer att skriva om hela disketten."
+
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Genom att markera \"Skapa en startdiskett\" kan du skapa ett\n"
+#~ "räddningstartmedia som kan vara bra att ha.\n"
+#~ "\n"
+#~ "Mandrake Linux cd-skiva har ett inbyggt reparationssläge. Du kan komma "
+#~ "åt\n"
+#~ "det genom att starta från cd-skivan och sedan trycka på tangenten >>F1<<\n"
+#~ "vid uppstart och skriva >>rescue<< vid prompten. Om datorn inte kan\n"
+#~ "starta från cd-skiva bör du komma tillbaka till det här steget i "
+#~ "åtminstone\n"
+#~ "två situationer:\n"
+#~ "\n"
+#~ " * när starthanteraren installeras kommer DrakX att skriva över\n"
+#~ "startsektorn (MBR) på huvuddisken (om du inte använder en annan\n"
+#~ "starthanterare) så att du kan starta antingen Windows eller GNU/Linux\n"
+#~ "(om du har Windows installerat på datorn). Om du blir tvungen att\n"
+#~ "installera om Windows så kommer Microsofts installationsprogram att\n"
+#~ "skriva över startsektorn vilket leder till att du inte kan starta GNU/"
+#~ "Linux.\n"
+#~ "\n"
+#~ " * om ett problem uppstår så att du inte kan starta GNU/Linux från\n"
+#~ "hårddisken kommer den här disketten att vara det enda sättet att starta\n"
+#~ "GNU/Linux. Den innehåller ett antal systemverktyg som kan användas för "
+#~ "att\n"
+#~ "återställa ett system som kraschat på grund av strömavbrott, en olycklig\n"
+#~ "felstavning, en felskrivning i ett lösenord eller av någon annan "
+#~ "anledning.\n"
+#~ "\n"
+#~ "Om du klickar på Ja kommer du att bli ombedd att stoppa in en\n"
+#~ "diskett i diskettstationen. Disketten som du stoppar in måste vara tom\n"
+#~ "eller inte innehålla någon data som du vill ha kvar. Du behöver inte\n"
+#~ "formatera den eftersom DrakX kommer att skriva om hela disketten."
+
+#~ msgid ""
+#~ "The following printers are configured. Double-click on a printer to "
+#~ "change its settings; to make it the default printer; to view information "
+#~ "about it; or to make a printer on a remote CUPS server available for Star "
+#~ "Office/OpenOffice.org/GIMP."
+#~ msgstr ""
+#~ "Följande skrivare är konfigurerade. Dubbelklicka på en skrivare för att "
+#~ "ändra dess inställningar, göra den till standardskrivare, se information "
+#~ "om den eller för att göra en fjärrskrivare på CUPS-server tillgänglig för "
+#~ "Star/Open Office."
+
 #~ msgid ""
 #~ "Please enter your host name if you know it.\n"
 #~ "Some DHCP servers require the hostname to work.\n"
@@ -19412,32 +19694,28 @@ msgstr "Program för att hantera din ekonomi, som till exempel Gnucash"
 #~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 #~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
 
-#~ msgid "Launch Aurora at boot time"
-#~ msgstr "Kör Aurora vid uppstart"
-
-#~ msgid "Traditional Gtk+ Monitor"
-#~ msgstr "Traditionell Gtk+-monitor"
-
-#~ msgid "Traditional Monitor"
-#~ msgstr "Traditionell monitor"
-
-#~ msgid "NewStyle Monitor"
-#~ msgstr "Ny stil monitor"
-
-#~ msgid "NewStyle Categorizing Monitor"
-#~ msgstr "Ny stil kategoriseringsmonitor"
-
-#~ msgid "Secure Connection"
-#~ msgstr "Säker anslutning"
-
-#~ msgid "FTP Connection"
-#~ msgstr "FTP-anslutning"
-
-#~ msgid "Mail/Groupware/News"
-#~ msgstr "E-post/Grupprogram/Diskussioner"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "E-postservern Postfix, Diskussionsgruppsservern Inn"
-
-#~ msgid "Format of floppies the drive accept"
-#~ msgstr "Diskettformat som enheten accepterar"
+#, fuzzy
+#~ msgid ""
+#~ "You are about to configure your computer to install a PXE server as a "
+#~ "DHCP server\n"
+#~ "and a TFTP server to build an installation server.\n"
+#~ "With that feature, other computers on your local network will be "
+#~ "installable using from this computer.\n"
+#~ "\n"
+#~ "Make sure you have configured your Network/Internet access using "
+#~ "drakconnect before going any further.\n"
+#~ "\n"
+#~ "Note: you need a dedicated Network Adapter to set up a Local Area Network "
+#~ "(LAN)."
+#~ msgstr ""
+#~ "Du är på väg att konfigurera din dator för att dela sin "
+#~ "Internetanslutning.\n"
+#~ "Med den funktionen kan andra datorer i ditt nätverk använda din dators "
+#~ "Internetanslutning.\n"
+#~ "\n"
+#~ "Se till så att du har konfigurerat din nätverks- och Internetanslutning "
+#~ "med\n"
+#~ "Drakconnect innan du fortsätter.\n"
+#~ "\n"
+#~ "Observera att du behöver ett dedikerat nätverkskort för att sätta upp ett "
+#~ "lokalt nätverk (LAN)."

@@ -2,19 +2,20 @@
 # Copyright (c) 2000 MandrakeSoft
 # Florin Grad <florin@mandrakesoft.com>, 1999-2000
 # Dragos Marian Barbu <dragosb@softhome.net>, 2000
-# Ovidiu Constantin <ovidiu.soft@xnet.ro>, 2002
+# Ovidiu Constantin <ovidiu.soft@xnet.ro>, 2002, 2003
+# Harald Ersch <harald@ersch.ro>,2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2002-11-14 09:12+0200\n"
-"Last-Translator: Harald Ersch <hersch@romatsa.ro>\n"
-"Language-Team: Romanian <rtfs-project@sourceforge.net>\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-03-05 08:44+0200\n"
+"Last-Translator: Ovidiu Constantin <ovidiu.constantin@gmx.net>\n"
+"Language-Team: Romanian Translators for Free Software <rtfs-project@lists."
+"sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -103,27 +104,27 @@ msgstr "Mai multe"
 #: ../../any.pm:1
 #, c-format
 msgid "Here is the full list of available countries"
-msgstr ""
+msgstr "Aici este lista tuturor þãrilor disponibile"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Vã rog sã alegeþi tipul de mouse."
+msgstr "Vã rog sã alegeþi þara"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Country"
-msgstr "Þara:"
+msgstr "Þara"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "All languages"
-msgstr "Alegeþi limba"
+msgstr "Toate limbile"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
+msgstr "Foloseºte implicit Unicode "
 
 #: ../../any.pm:1
 #, c-format
@@ -152,16 +153,15 @@ msgid "Choose the default user:"
 msgstr "Alegeþi utilizatorul implicit:"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to use this feature?"
-msgstr "Vreþi sã folosiþi aboot?"
+msgstr "Vreþi sã folosiþi aceastã facilitate?"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "I can set up your computer to automatically log on one user."
 msgstr ""
-"Pot sã configurez calculatorul sã logheze automat un utilizator.\n"
-"Doriþi sã folosiþi aceastã facilitate?"
+"Pot sã configurez calculatorul sã facã logare automatã pt. un utilizator."
 
 #: ../../any.pm:1
 #, c-format
@@ -506,12 +506,12 @@ msgstr "Limiteazã opþiunile liniei de comandã"
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
-msgstr ""
+msgstr "Forþeazã nefolosirea APIC"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable ACPI"
-msgstr "Demarare de pe CD activã?"
+msgstr "Activeazã ACPI"
 
 #: ../../any.pm:1
 #, c-format
@@ -564,14 +564,14 @@ msgid "Skip"
 msgstr "Sari peste"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Floppy"
-msgstr "Dischetã de demaraj"
+msgstr "Pe dischetã"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "First sector of the root partition"
-msgstr "Primul sector al partiþiei de demaraj"
+msgstr "Primul sector al partiþiei root"
 
 #: ../../any.pm:1
 #, c-format
@@ -653,6 +653,11 @@ msgid ""
 "creating a bootdisk on a 1.44 Mb floppy will probably fail,\n"
 "because XFS needs a very large driver)."
 msgstr ""
+"\n"
+"\n"
+"(AVERTISMENT! Folosiþi XFS pentru partiþia root,\n"
+"crearea unei dischete de demaraj de 1,44Mb probabil va eºua,\n"
+"pt. cã XFS necesitã spaþiu mare)."
 
 #: ../../any.pm:1
 #, c-format
@@ -814,12 +819,12 @@ msgstr ""
 #: ../../common.pm:1
 #, c-format
 msgid "consolehelper missing"
-msgstr ""
+msgstr "lipseºte ajutorul de consolã"
 
 #: ../../common.pm:1
 #, c-format
 msgid "kdesu missing"
-msgstr ""
+msgstr "lipseºte kdesu"
 
 #: ../../common.pm:1
 #, c-format
@@ -968,13 +973,13 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Nu puteþi folosi volumul logic LVM pentru punctul de montare %s"
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Aþi selectat o partiþie RAID software pentru /root.\n"
+"Aþi selectat o partiþie RAID software pentru root (/).\n"
 "Nici un gestionar de demaraj nu e capabil sã foloseascã aceasta fãrã\n"
 "o partiþie /boot. Adãugaþi deci o partiþie /boot"
 
@@ -986,7 +991,7 @@ msgstr "Existã deja o partiþie cu punctul de montare %s!\n"
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr ""
+msgstr "Punctele de montare au trebui sã conþinã doar caractere alfanumerice"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1047,9 +1052,9 @@ msgid "simple"
 msgstr "simplu"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "Formatarea partiþiei %s"
+msgstr "Activez partiþia swap %s"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1062,19 +1067,19 @@ msgid "mounting partition %s in directory %s failed"
 msgstr "montarea partiþiei %s în directorul %s a eºuat"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
-msgstr "Formatarea partiþiei %s"
+msgstr "Montez partiþia %s"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "Copiez %s"
+msgstr "Verific %s"
 
 #: ../../fs.pm:1
 #, c-format
 msgid "Formatting partition %s"
-msgstr "Formatarea partiþiei %s"
+msgstr "Formatez partiþia %s"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1102,6 +1107,15 @@ msgid ""
 "Click on \"<- Previous\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
+"Clic pe \"Urmãtor-->\" dacã doriþi ºtergerea tuturor datelor ºi partiþiilor "
+"existente\n"
+"pe acest disc fix. ATENÞIE! dupa acel clic nu veþi putea recupera nici un "
+"fel de date\n"
+"sau partiþii de pe discul fix, inclusiv date Windows.\n"
+"\n"
+"\n"
+"Clic pe \"<--Anterior\" pentru a opri aceastã operaþie fãrã a pierde date\n"
+"ºi partiþii prezente pe discul fix."
 
 #: ../../help.pm:1
 #, c-format
@@ -1110,56 +1124,76 @@ msgid ""
 "Mandrake Linux partition. Be careful, all data present on it will be lost\n"
 "and will not be recoverable!"
 msgstr ""
+"Alegeþi discul fix pe care doriþi sã îl ºtergeþi complet pentru a instala "
+"noua\n"
+"partiþie Makdrake Linux. Aveþi grijã, toate datele existente pe el se vor "
+"pierde\n"
+"ºi nu vor putea fi recuperate!"
 
 #: ../../help.pm:1
 #, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1263,13 +1297,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1293,7 +1322,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1331,36 +1360,11 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -1377,15 +1381,20 @@ msgid ""
 "bootloader menu, but you will need a boot disk in order to boot those other\n"
 "operating systems!"
 msgstr ""
-"LILO (de la LInux LOader) ºi Grub sunt gestionare de pornire. Amândouã sunt\n"
-"capabile sã demareze Linux sau un alt sistem prezent în calculator.\n"
-"În mod normal, aceste alte sisteme de operare sunt detectate ºi instalate\n"
-"corect. Dacã cumva nu e cazul, puteþi adãuga manual o intrare în acest\n"
-"ecran. Aveþi grijã sã alegeþi parametrii cei buni.\n"
+"Dupã ce aþi configurat parametrii generali pt. gestionarul de demarare, va "
+"fi afiºatã \n"
+"lista opþiunilor de demaraj ce va fi disponibilã la momentul demarãrii\n"
+"\n"
+"Dacã existã alte sisteme de operare instalate deja,\n"
+"ele vor fi adãugate automat la meniul de demarare.\n"
+"Puteþi ajusta opþiunile existente selectând o intrare ºi clic pe \n"
+"\"Modificare\" sau \"ªtergere\". \"OK\" valideazã schimbãrile.\n"
 "\n"
 "\n"
-"Puteþi de asemenea sã interziceþi accesul acestor alte sisteme a altor \n"
-"utilizatori, caz în care ar trebui sã ºtergeþi intrãrile acestor sisteme.\n"
+"Puteþi de asemenea sã interziceþi accesul la aceste sisteme a utilizatorilor "
+"neautorizaþi,\n"
+"caz în care ar trebui sã ºtergeþi intrãrile acestor sisteme din meniul de "
+"demarare.\n"
 "În acest ultim caz însã, veþi avea nevoie de un floppy de demarare pentru\n"
 "a putea le demara!"
 
@@ -1511,9 +1520,14 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1570,7 +1584,9 @@ msgstr ""
 #, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1692,9 +1708,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -1705,14 +1719,14 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 
 #: ../../help.pm:1
@@ -1753,7 +1767,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -1811,7 +1825,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -1836,42 +1850,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
-msgstr ""
-
-#: ../../help.pm:1
-#, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 
 #: ../../help.pm:1
@@ -2003,7 +1988,8 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2023,7 +2009,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
@@ -2335,14 +2321,14 @@ msgid ""
 msgstr ""
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System configuration"
-msgstr "Configurare alertare"
+msgstr "Configurare sistem"
 
 #: ../../install_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "System installation"
-msgstr "Instalare SILO"
+msgstr "Instalare sistem"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2475,9 +2461,9 @@ msgid ""
 msgstr ""
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Computing the size of the Windows partition"
-msgstr "Foloseºte spaþiul liber din partiþia Windows"
+msgstr "Calculez dimensiunea partiþiei Windows"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2614,9 +2600,9 @@ msgstr ""
 "Official Mandrake Linux User's Guide."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -2788,9 +2774,9 @@ msgid "Help"
 msgstr "Ajutor"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "not configured"
-msgstr "Reconfigureazã"
+msgstr "neconfigurat"
 
 #: ../../install_steps_gtk.pm:1 ../../standalone/drakbackup:1
 #: ../../standalone/drakboot:1 ../../standalone/drakgw:1
@@ -2850,9 +2836,9 @@ msgid "%d packages"
 msgstr "%d pachete"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Detalii"
+msgstr "Fãrã detalii"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -3056,9 +3042,9 @@ msgid "Generate auto install floppy"
 msgstr "Generare dischetã de autoinstalare"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reboot"
-msgstr "Root"
+msgstr "Repornire sistem"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3257,30 +3243,36 @@ msgstr "Servicii"
 msgid "System"
 msgstr "Sistem"
 
+#. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
+msgid "%s on %s"
+msgstr "%s (Port %s)"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Bootloader"
-msgstr "Gestionarul de demarare folosit"
+msgstr "Gestionar de demarare"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Root"
+msgstr "Demarare"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "Dezactiveazã"
+msgstr "dezactivat"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "Activeazã acum"
+msgstr "activat"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Firewall/Router"
+msgstr "Firewall"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -3288,9 +3280,9 @@ msgid "Security"
 msgstr "Securitate"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level"
-msgstr "Nivel de securitate:"
+msgstr "Nivel de securitate"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -3298,19 +3290,19 @@ msgid "Network"
 msgstr "Reþea"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Interfaþa de reþea"
+msgstr "Reþea ºi Internet"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Graphical interface"
-msgstr "Interfaþa graficã la demaraj"
+msgstr "Interfaþa graficã"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Echipamente"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3341,7 +3333,7 @@ msgstr "Placã de sunet"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Remote CUPS server"
-msgstr "Coadã imprimare CUPS la distanþã:"
+msgstr "Coadã imprimare CUPS la distanþã"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3357,7 +3349,7 @@ msgstr "Imprimantã"
 #: ../../install_steps_interactive.pm:1 ../../harddrake/data.pm:1
 #, c-format
 msgid "Mouse"
-msgstr "Mouse"
+msgstr "Maus"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3382,7 +3374,7 @@ msgstr "Server NTP"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Automatic time synchronization (using NTP)"
-msgstr ""
+msgstr "Sincronizare automatã de timp (folosind NTP)"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3395,14 +3387,14 @@ msgid "Which is your timezone?"
 msgstr "Care este zona dvs. de timp?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Doriþi sã configuraþi tipãrirea?"
+msgstr "Doriþi sã încercaþi din nou?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Nu pot executa fork: %s"
+msgstr "Nu pot executa serverul de oglindire %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3682,23 +3674,28 @@ msgstr "Vã rog sã alegeþi tipul de mouse folosit."
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
-msgid "Upgrade %s"
-msgstr "Actualizare"
+msgid "Encryption key for %s"
+msgstr "Cheia de criptare"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
+msgid "Upgrade %s"
+msgstr "Actualizare %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Is this an install or an upgrade?"
 msgstr "Este vorba de o instalare sau de o actualizare ?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install/Upgrade"
 msgstr "Instalare/Actualizare"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
-msgstr ""
+msgstr "Aici este lista tuturor tastaturilor disponibile"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3806,9 +3803,9 @@ msgid "Advanced"
 msgstr "Avansat(e)"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove"
-msgstr "ªterge listã"
+msgstr "ªterge"
 
 #: ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #, c-format
@@ -3933,12 +3930,12 @@ msgid "Thai keyboard"
 msgstr "Tastaturã Thai"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (Typewriter-layout)"
-msgstr "Armeanã (maºinã de scris)"
+msgstr "Tamil (maºinã de scris)"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tamil (ISCII-layout)"
 msgstr "Tamilã (TSCII)"
 
@@ -4323,9 +4320,9 @@ msgid "South Africa"
 msgstr "Africa de sud"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "serie"
+msgstr "Sârbia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4343,7 +4340,7 @@ msgid "Samoa"
 msgstr "Samoa"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
 msgstr "Insulele Wallis ºi Futuna"
 
@@ -4353,7 +4350,7 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Viet Nam"
 
@@ -4378,9 +4375,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent ºi Grenadinele"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Letonã"
+msgstr "Vatican"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4413,9 +4410,9 @@ msgid "Tanzania"
 msgstr ""
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Tailanda"
+msgstr "Taiwan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4493,9 +4490,9 @@ msgid "Swaziland"
 msgstr "Swaziland"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Syria"
-msgstr "Surinam"
+msgstr "Siria"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4583,14 +4580,14 @@ msgid "Rwanda"
 msgstr "Ruanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Rus"
+msgstr "Rusia"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
-msgstr "România"
+msgstr "România :-)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4618,9 +4615,9 @@ msgid "Portugal"
 msgstr "Portugalia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Selectare cale"
+msgstr "Palestina"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4828,9 +4825,9 @@ msgid "Morocco"
 msgstr "Maroc"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Liberia"
+msgstr "Libia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4898,14 +4895,14 @@ msgid "Kuwait"
 msgstr "Kuweit"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Mai multe"
+msgstr "Coreea"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Coreea de nord"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4943,7 +4940,7 @@ msgid "Japan"
 msgstr "Japonia"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
 msgstr "Iordania"
 
@@ -4958,9 +4955,9 @@ msgid "Iceland"
 msgstr "Islanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Irak"
+msgstr "Iran"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5013,7 +5010,7 @@ msgid "Honduras"
 msgstr "Honduras"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
 msgstr "Insulele Heard ºi McDonald"
 
@@ -5043,7 +5040,7 @@ msgid "Guatemala"
 msgstr "Guatemala"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Insulele South Georgia ºi South Sandwich"
 
@@ -5438,19 +5435,19 @@ msgid "Afghanistan"
 msgstr "Afganistan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "default:LTR"
-msgstr "Implicit"
+msgstr "Implicit: LTR"
 
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
-msgstr "Montaje circulare %s\n"
+msgstr "Montãri circulare %s\n"
 
 #: ../../lvm.pm:1
 #, c-format
 msgid "Remove the logical volumes first\n"
-msgstr ""
+msgstr "ªterge întâi volumele logice\n"
 
 #: ../../modules.pm:1
 #, c-format
@@ -5466,17 +5463,17 @@ msgstr "MIªCAÞI ROTIÞA!"
 #: ../../mouse.pm:1
 #, c-format
 msgid "To activate the mouse,"
-msgstr "Pentru a activa mouse-ul,"
+msgstr "Pentru a activa mausul,"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "Please test the mouse"
-msgstr "Vã rog sã testaþi mouse-ul"
+msgstr "Vã rog sã testaþi mausul"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "No mouse"
-msgstr "Fãrã mouse"
+msgstr "Fãrã maus"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5556,17 +5553,17 @@ msgstr "Microsoft IntelliMouse"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 3 Button Mouse"
-msgstr "Mouse generic cu 3 butoane"
+msgstr "Maus comun cu 3 butoane"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
-msgstr "Mouse generic cu 2 butoane"
+msgstr "Maus comun cu 2 butoane"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "serial"
-msgstr "serie"
+msgstr "serial"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5581,7 +5578,7 @@ msgstr "Rotiþã"
 #: ../../mouse.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
 msgid "Generic"
-msgstr "Generic"
+msgstr "Comun"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5596,7 +5593,7 @@ msgstr "GlidePoint"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic PS2 Wheel Mouse"
-msgstr "Mouse PS/2 generic cu rotiþã"
+msgstr "Maus PS/2 comun cu rotiþã"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -5611,12 +5608,12 @@ msgstr "Standard"
 #: ../../mouse.pm:1
 #, c-format
 msgid "Sun - Mouse"
-msgstr "Mouse - Sun"
+msgstr "Maus - Sun"
 
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
 msgid "Toggle between flat and group sorted"
-msgstr "Basculaþi între plat ºi triere în funcþie de grup"
+msgstr "Basculare între plat ºi triere în funcþie de grup"
 
 #: ../../my_gtk.pm:1 ../../ugtk2.pm:1
 #, c-format
@@ -6170,9 +6167,9 @@ msgid "[--file=myfile] [--word=myword] [--explain=regexp] [--alert]"
 msgstr ""
 
 #: ../../standalone.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "[keyboard]"
-msgstr "Tastaturã"
+msgstr "[Tastaturã]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -6260,7 +6257,7 @@ msgid "Exit install"
 msgstr "Ieºire din instalare"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
 msgstr "Instalare actualizãri pt. sistem"
 
@@ -6290,9 +6287,9 @@ msgid "Add a user"
 msgstr "Adaugã un utilizator"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "Nici o parolã"
+msgstr "Parola de root"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6310,9 +6307,9 @@ msgid "Format partitions"
 msgstr "Formatare partiþii"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "Imprimare"
+msgstr "Partiþionare"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6453,12 +6450,12 @@ msgid "Select the memory size of your graphics card"
 msgstr "Alegeþi memoria pentru placa graficã"
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your system supports multiple head configuration.\n"
 "What do you want to do?"
 msgstr ""
-"Sistemul dvs. permite configurarea mai multor iesiri de afiºare.\n"
+"Sistemul dvs. permite configurarea mai multor ieºiri de afiºare.\n"
 "Ce doriþi sã faceþi?"
 
 #: ../../Xconfig/card.pm:1
@@ -6467,7 +6464,7 @@ msgid "Multi-head configuration"
 msgstr "Configurare multi-head (ieºiri multiple)"
 
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an X server"
 msgstr "Alegeþi un server X"
 
@@ -6655,14 +6652,14 @@ msgid "256 colors (8 bits)"
 msgstr "256 de culori (8 biþi)"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
-msgstr "E corect ?"
+msgstr "Configuraþia este corectã?"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving in %d seconds"
-msgstr "%d secunde"
+msgstr "terminare în %d secunde"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -6671,6 +6668,9 @@ msgid ""
 "%s\n"
 "Try to change some parameters"
 msgstr ""
+"A apãrut o eroare:\n"
+"%s\n"
+"Încercaþi sã schimbaþi câþiva parametri"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -6887,9 +6887,9 @@ msgid "Empty"
 msgstr "Gol"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows"
-msgstr "Domeniu Windows"
+msgstr "Window$"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -6927,14 +6927,13 @@ msgid "Please click on a partition"
 msgstr "Vã rog faceþi clic pe o partiþie"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Aveþi o singurã partiþie mare FAT\n"
-"(în general folositã de Microsoft  Dos/Windows).\n"
+"Aveþi o singurã partiþie mare Microsoft  Dos/Windows).\n"
 "Va sugerez sã redimensionaþi mai întîi acea partiþie\n"
 "faceþi clic pe ea ºi apoi pe \"Redimensioneazã\")"
 
@@ -7058,7 +7057,7 @@ msgstr ""
 "demararea dualã a sistemului.\n"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -7261,9 +7260,9 @@ msgid "File already exists. Use it?"
 msgstr "Fiºierul existã deja. Sã-l folosesc ?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr "Fiºier deja folosit de un alt loopback, alegeþi un altul"
+msgstr "Fiºierul este deja folosit de un alt loopback, alegeþi un altul"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7403,7 +7402,7 @@ msgid "Where do you want to mount device %s?"
 msgstr "Unde doriþi sã montaþi perifericul %s?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Where do you want to mount the loopback file %s?"
 msgstr "Unde doriþi sã montaþi fiºierul loopback %s?"
 
@@ -7690,27 +7689,27 @@ msgstr "Numele utilizatorului"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Can't login using username %s (bad password?)"
-msgstr "Nu pot loga folosind numele utilizator %s (parolã incorectã?)"
+msgstr "Nu pot face login folosind numele utilizator %s (parolã incorectã?)"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "cpu # "
-msgstr ""
+msgstr "CPU #"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
-msgstr ""
+msgstr "Controllere SMBus"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "USB controllers"
-msgstr ""
+msgstr "Controllere USB"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
-msgstr ""
+msgstr "Controllere SCSI"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -7720,112 +7719,112 @@ msgstr ""
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
-msgstr ""
+msgstr "Controllere (E)IDE/ATA"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Joystick"
-msgstr ""
+msgstr "Joystick-uri"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner"
-msgstr "Alegeþi un scanner"
+msgstr "Scannere"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
-msgstr "Necunoscut|Generic"
+msgstr "Necunoscut/Altele"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
-msgstr ""
+msgstr "Punþi ºi controllere de sistem"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Modem"
-msgstr "Model"
+msgstr "Modem-uri"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernetcard"
-msgstr "Placã Ethernet"
+msgstr "Plãci Ethernet"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Processors"
-msgstr "ID Procesor"
+msgstr "Procesoare"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Webcam"
-msgstr ""
+msgstr "Webcam-uri"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
-msgstr "Placã de sunet"
+msgstr "Plãci de sunet"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Other MultiMedia devices"
-msgstr ""
+msgstr "Alte dispozitive multimedia"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tvcard"
-msgstr "Placã TV"
+msgstr "Plãci TV"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "Mod video"
+msgstr "Plãci video"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "Tape"
-msgstr "Bandã"
+msgstr "Unitãþi de bandã"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "DVD-ROM"
-msgstr ""
+msgstr "Unitãþi DVD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CD/DVD burners"
-msgstr ""
+msgstr "Inscriptoare CD/DVD"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CDROM"
-msgstr "pe CDROM"
+msgstr "Unitãþi CDROM"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disk"
-msgstr "Danezã"
+msgstr "Unitãþi de disc"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Unitãþi ZIP"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy"
-msgstr "Dischetã de demaraj"
+msgstr "Unitãþi de dischete"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
-msgstr ""
+msgstr "Permite alegerea oricãrui pilot"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Driver:"
-msgstr "Driver:"
+msgstr "Pilot:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -7840,7 +7839,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Choosing an arbitratry driver"
-msgstr ""
+msgstr "Alegere arbitrarã pilot"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -7869,39 +7868,41 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Sound trouble shooting"
-msgstr ""
+msgstr "Depanare sunet"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Error: The \"%s\" driver for your sound card is unlisted"
-msgstr "Nu existã un driver cunoscut pentru placa dvs. de sunet (%s)"
+msgstr "Eroare: Pilotul \"%s\" pentru placa dvs. de sunet nu este în listã"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Unkown driver"
-msgstr "Driver necunoscut"
+msgstr "Pilot necunoscut"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
-msgstr "Nu existã un driver cunoscut pentru placa dvs. de sunet (%s)"
+msgstr "Nu existã un pilot cunoscut pentru placa dvs. de sunet (%s)"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "No known driver"
-msgstr "Nu existã driver cunoscut"
+msgstr "Nu existã pilot cunoscut"
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There's no free driver for your sound card (%s), but there's a proprietary "
 "driver at \"%s\"."
-msgstr "Nu existã un driver cunoscut pentru placa dvs. de sunet (%s)"
+msgstr ""
+"Nu existã un pilot liber pentru placa dvs. de sunet (%s), dar exista unul "
+"proprietar la  \"%s\"."
 
 #: ../../harddrake/sound.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No open source driver"
-msgstr "Nu existã driver cunoscut"
+msgstr "Nu existã pilot open-source"
 
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -7921,7 +7922,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Trouble shooting"
-msgstr ""
+msgstr "Depanare"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8041,9 +8042,9 @@ msgid "Auto-detect"
 msgstr "Auto-detecþie"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Jos"
+msgstr "Executã"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -8366,7 +8367,7 @@ msgstr "Server Web"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
+msgstr "Numele gazdei Zeroconf nu trebuie sã conþinã un ."
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -8374,9 +8375,9 @@ msgid "Host name"
 msgstr "Nume gazdã"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Zeroconf Host name"
-msgstr "Nume gazdã"
+msgstr "Nume gazdã Zeroconf"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -8394,14 +8395,11 @@ msgstr "Configurare reþea"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "Nu am gãsit nici o placã de reþea"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
+"Vã rog alegeþi ce adaptor de reþea doriþi sã folosiþi pentru a vã conecta la "
+"Internet."
 
 #: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
 #: ../../standalone/drakpxe:1
@@ -8415,6 +8413,9 @@ msgid ""
 "No ethernet network adapter has been detected on your system.\n"
 "I cannot set up this connection type."
 msgstr ""
+"Nu a fost detectat nici un adaptor de reþea ethernet pe sistemul "
+"dumneavoastrã.\n"
+"Nu pot configura acest tip de conexiune."
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -8422,6 +8423,8 @@ msgid ""
 "Which dhcp client do you want to use?\n"
 "Default is dhcp-client."
 msgstr ""
+"Ce client dhcp doriþi sã folosiþi?\n"
+"Implicit este dhcp-client."
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8508,14 +8511,14 @@ msgid ""
 msgstr ""
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "European protocol"
 msgstr "Protocol European"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "European protocol (EDSS1)"
-msgstr ""
+msgstr "Protocol European (EDSS1)"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8547,12 +8550,12 @@ msgstr "Asistent configurare reþea"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "Old configuration (isdn4net)"
-msgstr ""
+msgstr "Configuraþie veche (isdn4net)"
 
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "New configuration (isdn-light)"
-msgstr ""
+msgstr "Configuraþie nouã (isdn-light)"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -8683,6 +8686,9 @@ msgid ""
 "The configuration will now be applied to your system.\n"
 "\n"
 msgstr ""
+"Felicitãri, configuraþia reþelei si a conexiunii la Internet s-a terminatã.\n"
+"Configuraþia va fi acum aplicatã sistemului dumneavoastrã.\n"
+"\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8691,21 +8697,24 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"O problemã a avut loc la restartarea reþelei: \n"
+"\n"
+"%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "Pachetul %s trebuie instalat. Doriþi sã îl instalez?"
+msgstr "Reþeaua trebuie repornitã. Doriþi sã o repornesc?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network configuration"
-msgstr "Configuraþia reþelei"
+msgstr "Configurarea reþelei"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start the connection at boot?"
-msgstr ""
+msgstr "Doriþi sã pornesc conectarea la demaraj?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8719,16 +8728,19 @@ msgid ""
 "Choose the one you want to use.\n"
 "\n"
 msgstr ""
+"Aþi configurat cãi multiple de conectare la Internet.\n"
+"Alegeþi-o pe cea pe care doriþi sã o folosiþi.\n"
+"\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the connection you want to configure"
-msgstr ""
+msgstr "Alegeþi conexiunea pe care doriþi sã o configuraþi"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ethernet card(s) detected"
-msgstr "Cartele Ethernet detectate"
+msgstr "Plãci Ethernet detectate"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8753,7 +8765,7 @@ msgstr "detectat"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ADSL connection"
-msgstr ""
+msgstr "Conexiune ADSL"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8763,7 +8775,7 @@ msgstr "Am detectat %s"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "ISDN connection"
-msgstr ""
+msgstr "Conexiune ISDN"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8778,7 +8790,7 @@ msgstr "detectat la portul %s"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
-msgstr ""
+msgstr "Conexiune prin modem normal"
 
 #: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -8794,12 +8806,12 @@ msgstr "Mod expert"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Use auto detection"
-msgstr ""
+msgstr "Foloseºte autodetecþia"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
-msgstr ""
+msgstr "Alegeþi profilul ce va fi configurat"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8818,6 +8830,10 @@ msgid ""
 "Click on Ok to keep your configuration, or cancel to reconfigure your "
 "Internet & Network connection.\n"
 msgstr ""
+"Pentru cã faceþi o instalare prin reþea, reþeaua dumneavoastrã este deja "
+"configuratã.\n"
+"Apãsaþi Ok pentru a pãstra configuraþia, sau Anulare pentru a reconfigura "
+"conexiune la Internet ºi reþeaua.\n"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -8986,9 +9002,9 @@ msgid "Assign host name from DHCP address"
 msgstr ""
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Configuraþia reþelei"
+msgstr "Reconfigurarea \"la cald\" a reþelei"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -8996,9 +9012,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Urmãreºte id-ul plãcii de reþea (util pt. laptopuri)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Nume gazdã"
+msgstr "Nume gazdã DHCP"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -9013,9 +9029,9 @@ msgid "IP address"
 msgstr "Adresã IP"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
+msgstr "(bootp/dhcp/zeroconf)"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9157,21 +9173,21 @@ msgid "Connection Configuration"
 msgstr "Configurare conexiuni"
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
 "Try to reconfigure your connection."
 msgstr ""
-"Sistemul dvs. nu pare a fi conectat la internet.\n"
+"Sistemul dvs. nu pare a fi conectat la Internet.\n"
 "Încercaþi sã reconfiguraþi conexiunea."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr "Din motive de securitate va fi deconectat acum."
 
 #: ../../network/tools.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Sistemul este acum conectat la Internet."
 
@@ -9275,29 +9291,29 @@ msgid "Unknown model"
 msgstr "Model necunoscut"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Port %s)"
-msgstr "Port"
+msgstr "%s (Port %s)"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Host %s"
-msgstr "Nume gazdã"
+msgstr "Nume gazdã %s"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network %s"
-msgstr "Reþea"
+msgstr "Reþea %s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface \"%s\""
-msgstr "Interfaþã %s"
+msgstr "Interfaþã \"%s\""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local network(s)"
-msgstr "Adresa reþea localã"
+msgstr "Reþele locale"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -9350,24 +9366,24 @@ msgid ", multi-function device on USB"
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", multi-function device on parallel port \\#%s"
-msgstr " pe portul paralel \\/*%s"
+msgstr ", dispozitiv multifuncþional pe portul paralel \\#%s"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer"
-msgstr ", imprimantã USB \\/*%s"
+msgstr ", imprimantã USB "
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ", USB printer \\#%s"
-msgstr ", imprimantã USB \\/*%s"
+msgstr ", imprimantã USB \\#%s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid " on parallel port \\#%s"
-msgstr " pe portul paralel \\/*%s"
+msgstr " pe portul paralel \\#%s"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -9589,9 +9605,9 @@ msgid "Change the printing system"
 msgstr "Schimbã sistemul de tipãrire"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing"
-msgstr "Partajare fiºiere"
+msgstr "Partajare imprimante"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9618,15 +9634,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Printing system: "
 msgstr "Sistem de tipãrire:"
 
@@ -9641,9 +9648,9 @@ msgid "Installing Foomatic..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to configure printer \"%s\"!"
-msgstr "Configurez imprimanta \"%s\"..."
+msgstr "Nu am putut configura imprimanta \"%s\"!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -9666,19 +9673,19 @@ msgid "Select Printer Spooler"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Setting Default Printer..."
-msgstr "Imprimanta implicitã"
+msgstr "Setez imprimanta implicitã..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing %s ..."
-msgstr "Instalare pachete..."
+msgstr "Instalez %s..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Removing %s ..."
-msgstr "ªterg %s"
+msgstr "ªterg %s..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10144,6 +10151,11 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Printer default settings"
+msgstr "Opþiuni implicite imprimantã"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid ""
 "Printer default settings\n"
 "\n"
@@ -10335,14 +10347,14 @@ msgid "Scanning on your HP multi-function device"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing mtools packages..."
-msgstr "Instalare pachete..."
+msgstr "Instalare pachete mtools..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing SANE packages..."
-msgstr "Instalare pachete..."
+msgstr "Instalare pachete SANE..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10350,9 +10362,9 @@ msgid "Checking device and configuring HPOJ..."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing HPOJ package..."
-msgstr "Instalare pachete..."
+msgstr "Instalare pachete HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10368,9 +10380,9 @@ msgid "A command line must be entered!"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Command line"
-msgstr "Nume domeniu"
+msgstr "Linia de comandã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10380,9 +10392,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Pipe into command"
-msgstr ", folosind comanda %s"
+msgstr "Pipe în comanda"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10690,10 +10702,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the printer to which the print jobs should go."
-msgstr ""
-"Vã rog sã specificaþi la ce port este conectatã imprimanta dumneavoastrã."
+msgstr "Vã rog sã specificaþi la ce imprimantã vor fi trimise lucrãrile."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10723,11 +10734,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The following printer was auto-detected. "
-msgstr ""
-"Urmãtoarele imprimante\n"
-"\n"
+msgstr "A fost detectatã urmãtoarea imprimantã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10786,14 +10795,14 @@ msgid "Local Printer"
 msgstr "Imprimantã localã"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer \\#%s"
-msgstr ", imprimantã USB \\/*%s"
+msgstr "imprimantã USB \\#%s"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer on parallel port \\#%s"
-msgstr " pe portul paralel \\/*%s"
+msgstr "Imprimantã pe portul paralel \\#%s"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10960,14 +10969,14 @@ msgid "("
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer ..."
-msgstr "Configurez imprimanta \"%s\"..."
+msgstr "Configurez imprimanta ..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new printers..."
-msgstr "Imprimante disponibile"
+msgstr "Caut noi imprimante..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11024,51 +11033,63 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "is directly connected to your system"
-msgstr "conectatã direct la sistemul dvs."
+msgstr ""
+"Imprimanta\n"
+"\n"
+"%s%s\n"
+"este conectatã direct la sistemul dvs."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
-msgstr "conectatã direct la sistemul dvs."
+msgstr ""
+"Imprimantele\n"
+"\n"
+"%s%s\n"
+"sunt conectate direct la sistemul dvs."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
-msgstr "conectatã direct la sistemul dvs."
+msgstr ""
+"Imprimantele\n"
+"\n"
+"%s%s\n"
+"sunt conectate direct la sistemul dvs."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and %d unknown printers"
-msgstr "Adaugã o imprimantã nouã"
+msgstr "ºi %d imprimante necunoscute"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and one unknown printer"
-msgstr "Adaugã o imprimantã nouã"
+msgstr "ºi o imprimantã necunoscutã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking your system..."
-msgstr ""
+msgstr "Verific sistemul dvs..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "Reporneºte XFS"
+msgstr "Repornesc CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11081,39 +11102,41 @@ msgid "Examples for correct IPs:\n"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Modelul este corect"
+msgstr "Adresa IP introdusã nu este corectã.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server IP missing!"
-msgstr "Lipseºte numele obiectului partajat Samba"
+msgstr "Lipseºte IP-ul serverului"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
+"Introduceþi adresa IP ºi portul gazdei a cãrui imprimante doriþi sã le "
+"utilizaþi."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Accessing printers on remote CUPS servers"
-msgstr "Imprimantã conectatã la server CUPS"
+msgstr "Acesez imprimantele conectate la serverele CUPS"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected server"
-msgstr "ªterge cele selectate"
+msgstr "ªterge serverul selectat"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected server"
-msgstr "Am detectat %s"
+msgstr "Editare server selectat"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add server"
-msgstr "Adãugaþi un utilizator"
+msgstr "Adãugare server"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11126,7 +11149,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
-msgstr ""
+msgstr "Adresa IP a gazdei/reþelei:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11151,24 +11174,24 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local printers"
-msgstr "Imprimante disponibile"
+msgstr "Partajare imprimante locale"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host/network"
-msgstr "ªterge cele selectate"
+msgstr "ªterge gazda/reþeaua selectatã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Edit selected host/network"
-msgstr ""
+msgstr "Editeazã gazda/reþeaua selectatã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add host/network"
-msgstr ""
+msgstr "Adaugã gazdã/reþea"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11195,9 +11218,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Automatic correction of CUPS configuration"
-msgstr "Configurare automatã CUPS"
+msgstr "Corectare automatã a configuraþiei CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11213,34 +11236,34 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "None"
-msgstr "Gata"
+msgstr "Nimic"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Additional CUPS servers: "
-msgstr "Coadã imprimare CUPS la distanþã:"
+msgstr "Servere CUPS adiþionale:"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "No remote machines"
-msgstr "(pe aceastã maºinã)"
+msgstr "Nu existã maºini la distanþã"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom configuration"
-msgstr "Configurare alertare"
+msgstr "Configurare personalizatã"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer sharing on hosts/networks: "
-msgstr "Partajare fiºiere"
+msgstr "Partajare imprimante pe gazde/reþele: "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr ""
+msgstr "Cãutare automatã imprimante disponibile pe maºinile la distanþã"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11262,9 +11285,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer sharing configuration"
-msgstr "Configurare partajare conexiune la Internet"
+msgstr "Configurare partajare imprimante CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11788,11 +11811,11 @@ msgid "Welcome To Crackers"
 msgstr "Bun venit Piraþilor"
 
 #: ../../share/advertising/01-thanks.pl:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "Succesul MandrakeSoft se bazeazã pe principiul Programe Libere. Noul dvs. "
 "sistem de operare este rezultatul muncii colaborative a comunitãþii Linux "
@@ -11800,7 +11823,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "Bine aþi venit în lumea Open Source (surse deschise)"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -11809,10 +11832,10 @@ msgid "Thank you for choosing Mandrake Linux 9.1"
 msgstr "Mulþumim cã aþi ales Mandrake Linux 9.1"
 
 #: ../../share/advertising/02-community.pl:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "Pentru împãrtãºi cunoºtinþele dvs. ºi pentru a ajuta la dezvoltarea "
 "uneletelor Linux, participaþi la forumurile de discuþii pe care le veþi gãsi "
@@ -11820,195 +11843,152 @@ msgstr ""
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "Vreþi sã ºtiþi mai multe despre comunitatea Open Source?"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"Vreþi sã ºtiþi mai multe despre comunitatea Open Source? Implicaþi-vã în "
+"lumea programelor libere!"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "Implicaþi-vã în lumea programelor libere"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "Obþineþi cât mai mult de la Internet"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
+#: ../../share/advertising/03-software.pl:1
+#, fuzzy, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 vã permite sã folosiþi cele mai recente programe pentru "
 "manipularea sunetelor, imaginilor, fotografiilor ºi a filmelor video."
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "Împingeþi multimedia pânã la limitã!"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr ""
-"Descoperiþi cea mai actualizatã selecþie de unelte grafice ºi multimedia!"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "Jocuri"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Mandrake Linux 9.1 oferã o unealtã puternicã pentru configurarea ºi "
-"personalizarea calculatorului dumneavoastrã."
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Centrul de control Mandrake"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Configurare Mandrake Terminal Server"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1 oferã 11 interfeþe utilizator ce pot fi mofificate "
 "complet: KDE3, Gnome2, WindowMaker etc."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "Interfeþe utilizator"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"Foloseºte puterea compilatorului GNU gcc 3 precum ºi cele mai bune medii de "
-"dezvoltare cu surse deschise (Open Source)"
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1 este cea mai puternicã platformã de dezvoltare"
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "Dezvoltare simplificatã"
-
-#: ../../share/advertising/09-server.pl:1
-#, c-format
+#: ../../share/advertising/07-server.pl:1
+#, fuzzy, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "Transformaþi masina dvs. într-un server puternic cu doar câteva clicuri de "
 "mouse: Server Web, poºtã, router, firewall, de fiºiere ºi imprimare ..."
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "Transformaþi calculatorul într-un server fiabil."
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "Optimizaþi securitatea"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr ""
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
-msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
-msgstr ""
-
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
-msgid "Strategic partners"
-msgstr "Parteneri strategici"
-
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
+msgid "Get the best items with Mandrake Linux Strategic partners"
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "Optimizaþi securitatea"
+
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid ""
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
+msgstr ""
+
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
+
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -12016,50 +11996,34 @@ msgid ""
 "technical support website:"
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Deveniþi un MandrakeExpert"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr ""
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Corporaþia MandrakeExpert"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr ""
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -12267,7 +12231,7 @@ msgid "Build All Kernels -->"
 msgstr "Construieºte toate nucleele -->"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "No NIC selected!"
 msgstr "Nu e selectatã nici o interfaþã de reþea!"
 
@@ -12666,12 +12630,13 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
 "fr>"
 msgstr ""
-" Copyright (C) 2001 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita.fr>"
+" Copyright (C) 2001-2002 MandrakeSoft by DUPONT Sebastien <dupont_s\\@epita."
+"fr>"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12890,9 +12855,9 @@ msgid "Please select data to restore..."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "The following packages need to be installed:\n"
-msgstr "Urmãtoarele pachetele vor instalate"
+msgstr "Este necesarã instalarea urmãtoarelor pachetele: \n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13998,6 +13963,11 @@ msgid ""
 "you can choose\n"
 "them separately"
 msgstr ""
+"\n"
+"Selectaþi tema pt.\n"
+"lilo ºi imaginea,\n"
+"le puteþi alege\n"
+"separat."
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -14044,16 +14014,19 @@ msgid ""
 "Can't relaunch LiLo!\n"
 "Launch \"lilo\" as root in command line to complete LiLo theme installation."
 msgstr ""
+"Nu pot relansa LiLo!\n"
+"Lansaþi \"lilo\" ca root în linia de comandã pentru a termina instalarea "
+"temei LiLo."
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Make initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
-msgstr ""
+msgstr "Fã initrd 'mkinitrd -f /boot/initrd-%s.img %s'."
 
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Can't launch mkinitrd -f /boot/initrd-%s.img %s."
-msgstr ""
+msgstr "Nu pot lansa mkinitrd -f /boot/initrd-%s.img %s. "
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -14087,7 +14060,7 @@ msgstr "Copiez %s în %s"
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Backup %s to %s.old"
-msgstr ""
+msgstr "Copie de siguranþã %s în %s.old"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -14263,6 +14236,11 @@ msgstr "Unealtã de sincronizare"
 #, c-format
 msgid "First Time Wizard"
 msgstr "Asistent iniþial"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Mandrake Control Center"
+msgstr "Centrul de control Mandrake"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -14773,9 +14751,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "About"
-msgstr "Abandoneazã"
+msgstr "Despre"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -15152,6 +15130,22 @@ msgid "Interface %s (using module %s)"
 msgstr "Interfaþã %s (folosind modulul %s)"
 
 #: ../../standalone/drakgw:1
+#, fuzzy, c-format
+msgid "Net Device"
+msgstr "Serviciul xinetd"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+
+#: ../../standalone/drakgw:1
 #, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
@@ -15196,13 +15190,17 @@ msgid "enable"
 msgstr "Activeazã"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The setup of Internet connection sharing has already been done.\n"
 "It's currently disabled.\n"
 "\n"
 "What would you like to do?"
-msgstr "Configurarea a fost fãcutã deja, dar acum este dezactivatã."
+msgstr ""
+"Configurarea partajãrii conexiunii la Internet a fost fãcutã deja.\n"
+"Acum este dezactivatã.\n"
+"\n"
+"Ce doriþi sã facem?"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -15411,9 +15409,9 @@ msgid "path"
 msgstr "cale"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Location of auto_install.cfg file"
-msgstr "Creare dischetã de autoinstalare"
+msgstr "Poziþia fiºierului auto_install.cfg"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15431,14 +15429,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "No image found"
-msgstr "Nu am gãsit nici o imprimantã!"
+msgstr "Nu am gãsit nici o imagine"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation image directory"
-msgstr "Xpmac (driver de instalare ecran)"
+msgstr "Directorul de instalare a imaginilor"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15449,16 +15447,21 @@ msgid ""
 "contents.\n"
 "\n"
 msgstr ""
+"Vã rog sã indicaþi unde va fi disponibilã imaginea instalãrii.\n"
+"\n"
+"Dacã nu aveþi un director existent, copiaþi conþinutul\n"
+"de pe CD sau DVD\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "The DHCP end ip"
-msgstr ""
+msgstr "IP de final pt. DHCP"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "The DHCP start ip"
-msgstr ""
+msgstr "IP de inceput pt. DHCP"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15469,16 +15472,23 @@ msgid ""
 "The network address is %s using a netmask of %s.\n"
 "\n"
 msgstr ""
+"Serverul DHCP va permite altor calculatoare sã demareze folosind PXE în gama "
+"de adrese datã.\n"
+"\n"
+"Adresa reþelei este %s folosind masca de reþea %s.\n"
+"\n"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface %s (on network %s)"
-msgstr "Interfaþã %s (folosind modulul %s)"
+msgstr "Interfaþã %s (în reþeaua %s)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
 msgstr ""
+"Vã rog sã alegeþi ce interfaþã de reþea va fi utilizatã de cãtre serverul "
+"DHCP."
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15487,7 +15497,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -15497,14 +15507,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "Configurare server DHCPd"
+msgstr "Configurare server de instalare"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "Configurare server DHCPd"
+msgstr "Configurare server PXE"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15532,7 +15542,7 @@ msgid "Network Options"
 msgstr "Opþiuni reþea"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following options can be set to customize your\n"
 "system security. If you need an explanation, look at the help tooltip.\n"
@@ -15556,9 +15566,9 @@ msgid "Security Level:"
 msgstr "Nivel de securitate:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "(default value: %s)"
-msgstr " (Implicit: %s)"
+msgstr "(valoare implicitã: %s)"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -15585,6 +15595,27 @@ msgid ""
 "be sent to this user (username or\n"
 "            email)"
 msgstr ""
+"Standard: Acesta este nivelul de securitate recomandat pentru calculatoarele "
+"ce vor fi folosite\n"
+"pentru conectarea la Internet ca ºi client.\n"
+"\n"
+"Înaltã:   Niºte verificãri ruleazã automat în fiecare noapte în plus faþã de "
+"restricþiile standard. \n"
+"\n"
+"Ridicatã: Securitatea este suficient de înaltã pentru utilizarea "
+"calculatorului ca server ce \n"
+"poate accepta conexiuni de la mai mulþi clienþi. Dacã folosiþi calculatorul "
+"numai ca ºi client la \n"
+"Internet, ar trebui sã alegeþi un nivel de securitate mai scãzut.\n"
+"\n"
+"Paranoicã: Similar cu nivelul anterior, dar sistemul este complet închis ºi "
+"caracteristicile de \n"
+"securitate sunt la valorile lor maxime.\n"
+"\n"
+"Administrator de securitate:\n"
+"Dacã aþi ales opþiunea 'Alerte de securitate', vor fi trimise alerte de "
+"securitate cãtre acest\n"
+"utilizator (nume utilizator sau email)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -15595,6 +15626,11 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig "
 "program.  Just type \"sndconfig\" in a console."
 msgstr ""
+"\n"
+"\n"
+"\n"
+"Notã: dacã aveþi o placã de sunet ISA PnP, trebuie sã folosiþi programul "
+"sndconfig. Tastaþi \"sndconfig\" într-o consolã. "
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -15647,6 +15683,11 @@ msgstr ""
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "Selectaþi un fiºier imagine"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "Selectaþi un fiºier imagine"
 
 #: ../../standalone/draksplash:1
@@ -15925,16 +15966,18 @@ msgstr "secundar"
 msgid ""
 "Click on a device in the left tree in order to display its information here."
 msgstr ""
+"Clic pe un dispozitiv din arborele din stânga pentru a-i afiºa informaþiile "
+"aici."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown"
-msgstr "Model necunoscut"
+msgstr "Necunoscut"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "unknown"
-msgstr "Model necunoscut"
+msgstr "Necunoscut"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16008,9 +16051,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a device !"
-msgstr "Alegeþi un scanner"
+msgstr "Alegeþi un dispozitiv!"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16027,9 +16070,9 @@ msgid "Harddrake help"
 msgstr "Ajutor HardDrake"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Fields description"
-msgstr "Descriere"
+msgstr "/Descriere câmpuri"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
@@ -16042,19 +16085,19 @@ msgid "/_Quit"
 msgstr "/_Terminã"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _jazz drives"
-msgstr "Auto-detectat"
+msgstr "/Auto-detecþie unitãþi _JAZZ"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _modems"
-msgstr "Auto-detectat"
+msgstr "/Auto-detecþie _MODEM-uri"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _printers"
-msgstr "Auto-detectat"
+msgstr "/Auto-detecþie im_primante"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
@@ -16072,19 +16115,19 @@ msgid "the vendor name of the device"
 msgstr "nume dat de vânzãtor pt. dispozitiv"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "The type of bus on which the mouse is connected"
-msgstr "Pe ce port serie este conectat mouse-ul?"
+msgstr "Tip magistralã pe care este conectat mausul"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Stepping of the cpu (sub model (generation) number)"
-msgstr ""
+msgstr "Pasul pt. procesor (numãr sub-model (generaþia))"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Model stepping"
-msgstr "Configurare încãrcare"
+msgstr "Pasul modelului"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16097,9 +16140,14 @@ msgid "Processor ID"
 msgstr "ID Procesor"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "network printer port"
-msgstr "Imprimantã de reþea (TCP/Socket)"
+msgstr "Port Imprimantã de reþea"
+
+#: ../../standalone/harddrake2:1
+#, c-format
+msgid "the name of the CPU"
+msgstr "numele procesorului"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16107,24 +16155,29 @@ msgid "Name"
 msgstr "Nume"
 
 #: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the number of buttons the mouse has"
+msgstr "numãrul de butoane pe care le are mausul"
+
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Number of buttons"
 msgstr "Numãr butoane"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Official vendor name of the cpu"
-msgstr "nume dat de vânzãtor pt. dispozitiv"
+msgstr "Nume oficial dat de vânzãtor pt. procesor"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Model name"
-msgstr "Nume modul"
+msgstr "Nume model"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr ""
+msgstr "Generaþie procesor (ex. 8 pt. Pentium III,...)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16152,9 +16205,9 @@ msgid "Sub generation of the cpu"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Level"
-msgstr "nivel"
+msgstr "Nivel"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16162,9 +16215,9 @@ msgid "Format of floppies supported by the drive"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy format"
-msgstr "Formateazã"
+msgstr "Formateazã discheta"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16176,37 +16229,38 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Halt bug"
-msgstr ""
+msgstr "Eroare tip halt"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
+"Primele Pentium-uri aveau erori ºi se blocau la decodarea secvenþei F0 0F"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "F00f bug"
-msgstr ""
+msgstr "Eroare tip F00F"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the arithmetic coprocessor has an exception vector attached"
-msgstr ""
+msgstr "da, coprocesorul matematic are ataºat un vector de excepþii"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr ""
+msgstr "Dacã FPU are un vector IRQ"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "yes means the processor has an arithmetic coprocessor"
-msgstr ""
+msgstr "da, procesorul are un coprocesor matematic"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Is FPU present"
-msgstr ""
+msgstr "Existã FPU?"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16219,17 +16273,17 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Fdiv bug"
-msgstr ""
+msgstr "Eroare tip FDIV"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "CPU flags reported by the kernel"
-msgstr ""
+msgstr "Indicatorii procesorului raportaþi de nucleu"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Flags"
-msgstr ""
+msgstr "Indicatori"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16242,7 +16296,7 @@ msgid "Module"
 msgstr "Module"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr "nume dispozitiv dinamic nou generat de devfs din nucleu"
 
@@ -16262,14 +16316,14 @@ msgid "Old device file"
 msgstr "Fiºier dispozitiv vechi"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "This field describes the device"
-msgstr "acest câmp descrie dispozitivul"
+msgstr "Acest câmp descrie dispozitivul"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -16277,7 +16331,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Frequency (MHz)"
-msgstr ""
+msgstr "Frecvenþã (MHz)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16285,29 +16339,29 @@ msgid "Information level that can be obtained through the cpuid instruction"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cpuid level"
-msgstr "Nivel de securitate"
+msgstr "Nivel CPUid"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Family of the cpu (eg: 6 for i686 class)"
-msgstr ""
+msgstr "Familia procesorului (ex. 6 pt. clasa i686)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Cpuid family"
-msgstr ""
+msgstr "Familie CPUid"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr ""
+msgstr "Dacã acest procesor are eroare tip Cyrix 6x86 Coma"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Coma bug"
-msgstr ""
+msgstr "Eroare tip Coma"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16322,12 +16376,12 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Size of the (second level) cpu cache"
-msgstr ""
+msgstr "Dimensiune cache procesor (nivel doi)"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Cache size"
-msgstr "mãrimea porþiunii "
+msgstr "Mãrime cache "
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16463,11 +16517,11 @@ msgid "load setting"
 msgstr "Configurare încãrcare"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
-msgstr "Veþi fi notificaþi dacã unul din serviciile selectate nu mai ruleazã"
+msgstr "Veþi fi anunþaþi dacã unul din serviciile selectate nu mai ruleazã"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16666,14 +16720,14 @@ msgid "Please choose your mouse type."
 msgstr "Vã rog sã alegeþi tipul de mouse."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connect %s"
-msgstr "Conecteazã"
+msgstr "Conecteazã %s"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnect %s"
-msgstr "Deconecteazã"
+msgstr "Deconecteazã %s"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16703,19 +16757,19 @@ msgid "sent: "
 msgstr ""
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Local measure"
-msgstr "Fiºiere locale"
+msgstr "Mãsuri locale"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "average"
-msgstr ""
+msgstr "medie"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Color configuration"
-msgstr "Configurare alertare"
+msgstr "Configurare culori"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -16723,76 +16777,78 @@ msgid ""
 "Connection failed.\n"
 "Verify your configuration in the Mandrake Control Center."
 msgstr ""
+"Conectare eºuatã.\n"
+"Verificaþi configurarea în Centrul de control Mandrake."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection complete."
-msgstr "Vitezã conexiune"
+msgstr "Conectare reuºitã."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from the Internet complete."
-msgstr ""
+msgstr "Deconectare de la Internet reuºitã."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from the Internet failed."
-msgstr ""
+msgstr "Deconectare de la Internet eºuatã."
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connecting to the Internet "
-msgstr "Conectare la Internet"
+msgstr "Conectare la Internet "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from the Internet "
-msgstr "Conectare la Internet"
+msgstr "Deconectare de la Internet"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wait please, testing your connection..."
-msgstr "Testez conexiunea dvs..."
+msgstr "Vã rog sã aºteptaþi, testez conexiunea dvs..."
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Logs"
-msgstr ""
+msgstr "Jurnale"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Time: "
-msgstr "Tip conexiune:"
+msgstr "Timp conectare:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Receiving Speed:"
-msgstr ""
+msgstr "Vitezã recepþie:"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sending Speed:"
-msgstr "Trimit fiºierele..."
+msgstr "Vitezã transmisie:"
 
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Statistics"
-msgstr ""
+msgstr "Statistici"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Profile "
-msgstr "Profil:"
+msgstr "Profiluri"
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Monitoring"
-msgstr "Configuraþia reþelei"
+msgstr "Monitorizare reþea"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data of installed printers..."
-msgstr "Imprimante disponibile"
+msgstr "Citesc date despre imprimantele instalate..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16805,9 +16861,9 @@ msgid "This host is already in the list, it cannot be added again.\n"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Alegeþi un scanner"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16820,44 +16876,44 @@ msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Imprimante disponibile"
+msgstr "Partajarea scannerelor locale"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
 msgstr "(pe aceastã maºinã)"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "ªterge cele selectate"
+msgstr "ªterge gazda selectatã"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "Am detectat %s"
+msgstr "Editare gazdã selectatã"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Adãugaþi un utilizator"
+msgstr "Adãugare gazdã"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "These are the machines from which the scanners should be used:"
-msgstr ""
+msgstr "Acestea sunt maºinile de pe care vor fi folosite scannerele:"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Foloseºte spaþiul liber"
+msgstr "Folosirea scannerelor de la distanþã"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "(pe aceastã maºinã)"
+msgstr "Toate maºinile de la distanþã"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16877,14 +16933,14 @@ msgid "Use scanners on remote computers"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Partajare fiºiere"
+msgstr "Partajare scannere cãtre gazdele:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The scanners on this machine are available to other computers"
-msgstr ""
+msgstr "Scanerele de pe aceastã maºinã sunt disponibile altor calculatoare"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16906,62 +16962,70 @@ msgid "Re-generating list of configured scanners ..."
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new scanners ..."
-msgstr "Imprimante disponibile"
+msgstr "Caut noi scannere disponibile..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for configured scanners ..."
-msgstr "Imprimante disponibile"
+msgstr "Caut scannere configurate ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing"
-msgstr "Partajare fiºiere"
+msgstr "Partajare scannere"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
-msgstr ""
+msgstr "Adaugã manula un scanner"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search for new scanners"
-msgstr "Imprimante disponibile"
+msgstr "Cãutare de noi scannere ..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "There are no scanners found which are available on your system.\n"
-msgstr ""
+msgstr "Nu am gãrit nici un scanner disponibil pe sistemul dvs.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanner\n"
 "\n"
 "%s\n"
 "is available on your system.\n"
-msgstr "conectatã direct la sistemul dvs."
+msgstr ""
+"Urmãtorul scanner\n"
+"\n"
+"%s\n"
+"este disponibil pe sistemul dvs.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following scanners\n"
 "\n"
 "%s\n"
 "are available on your system.\n"
-msgstr "conectatã direct la sistemul dvs."
+msgstr ""
+"Urmãtoarele scannere\n"
+"\n"
+"%s\n"
+"sunt disponibile pe sistemul dvs.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your %s has been configured.\n"
 "You may now scan documents using \"XSane\" from Multimedia/Graphics in the "
 "applications menu."
 msgstr ""
 "Scannerul dvs. %s a fost configurat.\n"
-"Acum puteþi scana documente folosind ''XSane'' din meniul de aplicaþii "
+"Acum puteþi scana documente folosind \"XSane\" din meniul de aplicaþii "
 "Multimedia/Graficã."
 
 #: ../../standalone/scannerdrake:1
@@ -16970,46 +17034,45 @@ msgid "choose device"
 msgstr "Alegeþi dispozitivul"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please select the device where your %s is attached"
-msgstr ""
-"Scannerdrake nu a putut detecta scanerr-ul dvs. %s. Vã rog sã selectaþi "
-"dispozitivul la care este conectat scanner-ul dvs."
+msgstr "Vã rog sã selectaþi dispozitivul la care este conectat %s."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for scanners ..."
-msgstr "Imprimante disponibile"
+msgstr "Cãutare scannere ..."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Auto-detect available ports"
-msgstr "Auto-detectat"
+msgstr "Auto-detecþie porturi disponibile"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "(Note: Parallel ports cannot be auto-detected)"
-msgstr ""
+msgstr "(Notã: Porturile paralele nu au putut fi auto-detectate)"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The %s must be configured by printerdrake.\n"
 "You can launch printerdrake from the Mandrake Control Center in Hardware "
 "section."
 msgstr ""
 "Scanner-ul %s trebuie configurat de cãtre PrinterDrake.\n"
-"Puteþi lansa PrinterDrake în secþiunea Centrului de control Mandrake."
+"Puteþi lansa PrinterDrake în secþiunea Echipamente a Centrului de control "
+"Mandrake."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is unsupported"
-msgstr "Scanner-ul %s nu este susþinut"
+msgstr "Scanner-ul %s nu este susþinut "
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "The %s is not known by this version of Scannerdrake."
-msgstr "%s nu are susþinere în aceastã versiune a Mandrake Linux."
+msgstr "%s nu este cunoscut în aceastã versiune a programului Scannerdrake."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17017,29 +17080,29 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s nu are susþinere în aceastã versiune a Mandrake Linux."
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Port: %s"
-msgstr "Port"
+msgstr "Port: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Detected model: %s"
-msgstr "Model detectat: %s %s"
+msgstr "Model detectat: %s"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid " ("
-msgstr ""
+msgstr " ("
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Select a scanner model"
-msgstr "Alegeþi un scanner"
+msgstr "Alegeþi un model de scanner"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -17047,9 +17110,9 @@ msgid "%s is not in the scanner database, configure it manually?"
 msgstr "%s nu este în baza de date de scannere, configuraþi manual?"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s found on %s, configure it automatically?"
-msgstr "Am gãsit %s la %s, doriþi sã configuraþi?"
+msgstr "Am gãsit %s la %s, doriþi sã configurare automatã?"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -17059,7 +17122,7 @@ msgstr "Detecþia echipamentelor este în progres..."
 #: ../../standalone/service_harddrake:1
 #, c-format
 msgid "Some devices were added:\n"
-msgstr ""
+msgstr "Au fost adãugate câteva dispozitive:\n"
 
 #: ../../standalone/service_harddrake:1
 #, c-format
@@ -17132,7 +17195,7 @@ msgstr "Staþie de lucru ºtiinþificã"
 
 #: ../../share/compssUsers:999
 msgid "Scientific applications such as gnuplot"
-msgstr ""
+msgstr "Aplicþii ºtiinþifice precum gnuplot"
 
 #: ../../share/compssUsers:999
 msgid "Console Tools"
@@ -17208,14 +17271,12 @@ msgid "Apache, Pro-ftpd"
 msgstr "Apache, Pro-ftpd"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Mail"
-msgstr "Mali"
+msgstr "Poºtã"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Postfix mail server"
-msgstr "Server de mail Postfix"
+msgstr "Server de poºtã Postfix"
 
 #: ../../share/compssUsers:999
 msgid "Database"
@@ -17256,6 +17317,10 @@ msgstr "Birou"
 #: ../../share/compssUsers:999
 msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "Unelte pentru poºtã, ºtiri, Web, transfer de fiºiere ºi chat"
+
+#: ../../share/compssUsers:999
+msgid "Games"
+msgstr "Jocuri"
 
 #: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
@@ -17313,114 +17378,38 @@ msgstr "Finanþe personale"
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "Programe pentru administrarea banilor, ca gnucash"
 
-#~ msgid "DrakFloppy Error: %s"
-#~ msgstr "Eroare DrakFloppy: %s"
+#~ msgid "no network card found"
+#~ msgstr "Nu am gãsit nici o placã de reþea"
 
-#~ msgid "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
-#~ msgstr "-misc-Fixed-Medium-r-*-*-*-140-*-*-*-*-*-*,*"
+#~ msgid "Get the most from the Internet"
+#~ msgstr "Obþineþi cât mai mult de la Internet"
 
-#~ msgid "Launch Aurora at boot time"
-#~ msgstr "Lanseazã Aurora la pornire"
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "Împingeþi multimedia pânã la limitã!"
 
-#~ msgid "Traditional Gtk+ Monitor"
-#~ msgstr "Monitor tradiþional Gtk+"
-
-#~ msgid "Traditional Monitor"
-#~ msgstr "Monitor tradiþional"
-
-#~ msgid "NewStyle Monitor"
-#~ msgstr "Monitor stil nou"
-
-#~ msgid "NewStyle Categorizing Monitor"
-#~ msgstr "Categorisire monitor stil nou"
-
-#~ msgid "Secure Connection"
-#~ msgstr "Conexiune securizatã"
-
-#~ msgid "FTP Connection"
-#~ msgstr "Conexiune FTP"
-
-#~ msgid "Mail/Groupware/News"
-#~ msgstr "Poºtã/Programe de lucru în grup/ªtiri"
-
-#~ msgid "Postfix mail server, Inn news server"
-#~ msgstr "Server de mail Postfix, server de ºtiri Inn"
-
-#~ msgid "/Options"
-#~ msgstr "/Opþiuni"
-
-#, fuzzy
-#~ msgid "/Autodetect jazz drives"
-#~ msgstr "Auto-detectat"
-
-#, fuzzy
-#~ msgid "/Autodetect modems"
-#~ msgstr "Auto-detectat"
-
-#, fuzzy
-#~ msgid "/Autodetect printers"
-#~ msgstr "Auto-detectat"
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr ""
+#~ "Descoperiþi cea mai actualizatã selecþie de unelte grafice ºi multimedia!"
 
 #~ msgid ""
-#~ "The partition you've selected to add as root (/) is physically located "
-#~ "beyond\n"
-#~ "the 1024th cylinder of the hard drive, and you have no /boot partition.\n"
-#~ "If you plan to use the LILO boot manager, be careful to add a /boot "
-#~ "partition"
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
 #~ msgstr ""
-#~ "Partiþia pe care aþi selecþionat-o pentru adãugare ca root (/) e fizic "
-#~ "localizatã dincolo\n"
-#~ "de cilindru 1024 pe discul fix ºi nu aveþi nici o partiþie /boot.\n"
-#~ "Dacã planificaþi sã folosiþi LILO ca gestionar de demaraj, asiguraþi-vã "
-#~ "cã aþi adãugat o partiþie /boot."
+#~ "Mandrake Linux 9.1 oferã o unealtã puternicã pentru configurarea ºi "
+#~ "personalizarea calculatorului dumneavoastrã."
+
+#~ msgid "User interfaces"
+#~ msgstr "Interfeþe utilizator"
 
 #~ msgid ""
-#~ "Sorry I won't accept to create /boot so far onto the drive (on a cylinder "
-#~ "> 1024).\n"
-#~ "Either you use LILO and it won't work, or you don't use LILO and you "
-#~ "don't need /boot"
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
 #~ msgstr ""
-#~ "Îmi pare rãu dar nu voi accepta sã creez /boot atît de departe pe disc "
-#~ "(pe un cilindru > 1024).\n"
-#~ "Sau folosiþi LILO ºi nu va funcþiona, sau nu folosiþi LILO ºi atunci nu\n"
-#~ "aveþi nevoie de /boot"
+#~ "Foloseºte puterea compilatorului GNU gcc 3 precum ºi cele mai bune medii "
+#~ "de dezvoltare cu surse deschise (Open Source)"
 
-#~ msgid "Upgrade"
-#~ msgstr "Actualizare"
+#~ msgid "Development simplified"
+#~ msgstr "Dezvoltare simplificatã"
 
-#~ msgid "Preparing Printerdrake..."
-#~ msgstr "Pregãtesc PrinterDrake..."
-
-#~ msgid "Reading printer data ..."
-#~ msgstr "Citesc datele despre imprimante..."
-
-#~ msgid ""
-#~ "You must indicate where you wish to place the information required to "
-#~ "boot\n"
-#~ "GNU/Linux.\n"
-#~ "\n"
-#~ "Unless you know exactly what you are doing, choose \"First sector of "
-#~ "drive\n"
-#~ "(MBR)\"."
-#~ msgstr ""
-#~ "Va trebui sã indicaþi unde sã puneþi informaþia necesarã pentru a porni "
-#~ "GNU/Linux.\n"
-#~ "\n"
-#~ "În general alegeþi \"Primul sector al discului (MBR)\". Alegeþi altceva "
-#~ "doar dacã ºtiþi ce faceþi."
-
-#~ msgid "Please be patient. This operation can take several minutes."
-#~ msgstr "Vã rog aºteptaþi. Aceastã operaþie poate dura mai multe minute."
-
-#~ msgid "quit"
-#~ msgstr "Ieºire"
-
-#, fuzzy
-#~ msgid "save"
-#~ msgstr "Salveazã"
-
-#~ msgid "Detecting devices ..."
-#~ msgstr "Detecþia perifericelor..."
-
-#~ msgid "Test ports"
-#~ msgstr "Test porturi"
+#~ msgid "Strategic partners"
+#~ msgstr "Parteneri strategici"

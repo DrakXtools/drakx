@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2002-12-05 19:52+0100\n"
-"PO-Revision-Date: 2003-02-28 13:46+0100\n"
+"POT-Creation-Date: 2003-03-07 03:05+0100\n"
+"PO-Revision-Date: 2003-02-28 22:50+0100\n"
 "Last-Translator: YAMAGATA Hiroo <hiyori13@alum.mit.edu>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1086,80 +1086,70 @@ msgstr ""
 "消えて回復できません。注意してください。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
-"or all of the following entries:\n"
+"or all of the following entries. Each entry is made up of the configuration\n"
+"item to be configured, followed by a quick summary of the current\n"
+"configuration. Click on the corresponding \"Configure\" button to change\n"
+"that.\n"
+"\n"
+" * \"Keyboard\": check the current keyboard map configuration and change\n"
+"that if necessary.\n"
+"\n"
+" * \"Country\": check the current country selection. If you are not in this\n"
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list.\n"
+"\n"
+" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+"country you have chosen. You can click on the \"Configure\" button here if\n"
+"this is not correct.\n"
 "\n"
 " * \"Mouse\": check the current mouse configuration and click on the button\n"
 "to change it if necessary.\n"
 "\n"
-" * \"Keyboard\": check the current keyboard map configuration and click on\n"
-"the button to change that if necessary.\n"
-"\n"
-" * \"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one.\n"
-"\n"
-" * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
-"primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in a country to which the chosen language\n"
-"corresponds. You may need to click on the \"Timezone\" button to\n"
-"configure the clock for the correct timezone.\n"
-"\n"
-" * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+" * \"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation.\n"
-"\n"
-" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
-"click that button. This should be reserved to advanced users.\n"
-"\n"
-" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
-"interface in \"800x600\" resolution. If that does not suits you, click on\n"
-"the button to reconfigure your graphical interface.\n"
-"\n"
-" * \"Network\": If you want to configure your Internet or local network\n"
-"access now, you can by clicking on this button.\n"
 "\n"
 " * \"Sound card\": if a sound card is detected on your system, it is\n"
 "displayed here. If you notice the sound card displayed is not the one that\n"
 "is actually present on your system, you can click on the button and choose\n"
 "another driver.\n"
 "\n"
+" * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+"interface in \"800x600\" or \"1024x768\" resolution. If that does not suits\n"
+"you, click on \"Configure\" to reconfigure your graphical interface.\n"
+"\n"
 " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
-"here. If you have a TV card and it is not detected, click on the button to\n"
-"try to configure it manually.\n"
+"here. If you have a TV card and it is not detected, click on \"Configure\"\n"
+"to try to configure it manually.\n"
 "\n"
 " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
-"displayed here. You can click on the button to change the parameters\n"
-"associated with the card."
+"displayed here. You can click on \"Configure\" to change the parameters\n"
+"associated with the card.\n"
+"\n"
+" * \"Network\": If you want to configure your Internet or local network\n"
+"access now.\n"
+"\n"
+" * \"Security Level\": this entry offers you to redefine the security level\n"
+"as set in a previous step ().\n"
+"\n"
+" * \"Firewall\": if you plan to connect your machine to the Internet, it's\n"
+"a good idea to protect you from intrusions by setting up a firewall.\n"
+"Consult the corresponding section of the ``Starter Guide'' for details\n"
+"about firewall settings.\n"
+"\n"
+" * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+"click that button. This should be reserved to advanced users.\n"
+"\n"
+" * \"Services\": you'll be able here to control finely which services will\n"
+"be run on your machine. If you plan to use this machine as a server it's a\n"
+"good idea to review this setup."
 msgstr ""
-"あなたのマシンに関する各種のパラメータを示します。ハードウェアにも\n"
-"よりますが、以下のような項目が出てくるはずです:\n"
-"\n"
-" * 「マウス」: マウス。現在のマウス設定を見て、必要ならボタンをクリック\n"
-"して変更します。\n"
-"\n"
-" * 「キーボード」：キーボード。いまのキーボードの割付設定を見て、必要なら\n"
-"ボタンをクリックして変更します。\n"
-"\n"
-" * 「時間帯」: 時間帯　DrakX はデフォルトで、あなたの選んだ言語に応じて\n"
-"時間帯を推定します。でもここでもキーボードの選択と同じで、言語とは\n"
-"ちがう国にいるときには、時間帯ボタンを押して、自分の時間帯にあわせた\n"
-"設定にできます。\n"
-"\n"
-" * 「プリンタ」: 「プリンタなし」ボタンを押すと、プリンタ設定ウィザード\n"
-"が開きます。\n"
-"\n"
-" * 「サウンドカード」: サウンドカードが検出されたらここに表示されます。\n"
-"インストール時には変更できません。\n"
-"\n"
-" * 「TV カード」: TV カードが検出されたらここに表示されます。\n"
-"インストール時には変更できません。\n"
-"\n"
-" * 「ISDN カード」: ISDN カードが検出されたらここに表示されます。\n"
-"ボタンをクリックすると関連パラメータが変えられます。"
 
 #: ../../help.pm:1
 #, c-format
@@ -1335,13 +1325,8 @@ msgid ""
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
 "found, DrakX will automatically install the appropriate driver.\n"
 "\n"
-"Because hardware detection is not foolproof, DrakX will ask you if you have\n"
-"a PCI SCSI installed. Clicking \" Yes\" will display a list of SCSI cards\n"
-"to choose from. Click \"No\" if you know that you have no SCSI hardware in\n"
-"your machine. If you're not sure, you can check the list of hardware\n"
-"detected in your machine by selecting \"See hardware info \" and clicking\n"
-"the \"Next ->\". Examine the list of hardware and then click on the \"Next\n"
-"->\" button to return to the SCSI interface question.\n"
+"Because hardware detection is not foolproof, DrakX may fail in detecting\n"
+"your hard drives. If so, You'll have to specify your hardware by hand.\n"
 "\n"
 "If you had to manually specify your PCI SCSI adapter, DrakX will ask if you\n"
 "want to configure options for it. You should allow DrakX to probe the\n"
@@ -1386,7 +1371,7 @@ msgid ""
 "if you have a direct connection to your printer, you want to be able to\n"
 "panic out of printer jams, and you do not have networked printers. (\"pdq\n"
 "\" will handle only very simple network cases and is somewhat slow when\n"
-"used with networks.) It's recommended that you use \"pdq \" if this is your\n"
+"used with networks.) It's recommended that you use \"pdq\" if this is your\n"
 "first experience with GNU/Linux.\n"
 "\n"
 " * \"CUPS\" - `` Common Unix Printing System'', is an excellent choice for\n"
@@ -1431,7 +1416,7 @@ msgstr ""
 "CUPSにしましょう。"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
 "automated. DrakX will analyze the disk boot sector and act according to\n"
@@ -1450,55 +1435,8 @@ msgid ""
 "\"Boot device\": in most cases, you will not change the default (\"First\n"
 "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
-"(\"On Floppy\").\n"
-"\n"
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
+"(\"On Floppy\")."
 msgstr ""
-"Mandrake Linux CDROM にはレスキューモードが組み込んであります。これを\n"
-"使うには CDROM から起動して、起動時に >>F1<< キーを押し、プロンプトで\n"
-">>rescue<< とタイプすることです。でも、CDROMから起動できない場合には、\n"
-"2種類の場合にここに戻ってくる必要があるでしょう:\n"
-"\n"
-" * ブートローダのインストール時には、drakX は主ディスクのブートセクタ\n"
-" (MBR) を書き換えます（別のブートマネージャを使っていない限り）。こう\n"
-"することで、ウィンドウズと GNU/Linux のどっちでも起動できるようになり\n"
-"ます（システムにウィンドウズが入っている場合）。\n"
-"　ウィンドウズをインストールしなおすと、マイクロソフトのインストール\n"
-"プロセスがブートセクタを書き換えるので、GNU/Linuxが起動できません!\n"
-"\n"
-" * もし何か問題が起きて、ハードディスクから GNU/Linux を起動できない\n"
-"場合には、GNU/Linux を起動するにはこのフロッピーしか手がありません。\n"
-"このディスクには、停電とかちょっとしたタイプミス、パスワードの間違い\n"
-"などによるクラッシュからシステムを回復させるのに使える、各種のツール\n"
-"が入っています。\n"
-"\n"
-"「はい」と応えたら、フロッピーディスクをドライブに入れろと\n"
-"要求されます。挿入するフロッピーディスクは、空か、不要なデータしか\n"
-"入っていないものにしましょう。フォーマットする必要はありません。\n"
-"DrakXが完全にそれを書き換えます。"
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -1730,9 +1668,14 @@ msgid ""
 "as the default language in the tree view and \"Espanol\" in the Advanced\n"
 "section.\n"
 "\n"
-"Note that you're not limited to choosing a single additional language. Once\n"
-"you have selected additional locales, click the \"Next ->\" button to\n"
-"continue.\n"
+"Note that you're not limited to choosing a single additional language. You\n"
+"may choose several ones, or even install them all by selecting the \"All\n"
+"languages\" box. Selecting support for a language means translations,\n"
+"fonts, spell checkers, etc. for that language will be installed.\n"
+"Additionally, the \"Use Unicode by default\" checkbox allows to force the\n"
+"system to use unicode (UTF-8). Note however that this is an experimental\n"
+"feature. If you select different languages requiring different encoding the\n"
+"unicode support will be installed anyway.\n"
 "\n"
 "To switch between the various languages installed on the system, you can\n"
 "launch the \"/usr/sbin/localedrake\" command as \"root\" to change the\n"
@@ -1807,7 +1750,9 @@ msgstr ""
 #, c-format
 msgid ""
 "\"Country\": check the current country selection. If you are not in this\n"
-"country, click on the button and choose another one."
+"country, click on the \"Configure\" button and choose another one. If your\n"
+"country is not in the first list shown, click the \"More\" button to get\n"
+"the complete country list."
 msgstr ""
 
 #: ../../help.pm:1
@@ -2024,9 +1969,7 @@ msgid ""
 "for the machine. As a rule of thumb, the security level should be set\n"
 "higher if the machine will contain crucial data, or if it will be a machine\n"
 "directly exposed to the Internet. The trade-off of a higher security level\n"
-"is generally obtained at the expense of ease of use. Refer to the \"msec\"\n"
-"chapter of the ``Command Line Manual'' to get more information about the\n"
-"meaning of these levels.\n"
+"is generally obtained at the expense of ease of use.\n"
 "\n"
 "If you do not know what to choose, keep the default option."
 msgstr ""
@@ -2044,14 +1987,14 @@ msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
 "fixed, security issues resolved. To allow you to benefit from these\n"
-"updates, you are now able to download them from the Internet. Choose\n"
-"\"Yes\" if you have a working Internet connection, or \"No\" if you prefer\n"
-"to install updated packages later.\n"
+"updates, you are now able to download them from the Internet. Check \"Yes\"\n"
+"if you have a working Internet connection, or \"No\" if you prefer to\n"
+"install updated packages later.\n"
 "\n"
-"Choosing \"Yes\" displays a list of places from which updates can be\n"
+"Choosing \"Yes\" will display a list of places from which updates can be\n"
 "retrieved. Choose the one nearest you. A package-selection tree will\n"
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
-"the selected package( s), or \"Cancel\" to abort."
+"the selected package(s), or \"Cancel\" to abort."
 msgstr ""
 "Mandrake Linux をあなたがインストールする頃には、たぶんいくつかのパッケージ\n"
 "が更新されているはずです。バグフィクスが行われたり、セキュリティ問題が解決\n"
@@ -2124,7 +2067,7 @@ msgid ""
 "the bootloader menu, giving you the choice of which operating system to\n"
 "start.\n"
 "\n"
-"The \"Advanced\" button (in Expert mode only) shows two more buttons to:\n"
+"The \"Advanced\" button shows two more buttons to:\n"
 "\n"
 " * \"generate auto-install floppy\": to create an installation floppy disk\n"
 "that will automatically perform a whole installation without the help of an\n"
@@ -2208,7 +2151,7 @@ msgid ""
 " * \"Use the free space on the Windows partition\": if Microsoft Windows is\n"
 "installed on your hard drive and takes all the space available on it, you\n"
 "have to create free space for Linux data. To do so, you can delete your\n"
-"Microsoft Windows partition and data (see `` Erase entire disk'' solution)\n"
+"Microsoft Windows partition and data (see ``Erase entire disk'' solution)\n"
 "or resize your Microsoft Windows FAT partition. Resizing can be performed\n"
 "without the loss of any data, provided you previously defragment the\n"
 "Windows partition and that it uses the FAT format. Backing up your data is\n"
@@ -2233,13 +2176,13 @@ msgid ""
 "\n"
 "   !! If you choose this option, all data on your disk will be lost. !!\n"
 "\n"
-" * \"Custom disk partitionning\": choose this option if you want to\n"
-"manually partition your hard drive. Be careful -- it is a powerful but\n"
-"dangerous choice and you can very easily lose all your data. That's why\n"
-"this option is really only recommended if you have done something like this\n"
-"before and have some experience. For more instructions on how to use the\n"
-"DiskDrake utility, refer to the ``Managing Your Partitions '' section in\n"
-"the ``Starter Guide''."
+" * \"Custom disk partitioning\": choose this option if you want to manually\n"
+"partition your hard drive. Be careful -- it is a powerful but dangerous\n"
+"choice and you can very easily lose all your data. That's why this option\n"
+"is really only recommended if you have done something like this before and\n"
+"have some experience. For more instructions on how to use the DiskDrake\n"
+"utility, refer to the ``Managing Your Partitions '' section in the\n"
+"``Starter Guide''."
 msgstr ""
 "さてこんどは、ハードディスク上でMandrake Linux OS をどこにインストール\n"
 "するか選ぶことになります。もしハードディスクが空か、すでに別の OS が\n"
@@ -2304,57 +2247,6 @@ msgstr ""
 "  このオプションを選びましょう。でも、注意してください。強力なだけに、\n"
 "  危険な選択でもあります。ディスク上の全データをあっさり消してしまえます。\n"
 "  よくよくわかったうえでなければ、これは選ばないでください。"
-
-#: ../../help.pm:1
-#, fuzzy, c-format
-msgid ""
-"Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
-"handy.\n"
-"\n"
-"The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it by\n"
-"booting the CD-ROM, pressing the >> F1<< key at boot and typing >>rescue<<\n"
-"at the prompt. If your computer cannot boot from the CD-ROM, there are at\n"
-"least two situations where having a boot floppy is critical:\n"
-"\n"
-" * when installing the bootloader, DrakX will rewrite the boot sector (MBR)\n"
-"of your main disk (unless you are using another boot manager), to allow you\n"
-"to start up with either Windows or GNU/Linux (assuming you have Windows on\n"
-"your system). If at some point you need to reinstall Windows, the Microsoft\n"
-"install process will rewrite the boot sector and remove your ability to\n"
-"start GNU/Linux!\n"
-"\n"
-" * if a problem arises and you cannot start GNU/Linux from the hard disk,\n"
-"this floppy will be the only means of starting up GNU/Linux. It contains a\n"
-"fair number of system tools for restoring a system that has crashed due to\n"
-"a power failure, an unfortunate typing error, a forgotten root password, or\n"
-"any other reason.\n"
-"\n"
-"If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
-"floppy disk must be blank or have non-critical data on it - DrakX will\n"
-"format the floppy and will rewrite the whole disk."
-msgstr ""
-"Mandrake Linux CDROM にはレスキューモードが組み込んであります。これを\n"
-"使うには CDROM から起動して、起動時に >>F1<< キーを押し、プロンプトで\n"
-">>rescue<< とタイプすることです。でも、CDROMから起動できない場合には、\n"
-"2種類の場合にここに戻ってくる必要があるでしょう:\n"
-"\n"
-" * ブートローダのインストール時には、drakX は主ディスクのブートセクタ\n"
-" (MBR) を書き換えます（別のブートマネージャを使っていない限り）。こう\n"
-"することで、ウィンドウズと GNU/Linux のどっちでも起動できるようになり\n"
-"ます（システムにウィンドウズが入っている場合）。\n"
-"　ウィンドウズをインストールしなおすと、マイクロソフトのインストール\n"
-"プロセスがブートセクタを書き換えるので、GNU/Linuxが起動できません!\n"
-"\n"
-" * もし何か問題が起きて、ハードディスクから GNU/Linux を起動できない\n"
-"場合には、GNU/Linux を起動するにはこのフロッピーしか手がありません。\n"
-"このディスクには、停電とかちょっとしたタイプミス、パスワードの間違い\n"
-"などによるクラッシュからシステムを回復させるのに使える、各種のツール\n"
-"が入っています。\n"
-"\n"
-"「はい」と応えたら、フロッピーディスクをドライブに入れろと\n"
-"要求されます。挿入するフロッピーディスクは、空か、不要なデータしか\n"
-"入っていないものにしましょう。フォーマットする必要はありません。\n"
-"DrakXが完全にそれを書き換えます。"
 
 #: ../../help.pm:1
 #, c-format
@@ -2501,7 +2393,8 @@ msgstr ""
 #: ../../help.pm:1
 #, fuzzy, c-format
 msgid ""
-"This step is used to choose which services you wish to start at boot time.\n"
+"This dialog is used to choose which services you wish to start at boot\n"
+"time.\n"
 "\n"
 "DrakX will list all the services available on the current installation.\n"
 "Review each one carefully and uncheck those which are not always needed at\n"
@@ -2533,7 +2426,7 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid ""
-"\"Printer\": clicking on the \"No Printer\" button will open the printer\n"
+"\"Printer\": clicking on the \"Configure\" button will open the printer\n"
 "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
@@ -4110,6 +4003,12 @@ msgstr "サービス"
 msgid "System"
 msgstr "システム"
 
+#. -PO: example: lilo-graphic on /dev/hda1
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "%s on %s"
+msgstr "ポート"
+
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
 msgid "Bootloader"
@@ -4542,6 +4441,11 @@ msgstr "マウスポート"
 #, c-format
 msgid "Please choose your type of mouse."
 msgstr "マウスの型はなんですか？"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Encryption key for %s"
+msgstr "暗号鍵"
 
 #: ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
@@ -7141,9 +7045,9 @@ msgid "Exit install"
 msgstr "導入作業を終了"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
-msgstr "システム更新をインストール"
+msgstr "システム更新"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7171,9 +7075,9 @@ msgid "Add a user"
 msgstr "ユーザの登録"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "パスワードなし"
+msgstr "rootのパスワード"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7758,8 +7662,8 @@ msgstr "削除"
 msgid "Create"
 msgstr "作成"
 
-#: ../../diskdrake/hd_gtk.pm:1
 # "FS" instead  of "fairuistemu" because we must keep label narrow
+#: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Filesystem types:"
 msgstr "FS タイプ:"
@@ -7789,8 +7693,8 @@ msgstr "SunOS"
 msgid "Swap"
 msgstr "スワップ"
 
-#: ../../diskdrake/hd_gtk.pm:1
 # we must keep label narrow, full katakana label is too wide
+#: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Journalised FS"
 msgstr "Journalised FS"
@@ -9297,11 +9201,6 @@ msgstr "ネットワークの設定"
 
 #: ../../network/ethernet.pm:1
 #, c-format
-msgid "no network card found"
-msgstr "ネットワークカードが見付かりません"
-
-#: ../../network/ethernet.pm:1
-#, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
 msgstr "インターネット接続に使うネットワークアダプタを選びましょう"
@@ -10584,19 +10483,6 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"The following printers are configured. Double-click on a printer to change "
-"its settings; to make it the default printer; to view information about it; "
-"or to make a printer on a remote CUPS server available for Star Office/"
-"OpenOffice.org/GIMP."
-msgstr ""
-"以下のプリンタが設定されています。設定を変更したいプリンタをダブルクリックし"
-"てください。デフォルトプリンタにしたり、その情報を見たり、リモートのCUPS サー"
-"バ上のプリンタを Star Office/OpenOffice.org/GIMPで使えるようにする場合もそう"
-"です。"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "Printing system: "
 msgstr "印刷システム:"
 
@@ -11217,6 +11103,11 @@ msgstr "オプション %s は数字です！"
 #, c-format
 msgid "Option %s must be an integer number!"
 msgstr "オプション %s は整数です！"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Printer default settings"
+msgstr "プリンタの機種を選ぶ"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13042,8 +12933,8 @@ msgstr "悪質なクラッカー様も侵入しほうだい"
 #, c-format
 msgid ""
 "The success of MandrakeSoft is based upon the principle of Free Software. "
-"Your new operating system is the result of collaborative work on the part of "
-"the worldwide Linux Community"
+"Your new operating system is the result of collaborative work of the "
+"worldwide Linux Community."
 msgstr ""
 "MandrakeSoft の成功は、フリーソフトの原理に根ざしたものです。あなたの新オペ"
 "レーティングシステムは、全世界の Linux コミュニティによる共同作業の成果なので"
@@ -13051,7 +12942,7 @@ msgstr ""
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
-msgid "Welcome to the Open Source world"
+msgid "Welcome to the Open Source world."
 msgstr "オープンソースの世界へようこそ"
 
 #: ../../share/advertising/01-thanks.pl:1
@@ -13062,220 +12953,165 @@ msgstr "Mandrake Linux 9.1をお選びいただきましてありがとうございます"
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid ""
-"To share your own knowledge and help build Linux tools, join the discussion "
-"forums you'll find on our \"Community\" webpages"
+"To share your own knowledge and help build Linux software, join our "
+"discussion forums on our \"Community\" webpages."
 msgstr ""
 "自分の知識を共有してLinuxツールの構築を助けるには、「コミュニティ」ウェブペー"
 "ジにあるフォーラムに参加しましょう。"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Want to know more about the Open Source community?"
-msgstr "オープンソースコミュニティについてもっと詳しく知りたいですか？"
+msgid ""
+"Want to know more and to contribute to the Open Source community? Get "
+"involved in the Free Software world!"
+msgstr ""
+"オープンソースコミュニティについてもっと詳しく知りたいですか？ フリーソフトの"
+"世界に参加しましょう"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
-msgid "Get involved in the Free Software world"
-msgstr "フリーソフトの世界に参加しましょう"
-
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 has selected the best software for you. Surf the Web and "
-"view animations with Mozilla and Konqueror, or read your mail and handle "
-"your personal information with Evolution and Kmail"
+msgid "Build the future of Linux!"
 msgstr ""
-"Mandrake Linux 9.1 は最高のソフトを取りそろえています。ウェブをサーフして、動"
-"画を見るならMozilla と Konqueror があるし、メールの送受信と個人情報管理は"
-"Evolution と Kmailが使えます。"
 
-#: ../../share/advertising/03-internet.pl:1
-#, c-format
-msgid "Get the most from the Internet"
-msgstr "インターネットを最大限に活用"
-
-#: ../../share/advertising/04-multimedia.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 enables you to use the very latest software to play audio "
-"files, edit and handle your images or photos, and play videos"
+"And, of course, push multimedia to its limits with the very latest software "
+"to play videos, audio files and to handle your images or photos."
 msgstr ""
 "Mandrake Linux 9.1 では、最新ソフトで音楽や音声ファイルの再生をしたり、画像や"
 "写真を管理したり、テレビを見たりできます。"
 
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Push multimedia to its limits!"
-msgstr "マルチメディアを使い倒しましょう！"
-
-#: ../../share/advertising/04-multimedia.pl:1
-#, c-format
-msgid "Discover the most up-to-date graphical and multimedia tools!"
-msgstr "最新のグラフィックやマルチメディアツールをどうぞ"
-
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-"strategy, ..."
+"Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
+"Kmail, create your documents with OpenOffice.org."
 msgstr ""
-"Mandrake Linux 9.1 には、最高のオープンソースゲームがついてきます。アーケード"
-"型、アクション型、カードゲーム、スポーツ、戦略ゲーム..."
 
-#: ../../share/advertising/05-games.pl:1
+#: ../../share/advertising/03-software.pl:1
 #, c-format
-msgid "Games"
-msgstr "ゲーム"
-
-#: ../../share/advertising/06-mcc.pl:1
-#, c-format
-msgid ""
-"Mandrake Linux 9.1 provides a powerful tool to fully customize and configure "
-"your machine"
+msgid "MandrakeSoft has selected the best software for you"
 msgstr ""
-"Mandrake Linux 9.1 コントロールセンターは、Mandrake システムのカスタマイズと"
-"設定のためのワンストップパネル集です。"
 
-#: ../../share/advertising/06-mcc.pl:1 ../../standalone/drakbug:1
-#, c-format
-msgid "Mandrake Control Center"
-msgstr "Mandrake コントロールセンター"
-
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/04-configuration.pl:1
 #, c-format
 msgid ""
-"Mandrake Linux 9.1 provides you with 11 user interfaces that can be fully "
-"modified: KDE 3, Gnome 2, WindowMaker, ..."
+"Mandrake Linux 9.1 provides you with the Mandrake Control Center, a powerful "
+"tool to fully adapt your computer to the use you make of it. Configure and "
+"customize elements such as the security level, the peripherals (screen, "
+"mouse, keyboard...), the Internet connection and much more!"
+msgstr ""
+
+#: ../../share/advertising/04-configuration.pl:1
+#, fuzzy, c-format
+msgid "Mandrake's multipurpose configuration tool"
+msgstr "Mandrakeターミナルサーバ設定"
+
+#: ../../share/advertising/05-desktop.pl:1
+#, fuzzy, c-format
+msgid ""
+"Perfectly adapt your computer to your needs thanks to the 11 available "
+"Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
+"2.2, Window Maker, ..."
 msgstr ""
 "Mandrake Linux 9.1には11種類のユーザインターフェースがついてきて、どれも好き"
 "なように変更できます: KDE 3, Gnome 2, WindowMaker, ..."
 
-#: ../../share/advertising/07-desktop.pl:1
+#: ../../share/advertising/05-desktop.pl:1
 #, c-format
-msgid "User interfaces"
-msgstr "ユーザインターフェイス"
+msgid "A customizable environment"
+msgstr ""
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
 msgid ""
-"Use the full power of the GNU gcc 3 compiler as well as the best Open Source "
-"development environments"
+"To modify and to create in different languages such as Perl, Python, C and C+"
+"+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
+"development environments."
 msgstr ""
-"GNU gcc 3 コンパイラをはじめ、最高のオープンソース開発環境の威力を使いましょ"
-"う。"
 
-#: ../../share/advertising/08-development.pl:1
+#: ../../share/advertising/06-development.pl:1
 #, c-format
-msgid "Mandrake Linux 9.1 is the ultimate development platform"
+msgid "Mandrake Linux 9.1: the ultimate development platform"
 msgstr "Mandrake Linux 9.1は究極の開発用プラットホームです"
 
-#: ../../share/advertising/08-development.pl:1
-#, c-format
-msgid "Development simplified"
-msgstr "開発も楽になりました"
-
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
 msgid ""
-"Transform your machine into a powerful Linux server with a few clicks of "
-"your mouse: Web server, mail, firewall, router, file and print server, ..."
+"Transform your computer into a powerful Linux server: Web server, mail, "
+"firewall, router, file and print server (etc.) are just a few clicks away!"
 msgstr ""
 "マウスをほんの数クリックするだけで、あなたのマシンは強力なサーバに早変わり！"
 "ウェブサーバ、メール、ファイアーウォール、ルータ、ファイルサーバに印刷サーバ"
 "などもろもろです。"
 
-#: ../../share/advertising/09-server.pl:1
+#: ../../share/advertising/07-server.pl:1
 #, c-format
-msgid "Turn your machine into a reliable server"
+msgid "Turn your computer into a reliable server"
 msgstr "マシンを更新ライサーバに"
 
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "This product is available on MandrakeStore website"
-msgstr "この製品はMandrakeStoreウェブサイト上にあります"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"This firewall product includes network features that allow you to fulfill "
-"all your security needs"
-msgstr ""
-"このファイアーウォール製品を使えば、セキュリティニーズをすべて満たせるネット"
-"ワーク機能が手に入ります。"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid ""
-"The MandrakeSecurity range includes the Multi Network Firewall product (M.N."
-"F.)"
-msgstr ""
-"MandrakeSecurity 製品には Multi Network Firewall 製品 (M.N.F.)もあります"
-
-#: ../../share/advertising/10-mnf.pl:1
-#, c-format
-msgid "Optimize your security"
-msgstr "セキュリティの最適化"
-
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
 msgid ""
 "Our full range of Linux solutions, as well as special offers on products and "
-"other \"goodies,\" are available online on our e-store:"
+"other \"goodies\", are available on our e-store:"
 msgstr ""
 "フルレンジのLinux ソリューションや、製品や各種アイテムの特価販売が、弊社のオ"
 "ンライン e-商店で手に入ります。"
 
-#: ../../share/advertising/11-mdkstore.pl:1
+#: ../../share/advertising/08-store.pl:1
 #, c-format
-msgid "The official MandrakeSoft store"
+msgid "The official MandrakeSoft Store"
 msgstr "公式MandrakeSoft商店"
 
-#: ../../share/advertising/12-mdkstore.pl:1
-#, c-format
+#: ../../share/advertising/09-mdksecure.pl:1
+#, fuzzy, c-format
 msgid ""
-"MandrakeSoft works alongside a selection of companies offering professional "
-"solutions compatible with Mandrake Linux. A list of these partners is "
-"available on the MandrakeStore"
+"Enhance your computer performance with the help of a selection of partners "
+"offering professional solutions compatible with Mandrake Linux"
 msgstr ""
 "MandrakeSoft は各種の企業と提携してMandrake Linuxと互換性のある高度なソリュー"
 "ションを提供します。こうしたパートナーの一覧もMandrakeStoreにあります"
 
-#: ../../share/advertising/12-mdkstore.pl:1
+#: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
-msgid "Strategic partners"
-msgstr "戦略パートナー"
+msgid "Get the best items with Mandrake Linux Strategic partners"
+msgstr ""
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
 msgid ""
-"Whether you choose to teach yourself online or via our network of training "
-"partners, the Linux-Campus catalogue prepares you for the acknowledged LPI "
-"certification program (worldwide professional technical certification)"
+"MandrakeSoft has designed exclusive tools to create the most secured Linux "
+"version ever: Draksec, a system security management tool, and a strong "
+"firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
-"オンラインにせよネットワーク研修パートナーを通じてにせよ、Linux-Campus カタロ"
-"グは、認知度の高いLPI認定プログラム（世界的専門技術資格の取得準備の自習に最適"
-"です"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/10-security.pl:1
 #, c-format
-msgid "Certify yourself on Linux"
-msgstr "Linuxの技能認定を得よう"
+msgid "Optimize your security by using Mandrake Linux"
+msgstr "セキュリティの最適化"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
+#, c-format
+msgid "This product is available on the MandrakeStore Web site."
+msgstr "この製品はMandrakeStoreウェブサイト上にあります"
+
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid ""
-"The training program has been created to respond to the needs of both end "
-"users and experts (Network and System administrators)"
+"Complete your security setup with this very easy-to-use software which "
+"combines high performance components such as a firewall, a virtual private "
+"network (VPN) server and client, an intrusion detection system and a traffic "
+"manager."
 msgstr ""
-"各種研修プログラムは、ユーザと専門家（ネットワークやシステム管理者）のニーズ"
-"に合うように作られています"
 
-#: ../../share/advertising/13-mdkcampus.pl:1
+#: ../../share/advertising/11-mnf.pl:1
 #, c-format
-msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-msgstr "MandrakeSoftの研修カタログLinux-Campusをどうぞ"
+msgid "Secure your networks with the Multi Network Firewall"
+msgstr ""
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Join the MandrakeSoft support teams and the Linux Community online to share "
@@ -13286,55 +13122,34 @@ msgstr ""
 "有して他の人を助けましょう。それには、オンライン技術サポートウェブサイト上で"
 "認知された専門家になりましょう:"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid ""
 "Find the solutions of your problems via MandrakeSoft's online support "
-"platform"
+"platform."
 msgstr "MandrakeSoftのオンラインサポートプラットホームで問題解決"
 
-#: ../../share/advertising/14-mdkexpert.pl:1
+#: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
 msgid "Become a MandrakeExpert"
 msgstr "Mandrakeエキスパートになろう"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid ""
 "All incidents will be followed up by a single qualified MandrakeSoft "
 "technical expert."
 msgstr "すべての事象が一人の高技能MandrakeSoft技術専門家によって追跡されます。"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
-msgid "An online platform to respond to company's specific support needs"
+msgid "An online platform to respond to enterprise support needs."
 msgstr "企業固有のサポートニーズに応えるオンラインプラットホーム"
 
-#: ../../share/advertising/15-mdkexpert-corporate.pl:1
+#: ../../share/advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "MandrakeExpert Corporate"
 msgstr "Mandrake企業エキスパート"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid ""
-"MandrakeClub and Mandrake Corporate Club were created for business and "
-"private users of Mandrake Linux who would like to directly support their "
-"favorite Linux distribution while also receiving special privileges. If you "
-"enjoy our products, if your company benefits from our products to gain a "
-"competititve edge, if you want to support Mandrake Linux development, join "
-"MandrakeClub!"
-msgstr ""
-"MandrakeClub と Mandrake Corporate Club は、Mandrake Linuxのビジネスや個人"
-"ユーザがお気に入りのLinuxディストリビューションをサポートしつつ、ちょっとした"
-"メリットを手に入れるために作られました。弊社製品がお気に召したらあるいは御社"
-"が弊社製品で競争力を得ているなら、あるいはMandrake Linuxの開発をサポートした"
-"ければ、MandrakeClubに参加しましょう!"
-
-#: ../../share/advertising/17-mdkclub.pl:1
-#, c-format
-msgid "Discover MandrakeClub and Mandrake Corporate Club"
-msgstr "MandrakeClub と Mandrake Corporate Club"
 
 #: ../../standalone/XFdrake:1
 #, c-format
@@ -15814,6 +15629,11 @@ msgstr "First Time Wizard"
 
 #: ../../standalone/drakbug:1
 #, c-format
+msgid "Mandrake Control Center"
+msgstr "Mandrake コントロールセンター"
+
+#: ../../standalone/drakbug:1
+#, c-format
 msgid "Mandrake Bug Report Tool"
 msgstr "Mandrake バグ報告ツール"
 
@@ -16741,6 +16561,22 @@ msgstr "インターフェース %s (モジュール %s を使用)"
 
 #: ../../standalone/drakgw:1
 #, fuzzy, c-format
+msgid "Net Device"
+msgstr "Xinetdサービス"
+
+#: ../../standalone/drakgw:1
+#, c-format
+msgid ""
+"Please enter the name of the interface connected to the internet.\n"
+"\n"
+"Examples:\n"
+"\t\tppp+ for modem or DSL connections, \n"
+"\t\teth0, or eth1 for cable connection, \n"
+"\t\tippp+ for a isdn connection.\n"
+msgstr ""
+
+#: ../../standalone/drakgw:1
+#, fuzzy, c-format
 msgid ""
 "You are about to configure your computer to share its Internet connection.\n"
 "With that feature, other computers on your local network will be able to use "
@@ -17093,7 +16929,7 @@ msgid ""
 "server\n"
 "and a TFTP server to build an installation server.\n"
 "With that feature, other computers on your local network will be installable "
-"using from this computer.\n"
+"using this computer as source.\n"
 "\n"
 "Make sure you have configured your Network/Internet access using drakconnect "
 "before going any further.\n"
@@ -17264,6 +17100,11 @@ msgstr "起動スプラッシュテーマを保存中..."
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
+msgstr "画像ファイルを選択"
+
+#: ../../standalone/draksplash:1
+#, fuzzy, c-format
+msgid "choose image"
 msgstr "画像ファイルを選択"
 
 #: ../../standalone/draksplash:1
@@ -17730,8 +17571,18 @@ msgstr ", ネットワークプリンタ「%s」, ポート %s"
 
 #: ../../standalone/harddrake2:1
 #, fuzzy, c-format
+msgid "the name of the CPU"
+msgstr "デバイスのベンダー名"
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
 msgid "Name"
 msgstr "名前: "
+
+#: ../../standalone/harddrake2:1
+#, fuzzy, c-format
+msgid "the number of buttons the mouse has"
+msgstr "プログレスバーの色"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17896,7 +17747,7 @@ msgstr "このフィールドはデバイスの説明です"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid ""
-"The cpu frequency in Mhz (Mega herz which in first approximation may be "
+"The CPU frequency in MHz (Megahertz which in first approximation may be "
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
@@ -18747,7 +18598,7 @@ msgstr ""
 
 #: ../../share/compssUsers:999
 msgid "Network Computer (client)"
-msgstr "ネットワークコンピュータ (クライアント)"
+msgstr "ネットワーク (クライアント)"
 
 #: ../../share/compssUsers:999
 msgid "Clients for different protocols including ssh"
@@ -18892,6 +18743,10 @@ msgid "Set of tools for mail, news, web, file transfer, and chat"
 msgstr "メール、ニュース、web, ファイル転送、チャットなどのツール"
 
 #: ../../share/compssUsers:999
+msgid "Games"
+msgstr "ゲーム"
+
+#: ../../share/compssUsers:999
 msgid "Multimedia - Graphics"
 msgstr "マルチメディア　画像"
 
@@ -18946,6 +18801,351 @@ msgstr "個人の財務管理"
 #: ../../share/compssUsers:999
 msgid "Programs to manage your finances, such as gnucash"
 msgstr "gnucashなどの家計管理ソフト"
+
+#~ msgid "no network card found"
+#~ msgstr "ネットワークカードが見付かりません"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
+#~ "and view animations with Mozilla and Konqueror, or read your mail and "
+#~ "handle your personal information with Evolution and Kmail"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 は最高のソフトを取りそろえています。ウェブをサーフし"
+#~ "て、動画を見るならMozilla と Konqueror があるし、メールの送受信と個人情報"
+#~ "管理はEvolution と Kmailが使えます。"
+
+#~ msgid "Get the most from the Internet"
+#~ msgstr "インターネットを最大限に活用"
+
+#~ msgid "Push multimedia to its limits!"
+#~ msgstr "マルチメディアを使い倒しましょう！"
+
+#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
+#~ msgstr "最新のグラフィックやマルチメディアツールをどうぞ"
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
+#~ "strategy, ..."
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 には、最高のオープンソースゲームがついてきます。アー"
+#~ "ケード型、アクション型、カードゲーム、スポーツ、戦略ゲーム..."
+
+#~ msgid ""
+#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
+#~ "configure your machine"
+#~ msgstr ""
+#~ "Mandrake Linux 9.1 コントロールセンターは、Mandrake システムのカスタマイズ"
+#~ "と設定のためのワンストップパネル集です。"
+
+#~ msgid "User interfaces"
+#~ msgstr "ユーザインターフェイス"
+
+#~ msgid ""
+#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
+#~ "Source development environments"
+#~ msgstr ""
+#~ "GNU gcc 3 コンパイラをはじめ、最高のオープンソース開発環境の威力を使いま"
+#~ "しょう。"
+
+#~ msgid "Development simplified"
+#~ msgstr "開発も楽になりました"
+
+#~ msgid ""
+#~ "This firewall product includes network features that allow you to fulfill "
+#~ "all your security needs"
+#~ msgstr ""
+#~ "このファイアーウォール製品を使えば、セキュリティニーズをすべて満たせるネッ"
+#~ "トワーク機能が手に入ります。"
+
+#~ msgid ""
+#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
+#~ "N.F.)"
+#~ msgstr ""
+#~ "MandrakeSecurity 製品には Multi Network Firewall 製品 (M.N.F.)もあります"
+
+#~ msgid "Strategic partners"
+#~ msgstr "戦略パートナー"
+
+#~ msgid ""
+#~ "Whether you choose to teach yourself online or via our network of "
+#~ "training partners, the Linux-Campus catalogue prepares you for the "
+#~ "acknowledged LPI certification program (worldwide professional technical "
+#~ "certification)"
+#~ msgstr ""
+#~ "オンラインにせよネットワーク研修パートナーを通じてにせよ、Linux-Campus カ"
+#~ "タログは、認知度の高いLPI認定プログラム（世界的専門技術資格の取得準備の自"
+#~ "習に最適です"
+
+#~ msgid "Certify yourself on Linux"
+#~ msgstr "Linuxの技能認定を得よう"
+
+#~ msgid ""
+#~ "The training program has been created to respond to the needs of both end "
+#~ "users and experts (Network and System administrators)"
+#~ msgstr ""
+#~ "各種研修プログラムは、ユーザと専門家（ネットワークやシステム管理者）のニー"
+#~ "ズに合うように作られています"
+
+#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
+#~ msgstr "MandrakeSoftの研修カタログLinux-Campusをどうぞ"
+
+#~ msgid ""
+#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
+#~ "private users of Mandrake Linux who would like to directly support their "
+#~ "favorite Linux distribution while also receiving special privileges. If "
+#~ "you enjoy our products, if your company benefits from our products to "
+#~ "gain a competititve edge, if you want to support Mandrake Linux "
+#~ "development, join MandrakeClub!"
+#~ msgstr ""
+#~ "MandrakeClub と Mandrake Corporate Club は、Mandrake Linuxのビジネスや個人"
+#~ "ユーザがお気に入りのLinuxディストリビューションをサポートしつつ、ちょっと"
+#~ "したメリットを手に入れるために作られました。弊社製品がお気に召したらあるい"
+#~ "は御社が弊社製品で競争力を得ているなら、あるいはMandrake Linuxの開発をサ"
+#~ "ポートしたければ、MandrakeClubに参加しましょう!"
+
+#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
+#~ msgstr "MandrakeClub と Mandrake Corporate Club"
+
+#, fuzzy
+#~ msgid ""
+#~ "As a review, DrakX will present a summary of various information it has\n"
+#~ "about your system. Depending on your installed hardware, you may have "
+#~ "some\n"
+#~ "or all of the following entries:\n"
+#~ "\n"
+#~ " * \"Mouse\": check the current mouse configuration and click on the "
+#~ "button\n"
+#~ "to change it if necessary.\n"
+#~ "\n"
+#~ " * \"Keyboard\": check the current keyboard map configuration and click "
+#~ "on\n"
+#~ "the button to change that if necessary.\n"
+#~ "\n"
+#~ " * \"Country\": check the current country selection. If you are not in "
+#~ "this\n"
+#~ "country, click on the button and choose another one.\n"
+#~ "\n"
+#~ " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
+#~ "primary language you have chosen. But here, just as in your choice of a\n"
+#~ "keyboard, you may not be in a country to which the chosen language\n"
+#~ "corresponds. You may need to click on the \"Timezone\" button to\n"
+#~ "configure the clock for the correct timezone.\n"
+#~ "\n"
+#~ " * \"Printer\": clicking on the \"No Printer\" button will open the "
+#~ "printer\n"
+#~ "configuration wizard. Consult the corresponding chapter of the ``Starter\n"
+#~ "Guide'' for more information on how to setup a new printer. The "
+#~ "interface\n"
+#~ "presented there is similar to the one used during installation.\n"
+#~ "\n"
+#~ " * \"Bootloader\": if you wish to change your bootloader configuration,\n"
+#~ "click that button. This should be reserved to advanced users.\n"
+#~ "\n"
+#~ " * \"Graphical Interface\": by default, DrakX configures your graphical\n"
+#~ "interface in \"800x600\" resolution. If that does not suits you, click "
+#~ "on\n"
+#~ "the button to reconfigure your graphical interface.\n"
+#~ "\n"
+#~ " * \"Network\": If you want to configure your Internet or local network\n"
+#~ "access now, you can by clicking on this button.\n"
+#~ "\n"
+#~ " * \"Sound card\": if a sound card is detected on your system, it is\n"
+#~ "displayed here. If you notice the sound card displayed is not the one "
+#~ "that\n"
+#~ "is actually present on your system, you can click on the button and "
+#~ "choose\n"
+#~ "another driver.\n"
+#~ "\n"
+#~ " * \"TV card\": if a TV card is detected on your system, it is displayed\n"
+#~ "here. If you have a TV card and it is not detected, click on the button "
+#~ "to\n"
+#~ "try to configure it manually.\n"
+#~ "\n"
+#~ " * \"ISDN card\": if an ISDN card is detected on your system, it will be\n"
+#~ "displayed here. You can click on the button to change the parameters\n"
+#~ "associated with the card."
+#~ msgstr ""
+#~ "あなたのマシンに関する各種のパラメータを示します。ハードウェアにも\n"
+#~ "よりますが、以下のような項目が出てくるはずです:\n"
+#~ "\n"
+#~ " * 「マウス」: マウス。現在のマウス設定を見て、必要ならボタンをクリック\n"
+#~ "して変更します。\n"
+#~ "\n"
+#~ " * 「キーボード」：キーボード。いまのキーボードの割付設定を見て、必要な"
+#~ "ら\n"
+#~ "ボタンをクリックして変更します。\n"
+#~ "\n"
+#~ " * 「時間帯」: 時間帯　DrakX はデフォルトで、あなたの選んだ言語に応じて\n"
+#~ "時間帯を推定します。でもここでもキーボードの選択と同じで、言語とは\n"
+#~ "ちがう国にいるときには、時間帯ボタンを押して、自分の時間帯にあわせた\n"
+#~ "設定にできます。\n"
+#~ "\n"
+#~ " * 「プリンタ」: 「プリンタなし」ボタンを押すと、プリンタ設定ウィザード\n"
+#~ "が開きます。\n"
+#~ "\n"
+#~ " * 「サウンドカード」: サウンドカードが検出されたらここに表示されます。\n"
+#~ "インストール時には変更できません。\n"
+#~ "\n"
+#~ " * 「TV カード」: TV カードが検出されたらここに表示されます。\n"
+#~ "インストール時には変更できません。\n"
+#~ "\n"
+#~ " * 「ISDN カード」: ISDN カードが検出されたらここに表示されます。\n"
+#~ "ボタンをクリックすると関連パラメータが変えられます。"
+
+#, fuzzy
+#~ msgid ""
+#~ "LILO and grub are GNU/Linux bootloaders. Normally, this stage is totally\n"
+#~ "automated. DrakX will analyze the disk boot sector and act according to\n"
+#~ "what it finds there:\n"
+#~ "\n"
+#~ " * if a Windows boot sector is found, it will replace it with a grub/"
+#~ "LILO\n"
+#~ "boot sector. This way you will be able to load either GNU/Linux or "
+#~ "another\n"
+#~ "OS.\n"
+#~ "\n"
+#~ " * if a grub or LILO boot sector is found, it will replace it with a new\n"
+#~ "one.\n"
+#~ "\n"
+#~ "If it cannot make a determination, DrakX will ask you where to place the\n"
+#~ "bootloader.\n"
+#~ "\n"
+#~ "\"Boot device\": in most cases, you will not change the default (\"First\n"
+#~ "sector of drive (MBR)\"), but if you prefer, the bootloader can be\n"
+#~ "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy "
+#~ "disk\n"
+#~ "(\"On Floppy\").\n"
+#~ "\n"
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mandrake Linux CDROM にはレスキューモードが組み込んであります。これを\n"
+#~ "使うには CDROM から起動して、起動時に >>F1<< キーを押し、プロンプトで\n"
+#~ ">>rescue<< とタイプすることです。でも、CDROMから起動できない場合には、\n"
+#~ "2種類の場合にここに戻ってくる必要があるでしょう:\n"
+#~ "\n"
+#~ " * ブートローダのインストール時には、drakX は主ディスクのブートセクタ\n"
+#~ " (MBR) を書き換えます（別のブートマネージャを使っていない限り）。こう\n"
+#~ "することで、ウィンドウズと GNU/Linux のどっちでも起動できるようになり\n"
+#~ "ます（システムにウィンドウズが入っている場合）。\n"
+#~ "　ウィンドウズをインストールしなおすと、マイクロソフトのインストール\n"
+#~ "プロセスがブートセクタを書き換えるので、GNU/Linuxが起動できません!\n"
+#~ "\n"
+#~ " * もし何か問題が起きて、ハードディスクから GNU/Linux を起動できない\n"
+#~ "場合には、GNU/Linux を起動するにはこのフロッピーしか手がありません。\n"
+#~ "このディスクには、停電とかちょっとしたタイプミス、パスワードの間違い\n"
+#~ "などによるクラッシュからシステムを回復させるのに使える、各種のツール\n"
+#~ "が入っています。\n"
+#~ "\n"
+#~ "「はい」と応えたら、フロッピーディスクをドライブに入れろと\n"
+#~ "要求されます。挿入するフロッピーディスクは、空か、不要なデータしか\n"
+#~ "入っていないものにしましょう。フォーマットする必要はありません。\n"
+#~ "DrakXが完全にそれを書き換えます。"
+
+#, fuzzy
+#~ msgid ""
+#~ "Checking \"Create a boot disk\" allows you to have a rescue boot media\n"
+#~ "handy.\n"
+#~ "\n"
+#~ "The Mandrake Linux CD-ROM has a built-in rescue mode. You can access it "
+#~ "by\n"
+#~ "booting the CD-ROM, pressing the >> F1<< key at boot and typing "
+#~ ">>rescue<<\n"
+#~ "at the prompt. If your computer cannot boot from the CD-ROM, there are "
+#~ "at\n"
+#~ "least two situations where having a boot floppy is critical:\n"
+#~ "\n"
+#~ " * when installing the bootloader, DrakX will rewrite the boot sector "
+#~ "(MBR)\n"
+#~ "of your main disk (unless you are using another boot manager), to allow "
+#~ "you\n"
+#~ "to start up with either Windows or GNU/Linux (assuming you have Windows "
+#~ "on\n"
+#~ "your system). If at some point you need to reinstall Windows, the "
+#~ "Microsoft\n"
+#~ "install process will rewrite the boot sector and remove your ability to\n"
+#~ "start GNU/Linux!\n"
+#~ "\n"
+#~ " * if a problem arises and you cannot start GNU/Linux from the hard "
+#~ "disk,\n"
+#~ "this floppy will be the only means of starting up GNU/Linux. It contains "
+#~ "a\n"
+#~ "fair number of system tools for restoring a system that has crashed due "
+#~ "to\n"
+#~ "a power failure, an unfortunate typing error, a forgotten root password, "
+#~ "or\n"
+#~ "any other reason.\n"
+#~ "\n"
+#~ "If you say \"Yes\", you will be asked to insert a disk in the drive. The\n"
+#~ "floppy disk must be blank or have non-critical data on it - DrakX will\n"
+#~ "format the floppy and will rewrite the whole disk."
+#~ msgstr ""
+#~ "Mandrake Linux CDROM にはレスキューモードが組み込んであります。これを\n"
+#~ "使うには CDROM から起動して、起動時に >>F1<< キーを押し、プロンプトで\n"
+#~ ">>rescue<< とタイプすることです。でも、CDROMから起動できない場合には、\n"
+#~ "2種類の場合にここに戻ってくる必要があるでしょう:\n"
+#~ "\n"
+#~ " * ブートローダのインストール時には、drakX は主ディスクのブートセクタ\n"
+#~ " (MBR) を書き換えます（別のブートマネージャを使っていない限り）。こう\n"
+#~ "することで、ウィンドウズと GNU/Linux のどっちでも起動できるようになり\n"
+#~ "ます（システムにウィンドウズが入っている場合）。\n"
+#~ "　ウィンドウズをインストールしなおすと、マイクロソフトのインストール\n"
+#~ "プロセスがブートセクタを書き換えるので、GNU/Linuxが起動できません!\n"
+#~ "\n"
+#~ " * もし何か問題が起きて、ハードディスクから GNU/Linux を起動できない\n"
+#~ "場合には、GNU/Linux を起動するにはこのフロッピーしか手がありません。\n"
+#~ "このディスクには、停電とかちょっとしたタイプミス、パスワードの間違い\n"
+#~ "などによるクラッシュからシステムを回復させるのに使える、各種のツール\n"
+#~ "が入っています。\n"
+#~ "\n"
+#~ "「はい」と応えたら、フロッピーディスクをドライブに入れろと\n"
+#~ "要求されます。挿入するフロッピーディスクは、空か、不要なデータしか\n"
+#~ "入っていないものにしましょう。フォーマットする必要はありません。\n"
+#~ "DrakXが完全にそれを書き換えます。"
+
+#~ msgid ""
+#~ "The following printers are configured. Double-click on a printer to "
+#~ "change its settings; to make it the default printer; to view information "
+#~ "about it; or to make a printer on a remote CUPS server available for Star "
+#~ "Office/OpenOffice.org/GIMP."
+#~ msgstr ""
+#~ "以下のプリンタが設定されています。設定を変更したいプリンタをダブルクリック"
+#~ "してください。デフォルトプリンタにしたり、その情報を見たり、リモートの"
+#~ "CUPS サーバ上のプリンタを Star Office/OpenOffice.org/GIMPで使えるようにす"
+#~ "る場合もそうです。"
 
 #~ msgid ""
 #~ "Please enter your host name if you know it.\n"
