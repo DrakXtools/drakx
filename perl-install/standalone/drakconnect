@@ -38,7 +38,7 @@ use c;
 use modules;
 use network::isdn;
 use network::adsl;
-use MDK::Common::Globals "network", qw($in);
+use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file);
 use POSIX ":sys_wait_h";
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
@@ -53,7 +53,13 @@ reread_net_conf();
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "wiz_drakconnect.png";
 
-MDK::Common::Globals::init(in => $in);
+MDK::Common::Globals::init(
+	      in => $in,
+	      prefix => '',
+	      connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
+	      disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
+	      connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg"
+	     );
 
 local $_ = join '', @ARGV;
 /--skip-wizard/ and manage($netc, $netcnx, $intf);
@@ -93,8 +99,8 @@ my $int_connect = Gtk2::Button->new(N("Wait please"));
 $int_connect->set_sensitive(0);
 $int_connect->signal_connect(clicked => sub {
     if (!$isconnected) {
-        if (cat_($network::tools::connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
-            run_program::run("/usr/bin/kppp &");
+        if (cat_($connect_prog) =~ m|/usr/bin/kppp| && -e '/usr/bin/kppp') {
+            run_program::rooted($prefix, "/usr/bin/kppp &");
           } else {
               connect_backend();
           } 
@@ -193,7 +199,9 @@ sub manage {
     $notebook->set_property('show-border', 0);
     my $apply_button;
   
-    my $config = { 'eth0' => 1 }; # testing
+    my $config = { 'ethernet0' => { kind => 'eth0' },
+		   'adsl' => { kind => 'speedtouch', protocol => 'pppoa'  },
+		 }; # testing
 
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
@@ -223,14 +231,14 @@ sub manage {
     $apply_button = $oc->{buttons}{N("Apply")};
 
     each_index {
-	my $interface = $_;
+	my ($name, $interface, $protocol) = ($_, $config->{$_}{kind}, $config->{$_}{protocol});
 	$gui->{$interface}{index} = $::i;
-	build_tree($netc, $intf->{$interface} ||= {}, $interface, $config->{$interface});
-	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $interface, $config->{$interface}, $apply_button);
+	build_tree($netc, $intf->{$interface} ||= {}, $name, $interface, $protocol);
+	build_notebook($netc, $intf->{$interface}, $gui->{$interface}, $apply_button, $name, $interface);
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
     } (sort keys %$config);
 
-    $interface_menu->set_popdown_strings(sort keys %$config);
+    $interface_menu->set_popdown_strings(map { $config->{$_}{kind} } sort keys %$config);
     $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
@@ -239,11 +247,11 @@ sub manage {
 }
 
 sub build_tree {
-    my ($netc, $intf, $interface, $interface_kind) = @_;
+    my ($netc, $intf, $interface, $interface_kind, $protocol) = @_;
     
     if ($interface eq 'adsl') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Informations") => 1 };
-	network::adsl::adsl_probe_info($intf, $netc, $interface_kind);
+	network::adsl::adsl_probe_info($intf, $netc, $interface_kind, $protocol);
 	$intf->{save} = sub { network::adsl::adsl_conf_backend($intf, $netc, $interface_kind) };
     }
     elsif ($interface eq 'modem') {
@@ -279,7 +287,7 @@ sub build_tree {
 }
 
 sub build_notebook {
-    my ($netc, $intf, $gui, $interface, $interface_kind, $apply_button) = @_;
+    my ($netc, $intf, $gui, $apply_button, $interface, $interface_kind) = @_;
  
     my $apply = sub { $apply_button->set_sensitive(1) };
 
@@ -456,7 +464,7 @@ sub build_notebook {
     }
     
     if ($intf->{pages}{N("Informations")}) {
-	my $module = c::getNetDriver($interface) || modules::get_alias($interface);
+	my $module = c::getNetDriver($interface_kind) || modules::get_alias($interface_kind);
 	my $info = find { $module ? $_->{driver} eq $module : $_->{description} eq $gui->{description} } detect_devices::probeall();
 	
 	gtkpack($gui->{sheet}{N("Informations")} = Gtk2::VBox->new(0,0),
@@ -467,7 +475,7 @@ sub build_notebook {
 					 [ N("Description"), reverse split('\|', $info->{description}) ],
 					 [ N("Media class"), $info->{media_type} || '-' ],
 					 [ N("Module name"), $module || '-' ], 
-					 [ N("Mac Address"), c::get_hw_address($interface) || '-' ],
+					 [ N("Mac Address"), c::get_hw_address($interface_kind) || '-' ],
 					 [ N("Bus"), $info->{bus} || '-' ],
 					 [ N("Location on the bus"), $info->{pci_bus} || '-' ],
 										    )
@@ -597,9 +605,9 @@ sub apply {
     
     network::network::sethostname($netc) if is_dynamic_ip($intf);
     
-    network::network::configureNetwork2($in, '', $netc, $intf);
+    network::network::configureNetwork2($in, $prefix, $netc, $intf);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
-    $netcnx->{type} !~ /adsl_p/ and system("/etc/rc.d/init.d/network restart");
+    $netcnx->{type} !~ /adsl_p/ and system("$prefix/etc/rc.d/init.d/network restart");
 
     $button_apply->set_sensitive(0);
 }
