@@ -581,7 +581,6 @@ sub main {
 	    text      => sub { $o->{interactive} = "newt" },
 	    stdio     => sub { $o->{interactive} = "stdio"},
 	    corporate => sub { $::corporate = 1 },
-	    ks        => sub { $::auto_install ||= 1 },
 	    kickstart => sub { $::auto_install = $v },
 	    auto_install => sub { $::auto_install = $v },
 	    simple_themes => sub { $o->{simple_themes} = 1 },
@@ -634,7 +633,6 @@ sub main {
     if ($::auto_install) {
 	require install_steps_auto_install;
 	if ($::auto_install eq 'floppy') {
-	    eval { $o = $::o = install_any::loadO($o, "auto_inst.cfg.pl") };
 	    eval { $o = $::o = install_any::loadO($o, "floppy") } if $@;
 	} else {
 	    eval { $o = $::o = install_any::loadO($o, $::auto_install) };
