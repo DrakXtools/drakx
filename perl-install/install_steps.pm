@@ -973,9 +973,9 @@ sub exitInstall {
     my ($o) = @_;
     eval { 
 	my $report = '/root/drakx/report.bug';
-	unlink $report, "$report.gz";
-	output "$o->{prefix}$report", install_any::report_bug($o->{prefix});
-	run_program::rooted($o->{prefix}, 'gzip', $report);
+	unlink "$::prefix$report", "$::prefix$report.gz";
+	output "$::prefix$report", install_any::report_bug($o->{prefix});
+	run_program::rooted($::prefix, 'gzip', $report);
     };
     install_any::getAndSaveAutoInstallFloppy($o, 1, "$o->{prefix}/root/drakx/replay_install.img");
     eval { output "$o->{prefix}/root/drakx/README", "This directory contains several installation-related files,
