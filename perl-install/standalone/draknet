@@ -184,13 +184,17 @@ my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interf
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $c=connected();
+my $connected_now;
+sub connected_local {
+    my $w = $in->wait_message('', _("Testing your connection..."), 1);
+    $connected_now=connected();
+}
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
-my $label8 = new Gtk::Label($c ? _("Connected") : _("Not connected"));
+my $label8 = new Gtk::Label($connected_now ? _("Connected") : _("Not connected"));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
-my $button2 = new Gtk::Button($c ? _("Disconnect...") : _("Connect..."));
+my $button2 = new Gtk::Button($connected_now ? _("Disconnect...") : _("Connect..."));
 $button2->signal_connect (clicked => sub {
 			      my $dialog = new Gtk::Dialog();
 			      $dialog->signal_connect ( delete_event => sub { Gtk->main_quit(); });
@@ -207,12 +211,12 @@ $button2->signal_connect (clicked => sub {
 			      $bbox_dialog->add($button_ok );
 			      $dialog->show_all;
 			      $dialog->set_modal(1);
-			      if (!connected()) {
+			      if (!$connected_now) {
 				  $l->set(_("Starting your connection..."));
 				  Gtk->main_iteration while Gtk->events_pending;
 				  connect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=connected();
+				  my $up=connected_local();
 				  $l->set($up ? _("The system is now connected to Internet.") : _("The system doesn't seem to be connected to internet.
 Try to reconfigure your connection."));
 			      } else {
@@ -220,7 +224,7 @@ Try to reconfigure your connection."));
 				  Gtk->main_iteration while Gtk->events_pending;
 				  disconnect_backend();
 				  foreach (1..10) { Gtk->main_iteration while Gtk->events_pending; sleep 1; }
-				  my $up=connected();
+				  my $up=connected_local();
 				  $l->set($up ? _("The connection is not closed.
 Try to do it manually by running
 /etc/sysconfig/network-scripts/net_cnx_down
@@ -229,7 +233,7 @@ in root.") : _("The system is now disconnected.") );
 			      $button_ok->set_sensitive(1);
 			      Gtk->main();
 			      $dialog->destroy;
-			      update();
+			      update2();
 			  });
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
 
@@ -343,7 +347,7 @@ $window1->show_all();
 $_->hide foreach ($button1, $button3);
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill USR2, $::CCPID;
-my $tag = Gtk->timeout_add(15000, \&update);
+my $tag = Gtk->timeout_add(15000, \&update2);
 Gtk->main;
 Gtk->exit(0);
 
@@ -392,9 +396,6 @@ sub update {
     $label4->set($netcnx->{type});
     $label5->set($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
-    my $c = connected();
-    $label8->set($c ? _("Connected") : _("Not connected"));
-    $button2->child->set($c ? _("Disconnect...") : _("Connect..."));
     $clist1->freeze();
     $clist1->clear();
     build_clist();
@@ -403,6 +404,12 @@ sub update {
     1;
 }
 
+sub update2 {
+    update();
+    $connected_now = connected();
+    $label8->set($connected_now ? _("Connected") : _("Not connected"));
+    $button2->child->set($connected_now ? _("Disconnect...") : _("Connect..."));
+}
 sub quit_global {
     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
 }
