@@ -36,7 +36,7 @@ install: dirs images rescue install_only
 dirs:
 	@for n in $(DIRS); do $(MAKE) -C $$n all || exit 1 ; done
 
-images: $(FBOOT_IMG) images/all.rdz # all.rdz is needed to update isolinux
+images: $(FBOOT_IMG) images/hd_grub.img images/all.rdz # all.rdz is needed to update isolinux
 
 $(FBOOT_RDZ): kernel/all.modules
 	./make_boot_img $@ `basename $(@:%.rdz=%)`
@@ -52,7 +52,7 @@ tar: clean
 install_only:
 	for i in images misc Mandrake Mandrake/base Mandrake/share; do install -d $(ROOTDEST)/$$i ; done
     ifneq (ppc,$(ARCH))
-	for i in $(FBOOT_IMG); do cp -f $${i}* $(ROOTDEST)/images; done
+	for i in $(FBOOT_IMG) images/hd_grub.img; do cp -f $${i}* $(ROOTDEST)/images; done
     endif
     ifeq (alpha,$(ARCH))
 	for i in $(FBOOT_RDZ); do cp -f $${i}* $(ROOTDEST)/boot; done
