@@ -342,12 +342,12 @@ sub optionsConfiguration($) {
 	    my $options = 'options_' . ($o->{card}{server} eq 'XFree86' ? 'xf4' : 'xf3');
 	    $o->{card}{$options}{$_->[0]} ||= 0;
 	    unless ($l{$_->[0]}) {
-		push @l, $_->[0], { val => \$o->{card}{$options}{$_->[0]}, type => 'bool' };
+		push @l, { label => $_->[0], val => \$o->{card}{$options}{$_->[0]}, type => 'bool' };
 		$l{$_->[0]} = 1;
 	    }
 	}
     }
-    @l = @l[0..19] if @l > 19; #- reduce list size to 10 for display (it's a hash).
+    @l = @l[0..9] if @l > 9; #- reduce list size to 10 for display
 
     $in->ask_from_entries_refH('', _("Choose options for server"), \@l);
 }
@@ -1159,8 +1159,8 @@ sub autologin {
 	$in->ask_from_entries_refH(_("Autologin"),
 				   _("I can set up your computer to automatically log on one user.
 If you don't want to use this feature, click on the cancel button."),
-				   [ _("Choose the default user:") => { val => \$o->{autologin}, list => [ '', @users ] },
- 				     _("Choose the window manager to run:") => { val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
+				   [ { label => _("Choose the default user:"), val => \$o->{autologin}, list => [ '', @users ] },
+ 				     { label => _("Choose the window manager to run:"), val => \$o->{desktop}, list => \@wm }, ]) or delete $o->{autologin};
     }
     $o->{autologin} and $::isStandalone ? do { $in->suspend; system("urpmi --auto --best-output autologin"); $in->resume; } : $in->pkg_install("autologin");
     any::setAutologin($prefix, $o->{autologin}, $o->{desktop});

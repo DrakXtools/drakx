@@ -36,15 +36,15 @@ if ($in->ask_from_entries_refH(
         [ _("Add user"), _("Accept user"), _("Done") ],
         _("Enter a user\n%s", $users ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @users)) : ''),
         [ 
-	 _("Real name") => \$u->{realname},
-	 _("User name") => \$u->{name},
-	   $security < 2 ? () : (
-         _("Password") => {val => \$u->{password}, hidden => 1},
-         _("Password (again)") => {val => \$u->{password2}, hidden => 1},
-	   ), $::beginner ? () : (
-         _("Shell") => {val => \$u->{shell}, list => \@shells, not_edit => !$::expert} 
-	   ), $security > 3 ? () : (
-	 _("Icon") => {val => \$u->{icon}, list => [ any::facesnames() ], icon2f => \&any::face2xpm },
+	 { label => _("Real name"), val => \$u->{realname} },
+	 { label => _("User name"), val => \$u->{name} },
+	   if_($security >= 2,
+         { label => _("Password"), val => \$u->{password}, hidden => 1 },
+         { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
+	   ), if_(!$::beginner,
+         { label => _("Shell"), val => \$u->{shell}, list => \@shells, not_edit => !$::expert } 
+	   ), if_($security <= 3,
+	 { label => _("Icon"), val => \$u->{icon}, list => [ any::facesnames() ], icon2f => \&any::face2xpm },
 	   ),
         ],
         focus_out => sub {

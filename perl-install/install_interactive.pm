@@ -90,8 +90,8 @@ sub partitionWizardSolutions {
 		my $part = $o->ask_from_listf('', _("Which partition do you want to use for Linux4Win?"), \&partition_table_raw::description, \@ok_forloopback) or return;
 		$max_swap = $min_swap + 1 if $part->{free} - $max_swap < $min_linux;
 		$o->ask_from_entries_refH('', _("Choose the sizes"), [ 
-		   _("Root partition size in MB: ") => { val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
-		   _("Swap partition size in MB: ") => { val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
+		   { label => _("Root partition size in MB: "), val => \$s_root, min => $min_linux >> 11, max => min($part->{free} - $max_swap, $max_linux) >> 11, type => 'range' },
+		   { label => _("Swap partition size in MB: "), val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
 		  { type => 0x83, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, device => $part, notFormatted => 1 },
@@ -121,7 +121,7 @@ When sure, press Ok.")) or return;
 
 		my $size = $part->{size};
 		$o->ask_from_entries_refH('', _("Which size do you want to keep for windows on"), [
-                   _("partition %s", partition_table_raw::description($part)) => { val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
+                   { label => _("partition %s", partition_table_raw::description($part)), val => \$size, min => $min_win >> 11, max => ($part->{size} - $min_linux - $min_swap) >> 11, type => 'range' },
                 ]) or return;
 		$size <<= 11;
 

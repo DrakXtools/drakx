@@ -298,8 +298,8 @@ sub ask_mntpoint_s {
     } else {
 	$o->ask_from_entries_refH('', 
 				  _("Choose the mount points"),
-				  [ map { partition_table_raw::description($_) => 
-				            { val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint([]) ] }
+				  [ map { { label => partition_table_raw::description($_), 
+					    val => \$_->{mntpoint}, not_edit => 0, list => [ '', fsedit::suggestions_mntpoint([]) ] }
 					} @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);
@@ -754,13 +754,13 @@ sub setRootPassword {
 
     $o->ask_from_entries_refH([_("Set root password"), _("Ok"), if_($o->{security} <= 2 && !$::corporate, _("No password"))],
 			 [ _("Set root password"), "\n" ], [
-_("Password") => { val => \$sup->{password},  hidden => 1 },
-_("Password (again)") => { val => \$sup->{password2}, hidden => 1 },
+{ label => _("Password"), val => \$sup->{password},  hidden => 1 },
+{ label => _("Password (again)"), val => \$sup->{password2}, hidden => 1 },
   if_($o->{installClass} eq "server" || $::expert,
-_("Use shadow file") => { val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
-_("Use MD5 passwords") => { val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
+{ label => _("Use shadow file"), val => \$o->{authentication}{shadow}, type => 'bool', text => _("shadow") },
+{ label => _("Use MD5 passwords"), val => \$o->{authentication}{md5}, type => 'bool', text => _("MD5") },
   ), if_(!$::beginner,
-_("Use NIS") => { val => \$nis, type => 'bool', text => _("yellow pages") },
+{ label => _("Use NIS"), val => \$nis, type => 'bool', text => _("yellow pages") },
   )
 			 ],
 			 complete => sub {
@@ -801,15 +801,15 @@ sub addUser {
         [ _("Add user"), _("Accept user"), if_($o->{security} < 4 || @{$o->{users}}, _("Done")) ],
         _("Enter a user\n%s", $o->{users} ? _("(already added %s)", join(", ", map { $_->{realname} || $_->{name} } @{$o->{users}})) : ''),
         [ 
-	 _("Real name") => \$u->{realname},
-	 _("User name") => \$u->{name},
+	 { label => _("Real name"), val => \$u->{realname} },
+	 { label => _("User name"), val => \$u->{name} },
 	   if_($o->{security} >= 2,
-         _("Password") => {val => \$u->{password}, hidden => 1},
-         _("Password (again)") => {val => \$u->{password2}, hidden => 1},
+         { label => _("Password"),val => \$u->{password}, hidden => 1},
+         { label => _("Password (again)"), val => \$u->{password2}, hidden => 1},
 	   ), if_(!$::beginner,
-         _("Shell") => {val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
+         { label => _("Shell"), val => \$u->{shell}, list => [ any::shells($o->{prefix}) ], not_edit => !$::expert} 
 	   ), if_($o->{security} <= 3,
-	 _("Icon") => {val => \$u->{icon}, list => [ any::facesnames($o->{prefix}) ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
+	 { label => _("Icon"), val => \$u->{icon}, list => [ any::facesnames($o->{prefix}) ], icon2f => sub { any::face2xpm($_[0], $o->{prefix}) } },
 	   ),
         ],
         focus_out => sub {
@@ -952,17 +952,17 @@ sub miscellaneous {
 
     !$::beginner || $clicked and $o->ask_from_entries_refH('',
 	_("Miscellaneous questions"), [
-_("Use hard drive optimisations?") => { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
-_("Choose security level") => { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-_("Precise RAM size if needed (found %d MB)", availableRamMB()) => \$u->{memsize},
+{ label => _("Use hard drive optimisations?"), val => \$u->{HDPARM}, type => 'bool', text => _("(may cause data corruption)") },
+{ label => _("Choose security level"), val => \$s, list => [ map { $l{$_} } ikeys %l ] },
+{ label => _("Precise RAM size if needed (found %d MB)", availableRamMB()), val => \$u->{memsize} },
    if_(arch() !~ /^sparc/,
-_("Removable media automounting") => { val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
+{ label => _("Removable media automounting"), val => \$o->{useSupermount}, type => 'bool', text => 'supermount' },
    ), if_($::expert,
-_("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
+{ label => _("Clean /tmp at each boot"), val => \$u->{CLEAN_TMP}, type => 'bool' },
    ), $o->{pcmcia} && $::expert ? (
-_("Enable multi profiles") => { val => \$u->{profiles}, type => 'bool' },
+{ label => _("Enable multi profiles"), val => \$u->{profiles}, type => 'bool' },
    ) : (
-_("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },
+{ label => _("Enable num lock at startup"), val => \$u->{numlock}, type => 'bool' },
    ),
      ], complete => sub {
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in MB")), return 1;

@@ -122,21 +122,21 @@ sub setupBootloader {
 	my $silo_install_lang = $silo_install_lang[$b->{use_partition}];
 	my @l = (
 arch() =~ /sparc/ ? (
-_("Bootloader installation") => { val => \$silo_install_lang, list => \@silo_install_lang },
+{ label => _("Bootloader installation"), val => \$silo_install_lang, list => \@silo_install_lang },
 ) : (
-_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },
-_("LBA (doesn't work on old BIOSes)") => { val => \$b->{lba32}, type => "bool", text => "lba" },
-_("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
-_("Video mode") => { val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => $::beginner },
+{ label => _("Boot device"), val => \$b->{boot}, list => [ map { "/dev/$_" } (map { $_->{device} } @$hds, @$fstab), detect_devices::floppies() ], not_edit => !$::expert },
+{ label => _("LBA (doesn't work on old BIOSes)"), val => \$b->{lba32}, type => "bool", text => "lba" },
+{ label => _("Compact"), val => \$b->{compact}, type => "bool", text => _("compact") },
+{ label => _("Video mode"), val => \$b->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => $::beginner },
 ),
-_("Delay before booting default image") => \$b->{timeout},
+{ label => _("Delay before booting default image"), val => \$b->{timeout} },
 $security < 4 ? () : (
-_("Password") => { val => \$b->{password}, hidden => 1 },
-_("Password (again)") => { val => \$b->{password2}, hidden => 1 },
-_("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
+{ label => _("Password"), val => \$b->{password}, hidden => 1 },
+{ label => _("Password (again)"), val => \$b->{password2}, hidden => 1 },
+{ label => _("Restrict command line options"), val => \$b->{restricted}, type => "bool", text => _("restrict") },
 )
 	);
-	@l = @l[0..3] unless $::expert; #- take "bootloader installation" and "delay before ..." on SPARC.
+	@l = @l[0..1] unless $::expert; #- take "bootloader installation" and "delay before ..." on SPARC.
 
 	$b->{vga} ||= 'Normal';
 	$in->ask_from_entries_refH('', _("Bootloader main options"), \@l,
@@ -193,28 +193,28 @@ You can add some more or change the existing ones."),
 	my @l;
 	if ($e->{type} eq "image") { 
 	    @l = (
-_("Image") => { val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
-_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
-_("Append") => \$e->{append},
-_("Video mode") => { val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
-_("Initrd") => { val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
-_("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
+{ label => _("Image"), val => \$e->{kernel_or_dev}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/vmlinuz*") ], not_edit => 0 },
+{ label => _("Root"), val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => _("Append"), val => \$e->{append} },
+{ label => _("Video mode"), val => \$e->{vga}, list => [ keys %bootloader::vga_modes ], not_edit => !$::expert },
+{ label => _("Initrd"), val => \$e->{initrd}, list => [ map { s/$prefix//; $_ } glob_("$prefix/boot/initrd*") ] },
+{ label => _("Read-write"), val => \$e->{'read-write'}, type => 'bool' }
 	    );
-	    @l = @l[0..5] unless $::expert;
+	    @l = @l[0..2] unless $::expert;
 	} else {
 	    @l = ( 
-_("Root") => { val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
+{ label => _("Root"), val => \$e->{kernel_or_dev}, list => [ map { "/dev/$_->{device}" } @$fstab ], not_edit => !$::expert },
 arch() !~ /sparc/ ? (
-_("Table") => { val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
-_("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
+{ label => _("Table"), val => \$e->{table}, list => [ '', map { "/dev/$_->{device}" } @$hds ], not_edit => !$::expert },
+{ label => _("Unsafe"), val => \$e->{unsafe}, type => 'bool' }
 ) : (),
 	    );
-	    @l = @l[0..1] unless $::expert;
+	    @l = $l[0] unless $::expert;
 	}
 	@l = (
-_("Label") => \$e->{label},
+{ label => _("Label"), val => \$e->{label} },
 @l,
-_("Default") => { val => \$default, type => 'bool' },
+{ label => _("Default"), val => \$default, type => 'bool' },
 	);
 
 	if ($in->ask_from_entries_refH($c eq "Add" ? '' : ['', _("Ok"), _("Remove entry")], 

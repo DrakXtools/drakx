@@ -345,10 +345,12 @@ _("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
 You may also enter the IP address of the gateway if you have one"),
-			       [ _("Host name") => \$netc->{HOSTNAME},
-				 _("DNS server") => \$netc->{dnsServer},
-				 _("Gateway") => \$netc->{GATEWAY},
-				 $::expert ? (_("Gateway device") => {val => \$netc->{GATEWAYDEV}, list => \@devices }) : (),
+			       [ { label => _("Host name"), val => \$netc->{HOSTNAME} },
+				 { label => _("DNS server"), val => \$netc->{dnsServer} },
+				 { label => _("Gateway"), val => \$netc->{GATEWAY} },
+				    if_($::expert, 
+				 { label => _("Gateway device"), val => \$netc->{GATEWAYDEV}, list => \@devices },
+				    ),
 			       ],
 			      ) or return;
 }

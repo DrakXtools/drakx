@@ -48,7 +48,7 @@ sub setup_local($$$) {
 	return if !$in->ask_from_entries_refH(_("Local Printer Device"),
 _("What device is your printer connected to 
 (note that /dev/lp0 is equivalent to LPT1:)?\n") . (join "\n", @str), [
-_("Printer Device") => {val => \$printer->{DEVICE}, list => \@port } ],
+{ label => _("Printer Device"), val => \$printer->{DEVICE}, list => \@port } ],
 					     );
     }
 
@@ -71,8 +71,8 @@ sub setup_remote($$$) {
 _("To use a remote lpd print queue, you need to supply
 the hostname of the printer server and the queue name
 on that server which jobs should be placed in."), [
-_("Remote hostname") => \$printer->{REMOTEHOST},
-_("Remote queue") => \$printer->{REMOTEQUEUE}, ],
+{ label => _("Remote hostname"), val => \$printer->{REMOTEHOST} },
+{ label => _("Remote queue"), val => \$printer->{REMOTEQUEUE} } ],
 			      );
     #- make the DeviceURI from DEVICE.
     $printer->{DeviceURI} = "lpd://$printer->{REMOTEHOST}/$printer->{REMOTEQUEUE}";
@@ -87,12 +87,12 @@ SMB host name (Note! It may be different from its
 TCP/IP hostname!) and possibly the IP address of the print server, as
 well as the share name for the printer you wish to access and any
 applicable user name, password, and workgroup information."), [
-_("SMB server host") => \$printer->{SMBHOST},
-_("SMB server IP") => \$printer->{SMBHOSTIP},
-_("Share name") => \$printer->{SMBSHARE},
-_("User name") => \$printer->{SMBUSER},
-_("Password") => { val => \$printer->{SMBPASSWD}, hidden => 1 },
-_("Workgroup") => \$printer->{SMBWORKGROUP} ],
+{ label => _("SMB server host"), val => \$printer->{SMBHOST} },
+{ label => _("SMB server IP"), val => \$printer->{SMBHOSTIP} },
+{ label => _("Share name"), val => \$printer->{SMBSHARE} },
+{ label => _("User name"), val => \$printer->{SMBUSER} },
+{ label => _("Password"), val => \$printer->{SMBPASSWD}, hidden => 1 },
+{ label => _("Workgroup"), val => \$printer->{SMBWORKGROUP} }, ],
 					 complete => sub {
 					     unless (network::is_ip($printer->{SMBHOSTIP})) {
 						 $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
@@ -122,10 +122,10 @@ _("To print to a NetWare printer, you need to provide the
 NetWare print server name (Note! it may be different from its
 TCP/IP hostname!) as well as the print queue name for the printer you
 wish to access and any applicable user name and password."), [
-_("Printer Server") => \$printer->{NCPHOST},
-_("Print Queue Name") => \$printer->{NCPQUEUE},
-_("User name") => \$printer->{NCPUSER},
-_("Password") => {val => \$printer->{NCPPASSWD}, hidden => 1} ],
+{ label => _("Printer Server"), val => \$printer->{NCPHOST} },
+{ label => _("Print Queue Name"), val => \$printer->{NCPQUEUE} },
+{ label => _("User name"), val => \$printer->{NCPUSER} },
+{ label => _("Password"), val => \$printer->{NCPPASSWD}, hidden => 1 } ],
 					);
     &$install('ncpfs');
     1;
@@ -138,8 +138,8 @@ sub setup_socket($$$) {
     return if !$in->ask_from_entries_refH(_("Socket Printer Options"),
 _("To print to a socket printer, you need to provide the
 hostname of the printer and optionally the port number."), [
-_("Printer Hostname") => \$hostname,
-_("Port") => \$port ],
+{ label => _("Printer Hostname"), val => \$hostname },
+{ label => _("Port"), val => \$port } ],
 					 );
 
     #- make the DeviceURI parameters given above, these parameters are not in printer
@@ -153,7 +153,7 @@ sub setup_uri($$$) {
 
     return if !$in->ask_from_entries_refH(_("Printer Device URI"),
 _("You can specify directly the URI to access the printer with CUPS."), [
-_("Printer Device URI") => { val => \$printer->{DeviceURI}, list => [ printer::get_direct_uri(),
+{ label => _("Printer Device URI"), val => \$printer->{DeviceURI}, list => [ printer::get_direct_uri(),
                                                                       "file:/",
                                                                       "http://",
                                                                       "ipp://",
@@ -269,31 +269,28 @@ sub setup_gsdriver_lpr($$$;$) {
 	$printer->{TEXTONLYOPTIONS} =~ s/^"(.*)"/$1/;
 
 	return if !$in->ask_from_entries_refH('', _("Printer options"), [
-_("Paper Size") => { val => \$printer->{PAPERSIZE}, type => 'list', not_edit => !$::expert, list => \@printer::papersize_type },
-_("Eject page after job?") => { val => \$printer->{AUTOSENDEOF}, type => 'bool' },
-@list_res > 1 ? (
-_("Resolution") => { val => \$printer->{RESOLUTION}, type => 'list', not_edit => !$::expert, list => \@res } ) : (),
-@list_col > 1 ? (
-$is_uniprint ? (
-_("Uniprint driver options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col } ) : (
-_("Color depth options") => { val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col } ), ) : (),
-$db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT' && $db_entry{GSDRIVER} ne 'ppa' ? (
-_("Print text as PostScript?") => { val => \$printer->{ASCII_TO_PS}, type => 'bool' }, ) : (),
-#+_("Reverse page order") => { val => \$printer->{REVERSE_ORDER}, type => 'bool' },
-$db_entry{GSDRIVER} ne 'POSTSCRIPT' ? (
-_("Fix stair-stepping text?") => { val => \$printer->{CRLF}, type => 'bool' },
-) : (),
-$db_entry{GSDRIVER} ne 'TEXT' ? (
-_("Number of pages per output pages") => { val => \$printer->{NUP}, type => 'list', not_edit => !$::expert, list => [1,2,4,8] },
-_("Right/Left margins in points (1/72 of inch)") => \$printer->{RTLFTMAR},
-_("Top/Bottom margins in points (1/72 of inch)") => \$printer->{TOPBOTMAR},
-) : (),
-$::expert && $db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT' ? (
-_("Extra GhostScript options") => \$printer->{EXTRA_GS_OPTIONS},
-) : (),
-$::expert && $db_entry{GSDRIVER} ne 'POSTSCRIPT' ? (
-_("Extra Text options") => \$printer->{TEXTONLYOPTIONS},
-) : (),
+{ label => _("Paper Size"), val => \$printer->{PAPERSIZE}, type => 'list', not_edit => !$::expert, list => \@printer::papersize_type },
+{ label => _("Eject page after job?"), val => \$printer->{AUTOSENDEOF}, type => 'bool' },
+  if_(@list_res > 1,
+{ label => _("Resolution"), val => \$printer->{RESOLUTION}, type => 'list', not_edit => !$::expert, list => \@res },
+  ), if_(@list_col > 1,
+     $is_uniprint ?
+{ label => _("Uniprint driver options"), val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col } :
+{ label => _("Color depth options"), val => \$printer->{BITSPERPIXEL}, type => 'list', list => \@col }
+  ), if_($db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT' && $db_entry{GSDRIVER} ne 'ppa',
+{ label => _("Print text as PostScript?"), val => \$printer->{ASCII_TO_PS}, type => 'bool' },
+  ), if_($db_entry{GSDRIVER} ne 'POSTSCRIPT',
+{ label => _("Fix stair-stepping text?"), val => \$printer->{CRLF}, type => 'bool' },
+  ), if_($db_entry{GSDRIVER} ne 'TEXT',
+{ label => _("Number of pages per output pages"), val => \$printer->{NUP}, type => 'list', not_edit => !$::expert, list => [1,2,4,8] },
+{ label => _("Right/Left margins in points (1/72 of inch)"), val => \$printer->{RTLFTMAR} },
+{ label => _("Top/Bottom margins in points (1/72 of inch)"), val => \$printer->{TOPBOTMAR} },
+  ), if_($::expert && $db_entry{GSDRIVER} ne 'TEXT' && $db_entry{GSDRIVER} ne 'POSTSCRIPT',
+{ label => _("Extra GhostScript options"), val => \$printer->{EXTRA_GS_OPTIONS} },
+  ), if_($::expert && $db_entry{GSDRIVER} ne 'POSTSCRIPT',
+{ label => _("Extra Text options"), val => \$printer->{TEXTONLYOPTIONS} },
+  ),
+#+ { label => _("Reverse page order"), val => \$printer->{REVERSE_ORDER}, type => 'bool' },
 ]);
 
         $printer->{BITSPERPIXEL} = $col_to_depth{$printer->{BITSPERPIXEL}} || $printer->{BITSPERPIXEL}; #- translate back.
@@ -412,8 +409,8 @@ any printer here; printers will be automatically detected
 unless you have a server on a different network; in the
 latter case, you have to give the CUPS server IP address
 and optionally the port number."), [
-_("CUPS server IP") => \$server,
-_("Port") => \$port ],
+{ label => _("CUPS server IP"), val => \$server },
+{ label => _("Port"), val => \$port } ],
 						   complete => sub {
 						       unless (!$server || network::is_ip($server)) {
 							   $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
@@ -446,9 +443,9 @@ _("Every printer need a name (for example lp).
 Other parameters such as the description of the printer or its location
 can be defined. What name should be used for this printer and
 how is the printer connected?"), [
-_("Name of printer") => { val => \$printer->{QUEUE} },
-_("Description") => { val => \$printer->{Info} },
-_("Location") => { val => \$printer->{Location} },
+{ label => _("Name of printer"), val => \$printer->{QUEUE} },
+{ label => _("Description"), val => \$printer->{Info} },
+{ label => _("Location"), val => \$printer->{Location} },
 				  ],
 					   ) or printer::remove_queue($printer), $continue = 1, last;
 	    } else {
@@ -464,9 +461,9 @@ _("Location") => { val => \$printer->{Location} },
 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue and how is the printer connected?"), [
-_("Name of queue") => { val => \$printer->{QUEUE} },
-_("Spool directory") => { val => \$printer->{SPOOLDIR} },
-_("Printer Connection") => { val => \$printer->{str_type}, list => [ printer::printer_type($printer) ], not_edit => 1 },
+{ label => _("Name of queue"), val => \$printer->{QUEUE} },
+{ label => _("Spool directory"), val => \$printer->{SPOOLDIR} },
+{ label => _("Printer Connection"), val => \$printer->{str_type}, list => [ printer::printer_type($printer) ] },
 										      ],
 					       changed => sub {
 						   $printer->{SPOOLDIR} = printer::default_spooldir($printer) unless $_[0];
