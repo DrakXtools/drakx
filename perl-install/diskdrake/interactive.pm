@@ -104,6 +104,7 @@ struct hd {
   string capacity       # contain of the strings of { 'burner', 'DVD' }
   string info           # name of the hd, eg: 'QUANTUM ATLAS IV 9 WLS'
 
+  bool readonly         # is it allowed to modify the partition table
   bool isDirty          # does it need to be written to the disk 
   bool needKernelReread # must we tell the kernel to reread the partition table
   bool hasBeenDirty     # for undo
@@ -258,10 +259,12 @@ sub Done {
 # per-hd actions
 ################################################################################
 sub hd_possible_actions {
-    __("Clear all"), if_($::isInstall, __("Auto allocate")), __("More");
+    my ($in, $hd, $all_hds) = @_;
+    __("Clear all"), if_($::isInstall && !$hd->{readonly}, __("Auto allocate")), __("More");
 }
 sub hd_possible_actions_interactive {
-    hd_possible_actions(), __("Hard drive information");
+    my ($in, $hd, $all_hds) = @_;
+    &hd_possible_actions, __("Hard drive information");
 }
 
 sub Clear_all {
@@ -275,6 +278,7 @@ sub Clear_all {
     if (isLVM($hd)) {
 	lvm::lv_delete($hd, $_) foreach @parts
     } else {
+	$hd->{readonly} = 0; #- give a way out of readonly-ness. Dangerous!
 	partition_table::raw::zero_MBR_and_dirty($hd);
     }
 }
@@ -373,16 +377,16 @@ sub part_possible_actions {
 
     my %actions = my @l = (
         __("Mount point")      => '($part->{real_mntpoint} && common::usingRamdisk()) || (!isBusy && !isSwap && !isNonMountable)',
-        __("Type")             => '!isBusy && $::expert',
+        __("Type")             => '!isBusy && $::expert && (!readonly || ($part->{type} & 0xff) == 0x83)',
         __("Options")          => '$::expert',
-        __("Resize")	       => '!isBusy && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
-        __("Move")             => '!isBusy && !isSpecial && $::expert && 0', # disable for the moment
-        __("Format")           => '!isBusy && ($::expert || $::isStandalone)',
+        __("Resize")	       => '!isBusy && !readonly && !isSpecial || isLVM($hd) && isMounted && isThisFs("xfs", $part)',
+        __("Move")             => '!isBusy && !readonly && !isSpecial && $::expert && 0', # disable for the moment
+        __("Format")           => '!isBusy && !readonly && ($::expert || $::isStandalone)',
         __("Mount")            => '!isBusy && (hasMntpoint || isSwap) && maybeFormatted && ($::expert || $::isStandalone)',
         __("Add to RAID")      => '!isBusy && isRawRAID && !isSpecial',
         __("Add to LVM")       => '!isBusy && isRawLVM',
         __("Unmount")          => '!$part->{real_mntpoint} && isMounted',
-        __("Delete")	       => '!isBusy',
+        __("Delete")	       => '!isBusy && !readonly',
         __("Remove from RAID") => 'isPartOfRAID',
         __("Remove from LVM")  => 'isPartOfLVM',
         __("Modify RAID")      => 'isPartOfRAID && !isMounted($all_hds->{raids}[$part->{raid}])',
@@ -390,11 +394,12 @@ sub part_possible_actions {
     );
     my ($actions_names) = list2kv(@l);
     my %macros = (
+	readonly => '$hd->{readonly}',
         hasMntpoint => '$part->{mntpoint}',
         isPrimary => 'isPrimary($part, $hd)',
     );
     if ($part->{type} == 0) {
-	__("Create");
+	if_(!$hd->{readonly}, __("Create"));
     } else {
         grep { 
     	    my $cond = $actions{$_};
@@ -515,10 +520,15 @@ sub Type {
     #- for ext2, warn after choosing as ext2->ext3 can be achieved without loosing any data :)
     isExt2($part) or $warn->() or return;
 
+    my @types = partition_table::important_types();
+
+    #- when readonly, Type() is allowed only when changing between various { 0x83, 0x183, ... }
+    @types = grep { (name2type($_) & 0xff) == 0x83 } @types if $hd->{readonly};
+
     my $type_name = type2name($part->{type});
     $in->ask_from(_("Change partition type"),
 		  _("Which filesystem do you want?"),
-		  [ { label => _("Type"), val => \$type_name, list => [ partition_table::important_types() ], sort => 0, not_edit => !$::expert } ]) or return;
+		  [ { label => _("Type"), val => \$type_name, list => \@types, sort => 0, not_edit => !$::expert } ]) or return;
 
     my $type = $type_name && name2type($type_name);
 
@@ -1137,6 +1147,7 @@ sub format_hd_info {
 
     my $info = '';
     $info .= _("Device: ") . "$hd->{device}\n";
+    $info .= _("Read-only") . "\n" if $hd->{readonly};
     $info .= _("Size: %s\n", formatXiB($hd->{totalsectors}, 512)) if $hd->{totalsectors};
     $info .= _("Geometry: %s cylinders, %s heads, %s sectors\n", @{$hd->{geom}}{qw(cylinders heads sectors)}) if $::expert && $hd->{geom};
     $info .= _("Info: ") . ($hd->{info} || $hd->{media_type}) . "\n" if $::expert && ($hd->{info} || $hd->{media_type});
