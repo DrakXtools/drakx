@@ -16,6 +16,13 @@ sub rooted_or_die {
     my ($root, $name, @args) = @_;
     rooted($root, $name, @args) or die "$name failed\n";
 }
+
+sub get_stdout {
+    my ($name, @args) = @_;
+    my @r;
+    run($name, '>', \@r, @args) or return;
+    wantarray ? @r : join('', @r);
+}
 sub rooted_get_stdout {
     my ($root, $name, @args) = @_;
     my @r;
