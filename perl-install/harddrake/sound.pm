@@ -141,7 +141,7 @@ sub get_alternative {
 
 sub explain {
     require standalone;
-    standalone::explanations @_ unless $::isInstall;
+    standalone::explanations(@_) unless $::isInstall;
 }
 
 
