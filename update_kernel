@@ -40,7 +40,7 @@ function create_modules() {
     create_marfile pcmcia_modules.mar   $PCMCIA_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
     create_marfile usbnet_modules.mar   $USBNET_MODULES $GENERIC_MODULES
     create_marfile other_modules.mar    $BIG_MODULES $GENERIC_MODULES
-    create_marfile all_modules.mar      $ALL_MODULES $GENERIC_MODULES
+    create_marfile all_modules.mar      $ALL_MODULES $PCMCIA_COREMODULES $GENERIC_MODULES
     rm -f $ALL_MODULES $PCMCIA_COREMODULES $NOT_USEFULL_IN_STAGE1 # leave in the directory non-install1 used modules
 }
 
