@@ -194,14 +194,13 @@ sub manage {
     my $apply_button;
   
     my $config = { 'ethernet0' => { kind => 'eth0' },
-		   'adsl' => { kind => 'speedtouch', protocol => 'pppoa'  },
 		 }; # testing
 
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
 										$selected = $interface_menu->get_text;
-										$notebook->set_current_page($gui->{$selected}{index});
+										$notebook->set_current_page($gui->{$config->{$selected}{kind}}{index});
 									    },
 									   ),
 				     1, $notebook,
@@ -232,7 +231,7 @@ sub manage {
 	$notebook->append_page(gtkpack(Gtk2::VBox->new(0,0), $gui->{$interface}{notebook}));
     } (sort keys %$config);
 
-    $interface_menu->set_popdown_strings(map { $config->{$_}{kind} } sort keys %$config);
+    $interface_menu->set_popdown_strings(sort keys %$config);
     $apply_button->set_sensitive(0);
     
     $window->{rwindow}->show_all;
@@ -245,8 +244,8 @@ sub build_tree {
     
     if ($interface eq 'adsl') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1, N("Informations") => 1 };
-	network::adsl::adsl_probe_info($intf, $netc, $interface_kind, $protocol);
-	$intf->{save} = sub { network::adsl::adsl_conf_backend($intf, $netc, $interface_kind) };
+	network::adsl::adsl_probe_info($intf, $netc, $protocol, $interface_kind);
+	$intf->{save} = sub { network::adsl::adsl_conf_backend($intf, $netc, $interface_kind, $protocol) };
     }
     elsif ($interface eq 'modem') {
 	$intf->{pages} = { N("TCP/IP") => 1, N("Account") => 1, N("Options") => 1 };
