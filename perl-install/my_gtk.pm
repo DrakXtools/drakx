@@ -661,9 +661,10 @@ sub _ask_okcancel($@) {
 }
 
 
-sub _ask_file($$) {
-    my ($o, $title) = @_;
+sub _ask_file {
+    my ($o, $title, $path) = @_;
     my $f = $o->{rwindow} = new Gtk::FileSelection $title;
+    $f->set_filename($path);
     $f->ok_button->signal_connect(clicked => sub { $o->{retval} = $f->get_filename ; Gtk->main_quit });
     $f->cancel_button->signal_connect(clicked => sub { Gtk->main_quit });
     $f->hide_fileop_buttons;
