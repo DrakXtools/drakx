@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 29mdk
+Release: 30mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,22 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Apr  8 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-30mdk
+- fix inverted translations in french catalog (#8217)
+- fix drakxtools postuninstall script
+- drakbackup (stew):
+  o remove config-info (will be in a man page)
+  o reuse more code from ugtk2 layer regarding cursors managment
+  o combine/rework restore code
+- drakTermServ (stew):
+  o do not move existing dhcpd.conf
+  o add an include for terminal-server instead
+- drakups: update to new libconf-0.32 API (dam's)
+- harddrake service: log nv<=>nvidia switches
+- localedrake: set default font to use in KDE for devanagari and
+  malayalam scripts
+- ugtk2: fix faillure with perl-Gtk+-1.04x (#9411)
+
 * Mon Mar 29 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-29mdk
 - harddrake service: skip nv/nvidia test when there's no nvidia card
 
