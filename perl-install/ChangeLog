@@ -1,3 +1,516 @@
+2004/06/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: unset automatic in ftp/http install when ramdisk
+	can't be loaded
+	use new http_proxy variables instead of the old answers (not anymore
+	available)
+
+2004/06/25  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm: drop obsolete function
+	drop obsolete lnx4win_file()
+	major cleanup and rewrite
+	  - some functions have been renamed
+	  - some functions have changed prototype
+	  - no more bootloader::vga_modes, we use
+	Xconfig::resolution_and_depth::bios_vga_modes()
+	  - no more detectloader, it is now detect_main_method(),
+	but notice that bootloader::read() + bootloader::write() abstract all
+	this!
+	  - update_for_renumbered_partitions() is surely broken :)
+	  - sort_hds_according_to_bios() and mixed_kind_of_disks() uses new
+	function hd2bios_kind()
+	  - new data structure "kernel_str"
+	  - lilo doesn't need so much help as it used to be, so don't put as
+	much
+	  "disk=/dev/sda bios=0x80" as before
+	some goals:
+	  - don't rely on device names
+	  (this allows not to care too much about devfs vs udev vs ...)
+	  - kernels can be named something else than /boot/vmlinuz*,
+	  please use the various functions to construct the initrd file name,
+	the symlink name...
+
+	* install_any.pm: 
+	  - adapt to new bootloader.pm
+	  - simplify
+
+	* standalone/drakTermServ: simplify using new bootloader.pm
+
+	* Xconfig/various.pm, any.pm, standalone/drakboot, install_steps.pm: adapt
+	to new bootloader.pm
+
+	* fs.pm: 
+	  - enhance subpart_from_wild_device_name() to handle "sda" the same as
+	"/dev/sda" (when /dev/sda exists)
+	  - new function device2part() which uses subpart_from_wild_device_name
+	and the
+	  given fstab to convert the device name to the corresponding structure
+	  (this allows not relying too much on the device name)
+
+	* share/rpmsrate: 
+	  - scim-uim requires scim, no need to have both
+	  - scim-chinese requires scim, no need to have both
+
+2004/06/24  fisher
+
+	* share/po/uk.po: translation update.
+
+2004/06/24  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: don't redefine buf for /proc/scsi/scsi (size 5000
+	instead of 2048)
+	don't redefine buf for /proc/scsi/scsi (size 5000 instead of 512)
+
+2004/06/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* modules.pm: perl_checker compliance
+	remove unneeded "above" lines in modules::write_conf
+	delete "above" lines when removing a sound alias with
+	modules::remove_alias_regexp
+	fix stupid typo
+	in modules::when_load, try to find the best sound slot index instead of
+	always overwritting sound-slot-0 (#7890)
+
+	* network/tools.pm, network/network.pm: properly handle ascii WEP keys
+	(#9884)
+
+2004/06/24  Pixel  <pixel at mandrakesoft.com>
+
+	* share/rpmsrate: 
+	  - add gv (not installed by default) to have it in the package tree
+	(bugzilla #10127)
+	  - add pciutils (not installed by default) in MONITORING (but i don't
+	think it will get to the package tree)
+
+	* mouse.pm: module hid is now named usbhid (thanks to svetljo on cooker)
+
+2004/06/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* standalone/draksplash, standalone/drakperm, standalone/drakbug,
+	standalone/harddrake2, standalone/printerdrake, standalone/logdrake,
+	standalone/draksec, standalone/drakfloppy, standalone/drakTermServ,
+	standalone/net_monitor, standalone/drakfont, standalone/drakups,
+	standalone/drakclock: Some standalone tools don't compile when run from
+	console
+
+2004/06/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* install_steps_interactive.pm (acceptLicense) just reboot when one cancel
+	the globetrotter first time wizard
+	(acceptLicense) just reboot when one cancel the globetrotter first time
+	wizard
+
+	* drakxtools.spec: 10-48mdk
+
+	* share/rpmsrate: 
+	  - switch japanese to scim+uim and scim
+	  - switch chinese to scim
+
+	* lang.pm: switch chinese to scim by default
+	fix gtk IM module for scim IM
+	fix xcin IM
+	add back support for kinput2 IM
+	sort CJK's IM entries
+	  - factorize im settings
+	  - change default IM according to cooker-i18n feedback:
+	o default all chinese locales to fctix IM
+	  o default all japanese locales to scim+uim IM
+
+	* standalone/service_harddrake.sh: rollback service priority
+
+2004/06/23  Olivier Blin <oblin at mandrakesoft.com>
+
+	* any.pm: remove global vga choice to please Pixel and Titi
+	add a global vga option in any::setupBootloader__general (fix bug 8957)
+
+	* standalone/drakclock: be mouse wheel aware (fix bug 9926)
+
+	* mdk-stage1/Makefile: define _FILE_OFFSET_BITS=64 so that stat() is large
+	files aware
+
+	* modules.pm: fix another typo from Titi in #9112 fix (#6802)
+
+	* mdk-stage1/directory.c: revert the workaround on stat() now that it
+	works on large files
+
+	* standalone/drakboot: remove unneeded quotes
+	fix processing of config file broken again by Titi
+	please perl_checko the Clean Keeper
+	remove spurious spaces
+	ask for bootloader choice when framebuffer isn't configured (fix bug
+	9925)
+	remove unused variable
+
+2004/06/23  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/monitor.pm: good_default_monitor() should work *nearly*
+	everywhere, so use it for the auto_install fallback
+	(this is used by mandrakemove)
+	good_default_monitor() should work *nearly* everywhere, so use it for
+	the auto_install fallback
+	(this is used by mandrakemove)
+
+	* any.pm: kernelVersion() is unused (only bootloader::mkbootdisk() used
+	it, and it has already been removed)
+
+2004/06/23  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: Make perl_checker happy
+	Support for supplementary CDs during installation (from the 10.0
+	update branch.)
+
+2004/06/23  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakTermServ: code cleanup per Pixel
+
+2004/06/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm: use upcase letters whenever needed
+
+	* network/netconnect.pm: 
+	  - unblacklist tg3 since QA has confirmed it works smoothly
+	  - blacklist buggy madwifi_pci
+
+	* standalone/drakboot: 
+	  - fix processing of config file broken by magic olivier
+	  - reuse cat_()
+
+	* modules.pm: merge fix from MDK-10-branch: tv modules weren't loaded on
+	boot
+
+	* share/po/br.po: update
+
+2004/06/22  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/drakboot: fix indentation
+	do not update bootsplash in autologin wizard
+	remove spurious comma and spaces
+
+	* network/netconnect.pm: rephrase zeroconf dialog (cybercfo)
+	blacklist sis900 and tg3 modules for network hotplugging
+
+2004/06/22  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: 
+	  - use Xconfig::resolution_and_depth::bios_vga_modes() instead of
+	%bootloader::vga_modes
+	  - remove broken sparc code
+
+	* docs/HACKING, install2.pm: rename --test in --testing for install2 (more
+	coherent with standalone tools)
+
+	* ugtk2.pm: 
+	  ->set_title doesn't like title undef, give it '' instead
+	(to remove ugly warnings at install)
+
+	* Xconfig/resolution_and_depth.pm: perl_checker compliance
+	  - export @bios_vga_modes (needed for bootloader vga=)
+	  - to_string should return '' instead of ()
+	remove duplicate (use existing function to_string())
+	sync with detect-resolution
+
+	* bootloader.pm: add check_enough_space() and use it
+	  - fix typo
+	  - remove silo code (sparc)
+
+2004/06/22  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Make the CD-Rom install with supplementary CD work
+	(don't forget to
+	re-mount the main CDs).
+
+	* share/po/fr.po: French translations for new messages
+
+2004/06/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl_consts.pm: update fields description (baud
+	<baud123@tuxfamily.org>)
+	update doc urls (baud <baud123@tuxfamily.org>)
+	add new ISP entries (baud <baud123@tuxfamily.org>)
+	fix Telia entry (baud <baud123@tuxfamily.org>)
+	fix Free dns (baud <baud123@tuxfamily.org>)
+	merge duplicate Free entries
+	enhance tel9com name (baud <baud123@tuxfamily.org>)
+	kill duplicate spanish entry (baud <baud123@tuxfamily.org>)
+	enhance a few entries (baud <baud123@tuxfamily.org>)
+	fix spanish isp name
+
+	* drakxtools.spec: fix build broken by net_applet
+	move net_applet in right package (aka drakxtools-gtk)
+	10-47mdk
+
+	* standalone/net_applet: perl_checker fixes
+	(getIP) fix build
+
+2004/06/21  Daouda Lo  <daouda at mandrakesoft.com>
+
+	* Makefile.drakxtools: 
+	  - autostart file for KDE/GNOME
+	  - add net_applet file (installed in bindir)
+
+	* drakxtools.spec: 
+	  - net_applet to watch network connection
+
+	* Makefile.config: 
+	  - added net_applet
+
+	* share/net_applet.desktop: 
+	  - autostart file for KDE/GNOME
+
+	* pixmaps/connected.png, pixmaps/disconnected.png: network applet state
+	icons
+
+	* standalone/net_applet: 
+	  - cleaning titi factorization
+	  - net_applet to watch network connection
+
+2004/06/21  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/shorewall.pm: accept from fw to loc
+
+2004/06/21  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: allow to use ISO images in NFS install
+
+	* mdk-stage1/directory.c: workaround the fact that stat() fails on large
+	files (like DVD ISO images)
+	add log message when using directory as a mirror tree
+	split directory specific functions and move them from disk.c to
+	directory.c (will be used in NFS install)
+
+	* mdk-stage1/disk.c, mdk-stage1/directory.h: split directory specific
+	functions and move them from disk.c to directory.c (will be used in NFS
+	install)
+
+	* mdk-stage1/Makefile: allow to use ISO images in NFS install
+	split directory specific functions and move them from disk.c to
+	directory.c (will be used in NFS install)
+
+2004/06/21  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: fix missing trailling quotes
+
+	* standalone/logdrake: kill stupid useless code
+
+	* standalone/harddrake2: do not display version number in title bar since
+	it's useless
+	according to interface team
+
+	* standalone/net_applet (getIP) simplify
+
+2004/06/20  reinouts
+
+	* share/po/nl.po: Updated Dutch (nl) translation
+	by Reinout van Schouwen <reinout@cs.vu.nl>
+
+2004/06/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/mousedrake: kill dead code
+
+	* standalone/harddrake2: show list of partitions
+	display better info for hard disks
+	really ensure that "identification" section is displayed first
+	still show info field if detect_devices::getIDE() failled to parse it
+	for a
+	known vendor string
+	still show mass media fields for mass media that are not hard disks (eg:
+	cdroms, dvdrom, burners, ...)
+	remove old SCSI garbage code
+	adapt fields name to new behavior of mousedrake on 2.6.x kernels
+	smoother mouse data: sort fields
+	show more fields for mice
+	move mice help where it belongs
+	simplify
+	display media type for mass storage devices
+	fix undisplayed fields:
+	  - if a per-class group exists, prefer it upon generic group
+	  - only care about current group fields, not about those of the group
+	that has
+	the same name in generic
+	show splited vendor and description fields for USB hard disks too
+
+	* share/po/fr.po: spell-check french translations
+	update
+	typo fixes
+
+	* drakxtools.spec: 10-46mdk
+	cleanups build
+	typo fix
+
+	* standalone/service_harddrake: fix logs of newly added hardware
+	fix warnings
+	only log about nv <-> nvidia swtich only if we do have to perform it
+	fix mouse autoconfiguration done on every boot instead of on 2.4.x/2.6.x
+	switches
+	simplify x11 autoconf
+	log error if a tool isn't executable
+	simplify globetrotter case: skip non interactive stuff
+	do not uselessy fork shells
+	log error when we cannot run the config tool
+	faster auto mouse reconfiguration on major kernel switch
+	harddrake wasn't aware of newly added wireless network card since early
+	2004/02
+	fix logs of newly added hardware
+	fix mouse autoconfiguration done on every boot instead of on 2.4.x/2.6.x
+	switches
+
+2004/06/19  yrahal
+
+	* share/po/ar.po: Committing Arabic translation
+	Sync with Arabeyes.org's CVS
+
+2004/06/18  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/disk.c: in iso install, use ISOPATH environment variable
+	instead of loopback device filename (limited to 64 chars)
+
+	* pkgs.pm: add and use install_any::method_allows_medium_change
+	in disk-iso install, automatically choose and change ISO images,
+	according to their volume id and application id
+
+	* install_steps_gtk.pm, install_steps_interactive.pm: fix
+	method_allows_medium_change calls (I suck)
+	add and use install_any::method_allows_medium_change
+	in disk-iso install, automatically choose and change ISO images,
+	according to their volume id and application id
+
+	* c/stuff.xs.pl: in iso install, use ISOPATH environment variable instead
+	of loopback device filename (limited to 64 chars)
+	in disk-iso install, automatically choose and change ISO images,
+	according to their volume id and application id
+
+	* install_any.pm: in disk-iso install, strip old root from ISOPATH and
+	remove iso file from path if present
+	in iso install, use ISOPATH environment variable instead of loopback
+	device filename (limited to 64 chars)
+	add and use install_any::method_allows_medium_change
+	in disk-iso install, automatically choose and change ISO images,
+	according to their volume id and application id
+
+2004/06/18  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Don't ask a supplementary CD for upgrades
+
+2004/06/18  tsdgeos
+
+	* share/po/ca.po: typos
+
+2004/06/18  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakupdate_fstab: merge floppies support from MDK-10-branch
+
+	* harddrake/autoconf.pm: merge x11 autoconf support from MDK-10-branch
+
+	* authentication.pm (configure_krb5_for_AD) fix kerberos server lookup
+	(vincent guardiola)
+
+	* install_steps_newt.pm: fix comment
+
+	* standalone/service_harddrake: only stop boot progressbar if there a non
+	automatic tool to run
+	merge globetrotter support from MDK-10-branch
+	merge mouse autoreconfiguration when switching between 2.4.x and 2.6.x
+	kernels
+	from MDK-10-branch
+	merge x11 autoconf support from MDK-10-branch
+	only stop boot progressbar if there a non automatic tool to run
+
+	* install_steps_gtk.pm, do_pkgs.pm, install2.pm, install_gtk.pm: merge
+	globetrotter support from MDK-10-branch
+
+	* standalone/harddrake2: add help for new fields
+	group driver fields for sound cards
+	do not display PCI/USB vendor id in identification section
+	  - simplify item grouping
+	  - always show identification first
+	fix displaying pci/usb vendor and device id
+	display bus (PCI, USB, ...) first
+	fix help for floppies
+	  - add infrastructure in order to group fields
+	  - start to group fields for mass media, CPUs and generic PCI/USB
+	devices
+
+	* drakxtools.spec: update 10-45mdk
+	10-45mdk
+
+	* Xconfig/card.pm: merge from MDK-10-branch: add support for ATI_GLX and
+	NVIDIA_GLX cohabitation
+
+2004/06/17  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/probing.c: enlarge your scsi buffer (previous size wasn't
+	enough with more than one scsi device, fixed thanks to nplanel)
+
+	* mdk-stage1/disk.c: add disk-iso install method
+	do not delete loopbacks devices before umount but after
+
+2004/06/17  Pixel  <pixel at mandrakesoft.com>
+
+	* authentication.pm: 
+	  - AD_users_db is cn=users,ldap_domain and not
+	cn=users,dc=servername,ldap_domain
+	  - AD_user (for binddn) is user@domain instead of
+	cn=user,cn=users,ldap_domain
+	  - better system-auth krb5 configuration
+	(all this as requested by Vincent Guardiola)
+
+2004/06/17  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm, install_any.pm: Install with a supplementary CD:
+	allow to override the main compssUsers and rpmsrate
+
+2004/06/17  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: bump buildrequires on ldetect-devel so that tools get
+	proper module
+	information on USB devices (we should really use a shared library
+	instead ...)
+	compile everything with standard flags from rpm
+
+	* harddrake/data.pm (pciusb_id) fix duplicated USB disks (in both disk and
+	unknown categories)
+	(set_removable_configurator) fix typo preventing adding entries in
+	/etc/fstab for new removable media
+	(pciusb_id) fix duplicated USB disks (in both disk and unknown
+	categories)
+	(set_removable_configurator, set_removable_remover) use the same flags
+	as hotplug does when calling drakupdate_fstab
+	(set_removable_configurator) fix adding a removable medium
+
+	* tools/cvslog2changelog.pl: perl_checker cleanups
+
+	* standalone/drakupdate_fstab: add support for floppies
+
+	* lang.pm, ugtk2.pm: kill warnings
+
+	* standalone/service_harddrake: autoconfigure mouse when swtiching back
+	between 2.4.x and 2.6.x kernels
+
+	* standalone/harddrake2: kill warnings
+	kill usb_id like usb_vendor is (for USB mass storage media)
+	add missing field for hard disks
+	the split of the cpu help nicely show up that mice were using CPU help.
+	let's describe their "name" field too.
+	split out CPU help
+	use new infrastructure in order to not display useless floppy help for
+	SCSI
+	disks
+	add infrastructure for per class help (and add missing space around
+	brackets
+	that perl_checker did miss :-()
+	perl_checker cleanup
+
+	* install_steps_gtk.pm, install_gtk.pm: fix applying keyboard
+	configuration in globetrotter's first time wizard
+
+	* Xconfig/card.pm (install_server) remove proprietary gl libraries when
+	configuring a non
+	ATI/NVIDIA card and redo ldconfig cache accordingly
+	(to_raw_X) load non nvidia glx for all non nvidia cards, thus fixing 3D
+	on non
+	NVIDIA/ATI gfx card
+
 2004/06/15  Olivier Blin <oblin at mandrakesoft.com>
 
 	* mdk-stage1/disk.c: redesign of the ISO image selection dialog, add an
@@ -31534,7 +32047,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.926 2004/06/08 15:02:09 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.927 2004/06/15 15:33:17 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
