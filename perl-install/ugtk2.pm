@@ -1523,6 +1523,7 @@ sub set_pixmap {
     return if !$darea->realized;
     ugtk2::set_back_pixmap($darea);
     $darea->{layout} = $darea->create_pango_layout($darea->{text});
+    $darea->{txt_width} = ($darea->{layout}->get_pixel_size)[0];
 }
 
 
@@ -1535,6 +1536,7 @@ sub new {
     $darea->modify_font(Gtk2::Pango::FontDescription->from_string(common::N("_banner font:\nSans 14")));
     $darea->{icon} = ugtk2::gtkcreate_pixbuf($icon);
     $darea->{text} = $text;
+    my $is_rtl = lang::text_direction_rtl();
 
     $darea->signal_connect(realize => \&set_pixmap);
     $darea->signal_connect("style-set" => \&set_pixmap);
@@ -1542,9 +1544,12 @@ sub new {
                                my $style = $darea->get_style;
                                my $height = $darea->{icon}->get_height;
                                my $padding = int(($d_height - $height)/2);
+                               my $d_width = $darea->allocation->width;
+                               my $x_icon = $is_rtl ? $d_width - $padding - $darea->{icon}->get_width : $padding;
+                               my $x_text = $is_rtl ? $x_icon - $padding - $darea->{txt_width} : $height + $padding*2;
                                $darea->{icon}->render_to_drawable($darea->window, $style->bg_gc('normal'),
-                                                                  0, 0, $padding, $padding, -1, -1, 'none', 0, 0);
-                               $darea->window->draw_layout($style->text_gc('normal'), $height + $padding*2, $o_options->{txt_ypos} || 25,
+                                                                  0, 0, $x_icon, $padding, -1, -1, 'none', 0, 0);
+                               $darea->window->draw_layout($style->text_gc('normal'), $x_text, $o_options->{txt_ypos} || 25,
                                                            $darea->{layout});
                                1;
                            });
