@@ -166,7 +166,7 @@ sub configureNetwork {
     $last or return;
     
   configureNetwork_step_2:
-    if ($last->{BOOTPROTO} !~ /static/) {
+    if (is_dynamic_ip($intf)) {
 	$netc->{minus_one} = 1;
 
 	$in->ask_from(N("Configuring network"), N("
