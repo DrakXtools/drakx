@@ -32,7 +32,7 @@ local $_ = join '', @ARGV;
 
 /-h/ and die "usage: drakgw [--version]\n";
 /-version/ and die 'version: $Id$ '."\n";
-$::isEmbedded or $::isWizard = 1;
+!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
 $::Wizard_pix_up = "wiz_drakgw.png";
 $::Wizard_title = _("Internet Connection Sharing");
 $::direct = /-direct/;
@@ -664,6 +664,9 @@ Click on Configure to launch the setup wizard.", $setup_state));
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.53  2001/09/12 10:57:01  damien
+#- corrected wizard mode in newt mode
+#-
 #- Revision 1.52  2001/09/06 15:38:09  gc
 #- works now ;p
 #-

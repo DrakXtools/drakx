@@ -38,9 +38,6 @@ my $xpm_path="/usr/share/libDrakX/pixmaps";
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 $::expert = "@ARGV" =~ /--expert/;
-$::isEmbedded or $::isWizard=1;
-$::Wizard_pix_up = "wiz_draknet.png";
-$::Wizard_title = "Network & Internet Configuration";
 local $_ = join '', @ARGV;
 
 #/-h/ and die "usage: draknet[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
@@ -53,6 +50,9 @@ my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'la
 #$::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = 'interactive'->vnew('su', 'network');
+!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+$::Wizard_pix_up = "wiz_draknet.png";
+$::Wizard_title = "Network & Internet Configuration";
 
 MDK::Common::Globals::init(
 	      in => $in,
