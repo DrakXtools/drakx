@@ -165,9 +165,6 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/{%_initrddir,%_sysconfdir/{X11/xinit.d,sysconfig/harddrake2}}
 touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
-mv $RPM_BUILD_ROOT%_sbindir/net_monitor \
-   $RPM_BUILD_ROOT%_sbindir/net_monitor.real
-ln -sf %_bindir/consolehelper $RPM_BUILD_ROOT%_sbindir/net_monitor
 mkdir -p $RPM_BUILD_ROOT%_sysconfdir/{pam.d,security/console.apps}
 cp pam.net_monitor $RPM_BUILD_ROOT%_sysconfdir/pam.d/net_monitor
 cp apps.net_monitor $RPM_BUILD_ROOT%_sysconfdir/security/console.apps/net_monitor
