@@ -708,7 +708,7 @@ sub pcmcia_controller_probe() {
 sub real_pcmcia_probe() {
     return if $::testing;
 
-    c::pcmcia_probe() || (find { $_->{driver} eq 'yenta_socket' } pci_probe()) && 'yenta_socket';
+    c::pcmcia_probe() || (pcmcia_controller_probe())[0]->{driver};
 }
 
 sub pcmcia_probe() {
