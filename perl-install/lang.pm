@@ -896,13 +896,13 @@ sub pack_langs {
 sub system_locales_to_ourlocale {
     my ($locale_lang, $locale_country) = @_;
     my $locale = {};
-    my $h = analysed_locale($locale_lang);
+    my $h = analyse_locale_name($locale_lang);
     my $locale_lang_no_encoding = join('_', $h->{main}, if_($h->{country}, $h->{country}));
     $locale->{lang} = member($locale_lang_no_encoding, list_langs()) ?
 	$locale_lang_no_encoding : #- special lang's such as en_US pt_BR
 	$h->{main};
     $locale->{lang} .= '@' . $h->{variant} if $h->{variant};
-    $locale->{country} = $h->{country};
+    $locale->{country} = analyse_locale_name($locale_country)->{country};
     $locale->{utf8} = $h->{encoding} eq 'UTF-8';
     #- safe fallbacks
     $locale->{lang} ||= 'en_US';
