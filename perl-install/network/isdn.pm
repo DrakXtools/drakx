@@ -23,15 +23,15 @@ sub configure {
 			       ) or return;
     if ($e =~ /card/) {
       intern_pci:
-	$netc->{isdntype}='isdn_internal';
-	$netcnx->{isdn_internal}={};
+	$netc->{isdntype} = 'isdn_internal';
+	$netcnx->{isdn_internal} = {};
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type';
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
-	$netc->{isdntype}='isdn_external';
-	$netcnx->{isdn_external}={};
-	$netcnx->{isdn_external}{device}=$netc->{autodetect}{modem};
-	$netcnx->{isdn_external}{special_command}='AT&F&O2B40';
+	$netc->{isdntype} = 'isdn_external';
+	$netcnx->{isdn_external} = {};
+	$netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
+	$netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
 	require network::modem;
 	network::modem::pppConfig($netcnx->{isdn_external}, $mouse, $netc) or goto isdn_step_1;
     }
@@ -76,7 +76,7 @@ sub isdn_write_config_backend {
 	} else {
 	    my $a = "";
 	    defined $isdn->{$_} and $a .= "$_=" . $isdn->{$_} . " " foreach qw(type protocol mem io io0 io1 irq);
-	    $isdn->{driver} eq "hisax" and $a.="id=HiSax";
+	    $isdn->{driver} eq "hisax" and $a .= "id=HiSax";
 	    modules::set_options($isdn->{driver}, $a);
 	}
 	modules::add_alias("ippp0", $isdn->{driver});
@@ -243,7 +243,7 @@ sub isdn_detect {
 	    isdn_ask($isdn, $netc, N("I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen.")) or return;
 	} else {
 	  isdn_detect_step_1:
-	    $isdn->{protocol}=isdn_ask_protocol() or return;
+	    $isdn->{protocol} = isdn_ask_protocol() or return;
 	  isdn_detect_step_2:
 	    isdn_ask_info($isdn, $netc) or goto isdn_detect_step_1;
 	    isdn_write_config($isdn, $netc) or goto isdn_detect_step_2;
@@ -251,7 +251,7 @@ sub isdn_detect {
     } else {
 	isdn_ask($isdn, $netc, N("No ISDN PCI card found. Please select one on the next screen.")) or return;
     }
-    $netc->{$_}='ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
+    $netc->{$_} = 'ippp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }
 

@@ -40,7 +40,7 @@ if_((arch() !~ /alpha/) && (arch() !~ /ppc/),
 	$h{entered} = 0;
 	$h{onError} = $installSteps[$i + 2 * $h{onError}];
 	$h{reachable} = !$h{needs};
-	$installSteps{ $installSteps[$i]} = \%h;
+	$installSteps{$installSteps[$i]} = \%h;
 	push @orderedInstallSteps, $installSteps[$i];
     }
     $installSteps{first} = $installSteps[0];

@@ -212,7 +212,7 @@ LC_ALL=C LANG=C LANGUAGE=C LC_MESSAGES=C /usr/sbin/adsl-start $netc->{NET_DEVICE
 echo 'not yet implemented, still beta software'
 ", $netc->{adsltype}) }
 
-    $netc->{NET_INTERFACE}='ppp0';
+    $netc->{NET_INTERFACE} = 'ppp0';
 }
 
 1;

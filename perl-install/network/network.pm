@@ -269,7 +269,7 @@ sub configureNetworkIntf {
     my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinoco_cs orinoco airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport);
     my $flag = 0;
     foreach (@wireless_modules) {
-	$module =~ /$_/ and $flag =1;
+	$module =~ /$_/ and $flag = 1;
     }
     if ($flag) {
 	$intf->{wireless_eth} = 1;
@@ -305,7 +305,7 @@ notation (for example, 1.2.3.4).");
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
-  	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') ."\n\n") .
+  	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n") .
 	          $text,
 	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },

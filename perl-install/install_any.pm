@@ -689,7 +689,7 @@ sub kdeicons_postinstall {
 
 	template2userfile($prefix, 
 			  "$ENV{SHARE_PATH}/$name.kdelnk.in",
-			  "Desktop/$text" .  ($nb && " $nb"). ".kdelnk",
+			  "Desktop/$text" .  ($nb && " $nb") . ".kdelnk",
 			  1, %$_) if $name;
     }
 

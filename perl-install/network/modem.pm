@@ -14,9 +14,9 @@ use MDK::Common::Globals "network", qw($in $prefix);
 
 sub configure {
     my ($netcnx, $mouse, $netc) = @_;
-    $netcnx->{type}='modem';
-    $netcnx->{$netcnx->{type}}={};
-    $netcnx->{modem}{device}=$netc->{autodetect}{modem};
+    $netcnx->{type} = 'modem';
+    $netcnx->{$netcnx->{type}} = {};
+    $netcnx->{modem}{device} = $netc->{autodetect}{modem};
   modem_step_1:
     pppConfig($netcnx->{$netcnx->{type}}, $mouse, $netc) or return;
     write_cnx_script($netc, "modem",
@@ -33,7 +33,7 @@ killall pppd
 sub pppConfig {
     my ($modem, $mouse, $netc) = @_;
 
-    $mouse ||={};
+    $mouse ||= {};
     $mouse->{device} ||= readlink "$prefix/dev/mouse";
     $::isInstall and $in->set_help('selectSerialPort');
     $modem->{device} ||= $in->ask_from_listf('', N("Please choose which serial port your modem is connected to."),
@@ -53,7 +53,7 @@ sub pppConfig {
     ]) or return;
     $netc->{DOMAINNAME2} = $modem->{domain};
     any::pppConfig($in, $modem, $prefix);
-    $netc->{$_}='ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
+    $netc->{$_} = 'ppp0' foreach 'NET_DEVICE', 'NET_INTERFACE';
     1;
 }
 

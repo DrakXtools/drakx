@@ -32,7 +32,7 @@ sub info {
     $info .= N("Monitor: %s\n", $monitor->{ModelName});
     $info .= N("Monitor HorizSync: %s\n", $monitor->{HorizSync}) if $::expert;
     $info .= N("Monitor VertRefresh: %s\n", $monitor->{VertRefresh}) if $::expert;
-    $info .= N("Graphics card: %s\n", $device->{VendorName} . ' '. $device->{BoardName});
+    $info .= N("Graphics card: %s\n", $device->{VendorName} . ' ' . $device->{BoardName});
     $info .= N("Graphics memory: %s kB\n", $device->{VideoRam}) if $device->{VideoRam};
     if (my $resolution = eval { $raw_X->get_resolution }) {
 	$info .= N("Color depth: %s\n", translate($Xconfig::resolution_and_depth::depth2text{$resolution->{Depth}}));

@@ -175,7 +175,7 @@ sub switch {
                                [
                                 { label => N("Driver:"), val => \$new_driver, list => $alternative, default => $new_driver, sort =>1, format => sub {
                                     my %des = modules::category2modules_and_description('multimedia/sound');
-                                    "$_[0] (". $des{$_[0]} . ')'
+                                    "$_[0] (" . $des{$_[0]} . ')'
                                     }, allow_empty_list => 1 },
                                 {
                                     val => N("Help"), disabled => sub {},

@@ -466,7 +466,7 @@ sub main {
 	    $o->{intf} ||= { $l->{DEVICE} => $l };
 	}
 	if (-e '/etc/resolv.conf') {
-	    my $file ='/etc/resolv.conf';
+	    my $file = '/etc/resolv.conf';
 	    log::l("found network config file $file");
 	    add2hash($o->{netc}, network::read_resolv_conf($file));
 	}
@@ -618,7 +618,7 @@ sub main {
 
     #- to ensure linuxconf doesn't cry against those files being in the future
     foreach ('/etc/modules.conf', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/sysconfig/network', '/etc/X11/fs/config') {
-	my $now = time - 24 * 60 * 60;
+	my $now = time() - 24 * 60 * 60;
 	utime $now, $now, "$o->{prefix}/$_";
     }
     $::live or install_any::killCardServices();

@@ -1109,7 +1109,7 @@ sub setup_socket {
 	join '', ("socket://$remotehost", $remoteport ? (":$remoteport") : ());
 
     #- LPD and LPRng need netcat ('nc') to access to socket printers
-    if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng'))&& 
+    if ((($printer->{SPOOLER} eq 'lpd') || ($printer->{SPOOLER} eq 'lprng')) && 
         (!$::testing) &&
         (!files_exist((qw(/usr/bin/nc))))) {
         $in->do_pkgs->install('nc');
@@ -2068,12 +2068,12 @@ You should make sure that the page size and the ink type/printing mode (if avail
 		my $j;
 		for ($j = 0; $j <= $#{$choicelists[$i]}; $j++) {
 		    if ($choicelists[$i][$j] eq $userinputs[$i]) {
-			push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=". $shortchoicelists[$i][$j]);
+			push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=" . $shortchoicelists[$i][$j]);
 		    }
 		}
 	    } elsif ($printer->{ARGS}[$i]{type} eq 'bool') {
 		# boolean option
-		push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=".
+		push(@{$printer->{currentqueue}{options}}, $printer->{ARGS}[$i]{name} . "=" .
 		     (($choicelists[$i][0] eq $userinputs[$i]) ? "1" : "0"));
 	    } else {
 		# numerical option
@@ -3447,8 +3447,7 @@ What do you want to modify on this printer?",
 		#- URI)
 		if ($printer->{configured}{$queue}) {
 		    foreach my $type (qw(file lpd socket smb ncp postpipe)) {
-			if ($printer->{currentqueue}{connect}
-			    =~ /^$type:/) {
+			if ($printer->{currentqueue}{connect} =~ /^$type:/) {
 			    $printer->{TYPE} = 
 				($type eq 'file' ? 'LOCAL' : uc($type));
 			    last;

@@ -7,7 +7,7 @@ use network;
 my $sock;
 
 sub getFile {
-    local($^W) = 0;
+    local ($^W) = 0;
 
     my ($url) = @_;
     $sock->close if $sock;

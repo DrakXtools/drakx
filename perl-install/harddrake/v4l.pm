@@ -221,7 +221,7 @@ If your card is misdetected, you can force the right tuner and card types here. 
         $conf{card} = $cards_lst->{$driver}{$conf{card}};
 
         my $options = 
-            'radio=' . ($conf{radio} ? 1 : 0) . ' '.
+            'radio=' . ($conf{radio} ? 1 : 0) . ' ' .
             join(' ', map { if_($conf{$_} ne -1, "$_=$conf{$_}") } qw(card pll tuner gbuffers));
         if ($options) {
             log::l("[harddrake::bttv] $options");

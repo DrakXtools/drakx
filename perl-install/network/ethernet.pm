@@ -16,7 +16,7 @@ use MDK::Common::Globals "network", qw($in $prefix);
 sub configure_cable {
     my ($netcnx, $netc, $intf, $first_time) = @_;
     $::isInstall and $in->set_help('configureNetworkCable');
-    $netcnx->{type}='cable';
+    $netcnx->{type} = 'cable';
     #  		     $netcnx->{cable}={};
     #  		     $in->ask_from_entries_ref(N("Cable connection"),
     #  N("Please enter your host name if you know it.
@@ -38,9 +38,9 @@ sub configure_cable {
 Default is dhcpcd"),
 					sub { $_[0]{description} },
 					\@m)) {
-	    $f->{c}==1 and $netcnx->{dhcp_client}="dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
-	    $f->{c}==3 and $netcnx->{dhcp_client}="dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
-	    $f->{c}==4 and $netcnx->{dhcp_client}="dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
+	    $f->{c} == 1 and $netcnx->{dhcp_client} = "dhcpcd" and $in->do_pkgs->install(qw(dhcpcd));
+	    $f->{c} == 3 and $netcnx->{dhcp_client} = "dhcpxd" and $in->do_pkgs->install(qw(dhcpxd));
+	    $f->{c} == 4 and $netcnx->{dhcp_client} = "dhcp-client" and $in->do_pkgs->install(qw(dhcp-client));
 	}
     } else {
 	$in->do_pkgs->install(qw(dhcpcd));
@@ -63,7 +63,7 @@ sub configure_lan {
     configureNetwork2($in, $prefix, $netc, $intf);
     $netc->{NETWORKING} = "yes";
     if ($netc->{GATEWAY} || grep { $_->{BOOTPROTO} eq 'dhcp' } values %$intf) {
-	$netcnx->{type}='lan';
+	$netcnx->{type} = 'lan';
 	$netcnx->{NET_DEVICE} = $netc->{NET_DEVICE} = '';
 	$netcnx->{NET_INTERFACE} = 'lan'; #$netc->{NET_INTERFACE};
         write_cnx_script($netc, "local network",
@@ -162,7 +162,7 @@ sub conf_network_card_backend {
 sub go_ethernet {
     my ($netc, $intf, $type, $ipadr, $netadr, $first_time) = @_;
     conf_network_card($netc, $intf, $type, $ipadr, $netadr) or return;
-    $netc->{NET_INTERFACE}=$netc->{NET_DEVICE};
+    $netc->{NET_INTERFACE} = $netc->{NET_DEVICE};
     configureNetwork($netc, $intf, $first_time) or return;
 #      if ( $::isStandalone and $netc->{NET_DEVICE}) {
 #  	$in->ask_yesorno(N("Network interface"),

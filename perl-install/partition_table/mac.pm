@@ -128,7 +128,7 @@ sub read($$) {
     c::lseek_sector(fileno(F), $sector, 512) or die "reading of partition in sector $sector failed";
 
     my @pt;
-    for (my $i=0;$i<$partmapsize;$i++) {
+    for (my $i = 0;$i < $partmapsize;$i++) {
     	my $part;
         sysread F, $part, psizeof($p_format) or die "error while reading partition info in sector $sector";
 

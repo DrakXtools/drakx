@@ -182,7 +182,7 @@ sub updateScannerDBfromSane {
 		  model => sub {
 		      unless ($name) { $name = $val; next }
 		      $name = (member($mfg, keys %$sane2DB)) ?
-			(ref $sane2DB->{ $mfg}) ? $sane2DB->{ $mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
+			(ref $sane2DB->{$mfg}) ? $sane2DB->{$mfg}($name) : "$sane2DB->{ $mfg }|$name" : "$mfg|$name";
 		      if (member($name, keys %$scanner::scannerDB)) {
 			  print "#[$name] already in ScannerDB!\n";
 		      } else {
@@ -200,7 +200,7 @@ sub updateScannerDBfromSane {
 		       s/\s+$//;
 		       /^\;/ and next;
 		       ($cmd, $val) = /:(\S+)\s*\"([^\;]*)\"/ or next; #log::l("bad line $lineno ($_)"), next;
-		       my $f = $fs->{ $cmd};
+		       my $f = $fs->{$cmd};
 		       $f ? $f->() : log::l("unknown line $lineno ($_)");
 		   }
 	$fs->{model}(); # the last one

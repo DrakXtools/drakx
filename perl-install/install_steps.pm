@@ -362,12 +362,12 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     #- small transaction will be built based on this selection and depslist.
     my @toInstall = pkgs::packagesToInstall($packages);
 
-    my $time = time;
+    my $time = time();
     $ENV{DURING_INSTALL} = 1;
     pkgs::install($o->{prefix}, $o->{isUpgrade}, \@toInstall, $packages);
     delete $ENV{DURING_INSTALL};
     run_program::rooted_or_die($o->{prefix}, 'ldconfig') unless $::g_auto_install;
-    log::l("Install took: ", formatTimeRaw(time - $time));
+    log::l("Install took: ", formatTimeRaw(time() - $time));
     install_any::log_sizes($o);
     scalar(@toInstall); #- return number of packages installed.
 }

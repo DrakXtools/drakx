@@ -85,7 +85,7 @@ my $menubar = ugtk::create_factory_menu($window, @menu_items);
 my $user_combo = new Gtk::Combo;
 $user_combo->set_popdown_strings(@usernames);
 $user_combo->entry->set_text($auto_mode{autologin}) if $auto_mode{autologin};
-my $desktop_combo =new Gtk::Combo;
+my $desktop_combo = new Gtk::Combo;
 $desktop_combo->set_popdown_strings(get_wm());
 $desktop_combo->entry->set_text($auto_mode{desktop}) if $auto_mode{desktop};
 my $a_c_button = new Gtk::RadioButton (N("NewStyle Categorizing Monitor"));
@@ -362,7 +362,7 @@ $window->show_all();
 $no_bootsplash and $thm_frame->hide();
 Gtk->main_iteration while Gtk->events_pending;
 $::isEmbedded and kill 'USR2', $::CCPID;
-$inmain=1;
+$inmain = 1;
 Gtk->main;
 Gtk->exit(0);
 
@@ -472,7 +472,7 @@ sub get_autologin {
 }
 
 sub updateAutologin {
-    my ($usern,$deskt)=($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
+    my ($usern,$deskt) = ($user_combo->entry->get_text(), $desktop_combo->entry->get_text());
     if ($x_yes_button->get_active()) {
 	$in->do_pkgs->install('autologin') if $x_mode;
 	set_autologin('',$usern,$deskt);

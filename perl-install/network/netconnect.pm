@@ -46,10 +46,10 @@ sub intro {
 				    translate($text),
 				    sub { $_[0]{description} },
 				    \@l);
-	run_program::rooted($prefix, $connect_prog) if $e->{c}==1;
-	run_program::rooted($prefix, $disconnect_file) if $e->{c}==2;
-	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if $e->{c}==3;
-	$in->exit(0) if $e->{c}==4;
+	run_program::rooted($prefix, $connect_prog) if $e->{c} == 1;
+	run_program::rooted($prefix, $disconnect_file) if $e->{c} == 2;
+	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0) if $e->{c} == 3;
+	$in->exit(0) if $e->{c} == 4;
     } else {
 	main($prefix, $netcnx, $netc, $mouse, $in, $intf, 0, 0);
     }
@@ -123,11 +123,11 @@ sub init_globals {
 sub main {
     my ($prefix, $netcnx, $netc, $mouse, $in, $intf, $first_time, $direct_fr, $noauto) = @_;
     init_globals ($in, $prefix);
-    $netc->{minus_one}=0; #When one configure an eth in dhcp without gateway
+    $netc->{minus_one} = 0; #When one configure an eth in dhcp without gateway
     $::isInstall and $in->set_help('configureNetwork');
     $::isStandalone and read_net_conf($prefix, $netcnx, $netc); # REDONDANCE with intro. FIXME
-    $netc->{NET_DEVICE}=$netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
-    $netc->{NET_INTERFACE}=$netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
+    $netc->{NET_DEVICE} = $netcnx->{NET_DEVICE} if $netcnx->{NET_DEVICE}; # REDONDANCE with read_conf. FIXME
+    $netc->{NET_INTERFACE} = $netcnx->{NET_INTERFACE} if $netcnx->{NET_INTERFACE}; # REDONDANCE with read_conf. FIXME
     network::read_all_conf($prefix, $netc ||= {}, $intf ||= {});
 
     modules::mergein_conf("$prefix/etc/modules.conf");
@@ -138,7 +138,7 @@ sub main {
 						      N("Because you are doing a network installation, your network is already configured.
 Click on Ok to keep your configuration, or cancel to reconfigure your Internet & Network connection.
 "), 1)) and do {
-    $netcnx->{type}='lan';
+    $netcnx->{type} = 'lan';
     output "$prefix$connect_file",
       qq(
 ifup eth0
@@ -154,11 +154,11 @@ ifdown eth0
 };
     }
 
-    $netc->{autodetection}=1;
-    $netc->{autodetect}={};
+    $netc->{autodetection} = 1;
+    $netc->{autodetect} = {};
 
   step_1:
-    $::Wizard_no_previous=1;
+    $::Wizard_no_previous = 1;
     my @profiles = get_profiles();
     $in->ask_from(N("Network Configuration Wizard"),
 		  N("Welcome to The Network Configuration Wizard.
@@ -272,8 +272,8 @@ N("After this is done, we recommend that you restart your X environment to avoid
       N("Problems occured during configuration.
 Test your connection via net_monitor or mcc. If your connection doesn't work, you might want to relaunch the configuration.");
     if ($::isWizard) {
-	$::Wizard_no_previous=1;
-	$::Wizard_finished=1;
+	$::Wizard_no_previous = 1;
+	$::Wizard_finished = 1;
 	$in->ask_okcancel(N("Network Configuration"), $m, 1);
 	undef $::Wizard_no_previous;
 	undef $::Wizard_finished;
@@ -327,7 +327,7 @@ fi
 );
     }
     chmod 0755, "$prefix$connect_prog";
-    $netcnx->{$_}=$netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
+    $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
 
     $netcnx->{NET_INTERFACE} and set_net_conf($netcnx, $netc);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
@@ -354,7 +354,7 @@ fi
 }
 
 sub save_conf {
-    my ($netcnx, $netc, $intf)=@_;
+    my ($netcnx, $netc, $intf) = @_;
     my $adsl;
     my $modem;
     my $isdn;
@@ -471,7 +471,7 @@ sub set_profile {
     $profile or return;
     my $f = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     -e ($f . "." . $profile) or return;
-    $netcnx->{PROFILE}=$profile;
+    $netcnx->{PROFILE} = $profile;
     cp_af($f . "." . $profile, $f);
     foreach (["$prefix$connect_file", "up"],
 	      ["$prefix$disconnect_file", "down"],
@@ -511,7 +511,7 @@ sub get_profiles {
 }
 
 sub load_conf {
-    my ($netcnx, $netc, $intf)=@_;
+    my ($netcnx, $netc, $intf) = @_;
     my $adsl_pptp = {};
     my $adsl_pppoe = {};
     my $modem = {};
@@ -574,14 +574,14 @@ sub load_conf {
 	    /^DOMAINNAME2=(.*)$/ and $netc->{DOMAINNAME2} = $1;
 	}
     }
-    $system_name && $domain_name and $netc->{HOSTNAME}=join ('.', $system_name, $domain_name);
-    $adsl_pptp->{$_}=$adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
-    $isdn_external->{$_}=$modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
-    $netcnx->{adsl_pptp}=$adsl_pptp;
-    $netcnx->{adsl_pppoe}=$adsl_pppoe;
-    $netcnx->{modem}=$modem;
-    $netcnx->{modem}=$isdn_external;
-    $netcnx->{isdn_internal}=$isdn;
+    $system_name && $domain_name and $netc->{HOSTNAME} = join ('.', $system_name, $domain_name);
+    $adsl_pptp->{$_} = $adsl_pppoe->{$_} foreach 'login', 'passwd', 'passwd2';
+    $isdn_external->{$_} = $modem->{$_} foreach 'device', 'connection', 'phone', 'domain', 'dns1', 'dns2', 'login', 'passwd', 'auth';
+    $netcnx->{adsl_pptp} = $adsl_pptp;
+    $netcnx->{adsl_pppoe} = $adsl_pppoe;
+    $netcnx->{modem} = $modem;
+    $netcnx->{modem} = $isdn_external;
+    $netcnx->{isdn_internal} = $isdn;
     -e "$prefix/etc/sysconfig/network" and put_in_hash($netc, network::read_conf("$prefix/etc/sysconfig/network"));
     foreach (glob_("$prefix/etc/sysconfig/ifcfg-*")) {
 	my $l = network::read_interface_conf($_);
@@ -607,15 +607,15 @@ sub get_net_device {
 }
 
 sub read_net_conf {
-    my ($prefix, $netcnx, $netc)=@_;
+    my ($prefix, $netcnx, $netc) = @_;
     add2hash($netcnx, { read_raw_net_conf('_conf') });
     $netc->{$_} = $netcnx->{$_} foreach 'NET_DEVICE', 'NET_INTERFACE';
-    $netcnx->{$netcnx->{type}}||={};
+    $netcnx->{$netcnx->{type}} ||= {};
     add2hash($netcnx->{$netcnx->{type}}, { read_raw_net_conf($netcnx->{type}) });
 }
 
 sub set_net_conf {
-    my ($netcnx, $netc)=@_;
+    my ($netcnx, $netc) = @_;
     setVarsInShMode("$prefix/etc/sysconfig/drakconnect", 0600, $netcnx, "NET_DEVICE", "NET_INTERFACE", "type", "PROFILE");
     setVarsInShMode("$prefix/etc/sysconfig/drakconnect." . $netcnx->{type}, 0600, $netcnx->{$netcnx->{type}}); #- doesn't work, don't know why
     setVarsInShMode("$prefix/etc/sysconfig/drakconnect.netc", 0600, $netc); #- doesn't work, don't know why

@@ -97,7 +97,7 @@ sub configureoffice {
     # the "Generic Printer"
     my @parameters = $suites{$suite}{param};
     $configfilecontent = removeentry(@parameters, $configfilecontent);
-    $configfilecontent =addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
+    $configfilecontent = addentry($parameters[0], $parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
@@ -192,21 +192,21 @@ sub makestarofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Set default printer
     if ($queue eq $printer->{DEFAULT}) {
-	$configfile =removeentry("windows", "device=", $configfile);
-	$configfile =addentry("windows", 
+	$configfile = removeentry("windows", "device=", $configfile);
+	$configfile = addentry("windows", 
 			       "device=$queue,$queue PostScript,$queue",
 			       $configfile);
     }
     # Make an entry in the "[devices]" section
-    $configfile =removeentry("devices", "$queue=", $configfile);
-    $configfile =addentry("devices", 
+    $configfile = removeentry("devices", "$queue=", $configfile);
+    $configfile = addentry("devices", 
 			   "$queue=$queue PostScript,$queue",
 			   $configfile);
     # Make an entry in the "[ports]" section
     # The "perl" command patches the PostScript output to print the Euro
     # symbol correctly.
-    $configfile =removeentry("ports", "$queue=", $configfile);
-    $configfile =addentry("ports", 
+    $configfile = removeentry("ports", "$queue=", $configfile);
+    $configfile = addentry("ports", 
 			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
 			   $configfile);
     # Make printer's section
@@ -219,21 +219,21 @@ sub makestarofficeprinterentry {
 	$pslevel = $1;
 	$pslevel = "2" if $pslevel eq "3";
     } else { $pslevel = "2" }
-    $configfile =removeentry("$queue.PostScript.$queue",
+    $configfile = removeentry("$queue.PostScript.$queue",
 			      "Level=", $configfile);
-    $configfile =addentry("$queue.PostScript.$queue", 
+    $configfile = addentry("$queue.PostScript.$queue", 
 			   "Level=$pslevel", $configfile);
     # Set Color/BW
     my $color = ($ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m) ? "1" : "0";
-    $configfile =removeentry("$queue.PostScript.$queue", "BitmapColor=", $configfile);
-    $configfile =addentry("$queue.PostScript.$queue", "BitmapColor=$color", $configfile);
+    $configfile = removeentry("$queue.PostScript.$queue", "BitmapColor=", $configfile);
+    $configfile = addentry("$queue.PostScript.$queue", "BitmapColor=$color", $configfile);
     # Set the default paper size
     if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
 	my $papersize = $1;
-	$configfile =removeentry("$queue.PostScript.$queue", "PageSize=", $configfile);
-	$configfile =removeentry("$queue.PostScript.$queue", "PPD_PageSize=", $configfile);
-	$configfile =addentry("$queue.PostScript.$queue", "PageSize=$papersize", $configfile);
-	$configfile =addentry("$queue.PostScript.$queue", "PPD_PageSize=$papersize", $configfile);
+	$configfile = removeentry("$queue.PostScript.$queue", "PageSize=", $configfile);
+	$configfile = removeentry("$queue.PostScript.$queue", "PPD_PageSize=", $configfile);
+	$configfile = addentry("$queue.PostScript.$queue", "PageSize=$papersize", $configfile);
+	$configfile = addentry("$queue.PostScript.$queue", "PPD_PageSize=$papersize", $configfile);
     }
     # Link the PPD file
     run_program::rooted($::prefix, 
@@ -267,7 +267,7 @@ sub makeopenofficeprinterentry {
     $configfile = removeentry($queue, "Comment=", $configfile);
     if (($printer->{configured}{$queue}) &&
 	($printer->{configured}{$queue}{queuedata}{desc})) {
-	$configfile =addentry
+	$configfile = addentry
 	    ($queue, 
 	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
 	     $configfile);

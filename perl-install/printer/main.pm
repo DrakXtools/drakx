@@ -191,7 +191,7 @@ sub getinfo($) {
     my $printer = {};
     my @QUEUES;
 
-    $::prefix=$prefix;
+    $::prefix = $prefix;
 
     # Initialize $printer data structure
     resetinfo($printer);
@@ -1007,8 +1007,7 @@ sub configure_queue($) {
 	$useUSB ||= $_->{queuedata}{connect} =~ /usb/ || 
 	    $_->{DeviceURI} =~ /usb/;
     }
-    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect}
-		 =~ /usb/);
+    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect} =~ /usb/);
     if ($useUSB) {
 	my $f = "$prefix/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
@@ -1462,38 +1461,38 @@ sub configure_hpoj {
     $_ = `date`;
     chomp;
     print CONFIG
-	"# Added $_ by \"printerdrake\".\n".
-	"\n".
-	"# The basic format for this file is \"key[+]=value\".\n".
-	"# If you say \"+=\" instead of \"=\", then the value is appended to any\n".
-	"# value already defined for this key, rather than replacing it.\n".
-	"\n".
-	"# Comments must start at the beginning of the line.  Otherwise, they may\n".
-	"# be interpreted as being part of the value.\n".
-	"\n".
-	"# If you have multiple devices and want to define options that apply to\n".
-	"# all of them, then put them in the file /etc/ptal/defaults, which is read\n".
-	"# in before this file.\n".
-	"\n".
-	"# The format version of this file:\n".
-	"#   ptal-init ignores devices with incorrect/missing versions.\n".
+	"# Added $_ by \"printerdrake\".\n" .
+	"\n" .
+	"# The basic format for this file is \"key[+]=value\".\n" .
+	"# If you say \"+=\" instead of \"=\", then the value is appended to any\n" .
+	"# value already defined for this key, rather than replacing it.\n" .
+	"\n" .
+	"# Comments must start at the beginning of the line.  Otherwise, they may\n" .
+	"# be interpreted as being part of the value.\n" .
+	"\n" .
+	"# If you have multiple devices and want to define options that apply to\n" .
+	"# all of them, then put them in the file /etc/ptal/defaults, which is read\n" .
+	"# in before this file.\n" .
+	"\n" .
+	"# The format version of this file:\n" .
+	"#   ptal-init ignores devices with incorrect/missing versions.\n" .
 	"init.version=1\n";
 
     # Write model string.
     if ($model_long !~ /\S/) {
 	print CONFIG
-	    "\n".
-	    "# \"printerdrake\" couldn't read the model but added this device anyway:\n".
+	    "\n" .
+	    "# \"printerdrake\" couldn't read the model but added this device anyway:\n" .
 	    "# ";
     } else {
 	print CONFIG
-	    "\n".
-	    "# The device model that was originally detected on this port:\n".
-	    "#   If this ever changes, then you should re-run \"printerdrake\"\n".
+	    "\n" .
+	    "# The device model that was originally detected on this port:\n" .
+	    "#   If this ever changes, then you should re-run \"printerdrake\"\n" .
 	    "#   to delete and re-configure this device.\n";
 	if ($bus eq "par") {
 	    print CONFIG
-		"#   Comment out if you don't care what model is really connected to this\n".
+		"#   Comment out if you don't care what model is really connected to this\n" .
 		"#   parallel port.\n";
 	}
     }
@@ -1501,16 +1500,16 @@ sub configure_hpoj {
 	"init.mlcd.append+=-devidmatch \"$model_long\"\n";
 
     # Write serial-number string.
-    if ($serialnumber_long!~/\S/) {
+    if ($serialnumber_long !~ /\S/) {
 	print CONFIG
-	    "\n".
-	    "# The device's serial number is unknown.\n".
+	    "\n" .
+	    "# The device's serial number is unknown.\n" .
 	    "# ";
     } else {
 	print CONFIG
-	    "\n".
+	    "\n" .
 	    "# The serial number of the device that was originally detected on this port:\n";
-	if ($bus=~/^[pu]/) {
+	if ($bus =~ /^[pu]/) {
 	    print CONFIG
 		"#   Comment out if you want to disable serial-number matching.\n";
 	}
@@ -1518,10 +1517,10 @@ sub configure_hpoj {
     print CONFIG
 	"init.mlcd.append+=-devidmatch \"$serialnumber_long\"\n";
 
-    if ($bus=~/^[pu]/) {
+    if ($bus =~ /^[pu]/) {
 	print CONFIG
-	    "\n".
-	    "# Standard options passed to ptal-mlcd:\n".
+	    "\n" .
+	    "# Standard options passed to ptal-mlcd:\n" .
 	    "init.mlcd.append+=";
 	if ($bus eq "usb") {
 	    # Important: don't put more quotes around /dev/usb/lp[0-9]*,
@@ -1530,46 +1529,46 @@ sub configure_hpoj {
 	} elsif ($bus eq "par") {
 	    print CONFIG "$address_arg -device $device";
 	}
-	print CONFIG "\n".
-	    "\n".
-	    "# ptal-mlcd's remote console can be useful for debugging, but may be a\n".
-	    "# security/DoS risk otherwise.  In any case, it's accessible with the\n".
-	    "# command \"ptal-connect mlc:<XXX>:<YYY> -service PTAL-MLCD-CONSOLE\".\n".
-	    "# Uncomment the following line if you want to enable this feature for\n".
-	    "# this device:\n".
-	    "# init.mlcd.append+=-remconsole\n".
-	    "\n".
-	    "# If you need to pass any other command-line options to ptal-mlcd, then\n".
-	    "# add them to the following line and uncomment the line:\n".
-	    "# init.mlcd.append+=\n".
-	    "\n".
-	    "# By default ptal-printd is started for mlc: devices.  If you use CUPS,\n".
-	    "# then you may not be able to use ptal-printd, and you can uncomment the\n".
-	    "# following line to disable ptal-printd for this device:\n".
+	print CONFIG "\n" .
+	    "\n" .
+	    "# ptal-mlcd's remote console can be useful for debugging, but may be a\n" .
+	    "# security/DoS risk otherwise.  In any case, it's accessible with the\n" .
+	    "# command \"ptal-connect mlc:<XXX>:<YYY> -service PTAL-MLCD-CONSOLE\".\n" .
+	    "# Uncomment the following line if you want to enable this feature for\n" .
+	    "# this device:\n" .
+	    "# init.mlcd.append+=-remconsole\n" .
+	    "\n" .
+	    "# If you need to pass any other command-line options to ptal-mlcd, then\n" .
+	    "# add them to the following line and uncomment the line:\n" .
+	    "# init.mlcd.append+=\n" .
+	    "\n" .
+	    "# By default ptal-printd is started for mlc: devices.  If you use CUPS,\n" .
+	    "# then you may not be able to use ptal-printd, and you can uncomment the\n" .
+	    "# following line to disable ptal-printd for this device:\n" .
 	    "# init.printd.start=0\n";
     } else {
 	print CONFIG
-	    "\n".
-	    "# By default ptal-printd isn't started for hpjd: devices.\n".
-	    "# If for some reason you want to start it for this device, then\n".
-	    "# uncomment the following line:\n".
+	    "\n" .
+	    "# By default ptal-printd isn't started for hpjd: devices.\n" .
+	    "# If for some reason you want to start it for this device, then\n" .
+	    "# uncomment the following line:\n" .
 	    "init.printd.start=1\n";
     }
 
     print CONFIG
-	"\n".
-	"# If you need to pass any additional command-line options to ptal-printd,\n".
-	"# then add them to the following line and uncomment the line:\n".
+	"\n" .
+	"# If you need to pass any additional command-line options to ptal-printd,\n" .
+	"# then add them to the following line and uncomment the line:\n" .
 	"# init.printd.append+=\n";
     if ($cardreader) {
 	print CONFIG
-	    "\n".
-	    "# Uncomment the following line to enable ptal-photod for this device:\n".
-	    "init.photod.start=1\n".
-	    "\n".
-	    "# If you have more than one photo-card-capable peripheral and you want to\n".
-	    "# assign particular TCP port numbers and mtools drive letters to each one,\n".
-	    "# then change the line below to use the \"-portoffset <n>\" option.\n".
+	    "\n" .
+	    "# Uncomment the following line to enable ptal-photod for this device:\n" .
+	    "init.photod.start=1\n" .
+	    "\n" .
+	    "# If you have more than one photo-card-capable peripheral and you want to\n" .
+	    "# assign particular TCP port numbers and mtools drive letters to each one,\n" .
+	    "# then change the line below to use the \"-portoffset <n>\" option.\n" .
 	    "init.photod.append+=-maxaltports 26\n";
     }
     close(CONFIG);

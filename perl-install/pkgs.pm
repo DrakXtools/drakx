@@ -81,7 +81,7 @@ sub extractHeaders {
     }
 
     foreach (@$pkgs) {
-	my $f = "$prefix/tmp/headers/". $_->header_filename;
+	my $f = "$prefix/tmp/headers/" . $_->header_filename;
 	$_->update_header($f) or log::l("unable to open header file $f"), next;
 	log::l("read header file $f");
     }
@@ -190,7 +190,7 @@ sub packagesToInstall {
 	log::l("examining packagesToInstall of medium $_->{descr}");
 	push @packages, grep { $_->flag_selected } packagesOfMedium($packages, $_);
     }
-    log::l("found " .scalar(@packages). " packages to install");
+    log::l("found " . scalar(@packages) . " packages to install");
     @packages;
 }
 
@@ -749,7 +749,7 @@ sub rpmDbOpen {
 	    my $rebuilddb_dir = "$prefix/var/lib/rpmrebuilddb.$$";
 	    -d $rebuilddb_dir and log::l("removing stale directory $rebuilddb_dir"), rm_rf($rebuilddb_dir);
 
-	    URPM::DB::rebuild($prefix) or log::l("rebuilding of rpm database failed: ". c::rpmErrorString()), c::_exit(2);
+	    URPM::DB::rebuild($prefix) or log::l("rebuilding of rpm database failed: " . c::rpmErrorString()), c::_exit(2);
 
 	    c::_exit(0);
 	}
@@ -988,7 +988,7 @@ sub install($$$;$$) {
 			log::l("opened rpm database for retry transaction of 1 package only");
 			$trans->add($retry_pkg, $isUpgrade && allowedToUpgrade($retry_pkg->name));
 		    } else {
-			log::l("opened rpm database for transaction of ". scalar @transToInstall .
+			log::l("opened rpm database for transaction of " . scalar @transToInstall .
 			       " new packages, still $nb after that to do");
 			$trans->add($_, $isUpgrade && allowedToUpgrade($_->name))
 			  foreach @transToInstall;
@@ -1073,7 +1073,7 @@ sub install($$$;$$) {
 			log::l("retrying installing package ".$retry_pkg->fullname." alone in a transaction");
 			--$retry_count;
 		    } else {
-			log::l("bad package ". $retry_pkg->fullname ." unable to be installed");
+			log::l("bad package " . $retry_pkg->fullname . " unable to be installed");
 			$retry_pkg->set_flag_requested(0);
 			$retry_pkg->set_flag_required(0);
 			#- keep name to display (problem of displaying ?).
