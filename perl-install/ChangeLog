@@ -1,3 +1,143 @@
+2003/02/25  fabman
+
+	* share/po/es.po: Updated Spanish translations (some left)
+
+2003/02/25  Frederic Lepied  <flepied@mandrakesoft.com>
+
+	* share/rpmsrate: removed gnome-tiles
+
+	* share/po/fr.po: mise-à-jour => mise à jour
+
+2003/02/25  François Pons  <fpons@mandrakesoft.com>
+
+	* share/list: added dmidecode in install.
+
+	* pkgs.pm: improved code for populating group with pixel.
+
+	* network/adsl.pm: cleaned a bit the code.
+	added login and passwd remember from /etc/ppp/peers/adsl
+	/etc/ppp/options
+	/etc/ppp/pap-secrets /etc/ppp/chap-secrets file
+	modified string as sagem driver now use pppoa
+
+	* any.pm: added dmidecode in bug report.
+
+	* tools/Makefile, Makefile: removed dmidecode.
+	added dmidecode
+
+	* tools/dmidecode/dmidecode.c, tools/dmidecode/Makefile: added dmidecode
+
+	* rescue/list: removed dmidecode.
+	added dmidecode for rescue (from lm_sensors)
+
+2003/02/25  gbeauchesne
+
+	* share/list.x86_64: More xf86 modules for x86-64
+
+2003/02/25  nplanel
+
+	* c/smp-dmi.c, c/smp.c, c/Makefile.PL: Add dmidetection for smp
+
+2003/02/25  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/ga.po, share/po/uk.po, share/po/lt.po, share/po/af.po,
+	share/po/lv.po: Fixed the wrong Finish/Finnish of some translations
+	updated Finnish and French files
+
+	* share/po/et.po: updated Estonian file
+	updated Finnish and French files
+
+	* share/po/th.po: Fixed Thai button for "Finish" (it means "end" and not
+	"from Finland")
+	updated Finnish and French files
+
+	* share/po/id.po, share/po/sk.po, share/po/ru.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/br.po, share/po/sl.po, share/po/no.po,
+	share/po/ja.po, share/po/hr.po, share/po/tr.po, share/po/mt.po,
+	share/po/be.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/sp.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/ar.po, share/po/tg.po, share/po/bs.po, share/po/uz.po,
+	share/po/ro.po, share/po/wa.po, share/po/is.po, share/po/az.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/pt.po, share/po/vi.po,
+	share/po/ta.po, share/po/fr.po, share/po/sq.po, share/po/it.po,
+	share/po/nl.po, share/po/eu.po, share/po/es.po, share/po/de.po,
+	share/po/eo.po, share/po/el.po, share/po/cs.po, share/po/bg.po,
+	share/po/hu.po: updated Finnish and French files
+
+2003/02/25  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm, install_gtk.pm: cleanup handling of XF4 server
+	choice during install
+
+	* network/network.pm (read_resolv_conf_raw): fix "search ..." handling
+
+	* share/rpmsrate: s/apache/apache2/
+
+	* mdk-stage1/mount.c: handle device hdi, hdj... hdt creation
+
+	* modules/interactive.pm: join detect_devices::stringlist() to have it in
+	a text box (eurk!)
+	(for bug #1802), the result is quite ugly, but at least the full line
+	can be read
+
+	* any.pm (fileshare_config): create group "fileshare" in "Custom" mode
+
+2003/02/25  Till Kamppeter  <till@mandrakesoft.com>
+
+	* printer/main.pm, printer/printerdrake.pm: Prepared for LPRng and PDQ
+	goint to Contribs or leaving the distro, "Change
+	Printing System" button only appears if at least one of them is manually
+	installed.
+
+2003/02/25  Thierry Vignaud  <tvignaud@mandrakesoft.com>
+
+	* harddrake/data.pm: handle floppes, zip drives, dvd-rom, cdrom and
+	burners at startup time
+	  - factorize code into harddrake::data::set_removable_configurator()
+	  - really do not offer to configure module for removable devices
+	  - do not put zip drives in unknown devices class
+	  - reuse Yes|No translations in harddrake::ui
+
+	* standalone/drakfloppy: we already use diagnostics pragma, so -w will
+	just slow down normal execution
+	only list physically present floppies
+	reuse MDK::Common
+	  - fix stupid copy 'n past of copyright header
+	  - update copyright years
+	fix #???? : switch the "expert mode" toggle button label regarding the
+	current
+	mode (beginner or expert)
+
+	* bootlook.pm: 
+	  - remove deprecated, half-commented aurora related code
+	  - fix display of autologin radio buttons
+
+	* standalone/harddrake2: do not display alternatives oss/alsa drivers if
+	there's none
+	  - factorize code into harddrake::data::set_removable_configurator()
+	  - really do not offer to configure module for removable devices
+	  - do not put zip drives in unknown devices class
+	  - reuse Yes|No translations in harddrake::ui
+	  - don't offer to configure module for removable media
+	  - usb devices (such as zip): display vendor, description and a more
+	detailled media type
+	display media capacity too (DVD and/or burning ability)
+
+	* standalone/service_harddrake: handle floppes, zip drives, dvd-rom, cdrom
+	and burners at startup time
+	don't black out the screen if not needed
+
+	* drakxtools.spec: 9.1-7mdk
+
+	* share/po/fr.po: update french translation
+
+2003/02/25  Warly  <warly@mandrakesoft.com>
+
+	* share/rpmsrate: readd harddrake in SYSTEM 5
+
+	* share/compssUsers: add ARCHIVING in OFFICE
+
 2003/02/24  alus
 
 	* share/po/pl.po: one entry
@@ -12915,7 +13055,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.792 2003/02/23 12:45:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.793 2003/02/24 21:38:29 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
