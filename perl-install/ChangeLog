@@ -13,6 +13,25 @@
 	  - log calls to drakupdate_fstab
 	  - use "find" instead of "grep" where possible
 
+2004/03/03  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-20mdk
+
+2004/03/03  Pixel  <pixel at mandrakesoft.com>
+
+	* install2.pm: mount /sys in case it is useful (and it is for
+	get_usb_storage_info_26())
+
+	* fs.pm: sysfs now exists!
+
+	* detect_devices.pm: fix get_usb_storage_info() on kernel 2.6
+
+	* standalone/drakupdate_fstab: 
+	  - device_name_to_entry() will not fail anymore so that removing a
+	device works
+	  - log calls to drakupdate_fstab
+	  - use "find" instead of "grep" where possible
+
 	* crypto.pm: 
 	  - community updates are not in a per-version directory either
 	  - cooker & community urls do contain .../RPMS at the end whereas
@@ -28221,7 +28240,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.899 2004/03/02 17:21:45 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.900 2004/03/03 12:35:50 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
