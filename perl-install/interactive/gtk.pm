@@ -336,7 +336,7 @@ sub ask_fromW {
     my ($o, $common, $l, $l2) = @_;
     my $ignore = 0; #-to handle recursivity
 
-    my $mainw = ugtk2->new($common->{title}, %$o);
+    my $mainw = ugtk2->new($common->{title}, %$o, if__($::main_window, transient => $::main_window));
  
     #-the widgets
     my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $max_width);
@@ -672,7 +672,7 @@ sub wait_messageW($$$) {
     my ($o, $title, $messages) = @_;
 
     local $ugtk2::pop_it = 1;
-    my $w = ugtk2->new($title, %$o, grab => 1);
+    my $w = ugtk2->new($title, %$o, grab => 1, if__($::main_window, transient => $::main_window));
     gtkadd($w->{window}, my $hbox = Gtk2::HBox->new(0,0));
     $hbox->pack_start(my $box = Gtk2::VBox->new(0,0), 1, 1, 10);  
     $box->pack_start($_, 1, 1, 4) foreach my @l = map { Gtk2::Label->new(scalar warp_text($_)) } @$messages;

@@ -55,6 +55,7 @@ sub main {
     local $in->{grab} = 1;
 
     $w = ugtk2->new('DiskDrake');
+    $::main_window = $w->{rwindow} unless $::isEmbedded;
     my $rc = "/usr/share/libDrakX/diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../diskdrake.rc";
     -r $rc or $rc = dirname(__FILE__) . "/../share/diskdrake.rc";
