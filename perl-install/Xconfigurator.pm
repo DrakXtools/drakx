@@ -1123,6 +1123,7 @@ EndSection
     print G qq(\nSection "Module"\n);
     print G qq(    Load "dbe" # Double-Buffering Extension\n);
     print G qq(    Load "v4l" # Video for Linux\n) if !($X->{card}{use_DRI_GLX} && $X->{card}{driver} eq 'r128');
+    print G qq(    Load "extmod"\n);
 
     #- For example, this loads the NVIDIA GLX extension module.
     #- When DRI_GLX_SPECIAL is set, use_DRI_GLX is also set
