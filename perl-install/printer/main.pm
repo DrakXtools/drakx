@@ -2238,6 +2238,121 @@ sub autodetectionentry_for_uri {
 #
 # ------------------------------------------------------------------
 
+sub read_hplip_db {
+
+    # Read the device database XML file which comes with the HPLIP
+    # package
+    open(my $F, "< $::prefix/usr/share/hplip/data/xml/models.xml") or
+	die "Could not read /usr/share/hplip/data/xml/models.xml\n";
+
+    my $entry = {};
+    my $inentry = 0;
+    my $inrX = 0;
+    my $incomment = 0;
+    my %hplipdevices;
+    local $_;
+    while (<$F>) {
+	chomp;
+	if ($incomment) {
+	    # In a comment block, skip all except the end of the comment
+	    if (m!^(.*?)-->(.*)$!) {
+		# End of comment, keep rest of line
+		$_ = $2;
+		$incomment = 0;
+	    } else {
+		# Skip line
+		$_ = '';
+	    }
+	} else {
+	    while (m/^(.*?)<!--(.*?)-->(.*)$/) {
+		# Remove one-line comments
+		$_ = $1 . $3;
+	    }
+	    if (m/^(.*?)<!--(.*)$/) {
+		# Start of comment, keep the beginning of the line
+		$_ = $1;
+		$incomment = 1;
+	    }
+	}
+	# Is there some non-comment part left in the line
+	if (m!\S!) {
+	    if ($inentry) {
+		# We are inside a device entry
+		if ($inrX) {
+		    # We are in one of the the device's <rX> sections,
+		    # skip the section
+		    if (m!^\s*</r\d+>\s*$!) {
+			# End of <rX> section
+			$inrX = 0;
+		    }
+		} else {
+		    if (m!^\s*<r\d+>\s*$!) {
+			# Start of <rX> section
+			$inrX = 1;
+		    } elsif (m!^\s*</model>\s*$!) {
+			# End of device entry
+			$inentry = 0;
+			my $devidmodel;
+			if ($entry->{$devidmodel}) {
+			    $devidmodel = $entry->{devidmodel};
+			    $devidmodel =~ s/ /_/g;
+			} else {
+			    $devidmodel = $entry->{model};
+			}
+			$hplipdevices{$devidmodel} = $entry;
+			$entry = {};
+		    } elsif (m!^\s*<id>\s*([^<>]+)\s*</id>\s*$!) {
+			# Full ID string
+			my $idstr = $1;
+			$idstr =~ m!(MFG|MANUFACTURER):([^;]+);!i
+			    and $entry->{devidmake} = $2;
+			$idstr =~ m!(MDL|MODEL):([^;]+);!i
+			    and $entry->{devidmodel} = $2;
+			$idstr =~ m!(DES|DESCRIPTION):([^;]+);!i
+			    and $entry->{deviddesc} = $2;
+			$idstr =~ m!(CMD|COMMAND\s*SET):([^;]+);!i
+			    and $entry->{devidcmdset} = $2;
+		    } elsif (m!^\s*<align type="(\d+)"/>\s*$!) {
+			# Head alignment type
+			$entry->{align} = $1;
+		    } elsif (m!^\s*<clean type="(\d+)"/>\s*$!) {
+			# Head cleaning type
+			$entry->{clean} = $1;
+		    } elsif (m!^\s*<color-cal type="(\d+)"/>\s*$!) {
+			# Color calibration type
+			$entry->{colorcal} = $1;
+		    } elsif (m!^\s*<status type="(\d+)"/>\s*$!) {
+			# Status request type
+			$entry->{status} = $1;
+		    } elsif (m!^\s*<scan type="(\d+)"/>\s*$!) {
+			# Scanner access type
+			$entry->{scan} = $1;
+		    } elsif (m!^\s*<fax type="(\d+)"/>\s*$!) {
+			# Fax access type
+			$entry->{fax} = $1;
+		    } elsif (m!^\s*<pcard type="(\d+)"/>\s*$!) {
+			# Memory card access type
+			$entry->{card} = $1;
+		    } elsif (m!^\s*<copy type="(\d+)"/>\s*$!) {
+			# Copier access type
+			$entry->{copy} = $1;
+		    }
+		}
+	    } else {
+		# We are not in a printer entry
+		if (m!^\s*<\s*model\s+name=\"(\S+)\"\a*>\s*$!) {
+		    $inentry = 1;
+		    # HPLIP model ID
+		    $entry->{model} = $1;
+		}
+	    }
+	}
+    }
+    close $F;
+    return \%hplipdevices;
+}
+
+
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
 
