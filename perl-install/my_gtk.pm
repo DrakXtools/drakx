@@ -122,6 +122,14 @@ sub gtksignal_connect($@) {
     $w->signal_connect(@_);
     $w
 }
+
+sub gtkradio {
+    my $def = pop;
+    my $radio;
+    map { $radio = new Gtk::RadioButton($_, $radio ? $radio : ());
+	  $radio->set_active($_ eq $def); $radio } @_;
+}
+
 sub gtkpack($@) {
     my $box = shift;
     gtkpack_($box, map {; 1, $_ } @_);
