@@ -1463,8 +1463,8 @@ sub check_network {
 	    if ($in->ask_from(_("Network functionality not configured"),
 			      _("You are going to configure a remote printer. This needs working
 network access, but your network is not configured yet. If you
-go on without network configuration, you will not be able to
-use the printer which you are configuring now. How do you want 
+go on without network configuration, you will not be able to use
+the printer which you are configuring now. How do you want 
 to proceed?"),
 			      [ { val => \$choice, type => 'list',
 				  list => [ _("Configure the network now"),
