@@ -460,11 +460,11 @@ sub load_raw {
                 unlink $m;
                 '';
             } else {
-                -e $m;
+		'error';
             }
 	} else {
-	    log::l("missing module $_->[0]") if !-e $m;
-            -e $m;
+	    log::l("missing module $_->[0]");
+	    'error';
 	}
     } @l;
 
