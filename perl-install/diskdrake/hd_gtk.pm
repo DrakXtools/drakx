@@ -350,11 +350,8 @@ sub createOrChangeType {
     } elsif (!$type) {
 	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if $part->{type};
     } elsif ($part->{type}) {
-	return unless $::expert;
 	return if $type == $part->{type};
-	isBusy($part) and $in->ask_warn('', N("Use ``Unmount'' first")), return;
-	diskdrake::interactive::ask_alldatawillbelost($in, $part, N_("After changing type of partition %s, all data on this partition will be lost")) or return;
-	diskdrake::interactive::check_type($in, $type, $hd, $part) and fsedit::change_type($type, $hd, $part);
+	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead", N("Type")));
     } else {
 	$part->{type} = $type;
 	diskdrake::interactive::Create($in, $hd, $part, $all_hds);
