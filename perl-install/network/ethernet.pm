@@ -35,6 +35,10 @@ sub mapIntfToDevice {
 }
 
 
+sub get_eth_categories() {
+    'network/main|gigabit|pcmcia|usb|wireless|firewire';
+}
+
 # return list of [ intf_name, module, device_description ] tuples such as:
 # [ "eth0", "3c59x", "3Com Corporation|3c905C-TX [Fast Etherlink]" ]
 sub get_eth_cards {
