@@ -194,7 +194,10 @@ arch() =~ /^sparc/ ? (
  "is" => [ N_("Icelandic"),      "is-latin1",       "is",    0 ],
  "it" => [ N_("Italian"),        "it-latin1",       "it",    0 ],
  "iu" => [ N_("Inuktitut"),      "us",              "iu",    1 ],
- "jp" => [ N_("Japanese 106 keys"), "jp106",        "jp",    1 ],
+# Japanese keyboard is dual latin/kana; but telling it here shows a
+# message to choose the switching key that is misleading, as input methods
+# aren't automatically enabled when typing in kana
+ "jp" => [ N_("Japanese 106 keys"), "jp106",        "jp",    0 ],
  "kan" => [ N_("Kannada"),        "us",              "kan",  1 ],
 #There is no XKB korean file yet; but using xmodmap one disables
 # some functioanlity; "us" used for XKB until this is fixed
