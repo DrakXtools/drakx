@@ -50,7 +50,6 @@ ugtk2->import(qw(:helpers :wrappers :create));
 
 my $no_bootsplash;
 my $x_mode = Xconfig::various::runlevel() == 5;
-my $splash_mode = 1;
 my $auto_mode = any::get_autologin();
 my $switch_theme = '/usr/share/bootsplash/scripts/switch-themes';
 
@@ -88,33 +87,30 @@ my %themes = 	('path' => '/usr/share/bootsplash/themes/',
                           },
                );
 my $cur_res = `/usr/share/bootsplash/scripts/detect-resolution`;
+$cur_res =~ m/(\d+x\d+)x\d+/ and $cur_res = $1;
 #- verify that current resolution is ok
-if (member($cur_res, qw( 785 788 791 794))) {
-    ($cur_res) = $bootloader::vga_modes{$cur_res} =~ /^([0-9x]+).*?$/;
-} else {
+if (!$cur_res) {
     $no_bootsplash = 1; #- we can't select any theme we're not in Framebuffer mode :-/
+    $cur_res = '800x600'
 }
 
-do { $no_bootsplash = 0; $cur_res = '800x600' } if $::testing;
+$no_bootsplash = 0 if $::testing;
 my @thms;
 my @boot_thms = if_(!$themes{default}, qw(default));
 chdir($themes{path}); #- we must change directory for correct @thms assignement
 foreach (all('.')) {
-    if (-d $themes{path} . $_ && m/^[^.]/) {
+    if (-d "$themes{path}$_" && m/^[^.]/) {
         push @thms, $_;
-        -f $themes{path} . $_ . $themes{boot}{path} . "bootsplash-$cur_res.jpg" and push @boot_thms, $_;
+        -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
-    #       $_ eq $themes{'defaut'} and $default = $themes{'defaut'};
 }
 my %combo = ('thms' => '', 'lilo' => '', 'boot' => '');
 foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::OptionMenu->new, 10, -1);
 }
 
-if (!$no_bootsplash) {
-    $combo{boot}->set_popdown_strings(@boot_thms);
-    $combo{boot}->entry->set_text($themes{default});
-}
+$combo{boot}->set_popdown_strings(@boot_thms);
+$combo{boot}->entry->set_text($themes{default});
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});
@@ -125,18 +121,24 @@ my $keep_logo = 1;
 			  
 #- ******** action to take on changing combos values
 
-$no_bootsplash == 0 
-  and $combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
-my ($x_box, $splash_box);
+$combo{boot}->entry->signal_connect(changed => sub { change_image($boot_pic, $combo{boot}->entry->get_text) });
 
+my ($x_box, $splash_box);
+my $boot_warn = 1;
+my $splash_mode &= !$no_bootsplash;
 gtkadd($window,
        gtkpack_(Gtk2::VBox->new(0,0),
                 ($splash_working ?
                  (1, gtkpack_(gtkset_border_width(Gtk2::VBox->new(0, 5), 5),
                               0, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new(N("Use graphical boot")), $splash_mode), 
                                                clicked => sub {
-                                                   $splash_box->set_sensitive(!$splash_mode);
                                                    $splash_mode = !$splash_mode;
+        					   if ($boot_warn && $no_bootsplash && $splash_mode) { 
+						       $in->ask_warn(N("Warning"), 
+						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode into the bootloader configuration tool.") ]);
+						   	$boot_warn = 0
+						    }
+                                                   $splash_box->set_sensitive($splash_mode);
                                                }),
                               1, gtkpack(gtkset_sensitive($splash_box = Gtk2::HBox->new(0, 0), $splash_mode),
                                        gtkpack__(Gtk2::VBox->new(0, 5),
@@ -182,7 +184,7 @@ gtkadd($window,
                                      cancel_clicked => sub { ugtk2->exit(0) },
                                      ok_clicked => sub {
                                          Xconfig::various::runlevel($x_mode ? 5 : 3);
-                                         updateAutologin();
+                                         $splash_working or updateAutologin();
                                          $no_bootsplash or update_bootsplash($combo{boot}->entry->get_text, $keep_logo);
                                          ugtk2->exit(0);
                                      }
