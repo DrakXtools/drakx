@@ -6,7 +6,7 @@ use vars qw(@ISA @EXPORT);
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 @ISA = qw(Exporter);
-@EXPORT = qw(write_cnx_script write_secret_backend ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected disconnected);
+@EXPORT = qw(write_cnx_script write_secret_backend write_initscript ask_connect_now connect_backend disconnect_backend read_providers_backend ask_info2 type2interface connected disconnected);
 @EXPORT_OK = qw($in);
 
 sub write_cnx_script {
@@ -123,21 +123,18 @@ sub write_initscript {
 # chkconfig: 2345 11 89
 # description: Activates/Deactivates the internet interfaces
 #
-# dam's damien@mandrakesoft.com
+# dam's (damien@mandrakesoft.com)
+
+# Source function library.
+. /etc/rc.d/init.d/functions
 
 	case "$1" in
 		start)
-		echo -n "Checking internet connections to start at boot: " } . "
-		$connect_file --boot_time" . q{
+		action "Checking internet connections to start at boot" "} . "$connect_file --boot_time" . q{"
 		touch /var/lock/subsys/internet
-		echo -n internet
-		echo
 		;;
 	stop)
-		echo -n "Stopping internet connection if needed: " } . "
-		$disconnect_file" . q{
-		echo -n internet
-		echo
+		action "Stopping internet connection if needed: " "} . "$disconnect_file" . q{"
 		rm -f /var/lock/subsys/internet
 		;;
 	restart)
