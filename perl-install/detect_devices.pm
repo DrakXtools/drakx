@@ -395,7 +395,7 @@ sub getSerialModem {
 
 sub getModem() {
     my @pci_modems = grep { $_->{driver} =~ /www.linmodems.org/ } probeall(0);
-    getSerialModem({}), @pci_modems;
+    grep { !is_empty_hash_ref($_) } getSerialModem({}), @pci_modems;
 }
 
 sub getSpeedtouch {
