@@ -1182,7 +1182,12 @@ sub setup_common {
     my $ptaldevice = "";
     my $isHPOJ = 0;
     if (($device =~ /^\/dev\//) || ($device =~ /^socket:\/\//)) {
-	if (!$do_auto_detect) {
+	# Ask user whether he has a multi-function device when he didn't
+	# do auto-detection or when auto-detection failed
+	my $searchunknown = _("Unknown model");
+	if ((!$do_auto_detect) ||
+	    ($makemodel =~ /$searchunknown/i) ||
+	    ($makemodel =~ /^\s*$/)) {
 	    local $::isWizard = 0;
 	    $isHPOJ = $in->ask_yesorno(_("Local Printer"),
 				       _("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);

@@ -1468,10 +1468,12 @@ sub configure_hpoj {
     setupVariables ();
     readDeviceInfo ();
 
-    $device =~ m!^/dev/\S*lp(\d+)$! or $device =~ m!^socket://([^:]+)$! or
+    $device =~ m!^/dev/\S*lp(\d+)$! or
+	$device =~ m!^/dev/printers/(\d+)$! or
+	$device =~ m!^socket://([^:]+)$! or
 	$device =~ m!^socket://([^:]+):(\d+)$!;
     my $model = $1;
-    my $model_long = $1;
+    my $model_long = "";
     my $serialnumber = "";
     my $serialnumber_long = "";
     my $cardreader = 0;
@@ -1483,7 +1485,9 @@ sub configure_hpoj {
     my $port = $2;
     if ($device =~ /usb/) {
 	$bus = "usb";
-    } elsif ($device =~ /par/) {
+    } elsif (($device =~ /par/) ||
+	     ($device =~ /\/dev\/lp/) ||
+	     ($device =~ /printers/)) {
 	$bus = "par";
 	$address_arg = parport_addr($device);
 	$address_arg =~ /^\s*-base\s+(\S+)/;
@@ -1503,7 +1507,15 @@ sub configure_hpoj {
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
 	$devdata = $_;
-	$model = $_->{val}{MODEL};
+	# $model is for the PTAL device name, so make sure that it is unique
+	# so in the case of the model name auto-detection having failed leave
+	# the port number or the host name as model name.
+	my $searchunknown = _("Unknown model");
+	if (($_->{val}{MODEL}) &&
+	    ($_->{val}{MODEL} !~ /$searchunknown/i) &&
+	    ($_->{val}{MODEL} !~ /^\s*$/)) {
+	    $model = $_->{val}{MODEL};
+	}
 	$serialnumber = $_->{val}{SERIALNUMBER};
 	# Check if the device is really an HP multi-function device
 	if ($bus ne "hpjd") {
@@ -1526,6 +1538,15 @@ sub configure_hpoj {
 		    $model_long = join("", <F>);
 		    close F;
 		    chomp $model_long;
+		    # If SNMP or local port auto-detection failed but HPOJ
+		    # auto-detection succeeded, fill in model name here.
+		    if ((!$_->{val}{MODEL}) ||
+			($_->{val}{MODEL} =~ /$searchunknown/i) ||
+			($_->{val}{MODEL} =~ /^\s*$/)) {
+			if ($model_long =~ /:([^:;]+);/) {
+			    $_->{val}{MODEL} = $1;
+			}
+		    }
 		}
 		if (open F, ($::testing ? $prefix : "chroot $prefix/ ") . "/usr/bin/ptal-devid $ptalprobedevice -long -sern 2>/dev/null |") {
 		    $serialnumber_long = join("", <F>);
@@ -1720,7 +1741,8 @@ sub configure_hpoj {
 sub parport_addr{
     # auto-detect the parallel port addresses
     my ($device) = @_;
-    $device =~ m!^/dev/lp(\d+)$!;
+    $device =~ m!^/dev/lp(\d+)$! or
+	$device =~ m!^/dev/printers/(\d+)$!;
     my $portnumber = $1;
     my $parport_addresses = 
 	`cat /proc/sys/dev/parport/parport$portnumber/base-addr`;
