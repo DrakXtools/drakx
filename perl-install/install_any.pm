@@ -840,25 +840,29 @@ sub generate_automatic_stage1_params {
 
     my @ks = "method:$o->{method}";
 
-    if ($o->{method} =~ /http/) {
+    if ($o->{method} eq 'http') {
 	"$ENV{URLPREFIX}" =~ m|http://([^/:]+)/(.*)| or die;
 	push @ks, "server:$1", "directory:$2";
-    } elsif ($o->{method} =~ /ftp/) {
+    } elsif ($o->{method} eq 'ftp') {
 	push @ks,  "server:$ENV{HOST}", "directory:$ENV{PREFIX}", "user:$ENV{LOGIN}", "pass:$ENV{PASSWORD}";
-    } elsif ($o->{method} =~ /nfs/) {
+    } elsif ($o->{method} eq 'nfs') {
 	cat_("/proc/mounts") =~ m|(\S+):(\S+)\s+/tmp/image nfs| or die;
 	push @ks, "server:$1", "directory:$2";
     }
 
-    my ($intf) = values %{$o->{intf}};
-    if ($intf->{BOOTPROTO} =~ /dhcp/) {
-	push @ks, "network:dhcp";
-    } else {
-	require network;
-	push @ks, "network:static", "ip:$intf->{IPADDR}", "netmask:$intf->{NETMASK}", "gateway:$o->{netc}{GATEWAY}";
-	my @dnss = network::dnsServers($o->{netc});
-	push @ks, "dns:$dnss[0]" if @dnss;
+    if (member($o->{method}, qw(http ftp nfs))) {
+	my ($intf) = values %{$o->{intf}};
+	push @ks, "interface:$intf->{DEVICE}";
+	if ($intf->{BOOTPROTO} eq 'dhcp') {
+	    push @ks, "network:dhcp";
+	} else {
+	    require network;
+	    push @ks, "network:static", "ip:$intf->{IPADDR}", "netmask:$intf->{NETMASK}", "gateway:$o->{netc}{GATEWAY}";
+	    my @dnss = network::dnsServers($o->{netc});
+	    push @ks, "dns:$dnss[0]" if @dnss;
+	}
     }
+    
     "automatic=".join(',', @ks);
 }
 
