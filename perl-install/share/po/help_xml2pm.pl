@@ -80,7 +80,7 @@ EOF
 	my $s = join(', ', $main, map { qq(N($_)) } @inside);
 	print STDERR "Writing id=$_\n";
 	print $F <<EOF;
-sub $_ {
+sub $_() {
     N($s);
 }
 EOF
