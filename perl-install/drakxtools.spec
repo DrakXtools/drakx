@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.4mdk
+Release: 0.5mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -312,9 +312,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue May 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.5mdk
+- keyboardrake: resync with XFree86-4.3 (pablo)
+
 * Tue May 27 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.4mdk
 - drakconnect: fix #3628 (ensure 644 perms on /etc/resolv.conf)
-- keyboardrake: resync with XFree86-4.3 (pablo)
 
 * Wed May 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.3mdk
 - drakbackup: fixes regarding file names in differntial mode (stew)
