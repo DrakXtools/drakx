@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 6mdk
+Release: 7mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -315,6 +315,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Nov 15 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-7mdk
+- fix links
+
 * Fri Nov 14 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-6mdk
 - drakconnect: fix speedtouch start/stop scripts when firmware is
   already there or when firmware installation is canceled
