@@ -357,7 +357,7 @@ sub build_notebook {
             my $proto = $gui->{intf}{BOOTPROTO};
             $proto->{protocols} = { none => N("none"), static => N("static"), dhcp => N("DHCP") };
             $proto->set_popdown_strings(values %{$proto->{protocols}});
-            $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO}});
+            $proto->set_text($proto->{protocols}{$intf->{BOOTPROTO} || 'none'});
             foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
                 $_->set_sensitive($intf->{BOOTPROTO} eq 'static' ? 1 : 0)
             };
