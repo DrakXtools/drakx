@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 16mdk
+Release: 17mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -347,6 +347,14 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-17mdk
+- 64-bit fixes (gwenole)
+- drakconnect: write wlan-ng config files for prism2 drivers (blino)
+- harddrake service: 
+  o do not disable glx when switching from nvidia driver to nv
+    (indirect support, #11285)
+  o do not faill when hw db is corrupted
+
 * Mon Oct  4 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-16mdk
 - drakconnect (blino):
   o only write TYPE field in ifcfg files for xDSL connection
