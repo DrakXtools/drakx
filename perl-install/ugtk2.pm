@@ -134,8 +134,8 @@ sub gtkappenditems {
 
 # append page to a notebook
 sub gtkappend_page {
-    my ($notebook, $page, $title) = @_;
-    $notebook->append_page($page, $title);
+    my ($notebook, $page, $o_title) = @_;
+    $notebook->append_page($page, $o_title);
     $notebook;
 }
 
