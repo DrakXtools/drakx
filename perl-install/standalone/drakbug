@@ -34,6 +34,7 @@ my $in = 'interactive'->vnew;
 $::bugzilla_url = "https://qa.mandrakesoft.com";
 my $version = "0.9.0";
 my $prog;
+my $incident=1;
 
 sub usage {
     print STDERR _("drakbug version %s
@@ -45,6 +46,7 @@ usage: drakbug [OPTIONS] [PROGRAM_NAME]
 OPTIONS:
 ", $version) . _("  --help            - print this help message.
 ") . "\n" . _("  --report          - program should be one of mandrake tools
+") . "\n" . _("  --incident        - program should be one of mandrake tools
 ");
     exit(0);
 }
@@ -52,6 +54,7 @@ OPTIONS:
 while (defined($_ = shift @ARGV)) {
     /^--help$/ and do { usage; next };
     /^--report$/ and do { $prog = shift @ARGV };
+    /^--incident$/ and do {$incident = 1 ; $prog = shift @ARGV };
 }
 
 my $window_g = new Gtk::Window -toplevel;
@@ -126,8 +129,11 @@ my $hbx = new Gtk::HBox(0,0);
 my $Close_Button = new Gtk::Button(_("Close"));
 $Close_Button->signal_connect(clicked => sub { Gtk->exit(0) });
 $hbx->pack_start($Close_Button,0,0,0);
+my $options = "mdkwizard=1";
+$options.="";
+
 my $Report_Button = new Gtk::Button(_("Report"));
-$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard/") });
+$Report_Button->signal_connect(clicked => sub { connect_bugzilla("$::bugzilla_url/wizard?"."$options") });
 $hbx->pack_end($Report_Button,0,0,0);
 $vbx->pack_start($hbx,0,0,0);
 $window_g->add($vbx);
@@ -167,6 +173,10 @@ sub get_package {
     $rpm_package;
 }
 
+sub parse_release {
+    my ($rel) = cat_('/etc/mandrake-release') =~ /release\s(\S+\s\(.*\))/;
+    
+}
 sub connect_bugzilla {
     my($url) = @_;
     my $w = $in->wait_message('',_("connecting to Bugzilla wizard ...")); 
