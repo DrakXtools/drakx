@@ -261,7 +261,7 @@ sub gateway {
 sub configureNetworkIntf {
     my ($netc, $in, $intf, $net_device, $skip, $module) = @_;
     my $text;
-    my @wireless_modules = ("airo_cs", "netwave_cs", "ray_cs", "wavelan_cs", "wvlan_cs", "airport");
+    my @wireless_modules = qw(aironet_cs aironet4500_cs hermes airo orinico_cs orinico airo_cs netwave_cs ray_cs wavelan_cs wvlan_cs airport);
     my $flag = 0;
     foreach (@wireless_modules) {
 	$module =~ /$_/ and $flag =1;
@@ -427,7 +427,7 @@ sub configureNetwork2 {
     my ($in, $prefix, $netc, $intf) = @_;
     my $etc = "$prefix/etc";
 
-    $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools wlan_cs wavelan_cs aironet_cs aironet4500_cs hermes airo orinico_cs orinico ));
+    $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
     write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
