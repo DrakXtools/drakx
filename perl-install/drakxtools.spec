@@ -319,6 +319,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o fix protocol switching from manual to DHCP when stepping back in
     wizard
   o read VLAN and IP aliased interfaces config too
+- drakbackup: fix typo in tape restore (Federico Belvisi).
 
 * Fri May 28 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-40mdk
 - drakconnect:
