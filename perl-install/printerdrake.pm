@@ -211,7 +211,8 @@ sub auto_detect {
 sub wizard_welcome {
     my ($in) = @_;
     if ($in) {
-	return $in->ask_okcancel(_("Local Printer"),
+	eval {
+	    return $in->ask_okcancel(_("Local Printer"),
 			  _("
 Welcome to the Printer Setup Wizard
 
@@ -220,6 +221,8 @@ This wizard will help you to install your printer(s) connected to this computer.
 Please plug in your printer(s) on this computer and turn it/them on. Click on \"Next\" when you are ready, and on \"Cancel\" when you do not want to set up your printer(s) now.
 
 Note that some computers can crash during the printer auto-detection, use the \"Expert Mode\" of printerdrake to do a printer installation without auto-detection. You also need the \"Expert Mode\" when you want to set up printing on a remote printer when printerdrake does not list it automatically."));
+	};
+	return 0 if ($@ =~ /wizcancel/);
     }
 }
 
@@ -2074,6 +2077,7 @@ sub wizard_close {
     wizard_congratulations($in) if ($mode == 1);
     undef $::isWizard;
     $::WizardWindow->destroy if defined $::WizardWindow;
+    undef $::WizardWindow;
 };
 
 #- Program entry point for configuration of the printing system.
@@ -2333,7 +2337,7 @@ sub main {
 	    #- configuration work correctly.
 	    $printer->{OLD_QUEUE} = $printer->{QUEUE} = $queue;
 	    #- Do all the configuration steps for a new queue
-	    if (0 && (!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
+	    if ((!$::expert) && (!$::isEmbedded) && (!$::isInstall) &&
 		($in->isa('interactive_gtk'))) {
 		# Enter wizard mode
 		$::Wizard_pix_up = "wiz_printerdrake.png";
@@ -2349,50 +2353,53 @@ sub main {
 		};
 		undef $::Wizard_no_previous;
 	    }
-	    $printer->{TYPE} = "LOCAL";
-	    !$::expert or choose_printer_type($printer, $in) or next;
-	    if ($printer->{TYPE} eq 'CUPS') {
-		setup_remote_cups_server($printer, $in);
-		$continue = ($::expert || !$::isInstall || $menushown ||
-			     $in->ask_yesorno('',_("Do you want to configure another printer?")));
-		next;
-	    }
-	    #- Cancelling one of the following dialogs should restart 
-	    #- printerdrake
-	    $continue = 1;
-	    setup_printer_connection($printer, $in) or do {
-		wizard_close($in, 0) if $::isWizard;
-		next;
-	    };
-	    !$::expert or choose_printer_name($printer, $in) or	next;    
-	    get_db_entry($printer, $in);
-	    !$::expert or choose_model($printer, $in) or next;
-	    get_printer_info($printer, $in) or do {
-		wizard_close($in, 0) if $::isWizard;
-		next;
-	    };
-	    !$::expert or setup_options($printer, $in) or next;
-	    configure_queue($printer, $in);
-	    !$::expert or setasdefault($printer, $in);
-	    $cursorpos = 
-		$printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
-		($printer->{QUEUE} eq $printer->{DEFAULT} ? 
-		 _(" (Default)") : ());
-	    if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
-		if ($::isWizard) {
-		    # Leave wizard mode with congratulations screen
-		    wizard_close($in, 1);
+	    eval { # eval to catch wizard cancel. The wizard stuf should be in a separate function with steps. see dragw. (dams)
+		$printer->{TYPE} = "LOCAL";
+		!$::expert or choose_printer_type($printer, $in) or next;
+		if ($printer->{TYPE} eq 'CUPS') {
+		    setup_remote_cups_server($printer, $in);
+		    $continue = ($::expert || !$::isInstall || $menushown ||
+				 $in->ask_yesorno('',_("Do you want to configure another printer?")));
+		    next;
 		}
-		$continue = ($::expert || !$::isInstall || $menushown ||
-			 $in->ask_yesorno('',_("Do you want to configure another printer?")));
-	    } else {
-		if ($::isWizard) {
-		    # Leave wizard mode without congratulations screen
-		    wizard_close($in, 0);
+		#- Cancelling one of the following dialogs should restart 
+		#- printerdrake
+		$continue = 1;
+		setup_printer_connection($printer, $in) or do {
+		    wizard_close($in, 0) if $::isWizard;
+		    next;
+		};
+		!$::expert or choose_printer_name($printer, $in) or	next;    
+		get_db_entry($printer, $in);
+		!$::expert or choose_model($printer, $in) or next;
+		get_printer_info($printer, $in) or do {
+		    wizard_close($in, 0) if $::isWizard;
+		    next;
+		};
+		!$::expert or setup_options($printer, $in) or next;
+		configure_queue($printer, $in);
+		!$::expert or setasdefault($printer, $in);
+		$cursorpos = 
+		  $printer->{configured}{$printer->{QUEUE}}{'queuedata'}{'menuentry'} . 
+		    ($printer->{QUEUE} eq $printer->{DEFAULT} ? 
+		     _(" (Default)") : ());
+		if (print_testpages($printer, $in, $printer->{TYPE} !~ /LOCAL/ && $upNetwork)) {
+		    if ($::isWizard) {
+			# Leave wizard mode with congratulations screen
+			wizard_close($in, 1);
+		    }
+		    $continue = ($::expert || !$::isInstall || $menushown ||
+				 $in->ask_yesorno('',_("Do you want to configure another printer?")));
+		} else {
+		    if ($::isWizard) {
+			# Leave wizard mode without congratulations screen
+			wizard_close($in, 0);
+		    }
+		    $editqueue = 1;
+		    $queue = $printer->{QUEUE};
 		}
-		$editqueue = 1;
-		$queue = $printer->{QUEUE};
-	    }
+	    };
+	    wizard_close($in, 0) if ($@ =~ /wizcancel/);
 	} else {
 	    $printer->{NEW} = 0;
 	    # Modify a queue, ask which part should be modified
