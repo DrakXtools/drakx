@@ -70,7 +70,8 @@ upload_only:
 	function upload() { rel=`echo $$1 | sed 's!$(ROOTDEST)/!!'`; rsync -qSavz --verbose --exclude '*~' -e ssh --delete $$1/$$2 mandrake@ken:/c/cooker/$$rel; } ;\
 	upload $(MEDIA_INFO_DEST) 'compssUsers.pl*' ;\
 	upload $(MEDIA_INFO_DEST) rpmsrate ;\
-	upload $(STAGE2_DEST) '*_stage2.bz2' ;\
+	upload $(STAGE2_DEST) '*.clp' ;\
+	upload $(STAGE2_DEST) mdkinst.kernels ;\
 	upload $(EXTRA_INSTALL_DEST)/advertising '' ;\
 	upload $(MISC_DEST) gendistrib ;\
 	upload $(MISC_DEST) mdkinst_stage2_tool ;\
