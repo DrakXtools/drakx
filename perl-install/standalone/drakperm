@@ -286,9 +286,9 @@ sub row_setting_dialog {
     $groups->entry->set_text($model->get($iter, 3)) if $iter;
 
     my $id_box = gtkadd(Gtk2::HBox->new,
-                        Gtk2::Label->new(N("User :")),
+                        Gtk2::Label->new(N("User:")),
                         $users,
-                        Gtk2::Label->new(N("Group :")),
+                        Gtk2::Label->new(N("Group:")),
                         $groups,
                        );
 

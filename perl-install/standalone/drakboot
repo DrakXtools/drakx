@@ -153,7 +153,7 @@ gtkadd($window,
         					   if ($boot_warn && $no_bootsplash && $splash_mode) {
 						       if ($in->ask_yesorno(N("Warning"),
 						   [ N("Your system bootloader is not in framebuffer mode. To activate graphical boot, select a graphic video mode from the bootloader configuration tool.") . "\n" .
-                                                     N("Do you want to configure it now ?") ])) {
+                                                     N("Do you want to configure it now?") ])) {
                                                            enable_framebuffer();
                                                            #- it would be nice to get available themes for new cur_res here
                                                        };

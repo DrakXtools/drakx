@@ -224,7 +224,7 @@ sub get_pkg_name {
 sub connect_bugzilla {
     my ($url) = @_;
     if (!$stable_release) {
-	my $_w = create_dialog(N("Please wait"), N("connecting to %s ...", $wizard_name)); 
+	my $_w = create_dialog(N("Please wait"), N("connecting to %s...", $wizard_name)); 
 	sleep(3);
     }
     exec $ENV{BROWSER},$url if exists $ENV{BROWSER};

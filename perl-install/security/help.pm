@@ -103,7 +103,7 @@ and crontab(1))."),
 
 'set_root_umask' => N("Set the root umask."),
 CHECK_OPEN_PORT => N("if set to yes, check open ports."),
-CHECK_PASSWD => N("if set to yes, check for :
+CHECK_PASSWD => N("if set to yes, check for:
 
 - empty passwords,
 

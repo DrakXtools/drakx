@@ -63,11 +63,11 @@ Do you want to install the SANE packages?"))) {
 }
 if ($::Manual) { manual(); quit() }
 my $wait = $in->wait_message(N("Scannerdrake"),
-			     N("Searching for configured scanners ..."));
+			     N("Searching for configured scanners..."));
 my @c = scanner::configured();
 $wait = undef;
 $wait = $in->wait_message(N("Scannerdrake"),
-			     N("Searching for new scanners ..."));
+			     N("Searching for new scanners..."));
 my @f = scanner::detect(@c);
 $wait = undef;
 my $changed = 0;
@@ -75,7 +75,7 @@ my $changed = 0;
 if ($changed) {
     my $_wait =
 	$in->wait_message(N("Scannerdrake"),
-			  N("Re-generating list of configured scanners ..."));
+			  N("Re-generating list of configured scanners..."));
     @c = scanner::configured();
 }
 mainwindow(@c);
@@ -342,7 +342,7 @@ sub tryConfScanner {
 		      ) or return 0;
 	if ($port eq N("Auto-detect available ports")) {
 	    $wait = $in->wait_message(N("Scannerdrake"),
-				      N("Searching for scanners ..."));
+				      N("Searching for scanners..."));
 	    my @d = scanner::detect();
 	    undef $wait;
 	    my @list = map {
@@ -461,11 +461,11 @@ sub mainwindow {
 		# Do scanner auto-detection
 		my $wait =
 		    $in->wait_message(N("Scannerdrake"),
-				      N("Searching for configured scanners ..."));
+				      N("Searching for configured scanners..."));
 		@configured = scanner::configured();
 		$wait = 
 		    $in->wait_message(N("Scannerdrake"),
-				      N("Searching for new scanners ..."));
+				      N("Searching for new scanners..."));
 		my @f = scanner::detect(@configured);
 		$wait = undef;
 		if (@f) { 
@@ -487,7 +487,7 @@ sub mainwindow {
 	    if ($changed) {
 		my $_wait =
 		    $in->wait_message(N("Scannerdrake"),
-				      N("Re-generating list of configured scanners ..."));
+				      N("Re-generating list of configured scanners..."));
 		@configured = scanner::configured();
 	    }
 	} else {

@@ -158,7 +158,7 @@ $first{widgets}{combo}{res}->entry->signal_connect(changed => sub {
 	$boot_conf_frame{frame} = Gtk2::Frame->new(N("Configure bootsplash picture"));
 	&make_boot_frame;
 	$first_vbox->add($boot_conf_frame{frame});
-	member($theme{name}, giv_exist_thm()) && thm_in_this_res() && get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res}));
+	member($theme{name}, giv_exist_thm()) && thm_in_this_res() && get_this_thm_res_conf() || $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res}));
       });
 #- go to bootsplash configuration step 2
 #$first{widgets}{button}{boot_conf}->signal_connect(clicked => sub{show_act(\%boot_conf_frame) } );
@@ -306,7 +306,7 @@ sub which_res_exist() {
          $first{widgets}{combo}{res}->entry->set_text($_);
          last;
 	}
-	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s !", $theme{res}{res})) and return 0;
+	$is_ok == 1 or $in->ask_warn(N("Notice"), N("This theme does not yet have a bootsplash in %s!", $theme{res}{res})) and return 0;
 	return 1;
 }	
 
@@ -456,7 +456,7 @@ sub make_boot_frame() {
 	  }
 	  #- calculation of the 2 angle of text box and progress bar
 	  set_thm_values();
-	  my $_w = $in->wait_message('', N("Generating preview ..."));
+	  my $_w = $in->wait_message('', N("Generating preview..."));
        my $txt_tl_xx 	= $theme{boot_conf}{tx}*$font_size{w}; 
        my $txt_tl_yy 	= $theme{boot_conf}{ty}*$font_size{h};
        my $txt_width 	= $theme{boot_conf}{tw}*$font_size{w};

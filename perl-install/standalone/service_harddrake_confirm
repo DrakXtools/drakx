@@ -5,5 +5,5 @@ use interactive;
 
 my $in = interactive->vnew;
 my $res = $in->ask_okcancel(N("Hardware changes in \"%s\" class (%s seconds to answer)", $ARGV[0], $ARGV[1]),
-                            $ARGV[2] . N("Do you want to run the appropriate config tool ?"), 1);
+                            $ARGV[2] . N("Do you want to run the appropriate config tool?"), 1);
 $in->exit($res);

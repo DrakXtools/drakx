@@ -709,7 +709,7 @@ sub configure_new_printers {
 	    undef $w;
 	    $w = $in->wait_message(N("Printerdrake"),
 				    ($unknown ?
-				     N("Configuring printer ...") :
+				     N("Configuring printer...") :
 				     N("Configuring printer \"%s\"...",
 				       $printer->{currentqueue}{queue})));
 	    # Do configuration of multi-function devices and look up
@@ -3648,7 +3648,7 @@ sub install_spooler {
     my $packages = $spoolers{$spooler}{packages2rm};
     if ($packages && files_exist($packages->[1])) {
 	undef $w;
-        $w = $in->wait_message(N("Printerdrake"), N("Removing %s ..."), $spoolers{$packages->[0]}{short_name});
+        $w = $in->wait_message(N("Printerdrake"), N("Removing %s..."), $spoolers{$packages->[0]}{short_name});
         $in->do_pkgs->remove_nodeps($packages->[0])
 	    or do {
 		$in->ask_warn(N("Error"),
@@ -3661,7 +3661,7 @@ sub install_spooler {
     $packages = $spoolers{$spooler}{packages2add};
     if ($packages && !files_exist(@{$packages->[1]})) {
 	undef $w;
-        $w = $in->wait_message(N("Printerdrake"), N("Installing %s ..."), $spoolers{$spooler}{short_name});
+        $w = $in->wait_message(N("Printerdrake"), N("Installing %s..."), $spoolers{$spooler}{short_name});
         $in->do_pkgs->install(@{$packages->[0]})
 	    or do {
 		$in->ask_warn(N("Error"),

@@ -758,7 +758,7 @@ and copy the mgmt.o in /usr/share/speedtouch", 'http://prdownloads.sourceforge.n
 Some connections use pptp, a few use dhcp.
 If you don't know, choose 'use pppoe'"),
                     data =>  [
-                              { text => N("ADSL connection type :"), val => \$adsl_type, type => "list",
+                              { text => N("ADSL connection type:"), val => \$adsl_type, type => "list",
                                 list => [ sort { $adsl_types{$a} cmp $adsl_types{$b} } keys %adsl_types ],
                                 format => sub { $adsl_types{$_[0]} },
                               },
@@ -795,7 +795,7 @@ If you don't know, choose 'use pppoe'"),
                          { label => N("Virtual Path ID (VPI):"), val => \$netc->{vpi}, advanced => 1 },
                          { label => N("Virtual Circuit ID (VCI):"), val => \$netc->{vci}, advanced => 1 },
                          if_($ntf_name eq "sagem",
-                             { label => N("Encapsulation :"), val => \$netc->{Encapsulation}, list => [ keys %encapsulations ],
+                             { label => N("Encapsulation:"), val => \$netc->{Encapsulation}, list => [ keys %encapsulations ],
                                format => sub { $encapsulations{$_[0]} }, advanced => 1,
                              },
                             ),
@@ -933,7 +933,7 @@ notation (for example, 1.2.3.4).")),
                             $in->ask_warn(N("Error"), N("IP address should be in format 1.2.3.4"));
                             return 1, $bad[0];
                         }
-                        $in->ask_warn(N("Error"), N("Warning : IP address %s is usually reserved !", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
+                        $in->ask_warn(N("Error"), N("Warning: IP address %s is usually reserved !", $ethntf->{IPADDR})) if is_ip_forbidden($ethntf->{IPADDR});
                     },
                     focus_out => sub {
                         $ethntf->{NETMASK} ||= netmask($ethntf->{IPADDR}) unless $_[0]
@@ -1112,7 +1112,7 @@ It is not necessary on most networks."),
                    
                    apply_settings => 
                    {
-                    name => N("Configuration is complete, do you want to apply settings ?"),
+                    name => N("Configuration is complete, do you want to apply settings?"),
                     type => "yesorno",
                    },
                    
@@ -1154,7 +1154,7 @@ It is not necessary on most networks."),
                         #- use net_applet by default
                         $isdn->{dial_method} = $method->{name} || $isdn_dial_methods[1]{name};
                     },
-                    name => N("How do you want to dial this connection ?"),
+                    name => N("How do you want to dial this connection?"),
                     data => sub {
                         [ { type => "list", val => \$isdn->{dial_method}, list => [ map { $_->{name} } @isdn_dial_methods ] } ]
                     },
@@ -1167,7 +1167,7 @@ It is not necessary on most networks."),
 
                    restart => 
                    {
-                    name => N("The network needs to be restarted. Do you want to restart it ?"),
+                    name => N("The network needs to be restarted. Do you want to restart it?"),
                     type => "yesorno",
                     post => sub {
                         my ($a) = @_;

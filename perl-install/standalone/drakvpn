@@ -379,7 +379,7 @@ Choose the section you would like to add.\n", $ipsec_conf),
 	$existing_section = network::ipsec::already_existing_section_ipsec_conf("config setup", $ipsec, $kernel_version);
 
 	if ($existing_section eq "already existing") {
-$in->ask_okcancel(N("Exists !"), 
+$in->ask_okcancel(N("Exists!"), 
 N("A section with this name already exists.
 The section names have to be unique.\n
 You'll have to go back and add another section
@@ -420,7 +420,7 @@ Choose continue or previous when you are done.\n", $ipsec_conf),
 	$existing_section = network::ipsec::already_existing_section_ipsec_conf("conn %default", $ipsec, $kernel_version);
 
 	if ($existing_section eq "already existing") {
-$in->ask_okcancel(N("Exists !"), 
+$in->ask_okcancel(N("Exists!"), 
 N("A section with this name already exists.
 The section names have to be unique.\n
 You'll have to go back and add another section
@@ -507,7 +507,7 @@ Choose continue when you are done to write the data.\n", $ipsec_conf),
 	$existing_section = network::ipsec::already_existing_section_ipsec_conf($normal_conn->{1}[0] . " " . $normal_conn->{1}[1], $ipsec, $kernel_version);
 
 	if ($existing_section eq "already existing") {
-$in->ask_okcancel(N("Exists !"), 
+$in->ask_okcancel(N("Exists!"), 
 N("A section with this name already exists.
 The section names have to be unique.\n
 You'll have to go back and add another section
@@ -547,7 +547,7 @@ Choose continue when you are done to write the data.\n"), $section)  or goto ste
 #	$existing_section = network::ipsec::already_existing_section_ipsec_conf($section->{src_dest}, $ipsec, $kernel_version);
 #
 #	if ($existing_section eq "already existing") {
-#$in->ask_okcancel(N("Exists !"), 
+#$in->ask_okcancel(N("Exists!"), 
 #N("A section with this name already exists.
 #The section names have to be unique.\n
 #You'll have to go back and add another section
@@ -587,7 +587,7 @@ my $number = network::ipsec::matched_section_key_number_ipsec_conf($choice,$ipse
 if ($kernel_version < 2.5) { 
 if ($choice =~ /^version|block|private|clear|packet/) {
 
-$in->ask_okcancel(N("Can't edit !"), 
+$in->ask_okcancel(N("Can't edit!"), 
 N("You cannot edit this section.\n
 This section is mandatory for Freswan 2.X.
 One has to specify version 2.0 on the top
@@ -747,7 +747,7 @@ Put your mouse over the certificate entry to obtain online help."),
 		val => \$path_section->{1}[1], 
 		list => [ 'certificate', 'pre_shared_key', 'include' ], 
 		help => 
-N("path include path : specifies a path to include
+N("path include path: specifies a path to include
 a file. See File Inclusion.
 	Example: path include '/etc/racoon'
 
@@ -1024,7 +1024,7 @@ Examples : \n
         lifetime time 30 sec;
         lifetime time 30 sec;
         lifetime time 60 sec;
-	lifetime time 12 hour ;
+	lifetime time 12 hour;
 
 So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and 'hour'.
 ") },
