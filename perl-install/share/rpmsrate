@@ -526,19 +526,25 @@ EMULATORS
   1 xmame xmess
 
 INSTALL
+  NOCOPY
+    5 kernel22 kernel22-smp kernel22-secure kernel kernel-smp kernel-enterprise
+      raidtools lvm reiserfsprogs jfsprogs xfsprogs 
+      alsa alsa-utils
+    4 XFree86
+
   5 pptp-adsl dhcpcd dhcpxd dhcp-client isdn4net isdn-light isdn4k-utils ibod rp-pppoe pump wireless-tools speedtouch
-  5 XFree86-SVGA XFree86-server hotplug dev ypbind speedtouch_mgmt
-  4 XFree86-S3 XFree86-S3V XFree86-VGA16 XFree86-Mach64 XFree86-FBDev
-  3 XFree86-3DLabs XFree86-Sun XFree86-SunMono XFree86-Sun24
-  1 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
-    XFree86 XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
     ppp nfs-utils-clients
-    kernel kernel-smp kernel-enterprise kernel22 kernel22-smp kernel22-secure 
     autologin ntp cups-drivers samba ncpfs hpoj ucd-snmp libptal0
-    reiserfsprogs jfsprogs xfsprogs ipchains printer-utils rlpr samba-client
+    ipchains printer-utils rlpr samba-client
     xpp pdq printer-testpages 
-    autologin ntp ipchains lvm
+    autologin ntp ipchains 
     cups LPRng lpr foomatic printer-utils printer-testpages gimpprint xpp 
     nc qtcups kups sndconfig
     ImageMagick ghostscript printer-filters mpage a2ps ppdfilt libppd1 gpr groff libgimpprint1 numlock curl
     sane-backends sane-frontends xsane xsane-gimp
+    hotplug dev ypbind speedtouch_mgmt
+  4 XFree86-SVGA XFree86-server XFree86-Mach64 XFree86-FBDev
+    XFree86-glide-module Device3Dfx Glide_V3-DRI Glide_V5 Mesa
+  3 XFree86-S3 XFree86-S3V XFree86-VGA16
+  2 XFree86-8514 XFree86-AGX XFree86-I128 XFree86-Mach32 XFree86-Mach8 XFree86-Mono XFree86-P9000 XFree86-W32
+  1 XFree86-3DLabs XFree86-Sun XFree86-SunMono XFree86-Sun24
