@@ -1,3 +1,20 @@
+2000-02-11  Pixel  <pixel@mandrakesoft.com>
+
+	* partition_table_raw.pm (get_geometry): do not use the cylinder
+	number given by HDIO_GETGEO cuz limited to 16bits. Compute using
+	the total_sectors using HDIO_GET_IDENTITY
+
+	* c/stuff.xs.pm: added total_sectors (gives the number of sector
+	of a drive)
+
+	* modules.pm (load): ignore error in loading prereq's
+	
+	* modules.pm (@drivers_by_category): rcpci instead of rcpci45,
+	z85230 added
+
+	* commands.pm (mount): add modules::load_deps otherwise the
+	fs::mount won't succeed insmoding vfat if needed
+
 2000-02-11  François Pons  <fpons@mandrakesoft.com>
 
 	* fixed diskdrake to handle limit case when creating and resizing
