@@ -1,3 +1,54 @@
+2002/01/07  dam's  <damien@mandrakesoft.com>
+
+	* Makefile: socmetic
+	typo
+	added debug mode for the whole install
+
+	* my_gtk.pm: removed print
+	new pack_start functions, powerpack sub added (code from adrien)
+	incorporated adrien's code to generalize pack functions
+	minor bug fixes
+
+	* install_steps.pm, network/netconnect.pm: corrected network connection
+	during install
+
+	* install2: added debug mode for the whole install
+
+2002/01/07  François Pons  <fpons@mandrakesoft.com>
+
+	* steps.pm: changed installUpdates after summary (to get corrected
+	timezone).
+
+	* install_any.pm: separated setDefaultPackages from setPackages because it
+	is used by allowing
+	only base system to be installed (allow remade a better package
+	selection).
+
+	* crypto.pm: added bestMirror method to retrieve a good mirror (according
+	to timezone) and
+	add salt with random number to avoid using always the same.
+
+	* install2.pm: added option to only upgrade packages.
+
+	* install_steps_interactive.pm: added minimal type of install support.
+
+	* share/list: fixed to match newer menu package.
+
+	* Makefile: fixed overwriting of install2 filtering, keep diagnostic and
+	strict for debug mode.
+
+2002/01/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/network.c: also log server name for HTTP install
+
+2002/01/04  dam's  <damien@mandrakesoft.com>
+
+	* network/adsl.pm, install_steps.pm, network/tools.pm, my_gtk.pm,
+	network/netconnect.pm: corrected minor bugs in network (among others bug
+	"modifying read only values")
+	recode upNetwork and downNetwork (it might work, at least if you are
+	lucky);
+
 2002/01/04  dam's  <damien@mandrakesoft.com>
 
 	* my_gtk.pm: corrected minor bugs in network (among others bug "modifying
