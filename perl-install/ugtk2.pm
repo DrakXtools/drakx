@@ -522,7 +522,6 @@ sub gtktext_insert {
 sub gtkfontinfo {
     my ($widget) = @_;
     my $context = $widget->get_pango_context;
-    my $_lan = $context->get_language;
     my $metrics = $context->get_metrics($widget->style->get_font_desc, $context->get_language);
     my %fontinfo;
     foreach (qw(ascent descent approximate_char_width approximate_digit_width)) {
