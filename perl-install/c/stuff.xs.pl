@@ -83,8 +83,6 @@ void rpmError_callback(void) {
 
 $ENV{C_DRAKX} and print '
 
-#include <gdk/gdkx.h>
-
 void initIMPS2() {
   unsigned char imps2_s1[] = { 243, 200, 243, 100, 243, 80, };
   unsigned char imps2_s2[] = { 246, 230, 244, 243, 100, 232, 3, };
