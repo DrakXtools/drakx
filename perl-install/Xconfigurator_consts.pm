@@ -330,7 +330,8 @@ $default_monitor = "High Frequency SVGA, 1024x768 at 70 Hz";
 );
 
 %xkb_options = (
-    'ru' => [ 'XkbVariant "winkeys"', 'XkbOptions "grp:caps_toggle"' ],
+    'ru(winkeys)' => [ 'XkbVariant "winkeys"', 'XkbOptions "grp:caps_toggle"' ],
+    'jp' => [ 'XkbModel "jp106"' ], 
 );
 
 $XF86firstchunk_text = q(
