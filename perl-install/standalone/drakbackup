@@ -210,6 +210,7 @@ my $log_buff;
 my $comp_mode = 0;
 my $backup_sys = 1;
 my $backup_user = 1;
+my $manual_user = 0;
 my $backup_daemon = 1;
 my $backup_sys_versions = 0;
 my $backup_user_versions = 0;
@@ -2886,9 +2887,9 @@ sub wizard()   {
 	my $box2;    
     my $user_string = N("Backup Users");
 	$user_string .= N(" (Default is all users)") if !$nonroot_user;
-	if ($backup_user) {
+	if ($backup_user && !$manual_user) {
 		@user_list = @user_list_all;
-	} else {
+	} elsif (!$manual_user) {
 		@user_list = ();
 	}
 
@@ -2901,6 +2902,7 @@ sub wizard()   {
 				0, my $check_wizard_sys = new Gtk2::CheckButton(N("Backup System")),
 				0, my $check_wizard_user = new Gtk2::CheckButton($user_string),
 				0, gtksignal_connect(Gtk2::Button->new(N("Select user manually")), clicked => sub {
+					$manual_user = 1;
 					destroy_widget();
 					advanced_what_user(\&wizard);
 				}),
