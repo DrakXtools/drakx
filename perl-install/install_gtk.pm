@@ -100,6 +100,7 @@ sub create_help_window {
 	$w->{rwindow} = $w->{window} = new Gtk::Window;
 	$w->{rwindow}->set_uposition($::rootwidth - $::helpwidth, $::rootheight - $::helpheight);
 	$w->{rwindow}->set_usize($::helpwidth, $::helpheight);
+	$w->{rwindow}->set_title('skip');
 	$w->sync;
     }
     my $pixmap = gtkpng("$ENV{SHARE_PATH}/help.png");
@@ -127,6 +128,7 @@ sub create_steps_window {
     $w->{rwindow}->set_usize($::stepswidth, $::stepsheight);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_events('button_press_mask');
+    $w->{rwindow}->set_title('skip');
     #$w->show;
 
     gtkadd($w->{window},
@@ -187,6 +189,7 @@ sub create_logo_window {
     $w->{rwindow}->set_uposition($::stepswidth, 0);
     $w->{rwindow}->set_usize($::logowidth, $::logoheight);
     $w->{rwindow}->set_name("logo");
+    $w->{rwindow}->set_title('skip');
     $w->show;
     my $file = $o->{meta_class} eq 'desktop' ? "logo-mandrake-Desktop.png" : "logo-mandrake.png";
     $o->{meta_class} eq 'firewall' and $file = "logo-mandrake-Firewall.png";

@@ -774,6 +774,7 @@ sub selectLanguage {
     my ($in, $lang, $langs) = @_;
     $in->ask_from_(
 	{ messages => _("Please, choose a language to use."),
+	  title => 'language choice',
 	  advanced_messages => _("You can choose other languages that will be available after install"),
 	  callbacks => {
 	      focus_out => sub { $langs->{$lang} = 1 },

@@ -33,8 +33,6 @@ sub new($$) {
 
     $ENV{DISPLAY} ||= $o->{display} || ":0";
     unless ($::testing) {
-	$my_gtk::force_focus = $ENV{DISPLAY} eq ":0";
-
 	if ($ENV{DISPLAY} eq ":0" && !$::live) {
 	    my $f = "/tmp/Xconf";
 	    install_gtk::createXconf($f, @{$o->{mouse}}{"XMOUSETYPE", "device"}, $o->{wacom}[0]);
@@ -58,7 +56,10 @@ sub new($$) {
 		foreach (1..60) {
 		    sleep 1;
 		    log::l("Server died"), return 0 if !$ok;
-		    return 1 if c::Xtest($ENV{DISPLAY});
+		    if (c::Xtest($ENV{DISPLAY})) {
+			fork || exec("aewm-drakx") || exec("true");
+			return 1;
+		    }
 		}
 		log::l("Timeout!!");
 		0;
@@ -155,7 +156,7 @@ sub selectInstallClass1 {
     my ($o, $verif, $l, $def, $l2, $def2) = @_;
     $::live || @$l == 1 and return $o->SUPER::selectInstallClass1($verif, $l, $def, $l2, $def2);
 
-    my $w = my_gtk->new('');
+    my $w = my_gtk->new(_("Install Class"));
     my $focused;
     gtkadd($w->{window},
 	   gtkpack($w->create_box_with_title(_("Please, choose one of the following classes of installation:")),
