@@ -61,7 +61,9 @@ sub vnew {
     if ($ENV{DISPLAY} && system('/usr/X11R6/bin/xtest') == 0) {
 	if ($su) {
 	    $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
-	    $> and exec "kdesu", "-c", "$0 @ARGV";	    
+	    if ($>) {
+		exec("kdesu", "-c", "$0 @ARGV") or die _("kdesu missing");
+	    }
 	}
 	eval { require interactive_gtk };
 	!$@ and return interactive_gtk->new;
