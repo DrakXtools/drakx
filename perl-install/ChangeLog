@@ -1,3 +1,107 @@
+2003/02/16  alus
+
+	* share/po/pl.po: updated
+
+2003/02/16  fabman
+
+	* share/po/es.po: updated
+
+2003/02/16  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* lang.pm: log a bit more
+
+	* install_steps_gtk.pm, install_gtk.pm: fix my breakage (broke non-latin1
+	installs :/)
+
+	* any.pm: clean $o->{locale}{langs}
+
+2003/02/16  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* keyboard.pm, lang.pm: Enabled Arabic keyboard,
+	added full list of countries listed in iso 3166,
+	changed japanese charset->font for KDE,
+	removed charset names no longer used
+
+2003/02/16  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_gtk.pm: summary written in gtk, isn't it nice (?)
+	  - factorize "Help"-button handling
+	  - fix interactive_help_get_id (happily, it was no pb :)
+
+	* help.pm: fix typo (thanks to Christophe Combelles)
+
+	* install_steps_interactive.pm: handle "not configured" in summary_prompt
+
+	* services.pm: fix rawdevices description (bug #1677)
+
+	* diskdrake/hd_gtk.pm, interactive.pm, Xconfig/resolution_and_depth.pm,
+	install_interactive.pm: 
+	  - factorize "Help"-button handling
+	  - fix interactive_help_get_id (happily, it was no pb :)
+
+2003/02/15  alus
+
+	* share/po/pl.po: mostly updated
+	updated partially
+	why this file wasn't regenerated?
+
+2003/02/15  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* ugtk2.pm: don't mute the keyboard in ask_browse_tree_info (#1598)
+
+	* printer/printerdrake.pm: 
+	  - try to workaround #1581
+	  - fix the most code style-independant perl checker things
+
+2003/02/15  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* share/po/et.po: updated Estonian, Norwegian and Vietnamese files
+	updated po files
+
+	* share/po/vi.po: updated Estonian, Norwegian and Vietnamese files
+	updated pot files
+	updated po files
+
+	* share/po/id.po, share/po/gl.po, share/po/ja.po, share/po/hr.po,
+	share/po/mt.po, share/po/ga.po, share/po/ko.po, share/po/lt.po,
+	share/po/he.po, share/po/is.po, share/po/it.po, share/po/lv.po,
+	share/po/hu.po: updated pot files
+
+	* share/po/ar.po: updated remaining po files
+	updated po files
+
+	* share/po/pt_BR.po, share/po/br.po, share/po/be.po, share/po/uk.po,
+	share/po/fi.po, share/po/cy.po, share/po/ca.po, share/po/da.po,
+	share/po/tg.po, share/po/bs.po, share/po/uz.po, share/po/wa.po,
+	share/po/af.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/fr.po, share/po/eu.po, share/po/es.po,
+	share/po/de.po, share/po/eo.po, share/po/el.po, share/po/cs.po,
+	share/po/bg.po: updated po files
+
+	* share/po/sk.po, share/po/ru.po, share/po/th.po, share/po/sl.po,
+	share/po/tr.po, share/po/sv.po, share/po/sr.po, share/po/sp.po,
+	share/po/ro.po, share/po/ta.po, share/po/sq.po, share/po/nl.po: updated
+	remaining po files
+
+	* share/po/no.po: updated Estonian, Norwegian and Vietnamese files
+	updated remaining po files
+
+2003/02/15  Pixel  <pixel@mandrakesoft.com>
+
+	* install_any.pm: fix gc's typo
+
+2003/02/15  Till Kamppeter  <till@mandrakesoft.com>
+
+	* standalone/scannerdrake: Fixed bug in setting up multiple scanners at
+	once.
+
+2003/02/14  Till Kamppeter  <till@mandrakesoft.com>
+
+	* scanner.pm, standalone/scannerdrake: Improved manual scanner
+	configuration, bug fixes.
+
+	* standalone.pm: Updated "Usage:" message for Scannerdrake.
+
 2003/02/14  alus
 
 	* share/po/pl.po: fixed
@@ -10642,7 +10746,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.781 2003/02/14 00:04:41 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.782 2003/02/15 00:47:57 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
