@@ -127,7 +127,7 @@ sub ask_from_listf_ {
 }
 sub ask_from_listf {
     my ($o, $title, $message, $f, $l, $def, $help) = @_;
-    @$l == 0 and die 'ask_from_list: empty list';
+    @$l == 0 and die "ask_from_list: empty list\n" . common::backtrace();
     @$l == 1 and return $l->[0];
     goto &ask_from_listf_no_check;
 }
@@ -248,7 +248,10 @@ sub ask_from_entries_refH_powered_normalize {
     #- don't display empty lists and one element lists
     @$l = grep { 
 	if ($_->{list} && $_->{not_edit}) {
-	    @{$_->{list}} == () and die 'ask_from_list: empty list';
+	    if (@{$_->{list}} == ()) {
+		require log;
+		log::l("ask_from_entries_refH_powered_normalize: empty list\n" . common::backtrace());
+	    }
 	    @{$_->{list}} > 1;
 	} else {
 	    1;
