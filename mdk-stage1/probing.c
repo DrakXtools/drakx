@@ -454,7 +454,7 @@ static void find_media(enum media_bus bus)
 		char scsi_tape_count = '0';
 
 		char scsi_no_devices[] = "Attached devices: none";
-		char scsi_some_devices[] = "Attached devices: ";
+		char scsi_some_devices[] = "Attached devices:";
 		char scsi_host[] = "Host: ";
 		char scsi_vendor[] = "  Vendor: ";
 
