@@ -437,7 +437,6 @@ int main(int argc, char **argv)
 	int wait_status;
 	int fd;
 	int abnormal_termination = 0;
-	int end_stage2 = 0;
 
         if (argc > 1 && argv[1][0] >= '0' && argv[1][0] <= '9') {
                 printf("This is no normal init, sorry.\n"
@@ -516,11 +515,9 @@ int main(int argc, char **argv)
 		return 0;
 	}
 
-	while (!end_stage2) {
+	do {
 		childpid = wait4(-1, &wait_status, 0, NULL);
-		if (childpid == installpid)
-			end_stage2 = 1;
-	}
+	} while (childpid != installpid);
 
         /* allow Ctrl Alt Del to reboot */
         reboot(0xfee1dead, 672274793, BMAGIC_HARD);
