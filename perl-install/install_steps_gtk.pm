@@ -460,6 +460,7 @@ sub installPackages {
     my ($advertising, $change_time, $i);
     my $show_advertising if 0;
     $show_advertising = to_bool(@install_any::advertising_images) if !defined $show_advertising;
+    my $detail_or_not = sub { $show_advertising ? N("Details") : N("No details") };
     my ($msg, $msg_time_remaining, $msg_time_total) = map { Gtk2::Label->new($_) } '', (N("Estimating")) x 2;
     my ($progress, $progress_total) = map { Gtk2::ProgressBar->new } (1..2);
     gtkadd($w->{window}, my $box = Gtk2::VBox->new(0,10));
@@ -473,7 +474,7 @@ sub installPackages {
 			   $progress_total,
 			   gtkadd(create_hbox(),
 				  my $cancel = Gtk2::Button->new(N("Cancel")),
-				  my $details = Gtk2::Button->new(N("Details")),
+				  my $details = Gtk2::Button->new($detail_or_not->()),
 				  ),
 			  )), 0, 1, 0);
     $details->hide if !@install_any::advertising_images;
@@ -531,7 +532,7 @@ sub installPackages {
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
     $details->signal_connect(clicked => sub {
 	invbool \$show_advertising;
-	$details->set_label($show_advertising ? N("Details") : N("No details"));
+	$details->set_label($detail_or_not->());
 	$advertize->(1);
     });
     $advertize->();
