@@ -738,12 +738,6 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{MII_NOT_SUPPORTED} = bool2yesno(!$hotplug);
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
-                        write_cnx_script($netc, "cable", qq(
-/sbin/ifup $netc->{NET_DEVICE}
-),
-                                                  qq(
-/sbin/ifdown $netc->{NET_DEVICE}
-), $netcnx->{type}) if $netcnx->{type} eq 'cable';
 
                         return is_wireless_intf($module) ? "wireless" : "static_hostname";
                     },
@@ -848,6 +842,7 @@ I cannot set up this connection type.")), return;
                    static_hostname => 
                    {
                     pre => sub {
+                        
                         $netc->{dnsServer} ||= dns($intf->{IPADDR});
                         $gateway_ex = gateway($intf->{IPADDR});
                         #-    $netc->{GATEWAY}   ||= gateway($intf->{IPADDR});
@@ -881,6 +876,20 @@ You may also enter the IP address of the gateway if you have one."),
                             $in->ask_warn(N("Error"), N("Gateway address should be in format 1.2.3.4"));
                             return 1;
                         }
+                    },
+                    #post => $handle_multiple_cnx,
+                    next => "zeroconf",
+                   },
+                   
+                   dhcp_hostname => 
+                   {
+                   },
+                   
+                   zeroconf => 
+                   {
+                    name => N("Enter a Zeroconf host name which will be the one that your machine will get back to other machines on the network:"),
+                    data => [ { label => N("Zeroconf Host name"), val => \$netc->{ZEROCONF_HOSTNAME} } ],
+                    complete => sub {
                         if ($netc->{ZEROCONF_HOSTNAME} =~ /\./) {
                             $in->ask_warn(N("Error"), N("Zeroconf host name must not contain a ."));
                             return 1;
@@ -888,7 +897,6 @@ You may also enter the IP address of the gateway if you have one."),
                     },
                     post => $handle_multiple_cnx,
                    },
-                   
                    
                    multiple_internet_cnx => 
                    {
