@@ -1,12 +1,20 @@
 #!/bin/sh
 
-[ $# != 1 ] && { 
-    echo "usage: make_partimage_save_rest_all <partimage special rpm>" ; 
+[ $# != 1 -a $# != 2 ] && { 
+    echo "usage: make_partimage_save_rest_all <partimage special rpm> [<partimage dir>]" ; 
     exit 1
 }
 
 rpm=$1
+partimage_dir=$2
 where=/data/box
+
+if [ -n "$partimage_dir" ]; then
+    [ -d "$partimage_dir$where" ] || {
+	echo "can't find $partimage_dir$where"
+	exit 1
+    }
+fi
 
 rm -rf .tmp
 mkdir -p .tmp/isolinux
@@ -28,10 +36,18 @@ label save_all
   append initrd=all.rdz rescue save_all automatic=method:cdrom
 label rest_all
   kernel vmlinuz
-  append initrd=all.rdz rescue rest_all automatic=method:cdrom
+  append initrd=all.rdz rescue keepmounted rest_all automatic=method:cdrom
+label rescue
+  kernel vmlinuz
+  append initrd=all.rdz rescue automatic=method:cdrom
 EOF
 
-    mkisofs -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
+    if [ $action = rest_all ]; then
+	mkdir -p .tmp$where
+	ln -s $partimage_dir$where/* .tmp$where
+    fi
+
+    mkisofs -f -o part_$action.iso -r -J -hide-rr-moved -nobak -cache-inodes -publisher Mandrakesoft -V 'mdk part save/rest' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table .tmp    
 done
  
 rm -rf .tmp

@@ -115,14 +115,18 @@ __ "strip $tmp/{lib,$lib,bin,sbin}/* $tmp/usr/{bin,sbin}/* 2>/dev/null";
 if ($ENV{PARTIMAGE_DIR}) {
     _ "rpm2cpio $ENV{PARTIMAGE_RPM} | (cd $tmp ; cpio -idu ./usr/sbin/partimage)";
     my $server = 'partimaged';
-    $server = 'leia';
     substInFile {
 	$_ = <<EOF if /^\s*rescue-gui/;
   if grep -q save_all /proc/cmdline; then
       drvinst ; dhcp-client ; partimage -s $server -b save_all $ENV{PARTIMAGE_DIR}; reboot
   fi
   if grep -q rest_all /proc/cmdline; then
-      drvinst ; dhcp-client ; partimage -s $server -b rest_all $ENV{PARTIMAGE_DIR}; reboot
+      local=/tmp/image$ENV{PARTIMAGE_DIR}
+      if [ -d \$local ]; then
+          partimage -b rest_all \$local; reboot
+      else
+          drvinst ; dhcp-client ; partimage -s $server -b rest_all $ENV{PARTIMAGE_DIR}; reboot
+      fi
   fi
 EOF
     } "$tmp/etc/rc.sysinit";
