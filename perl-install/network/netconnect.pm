@@ -320,10 +320,14 @@ sub real_main {
                         detect($netc->{autodetect}, 'isdn');
                         %isdn_cards = map { $_->{description} => $_ } @{$netc->{autodetect}{isdn}};
                     },
-                    name => N("Select the network interface to configure:") . "\n\n" . N("Sorry, we support only 2.4 and above kernels."),
+                    name => N("Select the network interface to configure:"),
                     data =>  sub {
                         [ { label => N("Net Device"), type => "list", val => \$isdn_name, allow_empty_list => 1, 
                             list => [ $my_isdn, N("External ISDN modem"), keys %isdn_cards ] } ]
+                    },
+                    complete => sub {
+                        $in->ask_warn(N("Warning"), N("Sorry, we support only 2.4 and above kernels.")) if c::kernel_version() !~ /^\Q2.4/;
+                        return 0;
                     },
                     post => sub {
                         # !intern_pci:
