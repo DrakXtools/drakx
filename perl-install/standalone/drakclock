@@ -120,7 +120,7 @@ $my_win->{window}->add(gtkpack_(gtkset_border_width(Gtk2::VBox->new, $::isEmbedd
 								system("service ntpd start");
 								$need_date = 0
 							    } else {
-								warn_dialog(N("Error"), N("Could not synchronize with $choosed_serv."));
+								warn_dialog(N("Error"), N("Could not synchronize with %s.", $choosed_serv));
 								return
 							    }
                                                         } else {
