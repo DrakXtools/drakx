@@ -1388,7 +1388,13 @@ sub install($$$;$$) {
 		    log::l("rpmRunTransactions start");
 		    my @probs = c::rpmRunTransactions($trans, $callbackOpen,
 						      sub { #- callbackClose
-							  print OUTPUT "close:$_[0]\n"; },
+							  my $p = $packages{$_[0]} or return;
+							  my $check_installed;
+							  c::rpmdbNameTraverse($db, packageName($p), sub {
+										   my ($header) = @_;
+										   $check_installed = c::headerGetEntry($header, 'version') eq packageVersion($p) && c::headerGetEntry($header, 'release') eq packageRelease($p);
+									       });
+							  $check_installed and print OUTPUT "close:$_[0]\n"; },
 						      sub { #- installCallback
 							  print OUTPUT join(":", @_), "\n"; },
 						      1);
