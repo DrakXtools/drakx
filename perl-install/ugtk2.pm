@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_center $force_focus $grab $pop_it $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_center_at_pos $force_center $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -831,7 +831,7 @@ sub new {
     my $o = bless { %opts }, $type;
     while (my $e = shift @tempory::objects) { $e->destroy }
 
-    $o->{pop_it} ||= $pop_it || !$::isWizard && !$::isEmbedded || $::WizardTable && do {
+    $o->{pop_it} ||= !$::isWizard && !$::isEmbedded || $::WizardTable && do {
 	#- do not take into account the DrawingArea
 	any { !$_->isa('Gtk2::DrawingArea') && $_->visible } $::WizardTable->get_children;
     };
