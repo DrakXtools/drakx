@@ -19,7 +19,7 @@ if (@ARGV && $ARGV[0] eq '-u') {
 
 	if (-e $dest && -s $dest != -s $orig) {
 	    warn "ERROR: $dest already exist, skipping\n";
-	} else {
+	} elsif (!-d $dest || -l $dest) {
 	    unlink $dest or die "removing $dest failed: $!\n";
 	    rename $orig, $dest or die "moving $orig to $dest failed: $!\n";
 	}
@@ -27,6 +27,9 @@ if (@ARGV && $ARGV[0] eq '-u') {
     rmdir($_) foreach reverse(chomp_(`find $boot_prefix -type d`));
 
     if (-e $boot_prefix) {
+	print "still there:\n";
+	system('find', $boot_prefix);
+
 	foreach my $dest (chomp_(`find $prefix -type l`)) {
 	    my $orig = readlink($dest) or next;
 	    $orig =~ s!/image_boot/!$boot_prefix/! or next;
