@@ -94,6 +94,7 @@ sub rewrite1 {
 	    foreach ($tree) {
 		s/\s+/ /gs;
 		s/"/\\"/g;
+		s/\x{ad}//g;
 		s/\x{2013}/-/g;
 	    }
 	    push @l, $tree
@@ -171,6 +172,7 @@ sub rewrite2_ {
 	$text =~ s/\s+$//;
 	qq(\n$text\n);
     } elsif (member($tree->{tag}, 'quote', 'citetitle', 'foreignphrase')) {
+	$text =~ s/^\Q$i18ned_open_label_quote\E(.*)\Q$i18ned_close_label_quote\E$/$1/ if $i18ned_open_label_quote;
 	($i18ned_open_text_quote || "``") . $text . ($i18ned_close_text_quote || "''");
     } elsif (member($tree->{tag}, 'guilabel', 'guibutton', 'guimenu', 'literal', 'filename')) {
 	($i18ned_open_label_quote || "\\\"") . $text . ($i18ned_close_label_quote || "\\\"");
