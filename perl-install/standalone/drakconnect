@@ -135,7 +135,7 @@ $window1->{window}->add(
                                                               clicked => sub {
                                                                   local ($::isWizard, $::Wizard_finished) = (1, 1);
                                                                   eval { # For wizcancel
-                                                                      configureNetworkNet($in, $netc, $intf, map { $_->[0] } @all_cards);
+                                                                      network::netconnect::main('', $netcnx, $in, $modules_conf, $netc, undef, $intf);
                                                                       $button_apply->set_sensitive(1);
                                                                       update();
                                                                   };
@@ -168,7 +168,7 @@ $window1->{window}->add(
                                                                               Gtk2::Label->new(N("Please Wait... Applying the configuration")));
                                                                       $dialog->show_all;
                                                                       gtkflush();
-                                                                      apply();
+                                                                      apply($netc, $intf);
                                                                       $dialog->destroy;
                                                                   }
                                                                   update();
@@ -267,7 +267,7 @@ sub build_tree {
 	$intf->{save} = sub {
             $netc->{internet_cnx_choice} = 'adsl';
             $netc->{at_boot} = $intf->{ONBOOT} eq 'yes' ? 1 : 0;
-            network::adsl::adsl_conf_backend($in, $modules_conf, $intf, $netc, $interface_kind, $protocol)
+            network::adsl::adsl_conf_backend($in, $modules_conf, $netcnx, $netc, $intf, $interface_kind, $protocol)
           };
     }
     elsif ($interface eq 'modem') {
@@ -660,7 +660,7 @@ sub del_intf() {
                                           list => [ keys %$intf, grep { -f "/etc/ppp/peers/$_" } qw(adsl isdn) ], } ],
                              post => sub {
                                  !$::testing and eval {
-                                     if (member($intf2delete, qw(adsl modem)) {
+                                     if (member($intf2delete, qw(adsl modem))) {
                                          rm_rf("/etc/ppp/peers/ppp0");
                                          rm_rf("/etc/sysconfig/network-scripts/ifcfg-ppp0");
                                      }
@@ -755,7 +755,7 @@ sub update() {
     $label_host->set_label($h);
     $int_label->set($netcnx->{type} eq 'lan' ? N("Gateway:") : N("Interface:"));
     $interface_name->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netcnx->{NET_INTERFACE});
-    update_list();
+    update_list($modules_conf);
     update_intbutt() if $isconnected != -1;
     1;
 }
