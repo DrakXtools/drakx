@@ -41,7 +41,12 @@ sub get_spooler () {
     if (-f "$::prefix$FOOMATIC_DEFAULT_SPOOLER") {
         my $spool = cat_("$::prefix$FOOMATIC_DEFAULT_SPOOLER");
 	chomp $spool;
-	return $spool if $spool =~ /cups|lpd|lprng|pdq/; 
+	if ($spool =~ /cups/) {
+	    my ($daemonless_cups, $_remote_cups_server) =
+		printer::main::read_client_conf();
+	    $spool = ($daemonless_cups > 0 ? "rcups" : "cups");
+	}
+	return $spool if $spool =~ /cups|lpd|lprng|pdq/;
     }
 }
 
