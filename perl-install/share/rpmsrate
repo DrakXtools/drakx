@@ -642,11 +642,11 @@ EMULATORS
   3 wine
 
 PRINTER
-  4 xpp printer-testpages scli net-tools cups gimpprint foomatic-db-engine 
+  4 xpp nmap printer-testpages scli net-tools gimpprint foomatic-db-engine 
     foomatic-filters foomatic-db ImageMagick ghostscript printer-filters mpage 
-    a2ps ppdfilt libppd gpr groff libgimpprint
+    a2ps ppdfilt gpr groff lesstif
     sane-backends sane-frontends xsane xsane-gimp 
-    libhpojip libsnmp xojpanel libsane-hpoj
+    libsnmp0 xojpanel libsane-hpoj1 printer-utils
 
 INSTALL
   NOCOPY
@@ -657,12 +657,13 @@ INSTALL
 
   5 pptp-adsl dhcpcd dhcpxd dhcp-client isdn4net isdn-light isdn4k-utils ibod rp-pppoe pump wireless-tools speedtouch
     ppp nfs-utils-clients libiw26 wireless-tools speedtouch eagle ppp-pppoe ppp-pppoatm
-    autologin ntp cups-drivers samba-server ncpfs hpoj ucd-snmp libptal0
-    shorewall iptables printer-utils samba-client
+    autologin ntp samba-server ncpfs ucd-snmp libptal0
+    shorewall iptables samba-client
     ipchains nc sndconfig curl
     mtools mtoolsfm numlock usbutils
     hotplug ypbind speedtouch_mgmt
     tmdns zcip acpi acpid
+  5 cups cups-drivers hpoj libhpojip 
   4 XFree86-SVGA XFree86-server XFree86-Mach64 XFree86-FBDev
     XFree86-glide-module Glide_V3-DRI Glide_V5 Mesa
   3 XFree86-S3 XFree86-S3V XFree86-VGA16
