@@ -189,6 +189,13 @@ sub add_probeall {
     @$l = uniq(@$l, $module);
     log::l("setting probeall $alias to @$l");
 }
+sub remove_probeall {
+    my ($alias, $module) = @_;
+
+    my $l = $conf{$alias}{probeall} ||= [];
+    @$l = grep { $_ ne $module } @$l;
+    log::l("setting probeall $alias to @$l");
+}
 
 sub remove_alias($) {
     my ($name) = @_;
@@ -409,7 +416,7 @@ sub when_load {
 
     if (my $category = module2category($name)) {
 	if ($category =~ m,disk/(scsi|hardware_raid|usb|firewire),) {
-	    add_probeall('scsi_hostadapter', $name) if $name ne 'usb-storage';
+	    add_probeall('scsi_hostadapter', $name);
 	    eval { load('sd_mod') };
 	}
 	add_alias('sound-slot-0', $name) if $category =~ /sound/;
