@@ -478,6 +478,8 @@ sub setAuthentication {
 	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
     } elsif ($winbind) {
 	my $domain = $o->{netc}{WINDOMAIN};
+	$domain =~ tr/a-z/A-Z/;
+
 	$o->pkg_install(qw(samba-winbind samba-common));
 	{   #- setup pam
 	    my $f = "$o->{prefix}/etc/pam.d/system-auth";
@@ -500,7 +502,6 @@ sub setAuthentication {
 
 sub write_smb_conf {
     my ($domain) = @_;
-    $domain =~ tr/a-z/A-Z/;
 
     #- was going to just have a canned config in samba-winbind
     #- and replace the domain, but sylvestre/buchan didn't bless it yet
