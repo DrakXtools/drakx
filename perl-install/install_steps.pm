@@ -451,7 +451,7 @@ sub pppConfig {
     $o->{modem} or return;
 
     symlinkf($o->{modem}{device}, "$o->{prefix}/dev/modem") or log::l("creation of $o->{prefix}/dev/modem failed");
-    $o->pkg_install("ppp");
+    $o->pkg_install("ppp") unless $::testing;
 
     my %toreplace;
     $toreplace{$_} = $o->{modem}{$_} foreach qw(connection phone login passwd auth domain dns1 dns2);
@@ -466,30 +466,90 @@ sub pppConfig {
     $toreplace{connection} ||= 'DialupConnection';
     $toreplace{domain} ||= 'localdomain';
     $toreplace{intf} ||= 'ppp0';
+    $toreplace{papname} = $o->{modem}{auth} eq 'PAP' && $toreplace{connection};
 
-    if ($o->{modem}{auth} eq 'PAP') {
-	template2file($toreplace{dnsserver} ? "/usr/share/ifcfg-ppp.pap.dns.in" : "/usr/share/ifcfg-ppp.pap.in",
-		      "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
-	template2file("/usr/share/chat-ppp.pap.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
+    #- build ifcfg-ppp0.
+    my $ifcfg = "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0";
+    local *IFCFG; open IFCFG, ">$ifcfg" or die "Can't open $ifcfg";
+    print IFCFG <<END;
+DEVICE="$toreplace{intf}"
+ONBOOT="no"
+USERCTL="no"
+MODEMPORT="/dev/modem"
+LINESPEED="115200"
+PERSIST="yes"
+DEFABORT="yes"
+DEBUG="yes"
+INITSTRING="ATZ"
+DEFROUTE="yes"
+HARDFLOWCTL="yes"
+ESCAPECHARS="no"
+PPPOPTIONS=""
+PAPNAME="$toreplace{papname}"
+REMIP=""
+NETMASK=""
+IPADDR=""
+MRU=""
+MTU=""
+DISCONNECTTIMEOUT="5"
+RETRYTIMEOUT="60"
+BOOTPROTO="none"
+PEERDNS="$toreplace{peerdns}"
+END
+    foreach (1..2) {
+	if ($toreplace{"dns$_"}) {
+	    print IFCFG <<END;
+DNS$_=$toreplace{"dns$_"}
+END
+	}
+    }
+    close IFCFG;
 
-	my @l = cat_("$o->{prefix}/etc/ppp/pap-secrets");
+    #- build chat-ppp0.
+    my $chat = "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0";
+    local *CHAT; open CHAT, ">$chat" or die "Can't open $chat";
+    print CHAT <<END;
+'ABORT' 'BUSY'
+'ABORT' 'ERROR'
+'ABORT' 'NO CARRIER'
+'ABORT' 'NO DIALTONE'
+'ABORT' 'Invalid Login'
+'ABORT' 'Login incorrect'
+'' 'ATZ'
+'OK' 'ATDT$toreplace{phone}'
+'CONNECT' ''
+END
+    if ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
+	print CHAT <<END;
+'ogin:' '$toreplace{login}'
+'ord:' '$toreplace{passwd}'
+END
+    }
+    print CHAT <<END;
+'TIMEOUT' '5'
+'~--' ''
+END
+    close CHAT;
+
+    if ($o->{modem}{auth} eq 'PAP' || $o->{modem}{auth} eq 'CHAP') {
+	#- need to create a secrets file for the connection.
+	my $secrets = "$o->{prefix}/etc/ppp/" . lc($o->{modem}{auth}) . "-secrets";
+	my @l = cat_($secrets);
 	my $replaced = 0;
 	do { $replaced ||= 1
-	       if s/^\s*$toreplace{login}\s+ppp0\s+(\S+)/$toreplace{login}  ppp0  $toreplace{passwd}/; } foreach @l;
+	       if s/^\s*$toreplace{login}\s+ppp0\s+(\S+)/$toreplace{login}  ppp0  "$toreplace{passwd}"/; } foreach @l;
 	if ($replaced) {
 	    local *F;
-	    open F, ">$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
+	    open F, ">$secrets" or die "Can't open $secrets: $!";
 	    print F @l;
 	} else {
 	    local *F;
-	    open F, ">>$o->{prefix}/etc/ppp/pap-secrets" or die "Can't open $o->{prefix}/etc/ppp/pap-secrets $!";
-	    print F "$toreplace{login}  ppp0  $toreplace{passwd}\n";
+	    open F, ">>$secrets" or die "Can't open $secrets: $!";
+	    print F "$toreplace{login}  ppp0  \"$toreplace{passwd}\"\n";
 	}
-    } elsif ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
-	template2file($toreplace{dnsserver} ? "/usr/share/ifcfg-ppp.script.dns.in" : "/usr/share/ifcfg-ppp.script.in",
-		      "$o->{prefix}/etc/sysconfig/network-scripts/ifcfg-ppp0", %toreplace);
-	template2file("/usr/share/chat-ppp.script.in", "$o->{prefix}/etc/sysconfig/network-scripts/chat-ppp0", %toreplace);
-    } #- no CHAP currently.
+	#- restore access right to secrets file, just in case.
+	chmod 0600, $secrets;
+    }
 
     install_any::template2userfile($o->{prefix}, "$ENV{SHARE_PATH}/kppprc.in", ".kde/share/config/kppprc", 1, %toreplace);
 
