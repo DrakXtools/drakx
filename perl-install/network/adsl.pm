@@ -77,7 +77,7 @@ sub adsl_probe_info {
     my $passwd = passwd_by_login($login);
     if (!$netc->{vpi} && !$netc->{vpi} && member($adsl_modem, qw(eci speedtouch))) {
       ($netc->{vpi}, $netc->{vci}) = 
-	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, $1, $2) } cat_("$::prefix/etc/ppp/peers/adsl"));
+	(map { if_(/^.*-vpi\s+(\d+)\s+-vci\s+(\d+)/, map { sprintf("%x", $_) } $1, $2) } cat_("$::prefix/etc/ppp/peers/adsl"));
     }
     $pppoe_conf{DNS1} ||= '';
     $pppoe_conf{DNS2} ||= '';
