@@ -301,8 +301,7 @@ sub row_setting_dialog {
     my %perms;
     $ok->signal_connect(clicked => sub {
                             unless ($iter) {
-                                $iter = Gtk2::TreeIter->new;
-                                $treeModel->append($iter, undef);
+                                $iter = $treeModel->append(undef);
                             }
                             $treeModel->set($iter, 0 => $file->get_text);
                             if ($usr_check->get_active) {
