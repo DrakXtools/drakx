@@ -37,8 +37,10 @@ sub ppp_configure {
     # handle static/dynamic settings:
     if ($modem->{auto_ip} eq N("Automatic")) {
         $toreplace{$_} = '0.0.0.0' foreach qw(IPAddr SubnetMask) ;
+    } else {
+        $toreplace{$_} = $modem->{$_} foreach qw(IPAddr SubnetMask) ;
     }
-    $toreplace{Gateway} = '0.0.0.0' if $modem->{auto_gateway} eq N("Automatic");
+    $toreplace{Gateway} = $modem->{auto_gateway} eq N("Automatic") ? '0.0.0.0' : $modem->{Gateway};
 
 
     #- build ifcfg-ppp0.
