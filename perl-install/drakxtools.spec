@@ -267,12 +267,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
 
 * Wed Aug 28 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-22mdk
 - harddrake: don't display the menu bar in embedded mode, but a "quit"
-  button 
-  (titi still have to learn how to commit (bis))
+  button
 
 * Tue Aug 27 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-21mdk
 - drakconnect fixes (damien)
-  (titi still have to learn how to commit (bis))
 
 * Fri Aug 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-20mdk
 - draksound: display right message ("no alternative") when no
