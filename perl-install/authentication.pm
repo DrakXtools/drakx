@@ -50,20 +50,17 @@ my %kind2nsswitch = (
     SMBKRB    => ['winbind'],
 );
 
-sub kind2description() {
-    join('', 
-         map {
-             qq($_->[0]\n$_->[1]\n\n);
-         }
-         (
-          [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
-          [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
-          [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
-          [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
-          [ N("Active Directory with SFU:"), N("Kerberos is a secure system for providing network authentication services."), ],
-          [ N("Active Directory with Winbind:"), N("Kerberos is a secure system for providing network authentication services.")  ],
-         )
-        );
+sub kind2description {
+    my (@kinds) = @_;
+    my %kind2description = (
+	local     => [ N("Local file:"), N("Use local for all authentication and information user tell in local file"), ],
+	LDAP      => [ N("LDAP:"), N("Tells your computer to use LDAP for some or all authentication. LDAP consolidates certain types of information within your organization."), ],
+	NIS       => [ N("NIS:"), N("Allows you to run a group of computers in the same Network Information Service domain with a common password and group file."), ],
+	winbind   => [ N("Windows Domain:"), N("Winbind allows the system to retrieve information and authenticate users in a Windows domain."), ],
+	AD        => [ N("Active Directory with SFU:"), N("Kerberos is a secure system for providing network authentication services."), ],
+	SMBKRB    => [ N("Active Directory with Winbind:"), N("Kerberos is a secure system for providing network authentication services.")  ],
+    );
+    join('', map { $_ ? qq($_->[0]\n$_->[1]\n\n) : '' } map { $kind2description{$_} } @kinds);
 }
 sub to_kind {
     my ($authentication) = @_;
@@ -168,12 +165,13 @@ sub ask_root_password_and_authentication {
     my ($in, $netc, $superuser, $authentication, $meta_class, $security) = @_;
 
     my $kind = to_kind($authentication);
+    my @kinds = authentication::kinds($in->do_pkgs, $meta_class);
 
     $in->ask_from_({
 	 title => N("Set administrator (root) password and network authentication methods"), 
 	 messages => N("Set administrator (root) password"),
 	 advanced_label => N("Authentication method"),
-	 advanced_messages => kind2description(),
+	 advanced_messages => kind2description(@kinds),
 	 interactive_help_id => "setRootPassword",
 	 cancel => ($security <= 2 ? 
 		    #-PO: keep this short or else the buttons will not fit in the window
@@ -188,7 +186,7 @@ sub ask_root_password_and_authentication {
         } } }, [
 { label => N("Password"), val => \$superuser->{password},  hidden => 1 },
 { label => N("Password (again)"), val => \$superuser->{password2}, hidden => 1 },
-{ label => N("Authentication"), val => \$kind, type => 'list', list => [ authentication::kinds($in->do_pkgs, $meta_class) ], format => \&authentication::kind2name, advanced => 1 },
+{ label => N("Authentication"), val => \$kind, type => 'list', list => \@kinds, format => \&authentication::kind2name, advanced => 1 },
         ]) or delete $superuser->{password};
 
     ask_parameters($in, $netc, $authentication, $kind) or goto &ask_root_password_and_authentication;
