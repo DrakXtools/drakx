@@ -240,7 +240,7 @@ sub choosePackages {
     pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 
     add2hash_($o, { compssListLevel => $::expert ? 90 : 80 }) unless $::auto_install;
-    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $available, $o->{installClass}) if exists $o->{compssListLevel};
+    pkgs::setSelectedFromCompssList($o->{compssListLevels}, $packages, $o->{compssListLevel}, $availableCorrected, $o->{installClass}) if exists $o->{compssListLevel};
     $availableCorrected;
 }
 

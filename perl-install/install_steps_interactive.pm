@@ -970,7 +970,7 @@ _("Removable media automounting") => { val => \$o->{useSupermount}, type => 'boo
      $::expert ? (
 _("Clean /tmp at each boot") => { val => \$u->{CLEAN_TMP}, type => 'bool' },
      ) : (),
-     $o->{pcmcia} ? (
+     $o->{pcmcia} && $::expert ? (
 _("Enable multi profiles") => { val => \$u->{profiles}, type => 'bool' },
      ) : (
 _("Enable num lock at startup") => { val => \$u->{numlock}, type => 'bool' },

@@ -247,6 +247,7 @@ sub mount_part($;$$) {
 		$mntpoint = "/initrd/loopfs";
 	    }
 	    mount(devices::make($dev), $mntpoint, type2fs($part->{type}), $rdonly);
+	    rmdir "$mntpoint/lost+found";
 	}
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted

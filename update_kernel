@@ -18,7 +18,7 @@ f "pcmcia|network" ; PCMCIA_DRIVERS=$v
 NETWORK_MODULES="$FSMODULES $NETWORK_DRIVERS"
 CDROM_MODULES="  $FSMODULES $CD_DRIVERS"
 HD_MODULES="     $FSMODULES $SCSI_DRIVERS"
-PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS af_packet.o isofs.o scsi_mod.o sr_mod.o sd_mod.o cdrom.o ide-cd.o ide-mod.o ide-probe.o ide-disk.o"
+PCMCIA_MODULES=" $FSMODULES $PCMCIA_DRIVERS af_packet.o isofs.o scsi_mod.o sr_mod.o sd_mod.o cdrom.o ide-cd.o ide-mod.o ide-probe.o ide-disk.o serial.o"
 NOT_USEFULL_IN_STAGE1="nls_*.o parport_probe.o raid*.o serial.o smbfs.o usb-*.o"
 
 PCMCIA_INSTALLMODULES="pcmcia_core.o tcic.o ds.o i82365.o"

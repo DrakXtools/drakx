@@ -232,7 +232,7 @@ sub getAvailableSpace {
     #- 50mb may be a good choice to avoid almost all problem of insuficient space left...
     my $minAvailableSize = 50 * sqr(1024);
 
-    int (getAvailableSpace_mounted($o->{prefix}) || getAvailableSpace_raw($o->{fstab})) * 512 / 1.07 - $minAvailableSize;
+    int ((getAvailableSpace_mounted($o->{prefix}) || getAvailableSpace_raw($o->{fstab}) * 512 / 1.07) - $minAvailableSize);
 }
 
 sub getAvailableSpace_mounted {
@@ -240,7 +240,7 @@ sub getAvailableSpace_mounted {
     my $buf = ' ' x 20000;
     syscall_('statfs', "$prefix/usr", $buf) or return;
     my (undef, $blocksize, $size, undef, $free, undef) = unpack "L2L4", $buf;
-    ($free || 1) * $blocksize / 512;
+    ($free || 1) * $blocksize;
 }
 sub getAvailableSpace_raw {
     my ($fstab) = @_;

@@ -43,11 +43,18 @@ mouse::write('', $mouse);
 modules::write_conf("/etc/conf.modules") if $mouse->{device} eq "usbmouse" && !$::testing;
 
 my $f = "/etc/X11/XF86Config";
+my $g = "/etc/X11/XF86Config-4";
 substInFile {
     if (/^Section "Pointer"/ .. /^EndSection/) {
 	s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
 	s|^(\s*Device\s+).*|$1"/dev/mouse"|;
     }
 } $f if -e $f && !$::testing;
+substInFile {
+    if (/^Identifier "Mouse1"/ .. /^EndSection/) {
+	s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+	s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"|;
+    }
+} $g if -e $g && !$::testing;
 
 $in->exit(0);
