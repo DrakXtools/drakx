@@ -408,6 +408,9 @@ Take a look at http://www.linmodems.org"),
                    
                    choose_serial_port =>
                    {
+                    pre => sub {
+                        $modem ||= $netcnx->{modem} ||= {};;
+                    },
                     name => N("Please choose which serial port your modem is connected to."),
                     interactive_help_id => 'selectSerialPort',
                     data => sub {
