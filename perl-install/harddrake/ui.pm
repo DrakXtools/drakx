@@ -68,7 +68,7 @@ my %fields =
 
 my ($in, %IDs, $pid, $w);
 
-my %options;
+my (%options, %check_boxes);
 my $conffile = "/etc/sysconfig/harddrake2/ui.conf";
 
 my ($modem_check_box, $printer_check_box,  $current_device);
@@ -77,10 +77,10 @@ my @menu_items =
     (
      {   path => N("/_File"), type => '<Branch>' },
      {   path => N("/_File").N("/_Quit"), accelerator => N("<control>Q"), callback => \&quit_global    },
-#     {   path => N("/_Options").N("/Autodetect _printers"), type => '<CheckItem>',
-#         callback => sub { $options{PRINTERS_DETECTION} ^= 1 } },
-#     {   path => N("/_Options").N("/Autodetect _modems"), type => '<CheckItem>',
-#         callback => sub { $options{MODEMS_DETECTION} ^= 1 } },
+     {   path => N("/_Options").N("/Autodetect _printers"), type => '<CheckItem>',
+         callback => sub { $options{PRINTERS_DETECTION} = $check_boxes{PRINTERS_DETECTION}->active } },
+     {   path => N("/_Options").N("/Autodetect _modems"), type => '<CheckItem>',
+         callback => sub { $options{MODEMS_DETECTION} = $check_boxes{MODEMS_DETECTION}->active } },
      {   path => N("/_Help"), type => '<Branch>' },
      {
          path => N("/_Help").N("/_Help..."), 
@@ -139,7 +139,7 @@ sub detect {
             if (exists $_->{bus} && $_->{bus} eq 'ide') {
                 $_->{channel} = $_->{channel} ? N("secondary") : N("primary");
                 delete $_->{info};
-            } elsif ((exists $_->{id}) && $_->{bus} ne 'PCI') {
+            } elsif ((exists $_->{id}) && $_->{bus} !~ /USB|PCI/) {
                 # SCSI detection incoherency:
                 my $i = $_;
                 $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(bus id);
@@ -173,8 +173,6 @@ sub new {
     add_icon_path('/usr/share/pixmaps/harddrake2/');
     $w = my_gtk->new(N("Harddrake2 version ") . $harddrake::data::version);
     $w->{window}->set_usize(760, 550) unless $::isEmbedded;
-    $options{MODEMS_DETECTION} = 1   unless defined $options{MODEMS_DETECTION};
-    $options{PRINTERS_DETECTION} = 1 unless defined $options{PRINTERS_DETECTION};
 
     $w->{window}->add(my $main_vbox = gtkadd(gtkadd($::isEmbedded ? new Gtk::VBox(0, 0) :
                                                     gtkadd(new Gtk::VBox(0, 0),
@@ -271,6 +269,14 @@ sub new {
     gtkset_mousecursor_normal();
     $w->{rwindow}->set_position('center') unless $::isEmbedded;
     $w->{rwindow}->show_all();
+
+    foreach (['PRINTERS_DETECTION', N("/Autodetect printers")], ['MODEMS_DETECTION', N("/Autodetect modems")]) {
+        $check_boxes{$_->[0]} = $menubar->{factory}->get_widget("<main>".N("/Options").$_->[1]);
+        print "$_->[0] : value=$options{$_->[0]}, defined=" , defined($options{$_->[0]}), "\n";
+        $options{$_->[0]} = 0 unless defined($options{$_->[0]});
+        $check_boxes{$_->[0]}->set_active($options{$_->[0]});
+    }
+
     foreach ($module_cfg_button, $config_button) { $_->hide };
     $in = 'interactive'->vnew('su', 'default') if $::isEmbedded;
     $w->main;
@@ -284,7 +290,7 @@ sub quit_global {
     $in->exit;
 }
 
-# remove a signal handler from a button & hide it  if needed
+# remove a signal handler from a button & hide it if needed
 sub disconnect {
     my ($button, $id) = @_;
     if ($IDs{$id}) {
