@@ -99,8 +99,7 @@ sub gtkset_line_wrap          { $_[0]->set_line_wrap($_[1]); $_[0] }
 
 sub gtkadd {
     my $w = shift;
-    foreach (@_) {
-	my $l = $_;
+    foreach my $l (@_) {
 	ref $l or $l = Gtk2::Label->new($l);
 	$w->add(gtkshow($l));
     }
@@ -119,8 +118,7 @@ sub gtkadd_widget {
 
 sub gtkappend {
     my $w = shift;
-    foreach (@_) {
-	my $l = $_;
+    foreach my $l (@_) {
 	ref $l or $l = Gtk2::Label->new($l);
 	$w->append(gtkshow($l));
     }
