@@ -348,6 +348,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                             $netcnx->{isdn_internal} = isdn_read_config($netcnx->{isdn_internal});
                             isdn_detect($netcnx->{isdn_internal}, $netc) or goto isdn_step_1;
                         } else {
+                            detect($netc->{autodetect}, 'modem') if !$::isInstall && !$netc->{autodetection};
                             $netc->{isdntype} = 'isdn_external';
                             $netcnx->{isdn_external}{device} = $netc->{autodetect}{modem};
                             $netcnx->{isdn_external} = isdn_read_config($netcnx->{isdn_external});
