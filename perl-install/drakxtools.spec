@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 26mdk
+Release: 27mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -321,6 +321,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Fri Mar 26 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-27mdk
+- drakconnect:
+  o fix some bugs in ISDN configuration
+  o warn than speedtouch only works with 2.4.x kernels for now
+  o fix "manage interface" that broke speedtouch configuration
+  o blacklist bcm4400 for ifplugd
+- drakboot blacklist again Savage gfx cards, they're broken again with
+  lilo
+
 * Wed Mar 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-26mdk
 - diskdrake: tag removable medias as noauto in fstab file (pixel, #9076)
 - drakboot: add nolapic support option (planel)
