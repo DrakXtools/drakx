@@ -152,7 +152,7 @@ foreach (@ARGV) {
 @ARGV = @new_ARGV;
 
 
-sub version {
+sub version() {
     print 'Drakxtools version 10
 Copyright (C) 1999-2004 Mandrakesoft by <install@mandrakesoft.com>
 ',  $::license, "\n";
@@ -170,7 +170,7 @@ our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::mo
 
 $SIG{SEGV} = sub { my $progname = $0; $progname =~ s|.*/||; exec("drakbug --incident $progname") };
 
-sub import {
+sub import() {
     ($standalone_name = $0) =~ s|.*/||;
     c::openlog($standalone_name . "[$$]");
     explanations('### Program is starting ###');
