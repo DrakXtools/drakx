@@ -74,6 +74,7 @@ my %languages = (
 'no@nynorsk' => [ 'Norwegian (Nynorsk)','iso-8859-1', 'no', 'no@nynorsk:no' ],
 #-'oc'  => [ 'Occitan',			'iso-8859-1', 'oc', 'oc:fr_FR' ],
 #-'pd'	=> [ 'Plauttdietsch',		'iso-8859-1', 'pd', 'pd' ],
+#-'ph'  => [ 'Pilipino',		'iso-8859-1', 'ph', 'ph' ],
   'pl'  => [ 'Polish',			'iso-8859-2', 'pl', 'pl' ],
 #-'pp'	=> [ 'Papiamento',		'iso-8859-1', 'pp', 'pp' ],
 'pt_BR' => [ 'Portuguese (Brazil)',	'iso-8859-1', 'pt_BR', 'pt_BR:pt_PT:pt' ],
