@@ -714,8 +714,8 @@ Does it work properly?"), 1) and last;
     $printer->{complete} = 1;
 }
 
-sub setup_default_spooler ($$) {
-    my ($printer, $in) = @_;
+sub setup_default_spooler ($$$) {
+    my ($printer, $in, $install) = @_;
     $printer->{SPOOLER} ||= 'cups';
     my $str_spooler = 
 	$in->ask_from_list_(__("Select Printer Spooler"),
@@ -724,9 +724,45 @@ sub setup_default_spooler ($$) {
 			    $printer::spooler_inv{$printer->{SPOOLER}},
 			    ) or return;
     $printer->{SPOOLER} = $printer::spooler{$str_spooler};
+    # Install the spooler if not done yet
+    install_spooler($printer, $install);
     # Get the queues of this spooler
     printer::read_configured_queues($printer);
     return $printer->{SPOOLER};
+}
+
+sub install_spooler ($$) {
+    # installs the default spooler and start its daemon
+    # TODO: Automatically transfer queues between LPRng and LPD,
+    #       Turn off /etc/printcap writing in CUPS when LPD or
+    #       LPRng is used (perhaps better to be done in CUPS/LPD/LPRng
+    #       start-up scripts?)
+    my ($printer, $install) = @_;
+    if (!$::testing) {
+	if ($printer->{SPOOLER} eq "cups") {
+	    &$install('cups');
+	    # Restart daemon
+	    printer::start_service("cups");
+	    sleep 5;
+	} elsif ($printer->{SPOOLER} eq "lpd") {
+	    # "lpr" conflicts with "LPRng", remove "LPRng"
+	    printer::remove_package("LPRng");
+	    &$install('lpr');
+	    # Restart daemon
+	    printer::restart_service("lpd");
+	    sleep 1;
+	} elsif ($printer->{SPOOLER} eq "lprng") {
+	    # "LPRng" conflicts with "lpr", remove "lpr"
+	    printer::remove_package("lpr");
+	    &$install('LPRng');
+	    # Restart daemon
+	    printer::restart_service("lpd");
+	    sleep 1;
+	} elsif ($printer->{SPOOLER} eq "pdq") {
+	    &$install('pdq');
+	    # PDQ has no daemon
+	}
+    }
 }
 
 #- Program entry point for configuration with lpr or cups (stored in $mode).
@@ -745,13 +781,15 @@ sub main($$$$;$) {
 		$in->ask_yesorno(_("Printer"),
 				 __("Would you like to configure printing?"),
 				 0) ? 'lp' : 'Done';
-	    $printer->{SPOOLER} ||= setup_default_spooler ($printer, $in) ||
-		return;
+	    $printer->{SPOOLER} ||= 
+		setup_default_spooler ($printer, $in, $install) ||
+		    return;
 	    
 	} else {
 	    # Ask for a spooler when noone is defined
-	    $printer->{SPOOLER} ||= setup_default_spooler ($printer, $in) ||
-		return;
+	    $printer->{SPOOLER} ||= 
+		setup_default_spooler ($printer, $in, $install) ||
+		    return;
 	    # Show a queue list window when there is at least one queue
 	    # or when we are in expert mode
 	    unless ((%{$printer->{configured} || {}} == ()) && (!$::expert)) {
@@ -765,7 +803,7 @@ sub main($$$$;$) {
                     [ { val => \$queue, format => \&translate,
 		        list => [ (sort keys %{$printer->{configured} || {}}),
 		    # Button to add a new queue
-		    __("Add queue"),
+		    __("Add printer"),
 		    # In expert mode we can change the spooler
 		    ($::expert ?
 		     ( __("Spooler: ") .
@@ -773,10 +811,10 @@ sub main($$$$;$) {
 		    # Bored by configuring your printers, get out of here!
 		    __("Done") ] } ]
 		);
-	    } else { $queue = 'Add queue' }  #- as there are no printers 
-	                                     #- already configured, Add one
-	                                     #- automatically.
-	    if ($queue eq 'Add queue') {
+	    } else { $queue = __("Add printer") }#- as there are no printers 
+	                                         #- already configured, Add one
+	                                         #- automatically.
+	    if ($queue eq __("Add printer")) {
 		my %queues; 
 		@queues{map { split '\|', $_ } keys %{$printer->{configured}}} = ();
 		my $i = ''; while ($i < 100) { last unless exists $queues{"lp$i"}; ++$i; }
@@ -784,12 +822,15 @@ sub main($$$$;$) {
 	    }
 	    if ($queue =~ /^Spooler: /) {
 		$printer->{SPOOLER} =
-		    setup_default_spooler ($printer, $in) || $printer->{SPOOLER};
+		    setup_default_spooler ($printer, $in, $install) || 
+			$printer->{SPOOLER};
 		next;
 	    }
 	}
 	# Save the default spooler
 	printer::set_default_spooler($printer);
+	# install the spooler if not done yet
+	install_spooler($printer, $install);
 	#- Close printerdrake
 	$queue eq 'Done' and last;
 

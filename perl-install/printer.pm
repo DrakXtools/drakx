@@ -1,9 +1,8 @@
 package printer;
 # $Id$
 
-
-
-
+#use diagnostics;
+#use strict;
 
 
 use common;
@@ -14,9 +13,11 @@ use run_program;
 my $prefix = "";
 
 #-location of the printer database in an installed system
-my $PRINTER_DB_FILE    = "/usr/share/foomatic/db/compiled/overview.xml";
+my $PRINTER_DB_FILE = "/usr/share/foomatic/db/compiled/overview.xml";
+#-configuration directory of Foomatic
+my $FOOMATICCONFDIR = "/etc/foomatic"; 
 #-location of the file containing the default spooler's name
-my $FOOMATIC_DEFAULT_SPOOLER = "/etc/foomatic/defaultspooler";
+my $FOOMATIC_DEFAULT_SPOOLER = "$FOOMATICCONFDIR/defaultspooler";
 
 %spooler = (
     __("CUPS - Common Unix Printing System") => "cups",
@@ -72,9 +73,36 @@ sub get_default_spooler () {
 
 sub set_default_spooler ($) {
     my ($printer) = @_;
-    open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER";
+    # Make Foomatic config directory if it does not exist yet
+    if (!(-d $FOOMATICCONFDIR)) {mkdir $FOOMATICCONFDIR;}
+    # Mark the default driver in a file
+    open DEFSPOOL, "> $prefix$FOOMATIC_DEFAULT_SPOOLER" || 
+	die "Cannot create $prefix$FOOMATIC_DEFAULT_SPOOLER!";
     print DEFSPOOL $printer->{SPOOLER};
     close DEFSPOOL;
+}
+
+sub restart_service ($) {
+    my ($service) = @_;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service restart")
+	|| die "Could not restart $service!";
+}
+
+sub start_service ($) {
+    my ($service) = @_;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service start")
+	|| die "Could not start $service!";
+}
+
+sub stop_service ($) {
+    my ($service) = @_;
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service stop")
+	|| die "Could not stop $service!";
+}
+
+sub remove_package ($) {
+    my ($package) = @_;
+    run_program::rooted($prefix, "rpm -e --nodeps $package") || do {};
 }
 
 sub copy_printer_params($$) {
@@ -609,7 +637,7 @@ sub restart_queue($) {
     for ($printer->{SPOOLER}) {
 	/cups/ && do {
 	    #- restart cups.
-	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups start"); sleep 1;
+	    run_program::rooted($prefix, "/etc/rc.d/init.d/cups restart"); sleep 1;
 	    last };
 	/lpr|lprng/ && do {
 	    #- restart lpd.
