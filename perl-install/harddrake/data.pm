@@ -26,11 +26,16 @@ sub unknown {
 
 # FIXME: add translated items
 
+sub is_removable { $_[0] =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/ }
+
 sub set_removable_configurator {
-    my ($class, $device, $configurator) = @_;
-    if ($class =~ /FLOPPY|ZIP|DVDROM|CDROM|BURNER/) {
-        $$configurator = "/usr/sbin/diskdrake --removable=$device->{device}";
-    }
+    my ($class, $device) = @_;
+    return "/usr/sbin/diskdrake --removable=$device->{device}" if is_removable($class);
+}
+
+sub set_removable_remover {
+    my ($class, $device) = @_;
+    return "/usr/sbin/drakupdate_fstab --auto] --no-flag --del $device->{device}" if is_removable($class);
 }
 
 our @tree =

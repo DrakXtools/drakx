@@ -272,7 +272,7 @@ foreach (@harddrake::data::tree) {
             my $i = $_;
             $_->{bus_location} = join ':', map { sprintf("%lx", $i->{$_}) } qw(channel id lun);
         }
-        harddrake::data::set_removable_configurator($Ident, $_, \$configurator);
+        $configurator .= harddrake::data::set_removable_configurator($Ident, $_);
         if ($Ident eq "AUDIO") {
             require harddrake::sound;
             my $alter = harddrake::sound::get_alternative($_->{driver});
