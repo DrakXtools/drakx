@@ -352,7 +352,9 @@ END
 'ABORT' 'Invalid Login'
 'ABORT' 'Login incorrect'
 '' 'ATZ'
-'OK' 'ATDT$toreplace{phone}'
+'OK'
+'ATDT$o->{netcnx}{special_command}'
+'ATDT$toreplace{phone}'
 'CONNECT' ''
 END
     if ($o->{modem}{auth} eq 'Terminal-based' || $o->{modem}{auth} eq 'Script-based') {
