@@ -713,6 +713,7 @@ sub appli_choice {
 								     }),
 						   gtksignal_connect(new Gtk2::Button(N("Cancel")),
 								     clicked => sub {
+									 undef @install;
 									 ${$central_widget}->destroy();
 									 create_fontsel();
 								     }),
