@@ -217,6 +217,7 @@ sub quit() { ugtk2->exit(0) }
 # search functions
 #-------------------------------------------------------------
 sub search() {
+    return if !$log_text->window;
     $log_text->window->freeze_updates;
     $log_buf->set_text('');
     if ($::isFile) {
