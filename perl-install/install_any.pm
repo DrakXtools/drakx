@@ -420,11 +420,11 @@ sub setAuthentication {
 	$o->pkg_install("ypbind");
 	my $domain = $o->{netc}{NISDOMAIN};
 	$domain || $nis ne "broadcast" or die _("Can't use broadcast with no NIS domain");
-	my $t = $domain ? "domain $domain" . ($nis_server ne "broadcast" && " server")
+	my $t = $domain ? "domain $domain" . ($nis ne "broadcast" && " server")
 	                : "ypserver";
 	substInFile {
 	    $_ = "#~$_" unless /^#/;
-	    $_ .= "$t $nis_server\n" if eof;
+	    $_ .= "$t $nis\n" if eof;
 	} "$p/etc/yp.conf";
 	network::write_conf("$p/etc/sysconfig/network", $o->{netc});
     }

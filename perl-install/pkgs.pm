@@ -465,6 +465,9 @@ sub getDeps($) {
 
     my $f = install_any::getFile("depslist.ordered") or die "can't find dependencies list";
 
+    #- beware of heavily mismatching depslist.ordered file against hdlist files.
+    my $mismatch = 0;
+
     #- update dependencies list, provides attributes are updated later
     #- cross reference to be resolved on id (think of loop requires)
     #- provides should be updated after base flag has been set to save
@@ -473,9 +476,11 @@ sub getDeps($) {
 	my ($name, $version, $release, $sizeDeps) = /^(\S*)-([^-\s]+)-([^-\s]+)\s+(.*)/;
 	my $pkg = $packages->[0]{$name};
 
-	$pkg or log::l("ignoring package $name-$version-$release in depslist is not in hdlist"), next;
-	$version eq packageVersion($pkg) and $release eq packageRelease($pkg)
-	  or log::l("ignoring package $name-$version-$release in depslist mismatch version or release in hdlist"), next;
+	$pkg or
+	  log::l("ignoring $name-$version-$release in depslist is not in hdlist"), $mismatch = 1, next;
+	$version eq packageVersion($pkg) and $release eq packageRelease($pkg) or
+	  log::l("ignoring $name-$version-$release in depslist mismatch version or release in hdlist"), $mismatch = 1, next;
+
 	$pkg->{sizeDeps} = $sizeDeps;
 
 	#- check position of package in depslist according to precomputed
@@ -483,11 +488,14 @@ sub getDeps($) {
 	#- above warning have chance to raise an exception here, but may help
 	#- for debugging.
 	my $i = scalar @{$packages->[1]};
-	$i >= $pkg->{medium}{min} && $i <= $pkg->{medium}{max} or die "depslist.ordered mismatch against hdlist files";
+	$i >= $pkg->{medium}{min} && $i <= $pkg->{medium}{max} or $mismatch = 1;
 
 	#- package are already sorted in depslist to enable small transaction and multiple medium.
 	push @{$packages->[1]}, $pkg;
     }
+
+    #- check for mismatching package, it should breaj with above die unless depslist has too many errors!
+    $mismatch and die "depslist.ordered mismatch against hdlist files";
 
     #- check for same number of package in depslist and hdlists.
     scalar(keys %{$packages->[0]}) == scalar(@{$packages->[1]}) or die "depslist.ordered has not same package as hdlist files";
