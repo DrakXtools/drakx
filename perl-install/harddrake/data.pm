@@ -6,7 +6,7 @@ use common;
 
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(version tree);
-our ($version, $sbindir, $bindir) = ("1.1.8", "/usr/sbin", "/usr/bin");
+our ($version, $sbindir, $bindir) = ("9.0.1", "/usr/sbin", "/usr/bin");
 
 my @devices = detect_devices::probeall(1);
 
