@@ -480,10 +480,10 @@ sub probe_netcnx_type {
     #- try to probe $netcnx->{type} which is used almost everywhere.
     unless ($netcnx->{type}) {
 	#- ugly hack to determine network type (avoid saying not configured in summary).
-	$intf->{eth0} and $netcnx->{type} ||= 'lan';
-	$intf->{ppp0} and $netcnx->{type} ||= 'modem';
 	-e "$prefix/etc/ppp/peers/adsl" and $netcnx->{type} ||= 'adsl'; # enough ?
 	-e "$prefix/etc/ppp/ioptions1B" || -e "$prefix/etc/ppp/ioptions2B" and $netcnx->{type} ||= 'isdn'; # enough ?
+	$intf->{ppp0} and $netcnx->{type} ||= 'modem';
+	$intf->{eth0} and $netcnx->{type} ||= 'lan';
     }
 }
 
