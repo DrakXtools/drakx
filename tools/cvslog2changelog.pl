@@ -84,5 +84,6 @@ BEGIN {
 	      'alafox'  => 'Alice Lafox  <alice at lafox.com.ua>',
 	      'alus'    => 'Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>',
 	      'fabman'  => 'Fabian Mandelbaum  <fabman at 2vias.com.ar>',
+              'erwan'   => 'Erwan Velu  <erwan at mandrakesoft.com>',
 	     );
 }
