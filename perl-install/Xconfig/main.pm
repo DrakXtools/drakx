@@ -127,9 +127,9 @@ sub configure_chooser {
     my ($in, $raw_X, $do_pkgs, $options) = @_;
 
     my $X = {
-	card => eval { Xconfig::card::from_raw_X($raw_X) },
+	card => scalar eval { Xconfig::card::from_raw_X($raw_X) },
 	monitor => $raw_X->get_monitors && Xconfig::monitor::from_raw_X($raw_X),
-	resolution => eval { $raw_X->get_resolution },
+	resolution => scalar eval { $raw_X->get_resolution },
     };
     my ($ok, $modified) = configure_chooser_raw($in, $raw_X, $do_pkgs, $options, $X);
 
