@@ -295,8 +295,11 @@ sub build_notebook {
 		 if_($is_ethernet, 
 		      0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
 								     changed => sub { 
+                                                 my $proto = $gui->{intf}{BOOTPROTO};
+                                                 my $protocol = $intf->{BOOTPROTO} = { reverse %{$proto->{protocols}} }->{$proto->get_text};
+
 							      foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
-								  $_->set_sensitive($gui->{intf}{BOOTPROTO}->get_text eq "static" ? 1 : 0)
+								  $_->set_sensitive($protocol eq "static" ? 1 : 0)
 							      }; $apply->() },
 								    ),
 		     ),
