@@ -529,7 +529,7 @@ sub interactive_mode() {
                  1, gtkpack_(Gtk2::HBox->new(0, 2), 
                              1, gtkpack_(Gtk2::VBox->new(0, 2), 
                                          1, gtkpack($font_box = Gtk2::VBox->new(0, 5), $font_sel = Gtk2::FontSelection->new,),
-                                         1, gtkpack_(Gtk2::HBox->new(0, 2),
+                                         0, gtkpack_(Gtk2::HBox->new(0, 2),
                                                      0, gtkadd(gtkset_layout(Gtk2::VButtonBox->new, 'end'),
                                                                gtksignal_connect($button->{windows} = Gtk2::Button->new(N("Get Windows Fonts")),
                                                                                  clicked => sub {
