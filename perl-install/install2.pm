@@ -101,7 +101,7 @@ arch() =~ /^sparc/ ? (
   ],
 ),
   developer => [
-    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 300 << 11 },
+    { mntpoint => "/",     size => 150 << 11, type => 0x83, ratio => 1, maxsize => 500 << 11 },
     { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize => 250 << 11 },
     { mntpoint => "/usr",  size => 300 << 11, type => 0x83, ratio => 4, maxsize =>3000 << 11 },
     { mntpoint => "/home", size => 100 << 11, type => 0x83, ratio => 5 },

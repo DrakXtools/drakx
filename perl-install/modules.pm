@@ -330,7 +330,7 @@ my %type_aliases = (
 my @skip_big_modules_on_stage1 = 
 qw(
 acenic sk98lin de4x5
-BusLogic seagate fdomain g_NCR5380 dc395x_trm tmscsim
+BusLogic seagate fdomain g_NCR5380 tmscsim
 dpt_i2o eata eata_pio eata_dma
 aztcd gscd isp16 mcd mcdx optcd cm206 sjcd 
 );
