@@ -82,6 +82,10 @@ sub untranslate {
     die "untranslate failed";
 }
 
+#- This is needed because text printed by Gtk2 will always be encoded
+#- in UTF-8;
+#- we first check if LC_ALL is defined, because if it is, changing
+#- only LC_COLLATE will have no effect.
 sub set_l10n_sort() {
     my $collation_locale = $ENV{LC_ALL};
     if (!$collation_locale) {
