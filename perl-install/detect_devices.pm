@@ -785,7 +785,7 @@ sub get_mac_generation() {
 }
 
 sub is_xbox() {
-    return any { $_->{vendor} . $_->{id} == hex('10de') . hex('02a5') } detect_devices::pci_probe();                                                 
+    any { $_->{vendor} == 0x10de && $_->{id} == 0x02a5 } detect_devices::pci_probe();
 }
 
 sub hasSMP() { 
