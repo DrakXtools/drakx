@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 38mdk
+Release: 39mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -314,6 +314,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu May 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-39mdk
+- diskdrake (pixel):
+  o allow /home on nfs (#7460)
+  o disable package instead of removing nfs-utils or samba-server
+    (when "diskdrake --fileshare" disables a export kind) (#9804)
+
 * Thu May 27 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-38mdk
 - detect aliased network interfaces too
 - drakfirewall: handle BitTorrent (robert vojta)
