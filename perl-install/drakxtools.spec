@@ -372,6 +372,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Fri Apr  1 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-18mdk
 - drakconnect: enable ethernet interfaces during detection, thus
   fixing Ralink wireless detection (blino)
+- harddrake: fix crash
 - mousedrake: configure wacom devices with synaptics touchpads too
   (blino)
 
