@@ -78,30 +78,28 @@ sub mkbootdisk {
 
 sub read() {
     my $file = sprintf("/etc/%s.conf", arch() =~ /sparc/ ? 'silo' : arch() =~ /ppc/ ? 'yaboot' : 'lilo');
-    my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub("/boot/grub/menu.lst") : read_lilo($file);
+    my $bootloader = $file =~ /lilo/ && detect_bootloader() =~ /GRUB/ ? read_grub() : read_lilo($file);
     if (my $default = find { $_ && $_->{append} } get_label($bootloader->{default}, $bootloader), @{$bootloader->{entries}}) {
 	$bootloader->{perImageAppend} ||= $default->{append};
     }
     $bootloader;
 }
 
-sub read_grub {
-    my ($file) = @_;
+sub read_grub() {
     my $global = 1;
     my ($e, %b);
-    foreach (cat_("$::prefix$file")) {
+    foreach (cat_("$::prefix/boot/grub/menu.lst")) {
         next if /^\s*#/ || /^\s*$/;
         chomp;
-        if (! /^\s*(\S*)\s*(.*?)\s*$/) {
-            print STDERR "unknown line in $file: \"",  chomp_($_), "\"\n";
+	my ($keyword, $v) = /^\s*(\S+)\s*(.*?)\s*$/ or do {
+            print STDERR "unknown line in /boot/grub/menu.lst: \"",  chomp_($_), "\"\n";
             next;
-        }
-        my ($keyword, $v) = ($1, $2);
+        };
         if ($keyword eq 'title') {
             push @{$b{entries}}, $e = { label => $v };
             $global = 0;
         } elsif ($global) {
-            $b{$keyword} = ungrubify($v) || 1;
+            $b{$keyword} = $v eq '' ? 1 : ungrubify($v);
         } else {
             $e->{root} = $1 if $v =~ s/root=([^\s]*)\s*//;
             if ($keyword eq 'kernel') {
@@ -109,7 +107,11 @@ sub read_grub {
                 $e->{type} = 'image';
             } elsif ($keyword eq 'root') {
                 $e->{type} = 'other';
-                $e->{table} = grub2dev($v, 1) if $v =~ /,/; # floppy does not need table in lilo.conf
+		if ($v =~ /,/) {
+		    $e->{table} = grub2dev($v, 1);
+		} else {
+		    $e->{unsafe} = 1;
+		}
                 $e->{kernel_or_dev} = grub2dev($v);
                 $e->{append} = "";
             } elsif ($keyword eq 'initrd') {
@@ -120,9 +122,19 @@ sub read_grub {
     }
     # Generating /etc/lilo.conf require having a boot device:
     foreach (cat_("$::prefix/boot/grub/install.sh")) {
-        $b{boot} = grub2dev($1) if /\s*d\s* (\(.*?\))\s*/;
+        $b{boot} = grub2dev($1) if /\s+d\s+(\(.*?\))/;
     }
 
+    #- sanitize
+    foreach (@{$b{entries}}) {
+	my ($vga, $other) = partition { /^vga=/ } split(' ', $_->{append});
+	if ($vga) {
+	    $_->{vga} = $vga->[0] =~ /vga=(.*)/ && $1;
+	    $_->{append} = join(' ', @$other);
+	}
+    }
+
+    $b{nowarn} = 1;
     $b{default} = $b{entries}[$b{default}]{label};
 
     \%b;
@@ -153,7 +165,7 @@ sub read_lilo {
 		$v =~ s/"//g;
 		$b{'init-message'} = $v;
 	    } else {
-		$b{$_} = $v || 1;
+		$b{$_} = $v eq '' ? 1 : $v;
 	    }
 	} else {
 	    if ((/map-drive/ .. /to/) && /to/) {
