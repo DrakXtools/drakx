@@ -195,20 +195,35 @@ sub read_printer_db(;$) {
 		if (m!^\s*</printer>\s*$!) {
 		    # entry completed
 		    $inentry = 0;
+		    # Expert mode:
 		    # Make one database entry per driver with the entry name
 		    # manufacturer|model|driver
-		    my $driver;
-		    for $driver (@{$entry->{drivers}}) {
-			my $driverstr;
-			if ($driver eq "Postscript") {
-			    $driverstr = "PostScript";
-			} else {
-			    $driverstr = "GhostScript + $driver";
+		    if ($::expert) {
+			my $driver;
+			for $driver (@{$entry->{drivers}}) {
+			    my $driverstr;
+			    if ($driver eq "Postscript") {
+				$driverstr = "PostScript";
+			    } else {
+				$driverstr = "GhostScript + $driver";
+			    }
+			    if ($driver eq $entry->{defaultdriver}) {
+				$driverstr .= " (recommended)";
+			    }
+			    $entry->{ENTRY} = "$entry->{make}|$entry->{model}|$driverstr";
+			    $entry->{driver} = $driver;
+			    # Duplicate contents of $entry because it is multiply entered to the database
+			    map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
 			}
-			$entry->{ENTRY} = "$entry->{make}|$entry->{model}|$driverstr";
-			$entry->{driver} = $driver;
-			# Duplicate contents of $entry because it is multiply entered to the database
-			map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+		    } else {
+			# Recommended mode
+			# Make one entry per printer, with the recommended
+			# driver (manufacturerer|model)
+			$entry->{ENTRY} = "$entry->{make}|$entry->{model}";
+			if ($entry->{defaultdriver}) {
+			    $entry->{driver} = $entry->{defaultdriver};
+			    map { $thedb{$entry->{ENTRY}}->{$_} = $entry->{$_} } keys %$entry;
+			}
 		    }
 		    $entry = {};
 		} elsif (m!^\s*<id>\s*([0-9]+)\s*</id>\s*$!) {
@@ -220,6 +235,9 @@ sub read_printer_db(;$) {
 		} elsif (m!^\s*<model>(.+)</model>\s*$!) {
 		    # Printer model
 		    $entry->{model} = $1;
+		} elsif (m!<driver>(.+)</driver>!) {
+		    # Printer default driver
+		    $entry->{defaultdriver} = $1;
 		} elsif (m!^\s*<drivers>\s*$!) {
 		    # Drivers block
 		    $indrivers = 1;
@@ -238,7 +256,7 @@ sub read_printer_db(;$) {
     }
 
     #- Load CUPS driver database if CUPS is used as spooler
-    if (($spooler) && ($spooler eq "cups")) {
+    if (($spooler) && ($spooler eq "cups") && ($::expert)) {
 	#&$install('cups-drivers') unless $::testing;
 	#my $w;
 	#if ($in) {

@@ -84,8 +84,7 @@ complete => sub {
     foreach (@parport) {
 	$device eq $_->{port} or next;
         $printer->{DBENTRY} =
-            bestMatchSentence($_->{val}{DESCRIPTION}, 
-            keys %printer::thedb);
+            bestMatchSentence ($_->{val}{DESCRIPTION}, keys %printer::thedb);
     }
     1;
 }
@@ -426,15 +425,40 @@ sub setup_gsdriver($$$;$) {
 		my $make = $printer->{configured}{$queue}{'make'};
 		my $model =
 		    $printer->{configured}{$queue}{'model'};
-		$printer->{DBENTRY} = "$make|$model|$driverstr";
-	    } elsif ($printer->{SPOOLER} eq "cups") {
+		if ($::expert) {
+		    $printer->{DBENTRY} = "$make|$model|$driverstr";
+		    # database key contains te "(recommended)" for the
+		    # recommended driver, so add it if necessary
+		    if (!($printer::thedb{$printer->{DBENTRY}}{id})) {
+			$printer->{DBENTRY} .= " (recommended)";
+		    }
+		} else {
+		    $printer->{DBENTRY} = "$make|$model";
+		    # Make sure that we use the recommended driver
+		    $printer->{currentqueue}{'driver'} =
+			$printer::thedb{$printer->{DBENTRY}}{driver};
+		}
+	    } elsif (($::expert) && ($printer->{SPOOLER} eq "cups")) {
 		# Do we have a native CUPS driver or a PostScript PPD file?
 		$printer->{DBENTRY} = printer::get_descr_from_ppd($printer) ||
 		    $printer->{DBENTRY};
 	    }
+        } else {
+	    if (($::expert) && ($printer->{DBENTRY} !~ (recommended))) {
+		$printer->{DBENTRY} =~ /^([^\|]+)\|([^\|]+)\|/;
+		my $make = $1;
+		my $model = $2;
+		my $key;
+		for $key (keys %printer::thedb) {
+		    if ($key =~ /^$make\|$model\|.*\(recommended\)$/) {
+			$printer->{DBENTRY} = $key;
+		    }
+		}
+	    }
 	}
 	# Choose the printer/driver from the list
 	my $oldchoice = $printer->{DBENTRY};
+    
 	$printer->{DBENTRY} = $in->ask_from_treelist
 	    (__("Printer model selection"),
 	     __("Which printer model do you have?"), '|',
