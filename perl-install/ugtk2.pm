@@ -466,7 +466,6 @@ sub create_okcancel {
     my $box = create_hbox($spread || "edge");
     
     $box->pack_start($_, 0, 0, 1) foreach @l2;
-    gtkpack($box, '');
     $box->pack_end($_, 0, 0, 1) foreach @r2, @l;
     foreach (@l2, @r2, @l) {
 	$_->show;
