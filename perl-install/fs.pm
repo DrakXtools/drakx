@@ -639,11 +639,13 @@ sub mount_part {
 	    require install_any;
 	    install_any::getFile('XXX');
 	}
-	umount($part->{real_mntpoint});
-	rmdir $part->{real_mntpoint};
-	symlinkf "$prefix$part->{mntpoint}", $part->{real_mntpoint};
-	delete $part->{real_mntpoint};
-	$part->{isMounted} = 0;
+	eval {
+	    umount($part->{real_mntpoint});
+	    rmdir $part->{real_mntpoint};
+	    symlinkf "$prefix$part->{mntpoint}", $part->{real_mntpoint};
+	    delete $part->{real_mntpoint};
+	    $part->{isMounted} = 0;
+	};
     }
 
     return if $part->{isMounted};
