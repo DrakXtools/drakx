@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -133,6 +133,12 @@ sub gtkpack2_($@) {
     }
     $box
 }
+sub gtksetstyle {
+    my ($w, $s) = @_;
+    $w->set_style($s);
+    $w;
+}
+
 sub gtkappend($@) {
     my $w = shift;
     foreach (@_) {
@@ -240,7 +246,7 @@ sub create_okcancel {
     $spread ||= $::isWizard ? "edge" : "spread";
     $ok ||= $::isWizard ? _("Next ->") : _("Ok");
 
-    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit });
+    my $b1 = gtksignal_connect($w->{ok} = new Gtk::Button($ok), clicked => $w->{ok_clicked} || sub { $::isWizard or $w->{retval} = 1; Gtk->main_quit });
     my $b2 = !$one && gtksignal_connect($w->{cancel} = new Gtk::Button($cancel || _("Cancel")), clicked => $w->{cancel_clicked} || sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk->main_quit });
     my @l = grep { $_ } $::isStandalone ? ($b2, $b1) : ($b1, $b2);
 
