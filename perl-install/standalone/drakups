@@ -343,7 +343,7 @@ foreach my $i (@pages) {
     my (%buttons, $list);
     $indexes{$i->{name}} = 0;
     my $idx = \$indexes{$i->{name}};
-    my $getindex = sub { ${$idx}++ };
+    my $getindex = sub { $$idx++ };
     $nb->append_page(gtkpack_(Gtk2::VBox->new,
                               1, create_scrolled_window($list = Gtk2::TreeView->new_with_model($model),
                                                         [ 'automatic', 'automatic' ]),
