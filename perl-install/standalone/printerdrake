@@ -48,15 +48,15 @@ my $w = $in->wait_message('', _("Reading printer data ..."));
 eval { $printer = printer::getinfo('') };
 # Choose the spooler by command line options
 /-cups/ and
-    $printer->{mode} = 'cups' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'cups' and printer::read_configured_queues($printer);
 /-lpr/ and 
-    $printer->{mode} = 'lpd' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
 /-lpd/ and 
-    $printer->{mode} = 'lpd' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'lpd' and printer::read_configured_queues($printer);
 /-lprng/ and 
-    $printer->{mode} = 'lprng' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} ='lprng' and printer::read_configured_queues($printer);
 /-pdq/ and 
-    $printer->{mode} = 'pdq' and printer::read_configured_queues($printer);
+    $printer->{SPOOLER} = 'pdq' and printer::read_configured_queues($printer);
 
 -r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 }
