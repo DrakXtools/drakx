@@ -211,6 +211,24 @@ my $x_main_frame = new Gtk::Frame _("System mode");
 $x_main_frame->add($x_dedans);
 $global_vbox->pack_start ($x_main_frame, 1, 1, 0);
 
+#deush : hability to choose the runlevel.
+my $runl_hbox = new Gtk::HBox;
+my $runl_button5 = new Gtk::RadioButton _("5");
+my $runl_button1 = new Gtk::RadioButton _("1"), $runl_button5;
+$runl_hbox->pack_start($runl_button1, 0, 0, 0);
+my $runl_button2 = new Gtk::RadioButton _("2"), $runl_button5;
+$runl_hbox->pack_start($runl_button2, 0, 0, 0);
+my $runl_button3 = new Gtk::RadioButton _("3"), $runl_button5;
+$runl_hbox->pack_start($runl_button3, 0, 0, 0);
+my $runl_button4 = new Gtk::RadioButton _("4"), $runl_button5;
+$runl_hbox->pack_start($runl_button4, 0, 0, 0);
+
+$runl_hbox->pack_start($runl_button5, 0, 0, 0);
+
+my $runlevel_frame = new Gtk::Frame _("Default Runlevel");
+$runlevel_frame->add($runl_hbox);
+$global_vbox->pack_start ($runlevel_frame, 0, 0, 0);
+
 ### final buttons
 my $bbox = new Gtk::HButtonBox;
 $global_vbox->pack_start($bbox, 0, 0, 0);
@@ -221,7 +239,7 @@ my $cancel_button = new Gtk::Button $::isEmbedded ? _("Cancel") : _("Quit");
 $bbox->add($cancel_button);
 my $fin_hbox = new Gtk::HBox( 0, 0 );
 $cancel_button->signal_connect(clicked => sub {$::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0)});
-$build_button->signal_connect(clicked=>sub{updateInit();updateAutologin();updateAurora();$::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0)});
+$build_button->signal_connect(clicked=>sub{updateInit();updateAutologin();updateAurora();runlevel_choice();$::isEmbedded ? kill(USR1,$::CCPID) : Gtk->exit(0)});
 
 ### back to window
 $window->add($global_vbox);
@@ -420,3 +438,26 @@ sub lilo_choice
 	goto ask;
     }
 }
+
+#---------------------------------------------------------------
+# Choose your runlevel: from 1 to 5
+#---------------------------------------------------------------
+sub runlevel_choice
+{
+    if ($runl_button1->get_active()) {
+      any::runlevel('',1);
+        }
+    if ($runl_button2->get_active()) {
+      any::runlevel('',2);
+    }
+    if ($runl_button3->get_active()) {
+      any::runlevel('',3);
+    }
+    if ($runl_button4->get_active()) {
+      any::runlevel('',4);
+    }
+    if ($runl_button5->get_active()) {
+      any::runlevel('',5);
+    }
+}
+
