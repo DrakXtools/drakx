@@ -78,7 +78,7 @@ my $backup_choice = 0;
 my $cfg_file_exist = 0;
 my @user_and_path_list;
 my $mdk_cc = 0;
-my $DEBUG = 0;
+my $DEBUG = 1;
 
 # config. FILES ->  PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -581,10 +581,10 @@ sub interactive_mode_my {
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
 
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("pixmaps/backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("pixmaps/backup_left.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("pixmaps/backup_bot.png");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("pixmaps/backup_hd.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
+    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
 
     my $box2 = new Gtk::VBox( 0, 10 );
 
