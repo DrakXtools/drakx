@@ -454,55 +454,78 @@ sub whatUsbport() {
 	my $port = "/dev/usb/lp$i";
 	my $realport = devices::make("$port");
 	next if (!$realport);
-	open PORT, "$realport" or next;
-	my $idstr;
-	# Calculation of IOCTL function 0x84005001 (to get device ID string):
-	# len = 1024
-	# IOCNR_GET_DEVICE_ID = 1
-	# LPIOC_GET_DEVICE_ID(len) =
-	#     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
-	# _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
-	ioctl(PORT, 0x84005001, $idstr) or do {
+	next if (! -r $realport);
+	# Try up to three times, sometimes the IOCTL request fails.
+	my $j;
+	for ($j = 0; $j < 3; $j ++) {
+	    open PORT, "$realport" or do { sleep 1; next; };
+	    my $idstr = "";
+	    # Calculation of IOCTL function 0x84005001 (to get device ID
+	    # string):
+	    # len = 1024
+	    # IOCNR_GET_DEVICE_ID = 1
+	    # LPIOC_GET_DEVICE_ID(len) =
+	    #     _IOC(_IOC_READ, 'P', IOCNR_GET_DEVICE_ID, len)
+	    # _IOC(), _IOC_READ as defined in /usr/include/asm/ioctl.h
+	    # Use "eval" so that program does not stop when IOCTL fails
+	    eval{ my $output = "\0" x 1024; 
+		  ioctl(PORT, 0x84005001, $output);
+		  $idstr = $output; } or do {
+		close PORT;
+		sleep 1;
+		next;
+	    };
 	    close PORT;
-	    next;
-	};
-	close PORT;
-	# Remove non-printable characters
-	$idstr =~ tr/[\x00-\x1f]/\./;
-	# Extract the printer data from the ID string
-	my ($manufacturer, $model, $description) = ("", "", "");
-	if (($idstr =~ /MFG:([^;]+);/) ||
-	    ($idstr =~ /MANUFACTURER:([^;]+);/)) {
-	    $manufacturer = $1;
-	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
-	    $manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    # Remove non-printable characters
+	    $idstr =~ tr/[\x00-\x1f]/\./;
+	    # Extract the printer data from the ID string
+	    my ($manufacturer, $model, $description) = ("", "", "");
+	    if (($idstr =~ /MFG:([^;]+);/) ||
+		($idstr =~ /MANUFACTURER:([^;]+);/)) {
+		$manufacturer = $1;
+		$manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
+		$manufacturer =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    }
+	    if (($idstr =~ /MDL:([^;]+);/) ||
+		($idstr =~ /MODEL:([^;]+);/)) {
+		$model = $1;
+	    }
+	    if (($idstr =~ /DES:([^;]+);/) ||
+		($idstr =~ /DESCRIPTION:([^;]+);/)) {
+		$description = $1;
+		$description =~ s/Hewlett[-\s_]Packard/HP/;
+		$description =~ s/HEWLETT[-\s_]PACKARD/HP/;
+	    }
+	    # Was there a manufacturer and a model in the string?
+	    if (($manufacturer eq "") || ($model eq "")) {
+		sleep 1;
+		next;
+	    }
+	    # No description field? Make one out of manufacturer and model.
+	    if ($description eq "") {
+		$description = "$manufacturer $model";
+	    }
+	    # Store this auto-detection result in the data structure
+	    push @res, { port => $port, val => 
+			 { CLASS => 'PRINTER',
+			   MODEL => $model,
+			   MANUFACTURER => $manufacturer,
+			   DESCRIPTION => $description,
+		       }};
+	    # We have succeded for this device, do not try again
+	    last;
+        }
+	if ($j == 3) {
+	    # There is a printer, but it did not reply with a usable ID
+	    # string
+	    push @res, { port => $port, val => 
+			 { CLASS => 'PRINTER',
+			   MODEL => _("Unknown model"),
+			   MANUFACTURER => "",
+			   DESCRIPTION => _("Unknown model"),
+		       }};
 	}
-	if (($idstr =~ /MDL:([^;]+);/) ||
-	    ($idstr =~ /MODEL:([^;]+);/)) {
-	    $model = $1;
-	}
-	if (($idstr =~ /DES:([^;]+);/) ||
-	    ($idstr =~ /DESCRIPTION:([^;]+);/)) {
-	    $description = $1;
-	    $description =~ s/Hewlett[-\s_]Packard/HP/;
-	    $description =~ s/HEWLETT[-\s_]PACKARD/HP/;
-	}
-	# Was there a manufacturer and a model in the string?
-	if (($manufacturer eq "") || ($model eq "")) {
-	    next;
-	}
-	# No description field? Make one out of manufacturer and model.
-	if ($description eq "") {
-	    $description = "$manufacturer $model";
-	}
-	# Store this auto-detection result in the data structure
-	push @res, { port => $port, val => { CLASS => 'PRINTER',
-					     MODEL => $model,
-					     MANUFACTURER => $manufacturer,
-					     DESCRIPTION => $description,
-					     }};
     }
-    use Data::Dumper;
     @res;
 }
 
