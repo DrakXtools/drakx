@@ -11,7 +11,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
     wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack3 gtkpack2_ gtkpack2__ gtksetstyle gtkappend gtkadd gtkput gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
-    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
+    ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
@@ -534,7 +534,6 @@ sub ask_warn       { my $w = my_gtk->new(shift @_); $w->_ask_warn(@_); main($w);
 sub ask_yesorno    { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Yes"), _("No")); main($w); }
 sub ask_okcancel   { my $w = my_gtk->new(shift @_); $w->_ask_okcancel(@_, _("Is this correct?"), _("Ok"), _("Cancel")); main($w); }
 sub ask_from_entry { my $w = my_gtk->new(shift @_); $w->_ask_from_entry(@_); main($w); }
-sub ask_from_list  { my $w = my_gtk->new($_[0]); $w->_ask_from_list(@_); main($w); }
 sub ask_file       { my $w = my_gtk->new(''); $w->_ask_file(@_); main($w); }
 
 sub _ask_from_entry($$@) {
@@ -550,82 +549,6 @@ sub _ask_from_entry($$@) {
 		 ($o->{hide_buttons} ? () : create_okcancel($o))),
 	  );
     $entry->grab_focus;
-}
-
-sub _ask_from_list {
-    my ($o, $title, $messages, $l, $def) = @_;
-    my (undef, @okcancel) = ref $title ? @$title : $title;
-    my $list = new Gtk::CList(1);
-    my ($first_time, $starting_word, $start_reg) = (1, '', "^");
-    my (@widgets, $timeout, $curr);
-
-    my $leave = sub { $o->{retval} = $l->[$curr]; Gtk->main_quit };
-    my $select = sub {
-	$list->set_focus_row($_[0]);
-	$list->select_row($_[0], 0);
-	$list->moveto($_[0], 0, 0.5, 0);
-    };
-
-    ref $title && !@okcancel ?
-      $list->signal_connect(button_release_event => $leave) :
-      $list->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
-
-    $list->signal_connect(select_row => sub {
-	my ($w, $row, undef, $e) = @_;
-	$curr = $row;
-    });
-    $list->signal_connect(key_press_event => sub {
-        my ($w, $e) = @_;
-	my $c = chr($e->{keyval} & 0xff);
-
-	Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
-	
-	if ($e->{keyval} >= 0x100) {
-	    &$leave if $c eq "\r" || $c eq "\x8d";
-	    $starting_word = '' if $e->{keyval} != 0xffe4; # control
-	} else {
-	    if ($e->{state} & 4) {
-		#- control pressed
-		$c eq "s" or return 1;
-		$start_reg and $start_reg = '', return 1;
-		$curr++;
-	    } else {
-		&$leave if $c eq ' ';
-
-		$curr++ if $starting_word eq '' || $starting_word eq $c;
-		$starting_word .= $c unless $starting_word eq $c;
-	    }
-	    my $word = quotemeta $starting_word;
-	    my $j; for ($j = 0; $j < @$l; $j++) {
-		 $l->[($j + $curr) % @$l] =~ /$start_reg$word/i and last;
-	    }
-	    $j == @$l ?
-	      $starting_word = '' :
-	      &$select(($j + $curr) % @$l);
-
-	    $w->{timeout} = $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
-	}
-	1;
-    });
-    $list->set_selection_mode('browse');
-    $list->set_column_auto_resize(0, 1);
-
-    $o->{ok_clicked} = $leave;
-    $o->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
-    gtkadd($o->{window},
-	   gtkpack($o->create_box_with_title(@$messages),
-		   gtkpack_(new Gtk::VBox(0,7),
-			    1, createScrolledWindow($list),
-			    @okcancel || !ref $title ? (0, create_okcancel($o, @okcancel)) : ())
-		  ));
-    $o->show; #- otherwise the moveto is not done
-    my $toselect; map_index {
-	$list->append($_);
-	$toselect = $::i if $def && $_ eq $def;
-    } @$l;
-    &$select($toselect);
-
-    $list->grab_focus;
 }
 
 sub _ask_warn($@) {
