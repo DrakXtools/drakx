@@ -636,19 +636,22 @@ sub dialog {
 }
 
 sub advanced_install() {
+    my $button;
     $model = Gtk2::TreeStore->new("Glib::String");
     $list = Gtk2::TreeView->new_with_model($model);
     $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererText->new, 'text' => 0));
     $list->set_headers_visible(0);
     $list->get_selection->set_mode('browse');
     $list->set_rules_hint(1);
+    $model->signal_connect("row-inserted" => sub { $button and $button->set_sensitive(1) });
+    $model->signal_connect("row-deleted" => sub { $button and $button->set_sensitive($model->get_iter_first) });
 
     dialog(N("Import fonts"),
            [ 1, create_scrolled_window($list) ],
            [
             gtksignal_connect(Gtk2::Button->new(N("Add")), clicked => \&font_choice),
             gtksignal_connect(Gtk2::Button->new(N("Remove Selected")), clicked => \&list_remove),
-            gtksignal_connect(Gtk2::Button->new(N("Install fonts")), 
+            gtksignal_connect($button = gtkset_sensitive(Gtk2::Button->new(N("Install fonts")), 0),
                               clicked => sub {
                                   $dialog->destroy;
                                   undef $dialog;
