@@ -94,20 +94,19 @@ Continue at your own risk."), formatError($@) ]) if $@;
     run_program::run('/sbin/service', 'syslog', 'start');  #- otherwise minilogd will strike
     run_program::run('killall', 'minilogd');  #- get rid of minilogd
 
-    run_program::run('adduser', 'mdk');
-
-    output('/var/run/console.lock', 'mdk');
-    output('/var/run/console/mdk', 1);
+    my $username = $o->{users}[0]{name};
+    output('/var/run/console.lock', $username);
+    output("/var/run/console/$username", 1);
     run_program::run('pam_console_apply');
 
     if (fork()) {
 	sleep 1;
         log::l("DrakX waves bye-bye");
 
-	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home, my $shell) = getpwnam('mdk');
+	(undef, undef, my $uid, my $gid, undef, undef, undef, my $home, my $shell) = getpwnam($username);
 	$( = $) = "$gid $gid";
 	$< = $> = $uid;
-	$ENV{LOGNAME} = $ENV{USER} = 'mdk';
+	$ENV{LOGNAME} = $ENV{USER} = $username;
 	$ENV{HOME} = $home;
 	$ENV{SHELL} = $shell;
 	exec 'startkde';
