@@ -704,7 +704,7 @@ sub Resize {
 	my ($write_partitions) = @_;
 
 	if (isLVM($hd)) {
-	    lvm::lv_resize($part, $oldsize) ;
+	    lvm::lv_resize($part, $oldsize);
 	} else {
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
