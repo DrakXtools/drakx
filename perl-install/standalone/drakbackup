@@ -1100,7 +1100,7 @@ sub build_backup_files() {
 		my $msg = N("No changes to backup!");
 		show_warning("w", $msg);
 		$interactive and gtkset_mousecursor_normal();
-		$interactive and interactive_mode_box(undef);
+		$interactive and interactive_mode_box();
 		results_to_logfile();
 		return 1;		
 	}
@@ -3364,7 +3364,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, ());
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box(undef);
+								interactive_mode_box();
 							} 
 						} 
 					}),
@@ -3376,7 +3376,7 @@ sub catalog_restore {
 							my $media_check = restore_catalog_entry($cat_entry, @passed_files);
 							if (! $media_check) {
 								destroy_widget();
-								interactive_mode_box(undef);
+								interactive_mode_box();
 							} 
 						}
 					}),
@@ -3991,7 +3991,7 @@ sub button_box_wizard_end() {
 			pbutton(),
 			0, gtksignal_connect(Gtk2::Button->new(N("Save")), clicked => sub { 
 				save_conf_file();
-				interactive_mode_box(undef);
+				interactive_mode_box();
 			}),
 		),
 	);
@@ -4286,8 +4286,8 @@ sub build_backup_box() {
 
 sub interactive_mode_box {
 
-	my ($mode) = @_;
-	if ($mode eq "restore") {
+	my ($o_mode) = @_;
+	if ($o_mode eq "restore") {
     	$central_widget = \$box2;
 		restore_box();
 		return 0;
@@ -4367,7 +4367,7 @@ sub interactive_mode() {
 		),
 	);
 	setup_tooltips();
-    interactive_mode_box(undef);
+    interactive_mode_box();
     button_box_main();
     $central_widget = \$box2;
     $window1->realize;
