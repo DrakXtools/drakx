@@ -247,8 +247,9 @@ done
 %changelog 
 * Tue Jul 23 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-9mdk
 - reorganization cleanup:
-	move interactive_* into interactive::*
-	move partition_table_* into partition_table::*
+    o move interactive_* into interactive::*
+    o move partition_table_* into partition_table::*
+- XFdrake: more cleanups
 
 * Sun Jul 21 2002 Pixel <pixel@mandrakesoft.com> 1.1.8-8mdk
 - new snapshot (beware of XFdrake)
