@@ -489,7 +489,7 @@ static void find_media(void)
 					sprintf(tmp_name, "st%c", scsi_tape_count++);
 					tmp[count].type = TAPE;
 				} else if (strstr(start, "CD-ROM")) {
-					sprintf(tmp_name, "scd%c", scsi_cdrom_count++);
+					sprintf(tmp_name, "sr%c", scsi_cdrom_count++);
 					tmp[count].type = CDROM;
 				}
 
