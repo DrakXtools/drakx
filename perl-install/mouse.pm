@@ -287,27 +287,41 @@ sub write_conf {
     my $f = "/etc/X11/XF86Config";
     my $g = "/etc/X11/XF86Config-4";
 
-    my @zaxis = (
-		 $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
-		 $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
-		 $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
-		);
+    my $update_mouse = sub {
+	my ($mouse, $id) = @_;
 
-    my $zaxis = join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @zaxis);
-    substInFile {
-	if (/^Section\s+"Pointer"/ .. /^EndSection/) {
-	    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-	    s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	    s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
-	}
-    } $f if -e $f && !$::testing;
+	my @zaxis = (
+		     $mouse->{nbuttons} > 3 ? [ "ZAxisMapping", "4 5" ] : (),
+		     $mouse->{nbuttons} > 5 ? [ "ZAxisMapping", "6 7" ] : (),
+		     $mouse->{nbuttons} < 3 ? ([ "Emulate3Buttons" ], [ "Emulate3Timeout", "50" ]) : ()
+		    );
 
-    $zaxis = join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @zaxis);
-    substInFile {
-	if (/Identifier\s+"Mouse1"/ .. /^EndSection/) {
-	    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
-	    s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
-	    s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;
-	}
-    } $g if -e $g && !$::testing;
+	my $zaxis = join('', map { qq(\n    $_->[0]) . ($_->[1] && qq( $_->[1])) } @zaxis);
+	substInFile {
+	    if ($id > 1) {
+		if (/^DeviceName\s+"Mouse$id"/ .. /^EndSection/) {
+		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+		    s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+		    s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
+		}
+	    } else {
+		if (/^Section\s+"Pointer"/ .. /^EndSection/) {
+		    $_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+		    s|^(\s*Protocol\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+		    s|^(\s*Device\s+).*|$1"/dev/mouse"$zaxis|;
+		}
+	    }
+	} $f if -e $f && !$::testing;
+
+	$zaxis = join('', map { qq(\n    Option "$_->[0]") . ($_->[1] && qq( "$_->[1]")) } @zaxis);
+	substInFile {
+	    if (/Identifier\s+"Mouse$id"/ .. /^EndSection/) {
+		$_ = '' if /(ZAxisMapping|Emulate3)/; #- remove existing line
+		s|^(\s*Option\s+"Protocol"\s+).*|$1"$mouse->{XMOUSETYPE}"|;
+		s|^(\s*Option\s+"Device"\s+).*|$1"/dev/mouse"$zaxis|;
+	    }
+	} $g if -e $g && !$::testing;
+    };
+    $update_mouse->($mouse, 1);
+    $mouse->{auxmouse} and $update_mouse->($mouse->{auxmouse}, 2);
 }

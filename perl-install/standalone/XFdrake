@@ -21,6 +21,7 @@ use lib qw(/usr/lib/libDrakX);
 
 use interactive;
 use standalone;
+use modules;
 use Xconfigurator;
 use Xconfig;
 use c;
@@ -43,6 +44,8 @@ $i->{skiptest} = /-skiptest/;
 
 my $in = interactive->vnew('su');
 
+-r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
+
 my $f = "/usr/X11R6/lib/X11/Cards";
 $in->standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 -e $f or die "install XFree86 first!\n";
@@ -51,11 +54,9 @@ $in->standalone::pkgs_install('XFree86', 'XFree86-75dpi-fonts') if (! -e $f);
 
 system("mount /proc 2>/dev/null"); # ensure /proc is mounted for pci probing
 
-Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
-
 begin:
 Xconfig::getinfo($i);
-Xconfig::getinfoFromXF86Config($i, ''); #- take default from here at least.
+Xconfig::getinfoFromXF86Config($i); #- take default from here at least.
 
 $::isEmbedded and kill USR2, $::CCPID;
 Xconfigurator::main('', $i, $in, 0, sub { $in->standalone::pkgs_install(@_) });

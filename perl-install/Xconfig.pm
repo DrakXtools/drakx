@@ -27,7 +27,9 @@ sub getinfo {
     getinfoFromDDC($o);
     getinfoFromSysconfig($o);
 
-    add2hash($o->{mouse}, mouse::detect()) unless $o->{mouse}{XMOUSETYPE};
+    my ($mouse) = mouse::detect();
+    add2hash($o->{mouse}, $mouse) unless $o->{mouse}{XMOUSETYPE};
+    add2hash($o->{mouse}{auxmouse}, $mouse->{auxmouse}) unless $o->{mouse}{auxmouse}{XMOUSETYPE};
 
     $o->{mouse}{device} ||= "mouse" if -e "/dev/mouse";
     $o;
@@ -46,6 +48,7 @@ sub getinfoFromXF86Config {
 	    %c = () if $i == 1;
 
 	    $c{driver} = $1 if /^\s*Driver\s+"(.*?)"/;
+	    $c{id} = $1 if /^\s*Identifier\s+"[^\d"]*(\d*)"/;
 	    $c{xkb_keymap} ||= $1 if /^\s*Option\s+"XkbLayout"\s+"(.*?)"/;
 	    $c{XMOUSETYPE} ||= $1 if /^\s*Option\s+"Protocol"\s+"(.*?)"/;
 	    $c{device} ||= $1 if /^\s*Option\s+"Device"\s+"\/dev\/(.*?)"/;
@@ -59,9 +62,9 @@ sub getinfoFromXF86Config {
 		@keyboard{qw(xkb_keymap)} = @c{qw(xkb_keymap)}
 		  if $c{driver} =~ /keyboard/i;
 		@{$mouse{auxmouse}}{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
-		  if $c{driver} =~ /mouse/i && $mouse{device};
+		  if $c{driver} =~ /mouse/i && $c{id} > 1;
 		@mouse{qw(XMOUSETYPE device chordmiddle nbuttons)} = @c{qw(XMOUSETYPE device chordmiddle nbuttons)}
-		  if $c{driver} =~ /mouse/i && !$mouse{device};
+		  if $c{driver} =~ /mouse/i && $c{id} < 1;
 		$wacom{$c{device}} = undef
 		  if $c{driver} =~ /wacom/i;
 	    }
@@ -159,6 +162,7 @@ sub getinfoFromXF86Config {
     #- try to merge with $o, the previous has been obtained by ddcxinfos.
     add2hash($o->{keyboard} ||= {}, \%keyboard);
     add2hash($o->{mouse} ||= {}, \%mouse);
+    add2hash($o->{mouse}{auxmouse} ||= {}, $mouse{auxmouse});
     @{$o->{wacom}} > 0 or $o->{wacom} = [ keys %wacom ];
     add2hash($o->{monitor} ||= {}, \%monitor);
 

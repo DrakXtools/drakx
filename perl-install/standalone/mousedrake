@@ -5,6 +5,7 @@ use lib qw(/usr/lib/libDrakX);
 use common qw(:common :system);
 use interactive;
 use standalone;
+use modules;
 use detect_devices;
 use mouse;
 use c;
@@ -18,6 +19,8 @@ $::auto = /-auto/;
 $::testing = /-testing/;
 
 my $in = vnew interactive('su');
+
+-r '/etc/modules.conf' and modules::mergein_conf('/etc/modules.conf');
 
 begin:
 my ($mouse) = mouse::detect() unless $::noauto;
