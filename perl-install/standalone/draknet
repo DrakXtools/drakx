@@ -28,7 +28,7 @@ use standalone;
 use netconnect;
 use c;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 print "EMBED\n" if $::isEmbedded;
 print "XID : $::XID\n";
@@ -142,7 +142,7 @@ my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout(-end);
 my $button_ok = new Gtk::Button "OK";
-$button_ok->signal_connect ( clicked => sub { kill(USR1, $::CCPID) });
+$button_ok->signal_connect ( clicked => sub { $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0); });
 $bbox1->add($button_ok);
 my $button_cancel = new Gtk::Button "Cancel";
 $button_cancel->signal_connect ( clicked => sub {
@@ -152,7 +152,7 @@ $button_cancel->signal_connect ( clicked => sub {
 				     $label_host->set ($h);
 				     $label4->set($netcnx->{type});
 				     $label6->set($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
-				     kill(USR1, $::CCPID);
+				     $::isEmbedded ? kill(USR1, $::CCPID) : Gtk->exit(0);
 				 });
 $bbox1->add($button_cancel);
 
@@ -161,7 +161,7 @@ Gtk->main;
 
 dd:
 
-netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {});#\&standalone::pkgs_install);
+netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", \&standalone::pkgs_install);
 $in->exit(0);
 
 sub configure_net {

@@ -26,6 +26,7 @@ use printerdrake;
 use printer;
 use c;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
@@ -44,6 +45,8 @@ $printer->{mode} ||= 'CUPS'; #- assume this default if nothing found.
 
 my $in = vnew interactive('su');
 
+begin:
 printerdrake::main($printer, $in, sub { $in->standalone::pkgs_install(@_) });
 
-$in->exit(0);
+$::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+goto begin;

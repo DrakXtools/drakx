@@ -23,7 +23,7 @@ use c;
 use netconnect;
 use detect_devices;
 
-$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\S*) (\S*)/;
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 $::isWizard = "@ARGV" =~ /--wizard/;
 
 local $_ = join '', @ARGV;
@@ -552,6 +552,9 @@ sub quit_global {
 
 #-------------------------------------------------
 #- $Log$
+#- Revision 1.21  2001/02/08 10:11:37  damien
+#- implemented or updated embedded mode
+#-
 #- Revision 1.20  2001/02/08 07:00:41  damien
 #- added embedded and (ugly) wizard mode.
 #-

@@ -10,6 +10,7 @@ use mouse;
 use c;
 require 'dumpvar.pl';
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: mousedrake [--auto] [--testing]\n";
@@ -19,6 +20,7 @@ $::testing = /-testing/;
 
 my $in = vnew interactive('su');
 
+begin:
 my ($mouse) = mouse::detect() unless $::noauto;
 
 if (!$mouse || !$::auto) {
@@ -45,4 +47,5 @@ $o->{mouse}{device} =
 dumpValue(\$mouse);
 mouse::write_conf($mouse);
 
-$in->exit(0);
+$::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+goto begin;

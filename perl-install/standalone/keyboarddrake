@@ -10,16 +10,20 @@ use Xconfigurator_consts;
 use common qw(:system);
 use c;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 local $_ = join '', @ARGV;
 
 /-h/ and die _("usage: keyboarddrake [--expert] [keyboard]\n");
 
 $::expert = /-expert/;
 
-my ($keyboard) = grep { !/^-/ } @ARGV;
-
+print "[$::expert]\n";
+my $keyboard='';
+if ($::expert) { ($keyboard) = grep { !/^-/ } @ARGV;}
+print "[$keyboard]\n";
 my $in = interactive->vnew('su');
 
+begin:
 $keyboard ||= $in->ask_from_listf_(_("Keyboard"),
 				   _("Please, choose your keyboard layout."),
 				   \&keyboard::keyboard2text,
@@ -57,4 +61,6 @@ substInFile {
 
 keyboard::write('', $keyboard, $isNotDelete);
 
-$in->exit(0);
+$::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
+$keyboard='';
+goto begin;

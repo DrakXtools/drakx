@@ -25,6 +25,8 @@ use Xconfigurator;
 use Xconfig;
 use c;
 
+$::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
+
 local $_ = join '', @ARGV;
 
 /-h/ and die "usage: XFdrake [--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
@@ -39,6 +41,7 @@ $::noauto = /-noauto/;
 $::testing = /-testing/;
 $i->{skiptest} = /-skiptest/;
 
+begin:
 my $in = interactive->vnew('su');
 
 my $f = "/usr/X11R6/lib/X11/Cards";
@@ -53,4 +56,6 @@ Xconfig::getinfoFromXF86Config($i) if $0 =~ Xdrakres;
 Xconfig::getinfo($i);
 
 Xconfigurator::main('', $i, $in, 0, \&standalone::pkgs_install);
-$in->exit(0);
+!$::isEmbedded and $in->exit(0);
+kill(USR1, $::CCPID);
+#goto begin;
