@@ -940,7 +940,7 @@ sub upNetwork {
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::up_it($o->{prefix}, $o->{intf});
     } elsif (!$pppAvoided && $o->{modem} && !$o->{modem}{isUp}) {
-	eval { modules::load_multi(qw(serial ppp)) };
+	eval { modules::load_multi(qw(serial ppp bsd_comp ppp_deflate)) };
 	run_program::rooted($o->{prefix}, "/etc/rc.d/init.d/syslog", "start");
 	run_program::rooted($o->{prefix}, "ifup", "ppp0");
 	$o->{modem}{isUp} = 1;
