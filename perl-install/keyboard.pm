@@ -203,7 +203,7 @@ sub xmodmap_file {
     my ($keyboard) = @_;
     my $f = "/usr/share/xmodmap/xmodmap.$keyboard";
     if (! -e $f) {
-	run_program::run("extract_archive", "/usr/share/xmodmap", '/tmp', "xmodmap.$keyboard");
+	run_program::run("extract_archive", "/usr/share/xmodmap.cz2", '/tmp', "xmodmap.$keyboard");
 	$f = "/tmp/xmodmap.$keyboard";
     }
     $f;
@@ -218,7 +218,7 @@ sub setup($) {
 	load(cat_($f));
     } else {
 	local *F;
-	open F, "extract_archive /usr/share/keymaps '' $o->[1].kmap |";
+	open F, "extract_archive /usr/share/keymaps.cz2 '' $o->[1].kmap |";
 	local $/ = undef;
 	eval { load(<F>) };
     }

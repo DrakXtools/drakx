@@ -415,7 +415,7 @@ sub insmod {
 	unless (-r ($f = "/lib/modules/$_.o")) {
 	    $f = "/tmp/$_.o";
 	    if (-e "/lib/modules.cz2") {
-		run_program::run("extract_archive /lib/modules /tmp $_.o");
+		run_program::run("extract_archive /lib/modules.cz2 /tmp $_.o");
 	    } elsif (-e "/lib/modules.cpio.bz2") {
 		run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
 	    } else {
@@ -533,12 +533,9 @@ sub du {
     print &$f($_) >> 1, "\t$_\n" foreach @_ ? @_ : glob_("*");
 }
 
-#my %cached_failed_install_cpio;
-#- double space between sub and install_cpio cuz install_cpio is not a shell command
 sub  install_cpio($$;@) {
     my ($dir, $name, @more) = @_; 
 
-#    return if $cached_failed_install_cpio{"$dir $name"};
     return "$dir/$name" if -e "$dir/$name";
 
     my $cpio = "$dir.cpio.bz2";
@@ -551,8 +548,6 @@ sub  install_cpio($$;@) {
     my $more = join " ", map { $_ && "$_ $_/*" } @more;
     run_program::run("cd $dir ; bzip2 -cd $cpio | cpio -id $name $name/* $more");
 
-    #- not found, cache result
-#    return if $cached_failed_install_cpio{"$dir $name"} = ! -e "$dir/$name";
     "$dir/$name";
 }
 

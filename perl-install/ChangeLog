@@ -1,3 +1,15 @@
+2000-02-10  François Pons  <fpons@mandrakesoft.com>
+	* heavy modification of build_archive and extract_archive to manage
+	a TOC directly in archive file, handle bzip2 or gzip compression,
+	extract_archive can extract multiple files a time, with minimal
+	invocation of uncompress program and follow symlink and expand
+	directory contents.
+	* use build_archive/extract_archive for locales.
+	* fixed a min/max in install_steps_gtk for Resize/Create partition.
+	* fixed adjustEnd with dos partition table, take care of magic 63
+	sectors at beginning of partitions, a more solid method should be
+	used for that.
+
 2000-02-10  Pixel  <pixel@mandrakesoft.com>
 
 	* modules.pm (load_thiskind): skip modules "unknown" and "ignore"

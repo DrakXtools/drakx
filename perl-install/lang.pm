@@ -203,24 +203,30 @@ sub set {
     my ($lang, $langs) = @_;
 
     if ($lang) {
+	#- use extract_archive that follow symlinks and expand directory.
+	#- it is necessary as there is a lot of symlinks inside locale.cz2,
+	#- using a compressed cpio archive is nighmare to extract all files.
+	#- reset locale environment variable to avoid any warnings by perl,
+	#- so installation of new locale is done with empty locale ...
+	unless (-e "/usr/share/locale/".$languages{$lang}[2]) {
+	    @ENV{qw(LANG LC_ALL LANGUAGE LINGUAS)} = ();
+
+	    eval { commands::rm("-r", "/usr/share/locale") };
+	    require 'run_program.pm';
+	    run_program::run("extract_archive", "/usr/share/locale.cz2", '/usr/share/locale', $languages{$lang}[2]);
+	}
+
 	$ENV{LC_ALL}    = $lang;
 	$ENV{LANG}      = $languages{$lang}[2];
 	$ENV{LANGUAGE}  = $languages{$lang}[3];
 #- apparently autoconf/automake doesn't like LINGUAS having a list of values
 #-	$ENV{LINGUAS}   = $languages{$lang}[3];
 	set_langs($langs || [$lang]);
-
-	local $_ = $languages{$lang}[1];
-	s/iso-8859-1$/iso-8859-15/;
-	s/iso-/iso/;
-	s/koi8-.*/koi8/;
-	s/cp1251/mscp1251/;
-	
-	commands::install_cpio("/usr/share/locale", $languages{$lang}[2], "misc", $_);
     } else {
 	# stick with the default (English) */
 	delete $ENV{LANG};
 	delete $ENV{LC_ALL};
+	delete $ENV{LINGUAGE};
 	delete $ENV{LINGUAS};
 	delete $ENV{RPM_INSTALL_LANG};
     }
@@ -283,7 +289,6 @@ sub load_po($) {
 	    open F, "bzip2 -dc $f 2>/dev/null |";
 	} else {
 	    -e ($f = "$_/po.cz2") and last foreach @INC;
-	    $f =~ s/\.cz2//;
 	    log::l("trying to load $lang.po from $f");
 	    open F, "extract_archive $f '' $lang.po 2>/dev/null |";
 	}
