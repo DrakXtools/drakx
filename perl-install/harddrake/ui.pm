@@ -49,6 +49,7 @@ my %fields =
      "model name" => [N("Model name"), N("Official vendor name of the cpu")],
      "nbuttons" => [ N("Number of buttons"), "the number of buttons the mouse have"],
      "name" => [ N("Name"), "the name of the cpu"],
+     "port" => [N("Port"), N("network printer port")],
      "processor" => [ N("Processor ID"), N("the number of the processor")],
      "stepping" => [ N("Model stepping"), N("Stepping of the cpu (sub model (generation) number)") ],
      "type" => [ N("Type"), N("The type of bus on which the mouse is connected")],
