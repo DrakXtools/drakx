@@ -133,6 +133,7 @@ sub set_check {
 sub apply_functions {
     my ($msec) = @_;
     my @list = sort($msec->list_functions('system'), $msec->list_functions('network'));
+    touch($msec->{functions}{values_file}) if !-e $msec->{functions}{values_file};
     substInFile {
         foreach my $function (@list) { s/^$function.*\n// }
         if (eof) {
@@ -147,6 +148,7 @@ sub apply_functions {
 sub apply_checks {
     my ($msec) = @_;
     my @list =  sort $msec->raw_checks_list;
+    touch($msec->{checks}{values_file}) if !-e $msec->{checks}{values_file};
     substInFile {
         foreach my $check (@list) { s/^$check.*\n// }
         if (eof) {
