@@ -172,7 +172,7 @@ sub setup_postinstall_rpms($$) {
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
     #- cp_af doesn't handle correctly a missing file.
-    eval { cp_af((grep { -r $_ } map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms) };
+    eval { cp_af((grep { -r $_ } map { "/tmp/image/" . relGetFile($_->filename) } @toCopy), $postinstall_rpms) };
 
     log::l("copying Auto Install Floppy");
     getAndSaveInstallFloppy($::o, "$postinstall_rpms/auto_install.img");
@@ -196,7 +196,7 @@ sub allowNVIDIA_rpms {
 	    my ($ext, $version, $release) = /kernel[^-]*(-smp|-enterprise|-secure)?(?:-(\d.*?)\.(\d+mdk))?$/ or next;
 	    my $p = pkgs::packageByName($packages, $_);
 	    pkgs::packageSelectedOrInstalled($p) or next;
-	    $version or ($version, $release) = (pkgs::packageVersion($p), pkgs::packageRelease($p));
+	    $version or ($version, $release) = ($p->version, $p->release);
 	    my $name = "NVIDIA_kernel-$version-$release$ext";
 	    pkgs::packageByName($packages, $name) or return;
 	    push @rpms, $name;
