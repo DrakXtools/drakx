@@ -380,6 +380,7 @@ sub setDefaultPackages {
 	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
 	    #- by default, choose:
 	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+	    $o->{lang} eq 'eu_ES' and $o->{compssUsersChoice}{KDE} = 0;
 	    $o->{compssUsersChoice}{$_} = 1 
 	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
 	}
