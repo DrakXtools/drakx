@@ -41,6 +41,7 @@ We recommand the light configuration.
 	$netc->{isdntype} = 'isdn_internal';
 	$netcnx->{isdn_internal} = isdn_read_config($isdn);
 	$netcnx->{isdn_internal}{$_} = $netc->{autodetect}{isdn}{$_} foreach 'description', 'vendor', 'id', 'driver', 'card_type', 'type', 'is_light';
+	$netc->{autodetect}{isdn} and $isdn->{is_light} = 1;
 	isdn_detect($netcnx->{isdn_internal}, $netc) or return;
     } else {
 	$netc->{isdntype} = 'isdn_external';
@@ -278,7 +279,7 @@ If you have a PCMCIA card, you have to know the \"irq\" and \"io\" of your card.
     $e = $in->ask_from_listf(N("ISDN Configuration"),
 			     N("Which of the following is your ISDN card?"),
 			     sub { $_[0]{description} },
-			     [ grep { $_->{card} eq $isdn->{card_type} } @isdn::isdndata ]) or goto isdn_ask_step_1;
+			     [ grep { $_->{card} eq $isdn->{card_type} } @isdndata ]) or goto isdn_ask_step_1;
     $e->{$_} and $isdn->{$_} = $e->{$_} foreach qw(driver type mem io io0 io1 irq firmware);
 
   isdn_ask_step_3:
