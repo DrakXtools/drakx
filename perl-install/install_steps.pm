@@ -642,8 +642,9 @@ sub setRootPassword {
     my ($o) = @_;
     my $p = $o->{prefix};
     my $u = $o->{superuser} ||= {};
-    local $o->{superuser}{name} = 'root';
+    $o->{superuser}{name} = 'root';
     any::write_passwd_user($o->{prefix}, $o->{superuser}, $o->{authentication}{md5});
+    delete $o->{superuser}{name};
 }
 
 #------------------------------------------------------------------------------
