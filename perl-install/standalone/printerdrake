@@ -221,18 +221,25 @@ my @toolbwg = map {
     $toolb->append_item($_->[0], $_->[1], $_->[2],  
                         Gtk2::Image->new_from_file($pixdir . $_->[2] . '.png'), $_->[3], $toolb);
 #    $toolb->append_space;
-#-PO "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
-} ( [ N("Add Printer"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
-#-PO "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
-    [ N("Set as default"), N("Set selected printer as the default printer"), 'printer_default', \&SetAsDefault ],
-#-PO "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
-    [ N("Edit"), N("Edit selected printer"), 'printer_conf', \&Edit ],
-#-PO "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
-    [ N("Delete"), N("Delete selected printer"), 'printer_del', \&Delete ],
-#-PO "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
-    [ N("Refresh"), N("Refresh the list"), 'refresh', sub { Refresh($stringsearch) } ],
-#-PO "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
-    [ N("Configure CUPS"), N("Configure CUPS printing system"), 'cups_config', \&ConfigCUPS ]
+} ( [
+     # FIXME: then "add printer" should be a simple verb as suggested in Human Guidelines!!!
+     #-PO: "Add Printer" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Add Printer"), N("Add a new printer to the system"), 'printer_add', \&AddPrinter ], 
+    [
+     #-PO: "Set as default" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Set as default"), N("Set selected printer as the default printer"), 'printer_default', \&SetAsDefault ],
+    [ 
+     #-PO: "Edit" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Edit"), N("Edit selected printer"), 'printer_conf', \&Edit ],
+    [ 
+     #-PO: "Delete" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Delete"), N("Delete selected printer"), 'printer_del', \&Delete ],
+    [ 
+     #-PO: "Refresh" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Refresh"), N("Refresh the list"), 'refresh', sub { Refresh($stringsearch) } ],
+    [
+     #-PO: "Configure CUPS" is a button text and the translation has to be AS SHORT AS POSSIBLE
+     N("Configure CUPS"), N("Configure CUPS printing system"), 'cups_config', \&ConfigCUPS ]
   );
 my ($_tbadd, $tbdefault, $tbedit, $tbdel, $_tbref, $_tbconfig) = @toolbwg;
 GrayDelEdit();

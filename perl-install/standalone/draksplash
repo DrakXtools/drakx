@@ -510,8 +510,9 @@ sub show_prev {
  my ($txt_tl_xx, $txt_tl_yy, $txt_width, $txt_height, $prog_tl_xx, $prog_tl_yy, $prog_width, $prog_height) = @_;
  $prev_window
    or $prev_window = Gtk2::Window->new('toplevel'); 
-#-PO  First %s is theme name, second %s (in parenthesis) is resolution
- $prev_window->set_title(N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
+ $prev_window->set_title(
+                         #-PO:  First %s is theme name, second %s (in parenthesis) is resolution
+                         N("%s BootSplash (%s) preview", $theme{name}, $theme{res}{res}));
  $prev_pic = gtkcreate_pixbuf($img_file);
  $prev_pic->scale_simple($theme{res}{w}, $theme{res}{h}, 'hyper');
  $prev_canvas && $prev_canvas->isa('Gtk2::Widget')
