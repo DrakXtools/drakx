@@ -217,7 +217,7 @@ arch() =~ /^sparc/ ? (
 # TODO: console map
  "dvorak_pl" => [ N_("_: keyboard\nDvorak (Polish)"),    "us",   "dvorak(pl)", 0 ],
  "dvorak_se" => [ N_("_: keyboard\nDvorak (Swedish)"), "se-dvorak", "dvorak(se)", 0 ],
- "dz" => [ N_("_: keyboard\nDzonkha/Tibetan"), "us",             "dz",    1 ],
+ "dz" => [ N_("_: keyboard\nDzongkha/Tibetan"), "us",            "dz",    1 ],
  "ee" => [ N_("_: keyboard\nEstonian"),       "ee-latin9",       "ee",    0 ],
  "es" => [ N_("_: keyboard\nSpanish"),        "es-latin1",       "es",    0 ],
  "fi" => [ N_("_: keyboard\nFinnish"),        "fi-latin1",       "fi",    0 ],
