@@ -1,3 +1,235 @@
+2004/03/23  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+	update
+
+2004/03/23  Nicolas Planel  <nplanel at mandrakesoft.com>
+
+	* any.pm: add nolapic support option (NOn Local APIC)
+
+2004/03/23  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/it.po, share/po/uk.po, share/po/sv.po,
+	share/po/mk.po, share/po/de.po, share/po/is.po, share/po/hi.po,
+	share/po/nn.po, share/po/et.po, share/po/ca.po, share/po/ja.po,
+	share/po/sq.po: corrected "default:LTR" translations
+
+2004/03/23  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm, install_any.pm, install_steps_interactive.pm: LSB doesn't
+	need kernel 2.4 anymore
+
+	* fs.pm, standalone/diskdrake, standalone/drakupdate_fstab: 
+	  - do not pass options is_removable to set_default_options() since it
+	is not a global options
+	  - replace it with a flag in the part or raw_hd
+	  - set is_removable for part from usb drive
+	  - ensure usb partitions are not checked at boot time (freq field in
+	fstab)
+
+	* keyboard.pm: 
+	  - az, tr and tr_f needs XkbOptions 'caps:shift'
+	  - cleanup
+
+	* share/rpmsrate: replace kernel-enterprise with kernel-i686-up-4GB when
+	BIGMEM
+
+2004/03/23  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/rpmsrate: install ndiswrapper for centrino chipsets
+
+	* standalone/drakgw: fix drakgw removing MII_NOT_SUPPORTED parameter from
+	ifcfg file (#9076)
+
+	* network/netconnect.pm: bewan PCI and ethernet ADSL modems work smoothly
+	with 2.6.x kernels
+	for ISDN, do the same warning popup about supported kernels
+
+	* standalone/drakTermServ (interactive_mode) fix button layout (prevent
+	button collisions and
+	text truncation when translated)
+	(client_type) fix layout (checbox was using too muche vertical space)
+	enable to go in in --testing mode
+
+	* standalone/drakclock: fix packing
+
+	* share/po/gl.po, share/po/cy.po, share/po/fr.po, share/po/ga.po: update
+
+2004/03/22  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/po/fr.po: Fix typo
+
+2004/03/22  Florin Grad  <florin at mandrakesoft.com>
+
+	* network/shorewall.pm: typo (forgot a space)
+	do not write the REDIRECT squid rules if one has only one NIC connected
+	to the net zone
+
+2004/03/22  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po: updated Filipino file
+
+2004/03/22  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakperm (row_setting_dialog) hide dialog's horizontal
+	separator, because
+	create_okcancel() already creates its own separator (Robert Vojta,
+	#9153)
+	add space around main vbox (Robert Vojta, #9153)
+
+	* standalone/drakclock: Look & feel enhancement in order to have a
+	smoother GUI (Robert Vojta,
+	#9141) :
+	  - when not embedded, add 5 pixels border around the whole GUI
+	  - add border around frames contents
+	show timezone in drakclock (Robert Vojta, #9141)
+	(get_servers) sort servers (Robert Vojta, #9139)
+
+	* detect_devices.pm (isTVcard) typo fix
+	fix tv cards managed by cx88 and saa7134 (#9112)
+
+	* harddrake/v4l.pm: fix log message
+
+	* standalone/drakxtv: fix tv cards managed by cx88 and saa7134 (#9112)
+
+	* modules.pm (write_conf) simplify
+	typo fix
+	fix tv cards managed by cx88 and saa7134 (#9112)
+
+	* standalone/logdrake (parse_file) oops, forgot one /o
+	fix non first searches (#9115)
+
+2004/03/21  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: done
+
+2004/03/21  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/03/21  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+	* share/po/ar.po: updated Arabic file
+
+2004/03/21  tbacklund
+
+	* share/po/fi.po: fully translated, was 25 fuzzy, 5 untranslated
+
+2004/03/21  yrahal
+
+	* share/po/ar.po: Committing Arabeyes.org's Arabic translation
+
+2004/03/20  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: updated
+
+2004/03/20  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po: updated Farsi file
+
+2004/03/20  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakxtv: fix error message (#9080)
+	cleanup
+	fix loged message (thx perl_checko)
+	fix #3193:
+	  - use right device
+	  - offer to set the user to config
+	fix saa7134 detection (#5612)
+	testing mode
+	reorder modules import
+	fix wiping out /etc/modules.conf (scott@littlefish.ca)
+	Defaulted canada-cable to NTSC (Scott Mazur (scott@littlefish.ca)
+
+	* standalone/drakvpn: icon
+
+	* harddrake/v4l.pm: sync with 2.6.3-4mdk
+	reorder modules import
+	(config) read current configuration (Scott Mazur <scott@littlefish.ca>)
+	share translation
+	fix setting options for bttv instead of saa7134 (#5612)
+
+	* drakxtools.spec: move draksplash into drakxtools b/c it needs gtk+
+	(#7807)
+	oops, that should have been 25mdk
+
+2004/03/19  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated
+
+2004/03/19  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Update GNOME devel packages
+
+2004/03/19  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/ja.po, share/po/DrakX.pot, share/po/nb.po, share/po/zh_CN.po,
+	share/po/it.po, share/po/eu.po, share/po/ru.po, share/po/uk.po,
+	share/po/cy.po, share/po/mk.po, share/po/af.po, share/po/tl.po,
+	share/po/cs.po: updated pot file
+
+	* share/po/et.po: Updated Estonian file; fixed quote in Hindi file
+	updated pot file
+
+	* share/po/sk.po, share/po/th.po, share/po/hr.po, share/po/sv.po,
+	share/po/ltg.po, share/po/zh_TW.po, share/po/sq.po, share/po/nn.po,
+	share/po/mn.po, share/po/pt.po, share/po/fr.po, share/po/ta.po: updated
+	po files
+	updated po files
+	updated pot file
+
+	* share/po/ms.po, share/po/gl.po, share/po/pt_BR.po, share/po/be.po,
+	share/po/ko.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/uz.po, share/po/ro.po, share/po/sr@Latn.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/br.po, share/po/sl.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/lt.po, share/po/tg.po, share/po/bs.po,
+	share/po/wa.po, share/po/is.po, share/po/az.po, share/po/vi.po,
+	share/po/nl.po, share/po/de.po, share/po/eo.po, share/po/bg.po,
+	share/po/el.po, share/po/uz@Latn.po: updated po files
+	updated pot file
+
+	* standalone/drakvpn: disambiguated string
+
+	* share/po/hi.po: updated po files
+	Updated Estonian file; fixed quote in Hindi file
+	updated pot file
+
+2004/03/19  Pixel  <pixel at mandrakesoft.com>
+
+	* detect_devices.pm: adapt to devfs (?) naming which breaks compatibility
+	(bugzilla #9029)
+
+	* ugtk2.pm: 
+	  - fix _find_imgfile()
+	  - cleanup
+
+	* install_steps.pm: devfs=mount is the default for kernel 2.6 (what about
+	2.4 ?), so one need
+	devfs=nomount when devfsd is not installed
+
+2004/03/19  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/fr.po: update
+
+	* standalone/drakvpn: add hint for translators (cooker-i18n request)
+
+	* drakxtools.spec: 10-24mdk
+
+	* network/netconnect.pm: eagle-usb maintainers ask not to fill dns by
+	default because ppp will
+	return better one through peerdns option
+	dnsX were renamed as dnsServerX+1 long time ago and are managed one
+	step earlier
+
+2004/03/19  Warly  <warly at mandrakesoft.com>
+
+	* standalone/drakboot: add Olivier Blin patches to reread the previous
+	configuration
+
 2004/03/19  Pixel  <pixel at mandrakesoft.com>
 
 	* detect_devices.pm: adapt to devfs (?) naming which breaks compatibility
@@ -29509,7 +29741,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.913 2004/03/18 10:50:17 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.914 2004/03/19 09:52:10 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
