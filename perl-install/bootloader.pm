@@ -689,7 +689,7 @@ sub write_lilo_conf {
 	if ($dev2bios{$dev}) {
 	    my %bios2dev = reverse %dev2bios;
 	    print  F "disk=/dev/$bios2dev{0} bios=0x80";
-	    printf F "disk=/dev/$dev bios=0x%x", 0x80 + $dev2bios{$dev};
+	    printf F "disk=/dev/$dev bios=0x%x\n", 0x80 + $dev2bios{$dev};
 	} elsif ($dev =~ /hd[bde]/) {
 	    print F "disk=/dev/$dev bios=0x80";
 	}
@@ -743,6 +743,7 @@ sub install_lilo {
 
 sub dev2bios {
     my ($hds, $where) = @_;
+    $where =~ s|/dev/||;
     my @dev = map { $_->{device} } @$hds;
     member($where, @dev) or ($where) = @dev; #- if not on mbr, 
 
