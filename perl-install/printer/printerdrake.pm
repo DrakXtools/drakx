@@ -491,7 +491,9 @@ N("Examples for correct IPs:\n") .
 }
 
 sub choose_printer_type {
-    my ($printer, $in) = @_;
+    my ($printer, $in, $upNetwork) = @_;
+    my $havelocalnetworks = check_network($printer, $in, $upNetwork, 1) &&
+	                    printer::detect::getIPsInLocalNetworks() != ();
     $printer->{str_type} = $printer_type_inv{$printer->{TYPE}};
     my $autodetect = 0;
     $autodetect = 1 if $printer->{AUTODETECT};
@@ -501,7 +503,9 @@ sub choose_printer_type {
 		     messages => N("How is the printer connected?") .
 			 if_($printer->{SPOOLER} eq "cups",
 			  N("
-Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")),
+Printers on remote CUPS servers do not need to be configured here; these printers will be automatically detected.")) .
+			 if_(!$havelocalnetworks,
+			  N("\nWARNING: No local network connection active, remote printers can neither be detected nor tested!")),
 		     },
 		   [
 		    { val => \$printer->{str_type},
@@ -3279,7 +3283,7 @@ You can also type a new name or skip this printer.",
 
 sub start_network {
     my ($in, $upNetwork) = @_;
-    my $_w = $in->wait_message(N("Configuration of a remote printer"), 
+    my $_w = $in->wait_message(N("Printerdrake"), 
 			      N("Starting network..."));
     if ($::isInstall) {
 	return ($upNetwork and 
@@ -3356,8 +3360,9 @@ sub check_network {
     if (printer::detect::network_running()) { return 1 }
 
     # The network is configured now, start it.
-    if (!start_network($in, $upNetwork) && !$dontconfigure) {
-	$in->ask_warn(N("Configuration of a remote printer"), 
+    if (!start_network($in, $upNetwork) && 
+	(!$dontconfigure || $::isInstall)) {
+	$in->ask_warn(N("Warning"), 
 ($::isInstall ?
 N("The network configuration done during the installation cannot be started now. Please check whether the network is accessable after booting your system and correct the configuration using the %s Control Center, section \"Network & Internet\"/\"Connection\", and afterwards set up the printer, also using the %s Control Center, section \"Hardware\"/\"Printer\"", $shortdistroname, $shortdistroname) :
 N("The network access was not running and could not be started. Please check your configuration and your hardware. Then try to configure your remote printer again.")));
@@ -3369,8 +3374,8 @@ N("The network access was not running and could not be started. Please check you
     # The daemon is not really restarted but only SIGHUPped to not
     # interrupt print jobs.
 
-    my $_w = $in->wait_message(N("Configuration of a remote printer"), 
-			      N("Restarting printing system..."));
+    my $_w = $in->wait_message(N("Printerdrake"), 
+                               N("Restarting printing system..."));
 
     return printer::main::SIGHUP_daemon($printer->{SPOOLER});
 
@@ -3762,12 +3767,13 @@ sub mainwindow_interactive {
 	my ($queue, $newcursorpos) = ('', 0);
 	# If networking is configured, start it, but don't ask the
 	# user to configure networking. We want to know whether we
-	# have a local network, to suppress some buttons in the
-	# recommended mode
-	my $havelocalnetworks_or_expert =
-	    $printer->{expert} ||
+	# have a local network to suppress some buttons when there is
+	# no network
+	my $havelocalnetworks =
 	    check_network($printer, $in, $upNetwork, 1) && 
 	    printer::detect::getIPsInLocalNetworks() != ();
+	my $havelocalnetworks_or_expert =
+	    $printer->{expert} || $havelocalnetworks;
 #	$in->set_help('mainMenu') if $::isInstall;
 	# Initialize the cursor position
 	if ($cursorpos eq "::" && 
@@ -3797,7 +3803,8 @@ sub mainwindow_interactive {
 	# Show the main dialog
 	$in->ask_from_({ 
 	    title => N("Printerdrake"),
-	    messages => N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it."),
+	    messages => if_(!$noprinters, N("The following printers are configured. Double-click on a printer to change its settings; to make it the default printer; or to view information about it. ")) .
+		        if_(!$havelocalnetworks, N("\nWARNING: No local network connection active, remote printers can neither be detected nor tested!")),
 	    cancel => (""),
 	    ok => ("") },
 	    # List the queues
@@ -3815,7 +3822,7 @@ sub mainwindow_interactive {
 		    },
 		val => N("Add a new printer") },
 	      ($printer->{SPOOLER} eq "cups" &&
-	       $havelocalnetworks_or_expert ?
+	       $havelocalnetworks ?
 	       ({ clicked_may_quit =>
 		      sub { 
 			  # Save the cursor position
@@ -3823,10 +3830,12 @@ sub mainwindow_interactive {
 			  $menuchoice = '@refresh';
 			  1;
 		      },
-		  val => ($#printerlist < 0 ?
+		  val => ($noprinters ?
 			  N("Display all available remote CUPS printers") :
-			  N("Refresh printer list (to display all available remote CUPS printers)")) },
-		{ clicked_may_quit =>
+			  N("Refresh printer list (to display all available remote CUPS printers)")) }) : ()),
+	      ($printer->{SPOOLER} eq "cups" &&
+	       $havelocalnetworks_or_expert ?
+	       ({ clicked_may_quit =>
 		      sub { 
 			  # Save the cursor position
 			  $cursorpos = $menuchoice;
@@ -4011,7 +4020,7 @@ sub add_printer {
 	    # drakgw.
 	    $printer->{expert} or $printer->{TYPE} = "LOCAL";
 	  step_1:
-	    !$printer->{expert} or choose_printer_type($printer, $in) or
+	    !$printer->{expert} or choose_printer_type($printer, $in, $upNetwork) or
 		goto step_0;
 	  step_2:
 	    setup_printer_connection($printer, $in, $upNetwork) or 
@@ -4076,7 +4085,7 @@ sub add_printer {
     } else {
 	$printer->{expert} or $printer->{TYPE} = "LOCAL";
 	wizard_welcome($printer, $in, $upNetwork) or return 0;
-	!$printer->{expert} or choose_printer_type($printer, $in) or return 0;
+	!$printer->{expert} or choose_printer_type($printer, $in, $upNetwork) or return 0;
 	setup_printer_connection($printer, $in, $upNetwork) or return 0;
 	if ($printer->{expert} || $printer->{MANUAL} ||
 	    $printer->{MORETHANONE}) {
@@ -4232,7 +4241,7 @@ What do you want to modify on this printer?",
 
 	    # Do the chosen task
 	    if ($modify eq N("Printer connection type")) {
-		choose_printer_type($printer, $in) &&
+		choose_printer_type($printer, $in, $upNetwork) &&
 		    setup_printer_connection($printer, $in, $upNetwork) &&
 		    configure_queue($printer, $in);
 	    } elsif ($modify eq N("Printer name, description, location")) {
