@@ -120,12 +120,6 @@ setMouseLive(display, type, emulate3buttons)
       }
     }
   }
-
-void
-XSetInputFocus(window)
-  int window
-  CODE:
-  XSetInputFocus(GDK_DISPLAY(), window, RevertToParent, CurrentTime);
 ';
 
 print '
