@@ -84,19 +84,19 @@ sub set_default_spooler ($) {
 
 sub restart_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service restart")
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart")
 	|| die "Could not restart $service!";
 }
 
 sub start_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service start")
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start")
 	|| die "Could not start $service!";
 }
 
 sub stop_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service stop")
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop")
 	|| die "Could not stop $service!";
 }
 
