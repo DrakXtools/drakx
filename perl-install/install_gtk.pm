@@ -129,17 +129,18 @@ sub create_steps_window {
     $o->{steps_window} and $o->{steps_window}->destroy;
     my $w = bless {}, 'ugtk2';
     $w->{rwindow} = $w->{window} = Gtk2::Window->new('toplevel');
-    $w->{rwindow}->set_uposition(lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 160);
+    $w->{rwindow}->set_uposition(lang::text_direction_rtl() ? ($::rootwidth - $::stepswidth - 8) : 8, 150);
     $w->{rwindow}->set_size_request($::stepswidth, -1);
     $w->{rwindow}->set_name('Steps');
     $w->{rwindow}->set_title('skip');
 
     $steps{$_} ||= gtkcreate_pixbuf("steps_$_") foreach qw(on off);
+    my $category = sub { gtkset_markup(Gtk2::Label->new, '<span foreground="gray81">' . $_[0] . '</span>') };
 
-    gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = Gtk2::Label->new(N("System installation")), '');
+    gtkpack__(my $vb = Gtk2::VBox->new(0, 3), $steps{inst} = $category->(N("System installation")), '');
     foreach (grep { !eval $o->{steps}{$_}{hidden} } @{$o->{orderedSteps}}) {
 	$_ eq 'setRootPassword'
-	  and gtkpack__($vb, '', '', $steps{conf} = Gtk2::Label->new(N("System configuration")), '');
+	  and gtkpack__($vb, '', '', $steps{conf} = $category->(N("System configuration")), '');
 	$steps{steps}{$_} = { img => gtkcreate_img('steps_off.png'),
 			      txt => Gtk2::Label->new(translate($o->{steps}{$_}{text})) };
 	gtkpack__($vb, gtkpack__(Gtk2::HBox->new(0, 7), $steps{steps}{$_}{img}, $steps{steps}{$_}{txt}));
