@@ -147,7 +147,9 @@ sub set {
 
     sshd_config_UsePAM($kind ne 'local');
 
-    if ($kind eq 'SmartCard') {
+    if ($kind eq 'local') {
+	set_pam_authentication();
+    } elsif ($kind eq 'SmartCard') {
 	$in->do_pkgs->install('castella-pam');
 	set_pam_authentication('castella');
     } elsif ($kind eq 'LDAP') {
@@ -349,14 +351,20 @@ sub set_pam_authentication {
 		#- first removing previous config
 		$_ = '';
 	    }
-	    if ($module eq 'pam_unix' && $special{$type} && @{$special{$type}}) {
+	    if ($module eq 'pam_unix' && $special{$type}) {
 		my @para_for_last = 
-		  $type eq 'auth' ? qw(likeauth nullok use_first_pass) :
-		  $type eq 'account' ? qw(use_first_pass) : @{[]};
+		    $type eq 'auth' ? qw(likeauth nullok use_first_pass) :
+		    $type eq 'account' ? qw(use_first_pass) : @{[]};
 		@para = difference2(\@para, \@para_for_last);
 
-		my ($before, $after) = partition { member($_, 'krb5', 'castella') } @{$special{$type}};
-		my @l = ((map { [ "pam_$_" ] } @$before),
+		my ($before_noask, $ask) = partition { $_ eq 'castella' } @{$special{$type}};
+		my ($before, $after) = partition { $_ eq 'krb5' } @$ask;
+
+		if (!@$ask) {
+		    @para_for_last = grep { $_ ne 'use_first_pass' } @para_for_last;
+		}
+
+		my @l = ((map { [ "pam_$_" ] } @$before_noask, @$before),
 			 [ 'pam_unix', @para ],
 			 (map { [ "pam_$_" ] } @$after),
 			 );
