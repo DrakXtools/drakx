@@ -37,7 +37,7 @@ my @kernels = grep { /^2/ } all('kernel/all.kernels');
 
 
 my @all_images = (
-		  if_($arch =~ /i.86/, 'cdrom.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img'),
+		  if_($arch =~ /i.86/, 'cdrom.img', 'pcmcia.img', 'isolinux', 'boot.iso', 'hd_grub.img', 'network.img', 'network_drivers.img'),
 		  if_($arch =~ /x86_64/, 'cdrom.img', 'isolinux', 'boot.iso'),
 		  if_($arch =~ /ia64/, 'all.img'),
 		 );
@@ -57,6 +57,9 @@ foreach my $img (@images) {
 	}
     } elsif ($img =~ /boot.iso/) {
 	boot_iso($img);
+    } elsif ($img =~ /drivers/) {
+	drivers($type, $I, "$img-$_") foreach @kernels;
+	rename("$img-$main", $img);
     } elsif ($extension eq 'rdz') {
 	initrd($tmp_mnt_initrd, $type, $I, "$img-$_") foreach @kernels;
     } elsif ($extension eq 'img') {
@@ -767,4 +770,22 @@ sub boot_iso {
 
     _ "mkisofs -r -f -J -cache-inodes -V 'Mdk Boot ISO' -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $iso .boot_iso";
     rm_rf('.boot_iso');
+}
+
+sub drivers {
+    my ($type, $I, $img) = @_;
+
+    my $tmp = "$ENV{HOME}/tmp/initrd";
+
+    _ "dd if=/dev/zero of=$img bs=1k count=1440";
+    _ "$mke2fs $img";
+    _ "$sudo mount -t ext2 $img $tmp_mnt -o loop";
+
+    my ($ext) = $img =~ /img-(.*)/ or die "bad image name ($img)";
+    _ "$sudo cp -f kernel/all.modules$I/$ext/${type}_modules.mar $tmp_mnt/modules$I.mar";
+
+    _ "sync";
+    _ "df $tmp_mnt";
+
+    _ "$sudo umount $tmp_mnt";
 }
