@@ -176,7 +176,7 @@ sub selectKeyboard {
     }
     return if !$::expert && !$clicked;
 
-    $o->selectKeyboard;
+    $o->selectKeyboard($clicked);
 
     #- if we go back to the selectKeyboard, you must rewrite
     addToBeDone {
