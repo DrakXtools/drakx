@@ -735,6 +735,7 @@ sub getAndSaveAutoInstallFloppy {
 	output("$mountdir/auto_inst.cfg", g_auto_install($replay));
 
 	fs::umount($mountdir);
+	c::del_loop($dev);
         commands::dd("if=$imagefile", "of=$where", "bs=1440", "count=1024");
     }
     1;
