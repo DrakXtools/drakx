@@ -197,13 +197,13 @@ sub remove_probeall {
     log::l("setting probeall $alias to @$l");
 }
 
-sub remove_alias($) {
+sub remove_alias {
     my ($name) = @_;
     log::l(qq(removing alias "$name"));
     remove_alias_regexp("^$name\$");
 }
 
-sub remove_alias_regexp($) {
+sub remove_alias_regexp {
     my ($aliased) = @_;
     log::l(qq(removing all aliases that match "$aliased"));
     foreach (keys %conf) {
@@ -215,7 +215,7 @@ sub remove_alias_regexp($) {
     }
 }
 
-sub remove_alias_regexp_byname($) {
+sub remove_alias_regexp_byname {
     my ($name) = @_;
     log::l(qq(removing all aliases which names match "$name"));
     foreach (keys %conf) {
@@ -223,7 +223,7 @@ sub remove_alias_regexp_byname($) {
     }
 }
 
-sub remove_module($) {
+sub remove_module {
     my ($name) = @_;
     remove_alias($name);
     log::l("removing module $name");
