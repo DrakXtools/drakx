@@ -1,3 +1,85 @@
+2001/01/11  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm (autologin): moved to package any
+
+	* interactive_gtk.pm (ask_from_entries_refW): apply "format" on label when
+	icon is missing for iconlist
+	(ask_from_entries_refW): handle "canceled" callback. Permits to overrule
+	the cancel.
+
+	* install_steps.pm (configureX): call directly $o->pkg_install, no need to
+	add 'XFree86-' at
+	the beginning
+	(addUser): use any::write_passwd_user
+	(setRootPassword): use any::write_passwd_user
+	(configureX): fix bad $install given to Xconfigurator::main
+
+	* any.pm (write_passwd_user): add or update an entry in /etc/passwd
+	(ask_users): created, interactively ask users to add (used in
+	adduserdrake
+	and install)
+	(allocUsers, addUsers): changed the prototype
+	(setupBootloader): grep out fat partitions for the "Boot device"
+	propositions (people are too stupid)
+
+	* my_gtk.pm (main): third argument is a function to call before leaving in
+	case of
+	"cancel" clicked.
+
+	* install_any.pm (g_auto_install): deep copy of $o->{users} because we're
+	modifying it
+
+	* Makefile.config (STANDALONEPMS): remove netdrake (which is deprecated)
+
+	* install_steps_interactive.pm (addUser): use any::ask_users
+
+	* standalone/adduserdrake: use any::ask_users
+
+	* Xconfig.pm (getinfoFromDDC): removed devices::make("/dev/zero") (now in
+	install2::main)
+
+	* install2.pm (main): move devices::make("/dev/zero") needed by ddcxinfos
+	here
+
+	* interactive.pm (ask_from_entries_refH_powered_normalize): "canceled"
+	callback defaults
+	to "sub { 0 }"
+
+2001/01/10  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* mdk-stage1/dietlibc/dietfeatures.h: tweak dietlibc config to get minimal
+	size
+
+	* mdk-stage1/dietlibc/lib/vsscanf.c, mdk-stage1/dietlibc/lib/ttyname.c:
+	remove warnings from compile
+
+2001/01/10  Pixel  <pixel@mandrakesoft.com>
+
+	* interactive_gtk.pm (ask_from_entries_refW): add handling of 'changed'
+	callback on clist/list/ctree
+
+	* install_steps.pm (addUser): use any::pack_passwd
+	(setRootPassword): use any::unpack_passwd and any::pack_passwd
+
+	* Xconfigurator.pm (cardConfiguration): adapt for $install which is
+	generic
+	(autologin): use $install which is now generic
+
+	* install_steps_interactive.pm (selectLanguage): many_languages choice
+	moved there as advanced
+
+	* my_gtk.pm (create_packtable): yet another try to have something nice :)
+	!! uses Gtk::Table::attach_raw which is available in
+	perl-GTK-0.7004-6mdk !!
+	(create_box_with_title): with the size given to set_usize for the scroll
+	containing the text widget in case of long text. and don't let the
+	scroll
+	grow.
+	(gtktext_insert): remove adding an ending "\n" (no more needed?)
+
+	* any.pm (setAutologin): cleanup
+	(pack_passwd, unpack_passwd): created
+
 2001/01/10  dam's  <damien@mandrakesoft.com>
 
 	* install_steps_interactive.pm: corrected last message . firewall
@@ -136,24 +218,6 @@
 
 	* install_any.pm (getHds): test_for_bad_drives called on hard drives
 	(getHds): ensure $o->{hds} is not set until the hard drives are checked
-
-2001/01/06  Pixel  <pixel@mandrakesoft.com>
-
-	* ChangeLog: New snapshot uploaded
-	New snapshot uploaded
-	New snapshot uploaded
-
-2001/01/06  Pixel  <pixel@mandrakesoft.com>
-
-	* ChangeLog: New snapshot uploaded
-	New snapshot uploaded
-	New snapshot uploaded
-
-2001/01/06  Pixel  <pixel@mandrakesoft.com>
-
-	* ChangeLog: New snapshot uploaded
-	New snapshot uploaded
-	New snapshot uploaded
 
 2001/01/06  Pixel  <pixel@mandrakesoft.com>
 
