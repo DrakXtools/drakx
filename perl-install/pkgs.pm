@@ -293,10 +293,6 @@ sub unselectPackage($$;$) {
     }
     1;
 }
-sub togglePackageSelection($$;$) {
-    my ($packages, $pkg, $o_otherOnly) = @_;
-    $pkg->flag_selected ? unselectPackage($packages, $pkg, $o_otherOnly) : selectPackage($packages, $pkg, 0, $o_otherOnly);
-}
 sub setPackageSelection($$$) {
     my ($packages, $pkg, $value) = @_;
     $value ? selectPackage($packages, $pkg) : unselectPackage($packages, $pkg);
