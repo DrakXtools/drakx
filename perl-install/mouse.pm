@@ -32,7 +32,9 @@ my %mice =
      [ 5, 'ps/2', 'MouseManPlusPS/2', N_("Logitech MouseMan+") ],
      [ 5, 'imps2', 'IMPS/2', N_("Generic PS2 Wheel Mouse") ],
      [ 5, 'ps/2', 'GlidePointPS/2', N_("GlidePoint") ],
-     [ 5, 'imps2', c::kernel_version() =~ /^\Q2.4/ ? 'auto' : 'ExplorerPS/2', N_("Automatic") ],
+        if_(c::kernel_version() !~ /^\Q2.6/,
+     [ 5, 'imps2', 'auto', N_("Automatic") ],
+        ),
      '',
      [ 5, 'ps/2', 'ThinkingMousePS/2', N_("Kensington Thinking Mouse") ],
      [ 5, 'netmouse', 'NetMousePS/2', N_("Genius NetMouse") ],
@@ -79,6 +81,13 @@ my %mice =
      [ 3, 'Busmouse', 'BusMouse', N_("3 buttons") ],
      [ 3, 'Busmouse', 'BusMouse', N_("3 buttons with Wheel emulation"), 'wheel' ],
    ] ],
+
+    if_(c::kernel_version() =~ /^\Q2.6/,
+ N_("Universal") =>
+ [ [ 'input/mice' ],
+   [ [ 7, 'ps/2', 'ExplorerPS/2', N_("Any PS/2 & USB mice") ],
+   ] ],
+    ),
 
  N_("none") =>
  [ [ 'none' ],
@@ -271,11 +280,18 @@ sub detect() {
 			      "busmouse|1 button");
     }
 
-    my $fast_mouse_probe = sub {
+    my @wacom = probe_wacom_devices();
+
+    if (c::kernel_version() =~ /^\Q2.6/) {
+	modules::get_probeall("usb-interface") and modules::load('hid');
+	if (cat_('/proc/bus/input/devices') =~ /^H: Handlers=mouse/m) {
+	    return fullname2mouse('Universal|Any PS/2 & USB mice', wacom => \@wacom);
+	}
+    } else {
 	my $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
 
 	#- workaround for some special case were mouse is openable 1/2.
-	unless ($auxmouse) {
+	if (!$auxmouse) {
 	    $auxmouse = detect_devices::hasMousePS2("psaux") && fullname2mouse("PS/2|Automatic", unsafe => 0);
 	    $auxmouse and detect_devices::hasMousePS2("psaux"); #- fake another open in order for XFree to see the mouse.
 	}
@@ -284,24 +300,17 @@ sub detect() {
 	    sleep 2;
 	    if (my (@l) = detect_devices::usbMice()) {
 		log::l(join('', "found usb mouse $_->{driver} $_->{description} (", if_($_->{type}, $_->{type}), ")")) foreach @l;
-		eval { modules::load(qw(hid mousedev usbmouse)) };
-		if (!$@ && detect_devices::tryOpen("usbmouse")) {
+		if (eval { modules::load(qw(hid mousedev usbmouse)); detect_devices::tryOpen("usbmouse") }) {
 		    my $mouse = fullname2mouse($l[0]{driver} =~ /Mouse:(.*)/ ? $1 : "USB|Wheel");
-		    $auxmouse and $mouse->{auxmouse} = $auxmouse; #- for laptop, we kept the PS/2 as secondary (symbolic).
-		    return $mouse;
+		    #- for laptop, we kept the PS/2 as secondary (symbolic).
+		    return { wacom => \@wacom, if_($auxmouse, auxmouse => $auxmouse), %$mouse };
 		}
 		eval { modules::unload(qw(usbmouse mousedev hid)) };
 	    }
 	} else {
 	    log::l("no usb interface found for mice");
 	}
-	$auxmouse;
-    };
-
-    my @wacom = probe_wacom_devices();
-
-    if (my $mouse = $fast_mouse_probe->()) {
-	return { wacom => \@wacom, %$mouse };
+	return { wacom => \@wacom, %$auxmouse };
     }
 
     #- probe serial device to make sure a wacom has been detected.
