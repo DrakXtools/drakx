@@ -14,5 +14,5 @@ foreach (keyboard::xmodmaps()) {
     }
 }
 
-system("tar cfI keymaps.tar.bz2 -C keymaps usr") == 0 or die;
+system("tar cfj keymaps.tar.bz2 -C keymaps usr") == 0 or die;
 system("rm -rf keymaps");
