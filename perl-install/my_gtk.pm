@@ -10,7 +10,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title create_treeitem) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkpack__ gtkpack2 gtkpack2_ gtkpack2__ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_background gtkset_default_fontset gtkctree_children gtkxpm gtkcreate_xpm) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -90,6 +90,11 @@ sub gtksignal_connect($@) {
     $w->signal_connect(@_);
     $w
 }
+sub candefault {
+    my $w = shift;
+    $w->can_default(1);
+    $w
+}
 sub gtkpack($@) {
     my $box = shift;
     gtkpack_($box, map {; 1, $_ } @_);
@@ -104,6 +109,24 @@ sub gtkpack_($@) {
 	my $l = $_[$i + 1];
 	ref $l or $l = new Gtk::Label($l);
 	$box->pack_start($l, $_[$i], 1, 0);
+	$l->show;
+    }
+    $box
+}
+sub gtkpack2($@) {
+    my $box = shift;
+    gtkpack2_($box, map {; 1, $_ } @_);
+}
+sub gtkpack2__($@) {
+    my $box = shift;
+    gtkpack2_($box, map {; 0, $_ } @_);
+}
+sub gtkpack2_($@) {
+    my $box = shift;
+    for (my $i = 0; $i < @_; $i += 2) {
+	my $l = $_[$i + 1];
+	ref $l or $l = new Gtk::Label($l);
+	$box->pack_start($l, $_[$i], 0, 0);
 	$l->show;
     }
     $box
@@ -206,10 +229,18 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub create_okcancel($;$$) {
     my ($w, $ok, $cancel) = @_;
 
-    gtkadd(create_hbox(),
-	  gtksignal_connect($w->{ok} = new Gtk::Button($ok || _("Ok")), "clicked" => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit }),
-	  ($ok xor $cancel) ? () : gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit }),
-	 );
+    if ($::isStandalone) {
+	gtkadd(create_hbox_(),
+	       ($ok xor $cancel) ? () : candefault(gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit })),
+	       candefault(gtksignal_connect($w->{ok} = new Gtk::Button($ok || _("Next ->")), "clicked" => $w->{ok_clicked} || sub { Gtk->main_quit })),
+	      );
+    }
+    else {
+	gtkadd(create_hbox(),
+	       gtksignal_connect($w->{ok} = new Gtk::Button($ok || _("Ok")), "clicked" => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk->main_quit }),
+	       ($ok xor $cancel) ? () : gtksignal_connect(new Gtk::Button($cancel || _("Cancel")), "clicked" => $w->{cancel_clicked} || sub { $w->{retval} = 0; Gtk->main_quit }),
+	      );
+    }
 }
 
 sub create_box_with_title($@) {
@@ -292,6 +323,11 @@ sub create_packtable($@) {
 sub create_hbox {
     my $w = new Gtk::HButtonBox;
     $w->set_layout(-spread);
+    $w;
+}
+sub create_hbox_ {
+    my $w = new Gtk::HButtonBox;
+    $w->set_layout(-edge);
     $w;
 }
 sub create_vbox {

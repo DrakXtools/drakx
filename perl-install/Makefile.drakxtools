@@ -29,8 +29,7 @@ install:
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
 
 	for i in *.pm ; do perl -pe '$$_ = "\n" if /\s*use\s+(diagnostics|vars|strict)/' $$i > $(LIBDEST)/$$i ; done
-	install -m 644 share/isdndb.net $(SYSCONFNETDEST)/isdn_db.txt
-	install -m 744 share/makedev.sh $(SYSCONFNETDEST)
+	install -m 644 share/isdndb.net $(LIBDEST)
 	install -m 644 share/{MonitorsDB,CardsNames,Cards+} $(LIBX11DEST)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/po/*.po $(LIBDEST)/po
