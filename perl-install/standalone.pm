@@ -2,7 +2,7 @@ package standalone; # $Id$
 
 use c;
 use strict;
-use common;
+use common qw(N);
 use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
@@ -33,7 +33,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 ");
 
-my $progname = basename $0;
+my $progname = common::basename($0);
 
 my %usages = (
            'diskdrake' => "[--{" . join(",", qw(hd nfs smb dav removable fileshare)) . "}]",
