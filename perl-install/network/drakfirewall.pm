@@ -1,7 +1,7 @@
 package network::drakfirewall; # $Id$
 
-
-
+use strict;
+use diagnostics;
 
 use network::shorewall;
 use common;
