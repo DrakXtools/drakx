@@ -1,3 +1,390 @@
+2005/03/31  Frederic Crozat  <fcrozat at mandrakesoft.com>
+
+	* share/rpmsrate: Add gpdf and eog to GNOME packages
+
+2005/03/31  mareklaane
+
+	* share/po/et.po: Updated translation.
+
+2005/03/31  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: add some comment for post 10.2
+	do not use ifplugd for wireless cards (and don't allow users to enable
+	it for wireless cards in drakconnect)
+
+2005/03/31  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/az.po, share/po/tr.po: small changes
+
+	* share/po/vi.po: updated Vietnamese file
+
+	* share/po/es.po: updated Spanish file
+
+2005/03/31  pmaryanov
+
+	* share/po/ru.po: fixed drakperm:24 and drakperm:23
+	updated drakperm
+
+2005/03/31  Pixel  <pixel at mandrakesoft.com>
+
+	* diskdrake/interactive.pm: useSupermount is no more a boolean, don't let
+	the "More" dialog box set it to 1 when it is magicdev
+
+	* standalone/drakauth, authentication.pm: don't display description for
+	non proposed authentication kinds
+
+	* network/drakfirewall.pm: fix typo (bugzilla #15116)
+
+	* lang.pm: better locale-policy.fdi (bugzilla #15025)
+
+	* rescue/list: disambiguate (esp for Config.pm which now has
+	Net/Config.pm)
+
+	* any.pm: the wmaker line didn't ask the window manager to logout, but to
+	rerun itself, so removing it (bugzilla #15087)
+
+2005/03/31  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/03/31  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* harddrake/data.pm: do not detect USB joystics as UPSes (#15102)
+
+	* share/po/az.po: update (Ugur Eminli <system.virus@gmail.com>)
+
+	* standalone/harddrake2: do not try to install packages that are not
+	availlable (#15106)
+	do no try to install too generic hw packages (#15101)
+
+2005/03/30  mbukovjan
+
+	* share/po/cs.po: Updated Czech translation.
+
+2005/03/30  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: fix speedtouch microcode url (#15095)
+
+	* network/adsl.pm: eagle-usb: try to use the country specific CMV
+	fctStartAdsl is moved in /sbin too
+
+2005/03/30  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po, share/po/ja.po, share/po/pl.po, share/po/fr.po,
+	share/po/wa.po: updated Japanese, Polish, Spanish, French and Walloon
+	files
+
+2005/03/30  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: updates:)
+
+2005/03/30  pmaryanov
+
+	* share/po/ru.po: updated drakbackup
+	multiply fixes translation of 'Service'
+	s/search/Search
+	fixed '...mail alert...'
+
+2005/03/30  rstandtke
+
+	* share/po/de.po: some fixes
+	some additions
+
+2005/03/30  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/pa_IN.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/am.po, share/po/lt.po, share/po/cy.po,
+	share/po/tg.po, share/po/bs.po, share/po/fur.po, share/po/mk.po,
+	share/po/wa.po, share/po/is.po, share/po/hi.po, share/po/af.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/nl.po,
+	share/po/tl.po, share/po/de.po, share/po/cs.po, share/po/uz@Latn.po: 
+	  - merge in new strings from drakroam
+	  - auto translate "RAID controllers" for harddrake
+	  - manual updates for af, br & fr
+
+	* share/po/Makefile: fix makefile
+
+	* drakxtools.spec: update 10.2-16mdk's changelog
+	update 10.2-16mdk's changelog
+	10.2-16mdk
+
+	* share/po/sr.po, share/po/ro.po, share/po/sr@Latn.po, share/po/sq.po,
+	share/po/tr.po, share/po/mn.po, share/po/az.po, share/po/ta.po,
+	share/po/eo.po, share/po/el.po, share/po/bg.po: manual updates
+	  - merge in new strings from drakroam
+	  - auto translate "RAID controllers" for harddrake
+	  - manual updates for af, br & fr
+
+	* harddrake/data.pm: megaraid controllers are listed as RAID ones now
+	3ware controllers are listed as RAID ones now
+	ensure we detect all known sound cards
+	do not list hardware controllers in unknown section
+	ensure we detect all known SATA controllers
+
+2005/03/30  willysr
+
+	* share/po/id.po: Updated
+
+2005/03/29  mareklaane
+
+	* share/po/et.po: Updated translation.
+
+2005/03/29  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm: fix NET_INTERFACE for sagem modems not using
+	pppoa
+
+	* detect_devices.pm: detect more Bewan devices
+
+	* standalone/net_applet: really load network configuration at start
+
+2005/03/29  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/es.po, share/po/fr.po: updated French and Spanish files
+
+	* Makefile: removed pa_IN.po and ta.po from install due to font problems
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/pa_IN.po: Added Punjabi file
+
+	* share/po/it.po: updated Italian file
+
+2005/03/29  Per Øyvind Karlsen <peroyvind at linux-mandrake.com>
+
+	* share/po/nb.po: Updates from Eskild Hustvedt
+
+2005/03/29  pmaryanov
+
+	* share/po/ru.po: fixed Uninstall font
+
+2005/03/29  Pixel  <pixel at mandrakesoft.com>
+
+	* pkgs.pm: if i686-up-4GB is not there we don't have pae, fallback on
+	i586-up-1GB
+
+	* lang.pm: revert to standard size (as told on bugzilla #14988 to revert
+	#13809)
+
+	* lvm.pm: ensure we have a {lv_name} (esp. for auto_installs)
+
+	* standalone/service_harddrake, modules.pm, standalone/harddrake2,
+	harddrake/data.pm: 
+	  - disable imm/ppa probe during install since it causes some rubbish to
+	be printed (bugzilla #12560)
+	  - add an option in harddrake to probe imm/ppa
+
+2005/03/29  Reinout van Schouwen  <reinout at cs.vu.nl>
+
+	* share/po/nl.po: Reinout van Schouwen <reinout@cs.vu.nl>:
+	Updated Dutch translation-
+
+2005/03/29  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/detect.pm: 
+	  - Let IOCTL detection of an USB printer not get accepted if there is
+	no
+	relevant item at all in the ID string, to avoid mis-detection of some
+	USB
+	  keyboards as printers.
+
+2005/03/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: move drakroam from drakxtools-newt into drakxtools
+	since it requires gtk+
+	fix tools' crash when drakconf is not installing (#13392)
+	10.2-15mdk
+
+	* docs/HACKING: update package list regarding gtk+ bindings
+
+	* standalone/drakroam (UpdateStatus) fix layout
+	translate columns' headers
+
+	* any.pm (selectLanguage) remove unused variable
+	(selectLanguage) let "unicode" checkbox be an advanced item at both
+	install
+	time and in standalone mode
+
+	* detect_devices.pm (floppies) do not use dmidecode for detecting floppies
+	since it's not
+	reliable (#15029)
+
+	* harddrake/data.pm: fix optical mice detection (#15082)
+
+2005/03/28  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/netconnect.pm, network/adsl.pm: eaglectrl is now in /sbin
+	(#15033)
+
+2005/03/28  pmaryanov
+
+	* share/po/ru.po: fixed PPPoE, PPPoA,...
+
+2005/03/27  Alice Lafox  <alice at lafox.com.ua>
+
+	* share/po/ru.po: transl. drakroam messages
+
+2005/03/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/br.po, share/po/pl.po, share/po/ar.po,
+	share/po/he.po: removed "10.1"
+
+2005/03/27  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* rescue/list: Add some more files to the rescue until packdrake works
+	correctly without Compress::Zlib.
+
+2005/03/27  Tibor Pittich  <Tibor.Pittich at phuture.sk>
+
+	* share/po/sk.po: updated slovak translation
+
+2005/03/27  willysr
+
+	* share/po/id.po: Updated
+
+2005/03/26  Funda Wang <fundawang at linux.net.cn>
+
+	* share/advertising/09.pl: Oops, Sorry for the critical typo
+	s/Mandrakelinux 10.1/Mandrakelinux. For advertising.
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/es.po, share/po/lv.po, share/po/hu.po, share/po/fa.po,
+	share/po/id.po, share/po/ru.po, share/po/sc.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/pt.po, share/po/vi.po,
+	share/po/fr.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/bg.po, share/po/cs.po,
+	share/po/el.po, share/po/uz@Latn.po: Oops! Sorry for the critial typo :(
+	s/Mandrakelinux 10.1/Mandrakelinux/. For advertising.
+
+2005/03/26  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/03/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/it.po, share/po/eu.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sc.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/mn.po, share/po/uk.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/hi.po,
+	share/po/af.po, share/po/az.po, share/po/vi.po, share/po/fr.po,
+	share/po/ta.po, share/po/nl.po, share/po/de.po, share/po/tl.po,
+	share/po/eo.po, share/po/bg.po, share/po/cs.po, share/po/el.po,
+	share/po/uz@Latn.po: updated pot file
+
+	* share/po/es.po, share/po/pt.po: updated Spanish file
+	updated pot file
+
+2005/03/25  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* rescue/list.x86_64: speculatively add 32-bit loader in case user wants
+	to use 3rdparty 32-bit
+	binaries depending on it.
+
+	* rescue/tree/usr/share/symlinks: I hate you pixel. ;-) You were not lib64
+	aware of those modern arches. ;-))
+
+	* rescue/make_rescue_img: take care of lib64 platforms, also add msboot
+	restorer to x86_64 tree
+
+	* share/rpmsrate: kdm was the new default
+
+2005/03/25  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sc.po: Added Sardinian file
+
+	* share/po/pt_BR.po: updated Brazilian file
+
+	* share/po/sl.po, share/po/id.po: updated Slovenian file
+
+2005/03/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.2-14mdk
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/ko.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sr.po, share/po/pl.po, share/po/fi.po, share/po/he.po,
+	share/po/da.po, share/po/ca.po, share/po/ar.po, share/po/ltg.po,
+	share/po/nb.po, share/po/ky.po, share/po/uz.po, share/po/ro.po,
+	share/po/zh_TW.po, share/po/zh_CN.po, share/po/sr@Latn.po,
+	share/po/sq.po, share/po/it.po, share/po/eu.po, share/po/es.po,
+	share/po/lv.po, share/po/hu.po, share/po/fa.po, share/po/id.po,
+	share/po/ru.po, share/po/sc.po, share/po/br.po, share/po/sl.po,
+	share/po/nn.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/uk.po, share/po/mn.po, share/po/am.po, share/po/lt.po,
+	share/po/cy.po, share/po/tg.po, share/po/bs.po, share/po/fur.po,
+	share/po/mk.po, share/po/wa.po, share/po/Makefile, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/fr.po, share/po/ta.po, share/po/nl.po,
+	share/po/de.po, share/po/tl.po, share/po/eo.po, share/po/el.po,
+	share/po/bg.po, share/po/cs.po, share/po/uz@Latn.po: 
+	  - add new strings from drakroam
+	  - merge in kde's translations
+
+	* share/po/be.po: fix bogus translations introduced on 6-Aug-2004
+	  - add new strings from drakroam
+	  - merge in kde's translations
+
+	* modules/interactive.pm (load_category__prompt_for_more) enable one to
+	load ide drivers if needed
+
+2005/03/25  willysr
+
+	* share/po/id.po: Fix Typo
+	Fix Typo and Minnor Update
+	Updated
+
+2005/03/24  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_any.pm: nasty warly uses different volume IDs for mini CDs
+
+	* standalone/drakroam: do not crash in Help and About buttons
+
+2005/03/24  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Always write an MD5SUM file
+
+2005/03/24  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* share/po/br.po: update
+	update
+
+	* standalone/drakroam: tag strings as being translatable
+
+	* share/po/pt_BR.po: 
+	  - update from Cristiano Otto Von Trompczynski <cris@mandrakesoft.com>
+	  - fix errors in cataglog
+
 2005/03/24  Olivier Blin <oblin at mandrakesoft.com>
 
 	* standalone/net_applet: force refresh if asked by user from the menu
@@ -47527,7 +47914,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1024 2005/03/23 19:36:02 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1025 2005/03/24 15:32:29 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
