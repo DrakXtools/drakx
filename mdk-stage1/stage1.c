@@ -499,28 +499,28 @@ int mandrake_move_post(void)
         if (boot__real_is_symlink_to_raw) {
                 if (scall(unlink(BOOT_LOCATION), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(RAW_LOCATION_REL "/live_tree_boot", BOOT_LOCATION), "symlink"))
+                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree_boot", BOOT_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 
         if (always__real_is_symlink_to_raw) {
                 if (scall(unlink(ALWAYS_LOCATION), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(RAW_LOCATION_REL "/live_tree_always", ALWAYS_LOCATION), "symlink"))
+                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree_always", ALWAYS_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 
         if (totem__real_is_symlink_to_raw) {
                 if (scall(unlink(TOTEM_LOCATION), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(RAW_LOCATION_REL "/live_tree_totem", TOTEM_LOCATION), "symlink"))
+                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree_totem", TOTEM_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 
         if (main__real_is_symlink_to_raw) {
                 if (scall(unlink(IMAGE_LOCATION_REAL), "unlink"))
                         return RETURN_ERROR;
-                if (scall(symlink(RAW_LOCATION_REL "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
+                if (scall(symlink(IMAGE_LOCATION_REL "/live_tree", IMAGE_LOCATION_REAL), "symlink"))
                         return RETURN_ERROR;
         }
 	return RETURN_OK;
