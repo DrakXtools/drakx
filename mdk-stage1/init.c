@@ -102,13 +102,13 @@ void print_str_init(int fd, char * string)
 	write(fd, string, strlen(string));
 }
 
-
 /* fork to:
  *   (1) watch /proc/kmsg and copy the stuff to /dev/tty4
  *   (2) listens to /dev/log and copy also this stuff (log from programs)
  */
 void doklog()
 {
+#ifdef DO_KLOG
 	fd_set readset, unixs;
 	int in, out, i;
 	int log;
@@ -232,6 +232,7 @@ void doklog()
 				FD_SET(readfd, &unixs);
 		}
 	}
+#endif
 }
 
 
@@ -355,9 +356,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		printf("*** TESTING MODE *** (pid is %d)\n", getpid());
 
 
-	printf("\n\t\t\t\033[1;40mWelcome to \033[1;36mMandrake\033[0;39m Linux\n\n");
-	
 	if (!testing) {
+                mkdir("/proc", 0755);
 		if (mount("/proc", "/proc", "proc", 0, NULL))
 			fatal_error("Unable to mount proc filesystem");
 	}
@@ -369,13 +369,9 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 
 	if (!testing) {
-		fd = open("/dev/tty1", O_RDWR, 0);
+		fd = open("/dev/console", O_RDWR, 0);
 		if (fd < 0)
-			/* try with devfs */
-			fd = open("/dev/vc/1", O_RDWR, 0);
-		
-		if (fd < 0)
-			fatal_error("failed to open /dev/tty1 and /dev/vc/1");
+			fatal_error("failed to open /dev/console");
 		
 		dup2(fd, 0);
 		dup2(fd, 1);
@@ -386,8 +382,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 	/* I set me up as session leader (probably not necessary?) */
 	setsid();
-	if (ioctl(0, TIOCSCTTY, NULL))
-		print_error("could not set new controlling tty");
+//	if (ioctl(0, TIOCSCTTY, NULL))
+//		print_error("could not set new controlling tty");
 
 	if (!testing) {
 		char my_hostname[] = "localhost.localdomain";
@@ -407,18 +403,16 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	   2) we receive a SIGHUP 
 	*/
 
-	printf("Moltes ! MOLTES !\n");
-	printf("\n");
-	printf("Running install...\n"); 
+	printf("init: running %s\n", BINARY); 
 	
 	if (!(installpid = fork())) {
 		/* child */
 		char * child_argv[2];
-		child_argv[0] = "/sbin/stage1";
+		child_argv[0] = BINARY;
 		child_argv[1] = NULL;
 
 		execve(child_argv[0], child_argv, env);
-		printf("error in exec of stage1 :-(\n");
+		printf("error in exec of %s :-(\n", BINARY);
 		return 0;
 	}
 
@@ -429,7 +423,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 	}
 
 	if (!WIFEXITED(wait_status) || (WEXITSTATUS(wait_status) != 0 && WEXITSTATUS(wait_status) != exit_value_proceed)) {
-		printf("install exited abnormally :-( ");
+		printf("exited abnormally :-( ");
 		if (WIFSIGNALED(wait_status))
 			printf("-- received signal %d", WTERMSIG(wait_status));
 		printf("\n");
@@ -445,6 +439,10 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		return 0;
 
 	sync(); sync();
+
+#ifndef DO_KLOG
+        while (1);
+#endif
 
 	printf("sending termination signals...");
 	kill(-1, 15);

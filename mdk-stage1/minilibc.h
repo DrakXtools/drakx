@@ -79,6 +79,7 @@ static inline _syscall2(int,chmod,const char * ,path,mode_t,mode)
 static inline _syscall2(int,sethostname,const char *,name,int,len)
 static inline _syscall2(int,setdomainname,const char *,name,int,len)
 static inline _syscall2(int,setpgid,int,name,int,len)
+static inline _syscall2(int,mkdir,const char *,pathname,mode_t,mode)
 #ifdef __x86_64__
 extern __sighandler_t signal(int signum, __sighandler_t handler);
 #else
