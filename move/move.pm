@@ -506,17 +506,24 @@ sub install2::startMove {
 sub automatic_xconf {
     my ($o) = @_;
 
-    $using_existing_host_config and return;
+    if (!$using_existing_host_config) {
     
-    log::l('automatic XFree configuration');
+	log::l('automatic XFree configuration');
         
-    require Xconfig::default;
-    $o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
+	require Xconfig::default;
+	$o->{raw_X} = Xconfig::default::configure({ KEYBOARD => 'uk' }, $o->{mouse}); #- using uk instead of us for now to have less warnings
     
-    require Xconfig::main;
-    require class_discard;
-    Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
-                                                     { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
+	require Xconfig::main;
+	require class_discard;
+	Xconfig::main::configure_everything_auto_install($o->{raw_X}, class_discard->new, {},
+                                                         { allowNVIDIA_rpms => [], allowATI_rpms => [], allowFB => $o->{allowFB} });
+    
+	my $card = Xconfig::card::from_raw_X($o->{raw_X});
+    }
+
+    if (cat_('/etc/X11/XF86Config-4') =~ /Driver\s*"nvidia"/) {
+        modules::load('nvidia');
+    }
 }
 
 
