@@ -121,6 +121,9 @@ sub choosePartitionsToFormat($$) {
     $o->SUPER::choosePartitionsToFormat($fstab);
 
     my @l = grep { $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
+
+    return if $::beginner && 0 == grep { ! $_->{toFormat} } @l;
+
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
 			       [ map { isSwap($_) ? type2name($_->{type}) . " ($_->{device})" : $_->{mntpoint} } @l ],
 			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
@@ -618,7 +621,7 @@ _("Default") => { val => \$default, type => 'bool' },
 	);
 
 	$o->ask_from_entries_ref('',
-				 _(""),
+				 '',
 				 [ grep_index { even($::i) } @l ],
 				 [ grep_index {  odd($::i) } @l ],
 				 ) or return;
@@ -628,7 +631,13 @@ _("Default") => { val => \$default, type => 'bool' },
 	delete $b->{entries}{$old_name};
 	$b->{entries}{$name} = $e;
     }
-    $o->SUPER::setupBootloader;
+    eval { $o->SUPER::setupBootloader };
+    if ($@) {
+	$o->ask_warn('', 
+		     [ _("Lilo failed. The following error occured:"),
+		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
+	die "already displayed";
+    }
 }
 
 #------------------------------------------------------------------------------

@@ -14,31 +14,6 @@ my %conf;
 my $scsi = 0;
 my %deps = ();
 
-
-#-my @modules_fields = qw(shouldAutoprobe options flags defaultOptions);
-#-my %modules = (
-#-  "8390" => [ 1 ],
-#-  "cdu31a" => [ 0, \@cdu31aOptions ],
-#-  "cm206" => [ 0, \@cm206Options ],
-#-  "de4x5" => [ 1, \@de4x5Options, 'AUTOPROBE', "io=0" ],
-#-  "ds" => [ 1, undef, 0, '' ],
-#-  "fdomain" => [ 1, \@fdomainOptions, 0, '' ],
-#-  "i82365" => [ 1, undef, 0, '' ],
-#-  "isofs" => [ 1, undef, 0, '' ],
-#-  "loop" => [ 1, undef, 0, '' ],
-#-  "lp" => [ 1, undef, 0, '' ],
-#-  "parport" => [ 1, undef, 0, '' ],
-#-  "parport_pc" => [ 1, \@parportPcOptions, 0, "irq=7" ],
-#-  "mcd" => [ 0, \@mcdOptions, 0, '' ],
-#-  "ne" => [ 0, \@neOptions, 'FAKEAUTOPROBE', "io=0x300" ],
-#-  "nfs" => [ 1, undef, 0, '' ],
-#-  "optcd" => [ 0, \@optcdOptions, 0, '' ],
-#-  "pcmcia_core" => [ 1, undef, 0, '' ],
-#-  "sbpcd" => [ 1, \@sbpcdOptions, 0, '' ],
-#-  "smbfs" => [ 1, undef, 0, '' ],
-#-  "tcic" => [ 1, undef, 0, '' ],
-#-  "vfat" => [ 1, undef, 0, '' ],
-#-);
 my @drivers_by_category = (
 [ \&detect_devices::hasEthernet, 'net', 'ethernet', {
   "3c509" => "3com 3c509",
@@ -195,7 +170,7 @@ sub load($;$@) {
     }
 
     $conf{'scsi_hostadapter' . ($scsi++ || '')}{alias} = $name
-      if $type eq 'scsi';
+      if $type && $type eq 'scsi';
 
     $conf{$name}{options} = join " ", @options if @options;
 }

@@ -18,7 +18,7 @@ sub keymap_translate {
 
 
 sub getinfo {
-    my $o = { monitor => { hsyncrange => "30-54" } };
+    my $o = {};
 #    getinfoFromXF86Config($o);
     getinfoFromDDC($o);
     getinfoFromSysconfig($o);

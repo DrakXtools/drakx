@@ -197,6 +197,11 @@ sub allocatePartitions($$) {
 	    for (my $i = 0; $i < @$v; $i += 2) {
 		my $size = $v->[$i + 1] - $v->[$i];
 		$e{size} > $size and next;
+
+		if ($v->[$i] + $e{size} > 1024 * partition_table::cylinder_size($hd)) {
+		    next if $e{mntpoint} eq "/boot" || 
+		            $e{mntpoint} eq "/" && !has_mntpoint("/boot", $hds);
+		}
 		$e{start} = $v->[$i];
 		$e{rootDevice} = $hd->{device};
 		partition_table::adjustStartAndEnd($hd, \%e);

@@ -184,7 +184,6 @@ sub catch_cdie(&&) {
 }
 
 sub cdie($;&) {
-    print "JJJJ\n";
     my ($err, $f) = @_;
     foreach (@common::cdie_catches) {
 	$@ = $err;

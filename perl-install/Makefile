@@ -139,8 +139,8 @@ get_needed_files: $(SO_FILES)
 
 	ln -sf ash $(DEST)/usr/bin/sh
 
-#	 tar xfy locales.tar.bz2 -C $(DEST)
-	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
+	tar xfy locales.tar.bz2 -C $(DEST)
+#	DEST=$(DEST) perl -I. -MForMakefile -e 'locale()'
 	DEST=$(DEST) perl -I. -MForMakefile -e 'xmodmap()'
 
 	cp -a keymaps $(DEST)/usr/share
@@ -150,6 +150,8 @@ get_needed_files: $(SO_FILES)
 	cp compss compssList $(ROOTDEST)/Mandrake/base
 
 	cp -f ../modules/modules.cpio.bz2 $(DEST)/lib/
+	install -d $(DEST)/lib/modules
+	cp -f ../modules/pristine/* $(DEST)/lib/modules
 
 	ln -s install2 $(DEST)/usr/bin/runinstall2
 #	echo -e "#!/bin/sh\n\nexec '/usr/bin/sh'" > $(DEST)/usr/bin/runinstall2
@@ -178,7 +180,7 @@ stage2:
 	$(SUDO) umount /mnt/stage2 ; true
 	dd if=/dev/zero of=$(STAGE2) bs=1M count=14
 	echo y | /sbin/mke2fs $(STAGE2)
-	$(SUDO) mount $(STAGE2) /mnt/stage2 -o loop
+	$(SUDO) mount -t ext2 $(STAGE2) /mnt/stage2 -o loop
 
 #	hack to reduce the STAGE2 image
 	rm $(STAGE2TMP)/usr/X11R6/bin/XF86_VGA16

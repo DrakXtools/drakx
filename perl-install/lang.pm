@@ -174,7 +174,7 @@ sub write {
 
 sub load_po($) {
     my ($lang) = @_;
-    my ($s, $from, $to, $state);
+    my ($s, $from, $to, $state, $fuzzy);
 
     $s .= "package po::I18N;\n";
     $s .= "\%$lang = (";
@@ -183,7 +183,7 @@ sub load_po($) {
     local *F; open F, $f or return;
     foreach (<F>) {
 	/^msgstr/ and $state = 1;
-	/^msgid/ and $state = 2;
+	/^msgid/  && !$fuzzy and $state = 2;
 
 	if (/^(#|$)/ && $state != 3) {
 	    $state = 3;
@@ -192,6 +192,8 @@ sub load_po($) {
 	}
 	$to .= (/"(.*)"/)[0] if $state == 1;
 	$from .= (/"(.*)"/)[0] if $state == 2;
+
+	$fuzzy = /^#, fuzzy/;
     }
     $s .= ");";
     no strict "vars";

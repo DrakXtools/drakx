@@ -18,6 +18,7 @@ use c;
 use common qw(:common :functional);
 
 my $forgetTime = 1000; #- in milli-seconds
+my @grabbed;
 $border = 5;
 
 1;
@@ -49,11 +50,13 @@ sub show($) {
     my ($o) = @_;
     $o->{window}->show;
     $o->{rwindow}->show;
-    $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
+    top(@grabbed)->grab_remove if @grabbed;
+    push(@grabbed, $o->{rwindow}), $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
 }
 sub destroy($) {
     my ($o) = @_;
-    $o->{rwindow}->grab_remove if $my_gtk::grab || $o->{grab};
+    (pop @grabbed)->grab_remove if @grabbed;
+    top(@grabbed)->grab_add if @grabbed;
     $o->{rwindow}->destroy;
     flush();
 }

@@ -17,12 +17,18 @@ sub rooted {
 
     fork and wait, return $? == 0;
     {
-	my ($stdout, $stdoutm);
-	($stdoutm, $stdout, @args) = @args if $args[0] eq ">" || $args[0] eq ">>";
+	my ($stdout, $stdoutm, $stderr, $stderrm);
+	($stdoutm, $stdout, @args) = @args if $args[0] =~ /^>>?$/;
+	($stderrm, $stderr, @args) = @args if $args[0] =~ /^2>>?$/;
 
 	open STDIN, "/dev/null" or die "can't open /dev/null as stdin";
 
-	open STDERR, ">> /dev/tty7" or open STDERR, ">> /tmp/exec.log" or die "run_program can't log :(";
+	if ($stderr) {
+	    $stderrm =~ s/2//;
+	    open STDERR, "$stderrm $root$stderr" or die "run_program can't output in $root$stderr (mode `$stderrm')";
+	} else {
+	    open STDERR, ">> /dev/tty7" or open STDERR, ">> /tmp/exec.log" or die "run_program can't log :(";
+	}
 	if ($stdout) {
 	    open STDOUT, "$stdoutm $root$stdout" or die "run_program can't output in $root$stdout (mode `$stdoutm')";
 	} else {

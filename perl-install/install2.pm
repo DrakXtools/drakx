@@ -175,7 +175,7 @@ $o = $::o = {
     steps        => \%installSteps,
     orderedSteps => \@orderedInstallSteps,
 
-    base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio) ],
+    base => [ qw(basesystem initscripts console-tools mkbootdisk anacron rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup filesystem SysVinit bdflush crontabs dev e2fsprogs etcskel fileutils findutils getty_ps grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup man mkinitrd mingetty modutils mount net-tools passwd procmail procps psmisc mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which cpio perl) ],
 #- for the list of fields available for user and superuser, see @etc_pass_fields in install_steps.pm
 #-    intf => [ { DEVICE => "eth0", IPADDR => '1.2.3.4', NETMASK => '255.255.255.128' } ],
 
@@ -235,7 +235,7 @@ sub selectInstallClass {
     $::expert   = $o->{installClass} eq "expert";
     $::beginner = $o->{installClass} eq "beginner";
     $o->{partitions} ||= $suggestedPartitions{$o->{installClass}};
-    $o->{partitioning}{auto_allocate} = 1;
+    $o->{partitioning}{auto_allocate} ||= -1 if $::beginner;
 
     $o->setPackages(\@install_classes) if $o->{steps}{choosePackages}{entered} >= 1;
 }
@@ -269,7 +269,11 @@ I'll try to go on blanking bad partitions"));
 	die _("An error has occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
     }
 
-    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if $o->{partitioning}{auto_allocate};
+    $o->{partitioning}{auto_allocate} = 0 
+      if $o->{partitioning}{auto_allocate} == -1 && fsedit::get_fstab(@{$o->{hds}}) >= 4;
+
+    eval { fsedit::auto_allocate($o->{hds}, $o->{partitions}) } if 
+      $o->{partitioning}{auto_allocate} && ($o->{partitioning}{auto_allocate} != -1 || $::beginner);
 
     if ($o->{partitioning}{auto_allocated} = ($::beginner && fsedit::get_root_($o->{hds}) && $_[1] == 1)) {
 	install_steps::doPartitionDisks($o, $o->{hds});	
@@ -284,21 +288,19 @@ I'll try to go on blanking bad partitions"));
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
     fsedit::get_root($o->{fstab}) or die _("partitioning failed: no root filesystem");
-
 }
 
 sub formatPartitions {
-    if ($o->{partitioning}{auto_allocated}) { #- if all was auto_allocated, no need to ask, go on!
-	install_steps::choosePartitionsToFormat($o, $o->{fstab});
-    } else {
-	$o->choosePartitionsToFormat($o->{fstab});
-    }
+    $o->choosePartitionsToFormat($o->{fstab});
+
     unless ($::testing) {
 	$o->formatPartitions(@{$o->{fstab}});
 	fs::mount_all([ grep { isExt2($_) || isSwap($_) } @{$o->{fstab}} ], $o->{prefix});
     }
-    mkdir "$o->{prefix}/$_", 0755 foreach qw(dev etc etc/sysconfig etc/sysconfig/network-scripts
-                                             home mnt root tmp var var/tmp var/lib var/lib/rpm);
+    mkdir "$o->{prefix}/$_", 0755 foreach 
+      qw(dev etc etc/sysconfig etc/sysconfig/console etc/sysconfig/network-scripts
+	etc/sysconfig/network-scripts
+	home mnt root tmp var var/tmp var/lib var/lib/rpm);
 }
 
 #------------------------------------------------------------------------------
@@ -477,7 +479,7 @@ sub main {
 	    $o->kill_action;
 	    /^setstep (.*)/ and $o->{step} = $1, $clicked = 1, redo MAIN;
 	    /^theme_changed$/ and redo MAIN;
-	    eval { $o->errorInStep($_) };
+	    eval { $o->errorInStep($_) } unless /^already displayed/;
 	    $@ and next;
 	    $o->{step} = $o->{steps}{$o->{step}}{onError};
 	    redo MAIN;

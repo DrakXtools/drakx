@@ -263,13 +263,32 @@ sub testFinalConfig($;$) {
 
     unlink "$prefix/tmp/.X9-lock";
 
-    my $pid; unless ($pid = fork) {
+    my $f_err = "$prefix/tmp/Xoutput";
+    my $pid;
+    unless ($pid = fork) {
+	open STDERR, ">$f_err";
 	my @l = "X";
 	@l = ($o->{card}{prog}, "-xf86config", $tmpconfig) if $::testing;
 	chroot $prefix if $prefix;
-	exec @l, ":9" or exit 1;
+	exec @l, ":9" or exit 'true';
     }
-    do { sleep 1; } until (c::Xtest(':0'));
+    do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());
+
+    my $b = before_leaving { unlink $f_err };
+    
+    local *F; open F, $f_err;
+    while (<F>) {
+	if (/^Fatal server error/) {
+	    my @msg; while (<F>) {
+		/^$/ and last;
+		push @msg, $_;		
+	    }
+	    $in->ask_warn('', [ _("An error occurred:"), " ",
+				@msg,
+				_("\ntry changing some parameters") ]);
+	    return 0;
+	}
+    }
 
     #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
     #- that way, you can talk to :9 without doing a chroot
@@ -285,7 +304,7 @@ sub testFinalConfig($;$) {
 
 	$ENV{DISPLAY} = ":9";
         gtkset_mousecursor(68);
-        gtkset_background(200, 210, 210);
+        gtkset_background(200 * 256, 210 * 256, 210 * 256);
         my ($h, $w) = Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW)->get_size;
         $my_gtk::force_position = [ $w / 3, $h / 2.4 ];
 	$my_gtk::force_focus = 1;

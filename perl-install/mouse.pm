@@ -7,6 +7,7 @@ use strict;
 #- misc imports
 #-######################################################################################
 use common qw(:common :system :functional);
+use modules;
 use log;
 
 my @mouses_fields = qw(nbuttons device MOUSETYPE XMOUSETYPE FULLNAME);
@@ -75,6 +76,7 @@ sub write($;$) {
 
 sub detect() {
     my %l;
+    eval { modules::load("serial") };
     @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) or die "mouseconfig failed";
     \%l;
 }

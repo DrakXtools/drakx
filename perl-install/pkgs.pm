@@ -167,15 +167,13 @@ sub readCompss($) {
     foreach (<$f>) {
 	/^\s*$/ || /^#/ and next;
 	s/#.*//;
-	my ($options, $name) = /^(\S*)\s+(.*?)\s*$/ or log::l("bad line in compss: $_"), next;
 
-	if ($name =~ /(.*):$/) {
+	if (/^(\S+)/) {
 	    $ps = [];
-	    push @compss, { options => $options, name => $1, packages => $ps };
+	    push @compss, { name => $1, packages => $ps };
 	} else {
-	    my $p = $packages->{$name} or log::l("unknown package $name (in compss)"), next;
-	    $p->{options} = $options;
-	    push @$ps, $p;
+	    /(\S+)/ or log::l("bad line in compss: $_"), next;
+	    push @$ps, $packages->{$1} || do { log::l("unknown package $1 (in compss)"); next };
 	}
     }
     \@compss;
@@ -302,7 +300,12 @@ sub install($$) {
 	$total += $p->{size};
     }
 
-    c::rpmdepOrder($trans) or c::rpmdbClose($db), c::rpmtransFree($trans), die "error ordering package list: ", c::rpmErrorString();
+    c::rpmdepOrder($trans) or
+	cdie "error ordering package list: " . c::rpmErrorString(),
+	  sub {
+	      c::rpmdbClose($db);
+	      c::rpmtransFree($trans);
+	  };
     c::rpmtransSetScriptFd($trans, $fd);
 
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) };

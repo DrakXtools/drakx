@@ -395,12 +395,19 @@ sub unpack_ {
 sub insmod {
     my ($h) = getopts(\@_, qw(h));
     $h || @_ == 0 and die "usage: insmod <module> [options]\n";
-    my $name = shift;
-    my $f = "/tmp/$name.o";
+    my $f = local $_ = shift;
+
     require 'run_program.pm';
-    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $name.o");
-    -r $f or die "can't find module $name";
-    run_program::run(["insmod_", "insmod"], $f, @_) or die("insmod $name failed");
+
+    unless (m|/|) {
+	m/(.*)\.o/ and die "either give ./$_ or $1\n";
+	unless (-r ($f = "/lib/modules/$_.o")) {
+	    $f = "/tmp/$_.o";
+	    run_program::run("cd /tmp ; bzip2 -cd /lib/modules.cpio.bz2 | cpio -i $_.o");
+	}
+    }
+    -r $f or die "can't find module $_";
+    run_program::run(["insmod_", "insmod"], $f, @_) or die("insmod $_ failed");
     unlink $f;
 }
 
