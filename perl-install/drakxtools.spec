@@ -225,7 +225,7 @@ done
 
 %postun -n harddrake
 file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && \
-	%_sbindir/convert-harddrake
+	%_sbindir/convert-harddrake || :
 
 %files newt -f %name.list
 %defattr(-,root,root)
