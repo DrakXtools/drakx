@@ -42,8 +42,11 @@ sub select_country() {
 }
 
 eval {
+    local $::isWizard = 1;
+    local $::Wizard_no_previous = 1;
   language:
     select_language() or goto the_end;
+    undef $::Wizard_no_previous;
     select_country() or goto language;
 };
 if ($@) {
