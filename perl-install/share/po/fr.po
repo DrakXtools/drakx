@@ -6,7 +6,7 @@
 # Pablo Saratxaga <pablo@mandrakesoft.com>, 2001
 # KAtiOS <katios@nolabel.net>, 2001
 # Guillaume Cottenceau <gc@mandrakesoft.com>, 2001-2002
-# Thierry Vignaud <tvignaud@mandrakesoft.com>, 2001-2002
+# Thierry Vignaud <tvignaud@mandrakesoft.com>, 2001-2003
 # Christophe Combelles <ccomb@free.fr>, 2002,2003
 #
 # Veuillez ne pas mettre à jour ce fichier à moins d'être
@@ -24,6 +24,11 @@
 # le point, espace insécables avant les points d'interrogation,
 # d'exclamation, les deux-points et le point virgule, espace aussi après
 # le point virgule).
+# N'enlevez pas l'espace qui suit un signe de ponctuation en fin de
+# phrase; vous devez respecter la version originale.  Dans ce type de
+# cas, il est extrèmement probable que le programme va afficher
+# quelque chose d'autre à la fin.  En enlevant l'espace, vous allez
+# accoller deux mots.
 #
 # ESPACES INSÉCABLES
 # Vous devez utiliser un espace insécable (c'est un espace qui ne peut
@@ -44,7 +49,7 @@
 # Les guillemets françaises sont « et » et non ". La guillemet ouvrante
 # « est suivie d'un espace insécable et la guillemet fermante » est
 # précédée du même type d'espace. Pour le tapper, vous pouvez utiliser
-# la combinaison Compose < <, et Compose > >.
+# la combinaison Compose < <, et Compose > > (ou alt-z et alt-x).
 #
 # Enfin, traduisez INTELLIGEMMENT et non mot à mot. Certaines traductions
 # n'ont aucun sens en français.
@@ -53,8 +58,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-fr\n"
-"POT-Creation-Date: 2003-03-12 14:29+0100\n"
-"PO-Revision-Date: 2003-03-11 23:41+0100\n"
+"POT-Creation-Date: 2003-03-24 22:30+0100\n"
+"PO-Revision-Date: 2003-03-14 18:39+0100\n"
 "Last-Translator: Christophe Combelles <ccomb@free.fr>\n"
 "Language-Team: french <cooker-i18n@linux-mandrake.com>\n"
 "MIME-Version: 1.0\n"
@@ -156,6 +161,11 @@ msgstr "Voici la liste complète des pays disponibles"
 #, c-format
 msgid "Please choose your country."
 msgstr "Veuillez choisir votre pays."
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
+msgid " / Region"
+msgstr " / Région"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -6251,6 +6261,11 @@ msgstr "Hong-Kong"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "China"
+msgstr "Chine"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "Guyana"
 msgstr "Guyana"
 
@@ -6443,11 +6458,6 @@ msgstr "Cuba"
 #, c-format
 msgid "Colombia"
 msgstr "Colombie"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "China"
-msgstr "Chine"
 
 #: ../../lang.pm:1
 #, c-format
@@ -13198,7 +13208,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
 msgid "CUPS printer configuration"
-msgstr "Configuration du partage d'imprimante CUPS"
+msgstr "Configuration de l'imprimante CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18447,7 +18457,7 @@ msgstr "Matériel détecté"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Harddrake2 version "
-msgstr "Harddrake2 version"
+msgstr "Harddrake2 version "
 
 #: ../../standalone/harddrake2:1
 #, c-format

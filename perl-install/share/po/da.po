@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-12 14:29+0100\n"
-"PO-Revision-Date: 2003-03-10 00:29+0100\n"
+"POT-Creation-Date: 2003-03-24 22:30+0100\n"
+"PO-Revision-Date: 2003-03-15 00:29+0100\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -106,6 +106,11 @@ msgstr "Her er den komplette liste over tilgængelige lande"
 #, c-format
 msgid "Please choose your country."
 msgstr "Vælg dit land."
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid " / Region"
+msgstr "Réunion"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -6018,6 +6023,11 @@ msgstr "Hong Kong"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "China"
+msgstr "Kina"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "Guyana"
 msgstr "Guyana"
 
@@ -6210,11 +6220,6 @@ msgstr "Cuba"
 #, c-format
 msgid "Colombia"
 msgstr "Columbia"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "China"
-msgstr "Kina"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11270,16 +11275,15 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Udskriver/Skanner/Fotokort på '%s'"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Hvilke muligheder der er for den aktuelle printer kan du enten læse på "
-"listen vist nedenfor, eller klikke på knappen 'liste med printermuligheder'%s"
-"%s\n"
-"\n"
+"listen vist nedenfor, eller klikke på knappen 'Liste med printermuligheder'.%"
+"s%s%s\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11504,7 +11508,7 @@ msgstr "Valg %s skal være et helt tal!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer default settings"
-msgstr "Standardinstillinger for printer"
+msgstr "Standardindstillinger for printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11526,7 +11530,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "Oplægning af firmware for HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12612,7 +12616,7 @@ msgstr "Server-IP mangler!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Hvis ingen port er angivet, vil port 631 blive brugt som standard."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12756,11 +12760,19 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
+"Aktivering af dette vil muliggøre udskrift at rene tekstfiler på japansk. "
+"Brug kun denne funktion hvis du virkelig ønsker at udskrive tekst på "
+"japansk, hvis det er aktiveret kan du ikke længere udskrive bogstaver med "
+"accenter i latinske skrifttyper, og du vil ikke kunne tilpasse margenerne, "
+"tegnstørrelse mv. Denne indstilling vedrører kun printere defineret på denne "
+"maskine. Hvis du ønsker at udskrive japansk tekst på en printer der er sat "
+"op på en ekstern maskine, skal du aktivere denne funktion på denne eksterne "
+"maskine."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Ændr printsystemet"
+msgstr "Printertilstand for japansk tekst"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12836,9 +12848,9 @@ msgstr ""
 "tilgængelige fra eksterne maskiner, og fra hvilke eksterne maskiner."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "Konfiguration af deling af CUPS-printere"
+msgstr "Konfiguration af CUPS-printere"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12878,6 +12890,13 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
+"HP LaserJet 1000 skal have lagt sin firmware op efter at være blevet tændt. "
+"Hjemhent pakken med Windows-drivere fra HP's websted (firmwaren fra "
+"printerens CD virker ikke) og hiv firmware-filen ud af den ved at "
+"dekomprimere den selvudpakkende .exe-fil med 'unzip'-programmet og lede "
+"efter filen 'sihp1000.img'. Kopiér denne fil til kataloget '/etc/printer'. "
+"Dér vil den blive fundet af det automatiske oplæggerskript og lagt op hver "
+"gang printeren er sluttet til og tændt.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -19605,41 +19624,34 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "NFS-vært, SMB-vært, mellemvært (proxy), SSH-vært"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Audio station"
-msgstr "Multimedie-station"
+msgstr "Lyd-station"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Sound playing/editing programs"
-msgstr "Lyd- og video-afspillere og redigeringsværktøjer"
+msgstr "Lyd-afspillere og -redigeringsværktøjer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video station"
-msgstr "Spillemaskine"
+msgstr "Video-maskine"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video playing programs"
-msgstr "Lyd- og video-afspillere og redigeringsværktøjer"
+msgstr "Video-afspilningsprogrammer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphic station"
-msgstr "Spillemaskine"
+msgstr "Grafisk maskine"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphics programs"
-msgstr "Grafiske programmer som fx The Gimp"
+msgstr "Grafiske programmer"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
-"Værktøjssæt til at læse samt sende post og nyheder (pine, mutt, tin..) , og "
-"til at browse på nettet"
+"Værktøjssæt til at læse samt sende post og nyheder, og til at browse på "
+"nettet"
 
 #~ msgid "Printer sharing"
 #~ msgstr "Printerdeling"

@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX\n"
-"POT-Creation-Date: 2003-03-12 17:27+0100\n"
-"PO-Revision-Date: 2003-02-08 04:15+0200\n"
+"POT-Creation-Date: 2003-03-24 22:30+0100\n"
+"PO-Revision-Date: 2003-03-18 18:15+0200\n"
 "Last-Translator: Ömer Fadıl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -103,29 +103,34 @@ msgid "More"
 msgstr "Ayrıntı"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Here is the full list of available countries"
-msgstr "Bu desteklenen tüm klavyelerin listesidir"
+msgstr "Mevcut tüm ülkelerin listesi"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose your country."
-msgstr "Lütfen farenizin türünü seçin."
+msgstr "Lütfen ülkenizi seçiniz."
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, fuzzy, c-format
+msgid " / Region"
+msgstr "Reunion"
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, c-format
 msgid "Country"
-msgstr "Ülke:"
+msgstr "Ülke"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "All languages"
-msgstr "Kullanacağınız dili seçin"
+msgstr "Tüm lisanlar"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Use Unicode by default"
-msgstr ""
+msgstr "Öntanımlı olarak Unicode kullan"
 
 #: ../../any.pm:1
 #, c-format
@@ -145,12 +150,12 @@ msgstr "Lütfen kullanacağınız dili seçiniz."
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the window manager to run:"
-msgstr "Çalıştırmak istediğiniz pencere yöneticisini seçin:"
+msgstr "Çalıştırmak istediğiniz pencere yöneticisini seçiniz:"
 
 #: ../../any.pm:1
 #, c-format
 msgid "Choose the default user:"
-msgstr "Öntanımlı kullanıcıyı seçin:"
+msgstr "Öntanımlı kullanıcıyı seçiniz:"
 
 #: ../../any.pm:1
 #, c-format
@@ -508,12 +513,12 @@ msgstr "Komut satırı seçeneklerini kısıtla"
 #: ../../any.pm:1
 #, c-format
 msgid "Force No APIC"
-msgstr ""
+msgstr "APIC özelliğini pasif tutmaya zorla"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enable ACPI"
-msgstr "CD den açılış etkinleştirilsin mi?"
+msgstr "ACPI özelliğini etkinleştir"
 
 #: ../../any.pm:1
 #, c-format
@@ -571,9 +576,9 @@ msgid "On Floppy"
 msgstr "Açılış Disketinden"
 
 #: ../../any.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "First sector of the root partition"
-msgstr "Önyükleme bölümünün ilk sektörü"
+msgstr "Kök bölümünün ilk sektörü"
 
 #: ../../any.pm:1
 #, c-format
@@ -774,7 +779,7 @@ msgstr ""
 #: ../../bootloader.pm:1
 #, c-format
 msgid "Welcome to GRUB the operating system chooser!"
-msgstr "İsletim sistemi secici GRUB'a Hos Geldiniz!"
+msgstr "İsletim sistemi secici GRUB uygulamasına Hos Geldiniz!"
 
 #: ../../bootloader.pm:1
 #, c-format
@@ -978,15 +983,15 @@ msgid "You can't use a LVM Logical Volume for mount point %s"
 msgstr "Bir LVM Havuzunu %s bağlantı noktası olarak kullanmazsınız."
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You've selected a software RAID partition as root (/).\n"
 "No bootloader is able to handle this without a /boot partition.\n"
 "Please be sure to add a /boot partition"
 msgstr ""
-"Bir yazılım RAID bölümünü kök dizini (/) olarak atadınız.\n"
-"Hiçbir önyükleyici önyükleme bölümü olmadan bunu çalıştıramaz.\n"
-"Bu nedenle bir önyükleme bölümü eklemeyi ihmal etmeyin."
+"Bir yazılımsal RAID bölümünü kök dizini (/) olarak seçtiniz.\n"
+"Hiçbir önyükleyici, /boot bölümü olmadan bunu çalıştıramaz.\n"
+"Bu nedenle bir /boot bölümü eklediğinize emin olun."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -994,9 +999,9 @@ msgid "There is already a partition with mount point %s\n"
 msgstr "Bağlama noktası %s olan bir bölüm zaten var\n"
 
 #: ../../fsedit.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mount points should contain only alphanumerical characters"
-msgstr "Yazıcı ismi sadece harfler, rakamlar ve alt çizgi içerebilir."
+msgstr "Bağlantı noktaları sadece alfabetik harfler içerebilir."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -1056,9 +1061,9 @@ msgid "simple"
 msgstr "basit"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Enabling swap partition %s"
-msgstr "Biçemlendirilen bölüm: %s"
+msgstr "Takas bölümü etkinleştiriliyor: %s"
 
 #: ../../fs.pm:1 ../../partition_table.pm:1
 #, c-format
@@ -1068,17 +1073,17 @@ msgstr "%s ayrılırken hata: %s"
 #: ../../fs.pm:1
 #, c-format
 msgid "mounting partition %s in directory %s failed"
-msgstr "%s bölümü %s dizinine bağlanamadı"
+msgstr "%2$s dizini içerisine %1$s bölümü bağlanamadı"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mounting partition %s"
-msgstr "Biçemlendirilen bölüm: %s"
+msgstr "%s bölümü bağlanıyor"
 
 #: ../../fs.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Checking %s"
-msgstr "%s kopyalanıyor"
+msgstr "%s kontrol ediliyor"
 
 #: ../../fs.pm:1
 #, c-format
@@ -1101,7 +1106,7 @@ msgid "%s formatting of %s failed"
 msgstr "%s biçimlemesinde %s bölüm hatası"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"Next ->\" if you want to delete all data and partitions present\n"
 "on this hard drive. Be careful, after clicking on \"Next ->\", you will not\n"
@@ -1112,13 +1117,12 @@ msgid ""
 "partitions present on this hard drive."
 msgstr ""
 "Bu sabit disk üzerindeki tüm verinin ve bölümlerin silinmesini istiyorsanız\n"
-"\"Tamam\"'a tıklayın. Dikkatli olun, tıkladıktan sonra Windows "
-"bölümünüzdeki\n"
-"verileriniz de dahil her şeyi kaybedeceksiniz.\n"
+"\"Sonraki ->\" tuşuna tıklayın. Dikkatli olun, \"İleri ->\"  tuşuna "
+"tıkladıktan\n"
+"sonra Windows içeren bölümünüz de dahil tüm verilerinizi kaybedeceksiniz.\n"
 "\n"
-"Sabit diskinizdeki hiçbir veriyi ya da bölümü silmeden bu işlemden "
-"vazgeçmek\n"
-"istiyorsanız lütfen \"İptal\"'e tıklayın."
+"Sabit diskinizdeki hiçbir veriyi ya da bölümü silmeden bu işlemden\n"
+"vazgeçmek istiyorsanız lütfen \"<- Önceki\" tuşuna tıklayın."
 
 #: ../../help.pm:1
 #, c-format
@@ -1207,7 +1211,7 @@ msgid ""
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Yaboot is a bootloader for NewWorld Macintosh hardware and can be used to\n"
 "boot GNU/Linux, MacOS or MacOSX. Normally, MacOS and MacOSX are correctly\n"
@@ -1240,35 +1244,33 @@ msgid ""
 " * Default OS: you can select which OS will boot by default when the Open\n"
 "Firmware Delay expires."
 msgstr ""
-"Yaboot, NewWorld MacIntosh donanımı için bir önyükleyicidir. Onunla\n"
+"Yaboot, NewWorld Macintosh donanımı için bir önyükleyicidir. Onunla\n"
 "GNU/Linux, MacOS, ya da MacOSX yüklenebilir. Normalde bu diğer işletim\n"
-"sistemleri doğru saptanır ve kurulur. Bu mümkün olmamışsa, bu ekranda elle\n"
-"girdileri verebilirsiniz. Doğru parametreleri vermeye özen göstermelisiniz.\n"
+"sistemleri doğru algılanır ve önyükleme listesine eklenir. Bu olmamışsa, "
+"siz\n"
+"elle girdileri verebilirsiniz. Doğru parametreleri vermeye dikkat ediniz.\n"
 "\n"
 "Yaboot'un ana seçenekleri:\n"
 "\n"
-" * \"Açılış iletisi\": önyükleyici komut satırından önce gösterilecek basit\n"
+" * \"Açılış İletisi\": Önyükleyici komut satırından önce gösterilecek basit\n"
 "   bir metindir.\n"
 "\n"
 " * \"Önyükleme Aygıtı\": GNU/Linux'un önyüklemesi için gereken bilgilerin\n"
 "   yerleştirildiği aygıtı belirtir. Genellikle bu bilgiyi saklamak üzere\n"
 "   bir önyükleme disk bölümünü belirtilir.\n"
 "\n"
-" * \"Gömülü Sistem Gecikmesi\": yaboot'da iki gecikme mümkündür. Bu ilk\n"
-"   gecikme saniyelerle ölçülür ve bu noktada CD, Gömülü Sistem, MacOS ya da\n"
-"   Linux açılışları arasında seçim yapılabilir.\n"
-"\n"
-" * \"Çekirdek Önyükleme Zaman Aşımı\": bu zaman aşımı LILO önyükleme\n"
+" * \"Çekirdek Önyükleme Zaman Aşımı\": Bu zaman aşımı LILO önyükleme\n"
 "   gecikmesine benzer. Linux seçildikten sonra öntanımlı çekirdek tanımı\n"
 "   seçilmeden önce 0.1 saniyelik adımlarla ölçülen bir gecikme sağlanır.\n"
 "\n"
-" * \"CD'den Açılış Etkileştirilsin\": bu seçenek işaretlenmişse\n"
+" * \"CD'den Açılış Etkileştirilsin ?\": Bu seçenek işaretlenmişse\n"
 "   önyükleyicinin ilk komut satırında CD için \"C\" seçebilirsiniz.\n"
 "\n"
-" * \"Gömülü Sistem Açılışı Etkinleştirilsin\": bu seçenek işaretlenmişse\n"
+" * \"Gömülü Sistem Açılışı Etkinleştirilsin ?\": bu seçenek işaretlenmişse\n"
 "   önyükleyicinin ilk komut satırında Gömülü Sistem Açılışı için \"N\"\n"
 "   seçebilirsiniz.\n"
-"   \"Öntanımlı İşletim Sistemi\": Gömülü sistem gecikmesi zaman aşımına\n"
+"\n"
+" * \"Öntanımlı İşletim Sistemi\": Gömülü sistem gecikmesi zaman aşımına\n"
 "   uğradığında öntanımlı olarak yüklenecek işletim sistemini burada\n"
 "   belirteceksiniz."
 
@@ -1366,7 +1368,7 @@ msgstr ""
 "   bu alana girilen etiket \"*\" ile belirlenmiş olacaktır."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1385,32 +1387,16 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"DrakX PCI ve SCSI kartlarınızı tarayarak IDE aygıtlarınızı bulmaya "
-"çalışacak.\n"
-"Eğer bir SCSI arabirimi bulursa otomatik olarak bunun sürücüsünü "
-"kuracaktır.\n"
+"DrakX ilk olarak sisteminizde mevcut olan IDE aygıtlarını algılayacaktır.\n"
+"Ayrıyeten PCI ve SCSI kartlarınıza ulaşmaya çalışacaktır.\n"
+"Eğer bir SCSI arabirimi bulursa otomatik olarak gerekli sürücü kuracaktır.\n"
 "\n"
-"Hiç SCSI arabiriminiz yoksa, bir ISA SCSI kartınız varsa, ya da\n"
-"DrakX'in tanımadığı bir PCI SCSI kartınız bulunuyorsa, sisteminizde bir\n"
-"SCSI kartınızın olup olmadığı sorulacaktır. Bir SCSI kartına sahip "
-"değilseniz\n"
-"\"Hayır\" düğmesine tıklayın. Emin değilseniz, \"Donanım bilgilerine bak\"\n"
-"seçerek ve \"Tamam\"a tıkladıktan sonra makinanızda saptanan donanımın\n"
-"listesine göz atabilir ve tekrar \"Tamam\" düğmesine tıklayıp SCSI arayüzü\n"
-"sorusuna geri dönebilirsiniz\n"
-"\n"
-"Kartınızı elle tanıtmak zorundaysanız sizden kartınıza uygun seçenekleri\n"
-"belirlemenizi istenecektir. Bu karta özel seçeneklerle DrakX donanımınızı\n"
-"algılamaya ve başlatmaya çalışacaktır. Bu, genellikle çalışır.\n"
-"\n"
-"Eğer çalışmazsa, sürücü seçeneklerini öğrenmeniz gereklidir. İnternet\n"
-"bağlantınız bulunuyorsa, üreticinin web sitesindeki donanım belgelerinden\n"
-"ya da (eğer sisteminizde bulunuyorsa) Microsoft Windows'dan elde edebilir\n"
-"veya bu bilgileri bulabilme ipuçları için 'Kullanma Kılavuzu'ndaki 3.\n"
-"bölümü (\"Donanımınızın Bilgilerinin Toplanması\") okuyun."
+"Donanım algılama dört dörtlük bir sistem değildir, DrakX algılama sırasında\n"
+"başarısızlığa uğrayabilir.Eğer böyle bir durum olursa donanımınızı elle \n"
+"yapılandırmanız gerekecektir."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1438,35 +1424,34 @@ msgid ""
 "Center and clicking the expert button."
 msgstr ""
 "Burada kullanacağınız yazdırma sistemini seçeceksiniz. Diğer işletim\n"
-"sistemleri bir seçenek sunarken, Mandrake size üç ayrı seçenek sunuyor.\n"
+"sistemleri bir seçenek sunarken, Mandrake Linux size iki ayrı seçenek\n"
+"sunmaktadır. İki tip yazdırma sistemide özel yapılandırma türü için en "
+"iyidir.\n"
 "\n"
-" * \"PDQ\" - bir ağ yazıcısı kullanmıyorsanız, yazıcının kağıt yemesi\n"
-"   durumunda tekrar yazdırma sorunu yaşamak istemiyorsanız, bir de "
-"makinanıza\n"
-"   doğrudan bağlı bir yazıcınız varsa, 'kuyruğa değil doğrudan yazıcıya\n"
-"   yolla' deme şansınız bulunuyor. 'Bu tam da benim aradığım özellik'\n"
-"   diyorsanız \"PDQ\" seçeneğine tıklayınız. Kurulumdan sonra Mandrake\n"
-"   Kontrol Merkezi'nden PrinterDrake'i çalıştırdıktan sonra uzman düğmesine\n"
-"   tıklayarak seçimlerinizi değiştirebilirsiniz.\n"
+" * \"pdq\" -- bir ağ yazıcısı kullanmıyorsanız, yazıcının kağıt yemesi\n"
+"   durumunda tekrar yazdırma sorunu yaşamak istemiyorsanız, bir de \n"
+"   makinanıza doğrudan bağlı bir yazıcınız varsa, 'kuyruğa değil doğrudan\n"
+"   yazıcıya yolla' deme şansınız bulunuyor. 'Bu tam da benim aradığım "
+"özellik'\n"
+"   diyorsanız \"PDQ\" seçeneğine tıklayınız.\n"
+"   Bu seçenek eğer bu ilk linux deneyiminizse özellikle TAVSİYE edilir\n"
 "\n"
-" * \"CUPS\"'Unix Ortak Yazdırma Sistemi' - hem yerel yazıcınızı hem de ağ\n"
-"   üzerindeki bir yazıcıyı kullanabilmenizi sağlayan, mevcut tüm "
-"sistemlerle\n"
-"   uyumlu, eski \"lpd\" yazdırma sistemi için hem sunucu hem de istemci "
-"gibi\n"
-"   davranabilen, basit ama mükemmel bir sistemdir. Çok çeşitli seçenekler\n"
-"   sunmasına rağmen en az \"pdq\" kadar kolay ayarlanabilir. Bir \"lpd\"\n"
-"   sunucusunu taklit etmek isterseniz \"cups-lpd\" artalan uygulamasını\n"
+" * \"CUPS\" - `` Unix Ortak Yazdırma Sistemi '' hem yerel yazıcınızı hem de "
+"ağ\n"
+"   üzerindeki bir yazıcıyı kullanabilmenizi sağlayan, mevcut tüm \n"
+"   sistemlerle uyumlu, eski \"lpd\" yazdırma sistemi için hem sunucu hem "
+"de \n"
+"   istemci gibi davranabilen, basit ama mükemmel bir sistemdir. Çok "
+"çeşitli \n"
+"   seçenekler sunmasına rağmen en az \"pdq\" kadar kolay ayarlanabilir. \n"
+"   Bir \"lpd\" sunucusunu taklit etmek isterseniz \"cups-lpd\" artalan "
+"uygulamasını\n"
 "   çalıştırabilirsiniz. Yazdırma ve yazıcı seçeneklerini belirlemek için\n"
 "   bir grafik arayüze de sahiptir.\n"
 "\n"
-" * \"lprNG\" - 'Yeni Nesil lpd' - Bu sistem diğerlerinin yaptıklarını\n"
-"   yapabilmekten başka IPX protokolünü de desteklediğinden bir Novell "
-"ağında\n"
-"   bağlı yazıcıları ve komutları kullanmanızı sağlar. Novell ağınızdaki\n"
-"   yazıcıları kullanmak isterseniz ya da ayrı bir veri yolu oluşturmaksızın\n"
-"   komutlara yazdırmak isterseniz lprNG'yi kullanınız. Novell ağında,\n"
-"   değilseniz daha iyi ve daha basit olduğundan CUPS tercih edilmelidir."
+"   Şimdi kararınızı verin. Kurulumdan sonra Mandrake Kontrol Merkezi'nden\n"
+"   PrinterDrake uygulamasını çalıştırdıktan sonra uzman düğmesine\n"
+"   tıklayarak seçimlerinizi değiştirebilirsiniz."
 
 #: ../../help.pm:1
 #, c-format
@@ -1490,6 +1475,26 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\")."
 msgstr ""
+"LILO ve gub GNU/Linux önyükleyicileridir. Normal şartlar artında bu "
+"işlemler\n"
+"tamamen otomatik bir şekilde tamamlanır.\n"
+"\n"
+" * Eğer Bir Windows önyükleme sektörü bulundu ise, bu grub/LILO ile "
+"değiştirilir\n"
+"Bu aynı zamanda çoktan seçmeli önyükleme özelliğini getirir.\n"
+"\n"
+" * Eğer bir grub veya LILO önyükleme sektörü bulundu ise bunlar yeni şekli "
+"ile\n"
+"güncellenir.\n"
+"\n"
+" * Eğer bir tanımlama yapılamadı ise, DrakX size önyükleyiciyi nereye "
+"kuracağı\n"
+"sorusunu yönlendirir.\n"
+"\"Önyükleme aygıtı\": genelde öntanımlı ayarı değiştirmeye ihtiyacınız "
+"yoktur\n"
+"(\"Sürücünün ilk sektörü(MBR)\". Fakat tercihinize göre önyükleyiciyi "
+"ikincil\n"
+"sürücüye (\"/dev/hdb\") veya herhangi bir diskete yükleyebilirsiniz."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2775,14 +2780,15 @@ msgstr ""
 "Bu işlem mevcut sisteminizin onarımı için elverişlidir."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The Mandrake Linux installation is distributed on several CD-ROMs. DrakX\n"
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
 "Mandrake Linux kurulum CD'leri bir kaç CD'den oluşur. DrakX seçilen paketin\n"
-"hangi CD'de olduğunu bilir ve o CD'yi yerleştirmeniz için CD yuvasını açar."
+"hangi CD'de olduğunu bilir ve o CD'yi yerleştirmeniz için CD yuvasını açar\n"
+"ve size gerekli CD'yi yerleştirmeniz için uyarır."
 
 #: ../../help.pm:1
 #, fuzzy, c-format
@@ -2924,7 +2930,7 @@ msgstr ""
 "olarak bash) değiştirilebilir."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Before continuing, you should carefully read the terms of the license. It\n"
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
@@ -2932,9 +2938,10 @@ msgid ""
 "computer."
 msgstr ""
 "Devam etmeden önce lisans koşullarını dikkatle okumalısınız. Lisans tüm\n"
-"Mandrake Linux dağıtımını kapsar, bu koşullarını kabul etmiyorsanız \"Red\"\n"
-"düğmesine tıklayarak kurulumdan çıkabilirsiniz. Kuruluma devam etmek için\n"
-"\"Kabul\" düğmesine tıklayınız."
+"Mandrake Linux dağıtımını kapsar, bu koşullarını kabul ediyorsanız \"Kabul"
+"\" \n"
+"düğmesine tıklayarak kuruluma devam edebilirsiniz. Aksi halde makinenizi \n"
+"basitçe kapatınız.çıkabilirsiniz."
 
 #: ../../install2.pm:1
 #, c-format
@@ -3331,9 +3338,9 @@ msgstr ""
 "bilgiyi Mandrake Linux Kullanıcı Kılavuzunda bulabilirsiniz."
 
 #: ../../install_messages.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "http://www.mandrakelinux.com/en/91errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
+msgstr "http://www.mandrakelinux.com/en/91errata.php3"
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -3620,7 +3627,7 @@ msgid "Help"
 msgstr "Yardım"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "not configured"
 msgstr "yapılandırılmamış"
 
@@ -3681,9 +3688,9 @@ msgid "%d packages"
 msgstr "%d paket"
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "No details"
-msgstr "Ayrıntılar"
+msgstr "Ayrıntısız"
 
 #: ../../install_steps_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -3694,7 +3701,7 @@ msgstr "Ayrıntılar"
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Please wait, preparing installation..."
-msgstr "Lütfen bekleyin, Kurulum hazırlanıyor"
+msgstr "Lütfen bekleyin, Kurulum hazırlanıyor..."
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -3719,7 +3726,7 @@ msgstr "Kurmak istediğiniz paketleri seçin"
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
-msgstr "En küçük Kurulum"
+msgstr "En ufak kurulum"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -4122,9 +4129,9 @@ msgstr "Sistem"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s on %s"
-msgstr "Kapı"
+msgstr "%2$s üstündeki %1$s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4132,24 +4139,24 @@ msgid "Bootloader"
 msgstr "Önyükleyici"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Boot"
-msgstr "Kök"
+msgstr "Önyükleme"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "disabled"
-msgstr "pasif"
+msgstr "pasifleştirilmiş"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "activated"
-msgstr "şimdi etkinleştir"
+msgstr "etkinleştirilmiş"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firewall"
-msgstr "Güvenlik Kalkanı/Router"
+msgstr "AteşDuvarı"
 
 #: ../../install_steps_interactive.pm:1 ../../steps.pm:1
 #, c-format
@@ -4157,9 +4164,9 @@ msgid "Security"
 msgstr "Güvenlik"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Security Level"
-msgstr "Güvenlik seviyesi:"
+msgstr "Güvenlik Seviyesi"
 
 #: ../../install_steps_interactive.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -4167,9 +4174,9 @@ msgid "Network"
 msgstr "Ağ"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet"
-msgstr "Ağ arabirimi"
+msgstr "Ağ & İnternet"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4177,9 +4184,9 @@ msgid "Graphical interface"
 msgstr "Grafiksel arabirim"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hardware"
-msgstr "HardDrake"
+msgstr "Donanım"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4265,14 +4272,14 @@ msgid "Which is your timezone?"
 msgstr "Bulunduğunuz zaman dilimi hangisi?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Yazdırmayı ayarlamak istiyor musunuz?"
+msgstr "Tekrar denemek ister misiniz?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Ayrılamıyor: %s"
+msgstr "%s yansısı ile iletişim kurulamıyor"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4294,7 +4301,7 @@ msgstr ""
 "Yansı adreslerini almak için Mandrake Linux web sayfasına bağlantı kuruluyor"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You now have the opportunity to download updated packages. These packages\n"
 "have been updated after the distribution was released. They may\n"
@@ -4305,14 +4312,17 @@ msgid ""
 "\n"
 "Do you want to install the updates ?"
 msgstr ""
-"Şimdi güncellenmiş paketleri indirme fırsatınız var. Bu paketler\n"
-"dağıtımın çıkış tarihinden sonra çıkan güncellemeleri içermektedir. \n"
-"Bu güncellemeler önemli hata düzeltmeleri ve güvenlik çözümleri \n"
-"içeriyor olabilir. [Güncelleme yapmanızı tavsiye ediyoruz]\n"
-"Güvenlik açıklarını ve hataları gideren güncellemeleri indirebilmek\n"
-"için çalışan bir internet bağlantısına ihtiyacınız var.\n"
+"Şu anda güncellenmiş paketleri indirme fırsatınız var. Bu paketler\n"
+"dağıtımın çıkış tarihinden sonra çıkan güncellemeleri içermektedir.\n"
+"Bu güncellemeler önemli hata düzeltmeleri ve güvenlik çözümleri\n"
+"içeriyor olabilir.\n"
 "\n"
-"Güncellemeleri kurmak istiyor musunuz?"
+"[Güncelleme indirmenizi tavsiye ediyoruz]\n"
+"\n"
+"Bahsi geçen güncellemeleri indirebilmek için çalışan bir internet \n"
+"bağlantısına ihtiyacınız var.\n"
+"\n"
+"Güncellemeleri kurmak istiyor musunuz ?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4377,7 +4387,7 @@ msgstr "Temel belgeler olsun (önerilir!)"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "With X"
-msgstr "X olsun"
+msgstr "X ile"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4567,9 +4577,9 @@ msgid "Please choose your type of mouse."
 msgstr "Lütfen kullandığınız farenin türünü seçin."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "Parola"
+msgstr "%s için Parola"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4635,7 +4645,7 @@ msgstr "Disket sürücünüz yok"
 #: ../../install_steps.pm:1
 #, c-format
 msgid "Welcome to %s"
-msgstr "%s'a Hoş Geldiniz"
+msgstr "%s Hoş Geldiniz"
 
 #: ../../install_steps.pm:1
 #, c-format
@@ -5164,7 +5174,7 @@ msgstr "Azerice (latin)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Arabic"
-msgstr ""
+msgstr "Arapça"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5179,7 +5189,7 @@ msgstr "Ermenice (daktilo)"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Armenian (old)"
-msgstr "Ermenice (eski) "
+msgstr "Ermenice (eski)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5212,9 +5222,9 @@ msgid "South Africa"
 msgstr "Güney Afrika"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Serbia"
-msgstr "seri"
+msgstr "Serbia"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5232,9 +5242,9 @@ msgid "Samoa"
 msgstr "Samoa"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Wallis and Futuna"
-msgstr "Wallis ve Futuna Adaları"
+msgstr "Wallis ve Futuna"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5242,7 +5252,7 @@ msgid "Vanuatu"
 msgstr "Vanuatu"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vietnam"
 msgstr "Vietnam"
 
@@ -5267,9 +5277,9 @@ msgid "Saint Vincent and the Grenadines"
 msgstr "Sen Vinsınt ve Granadalar"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Vatican"
-msgstr "Latviya dili"
+msgstr "Vatikan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5299,12 +5309,12 @@ msgstr "Ukrayna"
 #: ../../lang.pm:1
 #, c-format
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Taiwan"
-msgstr "Tayland"
+msgstr "Tayvan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5374,7 +5384,7 @@ msgstr "Çad"
 #: ../../lang.pm:1
 #, c-format
 msgid "Turks and Caicos Islands"
-msgstr "Turks ve Kaykos Adaları"
+msgstr "Türkler ve Kaykos Adaları"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5472,9 +5482,9 @@ msgid "Rwanda"
 msgstr "Ruanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Russia"
-msgstr "Rusça"
+msgstr "Rusya"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5507,9 +5517,9 @@ msgid "Portugal"
 msgstr "Portekiz"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Palestine"
-msgstr "Yol seçimi"
+msgstr "Palestine"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5714,12 +5724,12 @@ msgstr "Monako"
 #: ../../lang.pm:1
 #, c-format
 msgid "Morocco"
-msgstr "Fas"
+msgstr "Morocco"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Libya"
-msgstr "Liberya"
+msgstr "Libya"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5767,9 +5777,9 @@ msgid "Lebanon"
 msgstr "Lübnan"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Laos"
-msgstr "Kayıtlar"
+msgstr "Laos"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5787,14 +5797,14 @@ msgid "Kuwait"
 msgstr "Kuveyt"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Korea"
-msgstr "Ayrıntı"
+msgstr "Kore"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "Kore (Kuzey)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5832,9 +5842,9 @@ msgid "Japan"
 msgstr "Japonya"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Jordan"
-msgstr "Ürdün"
+msgstr "Jordan"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5847,9 +5857,9 @@ msgid "Iceland"
 msgstr "İzlanda"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Iran"
-msgstr "Irak"
+msgstr "İran"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5902,14 +5912,19 @@ msgid "Honduras"
 msgstr "Honduras"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Heard and McDonald Islands"
-msgstr "Heard Adası and McDonald Adaları"
+msgstr "Heard and McDonald Adaları"
 
 #: ../../lang.pm:1
 #, c-format
 msgid "Hong Kong"
 msgstr "Hong Kong"
+
+#: ../../lang.pm:1
+#, c-format
+msgid "China"
+msgstr "Çin"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5932,9 +5947,9 @@ msgid "Guatemala"
 msgstr "Guetemala"
 
 #: ../../lang.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "South Georgia and the South Sandwich Islands"
-msgstr "Güney Gürcistan ve Güney Sandoviç Adası"
+msgstr "Güney Georgia ve Güney Sandwich Adasları"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6108,11 +6123,6 @@ msgstr "Kolombiya"
 
 #: ../../lang.pm:1
 #, c-format
-msgid "China"
-msgstr "Çin"
-
-#: ../../lang.pm:1
-#, c-format
 msgid "Cameroon"
 msgstr "Kamerun"
 
@@ -6139,7 +6149,7 @@ msgstr "İsviçre"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "Congo (Brazzaville)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6149,7 +6159,7 @@ msgstr "Orta Afrika Cumhuriyeti"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Kinshasa)"
-msgstr ""
+msgstr "Congo (Kinshasa)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -6612,7 +6622,7 @@ msgstr "mkraid başarısız (raidtools eksik olabilir mi?"
 #: ../../raid.pm:1
 #, c-format
 msgid "Can't add a partition to _formatted_ RAID md%d"
-msgstr "Biçemlendirilmiş RAID md%d'ye disk bölümü eklenemedi"
+msgstr "Biçemlendirilmiş RAID md%d 'ye disk bölümü eklenemedi"
 
 #: ../../services.pm:1
 #, c-format
@@ -6627,7 +6637,7 @@ msgstr "Başlat"
 #: ../../services.pm:1
 #, c-format
 msgid "On boot"
-msgstr "Önyükleme"
+msgstr "Önyüklemede"
 
 #: ../../services.pm:1
 #, c-format
@@ -7023,6 +7033,9 @@ msgid ""
 "Usage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
 "testing] [-v|--version] "
 msgstr ""
+"\n"
+"Kullanımı: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--"
+"testing] [-v|--version] "
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7031,6 +7044,9 @@ msgid ""
 "       XFdrake [--noauto] monitor\n"
 "       XFdrake resolution"
 msgstr ""
+" [everything]\n"
+"       XFdrake [--noauto] monitör\n"
+"       XFdrake çözünürlük"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7038,6 +7054,8 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
+"[--manual] [--device=dev] [--update-sane=sane_kaynak_diz] [--update-"
+"usbtable] [--dynamic=dev]"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -7179,14 +7197,14 @@ msgid "Exit install"
 msgstr "Kurulumdan Çık"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Install updates"
-msgstr "Sistem güncellemeleri kurulumu"
+msgstr "Güncellemeleri kur"
 
 #: ../../steps.pm:1
 #, c-format
 msgid "Configure services"
-msgstr "Hizmet Ayarları"
+msgstr "Hizmetlerin Yapılandırması"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7209,9 +7227,9 @@ msgid "Add a user"
 msgstr "Kullanıcı Ekleme"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Root password"
-msgstr "Parola yok"
+msgstr "Root parolası"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7229,9 +7247,9 @@ msgid "Format partitions"
 msgstr "Bölümleri biçemlendir"
 
 #: ../../steps.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Partitioning"
-msgstr "Yazdırılıyor"
+msgstr "Bölümlendirme"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7256,7 +7274,7 @@ msgstr "Fare ayarları"
 #: ../../steps.pm:1
 #, c-format
 msgid "License"
-msgstr ""
+msgstr "Lisans"
 
 #: ../../steps.pm:1
 #, c-format
@@ -7266,7 +7284,7 @@ msgstr "Kullanacağınız dili seçin"
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "utopia 25"
-msgstr ""
+msgstr "utopia 25"
 
 #: ../../ugtk2.pm:1 ../../ugtk.pm:1 ../../network/netconnect.pm:1
 #: ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1
@@ -7284,7 +7302,7 @@ msgstr "logdrake"
 #: ../../ugtk.pm:1
 #, c-format
 msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso10646-1,*-r-*"
+msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-9,*-r-*"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -7390,7 +7408,7 @@ msgstr "Çoklu-Kafa yapılandırması"
 
 #
 #: ../../Xconfig/card.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Choose an X server"
 msgstr "Bir X sunucusu seçiniz"
 
@@ -7575,14 +7593,14 @@ msgid "256 colors (8 bits)"
 msgstr "256 renk (8 bit)"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Is this the correct setting?"
-msgstr "Doğru mu?"
+msgstr "Ayarlamalar doğru mu?"
 
 #: ../../Xconfig/test.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Leaving in %d seconds"
-msgstr "%d saniye"
+msgstr "%d saniye içerisinde çıkılıyor"
 
 #: ../../Xconfig/test.pm:1
 #, c-format
@@ -7810,9 +7828,9 @@ msgid "Empty"
 msgstr "Boş"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Windows"
-msgstr "Windows Etki alanı"
+msgstr "Windows"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -7832,7 +7850,7 @@ msgstr "Takas"
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Journalised FS"
-msgstr "Günlük FS"
+msgstr "Journalised FS"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -7850,17 +7868,16 @@ msgid "Please click on a partition"
 msgstr "Lütfen bir bölüm üzerine tıklayın"
 
 #: ../../diskdrake/hd_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You have one big MicroSoft Windows partition.\n"
 "I suggest you first resize that partition\n"
 "(click on it, then click on \"Resize\")"
 msgstr ""
-"Tek bir büyük FAT disk bölümünüz var\n"
-"(genellikle MS DOS/Windows tarafından kullanılır).\n"
-"Öncelikle bu disk bölümünün boyutunu değiştirmenizi\n"
-"öneriyoruz. Önce bölümün üzerine, sonra \"Yeniden\n"
-"Boyutlandır\" düğmesine tıklayınız"
+"Tek bir büyük MicroSoft Windows disk bölümünüz var\n"
+"Size Öncelikle bu disk bölümünün boyutunu düzenlemenizi\n"
+"öneriyoruz. (Önce bölümün üzerine, sonra \"Yeniden\n"
+"Boyutlandır\" düğmesine tıklayınız)"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -7900,7 +7917,7 @@ msgstr "Parola (tekrar)"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Encryption key"
-msgstr "Parola"
+msgstr "parola"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7980,7 +7997,7 @@ msgstr ""
 "için özel bir önyükleme bölümüdür.\n"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Chances are, this partition is\n"
@@ -7989,9 +8006,9 @@ msgid ""
 msgstr ""
 "\n"
 "Şans işte!, bu disk bölümü\n"
-"bir Aygıt bölümüdür ve büyük\n"
-"ihtimalle onu tek başına\n"
-"bırakacaksınız.\n"
+"bir Aygıt bölüm. Ve büyük\n"
+"ihtimalle onu bu şekilde\n"
+"bırakmalısınız.\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8181,11 +8198,9 @@ msgid "File already exists. Use it?"
 msgstr "Dosya zaten var. Kullanılsın mı?"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "File is already used by another loopback, choose another one"
-msgstr ""
-"Dosya başka bir loopback tarafından kullanılıyor,\n"
-"başka bir tane seçin"
+msgstr "Dosya başka bir loopback tarafından kullanılıyor,başka bir tane seçin"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8576,7 +8591,7 @@ msgstr "Sunucuları ara"
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Domain"
-msgstr "Etki Alanı"
+msgstr "Alan Adı"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -8613,92 +8628,92 @@ msgstr "Giriş başarısız %s (hatalı şifre?)"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "cpu # "
-msgstr ""
+msgstr "cpu # "
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SMBus controllers"
-msgstr ""
+msgstr "SMBus kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "USB controllers"
-msgstr ""
+msgstr "USB kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "SCSI controllers"
-msgstr ""
+msgstr "SCSI kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Firewire controllers"
-msgstr ""
+msgstr "Firewire kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "(E)IDE/ATA controllers"
-msgstr ""
+msgstr "(E)IDE/ATA kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Joystick"
-msgstr ""
+msgstr "Oyun Çubuğu"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner"
-msgstr "Bir tarayıcı seçiniz"
+msgstr "Tarayıcı"
 
 #: ../../harddrake/data.pm:1 ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown/Others"
-msgstr "Bilinmeyen|Genel"
+msgstr "Bilinmeyen/Diğerleri"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Bridges and system controllers"
-msgstr ""
+msgstr "Köprüler ve sistem kontrolcüleri"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Modem"
 msgstr "Model"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Ethernetcard"
-msgstr "Ağ kartı"
+msgstr "Ağ Kartı"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Processors"
-msgstr "İşlemci ID"
+msgstr "İşlemciler"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Webcam"
-msgstr ""
+msgstr "İnternet Kamerası"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Soundcard"
 msgstr "Ses Kartı"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Other MultiMedia devices"
-msgstr "Diğer Ortam"
+msgstr "Diğer Çoklu Ortam aygıtları"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Tvcard"
-msgstr "TV kartı"
+msgstr "Tv Kartı"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Videocard"
-msgstr "Ekran kipi"
+msgstr "Ekran Kartı"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -8708,32 +8723,32 @@ msgstr "Teyp"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "DVD-ROM"
-msgstr ""
+msgstr "DVD-ROM"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "CD/DVD burners"
-msgstr ""
+msgstr "CD/DVD yazıcılar"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CDROM"
-msgstr "CDROM üzerine"
+msgstr "CDROM"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disk"
-msgstr "Danimarkaca"
+msgstr "Sürücü"
 
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Zip"
-msgstr ""
+msgstr "Zip"
 
 #: ../../harddrake/data.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Floppy"
-msgstr "Açılış disketi"
+msgstr "Disket Sürücü"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8826,7 +8841,7 @@ msgstr "Bilinmeyen sürücü"
 #: ../../harddrake/sound.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Please Wait... Applying the configuration"
-msgstr "Lütfen Bekleyiniz... Yapılandırmalar aktifleştiriliyor"
+msgstr "Lütfen Bekleyiniz... Yapılandırmalar uygulanıyor"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -8993,9 +9008,9 @@ msgid "Auto-detect"
 msgstr "Otomatik algıla"
 
 #: ../../interactive/newt.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Do"
-msgstr "Aşağı"
+msgstr "Yap"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -9228,7 +9243,7 @@ msgstr "Internet'e bağlantı"
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "Sagem (using pppoa) usb"
-msgstr ""
+msgstr "Sagem (pppoa kullanarak) usb"
 
 #: ../../network/adsl.pm:1
 #, c-format
@@ -9344,17 +9359,17 @@ msgstr "Web Sunucu"
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
-msgstr ""
+msgstr "Zeroconf makine adı .(nokta) içeremez"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
 msgid "Host name"
-msgstr "Sunucu ismi"
+msgstr "Makine ismi"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Zeroconf Host name"
-msgstr "Sunucu ismi"
+msgstr "Zeroconf makine ismi"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -9416,9 +9431,9 @@ msgstr ""
 "ekrandan bir PCI kart seçin."
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which of the following is your ISDN card?"
-msgstr "Hangisi sizin ISDN kartınız?"
+msgstr "Aşağıdakilerden hangisi sizin ISDN kartınız?"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9495,9 +9510,9 @@ msgstr ""
 " D-Kanalı yok (kiralık hat)"
 
 #: ../../network/isdn.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "European protocol"
-msgstr "Avrupa Protokolü"
+msgstr "Avrupa protokolü"
 
 #: ../../network/isdn.pm:1
 #, c-format
@@ -9581,6 +9596,7 @@ msgstr "rpm'i Kur"
 msgid ""
 "\"%s\" based winmodem detected, do you want to install needed software ?"
 msgstr ""
+" \"%s\"  winmodem algılandı, gerekli yazılımını yüklememi ister misiniz?"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -9593,6 +9609,8 @@ msgid ""
 "Your modem isn't supported by the system.\n"
 "Take a look at http://www.linmodems.org"
 msgstr ""
+"Modeminiz sistem tarafından desteklenmiyor.\n"
+"http://www.linmodems.org adresine bir göz gezdirin."
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -9702,9 +9720,9 @@ msgstr ""
 "%s"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
-msgstr "%s paketinin kurulması gerekiyor. Kurulmasını ister misiniz?"
+msgstr "Ağ'ın yeniden başlatılması gerekiyor. Yeniden başlatmak ister misiniz?"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -10012,9 +10030,9 @@ msgid "Assign host name from DHCP address"
 msgstr "Lütfen makina adını ya da IP numarasını giriniz."
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network Hotplugging"
-msgstr "Ağ İzlemesi"
+msgstr "Ağ Hotplugging"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10022,9 +10040,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Track ağ kart id'si (laptoplar için kullanışlı)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Sunucu ismi"
+msgstr "DHCP makine adı"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -10039,9 +10057,9 @@ msgid "IP address"
 msgstr "IP adresi:"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "(bootp/dhcp/zeroconf)"
-msgstr "(bootp/dhcp)"
+msgstr "(bootp/dhcp/zeroconf)"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10095,7 +10113,7 @@ msgstr "Bir güvenlik kalkanı yapılandırılması bulundu!"
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
-msgstr "Parola"
+msgstr "Hesap Parolası"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10217,7 +10235,7 @@ msgid "Internet configuration"
 msgstr "İnternet ayarları"
 
 #: ../../partition_table/raw.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Something bad is happening on your drive. \n"
 "A test to check the integrity of data has failed. \n"
@@ -10226,7 +10244,7 @@ msgid ""
 msgstr ""
 "Diskinizde bir şeyler kötü gidiyor.\n"
 "Veri bütünlüğünün denetlenmesi başarısız oldu.\n"
-"Bu durumda bu diske yazılan her şey çöpe gitmiş olacak."
+"Bu durumda diskinize yazılan data kayıp olma ihtimali var."
 
 #: ../../printer/cups.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -10301,12 +10319,12 @@ msgstr "Bilinmeyen Model"
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown model"
-msgstr "Bilinmeyen Model"
+msgstr "Bilinmeyen model"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s (Port %s)"
-msgstr "Kapı"
+msgstr "%s (Liman %s)"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -10631,9 +10649,9 @@ msgid "Refresh printer list (to display all available remote CUPS printers)"
 msgstr "Yazıcı listesini tazele (Uzak CUPS yazıcıları da göstermek için)"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Display all available remote CUPS printers"
-msgstr "Yazıcı listesini tazele (Uzak CUPS yazıcıları da göstermek için)"
+msgstr "Tüm uzak CUPS yazıcılarını göster"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10686,9 +10704,9 @@ msgid "Select Printer Spooler"
 msgstr "Yazıcı makarasını seçin"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Setting Default Printer..."
-msgstr "Öntanımlı yazıcı"
+msgstr "Öntanımlı yazıcı ayarlanıyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10805,12 +10823,12 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Configure the network now"
-msgstr "Ağ şimdi yapılandırılsın"
+msgstr "Ağ'ı şimdi yapılandır"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Go on without configuring the network"
-msgstr "Ağ yapılandırılmadan devam edilsin"
+msgstr "Ağ yapılandırılmadan devam et"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11284,9 +11302,9 @@ msgid "Option %s must be an integer number!"
 msgstr "%s seçeneği bir tamsayı olmalıdır!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer default settings"
-msgstr "Yazıcı model seçimi"
+msgstr "Öntanımlı yazıcı ayarları"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11308,7 +11326,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "HP LaserJet 1000 için Firmware-güncellemesi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11380,7 +11398,7 @@ msgstr ""
 "(yazıcınızın kılavuzuna bakınız)."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "\n"
@@ -11391,8 +11409,8 @@ msgstr ""
 "\n"
 "\n"
 "Lütfen Printerdrake'in doğru yazıcıyı bulup bulmadığını kontrol edin. Yanlış "
-"model bulunmuşsa ya da \"Temel Yazıcı\" gösteriliyorsa, listeyi tarayarak "
-"doğru modeli bulun."
+"model bulunmuşsa ya da \"Temel Yazıcı\" gösteriliyorsa, listeden doğru "
+"modeli bulun."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11481,17 +11499,17 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter Printer Name and Comments"
-msgstr ""
+msgstr "Yazıcı Adını ve Yorumları Girin"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Making printer port available for CUPS..."
-msgstr ""
+msgstr "Yazıcı limanı CUPS'a uygun hale getiriliyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Checking device and configuring HPOJ..."
-msgstr ""
+msgstr "Aygıt sınanıyor ve HPOJ yapılandırılıyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11504,19 +11522,19 @@ msgid "Scanning on your HP multi-function device"
 msgstr ", çok işlevli aygıt"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing mtools packages..."
-msgstr "Paketler kuruluyor..."
+msgstr "mtools paketleri kuruluyor..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing SANE packages..."
-msgstr "Paketler kuruluyor..."
+msgstr "SANE paketleri kuruluyor..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installing HPOJ package..."
-msgstr "Paketler kuruluyor..."
+msgstr "HPOJ paketi kuruluyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11527,14 +11545,14 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "A command line must be entered!"
-msgstr "Geçerli bir URI girilmelidir!"
+msgstr "Bir komut satırı girilmelidir!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Command line"
-msgstr "Alan adı"
+msgstr "Komut satırı"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11544,9 +11562,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Pipe into command"
-msgstr "Bir komuttaki bağlama işi"
+msgstr "Komuta bağla(borula)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12220,31 +12238,35 @@ msgid ""
 "Printerdrake could not determine which model your printer %s is. Please "
 "choose the correct model from the list."
 msgstr ""
+"\n"
+"\n"
+"Printerdrake %s yazıcınızın modelini belirleyemedi. Lütfen listeden doğru "
+"modeli seçiniz."
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid " on "
-msgstr ""
+msgstr " üstündeki "
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configuring printer ..."
-msgstr "\"%s\" yazıcısını yapılandır..."
+msgstr "Yazıcı yapılandırılıyor ..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for new printers..."
-msgstr "Mevcut yazıcılar"
+msgstr "Yeni yazıcılar aranıyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12310,51 +12332,53 @@ msgstr ""
 "Bir adet bilinmeyen yazıcı bilgisayarınıza doğrudan bağlı"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "is directly connected to your system"
 msgstr ""
+"Şu yazıcı\n"
 "\n"
-"Bir adet bilinmeyen yazıcı bilgisayarınıza doğrudan bağlı"
+"%s%s\n"
+"sisteminize direk olarak bağlı bulunmaktadır"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printer\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"Şu yazıcı\n"
 "\n"
-"Bir adet bilinmeyen yazıcı bilgisayarınıza doğrudan bağlı"
+"%s%s\n"
+"sisteminize direk olarak bağlı bulunmaktadır"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The following printers\n"
 "\n"
 "%s%s\n"
 "are directly connected to your system"
 msgstr ""
+"Şu yazıcılar\n"
 "\n"
-"Bir adet bilinmeyen yazıcı bilgisayarınıza doğrudan bağlı"
+"%s%s\n"
+"sisteminize direk olarak bağlı bulunmaktadır"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and %d unknown printers"
-msgstr ""
-"\n"
-"ve %d adet bilinmeyen yazıcı "
+msgstr "ve %d adet bilinmeyen yazıcı"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "and one unknown printer"
-msgstr ""
-"\n"
-"ve bir bilinmeyen yazıcı "
+msgstr "ve bir adet bilinmeyen yazıcı"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12362,39 +12386,41 @@ msgid "Checking your system..."
 msgstr "Sisteminiz denetleniyor..."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restarting CUPS..."
-msgstr "XFS'i yeniden başlat"
+msgstr "CUPS yeniden başlatılıyor..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "This server is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Bu sunucu listenizde zaten bulunmaktadır, tekrar eklenilemez.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Examples for correct IPs:\n"
-msgstr ""
+msgstr "Doğru IP adresi örnekleri:\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "The entered IP is not correct.\n"
-msgstr "Model doğru"
+msgstr "Girilen IP adresi doğru değil.\n"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Server IP missing!"
-msgstr "NCP sunucusu ismi yok!"
+msgstr "Sunucu IP adresi yok!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Eğer liman numarası girilmezse, 631 öntanımlı olarak alınacaktır."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr ""
+"Yazıcısını kullanmak istediğiniz sunucunun IP adresini ve liman numarasını "
+"giriniz."
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12402,19 +12428,19 @@ msgid "Accessing printers on remote CUPS servers"
 msgstr "Uzak CUPS sunucusundaki yazıcı"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected server"
-msgstr "Seçilenleri Sil"
+msgstr "Seçili sunucuyu kaldır"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected server"
-msgstr "%s algılandı"
+msgstr "Seçili sunucuyu düzenle"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add server"
-msgstr "Kullanıcı ekle"
+msgstr "Sunucu ekle"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12427,22 +12453,22 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
-msgstr ""
+msgstr "Makine/Ağ IP adresi:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "This host/network is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Bu makine/ağ listenizde zaten bulunmaktadır, tekrar eklenilemez.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The entered host/network IP is not correct.\n"
-msgstr ""
+msgstr "Girilen makine/ağ IP numarası doğru değil.\n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host/network IP address missing."
-msgstr ""
+msgstr "Makine/ağ IP adresi yok."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12452,24 +12478,24 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local printers"
-msgstr "Mevcut yazıcılar"
+msgstr "Yerel yazıcılar paylaşılıyor"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host/network"
-msgstr "Seçilenleri Sil"
+msgstr "Seçili makine/ağ'ı kaldır"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Edit selected host/network"
-msgstr ""
+msgstr "Seçili makine/ağ'ı düzenle"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Add host/network"
-msgstr ""
+msgstr "Makine/ağ ekle"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12513,9 +12539,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Yazdırma sistemini değiştir"
+msgstr "Japonca metin yazdırma kipi"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12531,9 +12557,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "None"
-msgstr "Bitti"
+msgstr "Hiçbiri"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12541,14 +12567,14 @@ msgid "Additional CUPS servers: "
 msgstr "CUPS sunucusu \"%s\" üzerindeki"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "No remote machines"
-msgstr "(bu makinada)"
+msgstr "Uzak makine yok"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Custom configuration"
-msgstr "Renk yapılandırması"
+msgstr "Özel yapılandırma"
 
 #: ../../printer/printerdrake.pm:1
 #, fuzzy, c-format
@@ -12558,12 +12584,12 @@ msgstr "Dosya paylaşımı"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatically find available printers on remote machines"
-msgstr ""
+msgstr "Uzak makinelerdeki yazıcıları otomatik olarak bul"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The printers on this machine are available to other computers"
-msgstr ""
+msgstr "Bu makinedeki yazıcılar diğer makinelerden erişilebilinir."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12580,9 +12606,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "OKI winprinter yapılandırması"
+msgstr "CUPS yazdırma yapılandırması"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13131,6 +13157,7 @@ msgstr "Lütfen çıkın ve Ctrl-Alt-BackSpace tuşlarına basın"
 #, c-format
 msgid "/etc/hosts.allow and /etc/hosts.deny already configured - not changed"
 msgstr ""
+"/etc/hosts.allow ve /etc/hosts.deny zaten yapılandırılmış - değiştirilmedi"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13175,7 +13202,7 @@ msgstr "Yapılandırmayı Kaydet"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Dynamic IP Address Pool:"
-msgstr ""
+msgstr "Dinamik IP Adresleri Havuzu:"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13321,9 +13348,9 @@ msgid "Build All Kernels -->"
 msgstr "Bütün çekirnekleri derle -->"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "No NIC selected!"
-msgstr "Bir NIC seçilmemiş!"
+msgstr "Hiçbir NIC seçilmemiş!"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13612,7 +13639,7 @@ msgstr "Otomatik kurulum disketi oluşturuluyor"
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "manual"
-msgstr ""
+msgstr "elle"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -15865,7 +15892,7 @@ msgstr ""
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "Choosing a display manager"
-msgstr ""
+msgstr "Bir görüntü yönetici seçin"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15915,7 +15942,7 @@ msgstr "modülü kaldır"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Add a module"
-msgstr "modül ekle"
+msgstr "Bir modül ekle"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -15925,7 +15952,7 @@ msgstr "scsi modülleri atla"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "if needed"
-msgstr "(gerekirse)"
+msgstr "gerekirse"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -16468,7 +16495,7 @@ msgstr "Mevcut bağdaştırıcı yapılandırmasını göster"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "No (experts only)"
-msgstr ""
+msgstr "Hayır (sadece uzmanlar)"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16547,9 +16574,9 @@ msgid "Interface %s (using module %s)"
 msgstr "%s Arayüzü (%s modülü kullanılarak)"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Net Device"
-msgstr "Xinetd Servisi"
+msgstr "Ağ Aygıtı"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16561,6 +16588,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Lütfen İnternet'e bağlantı için kullanılacak arayüzü seçiniz.\n"
+"\n"
+"Örnek:\n"
+"\t\tppp+  : modem veya DSL bağlantıları, \n"
+"\t\teth0, veya eth1 : kablo bağlantısı, \n"
+"\t\tippp+ : isdn bağlantısı.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16845,9 +16878,9 @@ msgid "path"
 msgstr "yol"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Location of auto_install.cfg file"
-msgstr "Otomatik kurulum disketi oluşturuluyor"
+msgstr "auto_install.cfg dosyasının konumu"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16863,16 +16896,18 @@ msgstr ""
 msgid ""
 "No CD or DVD image found, please copy the installation program and rpm files."
 msgstr ""
+"CD veya DVD görüntüsü bulunamadı, lütfen kurulum programını ve rpm "
+"dosyalarını kopyalayın."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "No image found"
-msgstr "Yazıcı bulunamadı!"
+msgstr "Görüntü (imaj) bulunamadı!"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation image directory"
-msgstr "Xpmac (kurulum ekran sürücüsü)"
+msgstr "Kurulum görüntü (imaj) dizini"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16885,14 +16920,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP end ip"
-msgstr "DHCP bitiş modu"
+msgstr "DHCP bitiş ip numarası"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "The DHCP start ip"
-msgstr "DHCP başlama modu"
+msgstr "DHCP başlama ip numarası"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -16905,15 +16940,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Interface %s (on network %s)"
-msgstr "%s Arayüzü (%s modülü kullanılarak)"
+msgstr "(%2$s Ağ'ı üzerindeki) %1$s Arayüzü"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose which network interface will be used for the dhcp server."
-msgstr ""
-"Lütfen Internet'e bağlanmak için kullanacağınız ağ bağdaştırıcısını seçin"
+msgstr "Lütfen dhcp sunucusu için kullanılacak ağ arayüzünü seçiniz."
 
 #: ../../standalone/drakpxe:1
 #, fuzzy, c-format
@@ -16941,14 +16975,14 @@ msgstr ""
 "kartına) ihtiyacınız var."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "Installation Server Configuration"
-msgstr "dhcpd Sunucu Yapılandırması"
+msgstr "Kurulum Sunucu Yapılandırması"
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid "PXE Server Configuration"
-msgstr "dhcpd Sunucu Yapılandırması"
+msgstr "PXE Sunucu Yapılandırması"
 
 #: ../../standalone/draksec:1
 #, c-format
@@ -17001,12 +17035,12 @@ msgid "Security Level:"
 msgstr "Güvenlik seviyesi:"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "(default value: %s)"
-msgstr " (öntanımlı değer: %s)"
+msgstr "(öntanımlı değer: %s)"
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Standard: This is the standard security recommended for a computer that will "
 "be used to connect\n"
@@ -17033,15 +17067,15 @@ msgstr ""
 "Standart: Bu standart güvenlik seviyesi internete bağlanan her makine için "
 "önerilir.\n"
 "\n"
-"Yüksek:   Bu seviye bazı sınırlayan kurallar getirir ve her akşam daha fazla "
+"Yüksek:   Bu seviye bazı sınırlayan kurallar getirir ve akşamları daha fazla "
 "otomatik denetim yapar.\n"
 "\n"
 "Daha Yüksek:    Sistemin bir güvenli sunucu olarak kullanılabilmesi için "
-"hertürlü önlemi alır.\n"
-"                 Eğer sisteminizi bir sunucu olarak degilde bir internet "
-"istemci (yani sadece internete\n"
-"                 bağlanacak bir sistem) olarak düşünüyorsanız daha alçak bir "
-"seviye seçin.\n"
+"hertürlü \n"
+"                önlemi alır. Eğer sisteminizi bir sunucu olarak degilde bir "
+"internet istemci (yani sadece\n"
+"                internete bağlanacak bir sistem) olarak düşünüyorsanız daha "
+"alçak bir seviye seçin.\n"
 "\n"
 "Paranoyak:     \"Daha Yüksek\" seçeneğindekinin tüm özellikleri ile birlikte "
 "sistem tüm girişlere kapatılır\n"
@@ -17049,8 +17083,8 @@ msgstr ""
 "\n"
 "Güvenlik Yöneticisi:\n"
 "                Eğer 'Güvenlik Alarmları' seçenekleri belirlendiyse gerekli "
-"güvenlik alarmları kullanıcılara\n"
-"/t   yollanacaktır. ( kullanıcı adı ve email )"
+"güvenlik alarmları\n"
+"                bu kullanıcılara yollanacaktır. ( kullanıcı adı ve email ?)"
 
 #: ../../standalone/draksound:1
 #, c-format
@@ -17126,12 +17160,12 @@ msgstr "Bootsplash teması kaydediliyor..."
 #: ../../standalone/draksplash:1
 #, c-format
 msgid "choose image file"
-msgstr "bir dosya seçin"
+msgstr "bir görüntü dosyası seçin"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "bir dosya seçin"
+msgstr "görüntü seçin"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17430,17 +17464,17 @@ msgstr "ikincil"
 #, c-format
 msgid ""
 "Click on a device in the left tree in order to display its information here."
-msgstr ""
+msgstr "Hakkında bilgi edinmek istediğiniz aygıtı sol ağaçtan tıklayınız."
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown"
-msgstr "Bilinmeyen Model"
+msgstr "Bilinmeyen"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "unknown"
-msgstr "Bilinmeyen Model"
+msgstr "bilinmeyen"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17533,9 +17567,9 @@ msgid "Harddrake help"
 msgstr "Harddrake yardım"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Fields description"
-msgstr "Tanım"
+msgstr "/_Alan tanımlaması"
 
 #: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
 #, c-format
@@ -17548,9 +17582,9 @@ msgid "/_Quit"
 msgstr "/_Çık"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "/Autodetect _jazz drives"
-msgstr "/_Yazıcıları otomatik algıla"
+msgstr "/_jazz sürücülerini otomatik algıla"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17608,9 +17642,9 @@ msgid "network printer port"
 msgstr "ağ yazıcısı portu"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the name of the CPU"
-msgstr "aygıtın üreticisinin adı"
+msgstr "CPU'nun ismi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17618,9 +17652,9 @@ msgid "Name"
 msgstr "İsim:"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the number of buttons the mouse has"
-msgstr "işlemci sayısı"
+msgstr "farenin sahip olduğu tuş sayısı"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17630,7 +17664,7 @@ msgstr "Tuş sayısı"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Official vendor name of the cpu"
-msgstr "Cpu'un Resmi üreticisinin adı"
+msgstr "Cpu'nun Resmi üreticisinin adı"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17698,6 +17732,8 @@ msgstr "Kapanma hatası"
 #, c-format
 msgid "Early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
+"Eski pentiumlarda birçok hatacıklar vardı ve F00F byte kodunu çözerken "
+"kitleniyorlardı"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17710,9 +17746,9 @@ msgid "yes means the arithmetic coprocessor has an exception vector attached"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Whether the FPU has an irq vector"
-msgstr "FPU'da bir irq vektörü mevcut mu ?"
+msgstr "FPU'da bir irq vektörü mevcut"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17794,7 +17830,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Frequency (MHz)"
-msgstr ""
+msgstr "Frekans (MHz)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17809,7 +17845,7 @@ msgstr "Cpuid seviyesi"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Family of the cpu (eg: 6 for i686 class)"
-msgstr ""
+msgstr "CPU ailesi (örn: i686 sınıfı için 6)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17819,27 +17855,27 @@ msgstr "Cpuid ailesi"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Whether this cpu has the Cyrix 6x86 Coma bug"
-msgstr ""
+msgstr "Bu işlemci Cyrix 6x86 Virgül hatasını içermektedir"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Coma bug"
-msgstr "Virgül hatası:"
+msgstr "Virgül hatası"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "special capacities of the driver (burning ability and or DVD support)"
-msgstr ""
+msgstr "Sürücünün özel kapasiteleri ( yazma desteği ve/veya DVD support"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Drive capacity"
-msgstr ""
+msgstr "Sürücü kapasitesi"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Size of the (second level) cpu cache"
-msgstr ""
+msgstr "CPU önbelleğinin (ikinci seviye) boyutu"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17863,13 +17899,13 @@ msgid "Location on the bus"
 msgstr "Veriyolundaki konum"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "- PCI and USB devices: this lists the vendor, device, subvendor and "
 "subdevice PCI/USB ids"
 msgstr ""
-"- PCI ve USB aygıtları : burada üretici, aygıt, altüretici ve altaygıt PCI/"
-"USB kimlikleri gösterilir"
+"- PCI ve USB aygıtları : bu liste üretici, aygıt, alt-üretici ve alt-aygıt  "
+"PCI/USB kimliklerini göstermektedir"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17887,7 +17923,7 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Bogomips"
-msgstr ""
+msgstr "Bogomips"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17972,15 +18008,15 @@ msgstr "uyarı yapılandırması"
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "You will receive an alert if the load is higher than this value"
-msgstr "Yük bu değerden fazlaysa bir uyarı alacaksınız"
+msgstr "Yükleme bu değerden fazlaysa bir uyarı alacaksınız"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "load setting"
-msgstr "yük ayarı"
+msgstr "yükleme ayarları"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You will receive an alert if one of the selected services is no longer "
 "running"
@@ -18265,7 +18301,7 @@ msgid "Connecting to the Internet "
 msgstr "Internete bağlanılıyor "
 
 #: ../../standalone/net_monitor:1
-#, fuzzy, c-format
+#, c-format
 msgid "Disconnecting from the Internet "
 msgstr "Internetten çıkılıyor "
 
@@ -18310,29 +18346,29 @@ msgid "Network Monitoring"
 msgstr "Ağ İzlemesi"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Reading data of installed printers..."
-msgstr "Mevcut yazıcılar"
+msgstr "Yüklü yazıcıların verisi okunuyor..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Name/IP address of host:"
-msgstr ""
+msgstr "Makinenin adı/IP adresi:"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "This host is already in the list, it cannot be added again.\n"
-msgstr ""
+msgstr "Bu makine listede zaten mevcut, tekrar eklenemez.\n"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scannerdrake"
-msgstr "Bir tarayıcı seçiniz"
+msgstr "Scannerdrake"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "You must enter a host name or an IP address.\n"
-msgstr "Lütfen makina adını ya da IP numarasını giriniz."
+msgstr "Makina adı ya da IP numarası girmelisiniz.\n"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18340,29 +18376,29 @@ msgid "Choose the host on which the local scanners should be made available:"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Sharing of local scanners"
-msgstr "Mevcut yazıcılar"
+msgstr "Yerel tarayıcıların paylaşımı"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "This machine"
-msgstr "(bu makinada)"
+msgstr "Bu makine"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Remove selected host"
-msgstr "Seçilenleri Sil"
+msgstr "Seçili makineleri kaldır"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected host"
-msgstr "%s algılandı"
+msgstr "Seçili makineyi düzenle"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add host"
-msgstr "Kullanıcı ekle"
+msgstr "Makine Ekle"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18370,14 +18406,14 @@ msgid "These are the machines from which the scanners should be used:"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Usage of remote scanners"
-msgstr "Boş alan kullanılsın"
+msgstr "Uzak (makinedeki) tarayıcıların kullanımı"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "All remote machines"
-msgstr "(bu makinada)"
+msgstr "Tüm uzak makineler"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18389,22 +18425,23 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
-msgstr ""
+msgstr "Şu makinelerdeki tarayıcıları kullan: "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use scanners on remote computers"
-msgstr ""
+msgstr "Uzak makinelerdeki tarayıcıları kullan"
 
 #: ../../standalone/scannerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Scanner sharing to hosts: "
-msgstr "Dosya paylaşımı"
+msgstr "Şu makinelere tarayıcı paylaştırılıyor: "
 
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The scanners on this machine are available to other computers"
 msgstr ""
+"Bu makinedeki mevcut tarayıcılara diğer bilgisayarlardan da erişilebilinir"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18423,7 +18460,7 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Re-generating list of configured scanners ..."
-msgstr ""
+msgstr "Yapılandırılmış tarayıcıların listesi yeniden oluşturuluyor ..."
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18603,11 +18640,11 @@ msgid ""
 "Your new operating system is the result of collaborative work of the "
 "worldwide Linux Community."
 msgstr ""
-"MandrakeSoft başarısı Özgür Yazılım felsefesi üzerine kuruludur. Yeni "
+"MandrakeSoft'un başarısı Özgür Yazılım felsefesi üzerine kuruludur. Yeni "
 "işletim sisteminiz dünya çapında Linux Topluluğunun ortaklaşa çalışmasının "
 "bir sonucudur.\n"
 "\n"
-"Çeviri hatalarını lütfen <omer_fad@hotmail.com> adresine bildiriniz."
+"Çeviri hatalarını lütfen < omer_fad@hotmail.com > adresine bildiriniz."
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 0.1\n"
-"POT-Creation-Date: 2003-03-12 17:27+0100\n"
-"PO-Revision-Date: 2003-03-13 15:00+0900\n"
+"POT-Creation-Date: 2003-03-24 22:30+0100\n"
+"PO-Revision-Date: 2003-03-16 02:21+0900\n"
 "Last-Translator: Budi Rachmanto <rac@linux-mandrake.com>\n"
 "Language-Team: Bahasa Indonesia <id@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -109,6 +109,11 @@ msgstr "Ini adalah daftar negara yang tersedia"
 #, c-format
 msgid "Please choose your country."
 msgstr "Pilih negara Anda."
+
+#: ../../any.pm:1 ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid " / Region"
+msgstr "Reunion"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -1147,6 +1152,52 @@ msgid ""
 "be run on your machine. If you plan to use this machine as a server it's a\n"
 "good idea to review this setup."
 msgstr ""
+"DrakX menyajikan aneka informasi mesin Anda. Jika ingin mengubah entri,\n"
+"klik \"Konfigurasikan\":\n"
+"\n"
+" * \"Papanketik\": cek konfigurasi map papanketik, ubah bila perlu.\n"
+"\n"
+" * \"Negara\": negara saat ini. Jika tak berada di negara ini, pilih yg "
+"lain.\n"
+"\n"
+" * \"Zona waktu\": DrakX menerka zona waktu Anda dari bahasa yg Anda pilih.\n"
+"Jika tak benar, klik \"Konfigurasikan\".\n"
+"\n"
+" * \"Mouse\": cek konfigurasi mouse, klik tombol utk mengubahnya bila perlu\n"
+"\n"
+" * \"Printer\": klik \"Konfigurasikan\" utk membuka konfigurator printer.\n"
+"\n"
+" * \"Kartu suara\": kartu suara terdeteksi di sistem Anda akan ditampilkan\n"
+"di sini. Jika tak cocok, klik tombol dan pilih driver lain.\n"
+"\n"
+" * \"Antarmuka Grafis\": Awalnya DrakX mengkonfigurasikan antarmuka grafis "
+"pada\n"
+"resolusi \"800x600\". Jika tak cocok, klik tombol utk mengonfigurasikannya "
+"lagi.\n"
+"\n"
+" * \"Kartu TV\": kartu TV yg terdeteksi di sistem Anda akan ditampilkan di\n"
+"sini. Jika Anda punya kartu TV dan tak terdeteksi, klik tombol utk\n"
+"mengkonfigurasikannya.\n"
+"\n"
+" * \"Kartu ISDN\": kartu ISDN yg terdeteksi di sistem Anda akan ditampilkan\n"
+"di sini. Anda dapat meng-klik tombol utk mengubah parameternya.\n"
+"\n"
+" * \"Jaringan\": Jika Anda ingin mengkonfigurasikan akses Internet atau "
+"jaringan\n"
+"lokal sekarang, klik tombol ini.\n"
+"\n"
+" * \"Tingkat Keamanan\": Tingkat keamanan dapat didefinisikan ulang di "
+"sini.\n"
+"\n"
+" * \"Firewall\": Jika ingin berhubungan dg Internet, sebaiknya Anda berjaga\n"
+"diri dari penyusupan dg memasang firewall (tembok api).\n"
+"\n"
+" * \"Bootloader\": Jika Anda ingin mengganti konfigurasi bootloader, klik "
+"tombol\n"
+"tersebut. Ini diperuntukkan pengguna ahli.\n"
+"\n"
+" * \"Servis\": Anda dpt mengatur servis mana yg akan dijalankan. Jika ingin\n"
+"menjalankan mesin sbg server periksalah setup-nya sekali lagi."
 
 #: ../../help.pm:1
 #, c-format
@@ -1316,7 +1367,7 @@ msgstr ""
 "untuk melihat pilihan boot."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "DrakX will first detect any IDE devices present in your computer. It will\n"
 "also scan for one or more PCI SCSI cards on your system. If a SCSI card is\n"
@@ -1335,30 +1386,24 @@ msgid ""
 "which parameters need to be passed to the hardware, you'll need to manually\n"
 "configure the driver."
 msgstr ""
-"DrakX sedang mendeteksi perangkat IDE komputer Anda, juga men-scan kartu\n"
+"DrakX mendeteksi perangkat IDE komputer Anda, juga men-scan kartu\n"
 "SCSI PCI di sistem Anda. Jika kartu SCSI ditemukan DrakX akan otomatis\n"
 "meng-instal driver yang sesuai.\n"
 "\n"
-"Karena perangkat keras terkadang tak terdeteksi, DrakX akan bertanya apakah\n"
-"ada kartu SCSI PCI. Klik \"Ya\" jika Anda tahu ada kartu SCSI terinstal di\n"
-"mesin Anda. Akan disajikan list kartu SCSI utk dipilih. Klik \"Tidak\" jika\n"
-"tak ada hardware SCSI. Jika Anda tak yakin, periksa daftar perangkat keras\n"
-"yang terdeteksi di mesin Anda dg memilih \"Lihat info hardware\" lalu klik\n"
-"\"OK\". Periksa daftar hardware lalu klik \"OK\" utk kembali.\n"
+"Karena perangkat keras terkadang tak terdeteksi, DrakX mungkin gagal\n"
+"mendeteksi harddisk Anda. Jika demikian, tentukan sendiri hardware Anda.\n"
 "\n"
-"Jika Anda harus menunjuk adaptor secara manual, DrakX akan bertanya apakah\n"
-"Anda ingin menunjuk opsi untuknya. Anda harus mengizinkan DrakX mem-probe\n"
-"hardware utk opsi spesifik-kartu yg diperlukan hardware utk inisiasi. Ini\n"
-"biasanya bekerja baik.\n"
+"Jika Anda harus menentukan adaptor SCSI PCI secara manual, DrakX akan\n"
+"menanyakan opsi konfigurasinya. DrakX akan mem-probe hardware utk "
+"menentukan\n"
+"opsi spesifik hardware yg diperlukan utk menyalakan adaptor. DrakX biasanya\n"
+"melakukan ini tanpa banyak basa-basi.\n"
 "\n"
 "Jika DrakX gagal mem-probe opsi yang harus diberikan, Anda perlu memberikan\n"
-"opsi ke driver secara manual. Baca ``User Guide'' (bab 3, bag. \"Collecting\n"
-"information on your hardware\") utk trik mendapat parameter yg dibutuhkan\n"
-"dari dokumentasi hardware, website pabrik (jika Anda punya akses Internet)\n"
-"atau wicrosoft mindows (jika Anda memakai hardware ini di windows)."
+"opsi ke driver secara manual."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Now, it's time to select a printing system for your computer. Other OSs may\n"
 "offer you one, but Mandrake Linux offers two. Each of the printing systems\n"
@@ -1386,30 +1431,24 @@ msgid ""
 "Center and clicking the expert button."
 msgstr ""
 "Kini kita pilih sistem cetak komputer Anda. OS lain mungkin punya satu,\n"
-"Mandrake menyediakan tiga.\n"
+"Mandrake menyediakan dua.\n"
 "\n"
-" * \"pdq\" - artinya ``print, djangan nqantri'', adalah pilihan jika Anda\n"
+" * \"pdq\" - artinya ``Print, Djangan nQantri'', adalah pilihan jika Anda\n"
 "punya koneksi langsung ke printer Anda dan ingin bebas dari panik kemacetan\n"
 "printer, serta tak punya printer jaringan. Ia akan meng-handle hanya kasus\n"
-"jaringan yg amat mudah dan agak lambat utk network. Ambil \"pdq\" jika ini\n"
-"kali pertama Anda mengenal GNU/Linux. Anda dapat mengubah pilihan setelah\n"
-"instalasi dg menjalankan PrinterDrake dari Pusat Kontrol Mandrake dan\n"
-"meng-klik tombol expert/ahli.\n"
+"jaringan yg amat mudah dan agak lambat utk kerja jaringan. Ambil \"pdq\" "
+"jika\n"
+"ini kali pertama Anda mengenal GNU/Linux.\n"
 "\n"
-" * \"CUPS\"``Sistem Cetak Unix Umum'' canggih untuk mencetak ke printer\n"
+" * \"CUPS\" - ``Sistem Cetak Unix Umum'' canggih untuk mencetak ke printer\n"
 "lokal dan juga separuh planet. Mudah dan berfungsi spt server/klien utk\n"
 "sistem cetak kuno \"lpd\" jadi kompatibel dg sistem lama. Banyak trik dapat\n"
 "dilakukan, tapi setup awalnya hampir semudah \"pdq\". Jika Anda perlu ini\n"
 "utk emulasi server \"lpd\", Anda harus menyalakan daemon \"cups-lpd\".\n"
 "Front-end grafis disediakan utk pencetakan/pemilihan opsi printer.\n"
 "\n"
-" * \"lprNG\"``daemon printer baris Generasi Baru''. Sistem ini dapat\n"
-"melakukan hal yg mirip dg yg bisa dilakukan sistem lain, hanya saja ia akan\n"
-"mencetak ke printer yang terhubung dengan network Novell, karena mensupport\n"
-"protokol IPX, dan bisa mencetak langsung ke perintah shell. Jika Anda perlu\n"
-"Novell atau mencetak ke perintah tanpa memakai konstruksi pipa terpisah,\n"
-"gunakan lprNG. Jika tidak, pilihlah CUPS sebab lebih mudah dan bekerja baik\n"
-"di network."
+"Jika nanti Anda tidak menyukai sistem cetak yg Anda pilih saat ini,\n"
+"jalankan PrinterDrake dari Pusat Kontrol Mandrake dan klik tombol Ahli."
 
 #: ../../help.pm:1
 #, c-format
@@ -1433,6 +1472,20 @@ msgid ""
 "installed on the second hard drive (\"/dev/hdb\"), or even on a floppy disk\n"
 "(\"On Floppy\")."
 msgstr ""
+"LILO dan grub adalah pemuat boot GNU/Linux. DrakX akan menganalisa sektor\n"
+"boot disk dan bekerja menurut apa yg ditemukannya di sana:\n"
+"\n"
+" * jika ditemukan sektor boot Mindows, ia akan menggantinya dg sektor boot\n"
+"grub/LILO. Dg demikian Anda akan dapat memuat GNU/Linux atau OS lain.\n"
+"\n"
+" * jika ditemukan sektor boot grub/LILO, ia akan menggantinya dg yg baru.\n"
+"\n"
+"Jika DrakX tak dapat mengambil keputusan, ia akan menanyakan tempat menaruh\n"
+"bootloader.\n"
+"\n"
+"\"Device boot\": Umumnya Anda tak perlu mengubah aslinya (\"sektor pertama\n"
+"(MBR)\"), tapi jika ingin, pemuat boot dapat ditaruh di harddisk kedua\n"
+"(\"/dev/hdb\"), atau bahkan disket (\"Di Disket\")."
 
 #: ../../help.pm:1
 #, c-format
@@ -1646,7 +1699,7 @@ msgstr ""
 "apakah gerakan pointer di layar selaras dg gerakan mouse."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Your choice of preferred language will affect the language of the\n"
 "documentation, the installer and the system in general. Select first the\n"
@@ -1673,17 +1726,25 @@ msgid ""
 "language used by the entire system. Running the command as a regular user\n"
 "will only change the language settings for that particular user."
 msgstr ""
-"Pilih bahasa kesukaan Anda utk instalasi dan penggunaan sistem.\n"
+"Pilihan bahasa mempengaruhi bahasa dokumentasi, instalasi dan sistem pada\n"
+"umumnya. Pilih daerah tempat Anda berada, lalu bahasa yg Anda ucapkan.\n"
 "\n"
 "Klik \"Tambahan\" utk memilih bahasa-bahasa lain yg akan diinstal di\n"
 "workstation Anda. Hal ini akan menginstal file spesifik-bahasa dokumentasi\n"
-"sistem dan aplikasi. Misalnya jika Anda menginapkan pengguna dari Spanyol "
-"di\n"
-"mesin Anda, pilih bhs Indonesia sbg bahasa utama di tampilan pohon dan di\n"
-"bagian Tambahan klik bintang abu-abu yg terkait dg \"Spanyol\".\n"
+"sistem dan aplikasi. Misalnya jika Anda menginapkan pengguna dari Spanyol\n"
+"di mesin Anda, pilih bhs Indonesia sbg bahasa utama di tampilan pohon dan\n"
+"di bagian Tambahan pilih \"Spanyol\".\n"
 "\n"
-"Anda dapat menginstal banyak bahasa. Setelah Anda selesai memilih tambahan\n"
-"bahasa (locale) klik \"OK\" untuk melanjutkan."
+"Anda dapat menginstal banyak, bahkan semua bahasa dg menandai kotak \"Semua\n"
+"bahasa\". Terjemahan, font, tes ejaan, dll. yg terkait dg suatu bahasa akan\n"
+"diinstal. Sbg tambahan, unicode (UTF-8) akan dijadikan standar sistem jika\n"
+"\"Pakai Unicode sebagai standar\" ditandai. Awas, ini masih dalam tahap\n"
+"percobaan. Jika Anda memilih bahasa lain yg memerlukan encoding lain,\n"
+"support unicode akan diinstal.\n"
+"\n"
+"Utk men-switch bahasa, sbg \"root\" luncurkan \"/usr/sbin/localedrake\" utk\n"
+"mengganti bahasa yg digunakan oleh keseluruhan sistem. Jika dijalankan\n"
+"sbg pengguna normal, bahasa yg diubah hanyalah bagi pengguna tersebut."
 
 #: ../../help.pm:1
 #, c-format
@@ -1765,6 +1826,9 @@ msgid ""
 "country is not in the first list shown, click the \"More\" button to get\n"
 "the complete country list."
 msgstr ""
+"\"Negara\": cek pilihan negara saat ini. Jika tak berada di sini, klik\n"
+"\"Konfigurasikan\" dan pilih yg lain. Jika negara Anda tak ada di daftar,\n"
+"klik \"Lainnya\" utk mendapatkan daftar lengkap."
 
 #: ../../help.pm:1
 #, c-format
@@ -1968,7 +2032,7 @@ msgstr ""
 "cadangan dan image ramdisk utk situasi boot darurat."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, DrakX will allow you to choose the security level desired\n"
 "for the machine. As a rule of thumb, the security level should be set\n"
@@ -1981,12 +2045,11 @@ msgstr ""
 "Kini waktunya memilih tingkat keamanan mesin. Makin terbuka suatu mesin,\n"
 "dan makin penting data di dalamnya, tingkat keamanannya harus makin tinggi.\n"
 "Tapi, level keamanan yang tinggi umumnya mengorbankan kemudahan pemakaian.\n"
-"Info ttg level keamanan dapat dilihat bab MSEC pada ``Manual Referensi''.\n"
 "\n"
-"Jika Anda tak tahu apa yg dipilih, tetaplah pada opsi standar."
+"Jika Anda tak tahu apa yg dipilih, biarkan aslinya."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At the time you are installing Mandrake Linux, it is likely that some\n"
 "packages have been updated since the initial release. Bugs may have been\n"
@@ -2000,14 +2063,14 @@ msgid ""
 "appear: review the selection, and press \"Install\" to retrieve and install\n"
 "the selected package(s), or \"Cancel\" to abort."
 msgstr ""
-"Saat Mandrake Linux diinstal, nampaknya beberapa paket telah diupdate sejak\n"
-"rilis awal. Beberapa kutu mungkin telah diperbaiki, dan masalah keamanan\n"
-"dipecahkan. Untuk memanfaatkan update ini Anda dianjurkan men-download dari\n"
-"internet. Pilih \"Ya\" jika ada koneksi internet aktif, atau \"Tidak\" jika\n"
+"Saat Mandrake Linux diinstal, mungkin beberapa paket telah diupdate sejak\n"
+"rilis awal. Beberapa kesalahan mungkin telah diperbaiki / masalah keamanan\n"
+"dipecahkan. Untuk memanfaatkan update ini Anda dapat men-download-nya dari\n"
+"Internet. Pilih \"Ya\" jika ada koneksi Internet aktif, atau \"Tidak\" jika\n"
 "ingin mengupdate paket lain waktu.\n"
 "\n"
 "Jika \"Ya\", daftar sumber download update akan ditampilkan. Pilih yang\n"
-"dekat. Lalu muncul pohon seleksi paket: lihat lagi pilihan Anda, tekan\n"
+"terdekat. Lalu muncul daftar paket: lihat lagi pilihan Anda, tekan\n"
 "\"Instal\" untuk mengambil/nstal paket atau \"Batal\" jika tak jadi."
 
 #: ../../help.pm:1
@@ -2062,7 +2125,7 @@ msgstr ""
 "di disk."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There you are. Installation is now complete and your GNU/Linux system is\n"
 "ready to use. Just click \"Next ->\" to reboot the system. The first thing\n"
@@ -2095,13 +2158,15 @@ msgid ""
 "(*) You need a FAT-formatted floppy (to create one under GNU/Linux, type\n"
 "\"mformat a:\")"
 msgstr ""
-"Oke, instalasi kini selesai dan sistem GNU/Linux Anda siap dipakai. Klik\n"
-"\"OK\" utk reboot sistem. Anda dapat menjalankan GNU/Linux atau Windows,\n"
-"tergantung pilihan Anda (jika Anda memakai dual-boot).\n"
+"Instalasi kini selesai dan sistem GNU/Linux Anda siap dipakai. Klik\n"
+"\"Lanjut ->\" utk reboot. Yg akan Anda lihat pertama kali setelah tes "
+"hardware\n"
+"adalah menu bootloader; di sana Anda dapat memilih sistem operasi yg akan\n"
+"dijalankan.\n"
 "\n"
-"Tombol \"Tambahan\" (hanya di mode Ahli) menampilkan 2 tombol utk:\n"
+"Tombol \"Tambahan\" menampilkan 2 tombol utk:\n"
 "\n"
-" * \"Membuat floppy instalasi otomatis\": utk membuat disket instalasi yang\n"
+" * \"Membuat disket instalasi otomatis\": utk membuat disket instalasi yang\n"
 "akan secara otomatis melakukan instalasi tanpa bantuan operator, sama dg\n"
 "instalasi yang baru Anda konfigurasikan.\n"
 "\n"
@@ -2114,9 +2179,9 @@ msgstr ""
 "seluruhnya, semua data hilang.\n"
 "\n"
 "   Fitur ini amat praktis utk instalasi banyak mesin dg spesifikasi sama.\n"
-"Lihat pasal Auto install di website kami.\n"
+"Lihat pasal Auto install di situs web kami.\n"
 "\n"
-" * \"Menyimpan pilihan paket\"(*): simpan pilihan paket seperti yang dibuat\n"
+" * \"Simpan pilihan paket\"(*): simpan pilihan paket seperti yang dibuat\n"
 "sebelumnya. Lalu saat mengerjakan instalasi lain, masukkan floppy ke driver\n"
 "dan arahkan instalasi ke layar pertolongan dg menekan kunci [F1] lalu ketik\n"
 ">>linux defcfg=\"floppy\"<<.\n"
@@ -2125,7 +2190,7 @@ msgstr ""
 "\"mformat a:\")"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -2190,32 +2255,22 @@ msgid ""
 "``Starter Guide''."
 msgstr ""
 "Pada tahap ini, pilihlah tempat Mandrake Linux akan diinstal di harddisk.\n"
-"Bila harddisk masih kosong / ada sistem operasi lain yg mengisi seluruhnya,\n"
+"Jika harddisk masih kosong / ada sistem operasi lain yg mengisi seluruhnya,\n"
 "Anda perlu melakukan proses partisi. Pada dasarnya, proses partisi harddisk\n"
 "adalah membagi harddisk, dg membuat ruang kosong utk instalasi sistem\n"
 "Mandrake Linux.\n"
 "\n"
 "Karena bersifat satu arah (tak dapat dikembalikan ke keadaan awal), proses\n"
 "partisi dapat membuat stres dan pusing kepala, apalagi jika Anda belum\n"
-"berpengalaman. Untungnya, ada wizard yang mempermudah proses ini.\n"
+"berpengalaman. Untungnya, DrakX mempermudah proses ini.\n"
 "Sebelum mulai, baca dan pelajari dulu buku manual dengan baik.\n"
 "\n"
-"Jika Anda menggunakan mode Ahli, Anda akan masuk DiskDrake, alat partisi\n"
-"Mandrake Linux, yg memungkinkan fine-tuning partisi Anda. Lihat manual bab\n"
-"DiskDrake. Dari antarmuka instalasi, Anda dapat menggunakan wizard seperti\n"
-"dijelaskan di sini dg meng-klik tombol \"Wizard\".\n"
-"\n"
-"Bila partisi-partisi tsb sudah ada sebelumnya (hasil instal sebelumnya\n"
-"atau hasil program partisi lain), pilihlah partisi tsb utk tempat instalasi\n"
-"sistem Linux Anda.\n"
-"\n"
-"Jika belum ada partisi, Anda perlu membuatnya dengan program wizard. Ada\n"
-"bbrp opsi tergantung konfigurasi harddisk Anda:\n"
+"Ada bbrp opsi tergantung konfigurasi harddisk Anda:\n"
 "\n"
 " * \"Pakai ruang kosong\": opsi ini akan secara otomatis mem-partisi drive\n"
 "kosong Anda. Anda takkan ditanya lebih jauh.\n"
 "\n"
-" * \"Pakai partisi yang sudah ada\": wizard mendeteksi satu/lebih partisi\n"
+" * \"Pakai partisi yang sudah ada\": akan dideteksi satu/lebih partisi\n"
 "Linux di hard drive Anda. Jika Anda ingin menggunakannya, pilih opsi ini.\n"
 "\n"
 " * \"Pakai ruang kosong pada partisi Mindows\": jika wicrosoft mindows\n"
@@ -2228,7 +2283,7 @@ msgstr ""
 "\n"
 "   Sebelum memilih cara ini, mohon maklum bahwa partisi wicrosoft mindows\n"
 "sekarang berukuran lebih kecil. Ruang dlm wicrosoft mindows utk menyimpan\n"
-"data / menginstall software baru menjadi kecil.\n"
+"data / menginstal software baru menjadi kecil.\n"
 "\n"
 " * \"Hapus seluruh disk\": jika Anda ingin hapus semua data dan partisi di\n"
 "harddisk Anda utk kemudian digantikan semuanya oleh sistem Mandrake Linux,\n"
@@ -2241,9 +2296,11 @@ msgstr ""
 "\n"
 "   !! Jika Anda pilih opsi ini semua data di disk Anda akan hilang. !!\n"
 "\n"
-" * \"Mode ahli\": pilih jika Anda ingin secara manual mempartisi harddisk.\n"
+" * \"Partisi manual\": pilih jika Anda ingin secara manual mempartisi "
+"harddisk.\n"
 "Awas! Cara ini amat perkasa tapi juga berbahaya. Anda bisa kehilangan data\n"
-"dg mudah. Jangan pilih kecuali Anda tahu yg Anda lakukan."
+"dg mudah. Instruksi penggunaan DiskDrake dapat dilihat di bagian\n"
+"``Pengaturan Partisi'' dalam ``Pedoman Pemula''."
 
 #: ../../help.pm:1
 #, c-format
@@ -2450,7 +2507,7 @@ msgstr ""
 "oleh mesin lain di jaringan lokal Anda."
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This dialog is used to choose which services you wish to start at boot\n"
 "time.\n"
@@ -2490,6 +2547,10 @@ msgid ""
 "Guide'' for more information on how to setup a new printer. The interface\n"
 "presented there is similar to the one used during installation."
 msgstr ""
+"\"Printer\": klik \"Konfigurasikan\" utk membuka konfigurator printer. Baca\n"
+"bab yg bersangkutan di ``Pedoman Pemula'' utk info lebih lanjut ttg cara\n"
+"setup printer baru. Antarmuka yg ditampilkan di sana sama dg yg dipakai\n"
+"saat instalasi."
 
 #: ../../help.pm:1
 #, c-format
@@ -4055,9 +4116,9 @@ msgstr "Sistem"
 
 #. -PO: example: lilo-graphic on /dev/hda1
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s on %s"
-msgstr "Port"
+msgstr "%s di %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4196,14 +4257,14 @@ msgid "Which is your timezone?"
 msgstr "Pilih zonawaktu Anda"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Would you like to try again?"
-msgstr "Ingin konfigurasi printer?"
+msgstr "Ingin coba lagi?"
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to contact mirror %s"
-msgstr "Fork gagal: %s"
+msgstr "Gagal hubungi mirror %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4488,9 +4549,9 @@ msgid "Please choose your type of mouse."
 msgstr "Pilihlah tipe mouse Anda."
 
 #: ../../install_steps_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Encryption key for %s"
-msgstr "Kunci sandi"
+msgstr "Kunci sandi utk %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -5834,6 +5895,11 @@ msgstr "Hong Kong"
 
 #: ../../lang.pm:1
 #, c-format
+msgid "China"
+msgstr "Cina"
+
+#: ../../lang.pm:1
+#, c-format
 msgid "Guyana"
 msgstr "Guyana"
 
@@ -6026,11 +6092,6 @@ msgstr "Kuba"
 #, c-format
 msgid "Colombia"
 msgstr "Colombia"
-
-#: ../../lang.pm:1
-#, c-format
-msgid "China"
-msgstr "Cina"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8603,7 +8664,7 @@ msgstr "Pengontrol SCSI"
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Firewire controllers"
-msgstr ""
+msgstr "Pengontrol Firewire"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -8757,6 +8818,25 @@ msgid ""
 "\n"
 "- \"/sbin/fuser -v /dev/dsp\" will tell which program uses the sound card.\n"
 msgstr ""
+"Tester suara klasik akan menjalankan perintah berikut:\n"
+"\n"
+"\n"
+"- \"lspcidrake -v | fgrep AUDIO\" akan memberitahu Anda driver mana yg\n"
+"dipakai oleh kartu Anda secara default\n"
+"\n"
+"- \"grep sound-slot /etc/modules.conf\" memberitahu driver apa yg dipakai\n"
+"sekarang\n"
+"\n"
+"- \"/sbin/lsmod\" mencek apakah modul (driver) ybs dimuat atau tidak\n"
+"\n"
+"- \"/sbin/chkconfig --list sound\" dan \"/sbin/chkconfig --list alsa\" akan\n"
+"memberitahu Anda apakah servis suara dan alsa terkonfigurasi utk dijalankan\n"
+"pada initlevel 3\n"
+"\n"
+"- \"aumix -q\" memberitahu apakah volume suara dipadamkan atau tidak\n"
+"\n"
+"- \"/sbin/fuser -v /dev/dsp\" akan memberitahu program mana yg memakai\n"
+"kartu suara.\n"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -9992,9 +10072,9 @@ msgid "Start at boot"
 msgstr "Start saat boot"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Assign host name from DHCP address"
-msgstr "Masukkan nama host atau IP."
+msgstr "Tentukan nama host dari alamat DHCP"
 
 #: ../../network/network.pm:1
 #, c-format
@@ -10007,9 +10087,9 @@ msgid "Track network card id (useful for laptops)"
 msgstr "Lacak ID kartu network (berguna di laptop)"
 
 #: ../../network/network.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "DHCP host name"
-msgstr "Nama Host"
+msgstr "Nama Host DHCP"
 
 #: ../../network/network.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
@@ -11024,14 +11104,14 @@ msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr "Cetak/Scan/Kartu Foto di \"%s\""
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
 "list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Untuk mengetahui opsi printer bacalah daftar di bawah atau klik tombol "
-"\"Daftar opsi cetak\".%s%s\n"
+"\"Daftar opsi cetak\".%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11250,9 +11330,9 @@ msgid "Option %s must be an integer number!"
 msgstr "Opsi %s harus berupa integer!"
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer default settings"
-msgstr "Seleksi model printer"
+msgstr "Setting default printer"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11273,7 +11353,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Firmware-Upload for HP LaserJet 1000"
-msgstr ""
+msgstr "Firmware-Upload utk HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12345,7 +12425,7 @@ msgstr "Server IP hilang!"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
-msgstr ""
+msgstr "Jika port tak diberikan, sbg standar akan dipakai 631."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12480,11 +12560,16 @@ msgid ""
 "print japanese text on a printer set up on a remote machine, you have to "
 "activate this function on that remote machine."
 msgstr ""
+"Nyalakan ini HANYA BILA Anda benar-benar perlu mencetak teks bahasa Jepang, "
+"jika ini aktif Anda tak dapat mencetak huruf aksen font latin dan takkan "
+"dapat menyetel margin, ukuran huruf, dsb. Setting ini hanya berlaku bagi "
+"printer yg didefinisikan di mesin ini. Jika ingin mencetak teks Jepang di "
+"printer mesin lain, aktifkan fungsi ini di mesin remote tsb."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Japanese text printing mode"
-msgstr "Ubah sistem cetak"
+msgstr "Mode cetak teks Jepang"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12560,9 +12645,9 @@ msgstr ""
 "diakses oleh mesin remote dan oleh mesin remote mana."
 
 #: ../../printer/printerdrake.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "CUPS printer configuration"
-msgstr "Konfigurasi sharing printer CUPS"
+msgstr "Konfigurasi printer CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12601,6 +12686,12 @@ msgid ""
 "printer' directory. There it will be found by the automatic uploader script "
 "and uploaded whenever the printer is connected and turned on.\n"
 msgstr ""
+"HP LaserJet 1000 perlu firmware di-upload setelah dinyalakan. Downloadlah "
+"paket driver Mindows dari situs web HP (firmware di CD printer tak bekerja) "
+"dan urailah file firmware (self-extracting '.exe' file) dg utilitas 'unzip' "
+"dan carilah file 'sihp1000.img'. Copy file ini ke direktori '/etc/printer'. "
+"Di sana ia akan ditemukan oleh skrip uploader otomatis dan di-upload ketika "
+"printer dihubungkan dan dinyalakan.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13591,6 +13682,124 @@ msgid ""
 " \n"
 "\n"
 msgstr ""
+"Overview drakTermServ\n"
+"\t\t\t   \n"
+"        - Buat Image Etherboot:\n"
+"        \t\tUtk mem-boot kernel via etherboot, image khusus kernel/initrdrd "
+"harus dibuat.\n"
+"        \t\tmkinitrd-net melakukan sebagian besar kerja, drakTermServ "
+"hanyalah antarmuka grafis\n"
+"        \t\tutk menolong manajemen/tuning image ini.\n"
+"\n"
+"        - Rawat /etc/dhcpd.conf:\n"
+"        \t\tUtk me-net_boot klien, tiap klien perlu entri dhcpd.conf, "
+"menunjuk alamat IP\n"
+"        \t\tdan image net boot ke mesin. drakTermServ menolong membuat/hapus "
+"entri ini.\n"
+"\t\t\t\n"
+"        \t\t(Kartu PCI mungkin mengabaikan image - etherboot akan meminta "
+"image yg benar. Ingat\n"
+"        \t\tbila etherboot mencari images, ia mengharap nama seperti\n"
+"        \t\tboot-3c59x.nbi, bukan boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tContoh dhcpd.conf yg men-support klien diskless:\n"
+"        \t\t\n"
+"\t\t\t\thost curly {\n"
+"\t\t\t\t\thardware ethernet        00:20:af:2f:f7:9d;\n"
+"\t\t\t\t\tfixed-address              192.168.192.3;\n"
+"\t\t\t\t\t#type                          fat;\n"
+"\t\t\t\t\tfilename                      \"i386/boot/boot-3c509.2.4.18-6mdk."
+"nbi\";\n"
+"\t\t\t\t}\n"
+"\t\t\t\n"
+"\t\t\tAnda dapat memakai pool alamat IP, bukannya satu entri perklien dg\n"
+"\t\t\talamat tetap, dg menggunakan fungsi file konfigurasi spesifik-klien\n"
+"\t\t\tyg disajikan oleh ClusterNFS.\n"
+"\t\t\t\n"
+"\t\t\tCatatan: Entri \"#type\" hanya dipakai oleh drakTermServ. Klien dapat "
+"berupa \"kurus\"\n"
+"\t\t\tatau 'gemuk'. Klien kurus menjalankan sebagian besar software di "
+"server via xdmcp, sementara klien gemuk menjalankan sebagian besar\n"
+"\t\t\tsoftware di mesin klien. Pada inittab khusus, /etc/inittab\\$\\"
+"$IP=client_ip\\$\\$ akan\n"
+"\t\t\tditulis utk klien kurus. File konfigurasi sistem xdm-config, kdmrc, "
+"gdm.conf dimodifikasi\n"
+"\t\t\tjika klien kurus digunakan, utk mengaktifkan xdmcp. Karena ada masalah "
+"keamanan dlm penggunaan xdmcp,\n"
+"\t\t\thosts.deny dan hosts.allow dimodifikasi utk membatasi akses ke subnet "
+"lokal.\n"
+"\t\t\t\n"
+"\t\t\tCatatan: Lakukan stop/start server setelah menambahkan/mengubah "
+"klien.\n"
+"\t\t\t\n"
+"        - Rawat /etc/exports:\n"
+"        \t\tClusternfs memungkinkan ekspor sistem file root ke klien "
+"diskless. drakTermServ\n"
+"        \t\tmensetup entri utk mengizinkan akses anonim ke sistem file root\n"
+"        \t\tdari klien diskless.\n"
+"\n"
+"        \t\tContoh entri ekspor clusternfs:\n"
+"        \t\t\n"
+"        \t\t/                  (ro,all_squash)\n"
+"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"\t\t\tDg SUBNET/MASK terdefinisikan utk jaringan Anda.\n"
+"        \t\t\n"
+"        - Rawat /etc/shadow\\$\\$CLIENT\\$\\$:\n"
+"        \t\tAgar pengguna dapat login ke sistem dari klien diskless, entri\n"
+"        \t\tdi /etc/shadow harus disalin ke /etc/shadow\\$\\$CLIENTS\\$\\$. "
+"drakTermServ membantu\n"
+"        \t\thal ini dg menambahkan/hapus pengguna sistem dari file ini.\n"
+"\n"
+"        - /etc/X11XF86Config-4\\$\\$IP-ADDRESS\\$\\$ masing-masing klien:\n"
+"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"konfigurasi sendiri\n"
+"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
+"        \t\tmembuat file-file ini.\n"
+"\n"
+"        - File konfigurasi sistem per klien:\n"
+"        \t\tVia clusternfs, tiap klien diskless dapat memiliki file "
+"konfiguras sendiri\n"
+"        \t\tdi sistemfile root server. drakTermServ nantinya akan membantu\n"
+"        \t\tmembuat file /etc/modules.conf, /etc/sysconfig/mouse, /etc/"
+"sysconfig/keyboard\n"
+"        \t\ttiap klien.\n"
+"\n"
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tdrakTermServ mengkonfigurasikan file ini agar bekerja dlm "
+"hubungan dg image yg dibuat oleh\n"
+"        \t\tmkinitrd-net, dan entri di /etc/dhcpd.conf, utk melayani image "
+"boot ke tiap\n"
+"        \t\tklien diskless.\n"
+"\n"
+"        \t\tContoh file konfigurasi tftp:\n"
+"        \t\t\n"
+"        \t\tservice tftp\n"
+"        \t\t(\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t\t}\n"
+"        \t\t\n"
+"        \t\tPerubahan dari instalasi standar adalah flag disable jadi 'no'\n"
+"        \t\tdan path direktori jadi /var/lib/tftpboot, tempat mkinitrd-net\n"
+"        \t\tmenaruh image.\n"
+"\n"
+"        - Buat disket/CD etherboot:\n"
+"        \t\tMesin klien diskless perlu image ROM di NIC, disket boot atau\n"
+"        \t\tCD utk memulai boot. drakTermServ membantu membuat image ini,\n"
+"        \t\tberdasarkan NIC di mesin klien.\n"
+"        \t\t\n"
+"        \t\tContoh pembuatan disket boot utk 3Com 3c509 secara manual:\n"
+"        \t\t\n"
+"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0\n"
+" \n"
+"\n"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16650,9 +16859,9 @@ msgid "Interface %s (using module %s)"
 msgstr "Interface %s (pakai module %s)"
 
 #: ../../standalone/drakgw:1
-#, fuzzy, c-format
+#, c-format
 msgid "Net Device"
-msgstr "Server Xinetd"
+msgstr "Device Net"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -16664,6 +16873,12 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 msgstr ""
+"Masukkan nama antarmuka yg terhubung dg Internet.\n"
+"\n"
+"Misal:\n"
+"\t\tppp+ utk modem atau koneksi DSL, \n"
+"\t\teth0, atau eth1 utk koneksi kabel, \n"
+"\t\tippp+ utk koneksi isdn.\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -17034,7 +17249,7 @@ msgid "Please choose which network interface will be used for the dhcp server."
 msgstr "Pilihlah antarmuka jaringan yang akan digunakan sbg server dhcp."
 
 #: ../../standalone/drakpxe:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You are about to configure your computer to install a PXE server as a DHCP "
 "server\n"
@@ -17048,14 +17263,13 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network "
 "(LAN)."
 msgstr ""
-"Anda sedang membuat komputer Anda membagi koneksi Internetnya.\n"
-"Dengan cara ini, komputer lain di jaringan lokal dapat memakai koneksi "
-"Internet komputer ini.\n"
-"\n"
-"Pastikan Anda telah mengkonfigurasikan akses Jaringan/Internet dg "
+"Anda sedang akan melakukan instalasi server PXE sbg server DHCP dan server\n"
+"TFTP utk membangun server instalasi. Dengan fitur tsb, komputer lain di\n"
+"jaringan lokal akan dpt diinstal menggunakan komputer ini sbg source-nya.\n"
+"Pastikan Anda telah mengkonfigurasikan akses Jaringan/Internet dg\n"
 "drakconnect sebelum pergi lebih jauh.\n"
 "\n"
-"Catatan: Anda mesti punya Adapter Jaringan untuk mensetup Jaringan Area "
+"Catatan: Anda mesti punya Adaptor Jaringan untuk mensetup Jaringan Area\n"
 "Lokal (LAN)."
 
 #: ../../standalone/drakpxe:1
@@ -17240,9 +17454,9 @@ msgid "choose image file"
 msgstr "pilih file image"
 
 #: ../../standalone/draksplash:1
-#, fuzzy, c-format
+#, c-format
 msgid "choose image"
-msgstr "pilih file image"
+msgstr "pilih image"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -17720,9 +17934,9 @@ msgid "network printer port"
 msgstr "port printer jaringan"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the name of the CPU"
-msgstr "nama pembuat device"
+msgstr "nama CPU"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17730,9 +17944,9 @@ msgid "Name"
 msgstr "Nama"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the number of buttons the mouse has"
-msgstr "warna papan perkembangan"
+msgstr "jumlah tombol mouse"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -17906,6 +18120,8 @@ msgid ""
 "coarsely assimilated to number of instructions the cpu is able to execute "
 "per second)"
 msgstr ""
+"Frekuensi CPU dlm MHz (jumlah instruksi perdetik yg dapat dieksekusi oleh "
+"CPU)"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18753,7 +18969,7 @@ msgstr ""
 #: ../../share/advertising/02-community.pl:1
 #, c-format
 msgid "Build the future of Linux!"
-msgstr ""
+msgstr "Bangun masa depan Linux!"
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
@@ -18770,11 +18986,13 @@ msgid ""
 "Surf the Web with Mozilla or Konqueror, read your mail with Evolution or "
 "Kmail, create your documents with OpenOffice.org."
 msgstr ""
+"Jelajah Web dg Mozilla atau Konqueror, baca mail dg Evolution atau Kmail, "
+"buat dokumen dg OpenOffice.org."
 
 #: ../../share/advertising/03-software.pl:1
 #, c-format
 msgid "MandrakeSoft has selected the best software for you"
-msgstr ""
+msgstr "MandrakeSoft telah memilih software terbaik utk Anda"
 
 #: ../../share/advertising/04-configuration.pl:1
 #, c-format
@@ -18784,26 +19002,29 @@ msgid ""
 "customize elements such as the security level, the peripherals (screen, "
 "mouse, keyboard...), the Internet connection and much more!"
 msgstr ""
+"Mandrake Linux 9.1 menyajikan Pusat Kontrol Mandrake, konfigurator ampuh "
+"komputer Anda. Anda dapat mengatur tingkat keamanan, perangkat (layar, "
+"mouse, papanketik...), koneksi Internet dll!"
 
 #: ../../share/advertising/04-configuration.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake's multipurpose configuration tool"
-msgstr "Konfigurasi Server Terminal Mandrake"
+msgstr "Konfigurator multiguna Mandrake"
 
 #: ../../share/advertising/05-desktop.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Perfectly adapt your computer to your needs thanks to the 11 available "
 "Mandrake Linux user interfaces which can be fully modified: KDE 3.1, GNOME "
 "2.2, Window Maker, ..."
 msgstr ""
-"Mandrake Linux menyediakan 11 antarmuka pengguna yang dapat dimodifikasi: "
-"KDE 3, Gnome 2, WindowMaker, ..."
+"Tersedia 11 antarmuka yg dapat dimodifikasi: KDE 3.1, Gnome 2.2, "
+"WindowMaker, ..."
 
 #: ../../share/advertising/05-desktop.pl:1
 #, c-format
 msgid "A customizable environment"
-msgstr ""
+msgstr "Lingkungan tersesuaikan"
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -18812,6 +19033,9 @@ msgid ""
 "+ has never been so easy thanks to GNU gcc 3 and the best Open Source "
 "development environments."
 msgstr ""
+"Pemrograman dg aneka bahasa spt Perl, Python, C and C++ tak pernah "
+"semudahsaat ini berkat GNU gcc 3 dan lingkungan pengembangan Open Source "
+"terbaik."
 
 #: ../../share/advertising/06-development.pl:1
 #, c-format
@@ -18847,19 +19071,16 @@ msgid "The official MandrakeSoft Store"
 msgstr "Toko resmi MandrakeSoft"
 
 #: ../../share/advertising/09-mdksecure.pl:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enhance your computer performance with the help of a selection of partners "
 "offering professional solutions compatible with Mandrake Linux"
-msgstr ""
-"MandrakeSoft bekerjasama dengan sejumlah perusahaan penyedia solusi "
-"profesional yang kompatibel dengan Mandrake Linux. Daftar mitra ada di "
-"MandrakeStore"
+msgstr "Maksimalkan kemampuan komputer Anda dg pertolongan partner profesional"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
 msgid "Get the best items with Mandrake Linux Strategic partners"
-msgstr ""
+msgstr "Dapatkan item terbaik dg partner strategis Linux Mandrake"
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -18868,6 +19089,9 @@ msgid ""
 "version ever: Draksec, a system security management tool, and a strong "
 "firewall are teamed up together  in order to highly reduce hacking risks."
 msgstr ""
+"MandrakeSoft telah mendesain alat eksklusif utk membuat versi Linux teraman: "
+"Draksec (manajer keamanan sistem) & sebuah firewall kokoh dipadukan utk "
+"menangkis hacker."
 
 #: ../../share/advertising/10-security.pl:1
 #, c-format
@@ -18887,11 +19111,13 @@ msgid ""
 "network (VPN) server and client, an intrusion detection system and a traffic "
 "manager."
 msgstr ""
+"Software ini mengkombinasikan komponen firewall, server dan klien virtual "
+"private network (VPN), deteksi penyusupan dan manajer lalulintas."
 
 #: ../../share/advertising/11-mnf.pl:1
 #, c-format
 msgid "Secure your networks with the Multi Network Firewall"
-msgstr ""
+msgstr "Amankan jaringan Anda dg Tembok Api Jaringan Majemuk"
 
 #: ../../share/advertising/12-mdkexpert.pl:1
 #, c-format
@@ -19119,41 +19345,32 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "server NFS, SMB, Proxy, SSH"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Audio station"
-msgstr "Komputer Multimedia"
+msgstr "Pangkalan Audio"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Sound playing/editing programs"
-msgstr "Program untuk memainkan/mengedit suara dan video"
+msgstr "Program memainkan/mengedit suara"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video station"
-msgstr "Komputer Game"
+msgstr "Pangkalan Video"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Video playing programs"
-msgstr "Program untuk memainkan/mengedit suara dan video"
+msgstr "Program untuk memainkan/mengedit video"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphic station"
-msgstr "Komputer Game"
+msgstr "Pangkalan Grafik"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Graphics programs"
-msgstr "Program Grafis, misalnya The Gimp"
+msgstr "Program Grafik"
 
 #: ../../share/compssUsers:999
-#, fuzzy
 msgid "Set of tools to read and send mail and news and to browse the Web"
-msgstr ""
-"Kumpulan tool untuk membaca dan mengirimkan email dan news (pine, mutt, "
-"tin..) dan untuk membrowse Web"
+msgstr "Kumpulan tool utk membaca, mengirim email dan news serta membrowse Web"
 
 #~ msgid ""
 #~ "As a review, DrakX will present a summary of various information it has\n"
