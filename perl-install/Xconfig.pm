@@ -79,7 +79,7 @@ sub getinfoFromXF86Config {
 sub getinfoFromSysconfig {
     my $o = shift || {};
 
-    add2hash($o->{mouse}, getVarsFromSh("/etc/sysconfig/mouse"));
+    add2hash($o->{mouse} ||= {}, { getVarsFromSh("/etc/sysconfig/mouse") });
 
     if (my %keyboard = getVarsFromSh "/etc/sysconfig/keyboard") {
 	$keyboard{KEYTABLE} or last;

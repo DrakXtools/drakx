@@ -87,64 +87,60 @@ $resolution_wanted = "1024x768";
 	1600 => 75.0,
 );
 
-#- * Screen/video card configuration.
-%ramdacs = (
-    __("No RAMDAC Setting (recommended)")               => '',
-    __("AT&T 20C490 (S3 and AGX servers, ARK driver)"), => 'att20c490',
-    __("AT&T 20C498/21C498/22C498 (S3, autodetected)"),	=> 'att20c498',
-    __("AT&T 20C409/20C499 (S3, autodetected)"),	=> 'att20c409',
-    __("AT&T 20C505 (S3)"),				=> 'att20c505',
-    __("BrookTree BT481 (AGX)"),			=> 'bt481',
-    __("BrookTree BT482 (AGX)"),			=> 'bt482',
-    __("BrookTree BT485/9485 (S3)"),			=> 'bt485',
-    __("Sierra SC15025 (S3, AGX)"),			=> 'sc15025',
-    __("S3 GenDAC (86C708) (autodetected)"),		=> 's3gendac',
-    __("S3 SDAC (86C716) (autodetected)"),		=> 's3_sdac',
-    __("STG-1700 (S3, autodetected)"),			=> 'stg1700',
-    __("STG-1703 (S3, autodetected)"),			=> 'stg1703',
-    __("TI 3020 (S3)"),					=> 'ti3020',
-    __("TI 3025 (S3, autodetected)"),			=> 'ti3025',
-    __("TI 3026 (S3, autodetected)"),			=> 'ti3026',
-    __("IBM RGB 514 (S3, autodetected)"),		=> 'ibm_rgb514',
-    __("IBM RGB 524 (S3, autodetected)"),		=> 'ibm_rgb524',
-    __("IBM RGB 525 (S3, autodetected)"),		=> 'ibm_rgb525',
-    __("IBM RGB 526 (S3)"),				=> 'ibm_rgb526',
-    __("IBM RGB 528 (S3, autodetected)"),		=> 'ibm_rgb528',
-    __("ICS5342 (S3, ARK)"),				=> 'ics5342',
-    __("ICS5341 (W32)"),				=> 'ics5341',
-    __("IC Works w30C516 ZoomDac (ARK)"),		=> 'zoomdac',
-    __("Normal DAC"),					=> 'normal',
+
+%lines = (
+    'Cirrus Logic|GD 5446' => [ '	Option "noblt"' ],
 );
 
-@clockchip_name = (
-    __("No Clockchip Setting (recommended)")                         => '',
-    __("Chrontel 8391")                                              => 'ch8391',
-    __("ICD2061A and compatibles (ICS9161A => DCS2824)")	     => 'icd2061a',
-    __("ICS2595")                                                    => 'ics2595',
-    __("ICS5342 (similar to SDAC, but not completely compatible)")   => 'ics5342',
-    __("ICS5341")						     => 'ics5341',
-    __("S3 GenDAC (86C708) and ICS5300 (autodetected)")	             => 's3gendac',
-    __("S3 SDAC (86C716)")					     => 's3_sdac',
-    __("STG 1703 (autodetected)")				     => 'stg1703',
-    __("Sierra SC11412")					     => 'sc11412',
-    __("TI 3025 (autodetected)")				     => 'ti3025',
-    __("TI 3026 (autodetected)")				     => 'ti3026',
-    __("IBM RGB 51x/52x (autodetected)")			     => 'ibm_rgb5xx',
+%xkb_options = (
+    'ru' => [ 'XkbVariant "winkeys"', 'XkbOptions "grp:caps_toggle"' ],
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#-#- * Screen/video card configuration.
+#-%ramdacs = (
+#-    __("No RAMDAC Setting (recommended)")               => '',
+#-    __("AT&T 20C490 (S3 and AGX servers, ARK driver)"), => 'att20c490',
+#-    __("AT&T 20C498/21C498/22C498 (S3, autodetected)"),	=> 'att20c498',
+#-    __("AT&T 20C409/20C499 (S3, autodetected)"),	=> 'att20c409',
+#-    __("AT&T 20C505 (S3)"),				=> 'att20c505',
+#-    __("BrookTree BT481 (AGX)"),			=> 'bt481',
+#-    __("BrookTree BT482 (AGX)"),			=> 'bt482',
+#-    __("BrookTree BT485/9485 (S3)"),			=> 'bt485',
+#-    __("Sierra SC15025 (S3, AGX)"),			=> 'sc15025',
+#-    __("S3 GenDAC (86C708) (autodetected)"),		=> 's3gendac',
+#-    __("S3 SDAC (86C716) (autodetected)"),		=> 's3_sdac',
+#-    __("STG-1700 (S3, autodetected)"),			=> 'stg1700',
+#-    __("STG-1703 (S3, autodetected)"),			=> 'stg1703',
+#-    __("TI 3020 (S3)"),					=> 'ti3020',
+#-    __("TI 3025 (S3, autodetected)"),			=> 'ti3025',
+#-    __("TI 3026 (S3, autodetected)"),			=> 'ti3026',
+#-    __("IBM RGB 514 (S3, autodetected)"),		=> 'ibm_rgb514',
+#-    __("IBM RGB 524 (S3, autodetected)"),		=> 'ibm_rgb524',
+#-    __("IBM RGB 525 (S3, autodetected)"),		=> 'ibm_rgb525',
+#-    __("IBM RGB 526 (S3)"),				=> 'ibm_rgb526',
+#-    __("IBM RGB 528 (S3, autodetected)"),		=> 'ibm_rgb528',
+#-    __("ICS5342 (S3, ARK)"),				=> 'ics5342',
+#-    __("ICS5341 (W32)"),				=> 'ics5341',
+#-    __("IC Works w30C516 ZoomDac (ARK)"),		=> 'zoomdac',
+#-    __("Normal DAC"),					=> 'normal',
+#-);
+#-
+#-@clockchip_name = (
+#-    __("No Clockchip Setting (recommended)")                         => '',
+#-    __("Chrontel 8391")                                              => 'ch8391',
+#-    __("ICD2061A and compatibles (ICS9161A => DCS2824)")	     => 'icd2061a',
+#-    __("ICS2595")                                                    => 'ics2595',
+#-    __("ICS5342 (similar to SDAC, but not completely compatible)")   => 'ics5342',
+#-    __("ICS5341")						     => 'ics5341',
+#-    __("S3 GenDAC (86C708) and ICS5300 (autodetected)")	             => 's3gendac',
+#-    __("S3 SDAC (86C716)")					     => 's3_sdac',
+#-    __("STG 1703 (autodetected)")				     => 'stg1703',
+#-    __("Sierra SC11412")					     => 'sc11412',
+#-    __("TI 3025 (autodetected)")				     => 'ti3025',
+#-    __("TI 3026 (autodetected)")				     => 'ti3026',
+#-    __("IBM RGB 51x/52x (autodetected)")			     => 'ibm_rgb5xx',
+#-);
+#-
 
 $intro_text = "
 This program will create a basic XF86Config file, based on menu selections you make.
@@ -345,13 +341,13 @@ $keyboardsection_part2 = '
 #    XkbVariant  ""
 #    XkbOptions  ""
 
-   XkbKeycodes     "xfree86"
-   XkbTypes        "default"
-   XkbCompat       "default"
-   XkbSymbols      "us(pc101)"
-   XkbGeometry     "pc"
-   XkbRules        "xfree86"
-   XkbModel        "pc101"
+    XkbKeycodes     "xfree86"
+    XkbTypes        "default"
+    XkbCompat       "default"
+    XkbSymbols      "us(pc101)"
+    XkbGeometry     "pc"
+    XkbRules        "xfree86"
+    XkbModel        "pc101"
 ';
 
 $keyboardsection_end = '

@@ -184,7 +184,7 @@ sub readCompss($) {
     \@compss;
 }
 
-sub readCompssList($) {
+sub readCompssList($$) {
     my ($packages, $compss) = @_;
     my %compss; map { $compss{$_->{name}} = $_ } @$compss;
 

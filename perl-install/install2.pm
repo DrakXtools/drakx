@@ -28,7 +28,7 @@ use printer;
 use modules;
 use detect_devices;
 use modparm;
-use install_steps_graphical;
+#use install_steps_graphical;
 use run_program;
 
 #-######################################################################################

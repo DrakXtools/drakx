@@ -118,7 +118,7 @@ sub setPackages($$) {
 	pkgs::getDeps($o->{packages});
 
 	$o->{compss} = pkgs::readCompss($o->{packages});
-	$o->{compssListLevels} = pkgs::readCompssList($o->{packages});
+	$o->{compssListLevels} = pkgs::readCompssList($o->{packages}, $o->{compss});
 	$o->{compssListLevels} ||= $install_classes;
 	push @{$o->{base}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{base}}, "kernel-pcmcia-cs" if $o->{pcmcia};

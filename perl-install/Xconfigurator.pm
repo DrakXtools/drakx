@@ -2,7 +2,7 @@ package Xconfigurator;
 
 use diagnostics;
 use strict;
-use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1);
+use vars qw($in $install $resolution_wanted @depths @monitorSize2resolution @hsyncranges %min_hsync4wres @vsyncranges %depths @resolutions @svgaservers @accelservers @allservers %videomemory @ramdac_name @ramdac_id @clockchip_name @clockchip_id %keymap_translate %standard_monitors $intro_text $finalcomment_text $s3_comment $cirrus_comment $probeonlywarning_text $monitorintro_text $hsyncintro_text $vsyncintro_text $XF86firstchunk_text $keyboardsection_start $keyboardsection_part2 $keyboardsection_end $pointersection_text1 $pointersection_text2 $monitorsection_text1 $monitorsection_text2 $monitorsection_text3 $monitorsection_text4 $modelines_text_Trident_TG_96xx $modelines_text $devicesection_text $screensection_text1 %lines %xkb_options);
 
 use pci_probing::main;
 use common qw(:common :file :functional);
@@ -146,6 +146,7 @@ sub cardConfigurationAuto() {
 	($card->{identifier}, $_) = @$c;
 	$card->{type} = $1 if /Card:(.*)/;
 	$card->{server} = $1 if /Server:(.*)/;
+	push @{$card->{lines}}, @{$lines{$card->{identifier}} || []};
     }
     $card;
 }
@@ -263,6 +264,11 @@ sub testFinalConfig($;$) {
 
     unlink "$prefix/tmp/.X9-lock";
 
+    #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
+    #- that way, you can talk to :9 without doing a chroot
+    unlink "/tmp/.X11-unix/X9" if $prefix;
+    symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
+
     my $f_err = "$prefix/tmp/Xoutput";
     my $pid;
     unless ($pid = fork) {
@@ -272,13 +278,14 @@ sub testFinalConfig($;$) {
 	chroot $prefix if $prefix;
 	exec @l, ":9" or exit 'true';
     }
+
     do { sleep 1 } until c::Xtest(":9") || waitpid($pid, c::WNOHANG());
 
     my $b = before_leaving { unlink $f_err };
     
     local *F; open F, $f_err;
     while (<F>) {
-	if (/^Fatal server error/) {
+	if (/\berror\b/i) {
 	    my @msg; while (<F>) {
 		/^$/ and last;
 		push @msg, $_;		
@@ -289,11 +296,6 @@ sub testFinalConfig($;$) {
 	    return 0;
 	}
     }
-
-    #- create a link from the non-prefixed /tmp/.X11-unix/X9 to the prefixed one
-    #- that way, you can talk to :9 without doing a chroot
-    unlink "/tmp/.X11-unix/X9" if $prefix;
-    symlink "$prefix/tmp/.X11-unix/X9", "/tmp/.X11-unix/X9" if $prefix;
 
     local *F;
     open F, "|perl" or die '';
@@ -541,6 +543,7 @@ sub write_XF86Config {
     print F "    RightAlt        ", ($O->{altmeta} ? "ModeShift" : "Meta"), "\n";
     print F $keyboardsection_part2;
     print F qq(    XkbLayout       "$O->{xkb_keymap}"\n);
+    print F join '', map { "    $_\n" } @{$xkb_options{$O->{xkb_keymap}} || []};
     print F $keyboardsection_end;
 
     #- Write pointer section.

@@ -8,8 +8,9 @@ $libs .= ' -lrpm -ldb1 -lz' if $ENV{C_RPM};
 
 WriteMakefile(
     'NAME'	=> 'c',
+    'OPTIMIZE'  => '-Os',
     'VERSION_FROM' => 'c.pm', # finds $VERSION
     'LIBS'	=> [$libs],   # e.g., '-lm' 
     'DEFINE'	=> '',     # e.g., '-DHAVE_SOMETHING' 
-    'INC'	=> '-I/usr/include/rpm -Wall `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
+    'INC'	=> '-I/usr/include/rpm `gtk-config --cflags`',     # e.g., '-I/usr/include/other' 
 );
