@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 54mdk
+Release: 55mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -173,10 +173,6 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/{%_initrddir,%_sysconfdir/{X11/xinit.d,sysconfig/harddrake2}}
 touch $RPM_BUILD_ROOT/etc/sysconfig/harddrake2/previous_hw
 
-mkdir -p $RPM_BUILD_ROOT%_sysconfdir/{pam.d,security/console.apps}
-cp pam.net_monitor $RPM_BUILD_ROOT%_sysconfdir/pam.d/net_monitor
-cp apps.net_monitor $RPM_BUILD_ROOT%_sysconfdir/security/console.apps/net_monitor
-
 dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
@@ -290,8 +286,6 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
-%config(noreplace) %_sysconfdir/pam.d/net_monitor
-%config(noreplace) %_sysconfdir/security/console.apps/net_monitor
 /usr/share/autostart/net_applet.desktop
 /usr/X11R6/bin/*
 
@@ -324,6 +318,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sat Jul 17 2004 Daouda LO <daouda@mandrakesoft.com> 10-55mdk
+- remove historical consolehelper files (pam.d and console.apps)
+
 * Thu Jul 15 2004 Olivier Blin <blino@mandrake.org> 10-54mdk
 - drakboot: use bootloader and Xconfig instead of detect-resolution
 - net_applet:
