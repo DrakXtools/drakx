@@ -511,6 +511,17 @@ sub get_x_fontset {
     ($big, $small);
 }
 
+sub fs_options {
+    my ($lang) = @_;
+    my $l = $languages{$lang}  or return;
+    my $c = $charsets{$l->[1]} or return;
+    my ($iocharset, $codepage) = @$c[3..4];
+    +{
+      if_($iocharset, iocharset => $iocharset),
+      if_($codepage, codepage => $codepage),
+    };
+}
+
 sub charset {
     my ($lang, $prefix) = @_;
     my $l = $languages{$lang} && $languages{$lang}[2];
