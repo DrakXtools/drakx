@@ -484,7 +484,12 @@ sub create_okcancel {
     # @other is a list of extra buttons (usually help (eg: XFdrake/drakx caller) or advanced (eg: interactive caller) button)
     # extra buttons have the following structure [ label, handler, is_first ]
     local $::isWizard = $::isWizard && !$w->{pop_it};
-    my $cancel = defined $o_cancel || defined $o_ok ? $o_cancel : $::isWizard ? N("<- Previous") : N("Cancel");
+    my $cancel;
+    if (defined $o_cancel || defined $o_ok) {
+        $cancel = $o_cancel;
+    } elsif (!$::Wizard_no_previous) {
+        $cancel = $::isWizard ? N("<- Previous") : N("Cancel");
+    }
     my $ok = defined $o_ok ? $o_ok : $::isWizard ? ($::Wizard_finished ? N("Finish") : N("Next ->")) : N("Ok");
     my $bok = $ok && gtksignal_connect($w->{ok} = Gtk2::Button->new($ok), clicked => $w->{ok_clicked} || sub { $w->{retval} = 1; Gtk2->main_quit });
     my $bprev;
