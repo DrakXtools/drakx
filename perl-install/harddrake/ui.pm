@@ -259,20 +259,19 @@ sub new {
     foreach (@class_tree) {
         my ($devices_list, $title, $icon, $configurator) = @$_;
         my $parent_iter = Gtk2::TreeIter->new;
-	$tree_model->append($parent_iter, undef);
-	$tree_model->set($parent_iter, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
+        $tree_model->append($parent_iter, undef);
+        $tree_model->set($parent_iter, [ 0 => gtkcreate_pixbuf($icon), 1 => $title ]);
 
         # Fill the graphic tree with a "tree leaf" widget per device
         foreach (@$devices_list) {
             my $custom_id = $_->{custom_id};
             delete $_->{custom_id};
             $custom_id .= ' ' while exists($data{$custom_id}); # get a unique id for eg bt8xx audio/video funtions
-	    $tree_model->append_set($parent_iter, [ 1 => $custom_id ]);
+            $tree_model->append_set($parent_iter, [ 1 => $custom_id ]);
             $data{$custom_id} = $_;
             $configurators{$custom_id} = $configurator;
         }
-	#$tree->expand_to_path($tree_model->get_path($iter)) unless ($title eq "Unknown/Others");
-	$tree->expand_row($tree_model->get_path($parent_iter), 1) unless ($title eq "Unknown/Others");
+        $tree->expand_row($tree_model->get_path($parent_iter), 1) unless $title eq "Unknown/Others";
     }
 
     $SIG{CHLD} = sub { undef $pid; $statusbar->pop($sig_id) };
@@ -301,11 +300,7 @@ sub quit_global {
 
 sub show_hide {
     my ($bool, $button) = @_;
-    if ($bool) {
-        $button->show();
-    } else {
-        $button->hide();
-    }
+    if ($bool) { $button->show() } else { $button->hide() }
 }
 
 
