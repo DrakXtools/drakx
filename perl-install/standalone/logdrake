@@ -275,6 +275,8 @@ sub parse_file {
   my $ey = $e_yes->get_chars(0, -1);
   my $en = $e_no->get_chars(0, -1);
   $ey =~ s/ OR /\|/;
+  $ey =~ s/^\*$//;
+  $en =~ s/^\*$/.*/;
   $ey = $ey .($::Word) if ($::isWord);
 
   if ($cal_mode) {
@@ -449,17 +451,30 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 		  [
 		   { label => "mail", val => \$mail, type => "bool", text => "mail output" },
 		   { label => "email", val => \$email, disabled => sub { !$mail; }},
-		   { label => "smtp ??", val => \$smtp, disabled => sub { !$mail; } },
+		   #{ label => "smtp", val => \$smtp, disabled => sub { !$mail; } },
 		   { label => "" },
 		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have smsend set up (works only for some countries)" },
 		   { label => "smssend output", val => \$smssend , disabled => sub {!$sms;}},
 		  ]) or goto step_load;
 
 #output("/etc/cron.hourly/logdrake_alert.pl", ($cron));
-    $cron .= q@#- report it
-print $r;
-# EOF@;
-    print $cron;
+    $cron .= q@#- report it@;
+    if ($mail) {
+	$cron .= q!
+open F, '|/usr/sbin/sendmail -oi -t';
+
+print F
+q(Subject: Mail Alert
+From: root@localhost
+To: ), "$email\n";
+print F $r;
+
+# EOF!;
+    } elsif ($sms) {
+	$in->do_pkgs->install('smssend');
+	$cron .= q!`smssend !, $smssend, q! chomp_(`date`);!
+    }
+
     undef $::isWizard; 
     $::WizardWindow->destroy if defined $::WizardWindow;
     undef $::WizardWindow;
@@ -530,6 +545,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.14  2002/03/14 12:25:43  yduret
+# fix * bug in field matching/ not matching
+#
 # Revision 1.13  2002/03/05 06:56:27  yduret
 # mail alert: use eval {} to catch wizcancel
 #
