@@ -286,6 +286,35 @@ sub parse_file {
   }     
 }
 
+sub text_append {
+    my ($textview, $t, %opts) = @_;
+    my $buffer = $textview->get_buffer;
+    my %gtk_tags;
+    if (ref($t) eq 'ARRAY') {
+        foreach my $token (@$t) {
+            my $iter1 = $buffer->get_end_iter;
+            if ($token->[0] =~ /^Gtk2::Gdk::Pixbuf/) {
+                $buffer->insert_pixbuf($iter1, $token->[0]);
+                next;
+            }
+            if ($token->[1]) {
+                my $tag = $token->[1];
+                $gtk_tags{$tag} ||= $buffer->create_tag($tag, %{$tags{$token->[1]}});
+                $buffer->insert_with_tags($iter1, $token->[0], $gtk_tags{$tag});
+            } else {
+                $buffer->insert($iter1, $token->[0]);
+            }
+        }
+    } else {
+        $buffer->set_text($t);
+    }
+    #- the following line is needed to move the cursor to the beginning, so that if the
+    #- textview has a scrollbar, it won't scroll to the bottom when focusing (#3633)
+    $buffer->place_cursor($buffer->get_start_iter);
+    $textview->set_wrap_mode($opts{wrap_mode} || 'word');
+    $textview->set_editable($opts{editable} || 0);
+    $textview->set_cursor_visible($opts{visible} || 0);
+}
 
 ##########################################################################################
 
