@@ -18,6 +18,7 @@ clean:
 check:
 	$(MAKE) -C share/po check
 	perl -I. -Mlang -e 'lang::check'
+	perl -I. -Mkeyboard -e 'keyboard::check'
 
 tar-drakxtools: clean
 	rm -rf standalone/pixmaps
@@ -34,7 +35,7 @@ $(DIRS):
 	$(MAKE) -C $@
 
 test_pms: verify_c
-	for i in install2 install_steps_*.pm standalone/keyboarddrake standalone/XFdrake standalone/drakboot; do perl_checker -I. -no_cw -excludec -excludehelp -excluderesize_fat::c_rewritten -excludeMDK::Common::Globals -excludeCGI -excludestandalone $$i; done
+	for i in install2 install_steps_*.pm standalone/keyboarddrake standalone/XFdrake standalone/drakboot; do perl_checker -I. -no_cw -excludec -excludehelp -excluderesize_fat::c_rewritten -excludeMDK::Common::Globals -excludeCGI -excludestandalone -excludeurpm $$i; done
 	for i in install2 install_steps_*.pm; do perl -cw -I. $$i; done
 
 verify_c:
