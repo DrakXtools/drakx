@@ -395,7 +395,8 @@ sub configure_lan {
 	#	$clist1->append($_+1, "eth$_", $intf->{"eth$_"}{IPADDR}, $intf->{"eth$_"}{BOOTPROTO}, $all_cards[$_]->[1]);
 	#	$clist1->set_selectable($_, 0);
 	my $hbox_local = new Gtk::HBox(0,0);
-	my $pix = my_gtk::gtkxpm ("/usr/share/libDrakX/pixmaps/eth_card_mini.xpm");
+	$window->realize;
+	my $pix = my_gtk::gtkxpm ($window, "/usr/share/libDrakX/pixmaps/eth_card_mini.xpm");
 	$hbox_local->pack_start($pix,0,0,0);
 	$hbox_local->pack_start(new Gtk::Label("eth$_"),0,0,0);
 	$hbox_local->show_all;
@@ -518,7 +519,7 @@ sub configure_net {
 @mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'lan';
 @mask=(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} eq 'pci';
 @mask=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) if $netcnx->{type}eq'isdn_internal' && $cnx->{card_type} ne 'pci';
-@mask=(0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0) if ($netcnx->{type}eq'modem'||$netcnx->{type} eq 'isdn_external');
+@mask=(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0) if ($netcnx->{type}eq'modem'||$netcnx->{type} eq 'isdn_external');
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0) if $netcnx->{type} =~ 'adsl';
 @mask=(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1) if $netcnx->{type} eq 'cable';
     $vbox1->pack_start(new Gtk::HSeparator,0,0,5);
