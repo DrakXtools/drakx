@@ -1561,10 +1561,52 @@ sub selected_leaves {
 sub naughtyServers {
     my ($packages) = @_;
 
-    my @naughtyServers = qw(FreeWnn MySQL am-utils boa cfengine cups
-finger-server freeswan imap jabber leafnode lpr mon ntp apache
-openssh-server pidentd postfix postgresql-server proftpd rwall rwho
-telnet-server webmin wu-ftpd ypbind drakxtools-http); # portmap nfs-utils-clients
+    my @old = qw(
+freeswan
+jabber
+);
+    # boa ??
+    my @sure = qw(
+FreeWnn
+MySQL
+am-utils
+apache
+boa
+cfengine
+cups
+drakxtools-http
+finger-server
+imap
+leafnode
+lpr
+mon
+ntp
+openssh-server
+pidentd
+postfix
+postgresql-server
+proftpd
+rwall
+rwho
+squid
+webmin
+wu-ftpd
+ypbind
+); # nfs-utils-clients portmap
+  # /usr/bin/kdm, X server, xdm
+
+  my @new = qw(
+apache-mod_perl
+ftp-server-krb5
+mcserv
+mysql
+samba
+telnet-server-krb5
+vnc-server
+ypserv
+);
+
+    my @naughtyServers = (@new, @sure);
 
     grep {
 	my $p = packageByName($packages, $_);
