@@ -259,6 +259,7 @@ sub update_server {
 	if (system('/sbin/pidof rpc.mountd >/dev/null') != 0 ||
 	    system('/sbin/pidof nfsd >/dev/null') != 0) {
 	    # trying to start the server...
+	    system('/etc/init.d/portmap start') if system('/etc/init.d/portmap status') != 0;
 	    system('/etc/init.d/nfs', $_) foreach 'stop', 'start';
 	}
 	exit 0;
