@@ -272,8 +272,6 @@ sub choosePackages {
     #- avoid destroying user selection of packages but only
     #- for expert, as they may have done individual selection before.
     if ($first_time || !$::expert) {
-	install_any::unselectMostPackages($o);
-
 	exists $o->{compssListLevel}
 	  and pkgs::setSelectedFromCompssList($packages, $o->{compssUsersChoice}, $o->{compssListLevel}, $availableCorrected);
     }
