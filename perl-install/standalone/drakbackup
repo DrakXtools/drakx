@@ -1325,8 +1325,8 @@ sub build_backup_files() {
     -d  $save_path or mkdir_p($save_path);
 		
     if ($comp_mode) { 
-		$DEBUG and $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 ";
-		$DEBUG or $tar_cmd = "tar c --use-compress-program /usr/bin/bzip2 "; 
+		$DEBUG and $tar_cmd = "tar cvpj ";
+		$DEBUG or $tar_cmd = "tar cpj "; 
 		$tar_ext = "tar.bz2";
     } else { 
 		$DEBUG and $tar_cmd = "tar cvpz "; 
@@ -2701,7 +2701,7 @@ sub advanced_options() {
 # 					     ),
 # 				 0, new Gtk2::HSeparator,
 # 				 0, gtkpack_(new Gtk2::VBox(0,10),
-# 					     0, gtkset_sensitive(my $check_tar_bz2  = new Gtk2::CheckButton( N("Use Tar and bzip2 (very slow) [Please be careful if you\n (un)select this option, as all your old backups will be deleted.]")), 0),
+			0, my $check_tar_bz2  = new Gtk2::CheckButton(N("Use tar and bzip2 (rather than tar and gzip)")),
  			0, my $check_backupignore = new Gtk2::CheckButton(N("Use .backupignore files")),
 #			0, new Gtk2::VBox(0,10),
 			0, gtkpack_(new Gtk2::HBox(0,10),
@@ -2715,8 +2715,7 @@ sub advanced_options() {
 			),
 		),
 	);
-    check_list([$check_mail, \$send_mail], [$check_del_hd_files, \$del_hd_files], [$check_backupignore, \$backupignore]);
-#    check_list([$check_mail, \$send_mail], [$check_tar_bz2, \$comp_mode], [$check_backupignore, \$backupignore]);
+    check_list([$check_mail, \$send_mail], [$check_tar_bz2, \$comp_mode], [$check_del_hd_files, \$del_hd_files], [$check_backupignore, \$backupignore]);
     $mail_entry->set_text($user_mail);
     $mail_entry->signal_connect('changed', sub { $user_mail = $mail_entry->get_text });
 	set_help_tip($check_backupignore, 'backupignore');
@@ -3283,9 +3282,9 @@ sub restore_backend() {
 	-d $restore_path or mkdir_p $restore_path;
 	
     if (any { /tar.gz$/ } all($path_to_find_restore)) { 
-    	$untar_cmd = 0; 
+    	$untar_cmd = "tar xzf"; 
     } else { 
-    	$untar_cmd = 1; 
+    	$untar_cmd = "tar xjf"; 
     }
     
 	if ($restore_user)  {
@@ -3305,8 +3304,7 @@ sub restore_backend() {
 				-d $user_dir and rm_rf($user_dir) if $remove_user_before_restore;
 
 		    	$DEBUG and print "user name to restore: $username, user directory: $user_dir\n";		    
-		    	$untar_cmd or system(" tar xfz  $path_to_find_restore/$_ -C $restore_path");
-		    	$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$_ | tar xf -C $restore_path ");
+		    	system("$untar_cmd $path_to_find_restore/$_ -C $restore_path");
 			}
 			#- flush this out for another cycle (SB)
 			@user_list_to_restore2 = ();
@@ -3321,17 +3319,14 @@ sub restore_backend() {
 				$exist_problem = 1;
 				restore_aff_backup_problems();
 	    	} else {
-				$untar_cmd or system("tar xfz $path_to_find_restore/$_  -C $restore_path ") foreach @sys_list_to_restore;
-				$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/$_  | tar xf -C $restore_path ") foreach @sys_list_to_restore;
+				system("$untar_cmd $path_to_find_restore/$_ -C $restore_path") foreach @sys_list_to_restore;
 			}
 		} else {
-			$untar_cmd or system("tar xfz $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
-			$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/backup_sys.tar.bz2  | tar xf -C $restore_path ");
+			system("$untar_cmd $path_to_find_restore/backup_sys.tar.gz  -C $restore_path ");
 		}	    
     }
     if ($restore_other) { 
-		$untar_cmd or system("tar xfz $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
-		$untar_cmd and system("/usr/bin/bzip2 -cd $path_to_find_restore/backup_other.tar.bz2  | tar xf -C $restore_path ");
+		system("$untar_cmd $path_to_find_restore/backup_other.tar.gz  -C $restore_path ");
     }
     $exist_problem or restore_aff_result();
 }
