@@ -1,3 +1,106 @@
+2001/09/09  Pixel  <pixel@mandrakesoft.com>
+
+	* modules.pm (write_conf): switch to "probeall scsi_hostadapter ..."
+
+2001/09/08  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* share/po/fr.po: fix some ortograf
+
+	* share/rpmsrate: lvm not installed for everyone ?!
+
+	* modules.pm: fix write_conf regarding /etc/modules so that (1) it doesn't
+	flush it when
+	it didn't decide to put any modules in it (to leave user's modules) (2)
+	it
+	doesn't remove the last line (3) it uses stronger regexp'es for
+	substitution to not remove modules that have names made of other modules
+	names subsets
+
+2001/09/08  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/zh_TW.po: updated Chinese file
+
+2001/09/08  Pixel  <pixel@mandrakesoft.com>
+
+	* lang.pm: fix font in iso-15
+
+	* modules.pm (write_conf): put "probeall scsi-hosts scsi_hostadapter ..."
+
+	* interactive.pm: ugly workaround perl bug ([ID 20010908.008] memory leak
+	with nested subs)
+
+	* share/diskdrake.rc: change name
+
+	* install_steps_auto_install.pm: force exitInstall to be non automatic
+
+	* install_steps.pm, fs.pm, install_steps_interactive.pm, fsedit.pm,
+	diskdrake_interactive.pm, install2.pm, diskdrake.pm: make loopback
+	installs work again
+
+	* timezone.pm: Asia/Taipei for Traditional Chinese
+
+	* detect_devices.pm: remove debug code
+
+2001/09/07  daouda
+
+	* share/rpmsrate: add mdkonline (X 4)
+
+2001/09/07  fcrozat
+
+	* share/rpmsrate: Add grio500
+
+2001/09/07  François Pons  <fpons@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix card managed only by XF4 (may have some wrong
+	result).
+	fix all Matrox card used with XF4 which really does not like X in frame
+	buffer
+	(unable to restore frame buffer of DrakX).
+
+2001/09/07  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/tree/etc/oem, rescue/guessmounts, rescue/list.i386,
+	rescue/tree/etc/rc.sysinit: ext3, xfs, jfs
+
+	* bootloader.pm: use -v for mkinitrd
+
+	* share/po/fr.po: "reseaux" and plurals
+	misc
+
+	* share/rpmsrate: some work on games
+
+2001/09/07  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ja.po, share/po/vi.po: updated Vietnamese and Japanese files
+
+2001/09/07  Pixel  <pixel@mandrakesoft.com>
+
+	* Makefile: cleanup po
+
+	* install_steps.pm: s|kdmrc|kdm/kdmrc|
+
+	* lang.pm: fix load_mo call
+
+	* share/po/help_xml2pm.pl, share/po/Makefile, help.pm: new help
+
+	* diskdrake_interactive.pm: disable_forced_fsck called for ext3 formatting
+	disable_forced_fsck called for ext3 formatting
+	(Type): disable fsck when migrated ext2->ext3
+
+	* fs.pm: disable_forced_fsck called for ext3 formatting
+
+2001/09/07  siegel
+
+	* share/po/de.po: updates
+
+2001/09/07  Till Kamppeter <till@mandrakesoft.com>
+
+	* standalone/printerdrake, printer.pm, printerdrake.pm: Data structure
+	fitted for auto-install to work
+	Optimized program to be much faster
+	Many more waiting messages
+	Many bugfixes
+
 2001/09/07  daouda
 
 	* share/rpmsrate: add mdkonline (X 4)
