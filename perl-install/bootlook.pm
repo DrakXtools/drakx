@@ -101,7 +101,7 @@ gtkadd($window,
 		  gtkadd (new Gtk::Frame ("$disp_mode"),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
-					      1,_("You are currently using %s as Boot Manager.
+					      1,_("You are currently using %s as your boot manager.
 Click on Configure to launch the setup wizard.", $lilogrub),
 					      0,gtksignal_connect(new Gtk::Button (_("Configure")), clicked => $::lilo_choice),
 					     )),
@@ -140,7 +140,7 @@ Click on Configure to launch the setup wizard.", $lilogrub),
 		  # X
 		  gtkadd (new Gtk::Frame (_("System mode")),
 			  gtkpack__ (new Gtk::VBox(0, 5),
-				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (_("Launch the X-Window system at start")), $x_mode ), clicked => sub {
+				     gtksignal_connect(gtkset_active(new Gtk::CheckButton (_("Launch the graphical environment when your system starts")), $x_mode ), clicked => sub {
 							   $x_box->set_sensitive(!$x_mode);
 							   $x_mode = !$x_mode;
 						       }),
