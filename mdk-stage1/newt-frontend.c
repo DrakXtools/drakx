@@ -358,7 +358,7 @@ enum return_type ask_from_entries(char *msg, char ** questions, char *** answers
 
 	while (questions && *questions) {
 		entries[i].text = *questions;
-		entries[i].flags = NEWT_FLAG_SCROLL | (!strcmp(*questions, "Password") ? NEWT_FLAG_HIDDEN : 0);
+		entries[i].flags = NEWT_FLAG_SCROLL | (!strcmp(*questions, "Password") ? NEWT_FLAG_PASSWORD : 0);
 		i++;
 		questions++;
 	}
