@@ -37,7 +37,7 @@ $connect = "@ARGV" =~ /--connect/;
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
-$window1->set_title(_("Network monitoring"));
+$window1->set_title(_("Network Monitoring"));
 $window1->set_policy(0, 0, 0);
 $window1->set_border_width(5);
 #$::isEmbedded or $window1->set_usize(500, 400);
@@ -56,9 +56,9 @@ gtkadd($window1,
 					1, gtkadd(gtkset_shadow_type(new Gtk::Frame(_("Statistics")), 'etched_out'),
 						  gtkpack__(gtkset_border_width(new Gtk::VBox(0,5),5),
 							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Sending Speed : "), my $label_st = new Gtk::Label("")),
+								      _("Sending Speed: "), my $label_st = new Gtk::Label("")),
 							    gtkpack__(new Gtk::HBox(0,0),
-								      _("Receiving Speed : "), my $label_sr = new Gtk::Label("")),
+								      _("Receiving Speed: "), my $label_sr = new Gtk::Label("")),
 							   )
 						 ),
 					0, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
@@ -78,7 +78,7 @@ my ($pix_c_map, $pix_c_mask) = gtkcreate_png("net_c.png");
 my ($pix_d_map, $pix_d_mask) = gtkcreate_png("net_d.png");
 $button_connect->add(gtkpack__(new Gtk::VBox(0,3),
 				   my $pix_c = new Gtk::Pixmap($pix_d_map, $pix_d_mask),
-				   my $label_c = new Gtk::Label(_("Connect to internet"))
+				   my $label_c = new Gtk::Label(_("Connect to Internet"))
 				  ));
 $statusbar->push(1, _("Not connected"));
 $window1->show_all();
@@ -97,11 +97,11 @@ sub connection {
     $button_connect->set_sensitive(0);
     $button_close->set_sensitive(0);
     $statusbar->pop(1);
-    $statusbar->push(1, $isconnected2 ? _("Disconnecting from internet ") : _("Connecting to internet "));
+    $statusbar->push(1, $isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "));
     my $nb_point=1;
     my $tag = Gtk->timeout_add(100, sub {
 				   $statusbar->pop(1);
-				   $statusbar->push(1, ($isconnected2 ? _("Disconnecting from internet ") : _("Connecting to internet "))
+				   $statusbar->push(1, ($isconnected2 ? _("Disconnecting from Internet ") : _("Connecting to Internet "))
 						    . join('', map { "." } (1..$nb_point)));
 				   $nb_point++;
 				   1;
@@ -111,8 +111,8 @@ sub connection {
 				    Gtk->timeout_remove($tag);
 				    $statusbar->pop(1);
 				    $statusbar->push(1, $isconnected2 ? ( netconnect::connected('', $netc) ?
-									  _("Disconnection from internet failed.") :
-									  _("Disconnection from internet complete.")) :
+									  _("Disconnection from Internet failed.") :
+									  _("Disconnection from Internet complete.")) :
 						     ( netconnect::connected('', $netc) ?
 						       _("Connection complete.") :
 						       _("Connection failed.\nVerify your configuration in the Mandrake Control Center."))
@@ -189,10 +189,10 @@ sub update {
 							    gtksize(my $darea = $monitor->{$intf}{darea} = new Gtk::DrawingArea(),300, 150)),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
 							    gtksize(my $dareat = new Gtk::DrawingArea(),15, 15),
-							    _("sent : "), $labelt = new Gtk::Label("0")),
+							    _("sent: "), $labelt = new Gtk::Label("0")),
 					       0, gtkpack__(gtkset_border_width(new Gtk::HBox(0,5), 5),
 							    gtksize(my $darear = new Gtk::DrawingArea(),15, 15),
-							    _("received : "), $labelr = new Gtk::Label(_("0"))),
+							    _("received: "), $labelr = new Gtk::Label("0")),
 					   )),
 				   new Gtk::Label($intf));
 	    $dareat->signal_connect( expose_event => sub {
