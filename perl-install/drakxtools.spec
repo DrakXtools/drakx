@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.2
-Release: 1mdk
+Release: 2mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -367,6 +367,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Tue Mar  8 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-2mdk
+- drakconnect (oblin):
+  o scan hidden ssid
+  o manage interface
+    * handle more DHCP options
+    * move DHCP settings in a notebook page
+- XFdrake: choose a 4/3 resolution by default (pixel)
+- XBox support (stew)
+
 * Mon Mar  7 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.2-1mdk
 - diskdrake: allow live resizing of reiserfs on lvm (pixel)
 - drakboot: fix detecting yaboot (pixel)
