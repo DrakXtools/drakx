@@ -367,21 +367,21 @@ our @tree =
      },
 
      {
+      class => "UPS",
+      string => N("UPS"),
+      icon => "harddisk.png",
+      configurator => "$sbindir/drakups",
+      detector => sub { detect_devices::getUPS() },
+      checked_on_boot => 0,
+     },
+     
+     {
       class => "SCANNER",
       string => N("Scanner"),
       icon => "scanner.png",
       configurator => "$sbindir/scannerdrake",
       detector => sub { 
          require scanner; f(scanner::detect()) },
-      checked_on_boot => 0,
-     },
-     
-     {
-      class => "UPS",
-      string => N("UPS"),
-      icon => "harddisk.png",
-      configurator => "$sbindir/drakups",
-      detector => sub { detect_devices::getUPS() },
       checked_on_boot => 0,
      },
      
