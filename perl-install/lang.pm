@@ -490,10 +490,19 @@ my %im_xim_program =
                'zh_TW.UTF-8' => '"chinput -big5"',
               },
    xcin => {
-            'zh_TW' => '"@im=xcin-zh_TW"'
+            'zh_TW' => '"xcin"'
            },
   );
 
+#- XMODIFIERS is the environnement variable used by the X11 XIM protocol
+#-	it is of the form XIMODIFIERS="@im=foo"
+#- XIM is used by some programs, it usually is the like XIMODIFIERS
+#-	with the "@im=" part stripped
+#- GTK_IM_MODULE the module to use for Gtk programs ("xim" to use an X11
+#-	XIM server; or a a native gtk module if exists)
+#- XIM_PROGRAM the program to run (usually the same as XIM value, but
+#-	in some cases different, particularly if parameters are needed;
+#-	if it is locale dependent it should be defined in %im_xim_program)
 my %gtkqt_im =
   (
    ami => {
@@ -507,7 +516,7 @@ my %gtkqt_im =
           },
    chinput => {
                GTK_IM_MODULE => 'xim',
-               XIM => 'xcin',
+               XIM => 'chinput',
                XMODIFIERS => '@im=Chinput',
                },
    fctix => {
@@ -548,6 +557,7 @@ my %gtkqt_im =
    xcin => {
             XIM => 'xcin',
             XIM_PROGRAM => 'xcin',
+            XMODIFIERS => '@im=xcin-zh_TW',
             GTK_IM_MODULE => 'xim',
            },
    'x-unikey' => {
@@ -558,70 +568,51 @@ my %gtkqt_im =
 
 sub get_ims() { keys %gtkqt_im }
            
-
+#- ENC is used by some versions or rxvt
 my %xim = (
-#- xcin only works with 'zh_TW', 'zh_TW.Big5', 'zh_CN', 'zh_CN.GB2312'
-#- all other locale names, in particular 'zh_HK' or 'zh_TW.UTF-8'
-#- are unknown to it. So chinput is used for all but 'zh_TW'
-  'ja_JP' => {
-	ENC => 'eucj',
-  },
-  'ja_JP.UTF-8' => {
-	ENC => 'utf8',
-  },
-  'ko_KR' => {
-	ENC => 'kr',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'ko_KR.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_TW' => { 
- 	ENC => 'big5',
- 	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_TW.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_CN' => {
-	ENC => 'gb',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_CN.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_HK' => {
-	ENC => 'big5',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_HK.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_SG' => {
-	ENC => 'gb',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  'zh_SG.UTF-8' => {
-	ENC => 'utf8',
-	CONSOLE_NOT_LOCALIZED => 'yes',
-  },
-  #-XFree86 has an internal XIM for Thai that enables syntax checking etc.
-  #-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
-  #-and convert them to right ones, 'Strict' refuses bad sequences
-  'th_TH' => {
-	XIM_PROGRAM => '/bin/true', #- it's an internal module
-	XMODIFIERS => '"@im=BasicCheck"',
-  },
-  #-xvnkb is not an XIM input method; but an input method of another
-  #-kind, only XIM_PROGRAM needs to be defined
-  #- ! xvnkb doesn't work in UTF-8 !
-#-  'vi_VN.VISCII' => {
-#-	XIM_PROGRAM => 'xvnkb',
-#-  },
+'ja_JP' => {
+ENC => 'eucj',
+},
+'ja_JP.UTF-8' => {
+ENC => 'utf8',
+},
+'ko_KR' => {
+ENC => 'kr',
+},
+'ko_KR.UTF-8' => {
+ENC => 'utf8',
+},
+'zh_TW' => { 
+ENC => 'big5',
+},
+'zh_TW.UTF-8' => {
+ENC => 'utf8',
+},
+'zh_CN' => {
+ENC => 'gb',
+},
+'zh_CN.UTF-8' => {
+ENC => 'utf8',
+},
+'zh_HK' => {
+ENC => 'big5',
+},
+'zh_HK.UTF-8' => {
+ENC => 'utf8',
+},
+'zh_SG' => {
+ENC => 'gb',
+},
+'zh_SG.UTF-8' => {
+ENC => 'utf8',
+},
+#-XFree86 has an internal XIM for Thai that enables syntax checking etc.
+#-'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
+#-and convert them to right ones, 'Strict' refuses bad sequences
+'th_TH' => {
+XIM_PROGRAM => '/bin/true', #- it's an internal module
+XMODIFIERS => '"@im=BasicCheck"',
+},
 );
 
 my %default_im;
@@ -664,6 +655,20 @@ sub IM2packages {
     return $packages ? @$packages : $im;
 }
 
+#- CONSOLE_NOT_LOCALIZED if defined to yes, disables translations on console
+#-	it is needed for languages not supported by the linux console
+my %console_support = (
+'ar' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'bn' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'fa' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'he' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'hi' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'ko' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'ur' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'yi' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'zh_TW' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+'zh_CN' => { CONSOLE_NOT_LOCALIZED => 'yes', },
+);
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
@@ -1051,8 +1056,8 @@ sub write {
     }
 
     #- deactivate translations on console for RTL languages
-    if ($h->{LANG} =~ /ar|fa|he|ur|yi/) {
-	add2hash $h, { CONSOLE_NOT_LOCALIZED => 'yes' }
+    if ($console_support->{$locale->{lang}}) {
+	add2hash $h, { CONSOLE_NOT_LOCALIZED => $console_support{$locale->{lang}}{CONSOLE_NOT_LOCALIZED} }
     }
 
     setVarsInSh($prefix . ($b_user_only ? "$ENV{HOME}/.i18n" : '/etc/sysconfig/i18n'), $h);
