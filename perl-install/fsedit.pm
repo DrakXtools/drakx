@@ -516,13 +516,6 @@ sub get_root_ {
 }
 sub get_root { &get_root_ || {} }
 
-#- do this before modifying $part->{fs_type}
-sub check_fs_type {
-    my ($fs_type, $_hd, $part) = @_;
-    $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
-    $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
-}
-
 #- you can do this before modifying $part->{mntpoint}
 #- so $part->{mntpoint} should not be used here, use $mntpoint instead
 sub check_mntpoint {
@@ -752,7 +745,7 @@ sub move {
 sub change_type {
     my ($type, $hd, $part) = @_;
     $type->{pt_type} != $part->{pt_type} || $type->{fs_type} ne $part->{fs_type} or return;
-    check_fs_type($type->{fs_type}, $hd, $part);
+    fs::type::check($type->{fs_type}, $hd, $part);
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
     $part->{mntpoint} = '' if isRawLVM($type) || isRawRAID($type);

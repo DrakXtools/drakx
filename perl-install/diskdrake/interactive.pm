@@ -1021,7 +1021,7 @@ sub partitions_suggestions {
 
 sub check_type {
     my ($in, $type, $hd, $part) = @_;
-    eval { fsedit::check_fs_type($type->{fs_type}, $hd, $part) };
+    eval { fs::type::check($type->{fs_type}, $hd, $part) };
     if (my $err = $@) {
 	$in->ask_warn('', formatError($err));
 	return;
