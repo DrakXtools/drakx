@@ -741,7 +741,7 @@ sub saveCompssUsers {
 }
 
 sub setSelectedFromCompssList {
-    my ($packages, $compssUsersChoice, $min_level, $max_size) = @_;
+    my ($packages, $compssUsersChoice, $min_level, $max_size, $otherOnly) = @_;
     $compssUsersChoice->{TRUE} = 1; #- ensure TRUE is set
     my $nb = selectedSize($packages);
     foreach my $p (sort { packageRate($b) <=> packageRate($a) } values %{$packages->{names}}) {
@@ -767,10 +767,16 @@ sub setSelectedFromCompssList {
 	}
 
 	#- at this point the package can safely be selected.
-	selectPackage($packages, $p);
+	if ($otherOnly) {
+	    selectPackage($packages, $p, 0, $otherOnly);
+	} else {
+	    selectPackage($packages, $p);
+	}
     }
-    log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
-    log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
+    unless ($otherOnly) {
+	log::l("setSelectedFromCompssList: reached size ", formatXiB($nb), ", up to indice $min_level (less than ", formatXiB($max_size), ")");
+	log::l("setSelectedFromCompssList: ", join(" ", sort map { packageName($_) } grep { packageFlagSelected($_) } @{$packages->{depslist}}));
+    }
     $min_level;
 }
 
