@@ -24,7 +24,6 @@ use Gtk;
 use Config;
 init Gtk;
 use POSIX;
-use Locale::GetText;
 use lib qw(/usr/lib/libDrakX);
 use interactive;
 use standalone;
@@ -33,13 +32,6 @@ use my_gtk qw(:helpers :wrappers);
 use any;
 use bootloader;
 use fs;
-
-setlocale (LC_ALL, "");
-Locale::GetText::textdomain ("Bootlookdrake");
-
-import Locale::GetText I_;
-*_ = *I_;
-
 
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~/--embedded (\S*) (\S*)/;
 if ($::isEmbedded) {
