@@ -241,7 +241,7 @@ sub configure_entry($$) {
 
 	if ($specific_version) {
 	    $entry->{initrd} or $entry->{initrd} = "/boot/initrd-$specific_version.img";
-	    unless (-e "$prefix/$entry->{initrd}") {
+	    if (! -e "$prefix/$entry->{initrd}" || $::oem) {
 		eval { mkinitrd($prefix, $specific_version, "$entry->{initrd}") };
 		undef $entry->{initrd} if $@;
 	    }
