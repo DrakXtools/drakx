@@ -176,7 +176,7 @@ sub packageById {
 sub analyse_kernel_name {
     my $kernels = join('|', map { "-$_" }
 	'(p3|i586|i686)-(up|smp)-(1GB|4GB|64GB)', 
-	qw(enterprise secure smp multimedia multimedia-smp),
+	qw(enterprise secure smp multimedia multimedia-smp xbox),
     );
     my @l = $_[0] =~ /kernel[^\-]*($kernels)?(-([^\-]+))?$/ or return;
     $l[0], $l[-1];
@@ -205,6 +205,7 @@ sub bestKernelPackage {
 	@kernels = @l;
     }
     my @prefered_exts = 
+      is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
       detect_devices::BIGMEM() ? ('-enterprise', '-smp') : 
       detect_devices::hasSMP() ? '-smp' : 

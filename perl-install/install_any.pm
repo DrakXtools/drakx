@@ -914,6 +914,7 @@ sub ejectCdrom {
     #- D state if the cdrom is already removed
     eval { fs::umount($o_mountpoint) };
     $@ and warnAboutFilesStillOpen();
+    return if is_xbox();
     eval { 
 	my $dev = detect_devices::tryOpen($cdrom);
 	ioctl($dev, c::CDROMEJECT(), 1) if ioctl($dev, c::CDROM_DRIVE_STATUS(), 0) == c::CDS_DISC_OK();
