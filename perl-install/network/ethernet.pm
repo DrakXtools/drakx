@@ -63,7 +63,7 @@ sub get_eth_cards() {
         }
         if (!$description) {
             my @cards = grep { $_->{driver} eq ($a || $saved_driver) } detect_devices::probeall();
-            $description = $cards[0]{descripxtion} if @cards == 1;
+            $description = $cards[0]->{description} if $#cards == 0;
         }
         $a and $saved_driver = $a; # handle multiple cards managed by the same driver
         [ $interface, $saved_driver, if_($description, $description) ]
