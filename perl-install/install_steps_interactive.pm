@@ -1057,12 +1057,13 @@ sub configurePrinter {
     my ($o, $clicked) = @_;
     $::corporate && !$clicked and return;
 
-    require printer;
-    require printerdrake;
+    require printer::main;
+    require printer::printerdrake;
+    require printer::detect;
 
     #- try to determine if a question should be asked to the user or
     #- if he is autorized to configure multiple queues.
-    my $ask_multiple_printer = ($::expert || $clicked) && 2 || scalar(printerdrake::auto_detect($o));
+    my $ask_multiple_printer = ($::expert || $clicked) && 2 || ($o && printer::detect::local_detect());
     $ask_multiple_printer-- or return;
 
     #- install packages needed for printer::getinfo()
@@ -1071,12 +1072,12 @@ sub configurePrinter {
     #- take default configuration, this include choosing the right system
     #- currently used by the system.
     my $printer = $o->{printer} ||= {};
-    eval { add2hash($printer, printer::getinfo($o->{prefix})) };
+    eval { add2hash($printer, printer::main::getinfo($o->{prefix})) };
 
     $printer->{PAPERSIZE} = (($o->{lang} =~ /^en_US/) || 
                              ($o->{lang} =~ /^en_CA/) || 
                              ($o->{lang} =~ /^fr_CA/)) ? 'Letter' : 'A4';
-    printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
+    printer::printerdrake::main($printer, $o, $ask_multiple_printer, sub { install_interactive::upNetwork($o, 'pppAvoided') });
 
 }
 
