@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.3
-Release: 27mdk
+Release: 28mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -316,6 +316,11 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Mon Feb  2 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-28mdk
+- drakconnect:
+  o enable to set hostname even when using DHCP (#7230)
+  o handle not loaded drivers (#7273)
+
 * Fri Jan 30 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-27mdk
 - drakconnect:
   o wizard:
