@@ -283,7 +283,7 @@ sub symlink {
 }
 
 sub rename {
-    explanations "renamed file $_[0] to $_[1]";
+    explanations "renamed file $_[0] to $_[1]" if -r $_[0];
     CORE::rename($_[0], $_[1]);
 }
 
