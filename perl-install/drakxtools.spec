@@ -353,9 +353,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o really display which devices were removed
 - misc cleanups
 - tool layout:
-  o add a separator below buttons on fredc request
+  o add a separator below buttons
   o really pack the two button sets at edges
-  o try to have a better layout when embedded): let's have only one
+  o try to have a better layout when embedded: let's have only one
     scrollbar that scroll the whole window
 
 * Tue Dec 30 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.3-14mdk
