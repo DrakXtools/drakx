@@ -253,7 +253,7 @@ sub setPackages {
 
     install_any::setPackages($o, $rebuild_needed);
     pkgs::selectPackagesAlreadyInstalled($o->{packages}, $o->{prefix});
-    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix}, $o->{base}, $o->{toRemove}, $o->{toSave});
+    $rebuild_needed and pkgs::selectPackagesToUpgrade($o->{packages}, $o->{prefix});
 }
 
 sub choosePackages {
@@ -353,28 +353,9 @@ sub installPackages($$) { #- complete REWORK, TODO and TOCHECK!
     #- this method is always called, go here to close still opened rpm db.
     delete $packages->{rpmdb};
 
-    if (@{$o->{toRemove} || []}) {
-	#- hack to ensure proper upgrade of packages from other distribution,
-	#- as release number are not mandrake based. this causes save of
-	#- important files and restore them after.
-	foreach (@{$o->{toSave} || []}) {
-	    if (-e "$o->{prefix}/$_") {
-		eval { cp_af("$o->{prefix}/$_", "$o->{prefix}/$_.mdkgisave") };
-	    }
-	}
-	pkgs::remove($o->{prefix}, $o->{toRemove});
-	foreach (@{$o->{toSave} || []}) {
-	    if (-e "$o->{prefix}/$_.mdkgisave") {
-		renamef("$o->{prefix}/$_.mdkgisave", "$o->{prefix}/$_");
-	    }
-	}
-	$o->{toSave} = [];
-
-	#- hack for compat-glibc to upgrade properly :-(
-	if (pkgs::packageByName($packages, 'compat-glibc')->flag_selected &&
-	    !pkgs::packageByName($packages, 'compat-glibc')->flag_installed) {
-	    rename "$o->{prefix}/usr/i386-glibc20-linux", "$o->{prefix}/usr/i386-glibc20-linux.mdkgisave";
-	}
+    if (%{$packages->{state}{ask_remove} || {}}) {
+	log::l("removing : ", join ', ', keys %{$packages->{state}{ask_remove}});
+	pkgs::remove($o->{prefix}, keys %{$packages->{state}{ask_remove}});
     }
 
     #- small transaction will be built based on this selection and depslist.
