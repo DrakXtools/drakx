@@ -640,8 +640,9 @@ sub whatUsbport() {
 	# Remove non-printable characters
 	$idstr =~ tr/[\x00-\x1f]/\./;
 	# Extract the printer data from the ID string
-	my ($manufacturer, $model, $serialnumber, $description) =
-	    ("", "", "", "");
+	my ($manufacturer, $model, $serialnumber, $description, 
+	    $commandset, $sku) =
+	    ("", "", "", "", "");
 	if ($idstr =~ /MFG:([^;]+);/ || $idstr =~ /MANUFACTURER:([^;]+);/) {
 	    $manufacturer = $1;
 	    $manufacturer =~ s/Hewlett[-\s_]Packard/HP/;
@@ -653,7 +654,7 @@ sub whatUsbport() {
 	    $model ||= $1;
 	}
 	if ($idstr =~ /SKU:([^;]+);/) {
-	    $model = $1;
+	    $sku = $1;
 	}
 	if ($idstr =~ /DES:([^;]+);/ || $idstr =~ /DESCRIPTION:([^;]+);/) {
 	    $description = $1;
@@ -662,6 +663,10 @@ sub whatUsbport() {
 	}
 	if ($idstr =~ /SE*R*N:([^;]+);/) {
 	    $serialnumber = $1;
+	}
+	if ($idstr =~ /CMD:([^;]+);/ || 
+	    $idstr =~ /COMMAND\s*SET:([^;]+);/) {
+	    $commandset ||= $1;
 	}
 	# Was there a manufacturer and a model in the string?
 	if ($manufacturer eq "" || $model eq "") {
@@ -677,7 +682,9 @@ sub whatUsbport() {
 		       MODEL => $model,
 		       MANUFACTURER => $manufacturer,
 		       DESCRIPTION => $description,
-		       SERIALNUMBER => $serialnumber
+		       SERIALNUMBER => $serialnumber,
+		       'COMMAND SET' => $commandset,
+		       SKU => $sku
 		   } };
     }
     @res;

@@ -1515,31 +1515,114 @@ sub setup_common {
     my $descr = "";
     foreach (@autodetected) {
 	$device eq $_->{port} or next;
-	if ($_->{val}{MANUFACTURER} && $_->{val}{MODEL}) {
-	    $descr = "$_->{val}{MANUFACTURER}|$_->{val}{MODEL}";
+	my ($automake, $automodel, $autodescr, $autocmdset, $autosku) =
+	    ($_->{val}{MANUFACTURER}, $_->{val}{MODEL},
+	     $_->{val}{DESCRIPTION}, $_->{val}{'COMMAND SET'},
+	     $_->{val}{SKU});
+	if ($automake && $autosku) {
+	    $descr = "$automake|$autosku";
+	} elsif ($automake && $automodel) {
+	    $descr = "$automake|$automodel";
 	} else {
-	    $descr = $_->{val}{DESCRIPTION};
+	    $descr = $autodescr;
 	    $descr =~ s/ /\|/;
 	}
+	$descr =~ s/^$automake\|\s*$automake\s*/$automake\|/;
 	# Clean up the description from noise which makes the best match
 	# difficult
-	$descr =~ s/Seiko\s+Epson/Epson/;
-	$descr =~ s/\s+Inc\.//;
-	$descr =~ s/\s+Corp\.//;
-	$descr =~ s/\s+SA\.//;
-	$descr =~ s/\s+S\.\s*A\.//;
-	$descr =~ s/\s+Ltd\.//;
-	$descr =~ s/\s+International//;
-	$descr =~ s/\s+Int\.//;
-	$descr =~ s/\s+[Ss]eries//;
-	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
+	$descr =~ s/Seiko\s+Epson/Epson/i;
+	$descr =~ s/Kyocera[\s\-]*Mita/Kyocera/i;
+	$descr =~ s/\s+Inc\.//i;
+	$descr =~ s/\s+Corp\.//i;
+	$descr =~ s/\s+SA\.//i;
+	$descr =~ s/\s+S\.\s*A\.//i;
+	$descr =~ s/\s+Ltd\.//i;
+	$descr =~ s/\s+International//i;
+	$descr =~ s/\s+Int\.//i;
+	$descr =~ s/\s+[Ss]eries//i;
+	$descr =~ s/\s+\(?[Pp]rinter\)?$//i;
 	$printer->{DBENTRY} = "";
 	# Try to find an exact match, check both whether the detected
 	# make|model is in the make|model of the database entry and vice versa
 	# If there is more than one matching database entry, the longest match
 	# counts.
-	my $matchlength = 0;
+	my $matchlength = -100;
 	foreach my $entry (keys %printer::main::thedb) {
+	    # Try to match the device ID string of the auto-detection
+	    if ($printer::main::thedb{$entry}{make} =~ /Generic/i) {
+		# Database entry for generic printer, check printer
+		# languages (command set)
+		my $cmd = $printer::main::thedb{$entry}{devidcmd};
+		if ($printer::main::thedb{$entry}{model} =~ 
+		    m!PCL\s*5/5e!i) {
+		    # Generic PCL 5/5e Printer
+		    if ($autocmdset =~
+			/(^|[:,])PCL\s*\-*\s*(5|)([,;]|$)/i) {
+			if ($matchlength < -50) {
+			    $matchlength = -50;
+			    $printer->{DBENTRY} = $entry;
+			    next;
+			}
+		    }
+		} elsif ($printer::main::thedb{$entry}{model} =~ 
+		    m!PCL\s*(6|XL)!i) {
+		    # Generic PCL 6/XL Printer
+		    if ($autocmdset =~
+			/(^|[:,])PCL\s*\-*\s*(6|XL)([,;]|$)/i) {
+			if ($matchlength < -40) {
+			    $matchlength = -40;
+			    $printer->{DBENTRY} = $entry;
+			    next;
+			}
+		    }
+		} elsif ($printer::main::thedb{$entry}{model} =~ 
+		    m!(PostScript)!i) {
+		    # Generic PostScript Printer
+		    if ($autocmdset =~
+			/(^|[:,])(PS|POSTSCRIPT)[^:;,]*([,;]|$)/i) {
+			if ($matchlength < -10) {
+			    $matchlength = -10;
+			    $printer->{DBENTRY} = $entry;
+			    next;
+			}
+		    }
+		}
+	    } else {
+		# "Real" manufacturer, check manufacturer, model, and/or
+		# description
+		my $matched = 1;
+		my ($mfg, $mdl, $des);
+		if ($mfg = $printer::main::thedb{$entry}{devidmake}) {
+		    $mfg =~ s/Hewlett[-\s_]Packard/HP/;
+		    $mfg =~ s/HEWLETT[-\s_]PACKARD/HP/;    
+		    if ($mfg ne $automake) {
+			$matched = 0;
+		    }
+		}
+		if ($mdl = $printer::main::thedb{$entry}{devidmodel}) {
+		    if ($mdl ne $automodel) {
+			$matched = 0;
+		    }
+		}
+		if ($des = $printer::main::thedb{$entry}{deviddesc}) {
+		    $des =~ s/Hewlett[-\s_]Packard/HP/;
+		    $des =~ s/HEWLETT[-\s_]PACKARD/HP/;    
+		    if ($des ne $autodescr) {
+			$matched = 0;
+		    }
+		}
+		if ($matched && ($des || ($mfg && $mdl))) {
+		    # Full match to known auto-detection data
+		    $printer->{DBENTRY} = $entry;
+		    $matchlength = 1000;
+		    last;
+		}
+	    }
+	    # Do not search human-readable make and model names if we had an
+	    # exact match or a match to the auto-detection ID string 
+	    next if $matchlength >= 100;
+	    # Try to match the (human-readable) make and model of the
+	    # Foomatic database or of thr PPD file
 	    my $dbmakemodel;
 	    if ($::expert) {
 		$entry =~ m/^(.*)\|[^\|]*$/;
@@ -1547,29 +1630,42 @@ sub setup_common {
 	    } else {
 		$dbmakemodel = $entry;
 	    }
+	    # Don't try to match if the database entry does not provide
+	    # make and model
 	    next unless $dbmakemodel;
-	    $dbmakemodel =~ s/\|/\\\|/;
+	    # If make and model match exactly, we have found the correct
+	    # entry and we can stop searching human-readable makes and
+	    # models
+	    if ($dbmakemodel eq $descr) {
+		$printer->{DBENTRY} = $entry;
+		$matchlength = 100;
+		next;
+	    }
 	    my $searchterm = $descr;
-	    $searchterm =~ s/\|/\\\|/;
 	    my $lsearchterm = length($searchterm);
+	    $searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
 	    if ($lsearchterm > $matchlength &&
-		$entry =~ m!$searchterm!i) {
+		$dbmakemodel =~ m!$searchterm!i) {
 		$matchlength = $lsearchterm;
 		$printer->{DBENTRY} = $entry;
 	    }
-	    my $ldbmakemodel = length($dbmakemodel);
-	    if ($ldbmakemodel > $matchlength &&
-		$descr =~ m!$dbmakemodel!i) {
-		$matchlength = $ldbmakemodel;
+	    $searchterm = $dbmakemodel;
+	    $lsearchterm = length($searchterm);
+	    $searchterm =~ s/([\\\/\(\)\[\]\|\.\$\@\%\*\?])/\\$1/g;
+	    if ($lsearchterm > $matchlength &&
+		$descr =~ m!$searchterm!i) {
+		$matchlength = $lsearchterm;
 		$printer->{DBENTRY} = $entry;
 	    }
 	}
-     $printer->{DBENTRY} ||= bestMatchSentence($descr, keys %printer::main::thedb);
+	# No matching printer found, try a best match as last mean
+	$printer->{DBENTRY} ||= bestMatchSentence($descr, keys %printer::main::thedb);
         # If the manufacturer was not guessed correctly, discard the
         # guess.
         $printer->{DBENTRY} =~ /^([^\|]+)\|/;
         my $guessedmake = lc($1);
-        if ($descr !~ /$guessedmake/i &&
+        if ($guessedmake !~ /Generic/i &&
+	    $descr !~ /$guessedmake/i &&
             ($guessedmake ne "hp" ||
              $descr !~ /Hewlett[\s-]+Packard/i))
             { $printer->{DBENTRY} = "" };
@@ -3180,7 +3276,8 @@ sub main {
 		    next;
 		};
 		undef $::Wizard_no_previous;
-		eval { 
+		eval {
+		#do {
 		    # eval to catch wizard cancel. The wizard stuff should 
 		    # be in a separate function with steps. see dragw.
 		    # (dams)

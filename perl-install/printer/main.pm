@@ -383,6 +383,7 @@ sub read_printer_db(;$) {
     my $inentry = 0;
     my $indrivers = 0;
     my $inautodetect = 0;
+    my $autodetecttype = "";
     local $_;
     while (<DBPATH>) {
 	chomp;
@@ -399,9 +400,31 @@ sub read_printer_db(;$) {
 	    } elsif ($inautodetect) {
 		# We are inside the autodetect block of a printers entry
 		# All entries inside this block will be ignored
-		if (m!^.*</autodetect>\s*$!) {
-		    # End of autodetect block
-		    $inautodetect = 0;
+		if ($autodetecttype) {
+		    if (m!^.*</$autodetecttype>\s*$!) {
+			# End of parallel, USB, or SNMP section
+			$autodetecttype = "";
+		    } elsif (m!^\s*<manufacturer>\s*([^<>]+)\s*</manufacturer>\s*$!) {
+			# Manufacturer
+			$entry->{devidmake} = $1;
+		    } elsif (m!^\s*<model>\s*([^<>]+)\s*</model>\s*$!) {
+			# Model
+			$entry->{devidmodel} = $1;
+		    } elsif (m!^\s*<description>\s*([^<>]+)\s*</description>\s*$!) {
+			# Description
+			$entry->{deviddesc} = $1;
+		    } elsif (m!^\s*<commandset>\s*([^<>]+)\s*</commandset>\s*$!) {
+			# Command set
+			$entry->{devidcmdset} = $1;
+		    }
+		} else {
+		    if (m!^.*</autodetect>\s*$!) {
+			# End of autodetect block
+			$inautodetect = 0;
+		    } elsif (m!^\s*<(parallel|usb|snmp)>\s*$!) {
+			# Beginning of parallel, USB, or SNMP section
+			$autodetecttype = $1;
+		    }
 		}
 	    } else {
 		if (m!^\s*</printer>\s*$!) {
@@ -422,6 +445,9 @@ sub read_printer_db(;$) {
 				$driverstr .= " (recommended)";
 			    }
 			    $entry->{ENTRY} = "$entry->{make}|$entry->{model}|$driverstr";
+			    $entry->{ENTRY} =~ s/^CITOH/C.ITOH/i;
+			    $entry->{ENTRY} =~ 
+				s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
 			    $entry->{driver} = $driver;
 			    # Duplicate contents of $entry because it is multiply entered to the database
 			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
@@ -431,6 +457,9 @@ sub read_printer_db(;$) {
 			# Make one entry per printer, with the recommended
 			# driver (manufacturerer|model)
 			$entry->{ENTRY} = "$entry->{make}|$entry->{model}";
+			$entry->{ENTRY} =~ s/^CITOH/C.ITOH/i;
+			$entry->{ENTRY} =~ 
+			    s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
 			if ($entry->{defaultdriver}) {
 			    $entry->{driver} = $entry->{defaultdriver};
 			    map { $thedb{$entry->{ENTRY}}{$_} = $entry->{$_} } keys %$entry;
@@ -1459,9 +1488,30 @@ sub poll_ppd_base {
 	    if ($ppd eq "raw") { next }
 	    my ($model, $driver);
 	    if ($descr) {
-		if ($descr =~ /^([^,]+), (.*)$/) {
+		$descr =~ s/\s*Series//i;
+		$descr =~ s/\((.*?(PostScript|PS).*?)\)/$1/i;
+		if (($descr =~ /^([^,]+[^,\s])\s+(PS.*)$/i) ||
+		    ($descr =~ /^([^,]+[^,\s])\s*(PostScript.*)$/i) ||
+		    ($descr =~ 
+		     /^([^,]+[^,\s])\s*(\(\d\d\d\d\.\d\d\d\).*)$/i) ||
+		    ($descr =~ 
+		     /^([^,]+[^,\s])\s*(v\d+\.\d+.*)$/i) ||
+		    ($descr =~ /^([^,]+), (.*)$/)) {
 		    $model = $1;
 		    $driver = $2;
+		    $model =~ s/[\-\s,]+$//;
+		    $driver =~
+			s/\b(PS|PostScript\b)/PostScript/gi;
+		    $driver =~
+			s/(PostScript)(.*)(PostScript)/$1$2/i;
+		    $driver =~ 
+			s/^\s*(\(\d\d\d\d\.\d\d\d\)|v\d+\.\d+)([,\s]*)(.*)/$3$2$1/;
+		    $driver =~ s/[\-\s,]+$//;
+		    $driver =~ s/^[\-\s,]+//;
+		    if ($driver !~ /[a-z]/i) {
+			$driver = "PostScript " . $driver;
+			$driver =~ s/ $//;
+		    }
 		} else {
 		    # Some PPDs do not have the ", <driver>" part.
 		    $model = $descr;
@@ -1475,6 +1525,7 @@ sub poll_ppd_base {
 	    }
 	    $ppd && $mf && $descr and do {
 		my $key = "$mf|$model|$driver" . ($lang && " ($lang)");
+		$key =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
 	        $thedb{$key}{ppd} = $ppd;
 		$thedb{$key}{driver} = $driver;
 		$thedb{$key}{make} = $mf;
