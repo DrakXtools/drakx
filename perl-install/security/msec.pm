@@ -1,17 +1,16 @@
 package security::msec;
 
 use strict;
-use vars qw($VERSION);
 use MDK::Common::File;
 use MDK::Common;
 
-$VERSION = "0.2";
 
+#-------------------------------------------------------------
+# msec files
 
-
-my $check_file = "$::prefix/etc/security/msec/security.conf";
-
-
+my $check_file    = "$::prefix/etc/security/msec/security.conf";
+my $curr_sec_file = "$::prefix/var/lib/msec/security.conf";
+my $options_file  = "$::prefix/etc/security/msec/level.local";
 
 # ***********************************************
 #              PRIVATE FUNCTIONS
@@ -19,58 +18,89 @@ my $check_file = "$::prefix/etc/security/msec/security.conf";
 
 my $num_level;
 
-sub get_default {
-    my ($option, $category) = @_;
-    my $default_file = "";
-    my $default_value = "";
+
+#-------------------------------------------------------------
+# msec options managment methods
+
+
+#-------------------------------------------------------------
+# option defaults
+
+sub load_defaults {
+    my ($category) = @_;
+    my $default_file;
     my $num_level = 0;
 
-    if ($category eq "functions") {
+    if ($category eq 'functions') {
         require security::level;
         $num_level ||= security::level::get();
         $default_file = "$::prefix/usr/share/msec/level.".$num_level;
     }
-    elsif ($category eq "checks") { $default_file = "$::prefix/var/lib/msec/security.conf" }
+    elsif ($category eq 'checks') { $default_file = $curr_sec_file }
 
-    foreach (cat_($default_file)) {
-	   if ($category eq 'functions') {
-		  (undef, $default_value) = split / / if /^$option/;
-	   } elsif ($category eq 'checks') {
-		  (undef, $default_value) = split /=/ if /^$option/;
-	   }
-    }
-    chop $default_value;
-    $default_value;
+    my $separator = $category eq 'functions' ? ' ' : $category eq 'checks' ? '=' : undef;
+    do { print "BACKTRACE:\n", backtrace(), "\n"; die 'wrong category' } unless $separator;
+    map { 
+        my ($opt, $val) = split /$separator/;
+        chop $val;
+        if_($opt ne 'set_security_conf', $opt => $val);
+    } cat_($default_file);
 }
 
-sub get_value {
-    my ($item, $category) = @_;
-    my $value = '';
+
+# get_XXX_default(function) -
+#   return the default of the function|check passed in argument.
+#   If no default is set, return "default".
+
+sub get_check_default {
+    my ($msec, $check) = @_;
+    $msec->{checks}{default}{$check};
+}
+
+sub get_function_default {
+    my ($msec, $function) = @_;
+    $msec->{functions}{default}{$function};
+}
+
+
+
+#-------------------------------------------------------------
+# option values
+
+sub load_values {
+    my ($category) = @_;
     my $item_file =
-      $category eq 'functions' ? "$::prefix/etc/security/msec/level.local" :
+      $category eq 'functions' ? $options_file :
       $category eq 'checks' ? $check_file : '';
 
-    foreach (cat_($item_file)) {
-	/^$item/ or next;
-
-	if ($category eq 'functions') {
-	    my $i = $_;
-	    (undef, $_) = split /\(/;
-	    s/[()]//g;
-	    $value = $_;
-	    $_ = $i;
-	} elsif ($category eq 'checks') {
-	    (undef, $value) = split(/=/, $_);
-	}
-	chop $value;
-	return $value;
-    }
-    "default";
+    my $separator = $category eq 'functions' ? '\(' : $category eq 'checks' ? '=' : undef;
+    do { print "BACKTRACE:\n", backtrace(), "\n"; die 'wrong category' } unless $separator;
+    map {
+        my ($opt, $val) = split /$separator/;
+        $val =~ s/[()]//g;
+        chop $opt if $separator eq '\(';   # $opt =~ s/ //g if $separator eq '\(';
+        chop $val;
+        $opt => $val;
+    } cat_($item_file);
 }
 
-# ***********************************************
-#               SPECIFIC OPTIONS
-# ***********************************************
+
+# get_XXX_value(function) -
+#   return the value of the function|check passed in argument.
+#   If no value is set, return "default".
+
+sub get_function_value {
+    my ($msec, $function) = @_;
+    $msec->{functions}{value}{$function} || "default";
+}
+
+sub get_check_value {
+    my ($msec, $check) = @_;
+#    print "value for '$check' is '$msec->{checks}{value}{$check}'\n";
+    $msec->{checks}{value}{$check} || "default";
+}
+
+
 
 
 # ***********************************************
@@ -117,26 +147,10 @@ sub get_functions {
     @functions;
 }
 
-# get_function_value(function) -
-#   return the value of the function passed in argument. If no value is set,
-#   return "default".
-sub get_function_value {
-    shift;
-    get_value(@_, 'functions');
-}
-
-# get_function_default(function) -
-#   return the default value of the function according to the security level
-sub get_function_default {
-    shift;
-    return get_default(@_, "functions");
-}
-
 # config_function(function, value) -
 #   Apply the configuration to 'prefix'/etc/security/msec/level.local
 sub config_function {
     my (undef, $function, $value) = @_;
-    my $options_file = "$::prefix/etc/security/msec/level.local";
 
     substInFile { s/^$function.*\n// } $options_file;
     append_to_file($options_file, "$function ($value)") if $value ne 'default';
@@ -149,22 +163,11 @@ sub config_function {
 # get_default_checks() -
 #   return a list of periodic checks handled by security.conf
 sub get_default_checks {
-    map { if_(/(.*?)=/, $1) } cat_("$::prefix/var/lib/msec/security.conf");
+    my ($msec) = @_;
+    keys %{$msec->{checks}{default}};
 }
 
-# get_check_value(check)
-#   return the value of the check passed in argument
-sub get_check_value {
-    shift;
-    get_value(@_, 'checks');
-}
 
-# get_check_default(check)
-#   Get the default value according to the security level
-sub get_check_default {
-    my ($check) = @_;
-    return get_default($check, 'checks');
-}
 
 # config_check(check, value)
 #   Apply the configuration to "$::prefix"/etc/security/msec/security.conf
@@ -177,5 +180,14 @@ sub config_check {
     }
 }
 
-sub new { shift }
+sub new { 
+    my $type = shift;
+    my $thing = {};
+    $thing->{checks}{default}    = { load_defaults('checks') };
+    $thing->{functions}{default} = { load_defaults('functions') };
+    $thing->{functions}{value} = { load_values('functions') };
+    $thing->{checks}{value}    = { load_values('checks') };
+    bless $thing, $type;
+}
+
 1;
