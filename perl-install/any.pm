@@ -443,14 +443,11 @@ sub set_window_manager {
     my ($home, $wm) = @_;
     my $p_home = "$::prefix$home";
 
-    #- for KDM
-    output("$p_home/.wmrc", "$wm\n");
+    #- for KDM/GDM
+    my $wm_number = sessions_with_order()->{$wm} || '';
+    update_gnomekderc("$p_home/.dmrc", 'Desktop', Session => "$wm_number$wm");
 
-    #- for GDM
-    mkdir_p("$p_home/.gnome2");
-    update_gnomekderc("$p_home/.gnome2/gdm", 'session', last => $wm);
-
-    #- for startx
+    #- for startx/autologin
     {
 	my %l = getVarsFromSh("$p_home/.desktop");
 	$l{DESKTOP} = $wm;
@@ -590,6 +587,10 @@ sub ask_users {
 
 sub sessions() {
     split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-l'));
+}
+sub sessions_with_order() {
+    my %h = map { /(.*)=(.*)/ } split(' ', run_program::rooted_get_stdout($::prefix, '/usr/sbin/chksession', '-L'));
+    \%h;
 }
 
 sub autologin {
