@@ -278,10 +278,11 @@ sub build_notebook {
     my ($netc, $intf, $gui, $apply_button, $interface, $interface_kind) = @_;
  
     my $apply = sub { $apply_button->set_sensitive(1) };
+    my $is_ethernet = $interface =~ /eth|ath|wlan/;
 
     if ($intf->{pages}{N("TCP/IP")}) {
 	gtkpack_($gui->{sheet}{N("TCP/IP")} = Gtk2::VBox->new(0,0),
-		 if_($interface =~ /eth/, 
+		 if_($is_ethernet, 
 		      0, $gui->{intf}{BOOTPROTO} = gtksignal_connect(Gtk2::OptionMenu->new,
 								     changed => sub { 
 							      foreach ($gui->{intf}{IPADDR}, $gui->{intf}{NETMASK}, $gui->{netc}{GATEWAY}) {
@@ -301,7 +302,7 @@ sub build_notebook {
 						 0, gtksignal_connect($gui->{intf}{NETMASK} = Gtk2::Entry->new,
 								      key_press_event => $apply),
 						),
-				     if_($interface =~ /eth/,
+				     if_($is_ethernet,
 					 0, gtkpack_(Gtk2::VBox->new(0,0),
 						     1, Gtk2::Label->new(N("Gateway")),
 						     0, gtksignal_connect($gui->{netc}{GATEWAY} = Gtk2::Entry->new,
@@ -324,7 +325,7 @@ sub build_notebook {
 				    ),
 			   ),
 		);
-	if ($interface =~ /eth/) { $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) } 
+	if ($is_ethernet) { $gui->{intf}{BOOTPROTO}->set_popdown_strings(N_("static"), N_("dhcp")) } 
 	else {
 	    $_->set_sensitive(0) foreach $gui->{intf}{IPADDR}, $gui->{intf}{NETMASK};
 	    delete $gui->{intf}{BOOTPROTO};
@@ -372,7 +373,7 @@ sub build_notebook {
 		gtkpack__(Gtk2::VBox->new(0,0),
 			  $gui->{intf_bool}{ONBOOT} = gtksignal_connect(Gtk2::CheckButton->new(N("Start at boot")),
 									toggled => $apply),
-			  if_($interface =~ /eth/,
+			  if_($is_ethernet,
 			      map { ($gui->{intf_bool}{$_->[0]} = gtksignal_connect(Gtk2::CheckButton->new($_->[1]),
 										    toggled => $apply))
 				} ([ "HWADDR", N("Track network card id (useful for laptops)") ],
