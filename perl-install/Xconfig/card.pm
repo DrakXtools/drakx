@@ -348,9 +348,9 @@ sub xfree_and_glx_choose {
 
     my $tc = 
       $auto ? $choices[0] :
-	$in->ask_from_listf_raw({ title => N("XFree configuration"), 
+	$in->ask_from_listf_raw({ title => N("Xorg configuration"), 
 				  messages => formatAlaTeX(join("\n\n\n", (grep { $_ } map { $_->{more_messages} } @choices),
-								N("Which configuration of XFree do you want to have?"))), 
+								N("Which configuration of Xorg do you want to have?"))), 
 				  interactive_help_id => 'configureX_xfree_and_glx',
 				},
 				sub { $_[0]{text} }, \@choices) or return;
@@ -395,31 +395,31 @@ sub multi_head_choices {
     @choices;
 }
 
-#- XFree version available, it would be better to parse available package and get version from it.
-sub xfree4_version() { '4.3' }
+#- Xorg version available, it would be better to parse available package and get version from it.
+sub xorg_version() { '6.7.0' }
 
 sub xfree_and_glx_choices {
     my ($card) = @_;
 
-    my @choices = if_($card->{Driver}, { text => N("XFree %s", xfree4_version()), code => sub {} });
+    my @choices = if_($card->{Driver}, { text => N("Xorg %s", xorg_version()), code => sub {} });
 
     #- no GLX with Xinerama
     return @choices if $card->{Xinerama};
 
     #- ask the expert or any user on second pass user to enable or not hardware acceleration support.
     if ($card->{DRI_GLX}) {
-	unshift @choices, { text => N("XFree %s with 3D hardware acceleration", xfree4_version()),
+	unshift @choices, { text => N("Xorg %s with 3D hardware acceleration", xorg_version()),
 			    code => sub { $card->{use_DRI_GLX} = 1 },
-			    more_messages => N("Your card can have 3D hardware acceleration support with XFree %s.", xfree4_version()),
+			    more_messages => N("Your card can have 3D hardware acceleration support with Xorg %s.", xorg_version()),
 			  };
     }
 
     #- an expert user may want to try to use an EXPERIMENTAL 3D acceleration.
     if ($card->{DRI_GLX_EXPERIMENTAL} && $::expert) {
-	push @choices, { text => N("XFree %s with EXPERIMENTAL 3D hardware acceleration", xfree4_version()),
+	push @choices, { text => N("Xorg %s with EXPERIMENTAL 3D hardware acceleration", xorg_version()),
 			 code => sub { $card->{use_DRI_GLX} = 1 },
-			 more_messages => N("Your card can have 3D hardware acceleration support with XFree %s,
-NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", xfree4_version()),
+			 more_messages => N("Your card can have 3D hardware acceleration support with Xorg %s,
+NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", xorg_version()),
 		       };
     }
     @choices;
@@ -459,7 +459,7 @@ sub add_to_card__using_Cards {
     $card;
 }
 
-#- needed for bad cards not restoring cleanly framebuffer, according to which version of XFree are used.
+#- needed for bad cards not restoring cleanly framebuffer, according to which version of Xorg are used.
 sub check_bad_card {
     my ($card) = @_;
     my $bad_card = $card->{BAD_FB_RESTORE};

@@ -18,9 +18,9 @@ sub to_string {
 sub info {
     my ($raw_X, $card) = @_;
     my $info;
-    my $xf_ver = Xconfig::card::xfree4_version();
-    my $title = $card->{use_DRI_GLX} ? N("XFree %s with 3D hardware acceleration", $xf_ver) : 
-                                       N("XFree %s", $xf_ver);
+    my $xf_ver = Xconfig::card::xorg_version();
+    my $title = $card->{use_DRI_GLX} ? N("Xorg %s with 3D hardware acceleration", $xf_ver) : 
+                                       N("Xorg %s", $xf_ver);
     my $keyboard = eval { $raw_X->get_keyboard } || {};
     my @monitors = eval { $raw_X->get_monitors };
     my $device = eval { $raw_X->get_device } || {};
