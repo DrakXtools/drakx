@@ -623,7 +623,6 @@ If you don't know, choose 'use pppoe'"),
                              ],
                     post => sub {
                         my $adsl_type = find { $adsl_types{$_} eq $adsl_protocol } keys %adsl_devices;
-                        find 
                         if ($adsl_type eq 'dhcp') {
                             $auto_ip = 1;
                             return 'lan_intf';
