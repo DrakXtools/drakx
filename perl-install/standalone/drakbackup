@@ -278,6 +278,8 @@ my $passwd_user = '';
 my $tape_device;
 my $media_erase = 0;
 my $media_eject = 0;
+my $multi_session = 0;
+my $session_offset = '';
 my $tape_norewind = 0;
 my $no_critical_sys = 1;
 my $send_mail = 0;
@@ -850,11 +852,10 @@ sub rsync_client {
 	return(0);
 }
 
-sub write_on_cd {
-	my $command;
+sub check_for_cd {
 	
 	#- check for a cd
-	$command = "cdrecord dev=$cd_device -atip";
+	my $command = "cdrecord dev=$cd_device -atip";
 	spawn_progress($command, "Check for media in drive");
 	if ($log_buff =~ /No disk/) {
 		show_warning("No CDR/DVDR in drive!");
@@ -869,12 +870,35 @@ sub write_on_cd {
 		return(1);
 	}
 	 
-	 
-	if ($media_erase) {
-		$command = "cdrecord -v dev=$cd_device blank=fast -data $save_path/drakbackup.iso"; 
-	} else {
-		$command = "cdrecord -v dev=$cd_device -data $save_path/drakbackup.iso"; 
+	if ($multi_session) {
+		$command = "cdrecord dev=$cd_device -msinfo";
+		spawn_progress($command, "Check for previous session status");
+		#- if we don't find a previous session, start fresh
+		if ($log_buff =~ /Cannot read session offset/) {
+			$media_erase = 1;
+			return(0);
+		} else {
+			#- extract the session info from $log_buff
+			my $code_loc = rindex($log_buff, "msinfo") + 8;
+			if ($code_loc != -1) { 
+				my $bufflen = length($log_buff);
+				$session_offset = substr($log_buff, $code_loc, $bufflen-$code_loc-1);
+				return(0);
+			}
+			return(1);
+		}
 	}
+}
+	
+sub write_on_cd {
+	
+	my $command = "cdrecord -v dev=$cd_device -data ";
+	#- only blank if it's the first session
+	$command .= "blank=fast " if (($media_erase) && ($session_offset eq ''));
+	#- multi-session mode
+	$command .= "-multi -pad " if ($multi_session);
+	$command .= "$save_path/drakbackup.iso"; 
+	
 	spawn_progress($command, "Running cdrecord");
 	unlink("$save_path/drakbackup.iso");
 }
@@ -889,7 +913,9 @@ sub spawn_progress {
 	$interactive and ($pbar3->set_value(0));
 	$interactive and ($timer = Gtk->timeout_add(2, \&progress_timeout));
 
-	$log_buff .= "\n" . $descr . ":\n\n";
+	$log_buff .= "\n" . $descr . ":\n";
+	$log_buff .= $command . "\n\n";
+	
 	open TMP, "$command 2>&1 |";
 	while ($value = <TMP>) {
 		$log_buff .= $value;
@@ -914,13 +940,17 @@ sub progress_timeout {
 }
 
 sub build_iso {
-	my $command = "mkisofs -r -J -T -v -V 'Drakbackup' -o $save_path/drakbackup.iso @file_list_to_send_by_ftp";
+	my $command = "mkisofs -r -J -T -v -V 'Drakbackup' ";
+	$command .= "-C $session_offset -M $cd_device " if (($multi_session) && ($session_offset ne ''));
+	$command .= "-o $save_path/drakbackup.iso @file_list_to_send_by_ftp";
 	spawn_progress($command, "Running mkisofs...");
 }
 
 sub build_cd {
-	build_iso();
-	write_on_cd();
+	if (!check_for_cd()) {
+		build_iso();
+		write_on_cd();
+	}
 }
 
 sub build_tape {
@@ -1399,7 +1429,7 @@ sub advanced_what_user {
 			0, _("Please check all users that you want to include in your backup."),
 			0, new Gtk::HSeparator,
 			1, createScrolledWindow( 
-				gtkpack_(new Gtk::VBox(0,0),
+				gtkpack__(new Gtk::VBox(0,0),
 					map { my $name = $_;
 						my @user_list_tmp;
 						my $b = new Gtk::CheckButton($name); 
