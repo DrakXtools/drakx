@@ -114,7 +114,8 @@ If you don't want to use the auto detection, deselect the checkbox.
                              );
 
 
-    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach 'modem', 'winmodem', 'adsl', 'cable', 'lan';
+    $conf{$_} = values %{$netc->{autodetect}{$_}} ? 1 : 0 foreach 'lan';
+    $conf{$_} = $netc->{autodetect}{$_} ? 1 : 0 foreach qw(adsl cable modem winmodem);
     $conf{isdn} = $netc->{autodetect}{isdn}{driver} ? 1 : 0;
   step_2:
 
