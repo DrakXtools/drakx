@@ -25,6 +25,7 @@ sub cylinder_size {
 
 modules::load('lvm-mod');
 run_program::run('vgscan') if !-e '/etc/lvmtab';
+run_program::run('vgchange', '-a', 'y');
 
 sub get_vg {
     my ($part) = @_;
@@ -47,7 +48,7 @@ sub get_lvs {
 	   { device => $_, 
 	     type => $type || 0x83,
 	     isFormatted => $type,
-	     size => (split(':', `lvdisplay -c $_`))[6] }
+	     size => (split(':', `lvdisplay -D -c $_`))[6] }
        } map { /^LV Name\s+(\S+)/ ? $1 : () } `vgdisplay -v -D $lvm->{LVMname}`
       ];
 }

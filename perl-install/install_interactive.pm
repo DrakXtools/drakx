@@ -32,9 +32,9 @@ sub partition_with_diskdrake {
     do {
 	$ok = 1;
 	require diskdrake;
-	diskdrake::main($hds, $o->{raid}, interactive_gtk->new, $nowizard);
+	diskdrake::main($hds, $o->{lvms}, $o->{raid}, interactive_gtk->new, $nowizard);
 	delete $o->{wizard} and return partitionWizard($o, 'nodiskdrake');
-	my @fstab = fsedit::get_fstab(@$hds, $o->{raid});
+	my @fstab = fsedit::get_fstab(@$hds, @{$o->{lvms}}, $o->{raid});
 	
 	unless (fsedit::get_root_(\@fstab)) {
 	    $ok = 0;

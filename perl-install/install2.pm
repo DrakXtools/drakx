@@ -219,9 +219,6 @@ sub formatPartitions {
     require raid;
     raid::prepare_prefixed($o->{raid}, $o->{prefix});
 
-    #- generate /etc/lvmtab need for rc.sysinit
-    run_program::rooted($o->{prefix}, 'vgscan') if -e '/etc/lvmtab';
-
     my $d = "/initrd/loopfs/lnx4win";
     if (-d $d) {
 #-	install_any::useMedium(0);

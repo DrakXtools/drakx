@@ -84,25 +84,24 @@ sub hds {
 	    my $type = typeOfPart($_->{device});
 	    $_->{type} = $type if $type > 0x100;
 	}
-	
-	if (my @lvms = grep { isLVM($_) } partition_table::get_normal_parts($hd)) {
-	    require lvm;
-	    foreach (@lvms) {
-		my $name = lvm::get_vg($_) or next;
-		my ($lvm) = grep { $_->{LVMname} eq $name } @hds;
-		if (!$lvm) {
-		    $lvm = bless { disks => [], LVMname => $name, level => 'linear' }, 'lvm';
-		    lvm::update_size($lvm);
-		    lvm::get_lvs($lvm);
-		    push @lvms, $lvm;
-		}
-		$_->{lvm} = $name;
-		push @{$lvm->{disks}}, $_;
-	    }
-	}
-
-
 	push @hds, $hd;
+    }
+    if (my @pvs = grep { isLVM($_) } map { partition_table::get_normal_parts($_) } @hds) {
+	#- otherwise vgscan won't find them
+	devices::make($_->{device}) foreach @pvs; 
+	require lvm;
+	foreach (@pvs) {
+	    my $name = lvm::get_vg($_) or next;
+	    my ($lvm) = grep { $_->{LVMname} eq $name } @hds;
+	    if (!$lvm) {
+		$lvm = bless { disks => [], LVMname => $name, level => 'linear' }, 'lvm';
+		lvm::update_size($lvm);
+		lvm::get_lvs($lvm);
+		push @lvms, $lvm;
+	    }
+	    $_->{lvm} = $name;
+	    push @{$lvm->{disks}}, $_;
+	}
     }
     \@hds, \@lvms;
 }

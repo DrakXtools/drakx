@@ -67,13 +67,12 @@ my ($hds, $lvms) =
 [_("I can't read your partition table, it's too corrupted for me :(
 I'll try to go on blanking bad partitions"), $err]);
     };
-push @$hds, @$lvms;
 
 $SIG{__DIE__} = sub { chomp (my $m = $_[0]); log::l("ERROR: $m") };
-my $fstab = [ fsedit::get_fstab(@$hds) ];
+my $fstab = [ fsedit::get_fstab(@$hds, @$lvms) ];
  
 fs::get_mntpoints_from_fstab($fstab);
 fs::check_mounted($fstab);
-diskdrake::main($hds, {}, $in);
+diskdrake::main($hds, $lvms, {}, $in);
 
 $in->exit(0);
