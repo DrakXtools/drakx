@@ -130,7 +130,7 @@ sub ask_fromW_real {
 	    $old_focus = $ind;
 	};
 
-	my ($w, $real_w, $set, $get, $expand, $size);
+	my ($w, $real_w, $set, $get, $expand, $size, $invalid_choice);
 	if ($e->{type} eq 'bool') {
 	    $w = Newt::Component::Checkbox($e->{text} || '', checkval(${$e->{val}}), " *");
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
@@ -157,30 +157,44 @@ sub ask_fromW_real {
 
 	    my $wi;
 	    my $add_item = sub {
-		my ($text, $data, $parents) = @_;
+		my ($text, $index, $parents) = @_;
 		$text = simplify_string($text, $width - 10);
 		$wi = max($wi, length($text) + 3 * @$parents + 4);
-		$w->TreeAdd($text, $data, $parents);
+		$w->TreeAdd($text, $index, $parents);
 	    };
 
+	    my @data = (undef);
 	    my $populate; $populate = sub {
 		my ($node, $parents) = @_;
 		if (my $l = $node->{_order_}) {
 		    each_index {
-			$add_item->($_, '', $parents);
+			$add_item->($_, 0, $parents);
 			$populate->($node->{$_}, [ @$parents, $::i ]);
 		    } @$l;
 		}
 		if (my $l = $node->{_leaves_}) {
-		    $add_item->($_->[0], $_->[1], $parents) foreach @$l;
+		    foreach (@$l) {
+			my ($leaf, $data) = @$_;
+			my $s = scalar($data);
+			push @data, $data;
+			$add_item->($leaf, int(@data) - 1, $parents);
+		    }
 		}
 	    };
 	    $populate->($data_tree, []);
 
 	    $w->TreeSetWidth($wi + 1);
-	    $get = sub { $w->TreeGetCurrent };
+	    $get = sub { 
+		my $i = $w->TreeGetCurrent;
+		$invalid_choice = $i == 0;
+		$data[$i];
+	    };
 	    $set = sub {
-#		$w->TreeSetCurrent($_[0]);
+		my ($data) = @_;
+		eval { 
+		    my $i = find_index { $_ eq $data } @data;
+		    $w->TreeSetCurrent($i);
+		} if $data;
 		1;
 	    };
 	} elsif ($e->{type} =~ /list/) {
@@ -216,7 +230,8 @@ sub ask_fromW_real {
 	#- (better handling of addCallback needed)
 
 	{ e => $e, w => $w, real_w => $real_w || $w, expand => $expand, callback => $changed,
-	  get => $get || sub { ${$e->{val}} }, set => $set || sub {} };
+	  get => $get || sub { ${$e->{val}} }, set => $set || sub {},
+	  invalid_choice => \$invalid_choice };
     };
     @widgets = map_index { $create_widget->($_, $::i) } @$l;
 
@@ -269,7 +284,6 @@ sub ask_fromW_real {
     my $check = sub {
 	my ($f) = @_;
 
-	$get_all->();
 	my ($error, $_focus) = $f->();
 	
 	if ($error) {
@@ -279,24 +293,27 @@ sub ask_fromW_real {
     };
 
     my ($blocked, $canceled);
-    do {
+    while (1) {
 	my $r = $form->RunForm;
 
 	$canceled = $cancel_button && $$r == $$cancel_button;
 
+	$get_all->();
+	next if !$canceled && any { ${$_->{invalid_choice}} } @widgets;
+
 	$blocked = 
 	  $$r == $$ok_button && 
 	    $common->{callbacks}{ok_disabled} && 
-	      do { $get_all->(); $common->{callbacks}{ok_disabled}() };
+	      do { $common->{callbacks}{ok_disabled}() };
 
 	if (my $button = find { $$r == ${$_->{w}} } @widgets) {
-	    $get_all->();
 	    my $v = $button->{e}{clicked_may_quit}();
 	    $form->FormDestroy;
 	    Newt::PopWindow();
 	    return $v || &ask_fromW;
 	}
-    } until !$blocked && $check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'});
+	last if !$blocked && $check->($common->{callbacks}{$canceled ? 'canceled' : 'complete'});
+    }
 
     $form->FormDestroy;
     Newt::PopWindow();

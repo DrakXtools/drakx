@@ -232,7 +232,7 @@ int
 newtTreeAdd(co,text,data,parents)
 	Newt::Component co;
 	const char * text;
-	SV * data;
+	int data;
         SV * parents;
 	CODE:
         {
@@ -242,7 +242,7 @@ newtTreeAdd(co,text,data,parents)
 	  for (i = 0; i <= av_len(av); i++) l[i] = SvIV(*av_fetch(av, i, 0));
 	  l[i++] = NEWT_ARG_APPEND;
 	  l[i] = NEWT_ARG_LAST;
-	  RETVAL = newtCheckboxTreeAddArray(co, text, SvREFCNT_inc(data), 0, l);
+	  RETVAL = newtCheckboxTreeAddArray(co, text, (void *) data, 0, l);
 	}
 	OUTPUT:
 	RETVAL
@@ -250,9 +250,9 @@ newtTreeAdd(co,text,data,parents)
 void
 newtTreeSetCurrent(co, data)
 	Newt::Component co;
-	SV * data;
+	int data;
 	CODE:
-	newtCheckboxTreeSetCurrent(co, data);
+	newtCheckboxTreeSetCurrent(co, (void *) data);
 
 void
 newtTreeSetWidth(co,width)
@@ -261,11 +261,11 @@ newtTreeSetWidth(co,width)
 	CODE:
 	newtCheckboxTreeSetWidth(co, width);
 
-SV *
+int
 newtTreeGetCurrent(co)
 	Newt::Component co;
 CODE:
-	RETVAL = SvREFCNT_inc(newtCheckboxTreeGetCurrent(co));
+	RETVAL = (int) newtCheckboxTreeGetCurrent(co);
 OUTPUT:
 	RETVAL
 
@@ -308,7 +308,7 @@ newtReflowText(text,width,flexDown,flexUp,actualWidth,actualHeight)
 Newt::Component
 newtForm(vertBar,help,flags)
 	Newt::Component vertBar;
-	const char * help;
+	char * help;
 	int flags;
 
 void
