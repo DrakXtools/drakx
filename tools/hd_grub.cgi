@@ -34,7 +34,7 @@ default 0
 title Mandrake Install
 
 root ($hd,$grub_partition_number)
-kernel $directory/isolinux/alt0/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk,partition=$hd_linux$partition_number,directory=$directory
+kernel $directory/isolinux/alt0/vmlinuz $default_append $default_acpi $default_vga automatic=method:disk,partition:$hd_linux$partition_number,directory:$directory
 initrd $directory/isolinux/alt0/all.rdz
 EOF
 
