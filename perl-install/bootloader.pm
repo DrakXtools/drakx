@@ -318,13 +318,13 @@ wait %d seconds for default boot.
 
     #- manage older kernel if installed.
     foreach (qw(2.2 hack)) {
-	my $hasOld = -e "$prefix/boot/vmlinuz-$_";
-	if ($hasOld) {
-	    my $oldVersion = first(readlink("$prefix/boot/vmlinuz-$_") =~ /vmlinuz-(.*mdk)/);
-	    my $oldSecure = -e "$prefix/boot/vmlinuz-${_}secure";
-	    my $oldSMP = $isSMP && -e "$prefix/boot/vmlinuz-${_}smp";
+	my $f = "$prefix/boot/vmlinuz-$_";
+	if (-e $f) {
+	    my $oldVersion = first(readlink($f) =~ /vmlinuz-(.*mdk)/);
+	    my $oldSecure = -e "$prefix/boot/vmlinuz-${oldVersion}secure";
+	    my $oldSMP = -e "$prefix/boot/vmlinuz-${oldVersion}smp";
 
-	    add_kernel($prefix, $lilo, $oldVersion, $oldSecure ? "${_}secure" : $oldSMP ? "${_}smp" : $_,
+	    add_kernel($prefix, $lilo, $oldVersion, $_ . ($oldSecure ? 'secure' : $oldSMP ? 'smp' : ''),
 		       {
 			label => "linux-$_",
 			root  => "/dev/$root",
