@@ -155,7 +155,6 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 	struct stat buf;
 	int rc;
 
-#ifndef DISABLE_MEDIAS
 	if (strcmp(fs, "nfs")) {
 	    rc = ensure_dev_exists(dev);
 	    if (rc != 0) {
@@ -163,7 +162,6 @@ int my_mount(char *dev, char *location, char *fs, int force_rw)
 		    return -1;
 	    }
 	}
-#endif
 
 	log_message("mounting %s on %s as type %s", dev, location, fs);
 
