@@ -15,11 +15,13 @@ sub main {
 
     # grab current config
     foreach (cat_($config_file)) {
-        ($proxy_cfg->{http_url}, $proxy_cfg->{http_port}) = /http_proxy = (http:.*):(.*)/;
-        ($proxy_cfg->{ftp_url}, $proxy_cfg->{ftp_port}) = /ftp_proxy = (ftp:.*):(.*)/;
-	($proxy_cfg->{login}) = /http_user = (.*)/;
-	($proxy_cfg->{passwd}) = /http_passwd = (.*)/;
-	($proxy_cfg->{passwd2}) = /http_passwd = (.*)/;
+      /http_proxy = (http:.*):(\d+)/ and ($proxy_cfg->{http_url}, $proxy_cfg->{http_port}) = ($1, $2);
+      /ftp_proxy = (ftp:.*):(\d+)/ and ($proxy_cfg->{ftp_url}, $proxy_cfg->{ftp_port}) = ($1, $2);
+      /http_user = (.*)/ and ($proxy_cfg->{login}) = $1;
+      if (/http_passwd = (.*)/) {
+	($proxy_cfg->{passwd}) = $1;
+    	($proxy_cfg->{passwd2}) = $1;
+      }
     }
   begin:
     $::isWizard = 1;
@@ -31,9 +33,9 @@ sub main {
     # http proxy
   step_http_proxy:
     undef $::Wizard_no_previous;
-    $proxy_cfg->{http_url} ||= "http:";
+    $proxy_cfg->{http_url} ||= "http://www.proxy.com/";
     $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please fill in the http proxy informations"),
+                               _("Please fill in the http proxy informations\nLeave it blank if you don't want an http proxy"),
 			       [ { label => _("URL"), val => \$proxy_cfg->{http_url} },
 				 { label => _("port"), val => \$proxy_cfg->{http_port} }
 			       ],
@@ -52,8 +54,9 @@ sub main {
 
     # ftp proxy
     step_ftp_proxy:
+    $proxy_cfg->{ftp_url} ||= "ftp://ftp.proxy.com/";
     $in->ask_from_entries_refH(_("Proxy configuration"),
-                               _("Please fill in the ftp proxy informations"),
+                               _("Please fill in the ftp proxy informations\nLeave it blank if you don't want an ftp proxy"),
 			       [ { label => _("URL"), val => \$proxy_cfg->{ftp_url} },
 				 { label => _("port"), val => \$proxy_cfg->{ftp_port} }
 			       ],
