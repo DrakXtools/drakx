@@ -240,15 +240,15 @@ void doklog()
 void del_loop(char *device) 
 {
 	int fd;
-	if ((fd = open(device, O_RDONLY, 0)) < 0) {
-		printf("del_loop open failed\n");
+	if ((fd = open(device, O_RDONLY, 0)) < 0)
+		return;
+
+	if (ioctl(fd, LOOP_CLR_FD, 0) < 0) {
+                close(fd);
 		return;
 	}
 
-	if (ioctl(fd, LOOP_CLR_FD, 0) < 0) {
-		printf("del_loop ioctl failed");
-		return;
-	}
+        printf("\t%s\n", device);
 
 	close(fd);
 }
@@ -299,7 +299,10 @@ void unmount_filesystems(void)
 		*p++ = '\0';
 		while (*p != '\n') p++;
 		p++;
-		if (strcmp(fs[numfs].name, "/") != 0) numfs++; /* skip if root, no need to take initrd root in account */
+		if (strcmp(fs[numfs].name, "/")
+                    && strcmp(fs[numfs].name, "/dev")
+                    && strncmp(fs[numfs].name, "/proc", 5))
+                        numfs++;
 	}
 
 	/* Pixel's ultra-optimized sorting algorithm:
@@ -310,11 +313,11 @@ void unmount_filesystems(void)
 		for (i = 0; i < numfs; i++) {
 			/*printf("trying with %s\n", fs[i].name);*/
 			if (fs[i].mounted && umount(fs[i].name) == 0) { 
-				if (strncmp(fs[i].dev + sizeof("/dev/") - 1, "loop",
-					    sizeof("loop") - 1) == 0)
+				printf("\t%s\n", fs[i].name);
+
+				if (strstr(fs[i].dev, "loop"))
 					del_loop(fs[i].dev);
 				
-				printf("\t%s\n", fs[i].name);
 				fs[i].mounted = 0;
 				nb++;
 			}
@@ -436,6 +439,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 		return 0;
 
 	sync(); sync();
+	sleep(5);
 
 	printf("sending termination signals...");
 	kill(-1, 15);
@@ -449,9 +453,11 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
 
 	unmount_filesystems();
 
+	sync(); sync();
+
 	if (!abnormal_termination) {
-		printf("rebooting system\n");
-		sleep(2);
+		printf("rebooting system in 10 seconds\n");
+                sleep(10);
 		reboot(0xfee1dead, 672274793, 0x01234567);
 	} else {
 		printf("you may safely reboot your system\n");
