@@ -221,4 +221,12 @@ sub is_dynamic_host {
   any { defined $_->{DHCP_HOSTNAME} } values %$intf;
 }
 
+sub reread_net_conf {
+    my ($netcnx, $netc, $intf) = @_;
+    network::netconnect::read_net_conf('', $netcnx, $netc);
+    modules::load_category('net');
+    network::netconnect::load_conf($netcnx, $netc, $intf);
+    network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
+}
+
 1;

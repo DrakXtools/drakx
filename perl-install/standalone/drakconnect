@@ -51,7 +51,7 @@ if ($in->isa('interactive::gtk')) {
     require ugtk2;
     ugtk2->import(qw(:create :dialogs :helpers :wrappers));
 }
-reread_net_conf();
+network::tools::reread_net_conf($netcnx, $netc, $intf);
 $::Wizard_title = N("Network & Internet Configuration");
 $::Wizard_pix_up = "drakconnect.png";
 
@@ -212,7 +212,7 @@ sub manage {
 	/^ippp/ and $p->{isdn} = { kind => $_ };
 	/^ppp0/ and $p->{modem} = { kind => $_ };
     };
-        
+
     $window->{rwindow}->add(gtkpack_(Gtk2::VBox->new,
 				     0, $interface_menu = gtksignal_connect(Gtk2::OptionMenu->new,
 									    changed => sub {
@@ -996,9 +996,3 @@ Please run \"Internet access\" in control center."));
     ugtk2->exit(0);
 }
 
-sub reread_net_conf() {
-    network::netconnect::read_net_conf('', $netcnx, $netc);
-    modules::load_category('net');
-    network::netconnect::load_conf($netcnx, $netc, $intf);
-    network::network::probe_netcnx_type('', $netc, $intf, $netcnx);
-}
