@@ -176,7 +176,6 @@ sub cardConfigurationAuto() {
 		       foreach (1..$dup) {
 			   my $card = {};
 			   add2hash($card, $orig);
-			   $card->{screen} = $_ - 1;
 			   push @result, $card;
 		       }
 		       @result;
@@ -220,6 +219,11 @@ sub cardConfiguration(;$$$) {
 	    unless ($_->{driver} && !$_->{flags}{unsupported}) {
 		log::l("found card \"$_->{identifier}\" not supported by XF4, disabling mutli-head support");
 		$configure_multi_head = undef;
+	    }
+	    #- if more than one card use the same BusID, we have to use screen.
+	    if ($single_heads{$_->{busid}}) {
+		$single_heads{$_->{busid}}{screen} ||= 0;
+		$_->{screen} = $single_heads{$_->{busid}}{screen} + 1;
 	    }
 	    $single_heads{$_->{busid}} = $_;
 	}
