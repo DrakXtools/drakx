@@ -744,7 +744,8 @@ sub new {
 
     $o->{pop_it} ||= $pop_it || $::WizardTable && do {
 	my @l = $::WizardTable->get_children;
-	@l > ($::isInstall ? 1 : 2) || @l && $l[-1]->visible;
+	shift @l if !$::isInstall; #- don't take into account the DrawingArea
+	@l > 1 || @l && $l[-1]->visible;
     };
 
     if ($::isWizard && !$o->{pop_it}) {
