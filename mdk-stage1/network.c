@@ -395,7 +395,7 @@ static enum return_type setup_network_interface(struct interface_info * intf)
 	char * bootprotos_auto[] = { "static", "dhcp", "adsl" };
 	char * choice;
 
-	results = ask_from_list_auto("Please choose the desired IP attribution.", bootprotos, &choice, "network", bootprotos_auto);
+	results = ask_from_list_auto("Please select your network connection type.", bootprotos, &choice, "network", bootprotos_auto);
 	if (results != RETURN_OK)
 		return results;
 
