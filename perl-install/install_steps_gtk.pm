@@ -632,4 +632,62 @@ sub summary_prompt {
     $w->main($check_complete);
 }
 
+sub deselectFoundMedia {
+    #- group by CD
+    my (undef, $hdlists) = @_;
+    my %cdlist;
+    my @hdlist2;
+    my @corresp;
+    my $i = 0;
+    foreach (@$hdlists) {
+	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
+	if (!$cd || !@{$cdlist{$cd} || []}) {
+	    push @hdlist2, $_;
+	    $corresp[$i] = [ $i ];
+	} else {
+	    $corresp[$i] = [];
+	    push @{$corresp[$cdlist{$cd}[0]]}, $i;
+	}
+	if ($cd) {
+	    $cdlist{$1} ||= [];
+	    push @{$cdlist{$1}}, $i;
+	}
+	++$i;
+    }
+    my $w = ugtk2->new("");
+    my @selection = (1) x @hdlist2;
+    my $copy_rpms_on_disk = 0;
+    $i = -1;
+    $w->sync;
+    #- TODO check available size for copying rpms from infos in hdlists file
+    ugtk2::gtkadd(
+	$w->{window},
+	gtkpack(
+	    Gtk2::VBox->new(0, 5),
+	    Gtk2::WrappedLabel->new(N("The following installation media have been found.
+If you want to skip some of them, you can unselect them now.")),
+	    (map { ++$i; gtknew('CheckButton', text => $_->[3], active_ref => \$selection[$i]) } @hdlist2),
+	    gtknew('HSeparator'),
+	    Gtk2::WrappedLabel->new(N("You have the possibility to copy the contents of the CDs on the hard drive before installation.
+It will then continue from the hard drive and the packages will remain available once the system will be fully installed.")),
+	    gtknew('CheckButton', text => N("Copy whole CDs"), active_ref => \$copy_rpms_on_disk),
+	    gtknew('HSeparator'),
+	    #- TODO only show this for cdrom install method ?
+	    gtknew('HBox', children_tight => [
+		gtknew('Button', text => N("Next"), clicked => sub { Gtk2->main_quit }),
+	    ]),
+	),
+    );
+    $w->main;
+    $i = -1;
+    my $l = [ grep { $selection[++$i] } @hdlist2 ];
+    my @l2; $i = 0;
+    foreach my $c (@$l) {
+	++$i while $hdlists->[$i][3] ne $c->[3];
+	push @l2, $hdlists->[$_] foreach @{$corresp[$i]};
+    }
+    log::l("keeping media " . join ',', map { $_->[1] } @l2);
+    (\@l2, $copy_rpms_on_disk);
+}
+
 1;

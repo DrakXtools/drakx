@@ -423,7 +423,9 @@ sub psUsingHdlists {
 	];
 	$cdsuppl ? ($medium_name = ($medium_name + 1) . 's') : ++$medium_name;
     }
-    @hdlists = $o->deselectFoundMedia(\@hdlists) if $deselectionAllowed && !defined $o_initialmedium;
+    my ($finalhdlists, $copy_rpms_on_disk);
+    ($finalhdlists, $copy_rpms_on_disk) = $o->deselectFoundMedia(\@hdlists) if $deselectionAllowed && !defined $o_initialmedium;
+    @hdlists = @$finalhdlists;
 
     foreach my $h (@hdlists) {
 	#- make sure the first medium is always selected!
@@ -435,7 +437,7 @@ sub psUsingHdlists {
     log::l("psUsingHdlists read " . int(@{$o_packages->{depslist}}) .
 	   " headers on " . int(keys %{$o_packages->{mediums}}) . " hdlists");
 
-    return $o_packages, $suppl_CDs;
+    return $o_packages, $suppl_CDs, $copy_rpms_on_disk;
 }
 
 sub psUsingHdlist {

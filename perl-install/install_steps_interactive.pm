@@ -403,11 +403,6 @@ sub setPackages {
     }
 }
 
-sub deselectFoundMedia {
-    my ($o, $p) = @_;
-    install_any::deselectFoundMedia($o, $p);
-}
-
 sub mirror2text { $crypto::mirrors{$_[0]} ? $crypto::mirrors{$_[0]}[0] . '|' . $_[0] : "-|URL" }
 sub askSupplMirror {
     my ($o, $message) = @_;

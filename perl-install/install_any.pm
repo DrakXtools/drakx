@@ -79,7 +79,7 @@ sub askChangeMedium($$) {
     do {
 	local $::o->{method} = $method = 'cdrom' if $medium_name =~ /^\d+s$/; #- Suppl CD
 	eval { $allow = changeMedium($method, $medium_name) };
-    } while $@; #- really it is not allowed to die in changeMedium!!! or install will cores with rpmlib!!!
+    } while $@; #- really it is not allowed to die in changeMedium!!! or install will core with rpmlib!!!
     log::l($allow ? "accepting medium $medium_name" : "refusing medium $medium_name");
     $allow;
 }
@@ -369,46 +369,6 @@ sub preConfigureTimezone {
     add2hash_($o->{timezone}, { UTC => $utc, ntp => $ntp });
 }
 
-sub deselectFoundMedia {
-    #- group by CD
-    my ($o, $hdlists) = @_;
-    my %cdlist;
-    my @hdlist2;
-    my @corresp;
-    my $i = 0;
-    foreach (@$hdlists) {
-	(my $cd) = $_->[3] =~ /\bCD ?(\d+)\b/;
-	if (!$cd || !@{$cdlist{$cd} || []}) {
-	    push @hdlist2, $_;
-	    $corresp[$i] = [ $i ];
-	} else {
-	    $corresp[$i] = [];
-	    push @{$corresp[$cdlist{$cd}[0]]}, $i;
-	}
-	if ($cd) {
-	    $cdlist{$1} ||= [];
-	    push @{$cdlist{$1}}, $i;
-	}
-	++$i;
-    }
-    my $l = $o->ask_many_from_list('',
-N("The following installation media have been found.
-If you want to skip some of them, you can unselect them now."),
-	{
-	    list => \@hdlist2,
-	    value => sub { 1 },
-	    label => sub { $_[0][3] },
-	},
-    );
-    my @l2; $i = 0;
-    foreach my $c (@$l) {
-	++$i while $hdlists->[$i][3] ne $c->[3];
-	push @l2, $hdlists->[$_] foreach @{$corresp[$i]};
-    }
-    log::l("keeping media " . join ',', map { $_->[1] } @l2);
-    @l2;
-}
-
 sub ask_if_suppl_media {
     my ($o) = @_;
     our $suppl_already_asked;
@@ -613,7 +573,7 @@ sub setPackages {
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
-	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o, $o->{method});
+	($o->{packages}, my $suppl_method, my $copy_rpms_on_disk) = pkgs::psUsingHdlists($o, $o->{method});
 
 	1 while $suppl_method = $o->selectSupplMedia($suppl_method);
 
@@ -633,6 +593,8 @@ sub setPackages {
 	put_in_hash($o->{rpmsrate_flags_chosen} ||= {}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
 	load_rate_files($o);
 
+	copy_rpms_on_disk($o) if $copy_rpms_on_disk;
+
 	set_rpmsrate_default_category_flags($o, $rpmsrate_flags_was_chosen);
 
 	push @{$o->{default_packages}}, default_packages($o);
@@ -645,6 +607,43 @@ sub setPackages {
 	#- open rpm db (always without rebuilding db, it should be false at this point).
 	$o->{packages}{rpmdb} ||= pkgs::rpmDbOpen();
     }
+}
+
+sub copy_rpms_on_disk {
+    my ($o) = @_;
+    use Data::Dumper;log::l("dumper mediums:".Dumper$o->{packages}{mediums});
+    mkdir "$o->{prefix}/$_", 0755 for qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
+    local *changeMedium = sub {
+	my ($method, $medium) = @_;
+	my $name = pkgs::mediumDescr($o->{packages}, $medium);
+	if (method_allows_medium_change($method)) {
+	    my $r;
+	    if ($method =~ /-iso$/) {
+		$r = install_any::changeIso($name);
+	    } else {
+		ejectCdrom();
+		$r &&= $o->ask_okcancel('', N("Change your Cd-Rom!
+Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.", $name), 1);
+	    }
+	    return $r;
+	} else {
+	    return 1;
+	}
+    };
+    for my $k (pkgs::allMediums($o->{packages})) {
+	my $m = $o->{packages}{mediums}{$k};
+	askChangeMedium($o->{method}, $m->{descr})
+	    or next;
+	log::l("copying /tmp/image/$m->{rpmsdir} to $o->{prefix}/var/ftp/pub/Mandrakelinux/media");
+	my $wait_w = $o->wait_message(N("Please wait"), N("Copying in progress"));
+	eval { cp_af("/tmp/image/$m->{rpmsdir}", "$o->{prefix}/var/ftp/pub/Mandrakelinux/media") };
+	undef $wait_w;
+	log::l($@) if $@;
+	$m->{prefix} = "$o->{prefix}/var/ftp/pub/Mandrakelinux";
+	$m->{method} = 'disk';
+    }
+    #- now the install will continue as 'disk'
+    $o->{method} = 'disk';
 }
 
 sub set_rpmsrate_default_category_flags {

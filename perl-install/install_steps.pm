@@ -295,7 +295,7 @@ sub setPackages {
 
 sub deselectFoundMedia {
     my (undef, $hdlists) = @_;
-    @$hdlists;
+    return ($hdlists, 0);
 }
 
 sub selectSupplMedia { '' }
