@@ -203,6 +203,10 @@ image[sun4c,sun4d,sun4m]=/$boot/vmlinux
   label=ks
   initrd=/$boot/live.rdz
   append=\"ramdisk_size=32000 ks$corporate\"
+image[sun4c,sun4d,sun4m]=/$boot/vmlinux
+  label=rescue
+  initrd=/$boot/live.rdz
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
 image[sun4u]=/$boot/vmlinux64
   label=linux
   alias=install
@@ -220,6 +224,10 @@ image[sun4u]=/$boot/vmlinux64
   label=ks
   initrd=/$boot/live64.rdz
   append=\"ramdisk_size=32000 ks$corporate\"
+image[sun4u]=/$boot/vmlinux64
+  label=rescue
+  initrd=/$boot/live64.rdz
+  append=\"ramdisk_size=32000 rescue rw root=/dev/ram3$corporate\"
 ");
 
 	output("$dir/$boot/README", "
