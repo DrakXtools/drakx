@@ -246,7 +246,7 @@ sub configureNetwork($) {
     install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
-    pppConfig($o);
+    miscellaneousNetwork($o);
 }
 
 #------------------------------------------------------------------------------
@@ -297,6 +297,8 @@ sub pppConfig {
     foreach ("$o->{prefix}/root", "$o->{prefix}/etc/skel") {
 	template2file("/usr/share/kppprc.in", "$_/.kde/share/config/kppprc", %toreplace) if -d "$_/.kde/share/config";
     }
+
+    miscellaneousNetwork($o);
 }
 
 #------------------------------------------------------------------------------
@@ -474,6 +476,13 @@ sub setupXfree {
 }
 
 #------------------------------------------------------------------------------
+sub miscellaneousNetwork {
+    my ($o) = @_;
+    setVarsInSh ("$o->{prefix}/etc/profile.d/proxy.sh",  $o->{miscellaneous}, qw(http_proxy ftp_proxy));
+    setVarsInCsh("$o->{prefix}/etc/profile.d/proxy.csh", $o->{miscellaneous}, qw(http_proxy ftp_proxy));
+}
+
+#------------------------------------------------------------------------------
 sub miscellaneous {
     my ($o) = @_;
     setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
@@ -482,8 +491,6 @@ sub miscellaneous {
         TYPE => $o->{installClass},
         SECURITY => $o->{security},
     });
-    setVarsInSh ("$o->{prefix}/etc/profile.d/proxy.sh",  $o->{miscellaneous}, qw(http_proxy ftp_proxy)); 
-    setVarsInCsh("$o->{prefix}/etc/profile.d/proxy.csh", $o->{miscellaneous}, qw(http_proxy ftp_proxy)); 
 }
 
 #------------------------------------------------------------------------------

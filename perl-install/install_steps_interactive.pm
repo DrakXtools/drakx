@@ -245,7 +245,7 @@ sub configureNetwork($) {
     my ($o, $first_time) = @_;
     local $_;
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
-	if (!$::beginner && $first_time) {
+	if (!$::beginner && $first_time || $::expert) {
 	    my @l = (
 		     __("Keep the current IP configuration"),
 		     __("Reconfigure network now"),
@@ -338,6 +338,8 @@ You may also enter the IP address of the gateway if you have one"),
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
 			      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
 			    );
+
+    $o->miscellaneousNetwork();
 }
 
 #------------------------------------------------------------------------------
@@ -368,6 +370,8 @@ _("Domain name") => \$m->{domain},
 _("First DNS Server") => \$m->{dns1},
 _("Second DNS Server") => \$m->{dns2},
     ]);
+
+    $o->miscellaneousNetwork();
 }
 
 #------------------------------------------------------------------------------
@@ -604,7 +608,7 @@ _("Use NIS") => { val => \$o->{authentification}{NIS}, type => 'bool', text => _
 
     if ($o->{authentification}{NIS}) {
 	$o->ask_from_entries_ref('',
-				 _("TODO"),
+				 _("Authentification NIS"),
 				 [ _("NIS Domain"), _("NIS Server") ],
 				 [ \ ($o->{netc}{NISDOMAIN} ||= $o->{netc}{DOMAINNAME}),
 				   { val => \$o->{authentification}{NIS_server}, list => ["broadcast"] },
@@ -819,6 +823,27 @@ _("Default") => { val => \$default, type => 'bool' },
 }
 
 #------------------------------------------------------------------------------
+sub miscellaneousNetwork {
+    my ($o, $clicked) = @_;
+    my $u = $o->{miscellaneous} ||= {};
+
+    !$::beginner || $clicked and $o->ask_from_entries_ref('',
+       _("Proxies configuration"),
+       [ _("HTTP proxy"),
+         _("FTP proxy"),
+       ],
+       [ \$u->{http_proxy},
+         \$u->{ftp_proxy},
+       ],
+       complete => sub {
+	   $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
+	   $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
+	   0;
+       }
+    ) || return;
+}
+
+#------------------------------------------------------------------------------
 sub miscellaneous {
     my ($o, $clicked) = @_;
     my %l = (
@@ -837,24 +862,18 @@ sub miscellaneous {
     !$::beginner || $clicked and $o->ask_from_entries_ref('',
 	_("Miscellaneous questions"),
 	[ _("Do you have a laptop?"), 
-	  _("Use hard drive optimizations"), 
-	  _("Security level"),
-	  _("HTTP proxy"),
-	  _("FTP proxy"),
+	  _("Use hard drive optimizations?"), 
+	  _("Choose security level"),
 #-GOLD	  _("Use kudzu"),
-	  _("Precise ram size (found %d MB)", availableRam / 1024),
+	  _("Precise ram size if needed (found %d MB)", availableRam / 1024),
 	],
 	[ { val => \$u->{LAPTOP}, type => 'bool' },
 	  { val => \$u->{HDPARM}, type => 'bool', text => _("(may cause disk problems)") },
 	  { val => \$s, list => [ map { $l{$_} } ikeys %l ] },
-	  \$u->{http_proxy},
-	  \$u->{ftp_proxy},
 #-GOLD	  { val => \$u->{kudzu}, type => 'bool' },
 	  \$u->{memsize},
 	],
         complete => sub {
-	    $u->{http_proxy} =~ m,^($|http://), or $o->ask_warn('', _("Proxy should be http://...")), return 1,3;
-	    $u->{ftp_proxy} =~ m,^($|ftp://), or $o->ask_warn('', _("Proxy should be ftp://...")), return 1,4;
 	    !$u->{memsize} || $u->{memsize} =~ s/^(\d+)M?$/$1M/i or $o->ask_warn('', _("Give the ram size in Mb")), return 1;
 	    0;
 	}

@@ -95,8 +95,8 @@ sub format_part($;$@) {
     $part->{isFormatted} = 1;
 }
 
-sub mount($$$;$$) {
-    my ($dev, $where, $fs, $rdonly, $remount) = @_;
+sub mount($$$;$) {
+    my ($dev, $where, $fs, $rdonly) = @_;
     log::l("mounting $dev on $where as type $fs");
 
     -d $where or commands::mkdir_('-p', $where);
@@ -111,7 +111,6 @@ sub mount($$$;$$) {
 
 	my $flag = 0;#c::MS_MGC_VAL();
 	$flag |= c::MS_RDONLY() if $rdonly;
-	$flag |= c::MS_REMOUNT() if $remount;
 	my $mount_opt = "";
 
 	if ($fs eq 'vfat') {
@@ -140,8 +139,8 @@ sub umount($) {
     foreach (@mtab) { print F $_ unless /(^|\s)$mntpoint\s/; }
 }
 
-sub mount_part($;$$$) {
-    my ($part, $prefix, $rdonly, $remount) = @_;
+sub mount_part($;$$) {
+    my ($part, $prefix, $rdonly) = @_;
 
     $part->{isMounted} and return;
 
@@ -149,7 +148,7 @@ sub mount_part($;$$$) {
 	swap::swapon($part->{device});
     } else {
 	$part->{mntpoint} or die "missing mount point";
-	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly, $remount);
+	mount(devices::make($part->{device}), ($prefix || '') . $part->{mntpoint}, type2fs($part->{type}), $rdonly);
     }
     $part->{isMounted} = $part->{isFormatted} = 1; #- assume that if mount works, partition is formatted
 }
