@@ -812,7 +812,7 @@ sub exit {
 }
 
 #- in case "exit" above was not called by the program
-END { print "BUG in $0 : ugtk2->exit was *NOT* called !! \n"; &exit() }
+END { &exit() }
 
 sub _create_window($$) {
     my ($o, $title) = @_;
