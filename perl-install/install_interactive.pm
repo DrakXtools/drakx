@@ -72,7 +72,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 }
 
 sub partitionWizardSolutions {
-    my ($o, $all_hds, $readonly) = @_;
+    my ($o, $all_hds) = @_;
     my $hds = $all_hds->{hds};
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
     my @wizlog;
@@ -86,14 +86,15 @@ sub partitionWizardSolutions {
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
-    my @good_hds = grep { $_->can_raw_add } @$hds;
-    if (fsedit::free_space(@good_hds) > $min_linux and !$readonly) {
+    my @hds_rw = grep { !$_->{readonly} } @$hds;
+    my @hds_can_add = grep { $_->can_raw_add } @hds_rw;
+    if (fsedit::free_space(@hds_can_add) > $min_linux) {
 	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($all_hds); 1 } ]
     } else { 
 	push @wizlog, _("Not enough free space to allocate new partitions") . ": " .
-	  (@good_hds ? 
-	   fsedit::free_space(@good_hds) . " < $min_linux" :
-	   "no harddrive on which partitions can be added") if !$readonly;
+	  (@hds_can_add ? 
+	   fsedit::free_space(@hds_can_add) . " < $min_linux" :
+	   "no harddrive on which partitions can be added");
     }
 
     if (my @truefs = grep { isTrueFS($_) } @$fstab) {
@@ -122,11 +123,12 @@ sub partitionWizardSolutions {
 		fsedit::recompute_loopbacks($all_hds);
 		1;
 	    } ];
+	my @ok_for_resize_fat = grep { !fsedit::part2hd($_, $all_hds)->{readonly} } @ok_forloopback;
 	$solutions{resize_fat} = 
 	  [ 6 - @fats, _("Use the free space on the Windows partition"),
 	    sub {
 		$o->set_help('resizeFATChoose');
-		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table::description, \@ok_forloopback) or return;
+		my $part = $o->ask_from_listf('', _("Which partition do you want to resize?"), \&partition_table::description, \@ok_for_resize_fat) or return;
 		$o->set_help('resizeFATWait');
 		my $w = $o->wait_message(_("Resizing"), _("Resizing Windows partition"));
 		require resize_fat::main;
@@ -166,19 +168,19 @@ When sure, press Ok.")) or return;
 
 		fsedit::auto_allocate($all_hds);
 		1;
-	    } ] if !$readonly;
+	    } ] if @ok_for_resize_fat;
     } else {
 	push @wizlog, _("There is no FAT partition to resize or to use as loopback (or not enough space left)") .
 	  @fats ? "\nFAT partitions:" . join('', map { "\n  $_->{device} $_->{free} (" . ($min_linux + $min_swap + $min_freewin) . ")" } @fats) : '';
     }
 
-    if (@$fstab && !$readonly) {
+    if (@$fstab && @hds_rw) {
 	$solutions{wipe_drive} =
 	  [ 10, fsedit::is_one_big_fat($hds) ? _("Remove Windows(TM)") : _("Erase entire disk"), 
 	    sub {
 		$o->set_help('takeOverHdChoose');
 		my $hd = $o->ask_from_listf('', _("You have more than one hard drive, which one do you install linux on?"),
-					    \&partition_table::description, $hds) or return;
+					    \&partition_table::description, \@hds_rw) or return;
 		$o->set_help('takeOverHdConfirm');
 		$o->ask_okcancel('', _("ALL existing partitions and their data will be lost on drive %s", partition_table::description($hd))) or return;
 		partition_table::raw::zero_MBR($hd);
@@ -187,7 +189,7 @@ When sure, press Ok.")) or return;
 	    } ];
     }
 
-    if (!$readonly) {
+    if (@hds_rw) {
 	$solutions{diskdrake} = [ 0, _("Custom disk partitioning"), sub { partition_with_diskdrake($o, $all_hds, 'nowizard') } ];
     }
 
@@ -219,7 +221,7 @@ sub partitionWizard {
 
     $o->set_help('doPartitionDisks');
 
-    my %solutions = partitionWizardSolutions($o, $o->{all_hds}, $o->{partitioning}{readonly});
+    my %solutions = partitionWizardSolutions($o, $o->{all_hds});
     if ($o->{lnx4win}) {
 	if ($solutions{loopback}) {
 	    %solutions = (loopback => $solutions{loopback});
