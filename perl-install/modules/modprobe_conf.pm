@@ -12,7 +12,7 @@ sub handled_fields { qw(alias options install remove) }
 sub mapping {
     my ($_conf, @modules) = @_;
     my @l = map { modules::mapping_24_26($_) } @modules;
-    wantarray ? @l : $l[0];
+    wantarray() ? @l : $l[0];
 }
 
 sub get_above {
