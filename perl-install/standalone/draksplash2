@@ -299,7 +299,7 @@ EOF
 
 GetOptions('kernel=s' => \ (my $kernel),
 	   'initrd=s' => \ (my $initrd),
-	   'size=s' => \ $kernel_and_initrd_size,
+	   'size=s' => \$kernel_and_initrd_size,
            'isolinux' => \ (my $force_isolinux_mode),
 	  ) or die $usage;
 
