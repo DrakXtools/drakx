@@ -43,9 +43,10 @@ sub N_ { $_[0] }
 
 # translation with context, kde-like 
 sub NC {
-    my ($s) = N(@_);
-    $s =~ s/_:.*\n//;
-    $s;
+    $::one_message_has_been_translated ||= join(':', (caller(0))[1,2]); #- see ugtk2.pm
+    my $s = shift @_; my $t = translate($s);
+    $t =~ s/_:.*\n//;
+    sprintf_fixutf8 $t, @_;
 }
 
 
