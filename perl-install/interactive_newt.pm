@@ -102,7 +102,7 @@ sub ask_fromW {
 	    $set = sub { $w->CheckboxSetValue(checkval($_[0])) };
 	    $get = sub { $w->CheckboxGetValue == ord '*' };
 	} elsif ($e->{type} eq 'button') {
-	    $w = Newt::Component::Button(-1, -1, may_apply($e->{format}, ${$e->{val}}));
+	    $w = Newt::Component::Button(-1, -1, simplify_string(may_apply($e->{format}, ${$e->{val}})));
 	} elsif ($e->{type} =~ /list/) {
 	    my ($h, $wi) = (@$l == 1 && $height > 30 ? 10 : 5, 20);
 	    my $scroll = @{$e->{list}} > $h ? 1 << 2 : 0;
@@ -110,7 +110,7 @@ sub ask_fromW {
 
 	    $w = Newt::Component::Listbox(-1, -1, $h, $scroll); #- NEWT_FLAG_SCROLL	    
 	    foreach (@{$e->{list}}) {
-		my $t = may_apply($e->{format}, $_);
+		my $t = simplify_string(may_apply($e->{format}, $_));
 		$w->ListboxAddEntry($t, $_);
 		$wi = max($wi, length $t);
 	    }
@@ -167,7 +167,8 @@ sub ask_fromW {
 	    $grid;
 	}
     };
-    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar($common->{ok} || _("Ok"), if_($common->{cancel}, $common->{cancel}));
+    my ($buttons, $ok, $cancel) = Newt::Grid::ButtonBar(simplify_string($common->{ok} || _("Ok")), 
+							if_($common->{cancel}, simplify_string($common->{cancel})));
 
     my $form = Newt::Component::Form(\undef, '', 0);
     my $window = Newt::Grid::GridBasicWindow(first(myTextbox(@widgets == 0, @{$common->{messages}})), $listg, $buttons);
@@ -188,13 +189,19 @@ sub ask_fromW {
 
     my ($destroyed, $canceled);
     do {
-	my $r = $form->RunForm;
+	my $r = do {
+	    local $::setstep = 1;
+	    $form->RunForm;
+	};
 	foreach (@widgets) {
 	    if ($$r == ${$_->{w}}) {
 		$destroyed = 1;
 		$form->FormDestroy;
 		Newt::PopWindow;
-		my $v = $_->{e}{clicked_may_quit}();
+		my $v = do {
+		    local $::setstep = 1;
+		    $_->{e}{clicked_may_quit}();
+		};
 		$v or return ask_fromW($o, $common, $l, $l2);
 	    }
 	}
@@ -241,5 +248,11 @@ sub wait_message_endW {
     Newt::PopWindow;
 }
 
+sub simplify_string {
+    my ($s) = @_;
+    $s =~ s/\n/ /g;
+    $s = substr($s, 0, 40); #- truncate if too long
+    $s;
+}
 
 1;
