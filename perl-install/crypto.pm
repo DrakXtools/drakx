@@ -31,6 +31,9 @@ my %land2tzs = (
 		_("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
 		_("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
 		_("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
+		_("Netherlands") => [ 'Europe/Amsterdam', 'Europe/Brussels', 'Europe/Berlin' ],
+		_("Italy") => [ 'Europe/Rome', 'Europe/Brussels', 'Europe/Paris' ],
+		_("Austria") => [ 'Europe/Vienna', 'Europe/Brussels', 'Europe/Berlin' ],
 	       );
 
 my %static_mirrors = (
