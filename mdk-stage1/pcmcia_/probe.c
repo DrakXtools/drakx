@@ -115,6 +115,8 @@ pci_id_t pci_id[] = {
 };
 #define PCI_COUNT (sizeof(pci_id)/sizeof(pci_id_t))
 
+char * driver = NULL;
+
 static int pci_probe(void)
 {
     char s[256], *name = NULL;
@@ -133,6 +135,10 @@ static int pci_probe(void)
 		    (device == pci_id[i].device)) break;
 	    if (i < PCI_COUNT) {
 		name = pci_id[i].name;
+		if (pci_id[i].vendor == 0x1013 && pci_id[i].device == 0x1100)
+			driver = "i82365";
+		else
+			driver = "yenta_socket";
 		break;
 	    }
 	}
@@ -497,7 +503,7 @@ int tcic_probe(void)
 char * pcmcia_probe(void)
 {
 	if (!pci_probe())
-		return "yenta_socket";  // will only work for 2.4 with kernel pcmcia :-(
+		return driver;
 	else if (!i365_probe())
 		return "i82365";
 	else if (!tcic_probe())
