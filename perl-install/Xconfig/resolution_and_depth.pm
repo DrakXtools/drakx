@@ -83,6 +83,9 @@ sub allowed {
 
     if ($using_xf4 ? $card->{Driver} eq 'fbdev' : $card->{server} eq 'FBDev') {
 	push @resolution_and_depth, grep { $_->{Depth} == 16 } @bios_vga_modes;
+    } elsif ($using_xf4 && $card->{Driver} eq 'fglrx') {
+	$prefered_depth = 24;
+	push @depths, 24;
     } elsif ($using_xf4) {
 	if ($card->{use_DRI_GLX}) {
 	    $prefered_depth = 16;
