@@ -111,7 +111,7 @@ You can add some more or change the existing ones."),
 	if ($c eq "Add") {
 	    my @labels = map { $_->{label} } @{$b->{entries}};
 	    my $prefix;
-	    if ($in->ask_from_list_('', _("Which type of entry do you want to add"), [ __("Linux"), __("Other OS (windows...)") ]) eq "Linux") {
+	    if ($in->ask_from_list_('', _("Which type of entry do you want to add?"), [ __("Linux"), __("Other OS (windows...)") ]) eq "Linux") {
 		$e = { type => 'image' };
 		$prefix = "linux";
 	    } else {
@@ -155,7 +155,7 @@ _("Default") => { val => \$default, type => 'bool' },
 	    '', \@l,
 	    complete => sub {
 		$e->{label} or $in->ask_warn('', _("Empty label not allowed")), return 1;
-		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already in use")), return 1;
+		member($e->{label}, map { $_->{label} } grep { $_ != $e } @{$b->{entries}}) and $in->ask_warn('', _("This label is already used")), return 1;
 		0;
 	    })) {
 	    $b->{default} = $old_default || $default ? $default && $e->{label} : $b->{default};

@@ -126,7 +126,7 @@ sub real_format_part {
 	my $check_blocks = grep { /^-c$/ } @options;
         swap::make($part->{device}, $check_blocks);
     } else {
-	die _("don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
+	die _("I don't know how to format %s in type %s", $_->{device}, type2name($_->{type}));
     }
     $part->{isFormatted} = 1;
 }

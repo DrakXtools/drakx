@@ -302,7 +302,7 @@ sub testFinalConfig($;$$) {
 	$mesg = $mesg . "\n" . _("Warning: testing is dangerous on this graphic card");
 	$def = 0;
     }
-    $auto && $def or $in->ask_yesorno(_("Test configuration"), $mesg, $def) or return 1;
+    $auto && $def or $in->ask_yesorno(_("Test of the configuration"), $mesg, $def) or return 1;
 
     unlink "$prefix/tmp/.X9-lock";
 
@@ -341,7 +341,7 @@ sub testFinalConfig($;$$) {
 		    /^$/ and last;
 		    push @msg, $_;
 		}
-		$in->ask_warn('', [ _("An error occurred:"), " ", @msg, _("\ntry changing some parameters") ]);
+		$in->ask_warn('', [ _("An error has occurred:"), " ", @msg, _("\ntry to change some parameters") ]);
 		return 0;
 	    }
 	}
@@ -364,11 +364,11 @@ sub testFinalConfig($;$$) {
         my $text = Gtk::Label->new;
         my $time = 8;
         Gtk->timeout_add(1000, sub {
-	    $text->set(_("(leaving in %d seconds)", $time));
+	    $text->set(_("Leaving in %d seconds", $time));
 	    $time-- or Gtk->main_quit;
 	});
 
-	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this correct?"), $text ], 0) ? 0 : 222);
+	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this the correct setting?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
@@ -376,7 +376,7 @@ sub testFinalConfig($;$$) {
     unlink "/tmp/.X11-unix/X9" if $prefix;
     kill 2, $pid;
 
-    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error occurred, try changing some parameters"));
+    $rc || $err == 222 << 8 or $in->ask_warn('', _("An error has occurred, try to change some parameters"));
     $rc;
 }
 
@@ -475,7 +475,7 @@ sub chooseResolutionsGtk($$;$) {
 			   });
     }
     gtkadd($W->{window},
-	   gtkpack_($W->create_box_with_title(_("Choose resolution and color depth"),
+	   gtkpack_($W->create_box_with_title(_("Choose the resolution and the color depth"),
 					      "(" . ($card->{type} ? 
 						     _("Graphic card: %s", $card->{type}) :
 						     _("XFree86 server: %s", $card->{server})) . ")"

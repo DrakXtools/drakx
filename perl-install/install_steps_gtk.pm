@@ -151,7 +151,7 @@ sub selectInstallClass1 {
     my $w = my_gtk->new('');
     my ($radio, $focused);
     gtkadd($w->{window},
-	   gtkpack($o->create_box_with_title(_("Which installation class do you want?")),
+	   gtkpack($o->create_box_with_title(_("Please, choose one of the following classes of installation:")),
 		   (my @radios = map { $radio = new Gtk::RadioButton($_, $radio ? $radio : ()); 
 			 $radio->set_active($_ eq $def); $radio } @$l),
 		   gtkadd(create_hbox(),
@@ -309,7 +309,7 @@ sub chooseSizeToInstall {
 _("Now that you've selected desired groups, please choose 
 how many packages you want, ranging from minimal to full 
 installation of each selected groups.") .
-		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose more precisely in next step") : ''),
+		  ($o->{compssUsersChoice}{Individual} ? "\n" . _("You will be able to choose them  more specificaly in the next step") : ''),
 		 create_packtable({ col_spacings => 10 },
 				  [ _("Choose the size you want to install"), $spin, _("MB"), ],
 				  [ undef, new Gtk::HScrollbar($adj) ],
@@ -397,8 +397,8 @@ sub choosePackagesTree {
 
     my %toolbar = my @toolbar = 
       (
-       ftout =>  [ _("Expand Tree") , sub { $tree->expand_recursive(undef) } ],
-       ftin  =>  [ _("Collapse Tree") , sub { $tree->collapse_recursive(undef) } ],
+       ftout =>  [ _("Expand tree") , sub { $tree->expand_recursive(undef) } ],
+       ftin  =>  [ _("Collapse tree") , sub { $tree->collapse_recursive(undef) } ],
        reload=>  [ _("Toggle between flat and group sorted"), sub { $add_nodes->(!$flat) } ],
       );
     $toolbar->set_button_relief("none");
@@ -443,7 +443,7 @@ sub choosePackagesTree {
 	    my $p = $packages->[0]{$curr} or return;
 	    pkgs::togglePackageSelection($packages, $p, my $l = {});
 	    if (my @l = grep { $l->{$_} } keys %$l) {
-		@l > 1 && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be install/removed"), join(", ", sort @l) ], 1) || return;
+		@l > 1 && !$auto_deps and $o->ask_okcancel('', [ _("The following packages are going to be installed/removed"), join(", ", sort @l) ], 1) || return;
 		pkgs::togglePackageSelection($packages, $p);
 		foreach (@l) {
 		    my $p = $packages->[0]{$_};
@@ -546,7 +546,7 @@ sub installPackages {
 _("Change your Cd-Rom!
 
 Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.
-If you don't have it press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($packages, $medium));
+If you don't have it, press Cancel to avoid installation from this Cd-Rom.", pkgs::mediumDescr($packages, $medium));
 
 	#- if not using a cdrom medium, always abort.
 	$method eq 'cdrom' && $o->ask_okcancel('', $msg);

@@ -54,7 +54,7 @@ sub selectLanguage($) {
 
     $o->{lang} =
       lang::text2lang($o->ask_from_list("Language",
-					_("Which language do you want?"),
+					_("Please, choose a language to use."),
 					# the translation may be used for the help
 					[ lang::list() ],
 					lang::lang2text($o->{lang})));
@@ -69,7 +69,7 @@ sub selectKeyboard($) {
     my ($o) = @_;
     $o->{keyboard} =
       keyboard::text2keyboard($o->ask_from_list_(_("Keyboard"),
-						 _("What is your keyboard layout?"),
+						 _("Please, choose your keyboard layout."),
 						 [ keyboard::list() ],
 						 keyboard::keyboard2text($o->{keyboard})));
     delete $o->{keyboard_unsafe};
@@ -115,8 +115,8 @@ sub selectInstallClass($@) {
 	$::expert   = $c{$_[0]} eq "expert" &&
 	  $o->ask_from_list_('',
 _("Are you sure you are an expert? 
-Hey no kidding, you will be allowed powerfull but dangerous things here."), 
-			 [ _("Hurt me plenty"), _("Normal") ]) ne "Normal";
+Hey no kidding, you will be allowed to make powerfull but dangerous things here."), 
+			 [ _("Expert"), _("Normal") ]) ne "Normal";
     };      
 
     $o->{isUpgrade} = $o->selectInstallClass1($verifInstallClass,
@@ -132,7 +132,7 @@ Hey no kidding, you will be allowed powerfull but dangerous things here."),
 		 server    => _("Server"),
 		);
 	$o->{installClass} = ${{reverse %c}}{$o->ask_from_list(_("Install Class"),
-							       _("Which usage do you want?"),
+							       _("Which usage is your system used for ?"),
 							       [ values %c ], $c{$o->{installClass}})};
     }
     install_steps::selectInstallClass($o);
@@ -143,7 +143,7 @@ sub selectMouse {
     my ($o, $force) = @_;
 
     if ($o->{mouse}{unsafe} || $::expert || $force) {
-	my $name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $o->{mouse}{FULLNAME});
+	my $name = $o->ask_from_list_('', _("Please, choose the type of your mouse."), [ mouse::names() ], $o->{mouse}{FULLNAME});
 	$o->{mouse} = mouse::name2mouse($name);
     }
     $o->{mouse}{XEMU3} = 'yes' if $o->{mouse}{nbuttons} < 3; #- if $o->{mouse}{nbuttons} < 3 && $o->ask_yesorno('', _("Emulate third button?"), 1);
@@ -152,7 +152,7 @@ sub selectMouse {
 	$o->set_help('selectSerialPort');
 	$o->{mouse}{device} = mouse::serial_ports_names2dev(
 	  $o->ask_from_list(_("Mouse Port"),
-			    _("Which serial port is your mouse connected to?"),
+			    _("Please choose on which serial port your mouse is connected to."),
 			    [ mouse::serial_ports_names() ]));
     }
 
@@ -182,7 +182,7 @@ sub ask_mntpoint_s {
     } elsif ($::beginner) {
 	my %l; $l{&$msg} = $_ foreach @fstab;
 	my $e = $o->ask_from_list('', 
-				  _("Which partition do you want to use as your root partition"), 
+				  _("Please choose a partition to use as your root partition."), 
 				  [ sort keys %l ]);
 	(fsedit::get_root($fstab) || {})->{mntpoint} = '';
 	$l{$e}{mntpoint} = '/';
@@ -372,7 +372,7 @@ sub installPackages {
 
 sub afterInstallPackages($) {
     my ($o) = @_;
-    my $w = $o->wait_message('', _("Post install configuration"));
+    my $w = $o->wait_message('', _("Post-install configuration"));
     $o->SUPER::afterInstallPackages($o);
 }
 
@@ -393,7 +393,7 @@ sub configureNetwork($) {
     } else {
 	$_ = $::beginner ? "Do not" :
 	  ($o->ask_yesorno([ _("Network Configuration") ],
-			   _("Do you want to configure Local LAN networking for your system?"), 0) ? "Local LAN" : "Do not");
+			   _("Do you want to configure a local network for your system?"), 0) ? "Local LAN" : "Do not");
     }
     if (/^Do not/) {
 	$o->{netc}{NETWORKING} = "false";
@@ -423,7 +423,7 @@ sub configureNetwork($) {
 
     #- added ppp configuration after ethernet one.
     if (!$::beginner && $o->ask_yesorno([ _("Modem Configuration") ],
-			_("Do you want to configure Dialup with modem networking for your system?"), 0)) {
+			_("Do you want to configure a dialup connection with modem for your system?"), 0)) {
 	$o->pppConfig;
     }
 }
@@ -493,7 +493,7 @@ sub pppConfig {
 
     $m->{device} ||= $o->set_help('selectSerialPort') && 
                      mouse::serial_ports_names2dev(
-	$o->ask_from_list('', _("Which serial port is your modem connected to?"),
+	$o->ask_from_list('', _("Please choose on which serial port your modem is connected to."),
 			  [ mouse::serial_ports_names ]));
 
     $o->set_help('configureNetworkISP');
@@ -539,7 +539,7 @@ and/or use these software.
 
 In addition customer and/or end user shall particularly be aware to not infringe
 the laws of his/their jurisdiction. Should customer and/or end user do not
-respect the provision of these applicable laws, he/they will incur serious
+respect the provision of these applicable laws, he/they will incure serious
 sanctions.
 
 In no event shall Mandrakesoft nor its manufacturers and/or suppliers be liable
@@ -570,7 +570,7 @@ USA")) || return;
 
     map { $u->{packages}{pkgs::packageName($_)} = { pkg => $_, selected => 0 } } @packages;
 
-    $o->ask_many_from_list_ref('', _("Which packages do you want to install"),
+    $o->ask_many_from_list_ref('', _("Please choose the packages you want to install."),
 			       [ map { pkgs::packageHeaderFile($_) } @packages ],
 			       [ map { \$u->{packages}{pkgs::packageName($_)}{selected} } @packages ]) or return;
 
@@ -1151,7 +1151,7 @@ sub setup_thiskind {
 	my $msg = @l ?
 	  [ _("Found %s %s interfaces", join(", ", map { $_->[0] } @l), $type),
 	    _("Do you have another one?") ] :
-	  _("Do you have any %s interface?", $type);
+	  _("Do you have any %s interfaces?", $type);
 
 	my $opt = [ __("Yes"), __("No") ];
 	push @$opt, __("See hardware info") if $::expert;

@@ -83,7 +83,7 @@ computer is first turned on.
 
 Because the effects of this process are usually irreversible, partitioning
 can be intimidating and stressful to the unexperienced user. DiskDrake
-simplifies the process so that it need not be. Consult the documentation
+simplifies the process so that it must not be. Consult the documentation
 and take your time before proceeding.
 
 
@@ -143,8 +143,8 @@ In case of a serial mouse, you will also have to tell DrakX
 which serial port it is connected to."),
 
 selectSerialPort =>
- __("Please select the correct port. For example, the COM1 port in MS Windows
-is named ttyS0 in Linux."),
+ __("Please select the correct port. For example, the COM1 port under MS Windows
+is named ttyS0 under Linux."),
 
 configureNetwork =>
  __("This section is dedicated to configuring a local area
@@ -196,8 +196,8 @@ configureNetworkISP =>
 correct information can be obtained from your ISP."),
 
 configureNetworkProxy =>
- __("If you will use proxies, please configure them now. If you don't know if
-you will use proxies, ask your network administrator or your ISP."),
+ __("If you will  proxies, please configure them now. If you don't know if
+you should use proxies, ask your network administrator or your ISP."),
 
 installCrypto =>
  __("You can install cryptographic package if your internet connection has been
@@ -386,7 +386,7 @@ system.
 
 
   - Precise RAM size if needed: In some cases, Linux is unable to
-correctly detect all the installed RAM on  some systems. If this is the
+correctly detect all the installed RAM on  some systems. If it is the
 case, specify the correct quantity. Note: a difference of 2 or 4 Mb is
 normal.
 

@@ -42,7 +42,7 @@ my (%installSteps, @orderedInstallSteps);
     my @installSteps = (
   selectLanguage     => [ __("Choose your language"), 1, 1, '' ],
   selectInstallClass => [ __("Select installation class"), 1, 1, '' ],
-  setupSCSI          => [ __("Setup SCSI"), 1, 0, '' ],
+  setupSCSI          => [ __("Hard drive detection"), 1, 0, '' ],
   selectMouse        => [ __("Configure mouse"), 1, 1, 'beginner', "selectInstallClass" ],
   selectKeyboard     => [ __("Choose your keyboard"), 1, 1, '', "selectInstallClass" ],
   miscellaneous      => [ __("Miscellaneous"), 1, 1, 'beginner' ],
@@ -145,7 +145,7 @@ $o = $::o = {
 #-    security => 2,
     shells => [ map { "/bin/$_" } qw(bash tcsh zsh ash ksh) ],
     authentication => { md5 => 1, shadow => 1 },
-    lang         => 'fr_FR',
+    lang         => 'en',
     isUpgrade    => 0,
     toRemove     => [],
     toSave       => [],
@@ -502,7 +502,7 @@ sub main {
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
-    c::unlimit_core();
+    c::unlimit_core() unless $::testing;
 
     my ($cfg, $patch);
     my %cmdline; map { 
@@ -650,6 +650,8 @@ sub main {
     modules::read_already_loaded();
 
     eval { modules::load("af_packet") };
+
+    lang::set($o->{lang}, $o->{langs});
 
     #-the main cycle
     my $clicked = 0;
