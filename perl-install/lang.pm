@@ -915,7 +915,7 @@ sub write {
 			      Language => get_kde_lang($locale),
 			  ));
 
-	my %qt_xim = (zh => 'On The Spot', ko => 'On The Spot', ja => 'Over The Spot');
+	my %qt_xim = (zh => 'Over The Spot', ko => 'On The Spot', ja => 'Over The Spot');
 	if ($user_only && (my $qt_xim = $qt_xim{substr($locale->{lang}, 0, 2)})) {
 	    update_gnomekderc("$ENV{HOME}/.qt/qtrc", General => (XIMInputStyle => $qt_xim));
 	}
