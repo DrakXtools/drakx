@@ -516,7 +516,7 @@ sub configureNetwork {
     my ($o, $first_time) = @_;
     require netconnect;
     netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{pcmcia}, $o->{intf},
-		     sub { $o->pkg_install(@_) }, $first_time);
+		     sub { $o->pkg_install(@_) }, $first_time, $o->{lang} eq "fr_FR" && $o->{keyboard} eq "fr");
 }
 
 #-configureNetworkIntf moved to network
