@@ -24,12 +24,12 @@ sub read ($) {
     ("timezone", $t{ZONE}, "UTC", text2bool($t{UTC}));
 }
 
-sub write($$$) {
-    my ($prefix, $t, $f) = @_;
+sub write {
+    my ($prefix, $t) = @_;
 
     eval { commands::cp("-f", "$prefix/usr/share/zoneinfo/$t->{timezone}", "$prefix/etc/localtime") };
     $@ and log::l("installing /etc/localtime failed");
-    setVarsInSh($f, {
+    setVarsInSh("$prefix/etc/sysconfig/clock", {
 	ZONE => $t->{timezone},
 	UTC  => bool2text($t->{UTC}),
 	ARC  => "false",

@@ -674,13 +674,13 @@ USA")) || return;
 
 #------------------------------------------------------------------------------
 sub configureTimezone {
-    my ($o, $f, $clicked) = @_;
+    my ($o, $clicked) = @_;
 
     require timezone;
     $o->{timezone}{timezone} = $o->ask_from_treelist('', _("Which is your timezone?"), '/', [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     $o->set_help('configureTimezoneGMT');
     $o->{timezone}{UTC} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{UTC}) if $::expert || $clicked;
-    install_steps::configureTimezone($o, $f);
+    install_steps::configureTimezone($o);
 }
 
 #------------------------------------------------------------------------------

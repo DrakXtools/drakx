@@ -499,9 +499,9 @@ sub installCrypto {
 
 #------------------------------------------------------------------------------
 sub configureTimezone {
-    my ($o, $f) = @_;
+    my ($o) = @_;
     require timezone;
-    timezone::write($o->{prefix}, $o->{timezone}, $f);
+    timezone::write($o->{prefix}, $o->{timezone});
 }
 
 #------------------------------------------------------------------------------

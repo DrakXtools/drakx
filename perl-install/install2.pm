@@ -383,7 +383,7 @@ sub configureTimezone {
     }
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
     $o->{timezone}{UTC} = $::expert && !grep { isFat($_) || isNT($_) } @{$o->{fstab}} unless exists $o->{timezone}{UTC};
-    $o->configureTimezone($f, $clicked);
+    $o->configureTimezone($clicked);
 }
 #------------------------------------------------------------------------------
 sub configureServices { $::expert and $o->configureServices }
