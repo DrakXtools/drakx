@@ -294,6 +294,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Thu Mar  6 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-15mdk
 - fix infamous #2672
 - let draksec fit in 800x600
+- harddrake: fix detection of mod_quickcam's webcams
+- scannerdrake: do not detect mod_quickcam's webcams as scanners
 - logdrake:
   o do not update the text buffer when filling it
   o show the wait message also when searching while embedded (else the
