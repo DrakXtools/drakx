@@ -326,14 +326,14 @@ sub Disconnect {
 sub Dialog {
 # read file
     my ($FilePointer) = @_;
-my $content = join('', cat_($FilePointer));
-# dump into a dialog
-my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{window},
-                                    'destroy-with-parent',
-                                    'gtk-ok' => 'none');
-$AboutWindow->vbox->add(create_scrolled_window(Gtk2::Label->new($content)));
-$AboutWindow->signal_connect(response => sub { $_[0]->destroy });
-$AboutWindow->show_all;
+    my $content = join('', cat_($FilePointer));
+    # dump into a dialog
+    my $AboutWindow = Gtk2::Dialog->new("Drakroam Info", $w->{window},
+                                        'destroy-with-parent',
+                                        'gtk-ok' => 'none');
+    $AboutWindow->vbox->add(create_scrolled_window(Gtk2::Label->new($content)));
+    $AboutWindow->signal_connect(response => sub { $_[0]->destroy });
+    $AboutWindow->show_all;
 }
 
 # start GUI
