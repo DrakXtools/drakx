@@ -561,17 +561,20 @@ Take a look at http://www.linmodems.org"),
                     },
                     name => N("Select your provider:"),
                     data => sub {
-                        [ { label => N("Provider:"), type => "list", val => \$provider, separator => '/', list => \@isp } ]
+                        [ { label => N("Provider:"), type => "list", val => \$provider, separator => '/',
+                            list => [ N("Unlisted - edit manually"), @isp ] } ]
                     },
                     post => sub {
-                        ($country, $provider) = split('/', $provider);
-                        $country = { reverse %countries }->{$country};
-                        my %l = getVarsFromSh("$::prefix$db_path/$country/$provider");
-                        if (defined $old_provider && $old_provider ne $provider) {
-                            $modem->{connection} = $l{Name};
-                            $modem->{phone} = $l{Phonenumber};
-                            $modem->{$_} = $l{$_} foreach qw(Authentication AutoName Domain Gateway IPAddr SubnetMask);
-                            ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
+                        if ($provider ne N("Unlisted - edit manually")) {
+                            ($country, $provider) = split('/', $provider);
+                            $country = { reverse %countries }->{$country};
+                            my %l = getVarsFromSh("$::prefix$db_path/$country/$provider");
+                            if (defined $old_provider && $old_provider ne $provider) {
+                                $modem->{connection} = $l{Name};
+                                $modem->{phone} = $l{Phonenumber};
+                                $modem->{$_} = $l{$_} foreach qw(Authentication AutoName Domain Gateway IPAddr SubnetMask);
+                                ($modem->{dns1}, $modem->{dns2}) = split(',', $l{DNS});
+                            }
                         }
                         return "ppp_account";
                     },
