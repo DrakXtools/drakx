@@ -174,7 +174,7 @@ msgstr ""
 msgid "Accept user"
 msgstr ""
 
-#: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#: ../../any.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/removable.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Done"
 msgstr ""
@@ -1174,8 +1174,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country with which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -1931,7 +1931,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -1977,7 +1977,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -8707,7 +8707,7 @@ msgstr ""
 msgid "Netmask"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr ""
@@ -8951,6 +8951,11 @@ msgstr ""
 #: ../../printer/main.pm:1 ../../printer/main.pm:1 ../../printer/main.pm:1 ../../printer/main.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Unknown model"
+msgstr ""
+
+#: ../../printer/main.pm:1
+#, c-format
+msgid "%s (Port %s)"
 msgstr ""
 
 #: ../../printer/main.pm:1
@@ -9956,7 +9961,7 @@ msgstr ""
 msgid "You can specify directly the URI to access the printer. The URI must fulfill either the CUPS or the Foomatic specifications. Note that not all URI types are supported by all the spoolers."
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Port"
 msgstr ""
@@ -9966,7 +9971,7 @@ msgstr ""
 msgid "Printer host name or IP"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The port number should be an integer!"
 msgstr ""
@@ -10500,7 +10505,63 @@ msgstr ""
 msgid "Checking your system..."
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"This server is already in the list, it cannot be added again.\n"
+""
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Examples for correct IPs:\n"
+""
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The entered IP is not correct.\n"
+""
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Server IP missing!"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Remove selected server"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Edit selected server"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add server"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Add here the CUPS servers whose printers you want to use. You only need to do this if the servers do not broadcast their printer information into the local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address of host/network:"
 msgstr ""
@@ -10515,50 +10576,13 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
-"192.168.100.0/255.255.255.0\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"192.168.100.0/24\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"10.1.*\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"10.0.0.*\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"192.168.100.194\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
-"Examples for correct IPs:\n"
-""
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid ""
 "The entered host/network IP is not correct.\n"
 ""
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -10608,6 +10632,21 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatic correction of CUPS configuration"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "To get access to printers on remote CUPS servers in your local network you only need to turn on the \"Automatically find available printers on remote machines\" option; the CUPS servers inform your machine automatically about their printers. All printers currently known to your machine are listed in the \"Remote printers\" section in the main window of Printerdrake. If your CUPS server(s) is/are not in your local network, you have to enter the IP address(es) and optionally the port number(s) here to get the printer information from the server(s)."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "None"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Additional CUPS servers: "
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
@@ -10758,7 +10797,7 @@ msgstr ""
 
 #: ../../security/help.pm:1
 #, c-format
-msgid "if set to yes, check for empty passwords, for no password in /etc/shadow and for"
+msgid "if set to yes, check for empty passwords, for no password in /etc/shadow and for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1

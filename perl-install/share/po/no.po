@@ -1283,7 +1283,7 @@ msgstr ""
 "kunne gjenopprettes!"
 
 #: ../../help.pm:1
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "As a review, DrakX will present a summary of various information it has\n"
 "about your system. Depending on your installed hardware, you may have some\n"
@@ -1300,8 +1300,8 @@ msgid ""
 "\n"
 " * \"Timezone\": By default, DrakX deduces your time zone based on the\n"
 "primary language you have chosen. But here, just as in your choice of a\n"
-"keyboard, you may not be in the country with which the chosen language\n"
-"should correspond. You may need to click on the \"Timezone\" button to\n"
+"keyboard, you may not be in a country to which the chosen language\n"
+"corresponds. You may need to click on the \"Timezone\" button to\n"
 "configure the clock for the correct timezone.\n"
 "\n"
 " * \"Printer\": clicking on the \"No Printer\" button will open the printer\n"
@@ -2529,7 +2529,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor."
 msgstr ""
 
@@ -2575,7 +2575,7 @@ msgid ""
 "\n"
 "   You can choose here resolutions and color depth between those available\n"
 "for your hardware. Choose the one that best suit your needs (you will be\n"
-"able to change that after installation though). Asample of the chosen\n"
+"able to change that after installation though). A sample of the chosen\n"
 "configuration is shown in the monitor.\n"
 "\n"
 "\n"
@@ -10119,7 +10119,8 @@ msgstr "Automatisk IP"
 msgid "Netmask"
 msgstr "Nettmaske"
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1
 #, c-format
 msgid "IP address"
 msgstr "IP-adresse"
@@ -10383,6 +10384,11 @@ msgstr "Ukjent modell"
 #, c-format
 msgid "Unknown model"
 msgstr "Ukjent modell"
+
+#: ../../printer/main.pm:1
+#, fuzzy, c-format
+msgid "%s (Port %s)"
+msgstr "Port"
 
 #: ../../printer/main.pm:1
 #, c-format
@@ -12280,6 +12286,59 @@ msgstr "Sjekker systemet ditt..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "This server is already in the list, it cannot be added again.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Examples for correct IPs:\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "The entered IP is not correct.\n"
+msgstr "Modellen er riktig"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Server IP missing!"
+msgstr "NCP servernavn mangler!"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Enter IP address and port of the host whose printers you want to use."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Accessing printers on remote CUPS servers"
+msgstr "Skriver på fjern-CUPS tjener"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Remove selected server"
+msgstr "Fjern valgte vert/nettverk"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Edit selected server"
+msgstr "oppdaget %s"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Add server"
+msgstr "Legg til bruker"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"Add here the CUPS servers whose printers you want to use. You only need to "
+"do this if the servers do not broadcast their printer information into the "
+"local network."
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "IP address of host/network:"
 msgstr ""
 
@@ -12290,37 +12349,12 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "192.168.100.0/255.255.255.0\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.0/24\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.1.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "10.0.0.*\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "192.168.100.194\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Examples for correct IPs:\n"
-msgstr ""
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "The entered host/network IP is not correct.\n"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Host/network IP address missing."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -12378,6 +12412,36 @@ msgstr ""
 #, c-format
 msgid "Automatic correction of CUPS configuration"
 msgstr "Automatisk retting av CUPS-konfigurasjon"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid ""
+"To get access to printers on remote CUPS servers in your local network you "
+"only need to turn on the \"Automatically find available printers on remote "
+"machines\" option; the CUPS servers inform your machine automatically about "
+"their printers. All printers currently known to your machine are listed in "
+"the \"Remote printers\" section in the main window of Printerdrake. If your "
+"CUPS server(s) is/are not in your local network, you have to enter the IP "
+"address(es) and optionally the port number(s) here to get the printer "
+"information from the server(s)."
+msgstr ""
+"For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
+"ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
+"automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
+"maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
+"Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
+"entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
+"informasjon fra tjeneren, ellers la disse feltene være tomme."
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "None"
+msgstr "Ferdig"
+
+#: ../../printer/printerdrake.pm:1
+#, fuzzy, c-format
+msgid "Additional CUPS servers: "
+msgstr "På CUPS tjener \"%s\""
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -12538,7 +12602,7 @@ msgstr ""
 #, c-format
 msgid ""
 "if set to yes, check for empty passwords, for no password in /etc/shadow and "
-"for"
+"for users with the 0 id other than root."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -19092,24 +19156,6 @@ msgstr "Programmer for å håndtere dine finanser, så som gnucash"
 
 #~ msgid "Specify CUPS server"
 #~ msgstr "Spesifiser CUPS tjener"
-
-#~ msgid ""
-#~ "To get access to printers on remote CUPS servers in your local network "
-#~ "you do not have to configure anything; the CUPS servers inform your "
-#~ "machine automatically about their printers. All printers currently known "
-#~ "to your machine are listed in the \"Remote printers\" section in the main "
-#~ "window of Printerdrake. When your CUPS server is not in your local "
-#~ "network, you have to enter the CUPS server IP address and optionally the "
-#~ "port number to get the printer information from the server, otherwise "
-#~ "leave these fields blank."
-#~ msgstr ""
-#~ "For å få tilgang til fjern CUPS-tjenere i ditt lokale nettverk trenger du "
-#~ "ikke å konfigurere noen ting; CUPS-tjenerene informerer maskinen din "
-#~ "automatisk om skriverene. Alle skriverene som før øyeblikket er kjent for "
-#~ "maskinen din er listet i \"Remote printers\" seksjonen i hovedvinduet til "
-#~ "Printerdrake. Når CUPS-tjeneren din ikke er i ditt lokale nettverk, må du "
-#~ "entre CUPS-tjenerens IP-adresse og evnt. portnummeret for å få skriver- "
-#~ "informasjon fra tjeneren, ellers la disse feltene være tomme."
 
 #~ msgid ""
 #~ "\n"
