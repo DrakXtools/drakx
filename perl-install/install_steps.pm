@@ -763,7 +763,7 @@ sub createBootdisk($) {
     return if $::testing;
 
     require bootloader;
-    bootloader::mkbootdisk($o->{prefix}, install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
+    bootloader::mkbootdisk(install_any::kernelVersion($o), $dev, $o->{bootloader}{perImageAppend});
     $o->{mkbootdisk} = $dev;
 }
 
@@ -875,7 +875,7 @@ sub setupBootloader($) {
 #	    map { /$o->{prefix}(.*)/ } eval { glob_("$o->{prefix}/boot/vmlinux*") };
     } else {
 	require bootloader;
-	bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
+	bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
     }
 }
 

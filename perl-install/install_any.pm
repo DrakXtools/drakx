@@ -543,7 +543,7 @@ sub setupFB {
 	    $e->{vga} = $vga;
 	}
     }
-    bootloader::install($o->{prefix}, $o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
+    bootloader::install($o->{bootloader}, $o->{fstab}, $o->{all_hds}{hds});
     1;
 }
 
