@@ -116,8 +116,6 @@ my %images = (
     all     => 'fs/cdrom disk/cdrom|raw bus/usb disk/usb|scsi fs/loopback|local bus/pcmcia disk/pcmcia|hardware_raid fs/network network/main|pcmcia|usb|raw|gigabit bus/firewire disk/firewire',
 );
 
-load_dependencies(glob("all.modules/2.4*/modules.dep"));
-
 my $verbose = "@ARGV" =~ /-v/;
 images() if "@ARGV" =~ /images/;
 check() if "@ARGV" =~ /check/;
@@ -135,8 +133,7 @@ sub images {
 	if ($image !~ /all/) {
 	    @modules = difference2(\@modules, \@modules_only_for_all_img);
 	}
-	@modules = uniq(map { dependencies_closure($_) } @modules);
-	printf qq(%s_modules="%s"\n), $image, join(" ", map { "$_.o" } @modules);
+	printf qq(%s_modules_raw="%s"\n), $image, join ' ', @modules;
     }
 }
 
