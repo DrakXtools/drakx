@@ -785,6 +785,9 @@ sub setupBootloaderBefore {
     if ($o->{miscellaneous}{HDPARM}) {
 	bootloader::add_append($o->{bootloader}, $_, 'autotune') foreach grep { /ide.*/ } all("/proc/ide");
     }
+    if (grep { /mem=nopentium/ } cat_("/proc/cmdline")) {
+	bootloader::add_append($o->{bootloader}, 'mem', 'nopentium');
+    }
 
     if (arch() =~ /alpha/) {
 	if (my $dev = fsedit::get_root($o->{fstab})) {
