@@ -16,7 +16,7 @@ use loopback;
 use c;
 
 
-our %preferred = map { $_ => undef } qw(perl-GTK postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4 zlib1 libncurses5 harddrake cups);
+our %preferred = map { $_ => undef } qw(perl-GTK postfix mdkkdm gcc gcc-cpp gcc-c++ proftpd ghostscript-X vim-minimal kernel db1 db2 ispell-en Bastille-Curses-module nautilus libxpm4 zlib1 libncurses5 harddrake cups apache);
 
 #- lower bound on the left ( aka 90 means [90-100[ )
 our %compssListDesc = (
