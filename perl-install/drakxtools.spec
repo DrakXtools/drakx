@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 7mdk
+Release: 8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -318,6 +318,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Sun Sep  7 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-8mdk
+- localedrake: configuration fixes (gc)
+- drakgw: fix #2120 & #2405 (florin)
+- drakconnect: (poulpy)
+  o workaround messed up ppp0 configration
+  o fix profiles
+
 * Thu Sep  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-7mdk
 - diskdrake: fix #5204 (pixel)
 - drakbackup: fix untranslatable strings, ... (stew)
