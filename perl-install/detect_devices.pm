@@ -418,8 +418,7 @@ sub getSerialModem {
 }
 
 sub getModem() {
-    my @pci_modems = matching_driver('www\.linmodems\.org');
-    getSerialModem({}), @pci_modems;
+    getSerialModem({}), matching_driver('www\.linmodems\.org');
 }
 
 sub getSpeedtouch() {
