@@ -1021,10 +1021,10 @@ sub install($$$;$$) {
 		    my @probs = $trans->run($packages, force => 1, nosize => 1, callback_open => sub {
 						my ($data, $type, $id) = @_;
 						my $pkg = defined $id && $data->{depslist}[$id];
+						my $medium = packageMedium($packages, $pkg);
 						my $f = $pkg && $pkg->filename;
 						print LOG "$f\n";
-						#my $fd = install_any::getFile($f, $media->{$p->[$MEDIUM]}{descr});
-						my $fd = install_any::getFile($f);
+						my $fd = install_any::getFile($f, $medium->{descr});
 						$fd ? fileno $fd : -1;
 					    }, callback_close => sub {
 						my ($data, $type, $id) = @_;
