@@ -608,7 +608,7 @@ notation (for example, 1.2.3.4).")),
                         ],
                     },
                     complete => sub {
-                        $ethntf->{BOOTPROTO} = $auto_ip ? join('', if_($auto_ip, "dhcp")) : "static";
+                        $ethntf->{BOOTPROTO} = $auto_ip ? "dhcp" : "static";
                         $netc->{DHCP} = $auto_ip;
                         return 0 if $auto_ip;
                         if (my @bad = map_index { if_(!is_ip($ethntf->{$_}), $::i) } @fields) {
