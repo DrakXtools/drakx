@@ -35,15 +35,15 @@ sub get {
 
     getIDE(), getSCSI(), getDAC960(), getCompaqSmartArray(), getATARAID();
 }
-sub hds         { grep { $_->{media_type} eq 'hd' && ($::isStandalone || !isRemovableDrive($_)) } get() }
-sub tapes       { grep { $_->{media_type} eq 'tape' && ($::isStandalone || !isRemovableDrive($_)) } get() }
+sub hds         { grep { $_->{media_type} eq 'hd' && !isRemovableDrive($_) } get() }
+sub tapes       { grep { $_->{media_type} eq 'tape' } get() }
 sub cdroms      { grep { $_->{media_type} eq 'cdrom' } get() }
 sub burners     { grep { isBurner($_) } cdroms() }
 sub dvdroms     { grep { isDvdDrive($_) } cdroms() }
 sub raw_zips    { grep { member($_->{media_type}, 'fd', 'hd') && isZipDrive($_) } get() }
 #-sub jazzs     { grep { member($_->{media_type}, 'fd', 'hd') && isJazzDrive($_) } get() }
 sub ls120s      { grep { member($_->{media_type}, 'fd', 'hd') && isLS120Drive($_) } get() }
-sub zips        { 
+sub zips        {
     map { 
 	$_->{device} .= 4; 
 	$_->{devfs_device} = $_->{devfs_prefix} . '/part4'; 
@@ -91,12 +91,16 @@ sub floppies() {
     my @ide = ls120s() and eval { modules::load("ide-floppy") };
 
     eval { modules::load("usb-storage") } if usbStorage();
-    my @scsi = grep { $_->{media_type} eq 'fd' && !isZipDrive($_) && !isJazzDrive($_) } getSCSI();
+    my @scsi = grep { $_->{media_type} eq 'fd' } getSCSI();
     @ide, @scsi, @fds;
 }
 sub floppies_dev() { map { $_->{device} } floppies() }
 sub floppy { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
+
+sub removables {
+    floppies(), cdroms__faking_ide_scsi(), zips__faking_ide_scsi();
+}
 
 sub get_sys_cdrom_info {
     my (@drives) = @_;
@@ -123,6 +127,41 @@ sub get_sys_cdrom_info {
 		    ($drives_order[$::i] || {})->{capacity} .= "$capacity " if $_;
 		} @l;
 	    }
+	}
+    }
+}
+
+sub get_usb_storage_info {
+    my (@l) = @_;
+
+    my %usbs = map {
+	my $s = cat_(glob_("$_/*"));
+	my ($host) = $s =~ /^\s*Host scsi(\d+):/m; #-#
+	my ($vendor_name) = $s =~ /^\s*Vendor: (.*)/m;
+	my ($vendor, $id) = $s =~ /^\s*GUID: (....)(....)/m;
+	if_(defined $host, $host => { vendor_name => $vendor_name, usb_vendor => hex $vendor, usb_id => hex $id });
+    } glob_('/proc/scsi/usb-storage-*') or return;
+
+    #- only the entries matching the following conditions can be usb-storage devices
+    @l = grep { $_->{channel} == 0 && $_->{id} == 0 && $_->{lun} == 0 } @l;
+    my %l; push @{$l{$_->{host}}}, $_ foreach @l;
+
+    my @informed;
+    foreach my $host (keys %usbs) {
+	my @choices = @{$l{$host} || []} or log::l("weird, host$host from /proc/scsi/usb-storage-*/* is not in /proc/scsi/scsi"), next;
+	if (@choices > 1) {
+	    @choices = grep { $_->{info} =~ /^\Q$usbs{$host}{vendor_name}/ } @choices;
+	    @choices or log::l("weird, can't find the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
+	    @choices == 1 or log::l("argh, can't determine the good entry host$host from /proc/scsi/usb-storage-*/* in /proc/scsi/scsi"), next;
+	}
+	add2hash($choices[0], $usbs{$host});
+	push @informed, $choices[0];
+    }
+    @informed or return;
+
+    foreach my $usb (usb_probe()) {
+	if (my ($e) = grep { $_->{usb_vendor} == $usb->{vendor} && $_->{usb_id} == $usb->{id} } @informed) {
+	    $e->{"usb_$_"} = $usb->{$_} foreach keys %$usb;
 	}
     }
 }
@@ -157,13 +196,11 @@ sub isDvdDrive {
 sub isZipDrive { $_[0]{info} =~ /ZIP\s+\d+/ } #- accept ZIP 100, untested for bigger ZIP drive.
 sub isJazzDrive { $_[0]{info} =~ /\bJAZZ?\b/i } #- accept "iomega jaz 1GB"
 sub isLS120Drive { $_[0]{info} =~ /LS-?120|144MB/ }
-sub isRemovableDrive { &isZipDrive || &isLS120Drive || $_[0]{media_type} eq 'fd' } #-or &isJazzDrive }
-
-sub isFloppyOrHD {
-    my ($dev) = @_;
-    require partition_table::raw;
-    my $geom = partition_table::raw::get_geometry(devices::make($dev));
-    $geom->{totalsectors} < 10 << 11 ? 'fd' : 'hd';
+sub isRemovableUsb { index($_[0]{usb_media_type}, 'Mass Storage|Floppy (UFI)') == 0 }
+sub isFloppyUsb { $_[0]{usb_driver} eq 'Removable:floppy' }
+sub isRemovableDrive { 
+    my ($e) = @_;
+    isZipDrive($e) || isLS120Drive($e) || $e->{media_type} eq 'fd' || isRemovableUsb($e);
 }
 
 sub getSCSI() {
@@ -176,14 +213,16 @@ sub getSCSI() {
 	my ($host, $channel, $id, $lun) = m/^Host: scsi(\d+) Channel: (\d+) Id: (\d+) Lun: (\d+)/ or $err->($_);
 	my ($vendor, $model) = /^\s*Vendor:\s*(.*?)\s+Model:\s*(.*?)\s+Rev:/m or $err->($_);
 	my ($type) = /^\s*Type:\s*(.*)/m or $err->($_);
-	{ info => "$vendor $model", channel => $channel, id => $id, lun => $lun, 
+	{ info => "$vendor $model", host => $host, channel => $channel, id => $id, lun => $lun, 
 	  device => "sg$::i", devfs_prefix => sprintf('scsi/host%d/bus%d/target%d/lun%d', $host, $channel, $id, $lun),
           raw_type => $type, bus => 'SCSI' };
     } @l;
 
+    get_usb_storage_info(@l);
+
     each_index {
 	my $dev = "sd" . chr($::i + ord('a'));
-	put_in_hash $_, { device => $dev, media_type => isZipDrive($_) ? 'hd' : isFloppyOrHD($dev) };
+	put_in_hash $_, { device => $dev, media_type => isFloppyUsb($_) ? 'fd' : 'hd' };
     } grep { $_->{raw_type} =~ /Direct-Access|Optical Device/ } @l;
 
     each_index {
@@ -681,8 +720,26 @@ sub is_a_recent_computer {
     $frequence > 600;
 }
 
+
+sub usb_description2removable {
+    local ($_) = @_;
+    return 'camera' if /\bcamera\b/i;
+    return 'memory_card' if /\bmemory\s?stick\b/i || /\bcompact\s?flash\b/i || /\bsmart\s?media\b/i;
+    return;
+}
+
 sub suggest_mount_point {
     my ($e) = @_;
+
+    if (isRemovableUsb($e)) {
+	if ($e->{usb_driver} =~ /Removable:(.*)/) {
+	    return $1;
+	} elsif (my $name = usb_description2removable($e->{usb_description})) {
+	    return $name;
+	} else {
+	    return 'removable';
+	}
+    }
 
     my $name = $e->{media_type};
     if (member($name, 'hd', 'fd')) {
