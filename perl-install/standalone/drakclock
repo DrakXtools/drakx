@@ -109,7 +109,7 @@ $my_win->{window}->add(gtkpack_(Gtk2::VBox->new(0,0),
                                           gtksignal_connect(Gtk2::Button->new(N("Ok")), 
                                                                        clicked => sub {
 									   if ($check_ntp->get_active) {
-									       my $choosed_serv = $combo_ntpserver->entry->get_text();
+									       my $choosed_serv = $combo_ntpserver->entry->get_text;
 									       $choosed_serv =~ s/(\S+)\s*(.*)$/$1/;
 									       timezone::ntp_server('', $1);
 									       system("/sbin/chkconfig --level 35 ntpd on");
@@ -208,7 +208,7 @@ sub install_ntp() {
 					       }))));
     $w->main;
 }
-sub get_server {
+sub get_server() {
     my ($servs, @sv);
     $servs = timezone::ntp_servers();
     foreach my $l (keys %$servs) {
@@ -268,7 +268,7 @@ sub determine_radian {
     my $res;
     my $r;
     foreach (\$dRadians_hour, \$dRadians_min, \$dRadians_sec) {
-	my $d = sqrt( ($x - ($midx + 7/10 * $radius * sin($$_)))**2 + ($y - ($midy - 7/10 * $radius * cos($$_)))**2);
+	my $d = sqrt(($x - ($midx + 7/10 * $radius * sin($$_)))**2 + ($y - ($midy - 7/10 * $radius * cos($$_)))**2);
 	$res or $res = $d, $r = $_;
 	$d < $res and $res = $d, $r = $_;
     }
