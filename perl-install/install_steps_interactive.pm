@@ -110,7 +110,7 @@ sub selectKeyboard {
 		      { title => N("Keyboard"), 
 			messages => N("Please choose your keyboard layout."),
 			interactive_help_id => 'selectKeyboard',
-			advanced_messages => N("Here is the full list of keyboards available"),
+			advanced_messages => N("Here is the full list of available keyboards"),
 			advanced_label => N("More"),
 			callbacks => { changed => sub { $other = $_[0] == 1 } },
 		      },
