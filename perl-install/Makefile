@@ -7,7 +7,7 @@ DESTREP4PMS = $(DEST)/usr/bin/perl-install
 PERL = perl
 LOCALFILES = $(PERL) mouseconfig
 DIRS = po pci_probing
-EXCLUDE = $(LOCALFILES) boot.img keymaps xmodmaps consolefonts install
+EXCLUDE = $(LOCALFILES) boot.img xmodmap keymaps consolefonts install
 
 CFLAGS	= -Wall
 override CFLAGS  += -pipe
@@ -127,7 +127,7 @@ get_needed_files: $(SO_FILES)
 	cd /usr/X11R6/lib/X11/fonts/75dpi ; cp -a fonts.* helvR* $(DEST)/usr/X11R6/lib/X11/fonts/75dpi
 	cd /usr/X11R6/lib/X11/fonts/misc ; cp -a fonts.* cursor.pcf.gz 6x13.pcf.gz $(DEST)/usr/X11R6/lib/X11/fonts/misc
 
-	cp -a xmodmaps $(DEST)/usr/share
+	cp -a xmodmap $(DEST)/usr/share
 	cp -a keymaps $(DEST)/usr/share
 	cp -a consolefonts $(DEST)/usr/share
 	cp MonitorsDB $(DEST)/usr/share
