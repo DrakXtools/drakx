@@ -6,15 +6,10 @@ sub name2file {
 }
 
 sub get_file2loop {
-    my (@names) = @_;
-    my %files = map { name2file($_) => 1 } @names;
     my %file2loop;
     foreach (0 .. 9) {
 	my ($file) = `sudo losetup /dev/loop$_ 2>/dev/null` =~ m!\([^)]*/([^)]*)\)! or last;
-        if (delete $files{$file}) {
-	    $file2loop{$file} = "loop$_";
-	    last if !%files;
-	}
+	$file2loop{$file} = "loop$_";
     }
     %file2loop;
 }
@@ -48,7 +43,14 @@ $f && @names or usage();
 my %file2loop = get_file2loop(@names);
 
 foreach my $name (@names) {
+    if ($name eq 'always_i18n') {
+	/(always_i18n.*)\.clp/ and $name = $1 foreach keys %file2loop;
+    }
     my $file = name2file($name);
     my $loop = $file2loop{$file} or next;
     $f->($loop, $file);
+}
+
+if ($ENV{GIVE_LOOP}) {
+    print "$_=$file2loop{$_}\n" foreach keys %file2loop;
 }
