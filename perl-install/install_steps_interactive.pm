@@ -103,6 +103,8 @@ varies from language to language).")) if $o->{lang} !~ /^en/ && !lang::load_mo()
 so the messages will be displayed in english during installation") if $ENV{LANGUAGE} eq 'C';
     }
     
+sub acceptLicence {
+    my ($o) = @_;
     unless ($o->{useless_thing_accepted}) {
 	$o->set_help('license');
 	$o->{useless_thing_accepted} = $o->ask_from_list_(_("License agreement"), formatAlaTeX(
@@ -185,6 +187,8 @@ For any question on this document, please contact MandrakeSoft S.A.
 ")), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" or $o->exit;
     }
 }
+}
+
 #------------------------------------------------------------------------------
 sub selectKeyboard {
     my ($o, $clicked) = @_;

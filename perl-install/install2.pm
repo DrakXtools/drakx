@@ -89,6 +89,8 @@ sub selectLanguage {
     my ($clicked, $ent_number, $auto) = @_;
 
     installStepsCall($o, $auto, 'selectLanguage', $ent_number == 1);
+
+    $o->acceptLicence;
 }
 
 #------------------------------------------------------------------------------

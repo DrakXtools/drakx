@@ -116,6 +116,7 @@ sub selectKeyboard {
     } 'installPackages' unless $::g_auto_install;
 }
 #------------------------------------------------------------------------------
+sub acceptLicence {}
 sub selectPath {}
 #------------------------------------------------------------------------------
 sub selectInstallClass {}
