@@ -81,7 +81,7 @@ eval {
 };
 
 $::isEmbedded and kill USR2, $::CCPID;
-Xconfigurator::main('', $i, $in, { allowFB          => 0,
+Xconfigurator::main('', $i, $in, { allowFB          => $::expert,
 				   allowNVIDIA_rpms => $allowNVIDIA_rpms }, sub { $in->standalone::pkgs_install(@_) });
 !$::isEmbedded and $in->exit(0);
 kill USR1, $::CCPID;
