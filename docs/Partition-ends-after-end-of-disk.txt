@@ -1,0 +1,66 @@
+        Cylinder/Head/Size Hell Is Not Over 
+        $Id$
+		   
+
+
+Nowadays, you can boot Linux without every relying on CHS
+(Cylinder/Head/Size):
+
+- CHS information on partition table is obsolete and not used anymore.
+It was causing the 1024th cylinder limitation:
+  - disallowing partitions above 8GiG. Problem overcome using 32bits linear
+  addressing in partition table.
+  - disallowing to boot on partition above 8GiG (due to int13 limitation used
+  in bootloaders). Problem overcome using int13 extensions (EDD)
+
+Logical CHS (Cylinder/Head/Size) and physical CHS are not related anymore.
+Especially the size of a hard drive is not a multiple of the number of
+Cylinders.
+
+
+The problem is that many tools still rely somewhat heavily on CHS information.
+- most tools adjust partitions on cylinder boundary
+- some tools compute the size of the disk based on CHS (eg: fdisk)
+
+
+Resulting problems in various tools:
+
+- last partition not cylinder boundary adjusted, and overrun CHS computed size
+  - fdisk
+    > Total allocated sectors %d greater than the maximum %d
+  - cfdisk (need confirmation)
+    > FATAL ERROR: Bad primary partition %d: Partition ends after end-of-disk
+    or
+    > FATAL ERROR: Bad logical partition %d: Partition ends after end-of-disk
+  - Partition Magic (version?)
+    (doesn't like it, what error message?)
+  - Windows <= 98se, Windows Me
+    (doesn't like it, what error message?)
+
+  Tools handling it correctly:
+  - parted and so diskdruid in RedHat >= 7.2 (or is it 7.x?)
+  - diskdrake >= Mandrake 8.2
+  - Windows XP (need confirmation)
+
+  Tools using the full size of the disk, and so causing pbs with fdisk/cfdisk/...:
+  - diskdrake >= Mandrake 8.2
+  - parted (what about diskdruid??)
+
+- disagreement between CHS and linear address
+  - parted
+    > "Warning: Unable to align partition properly.  This probably means that
+    > another partitioning tool generated an
+    > incorrect partition table, because it didn't have the correct BIOS
+    > geometry.  It is safe to ignore,but
+    > ignoring may cause (fixable) problems with some boot loaders.
+    > Ignore Cancel ? C
+  - lilo
+    > Warning: Kernel & BIOS return differing head/sector geometries for device 0x80
+    >     Kernel: 38792 cylinders, 16 heads, 63 sectors
+    >       BIOS: 1023 cylinders, 255 heads, 63 sectors
+    > Device 0x2100: Inconsistent partition table, 2nd entry
+    >   CHS address in PT:  48:0:1  -->  LBA (771120)
+    >   LBA address in PT:  48384  -->  CHS (3:3:1)
+    > The partition table is *NOT* being adjusted.
+
+
