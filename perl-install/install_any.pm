@@ -1043,8 +1043,7 @@ sub copy_advertising {
 
 sub remove_advertising {
     my ($o) = @_;
-    unlink @advertising_images;
-    rmdir "$o->{prefix}/tmp/drakx-images";
+    rm_rf("$o->{prefix}/tmp/drakx-images");
     @advertising_images = ();
 }
 
