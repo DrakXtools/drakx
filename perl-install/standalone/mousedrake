@@ -31,7 +31,8 @@ if (!$mouse || !$::auto) {
     my $name = $in->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
 				       sub { join '|', map { translate($_) } split '\|', $_[0] },
 				       [ mouse::fullnames ], 
-				       $mouse->{type} . '|' . $mouse->{name}) || goto begin;
+				       $mouse->{type} . '|' . $mouse->{name});
+    $name or $::isEmbedded ? kill(USR1, $::CCPID) : $in->exit(0);
     $mouse = mouse::fullname2mouse($name);
 
     if ($mouse->{device} eq "usbmouse") {
