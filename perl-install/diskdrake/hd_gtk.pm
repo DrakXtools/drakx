@@ -292,7 +292,7 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	$w->set_name("PART_" . pt_type2name($entry->{pt_type}));
+	$w->set_name("PART_" . part2name($entry));
 	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
 	gtkpack__($kind->{display_box}, $w);
 	$w->grab_focus if $current_entry && fsedit::are_same_partitions($current_entry, $entry);

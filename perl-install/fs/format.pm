@@ -44,7 +44,7 @@ sub part_raw {
     my $dev = $part->{real_device} || $part->{device};
 
     my @options = if_($part->{toFormatCheck}, "-c");
-    log::l("formatting device $dev (type ", pt_type2name($part->{pt_type}), ")");
+    log::l("formatting device $dev (type ", part2name($part), ")");
 
     my $fs_type = type2fs($part);
 
@@ -58,7 +58,7 @@ sub part_raw {
 	push @options, '-l', 'bootstrap';
     }
 
-    my $cmd = $cmds{$fs_type} or die N("I don't know how to format %s in type %s", $part->{device}, pt_type2name($part->{pt_type}));
+    my $cmd = $cmds{$fs_type} or die N("I don't know how to format %s in type %s", $part->{device}, part2name($part));
 
     run_program::raw({ timeout => 60 * 60 }, $cmd, @options, devices::make($dev)) or die N("%s formatting of %s failed", $fs_type, $dev);
 

@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(pt_type2name type2fs name2pt_type fs2pt_type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
+    types => [ qw(part2name type2fs name2pt_type fs2pt_type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -220,7 +220,10 @@ sub type2fs {
     $pt_type2fs{$pt_type} || $pt_type =~ /^(\d+)$/ && $o_default || $pt_type;
 }
 sub fs2pt_type { $fs2pt_type{$_[0]} || $_[0] }
-sub pt_type2name { $pt_type2name{$_[0]} || $_[0] }
+sub part2name { 
+    my ($part) = @_;
+    $pt_type2name{$part->{pt_type}} || $part->{pt_type};
+}
 sub name2pt_type { 
     local ($_) = @_;
     /0x(.*)/ ? hex $1 : $name2pt_type{$_} || $_;
@@ -278,7 +281,7 @@ sub description {
       formatXiB($hd->{totalsectors} || $hd->{size}, 512),
       $hd->{info} && ", $hd->{info}",
       $hd->{mntpoint} && ", " . $hd->{mntpoint},
-      $hd->{pt_type} && ", " . pt_type2name($hd->{pt_type});
+      $hd->{pt_type} && ", " . part2name($hd);
 }
 
 sub isPrimary {

@@ -460,7 +460,7 @@ sub Create {
     #- including one less sector for start due to a capacity to increase the adjustement by
     #- one.
     my ($primaryOrExtended, $migrate_files);
-    my $type_name = pt_type2name($part->{pt_type});
+    my $type_name = part2name($part);
     my $mb_size = $part->{size} >> 11;
     my $has_startsector = ($::expert || arch() !~ /i.86/) && !isLVM($hd);
 
@@ -566,7 +566,7 @@ sub Type {
     #- when readonly, Type() is allowed only when changing between various { 0x83, 0x183, ... }
     @types = grep { (name2pt_type($_) & 0xff) == 0x83 } @types if $hd->{readonly};
 
-    my $type_name = pt_type2name($part->{pt_type});
+    my $type_name = part2name($part);
     $in->ask_from_({ title => N("Change partition type"),
 		     messages => N("Which filesystem do you want?"),
 		     focus_first => 1,
@@ -874,7 +874,7 @@ sub Loopback {
     }
     delete $part->{mntpoint}; # we don't want the suggested mntpoint
 
-    my $type_name = pt_type2name($part->{pt_type});
+    my $type_name = part2name($part);
     my $mb_size = $part->{size} >> 11;
     $in->ask_from(N("Loopback"), '', [
 		  { label => N("Loopback file name: "), val => \$part->{loopback_file} },
@@ -1166,7 +1166,7 @@ sub format_part_info {
       	$info .= N("Name: ") . $new_value . "\n";
       }
     } elsif ($part->{pt_type}) {
-	my $type_name = substr(pt_type2name($part->{pt_type}), 0, 40); # limit the length
+	my $type_name = substr(part2name($part), 0, 40); # limit the length
 	$info .= N("Type: ") . $type_name . ($::expert ? sprintf " (0x%x)", $part->{pt_type} : '') . "\n";
     } else {
 	$info .= N("Empty") . "\n";
@@ -1232,7 +1232,7 @@ sub format_raw_hd_info {
     $info .= N("Mount point: ") . "$raw_hd->{mntpoint}\n" if $raw_hd->{mntpoint};
     $info .= format_hd_info($raw_hd);
     if ($raw_hd->{pt_type}) {
-	my $type_name = substr(pt_type2name($raw_hd->{pt_type}), 0, 40); # limit the length
+	my $type_name = substr(part2name($raw_hd), 0, 40); # limit the length
 	$info .= N("Type: ") . $type_name . "\n";
     }
     if (my $s = $raw_hd->{options}) {

@@ -1130,7 +1130,7 @@ sub getHds {
 	}
     }
 
-    my @sunos = grep { isSunOS($_) && pt_type2name($_->{pt_type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
+    my @sunos = grep { isSunOS($_) && part2name($_) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
     if (@sunos) {
 	my $v = '';
 	map { $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;

@@ -119,7 +119,7 @@ sub merge_fstabs {
 	$p->{pt_type} && $p2->{pt_type} && $p->{pt_type} ne $p2->{pt_type} && type2fs($p) ne type2fs($p2) &&
 	  $p->{pt_type} ne 'auto' && $p2->{pt_type} ne 'auto' and
 	    log::l("err, fstab and partition table do not agree for $p->{device} type: " .
-		   (type2fs($p) || pt_type2name($p->{pt_type})) . " vs ", (type2fs($p2) || pt_type2name($p2->{pt_type})));
+		   (type2fs($p) || part2name($p)) . " vs ", (type2fs($p2) || part2name($p2)));
     }
     @l;
 }
