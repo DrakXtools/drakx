@@ -20,7 +20,7 @@ sub rooted_get_stdout {
     my ($root, $name, @args) = @_;
     my @r;
     rooted($root, $name, '>', \@r, @args) or return;
-    @r;
+    wantarray ? @r : join('', @r);
 }
 
 sub run { rooted('', @_) }
