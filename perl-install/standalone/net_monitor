@@ -41,8 +41,8 @@ my $disconnect = "@ARGV" =~ /--disconnect/;
 my ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
 
 if ($force) {
-    $connect and system("/etc/sysconfig/network-scripts/net_cnx_up");
-    $disconnect and system("/etc/sysconfig/network-scripts/net_cnx_down");
+    $connect and start_connection();
+    $disconnect and stop_connection();
     $connect = $disconnect = 0;
 }
 $quiet and exit(0);
@@ -148,6 +148,18 @@ ugtk2->exit(0);
 my $during_connection;
 my $first;
 
+sub bg_command_as_root {
+    fork() or exec { 'consolehelper' } @_ or die N("consolehelper missing");
+}
+
+sub start_connection() {
+    bg_command_as_root('/sbin/ifup', $default_intf);
+}
+
+sub stop_connection() {
+    bg_command_as_root('/sbin/ifdown', $default_intf);
+}
+
 sub connection() {
     $during_connection = 1;
     my $wasconnected = $isconnected;
@@ -222,8 +234,11 @@ sub connection() {
 
     gtkflush();
 
-    # ergh, our integrist common::system can't lie on the program name :-/
-    CORE::system { 'consolehelper' } ($wasconnected == 1 ? '/sbin/ifdown' : '/sbin/ifup', $default_intf) or die N("consolehelper missing");
+    if ($wasconnected == 1) {
+        stop_connection();
+    } else {
+        start_connection();
+    }
 }
 
 sub graph_window_width() { $width - $left_border }
