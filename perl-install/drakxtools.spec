@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.7mdk
+Release: 0.8mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,26 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Aug 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.8mdk
+- bootloader-config: log command on mkinitrd faillure
+- drakbug (olivier):
+  o update product list and fix case (bugzilla is case sensitive)
+  o fix product, component and version for bugzilla
+  o fix bugzilla url
+- drakhelp (daouda):
+  o use webclient-kde instead of konqueror
+  o add epiphany browser
+- drakroam:
+  o initial import of wlandetect version, from Austin Action
+- mousedrake, diskdrake: create /etc/udev/conf.d/xxx.conf as well as
+  devfsd rules (pixel)
+- net_monitor:
+  o add a horizontal separator in stats to prevent visual disguts
+    between supposed non aligned labels
+  o fix looking aka vertical alignment of labels (Fabrice FACORAT, #10300)
+  o fix resizing (Fabrice FACORAT, #10300)
+- XFdrake: s/XFree/Xorg/ (pixel)
+
 * Mon Aug  9 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.7mdk
 - diskdrake: switch from raidtools to mdadm (pixel)
 - drakboot: sort themes, users and WMs lists
