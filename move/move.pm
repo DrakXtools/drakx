@@ -140,7 +140,9 @@ sub init {
         print "Using existing host configuration\n";
         $using_existing_host_config = 1;
     }
-    $o->{locale} = lang::read('', 0);
+    if (-s '/etc/sysconfig/i18n') {
+        lang::set($o->{locale} = lang::read('', 0));
+    }
 
 drakx_stuff:
     $o->{steps}{$_} = { reachable => 1, text => $_ }
