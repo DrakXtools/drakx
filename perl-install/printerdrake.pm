@@ -224,7 +224,7 @@ Do you really want to get your printers auto-detected?"),
 	     _("Do auto-detection"));
 	$do_auto_detect = ($res eq _("Do auto-detection"));
     }
-    my @parport;
+    my @autodetected;
     my $menuentries = {};
     $in->set_help('setupLocal') if $::isInstall;
     if ($do_auto_detect) {
@@ -233,11 +233,11 @@ Do you really want to get your printers auto-detected?"),
 	# configured, so we stop it here. If it is not installed or not 
 	# configured, this command has no effect.
 	printer::stop_service("hpoj");
-	@parport = auto_detect($in);
+	@autodetected = auto_detect($in);
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
-	$printer->{MORETHANONE} = ($#parport > 0);
-	for my $p (@parport) {
+	$printer->{MORETHANONE} = ($#autodetected > 0);
+	for my $p (@autodetected) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
 		if ($p->{port} =~ m!^/dev/lp(\d+)$!) {
@@ -272,7 +272,7 @@ Do you really want to get your printers auto-detected?"),
 	    for my $q (@port) {
 		if (@str) {
 		    my $alreadyfound = 0;
-		    for my $p (@parport) {
+		    for my $p (@autodetected) {
 			if ($p->{port} eq $q) {
 			    $alreadyfound = 1;
 			    last;
@@ -300,7 +300,7 @@ Do you really want to get your printers auto-detected?"),
     } else {
 	# Always ask for queue name in recommended mode when no auto-
 	# detection was done
-	$printer->{MORETHANONE} = ($#parport > 0);
+	$printer->{MORETHANONE} = ($#autodetected > 0);
 	my $m;
 	for ($m = 0; $m <= 2; $m++) {
 	    my $menustr = _("Printer on parallel port \#%s", $m);
@@ -355,6 +355,16 @@ Do you really want to get your printers auto-detected?"),
 		    $device = $menuentries->{$p};
 		    last;
 		}
+	    }
+	}
+    } elsif (($printer->{configured}{$queue}) &&
+	($printer->{currentqueue}{connect} =~ m!^socket:/!)) {
+	# Ethernet-(TCP/Socket)-connected printer
+	$device = $printer->{currentqueue}{connect};
+	for my $p (keys %{$menuentries}) {
+	    if ($device eq $menuentries->{$p}) {
+		$menuchoice = $p;
+		last;
 	    }
 	}
     } else {
@@ -435,7 +445,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	     ($::expert ? 
 	      { val => \$device } : ()),
 	     { val => \$menuchoice, list => \@menuentrieslist, 
-	       not_edit => !$::expert, format => \&translate,
+	       not_edit => !$::expert, format => \&translate, sort => 0,
 	       allow_empty_list => 1, type => 'list' },
 	     (((!$::expert) && ($do_auto_detect) && ($printer->{NEW})) ? 
 	      { text => _("Manual configuration"), type => 'bool',
@@ -456,174 +466,10 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	}
     }
 
-    #- Check whether the printer is an HP multi-function device and 
-    #- configure HPOJ if it is one
-
-    my $ptaldevice = "";
-    my $isHPOJ = 0;
-    if (!$do_auto_detect) {
-	local $::isWizard = 0;
-	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
-				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
-    }
-    if (($menuchoice =~ /HP\s+OfficeJet/i) ||
-	($menuchoice =~ /HP\s+PSC/i) ||
-	($menuchoice =~ /HP\s+PhotoSmart/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+1100/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+1200/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+1220/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+2200/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+3200/i) ||
-	($menuchoice =~ /HP\s+LaserJet\s+33.0/i) ||
-	($isHPOJ)) {
-	# Install HPOJ package
-	if ((!$::testing) &&
-	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
-				       /usr/sbin/ptal-init
-				       /usr/bin/xojpanel))))) {
-	    my $w = $in->wait_message('', _("Installing HPOJ package..."));
-	    $in->do_pkgs->install('hpoj', 'xojpanel');
-	}
-	# Configure and start HPOJ
-	my $w = $in->wait_message
-	    ('', _("Checking device and configuring HPOJ..."));
-	$ptaldevice = printer::configure_hpoj($device, @parport);
-
-	if ($ptaldevice) {
-	    # Configure scanning with SANE on the MF device
-	    if (($menuchoice !~ /HP\s+PhotoSmart/i) &&
-		($menuchoice !~ /HP\s+LaserJet\s+2200/i)) {
-		# Install SANE
-		if ((!$::testing) &&
-		    (!printer::files_exist((qw(/usr/bin/scanimage
-					       /usr/bin/xscanimage
-					       /usr/bin/xsane
-					       /etc/sane.d/dll.conf
-					       /usr/lib/libsane-hpoj.so.1),
-					    (printer::files_exist
-					     ('/usr/bin/gimp') ? 
-					     '/usr/bin/xsane-gimp' : 
-					     ()))))) {
-		    my $w = $in->wait_message
-			('', _("Installing SANE packages..."));
-		    $in->do_pkgs->install('sane-backends', 'sane-frontends',
-					  'xsane', 'libsane-hpoj0',
-					  if_($in->do_pkgs->is_installed
-					      ('gimp'),'xsane-gimp'));
-		}
-		# Configure the HPOJ SANE backend
-		printer::config_sane();
-	    }
-	    # Configure photo card access with mtools and MToolsFM
-	    if (($menuchoice =~ /HP\s+PhotoSmart/i) ||
-		($menuchoice =~ /HP\s+PSC\s*9[05]0/i) ||
-		($menuchoice =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
-		# Install mtools and MToolsFM
-		if ((!$::testing) &&
-		    (!printer::files_exist(qw(/usr/bin/mdir
-					      /usr/bin/mcopy
-					      /usr/bin/MToolsFM
-					      )))) {
-		    my $w = $in->wait_message
-			('', _("Installing mtools packages..."));
-		    $in->do_pkgs->install('mtools', 'MToolsFM');
-		}
-		# Configure mtools/MToolsFM for photo card access
-		printer::config_photocard();
-	    }
-
-	    my $text = "";
-	    # Inform user about how to scan with his MF device
-	    $text = scanner_help($menuchoice, "ptal:/$ptaldevice");
-	    if ($text) {
-		$in->ask_warn(_("Scanning on your HP multi-function device"),
-			      $text);
-	    }
-	    # Inform user about how to access photo cards with his MF device
-	    $text = photocard_help($menuchoice, "ptal:/$ptaldevice");
-	    if ($text) {
-		$in->ask_warn(_("Photo memory card access on your HP multi-function device"),
-			      $text);
-	    }
-	    # make the DeviceURI from $ptaldevice.
-	    $printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
-	} else {
-	    # make the DeviceURI from $device.
-	    $printer->{currentqueue}{connect} = "file:" . $device;
-	}
-    } else {
-	# make the DeviceURI from $device.
-	$printer->{currentqueue}{connect} = "file:" . $device;
-    }
-
-    #- if CUPS is the spooler, make sure that CUPS knows the device
-    if ($printer->{SPOOLER} eq "cups") {
-	my $w = $in->wait_message
-	    ('', _("Making printer port available for CUPS..."));
-	if ($ptaldevice eq "") {
-	    printer::assure_device_is_available_for_cups($device);
-	} else {
-	    printer::assure_device_is_available_for_cups($ptaldevice);
-	}
-    }
-
-    #- Read the printer driver database if necessary
-    if ((keys %printer::thedb) == 0) {
-	my $w = $in->wait_message('', _("Reading printer database..."));
-        printer::read_printer_db($printer->{SPOOLER});
-    }
-
-    #- Search the database entry which matches the detected printer best
-    my $descr = "";
-    foreach (@parport) {
-	$device eq $_->{port} or next;
-	if (($_->{val}{MANUFACTURER}) && ($_->{val}{MODEL})) {
-	    $descr = "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
-	} else {
-	    $descr = $_->{val}{DESCRIPTION};
-	}
-	# Clean up the description from noise which makes the best match
-	# difficult
-	$descr =~ s/\s+Inc\.//;
-	$descr =~ s/\s+Corp\.//;
-	$descr =~ s/\s+SA\.//;
-	$descr =~ s/\s+S\.\s*A\.//;
-	$descr =~ s/\s+Ltd\.//;
-	$descr =~ s/\s+International//;
-	$descr =~ s/\s+Int\.//;
-	$descr =~ s/\s+[Ss]eries//;
-	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
-	$printer->{DBENTRY} = "";
-	for my $entry (keys(%printer::thedb)) {
-	    if ($entry =~ m!$descr!) {
-		$printer->{DBENTRY} = $entry;
-		last;
-	    }
-	}
-	if (!$printer->{DBENTRY}) {
-	    $printer->{DBENTRY} =
-		bestMatchSentence ($descr, keys %printer::thedb);
-	}
-        # If the manufacturer was not guessed correctly, discard the
-        # guess.
-        $printer->{DBENTRY} =~ /^([^\|]+)\|/;
-        my $guessedmake = lc($1);
-        if (($descr !~ /$guessedmake/i) &&
-            (($guessedmake ne "hp") ||
-             ($descr !~ /Hewlett[\s-]+Packard/i)))
-            { $printer->{DBENTRY} = "" };
-    }
-
-    #- Pre-fill the "Description" field with the printer's model name
-    if ((!$printer->{currentqueue}{desc}) && ($descr)) {
-	$printer->{currentqueue}{desc} = $descr;
-	$printer->{currentqueue}{desc} =~ s/\|/ /g;
-    }
-
-    #- When we have chosen a printer here, the question whether the
-    #- automatically chosen model from the database is correct, should
-    #- have "This model is correct" as default answer
-    delete($printer->{MANUALMODEL});
+    # Do configuration of multi-function devices and look up model name
+    # in the printer database
+    setup_common ($printer, $in, $menuchoice, $device, $do_auto_detect,
+		  @autodetected);
 
     1;
 }
@@ -675,6 +521,26 @@ complete => sub {
         (!printer::files_exist((qw(/usr/bin/rlpr))))) {
         $in->do_pkgs->install('rlpr');
     }
+
+    # Auto-detect printer model (works if host is an ethernet-connected
+    # printer)
+    my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+    my $auto_hpoj;
+    if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+        $in->ask_warn('', _("Detected model: %s %s",
+                            $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
+        $auto_hpoj = 1;
+    } else {
+	$auto_hpoj = 0;
+    }
+
+    # Do configuration of multi-function devices and look up model name
+    # in the printer database
+    setup_common ($printer, $in,
+		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
+		  $printer->{currentqueue}{connect}, $auto_hpoj,
+                  ({port => $printer->{currentqueue}{connect},
+                    val => $modelinfo}));
 
     1;
 }
@@ -905,6 +771,26 @@ complete => sub {
         $in->do_pkgs->install('nc');
     }
 
+    # Auto-detect printer model (works if host is an ethernet-connected
+    # printer)
+    my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+    my $auto_hpoj;
+    if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+        $in->ask_warn('', _("Detected model: %s %s",
+                            $modelinfo->{MANUFACTURER}, $modelinfo->{MODEL}));
+        $auto_hpoj = 1;
+    } else {
+	$auto_hpoj = 0;
+    }
+
+    # Do configuration of multi-function devices and look up model name
+    # in the printer database
+    setup_common ($printer, $in,
+		  "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
+		  $printer->{currentqueue}{connect}, $auto_hpoj,
+                  ({port => $printer->{currentqueue}{connect},
+                    val => $modelinfo}));
+
     1;
 }
 
@@ -965,6 +851,35 @@ complete => sub {
         (!printer::files_exist((qw(/usr/bin/nc))))) {
         $in->do_pkgs->install('nc');
     }
+
+    if (($printer->{currentqueue}{connect} =~ m!^socket://([^:/]+)!) ||
+        ($printer->{currentqueue}{connect} =~ m!^lpd://([^:/]+)!) ||
+        ($printer->{currentqueue}{connect} =~ m!^http://([^:/]+)!) ||
+        ($printer->{currentqueue}{connect} =~ m!^ipp://([^:/]+)!)) {
+	
+	# Auto-detect printer model (works if host is an ethernet-connected
+	# printer)
+	my $remotehost = $1;
+	my $modelinfo = detect_devices::getSNMPModel ($remotehost);
+        my $auto_hpoj;
+        if ((defined($modelinfo)) && ($modelinfo->{MANUFACTURER} ne "")) {
+            $in->ask_warn('', _("Detected model: %s %s",
+                                $modelinfo->{MANUFACTURER},
+				$modelinfo->{MODEL}));
+            $auto_hpoj = 1;
+        } else {
+	    $auto_hpoj = 0;
+        }
+
+        # Do configuration of multi-function devices and look up model name
+        # in the printer database
+        setup_common ($printer, $in,
+		      "$modelinfo->{MANUFACTURER} $modelinfo->{MODEL}", 
+		      $printer->{currentqueue}{connect}, $auto_hpoj,
+                      ({port => $printer->{currentqueue}{connect},
+                        val => $modelinfo}));
+    }
+
     1;
 }
 
@@ -1000,6 +915,193 @@ complete => sub {
     #- make the Foomatic URI
     $printer->{currentqueue}{connect} = "postpipe:$commandline";
     
+    1;
+}
+
+sub setup_common {
+
+    my ($printer, $in, $makemodel, $device, $do_auto_detect,
+	@autodetected) = @_;
+
+    #- Check whether the printer is an HP multi-function device and 
+    #- configure HPOJ if it is one
+
+    my $ptaldevice = "";
+    my $isHPOJ = 0;
+    if (!$do_auto_detect) {
+	local $::isWizard = 0;
+	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
+				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, LaserJet 1100/1200/1220/3200/3300 with scanner), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
+    }
+    if (($makemodel =~ /HP\s+OfficeJet/i) ||
+	($makemodel =~ /HP\s+PSC/i) ||
+	($makemodel =~ /HP\s+PhotoSmart/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+1100/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+1200/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+1220/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+2200/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+3200/i) ||
+	($makemodel =~ /HP\s+LaserJet\s+33.0/i) ||
+	($isHPOJ)) {
+	# Install HPOJ package
+	if ((!$::testing) &&
+	    (!printer::files_exist((qw(/usr/sbin/ptal-mlcd
+				       /usr/sbin/ptal-init
+				       /usr/bin/xojpanel))))) {
+	    my $w = $in->wait_message('', _("Installing HPOJ package..."));
+	    $in->do_pkgs->install('hpoj', 'xojpanel');
+	}
+	# Configure and start HPOJ
+	my $w = $in->wait_message
+	    ('', _("Checking device and configuring HPOJ..."));
+	$ptaldevice = printer::configure_hpoj($device, @autodetected);
+
+	if ($ptaldevice) {
+	    # Configure scanning with SANE on the MF device
+	    if (($makemodel !~ /HP\s+PhotoSmart/i) &&
+		($makemodel !~ /HP\s+LaserJet\s+2200/i)) {
+		# Install SANE
+		if ((!$::testing) &&
+		    (!printer::files_exist((qw(/usr/bin/scanimage
+					       /usr/bin/xscanimage
+					       /usr/bin/xsane
+					       /etc/sane.d/dll.conf
+					       /usr/lib/libsane-hpoj.so.1),
+					    (printer::files_exist
+					     ('/usr/bin/gimp') ? 
+					     '/usr/bin/xsane-gimp' : 
+					     ()))))) {
+		    my $w = $in->wait_message
+			('', _("Installing SANE packages..."));
+		    $in->do_pkgs->install('sane-backends', 'sane-frontends',
+					  'xsane', 'libsane-hpoj0',
+					  if_($in->do_pkgs->is_installed
+					      ('gimp'),'xsane-gimp'));
+		}
+		# Configure the HPOJ SANE backend
+		printer::config_sane();
+	    }
+	    # Configure photo card access with mtools and MToolsFM
+	    if (($makemodel =~ /HP\s+PhotoSmart/i) ||
+		($makemodel =~ /HP\s+PSC\s*9[05]0/i) ||
+		($makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i)) {
+		# Install mtools and MToolsFM
+		if ((!$::testing) &&
+		    (!printer::files_exist(qw(/usr/bin/mdir
+					      /usr/bin/mcopy
+					      /usr/bin/MToolsFM
+					      )))) {
+		    my $w = $in->wait_message
+			('', _("Installing mtools packages..."));
+		    $in->do_pkgs->install('mtools', 'MToolsFM');
+		}
+		# Configure mtools/MToolsFM for photo card access
+		printer::config_photocard();
+	    }
+
+	    my $text = "";
+	    # Inform user about how to scan with his MF device
+	    $text = scanner_help($makemodel, "ptal:/$ptaldevice");
+	    if ($text) {
+		$in->ask_warn(_("Scanning on your HP multi-function device"),
+			      $text);
+	    }
+	    # Inform user about how to access photo cards with his MF device
+	    $text = photocard_help($makemodel, "ptal:/$ptaldevice");
+	    if ($text) {
+		$in->ask_warn(_("Photo memory card access on your HP multi-function device"),
+			      $text);
+	    }
+	    # make the DeviceURI from $ptaldevice.
+	    $printer->{currentqueue}{connect} = "ptal:/" . $ptaldevice;
+	} else {
+	    # make the DeviceURI from $device.
+	    $printer->{currentqueue}{connect} = $device;
+	}
+    } else {
+	# make the DeviceURI from $device.
+	$printer->{currentqueue}{connect} = $device;
+    }
+
+    if ($printer->{currentqueue}{connect} !~ /:/) {
+	$printer->{currentqueue}{connect} =
+	    "file:" . $printer->{currentqueue}{connect};
+    }
+
+    #- if CUPS is the spooler, make sure that CUPS knows the device
+    if (($printer->{SPOOLER} eq "cups") &&
+	($device !~ /^lpd:/) &&
+	($device !~ /^smb:/) &&
+	($device !~ /^socket:/) &&
+	($device !~ /^http:/) &&
+	($device !~ /^ipp:/)) {
+	my $w = $in->wait_message
+	    ('', _("Making printer port available for CUPS..."));
+	if ($ptaldevice eq "") {
+	    printer::assure_device_is_available_for_cups($device);
+	} else {
+	    printer::assure_device_is_available_for_cups($ptaldevice);
+	}
+    }
+
+    #- Read the printer driver database if necessary
+    if ((keys %printer::thedb) == 0) {
+	my $w = $in->wait_message('', _("Reading printer database..."));
+        printer::read_printer_db($printer->{SPOOLER});
+    }
+
+    #- Search the database entry which matches the detected printer best
+    my $descr = "";
+    foreach (@autodetected) {
+	$device eq $_->{port} or next;
+	if (($_->{val}{MANUFACTURER}) && ($_->{val}{MODEL})) {
+	    $descr = "$_->{val}{MANUFACTURER} $_->{val}{MODEL}";
+	} else {
+	    $descr = $_->{val}{DESCRIPTION};
+	}
+	# Clean up the description from noise which makes the best match
+	# difficult
+	$descr =~ s/\s+Inc\.//;
+	$descr =~ s/\s+Corp\.//;
+	$descr =~ s/\s+SA\.//;
+	$descr =~ s/\s+S\.\s*A\.//;
+	$descr =~ s/\s+Ltd\.//;
+	$descr =~ s/\s+International//;
+	$descr =~ s/\s+Int\.//;
+	$descr =~ s/\s+[Ss]eries//;
+	$descr =~ s/\s+\(?[Pp]rinter\)?$//;
+	$printer->{DBENTRY} = "";
+	for my $entry (keys(%printer::thedb)) {
+	    if ($entry =~ m!$descr!) {
+		$printer->{DBENTRY} = $entry;
+		last;
+	    }
+	}
+	if (!$printer->{DBENTRY}) {
+	    $printer->{DBENTRY} =
+		bestMatchSentence ($descr, keys %printer::thedb);
+	}
+        # If the manufacturer was not guessed correctly, discard the
+        # guess.
+        $printer->{DBENTRY} =~ /^([^\|]+)\|/;
+        my $guessedmake = lc($1);
+        if (($descr !~ /$guessedmake/i) &&
+            (($guessedmake ne "hp") ||
+             ($descr !~ /Hewlett[\s-]+Packard/i)))
+            { $printer->{DBENTRY} = "" };
+    }
+
+    #- Pre-fill the "Description" field with the printer's model name
+    if ((!$printer->{currentqueue}{desc}) && ($descr)) {
+	$printer->{currentqueue}{desc} = $descr;
+	$printer->{currentqueue}{desc} =~ s/\|/ /g;
+    }
+
+    #- When we have chosen a printer here, the question whether the
+    #- automatically chosen model from the database is correct, should
+    #- have "This model is correct" as default answer
+    delete($printer->{MANUALMODEL});
+
     1;
 }
 
@@ -1135,6 +1237,12 @@ sub is_model_correct {
     my ($printer, $in) = @_;
     $in->set_help('chooseModel') if $::isInstall;
     my $dbentry = $printer->{DBENTRY};
+    if (!$dbentry) {
+	# If printerdrake could not determine the model, omit this dialog and
+	# let the user choose manually.
+	$printer->{MANUALMODEL} = 1;
+	return 1;
+    }
     $dbentry =~ s/\|/ /g;
     my $res = $in->ask_from_list_
 	    (_("Your printer model"),
@@ -1976,7 +2084,7 @@ sub check_network {
     # (otherwise the network is not configured yet and drakconnet has to be
     # started)
 
-    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnet_conf")) {
+    if (!printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
 	my $go_on = 0;
 	while (!$go_on) {
 	    my $choice = _("Configure the network now");
@@ -1997,7 +2105,7 @@ sub check_network {
 		    } else {
 			system("/usr/sbin/drakconnet");
 		    }
-		    if (printer::files_exist("/etc/sysconfig/network-scripts/drakconnet_conf")) {
+		    if (printer::files_exist("/etc/sysconfig/network-scripts/drakconnect_conf")) {
 			$go_on = 1;
 		    }
 		} else {
