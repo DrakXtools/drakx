@@ -1,3 +1,220 @@
+2004/01/29  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/01/29  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm: fix encapsulation parameter
+	fix VPI parameter setting
+	(adsl_conf_backend) fix disconnect script
+	(adsl_conf_backend) fix ppp's pty server
+
+	* network/netconnect.pm: typo fix
+	fix encapsulation pull down menu filling
+	enable to alter encapsulation, vci and vpi parameters in advanced mode
+	write cnx scripts for cable connection too
+
+	* drakxtools.spec: 9.3-23mdk
+
+2004/01/28  David Baudens  <baudens at mandrakesoft.com>
+
+	* pixmaps/about.png, pixmaps/nosplash_thumb.png,
+	pixmaps/slpash-drakeprint-2.png, pixmaps/printerdrake.png: Update
+
+2004/01/28  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: sucky toggled fix (queen fix)
+	  - move radio buttons to $gui->{intf_radio}
+	  - fix authentication menu wrongly used for isdn
+
+2004/01/28  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/dns.c, mdk-stage1/network.c: allow having no DNS by only
+	using the ip callback once, see DNS == IP as a special case, don't do
+	DNS calls when no DNS is configured to avoid timeouts
+
+2004/01/28  Pixel  <pixel at mandrakesoft.com>
+
+	* interactive/gtk.pm: create add_modify_remove_sensitive() and use it so
+	that "Modify" and "Remove"
+	are non sensitive when the initial list is empty
+
+2004/01/28  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/adsl.pm (adsl_probe_info) minor cleanups
+	(adsl_conf_backend) new configuration stuff
+
+	* network/modem.pm: simplify code through format callback (thus enabling
+	to centralize translatable
+	strings, thus reducing error risk)
+
+	* network/netconnect.pm: removed useless variable
+	simplify code through format callback (thus enabling to centralize
+	translatable
+	strings, thus reducing error risk)
+
+2004/01/27  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* share/po/fa.po, share/po/ms.po, share/po/id.po, share/po/sk.po,
+	share/po/ru.po, share/po/gl.po, share/po/pt_BR.po, share/po/th.po,
+	share/po/sl.po, share/po/uz@Cyrl.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/tr.po, share/po/mt.po, share/po/ga.po,
+	share/po/be.po, share/po/uk.po, share/po/mn.po, share/po/ko.po,
+	share/po/DrakX.pot, share/po/sv.po, share/po/sr.po, share/po/pl.po,
+	share/po/fi.po, share/po/lt.po, share/po/he.po, share/po/cy.po,
+	share/po/ca.po, share/po/da.po, share/po/ar.po, share/po/tg.po,
+	share/po/nb.po, share/po/bs.po, share/po/uz.po, share/po/ro.po,
+	share/po/mk.po, share/po/wa.po, share/po/is.po, share/po/af.po,
+	share/po/hi.po, share/po/az.po, share/po/zh_TW.po, share/po/zh_CN.po,
+	share/po/pt.po, share/po/vi.po, share/po/ta.po, share/po/fr.po,
+	share/po/sr@Latn.po, share/po/sq.po, share/po/nl.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/de.po, share/po/eo.po,
+	share/po/lv.po, share/po/el.po, share/po/bg.po, share/po/cs.po,
+	share/po/hu.po: fix typo s#Network name#Network name#
+
+	* standalone/drakconnect: fix typo s/Netwok name (ESSID)/Network name
+	(ESSID)/
+	  - fix Information page
+	  - use mapIntfToDevice to get infos
+
+2004/01/27  Pixel  <pixel at mandrakesoft.com>
+
+	* ugtk2.pm: 
+	  - add gtk_new_TextView_get_log() and gtk_TextView_get_log() which
+	allow
+	running a command in background and get the filtered output in a
+	TextView
+	  - add Gtk2::OptionMenu::new_with_strings() which is a simple
+	combination of
+	  ->new, ->set_popdown_strings and ->set_text
+
+2004/01/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* network/netconnect.pm: rollback debug stuff :-(
+	typo fix
+	get encapsulation default value from provider db and offer to configure
+	it
+	typo fix
+	adiusbadsl package was renamed as eagle
+	default protocol for speedtouch is pppoa
+	do not try to install "auto" package
+	install needed packages w/o second thoughs
+	remove extra argument
+	add a step in order to select a provider from kppp database
+	configure adsl account
+	(isdn account step)
+	  - directly use needed variables
+	  - kill uneeded fields
+	preset domainname for a few known providers
+
+	* share/po/fr.po: update
+
+	* network/adsl.pm: kill dead code
+	(adsl_probe_info) vpi and vci parameters are independant
+
+	* network/adsl_consts.pm: typo fix
+	  - add Retevision spanish provider
+	  - add encapsulation default value
+	preset domainname for a few known providers
+	typo fix
+
+2004/01/26  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: 
+	  - fix sucky fix
+	  - fix missing parameters
+	  - add kind and protocol to $config
+	  - fix various issues from $config changes
+
+2004/01/26  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* mdk-stage1/modules.c: don't forget to umount additional drivers floppy
+	after successful copy of modules.mar (gc sux)
+
+2004/01/26  Pixel  <pixel at mandrakesoft.com>
+
+	* any.pm: fix typo
+
+	* ugtk2.pm: add gtk_set_treelist
+
+	* share/list: perl Gtk2 has been rebuilt
+
+	* interactive/gtk.pm: 
+	  - pack add_modify_remove widget growable
+	  - no need to size it
+	new function add_modify_remove_action()
+
+2004/01/26  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Another cron issue reported on Anthill.
+
+	* standalone/drakTermServ: Remove unused sub.
+
+2004/01/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakconnect: reput back my changes that poulpy gratuitously
+	rollbacked because:
+	  - he hadn't update network/*pm but only update standalone/drakconnect
+	  - he happilly followed what perl_checker instrumentate him w/o any
+	second thoughs
+	next time damien, do not listen gc when he's explaining how he
+	resolves conflicts the first time he used cvs :-(
+	get rid of global variables regarding connect/disconnect scripts
+
+	* network/ethernet.pm (mapIntfToDevice) actually use given interface
+	rather than hardcoded "eth0"
+	cleanups
+	(get_eth_cards)
+	  - split it out of conf_network_card_backend() (which still call it for
+	compatibility for now but sincefunctions whose behavior is totally
+	altered by
+	  arguments are insane should just be splited, caller will be fixed then
+	this
+	  compatibily call removed)
+	  - add a third string in returned tuples (physical net device
+	description)
+	(mapIntfToDevice) introduce it in order to map a network interface to a
+	pci/usb/... device
+	get rid of pseudo global $prefix, just reuse global $::prefix :-)
+
+	* standalone/net_monitor: get rid of global variables regarding
+	connect/disconnect scripts
+
+	* network/network.pm: get rid of pseudo global $prefix, just reuse global
+	$::prefix :-)
+	kill unused down_it() and up_it() functions
+
+	* network/tools.pm: get rid of global variables regarding
+	connect/disconnect scripts
+	get rid of pseudo global $prefix, just reuse global $::prefix :-)
+
+	* network/adsl.pm, network/isdn.pm: get rid of pseudo global $prefix, just
+	reuse global $::prefix :-)
+
+	* network/adsl_consts.pm: rename dns fields as they're named in netc
+	structure
+
+	* network/netconnect.pm: reuse values got from provider db
+	display nice "ethX: card description" rather than raw interface name
+	when
+	selecting an ethernet interface
+	perl_checker was wrong
+	get rid of global variables regarding connect/disconnect scripts
+	(stop_internet) init_globals()'s prefix parameter is dead
+	get rid of pseudo global $prefix, just reuse global $::prefix :-)
+	fix the cleanup
+	remove useless parenthessis
+	make wizard be faster when trying to install speedtouch_mgmt and when
+	firmware
+	is already present
+	share provider db for all usb modems (vpi/vci parameters are need for
+	most
+	modem/protocol combinaisons and anyway it's ok to guess the protocol and
+	dns
+	servers for the end user)
+	  - let be faster when trying to install already installed packages
+	  - fix next step name when installing kppp
+
 2004/01/26  keld
 
 	* share/po/da.po: Updates
@@ -24196,7 +24413,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.856 2004/01/22 14:52:40 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.857 2004/01/26 12:25:58 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
