@@ -57,6 +57,9 @@ sub mirrors {
 	#- http://www.linux-mandrake.com/mirrorsfull.list
 	require http;
 	my $f = http::getFile("http://www.linux-mandrake.com/mirrorsfull.list");
+
+	local $SIG{ALRM} = sub { die "timeout" };
+	alarm 60; 
 	foreach (<$f>) {
 	    my ($arch, $url, $dir) = m|updates([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
@@ -69,6 +72,7 @@ sub mirrors {
 	    $mirrors{$url} = [ $land, $dir ];
 	}
 	http::getFile('/XXX'); #- close connection.
+	alarm 0; 
 
 	#- now add static mirror (in case of something wrong happened above).
 	add2hash(\%mirrors, \%static_mirrors);
