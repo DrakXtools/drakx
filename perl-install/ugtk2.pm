@@ -1062,13 +1062,14 @@ sub ask_browse_tree_info {
 	$toolbar->append_item(undef, $toolbar{$_}[0], undef, gtkcreate_img("$_.png"), $toolbar{$_}[1]);
     }
 
-    my $widgets = { w => $w, tree => $tree, tree_model => $tree_model, textcolumn => $textcolumn, pixcolumn => $pixcolumn,
-		    info => $info, status => $status };
-    ask_browse_tree_info_given_widgets($common, $widgets);
+    $common->{widgets} = { w => $w, tree => $tree, tree_model => $tree_model, textcolumn => $textcolumn, pixcolumn => $pixcolumn,
+                           info => $info, status => $status };
+    ask_browse_tree_info_given_widgets($common);
 }
 
 sub ask_browse_tree_info_given_widgets {
-    my ($common, $w) = @_;
+    my ($common) = @_;
+    my $w = $common->{widgets};
     my ($curr, $prev_label, $idle, $mouse_toggle_pending);
     my (%wtree, %ptree, %pix, %node_state, %state_stats);
     my $update_size = sub {
