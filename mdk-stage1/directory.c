@@ -92,7 +92,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				stage2_isos[stage2_iso_number++] = strdup(*file);
 			}
 
- 			umount(IMAGE_LOCATION);
+			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 		}
 
@@ -150,11 +150,13 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				      "(I need the subdirectory " RAMDISK_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", extract_list_directory(IMAGE_LOCATION));
+			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_ERROR;
 		}
 		if (load_ramdisk() != RETURN_OK) {
 			stg1_error_message("Could not load program into memory.");
+			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_ERROR;
 		}
@@ -171,6 +173,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 				      "(I need the subdirectory " LIVE_LOCATION ")\n"
 				      "Here's a short extract of the files in the directory:\n"
 				      "%s", extract_list_directory(IMAGE_LOCATION));
+			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_ERROR;
 		}
@@ -179,6 +182,7 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 			stg1_error_message("The " DISTRIB_NAME " Distribution seems to be copied on a Windows partition. "
 				      "You need more memory to perform an installation from a Windows partition. "
 				      "Another solution if to copy the " DISTRIB_NAME " Distribution on a Linux partition.");
+			umount(IMAGE_LOCATION);
 			del_loop(loopdev);
 			return RETURN_ERROR;
 		}
@@ -186,8 +190,10 @@ enum return_type try_with_directory(char *directory, char *method_live, char *me
 	}
 #endif
 
-	if (IS_RESCUE)
-                del_loop(loopdev);
+	if (IS_RESCUE) {
+		umount(IMAGE_LOCATION);
+		del_loop(loopdev);
+	}
 
 	return RETURN_OK;
 }
