@@ -53,23 +53,23 @@ sub read_interface_conf {
 }
 
 sub read_dhcpd_conf {
-    my ($file) = @_;
-    $file ||= "$::prefix/etc/dhcpd.conf";
-    { option_routers => [ cat_($file) =~ /^\s*option routers\s+(\S+);/mg ],
-      subnet_mask => [ if_(cat_($file) =~ /^\s*option subnet-mask\s+(.*);/mg, split(' ', $1)) ],
-      domain_name => [ if_(cat_($file) =~ /^\s*option domain-name\s+"(.*)";/mg, split(' ', $1)) ],
-      domain_name_servers => [ if_(cat_($file) =~ /^\s*option domain-name-servers\s+(.*);/m, split(' ', $1)) ],
-      dynamic_bootp => [ if_(cat_($file) =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*;/m, split(' ', $1)) ],
-      default_lease_time => [ if_(cat_($file) =~ /^\s*default-lease-time\s+(.*);/m, split(' ', $1)) ],
-      max_lease_time => [ if_(cat_($file) =~ /^\s*max-lease-time\s+(.*);/m, split(' ', $1)) ] };
+    my ($o_file) = @_;
+    my $s = cat_($o_file || "$::prefix/etc/dhcpd.conf");
+    { option_routers => [ $s =~ /^\s*option routers\s+(\S+);/mg ],
+      subnet_mask => [ if_($s =~ /^\s*option subnet-mask\s+(.*);/mg, split(' ', $1)) ],
+      domain_name => [ if_($s =~ /^\s*option domain-name\s+"(.*)";/mg, split(' ', $1)) ],
+      domain_name_servers => [ if_($s =~ /^\s*option domain-name-servers\s+(.*);/m, split(' ', $1)) ],
+      dynamic_bootp => [ if_($s =~ /^\s*range dynamic-bootp\s+\S+\.(\d+)\s+\S+\.(\d+)\s*;/m, split(' ', $1)) ],
+      default_lease_time => [ if_($s =~ /^\s*default-lease-time\s+(.*);/m, split(' ', $1)) ],
+      max_lease_time => [ if_($s =~ /^\s*max-lease-time\s+(.*);/m, split(' ', $1)) ] };
 }
 
 sub read_squid_conf {
-    my ($file) = @_;
-    $file ||= "$::prefix/etc/squid/squid.conf";
-    { http_port => [ cat_($file) =~ /^\s*http_port\s+(.*)/mg ],
-      cache_size => [ if_(cat_($file) =~ /^\s*cache_dir diskd\s+(.*)/mg, split(' ', $1)) ],
-      admin_mail => [ if_(cat_($file) =~ /^\s*err_html_text\s+(.*)/mg, split(' ', $1)) ] };
+    my ($o_file) = @_;
+    my $s = cat_($o_file || "$::prefix/etc/squid/squid.conf");
+    { http_port => [ $s =~ /^\s*http_port\s+(.*)/mg ],
+      cache_size => [ if_($s =~ /^\s*cache_dir diskd\s+(.*)/mg, split(' ', $1)) ],
+      admin_mail => [ if_($s =~ /^\s*err_html_text\s+(.*)/mg, split(' ', $1)) ] };
 }
 
 sub read_tmdns_conf() {
