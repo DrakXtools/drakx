@@ -314,8 +314,10 @@ sub setPackages($) {
 	require timezone;
 	require lang;
 	push @l, "isdn4k-utils" if ($o->{timezone}{timezone} || timezone::bestTimezone(lang::lang2text($o->{lang}))) =~ /Europe/;
+	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
 
 	#- add OpenGL games that are only usefull if a 3D accelerated card is installed.
+	my @gl = ();
 	if (detect_devices::matching_desc('Matrox.* G[24]00') ||
 	    detect_devices::matching_desc('Rage X[CL]') ||
 	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
@@ -324,15 +326,14 @@ sub setPackages($) {
 	    detect_devices::matching_desc('Voodoo Banshee') ||
 	    detect_devices::matching_desc('8281[05].* CGC') ||
 	    detect_devices::matching_desc('Rage 128')) {
-	    push @l, "xscreensaver-gl", "Mesa-demos", "xmms-mesa";
-	    push @l, "bzflag" if (!detect_devices::matching_desc('Rage X[CL]') &&
-				  !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
-				  !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
-	    push @l, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.
-	    push @l, "spacecup", "chromium";
+	    push @gl, "xscreensaver-gl", "Mesa-demos", "xmms-mesa";
+	    push @gl, "bzflag" if (!detect_devices::matching_desc('Rage X[CL]') &&
+				   !detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') &&
+				   !detect_devices::matching_desc('3D Rage (?:LT|Pro)'));
+	    push @gl, "csmash", "gltron" if (!detect_devices::matching_desc('Rage 128')); #- does not work well on transparancy.
+	    push @gl, "spacecup", "chromium";
 	}
-
-	$_->{values} = [ map { $_ + 50 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @l;
+	$_->{values} = [ map { $_ + 60 } @{$_->{values}} ] foreach grep {$_} map { pkgs::packageByName($o->{packages}, $_) } @gl;
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.

@@ -15,19 +15,29 @@ done
 /bin/cp -a "$dir/../../Mandrake/mdkinst" "/tmp/drakx"
 
 if [ -x "/tmp/drakx/mdkinst/usr/bin/perl-install/live_install2" ]; then
-    $perlcoredir=/usr/lib/perl5/5.6.0/i386-linux/CORE
+    perlcoredir=/usr/lib/perl5/5.6.0/i386-linux/CORE
     cd /tmp/drakx/mdkinst/usr/bin/perl-install
     if [ -x $perlcoredir/libperl.so ]; then
 	mv $perlcoredir/libperl.so /tmp/drakx/mdkinst
-    else
-	mkdir -p $perlcoredir
-	ln -sf /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
     fi
+    mkdir -p $perlcoredir
+    ln -sf /tmp/drakx/mdkinst/$perlcoredir/libperl.so $perlcoredir/libperl.so
 
+    if [ -x /usr/bin/packdrake ]; then
+	mv /usr/bin/packdrake /tmp/drakx/mdkinst
+    fi
+    ln -sf /tmp/drakx/mdkinst/usr/bin/packdrake /usr/bin/packdrake
+
+    # start DrakX
     ../../../lib/ld-linux.so.2 ../perl ./live_install2
 
+    rm -f /usr/bin/packdrake
+    if [ -x /tmp/drakx/mdkinst/packdrake ]; then
+	mv /tmp/drakx/mdkinst/packdrake.so /usr/bin/packdrake
+    fi
+
     rm -f $perlcoredir/libperl.so
-    if [ -x /tmp/drakx/mdkinst ]; then
+    if [ -x /tmp/drakx/mdkinst/libperl.so ]; then
 	mv /tmp/drakx/mdkinst/libperl.so $perlcoredir/libperl.so
     fi
 else
