@@ -386,10 +386,31 @@ image = cd:,\\\\\\\\vmlinux
     initrd-size = 32000
     append = \" text video=ofonly\"
 
+image = enet:0,vmlinux
+    label = install-net
+    root = /dev/ram3
+    initrd = enet:0,all.gz
+    initrd-size = 32000
+    append = \" video=ofonly\"
+
+image = enet:0,vmlinux
+    label = install-net-text
+    root = /dev/ram3
+    initrd = enet:0,all.gz
+    initrd-size = 32000
+    append = \" text video=ofonly\"
+
 image = cd:,\\\\\\\\vmlinux
     label = rescue
     root = /dev/ram3
     initrd = cd:,\\\\\\\\all.gz
+    initrd-size = 32000
+    append = \" rescue video=ofonly\"    
+
+image = enet:0,vmlinux
+    label = rescue-net
+    root = /dev/ram3
+    initrd = enet:0,all.gz
     initrd-size = 32000
     append = \" rescue video=ofonly\"    
 ");
