@@ -1,16 +1,19 @@
+-=-=--
 DrakX is a very big project, and it needs special setups to work.
 The purpose of this file is to explain how you can setup your box to make it
-compile and run safely.
+compile and run.
+-=-=--
 
-[ Caution!!! This file isn't finished yet, so it isn't 100% safe to use it on
-  a production machine ]
+Beware, don't try this on a production machine with important data.
+
 
 --------------------------------------------------------------------------
 Sources installation:
 
-  First grab the gi.tar.bz2 archive and untar it in your home directory.
+  First grab the gi.tar.bz2 archive and untar it in your home directory,
+for example from DrakX-*.src.rpm on your Linux-Mandrake distribution.
+
 cd to gi
-If you're not Pixel, run this:
 for i in `du -a | grep CVS/Root | cut -f 2`
 do
   sed -e 's/prigaux/anoncvs/' $i > $i.tmp
@@ -18,25 +21,70 @@ do
 done
 
 Then, log yourself into the cvs:
-cvs login
-(The Password is 'cvs')
+% export CVSROOT=:pserver:anoncvs@mandrakesoft.com:/home/cvs/cooker
+% cvs login
+% Passwd: cvs
+% cvs checkout gi
+
 And update the gi package:
 cvs update -P
+
 
 --------------------------------------------------------------------------
 Preparing the compilation process:
 
-create a /export directory and copy a recent Mandrake-Linux CD in there.
-(You don't have to put have all the RPMS...)
+(1) target directory
 
-return to the gi directory, and type:
-ln -s /usr/bin/perl .
-make
+create a /export directory and copy a recent Mandrake-Linux CD in there.
+(You don't have to put have all the RPMS...) ; you'll need roughly 1.5
+Gbytes for a full install.
+
+[gc@obiwan ~/cvs/gi] su -c "mkdir /export"
+
+
+(2) devel packages
+
+you need quite a few devel packages to run the stuff; roughly: gcc, make,
+glibc-devel, perl-devel, XFree86-devel, libglib-devel, libgtk+-devel,
+perl-GTK, ldetect*, libslang-devel, libnewt-devel, e2fsprogs, dosfstools,
+rpm-devel, popt-devel, rpmtools.
+
+
+(3) sudo
+
+never build or run DrakX as root; install package sudo, and set up
+relevant permissions; the following should be enough: (in your
+/etc/sudoers)
+
+gc ALL=(root) NOPASSWD:/usr/bin/patch,NOPASSWD:/bin/rpm,NOPASSWD:/bin/mount,NOPASSWD:/bin/cp,NOPASSWD:/bin/umount,NOPASSWD:/usr/bin/install,NOPASSWD:/bin/rm,NOPASSWD:/bin/mv,NOPASSWD:/bin/tar,NOPASSWD:/bin/cpio,NOPASSWD:/bin/chown,NOPASSWD:/bin/mkdir,NOPASSWD:/usr/bin/strip
+
+
+(4) boot kernel
+
+you need a boot kernel and some kind of modules for each boot floppy. it's
+located in subdirectory "kernel" in DrakX-*.src.rpm ; if you ever grab (or
+build) another boot kernel, re-do following step (c).
+
+	(a) build the packager software for stage1 (read README file to know what's stage1)
+	[gc@obiwan ~/cvs/gi] cd mdk-stage1/mar
+	[gc@obiwan ~/cvs/gi/mdk-stage1/mar] make
+
+	(b) build the perl stuff for stage2
+	[gc@obiwan ~/cvs/gi] cd perl-install
+	[gc@obiwan ~/cvs/gi/perl-install] make
+
+	(c) build kernel/modules stuff for stage1 and stage2
+	[gc@obiwan ~/cvs/gi] ./update_kernel
+
+
+(5) pray
+
+[gc@obiwan ~/cvs/gi] make
 
 
 ---------------------------------------------------------------------------
-The comments are written with #-
-You should use #+ instead of #- if the code is i18n'ed
+The comments written with #- are automatically stripped out at install.
+
 
 ---------------------------------------------------------------------------
 testing all:
@@ -48,15 +96,10 @@ testing all:
 NEVER compile and/or execute DrakX as root!
 
 
--- 
- DindinX <odin@mandrakesoft.com>
- Last change: Mon Feb 21 12:47:06 CET 2000
 
 
-(dam's):
-
-Here is how I made it work on my computer.
-------------------------------------------
+Here is how I (dams) made it work on my computer.
+-------------------------------------------------
 
 - get the sources
 - install the librairies needed included newt-devel gtk+-devel popt-devel popt gtk-engines
@@ -73,7 +116,6 @@ Here is how I made it work on my computer.
 - cd path/to/gi/perl-install
 - ./install2 in root (dangerous) or chmod a+r /dev/hd* and ./install2 in user
 
---
- dam's
- Last change : Thu Jul 20 14:15:30 CET 2000
 
+
+address all bugreports to dave@null.com

@@ -20,6 +20,23 @@
 + default config
 + i18n (bootloader keyboard)
 
++ More user-friendliness in general:
+	+ you can choose between multiple net devices when more than one are
+	detected
+	+ you are presented with the media descriptions (disks, cdrom's)
+	when you must choose between multiple media, and not only "sda",
+	"hdc", ..
+	+ when installing from a disk partition, you are presented with an
+	extract of the directory contents when you fail to give the
+	correct location, which is very helpful to correct the input
+	instead of simply rebooting to remember where on earth you
+	mirrored the distribution on your disks
++ Automatic mode (Redhat's equivalent is called "kickstart") is not
+  performed according to a file on the floppy but from kernel parameters,
+  which have many pros, among them: (1) we don't need the vfat filesystem
+  for that purpose, and (2) with advanced bootloaders such as grub and
+  lilo you can edit parameters on the fly at boot time.
+
 - no LABEL= in fstab (for auto renumbering of devices)
 - kerberos
 - LDAP
