@@ -30,7 +30,7 @@ use ugtk2 qw(:helpers :wrappers :create);
 use common;
 use network::netconnect;
 use network::tools;
-use MDK::Common::Globals "network", qw($in $prefix $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in);
 
 if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
 my $force = "@ARGV" =~ /--force/;
@@ -75,12 +75,7 @@ my ($width, $height) = (300, 150);
 
 network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
-MDK::Common::Globals::init(
-			   in => $in,
-			   prefix => '',
-			   connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
-			   disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-			   connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg");
+MDK::Common::Globals::init(in => $in);
 
 gtkadd($window1->{window},
        gtkpack_(Gtk2::VBox->new(0,5),
@@ -423,7 +418,7 @@ sub update() {
          $button_connect->set("label", $isconnected == 1 ? N("Disconnect %s", $netcnx->{type}) : N("Connect %s", $netcnx->{type}));
 	    $button_connect->set_sensitive(1);
 	}
-    if (!(-e $connect_file && -e $disconnect_file)) {
+    if (!(-e $network::tools::connect_file && -e $network::tools::disconnect_file)) {
 	$button_connect->set_sensitive(0);
 	$button_connect->set("label", N("No internet connection configured"));
     }

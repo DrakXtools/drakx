@@ -10,7 +10,7 @@ use any;
 use mouse;
 use network::network;
 use network::tools;
-use MDK::Common::Globals "network", qw($in $connect_file $disconnect_file $connect_prog);
+use MDK::Common::Globals "network", qw($in);
 
 my %conf;
 
@@ -40,11 +40,7 @@ sub detect {
 
 sub init_globals {
     my ($in) = @_;
-    MDK::Common::Globals::init(
-			       in => $in,
-			       connect_file => "/etc/sysconfig/network-scripts/net_cnx_up",
-			       disconnect_file => "/etc/sysconfig/network-scripts/net_cnx_down",
-			       connect_prog => "/etc/sysconfig/network-scripts/net_cnx_pg");
+    MDK::Common::Globals::init(in => $in);
 }
 
 sub detect_timezone() {
@@ -1045,9 +1041,10 @@ Click on Ok to keep your configuration, or cancel to reconfigure your Internet &
 "), 1) 
                 and do {
                     $netcnx->{type} = 'lan';
-                    output_with_perm("$::prefix$connect_file", 0755, qq(ifup eth0
+                    write_cnx_file(
+                                   "$::prefix$network::tools::connect_file", 0755, qq(ifup eth0
 ));
-                    output("$::prefix$disconnect_file", 0755, qq(
+                    output("$::prefix$network::tools::disconnect_file", 0755, qq(
 ifdown eth0
 ));
                     $direct_net_install = 1;
@@ -1081,7 +1078,7 @@ if [ -n "\$DISPLAY" ]; then
 		/usr/sbin/net_monitor --connect
 	fi
 	else
-	$connect_file
+	$network::tools::connect_file
 fi
 );
     } elsif ($netcnx->{type}) {
@@ -1090,7 +1087,7 @@ fi
 if [ -n "\$DISPLAY" ]; then
 	/usr/sbin/net_monitor --connect
 else
-	$connect_file
+	$network::tools::connect_file
 fi
 );
     } else {
@@ -1105,11 +1102,11 @@ fi
 if [ -n "\$DISPLAY" ]; then
 	/usr/sbin/net_monitor --connect
 else
-	$connect_file
+	$network::tools::connect_file
 fi
 );
     }
-    output_with_perm("$::prefix$connect_prog", 0755, $connect_cmd) if $connect_cmd;
+    output_with_perm("$::prefix$network::tools::connect_prog", 0755, $connect_cmd) if $connect_cmd;
     $netcnx->{$_} = $netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     $netcnx->{type} =~ /adsl/ or system("/sbin/chkconfig --del adsl 2> /dev/null");
 
@@ -1158,7 +1155,7 @@ sub load_conf {
 }
 
 sub get_net_device() {
-    my $connect_file = "/etc/sysconfig/network-scripts/net_cnx_up";
+    my $connect_file = $network::tools::connect_file;
     my $network_file = "/etc/sysconfig/network";
 		if (cat_("$::prefix$connect_file") =~ /ifup/) {
   		if_(cat_($connect_file) =~ /^\s*ifup\s+(.*)/m, split(' ', $1))
@@ -1182,13 +1179,13 @@ sub start_internet {
     init_globals($o);
     #- give a chance for module to be loaded using kernel-BOOT modules...
     $::isStandalone or modules::load_category('network/main|gigabit|usb');
-    run_program::rooted($::prefix, $connect_file);
+    run_program::rooted($::prefix, $network::tools::connect_file);
 }
 
 sub stop_internet {
     my ($o) = @_;
     init_globals($o);
-    run_program::rooted($::prefix, $disconnect_file);
+    run_program::rooted($::prefix, $network::tools::disconnect_file);
 }
 
 1;
