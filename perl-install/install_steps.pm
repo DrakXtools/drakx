@@ -17,6 +17,7 @@ use lang;
 use keyboard;
 use fsedit;
 use loopback;
+use do_pkgs;
 use pkgs;
 use any;
 use log;
