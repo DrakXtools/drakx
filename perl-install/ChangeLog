@@ -1,3 +1,45 @@
+2004/03/12  fwang
+
+	* share/po/zh_CN.po: Updated Simplified Chinese translation
+
+2004/03/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po: updated Norwegian file
+
+	* lang.pm: improved previous change
+	always define KDM fonts dependending on encoding (fix for bug #8714)
+
+2004/03/12  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10-22mdk
+
+	* standalone/drakconnect (build_notebook) default protocol is dhcp (eg for
+	unconfigured
+	interfaces), thus preventing ip checks faillure on protocol change on
+	other network interfaces
+	(apply) do not write IPADDR, NETMASK and NETWORK fields in ifcfg-ethX
+	when using DHCP
+	(apply) factorize interface hash
+	(apply) fix crash (is_dynamic_ip expect a hash of network interaces,
+	not a single interface)
+	(configure_net) kill useless code
+	(configure_net) fix layout by using a table
+	remove a few more parameters
+	(configure_net) get rid of mask now we've cleaned up parameters
+	only show dns from resolv.conf for now
+	(configure_net) remove some parameters according to specs
+	(configure_net) sanitize buttons layout (#8637)
+
+	* network/netconnect.pm: provide a nice way to go back to summary when
+	interface is already configured (#8002)
+	fix buttons so that they're labeled as cancel/ok instead of
+	previous/next when warning in network installations
+	fix writing drakconnect config file at install time (#7478)
+
+	* standalone/drakfont (advanced_install) "Install" button is sensitive
+	only if there're some
+	fonts in the font list
+
 2004/03/12  Frederic Lepied  <flepied at mandrakesoft.com>
 
 	* share/rpmsrate: removed audacity (in contrib)
@@ -28947,7 +28989,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.907 2004/03/10 16:47:50 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.908 2004/03/12 08:52:37 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
