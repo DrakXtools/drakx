@@ -74,11 +74,18 @@ Security Administrator:
     gtkpack_(gtkshow(new Gtk2::HBox(0, 0)), 1, $text);
 }
 
-sub new_editable_combo {
+sub new_nonedit_combo {
     my ($string_list, $o_default_value) = @_;
     my $w = new Gtk2::OptionMenu();
     $w->set_popdown_strings(to_i18n(@$string_list)) unless is_empty_array_ref $string_list;
     $w->entry->set_text(to_i18n($o_default_value)) if $o_default_value;
+    $w;
+}
+
+sub new_wrapped_label {
+    my ($label) = @_;
+    my $w = Gtk2::Label->new($label);
+    $w->set_line_wrap(1);
     $w;
 }
 
@@ -132,7 +139,7 @@ $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
                                                               my $current_level = security::level::get_string();
                                                               
                                                               push(@sec_levels, $current_level) unless member($current_level, @sec_levels);
-                                                              $seclevel_entry = new_editable_combo(\@sec_levels, $current_level);
+                                                              $seclevel_entry = new_nonedit_combo(\@sec_levels, $current_level);
                                                               
                                                               new Gtk2::Label(N("Security Level:")), $seclevel_entry;
                                                           }
@@ -156,7 +163,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
     my ($domain, $label) = @$_;
     my %values;
     $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
-                                                                   0, new Gtk2::Label($help_msg),
+                                                                   0, Gtk2::Label->new($help_msg),
                                                                    1, create_packtable($common_opts,
                                                                                        map {
                                                                                            my $i = $_;
@@ -164,7 +171,7 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            my $entry;
                                                                                            my $default = $msec->get_function_default($i);
                                                                                            if (member($default, @all_choices)) {
-                                                                                               $values{$i} = new_editable_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
+                                                                                               $values{$i} = new_nonedit_combo(member($default, @yesno_choices) ? \@yesno_choices : if_(member($default, @alllocal_choices), \@alllocal_choices));
                                                                                                $entry = $values{$i}->entry;
                                                                                            } else {
                                                                                                $values{$i} = new Gtk2::Entry();
@@ -172,9 +179,9 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
                                                                                            }
                                                                                            $entry->set_text($msec->get_function_value($i));
                                                                                            set_help_tip($entry, $default, $i);
-                                                                                           [ Gtk2::Label->new($fields{$i} || $i), $values{$i} ];
+                                                                                           [ new_wrapped_label($fields{$i} || $i), $values{$i} ];
                                                                                        } sort $msec->list_functions($domain))))),
-                           new Gtk2::Label($label));
+                           new_wrapped_label($label));
     $options_values{$domain} = \%values;
 }
 
@@ -182,14 +189,14 @@ foreach ([ 'network', N("Network Options") ], [ 'system', N("System Options") ])
 my %security_checks_value;
 
 $notebook->append_page(gtkshow(create_scrolled_window(gtkpack_(new Gtk2::VBox(0, 0),
-                                                               0, new Gtk2::Label($help_msg),
+                                                               0, Gtk2::Label->new($help_msg),
                                                                1, create_packtable($common_opts,
                                                                                    map {
                                                                                        my $i = $_;
-                                                                                       $security_checks_value{$i} = new_editable_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($i));
+                                                                                       $security_checks_value{$i} = new_nonedit_combo([ 'yes', 'no', 'default' ], $msec->get_check_value($i));
                                                                                        my $entry = $security_checks_value{$i}->entry;
                                                                                        set_help_tip($entry, $msec->get_check_default($i), $i);
-                                                                                       [ gtkshow(new Gtk2::Label($fields{$i} || translate($i))), $security_checks_value{$i} ];
+                                                                                       [ gtkshow(new_wrapped_label($fields{$i} || translate($i))), $security_checks_value{$i} ];
                                                                                    } sort $msec->list_checks)))),
                        new Gtk2::Label(N("Periodic Checks")));
 
