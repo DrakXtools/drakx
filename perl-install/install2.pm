@@ -512,7 +512,7 @@ sub main {
     } modules::probe_category('multimedia/sound');
 
     #- needed very early for install_steps_gtk
-    eval { ($o->{mouse}, @{$o->{wacom} = []}) = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
+    eval { $o->{mouse} = mouse::detect() } unless $o->{nomouseprobe} || $o->{mouse};
 
     $o->{lang} = lang::set($o->{lang}) if $o->{lang} ne 'en_US'; #- mainly for defcfg
 
