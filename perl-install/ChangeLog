@@ -4,6 +4,42 @@
 
 2001/08/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
 
+	* install_any.pm: oops, fix type of installing X or not
+	  - fix choice of packages when auto install
+
+	* Makefile.config: add drakautoinst in drakxtools standalone binaries
+
+	* install_steps_interactive.pm, install2.pm: 
+	  - fix createBootdisk with auto
+	  - fix setupBootloader with auto
+	  - fix behaviour of draknet when auto-install
+	  - remove auto flag when error-in-step
+
+	* install_steps.pm, network/netconnect.pm: 
+	  - fix behaviour of draknet when auto-install
+	  - remove auto flag when error-in-step
+
+	* Xconfigurator.pm: fix automatic configuration
+
+2001/08/14  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+2001/08/14  Pixel  <pixel@mandrakesoft.com>
+
+	* Xconfigurator.pm: fix typo?
+
+2001/08/14  Till Kamppeter <till@mandrakesoft.com>
+
+	* printerdrake.pm: Transfer queues non-interactively when switching
+	between LPD and LPRng.
+
+2001/08/14  dam's  <damien@mandrakesoft.com>
+
+	* standalone/draknet: corrected activation button
+
+2001/08/14  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
 	* install_steps.pm, install_steps_interactive.pm, install2.pm,
 	network/netconnect.pm: 
 	  - fix behaviour of draknet when auto-install
