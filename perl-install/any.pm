@@ -731,7 +731,7 @@ sub ask_users {
             { label => _("Password (again)"), val => \$u->{password2}, hidden => 1 },
             { label => _("Shell"), val => \$u->{shell}, list => [ shells($prefix) ], not_edit => !$::expert, advanced => 1 },
 	      if_($security <= 3 && @icons,
-	    { label => _("Icon"), val => \$u->{icon}, list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
+	    { label => _("Icon"), val => \ ($u->{icon} ||= 'man'), list => \@icons, icon2f => sub { face2png($_[0], $prefix) }, format => \&translate },
 	      ),
            ],
         );
