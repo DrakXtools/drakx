@@ -25,8 +25,8 @@ function create_marfile() {
 
 [ -e kernel/cardmgr ] && (
     cd kernel/cardmgr
-    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
-    gcc -o cardmgr *.o main.c
+#    echo "int main(int argc, char **argv) { cardmgr_main(argc, argv); }" > main.c
+    gcc -o cardmgr *.o #main.c
 )
 
 ARCH=`uname -m | sed -e 's/i.86/i386/' -e 's/sparc.*/sparc/'`
