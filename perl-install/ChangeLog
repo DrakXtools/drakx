@@ -1,5 +1,43 @@
 2002/01/21  dam's  <damien@mandrakesoft.com>
 
+	* install_steps.pm: fixed network conf in auto install
+	corrected network down
+
+	* my_gtk.pm: removed debug print
+	icons widget improvment : icon placment, highlighting
+
+2002/01/21  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: increase the size of the "Choose action" box
+
+	* diskdrake_interactive.pm: remove the "Active" partition feature
+
+	* interactive_gtk.pm, my_gtk.pm: hopefully better dialog box sizing
+
+	* install2.pm: can't call any::config_libsafe so early during install,
+	move it where msec is called
+
+	* install_steps_interactive.pm: can't call any::config_libsafe so early
+	during install, move it where msec is called
+	cleanup, update, enhance security level choice
+
+	* standalone/draksec: cleanup, update, enhance security level choice
+
+	* install_steps.pm: remove deprecated msec groups adding
+	cleanup
+
+	* tools/i386/netboot/stage2.3c90x, tools/i386/netboot/grub: newer grub
+
+	* any.pm: quiet perl's warning
+	cleanup, update, enhance security level choice
+	when creating users, add handling of xgrp/rpm/adm/wheel groups in high
+	security
+	fix advice about "usermod -G"
+
+	* tools/i386/netboot/menu.lst.example: add gateway parameter
+
+2002/01/21  dam's  <damien@mandrakesoft.com>
+
 	* share/logo-mandrake.png: new ugly icon
 
 	* install_steps.pm: corrected network down
