@@ -291,8 +291,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-
 * Tue Mar  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-14mdk
+- drakconnect: fixes in isdn configuration (flepied)
 - drakperm:
   o fix #1776
   o fix small memory leak (tree iterators)
