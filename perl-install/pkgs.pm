@@ -207,6 +207,7 @@ sub bestKernelPackage {
     my @prefered_exts = 
       is_xbox() ? '-xbox' :
       detect_devices::is_i586() ? '-i586-up-1GB' :
+      !detect_devices::has_cpu_flag('pae') ? '-i686-up-4GB' :
       detect_devices::BIGMEM() ? ('-enterprise', '-smp') : 
       detect_devices::hasSMP() ? '-smp' : 
       '';

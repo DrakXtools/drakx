@@ -860,8 +860,11 @@ sub BIGMEM() {
 sub is_i586() {
     my $cpuinfo = cat_('/proc/cpuinfo');
     $cpuinfo =~ /^cpu family\s*:\s*(\d+)/m && $1 < 6 ||
-      $cpuinfo !~ /^flags.*\bcmov\b/m ||
-      $cpuinfo !~ /^flags.*\bpae\b/m;
+      !has_cpu_flag('cmov');
+}
+sub has_cpu_flag {
+    my ($flag) = @_;
+    cat_('/proc/cpuinfo') =~ /^flags.*\b$flag\b/m;
 }
 
 sub matching_type {
