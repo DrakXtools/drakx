@@ -4,8 +4,7 @@ if ($ARGV[0] ne '-f') {
     print "Call it with option -f, but don't fear loosing all your data, this command is dangerous!";
     exit 1;
 }
-
-my ($yes, $hd, $cd);
+my ($mode, $yes, $hd, $cd) = ($ARGV[1]);
 
 #- avoid globing as it is not available in rescue ramdisk.
 foreach my $device (split ' ', `/bin/ls -d /proc/ide/hd*`) {
@@ -355,7 +354,7 @@ sub select_packages {
 
     $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}} } @{$o->{compssUsersSorted}};
     $o->{compssUsersChoice}{SYSTEM} = 1;
-    @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
+    $mode =~ /server/i or @{$o->{compssUsersChoice}}{grep { /SERVER/ } keys %{$o->{compssUsersChoice}}} = ();
 
     my $lang_pkg = $lang && pkgs::packageByName($o->{packages}, "locales-$lang");
     if ($lang_pkg) {
