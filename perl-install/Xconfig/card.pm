@@ -263,8 +263,11 @@ sub configure_auto_install {
     }
 
     my @cards = probe();
-    my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards) or log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{server} or $o->{card}{card_name}'), return;
-    my $card = $choice->{code}();
+    my ($choice) = multi_head_choices($old_X->{Xinerama}, @cards);
+    my $card = $choice ? $choice->{code}() : do {
+	log::l('no graphic card probed, try providing one using $o->{card}{Driver} or $o->{card}{server} or $o->{card}{card_name}. Defaulting...');
+	{ Driver => ($options->{allowFB} ? 'fbdev' : 'vesa') };
+    };
 
     my ($glx_choice) = xfree_and_glx_choices($card);
     log::l("Using $glx_choice->{text}");
