@@ -318,7 +318,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Tue Feb 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-9mdk
 - drakconnect: alter both /etc/analog/adiusbadsl.conf and
-  /etc/eagle-usb/eagle-usb.conf too when configuring sagemXXX
+  /etc/eagle-usb/eagle-usb.conf when configuring sagemXXX
 
 * Tue Feb 24 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-8mdk
 - drakconnect wizard:
