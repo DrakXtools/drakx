@@ -176,10 +176,16 @@ sub get_append {
 sub add_append {
     my ($b, $key, $val) = @_;
 
-    foreach ({ append => $b->{perImageAppend} }, @{$b->{entries}}) {
-	$_->{append} =~ s/\b$key=\S*\s*//;
-	$_->{append} =~ s/\s*$/ $key=$val/ if $val;
+    foreach (\$b->{perImageAppend}, map { \$_->{append} } @{$b->{entries}}) {
+	$$_ =~ s/\b$key=\S*\s*//;
+	$$_ =~ s/\s*$/ $key=$val/ if $val;
+	log::l("add_append: $$_");
     }
+    log::l("add_append: $b->{perImageAppend}");
+}
+sub may_append {
+    my ($b, $key, $val) = @_;
+    add_append($b, $key, $val) if !get_append($b, $key);
 }
 
 sub configure_entry($$) {
@@ -316,6 +322,11 @@ wait %d seconds for default boot.
 
     add2hash_($lilo, { getVarsFromSh("$prefix/etc/sysconfig/system") }); #- for CLEAN_TMP
     add2hash_($lilo, { memsize => $1 }) if cat_("/proc/cmdline") =~ /mem=(\S+)/;
+    if (my ($s, $port, $speed) = cat_("/proc/cmdline") =~ /console=(ttyS(\d),(\d+)\S*)/) {
+	log::l("serial console $s $port $speed");
+	add_append($lilo, 'console' => $s);
+	any::set_login_serial_console($prefix, $port, $speed);
+    }
 
     my %labels = get_kernels_and_labels($prefix);
     $labels{''} or die "no kernel installed";
@@ -655,6 +666,7 @@ sub write_lilo_conf {
 	$lilo->{$_} and print F $_ foreach qw(linear lba32 compact prompt restricted);
  	print F "password=", $lilo->{password} if $lilo->{restricted} && $lilo->{password}; #- also done by msec
 	print F "timeout=", round(10 * $lilo->{timeout}) if $lilo->{timeout};
+	print F "serial=", $1 if get_append($lilo, 'console') =~ /ttyS(.*)/;
 
 	my $dev = $hds->[0]{device};
 	my %dev2bios = map_index { $_ => $::i } dev2bios($hds, $lilo->{boot});
@@ -772,6 +784,8 @@ sub write_grub_config {
 	print F "color black/cyan yellow/cyan";
 	print F "i18n ", $file2grub->("/boot/grub/messages");
 	print F "keytable ", $file2grub->($lilo->{keytable}) if $lilo->{keytable};
+	print F "serial --unit=$1 --speed=$2\nterminal serial console" if get_append($lilo, 'console') =~ /ttyS(\d),(\d+)/;
+
 	#- since we use notail in reiserfs, altconfigfile is broken :-(
 	unless ($bootIsReiser) {
 	    print F "altconfigfile ", $file2grub->(my $once = "/boot/grub/menu.once");

@@ -152,10 +152,8 @@ sub doPartitionDisksAfter {
     $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
     fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
 
-    # do not use devfs with root software raid
-    foreach ($o->{bootloader}{perImageAppend}) {
-	$_ .= ' devfs=mount' if !/devfs=/;
-    }
+    require bootloader;
+    bootloader::may_append($o->{bootloader}, devfs => 'mount');
     
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation =~ /NewWorld/) {
 	die "Need bootstrap partition to boot system!" if !(defined $partition_table_mac::bootstrap_part);
