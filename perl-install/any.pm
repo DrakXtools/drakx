@@ -942,16 +942,17 @@ sub report_bug {
 
 sub devfssymlinkf {
     my ($o_if, $of, $prefix) = @_;
+    my $if = $o_if->{device};
 
-    my $if = $o_if->{devfs_device};
-    $if ||= devices::to_devfs($o_if->{device});
-    $if ||= $o_if->{device};
+    my $devfs_if = $o_if->{devfs_device};
+    $devsfs_if ||= devices::to_devfs($o_if->{device});
+    $devsfs_if ||= $o_if->{device};
 
     symlinkf($if, "$prefix/dev/$of");
 
     output_p("$prefix/etc/devfs/conf.d/$of.conf", 
-"REGISTER	^$if\$	CFUNCTION GLOBAL symlink $if $of
-UNREGISTER	^$if\$	CFUNCTION GLOBAL unlink $of
+"REGISTER	^$devfs_if\$	CFUNCTION GLOBAL symlink $devfs_if $of
+UNREGISTER	^$devfs_if\$	CFUNCTION GLOBAL unlink $of
 ");
 }
 
