@@ -266,8 +266,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_sbindir/convert-
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog 
-* Mon Sep  2 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.9-28mdk
-- s/tinyfirewall/drakfirewall/
+* Mon Sep  2 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-28mdk
+- tinyfirewall is now drakfirewall (daouda)
 
 * Fri Aug 30 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-27mdk
 - ugtk: add alpha blendering support for mcc's icons through pixbufs
