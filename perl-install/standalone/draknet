@@ -39,8 +39,10 @@ local $_ = join '', @ARGV;
 #/-h/ and die "usage: draknet[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
 
 my $netcnx = {};
+my $netc = {};
+my $intf = {};
 
-$::isWizard = 0;
+$::isWizard = 1;
 $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 #$::force_xf3 = /-xf3/;
 #$::beginner = /-beginner/;
@@ -56,7 +58,7 @@ $::wizard_xpm = "/usr/share/pixmaps/internet.xpm";
 
 my $in = vnew interactive('su');
 
-goto dd;
+#goto dd;
 my $window1 = new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -80,6 +82,8 @@ $hbox2->pack_start(new Gtk::Label($hostname),0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
 
+netconnect::load_conf('', $netcnx, $netc, $intf);
+
 my $frame1 = new Gtk::Frame (_("Internet access"));
 $vbox1->pack_start($frame1,1,1,0);
 my $table1 = new Gtk::Table (3,3, 0);
@@ -90,11 +94,12 @@ $frame1->add($table1);
 #attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
 $table1->attach(new Gtk::Label(_("Type:")), 0, 1, 0, 1, 'fill', 'fill',0,0);
-my $label4 = new Gtk::Label(_("isdn_internal"));
+print "type : $netcnx->{type}\n";
+my $label4 = new Gtk::Label($netcnx->{type});
 $table1->attach($label4, 1, 2, 0, 1, 'fill', 'fill',0,0);
-my $label5 = new Gtk::Label(_("Interface:"));
+my $label5 = new Gtk::Label($netcnx->{type} eq 'lan' ? _("Gateway:") : _("Interface:"));
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
-my $label6 = new Gtk::Label("ippp0");
+my $label6 = new Gtk::Label($netcnx->{type} eq 'lan' ? $netc->{GATEWAY} : $netc->{NET_INTERFACE});
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
 my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
@@ -103,7 +108,7 @@ $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
 
 my $button1 = new Gtk::Button(_("Configure..."));
 $table1->attach($button1, 2, 3, 0, 2, 'fill', 'fill',0,0);
-$button1->signal_connect( 'clicked', \&configure_net );
+$button1->signal_connect( clicked => [ \&configure_net, '', $netcnx, $netc, $intf]);
 
 my $button2 = new Gtk::Button(_("Connect..."));
 $table1->attach($button2, 2, 3, 2, 3, 'fill', 'fill',0,0);
@@ -116,10 +121,7 @@ $vbox1->pack_start($frame2,1,1,0);
 my$table2 = new Gtk::Table (3,2, 0);
 $table2->set_row_spacings(5);
 $table2->set_col_spacings(5);
-#$table1->border_width(10);
 $frame2->add($table2);
-#attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
-#$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
 my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
 $table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
 my $label10 = new Gtk::Label(_("isdn_internal"));
@@ -143,8 +145,10 @@ netconnect::intro('', $netcnx, $in, -e "/etc/pcmcia", sub {});#\&standalone::pkg
 $in->exit(0);
 
 sub configure_net {
+    my (undef, $prefix, $netcnx, $netc, $intf) = @_;
+    my $cnx={};
+    $cnx=$netcnx->{netcnx->{type}};
     my $auto_detect={};
-
     my $window = new Gtk::Window -toplevel;
     $window->signal_connect ( delete_event => sub { Gtk->main_quit; });
     $window->set_position(1);
@@ -174,23 +178,49 @@ sub configure_net {
     $table2->set_col_spacings(5);
     $frame1->add($table2);
     my $i=0;
-    foreach (_("Card IRQ"), _("Card mem (DMA)"), _("Card IO"), _("Card IO_0"), _("Card IO_1"), _("Your personal phone number"), _("Provider name (ex provider.net)"), _("Provider phone number"), _("Provider dns 1"), _("Provider dns 2"), _("Account Login (user name)"), _("Account Password")) {
-	$infos[2*$i]=new Gtk::Label(_($_));
+    foreach ([_("Card IRQ"), \$cnx->{irq}],
+	     [_("Card mem (DMA)"), \$cnx->{mem}],
+	     [_("Card IO"), \$cnx->{io}],
+	     [_("Card IO_0"), \$cnx->{io0} ],
+	     [_("Card IO_1"), \$cnx->{io1}],
+	     [_("Your personal phone number"), \$cnx->{phone_in}],
+	     [_("Provider name (ex provider.net)"), \$netc->{DOMAINNAME2}],
+	     [_("Provider phone number"), \$cnx->{phone_out}],
+	     [_("Provider dns 1 (optional)"), \$netc->{dnsServer2}],
+	     [_("Provider dns 2 (optional)"), \$netc->{dnsServer3}],
+	     [_("Account Login (user name)"), \$cnx->{login}],
+	     [_("Account Password"), \$cnx->{passwd}],
+	     [_("Gateway"), \$netc->{GATEWAY}]) {
+	$infos[2*$i]=new Gtk::Label($_->[0]);
   	$table2->attach($infos[2*$i], 0, 1, $i+1, $i+2, 'fill', 'fill',0,0);
   	$infos[2*$i+1]=new Gtk::Entry();
+	$infos[2*$i+1]->set_text(${$_->[1]});
   	$table2->attach($infos[2*$i+1], 1, 2, $i+1, $i+2, 'fill', 'fill',0,0);
   	$i++;
     }
+    my @mask;
+    @mask = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1) if $netcnx->{type} eq 'lan';
+    @mask = (0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} ne 'pci';
+    @mask = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0) if $netcnx->{type} eq 'isdn_internal' && $cnx->{card_type} eq 'isa';
     $vbox1->pack_start(new Gtk::HSeparator,0,0,5);
+
+
     my $bbox1 = new Gtk::HButtonBox;
     $vbox1->pack_start($bbox1,0,0,0);
     $bbox1->set_layout(-end);
-    my $button1 = new Gtk::Button "OK";
-    $bbox1->add($button1);
-    my $button2 = new Gtk::Button "Cancel";
-    $bbox1->add($button2);
+    my $button_ok = new Gtk::Button "OK";
+    $bbox1->add($button_ok);
+    my $button_cancel = new Gtk::Button "Cancel";
+    $bbox1->add($button_cancel);
 
     $window->show_all();
+    $i=0;
+    foreach (@mask) {
+	print "$_\n";
+	if ($_) { $infos[2*$i]->show; $infos[2*$i+1]->show }
+	else { $infos[2*$i]->hide; $infos[2*$i+1]->hide }
+	$i++;
+    }
     Gtk->main;
 
 }
