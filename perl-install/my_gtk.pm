@@ -372,21 +372,24 @@ sub gtkxpm { new Gtk::Pixmap(gtkcreate_xpm(@_)) }
 sub gtkpng { new Gtk::Pixmap(gtkcreate_png(@_)) }
 
 sub create_pix_text {
-    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, correction, [background (color or gdkpix), backsize x y]
-    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $correction, $background, $x_back, $y_back) = @_;
+    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, [background (color or gdkpix), backsize x y], centered
+    my ($w, $text, $color_text, $font, $max_width, $max_height, $can_be_greater, $can_be_smaller, $background, $x_back, $y_back, $centeredx, $centeredy) = @_;
     my $color_background;
     my $backpix;
     if ($color_text =~ /#(\d+)#(\d+)#(\d+)/) { $color_text = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
     if (ref($background) eq 'Gtk::Gdk::Color') { $color_background = $background }
     elsif ($background =~ /#(\d+)#(\d+)#(\d+)/) { $color_background = gtkcolor(map{$_*65535/255}($1, $2, $3)) }
     elsif (ref($background) eq 'Gtk::Gdk::Pixmap' && $x_back && $y_back) { $backpix = 1 }
-    my $max_width2 = $max_width;
-    $font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
     my $style= new Gtk::Style;
-    $style->font(Gtk::Gdk::Font->fontset_load($font));
+    if(ref($font) eq 'Gtk::Gdk::Font') {
+	$style->font($font);
+    } else {
+	$font ||= _("-adobe-utopia-medium-r-normal-*-12-*-*-*-p-*-iso8859-*,*-r-*");
+	$style->font(Gtk::Gdk::Font->fontset_load($font));
+    }
 
     my ($width, $height, $lines, $widths, $heights, $ascents, $descents) = get_text_coord (
-        $text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller, 1);
+        $text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy);
 
     my $pix = new Gtk::Gdk::Pixmap($w->window, $width, $height);
     if ($backpix) {
@@ -410,8 +413,7 @@ sub create_pix_text {
 
 sub get_text_coord {
 
-    #reference widget, text, color_text, [font], [width], [height], flag1, flag2, correction, [background (color or gdkpix), backsize x y]
-    my ($text, $style, $max_width, $max_height, $correction, $can_be_greater, $can_be_smaller) = @_;
+    my ($text, $style, $max_width, $max_height, $can_be_greater, $can_be_smaller, $centeredx, $centeredy) = @_;
 
     my $idx = 0;
     my $real_width = 0;
@@ -433,9 +435,8 @@ sub get_text_coord {
 	    $flag = 1;
 	    $height += $style->font->string_height($lines[$idx]);
 	    (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
-	    $height -= $correction;
 	    $heights[$idx+1] = $height;
-	    $widths[$idx] = ($max_width2-$width)/2;
+	    $widths[$idx] = $centeredx && !$can_be_smaller ? (max($max_width2-$width, 0))/2 : 0;
 	    $width = 0;
 	    $idx++;
 	}
@@ -447,7 +448,6 @@ sub get_text_coord {
     }
     (undef, undef, undef, $ascents[$idx], $descents[$idx]) = $style->font->string_extents($lines[$idx]);
     $height += $style->font->string_height($lines[$idx]);
-    $height -= $correction;
 
     $height < $real_height or $real_height = $height;
     $width = $max_width;
@@ -456,7 +456,10 @@ sub get_text_coord {
     $real_width > $max_width && $can_be_greater and $width = $real_width;
     $real_height < $max_height && $can_be_smaller and $height = $real_height;
     $real_height > $max_height && $can_be_greater and $height = $real_height;
-
+    if($centeredy) {
+	my $dh = ($height-$real_height)/2;
+	@heights = map { $_ + $dh } @heights;
+    }
     ($width, $height, \@lines, \@widths, \@heights, \@ascents, \@descents)
 }
 
@@ -465,8 +468,7 @@ sub fill_tiled {
     my ($x2, $y2) = (0, 0);
     while (1) {
 	$x2 = 0;
-	while (1) {
-	    print "tiled($width, $height) x : $x2 - y : $y2\n";
+	while(1) {
 	    $pix->draw_pixmap($w->style->bg_gc('normal'),
 			      $bitmap, 0, 0, $x2, $y2, $x_back, $y_back);
 	    $x2 += $x_back;
@@ -478,19 +480,20 @@ sub fill_tiled {
 }
 
 sub gtkicons_labels_widget {
-    my ($args, $w, $color_text, $font, $correction, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
-#      [_("Menus") , 'menudrake-mdk.png', "$_sbindir/menus.pm"],
-#      [_("Services") , 'service-mdk.png', "$_sbindir/drakxservices"],
-#      [_("Fonts"), 'drakfont-mdk.png', "$_xbindir/drakfont"],
-#      [_("Date & Time") , 'time-mdk.png', "$_sbindir/clock.pm"],
-#      [_("Software Manager"), 'harddrake-mdk.png', "$_bindir/rpmdrake"],
-#      [_("Logs"), 'logdrake-mdk.png', "$_sbindir/logdrake"],
-#      [_("Console"), 'drakboot-mdk.png', "$_xbindir/rxvt"],
+    my ($args, $w, $color_text, $font, $background, $x_back, $y_back, $x_round, $y_round, $x_back2, $y_back2, $icon_width, $icon_height) = @_;
+#-      [_("Menus") , 'menudrake-mdk.png', "$_sbindir/menus.pm"],
+#-      [_("Services") , 'service-mdk.png', "$_sbindir/drakxservices"],
+#-      [_("Fonts"), 'drakfont-mdk.png', "$_xbindir/drakfont"],
+#-      [_("Date & Time") , 'time-mdk.png', "$_sbindir/clock.pm"],
+#-      [_("Software Manager"), 'harddrake-mdk.png', "$_bindir/rpmdrake"],
+#-      [_("Logs"), 'logdrake-mdk.png', "$_sbindir/logdrake"],
+#-      [_("Console"), 'drakboot-mdk.png', "$_xbindir/rxvt"],
 
     my @tab;
     my $i = 0;
     foreach (@$args) {
 	my $label = $_->[0];
+	my $exec = $_->[2];
 	my $dbl_area;
 	my $darea = new Gtk::DrawingArea;
 	my ($icon, undef) = gtkcreate_png($_->[1]);
@@ -498,7 +501,7 @@ sub gtkicons_labels_widget {
 		   my ($dx, $dy) = ($darea->allocation->[2], $darea->allocation->[3]);
 		   if (!defined($dbl_area)) {
 		       my ($pix, $width, $height) = create_pix_text($darea, $label, $color_text, $font, $x_round, $y_round,
-								1, 1, $correction, $background, $x_back2, $y_back2);
+								1, 1, $background, $x_back2, $y_back2);
 		       ($dx, $dy) = (max($width, $x_round), $y_round + $height);
 		       $darea->set_usize($dx, $dy);
 		       $dbl_area = new Gtk::Gdk::Pixmap($darea->window, max($width, $x_round), $y_round + $height);
@@ -511,28 +514,28 @@ sub gtkicons_labels_widget {
 					      $pix, 0, 0, ($dx - $width)/2, $y_round, $width, $height);
 		   }
 		   $darea->window->draw_pixmap($darea->style->bg_gc('normal'),
-					       $dbl_area, 0, 0, 0, 0, $darea->allocation->[2], $darea->allocation->[3]);
+					       $dbl_area, 0, 0, 0, 0, $dx, $dy);
 	       });
+	$darea->set_events(['exposure_mask', 'enter_notify_mask', 'leave_notify_mask', 'button_press_mask', 'button_release_mask' ]);
+	$darea->signal_connect( button_release_event => sub { system("$exec&") });
+	$darea->{width} = $dx;
+	$darea->{height} = $dy;
 	$tab[$i] = $darea;
 	$i++;
     }
     my $fixed = new Gtk::Fixed;
-    my $darea = new Gtk::DrawingArea;
-    $fixed->signal_connect(realize => sub {
-			       $darea->set_usize($fixed->allocation->[2], $fixed->allocation->[3]);
-			   });
-    $fixed->put(gtksignal_connect($darea, expose_event => sub { 
-		      if ($_[0]->allocation->[2] != $fixed->allocation->[2] || $_[0]->allocation->[3] != $fixed->allocation->[3]) {
-			  $darea->set_usize($fixed->allocation->[2], $fixed->allocation->[3]);
-		      }
-		      my ($dx, $dy) = ($_[0]->allocation->[2], $_[0]->allocation->[3]);
-		      fill_tiled($darea, $darea->window, $background, $x_back, $y_back, $dx, $dy);
-		  }), 0, 0);
-    $i = 0;
     foreach (@tab) {
 	$fixed->put($_, $i*75, 65);
 	$i++;
     }
+    $fixed->signal_connect( size_allocate => sub {
+				my ($dx, $dy) = ($fixed->allocation->[2], $fixed->allocation->[3]);
+				foreach (@tab) {
+				    $fixed->move($_);
+				}
+			    });
+    $fixed->signal_connect( realize => sub { $fixed->window->set_back_pixmap($background, 0) });
+    $i = 0;
     $fixed->show_all();
     $fixed;
 }
