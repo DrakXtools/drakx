@@ -216,9 +216,14 @@ newtListbox(left,top,height,flags)
 	int height;
 	int flags;
 
-char *
+SV *
 newtListboxGetCurrent(co)
 	Newt::Component co;
+CODE:
+        RETVAL = SvREFCNT_inc(newtListboxGetCurrent(co));
+OUTPUT:
+	RETVAL
+
 
 void
 newtListboxSetCurrent(co,indice)
@@ -231,11 +236,12 @@ newtListboxSetWidth(co,width)
 	int width;
 
 int
-newtListboxAddEntry(co,text)
+newtListboxAddEntry(co,text,data)
 	Newt::Component co;
 	const char * text;
+	SV * data;
 CODE:
-	RETVAL = newtListboxAddEntry(co, text, text);
+	RETVAL = newtListboxAddEntry(co, text, data);
 OUTPUT:
 	RETVAL
 
@@ -308,6 +314,14 @@ void
 newtFormAddComponent(form,co)
 	Newt::Component form;
 	Newt::Component co;
+
+void
+newtFormAddGrid(form,grid,recurse)
+	Newt::Component form;
+	Newt::Grid grid;
+        int recurse;
+  CODE:
+  newtGridAddComponentsToForm(grid,form,recurse);
 
 void
 newtFormSetHeight(co,height)
@@ -415,22 +429,28 @@ newtGridFree(grid,recurse)
 	int recurse;
 
 void
-newtGridGetSize(grid,width,height)
+newtGridPlace(grid,left,top)
 	Newt::Grid grid;
-	int * width;
-	int * height;
+        int left;
+        int top;
+
+void
+newtGridGetSize(grid)
+	Newt::Grid grid;
+ PPCODE:
+{
+  int width;
+  int height;
+  newtGridGetSize(grid, &width, &height);
+  PUSHs(sv_2mortal(newSViv(width)));
+  PUSHs(sv_2mortal(newSViv(height)));
+}
 
 void
 newtGridWrappedWindow(grid,title)
 	Newt::Grid grid;
 	char * title;
 	
-void
-newtGridAddComponentsToForm(grid,form,recurse)
-	Newt::Grid grid;
-	Newt::Component form;
-	int recurse;
-
 Newt::Grid
 newtButtonBar(button1, ...)
 	char * button1;
