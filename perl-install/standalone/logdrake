@@ -196,7 +196,7 @@ gtkadd($my_win->{window},
                                                           $::Wizard_no_cancel = 1;
                                                           $::WizardWindow->destroy if defined $::WizardWindow;
                                                           undef $::WizardWindow;
-                                                      }
+                                                      } else { print "CRITICAL: \"$@\"\n" }
 
                                                   })),
 					      gtksignal_connect(new Gtk2::Button(N("Save")), clicked => \&save),
@@ -466,8 +466,6 @@ print F $r;
 	output $cron_hourly, $cron;
 	chmod 0755, $cron_hourly;
         
-    print "whole cron is ****** $cron *******\n";
-    
     undef $::isWizard; 
     if (defined $::WizardWindow) {
 	$::WizardWindow->destroy;
