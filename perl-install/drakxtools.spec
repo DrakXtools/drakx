@@ -127,7 +127,7 @@ cat > $RPM_BUILD_ROOT%_menudir/%name <<EOF
 	command="/usr/sbin/harddrake"\
 	icon="harddrake.png"
 EOF
-mv mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
+mv $RPM_BUILD_ROOT%_sbindir/service_harddrake $RPM_BUILD_ROOT%_initrddir/harddrake2
 
 
 %find_lang libDrakX
@@ -183,7 +183,7 @@ done
 %files -n harddrake
 %defattr(-,root,root)
 %_sbindir/harddrake2
-%_initrddir/harddrake2
+#%_initrddir/harddrake2
 
 %files http -f %{name}-http.list
 %defattr(-,root,root)
@@ -195,7 +195,7 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/drakxtools-http
 
 %changelog 
-* Fri Jul  5 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.8-1mdk
+* Sun Jul  7 2002 Daouda LO <daouda@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
 - new entries: 
 	o harddrake2 : new hardware detection && configuration tool
