@@ -412,7 +412,6 @@ sub update {
 }
 
 sub update2 {
-    print "HHHHHH\n";
     connected_bg(\$isconnected);
     update();
     1;
@@ -424,8 +423,8 @@ sub quit_global {
 sub configure_lan {
     my (undef, $prefix, $netcnx, $netc, $intf) = @_;
     my $window = new Gtk::Window -toplevel;
-    my @infos;
-    my @conf_data;
+
+    my @card_tab;
 
     if (@all_cards < 1) {
 	my $dialog = new Gtk::Dialog();
@@ -459,6 +458,10 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $vbox1->pack_start($notebook,0,1,0);
     my @eth_data;
     foreach (0..$#all_cards) {
+	my @infos;
+	my @conf_data;
+	$card_tab[2*$_] = \@infos;
+	$card_tab[2*$_+1] = \@conf_data;
 	my $vbox_local=new Gtk::VBox(0,0);
 	$vbox_local->set_border_width(10);
 	$vbox_local->pack_start(new Gtk::Label( _("Adapter %s: %s", $_+1 , "eth$_")),1,1,0);
@@ -472,15 +475,15 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 			 [_("DHCP client"), \$netcnx->{dhcp_client}]
 			);
 	my $i=0;
-	foreach (@conf_data) {
+	foreach my $j (@conf_data) {
 	    $infos[2*$i]=new Gtk::HBox(0,0);
-	    my $l=new Gtk::Label($_->[0]);
+	    my $l=new Gtk::Label($j->[0]);
 	    $l->set_justify('left');
 	    $infos[2*$i]->pack_start($l,1,1,0);
 	    $vbox_local->pack_start($infos[2*$i],0,0,0);
-	    if (defined $_->[2]) {
+	    if (defined $j->[2]) {
 		my $c=new Gtk::Combo();
-		$c->set_popdown_strings(@{$_->[2]});
+		$c->set_popdown_strings(@{$j->[2]});
 		$infos[2*$i+1]=$c->entry;
 		$infos[2*$i+1]->set_editable(0);
 		$infos[2*$i]->pack_start($c,0,0,0);
@@ -488,7 +491,7 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 		$infos[2*$i+1]=new Gtk::Entry();
 		$infos[2*$i]->pack_start($infos[2*$i+1],0,0,0);
 	    }
-	    $infos[2*$i+1]->set_text(${$_->[1]});
+	    $infos[2*$i+1]->set_text(${$j->[1]});
 	    $i++;
 	}
 	my $c = $_;
@@ -513,10 +516,14 @@ Configure them first by clicking on 'Configure'")),1,1,0);
     $bbox1->set_layout(-end);
     my $button_ok = new Gtk::Button( _("OK") );
     $button_ok->signal_connect ( clicked => sub {
-				     my $i=0;
-				     foreach (@conf_data) {
-					 ${$_->[1]}=$infos[2*$i+1]->get_text();
-					 $i++;
+				     foreach (0..$#all_cards) {
+					 my $i=0;
+					 my @infos = @{$card_tab[2*$_]};
+					 my @conf_data = @{$card_tab[2*$_+1]};
+					 foreach my $j (@conf_data) {
+					     ${$j->[1]}=$infos[2*$i+1]->get_text();
+					     $i++;
+					 }
 				     }
 				     update();
 				     $button_apply->set_sensitive(1);
@@ -529,7 +536,10 @@ Configure them first by clicking on 'Configure'")),1,1,0);
 
     $window->set_modal(1);
     $window->show_all();
-    $intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
+    foreach (0..$#all_cards) {
+	my @infos = @{$card_tab[2*$_]};
+	$intf->{"eth$_"}{BOOTPROTO} eq "dhcp" or $infos[8]->hide;
+    }
     $window->set_position('center_always');
     Gtk->main;
 }
