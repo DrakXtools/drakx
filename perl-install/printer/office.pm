@@ -91,15 +91,13 @@ sub configureoffice {
 	    }
 	}
 	$configfilecontent = 
-	    $suites{$suite}{make}($printer, $queue, $configprefix,
-				       $configfilecontent);
+	    $suites{$suite}{make}($printer, $queue, $configprefix, $configfilecontent);
     }
     # Patch PostScript output to print Euro symbol correctly also for
     # the "Generic Printer"
     my @parameters = $suites{$suite}{param};
-    $configfilecontent =printer::common::removeentry
-	(@parameters, $configfilecontent);
-    $configfilecontent =printer::common::addentry($parameters[0],$parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
+    $configfilecontent = removeentry(@parameters, $configfilecontent);
+    $configfilecontent =addentry($parameters[0],$parameters[1] . $suites{$suite}{perl} . $printer::data::lprcommand{$printer->{SPOOLER}{print_command}}, $configfilecontent);
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
 }
@@ -183,8 +181,7 @@ sub remove_local_printers_from_office {
     # Remove the printer entries
     foreach my $queue (keys(%{$printer->{configured}})) {
 	$configfilecontent = 
-	    removestarofficeprinterentry($printer, $queue, $configprefix,
-					 $configfilecontent);
+	    removestarofficeprinterentry($printer, $queue, $configprefix, $configfilecontent);
     }
     # Write back Star Office configuration file
     return writesofficeconfigfile($configfilename, $configfilecontent);
@@ -195,25 +192,25 @@ sub makestarofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Set default printer
     if ($queue eq $printer->{DEFAULT}) {
-	$configfile =printer::common::removeentry("windows", "device=", $configfile);
-	$configfile =printer::common::addentry("windows", 
+	$configfile =removeentry("windows", "device=", $configfile);
+	$configfile =addentry("windows", 
 			       "device=$queue,$queue PostScript,$queue",
 			       $configfile);
     }
     # Make an entry in the "[devices]" section
-    $configfile =printer::common::removeentry("devices", "$queue=", $configfile);
-    $configfile =printer::common::addentry("devices", 
+    $configfile =removeentry("devices", "$queue=", $configfile);
+    $configfile =addentry("devices", 
 			   "$queue=$queue PostScript,$queue",
 			   $configfile);
     # Make an entry in the "[ports]" section
     # The "perl" command patches the PostScript output to print the Euro
     # symbol correctly.
-    $configfile =printer::common::removeentry("ports", "$queue=", $configfile);
-    $configfile =printer::common::addentry("ports", 
+    $configfile =removeentry("ports", "$queue=", $configfile);
+    $configfile =addentry("ports", 
 			   "$queue=/usr/bin/perl -p -e \"s=16#80 /euro=16#80 /Euro=\" | /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
 			   $configfile);
     # Make printer's section
-    $configfile = printer::common::addsection("$queue,PostScript,$queue", $configfile);
+    $configfile = addsection("$queue,PostScript,$queue", $configfile);
     # Load PPD file
     my $ppd = cat_("$::prefix/etc/foomatic/$queue.ppd");
     # Set the PostScript level
@@ -222,21 +219,21 @@ sub makestarofficeprinterentry {
 	$pslevel = $1;
 	$pslevel = "2" if $pslevel eq "3";
     } else { $pslevel = "2" }
-    $configfile =printer::common::removeentry("$queue.PostScript.$queue",
+    $configfile =removeentry("$queue.PostScript.$queue",
 			      "Level=", $configfile);
-    $configfile =printer::common::addentry("$queue.PostScript.$queue", 
+    $configfile =addentry("$queue.PostScript.$queue", 
 			   "Level=$pslevel", $configfile);
     # Set Color/BW
     my $color = ($ppd =~ /^\s*\*ColorDevice:\s*\"?([Tt]rue)\"?\s*$/m) ? "1" : "0";
-    $configfile =printer::common::removeentry("$queue.PostScript.$queue", "BitmapColor=", $configfile);
-    $configfile =printer::common::addentry("$queue.PostScript.$queue", "BitmapColor=$color", $configfile);
+    $configfile =removeentry("$queue.PostScript.$queue", "BitmapColor=", $configfile);
+    $configfile =addentry("$queue.PostScript.$queue", "BitmapColor=$color", $configfile);
     # Set the default paper size
     if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
 	my $papersize = $1;
-	$configfile =printer::common::removeentry("$queue.PostScript.$queue", "PageSize=", $configfile);
-	$configfile =printer::common::removeentry("$queue.PostScript.$queue", "PPD_PageSize=", $configfile);
-	$configfile =printer::common::addentry("$queue.PostScript.$queue", "PageSize=$papersize", $configfile);
-	$configfile =printer::common::addentry("$queue.PostScript.$queue", "PPD_PageSize=$papersize", $configfile);
+	$configfile =removeentry("$queue.PostScript.$queue", "PageSize=", $configfile);
+	$configfile =removeentry("$queue.PostScript.$queue", "PPD_PageSize=", $configfile);
+	$configfile =addentry("$queue.PostScript.$queue", "PageSize=$papersize", $configfile);
+	$configfile =addentry("$queue.PostScript.$queue", "PPD_PageSize=$papersize", $configfile);
     }
     # Link the PPD file
     run_program::rooted($::prefix, 
@@ -248,64 +245,64 @@ sub makestarofficeprinterentry {
 sub makeopenofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Make printer's section
-    $configfile = printer::common::addsection($queue, $configfile);
+    $configfile = addsection($queue, $configfile);
     # Load PPD file
     my $ppd = cat_("$::prefix/etc/foomatic/$queue.ppd");
     # "PPD_PageSize" line
     if ($ppd =~ /^\s*\*DefaultPageSize:\s*(\S+)\s*$/m) {
 	my $papersize = $1;
-	$configfile = printer::common::removeentry($queue,
+	$configfile = removeentry($queue,
 				  "PPD_PageSize=", $configfile);
-	$configfile = printer::common::addentry($queue, 
+	$configfile = addentry($queue, 
 			       "PPD_PageSize=$papersize", $configfile);
     }
     # "Command" line
     # The "perl" command patches the PostScript output to print the Euro
     # symbol correctly.
-    $configfile = printer::common::removeentry($queue, "Command=", $configfile);
-    $configfile = printer::common::addentry($queue, 
+    $configfile = removeentry($queue, "Command=", $configfile);
+    $configfile = addentry($queue, 
 			   "Command=/usr/bin/perl -p -e \"s=/euro /unused=/Euro /unused=\" | /usr/bin/$printer::data::lprcommand{$printer->{SPOOLER}{print_command}} -P $queue",
 			   $configfile);
     # "Comment" line 
-    $configfile = printer::common::removeentry($queue, "Comment=", $configfile);
+    $configfile = removeentry($queue, "Comment=", $configfile);
     if (($printer->{configured}{$queue}) &&
 	($printer->{configured}{$queue}{queuedata}{desc})) {
-	$configfile =printer::common::addentry
+	$configfile =addentry
 	    ($queue, 
 	     "Comment=$printer->{configured}{$queue}{queuedata}{desc}",
 	     $configfile);
     } else {
-	$configfile = printer::common::addentry($queue, 
+	$configfile = addentry($queue, 
 			       "Comment=",
 			       $configfile);
     }
     # "Location" line 
-    $configfile = printer::common::removeentry($queue, "Location=", $configfile);
+    $configfile = removeentry($queue, "Location=", $configfile);
     if (($printer->{configured}{$queue}) &&
 	($printer->{configured}{$queue}{queuedata}{loc})) {
-	$configfile = printer::common::addentry
+	$configfile = addentry
 	    ($queue, 
 	     "Location=$printer->{configured}{$queue}{queuedata}{loc}",
 	     $configfile);
     } else {
-	$configfile = printer::common::addentry($queue, "Location=", $configfile);
+	$configfile = addentry($queue, "Location=", $configfile);
     }
     # "DefaultPrinter" line
-    $configfile = printer::common::removeentry($queue, "DefaultPrinter=", $configfile);
+    $configfile = removeentry($queue, "DefaultPrinter=", $configfile);
     my $default = "0";
     if ($queue eq $printer->{DEFAULT}) {
 	$default = "1";
 	# "DefaultPrinter=0" for the "Generic Printer"
-	$configfile = printer::common::removeentry("Generic Printer", "DefaultPrinter=",
+	$configfile = removeentry("Generic Printer", "DefaultPrinter=",
 				  $configfile);
-	$configfile = printer::common::addentry("Generic Printer", 
+	$configfile = addentry("Generic Printer", 
 			       "DefaultPrinter=0",
 			       $configfile);	
     }
-    $configfile = printer::common::addentry($queue, "DefaultPrinter=$default", $configfile);
+    $configfile = addentry($queue, "DefaultPrinter=$default", $configfile);
     # "Printer" line 
-    $configfile = printer::common::removeentry($queue, "Printer=", $configfile);
-    $configfile = printer::common::addentry($queue, "Printer=$queue/$queue", $configfile);
+    $configfile = removeentry($queue, "Printer=", $configfile);
+    $configfile = addentry($queue, "Printer=$queue/$queue", $configfile);
     # Link the PPD file
     run_program::rooted($::prefix, 
 			"ln", "-sf", "/etc/foomatic/$queue.ppd", 
@@ -316,13 +313,13 @@ sub makeopenofficeprinterentry {
 sub removestarofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Remove default printer entry
-    $configfile = printer::common::removeentry("windows", "device=$queue,", $configfile);
+    $configfile = removeentry("windows", "device=$queue,", $configfile);
     # Remove entry in the "[devices]" section
-    $configfile = printer::common::removeentry("devices", "$queue=", $configfile);
+    $configfile = removeentry("devices", "$queue=", $configfile);
     # Remove entry in the "[ports]" section
-    $configfile = printer::common::removeentry("ports", "$queue=", $configfile);
+    $configfile = removeentry("ports", "$queue=", $configfile);
     # Remove "[$queue,PostScript,$queue]" section
-    $configfile = printer::common::removesection("$queue,PostScript,$queue", $configfile);
+    $configfile = removesection("$queue,PostScript,$queue", $configfile);
     # Remove Link of PPD file
     run_program::rooted($::prefix, 
 			"rm", "-f", 
@@ -333,7 +330,7 @@ sub removestarofficeprinterentry {
 sub removeopenofficeprinterentry {
     my ($printer, $queue, $configprefix, $configfile) = @_;
     # Remove printer's section
-    $configfile = printer::common::removesection($queue, $configfile);
+    $configfile = removesection($queue, $configfile);
     # Remove Link of PPD file
     run_program::rooted($::prefix, 
 			"rm", "-f", 

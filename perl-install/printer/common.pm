@@ -1,6 +1,10 @@
 package printer::common;
 
 use strict;
+use vars qw(@ISA @EXPORT);
+
+@ISA = qw(Exporter);
+@EXPORT = qw(addentry addsection removeentry  removesection);
 
 
 sub addentry {
@@ -10,9 +14,7 @@ sub addentry {
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
 	if (!$sectionfound) {
-	    if (/^\s*\[\s*$section\s*\]\s*$/) {
-		$sectionfound = 1;
-	    }
+	    $sectionfound = 1 if /^\s*\[\s*$section\s*\]\s*$/;
 	} else {
 	    if (!/^\s*$/ && !/^\s*;/) { #-#
 		$_ = "$entry\n$_";
@@ -21,9 +23,7 @@ sub addentry {
 	    }
 	}
     }
-    if ($sectionfound && !$entryinserted) {
-	push(@lines, $entry);
-    }
+    push(@lines, $entry) if $sectionfound && !$entryinserted;
     return join ("\n", @lines);
 }
 
@@ -32,10 +32,8 @@ sub addsection {
     my $entryinserted = 0;
     my @lines = split("\n", $filecontent);
     foreach (@lines) {
-	if (/^\s*\[\s*$section\s*\]\s*$/) {
-	    # section already there, nothing to be done
-	    return $filecontent;
-	}
+     # section already there, nothing to be done
+     return $filecontent if /^\s*\[\s*$section\s*\]\s*$/;
     }
     return $filecontent . "\n[$section]";
 }
@@ -49,8 +47,7 @@ sub removeentry {
 	$_ = "$_\n";
 	next if $done;
 	if (!$sectionfound) {
-	    if (/^\s*\[\s*$section\s*\]\s*$/) {
-		$sectionfound = 1;
+	    $sectionfound = 1 if /^\s*\[\s*$section\s*\]\s*$/;
 	    }
 	} else {
 	    if (/^\s*\[.*\]\s*$/) { # Next section
