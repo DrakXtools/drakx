@@ -238,20 +238,20 @@ void doklog()
 
 #define LOOP_CLR_FD	0x4C01
 
-void del_loop(char *device) 
+void del_loops(void) 
 {
-	int fd;
-	if ((fd = open(device, O_RDONLY, 0)) < 0)
-		return;
-
-	if (ioctl(fd, LOOP_CLR_FD, 0) < 0) {
-                close(fd);
-		return;
-	}
-
-        printf("\t%s\n", device);
-
-	close(fd);
+        char loopdev[] = "/dev/loop0";
+        int i;
+        for (i=0; i<8; i++) {
+                int fd;
+                loopdev[9] = '0' + i;
+                fd = open(loopdev, O_RDONLY, 0);
+                if (fd > 0) {
+                        if (!ioctl(fd, LOOP_CLR_FD, 0))
+                                printf("\t%s\n", loopdev);
+                        close(fd);
+                }
+        }
 }
 
 struct filesystem
@@ -316,12 +316,9 @@ void unmount_filesystems(void)
 		nb = 0;
 		for (i = 0; i < numfs; i++) {
 			/*printf("trying with %s\n", fs[i].name);*/
+                        del_loops();
 			if (fs[i].mounted && umount(fs[i].name) == 0) { 
 				printf("\t%s\n", fs[i].name);
-
-				if (strstr(fs[i].dev, "loop"))
-					del_loop(fs[i].dev);
-				
 				fs[i].mounted = 0;
 				nb++;
 			}
