@@ -291,7 +291,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
-* Tue Mar  4 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.1-14mdk
+* Wed Mar  5 2003 Guillaume Cottenceau <gc@mandrakesoft.com> 9.1-14mdk
+- localedrake: fix behaviour when only one lang is available (clicking
+  on "cancel" on the country selection didn't cancel it)
 - drakconnect: fixes in isdn configuration (flepied)
 - drakperm:
   o fix #1776

@@ -9,15 +9,16 @@ use common;
 use lang;
 use any;
 
-my ($klang, $country, $apply);
+my ($klang, $kcountry, $apply);
 
 foreach (@ARGV) {
     $apply = /--apply/;
     $klang = $1 if /--kde_lang=(.*)/;
     $kcountry = uc($1) if /--kde_country=(.*)/;
 }
+
 if (defined $klang) {
-    $klang or exit;
+    $klang or exit(-1);
     my $lang = member($klang, lang::list_langs()) ? $klang : 'en_US';
     my $country = member($kcountry, lang::list_countries()) ? $kcountry : 'US';
     my $locale = lang::read('', $>);
@@ -27,21 +28,42 @@ if (defined $klang) {
 
     #- help KDE defaulting to the right charset
     print lang::charset2kde_charset(lang::l2charset($lang)), "\n";
-} else {
-    my $locale = lang::read('', $>);
-    my $in = 'interactive'->vnew;
-  select_language:
-    $locale->{lang} = any::selectLanguage($in, $locale->{lang}) or goto the_end;
-    any::selectCountry($in, $locale) or goto select_language;
-    lang::write('', $locale, $>);
-    if ($>) {
-	if (my $wm = any::running_window_manager()) {
-	    $in->ask_okcancel('', N("The change is done, but to be effective you must logout"), 1)
-	      and any::ask_window_manager_to_logout($wm);
-	}
-    }
-the_end:
-    $in->exit(0);
+    exit(0);
 }
+
+my $locale = lang::read('', $>);
+my $in = 'interactive'->vnew;
+my $one_lang_only;
+
+sub select_language {
+    $locale->{lang} = any::selectLanguage($in, $locale->{lang});
+}
+sub select_country {
+    any::selectCountry($in, $locale);  
+}
+
+eval {
+  language:
+    select_language() or goto the_end;
+    select_country() or goto language;
+};
+if ($@) {
+    if ($@ =~ /^one lang only/) {
+	select_country() or goto the_end;
+    } else {
+	die;
+    }
+}
+
+lang::write('', $locale, $>);
+if ($>) {
+    if (my $wm = any::running_window_manager()) {
+	$in->ask_okcancel('', N("The change is done, but to be effective you must logout"), 1)
+	  and any::ask_window_manager_to_logout($wm);
+    }
+}
+
+the_end:
+$in->exit(0);
 
 
