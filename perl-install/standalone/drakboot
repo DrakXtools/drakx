@@ -78,12 +78,8 @@ unless ($::isEmbedded) {
     ######### menus end
 }
 
-my $user_combo = Gtk2::ComboBox->new_text;
-$user_combo->set_popdown_strings(sort(list_users()));
-$user_combo->entry->set_text($auto_mode->{autologin}) if $auto_mode->{autologin};
-my $desktop_combo = Gtk2::ComboBox->new_text;
-$desktop_combo->set_popdown_strings(sort(split(' ', `/usr/sbin/chksession -l`)));
-$desktop_combo->entry->set_text($auto_mode->{desktop}) if $auto_mode->{desktop};
+my $user_combo = Gtk2::ComboBox->new_with_strings([ sort(list_users()) ], $auto_mode->{autologin});
+my $desktop_combo = Gtk2::ComboBox->new_with_strings([ sort(split(' ', `/usr/sbin/chksession -l`)) ], $auto_mode->{desktop});
 
 my %themes = 	('path' => '/usr/share/bootsplash/themes/',
    	        'sysconfig' => '/etc/sysconfig/bootsplash',
@@ -128,13 +124,12 @@ foreach (all('.')) {
         -f "$themes{path}$_$themes{boot}{path}bootsplash-$cur_res.jpg" and push @boot_thms, $_;
     }
 }
-my %combo = ('thms' => '', 'lilo' => '', 'boot' => '');
+my %combo = ('thms' => '', 'lilo' => '');
 foreach (keys(%combo)) {
     $combo{$_} = gtkset_size_request(Gtk2::ComboBox->new_text, 10, -1);
 }
 
-$combo{boot}->set_popdown_strings(@boot_thms);
-$combo{boot}->entry->set_text($themes{default});
+$combo{boot} = gtkset_size_request(Gtk2::ComboBox->new_with_strings(\@boot_thms, $themes{default}), 10, -1);;
 
 my $boot_pic = gtkcreate_img($themes{def_thmb});
 change_image($boot_pic, $themes{default});

@@ -1748,15 +1748,9 @@ sub advanced_where_cd {
 		$dev_codes{$cd_devices{$key}{rec_dev}} = $key; 
 	}
 	
-	my $combo_where_cd_device = Gtk2::ComboBox->new_text;
-	if (keys %cd_devices) {
-    	$combo_where_cd_device->set_popdown_strings('', sort keys %dev_codes);
-	} else {
-		$combo_where_cd_device->set_popdown_strings(@no_devices);
-	}  
+    my $combo_where_cd_device = Gtk2::ComboBox->new_with_strings(%cd_devices ? [ sort keys %dev_codes ] : \@no_devices);
 	
-    my $combo_where_cd_time = Gtk2::ComboBox->new_text;
-    $combo_where_cd_time->set_popdown_strings("650 MB", "700 MB", "750 MB", "800 MB", "4.7 GB");    
+    my $combo_where_cd_time = Gtk2::ComboBox->new_with_strings([ "650 MB", "700 MB", "750 MB", "800 MB", "4.7 GB" ]);
  
     gtkpack($advanced_box,
 		$box_where_cd = gtkpack_(new Gtk2::VBox(0, 6),
@@ -1859,12 +1853,7 @@ sub advanced_where_tape {
 	#- look for tape devices;
 	get_tape_info();
 
-	my $combo_where_tape_device = Gtk2::ComboBox->new_text;
-    if (@tape_devices) {  
-		$combo_where_tape_device->set_popdown_strings('', @tape_devices) 
-	} else {
-		$combo_where_tape_device->set_popdown_strings(@no_devices);
-	}
+    my $combo_where_tape_device = Gtk2::ComboBox->new_with_strings(@tape_devices ? \@tape_devices : \@no_devices);
 	
     my $box_where_tape;
     local $_;
@@ -2064,7 +2053,7 @@ sub advanced_where() {
 sub advanced_when() {
     my $box_when;
 	my $allow_custom = $backup_daemon && $custom_cron; 
-    my $combo_when_space = Gtk2::ComboBox->new_text;
+    my $combo_when_space = Gtk2::ComboBox->new_with_strings([ "", N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom") ]);
     my %trans = (N("hourly") => 'hourly',
 		 N("daily") => 'daily',
 		 N("weekly") => 'weekly',
@@ -2075,25 +2064,20 @@ sub advanced_when() {
 		  'weekly' => N("weekly"),
 		  'monthly' => N("monthly"),
 		  'custom' => N("custom"));
-    $combo_when_space->set_popdown_strings("", N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom"));    
 	set_help_tip($combo_when_space, 'when_space');
 
 	#- custom setup - let user specify month, day of month, day of week, hour, minute
-	my $combo_month_when = Gtk2::ComboBox->new_text;
 	my @months = ("*", N("January"), N("February"), N("March"),
 		N("April"), N("May"), N("June"), N("July"), N("August"), N("September"),
 		N("October"), N("November"), N("December"));
-	$combo_month_when->set_popdown_strings(@months);
-	my $combo_day_when = Gtk2::ComboBox->new_text;
-	$combo_day_when->set_popdown_strings("*", (1..31));
-	my $combo_weekday_when = Gtk2::ComboBox->new_text;
+	my $combo_month_when = Gtk2::ComboBox->new_with_strings(\@months);
+	my $combo_day_when = Gtk2::ComboBox->new_with_strings([ "*", (1..31) ]);
 	my @weekdays = ("*", N("Sunday"), N("Monday"), N("Tuesday"), 
 		N("Wednesday"), N("Thursday"), N("Friday"), N("Saturday")); 
-	$combo_weekday_when->set_popdown_strings(@weekdays);
+	my $combo_weekday_when = Gtk2::ComboBox->new_with_strings(\@weekdays);
 	my $combo_hour_when = Gtk2::ComboBox->new_text;
 	$combo_hour_when->set_popdown_strings("*", (0..23));
-	my $combo_minute_when = Gtk2::ComboBox->new_text;
-	$combo_minute_when->set_popdown_strings("*", (0..59));
+	my $combo_minute_when = Gtk2::ComboBox->new_with_strings([ "*", (0..59) ]);
 	
 	my $entry_crontab = new Gtk2::Entry();
 	gtkset_editable($entry_crontab, 0);
@@ -2114,9 +2098,7 @@ sub advanced_when() {
 	}
 	
 	#- drop down list of possible media - default to config value
-    my $entry_media_type = Gtk2::ComboBox->new_text;
-    $entry_media_type->set_popdown_strings(sort(@net_methods, @media_types));
-	$entry_media_type->entry->set_text($conf{DAEMON_MEDIA}) if $conf{DAEMON_MEDIA};
+    my $entry_media_type = Gtk2::ComboBox->new_with_strings([ sort(@net_methods, @media_types) ], $conf{DAEMON_MEDIA});
 	
     gtkpack($advanced_box,
 		$box_when = gtkpack_(new Gtk2::VBox(0, 10),
@@ -2213,9 +2195,7 @@ sub combo_to_cron_string {
 
 sub advanced_options() {
     my $box_options;
-	my $entry_comp_mode = Gtk2::ComboBox->new_text;
-    $entry_comp_mode->set_popdown_strings("tar", "tar.gz", "tar.bz2");
-	$entry_comp_mode->entry->set_text($conf{OPTION_COMP});
+	my $entry_comp_mode = Gtk2::ComboBox->new_with_strings([ "tar", "tar.gz", "tar.bz2" ], $conf{OPTION_COMP});
 	gtkpack($advanced_box,
 		$box_options = gtkpack_(new Gtk2::VBox(0, 15),
 			0, gtkpack_(new Gtk2::HBox(0,10),
@@ -3024,9 +3004,7 @@ sub restore_step_user() {
 
 sub restore_step_sys() {
     my $restore_step_sys;
-    my $combo_restore_step_sys = Gtk2::ComboBox->new_text;
-    $combo_restore_step_sys->set_popdown_strings(@sys_backuped);
-    $combo_restore_step_sys->entry->set_text($restore_step_sys_date);
+    my $combo_restore_step_sys = Gtk2::ComboBox->new_with_strings(\@sys_backuped, $restore_step_sys_date);
     gtkpack($advanced_box,
 		$restore_step_sys = gtkpack_(new Gtk2::VBox(0,10),
 			0, N("Please choose the date to restore:"),

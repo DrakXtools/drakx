@@ -126,10 +126,7 @@ maximum"))) ]);
 
 sub new_nonedit_combo {
     my ($string_list, $o_default_value) = @_;
-    my $w = Gtk2::ComboBox->new_text;
-    $w->set_popdown_strings(to_i18n(@$string_list)) unless is_empty_array_ref $string_list;
-    $w->entry->set_text(to_i18n($o_default_value)) if $o_default_value;
-    $w;
+    Gtk2::ComboBox->new_with_strings([ to_i18n(@$string_list) ], to_i18n($o_default_value));
 }
 
 sub set_help_tip {

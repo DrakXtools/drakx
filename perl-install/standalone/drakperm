@@ -51,8 +51,7 @@ my $index = 0;
 load_perms();
 
 #- widgets settings
-my $combo_perm = Gtk2::ComboBox->new_text;
-$combo_perm->set_popdown_strings(sort(values %perm_l10n));
+my $combo_perm = Gtk2::ComboBox->new_with_strings([ sort(values %perm_l10n) ]);
 
 sub add_callback() {
     row_setting_dialog();
@@ -275,12 +274,10 @@ sub row_setting_dialog {
     my $alrd_exsts = defined $iter;
     $file->set_text($model->get($iter, 1)) if $iter;
 
-    my $users  = Gtk2::ComboBox->new_text;
-    $users->set_popdown_strings(&get_user_or_group('users'));
+    my $users  = Gtk2::ComboBox->new_with_strings([ get_user_or_group('users') ]);
     $users->entry->set_text($model->get($iter, 2)) if $iter;
      
-    my $groups = Gtk2::ComboBox->new_text;
-    $groups->set_popdown_strings(&get_user_or_group);
+    my $groups = Gtk2::ComboBox->new_with_strings([ get_user_or_group() ]);
     $groups->entry->set_text($model->get($iter, 3)) if $iter;
 
     my $id_box = gtkadd(Gtk2::HBox->new,
