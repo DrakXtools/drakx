@@ -374,7 +374,7 @@ sub inspect {
 
     isMountableRW($part) or return;
 
-    my $dir = "/tmp/inspect_tmp_dir";
+    my $dir = $::isInstall ? "/tmp/inspect_tmp_dir" : "/root/.inspect_tmp_dir";
 
     if ($part->{isMounted}) {
 	$dir = ($prefix || '') . $part->{mntpoint};
