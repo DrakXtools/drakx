@@ -864,4 +864,33 @@ sub devfssymlinkf {
     symlinkf($if, "$prefix/$_") foreach ("dev/$of", "lib/dev-state/$of");
 }
 
+sub fileshare_config {
+    my ($in) = @_;
+    
+    my $file = '/etc/security/fileshare.conf';
+    my %conf = getVarsFromSh($file);
+
+    my @l = (__("No sharing"), __("Allow all users"), __("Custom"));
+    my $restrict = exists $conf{RESTRICT} ? text2bool($conf{RESTRICT}) : 1;
+
+    my $r = $in->ask_from_list_('fileshare',
+'Do you want to allow users to export some directories in their home?
+Allowing this will permit users to simply click on "Share" in konqueror and nautilus.
+
+"Custom" permit a per-user granularity.
+',
+				\@l, $l[$restrict ? 0 : 1]) or return;
+    $restrict = $r ne $l[1];
+    $conf{RESTRICT} = bool2yesno($restrict);
+
+    setVarsInSh($file, \%conf);
+    if ($r eq $l[2]) {
+	# custom
+	$in->ask_warn('', 
+'The per-user sharing uses the group "fileshare". 
+You can use userdrake to add a user in this group.
+Or on the command line use: "usermod -G fileshare user_name"');
+    }
+}
+
 1;

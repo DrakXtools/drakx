@@ -31,6 +31,7 @@ install:
 	install $(STANDALONEPMS) $(SBINDEST)
 	install -s rpcinfo-flushed ddcprobe/ddcxinfos serial_probe/serial_probe $(SBINDEST)
 	ln -s ../../$(patsubst $(PREFIX)/usr%,%,$(SBINDEST))/XFdrake $(BINX11DEST)/Xdrakres
+	ln -s fileshareset $(SBINDEST)/filesharelist
 	mv -f $(SBINDEST)/lsnetdrake $(BINDEST)/lsnetdrake
 
 	install -m 644 *.pm $(LIBDEST)
@@ -38,6 +39,9 @@ install:
 	install -m 644 pixmaps/* $(PIXDIR)
 	install -m 644 share/diskdrake.rc $(ETCDEST)
 	install -m 644 share/wizard.rc $(ETCDEST)
+
+	install -d $(PREFIX)/etc/security
+	echo 'RESTRICT=yes' > $(PREFIX)/etc/security/fileshare.conf
 
 	install -m 644 $(patsubst %,Newt/%.pm,Newt) $(LIBDEST)/Newt
 	install -m 644 $(patsubst %,c/%.pm,stuff) $(LIBDEST)/c

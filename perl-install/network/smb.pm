@@ -35,13 +35,13 @@ sub find_servers() {
 sub find_exports {
     my ($server) = @_;
     my @l;
-    my $name  = $server->{name}  ? " -L $server->{name}"  : '';
+    my $ip    = $server->{ip}    ? " -I $server->{ip}"  : '';
     my $group = $server->{group} ? " -W $server->{group}" : '';
 
     # WARNING: using smbclient -L is ugly. It can't handle more than 15
     # characters shared names
 
-    foreach (`smbclient -U% -L -I $server->{ip}$name$group`) {
+    foreach (`smbclient -U% -L $server->{name}$ip$group`) {
 	chomp;
 	s/^\t//;
 	my ($name, $type, $comment) = unpack "A15 A10 A*", $_;

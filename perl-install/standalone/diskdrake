@@ -43,10 +43,11 @@ if ($::isEmbedded) {
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: diskdrake [--expert] [--testing]\n";
+/-h/ and die "usage: diskdrake [--expert] [--testing] [--fileshare]\n";
 
 $::expert = /-expert/;
 $::testing = /-testing/;
+my $fileshare = /-fileshare/;
 
 if ($>) {
     $ENV{PATH} = "/sbin:/usr/sbin:$ENV{PATH}";
@@ -54,6 +55,12 @@ if ($>) {
 
 
 my $in = 'interactive'->vnew('su');
+
+if ($fileshare) {
+    any::fileshare_config($in);
+    $in->exit(0);
+}
+
 my ($all_hds) =
     catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) }
     sub {
