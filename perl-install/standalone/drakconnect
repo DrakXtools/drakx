@@ -183,7 +183,7 @@ $window1->{window}->add(
                                              0, $profile_combo,
                                              0, $button_del,
                                              0, gtksignal_connect(Gtk2::Button->new(N("New profile...")), clicked => sub {
-                                                                      my $dialog = _create_dialog("New profile...", { small => 1 });
+                                                                      my $dialog = _create_dialog(N("New profile..."), { small => 1 });
                                                                       my $entry_dialog = Gtk2::Entry->new;
                                                                       gtkpack($dialog->vbox,
                                                                               Gtk2::Label->new(N("Name of the profile to create (the new profile is created as a copy of the current one) :")),
@@ -328,7 +328,7 @@ sub get_intf_ip {
 	local $_ = `LC_ALL=C LANGUAGE=C /sbin/ifconfig $interface`;
 	$ip = /inet addr:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/mso ? $1 : N("No Ip");
 	$mask = /Mask:(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/mso ? $1 : N("No Mask");
-	$state = /inet/ ? "up" : "down";
+	$state = /inet/ ? N("up") : N("down");
     } else {
 	$ip = $intf->{$interface}{IPADDR};
 	$state = "n/a";
@@ -496,7 +496,7 @@ Configure them first by clicking on 'Configure'")));
 	if (-e "$::prefix/etc/sysconfig/network-scripts/ifcfg-$interface") {
          $widget_temp = gtksignal_connect(Gtk2::Button->new(get_intf_status($interface)),
                                           clicked => sub {
-                                              system("/sbin/if" . (ethisup($interface) ? "down" : "up") . " $interface");
+                                              system("/sbin/if" . (ethisup($interface) ? N("down") : N("up")) . " $interface");
                                               $_[0]->set_label(get_intf_status($interface));
                                               update();
                                           });
