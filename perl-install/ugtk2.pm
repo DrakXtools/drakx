@@ -2,7 +2,7 @@ package ugtk2;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $force_focus $grab $border); #- leave it on one line, for automatic removal of the line at package creation
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $wm_icon $grab $border); #- leave it on one line, for automatic removal of the line at package creation
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -948,13 +948,6 @@ sub _create_window {
 		   ]),
 		   %options);
 
-    if ($force_focus) {
-	#- force keyboard focus instead of mouse focus (useful when we have no Window Manager)
-	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
-	$w->signal_connect(expose_event => \&_XSetInputFocus);
-	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
-    }
-
     #- when the window is closed using the window manager "X" button (or alt-f4)
     $w->signal_connect(delete_event => sub { 
 	if ($::isWizard) {
@@ -964,6 +957,13 @@ sub _create_window {
 	    Gtk2->main_quit;
 	} 
     });
+
+    if (!$::isStandalone) {
+	#- force keyboard focus instead of mouse focus (useful when we have no Window Manager)
+	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
+	$w->signal_connect(expose_event => \&_XSetInputFocus);
+	$w->signal_connect(destroy => sub { $ugtk2::current_window = $previous_current_window });
+    }
 
     if ($::isInstall) {
 	require install_gtk; #- for perl_checker
