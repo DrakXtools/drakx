@@ -41,7 +41,6 @@ my %lang2keyboard =
 'de_DE'=> 'de_nodeadkeys:70 de:50', 
 'de_LU'=> 'de_nodeadkeys:70 de:50 fr:40 be:35', 
   'el' => 'gr:90',
-'el_GR'=> 'gr:90',
   'en' => 'us:90 us_intl:50',
 'en_US'=> 'us:90 us_intl:50',
 'en_GB'=> 'uk:89 us:60 us_intl:50',
@@ -336,8 +335,10 @@ sub unpack_keyboards {
     } map { [ split ':' ] } split ' ', $k ];
 }
 sub lang2keyboards {
-    my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map { 
-	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || [ [ ($keyboards{$_} ? $_ : "us") => 100 ] ];
+    my @li = sort { $b->[1] <=> $a->[1] } map { @$_ } map {
+	#- first try with the 5 first chars of LANG; if it fails try with
+	#- with the 2 first chars of LANG, it still not good, with "us". 
+	unpack_keyboards($lang2keyboard{substr($_, 0, 5)}) || [ [ ($keyboards{substr($_, 0, 2)} ? $_ : "us") => 100 ] ];
     } @_;
     \@li;
 }
