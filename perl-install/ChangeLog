@@ -1,0 +1,16 @@
+1999-12-19  Pixel  <pixel@mandrakesoft.com>
+
+	* install2.pm (configureX): write current fstab and conf.modules
+	before X configuration (da
+	
+
+	* install_any.pm (install_urpmi): added
+		$SIG{CHLD} = 'IGNORE';
+		fork and exec("gzip", "-9", $f) || c::_exit(1);
+	may cause problems?
+
+	* install2.pm (main): moved updating things for kde in
+	install_steps::afterInstallPackages
+	* install2.pm (main): moved msec in in addToBeDone after
+	doInstallStep in install2::miscellaneous
+

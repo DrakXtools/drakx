@@ -50,7 +50,7 @@ my (%installSteps, @orderedInstallSteps);
   partitionDisks     => [ __("Setup filesystems"), 1, 0, '', "selectPath" ],
   formatPartitions   => [ __("Format partitions"), 1, -1, '', "partitionDisks" ],
   choosePackages     => [ __("Choose packages to install"), 1, 1, 'beginner', "selectPath" ],
-  doInstallStep      => [ __("Install system"), 1, -1, ''],#, ["formatPartitions", "selectPath"] ],
+  doInstallStep      => [ __("Install system"), 1, -1, '', ["formatPartitions", "selectPath"] ],
   configureNetwork   => [ __("Configure networking"), 1, 1, 'beginner', "formatPartitions" ],
   installCrypto      => [ __("Cryptographic"), 1, 1, '!expert', "configureNetwork" ],
   configureTimezone  => [ __("Configure timezone"), 1, 1, '', "doInstallStep" ],
@@ -362,6 +362,20 @@ sub doInstallStep {
 #------------------------------------------------------------------------------
 sub miscellaneous {
     $o->miscellaneous($_[0]); 
+
+    addToBeDone {
+	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
+            HDPARM => $o->{miscellaneous}{HDPARM},
+            TYPE => $o->{installClass},
+            SECURITY => $o->{security},
+        });
+	install_any::fsck_option();
+
+	local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
+	run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
+	chmod 0755, map { "$o->{prefix}/etc/X11/$_" } qw(xdm/Xsession xinit/xinitrc);
+
+    } 'doInstallStep';
 }
 
 #------------------------------------------------------------------------------
@@ -440,6 +454,11 @@ sub setupBootloader {
 #------------------------------------------------------------------------------
 sub configureX {
     my ($clicked) = $_[0];
+
+    #- done here and also at the end of install2.pm, just in case...
+    fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
+    modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
+
     $o->setupXfree if $o->{packages}{XFree86}{installed} || $clicked;
 }
 #------------------------------------------------------------------------------
@@ -450,7 +469,7 @@ sub exitInstall { $o->exitInstall(getNextStep() eq "exitInstall") }
 #- MAIN
 #-######################################################################################
 sub main {
-    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("ERROR: $err") };
+    $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("WARNING: $err") };
 
     $::beginner = $::expert = $::g_auto_install = 0;
 
@@ -602,27 +621,13 @@ sub main {
 
 	last if $o->{step} eq 'exitInstall';
     }
-
-    local $ENV{LILO_PASSWORD} = $o->{lilo}{password};
-    run_program::rooted($o->{prefix}, "/etc/security/msec/init.sh", $o->{security});
-
-    chmod 0755, map { "$o->{prefix}/etc/X11/$_" } qw(xdm/Xsession xinit/xinitrc);
-
-    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
-
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
     modules::write_conf("$o->{prefix}/etc/conf.modules", 'append');
 
-    #- update language and icons for KDE.
-    log::l("updating language for kde");
-    install_any::kdelang_postinstall($o->{prefix});
-    log::l("updating kde icons according to available devices");
-    install_any::kdeicons_postinstall($o->{prefix});
-
-    run_program::rooted($o->{prefix}, "kdeDesktopCleanup");
-
     install_any::lnx4win_postinstall($o->{prefix}) if $o->{lnx4win};
     install_any::killCardServices();
+
+    run_program::rooted($o->{prefix}, "kudzu", "-q"); # -q <=> fermetagueuleconnard
 
     #- have the really bleeding edge ddebug.log for this f*cking msec :-/
     eval { commands::cp('-f', "/tmp/ddebug.log", "$o->{prefix}/root") };

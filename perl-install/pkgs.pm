@@ -79,8 +79,8 @@ sub select($$;$) {
     }
     1;
 }
-sub unselect($$;$) {
-    my ($packages, $p, $size) = @_;
+sub unselect($$) {
+    my ($packages, $p) = @_;
     $p->{base} and return;
     my $set = set_new($p->{name});
     my $l = $set->{list};
@@ -98,26 +98,10 @@ sub unselect($$;$) {
 
 	$i->{selected} <= 0 || $i->{base} and next;
 	if (--$i->{selected} == 0) {
-	    push @$l, @{$i->{deps} || []} if !$size || ($size -= $i->{size}) > 0;
+	    push @$l, @{$i->{deps} || []};
 	}
     }
-    return if defined $size && $size <= 0;
-
-#-    #- garbage collect for circular dependencies
-#-    my $changed = 0; #1;
-#-    while ($changed) {
-#-	  $changed = 0;
-#-	NEXT: foreach my $p (grep { $_->{selected} > 0 && !$_->{base} } values %$packages) {
-#-	      my $set = set_new(@{$p->{provides}});
-#-	      foreach (@{$set->{list}}) {
-#-		  my $q = Package($packages, $_);
-#-		  $q->{selected} == -1 || $q->{base} and next NEXT;
-#-		  set_add($set, @{$q->{provides}}) if $q->{selected};
-#-	      }
-#-	      $p->{selected} = 0;
-#-	      $changed = 1;
-#-	  }
-#-    }
+    1;
 }
 sub toggle($$) {
     my ($packages, $p) = @_;
@@ -306,7 +290,7 @@ sub setSelectedFromCompssList {
 	    $nb += $_->{size} if $_->{selected};
 	}
 	if ($nb > $max_size) {
-	    unselect($packages, $p, $nb - $max_size) unless $isUpgrade;
+	    unselect($packages, $p) unless $isUpgrade;
 	    $min_level = $p->{values}[$ind];
 	    last;
 	}
@@ -545,10 +529,6 @@ sub install($$$) {
     my ($prefix, $isUpgrade, $toInstall) = @_;
     my %packages;
 
-    foreach my $p (@$toInstall) {
-	print "$p->{name}\n";
-    }
-
     return if $::g_auto_install;
 
     log::l("reading /usr/lib/rpm/rpmrc");
@@ -586,7 +566,7 @@ sub install($$$) {
     my $callbackOpen = sub {
 	my $f = (my $p = $packages{$_[0]})->{file};
 	print LOG "$f\n";
-	my $fd = install_any::getFile($f) or log::l("bad file $f");
+	my $fd = install_any::getFile($f) or log::l("ERROR: bad file $f");
 	$fd ? fileno $fd : -1;
     };
     my $callbackClose = sub { $packages{$_[0]}{installed} = 1; };

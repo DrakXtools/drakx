@@ -507,6 +507,8 @@ sub install_urpmi {
 	chop, print LIST "$dir/Mandrake/RPMS/$_\n" foreach <FILES>;
 	close FILES or log::l("hdlist2files failed"), return;
 
+	run_program::run("gzip", "-9", $f);
+
 	$dir .= "/Mandrake/RPMS with ../base/hdlist" if $method =~ /ftp|http/;
 	eval { output "$prefix/etc/urpmi/urpmi.cfg", "$name $dir\n" };
     }
@@ -582,9 +584,7 @@ sub kdelang_postinstall($) {
     my %i18n = getVarsFromSh("$prefix/etc/sysconfig/i18n");
     my $lang = $i18n{LANG} eq 'se' ? 'sv' : $i18n{LANG};
 
-    update_userkderc($prefix, 'Locale', {
-					 language => "Language=$lang\n",
-					});
+    update_userkderc($prefix, 'Locale', { language => "Language=$lang\n" });
 }
 
 sub kdeicons_postinstall($) {

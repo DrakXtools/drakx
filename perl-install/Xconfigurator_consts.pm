@@ -511,7 +511,7 @@ Section "Keyboard"
     # following line
     #Protocol   "Xqueue"
 
-    AutoRepeat  500 5
+    AutoRepeat  250 30
 
     # Let the server do the NumLock processing.  This should only be
     # required when using pre-R6 clients

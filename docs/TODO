@@ -1,18 +1,20 @@
-draksec is still buggy, don't try security >= 4
+(done,pix)draksec is buggy, don't try security >= 4
 
-BUG bootp in network install sigsegv
+in ftp install, locale not installed properly
+locale (and fonts?) buggy in case ramdisk is used
 
 missing alias ll for root
 
 bug rpmdrake: just after installing a package, switch to `Installed', the package has wrong name
 
 bug in users: mandrake user is added twice in strange installs
+(mixed of security 0 + ???)
 
 bug in diskdrake:
 in expert: blank, create hda5 at beginning, create hda6 at the end, create hda7
 in the middle, remove the first one. Result hda5 at the end and bug.
 
-urpmi.addmedia: |gzip instead of doing it afterwards
+urpmi.addmedia: (done,pix) |gzip instead of doing it afterwards
 rpmdrake: Installed packages not in hdlist should be there
 urpmi: pb if XXX-devel requires XXX = 1.2.3 and we updgrade XXX-1.2.3
 
@@ -53,6 +55,7 @@ ability to add nfs/weird_fs entries in fstab
 is configureNetworkNet needed with dhcp/bootp?
 
 (pix)kickstart
+partitioning? raid?
 X configuration and bootloader in kickstart
 
 (pix)Tree -> CTree, ``all'' branch with all packages
@@ -200,5 +203,7 @@ suggested partition tables must be better foreach installClass
 
 (done,pix)perl and .ph's
 
-? in ftp install, locale not installed properly
+(done,pix) BUG bootp in network install sigsegv
+
+(done,pix) move the last done stuff before Xconfiguration if possible
 

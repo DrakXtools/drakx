@@ -256,16 +256,6 @@ sub afterInstallPackages($) {
     #- remove the nasty acon...
     run_program::rooted($o->{prefix}, "chkconfig", "--del", "acon") unless $ENV{LANGUAGE} =~ /ar/;
 
-    #- miscellaneous
-    addToBeDone {
-	setVarsInSh("$o->{prefix}/etc/sysconfig/system", { 
-            HDPARM => $o->{miscellaneous}{HDPARM},
-            TYPE => $o->{installClass},
-            SECURITY => $o->{security},
-        });
-	install_any::fsck_option();
-    } 'doInstallStep';
-
     if ($o->{pcmcia}) {
 	substInFile { s/.*(TaskBarShowAPMStatus).*/$1=1/ } "$o->{prefix}/usr/lib/X11/icewm/preferences";
 	eval { commands::cp("$o->{prefix}/usr/share/applnk/System/kapm.kdelnk", 
@@ -280,6 +270,12 @@ sub afterInstallPackages($) {
 	install_any::install_urpmi($o->{prefix}, $o->{method});
 	substInFile { s/^urpmi\n//; $_ .= "urpmi\n" if eof } "$msec/group.conf" if -d $msec;
     }
+
+    #- update language and icons for KDE.
+    log::l("updating language for kde");
+    install_any::kdelang_postinstall($o->{prefix});
+    log::l("updating kde icons according to available devices");
+    install_any::kdeicons_postinstall($o->{prefix});
 }
 
 #------------------------------------------------------------------------------

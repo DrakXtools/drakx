@@ -782,7 +782,7 @@ EndSection
 
 Section "Keyboard"
    Protocol    "Standard"
-   AutoRepeat  500 5
+   AutoRepeat  250 30
 
    LeftAlt         Meta
    RightAlt        Meta
