@@ -35,7 +35,7 @@ $(POFILES): DrakX.pot
 	rm $@t
 
 DrakX.pot: $(PMSFILES)
-	perl_checker -q --generate-pot $@ `echo $(PMSFILES)|sed -e 's!drakpxe!!g'`
+	perl_checker -q --generate-pot $@ $(PMSFILES)
 	perl i18n_compssUsers 2>/dev/null >> $@
 
 install:
