@@ -132,7 +132,7 @@ sub selectInstallClass {
 	log::l("proposing to upgrade partitions " . join(" ", map { $_->{part}{device} } @l));
 
 	my @releases = uniq(map { $_->{release} } @l);
-	if (@release != @l) {
+	if (@releases != @l) {
 	    #- same release name so adding the device to differentiate them:
 	    $_->{release} .= " ($_->{part}{device})" foreach @l;
 	}
