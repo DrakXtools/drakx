@@ -130,8 +130,8 @@ sub read_partitionEntries {
 	sysread $F, $tmp, psizeof($partitionEntry_format) or die "error while reading partition table in sector $info->{partitionEntriesLBA}";
 	my %h; @h{@$partitionEntry_fields} = unpack $partitionEntry_format, $tmp;
 	$h{size} = $h{ending} - $h{start} + 1;
-	$h{type} = $gpt_types_rev{$h{gpt_type}};
-	$h{type} = 0x100 if !defined $h{type};
+	$h{pt_type} = $gpt_types_rev{$h{gpt_type}};
+	$h{pt_type} = 0x100 if !defined $h{pt_type};
 	\%h;
     } (1 .. $info->{nbPartitions});
     \@pt;
@@ -141,9 +141,9 @@ sub read {
     my ($hd, $sector) = @_;
 
     my $l = partition_table::dos::read($hd, $sector);
-    my @l = grep { $_->{size} && $_->{type} && !partition_table::isExtended($_) } @$l;
+    my @l = grep { $_->{size} && $_->{pt_type} && !partition_table::isExtended($_) } @$l;
     @l == 1 or die "bad PMBR";
-    $l[0]{type} == 0xee or die "bad PMBR";
+    $l[0]{pt_type} == 0xee or die "bad PMBR";
     my $myLBA = $l[0]{start};
 
     my $F = partition_table::raw::openit($hd) or die "failed to open device";
@@ -159,14 +159,14 @@ sub read {
 }
 
 # write the partition table (and extended ones)
-# for each entry, it uses fields: start, size, type, active
+# for each entry, it uses fields: start, size, pt_type, active
 sub write {
     my ($hd, $sector, $pt, $info) = @_;
 
     foreach (@$pt) {
 	$_->{ending} = $_->{start} + $_->{size} - 1;
 	$_->{guid} ||= generate_guid();
-	$_->{gpt_type} = $gpt_types{$_->{type}} || $_->{gpt_type} || $gpt_types{0x83};
+	$_->{gpt_type} = $gpt_types{$_->{pt_type}} || $_->{gpt_type} || $gpt_types{0x83};
     }
     my $partitionEntries = join('', map {
 	pack($partitionEntry_format, @$_{@$partitionEntry_fields})	
@@ -184,7 +184,7 @@ sub write {
     {
 	# write the PMBR
 	my $pmbr = partition_table::dos::clear_raw();
-	$pmbr->{raw}[0] = { type => 0xee, local_start => $info->{myLBA}, size => $info->{alternateLBA} - $info->{myLBA} + 1 };
+	$pmbr->{raw}[0] = { pt_type => 0xee, local_start => $info->{myLBA}, size => $info->{alternateLBA} - $info->{myLBA} + 1 };
 	partition_table::dos::write($hd, $sector, $pmbr->{raw});
     }
 
@@ -210,7 +210,7 @@ sub write {
 
 sub raw_removed {
     my ($_hd, $raw) = @_;
-    @$raw = grep { $_->{size} && $_->{type} } @$raw;
+    @$raw = grep { $_->{size} && $_->{pt_type} } @$raw;
 }
 sub can_raw_add {
     my ($hd) = @_;

@@ -121,8 +121,8 @@ sub partitionWizardSolutions {
 		   { label => N("Swap partition size in MB: "), val => \$s_swap, min => $min_swap >> 11,  max => $max_swap >> 11, type => 'range' },
 		]) or return;
 		push @{$part->{loopback}}, 
-		  { type =>0x483, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, loopback_device => $part, notFormatted => 1 },
-		  { type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap << 11, loopback_device => $part, notFormatted => 1 };
+		  { pt_type =>0x483, loopback_file => '/lnx4win/linuxsys.img', mntpoint => '/',    size => $s_root << 11, loopback_device => $part, notFormatted => 1 },
+		  { pt_type => 0x82, loopback_file => '/lnx4win/swapfile',     mntpoint => 'swap', size => $s_swap << 11, loopback_device => $part, notFormatted => 1 };
 		fsedit::recompute_loopbacks($all_hds);
 		1;
 	    } ];

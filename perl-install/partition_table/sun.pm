@@ -32,7 +32,7 @@ my ($main_format, $main_fields) = list2kv(
 );
 $main_format = join '', @$main_format;
 
-my ($fields1, $fields2) = ([ qw(type flags) ], [ qw(start_cylinder size) ]);
+my ($fields1, $fields2) = ([ qw(pt_type flags) ], [ qw(start_cylinder size) ]);
 my ($format1, $format2) = ("xCxC", "N2");
 my $magic = 0xDABE;
 my $nb_primary = 8;
@@ -92,10 +92,10 @@ sub read($$) {
     my @infos_up = unpack $format1 x $nb_primary, $info{infos};
     my @partitions_up = unpack $format2 x $nb_primary, $info{partitions};
     foreach (0..$nb_primary-1) {
-	my $h = { type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
+	my $h = { pt_type => $infos_up[2 * $_], flag => $infos_up[1 + 2 * $_],
 		  start_cylinder => $partitions_up[2 * $_], size => $partitions_up[1 + 2 * $_] };
 	$h->{start} = $sector + $h->{start_cylinder} * $hd->cylinder_size;
-	$h->{type} && $h->{size} or $h->{$_} = 0 foreach keys %$h;
+	$h->{pt_type} && $h->{size} or $h->{$_} = 0 foreach keys %$h;
 	push @pt, $h;
     }
 
@@ -105,7 +105,7 @@ sub read($$) {
 #	@h{@$fields1} = unpack $format1, $_[0];
 #	@h{@$fields2} = unpack $format2, $_[1];
 #	$h{start} = $sector + $h{start_cylinder} * $hd->cylinder_size();
-#	$h{type} && $h{size} or $h{$_} = 0 foreach keys %h;
+#	$h{pt_type} && $h{size} or $h{$_} = 0 foreach keys %h;
 #	\%h;
 #    } [ grep { $_ } split /(.{$size1})/o, $info{infos} ], [ grep { $_ } split /(.{$size2})/o, $info{partitions} ];
 
@@ -113,7 +113,7 @@ sub read($$) {
 }
 
 # write the partition table (and extended ones)
-# for each entry, it uses fields: start, size, type, active
+# for each entry, it uses fields: start, size, pt_type, active
 sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 #    my ($csize, $wdsize) = (0, 0);
@@ -130,8 +130,8 @@ sub write($$$;$) {
 
     ($info->{infos}, $info->{partitions}) = map { join '', @$_ } list2kv map {
 	$_->{start} % $hd->cylinder_size == 0 or die "partition not at beginning of cylinder";
-#	$csize += $_->{size} if $_->{type} != 5;
-#	$wdsize += $_->{size} if $_->{type} == 5;
+#	$csize += $_->{size} if $_->{pt_type} != 5;
+#	$wdsize += $_->{size} if $_->{pt_type} == 5;
 	$_->{flags} |= 0x10 if $_->{mntpoint} eq '/';
 	$_->{flags} |= 0x01 if partition_table::isSwap($_);
 	local $_->{start_cylinder} = $_->{start} / $hd->cylinder_size - $sector;
@@ -188,7 +188,7 @@ sub clear_raw {
 
     #- handle special case for partition 2 which is whole disk.
     $pt->{raw}[2] = {
-	type => 5, #- the whole disk type.
+	pt_type => 5, #- the whole disk type.
 	flags => 0,
 	start_cylinder => 0,
 	size => $hd->{geom}{cylinders} * $hd->cylinder_size,

@@ -12,11 +12,11 @@ use partition_table;
 use c;
 
 #- very bad and rough handling :(
-my %typeToDos = (
+my %pt_typeToDos = (
   8 => 0x83,
   1 => 0x82,
 );
-my %typeFromDos = reverse %typeToDos;
+my %pt_typeFromDos = reverse %pt_typeToDos;
 
 my ($main_format, $main_fields) = list2kv(
   I   => 'magic',
@@ -52,7 +52,7 @@ my ($main_format, $main_fields) = list2kv(
 );
 $main_format = join '', @$main_format;
 
-my @fields = qw(size start fsize type frag cpg);
+my @fields = qw(size start fsize pt_type frag cpg);
 my $format = "I I I C C S";
 my $magic = 0x82564557;
 my $nb_primary = 8;
@@ -73,7 +73,7 @@ sub read($$) {
     my $size = psizeof($format);
     my @pt = map {
 	my %h; @h{@fields} = unpack $format, $_;
-	$h{type} = $typeToDos{$h{type}} || $h{type};
+	$h{pt_type} = $pt_typeToDos{$h{pt_type}} || $h{pt_type};
 	\%h;
     } $info{partitions} =~ /(.{$size})/g;
 
@@ -85,7 +85,7 @@ sub read($$) {
 }
 
 # write the partition table (and extended ones)
-# for each entry, it uses fields: start, size, type, active
+# for each entry, it uses fields: start, size, pt_type, active
 sub write($$$;$) {
     my ($hd, $sector, $pt, $info) = @_;
 
@@ -105,7 +105,7 @@ sub write($$$;$) {
 
     @$pt == $nb_primary or die "partition table does not have $nb_primary entries";
     $info->{partitions} = join '', map {
-	local $_->{type} = $typeFromDos{$_->{type}} || $_->{type};
+	local $_->{pt_type} = $pt_typeFromDos{$_->{pt_type}} || $_->{pt_type};
 	pack $format, @$_{@fields};
     } @$pt;
 

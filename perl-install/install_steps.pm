@@ -215,7 +215,7 @@ sub doPartitionDisksAfter {
 
     cat_("/proc/mounts") =~ m|(\S+)\s+/tmp/nfsimage| &&
       !any { $_->{mntpoint} eq "/mnt/nfs" } @{$o->{all_hds}{nfss}} and
-	push @{$o->{all_hds}{nfss}}, { type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
+	push @{$o->{all_hds}{nfss}}, { pt_type => 'nfs', mntpoint => "/mnt/nfs", device => $1, options => "noauto,ro,nosuid,soft,rsize=8192,wsize=8192" };
 }
 
 #------------------------------------------------------------------------------
@@ -243,7 +243,7 @@ sub ask_mntpoint_s {#-}}}
 	$m{$m} = 1;
 
 	#- in case the type does not correspond, force it to ext3
-	$_->{type} = 0x483 if $m =~ m|^/| && !isTrueFS($_) && !isOtherAvailableFS($_);
+	$_->{pt_type} = 0x483 if $m =~ m|^/| && !isTrueFS($_) && !isOtherAvailableFS($_);
     }
     1;
 }
@@ -269,7 +269,7 @@ sub choosePartitionsToFormat($$) {
 	    my $t = fsedit::typeOfPart($_->{device});
 	    $_->{toFormatUnsure} ||=
 	      #- if detected dos/win, it's not precise enough to just compare the types (too many of them)
-	      (!$t || isOtherAvailableFS({ type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{type});
+	      (!$t || isOtherAvailableFS({ pt_type => $t }) ? !isOtherAvailableFS($_) : $t != $_->{pt_type});
 	}
     }
 }

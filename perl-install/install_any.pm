@@ -793,7 +793,7 @@ sub g_auto_install {
     require pkgs;
     $o->{default_packages} = pkgs::selected_leaves($::o->{packages});
 
-    my @fields = qw(mntpoint type size);
+    my @fields = qw(mntpoint pt_type size);
     $o->{partitions} = [ map { my %l; @l{@fields} = @$_{@fields}; \%l } grep { $_->{mntpoint} } @{$::o->{fstab}} ];
     
     exists $::o->{$_} and $o->{$_} = $::o->{$_} foreach qw(locale authentication mouse netc timezone superuser intf keyboard users partitioning isUpgrade manualFstab nomouseprobe crypto security security_user libsafe netcnx useSupermount autoExitInstall X services); #- TODO modules bootloader 
@@ -977,6 +977,12 @@ sub loadO {
 	$O and add2hash_($o ||= {}, $O);
     }
     $O and bless $o, ref $O;
+
+    #- handle backward compatibility for things that changed
+    foreach (@{$o->{partitions} || []}, @{$o->{manualFstab} || []}) {
+	$_->{pt_type} ||= $_->{type};
+    }
+
     $o;
 }
 
@@ -1104,7 +1110,7 @@ sub getHds {
     $o->{fstab} = [ fsedit::get_really_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
-    my @win = grep { isFat_or_NTFS($_) && isFat_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
+    my @win = grep { isFat_or_NTFS($_) && isFat_or_NTFS({ pt_type => fsedit::typeOfPart($_->{device}) }) } @{$o->{fstab}};
     log::l("win parts: ", join ",", map { $_->{device} } @win) if @win;
     if (@win == 1) {
 	#- Suggest /boot/efi on ia64.
@@ -1116,7 +1122,7 @@ sub getHds {
 	}
     }
 
-    my @sunos = grep { isSunOS($_) && type2name($_->{type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
+    my @sunos = grep { isSunOS($_) && pt_type2name($_->{pt_type}) =~ /root/i } @{$o->{fstab}}; #- take only into account root partitions.
     if (@sunos) {
 	my $v = '';
 	map { $_->{mntpoint} = $_->{unsafeMntpoint} = "/mnt/sunos" . ($v && ++$v) } @sunos;

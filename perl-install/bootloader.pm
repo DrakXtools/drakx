@@ -700,7 +700,7 @@ wait for default boot.
     } elsif (arch() !~ /ia64/) {
 	#- search for dos (or windows) boot partition. Don't look in extended partitions!
 	my @windows_boot_parts =
-	  grep { isFat_or_NTFS($_) && isFat_or_NTFS({ type => fsedit::typeOfPart($_->{device}) }) }
+	  grep { isFat_or_NTFS($_) && isFat_or_NTFS({ pt_type => fsedit::typeOfPart($_->{device}) }) }
 	    map { @{$_->{primary}{normal}} } @$hds;
 	each_index {
 	    add_entry($bootloader,

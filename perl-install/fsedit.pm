@@ -19,26 +19,26 @@ use fs;
 
 %suggestions = (
   N_("simple") => [
-    { mntpoint => "/",     size => 300 << 11, type =>0x483, ratio => 5, maxsize => 6000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11 },
-    { mntpoint => "/home", size => 300 << 11, type =>0x483, ratio => 3 },
+    { mntpoint => "/",     size => 300 << 11, pt_type =>0x483, ratio => 5, maxsize => 6000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 1, maxsize =>  500 << 11 },
+    { mntpoint => "/home", size => 300 << 11, pt_type =>0x483, ratio => 3 },
   ], N_("with /usr") => [
-    { mntpoint => "/",     size => 250 << 11, type =>0x483, ratio => 1, maxsize => 2000 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 1, maxsize =>  500 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize => 4000 << 11 },
-    { mntpoint => "/home", size => 100 << 11, type =>0x483, ratio => 3 },
+    { mntpoint => "/",     size => 250 << 11, pt_type =>0x483, ratio => 1, maxsize => 2000 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 1, maxsize =>  500 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, pt_type =>0x483, ratio => 4, maxsize => 4000 << 11 },
+    { mntpoint => "/home", size => 100 << 11, pt_type =>0x483, ratio => 3 },
   ], N_("server") => [
-    { mntpoint => "/",     size => 150 << 11, type =>0x483, ratio => 1, maxsize =>  800 << 11 },
-    { mntpoint => "swap",  size =>  64 << 11, type => 0x82, ratio => 2, maxsize =>  800 << 11 },
-    { mntpoint => "/usr",  size => 300 << 11, type =>0x483, ratio => 4, maxsize => 4000 << 11 },
-    { mntpoint => "/var",  size => 200 << 11, type =>0x483, ratio => 3 },
-    { mntpoint => "/home", size => 150 << 11, type =>0x483, ratio => 3 },
-    { mntpoint => "/tmp",  size => 150 << 11, type =>0x483, ratio => 2, maxsize => 1000 << 11 },
+    { mntpoint => "/",     size => 150 << 11, pt_type =>0x483, ratio => 1, maxsize =>  800 << 11 },
+    { mntpoint => "swap",  size =>  64 << 11, pt_type => 0x82, ratio => 2, maxsize =>  800 << 11 },
+    { mntpoint => "/usr",  size => 300 << 11, pt_type =>0x483, ratio => 4, maxsize => 4000 << 11 },
+    { mntpoint => "/var",  size => 200 << 11, pt_type =>0x483, ratio => 3 },
+    { mntpoint => "/home", size => 150 << 11, pt_type =>0x483, ratio => 3 },
+    { mntpoint => "/tmp",  size => 150 << 11, pt_type =>0x483, ratio => 2, maxsize => 1000 << 11 },
   ],
 );
 foreach (values %suggestions) {
     if (arch() =~ /ia64/) {
-	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, type => 0xef, ratio => 1, maxsize => 150 << 11 }, @$_);
+	@$_ = ({ mntpoint => "/boot/efi", size => 50 << 11, pt_type => 0xef, ratio => 1, maxsize => 150 << 11 }, @$_);
     }
 }
 
@@ -113,10 +113,10 @@ sub raids {
 
 	my @raw_mdparts = map { /([^\[]+)/ } split ' ', $mdparts;
 
-	my $type = typeOfPart("md$nb");
-	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($type, "type $type "), "with parts ", join(", ", @raw_mdparts));
-	$raids[$nb] = { 'chunk-size' => $chunks, type => $type || 0x83, raw_mdparts => \@raw_mdparts,
-			device => "md$nb", notFormatted => !$type, level => $level };
+	my $pt_type = typeOfPart("md$nb");
+	log::l("RAID: found md$nb (raid $level) chunks $chunks ", if_($pt_type, "type $pt_type "), "with parts ", join(", ", @raw_mdparts));
+	$raids[$nb] = { 'chunk-size' => $chunks, pt_type => $pt_type || 0x83, raw_mdparts => \@raw_mdparts,
+			device => "md$nb", notFormatted => !$pt_type, level => $level };
     }
 
     my %devname2part = map { $_->{dev} => { %$_, device => $_->{dev} } } devices::read_proc_partitions_raw();
@@ -127,7 +127,7 @@ sub raids {
 	      my $mdpart = $devname2part{$_} || { device => $_ };
 	      if (my $part = find { is_same_hd($mdpart, $_) } @parts, @raids) {
 		  $part->{raid} = $::i;
-		  $part->{type} = 0xfd;
+		  $part->{pt_type} = 0xfd;
 		  delete $part->{mntpoint};
 		  $part;
 	      } else {
@@ -205,7 +205,7 @@ sub hds {
 		if ($hd->{readonly}) {
 		    log::l("using /proc/partitions since diskdrake failed :(");
 		    use_proc_partitions($hd);
-		} elsif (exists $hd->{usb_description} && ($hd->{type} ||= typeOfPart($hd->{device}))) {
+		} elsif (exists $hd->{usb_description} && ($hd->{pt_type} ||= typeOfPart($hd->{device}))) {
 		    push @raw_hds, $hd;
 		    next;
 		} elsif ($o_ask_before_blanking && $o_ask_before_blanking->($hd->{device}, $err)) {
@@ -221,13 +221,13 @@ sub hds {
 	}
 
 	# special case for Various type
-	$_->{type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{type} == 0x100 } partition_table::get_normal_parts($hd);
+	$_->{pt_type} = typeOfPart($_->{device}) || 0x100 foreach grep { $_->{pt_type} == 0x100 } partition_table::get_normal_parts($hd);
 
 	#- special case for type overloading (eg: reiserfs is 0x183)
-	foreach (grep { isExt2($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } partition_table::get_normal_parts($hd)) {
-	    my $wanted_type = $_->{type} == 0x17 ? 0x7 : $_->{type};
-	    my $type = typeOfPart($_->{device});
-	    $_->{type} = $type if ($type & 0xff) == $wanted_type || $type && $hd->isa('partition_table::gpt');
+	foreach (grep { isExt2($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } partition_table::get_normal_parts($hd)) {
+	    my $wanted_pt_type = $_->{pt_type} == 0x17 ? 0x7 : $_->{pt_type};
+	    my $pt_type = typeOfPart($_->{device});
+	    $_->{pt_type} = $pt_type if ($pt_type & 0xff) == $wanted_pt_type || $pt_type && $hd->isa('partition_table::gpt');
 	}
 	
 	foreach (partition_table::get_normal_parts($hd)) {
@@ -303,7 +303,7 @@ sub read_proc_partitions {
 
 	$part->{device} = $dev;
 	$part->{size} *= 2;	# from KB to sectors
-	$part->{type} = typeOfPart($dev); 
+	$part->{pt_type} = typeOfPart($dev); 
 	$part->{start} = $prev_part ? $prev_part->{start} + $prev_part->{size} : 0;
 	$prev_part = $part;
 	delete $part->{dev}; # cleanup
@@ -338,7 +338,7 @@ sub is_same_hd {
 #- are_same_partitions() do not look at the device name since things may have changed
 sub are_same_partitions {
     my ($part1, $part2) = @_;
-    foreach ('start', 'size', 'type', 'rootDevice') {
+    foreach ('start', 'size', 'pt_type', 'rootDevice') {
 	$part1->{$_} eq $part2->{$_} or return;
     }
     1;
@@ -360,7 +360,7 @@ sub get_fstab_and_holes {
 	if (isLVM($_)) {
 	    my @parts = partition_table::get_normal_parts($_);
 	    my $free = $_->{totalsectors} - sum map { $_->{size} } @parts;
-	    my $free_part = { start => 0, size => $free, type => 0, rootDevice => $_->{VG_name} };
+	    my $free_part = { start => 0, size => $free, pt_type => 0, rootDevice => $_->{VG_name} };
 	    @parts, if_($free >= $_->cylinder_size, $free_part);
 	} else {
 	    partition_table::get_normal_parts_and_holes($_);
@@ -368,7 +368,7 @@ sub get_fstab_and_holes {
     } @_;
 }
 sub get_holes {
-    grep { $_->{type} == 0 } get_fstab_and_holes(@_);
+    grep { $_->{pt_type} == 0 } get_fstab_and_holes(@_);
 }
 
 sub get_all_fstab {
@@ -390,7 +390,7 @@ sub get_all_fstab_and_holes {
 }
 sub get_all_holes {
     my ($all_hds) = @_;
-    grep { $_->{type} == 0 } get_all_fstab_and_holes($all_hds);
+    grep { $_->{pt_type} == 0 } get_all_fstab_and_holes($all_hds);
 }
 
 sub all_free_space {
@@ -485,13 +485,13 @@ sub suggest_part {
     my ($best) =
       grep { !$_->{maxsize} || $part->{size} <= $_->{maxsize} }
       grep { $_->{size} <= ($part->{maxsize} || $part->{size}) }
-      grep { !$part->{type} || $part->{type} == $_->{type} || isTrueFS($part) && isTrueFS($_) }
+      grep { !$part->{pt_type} || $part->{pt_type} == $_->{pt_type} || isTrueFS($part) && isTrueFS($_) }
 	@local_suggestions;
 
     defined $best or return; #- sorry no suggestion :(
 
     $part->{mntpoint} = $best->{mntpoint};
-    $part->{type} = $best->{type} if !(isTrueFS($best) && isTrueFS($part));
+    $part->{pt_type} = $best->{pt_type} if !(isTrueFS($best) && isTrueFS($part));
     $part->{size} = computeSize($part, $best, $all_hds, \@local_suggestions);
     foreach ('options', 'lv_name', 'encrypt_key') {
 	$part->{$_} = $best->{$_} if $best->{$_};
@@ -519,11 +519,11 @@ sub get_root_ {
 }
 sub get_root { &get_root_ || {} }
 
-#- do this before modifying $part->{type}
-sub check_type {
-    my ($type, $_hd, $part) = @_;
-    isThisFs("jfs", { type => $type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
-    isThisFs("reiserfs", { type => $type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
+#- do this before modifying $part->{pt_type}
+sub check_pt_type {
+    my ($pt_type, $_hd, $part) = @_;
+    isThisFs("jfs", { pt_type => $pt_type }) && $part->{size} < 16 << 11 and die N("You can't use JFS for partitions smaller than 16MB");
+    isThisFs("reiserfs", { pt_type => $pt_type }) && $part->{size} < 32 << 11 and die N("You can't use ReiserFS for partitions smaller than 32MB");
 }
 
 sub package_needed_for_partition_type {
@@ -648,7 +648,7 @@ sub auto_allocate_raids {
 
 	my %h = %$md;
 	delete @h{'hd', 'parts'};
-	put_in_hash($part, \%h); # mntpoint, level, chunk-size, type
+	put_in_hash($part, \%h); # mntpoint, level, chunk-size, pt_type
 	raid::updateSize($part);
     }
 }
@@ -762,14 +762,14 @@ sub move {
     }
 }
 
-sub change_type {
-    my ($type, $hd, $part) = @_;
-    $type != $part->{type} or return;
-    check_type($type, $hd, $part);
+sub change_pt_type {
+    my ($pt_type, $hd, $part) = @_;
+    $pt_type != $part->{pt_type} or return;
+    check_pt_type($pt_type, $hd, $part);
     $hd->{isDirty} = 1;
     $part->{mntpoint} = '' if isSwap($part) && $part->{mntpoint} eq "swap";
-    $part->{mntpoint} = '' if isRawLVM({ type => $type }) || isRawRAID({ type => $type });
-    $part->{type} = $type;
+    $part->{mntpoint} = '' if isRawLVM({ pt_type => $pt_type }) || isRawRAID({ pt_type => $pt_type });
+    $part->{pt_type} = $pt_type;
     $part->{notFormatted} = 1;
     $part->{isFormatted} = 0;
     fs::rationalize_options($part);
@@ -784,7 +784,7 @@ sub rescuept($) {
     local $_;
     while (<$F>) {
 	my ($st, $si, $id) = /start=\s*(\d+),\s*size=\s*(\d+),\s*Id=\s*(\d+)/ or next;
-	my $part = { start => $st, size => $si, type => hex($id) };
+	my $part = { start => $st, size => $si, pt_type => hex($id) };
 	if (isExtended($part)) {
 	    $ext = $part;
 	} else {

@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @important_types @important_types2 @fie
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    types => [ qw(type2name type2fs name2type fs2type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
+    types => [ qw(pt_type2name type2fs name2pt_type fs2pt_type isExtended isExt2 isThisFs isTrueLocalFS isTrueFS isSwap isDos isWin isFat isFat_or_NTFS isSunOS isOtherAvailableFS isPrimary isRawLVM isRawRAID isRAID isLVM isMountableRW isNonMountable isPartOfLVM isPartOfRAID isPartOfLoopback isLoopback isMounted isBusy isSpecial maybeFormatted isApple isAppleBootstrap isEfi) ],
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
@@ -27,7 +27,7 @@ use log;
 
 @bad_types = ('Empty', 'DOS 3.3+ Extended Partition', 'Win95: Extended partition, LBA-mapped', 'Linux extended partition');
 
-my %types = (
+my %pt_types = (
   0x0 => 'Empty',
 if_(arch() =~ /^ppc/, 
   0x183 => 'Journalised FS: ReiserFS',
@@ -177,7 +177,7 @@ if_(arch() =~ /^ppc/,
   0xff => 'Xenix Bad Block Table',
 );
 
-my %type2fs = (
+my %pt_type2fs = (
 arch() =~ /^ppc/ ? (
   0x07 => 'hpfs',
 ) : (
@@ -215,41 +215,42 @@ arch() !~ /sparc/ ? (
   0x402 => 'hfs',
 );
 
-my %types_rev = reverse %types;
-my %fs2type = reverse %type2fs;
+my %pt_types_rev = reverse %pt_types;
+my %fs2pt_type = reverse %pt_type2fs;
 
 
 1;
 
 sub important_types() { 
-    my @l = (@important_types, if_($::expert, @important_types2, sort values %types));
+    my @l = (@important_types, if_($::expert, @important_types2, sort values %pt_types));
     difference2(\@l, \@bad_types);
 }
 
 sub type2fs {
     my ($part, $o_default) = @_;
-    my $type = $part->{type};
-    $type2fs{$type} || $type =~ /^(\d+)$/ && $o_default || $type;
+    my $pt_type = $part->{pt_type};
+    $pt_type2fs{$pt_type} || $pt_type =~ /^(\d+)$/ && $o_default || $pt_type;
 }
-sub fs2type { $fs2type{$_[0]} || $_[0] }
-sub type2name { $types{$_[0]} || $_[0] }
-sub name2type { 
+sub fs2pt_type { $fs2pt_type{$_[0]} || $_[0] }
+sub pt_type2name { $pt_types{$_[0]} || $_[0] }
+sub name2pt_type { 
     local ($_) = @_;
-    /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
+    /0x(.*)/ ? hex $1 : $pt_types_rev{$_} || $_;
 }
+#sub name2type { { pt_type => name2pt_type($_[0]) } }
 
-sub isEfi { arch() =~ /ia64/ && $_[0]{type} == 0xef }
-sub isWholedisk { arch() =~ /^sparc/ && $_[0]{type} == 5 }
-sub isExtended { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
-sub isRawLVM { $_[0]{type} == 0x8e }
-sub isRawRAID { $_[0]{type} == 0xfd }
+sub isEfi { arch() =~ /ia64/ && $_[0]{pt_type} == 0xef }
+sub isWholedisk { arch() =~ /^sparc/ && $_[0]{pt_type} == 5 }
+sub isExtended { arch() !~ /^sparc/ && ($_[0]{pt_type} == 5 || $_[0]{pt_type} == 0xf || $_[0]{pt_type} == 0x85) }
+sub isRawLVM { $_[0]{pt_type} == 0x8e }
+sub isRawRAID { $_[0]{pt_type} == 0xfd }
 sub isSwap { type2fs($_[0]) eq 'swap' }
 sub isExt2 { type2fs($_[0]) eq 'ext2' }
-sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{type}} }
-sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{type}} }
+sub isDos { arch() !~ /^sparc/ && ${{ 1 => 1, 4 => 1, 6 => 1 }}{$_[0]{pt_type}} }
+sub isWin { ${{ 0xb => 1, 0xc => 1, 0xe => 1, 0x1b => 1, 0x1c => 1, 0x1e => 1 }}{$_[0]{pt_type}} }
 sub isFat { isDos($_[0]) || isWin($_[0]) }
-sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{type} == 0x107 }
-sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{type}} }
+sub isFat_or_NTFS { isDos($_[0]) || isWin($_[0]) || $_[0]{pt_type} == 0x107 }
+sub isSunOS { arch() =~ /sparc/ && ${{ 0x1 => 1, 0x2 => 1, 0x4 => 1, 0x6 => 1, 0x7 => 1, 0x8 => 1 }}{$_[0]{pt_type}} }
 sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
 sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
@@ -289,7 +290,7 @@ sub description {
       formatXiB($hd->{totalsectors} || $hd->{size}, 512),
       $hd->{info} && ", $hd->{info}",
       $hd->{mntpoint} && ", " . $hd->{mntpoint},
-      $hd->{type} && ", " . type2name($hd->{type});
+      $hd->{pt_type} && ", " . pt_type2name($hd->{pt_type});
 }
 
 sub isPrimary {
@@ -399,11 +400,11 @@ sub assign_device_numbers {
     #- isFat_or_NTFS isn't true for 0x7 partitions, only for 0x107.
     #- alas 0x107 is not set correctly at this stage
     #- solution: don't bother with 0x7 vs 0x107 here
-    my ($c, @others) = grep { isFat_or_NTFS($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } @{$hd->{primary}{normal}};
+    my ($c, @others) = grep { isFat_or_NTFS($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } @{$hd->{primary}{normal}};
 
     $i = ord 'C';
     $c->{device_windobe} = chr($i++) if $c;
-    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) || $_->{type} == 0x7 || $_->{type} == 0x17 } map { $_->{normal} } @{$hd->{extended}};
+    $_->{device_windobe} = chr($i++) foreach grep { isFat_or_NTFS($_) || $_->{pt_type} == 0x7 || $_->{pt_type} == 0x17 } map { $_->{normal} } @{$hd->{extended}};
     $_->{device_windobe} = chr($i++) foreach @others;
 }
 
@@ -435,7 +436,7 @@ sub adjust_main_extended {
 	    $start = min($start, $_->{start});
 	    $end = max($end, $_->{start} + $_->{size});
 	    $only_linux &&= isTrueLocalFS($_) || isSwap($_);
-	    $has_win_lba ||= $_->{type} == 0xc || $_->{type} == 0xe;
+	    $has_win_lba ||= $_->{pt_type} == 0xc || $_->{pt_type} == 0xe;
 	}
 	$l->{start} = $hd->{primary}{extended}{start} = $start;
 	$l->{size} = $hd->{primary}{extended}{size} = $end - $start;
@@ -474,12 +475,12 @@ sub get_normal_parts_and_holes {
     my @l = map {
 	my $current = $start;
 	$start = $_->{start} + $_->{size};
-	my $hole = { start => $current, size => $_->{start} - $current, type => 0, rootDevice => $hd->{device} };
+	my $hole = { start => $current, size => $_->{start} - $current, pt_type => 0, rootDevice => $hd->{device} };
 	$hole, $_;
     } sort { $a->{start} <=> $b->{start} } grep { !isWholedisk($_) } get_normal_parts($hd);
 
-    push @l, { start => $start, size => $last - $start, type => 0, rootDevice => $hd->{device} };
-    grep { $_->{type} || $_->{size} >= $hd->cylinder_size } @l;
+    push @l, { start => $start, size => $last - $start, pt_type => 0, rootDevice => $hd->{device} };
+    grep { $_->{pt_type} || $_->{size} >= $hd->cylinder_size } @l;
 }
 
 sub read_one($$) {
@@ -516,8 +517,8 @@ sub read_one($$) {
     }
 
     my @extended = $hd->hasExtended ? grep { isExtended($_) } @$pt : ();
-    my @normal = grep { $_->{size} && $_->{type} && !isExtended($_) } @$pt;
-    my $nb_special_empty = int(grep { $_->{size} && $_->{type} == 0 } @$pt);
+    my @normal = grep { $_->{size} && $_->{pt_type} && !isExtended($_) } @$pt;
+    my $nb_special_empty = int(grep { $_->{size} && $_->{pt_type} == 0 } @$pt);
 
     @extended > 1 and die "more than one extended partition";
 
@@ -733,7 +734,7 @@ sub remove {
     0;
 }
 
-# create of partition at starting at `start', of size `size' and of type `type' (nice comment, uh?)
+# create of partition at starting at `start', of size `size' and of type `pt_type' (nice comment, uh?)
 sub add_primary {
     my ($hd, $part) = @_;
 
@@ -777,13 +778,13 @@ The only solution is to move your primary partitions to have the hole next to th
 	$l->{start} = round_down($l->{normal}{start} - 1, $hd->cylinder_size);
 	$l->{size} = $l->{normal}{start} + $l->{normal}{size} - $l->{start};
 	my $ext = { %$l };
-	unshift @{$hd->{extended}}, { type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
+	unshift @{$hd->{extended}}, { pt_type => 5, raw => [ $part, $ext, {}, {} ], normal => $part, extended => $ext };
 	#- size will be autocalculated :)
     } else {
 	my ($ext, $ext_size) = is_empty_array_ref($hd->{extended}) ?
 	  ($hd->{primary}, -1) : #- -1 size will be computed by adjust_main_extended
 	  (top(@{$hd->{extended}}), $part->{size});
-	my %ext = (type => $extended_type || 5, start => $part->{start}, size => $ext_size);
+	my %ext = (pt_type => $extended_type || 5, start => $part->{start}, size => $ext_size);
 
 	$hd->raw_add($ext->{raw}, \%ext);
 	$ext->{extended} = \%ext;

@@ -292,7 +292,7 @@ sub create_buttons4partitions {
 		last;
 	    }
 	});
-	$w->set_name("PART_" . type2name($entry->{type}));
+	$w->set_name("PART_" . pt_type2name($entry->{pt_type}));
 	$w->set_size_request($entry->{size} * $ratio + $minwidth, 0);
 	gtkpack__($kind->{display_box}, $w);
 	$w->grab_focus if $current_entry && fsedit::are_same_partitions($current_entry, $entry);
@@ -325,12 +325,12 @@ sub hd2kind {
 sub filesystems_button_box() {
     my @types = (N_("Ext2"), N_("Journalised FS"), N_("Swap"), arch() =~ /sparc/ ? N_("SunOS") : arch() eq "ppc" ? N_("HFS") : N_("Windows"),
 		 N_("Other"), N_("Empty"));
-    my %name2type = (Ext2 => 0x83, 'Journalised FS' => 0x483, Swap => 0x82, Other => 1, "Windows" => 0xb, HFS => 0x402);
+    my %name2pt_type = (Ext2 => 0x83, 'Journalised FS' => 0x483, Swap => 0x82, Other => 1, "Windows" => 0xb, HFS => 0x402);
 
     gtkpack(Gtk2::HBox->new(0,0), 
 	    N("Filesystem types:"),
 	    map { my $w = Gtk2::Button->new(translate($_));
-		  my $t = $name2type{$_};
+		  my $t = $name2pt_type{$_};
 		  $w->signal_connect(clicked => sub { try_('', \&createOrChangeType, $t, current_hd(), current_part()) });
 		  $w->can_focus(0);
 		  $w->set_name($_); 
@@ -339,20 +339,20 @@ sub filesystems_button_box() {
 }
 
 sub createOrChangeType {
-    my ($in, $type, $hd, $part, $all_hds) = @_;
+    my ($in, $pt_type, $hd, $part, $all_hds) = @_;
 
     $part ||= !fsedit::get_fstab($hd) && 
-              { type => 0, start => 1, size => $hd->{totalsectors} - 1 };
+              { pt_type => 0, start => 1, size => $hd->{totalsectors} - 1 };
     $part or return;
-    if ($type == 1) {
-	$in->ask_warn('', N("Use ``%s'' instead", $part->{type} ? N("Type") : N("Create")));
-    } elsif (!$type) {
-	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if $part->{type};
-    } elsif ($part->{type}) {
-	return if $type == $part->{type};
+    if ($pt_type == 1) {
+	$in->ask_warn('', N("Use ``%s'' instead", $part->{pt_type} ? N("Type") : N("Create")));
+    } elsif (!$pt_type) {
+	$in->ask_warn('', N("Use ``%s'' instead", N("Delete"))) if $part->{pt_type};
+    } elsif ($part->{pt_type}) {
+	return if $pt_type == $part->{pt_type};
 	$in->ask_warn('', isBusy($part) ? N("Use ``Unmount'' first") : N("Use ``%s'' instead", N("Type")));
     } else {
-	$part->{type} = $type;
+	$part->{pt_type} = $pt_type;
 	diskdrake::interactive::Create($in, $hd, $part, $all_hds);
     }
 }

@@ -124,14 +124,14 @@ sub raw_removed {
 }
 sub can_raw_add {
     my ($hd) = @_;
-    $_->{size} || $_->{type} or return 1 foreach @{$hd->{primary}{raw}};
+    $_->{size} || $_->{pt_type} or return 1 foreach @{$hd->{primary}{raw}};
     0;
 }
 sub raw_add {
     my ($_hd, $raw, $part) = @_;
 
     foreach (@$raw) {
-	$_->{size} || $_->{type} and next;
+	$_->{size} || $_->{pt_type} and next;
 	$_ = $part;
 	return;
     }

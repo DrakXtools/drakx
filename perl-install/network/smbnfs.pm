@@ -35,8 +35,8 @@ sub to_fullstring {
     $class->to_dev($e) . ($comment ? " ($comment)" : '');
 }
 sub to_fstab_entry_raw {
-    my ($class, $e, $type) = @_;
-    my $fs_entry = { device => $class->to_dev($e), type => $type };
+    my ($class, $e, $pt_type) = @_;
+    my $fs_entry = { device => $class->to_dev($e), pt_type => $pt_type };
     fs::set_default_options($fs_entry);
     $fs_entry;
 }

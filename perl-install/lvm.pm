@@ -92,10 +92,10 @@ sub get_lvs {
       [
        map {
 	   my $device = "$lvm->{VG_name}/$_";
-	   my $type = -e "/dev/$device" && fsedit::typeOfPart($device);
+	   my $pt_type = -e "/dev/$device" && fsedit::typeOfPart($device);
 
 	   { device => $device, 
-	     type => $type || 0x83,
+	     type => $pt_type || 0x83,
 	     size => get_lv_size($device) }
        } @l
       ];

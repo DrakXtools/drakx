@@ -35,7 +35,7 @@ points, select \"New\".")) },
 sub create {
     my ($in, $all_hds) = @_;
 
-    my $dav = { type => 'davfs' };
+    my $dav = { pt_type => 'davfs' };
     ask_server($in, $dav, $all_hds) or return;
     push @{$all_hds->{davs}}, $dav;
     config($in, $dav, $all_hds);

@@ -139,7 +139,7 @@ sub read($$) {
                 $h{start} = ($h{pPBlockStart} * $info{bzBlkSize}) / 512;
 
                 if ($h{pType} =~ /^Apple_UNIX_SVR2/i) {
-                    $h{pName} =~ /swap/i ? ($h{type} = 0x82) : ($h{type} = 0x83);
+                    $h{pName} =~ /swap/i ? ($h{pt_type} = 0x82) : ($h{pt_type} = 0x83);
                 } elsif ($h{pType} =~ /^Apple_Free/i) {
                 	#- need to locate a 1MB partition to setup a bootstrap on
                 	if ($freepart && $freepart->{size} >= 1) {
@@ -148,10 +148,10 @@ sub read($$) {
 			    $freepart = { start => $h{start}, size => $h{size}/2048, hd => $hd, part => "/dev/$hd->{device}" . ($i+1) };
 			    log::l("free apple partition found on drive /dev/$freepart->{hd}{device}, block $freepart->{start}, size $freepart->{size}");
                 	}
-			$h{type} = 0x0;
+			$h{pt_type} = 0x0;
 			$h{pName} = 'Extra';                    
                 } elsif ($h{pType} =~ /^Apple_HFS/i) {
-                 	$h{type} = 0x402;
+                 	$h{pt_type} = 0x402;
                  	if (defined $macos_part) {		
                  		#- swag at identifying MacOS - 1st HFS partition
                  	} else {	
@@ -159,10 +159,10 @@ sub read($$) {
                  		log::l("found MacOS at partition $macos_part");
                  	}
                 } elsif ($h{pType} =~ /^Apple_Partition_Map/i) {
-                 	$h{type} = 0x401;
+                 	$h{pt_type} = 0x401;
                  	$h{isMap} = 1;
                 } elsif ($h{pType} =~ /^Apple_Bootstrap/i) {
-                 	$h{type} = 0x401;
+                 	$h{pt_type} = 0x401;
                  	$h{isBoot} = 1;
                  	if (defined $bootstrap_part) {
                  		#found a bootstrap already - use it, but log the find
@@ -172,7 +172,7 @@ sub read($$) {
                  		log::l("found apple bootstrap at partition $bootstrap_part");
                  	}
                 } else {
-                 	$h{type} = 0x401;
+                 	$h{pt_type} = 0x401;
                      $h{isDriver} = 1;
                 };
 
@@ -218,7 +218,7 @@ sub write($$$;$) {
         if ($last->{start} + $last->{size} < $part->{start}) {
             #There is a gap between partitions.  Fill it and move on.
             push @partstowrite, {
-                type => 0x0,
+                pt_type => 0x0,
                 start => $last->{start} + $last->{size},
                 size => $part->{start} - ($last->{start} + $last->{size}),
             };
@@ -229,7 +229,7 @@ sub write($$$;$) {
     # now, fill a gap at the end if there is one.
     if ($last->{start} + $last->{size} < $hd->{totalsectors}) {
         push @partstowrite, {
-            type => 0x0,
+            pt_type => 0x0,
             start => $last->{start} + $last->{size},
             size => $hd->{totalsectors} - ($last->{start} + $last->{size}),
      	};
@@ -281,15 +281,15 @@ sub write($$$;$) {
             $_->{pBootArgs} = "\0";
             $_->{pReserved} = "\0";
 
-            if ($_->{type} == 0x402) {
+            if ($_->{pt_type} == 0x402) {
                 $_->{pType} = "Apple_HFS";
                 $_->{pName} = "MacOS";
                 $_->{pFlags} = 0x4000037F;
-            } elsif ($_->{type} == 0x401 && $_->{start} == 1) {
+            } elsif ($_->{pt_type} == 0x401 && $_->{start} == 1) {
                 $_->{pType} = "Apple_Partition_Map";
                 $_->{pName} = "Apple";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x401) {
+            } elsif ($_->{pt_type} == 0x401) {
                 $_->{pType} = "Apple_Bootstrap";
                 $_->{pName} = "bootstrap";
                 $_->{pFlags} = 0x33;
@@ -297,31 +297,31 @@ sub write($$$;$) {
 		log::l("writing a bootstrap at /dev/$_->{device}");
 		$install_steps_interactive::new_bootstrap = 1 if !(defined $partition_table::mac::bootstrap_part);
 		$bootstrap_part = "/dev/" . $_->{device};
-            } elsif ($_->{type} == 0x82) {
+            } elsif ($_->{pt_type} == 0x82) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "swap";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x83) {
+            } elsif ($_->{pt_type} == 0x83) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux Native";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x183) {
+            } elsif ($_->{pt_type} == 0x183) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux ReiserFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x283) {
+            } elsif ($_->{pt_type} == 0x283) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux XFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x383) {
+            } elsif ($_->{pt_type} == 0x383) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux JFS";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x483) {
+            } elsif ($_->{pt_type} == 0x483) {
                 $_->{pType} = "Apple_UNIX_SVR2";
                 $_->{pName} = "Linux ext3";
                 $_->{pFlags} = 0x33;
-            } elsif ($_->{type} == 0x0) {
+            } elsif ($_->{pt_type} == 0x0) {
                 $_->{pType} = "Apple_Free";
                 $_->{pName} = "Extra";
                 $_->{pFlags} = 0x31;
@@ -361,13 +361,13 @@ sub clear_raw {
 
     #- handle special case for partition 1 which is the partition map.
     $pt->{raw}[0] = {
-        type => 0x401,
+        pt_type => 0x401,
         start => 1,
         size => 63,
         isMap => 1,
     };
 #	$pt->{raw}[1] = {
-#		type => 0x0,
+#		pt_type => 0x0,
 #		start => 64,
 #		size => $hd->{totalsectors} - 64,
 #		isMap => 0,

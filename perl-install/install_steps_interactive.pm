@@ -286,7 +286,7 @@ sub doPartitionDisks {
 		log::l("creating bootstrap partition on drive /dev/$freepart->{hd}{device}, block $freepart->{start}");
 		$partition_table::mac::bootstrap_part = $freepart->{part};	
 		log::l("bootstrap now at $partition_table::mac::bootstrap_part");
-		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
+		fsedit::add($freepart->{hd}, { start => $freepart->{start}, size => 1 << 11, pt_type => 0x401, mntpoint => '' }, $o->{all_hds}, { force => 1, primaryOrExtended => 'Primary' });
 		$new_bootstrap = 1;    
 	    } else {
 		$o->ask_warn('', N("No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"));

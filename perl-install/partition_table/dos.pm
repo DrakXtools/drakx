@@ -11,7 +11,7 @@ use partition_table::raw;
 use partition_table;
 use c;
 
-my @fields = qw(active start_head start_sec start_cyl type end_head end_sec end_cyl start size);
+my @fields = qw(active start_head start_sec start_cyl pt_type end_head end_sec end_cyl start size);
 my $format = "C8 V2";
 my $magic = "\x55\xAA";
 my $nb_primary = 4;
@@ -52,7 +52,7 @@ sub compute_CHS {
 sub CHS_from_part_rawCHS {
     my ($part) = @_;
 
-    $part->{start} || $part->{type} or return;
+    $part->{start} || $part->{pt_type} or return;
 
     my ($raw_chs_start, $raw_chs_end) = get_rawCHS($part);
     rawCHS2CHS($raw_chs_start), rawCHS2CHS($raw_chs_end);
@@ -61,7 +61,7 @@ sub CHS_from_part_rawCHS {
 sub CHS_from_part_linear {
     my ($geom, $part) = @_;
 
-    $part->{start} || $part->{type} or return;
+    $part->{start} || $part->{pt_type} or return;
 
     sector2CHS($geom, $part->{start}), sector2CHS($geom, $part->{start} + $part->{size} - 1);
 }
@@ -197,7 +197,7 @@ sub read {
 }
 
 # write the partition table (and extended ones)
-# for each entry, it uses fields: start, size, type, active
+# for each entry, it uses fields: start, size, pt_type, active
 sub write($$$;$) {
     my ($hd, $sector, $pt) = @_;
 
@@ -215,7 +215,7 @@ sub write($$$;$) {
     foreach (@$pt) {
 	compute_CHS($hd, $_);
 	local $_->{start} = $_->{local_start} || 0;
-	$_->{active} ||= 0; $_->{type} ||= 0; $_->{size} ||= 0; #- for no warning
+	$_->{active} ||= 0; $_->{pt_type} ||= 0; $_->{size} ||= 0; #- for no warning
 	syswrite $F, pack($format, @$_{@fields}), psizeof($format) or return 0;
     }
     syswrite $F, $magic, length $magic or return 0;
