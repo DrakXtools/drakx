@@ -35,6 +35,11 @@ select \"Printer on remote CUPS server\" in this case.") : ()),
 
 sub setup_remote_cups_server {
     my ($printer, $in) = @_;
+
+    # Check whether the network functionality is configured and
+    # running
+    if (!check_network($printer, $in)) {return 0};
+
     $in->set_help('configureRemoteCUPSServer') if $::isInstall;
     my $queue = $printer->{OLD_QUEUE};
     #- hack to handle cups remote server printing,
@@ -65,6 +70,8 @@ sub setup_remote_cups_server {
 		    $printer->{DEFAULT} = $default;
 		    printer::set_default_printer($printer);
 		}
+	    } else {
+		$default = $printer->{DEFAULT};
 	    }
 	    my $queue;
 	    for $queue (@queuelist) {
@@ -72,9 +79,14 @@ sub setup_remote_cups_server {
 		    $default = $queue;
 		}
 	    }
+	    # The default printer setting should not be "None" when there
+	    # are printers
+	    if ($default eq _("None")) {
+		$default = _("Choose a default printer!");
+	    }
 	} else {
-	    push(@queuelist, "None");
-	    $default = "None";
+	    push(@queuelist, _("None"));
+	    $default = _("None");
 	}
 	#- Did we have automatic or manual configuration mode for CUPS
 	$autoconf = printer::get_cups_autoconf();
@@ -144,7 +156,8 @@ CUPS afterwards (command: \"service cups restart\").") : ()),
 	    if ($default =~ /^\s*([^\s\(\)]+)\s*\(/) {
 		$default = $1;
 	    }
-	    if ($default ne "None") {
+	    if (($default ne _("None")) &&
+		($default ne _("Choose a default printer!"))) {
 		$printer->{DEFAULT} = $default;
 	        printer::set_default_printer($printer);
 	    }
@@ -278,6 +291,10 @@ complete => sub {
 sub setup_lpd {
     my ($printer, $in) = @_;
 
+    # Check whether the network functionality is configured and
+    # running
+    if (!check_network($printer, $in)) {return 0};
+
     $in->set_help('setupLPD') if $::isInstall;
     my ($uri, $remotehost, $remotequeue);
     my $queue = $printer->{OLD_QUEUE};
@@ -326,6 +343,10 @@ complete => sub {
 
 sub setup_smb {
     my ($printer, $in) = @_;
+
+    # Check whether the network functionality is configured and
+    # running
+    if (!check_network($printer, $in)) {return 0};
 
     $in->set_help('setupSMB') if $::isInstall;
     my ($uri, $smbuser, $smbpassword, $workgroup, $smbserver, $smbserverip, $smbshare);
@@ -414,6 +435,10 @@ complete => sub {
 sub setup_ncp {
     my ($printer, $in) = @_;
 
+    # Check whether the network functionality is configured and
+    # running
+    if (!check_network($printer, $in)) {return 0};
+
     $in->set_help('setupNCP') if $::isInstall;
     my ($uri, $ncpuser, $ncppassword, $ncpserver, $ncpqueue);
     my $queue = $printer->{OLD_QUEUE};
@@ -482,6 +507,11 @@ complete => sub {
 
 sub setup_socket {
     my ($printer, $in) = @_;
+
+    # Check whether the network functionality is configured and
+    # running
+    if (!check_network($printer, $in)) {return 0};
+
     $in->set_help('setupSocket') if $::isInstall;
     my ($hostname, $port, $uri, $remotehost,$remoteport);
     my $queue = $printer->{OLD_QUEUE};
@@ -555,6 +585,10 @@ complete => sub {
     return 0;
 }
     );
+
+    # Non-local printer, check network and abort if no network available
+    if (($printer->{currentqueue}{'connect'} !~ m!^file:/!) &&
+        (!check_network($printer, $in))) {return 0};
 
     # If the chosen protocol needs additional software, install it.
 
@@ -1400,18 +1434,25 @@ new printing system %s?", $oldqueue, $newspoolerstr), 1))) {
     }
 }
 
+sub start_network {
+    my $in = $_[0];
+    my $w = $in->wait_message(_("Configuration of a remote printer"), 
+			      _("Starting network ..."));
+    return printer::start_service("network");
+}
+
 sub check_network {
-    # CUPS, LPD, and LPRng need at least basic network functionality to
-    # work. Here we check the state of the network to assure that the
-    # chosen spooler will work.
+
+    # This routine is called whenever the user tries to configure a remote
+    # printer. It checks the state of the network functionality to assure
+    # that the network is up and running so that the remote printer is
+    # reachable.
 
     my ($printer, $in) = @_;
-    $in->set_help('checkNetwork') if $::isInstall;
-    if ((!$printer->{SPOOLER}) || ($printer->{SPOOLER} eq "pdq")) {
-	return 1;
-    }
 
-    # First Check: Does /etc/sysconfig/network-scripts/draknet_conf exist
+    $in->set_help('checkNetwork') if $::isInstall;
+
+    # First check: Does /etc/sysconfig/network-scripts/draknet_conf exist
     # (otherwise the network is not configured yet and draknet has to be
     # started)
 
@@ -1420,15 +1461,11 @@ sub check_network {
 	while (!$go_on) {
 	    my $choice = _("Configure the network now");
 	    if ($in->ask_from(_("Network functionality not configured"),
-			      _("The printing system which you are going to use (%s) needs basic 
-network functionality, but your network functionality is not
-configured yet. If you go on without network configuration, your
-printing system will set up a network only consisting of the 
-local machine which does not allow the usage of remote printers
-or the sharing of a local printer with remote clients, but you
-can set up local printers usable from your local machine. How do
- you want to proceed?",
-				$printer::shortspooler_inv{$printer->{SPOOLER}}),
+			      _("You are going to configure a remote printer. This needs working
+network access, but your network is not configured yet. If you
+go on without network configuration, you will not be able to
+use the printer which you are configuring now. How do you want 
+to proceed?"),
 			      [ { val => \$choice, type => 'list',
 				  list => [ _("Configure the network now"),
 					    _("Go on without configuring the network") ]} ] )) {
@@ -1455,14 +1492,38 @@ can set up local printers usable from your local machine. How do
 	    }
 	}
     }
-    # Second check: The network is configured now, check whether it is up
-    # and running and if not, start it.
 
-    if (!printer::network_status()) {
-	printer::restart_service("network");
+    # Second check: Is the network running?
+
+    if (printer::network_running()) {return 1;}
+
+    # The network is configured now, start it.
+    if (!start_network($in)) {
+	$in->ask_warn(_("Configuration of a remote printer"), 
+($::isInstall ?
+_("The network configuration done during the installation 
+cannot be started now. Please check whether the network
+gets accessable after booting your system and correct the
+configuration using the Mandrake Control Center, section
+\"Network & Internet\"/\"Connection\", and afterwards set
+up the printer, also using the Mandrake Control Center,
+section \"Hardware\"/\"Printer\"") :
+_("The network access was not running and could not be 
+started. Please check your configuration and your 
+hardware. Then try to configure your remote printer
+again.")));
+	return 0;
     }
 
-    1;
+    # Give a SIGHUP to the daemon and in case of CUPS do also the
+    # automatic configuration of broadcasting/access permissions
+    # The daemon is not really restarted but only SIGHUPped to not
+    # interrupt print jobs.
+
+    my $w = $in->wait_message(_("Configuration of a remote printer"), 
+			      _("Restarting printing system ..."));
+    return printer::SIGHUP_daemon($printer->{SPOOLER});
+
 }
 
 sub security_check {
@@ -1572,9 +1633,6 @@ sub install_spooler {
 					   if_($in->do_pkgs->is_installed('kdebase'), 'kups'),
 					   ($::expert ? 'cups-drivers' : ())));
 		}
-		# Check whether the network functionality is configured and
-		# running
-		if (!check_network($printer, $in)) {return 0};
 		# Start daemon
 	        printer::start_service("cups");
 		# Set the CUPS tools as defaults for "lpr", "lpq", "lprm", ...
@@ -1605,9 +1663,6 @@ sub install_spooler {
 					       /sbin/ifconfig))))) {
 		    $in->do_pkgs->install(('lpr', 'net-tools'));
 		}
-		# Check whether the network functionality is configured and
-		# running
-		if (!check_network($printer, $in)) {return 0};
 		# Start daemon
 	        printer::restart_service("lpd");
 		# Set the LPD tools as defaults for "lpr", "lpq", "lprm", ...
@@ -1635,9 +1690,6 @@ sub install_spooler {
 					       /sbin/ifconfig))))) {
 		    $in->do_pkgs->install('LPRng', 'net-tools');
 		}
-		# Check whether the network functionality is configured and
-		# running
-		if (!check_network($printer, $in)) {return 0};
 		# Start daemon
 	        printer::restart_service("lpd");
 		# Set the LPRng tools as defaults for "lpr", "lpq", "lprm", ...

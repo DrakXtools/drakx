@@ -111,34 +111,34 @@ sub set_permissions {
     my ($file, $perms, $owner, $group) = @_;
     if ($owner && $group) {
         run_program::rooted($prefix, "/bin/chown", "$owner.$group", $file)
-	    || die "Could not restart chown!";
+	    || die "Could not start chown!";
     } elsif ($owner) {
         run_program::rooted($prefix, "/bin/chown", $owner, $file)
-	    || die "Could not restart chown!";
+	    || die "Could not start chown!";
     } elsif ($group) {
         run_program::rooted($prefix, "/bin/chgrp", $group, $file)
-	    || die "Could not restart chgrp!";
+	    || die "Could not start chgrp!";
     }
     run_program::rooted($prefix, "/bin/chmod", $perms, $file)
-	|| die "Could not restart chmod!";
+	|| die "Could not start chmod!";
 }
 
 sub restart_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart")
-	|| die "Could not restart $service!";
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "restart");
+    if (($? >> 8) != 0) {return 0;} else {return 1;}
 }
 
 sub start_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start")
-	|| die "Could not start $service!";
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "start");
+    if (($? >> 8) != 0) {return 0;} else {return 1;}
 }
 
 sub stop_service ($) {
     my ($service) = @_;
-    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop")
-	|| die "Could not stop $service!";
+    run_program::rooted($prefix, "/etc/rc.d/init.d/$service", "stop");
+    if (($? >> 8) != 0) {return 0;} else {return 1;}
 }
 
 sub service_starts_on_boot ($) {
@@ -165,28 +165,49 @@ sub start_service_on_boot ($) {
     return 1;
 }
 
-sub network_status {
-    # If the network is not running or not running as configured,
-    # return 0, otherwise 1.
+sub SIGHUP_daemon {
+    my ($spooler) = @_;
+    # PDQ has no daemon, exit.
+    if ($spooler eq "pdq") {return 1};
+    # CUPS needs auto-configuration
+    if ($spooler eq "cups") {
+        run_program::rooted($prefix, "/usr/sbin/setcupsconfig");
+    }
+    # Name of the daemon
+    my $daemon;
+    if (($spooler eq "lpr") || ($spooler eq "lpd") || ($spooler eq "lprng")) {
+	$daemon = "lpd";
+    } elsif ($spooler eq "cups") {
+	$daemon = "cupsd";
+    } else {
+	return 1;
+    }
+    # Send the SIGHUP
+    run_program::rooted($prefix, "/usr/bin/killall", "-HUP", $daemon);
+    # CUPS needs some time to come up.
+    if ($spooler eq "cups") {
+	sleep 5;
+    }
+    return 1;
+}
+
+sub network_running {
+    # If the network is not running return 0, otherwise 1.
     local *F; 
     open F, ($::testing ? "$prefix" : "chroot $prefix/ ") . 
-	"/bin/sh -c \"export LC_ALL=C; /etc/rc.d/init.d/network status\" |" ||
-	    die "Could not run \"/etc/rc.d/init.d/network status\"!";
+	"/bin/sh -c \"export LC_ALL=C; /sbin/ifconfig\" |" ||
+	    die "Could not run \"ifconfig\"!";
     while (<F>) {
-	if (($_ =~ /Devices.*down/) || # Are there configured devices which
-	                               # are down
-	    ($_ =~ /Devices.*modified/)) { # Configured devices which are not
-	                                   # running as configured
-	    my $devices = <F>;
-	    chomp $devices;
-	    if ($devices !~ /^\s*$/) { # Blank line
-		close F;
-		return 0;
-	    }
+	if (($_ !~ /^lo\s+/) && # The loopback device can have been started by
+	                        # the spooler's startup script
+	    ($_ =~ /^(\S+)\s+/)) { # In this line starts an entry for a
+	                           # running network
+	    close F;
+	    return 1;
 	}
     }
     close F;
-    return 1;
+    return 0;
 }
 
 sub get_security_level {
