@@ -198,8 +198,11 @@ sub ensure_is_installed {
 
 sub check_kernel_module_packages {
     my ($do, $base_name, $ext_name) = @_;
-    my $result;
-    my (%list, %select);
+    my ($result, %list, %select);
+    my @rpm_qa if 0;
+
+    #- initialize only once from rpm -qa output...
+    @rpm_qa or @rpm_qa = `rpm -qa`;
 
     eval {
 	local *_;
@@ -213,10 +216,10 @@ sub check_kernel_module_packages {
 	    $_->name eq $ext_name and $list{$_->name} = 1;
 	    $_->name =~ /$base_name/ and $list{$_->name} = 1;
 	}
-	foreach (`rpm --qf '\%{NAME}\n' -qa`) {
-	    chomp;
-	    $_ eq $ext_name and $list{$_} = 0;
-	    /$base_name/ and $list{$_} = 0;
+	foreach (@rpm_qa) {
+	    my ($name) = /(.*?)-[^-]*-[^-]*$/ or next;
+	    $name eq $ext_name and $list{$name} = 0;
+	    $name =~ /$base_name/ and $list{$name} = 0;
 	}
     };
     if (!$ext_name || exists $list{$ext_name}) {
@@ -230,7 +233,7 @@ sub check_kernel_module_packages {
 	    } else {
 		#- kernel version is not recognized, what to do ?
 	    }
-	    foreach (`rpm -qa`) {
+	    foreach (@rpm_qa) {
 		($ext, $version_release) = /kernel[^\-]*(-smp|-enterprise|-secure)?(?:-([^\-]+))$/;
 		$list{"$base_name$ext-$version_release"} and $select{"$base_name$ext-$version_release"} = 1;
 	    }
