@@ -598,7 +598,7 @@ my %xim = (
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
-  #- 'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
+  #-?Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
   #- and convert them to right ones, 'Strict' refuses bad sequences
   'th_TH' => {
 	XIM_PROGRAM => '/bin/true', #- it's an internal module
@@ -763,7 +763,7 @@ my %charset2kde_font = (
   'iso-8859-13' => [ "Sans,10", "Monospace,10" ],
   'jisx0208' => [ "Sazanami Mincho,13", "Sazanami Gothic,13" ],
   'ksc5601' => [ "Baekmuk Gulim,16" ],
-  'gb2312' => [ "AR PL SungtiL GB,13" ],
+  'gb2312' => [ "Nimbus Sans L,12", "Monospace,12" ],
   'Big5' => [ "AR PL Mingti2L Big5,13" ],
   'tis620' => [ "Norasi,16", "Norasi,15" ],
   'utf_ar' => [ "Kacs_qr,14", "Courier New,13", "Kacs_qr,13" ], 
