@@ -362,6 +362,12 @@ sub set_default_options {
 	$options->{user} = 0;
     }
 
+    if ($options->{supermount}) {
+	#- drives supermount crazy :'-(
+	delete $options->{'codepage='};
+	delete $options->{'iocharset='};
+    }
+
     # have noauto when we have user
     $options->{noauto} = 1 if $options->{user}; 
 
