@@ -437,13 +437,6 @@ sub prep_net_suppl_media {
     network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
     require install_interactive;
     install_interactive::upNetwork($o);
-    #- force reinitialisation of network modules
-    delete $INC{'IO/Socket.pm'};
-    delete $INC{'IO/Socket/UNIX.pm'};
-    delete $INC{'IO/Socket/INET.pm'};
-    delete $INC{'ftp.pm'};
-    delete $INC{'http.pm'};
-    require IO::Socket;
 }
 
 sub selectSupplMedia {
