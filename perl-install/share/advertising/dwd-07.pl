@@ -12,7 +12,7 @@ $border = 10;  #- for leftish text
 
 @text = ([ N("<b>Become a MandrakeClub member!</b>"), center => 1 ],
         ' ',
-        N("Take advantage of valuable benefits, products and services by joining Mandrake Club, such as:"),
+        N("Take advantage of valuable benefits, products and services by joining MandrakeClub, such as:"),
 	N("	- Full access to commercial applications"),
 	N("	- Special download mirror list exclusively for MandrakeClub Members"),
 	N("	- Voting for software to put in Mandrakelinux"),
