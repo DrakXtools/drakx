@@ -444,6 +444,10 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	    )) {
 		return 0;
 	    }
+	    if ($device ne $menuentries->{$menuchoice}) {
+		$menuchoice = "";
+		$do_auto_detect = 0;
+	    }
 	    if ($manualconf) {
 		$printer->{MANUAL} = 1;
 	    } else {
@@ -460,7 +464,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
     if (!$do_auto_detect) {
 	local $::isWizard = 0;
 	$isHPOJ = $in->ask_yesorno(_("Local Printer"),
-				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart LaserJet 1100/1200/1220/3200 with scanner)?"), 0);
+				   _("Is your printer a multi-function device from HP (OfficeJet, PSC, PhotoSmart, LaserJet 1100/1200/1220/3200/3300 with scanner)?"), 0);
     }
     if (($menuchoice =~ /HP\s+OfficeJet/i) ||
 	($menuchoice =~ /HP\s+PSC/i) ||
@@ -469,6 +473,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 	($menuchoice =~ /HP\s+LaserJet\s+1200/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+1220/i) ||
 	($menuchoice =~ /HP\s+LaserJet\s+3200/i) ||
+	($menuchoice =~ /HP\s+LaserJet\s+33.0/i) ||
 	($isHPOJ)) {
 	# Install HPOJ package
 	if ((!$::testing) &&
@@ -484,7 +489,7 @@ _(" (Parallel Ports: /dev/lp0, /dev/lp1, ..., equivalent to LPT1:, LPT2:, ..., 1
 
 	if ($ptaldevice) {
 	    # Configure scanning with SANE on the MF device
-	    if (($menuchoice =~ /HP\s+OfficeJet\s+[KVRGP]/i) ||
+	    if (($menuchoice =~ /HP\s+OfficeJet\s+[KVRGPD]/i) ||
 		($menuchoice =~ /HP\s+PSC\s+[579]/i)) {
 		# Install SANE
 		if ((!$::testing) &&
