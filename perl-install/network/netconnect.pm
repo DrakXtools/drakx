@@ -592,7 +592,8 @@ notation (for example, 1.2.3.4).")),
                         $ethntf->{HWADDR} = $track_network_id or delete $ethntf->{HWADDR};
                         $in->do_pkgs->install($netcnx->{dhcp_client}) if $auto_ip;
 
-                        #FIXME "wireless" if $ethntf->{wireless_eth};
+
+                        return "wireless" if is_wireless_intf($module);
                         return "static_hostname";
                     },
                    },
@@ -600,12 +601,10 @@ notation (for example, 1.2.3.4).")),
                    wireless =>
                    {
                     pre => sub {
-                        if (is_wireless_intf($module)) {
-                            $ethntf->{wireless_eth} = 1;
-                            $netc->{wireless_eth} = 1;
-                            $ethntf->{WIRELESS_MODE} = "Managed";
-                            $ethntf->{WIRELESS_ESSID} = "any";
-                        }
+                        $ethntf->{wireless_eth} = 1;
+                        $netc->{wireless_eth} = 1;
+                        $ethntf->{WIRELESS_MODE} = "Managed";
+                        $ethntf->{WIRELESS_ESSID} = "any";
                     },
                     name => N("Please enter the wireless parameters for this card:"),
                     data => [
@@ -667,6 +666,7 @@ See iwpriv(8) man page for further information."),
                     post => sub {
                         # untranslate parameters
                         $ethntf->{WIRELESS_MODE} = $wireless_mode{$ethntf->{WIRELESS_MODE}};
+                        return "static_hostname";
                     },
                    },
                    
