@@ -338,6 +338,8 @@ sub install2::configMove {
     $_->{mntpoint} && !$_->{isMounted} and run_program::run('mount', $_->{mntpoint}) foreach fsedit::get_really_all_fstab($o->{all_hds});
 
     modules::write_conf('');
+    require mouse;
+    mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
 
     foreach my $step (@{$o->{orderedSteps_orig}}) {
