@@ -96,20 +96,3 @@ diff -u -r1.171 install_steps_gtk.pm
      install_gtk::init_sizes();
      install_gtk::default_theme($o);
      install_gtk::create_logo_window($o);
-Index: interactive_gtk.pm
-===================================================================
-RCS file: /home/cvs/cooker/gi/perl-install/interactive_gtk.pm,v
-retrieving revision 1.94
-diff -u -r1.94 interactive_gtk.pm
---- interactive_gtk.pm	2000/12/18 19:36:04	1.94
-+++ interactive_gtk.pm	2000/12/20 23:29:33
-@@ -351,6 +351,9 @@
- 		   $ok
- 		   ));
-     widget($widgets[0],$val->[0])->grab_focus();
-+
-+#    mapn { $_[0]{expert} and $_[1]->hide } $val, \@widgets, $l;
-+
-     if ($hcallback{complete}) {
- 	my $callback = sub {
- 	    my ($error, $focus) = &{$hcallback{complete}};

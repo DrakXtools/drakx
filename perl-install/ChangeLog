@@ -1,3 +1,112 @@
+2002/04/03  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps.pm: setting /etc/sysconfig/msec for chkconfig which
+	doesn't use $ENV{SECURE_LEVEL} anymore
+
+2002/04/02  Pixel  <pixel@mandrakesoft.com>
+
+	* bootloader.pm: do not have "root=" with no root (needed for memtest)
+	(thanks to Borsenkow Andrej)
+
+	* share/rpmsrate: add tmpwatch (since it is not mandatory any more)
+
+2002/03/30  Yves Duret <yduret@mandrakesoft.com>
+
+	* standalone/drakbackup, standalone/drakfont: bugs fixes, code clean up,
+	more mdkish..
+
+2002/03/26  Till Kamppeter <till@mandrakesoft.com>
+
+	* printer.pm, printerdrake.pm: Fixed several problems related to HP
+	multi-function devices:
+	  - Parallel multi-function devices worked only on the first (onboard)
+	parallel
+	port.
+	  - HP LaserJet 2200 needs HPOJ for printing via USB.
+	  - For the HP OfficeJet D series the scanning instructions were not
+	shown.
+	  - HPOJ does not work with HP PhotoSmart 10xx, 11xx, and 12xx.
+
+2002/03/22  dam's  <damien@mandrakesoft.com>
+
+	* my_gtk.pm: cleaned gtkpowerpack
+
+2002/03/21  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* install_any.pm: use /root rather than /tmp for some temp files (security
+	suxx)
+
+2002/03/20  Guillaume Cottenceau  <gc@mandrakesoft.com>
+
+	* rescue/list: rpm 4.0.4
+
+	* mdk-stage1/network.c: don't save DHCP_HOSTNAME if the value is void
+
+2002/03/20  sdupont
+
+	* standalone/drakfont: fixing problems
+	exchanging: ttmkfdir by  /usr/X11R6/bin/mkttfdir
+	which generate correct fonts.dir
+
+	* standalone/drakbackup: remove backup on cd
+
+2002/03/20  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* standalone/drakxtv: use log for what is not related to explanations
+
+2002/03/19  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/updatehdlist: take care of commercial medium (not syncable).
+
+2002/03/19  Thierry Vignaud  <tvignaud@mandrakesoft.com
+
+	* standalone/drakxtv: 
+	  - default tv norm is pal rather than ntsc (because of alphabetical
+	sort) since it's the most used tv norm
+	  - figure out tv norm & country (aka frequency table) from locales
+	
+	  - add a hash based on lang in order to do this
+	
+	  - add --no-guess if one doesn't want drakxtv to automagically guess tv
+	  norm and geographic area through locales (lang.pm)
+	
+	  - log with standalone::explanations:
+	
+		 - guessed values from locales: language, tv norm and country
+	
+		 - runned command to scan for tv channels
+	
+	  	 - ~/.xawtv creation
+	
+	
+	  - s/bcast/broadcast/ in displayed messages
+	
+	  - add -h and --help support
+
+2002/03/18  dam's  <damien@mandrakesoft.com>
+
+	* install_gtk.pm, mouse.pm, my_gtk.pm: corrected create_xpm API
+
+2002/03/18  François Pons  <fpons@mandrakesoft.com>
+
+	* tools/oem-prepare: fixed to support rpm filename incoherent to standard
+	naming for commercial
+	packages (commercial are *really* shit (almost, for the hope) all the
+	time ?)
+
+2002/03/16  dam's  <damien@mandrakesoft.com>
+
+	* network/ethernet.pm: we now consider dhcp provide GATEWAY and internet
+	connection.
+
+2002/03/16  Pablo Saratxaga <pablo@mandrakesoft.com>
+
+	* share/po/ko.po, share/po/ar.po: updated po file
+
+2002/03/16  Pixel  <pixel@mandrakesoft.com>
+
+	* network/ethernet.pm: small cleanup on untested code (need testing:)
+
 2002/03/16  dam's  <damien@mandrakesoft.com>
 
 	* network/ethernet.pm: we now consider dhcp provide GATEWAY and internet
