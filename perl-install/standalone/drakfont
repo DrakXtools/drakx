@@ -243,11 +243,16 @@ sub search_installed_fonts_full_path {
 }
 
 sub search_windows_font {
-    foreach my $fstab_line (grep { /ext2/ } cat_('/etc/mtab') ) {
+    foreach my $fstab_line (grep { /vfat/ } cat_('/etc/mtab') ) {
 	my $win_dir = (split('\s', $fstab_line))[1];
 	my @list_fonts_win = all("$win_dir/windows/fonts");
 	my @list_fonts_winnt = all("$win_dir/winnt/fonts");
 	my $nb_dir = @list_fonts_win + @list_fonts_winnt;
+	if(!@list_fonts_win && !@list_fonts_winnt) {
+	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
+	    $interactive and display_error(_("could not find any font in %s/win*/fonts", $win_dir));
+	    return 0;
+	}
 	if(!@list_fonts_win && !@list_fonts_winnt) {
 	    print "[35mdrakfont:: could not find any font in $win_dir/win*/fonts [0m\n";
 	    $interactive and display_error(_("could not find any font in %s/win*/fonts", $win_dir));
