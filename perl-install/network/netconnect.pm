@@ -80,11 +80,11 @@ sub real_main {
       my $mouse = $o_mouse ||= {};
       my $intf  = $o_intf  ||= {};
       my $first_time = $o_first_time || 0;
-      my ($network_configured, $cnx_type, $type, $interface, @all_cards, %eth_intf);
+      my ($network_configured, $cnx_type, $type, @all_cards, %eth_intf);
       my (%connections, @connection_list, $is_wireless);
       my ($modem, $modem_name, $modem_conf_read, $modem_dyn_dns, $modem_dyn_ip);
       my ($adsl_type, @adsl_devices, $adsl_failed, $adsl_answer, %adsl_data, $adsl_data, $adsl_provider, $adsl_old_provider);
-      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $need_restart_network);
+      my ($ntf_name, $gateway_ex, $up, $need_restart_network);
       my ($isdn, $isdn_name, $isdn_type, %isdn_cards, @isdn_dial_methods);
       my $my_isdn = join('', N("Manual choice"), " (", N("Internal ISDN card"), ")");
       my ($module, $auto_ip, $protocol, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
