@@ -751,19 +751,19 @@ N("path include path: specifies a path to include
 a file. See File Inclusion.
 	Example: path include '/etc/racoon'
 
-path pre_shared_key file : specifies a file containing
+path pre_shared_key file: specifies a file containing
 pre-shared key(s) for various ID(s). See Pre-shared key File.
 	Example: path pre_shared_key '/etc/racoon/psk.txt' ;
 
-path certificate path : racoon(8) will search this directory
+path certificate path: racoon(8) will search this directory
 if a certificate or certificate request is received.
 	Example: path certificate '/etc/cert' ;
 
-File Inclusion : include file 
+File Inclusion: include file 
 other configuration files can be included.
 	Example: include \"remote.conf\" ;
 
-Pre-shared key File : Pre-shared key file defines a pair
+Pre-shared key File: Pre-shared key file defines a pair
 of the identifier and the shared secret key which are used at
 Pre-shared key authentication method in phase 1."),
 },
