@@ -25,7 +25,7 @@ unless ($in->do_pkgs->is_installed('ImageMagick')) {
 
 #- application vars
 my $tmp_path = '/tmp/draksplash/';
-! -d $tmp_path and mkdir($tmp_path);
+mkdir($tmp_path) if !-d $tmp_path;
 my $thm_path = '/usr/share/bootsplash/themes/';
 my $boot_conf_path = '/etc/bootsplash/themes/';
 my $cfg_path = "/cfg/";
@@ -220,46 +220,44 @@ sub write_boot_thm {
 	system('convert -scale '.$theme{res}{res} . ' ' . $img_file . ' ' . $thm_path.$theme{name} . '/images/bootsplash-' . $theme{res}{res} . '.jpg');
 	system('/usr/share/bootsplash/scripts/rewritejpeg '.$thm_path.$theme{name}.'/images/bootsplash-'.$theme{res}{res}.'.jpg');
 	#- write conf files
-	my $cfg_cont = '# This is the configuration file for the '.$theme{res}{res}.' bootsplash picture
+	output($cfg_file, qq(# This is the configuration file for the $theme{res}{res} bootsplash picture
 # this file is necessary to specify the coordinates of the text box on the
 # splash screen.
 
 # tx is the x coordinate of the text window in characters. default is 24
 # multiply width font width for coordinate in pixels.
-tx='.$theme{boot_conf}{tx}.'
+tx=$theme{boot_conf}{tx}
 
 # ty is the y coordinate of the text window in characters. default is 14
-ty='.$theme{boot_conf}{ty}.'
+ty=$theme{boot_conf}{ty}
 
 # tw is the width of the text window in characters. default is 130
 # note: this should at least be 80 as on the standard linux text console
-tw='.$theme{boot_conf}{tw}.'
+tw=$theme{boot_conf}{tw}
 
 # th is the height of the text window in characters. default is 44
 # NOTE: this should at least be 25 as on the standard linux text console
-th='.$theme{boot_conf}{th}.'
+th=$theme{boot_conf}{th}
 
 # px is the progress bar x coordinate of its upper left corner
-px='.$theme{boot_conf}{px}.'
+px=$theme{boot_conf}{px}
 
 # py is the progress bar y coordinate of its upper left corner
-py='.$theme{boot_conf}{py}.'
+py=$theme{boot_conf}{py}
 
 # pw is the with of the progress bar
-pw='.$theme{boot_conf}{pw}.'
+pw=$theme{boot_conf}{pw}
 
 # ph is the height of the progress bar
-ph='.$theme{boot_conf}{ph}.'
+ph=$theme{boot_conf}{ph}
 
 # pc is the color of the progress bar
-pc='.$theme{boot_conf}{pc}.'';
-	my $globalconf_cont = '# Display logo on console.
-LOGO_CONSOLE='.$logo.'
+pc=$theme{boot_conf}{pc});
+	output($globalconf_file, qq(# Display logo on console.
+LOGO_CONSOLE=$logo
 
 # Make kernel message quiet by default.
-QUIET='.$quiet;
-	output($globalconf_file, $globalconf_cont);
-	output($cfg_file, $cfg_cont);
+QUIET=$quiet));
 }
 
 
