@@ -136,8 +136,7 @@ sub selectInstallClass {
     installStepsCall($o, $auto, 'selectInstallClass', $clicked);
 
     if ($o->{steps}{choosePackages}{entered} >= 1 && !$o->{steps}{installPackages}{done}) {
-	installStepsCall($o, $auto, 'setPackages');
-	installStepsCall($o, $auto, 'selectPackagesToUpgrade') if $o->{isUpgrade};
+	installStepsCall($o, $auto, 'setPackages', $o->{isUpgrade} && $ent_number == 1);
     }
     if ($o->{isUpgrade}) {
 	@{$o->{orderedSteps}} = map { /setupSCSI/ ? ($_, "doPartitionDisks") : $_ }
