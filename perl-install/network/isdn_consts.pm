@@ -1,7 +1,7 @@
 package network::isdn_consts; # $Id$
 use vars qw(@ISA @EXPORT);
 @ISA = qw(Exporter);
-@EXPORT = qw(@isdndata);
+@EXPORT = qw(@isdndata @isdn_capi);
 
 our @isdndata =
   (
@@ -335,5 +335,110 @@ our @isdndata =
     card => 'usb',
    },
   );
+
+#- cards than can be used with capi drivers
+our @isdn_capi =
+  (
+   {
+    vendor => 0x1244,
+    id => 0x0a00,
+    description => 'AVM Audiovisuelles|A1 ISDN Adapter [Fritz] CAPI',
+    bus => 'PCI',
+    driver => 'fcpci'
+   },
+   {
+    vendor => 0x1244,
+    id => 0x0e00,
+    description => 'AVM Audiovisuelles|A1 ISDN Adapter [Fritz] CAPI',
+    bus => 'PCI',
+    driver => 'fcpci'
+   },
+   {
+    vendor => 0x1244,
+    id => 0x0f00,
+    description => 'AVM Audiovisuelles|Fritz DSL ISDN/DSL Adapter',
+    bus => 'PCI',
+    driver => 'fcdsl',
+    firmware => 'fdslbase.bin'
+   },
+   {
+    vendor => 0x1244,
+    id => 0x2700,
+    description => 'AVM Audiovisuelles|Fritz!Card DSL SL',
+    bus => 'PCI',
+    driver => 'fcdslsl',
+    firmware => 'fdssbase.bin'
+   },
+   {
+    vendor => 0x1244,
+    id => 0x2900,
+    description => 'AVM Audiovisuelles|Fritz DSL Ver. 2.0',
+    bus => 'PCI',
+    driver => 'fcdsl2',
+    firmware => 'fds2base.bin'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x0c00,
+    description => 'AVM GmbH|FritzCard USB ISDN TA',
+    bus => 'USB',
+    driver => 'fcusb'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x1000,
+    description => 'AVM GmbH|FritzCard USB 2 Ver. 2.0 ISDN TA',
+    bus => 'USB',
+    driver => 'fcusb2',
+    firmware => 'fus2base.frm'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x1900,
+    description => 'AVM GmbH|FritzCard USB 2 Ver. 3.0 ISDN TA',
+    bus => 'USB',
+    driver => 'fcusb2',
+    firmware => 'fus3base.frm'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x2000,
+    description => 'AVM GmbH|Fritz X USB ISDN TA',
+    bus => 'USB',
+    driver => 'fxusb'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x2300,
+    description => 'AVM GmbH|FtitzCard USB DSL ISDN TA/ DSL Modem',
+    bus => 'USB',
+    driver => 'fcdslusb',
+    firmware => 'fdsubase.frm'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x2800,
+    description => 'AVM GmbH|Fritz X USB OEM ISDN TA',
+    bus => 'USB',
+    driver => 'fxusb_CZ'
+   },
+   {
+    vendor => 0x057c,
+    id => 0x3000,
+    description => 'AVM GmbH|FtitzCard USB DSL SL USB',
+    bus => 'USB',
+    driver => 'fcdslslusb',
+    firmware => 'fdlubase.frm',
+   },
+   {
+    vendor => 0x057c,
+    id => 0x3500,
+    description => 'AVM GmbH|FtitzCard USB DSL SL USB Analog',
+    bus => 'USB',
+    driver => 'fcdslusba',
+    firmware => 'fdlabase.frm'
+   },
+  );
+
 
 1;
