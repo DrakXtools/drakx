@@ -581,11 +581,7 @@ sub add_intf() {
     $::isWizard = 1;
     network::netconnect::load_conf($netcnx, $netc, $intf);
     # network::netconnect::add_interface($in, $netcnx);
-    eval { network::netconnect::main('', $netcnx, $in, $netc, undef, $intf) };
-    my $err = $@;
-    if ($err && $in->isa('interactive::gtk')) {
-        err_dialog(N("Error"), N("An unexpected error has happened:\n%s", $err));
-    }
+    network::netconnect::main('', $netcnx, $in, $netc, undef, $intf);
     $in->exit(0);
 }
 
