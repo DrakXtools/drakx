@@ -56,7 +56,7 @@ sub cdroms__faking_ide_scsi {
     return @l if $::isStandalone;
     if (my @l_ide = grep { $_->{bus} eq 'ide' && isBurner($_) } @l) {
 	require modules;
-	modules::add_alias('scsi_hostadapter', 'ide-scsi');
+	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
 	foreach my $e (@l_ide) {	    
 	    log::l("IDEBurner: $e->{device}");
@@ -69,7 +69,7 @@ sub zips__faking_ide_scsi {
     my @l = raw_zips();
     if (my @l_ide = grep { $_->{bus} eq 'ide' && $::isInstall } @l) {
 	require modules;
-	modules::add_alias('scsi_hostadapter', 'ide-scsi');
+	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
 	my $nb = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
 	foreach my $e (@l_ide) {	    
 	    my $faked = "sd" . chr(ord('a') + $nb++);
