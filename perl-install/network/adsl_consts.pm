@@ -324,18 +324,18 @@ our %adsl_data = (
                    vci => 23,
                    Encapsulation => 1,
                   },
-                  
+
                   N("Slovenia") . "|SiOL" =>
-                  { 
-                   dnsServer2 => 193.189.160.11, 
-                   dnsServer3 => nameserver 193.189.160.12, 
-                   vpi => 1, 
-                   vci => 32, 
-                   method => pppoe, 
-                   DOMAINNAME2 => siol.net, 
-                   Encapsulation => 1, 
-                  }
-                  
+                  {
+                   dnsServer2 => '193.189.160.11',
+                   dnsServer3 => '193.189.160.12',
+                   vpi => 1,
+                   vci => 32,
+                   method => 'pppoe',
+                   DOMAINNAME2 => 'siol.net',
+                   Encapsulation => 1,
+                  },
+
                   N("Spain") . "|Telefónica IP dinámica" =>
                   {
                    vpi => 8,
