@@ -22,6 +22,7 @@ use Gtk;
 init Gtk;
 use Data::Dumper;
 use lib qw(/usr/lib/libDrakX);
+#use lib qw(..);
 
 use interactive;
 use standalone;
@@ -190,6 +191,14 @@ $vbox2->pack_start($hbox3, 0, 0, 0);
 my $bbox1 = new Gtk::HButtonBox;
 $vbox1->pack_start($bbox1,0,0,0);
 $bbox1->set_layout(-end);
+
+my $button_wizard = new Gtk::Button "Wizard...";
+$button_wizard->signal_connect ( clicked => sub {
+				     $::isWizard = 1;
+				     netconnect::intro('', $netcnx, $in, sub { $in->standalone::pkgs_install(@_) });
+				     $combo1->entry->set_text((-e "/etc/sysconfig/network-scripts/draknet_conf." . $combo1->entry->get_text) ? $combo1->entry->get_text : "default");
+				 });
+$bbox1->add($button_wizard );
 my $button_ok = new Gtk::Button "OK";
 $button_ok->signal_connect ( clicked => sub {
 				 $old_profile=$netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
@@ -208,6 +217,7 @@ $button_cancel->signal_connect ( clicked => sub {
 				 });
 $bbox1->add($button_cancel);
 $combo1->entry->signal_connect( 'changed', sub {
+				    print "CHANGED\n";
 				    netconnect::set_profile('', $netcnx, $combo1->entry->get_text());
 				    netconnect::load_conf('', $netcnx, $netc, $intf);
 				    $netcnx->{$_}=$netc->{$_} foreach qw(NET_DEVICE NET_INTERFACE);
