@@ -820,8 +820,6 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
     }
 
-    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
-
     if ($::isEmbedded && !$o->{pop_it}) {
 	$o->{isEmbedded} = 1;
 	$o->{window} = new Gtk2::HBox(0,0);
@@ -836,6 +834,8 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, ['fill', 'expand'], ['fill', 'expand'], 0, 0);
 	$::WizardTable->show;
     }
+    $o->{rwindow}->signal_connect(destroy => sub { $o->{destroyed} = 1 });
+
     $o;
 }
 sub main {
