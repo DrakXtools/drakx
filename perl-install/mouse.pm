@@ -458,7 +458,7 @@ sub test_mouse_standalone {
 sub test_mouse {
     my ($mouse, $w, $darea, $width, $height) = @_;
 
-    $darea->realize();
+#-    $darea->realize();
     my $wait = 0;
     my ($m3_image, $m3_mask) = gtkcreate_xpm($darea, 'mouse_3b.xpm');
     my ($m3_imagep, $m3_maskp) = gtkcreate_xpm($darea, 'mouse_3b+.xpm');
