@@ -334,6 +334,13 @@ sub set_default_options {
 	$options->{sync} = 1;
     }
 
+    if (isTrueFS($part)) {
+	#- noatime on laptops (do not wake up the hd)
+	#- Do  not  update  inode  access times on this
+	#- file system (e.g, for faster access  on  the
+	#- news spool to speed up news servers).
+	$options->{noatime} = detect_devices::isLaptop();
+    }
     if (isNfs($part)) {
 	put_in_hash($options, { 
 			       nosuid => 1, 'rsize=8192,wsize=8192' => 1,
@@ -342,7 +349,7 @@ sub set_default_options {
     if (isFat($part) || $is_auto) {
 
 	put_in_hash($options, {
-			       user => 1, exec => 1,
+			       user => 1, noexec => 0,
 			      }) if !exists $part->{rootDevice}; # partition means no removable media
 
 	put_in_hash($options, {
@@ -353,7 +360,7 @@ sub set_default_options {
 	put_in_hash($options, { 'iocharset=' => $iocharset });
     }
     if (isThisFs('iso9660', $part) || $is_auto) {
-	put_in_hash($options, { user => 1, exec => 1, });
+	put_in_hash($options, { user => 1, noexec => 0, });
     }
     if (isThisFs('reiserfs', $part)) {
 	$options->{notail} = 1;

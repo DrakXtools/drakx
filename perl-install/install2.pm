@@ -175,14 +175,6 @@ sub formatPartitions {
 
     require raid;
     raid::prepare_prefixed($o->{all_hds}{raids}, $o->{prefix});
-
-#-    chdir "$o->{prefix}"; was for core dumps
-
-    #-noatime option for ext2 fs on laptops (do not wake up the hd)
-    #-	 Do  not  update  inode  access times on this
-    #-	 file system (e.g, for faster access  on  the
-    #-	 news spool to speed up news servers).
-    $o->{pcmcia} and $_->{options} = "noatime" foreach grep { isTrueFS($_) } @{$o->{fstab}};
 }
 
 #------------------------------------------------------------------------------
