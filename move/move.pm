@@ -436,7 +436,7 @@ sub install2::configMove {
     mouse::write_conf($o, $o->{mouse}, 1);  #- write xfree mouse conf
     detect_devices::install_addons('');
 
-    cp_af("/usr/share/services/ksycoca-$o->{locale}{lang}", '/etc/X11/ksycoca');
+    eval { cp_af("/usr/share/services/ksycoca-$o->{locale}{lang}", '/etc/X11/ksycoca') };
 
     {
 	my $user = $o->{users}[0]{name};
