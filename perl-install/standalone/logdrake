@@ -412,6 +412,7 @@ my $initdir = "/etc/init.d";
 
   step_service:
     undef $::Wizard_no_previous;
+    undef $::Wizard_finished;
     my $service ={
 		  httpd => _("Apache World Wide Web Server"), 
 		  bind => _("Domain Name Resolver"),
@@ -422,6 +423,7 @@ my $initdir = "/etc/init.d";
 		  webmin => _("Webmin Service"),
 		  xinetd => _("Xinetd Service")
 		 };
+    my @installed_d = ();
     foreach $serv (keys %$service) {
 	-e "$initdir/$serv" && push (@installed_d,$serv);
     }
@@ -435,10 +437,11 @@ my $initdir = "/etc/init.d";
     for (keys %$service) {
 #	$cron .= $l->{$_}[2]."\n" if (${$_}); 
 	if(!-e "/var/lock/subsys/$_") { $r .="Service $_ ($service->{$_} is not running\n"};
-	$cron .= "$r";  
+	$cron .= "$r" if ${$_}; # take a look at this, don't know what is done here   
     }
 
   step_load:
+    undef $::Wizard_finished;
     $in->ask_from(_("load setting"),
 		  _("You will receive an alert if the load is higher than this value"),
 		  [
@@ -451,7 +454,7 @@ my ($load) = split ' ', first(cat_("/proc/loadavg"));
 $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
     
   step_output:
-    $::Wizard_no_previous = 1;
+#    $::Wizard_no_previous = 1;
     $::Wizard_finished = 1;
     $in->ask_from(_("alert configuration"),
 		  _("Configure the way the system will alert you"),
@@ -552,6 +555,10 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.17  2002/07/26 11:23:39  daouda
+# - more consistency when back button hit in wizard mode
+# - back button at last stage.
+#
 # Revision 1.16  2002/07/25 21:23:31  daouda
 # - don't display services that are not installed
 # - word wrap string correctly
