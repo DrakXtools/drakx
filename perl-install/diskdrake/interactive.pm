@@ -1075,6 +1075,9 @@ sub format_ {
     my ($in, $hd, $part, $all_hds) = @_;
     write_partitions($in, $_) or return foreach isRAID($part) ? @{$all_hds->{hds}} : $hd;
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
+    if ($::isStandalone) {
+	fs::format::check_package_is_installed($in->do_pkgs, $part->{fs_type}) or return;
+    }
     $part->{isFormatted} = 0; #- force format;
     my $w;
     fs::format::part($all_hds->{raids}, $part, $::prefix, sub {
