@@ -374,7 +374,7 @@ sub mount_options_pack_ {
 sub mount_options_pack {
     my ($part, $options, $unknown) = @_;
     $part->{options} = mount_options_pack_($part, $options, $unknown);
-    MDK::Common::Various::noreturn();
+    noreturn();
 }
 
 sub mount_options_help {
