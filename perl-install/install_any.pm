@@ -325,6 +325,18 @@ sub setPackages {
 	$o->{compssUsersChoice}{SYSTEM} = 1;
 	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
 
+	$o->{compssUsersChoice}{3D} = 1 if 
+	    detect_devices::matching_desc('Matrox.* G[24]00') ||
+	    detect_devices::matching_desc('Riva.*128') ||
+	    detect_devices::matching_desc('Rage X[CL]') ||
+	    detect_devices::matching_desc('Rage Mobility (?:P\/M|L) ') ||
+	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
+	    detect_devices::matching_desc('Voodoo [35]') ||
+	    detect_devices::matching_desc('Voodoo Banshee') ||
+	    detect_devices::matching_desc('8281[05].* CGC') ||
+	    detect_devices::matching_desc('Rage 128');
+
+
 	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
 	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
 	    push @{$o->{default_packages}}, "locales-$_";
