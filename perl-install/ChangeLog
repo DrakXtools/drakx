@@ -1,3 +1,99 @@
+2004/07/14  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_steps_interactive.pm: to_bool is what I was looking for, thanks
+	Pixel
+	perl_checker fix, I should have done it before ...
+	automatically detect which media are available in install from ISO
+	images
+
+	* install_any.pm: remove unneeded return
+	automatically detect which media are available in install from ISO
+	images
+
+	* standalone/drakboot: use bootloader and Xconfig instead of
+	detect-resolution
+
+2004/07/13  Olivier Blin <oblin at mandrakesoft.com>
+
+	* mdk-stage1/network.c: umount nfs directory if an error occurs too
+	fix segfault when hostname resolves as weird name without any dot (for
+	example 24.159.64.20 resolves as TN-JACKSN-NR1) and abort domain name
+	guess in this case
+
+	* standalone/net_applet: apply Pixel's suggestion, use //m instead of
+	foreach
+
+	* mdk-stage1/directory.c: don't forget to umount ISO images
+	it is again stupid to use a ramdisk if the install location isn't
+	mounted by loopback
+
+2004/07/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bn.po, share/po/fur.po: Added Bengali and Furlan files
+
+2004/07/13  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* pkgs.pm: Some factorization. Protection against /var/lib/urpmi being a
+	dangling symlink (see bug #9934)
+
+2004/07/13  Warly  <warly at mandrakesoft.com>
+
+	* share/logo-mandrake.png: cooker logo
+
+2004/07/12  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2004/07/12  Olivier Blin <oblin at mandrakesoft.com>
+
+	* standalone/net_applet: perl_checker fixes
+	add a "monitor network" menu item that launches net_monitor
+	use drakconnect to configure network
+	use 'ip route show' to find the gateway device when no GATEWAYDEV is
+	defined
+
+2004/07/12  Pixel  <pixel at mandrakesoft.com>
+
+	* bootloader.pm (sort_hds_according_to_bios): when installing on floppy,
+	$boot_hd is undefined, but that's ok (bugzilla #10260)
+
+	* authentication.pm: 
+	  - add "Active Directory" through winbind (it needs more stuff to work)
+	  - drop using $val, use directly $authentication->{XXX}
+
+2004/07/09  Pixel  <pixel at mandrakesoft.com>
+
+	* lang.pm: replace lang::get_unneeded_png_lang_files() with
+	lang::png_lang_files
+
+	* share/list: unicore/PVA.pl is needed
+	  - adapt to new perl
+	  - use "*" instead of PERL_VERSION to be more versatile
+
+	* rescue/make_rescue_img, rescue/list: use "*" instead of PERL_VERSION in
+	list, but ensure only one match
+
+	* install_steps.pm: fix commit 1.685: use lang::analyse_locale_name() but
+	still use lang::l2locale()
+
+	* Makefile: replace lang::get_unneeded_png_lang_files() with
+	lang::png_lang_files
+	ensure "*" to wildcard a directory in share/list match only once
+
+	* tools/Makefile: ask perl where to find package.pm and URPM.pm, this is
+	more versatile than using installvendorlib
+
+	* install2.pm: fix mounting /sys (why did i switch to using syscall_
+	'mount' directly? and with missing parameters!)
+
+	* any.pm: add "ls -l /sys/bus/scsi/devices" in report.bug
+	(it helps for debugging getSCSI on 2.6)
+
+2004/07/09  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* tools/cvslog2changelog.pl: sort
+	add Robert Vojta
+
 2004/07/09  Pixel  <pixel at mandrakesoft.com>
 
 	* install2.pm: fix mounting /sys (why did i switch to using syscall_
@@ -32659,7 +32755,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.930 2004/07/06 01:53:28 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.931 2004/07/09 01:37:40 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
