@@ -165,6 +165,7 @@ endif
 	cd share ; cp -a consolefonts $(DEST)/usr/share
 	-cd share ; cp -f *.png $(DEST)/usr/share
 	-cd pixmaps ; cp -af *.png *.xpm langs $(DEST)/usr/share ; rm -f $(DEST)/usr/share/wiz_*
+	unneeded=`perl -I. -Mlang -e 'lang::get_unneeded_png_lang_files'`; cd $(DEST)/usr/share; rm -f $$unneeded
 	cd share ; cp compssUsers compssUsers.* rpmsrate $(ROOTDEST)/Mandrake/base
 
 	clean-rpmsrate $(ROOTDEST)/Mandrake/base/rpmsrate $(ROOTDEST)/Mandrake/RPMS*

@@ -973,6 +973,9 @@ sub during_install__l2charset {
     uc($c);
 }
 
+sub get_unneeded_png_lang_files {
+    print join(' ', map { m|(langs/lang-(.*)\.png)|; if_(!member($2, list_langs()), $1) } glob("pixmaps/langs/lang-*.png"));
+}
 
 sub check {
     $^W = 0;
@@ -986,8 +989,7 @@ sub check {
     };
     
     my @wanted_charsets = uniq map { l2charset($_) } list_langs();
-    $err->("invalid charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
-    $err->("invalid charset $_ in \%charset2kde_font ($_ does not exist in \%charsets)") foreach difference2([ keys %charset2kde_font ], [ 'default', keys %charsets ]);
+    print "\tWarnings:\n";
     $warn->("unused charset $_ (given in \%charsets, but not used in \%langs)") foreach difference2([ keys %charsets ], \@wanted_charsets);
 
     $warn->("unused entry $_ in \%xim") foreach grep { !/UTF-8/ } difference2([ keys %xim ], [ map { l2locale($_) } list_langs() ]);
@@ -1005,14 +1007,23 @@ sub check {
 	$warn->("no KDE charset for charsets " . join(" ", @l));
     }
 
+    $warn->("no country corresponding to default locale $_->[1] of lang $_->[0]")
+      foreach grep { $_->[1] =~ /^.._(..)/ && !exists $countries{$1} } map { [ $_, l2locale($_) ] } list_langs();
+
+    print "\tErrors:\n";
+
+    $err->("invalid charset $_ ($_ does not exist in \%charsets)") foreach difference2(\@wanted_charsets, [ keys %charsets ]);
+    $err->("invalid charset $_ in \%charset2kde_font ($_ does not exist in \%charsets)") foreach difference2([ keys %charset2kde_font ], [ 'default', keys %charsets ]);
+
     $err->("default locale $_->[1] of lang $_->[0] isn't listed in \@locales")
       foreach grep { !member($_->[1], @locales) } map { [ $_, l2locale($_) ] } list_langs();
+
+    $err->("lang image for lang $_->[0] is missing (file $_->[1])")
+      foreach grep { !(-e $_->[1]) } map { [ $_, "pixmaps/langs/lang-$_.png" ] } list_langs();
 
     $err->("default locale $_->[1] of country $_->[0] isn't listed in \@locales")
       foreach grep { !member($_->[1], @locales) } map { [ $_, c2locale($_) ] } list_countries();
 
-    $warn->("no country corresponding to default locale $_->[1] of lang $_->[0]")
-      foreach grep { $_->[1] =~ /^.._(..)/ && !exists $countries{$1} } map { [ $_, l2locale($_) ] } list_langs();
 
     exit($ok ? 0 : 1);
 }
