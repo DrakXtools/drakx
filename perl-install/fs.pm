@@ -163,18 +163,10 @@ sub subpart_from_wild_device_name {
     { device => $dev };
 }
 
-sub device2part {
-    my ($dev, $fstab) = @_;
-    my $subpart = fs::subpart_from_wild_device_name($dev);
-    my $part = find { fsedit::is_same_hd($subpart, $_) } @$fstab;
-    log::l("fs::device2part: unknown device <<$dev>>") if !$part;
-    $part;
-}
-
 sub add2all_hds {
     my ($all_hds, @l) = @_;
 
-    @l = merge_fstabs('', [ fsedit::get_really_all_fstab($all_hds) ], @l);
+    @l = merge_fstabs('', [ fs::get::really_all_fstab($all_hds) ], @l);
 
     foreach (@l) {
 	my $s = 
@@ -227,7 +219,7 @@ sub merge_info_from_fstab {
 
     my @l = grep { 
 	if ($uniq) {
-	    my $part = fsedit::mntpoint2part($_->{mntpoint}, $fstab);
+	    my $part = fs::get::mntpoint2part($_->{mntpoint}, $fstab);
 	    !$part || fsedit::is_same_hd($part, $_); #- keep it only if it is the mountpoint AND the same device
 	} else {
 	    1;
@@ -315,7 +307,7 @@ sub prepare_write_fstab {
 
 sub fstab_to_string {
     my ($all_hds, $o_prefix) = @_;
-    my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
+    my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
     my ($s, undef) = prepare_write_fstab($fstab, $o_prefix, 'keep_smb_credentials');
     $s;
 }
@@ -323,7 +315,7 @@ sub fstab_to_string {
 sub write_fstab {
     my ($all_hds, $o_prefix) = @_;
     log::l("writing $o_prefix/etc/fstab");
-    my $fstab = [ fsedit::get_really_all_fstab($all_hds), @{$all_hds->{special}} ];
+    my $fstab = [ fs::get::really_all_fstab($all_hds), @{$all_hds->{special}} ];
     my ($s, $smb_credentials) = prepare_write_fstab($fstab, $o_prefix, '');
     output("$o_prefix/etc/fstab", $s);
     network::smb::save_credentials($_) foreach @$smb_credentials;
@@ -579,7 +571,7 @@ sub set_all_default_options {
     my ($all_hds, %opts) = @_;
     #- opts are: useSupermount security iocharset codepage
 
-    foreach my $part (fsedit::get_really_all_fstab($all_hds)) {
+    foreach my $part (fs::get::really_all_fstab($all_hds)) {
 	set_default_options($part, %opts);
     }
 }
@@ -642,7 +634,7 @@ sub formatMount_part {
     if (isLoopback($part)) {
 	formatMount_part($part->{loopback_device}, $raids, $fstab, $prefix, $wait_message);
     }
-    if (my $p = up_mount_point($part->{mntpoint}, $fstab)) {
+    if (my $p = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
 	formatMount_part($p, $raids, $fstab, $prefix, $wait_message) unless loopback::carryRootLoopback($part);
     }
     if ($part->{toFormat}) {
@@ -662,7 +654,7 @@ sub formatMount_all {
     #- for fun :)
     #- that way, when install exits via ctrl-c, it gives hand to partition
     eval {
-	my ($_type, $major, $minor) = devices::entry(fsedit::get_root($fstab)->{device});
+	my ($_type, $major, $minor) = devices::entry(fs::get::root($fstab)->{device});
 	output "/proc/sys/kernel/real-root-dev", makedev($major, $minor);
     };
 }
@@ -857,15 +849,6 @@ sub df {
 
     $part->{free} = 2 * $free if defined $free;
     $part->{free};
-}
-
-sub up_mount_point {
-    my ($mntpoint, $fstab) = @_;
-    while (1) {
-	$mntpoint = dirname($mntpoint);
-	$mntpoint ne "." or return;
-	$_->{mntpoint} eq $mntpoint and return $_ foreach @$fstab;
-    }
 }
 
 1;

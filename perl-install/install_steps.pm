@@ -22,7 +22,6 @@ use do_pkgs;
 use pkgs;
 use any;
 use log;
-use fs;
 
 our @ISA = qw(do_pkgs);
 
@@ -168,7 +167,7 @@ sub selectInstallClass {
 
     if ($o->{partitioning}{use_existing_root} || $o->{isUpgrade}) {
 	# either one root is defined (and all is ok), or we take the first one we find
-	my $p = fsedit::get_root_($o->{fstab}) || (first(install_any::find_root_parts($o->{fstab}, $o->{prefix})) || die)->{part};
+	my $p = fs::get::root_($o->{fstab}) || (first(install_any::find_root_parts($o->{fstab}, $o->{prefix})) || die)->{part};
 	install_any::use_root_part($o->{all_hds}, $p, $o->{prefix});
     } 
 }
@@ -197,14 +196,14 @@ sub doPartitionDisksAfter {
     fs::set_all_default_options($o->{all_hds}, %$o, lang::fs_options($o->{locale}))
 	if !$o->{isUpgrade};
 
-    $o->{fstab} = [ fsedit::get_all_fstab($o->{all_hds}) ];
-    fsedit::get_root_($o->{fstab}) or die "Oops, no root partition";
+    $o->{fstab} = [ fs::get::fstab($o->{all_hds}) ];
+    fs::get::root_($o->{fstab}) or die "Oops, no root partition";
 
     if (arch() =~ /ppc/ && detect_devices::get_mac_generation() =~ /NewWorld/) {
 	die "Need bootstrap partition to boot system!" if !(defined $partition_table::mac::bootstrap_part);
     }
     
-    if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $o->{all_hds})) {
+    if (arch() =~ /ia64/ && !fs::get::has_mntpoint("/boot/efi", $o->{all_hds})) {
 	die N("You must have a FAT partition mounted in /boot/efi");
     }
 

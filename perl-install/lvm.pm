@@ -8,7 +8,6 @@ use strict;
 #-######################################################################################
 use common;
 use modules;
-use fsedit;
 use devices;
 use fs::type;
 use run_program;

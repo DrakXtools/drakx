@@ -74,12 +74,12 @@ my $all_hds = fsedit::get_hds({}, $in);
 fs::get_raw_hds('', $all_hds);
 
 fs::get_info_from_fstab($all_hds, '');
-fs::merge_info_from_mtab([ fsedit::get_really_all_fstab($all_hds) ]);
+fs::merge_info_from_mtab([ fs::get::really_all_fstab($all_hds) ]);
 
 $all_hds->{current_fstab} = fs::fstab_to_string($all_hds, '');
 
 if ($type eq 'list-hd') {
-    print partition_table::description($_), "\n" foreach fsedit::get_all_fstab($all_hds);    
+    print partition_table::description($_), "\n" foreach fs::get::fstab($all_hds);    
 } elsif ($type eq 'change-geometry') {
     $para =~ s|^/dev/||;
     my ($device, undef, $heads, $sectors) = $para =~ /(.+)=(\d+,)?(\d+),(\d+)$/ or die "usage: diskdrake --change-geometry=<device>=[<cylinders>,]<heads>,<sectors>\n";
@@ -100,7 +100,7 @@ if ($type eq 'list-hd') {
 
     if (!$raw_hd->{mntpoint}) {
 	my $mntpoint = detect_devices::suggest_mount_point($raw_hd);
-	$raw_hd->{mntpoint} ||= find { !fsedit::has_mntpoint($_, $all_hds) } map { "/mnt/$mntpoint$_" } '', 2 .. 10;
+	$raw_hd->{mntpoint} ||= find { !fs::get::has_mntpoint($_, $all_hds) } map { "/mnt/$mntpoint$_" } '', 2 .. 10;
 	$raw_hd->{is_removable} = 1; #- force removable flag
 
 	my $useSupermount = 'magicdev';

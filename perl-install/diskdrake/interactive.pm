@@ -15,7 +15,6 @@ use fsedit;
 use raid;
 use any;
 use log;
-use fs;
 
 
 =begin
@@ -184,14 +183,14 @@ sub main {
     
     while (1) {
 	my $choose_txt = $current_part ? N_("Choose another partition") : N_("Choose a partition");
-	my $parts_and_holes = [ fsedit::get_all_fstab_and_holes($all_hds) ];
+	my $parts_and_holes = [ fs::get::fstab_and_holes($all_hds) ];
 	my $choose_part = sub {
 	    $current_part = $in->ask_from_listf('diskdrake', translate($choose_txt), 
 						sub {
-						    my $hd = fsedit::part2hd($_[0] || return, $all_hds);
+						    my $hd = fs::get::part2hd($_[0] || return, $all_hds);
 						    format_part_info_short($hd, $_[0]);
 						}, $parts_and_holes, $current_part) || return;
-	    $current_hd = fsedit::part2hd($current_part, $all_hds);
+	    $current_hd = fs::get::part2hd($current_part, $all_hds);
 	};
 
 	$choose_part->() if !$current_part;
@@ -228,7 +227,7 @@ sub main {
 	} else {
 	    $choose_part->();
 	}
-	partition_table::assign_device_numbers($_) foreach fsedit::all_hds($all_hds);
+	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
     }
     return if eval { Done($in, $all_hds) };
     if (my $err = $@) {
@@ -604,7 +603,7 @@ sub Mount_point {
     my $mntpoint = $part->{mntpoint} || do {
 	my $part_ = { %$part };
 	if (fsedit::suggest_part($part_, $all_hds)) {
-	    fsedit::has_mntpoint('/', $all_hds) || $part_->{mntpoint} eq '/boot' ? $part_->{mntpoint} : '/';
+	    fs::get::has_mntpoint('/', $all_hds) || $part_->{mntpoint} eq '/boot' ? $part_->{mntpoint} : '/';
 	} else { '' }
     };
     $in->ask_from_({ messages =>
@@ -973,7 +972,7 @@ sub Options {
 
 sub is_part_existing {
     my ($part, $all_hds) = @_;
-    $part && any { fsedit::are_same_partitions($part, $_) } fsedit::get_all_fstab_and_holes($all_hds);
+    $part && any { fsedit::are_same_partitions($part, $_) } fs::get::fstab_and_holes($all_hds);
 }
 
 sub modifyRAID {

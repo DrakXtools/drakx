@@ -10,14 +10,13 @@ use common;
 use detect_devices;
 use partition_table;
 use fs::type;
-use fsedit;
-use fs;
 use lang;
 use run_program;
 use keyboard;
 use devices;
 use modules;
 use log;
+use fs;
 use c;
 
 sub drakx_version() { 
@@ -159,7 +158,7 @@ sub setupBootloader__mbr_or_not {
 
 	my @l = (
 		 [ N("First sector of drive (MBR)") => '/dev/' . $hds->[0]{device} ],
-		 [ N("First sector of the root partition") => '/dev/' . fsedit::get_root($fstab, 'boot')->{device} ],
+		 [ N("First sector of the root partition") => '/dev/' . fs::get::root($fstab, 'boot')->{device} ],
 		     if_($floppy, 
                  [ N("On Floppy") => "/dev/$floppy" ],
 		     ),
@@ -265,7 +264,7 @@ sub setupBootloader__general {
     }
 
     if ($prev_clean_tmp != $clean_tmp) {
-	if ($clean_tmp && !fsedit::has_mntpoint('/tmp', $all_hds)) {
+	if ($clean_tmp && !fs::get::has_mntpoint('/tmp', $all_hds)) {
 	    push @{$all_hds->{special}}, { device => 'none', mntpoint => '/tmp', fs_type => 'tmpfs' };
 	} else {
 	    @{$all_hds->{special}} = grep { $_->{mntpoint} ne '/tmp' } @{$all_hds->{special}};
@@ -344,7 +343,7 @@ sub setupBootloader__entries {
 				  N_("Other OS (MacOS...)") : N_("Other OS (Windows...)") ]
 			       ) eq "Linux") {
 	    $e = { type => 'image',
-		   root => '/dev/' . fsedit::get_root($fstab)->{device}, #- assume a good default.
+		   root => '/dev/' . fs::get::root($fstab)->{device}, #- assume a good default.
 		 };
 	    $prefix = "linux";
 	} else {

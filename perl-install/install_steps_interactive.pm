@@ -29,7 +29,6 @@ use modules::interactive;
 use lang;
 use keyboard;
 use any;
-use fs;
 use log;
 
 #-######################################################################################
@@ -265,7 +264,7 @@ sub ask_mntpoint_s { #- }{}
 		      [ map { { label => partition_table::description($_), 
 				  val => \$_->{mntpoint},
 				    not_edit => 0,
-				      list => [ '', fsedit::suggestions_mntpoint(fsedit::empty_all_hds()) ] }
+				      list => [ '', fsedit::suggestions_mntpoint(fs::get::empty_all_hds()) ] }
 			  } grep { !$_->{real_mntpoint} || common::usingRamdisk() } @fstab ]) or return;
     }
     $o->SUPER::ask_mntpoint_s($fstab);

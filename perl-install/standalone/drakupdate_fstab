@@ -108,7 +108,7 @@ sub set_mount_point {
     $mntpoint = "/mnt/$mntpoint";
 
     foreach ('', 2 .. 10) {
-	next if fsedit::mntpoint2part("$mntpoint$_", $fstab);
+	next if fs::get::mntpoint2part("$mntpoint$_", $fstab);
 	$part->{mntpoint} = "$mntpoint$_";
 	return 1;
     }

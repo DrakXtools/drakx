@@ -4,8 +4,6 @@ use diagnostics;
 use strict;
 use diskdrake::interactive;
 use common;
-use fsedit;
-use fs;
 
 sub main {
     my ($in, $all_hds) = @_;

@@ -10,9 +10,9 @@ use vars qw(%vga_modes);
 use common;
 use partition_table;
 use fs::type;
+use fs::get;
 use log;
 use any;
-use fsedit;
 use devices;
 use loopback;
 use detect_devices;
@@ -579,10 +579,10 @@ sub sanitize_ver {
 
 sub suggest {
     my ($bootloader, $hds, %options) = @_;
-    my $fstab = [ fsedit::get_fstab(@$hds) ];
-    my $root_part = fsedit::get_root($fstab);
+    my $fstab = [ fs::get::hds_fstab(@$hds) ];
+    my $root_part = fs::get::root($fstab);
     my $root = '/dev/' . (isLoopback($root_part) ? 'loop7' : $root_part->{device});
-    my $boot = fsedit::get_root($fstab, 'boot')->{device};
+    my $boot = fs::get::root($fstab, 'boot')->{device};
     #- PPC xfs module requires enlarged initrd
     my $xfsroot = $root_part->{fs_type} eq 'xfs';
 
@@ -605,7 +605,7 @@ sub suggest {
 	 timeout => $onmbr && 10,
 	 nowarn => 1,
 	   if_(arch() !~ /ia64/,
-	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fsedit::get_root($fstab, 'boot')->{device}),
+	 boot => "/dev/" . ($onmbr ? $hds->[0]{device} : fs::get::root($fstab, 'boot')->{device}),
 	 map => "/boot/map",
 	 color => 'black/cyan yellow/cyan',
          ),
@@ -746,9 +746,9 @@ sub method_choices {
     my ($fstab) = @_;
 
     grep {
-	!(/lilo/ && isLoopback(fsedit::get_root($fstab)))
+	!(/lilo/ && isLoopback(fs::get::root($fstab)))
 	  && !(/lilo-graphic/ && detect_devices::matching_desc('ProSavageDDR'))
-	  && !(/grub/ && isRAID(fsedit::get_root($fstab)));
+	  && !(/grub/ && isRAID(fs::get::root($fstab)));
     } method_choices_raw();
 }
 
@@ -908,8 +908,8 @@ sub write_lilo {
     my $file2fullname = sub {
 	my ($file) = @_;
 	if (arch() =~ /ia64/) {
-	    my $fstab = [ fsedit::get_fstab(@$hds) ];
-	    (my $part, $file) = fsedit::file2part($fstab, $file);
+	    my $fstab = [ fs::get::hds_fstab(@$hds) ];
+	    (my $part, $file) = fs::get::file2part($fstab, $file);
 	    my %hds = map_index { $_ => "hd$::i" } map { $_->{device} } 
 	      sort { 
 		  my ($a_is_fat, $b_is_fat) = ($a->{fs_type} eq 'vfat', $b->{fs_type} eq 'vfat');
@@ -971,7 +971,7 @@ sub write_lilo {
 	    push @entry_conf, "unsafe" if $entry->{unsafe} && !$entry->{table};
 		
 	    if ($entry->{table}) {
-		my $hd = fs::device2part($entry->{table}, $hds);
+		my $hd = fs::get::device2part($entry->{table}, $hds);
 		if ($hd != $sorted_hds[0]) {		       
 		    #- boot off the nth drive, so reverse the BIOS maps
 		    my $nb = sprintf("0x%x", 0x80 + (find_index { $hd == $_ } @sorted_hds));
@@ -1030,7 +1030,7 @@ sub mixed_kind_of_disks {
 
 sub sort_hds_according_to_bios {
     my ($bootloader, $hds) = @_;
-    my $boot_hd = fs::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $hds); #- $boot_hd is undefined when installing on floppy
+    my $boot_hd = fs::get::device2part($bootloader->{first_hd_device} || $bootloader->{boot}, $hds); #- $boot_hd is undefined when installing on floppy
     my $boot_kind = $boot_hd && hd2bios_kind($boot_hd);
 
     my $translate = sub {
@@ -1043,9 +1043,9 @@ sub sort_hds_according_to_bios {
 
 sub device_string2grub {
     my ($dev, $legacy_floppies, $sorted_hds) = @_;
-    if (my $device = fs::device2part($dev, [ @$sorted_hds, fsedit::get_fstab(@$sorted_hds) ])) {
+    if (my $device = fs::get::device2part($dev, [ @$sorted_hds, fs::get::hds_fstab(@$sorted_hds) ])) {
 	device2grub($device, $sorted_hds);
-    } elsif (my $floppy = fs::device2part($dev, $legacy_floppies)) {
+    } elsif (my $floppy = fs::get::device2part($dev, $legacy_floppies)) {
 	my $bios = find_index { $floppy eq $_ } @$legacy_floppies;
 	"(fd$bios)";
     } else {
@@ -1056,7 +1056,7 @@ sub device2grub {
     my ($device, $sorted_hds) = @_;
     my ($hd, $part_nb) = 
       $device->{rootDevice} ?
-	(fs::device2part($device->{rootDevice}, $sorted_hds), $device->{device} =~ /(\d+)$/) :
+	(fs::get::device2part($device->{rootDevice}, $sorted_hds), $device->{device} =~ /(\d+)$/) :
 	$device;
     my $bios = find_index { $hd eq $_ } @$sorted_hds;
     my $part_string = defined $part_nb ? ',' . ($part_nb - 1) : '';    
@@ -1093,7 +1093,7 @@ sub grub2dev {
 sub grub2file {
     my ($grub_file, $grub2dev, $fstab) = @_;
     if (my ($device, $rel_file) = grub2dev_and_file($grub_file, $grub2dev)) {	
-	my $part = fs::device2part($device, $fstab) or log::l("ERROR: unknown device $device (computed from $grub_file)");
+	my $part = fs::get::device2part($device, $fstab) or log::l("ERROR: unknown device $device (computed from $grub_file)");
 	my $mntpoint = $part->{mntpoint} || '';
 	($mntpoint eq '/' ? '' : $mntpoint) . '/' . $rel_file;
     } else {
@@ -1104,14 +1104,14 @@ sub grub2file {
 sub write_grub {
     my ($bootloader, $hds) = @_;
 
-    my $fstab = [ fsedit::get_fstab(@$hds) ]; 
+    my $fstab = [ fs::get::hds_fstab(@$hds) ]; 
     my @legacy_floppies = detect_devices::floppies();
     my @sorted_hds = sort_hds_according_to_bios($bootloader, $hds);
 
     write_grub_device_map(\@legacy_floppies, \@sorted_hds);
 
     my $file2grub = sub {
-	my ($part, $file) = fsedit::file2part($fstab, $_[0], 'keep_simple_symlinks');
+	my ($part, $file) = fs::get::file2part($fstab, $_[0], 'keep_simple_symlinks');
 	device2grub($part, \@sorted_hds) . $file;
     };
     {
@@ -1146,7 +1146,7 @@ sub write_grub {
 		push @conf, $title, "root $dev";
 
 		if ($_->{table}) {
-		    if (my $hd = fs::device2part($_->{table}, \@sorted_hds)) {
+		    if (my $hd = fs::get::device2part($_->{table}, \@sorted_hds)) {
 			if (my $bios = find_index { $hd eq $_ } @sorted_hds) {
 			    #- boot off the nth drive, so reverse the BIOS maps
 			    my $nb = sprintf("0x%x", 0x80 + $bios);
@@ -1211,7 +1211,7 @@ sub action {
 sub install {
     my ($bootloader, $hds) = @_;
 
-    if (my $part = fs::device2part($bootloader->{boot}, [ fsedit::get_fstab(@$hds) ])) {
+    if (my $part = fs::get::device2part($bootloader->{boot}, [ fs::get::hds_fstab(@$hds) ])) {
 	die N("You can't install the bootloader on a %s partition\n", $part->{fs_type})
 	  if $part->{fs_type} eq 'xfs';
     }
@@ -1239,7 +1239,7 @@ sub update_for_renumbered_partitions {
     my @sorted_hds; {
  	my $grub2dev = read_grub_device_map();
 	map_each {
-	    $sorted_hds[$1] = fs::device2part($::b, $hds) if $::a =~ /hd(\d+)/;
+	    $sorted_hds[$1] = fs::get::device2part($::b, $hds) if $::a =~ /hd(\d+)/;
 	} %$grub2dev;
     };
 
@@ -1266,7 +1266,7 @@ sub update_for_renumbered_partitions {
 	}
     }
 
-    my $main_method = detect_main_method([ fsedit::get_fstab(@$hds) ]);
+    my $main_method = detect_main_method([ fs::get::hds_fstab(@$hds) ]);
     my @needed = $main_method ? $main_method : ('lilo', 'grub');
     if (find {
 	my $config = $_ eq 'grub' ? 'grub_install' : $_;

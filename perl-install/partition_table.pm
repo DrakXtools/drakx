@@ -7,7 +7,6 @@ use common;
 use fs::type;
 use partition_table::raw;
 use detect_devices;
-use fs::type;
 use log;
 
 our @fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);

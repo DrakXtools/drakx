@@ -15,7 +15,6 @@ use install_any;
 use lang;
 use keyboard;
 use mouse;
-use fsedit;
 use devices;
 use partition_table;
 use modules;
@@ -162,10 +161,10 @@ sub formatPartitions {
 
     $o->{steps}{choosePackages}{done} = 0;
     installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) if !$o->{isUpgrade};
-    my $want_root_formated = fsedit::get_root($o->{fstab})->{toFormat};
+    my $want_root_formated = fs::get::root($o->{fstab})->{toFormat};
     if ($want_root_formated) {
 	foreach ('/usr') {
-	    my $part = fsedit::mntpoint2part($_, $o->{fstab}) or next;
+	    my $part = fs::get::mntpoint2part($_, $o->{fstab}) or next;
 	    $part->{toFormat} or die N("You must also format %s", $_);
 	}
     }

@@ -10,7 +10,6 @@ use MDK::Common::System;
 use common;
 use fs::type;
 use fs;
-use fsedit;
 use log;
 
 
@@ -23,14 +22,14 @@ sub carryRootLoopback {
 sub check_circular_mounts {
     my ($_hd, $part, $all_hds) = @_;
 
-    my $fstab = [ fsedit::get_all_fstab($all_hds), $part ]; # no pb if $part is already in $all_hds
+    my $fstab = [ fs::get::fstab($all_hds), $part ]; # no pb if $part is already in $all_hds
 
     my $base_mntpoint = $part->{mntpoint};
     my $check; $check = sub {
 	my ($part, @seen) = @_;
 	push @seen, $part->{mntpoint} || return;
 	@seen > 1 && $part->{mntpoint} eq $base_mntpoint and die N("Circular mounts %s\n", join(", ", @seen));
-	if (my $part = fs::up_mount_point($part->{mntpoint}, $fstab)) {
+	if (my $part = fs::get::up_mount_point($part->{mntpoint}, $fstab)) {
 	    #- '/' carrier is a special case, it will be mounted first
 	    $check->($part, @seen) if !carryRootLoopback($part);
 	}

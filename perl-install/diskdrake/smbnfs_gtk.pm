@@ -4,7 +4,7 @@ use diagnostics;
 use strict;
 
 use any;
-use fs;
+use fs::get;
 use diskdrake::interactive;
 use common;
 use interactive;
@@ -47,7 +47,7 @@ sub try_ {
 
 sub raw_hd_options {
     my ($in, $raw_hd) = @_;
-    diskdrake::interactive::Options($in, {}, $raw_hd, fsedit::empty_all_hds());
+    diskdrake::interactive::Options($in, {}, $raw_hd, fs::get::empty_all_hds());
 }
 sub raw_hd_mount_point {
     my ($in, $raw_hd) = @_;

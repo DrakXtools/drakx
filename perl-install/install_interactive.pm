@@ -13,7 +13,6 @@ use install_any;
 use devices;
 use fsedit;
 use log;
-use fs;
 
 
 sub tellAboutProprietaryModules {
@@ -42,7 +41,7 @@ sub partition_with_diskdrake {
     do {
 	$ok = 1;
 	my $do_force_reload = sub {
-	    $o->{all_hds} = fsedit::empty_all_hds();
+	    $o->{all_hds} = fs::get::empty_all_hds();
 	    install_any::getHds($o, $o);
 	    $all_hds = $o->{all_hds};
 	    $o->{all_hds};
@@ -56,9 +55,9 @@ sub partition_with_diskdrake {
 	    partitionWizard($o, 'nodiskdrake') or redo;
 	    return 1;
 	}
-	my @fstab = fsedit::get_all_fstab($all_hds);
+	my @fstab = fs::get::fstab($all_hds);
 	
-	unless (fsedit::get_root_(\@fstab)) {
+	unless (fs::get::root_(\@fstab)) {
 	    $ok = 0;
 	    $o->ask_okcancel('', N("You must have a root partition.
 For this, create a partition (or click on an existing one).
@@ -67,7 +66,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	if (!any { isSwap($_) } @fstab) {
 	    $ok &&= $o->ask_okcancel('', N("You don't have a swap partition.\n\nContinue anyway?"));
 	}
-	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $all_hds)) {
+	if (arch() =~ /ia64/ && !fs::get::has_mntpoint("/boot/efi", $all_hds)) {
 	    $o->ask_warn('', N("You must have a FAT partition mounted in /boot/efi"));
 	    $ok = '';
 	}
@@ -78,7 +77,7 @@ Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 sub partitionWizardSolutions {
     my ($o, $all_hds) = @_;
     my $hds = $all_hds->{hds};
-    my $fstab = [ fsedit::get_all_fstab($all_hds) ];
+    my $fstab = [ fs::get::fstab($all_hds) ];
     my @wizlog;
     my (%solutions);
 
@@ -92,12 +91,12 @@ sub partitionWizardSolutions {
 
     my @hds_rw = grep { !$_->{readonly} } @$hds;
     my @hds_can_add = grep { $_->can_raw_add } @hds_rw;
-    if (fsedit::free_space(@hds_can_add) > $min_linux) {
+    if (fs::get::hds_free_space(@hds_can_add) > $min_linux) {
 	$solutions{free_space} = [ 20, N("Use free space"), sub { fsedit::auto_allocate($all_hds); 1 } ]
     } else { 
 	push @wizlog, N("Not enough free space to allocate new partitions") . ": " .
 	  (@hds_can_add ? 
-	   fsedit::free_space(@hds_can_add) . " < $min_linux" :
+	   fs::get::hds_free_space(@hds_can_add) . " < $min_linux" :
 	   "no harddrive on which partitions can be added");
     }
 
@@ -133,14 +132,14 @@ sub partitionWizardSolutions {
     }
 
     
-    if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fsedit::part2hd($_, $all_hds)->{readonly} } @$fstab) {
+    if (my @ok_for_resize_fat = grep { isFat_or_NTFS($_) && !fs::get::part2hd($_, $all_hds)->{readonly} } @$fstab) {
 	$solutions{resize_fat} = 
 	  [ 6 - @ok_for_resize_fat, N("Use the free space on the Windows partition"),
 	    sub {
 		my $part = $o->ask_from_listf_raw({ messages => N("Which partition do you want to resize?"),
 						    interactive_help_id => 'resizeFATChoose',
 						  }, \&partition_table::description, \@ok_for_resize_fat) or return;
-		my $hd = fsedit::part2hd($part, $all_hds);
+		my $hd = fs::get::part2hd($part, $all_hds);
 		my $resize_fat = eval {
 		    my $pkg = $part->{fs_type} eq 'vfat' ? do { 
 			require resize_fat::main;

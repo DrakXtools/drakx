@@ -16,7 +16,6 @@ use raid;
 use any;
 use log;
 use fsedit;
-use fs;
 
 my ($width, $height, $minwidth) = (400, 50, 5);
 my ($all_hds, $in, $do_force_reload, $current_kind, $current_entry, $update_all);
@@ -76,7 +75,7 @@ sub main {
     $update_all = sub {
 	$lock and return;
 	$lock = 1;
-	partition_table::assign_device_numbers($_) foreach fsedit::all_hds($all_hds);
+	partition_table::assign_device_numbers($_) foreach fs::get::hds($all_hds);
 	create_automatic_notebooks($notebook_widget);
 	general_action_box($general_action_box, $nowizard, $interactive_help);
 	per_kind_action_box($per_kind_action_box, $current_kind);
@@ -217,7 +216,7 @@ sub current_kind_changed {
     my $v = $kind->{val};
     my @parts = 
       $kind->{type} eq 'raid' ? grep { $_ } @$v :
-      $kind->{type} eq 'loopback' ? @$v : fsedit::get_fstab_and_holes($v);
+      $kind->{type} eq 'loopback' ? @$v : fs::get::hds_fstab_and_holes($v);
     my $totalsectors = 
       $kind->{type} =~ /raid|loopback/ ? sum(map { $_->{size} } @parts) : $v->{totalsectors};
     create_buttons4partitions($kind, $totalsectors, @parts);
@@ -341,7 +340,7 @@ sub filesystems_button_box() {
 sub createOrChangeType {
     my ($in, $fs_type, $hd, $part, $all_hds) = @_;
 
-    $part ||= !fsedit::get_fstab($hd) && 
+    $part ||= !fs::get::hds_fstab($hd) && 
               { pt_type => 0, start => 1, size => $hd->{totalsectors} - 1 };
     $part or return;
     if ($fs_type eq 'other') {

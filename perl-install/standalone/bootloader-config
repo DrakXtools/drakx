@@ -57,7 +57,7 @@ my $all_hds = fsedit::get_hds();
 fs::get_info_from_fstab($all_hds, '');
 my $hds = $all_hds->{hds};
 
-my $bootloader = bootloader::read([ fsedit::get_fstab(@$hds) ]) or die "Cannot find a boot loader installed\n";
+my $bootloader = bootloader::read([ fs::get::fstab($all_hds) ]) or die "Cannot find a boot loader installed\n";
 
 
 $action =~ s/-/_/g;
@@ -100,7 +100,7 @@ sub add_kernel() {
 
     my $kernel_str = bootloader::vmlinuz2kernel_str($image);
 
-    my $root_part = fsedit::get_root([ fsedit::get_fstab(@$hds) ]);
+    my $root_part = fs::get::root([ fs::get::fstab($all_hds) ]);
     my %opts = (
 		root => "/dev/$root_part->{device}", 
 		initrd_options => $initrd_options,

@@ -25,7 +25,6 @@ use detect_devices;
 use lang;
 use any;
 use log;
-use fs;
 
 #- boot medium (the first medium to take into account).
 $boot_medium = 1;
@@ -476,7 +475,7 @@ sub setDefaultPackages {
     push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
     push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
     push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    push @{$o->{default_packages}}, "grub" if isLoopback(fsedit::get_root($o->{fstab}));
+    push @{$o->{default_packages}}, "grub" if isLoopback(fs::get::root($o->{fstab}));
     push @{$o->{default_packages}}, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
@@ -1067,7 +1066,7 @@ sub suggest_mount_points {
 
 	my ($mnt, $handle) = guess_mount_point($part, $prefix, \$user) or next;
 
-	next if $uniq && fsedit::mntpoint2part($mnt, $fstab);
+	next if $uniq && fs::get::mntpoint2part($mnt, $fstab);
 	$part->{mntpoint} = $mnt; delete $part->{unsafeMntpoint};
 
 	#- try to find other mount points via fstab
@@ -1096,7 +1095,7 @@ sub use_root_part {
 	my $handle = any::inspect($part, $prefix) or die;
 	fs::get_info_from_fstab($all_hds, $handle->{dir});
     }
-    isSwap($_) and $_->{mntpoint} = 'swap' foreach fsedit::get_really_all_fstab($all_hds); #- use all available swap.
+    isSwap($_) and $_->{mntpoint} = 'swap' foreach fs::get::really_all_fstab($all_hds); #- use all available swap.
 }
 
 sub getHds {
@@ -1117,7 +1116,7 @@ sub getHds {
     fs::add2all_hds($all_hds, @{$o->{manualFstab}});
 
     $o->{all_hds} = $all_hds;
-    $o->{fstab} = [ fsedit::get_really_all_fstab($all_hds) ];
+    $o->{fstab} = [ fs::get::really_all_fstab($all_hds) ];
     fs::merge_info_from_mtab($o->{fstab});
 
     my @win = grep { isFat_or_NTFS($_) && maybeFormatted($_) && !$_->{is_removable} } @{$o->{fstab}};

@@ -12,7 +12,6 @@ use partition_table;
 use partition_table::raw;
 use fs::type;
 use detect_devices;
-use fsedit;
 use devices;
 use loopback;
 use log;
@@ -52,19 +51,16 @@ my @suggestions_mntpoints = (
 #-######################################################################################
 #- Functions
 #-######################################################################################
-sub empty_all_hds() {
-    { hds => [], lvms => [], raids => [], loopbacks => [], raw_hds => [], nfss => [], smbs => [], davs => [], special => [] };
-}
 sub recompute_loopbacks {
     my ($all_hds) = @_;
-    my @fstab = get_all_fstab($all_hds);
+    my @fstab = fs::get::fstab($all_hds);
     @{$all_hds->{loopbacks}} = map { isPartOfLoopback($_) ? @{$_->{loopback}} : () } @fstab;
 }
 
 sub raids {
     my ($hds) = @_;
 
-    my @parts = get_fstab(@$hds);
+    my @parts = fs::get::hds_fstab(@$hds);
     {
 	my @l = grep { isRawRAID($_) } @parts or return [];
 	detect_devices::raidAutoStart(@l);
@@ -120,7 +116,7 @@ sub raids {
 
 sub lvms {
     my ($all_hds) = @_;
-    my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds) or return;
+    my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
 
     #- otherwise vgscan won't find them
     devices::make($_->{device}) foreach @pvs; 
@@ -256,11 +252,11 @@ Do you agree to lose all the partitions?
 
     #- detect raids before LVM allowing LVM on raid
     my $raids = raids(\@hds);
-    my $all_hds = { %{ empty_all_hds() }, hds => \@hds, raw_hds => \@raw_hds, lvms => [], raids => $raids };
+    my $all_hds = { %{ fs::get::empty_all_hds() }, hds => \@hds, raw_hds => \@raw_hds, lvms => [], raids => $raids };
 
     $all_hds->{lvms} = [ lvms($all_hds) ];
 
-    fs::get_major_minor(get_all_fstab($all_hds));
+    fs::get_major_minor(fs::get::fstab($all_hds));
 
     $all_hds;
 }
@@ -303,16 +299,6 @@ sub read_proc_partitions {
     @$parts;
 }
 
-sub all_hds {
-    my ($all_hds) = @_;
-    (@{$all_hds->{hds}}, @{$all_hds->{lvms}});
-}
-sub part2hd {
-    my ($part, $all_hds) = @_;
-    my $hd = find { $part->{rootDevice} eq ($_->{device} || $_->{VG_name}) } all_hds($all_hds);
-    $hd;
-}
-
 sub is_same_hd {
     my ($hd1, $hd2) = @_;
     if ($hd1->{major} && $hd2->{major}) {
@@ -336,90 +322,12 @@ sub are_same_partitions {
     1;
 }
 
-#- get all normal partition including special ones as found on sparc.
-sub get_fstab {
-    map { partition_table::get_normal_parts($_) } @_;
-}
-
-#- get normal partition that should be visible for working on.
-sub get_visible_fstab {
-    grep { $_ && !isWholedisk($_) && !isHiddenMacPart($_) }
-      map { partition_table::get_normal_parts($_) } @_;
-}
-
-sub get_fstab_and_holes {
-    map {
-	if (isLVM($_)) {
-	    my @parts = partition_table::get_normal_parts($_);
-	    my $free = $_->{totalsectors} - sum map { $_->{size} } @parts;
-	    my $free_part = { start => 0, size => $free, pt_type => 0, rootDevice => $_->{VG_name} };
-	    @parts, if_($free >= $_->cylinder_size, $free_part);
-	} else {
-	    partition_table::get_normal_parts_and_holes($_);
-	}
-    } @_;
-}
-sub get_holes {
-    grep { $_->{pt_type} == 0 } get_fstab_and_holes(@_);
-}
-
-sub get_all_fstab {
-    my ($all_hds) = @_;
-    my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
-    my @raids = grep { $_ } @{$all_hds->{raids}};
-    @parts, @raids, @{$all_hds->{loopbacks}};
-}
-sub get_really_all_fstab {
-    my ($all_hds) = @_;
-    my @parts = map { partition_table::get_normal_parts($_) } all_hds($all_hds);
-    my @raids = grep { $_ } @{$all_hds->{raids}};
-    @parts, @raids, @{$all_hds->{loopbacks}}, @{$all_hds->{raw_hds}}, @{$all_hds->{nfss}}, @{$all_hds->{smbs}}, @{$all_hds->{davs}};
-}
-sub get_all_fstab_and_holes {
-    my ($all_hds) = @_;
-    my @raids = grep { $_ } @{$all_hds->{raids}};
-    get_fstab_and_holes(all_hds($all_hds)), @raids, @{$all_hds->{loopbacks}};
-}
-sub get_all_holes {
-    my ($all_hds) = @_;
-    grep { $_->{pt_type} == 0 } get_all_fstab_and_holes($all_hds);
-}
-
-sub all_free_space {
-    my ($all_hds) = @_;
-    sum map { $_->{size} } get_all_holes($all_hds);
-}
-sub free_space {
-    sum map { $_->{size} } get_holes(@_);
-}
-
 sub is_one_big_fat_or_NT {
     my ($hds) = @_;
     @$hds == 1 or return;
 
-    my @l = get_fstab(@$hds);
-    @l == 1 && isFat_or_NTFS($l[0]) && free_space(@$hds) < 10 << 11;
-}
-
-sub file2part {
-    my ($fstab, $file, $b_keep_simple_symlinks) = @_;    
-    my $part;
-
-    $file = $b_keep_simple_symlinks ? common::expand_symlinks_but_simple("$::prefix$file") : expand_symlinks("$::prefix$file");
-    unless ($file =~ s/^$::prefix//) {
-	my $part = find { loopback::carryRootLoopback($_) } @$fstab or die;
-	log::l("found $part->{mntpoint}");
-	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
-    }
-    foreach (@$fstab) {
-	my $m = $_->{mntpoint};
-	$part = $_ if 
-	  $file =~ /^\Q$m/ && 
-	    (!$part || length $part->{mntpoint} < length $m);
-    }
-    $part or die "file2part: not found $file";
-    $file =~ s|$part->{mntpoint}/?|/|;
-    ($part, $file);
+    my @l = fs::get::hds_fstab(@$hds);
+    @l == 1 && isFat_or_NTFS($l[0]) && fs::get::hds_free_space(@$hds) < 10 << 11;
 }
 
 
@@ -428,7 +336,7 @@ sub computeSize {
     my $max = $part->{maxsize} || $part->{size};
     return min($max, $best->{size}) unless $best->{ratio};
 
-    my $free_space = all_free_space($all_hds);
+    my $free_space = fs::get::free_space($all_hds);
     my @l = my @L = grep { 
 	if ($free_space >= $_->{size}) {
 	    $free_space -= $_->{size};
@@ -450,7 +358,7 @@ sub computeSize {
 		return min($max, $best->{maxsize}) if $best->{mntpoint} eq $_->{mntpoint};
 		$free_space -= $_->{maxsize} - $_->{size};
 		if (!$cylinder_size_maxsize_adjusted++) {
-		    eval { $free_space += part2hd($part, $all_hds)->cylinder_size - 1 };
+		    eval { $free_space += fs::get::part2hd($part, $all_hds)->cylinder_size - 1 };
 		}
 		0;
 	    } else {
@@ -472,10 +380,10 @@ sub suggest_part {
 	fs::type::set_pt_type($_, $_->{pt_type}) if !exists $_->{fs_type};
     }
 
-    my $has_swap = any { isSwap($_) } get_all_fstab($all_hds);
+    my $has_swap = any { isSwap($_) } fs::get::fstab($all_hds);
 
     my @local_suggestions =
-      grep { !has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
+      grep { !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) || isSwap($_) && !$has_swap }
       grep { !$_->{hd} || $_->{hd} eq $part->{rootDevice} }
 	@$suggestions;
 
@@ -498,23 +406,9 @@ sub suggest_part {
 
 sub suggestions_mntpoint {
     my ($all_hds) = @_;
-    sort grep { !/swap/ && !has_mntpoint($_, $all_hds) }
+    sort grep { !/swap/ && !fs::get::has_mntpoint($_, $all_hds) }
       (@suggestions_mntpoints, map { $_->{mntpoint} } @{$suggestions{server} || $suggestions{simple}});
 }
-
-sub mntpoint2part {
-    my ($mntpoint, $fstab) = @_;
-    find { $mntpoint eq $_->{mntpoint} } @$fstab;
-}
-sub has_mntpoint {
-    my ($mntpoint, $all_hds) = @_;
-    mntpoint2part($mntpoint, [ get_really_all_fstab($all_hds) ]);
-}
-sub get_root_ {
-    my ($fstab, $o_boot) = @_;
-    $o_boot && mntpoint2part("/boot", $fstab) || mntpoint2part("/", $fstab);
-}
-sub get_root { &get_root_ || {} }
 
 #- you can do this before modifying $part->{mntpoint}
 #- so $part->{mntpoint} should not be used here, use $mntpoint instead
@@ -524,16 +418,16 @@ sub check_mntpoint {
     $mntpoint eq '' || isSwap($part) || isNonMountable($part) and return;
     $mntpoint =~ m|^/| or die N("Mount points must begin with a leading /");
     $mntpoint =~ m|[\x7f-\xff]| and cdie N("Mount points should contain only alphanumerical characters");
-    mntpoint2part($mntpoint, [ grep { $_ ne $part } get_really_all_fstab($all_hds) ]) and die N("There is already a partition with mount point %s\n", $mntpoint);
+    fs::get::mntpoint2part($mntpoint, [ grep { $_ ne $part } fs::get::really_all_fstab($all_hds) ]) and die N("There is already a partition with mount point %s\n", $mntpoint);
 
     cdie N("You've selected a software RAID partition as root (/).
 No bootloader is able to handle this without a /boot partition.
-Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !has_mntpoint("/boot", $all_hds);
+Please be sure to add a /boot partition") if $mntpoint eq "/" && isRAID($part) && !fs::get::has_mntpoint("/boot", $all_hds);
     die N("You can't use a LVM Logical Volume for mount point %s", $mntpoint)
       if $mntpoint eq '/boot' && isLVM($hd);
     cdie N("You've selected a LVM Logical Volume as root (/).
 The bootloader is not able to handle this without a /boot partition.
-Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) && !has_mntpoint("/boot", $all_hds);
+Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) && !fs::get::has_mntpoint("/boot", $all_hds);
     cdie N("You may not be able to install lilo (since lilo doesn't handle a LV on multiple PVs)")
       if 0; # arch() =~ /i.86/ && $mntpoint eq '/' && isLVM($hd) && @{$hd->{disks} || []} > 1;
 
@@ -571,12 +465,12 @@ sub add {
 sub allocatePartitions {
     my ($all_hds, $to_add) = @_;
 
-    foreach my $part_ (get_all_holes($all_hds)) {
+    foreach my $part_ (fs::get::holes($all_hds)) {
 	my ($start, $size, $dev) = @$part_{"start", "size", "rootDevice"};
 	my $part;
 	while (suggest_part($part = { start => $start, size => 0, maxsize => $size, rootDevice => $dev }, 
 			    $all_hds, $to_add)) {
-	    my $hd = part2hd($part, $all_hds);
+	    my $hd = fs::get::part2hd($part, $all_hds);
 	    add($hd, $part, $all_hds, {});
 	    $size -= $part->{size} + $part->{start} - $start;
 	    $start = $part->{start} + $part->{size};
@@ -586,7 +480,7 @@ sub allocatePartitions {
 
 sub auto_allocate {
     my ($all_hds, $o_suggestions) = @_;
-    my $before = listlength(get_all_fstab($all_hds));
+    my $before = listlength(fs::get::fstab($all_hds));
 
     my $suggestions = $o_suggestions || $suggestions{simple};
     allocatePartitions($all_hds, $suggestions);
@@ -603,9 +497,9 @@ sub auto_allocate {
 
     partition_table::assign_device_numbers($_) foreach @{$all_hds->{hds}};
 
-    if ($before == listlength(get_all_fstab($all_hds))) {
+    if ($before == listlength(fs::get::fstab($all_hds))) {
 	# find out why auto_allocate failed
-	if (any { !has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions) {
+	if (any { !fs::get::has_mntpoint($_->{mntpoint}, $all_hds) } @$suggestions) {
 	    die N("Not enough free space for auto-allocating");
 	} else {
 	    die N("Nothing to do");
@@ -616,7 +510,7 @@ sub auto_allocate {
 sub auto_allocate_raids {
     my ($all_hds, $suggestions) = @_;
 
-    my @raids = grep { isRawRAID($_) } get_all_fstab($all_hds) or return;
+    my @raids = grep { isRawRAID($_) } fs::get::fstab($all_hds) or return;
 
     require raid;
     my @mds = grep { $_->{hd} =~ /md/ } @$suggestions;
@@ -636,7 +530,7 @@ sub auto_allocate_raids {
 sub auto_allocate_vgs {
     my ($all_hds, $suggestions) = @_;
 
-    my @pvs = grep { isRawLVM($_) } get_all_fstab($all_hds) or return;
+    my @pvs = grep { isRawLVM($_) } fs::get::fstab($all_hds) or return;
 
     my @vgs = grep { $_->{VG_name} } @$suggestions or return;
 

@@ -54,6 +54,7 @@ sub part_raw {
     $part->{isFormatted} and return;
 
     if ($part->{encrypt_key}) {
+	require fs;
 	fs::set_loop($part);
     }
 

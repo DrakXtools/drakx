@@ -7,6 +7,7 @@ use detect_devices;
 use run_program;
 use modules;
 use any;
+use fs;
 use mouse;
 use network::network;
 use network::tools;
