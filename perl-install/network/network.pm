@@ -306,7 +306,7 @@ notation (for example, 1.2.3.4).");
     my $onboot = 1;
     my @fields = qw(IPADDR NETMASK);
     $::isStandalone or $in->set_help('configureNetworkIP');
-    $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
+    my $retvalue = $in->ask_from(_("Configuring network device %s", $intf->{DEVICE}),
   	          (_("Configuring network device %s", $intf->{DEVICE}) . ($module ? _(" (driver %s)", $module) : '') ."\n\n") .
 	          $text,
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
@@ -352,6 +352,7 @@ notation (for example, 1.2.3.4).");
 	         }
     	    );
     $intf->{ONBOOT} = bool2yesno($onboot);
+    return $retvalue;
 }
 
 sub configureNetworkNet {
