@@ -37,6 +37,7 @@ sub write {
 	    if (-l $_) {
 		unlink $_;
 	    } else {
+		unlink "$_.old";
 		rename $_, "$_.old"; #- there will not be any XF86Config nor XF86Config-4 anymore, we want this!
 	    }
 	}
