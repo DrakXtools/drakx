@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 9.2
-Release: 0.20mdk
+Release: 0.21mdk
 Url: http://www.mandrakelinux.com/en/drakx.php2
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -310,6 +310,12 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Wed Jul 23 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.21mdk
+- drakconnect: fix #4050
+- drakgw:
+  o fix not being able to step backward
+  o fix canceling resulting in broken dhcp config
+
 * Tue Jul 22 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.20mdk
 - drakconnect: fix "lan config" dialog where fields were not filled
 - draksec: vertically align OptionMenus
