@@ -632,19 +632,19 @@ sub read_rpmsrate {
 		      map { if_($_ && packageName($_) =~ /locales-(.*)/, qq(LOCALES"$1")) }
 		      map { packageById($packages, $_) } packageDepsId($p);
 
-		    @m = ((grep { !/^\d$/ } @m), @m2);
+		    my @m3 = ((grep { !/^\d$/ } @m), @m2);
 		    if (packageRate($p)) {
-			next if @m == 1 && $m[0] eq 'INSTALL';
+			next if @m3 == 1 && $m3[0] eq 'INSTALL';
 
-			my ($rate2, @m3) = packageRateRFlags($p);
-			if (@m3 > 1 || @m > 1) {
+			my ($rate2, @m4) = packageRateRFlags($p);
+			if (@m3 > 1 || @m4 > 1) {
 			    log::l("can't handle complicate flags for packages appearing twice ($_)");
 			    $fatal_error++;
 			}
 			log::l("package $_ appearing twice with different rates ($rate != $rate2)") if $rate != $rate2;
-			packageSetRateRFlags($p, $rate, "$m[0]||$m3[0]");
+			packageSetRateRFlags($p, $rate, "$m3[0]||$m4[0]");
 		    } else {
-			packageSetRateRFlags($p, $rate, @m);
+			packageSetRateRFlags($p, $rate, @m3);
 		    }
 		} else {
 		    print "$_ = ", join(" && ", @m), "\n";
