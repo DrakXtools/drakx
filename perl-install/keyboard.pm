@@ -551,7 +551,7 @@ sub check() {
 	}
     }
     /SKIP/ || $keyboards{$_} or $err->("invalid keyboard $_ in \@usb2keyboard keyboard.pm") foreach @usb2keyboard;
-    $usb2keyboard[0x21] eq 'us' or $err->("\@usb2keyboard is badly modified, 0x21 is not us keyboard");
+    $usb2keyboard[0x21] eq 'us' or $err->('@usb2keyboard is badly modified, 0x21 is not us keyboard');
 
     my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
     $err->("invalid xkb group toggle '$_' in \%grp_toggles") foreach difference2([ keys %grp_toggles ], \@xkb_groups);
