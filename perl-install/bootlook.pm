@@ -95,9 +95,10 @@ my $a_g_button = new Gtk::RadioButton _("Traditional Gtk+ Monitor"),$a_c_button 
 my $a_button = new Gtk::CheckButton(_("Launch Aurora at boot time"));
 my $a_box = new Gtk::VBox(0, 0);
 my $x_box = new Gtk::VBox(0, 0);
+my $disp_mode = arch() =~ /ppc/ ? "Yaboot mode" : "Lilo/grub mode";
 gtkadd($window,
        gtkpack__ (my $global_vbox = new Gtk::VBox(0,0),
-		  gtkadd (new Gtk::Frame (_("Lilo/grub mode")),
+		  gtkadd (new Gtk::Frame (_("$disp_mode")),
 #			  gtkpack__(new Gtk::VBox(0,0),
 				    (gtkpack_(gtkset_border_width(new Gtk::HBox(0, 0),5),
 					      1,_("You are currently using %s as Boot Manager.

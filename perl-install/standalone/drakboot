@@ -37,9 +37,9 @@ goto ask;
 
 sub lilo_choice
 {
-    my $bootloader = bootloader::read('', '/etc/lilo.conf');
+    my $bootloader = arch() =~ /ppc/ ? bootloader::read('', '/etc/yaboot.conf') : bootloader::read('', '/etc/lilo.conf');
     local ($_) = `detectloader`;
-    $bootloader->{methods} = { lilo => 1, grub => !!/grub/i };
+    $bootloader->{methods} = { lilo => 1, grub => !!/grub/i, yaboot => 1 };
     
     my ($all_hds) = catch_cdie { fsedit::hds([ detect_devices::hds() ], {}) } sub { 1 };
     my $fstab = [ fsedit::get_all_fstab($all_hds) ];
@@ -52,9 +52,11 @@ sub lilo_choice
     any::setupBootloader($in, $bootloader, $all_hds, $fstab, $ENV{SECURE_LEVEL}) or return;
     eval { bootloader::install('', $bootloader, $fstab, $all_hds->{hds}) };
 
+    my $loader = arch() =~ /ppc/ ? "Yaboot" : "LILO";
     if ($@) {
 	$in->ask_warn('', 
-		      [ _("Installation of LILO failed. The following error occured:"),
+		      [ _("Installation of $loader failed. The following error 
+occured:"),
 			grep { !/^Warning:/ } cat_("/tmp/.error") ]);
 	unlink "/tmp/.error";
 	goto ask;
