@@ -611,8 +611,7 @@ sub setPackages {
 
 sub copy_rpms_on_disk {
     my ($o) = @_;
-    use Data::Dumper;log::l("dumper mediums:".Dumper$o->{packages}{mediums});
-    mkdir "$o->{prefix}/$_", 0755 for qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
+    mkdir "$o->{prefix}/$_", 0755 foreach qw(var var/ftp var/ftp/pub var/ftp/pub/Mandrakelinux var/ftp/pub/Mandrakelinux/media);
     local *changeMedium = sub {
 	my ($method, $medium) = @_;
 	my $name = pkgs::mediumDescr($o->{packages}, $medium);
@@ -630,7 +629,7 @@ Please insert the Cd-Rom labelled \"%s\" in your drive and press Ok when done.",
 	    return 1;
 	}
     };
-    for my $k (pkgs::allMediums($o->{packages})) {
+    foreach my $k (pkgs::allMediums($o->{packages})) {
 	my $m = $o->{packages}{mediums}{$k};
 	askChangeMedium($o->{method}, $m->{descr})
 	    or next;
