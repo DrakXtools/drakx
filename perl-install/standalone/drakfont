@@ -181,7 +181,7 @@ my $ttf2pt1 = '/usr/sbin/ttf2pt1';
 my $pfm2afm = '/usr/sbin/pfm2afm';
 my $type1inst = '/usr/sbin/type1inst';
 my $chkfontpath = '/usr/sbin/chkfontpath';
-my $ttmkfdir = '/usr/sbin/ttmkfdir';
+my $ttmkfdir = '/usr/X11R6/bin/mkttfdir'; #'/usr/sbin/ttmkfdir';
 my $ghostscript;
 
 # Global lists, just to manipulate it easily.
@@ -355,7 +355,8 @@ sub put_font_dir {
 	system ('cd '.$drakfont_dir.'/tmp/tmp ; for i in *.TTF; do mv -f $i `basename $i .TTF`.ttf; done');
 	system ('cd '.$drakfont_dir.'/tmp/tmp  && cp *.ttf ../../ttf');
 	$interactive and progress($pbar2, 0.20, _("please wait during ttmkfdir..."));
-	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
+#	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir > fonts.dir' );
+	system ('cd '.$drakfont_dir.'/ttf && $ttmkfdir ' );
 	$interactive and progress($pbar2, 0.10, _("True Type install done"));
 	my $restart_xfs = "$chkfontpath -a $drakfont_dir/ttf";
 	
