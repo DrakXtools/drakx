@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-uz@Cyrl\n"
-"POT-Creation-Date: 2003-12-16 15:39+0100\n"
+"POT-Creation-Date: 2004-01-05 13:30+0100\n"
 "PO-Revision-Date: 2003-11-17 13:47+0100\n"
 "Last-Translator: Mashrab Kuvatov <kmashrab@uni-bremen.de>\n"
 "Language-Team: Uzbek <uz-li@yahoogroups.com>\n"
@@ -83,6 +83,24 @@ msgstr ""
 msgid "Which username"
 msgstr "Қайси фойдаланувчи"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Iwpriv enable to set up optionals (private) parameters of a wireless "
+"network\n"
+"interface.\n"
+"\n"
+"Iwpriv deals with parameters and setting specific to each driver (as opposed "
+"to\n"
+"iwconfig which deals with generic ones).\n"
+"\n"
+"In theory, the documentation of each device driver should indicate how to "
+"use\n"
+"those interface specific commands and their effect.\n"
+"\n"
+"See iwpriv(8) man page for further information."
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Which type of entry do you want to add?"
@@ -108,15 +126,6 @@ msgstr "CUPS серверида \"%s\""
 msgid "Post-install configuration"
 msgstr "Ўрнатишдан кегин мослаш"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"The current security level is %s\n"
-"Select permissions to see/edit"
-msgstr ""
-"Амалдаги ҳавфсизлик даражаси - %s\n"
-"Кўриш/таҳрирлаш учун рухсатларни танланг"
-
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``%s'' instead"
@@ -138,6 +147,11 @@ msgstr ""
 "\n"
 "Ишлаб чиқарувчининг PPD-файллари ёки CUPS'нинг асл драйверлари билан "
 "мосланган принтерларни ҳам узатиб бўлмайди."
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Repeater"
+msgstr "Тиклаш"
 
 #: ../../lang.pm:1
 #, c-format
@@ -162,7 +176,7 @@ msgstr ""
 msgid "Central African Republic"
 msgstr "Марказий Африка Республикаси"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway device"
 msgstr "Гейтвэй ускунаси"
@@ -202,17 +216,17 @@ msgstr "йўқ"
 msgid "Auto-detect"
 msgstr "Авто-аниқлаш"
 
-#: ../../standalone/drakconnect:1
-#, c-format
-msgid "Interface:"
-msgstr "Интерфейс:"
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Select installation class"
 msgstr "Ўрнатиш синфини танланг"
 
-#: ../../network/tools.pm:1
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid "Interface:"
+msgstr "Интерфейс:"
+
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
@@ -240,16 +254,16 @@ msgstr "Белорус"
 msgid "Error writing to file %s"
 msgstr "Файлга (%s) ёзишда хато"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Report check result to syslog"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Report check result to syslog"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -261,6 +275,16 @@ msgstr ""
 #, c-format
 msgid "The following packages are going to be installed"
 msgstr "Қуйидаги пакетлар ўрнатилади"
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Here, one can configure some extra wireless parameters such as:\n"
+"ap, channel, commit, enc, power, retry, sens, txpower (nick is already set "
+"as the hostname).\n"
+"\n"
+"See iwpconfig(8) man page for further information."
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -568,8 +592,8 @@ msgstr ""
 msgid "Venezuela"
 msgstr "Венесуэла"
 
-#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
-#: ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "IP address"
 msgstr "IP рақами"
@@ -595,7 +619,7 @@ msgid ""
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Your modem isn't supported by the system.\n"
@@ -653,7 +677,7 @@ msgstr " Novell серверида \"%s\", принтер \"%s\""
 msgid "Printer Name"
 msgstr "Принтернинг номи"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Setting up USB key"
 msgstr ""
@@ -664,9 +688,9 @@ msgid "Remove a module"
 msgstr "Модулни олиб ташлаш"
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
-#: ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1
+#: ../../diskdrake/smbnfs_gtk.pm:1 ../../network/netconnect.pm:1
 #: ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakconnect:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "Password"
 msgstr "Махфий сўз"
@@ -696,11 +720,6 @@ msgstr "Қўшиш учун мавжуд бўлган RAID'ни танланг"
 msgid "Turkish (modern \"Q\" model)"
 msgstr "Туркча (замонавий \"Q\" модели)"
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Lilo message not found"
-msgstr "Lilo'нинг хабари топилмади"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -708,17 +727,15 @@ msgid ""
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr "Lilo'нинг хабари топилмади"
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "if needed"
 msgstr "агар керак бўлса"
-
-#: ../../standalone/drakclock:1
-#, c-format
-msgid ""
-"We need to install ntp package\n"
-" to enable Network Time Protocol"
-msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -1048,7 +1065,7 @@ msgstr "Бу махфий сўз жуда қисқа (у энг ками %d бе
 msgid "[keyboard]"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "FTP proxy"
 msgstr "FTP прокси"
@@ -1117,8 +1134,8 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr "<control>Ч"
@@ -1138,8 +1155,7 @@ msgstr "Номаълум"
 msgid "This server is already in the list, it cannot be added again.\n"
 msgstr "Сервер аллақачон рўйхатда, уни яна қўшиб бўлмайди.\n"
 
-#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
-#: ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Configuration"
 msgstr "Тармоқни мослаш"
@@ -1201,12 +1217,22 @@ msgstr "Билдиришнома"
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr "Сиз X'ни мосламадингиз. Ростдан буни истайсизми?"
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "UPS devices"
+msgstr "Хизматлар"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
 "The configuration of the printer will work fully automatically. If your "
 "printer was not correctly detected or if you prefer a customized printer "
 "configuration, turn on \"Manual configuration\"."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "If this is the case, you can make this be done automatically."
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -1361,7 +1387,7 @@ msgid ""
 "and XFree at boot."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -1480,12 +1506,19 @@ msgstr ""
 msgid "Latvian"
 msgstr "Латвиача"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"If you have already installed your scanner's firmware you can update the "
+"firmware here by supplying the new firmware file."
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "monthly"
 msgstr "ҳар ой"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Retry"
 msgstr "Тиклаш"
@@ -1495,7 +1528,7 @@ msgstr "Тиклаш"
 msgid "Module name"
 msgstr "Модулнинг номи"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Start at boot"
 msgstr "Система юкланаётганда ишга тушириш"
@@ -1524,6 +1557,11 @@ msgstr "Жойстик"
 #, c-format
 msgid "DVD"
 msgstr "DVD"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "(detected on port %s)"
+msgstr "%s портида топилди"
 
 #: ../../any.pm:1 ../../help.pm:1
 #, c-format
@@ -1631,12 +1669,17 @@ msgstr "Фойдаланувчи"
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Secondary"
+msgstr "Иккиламчи"
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr "mkraid буйруғи муваффақиятсиз тугади."
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Name"
 msgstr "Номи"
@@ -1676,10 +1719,15 @@ msgstr "Принтер ёки ускунани танлашингиз ёки к�
 msgid "Permission problem accessing CD."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Phone number"
 msgstr "Телефон рақами"
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Rules"
+msgstr "Рутерлар:"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -1711,11 +1759,6 @@ msgstr "Loopback"
 msgid "West Europe"
 msgstr "Ғарбий Ойропа"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "On CD-R"
-msgstr "Компакт-дискга"
-
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -1726,6 +1769,11 @@ msgid ""
 "  --report          - program should be one of mandrake tools\n"
 "  --incident        - program should be one of mandrake tools"
 msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
+msgstr "Компакт-дискга"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1746,6 +1794,13 @@ msgstr "Свазиленд"
 #, c-format
 msgid "Dominican Republic"
 msgstr "Доминикана Республикаси"
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid ""
+"An unexpected error has happened:\n"
+"%s"
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1782,7 +1837,7 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Belgilash uchun %c va %c tugmalaridan foydalaning."
 
-#: ../../standalone/scannerdrake:1
+#: ../../scanner.pm:1
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
 msgstr ""
@@ -1838,6 +1893,11 @@ msgid ""
 msgstr ""
 "Жорий принтер учун мавжуд бўлган параметрларни билиш учун \"Параметрлар "
 "рўйхатини кўрсатиш\" тугмасини босинг."
+
+#: ../../standalone/service_harddrake:1
+#, fuzzy, c-format
+msgid "Some devices were added: %s\n"
+msgstr "Баъзи бир ускуналар қўшилди:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -1944,7 +2004,7 @@ msgstr "Украина"
 msgid "Application:"
 msgstr "Дастур:"
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "External ISDN modem"
 msgstr "Ташқи ISDN модем"
@@ -1953,6 +2013,11 @@ msgstr "Ташқи ISDN модем"
 #, c-format
 msgid "if set to yes, report check result by mail."
 msgstr "агар \"ҳа\" бўлса, текширув натижасини хат орқали юбориш"
+
+#: ../../network/adsl.pm:1
+#, fuzzy, c-format
+msgid "ADSL connection type :"
+msgstr "ADSL орқали уланиш"
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -2141,11 +2206,6 @@ msgstr "Мадагаскар"
 msgid "Urpmi"
 msgstr "Urpmi"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Cron not available yet as non-root"
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1 ../../services.pm:1
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2240,18 +2300,18 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr ""
 
+#: ../../services.pm:1
+#, c-format
+msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
+msgstr ""
+"ALSA (Advanced Linux Sound Architecture) товуш системасини ишга тушириш"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
 "Files or wildcards listed in a .backupignore file at the top of a directory "
 "tree will not be backed up."
 msgstr ""
-
-#: ../../services.pm:1
-#, c-format
-msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
-msgstr ""
-"ALSA (Advanced Linux Sound Architecture) товуш системасини ишга тушириш"
 
 #: ../../standalone/net_monitor:1
 #, fuzzy, c-format
@@ -2444,7 +2504,7 @@ msgstr "Принтер ускунасининг URI'и"
 msgid "Not erasable media!"
 msgstr "Ўчириб бўлмайдиган маълумот ташувчи!"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Terminal-based"
 msgstr "Терминалда асосланган"
@@ -2517,6 +2577,11 @@ msgstr ""
 "Бу даража олдинги даражага ўхшайди, аммо система умуман ёпиқ ва хавфсизлик\n"
 "параметрлари энг юқори қийматларга эга."
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Network ID"
+msgstr "Тармоқ"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Nicaragua"
@@ -2576,6 +2641,11 @@ msgstr "Диск қисмлар жадвалининг тури: %s\n"
 #, c-format
 msgid "Authentication Windows Domain"
 msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Manufacturer / Model:"
+msgstr "Принтернинг ишлаб чиқарувчиси, модели"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2662,7 +2732,7 @@ msgstr "Босниача"
 msgid "Release: "
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection speed"
 msgstr "Алоқанинг тезлиги"
@@ -2809,6 +2879,7 @@ msgstr ""
 " Тайёр бўлганингиздан сўнг \"Кейингиси\"ни ёки принтер(лар)ингизни ўрнатишни "
 "истамасангиз \"Бекор қилиш\"ни босинг."
 
+#. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2849,34 +2920,17 @@ msgstr "Дискнинг туб қисми Мб'да: "
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "Бу ўрнатилиши шарт бўлган пакет, уни танлашни бекор қилиб бўлмайди."
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \tThe diskless client machines need either ROM images on the NIC, or "
-"a boot floppy\n"
-"        \tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these\n"
-"        \timages, based on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid "Etherboot ISO image is %s"
-msgstr "Etherboot ISO тасвири: %s"
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
 "named (BIND) is a Domain Name Server (DNS) that is used to resolve host "
 "names to IP addresses."
 msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid "Etherboot ISO image is %s"
+msgstr "Etherboot ISO тасвири: %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -2892,6 +2946,11 @@ msgstr "Ноябрь"
 #, c-format
 msgid "Disconnect..."
 msgstr "Узиш..."
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "IP mask"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -2959,6 +3018,11 @@ msgstr ""
 "Аввало дискнинг асосий қисмини олиб таншланг кегин дискнинг кенгайтирилган "
 "қисмини яратинг."
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Install updates"
+msgstr "Янгиланишларни ўрнатиш"
+
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -2969,11 +3033,6 @@ msgstr "Улаш"
 #, c-format
 msgid "Creating auto install floppy"
 msgstr "Авто-ўрнатиш дискети яратилмоқда"
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Install updates"
-msgstr "Янгиланишларни ўрнатиш"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -3105,7 +3164,7 @@ msgstr "Кокос (Килинг) Ороллари"
 msgid "You'll need to reboot before the modification can take place"
 msgstr "Ўзгаришлар амалда қўлланилиши учун компютерни ўчириб-ёқиш керак"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider phone number"
 msgstr "Провайдернинг телефон рақами"
@@ -3310,11 +3369,6 @@ msgstr ""
 "Изоҳ: агар сизда ISA PnP товуш картаси бўлса, sndconfig дастурини "
 "ишлатишингиз керак бўлади. Консолда \"sndconfig\" буйруғини бажаринг холос."
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "If this is the case, you can make this be done automatically for you."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
@@ -3392,7 +3446,8 @@ msgstr "Гвинея-Биссау"
 msgid "Horizontal refresh rate"
 msgstr ""
 
-#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/drakups:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "Edit"
 msgstr "Тузатиш"
@@ -3628,7 +3683,7 @@ msgstr ""
 msgid "Liechtenstein"
 msgstr "Лихтенштейн"
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Host name"
 msgstr "Компютернинг номи"
@@ -3752,11 +3807,6 @@ msgstr ""
 msgid "Printer"
 msgstr "Принтер"
 
-#: ../../standalone/service_harddrake:1
-#, c-format
-msgid "Some devices were added:\n"
-msgstr "Баъзи бир ускуналар қўшилди:\n"
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Geometry: %s cylinders, %s heads, %s sectors\n"
@@ -3795,29 +3845,11 @@ msgid ""
 "report."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "Choose the profile to configure"
-msgstr "Мослаш учун профилни танланг"
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
 msgstr ""
 "Махфий сўзнинг энг қисқа узунлиги, ундаги сонларнинг ва бош ҳарфларнинг сони"
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"Enter a Zeroconf host name without any dot if you don't\n"
-"want to use the default host name."
-msgstr ""
-"\n"
-"\n"
-"Агар андоза компютернинг номидан фойдаланишни истамасангиз, Zeroconf "
-"компютернинг номини киритинг."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3834,7 +3866,7 @@ msgstr "Улаш нуқталари фақат сон ёки ҳарфларда�
 msgid "Restarting printing system..."
 msgstr "Босиб чиқариш ситемаси бошқадан ишга туширилмоқда..."
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "You can only run with no CDROM support"
 msgstr ""
@@ -3854,16 +3886,6 @@ msgstr "Кун"
 msgid "First sector of boot partition"
 msgstr "Дискнинг юклаш қисмининг биринчи сектори"
 
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer manufacturer, model"
-msgstr "Принтернинг ишлаб чиқарувчиси, модели"
-
-#: ../../printer/data.pm:1
-#, c-format
-msgid "PDQ - Print, Don't Queue"
-msgstr "PDQ - Навбатга қўймасдан босиб чиқариш"
-
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -3881,6 +3903,16 @@ msgid ""
 "--delclient      : delete a client machine from MTS (requires MAC address, "
 "IP, nbi image name)"
 msgstr ""
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer manufacturer, model"
+msgstr "Принтернинг ишлаб чиқарувчиси, модели"
+
+#: ../../printer/data.pm:1
+#, c-format
+msgid "PDQ - Print, Don't Queue"
+msgstr "PDQ - Навбатга қўймасдан босиб чиқариш"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -4057,7 +4089,7 @@ msgstr "Ҳақида"
 msgid "GlidePoint"
 msgstr "GlidePoint"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Proxies configuration"
 msgstr "Проксиларни мослаш"
@@ -4233,12 +4265,17 @@ msgstr "Бу маҳсулот MandrakeStore веб-сайтида бор."
 msgid "=> There are many things to choose from (%s).\n"
 msgstr "=> Танлаш учун кўп нарса бор (%s).\n"
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Hard drive detection"
+msgstr "Қаттиқ дискни аниқлаш"
+
 #: ../../standalone/drakclock:1
 #, c-format
 msgid "GMT - DrakClock"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "An error occurred:\n"
@@ -4257,11 +4294,6 @@ msgid ""
 "a look at log files in console #3 and #4 to try to\n"
 "guess what's happening."
 msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Hard drive detection"
-msgstr "Қаттиқ дискни аниқлаш"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -4357,7 +4389,7 @@ msgstr "Масофадаги принтер"
 msgid "Please choose a language to use."
 msgstr "Илтимос фойдаланиш учун тилни танланг."
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "WARNING: this device has been previously configured to connect to the "
@@ -4527,7 +4559,7 @@ msgstr "%s текширилмоқда"
 msgid "TCP/Socket Printer Options"
 msgstr "TCP/Socket принтернинг параметрлари"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card mem (DMA)"
 msgstr "Картанинг хотираси (DMA)"
@@ -4537,7 +4569,7 @@ msgstr "Картанинг хотираси (DMA)"
 msgid "Disconnecting from Internet "
 msgstr "Интернет билан алоқа узилмоқда"
 
-#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "France"
 msgstr "Франция"
@@ -4604,7 +4636,7 @@ msgstr "Асбоб-ускуналар"
 msgid "Ctrl and Alt keys simultaneously"
 msgstr "Бир вақтда Ctrl ва Alt тугмалари"
 
-#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "United States"
 msgstr "Қўшма Штатлар"
@@ -4668,7 +4700,7 @@ msgstr "яхши"
 msgid "Leaving in %d seconds"
 msgstr "%d сониядан кегин ёпилади"
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr "Илтимос, модем уланган кетма-кет портини танланг."
@@ -4876,6 +4908,11 @@ msgstr ""
 msgid "Printer on parallel port #%s"
 msgstr "\\#%s параллел портидаги принтер"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Please enter the wireless parameters for this card:"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -5021,11 +5058,6 @@ msgstr "Илтимос бу ердан чиқинг ва Ctrl-Alt-BackSpace ту
 
 #: ../../network/netconnect.pm:1
 #, c-format
-msgid "detected"
-msgstr "топилди"
-
-#: ../../network/netconnect.pm:1
-#, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
 msgstr ""
 "Тармоқни бошқадан ишга тушириш керак. Уни бошқадан ишга туширишни истайсизми?"
@@ -5049,6 +5081,11 @@ msgstr "ХАВФСИЗЛИК ОГОҲНОМАСИ!"
 #, c-format
 msgid "StarOffice"
 msgstr "StarOffice"
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Operating frequency"
+msgstr ""
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -5075,7 +5112,7 @@ msgstr "%s олиб ташланмоқда"
 msgid "%s not found...\n"
 msgstr "%s топилмади...\n"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
 msgstr "Алоқа синаб кўрилмоқда..."
@@ -5102,15 +5139,15 @@ msgstr "Бошланғич сектор: "
 msgid "Congo (Brazzaville)"
 msgstr "Конго (Браззавилле)"
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr "Ўқиш"
-
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
 msgstr "Пакет (%s) ўрнатилиши керак. Уни ўрнатишни истайсизми?"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
+msgstr "Ўқиш"
 
 #: ../../lang.pm:1
 #, c-format
@@ -5426,7 +5463,7 @@ msgstr "Танлаш"
 msgid "CDROM"
 msgstr "Компакт-диск"
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr "Интернетга уланишга уриниб кўришни истайсизми?"
@@ -5441,7 +5478,7 @@ msgstr "Белгиача"
 msgid "Do you have an ISA sound card?"
 msgstr "Сизда ISA товуш картаси борми?"
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
@@ -5518,11 +5555,6 @@ msgstr "dhcp'дан фойдаланиш"
 msgid "Mail alert"
 msgstr "Хат орқали хабар бериш"
 
-#: ../../network/tools.pm:1
-#, c-format
-msgid "Internet configuration"
-msgstr "Интернетни мослаш"
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Uzbekistan"
@@ -5567,6 +5599,14 @@ msgstr ""
 #, c-format
 msgid "16 MB"
 msgstr "16 Мб"
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"We're going to add an UPS device.\n"
+"\n"
+"Do you prefer autodetect UPS devices connected to this machine or  ?"
+msgstr ""
 
 #: ../../any.pm:1 ../../install_steps_interactive.pm:1
 #: ../../diskdrake/interactive.pm:1
@@ -5825,7 +5865,7 @@ msgstr ""
 msgid "Server Name"
 msgstr "Сервернинг номи"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
 msgstr "Махфий сўз"
@@ -5900,6 +5940,20 @@ msgid ""
 " machine, the yaboot bootloader will not work for you.\n"
 "The install will continue, but you'll\n"
 " need to use BootX or some other means to boot your machine"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"RTS/CTS adds a handshake before each packet transmission to make sure that "
+"the\n"
+"channel is clear. This adds overhead, but increase performance in case of "
+"hidden\n"
+"nodes or large number of active nodes. This parameters set the size of the\n"
+"smallest packet for which the node sends RTS, a value equal to the maximum\n"
+"packet size disable the scheme. You may also set this parameter to auto, "
+"fixed\n"
+"or off."
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -5978,6 +6032,11 @@ msgstr ""
 msgid "CDRW media"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "No new UPS devices was found"
+msgstr "Ҳеч қандай ускуна топилмади"
+
 #: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -5988,7 +6047,7 @@ msgstr "Компютерингизни ишончли серверга айла�
 msgid "Check empty password in /etc/shadow"
 msgstr "Бўш махфий сўзни /etc/shadow файлида текшириш"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid " (driver %s)"
 msgstr " (драйвер %s)"
@@ -6091,7 +6150,7 @@ msgstr "Модулни қўшиш"
 msgid "Local measure"
 msgstr "Локал кўрсатгич"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Warning : IP address %s is usually reserved !"
 msgstr ""
@@ -6117,7 +6176,7 @@ msgid ""
 "one full kernel."
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
 msgstr "Фойдаланувчи"
@@ -6210,7 +6269,7 @@ msgstr ""
 "Принтердраке дастурини Mandrake бошқарув марказининг \"Асбоб-ускуналар\" "
 "бўлимидан ишга туширишингиз мумкин."
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Key isn't writable"
 msgstr "ХавТВ ўрнатилмаган!"
@@ -6267,7 +6326,7 @@ msgstr "root учун махфий сўз"
 msgid "Error reading file %s"
 msgstr "%s файлини ўқишда хато рўй берди"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Script-based"
 msgstr "Скриптда асосланган"
@@ -6371,6 +6430,11 @@ msgstr ""
 "Drakbackup учун ажратилган\n"
 " юқори чегарани киритинг (Мб)"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Ad-hoc"
+msgstr ""
+
 #: ../../loopback.pm:1
 #, c-format
 msgid "Circular mounts %s\n"
@@ -6461,6 +6525,11 @@ msgstr ", HP JetDirect'даги кўп амалли ускуна"
 msgid "none"
 msgstr "йўқ"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Managed"
+msgstr "Тил"
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Floppy"
@@ -6539,6 +6608,13 @@ msgid ""
 "copyright laws applicable to software programs.\n"
 msgstr ""
 
+#: ../../services.pm:1
+#, c-format
+msgid ""
+"Linux Virtual Server, used to build a high-performance and highly\n"
+"available server."
+msgstr ""
+
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Expert mode"
@@ -6549,13 +6625,6 @@ msgstr "/_Эксперт усули"
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr "Бу принтерни Star Office/OpenOffice.org/GIMP дастурларидан олиб ташлаш"
 
-#: ../../services.pm:1
-#, c-format
-msgid ""
-"Linux Virtual Server, used to build a high-performance and highly\n"
-"available server."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
@@ -6565,6 +6634,11 @@ msgstr "Микронезия"
 #, c-format
 msgid "4 billion colors (32 bits)"
 msgstr "4 миллиардта ранг (32 бит)"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Operating Mode"
+msgstr "Эксперт усули"
 
 #: ../../steps.pm:1
 #, c-format
@@ -6754,6 +6828,13 @@ msgstr ""
 "Ускуна ҳақида маълумотни бу ерда кўриш учун уни чап тарафдаги рўйхатдан "
 "танланг."
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"We are configuring the \"%s\" UPS from \"%s\".\n"
+"Please fill in its name, its driver and its port."
+msgstr ""
+
 #: ../../security/help.pm:1
 #, c-format
 msgid "Allow/Forbid autologin."
@@ -6907,7 +6988,7 @@ msgid ""
 "bootloader."
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider dns 2 (optional)"
 msgstr "Провайдернинг DNS 2 (танласа бўлади)"
@@ -6916,6 +6997,11 @@ msgstr "Провайдернинг DNS 2 (танласа бўлади)"
 #, c-format
 msgid "Boot device"
 msgstr "Системани юклаш ускунаси"
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "ACL name"
+msgstr "LVM номи?"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -6936,11 +7022,6 @@ msgstr "Жибути"
 #, c-format
 msgid "A tool to monitor your logs"
 msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "detected on port %s"
-msgstr "%s портида топилди"
 
 #: ../../printer/data.pm:1
 #, c-format
@@ -6982,7 +7063,7 @@ msgstr ""
 msgid "Splash selection"
 msgstr "Splash'ни танлаш"
 
-#: ../../network/isdn.pm:1
+#: ../../network/isdn.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "ISDN Configuration"
 msgstr "ISDN'ни мослаш"
@@ -7073,6 +7154,11 @@ msgstr "Sagem (dhcp'ни ишлатиб) usb"
 #, c-format
 msgid "French Southern Territories"
 msgstr "Франциянинг Жанубий Ерлари"
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Add an UPS device"
+msgstr "Бандни қўшиш"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -7266,6 +7352,11 @@ msgstr "Фойдаланувчи :"
 msgid "Restore system"
 msgstr "Системани тиклаш"
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Select the network interface to configure:"
+msgstr "Тармоқ интерфейсини танлаш"
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid ""
@@ -7320,7 +7411,7 @@ msgstr "Реюнион"
 msgid "Details"
 msgstr "Тафсилотлар"
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr ""
@@ -7372,6 +7463,11 @@ msgstr "График интерфейс"
 msgid "Restore Users"
 msgstr "Фойдаланувчиларни тиклаш"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Bitrate (in b/s)"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Encryption key for %s"
@@ -7395,6 +7491,11 @@ msgstr ""
 #, c-format
 msgid "Detected hardware"
 msgstr "Аниқланган асбоб-ускуналар"
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Connected through a serial port or an usb cable"
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -7450,6 +7551,24 @@ msgstr ", хост \"%s\", порт %s"
 msgid "Monaco"
 msgstr "Монако"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
+"        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
+"        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -7499,7 +7618,7 @@ msgstr "Қирғизистон"
 msgid "Multi-function device on USB"
 msgstr "USB портидаги кўп амалли ускуна"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "We didn't detect any USB key on your system. If you\n"
@@ -7541,7 +7660,7 @@ msgstr ""
 msgid "Western Sahara"
 msgstr "Ғарбий Сахара"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Proxy should be http://..."
 msgstr "Прокси \"http://...\" бўлиши керак"
@@ -7650,7 +7769,7 @@ msgstr ""
 msgid "generate auto-install floppy"
 msgstr "Авто-ўрнатиш дискетни яратиш"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Dialing mode"
 msgstr ""
@@ -7658,6 +7777,11 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "File sharing"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "The alert wizard had unexpectly failled:"
 msgstr ""
 
 #: ../../any.pm:1
@@ -7675,15 +7799,15 @@ msgstr "Малави"
 msgid "local config: false"
 msgstr ""
 
+#: ../../scanner.pm:1
+#, c-format
+msgid "Could not set permissions of firmware file %s!"
+msgstr ""
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "System settings"
 msgstr "Система мосламалари"
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Could not set permissions of firmware file %s!"
-msgstr ""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -7709,7 +7833,7 @@ msgstr ""
 "Қуйидаги компютерлар ва тармоқлар шу компютерга уланган принтер(лар)дан "
 "фойдаланиши мумкин:"
 
-#: ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../lang.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "United Kingdom"
 msgstr "Буюк Британия"
@@ -7809,7 +7933,7 @@ msgstr "Своп"
 msgid "Custom settings"
 msgstr "Қўшимча мосламалар"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "The USB key seems to have write protection enabled, but we can't safely\n"
@@ -7878,7 +8002,7 @@ msgstr ""
 "яратувчи тугма ёки тугмалар бирикмасини танлашингиз\n"
 "мумкин. (м-н: лотин ва лотин эмас)"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Hotplugging"
 msgstr ""
@@ -7907,7 +8031,7 @@ msgid ""
 "(LAN)."
 msgstr ""
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Please choose which network adapter you want to use to connect to Internet."
@@ -7936,6 +8060,11 @@ msgstr "Муаллифлар: "
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
 msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "About DrakUPS"
+msgstr "Harddrake ҳақида"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -7969,8 +8098,8 @@ msgstr "Тугма \"%s\": %s"
 
 #: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1
 #: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakxtv:1 ../../standalone/harddrake2:1
-#: ../../standalone/service_harddrake:1
+#: ../../standalone/drakups:1 ../../standalone/drakxtv:1
+#: ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr "Илтимос кутиб туринг"
@@ -8051,7 +8180,7 @@ msgstr ""
 msgid "Exit install"
 msgstr "Ўрнатишдан чиқиш"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Need a key to save your data"
 msgstr ""
@@ -8186,7 +8315,7 @@ msgstr ""
 msgid "Install system"
 msgstr "Системани ўрнатиш"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr "Биринчи DNS сервери (танлаб бўлади)"
@@ -8308,6 +8437,11 @@ msgid ""
 "create such a floppy."
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Port:"
+msgstr "Порт"
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose your filesystem encryption key"
@@ -8363,7 +8497,7 @@ msgstr ""
 msgid "Choose an X server"
 msgstr "X серверини танланг"
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "Copying to memory to allow removing the CDROM"
 msgstr ""
@@ -8555,10 +8689,19 @@ msgstr "Сан-Марино"
 msgid "Internet Connection Sharing currently disabled"
 msgstr ""
 
-#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Belgium"
 msgstr "Белгия"
+
+#: ../../standalone/drakperm:1
+#, fuzzy, c-format
+msgid ""
+"The current security level is %s.\n"
+"Select permissions to see/edit"
+msgstr ""
+"Амалдаги ҳавфсизлик даражаси - %s\n"
+"Кўриш/таҳрирлаш учун рухсатларни танланг"
 
 #: ../../lang.pm:1
 #, c-format
@@ -8600,7 +8743,7 @@ msgstr "Покистон"
 msgid "please wait, parsing file: %s"
 msgstr ""
 
-#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#: ../../install_steps.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "An error occurred, but I don't know how to handle it nicely.\n"
@@ -8630,7 +8773,7 @@ msgstr ""
 msgid "Permissions"
 msgstr "Ҳуқуқлар"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr "Провайдернинг номи (м-н provider.net)"
@@ -8703,6 +8846,11 @@ msgstr "Камбоджа"
 #, c-format
 msgid "Monitor HorizSync: %s\n"
 msgstr "Мониторнинг HorizSync: %s\n"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Interval cron not available as non-root"
+msgstr ""
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -8782,10 +8930,15 @@ msgid ""
 "The format is the same as auto_install generated floppies."
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "No CDROM support"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Wireless connection"
+msgstr "Кабел орқали уланиш"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -8808,6 +8961,13 @@ msgid ""
 "Do not allow execution of any binaries on the mounted\n"
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Enter a Zeroconf host name which will be the one that your machine will get "
+"back to other machines on the network:"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
@@ -8848,7 +9008,7 @@ msgstr ""
 msgid "You must enter a host name or an IP address.\n"
 msgstr "Компютернинг номини ёки IP рақамини киритишингиз керак.\n"
 
-#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Netherlands"
 msgstr "Нидерландлар"
@@ -8858,7 +9018,7 @@ msgstr "Нидерландлар"
 msgid "Sending files by FTP"
 msgstr "Файллар FTP орқали юборилмоқда"
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internal ISDN card"
 msgstr "Ички ISDN карта"
@@ -8872,7 +9032,7 @@ msgstr ""
 "Сизнинг %s товуш картангизга, жорий ҳолда %s драйвери ишлатилмоқда, маълум "
 "бўлган бошқа OSS/ALSA драйвери мавжуд эмас."
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Title"
 msgstr "Сарлавҳа"
@@ -8892,15 +9052,15 @@ msgstr "ДИҚҚАТ"
 msgid "Installing bootloader"
 msgstr "ОС юклагичи ўрнатилмоқда"
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "The name of your ups"
+msgstr "процессорнинг номи"
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "replay"
 msgstr "қайтариш"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "detected %s"
-msgstr "%s топилди"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -9028,6 +9188,11 @@ msgstr "Швеция"
 msgid "Use Expect for SSH"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Master"
+msgstr "Маёт"
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Poland"
@@ -9053,7 +9218,7 @@ msgstr " - топилди"
 msgid "SMBus controllers"
 msgstr "SMBus контроллерлар"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr "Алоқа таймаути (сонияда)"
@@ -9074,6 +9239,11 @@ msgstr "Хорватча"
 #, c-format
 msgid "Use existing partition"
 msgstr "Дискда бор қисмлардан фойдаланиш"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Auto"
+msgstr "Ҳақида"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -9159,7 +9329,7 @@ msgstr ""
 msgid "Looking for available packages..."
 msgstr "Мавжуд бўлган пакетлар қидирилмоқда..."
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
 msgstr "Илтимос кутиб туринг, хавфсизлик даражаси ўрнатилмоқда"
@@ -9240,6 +9410,11 @@ msgid ""
 "!!"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Netwok name (ESSID)"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
@@ -9256,6 +9431,11 @@ msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
 msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Action"
+msgstr "/_Амаллар"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -9311,17 +9491,22 @@ msgstr "Аруба"
 msgid "Users"
 msgstr "Фойдаланувчилар"
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Name:"
+msgstr "Номи: "
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Preparing bootloader..."
 msgstr "ОС юклагичи таёрланмоқда..."
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Enter your user information, password will be used for screensaver"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr "Гейтвэй (м-н %s)"
@@ -9363,7 +9548,7 @@ msgstr "процессорлар сони"
 msgid "Hardware clock set to GMT"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start a new configuration ?"
 msgstr "Янги мослашни бошлашни истайсизми?"
@@ -9442,6 +9627,11 @@ msgstr ""
 "ИЗОҲ: Принтернинг моделига ва босиб чиқариш системасига боғлиқ равишда ҳажми "
 "то %d Мб бўлган қўшимча дастурлар ўрнатилади."
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwpriv command extra arguments"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -9481,11 +9671,16 @@ msgstr "ҲАММАСИ"
 msgid "Add/Del Clients"
 msgstr "Клиентларни қўшиш/ўчириш"
 
-#: ../../network/ethernet.pm:1 ../../standalone/drakgw:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakgw:1
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid "Choose the network interface"
 msgstr "Тармоқ интерфейсини танлаш"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Select firmware file for the %s"
+msgstr "Файлни танлаш"
 
 #: ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -9519,7 +9714,7 @@ msgstr "Тасвирни танлаш"
 msgid "Firewalling configuration detected!"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection name"
 msgstr "Уланишнинг номи"
@@ -9748,11 +9943,6 @@ msgstr "RAID md%s\n"
 msgid "%d comma separated strings"
 msgstr "%d вергул билан ажратилган қаторлар"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " isdn"
-msgstr " isdn"
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -9763,8 +9953,8 @@ msgstr "Мавжуд бўлган тугмалар тартибининг рўй
 msgid "Theme name"
 msgstr "Мавзунинг номи"
 
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr "/_Ёрдам"
@@ -9774,7 +9964,7 @@ msgstr "/_Ёрдам"
 msgid "Choosing an arbitrary driver"
 msgstr "Ихтиёрий драйвер танланмоқда"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "Your USB key doesn't have any valid Windows (FAT) partitions.\n"
@@ -9840,9 +10030,10 @@ msgstr "Интернет станция"
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1
 #: ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
-#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/drakboot:1 ../../standalone/drakclock:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakfont:1 ../../standalone/drakperm:1
+#: ../../standalone/draksec:1 ../../standalone/drakups:1
 #: ../../standalone/logdrake:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -10009,7 +10200,7 @@ msgstr "Гондурас"
 msgid "pdq"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO"
 msgstr "Картанинг IO'си"
@@ -10057,7 +10248,8 @@ msgstr ""
 msgid "You must enter a device or file name!"
 msgstr "Ускунанинг ёки файлнинг номини киритишингиз шарт!"
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr "/Чи_қиш"
@@ -10230,7 +10422,7 @@ msgstr "Бразилия"
 msgid "Auto Install"
 msgstr "Авто-ўрнатиш"
 
-#: ../../network/isdn.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Configuration Wizard"
 msgstr "Тармоқни мослаш ёрдамчиси"
@@ -10261,7 +10453,7 @@ msgstr "Сизнинг компютерингизга тўғридан-тўғр�
 msgid "Create a new partition"
 msgstr "Дискда янги қисм яратиш"
 
-#: ../../harddrake/sound.pm:1
+#: ../../harddrake/sound.pm:1 ../../standalone/drakups:1
 #, c-format
 msgid "Driver:"
 msgstr "Драйвер:"
@@ -10291,7 +10483,7 @@ msgstr "ҒИЛДИРАКНИ АЙЛАНTИРИНГ!"
 msgid "sent: "
 msgstr "юборилган: "
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Automatic IP"
 msgstr "Автоматик IP"
@@ -10345,12 +10537,17 @@ msgstr "Kensington Thinking Mouse"
 msgid "Configuration of a remote printer"
 msgstr "Масофадаги принтерни мослаш"
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Welcome to the UPS configuration tools"
+msgstr "Мосламаларни синаб кўриш"
+
 #: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr "URL \"'ftp:\" ёки \"http:\" билан бошланиши шарт"
@@ -10398,15 +10595,20 @@ msgstr "Дискнинг қисмлар жадвалини сақламасда�
 msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
+#: ../../standalone.pm:1
+#, c-format
+msgid "Installing packages..."
+msgstr "Пакетлар ўрнатилмоқда..."
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On Hard Drive"
 msgstr "Қаттиқ дискга"
 
-#: ../../standalone.pm:1
-#, c-format
-msgid "Installing packages..."
-msgstr "Пакетлар ўрнатилмоқда..."
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Access Control Lists"
+msgstr "тармоқ воситалардан фойдаланишни рухсат этиш"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -10422,6 +10624,11 @@ msgstr "Ангола"
 #, c-format
 msgid "The following packages need to be installed:\n"
 msgstr "Қуйидаги пакетларни ўрнатиш керак:\n"
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The driver that manage your ups"
+msgstr ""
 
 #: ../../any.pm:1 ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
 #, c-format
@@ -10487,7 +10694,7 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr "Локал тармоқни мослаш"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "The USB key seems to have write protection enabled. Please\n"
@@ -10565,11 +10772,6 @@ msgstr ""
 msgid "This floppy is not FAT formatted"
 msgstr "Бу дискетнинг формати FAT эмас"
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Configuring network"
-msgstr "Тармоқ мосланмоқда"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -10592,7 +10794,7 @@ msgstr "Дискнинг Windows қисмининг ҳажмини ўзгарт�
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider dns 1 (optional)"
 msgstr "Провайдернинг DNS 1 (танласа бўлади)"
@@ -10654,7 +10856,7 @@ msgstr ""
 msgid "Iceland"
 msgstr "Исландия"
 
-#: ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr "Тармоқ ва Интернетни мослаш"
@@ -10783,7 +10985,7 @@ msgstr ""
 msgid "Hour"
 msgstr "Соат"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr "Иккинчи DNS сервери (танлаб бўлади)"
@@ -10812,6 +11014,11 @@ msgstr "Дискетдан юкланмоқда"
 #, c-format
 msgid "Timezone - DrakClock"
 msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "DrakUPS"
+msgstr "Дворак (АҚШ)"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -10876,6 +11083,11 @@ msgstr "/dev/hda"
 #, c-format
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwspy command extra arguments"
+msgstr ""
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -11086,7 +11298,7 @@ msgid ""
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Please fill or check the field below"
 msgstr ""
@@ -11361,7 +11573,7 @@ msgstr ""
 msgid "Firmware copy succeeded"
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid ""
 "You can't use another CDROM when the following programs are running: \n"
@@ -11486,15 +11698,10 @@ msgstr "Багама Ороллари"
 msgid "Do you want to click on this button?"
 msgstr "Бу тугмани босишни истайсизми?"
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakups:1
 #, c-format
 msgid "Manual configuration"
 msgstr ""
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "search"
-msgstr "Қидириш"
 
 #: ../../services.pm:1
 #, c-format
@@ -11504,12 +11711,17 @@ msgid ""
 "You should leave this enabled for most machines."
 msgstr ""
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "search"
+msgstr "Қидириш"
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Xpmac (installation display driver)"
 msgstr "Xpmac (дисплей драйверини ўрнатиш)"
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr "Zeroconf компютернинг номида \".\" белгиси бўлмаши керкак"
@@ -11612,6 +11824,13 @@ msgid ""
 "system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"It is possible that your %s needs its firmware to be uploaded everytime when "
+"it is turned on."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
@@ -11625,6 +11844,13 @@ msgstr ""
 msgid "Refuse"
 msgstr "Қабул қилмаш"
 
+#: ../../services.pm:1
+#, c-format
+msgid ""
+"HardDrake runs a hardware probe, and optionally configures\n"
+"new/changed hardware."
+msgstr ""
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid "LOCAL"
@@ -11634,13 +11860,6 @@ msgstr "ЛОКАЛ"
 #, c-format
 msgid "HFS"
 msgstr "HFS"
-
-#: ../../services.pm:1
-#, c-format
-msgid ""
-"HardDrake runs a hardware probe, and optionally configures\n"
-"new/changed hardware."
-msgstr ""
 
 #: ../../fs.pm:1
 #, c-format
@@ -11723,7 +11942,7 @@ msgstr ""
 msgid "True Type install done"
 msgstr "Труе Тйпе шрифтлар ўрнатилди"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Detection in progress"
 msgstr "Аниқлаш кетаяпти"
@@ -11732,11 +11951,6 @@ msgstr "Аниқлаш кетаяпти"
 #, c-format
 msgid "Build Whole Kernel -->"
 msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "modem"
-msgstr "модем"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11932,7 +12146,7 @@ msgid ""
 "it installed on machines that don't need it."
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose your country"
 msgstr "Давлатингизни танланг"
@@ -11985,7 +12199,7 @@ msgstr "kdesu дастури етишмаяпти"
 msgid "%s: %s requires a username...\n"
 msgstr "%s: %s фойдаланувчини талаб қилади...\n"
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/interactive.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Encryption key"
 msgstr "Кодлаш калити"
@@ -12222,7 +12436,7 @@ msgstr "Португалча"
 msgid "Loopback file name: "
 msgstr "Loopback файлининг номи:"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr "DNS сервернинг манзили қуйидаги форматда бўлиши шарт: 1.2.3.4"
@@ -12325,7 +12539,7 @@ msgstr "Ўрнатишдан кегин амаллар"
 msgid "The internal domain name"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IRQ"
 msgstr "Картанинг IRQ'си"
@@ -12531,7 +12745,7 @@ msgid ""
 "%d MB used vs %d MB allocated."
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr ""
@@ -12552,12 +12766,12 @@ msgstr "Илтимос фойдаланувчининг исмини кирит�
 msgid "Enable CD Boot?"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Simply reboot"
 msgstr ""
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakups:1 ../../standalone/logdrake:1
 #, fuzzy, c-format
 msgid "Congratulations"
 msgstr "Табриклаймиз!"
@@ -12660,7 +12874,7 @@ msgstr ""
 msgid "Guinea"
 msgstr "Гвинея"
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr "Система Интернетга уланган."
@@ -12674,6 +12888,11 @@ msgstr "Жанубий Жоржия ва Жанубий Сендвич Орол�
 #, c-format
 msgid "Japan (broadcast)"
 msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "Fragmentation"
+msgstr "Ўйин станцияси"
 
 #: ../../help.pm:1
 #, c-format
@@ -12705,7 +12924,7 @@ msgstr ""
 msgid "Icon"
 msgstr "Нишонча"
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, fuzzy, c-format
 msgid "Kill those programs"
 msgstr "Х дастурларидан фойдаланишга рухсат этиш"
@@ -12780,17 +12999,13 @@ msgstr ""
 msgid "Error!"
 msgstr "Хато!"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "cable connection detected"
-msgstr "кабел орқали уланиш аниқланди"
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Permission denied transferring %s to %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr "/_Хато ҳақида хабар қилиш"
@@ -12832,7 +13047,7 @@ msgstr ""
 msgid "The following packages are going to be removed"
 msgstr "Қуйидаги пакетлар олиб ташланилади."
 
-#: ../../network/adsl.pm:1 ../../network/ethernet.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Connect to the Internet"
 msgstr "Интернетга уланиш"
@@ -12866,6 +13081,11 @@ msgid ""
 "switch to a graphical interface at boot. Obviously, you want to check\n"
 "\"%s\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The firmware file for your %s was successfully installed."
 msgstr ""
 
 #: ../advertising/13-mdkexpert_corporate.pl:1
@@ -12972,7 +13192,7 @@ msgstr ""
 "%s%s\n"
 "системангизга тўғридан-тўғри уланган."
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "You don't have any winmodem"
 msgstr ""
@@ -12993,6 +13213,25 @@ msgid ""
 "This should be a comma-separated list of local users or email addresses that "
 "you want the backup results sent to. You will need a functioning mail "
 "transfer agent setup on your system."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid ""
+"This is DrakUPS, a Mandrake configuration tool for UPS devices.\n"
+"\n"
+"Author:</span> Thierry Vignaud &lt;tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+msgstr ""
+"HardDrake - Mandrake учун асбоб-ускуналарни мословчи восита.\n"
+"<span foreground=\"royalblue3\">Версия:</span> %s\n"
+"<span foreground=\"royalblue3\">Муаллиф:</span> Thierry Vignaud &lt;"
+"tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Install firmware for the"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -13260,12 +13499,17 @@ msgstr "Ҳеч қандай ускуна топилмади"
 msgid "Truly minimal install (especially no urpmi)"
 msgstr "Ҳақиқий минимал ўрнатиш (хусусан urpmi'сиз)"
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" neither is a valid email nor is an existing local user!"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use daemon"
 msgstr "Демондан фойдаланиш"
 
-#: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1
+#: ../../install_steps_interactive.pm:1 ../../network/netconnect.pm:1
 #: ../../standalone/drakauth:1 ../../standalone/drakconnect:1
 #: ../../standalone/logdrake:1
 #, c-format
@@ -13301,6 +13545,11 @@ msgstr "Дискнинг %s қисмини қаерга уламоқчисиз?"
 #, c-format
 msgid "Algeria"
 msgstr "Жазоир"
+
+#: ../../standalone/scannerdrake:1
+#, fuzzy, c-format
+msgid "Install/Update firmware files"
+msgstr "Файлни танлаш"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13382,7 +13631,7 @@ msgstr "Интерфейс %s (%s модули ишлатилмоқда)"
 msgid "Generating preview ..."
 msgstr "Олдиндан кўриб чиқиш яратилмоқда..."
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz "
@@ -13615,6 +13864,7 @@ msgid ""
 msgstr ""
 
 #: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
+#: ../../standalone/drakups:1
 #, c-format
 msgid "Remove"
 msgstr "Олиб ташлаш"
@@ -13634,7 +13884,7 @@ msgstr "utopia 25"
 msgid "Pipe job into a command"
 msgstr "Вазифанинг натижасини буйруғга улаш (pipe)"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Remove system config files"
 msgstr "Loopback файлини олиб ташлайми?"
@@ -13651,7 +13901,7 @@ msgstr ""
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakclock:1 ../../standalone/drakgw:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakgw:1
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
@@ -13692,6 +13942,7 @@ msgstr "Канал"
 
 #: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
 #: ../../standalone/drakbackup:1 ../../standalone/drakfont:1
+#: ../../standalone/drakups:1
 #, c-format
 msgid "Add"
 msgstr "Қўшиш"
@@ -13714,7 +13965,7 @@ msgid ""
 " in the CD drive under mount point /mnt/cdrom"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add "
@@ -13731,7 +13982,7 @@ msgstr "Сиз мосламоқчи бўлган уланишни танланг
 msgid "Please wait, setting security level..."
 msgstr "Илтимос кутиб туринг, хавфсизлик даражаси ўрнатилмоқда"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Configuring network device %s"
 msgstr "Тармоқ ускунаси (%s) мосланмоқда"
@@ -13814,7 +14065,7 @@ msgid ""
 "logged into a machine running the rwho daemon (similiar to finger)."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Domain name"
 msgstr ""
@@ -13857,6 +14108,11 @@ msgstr "%s ускунани қаерга уламоқчисиз?"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Sensitivity threshold"
 msgstr ""
 
 #: ../../standalone/drakconnect:1
@@ -14074,7 +14330,7 @@ msgstr ""
 msgid "here if no."
 msgstr "бу ерга, агар \"йўқ\" бўлса."
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DHCP host name"
 msgstr "DHCP хостнинг номи"
@@ -14136,7 +14392,7 @@ msgstr ", %s сектор"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1
-#: ../../standalone/drakclock:1 ../../standalone/harddrake2:1
+#: ../../network/netconnect.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr "Йўқ"
@@ -14155,6 +14411,11 @@ msgstr "Каннада"
 #, c-format
 msgid "could not find any font.\n"
 msgstr "ҳеч қанақа шрифтни тополмадим.\n"
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "UPS driver configuration"
+msgstr "CUPS принтерини мослаш"
 
 #: ../../standalone/keyboarddrake:1
 #, c-format
@@ -14211,15 +14472,15 @@ msgstr "Февраль"
 msgid "General"
 msgstr "Умумий"
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "/etc/issue* exist"
-msgstr "/etc/issue* мавжуд"
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
 msgstr "Фойдаланувчини қўшиш"
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
+msgstr "/etc/issue* мавжуд"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -14231,20 +14492,20 @@ msgstr "Тармоқнинг мосламаси (%d адаптер)"
 msgid "April"
 msgstr "Апрель"
 
-#: ../../standalone/drakconnect:1
+#: ../../scanner.pm:1
 #, c-format
-msgid "Deactivate now"
-msgstr "Ўчириш"
+msgid "Could not create directory /usr/share/sane/firmware!"
+msgstr ""
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "Mandatory package %s is missing"
 msgstr "Шарт бўлган пакет (%s) етишмаяпти"
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/drakconnect:1
 #, c-format
-msgid "Could not create directory /usr/share/sane/firmware!"
-msgstr ""
+msgid "Deactivate now"
+msgstr "Ўчириш"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14255,9 +14516,10 @@ msgstr "Филиппин"
 #: ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1
 #: ../../interactive/http.pm:1 ../../interactive/newt.pm:1
 #: ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1
-#: ../../standalone/drakboot:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakfloppy:1 ../../standalone/drakperm:1
-#: ../../standalone/draksec:1 ../../standalone/mousedrake:1
+#: ../../standalone/drakboot:1 ../../standalone/drakclock:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakperm:1 ../../standalone/draksec:1
+#: ../../standalone/drakups:1 ../../standalone/mousedrake:1
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
@@ -14336,6 +14598,11 @@ msgstr ""
 #, c-format
 msgid "Pitcairn"
 msgstr "Питкерн"
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "The port on which is connected your ups"
+msgstr "Сизнинг компютерингизга тўғридан-тўғри уланган принтер топилмади"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14565,7 +14832,13 @@ msgstr ""
 "Илтимос\n"
 "давлатингизни ва ТВ форматингизни киритинг"
 
-#: ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "RTS/CTS)"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakups:1
+#: ../../standalone/harddrake2:1
 #, c-format
 msgid "Port"
 msgstr "Порт"
@@ -14614,7 +14887,7 @@ msgstr "USB принтер"
 msgid "Right \"Windows\" key"
 msgstr "Ўнг \"Windows\" тугмаси"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Detect USB key again"
 msgstr ""
@@ -14650,6 +14923,13 @@ msgstr ""
 msgid "Resolutions"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"It is possible that your scanners need their firmware to be uploaded "
+"everytime when they are turned on."
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -14670,11 +14950,6 @@ msgstr ""
 #, c-format
 msgid "Remove selected host"
 msgstr "Танланган компютерни олиб ташлаш"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "Network configuration"
-msgstr "Тармоқни мослаш"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -14754,12 +15029,20 @@ msgstr "Дискни яратиш"
 msgid "Disconnect %s"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"Welcome to the UPS configuration utility.\n"
+"\n"
+"Here, you'll be add a new UPS to your system.\n"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Status:"
 msgstr "Ҳолати:"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "HTTP proxy"
 msgstr "HTTP прокси"
@@ -14794,9 +15077,11 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1
 #: ../../standalone/drakauth:1 ../../standalone/drakboot:1
-#: ../../standalone/drakbug:1 ../../standalone/drakfloppy:1
-#: ../../standalone/drakfont:1 ../../standalone/draksplash:1
-#: ../../../move/move.pm:1 ../../../move/tree/mdk_totem:1
+#: ../../standalone/drakbug:1 ../../standalone/drakconnect:1
+#: ../../standalone/drakfloppy:1 ../../standalone/drakfont:1
+#: ../../standalone/draksplash:1 ../../standalone/logdrake:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "Error"
 msgstr "Хато"
@@ -14821,7 +15106,7 @@ msgstr "илтимос ttmkfdir тугагунча кутиб туринг..."
 msgid "Configure only card \"%s\"%s"
 msgstr "Фақат \"%s\"%s картасини мослаш"
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Level"
 msgstr "Даража"
@@ -14934,7 +15219,8 @@ msgstr "Июль"
 msgid "Prints into %s"
 msgstr "%s ёрдамида босиб чиқарилмоқда"
 
-#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
+#: ../../install_steps_interactive.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr "Хато рўй берди"
@@ -14977,6 +15263,11 @@ msgstr ""
 msgid "Filename text to search for:"
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, fuzzy, c-format
+msgid "Reset"
+msgstr "Қабул қилмаш"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer manufacturer, model, driver"
@@ -15017,6 +15308,11 @@ msgstr "Жума"
 #, c-format
 msgid "Disconnection from Internet complete."
 msgstr "Интернетдан узулиш бажарилди."
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Autodetection"
+msgstr "Авто-аниқлаш"
 
 #: ../../any.pm:1
 #, c-format
@@ -15203,6 +15499,13 @@ msgstr "Босиб чиқариш сервери"
 msgid "Custom configuration"
 msgstr "Бошқача мослаш"
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid ""
+"To do so, you need to supply the firmware files for your scanners so that it "
+"can be installed."
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -15243,7 +15546,7 @@ msgstr "Сизда яна бошқаси борми?"
 msgid ", printing to %s"
 msgstr ", %s ёрдамида босиб чиқарилмоқда"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr ""
@@ -15347,15 +15650,15 @@ msgstr "Маршалл Ороллари"
 msgid "Is this correct?"
 msgstr "Бу тўғрими?"
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Windows (FAT32)"
-msgstr "Windows (FAT32)"
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Root password"
 msgstr "Root махфий сўзи"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Windows (FAT32)"
+msgstr "Windows (FAT32)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15423,7 +15726,7 @@ msgstr "График муҳит"
 msgid "Gibraltar"
 msgstr "Гибралтар"
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do nothing"
 msgstr "Ҳеч нима қилмаш"
@@ -15481,7 +15784,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1 ../../standalone/drakbug:1
 #: ../../standalone/drakconnect:1 ../../standalone/drakfont:1
 #: ../../standalone/drakperm:1 ../../standalone/draksec:1
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr "Ёрдам"
@@ -15491,7 +15794,19 @@ msgstr "Ёрдам"
 msgid "Check if the network devices are in promiscuous mode"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Iwspy is used to set a list of addresses in a wireless network\n"
+"interface and to read back quality of link information for each of those.\n"
+"\n"
+"This information is the same as the one available in /proc/net/wireless :\n"
+"quality of the link, signal strength and noise level.\n"
+"\n"
+"See iwpspy(8) man page for further information."
+msgstr ""
+
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Your personal phone number"
 msgstr "Шахсий телефон рақамингиз"
@@ -15553,6 +15868,11 @@ msgstr "URI: %s"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The wizard successfully configured the new \"%s\" UPS device."
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -15757,7 +16077,7 @@ msgstr "CUPS бошқадан ишга туширилмоқда..."
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Continue without USB key"
 msgstr ""
@@ -15772,7 +16092,7 @@ msgstr "Бир ҳил улаш нуқталари %s"
 msgid "if set to yes, run chkrootkit checks."
 msgstr "агар \"ҳа\" бўлса, chkrootkit текширувини бажариш"
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Connection Configuration"
 msgstr "Алоқани мослаш"
@@ -15878,11 +16198,25 @@ msgstr ""
 msgid "Authentication NIS"
 msgstr "Тасдиқловчи NIS"
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol\n"
+"\n"
+"Do you want to install ntp ?"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
+
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "Please select your UPS model."
+msgstr "Илтимос сичқончани синаб кўринг:"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -15894,7 +16228,7 @@ msgstr ""
 msgid "United Arab Emirates"
 msgstr "Бирлашган Араб Амирликлари"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
 msgstr "Картанинг IO_0'си"
@@ -15909,7 +16243,7 @@ msgstr ""
 msgid "Thailand"
 msgstr "Таиланд"
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_1"
 msgstr "Картанинг IO_1'си"
@@ -15959,7 +16293,7 @@ msgstr "Тайча"
 msgid "Bouvet Island"
 msgstr "Буве Ороли"
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Dialup options"
 msgstr ""
@@ -16014,6 +16348,11 @@ msgstr "Полякча"
 msgid "Mandrake Online"
 msgstr "Mandrake Online"
 
+#: ../../standalone/drakups:1
+#, fuzzy, c-format
+msgid "UPS users"
+msgstr "Фойдаланувчилар"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\t-Network by webdav.\n"
@@ -16033,7 +16372,7 @@ msgstr ""
 "Системангизда тармоқ адаптери аниқланмади. Илтимос асбоб-ускунани мословчи "
 "воситани ишга туширинг."
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Netmask"
@@ -16054,7 +16393,7 @@ msgstr "2 тугмали"
 msgid "Logitech CC Series"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "What kind is your ISDN connection?"
 msgstr ""
@@ -16170,8 +16509,8 @@ msgstr "X Windows уланишларга рухсат этиш"
 msgid "Hardware probing in progress"
 msgstr "Асбоб-ускуналарни аниқлаш кетаяпти"
 
-#: ../../network/shorewall.pm:1 ../../standalone/drakconnect:1
-#: ../../standalone/drakgw:1
+#: ../../network/netconnect.pm:1 ../../network/shorewall.pm:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr "Тармоқ ускунаси"
@@ -16200,7 +16539,7 @@ msgstr "Кейингиси"
 msgid "You can't install the bootloader on a %s partition\n"
 msgstr "Операцион система юклагичини дискнинг %s қисмига ўрнатолмайсиз\n"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "CHAP"
 msgstr "CHAP"
@@ -16210,7 +16549,7 @@ msgstr "CHAP"
 msgid "Puerto Rico"
 msgstr "Пуэрто-Рико"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr "(bootp/dhcp/zeroconf)"
@@ -16317,7 +16656,7 @@ msgstr "Илтимос кутиб туринг, ўрнатишга таёрла�
 msgid "Czech (QWERTZ)"
 msgstr "Чехча (qwertz)"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr ""
@@ -16342,7 +16681,7 @@ msgstr "Қаттиқ дискдан тиклаш."
 msgid "Add to LVM"
 msgstr "LVM'га қўшиш"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DNS server"
 msgstr "DNS сервери"
@@ -16423,8 +16762,8 @@ msgid "Backup Now"
 msgstr ""
 
 #: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1
-#: ../../standalone/harddrake2:1 ../../standalone/logdrake:1
-#: ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/logdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr "/_Файл"
@@ -16446,7 +16785,7 @@ msgstr ""
 msgid "Editable"
 msgstr "Таҳрирлаб бўлади"
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
 msgstr ""
@@ -16493,11 +16832,6 @@ msgstr "Россия"
 #, c-format
 msgid "Partitioning"
 msgstr "Дискни бўлиш"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "ethernet card(s) detected"
-msgstr "ethernet карта(лар) топилди"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -16577,7 +16911,8 @@ msgstr ""
 msgid "Kernel:"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
+#: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr "/_Ҳақида"
@@ -16743,10 +17078,20 @@ msgstr "Байроқлар"
 msgid "Add/Del Users"
 msgstr "Фойдаланувчиларни қўшиш/ўчириш"
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwconfig command extra arguments"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host/network IP address missing."
 msgstr "Хостнинг/тармоқнинг IP рақами аниқланмаган."
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "(detected)"
+msgstr "топилди"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -16796,7 +17141,7 @@ msgstr ""
 msgid "Wait please"
 msgstr "Илтимос кутиб туринг"
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "PAP"
 msgstr "PAP"
@@ -16997,7 +17342,7 @@ msgstr " LPD серверида \"%s\", принтер \"%s\""
 msgid "Choosing a display manager"
 msgstr "Дисплей бошқарувчисини танлаш"
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Zeroconf Host name"
 msgstr "Zeroconf компютернинг номи"
@@ -17007,7 +17352,7 @@ msgstr "Zeroconf компютернинг номи"
 msgid "Custom setup/crontab entry:"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr "IP рақами қуйидаги форматда бўлиши шарт: 1.2.3.4"
@@ -17173,8 +17518,9 @@ msgid "You can't select/unselect this package"
 msgstr "Бу пакетни танлолмайсиз/танлашни бекор қилолмайсиз"
 
 #: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1
-#: ../../harddrake/sound.pm:1 ../../network/modem.pm:1
-#: ../../standalone/drakfloppy:1
+#: ../../harddrake/sound.pm:1 ../../network/netconnect.pm:1
+#: ../../standalone/drakclock:1 ../../standalone/drakfloppy:1
+#: ../../standalone/drakups:1
 #, c-format
 msgid "Warning"
 msgstr "Диққат"
@@ -17208,7 +17554,7 @@ msgstr "Дискнинг Windows қисмининг ҳажми ҳисоблан�
 msgid "/_Refresh"
 msgstr "/_Янгилаш"
 
-#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Italy"
@@ -17434,11 +17780,6 @@ msgstr ""
 #, c-format
 msgid "Graphical interface at startup"
 msgstr "Система юкланаётганда график интерфейс"
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " adsl"
-msgstr " adsl"
 
 #: ../../raid.pm:1
 #, c-format
@@ -17753,11 +18094,6 @@ msgstr "Сервер"
 msgid "Left Shift key"
 msgstr "Чап Shift тугмаси"
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " local network"
-msgstr " локал тармоқ"
-
 #: ../../interactive/stdio.pm:1
 #, c-format
 msgid "Bad choice, try again\n"
@@ -17798,12 +18134,12 @@ msgstr "Эксперт усулига ўтиш"
 msgid "(on this machine)"
 msgstr "(шу компютерда)"
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "\"%s\" based winmodem detected, do you want to install needed software ?"
@@ -17821,7 +18157,7 @@ msgstr "Аллақачон ўрнатилган пакетлар қидирил�
 msgid "Use Differential Backups"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "Driver"
 msgstr "Драйвер"
@@ -17925,6 +18261,11 @@ msgstr ""
 "Ўрнатишдан кегин, товуш картангизни мослаш учун, \"sndconfig\" дастурини "
 "ишга туширинг."
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Configure networking"
+msgstr "Тармоқни мослаш"
+
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
@@ -17934,11 +18275,6 @@ msgstr "Рўйхатни йиғиш"
 #, c-format
 msgid "Auto Install Configurator"
 msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Configure networking"
-msgstr "Тармоқни мослаш"
 
 #: ../../any.pm:1
 #, c-format
@@ -18310,7 +18646,7 @@ msgstr "Пастга"
 msgid "Raw printer (No driver)"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Install rpm"
 msgstr "rpm'ни ўрнатиш"
@@ -18340,6 +18676,11 @@ msgstr "Буюк Британия"
 msgid "Unmount"
 msgstr "Узиш"
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The wizard successfully added the following UPS devices:"
+msgstr ""
+
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
@@ -18357,7 +18698,7 @@ msgid ""
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Please wait, detecting and configuring devices..."
 msgstr "Илтимос кутиб туринг, хавфсизлик даражаси ўрнатилмоқда"
@@ -18401,7 +18742,7 @@ msgid "Mandrake Control Center"
 msgstr "Mandrake бошқарув маркази"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Reboot"
 msgstr "Ўчириб-ёқиш"
@@ -18466,11 +18807,6 @@ msgstr ""
 "танланг ва фойдаланувчини, махфий сўзни ва керак бўлса ишчи гуруҳни "
 "кўрсатинг."
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " cable"
-msgstr " кабел"
-
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -18515,6 +18851,11 @@ msgstr "Параллел портидаги кўп амалли ускуна"
 #, c-format
 msgid "Serbian (cyrillic)"
 msgstr "Сербча (кирилча)"
+
+#: ../../network/netconnect.pm:1
+#, fuzzy, c-format
+msgid "(detected %s)"
+msgstr "%s топилди"
 
 #: ../../standalone/drakbackup:1
 #, fuzzy, c-format
@@ -18562,7 +18903,7 @@ msgid ""
 "networks. This service provides NFS file locking functionality."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Login ID"
 msgstr "Фойдаланувчи"
@@ -18687,7 +19028,7 @@ msgstr ""
 msgid "Modify RAID"
 msgstr "RAID'ни ўзгартириш"
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "I have detected an ISDN PCI card, but I don't know its type. Please select a "
@@ -18717,6 +19058,11 @@ msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Choose your keyboard"
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -18733,11 +19079,6 @@ msgstr ""
 "\t\tppp+ модем ёки DSL орқали уланиш учун,\n"
 "\t\teth0 ёки eth1 кабел орқали уланиш учун,\n"
 "\t\tippp+ ISDN орқали уланиш учун.\n"
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Choose your keyboard"
-msgstr ""
 
 #: ../../steps.pm:1
 #, c-format
@@ -18812,7 +19153,7 @@ msgstr ""
 msgid "Backup Users"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -18863,11 +19204,6 @@ msgstr "Mandrake Linux 9.2 - дастур тузиш учун энг яхши п
 #, c-format
 msgid "Detected model: %s"
 msgstr "Аниқланган модел: %s"
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "\"%s\" is not a valid email!"
-msgstr "\"%s\" ҳақиқий электрон почта эмас!"
 
 #: ../../standalone/drakedm:1
 #, c-format
@@ -18935,7 +19271,7 @@ msgstr ""
 msgid "Services"
 msgstr "Хизматлар"
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, fuzzy, c-format
 msgid "Auto configuration"
 msgstr "Бошқача мослаш"
@@ -19121,6 +19457,53 @@ msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr ""
 "Хат-хабар ва янгиликларни ўқиш ва жўнатиш ва Интернетни кўриш воситалар "
 "тўплами."
+
+#~ msgid "Choose the profile to configure"
+#~ msgstr "Мослаш учун профилни танланг"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Enter a Zeroconf host name without any dot if you don't\n"
+#~ "want to use the default host name."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Агар андоза компютернинг номидан фойдаланишни истамасангиз, Zeroconf "
+#~ "компютернинг номини киритинг."
+
+#~ msgid "Internet configuration"
+#~ msgstr "Интернетни мослаш"
+
+#~ msgid " isdn"
+#~ msgstr " isdn"
+
+#~ msgid "Configuring network"
+#~ msgstr "Тармоқ мосланмоқда"
+
+#~ msgid "modem"
+#~ msgstr "модем"
+
+#~ msgid "cable connection detected"
+#~ msgstr "кабел орқали уланиш аниқланди"
+
+#~ msgid "Network configuration"
+#~ msgstr "Тармоқни мослаш"
+
+#~ msgid "ethernet card(s) detected"
+#~ msgstr "ethernet карта(лар) топилди"
+
+#~ msgid " adsl"
+#~ msgstr " adsl"
+
+#~ msgid " local network"
+#~ msgstr " локал тармоқ"
+
+#~ msgid " cable"
+#~ msgstr " кабел"
+
+#~ msgid "\"%s\" is not a valid email!"
+#~ msgstr "\"%s\" ҳақиқий электрон почта эмас!"
 
 #~ msgid "Configure Internet Access..."
 #~ msgstr "Интернетга уланишни мослаш"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-12-16 15:39+0100\n"
+"POT-Creation-Date: 2004-01-05 13:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,21 @@ msgstr ""
 msgid "Which username"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Iwpriv enable to set up optionals (private) parameters of a wireless network\n"
+"interface.\n"
+"\n"
+"Iwpriv deals with parameters and setting specific to each driver (as opposed to\n"
+"iwconfig which deals with generic ones).\n"
+"\n"
+"In theory, the documentation of each device driver should indicate how to use\n"
+"those interface specific commands and their effect.\n"
+"\n"
+"See iwpriv(8) man page for further information."
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Which type of entry do you want to add?"
@@ -103,13 +118,6 @@ msgstr ""
 msgid "Post-install configuration"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid ""
-"The current security level is %s\n"
-"Select permissions to see/edit"
-msgstr ""
-
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "Use ``%s'' instead"
@@ -125,6 +133,11 @@ msgstr ""
 msgid ""
 "\n"
 "Also printers configured with the PPD files provided by their manufacturers or with native CUPS drivers cannot be transferred."
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Repeater"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -146,7 +159,7 @@ msgstr ""
 msgid "Central African Republic"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway device"
 msgstr ""
@@ -186,17 +199,17 @@ msgstr ""
 msgid "Auto-detect"
 msgstr ""
 
-#: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
-#, c-format
-msgid "Interface:"
-msgstr ""
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Select installation class"
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#, c-format
+msgid "Interface:"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "The system doesn't seem to be connected to the Internet.\n"
@@ -221,16 +234,16 @@ msgstr ""
 msgid "Error writing to file %s"
 msgstr ""
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "Report check result to syslog"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
 "apmd is used for monitoring battery status and logging it via syslog.\n"
 "It can also be used for shutting down the machine when the battery is low."
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "Report check result to syslog"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -241,6 +254,15 @@ msgstr ""
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "The following packages are going to be installed"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Here, one can configure some extra wireless parameters such as:\n"
+"ap, channel, commit, enc, power, retry, sens, txpower (nick is already set as the hostname).\n"
+"\n"
+"See iwpconfig(8) man page for further information."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -403,7 +425,7 @@ msgstr ""
 msgid "Swiss (French layout)"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Other place"
 msgstr ""
@@ -540,7 +562,7 @@ msgstr ""
 msgid "Venezuela"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "IP address"
 msgstr ""
@@ -565,7 +587,7 @@ msgid ""
 "the -a option will not cause the file system to be mounted)."
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Your modem isn't supported by the system.\n"
@@ -619,7 +641,7 @@ msgstr ""
 msgid "Printer Name"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Setting up USB key"
 msgstr ""
@@ -629,7 +651,7 @@ msgstr ""
 msgid "Remove a module"
 msgstr ""
 
-#: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../network/modem.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "Password"
 msgstr ""
@@ -659,11 +681,6 @@ msgstr ""
 msgid "Turkish (modern \"Q\" model)"
 msgstr ""
 
-#: ../../standalone/drakboot:1
-#, c-format
-msgid "Lilo message not found"
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -671,16 +688,14 @@ msgid ""
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
 
+#: ../../standalone/drakboot:1
+#, c-format
+msgid "Lilo message not found"
+msgstr ""
+
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "if needed"
-msgstr ""
-
-#: ../../standalone/drakclock:1
-#, c-format
-msgid ""
-"We need to install ntp package\n"
-" to enable Network Time Protocol"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -839,7 +854,7 @@ msgstr ""
 msgid "[keyboard]"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "FTP proxy"
 msgstr ""
@@ -906,7 +921,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "<control>Q"
 msgstr ""
@@ -930,7 +945,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/tools.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Configuration"
 msgstr ""
@@ -988,9 +1003,19 @@ msgstr ""
 msgid "You have not configured X. Are you sure you really want this?"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "UPS devices"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "The configuration of the printer will work fully automatically. If your printer was not correctly detected or if you prefer a customized printer configuration, turn on \"Manual configuration\"."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#, c-format
+msgid "If this is the case, you can make this be done automatically."
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -1145,7 +1170,7 @@ msgid ""
 "and XFree at boot."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Please enter the IP configuration for this machine.\n"
@@ -1253,12 +1278,17 @@ msgstr ""
 msgid "Latvian"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "If you have already installed your scanner's firmware you can update the firmware here by supplying the new firmware file."
+msgstr ""
+
 #: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "monthly"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Retry"
 msgstr ""
@@ -1268,7 +1298,7 @@ msgstr ""
 msgid "Module name"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Start at boot"
 msgstr ""
@@ -1296,6 +1326,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "DVD"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "(detected on port %s)"
 msgstr ""
 
 #: ../../any.pm:1 ../../help.pm:1
@@ -1399,12 +1434,17 @@ msgstr ""
 msgid "Do new backup before restore (only for incremental backups.)"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Secondary"
+msgstr ""
+
 #: ../../raid.pm:1
 #, c-format
 msgid "mkraid failed"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Name"
 msgstr ""
@@ -1444,9 +1484,14 @@ msgstr ""
 msgid "Permission problem accessing CD."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Phone number"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Rules"
 msgstr ""
 
 #: ../../harddrake/sound.pm:1
@@ -1479,11 +1524,6 @@ msgstr ""
 msgid "West Europe"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "On CD-R"
-msgstr ""
-
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -1493,6 +1533,11 @@ msgid ""
 "  --help            - print this help message.\n"
 "  --report          - program should be one of mandrake tools\n"
 "  --incident        - program should be one of mandrake tools"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "On CD-R"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -1513,6 +1558,13 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Dominican Republic"
+msgstr ""
+
+#: ../../standalone/drakconnect:1
+#, c-format
+msgid ""
+"An unexpected error has happened:\n"
+"%s"
 msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
@@ -1550,7 +1602,7 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../scanner.pm:1
 #, c-format
 msgid "Could not copy firmware file %s to /usr/share/sane/firmware!"
 msgstr ""
@@ -1601,6 +1653,13 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "To get a list of the options available for the current printer click on the \"Print option list\" button."
+msgstr ""
+
+#: ../../standalone/service_harddrake:1
+#, c-format
+msgid ""
+"Some devices were added: %s\n"
+""
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -1710,7 +1769,7 @@ msgstr ""
 msgid "Application:"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "External ISDN modem"
 msgstr ""
@@ -1718,6 +1777,11 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result by mail."
+msgstr ""
+
+#: ../../network/adsl.pm:1
+#, c-format
+msgid "ADSL connection type :"
 msgstr ""
 
 #: ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1
@@ -1899,11 +1963,6 @@ msgstr ""
 msgid "Urpmi"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Cron not available yet as non-root"
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps_interactive.pm:1 ../../services.pm:1 ../../standalone/drakbackup:1
 #, c-format
 msgid "System"
@@ -1996,14 +2055,14 @@ msgstr ""
 msgid "Support the OKI 4w and compatible winprinters."
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."
-msgstr ""
-
 #: ../../services.pm:1
 #, c-format
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."
 msgstr ""
 
 #: ../../standalone/net_monitor:1
@@ -2176,7 +2235,7 @@ msgstr ""
 msgid "Not erasable media!"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Terminal-based"
 msgstr ""
@@ -2244,6 +2303,11 @@ msgstr ""
 msgid "This is similar to the previous level, but the system is entirely closed and security features are at their maximum."
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Network ID"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Nicaragua"
@@ -2304,6 +2368,11 @@ msgstr ""
 #: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Manufacturer / Model:"
 msgstr ""
 
 #: ../../keyboard.pm:1 ../../keyboard.pm:1
@@ -2393,7 +2462,7 @@ msgstr ""
 msgid "Release: "
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection speed"
 msgstr ""
@@ -2514,6 +2583,7 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want to set up your printer(s) now."
 msgstr ""
 
+#. -PO: here, "(detected)" string will be appended to eg "ADSL connection"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Normal modem connection"
@@ -2554,28 +2624,14 @@ msgstr ""
 msgid "This is a mandatory package, it can't be unselected"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
+#: ../../services.pm:1
 #, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \tThe diskless client machines need either ROM images on the NIC, or a boot floppy\n"
-"        \tor CD to initate the boot sequence.  drakTermServ will help generate these\n"
-"        \timages, based on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \tA basic example of creating a boot floppy for a 3Com 3c509 manually:\n"
-"        \t\t\n"
-"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Etherboot ISO image is %s"
-msgstr ""
-
-#: ../../services.pm:1
-#, c-format
-msgid "named (BIND) is a Domain Name Server (DNS) that is used to resolve host names to IP addresses."
 msgstr ""
 
 #: ../../lang.pm:1
@@ -2591,6 +2647,11 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Disconnect..."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "IP mask"
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -2653,6 +2714,11 @@ msgid ""
 "First remove a primary partition and create an extended partition."
 msgstr ""
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Install updates"
+msgstr ""
+
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
 msgid "Mount"
@@ -2661,11 +2727,6 @@ msgstr ""
 #: ../../standalone/drakautoinst:1 ../../standalone/drakautoinst:1
 #, c-format
 msgid "Creating auto install floppy"
-msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Install updates"
 msgstr ""
 
 #: ../../standalone/draksplash:1
@@ -2787,7 +2848,7 @@ msgstr ""
 msgid "You'll need to reboot before the modification can take place"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider phone number"
 msgstr ""
@@ -2969,11 +3030,6 @@ msgid ""
 "Note: if you've an ISA PnP sound card, you'll have to use the sndconfig program.  Just type \"sndconfig\" in a console."
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "If this is the case, you can make this be done automatically for you."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Romania"
@@ -3039,7 +3095,7 @@ msgstr ""
 msgid "Horizontal refresh rate"
 msgstr ""
 
-#: ../../standalone/drakperm:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakperm:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "Edit"
 msgstr ""
@@ -3256,7 +3312,7 @@ msgstr ""
 msgid "Liechtenstein"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Host name"
 msgstr ""
@@ -3369,13 +3425,6 @@ msgstr ""
 msgid "Printer"
 msgstr ""
 
-#: ../../standalone/service_harddrake:1
-#, c-format
-msgid ""
-"Some devices were added:\n"
-""
-msgstr ""
-
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid ""
@@ -3383,7 +3432,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "You find the file on the CD or floppy coming with the scanner, on the manufacturer's home page, or on your Windows partition."
 msgstr ""
@@ -3410,23 +3459,9 @@ msgid ""
 "to Anthill where you will be able to upload the above information as a bug report."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "Choose the profile to configure"
-msgstr ""
-
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Password minimum length and number of digits and upcase letters"
-msgstr ""
-
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"Enter a Zeroconf host name without any dot if you don't\n"
-"want to use the default host name."
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -3444,7 +3479,7 @@ msgstr ""
 msgid "Restarting printing system..."
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "You can only run with no CDROM support"
 msgstr ""
@@ -3464,16 +3499,6 @@ msgstr ""
 msgid "First sector of boot partition"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Printer manufacturer, model"
-msgstr ""
-
-#: ../../printer/data.pm:1
-#, c-format
-msgid "PDQ - Print, Don't Queue"
-msgstr ""
-
 #: ../../standalone.pm:1
 #, c-format
 msgid ""
@@ -3487,6 +3512,16 @@ msgid ""
 "--deluser        : delete an existing system user from MTS (requires username)\n"
 "--addclient      : add a client machine to MTS (requires MAC address, IP, nbi image name)\n"
 "--delclient      : delete a client machine from MTS (requires MAC address, IP, nbi image name)"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Printer manufacturer, model"
+msgstr ""
+
+#: ../../printer/data.pm:1
+#, c-format
+msgid "PDQ - Print, Don't Queue"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -3652,7 +3687,7 @@ msgstr ""
 msgid "GlidePoint"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Proxies configuration"
 msgstr ""
@@ -3825,12 +3860,17 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Hard drive detection"
+msgstr ""
+
 #: ../../standalone/drakclock:1
 #, c-format
 msgid "GMT - DrakClock"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "An error occurred:\n"
@@ -3848,11 +3888,6 @@ msgid ""
 "examine its contents under another OS, or even have\n"
 "a look at log files in console #3 and #4 to try to\n"
 "guess what's happening."
-msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Hard drive detection"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -3947,7 +3982,7 @@ msgstr ""
 msgid "Please choose a language to use."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "WARNING: this device has been previously configured to connect to the Internet.\n"
@@ -4104,7 +4139,7 @@ msgstr ""
 msgid "TCP/Socket Printer Options"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card mem (DMA)"
 msgstr ""
@@ -4114,7 +4149,7 @@ msgstr ""
 msgid "Disconnecting from Internet "
 msgstr ""
 
-#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "France"
 msgstr ""
@@ -4181,7 +4216,7 @@ msgstr ""
 msgid "Ctrl and Alt keys simultaneously"
 msgstr ""
 
-#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "United States"
 msgstr ""
@@ -4241,7 +4276,7 @@ msgstr ""
 msgid "Leaving in %d seconds"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Please choose which serial port your modem is connected to."
 msgstr ""
@@ -4446,6 +4481,11 @@ msgstr ""
 msgid "Printer on parallel port #%s"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Please enter the wireless parameters for this card:"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -4576,11 +4616,6 @@ msgstr ""
 msgid "Please log out and then use Ctrl-Alt-BackSpace"
 msgstr ""
 
-#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
-#, c-format
-msgid "detected"
-msgstr ""
-
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "The network needs to be restarted. Do you want to restart it ?"
@@ -4604,6 +4639,11 @@ msgstr ""
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "StarOffice"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Operating frequency"
 msgstr ""
 
 #: ../../standalone/drakboot:1
@@ -4633,7 +4673,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Testing your connection..."
 msgstr ""
@@ -4658,14 +4698,14 @@ msgstr ""
 msgid "Congo (Brazzaville)"
 msgstr ""
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Read"
-msgstr ""
-
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
 msgid "The package %s needs to be installed. Do you want to install it?"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Read"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -4965,7 +5005,7 @@ msgstr ""
 msgid "CDROM"
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to try to connect to the Internet now?"
 msgstr ""
@@ -4980,7 +5020,7 @@ msgstr ""
 msgid "Do you have an ISA sound card?"
 msgstr ""
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "No ethernet network adapter has been detected on your system.\n"
@@ -5047,11 +5087,6 @@ msgstr ""
 msgid "Mail alert"
 msgstr ""
 
-#: ../../network/tools.pm:1
-#, c-format
-msgid "Internet configuration"
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Uzbekistan"
@@ -5095,6 +5130,14 @@ msgstr ""
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "16 MB"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"We're going to add an UPS device.\n"
+"\n"
+"Do you prefer autodetect UPS devices connected to this machine or  ?"
 msgstr ""
 
 #: ../../any.pm:1 ../../any.pm:1 ../../install_steps_interactive.pm:1 ../../diskdrake/interactive.pm:1
@@ -5340,7 +5383,7 @@ msgstr ""
 msgid "Server Name"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Password"
 msgstr ""
@@ -5415,6 +5458,17 @@ msgid ""
 " need to use BootX or some other means to boot your machine"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"RTS/CTS adds a handshake before each packet transmission to make sure that the\n"
+"channel is clear. This adds overhead, but increase performance in case of hidden\n"
+"nodes or large number of active nodes. This parameters set the size of the\n"
+"smallest packet for which the node sends RTS, a value equal to the maximum\n"
+"packet size disable the scheme. You may also set this parameter to auto, fixed\n"
+"or off."
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Select file"
@@ -5484,6 +5538,11 @@ msgstr ""
 msgid "CDRW media"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "No new UPS devices was found"
+msgstr ""
+
 #: ../advertising/07-server.pl:1
 #, c-format
 msgid "Turn your computer into a reliable server"
@@ -5494,7 +5553,7 @@ msgstr ""
 msgid "Check empty password in /etc/shadow"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid " (driver %s)"
 msgstr ""
@@ -5587,7 +5646,7 @@ msgstr ""
 msgid "Local measure"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Warning : IP address %s is usually reserved !"
 msgstr ""
@@ -5608,7 +5667,7 @@ msgid ""
 "        \tdhcpd.conf, you should create the etherboot images for at least one full kernel."
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
 msgstr ""
@@ -5694,7 +5753,7 @@ msgid ""
 "You can launch printerdrake from the Mandrake Control Center in Hardware section."
 msgstr ""
 
-#: ../../../move/move.pm:1 ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Key isn't writable"
 msgstr ""
@@ -5748,7 +5807,7 @@ msgstr ""
 msgid "Error reading file %s"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Script-based"
 msgstr ""
@@ -5843,6 +5902,11 @@ msgid ""
 " allowed for Drakbackup (MB)"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Ad-hoc"
+msgstr ""
+
 #: ../../loopback.pm:1
 #, c-format
 msgid ""
@@ -5935,6 +5999,11 @@ msgstr ""
 msgid "none"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Managed"
+msgstr ""
+
 #: ../../harddrake/data.pm:1
 #, c-format
 msgid "Floppy"
@@ -6014,6 +6083,13 @@ msgid ""
 ""
 msgstr ""
 
+#: ../../services.pm:1
+#, c-format
+msgid ""
+"Linux Virtual Server, used to build a high-performance and highly\n"
+"available server."
+msgstr ""
+
 #: ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Expert mode"
@@ -6024,13 +6100,6 @@ msgstr ""
 msgid "Remove this printer from Star Office/OpenOffice.org/GIMP"
 msgstr ""
 
-#: ../../services.pm:1
-#, c-format
-msgid ""
-"Linux Virtual Server, used to build a high-performance and highly\n"
-"available server."
-msgstr ""
-
 #: ../../lang.pm:1
 #, c-format
 msgid "Micronesia"
@@ -6039,6 +6108,11 @@ msgstr ""
 #: ../../Xconfig/resolution_and_depth.pm:1
 #, c-format
 msgid "4 billion colors (32 bits)"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Operating Mode"
 msgstr ""
 
 #: ../../steps.pm:1
@@ -6110,7 +6184,7 @@ msgstr ""
 msgid "Starting the printing system at boot time"
 msgstr ""
 
-#: ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start the connection at boot?"
 msgstr ""
@@ -6207,6 +6281,13 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Click on a device in the left tree in order to display its information here."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"We are configuring the \"%s\" UPS from \"%s\".\n"
+"Please fill in its name, its driver and its port."
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -6334,7 +6415,7 @@ msgid ""
 "bootloader."
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider dns 2 (optional)"
 msgstr ""
@@ -6342,6 +6423,11 @@ msgstr ""
 #: ../../any.pm:1 ../../any.pm:1 ../../help.pm:1
 #, c-format
 msgid "Boot device"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "ACL name"
 msgstr ""
 
 #: ../../install_interactive.pm:1
@@ -6362,11 +6448,6 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "A tool to monitor your logs"
-msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "detected on port %s"
 msgstr ""
 
 #: ../../printer/data.pm:1
@@ -6411,7 +6492,7 @@ msgstr ""
 msgid "Splash selection"
 msgstr ""
 
-#: ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1
+#: ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/isdn.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "ISDN Configuration"
 msgstr ""
@@ -6496,6 +6577,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "French Southern Territories"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Add an UPS device"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -6666,6 +6752,11 @@ msgstr ""
 msgid "Restore system"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Select the network interface to configure:"
+msgstr ""
+
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "These are the machines on which the locally connected scanner(s) should be available:"
@@ -6717,7 +6808,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "For security reasons, it will be disconnected now."
 msgstr ""
@@ -6771,6 +6862,11 @@ msgstr ""
 msgid "Restore Users"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Bitrate (in b/s)"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Encryption key for %s"
@@ -6792,6 +6888,11 @@ msgstr ""
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Detected hardware"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Connected through a serial port or an usb cable"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -6842,6 +6943,21 @@ msgstr ""
 msgid "Monaco"
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/floppyload.bin \\\n"
+"        \t\t/usr/share/etherboot/start16.bin \\\t\t\t\n"
+"        \t\t/usr/lib/etherboot/zimg/3c509.zimg > /dev/fd0"
+msgstr ""
+
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "Partitioning failed: %s"
@@ -6889,7 +7005,7 @@ msgstr ""
 msgid "Multi-function device on USB"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "We didn't detect any USB key on your system. If you\n"
@@ -6928,7 +7044,7 @@ msgstr ""
 msgid "Western Sahara"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Proxy should be http://..."
 msgstr ""
@@ -7035,7 +7151,7 @@ msgstr ""
 msgid "generate auto-install floppy"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Dialing mode"
 msgstr ""
@@ -7043,6 +7159,11 @@ msgstr ""
 #: ../../services.pm:1
 #, c-format
 msgid "File sharing"
+msgstr ""
+
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "The alert wizard had unexpectly failled:"
 msgstr ""
 
 #: ../../any.pm:1
@@ -7060,14 +7181,14 @@ msgstr ""
 msgid "local config: false"
 msgstr ""
 
+#: ../../scanner.pm:1
+#, c-format
+msgid "Could not set permissions of firmware file %s!"
+msgstr ""
+
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "System settings"
-msgstr ""
-
-#: ../../standalone/scannerdrake:1
-#, c-format
-msgid "Could not set permissions of firmware file %s!"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -7090,7 +7211,7 @@ msgstr ""
 msgid "These are the machines and networks on which the locally connected printer(s) should be available:"
 msgstr ""
 
-#: ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
+#: ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "United Kingdom"
 msgstr ""
@@ -7188,7 +7309,7 @@ msgstr ""
 msgid "Custom settings"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "The USB key seems to have write protection enabled, but we can't safely\n"
@@ -7252,7 +7373,7 @@ msgid ""
 "(eg: latin and non latin)"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Hotplugging"
 msgstr ""
@@ -7278,7 +7399,7 @@ msgid ""
 "Note: you need a dedicated Network Adapter to set up a Local Area Network (LAN)."
 msgstr ""
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Please choose which network adapter you want to use to connect to Internet."
 msgstr ""
@@ -7301,6 +7422,11 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Internet Connection Sharing is now disabled."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "About DrakUPS"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -7333,7 +7459,7 @@ msgstr ""
 msgid "Button `%s': %s"
 msgstr ""
 
-#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1 ../../standalone/drakbug:1 ../../standalone/drakconnect:1 ../../standalone/drakxtv:1 ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
+#: ../../any.pm:1 ../../interactive.pm:1 ../../harddrake/sound.pm:1 ../../standalone/drakbug:1 ../../standalone/drakconnect:1 ../../standalone/drakups:1 ../../standalone/drakxtv:1 ../../standalone/harddrake2:1 ../../standalone/service_harddrake:1
 #, c-format
 msgid "Please wait"
 msgstr ""
@@ -7405,7 +7531,7 @@ msgstr ""
 msgid "Exit install"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Need a key to save your data"
 msgstr ""
@@ -7535,7 +7661,7 @@ msgstr ""
 msgid "Install system"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "First DNS Server (optional)"
 msgstr ""
@@ -7656,6 +7782,11 @@ msgid ""
 "create such a floppy."
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Port:"
+msgstr ""
+
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Choose your filesystem encryption key"
@@ -7707,7 +7838,7 @@ msgstr ""
 msgid "Choose an X server"
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "Copying to memory to allow removing the CDROM"
 msgstr ""
@@ -7863,7 +7994,7 @@ msgstr ""
 msgid "This user name has already been added"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "To do so, you need to supply the firmware file for your scanner so that it can be installed."
 msgstr ""
@@ -7893,9 +8024,16 @@ msgstr ""
 msgid "Internet Connection Sharing currently disabled"
 msgstr ""
 
-#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Belgium"
+msgstr ""
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid ""
+"The current security level is %s.\n"
+"Select permissions to see/edit"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -7938,7 +8076,7 @@ msgstr ""
 msgid "please wait, parsing file: %s"
 msgstr ""
 
-#: ../../install_steps.pm:1 ../../../move/move.pm:1
+#: ../../install_steps.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "An error occurred, but I don't know how to handle it nicely.\n"
@@ -7960,7 +8098,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider name (ex provider.net)"
 msgstr ""
@@ -7983,7 +8121,7 @@ msgstr ""
 msgid "Armenian (typewriter)"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Floppy Disk"
 msgstr ""
@@ -8033,6 +8171,11 @@ msgstr ""
 msgid ""
 "Monitor HorizSync: %s\n"
 ""
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Interval cron not available as non-root"
 msgstr ""
 
 #: ../../standalone/drakperm:1 ../../standalone/drakperm:1
@@ -8098,9 +8241,14 @@ msgid ""
 "The format is the same as auto_install generated floppies."
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "No CDROM support"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Wireless connection"
 msgstr ""
 
 #: ../../standalone/drakxtv:1
@@ -8124,6 +8272,11 @@ msgid ""
 "Do not allow execution of any binaries on the mounted\n"
 "file system. This option might be useful for a server that has file systems\n"
 "containing binaries for architectures other than its own."
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Enter a Zeroconf host name which will be the one that your machine will get back to other machines on the network:"
 msgstr ""
 
 #: ../../network/netconnect.pm:1
@@ -8162,7 +8315,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1
+#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Netherlands"
 msgstr ""
@@ -8172,7 +8325,7 @@ msgstr ""
 msgid "Sending files by FTP"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Internal ISDN card"
 msgstr ""
@@ -8182,7 +8335,7 @@ msgstr ""
 msgid "There's no known OSS/ALSA alternative driver for your sound card (%s) which currently uses \"%s\""
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Title"
 msgstr ""
@@ -8202,14 +8355,14 @@ msgstr ""
 msgid "Installing bootloader"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The name of your ups"
+msgstr ""
+
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "replay"
-msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "detected %s"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -8331,6 +8484,11 @@ msgstr ""
 msgid "Use Expect for SSH"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Master"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Poland"
@@ -8356,7 +8514,7 @@ msgstr ""
 msgid "SMBus controllers"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection timeout (in sec)"
 msgstr ""
@@ -8374,6 +8532,11 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid "Use existing partition"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Auto"
 msgstr ""
 
 #: ../../install_steps_interactive.pm:1
@@ -8456,7 +8619,7 @@ msgstr ""
 msgid "Looking for available packages..."
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Please wait, setting up system configuration files on USB key..."
 msgstr ""
@@ -8537,6 +8700,11 @@ msgid ""
 "!!"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Netwok name (ESSID)"
+msgstr ""
+
 #: ../../lang.pm:1
 #, c-format
 msgid "Niue"
@@ -8552,6 +8720,11 @@ msgstr ""
 msgid ""
 "Activates/Deactivates all network interfaces configured to start\n"
 "at boot time."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Action"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -8605,17 +8778,22 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Name:"
+msgstr ""
+
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Preparing bootloader..."
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Enter your user information, password will be used for screensaver"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway (e.g. %s)"
 msgstr ""
@@ -8657,7 +8835,7 @@ msgstr ""
 msgid "Hardware clock set to GMT"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do you want to start a new configuration ?"
 msgstr ""
@@ -8727,6 +8905,11 @@ msgstr ""
 msgid "NOTE: Depending on the printer model and the printing system up to %d MB of additional software will be installed."
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwpriv command extra arguments"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid ""
@@ -8761,9 +8944,14 @@ msgstr ""
 msgid "Add/Del Clients"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../standalone/drakgw:1 ../../standalone/drakpxe:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakgw:1 ../../standalone/drakpxe:1
 #, c-format
 msgid "Choose the network interface"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Select firmware file for the %s"
 msgstr ""
 
 #: ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/detect.pm:1 ../../printer/printerdrake.pm:1
@@ -8799,7 +8987,7 @@ msgstr ""
 msgid "Firewalling configuration detected!"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Connection name"
 msgstr ""
@@ -9025,11 +9213,6 @@ msgstr ""
 msgid "%d comma separated strings"
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " isdn"
-msgstr ""
-
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
@@ -9040,7 +9223,7 @@ msgstr ""
 msgid "Theme name"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Help"
 msgstr ""
@@ -9050,7 +9233,7 @@ msgstr ""
 msgid "Choosing an arbitrary driver"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "Your USB key doesn't have any valid Windows (FAT) partitions.\n"
@@ -9105,7 +9288,7 @@ msgstr ""
 msgid "Submit kernel version"
 msgstr ""
 
-#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/logdrake:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../any.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakautoinst:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakclock:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/logdrake:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Cancel"
 msgstr ""
@@ -9271,7 +9454,7 @@ msgstr ""
 msgid "pdq"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO"
 msgstr ""
@@ -9318,7 +9501,7 @@ msgstr ""
 msgid "You must enter a device or file name!"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Quit"
 msgstr ""
@@ -9474,7 +9657,7 @@ msgstr ""
 msgid "Auto Install"
 msgstr ""
 
-#: ../../network/isdn.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Network Configuration Wizard"
 msgstr ""
@@ -9504,7 +9687,7 @@ msgstr ""
 msgid "Create a new partition"
 msgstr ""
 
-#: ../../harddrake/sound.pm:1 ../../harddrake/sound.pm:1
+#: ../../harddrake/sound.pm:1 ../../harddrake/sound.pm:1 ../../standalone/drakups:1
 #, c-format
 msgid "Driver:"
 msgstr ""
@@ -9534,7 +9717,7 @@ msgstr ""
 msgid "sent: "
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Automatic IP"
 msgstr ""
@@ -9588,12 +9771,17 @@ msgstr ""
 msgid "Configuration of a remote printer"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Welcome to the UPS configuration tools"
+msgstr ""
+
 #: ../advertising/13-mdkexpert_corporate.pl:1
 #, c-format
 msgid "An online platform to respond to enterprise support needs."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "URL should begin with 'ftp:' or 'http:'"
 msgstr ""
@@ -9636,14 +9824,19 @@ msgstr ""
 msgid "Genius NetScroll"
 msgstr ""
 
+#: ../../standalone.pm:1
+#, c-format
+msgid "Installing packages..."
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "On Hard Drive"
 msgstr ""
 
-#: ../../standalone.pm:1
+#: ../../standalone/drakups:1
 #, c-format
-msgid "Installing packages..."
+msgid "Access Control Lists"
 msgstr ""
 
 #: ../../keyboard.pm:1
@@ -9661,6 +9854,11 @@ msgstr ""
 msgid ""
 "The following packages need to be installed:\n"
 ""
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The driver that manage your ups"
 msgstr ""
 
 #: ../../any.pm:1 ../../Xconfig/main.pm:1 ../../Xconfig/main.pm:1 ../../Xconfig/monitor.pm:1
@@ -9722,7 +9920,7 @@ msgstr ""
 msgid "Configure Local Area Network..."
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid ""
 "The USB key seems to have write protection enabled. Please\n"
@@ -9797,11 +9995,6 @@ msgstr ""
 msgid "This floppy is not FAT formatted"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
-#, c-format
-msgid "Configuring network"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "This option will save files that have changed.  Exact behavior depends on whether incremental or differential mode is used."
@@ -9822,7 +10015,7 @@ msgstr ""
 msgid "Cameroon"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Provider dns 1 (optional)"
 msgstr ""
@@ -9875,7 +10068,7 @@ msgstr ""
 msgid "Iceland"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Network & Internet Configuration"
 msgstr ""
@@ -9997,7 +10190,7 @@ msgstr ""
 msgid "Hour"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Second DNS Server (optional)"
 msgstr ""
@@ -10027,6 +10220,11 @@ msgstr ""
 #: ../../standalone/drakclock:1
 #, c-format
 msgid "Timezone - DrakClock"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "DrakUPS"
 msgstr ""
 
 #: ../../security/help.pm:1
@@ -10083,6 +10281,11 @@ msgstr ""
 #: ../../help.pm:1
 #, c-format
 msgid "/dev/hdb"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwspy command extra arguments"
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -10264,7 +10467,7 @@ msgid ""
 " need to purge the entry from authorized_keys on the server."
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Please fill or check the field below"
 msgstr ""
@@ -10535,7 +10738,7 @@ msgstr ""
 msgid "Firmware copy succeeded"
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid ""
 "You can't use another CDROM when the following programs are running: \n"
@@ -10656,14 +10859,9 @@ msgstr ""
 msgid "Do you want to click on this button?"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1
+#: ../../printer/printerdrake.pm:1 ../../standalone/drakups:1
 #, c-format
 msgid "Manual configuration"
-msgstr ""
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "search"
 msgstr ""
 
 #: ../../services.pm:1
@@ -10674,12 +10872,17 @@ msgid ""
 "You should leave this enabled for most machines."
 msgstr ""
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "search"
+msgstr ""
+
 #: ../../Xconfig/card.pm:1
 #, c-format
 msgid "Xpmac (installation display driver)"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Zeroconf host name must not contain a ."
 msgstr ""
@@ -10767,6 +10970,11 @@ msgstr ""
 msgid "No free space for 1MB bootstrap! Install will continue, but to boot your system, you'll need to create the bootstrap partition in DiskDrake"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "It is possible that your %s needs its firmware to be uploaded everytime when it is turned on."
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Please choose the printer you want to set up or enter a device name/file name in the input line"
@@ -10777,6 +10985,13 @@ msgstr ""
 msgid "Refuse"
 msgstr ""
 
+#: ../../services.pm:1
+#, c-format
+msgid ""
+"HardDrake runs a hardware probe, and optionally configures\n"
+"new/changed hardware."
+msgstr ""
+
 #: ../../standalone/draksec:1
 #, c-format
 msgid "LOCAL"
@@ -10785,13 +11000,6 @@ msgstr ""
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
 msgid "HFS"
-msgstr ""
-
-#: ../../services.pm:1
-#, c-format
-msgid ""
-"HardDrake runs a hardware probe, and optionally configures\n"
-"new/changed hardware."
 msgstr ""
 
 #: ../../fs.pm:1
@@ -10870,7 +11078,7 @@ msgstr ""
 msgid "True Type install done"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Detection in progress"
 msgstr ""
@@ -10878,11 +11086,6 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Build Whole Kernel -->"
-msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "modem"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -11066,7 +11269,7 @@ msgid ""
 "it installed on machines that don't need it."
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose your country"
 msgstr ""
@@ -11116,7 +11319,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../diskdrake/interactive.pm:1
+#: ../../diskdrake/interactive.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Encryption key"
 msgstr ""
@@ -11331,7 +11534,7 @@ msgstr ""
 msgid "Loopback file name: "
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DNS server address should be in format 1.2.3.4"
 msgstr ""
@@ -11416,7 +11619,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "The firmware file %s does not exist or is unreadable!"
 msgstr ""
@@ -11436,7 +11639,7 @@ msgstr ""
 msgid "The internal domain name"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IRQ"
 msgstr ""
@@ -11627,7 +11830,7 @@ msgid ""
 "%d MB used vs %d MB allocated."
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr ""
@@ -11647,12 +11850,12 @@ msgstr ""
 msgid "Enable CD Boot?"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Simply reboot"
 msgstr ""
 
-#: ../../standalone/logdrake:1
+#: ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Congratulations"
 msgstr ""
@@ -11753,7 +11956,7 @@ msgstr ""
 msgid "Guinea"
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "The system is now connected to the Internet."
 msgstr ""
@@ -11766,6 +11969,11 @@ msgstr ""
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "Japan (broadcast)"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Fragmentation"
 msgstr ""
 
 #: ../../help.pm:1
@@ -11793,7 +12001,7 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: ../../../move/tree/mdk_totem:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "Kill those programs"
 msgstr ""
@@ -11874,17 +12082,12 @@ msgstr ""
 msgid "Error!"
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "cable connection detected"
-msgstr ""
-
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Permission denied transferring %s to %s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_Report Bug"
 msgstr ""
@@ -11923,7 +12126,7 @@ msgstr ""
 msgid "The following packages are going to be removed"
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/ethernet.pm:1
+#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "Connect to the Internet"
 msgstr ""
@@ -11959,6 +12162,11 @@ msgid ""
 "switch to a graphical interface at boot. Obviously, you want to check\n"
 "\"%s\" if your machine is to act as a server, or if you were not successful\n"
 "in getting the display configured."
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "The firmware file for your %s was successfully installed."
 msgstr ""
 
 #: ../advertising/13-mdkexpert_corporate.pl:1
@@ -12058,7 +12266,7 @@ msgid ""
 "are directly connected to your system"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
 #, c-format
 msgid "You don't have any winmodem"
 msgstr ""
@@ -12076,6 +12284,21 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "This should be a comma-separated list of local users or email addresses that you want the backup results sent to. You will need a functioning mail transfer agent setup on your system."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"This is DrakUPS, a Mandrake configuration tool for UPS devices.\n"
+"\n"
+"Author:</span> Thierry Vignaud &lt;tvignaud@mandrakesoft.com&gt;\n"
+"\n"
+""
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Install firmware for the"
 msgstr ""
 
 #: ../../standalone/draksound:1
@@ -12327,12 +12550,17 @@ msgstr ""
 msgid "Truly minimal install (especially no urpmi)"
 msgstr ""
 
+#: ../../standalone/logdrake:1
+#, c-format
+msgid "\"%s\" neither is a valid email nor is an existing local user!"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use daemon"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1 ../../network/modem.pm:1 ../../standalone/drakauth:1 ../../standalone/drakconnect:1 ../../standalone/logdrake:1
+#: ../../install_steps_interactive.pm:1 ../../network/netconnect.pm:1 ../../standalone/drakauth:1 ../../standalone/drakconnect:1 ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
 msgstr ""
@@ -12360,6 +12588,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Algeria"
+msgstr ""
+
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "Install/Update firmware files"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -12444,7 +12677,7 @@ msgstr ""
 msgid "Generating preview ..."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough '0' (zeroes)."
 msgstr ""
@@ -12668,7 +12901,7 @@ msgid ""
 "\"second lowest SCSI ID\", etc."
 msgstr ""
 
-#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1
+#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/drakups:1
 #, c-format
 msgid "Remove"
 msgstr ""
@@ -12688,7 +12921,7 @@ msgstr ""
 msgid "Pipe job into a command"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Remove system config files"
 msgstr ""
@@ -12703,7 +12936,7 @@ msgstr ""
 msgid "new dynamic device name generated by core kernel devfs"
 msgstr ""
 
-#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakclock:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/harddrake2:1
+#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../network/netconnect.pm:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/drakgw:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Yes"
 msgstr ""
@@ -12740,7 +12973,7 @@ msgstr ""
 msgid "Channel"
 msgstr ""
 
-#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1
+#: ../../help.pm:1 ../../interactive.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakfont:1 ../../standalone/drakfont:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/drakups:1
 #, c-format
 msgid "Add"
 msgstr ""
@@ -12764,7 +12997,7 @@ msgid ""
 " in the CD drive under mount point /mnt/cdrom"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough '0' (zeroes)."
 msgstr ""
@@ -12779,7 +13012,7 @@ msgstr ""
 msgid "Please wait, setting security level..."
 msgstr ""
 
-#: ../../network/network.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Configuring network device %s"
 msgstr ""
@@ -12855,7 +13088,7 @@ msgid ""
 "logged into a machine running the rwho daemon (similiar to finger)."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Domain name"
 msgstr ""
@@ -12898,6 +13131,11 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The default lease (in seconds)"
+msgstr ""
+
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Sensitivity threshold"
 msgstr ""
 
 #: ../../standalone/drakconnect:1
@@ -13107,7 +13345,7 @@ msgstr ""
 msgid "here if no."
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DHCP host name"
 msgstr ""
@@ -13167,7 +13405,7 @@ msgstr ""
 msgid ", %s sectors"
 msgstr ""
 
-#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakclock:1 ../../standalone/harddrake2:1
+#: ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../network/netconnect.pm:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "No"
 msgstr ""
@@ -13187,6 +13425,11 @@ msgstr ""
 msgid ""
 "could not find any font.\n"
 ""
+msgstr ""
+
+#: ../../standalone/drakups:1 ../../standalone/drakups:1
+#, c-format
+msgid "UPS driver configuration"
 msgstr ""
 
 #: ../../standalone/keyboarddrake:1
@@ -13246,14 +13489,14 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: ../../security/l10n.pm:1
-#, c-format
-msgid "/etc/issue* exist"
-msgstr ""
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Add a user"
+msgstr ""
+
+#: ../../security/l10n.pm:1
+#, c-format
+msgid "/etc/issue* exist"
 msgstr ""
 
 #: ../../standalone/drakconnect:1
@@ -13266,9 +13509,9 @@ msgstr ""
 msgid "April"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../scanner.pm:1
 #, c-format
-msgid "Deactivate now"
+msgid "Could not create directory /usr/share/sane/firmware!"
 msgstr ""
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
@@ -13276,9 +13519,9 @@ msgstr ""
 msgid "Mandatory package %s is missing"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/drakconnect:1
 #, c-format
-msgid "Could not create directory /usr/share/sane/firmware!"
+msgid "Deactivate now"
 msgstr ""
 
 #: ../../lang.pm:1
@@ -13286,7 +13529,7 @@ msgstr ""
 msgid "Philippines"
 msgstr ""
 
-#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
+#: ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../interactive/gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../interactive/newt.pm:1 ../../interactive/newt.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakboot:1 ../../standalone/drakclock:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakperm:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/mousedrake:1 ../../standalone/net_monitor:1
 #, c-format
 msgid "Ok"
 msgstr ""
@@ -13344,6 +13587,11 @@ msgstr ""
 #: ../../lang.pm:1
 #, c-format
 msgid "Pitcairn"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The port on which is connected your ups"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
@@ -13565,7 +13813,12 @@ msgid ""
 "type in your tv norm and country"
 msgstr ""
 
-#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/harddrake2:1
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "RTS/CTS)"
+msgstr ""
+
+#: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1 ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Port"
 msgstr ""
@@ -13612,7 +13865,7 @@ msgstr ""
 msgid "Right \"Windows\" key"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Detect USB key again"
 msgstr ""
@@ -13643,6 +13896,11 @@ msgstr ""
 msgid "Resolutions"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "It is possible that your scanners need their firmware to be uploaded everytime when they are turned on."
+msgstr ""
+
 #: ../../network/drakfirewall.pm:1
 #, c-format
 msgid ""
@@ -13661,11 +13919,6 @@ msgstr ""
 #: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Remove selected host"
-msgstr ""
-
-#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
-#, c-format
-msgid "Network configuration"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
@@ -13739,12 +13992,21 @@ msgstr ""
 msgid "Disconnect %s"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid ""
+"Welcome to the UPS configuration utility.\n"
+"\n"
+"Here, you'll be add a new UPS to your system.\n"
+""
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Status:"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "HTTP proxy"
 msgstr ""
@@ -13776,7 +14038,7 @@ msgstr ""
 msgid "Note that currently all 'net' media also use the hard drive."
 msgstr ""
 
-#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps.pm:1 ../../wizards.pm:1 ../../wizards.pm:1 ../../wizards.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../standalone/drakauth:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakbug:1 ../../standalone/drakbug:1 ../../standalone/drakbug:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/draksplash:1 ../../../move/move.pm:1 ../../../move/move.pm:1 ../../../move/move.pm:1 ../../../move/tree/mdk_totem:1
+#: ../../fsedit.pm:1 ../../install_steps_interactive.pm:1 ../../install_steps.pm:1 ../../wizards.pm:1 ../../wizards.pm:1 ../../wizards.pm:1 ../../diskdrake/dav.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/interactive.pm:1 ../../diskdrake/smbnfs_gtk.pm:1 ../../interactive/http.pm:1 ../../interactive/http.pm:1 ../../standalone/drakauth:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakboot:1 ../../standalone/drakbug:1 ../../standalone/drakbug:1 ../../standalone/drakbug:1 ../../standalone/drakconnect:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfloppy:1 ../../standalone/drakfont:1 ../../standalone/draksplash:1 ../../standalone/logdrake:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/tree/mdk_totem:1
 #, c-format
 msgid "Error"
 msgstr ""
@@ -13801,7 +14063,7 @@ msgstr ""
 msgid "Configure only card \"%s\"%s"
 msgstr ""
 
-#: ../../standalone/harddrake2:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Level"
 msgstr ""
@@ -13908,7 +14170,7 @@ msgstr ""
 msgid "Prints into %s"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
+#: ../../install_steps_interactive.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "An error occurred"
 msgstr ""
@@ -13943,6 +14205,11 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Filename text to search for:"
+msgstr ""
+
+#: ../../standalone/drakclock:1
+#, c-format
+msgid "Reset"
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1 ../../printer/printerdrake.pm:1
@@ -13982,6 +14249,11 @@ msgstr ""
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Disconnection from Internet complete."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Autodetection"
 msgstr ""
 
 #: ../../any.pm:1
@@ -14163,6 +14435,11 @@ msgstr ""
 msgid "Custom configuration"
 msgstr ""
 
+#: ../../standalone/scannerdrake:1
+#, c-format
+msgid "To do so, you need to supply the firmware files for your scanners so that it can be installed."
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -14203,7 +14480,7 @@ msgstr ""
 msgid ", printing to %s"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Assign host name from DHCP address"
 msgstr ""
@@ -14309,14 +14586,14 @@ msgstr ""
 msgid "Is this correct?"
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "Windows (FAT32)"
-msgstr ""
-
 #: ../../steps.pm:1
 #, c-format
 msgid "Root password"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "Windows (FAT32)"
 msgstr ""
 
 #: ../../standalone/drakTermServ:1
@@ -14382,7 +14659,7 @@ msgstr ""
 msgid "Gibraltar"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Do nothing"
 msgstr ""
@@ -14429,7 +14706,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1 ../../standalone/drakconnect:1 ../../standalone/drakfont:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/harddrake2:1
+#: ../../install_steps_gtk.pm:1 ../../install_steps_gtk.pm:1 ../../interactive.pm:1 ../../ugtk2.pm:1 ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1 ../../diskdrake/hd_gtk.pm:1 ../../interactive/gtk.pm:1 ../../interactive/gtk.pm:1 ../../standalone/drakTermServ:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbug:1 ../../standalone/drakconnect:1 ../../standalone/drakfont:1 ../../standalone/drakperm:1 ../../standalone/draksec:1 ../../standalone/drakups:1 ../../standalone/harddrake2:1
 #, c-format
 msgid "Help"
 msgstr ""
@@ -14439,7 +14716,19 @@ msgstr ""
 msgid "Check if the network devices are in promiscuous mode"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid ""
+"Iwspy is used to set a list of addresses in a wireless network\n"
+"interface and to read back quality of link information for each of those.\n"
+"\n"
+"This information is the same as the one available in /proc/net/wireless :\n"
+"quality of the link, signal strength and noise level.\n"
+"\n"
+"See iwpspy(8) man page for further information."
+msgstr ""
+
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Your personal phone number"
 msgstr ""
@@ -14500,6 +14789,11 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Valid user list changed, rewriting config file."
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The wizard successfully configured the new \"%s\" UPS device."
 msgstr ""
 
 #: ../../standalone/drakfloppy:1
@@ -14691,7 +14985,7 @@ msgstr ""
 msgid "Printing/Scanning/Photo Cards on \"%s\""
 msgstr ""
 
-#: ../../../move/move.pm:1 ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Continue without USB key"
 msgstr ""
@@ -14706,7 +15000,7 @@ msgstr ""
 msgid "if set to yes, run chkrootkit checks."
 msgstr ""
 
-#: ../../network/tools.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Connection Configuration"
 msgstr ""
@@ -14795,9 +15089,23 @@ msgstr ""
 msgid "Authentication NIS"
 msgstr ""
 
+#: ../../standalone/drakclock:1
+#, c-format
+msgid ""
+"We need to install ntp package\n"
+" to enable Network Time Protocol\n"
+"\n"
+"Do you want to install ntp ?"
+msgstr ""
+
 #: ../../any.pm:1
 #, c-format
 msgid "Option ``Restrict command line options'' is of no use without a password"
+msgstr ""
+
+#: ../../standalone/drakups:1
+#, c-format
+msgid "Please select your UPS model."
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -14810,7 +15118,7 @@ msgstr ""
 msgid "United Arab Emirates"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_0"
 msgstr ""
@@ -14825,7 +15133,7 @@ msgstr ""
 msgid "Thailand"
 msgstr ""
 
-#: ../../network/tools.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card IO_1"
 msgstr ""
@@ -14875,7 +15183,7 @@ msgstr ""
 msgid "Bouvet Island"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Dialup options"
 msgstr ""
@@ -14918,6 +15226,11 @@ msgstr ""
 msgid "Mandrake Online"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "UPS users"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid ""
@@ -14935,7 +15248,7 @@ msgstr ""
 msgid "No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."
 msgstr ""
 
-#: ../../network/network.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakgw:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Netmask"
 msgstr ""
@@ -14955,7 +15268,7 @@ msgstr ""
 msgid "Logitech CC Series"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "What kind is your ISDN connection?"
 msgstr ""
@@ -15069,7 +15382,7 @@ msgstr ""
 msgid "Hardware probing in progress"
 msgstr ""
 
-#: ../../network/shorewall.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakgw:1
+#: ../../network/netconnect.pm:1 ../../network/shorewall.pm:1 ../../standalone/drakconnect:1 ../../standalone/drakgw:1
 #, c-format
 msgid "Net Device"
 msgstr ""
@@ -15096,7 +15409,7 @@ msgid ""
 ""
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "CHAP"
 msgstr ""
@@ -15106,7 +15419,7 @@ msgstr ""
 msgid "Puerto Rico"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "(bootp/dhcp/zeroconf)"
 msgstr ""
@@ -15202,7 +15515,7 @@ msgstr ""
 msgid "Czech (QWERTZ)"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Track network card id (useful for laptops)"
 msgstr ""
@@ -15227,7 +15540,7 @@ msgstr ""
 msgid "Add to LVM"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "DNS server"
 msgstr ""
@@ -15309,7 +15622,7 @@ msgstr ""
 msgid "Backup Now"
 msgstr ""
 
-#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakboot:1 ../../standalone/drakfloppy:1 ../../standalone/drakups:1 ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/harddrake2:1 ../../standalone/logdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_File"
 msgstr ""
@@ -15331,7 +15644,7 @@ msgstr ""
 msgid "Editable"
 msgstr ""
 
-#: ../../network/ethernet.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
 msgstr ""
@@ -15376,11 +15689,6 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Partitioning"
-msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid "ethernet card(s) detected"
 msgstr ""
 
 #: ../../standalone/logdrake:1
@@ -15453,7 +15761,7 @@ msgstr ""
 msgid "Kernel:"
 msgstr ""
 
-#: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
+#: ../../standalone/drakups:1 ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
 msgid "/_About..."
 msgstr ""
@@ -15605,9 +15913,19 @@ msgstr ""
 msgid "Add/Del Users"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "Iwconfig command extra arguments"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Host/network IP address missing."
+msgstr ""
+
+#: ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1
+#, c-format
+msgid "(detected)"
 msgstr ""
 
 #: ../../standalone/drakbackup:1 ../../standalone/drakbackup:1 ../../standalone/drakbackup:1
@@ -15655,7 +15973,7 @@ msgstr ""
 msgid "Wait please"
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "PAP"
 msgstr ""
@@ -15665,7 +15983,7 @@ msgstr ""
 msgid "Backup user files"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "CD-ROM"
 msgstr ""
@@ -15857,7 +16175,7 @@ msgstr ""
 msgid "Choosing a display manager"
 msgstr ""
 
-#: ../../network/ethernet.pm:1 ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Zeroconf Host name"
 msgstr ""
@@ -15867,7 +16185,7 @@ msgstr ""
 msgid "Custom setup/crontab entry:"
 msgstr ""
 
-#: ../../network/network.pm:1 ../../printer/printerdrake.pm:1
+#: ../../network/netconnect.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "IP address should be in format 1.2.3.4"
 msgstr ""
@@ -16020,7 +16338,7 @@ msgstr ""
 msgid "You can't select/unselect this package"
 msgstr ""
 
-#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1 ../../network/modem.pm:1 ../../network/modem.pm:1 ../../standalone/drakfloppy:1
+#: ../../keyboard.pm:1 ../../diskdrake/interactive.pm:1 ../../harddrake/sound.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../standalone/drakclock:1 ../../standalone/drakfloppy:1 ../../standalone/drakups:1
 #, c-format
 msgid "Warning"
 msgstr ""
@@ -16053,7 +16371,7 @@ msgstr ""
 msgid "/_Refresh"
 msgstr ""
 
-#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1 ../../network/tools.pm:1 ../../standalone/drakxtv:1
+#: ../../crypto.pm:1 ../../crypto.pm:1 ../../lang.pm:1 ../../network/netconnect.pm:1 ../../network/netconnect.pm:1 ../../standalone/drakxtv:1
 #, c-format
 msgid "Italy"
 msgstr ""
@@ -16259,11 +16577,6 @@ msgstr ""
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "Graphical interface at startup"
-msgstr ""
-
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " adsl"
 msgstr ""
 
 #: ../../raid.pm:1
@@ -16568,11 +16881,6 @@ msgstr ""
 msgid "Left Shift key"
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " local network"
-msgstr ""
-
 #: ../../interactive/stdio.pm:1 ../../interactive/stdio.pm:1
 #, c-format
 msgid ""
@@ -16615,12 +16923,12 @@ msgstr ""
 msgid "(on this machine)"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Gateway address should be in format 1.2.3.4"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "\"%s\" based winmodem detected, do you want to install needed software ?"
 msgstr ""
@@ -16635,7 +16943,7 @@ msgstr ""
 msgid "Use Differential Backups"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../standalone/drakconnect:1 ../../standalone/drakups:1
 #, c-format
 msgid "Driver"
 msgstr ""
@@ -16735,6 +17043,11 @@ msgstr ""
 msgid "Run \"sndconfig\" after installation to configure your sound card"
 msgstr ""
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Configure networking"
+msgstr ""
+
 #: ../../ugtk2.pm:1
 #, c-format
 msgid "Collapse Tree"
@@ -16743,11 +17056,6 @@ msgstr ""
 #: ../../standalone/drakautoinst:1
 #, c-format
 msgid "Auto Install Configurator"
-msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Configure networking"
 msgstr ""
 
 #: ../../any.pm:1
@@ -16995,7 +17303,7 @@ msgstr ""
 msgid "Croatia"
 msgstr ""
 
-#: ../../standalone/scannerdrake:1
+#: ../../standalone/scannerdrake:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid "Install firmware file from"
 msgstr ""
@@ -17115,7 +17423,7 @@ msgstr ""
 msgid "Raw printer (No driver)"
 msgstr ""
 
-#: ../../network/modem.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "Install rpm"
 msgstr ""
@@ -17142,6 +17450,11 @@ msgstr ""
 msgid "Unmount"
 msgstr ""
 
+#: ../../standalone/drakups:1
+#, c-format
+msgid "The wizard successfully added the following UPS devices:"
+msgstr ""
+
 #: ../../mouse.pm:1 ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
@@ -17159,7 +17472,7 @@ msgid ""
 "Click \"Next\" to install or \"Cancel\" to quit"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Please wait, detecting and configuring devices..."
 msgstr ""
@@ -17201,7 +17514,7 @@ msgstr ""
 msgid "Mandrake Control Center"
 msgstr ""
 
-#: ../../help.pm:1 ../../install_steps_interactive.pm:1 ../../../move/move.pm:1
+#: ../../help.pm:1 ../../install_steps_interactive.pm:1 /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Reboot"
 msgstr ""
@@ -17258,11 +17571,6 @@ msgstr ""
 msgid " If the desired printer was auto-detected, simply choose it from the list and then add user name, password, and/or workgroup if needed."
 msgstr ""
 
-#: ../../network/netconnect.pm:1
-#, c-format
-msgid " cable"
-msgstr ""
-
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
@@ -17312,6 +17620,11 @@ msgstr ""
 msgid "Serbian (cyrillic)"
 msgstr ""
 
+#: ../../network/netconnect.pm:1
+#, c-format
+msgid "(detected %s)"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Enter the directory where backups are stored"
@@ -17356,7 +17669,7 @@ msgid ""
 "networks. This service provides NFS file locking functionality."
 msgstr ""
 
-#: ../../network/modem.pm:1 ../../standalone/drakconnect:1
+#: ../../network/netconnect.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Login ID"
 msgstr ""
@@ -17467,7 +17780,7 @@ msgstr ""
 msgid "Modify RAID"
 msgstr ""
 
-#: ../../network/isdn.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid "I have detected an ISDN PCI card, but I don't know its type. Please select a PCI card on the next screen."
 msgstr ""
@@ -17494,6 +17807,11 @@ msgstr ""
 msgid "Could not install the packages needed to set up a scanner with Scannerdrake."
 msgstr ""
 
+#: ../../steps.pm:1
+#, c-format
+msgid "Choose your keyboard"
+msgstr ""
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid ""
@@ -17504,11 +17822,6 @@ msgid ""
 "\t\teth0, or eth1 for cable connection, \n"
 "\t\tippp+ for a isdn connection.\n"
 ""
-msgstr ""
-
-#: ../../steps.pm:1
-#, c-format
-msgid "Choose your keyboard"
 msgstr ""
 
 #: ../../steps.pm:1
@@ -17581,7 +17894,7 @@ msgstr ""
 msgid "Backup Users"
 msgstr ""
 
-#: ../../network/network.pm:1
+#: ../../network/netconnect.pm:1
 #, c-format
 msgid ""
 "Please enter your host name.\n"
@@ -17627,11 +17940,6 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Detected model: %s"
-msgstr ""
-
-#: ../../standalone/logdrake:1
-#, c-format
-msgid "\"%s\" is not a valid email!"
 msgstr ""
 
 #: ../../standalone/drakedm:1
@@ -17699,7 +18007,7 @@ msgstr ""
 msgid "Services"
 msgstr ""
 
-#: ../../../move/move.pm:1
+#: /home/srtxg/ftp/Mandrake/cooker/gi/move/move.pm:1
 #, c-format
 msgid "Auto configuration"
 msgstr ""
