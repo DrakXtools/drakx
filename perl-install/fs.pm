@@ -119,7 +119,7 @@ sub real_format_part {
 	push @options, "-F" if isLoopback($part);
 	format_ext2($part->{device}, @options);
     } elsif (isReiserfs($part)) {
-        format_reiserfs($part->{device}, @options);
+        format_reiserfs($part->{device}, @options, if_(c::kernel_version() =~ /^\Q2.2/, "-v", "1"));
     } elsif (isDos($part)) {
         format_dos($part->{device}, @options);
     } elsif (isWin($part)) {
