@@ -851,6 +851,7 @@ sub summary {
 { label => N("Timezone"), val => \$o->{timezone}{timezone}, clicked => sub { $o->configureTimezone(1) } },
 { label => N("Printer"), val => \$o->{printer}, clicked => sub { $o->configurePrinter(1) }, format => $format_printers },
 { label => N("Bootloader"), val => \$o->{bootloader}, clicked => sub { any::setupBootloader($o, $o->{bootloader}, $o->{all_hds}, $o->{fstab}, $o->{security}) }, format => sub { "$o->{bootloader}{method} on $o->{bootloader}{boot}" } },
+{ label => N("Graphical interface"), val => \$o->{raw_X}, clicked => sub { configureX($o, 'expert') }, format => sub { $o->{raw_X} ? Xconfig::resolution_and_depth::to_string($o->{raw_X}->get_resolution) : '' } },
     (map {
 { label => N("ISDN card"), val => $_->{description}, clicked => sub { $o->configureNetwork } }
      } grep { $_->{driver} eq 'hisax' } detect_devices::probeall()),
@@ -1107,16 +1108,25 @@ sub miscellaneous {
 
 #------------------------------------------------------------------------------
 sub configureX {
-    my ($o, $clicked) = @_;
-    $o->configureXBefore;
+    my ($o, $expert) = @_;
 
-    symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
-    require Xconfig::main;
-    Xconfig::main::configure_everything($o, $o->{raw_X}, $o->do_pkgs, !$::expert && !$clicked,
-			  { allowFB          => $o->{allowFB},
-			    allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
-			  });
-    $o->configureXAfter;
+    my $options = { 
+	allowFB => $o->{allowFB},
+	allowNVIDIA_rpms => install_any::allowNVIDIA_rpms($o->{packages}),
+    };
+
+    if ($o->{raw_X}) {
+	Xconfig::main::configure_chooser($o, $o->{raw_X}, $o->do_pkgs, $options);
+    } else {
+	install_steps::configureXBefore($o);
+	symlink "$o->{prefix}/etc/gtk", "/etc/gtk";
+	require Xconfig::main;
+	if (Xconfig::main::configure_everything($o, $o->{raw_X}, $o->do_pkgs, !$expert, $options)) {
+	    install_steps::configureXAfter($o);
+	} else {
+	    $o->{raw_X} = undef;
+	}
+    }
 }
 
 #------------------------------------------------------------------------------
