@@ -416,7 +416,7 @@ Please be sure to add a /boot partition") if $mntpoint eq "/" && isLVM($part) &&
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
       if !isTrueLocalFS($part) && $mntpoint eq '/';
     die N("You need a true filesystem (ext2/ext3, reiserfs, xfs, or jfs) for this mount point\n")
-      if !isTrueFS($part) && member($mntpoint, qw(/home /tmp /usr /var));
+      if !isTrueFS($part) && member($mntpoint, fs::type::directories_needed_to_boot());
     die N("You can not use an encrypted file system for mount point %s", $mntpoint)
       if $part->{options} =~ /encrypted/ && member($mntpoint, qw(/ /usr /var /boot));
 

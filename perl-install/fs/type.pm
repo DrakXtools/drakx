@@ -369,3 +369,7 @@ sub check {
     $fs_type eq "jfs" && $part->{size} < 16 << 11 and die N("You can not use JFS for partitions smaller than 16MB");
     $fs_type eq "reiserfs" && $part->{size} < 32 << 11 and die N("You can not use ReiserFS for partitions smaller than 32MB");
 }
+
+sub directories_needed_to_boot() { 
+    qw(/ /usr /var /boot /tmp);
+}
