@@ -54,7 +54,6 @@ sub installPackages {
 				 qw(zcip dhcp-client dhcpcd ppp kdenetwork-kppp rp-pppoe pptp-adsl speedtouch speedtouch_mgmt nfs-utils-clients samba-client tmdns wireless-tools adiusbadsl pcmcia-cs), #- network conf
                                  qw(cups cups-drivers foomatic-db gimpprint hpoj libnet-snmp mtools mtoolsfm nmap printer-filters printer-testpages printer-utils scli xojpanel xpp), #- printer stuff
 				 qw(ATI_GLX NVIDIA_GLX),
-                                 "kernel-smp-$kernel_version",
 				 qw(hcfpcimodem hsflinmodem ltmodem), "NVIDIA_nforce-$kernel_version",
 				 qw(xinput), #- for some mice
                                  qw(perl-Term-Readline-Gnu binutils emacs-X11 bash-completion),  #- allow debugging move
