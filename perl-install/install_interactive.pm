@@ -65,7 +65,6 @@ For this, create a partition (or click on an existing one).
 Then choose action ``Mount point'' and set it to `/'"), 1) or return;
 	}
 	if (!any { isSwap($_) } @fstab) {
-	    $o->ask_warn('', N("You must have a swap partition")), $ok = 0 if !$::expert;
 	    $ok &&= $o->ask_okcancel('', N("You don't have a swap partition.\n\nContinue anyway?"));
 	}
 	if (arch() =~ /ia64/ && !fsedit::has_mntpoint("/boot/efi", $all_hds)) {
