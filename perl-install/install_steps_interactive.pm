@@ -898,7 +898,7 @@ sub summary {
 	val => sub { lang::c2name($o->{locale}{country}) },
 	clicked => sub {
 	    any::selectCountry($o, $o->{locale}) or return;
-	    $o->do_pkgs->install('locales-' . substr(lang::c2locale($o->{locale}{country}), 0, 2));
+	    $o->do_pkgs->install('locales-' . substr(lang::getlocale_for_country($o->{locale}{lang}, $o->{locale}{country}), 0, 2));
 	    lang::write($o->{prefix}, $o->{locale});
 	    if (!$timezone_manually_set) {
 		delete $o->{timezone};
