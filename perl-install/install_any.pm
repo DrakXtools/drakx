@@ -78,7 +78,7 @@ sub askChangeMedium($$) {
 }
 sub method_allows_medium_change($) {
     my ($method) = @_;
-    $method eq "cdrom" || $method eq "disk-iso";
+    $method eq "cdrom" || $method eq "disk-iso" || $method eq "nfs-iso";
 }
 
 sub look_for_ISOs() {
