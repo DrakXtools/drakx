@@ -71,7 +71,7 @@ sub partitionWizardSolutions {
 
     # each solution is a [ score, text, function ], where the function retunrs true if succeeded
 
-    my @good_hds = grep { partition_table::can_raw_add($_) } @$hds;
+    my @good_hds = grep { $_->can_raw_add } @$hds;
     if (fsedit::free_space(@good_hds) > $min_linux and !$readonly) {
 	$solutions{free_space} = [ 20, _("Use free space"), sub { fsedit::auto_allocate($all_hds); 1 } ]
     } else { 
