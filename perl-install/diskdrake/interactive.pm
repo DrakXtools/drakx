@@ -995,7 +995,7 @@ sub check_type {
     my ($in, $type, $hd, $part) = @_;
     eval { fsedit::check_type($type, $hd, $part) };
     if (my $err = $@) {
-	$in->ask_warn('', $err);
+	$in->ask_warn('', formatError($err));
 	return;
     }
     if ($::isStandalone) {
