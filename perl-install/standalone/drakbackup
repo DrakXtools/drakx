@@ -30,6 +30,15 @@
 # build iso fs with rescue.
 # configuration file on /etc/drakconf/drakbackup/drakbakup.conf
 # perl -ne 'split(":");print "$_[0]:*:$_[2]:$_[3]:::\n";' /etc/passwd > passwd 
+#
+#
+# TODO:
+#	icon for cdrom.
+#	wizard step.
+#	implement all advanced.
+
+
+
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -78,8 +87,14 @@ my $backup_choice = 0;
 my $cfg_file_exist = 0;
 my @user_and_path_list;
 my @user_list;
+my $list_other;
+my @list_other;
 my $mdk_cc = 0;
 my $DEBUG = 0;
+
+my $backup_sys = 1;
+
+
 
 # config. FILES ->  PATH  & Global variables.
 my @sys_files = ("/etc");
@@ -132,11 +147,13 @@ sub save_conf_file {
 		     "PATH_TO_SAVE=$save_path\n",
 		     );
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
+    if ($backup_sys == 0) { push @cfg_list,  "NO_SYS_FILES\n";}
     if ($comp_mode) {
 	push @cfg_list, "OPTION_COMP=TAR.BZ2\n";
     } else {
 	push @cfg_list, "OPTION_COMP=TAR.GZ\n";
     }
+    print "before save : $backup_sys \n";
     output_p( $cfg_file, @cfg_list);
 }
 
@@ -152,6 +169,7 @@ sub read_conf_file {
 	    if (/^OTHER_FILES/)    { s/^OTHER_FILES=//gi;  @other_files = split(' ', $_ );	}
 	    if (/^PATH_TO_SAVE/)   { s/^PATH_TO_SAVE=//gi; $save_path = $_;	}
 	    if (/^OPTION_REPLACE/) { $option_replace = 1; }
+	    if (/^NO_SYS_FILES/)   { $backup_sys = 0; }
 	    if (/^OPTION_COMP/)    { s/^OPTION_COMP=//gi; /TAR.GZ/ and  $comp_mode = 0; /TAR.BZ2/ and $comp_mode = 1; }
 	}
 	$cfg_file_exist = 1;
@@ -282,7 +300,7 @@ sub about {
 							      sub { ${$central_widget}->destroy(); 
 								    $mdk_cc and interactive_mode();
 								    $mdk_cc or interactive_mode_my();
-								    }),
+								}),
 					    ),
 				  )
 	    );
@@ -344,6 +362,38 @@ configuration file:
     $up_box->show_all();
 }
 
+sub list_remove {
+    my($widget, $list) = @_;
+    my @to_remove;
+    push @to_remove, $list->child_position($_) foreach($list->selection);
+    splice @list_other, $_, 1 foreach(reverse sort @to_remove);
+    $list->remove_items($list->selection);
+}
+
+
+sub file_ok_sel { 
+    my ( $widget, $file_selection ) = @_;     
+    my $file_name = $file_selection->get_filename();
+ #   print "-- @install\n";
+    if(!member($file_name, @list_other)) {
+	push(@list_other, $file_name);
+	$list_other->add(gtkshow(new Gtk::ListItem($file_name)));
+    }
+}
+
+sub  filedialog {
+    my $file_dialog;
+
+    $file_dialog = gtksignal_connect(new Gtk::FileSelection(_("File Selection")), destroy => sub { $file_dialog->destroy(); } );
+    $file_dialog->ok_button->signal_connect(clicked => \&file_ok_sel, $file_dialog);
+    $file_dialog->ok_button->child->set(_("Add"));
+    $file_dialog->cancel_button->signal_connect(clicked => sub { $file_dialog->destroy() });
+    $file_dialog->cancel_button->child->set(_("Close"));
+    $file_dialog->set_filename(_("Select the files or directories and click on 'Add'"));
+    $file_dialog->show();
+}
+
+
 
 sub wizard {
     my $user = 1;
@@ -361,7 +411,7 @@ sub wizard {
 	          $text,
 		  [ 
 		    { label => _("System Files"), val => \$user, type => "bool", text => _("  all files on your /etc directory.") },
-		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contains on $_ directory") } } @user_list,
+		    map { { label => _("$_"), val => \$user, type => "bool", text => _("all data contained on $_ directory") } } @user_list,
 		    ],
 		  );
     
@@ -387,61 +437,8 @@ sub wizard {
 		    { label => _("Build Auto-Boot CDROM"), val => \$user, type => "bool", text => _("this option work only if you have a CDR-W CDROM drive\n This options allow you to restore all\n your system (data and your system variables)") },
 		    ],
 		  );
+} 
 
-
-
-#   step_where_backup:
-#     undef $::Wizard_no_previous;
-#     my $r2 = $in->ask_from_no_check(_("Backup Configuration wizard"),
-# 				_("Please choose how to backup your system"),
-# 				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
-# 	or quit_global($in, 0);
-
-
-}
-sub after_adv {
-    my $text = new Gtk::Text(undef, undef);
-    my $after_adv_box;
-    my $box_cfg_state;
-    my $box_cgf_state_replace;
-    my $box_cgf_state_comp;
-
-    read_conf_file();    
-    if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
-    } else { $box_cgf_state_replace = _("Update backups (do not replace)"), }
-
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),    }
-	
-    my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
-    $box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
-			      gtkset_justify( $label_cfg_file , 'left'),
-			      ),
-
-    gtkpack($up_box,
-	    $after_adv_box = gtkpack_(new Gtk::VBox(0,10),
-				      1, gtkadd(new Gtk::Frame(_("State of configuration file.")),
-						gtkpack(new Gtk::VBox(0,10),
-							$box_cfg_state,
-							),
-						),
-				      0, gtksignal_connect(new Gtk::Button(_("Click here if you want to build a backup now.")), clicked => 
-							   sub { ${$central_widget}->destroy(); }),
-				      0, new Gtk::HSeparator,
-				      0, gtkadd(new Gtk::HButtonBox,
-						gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
-						gtksignal_connect(new Gtk::Button(_("About")), clicked => 
-								  sub { ${$central_widget}->destroy();  about() }),
-						gtksignal_connect(new Gtk::Button(_("Help")), clicked => 
-								  sub { save_conf_file(); ${$central_widget}->destroy(); adv_help() }),
-						gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { 
-						    ${$central_widget}->destroy(); after_adv();    }),
-						),				  
-				      ),
-	    );
-    $central_widget = \$box;
-    $up_box->show_all();
-}
 
 sub advanced {
     my $notebook; 
@@ -455,10 +452,11 @@ sub advanced {
     my $transparent;
     my $book_closed;
     my $book_closed_mask;
-    
-    my $checkbutton = new Gtk::CheckButton( "Check me please!" );
-    $checkbutton->set_usize( 100, 75 );
-    $checkbutton->show();
+    my $box_tmp;    
+
+    $list_other = new Gtk::List();
+    $list_other->set_selection_mode(-extended);
+
     my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
     my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
     my ($pix_time_map, $pix_time_mask) = gtkcreate_png("../pixmaps/backup_time.png");
@@ -466,9 +464,6 @@ sub advanced {
     my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("../pixmaps/bootloader.png");
     my ($pix_other_map, $pix_other_mask) = gtkcreate_png("../pixmaps/net_u.png");
     my ($pix_options_map, $pix_options_mask) = gtkcreate_png("../pixmaps/backup_options.png");
-
-#    ($book_open, $book_open_mask) = Gtk::Gdk::Pixmap->create_from_xpm_d($up_box->window, $transparent, @book_open_xpm);
-#    ($book_closed, $book_closed_mask) = Gtk::Gdk::Pixmap->create_from_xpm_d($up_box->window, $transparent, @book_closed_xpm);
 
     my $label_what = gtkpack(new Gtk::VBox( 0, 2),
 			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
@@ -502,25 +497,74 @@ sub advanced {
 			 _("Other", " ")
 			 ); 
 
+    my $label_where_network = gtkpack(new Gtk::HBox( 0, 2),
+			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
+			 _(" Network & \n MandrakeOnline ")
+			 );
 
+    my $label_where_cd = gtkpack(new Gtk::HBox( 0, 2),
+			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
+			 _(" Hard Drive ")
+			 );
 
-    my $box_what_sys =  gtkpack(new Gtk::VBox(0,1),
-				_("\nPlease check all options that you need.\n"),
-				new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
-			);
+    my $label_where_hd = gtkpack(new Gtk::HBox( 0, 2),
+			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
+			 _(" CDROM ")
+			 );
 
-    my $box_what_user =  gtkpack(new Gtk::VBox(0,1),
-				 map {new Gtk::CheckButton("$_") } (@user_list), 
-				     
-#				 new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-#				 _("When backup.")
-			);
-
-    my $box_what_other =  gtkpack(new Gtk::VBox(0,1),
-			new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-			_("When backup.")
-			);
+    my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
+				 1, _("\nPlease check all options that you need.\n"),
+#gtkset_active
+				 0, gtksignal_connect(gtkset_active(new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)")), $backup_sys) , clicked => sub { $backup_sys = $backup_sys ? 0 : 1; print "backup sys : $backup_sys\n"; }),
+				 0, gtkset_active(new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ), 1),
+				 1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
+				 );
     
+    my $box_what_user =  gtkpack_(new Gtk::VBox(0,0),
+				  0, _("Please check all user that you want to include inb your backup."),
+				  0, new Gtk::HSeparator,
+				  1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
+								   new Gtk::CheckButton("root"),
+								   map {new Gtk::CheckButton("$_") } (@user_list) 
+								   ),
+							   ),
+				  0, new Gtk::HSeparator,
+				  0, new Gtk::CheckButton( _(" do not include the browser cache") ),
+				  );
+
+    my $box_what_other =  gtkpack_(new Gtk::VBox(0,10),
+				   1, gtkpack_(new Gtk::HBox(0,4),
+					       1, createScrolledWindow($list_other),
+					       ),
+				   0, gtkadd(gtkset_layout(new Gtk::HButtonBox, -spread),
+					     gtksignal_connect(new Gtk::Button(_("Add")), clicked => sub {filedialog()  }),
+ 					     gtksignal_connect(new Gtk::Button(_("Remove Selected")), clicked => \&list_remove, $list_other),
+					     ),
+				   );
+			
+    my $box_where_mdkonline =  gtkpack_(new Gtk::VBox(0,1),
+					1, _("\nPlease check all options that you need.\n"),
+					0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
+					0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
+					1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
+					);
+    
+
+
+    my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
+					1, _("\nPlease check all options that you need.\n"),
+					0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
+					0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
+					1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
+					);
+
+    my $box_where_cd =  gtkpack_(new Gtk::VBox(0,1),
+					1, _("\nPlease check all options that you need.\n"),
+					0, new Gtk::CheckButton( _(" Backup your System files. (~ 10Mo)") ),
+					0, new Gtk::CheckButton( _(" Need to restore any versions (CVS)") ),
+					1, _("With this option you will be able to restore any version\n of your /etc directory like in CVS this solution seems to be\n more interesting because it allow you to restore at any\n moment any vercions of your /etc"),
+					);
+	       
     my $box_what = gtkpack(new Gtk::VBox(0,1),
 			   $notebook_what = new Gtk::Notebook,
 			   $notebook_what->insert_page( $box_what_sys, $label_what_sys, 0),
@@ -531,7 +575,9 @@ sub advanced {
 
     my $box_where =  gtkpack(new Gtk::VBox(0,1),
  			$notebook_where = new Gtk::Notebook,
- #			$notebook_where->insert_page( _("toto") , "titi", 0 ),
+			$notebook_where->insert_page( $box_where_mdkonline, $label_where_network, 0 ),
+			$notebook_where->insert_page( $box_where_hd, $label_where_hd, 1 ),
+			$notebook_where->insert_page( $box_where_cd, $label_where_cd, 1 ),
 			);
     my $box_when =  gtkpack(new Gtk::VBox(0,1),
  			$notebook_when = new Gtk::Notebook,
@@ -541,7 +587,6 @@ sub advanced {
 			$notebook_options = new Gtk::Notebook,
  #			$notebook_options->insert_page( _("toto") , "titi", 0 ),
 			);
-
 
     gtkpack($up_box,
 	    $about_box = gtkpack_(new Gtk::VBox(0,10),
@@ -568,16 +613,13 @@ sub advanced {
 					    ),				  
 				  ),
 	    ),
-
-	my %rotate = (
-		top => "right",
-		right => "bottom",
-		bottom => "left",
-		left => "top"
-	);
-
-	$notebook->set_tab_pos( $rotate{ $notebook->tab_pos } );
-
+    my %rotate = (
+		  top => "right",
+		  right => "bottom",
+		  bottom => "left",
+		  left => "top"
+		  );
+    $notebook->set_tab_pos( $rotate{ $notebook->tab_pos } );
     $central_widget = \$about_box;
     $up_box->show_all();
 }
@@ -624,19 +666,18 @@ sub interactive_mode_my {
 					   0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
 					   1, gtkpack_(new Gtk::HBox(0, 3),
 						       0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
-						       1, gtkadd(new Gtk::Frame(_("State of configuration file.")),
-								 gtkpack(new Gtk::VBox(0,10),
-									 $box_cfg_state,
-								      ),
-								 ),
-						       ),
+						       1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
+									 gtkadd(new Gtk::Frame(_("State of configuration file.")),
+										gtkpack(new Gtk::VBox(0,10),
+											$box_cfg_state,
+											),),),),),
 					   0, gtkpack_(new Gtk::HBox(0, 0),
 						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
-						       1, gtkpack_(new Gtk::VBox(0, 1),								   
+						       1, gtkpack_(new Gtk::VBox(0, 1),	
 								   1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
-											clicked => sub { save_conf_file(); Gtk->main_quit() }),
-								   1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
-								clicked => sub { save_conf_file(); Gtk->main_quit() }),
+										  clicked => sub { save_conf_file(); Gtk->main_quit() }),
+							       1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
+										  clicked => sub { save_conf_file(); Gtk->main_quit() }),
 								   ),
 						       ),
 					   0, new Gtk::HSeparator,
@@ -660,6 +701,87 @@ sub interactive_mode_my {
     Gtk->main;
     Gtk->exit(0);
 }
+
+
+sub after_adv {
+    $interactive = 1;
+    my $box_cfg_state;
+    my $box_cgf_state_replace;
+    my $box_cgf_state_comp;
+    my $mask;
+    my $style;
+    my $box;
+    init Gtk;
+    my $text2 = new Gtk::Text(undef, undef);
+    my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
+    $window1->signal_connect (delete_event => sub { Gtk->exit(0) });
+    $window1->set_position(1);
+    $window1->set_title(_("Drakbackup"));
+
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
+
+    read_conf_file();    
+    if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
+    } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
+
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
+	
+    if ($cfg_file_exist) { 
+	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
+	$box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
+				  gtkset_justify( $label_cfg_file , 'left'),
+				  ),
+    } else { $box_cfg_state =  gtkpack(new Gtk::VBox(0,1),
+				       _("No configuration please click Wizard or Advanced.") ), }
+
+    gtkadd($window1,
+	   gtkpack(new Gtk::VBox(0,0),
+		   gtkpack(gtkset_usize($up_box = new Gtk::VBox(0, 5), 500, 420),
+			   $box = gtkpack_(new Gtk::VBox(0, 3),
+					   0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+					   1, gtkpack_(new Gtk::HBox(0, 3),
+						       0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+						       1, createScrolledWindow( gtkpack(new Gtk::VBox(0,0),
+									 gtkadd(new Gtk::Frame(_("State of configuration file.")),
+										gtkpack(new Gtk::VBox(0,10),
+											$box_cfg_state,
+											),),),),),
+					   0, gtkpack_(new Gtk::HBox(0, 0),
+						       0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+						       1, gtkpack_(new Gtk::VBox(0, 1),	
+							       1, gtksignal_connect(new Gtk::Button(_(" Build Backup ")), 
+										  clicked => sub { save_conf_file(); Gtk->main_quit() }),
+							       1, gtksignal_connect(new Gtk::Button(_("     Restore      ")), 
+										  clicked => sub { save_conf_file(); Gtk->main_quit() }),
+								   ),
+						       ),
+					   0, new Gtk::HSeparator,
+					   0, new Gtk::HSeparator,
+					   0, gtkpack_(gtkset_layout(new Gtk::HButtonBox, -end),
+						       1, gtksignal_connect(new Gtk::Button(_("Advanced Conf.")), clicked => 
+									    sub { ${$central_widget}->destroy(); advanced() }),
+						       1, gtksignal_connect(new Gtk::Button(_("Wizard Conf.")), clicked => 
+									    sub { ${$central_widget}->destroy(); wizard() }),
+						       1, gtksignal_connect(new Gtk::Button(_("close")), clicked => 
+									    sub { save_conf_file(); Gtk->main_quit() }),
+						       ),
+					   ),
+			   ),
+		   ),
+	   );
+    $central_widget = \$box;
+    $window1->show_all;
+    $window1->realize;
+    $window1->show_all();    
+    Gtk->main;
+    Gtk->exit(0);
+}
+
+
+
 
 
 # sub interactive_mode_my {
@@ -918,3 +1040,61 @@ sub interactive_mode_my {
 
 
 # ok
+
+
+
+
+
+#   step_where_backup:
+#     undef $::Wizard_no_previous;
+#     my $r2 = $in->ask_from_no_check(_("Backup Configuration wizard"),
+# 				_("Please choose how to backup your system"),
+# 				[ __("Hard Drive"), __("accross the Network"), __("Burn auto boot Restore CDROM") ]) 
+# 	or quit_global($in, 0);
+
+
+
+
+# sub after_adv {
+#     my $text = new Gtk::Text(undef, undef);
+#     my $after_adv_box;
+#     my $box_cfg_state;
+#     my $box_cgf_state_replace;
+#     my $box_cgf_state_comp;
+
+#     read_conf_file();    
+#     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
+#     } else { $box_cgf_state_replace = _("Update backups (do not replace)"), }
+
+#     if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
+#     } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),    }
+	
+#     my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @home_files\n-Other Files to backup: @other_files\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
+#     $box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
+# 			      gtkset_justify( $label_cfg_file , 'left'),
+# 			      ),
+
+#     gtkpack($up_box,
+# 	    $after_adv_box = gtkpack_(new Gtk::VBox(0,10),
+# 				      1, gtkadd(new Gtk::Frame(_("State of configuration file.")),
+# 						gtkpack(new Gtk::VBox(0,10),
+# 							$box_cfg_state,
+# 							),
+# 						),
+# 				      0, gtksignal_connect(new Gtk::Button(_("Click here if you want to build a backup now.")), clicked => 
+# 							   sub { ${$central_widget}->destroy(); }),
+# 				      0, new Gtk::HSeparator,
+# 				      0, gtkadd(new Gtk::HButtonBox,
+# 						gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->main_quit() }),
+# 						gtksignal_connect(new Gtk::Button(_("About")), clicked => 
+# 								  sub { ${$central_widget}->destroy();  about() }),
+# 						gtksignal_connect(new Gtk::Button(_("Help")), clicked => 
+# 								  sub { save_conf_file(); ${$central_widget}->destroy(); adv_help() }),
+# 						gtksignal_connect(new Gtk::Button(_("Ok")), clicked => sub { 
+# 						    ${$central_widget}->destroy(); after_adv();    }),
+# 						),				  
+# 				      ),
+# 	    );
+#     $central_widget = \$box;
+#     $up_box->show_all();
+# }
