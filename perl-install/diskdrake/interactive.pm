@@ -427,7 +427,7 @@ sub part_possible_actions {
         hasMntpoint => '$part->{mntpoint}',
         isPrimary => 'isPrimary($part, $hd)',
     );
-    if ($part->{type} == 0) {
+    if ($part->{type} eq '0') {
 	if_(!$hd->{readonly}, N_("Create"));
     } else {
         grep { 
