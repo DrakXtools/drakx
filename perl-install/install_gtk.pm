@@ -45,11 +45,10 @@ sub install_theme {
 
     load_rc($_) foreach "themes-$o->{theme}", "install", "themes";
 
-    my $pango_font_name_10 = "";
-    my $pango_font_name_12 = "";
+    my %pango_font_name;
     if (my $pango_font = lang::lang2pango_font($o->{lang})) {
-	$pango_font_name_10 = "font_name = \"$pango_font 10\""
-	$pango_font_name_12 = "font_name = \"$pango_font 12\""
+	$pango_font_name{10} = "font_name = \"$pango_font 10\"";
+	$pango_font_name{12} = "font_name = \"$pango_font 12\"";
     }
     if (my ($font, $font2) = lang::get_x_fontset($o->{lang}, $::rootwidth < 800 ? 10 : 12)) {
 	$font2 ||= $font;
@@ -57,12 +56,12 @@ sub install_theme {
 style "default-font" 
 {
    fontset = "$font,*"
-   $pango_font_name_12
+   $pango_font_name{12}
 }
 style "small-font"
 {
    fontset = "$font2,*"
-   $pango_font_name_10
+   $pango_font_name{10}
 }
 widget "*" style "default-font"
 widget "*Steps*" style "small-font"
@@ -189,6 +188,9 @@ sub create_logo_window {
 
 #------------------------------------------------------------------------------
 sub init_gtk() {
+    symlink("/tmp/stage2/etc/gtk-2.0", "/etc/gtk-2.0");
+    symlink("/tmp/stage2/etc/pango", "/etc/pango");
+    symlink("/tmp/stage2/etc/fonts", "/etc/fonts");
     Gtk2->init(\@ARGV);
     Gtk2->set_locale;
 }
