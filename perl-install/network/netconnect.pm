@@ -351,7 +351,7 @@ ADSLLogin=$adsl->{login}
 "DOMAINNAME2=$netc->{DOMAINNAME2}" if $conf{adsl};
 
     output_with_perm("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", 0600, $str);
-    my $a = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
+    my $a = $netcnx->{PROFILE} || "default";
     cp_af("$prefix/etc/sysconfig/network-scripts/drakconnect_conf", "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a);
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf";
     chmod 0600, "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $a;
@@ -407,7 +407,7 @@ sub add_profile {
     my ($netcnx, $profile) = @_;
     $profile or return;
     $profile eq "default" and return;
-    my $cmd1 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+    my $cmd1 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . ($netcnx->{PROFILE} || "default");
     my $cmd2 = "$prefix/etc/sysconfig/network-scripts/drakconnect_conf." . $profile;
     cp_af($cmd1, $cmd2);
 }

@@ -510,7 +510,7 @@ sub matching_desc {
 sub stringlist { 
     map {
 	sprintf("%-16s: %s%s%s", 
-		$_->{driver} ? $_->{driver} : 'unknown', 
+		$_->{driver} || 'unknown', 
 		$_->{description} eq '(null)' ? sprintf("Vendor=0x%04x Device=0x%04x", $_->{vendor}, $_->{id}) : $_->{description},
 		$_->{media_type} ? sprintf(" [%s]", $_->{media_type}) : '',
 		$_->{subid} && $_->{subid} != 0xffff ? sprintf(" SubVendor=0x%04x SubDevice=0x%04x", $_->{subvendor}, $_->{subid}) : '',

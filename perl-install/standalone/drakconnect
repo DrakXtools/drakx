@@ -85,7 +85,7 @@ $hbox1->pack_start(new Gtk2::Label(N("Profile: ")),0,0,0);
 my $combo1 = new Gtk2::Combo;
 $combo1->set_popdown_strings(network::netconnect::get_profiles());
 my $old_profile = $netcnx->{PROFILE};
-$combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+$combo1->entry->set_text($netcnx->{PROFILE} || "default");
 $combo1->entry->set_editable(0);
 $hbox1->pack_start($combo1,0,0,0);
 my $button_del = new Gtk2::Button(N("Del profile..."));
@@ -339,7 +339,7 @@ sub build_list {
 }
 
 sub apply {
-    $old_profile = $netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default";
+    $old_profile = $netcnx->{PROFILE} || "default";
     network::netconnect::save_conf($netcnx, $netc, $intf);
 
     $netcnx->{type} eq 'modem' and network::modem::ppp_configure($in, $netcnx->{$netcnx->{type}}, '');

@@ -476,7 +476,7 @@ sub configureNetwork2 {
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
 
     if (any { $_->{BOOTPROTO} =~ /^(dhcp)$/ } values %$intf) {
-	$in->do_pkgs->install($netc->{dhcp_client} ? $netc->{dhcp_client} : 'dhcp-client');
+	$in->do_pkgs->install($netc->{dhcp_client} || 'dhcp-client');
     }
     if (any { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } values %$intf) {
 	$in->do_pkgs->install('pump');

@@ -335,7 +335,7 @@ sub row_setting_dialog {
                #$group = ($group_read->get_active ? 4 : 0)+($group_write->get_active ? 2 : 0)+($group_execute->get_active ? 1 : 0);
                #$other = ($other_read->get_active ? 4 : 0)+($other_write->get_active ? 2 : 0)+($other_execute->get_active ? 1 : 0);
                my $s     = ($sticky->get_active ? 1 : 0)   + ($suid->get_active ? 4 : 0)      + ($gid->get_active ? 2 : 0);
-               $Perm_list->set_text($row,3, ($s ? $s : '') . $user . $group . $other);
+               $Perm_list->set_text($row,3, ($s || '') . $user . $group . $other);
 			$dlg->destroy;
 			$modified++;
 		});

@@ -73,7 +73,7 @@ network::netconnect::load_conf($netcnx, $netc, $intf);
 network::netconnect::read_net_conf('', $netcnx, $netc);
 my $combo1 = new Gtk::Combo;
 $combo1->set_popdown_strings(network::netconnect::get_profiles());
-$combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+$combo1->entry->set_text($netcnx->{PROFILE} || "default");
 $combo1->entry->set_editable(0);
 MDK::Common::Globals::init(
 			   in => $in,
@@ -358,8 +358,8 @@ sub update {
     };
 
     my @intfs = get_val(); # get values from /proc file system
-    if ($combo1->entry->get_text ne ($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default")) {
-	$combo1->entry->set_text($netcnx->{PROFILE} ? $netcnx->{PROFILE} : "default");
+    if ($combo1->entry->get_text ne ($netcnx->{PROFILE} || "default")) {
+	$combo1->entry->set_text($netcnx->{PROFILE} || "default");
     }
     foreach (@intfs) {
 	my $intf = $_;

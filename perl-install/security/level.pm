@@ -39,9 +39,9 @@ sub set {
     my %sec_levels = reverse %level_list;
     my $run_level = $sec_levels{$_[0]};
     print "set level: $_[0] -> $run_level\n";
-    print $::prefix, "/usr/sbin/msec ", $run_level ? $run_level : 3, "\n";
+    print $::prefix, "/usr/sbin/msec ", $run_level || 3, "\n";
     require run_program;
-    run_program::rooted($::prefix, "/usr/sbin/msec", $run_level ? $run_level : 3);
+    run_program::rooted($::prefix, "/usr/sbin/msec", $run_level || 3);
 }
 
 sub level_choose {
