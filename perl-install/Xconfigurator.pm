@@ -418,7 +418,11 @@ NOTE THIS IS EXPERIMENTAL SUPPORT AND MAY FREEZE YOUR COMPUTER.", $xf3_ver)) . "
 						     -e "$prefix/usr/X11R6/lib/modules/extensions/libglx.so")) {
 	log::l("Using specific NVIDIA driver and GLX extensions");
 	$card->{driver} = 'nvidia';
-	run_program::rooted($prefix, "/sbin/depmod", "-a"); #- hack as NVIDIA_kernel package does not do it actually (8.1 OEM).
+	foreach (@{$cardOptions->{allowNVIDIA_rpms}}) { #- hack as NVIDIA_kernel package does not do it actually (8.1 OEM).
+	    if (/NVIDIA_kernel-([^\-]*)-([^\-]*)(?:-(.*))?/ && -e "$prefix/boot/System.map-$1-$2$3") {
+		run_program::rooted($prefix, "/sbin/depmod", "-a", "-F", "/boot/System.map-$1-$2$3", "$1-$2$3");
+	    }
+	}
     } else {
 	$card->{NVIDIA_glx} = '';
     }
