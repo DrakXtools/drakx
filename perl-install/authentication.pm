@@ -9,7 +9,7 @@ sub kinds() {
 }
 sub kind2description {
     my ($kind) = @_;
-    ${{ local => N("Local files"), LDAP => N("LDAP"), NIS => N("NIS"), winbind => N("Windows Domain"), AD => N("Active Directory") }}{$kind};
+    ${{ local => N("Local file"), LDAP => N("LDAP"), NIS => N("NIS"), winbind => N("Windows Domain"), AD => N("Active Directory") }}{$kind};
 }
 sub to_kind {
     my ($authentication) = @_;
@@ -171,6 +171,7 @@ sub set {
 			  userPassword => 'msSFU30Password',
 			  homeDirectory => 'msSFU30HomeDirectory',
 			  LoginShell => 'msSFU30LoginShell',
+			  gecos => 'name',
 			 ),
 			);
 
@@ -192,8 +193,7 @@ sub set {
 	$when_network_is_up->(sub {
 	    run_program::rooted($::prefix, 'nisdomainname', $domain);
 	    run_program::rooted($::prefix, 'service', 'ypbind', 'restart');
-	}) if !$::isInstall; 
-#- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
+	}) if !$::isInstall; #- TODO: also do it during install since nis can be useful to resolve domain names. Not done because 9.2-RC
     } elsif ($kind eq 'winbind') {
 	my $domain = uc $netc->{WINDOMAIN};
 	
@@ -205,6 +205,8 @@ sub set {
 	network::smb::write_smb_conf($domain);
 	run_program::rooted($::prefix, "chkconfig", "--level", "35", "winbind", "on");
 	mkdir_p("$::prefix/home/$domain");
+	run_program::rooted($::prefix, 'service', 'smb', 'restart');
+	run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 	
 	#- defer running smbpassword until the network is up
 
@@ -217,9 +219,11 @@ sub set {
 	my $realm = $authentication->{AD_domain};
 
 	configure_krb5_for_AD($authentication);
-	$in->do_pkgs->install('samba-winbind', 'pam_krb5');
+	$in->do_pkgs->install('samba-winbind', 'pam_krb5', 'samba-server');
 	set_nsswitch_priority('winbind');
 	set_pam_authentication('winbind');
+	run_program::rooted($::prefix, 'service', 'smb', 'restart');
+        run_program::rooted($::prefix, 'service', 'winbind', 'restart');
 
     
 	require network::smb;
