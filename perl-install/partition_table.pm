@@ -195,7 +195,6 @@ arch() !~ /sparc/ ? (
   0x483=> 'ext3',
   0x401 => 'apple',
   0x402 => 'hfs',
-  nfs  => 'nfs', #- hack
 );
 
 my %types_rev = reverse %types;
@@ -209,35 +208,35 @@ sub important_types {
     difference2(\@l, \@bad_types);
 }
 
-sub type2name($) { $types{$_[0]} || $_[0] }
-sub type2fs($) { $type2fs{$_[0]} }
-sub fs2type($) { $fs2type{$_[0]} }
-sub name2type($) { 
+sub type2fs { $type2fs{$_[0]{type}} || $_[0]{type} }
+sub fs2type { $fs2type{$_[0]} || $_[0] }
+sub type2name { $types{$_[0]} || $_[0] }
+sub name2type { 
     local ($_) = @_;
     /0x(.*)/ ? hex $1 : $types_rev{$_} || $_;
 }
 
-sub isWholedisk($) { arch() =~ /^sparc/ && $_[0]{type} == 5 }
-sub isExtended($) { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
-sub isRawLVM($) { $_[0]{type} == 0x8e }
-sub isRawRAID($) { $_[0]{type} == 0xfd }
-sub isSwap($) { $type2fs{$_[0]{type}} eq 'swap' }
-sub isExt2($) { $type2fs{$_[0]{type}} eq 'ext2' }
-sub isDos($) { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
-sub isWin($) { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
-sub isFat($) { isDos($_[0]) || isWin($_[0]) }
-sub isSunOS($) { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
-sub isNfs($) { $_[0]{type} eq 'nfs' } #- small hack
-sub isNT($) { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
-sub isSupermount($) { $_[0]{type} eq 'supermount' }
-sub isApple($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isDriver} }
-sub isAppleBootstrap($) { $type2fs{$_[0]{type}} eq 'apple' && defined $_[0]{isBoot} }
+sub isWholedisk { arch() =~ /^sparc/ && $_[0]{type} == 5 }
+sub isExtended { arch() !~ /^sparc/ && ($_[0]{type} == 5 || $_[0]{type} == 0xf || $_[0]{type} == 0x85) }
+sub isRawLVM { $_[0]{type} == 0x8e }
+sub isRawRAID { $_[0]{type} == 0xfd }
+sub isSwap { type2fs($_[0]) eq 'swap' }
+sub isExt2 { type2fs($_[0]) eq 'ext2' }
+sub isDos { arch() !~ /^sparc/ && $ {{ 1=>1, 4=>1, 6=>1 }}{$_[0]{type}} }
+sub isWin { $ {{ 0xb=>1, 0xc=>1, 0xe=>1, 0x1b=>1, 0x1c=>1, 0x1e=>1 }}{$_[0]{type}} }
+sub isFat { isDos($_[0]) || isWin($_[0]) }
+sub isSunOS { arch() =~ /sparc/ && $ {{ 0x1=>1, 0x2=>1, 0x4=>1, 0x6=>1, 0x7=>1, 0x8=>1 }}{$_[0]{type}} }
+sub isNfs { $_[0]{type} eq 'nfs' } #- small hack
+sub isNT { arch() !~ /^sparc/ && $_[0]{type} == 0x7 }
+sub isSupermount { $_[0]{type} eq 'supermount' }
+sub isApple { type2fs($_[0]) eq 'apple' && defined $_[0]{isDriver} }
+sub isAppleBootstrap { type2fs($_[0]) eq 'apple' && defined $_[0]{isBoot} }
 sub isHiddenMacPart { defined $_[0]{isMap} }
 
-sub isThisFs { $type2fs{$_[1]{type}} eq $_[0] }
-sub isTrueFS { member($type2fs{$_[0]{type}}, qw(ext2 reiserfs xfs jfs ext3)) }
+sub isThisFs { type2fs($_[1]) eq $_[0] }
+sub isTrueFS { member(type2fs($_[0]), qw(ext2 reiserfs xfs jfs ext3)) }
 
-sub isOtherAvailableFS($) { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
+sub isOtherAvailableFS { isFat($_[0]) || isSunOS($_[0]) || isThisFs('hfs', $_[0]) } #- other OS that linux can access its filesystem
 sub isMountableRW { isTrueFS($_[0]) || isOtherAvailableFS($_[0]) }
 sub isNonMountable { isRawRAID($_[0]) || isRawLVM($_[0]) }
 
@@ -512,7 +511,7 @@ sub read_extended {
 }
 
 # write the partition table
-sub write($) {
+sub write {
     my ($hd) = @_;
     $hd->{isDirty} or return;
 

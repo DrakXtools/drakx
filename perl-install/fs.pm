@@ -79,7 +79,8 @@ sub mount_options {
 }
 
 sub mount_options_unpack {
-    my ($packed_options, $part) = @_;
+    my ($part) = @_;
+    my ($type, $packed_options) = ($part->{type}, $part->{options});
 
     my ($non_defaults, $user_implies) = mount_options();
 
@@ -94,12 +95,17 @@ sub mount_options_unpack {
 	$non_defaults->{$_} = 1 foreach @$l;
     }
 
+    $non_defaults->{autofs} = 1;  # autofs proposed for any types??
+    $non_defaults->{supermount} = 1 if member(type2fs($part), 'auto', @auto_fs);
+
     my $defaults = { reverse %$non_defaults };
     my %options = map { $_ => 0 } keys %$non_defaults;
     my @unknown;
     foreach (split(",", $packed_options)) {
 	if ($_ eq 'user') {
 	    $options{$_} = 1 foreach ('user', @$user_implies);
+	} elsif (/fstype=(.*)/) {
+	    $type = $1;
 	} elsif (exists $non_defaults->{$_}) {
 	    $options{$_} = 1;
 	} elsif ($defaults->{$_}) {
@@ -108,15 +114,25 @@ sub mount_options_unpack {
 	    push @unknown, $_;
 	}
     }
+    $options{autofs} = 1 if $part->{type} eq 'autofs';
+    $options{supermount} = 1 if $part->{type} eq 'supermount';
+
     my $unknown = join(",", @unknown);
-    \%options, $unknown;
+    \%options, $unknown, $type;
 }
 
 sub mount_options_pack {
-    my ($options, $unknown) = @_;
+    my ($part, $options, $unknown, $type) = @_;
 
     my ($non_defaults, $user_implies) = mount_options();
     my @l;
+
+    if ($options->{autofs} || $options->{supermount}) {
+	$options->{"fstype=$type"} = 1;
+	delete $options->{$_} and $part->{type} = $_ foreach 'autofs', 'supermount';
+    } else {
+	$part->{type} = $type;
+    }
     if (delete $options->{user}) {
 	push @l, 'user';
 	foreach (@$user_implies) {
@@ -129,7 +145,7 @@ sub mount_options_pack {
     push @l, grep { $options->{$_} } keys %$options;
     push @l, $unknown;
 
-    join(",", @l);
+    $part->{options} = join(",", grep { $_ } @l);
 }
 
 sub mount_options_help {
@@ -172,8 +188,8 @@ sub get_mntpoints_from_fstab {
 
 	foreach my $p (@$l) {
 	    $p->{device} eq $_->{device} or next;
-	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p->{type}) and
-		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p->{type}) || type2name($p->{type})) . " vs $_->{type}"), next;
+	    $_->{type} ne 'auto' && $_->{type} ne type2fs($p) and
+		log::l("err, fstab and partition table do not agree for $_->{device} type: " . (type2fs($p) || type2name($p->{type})) . " vs $_->{type}"), next;
 	    delete $p->{unsafeMntpoint} || !$p->{mntpoint} or next;
 	    $p->{type} ||= $_->{type};
 	    $p->{mntpoint} = $_->{mntpoint};
@@ -392,7 +408,7 @@ sub mount_part {
 	    } elsif (loopback::carryRootLoopback($part)) {
 		$mntpoint = "/initrd/loopfs";
 	    }
-	    mount(devices::make($dev), $mntpoint, type2fs($part->{type}), $rdonly);
+	    mount(devices::make($dev), $mntpoint, type2fs($part), $rdonly);
 	    rmdir "$mntpoint/lost+found";
 	}
     }
@@ -451,7 +467,7 @@ sub df {
 	return; #- won't even try!
     } else {
 	mkdir $dir;
-	eval { mount($part->{device}, $dir, type2fs($part->{type}), 'readonly') };
+	eval { mount($part->{device}, $dir, type2fs($part), 'readonly') };
 	if ($@) {
 	    $part->{notFormatted} = 1;
 	    $part->{isFormatted} = 0;
@@ -541,9 +557,9 @@ sub write_fstab($;$$@) {
 	eval { devices::make("$prefix/$dev") } if $dir && !isLoopback($_);
 	mkdir "$prefix/$_->{mntpoint}", 0755 if $_->{mntpoint} && !isSwap($_);
 	
-	[ $dev, $_->{mntpoint}, type2fs($_->{type}), $options, $freq, $passno ];
+	[ $dev, $_->{mntpoint}, type2fs($_), $options, $freq, $passno ];
 	
-    } grep { $_->{mntpoint} && type2fs($_->{type}) } @$fstab;
+    } grep { $_->{mntpoint} && type2fs($_) } @$fstab;
 
     push @to_add, map { [ split ] } cat_("$prefix/etc/fstab");
 
