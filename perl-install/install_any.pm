@@ -501,7 +501,7 @@ sub selectSupplMedia {
 	    local $global_ftp_prefix;
 	    if ($suppl_method eq 'ftp') { #- mirrors are ftp only (currently)
 		$url = $o->askSupplMirror(N("URL of the mirror?")) or return 'error';
-		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
+		$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 		    and $global_ftp_prefix = [ $3, $4, $1, $2 ]; #- for getFile
 	    } else {
 		$url = $o->ask_from_entry('', N("URL of the mirror?")) or return 'error';
@@ -571,7 +571,7 @@ sub setup_suppl_medium {
     my ($supplmedium, $url, $suppl_method) = @_;
     $supplmedium->{prefix} = $url; #- for install_urpmi
     if ($suppl_method eq 'ftp') {
-	$url =~ m!^ftp://(?:(.*?)(?::(.*?))?@)?([^/]+)/(.*)!
+	$url =~ m!^ftp://(?:(.*?)(?::(.*?))?\@)?([^/]+)/(.*)!
 	    and $supplmedium->{ftp_prefix} = [ $3, $4, $1, $2 ]; #- for getFile
     }
     $supplmedium->{selected} = 1;
