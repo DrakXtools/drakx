@@ -168,7 +168,7 @@ void end_progression(void)
 
 enum return_type ask_from_list_comments(char *msg, char ** elems, char ** elems_comments, char ** choice)
 {
-	char * items[50];
+	char * items[500];
 	int answer = 0, rc;
 	char ** sav_elems = elems;
 	int i;
