@@ -189,7 +189,7 @@ sub setup_postinstall_rpms($$) {
     #- the complete filename of each package.
     #- copy the package files in the postinstall RPMS directory.
     #- last arg is default medium '' known as the CD#1.
-    pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{1});
+    pkgs::extractHeaders($prefix, \@toCopy, $packages->{mediums}{$boot_medium});
     cp_af((map { "/tmp/image/" . relGetFile(pkgs::packageFile($_)) } @toCopy), $postinstall_rpms);
 
     log::l("copying Auto Install Floppy");
@@ -332,8 +332,8 @@ sub setPackages {
 
 	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
 	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-	push @{$o->{default_packages}}, "kernel-enterprise" if (availableRamMB() > 800) && (arch() !~ /ia64/);
-	push @{$o->{default_packages}}, "kernel22" if c::kernel_version() =~ /^\Q2.2/;
+	push @{$o->{default_packages}}, "kernel-enterprise" if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
+	push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
 	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
 	push @{$o->{default_packages}}, "kernel-pcmcia-cs" if $o->{pcmcia};
 	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
