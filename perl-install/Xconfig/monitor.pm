@@ -177,6 +177,7 @@ sub getinfoFromDDC() {
     if ($vbe =~ /Memory: (\d+)k/) {
 	$monitor->{VideoRam_probed} = $1;
     }
+    require Xconfig::xfree;
     $monitor->{ModeLine} = Xconfig::xfree::default_ModeLine();
     my $detailed_timings = $monitor->{detailed_timings} || [];
     foreach (grep { !$_->{bad_ratio} } @$detailed_timings) {
