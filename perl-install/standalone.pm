@@ -1,6 +1,8 @@
 package standalone; # $Id$
 
 use c;
+use strict;
+use common;
 use Config;
 
 #- for sanity (if a use standalone is made during install, MANY problems will happen)
@@ -17,12 +19,81 @@ $ENV{SHARE_PATH} ||= "/usr/share";
 c::setlocale();
 c::bindtextdomain('libDrakX', "/usr/share/locale");
 
-my $i;
-foreach (@ARGV) {
+$::license = N("This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+");
+
+my $progname = basename $0;
+print "Running $progname\n";
+
+my %usages = (
+	      'draksec' => N(" [OPTIONS]...
+	      --debug         print debugging information"),
+	      'drakxtv' => "[--no-guess]",
+	      'drakupdate_fstab' => " [--add | --del] <device>\n",
+	      'keyboardrake' => N("[keyboard]"),
+	      'printerdrake' => N(" [--skiptest] [--cups] [--lprng] [--lpd] [--pdq]"),
+	      'rpmdrake' => N("[OPTION]...
+  --no-confirmation      don't ask first confirmation question in MandrakeUpdate mode
+  --no-verify-rpm        don't verify packages signatures
+  --changelog-first      display changelog before filelist in the description window
+  --merge-all-rpmnew     propose to merge all .rpmnew/.rpmsave files found"),
+	      'XFdrake' => N(" [everything]
+       XFdrake [--noauto] monitor
+       XFdrake resolution"),
+	      );
+
+$usages{$_} = $usages{rpmdrake} foreach (qw(rpmdrake-remove MandrakeUpdate));
+$usages{Xdrakres} = $usages{XFdrake};
+
+
+my ($i, @new_ARGV);
+foreach my $opt (@ARGV) {
     $i++;
-    $_ eq '--embedded' or next;
-    (undef, $::XID, $::CCPID) = splice @ARGV, ($i-1), 3;
-    $::isEmbedded = 1;
+    if ($opt eq '--help' || $opt eq '-h') {
+	version();
+	print STDERR N("\nUsage: %s  [--auto] [--beginner] [--expert] [-h|--help] [--noauto] [--testing] [-v|--version] ", $progname),  if_($usages{$progname}, $usages{$progname}), "\n";
+#    print N("\nUsage: "), $::usage, "\n" if $::usage;
+	exit(0);
+    } elsif ($opt eq '--version' || $opt eq '-v') {
+	version();
+	exit(0);
+    } elsif ($opt eq '--embedded') {
+	(undef, $::XID, $::CCPID) = splice @ARGV, ($i-1), 3;
+	$::isEmbedded = 1;
+    } elsif ($opt eq '--expert') {
+	$::expert = 1;
+    } elsif ($opt eq '--noauto') {
+	$::noauto = /-noauto/;
+    } elsif ($opt eq '--auto') {
+	$::auto = 1;
+    } elsif ($opt eq '--testing') {
+	$::testing = 1;
+    } elsif ($opt eq '--beginner') {
+	$::expert = 0;
+    } else {
+	push @new_ARGV, $opt;
+    }
+}
+
+@ARGV = @new_ARGV;
+
+
+sub version {
+    print STDERR "Drakxtools version 9.1.0
+Copyright (C) 1999-2002 MandrakeSoft by <install\@mandrakesoft.com>
+",  $::license, "\n";
 }
 
 ################################################################################
@@ -118,11 +189,11 @@ package standalone;
 my $standalone_name;
 sub explanations { c::syslog(c::LOG_INFO()|c::LOG_LOCAL1(), "@_") }
 
-@common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af touch setVarsInSh setExportedVarsInSh setExportedVarsInCsh update_gnomekderc);
-@builtin_functs = qw(chmod chown unlink link symlink rename system);
-@drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::monitor Xconfig::parse Xconfig::proprietary Xconfig::resolution_and_depth Xconfig::screen Xconfig::test Xconfig::various Xconfig::xfree Xconfig::xfree3 Xconfig::xfree4 Xconfig::xfreeX any bootloader bootlook c class_discard commands crypto detect_devices devices diskdrake diskdrake::hd_gtk diskdrake::interactive diskdrake::removable diskdrake::removable_gtk diskdrake::smbnfs_gtk fs fsedit http keyboard lang log loopback lvm modparm modules mouse my_gtk network network::adsl network::ethernet network::isdn_consts network::isdn network::modem network::netconnect network::network network::nfs network::smb network::tools partition_table partition_table_bsd partition_table::dos partition_table::empty partition_table::gpt partition_table::mac partition_table::raw partition_table::sun printer printerdrake proxy raid run_program scanner services steps swap timezone network::drakfirewall network::shorewall);
+our @common_functs = qw(renamef linkf symlinkf output substInFile mkdir_p rm_rf cp_af touch setVarsInSh setExportedVarsInSh setExportedVarsInCsh update_gnomekderc);
+our @builtin_functs = qw(chmod chown unlink link symlink rename system);
+our @drakx_modules = qw(Xconfig::card Xconfig::default Xconfig::main Xconfig::monitor Xconfig::parse Xconfig::proprietary Xconfig::resolution_and_depth Xconfig::screen Xconfig::test Xconfig::various Xconfig::xfree Xconfig::xfree3 Xconfig::xfree4 Xconfig::xfreeX any bootloader bootlook c class_discard commands crypto detect_devices devices diskdrake diskdrake::hd_gtk diskdrake::interactive diskdrake::removable diskdrake::removable_gtk diskdrake::smbnfs_gtk fs fsedit http keyboard lang log loopback lvm modparm modules mouse my_gtk network network::adsl network::ethernet network::isdn_consts network::isdn network::modem network::netconnect network::network network::nfs network::smb network::tools partition_table partition_table_bsd partition_table::dos partition_table::empty partition_table::gpt partition_table::mac partition_table::raw partition_table::sun printer printerdrake proxy raid run_program scanner services steps swap timezone network::drakfirewall network::shorewall);
 
-$SIG{SEGV} = sub { ($progname = $0) =~ s|.*/||; exec("drakbug --incident $progname") };
+$SIG{SEGV} = sub { my $progname = $0; $progname =~ s|.*/||; exec("drakbug --incident $progname") };
 
 sub import {
     ($standalone_name = $0) =~ s|.*/||;

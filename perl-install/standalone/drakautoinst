@@ -29,8 +29,6 @@ use Data::Dumper;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakautoinst [--version]\n";
-/-version/ and die 'version: $Id$ '."\n";
 $::direct = /-direct/;
 $::direct = 1; #DEBUG
 

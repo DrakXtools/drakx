@@ -11,13 +11,6 @@ use mouse;
 use c;
 
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: mousedrake [--auto] [--testing]\n";
-
-$::auto = /-auto/;
-$::testing = /-testing/;
-
 my $in = 'interactive'->vnew('su', 'mouse');
 
 modules::mergein_conf('/etc/modules.conf') if -r '/etc/modules.conf';

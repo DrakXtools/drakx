@@ -13,13 +13,6 @@ use fsedit;
 use fs;
 use c;
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: drakboot [--expert] [--testing]\n";
-
-$::expert = /-expert/;
-$::testing = /-testing/;
-
 my $in = 'interactive'->vnew('su', 'bootloader');
 
 $::lilo_choice = \&lilo_choice;

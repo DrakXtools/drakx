@@ -35,17 +35,6 @@ local $_ = join '', @ARGV;
 my ($configure_this) = grep { !/^-/ } @ARGV;
 $configure_this ||= 'everything';
 
-/-h/ || $configure_this !~ /^(resolution|monitor|everything|auto_install)/ and die <<'EOF';
-usage: XFdrake [--expert] [--noauto] [--auto] [everything]
-       XFdrake [--noauto] monitor
-       XFdrake resolution
-EOF
-
-my $auto = /-auto/;
-$::expert = /-expert/;
-$::noauto = /-noauto/;
-$::testing = /-testing/;
-
 begin:
 { 
     my $in = 'interactive'->vnew('su', 'X');
@@ -68,7 +57,7 @@ begin:
 	    if ($has_conf) {
 		Xconfig::main::configure_chooser($in, $raw_X, $in->do_pkgs, $options);
 	    } else {
-		Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $auto, $options);
+		Xconfig::main::configure_everything($in, $raw_X, $in->do_pkgs, $::auto, $options);
 	    }
 	} elsif ($configure_this eq 'auto_install') {
 	    Xconfig::main::configure_everything_auto_install(Xconfig::default::configure(), $in->do_pkgs, {}, $options);

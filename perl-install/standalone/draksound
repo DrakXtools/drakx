@@ -26,8 +26,6 @@ use common;
 use harddrake::sound;
 use modules;
 
-("@ARGV" =~ /--help|-h/) and die "usage: draksound [-h] [--help]\n";
-
 my $in = 'interactive'->vnew();
 
 modules::mergein_conf('/etc/modules.conf');

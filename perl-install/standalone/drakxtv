@@ -29,9 +29,6 @@ use lang;
 use log;
 use common;
 
-("@ARGV" =~ /--help|-h/) and die "usage: drakxtv [-h] [--help] [--no-guess]\n";
-
-
 my $in = 'interactive'->vnew();
 
 sub scan4channels {

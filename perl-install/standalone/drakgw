@@ -37,8 +37,6 @@ $::isInstall and die "Not supported during install.\n";
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakgw [--version]\n";
-/-version/ and die 'version: $Id$ '."\n";
 $::Wizard_pix_up = "wiz_drakgw.png";
 $::Wizard_title = N("Internet Connection Sharing");
 $::direct = /-direct/;

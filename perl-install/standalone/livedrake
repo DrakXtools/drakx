@@ -9,12 +9,6 @@ use interactive;
 use run_program;
 use c;
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: livedrake [--testing]\n";
-
-$::testing = /-testing/;
-
 my $in = 'interactive'->vnew('su', 'default');
 
 my $cd_mntpoint = "/mnt/cdrom";

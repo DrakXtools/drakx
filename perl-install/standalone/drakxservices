@@ -9,11 +9,6 @@ use interactive;
 use services;
 use log;
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: drakxservices\n";
-
-
 my $in = 'interactive'->vnew('su', 'services');
 begin:
 my $l = services::ask($in);

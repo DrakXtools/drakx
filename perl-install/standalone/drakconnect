@@ -36,11 +36,8 @@ use network::adsl;
 use MDK::Common::Globals "network", qw($in $prefix $disconnect_file $connect_prog $connect_file $disconnect_file);
 
 my $xpm_path = "/usr/share/libDrakX/pixmaps";
-$::isWizard = "@ARGV" =~ /--wizard/;
-$::expert = "@ARGV" =~ /--expert/;
 local $_ = join '', @ARGV;
-
-#/-h/ and die "usage: drakconnect[--xf3] [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing]\n";
+$::isWizard = /--wizard/;
 
 my $netcnx = {};
 my $netc = {};

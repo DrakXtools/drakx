@@ -11,12 +11,6 @@ use common;
 use any;
 use c;
 
-local $_ = join '', @ARGV;
-
-/-h/ and die N("usage: keyboarddrake [--expert] [keyboard]\n");
-
-$::expert = /-expert/;
-
 my $in;
 my $keyboard = keyboard::read();
 if (my ($kb) = grep { !/^-/ } @ARGV) {

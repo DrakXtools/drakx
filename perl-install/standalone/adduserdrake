@@ -8,13 +8,6 @@ use common;
 use interactive;
 use any;
 
-local $_ = join '', @ARGV;
-
-/-h/ and die "usage: adduserdrake [--beginner] [--expert] [<users...>]\n";
-
-$::beginner = /-beginner/;
-$::expert = /-expert/;
-
 my @etc_pass_fields = qw(name pw uid gid realname home shell);
 my @shells = grep { -x $_ } map { "/bin/$_" } qw(bash tcsh zsh ash ksh);
 my $isMD5 = cat_("/etc/pam.d/system-auth") =~ /md5/;

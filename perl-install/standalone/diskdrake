@@ -36,18 +36,18 @@ use log;
 use c;
 
 
-my %options;
-my @l = @ARGV;
-while (my $e = shift @l) {
-    my ($option) = $e =~ /--?(.*)/ or next;
-    if ($option =~ /(.*?)=(.*)/) {
-	$options{$1} = $2;
-    } else {
-	$options{$option} = '';
-    }
-}
-$::expert = defined(delete $options{expert});
-$::testing = defined(delete $options{testing});
+#my %options;
+#my @l = @ARGV;
+#while (my $e = shift @l) {
+"    my ($option) = $e =~ /--?(.*)/ or next;
+#    if ($option =~ /(.*?)=(.*)/) {
+#	$options{$1} = $2;
+#    } else {
+#	$options{$option} = '';
+#    }
+"}
+#$::expert = defined(delete $options{expert});
+#$::testing = defined(delete $options{testing});
 
 my @types = qw(hd nfs smb dav removable fileshare);
 my ($type, $para) = ('hd', '');

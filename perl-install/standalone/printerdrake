@@ -30,18 +30,7 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: printerdrake [--beginner] [--expert] [--auto] [--noauto] [--skiptest] [--testing] [--cups] [--lprng] [--lpd] [--pdq]\n";
-
-$::expert = 0;
-if (/-expert/) {
-    $::expert = 1;
-} elsif (/-beginner/) {
-    $::expert = 0;
-} else {
-    printer::main::get_usermode ();
-}
-$::noauto = /-noauto/;
-$::testing = /-testing/;
+printer::main::get_usermode ();
 
 my $printer;
 

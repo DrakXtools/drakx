@@ -37,9 +37,6 @@ init Gtk;
 Gtk->set_locale;
 
 $in = 'interactive'->vnew('su', 'default');
-local $_ = join '', @ARGV;
-
-/-h/ and die N("usage: drakfloppy\n");
 
 $expert_mode = 0;
 # we have put here the list in order to do $list->clear() when we have to do
