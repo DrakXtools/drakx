@@ -648,6 +648,7 @@ sub testFinalConfig {
 	}
     }
 
+    $::noShadow = 1;
     local *F;
     open F, "|perl 2>/dev/null" or die '';
     print F "use lib qw(", join(' ', @INC), ");\n";
@@ -682,6 +683,7 @@ sub testFinalConfig {
 
     unlink "/tmp/.X11-unix/X9" if $prefix;
     kill 2, $pid;
+    $::noShadow = 0;
 
     $rc || $err == 222 << 8 or $in->ask_warn('', _("An error has occurred, try to change some parameters"));
     $rc;

@@ -542,7 +542,7 @@ sub _create_window($$) {
 		       my $f = gtkset_border_width(gtkset_shadow_type(new Gtk::Frame(undef), 'none'), 3)
 		      );
     my $table;
-    if ($::isStandalone || $::live || $::g_auto_install) { gtkadd($w, $inner) } else {
+    if ($::isStandalone || $::live || $::g_auto_install || $::noShadow) { gtkadd($w, $inner) } else {
 	my $sqw = $my_gtk::shape_width;
 	gtkadd($w, $table = new Gtk::Table(2, 2, 0));
 	$table->attach( $inner, 0, 1, 0, 1, 1|4, 1|4, 0, 0);
