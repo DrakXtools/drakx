@@ -44,7 +44,7 @@ sub isdn_write_config {
     my $e = $in->ask_from_list_(_("Network Configuration Wizard"),
 				    _("Which ISDN configuration do you prefer?
 
-* The Old configuration uses isdn4net. It contains powerfull
+* The Old configuration uses isdn4net. It contains powerful
   tools, but is tricky to configure, and not standard.
 
 * The New configuration is easier to understand, more

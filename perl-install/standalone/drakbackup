@@ -622,7 +622,7 @@ sub read_cron_files {
 
 sub save_cron_files {
 	if ($nonroot_user) {
-		show_warning("w", "Cron not available yet as non-root") if ($not_warned);
+		show_warning("w", __("Cron not available yet as non-root")) if ($not_warned);
 		$not_warned = 0;
 		$backup_daemon = 0;
 		return(1);
@@ -728,10 +728,10 @@ sub write_password_file {
 
 sub show_warning {
 	my ($mode, $warning) = @_;
-	$mode = "WARNING" if ($mode eq "w");
-	$mode = "FATAL" if ($mode eq "f");
+	$mode = __("WARNING") if ($mode eq "w");
+	$mode = __("FATAL") if ($mode eq "f");
 	if ($interactive) {
-		$in->ask_warn('', "$mode: $warning");
+		$in->ask_warn('',translate("$mode").": ".translate("$warning"));
 	} else {
 		warn "$mode: $warning\n";
 	}
@@ -905,11 +905,11 @@ sub webdav_client {
 	my $command = "sitecopy -u drakbackup";
 	spawn_progress($command, "Running sitecopy...");
 		if ($log_buff =~ /Nothing to do - no changes found/) {
-		show_warning("w", "WebDAV remote site already in sync!");
+		show_warning("w", __("WebDAV remote site already in sync!"));
 		return(1);
 	}
 	if ($log_buff !~ /Update completed successfully/) {
-		show_warning("f", "WebDAV transfer failed!");
+		show_warning("f", __("WebDAV transfer failed!"));
 		return(1);
 	}
 	return(0);
@@ -931,15 +931,15 @@ sub check_for_cd {
 	my $command = "cdrecord dev=$cd_device -atip";
 	spawn_progress($command, "Check for media in drive");
 	if ($log_buff =~ /No disk/) {
-		show_warning("f", "No CDR/DVDR in drive!");
+		show_warning("f", __("No CDR/DVDR in drive!"));
 		return(1);
 	}
 	if ($log_buff !~ /ATIP info from disk/) {
-		show_warning("f", "Does not appear to be recordable media!");
+		show_warning("f", __("Does not appear to be recordable media!"));
 		return(1);
 	}
 	if (($log_buff =~ /Is not erasable/) && ($media_erase)) {
-		show_warning("f", "Not erasable media!");
+		show_warning("f", __("Not erasable media!"));
 		return(1);
 	}
 	 
@@ -1042,7 +1042,7 @@ sub build_cd {
 	if (!check_for_cd()) {
 		build_iso();
 		if ($log_buff =~ /Permission denied/) {
-			show_warning("f", "Permission problem accessing CD.");
+			show_warning("f", __("Permission problem accessing CD."));
 			$media_problem = 1;
 			return(1);
 		} else {
@@ -1263,7 +1263,7 @@ sub build_backup_files {
 
 	my $filecount = @file_list_to_send_by_ftp;
 	if (!$filecount) {
-		show_warning("w", "No changes to backup!");
+		show_warning("w", __("No changes to backup!"));
 		$interactive and cursor_norm();
 		$interactive and show_status();
 		return(1); 
@@ -1343,7 +1343,7 @@ sub build_backup_files {
 		$catalog .= ":F" if ((!$backup_other_versions) && (@list_other));
 		$catalog .= "\n";
 			
-		open(CATALOG, ">> $cfg_dir/drakbackup_catalog") || show_warning("w", "Can't create catalog!");
+		open(CATALOG, ">> $cfg_dir/drakbackup_catalog") || show_warning("w", __("Can't create catalog!"));
 		print(CATALOG $catalog);
 		close(CATALOG);
 	}
@@ -1841,7 +1841,7 @@ sub advanced_where_cd {
 			0, my $check_where_cd = new Gtk::CheckButton(_("Use CD/DVDROM to backup")),
 			0, new Gtk::HSeparator,
 			0, gtkpack_(new Gtk::HBox(0,10),
-			0, gtkset_sensitive(new Gtk::Label(_("Please choose your CD/DVD device\n(Press Enter to propagate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
+			0, gtkset_sensitive(new Gtk::Label(_("Please choose your CD/DVD device\n(Press Enter to propogate settings to other fields.\nThis field isn't necessary, only a tool to fill in the form.)")), $where_cd),
 				1, new Gtk::VBox(0, 5),
 				0, gtkset_sensitive(gtkset_usize ($combo_where_cd_device, 200, 20), $where_cd),
 			),
@@ -2527,7 +2527,7 @@ sub system_state {
 		$where_cd and $multi_session and $system_state .= _(" (multi-session)");
 		$where_tape and $system_state .= _("\n- Save to Tape on device : %s", $tape_device);
 		(($where_cd || $where_tape) && $media_erase) and $system_state .= _("\t\tErase=%s", $erase_media);
-		($where_cd || $where_tape) and $system_state .= _("\n");
+		($where_cd || $where_tape) and $system_state .= "\n";
 		
 		$where_net and $system_state .= _("\n- Save via %s on host : %s\n", $net_proto, $host_name);
 		$where_net and $system_state .= _("\t\t user name: %s\n\t\t on path: %s \n", $login_user, $host_path);
@@ -3571,7 +3571,7 @@ sub send_mail_pb {
 			    0, gtkpack_(new Gtk::HBox(0, 15),	
 					0, new Gtk::VBox(0, 5),	
 					0, new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-					0, _("Error duringq sendmail
+					0, _("Error during sendmail
   your report mail was not sent
   Please configure sendmail"),
 					),
@@ -4131,7 +4131,7 @@ Otherwise, you are able to select only one of this
 
  - Incremental Backups:
 
-	The incremental backup is the most powerful
+	The incremental backup is the most powerful 
 	option to use backup, this option allow you 
 	to backup all your data the first time, and 
 	only the changed after.
