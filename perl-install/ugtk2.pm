@@ -42,6 +42,7 @@ use Gtk2::Gdk::Keysyms;
 
 $border = 5;
 
+sub wm_icon() { $wm_icon || $::Wizard_pix_up || "wiz_default_up.png" }
 
 # -=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---=-=---
 #                 wrappers
@@ -372,13 +373,12 @@ sub _create_dialog {
     #- keep compatibility with "transient" now called "transient_for"
     $options->{transient_for} = delete $options->{transient} if $options->{transient};
 
-    my $dialog = gtknew('Dialog', title => $title, 
-			position_policy => 'center-on-parent', # center-on-parent does not work
-			modal => 1,
-			%$options, allow_unknown_options => 1,
-			);
-    may_set_icon($dialog, $wm_icon || $::Wizard_pix_up || "wiz_default_up.png");
-    $dialog;
+    gtknew('Dialog', title => $title, 
+	   position_policy => 'center-on-parent', # center-on-parent does not work
+	   modal => 1,
+	   icon => wm_icon(),
+	   %$options, allow_unknown_options => 1,
+       );
 }
 
 
@@ -833,7 +833,6 @@ sub new {
 
     $o->{isWizard} ||= $::isWizard;
     $o->{isEmbedded} ||= $::isEmbedded;
-    $o->{wm_icon} ||= $wm_icon || $::Wizard_pix_up || "wiz_default_up.png";
 
     $o->{pop_it} ||= $pop_it || !$o->{isWizard} && !$o->{isEmbedded} || $::WizardTable && do {
 	#- do not take into account the DrawingArea
@@ -841,9 +840,13 @@ sub new {
     };
 
     if ($o->{pop_it}) {
-	$o->{rwindow} = _create_window($title);
-	may_set_icon($o->{rwindow}, $o->{wm_icon});
-	$o->{rwindow}->set_position('center-on-parent');
+	$o->{rwindow} = _create_window(
+	    title => $title, 
+	    icon => wm_icon(),
+	    position_policy => $force_center || $o->{force_center} ? 'center_always' : 'center-on-parent',
+	    modal => $grab || $o->{grab} || $o->{modal},
+	    if_($o->{transient} && $o->{transient} =~ /Gtk2::Window/, transient_for => $o->{transient}), 
+	);
 
 	if ($::isInstall) {
 	    gtkadd($o->{rwindow}, 
@@ -853,10 +856,6 @@ sub new {
 	} else {
 	    $o->{window} = $o->{rwindow};
 	}
-	$o->{rwindow}->set_position('center_always') if $force_center || $o->{force_center};
-	$o->{rwindow}->set_modal(1) if $grab || $o->{grab} || $o->{modal};
-	$o->{rwindow}->set_transient_for($o->{transient}) if $o->{transient} && $o->{transient} =~ /Gtk2::Window/;
-
     } else {
 	$o->{rwindow} = $o->{window} = gtknew('VBox', border_width => $::Wizard_splash ? 0 : 10);
 	set_main_window_size($o);
@@ -865,11 +864,11 @@ sub new {
 
 	if (!$::Plug && $o->{isEmbedded}) {
 	    $::Plug = $::WizardWindow = gtkshow(Gtk2::Plug->new($::XID));
-	    may_set_icon($::Plug, $o->{wm_icon});
+	    may_set_icon($::Plug, wm_icon());
 	    flush();
 	    gtkadd($::Plug, $::WizardTable);
 	} elsif (!$::WizardWindow) {
-	    $::WizardWindow = _create_window($title);
+	    $::WizardWindow = _create_window(title => $title);
 	    gtkadd($::WizardWindow, gtknew('Frame', shadow_type => 'out', child => $::WizardTable));
 
 	    if ($::isInstall) {
@@ -886,9 +885,9 @@ sub new {
 		});
 	    } elsif (!$o->{isEmbedded}) {
 		$::WizardWindow->set_position('center_always') if !$::isStandalone;
-		eval { gtkpack__($::WizardTable, Gtk2::Banner->new($::Wizard_pix_up || $wm_icon || "wiz_default_up.png", $::Wizard_title)) };
+		eval { gtkpack__($::WizardTable, Gtk2::Banner->new(wm_icon(), $::Wizard_title)) };
 		$@ and log::l("ERROR: missing wizard banner");
-		may_set_icon($::WizardWindow, $o->{wm_icon});
+	may_set_icon($::WizardWindow, wm_icon());
 	    }
 	    $::WizardWindow->show;
 	}
@@ -950,12 +949,13 @@ sub exit {
 END { &exit() }
 
 sub _create_window {
-    my ($title) = @_;
-    my $w = gtknew('Window');
-    $w->set_border_width(5) if !$::isInstall && !$::isWizard;
+    my (%options) = @_;
 
-    $w->set_name("Title");
-    $w->set_title($title || '');
+    add2hash(\%options, {
+	     if_(!$::isInstall && !$::isWizard, border_width => 5),
+	     widget_name => 'Title',
+	 });
+    my $w = gtknew('Window', %options);
 
     if ($force_focus) {
 	(my $previous_current_window, $ugtk2::current_window) = ($ugtk2::current_window, $w);
