@@ -440,7 +440,7 @@ sub build_notebook {
 		      if_($interface =~ /^(isdn|modem)$/, [ N("Provider phone number"), $1 eq 'modem' ? 'phone' : 'phone_out' ]),
 		     ),
 		);
-	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP"));
+	$gui->{intf}{auth}->set_popdown_strings(N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP"));
 	$gui->{intf}{passwd}->set_visibility(0);
     }
     
@@ -912,7 +912,7 @@ Please run \"Internet access\" in control center."));
 		     [ N("Phone number"), \$cnx->{phone} ],
 		     [ N("Login ID"), \$cnx->{login} ],
 		     [ N("Password"), \$cnx->{passwd} ],
-		     [ N("Authentication"), \$cnx->{auth}, [ N("PAP"), N("Terminal-based"), N("Script-based"), N_("CHAP") ] ],
+		     [ N("Authentication"), \$cnx->{auth}, [ N("PAP"), N("Terminal-based"), N("Script-based"), N("CHAP") ] ],
 		     [ N("Domain name"), \$cnx->{domain} ],
 		     [ N("First DNS Server (optional)"), \$cnx->{dns1} ],
 		     [ N("Second DNS Server (optional)"), \$cnx->{dns2} ],
