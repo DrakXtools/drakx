@@ -122,7 +122,7 @@ sub ask {
 			     values => $on_services,
 			     sort => 1,
 			    });
-    my $W = my_gtk->new(_("Resolution"));
+    my $W = my_gtk->new(_("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
     my $display = sub { $nopop->(); $_[0] and gtkmove(gtkshow(gtkadd($w_popup=new Gtk::Window (-popup),
