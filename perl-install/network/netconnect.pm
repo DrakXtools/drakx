@@ -321,7 +321,7 @@ If you don't want to use the auto detection, deselect the checkbox.
                             $netcnx->{isdn_external}{special_command} = 'AT&F&O2B40';
                             require network::modem;
                             $modem = $netcnx->{isdn_external};
-                            return "ppp_choose";
+                            return "ppp_account";
                         };
 
                     },
@@ -376,7 +376,7 @@ Take a look at http://www.linmodems.org"),
                         $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
                         print "Interface is $ntf_name\n";
 
-                        return "ppp_choose" if $ntf_name =~ m!^/dev/!;
+                        return "ppp_account" if $ntf_name =~ m!^/dev/!;
                         return "choose_serial_port" if !$ntf_name;
 
                         my %relocations = (ltmodem => $in->do_pkgs->check_kernel_module_packages('ltmodem'));
@@ -398,7 +398,7 @@ Take a look at http://www.linmodems.org"),
                         #$type eq 'ltmodem' and $netc->{autodetect}{modem} = '/dev/ttyS14';
 
                         #- fallback to modem configuration (beware to never allow test it).
-                        return "ppp_choose";
+                        return "ppp_account";
                     },
                    },
 
@@ -414,10 +414,10 @@ Take a look at http://www.linmodems.org"),
                         [ { var => \$modem->{device}, format => \&mouse::serial_port2text, type => "list",
                             list => [ grep { $_ ne $o_mouse->{device} } (if_(-e '/dev/modem', '/dev/modem'), mouse::serial_ports()) ] } ],
                         },
-                    next => "ppp_choose",
+                    next => "ppp_account",
                    },
 
-                   ppp_choose =>
+                   ppp_account =>
                    {
                     pre => sub {
                         $mouse ||= {};
