@@ -131,7 +131,7 @@ $notebook->append_page(gtkshow(gtkpack(new Gtk2::VBox(0, 0),
                                                         [ new Gtk2::Label(N("Security Alerts:")), 
                                                           my $secadmin_check = new Gtk2::CheckButton ],
                                                         [ new Gtk2::Label(N("Security Administrator:")),
-                                                          my $secadmin_entry = new Gtk2::Entry($msec->get_check_value("MAIL_USER")) ]))),
+                                                          my $secadmin_entry = Gtk2::Entry->new_with_text($msec->get_check_value("MAIL_USER")) ]))),
                                new Gtk2::Label(N("Basic")));
                        
 $secadmin_check->set_active(1) if $msec->get_check_value("MAIL_WARN") eq "yes";
