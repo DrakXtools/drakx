@@ -152,8 +152,8 @@ sub setupSCSI { setup_thiskind($_[0], 'scsi', $_[1], $_[2]) }
 sub ask_mntpoint_s {
     my ($o, $fstab) = @_;
     my @fstab = grep { isExt2($_) } @$fstab;
-    @fstab = grep { !isSwap($_) } @$fstab if @fstab == 0;
-    @fstab = @$fstab if @fstab == 0;
+    @fstab = grep { isSwap($_) } @$fstab if @fstab == 0;
+#    @fstab = @$fstab if @fstab == 0;
     die _("no available partitions") if @fstab == 0;
 
     my $msg = sub { "$_->{device} " . _("(%dMb)", $_->{size} / 1024 / 2) };
@@ -889,8 +889,6 @@ _("Some steps are not completed.
 
 Do you really want to quit now?"), 0);
 
-    $o->SUPER::exitInstall;
-
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
@@ -900,6 +898,8 @@ consult the Errata available from http://www.linux-mandrake.com/.
 
 Information on configuring your system is available in the post
 install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone && !$::g_auto_install;
+
+    $o->SUPER::exitInstall;
 }
 
 

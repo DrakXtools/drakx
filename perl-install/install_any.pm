@@ -21,6 +21,7 @@ use partition_table_raw;
 use devices;
 use fsedit;
 use network;
+use modules;
 use lilo;
 use detect_devices;
 use pkgs;
@@ -333,8 +334,10 @@ sub killCardServices {
 
 sub ejectCdrom() {
     cat_("/proc/mounts") =~ m|/tmp/(\S+)\s+/tmp/rhimage|;
-    my $f = eval { detect_devices::tryOpen($1) } or next;
-    ioctl $f, c::CDROM_LOCKDOOR(), 0;
+    my $f = eval { detect_devices::tryOpen($1) } or return;
+    getFile("XXX"); #- close still opened filehandle
+    eval { fs::umount("/tmp/rhimage") };
+    ioctl $f, c::CDROM_LOCKDOOR(), 0; #- in case the umount fails...
     ioctl $f, c::CDROMEJECT(), 1;
 }
 
@@ -406,7 +409,7 @@ sub loadO {
 	-e $f or $f .= ".pl";
 	$o = loadO($O, $f);
 	fs::umount("/mnt") unless $::testing;
-	eval { run_program::run("rmmod", "vfat") };
+	modules::unload($_) foreach qw(vfat fat);
     } else {
 	-e $f or $f .= ".pl";
 	{
@@ -414,10 +417,11 @@ sub loadO {
 	    open F, $f or die _("Error reading file $f");
 
 	    local $/ = "\0";
+	    no strict;
 	    eval <F>;
 	}
 	$@ and log::l _("Bad kickstart file %s (failed %s)", $f, $@);
-	add2hash_($o, $O);
+	add2hash_($o ||= {}, $O);
     }
     bless $o, ref $O;
 }

@@ -533,7 +533,7 @@ sub main {
 	add2hash(network::findIntf($o->{intf} ||= [], $l->{DEVICE}), $l);
     }
 
-    eval { run_program::run("rmmod", "vfat") };
+    modules::unload($_) foreach qw(vfat msdos fat);
     modules::load_deps("/modules/modules.dep");
     modules::read_stage1_conf("/tmp/conf.modules");
     modules::read_already_loaded();

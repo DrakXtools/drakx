@@ -12,6 +12,7 @@ use pci_probing::main;
 use detect_devices;
 use run_program;
 use commands;
+use modules;
 use log;
 
 my @mouses_fields = qw(nbuttons device MOUSETYPE XMOUSETYPE FULLNAME);
@@ -91,7 +92,7 @@ sub detect() {
     my %l;
     eval { commands::modprobe("serial") };
     @l{qw(FULLNAME nbuttons MOUSETYPE XMOUSETYPE device)} = split("\n", `mouseconfig --nointeractive 2>/dev/null`) and return \%l;
-    eval { run_program::run("rmmod", "serial") };
+    modules::unload("serial");
 
     if (my ($c) = pci_probing::main::probe("SERIAL_USB")) {
 	eval { modules::load($c->[1], 'usbmouse') };

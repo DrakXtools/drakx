@@ -35,4 +35,15 @@ clean:
 	for i in $(DIRS); do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
+upload: tar install
+	touch /tmp/mdkinst_done
+	rm ~/gi/*_ks.img
+	cd /export/Mandrake ; tar cfz mdkinst.tgz mdkinst
+
+#	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/cooker/images ; mput ~/gi/gi_*.img ;"
+	lftp -c "open -u devel mandrakesoft.com; cd ~/tmp ; put /export/Mandrake/mdkinst.tgz ; put /tmp/mdkinst_done ; cd ~/cooker/cooker/Mandrake/base ; put /export/Mandrake/base/mdkinst_stage2.gz ; put ~/gi/perl-install/compss ; put ~/gi/perl-install/compssList ; put ~/gi/perl-install/compssUsers "
+#	lftp -c "open -u devel mandrakesoft.com; cd ~/cooker/contrib/others/src ; put ~/gi.tar.bz2"
+	rm -f /export/Mandrake/mdkinst.tgz
+	rm -f /tmp/mdkinst_done
+
 # mkisofs -R -b images/gi_cdrom.img -c images/.catalog /tmp/r /mnt/disk/ | cdrecord -v -eject speed=6 dev=1,0 -
