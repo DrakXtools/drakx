@@ -333,20 +333,6 @@ sub setPackages {
     if (!$o->{packages} || is_empty_hash_ref($o->{packages}{names})) {
 	$o->{packages} = pkgs::psUsingHdlists($o->{prefix}, $o->{method});
 
-	push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
-	push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-	push @{$o->{default_packages}}, "kernel-enterprise" if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
-	push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
-	push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
-	push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
-	push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
-	push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
-	push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
-	push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
-
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages},
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
@@ -358,55 +344,78 @@ sub setPackages {
 	pkgs::read_rpmsrate($o->{packages}, getFile("Mandrake/base/rpmsrate"));
 	($o->{compssUsers}, $o->{compssUsersSorted}) = pkgs::readCompssUsers($o->{meta_class});
 
-	if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
-	    $o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
-	}
-	if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
-	    #- by default, choose:
-	    $o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
-	    $o->{compssUsersChoice}{$_} = 1 
-	      foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
-	}
-	$o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
-	$o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
-	$o->{compssUsersChoice}{SYSTEM} = 1;
-	$o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
-	$o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
-	$o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
-	$o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-	$o->{compssUsersChoice}{'3D'} = 1 if 
-	    detect_devices::matching_desc('Matrox.* G[245][05]0') ||
-	    detect_devices::matching_desc('Riva.*128') ||
-	    detect_devices::matching_desc('Rage X[CL]') ||
-	    detect_devices::matching_desc('Rage Mobility [PL]') ||
-	    detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
-	    detect_devices::matching_desc('Voodoo [35]') ||
-	    detect_devices::matching_desc('Voodoo Banshee') ||
-	    detect_devices::matching_desc('8281[05].* CGC') ||
-	    detect_devices::matching_desc('Rage 128') ||
-	    detect_devices::matching_desc('Radeon ') ||
-	    detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
-	    detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
-	    detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
-	    detect_devices::matching_desc('[nN]Vidia.*GeForce') || #- GeForce cards
-	    detect_devices::matching_desc('[nN]Vidia.*NV1[15]') ||
-	    detect_devices::matching_desc('[nN]Vidia.*Quadro');
-
-
-	foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
-	    pkgs::packageByName($o->{packages}, "locales-$_") or next;
-	    push @{$o->{default_packages}}, "locales-$_";
-	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
-	}
-	foreach (lang::langsLANGUAGE($o->{langs})) {
-	    $o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
-	}
-	$o->{compssUsersChoice}{'CHARSET"' . lang::lang2charset($o->{lang}) . '"'} = 1;
+	#- preselect default_packages and compssUsersChoices.
+	setDefaultPackages($o);
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
 	pkgs::psUpdateHdlistsDeps($o->{prefix}, $o->{method});
     }
+}
+
+sub setDefaultPackages {
+    my ($o) = @_;
+
+    delete $o->{$_} foreach qw(default_packages compssUsersChoice); #- clean modified variables.
+
+    push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
+    push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
+    push @{$o->{default_packages}}, "kernel-enterprise" if !$::oem && (availableRamMB() > 800) && (arch() !~ /ia64/);
+    push @{$o->{default_packages}}, "kernel22" if !$::oem && c::kernel_version() =~ /^\Q2.2/;
+    push @{$o->{default_packages}}, "kernel-smp" if detect_devices::hasSMP();
+    push @{$o->{default_packages}}, "raidtools" if !is_empty_array_ref($o->{all_hds}{raids});
+    push @{$o->{default_packages}}, "lvm" if !is_empty_array_ref($o->{all_hds}{lvms});
+    push @{$o->{default_packages}}, "usbd", "hotplug" if modules::get_alias("usb-interface");
+    push @{$o->{default_packages}}, "reiserfsprogs" if grep { isThisFs("reiserfs", $_) } @{$o->{fstab}};
+    push @{$o->{default_packages}}, "xfsprogs" if grep { isThisFs("xfs", $_) } @{$o->{fstab}};
+    push @{$o->{default_packages}}, "jfsprogs" if grep { isThisFs("jfs", $_) } @{$o->{fstab}};
+    push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
+    push @{$o->{default_packages}}, "imwheel" if $o->{mouse}{nbuttons} > 3;
+
+    if ($::auto_install && $o->{compssUsersChoice}{ALL}) {
+	$o->{compssUsersChoice}{$_} = 1 foreach map { @{$o->{compssUsers}{$_}{flags}} } @{$o->{compssUsersSorted}};
+    }
+    if (!$o->{compssUsersChoice} && !$o->{isUpgrade}) {
+	#- by default, choose:
+	$o->{compssUsersChoice}{$_} = 1 foreach 'GNOME', 'KDE', 'CONFIG', 'X';
+	$o->{compssUsersChoice}{$_} = 1 
+	  foreach map { @{$o->{compssUsers}{$_}{flags}} } 'Workstation|Office Workstation', 'Workstation|Internet station';
+    }
+    $o->{compssUsersChoice}{uc($_)} = 1 foreach grep { modules::get_that_type($_) } ('tv', 'scanner', 'photo', 'sound');
+    $o->{compssUsersChoice}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
+    $o->{compssUsersChoice}{SYSTEM} = 1;
+    $o->{compssUsersChoice}{BURNER} = 1 if detect_devices::burners();
+    $o->{compssUsersChoice}{DVD} = 1 if detect_devices::dvdroms();
+    $o->{compssUsersChoice}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
+    $o->{compssUsersChoice}{HIGH_SECURITY} = 1 if $o->{security} > 3;
+    $o->{compssUsersChoice}{'3D'} = 1 if 
+      detect_devices::matching_desc('Matrox.* G[245][05]0') ||
+      detect_devices::matching_desc('Riva.*128') ||
+      detect_devices::matching_desc('Rage X[CL]') ||
+      detect_devices::matching_desc('Rage Mobility [PL]') ||
+      detect_devices::matching_desc('3D Rage (?:LT|Pro)') ||
+      detect_devices::matching_desc('Voodoo [35]') ||
+      detect_devices::matching_desc('Voodoo Banshee') ||
+      detect_devices::matching_desc('8281[05].* CGC') ||
+      detect_devices::matching_desc('Rage 128') ||
+      detect_devices::matching_desc('Radeon ') ||
+      detect_devices::matching_desc('[nN]Vidia.*T[nN]T2') || #- TNT2 cards
+      detect_devices::matching_desc('[nN]Vidia.*NV[56]') ||
+      detect_devices::matching_desc('[nN]Vidia.*Vanta') ||
+      detect_devices::matching_desc('[nN]Vidia.*GeForce') || #- GeForce cards
+      detect_devices::matching_desc('[nN]Vidia.*NV1[15]') ||
+      detect_devices::matching_desc('[nN]Vidia.*Quadro');
+
+
+    foreach (map { substr($_, 0, 2) } lang::langs($o->{langs})) {
+	pkgs::packageByName($o->{packages}, "locales-$_") or next;
+	push @{$o->{default_packages}}, "locales-$_";
+	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1; #- mainly for zh in case of zh_TW.Big5
+    }
+    foreach (lang::langsLANGUAGE($o->{langs})) {
+	$o->{compssUsersChoice}{qq(LOCALES"$_")} = 1;
+    }
+    $o->{compssUsersChoice}{'CHARSET"' . lang::lang2charset($o->{lang}) . '"'} = 1;
 }
 
 sub unselectMostPackages {
