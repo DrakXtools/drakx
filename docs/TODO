@@ -1,7 +1,4 @@
 -URGENT---------------------------------------------------------------------------------
-compssList
-compssUsers
-
 check for fpons/pixel BOTH that resize_fat is clean for current version
 relative to 7.0-2.
 
@@ -11,8 +8,6 @@ partition is Ok (fixme? allow primary partition inside extended one, but with
 warning on diskdrake startup, made them as warning ?).
 
 -features-------------------------------------------------------------------------------
-handle NT (add entry for it in lilo, put it in fstab)
-
 (NEED 7.1) auto-install for corporate, very important (need consolidation).
 
 (7.1 or later) clean SCSI CDROM autoboot.
@@ -28,11 +23,6 @@ PPPoE install and configuration (SuSE includes it, DHCP-like)
 (7.1)standalone applications for configuration (netdrake, timetool, authentificationconf, soundcard)
 (7.1) improve printerdrake to at least have the same functionalities as printtool.
 
-(7.1, other persons)rescue: 
-- small modification for stage1 to get the rescue stage2
-- create a stage2 with many tools (fdisk, bash...)
-the rescue could be on another cd (if multi-cd)
-! care must be taken about modules (if ide is in module...)
 
 ----
 (7.2 or later)horizontal sub-steps
@@ -195,6 +185,8 @@ hibernation on laptop -> clock not restored
 possibility to specify the mouse
 
 -(?)---------------------------------------------------------------------------------
+(?) handle NT (add entry for it in lilo, put it in fstab)
+
 (?) lilo-0.22-19mdk is buggy with boot=/dev/hde & root=/dev/sda13, it needs
 disk=/dev/hde bios=0x80 & disk=/dev/sda bios=0x81
 
@@ -504,3 +496,9 @@ already hda1 with /boot/vmlinuz
 (done)crypto: add a cancel & progress bar while downloading
 (done)error handling (like reading hdlist)
 (done)(7.1)progression bar on crypto.
+
+(done, daouda&pix,7.1, other persons)rescue: 
+- small modification for stage1 to get the rescue stage2
+- create a stage2 with many tools (fdisk, bash...)
+the rescue could be on another cd (if multi-cd)
+! care must be taken about modules (if ide is in module...)

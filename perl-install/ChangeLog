@@ -1,5 +1,11 @@
 2000-04-25  Pixel  <pixel@mandrakesoft.com>
 
+	* lilo.pm (suggest): moved the generation of the keytable here. It
+	is used by both lilo & grub (lilo is not always installed as was
+	assumed)	
+
+	* common.pm (formatAlaTeX): remove bounding spaces
+
 	* pkgs.pm (setSelectedFromCompssList): remove the hack for min
 	mark 25 in beginner
 	* install_steps_interactive.pm (choosePackages): set $min_mark to

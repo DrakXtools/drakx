@@ -330,7 +330,7 @@ sub formatAlaTeX($) {
 	    $t .= ($t && "\n") . $tmp;
 	    $tmp = '';
 	} else {
-	    $tmp = ($tmp && "$tmp ") . $_;
+	    $tmp = ($tmp && "$tmp ") . first(/^\s*(.*?)\s*$/);
 	}
     }
     $t . ($t && $tmp && "\n") . $tmp;
