@@ -42,7 +42,7 @@ sub unquotify {
 }
 
 sub read_secret_backend() {
-    my $conf;
+    my $conf = [];
     foreach my $i ("pap-secrets", "chap-secrets") {
 	foreach (cat_("$prefix/etc/ppp/$i")) {
 	    my ($login, $server, $passwd) = split(' ');
