@@ -56,6 +56,9 @@ install:
 	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu32.png $(ICONSDIR)/harddrake.png
 	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu48.png $(ICONSDIR)/large/harddrake.png
 	mv $(LIBDEST)/icons/harddrake2/menu/harddrake-menu16.png $(ICONSDIR)/mini/harddrake.png
+	mv $(LIBDEST)/icons/localedrake-32.png $(ICONSDIR)/localedrake.png
+	mv $(LIBDEST)/icons/localedrake-48.png $(ICONSDIR)/large/localedrake.png
+	mv $(LIBDEST)/icons/localedrake-16.png $(ICONSDIR)/mini/localedrake.png
 	rmdir $(LIBDEST)/icons/harddrake2/menu
 	mv $(LIBDEST)/icons/harddrake2/ $(DATADIR)/pixmaps/
 	mv $(SBINDEST)/service_harddrake.sh $(INITDIR)/harddrake

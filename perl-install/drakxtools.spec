@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 24mdk
+Release: 25mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -182,12 +182,13 @@ perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 mkdir -p $RPM_BUILD_ROOT/%_menudir
 
 cat > $RPM_BUILD_ROOT%_menudir/drakxtools-newt <<EOF
-?package(drakxtools-newt):\
-	needs="X11"\
-	section="Configuration/Other"\
-	title="LocaleDrake"\
-	longtitle="Language configurator"\
-	command="/usr/bin/localedrake"\
+?package(drakxtools-newt): \
+	needs="X11" \
+	section="System/Configuration/Other" \
+	title="LocaleDrake" \
+	longtitle="Language configurator" \
+	command="/usr/bin/localedrake" \
+	icon="localedrake.png"
 
 EOF
  
@@ -280,6 +281,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %_menudir/drakxtools-newt
 %doc diskdrake/diskdrake.html
 %attr(4755,root,root) %_sbindir/fileshareset
+%_iconsdir/localedrake.png
+%_iconsdir/large/localedrake.png
+%_iconsdir/mini/localedrake.png
 
 %files -f %{name}-gtk.list
 %defattr(-,root,root)
@@ -317,6 +321,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 18 2004 David Baudens <baudens@mandrakesoft.com> 10-25mdk
+- Add missing icons for localedrake menu entry
+
 * Wed Mar 17 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-24mdk
 - set window icon
 - diskdrake: (pixel)
