@@ -1511,6 +1511,12 @@ sub get_path_str {
     $path->to_string;
 }
 
+sub iter_each_children {
+    my ($model, $iter, $f) = @_;
+    for (my $child = $model->iter_children($iter); $child; $child = $model->iter_next($child)) {
+	$f->($child);
+    }
+}
 
 package Gtk2::TreeView;
 # likewise gtk-1.2 function
