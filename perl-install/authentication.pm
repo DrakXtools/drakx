@@ -52,28 +52,12 @@ sub ask_parameters {
     }
 
     if ($kind eq 'LDAP') {
-	$authentication->{LDAP_server} ||= $netc->{HOSTNAME};
-	$authentication->{LDAP_users_db} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
-
-	my %scope = my @scope = (
-		scope_one => "one",
-		scope_base => "base",
-		scope_sub => "sub",
-		);
-	
-	#$netc->{LDAPDOMAIN} = $s;
+	$authentication->{LDAP_server} ||= 'ldap.' . $netc->{DOMAINNAME};
+	$netc->{LDAPDOMAIN} ||= domain_to_ldap_domain($netc->{DOMAINNAME});
 	$in->ask_from('',
-		     "\n" . N("Authentication LDAP") . "\n",
-		     [ { label => "\n" . N("Server Information:") },
-		     { label => "\t" . N("LDAP Server") . "\n", val => \$authentication->{LDAP_server} },
-		     { label => "\t" . N("Use SSL connection"), val => \$authentication->{LDAP_ssl}, type => 'bool' },
-		     { label => "\n" . N("User Base:") },
-		     { label => "\t" . N("Base:"), val => \$authentication->{LDAP_users_db} },
-		     { label => "\t" . N("Scope:") . "\n", val => \$authentication->{LDAP_scope}, list => [map { $_->[0] } group_by2(@scope)], format => sub { $scope{$_[0]} } },
-		     { label => "\n" . N("Bind Server:") . "\n" },
-		     { label => "\t" . N("Use Anonymous Bind"), val => \$anonymous, type => 'bool' },
-		     { label => "\t" . N("Distinguished Name"), val => \$authentication->{LDAP_user}, disabled => sub { $anonymous } },
-		     { label => "\t" . N("Password") . "\n", val => \$authentication->{LDAP_passwd}, disabled => sub { $anonymous } },
+		     N("Authentication LDAP"),
+		     [ { label => N("LDAP Base dn"), val => \$netc->{LDAPDOMAIN} },
+		       { label => N("LDAP Server"), val => \$authentication->{LDAP_server} },
 		     ]) or return;
     } elsif ($kind eq 'AD') {
 	
@@ -100,9 +84,9 @@ sub ask_parameters {
 		     [ { label => N("Domain"), val => \$authentication->{AD_domain} },
 		     #{ label => N("Server"), val => \$authentication->{AD_server} },
 		       { label => N("Server"), type => 'combo', val => \$authentication->{AD_server}, list => \@srvs , not_edit => 0 },
-		       { label => N("Users database"), val => \$authentication->{AD_users_db} },
+		       { label => N("LDAP users database"), val => \$authentication->{AD_users_db} },
 		       { label => N("Use Anonymous BIND "), val => \$anonymous, type => 'bool' },
-		       { label => N("User allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
+		       { label => N("LDAP user allowed to browse the Active Directory"), val => \$AD_user, disabled => sub { $anonymous } },
 		       { label => N("Password for user"), val => \$authentication->{AD_password}, disabled => sub { $anonymous } },
 		       { label => N("Encryption"), val => \$authentication->{sub_kind}, list => [ map { $_->[0] } group_by2(@sub_kinds) ], format => sub { $sub_kinds{$_[0]} } },
 		     ]) or return;
@@ -161,34 +145,22 @@ sub set {
     if ($kind eq 'LDAP') {
 	$in->do_pkgs->install(qw(openldap-clients nss_ldap pam_ldap autofs));
 
-       my $domain = $netc->{LDAPDOMAIN} || do {
-           my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
-           first($s =~ /namingContexts: (.+)/);
-       } or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;	
-	
-	if ($authentication->{LDAP_ssl} eq 'on') {
-		my $port = '636';
-	} else {
-		my $port = '389';
-	};
-	
-	my $scope = {
-		scope_base => 'base',
-		scope_one => 'one',
-		scope_sub => 'sub',
-	}->{$authentication->{LDAP_scope}};
-	
+	my $domain = $netc->{LDAPDOMAIN} || do {
+	    my $s = run_program::rooted_get_stdout($::prefix, 'ldapsearch', '-x', '-h', $authentication->{LDAP_server}, '-b', '', '-s', 'base', '+');
+	    first($s =~ /namingContexts: (.+)/);
+	} or log::l("no ldap domain found on server $authentication->{LDAP_server}"), return;
+
 	set_nsswitch_priority('ldap');
 	set_pam_authentication('ldap');
 
 	update_ldap_conf(
 			 host => $authentication->{LDAP_server},
-			 base => $authentication->{LDAP_users_db},
-			 port => $port,
-			 scope => $scope,
-			 nss_base_shadow => $authentication->{LDAP_users_db}."?".$scope,
-			 nss_base_passwd => $authentication->{LDAP_users_db}."?".$scope,
-			 nss_base_group => $authentication->{LDAP_users_db}."?".$scope,
+			 base => $domain,
+			 port => 636,
+			 ssl => 'on',
+			 nss_base_shadow => "ou=People,$domain",
+			 nss_base_passwd => "ou=People,$domain",
+			 nss_base_group => "ou=Group,$domain",
 			);
     } elsif ($kind eq 'AD') {
 	$in->do_pkgs->install(qw(nss_ldap pam_krb5 libsasl2-plug-gssapi));
