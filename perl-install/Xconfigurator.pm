@@ -1098,13 +1098,13 @@ Would you like X to start when you reboot?"), 1);
 	    $l{uid} > 500, $l{name};
 	} cat_("$o->{prefix}/etc/passwd");
 
-	autologin($prefix, $o, $in, $allowFB, $isLaptop, $install);
+	autologin($prefix, $o, $in, $allowFB, $isLaptop, $install, @users);
     }
 }
 
 sub autologin {
     my ($o, $allowFB);
-    ($prefix, $o, $in, $allowFB, $isLaptop, $install) = @_;
+    ($prefix, $o, $in, $allowFB, $isLaptop, $install, @users) = @_;
     $o ||= {};
     unless (($::auto && $o->{skiptest}) || !@users || $o->{authentication}{NIS}) {
 	my $cmd = $prefix ? "chroot $prefix" : "";
