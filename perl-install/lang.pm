@@ -504,7 +504,9 @@ my %gtkqt_im =
              XMODIFIERS => '@im=fcitx',
             },
    'im-ja' => {
-               GTK_IM_MODULE => 'im-ja',  # 'im-ja-xim-server',
+               GTK_IM_MODULE => 'im-ja',
+               XIM => 'im-ja-xim-server',
+               XIM_PROGRAM => 'im-ja-xim-server',
                XMODIFIERS => '@im=im-ja-xim-server',
               },
 
@@ -956,7 +958,7 @@ sub read {
     my $locale = system_locales_to_ourlocale($h{LC_MESSAGES} || 'en_US', $h{LC_MONETARY} || 'en_US');
     
     if ($h{XIM_PROGRAM}) {
-	$locale->{IM} = find { $gtkqt_im{$_}{XIM_PROGRAM} eq $locale->{XIM_PROGRAM} } keys %gtkqt_im;
+	$locale->{IM} = find { $gtkqt_im{$_}{XIM_PROGRAM} eq $h{XIM_PROGRAM} } keys %gtkqt_im;
     }
     $locale;
 }
