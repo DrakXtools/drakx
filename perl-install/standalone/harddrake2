@@ -123,6 +123,7 @@ $in = 'interactive'->vnew('su', 'default');
 
 # Build the gui
 add_icon_path('/usr/share/pixmaps/harddrake2/');
+$::noBorder = 1;
 $w = ugtk2->new(N("Harddrake2 version ") . $harddrake::data::version);
 $::main_window = $w->{rwindow} unless $::isEmbedded;
 my ($menubar, $factory);
