@@ -24,7 +24,7 @@ tags:
 clean:
 	test ! -e c/Makefile || $(MAKE) -C c clean
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
-	rm -f c/c.xs gendepslist
+	rm -rf c/c.xs gendepslist ../diskdrake*
 	find . -name "*~" -o -name "TAGS" -o -name "*.old" | xargs rm -f
 
 tar: clean
