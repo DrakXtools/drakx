@@ -237,55 +237,35 @@ sub gateway {
 sub configureNetwork {
     my ($prefix, $netc, $in, $pcmcia, $intf, $first_time) = @_;
     local $_;
-    if (@{$intf} > 0 && $first_time) {
-	my @l = (
-		 __("Keep the current IP configuration"),
-		 __("Reconfigure network now"),
-		 __("Do not set up networking"),
-		);
-	$_ = $::beginner ? "Keep" : 
-	  $in->ask_from_list_([ _("Network Configuration") ],
-			       _("Local networking has already been configured. Do you want to:"),
-			     [ @l ]) || "Do not";
-    } else {
-	$_ = (!$::beginner || any::setup_thiskind($in, 'net', 1, 0, $pcmcia)) &&
-	  $in->ask_yesorno([ _("Network Configuration") ],
-			   _("Do you want to configure a local network for your system?"), 0) ? "Local LAN" : "Do not";
+    any::setup_thiskind($in, 'net', !$::expert, 1, $pcmcia);
+    my @l = detect_devices::getNet() or die _("no network card found");
+
+    my $last; foreach ($::beginner ? $l[0] : @l) {
+	my $intf2 = findIntf($intf ||= [], $_);
+	add2hash($intf2, $last);
+	add2hash($intf2, { NETMASK => '255.255.255.0' });
+	configureNetworkIntf($in, $intf2) or last;
+
+	$netc ||= {};
+	delete $netc->{dnsServer};
+	delete $netc->{GATEWAY};
+	$last = $intf2;
     }
-    if (/^Do not/) {
-	$netc->{NETWORKING} = "false";
-    } elsif (!/^Keep/) {
-	any::setup_thiskind($in, 'net', !$::expert, 1, $pcmcia);
-	my @l = detect_devices::getNet() or die _("no network card found");
-
-	my $last; foreach ($::beginner ? $l[0] : @l) {
-	    my $intf2 = findIntf($intf ||= [], $_);
-	    add2hash($intf2, $last);
-	    add2hash($intf2, { NETMASK => '255.255.255.0' });
-	    configureNetworkIntf($in, $intf2) or last;
-
-	    $netc ||= {};
-	    delete $netc->{dnsServer};
-	    delete $netc->{GATEWAY};
-	    $last = $intf2;
-	}
-	#-	  {
-	#-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
-	#-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
-	#-	  }
-	if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
-	    $in->ask_from_entries_ref(_("Configuring network"),
+    #-	  {
+    #-	      my $wait = $o->wait_message(_("Hostname"), _("Determining host name and domain..."));
+    #-	      network::guessHostname($o->{prefix}, $o->{netc}, $o->{intf});
+    #-	  }
+    if ($last->{BOOTPROTO} =~ /^(dhcp|bootp)$/) {
+	$in->ask_from_entries_ref(_("Configuring network"),
 _("Please enter your host name if you know it.
 Some DHCP servers require the hostname to work.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''."),
-			     [_("Host name:")], [ \$netc->{HOSTNAME} ]);
-	} else {
-	    configureNetworkNet($in, $netc, $last ||= {}, @l);
-	}
-	miscellaneousNetwork($in);
+				  [_("Host name:")], [ \$netc->{HOSTNAME} ]);
+    } else {
+	configureNetworkNet($in, $netc, $last ||= {}, @l);
     }
-    configureNetwork2($in, $prefix, $netc, $intf);
+    miscellaneousNetwork($in);
 }
 
 sub miscellaneousNetwork {
