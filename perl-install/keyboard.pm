@@ -512,13 +512,13 @@ sub check {
     require lang;
     $^W = 0;
 
-    my $ok = 0;
+    my $not_ok = 0;
     my $warn = sub {
 	print STDERR "$_[0]\n";
     };
     my $err = sub {
 	&$warn;
-	$ok = 1;
+	$not_ok = 1;
     };
 
     if (my @l = grep { is_empty_array_ref(lang2keyboards($_)) } lang::list()) {
@@ -550,7 +550,7 @@ sub check {
 
     loadkeys_files($err);
 
-    exit($ok);
+    exit($not_ok);
 }
 
 1;
