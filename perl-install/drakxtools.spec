@@ -1,7 +1,7 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10.1
-Release: 0.10mdk
+Release: 0.11mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
@@ -326,6 +326,24 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Aug 19 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.11mdk
+- drakconnect: use mac_ieee1394 descriptor in iftab for firewire links
+  (WIP) (oblin)
+- fix drakxtools build for ppc & sparc
+- keyboarddrake: fix it not modifying xkb (pixel)
+- printerdrake:
+  o fix crash
+  o prevent potential crashes (blino)
+  o do not ignore some internal errors (blino)
+  o fix unloaded "usblp" kernel module before local printer
+    auto-detection (blino)
+  o do not install anymore gimpprint (included in gimp2_0) (till) 
+  o do not configure GIMP and OpenOffice.org which were patched so
+    that they do not need anymore to be configured regarding print
+    queues (till)
+  o text fix for scanners in HP's multi-function devices (till)
+- service_harddrake: check usb controllers on boot (oblin)
+
 * Wed Aug 18 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10.1-0.10mdk
 - drakconnect (oblin):
   o do not write 'ifcfg-Manually load a driver' file
