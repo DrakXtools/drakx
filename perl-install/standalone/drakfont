@@ -152,14 +152,13 @@ sub search_dir_font {
 		push @font_list_tmp, "$fn";
 	    }
 	}
-
 	print "Fonts in directory  : ".$_."\n" foreach (@font_list_tmp);
 #	@font_list = grep !$_, @font_list_tmp foreach @installed_fonts;
 
 
 	foreach my $i (@installed_fonts) {
 	    foreach my $j (@font_list_tmp) {
-		if ( $i =~ /$j/) { push @font_list, "$i" ;}
+		if ( $j =~ /$i/) { push @font_list, "$i" ;}
 	    }
 	}
 
