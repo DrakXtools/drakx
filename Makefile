@@ -125,6 +125,7 @@ upload_only:
 	upload Mandrake/base compssUsers ;\
 	upload Mandrake/base rpmsrate ;\
 	upload Mandrake/base *_stage2.bz2 ;\
+	upload Mandrake/share/advertising '' ;\
 	upload misc gendistrib ;\
 	upload misc make_mdkinst_stage2 ;\
 	upload misc packdrake ;\
