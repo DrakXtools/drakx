@@ -6,18 +6,17 @@
 * Harddrake TODO:
 ** rename it drakhw by default
 ** ui
-*** explain category and not just blank TreeView
 *** enable the user to force a module (isa, isapnp, ...)
 *** print "(not loaded)" if module isn't loaded
 *** add bus_position to make unique id in ui
-*** cdrom:
+*** cdrom (must be done by harddrake):
 **** ide-scsi / ide-cd switch
 **** supermount switch
 *** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
 *** translate all fields
+*** write dialogs in ugtk rather in interactive to make them transcient
 *** help: 
 **** print fields in black and their description in blue as for information fields
-**** split help per category
 *** check there's at least one config option before showing the "condigure module" button
 *** s/module/driver/ ?
 ** fixes
@@ -27,20 +26,20 @@
 **** snd cards
 **** switch nvidia/nv in /etc/X11/XF86Config
      if [[ -e /lib/modules/`uname -r`/kernel/drivers/video/NVdriver ]]; then
-           perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#(Load.*glx)!\1!g' /etc/X11/XF86Config-4
+           perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#HARDDRAKE (Load.*glx)!\1!g' /etc/X11/XF86Config-4
         else    
-           perl -pi -e 's!Driver "nv.*"!Driver "nv"!g;s!(Load.*glx)!#\1!g' /etc/X11/XF86Config-4
+           perl -pi -e 's!Driver "nv.*"!Driver "nv"!g;s!(Load.*glx)!#HARDDRAKE \1!g' /etc/X11/XF86Config-4
         fi
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
-*** pci freeze (fseek ?)
+*** pci freeze
 ** packaging : separate version for harddrake & drakxtool
 ** configurators
 *** new cd burner: offer to install cdrecord and one of its gui frontends
 *** new dvd driver : offer to install xine||mplayer
 *** draksound :
 **** add a dialog so that the user choose its wavetable.
-**** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
+**** list all availables drivers, defaulting to first alternative, prepending old one with '*'
 **** add 'ALSA/OSS': tag to modules list
 ** detect engine:
 *** detect isapnp devices
