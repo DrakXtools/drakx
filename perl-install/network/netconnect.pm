@@ -332,8 +332,8 @@ fi
     save_conf($netcnx, $netc, $intf);
 
     if ($::isInstall && $::o->{security} >= 3) {
-	require network::tinyfirewall;
-	network::tinyfirewall::main($in, $::o->{security} <= 3);
+	require network::drakfirewall;
+	network::drakfirewall::main($in, $::o->{security} <= 3);
     }
     
 #-    if ($netc->{NET_DEVICE} and $netc->{NETWORKING} ne 'no' and $::isStandalone and $::expert) {

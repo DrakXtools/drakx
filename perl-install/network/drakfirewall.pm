@@ -1,4 +1,4 @@
-package network::tinyfirewall; # $Id$
+package network::drakfirewall; # $Id$
 
 use diagnostics;
 use strict;
@@ -126,7 +126,7 @@ sub get_conf {
     } elsif (my $shorewall = network::shorewall::read()) {
 	$shorewall->{disabled}, from_ports(\$shorewall->{ports});
     } else {
-	$in->ask_okcancel('', _("tinyfirewall configurator
+	$in->ask_okcancel('', _("drakfirewall configurator
 
 This configures a personal firewall for this Mandrake Linux machine.
 For a powerful dedicated firewall solution, please look to the
