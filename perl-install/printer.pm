@@ -288,6 +288,8 @@ sub read_printer_db(;$) {
 	}
     }
     delete $available_devices{''};
+    @available_devices{qw/POSTSCRIPT TEXT/} = (); #- these are always available.
+    close AVAIL;
 
     local $_; #- use of while (<...
     local *DBPATH; #- don't have to do close ... and don't modify globals at least

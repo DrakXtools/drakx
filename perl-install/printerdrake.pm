@@ -197,11 +197,7 @@ wish to access and any applicable user name and password."),
 	my %depth_to_col  = reverse %col_to_depth;
 	my $is_uniprint = $db_entry{GSDRIVER} eq "uniprint";
 
-	if (@list_res) {
-	    $printer->{RESOLUTION} = $list_res[0];
-	} else {
-	    $printer->{RESOLUTION} = "Default";
-	}
+	$printer->{RESOLUTION} = @res ? $res[0] || "Default" : "Default";
 	$printer->{CRLF} = $db_entry{DESCR} =~ /HP/;
 	$printer->{BITSPERPIXEL} = @list_col ? $depth_to_col{$printer->{BITSPERPIXEL}} || $depth_to_col{$col[0]} : "Default";
 
