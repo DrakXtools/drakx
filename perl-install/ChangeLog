@@ -1,3 +1,78 @@
+2001/08/19  Pixel  <pixel@mandrakesoft.com>
+
+	* diskdrake.pm: major fs.pm rework + adaptation to it
+	don't show nfs/smb/removable in install
+	basic smb handling
+
+	* network/smb.pm: basic smb handling
+
+	* install_steps.pm: rename isCdNotEjectable in usingRamdisk, ensure no
+	files are removed unless we're in ramdisk
+	make the devfs= mount or nomount choice based on raid-based root work
+	disable supermount for the moment
+	major fs.pm rework + adaptation to it
+
+	* install_steps_interactive.pm, lang.pm: rename isCdNotEjectable in
+	usingRamdisk, ensure no files are removed unless we're in ramdisk
+	simplify
+
+	* standalone/diskdrake: rename isCdNotEjectable in usingRamdisk, ensure no
+	files are removed unless we're in ramdisk
+	fix diskdrake requiring gtk
+	add some test code
+	major fs.pm rework + adaptation to it
+
+	* install_any.pm: rename isCdNotEjectable in usingRamdisk, ensure no files
+	are removed unless we're in ramdisk
+	major fs.pm rework + adaptation to it
+
+	* partition_table.pm: remove JFS from @important_types (too broken for the
+	moment)
+	remove isSupermount (was unused)
+
+	* common.pm, install2.pm, pkgs.pm: rename isCdNotEjectable in
+	usingRamdisk, ensure no files are removed unless we're in ramdisk
+
+	* interactive_gtk.pm (create_ctree): fix focusing (the assumption number
+	of leaves = number of lines is dumb)
+
+	* fsedit.pm: various typos fix
+	major fs.pm rework + adaptation to it
+
+	* bootlook.pm, standalone/drakboot: major fs.pm rework + adaptation to it
+
+	* fs.pm: rename isCdNotEjectable in usingRamdisk, ensure no files are
+	removed unless we're in ramdisk
+	various typos fix
+	major fs.pm rework + adaptation to it
+	cleanup
+	basic smb handling
+
+	* diskdrake_interactive.pm: save fstab on exit
+	major fs.pm rework + adaptation to it
+
+2001/08/18  Pixel  <pixel@mandrakesoft.com>
+
+	* fs.pm: basic nfs/smb handling in diskdrake
+	fixes and function prototype removing
+
+	* diskdrake.pm: basic nfs/smb handling in diskdrake
+	nicer mount options code (for autofs and supermount)
+
+	* install_steps.pm: oops, i inverted devfs=nomount and devfs=mount
+
+	* interactive_gtk.pm: fix bug in box's height use
+
+	* partition_table.pm, any.pm: fixes and function prototype removing
+
+	* interactive.pm: readd the sorting based on size when no sorting is
+	precised
+
+	* my_gtk.pm (n_line_size): bigger spacing for 'various'
+
+	* standalone/diskdrake, diskdrake_interactive.pm, fsedit.pm: basic nfs/smb
+	handling in diskdrake
+
 2001/08/18  Pixel  <pixel@mandrakesoft.com>
 
 	* my_gtk.pm (n_line_size): bigger spacing for 'various'
