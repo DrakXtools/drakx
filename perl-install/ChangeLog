@@ -1,5 +1,18 @@
 2000-09-15  Pixel  <pixel@mandrakesoft.com>
 
+	* mouse.pm: reworked quite a lot. Now sorts/categorize nicely the mice.
+	
+	* install_steps_interactive.pm (selectMouse): adapted for reworked mouse.pm
+
+	* install2.pm (selectMouse): adapted for mouse::read now returning
+	an hash ref
+
+	* detect_devices.pm (hasMousePS2): remove hasMouseMacUSB, do it in
+	one function (now takes the device in the parameter)
+
+	* interactive.pm (ask_from_treelistf): added (just like
+	ask_from_listf, but with a tree)
+
 	* Xconfigurator.pm: the reference is now nbuttons to
 	know wether to put Emulate3Buttons or ZAxisMapping.
 	* Xconfigurator.pm (cardConfiguration): install Glide_V3-DRI on

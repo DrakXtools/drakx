@@ -213,7 +213,7 @@ sub selectMouse {
     $::live and return;
     my ($clicked) = $_[0];
 
-    add2hash($o->{mouse} ||= {}, { mouse::read($o->{prefix}) }) if $o->{isUpgrade} && !$clicked;
+    add2hash($o->{mouse} ||= {}, mouse::read($o->{prefix})) if $o->{isUpgrade} && !$clicked;
 
     $o->selectMouse($clicked);
     addToBeDone { mouse::write($o->{prefix}, $o->{mouse}) } 'installPackages';

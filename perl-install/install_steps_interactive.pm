@@ -151,9 +151,12 @@ sub selectMouse {
     my ($o, $force) = @_;
 
     $force ||= $o->{mouse}{unsafe} || $::expert;
-    
-    $o->{mouse} = $o->ask_from_listf_('', _("Please, choose the type of your mouse."), 
-				      sub { $_[0]{FULLNAME} }, [ mouse::list ], $o->{mouse}) if $force;
+
+    my $prev = $o->{mouse}{type} . '|' . $o->{mouse}{name};
+    $o->{mouse} = mouse::fullname2mouse(
+	$o->ask_from_treelistf('', _("Please, choose the type of your mouse."), '|',
+			       sub { join '|', map { translate($_) } split '\|', $_[0] },
+			       [ mouse::fullnames ], $prev)) if $force;
 
     if ($force && $o->{mouse}{device} eq "ttyS") {
 	$o->set_help('selectSerialPort');

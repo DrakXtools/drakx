@@ -154,6 +154,17 @@ sub ask_from_list2_with_help($$$$$;$) {
     $o->ask_from_list_with_helpW($title, [ deref($message) ], $l, $help, $def || $l->[0]);
 }
 
+sub ask_from_treelistf {
+    my ($o, $title, $message, $separator, $f, $l, $def) = @_;
+    my (@l,%l); my $i = 0; foreach (@$l) {
+	my $v = $f->($_, $i++);
+	push @l, $v;
+	$l{$v} = $_;
+    }
+    my $r = ask_from_treelist($o, $title, $message, $separator, \@l, defined $def ? $f->($def) : $def) or return;
+    $l{$r};
+}
+
 sub ask_from_treelist {
     my ($o, $title, $message, $separator, $l, $def) = @_;
     $o->ask_from_treelistW($title, [ deref($message) ], $separator, [ sort @$l ], $def || $l->[0]);

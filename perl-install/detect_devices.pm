@@ -307,12 +307,8 @@ sub hasModem($) {
     $serialprobe{$_[0]} and $serialprobe{$_[0]}{CLASS} eq 'MODEM' and $serialprobe{$_[0]}{DESCRIPTION};
 }
 
-sub hasMousePS2() {
-    my $t; sysread(tryOpen("psaux") || return, $t, 256) != 1 || $t ne "\xFE";
-}
-
-sub hasMouseMacUSB {
-    my $t; sysread(tryOpen("usbmouse") || return, $t, 256) != 1 || $t ne "\xFE";
+sub hasMousePS2 {
+    my $t; sysread(tryOpen($_[0]) || return, $t, 256) != 1 || $t ne "\xFE";
 }
 
 #-######################################################################################
