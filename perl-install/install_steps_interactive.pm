@@ -186,7 +186,13 @@ The terms and conditions of this License are governed by the Laws of France.
 All disputes on the terms of this license will preferably be settled out of court. As a last 
 resort, the dispute will be referred to the appropriate Courts of Law of Paris - France.
 For any question on this document, please contact MandrakeSoft S.A.  
-")), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" and return;
+") . "\n\n
+Warning: Free Software may not necessarily be patent free, and some Free
+Software included may be covered by patents in your country. For example, the
+MP3 decoders included may require a licence for further usage (see
+http://www.mp3licencing.com for more details). If you are unsure if a patent
+may be applicable to you, check your local laws.
+"), [ __("Accept"), __("Refuse") ], "Refuse") eq "Accept" and return;
 
     $o->ask_yesorno('', _("Are you sure you refuse the licence?"), 1) and $o->exit;
 
