@@ -223,8 +223,7 @@ sub disconnected { }
 
 
 sub write_initscript {
-    output ("$prefix/etc/rc.d/init.d/internet",
-	    q{
+    output ("$prefix/etc/rc.d/init.d/internet", sprintf(<<'EOF', $connect_file, $connect_file, $disconnect_file, $disconnect_file));
 #!/bin/bash
 #
 # internet       Bring up/down internet connection
@@ -239,16 +238,16 @@ sub write_initscript {
 
 	case "$1" in
 		start)
-                if [ -e } . $connect_file . q{ ]; then
-			action "Checking internet connections to start at boot" "} . "$connect_file --boot_time" . q{"
+                if [ -e %s ]; then
+			action "Checking internet connections to start at boot" "%s --boot_time"
 		else
 			action "No connection to start" "true"
 		fi
 		touch /var/lock/subsys/internet
 		;;
 	stop)
-                if [ -e } . $disconnect_file . q{ ]; then
-			action "Stopping internet connection if needed: " "} . "$disconnect_file --boot_time" . q{"
+                if [ -e %s ]; then
+			action "Stopping internet connection if needed: " "%s --boot_time"
 		else
 			action "No connection to stop" "true"
 		fi
@@ -267,7 +266,7 @@ sub write_initscript {
 	exit 1
 esac
 exit 0
- });
+EOF
     chmod 0755, "$prefix/etc/rc.d/init.d/internet";
     $::isStandalone ? system("/sbin/chkconfig --add internet") : do {
 	symlinkf ("../init.d/internet", "$prefix/etc/rc.d/rc$_") foreach
