@@ -60,7 +60,7 @@ customized installation, this Install Class is for you."),
 
 setupSCSI => 
  __("The system did not detect a SCSI card. If you have one (or several)
-click on \"Yes\" and choose the module\(s) to be tested. Otherwise, 
+click on \"Yes\" and choose the module(s) to be tested. Otherwise, 
 select \"No\".
 
 If you don't know if your computer has SCSI interfaces, consult the
@@ -161,7 +161,7 @@ drive\"."),
 
 configureX => 
  __("It is now time to configure the video card and monitor
-configuration for the X windows Graphic User Interface (GUI). First
+configuration for the X Window Graphic User Interface (GUI). First
 select your monitor. Next, you may test the configuration and change
 your selections if necessary."),
 exitInstall =>
