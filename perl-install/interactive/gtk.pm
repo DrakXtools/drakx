@@ -356,9 +356,15 @@ sub add_modify_remove_action {
 	${$e->{val}} = $e->{list}[0];
     }
     ugtk2::gtk_set_treelist($treelist, [ map { may_apply($e->{format}, $_) } @{$e->{list}} ]);
+
+    add_modify_remove_sensitive($buttons, $e);
+    1;
+}
+
+sub add_modify_remove_sensitive {
+    my ($buttons, $e) = @_;
     $_->{button}->set_sensitive(@{$e->{list}} != ()) foreach 
       grep { member($_->{kind}, 'modify', 'remove') } @$buttons;
-    1;
 }
 
 sub ask_fromW {
@@ -482,6 +488,8 @@ sub ask_fromW {
 		foreach my $button (@buttons) {
 		    $button->{button}->signal_connect(clicked => sub { $do_action->($button) });
 		}
+		add_modify_remove_sensitive(\@buttons, $e);
+
 		$real_w = gtkpack_(Gtk2::HBox->new(0,0),
 				   1, create_scrolled_window($w), 
 				   0, gtkpack__(Gtk2::VBox->new(0,0), map { $_->{button} } @buttons));
