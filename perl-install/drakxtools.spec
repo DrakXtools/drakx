@@ -134,8 +134,8 @@ perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
 mkdir -p $RPM_BUILD_ROOT/%_menudir
-cat > $RPM_BUILD_ROOT%_menudir/harddrake <<EOF
-?package(harddrake):\
+cat > $RPM_BUILD_ROOT%_menudir/harddrake-ui <<EOF
+?package(harddrake-ui):\
 	needs="X11"\
 	section="Configuration/Hardware"\
 	title="HardDrake"\
@@ -200,7 +200,7 @@ done
 %defattr(-,root,root)
 %_sbindir/harddrake2
 %_datadir/pixmaps/harddrake2
-%_menudir/harddrake
+%_menudir/harddrake-ui
 
 %files http -f %{name}-http.list
 %defattr(-,root,root)
