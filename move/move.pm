@@ -288,10 +288,15 @@ sub handleI18NClp {
 
 sub clean_partition_table_and_format_key {
     my ($in) = @_;
-    my @keys = grep { detect_devices::isKeyUsb($_) } detect_devices::getSCSI();
+    my @keys = grep { detect_devices::isKeyUsb($_) } detect_devices::getSCSI() or return;
     my $key = $in->ask_from_listf('', N("Which USB key do you want to format?"),
 				 sub { "$_->{usb_description} ($_->{device})" },
 				 \@keys);
+
+    $in->ask_warn('', N("You are about to format a USB device \"%s\". This will delete all data on it.
+Make sure that the selected device is the USB key you want to format. 
+We advise you to unplug all other USB storage devices while doing this operation.", $key->{usb_description}));
+
     $key->{prefix} ||= $key->{device};
     add2hash_($key, partition_table::raw::get_geometry($key->{file} = devices::make($key->{device})));
     partition_table::raw::zero_MBR($key);
