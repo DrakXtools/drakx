@@ -132,7 +132,7 @@ foreach my $hw_class (@harddrake::data::tree) {
     next if $is_globetrotter && !$hw_class->{automatic};
     next unless $configurator_pool[0];
     if (!-x first(split /\s+/, $configurator_pool[0])) {
-        log::explanations(qw(skip $Ident configuration sincecannot "$configurator" isn't executable));
+        log::explanations(qw(skip $Ident configuration since "$configurator" isn't executable));
         next;
     }
     my ($pid, $no, $res);
