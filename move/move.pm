@@ -306,7 +306,7 @@ sub install2::configMove {
         } else {
             require any;
             any::ask_user_one($o, $o->{users} ||= [], $o->{security},
-                              additional_msg => N("BLA BLA user for move, password for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
+                              additional_msg => N("Enter your user information, password will be used for screensaver"), noaccept => 1, needauser => 1, noicons => 1);
         }
         #- force uid/gid to 501 as it was used when mounting key, addUser may choose 502 when key already holds user data
         put_in_hash($o->{users}[0], { uid => 501, gid => 501 });
