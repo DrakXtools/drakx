@@ -510,6 +510,9 @@ sub getDeps {
     #- beware of heavily mismatching depslist.ordered file against hdlist files.
     my $mismatch = 0;
 
+    #- count the number of packages in deplist that are also in hdlist
+    my $nb_deplist = 0;
+
     #- update dependencies list, provides attributes are updated later
     #- cross reference to be resolved on id (think of loop requires)
     #- provides should be updated after base flag has been set to save
@@ -526,14 +529,15 @@ sub getDeps {
 	#- silent warning for package which are unknown at this point.
 	$pkg or
 	  log::l("ignoring $name-$version-$release.$arch in depslist is not in hdlist");
-	$pkg && $version eq packageVersion($pkg) or
+	$pkg && $version ne packageVersion($pkg) and
 	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch version in hdlist"), $pkg = undef;
-	$pkg && $release eq packageRelease($pkg) or
+	$pkg && $release ne packageRelease($pkg) and
 	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch release in hdlist"), $pkg = undef;
-	$pkg && $arch eq packageArch($pkg) or
+	$pkg && $arch ne packageArch($pkg) and
 	  log::l("ignoring $name-$version-$release.$arch in depslist mismatch arch in hdlist"), $pkg = undef;
 
 	if ($pkg) {
+	    $nb_deplist++;
 	    $epoch && $epoch > 0 and $pkg->[$EPOCH] = $epoch; #- only 5% of the distribution use epoch (serial).
 	    $pkg->[$SIZE_DEPS] = $sizeDeps;
 
@@ -554,8 +558,8 @@ sub getDeps {
     $mismatch and die "depslist.ordered mismatch against hdlist files";
 
     #- check for same number of package in depslist and hdlists.
-    scalar(keys %{$packages->{names}}) == scalar(@{$packages->{depslist}})
-      or die "depslist.ordered has not same package as hdlist files";
+    my $nb_hdlist = keys %{$packages->{names}};
+    $nb_hdlist == $nb_deplist or die "depslist.ordered has not same package as hdlist files ($nb_deplist != $nb_hdlist)";
 }
 
 sub getProvides($) {
