@@ -317,7 +317,10 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %changelog
 * Mon Sep  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-9mdk
 - drakfont: fix not being able to select directories (#4964)
-- drakconnect: fix firmware loading (#5307, poulpy)
+- drakconnect:
+  o fix profiles managment (poulpy & tv)
+  o fix firmware loading (#5307, poulpy)
+- fix net_monitor not working as root
 - printerdrake:
   o use new help scheme (daouda)
   o reread database when switching between normal and expert mode
