@@ -385,7 +385,7 @@ sub getSpeedtouch() {
     grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall();
 }
 sub getSagem() {
-    grep { $_->{description} eq 'Analog Devices Inc.|USB ADSL modem' } probeall();
+    grep { member($_->{driver}, qw(adiusbadsl eagle-usb)) } probeall();
 }
 
 # generate from the following from eci driver sources:
