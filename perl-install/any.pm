@@ -235,7 +235,7 @@ _("Here are the different entries.
 You can add some more or change the existing ones."),
 		 ok => '',
 },
-		[ { val => \$e, format => sub {
+		[ { val => \$e, type => 'list', format => sub {
 		    my ($e) = @_;
 		    ref $e ? 
 		      "$e->{label} ($e->{kernel_or_dev})" . ($b->{default} eq $e->{label} && "  *") : 
@@ -1021,7 +1021,7 @@ Security features are at their maximum.")),
     $in->ask_from('', _("Choose security level") . "\n\n" .
 		  join('', map { "$l{$_}: $help{$_}\n\n" } keys %l),
 		  [
-		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} } },
+		   { label => _("Security level"), val => $security, list => [ sort keys %l ], format => sub { $l{$_} }, type => 'list' },
 		   if_($in->do_pkgs->is_installed('libsafe') && arch() =~ /^i.86/,
 		       { label => _("Use libsafe for servers"), val => $libsafe, type => 'bool', text =>
 			 _("A library which defends against buffer overflow and format string attacks.") }
