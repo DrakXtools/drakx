@@ -216,7 +216,12 @@ sub install2::startMove {
 
     #- automatic printer, timezone, network configs
     require install_steps_interactive;
-    install_steps_interactive::configureNetwork($o);
+    if (!any { /nfs/ } cat_('/proc/mounts')) {
+        install_steps_interactive::configureNetwork($o);
+        #- seems that applications have trouble with the loopback interface
+        #- after successful network configuration if we don't do that
+        run_program::run('/sbin/service', 'network', 'restart');
+    }
     install_steps_interactive::summaryBefore($o);
 
     require install_any;
