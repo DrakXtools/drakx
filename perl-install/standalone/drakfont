@@ -346,7 +346,8 @@ sub put_font_dir() {
 
         if ($gs) {
             convert_ttf_fonts([ glob("$drakfont_dir/tmp/tmp/*.ttf") ], 1);
-            system(join('', "cd $drakfont_dir/tmp/tmp && mv *.gsf *.pfb *.pfm", if_($so, "*.afm"), " ../Type1"));
+            my @fonts = map { s@.*/@@; $_ } map { glob("$drakfont_dir/tmp/tmp/*.$_") } qw(gsf pfb pfm afm); 
+            system("cd $drakfont_dir/tmp/tmp && mv @fonts ../Type1") if @fonts;
             system("cd $drakfont_dir/tmp/Type1 && $type1inst");
             interactive_progress($pbar2, 0.1, N("type1inst building"));
             if ($so) {
