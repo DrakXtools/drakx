@@ -479,7 +479,7 @@ sub selectSupplMedia {
 		log::l($@) if $@;
 		$o->ask_warn('', N("Can't find hdlist file on this mirror"));
 		useMedium($prev_asked_medium);
-		return '';
+		return 'error';
 	    }
 	    my $supplmedium = pkgs::psUsingHdlist(
 		$o->{prefix},
