@@ -58,11 +58,11 @@ my $vbox1 = new Gtk::VBox(0,0);
 $window1->add($vbox1);
 my $hbox1 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox1,1,1,0);
-$hbox1->pack_start(new Gtk::Label(_("Profil : ")),0,0,0);
+$hbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 $hbox1->pack_start(new Gtk::Label(_("default")),0,0,0);
 my $hbox2 = new Gtk::HBox(0,0);
 $vbox1->pack_start($hbox2,1,1,0);
-$hbox2->pack_start(new Gtk::Label(_("Hostname : ")),0,0,0);
+$hbox2->pack_start(new Gtk::Label(_("Hostname: ")),0,0,0);
 $hbox2->pack_start(new Gtk::Label(_("petite.mandrakesoft.com")),0,0,0);
 
 $vbox1->pack_start(new Gtk::HSeparator,1,1,5);
@@ -76,14 +76,14 @@ $table1->set_col_spacings(5);
 $frame1->add($table1);
 #attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
-$table1->attach(new Gtk::Label(_("Type :")), 0, 1, 0, 1, 'fill', 'fill',0,0);
+$table1->attach(new Gtk::Label(_("Type:")), 0, 1, 0, 1, 'fill', 'fill',0,0);
 my $label4 = new Gtk::Label(_("isdn_internal"));
 $table1->attach($label4, 1, 2, 0, 1, 'fill', 'fill',0,0);
-my $label5 = new Gtk::Label(_("Interface :"));
+my $label5 = new Gtk::Label(_("Interface:"));
 $table1->attach($label5, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label6 = new Gtk::Label(_("ippp0"));
 $table1->attach($label6, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $label7 = new Gtk::Label(_("Status :"));
+my $label7 = new Gtk::Label(_("Status:"));
 $table1->attach($label7, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label8 = new Gtk::Label(_("not connected"));
 $table1->attach($label8, 1, 2, 2, 3, 'fill', 'fill',0,0);
@@ -108,15 +108,15 @@ $table2->set_col_spacings(5);
 $frame2->add($table2);
 #attach (table, child, left_attach, right_attach, top_attach, bottom_attach, xoptions, yoptions, xpadding, ypadding)
 #$table->attach($button[0], 0, 1, 0, 1, {expand=>1,fill=>1}, {expand=>1,fill=>1},0,0);
-my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0) :"));
+my $label9 = new Gtk::Label(_("Network adaptater 1 (eth0):"));
 $table2->attach($label9, 0, 1, 0, 1, 'fill', 'fill',0,0);
 my $label10 = new Gtk::Label(_("isdn_internal"));
 $table2->attach($label10, 1, 2, 0, 1, 'fill', 'fill',0,0);
-my $label11 = new Gtk::Label(_("Interface :"));
+my $label11 = new Gtk::Label(_("Interface:"));
 $table2->attach($label11, 0, 1, 1, 2, 'fill', 'fill',0,0);
 my $label12 = new Gtk::Label(_("ippp0"));
 $table2->attach($label12, 1, 2, 1, 2, 'fill', 'fill',0,0);
-my $label13 = new Gtk::Label(_("Status :"));
+my $label13 = new Gtk::Label(_("Status:"));
 $table2->attach($label13, 0, 1, 2, 3, 'fill', 'fill',0,0);
 my $label14 = new Gtk::Label(_("not connected"));
 $table2->attach($label14, 1, 2, 2, 3, 'fill', 'fill',0,0);
@@ -137,19 +137,19 @@ sub configure_net {
 
     my $isdn;
     netconnect::isdn_detect_backend($isdn);
-    print "isdn $_ : $isdn->{$_}\n" foreach qw(description vendor id driver card_type type);
+    print "isdn $_: $isdn->{$_}\n" foreach qw(description vendor id driver card_type type);
 
     my $netc={};
     my $intf={};
     any::setup_thiskind_backend('net', undef);
     my @all_cards = netconnect::conf_network_card_backend ('', $netc, $intf, undef, undef, undef, undef);
 
-#    print " fffff : " . Data::Dumper->Dump([@all_cards], ['@all_cards']) . "\n";
+#    print " fffff: " . Data::Dumper->Dump([@all_cards], ['@all_cards']) . "\n";
 
-    print "nb : " . $netc->{nb_cards} ."\n";
-    map { print "$_->[0] : $_->[1] \n" } @all_cards;
+    print "nb: " . $netc->{nb_cards} ."\n";
+    map { print "$_->[0]: $_->[1] \n" } @all_cards;
 
-    print " jjjj : " . run_program::rooted($prefix, "/bin/ping -c 1 kdsdfsdenobi" ) . "\n";
+    print " jjjj: " . run_program::rooted($prefix, "/bin/ping -c 1 kdsdfsdenobi" ) . "\n";
 #    system("ping eth0 10.0.0.10 netmask 255.255.255.0");
 #    system("ifconfig eth0 10.0.0.10 netmask 255.255.255.0");
 
@@ -160,7 +160,7 @@ sub configure_net {
     $window->border_width(10);
     my $vbox1 = new Gtk::VBox(0,0);
     $window->add($vbox1);
-    $vbox1->pack_start(new Gtk::Label(_("Profil : ")),0,0,0);
+    $vbox1->pack_start(new Gtk::Label(_("Profile: ")),0,0,0);
 
     $window->show_all();
     Gtk->main;
