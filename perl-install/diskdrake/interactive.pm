@@ -739,6 +739,7 @@ sub Resize {
 	$part->{notFormatted} = 1;
 	$part->{isFormatted} = 0;
 	partition_table::verifyParts($hd);
+	$part->{mntpoint} = '' if isNonMountable($part); #- mainly for ntfs, which we can't format
     }
 
     $adjust->(0) if $size < $oldsize;
