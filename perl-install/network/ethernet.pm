@@ -120,9 +120,9 @@ sub update_iftab() {
 # automatic net aliases configuration
 sub configure_eth_aliases {
     my ($modules_conf) = @_;
-    my @pcmcia = detect_devices::pcmcia_probe();
+    my @pcmcia_interfaces = map { $_->{device} } detect_devices::pcmcia_probe();
     foreach my $card (get_eth_cards($modules_conf)) {
-        if (any { $_->{device} eq $card->[0] } @pcmcia) {
+        if (member($card->[0], @pcmcia_interfaces)) {
             #- do not write aliases for pcmcia cards, or cardmgr will not be loaded
             $modules_conf->remove_alias($card->[0]);
         } else {
