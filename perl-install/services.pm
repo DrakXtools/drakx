@@ -93,28 +93,25 @@ xfs => __("Starts the X Font Server (this is mandatory for XFree to run)."),
     if ($s) {
 	$s = translate($s);
     } else {
-	($s = cat_("$prefix/etc/rc.d/init.d/$_")) =~ s/\\\s*\n#\s*//mg;
-	($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
-	$s =~ s/^#\s*//m;
+	$s = -e "$prefix/etc/rc.d/init.d/$name" && cat_("$prefix/etc/rc.d/init.d/$name");
+	$s ||= -e "$prefix/etc/init.d/$name" && cat_("$prefix/etc/init.d/$name");
+	$s ||= -e "$prefix/etc/xinetd.d/$name" && cat_("$prefix/etc/xinetd.d/$name");
+	$s =~ s/\\\s*\n#\s*//mg;
+	if ($s =~ /^# description:\s+\S/sm) {
+	    ($s) = $s =~ /^# description:\s+(.*?)^(?:[^#]|# {0,2}\S)/sm;
+	} else {
+	    ($s) = $s =~ /^#\s*(.*?)^[^#]/sm;
+	}
+	$s =~ s/#\s*//mg;
     }
     $s =~ s/\n/ /gm; $s =~ s/\s+$//;
     $s;
 }
 
-#- returns: 
-#--- the listref of installed services
-#--- the listref of "on" services
-sub services {
-    my ($prefix) = @_;
-    my $cmd = $prefix ? "chroot $prefix" : "";
-    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd chkconfig --list`;
-    [ map { $_->[0] } @l ], [ mapgrep { $_->[1], $_->[0] } @l ];
-}
-
-sub ask {
+sub ask_install {
     my ($in, $prefix) = @_;
     my ($l, $on_services) = services($prefix);
-    ref($in) !~ /gtk/ || $::isInstall and return $in->ask_many_from_list("drakxservices",
+    $in->ask_many_from_list("drakxservices",
 			    _("Choose which services should be automatically started at boot time"),
 			    {
 			     list => $l,
@@ -122,6 +119,57 @@ sub ask {
 			     values => $on_services,
 			     sort => 1,
 			    });
+}
+
+sub ask_install_gtk {
+    my ($in, $prefix) = @_;
+    my %root_services = (
+			 _("Printing") => [ qw(cups lpr oki4daemon) ],
+			 _("Internet") => [ qw(httpd ftp proftpd wuftpd) ],
+			 _("File sharing") => [ qw(nfs nfslock smb nettalk) ],
+			 _("System") => [ qw(usb usbd pcmcia irda xinetd inetd kudzu harddrake apmd sound network xfs) ],
+			 _("Remote Administration") => [ qw(sshd telnetd webmin) ],
+			 _("Database Server") => [ qw(mysql postgresql) ],
+			);
+    my %services_root;
+    foreach my $root (keys %root_services) {
+	$services_root{$_} = $root foreach @{$root_services{$root}};
+    }
+    my ($l, $on_services) = services($prefix);
+    my %services;
+    $services{$_} = 0 foreach @{$l || []};
+    $services{$_} = 1 foreach @{$on_services || []};
+
+    $in->ask_browse_tree_info('drakxservices', _("Choose which services should be automatically started at boot time"),
+			      {
+			       node_state => sub { $services{$_[0]} ? 'selected' : 'unselected' },
+			       build_tree => sub {
+				   my ($add_node, $flat) = @_;
+				   $add_node->($_, !$flat && ($services_root{$_} || _("Other")))
+				     foreach sort keys %services;
+			       },
+			       grep_unselected => sub { grep { !$services{$_} } @_ },
+			       toggle_nodes => sub {
+				   my ($set_state, @nodes) = @_;
+				   my $new_state = !$services{$nodes[0]};
+				   foreach (@nodes) {
+				       $set_state->($_, $new_state ? 'selected' : 'unselected');
+				       $services{$_} = $new_state;
+				   }
+			       },
+			       get_status => sub {
+				   _("Services: %d activated for %d registered", 
+				     scalar(grep { $_ } values %services),
+				     scalar(values %services));
+			       },
+			       get_info => sub { formatLines(description($_[0], $prefix)) },
+			      });
+    ($l, [ grep { $services{$_} } @$l ]);
+}
+
+sub ask_standalone_gtk {
+    my ($in, $prefix) = @_;
+    my ($l, $on_services) = services($prefix);
     my $W = my_gtk->new(_("Services"));
     my ($x, $y, $w_popup);
     my $nopop = sub { $w_popup and $w_popup->destroy };
@@ -189,6 +237,12 @@ sub ask {
     ($l, $on_services);
 }
 
+sub ask {
+    my ($in, $prefix) = @_;
+    return ref($in) !~ /gtk/ ? ask_install($in, $prefix) :
+      $::isInstall ? ask_install_gtk($in, $prefix) : ask_standalone_gtk($in, $prefix);
+}
+
 sub doit {
     my ($in, $on_services, $prefix) = @_;
     my ($l, $was_on_services) = services($prefix);
@@ -209,5 +263,14 @@ sub doit {
     }
 }
 
+#- returns: 
+#--- the listref of installed services
+#--- the listref of "on" services
+sub services {
+    my ($prefix) = @_;
+    my $cmd = $prefix && !$::testing ? "chroot $prefix" : "";
+    my @l = map { [ /([^\s:]+)/, /\bon\b/ ] } grep { !/:$/ } sort `LANGUAGE=C $cmd /sbin/chkconfig --list`;
+    [ map { $_->[0] } @l ], [ mapgrep { $_->[1], $_->[0] } @l ];
+}
 
 1;
