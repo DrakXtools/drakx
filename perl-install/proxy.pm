@@ -16,7 +16,7 @@ sub main {
     # grab current config
     foreach (cat_($config_file)) {
       /http_proxy = (http:.*):(\d+)/ and ($proxy_cfg->{http_url}, $proxy_cfg->{http_port}) = ($1, $2);
-      /ftp_proxy = (ftp:.*):(\d+)/ and ($proxy_cfg->{ftp_url}, $proxy_cfg->{ftp_port}) = ($1, $2);
+      /ftp_proxy = ((?:ftp|http):.*):(\d+)/ and ($proxy_cfg->{ftp_url}, $proxy_cfg->{ftp_port}) = ($1, $2);
       /http_user = (.*)/ and ($proxy_cfg->{login}) = $1;
       if (/http_passwd = (.*)/) {
         ($proxy_cfg->{passwd}) = $1;
