@@ -664,15 +664,6 @@ rescue-net:             boots the rescue image from a network server
 
 }
 
-sub bmp_to_msg {
-    my ($bmp, $msg, $progress_place, $progress_color, $clear_color) = @_;
-    #- change here for newer picture isolinux-graphic.bmp and newer parameters.
-    #- for old style pictures (9.1 and previous)
-    # lilo-bmp2mdk mode:0x103 progress:425,173,16,7,64+21 clear:600,800,64+59 pos:0,0 <isolinux-graphic.bmp >isolinux/boot.msg
-    #- for current 9.2 pictures.
-    -e $bmp and _ "lilo-bmp2mdk mode:0x103 progress:$progress_place,64+$progress_color clear:600,800,64+$clear_color pos:0,0 <$bmp >$msg"
-}
-
 sub isolinux {
     my ($main, @kernels) = @_;
     @kernels = ($main, grep { $_ ne $main } @kernels);
@@ -686,7 +677,7 @@ sub isolinux {
 	_ "mv images/all.rdz-$_ isolinux/alt$::i/all.rdz";
     } @kernels;
 
-    bmp_to_msg('isolinux-graphic.bmp', 'isolinux/boot.msg', '397,190,14,6', 18, 18);
+    _ "lilo-bmp2mdk file:isolinux-graphic.bmp >isolinux/boot.msg";
 
     _ "cp /usr/lib/syslinux/isolinux.bin isolinux/isolinux.bin";
     _ "install -m 644 -D /boot/memtest* isolinux/test/memtest.bin";
@@ -726,7 +717,7 @@ sub isolinux_move {
     initrd($tmp_mnt_initrd, 'all', '', "move/isolinux/all.rdz-$main", '-with-busybox');
     rename "move/isolinux/all.rdz-$main", "move/isolinux/all.rdz";
 
-    bmp_to_msg('move/data/isolinux-graphic.bmp', 'move/isolinux/boot.msg', '371,144,4,4', 11, 127);
+    _ "lilo-bmp2mdk file:move/data/isolinux-graphic.bmp >move/isolinux/boot.msg";
     _ "cp /usr/lib/syslinux/isolinux.bin move/isolinux/isolinux.bin";
 }
 
