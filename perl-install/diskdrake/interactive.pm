@@ -1159,12 +1159,13 @@ sub format_part_info {
     } else {
 	$info .= N("Empty") . "\n";
     }
-    $info .= N("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part);
+    $info .= N("Start: sector %s\n", $part->{start}) if $::expert && !isSpecial($part) && !isLVM($hd);
     $info .= N("Size: %s", formatXiB($part->{size}, 512));
     $info .= sprintf " (%s%%)", int 100 * $part->{size} / $hd->{totalsectors} if $hd->{totalsectors};
     $info .= N(", %s sectors", $part->{size}) if $::expert;
     $info .= "\n";
-    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || !$part->{type}) && !isSpecial($part);
+    $info .= N("Cylinder %d to %d\n", $part->{start} / $hd->cylinder_size, ($part->{start} + $part->{size} - 1) / $hd->cylinder_size) if ($::expert || !$part->{type}) && !isSpecial($part) && !isLVM($hd);
+    $info .= N("Number of logical extents: %d", $part->{size} / $hd->cylinder_size) if $::expert && isLVM($hd);
     $info .= N("Formatted\n") if $part->{isFormatted};
     $info .= N("Not formatted\n") if !$part->{isFormatted} && $part->{notFormatted};
     $info .= N("Mounted\n") if $part->{isMounted};
