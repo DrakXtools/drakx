@@ -23,7 +23,7 @@ use log;
 		    if_(arch() =~ /ppc/, 'Journalised FS: ext3', 'Journalised FS: ReiserFS', 'Journalised FS: JFS', 'Journalised FS: XFS', 'Apple HFS Partition', 'Apple Bootstrap'));
 @important_types2 = ('Linux RAID', 'Linux Logical Volume Manager partition');
 
-@fields2save = qw(primary extended totalsectors isDirty needKernelReread);
+@fields2save = qw(primary extended totalsectors isDirty will_tell_kernel);
 
 @bad_types = ('Empty', 'DOS 3.3+ Extended Partition', 'Win95: Extended partition, LBA-mapped', 'Linux extended partition');
 
@@ -374,9 +374,18 @@ sub assign_device_numbers {
 	}
 	foreach (map { $_->{normal} } @{$hd->{extended} || []}) {
 	    my $dev = $hd->{prefix} . $i;
-	    push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ] if $_->{device} && $dev ne $_->{device};
+	    my $renumbered = $_->{device} && $dev ne $_->{device};
+	    if ($renumbered) {
+		require fs;
+		eval { fs::umount_part($_) }; #- at least try to umount it
+		will_tell_kernel($hd, del => $_, 'delay_del');
+		push @{$hd->{partitionsRenumbered}}, [ $_->{device}, $dev ];
+	    }
 	    $_->{device} = $dev;
 	    $_->{devfs_device} = $hd->{devfs_prefix} . '/part' . $i;
+	    if ($renumbered) {
+		will_tell_kernel($hd, add => $_, 'delay_add');
+	    }
 	    $i++;
 	}
     }
@@ -576,6 +585,64 @@ sub read_extended {
     }
 }
 
+sub will_tell_kernel {
+    my ($hd, $action, $o_part, $o_delay) = @_;
+
+    if ($action eq 'resize') {
+	will_tell_kernel($hd, del => $o_part);
+	will_tell_kernel($hd, add => $o_part);
+    } else {
+	my $part_number = sub { $o_part->{device} =~ /(\d+)$/ ? $1 : internal_error("bad device " . description($o_part)) };
+	push @{$hd->{'will_tell_kernel' . ($o_delay || '')} ||= []}, 
+	  [
+	   $action,
+	   $action eq 'force_reboot' ? () :
+	   $action eq 'add' ? ($part_number->(), $o_part->{start}, $o_part->{size}) :
+	   $action eq 'del' ? $part_number->() :
+	   internal_error("unknown action $action")
+	  ];
+    }
+    if (!$o_delay) {
+	foreach my $delay ('delay_del', 'delay_add') {
+	    my $l = delete $hd->{"will_tell_kernel$delay"} or next;
+	    push @{$hd->{will_tell_kernel} ||= []}, @$l;
+	}
+    }
+    $hd->{isDirty} = 1;
+}
+
+sub tell_kernel {
+    my ($hd, $tell_kernel) = @_;
+
+    my $F = partition_table::raw::openit($hd);
+
+    my $force_reboot = any { $_->[0] eq 'force_reboot' } @$tell_kernel;
+    if (!$force_reboot) {
+	foreach (@$tell_kernel) {
+	    my ($action, $part_number, $o_start, $o_size) = @$_;
+	    
+	    if ($action eq 'add') {
+		$force_reboot ||= !c::add_partition(fileno $F, $part_number, $o_start, $o_size);
+	    } elsif ($action eq 'del') {
+		$force_reboot ||= !c::del_partition(fileno $F, $part_number);
+	    }
+	    log::l("tell kernel $action ($part_number $o_start $o_size), rebootNeeded is now $hd->{rebootNeeded}.");
+	}
+    }
+    if ($force_reboot) {
+	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
+	foreach (@magic_parts) {
+	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
+	}
+	$hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
+	log::l("tell kernel force_reboot, rebootNeeded is now $hd->{rebootNeeded}.");
+
+	foreach (@magic_parts) {
+	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
+	}
+    }
+}
+
 # write the partition table
 sub write {
     my ($hd) = @_;
@@ -610,29 +677,9 @@ sub write {
     $hd->{isDirty} = 0;
     $hd->{hasBeenDirty} = 1; #- used in undo (to know if undo should believe isDirty or not)
 
-    if ($hd->{needKernelReread} && ref($hd->{needKernelReread}) eq 'ARRAY' && $::isStandalone) {
-	#- we've only been adding partitions. Try special add_partition (using BLKPG_ADD_PARTITION)
-	my $F = partition_table::raw::openit($hd) or goto force_reread;
-
-	foreach (@{$hd->{needKernelReread}}) {
-	    c::add_partition(fileno $F, $_->{start}, $_->{size}, $_->{device} =~ /(\d+)$/)
-		or goto force_reread;
-	}
-    } elsif ($hd->{needKernelReread}) {
-      force_reread:
-	#- now sync disk and re-read the partition table
-	common::sync();
-
-	my @magic_parts = grep { $_->{isMounted} && $_->{real_mntpoint} } get_normal_parts($hd);
-	foreach (@magic_parts) {
-	    syscall_('umount', $_->{real_mntpoint}) or log::l(N("error unmounting %s: %s", $_->{real_mntpoint}, $!));
-	}
-	$hd->kernel_read;
-	foreach (@magic_parts) {
-	    syscall_('mount', $_->{real_mntpoint}, type2fs($_), c::MS_MGC_VAL()) or log::l(N("mount failed: ") . $!);
-	}
+    if (my $tell_kernel = delete $hd->{will_tell_kernel}) {
+	tell_kernel($hd, $tell_kernel);
     }
-    $hd->{needKernelReread} = 0;
 }
 
 sub active {
@@ -652,11 +699,13 @@ sub remove {
     #- first search it in the primary partitions
     $i = 0; foreach (@{$hd->{primary}{normal}}) {
 	if ($_ eq $part) {
+	    will_tell_kernel($hd, del => $_);
+
 	    splice(@{$hd->{primary}{normal}}, $i, 1);
 	    %$_ = (); #- blank it
 
 	    $hd->raw_removed($hd->{primary}{raw});
-	    return $hd->{isDirty} = $hd->{needKernelReread} = 1;
+	    return 1;
 	}
 	$i++;
     }
@@ -674,7 +723,8 @@ sub remove {
 	remove_empty_extended($hd);
 	assign_device_numbers($hd);
 
-	return $hd->{isDirty} = $hd->{needKernelReread} = 1;
+	will_tell_kernel($hd, del => $part);
+	return 1;
     }
     0;
 }
@@ -769,8 +819,7 @@ sub add {
     }
   success:
     assign_device_numbers($hd);
-    $hd->{isDirty} = 1;
-    push @{$hd->{needKernelReread} ||= []}, $part if !$hd->{needKernelReread} || ref($hd->{needKernelReread}) eq 'ARRAY'
+    will_tell_kernel($hd, add => $part);
 }
 
 # search for the next partition
@@ -813,7 +862,7 @@ sub load {
     @$hd{@fields2save} = @$h;
 
     delete @$_{qw(isMounted isFormatted notFormatted toFormat toFormatUnsure)} foreach get_normal_parts($hd);
-    $hd->{isDirty} = $hd->{needKernelReread} = 1;
+    will_tell_kernel($hd, 'force_reboot'); #- just like undo, do not force write_partitions so that user can see the new partition table but can still discard it
 }
 
 sub save {

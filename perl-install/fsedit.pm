@@ -682,7 +682,9 @@ sub undo {
 	my $h; eval $code;
 	@$_{@partition_table::fields2save} = @$h;
 
-	$_->{isDirty} = $_->{needKernelReread} = 1 if $_->{hasBeenDirty};
+	if ($_->{hasBeenDirty}) {
+	    partition_table::will_tell_kernel($_, 'force_reboot'); #- next action needing write_partitions will force it. We can't do it now since more undo may occur, and we must not needReboot now
+	}
     }
     
 }

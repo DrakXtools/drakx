@@ -195,7 +195,7 @@ When sure, press Ok."))) or return;
 filesystem checks will be run on your next boot into Windows(TM)")) if !isFat($part);
 
 		$part->{isFormatted} = 1;
-		$hd->{isDirty} = $hd->{needKernelReread} = 1;
+		partition_table::will_tell_kernel($hd, resize => $part); #- down-sizing, write_partitions is not needed
 		partition_table::adjust_local_extended($hd, $part);
 		partition_table::adjust_main_extended($hd);
 

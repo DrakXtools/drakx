@@ -113,18 +113,6 @@ sub openit {
     my $F; sysopen($F, $hd->{file}, $o_mode || 0) && $F;
 }
 
-# cause kernel to re-read partition table
-sub kernel_read($) {
-    my ($hd) = @_;
-    common::sync();
-    my $F = openit($hd) or return 0;
-    common::sync(); sleep(1);
-    $hd->{rebootNeeded} = !ioctl($F, c::BLKRRPART(), 0);
-    common::sync();
-    close $F;
-    common::sync(); sleep(1);
-}
-
 sub raw_removed {
     my ($_hd, $_raw) = @_;
 }
@@ -157,10 +145,10 @@ sub zero_MBR {
 }
 
 sub zero_MBR_and_dirty {
-    my ($hd) = @_;
+    my ($hd) = @_;    
+    my @parts = (partition_table::get_normal_parts($hd), if_($hd->{primary}{extended}, $hd->{primary}{extended}));
+    partition_table::will_tell_kernel($hd, del => $_) foreach @parts;
     zero_MBR($hd);
-    $hd->{isDirty} = $hd->{needKernelReread} = 1;
-
 }
 
 #- ugly stuff needed mainly for Western Digital IDE drives

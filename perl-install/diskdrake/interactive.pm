@@ -110,7 +110,7 @@ struct hd {
   bool readonly         # is it allowed to modify the partition table
   bool getting_rid_of_readonly_allowed # is it forbidden to write because the partition table is badly handled, or is it because we MUST not change the partition table
   bool isDirty          # does it need to be written to the disk 
-  bool needKernelReread # must we tell the kernel to reread the partition table
+  list will_tell_kernel # list of actions to tell to the kernel so that it knows the new partition table
   bool hasBeenDirty     # for undo
   bool rebootNeeded     # happens when a kernel reread failed
   bool partitionsRenumbered # happens when you
@@ -142,7 +142,7 @@ struct raw_hd inherits hd {
   string mntpoint   # '/', '/usr' ...
   string options    # 'defaults', 'noauto'
 
-  # invalid: isDirty, needKernelReread, hasBeenDirty, rebootNeeded, primary, extended
+  # invalid: isDirty, will_tell_kernel, hasBeenDirty, rebootNeeded, primary, extended
 }
 
 struct all_hds {
@@ -259,7 +259,7 @@ sub Done {
 	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?") ]) or return;
     }
     foreach (@{$all_hds->{hds}}) {
-	if (!write_partitions($in, $_)) {
+	if (!write_partitions($in, $_, 'skip_check_rebootNeeded')) {
 	    return if !$::isStandalone;
 	    $in->ask_yesorno(N("Quit without saving"), N("Quit without writing the partition table?"), 1) or return;
 	}
@@ -269,6 +269,10 @@ sub Done {
 	if ($new ne $all_hds->{current_fstab} && $in->ask_yesorno('', N("Do you want to save /etc/fstab modifications"), 1)) {
 	    $all_hds->{current_fstab} = $new;
 	    fs::write_fstab($all_hds);
+	}
+	if (any { $_->{rebootNeeded} } @{$all_hds->{hds}}) {
+	    $in->ask_warn('', N("You need to reboot for the partition table modifications to take place"));
+	    tell_wm_and_reboot();
 	}
     }
     1;
@@ -705,7 +709,6 @@ sub Resize {
     $part->{size} == $size and return;
 
     my $oldsize = $part->{size};
-    $hd->{isDirty} = $hd->{needKernelReread} = 1;
     $part->{size} = $size;
     $hd->adjustEnd($part);
 
@@ -714,6 +717,8 @@ sub Resize {
 
     my $adjust = sub {
 	my ($write_partitions) = @_;
+
+	partition_table::will_tell_kernel($hd, resize => $part);
 
 	if (isLVM($hd)) {
 	    lvm::lv_resize($part, $oldsize);
@@ -1043,16 +1048,20 @@ sub check {
       check_mntpoint($in, $part->{mntpoint}, $hd, $part, $all_hds);
 }
 
+sub check_rebootNeeded {
+    my ($_in, $hd) = @_;
+    $hd->{rebootNeeded} and die \N("You'll need to reboot before the modification can take place");
+}
+
 sub write_partitions {
-    my ($in, $hd) = @_;
+    my ($in, $hd, $b_skip_check_rebootNeeded) = @_;
+    check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
     $hd->{isDirty} or return 1;
     isLVM($hd) and return 1;
 
     $in->ask_okcancel(N("Read carefully!"), N("Partition table of drive %s is going to be written to disk!", $hd->{device}), 1) or return;
-    if (!$::testing) {
-	partition_table::write($hd);
-    }
-    $hd->{rebootNeeded} and die \N("You'll need to reboot before the modification can take place");
+    partition_table::write($hd) if !$::testing;
+    check_rebootNeeded($in, $hd) if !$b_skip_check_rebootNeeded;
     1;
 }
 
@@ -1243,4 +1252,29 @@ sub choose_encrypt_key {
 { label => N("Encryption key"), val => \$encrypt_key,  hidden => 1 },
 { label => N("Encryption key (again)"), val => \$encrypt_key2, hidden => 1 },
     ]) && $encrypt_key;
+}
+
+
+sub tell_wm_and_reboot() {
+    my ($wm, $pid) = any::running_window_manager();
+
+    if (!$wm) {
+	system('reboot');
+    } else {    
+	if (fork()) {
+	    any::ask_window_manager_to_logout($wm);
+	    return;
+	}
+    
+	open STDIN, "</dev/zero";
+	open STDOUT, ">/dev/null";
+	open STDERR, ">&STDERR";
+	c::setsid();
+	exec 'perl', '-e', q(
+	    my ($wm, $pid) = @ARGV;
+	    my $nb;
+	    for ($nb = 20; $nb && -e "/proc/$pid"; $nb--) { sleep 1 }
+	    exec 'reboot';
+	), $wm, $pid;
+    }
 }

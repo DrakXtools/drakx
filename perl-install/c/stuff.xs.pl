@@ -229,11 +229,24 @@ dgettext(domainname, msgid)
    char * msgid
 
 int
-add_partition(hd, start_sector, size_sector, part_number)
+del_partition(hd, part_number)
   int hd
+  int part_number
+  CODE:
+  {
+    struct blkpg_partition p = { 0, 0, part_number, "", "" };
+    struct blkpg_ioctl_arg s = { BLKPG_DEL_PARTITION, 0, sizeof(struct blkpg_partition), (void *) &p };
+    RETVAL = ioctl(hd, BLKPG, &s) == 0;
+  }
+  OUTPUT:
+  RETVAL
+
+int
+add_partition(hd, part_number, start_sector, size_sector)
+  int hd
+  int part_number
   unsigned long start_sector
   unsigned long size_sector
-  int part_number
   CODE:
   {
     long long start = start_sector * 512;
