@@ -39,6 +39,8 @@ our %printer_type_inv = reverse %printer_type;
 
 our %thedb;
 
+our $hplipdevicesdb;
+
 #------------------------------------------------------------------------------
 
 sub spooler() {
@@ -355,6 +357,17 @@ sub make_menuentry {
 	$connection = N(", USB printer #%s", $number);
     } elsif ($connect =~ m!^usb://!) {
 	$connection = N(", USB printer");
+    } elsif ($connect =~ m!^hp:/(.+?)$!) {
+	my $hplipdevice = $1;
+	if ($hplipdevice =~ m!^par/!) {
+	    $connection = N(", HP printer on a parallel port");
+	} elsif ($hplipdevice =~ m!^usb/!) {
+	    $connection = N(", HP printer on USB");
+	} elsif ($hplipdevice =~ m!^net/!) {
+	    $connection = N(", HP printer on HP JetDirect");
+	} else {
+	    $connection = N(", HP printer");
+	}
     } elsif ($connect =~ m!^ptal://?(.+?)$!) {
 	my $ptaldevice = $1;
 	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
@@ -412,6 +425,17 @@ sub connectionstr {
 	$connection = N("USB printer #%s", $number);
     } elsif ($connect =~ m!^usb://!) {
 	$connection = N("USB printer");
+    } elsif ($connect =~ m!^hp:/(.+?)$!) {
+	my $hplipdevice = $1;
+	if ($hplipdevice =~ m!^par/!) {
+	    $connection = N("HP printer on a parallel port");
+	} elsif ($hplipdevice =~ m!^usb/!) {
+	    $connection = N("HP printer on USB");
+	} elsif ($hplipdevice =~ m!^net/!) {
+	    $connection = N("HP printer on HP JetDirect");
+	} else {
+	    $connection = N("HP printer");
+	}
     } elsif ($connect =~ m!^ptal://?(.+?)$!) {
 	my $ptaldevice = $1;
 	if ($ptaldevice =~ /^mlc:par:(\d+)$/) {
@@ -2117,7 +2141,7 @@ sub get_copiable_queues {
 		if ($entry->{foomatic} && $entry->{spooler} eq $oldspooler) {
 		    # Is the connection type supported by the new
 		    # spooler?
-		    if ($newspooler eq "cups" && $entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ipp):/ ||
+		    if ($newspooler eq "cups" && $entry->{connect} =~ /^(file|hp|ptal|lpd|socket|smb|ipp):/ ||
                   $newspooler =~ /^(lpd|lprng)$/ && $entry->{connect} =~ /^(file|ptal|lpd|socket|smb|ncp|postpipe):/ ||
                   $newspooler eq "pdq" && $entry->{connect} =~ /^(file|ptal|lpd|socket):/) {
                   push(@queuelist, $entry->{name});
@@ -2197,6 +2221,27 @@ sub autodetectionentry_for_uri {
 			  $p->{val}{SERIALNUMBER} ne $serial));
 		return $p;
 	    }
+	}
+    } elsif ($uri =~ m!^hp:/(usb|par)/!) {
+	# HP printer (controlled by HPLIP)
+	my $hplipdevice = $uri;
+	$hplipdevice =~ m!^hp:/(usb|par)/(\S+?)(\?serial=(\S+)|)$!;
+	my $model = $2;
+	my $serial = $4;
+	$model =~ s/_/ /g;
+	foreach my $p (@autodetected) {
+	    next if !$p->{val}{MODEL};
+	    if (uc($p->{val}{MODEL}) ne uc($model)) {
+		my $entry = hplip_device_entry($p->{port}, @autodetected);
+		next if !$entry;
+		my $m = $entry->{model};
+		$m =~ s/_/ /g;
+		next if uc($m) ne uc($model);
+	    }
+	    next if ($serial && !$p->{val}{SERIALNUMBER}) ||
+		(!$serial && $p->{val}{SERIALNUMBER}) ||
+		(uc($serial) ne uc($p->{val}{SERIALNUMBER}));
+	    return $p;
 	}
     } elsif ($uri =~ m!^ptal://?mlc:!) {
 	# HP multi-function device (controlled by HPOJ)
@@ -2352,6 +2397,108 @@ sub read_hplip_db {
     return \%hplipdevices;
 }
 
+sub hplip_simple_model {
+    my ($model) = @_;
+    my $simplemodel = $model;
+    $simplemodel =~ s/[^A-Za-z0-9]//g;
+    $simplemodel =~ s/(DeskJet\d+C?)([a-z]*?)/$1/gi;
+    $simplemodel =~ s/((LaserJet|OfficeJet|PhotoSmart|PSC)\d+)([a-z]*?)/$1/gi;
+    $simplemodel =~ s/DeskJet/DJ/gi;
+    $simplemodel =~ s/PhotoSmartP/PhotoSmart/gi;
+    $simplemodel =~ s/LaserJet/LJ/gi;
+    $simplemodel =~ s/OfficeJet/OJ/gi;
+    $simplemodel =~ s/Series//gi;
+    $simplemodel = uc($simplemodel);
+    return $simplemodel;
+}
+
+sub hplip_device_entry {
+    my ($device, @autodetected) = @_;
+
+    # Currently, only devices on USB work
+    return undef if $device !~ /usb/i;
+
+    if (!$hplipdevicesdb) {
+	# Read the HPLIP device database if not done already
+	$hplipdevicesdb = read_hplip_db();
+    }
+
+    my $entry;
+    foreach my $a (@autodetected) {
+	$device eq $a->{port} or next;
+	# Only HP devices supported
+	return undef if $a->{val}{MANUFACTURER} !~ /^\s*HP\s*$/i;
+	my $modelstr = $a->{val}{MODEL};
+	$modelstr =~ s/ /_/g;
+	if ($entry = $hplipdevicesdb->{$modelstr}) {
+	    # Exact match
+	    return $entry;
+	}
+	# More 'fuzzy' matching
+	my $simplemodel = hplip_simple_model($modelstr);
+	foreach my $key (keys %{$hplipdevicesdb}) {
+	    my $simplekey = hplip_simple_model($key);
+	    return $hplipdevicesdb->{$key} if $simplemodel eq $simplekey;
+	}
+	foreach my $key (keys %{$hplipdevicesdb}) {
+	    my $simplekey = hplip_simple_model($key);
+	    $simplekey =~ s/(\d\d)00(C?)$/$1\\d\\d$2/;
+	    $simplekey =~ s/(\d\d\d)0(C?)$/$1\\d$2/;
+	    $simplekey =~ s/(\d\d)0(\dC?)$/$1\\d$2/;
+	    return $hplipdevicesdb->{$key} if 
+		$simplemodel =~ m/^$simplekey$/;
+	}
+	# Device not supported
+	return undef;
+    }
+    # $device not in @autodetected
+    return undef;
+}
+
+sub start_hplip {
+    my ($device, $hplipentry, @autodetected) = @_;
+
+    # Determine connection type
+    my $bus;
+    if ($device =~ /usb/) {
+	$bus = "usb";
+    } elsif ($device =~ /par/ ||
+	     $device =~ m!/dev/lp! ||
+	     $device =~ /printers/) {
+	$bus = "par";
+    } else {
+	return undef;
+    }
+
+    # Start HPLIP daemons
+    printer::services::start_not_running_service("hplip");
+
+    # Determine HPLIP device URI for the CUPS queue
+    foreach my $a (@autodetected) {
+	$device eq $a->{port} or next;
+	open(my $F, ($::testing ? $::prefix : "chroot $::prefix/ ") .
+	     '/bin/sh -c "export LC_ALL=C; /usr/lib/cups/backend/hp" |') or
+	     die 'Could not run "/usr/lib/cups/backend/hp"!';
+	while (my $line = <$F>) {
+	    if (($line =~ m!^direct\s+(hp:/$bus/(\S+)\?serial=(\S+))\s+!) ||
+		($line =~ m!^direct\s+(hp:/$bus/(\S+))\s+!)) {
+		my $uri = $1;
+		my $modelstr = $2;
+		my $serial = $3;
+		if ((uc($modelstr) eq uc($hplipentry->{model})) &&
+		    (!$serial ||
+		     (uc($serial) eq uc($a->{val}{SERIALNUMBER})))) {
+		    close $F;
+		    return $uri;
+		}
+	    }
+	}
+	close $F;
+	last;
+    }
+    # HPLIP URI not found
+    return undef;
+}
 
 sub configure_hpoj {
     my ($device, @autodetected) = @_;
@@ -2787,13 +2934,19 @@ sub usbdevice {
     return sprintf("%%%03d%%%03d", $bus, $device);
 }
 
-sub config_sane() {
-    # Add HPOJ backend to /etc/sane.d/dll.conf if needed (no individual
-    # config file /etc/sane.d/hpoj.conf necessary, the HPOJ driver finds the
-    # scanner automatically)
+sub config_sane {
+    my ($backend) = $_;
+
+    # Add HPOJ/HPLIP backend to /etc/sane.d/dll.conf if needed (no
+    # individual config file /etc/sane.d/hplip.conf or
+    # /etc/sane.d/hpoj.conf necessary, the HPLIP and HPOJ drivers find
+    # the scanner automatically)
+
     return if (! -f "$::prefix/etc/sane.d/dll.conf");
-    return if member("hpoj", chomp_(cat_("$::prefix/etc/sane.d/dll.conf")));
-    eval { append_to_file("$::prefix/etc/sane.d/dll.conf", "hpoj\n") } or
+    return if member($backend,
+		     chomp_(cat_("$::prefix/etc/sane.d/dll.conf")));
+    eval { append_to_file("$::prefix/etc/sane.d/dll.conf",
+			  "$backend\n") } or
 	   die "can not write SANE config in /etc/sane.d/dll.conf: $!";
 }
 

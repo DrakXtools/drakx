@@ -1912,6 +1912,9 @@ list => [ if_($printer->{currentqueue}{connect},
 	    "socket://",
 	    "ptal:/mlc:",
 	    "ptal:/hpjd:",
+	    "hp:/usb/",
+	    "hp:/par/",
+	    "hp:/net/",
 	    "file:/",
 	    'postpipe:""')),
 	  ], not_edit => 0, sort => 0 }, ],
@@ -1925,7 +1928,7 @@ complete => sub {
     );
 
     # Non-local printer, check network and abort if no network available
-    if ($printer->{currentqueue}{connect} !~ m!^(file|parallel|usb|serial|mtink|ptal://?mlc):/! &&
+    if ($printer->{currentqueue}{connect} !~ m!^(file:|parallel:|usb:|serial:|mtink:|ptal://?mlc|hp:/(usb|par))! &&
         !check_network($printer, $in, $upNetwork, 0)) { 
         return 0;
     # If the chosen protocol needs additional software, install it.
@@ -2046,6 +2049,7 @@ sub setup_common {
     #- Check whether the printer is an HP multi-function device and 
     #- configure HPOJ if it is one
 
+    my $hplipdevice = "";
     my $ptaldevice = "";
     my $isHPOJ = 0;
     my $w;
@@ -2062,77 +2066,57 @@ sub setup_common {
 					   N("Is your printer a multi-function device from HP or Sony (OfficeJet, PSC, LaserJet 1100/1200/1220/3000/3200/3300/4345 with scanner, DeskJet 450, Sony IJP-V100), an HP PhotoSmart or an HP LaserJet 2200?"), 0);
 	    }
 	}
-	if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|30(15|20|30)|3200|33.0|4345)|(DeskJet|dj)\s*450)/i ||
-	    $makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
-	    $isHPOJ) {
-	    # Install HPOJ package
-	    my $hpojinstallfailed = 0;
+	my $hplipentry;
+	if (($printer->{SPOOLER} eq 'cups') &&
+	    ($hplipentry =
+	     printer::main::hplip_device_entry($device, @autodetected))) {
+	    # Device is supported by HPLIP
+
+	    # Install HPLIP packages
+	    my $hplipinstallfailed = 0;
 	    if (!$::testing &&
-		!files_exist(qw(/usr/sbin/ptal-mlcd
-				/usr/sbin/ptal-init
-				/usr/bin/xojpanel
-				/usr/sbin/lsusb))) {
+		!files_exist(qw(/usr/sbin/hpiod))) {
 		if ($::noX) {
-		    $hpojinstallfailed = 1;
+		    $hplipinstallfailed = 1;
 		} else {
 		    $w = $in->wait_message(N("Printerdrake"),
-					   N("Installing HPOJ package..."))
+					   N("Installing HPLIP package..."))
 			if !$printer->{noninteractive};
-		    $in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
+		    $in->do_pkgs->install('hplip')
 			or do {
 			    $in->ask_warn(N("Warning"),
 					  N("Could not install the %s packages!",
-					    "HPOJ") . " " .
+					    "HPLIP") . " " .
 					  N("Only printing will be possible on the %s.",
 					    $makemodel));
-			    $hpojinstallfailed = 1;
+			    $hplipinstallfailed = 1;
 			};
 		}
 	    }
-	    # Configure and start HPOJ
+	    # Start HPLIP and get device URI
 	    undef $w;
 	    $w = $in->wait_message(
 		 N("Printerdrake"),
-		 N("Checking device and configuring HPOJ..."))
+		 N("Checking device and configuring HPLIP..."))
 		if !$printer->{noninteractive};
 	    
-	    eval { $ptaldevice = printer::main::configure_hpoj
-		       ($device, @autodetected) if !$hpojinstallfailed };
+	    $hplipdevice = printer::main::start_hplip
+		($device, $hplipentry, @autodetected) if 
+		!$hplipinstallfailed;
 
-	    if (my $err = $@) {
-		warn qq(HPOJ conf failure: "$err");
-		log::l(qq(HPOJ conf failure: "$err"));
-	    }
-
-	    if ($ptaldevice) {
-		# HPOJ has determined the device name, make use of it if we
-		# did not know it before
-		if (!$do_auto_detect ||
-		    !$makemodel ||
-		    $makemodel eq $searchunknown ||
-		    $makemodel =~ /^\s*$/) {
-		    $makemodel = $ptaldevice;
-		    $makemodel =~ s/^.*:([^:]+)$/$1/;
-		    $makemodel =~ s/_/ /g;
-		    if ($makemodel =~ /^\s*IJP/i) {
-			$makemodel = "Sony $makemodel";
-		    } else {
-			$makemodel = "HP $makemodel";
-		    }
-		}
-		# Configure scanning with SANE on the MF device
-		if ($makemodel !~ /HP\s+PhotoSmart/i &&
-		    $makemodel !~ /HP\s+LaserJet\s+2200/i &&
-		    $makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
+	    if ($hplipdevice) {
+		# Configure scanning with SANE on HP's MF devices
+		if ($hplipentry->{scan}) {
 		    # Install SANE
 		    if (!$::testing &&
 			(!files_exist(qw(/usr/bin/scanimage
 					/usr/bin/xscanimage
 					/etc/sane.d/dll.conf
-					/usr/lib/libsane-hpoj.so.1)) ||
+					/usr/lib/libsane-hpaio.so.1)) ||
 			 (!files_exist(qw(/usr/bin/xsane)) &&
 			  !files_exist(qw(/usr/bin/kooka)) &&
-			  ($::isInstall || !$in->do_pkgs->is_installed('scanner-gui'))))) {
+			  ($::isInstall ||
+			   !$in->do_pkgs->is_installed('scanner-gui'))))) {
 			undef $w;
 			$w = $in->wait_message(
 			     N("Printerdrake"),
@@ -2144,7 +2128,7 @@ sub setup_common {
 						     ($::isInstall ?
 						      'xsane' : 
 						      'scanner-gui'), 
-						     'libsane-hpoj1')
+						     'libsane-hpaio1')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
@@ -2153,77 +2137,180 @@ sub setup_common {
 						$makemodel));
 			    };
 		    }
-		    # Configure the HPOJ SANE backend
-		    printer::main::config_sane();
+		    # Configure the HPLIP SANE backend
+		    printer::main::config_sane('hpaio');
 		}
-		# Configure photo card access with mtools and MToolsFM
-		if (($makemodel =~ /HP\s+PhotoSmart/i ||
-		     $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
-		     $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
-		     $makemodel =~ /HP\s+PSC\s*161\d/i ||
-		     $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
-		     $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
-		     $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
-		     $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
-		     $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
-		    $makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
-		    # Install mtools and MToolsFM
-		    if (!$::testing &&
-			!files_exist(qw(/usr/bin/mdir
-						  /usr/bin/mcopy
-						  /usr/bin/MToolsFM
-						  ))) {
-			undef $w;
-			$w = $in->wait_message(
-			     N("Printerdrake"),
-			     N("Installing mtools packages..."))
+		# Take the DeviceURI from $hplipdevice.
+		$printer->{currentqueue}{connect} = $hplipdevice;
+	    }
+	}
+	print "##### 10 |$hplipdevice|\n";
+	if (!$hplipdevice) {
+	    if ($makemodel =~ /HP\s+(OfficeJet|PSC|PhotoSmart|LaserJet\s+(1200|1220|2200|30(15|20|30)|3200|33.0|4345)|(DeskJet|dj)\s*450)/i ||
+		$makemodel =~ /Sony\s+IJP[\s\-]+V[\s\-]+100/i ||
+		$isHPOJ) {
+		# Install HPOJ package
+		my $hpojinstallfailed = 0;
+		if (!$::testing &&
+		    !files_exist(qw(/usr/sbin/ptal-mlcd
+				    /usr/sbin/ptal-init
+				    /usr/bin/xojpanel
+				    /usr/sbin/lsusb))) {
+		    if ($::noX) {
+			$hpojinstallfailed = 1;
+		    } else {
+			$w = $in->wait_message(N("Printerdrake"),
+					       N("Installing HPOJ package..."))
 			    if !$printer->{noninteractive};
-			$::noX
-			    or $in->do_pkgs->install('mtools', 'mtoolsfm')
+			$in->do_pkgs->install('hpoj', 'xojpanel', 'usbutils')
 			    or do {
 				$in->ask_warn(N("Warning"),
 					      N("Could not install the %s packages!",
-						"Mtools") . " " .
-					      N("Photo memory card access on the %s will not be possible.",
+						"HPOJ") . " " .
+					      N("Only printing will be possible on the %s.",
 						$makemodel));
+				$hpojinstallfailed = 1;
 			    };
 		    }
-		    # Configure mtools/MToolsFM for photo card access
-		    printer::main::config_photocard();
 		}
+		# Configure and start HPOJ
+		undef $w;
+		$w = $in->wait_message
+		    (N("Printerdrake"),
+		     N("Checking device and configuring HPOJ..."))
+		    if !$printer->{noninteractive};
 		
-		if (!$printer->{noninteractive}) {
-		    my $text = "";
-		    # Inform user about how to scan with his MF device
-		    $text = scanner_help($makemodel, "ptal://$ptaldevice");
-		    if ($text) {
-			undef $w;
-			$in->ask_warn(
-			     N("Scanning on your HP multi-function device"),
-			     $text);
-		    }
-		    # Inform user about how to access photo cards with his 
-		    # MF device
-		    $text = photocard_help($makemodel, "ptal://$ptaldevice");
-		    if ($text) {
-			undef $w;
-			$in->ask_warn(N("Photo memory card access on your HP multi-function device"),
-				      $text);
-		    }
+		eval { $ptaldevice = printer::main::configure_hpoj
+			   ($device, @autodetected) if !$hpojinstallfailed };
+		
+		if (my $err = $@) {
+		    warn qq(HPOJ conf failure: "$err");
+		    log::l(qq(HPOJ conf failure: "$err"));
 		}
-		# make the DeviceURI from $ptaldevice.
-		$printer->{currentqueue}{connect} = "ptal://" . $ptaldevice;
+
+		if ($ptaldevice) {
+		    # HPOJ has determined the device name, make use of
+		    # it if we did not know it before
+		    if (!$do_auto_detect ||
+			!$makemodel ||
+			$makemodel eq $searchunknown ||
+			$makemodel =~ /^\s*$/) {
+			$makemodel = $ptaldevice;
+			$makemodel =~ s/^.*:([^:]+)$/$1/;
+			$makemodel =~ s/_/ /g;
+			if ($makemodel =~ /^\s*IJP/i) {
+			    $makemodel = "Sony $makemodel";
+			} else {
+			    $makemodel = "HP $makemodel";
+			}
+		    }
+		    # Configure scanning with SANE on the MF device
+		    if ($makemodel !~ /HP\s+PhotoSmart/i &&
+			$makemodel !~ /HP\s+LaserJet\s+2200/i &&
+			$makemodel !~ /HP\s+(DeskJet|dj)\s*450/i) {
+			# Install SANE
+			if (!$::testing &&
+			    (!files_exist(qw(/usr/bin/scanimage
+					     /usr/bin/xscanimage
+					     /etc/sane.d/dll.conf
+					     /usr/lib/libsane-hpoj.so.1)) ||
+			     (!files_exist(qw(/usr/bin/xsane)) &&
+			      !files_exist(qw(/usr/bin/kooka)) &&
+			      ($::isInstall ||
+			       !$in->do_pkgs->is_installed('scanner-gui'))))) {
+			    undef $w;
+			    $w = $in->wait_message
+				(N("Printerdrake"),
+				 N("Installing SANE packages..."))
+				if !$printer->{noninteractive};
+			    $::noX
+				or $in->do_pkgs->install('sane-backends',
+							 'sane-frontends',
+							 ($::isInstall ?
+							  'xsane' : 
+							  'scanner-gui'), 
+							 'libsane-hpoj1')
+				or do {
+				    $in->ask_warn(N("Warning"),
+						  N("Could not install the %s packages!",
+						    "SANE") . " " .
+						  N("Scanning on the %s will not be possible.",
+						    $makemodel));
+				};
+			}
+			# Configure the HPOJ SANE backend
+			printer::main::config_sane('hpoj');
+		    }
+		    # Configure photo card access with mtools and MToolsFM
+		    if (($makemodel =~ /HP\s+PhotoSmart/i ||
+			 $makemodel =~ /HP\s+PSC\s*9[05]0/i ||
+			 $makemodel =~ /HP\s+PSC\s*13[15]\d/i ||
+			 $makemodel =~ /HP\s+PSC\s*161\d/i ||
+			 $makemodel =~ /HP\s+PSC\s*2\d\d\d/i ||
+			 $makemodel =~ /HP\s+OfficeJet\s+D\s*1[45]5/i ||
+			 $makemodel =~ /HP\s+OfficeJet\s+71[34]0/i ||
+			 $makemodel =~ /HP\s+OfficeJet\s+91\d\d/i ||
+			 $makemodel =~ /HP\s+(DeskJet|dj)\s*450/i) &&
+			$makemodel !~ /HP\s+PhotoSmart\s+7150/i) {
+			# Install mtools and MToolsFM
+			if (!$::testing &&
+			    !files_exist(qw(/usr/bin/mdir
+					    /usr/bin/mcopy
+					    /usr/bin/MToolsFM
+					    ))) {
+			    undef $w;
+			    $w = $in->wait_message
+				(N("Printerdrake"),
+				 N("Installing mtools packages..."))
+				if !$printer->{noninteractive};
+			    $::noX
+				or $in->do_pkgs->install('mtools', 'mtoolsfm')
+				or do {
+				    $in->ask_warn(N("Warning"),
+						  N("Could not install the %s packages!",
+						    "Mtools") . " " .
+						  N("Photo memory card access on the %s will not be possible.",
+						    $makemodel));
+				};
+			}
+			# Configure mtools/MToolsFM for photo card access
+			printer::main::config_photocard();
+		    }
+		    
+		    if (!$printer->{noninteractive}) {
+			my $text = "";
+			# Inform user about how to scan with his MF device
+			$text = scanner_help($makemodel, "ptal://$ptaldevice");
+			if ($text) {
+			    undef $w;
+			    $in->ask_warn
+				(N("Scanning on your HP multi-function device"),
+				 $text);
+			}
+			# Inform user about how to access photo cards with his 
+			# MF device
+			$text = photocard_help($makemodel, "ptal://$ptaldevice");
+			if ($text) {
+			    undef $w;
+			    $in->ask_warn(N("Photo memory card access on your HP multi-function device"),
+					  $text);
+			}
+		    }
+		    # make the DeviceURI from $ptaldevice.
+		    $printer->{currentqueue}{connect} =
+			"ptal://" . $ptaldevice;
+		} else {
+		    # make the DeviceURI from $device.
+		    $printer->{currentqueue}{connect} = $device;
+		}
 	    } else {
 		# make the DeviceURI from $device.
 		$printer->{currentqueue}{connect} = $device;
 	    }
 	    $w = $in->wait_message(
 		 N("Printerdrake"),
-		 N("Checking device and configuring HPOJ..."))
+		 N("Configuring device..."))
 		if !$printer->{noninteractive} && !defined($w);
-	} else {
-	    # make the DeviceURI from $device.
-	    $printer->{currentqueue}{connect} = $device;
 	}
     } else {
 	# make the DeviceURI from $device.
@@ -4800,14 +4887,14 @@ What do you want to modify on this printer?",
 		if ($printer->{currentqueue}{connect} =~ m!^ptal://?hpjd!) {
 		    $printer->{TYPE} = "socket";
 		} else {
-		    foreach my $type (qw(file parallel serial usb ptal
+		    foreach my $type (qw(file parallel serial usb ptal hp
 					 mtink lpd socket smb ncp
 					 postpipe)) {
 			if ($printer->{currentqueue}{connect} =~
 			    /^$type:/) {
 			    $printer->{TYPE} = 
 				($type =~ 
-				 /(file|parallel|serial|usb|ptal|mtink)/ ? 
+				 /(file|parallel|serial|usb|ptal|hp|mtink)/ ? 
 				 'LOCAL' : uc($type));
 			    last;
 			}
