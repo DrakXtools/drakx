@@ -339,7 +339,7 @@ pci_probe(probe_type)
       struct pciusb_entry e = entries.entries[i];
       snprintf(buf, sizeof(buf), "%04x\t%04x\t%04x\t%04x\t%d\t%d\t%d\t%s\t%s\t%s", 
                e.vendor, e.device, e.subvendor, e.subdevice, e.pci_bus, e.pci_device, e.pci_function,
-               pci_class2text(e.class), e.module ? e.module : "unknown", e.text);
+               pci_class2text(e.class_), e.module ? e.module : "unknown", e.text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
     pciusb_free(entries);
@@ -355,7 +355,7 @@ usb_probe()
     for (i = 0; i < entries.nb; i++) {
       struct pciusb_entry e = entries.entries[i];
       snprintf(buf, sizeof(buf), "%04x\t%04x\t%s\t%s\t%s", 
-               e.vendor, e.device, usb_class2text(e.class), e.module ? e.module : "unknown", e.text);
+               e.vendor, e.device, usb_class2text(e.class_), e.module ? e.module : "unknown", e.text);
       PUSHs(sv_2mortal(newSVpv(buf, 0)));
     }
     pciusb_free(entries);
