@@ -832,7 +832,10 @@ sub summaryBefore {
 sub summary_prompt {
     my ($o, $l, $check_complete) = @_;
 
-    ($_->{format}, $_->{val}) = ($_->{val}, '') foreach @$l;
+    foreach (@$l) {
+	my $val = $_->{val};
+	($_->{format}, $_->{val}) = (sub { $val->() || N("not configured") }, '');
+    }
     
     $o->ask_from_({
 		   messages => N("Summary"),
@@ -948,14 +951,14 @@ sub summary {
     push @l, {
 	group => N("Hardware"),
 	label => N("Graphical interface"),
-	val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : N("not configured") },
+	val => sub { $o->{raw_X} ? Xconfig::various::to_string($o->{raw_X}) : '' },
 	clicked => sub { configureX($o, 'expert') }, 
     };
 
     push @l, {
 	group => N("Network & Internet"),
 	label => N("Network"),
-	val => sub { $o->{netcnx}{type} || N("not configured") },
+	val => sub { $o->{netcnx}{type} },
 	clicked => sub { 
 	    require network::netconnect;
 	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o->{netc}, $o->{mouse}, $o, $o->{intf}, 0, 0, 1);
