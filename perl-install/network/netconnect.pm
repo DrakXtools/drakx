@@ -77,7 +77,8 @@ sub detect_timezone() {
       my $first_time = $o_first_time || 0;
       my ($network_configured, $direct_net_install, $cnx_type, $type, $interface, @cards, @all_cards, @devices);
       my (%connections, %rconnections, @connection_list);
-      my ($modem, $ntf_name, $ipadr, $netadr, $gateway_ex, $up, $modem, $isdn, $isdn_type, $adsl_type, $need_restart_network);
+      my ($modem, $modem_name);
+      my ($ntf_name, $ipadr, $netadr, $gateway_ex, $up, $isdn, $isdn_type, $adsl_type, $need_restart_network);
       my ($module, $text, $auto_ip, $net_device, $onboot, $needhostname, $hotplug, $track_network_id, @fields); # lan config
       my $success = 1;
       my $ethntf = {};
@@ -372,10 +373,10 @@ Take a look at http://www.linmodems.org"),
                     },
                     name => N("Select the modem to configure:"),
                     data => sub {
-                        [ { label => N("Modem"), type => "list", val => \$modem, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
+                        [ { label => N("Modem"), type => "list", val => \$modem_name, list => [ keys %{$netc->{autodetect}{modem}} ], allow_empty_list => 1 } ],
                     },
                     post => sub {
-                        $ntf_name = $netc->{autodetect}{modem}{$modem}{device} || $netc->{autodetect}{modem}{$modem}{description};
+                        $ntf_name = $netc->{autodetect}{modem}{$modem_name}{device} || $netc->{autodetect}{modem}{$modem_name}{description};
                         print "Interface is $ntf_name\n";
 
                         return "ppp_choose" if $ntf_name =~ m!^/dev/!;
