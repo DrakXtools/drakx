@@ -156,7 +156,7 @@ sub rewrite2_ {
 	qq(\n$text\n);
     } elsif (member($tree->{tag}, 'quote', 'citetitle', 'foreignphrase')) {
 	($i18ned_open_text_quote || "``") . $text . ($i18ned_close_text_quote || "''");
-    } elsif (member($tree->{tag}, 'guilabel', 'guibutton', 'guimenu', 'literal')) {
+    } elsif (member($tree->{tag}, 'guilabel', 'guibutton', 'guimenu', 'literal', 'filename')) {
 	($i18ned_open_label_quote || "\\\"") . $text . ($i18ned_close_label_quote || "\\\"");
     } elsif ($tree->{tag} eq 'command') {
 	($i18ned_open_command_quote || "\\\"") . $text . ($i18ned_close_command_quote || "\\\"");
