@@ -82,13 +82,33 @@ sub get_eth_cards_names {
     my ($modules_conf, @all_cards) = @_;
     
     foreach my $card (@all_cards) {
+	#- fix modules aliases
 	$modules_conf->remove_alias($card->[1]);
 	$modules_conf->set_alias($card->[0], $card->[1]);
+
+	#- update iftab
+	update_eth_card_iftab($card->[0]);
     }
 
     { map { $_->[0] => join(': ', $_->[0], $_->[2]) } @all_cards };
 }
 
+#- returns (link_type, mac_address)
+sub get_eth_card_mac_address {
+    my ($intf) = @_;
+    `LC_ALL= LANG= $::prefix/sbin/ip -o link show $intf 2>/dev/null` =~ m|.*link/(\S+)\s([0-9a-z:]+)\s|;
+}
+
+#- write interface MAC address (if any) in iftab
+sub update_eth_card_iftab {
+    my ($intf) = @_;
+    my ($link_type, $mac_address) = get_eth_card_mac_address($intf) or next;
+    my $descriptor = ${{ ether => 'mac', ieee1394 => 'mac_ieee1394' }}{$link_type} or next;
+    substInFile {
+        s/^$intf\s+.*\n//;
+        $_ .= qq($intf\t$descriptor $mac_address\n) if eof
+    } "$::prefix/etc/iftab";
+}
 
 # automatic net aliases configuration
 sub configure_eth_aliases {
