@@ -59,8 +59,6 @@ sub selectLanguage {
     $o->{locale}{lang} = any::selectLanguage($o, $o->{locale}{lang}, $o->{locale}{langs} ||= {});
     install_steps::selectLanguage($o);
 
-    $o->charsetChanged;
-
     if ($o->isa('interactive::gtk')) {
 	$o->ask_warn('', formatAlaTeX(
 "If you see this message it is because you chose a language for

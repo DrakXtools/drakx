@@ -17,6 +17,11 @@ sub new($$) {
     (bless {}, ref($type) || $type)->SUPER::new($o);
 }
 
+sub charsetChanged {
+    my ($o) = @_;
+    lang::load_console_font($o->{locale});
+}
+
 sub enteringStep {
     my ($o, $step) = @_;
     print N("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
@@ -26,15 +31,6 @@ sub leavingStep {
     my ($o, $step) = @_;
     $o->SUPER::leavingStep($step);
     print "--------\n";
-}
-
-#-######################################################################################
-#- Steps Functions
-#-######################################################################################
-sub selectLanguage {
-    my ($o, $first_time) = @_;
-    $o->SUPER::selectLanguage($first_time);
-    lang::load_console_font($o->{locale});
 }
 
 1;

@@ -94,6 +94,11 @@ sub wait_message {
     my ($_o, $_title, $_message) = @_;
 }
 
+sub charsetChanged {
+    my ($o) = @_;
+    lang::load_console_font($o->{locale});
+}
+
 sub errorInStep {
     my ($_o, $_err) = @_;
     print "error :(\n"; 
@@ -107,12 +112,6 @@ sub errorInStep {
 #-######################################################################################
 #- Steps Functions
 #-######################################################################################
-sub selectLanguage {
-    my ($o) = @_;
-    $o->install_steps::selectLanguage;
-    lang::load_console_font($o->{locale});
-}
-
 sub installPackages {
     my ($o, $packages) = @_;
     catch_cdie { $o->install_steps::installPackages($packages) } sub { print formatError($@), "\n"; 1 }

@@ -35,6 +35,11 @@ sub new {
     (bless {}, ref($type) || $type)->SUPER::new($o);
 }
 
+sub charsetChanged {
+    my ($o) = @_;
+    lang::load_console_font($o->{locale});
+}
+
 sub enteringStep {
     my ($o, $step) = @_;
     $o->SUPER::enteringStep($step);
@@ -45,16 +50,6 @@ sub exitInstall {
     &install_steps_interactive::exitInstall;
     interactive::newt::end();
 }
-
-#-######################################################################################
-#- Steps Functions
-#-######################################################################################
-sub selectLanguage {
-    my ($o) = @_;
-    $o->SUPER::selectLanguage;
-    lang::load_console_font($o->{locale});
-}
-
 
 1;
 

@@ -114,6 +114,8 @@ sub selectLanguage {
 	keyboard::setup($o->{keyboard}) if !$::live;
     }
 
+    $o->charsetChanged;
+
     addToBeDone {
 	lang::write_langs($o->{prefix}, $o->{locale}{langs});
     } 'formatPartitions' unless $::g_auto_install;
