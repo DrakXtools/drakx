@@ -16,7 +16,8 @@ sub parse {
 	s/^\s*//;
 	s/\s*$//;
 	if ($nb == 2) {
-	    ($indic, $name) = /([A-Z ]*[A-Z])\s+(\S+)/ or die "bad line $_";
+	    s/US CA:/US CA/;
+	    ($indic, $name) = /([A-Z ]*[A-Z])\s+([.\w-]+)/ or die "bad line $_";
 	} else {
 	    s/^(.*):\s*/$field = $1; ''/e;
 	    $field = lc $field;
@@ -40,8 +41,8 @@ use Data::Dumper;
 foreach (grep { $_->{policy} eq 'open access' } @all) {
     ($country, $state) = split ' ', $_->{indic};
     $country = ucfirst(lc $country_codes{$country});
-    $country .= " ($state)" if $state;
-    print "$country|$_->{name}\n";
+    $country .= " $state" if $state;
+    print lc($_->{name}), " $country\n";
 }
 
 BEGIN {
