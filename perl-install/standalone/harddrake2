@@ -45,10 +45,8 @@ my %fields =
       "host" => [ N("Disk controller"), N("the disk controller on the host side") ],
       "media_type" => [ N("Media class"), N("class of hardware device") ],
       "Model" => [ N("Model"), N("hard disk model") ],
-      "nbuttons" => [ N("Number of buttons"), N("the number of buttons the mouse has") ],
       "port" => [ N("Port"), N("network printer port") ],
       "primary_partitions" => [ N("Primary partitions"), N("the number of the primary partitions") ],
-      "type" => [ N("Type"), N("the type of bus on which the mouse is connected") ],
       "Vendor" => [ N("Vendor"), N("the vendor name of the device") ],
       "pci_bus" => [ N("Bus PCI #"), N("the PCI bus on which the device is plugged") ],
       "pci_device" => [ N("PCI device #"), N("PCI device number") ],
@@ -96,6 +94,8 @@ my %fields =
      },
      MOUSE => {
       name => [ N("Name"), N("the name of the mouse") ],
+      nbuttons => [ N("Number of buttons"), N("the number of buttons the mouse has") ],
+      type => [ N("Type"), N("the type of bus on which the mouse is connected") ],
      }
     );
 
