@@ -179,10 +179,7 @@ endif
 ifeq (x86_64, $(ARCH))
 DIRS = dietlibc
 endif
-DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt
-ifneq (x86_64, $(ARCH))
-DIRS += ppp/pppd rp-pppoe/src
-endif
+DIRS += mar pci-resource usb-resource bzlib $(INSMOD) slang newt ppp/pppd rp-pppoe/src
 ifeq (i386, $(ARCH))
 DIRS += pcmcia_
 endif
