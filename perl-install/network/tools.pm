@@ -276,23 +276,6 @@ sub get_internet_connection {
     return $gw_intf, $is_up, $gw_address, $netc->{dnsServer};
 }
 
-#- returns (ping to mandrakesoft.com, resolved host)
-sub test_internet_connection() {
-    if (my $ip = gethostbyname('mandrakesoft.com')) {
-        require Net::Ping;
-        my $p;
-        if ($>) {
-            $p = Net::Ping->new('tcp');
-            # Try connecting to the www port instead of the echo port
-            $p->{port_num} = getservbyname('http', 'tcp');
-        } else {
-            $p = Net::Ping->new('icmp');
-        }
-        #- default timeout is 5 seconds
-        return $ip, to_bool($p->ping($ip));
-    }
-}
-
 sub get_interface_type {
     my ($interface) = @_;
     $interface->{DEVICE} =~ /^(eth|ath|wlan)/ && "ethernet" ||
