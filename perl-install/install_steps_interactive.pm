@@ -60,9 +60,6 @@ sub selectLanguage {
     $o->charsetChanged;
 
     if ($o->isa('interactive::gtk')) {
-        if (N("default:LTR") eq "default:RTL") {
-            Gtk2::Widget->set_default_direction("rtl");
-        };
 	$o->ask_warn('', formatAlaTeX(
 "If you see this message it is because you chose a language for
 which DrakX does not include a translation yet; however the fact
