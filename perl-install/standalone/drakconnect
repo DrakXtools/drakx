@@ -622,7 +622,6 @@ sub save {
                                save_notebook($netc, $p->{$_}{intf}, $p->{$_}{gui}) or return;
                                $p->{$_}{intf}{save} ? $p->{$_}{intf}{save}->() : apply($netc, $p->{$_}{intf});
                            }
-                           
                            system("/etc/rc.d/init.d/network restart");
                            $dialog->response(0);
                        });
