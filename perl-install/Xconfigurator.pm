@@ -284,8 +284,12 @@ What do you want to do?"), sub { translate($_[0]{text}) }, \@choices) or return;
 				     $card->{identifier} =~ /SiS.*630/ ||
 				     $card->{identifier} =~ /Radeon /); #- 16bits preferable ?
     #- 3D acceleration configuration for XFree 4.0 using NVIDIA driver (TNT, TN2 and GeForce cards only).
-    $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{type} =~ /RIVA TNT/ ||
-							       $card->{type} =~ /GeForce/);
+    $card->{NVIDIA_glx} = $cardOptions->{allowNVIDIA_rpms} && ($card->{identifier} =~ /[nN]Vidia.*T[nN]T2/ || #- TNT2 cards
+							       $card->{identifier} =~ /[nN]Vidia.*NV[56]/ ||
+							       $card->{identifier} =~ /[nN]Vidia.*Vanta/ ||
+							       $card->{identifier} =~ /[nN]Vidia.*GeForce/ || #- GeForce cards
+							       $card->{identifier} =~ /[nN]Vidia.*NV1[15]/ ||
+							       $card->{identifier} =~ /[nN]Vidia.*Quadro/);
 
     #- check to use XFree 4.0 or XFree 3.3.
     $card->{use_xf4} = $card->{driver} && !$card->{flags}{unsupported};
