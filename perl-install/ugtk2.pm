@@ -1020,28 +1020,29 @@ sub ask_browse_tree_info {
 		    0, $common->{message},
 		    1, gtkpack(Gtk2::HBox->new(0,0),
 			       create_scrolled_window($tree),
-			       gtkadd(gtkset_size_request(Gtk2::Frame->new(N("Info")), $::windowwidth - 490, 0),
+			       gtkadd(Gtk2::Frame->new(N("Info")),
 				      create_scrolled_window(my $info = Gtk2::TextView->new),
 				     )),
-		    0, my $l = Gtk2::HBox->new(0,15),
-		    0, gtkpack(Gtk2::HBox->new(0,10),
-			       my $go = gtksignal_connect(Gtk2::Button->new($common->{ok}), clicked => sub {
-							      $w->{retval} = 1;
-							      Gtk2->main_quit }),
-			       $common->{cancel} ? gtksignal_connect(Gtk2::Button->new($common->{cancel}), clicked => sub {
-									  $w->{retval} = 0;
-									  Gtk2->main_quit })
-			                         : (),
-			      )));
-    gtkpack__($l, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
+		    0, my $box1 = Gtk2::HBox->new(0,15),
+		    0, my $box2 = Gtk2::HBox->new(0,10),
+		   ));
+    gtkpack__($box2, my $toolbar = Gtk2::Toolbar->new('horizontal', 'icons'));
+
+    $box2->pack_end(gtksignal_connect(Gtk2::Button->new($common->{cancel}), clicked => sub {
+					  $w->{retval} = 0;
+					  Gtk2->main_quit }), 0, 1, 20) if $common->{cancel};
+
+    $box2->pack_end(my $go = gtksignal_connect(Gtk2::Button->new($common->{ok}), clicked => sub {
+						   $w->{retval} = 1;
+						   Gtk2->main_quit }), 0, 1, 20);
 
     if ($common->{auto_deps}) {
-	gtkpack__($l, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new($common->{auto_deps}), $common->{state}{auto_deps}),
+	gtkpack__($box1, gtksignal_connect(gtkset_active(Gtk2::CheckButton->new($common->{auto_deps}), $common->{state}{auto_deps}),
 					clicked => sub { invbool \$common->{state}{auto_deps} }));
     }
-    $l->pack_end(my $status = Gtk2::Label->new, 0, 1, 20);
+    $box1->pack_end(my $status = Gtk2::Label->new, 0, 1, 20);
 
-    $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight);
+    $w->{window}->set_size_request(map { $_ - 2 * $border - 4 } $::windowwidth, $::windowheight) if !$::isInstall;
     $go->grab_focus;
     $w->{rwindow}->show_all;
 
