@@ -64,7 +64,7 @@ sub leavingStep($$) {
     while (my $f = shift @{$o->{steps}{$step}{toBeDone} || []}) {
 	eval { &$f() };
 	$o->ask_warn(_("Error"), [
-_("An error occurred, i don't know how to handle it nicely,
+_("An error occurred, but I don't know how to handle it nicely,
 so continue at your own risk :("), $@ ]) if $@;
     }
 }
@@ -275,7 +275,7 @@ sub createBootdisk($) {
 
     my @l = detect_devices::floppies();
 
-    $dev = shift @l || die _("no floppy available")
+    $dev = shift @l || die _("No floppy drive available")
       if $dev eq "1"; #- special case meaning autochoose
 
     return if $::testing;

@@ -18,7 +18,7 @@ use log;
 
 sub enteringStep($$$) {
     my ($o, $step) = @_;
-    print _("Starting step `%s'\n", $o->{steps}{$step}{text});
+    print _("Entering step `%s'\n", $o->{steps}{$step}{text});
 }
 sub leavingStep {
     my ($o) = @_;

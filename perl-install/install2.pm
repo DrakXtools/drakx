@@ -28,7 +28,7 @@ use printer;
 use modules;
 use detect_devices;
 use modparm;
-#use install_steps_graphical;
+use install_steps_graphical;
 use run_program;
 
 #-######################################################################################
@@ -52,7 +52,7 @@ my @installSteps = (
   configurePrinter   => [ __("Configure printer"), 1, 0, "doInstallStep" ],
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
-  createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
+  createBootdisk     => [ __("Create a bootdisk"), 1, 0, "doInstallStep" ],
   setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
   exitInstall        => [ __("Exit install"), 0, 0 ],
@@ -75,7 +75,7 @@ $installSteps{first} = $installSteps[0];
 #-#####################################################################################
 #-INTERN CONSTANT
 #-#####################################################################################
-my @install_classes = (__("beginner"), __("developer"), __("server"), __("expert"));
+my @install_classes = (__("Beginner"), __("Developer"), __("Server"), __("Expert"));
 
 #-#####################################################################################
 #-Default value
@@ -266,7 +266,7 @@ sub selectPath {
 	my $selected_partition;
 	do {
 	    if ($selected_partition->{mntpoint} && !$selected_partition->{currentMntpoint}) {
-		$o->ask_warn(_("Information"), "$selected_partition->{device}" . _(" : This is not a root partition, try again."))
+		$o->ask_warn(_("Information"), "$selected_partition->{device}" . _(" : This is not a root partition, please select another one."))
 		  unless $::beginner;
 		log::l("umounting non root partition $selected_partition->{device}");
 		eval { fs::umount_part($selected_partition); };
@@ -382,7 +382,7 @@ I'll try to go on blanking bad partitions"));
 
     $o->{fstab} = [ fsedit::get_fstab(@{$o->{hds}}) ];
 
-    fsedit::get_root($o->{fstab}) or die _("partitioning failed: no root filesystem");
+    fsedit::get_root($o->{fstab}) or die _("Partitioning failed: no root filesystem");
 }
 
 sub formatPartitions {

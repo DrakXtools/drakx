@@ -161,7 +161,7 @@ sub cardConfiguration(;$$) {
     $card->{type} = undef unless $card->{server}; #- bad type as we can't find the server
 
     add2hash($card, cardConfigurationAuto()) unless $card->{server} || $noauto;
-    $card->{type} = $in->ask_from_list('', _("Choose a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
+    $card->{type} = $in->ask_from_list('', _("Select a graphic card"), ['Unlisted', keys %cards]) unless $card->{type} || $card->{server};
     $card->{type} = undef, $card->{server} = $in->ask_from_list('', _("Choose a X server"), \@allservers) if $card->{type} eq "Unlisted";
 
     add2hash($card, $cards{$card->{type}}) if $card->{type};
@@ -205,8 +205,8 @@ at which the whole screen is refreshed, and most importantly the horizontal
 sync rate, which is the rate at which scanlines are displayed.
 
 It is VERY IMPORTANT that you do not specify a monitor type with a sync range
-that is beyond the capabilities of your monitor. If in doubt, choose a
-conservative setting."),
+that is beyond the capabilities of your monitor: you may damage your monitor.
+ If in doubt, choose a conservative setting."),
 				  [ _("Horizontal refresh rate"), _("Vertical refresh rate") ],
 				  [ { val => \$monitor->{hsyncrange}, list => \@hsyncranges },
 				    { val => \$monitor->{vsyncrange}, list => \@vsyncranges }, ]);
@@ -317,7 +317,7 @@ sub testFinalConfig($;$) {
 	    $time-- or Gtk->main_quit;
 	});
 
-	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this ok?"), $text ], 0) ? 0 : 222);
+	exit (interactive_gtk->new->ask_yesorno('', [ _("Is this correct?"), $text ], 0) ? 0 : 222);
     };
     my $rc = close F;
     my $err = $?;
@@ -334,7 +334,7 @@ sub autoResolutions($;$) {
     my $card = $o->{card};
 
     $nowarning || $in->ask_okcancel(_("Automatic resolutions"),
-_("To find the available resolutions i will try different ones.
+_("To find the available resolutions I will try different ones.
 Your screen will blink...
 You can switch if off if you want, you'll hear a beep when it's over"), 1) or return;
 
@@ -484,7 +484,7 @@ sub resolutionsConfiguration($%) {
 	unless ($options{noauto}) {
 	    if ($options{nowarning} || $in->ask_okcancel(_("Automatic resolutions"),
 _("I can try to find the available resolutions (eg: 800x600).
-Alas it can freeze sometimes
+Sometimes, though, it may hang the machine.
 Do you want to try?"), 1)) {
 		autoResolutions($o, $options{nowarning});
 		is_empty_hash_ref($card->{depth}) and $in->ask_warn('',
@@ -680,7 +680,7 @@ sub show_info {
     $info .= _("Monitor HorizSync: %s\n", $o->{monitor}{hsyncrange}) if $::expert;
     $info .= _("Monitor VertRefresh: %s\n", $o->{monitor}{vsyncrange}) if $::expert;
     $info .= _("Graphic card: %s\n", $o->{card}{type});
-    $info .= _("Graphic memory: %s KB\n", $o->{card}{memory}) if $o->{card}{memory};
+    $info .= _("Graphic memory: %s kB\n", $o->{card}{memory}) if $o->{card}{memory};
     $info .= _("XFree86 server: %s\n", $o->{card}{server});
 
     $in->ask_warn('', $info);
@@ -731,8 +731,8 @@ Would you like X to start when you reboot?"), 1);
 
 	$in->ask_warn(_("X successfully configured"),
 _("Configuration file has been written. Take a look at it before running 'startx'.
-Within the server press ctrl, alt and '+' simultaneously to cycle video resolutions.
-Pressing ctrl, alt and backspace simultaneously immediately exits the server
+Within the server, press Ctrl, Alt and '+' simultaneously to cycle through video resolutions.
+Pressing Ctrl, Alt and Backspace simultaneously immediately exits the server
 For further configuration, refer to /usr/X11R6/lib/X11/doc/README.Config.")) unless $::auto;
     }
 }

@@ -60,7 +60,7 @@ sub selectKeyboard($) {
     my ($o) = @_;
     $o->{keyboard} =
       keyboard::text2keyboard($o->ask_from_list_("Keyboard",
-						 _("Which keyboard do you have?"),
+						 _("What is your keyboard layout?"),
 						 [ keyboard::list() ],
 						 keyboard::keyboard2text($o->{keyboard})));
     $o->{keyboard_force} = 1;
@@ -81,7 +81,7 @@ sub selectRootPartition($@) {
     my ($o,@partitions) = @_;
     $o->{upgradeRootPartition} =
       $o->ask_from_list_(_("Root Partition"),
-			 _("What is the root partition of your system?"),
+			 _("What is the root partition (/) of your system?"),
 			 [ @partitions ], $o->{upgradeRootPartitions});
 #- TODO check choice, then mount partition in $o->{prefix} and autodetect.
 #-    install_steps::selectRootPartition($o);
@@ -91,7 +91,7 @@ sub selectInstallClass($@) {
     my ($o, @classes) = @_;
     $o->{installClass} =
       $o->ask_from_list_(_("Install Class"),
-			 _("What type of user will you have?"),
+			 _("What installation class do you want?"),
 			 [ @classes ], $o->{installClass});
     install_steps::selectInstallClass($o);
 }
@@ -102,11 +102,11 @@ sub selectMouse {
 
     my $name = $o->{mouse}{FULLNAME};
     if (!$name || $::expert || $force) {
-	$name = $o->ask_from_list_('', _("Which mouse do you have"), [ mouse::names() ], $name);
+	$name = $o->ask_from_list_('', _("What is the type of your mouse?"), [ mouse::names() ], $name);
 	$o->{mouse} = mouse::name2mouse($name);
     }
     my $b = $o->{mouse}{nbuttons} < 3;
-    $o->{mouse}{XEMU3} = 'yes' if $::expert && $o->ask_yesorno('', _("Emulate third button"), $b) || $b;
+    $o->{mouse}{XEMU3} = 'yes' if $::expert && $o->ask_yesorno('', _("Emulate third button?"), $b) || $b;
 
     $o->{mouse}{device} = mouse::serial_ports_names2dev(
 	$o->ask_from_list(_("Mouse Port"),
@@ -151,7 +151,7 @@ sub formatPartitions {
 #------------------------------------------------------------------------------
 sub setPackages {
     my ($o, $install_classes) = @_;
-    my $w = $o->wait_message('', _("Searching for available packages"));
+    my $w = $o->wait_message('', _("Looking for available packages"));
     $o->SUPER::setPackages($install_classes);
 }
 #------------------------------------------------------------------------------
@@ -169,16 +169,16 @@ sub configureNetwork($) {
 	    my @l = (
 		     __("Keep the current IP configuration"),
 		     __("Reconfigure network now"),
-		     __("Don't set up networking"),
+		     __("Do not set up networking"),
 		    );
 	    $r = $o->ask_from_list_(_("Network Configuration"),
-				    _("LAN networking has already been configured. Do you want to:"),
+				    _("Local networking has already been configured. Do you want to:"),
 				    [ @l ]);
 	    $r ||= "Don't";
 	}
     } else {
 	$o->ask_yesorno(_("Network Configuration"),
-			_("Do you want to configure LAN (not dialup) networking for your installed system?")) or $r = "Don't";
+			_("Do you want to configure LAN (not dialup) networking for your system?")) or $r = "Don't";
     }
 
     if ($r =~ /^Don\'t/) {
@@ -243,7 +243,7 @@ sub configureNetworkNet {
 _("Please enter your host name.
 Your host name should be a fully-qualified host name,
 such as ``mybox.mylab.myco.com''.
-Also give the gateway if you have one"),
+You may also enter the IP address of the gateway if you have one"),
 			     [_("Host name:"), _("DNS server:"), _("Gateway:"), !$::beginner ? _("Gateway device:") : ()],
 			     [(map { \$netc->{$_}} qw(HOSTNAME dnsServer GATEWAY)),
 				      {val => \$netc->{GATEWAYDEV}, list => \@devices}]
@@ -256,7 +256,7 @@ sub timeConfig {
 
     $o->{timezone}{GMT} = $o->ask_yesorno('', _("Is your hardware clock set to GMT?"), $o->{timezone}{GMT});
     $o->{timezone}{timezone} ||= timezone::bestTimezone(lang::lang2text($o->{lang}));
-    $o->{timezone}{timezone} = $o->ask_from_list('', _("In which timezone are you"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
+    $o->{timezone}{timezone} = $o->ask_from_list('', _("Which is your timezone?"), [ timezone::getTimeZones($::g_auto_install ? '' : $o->{prefix}) ], $o->{timezone}{timezone});
     install_steps::timeConfig($o,$f);
 }
 
@@ -283,7 +283,7 @@ sub printerConfig($) {
     if ($::expert) {
 	#std info
 	#Don't wait, if the user enter something, you must remember it
-	$o->ask_from_entries_ref(_("Standard Printer Options"),
+	$o->ask_from_entries_ref(_("Local Printer Options"),
 				 _("Every print queue (which print jobs are directed to) needs a
 name (often lp) and a spool directory associated with it. What
 name and directory should be used for this queue?"),
@@ -320,7 +320,7 @@ name and directory should be used for this queue?"),
 	    $o->{printer}{DEVICE}    = $port;
 	    my $descr = common::bestMatchSentence2($parport[0]{val}{DESCRIPTION}, @printer::entry_db_description);
 	    $o->{printer}{DBENTRY} = $printer::descr_to_db{$descr};
-	    $str = _("I have detected a %s on ", $parport[0]{val}{DESCRIPTION}) . $port;
+	    $str = _("A printer, model \"%s\", has been detected on ", $parport[0]{val}{DESCRIPTION}) . $port;
 	    @port = map { $_->{port}} @parport;
 	} else {
 	    @port = detect_devices::whatPrinterPort();
@@ -345,10 +345,10 @@ on that server which jobs should be placed in."),
 
     } elsif ($o->{printer}{TYPE} eq "SMB") {
 	return if !$o->ask_from_entries_ref(
-	    _("SMB/Windows 95/NT Printer Options"),
+	    _("SMB (Windows 9x/NT) Printer Options"),
 	    _("To print to a SMB printer, you need to provide the
-SMB host name (this is not always the same as the machines
-TCP/IP hostname) and possibly the IP address of the print server, as
+SMB host name (Note! It may be different from its
+TCP/IP hostname!) and possibly the IP address of the print server, as
 well as the share name for the printer you wish to access and any
 applicable user name, password, and workgroup information."),
 	    [_("SMB server host:"), _("SMB server IP:"),
@@ -370,8 +370,8 @@ applicable user name, password, and workgroup information."),
     } else {#($o->{printer}{TYPE} eq "NCP") {
 	return if !$o->ask_from_entries_ref(_("NetWare Printer Options"),
 	    _("To print to a NetWare printer, you need to provide the
-NetWare print server name (this is not always the same as the machines
-TCP/IP hostname) as well as the print queue name for the printer you
+NetWare print server name (Note! it may be different from its
+TCP/IP hostname!) as well as the print queue name for the printer you
 wish to access and any applicable user name and password."),
 	    [_("Printer Server:"), _("Print Queue Name:"),
 	     _("User name:"), _("Password:")],
@@ -417,7 +417,7 @@ wish to access and any applicable user name and password."),
 
     $o->{printer}{CRLF} = $db_entry{DESCR} =~ /HP/;
     $o->{printer}{CRLF}= $o->ask_yesorno(_("CRLF"),
-					 _("Fix stair-stepping of text?"),
+					 _("Fix stair-stepping text?"),
 					 $o->{printer}{CRLF});
 
 
@@ -434,7 +434,7 @@ wish to access and any applicable user name and password."),
 		$o->{printer}{BITSPERPIXEL} =
 		  $col_to_depth{$o->ask_from_list_
 				(_("Configure Uniprint Driver"),
-				 _("You may now configure the uniprint options for this printer."),
+				 _("You may now set the Uniprint driver options for this printer."),
 				 \@col,
 				 $depth_to_col{$o->{printer}{BITSPERPIXEL}},
 				)};
@@ -466,11 +466,11 @@ sub setRootPassword($) {
 
     $o->ask_from_entries_ref(_("Set root password"),
 			 _("Set root password"),
-			 [_("Password"), _("Password (again)")],
+			 [_("Password:"), _("Password (again):")],
 			 [{ val => \$sup->{password},  hidden => 1},
 			  { val => \$sup->{password2}, hidden => 1}],
 			 complete => sub {
-			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,1);
+			     $sup->{password} eq $sup->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,1);
 			     (length $sup->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,0);
 			     return 0
 			 }
@@ -502,7 +502,7 @@ sub addUser($) {
 	    }
 	},
         complete => sub {
-	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("You must enter the same password"), _("Please try again") ]), return (1,3);
+	    $u->{password} eq $u->{password2} or $o->ask_warn('', [ _("The passwords do not match"), _("Please try again") ]), return (1,3);
 	    #(length $u->{password} < 6) and $o->ask_warn('', _("This password is too simple")), return (1,2);
 	    $u->{name} or $o->ask_warn('', _("Please give a user name")), return (1,0);
 	    $u->{name} =~ /^[a-z0-9_-]+$/ or $o->ask_warn('', _("The user name must contain only lower cased letters, numbers, `-' and `_'")), return (1,0);
@@ -526,7 +526,7 @@ sub createBootdisk {
 	$o->ask_yesorno('',
 			_("A custom bootdisk provides a way of booting into your Linux system without
 depending on the normal bootloader. This is useful if you don't want to install
-lilo on your system, or another operating system removes lilo, or lilo doesn't
+LILO on your system, or another operating system removes LILO, or LILO doesn't
 work with your hardware configuration. A custom bootdisk can also be used with
 the Mandrake rescue image, making it much easier to recover from severe system
 failures. Would you like to create a bootdisk for your system?"), $o->{mkbootdisk}) or return;
@@ -557,22 +557,22 @@ sub setupBootloader {
     my $b = $o->{bootloader};
 
     if ($::beginner && !$more) {
-	my @l = (__("First sector of drive"), __("First sector of boot partition"));
+	my @l = (__("First sector of drive (MBR)"), __("First sector of boot partition"));
 
 	my $boot = $o->{hds}[0]{device};
 	my $onmbr = "/dev/$boot" eq $b->{boot};
 	$b->{boot} = "/dev/$boot" if !$onmbr &&
-	  $o->ask_from_list_(_("Lilo Installation"),
+	  $o->ask_from_list_(_("LILO Installation"),
 			     _("Where do you want to install the bootloader?"),
 			     \@l, $l[!$onmbr]) eq $l[0];
     } else {
-	$::expert and $o->ask_yesorno('', _("Do you want to use lilo?"), 1) || return;
+	$::expert and $o->ask_yesorno('', _("Do you want to use LILO?"), 1) || return;
     
 	my @l = (
 _("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
 _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
 _("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
-_("Delay before choosing default choice") => \$b->{timeout},
+_("Delay before booting default image") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
 _("Password") => { val => \$b->{password}, hidden => 1 },
 _("Restrict command line options") => { val => \$b->{restricted}, type => "bool", text => _("restrict") },
@@ -581,7 +581,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 
 	$b->{vga} ||= 'Normal';
 	$o->ask_from_entries_ref('',
-				 _("Lilo main options"), 
+				 _("LILO main options"), 
 				 [ grep_index { even($::i) } @l ],
 				 [ grep_index {  odd($::i) } @l ],
 				 complete => sub {
@@ -594,7 +594,7 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 
     until ($::beginner && !$more) {
 	my $c = $o->ask_from_list_('', 
-_("Here are the following entries in lilo
+_("Here are the following entries in LILO.
 You can add some more or change the existent ones."),
 		[ (sort @{[map_each { "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}]}), __("Add"), __("Done") ],
 	);
@@ -648,7 +648,7 @@ _("Default") => { val => \$default, type => 'bool' },
     eval { $o->SUPER::setupBootloader };
     if ($@) {
 	$o->ask_warn('', 
-		     [ _("Lilo failed. The following error occured:"),
+		     [ _("Installation of LILO failed. The following error occured:"),
 		       grep { !/^Warning:/ } cat_("$o->{prefix}/tmp/.error") ]);
 	die "already displayed";
     }
@@ -659,16 +659,16 @@ sub exitInstall {
     my ($o, $alldone) = @_;
 
     return $o->{step} = '' unless $alldone || $o->ask_yesorno('', 
-_("Some steps are not completed
+_("Some steps are not completed.
 Do you really want to quit now?"), 0);
 
     $o->ask_warn('',
 _("Congratulations, installation is complete.
 Remove the boot media and press return to reboot.
-For information on fixes which are available for this release of Linux Mandrake,
+For information on fixes which are available for this release of Linux-Mandrake,
 consult the Errata available from http://www.linux-mandrake.com/.
 Information on configuring your system is available in the post
-install chapter of the Official Linux Mandrake User's Guide.")) if $alldone;
+install chapter of the Official Linux-Mandrake User's Guide.")) if $alldone;
 }
 
 
@@ -680,7 +680,7 @@ sub loadModule {
     my @options;
 
     my $l = $o->ask_from_list('',
-			      _("What %s card have you?", $type),
+			      _("What %s card do you have?", $type),
 			      [ modules::text_of_type($type) ]) or return;
     my $m = modules::text2driver($l);
 
@@ -696,15 +696,15 @@ not cause any damage.", $l),
       ASK:
 	if (defined @names) {
 	    my @l = $o->ask_from_entries('',
-_("Here must give the different options for the module %s.", $l),
+_("You may now provide its options to module %s.", $l),
 					 \@names) or return;
 	    @options = modparm::get_options_result($m, @l);
 	} else {
 	    @options = split ' ',
 	      $o->ask_from_entry('',
-_("Here must give the different options for the module %s.
+_("You may now provide its options to module %s.
 Options are in format ``name=value name2=value2 ...''.
-For example you can have ``io=0x300 irq=7''", $l),
+For instance, ``io=0x300 irq=7''", $l),
 				 _("Module options:"),
 				);
 	}
@@ -712,7 +712,7 @@ For example you can have ``io=0x300 irq=7''", $l),
     eval { modules::load($m, $type, @options) };
     if ($@) {
 	$o->ask_yesorno('',
-_("Loading of module %s failed
+_("Loading module %s failed.
 Do you want to try again with other parameters?", $l), 1) or return;
 	goto ASK;
     }
@@ -734,7 +734,7 @@ sub load_thiskind {
 #------------------------------------------------------------------------------
 sub setup_thiskind {
     my ($o, $type, $auto, $at_least_one) = @_;
-    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', _("Skip %s pci probe", $type), 1);
+    my @l = $o->load_thiskind($type) unless $::expert && $o->ask_yesorno('', _("Skip %s PCI probing", $type), 1);
     return if $auto && (@l || !$at_least_one);
     while (1) {
 	my $msg = @l ?
