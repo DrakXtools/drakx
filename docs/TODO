@@ -28,17 +28,11 @@ RAID upgrades
 
 (7.1) improve printerdrake to at least same functionalities of printtool.
 
-(7.2 or later)horizontal sub-steps
-
 (7.1)better help for partitioning in newbie, keyboard shortcut.
-
-(???)free provider auto configuration facility (to be discussed).
 
 (7.1 or later?)help in some configuration files.
 
 (7.1)progression bar on crypto.
-
-(7.1)manage a lot of language (ergonomic issue as it already exists)
 
 (?)firewall configuration (instant firewalling?)
 
@@ -47,22 +41,14 @@ RAID upgrades
 (7.1)install in 800x600
 - need handling of both 640x480 (mostly for VGA16) and 800x600
 
-(?)tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
-
 (7.1)index/compress hdlist? (for multi-cd)
 ! for multi-cd live is mandatory, small transaction are mandatory too.
-
-(7.1 or later)widget for displaying fdisk (dindinx)
-
-(?)on laptop, configure the MMU to use swap not very often
 
 (7.1, other persons)rescue: 
 - small modification for stage1 to get the rescue stage2
 - create a stage2 with many tools (fdisk, bash...)
 the rescue could be on another cd (if multi-cd)
 ! care must be taken about modules (if ide is in module...)
-
-(?)checkboxes in groups based on compssList (and availableSpace?)
 
 (7.1)Improved network configuration (PPP and/or Ethernet)
 PPPoE install and configuration (SuSE includes it, DHCP-like)
@@ -75,12 +61,6 @@ PPPoE install and configuration (SuSE includes it, DHCP-like)
 crypto: add a cancel & progress bar while downloading
 error handling (like reading hdlist)
 
-(7.2 or later)diskdrake in text mode
-
-(see above)add fdisk using the zvt widget (taken in gnome-libs)
-
-(?)see what can be done with nvram (50 bytes to save information)
-
 (7.1)Generally improved package selection /ergonmic issue.
 Tree -> CTree, ``all'' branch with all packages
 show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0->do not install)
@@ -91,6 +71,18 @@ show the value associated (100->a must, 90->great, 80->nice, ... 10->useless, 0-
 
 (?)enable the testing of the mouse type (under X) (wheel)
 possibility to specify the mouse
+
+(7.2 or later)horizontal sub-steps
+
+(7.2 or later)diskdrake in text mode
+
+(7.1 or later)widget for displaying fdisk (dindinx)
+(see above)add fdisk using the zvt widget (taken in gnome-libs)
+
+
+(done,pix,7.1)manage a lot of language (ergonomic issue as it already exists)
+
+(done,pix,7.1)tree for choosing things like timezone, monitors, graphic cards, modules, mice, keyboard? ...
 
 ----
 paride in stage1
@@ -160,6 +152,14 @@ bug keyboard focus: after switch in console at Xconfig step
 
 
 -to look at--------------------------------------------------------------------------
+(???)free provider auto configuration facility (to be discussed).
+
+(?)on laptop, configure the MMU to use swap not very often
+
+(?)checkboxes in groups based on compssList (and availableSpace?)
+
+(?)see what can be done with nvram (50 bytes to save information)
+
 support wacom
 
 bug in diskdrake: can in strange cases create a primary partition at sector #0
@@ -456,4 +456,3 @@ peut en sortir. La seule solution est de redémarrer.
 (done,pix)urpmi: handle many args on cmd-line
 
 (done,pix)fix any // in path to ftp server otherwise windobe server bug :(
-

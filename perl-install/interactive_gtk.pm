@@ -78,8 +78,12 @@ sub ask_from_treelistW {
 	if ($def eq $_) {
 	    $wdef = $node;
 	    my $s; $tree->expand($wtree{$s .= "$_$separator"}) foreach split $sep, $root;
-	    foreach (1 .. @$l) {
-		$tree->node_nth($_) == $node and $ndef = $_, last;
+	    foreach my $nb (1 .. @$l) {
+		if ($tree->node_nth($nb) == $node) {
+		    $tree->focus_row($nb);
+		    Gtk->idle_add(sub { $tree->moveto($nb, 0, 0.5, 0); 0 });
+		    last;
+		}
 	    }
 	}
     }
@@ -98,9 +102,11 @@ sub ask_from_treelistW {
     $w->{ok_clicked} = $leave;
     $w->{cancel_clicked} = sub { $o->destroy; die "ask_from_list cancel" }; #- make sure windows doesn't live any more.
     gtkadd($w->{window},
-	   gtkpack_(new Gtk::VBox(0,0),
-		    1, gtkset_usize(createScrolledWindow($tree), 400, 350),
-		    0, $w->create_okcancel));
+	   gtkpack($w->create_box_with_title(@$messages),
+		   gtkpack_(new Gtk::VBox(0,7),
+			    1, gtkset_usize(createScrolledWindow($tree), 300, 350),
+			    0, $w->create_okcancel)));
+    $tree->set_column_auto_resize(0, 1);
     $tree->set_selection_mode('browse');
     $tree->signal_connect(tree_select_row => sub { $curr = $_[1]; });
     $tree->signal_connect(button_press_event => sub { &$leave if $_[1]{type} =~ /^2/ });
@@ -114,10 +120,9 @@ sub ask_from_treelistW {
 	1;
     });
 
-    $tree->focus_row($ndef) if $ndef;
-    $tree->select($wdef) if $wdef;
-    $tree->node_moveto($wdef, 0, 0.5, 0) if $wdef;
-
+    if ($wdef) {
+	$tree->select($wdef);
+    }
     $tree->grab_focus;
 
     $w->main or die "ask_from_list cancel";

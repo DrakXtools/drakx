@@ -33,7 +33,7 @@ sub readCardsDB {
     my ($file) = @_;
     my ($card);
 
-    %cards and return;
+#    %cards and return;
 
     local *F;
     open F, $file or die "file $file not found";
