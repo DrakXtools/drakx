@@ -1,3 +1,48 @@
+2005/01/26  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2005/01/26  Pixel  <pixel at mandrakesoft.com>
+
+	* Xconfig/card.pm: xorg_version is 6.8.2
+
+	* install2.pm: drakx_version() is now in install_any
+
+	* network/network.pm: fix (bugzilla #13197)
+
+	* partition_table.pm: nicer description() (esp. when the size is 0)
+
+	* mygtk2.pm: fix commented code :)
+	fix return value of method calls on MagicWindow
+	  ->size_request doesn't return anything on the box, it is better done
+	on the window (for rpmdrake)
+
+	* any.pm, install_any.pm: drakx_version() is now in install_any and use
+	getFile() to get VERSION
+
+2005/01/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  - move convert script from spec file into standalone/convert
+	  - btw, do not try converting if uneeded
+	10.2-0.16mdk
+
+	* standalone/convert, Makefile.drakxtools, Makefile: 
+	  - move convert script from spec file into standalone/convert
+	  - btw, do not try converting if uneeded
+
+2005/01/25  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* do_pkgs.pm, drakxtools.spec: Use the new --gui option to urpmi for the
+	drakxtools to ask for media
+	change; update the dependency of drakxtools on urpmi version
+	accordingly.
+	Remove dependency on gurpmi.
+
+2005/01/25  rstandtke
+
+	* share/po/de.po: some additions and fixes
+
 2005/01/25  Pixel  <pixel at mandrakesoft.com>
 
 	* install_steps.pm: fix previous commit (we don't want devfsd anymore)
@@ -43909,7 +43954,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.1002 2005/01/21 15:17:08 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.1003 2005/01/25 15:19:46 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
