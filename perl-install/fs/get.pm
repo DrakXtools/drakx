@@ -126,3 +126,5 @@ sub up_mount_point {
 	$_->{mntpoint} eq $mntpoint and return $_ foreach @$fstab;
     }
 }
+
+1;

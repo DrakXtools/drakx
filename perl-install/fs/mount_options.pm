@@ -246,3 +246,5 @@ sub set_all_default {
 	set_default($part, %opts);
     }
 }
+
+1;
