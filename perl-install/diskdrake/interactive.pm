@@ -582,7 +582,7 @@ sub Mount_point {
         isLoopback($part) ? N("Where do you want to mount the loopback file %s?", $part->{loopback_file}) :
 			    N("Where do you want to mount device %s?", $part->{device}),
 	[ { label => N("Mount point"), val => \$mntpoint, 
-	    list => [ if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '' ], 
+	    list => [ uniq(if_($mntpoint, $mntpoint), fsedit::suggestions_mntpoint($all_hds), '') ], 
 	    not_edit => 0 } ],
 	complete => sub {
 	    !isPartOfLoopback($part) || $mntpoint or $in->ask_warn('', 
