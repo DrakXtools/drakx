@@ -835,6 +835,7 @@ sub set {
     my ($locale, $b_translate_for_console) = @_;
     
     if ($::move) {
+	move::handleI18NClp($locale->{lang});
 	put_in_hash(\%ENV, i18n_env($locale));
 	return;
     }
@@ -1168,10 +1169,6 @@ sub during_install__l2charset {
     $c = 'UTF-8' if $c =~ /cp125/;
     $c = 'UTF-8' if $c =~ /utf_/;
     uc($c);
-}
-
-sub get_unneeded_png_lang_files() {
-    print join(' ', map { if_(m|(langs/lang-(.*)\.png)| && !member($2, list_langs()), $1) } glob("pixmaps/langs/lang-*.png"));
 }
 
 sub check() {
