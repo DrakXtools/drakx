@@ -569,8 +569,23 @@ sub getNet() {
 #}
 
 sub getUPS() {
-    (map { $_->{driver} = "mge-shut"; $_->{media_type} = 'UPS'; $_ } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
-    (map { ($_->{name} = $_->{description}) =~ s/.*\|//; $_->{port} = "/dev/"; $_->{media_type} = 'UPS'; $_ } grep { $_->{driver} =~ /ups$/ }  usb_probe());
+    # MGE serial PnP devices:
+    (map {
+        $_->{port} = $_->{DEVICE};
+        $_->{bus} = "Serial";
+        $_->{driver} = "UPS:mge-utalk" if $_->{MODEL} =~ /0001/;
+        $_->{driver} = "UPS:mge-shut"  if $_->{MODEL} =~ /0002/;
+        $_->{media_type} = 'UPS';
+        $_->{description} = "MGE UPS SYSTEMS|UPS - Uninterruptible Power Supply" if $_->{MODEL} =~ /000[12]/;
+        $_;1
+    } grep { $_->{DESCRIPTION} =~ /MGE UPS/ } values %serialprobe),
+      # USB UPSs;
+      (map {
+          ($_->{name} = $_->{description}) =~ s/.*\|//;
+          $_->{port} = "/dev/"; # FIXME
+          $_->{media_type} = 'UPS';
+          $_;
+      } grep { $_->{driver} =~ /ups$/ } usb_probe());
 }
 
 $pcitable_addons = <<'EOF';
