@@ -5,6 +5,40 @@
 	fixed umask on urpmi list file and generate synthesis file for each
 	hdlist.
 
+	* pkgs.pm: fixed absurd mismatch of use of <=> and cmp on versionCompare.
+
+2001/04/14  Pixel  <pixel@mandrakesoft.com>
+
+	* install_steps_interactive.pm (configureX): fix link /etc/gtk (to
+	/mnt/etc/gtk) instead of /etc/gtkrc
+
+	* any.pm (autologin): spurious messages of chksession  -> dave nul
+
+	* interactive_newt.pm (exit): fix the exit code
+	(wait_message_endW): don't log "none stacked wait-messages" (as a lot of
+	them exist...)
+	(waitbox): remove spurious '0' in wait_messages
+
+	* lang.pm (load_po): s/!isStandalone/isInstall/ (mainly for XFdrake's
+	test)
+
+	* Xconfigurator.pm (use vars): fix stew sux
+	(testFinalConfig): nicer stderr handling
+
+	* interactive_gtk.pm (exit): fix the exit code
+
+2001/04/14  warly
+
+	* share/compssUsers, share/list, share/rpmsrate: add icons in compssUser
+	and list
+
+2001/04/14  François Pons  <fpons@mandrakesoft.com>
+
+	* install_any.pm: fixed to gzip synthesis file.
+	safe guard generation of synthesis file.
+	fixed umask on urpmi list file and generate synthesis file for each
+	hdlist.
+
 2001/04/14  Pixel  <pixel@mandrakesoft.com>
 
 	* install_steps_interactive.pm (configureX): fix link /etc/gtk (to
