@@ -36,10 +36,11 @@ if (!$mouse || !$::auto) {
 
 $mouse->{XEMU3} = 'yes' if $mouse->{nbuttons} < 3 && (!$::noauto || $in->ask_yesorno('', _("Emulate third button?"), 1));
 
-$mouse->{device} = mouse::serial_ports_names2dev(
-	$in->ask_from_list(_("Mouse Port"),
-			   _("Which serial port is your mouse connected to?"),
-			   [ mouse::serial_ports_names() ])) if $mouse->{type} eq 'serial';
+$o->{mouse}{device} = 
+  $o->ask_from_listf(_("Mouse Port"),
+		     _("Please choose on which serial port your mouse is connected to."),
+		     \&mouse::serial_port2text,
+		     [ mouse::serial_ports ]) if $mouse->{type} eq 'serial';
 
 mouse::write('', $mouse);
 modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
