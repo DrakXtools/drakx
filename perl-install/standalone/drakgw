@@ -129,7 +129,7 @@ It's currently enabled.
 What would you like to do?"),
 				   [ N_("disable"), N_("reconfigure"), N_("dismiss") ]) or quit_global($in, 0);
 	if ($r eq "disable") {
-	    {
+	    if (!$::testing) {
 		my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
 		stop_daemons();
 	    }
@@ -153,15 +153,17 @@ It's currently disabled.
 What would you like to do?"),
 				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
 	if ($r eq "enable") {
+        if (!$::testing) {
 	    foreach ($dhcpd_conf, $masq_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
-	    }
+	    };
 	    {
 		my $_wait_enabl = $in->wait_message('', N("Enabling servers..."));
 		start_daemons();
 	    }
             log::l("[drakgw] Enabled");
+         }
 	    $::Wizard_finished = 1;
 	    $in->ask_okcancel('', N("Internet Connection Sharing is now enabled."));
 	    quit_global($in, 0);
@@ -349,7 +351,7 @@ $wait_configuring = $in->wait_message(N("Configuring..."),
 
 #- setup the /etc/sysconfig/network-script/ script
 
-if ($reconf_dhcp_server_intf) {
+if ($reconf_dhcp_server_intf && !$::testing) {
     log::explanations("Reconfiguring network parameters of $device");
     my $network_scripts = "/etc/sysconfig/network-scripts";
     my $ifcfg = "$network_scripts/ifcfg-$device";
@@ -391,17 +393,17 @@ put_in_hash($shorewall ||= {}, {
     masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
 });
 
-network::shorewall::write($shorewall);
+network::shorewall::write($shorewall) if !$::testing;
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
 log::explanations("Enabling IPV4 forwarding");
-substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network;
+substInFile { s/^FORWARD_IPV4.*\n//; $_ .= "FORWARD_IPV4=true\n" if eof } $sysconf_network if !$::testing;
 
 
 #- setup the DHCP server
 
-if ($reconf_dhcp_server_intf) {
+if ($reconf_dhcp_server_intf && !$::testing) {
     log::explanations("Configuring a DHCP server on $lan_address.0");
     renamef($dhcpd_conf, "$dhcpd_conf.old");
     output($dhcpd_conf, qq(subnet $lan_address.0 netmask $netmask {
@@ -426,7 +428,7 @@ my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 #- put the interface for the dhcp server in the sysconfig-dhcp config, for the /etc/init.d script of dhcpd
 
 log::explanations("Update network interfaces list for dhcpd server");
-substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd;
+substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd if !$::testing;
 
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
@@ -453,7 +455,7 @@ substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysc
 
 #- Modify the root location block in /etc/cups/cupsd.conf
 
-if (-f $cups_conf) {
+if (-f $cups_conf && !$::testing) {
     log::explanations("Updating CUPS configuration accordingly");
 
     substInFile {
