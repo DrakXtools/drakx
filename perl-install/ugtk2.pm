@@ -579,14 +579,18 @@ sub create_hpaned {
 # several places of your programs.
 
 sub _find_imgfile {
-    my ($f, @extensions) = shift;
-    @extensions or @extensions = qw(.png .xpm);
-    if ($f !~ m|^/|) {
+    my ($name) = @_;
+
+    if ($name =~ m|^/|) {
+	$name;
+    } else {
 	foreach my $path (icon_paths()) {
-	    -f "$path/$f$_" and $f = "$path/$f$_" foreach '', @extensions;
+	    foreach ('', '.png', '.xpm') {
+		my $file = "$path/$name$_";
+		-f $file and return $file;
+	    }
 	}
     }
-    return $f;
 }
 
 # use it if you want to display an icon/image in your app
@@ -602,9 +606,10 @@ sub gtkcreate_pixbuf {
 sub gtktext_append { gtktext_insert(@_, append => 1) }
 
 sub may_set_icon {
-    my ($w, $f, @extensions) = @_;
-    $f = $f && _find_imgfile($f, @extensions) or return;
-    $w->set_icon(gtkcreate_pixbuf($f));
+    my ($w, $name) = @_;
+    if (my $f = $name && _find_imgfile($name)) {
+	$w->set_icon(gtkcreate_pixbuf($f));
+    }
 }
 
 # choose one of the two styles:
