@@ -14589,7 +14589,7 @@ msgid ""
 "define local print queues then and if the specified server is down it cannot "
 "be printed at all from this machine."
 msgstr ""
-"Dans ce mode, il n'y a pas de système d'impression local toutes les "
+"Dans ce mode, il n'y a pas de système d'impression local. Toutes les "
 "impressions vont directement au serveur spécifié ci dessous. Notez qu'il "
 "n'est pas possible de définir de file d'impression locale par la suite et "
 "que si le serveur spécifié est arrêté, il ne sera pas possible d'imprimer de "
@@ -14601,8 +14601,8 @@ msgid ""
 "Enter the host name or IP of your CUPS server and click OK if you want to "
 "use this mode, click \"Quit\" otherwise."
 msgstr ""
-"Entrez le nom d'hôte ou l'adresse IP de votre serveur CUPS\n"
-"et cliquez sur OK si vous voulez utiliser ce mode, cliquer sur Quitter sinon."
+"Donnez le nom d'hôte ou l'adresse IP de votre serveur CUPS\n"
+"et cliquez sur OK si vous voulez utiliser ce mode. Sinon, cliquez sur Quitter."
 
 #: printer/printerdrake.pm:4309
 #, c-format
@@ -14627,7 +14627,7 @@ msgstr "Le système d'impression CUPS peut être utilisé de deux façons : "
 #: printer/printerdrake.pm:4351
 #, c-format
 msgid "1. The CUPS printing system can run locally. "
-msgstr "1. Le système d'impression CUPS ne peut pas fonctionner localement"
+msgstr "1. Le système d'impression CUPS peut fonctionner localement"
 
 #: printer/printerdrake.pm:4352
 #, c-format
@@ -14635,7 +14635,7 @@ msgid ""
 "Then locally connected printers can be used and remote printers on other "
 "CUPS servers in the same network are automatically discovered. "
 msgstr ""
-"Ensuite les imprimantes locales pourront être utilisées et les imprimantes "
+"Ensuite, les imprimantes locales pourront être utilisées et les imprimantes "
 "distantes sur d'autres serveurs CUPS du même réseau seront automatiquement "
 "découvertes."
 
@@ -14667,7 +14667,7 @@ msgid ""
 "started or port opened, no software infrastructure for setting up local "
 "print queues is installed, so less memory and disk space is used. "
 msgstr ""
-"Ici la consommation locale de ressources est réduite au minimum. Aucun "
+"Ici, la consommation locale de ressources est réduite au minimum. Aucun "
 "service CUPS ne sera démarré, ni aucun port ouvert, aucun logiciel de "
 "configuration de files d'impression locales ne sera installé, donc moins de "
 "mémoire et d'espace disque seront utilisés."
@@ -14679,7 +14679,7 @@ msgid ""
 "the specified server is down it cannot be printed at all from this machine. "
 msgstr ""
 "L'inconvénient est qu'il n'est pas possible de définir d'imprimantes locales "
-"ensuite et que si le serveur d'impression spécifié est arrtêé il n'est plus "
+"ensuite, et que si le serveur d'impression spécifié est arrêté, il n'est plus "
 "possible d'imprimer de cet ordinateur."
 
 #: printer/printerdrake.pm:4359
@@ -14790,7 +14790,7 @@ msgstr ""
 #: printer/printerdrake.pm:5035
 #, c-format
 msgid "This printer is disabled"
-msgstr "Cette imprimante est desactivée"
+msgstr "Cette imprimante est désactivée"
 
 #: printer/printerdrake.pm:5037
 #, c-format
@@ -14987,7 +14987,7 @@ msgstr "Permettre la connexion distante en tant que root"
 #: security/help.pm:31
 #, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "Permet/interdit la connexion directe en tant que root."
+msgstr "Permettre/interdire la connexion directe en tant que root."
 
 #: security/help.pm:33
 #, c-format
@@ -14995,7 +14995,7 @@ msgid ""
 "Allow/Forbid the list of users on the system on display managers (kdm and "
 "gdm)."
 msgstr ""
-"Permet/interdit la liste des utilisateurs du système sur les gestionnaires "
+"Permettre/interdire la liste des utilisateurs du système sur les gestionnaires "
 "de connexion (kdm et gdm)."
 
 #: security/help.pm:35
@@ -15006,8 +15006,8 @@ msgid ""
 "\n"
 "See pam_xauth(8) for more details.'"
 msgstr ""
-"Permet/interdit d'exporter l'affichage lorsque l'on passe du\n"
-"compte super-utilisateur (« root ») à un autre utilisateur.\n"
+"Permettre/interdire d'exporter l'affichage lorsque l'on passe du\n"
+"compte superutilisateur (« root ») à un autre utilisateur.\n"
 "\n"
 "Cf pam_xauth(8) pour plus d'informations"
 
@@ -15022,7 +15022,7 @@ msgid ""
 "\n"
 "- NONE (no connection)."
 msgstr ""
-"Permet/interdit les connexions à Xorg :\n"
+"Permettre/interdire les connexions à Xorg :\n"
 "\n"
 "- TOUS (toutes connexions permises),\n"
 "\n"
@@ -15096,7 +15096,7 @@ msgid ""
 "Put allowed users in /etc/cron.allow and /etc/at.allow (see man at(1)\n"
 "and crontab(1))."
 msgstr ""
-"Active/Désactive les travaux planifiés (crontab et at) pour les\n"
+"Activer/Désactiver les travaux planifiés (crontab et at) pour les\n"
 "utilisateurs.\n"
 "\n"
 "Mettre les utilisateurs autorisés dans /etc/cron.allow et\n"
@@ -15160,7 +15160,7 @@ msgstr "Utiliser des mots de passe pour authentifier les utilisateurs"
 #: security/help.pm:94
 #, c-format
 msgid "Activate/Disable ethernet cards promiscuity check."
-msgstr "Active/Désactive la vérification du mode espion des cartes réseau."
+msgstr "Activer/Désactiver la vérification du mode espion des cartes réseau."
 
 #: security/help.pm:96
 #, c-format
@@ -15176,21 +15176,21 @@ msgstr ""
 #: security/help.pm:100
 #, c-format
 msgid "Add the name as an exception to the handling of password aging by msec."
-msgstr "Exclue « nom » de la gestion des mots de passe par msec."
+msgstr "Exclure « nom » de la gestion des mots de passe par msec."
 
 #: security/help.pm:102
 #, c-format
 msgid "Set password aging to \"max\" days and delay to change to \"inactive\"."
 msgstr ""
-"Règle la durée de vie des mots de passe à « max » et le délai de changement "
+"Régler la durée de vie des mots de passe à « max » et le délai de changement "
 "de mot de passe à « inactive »."
 
 #: security/help.pm:104
 #, c-format
 msgid "Set the password history length to prevent password reuse."
 msgstr ""
-"Règle la profondeur de l'historique des mots de passe pour éviter la "
-"réutilisation de mots de passe."
+"Régler la profondeur de l'historique des mots de passe pour éviter la "
+"leur réutilisation."
 
 #: security/help.pm:106
 #, c-format
@@ -15198,13 +15198,13 @@ msgid ""
 "Set the password minimum length and minimum number of digit and minimum "
 "number of capitalized letters."
 msgstr ""
-"Règle la longueur minimum, le nombre minimum de chiffres et le nombre "
+"Régler la longueur minimum, le nombre minimum de chiffres et le nombre "
 "minimum de lettres en majuscule d'un mot de passe."
 
 #: security/help.pm:108
 #, c-format
 msgid "Set the root umask."
-msgstr "Règle le « umask » de root"
+msgstr "Régler le « umask » de root"
 
 #: security/help.pm:109
 #, c-format
@@ -15240,7 +15240,7 @@ msgstr ""
 #: security/help.pm:118
 #, c-format
 msgid "if set to yes, check if the network devices are in promiscuous mode."
-msgstr "Si oui, vérifie si les périphériques réseaux sont dans un mode espion"
+msgstr "Si oui, vérifie si les périphériques réseau sont dans un mode espion"
 
 #: security/help.pm:119
 #, c-format
@@ -15326,13 +15326,13 @@ msgstr "Si oui, envoie le rapport de vérification dans le terminal."
 #, c-format
 msgid "Set shell commands history size. A value of -1 means unlimited."
 msgstr ""
-"Réglez la profondeur de l'historique du shell. Une valeur de -1 signifie "
+"Régler la profondeur de l'historique du shell. Une valeur de -1 signifie "
 "historique illimité."
 
 #: security/help.pm:136
 #, c-format
 msgid "Set the shell timeout. A value of zero means no timeout."
-msgstr "Réglez le délai d'expiration du shell. Zéro signifie pas d'expiration."
+msgstr "Régler le délai d'expiration du shell. Zéro signifie pas d'expiration."
 
 #: security/help.pm:136
 #, c-format
@@ -15342,7 +15342,7 @@ msgstr "L'unité du délai d'expiration est la seconde"
 #: security/help.pm:138
 #, c-format
 msgid "Set the user umask."
-msgstr "Réglez le « umask » utilisateur."
+msgstr "Régler le « umask » utilisateur."
 
 #: security/l10n.pm:11
 #, c-format
@@ -15420,7 +15420,7 @@ msgstr "Autoriser « crontab » et « at » pour les utilisateurs"
 #: security/l10n.pm:26
 #, c-format
 msgid "Syslog reports to console 12"
-msgstr "Afficher les messages systèmes sur la console 12"
+msgstr "Afficher les messages système sur la console 12"
 
 #: security/l10n.pm:27
 #, c-format
@@ -15456,7 +15456,7 @@ msgstr ""
 #: security/l10n.pm:33
 #, c-format
 msgid "Use password to authenticate users"
-msgstr "Utilise un mot de passe pour authentifier les utilisateurs"
+msgstr "Utiliser un mot de passe pour authentifier les utilisateurs"
 
 #: security/l10n.pm:34
 #, c-format
@@ -15482,7 +15482,7 @@ msgstr "Pas de délai d'expiration des mots de passe pour"
 #, c-format
 msgid "Set password expiration and account inactivation delays"
 msgstr ""
-"Règle la durée de vie des mots de passe et le délai d'inactivation du compte"
+"Régler la durée de vie des mots de passe et le délai d'inactivation du compte"
 
 #: security/l10n.pm:39
 #, c-format
@@ -15539,7 +15539,7 @@ msgstr "Vérifier l'utilisation du mode espion par les périphériques réseaux"
 #: security/l10n.pm:49
 #, c-format
 msgid "Run the daily security checks"
-msgstr "Effectue les vérifications quotidiennes de sécurité"
+msgstr "Effectuer les vérifications quotidiennes de sécurité"
 
 #: security/l10n.pm:50
 #, c-format
@@ -15571,12 +15571,12 @@ msgstr "Rechercher les fichiers n'appartenant à aucun utilisateur"
 #: security/l10n.pm:55
 #, c-format
 msgid "Check files/directories writable by everybody"
-msgstr "Vérifie les fichiers et/ou dossiers modifiables par tout un chacun"
+msgstr "Vérifier les fichiers et/ou dossiers modifiables par tout un chacun"
 
 #: security/l10n.pm:56
 #, c-format
 msgid "Run chkrootkit checks"
-msgstr "Effectue les vérifications de chkrootkit"
+msgstr "Effectuer les vérifications de chkrootkit"
 
 #: security/l10n.pm:57
 #, c-format
@@ -15740,7 +15740,7 @@ msgstr ""
 msgid "Launch the ALSA (Advanced Linux Sound Architecture) sound system"
 msgstr ""
 "Démarrage ou arrêt du système sonore ALSA (Advanced Linux Sound "
-"Architecture) Il charge le pilote pour votre carte son, et restaure les "
+"Architecture). Il charge le pilote pour votre carte son, et restaure les "
 "réglages du périphérique de mixage."
 
 #: services.pm:20
@@ -15772,7 +15772,7 @@ msgstr ""
 "Service qui permet de démarrer une tâche à une heure précise. Chaque tâche "
 "doit être créée par la commande « at », puis, à l'heure dite, le service "
 "« atd » lance cette tâche. Par exemple pour éteindre automatiquement la "
-"machine ce soir à 23h59, tapez « at 23:59 » dans une fenêtre de commande, "
+"machine ce soir à 23h59, tapez « at 23:59 » dans une fenêtre de commandes, "
 "puis « halt » et <Ctrl-D>."
 
 #: services.pm:25
@@ -15851,7 +15851,7 @@ msgid ""
 "Launch packet filtering for Linux kernel 2.2 series, to set\n"
 "up a firewall to protect your machine from network attacks."
 msgstr ""
-"Démarre le filtrage des paquets réseau pour la série 2.2 des noyaux Linux, "
+"Démarrer le filtrage des paquets réseau pour la série 2.2 des noyaux Linux, "
 "afin de mettre en place un pare-feu (firewall) pour protéger votre machine "
 "des attaques réseau. "
 
@@ -15873,7 +15873,7 @@ msgid ""
 "Automatic regeneration of kernel header in /boot for\n"
 "/usr/include/linux/{autoconf,version}.h"
 msgstr ""
-"Régénération automatique des fichiers d'en-têtes pour le noyau\n"
+"Régénération automatique des fichiers d'en-tête pour le noyau\n"
 "dans le dossier /boot pour /usr/include/linux/{autoconf,version}.h"
 
 #: services.pm:47
@@ -15907,8 +15907,8 @@ msgid ""
 "available server."
 msgstr ""
 "Activation / désactivation du Linux Virtual Server, qui est un service "
-"utilisé pour créer un serveur virtuel haute-performance et haute "
-"disponibilité, composé d'un ensemble de serveurs linux reliés entre eux."
+"utilisé pour créer un serveur virtuel haute performance et haute "
+"disponibilité, composé d'un ensemble de serveurs Linux reliés entre eux."
 
 #: services.pm:54
 #, c-format
@@ -15986,8 +15986,8 @@ msgid ""
 "it installed on machines that do not need it."
 msgstr ""
 "PCMCIA permet d'utiliser des périphériques PCCARD comme des cartes Ethernet "
-"ou des modems avec des ordinateurs portables. Ce service ne sera pas démarré "
-"à moins qu'il soit correctement configuré. Il peut donc être activé sans "
+"ou des modems avec des ordinateurs portables. Ce service ne sera pas démarré, "
+"à moins qu'il ne soit correctement configuré. Il peut donc être activé sans "
 "danger sur des machines ne possédant pas ce type de périphériques."
 
 #: services.pm:70
@@ -16018,7 +16018,7 @@ msgid ""
 "number generation."
 msgstr ""
 "Sauvegarde et restaure l'entropie du système pour une meilleure génération "
-"de nombres aléatoires. (utile par exemple pour la création de clefs de "
+"de nombres aléatoires. (utile, par example, pour la création de clefs de "
 "cryptographie)"
 
 #: services.pm:76
@@ -16317,7 +16317,7 @@ msgid ""
 "You are now installing <b>Mandrakelinux Download</b>. This is the free "
 "version that Mandrakesoft wants to keep <b>available to everyone</b>."
 msgstr ""
-"vous êtes en train d'installer <b>Mandrakelinux Download</b>. C'est la "
+"Vous êtes en train d'installer <b>Mandrakelinux Download</b>. C'est la "
 "version gratuite que Mandrakesoft tient à garder <b>disponible pour tous</b>."
 
 #: share/advertising/05.pl:17
@@ -16327,7 +16327,7 @@ msgid ""
 "source. Therefore, you will not find in the Download version:"
 msgstr ""
 "La version Download <b>ne peut pas intégrer</b> tous les logiciels qui ne "
-"sont pas libres. Ainsi vous ne trouverez pas dans la version Download :"
+"sont pas libres. Ainsi, vous ne trouverez pas dans la version Download :"
 
 #: share/advertising/05.pl:18
 #, c-format
@@ -16363,7 +16363,7 @@ msgstr "<b>Discovery, Votre premier poste de travail sous Linux</b>"
 #: share/advertising/06.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux Discovery</b>."
-msgstr "vous êtes en train d'installer <b>Mandrakelinux Discovery</b>."
+msgstr "Vous êtes en train d'installer <b>Mandrakelinux Discovery</b>."
 
 #: share/advertising/06.pl:17
 #, c-format
@@ -16386,7 +16386,7 @@ msgstr "<b>PowerPack, Le poste de travail de référence sous Linux</b>"
 #: share/advertising/07.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux PowerPack</b>."
-msgstr "vous êtes en train d'installer <b>Mandrakelinux PowerPack</b>."
+msgstr "Vous êtes en train d'installer <b>Mandrakelinux PowerPack</b>."
 
 #: share/advertising/07.pl:17
 #, c-format
@@ -16408,7 +16408,7 @@ msgstr ""
 #: share/advertising/08.pl:15
 #, c-format
 msgid "You are now installing <b>Mandrakelinux PowerPack+</b>."
-msgstr "vous êtes en train d'installer <b>Mandrakelinux PowerPack+</b>."
+msgstr "Vous êtes en train d'installer <b>Mandrakelinux PowerPack+</b>."
 
 #: share/advertising/08.pl:17
 #, c-format
@@ -16495,7 +16495,7 @@ msgid ""
 "\t* <b>GlobeTrotter</b>, a Mandrakelinux distribution pre-installed on the "
 "ultra-compact “LaCie Mobile Hard Drive”."
 msgstr ""
-"\t* <b>GlobeTrotter</b>, une distribution Mandrakelinux pré-installée sur le "
+"\t* <b>GlobeTrotter</b>, une distribution Mandrakelinux préinstallée sur le "
 "disque dur ultra compact “LaCie Mobile Hard Drive”."
 
 #: share/advertising/11.pl:13
@@ -16559,7 +16559,7 @@ msgid ""
 "Konqueror, the web browser and Kontact, the personal information manager."
 msgstr ""
 "KDE inclut également beaucoup de <b>logiciels intégrés</b> à l'environnement "
-"graphique tels que Konqueror, le navigateur web et Kontact, la suite "
+"graphique, tels que Konqueror, le navigateur web, et Kontact, la suite "
 "d'informations personnelles."
 
 #: share/advertising/13-a.pl:13 share/advertising/13-b.pl:13
@@ -16679,12 +16679,12 @@ msgstr ""
 #: share/advertising/16.pl:16
 #, c-format
 msgid "\t* Browse the <b>Web</b> with Konqueror."
-msgstr "\t* Naviguer sur le <b>web</b> avec Konqueror."
+msgstr "\t* Naviguez sur le <b>web</b> avec Konqueror."
 
 #: share/advertising/16.pl:17
 #, c-format
 msgid "\t* <b>Chat</b> online with your friends using Kopete."
-msgstr "\t* <b>Discuter</b> en ligne avec vos amis grâce à Kopete."
+msgstr "\t* <b>Discutez</b> en ligne avec vos amis grâce à Kopete."
 
 #: share/advertising/16.pl:18
 #, c-format
@@ -16712,17 +16712,17 @@ msgstr ""
 #: share/advertising/17.pl:16
 #, c-format
 msgid "\t* Watch your favorite <b>videos</b> with Kaffeine."
-msgstr "\t* Regarder vos <b>vidéos</b> favorites avec Kaffeine."
+msgstr "\t* Regardez vos <b>vidéos</b> favorites avec Kaffeine."
 
 #: share/advertising/17.pl:17
 #, c-format
 msgid "\t* Listen to your <b>music files</b> with amaroK."
-msgstr "\t* Écouter vos <b>fichiers musicaux</b> avec amaroK."
+msgstr "\t* Écoutez vos <b>fichiers musicaux</b> avec amaroK."
 
 #: share/advertising/17.pl:18
 #, c-format
 msgid "\t* Edit and create <b>images</b> with the GIMP."
-msgstr "\t* Créer et modifier des <b>images</b> avec le GIMP."
+msgstr "\t* Créez et modifiez des <b>images</b> avec le GIMP."
 
 #: share/advertising/18.pl:13
 #, c-format
@@ -16742,7 +16742,7 @@ msgstr ""
 #, c-format
 msgid "\t* Create, edit and share office documents with <b>OpenOffice.org</b>."
 msgstr ""
-"\t* Créer, éditer et partager des documents bureautiques avec <b>OpenOffice."
+"\t* Créez, éditez et partagez des documents bureautiques avec <b>OpenOffice."
 "org</b>."
 
 #: share/advertising/18.pl:17
@@ -16751,18 +16751,18 @@ msgid ""
 "\t* Manage your personal data with the integrated personal information "
 "suites <b>Kontact</b> and <b>Evolution</b>."
 msgstr ""
-"\t* Gérer vos données personnelles avec les suites d'informations "
+"\t* Gérez vos données personnelles avec les suites d'informations "
 "personnelles <b>Kontact</b> et <b>Evolution</b>."
 
 #: share/advertising/18.pl:18
 #, c-format
 msgid "\t* Browse the web with <b>Mozilla</b> and <b>Konqueror</b>."
-msgstr "\t* Naviguer sur le web avec <b>Mozilla</b> et <b>Konqueror</b>."
+msgstr "\t* Naviguez sur le web avec <b>Mozilla</b> et <b>Konqueror</b>."
 
 #: share/advertising/18.pl:19
 #, c-format
 msgid "\t* Participate in online chat with <b>Kopete</b>."
-msgstr "\t* Discuter en ligne avec <b>Kopete</b>."
+msgstr "\t* Discutez en ligne avec <b>Kopete</b>."
 
 #: share/advertising/18.pl:20
 #, c-format
@@ -16770,13 +16770,13 @@ msgid ""
 "\t* Listen to your <b>audio CDs</b> and <b>music files</b>, watch your "
 "<b>videos</b>."
 msgstr ""
-"\t* Écouter vos <b>CD audio</b> et vos <b>fichiers musicaux</b>, regarder "
+"\t* Écoutez vos <b>CD audio</b> et vos <b>fichiers musicaux</b>, regardez "
 "vos <b>vidéos</b>."
 
 #: share/advertising/18.pl:21
 #, c-format
 msgid "\t* Edit and create images with the <b>GIMP</b>."
-msgstr "\t* Créer et modifier des images avec le <b>GIMP</b>."
+msgstr "\t* Créez et modifier des images avec le <b>GIMP</b>."
 
 #: share/advertising/19.pl:13
 #, c-format
@@ -16931,17 +16931,17 @@ msgstr ""
 #: share/advertising/23.pl:16
 #, c-format
 msgid "\t* Send and receive your <b>e-mails</b>."
-msgstr "\t* Envoyer et recevoir vos <b>courriels</b>."
+msgstr "\t* Envoyez et recevez vos <b>courriels</b>."
 
 #: share/advertising/23.pl:17
 #, c-format
 msgid "\t* Share your <b>agendas</b> and your <b>address books</b>."
-msgstr "\t* Partager vos <b>calendriers</b> et vos <b>carnets d'adresses</b>."
+msgstr "\t* Partagez vos <b>calendriers</b> et vos <b>carnets d'adresses</b>."
 
 #: share/advertising/23.pl:18
 #, c-format
 msgid "\t* Manage your <b>memos</b> and <b>task lists</b>."
-msgstr "\t* Gérer vos <b>mémos</b> et vos <b>listes de tâches</b>."
+msgstr "\t* Gérez vos <b>mémos</b> et vos <b>listes de tâches</b>."
 
 #: share/advertising/24.pl:13
 #, c-format
@@ -17257,7 +17257,7 @@ msgstr "Jeux"
 #, c-format
 msgid "Amusement programs: arcade, boards, strategy, etc"
 msgstr ""
-"Programmes de divertissement : jeux d'arcade, de plateaux, de stratégie, etc"
+"Programmes de divertissement : jeux d'arcade, de plateau, de stratégie, etc"
 
 #: share/compssUsers.pl:37
 #, c-format
@@ -17402,7 +17402,7 @@ msgstr "Serveur de noms de domaine et d'information réseaux"
 #: share/compssUsers.pl:112
 #, c-format
 msgid "File and Printer Sharing Server"
-msgstr "Serveur pour partage de fichier et d'imprimante"
+msgstr "Serveur pour partage de fichiers et d'imprimantes"
 
 #: share/compssUsers.pl:113
 #, c-format
@@ -17530,7 +17530,7 @@ msgstr "Assistants Mandrakesoft"
 #: share/compssUsers.pl:197
 #, c-format
 msgid "Wizards to configure server"
-msgstr "Assistant pour configurer le serveur"
+msgstr "Assistants pour configurer le serveur"
 
 #: standalone.pm:21
 #, c-format
@@ -18003,7 +18003,7 @@ msgstr "Terminé !"
 msgid "Syncing server user list with client list, including root."
 msgstr ""
 "Synchroniser la liste des utilisateurs du serveur avec celle du client en "
-"incluant le super utilisateur (root)"
+"incluant le superutilisateur (root)"
 
 #: standalone/drakTermServ:474
 #, c-format
@@ -18011,7 +18011,7 @@ msgid ""
 "In order to enable changes made for thin clients, the display manager must "
 "be restarted. Restart now?"
 msgstr ""
-"Pour être en mesure d'activer les changements fait pour les clients légers, "
+"Pour être en mesure d'activer les changements faits pour les clients légers, "
 "le gestionnaire d'affichage doit être rechargé. Le redémarrer maintenant ?"
 
 #: standalone/drakTermServ:509
@@ -18116,7 +18116,7 @@ msgid ""
 "        Note: You must stop/start the server after adding or changing "
 "clients."
 msgstr ""
-"\t\t\tBien que vous pouvez utiliser une plage d'adresses IP plutôt qu'une "
+"\t\t\tBien que vous puissiez utiliser une plage d'adresses IP plutôt qu'une "
 "entrée\n"
 "\t\t\tspécifique pour chaque machine client, l'utilisation d'adresses fixes "
 "permet de profiter\n"
@@ -18124,7 +18124,7 @@ msgstr ""
 "ClusterNFS.\n"
 "\t\t\t\t\t\tRemarque : L'entrée « #type » est utilisée seulement par "
 "drakTermServ. Les clients peuvent être soit\n"
-"\t\t\t« légers », soit « lourd ». Les clients légers font tourner la plupart "
+"\t\t\t« légers », soit « lourds ». Les clients légers font tourner la plupart "
 "des logiciels sur le serveur via XDMCP, \n"
 "\t\t\ttandis que les clients lourds font tourner eux-mêmes leurs logiciels. "
 "Un fichier inittab spécial, %s est\n"
@@ -18182,7 +18182,7 @@ msgstr ""
 "        \t\tPour que les utilisateurs puissent se connecter au système à "
 "partir d'un client léger, l'entrée leur correspondant\n"
 "        \t\tdans /etc/shadow doit être dupliquée dans %s.\n"
-"        \t\tDrakTermServ permet à cet effet d'ajouter ou de retirer des "
+"        \t\tDrakTermServ permet, à cet effet, d'ajouter ou de retirer des "
 "utilisateurs de ce fichier."
 
 #: standalone/drakTermServ:570
@@ -18564,7 +18564,7 @@ msgstr "Fin de la plage d'adresses IP : "
 #: standalone/drakTermServ:1301
 #, c-format
 msgid "Append TS Includes To Existing Config"
-msgstr "Ajouter les Terminal Server inclut dans les configurations existantes"
+msgstr "Ajouter les Terminal Server inclus dans les configurations existantes"
 
 #: standalone/drakTermServ:1303
 #, c-format
@@ -18718,12 +18718,12 @@ msgstr ""
 "précaution.\n"
 "\n"
 "La disquette d'auto-installation vous permettra d'installer un autre "
-"ordinateur avec exactement la même configuration que le vôtre. Mais parmi "
+"ordinateur avec exactement la même configuration que le vôtre. Mais, parmi "
 "l'ensemble des étapes d'installation, vous pouvez choisir lesquelles seront "
 "complètement automatisées et lesquelles seront manuelles.\n"
 "Pour une sécurité maximale, les étapes de partitionnement et de formatage ne "
 "seront jamais faites automatiquement, quels que soient les choix que vous "
-"aviez fait lors de la première installation de cet ordinateur.\n"
+"aviez faits lors de la première installation de cet ordinateur.\n"
 "\n"
 "Pressez Ok pour continuer."
 
@@ -18836,7 +18836,7 @@ msgstr ""
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
 msgstr ""
-"Stocke le mot de passe pour ce système dans la configuration DrakBackup."
+"Stocker le mot de passe pour ce système dans la configuration DrakBackup."
 
 #: standalone/drakbackup:154
 #, c-format
@@ -18844,7 +18844,7 @@ msgid ""
 "For a multisession CD, only the first session will erase the cdrw. Otherwise "
 "the cdrw is erased before each backup."
 msgstr ""
-"Pour un CD multisession, seulement la première session va effacer le CD/RW. "
+"Pour un CD multisession, seule la première session va effacer le CD/RW. "
 "Sinon, le CD/RW est effacé avant chaque sauvegarde."
 
 #: standalone/drakbackup:155
@@ -18853,7 +18853,7 @@ msgid ""
 "This option will save files that have changed.  Exact behavior depends on "
 "whether incremental or differential mode is used."
 msgstr ""
-"Cette option permet de sauver les fichiers qui ont changé. Le comportement "
+"Cette option permet de sauvegarder les fichiers qui ont changé. Le comportement "
 "exact dépend du mode (différentiel ou incrémental)."
 
 #: standalone/drakbackup:156
@@ -18862,7 +18862,7 @@ msgid ""
 "Incremental backups only save files that have changed or are new since the "
 "last backup."
 msgstr ""
-"Les sauvegardes incrémentales ne sauvent que les fichiers modifiés ou "
+"Les sauvegardes incrémentales ne sauvegardent que les fichiers modifiés ou "
 "nouveaux depuis la sauvegarde précédente."
 
 #: standalone/drakbackup:157
@@ -18871,7 +18871,7 @@ msgid ""
 "Differential backups only save files that have changed or are new since the "
 "original 'base' backup."
 msgstr ""
-"Les sauvegardes différentielles sauvent seulement les fichiers qui ont été "
+"Les sauvegardes différentielles ne sauvegardent que les fichiers qui ont été "
 "modifiés ou ceux qui sont nouveaux depuis la sauvegarde de base."
 
 #: standalone/drakbackup:158
@@ -18938,7 +18938,7 @@ msgstr "Aucun intervalle n'a été sélectionné pour l'opération sur cron."
 #: standalone/drakbackup:377
 #, c-format
 msgid "Interval cron not available as non-root"
-msgstr "L'intervalle Cron n'est accessible qu'au super-utilisateur"
+msgstr "L'intervalle Cron n'est accessible qu'au superutilisateur"
 
 #: standalone/drakbackup:462 standalone/logdrake:437
 #, c-format
@@ -19376,7 +19376,7 @@ msgstr "Veuillez choisir la taille de votre média CD/DVD"
 #: standalone/drakbackup:1777
 #, c-format
 msgid "Multisession CD"
-msgstr "CD multisessions"
+msgstr "CD multisession"
 
 #: standalone/drakbackup:1779
 #, c-format
@@ -19441,7 +19441,7 @@ msgstr "Effacer la cartouche avant la sauvegarde"
 #: standalone/drakbackup:1896
 #, c-format
 msgid "Eject tape after the backup"
-msgstr "Éjectez la bande une fois la sauvegarde effectuée"
+msgstr "Éjecter la bande une fois la sauvegarde effectuée"
 
 #: standalone/drakbackup:1968
 #, c-format
@@ -19904,7 +19904,7 @@ msgstr ""
 #: standalone/drakbackup:2521
 #, c-format
 msgid "\tDo not include System Files\n"
-msgstr "\tFichiers systèmes non inclus\n"
+msgstr "\tFichiers système non inclus\n"
 
 #: standalone/drakbackup:2523
 #, c-format
@@ -20000,7 +20000,7 @@ msgstr ""
 #: standalone/drakbackup:2547
 #, c-format
 msgid "- Restore System Files.\n"
-msgstr "- Restaure les Fichiers Système.\n"
+msgstr "- Restaurer les fichiers système.\n"
 
 #: standalone/drakbackup:2549 standalone/drakbackup:2559
 #, c-format
@@ -20010,12 +20010,12 @@ msgstr "   - depuis la date : %s %s\n"
 #: standalone/drakbackup:2552
 #, c-format
 msgid "- Restore User Files: \n"
-msgstr "- Restaure les Données des utilisateurs :\n"
+msgstr "- Restaurer les données des utilisateurs :\n"
 
 #: standalone/drakbackup:2557
 #, c-format
 msgid "- Restore Other Files: \n"
-msgstr "- Restaure les Autres fichiers ou dossiers :\n"
+msgstr "- Restaurer les autres fichiers ou dossiers :\n"
 
 #: standalone/drakbackup:2736
 #, c-format
@@ -20110,7 +20110,7 @@ msgstr "Restaurer les autres fichiers ou dossiers"
 #: standalone/drakbackup:3107
 #, c-format
 msgid "Select path to restore (instead of /)"
-msgstr "Choisir un chemin de restauration ( au lieu de / )"
+msgstr "Choisir un chemin de restauration (au lieu de /)"
 
 #: standalone/drakbackup:3111 standalone/drakbackup:3393
 #, c-format
@@ -20177,7 +20177,7 @@ msgstr ""
 #: standalone/drakbackup:3453
 #, c-format
 msgid "Backup files not found at %s."
-msgstr "Fichiers de sauvegardes non trouvés sur %s."
+msgstr "Fichiers de sauvegarde non trouvés sur %s."
 
 #: standalone/drakbackup:3466
 #, c-format
@@ -20357,7 +20357,7 @@ msgstr "Veuillez choisir les données à restaurer..."
 #: standalone/drakbackup:4168
 #, c-format
 msgid "Backup system files"
-msgstr "Sauvegarde des fichiers systèmes..."
+msgstr "Sauvegarde des fichiers système..."
 
 #: standalone/drakbackup:4171
 #, c-format
@@ -21155,7 +21155,7 @@ msgid ""
 "Are you really sure that you want to restart the dm service?"
 msgstr ""
 "Vous êtes sur le point de fermer tous les programmes en cours d'exécution et "
-"de fermer votre session. Êtes-vous vraiment sur que vous voulez redémarrer "
+"de fermer votre session. Êtes-vous vraiment sûr que vous voulez redémarrer "
 "le service dm ?"
 
 #: standalone/drakfloppy:41
@@ -21244,13 +21244,13 @@ msgid ""
 "There is no medium or it is write-protected for device %s.\n"
 "Please insert one."
 msgstr ""
-"Il n'y a aucune disquette dans le lecteur %s ou alors elle est \n"
+"Il n'y a aucune disquette dans le lecteur %s, ou alors elle est \n"
 "protégée contre l'écriture. Veuillez vérifier ou en insérer une."
 
 #: standalone/drakfloppy:300
 #, c-format
 msgid "Unable to fork: %s"
-msgstr "Ne peut dédoubler (fork) : %s"
+msgstr "Impossible de dédoubler (fork) : %s"
 
 #: standalone/drakfloppy:303
 #, c-format
@@ -21270,7 +21270,7 @@ msgid ""
 "\n"
 "<span foreground=\"Red\"><tt>%s</tt></span>"
 msgstr ""
-"Ne peut terminer correctement mkbootdisk : \n"
+"Impossible de terminer correctement mkbootdisk : \n"
 "\n"
 "<span foreground=\"Red\"><tt>%s</tt></span>"
 
@@ -21459,19 +21459,19 @@ msgid ""
 msgstr ""
 "Ce programme est un logiciel libre : vous pouvez le redistribuer\n"
 "et/ou le modifier selon les termes de la « GNU General Public\n"
-"License », tels que publiés par la « Free Software Foundation »; soit\n"
+"License », tels que publiés par la « Free Software Foundation » ; soit\n"
 "la version 2 de cette licence ou (selon votre choix) toute version\n"
 "ultérieure.\n"
 "\n"
 "\n"
 "Ce programme est distribué dans l'espoir qu'il sera utile, mais\n"
-"SANS AUCUNE GARANTIE, ni explicite ni implicite; sans même les\n"
+"SANS AUCUNE GARANTIE, ni explicite ni implicite ; sans même les\n"
 "garanties de commercialisation ou d'adaptation dans un but spécifique.\n"
 "Se référer à la « GNU General Public License » pour plus de détails.\n"
 "\n"
 "\n"
 "Vous devriez avoir reçu une copie de la « GNU General Public License »\n"
-"en même temps que ce programme; sinon, écrivez à la « Free Software\n"
+"en même temps que ce programme ; sinon, écrivez à la « Free Software\n"
 "Foundation », Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
 #: standalone/drakfont:538
@@ -21521,7 +21521,7 @@ msgid ""
 "hang up your X Server."
 msgstr ""
 "Avant d'installer des polices de caractères, assurez-vous que vous avez\n"
-"les permissions de les utiliser et de les installer sur votre système. \n"
+"la permission de les utiliser et de les installer sur votre système. \n"
 "\n"
 "Vous pouvez installer les polices par la voie habituelle. Dans de rares "
 "cas,\n"
@@ -21615,7 +21615,7 @@ msgstr "Copier les polices sur votre système"
 #: standalone/drakfont:761
 #, c-format
 msgid "Install & convert Fonts"
-msgstr "Installe et convertit des polices"
+msgstr "Installer et convertir des polices"
 
 #: standalone/drakfont:762
 #, c-format
@@ -21865,9 +21865,9 @@ msgid ""
 "\n"
 msgstr ""
 "Je peux conserver votre configuration actuelle, et supposer que vous avez "
-"déjà configuré un serveur DHCP; dans ce cas veuillez vérifier que j'ai "
+"déjà configuré un serveur DHCP ; dans ce cas, veuillez vérifier que j'ai "
 "correctement lu l'adresse du réseau de Classe C que vous utilisez pour votre "
-"réseau local; je ne le reconfigurerai pas et je ne toucherai pas à la "
+"réseau local ; je ne le reconfigurerai pas et je ne toucherai pas à la "
 "configuration de votre serveur DHCP.\n"
 "\n"
 "L'entrée DNS par défaut est le serveur cache de nom configuré pour le pare-"
@@ -21893,7 +21893,7 @@ msgid ""
 msgstr ""
 "Configuration du serveur DHCP.\n"
 "\n"
-"Vous pouvez ici sélectionner différentes options pour le serveur DHCP.\n"
+"Vous pouvez sélectionner ici différentes options pour le serveur DHCP.\n"
 "Si vous ne connaissez pas leur signification, laissez-les telles quelles."
 
 #: standalone/drakgw:327
@@ -21998,14 +21998,14 @@ msgstr ""
 #: standalone/drakhelp:22
 #, c-format
 msgid " --help                - display this help     \n"
-msgstr "--help                - affiche ce message\n"
+msgstr "--help                - afficher ce message\n"
 
 #: standalone/drakhelp:23
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
 msgstr ""
-" --id <label_id>       - charge la page d'aide html identifié par label_id\n"
+" --id <label_id>       - charger la page d'aide html identifiée par label_id\n"
 
 #: standalone/drakhelp:24
 #, c-format
@@ -22086,7 +22086,7 @@ msgid ""
 "groups via msec.\n"
 "You can also edit your own rules which will owerwrite the default rules."
 msgstr ""
-"Ici il est possible de voir les fichiers à utiliser pour corriger les "
+"Ici, il est possible de voir les fichiers à utiliser pour corriger les "
 "permissions, les propriétaires et les groupes grâce à msec.\n"
 "Vous pouvez aussi éditer vos propres règles, prioritaires devant celles par "
 "défaut."
@@ -22177,7 +22177,7 @@ msgstr "Lecture"
 #: standalone/drakperm:255
 #, c-format
 msgid "Enable \"%s\" to read the file"
-msgstr "Permet à « %s » de lire ce fichier"
+msgstr "Permettre à « %s » de lire ce fichier"
 
 #: standalone/drakperm:259
 #, c-format
@@ -22188,7 +22188,7 @@ msgstr "Écriture"
 #: standalone/drakperm:262
 #, c-format
 msgid "Enable \"%s\" to write the file"
-msgstr "Permet à « %s » de modifier ce fichier"
+msgstr "Permettre à « %s » de modifier ce fichier"
 
 #: standalone/drakperm:266
 #, c-format
@@ -22199,7 +22199,7 @@ msgstr "Exécuter"
 #: standalone/drakperm:269
 #, c-format
 msgid "Enable \"%s\" to execute the file"
-msgstr "Permet à « %s » d'exécuter ce fichier"
+msgstr "Permettre à « %s » d'exécuter ce fichier"
 
 #: standalone/drakperm:272
 #, c-format
@@ -22887,7 +22887,7 @@ msgstr "Port : "
 #: standalone/drakups:149
 #, c-format
 msgid "The port on which is connected your ups"
-msgstr "le port sur lequel votre onduleur est connecté"
+msgstr "Le port sur lequel votre onduleur est connecté"
 
 #: standalone/drakups:156
 #, c-format
@@ -23283,7 +23283,7 @@ msgid ""
 msgstr ""
 "Cette section doit se trouver en haut du fichier %s.\n"
 "\n"
-"Soyer srû que toutes les autres sections suivent cette section de "
+"Soyez sûr que toutes les autres sections suivent cette section de "
 "configuration.\n"
 "\n"
 "Choisissez continuer ou précédent quand vous avez fini.\n"
@@ -23528,7 +23528,7 @@ msgstr ""
 "Votre fichier %s contient plusieurs sections ou connexions.\n"
 "\n"
 "Vous pouvez choisir ci dessous celle que vous voulez modifier.\n"
-"ensuite cliquez sur suivant.\n"
+"Ensuite, cliquez sur Suivant.\n"
 
 #: standalone/drakvpn:580 standalone/drakvpn:660 standalone/drakvpn:831
 #: standalone/drakvpn:877
@@ -23539,7 +23539,7 @@ msgstr "Noms des sections"
 #: standalone/drakvpn:590
 #, c-format
 msgid "Can not edit!"
-msgstr "Ne peut éditer !"
+msgstr "Impossible de modifier"
 
 #: standalone/drakvpn:591
 #, c-format
@@ -23555,7 +23555,7 @@ msgstr ""
 "\n"
 "Cette section est obligatoire pour Freeswan 2.X.\n"
 "Une section doit spécifier « version 2.0 » dans le haut du fichier %s et "
-"éventuellement, désactivez ou activez le cryptage.\n"
+"ensuite, désactivez ou activez le cryptage.\n"
 
 #: standalone/drakvpn:600
 #, c-format
@@ -23578,7 +23578,7 @@ msgid ""
 "You can now edit the default section entries.\n"
 "Choose continue when you are done to write the data.\n"
 msgstr ""
-"Votre fichier %s contient plusieurs sections ou connections.\n"
+"Votre fichier %s contient plusieurs sections ou connexions.\n"
 "\n"
 "Vous pouvez maintenant modifier les entrées de la section défaut.\n"
 "Choisissez continuer lorsque vous avez fini d'écrire les données.\n"
@@ -23611,7 +23611,7 @@ msgstr ""
 "\n"
 "Vous pouvez maintenant modifier une règle de sécurité.\n"
 "\n"
-"Choisissez continuer lorsque vous aurez fini.\n"
+"Choisissez Continuer lorsque vous aurez fini.\n"
 
 #: standalone/drakvpn:656 standalone/drakvpn:873
 #, c-format
@@ -23628,7 +23628,7 @@ msgid ""
 msgstr ""
 "Votre fichier %s contient plusieurs sections ou connexions.\n"
 "\n"
-"Vous pouvez choisir ci dessous ce que vous désirez enlever.\n"
+"Vous pouvez choisir ci-dessous ce que vous désirez enlever.\n"
 "Ensuite choisissez suivant.\n"
 
 #: standalone/drakvpn:686
@@ -23759,7 +23759,7 @@ msgstr ""
 "\tExemple : path include '/etc/racoon'\n"
 "\n"
 "path pre_shared_key file: spécifie le nom du fichier contenant\n"
-"la clé p r«é-partagée  p»our différents identifiants.\n"
+"la clé « prépartagée » pour différents identifiants.\n"
 "Voir Fichier de partage de clés.\n"
 "\tExemple : path pre_shared_key '/etc/racoon/psk.txt' ;\n"
 "\n"
@@ -23773,7 +23773,7 @@ msgstr ""
 "\n"
 "Fichier de partage de clés : ce fichier définit un couple\n"
 "identifiant et clé partagée qui sera utilisé lors de\n"
-"l'authentification par clé « pré-partagée » en phase 1."
+"l'authentification par clé « prépartagée » en phase 1."
 
 #: standalone/drakvpn:770 standalone/drakvpn:863
 #, c-format
@@ -23789,10 +23789,10 @@ msgid ""
 "You can now choose the remote settings.\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
-"Soyez srû que vous ayez déjà la section de chemin.\n"
+"Soyez sûr que vous ayez déjà la section de chemin\n"
 "en haut du fichier racoon.conf.\n"
 "Vous pouvez maintenant choisir les paramètres distants.\n"
-"Choisissez continuer ou précédent quand vous avez fini.\n"
+"Choisissez Continuer ou Précédent quand vous avez fini.\n"
 
 #: standalone/drakvpn:810
 #, c-format
@@ -23803,7 +23803,7 @@ msgid ""
 "You can now choose the sainfo settings.\n"
 "Choose continue or previous when you are done.\n"
 msgstr ""
-"Soyez srû que vous ayez déjà les sections de chemin.\n"
+"Soyez sûr que vous ayez déjà les sections de chemin\n"
 "en haut de votre fichier %s.\n"
 "\n"
 "Vous pouvez maintenant choisir les paramètres sainfo.\n"
@@ -23819,8 +23819,8 @@ msgid ""
 msgstr ""
 "Votre fichier %s contient plusieurs sections ou connexions.\n"
 "\n"
-"Vous pouvez choisir ci dessous ce que vous désirez modifier.\n"
-"Ensuite choisissez suivant.\n"
+"Vous pouvez choisir ci-dessous ce que vous désirez modifier.\n"
+"Ensuite, choisissez Suivant.\n"
 
 #: standalone/drakvpn:838
 #, c-format
@@ -23837,7 +23837,7 @@ msgstr ""
 "\n"
 "Vous pouvez maintenant modifier la section des sites distants.\n"
 "\n"
-"Choisissez continuer quand vous avez modifié les données.\n"
+"Choisissez Continuer quand vous avez modifié les données.\n"
 
 #: standalone/drakvpn:847
 #, c-format
@@ -23852,7 +23852,7 @@ msgstr ""
 "\n"
 "Vous pouvez maintenant modifier les paramètres de la section sainfo.\n"
 "\n"
-"Choisissez continuer quand vous avez écrit les données."
+"Choisissez Continuer quand vous avez écrit les données."
 
 #: standalone/drakvpn:855
 #, c-format
@@ -23869,11 +23869,11 @@ msgid ""
 msgstr ""
 "Cette section doit être en haut du fichier %s.\n"
 "\n"
-"Soyez sur que les autres sections suivent cette section de chemin.\n"
+"Soyez sûr que les autres sections suivent cette section de chemin.\n"
 "\n"
 "Vous pouvez maintenant modifier les chemins.\n"
 "\n"
-"Choisissez continuer ou précédent quand vous avez fini.\n"
+"Choisissez Continuer ou Précédent quand vous avez fini.\n"
 
 #: standalone/drakvpn:862
 #, c-format
@@ -24086,10 +24086,10 @@ msgid ""
 "Or you can define 1, 2, or 5 as the DH group number."
 msgstr ""
 "définir le groupe des exponentielles Diffie-Hellman.\n"
-"Si vous n'avez pas besoin de PFS alors vous pouvez omettre ce paramètre.\n"
+"Si vous n'avez pas besoin de PFS, vous pouvez omettre ce paramètre.\n"
 "Toutes les propositions seront acceptées si aucune n'est spécifiée.\n"
-"Goupe est de la forme : modp768, modp1024, modp1536.\n"
-"Ou vous pouvez définir 1,2 ou 5 comme numéro de groupe DH."
+"Groupe est de la forme : modp768, modp1024, modp1536.\n"
+"Ou vous pouvez définir 1, 2 ou 5 comme numéro de groupe DH."
 
 #: standalone/drakvpn:996
 #, c-format
@@ -24119,7 +24119,7 @@ msgid ""
 "So, here, the lifetime numbers are 1, 1, 30, 30, 60 and 12.\n"
 msgstr ""
 "définit un délai qui sera proposé dans les négociations de phase 1.\n"
-"Chaque proposition sera acceptée et les attributs ne seront pas \n"
+"Chaque proposition sera acceptée, et les attributs ne seront pas \n"
 "proposés aux partenaires si vous ne les spécifiez pas.\n"
 "Ils peuvent être spécifiés individuellement dans chaque proposition.\n"
 "\n"
@@ -24132,7 +24132,7 @@ msgstr ""
 "        lifetime time 60 sec;\n"
 "\tlifetime time 12 hour;\n"
 "\n"
-"Ainsi dans ces cas, les chiffres des délais sont 1, 1, 30, 30, 60 et 12.\n"
+"Ainsi, dans ces cas, les chiffres des délais sont 1, 1, 30, 30, 60 et 12.\n"
 
 #: standalone/drakvpn:1013
 #, c-format
@@ -24162,8 +24162,8 @@ msgid ""
 "So, here, the lifetime units are 'min', 'min', 'sec', 'sec', 'sec' and "
 "'hour'.\n"
 msgstr ""
-"définit un délai qui sera proposé dans les négociations de phase 1.\n"
-"Chaque proposition sera acceptée et les attributs ne seront pas \n"
+"définir un délai qui sera proposé dans les négociations de phase 1.\n"
+"Chaque proposition sera acceptée, et les attributs ne seront pas \n"
 "proposés aux partenaires si vous ne les spécifiez pas.\n"
 "Ils peuvent être spécifiés individuellement dans chaque proposition.\n"
 "\n"
@@ -24176,7 +24176,7 @@ msgstr ""
 "        lifetime time 60 sec;\n"
 "\tlifetime time 12 hour;\n"
 "\n"
-"Ainsi dans ces cas, les chiffres des délais sont 1, 1, 30, 30, 60 et 12.\n"
+"Ainsi, dans ces cas, les chiffres des délais sont 1, 1, 30, 30, 60 et 12.\n"
 
 #: standalone/drakvpn:1031 standalone/drakvpn:1116
 #, c-format
@@ -24244,8 +24244,8 @@ msgid ""
 "racoon uses when it is the initiator.\n"
 msgstr ""
 "Définit les modes d'échange pour la phase 1 lorsque racoon est\n"
-"l'initiateur. En outre cela précise le mode d'échange acceptable\n"
-"lorsque racoon est en mode répondeur. Vous pouvez spécifiez\n"
+"l'initiateur. En outre, cela précise le mode d'échange acceptable\n"
+"lorsque racoon est en mode répondeur. Vous pouvez spécifier\n"
 "plusieurs modes en les séparant par une virgule.\n"
 "Tous les modes sont acceptables. Le premier mode d'échange\n"
 "est celui qu'utilise racoon quand il est initiateur.\n"
@@ -24287,14 +24287,14 @@ msgstr ""
 "alors activer le mode passif pour que racoon(8) soit\n"
 "en mode répondeur seulement. Si le répondeur n'a pas\n"
 "de politique de sécurité dans la SPD durant la phase 2 de la\n"
-"négociation et que la directive est à « on », alors racoon(8)\n"
+"négociation, et que la directive est à « on », alors racoon(8)\n"
 "choisira la première proposition dans la SA de l'initiateur et\n"
 "générera les politiques de sécurité associées. Cela est\n"
 "utile lors de la négociation avec un client disposant d'une\n"
 "adresse IP dynamique. Attention : une politique de sécurité\n"
 "inadéquate peut être installée par l'initiateur dans la SPD du\n"
-"répondeur. Ainsi certaines communications peuvent échouer\n"
-"si ce type de politique de sécurité s'installent à cause d'une\n"
+"répondeur. Ainsi, certaines communications peuvent échouer\n"
+"si ce type de politique de sécurité s'installe à cause d'une\n"
 "incohérence entre l'initiateur et le répondeur. Cette directive\n"
 "est ignorée dans le cas de l'initiateur.\n"
 "La valeur par défaut est « off »."
@@ -24362,7 +24362,7 @@ msgid ""
 msgstr ""
 "Si vous ne voulez pas vérifier le certificat du tiers pour certaines "
 "raisons,\n"
-"désactivez ceci. La valeur par défaut est . on »    «"
+"désactivez ceci. La valeur par défaut est « on »."
 
 #: standalone/drakvpn:1093
 #, c-format
@@ -24441,7 +24441,7 @@ msgid ""
 msgstr ""
 "Spécifiez l'algorithme de cryptage utilisé pour la phase 1 de la "
 "négociation.\n"
-"Ce choix doit etre défini.\n"
+"Ce choix doit être défini.\n"
 "L'algorithme est un des suivants :\n"
 "\n"
 "DES, 3DES, blowfish, cast128 pour oakley.\n"
@@ -24466,12 +24466,12 @@ msgstr "Commande"
 #: standalone/drakvpn:1134
 #, c-format
 msgid "Source IP range"
-msgstr "Plage d'IPs source"
+msgstr "Plage d'IP source"
 
 #: standalone/drakvpn:1135
 #, c-format
 msgid "Destination IP range"
-msgstr "Plage d'IPs de destination"
+msgstr "Plage d'IP de destination"
 
 #: standalone/drakvpn:1136
 #, c-format
@@ -25079,7 +25079,7 @@ msgstr "Nom du modèle"
 #: standalone/harddrake2:82
 #, c-format
 msgid "official vendor name of the cpu"
-msgstr "le nom officiel du fabriquant de ce processeur"
+msgstr "le nom officiel du fabricant de ce processeur"
 
 #: standalone/harddrake2:83
 #, c-format
@@ -25169,7 +25169,7 @@ msgid ""
 "identified by a\n"
 "channel number, a target id and a logical unit number"
 msgstr ""
-"le numéro de la cible SCSI (LUN). Les périphériques SCSI connectés à l'htôe "
+"le numéro de la cible SCSI (LUN). Les périphériques SCSI connectés à l'hôte "
 "sont uniquement identifiés par\n"
 "un numéro de canal, un numéro de cible et un numéro d'unité logique."
 
@@ -25380,7 +25380,7 @@ msgstr "/_A propos..."
 #: standalone/harddrake2:219
 #, c-format
 msgid "About Harddrake"
-msgstr "A propos de Harddrake"
+msgstr "À propos de Harddrake"
 
 #. -PO: Do not alter the <span ..> and </span> tags
 #: standalone/harddrake2:221
@@ -25691,7 +25691,7 @@ msgid ""
 msgstr ""
 "Bienvenue dans l'utilitaire de configuration des alertes par courriel.\n"
 "\n"
-"Vous allez pouvoir configurer ici les alertes systèmes.\n"
+"Vous allez pouvoir configurer ici les alertes système.\n"
 
 #: standalone/logdrake:406
 #, c-format
@@ -25736,7 +25736,7 @@ msgstr "Configuration des alertes"
 #: standalone/logdrake:429
 #, c-format
 msgid "Please enter your email address below "
-msgstr "Veuillez entrer votre adresse courriel ci -dessous"
+msgstr "Veuillez entrer votre adresse courriel ci-dessous"
 
 #: standalone/logdrake:430
 #, c-format
@@ -26039,13 +26039,13 @@ msgid ""
 "Warning, another internet connection has been detected, maybe using your "
 "network"
 msgstr ""
-"Attention, une autre connexion internet a été détectée, utilisant peut-être "
+"Attention, une autre connexion Internet a été détectée, utilisant peut-être "
 "votre réseau"
 
 #: standalone/net_monitor:477
 #, c-format
 msgid "No internet connection configured"
-msgstr "Aucune connexion internet n'a été configurée"
+msgstr "Aucune connexion Internet n'a été configurée"
 
 #: standalone/printerdrake:68
 #, c-format
@@ -26352,8 +26352,8 @@ msgid ""
 "It is possible that your scanners need their firmware to be uploaded "
 "everytime when they are turned on."
 msgstr ""
-"Il est possible que vos scanners nécessitent que leur firmware soit mis à "
-"jour à chaque fois qu'ils sont branchés."
+"Il est possible que vos scanners nécessitent que leur firmware soit chargé "
+"à chaque fois qu'ils sont branchés."
 
 #: standalone/scannerdrake:230
 #, c-format
@@ -26576,7 +26576,7 @@ msgid ""
 "Here you can choose whether the scanners connected to this machine should be "
 "accessible by remote machines and by which remote machines."
 msgstr ""
-"Vous pouvez ici choisir si les scanners connectés à cette machine doivent "
+"Vous pouvez choisir ici si les scanners connectés à cette machine doivent "
 "être accessibles depuis des machines distantes, et quelles machines pourront "
 "y accéder."
 
