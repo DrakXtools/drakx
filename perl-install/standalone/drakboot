@@ -96,8 +96,6 @@ if (member($cur_res, qw( 785 788 791 794))) {
     $no_bootsplash = 1; #- we can't select any theme we're not in Framebuffer mode :-/
 }
 
-#- and check that lilo is the correct loader
-$no_bootsplash ||= $lilogrub ne 'LILO';
 do { $no_bootsplash = 0; $cur_res = '800x600' } if $::testing;
 my @thms;
 my @boot_thms = if_(!$themes{default}, qw(default));
