@@ -206,8 +206,11 @@ substInFile {
     s!/es/Starter.html/!/en/Starter.html/!;
 } "$::prefix/usr/share/mdk/mandrakegalaxy/mdkgalaxy-es.html";
 
-$ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
-run_program::rooted($::prefix, 'update-menus', '-n');
+{
+    local $ENV{LC_ALL} = 'en_US'; #- update-menus doesn't work when there is no locale (aka locale "C")
+    local $ENV{HOME} = '/'; #- savekdemimetypes.pl needs this otherwise it's tmp file fails
+    run_program::rooted($::prefix, 'update-menus', '-n');
+}
 
 run_program::rooted($::prefix, 'nspluginscan'); #- must be run before kbuildsycoca for the ksycoca to be flash plugin aware
 
