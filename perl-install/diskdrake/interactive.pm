@@ -948,7 +948,7 @@ sub Options {
 			  if (!check($in, $hd, $part, $all_hds)) {
 			      $options->{encrypted} = 0;
 			  } elsif (!$part->{encrypt_key} && !isSwap($part)) {
-			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in)) {
+			      if (my ($encrypt_key, $encrypt_algo) = choose_encrypt_key($in, $options)) {
 				  $options->{'encryption='} = $encrypt_algo;
 				  $part->{encrypt_key} = $encrypt_key;
 			      } else {
@@ -1257,11 +1257,11 @@ sub min_partition_size { $_[0]->cylinder_size + 2*$_[0]{geom}{sectors} }
 
 
 sub choose_encrypt_key {
-    my ($in) = @_;
+    my ($in, $options) = @_;
 
     my ($encrypt_key, $encrypt_key2);
     my @algorithms = map { "AES$_" } 128, 196, 256, 512, 1024, 2048;
-    my $encrypt_algo = "AES128";
+    my $encrypt_algo = $options->{'encryption='} || "AES128";
 
     $in->ask_from_(
 		       {
