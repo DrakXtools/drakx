@@ -304,7 +304,7 @@ sub setPackages {
 	push @{$o->{default_packages}}, "raidtools" if $o->{raid} && !is_empty_array_ref($o->{raid}{raid});
 	push @{$o->{default_packages}}, "lvm" if -e '/etc/lvmtab';
 	push @{$o->{default_packages}}, "reiserfs-utils" if grep { isReiserfs($_) } @{$o->{fstab}};
-	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("snd-slot-0") =~ /^snd-card-/;
+	push @{$o->{default_packages}}, "alsa", "alsa-utils" if modules::get_alias("sound-slot-0") =~ /^snd-card-/;
 
 	pkgs::getDeps($o->{prefix}, $o->{packages});
 	pkgs::selectPackage($o->{packages},
