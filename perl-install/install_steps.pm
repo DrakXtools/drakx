@@ -251,6 +251,8 @@ sub configureNetwork($) {
     network::addDefaultRoute($o->{netc}) unless $::testing;
 
     install_any::pkg_install($o, "dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp|bootp)$/ } @{$o->{intf}};
+    # Handle also pump (this is still in initscripts no?)
+    install_any::pkg_install($o, "pump") if grep { $_->{BOOTPROTO} =~ /^(pump)$/ } @{$o->{intf}};
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
     miscellaneousNetwork($o);
