@@ -236,13 +236,13 @@ sub selectInstallClass {
     $o->set_help('selectInstallClassCorpo') if $::corporate;
 
     my $verifInstallClass = sub { $::expert = $c{$_[0]} eq "expert" };
-    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? __("Update packages only") : __("Update") : __("Install");
+    my $installMode = $o->{isUpgrade} ? $o->{keepConfiguration} ? __("Upgrade packages only") : __("Upgrade") : __("Install");
 
     $installMode = $o->selectInstallClass1($verifInstallClass,
 					   first(list2kv(@c)), ${{reverse %c}}{$::expert ? "expert" : "beginner"},
-					   [ __("Install"), __("Update"), __("Update packages only") ], $installMode);
+					   [ __("Install"), __("Upgrade"), __("Upgrade packages only") ], $installMode);
 
-    $o->{isUpgrade} = $installMode =~ /Update/;
+    $o->{isUpgrade} = $installMode =~ /Upgrade/;
     $o->{keepConfiguration} = $installMode =~ /packages only/;
 
     install_steps::selectInstallClass($o);
