@@ -8,7 +8,7 @@ MOFILES = $(POFILES:%.po=%.mo)
 all: TAGS $(DIRS)
 
 TAGS: $(PMS)
-	etags -o - $^ | ./perl2etags > $@
+	etags -o - $^ /usr/lib/perl5/site_perl/*/MDK/Common/*.pm | ./perl2etags > $@
 
 clean:
 	for i in $(DIRS); do $(MAKE) -C $$i clean; done
