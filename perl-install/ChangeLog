@@ -1,3 +1,45 @@
+2004/02/26  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* standalone/drakautoinst: support two-floppies boot style for
+	replay_install disk as well (not nice at all..)
+
+	* install_any.pm: support two-floppies boot style for replay_install disk
+	as well (not nice at all..)
+	hd.img doesn't exist anymore, using hd_grub.img
+
+	* ugtk2.pm: ask_browse_tree_info_given_widgets: allow for an initial
+	selection if necessary (through toggle_nodes)
+
+2004/02/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tl.po, share/po/he.po: Added Filipino file; updated Hebrew file
+
+2004/02/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: remove bogus empty line
+	update 10-13mdk changelog
+	10-13mdk
+	10-12mdk
+
+	* ugtk2.pm (Gtk2::Banner::new) add o_otions ref hash parameter, thus
+	enabling to
+	override text position (eg: for mcc about dialog)
+	(set_back_pixmap) split it out of Gtk2::Banner::set_pixmap
+	(Gtk2::Banner::new) create only *one* expose event handler
+	(Gtk2::Banner::set_pixmap) stop expose event propagation so that
+	shadows do not accumulate (thus resulting in darker alpha-channel)
+
+	* network/adsl.pm (adsl_conf_backend) install needed packages
+
+	* network/netconnect.pm: 
+	  - never delete up/down scripts
+	  - only write internet service if start at boot requested
+	skip apply_setting step for now since anyway we've already written
+	most config files... (btw, now installer also write cnx type as side
+	effect)
+	reverse debug stuff that should never have been commited
+	typo fix: only write ether config for lan...
+
 2004/02/26  Till Kamppeter  <till at mandrakesoft.com>
 
 	* printer/main.pm, printer/data.pm: Fixes for HPOJ setup during
@@ -27594,7 +27636,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.889 2004/02/25 15:36:13 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.890 2004/02/26 10:18:56 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
