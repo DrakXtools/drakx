@@ -27,7 +27,6 @@ my $ptalinitread = 0;
     _("LPRng - LPR New Generation")         => "lprng",
     _("LPD - Line Printer Daemon")          => "lpd",
     _("PDQ - Print, Don't Queue")           => "pdq"
-#    _("PDQ - Marcia, click here!")           => "pdq"
 );
 %spooler_inv = reverse %spooler;
 
@@ -71,8 +70,10 @@ sub spooler {
     # LPD support can be reactivated by uncommenting the line which is
     # commented out now.
 
+    # LPRng is taken out of the distro since Mandrake 9.0.
+
     #return @spooler_inv{qw(cups lpd lprng pdq)};
-    return @spooler_inv{qw(cups lprng pdq)};
+    return @spooler_inv{qw(cups pdq)};
 }
 
 sub printer_type($) {
