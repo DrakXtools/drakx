@@ -460,7 +460,7 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
                 sleep(10);
 		reboot(0xfee1dead, 672274793, 0x01234567);
 	} else {
-		printf("you may safely reboot your system\n");
+		printf("you may safely reboot or halt your system\n");
 		while (1);
 	}
 
