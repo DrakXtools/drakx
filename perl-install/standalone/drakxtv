@@ -25,19 +25,19 @@
 #package tvdrake;
 
 use lib qw(/usr/lib/libDrakX);
+
+use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
+
 use interactive;
 use strict;
 use detect_devices;
+use common;
+
+my $in = 'interactive'->vnew('su', 'default');
 
 sub scan4channels {
-    my $in = shift;
     my $wait;
-    if ( ! -f "/usr/bin/scantv" ) {
-	   $wait = $in->ask_warn(_('Error'),
-						_("XawTV isn't installed ...\nYou should install it.\n Just type \"urpmi xawtv\""));
-	   $in->exit(0);
-	   return;
-    }
+    -x "/usr/bin/scantv" or $in->do_pkgs->install('xawtv');
 
     my ($i, $ftable_id, $norm, $check);
 
@@ -76,9 +76,19 @@ sub scan4channels {
 }
 
 
-scan4channels('interactive'->vnew()) 
-    if grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1);
+if (grep { $_->{media_type} eq 'MULTIMEDIA_VIDEO' } detect_devices::probeall(1)) {
+    scan4channels();
+} else {
+    $in->ask_warn(_("No TV Card detected!"), formatAlaTeX(
+_("No TV Card has been detected on your machine. Please verify that a Linux-supported Video/TV Card is correctly plugged in.
 
+
+You can visit our hardware database at:
+
+
+http://www.linux-mandrake.com/en/hardware.php3")));
+}
+      
 
 # TODO :
 # - offer to sort channels after
