@@ -763,7 +763,7 @@ sub Mount {
     my ($in, $hd, $part) = @_;
     write_partitions($in, $hd) or return;
     my $w;
-    fs::mount_part($part, sub {
+    fs::mount_part($part, $::prefix, 0, sub {
         	my ($msg) = @_;
         	$w ||= $in->wait_message('', $msg);
         	$w->set($msg);
@@ -1061,7 +1061,7 @@ sub format_ {
     ask_alldatawillbelost($in, $part, N_("After formatting partition %s, all data on this partition will be lost")) or return;
     $part->{isFormatted} = 0; #- force format;
     my $w;
-    fs::format_part($all_hds->{raids}, sub {
+    fs::format_part($all_hds->{raids}, $part, $::prefix, sub {
         	my ($msg) = @_;
         	$w ||= $in->wait_message('', $msg);
         	$w->set($msg);
