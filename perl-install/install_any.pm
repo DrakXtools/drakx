@@ -422,6 +422,7 @@ sub selectSupplMedia {
 	    local $::expert = $::expert;
 	    require network::netconnect;
 	    network::netconnect::main($o->{prefix}, $o->{netcnx} ||= {}, $o, $o->{modules_conf}, $o->{netc}, $o->{mouse}, $o->{intf}, 0, 1);
+	    require install_interactive;
 	    install_interactive::upNetwork($o);
 	}
 	local $o->{method} = $suppl_method;
