@@ -329,7 +329,7 @@ sub ask_fromW {
     $mainw->sync; # for XPM's creation
 
     #-the widgets
-    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_scroll, $total_size, $max_width);
+    my (@widgets, @widgets_always, @widgets_advanced, $advanced, $advanced_pack, $has_horiz_scroll, $has_scroll, $total_size, $max_width);
     my $tooltips = new Gtk::Tooltips;
 
     my $set_all = sub {
@@ -421,6 +421,7 @@ sub ask_fromW {
 	    $w->signal_connect(key_press_event => $may_go_to_next);
 	    $set = sub { $adj->set_value($_[0]) };
 	    $get = sub { $adj->get_value };
+	    $size = 2;
 	} elsif ($e->{type} =~ /list/) {
 
 	    my $quit_if_double_click = 
@@ -454,7 +455,9 @@ sub ask_fromW {
 		$w->set_popdown_strings(@{$e->{list}});
 		$w->disable_activate;
 		($real_w, $w) = ($w, $w->entry);
-		$width = max(map { length } @{$e->{list}});
+		my @l = sort { $b <=> $a } map { length } @{$e->{list}};
+		$has_horiz_scroll = 1;
+		$width = $l[@l / 16]; # take the third octile (think quartile)
 	    } else {
                 $w = new Gtk::Entry;
 		$w->signal_connect(focus_in_event => sub { $w->select_region });
@@ -522,6 +525,8 @@ sub ask_fromW {
     gtkadd($mainw->{window}, $pack);
     if ($has_scroll && !$::isEmbedded &&!$::isWizard) {
 	$mainw->{rwindow}->set_default_size($mainw->{box_width}, $mainw->{box_height});
+    } elsif ($has_horiz_scroll && !$::isEmbedded &&!$::isWizard) {
+	$mainw->{rwindow}->set_default_size($mainw->{box_width}, 0);
     } 
     $set_advanced->(0);
     (@widgets ? $widgets[0]{focus_w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
