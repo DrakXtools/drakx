@@ -28,10 +28,12 @@ use common qw(:common :file :functional :system);
 use strict;
 use netconnect;
 
-my $default_intf;
+my ($connect, $default_intf);
 init Gtk;
+my $in = vnew interactive('su');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
 ($default_intf) = "@ARGV" =~ /--defaultintf (\w+)/;
+$connect = "@ARGV" =~ /--connect/;
 my $window1 = $::isEmbedded ? new Gtk::Plug ($::XID) : new Gtk::Window -toplevel;
 $window1->signal_connect ( delete_event => sub { Gtk->exit(0); });
 $window1->set_position(1);
@@ -61,7 +63,7 @@ gtkadd($window1,
 						 ),
 					0, gtksignal_connect(my $button_connect = new Gtk::Button(), clicked => \&connection),
 					0, new Gtk::HSeparator,
-					0, gtksignal_connect(new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) })
+					0, gtksignal_connect(my $button_close = new Gtk::Button(_("Close")), clicked => sub { Gtk->exit(0) })
 				       )
 			   ),
 		0, my $statusbar = new Gtk::Statusbar
@@ -86,12 +88,14 @@ my ($labelr, $labelt);
 my $time_tag = Gtk->timeout_add(1000, \&rescan);
 my $time_tag2 = Gtk->timeout_add(5000, \&update);
 rescan();
+connection() if $connect && ! $isconnected;
 Gtk->main;
 Gtk->exit(0);
 
 sub connection {
     my $isconnected2 = $isconnected;
     $button_connect->set_sensitive(0);
+    $button_close->set_sensitive(0);
     $statusbar->pop(1);
     $statusbar->push(1, $isconnected2 ? _("Disconnecting from internet ") : _("Connecting to internet "));
     my $nb_point=1;
@@ -119,6 +123,7 @@ sub connection {
 					    0;
 					});
 				    $button_connect->set_sensitive(1);
+				    $button_close->set_sensitive(1);
 				    0;
 				});
     Gtk->main_iteration while Gtk->events_pending;
