@@ -208,7 +208,7 @@ sub detect() {
     }
 
     #- probe serial device to make sure a wacom has been detected.
-    eval { commands::modprobe("serial") };
+    eval { modules::load("serial") };
     my ($r, $wacom) = mouseconfig(); return ($r, $wacom) if $r;
 
     if (!$::isStandalone) {
