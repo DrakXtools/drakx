@@ -334,7 +334,7 @@ sub beforeInstallPackages {
     log::l("setting excludedocs to $o->{excludedocs}");
     substInFile { s/%_excludedocs.*//; $_ .= "%_excludedocs yes\n" if eof && $o->{excludedocs} } "$o->{prefix}/etc/rpm/macros";
 
-    if (my ($agp) = modules::probe_category('other/agpgart')) {
+    if (my ($agp) = modules::probe_category('various/agpgart')) {
 	modules::add_alias('agpgart', $agp);
     }
 

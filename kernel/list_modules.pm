@@ -159,14 +159,16 @@ our %l = (
       qw(parport parport_pc parport_serial),
       qw(btaudio),
 
+      #- these need checking
+      qw(pcilynx sktr rrunner meye 3c559 buz paep),
+    ],
+    agpgart => [
       if_(arch() =~ /alpha/, qw(alpha-agp)),
       if_(arch() =~ /ia64/, qw(hp-agp i460-agp)),
       if_(arch() =~ /ppc/, qw(uninorth-agp)),
 
       qw(agpgart ali-agp amd64-agp amd-k7-agp ati-agp intel-agp),
 	 qw(nvidia-agp sworks-agp sis-agp via-agp),
-      #- these need checking
-      qw(pcilynx sktr rrunner meye 3c559 buz paep),
     ],
   },
 );
