@@ -113,7 +113,8 @@ utilities and their documentation. This installation is suitable for
 setting up a server.
 
  * \"Truly minimal install\" Will install the strict minimum necessary to
-get a working Linux system, in command line only.
+get a working Linux system, in command line only. This installation is
+about 65Mb large.
 
 You can check the \"Individual package selection\" box, which is useful if
 you are familiar with the packages being offered or if you want to have
@@ -160,14 +161,15 @@ another installation. See the second tip of last step on how to create such
 a floppy."),
 
 configureNetwork => 
-__("If you wish to connect your computer to the Internet or to a local network,
-please choose the correct option. Please turn on your device before
-choosing the correct option to let DrakX detect it automatically.
+__("You are now proposed to setup your internet/network connection. If you wish
+to connect your computer to the Internet or to a local network, click
+\"OK\". The autodetection of network devices and modem will be launched. If
+this detection fails, uncheck the \"Use auto detection\" box next time. You
+may also choose not to configure the network, or do it later; in that case
+simply click the \"Cancel\" button.
 
-Mandrake Linux proposes the configuration of an Internet connection at
-installation time. Available connections are: traditional modem, ISDN
-modem, ADSL connection, cable modem, and finally a simple LAN connection
-(Ethernet).
+Available connections are: traditional modem, ISDN modem, ADSL connection,
+cable modem, and finally a simple LAN connection (Ethernet).
 
 Here, we will not detail each configuration. Simply make sure that you have
 all the parameters from your Internet Service Provider or system
@@ -200,14 +202,16 @@ enabled on a server. In general, select only the services you really need.
 configureTimezoneGMT => 
 __("GNU/Linux manages time in GMT (Greenwich Mean Time) and translates it in
 local time according to the time zone you selected. It is however possible
-to deactivate this by deselcting \"Hardware clock set to GMT\" so that the
+to deactivate this by deselecting \"Hardware clock set to GMT\" so that the
 hardware clock is the same as the system clock. This is useful when the
 machine is hosting another operating system like Windows.
 
 The \"Automatic time synchronization\" option will automatically regulate
 the clock by connecting to a remote time server on the internet. In the
 list that is presented, choose a server located near you. Of course you
-must have a working internet connection for this feature to function."),
+must have a working internet connection for this feature to function. It
+will actually install on your machine a time server that can be optionally
+used by other machines on your local network."),
 
 configureX => 
 __("X (for X Window System) is the heart of the GNU/Linux graphical interface
@@ -403,10 +407,10 @@ Please be patient."),
 
 installUpdates => 
 __("At the time you are installing Mandrake Linux, it is likely that some
-packages have been updated since the initial release. Some bugfixes may
+packages have been updated since the initial release. Some bug-fixes may
 have been fixed, and security issues solved. To allow you to benefit from
 this updates you are now proposed to download them from the internet.
-Choose \"Yes\" if you have a working intertnet connection, or \"No\" if you
+Choose \"Yes\" if you have a working internet connection, or \"No\" if you
 prefer to install updated packages later.
 
 Choosing \"Yes\" displays a list of places from which updates can be
@@ -493,7 +497,7 @@ When a partition is selected, you can use:
 
  * Ctrl-m to set the mount point.
 
-To get information about the different filesystem types available, pease
+To get information about the different filesystem types available, please
 read the chapter ext2fs from the ``Reference Manual''.
 
 If you are installing on a PPC machine, you will want to create a small HFS
@@ -555,6 +559,9 @@ configuration steps remain available with respect to plain installation.
 existing Mandrake Linux system while keeping all system configuration
 unchanged. Adding new packages to the current installation will be also
 possible.
+
+Upgrades should work fine for Mandrake Linux systems starting from \"8.1\"
+release.
 
 Depending on your knowledge of GNU/Linux, select one of the following
 choices:
@@ -687,7 +694,7 @@ options. !!
 Clicking the \"Advanced\" button in this dialog will offer many advanced
 options, which are reserved to the expert user.
 
-After you have configured the general bootloader parameters, you are
+After you have configured the general boot-loader parameters, you are
 presented the list of boot options that will be available at boot time.
 
 If there is another operating system installed on your machine, it will be
