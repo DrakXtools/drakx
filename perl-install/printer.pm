@@ -381,7 +381,7 @@ sub get_descr_from_ppd {
     my %ppd;
 
     #- if there is no ppd, this means this is the PostScript generic filter.
-    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "Generic PostScript";
+    local *F; open F, "$prefix/etc/cups/ppd/$printer->{QUEUE}.ppd" or return "POSTSCRIPT|Generic PostScript printer (en)";
     local $_;
     while (<F>) {
 	/^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
@@ -417,7 +417,7 @@ sub poll_ppd_base {
     scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
 
     #- assume a default printer not using any ppd at all.
-    $descr_to_ppd{"Generic PostScript"} = '';
+    $descr_to_ppd{"No driver (raw queue)"} = '';
 }
 
 #-******************************************************************************
