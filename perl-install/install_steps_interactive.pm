@@ -910,9 +910,9 @@ sub summary {
 	clicked => sub {
 	    any::selectCountry($o, $o->{locale}) or return;
 
-	    #- this is somehow broken so catching errors (eg: lang=nb and country=NO)
 	    my $pkg_locale = substr(lang::getlocale_for_country($o->{locale}{lang}, $o->{locale}{country}), 0, 2);
-	    eval { $o->do_pkgs->install("locales-$pkg_locale") }; 
+	    my @pkgs = pkgs::packagesProviding($o->{packages}, "locales-$pkg_locale");
+	    $o->pkg_install(map { $_->name } @pkgs) if @pkgs;
 
 	    lang::write($o->{prefix}, $o->{locale});
 	    if (!$timezone_manually_set) {
