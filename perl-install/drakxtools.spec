@@ -219,6 +219,7 @@ done
 	  stdout redirected to /dev/null; just use a small sh wrapper to
 	  fix it
      o harddrake::bttv: only log in standalone mode
+	o display channel of eide devices 
 
 - spec:
 	o reorder entries in description
