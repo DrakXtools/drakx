@@ -456,6 +456,7 @@ sub configureNetwork2 {
             $in->do_pkgs->ensure_binary_is_installed('tmdns', 'tmdns', 'auto') if !$in->do_pkgs->is_installed('bind');
             $in->do_pkgs->ensure_binary_is_installed('zcip', 'zcip', 'auto');
             write_zeroconf("$etc/tmdns.conf", $netc->{ZEROCONF_HOSTNAME});
+	    require services;
             services::start_service_on_boot("tmdns");
             services::restart("tmdns");
         } else {
