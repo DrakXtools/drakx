@@ -499,13 +499,13 @@ sub check {
     !$_ || $keyboards{$_} or $err->("invalid keyboard $_ in \%usb2drakxkbd keyboard.pm") foreach values %usb2drakxkbd;
 
     my @xkb_groups = map { if_(/grp:(\S+)/, $1) } cat_('/usr/lib/X11/xkb/rules/xfree86.lst');
-    $err->("unknown xkb group toggle '$_' in \%kbdgrptoggle") foreach difference2([ keys %kbdgrptoggle ], \@xkb_groups);
+    $err->("invalid xkb group toggle '$_' in \%kbdgrptoggle") foreach difference2([ keys %kbdgrptoggle ], \@xkb_groups);
     $warn->("unused xkb group toggle '$_'") foreach difference2(\@xkb_groups, [ keys %kbdgrptoggle ]);
 
     my @xkb_layouts = (#- (map { (split)[0] } grep { /^! layout/ .. /^\s*$/ } cat_('/usr/lib/X11/xkb/rules/xfree86.lst')),
 		       all('/usr/lib/X11/xkb/symbols'),
 		       (map { (split)[2] } cat_('/usr/lib/X11/xkb/symbols.dir')));
-    $err->("unknown xkb layout $_") foreach difference2([ map { keyboard2xkb($_) } keyboards() ], \@xkb_layouts);
+    $err->("invalid xkb layout $_") foreach difference2([ map { keyboard2xkb($_) } keyboards() ], \@xkb_layouts);
 
     loadkeys_files($err);
 
