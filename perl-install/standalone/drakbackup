@@ -4318,7 +4318,9 @@ sub message_noselect_what_box {
     $up_box->show_all();    
 }
 
-sub message_noconf_box {
+sub message_common_box_2 {
+    my ($label, $restore_main) = @_;
+
     $box2->destroy();
     my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
 
@@ -4334,29 +4336,16 @@ sub message_noconf_box {
 			1, new Gtk::VBox(0, 5),	
 		),
 	);
-    button_box_restore_main();
+    button_box_restore_main() if $restore_main;
     $central_widget = \$box2;
     $up_box->show_all();    
 }
+sub message_noconf_box {
+    message_common_box_2(N("No configuration file found \nplease click Wizard or Advanced."), 1);
+}
 
 sub message_underdevel {
-    $box2->destroy();
-    my ($pix_warn_map, $pix_warn_mask) = gtkcreate_png('warning');
-
-    gtkadd($advanced_box,
-		$box2 = gtkpack_(new Gtk::HBox(0, 15),	
-			1, new Gtk::VBox(0, 5),	
-			1, gtkpack(new Gtk::HBox(0, 15),	
-				new Gtk::VBox(0, 5),	
-				new Gtk::Pixmap($pix_warn_map, $pix_warn_mask),
-				N("Under Devel ... please wait."),
-				new Gtk::VBox(0, 5),	
-			),
-			1, new Gtk::VBox(0, 5),	
-		),
-	);
-    $central_widget = \$box2;
-    $up_box->show_all();    
+    message_common_box_2(N("Under Devel ... please wait."));
 }
 
 ################################################  BUILD_BACKUP  ################################################  
