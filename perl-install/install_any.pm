@@ -531,16 +531,25 @@ sub install_urpmi {
                       disk => "file:/" . hdInstallPath(),
 		      ftp => $ENV{URLPREFIX},
 		      http => $ENV{URLPREFIX},
-		      cdrom => "removable_cdrom_$::i://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
+		      cdrom => "removable_cdrom://mnt/cdrom" }}{$method} . "/$_->{rpmsdir}";
 
 	local *FILES; open FILES, "$ENV{LD_LOADER} parsehdlist /tmp/$_->{hdlist} |";
 	print LIST "$dir/$_\n" foreach chomp_(<FILES>);
 	close FILES or log::l("parsehdlist failed"), return;
 	close LIST;
 
-	$name =~ s/(\s)/\\$1/g; $dir =~ s/(\s)/\\$1/g; #- necessary to change protect white char, for urpmi >= 1.40
-	$dir .= " with ../base/$_->{hdlist}";
-	"$name $dir\n";
+	my ($qname, $qdir) = ($name, $dir);
+	$qname =~ s/(\s)/\\$1/g; $qdir =~ s/(\s)/\\$1/g;
+
+	#- output new urpmi.cfg format here.
+	"$qname " . ($dir !~ /^(ftp|http)/ && $qdir) . " {
+  hdlist: hdlist.$name.cz
+  with_hdlist: ../base/$_->{hdlist}
+  list: list.$name" . ($dir =~ /removable_([^\s:_]*)/ && "
+  removable: /dev/$1") . "
+}
+
+";
     } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
 }
