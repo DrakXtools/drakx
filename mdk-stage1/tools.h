@@ -46,5 +46,7 @@ struct param_elem
 	char * value;
 };
 
+#define ptr_begins_static_str(pointer,static_str) (!strncmp(pointer,static_str,sizeof(static_str)-1))
+
 
 #endif

@@ -195,7 +195,7 @@ static struct media_info * medias = NULL;
 static void find_media(void)
 {
     	char b[50];
-	char buf[500];
+	char buf[5000];
 	struct media_info tmp[50];
 	int count;
         int fd;
@@ -212,6 +212,10 @@ static void find_media(void)
     	strcpy(b, "/proc/ide/hd");
     	for (b[12] = 'a'; b[12] <= 'h'; b[12]++) {
 		int i;
+		char ide_disk[] = "disk";
+		char ide_cdrom[] = "cdrom";
+		char ide_tape[] = "tape";
+		char ide_floppy[] = "floppy";
 		
 		/* first, test if file exists (will tell if attached medium exists) */
 		b[13] = '\0';
@@ -237,13 +241,13 @@ static void find_media(void)
 		buf[i] = '\0';
 		close(fd);
 
-		if (!strncmp(buf, "disk", strlen("disk")))
+		if (ptr_begins_static_str(buf, ide_disk))
 			tmp[count].type = DISK;
-		else if (!strncmp(buf, "cdrom", strlen("cdrom")))
+		else if (ptr_begins_static_str(buf, ide_cdrom))
 			tmp[count].type = CDROM;
-		else if (!strncmp(buf, "tape", strlen("tape")))
+		else if (ptr_begins_static_str(buf, ide_tape))
 			tmp[count].type = TAPE;
-		else if (!strncmp(buf, "floppy", strlen("floppy")))
+		else if (ptr_begins_static_str(buf, ide_floppy))
 			tmp[count].type = FLOPPY;
 		else
 			tmp[count].type = UNKNOWN_MEDIA;
@@ -285,7 +289,12 @@ static void find_media(void)
 		char scsi_cdrom_count = '0';
 		char scsi_tape_count = '0';
 
-		int i = read(fd, &buf, sizeof(buf));
+		char scsi_no_devices[] = "Attached devices: none";
+		char scsi_some_devices[] = "Attached devices: ";
+		char scsi_host[] = "Host: ";
+		char scsi_vendor[] = "  Vendor: ";
+
+		int i = read(fd, &buf, sizeof(buf)-1);
 		if (i < 1) {
 			close(fd);
 			goto end_scsi;
@@ -293,7 +302,7 @@ static void find_media(void)
 		close(fd);
 		buf[i] = '\0';
 
-		if (!strncmp(buf, "Attached devices: none", strlen("Attached devices: none")))
+		if (ptr_begins_static_str(buf, scsi_no_devices))
 			goto end_scsi;
 		
 		start = buf;
@@ -308,19 +317,19 @@ static void find_media(void)
 			
 			switch (state) {
 			case SCSI_TOP:
-				if (strncmp(start, "Attached devices: ", strlen("Attached devices: ")))
+				if (!ptr_begins_static_str(start, scsi_some_devices))
 					goto end_scsi;
 				state = SCSI_HOST;
 				break;
 
 			case SCSI_HOST:
-				if (strncmp(start, "Host: ", strlen("Host: ")))
+				if (!ptr_begins_static_str(start, scsi_host))
 					goto end_scsi;
 				state = SCSI_VENDOR;
 				break;
 
 			case SCSI_VENDOR:
-				if (strncmp(start, "  Vendor: ", strlen("  Vendor: ")))
+				if (!ptr_begins_static_str(start, scsi_vendor))
 					goto end_scsi;
 
 				/* (1) Grab Vendor info */
