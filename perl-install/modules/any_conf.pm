@@ -37,7 +37,7 @@ sub get_options {
 sub set_options {
     my ($conf, $module, $new_option) = @_;
     $module = $conf->mapping($module);
-    log::l(qq(set option "$new_option" for module "$module"));
+    log::explanations(qq(set option "$new_option" for module "$module"));
     $conf->{$module}{options} = $new_option;
 }
 sub get_parameters {
@@ -53,7 +53,7 @@ sub get_probeall {
 sub _set_probeall {
     my ($conf, $alias, $modules) = @_;
     $conf->{$alias}{probeall} = $modules;
-    log::l("setting probeall $alias to $modules");
+    log::explanations("setting probeall $alias to $modules");
 }
 sub add_probeall {
     my ($conf, $alias, $module) = @_;
@@ -73,7 +73,7 @@ sub set_alias {
     $module =~ /ignore/ and return;
     $module = $conf->mapping($module);
     /\Q$alias/ && $conf->{$_}{alias} && $conf->{$_}{alias} eq $module and return $_ foreach keys %$conf;
-    log::l("adding alias $alias to $module");
+    log::explanations("adding alias $alias to $module");
     $conf->{$alias}{alias} = $module;
     $alias;
 }
@@ -81,13 +81,13 @@ sub set_alias {
 
 sub remove_alias {
     my ($conf, $name) = @_;
-    log::l(qq(removing alias "$name"));
+    log::explanations(qq(removing alias "$name"));
     $conf->remove_alias_regexp("^$name\$");
 }
 
 sub remove_alias_regexp {
     my ($conf, $aliased) = @_;
-    log::l(qq(removing all aliases that match "$aliased"));
+    log::explanations(qq(removing all aliases that match "$aliased"));
     foreach (keys %$conf) {
         delete $conf->{$_}{alias} if /$aliased/;
     }
@@ -95,7 +95,7 @@ sub remove_alias_regexp {
 
 sub remove_alias_regexp_byname {
     my ($conf, $name) = @_;
-    log::l(qq(removing all aliases which names match "$name"));
+    log::explanations(qq(removing all aliases which names match "$name"));
     foreach (keys %$conf) {
         delete $conf->{$_} if /$name/;
     }
@@ -105,7 +105,7 @@ sub remove_module {
     my ($conf, $module) = @_;
     $module = $conf->mapping($module);
     $conf->remove_alias($module);
-    log::l("removing module $module");
+    log::explanations("removing module $module");
     delete $conf->{$module};
     0;
 }
