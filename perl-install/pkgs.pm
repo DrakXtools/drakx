@@ -436,6 +436,8 @@ sub psUsingHdlist {
     -e $newf and do { unlink $newf or die "cannot remove $newf: $!"; };
     install_any::getAndSaveFile($fhdlist || "Mandrake/base/$hdlist", $newf) or die "no $hdlist found";
     symlinkf $newf, "/tmp/$hdlist";
+    install_any::getAndSaveFile("Mandrake/base/synthesis.$hdlist",
+				"$prefix/var/lib/urpmi/synthesis.hdlist.$fakemedium.cz" . ($hdlist =~ /\.cz2/ && "2"));
 
     #- avoid using more than one medium if Cd is not ejectable.
     #- but keep all medium here so that urpmi has the whole set.
