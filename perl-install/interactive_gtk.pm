@@ -79,17 +79,35 @@ sub ask_from_entries_refW {
     my $ignore = 0;
 
     my $w       = my_gtk->new($title, %$o);
-    my @entries = map { new Gtk::Entry } @{$l};
+    my @entries = map { 
+	if ($_->{type} eq "list") {
+	    if (@{$_->{list}}) {
+		my $depth_combo = new Gtk::Combo;
+		$depth_combo->set_use_arrows_always(1);
+		$depth_combo->entry->set_editable($_->{is_edit});
+		$depth_combo->set_popdown_strings(@{$_->{list}});
+		$depth_combo;
+	    } else {
+		new Gtk::Entry;
+	    }
+	} else {
+	    new Gtk::Entry;
+	}
+    } @{$val};
     my $ok      = $w->create_okcancel;
+    sub comb_entry {
+	my ($entry, $ref) = @_;
+	($ref->{type} eq "list" && @{$ref->{list}}) ? $entry->entry : $entry
+    }
 
     my @updates = mapn { 
 	my ($entry, $ref) = @_;
-	return sub { ${$ref} = $entry->get_text };
+	return sub { ${$ref->{val}} = comb_entry($entry, $ref)->get_text };
     } \@entries, $val;
 
     my @updates_inv = mapn { 
 	my ($entry, $ref) = @_;
-	sub { $entry->set_text(${$ref})
+	sub { comb_entry($entry, $ref)->set_text(${$ref->{val}})
 	};
     } \@entries, $val;
 
@@ -108,23 +126,38 @@ sub ask_from_entries_refW {
 	    }
 	};
 	my $entry = $entries[$i];
-	$entry->signal_connect(changed => $callback);
-	$entry->signal_connect(activate => sub {
+	comb_entry($entry,$val->[$i])->signal_connect(changed => $callback);
+	comb_entry($entry,$val->[$i])->signal_connect(activate => sub {
 				   ($ind == ($num_champs -1)) ?
 				     $w->{ok}->grab_focus() : $entries[$ind+1]->grab_focus();
 			       });
-	$entry->set_text(${$val->[$i]})  if ${$val->[$i]};
-	$entry->set_visibility(0) if $_[0] =~ /password/i;
+	comb_entry($entry,$val->[$i])->set_text(${$val->[$i]{val}})  if ${$val->[$i]{val}};
+	comb_entry($entry,$val->[$i])->set_visibility(0) if $_[0] =~ /password/i;
 #	&{$updates[$i]};
     }
+
     my @entry_list = mapn { [($_[0], $_[1])]} $l, \@entries;
+
     gtkadd($w->{window}, 
 	   gtkpack(
 		   create_box_with_title($w, @$messages),
 		   create_packtable({}, @entry_list),
 		   $ok
 		   ));
-    
+
+    if ($hcallback{complete}) {
+	my $callback = sub {
+	    my ($error, $focus) = &{$hcallback{changed}};
+	    #update all the value
+	    $ignore = 1;
+	    foreach (@updates_inv) { &{$_};}
+	    $ignore = 0;
+	    if ($error) {
+		$entries[$focus]->grab_focus();
+	    }
+	};
+	$w->{ok}->signal_connect(activate => $callback)
+    }
     $entries[0]->grab_focus();
     $w->main();
 }

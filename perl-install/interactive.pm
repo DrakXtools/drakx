@@ -1,4 +1,5 @@
 
+
 package interactive;
 
 use diagnostics;
@@ -104,8 +105,9 @@ sub ask_from_entries_ref($$$$;$%) {
     my ($o, $title, $message, $l, $val, %callback) = @_;
     
     $message = ref $message ? $message : [ $message ];
+    my $val_hash = [ map { (ref $_) eq "SCALAR" ? { val => $_ } : {(%{$_}, type => "list")}} @{$val} ];
 
-    $o->ask_from_entries_refW($title, $message, $l, $val, %callback)
+    $o->ask_from_entries_refW($title, $message, $l, $val_hash, %callback)
     
 }
 sub wait_message($$$) {

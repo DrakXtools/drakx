@@ -89,7 +89,6 @@ sub rebootNeeded($) {
     install_steps::rebootNeeded($o);
 }
 #------------------------------------------------------------------------------
-
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
@@ -164,6 +163,7 @@ sub timeConfig {
     install_steps::timeConfig($o,$f);
 }
 
+#------------------------------------------------------------------------------
 sub printerConfig($) {
     my ($o) = @_;
     $o->{printer}{want} = 
@@ -171,7 +171,7 @@ sub printerConfig($) {
 		      _("Would you like to configure a printer?"),
 		      $o->{printer}{want});
     return if !$o->{printer}{want};
-
+    
     $o->{printer}{complete} = 0;
     if ($::expert) {
 	#std info
@@ -189,7 +189,7 @@ sub printerConfig($) {
 				 }, 
 				);
     }
-
+    
     $o->{printer}{str_type} = 
       $o->ask_from_list_(_("Select Printer Connection"),
 			 _("How is the printer connected?"),
@@ -197,7 +197,7 @@ sub printerConfig($) {
 			 ${$o->{printer}}{str_type},
 			);
     $o->{printer}{TYPE} = $printer::printer_type{$o->{printer}{str_type}};
-
+    
     if ($o->{printer}{TYPE} eq "LOCAL") {
 	eval { modules::load("lp"); };
 	my @port = ();
@@ -206,17 +206,14 @@ sub printerConfig($) {
 	    push @port, "/dev/$_" if open LP, ">/dev/$_"
 	}
 	eval { modules::unload("lp") };
-	
-	my $string = _("What device is your printer connected to 
-(note that /dev/lp0 is equivalent to LPT1:)?\n");
-	$string .= _("I detect :");
-	$string .= join(", ", @port);
+	@port =("lp0", "lp1", "lp2");
 	$o->{printer}{DEVICE}    = $port[0] if $port[0];
-	
+
+
 	return if !$o->ask_from_entries_ref(_("Local Printer Device"),
-					    $string,
+					    _("What device is your printer connected to  \n(note that /dev/lp0 is equivalent to LPT1:)?\n"),
 					    [_("Printer Device:")],
-					    [\$o->{printer}{DEVICE}],
+					    [{val => \$o->{printer}{DEVICE}, list => \@port, is_edit => 1}],
 					   );
 	#TAKE A GOODDEFAULT TODO
 
