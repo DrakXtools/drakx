@@ -514,7 +514,7 @@ sub create_okcancel {
                                    sub { log::l("default cancel_clicked"); undef $w->{retval}; Gtk2->main_quit });
     }
     $w->{wizcancel} = gtksignal_connect(Gtk2::Button->new(N("Cancel")), clicked => sub { die 'wizcancel' }) if $::isWizard && !$::isInstall;
-    my $f = sub { $w->{buttons}{$_->[0]} = gtksignal_connect(Gtk2::Button->new($_->[0]), clicked => $_->[3]) };
+    my $f = sub { $w->{buttons}{$_[0][0]} = gtksignal_connect(Gtk2::Button->new($_[0][0]), clicked => $_[0][1]) };
     my @left  = ((map { $f->($_) } grep {  $_->[2] && !$_->[3] } @other),
                   map { $f->($_) } grep { !$_->[2] && !$_->[3] } @other);
     my @right = ((map { $f->($_) } grep {  $_->[2] &&  $_->[3] } @other),
