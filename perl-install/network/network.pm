@@ -129,6 +129,7 @@ sub write_interface_conf {
     my $hwaddr;
     $::o->{miscellaneous}{track_network_id} and $hwaddr = -e "$prefix/sbin/ip" && `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf->{DEVICE} 2>/dev/null`;
     if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
+    $hwaddr and $intf->{HWADDR} = undef;
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
@@ -310,7 +311,7 @@ notation (for example, 1.2.3.4).");
 	         [ { label => _("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
 	           { label => _("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
 	           { label => _("Automatic IP"), val => \$pump, type => "bool", text => _("(bootp/dhcp)") },
-	           { label => _("Started at boot"), val => \$onboot, type => "bool" },
+	           if_($::expert, { label => _("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto"] },
 	           { label => "WIRELESS_ESSID", val => \$intf->{WIRELESS_ESSID} },
