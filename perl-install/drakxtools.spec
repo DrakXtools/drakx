@@ -331,7 +331,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o do not write 'ifcfg-Manually load a driver' file
   o fix sagem pty in pppd config
   o prevent boot from timeoutingforever if modem can't be synchronized
-- localedrake: fix default IM setting when switching language
+- localedrake: fix default IM setting when switching language (#10831)
 - net_applet: fix tooltip's messages
 - harddrake: add a PCMCIA controllers class
 
