@@ -46,11 +46,13 @@ quit();
 
 sub auto {
     foreach (@f) { 
-	if (member($_->{val}{DESCRIPTION}), keys %$scanner::scannerDB) {
+	if (member($_->{val}{DESCRIPTION}, keys %$scanner::scannerDB)) {
 	    my $name = $_->{val}{DESCRIPTION};
 	    $name =~ s/\s$//; #some HP entry have a trailing space, i will correct usbtable asap
-	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configure it ?",$name,$_->{port}),1) or manual();
+	    $in->ask_yesorno('scannerdrake',_("%s found on %s, configure it?",$name,$_->{port}),1) or manual();
 	    tryConfScanner($name, $_->{port});
+	} else {
+	    $in->ask_yesorno('scannerdrake',_("%s is not in the scanner database, configure it manually?", $_->{val}{DESCRIPTION}),1) and manual();
 	}
     }
 }
@@ -73,7 +75,7 @@ sub dynamic {
 }
 
 sub tryConfScanner {
-    # take care if interactive ouptut is needed (unsupported, parallel..)
+    # take care if interactive output is needed (unsupported, parallel..)
     my ($model, $port) = @_;
     if ($scanner::scannerDB->{$model}{flags}{unsupported}) {
 	$in->ask_warn('scannerdrake', _("This %s scanner is unsupported", $model));
