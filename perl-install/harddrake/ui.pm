@@ -207,11 +207,8 @@ sub new {
     $vbox->set_child_packing($config_button, 0, 0, 0, 'start');
     $vbox->set_child_packing($module_cfg_button, 0, 0, 0, 'start');
 
-    my $cmap = Gtk::Gdk::Colormap->get_system;
-    my $color = { 'red' => 0x3100, 'green' => 0x6400, 'blue' => 0xbc00 };
-    $cmap->color_alloc($color);
-    my $wcolor = { 'red' => 0xFFFF, 'green' => 0x6400, 'blue' => 0x6400 };
-    $cmap->color_alloc($wcolor);
+    my $color = gtkcolor(0x3100, 0x6400, 0xbc00);
+    my $wcolor = gtkcolor(0xFFFF, 0x6400, 0x6400);
     $tree->set_column_auto_resize(0, 1);
 
     $tree->signal_connect('select_row', sub {
