@@ -51,9 +51,13 @@ We recommand the light configuration.
 
 "), [ __("New configuration (isdn-light)"), __("Old configuration (isdn4net)")]
 				   ) or return;
-    #FIXME debug only
-    #system('urpmi --auto --best-output ' . join(' ', $e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils'));
-    $install->($e =~ /light/ ? 'isdn-light' : 'isdn4net', 'isdn4k-utils');
+    my ($rmpackage, $instpackage) = $e =~ /light/ ? ('isdn4net', 'isdn-light') : ('isdn4net', 'isdn-light');
+    if (!$::isStandalone) {
+	my $p = packageByName($in->{packages}, $rmpackage);
+	$p && packageFlagSelected($p) and pkgs::unselectPackage($in->{packages}, $p);
+    }
+    run_program::rooted($prefix, "rpm", "-e", "$rmpackage");
+    $install->($instpackage, 'isdn4k-utils');
     isdn_write_config_backend($isdn, $e =~ /light/, $netc);
     1;
 }
