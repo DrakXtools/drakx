@@ -213,15 +213,11 @@ sub handle_attack {
                        0, N("Do you want to blacklist the attacker ?")
                    ])
                ]),
-               gtknew('HBox', children_loose => [
-                   gtknew('HButtonBox', layout => 'start', children_loose => [
-                       gtknew('Button', text => N("No"),
-                              clicked => sub { $activefw->blacklist($seq, 0); Gtk2->main_quit })
-                   ]),
-                   gtknew('HButtonBox', layout => 'end', children_loose => [
-                       my $ok = gtknew('Button', text => N("Yes"),
-                                         clicked => sub { $activefw->blacklist($seq, 1); Gtk2->main_quit })
-                   ])
+               gtknew('HButtonBox', layout => 'edge', children_loose => [
+                   gtknew('Button', text => N("No"),
+                          clicked => sub { $activefw->blacklist($seq, 0); Gtk2->main_quit }),
+                   my $ok = gtknew('Button', text => N("Yes"),
+                                   clicked => sub { $activefw->blacklist($seq, 1); Gtk2->main_quit })
                ]),
                gtkadd(Gtk2::Expander->new(N("Attack details")),
                       gtknew('HBox', children => [
