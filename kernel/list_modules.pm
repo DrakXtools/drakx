@@ -74,7 +74,7 @@ our %l = (
       if_(arch() =~ /^sparc/, qw(pluto)),
       if_(arch() !~ /alpha/ && arch() !~ /sparc/,
         qw(DAC960 dpt_i2o megaraid aacraid ataraid cciss cpqarray gdth i2o_block),
-	qw(cpqfc qla2200 qla2300 hptraid),
+	qw(cpqfc qla2200 qla2300),
         qw(ips ppa imm),
       ),
     ],
