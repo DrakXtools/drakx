@@ -227,7 +227,7 @@ our %adsl_data = (
                    method => 'static',
                   },
 
-                  N("Spain") . "|Wanadoo/Eresmas" =>
+                  N("Spain") . "|Wanadoo/Eresmas Retevision" =>
                   {
                    vpi => 8,
                    vci => 23,
