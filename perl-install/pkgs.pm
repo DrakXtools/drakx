@@ -786,8 +786,9 @@ sub selectPackagesToUpgrade {
     my $state = $packages->{state} ||= {};
     $state->{selected} = {};
 
-    $packages->resolve_requested($packages->{rpmdb}, $state,
-				 $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, {}, requested => undef) || {},
+    my %selection;
+    $packages->request_packages_to_upgrade($packages->{rpmdb}, $state, \%selection, requested => undef);
+    $packages->resolve_requested($packages->{rpmdb}, $state, \%selection,
 				 callback_choices => \&packageCallbackChoices);
 }
 
