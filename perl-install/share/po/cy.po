@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-cy2\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-11 08:32-0000\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-16 20:34-0000\n"
 "Last-Translator: Rhoslyn Prys <rhoslyn.prys@meddal.org.uk>\n"
 "Language-Team: Cymraeg <rhoslyn.prys@meddal.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -194,7 +194,7 @@ msgstr ""
 "Os wedi ei osod, anfon yr adroddiad e-bost i'r cyfeiriad e-bost neu ei anfon "
 "i'r gwraidd."
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Paramedrau"
@@ -511,6 +511,11 @@ msgstr "Bws"
 msgid "Iraq"
 msgstr "Irac"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "connecting to %s ..."
+msgstr "cysylltu â %s..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -554,6 +559,20 @@ msgstr "Chwilio am ffontiau wedi eu gosod"
 #, c-format
 msgid "Default desktop"
 msgstr "Bwrdd gwaith rhagosodedig"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"I gyflwyno adroddiad gwall, cliciwch ar y botwm adroddiad.\n"
+"Bydd hyn yn agor ffenestr porwr gwe yn %s\n"
+" lle welwch ffurflen i'w llenwi. Bydd yr wybodaeth rhowch arno'n cael ei\n"
+"drosglwyddo i'r gwasanaethwr."
 
 #: ../../lang.pm:1
 #, c-format
@@ -1145,6 +1164,61 @@ msgid ""
 msgstr ""
 "Protocol ar gyfer gweddill y byd\n"
 " dim D-Channel (llinell les)"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
+msgstr ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \t\tBydd drakTermServ yn ffurfweddu'r ffeil i weithio ar y cyd gyda "
+"delweddau grewyd gan\n"
+"        \t\tmkinitrd-net, a'r cofnodion yn /etc/dhcpd.conf, i wasanaethu'r "
+"delwedd cychwyn i bob\n"
+"        \t\tcleient di-ddisg.\n"
+"\n"
+"        \t\tMae ffeil ffurfweddu tftp nodweddiadol yn edrych fel hyn:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \t\tMae'r newidiadau yma o'r gosodiad rhagosodedig yn newid y faner "
+"analluogi i \n"
+"        \t\t'na' a newid llwybr cyfeiriadur i /var/lib/tftpboot, lle mae "
+"mkinitrd-net\n"
+"        \t\tyn gosod ei ddelweddau."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -1813,15 +1887,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Defnyddiwch allweddi %c a %c i ddewis pa gofnod i'w amlygu."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "Galluogi \"%s\" i weithredu'r ffeil"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Llygoden 2 Fotwm Generig"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "Galluogi \"%s\" i weithredu'r ffeil"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -3048,6 +3122,34 @@ msgstr "Mae hwn yn becyn hanfodol, does dim modd ei ddad-ddewis"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+"        - Creu disgiau meddal/CD:\n"
+"        \t\tMae angen delwedd ROM, disg meddal cychwyn neu CD ar y NIC\n"
+"        \t\ti gychwyn.  Bydd drakTermServ yn cynorthwyo i gynhyrchu'r "
+"delweddau hyn,\n"
+"        \t\tyn seiliedig ar y NIC yn y peiriant cleient.\n"
+"        \t\t\n"
+"        \t\tEnghraifft o greu gyda llaw, disg meddal cychwyn ar gyfer 3Com "
+"3c509 :\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "%s yw'r ddelwedd ISO etherboot"
 
@@ -3460,33 +3562,6 @@ msgstr "Cuddio ffeiliau"
 msgid "Auto-detect printers connected to this machine"
 msgstr "Awto ganfod argraffyddion sy'n gysylltiedig a'r peiriant hwn"
 
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"Nid yw XawTV wedi ei osod!\n"
-"\n"
-"\n"
-"Os oes gennych gerdyn teledu ond nid yw DrakX wedi ei ganfod (dim modiwl "
-"bttv ar saa7134\n"
-"yn \"/etc/modules\") na xawtv wedi ei osod, anfonwch canlyniad\n"
-"\"lspcidrake -v -f\" i \"install\\@mandrakesoft.com\"\n"
-"gyda phwnc \"undetected TV card\".\n"
-"\n"
-"\n"
-"Mae modd ei osod wrth deipio \"urpmi xawtv\" fel gwraidd mewn consol."
-
 #: ../../any.pm:1
 #, c-format
 msgid "Sorry, no floppy drive available"
@@ -3754,9 +3829,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "Ailgynhyrchu rhestr o sganwyr wedi eu ffurfweddu..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "Ffurfweddiad gyda llaw"
+msgstr "Ffurfweddiad modiwl"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -4077,6 +4152,19 @@ msgstr ""
 msgid "Restore From Tape"
 msgstr "Adfer o Dâp"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"I gyflwyno adroddiad gwall, cliciwch ar y botwm adroddiad. Bydd hyn yn agor "
+"ffenestr\n"
+"porwr gwe i Anthill lle bydd modd i chi drosglwyddo'r wybodaeth fel neges "
+"gwall."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -4237,7 +4325,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "Angen enw gwesteiwr, enw defnyddiwr a chyfrinair"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Rhowch ddisg meddal"
@@ -4381,10 +4469,17 @@ msgstr "Mae rhag wyneb y rhwydwaith wedi ei ffurfweddu eisoes"
 msgid "Couldn't access the floppy!"
 msgstr "Methu cael mynediad i'r disg meddal!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "cysylltwyd â dewin Bugzilla..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4570,6 +4665,11 @@ msgstr "Derbyn"
 #, c-format
 msgid "Description"
 msgstr "Disgrifiad"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr "Rhowch destun crynodeb yma."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -5533,7 +5633,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Bysell Control dde"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -6680,6 +6780,30 @@ msgstr "Rhybudd : cyfeiriad IP %s wedi ei gadw fel rheol !"
 msgid "busmouse"
 msgstr "busmouse"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
+"        - Creu Delwedd Cychwynnydd Galluogi Etherboot:\n"
+"        \t\tI gychwyn y cnewyllyn drwy etherboot, rhaid creu delwedd "
+"cnewyllyn/initrd\n"
+"        \tarbennig. Mae tmkinitrd-net yn gwneud llawer o'r gwaith ac mae "
+"drak TermServ yn                             \trhyngwyneb graffigol iddo i "
+"gynorthwyo rheoli/addasu'r delweddau. I greu'r ffeil\n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.dylech greu'r ddelwedd etherboot "
+"ar gyfer o leiaf un                  \tcnewyllyn llawn."
+
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Account Login (user name)"
@@ -7054,37 +7178,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Disg Meddal"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -7737,6 +7830,11 @@ msgstr "Rhannu Cysylltiad â'r Rhyngrwyd"
 msgid "Choose file"
 msgstr "Dewis ffeil"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Summary: "
+msgstr "Crynodeb:"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -7815,6 +7913,22 @@ msgstr "French Southern Territories"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "enw gwerthwr y prosesydd"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
+"        - Cynnal %s:\n"
+"        \t\tAr gyfer defnyddwyr sy'n gallu mewngofnodi i system o gleient di "
+"ddisg, rhaid dybylgu eu cofnod \n"
+"        \t\t/etc/shadow yn %s. drakTermServ helps\n"
+"        \t\tiyn yr achos hwn drwy ychwanegu neu dynnu defnyddwyr o'r ffeil."
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -8134,6 +8248,11 @@ msgstr "Adfer Defnyddwyr"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Allwedd amgryptio ar gyfer %s"
+
+#: ../../install_steps_interactive.pm:1
+#, c-format
+msgid "Do you want to recover your system?"
+msgstr "Ydych chi eisiau adfer eich system?"
 
 #: ../../services.pm:1
 #, c-format
@@ -8582,6 +8701,11 @@ msgstr "/_Ffurfweddu CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr "Cyflwyno Ispci"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -8821,6 +8945,11 @@ msgstr ""
 "\n"
 "Rwyf ar fin gosod eich Rhwydwaith Lleol gyda'r addasydd hwnnw.."
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr "Cyflwyno cpuinfo"
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -8830,6 +8959,11 @@ msgstr "Gosodiad lleiaf"
 #, c-format
 msgid "Ethiopia"
 msgstr "Ethiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr "IAWN"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9164,15 +9298,6 @@ msgstr "Math o osodiad"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr "Argraffydd  \"%s\" ar wasanaethwr SMB/Windows \"%s\""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-"\n"
-"- Daemon (%s) i gynnwys :\n"
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -9495,6 +9620,11 @@ msgstr "HorizSync Monitor: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Llwybr"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr "HEB GANFOD"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -10102,24 +10232,6 @@ msgstr "pwysig"
 msgid "Total Progress"
 msgstr "Cyfanswm Cynydd"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-"        - Cynnal /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tAr gyfer defnyddwyr sy'n gallu mewngofnodi i system o gleient di "
-"ddisg, rhaid dybylgu eu cofnod \n"
-"        \t\t/etc/shadow yn /etc/shadow\\$\\$CLIENTS\\$\\$. drakTermServ "
-"helps\n"
-"        \t\tiyn yr achos hwn drwy ychwanegu neu dynnu defnyddwyr o'r ffeil."
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -10253,6 +10365,40 @@ msgstr ""
 "Defnyddio Cadw wrth Gefn Cynyddol/Differol (peidio disodli hen gadw wrth "
 "gefn)"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+"        - Cynnal /etc/dhcpd.conf:\n"
+"        \t\tIgychwyn cleient o'r rhyngrwyd mae pob cleient angen cofnod "
+"dhcpd.conf ei hun,        \t\tiddynodi cyfeiriad IPa delwedd cychwyn "
+"rhyngrwyd i'r peiriant. Mae drakTermServ\n"
+"        \t\tyn medru gosod/tynnu rhain\n"
+"\t\t\t\n"
+"        \t\t(Gall cardiau PCI hepgor y ddelwedd - bydd etherboot yn gofyn am "
+"y ddelwedd cywir. Dylech\n"
+"        \t\thefyd ystyried pan fo etherboot yn chwilio am y ddelwedd, bydd "
+"yn disgwyl enwqau fel\n"
+"        \t\tboot-3c59x.nbi, yn lle boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \t\tMae stanzal dhcpd.conf arferol i gynnal cleient diddisg yn "
+"edrych fel:"
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -10372,6 +10518,15 @@ msgid ""
 msgstr ""
 "blwch testun cydfesuryn x\n"
 "mewn rhif nodau"
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+"Efallai na fydd modd i chi osod lilo (gan nad yw lilo'n trin LV ar PV "
+"lluosog)"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -10671,6 +10826,16 @@ msgstr "Mae angen enw gwesteiwr"
 msgid "Unselect fonts installed"
 msgstr "Tynnu ffontiau wedi eu gosod"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Olwyn"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit kernel version"
+msgstr "Cyflwyno fersiwn y cnewyllyn"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -10691,11 +10856,6 @@ msgstr "Diddymu"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Chwilio am sganiwr wedi ei ffurfweddu..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Olwyn"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -10764,6 +10924,11 @@ msgstr "Rhagosodedig"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Efelychiad Botwm 2"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter a package name."
+msgstr "Rhowch enw'r pecyn."
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -10847,6 +11012,11 @@ msgstr ""
 "  Hawlfraint (C) 2002 MandrakeSoft\n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11017,6 +11187,80 @@ msgstr "Allwedd amgryptio system ffeil : "
 #, c-format
 msgid "Gujarati"
 msgstr "Gujarati"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
+msgstr ""
+"\t\t\tEr bod modd defnyddio casgliad o gyfeiriadau IP, yn lle gosod cofnod "
+"penodol ar\n"
+"\t\t\t beiriant cleient, mae defnyddio cynllun cyfeiriad sefydlog yn "
+"caniatáu defnyddio\n"
+"\t\t\tnodweddionffeiliau ffurfweddu cleient penodol mae ClusterNFS yn "
+"darparu.\n"
+"\t\t\t\n"
+"\t\t\tSylwer: Mae'r cofnod \"#type\" yn cael ei ddefnyddio gan drakTermServ "
+"yn unig.  Clients can either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
 
 #: ../../interactive/stdio.pm:1
 #, c-format
@@ -11341,80 +11585,6 @@ msgstr ""
 "\n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-"\t\t\tEr bod modd defnyddio casgliad o gyfeiriadau IP, yn lle gosod cofnod "
-"penodol ar\n"
-"\t\t\t beiriant cleient, mae defnyddio cynllun cyfeiriad sefydlog yn "
-"caniatáu defnyddio\n"
-"\t\t\tnodweddionffeiliau ffurfweddu cleient penodol mae ClusterNFS yn "
-"darparu.\n"
-"\t\t\t\n"
-"\t\t\tSylwer: Mae'r cofnod \"#type\" yn cael ei ddefnyddio gan drakTermServ "
-"yn unig.  Clients can either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -11831,38 +12001,14 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
-"        - Cynnal /etc/dhcpd.conf:\n"
-"        \t\tIgychwyn cleient o'r rhyngrwyd mae pob cleient angen cofnod "
-"dhcpd.conf ei hun,        \t\tiddynodi cyfeiriad IPa delwedd cychwyn "
-"rhyngrwyd i'r peiriant. Mae drakTermServ\n"
-"        \t\tyn medru gosod/tynnu rhain\n"
-"\t\t\t\n"
-"        \t\t(Gall cardiau PCI hepgor y ddelwedd - bydd etherboot yn gofyn am "
-"y ddelwedd cywir. Dylech\n"
-"        \t\thefyd ystyried pan fo etherboot yn chwilio am y ddelwedd, bydd "
-"yn disgwyl enwqau fel\n"
-"        \t\tboot-3c59x.nbi, yn lle boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tMae stanzal dhcpd.conf arferol i gynnal cleient diddisg yn "
-"edrych fel:"
+"Enw Rhaglen\n"
+"neu Lwybr Llawn:"
 
 #: ../../services.pm:1
 #, c-format
@@ -12249,26 +12395,6 @@ msgstr "Anhawster wrth osod pecyn %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Byddwch yn derbyn rhybudd os yw'r llwyth yn uwch na'r gwerth hwn"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"I gyflwyno adroddiad gwall, cliciwch ar y botwm adroddiad.\n"
-"Bydd hyn yn agor ffenestr porwr gwe yn https://drakbug.mandrakesoft.com\n"
-" lle welwch ffurflen i'w llenwi. Bydd yr wybodaeth rhowch arno'n cael ei\n"
-"drosglwyddo i'r gwasanaethwr\n"
-"\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -12405,7 +12531,7 @@ msgstr "Gweinyddwr Diogelwch:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr "Gosod amser allan y gragen. Gwerth sero'n golygu dim amser allan."
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr "Copïo'r gadarnwedd yn llwyddiant"
@@ -12786,11 +12912,6 @@ msgstr ""
 "Mae argraffydd \"%s\" yn bodoli eisoes,\n"
 "ydych chi wir eisiau ailysgrifennu ei ffurfweddiad?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "dim rhaniadau ar gael"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -12800,6 +12921,11 @@ msgstr "Defnyddio sganwyr ar westeiwyr:"
 #, c-format
 msgid "Unselected All"
 msgstr "Dad ddewis Popeth"
+
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "dim rhaniadau ar gael"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -12841,7 +12967,7 @@ msgstr "Adeiladu'r cnewyllyn cyfan -->"
 msgid "modem"
 msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Croeso i %s"
@@ -12928,6 +13054,15 @@ msgstr ""
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
 msgstr "Nid y label CD cywir. Disg wedi ei labelu %s."
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
+msgstr ""
+"\n"
+"- Daemon %s trwy:\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -13065,41 +13200,6 @@ msgid ""
 msgstr ""
 "\n"
 "- Ffeiliau System: \n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-"        - Ffeiliau ffurfweddi system cleient unigol:\n"
-"        \t\tDrwy clusternfs, mae modd i bob cleient di-ddisg gael ei "
-"ffeiliau ffurfweddu ei hun\n"
-"        \t\tar system feiliau gwraidd y gwasanaethwr. Drwy ganiatau "
-"ffurfweddiad caledwedd  \n"
-"\t\t\t\tcleient lleol, mae modd addasu ffeiliau fel /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard ar sail cleient.\n"
-"\n"
-"        Sylw: Mae galluogi ffurfweddiad cleient lleol yn galluogi "
-"lewngofnodi gwraidd i'r gwasanaethwr\n"
-"        terfynnel ar bob un o'ch peiriannau cleient sydd a'r nodwedd hon "
-"wedi ei alluogi. Mae modd diffodd\n"
-"        ffurfweddiad lleol ,cadww'r ffeiliau ffurfweddu, un waith maeth'r "
-"peiriant cleient wedi ei ffurfweddu"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -13944,7 +14044,7 @@ msgstr "Adeiladu dyfodol Linux!"
 msgid "Local Printer"
 msgstr "Argraffydd Lleol"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Floppy access error, unable to mount device %s"
 msgstr "Gwall mynediad i'r disg meddal, methu gosod dyfais %s"
@@ -14049,61 +14149,6 @@ msgstr "Dyfais  llygoden: %s\n"
 #, c-format
 msgid "Reselect correct fonts"
 msgstr "Ailddewis y ffontiau cywir"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tBydd drakTermServ yn ffurfweddu'r ffeil i weithio ar y cyd gyda "
-"delweddau grewyd gan\n"
-"        \t\tmkinitrd-net, a'r cofnodion yn /etc/dhcpd.conf, i wasanaethu'r "
-"delwedd cychwyn i bob\n"
-"        \t\tcleient di-ddisg.\n"
-"\n"
-"        \t\tMae ffeil ffurfweddu tftp nodweddiadol yn edrych fel hyn:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tMae'r newidiadau yma o'r gosodiad rhagosodedig yn newid y faner "
-"analluogi i \n"
-"        \t\t'na' a newid llwybr cyfeiriadur i /var/lib/tftpboot, lle mae "
-"mkinitrd-net\n"
-"        \t\tyn gosod ei ddelweddau."
 
 #: ../../help.pm:1
 #, c-format
@@ -14432,6 +14477,11 @@ msgstr "Mai"
 msgid "Yaboot mode"
 msgstr "Modd Yaboot"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Llygoden 3 Botwm Generig"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -14446,11 +14496,6 @@ msgstr ""
 "Methu ailgychwyn LiLo!\n"
 "Cychwyn \"lilo\" fel gwraidd ar y linell orchymyn i gwblhau gosod thema "
 "LiLo'n llawn."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Llygoden 3 Botwm Generig"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -14797,34 +14842,6 @@ msgid ""
 msgstr ""
 " --id <id_label>       - llwyth y dudalen cymorth html  cy'n cyfeirio at "
 "id_label\n"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
-msgstr ""
-"        - Creu disgiau meddal/CD etherboot:\n"
-"        \t\tMae angen delwedd ROM,disg meddal cychwyn neu CD ar y NIC\n"
-"        \t\ti gychwyn.  Bydd drakTermServ yn cynorthwyo i gynhyrchu'r "
-"delweddau hyn,\n"
-"        \t\tyn seilieding ar y NIC yn y peiriant cleient.\n"
-"        \t\t\n"
-"        \t\tEnghraifft o greu gyda llaw, disg meddal cychwyn ar gyfer 3Com "
-"3c509 :\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -15224,11 +15241,6 @@ msgstr "Enw parth"
 msgid "Sharing of local printers"
 msgstr "Rhannu argraffyddion lleol"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -15238,6 +15250,11 @@ msgstr "Galluogi/Analluogi libsafe os yw ar y system."
 #, c-format
 msgid "Available printers"
 msgstr "Argraffyddion ar gael"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr "NA"
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -15271,27 +15288,6 @@ msgstr ""
 "\n"
 "\n"
 "Pwyswch \"%s\" i barhau."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
-"        - Crea Delwedd Cychwynydd Galluogi Etherboot:\n"
-"        \t\tI gychwyn y cnewyllyn drwy etherboot, rhaid creu delwedd "
-"cnewyllyn/initrd arbennig.\n"
-"        \t\tmae tmkinitrd-net yn gwneud llawer o'r gwaith ac mae drak "
-"termServ yn rhyngwyneb graffigol iddo\n"
-"        \t\ti gynorthwyo rheoli/addasuto help manage/customize these images."
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -16119,6 +16115,23 @@ msgstr "TERFYNOL"
 msgid "Refresh the list"
 msgstr "Adnewyddu'r rhestr"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+"        - Cleient Unigol %s:\n"
+"        \t\tDrwy clusternfs, mae modd i bob cleient gael ei ffeiliau "
+"ffurfweddiad ei hun\n"
+"        \t\tar system ffeiliau gwraidd y gwasanaethwr. Drwy ganiatau "
+"ffurfweddiad caledwedd cleient,\n"
+"        \t\tbydd drakTermServ yn cynorthwyo i greu'r ffeiliau hyn."
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -16684,12 +16697,17 @@ msgstr "Generig"
 msgid "Cylinder %d to %d\n"
 msgstr "Silindr %d i silindr %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr "EICH TESTUN YMA"
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Proffil newydd..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr "NONE"
@@ -17275,6 +17293,11 @@ msgstr "Dyfeisiau aml-gyfrwng eraill"
 msgid "burner"
 msgstr "llosgwr"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr "Disgrifiad Gwall/Gwybodaeth am y System"
+
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid " (Default is all users)"
@@ -17410,6 +17433,41 @@ msgid "If no port is given, 631 will be taken as default."
 msgstr ""
 "Os nad oes porth yn cael ei gynnig, bydd 631 yn cael ei gymryd fel y "
 "rhagosodedig."
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
+msgstr ""
+"        - Ffeiliau ffurfweddi system cleient unigol:\n"
+"        \t\tDrwy clusternfs, mae modd i bob cleient di-ddisg gael ei "
+"ffeiliau ffurfweddu ei hun\n"
+"        \t\tar system ffeiliau gwraidd y gwasanaethwr. Drwy ganiatáu "
+"ffurfweddiad caledwedd  \n"
+"       \tcleient lleol, mae modd addasu ffeiliau fel /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t\t/etc/sysconfig/keyboard ar sail cleient.\n"
+"\n"
+"        Sylw: Mae galluogi ffurfweddiad cleient lleol yn galluogi "
+"mewngofnodi gwraidd i'r gwasanaethwr\n"
+"        terfynel ar bob un o'ch peiriannau cleient sydd a'r nodwedd hon wedi "
+"ei alluogi. Mae modd diffodd\n"
+"        ffurfweddiad lleol, cadw'r ffeiliau ffurfweddu, un waith mae'r "
+"peiriant cleient wedi ei ffurfweddu"
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -17639,7 +17697,7 @@ msgstr ""
 " (Pyrth paralel: /dev/lp0, /dev/lp1, ..., yn cyfateb i LPT1:, LPT2:, ..., "
 "argraffydd USB cyntaf: /dev/usb/lp0, ail argraffydd USB : /dev/usb/lp1, ...)."
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Nesaf"
@@ -18973,7 +19031,7 @@ msgstr " adsl"
 msgid "format of floppies supported by the drive"
 msgstr "fformatio disgiau meddal derbyniol i'r gyrrwr"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr "Methodd copïo'r cadarnwedd, heb ganfod ffeil %s"
@@ -19673,6 +19731,11 @@ msgstr ""
 "\n"
 "Ydych chi'n cytuno i golli'r holl raniadau?\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Find Package"
+msgstr "Canfod Pecyn"
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Are you sure that you want to set up printing on this machine?\n"
@@ -19789,6 +19852,37 @@ msgstr "Ffurfweddiad y Rhwydwaith Lleol"
 #, c-format
 msgid "hard disk model"
 msgstr "Model disg caled"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -19976,15 +20070,15 @@ msgstr "Bysellfwrdd DG"
 msgid "Unmount"
 msgstr "Dadosod"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Dad osod Ffontiau"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Dad osod Ffontiau"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -20364,23 +20458,6 @@ msgstr "Rhedeg \"%s\"..."
 #, c-format
 msgid "enable radio support"
 msgstr "galluogi cynnal radio"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
-"        - Cleient Unigol /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tDrwy clusternfs, mae modd i bob cleient gael ei ffeiliau "
-"ffurfweddiad ei hun\n"
-"        \t\tar system ffeiliau gwraidd y gwasanaethwr. Drwy ganiatau "
-"ffurfweddiad caledwedd cleient,\n"
-"        \t\tbydd drakTermServ yn cynorthwyo i greu'r ffeiliau hyn."
 
 #: ../../standalone/scannerdrake:1
 #, c-format

@@ -1,22 +1,24 @@
+# translation of DrakX-he.po to hebrew
 # translation of DrakX-he-new.po to Hebrew
 # translation of DrakX-he.po to Hebrew
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the GNU GPL license.
 # Ram Matityahu  <linuxfun@email.com>, 2003.
-# nadav mavor <nadav@mavor.com>, 2003
-# el-cuco <cuco3001@yahoo.com>, 2003
+# nadav mavor <nadav@mavor.com>, 2003.
+# el-cuco <cuco3001@yahoo.com>, 2003.
+# Diego Iastrubni <iastrubn@actcom.co.il>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX-he\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-05 22:26+0000\n"
-"Last-Translator: el-cuco <cuco3001@yahoo.com>\n"
-"Language-Team: Hebrew\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-13 22:12+0300\n"
+"Last-Translator: Diego Iastrubni <iastrubn@actcom.co.il>\n"
+"Language-Team: hebrew\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -193,7 +195,7 @@ msgstr "כרטיס Ethernet"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "פרמטרים"
@@ -327,7 +329,7 @@ msgid ""
 "We are about to configure your internet/network connection.\n"
 "If you don't want to use the auto detection, deselect the checkbox.\n"
 msgstr ""
-"ברוך הבא אל אשף הגדרות הרשת.\n"
+"ברוך בואך אל אשף הגדרות הרשת.\n"
 "\n"
 "אנחנו עומדים להגדיר את החבור שלך לרשת/אינטרנט.\n"
 "אם אתה לא רוצה להשתמש בזיהוי אוטומטי, נא בטל את התיבות סימון.\n"
@@ -506,6 +508,11 @@ msgstr "פס"
 msgid "Iraq"
 msgstr "עירק"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "connecting to %s ..."
+msgstr "מתחבר לאשף Bugzilla..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
@@ -548,6 +555,19 @@ msgstr "חפש גופנים מותקנים"
 #, c-format
 msgid "Default desktop"
 msgstr "שולחן עבודה (בררת מחדל)"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
+"בכדי לדווח על תקלה, נא ללחוץ על כפתור הדיווח.\n"
+"זה יפתח חלון דפדפן בכתובת %s\n"
+"שם נמצא טופס שעליך למלא. במידע המוצג למעלה, יעבר לשרת זה."
 
 #: ../../lang.pm:1
 #, c-format
@@ -635,9 +655,9 @@ msgid " on Novell server \"%s\", printer \"%s\""
 msgstr "על שרת נובל \"%s\", מדפסת \"%s\""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Name"
-msgstr "Printerdrake"
+msgstr "שם המדפסת"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -984,9 +1004,9 @@ msgid "<control>Q"
 msgstr "<Ctrl>Q"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find backups to restore...\n"
-msgstr "נא לבחור מידע לשחזור"
+msgstr "לא יכול למצוא מידע לשחזור...\n"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -1013,6 +1033,36 @@ msgstr "<Ctrl>S"
 msgid ""
 "Protocol for the rest of the world\n"
 "No D-Channel (leased lines)"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -1220,7 +1270,7 @@ msgid ""
 "knows if a selected package is located on another CD-ROM so it will eject\n"
 "the current CD and ask you to insert the correct CD as required."
 msgstr ""
-"התקנת Linux Mandrake פרוסה על כמה תקליטורים. DrakX יודע אם חבילה שנבחרת \n"
+"התקנת Mandrake Linux פרוסה על כמה תקליטורים. DrakX יודע אם חבילה שנבחרת \n"
 "ממוקמת בתקליטור אחר ויוציא את התקליטור הנוכחי ויבקש להכניס אחד אחר כדרוש."
 
 #: ../../standalone/drakperm:1
@@ -1382,7 +1432,7 @@ msgstr "שימוש ביוניקוד בתור ברירת מחדל"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "the module of the GNU/Linux kernel that handles the device"
-msgstr "המודול של ליבת GNU/Linux שמטפל בהתקן"
+msgstr "המודול של גרעין GNU/Linux שמטפל בהתקן"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -1551,7 +1601,7 @@ msgid "West Europe"
 msgstr "אירופה המערבית"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "On CD-R"
 msgstr "על גבי התקליטור"
 
@@ -1619,7 +1669,7 @@ msgid ""
 "Mandrake Linux partition. Be careful, all data present on this partition\n"
 "will be lost and will not be recoverable!"
 msgstr ""
-"בחר את כונן הקשיח למחיקה על מנת להתקין את Linux Mandrake. \n"
+"בחר את כונן הקשיח למחיקה על מנת להתקין את Mandrake Linux\n"
 "זהירות ! כול המידע שנמצע על המחיצה \n"
 "ימחק ולא תהיה אפשרות לשחזר אותו !!"
 
@@ -1630,15 +1680,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "נא להשתמש במקשים %c ו-%c כדי לבחור איזה 'כניסה' תסומן."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr "אפשר ל-\"%s\" להריץ את הקובץ"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "עכבר כללי עם 2 מקשים"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr "אפשר ל-\"%s\" להריץ את הקובץ"
 
 #: ../../lvm.pm:1
 #, c-format
@@ -1703,7 +1753,7 @@ msgid "Enable/Disable msec hourly security check."
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "At this point, you need to decide where you want to install the Mandrake\n"
 "Linux operating system on your hard drive. If your hard drive is empty or\n"
@@ -1765,10 +1815,6 @@ msgid ""
 "refer to the ``Managing Your Partitions '' section in the ``Starter\n"
 "Guide''."
 msgstr ""
-"בשלב זה יש להחליט היכן להתקין את מערכת ההפעלה Linux Mandrake על הכונן קשיח "
-"של המערכת. אם הכונן הקשיח ריק, או שינה מערכת הפעלה התפוסות את כל השטח הקיים "
-"יש תורך לבצע חלוקה מחדש של המחיצות. בעקרון חלוקה למחיצות היא חלוקה לוגית של "
-"הכונן, בכדי ליצור מקום שהו תותקן מערכת ההפעלה Linux Mandrake. "
 
 #: ../../lang.pm:1
 #, c-format
@@ -2201,7 +2247,7 @@ msgstr "מסיכת רשת:"
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "Do it later"
-msgstr ""
+msgstr "עשה את זה מאוחר יותר"
 
 #: ../../any.pm:1
 #, c-format
@@ -2250,7 +2296,7 @@ msgstr "מדפסת רשת: \"%s\", יציאה %s"
 msgid ""
 "Please choose what network adapter will be connected to your Local Area "
 "Network."
-msgstr ""
+msgstr "נא לבחור את מתאם הרשת שיהיה מחובר אל הרשת המקומית שלך"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -2285,7 +2331,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Installing a printing system in the %s security level"
-msgstr ""
+msgstr "מתקין מערכת הדפסה הרמת אבטחה %s"
 
 #: ../../any.pm:1
 #, c-format
@@ -2300,7 +2346,7 @@ msgstr "מערכת הפעלה אחרת (windows...)"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "WebDAV remote site already in sync!"
-msgstr ""
+msgstr "אתר WebDAV מרוחק כבר מסונכרן!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -2355,12 +2401,12 @@ msgstr "קלדוניה החדשה"
 #: ../../network/isdn.pm:1
 #, c-format
 msgid "European protocol (EDSS1)"
-msgstr ""
+msgstr "פרוטוקול אירופאי (EDSS1)"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Delete"
-msgstr "מחיקה"
+msgstr "/_מחיקה"
 
 #: ../../any.pm:1
 #, c-format
@@ -2400,7 +2446,7 @@ msgstr "סוג שולחן המחיצות: %s\n"
 #: ../../any.pm:1
 #, c-format
 msgid "Authentication Windows Domain"
-msgstr ""
+msgstr "אימות של מתחם Windows"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -2490,7 +2536,7 @@ msgstr "בוסנית"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Release: "
-msgstr ""
+msgstr "שיחרור:"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -2617,6 +2663,21 @@ msgid ""
 " Click on \"Next\" when you are ready, and on \"Cancel\" if you do not want "
 "to set up your printer(s) now."
 msgstr ""
+"\n"
+"ברוך בואך אל אשף הגדרת המדפסת\n"
+"\n"
+"אשף זה יעזור לך להגדיר את המדפסות המחוברות למחשב הזה, מחוברות ישירות אל הרשת "
+"או על מכונת Windows מרוחקת.\n"
+"\n"
+"נא לחבר ולהדליק את כל המדפסות שמחוברות אל המחשב הזה, בכדי שהן יזוהו "
+"אוטומטית. מדפסות שמחוברות ישירות אל הרשת ומכונות Windows צריכות להיות דלוקות "
+"ומחוברות.\n"
+"\n"
+"נא לשים לב שזיהוי אוטומטי של מדפסות רשת לוקח יותר זמן מאשר מדפסות המחוברות "
+"ישירות אל מחשב זה , לכן מומלץ לבטל את אפשרות של זהוי מדפסות רשת כאשר זה לא "
+"נחוץ. מדפסות מרוחקות על מכונות Windows לא צריכות את זה.\n"
+"\n"
+"נא ללחוץ על \"הבא\" בזמנך הפנוי או \"בטל\" אם אין צורך להגדיר מדפסות כעת."
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -2646,7 +2707,7 @@ msgstr "הרצת כלי הגדרה"
 #: ../../any.pm:1
 #, c-format
 msgid "Bootloader installation"
-msgstr "התקנת מאתחל המערכת"
+msgstr "התקנת מנהל אתחול"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -2657,6 +2718,23 @@ msgstr "גודל מחיצה ראשית ב-MB:"
 #, c-format
 msgid "This is a mandatory package, it can't be unselected"
 msgstr "זוהי חבילה בסיסית, אי אפשר לבטל את בחירתה"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -2981,7 +3059,7 @@ msgstr "הצגת תצורת גיבוי"
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, report check result to syslog."
-msgstr "אם נקבע כחיובי, בדיקת דיווח תירשם ב-syslog. "
+msgstr "אם נקבע כחיובי, בדיקת דיווח תירשם ברישום המערכת."
 
 #. -PO: keep this short or else the buttons will not fit in the window
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
@@ -3059,30 +3137,6 @@ msgstr "הסתר קבצים"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "גלוי אוטומטי של מדפסות המחוברות למחשב זה"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
-"XawTV איננה מותקנת!\n"
-"אם אכן ברשותך כרטיס טלוויזיה אבל DrakX לא זיהה אותו (המודולים bttv או "
-"saa7134\n"
-" לא מופיעים ב \"/etc/modules\") או שהוא לא התקין את xawtv, נא לשלח את הפלט "
-"של \"lspcidrake -v -f\" אל \"install@mandrakesoft.com\" עם הנושא "
-"\"undetected TV card\". \n"
-"\n"
-"באפשרותך להתקינה ע\"י הקלדה של \"urpmi xawtv\" כמנהל במסוף. "
 
 #: ../../any.pm:1
 #, c-format
@@ -3298,7 +3352,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "Remove the loopback file?"
-msgstr ""
+msgstr "מחיקת קובץ ה-loopback?"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -3343,9 +3397,9 @@ msgid "Re-generating list of configured scanners ..."
 msgstr "יצירה מחדש של רשימת הסורקים המוגדרים ..."
 
 #: ../../modules/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Module configuration"
-msgstr "תצורה ידנית"
+msgstr "הגדרות מודולים"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -3416,12 +3470,12 @@ msgid ""
 "installation."
 msgstr ""
 "מחיצת חלונות איננה מאוחה. נא להפעיל מחדש את המחשב אל  Windows ולהריץ איחוי "
-"כונן, לאחר מכן יש להפעיל מחדש את התקנת Linux Mandrake"
+"כונן, לאחר מכן יש להפעיל מחדש את התקנת Mandrake Linux"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Dvorak (Norwegian)"
-msgstr ""
+msgstr "דבורק (נורבגית)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -3658,6 +3712,18 @@ msgstr "הקבצים /etc/hosts.allow ו /etc/hosts.deny כבר מוגדרים -
 msgid "Restore From Tape"
 msgstr "שיחזור מטייפ גיבוי"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+"בכדי לדווח על תקלה, נא ללחוץ על כפתור הדיווח.\n"
+"זה יפתח חלון דפדפן בכתובת %s\n"
+"שם נמצא טופס שעליך למלא. במידע המוצג למעלה, יעבר לשרת זה."
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -3766,7 +3832,7 @@ msgstr "הגדר זמן שהות לפני תפוגת הססמה ויציאה מ�
 msgid ""
 "_: load here is a noun, the load of the system\n"
 "Load"
-msgstr ""
+msgstr "טעינה"
 
 #: ../../Xconfig/monitor.pm:1
 #, c-format
@@ -3812,7 +3878,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr "צריך שם מארח, שם משתמש וססמה!"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "נא להכניס תקליטון"
@@ -3953,10 +4019,17 @@ msgstr "ממשק הרשת כבר הוגדר"
 msgid "Couldn't access the floppy!"
 msgstr "אין אפשרות גישה לתקליטון!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
-msgstr "מתחבר לאשף Bugzilla..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
+msgstr ""
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -4121,7 +4194,7 @@ msgstr ""
 #: ../../diskdrake/dav.pm:1
 #, c-format
 msgid "Please enter the WebDAV server URL"
-msgstr ""
+msgstr "נא להכניס את כתובת שרת ה-WevDAV"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4139,6 +4212,11 @@ msgstr "קבל"
 #, c-format
 msgid "Description"
 msgstr "תיאור"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -4173,7 +4251,7 @@ msgstr "מלטה (UK)"
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "I can't add any more partition"
-msgstr "אין באפשרותי להוסיף מחיצה נוספת"
+msgstr "לא ניתן להוסיף מחיצה נוספת"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -4243,6 +4321,8 @@ msgid ""
 "\n"
 "Please check all options that you need.\n"
 msgstr ""
+"\n"
+" נא לבדוק את כל האפשרויות הדרושות.\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -4260,9 +4340,9 @@ msgid "whether this cpu has the Cyrix 6x86 Coma bug"
 msgstr "האם למעבד הזה יש את באג התרדמת של Cyrix 6x86?"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Loading printer configuration... Please wait"
-msgstr "שינוי הגדרות מדפסת"
+msgstr "טוען הגדרות מדפסת... אנא המתן..."
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4280,6 +4360,8 @@ msgid ""
 "Please choose the port that your printer is connected to or enter a device "
 "name/file name in the input line"
 msgstr ""
+"נא לבחור את היצאה שהמדפסת שלך מחוברת אליה או כתוב שם התקן או שם קובץ בשדה "
+"בקליטה."
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -4320,9 +4402,9 @@ msgid "Test pages"
 msgstr "דפי ניסיון"
 
 #: ../../diskdrake/interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logical volume name "
-msgstr "מדד מקומי"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4341,12 +4423,12 @@ msgstr "בודק %s"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "TCP/Socket Printer Options"
-msgstr ""
+msgstr "אפשרויות מדפסת TCP/Socket"
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Card mem (DMA)"
-msgstr ""
+msgstr "כרטיס זכרון (DMA)"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -4396,7 +4478,7 @@ msgstr "מספר כפתורים"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Vietnamese \"numeric row\" QWERTY"
-msgstr ""
+msgstr "וייטנמית \"מספרים בשורה\"  QWERTY"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -4418,7 +4500,7 @@ msgstr "חומרה"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Ctrl and Alt keys simultaneously"
-msgstr "מקשי Ctrl ו-Alt באותו הזמן"
+msgstr "מקשי Ctrl ו-Alt בו זמנית"
 
 #: ../../crypto.pm:1 ../../lang.pm:1 ../../network/tools.pm:1
 #, c-format
@@ -4426,9 +4508,9 @@ msgid "United States"
 msgstr "ארצות הברית"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "User umask"
-msgstr "השתמש בfdisk"
+msgstr "מסיכת משתמש (umask)"
 
 #: ../../any.pm:1
 #, c-format
@@ -4691,7 +4773,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer on parallel port #%s"
-msgstr ""
+msgstr "מדפסת על יציאה מקבילית #%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4803,9 +4885,9 @@ msgid "East Timor"
 msgstr "מזרח טימור"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Tape Device"
-msgstr "התקן רשת"
+msgstr "התקן טייפ"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -4919,7 +5001,7 @@ msgstr "סקטור התחלה:"
 #: ../../lang.pm:1
 #, c-format
 msgid "Congo (Brazzaville)"
-msgstr ""
+msgstr "קונגו (Brazzaville)"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -4970,12 +5052,12 @@ msgstr ""
 msgid "Right Control key"
 msgstr "מקש Control הימני"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
 "press %s"
-msgstr "הכנס תקליטון מפורמט כ FAT לכונן %s"
+msgstr "הכנס תקליטון מפורמט כ FAT לכונן %s, עם %s בספריית שורש וללחוץ %s"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4990,12 +5072,12 @@ msgstr "מנהל אבטחה (שם משתמש או דוא\"ל)"
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Sorry, we support only 2.4 kernels."
-msgstr "סליחה, התמיכה היא בגרעיני 2.4 בלבד."
+msgstr "סליחה, התמיכה היא בגרעינים של משפחה 2.4 בלבד."
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwerty)"
-msgstr ""
+msgstr "רומנית (qwerty)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -5041,6 +5123,8 @@ msgid ""
 "Congratulations, the network and Internet configuration is finished.\n"
 "\n"
 msgstr ""
+"ברכותינו! תצורת הרשת ואינטרנט הסתיימה.\n"
+"\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -5151,7 +5235,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Romanian (qwertz)"
-msgstr ""
+msgstr "רומנית (qwertz)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -5498,7 +5582,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Maltese (US)"
-msgstr ""
+msgstr "מלטה (ארה\"ב)"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -5687,7 +5771,7 @@ msgid ""
 msgstr ""
 "הזהרה!\n"
 "\n"
-"התכנית DrakX תשנה עכשיו את גודל מחיצת החלונות. נא לשים לב\n"
+"התכנית DrakX תשנה עכשיו את גודל מחיצת Windows. נא לשים לב\n"
 "שפעולה זאת מסוכנת. אם לא עשית כן, אתה צריך לצאת מההתקנה, להריץ scandisk\n"
 "תחת Windows (וכנראה גם defrag) ואז לאתחל את ההתקנה.\n"
 "אתה צריך לעשות גיבויים של המידע שלך.\n"
@@ -5861,9 +5945,9 @@ msgid ""
 msgstr ""
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Telugu"
-msgstr "בלגיה"
+msgstr "טאלוגו"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -5906,7 +5990,7 @@ msgstr "שרת נובל \"%s\", מדפסת \"%s\""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Mongolian (cyrillic)"
-msgstr ""
+msgstr "מוגולית (קירילית)"
 
 #: ../../standalone/drakfloppy:1
 #, c-format
@@ -5932,6 +6016,22 @@ msgstr ""
 #, c-format
 msgid "busmouse"
 msgstr "עכבר BUS"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6066,7 +6166,7 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "Set the root umask."
-msgstr "ססמת מנהל"
+msgstr "קביעת מסיכת מנהל (root umask)"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6086,7 +6186,7 @@ msgstr ""
 #: ../../install_interactive.pm:1 ../../install_steps.pm:1
 #, c-format
 msgid "You must have a FAT partition mounted in /boot/efi"
-msgstr "FAT"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -6269,7 +6369,7 @@ msgstr "איי מריאנה הצפוניים"
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on HP JetDirect"
-msgstr ", התקן רב-אפשרויות על HP JetDirect"
+msgstr ", התקן רב-תכליתי על HP JetDirect"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -6287,24 +6387,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "תקליטון"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6510,7 +6592,7 @@ msgstr "פתירת בעיות קול"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish (qwerty layout)"
-msgstr ""
+msgstr "פולנית (פריסת qwerty)"
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -6548,7 +6630,7 @@ msgstr ""
 #: ../../diskdrake/interactive.pm:1
 #, c-format
 msgid "This partition can't be used for loopback"
-msgstr ""
+msgstr "לא יכול לעשות שימוש במחיצה זאת עבור loopback"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6655,7 +6737,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Greek (polytonic)"
-msgstr ""
+msgstr "יוונית (פוליטונית)"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -6838,6 +6920,11 @@ msgstr "שיתוף אינטרנט"
 msgid "Choose file"
 msgstr "יש לבחור קובץ"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Summary: "
+msgstr "סיכום"
+
 #: ../../network/shorewall.pm:1
 #, c-format
 msgid ""
@@ -6909,6 +6996,17 @@ msgstr "הטריטוריה הצרפתיתי הדרומית"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "שם היצרן של המעבד"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7043,7 +7141,7 @@ msgstr "לאפשר אתחול?"
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use JFS for partitions smaller than 16MB"
-msgstr "אינך יכול להשתמש בJFS בשביל מחיצה קטנה מ-16 MB"
+msgstr "אינך יכול להשתמש ב-JFS בשביל מחיצה קטנה מ- 16MB"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -7204,6 +7302,11 @@ msgstr ""
 msgid "Encryption key for %s"
 msgstr "מפתח הצפנה עבור %s"
 
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Do you want to recover your system?"
+msgstr "האם ברצונך להשתמש בaboot?"
+
 #: ../../services.pm:1
 #, c-format
 msgid ""
@@ -7318,9 +7421,9 @@ msgid "Kyrgyzstan"
 msgstr "קירגיסטן"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on USB"
-msgstr ", התקן רב-אפשרויות"
+msgstr "התקן רב תכליתי על USB"
 
 #: ../../help.pm:1
 #, c-format
@@ -7630,6 +7733,11 @@ msgstr "/_הגדרות CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -7722,7 +7830,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Latin American"
-msgstr ""
+msgstr "אמריקה הלטינית"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -7842,6 +7950,11 @@ msgid ""
 "I am about to setup your Local Area Network with that adapter."
 msgstr ""
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -7851,6 +7964,11 @@ msgstr "התקנה מינימלית"
 #, c-format
 msgid "Ethiopia"
 msgstr "אתיופיה"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8134,13 +8252,6 @@ msgstr "סוג ההתקנה"
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
 msgstr ""
 
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
-msgstr ""
-
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "%d comma separated numbers"
@@ -8385,7 +8496,7 @@ msgid ""
 "this,\n"
 "press `F1' when booting on CDROM, then enter `text'."
 msgstr ""
-"המערכת שלך בעלת משאבים נמוכים. אולי יהיו בעיות בהתקנת Mandrake. Linux\n"
+"המערכת שלך בעלת משאבים נמוכים. אולי יהיו בעיות בהתקנת Mandrake Linux\n"
 "אם זה קורה, ניתן להתקין דרך מנשק טקסט במקום. בשביל כך יש \n"
 "ללחוץ F1 כאשר מפעילים כניסה מתקליטור ולהכניס 'text'."
 
@@ -8448,6 +8559,11 @@ msgstr "רענון אופקי של המסך: %s\n"
 #, c-format
 msgid "Path"
 msgstr "מיקום תיקייה"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8847,7 +8963,7 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Root umask"
-msgstr "ססמת משתמש-על"
+msgstr "Root umask"
 
 #: ../../any.pm:1
 #, c-format
@@ -8976,9 +9092,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mandrake Linux Printer Management Tool"
-msgstr "כלי לניהול משתמשים של Mandrake Linux"
+msgstr "כלי לניהול מדפסות של Mandrake Linux"
 
 #: ../../pkgs.pm:1
 #, c-format
@@ -8989,18 +9105,6 @@ msgstr "חשוב"
 #, c-format
 msgid "Total Progress"
 msgstr "סך הכל התקדמות"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
 
 #: ../../help.pm:1
 #, c-format
@@ -9055,7 +9159,7 @@ msgstr "משתמשים"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Preparing bootloader..."
-msgstr "מכין את מאתחל המערכת..."
+msgstr "מכין את מנהל האתחול..."
 
 #: ../../network/network.pm:1
 #, c-format
@@ -9073,7 +9177,7 @@ msgid "Examples for correct IPs:\n"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Please choose the media for backup."
 msgstr "נא לבחור את סוג המדיה לגיבוי"
 
@@ -9136,6 +9240,26 @@ msgstr "הגדרת התצורה הסתיימה, האם להשתמש בהגדרו
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
 msgstr ""
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
+msgstr ""
+
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "There's no known driver for your sound card (%s)"
@@ -9168,7 +9292,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Estonian"
-msgstr ""
+msgstr "אסטונית"
 
 #: ../../services.pm:1
 #, c-format
@@ -9243,6 +9367,13 @@ msgstr "שם התחברות"
 msgid ""
 "x coordinate of text box\n"
 "in number of characters"
+msgstr ""
+
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1
@@ -9402,7 +9533,7 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "custom"
 msgstr "מותאם אישית"
 
@@ -9419,7 +9550,7 @@ msgstr ""
 #: ../../harddrake/sound.pm:1
 #, c-format
 msgid "Let me pick any driver"
-msgstr ""
+msgstr "תן לי לבחור מנהל התקן מסויים"
 
 #: ../../standalone/net_monitor:1
 #, c-format
@@ -9454,7 +9585,7 @@ msgstr " isdn"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Here is the full list of keyboards available"
-msgstr "הנה הרשימה המלאה של המקלדות הזמינות"
+msgstr "הנה הרשימה המלאה של הפריסות מקלדת הזמינות"
 
 #: ../../standalone/draksplash:1
 #, c-format
@@ -9506,6 +9637,16 @@ msgstr "שם השרת נחוץ"
 msgid "Unselect fonts installed"
 msgstr ""
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "עם גלגלת"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Submit kernel version"
+msgstr "גרסת גרעין:"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -9526,11 +9667,6 @@ msgstr "ביטול"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "מחפש סורקים מוגדרים..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "עם גלגלת"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9568,9 +9704,9 @@ msgid "Which services would you like to allow the Internet to connect to?"
 msgstr "איזה שירותים  לאפשר לאינטרנט להתחבר אליהם?"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Connection Type"
-msgstr "מהירות חיבור"
+msgstr "סוג חיבור"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -9599,6 +9735,11 @@ msgstr "ברירת מחדל"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "הדמיית כפתור שני"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Please enter a package name."
+msgstr "יש לספק שם משתמש"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9648,7 +9789,7 @@ msgstr "לא מותקן"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Alt keys simultaneously"
-msgstr "שני מקשי ה-Shift באותו הזמן"
+msgstr "שני מקשי ה-Shift בו זמנית"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -9682,6 +9823,11 @@ msgstr ""
 "כל הזכויות שמורות על ידי MandrakeSoft\n"
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/90errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9805,7 +9951,7 @@ msgid ""
 "enough)\n"
 "at the beginning of the disk"
 msgstr ""
-"אם ברצונך להשתמש ב-aboot, יש להיזהר להשאיר מקום פנוי (2048 סקטורים זה  "
+"אם ברצונך להשתמש ב-aboot, יש להיזהר להשאיר מקום פנוי (2048 סקטורים זה "
 "מספיק) \n"
 "בתחילת הכונן"
 
@@ -9847,6 +9993,45 @@ msgstr "מפתח ההצפנה של המערכת"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Gujarati"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
 msgstr ""
 
 #: ../../interactive/stdio.pm:1
@@ -10064,9 +10249,9 @@ msgid "Genius NetScroll"
 msgstr "Genius NetScroll"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "On Hard Drive"
-msgstr "HardDrake"
+msgstr "על גבי הכונן הקשיח"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -10157,45 +10342,6 @@ msgstr ""
 "אתה יכול לבקר ברשימת החומרה שלנו באתר: \n"
 "\n"
 "http://www.linux-mandrake.com/en/hardware.php3"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -10374,9 +10520,9 @@ msgid "Iceland"
 msgstr "איסלנד"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Network & Internet Configuration"
-msgstr "הגדרת הרשת"
+msgstr "הגדרת הרשת ואינטרנט"
 
 #: ../../common.pm:1
 #, c-format
@@ -10501,9 +10647,9 @@ msgstr ""
 "ולהעתיק הקובץ mgmt.o לתיקייה /usr/share/speedtouch"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Hour"
-msgstr "הונדורס"
+msgstr "שעה"
 
 #: ../../network/modem.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -10597,23 +10743,11 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
 
 #: ../../services.pm:1
@@ -10678,13 +10812,13 @@ msgid ""
 "Information on configuring your system is available in the post\n"
 "install chapter of the Official Mandrake Linux User's Guide."
 msgstr ""
-"מזל טוב, ההתקנה הסתיימה.\n"
-"נא להסיר את מדית ההתקנה ולחץ enter לאתחול.\n"
+"ברכותינו, ההתקנה הסתיימה.\n"
+"נא להסיר את מדית ההתקנה ולחץ Enter לאתחול.\n"
 "\n"
 "\n"
 "למידע עבור התיקונים הזמינים עבור גרסה זאת של Mandrake Linux, נא להציץ ב- "
 "Errata \n"
-"הזמינה  הכתובת: \n"
+"הזמינה בכתובת: \n"
 "\n"
 "%s\n"
 "\n"
@@ -10760,9 +10894,9 @@ msgstr ""
 "זהירות: זוהי גרסה ניסיונית העלולה לגרום למחשב שלך לקרוס."
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "פג זמן אתחול גרעין"
+msgstr "זמן תפוגת המעטפת"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10885,9 +11019,9 @@ msgid "Boot ISO"
 msgstr "Boot ISO"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firmware needed"
-msgstr "אם נדרש"
+msgstr "נדרשת Firmware"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10986,33 +11120,15 @@ msgstr "בעיות בזמן התקנת חבילה %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "התראה תתקבל אם הטעינה גבוהה מהערך הזה"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"בכדי לדווח על תקלה, נא ללחוץ על כפתור הדיווח.\n"
-"זה יפתח חלון דפדפן בכתובת https://drakbug.mandrakesoft.com\n"
-"שם נמצא טופס שעליך למלא. במידע המוצג למעלה, יעבר לשרת זה.\n"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
 msgstr "הוספה ידנית של סורק"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Refresh"
-msgstr "סרב"
+msgstr "רענן"
 
 #: ../../help.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11136,7 +11252,7 @@ msgstr "מנהל אבטחה:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
@@ -11183,9 +11299,9 @@ msgid "Save packages selection"
 msgstr "שמירת בחירת החבילות"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Actions"
-msgstr "/_אפשרויות"
+msgstr "/_פעולות"
 
 #: ../../standalone/drakautoinst:1
 #, c-format
@@ -11205,7 +11321,7 @@ msgstr "לא נבחרו מראות אתחול לרשת!"
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pptp"
-msgstr "שימוש ב-pptp"
+msgstr "שימוש ב-PPTP"
 
 #: ../../services.pm:1
 #, c-format
@@ -11460,11 +11576,6 @@ msgstr ""
 "המדפסת \"%s\" כבר קיימת,\n"
 "האם באמת ברצונך לדרוס את ההגדרות הקודמות?"
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "אין מחיצות זמינות"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -11475,10 +11586,15 @@ msgstr "שימוש בסורקים אלה תחת המארחים:"
 msgid "Unselected All"
 msgstr "ביטל בחירה של כולם"
 
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "אין מחיצות זמינות"
+
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management \n"
-msgstr "שם המדפסת החדשה"
+msgstr "ניהול מדפסות\n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11508,14 +11624,14 @@ msgstr "זיהוי בתהליך"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Build Whole Kernel -->"
-msgstr "בנית ליבה שלמה -->"
+msgstr "בניית גרעין שלמה -->"
 
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "modem"
 msgstr "מודם"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "ברוכים הבאים ל- %s"
@@ -11539,7 +11655,7 @@ msgstr "נא להכניס תקליטון עדכון מודולים לכונן %s
 #: ../../standalone/drakboot:1
 #, c-format
 msgid "Bootsplash"
-msgstr "Bootsplash"
+msgstr "מסך אתחול"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11583,6 +11699,13 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
+msgstr "לא התקליטור הנכון, התקליטור נקרא %s"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -11700,7 +11823,7 @@ msgstr ""
 #: ../../network/tools.pm:1
 #, c-format
 msgid "Choose your country"
-msgstr "בחירת ארץ"
+msgstr "בחירת מדינה"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -11709,35 +11832,15 @@ msgid ""
 "- System Files:\n"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
-msgstr ""
-
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Standalone Tools"
-msgstr ""
+msgstr "כלים עצמאיים"
 
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Where"
-msgstr ""
+msgstr "היכן"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11784,6 +11887,9 @@ msgid ""
 "During installation, you will need to use the Right Control\n"
 "key to switch between the different keyboard layouts."
 msgstr ""
+"הגדרה זאת תופעל לאחר ההתקנה.\n"
+"בזמן ההתקנה, הכפתור Control הימני ישמש \n"
+"להחלפת פריסת מקלדת."
 
 #: ../../lang.pm:1
 #, c-format
@@ -11793,7 +11899,7 @@ msgstr "איי חַג הַמּוֹלָד"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Installation of bootloader failed. The following error occured:"
-msgstr "התקנת מאתחל המערכת נכשלה. השגיאות הבאות התרחשו:"
+msgstr "התקנת מנהל האתחול נכשלה. השגיאות הבאות התרחשו:"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11806,9 +11912,9 @@ msgid "Set this printer as the default"
 msgstr "הגדרת המדפסת כברירת מחדל"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "האם אלו ההגדרות הנכונות?"
+msgstr "נא לוודא שהנתיב %s נכון"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11818,7 +11924,7 @@ msgstr "מחיצת %s"
 #: ../../security/level.pm:1
 #, c-format
 msgid "Paranoid"
-msgstr ""
+msgstr "פראנויד"
 
 #: ../../any.pm:1
 #, c-format
@@ -11828,17 +11934,17 @@ msgstr "NIS"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "<-- Del User"
-msgstr ""
+msgstr "<- מחיקת משתמש"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "Location on the bus"
-msgstr "מיקום על הbus"
+msgstr "מיקום על ה-BUS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "No printer found!"
-msgstr ""
+msgstr "לא מצאה מדפסת!"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -11890,7 +11996,7 @@ msgstr "העברה עכשיו"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password and network authentication methods"
-msgstr ""
+msgstr "קביעת ססמת מנהל, ושיטות אימות על בסיס רשת"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -11934,7 +12040,7 @@ msgstr "סנט הלנה"
 #: ../../printer/main.pm:1
 #, c-format
 msgid "Parallel port #%s"
-msgstr "על פורט מקבילי #%s"
+msgstr "על יציאה מקבילי #%s"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -11960,7 +12066,7 @@ msgstr "סודן"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish (qwertz layout)"
-msgstr ""
+msgstr "פולנית (פריסת qwetrz)"
 
 #: ../../lang.pm:1
 #, c-format
@@ -11994,7 +12100,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Portuguese"
-msgstr ""
+msgstr "פורטוגזית"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -12027,7 +12133,7 @@ msgid "This directory should remain within the root filesystem"
 msgstr "תיקייה זו צריכה להישאר עם מערכת הקבצים הראשית (root)."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Across Network"
 msgstr "דרך רשת"
 
@@ -12194,7 +12300,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Brazilian (ABNT-2)"
-msgstr ""
+msgstr "ברזליאית (ABNT-2)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12258,7 +12364,7 @@ msgstr "הגדרות צבע"
 msgid ""
 "There are already some restrictions, and more automatic checks are run every "
 "night."
-msgstr ""
+msgstr "ישנן כמה הגבלות, וכמה בדיקות שיגרתיות נוספות שמורצות מדי ערב."
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12380,6 +12486,14 @@ msgid ""
 "select \"Printer\" in the \"Hardware\" section of the Mandrake Control "
 "Center."
 msgstr ""
+"\n"
+"ברכותינו, המדפסת שלך התקונה והוגדרה! \n"
+"\n"
+"ניתן להשתמש בפקודת ההדפסה של היישום שלך (בדרך כלל תחת תפריט \"קובץ\"). \n"
+"\n"
+"אם ברצונך להוסיף, להתקין, לשנות שם של מדפסת, או לשנות את הגדרות ברירית המחדל "
+"(דפים, מגשי נייר, איכות הדפסה וכו'), נא לבחור באפשרויות של \"מדפסת\"  תחת "
+"איזור \"חומרה\" של מרכז הבקרה של Mandrake/"
 
 #: ../../standalone/drakxtv:1
 #, c-format
@@ -12400,7 +12514,7 @@ msgstr "%s על %s"
 #: ../../security/help.pm:1
 #, c-format
 msgid "Allow/Forbid remote root login."
-msgstr "הרשה/אסור התחברות מרוחקת של root"
+msgstr "הרשה/אסור התחברות מרוחקת של הנהל (root)"
 
 #: ../../help.pm:1
 #, c-format
@@ -12519,10 +12633,10 @@ msgstr "בניית העתיד של לינוקס!"
 msgid "Local Printer"
 msgstr ""
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid "Floppy access error, unable to mount device %s"
-msgstr "לאן ברצונך לחבר את ההתקן %s?"
+msgstr "שגיאת בעת גישה אל התלקיטון. לא יכול לחבר את התקן %s"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12610,7 +12724,7 @@ msgstr "שימוש במחיצה קיימת"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Canadian (Quebec)"
-msgstr ""
+msgstr "קנדית (קויבק)"
 
 #: ../../Xconfig/various.pm:1
 #, c-format
@@ -12620,36 +12734,6 @@ msgstr "התקן עכבר: %s\n"
 #: ../../standalone/drakfont:1
 #, c-format
 msgid "Reselect correct fonts"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
 msgstr ""
 
 #: ../../help.pm:1
@@ -12811,11 +12895,13 @@ msgid ""
 "Need to restart the Display Manager for full changes to take effect. \n"
 "(service dm restart - at the console)"
 msgstr ""
+"יש צורך לאתחל את מנהל הכניסה כדי שהשינויים יכנסו לתוקף.\n"
+"(להריץ במסוף \"service dm restart\")"
 
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Ftp Server"
-msgstr "שרת ftp"
+msgstr "שרת FTP"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12912,6 +12998,11 @@ msgstr "מאי"
 msgid "Yaboot mode"
 msgstr "מצב Yaboot"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "עכבר כליי עם 3 מקשים"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -12925,11 +13016,6 @@ msgid ""
 msgstr ""
 "לא יכול להפעיל מחדש את LiLo!\n"
 "יש להריץ את \"lilo\" כמנהל (root) משורת הפקודה להשלמת התקנת ערכת הנושא."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "עכבר כליי עם 3 מקשים"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -13013,9 +13099,9 @@ msgid "This password is too simple"
 msgstr "הססמה פשוטה מידיי"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "הגדרת שירותים"
+msgstr ""
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -13031,9 +13117,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "No devices found"
-msgstr "לא נמצאו כוננים קשיחים"
+msgstr "לא נמצאו התקנים"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -13050,7 +13136,7 @@ msgstr ""
 #: ../../standalone/logdrake:1
 #, c-format
 msgid "Authentication"
-msgstr ""
+msgstr "אימות"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13103,9 +13189,9 @@ msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set as default"
-msgstr "/_קבע בתור ברירת מחדל"
+msgstr "קבע בתור ברירת מחדל"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -13113,14 +13199,14 @@ msgid "2 MB"
 msgstr "2 MB"
 
 #: ../../printer/main.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on this machine"
-msgstr "(על המערכת הזו)"
+msgstr "מוגדר על מערכת זו"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Control keys simultaneously"
-msgstr "שני מקשי ה-Control יחד"
+msgstr "שני מקשי ה-Control בו זמנית"
 
 #: ../../standalone/drakhelp:1
 #, c-format
@@ -13186,7 +13272,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device on parallel port #%s"
-msgstr ""
+msgstr ", התקן רב תכליתי על יציאה מקבילית #%s"
 
 #: ../../mouse.pm:1
 #, c-format
@@ -13201,7 +13287,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Georgian (\"Latin\" layout)"
-msgstr ""
+msgstr "גרוגיאנית (פריסה \"לטינית\")"
 
 #: ../../share/advertising/09-mdksecure.pl:1
 #, c-format
@@ -13243,29 +13329,12 @@ msgstr "יצירת שלב ראשון"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Both Shift keys simultaneously"
-msgstr "שני מקשי הShift באותו הזמן"
+msgstr "שני מקשי ה-Shift בו זמנית"
 
 #: ../../standalone/drakhelp:1
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -13296,7 +13365,7 @@ msgstr "שמירה בשם..."
 #: ../../lang.pm:1
 #, c-format
 msgid "Korea (North)"
-msgstr ""
+msgstr "קוריאה (צפון)"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -13436,7 +13505,7 @@ msgstr "חוף השנהב"
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "new dynamic device name generated by core kernel devfs"
-msgstr "שם דינמי חדש מיותר על ידי הליבה בעזרת devfs"
+msgstr "שם דינמי חדש מיותר על ידי הגרעין בעזרת devfs"
 
 #: ../../help.pm:1 ../../install_any.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../modules/interactive.pm:1 ../../standalone/drakgw:1
@@ -13560,7 +13629,7 @@ msgstr ""
 #: ../../security/help.pm:1
 #, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "אפשר/אסור התחברות מקומית של root"
+msgstr "אפשר/אסור התחברות מקומית של המנהל (root)"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13617,11 +13686,6 @@ msgstr ""
 msgid "Sharing of local printers"
 msgstr ""
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/90errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -13630,6 +13694,11 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Available printers"
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
 msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
@@ -13664,21 +13733,6 @@ msgstr ""
 "\n"
 "\n"
 "יש ללחוץ \"%s\"  בכדי להמשיך."
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
-msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -13770,9 +13824,9 @@ msgid "Installing"
 msgstr "מתקין"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech MouseMan with Wheel emulation"
-msgstr "Logitech MouseMan"
+msgstr "Logitech MouseMan עם הדמיית גלגלת"
 
 #: ../../any.pm:1
 #, c-format
@@ -13856,7 +13910,7 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1 ../../standalone/mousedrake:1
 #, c-format
 msgid "Please choose which serial port your mouse is connected to."
-msgstr ""
+msgstr "נא לבחור לאיזה יציאה טורית העכבר שלך מחובר"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13911,9 +13965,9 @@ msgid "Guadeloupe"
 msgstr "גוואדלופ"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Kannada"
-msgstr "קנדה"
+msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -14001,9 +14055,9 @@ msgid "April"
 msgstr "אפריל"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Deactivate now"
-msgstr "פועל"
+msgstr "לכבות עכשיו"
 
 #: ../../any.pm:1 ../../install_any.pm:1 ../../standalone.pm:1
 #, c-format
@@ -14045,7 +14099,7 @@ msgstr "האם ברצונך להשתמש בaboot?"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Belarusian"
-msgstr ""
+msgstr "בלרוסית"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14241,7 +14295,7 @@ msgstr "החל מסנן"
 #: ../../network/adsl.pm:1
 #, c-format
 msgid "use pppoe"
-msgstr "שימוש ב pppoe"
+msgstr "שימוש ב-PPPOE"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -14332,7 +14386,7 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "No kernel selected!"
-msgstr ""
+msgstr "לא נבחר גרעין!"
 
 #. -PO: these messages will be displayed at boot time in the BIOS, use only ASCII (7bit)
 #. -PO: and keep them smaller than 79 chars long
@@ -14359,9 +14413,9 @@ msgid ""
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "USB printer"
-msgstr ", מדפסת USB"
+msgstr "מדפסת USB"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -14380,6 +14434,10 @@ msgid ""
 "covers the entire Mandrake Linux distribution. If you do agree with all the\n"
 "terms in it, check the \"%s\" box. If not, simply turn off your computer."
 msgstr ""
+"לפני שאתה ממשיך, יש צורך לקרא את תנאי ההסכם. \n"
+"זה מכסה את כל הפצת Mandrake Linux, אם הינך מסכים \n"
+"עם כל התנאים, הא לבחור \"%s\", אחרת יש פשוט לכבות \n"
+"את המחשב."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -14442,9 +14500,20 @@ msgid "FATAL"
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Refresh the list"
-msgstr "הסרת הפריט האחרון"
+msgstr "רענון הרשימה"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -14589,8 +14658,8 @@ msgid ""
 "initialize a timer counter.  Its result is stored as bogomips as a way to "
 "\"benchmark\" the cpu."
 msgstr ""
-"ליבת GNU/Linux צריכה להפעיל לולאה חישובית בזמן האתחול בכדי לזהות ספירת שעון. "
-"התוצאה מאוחסנת בתור bogomips כדרך ל\"אבחון\" המעבד"
+"גרעין GNU/Linux צריכה להפעיל לולאה חישובית בזמן האתחול בכדי לזהות ספירת "
+"שעון. התוצאה מאוחסנת בתור bogomips כדרך ל\"אבחון\" המעבד"
 
 #: ../../any.pm:1
 #, c-format
@@ -14659,9 +14728,9 @@ msgid "July"
 msgstr "יולי"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Prints into %s"
-msgstr ", הדפסה אל %s"
+msgstr "הדפסה אל %s"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14763,7 +14832,7 @@ msgstr ""
 #: ../../security/level.pm:1
 #, c-format
 msgid "Higher"
-msgstr ""
+msgstr "יותר גבוהה"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -14791,7 +14860,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Japanese 106 keys"
-msgstr ""
+msgstr "יפנית 106 תווים"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -14861,7 +14930,7 @@ msgstr "בערוץ %d זיהוי %d\n"
 #: ../../printer/main.pm:1
 #, c-format
 msgid ", multi-function device"
-msgstr ", התקן רב-אפשרויות"
+msgstr ", התקן רב-תכליתי"
 
 #: ../../lang.pm:1
 #, c-format
@@ -14982,12 +15051,17 @@ msgstr "כללי"
 msgid "Cylinder %d to %d\n"
 msgstr "צילינדר %d ל%d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr ""
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr ""
@@ -15010,7 +15084,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Saami (norwegian)"
-msgstr ""
+msgstr "סאמי (נורבגית)"
 
 #: ../../standalone/drakpxe:1
 #, c-format
@@ -15074,7 +15148,7 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Root password"
-msgstr "ססמת מנהל"
+msgstr "ססמת מנהל (root)"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -15292,9 +15366,9 @@ msgid "Print test pages"
 msgstr "הדפסת דפי ניסיון"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "Activate now"
-msgstr "פועל"
+msgstr "הפעל עכשיו"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -15345,6 +15419,7 @@ msgid ""
 "This is the standard security recommended for a computer that will be used "
 "to connect to the Internet as a client."
 msgstr ""
+"זהוי ברירת המחדל של רמת האבטוחה המומלצת למחשב שישמש לחיבור לאיטרנט בתור לקוח."
 
 #: ../../any.pm:1
 #, c-format
@@ -15536,10 +15611,15 @@ msgstr ""
 msgid "burner"
 msgstr "צורב"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr ""
+
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid " (Default is all users)"
-msgstr "משתמש ברירת מחדל"
+msgstr "(ברירת מחדל היא כל המשתמשים)"
 
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
@@ -15604,9 +15684,9 @@ msgid "Card IO_1"
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Search:"
-msgstr "חיפוש"
+msgstr "חיפוש:"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15641,7 +15721,7 @@ msgstr "מנהל התקן לא ידוע"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Thai keyboard"
-msgstr ""
+msgstr "מדלקת תאילנדית"
 
 #: ../../lang.pm:1
 #, c-format
@@ -15656,6 +15736,26 @@ msgstr "אפשרויות חיוג לרשת"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -15675,7 +15775,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Polish"
-msgstr ""
+msgstr "פולנית"
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -15741,9 +15841,9 @@ msgid "Check open ports"
 msgstr "זוהה בפורט"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Edit selected printer"
-msgstr "עריכת השרת הנבחר"
+msgstr "עריכת המדפסת הנבחרת"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -15853,7 +15953,7 @@ msgid ""
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "הבא"
@@ -16007,9 +16107,9 @@ msgid "Host name or IP."
 msgstr "שם מארח או כתובת IP"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "/_Edit"
-msgstr "עריכה"
+msgstr "/_עריכה"
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -16086,9 +16186,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Editable"
-msgstr "ביטול"
+msgstr "ניתן לעריכה"
 
 #: ../../network/ethernet.pm:1
 #, c-format
@@ -16167,7 +16267,7 @@ msgstr "אין מספיק מקום חופשי למיקום אוטומטי"
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Set root password"
-msgstr "הגדרת ססמה ראשית (root)"
+msgstr "הגדרת ססמת מנהל (root)"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -16209,7 +16309,7 @@ msgstr "מחפש ערוצי טלוויזיה"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Kernel:"
-msgstr ""
+msgstr "גרעין:"
 
 #: ../../standalone/harddrake2:1 ../../standalone/printerdrake:1
 #, c-format
@@ -16219,7 +16319,7 @@ msgstr "/_על זה..."
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Bengali"
-msgstr ""
+msgstr "בנגאלי"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -16277,9 +16377,9 @@ msgid "Show current interface configuration"
 msgstr "הראה את הגדרות המנשק הנוכחי"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add Printer"
-msgstr "/_ הוספת מדפסת"
+msgstr "הוספת מדפסת"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -16358,7 +16458,7 @@ msgstr ", שימוש בפקודה %s"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Alt and Shift keys simultaneously"
-msgstr "מקשי Alt וShift באותו זמן"
+msgstr "מקשי Alt ו-Shift בו זמנית"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -16505,9 +16605,9 @@ msgid "The following printer was auto-detected. "
 msgstr ""
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Uses command %s"
-msgstr ", שימוש בפקודה %s"
+msgstr "שימוש בפקודה %s"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -16517,7 +16617,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Norwegian"
-msgstr ""
+msgstr "נורבגית"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -16614,7 +16714,7 @@ msgstr "על שרת LPD - \"%s\" מדפסת \"%s\""
 #: ../../standalone/drakedm:1
 #, c-format
 msgid "Choosing a display manager"
-msgstr ""
+msgstr "בחירת מנהל הפעלה"
 
 #: ../../network/ethernet.pm:1 ../../network/network.pm:1
 #, c-format
@@ -16632,9 +16732,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "כתובת IP צריכה להראות ככה 1.2.3.4"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS printing system"
-msgstr "החלפת מערכת ההדפסה"
+msgstr "הגדרת מערכת הדפסה CUPS"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16692,7 +16792,7 @@ msgstr "אין אפשרות כניסה בשימוש שם משתמש %s (ססמה
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Azerbaidjani (latin)"
-msgstr ""
+msgstr "אזרביג'אן (לטינית) "
 
 #: ../../standalone/drakbug:1
 #, c-format
@@ -16879,9 +16979,9 @@ msgid "Left Alt key"
 msgstr "מקש Alt השמאלי"
 
 #: ../../standalone/logdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Load setting"
-msgstr "טוען הגדרה"
+msgstr "טוען הגדרות"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -16893,9 +16993,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set selected printer as the default printer"
-msgstr "הגדרת המדפסת כברירת מחדל"
+msgstr "סימון מדפסת זאת בתור ברירת מחדל"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17035,14 +17135,14 @@ msgstr "ממשק גרפי בהתחלת המחשב"
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid " adsl"
-msgstr ""
+msgstr " ADSL"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "format of floppies supported by the drive"
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
@@ -17075,7 +17175,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Macedonian"
-msgstr ""
+msgstr "מקדונית"
 
 #: ../../lang.pm:1
 #, c-format
@@ -17269,7 +17369,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid "%s (Port %s)"
-msgstr "%s (Port %s)"
+msgstr "%s (יציאה %s)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17279,7 +17379,7 @@ msgstr "משתמש בחיבור רשת לגיבוי"
 #: ../../standalone/drakfloppy:1
 #, c-format
 msgid "Kernel version"
-msgstr "גרסת ליבה"
+msgstr "גרסת גרעין:"
 
 #: ../../help.pm:1
 #, c-format
@@ -17362,7 +17462,7 @@ msgstr "בחירה לא נכונה, יש לנסות שוב\n"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Syslog reports to console 12"
-msgstr ""
+msgstr "דיווח של SysLog אל מסוף מספר 12"
 
 #: ../../diskdrake/smbnfs_gtk.pm:1
 #, c-format
@@ -17372,7 +17472,7 @@ msgstr "חפש שרתים חדשים"
 #: ../../lang.pm:1
 #, c-format
 msgid "Heard and McDonald Islands"
-msgstr "איי קייקוס"
+msgstr "איי Heard ו-McDonald"
 
 #: ../../harddrake/sound.pm:1
 #, c-format
@@ -17413,7 +17513,7 @@ msgstr ""
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Driver"
-msgstr ""
+msgstr "מנהל התקן"
 
 #: ../../services.pm:1
 #, c-format
@@ -17425,7 +17525,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "DVD-R device"
-msgstr "התקן DVDR"
+msgstr "התקן DVD-R"
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
@@ -17499,7 +17599,7 @@ msgstr "אוסטריה"
 #: ../../mouse.pm:1
 #, c-format
 msgid "No mouse"
-msgstr "אין עכבר"
+msgstr "ללא עכבר"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17534,7 +17634,7 @@ msgstr "הגדרת הרשת"
 #: ../../any.pm:1
 #, c-format
 msgid "Where do you want to install the bootloader?"
-msgstr "איפה ברצונך להתקין את מאתחל המערכת?"
+msgstr "איפה ברצונך להתקין את מנהל האתחול?"
 
 #: ../../help.pm:1
 #, c-format
@@ -17567,10 +17667,10 @@ msgstr ""
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "The %s is not supported by this version of Mandrake Linux."
-msgstr "ה%s לא נתמך בגרסה הנוכחית של Mandrake. Linux"
+msgstr "ה-%s הזה לא נתמך בגרסה הנוכחית של Mandrake Linux"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
 msgstr "טייפ"
 
@@ -17582,12 +17682,12 @@ msgstr "לקוח DHCP"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "List users on display managers (kdm and gdm)"
-msgstr ""
+msgstr "רשימת המשתמשים במנהלי הפעלה (KDM ו-GDM)"
 
 #: ../../mouse.pm:1
 #, c-format
 msgid "Logitech Mouse (serial, old C7 type)"
-msgstr "עכבר logitech (טורי, מסוג C7 ישן)"
+msgstr "עכבר Logitech (טורי, מסוג C7 ישן)"
 
 #: ../../partition_table.pm:1
 #, c-format
@@ -17610,6 +17710,11 @@ msgstr ""
 "(השגיאה היא %s)\n"
 "\n"
 "הם את/ה מסכים/ה  לאבד את כל המחיצות?\n"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Find Package"
+msgstr "%d חבילות"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17654,7 +17759,7 @@ msgstr "מודל כרטיס:"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Thin Client"
-msgstr ""
+msgstr "לקוח רזה"
 
 #: ../../share/advertising/01-thanks.pl:1
 #, c-format
@@ -17719,12 +17824,30 @@ msgstr "זיהוי מדפסות אוטומטי מחובר ישירות לרשת 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "LAN configuration"
-msgstr ""
+msgstr "הגדרת רשת מקומית"
 
 #: ../../standalone/harddrake2:1
 #, c-format
 msgid "hard disk model"
-msgstr "מודל כונן קשיח"
+msgstr "דגם כונן קשיח"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
 
 #: ../../fsedit.pm:1
 #, c-format
@@ -17754,7 +17877,7 @@ msgstr "קרואטיה"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Gateway:"
-msgstr ""
+msgstr "שער:"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17810,14 +17933,15 @@ msgid ", USB printer"
 msgstr ", מדפסת USB"
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to properly close mkbootdisk:\n"
 "\n"
 "<span foreground=\"Red\"><tt>%s</tt></span>"
 msgstr ""
-"לסגירה של mkbootdisk לא הצליחה. %s\n"
-"%s"
+"לא יכול לסגור כהלכה את mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17837,9 +17961,9 @@ msgid "Configure X"
 msgstr "הגדרת X"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "צ'אד"
+msgstr "כונן קשיח"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17860,7 +17984,7 @@ msgstr ""
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Allow remote root login"
-msgstr "אפשר התחברות מרוחקת של root"
+msgstr "אפשר התחברות מרוחקת של המנהל (root)"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -17870,7 +17994,7 @@ msgstr "מטה"
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Raw printer (No driver)"
-msgstr ""
+msgstr "מדפסת גולמית (ללא התקן)"
 
 #: ../../network/modem.pm:1
 #, c-format
@@ -17897,7 +18021,7 @@ msgstr "זמן נותר"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "UK keyboard"
-msgstr "מקלדת אנגליה"
+msgstr "מקלדת אנגלית"
 
 #: ../../diskdrake/dav.pm:1 ../../diskdrake/interactive.pm:1
 #: ../../diskdrake/smbnfs_gtk.pm:1
@@ -17905,15 +18029,15 @@ msgstr "מקלדת אנגליה"
 msgid "Unmount"
 msgstr "ניתוק"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "הסרת גופנים"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "הסרת גופנים"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17954,12 +18078,12 @@ msgstr "גמביה"
 #: ../../standalone/drakbug:1
 #, c-format
 msgid "Mandrake Control Center"
-msgstr ""
+msgstr "מרכז הבקרה של Mandrake"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device"
-msgstr ", התקן רב-אפשרויות"
+msgstr "התקן רב-תכליתי"
 
 #: ../../network/drakfirewall.pm:1
 #, c-format
@@ -17979,7 +18103,7 @@ msgstr ""
 msgid ""
 "No browser is installed on your system, Please install one if you want to "
 "browse the help system"
-msgstr "לא מותקן סייר במערכת שלך, נא להתקין אחד אם ברצונך לסייר במערכת העזרה"
+msgstr "לא מותקן דפדפן במערכת, נא להתקין אחד אם ברצונך לסייר במערכת העזרה"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18013,7 +18137,7 @@ msgstr "כבלים"
 #: ../../help.pm:1 ../../install_interactive.pm:1
 #, c-format
 msgid "Use the free space on the Windows partition"
-msgstr "השתמש בשטח החופשי על מחיצת חלונות"
+msgstr "השתמש בשטח החופשי על מחיצת Windows"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18023,7 +18147,7 @@ msgstr "%s נמצא ב%s, להגדיר אותו אוטומטית?"
 #: ../../Xconfig/various.pm:1
 #, c-format
 msgid "XFree86 driver: %s\n"
-msgstr "מנהל התקן Xfree86: %s\n"
+msgstr "מנהל התקן XFree %s: \n"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18033,7 +18157,7 @@ msgstr "המארח/הרשת כבר ברשימה, זה לא יכול להתוסף
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Choose the packages you want to install"
-msgstr "בחר את החבילות שברצונך להתקין"
+msgstr "נא לבחור את החבילות שברצונך להתקין"
 
 #: ../../lang.pm:1
 #, c-format
@@ -18041,14 +18165,14 @@ msgid "Papua New Guinea"
 msgstr "פאפואה-גינאה החדשה"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Multi-function device on a parallel port"
-msgstr "על פורט פרלאלי #%s"
+msgstr "התקן רב תכליתי על יציאה מקבילי"
 
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Serbian (cyrillic)"
-msgstr ""
+msgstr "סרבית (קרילית)"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18072,7 +18196,7 @@ msgstr ""
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "The DHCP end range"
-msgstr ""
+msgstr "סוף תחום DHCP"
 
 #: ../../any.pm:1
 #, c-format
@@ -18082,7 +18206,7 @@ msgstr "יוצר תקליטון הפעלת מערכת..."
 #: ../../standalone/net_monitor:1
 #, c-format
 msgid "Wait please, testing your connection..."
-msgstr "נא להמתין, בודק את החיבור שלך..."
+msgstr "נא להמתין, בזמן בדיקת החיבור שלך..."
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -18100,11 +18224,13 @@ msgid ""
 "NFS is a popular protocol for file sharing across TCP/IP\n"
 "networks. This service provides NFS file locking functionality."
 msgstr ""
+"פרוטוקול NFS, מיועד לשיתוף קבצים על גבי רשתות TCP/IP.\n"
+"רת זה מספק את פעולת הנעילה של קבצים על NFS."
 
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "DHCP Client"
-msgstr ""
+msgstr "לקוח  DHCP"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18131,7 +18257,7 @@ msgstr ""
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Irish"
-msgstr ""
+msgstr "אירי"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18141,12 +18267,12 @@ msgstr "ראשון"
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Internet Connection Configuration"
-msgstr ""
+msgstr "תצורת החיבור לאינטרנט"
 
 #: ../../modules/parameters.pm:1
 #, c-format
 msgid "comma separated numbers"
-msgstr ""
+msgstr "מספרים מופרדים על ידי פסיקים"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18160,7 +18286,7 @@ msgstr ""
 #: ../../standalone/drakperm:1
 #, c-format
 msgid "Move selected rule up one level"
-msgstr ""
+msgstr "העבר כלל נבחר שלב אחד למעלה"
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18183,7 +18309,7 @@ msgstr "האם באמת ברצונך להסיר את המדפסת \"%s\"?"
 #: ../../install_interactive.pm:1
 #, c-format
 msgid "I can't find any room for installing"
-msgstr "איני מוצא מקום להתקנה"
+msgstr "לא נמצא מקום להתקנה"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -18232,7 +18358,7 @@ msgstr "ליבריה"
 #, c-format
 msgid ""
 "Could not install the packages needed to set up a scanner with Scannerdrake."
-msgstr ""
+msgstr "לא יכול להתקין את החבליות הבסיסיות עבור תמיכה בסורק עם Scannerdrake."
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -18254,7 +18380,7 @@ msgstr ""
 #: ../../steps.pm:1
 #, c-format
 msgid "Choose your keyboard"
-msgstr "בחירת המקלדת שלך"
+msgstr "נא לבחור את המקלדת שלך"
 
 #: ../../steps.pm:1
 #, c-format
@@ -18264,7 +18390,7 @@ msgstr "פרמוט מחיצות"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Automatic correction of CUPS configuration"
-msgstr ""
+msgstr "תיקון אוטומטי של תצורת CUPS"
 
 #: ../../standalone/harddrake2:1
 #, c-format
@@ -18275,17 +18401,6 @@ msgstr "מריץ \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "אפשר תמיכת רדיו"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18313,7 +18428,7 @@ msgid "Delay before booting the default image"
 msgstr "המתנה לפני אתחול מערכת ברירת המחדל"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Copyright (C) 2001-2002 by MandrakeSoft \n"
@@ -18345,22 +18460,6 @@ msgid ""
 "\t  by Andrew Weeks, Frank Siegert, Thomas Henlich, Sergey Babkin  \n"
 "             Convert ttf font files to afm and pfb fonts\n"
 msgstr ""
-"תוכנה זו היא תוכנה חופשית; באפשרותך לשנותה או להפיצה אותה מחדש תחת רשיון\n"
-"הGPL בגירסא 2 או גירסא מאוחרת יותר.\n"
-"האחריות על שימוש בתוכנה זו חלה על המשתמש בלבד.\n"
-"עליך לקבל עותק של GPL עם תוכנית זו; אם לא כך הדבר, יש לכתוב אל\n"
-"Free software Foundation, \n"
-" Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
-"\n"
-"This program is free software; you can redistribute it and/or modify\n"
-"it under the terms of the GNU General Public License as published by\n"
-"the Free Software Foundation; either version 2, or (at your option)\n"
-"any later version.\n"
-"\n"
-"This program is distributed in the hope that it will be useful,\n"
-"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-"GNU General Public License for more details.\n"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -18691,6 +18790,28 @@ msgstr "שרת NFS, שרת SMB, שרת Proxy, שרת ssh "
 #: ../../share/compssUsers:999
 msgid "Set of tools to read and send mail and news and to browse the Web"
 msgstr "כלים לקריאה וכתיבת דוא\"ל וחדשות  (pine, mutt, tin..) ולגלישה באינטרנט"
+
+#~ msgid ""
+#~ "XawTV isn't installed!\n"
+#~ "\n"
+#~ "\n"
+#~ "If you do have a TV card but DrakX has neither detected it (no bttv nor "
+#~ "saa7134\n"
+#~ "module in \"/etc/modules\") nor installed xawtv, please send the\n"
+#~ "results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
+#~ "with subject \"undetected TV card\".\n"
+#~ "\n"
+#~ "\n"
+#~ "You can install it by typing \"urpmi xawtv\" as root, in a console."
+#~ msgstr ""
+#~ "XawTV איננה מותקנת!\n"
+#~ "אם אכן ברשותך כרטיס טלוויזיה אבל DrakX לא זיהה אותו (המודולים bttv או "
+#~ "saa7134\n"
+#~ " לא מופיעים ב \"/etc/modules\") או שהוא לא התקין את xawtv, נא לשלח את "
+#~ "הפלט של \"lspcidrake -v -f\" אל \"install@mandrakesoft.com\" עם הנושא "
+#~ "\"undetected TV card\". \n"
+#~ "\n"
+#~ "באפשרותך להתקינה ע\"י הקלדה של \"urpmi xawtv\" כמנהל במסוף. "
 
 #~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
 #~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"

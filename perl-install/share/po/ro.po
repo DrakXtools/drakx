@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX 7.1\n"
-"POT-Creation-Date: 2003-09-09 17:07+0200\n"
-"PO-Revision-Date: 2003-09-06 14:56+0200\n"
+"POT-Creation-Date: 2003-09-16 13:45+0200\n"
+"PO-Revision-Date: 2003-09-11 18:11+0200\n"
 "Last-Translator: Ovidiu Constantin <ovidiu.constantin@gmx.net>\n"
 "Language-Team: Romanian Translators for Free Software <rtfs-project@lists."
 "sourceforge.net>\n"
@@ -20,12 +20,12 @@ msgstr ""
 #: ../../install_steps_interactive.pm:1
 #, c-format
 msgid "Scanning partitions to find mount points"
-msgstr ""
+msgstr "Scanez partiţiile pentru a găsi punctele de montare"
 
 #: ../../security/help.pm:1
 #, c-format
 msgid "if set to yes, check additions/removals of suid root files."
-msgstr ""
+msgstr "dacă este activat, verifică adăugarea/eliminarea fişierelor suid root."
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -37,7 +37,7 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "Configuration changed - restart clusternfs/dhcpd?"
-msgstr ""
+msgstr "Configuraţia s-a schimbat - restartez clusternfs/dhcpd?"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -64,7 +64,7 @@ msgstr "Introduceţi discheta :"
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "DrakTermServ"
-msgstr ""
+msgstr "DrakTermServ"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -103,7 +103,7 @@ msgstr "Configurează nume gazdă..."
 #: ../../printer/cups.pm:1
 #, c-format
 msgid "On CUPS server \"%s\""
-msgstr ""
+msgstr "Pe serverul CUPS \"%s\""
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -116,6 +116,8 @@ msgid ""
 "The current security level is %s\n"
 "Select permissions to see/edit"
 msgstr ""
+"Nivelul de securitate curent este %s\n"
+"Selectaţi permisiunile de consultat/editat"
 
 #: ../../diskdrake/hd_gtk.pm:1
 #, c-format
@@ -184,7 +186,7 @@ msgstr "Plăci Ethernet"
 msgid "If set, send the mail report to this email address else send it to root"
 msgstr ""
 
-#: ../../standalone/drakconnect:1
+#: ../../modules/interactive.pm:1 ../../standalone/drakconnect:1
 #, c-format
 msgid "Parameters"
 msgstr "Parametri"
@@ -240,7 +242,7 @@ msgstr "Eroare la scrierea în fişierul %s"
 #: ../../security/l10n.pm:1
 #, c-format
 msgid "Report check result to syslog"
-msgstr ""
+msgstr "Raportează rezultatele verificării in syslog"
 
 #: ../../services.pm:1
 #, c-format
@@ -255,7 +257,7 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use tape to backup"
-msgstr ""
+msgstr "Foloseşte bandă pentru copii de siguranţă"
 
 #: ../../install_steps_gtk.pm:1
 #, c-format
@@ -303,7 +305,7 @@ msgstr "da"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "("
-msgstr ""
+msgstr "("
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -317,7 +319,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1 ../../standalone/scannerdrake:1
 #, c-format
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: ../../lang.pm:1
 #, c-format
@@ -342,7 +344,7 @@ msgstr "Editare gazdă selectată"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "No CD device defined!"
-msgstr ""
+msgstr "Nu a fost definit nici un dispozitiv CD!"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -367,7 +369,7 @@ msgstr "256 kB"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Don't rewind tape after backup"
-msgstr ""
+msgstr "Nu derula înapoi banda după efectuarea copiei"
 
 #: ../../any.pm:1
 #, c-format
@@ -380,6 +382,8 @@ msgid ""
 "[--manual] [--device=dev] [--update-sane=sane_source_dir] [--update-"
 "usbtable] [--dynamic=dev]"
 msgstr ""
+"[--manual] [--device=disp] [--update-sane=dir_sursă_sane] [--update-"
+"usbtable] [--dynamic=disp]"
 
 #: ../../harddrake/data.pm:1 ../../standalone/drakbackup:1
 #, c-format
@@ -402,6 +406,8 @@ msgid ""
 "With this option you will be able to restore any version\n"
 " of your /etc directory."
 msgstr ""
+"Cu această opţiune veţi putea să restauraţi orice versiune\n"
+" a directorului /etc."
 
 #: ../../standalone/drakedm:1
 #, c-format
@@ -459,6 +465,8 @@ msgid ""
 "To print a file from the command line (terminal window) use the command \"%s "
 "<file>\".\n"
 msgstr ""
+"Pentru a imprima un fişier de la linia de comandă (fereastră terminal) "
+"folosiţi comanda \"%s <fişier>\".\n"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -485,10 +493,16 @@ msgstr "Magistrală"
 msgid "Iraq"
 msgstr "Irak"
 
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "connecting to %s ..."
+msgstr "Rulează \"%s\" ..."
+
 #: ../../standalone/drakgw:1
 #, c-format
 msgid "Potential LAN address conflict found in current config of %s!\n"
 msgstr ""
+"Am găsit un potenţial conflict de adrese LAN în configuraţia curentă a %s!\n"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -520,9 +534,19 @@ msgid "Search installed fonts"
 msgstr "Caută fonturi instalate"
 
 #: ../../standalone/drakboot:1
-#, fuzzy, c-format
+#, c-format
 msgid "Default desktop"
-msgstr "Standard"
+msgstr "Mediu implicit"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click on the button report.\n"
+"This will open  a web browser window on %s\n"
+" where you'll find a form to fill in.  The information displayed above will "
+"be \n"
+"transferred to that server."
+msgstr ""
 
 #: ../../lang.pm:1
 #, c-format
@@ -546,6 +570,8 @@ msgid ""
 "List of data corrupted:\n"
 "\n"
 msgstr ""
+"Listă de date corupte:\n"
+"\n"
 
 #: ../../fs.pm:1
 #, c-format
@@ -560,6 +586,8 @@ msgid ""
 "Your modem isn't supported by the system.\n"
 "Take a look at http://www.linmodems.org"
 msgstr ""
+"Modemul dumneavoastră nu este suportat de sistem.\n"
+"Consultaţi http://www.linmodems.org"
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -601,7 +629,7 @@ msgstr ""
 #: ../../printer/main.pm:1
 #, c-format
 msgid " on Novell server \"%s\", printer \"%s\""
-msgstr ""
+msgstr " pe serverul Novell \"%s\", imprimanta \"%s\""
 
 #: ../../standalone/printerdrake:1
 #, c-format
@@ -678,7 +706,7 @@ msgstr "/Auto-detecţie unităţi _JAZZ"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Store the password for this system in drakbackup configuration."
-msgstr ""
+msgstr "Păstrează parola pentru acest sistem în configuraţia drakbackup."
 
 #: ../../install_messages.pm:1
 #, c-format
@@ -837,7 +865,7 @@ msgstr ""
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Do not print any test page"
-msgstr ""
+msgstr "Nu tipări nici o pagină de test"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -847,7 +875,7 @@ msgstr ""
 #: ../../standalone/drakTermServ:1
 #, c-format
 msgid "%s already in use\n"
-msgstr ""
+msgstr "%s este deja folosit\n"
 
 #: ../../any.pm:1
 #, c-format
@@ -892,7 +920,7 @@ msgstr "Afişează numai pentru ziua selectată"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "\tLimit disk usage to %s MB\n"
-msgstr ""
+msgstr "\tLimitează utilizarea discului la %s MB\n"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -977,6 +1005,36 @@ msgstr "<control>S"
 msgid ""
 "Protocol for the rest of the world\n"
 "No D-Channel (leased lines)"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - /etc/xinetd.d/tftp:\n"
+"        \tdrakTermServ will configure this file to work in conjunction with "
+"the images created\n"
+"        \tby mkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
+"the boot image to \n"
+"        \teach diskless client.\n"
+"\n"
+"        \tA typical tftp configuration file looks like:\n"
+"        \t\t\n"
+"        \tservice tftp\n"
+"\t\t\t{\n"
+"                        disable         = no\n"
+"                        socket_type  = dgram\n"
+"                        protocol        = udp\n"
+"                        wait             = yes\n"
+"                        user             = root\n"
+"                        server          = /usr/sbin/in.tftpd\n"
+"                        server_args  = -s /var/lib/tftpboot\n"
+"        \t}\n"
+"        \t\t\n"
+"        \tThe changes here from the default installation are changing the "
+"disable flag to\n"
+"        \t'no' and changing the directory path to /var/lib/tftpboot, where "
+"mkinitrd-net\n"
+"        \tputs its images."
 msgstr ""
 
 #: ../../printer/printerdrake.pm:1
@@ -1581,15 +1639,15 @@ msgstr ""
 msgid "Use the %c and %c keys for selecting which entry is highlighted."
 msgstr "Folositi tastele %c si %c pentru selectarea intrarii puse in evidenta."
 
-#: ../../standalone/drakperm:1
-#, c-format
-msgid "Enable \"%s\" to execute the file"
-msgstr ""
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Generic 2 Button Mouse"
 msgstr "Maus comun cu 2 butoane"
+
+#: ../../standalone/drakperm:1
+#, c-format
+msgid "Enable \"%s\" to execute the file"
+msgstr ""
 
 #: ../../lvm.pm:1
 #, c-format
@@ -2105,7 +2163,7 @@ msgid "Firewire controllers"
 msgstr ""
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "After you have configured the general bootloader parameters, the list of\n"
 "boot options that will be available at boot time will be displayed.\n"
@@ -2123,21 +2181,18 @@ msgid ""
 "operating systems!"
 msgstr ""
 "După ce aţi configurat parametrii generali pt. gestionarul de demarare,\n"
-"va fi afişată lista opţiunilor de demaraj ce va fi disponibilă la momentul\n"
-"demarării.\n"
+"va fi afişată lista opţiunilor ce va fi disponibilă la momentul demarării.\n"
 "\n"
-"Dacă există alte sisteme de operare instalate deja,\n"
-"ele vor fi adăugate automat la meniul de demarare.\n"
-"Puteţi ajusta opţiunile existente selectând o intrare şi clic pe \n"
-"\"Modificare\" sau \"Ştergere\". \"OK\" validează schimbările.\n"
+"Dacă există alte sisteme de operare instalate pe maşină, vor fi\n"
+"adăugate automat la meniul de demarare. Puteţi ajusta opţiunile\n"
+"existente apăsând pe \"%s\" pentru a crea o nouă intrare; selectând\n"
+"o intrare şi făcând clic pe \"%s\" sau \"%s\" pentru a o modifica sau a o\n"
+"\"elimina. \"%s\" validează schimbările.\n"
 "\n"
-"\n"
-"Puteţi de asemenea să interziceţi accesul la aceste sisteme a utilizatorilor "
-"neautorizaţi,\n"
-"caz în care ar trebui să ştergeţi intrările acestor sisteme din meniul de "
-"demarare.\n"
-"În acest ultim caz însă, veţi avea nevoie de un floppy de demarare pentru\n"
-"a putea le demara!"
+"Puteţi de asemenea să interziceţi accesul la aceste sisteme de operare\n"
+"oricui merge la consolă şi reporneşte maşina. Puteţi şterge intrările\n"
+"corespunzătoare acestor sisteme din meniul de demarare, dar veţi avea\n"
+"nevoie de o dischetă de demarare pentru a putea să le porniţi apoi!"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -2625,6 +2680,23 @@ msgstr "Acesta este un pachet indispensabil şi nu poate fi deselectat"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
+msgid ""
+"        - Create etherboot floppies/CDs:\n"
+"        \tThe diskless client machines need either ROM images on the NIC, or "
+"a boot floppy\n"
+"        \tor CD to initate the boot sequence.  drakTermServ will help "
+"generate these\n"
+"        \timages, based on the NIC in the client machine.\n"
+"        \t\t\n"
+"        \tA basic example of creating a boot floppy for a 3Com 3c509 "
+"manually:\n"
+"        \t\t\n"
+"        \tcat /usr/lib/etherboot/boot1a.bin \\\n"
+"        \t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
 msgid "Etherboot ISO image is %s"
 msgstr "Imaginea ISO pt. EtherBoot este %s"
 
@@ -2817,9 +2889,9 @@ msgid "All primary partitions are used"
 msgstr "Toate partiţiile principale sunt alocate"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "LPD server \"%s\", printer \"%s\""
-msgstr "Imprimanta \"%s\" pe serverul \"%s\""
+msgstr "Server LPD \"%s\", imprimantă \"%s\""
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -3010,22 +3082,6 @@ msgstr "Ascunde fişiere"
 #, c-format
 msgid "Auto-detect printers connected to this machine"
 msgstr "Autodetectare imprimante conectate direct la această maşină"
-
-#: ../../standalone/drakxtv:1
-#, c-format
-msgid ""
-"XawTV isn't installed!\n"
-"\n"
-"\n"
-"If you do have a TV card but DrakX has neither detected it (no bttv nor "
-"saa7134\n"
-"module in \"/etc/modules\") nor installed xawtv, please send the\n"
-"results of \"lspcidrake -v -f\" to \"install\\@mandrakesoft.com\"\n"
-"with subject \"undetected TV card\".\n"
-"\n"
-"\n"
-"You can install it by typing \"urpmi xawtv\" as root, in a console."
-msgstr ""
 
 #: ../../any.pm:1
 #, c-format
@@ -3541,6 +3597,15 @@ msgstr ""
 msgid "Restore From Tape"
 msgstr "Restaurează de pe bandă"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid ""
+"To submit a bug report, click the report button, which will open your "
+"default browser\n"
+"to Anthill where you will be able to upload the above information as a bug "
+"report."
+msgstr ""
+
 #: ../../network/netconnect.pm:1
 #, c-format
 msgid "Choose the profile to configure"
@@ -3677,7 +3742,7 @@ msgstr ""
 msgid "Need hostname, username and password!"
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Insert floppy"
 msgstr "Introduceţi discheta"
@@ -3800,9 +3865,9 @@ msgid "Start: sector %s\n"
 msgstr "Start: sector %s\n"
 
 #: ../../standalone/drakconnect:1
-#, fuzzy, c-format
+#, c-format
 msgid "No Mask"
-msgstr "Pachet defectuos"
+msgstr "Fără mască"
 
 #: ../../standalone/drakgw:1
 #, c-format
@@ -3814,9 +3879,16 @@ msgstr "Interfaţa de reţea este deja configurată"
 msgid "Couldn't access the floppy!"
 msgstr "Nu pot accesa discheta!"
 
-#: ../../standalone/drakbug:1
+#: ../../install_messages.pm:1
 #, c-format
-msgid "connecting to Bugzilla wizard ..."
+msgid ""
+"Warning: Free Software may not necessarily be patent free, and some Free\n"
+"Software included may be covered by patents in your country. For example, "
+"the\n"
+"MP3 decoders included may require a licence for further usage (see\n"
+"http://www.mp3licensing.com for more details). If you are unsure if a "
+"patent\n"
+"may be applicable to you, check your local laws."
 msgstr ""
 
 #: ../../network/drakfirewall.pm:1
@@ -3994,6 +4066,11 @@ msgstr "Acceptă"
 msgid "Description"
 msgstr "Descriere"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Please enter summary text."
+msgstr ""
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "Error opening %s for writing: %s"
@@ -4120,10 +4197,10 @@ msgid "Loading printer configuration... Please wait"
 msgstr "Încarc configuraţia imprimantei... Vă rog aşteptaţi"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "early pentiums were buggy and freezed when decoding the F00F bytecode"
 msgstr ""
-"Primele Pentium-uri aveau erori şi se blocau la decodarea secvenţei F0 0F"
+"primele Pentium-uri aveau erori şi se blocau la decodarea secvenţei F00F"
 
 #: ../../lang.pm:1
 #, c-format
@@ -4831,7 +4908,7 @@ msgstr ""
 msgid "Right Control key"
 msgstr "Tasta Control dreapta"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid ""
 "Insert a FAT formatted floppy in drive %s with %s in root directory and "
@@ -5555,7 +5632,7 @@ msgstr ""
 "De pe ce unitate de disc demaraţi?"
 
 #: ../../install_interactive.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING!\n"
 "\n"
@@ -5570,11 +5647,14 @@ msgid ""
 msgstr ""
 "AVERTISMENT!\n"
 "\n"
-"DrakX va redimensiona acum partiţia Windows. Aveţi grijă: această operaţie\n"
-"este periculoasă. Dacă nu aţi făcut-o deja, ar trebui mai întâi să părăsiţi\n"
-"instalarea şi să executaţi scandisk în Windows (şi defrag opţional), apoi\n"
+"DrakX va redimensiona acum partiţia Windows. Aveţi grijă: această\n"
+"operaţie este periculoasă. Dacă nu aţi făcut-o deja, trebuie să părăsiţi\n"
+"instalarea, să rulaţi \"chkdsk c:\" de la linia de comandă sub Windows\n"
+"(atenţie, rularea programului grafic \"scandisk\" nu ajunge, asiguraţi-vă\n"
+"că folosiţi \"chkdsk\" de la linia de comandă!), opţional rulaţi defrag, "
+"apoi\n"
 "reîncepeţi instalarea. Ar trebui de asemenea să faceţi o copie a datelor\n"
-"dumneavoastră. Dacă sunteţi sigur, apăsaţi Ok."
+"dumneavoastră. Când sunteţi sigur, apăsaţi Ok."
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -5817,6 +5897,22 @@ msgstr ""
 #, c-format
 msgid "busmouse"
 msgstr "Busmouse"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Create Etherboot Enabled Boot Images:\n"
+"        \tTo boot a kernel via etherboot, a special kernel/initrd image must "
+"be created.\n"
+"        \tmkinitrd-net does much of this work and drakTermServ is just a "
+"graphical \n"
+"        \tinterface to help manage/customize these images. To create the "
+"file \n"
+"        \t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
+"include in \n"
+"        \tdhcpd.conf, you should create the etherboot images for at least "
+"one full kernel."
+msgstr ""
 
 #: ../../network/tools.pm:1 ../../standalone/drakconnect:1
 #, c-format
@@ -6155,24 +6251,6 @@ msgstr ""
 #, c-format
 msgid "Floppy"
 msgstr "Unităţi de dischete"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/exports:\n"
-"        \t\tClusternfs allows export of the root filesystem to diskless "
-"clients. drakTermServ\n"
-"        \t\tsets up the correct entry to allow anonymous access to the root "
-"filesystem from\n"
-"        \t\tdiskless clients.\n"
-"\n"
-"        \t\tA typical exports entry for clusternfs is:\n"
-"        \t\t\n"
-"        \t\t/                  (ro,all_squash)\n"
-"        \t\t/home              SUBNET/MASK(rw,root_squash)\n"
-"\t\t\t\n"
-"\t\t\tWith SUBNET/MASK being defined for your network."
-msgstr ""
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -6676,9 +6754,9 @@ msgid "Yaboot"
 msgstr "Yaboot"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech CC Series with Wheel emulation"
-msgstr "Logitech CC Series"
+msgstr "Seria Logitech CC cu rotiţă emulată"
 
 #: ../../standalone/drakboot:1
 #, c-format
@@ -6709,6 +6787,11 @@ msgstr "Partajare conexiune la Internet"
 #, c-format
 msgid "Choose file"
 msgstr "Selectare fişier"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Summary: "
+msgstr "Sumar"
 
 #: ../../network/shorewall.pm:1
 #, c-format
@@ -6783,6 +6866,17 @@ msgstr "Teritoriile franceze de sud"
 #, c-format
 msgid "the vendor name of the processor"
 msgstr "nume dat de vânzător pt. procesor"
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain %s:\n"
+"        \tFor users to be able to log into the system from a diskless "
+"client, their entry in\n"
+"        \t/etc/shadow needs to be duplicated in %s. drakTermServ\n"
+"        \thelps in this respect by adding or removing system users from this "
+"file."
+msgstr ""
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -7081,6 +7175,11 @@ msgstr "Restaurare utilizatori"
 #, c-format
 msgid "Encryption key for %s"
 msgstr "Cheia de criptare pentru %s"
+
+#: ../../install_steps_interactive.pm:1
+#, fuzzy, c-format
+msgid "Do you want to recover your system?"
+msgstr "Vreţi să folosiţi aboot?"
 
 #: ../../services.pm:1
 #, c-format
@@ -7505,6 +7604,11 @@ msgstr "/_Configurează CUPS"
 msgid ", "
 msgstr ", "
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit lspci"
+msgstr ""
+
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Remove selected host/network"
@@ -7674,7 +7778,7 @@ msgid "Install"
 msgstr "Instalare"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Click on \"%s\" if you want to delete all data and partitions present on\n"
 "this hard drive. Be careful, after clicking on \"%s\", you will not be able\n"
@@ -7684,14 +7788,15 @@ msgid ""
 "Click on \"%s\" to stop this operation without losing any data and\n"
 "partitions present on this hard drive."
 msgstr ""
-"Clic pe \"Următor-->\" dacă doriţi ştergerea tuturor datelor şi partiţiilor "
+"Clic pe \"%s\" dacă doriţi ştergerea tuturor datelor şi partiţiilor "
 "existente\n"
-"pe acest disc fix. ATENŢIE! dupa acel clic nu veţi putea recupera nici un "
-"fel de date\n"
-"sau partiţii de pe discul fix, inclusiv date Windows.\n"
+"pe acest disc fix. Fiţi atent(ă), după ce faceţi clic pe \"%s\", nu veţi "
+"putea\n"
+"recupera nici un fel de date sau partiţii de pe discul fix, inclusiv orice "
+"dată\n"
+"Windows.\n"
 "\n"
-"\n"
-"Clic pe \"<--Anterior\" pentru a opri această operaţie fără a pierde date\n"
+"Clic pe \"%s\" pentru a opri această operaţie fără a pierde date\n"
 "şi partiţii prezente pe discul fix."
 
 #: ../../steps.pm:1
@@ -7727,6 +7832,11 @@ msgid ""
 "I am about to setup your Local Area Network with that adapter."
 msgstr ""
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Submit cpuinfo"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Minimal install"
@@ -7736,6 +7846,11 @@ msgstr "Instalare minimă"
 #, c-format
 msgid "Ethiopia"
 msgstr "Etiopia"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "YES"
+msgstr ""
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -8019,13 +8134,6 @@ msgstr "Tip instalare"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "Printer \"%s\" on SMB/Windows server \"%s\""
-msgstr ""
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid ""
-"\n"
-"- Daemon (%s) include:\n"
 msgstr ""
 
 #: ../../modules/parameters.pm:1
@@ -8335,6 +8443,11 @@ msgstr "Frecvenţa orizontală pentru monitor: %s\n"
 #, c-format
 msgid "Path"
 msgstr "Cale"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "NOT FOUND"
+msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -8885,18 +8998,6 @@ msgstr "important"
 msgid "Total Progress"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Maintain /etc/shadow\\$\\$CLIENT\\$\\$:\n"
-"        \t\tFor users to be able to log into the system from a diskless "
-"client, their entry in\n"
-"        \t\t/etc/shadow needs to be duplicated in /etc/shadow\\$\\$CLIENTS\\$"
-"\\$. drakTermServ helps\n"
-"        \t\tin this respect by adding or removing system users from this "
-"file."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -9009,6 +9110,26 @@ msgstr "Configurarea s-a terminat, doriţi să aplicaţi setările ?"
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Use Incremental/Differential Backups  (do not replace old backups)"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/dhcpd.conf:\n"
+"        \tTo net boot clients, each client needs a dhcpd.conf entry, "
+"assigning an IP \n"
+"        \taddress and net boot images to the machine. drakTermServ helps "
+"create/remove \n"
+"        \tthese entries.\n"
+"\t\t\t\n"
+"        \t(PCI cards may omit the image - etherboot will request the correct "
+"image. \n"
+"\t\t\tYou should also consider that when etherboot looks for the images, it "
+"expects \n"
+"\t\t\tnames like boot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
+"\t\t\t \n"
+"        \tA typical dhcpd.conf stanza to support a diskless client looks "
+"like:"
 msgstr ""
 
 #: ../../harddrake/sound.pm:1
@@ -9124,6 +9245,13 @@ msgid ""
 "in number of characters"
 msgstr ""
 
+#: ../../fsedit.pm:1
+#, c-format
+msgid ""
+"You may not be able to install lilo (since lilo doesn't handle a LV on "
+"multiple PVs)"
+msgstr ""
+
 #: ../../install_steps_gtk.pm:1
 #, c-format
 msgid "Updating package selection"
@@ -9187,9 +9315,9 @@ msgid "32 MB"
 msgstr "32 MB"
 
 #: ../../standalone/drakTermServ:1
-#, fuzzy, c-format
+#, c-format
 msgid "type: thin"
-msgstr "Tip: %s "
+msgstr "tip: subţire"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -9386,6 +9514,16 @@ msgstr "Nume gazdă necesar"
 msgid "Unselect fonts installed"
 msgstr "Deselectează fonturile instalate"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Wheel"
+msgstr "Rotiţă"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Submit kernel version"
+msgstr "Versiune kernel"
+
 #: ../../any.pm:1 ../../help.pm:1 ../../install_steps_gtk.pm:1
 #: ../../install_steps_interactive.pm:1 ../../interactive.pm:1
 #: ../../ugtk2.pm:1 ../../Xconfig/resolution_and_depth.pm:1
@@ -9406,11 +9544,6 @@ msgstr "Renunţă"
 #, c-format
 msgid "Searching for configured scanners ..."
 msgstr "Caut scannere configurate ..."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Wheel"
-msgstr "Rotiţă"
 
 #: ../../harddrake/data.pm:1
 #, c-format
@@ -9479,6 +9612,11 @@ msgstr "Standard"
 #, c-format
 msgid "Button 2 Emulation"
 msgstr "Emulare buton 2"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Please enter a package name."
+msgstr "Va rog înscrieţi numele utilizatorului"
 
 #: ../../security/l10n.pm:1
 #, c-format
@@ -9558,6 +9696,11 @@ msgid ""
 "\tStew Benedict sbenedict\\@mandrakesoft.com\n"
 "\n"
 msgstr ""
+
+#: ../../install_messages.pm:1
+#, c-format
+msgid "http://www.mandrakelinux.com/en/92errata.php3"
+msgstr "http://www.mandrakelinux.com/en/92errata.php3"
 
 #: ../../lang.pm:1
 #, c-format
@@ -9707,6 +9850,45 @@ msgstr "Cheie criptare pt. sistemul de fişiere"
 #: ../../keyboard.pm:1
 #, c-format
 msgid "Gujarati"
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        While you can use a pool of IP addresses, rather than setup a "
+"specific entry for\n"
+"        a client machine, using a fixed address scheme facilitates using the "
+"functionality\n"
+"        of client-specific configuration files that ClusterNFS provides.\n"
+"\t\t\t\n"
+"        Note: The '#type' entry is only used by drakTermServ.  Clients can "
+"either be 'thin'\n"
+"        or 'fat'.  Thin clients run most software on the server via xdmcp, "
+"while fat clients run \n"
+"        most software on the client machine. A special inittab, %s is\n"
+"        written for thin clients. System config files xdm-config, kdmrc, and "
+"gdm.conf are \n"
+"        modified if thin clients are used, to enable xdmcp. Since there are "
+"security issues in \n"
+"        using xdmcp, hosts.deny and hosts.allow are modified to limit access "
+"to the local\n"
+"        subnet.\n"
+"\t\t\t\n"
+"        Note: The '#hdw_config' entry is also only used by drakTermServ.  "
+"Clients can either \n"
+"        be 'true' or 'false'.  'true' enables root login at the client "
+"machine and allows local \n"
+"        hardware configuration of sound, mouse, and X, using the 'drak' "
+"tools. This is enabled \n"
+"        by creating separate config files associated with the client's IP "
+"address and creating \n"
+"        read/write mount points to allow the client to alter the file. Once "
+"you are satisfied \n"
+"        with the configuration, you can remove root login privileges from "
+"the client.\n"
+"\t\t\t\n"
+"        Note: You must stop/start the server after adding or changing "
+"clients."
 msgstr ""
 
 #: ../../interactive/stdio.pm:1
@@ -9982,45 +10164,6 @@ msgid ""
 "http://www.linux-mandrake.com/en/hardware.php3"
 msgstr ""
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"\t\t\tWhile you can use a pool of IP addresses, rather than setup a specific "
-"entry for\n"
-"\t\t\ta client machine, using a fixed address scheme facilitates using the "
-"functionality\n"
-"\t\t\tof client-specific configuration files that ClusterNFS provides.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#type\" entry is only used by drakTermServ.  Clients can "
-"either be 'thin'\n"
-"\t\t\tor 'fat'.  Thin clients run most software on the server via xdmcp, "
-"while fat clients run \n"
-"\t\t\tmost software on the client machine. A special inittab, /etc/inittab\\$"
-"\\$IP=client_ip\\$\\$ is\n"
-"\t\t\twritten for thin clients. System config files xdm-config, kdmrc, and "
-"gdm.conf are \n"
-"\t\t\tmodified if thin clients are used, to enable xdmcp. Since there are "
-"security issues in \n"
-"\t\t\tusing xdmcp, hosts.deny and hosts.allow are modified to limit access "
-"to the local\n"
-"\t\t\tsubnet.\n"
-"\t\t\t\n"
-"\t\t\tNote: The \"#hdw_config\" entry is also only used by drakTermServ.  "
-"Clients can either \n"
-"\t\t\tbe 'true' or 'false'.  'true' enables root login at the client machine "
-"and allows local \n"
-"\t\t\thardware configuration of sound, mouse, and X, using the 'drak' tools. "
-"This is enabled \n"
-"\t\t\tby creating separate config files associated with the client's IP "
-"address and creating \n"
-"\t\t\tread/write mount points to allow the client to alter the file. Once "
-"you are satisfied \n"
-"\t\t\twith the configuration, you can remove root login privileges from the "
-"client.\n"
-"\t\t\t\n"
-"\t\t\tNote: You must stop/start the server after adding or changing clients."
-msgstr ""
-
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "Configure Local Area Network..."
@@ -10248,9 +10391,9 @@ msgid "Backup your System files. (/etc directory)"
 msgstr ""
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set the user umask."
-msgstr "Utilizatori"
+msgstr "Setaţi umask utilizator."
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -10347,9 +10490,9 @@ msgid "Slovenia"
 msgstr "Slovenia"
 
 #: ../../standalone/mousedrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Mouse test"
-msgstr "Mouse Systems"
+msgstr "Test maus"
 
 #: ../../standalone/drakperm:1
 #, c-format
@@ -10399,23 +10542,11 @@ msgstr "/dev/hda"
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: ../../standalone/drakTermServ:1
+#: ../../standalone/drakbug:1
 #, c-format
 msgid ""
-"        - Maintain /etc/dhcpd.conf:\n"
-"        \t\tTo net boot clients, each client needs a dhcpd.conf entry, "
-"assigning an IP address\n"
-"        \t\tand net boot images to the machine. drakTermServ helps create/"
-"remove these entries.\n"
-"\t\t\t\n"
-"        \t\t(PCI cards may omit the image - etherboot will request the "
-"correct image. You should\n"
-"        \t\talso consider that when etherboot looks for the images, it "
-"expects names like\n"
-"        \t\tboot-3c59x.nbi, rather than boot-3c59x.2.4.19-16mdk.nbi).\n"
-"\t\t\t \n"
-"        \t\tA typical dhcpd.conf stanza to support a diskless client looks "
-"like:"
+"Application Name\n"
+"or Full Path:"
 msgstr ""
 
 #: ../../services.pm:1
@@ -10564,9 +10695,9 @@ msgstr ""
 "ACEST SUPORT ESTE EXPERIMENTAL ŞI POATE BLOCA SISTEMUL DVS."
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Shell timeout"
-msgstr "Timp expirat demarare nucleu"
+msgstr "Expirare shell"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -10686,9 +10817,9 @@ msgid "Boot ISO"
 msgstr "CD de demaraj"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Firmware needed"
-msgstr "Dacă este necesar"
+msgstr "Este necesar firmware-ul"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10793,19 +10924,6 @@ msgstr "Probleme la instalarea pachetului  %s"
 msgid "You will receive an alert if the load is higher than this value"
 msgstr "Veţi fi notificaţi dacă încărcarea este mai mare decăt această valoare"
 
-#: ../../standalone/drakbug:1
-#, c-format
-msgid ""
-"\n"
-"\n"
-"To submit a bug report, click on the button report.\n"
-"This will open  a web browser window  on https://drakbug.mandrakesoft.com\n"
-" where you'll find a form to fill in.The information displayed above will "
-"be \n"
-"transferred to that server\n"
-"\n"
-msgstr ""
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Add a scanner manually"
@@ -10827,11 +10945,9 @@ msgid "Yes, I want autologin with this (user, desktop)"
 msgstr "Da, vreau autologare cu acest (utilizator, desktop)"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Restore Selected"
-msgstr ""
-"Restaurează fişierele\n"
-"selectate"
+msgstr "Restaurează selecţia"
 
 #: ../../standalone/drakfont:1
 #, c-format
@@ -10912,7 +11028,7 @@ msgstr "Administrator de securitate:"
 msgid "Set the shell timeout. A value of zero means no timeout."
 msgstr ""
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy succeeded"
 msgstr ""
@@ -11016,9 +11132,9 @@ msgid ""
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Size: "
-msgstr "Mărimea: %s"
+msgstr "Mărime: "
 
 #: ../../diskdrake/interactive.pm:1
 #, c-format
@@ -11115,9 +11231,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "generation of the cpu (eg: 8 for PentiumIII, ...)"
-msgstr "Generaţie procesor (ex. 8 pt. Pentium III,...)"
+msgstr "generaţie procesor (ex. 8 pt. Pentium III,...)"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11235,11 +11351,6 @@ msgid ""
 "do you really want to overwrite its configuration?"
 msgstr ""
 
-#: ../../install_steps_interactive.pm:1
-#, c-format
-msgid "No partition available"
-msgstr "nici o partiţie disponibilă"
-
 #: ../../standalone/scannerdrake:1
 #, c-format
 msgid "Use the scanners on hosts: "
@@ -11250,10 +11361,15 @@ msgstr "Folosiţi scannerele de pe gazdele: "
 msgid "Unselected All"
 msgstr "Toate cele deselectate"
 
+#: ../../install_steps_interactive.pm:1 ../../network/tools.pm:1
+#, c-format
+msgid "No partition available"
+msgstr "nici o partiţie disponibilă"
+
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Printer Management \n"
-msgstr "Administrare utilizatori \n"
+msgstr "Administrare imprimare \n"
 
 #: ../../standalone/logdrake:1
 #, c-format
@@ -11286,11 +11402,11 @@ msgid "Build Whole Kernel -->"
 msgstr "Construieşte tot nucleul -->"
 
 #: ../../network/netconnect.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "modem"
-msgstr "Modem-uri"
+msgstr "modem"
 
-#: ../../install_steps.pm:1
+#: ../../lang.pm:1
 #, c-format
 msgid "Welcome to %s"
 msgstr "Bine aţi venit la %s"
@@ -11363,6 +11479,13 @@ msgstr ""
 #: ../../standalone/drakbackup:1
 #, c-format
 msgid "Not the correct CD label. Disk is labelled %s."
+msgstr ""
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid ""
+"\n"
+"- Daemon, %s via:\n"
 msgstr ""
 
 #: ../../standalone/drakgw:1
@@ -11456,9 +11579,9 @@ msgid "Automatic time synchronization (using NTP)"
 msgstr "Sincronizare automată de timp (folosind NTP)"
 
 #: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use my Windows partition"
-msgstr "Redimensionez partiţia Windows"
+msgstr "Foloseşte partiţia Windows"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -11492,26 +11615,6 @@ msgstr "Alegeţi ţara"
 msgid ""
 "\n"
 "- System Files:\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client system configuration files:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"\t\t\t\tclients can customize files such as /etc/modules.conf, /etc/"
-"sysconfig/mouse, \n"
-"        \t\t/etc/sysconfig/keyboard on a per-client basis.\n"
-"\n"
-"        Note: Enabling local client hardware configuration does enable root "
-"login to the terminal \n"
-"        server on each client machine that has this feature enabled.  Local "
-"configuration can be turned\n"
-"        back off, retaining the configuration files, once the client machine "
-"is configured."
 msgstr ""
 
 #: ../../standalone/drakbug:1
@@ -11591,9 +11694,9 @@ msgid "Set this printer as the default"
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Verify that %s is the correct path"
-msgstr "Configuraţia este corectă?"
+msgstr "Verificaţi dacă %s este calea corectă"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -11668,9 +11771,9 @@ msgid "<- Previous"
 msgstr "<- Precedentul"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Transfer Now"
-msgstr "Transferă"
+msgstr "Transferă acum"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -11717,9 +11820,9 @@ msgid "Saint Helena"
 msgstr "Saint Helena"
 
 #: ../../printer/main.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Parallel port #%s"
-msgstr " pe portul paralel #%s"
+msgstr "Portul paralel #%s"
 
 #: ../../help.pm:1 ../../install_steps_interactive.pm:1
 #, c-format
@@ -11796,9 +11899,9 @@ msgid "DNS server address should be in format 1.2.3.4"
 msgstr "Adresa serverului DNS ar trebui să fie în formatul 1.2.3.4"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Left Control key"
-msgstr "Telecomandă"
+msgstr "Tasta Control stânga"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12138,9 +12241,9 @@ msgid "January"
 msgstr "Ianuarie"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Password history length"
-msgstr "Aceasta parolă e prea simplă"
+msgstr "Lungime istoric parolă"
 
 #: ../../network/netconnect.pm:1
 #, c-format
@@ -12179,9 +12282,9 @@ msgid "%s on %s"
 msgstr "%s pe %s"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid remote root login."
-msgstr "Toate maşinile de la distanţă"
+msgstr "Permite/interzice logarea de la distanţă ca root."
 
 #: ../../help.pm:1
 #, c-format
@@ -12206,14 +12309,14 @@ msgid "Which is your timezone?"
 msgstr "Care este zona dvs. de timp?"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create log file!"
-msgstr "Nu se poate creea catalogul!"
+msgstr "Nu pot crea fişierul raport!"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "Use .backupignore files"
-msgstr "Backup defectuos"
+msgstr "Foloseşte fişiere .backupignore"
 
 #: ../../lang.pm:1
 #, c-format
@@ -12281,7 +12384,7 @@ msgid "Hostname: "
 msgstr "Nume gazdă:"
 
 #: ../../standalone/drakperm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Add a rule"
 msgstr "Adaugă o regulă"
 
@@ -12300,10 +12403,10 @@ msgstr "Clădiţi viitorul Linux!"
 msgid "Local Printer"
 msgstr "Imprimantă locală"
 
-#: ../../network/adsl.pm:1
-#, fuzzy, c-format
+#: ../../network/tools.pm:1
+#, c-format
 msgid "Floppy access error, unable to mount device %s"
-msgstr "Unde doriţi să montaţi perifericul %s?"
+msgstr "Eroare la accesarea dischetei, nu pot monta dispozitivul %s"
 
 #: ../../standalone.pm:1
 #, c-format
@@ -12406,36 +12509,6 @@ msgstr "Dispozitiv mouse: %s\n"
 msgid "Reselect correct fonts"
 msgstr "Reselectaţi fonturile corecte"
 
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - /etc/xinetd.d/tftp:\n"
-"        \t\tdrakTermServ will configure this file to work in conjunction "
-"with the images created by\n"
-"        \t\tmkinitrd-net, and the entries in /etc/dhcpd.conf, to serve up "
-"the boot image to each\n"
-"        \t\tdiskless client.\n"
-"\n"
-"        \t\tA typical tftp configuration file looks like:\n"
-"        \t\t\n"
-"        \t\tservice tftp\n"
-"\t\t\t{\n"
-"                        disable         = no\n"
-"                        socket_type  = dgram\n"
-"                        protocol        = udp\n"
-"                        wait             = yes\n"
-"                        user             = root\n"
-"                        server          = /usr/sbin/in.tftpd\n"
-"                        server_args  = -s /var/lib/tftpboot\n"
-"        \t\t}\n"
-"        \t\t\n"
-"        \t\tThe changes here from the default installation are changing the "
-"disable flag to\n"
-"        \t\t'no' and changing the directory path to /var/lib/tftpboot, where "
-"mkinitrd-net\n"
-"        \t\tputs its images."
-msgstr ""
-
 #: ../../help.pm:1
 #, c-format
 msgid ""
@@ -12461,14 +12534,14 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "Write protection"
-msgstr "Auto-detecţie imprimantă"
+msgstr "Protecţie la scriere"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "You've not selected any font"
-msgstr "nu am găsit nici un font.\n"
+msgstr "Nu aţi selectat nici un font"
 
 #: ../../steps.pm:1
 #, c-format
@@ -12602,14 +12675,14 @@ msgid "Uganda"
 msgstr "Uganda"
 
 #: ../../standalone/drakfont:1
-#, fuzzy, c-format
+#, c-format
 msgid "%s fonts conversion"
-msgstr "Conversie fonturi pfm"
+msgstr "conversie fonturi %s"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "the type of bus on which the mouse is connected"
-msgstr "Tip magistrală pe care este conectat mausul"
+msgstr "tipul de magistrală la care este conectat mausul"
 
 #: ../../help.pm:1
 #, c-format
@@ -12691,6 +12764,11 @@ msgstr "Mai"
 msgid "Yaboot mode"
 msgstr "Mod Yaboot"
 
+#: ../../mouse.pm:1
+#, c-format
+msgid "Generic 3 Button Mouse"
+msgstr "Maus comun cu 3 butoane"
+
 #: ../../standalone/drakxtv:1
 #, c-format
 msgid "USA (cable)"
@@ -12705,11 +12783,6 @@ msgstr ""
 "Nu pot relansa LiLo!\n"
 "Lansaţi \"lilo\" ca root în linia de comandă pentru a termina instalarea "
 "temei LiLo."
-
-#: ../../mouse.pm:1
-#, c-format
-msgid "Generic 3 Button Mouse"
-msgstr "Maus comun cu 3 butoane"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -12794,9 +12867,9 @@ msgid "This password is too simple"
 msgstr "Aceasta parolă e prea simplă"
 
 #: ../../security/l10n.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Chkconfig obey msec rules"
-msgstr "Configurare servicii"
+msgstr "Chkconfig respectă regulile msec"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -12812,9 +12885,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "No devices found"
-msgstr "Nu am găsit nici o imagine"
+msgstr "Nu am găsit nici un dispozitiv"
 
 #: ../../install_steps_interactive.pm:1
 #, c-format
@@ -12884,9 +12957,9 @@ msgid "\tBackups use tar and gzip\n"
 msgstr ""
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Set as default"
-msgstr "Implicit"
+msgstr "Stabileşte ca implicit"
 
 #: ../../Xconfig/card.pm:1
 #, c-format
@@ -12894,14 +12967,14 @@ msgid "2 MB"
 msgstr "2 MB"
 
 #: ../../printer/main.pm:1 ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configured on this machine"
-msgstr "(pe această maşină)"
+msgstr "Configurat pentru această maşină"
 
 #: ../../keyboard.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Both Control keys simultaneously"
-msgstr "Ambele taste Shift simultan"
+msgstr "Ambele taste Control simultan"
 
 #: ../../standalone/drakhelp:1
 #, c-format
@@ -12943,9 +13016,9 @@ msgid ""
 msgstr ""
 
 #: ../../standalone/draksec:1
-#, fuzzy, c-format
+#, c-format
 msgid "ignore"
-msgstr "Singapore"
+msgstr "ignoră"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13027,23 +13100,6 @@ msgstr "Ambele taste Shift simultan"
 #, c-format
 msgid ""
 " --id <id_label>       - load the html help page which refers to id_label\n"
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create etherboot floppies/CDs:\n"
-"        \t\tThe diskless client machines need either ROM images on the NIC, "
-"or a boot floppy\n"
-"        \t\tor CD to initate the boot sequence.  drakTermServ will help "
-"generate these images,\n"
-"        \t\tbased on the NIC in the client machine.\n"
-"        \t\t\n"
-"        \t\tA basic example of creating a boot floppy for a 3Com 3c509 "
-"manually:\n"
-"        \t\t\n"
-"        \t\tcat /usr/lib/etherboot/boot1a.bin \\\n"
-"        \t\t\t/usr/lib/etherboot/lzrom/3c509.lzrom > /dev/fd0"
 msgstr ""
 
 #: ../../standalone/scannerdrake:1
@@ -13341,9 +13397,9 @@ msgid "parse all fonts"
 msgstr "parsează toate fonturile"
 
 #: ../../security/help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Allow/Forbid direct root login."
-msgstr "Toate maşinile de la distanţă"
+msgstr "Permite/interzice logarea directă ca root."
 
 #: ../../security/help.pm:1
 #, c-format
@@ -13403,11 +13459,6 @@ msgstr "Nume domeniu"
 msgid "Sharing of local printers"
 msgstr "Partajare imprimante locale"
 
-#: ../../install_messages.pm:1
-#, c-format
-msgid "http://www.mandrakelinux.com/en/92errata.php3"
-msgstr "http://www.mandrakelinux.com/en/92errata.php3"
-
 #: ../../security/help.pm:1
 #, c-format
 msgid "Enable/Disable libsafe if libsafe is found on the system."
@@ -13417,6 +13468,11 @@ msgstr ""
 #, c-format
 msgid "Available printers"
 msgstr "Imprimante disponibile"
+
+#: ../../standalone/drakbackup:1
+#, c-format
+msgid "NO"
+msgstr ""
 
 #: ../../diskdrake/hd_gtk.pm:1 ../../diskdrake/interactive.pm:1
 #, c-format
@@ -13445,21 +13501,6 @@ msgid ""
 "\n"
 "\n"
 "Press \"%s\" to continue."
-msgstr ""
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Create Etherboot Enabled Boot Images:\n"
-"        \t\tTo boot a kernel via etherboot, a special kernel/initrd image "
-"must be created.\n"
-"        \t\tmkinitrd-net does much of this work and drakTermServ is just a "
-"graphical interface\n"
-"        \t\tto help manage/customize these images. To create the file \n"
-"        \t\t/etc/dhcpd.conf.etherboot-pcimap.include that is pulled in as an "
-"include in \n"
-"        \t\tdhcpd.conf, you should create the etherboot images for at least "
-"one full kernel."
 msgstr ""
 
 #: ../../printer/main.pm:1 ../../printer/printerdrake.pm:1
@@ -13505,9 +13546,9 @@ msgid "Raw printer"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "official vendor name of the cpu"
-msgstr "Nume oficial dat de vânzător pt. procesor"
+msgstr "nume oficial vânzător pt. procesor"
 
 #: ../../standalone/drakTermServ:1
 #, c-format
@@ -13550,9 +13591,9 @@ msgid "Installing"
 msgstr "În curs de instalare"
 
 #: ../../mouse.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Logitech MouseMan with Wheel emulation"
-msgstr "Logitech MouseMan"
+msgstr "Logitech MouseMan cu rotiţă emulată"
 
 #: ../../any.pm:1
 #, c-format
@@ -13565,9 +13606,9 @@ msgid "Is this an install or an upgrade?"
 msgstr "Este vorba de o instalare sau de o actualizare ?"
 
 #: ../../help.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "ISDN card"
-msgstr "Modem ISDN intern"
+msgstr "Placă ISDN"
 
 #: ../../share/advertising/02-community.pl:1
 #, c-format
@@ -14241,6 +14282,17 @@ msgstr "FATAL"
 msgid "Refresh the list"
 msgstr "Actualizare listă utilizatori"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client %s:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tdrakTermServ will help create these files."
+msgstr ""
+
 #: ../../standalone/drakpxe:1
 #, c-format
 msgid ""
@@ -14796,12 +14848,17 @@ msgstr "Comun"
 msgid "Cylinder %d to %d\n"
 msgstr "De la cilindrul %d la cilindrul %d\n"
 
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "YOUR TEXT HERE"
+msgstr ""
+
 #: ../../standalone/drakconnect:1
 #, c-format
 msgid "New profile..."
 msgstr "Profil nou..."
 
-#: ../../standalone/draksec:1
+#: ../../modules/interactive.pm:1 ../../standalone/draksec:1
 #, c-format
 msgid "NONE"
 msgstr ""
@@ -14904,7 +14961,7 @@ msgid "if set to yes, report unowned files."
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "This is HardDrake, a Mandrake hardware configuration tool.\n"
 "<span foreground=\"royalblue3\">Version:</span> %s\n"
@@ -14912,8 +14969,11 @@ msgid ""
 "\\@mandrakesoft.com&gt;\n"
 "\n"
 msgstr ""
-"Acesta este HardDrake, unealta Mandrake de configurare a echipamentelor.\n"
-"Versiunea:"
+"Acesta este HardDrake, o unealtă Mandrake de configurare a echipamentelor.\n"
+"<span foreground=\"royalblue3\">Versiune:</span> %s\n"
+"<span foreground=\"royalblue3\">Autor:</span> Thierry Vignaud &lt;tvignaud"
+"\\@mandrakesoft.com&gt;\n"
+"\n"
 
 #: ../../install_interactive.pm:1
 #, c-format
@@ -15340,9 +15400,14 @@ msgid "Other MultiMedia devices"
 msgstr "Alte dispozitive multimedia"
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "burner"
-msgstr "Imprimantă"
+msgstr "inscriptor"
+
+#: ../../standalone/drakbug:1
+#, c-format
+msgid "Bug Description/System Information"
+msgstr ""
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -15465,6 +15530,26 @@ msgstr "Opţiuni de telefonie"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid "If no port is given, 631 will be taken as default."
+msgstr ""
+
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Per client system configuration files:\n"
+"        \tThrough clusternfs, each diskless client can have its own unique "
+"configuration files\n"
+"        \ton the root filesystem of the server. By allowing local client "
+"hardware configuration, \n"
+"        \tclients can customize files such as /etc/modules.conf, /etc/"
+"sysconfig/mouse, \n"
+"        \t/etc/sysconfig/keyboard on a per-client basis.\n"
+"\n"
+"        Note: Enabling local client hardware configuration does enable root "
+"login to the terminal \n"
+"        server on each client machine that has this feature enabled.  Local "
+"configuration can be\n"
+"        turned back off, retaining the configuration files, once the client "
+"machine is configured."
 msgstr ""
 
 #: ../../install_steps_gtk.pm:1 ../../install_steps_interactive.pm:1
@@ -15664,7 +15749,7 @@ msgid ""
 "1st USB printer: /dev/usb/lp0, 2nd USB printer: /dev/usb/lp1, ...)."
 msgstr ""
 
-#: ../../network/adsl.pm:1 ../../network/netconnect.pm:1
+#: ../../network/netconnect.pm:1 ../../network/tools.pm:1
 #, c-format
 msgid "Next"
 msgstr "Următorul"
@@ -15903,11 +15988,9 @@ msgid "Editable"
 msgstr "Editabil"
 
 #: ../../network/ethernet.pm:1
-#, fuzzy, c-format
+#, c-format
 msgid "Which dhcp client do you want to use ? (default is dhcp-client)"
-msgstr ""
-"Ce client dhcp doriţi să folosiţi?\n"
-"Implicit este dhcp-client."
+msgstr "Ce client dhcp doriţi să folosiţi? (implicit este dhcp-client)"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -16459,9 +16542,9 @@ msgid "IP address should be in format 1.2.3.4"
 msgstr "Adresa IP ar trebui să fie în formatul 1.2.3.4"
 
 #: ../../standalone/printerdrake:1
-#, fuzzy, c-format
+#, c-format
 msgid "Configure CUPS printing system"
-msgstr "Schimbă sistemul de tipărire"
+msgstr "Configurează sistemul de tipărire CUPS"
 
 #: ../../lang.pm:1
 #, c-format
@@ -16871,11 +16954,11 @@ msgid " adsl"
 msgstr ""
 
 #: ../../standalone/harddrake2:1
-#, fuzzy, c-format
+#, c-format
 msgid "format of floppies supported by the drive"
-msgstr "Formatele de dischete suportate de unitate"
+msgstr "formate de dischete suportate de unitate"
 
-#: ../../network/adsl.pm:1
+#: ../../network/tools.pm:1
 #, c-format
 msgid "Firmware copy failed, file %s not found"
 msgstr ""
@@ -17405,9 +17488,9 @@ msgid "The %s is not supported by this version of Mandrake Linux."
 msgstr "%s nu are susţinere în această versiune a Mandrake Linux."
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "tape"
-msgstr "Unităţi de bandă"
+msgstr "bandă"
 
 #: ../../standalone/drakconnect:1
 #, c-format
@@ -17447,6 +17530,11 @@ msgstr ""
 "(eroarea este %s)\n"
 "\n"
 "Sunteţi de acord să pierdeţi toate partiţiile?\n"
+
+#: ../../standalone/drakbug:1
+#, fuzzy, c-format
+msgid "Find Package"
+msgstr "%d pachete"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -17563,6 +17651,24 @@ msgstr "Configuraţie LAN"
 msgid "hard disk model"
 msgstr "Model disc fix"
 
+#: ../../standalone/drakTermServ:1
+#, c-format
+msgid ""
+"        - Maintain /etc/exports:\n"
+"        \tClusternfs allows export of the root filesystem to diskless "
+"clients. drakTermServ\n"
+"        \tsets up the correct entry to allow anonymous access to the root "
+"filesystem from\n"
+"        \tdiskless clients.\n"
+"\n"
+"        \tA typical exports entry for clusternfs is:\n"
+"        \t\t\n"
+"        \t/\t\t\t\t\t(ro,all_squash)\n"
+"        \t/home\t\t\t\tSUBNET/MASK(rw,root_squash)\n"
+"\t\t\t\n"
+"        \tWith SUBNET/MASK being defined for your network."
+msgstr ""
+
 #: ../../fsedit.pm:1
 #, c-format
 msgid "You can't use a LVM Logical Volume for mount point %s"
@@ -17647,14 +17753,15 @@ msgid ", USB printer"
 msgstr ", imprimantă USB "
 
 #: ../../standalone/drakfloppy:1
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to properly close mkbootdisk:\n"
 "\n"
 "<span foreground=\"Red\"><tt>%s</tt></span>"
 msgstr ""
-"Nu pot termina corespunzător mkbootdisk:  %s\n"
-" %s"
+"Nu pot termina corespunzător mkbootdisk:\n"
+"\n"
+"<span foreground=\"Red\"><tt>%s</tt></span>"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -17674,9 +17781,9 @@ msgid "Configure X"
 msgstr "Configurare X"
 
 #: ../../standalone/drakbackup:1
-#, fuzzy, c-format
+#, c-format
 msgid "hd"
-msgstr "Ciad"
+msgstr "hd"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -17739,15 +17846,15 @@ msgstr "Tastatura UK"
 msgid "Unmount"
 msgstr "Demontare"
 
-#: ../../standalone/drakfont:1
-#, c-format
-msgid "Uninstall Fonts"
-msgstr "Dezinstalează fonturi"
-
 #: ../../mouse.pm:1
 #, c-format
 msgid "Microsoft Explorer"
 msgstr "Microsoft Explorer"
+
+#: ../../standalone/drakfont:1
+#, c-format
+msgid "Uninstall Fonts"
+msgstr "Dezinstalează fonturi"
 
 #: ../../keyboard.pm:1
 #, c-format
@@ -18102,17 +18209,6 @@ msgstr "Rulează \"%s\" ..."
 #, c-format
 msgid "enable radio support"
 msgstr "activare sprijin radio"
-
-#: ../../standalone/drakTermServ:1
-#, c-format
-msgid ""
-"        - Per client /etc/X11/XF86Config-4\\$\\$IP-ADDRESS\\$\\$:\n"
-"        \t\tThrough clusternfs, each diskless client can have its own unique "
-"configuration files\n"
-"        \t\ton the root filesystem of the server. By allowing local client "
-"hardware configuration, \n"
-"        \t\tdrakTermServ will help create these files."
-msgstr ""
 
 #: ../../standalone/scannerdrake:1
 #, c-format
@@ -18511,8 +18607,5 @@ msgstr ""
 "Set de unelte pentru citire şi trimitere poştă şi ştiri şi pentru navigare "
 "pe Web"
 
-#~ msgid "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-utopia-regular-r-*-*-25-*-*-*-p-*-iso8859-*,*-r-*"
-
-#~ msgid "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
-#~ msgstr "-adobe-times-bold-r-normal--17-*-100-100-p-*-iso8859-*,*-r-*"
+#~ msgid "http://www.mandrakelinux.com/en/91errata.php3"
+#~ msgstr "http://www.mandrakelinux.com/en/91errata.php3"
