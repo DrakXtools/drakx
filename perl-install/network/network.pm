@@ -5,7 +5,6 @@ package network::network; # $Id$wir
 #-######################################################################################
 use strict;
 use Socket;
-
 use common;
 use detect_devices;
 use run_program;
@@ -120,7 +119,7 @@ sub write_resolv_conf {
 }
 
 sub write_interface_conf {
-    my ($file, $intf, $dhcp_hostname, $prefix) = @_;
+    my ($file, $intf, $netc, $prefix) = @_;
 
     if ($::o->{miscellaneous}{track_network_id} && -e "$prefix/sbin/ip") {
 	$intf->{HWADDR} = undef;
@@ -133,12 +132,8 @@ sub write_interface_conf {
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
 
-    if ($dhcp_hostname) {
-	$intf->{DHCP_HOSTNAME} = $dhcp_hostname;
-    } else {
-	add2hash($intf, { NEEDHOSTNAME => "yes" });
-    }
-
+    $netc->{DHCP} ? ($intf->{DHCP_HOSTNAME} = $netc->{HOSTNAME}) : add2hash($intf, { NEEDHOSTNAME => "yes" });
+    
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int($_[0]) | ((~int($_[1])) & 255) } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int($_[0]) &        $_[1]          } \@ip, \@mask),
@@ -147,7 +142,7 @@ sub write_interface_conf {
     
     $intf->{BOOTPROTO} =~ s/dhcp.*/dhcp/; #- TODO: avoid obfuscating BOOTPROTO, waiting for zeroconf conf details 
 
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($dhcp_hostname, 'DHCP_HOSTNAME'), if_(!$dhcp_hostname, 'NEEDHOSTNAME'));
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), if_($intf->{wireless_eth}, qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV)), if_($netc->{DHCP}, 'DHCP_HOSTNAME'), if_(!$netc->{DHCP}, 'NEEDHOSTNAME'));
 }
 
 sub add2hosts {
@@ -298,7 +293,7 @@ Modifying the fields below will override this configuration.");
 Each item should be entered as an IP address in dotted-decimal
 notation (for example, 1.2.3.4).");
     }
-    my $pump = $intf->{BOOTPROTO} =~ /dhcp|bootp|zeroconf/;
+    my $auto_ip = $intf->{BOOTPROTO} !~ /static/;
     my ($dhcp, $zeroconf, $onboot) = (1, 1, 1);
     delete $intf->{NETWORK};
     delete $intf->{BROADCAST};
@@ -307,12 +302,12 @@ notation (for example, 1.2.3.4).");
     $in->ask_from(N("Configuring network device %s", $intf->{DEVICE}),
   	          (N("Configuring network device %s", $intf->{DEVICE}) . ($module ? N(" (driver %s)", $module) : '') . "\n\n") .
 	          $text,
-	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $pump } },
-	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $pump } },
-	           if_(!$::expert, { label => N("Automatic IP"), val => \$pump, type => "bool", text => N("(bootp/dhcp/zeroconf)") }),
-	           if_($::expert, { label => N("Automatic IP"), val => \$pump, type => "bool" },
-		       { val => \$dhcp, type => "bool", text => N("bootp/dhcp"), disabled => sub { !$pump } },
-		       { val => \$zeroconf, type => "bool", text => N("zeroconf"), disabled => sub { !$pump } },
+	         [ { label => N("IP address"), val => \$intf->{IPADDR}, disabled => sub { $auto_ip } },
+	           { label => N("Netmask"),     val => \$intf->{NETMASK}, disabled => sub { $auto_ip } },
+	           if_(!$::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool", text => N("(bootp/dhcp/zeroconf)") }),
+	           if_($::expert, { label => N("Automatic IP"), val => \$auto_ip, type => "bool" },
+		       { val => \$dhcp, type => "bool", text => N("bootp/dhcp"), disabled => sub { !$auto_ip } },
+		       { val => \$zeroconf, type => "bool", text => N("zeroconf"), disabled => sub { !$auto_ip } },
 		       { label => N("Start at boot"), val => \$onboot, type => "bool" }),
 		   if_($intf->{wireless_eth},
 	           { label => "WIRELESS_MODE", val => \$intf->{WIRELESS_MODE}, list => [ "Ad-hoc", "Managed", "Master", "Repeater", "Secondary", "Auto" ] },
@@ -330,28 +325,40 @@ notation (for example, 1.2.3.4).");
 	           ),
 	         ],
 	         complete => sub {
-			 $intf->{BOOTPROTO} = $pump ? if_($dhcp, "dhcp") . if_($zeroconf, "zeroconf") : "static";
-			 if ($pump and !$dhcp and !$zeroconf) {
-			     $in->ask_warn('', N("For an Automatic IP you have to select at least one protocol : dhcp or zeroconf"));
-			     return 1;
-			 }
-			 return 0 if $pump;
-	         	 for (my $i = 0; $i < @fields; $i++) {
-	         	     unless (is_ip($intf->{$fields[$i]})) {
-	         		 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
-	         		 return (1,$i);
-	         	     }
-	         	     return 0;
-	         	 }
-	         	 if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\' (zeroes)."));
-	         	     return (1,6);
-	         	 }
-	         	 if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
-	         	     $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\' (zeroes)."));
-	         	     return (1,8);
-	         	 }
-	         },
+		     
+		     $intf->{BOOTPROTO} = $auto_ip ? join('', if_($dhcp, "dhcp") , if_($zeroconf, "zeroconf")) : "static";
+		     
+		     if ($auto_ip && !$dhcp && !$zeroconf) {
+			 $in->ask_warn('', N("For an Automatic IP you have to select at least one protocol : dhcp or zeroconf"));
+			 return 1;
+		     }
+		     return 0 if $auto_ip;
+
+		     my $bad_ip = 0;
+		     each_index { unless (is_ip($intf->{$_})) { 
+			 $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
+			 $bad_ip = 1;
+		     } } @fields;
+		     return 1 if $bad_ip;
+
+		     #for (my $i = 0; $i < @fields; $i++) {
+		     #    unless (is_ip($intf->{$fields[$i]})) {
+		     #       $in->ask_warn('', N("IP address should be in format 1.2.3.4"));
+		     #       return (1);
+		     #    }
+		     #    return 0;
+		     #}
+		     		     		     
+		     return 0 if !$intf->{WIRELESS_FREQ};
+		     if ($intf->{WIRELESS_FREQ} !~ /[0-9.]*[kGM]/) {
+			 $in->ask_warn('', N("Freq should have the suffix k, M or G (for example, \"2.46G\" for 2.46 GHz frequency), or add enough \'0\' (zeroes)."));
+			 return (1,6);
+		     }
+		     if ($intf->{WIRELESS_RATE} !~ /[0-9.]*[kGM]/) {
+			 $in->ask_warn('', N("Rate should have the suffix k, M or G (for example, \"11M\" for 11M), or add enough \'0\' (zeroes)."));
+			 return (1,8);
+		     }
+		 },
 	         focus_out => sub {
 	         	 $intf->{NETMASK} ||= netmask($intf->{IPADDR}) unless $_[0]
 	         }
@@ -490,7 +497,7 @@ sub configureNetwork2 {
     $netc->{wireless_eth} and $in->do_pkgs->install(qw(wireless-tools));
     write_conf("$etc/sysconfig/network", $netc);
     write_resolv_conf("$etc/resolv.conf", $netc);
-    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $intf->{DHCP_HOSTNAME}, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
+    write_interface_conf("$etc/sysconfig/network-scripts/ifcfg-$_->{DEVICE}", $_, $netc, $prefix) foreach grep { $_->{DEVICE} } values %$intf;
     add2hosts("$etc/hosts", "localhost", "127.0.0.1");
     add2hosts("$etc/hosts", $netc->{HOSTNAME}, map { $_->{IPADDR} } values %$intf);
     
