@@ -4,50 +4,53 @@
 ** drakxtools* need XF-{75,100}fonts that requires XFree86
 
 * Harddrake TODO:
+** rename it drakhw by default
+** ui
+*** explain category and not just blank TreeView
+*** enable the user to force a module (isa, isapnp, ...)
+*** print "(not loaded)" if module isn't loaded
+*** add bus_position to make unique id in ui
+*** cdrom:
+**** ide-scsi / ide-cd switch
+**** supermount switch
+*** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
+*** translate all fields
+*** help: 
+**** print fields in black and their description in blue as for information fields
+**** split help per category
+*** check there's at least one config option before showing the "condigure module" button
+*** s/module/driver/ ?
 ** fixes
-*** configure at boot :
-**** configure usb interfaces
-**** switch nvidia-nv in /etc/X11/XF86Config
+*** configure at boot-time (hw hooks shared by both harddrake & drakx ?):
+    all /etc/modules aliases 
+**** usb-interfaces 
+**** snd cards
+**** switch nvidia/nv in /etc/X11/XF86Config
+     if [[ -e /lib/modules/`uname -r`/kernel/drivers/video/NVdriver ]]; then
+           perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#(Load.*glx)!\1!g' /etc/X11/XF86Config-4
+        else    
+           perl -pi -e 's!Driver "nv.*"!Driver "nv"!g;s!(Load.*glx)!#\1!g' /etc/X11/XF86Config-4
+        fi
 *** non needed stuff to run X must be posponed after X11 startup
 **** eg: scanner/audio/printer/floppy/cdrom/tape/tv/webcam/joystick/ ... 
-*** enable the user to force a module (isa, isapnp, ...)
 *** pci freeze (fseek ?)
-*** print "NOT LOADED" if module isn't loaded
-** add bus_position to make unique id in ui
-** cdrom
-*** ide-scsi / ide-cd switch
-*** supermount switch
-
-** add aliases for sound
-
-** 9.1 development
-*** move the usb-interface setting from drakx into harddrake, and do it at boot time
-*** nvidia proprietary module hook
-if [[ -e /lib/modules/`uname -r`/kernel/drivers/video/NVdriver ]]; then
-        perl -pi -e 's!Driver "nv.*"!Driver "nvidia"!g;s!#(Load.*glx)!\1!g' /etc/X11/XF86Config-4
-else    
-        perl -pi -e 's!Driver "nv.*"!Driver "nv"!g;s!(Load.*glx)!#\1!g' /etc/X11/XF86Config-4
-fi
-*** help: print fields in black and their description in blue as for information fields
-*** translate all fields
-*** split help per category
-*** separate version for harddrake & drakxtool
-
-
-** draksound
-*** add a dialog so that the user choose its wavetable.
-*** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
-*** add 'ALSA/OSS': tag to modules list
-
-** detect isapnp devices
-** ui
-*** more use of my_gtk/ugtk
-*** use fbgtk+2 when booting on fbcon for smoother GUI => interactive::fbgtk
-**** fpons, convert perl-GTK to gtk+2 :-)
+** packaging : separate version for harddrake & drakxtool
+** configurators
+*** new cd burner: offer to install cdrecord and one of its gui frontends
+*** new dvd driver : offer to install xine||mplayer
+*** draksound :
+**** add a dialog so that the user choose its wavetable.
+**** list all availlables drivers, defaulting to first alternative, prepending old one with '*'
+**** add 'ALSA/OSS': tag to modules list
+** detect engine:
+*** detect isapnp devices
+*** set more field for fscking 0x0000:0x0000 usb controllers
 
 ** move all drakx tools into just a small one-liner that uses real <tool>.pm
     so that harddrake and mcc reduces their memory usage pattern and
     be faster (the next fast step will be to use perl6/parrot)
+
+    drawback : this would level down quite a lot the global mcc/harddrake robustness
 
 ** check there're enough parameters in module config
 ** for to send a message for unknown hardware to install@mandrakesoft.com
