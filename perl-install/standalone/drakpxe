@@ -24,13 +24,11 @@ use lib qw(/usr/lib/libDrakX);
 use standalone;     #- warning, standalone must be loaded very first, for 'explanations'
 
 use common;
-use detect_devices;
 use interactive;
 use network;
 use log;
 use c;
 use network::netconnect;
-use network::shorewall;
 
 $::isInstall and die "Not supported during install.\n";
 
@@ -235,7 +233,7 @@ if ($pool) {
 } else {
     $pool = { start_ip => $start_ip, end_ip => $end_ip };
     foreach (keys %{$dhcpd_conf->{class}}) {
-	$pool->{$_ eq $dhcpd_conf->{class_PXE} ? 'allow' : 'deny'}{$_} = undef;
+	$pool->{$_ eq $dhcpd_conf->{class_PXE} || $_ eq 'Etherboot' ? 'allow' : 'deny'}{$_} = undef;
     }
     push @{$dhcpd_conf->{network}{pool}}, $pool;
 }
@@ -248,14 +246,16 @@ sys("cp", "-af", "$dir/isolinux/alt0", "/var/lib/tftpboot/PXEClient/images/");
 my $pxelinux_cfg = parse_pxelinux_cfg("/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 my $label = undef;
 foreach my $i (0..99) {
+    $label = undef;
     foreach my $e (@{$pxelinux_cfg->{entry}}) {
 	$e->{label} eq "halt$i" and $label = "halt$i", last;
     }
     defined $label or $label = "halt$i", last;
 }
+my $server = $intf[0]{IPADDR} || $netc->{HOSTNAME};
 push @{$pxelinux_cfg->{entry}}, { label => $label, 
 				  kernel => "images/alt0/vmlinuz",
-				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$netc->{dnsServer},server:$intf[0]{IPADDR},directory:$dir root=/dev/ram3" };
+				  append => "initrd=images/alt0/all.rdz ramdisk=32000 vga=788 ".($auto_inst_cfg ? "kickstart=$auto_inst_cfg " : "")."automatic=method:http,network:dhcp,interface:eth0,dns:$netc->{dnsServer},server:$server,directory:$dir root=/dev/ram3" };
 build_pxelinux_cfg($pxelinux_cfg, "/var/lib/tftpboot/PXEClient/pxelinux.cfg/default");
 
 #- make directory available for httpd.
@@ -296,6 +296,7 @@ sub parse_dhcpd_conf {
 sub build_dhcpd_conf {
     my ($dhcpd_conf, $file) = @_;
     local *F;
+    my $server = $dhcpd_conf->{network}{IPADDR} || $dhcpd_conf->{network}{HOSTNAME};
     open F, ">$file" or return;
     log::explanations("Modified file $file");
     print F qq[# for explanation in french go to : http://www.delafond.org/traducmanfr/man/man5/dhcpd.conf.5.html
@@ -372,7 +373,7 @@ vendor-option-space PXE;
 option PXE.mtftp-ip 0.0.0.0;
 
 # IP of you TFTP server
-next-server $dhcpd_conf->{network}{IPADDR};
+next-server $server;
 }
 
 
@@ -396,7 +397,7 @@ vendor-option-space PXE;
 option PXE.mtftp-ip 0.0.0.0;
 
 # IP of you TFTP server
-next-server $dhcpd_conf->{network}{IPADDR};
+next-server $server;
 }
 
 # the class know exist just for deny the response to other DHCP request
@@ -425,7 +426,7 @@ shared-network "mynetwork" {
   option domain-name "$dhcpd_conf->{network}{DOMAINNAME}";
   option domain-name-servers $dhcpd_conf->{network}{dnsServer};
 # Used by clusterautosetup-client to find its server
-  next-server $dhcpd_conf->{network}{IPADDR};
+  next-server $server;
 
 ];
     foreach (@{$dhcpd_conf->{network}{pool}}) {
@@ -465,7 +466,7 @@ sub parse_pxelinux_cfg {
 	    } elsif (/^\s*label\s+(.*)/i) {
 		$entry and push @{$pxelinux_cfg{entry}}, $entry;
 		$entry = { label => $1 },
-	    } elsif (/^\s*(LOCALBOOT|KERNEL|APPEND)\s+(.*)/) {
+	    } elsif (/^\s*(LOCALBOOT|KERNEL|APPEND)\s+(.*)/i) {
 		$entry->{$1} = $2;
 	    } else {
 		log::l("ignoring line $. in file $file due to parsing error");
@@ -473,29 +474,31 @@ sub parse_pxelinux_cfg {
 	}
 	$entry and push @{$pxelinux_cfg{entry}}, $entry;
 	close F;
-    } else {
-	%pxelinux_cfg = ( PROMPT => 1,
-			  DEFAULT => "local",
-			  DISPLAY => "messages",
-			  TIMEOUT => 50,
-			  entry => [ label => "local",
-				     LOCALBOOT => 0 ],
-			);
+    }
+    #- try to fix bad file (first version of drakpxe for example).
+    my %default_pxelinux_cfg = ( PROMPT => 1,
+				 DEFAULT => "local",
+				 DISPLAY => "messages",
+				 TIMEOUT => 50,
+				 entry => [ { label => "local",
+					      LOCALBOOT => 0 } ],
+			       );
+    foreach (qw(PROMPT DEFAULT DISPLAY TIMEOUT entry)) {
+	length $pxelinux_cfg{$_} > 0 or $pxelinux_cfg{$_} = $default_pxelinux_cfg{$_};
     }
     \%pxelinux_cfg;
 }
 
 sub build_pxelinux_cfg {
     my ($pxelinux_cfg, $file) = @_;
-    my %pxelinux_cfg;
     local *F;
     open F, ">$file" or return;
     log::explanations("Modified file $file");
     foreach (keys %$pxelinux_cfg) {
 	/^entry$/ and next;
-	print F "$_ $pxelinux_cfg{$_}\n";
+	print F "$_ $pxelinux_cfg->{$_}\n";
     }
-    foreach my $e (@{$pxelinux_cfg{entry}}) {
+    foreach my $e (@{$pxelinux_cfg->{entry}}) {
 	print F "label $e->{label}\n";
 	foreach (keys %$e) {
 	    /^label$/ and next;
