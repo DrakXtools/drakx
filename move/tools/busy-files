@@ -13,7 +13,7 @@ my @l = map {
 push @l, grep { $_ } map { (split)[5] } map { cat_("/proc/$_/maps") } @pids;
 
 if ($ARGV[0] eq '--totem') {
-    @l = grep { m!/image(_boot)?/! } @l;
+    @l = grep { m!/image(_boot|_raw)?/! } @l;
     $ARGV[0] = '--server';
 }
 foreach (uniq @l) {
