@@ -342,7 +342,7 @@ If you want to add, remove, or rename a printer, or if you want to change the de
 
 sub setup_local_autoscan {
     my ($printer, $in, $upNetwork) = @_;
-    my (@port, @str, $device);
+    my $device;
     my $queue = $printer->{OLD_QUEUE};
     my $expert_or_modify = $::expert || !$printer->{NEW};
     my $do_auto_detect = 
@@ -379,6 +379,7 @@ sub setup_local_autoscan {
 	# We have more than one printer, so we must ask the user for a queue
 	# name in the fully automatic printer configuration.
 	$printer->{MORETHANONE} = $#autodetected > 0;
+	my @str;
 	foreach my $p (@autodetected) {
 	    if ($p->{val}{DESCRIPTION}) {
 		my $menustr = $p->{val}{DESCRIPTION};
@@ -409,6 +410,7 @@ sub setup_local_autoscan {
 		$menuentries->{$menustr} = $p->{port};
 	    }
 	}
+	my @port;
 	if ($::expert) {
 	    @port = detect_devices::whatPrinterPort();
 	    foreach my $q (@port) {
@@ -463,6 +465,7 @@ sub setup_local_autoscan {
     } keys(%{$menuentries});
     my $menuchoice = "";
     my $oldmenuchoice = "";
+    my $device;
     if ($printer->{configured}{$queue} &&
 	$printer->{currentqueue}{connect} =~ m/^file:/) {
 	# Non-HP or HP print-only device (HPOJ not used)
@@ -1626,6 +1629,15 @@ N("If your printer is not listed, choose a compatible (see printer manual) or a 
 
 }
 
+my %lexmarkinkjet_options = (
+                             'file:/dev/lp0' => " -o Port=ParPort1",
+                             'file:/dev/lp1' => " -o Port=ParPort2",
+                             'file:/dev/lp2' => " -o Port=ParPort3",
+                             'file:/dev/usb/lp0' => " -o Port=USB1",
+                             'file:/dev/usb/lp1' => " -o Port=USB2",
+                             'file:/dev/usb/lp2' => " -o Port=USB3",
+                             );
+
 sub get_printer_info {
     my ($printer, $in) = @_;
     #- Read the printer driver database if necessary
@@ -1706,41 +1718,18 @@ sub get_printer_info {
 		    services::start_service_on_boot('oki4daemon');
 		    printer::services::start('oki4daemon');
 		    # Set permissions
-		    if ($printer->{SPOOLER} eq 'cups') {
-			set_permissions('/dev/oki4drv', '660', 'lp',
-						 'sys');
-		    } elsif ($printer->{SPOOLER} eq 'pdq') {
-			set_permissions('/dev/oki4drv', '666');
-		    } else {
-			set_permissions('/dev/oki4drv', '660', 'lp',
-						 'lp');
-		    }
+
+              my $h = {
+                  cups => sub { set_permissions('/dev/oki4drv', '660', 'lp', 'sys') },
+                  pdq  => sub { set_permissions('/dev/oki4drv', '666') }
+              };
+              my $s = $h->{$printer->{SPOOLER}} ||= sub { set_permissions('/dev/oki4drv', '660', 'lp', 'lp') };
+              &$s;
 		} elsif ($printer->{currentqueue}{driver} eq 'lexmarkinkjet') {
 		    # Set "Port" option
-		    if ($printer->{currentqueue}{connect} eq 
-			'file:/dev/lp0') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=ParPort1";
-		    } elsif ($printer->{currentqueue}{connect} eq 
-			'file:/dev/lp1') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=ParPort2";
-		    } elsif ($printer->{currentqueue}{connect} eq 
-			'file:/dev/lp2') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=ParPort3";
-		    } elsif ($printer->{currentqueue}{connect} eq 
-			'file:/dev/usb/lp0') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=USB1";
-		    } elsif ($printer->{currentqueue}{connect} eq 
-			'file:/dev/usb/lp1') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=USB2";
-		    } elsif ($printer->{currentqueue}{connect} eq 
-			'file:/dev/usb/lp2') {
-			$printer->{SPECIAL_OPTIONS} .= 
-			    " -o Port=USB3";
+              my $opt = $lexmarkinkjet_options{$printer->{currentqueue}{connect}};
+              if ($opt) {
+                  $printer->{SPECIAL_OPTIONS} .= $opt;
 		    } else {
 			$in->ask_warn(N("Lexmark inkjet configuration"),
 				      N("The inkjet printer drivers provided by Lexmark only support local printers, no printers on remote machines or print server boxes. Please connect your printer to a local port or configure it on the machine where it is connected to."));
