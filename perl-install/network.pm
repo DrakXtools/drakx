@@ -318,9 +318,9 @@ sub configureNetwork2 {
     sethostname($netc) unless $::testing;
     addDefaultRoute($netc) unless $::testing;
 
-    $in->pkg_install("dhcpcd") if grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$intf};
+    grep { $_->{BOOTPROTO} =~ /^(dhcp)$/ } @{$intf} and $::isStandalone ? system("urpmi --auto dhcpd") : $in->pkg_install("dhcpcd");
     # Handle also pump (this is still in initscripts no?)
-    $in->pkg_install("pump") if grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$intf};
+    grep { $_->{BOOTPROTO} =~ /^(pump|bootp)$/ } @{$intf} and $::isStandalone ? system("urpmi --auto pump") : $in->pkg_install("pump");
     #-res_init();		#- reinit the resolver so DNS changes take affect
 
     any::miscellaneousNetwork($in, $prefix);
