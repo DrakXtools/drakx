@@ -563,7 +563,7 @@ sub set {
 
 		#- LC_COLLATE and LC_CTYPE are getFile'd (cuz they are big, causing the .cz2 to be *big*)
 		my ($dir) = glob_("$ENV{SHARE_PATH}/locale/*");
-		install_any::getAndSaveFile("$dir/$_") foreach 'LC_COLLATE', 'LC_CTYPE';
+		install_any::getAndSaveFile ("$dir/$_") foreach 'LC_COLLATE', 'LC_CTYPE';
 	    };
 	}
 
