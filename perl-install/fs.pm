@@ -20,6 +20,10 @@ use loopback;
 sub read_fstab {
     my ($prefix, $file, @reading_options) = @_;
 
+    if (member('keep_default', @reading_options)) {
+	push @reading_options, 'freq_passno', 'keep_devfs_name', 'keep_device_LABEL';
+    }
+
     my %comments;
     my $comment;
     my @l = grep {
@@ -71,11 +75,9 @@ sub read_fstab {
 		 if_(member('keep_freq_passno', @reading_options), freq => $freq, passno => $passno),
 		};
 
-	if ($dev =~ /^LABEL=/) {
-	    if (my $e = find { $_->{mntpoint} eq $mntpoint } read_fstab('', '/proc/mounts')) {
-		$h->{device_LABEL} = $dev;
-		$dev = $h->{device} = $e->{device};
-	    }
+	if ($dev =~ /^LABEL=(.*)/) {
+	    $h->{device_LABEL} = $1;
+	    $h->{prefer_device_LABEL} = 1 if member('keep_device_LABEL', @reading_options);
         }
 	if ($dev =~ m,^/(tmp|dev)/,) {
 	    ($h->{major}, $h->{minor}) = unmakedev((stat "$prefix$dev")[6]);
@@ -197,7 +199,7 @@ sub merge_info_from_fstab {
 	} else {
 	    1;
 	}
-    } read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
+    } read_fstab($prefix, '/etc/fstab', 'keep_default');
 
     merge_fstabs($loose, $fstab, @l);
 }
@@ -205,7 +207,7 @@ sub merge_info_from_fstab {
 # - when using "$loose", it does not merge in type&options from the fstab
 sub get_info_from_fstab {
     my ($all_hds, $prefix) = @_;
-    my @l = read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
+    my @l = read_fstab($prefix, '/etc/fstab', 'keep_default');
     add2all_hds($all_hds, @l)
 }
 
@@ -250,7 +252,7 @@ sub prepare_write_fstab {
 	    my $type = type2fs($_, 'auto');
 
 	    my $dev = 
-	      $_->{device_LABEL} ? $_->{device_LABEL} :
+	      $_->{prefer_device_LABEL} ? 'LABEL=' . $_->{device_LABEL} :
 	      $_->{device_alias} ? "/dev/$_->{device_alias}" : $device;
 
 	    $mntpoint =~ s/ /\\040/g;
@@ -558,7 +560,7 @@ sub get_raw_hds {
 
     get_major_minor(@{$all_hds->{raw_hds}});
 
-    my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name');
+    my @fstab = read_fstab($prefix, '/etc/fstab', 'keep_default');
     $all_hds->{nfss} = [ grep { isThisFs('nfs', $_) } @fstab ];
     $all_hds->{smbs} = [ grep { isThisFs('smbfs', $_) } @fstab ];
     $all_hds->{davs} = [ grep { isThisFs('davfs', $_) } @fstab ];

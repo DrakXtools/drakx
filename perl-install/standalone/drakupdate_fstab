@@ -130,7 +130,7 @@ sub main {
 	cp_af('/etc/fstab', $fstab_file = '/tmp/fstab');
     }
 
-    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_freq_passno', 'keep_devfs_name', 'verbatim_credentials') ];
+    my $fstab = [ fs::read_fstab('', '/etc/fstab', 'keep_default', 'verbatim_credentials') ];
     my ($existing_fstab_entries, $fstab_) = partition { $_->{device} eq $part->{device} || $_->{device} eq $part->{devfs_device} } @$fstab;
 
     if ($action eq 'add') {

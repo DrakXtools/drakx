@@ -229,6 +229,15 @@ sub hds {
 	    my $type = typeOfPart($_->{device});
 	    $_->{type} = $type if ($type & 0xff) == $wanted_type || $type && $hd->isa('partition_table::gpt');
 	}
+	
+	foreach (partition_table::get_normal_parts($hd)) {
+	    my $label =
+	      member(type2fs($_), qw(ext2 ext3)) ?
+		c::get_ext2_label(devices::make($_->{device})) :
+		'';
+	    $_->{device_LABEL} = $label if $label;
+	}
+
 	push @hds, $hd;
     }
 
@@ -321,6 +330,7 @@ sub is_same_hd {
 	$s1 eq $s2;
     } else {
 	$hd1->{devfs_device} && $hd2->{devfs_device} && $hd1->{devfs_device} eq $hd2->{devfs_device}
+	  || $hd1->{device_LABEL} && $hd2->{device_LABEL} && $hd1->{device_LABEL} eq $hd2->{device_LABEL}
 	  || $hd1->{device} eq $hd2->{device};
     }
 }

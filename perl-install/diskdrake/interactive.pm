@@ -29,6 +29,8 @@ struct part {
   string device         # 'hda5', 'sdc1' ...
   string devfs_device   # 'ide/host0/bus0/target0/lun0/part5', ...
   string prefer_devfs_name # should the {devfs_device} or the {device} be used in fstab
+  string device_LABEL   # volume label. LABEL=xxx can be used in fstab instead of
+  string prefer_device_LABEL # should the {device_LABEL} or the {device} be used in fstab
   string rootDevice     # 'sda', 'hdc' ... (can also be a VG_name)
   string real_mntpoint  # directly on real /, '/tmp/hdimage' ...
   string mntpoint       # '/', '/usr' ...
@@ -36,6 +38,7 @@ struct part {
   string device_windobe # 'C', 'D' ...
   string encrypt_key    # [0-9A-Za-z./]{20,}
   string comment        # comment to have in fstab
+  string volume_label   # 
 
   bool isMounted
 
@@ -1150,6 +1153,8 @@ sub format_part_info {
 
     $info .= N("Mount point: ") . "$part->{mntpoint}\n" if $part->{mntpoint};
     $info .= N("Device: ") . "$part->{device}\n" if $part->{device} && !isLoopback($part);
+    $info .= N("Devfs name: ") . "$part->{devfs_device}\n" if $part->{devfs_device} && $::expert;
+    $info .= N("Volume label: ") . "$part->{device_LABEL}\n" if $part->{device_LABEL} && $::expert;
     $info .= N("DOS drive letter: %s (just a guess)\n", $part->{device_windobe}) if $part->{device_windobe};
     if (arch() eq "ppc") {
       my $new_value = $part->{pType};
