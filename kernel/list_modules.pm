@@ -17,7 +17,7 @@ our %l = (
       if_(arch() =~ /ppc/, qw(bmac ibm_emac mace oaknet sungem)),
       if_(arch() =~ /^sparc/, qw(sunbmac sunhme sunqe)),
       if_(arch() !~ /alpha|sparc/,
-        qw(3c501 3c503 3c505 3c507 3c509 3c515 3c90x 3c990 3c990fx),
+        qw(3c501 3c503 3c505 3c507 3c509 3c515 3c990 3c990fx),
         qw(82596 abyss ac3200 acenic aironet4500_card amd8111e at1700 atp),
         qw(b44 bcm4400 com20020-pci cs89x0 de2104x de600 de620),
         qw(defxx), # most unused
