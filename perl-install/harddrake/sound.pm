@@ -8,7 +8,7 @@ package harddrake::sound;
 # No OSS for ALSA's
 #    o pci cards: snd-als4000, snd-es968, snd-hdsp
 #    o isa cards: snd-azt2320, snd-cs4231, snd-cs4236, 
-#      snd-dt0197h, snd-korg1212, snd-rme32, snd-rme96
+#      snd-dt0197h, snd-korg1212, snd-rme32
 #    o usb cards: snd-usb-audio
 
 # TODO: 
@@ -65,8 +65,7 @@ my %alsa2oss =
      "snd-opl3sa2" => [ "opl3", "opl3sa", "opl3sa2" ], # isa
      "snd-opti93x" => [ "mad16" ],
      "snd-rme32"   => [ "unknown" ], # isa
-     "snd-rme96"   => [ "unknown" ], # isa
-     "snd-rme9652" => [ "rme96xx" ],
+     "snd-rme96"   => [ "rme96xx" ], # pci
      "snd-sb16"    => ["sscape", "sb"],
      "snd-sb8"     => [ "sb" ],
      "snd-sbawe"   => [ "awe_wave" ],
@@ -113,7 +112,7 @@ my %oss2alsa =
      "opl3sa2" => [ "snd-opl3sa2" ],
      "pas2"    => [ "unknown" ],
      "pss" => [ "snd-ad1848" ],
-     "rme96xx" => [ "snd-rme9652" ],
+     "rme96xx" => [ "snd-rme96" ],
      "sb"      => [ "snd-als100", "snd-cmi8330", "snd-es1688", "snd-es18xx", "snd-es968", "snd-sb8", "snd-sb16" ],
      "sgalaxy" => [ "snd-sgalaxy" ],
      "sonicvibes" => [ "snd-sonicvibes" ],
