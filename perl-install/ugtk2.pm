@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK @icon_paths $force_center $force_focus 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     wrappers => [ qw(gtkadd gtkappend gtkappend_page gtkappend_text gtkappenditems gtkcombo_setpopdown_strings gtkdestroy
-                     gtkentry gtkexpand gtkflush gtkhide gtkinsert_text gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
+                     gtkentry gtkexpand gtkflush gtkhide gtkmodify_font gtkmove gtkpack gtkpack2 gtkpack2_
                      gtkpack2__ gtkpack_ gtkpack__ gtkpowerpack gtkprepend_text gtkput gtkradio gtkresize gtkroot
                      gtkset_active gtkset_border_width gtkset_editable gtkset_justify gtkset_layout gtkset_markup
                      gtkset_modal gtkset_mousecursor gtkset_mousecursor_normal gtkset_mousecursor_wait gtkset_name
@@ -160,24 +160,6 @@ sub gtkcombo_setpopdown_strings {
     my $w = shift;
     $w->set_popdown_strings(@_);
     $w;
-}
-
-sub gtkinsert_text {
-    my ($w, $text, $position) = @_;
-    $w->insert_text($text, -1, $position);
-    $w;
-}
-
-# compat with ugtk for gtk-1.2, don't use it
-sub gtkappend_text {
-    my ($w, $s) = @_;
-    gtkinsert_text($w, $s, -1);
-}
-
-# compat with ugtk for gtk-1.2, don't use it
-sub gtkprepend_text {
-    my ($w, $s) = @_;
-    gtkinsert_text($w, $s, 0);
 }
 
 sub gtkset_mousecursor {
@@ -723,7 +705,8 @@ sub gtkset_background {
     my $color = gtkcolor($r, $g, $b);
     $gc->set_rgb_fg_color($color);
     $root->set_background($color);
-    $root->draw_rectangle($gc, 1, 0, 0, $root->get_size);
+    my ($w, $h) = $root->get_size;
+    $root->draw_rectangle($gc, 1, 0, 0, $w, $h);
     $gc->unref;
 }
 
