@@ -14,6 +14,9 @@ use harddrake::sound;
 use modules;
 use Storable qw(store retrieve);
 
+
+my $force = any { $_ eq '--force' } @ARGV;
+
 my $invert_do_it = $ARGV[0] eq 'X11' ? 1 : 0;
 my ($hw_sysconfdir, $timeout) = ("/etc/sysconfig/harddrake2", $invert_do_it ? 600 : 25);
 my $last_boot_config = "$hw_sysconfdir/previous_hw";
@@ -73,7 +76,7 @@ foreach my $hw_class (@harddrake::data::tree) {
         $id => $i;
     } eval { &$detector };
     $config{$Ident} = \%ID;
-    next if !$is_globetrotter && is_empty_hash_ref $previous_config; # don't fsck on first run
+    next if !$is_globetrotter && !$force && is_empty_hash_ref($previous_config); # don't fsck on first run but if --force
 
     my $oldconfig = $previous_config->{$Ident};
 
