@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-# $o->{hints}->{component} *was* 'Workstation' or 'Server' or NULL
-
 use diagnostics;
 use strict;
 use vars qw($testing $INSTALL_VERSION $o);
@@ -15,10 +13,10 @@ use keyboard;
 use fs;
 use fsedit;
 use install_steps_graphical;
-use install_methods;
 use modules;
 use partition_table qw(:types);
 use detect_devices;
+use pkgs;
 use smp;
 
 $testing = 1;#$ENV{PERL_INSTALL_TEST};
@@ -31,6 +29,7 @@ my @installSteps = (
   selectInstallClass => [ "Select installation class", "aide", 0, 0 ],
   setupSCSI => [ "Setup SCSI", "aide", 0, 1 ],	
   partitionDisks => [ "Setup filesystems", "aide", 0, 1 ],
+  formatPartitions => [ "Format partitions", "aide", 0, 1 ],
   findInstallFiles => [ "Find installation files", "aide", 1, 0 ],
   choosePackages => [ "Choose packages to install", "aide", 0, 0 ],
   doInstallStep => [ "Install system", "aide", 0, 0 ],
@@ -99,7 +98,14 @@ my $default = {
     installClass => 'Server',
     bootloader => { onmbr => 1, linear => 0 },
     mkbootdisk => 0,
-    comps => [ qw() ],
+    base => [ qw(basesystem mkbootdisk linuxconf anacron linux_logo rhs-hwdiag utempter ldconfig chkconfig ntsysv mktemp setup setuptool filesystem MAKEDEV SysVinit ash at authconfig bash bdflush binutils console-tools cpio crontabs dev diffutils e2fsprogs ed eject etcskel file fileutils findutils getty_ps gpm grep groff gzip hdparm info initscripts isapnptools kbdconfig kernel less ldconfig lilo logrotate losetup mailcap mailx man mkinitrd mingetty modutils mount mouseconfig net-tools passwd kernel-pcmcia-cs procmail procps psmisc pump mandrake-release rootfiles rpm sash sed setconsole setserial shadow-utils sh-utils slocate stat sysklogd tar termcap textutils time timeconfig tmpwatch util-linux vim-minimal vixie-cron which) ],
+    comps => [ 
+	      [ 1, 'X Window System' => qw(XFree86 XFree86-xfs XFree86-75dpi-fonts) ],
+	      [ 1, 'KDE' => qw(kdeadmin kdebase kthememgr kdegames kjumpingcube kdegraphics kdelibs kdemultimedia kdenetwork kdesupport kdeutils kBeroFTPD kdesu kdetoys kpilot kcmlaptop kdpms kpppload kmpg) ],
+	      [ 0, 'Console Multimedia' => qw(aumix audiofile esound sndconfig awesfx rhsound cdp mpg123 svgalib playmidi sox mikmod) ],
+	      [ 0, 'CD-R burning and utilities' => qw(mkisofs cdrecord cdrecord-cdda2wav cdparanoia xcdroast) ],
+	      [ 0, 'Games' => qw(xbill xboard xboing xfishtank xgammon xjewel xpat2 xpilot xpuzzles xtrojka xkobo freeciv) ],
+	     ],
     packages => [ qw() ],
     partitionning => { clearall => 0, eraseBadPartitions => 1, autoformat => 1 },
     partitions => [
@@ -121,12 +127,16 @@ sub selectPath {
     $o->{isUpgrade} = $o->selectInstallOrUpgrade;
     $o->{steps}        = $o->{isUpgrade} ? \%upgradeSteps : \%installSteps;
     $o->{orderedSteps} = $o->{isUpgrade} ? \@orderedUpgradeSteps : \@orderedInstallSteps;
+
+    $o->{comps} = [ @{$o->{default}->{comps}} ];
+    foreach (@{$o->{comps}}) {
+	my ($selected, $name, @packages) = @$_;
+	$_ = { selected => $selected, name => $name, packages => \@packages };
+    }
 }
 
 sub selectInstallClass {
     $o->{installClass} = $o->selectInstallClass;
-
-    $testing and $o->{default}->{partitionning}->{clearall} = 1;
 
     if ($o->{installClass} eq 'Server') {
 	#TODO
@@ -167,6 +177,9 @@ sub partitionDisks {
     my $root_fs; map { $_->{mntpoint} eq '/' and $root_fs = $_ } @{$o->{fstab}};
     $root_fs or die "partitionning failed: no root filesystem";
 
+}
+
+sub formatPartitions {
     $o->choosePartitionsToFormat($o->{fstab});
 
     $testing and return;
@@ -178,25 +191,16 @@ sub partitionDisks {
 }
 
 sub findInstallFiles {
-    $o->{packages} = $o->{method}->getPackageSet;
-    $o->{comps} = $o->{method}->getComponentSet($o->{packages});
+    $o->{packages} = pkgs::psFromHeaderListFile(install_any::imageGetFile("hdlist"));
 }
  
 sub choosePackages {
-    # remove Base from comps so that it's hidden
-    my $base = $o->{comps}->{Base};
-    delete $o->{comps}->{Base};
-
     $o->choosePackages($o->{packages}, $o->{comps}); 
 
-    #restore Base
-    $o->{comps}->{Base} = $base;
-    $o->{comps}->{Base}->{selected} = 1;
+    my @p = @{$o->{default}->{base}}, grep { $_->{selected} } @{$o->{comps}};
+    push @p, "kernel-smp" if smp::detect();
 
-    foreach (grep { $_->{selected} } values %{$o->{comps}}) {
-	foreach (@{$_->{packages}}) { $_->{selected} = 1 }
-    }
-    smp::detect() and $o->{packages}->{"kernel-smp"}->{selected} = 1;
+    foreach (@p) { $o->{packages}->{$_}->{selected} = 1 }
 }
 
 sub doInstallStep {
@@ -257,7 +261,6 @@ sub main {
 
     $o->{prefix} = $testing ? "/tmp/test-perl-install" : "/mnt";
     mkdir $o->{prefix}, 0755;
-    $o->{method} = install_methods->new('cdrom');
 
     $o = install_steps_graphical->new($o);
 

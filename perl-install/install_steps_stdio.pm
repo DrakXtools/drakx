@@ -28,7 +28,9 @@ sub leavingStep {
 }
 
 sub chooseLanguage($) {
-    my $lang = ask_from_list('Language', 'Which language do you want?', [ lang::list() ]);
+    my $lang = lang::text2lang(ask_from_list('Language', 
+					     'Which language do you want?', 
+					     [ lang::list() ]));
     run_program::run('xmodmap', "/usr/bin/$lang.map");
     $lang;
 }
@@ -56,13 +58,12 @@ sub choosePartitionsToFormat($$) {
 
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
-    my @comps = values %$comps;
     my @r = ask_many_from_list('',
 			       "Choose the packages you want to install",
-			       [ map { $_->{name} } @comps ], 
-			       [ map { $_->{selected} } @comps ]);
+			       [ map { $_->{name} } @$comps ], 
+			       [ map { $_->{selected} } @$comps ]);
     
-    for (my $i = 0; $i < @comps; $i++) {
+    for (my $i = 0; $i < @$comps; $i++) {
 	$comps[$i]->{selected} = $r[$i];
     }
 }

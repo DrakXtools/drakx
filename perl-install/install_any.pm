@@ -10,10 +10,20 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 );
 @EXPORT_OK = map { @$_ } values %EXPORT_TAGS;
 
-use common qw(:system);
+use common qw(:common :system);
 use log;
 
 1;
+
+sub fileInBase { member($_[0], qw(hdlist comps)); }
+
+sub imageGetFile { 
+    fileInBase($_[0]) and return "/tmp/rhimage/Mandrake/base/$_[0]";
+    my $f = "/tmp/rhimage/Mandrake/RPMS/$_[0]";
+    -r $f and return $f;
+    $f =~ s/i386/i586/;
+    $f;
+}
 
 sub versionString {
     my $kernel = $::o->{packages}->{kernel} or die "I couldn't find the kernel package!";

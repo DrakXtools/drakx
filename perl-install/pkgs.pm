@@ -45,43 +45,6 @@ sub psUsingDirectory {
     \%packages;
 }
 
-sub psReadComponentsFile {
-    my ($compsfile, $packages) = @_;
-    my (%comps, %current);
-
-    local *F;
-    open F, $compsfile or die "Cannot open components file: $!";
-
-    <F> =~ /^0(\.1)?$/ or die "Comps file is not version 0.1 as expected";
-
-    my $inComp = 0;
-    my $n = 0;
-    foreach (<F>) { $n++;
-	chomp;
-	s/^ +//;
-	/^#/ and next;
-	/^$/ and next;
-
-	if ($inComp) { if (/^end$/) {
-		$inComp = 0;
-		$comps{$current{name}} = { %current };
-	    } else {
-		$packages->{$_} ? 
-		  push @{$current{packages}}, $packages->{$_} :
-		  log::w("package $_ does not exist (line $n of comps file)");
-	    }
-	} else {
-	    my ($selected, $hidden, $name) = /^([01])\s*(--hide)?\s*(.*)/ or die "bad comps file at line $n";
-	    %current = (selected => $selected, inmenu => !$hidden, name => $name);
-	    $inComp = 1;
-	}
-    }
-    log::l("read " . (scalar keys %comps) . " comps");
-    \%comps;
-}
-
-
-
 sub psVerifyDependencies {
 #    my ($packages, $fixup) = @_;
 #
@@ -108,12 +71,6 @@ sub psVerifyDependencies {
 #    }
 #
 #    1;
-}
-
-sub selectComponents {
-    my ($csp, $psp, $doIndividual) = @_;
-
-    return 0;
 }
 
 sub psFromHeaderListDesc {

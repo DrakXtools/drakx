@@ -24,7 +24,14 @@ my %languages = (
 
 1;
 
-sub list { keys %languages }
+sub list { map { $_->[0] } values %languages }
+sub text2lang {
+    my ($t) = @_;
+    while (my ($k, $v) = each %languages) {
+	$v->[0] eq $t and return $k;
+    }
+    die "unknown language $t";
+}
 
 sub set {
     my $lang = shift;

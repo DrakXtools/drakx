@@ -12,6 +12,9 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK);
 
 use Gtk;
 use c;
+use common qw(:common);
+
+my $forgetTime = 1000; # in milli-seconds
 
 1;
 
@@ -202,7 +205,7 @@ sub _create_window($$) {
     my ($o, $title) = @_;
     $o->{window} = new Gtk::Window;
     $o->{window}->set_title($title);
-    $o->{window}->signal_connect("expose_event" => sub { c::XSetInputFocus($o->{window}->window->XWINDOW) }) if $my_gtk::force_focus; 
+    $o->{window}->signal_connect("expose_event" => sub { c::XSetInputFocus($o->{window}->window->XWINDOW) }) if $my_gtk::force_focus;
     $o->{window}->signal_connect("delete_event" => sub { $o->{retval} = undef; Gtk->main_quit });
     $o->{window}->set_uposition(@$my_gtk::force_position) if $my_gtk::force_position;
     $o->{window}
@@ -242,14 +245,50 @@ sub _ask_from_entry($$@) {
 sub _ask_from_list($$$@) {
     my ($o, $l, @msgs) = @_;
     my $list = new Gtk::List;
+    my ($first_time, $starting_word) = (1, '');
+    my (@widgets, $timeout);
     my @sorted = sort @$l;
-    $list->signal_connect(select_child => sub { 
+    $list->signal_connect(select_child => sub {
 	$o->{retval} = $sorted[$list->child_position($_[1])];
 	Gtk->main_quit;
     });
-    gtkadd($list, map { new Gtk::ListItem($_) } @sorted);
+    for (my $i = 0; $i < @sorted; $i++) {
+	my $focused = $i;
+	my $w = new Gtk::ListItem($sorted[$i]);
+	$w->signal_connect(key_press_event => sub {
+             my ($w, $e)= @_;
+	     my $c = chr $e->{keyval};
 
-    gtkadd($o->{window}, gtkpack($o->create_box_with_title(@msgs), $list));
+	     Gtk->timeout_remove($timeout) if $timeout; $timeout = '';
+
+	     if ($e->{keyval} >= 0x100) {
+		 if ($c eq "\r" || $c eq "\x8d") {
+		     $list->select_item($focused);
+		 }
+		 $starting_word = '';
+	     } else {
+		 my $curr = $focused + bool($starting_word eq '' || $starting_word eq $c);
+		 $starting_word .= $c unless $starting_word eq $c;
+
+		 my $j; for ($j = 0; $j < @sorted; $j++) {
+		     $sorted[($j + $curr) % @sorted] =~ /^$starting_word/i and last;
+		 }
+		 $j == @sorted ?
+		   $starting_word = '' :
+		   $widgets[($j + $curr) % @sorted]->grab_focus;
+
+		 $timeout = Gtk->timeout_add($forgetTime, sub { $timeout = $starting_word = ''; 0 } );
+	     }
+	});
+	push @widgets, $w;
+    }
+    gtkadd($list, @widgets);
+    gtkadd($o->{window}, 
+	   gtkpack($o->create_box_with_title(@msgs), 
+		   @widgets > 15 ? 
+		     gtkset_usize(createScrolledWindow($list), 0, 300) : 
+		     $list));
+    $widgets[0]->grab_focus;
 }
 
 sub _ask_warn($@) {

@@ -74,9 +74,6 @@ sub choosePartitionsToFormat($$) {
 
 sub choosePackages($$$) {
     my ($o, $packages, $comps) = @_;
-
-    foreach (@{$o->{default}->{comps}}) { $comps->{$_}->{selected} = 1; }
-    foreach (@{$o->{default}->{packages}}) { $packages->{$_}->{selected} = 1; }
 }
 
 sub beforeInstallPackages($) {
