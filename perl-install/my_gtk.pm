@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     helpers => [ qw(create_okcancel createScrolledWindow create_menu create_notebook create_packtable create_hbox create_vbox create_adjustment create_box_with_title) ],
-    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
+    wrappers => [ qw(gtksignal_connect gtkpack gtkpack_ gtkappend gtkadd gtktext_insert gtkset_usize gtkset_justify gtkset_active gtkshow gtkdestroy gtkset_mousecursor gtkset_background gtkset_default_fontset) ],
     ask => [ qw(ask_warn ask_okcancel ask_yesorno ask_from_entry ask_from_list ask_file) ],
 );
 $EXPORT_TAGS{all} = [ map { @$_ } values %EXPORT_TAGS ];
@@ -126,6 +126,14 @@ sub gtkadd($@) {
     $w
 }
 
+sub gtktext_insert($$) {
+    my ($w, $t) = @_;
+    $w->insert(undef, undef, undef, "$t\n"); #- needs \n otherwise in case of one line text the beginning is not shown (even with the vadj->set_value)
+    $w->set_word_wrap(1);
+    $w->vadj->set_value(0);
+    $w;
+}
+
 sub gtkroot {
     Gtk->init;
     Gtk::Gdk::Window->new_foreign(Gtk::Gdk->ROOT_WINDOW);
@@ -200,13 +208,20 @@ sub create_box_with_title($@) {
 }
 
 sub createScrolledWindow($) {
-    my $w = new Gtk::ScrolledWindow(undef, undef);
-    $w->set_policy('automatic', 'automatic');
-    member(ref $_[0], qw(Gtk::CList)) ?
-      $w->add($_[0]) :
-      $w->add_with_viewport($_[0]);
-    $_[0]->show;
-    $w
+    my ($W) = @_;
+    if (ref $W eq "Gtk::Text") {
+	gtkpack_(new Gtk::HBox(0,0), 
+		 1, $W, 
+		 0, new Gtk::VScrollbar($W->vadj));
+    } else {
+	my $w = new Gtk::ScrolledWindow(undef, undef);
+	$w->set_policy('automatic', 'automatic');
+	member(ref $W, qw(Gtk::CList)) ?
+	  $w->add($W) :
+	    $w->add_with_viewport($W);
+	$W->show;
+	$w
+    }
 }
 
 sub create_menu($@) {

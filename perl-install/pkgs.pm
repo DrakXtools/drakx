@@ -19,7 +19,7 @@ $size_correction_ratio = 1.04;
 
 sub Package {
     my ($packages, $name) = @_;
-    $packages->{$name} or log::l("unknown package $name") && undef;
+    $packages->{$name} or log::l("unknown package `$name'") && undef;
 }
 
 sub select($$;$) {
@@ -28,9 +28,8 @@ sub select($$;$) {
     $p->{base} ||= $base;
     $p->{selected} = -1; #- selected by user
     my %l; @l{@{$p->{deps} || die "missing deps file"}} = ();
-    while (do { while (($n, $v) = each %l) { last if !defined $v; } $n }) {
+    while (do { my %l = %l; while (($n, $v) = each %l) { last if $v != 1; } $n }) {
 	$l{$n} = 1;
-	$n =~ /|/ and $n = first(split '\|', $n); #-TODO better handling of choice
 	my $i = Package($packages, $n) or next;
 	$i->{base} ||= $base;
 	$i->{deps} or log::l("missing deps for $n");
@@ -39,6 +38,7 @@ sub select($$;$) {
 	}
 	$i->{selected}++ unless $i->{selected} == -1;
     }
+    1;
 }
 sub unselect($$;$) {
     my ($packages, $p, $size) = @_;
@@ -139,7 +139,7 @@ sub getDeps($) {
     my $f = install_any::getFile("depslist") or die "can't find dependencies list";
     foreach (<$f>) {
 	my ($name, $size, @deps) = split;
-	($name, @deps) = map { chop_version($_) } ($name, @deps);
+	($name, @deps) = map { chop_version(first(split '\|')) } ($name, @deps); #-TODO better handling of choice
 	$packages->{$name} or next;
 	$packages->{$name}{size} = $size;
 	$packages->{$name}{deps} = \@deps;

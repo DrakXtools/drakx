@@ -3,6 +3,8 @@ tolook qw(fstab )
 
 upgrade
 
+propose fb in XFdrake
+
 update the list of modules (in update_kernel)
 
 look at the pcmcia case
@@ -69,6 +71,8 @@ try detect_devices::floppies (and how are scsi floppies handled?)
 maybe: do a iotcl FDGETPRM to detect fd1, fd0.
 
 test smp (is it enough to scan /proc/cpuinfo for multiple /^processor/ lines?)
+
+remove the nasty wrapping arrow (in help) by patching gtk :(
 
 use ddcprobe monitor's size info for pnp monitors
 use ddcprobe video card memory size info

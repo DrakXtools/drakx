@@ -6,7 +6,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
-    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text) ],
+    common     => [ qw(__ min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
     functional => [ qw(fold_left map_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
@@ -246,6 +246,19 @@ sub warp_text($;$) {
     @l;
 }
 
+sub formatAlaTeX($) {
+    my ($t, $tmp);
+    foreach (split "\n", $_[0]) {
+	if (/^$/) {
+	    $t .= ($t && "\n") . $tmp;
+	    $tmp = '';
+	} else {
+	    $tmp = ($tmp && "$tmp ") . $_;
+	}
+    }
+    $t . ($t && $tmp && "\n") . $tmp;
+}
+
 sub getVarsFromSh($) {
     my %l;
     local *F;
@@ -274,7 +287,6 @@ sub setVarsInSh {
     open F, "> $_[0]" or die "cannot create config file $file";
     $l->{$_} and print F "$_=$l->{$_}\n" foreach @fields;
 }
-
 
 sub best_match {
     my ($str, @lis) = @_;

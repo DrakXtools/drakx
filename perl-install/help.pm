@@ -13,19 +13,24 @@ selectPath =>
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
 
+
 Choose \"Update\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 
 selectInstallClass =>
  __("Select:
+
   - Beginner: If you have not installed Linux before, or wish to install
 the distribution elected \"Product of the year\" for 1999, click here.
+
   - Developer: If you are familiar with Linux and will be using the
 computer primarily for software development, you will find happiness
 here.
+
   - Server: If you wish to install a general purpose server, or the
 Linux distribution elected \"Distribution/Server\" for 1999, select
 this.
+
   - Expert: If you know GNU/Linux and want to perform a highly
 customized installation, this Install Class is for you."),
 
@@ -33,6 +38,7 @@ setupSCSI =>
  __("The system did not detect a SCSI card. If you have one (or several)
 click on \"Yes\" and choose the module(s) to be tested. Otherwise,
 select \"No\".
+
 
 If you don't know if your computer has SCSI interfaces, consult the
 original documentation delivered with the computer, or if you use
@@ -62,11 +68,13 @@ data you wish to keep. Typically retained are: /home and /usr/local."),
 choosePackages =>
  __("You may now select the packages you wish to install.
 
+
 Please note that some packages require the installation of others. These
 are referred to as package dependencies. The packages you select, and
 the packages they require will automatically be added to the
 installation configuration. It is impossible to install a package
 without installing all of its dependencies.
+
 
 Information on each category and specific package is available in the
 area titled \"Info\". This is located above the buttons: [confirmation]
@@ -96,6 +104,7 @@ setRootPassword =>
 assigned. The password must be entered twice to verify that both
 password entries are identical.
 
+
 Choose this password carefully. Only persons with access to an
 administrator account can maintain and administer the system.
 Alternatively, unauthorized use of an administrator account can be
@@ -105,12 +114,14 @@ mixture of alphanumeric characters and a least 8 characters long. It
 should never be written down. Do not make the password too long or
 complicated that it will be difficult to remember.
 
+
 When you login as Administrator, at \"login\" type \"root\" and at
 \"password\", type the password that was created here."),
 
 addUser =>
  __("You can now authorize one or more people to use your Linux
 system. Each user account will have their own customizable environment.
+
 
 It is very important that you create a regular user account, even if
 there will only be one principle user of the system. The administrative
@@ -126,6 +137,7 @@ createBootdisk =>
 setupBootloader =>
  __("You need to indicate where you wish
 to place the information required to boot to Linux.
+
 
 Unless you know exactly what you are doing, choose \"First sector of
 drive\"."),
@@ -151,19 +163,24 @@ selectPath =>
  __("Choose \"Installation\" if there are no previous versions of Linux
 installed, or if you wish use to multiple distributions or versions.
 
+
 Choose \"Update\" if you wish to update a previous version of Mandrake
 Linux: 5.1 (Venice), 5.2 (Leeloo), 5.3 (Festen) or 6.0 (Venus)."),
 
 selectInstallClass =>
  __("Select:
+
   - Beginner: If you have not installed Linux before, or wish to install
 the distribution elected \"Product of the year\" for 1999, click here.
+
   - Developer: If you are familiar with Linux and will be using the
 computer primarily for software development, you will find happiness
 here.
+
   - Server: If you wish to install a general purpose server, or the
 Linux distribution elected \"Distribution/Server\" for 1999, select
 this.
+
   - Expert: If you know GNU/Linux and want to perform a highly
 customized installation, this Install Class is for you."),
 
@@ -171,6 +188,7 @@ setupSCSI =>
  __("The system did not detect a SCSI card. If you have one (or several)
 click on \"Yes\" and choose the module(s) to be tested. Otherwise,
 select \"No\".
+
 
 If you don't know if your computer has SCSI interfaces, consult the
 original documentation delivered with the computer, or if you use
@@ -200,11 +218,13 @@ data you wish to keep. Typically retained are: /home and /usr/local."),
 choosePackages =>
  __("You may now select the packages you wish to install.
 
+
 Please note that some packages require the installation of others. These
 are referred to as package dependencies. The packages you select, and
 the packages they require will automatically be added to the
 installation configuration. It is impossible to install a package
 without installing all of its dependencies.
+
 
 Information on each category and specific package is available in the
 area titled \"Info\". This is located above the buttons: [confirmation]
@@ -234,6 +254,7 @@ setRootPassword =>
 assigned. The password must be entered twice to verify that both
 password entries are identical.
 
+
 Choose this password carefully. Only persons with access to an
 administrator account can maintain and administer the system.
 Alternatively, unauthorized use of an administrator account can be
@@ -243,12 +264,14 @@ mixture of alphanumeric characters and a least 8 characters long. It
 should never be written down. Do not make the password too long or
 complicated that it will be difficult to remember.
 
+
 When you login as Administrator, at \"login\" type \"root\" and at
 \"password\", type the password that was created here."),
 
 addUser =>
  __("You can now authorize one or more people to use your Linux
 system. Each user account will have their own customizable environment.
+
 
 It is very important that you create a regular user account, even if
 there will only be one principle user of the system. The administrative
@@ -264,6 +287,7 @@ createBootdisk =>
 setupBootloader =>
  __("You need to indicate where you wish
 to place the information required to boot to Linux.
+
 
 Unless you know exactly what you are doing, choose \"First sector of
 drive\"."),

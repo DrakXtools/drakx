@@ -1,22 +1,25 @@
 style "any"
 {
+  base[NORMAL]	  = { 0, 0, 0.67 }
   bg[NORMAL]      = { 0, 0, 0.67 }
+  bg[INSENSITIVE] = { 0, 0, 0.67 }
+  base[INSENSITIVE]={ 0, 0, 0.67 }
   bg[ACTIVE]      = { 0, 0.67, 1.0 }
   bg[PRELIGHT]    = { 0, 0, 1.0 }
-  bg[INSENSITIVE] = { 1.0, 0, 0.67 }
   
+  text[NORMAL]	  = { 1.0, 1.0, 1.0 }
   fg[NORMAL]  	  = { 1.0, 1.0, 1.0 }
+  fg[INSENSITIVE] = { 1.0, 1.0, 1.0 }
+  text[INSENSITIVE]={ 1.0, 1.0, 1.0 }
   fg[ACTIVE]  	  = { 1.0, 1.0, 1.0 }
   fg[PRELIGHT]    = { 1.0, 1.0, 1.0 }
-  fg[INSENSITIVE] = { 1.0, 1.0, 1.0 }
-
 }
 
 style "entry"
 {
   base[NORMAL] = { 0, 1.0, 1.0 }
   base[ACTIVE] = { 0, 1.0, 1.0 }
-  fg[NORMAL] = { 0.67, 0, 0.67 }
+  fg[NORMAL]   = { 0.67, 0, 0.67 }
 
   bg[SELECTED] = { 1.0, 1.0, 1.0 }
   fg[SELECTED] = { 0, 0, 1.0 }
@@ -24,6 +27,10 @@ style "entry"
 
 style "button" = "any"
 {
+  bg[NORMAL] = { 0, 0, 1.0 }
+  fg[NORMAL] = { 1.0, 1.0, 1.0 }
+  bg[PRELIGHT] = { 0, 0, 1.0 }
+  fg[PRELIGHT] = { 0, 1.0, 1.0 }
 }
 
 style "background"
@@ -33,8 +40,8 @@ style "background"
 }
 
 widget_class "*" style "any"
-widget_class "*GtkEntry*" style "entry"
 widget_class "*GtkSpin*" style "entry"
+widget_class "*GtkEntry*" style "entry"
 widget_class "*Gtk*List*" style "entry"
 widget "*GtkButton*" style "button"
 widget "*background*" style "background"
