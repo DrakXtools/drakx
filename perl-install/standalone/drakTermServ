@@ -50,10 +50,12 @@ my $clients_set = 0;
 my @nothing = (0..10);
 my %conf;
 $conf{ALLOW_THIN} = 0;
+$conf{CREATE_PXE} = 0;
 
 my $nfs_subnet;
 my $nfs_mask;
 my $cfg_dir = "/etc/drakxtools/draktermserv/";
+-e $cfg_dir or mkdir_p($cfg_dir);
 my $cfg_file = $cfg_dir . "draktermserv.conf";
 my $interface = get_net_interface();
 my $server_ip = get_ip_from_sys();
@@ -488,7 +490,7 @@ sub text_view {
 sub help() {
 	my $inittab_str = '/etc/inittab$$IP=client_ip$$';
 	my $shadow_str = '/etc/shadow$$CLIENT$$';
-	my $xfconfig_str = '/etc/X11/XF86Config-4$$IP=client_ip$$';
+	my $xfconfig_str = '/etc/X11/xorg.conf$$IP=client_ip$$';
 	
     text_view(N("Terminal Server Overview") . "\n\n" .
 N("        - Create Etherboot Enabled Boot Images:
@@ -695,7 +697,12 @@ sub make_nbi() {
 
 	my $combo_default_kernel = Gtk2::ComboBox->new_with_strings([ N("Default kernel version"), 
                                                                    map { bootloader::vmlinuz2version($_) } @kernels ]);
-	$combo_default_kernel->set_active(0);
+	
+	my $check_pxe = Gtk2::CheckButton->new(N("Create PXE images."));
+	$check_pxe->set_active($conf{CREATE_PXE});
+	$check_pxe->signal_connect('clicked' => sub { invbool \$conf{CREATE_PXE} });
+
+    $combo_default_kernel->set_active(0);
 	$combo_default_kernel->entry->signal_connect('changed', sub {
 		my $default_kernel = $combo_default_kernel->entry->get_text;
 		my $config;
@@ -725,7 +732,8 @@ sub make_nbi() {
 						if ($kernel) {
 							$in->ask_warn(N("Information"), N("This will take a few minutes."));
 							gtkset_mousecursor_wait();
-							build_n_update($list_model, "-k /boot/$kernel");
+							build_n_update($list_model, $kernel, undef);
+							link_pxe($kernel, undef) if $conf{CREATE_PXE};
 							gtkset_mousecursor_normal(); 
 						} else {
 							$in->ask_warn(N("Error"), N("No kernel selected!")) if !($kernel); 
@@ -733,31 +741,35 @@ sub make_nbi() {
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build Single NIC -->")), clicked => sub { 
 						if ($nic) {
-							build_n_update($list_model, "-k /boot/$kernel -r $nic");
+							build_n_update($list_model, $kernel, $nic);
 						} else {
 							$in->ask_warn(N("Error"), N("No NIC selected!"));
 						}
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Build All Kernels -->")), clicked => sub {
 						$in->ask_warn(N("Information"), N("This will take a few minutes."));
-						gtkset_mousecursor_wait();
-						build_n_update($list_model, "-k /boot/$_") foreach @kernels;
+						gtkset_mousecursor_wait();						 
+						foreach (@kernels) {
+							build_n_update($list_model, $_, undef);
+							link_pxe($kernel, undef) if $conf{CREATE_PXE};
+						}
 						gtkset_mousecursor_normal(); 
 					}),
 					$combo_default_kernel,
+					$check_pxe,
 					Gtk2::HBox->new(1,1),
 					gtksignal_connect(Gtk2::Button->new(N("<-- Delete")), clicked => sub { 
-						my $nbi = $tftpboot . "/" . $nbi;
-						my $result = unlink($nbi) or warn("Can't delete $nbi...");
-						if ($result == 1) {
-							$list_model->remove($nbi_iter);
+						if ($nbi) {
+							my $result = clear_nbi($nbi);
+							$list_model->remove($nbi_iter) if $result == 1;
+						} else {
+							$in->ask_warn(N("Error"), N("No image selected!"));
 						}
 					}),
 					gtksignal_connect(Gtk2::Button->new(N("Delete All NBIs")), clicked => sub { 
 						gtkset_mousecursor_wait();
 						foreach (grep { /\.nbi/ } all($tftpboot)) {
-							my $nbi = $tftpboot . "/" . $_;
-							unlink($nbi) || warn("Can't delete $nbi...");
+							clear_nbi($_);
 						}
 						$list_model->clear;
 						gtkset_mousecursor_normal();
@@ -772,6 +784,21 @@ sub make_nbi() {
 	$nbi_box->show_all;
 }
 
+sub clear_nbi {
+	my ($nbi) = @_;
+	$nbi = $tftpboot . "/" . $nbi;
+	my $result = unlink($nbi) or warn("Can't delete $nbi...");
+	$nbi =~ s|boot-|initrd-|;
+	$nbi =~ s|nbi|img|;
+	unlink($nbi);
+	if ($conf{CREATE_PXE}) {
+		my $pxe = get_platform_pxe();
+		$nbi =~ s|$tftpboot/|$pxe|;
+		unlink($nbi);		
+	}
+	return $result;
+}
+
 sub update_list {
     my ($list_model) = @_;
     $list_model->clear;
@@ -779,11 +806,36 @@ sub update_list {
 }
 
 sub build_n_update {
-    my ($list_model, $command) = @_;
+    my ($list_model, $kernel, $nic) = @_;
+	my $command = "-k /boot/$kernel";
+	$command .= " -r $nic" if $nic;
     system("/usr/bin/mknbi-set -v $command");
+	if ($conf{CREATE_PXE}) {
+		my $pxedir = get_platform_pxe();
+		cp_af("/boot/$kernel", $pxedir) if !-f "$pxedir/$kernel";
+		link_pxe($kernel, $nic) if $nic;
+	}
     update_list($list_model);
 }
 
+sub link_pxe {
+	my ($kernel, $nic) = @_;
+	my $pxedir = get_platform_pxe();
+	$kernel =~ s|vmlinuz-||;
+	if ($nic) {
+		#- symlinkf doesn't work?
+		`ln -sf ../../initrd-$nic.$kernel.img $pxedir`;
+	} else {
+		`ln -sf ../../initrd-*.$kernel.img $pxedir`;
+	}
+}
+
+sub get_platform_pxe {
+	my $adir = "X86PC";
+	$adir = "IA64PC" if arch() =~ /x86_64|ia64/;
+	$adir = "$tftpboot/$adir/linux/";
+	return $adir;
+}
 
 sub maintain_users() {
 	#- copy users from /etc/shadow to /etc/shadow$$CLIENT$$ to allow ts login
@@ -1053,20 +1105,20 @@ sub maintain_clients() {
 }
 
 sub client_X_keyboard() {
-	my $server_conf = "/etc/X11/XF86Config-4";
-	my $client_conf = '/etc/X11/XF86Config-4$$CLIENT$$';
+	my $server_conf = "/etc/X11/xorg.conf";
+	my $client_conf = '/etc/X11/xorg.conf$$CLIENT$$';
 	my @server_X_config = cat_($server_conf);
 	foreach (@server_X_config) {
 		chomp;
 		if (/XkbModel/) {
-			my $oldmodel = `grep XkbModel '/etc/X11/XF86Config-4\$\$CLIENT\$\$'`;
+			my $oldmodel = `grep XkbModel '/etc/X11/xorg.conf\$\$CLIENT\$\$'`;
 			chomp $oldmodel;
 			my $newmodel = $_;
 			substInFile { s/$oldmodel/$newmodel/ } $client_conf;
 			log::explanations("Sync XkbModel in $client_conf from $server_conf"); 
 		}
 		if (/XkbLayout/) {
-			my $oldlayout = `grep XkbLayout '/etc/X11/XF86Config-4\$\$CLIENT\$\$'`;
+			my $oldlayout = `grep XkbLayout '/etc/X11/xorg.conf\$\$CLIENT\$\$'`;
 			chomp $oldlayout;
 			my $newlayout = $_;
 			substInFile { s/$oldlayout/$newlayout/ } $client_conf;
@@ -1133,43 +1185,43 @@ sub dhcpd_config() {
 	my $label_subnet = Gtk2::Label->new(N("Subnet:"));
 	$label_subnet->set_justify('right');
 	my $entry_subnet = Gtk2::Entry->new;	
-	$box_subnet->pack_end($entry_subnet, 0, 0, 10);
-	$box_subnet->pack_end($label_subnet, 0, 0, 10);
+	$box_subnet->pack_end($entry_subnet, 0, 0, 2);
+	$box_subnet->pack_end($label_subnet, 0, 0, 2);
 	
 	my $box_netmask = Gtk2::HBox->new(0,0);
 	my $label_netmask = Gtk2::Label->new(N("Netmask:"));
 	$label_netmask->set_justify('left');
 	my $entry_netmask = Gtk2::Entry->new;
-	$box_netmask->pack_end($entry_netmask, 0, 0, 10);
-	$box_netmask->pack_end($label_netmask, 0, 0, 10);
+	$box_netmask->pack_end($entry_netmask, 0, 0, 2);
+	$box_netmask->pack_end($label_netmask, 0, 0, 2);
 	
 	my $box_routers = Gtk2::HBox->new(0,0);
 	my $label_routers = Gtk2::Label->new(N("Routers:"));
 	$label_routers->set_justify('left');
 	my $entry_routers = Gtk2::Entry->new;
-	$box_routers->pack_end($entry_routers, 0, 0, 10);
-	$box_routers->pack_end($label_routers, 0, 0, 10);
+	$box_routers->pack_end($entry_routers, 0, 0, 2);
+	$box_routers->pack_end($label_routers, 0, 0, 2);
 	
 	my $box_subnet_mask = Gtk2::HBox->new(0,0);
 	my $label_subnet_mask = Gtk2::Label->new(N("Subnet Mask:"));
 	$label_subnet_mask->set_justify('left');
 	my $entry_subnet_mask = Gtk2::Entry->new;
-	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 10);
-	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 10);
+	$box_subnet_mask->pack_end($entry_subnet_mask, 0, 0, 2);
+	$box_subnet_mask->pack_end($label_subnet_mask, 0, 0, 2);
 	
 	my $box_broadcast = Gtk2::HBox->new(0,0);
 	my $label_broadcast = Gtk2::Label->new(N("Broadcast Address:"));
 	$label_broadcast->set_justify('left');
 	my $entry_broadcast = Gtk2::Entry->new;
-	$box_broadcast->pack_end($entry_broadcast, 0, 0, 10);
-	$box_broadcast->pack_end($label_broadcast, 0, 0, 10);
+	$box_broadcast->pack_end($entry_broadcast, 0, 0, 2);
+	$box_broadcast->pack_end($label_broadcast, 0, 0, 2);
 	
 	my $box_domain = Gtk2::HBox->new(0,0);
 	my $label_domain = Gtk2::Label->new(N("Domain Name:"));
 	$label_domain->set_justify('left');
 	my $entry_domain = Gtk2::Entry->new;
-	$box_domain->pack_end($entry_domain, 0, 0, 10);
-	$box_domain->pack_end($label_domain, 0, 0, 10);
+	$box_domain->pack_end($entry_domain, 0, 0, 2);
+	$box_domain->pack_end($label_domain, 0, 0, 2);
 	
 	my $box_name_servers = Gtk2::HBox->new(0,0);
 	my $box_name_servers_entry = Gtk2::VBox->new(0,0);
@@ -1181,8 +1233,8 @@ sub dhcpd_config() {
 	$box_name_servers_entry->pack_start($entry_name_server1, 0, 0, 0);
 	$box_name_servers_entry->pack_start($entry_name_server2, 0, 0, 0);
 	$box_name_servers_entry->pack_start($entry_name_server3, 0, 0, 0);
-	$box_name_servers->pack_end($box_name_servers_entry, 0, 0, 10);
-	$box_name_servers->pack_end($label_name_servers, 0, 0, 10);
+	$box_name_servers->pack_end($box_name_servers_entry, 0, 0, 2);
+	$box_name_servers->pack_end($label_name_servers, 0, 0, 2);
 
 	my $label_ip_range_start = Gtk2::Label->new(N("IP Range Start:"));
 	my $label_ip_range_end = Gtk2::Label->new(N("IP Range End:"));
@@ -1292,7 +1344,7 @@ sub dhcpd_config() {
 }
 
 sub get_net_interface() {
-	my @interfaces = `/sbin/route | grep -v lo | tail +3 | awk '{print \$8}' | uniq`;
+	my @interfaces = `/sbin/route | grep -v lo | grep -v vmnet | tail +3 | awk '{print \$8}' | uniq`;
 	chop @interfaces;
 	my $count = @interfaces;
 	if ($count == 1) {
@@ -1349,7 +1401,10 @@ sub write_dhcpd_config {
 	my @dhcpd_config;
 
 	if ($mode eq "append") {
+print "got here...";
+print "PXE: $conf{CREATE_PXE}\n";
 		append_to_file("/etc/dhcpd.conf", qq(include "/etc/dhcpd.conf.terminal-server";\n));
+		push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 		push @dhcpd_config, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
 		push @dhcpd_config, qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n);
 		push @dhcpd_config, qq(# Include client machine configurations\ninclude "$client_cfg";\n);
@@ -1365,6 +1420,7 @@ sub write_dhcpd_config {
 	push @dhcpd_config, "ddns-update-style none;\n\n";
 	push @dhcpd_config, "# Long leases (48 hours)\ndefault-lease-time 172800;\nmax-lease-time 172800;\n\n";
 	push @dhcpd_config, qq(# Include Etherboot definitions and defaults\ninclude "/etc/dhcpd.conf.etherboot.include";\n);
+	push @dhcpd_config, qq(# Include PXE definitions and defaults\ninclude "/etc/dhcpd.conf.pxe.include";\n) if $conf{CREATE_PXE};
 	push @dhcpd_config, qq(# Include Etherboot default kernel version\ninclude "/etc/dhcpd.conf.etherboot.kernel";\n\n);
 	push @dhcpd_config, "# Network-specific section\n\n";
 	
@@ -1535,6 +1591,7 @@ sub start_ts() {
 	@buff = ();
 	if (-f $pcimap) {
 		$buff[0] = "Starting Terminal Server...\n\n";
+		`touch /etc/dhcpd.conf.etherboot.kernel` if ! -f "/etc/dhcpd.conf.etherboot.kernel";
 		my $buff_index = service_change("dhcpd", "start", 2);
 		$buff_index = service_change("clusternfs", "start", $buff_index);
 		$buff[$buff_index] = "\n\tDone!";	
@@ -1887,7 +1944,7 @@ sub client_hdw_config {
 		# make all the local config files
 		cp_af("/etc/sysconfig/mouse", "/etc/sysconfig/mouse$suffix") if -f "/etc/sysconfig/mouse";
 		cp_af("/etc/X11/XF86Config", "/etc/X11/XF86Config$suffix") if -f "/etc/X11/XF86Config";
-		cp_af('/etc/X11/XF86Config-4$$CLIENT$$', "/etc/X11/XF86Config-4$suffix") if -f '/etc/X11/XF86Config-4$$CLIENT$$';
+		cp_af('/etc/X11/xorg.conf$$CLIENT$$', "/etc/X11/xorg.conf$suffix") if -f '/etc/X11/xorg.conf$$CLIENT$$';
 		cp_af("/dev/null", "/etc/modules.conf$suffix");
 		cp_af("/dev/null", "/etc/modules$suffix");
 		cp_af("/dev/null", "/etc/modprobe.conf$suffix");
@@ -1900,7 +1957,7 @@ sub client_hdw_config {
 		append_to_file("/etc/exports", "/etc/modprobe.conf$suffix\t$mnt_access\n");
 		append_to_file("/etc/exports", "/etc/modprobe.preload$suffix\t$mnt_access\n");
 		append_to_file("/etc/exports", "/etc/X11/XF86Config$suffix\t$mnt_access\n");
-		append_to_file("/etc/exports", "/etc/X11/XF86Config-4$suffix\t$mnt_access\n");
+		append_to_file("/etc/exports", "/etc/X11/xorg.conf$suffix\t$mnt_access\n");
 	} else {
 		log::explanations("Removing root access for $client_ip");
 		eval { rm_rf("/etc/shadow\$\$IP=$client_ip\$\$") };
@@ -1938,7 +1995,7 @@ sub clean_client_config {
 	eval { rm_rf("/etc/modprobe.conf$suffix") };
 	eval { rm_rf("/etc/modprobe.preload$suffix") };
 	eval { rm_rf("/etc/X11/XF86Config$suffix") };
-	eval { rm_rf("/etc/X11/XF86Config-4$suffix") };
+	eval { rm_rf("/etc/X11/xorg.conf$suffix") };
 	eval { rm_rf("/etc/sysconfig/network$suffix") };
 	remove_client_mounts($client_ip);
 }
