@@ -111,10 +111,13 @@ SV * iconv_(char* s, char* from_charset, char* to_charset) {
   char* retval = s;
   if (cd != (iconv_t) (-1)) {
       size_t s_len = strlen(retval);
-      char *buf = alloca(3 * s_len + 10); /* 10 for safety, it should not be needed */
+      /* the maximum expansion when converting happens when converting
+	 tscii to utf-8; each tscii char can become up to 4 unicode chars
+	 and each one of those unicode chars can be 3 bytes long */
+      char *buf = alloca(4 * 3 * s_len);
       {
 	  char *ptr = buf;
-	  size_t ptr_len = 3 * s_len + 10;
+	  size_t ptr_len = 4 * 3 * s_len;
 	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
 	      *ptr = 0;
 	      retval = buf;
