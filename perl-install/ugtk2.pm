@@ -907,7 +907,7 @@ sub show($) {
 }
 sub destroy($) {
     my ($o) = @_;
-    $o->{rwindow}->destroy if !$o->{destroyed};
+    $o->{rwindow}->destroy;
     flush();
 }
 sub DESTROY { goto &destroy }
