@@ -595,6 +595,7 @@ sub load_rate_files {
     #- if there is a supplementary media, the rpmsrate/compssUsers are overridable
     pkgs::read_rpmsrate(
 	$o->{packages},
+	$o->{rpmsrate_flags_chosen},
 	getFile(-e "/tmp/rpmsrate" ? "/tmp/rpmsrate" : "media/media_info/rpmsrate")
     );
     ($o->{compssUsers}, $o->{gtk_display_compssUsers}) = pkgs::readCompssUsers(
@@ -622,12 +623,15 @@ sub setPackages {
 	pkgs::selectPackage($o->{packages},
 			    pkgs::packageByName($o->{packages}, 'basesystem') || die("missing basesystem package"), 1);
 
+	my $rpmsrate_flags_was_chosen = $o->{rpmsrate_flags_chosen};
+
+	put_in_hash($o->{rpmsrate_flags_chosen}, rpmsrate_always_flags($o)); #- must be done before pkgs::read_rpmsrate()
 	load_rate_files($o);
 
-	#- preselect default_packages and compssUsers selected.
-	setDefaultPackages($o);
-	pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+	set_rpmsrate_default_category_flags($o, $rpmsrate_flags_was_chosen);
 
+	push @{$o->{default_packages}}, default_packages($o);
+	select_default_packages($o);
     } else {
 	#- this has to be done to make sure necessary files for urpmi are
 	#- present.
@@ -638,55 +642,47 @@ sub setPackages {
     }
 }
 
-sub setDefaultPackages {
-    my ($o) = @_;
-
-    push @{$o->{default_packages}}, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
-    push @{$o->{default_packages}}, "nfs-utils-clients" if $o->{method} eq "nfs";
-    push @{$o->{default_packages}}, "numlock" if $o->{miscellaneous}{numlock};
-    push @{$o->{default_packages}}, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
-    push @{$o->{default_packages}}, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
-    push @{$o->{default_packages}}, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
-    my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
-    if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
-        modules::append_to_modules_loaded_at_startup($_, 'i8k') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
-        push @{$o->{default_packages}}, "i8kutils";
-    }
-    if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
-        modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
-        push @{$o->{default_packages}}, "toshutils";
-    }
-    push @{$o->{default_packages}}, "grub" if isLoopback(fs::get::root($o->{fstab}));
-    push @{$o->{default_packages}}, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
+sub set_rpmsrate_default_category_flags {
+    my ($o, $rpmsrate_flags_was_chosen) = @_;
 
     #- if no cleaning needed, populate by default, clean is used for second or more call to this function.
-    {
-	if ($::auto_install && ($o->{rpmsrate_flags_chosen} || {})->{CAT_ALL}) {
-	    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
-	}
-	if (!$o->{rpmsrate_flags_chosen} && !$o->{isUpgrade}) {
-	    #- use default selection seen in compssUsers directly.
-	    foreach (@{$o->{compssUsers}}) {
-		$_->{selected} = $_->{default_selected} or next;
-		$o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach @{$_->{flags}};
-	    }
-	}
+    if ($::auto_install && ($o->{rpmsrate_flags_chosen} || {})->{CAT_ALL}) {
+	$o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } @{$o->{compssUsers}};
     }
-    $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
-    $o->{rpmsrate_flags_chosen}{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
+    if (!$rpmsrate_flags_was_chosen && !$o->{isUpgrade}) {
+	#- use default selection seen in compssUsers directly.
+	$_->{selected} = $_->{default_selected} foreach @{$o->{compssUsers}};
+	set_rpmsrate_category_flags($o, $o->{compssUsers});
+    }
+}
+
+sub set_rpmsrate_category_flags {
+    my ($o, $compssUsers) = @_;
+
+    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach grep { /^CAT_/ } keys %{$o->{rpmsrate_flags_chosen}};
+    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } grep { $_->{selected} } @$compssUsers;
     $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
-    $o->{rpmsrate_flags_chosen}{DOCS} = !$o->{excludedocs};
-    $o->{rpmsrate_flags_chosen}{UTF8} = $o->{locale}{utf8};
-    $o->{rpmsrate_flags_chosen}{BURNER} = 1 if detect_devices::burners();
-    $o->{rpmsrate_flags_chosen}{DVD} = 1 if detect_devices::dvdroms();
-    $o->{rpmsrate_flags_chosen}{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
-    $o->{rpmsrate_flags_chosen}{PCMCIA} = 1 if detect_devices::hasPCMCIA();
-    $o->{rpmsrate_flags_chosen}{HIGH_SECURITY} = 1 if $o->{security} > 3;
-    $o->{rpmsrate_flags_chosen}{BIGMEM} = 1 if detect_devices::BIGMEM();
-    $o->{rpmsrate_flags_chosen}{SMP} = 1 if detect_devices::hasSMP();
-    $o->{rpmsrate_flags_chosen}{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
-    $o->{rpmsrate_flags_chosen}{TV} = 1 if detect_devices::getTVcards();
-    $o->{rpmsrate_flags_chosen}{'3D'} = 1 if 
+}
+
+
+sub rpmsrate_always_flags {
+    my ($o) = @_;
+
+    my $rpmsrate_flags_chosen = {};
+    $rpmsrate_flags_chosen->{uc($_)} = 1 foreach grep { modules::probe_category("multimedia/$_") } modules::sub_categories('multimedia');
+    $rpmsrate_flags_chosen->{uc($_)} = 1 foreach map { $_->{driver} =~ /Flag:(.*)/ } detect_devices::probeall();
+    $rpmsrate_flags_chosen->{DOCS} = !$o->{excludedocs};
+    $rpmsrate_flags_chosen->{UTF8} = $o->{locale}{utf8};
+    $rpmsrate_flags_chosen->{BURNER} = 1 if detect_devices::burners();
+    $rpmsrate_flags_chosen->{DVD} = 1 if detect_devices::dvdroms();
+    $rpmsrate_flags_chosen->{USB} = 1 if $o->{modules_conf}->get_probeall("usb-interface");
+    $rpmsrate_flags_chosen->{PCMCIA} = 1 if detect_devices::hasPCMCIA();
+    $rpmsrate_flags_chosen->{HIGH_SECURITY} = 1 if $o->{security} > 3;
+    $rpmsrate_flags_chosen->{BIGMEM} = 1 if detect_devices::BIGMEM();
+    $rpmsrate_flags_chosen->{SMP} = 1 if detect_devices::hasSMP();
+    $rpmsrate_flags_chosen->{CDCOM} = 1 if any { $_->{descr} =~ /commercial/i } values %{$o->{packages}{mediums}};
+    $rpmsrate_flags_chosen->{TV} = 1 if detect_devices::getTVcards();
+    $rpmsrate_flags_chosen->{'3D'} = 1 if 
       detect_devices::matching_desc__regexp('Matrox.* G[245][05]0') ||
       detect_devices::matching_desc__regexp('Rage X[CL]') ||
       detect_devices::matching_desc__regexp('3D Rage (?:LT|Pro)') ||
@@ -702,20 +698,51 @@ sub setDefaultPackages {
       detect_devices::matching_desc__regexp('[nN][vV]idia.*NV1[15]') ||
       detect_devices::matching_desc__regexp('[nN][vV]idia.*Quadro');
 
+    foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
+	$rpmsrate_flags_chosen->{qq(LOCALES"$_")} = 1;
+    }
+    $rpmsrate_flags_chosen->{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
+
+    $rpmsrate_flags_chosen;
+}
+
+sub default_packages {
+    my ($o) = @_;
+    my @l;
+
+    push @l, "brltty" if cat_("/proc/cmdline") =~ /brltty=/;
+    push @l, "nfs-utils-clients" if $o->{method} eq "nfs";
+    push @l, "numlock" if $o->{miscellaneous}{numlock};
+    push @l, "mdadm" if !is_empty_array_ref($o->{all_hds}{raids});
+    push @l, "lvm2" if !is_empty_array_ref($o->{all_hds}{lvms});
+    push @l, "alsa", "alsa-utils" if any { $o->{modules_conf}->get_alias("sound-slot-$_") =~ /^snd-/ } 0 .. 4;
+    my %dmi = map { $_->{name} => $_ } detect_devices::dmidecode();
+    if ($dmi{System}{Manufacturer} eq "Dell Computer" && member($dmi{System}{'Product Name'}, qw(Inspiron Latitude))) {
+        modules::append_to_modules_loaded_at_startup($_, 'i8k') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        push @l, "i8kutils";
+    }
+    if ($dmi{System}{Manufacturer} eq 'TOSHIBA' && $dmi{BIOS}{Vendor} eq 'TOSHIBA') {
+        modules::append_to_modules_loaded_at_startup($_, 'toshiba') foreach "$::prefix/etc/modules", "$::prefix/etc/modprobe.preload";
+        push @l, "toshutils";
+    }
+    push @l, "grub" if isLoopback(fs::get::root($o->{fstab}));
+    push @l, uniq(grep { $_ } map { fs::format::package_needed_for_partition_type($_) } @{$o->{fstab}});
 
     my @locale_pkgs = map { pkgs::packagesProviding($o->{packages}, 'locales-' . $_) } lang::langsLANGUAGE($o->{locale}{langs});
-    unshift @{$o->{default_packages}}, uniq(map { $_->name } @locale_pkgs);
+    unshift @l, uniq(map { $_->name } @locale_pkgs);
 
-    foreach (lang::langsLANGUAGE($o->{locale}{langs})) {
-	$o->{rpmsrate_flags_chosen}{qq(LOCALES"$_")} = 1;
-    }
-    $o->{rpmsrate_flags_chosen}{'CHARSET"' . lang::l2charset($o->{locale}{lang}) . '"'} = 1;
+    @l;
+}
+
+sub select_default_packages {
+    my ($o) = @_;
+    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
 }
 
 sub unselectMostPackages {
     my ($o) = @_;
     pkgs::unselectAllPackages($o->{packages});
-    pkgs::selectPackage($o->{packages}, pkgs::packageByName($o->{packages}, $_) || next) foreach @{$o->{default_packages}};
+    select_default_packages($o);
 }
 
 sub warnAboutNaughtyServers {

@@ -583,10 +583,7 @@ sub chooseGroups {
        
 	$o->ask_warn('', N("Selected size is larger than available space"));	
     }
-
-    $o->{rpmsrate_flags_chosen}{$_} = 0 foreach grep { /^CAT_/ } keys %{$o->{rpmsrate_flags_chosen}};
-    $o->{rpmsrate_flags_chosen}{"CAT_$_"} = 1 foreach map { @{$_->{flags}} } grep {  $_->{selected} } @$compssUsers;
-    $o->{rpmsrate_flags_chosen}{CAT_SYSTEM} = 1;
+    install_any::set_rpmsrate_category_flags($o, $compssUsers);
 
     log::l("compssUsersChoice selected: ", join(', ', map { qq("$_->{path}|$_->{label}") } grep { $_->{selected} } @$compssUsers));
 

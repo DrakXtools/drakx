@@ -604,35 +604,35 @@ sub read_rpmsrate_raw {
 }
 
 sub read_rpmsrate {
-    my ($packages, $f) = @_;
+    my ($packages, $rpmsrate_flags_chosen, $f) = @_;
 
     my ($rates, $flags, $need_to_copy) = read_rpmsrate_raw($f);
     
     foreach (keys %$flags) {
 	my $p = packageByName($packages, $_) or next;
-	my @more_flags = map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense;
+	my @flags = (@{$flags->{$_}}, map { if_(/locales-(.*)/, qq(LOCALES"$1")) } $p->requires_nosense);
 
-	my @flags = map {
-	    my $ok = 0;
-	    my $flag = join('||', grep { 
-		if (my ($inv, $p) = /^(!)?HW"(.*)"/) {
-		    ($inv xor detect_devices::matching_desc__regexp($p)) and $ok = 1;
-		    0;
-                } elsif (($inv, $p) = /^(!)?DRIVER"(.*)"/) {
-		    ($inv xor detect_devices::matching_driver__regexp($p)) and $ok = 1;
-		    0;
-                } elsif (($inv, $p) = /^(!)?TYPE"(.*)"/) {
-		    ($inv xor detect_devices::matching_type($p)) and $ok = 1;
-		    0;
-		} else {
-		    1;
-		}
-	    } split '\|\|', $_);
-	    $ok ? 'TRUE' : $flag || 'FALSE';
-	} @{$flags->{$_}};
+	@flags = map {
+	    my ($user_flags, $known_flags) = partition { /^!?CAT_/ } split('\|\|', $_);
+	    my $ok = find {
+		my $inv = s/^!//;
+		$inv xor do {
+		    if (my ($p) = /^HW"(.*)"/) {
+			detect_devices::matching_desc__regexp($p);
+		    } elsif (($p) = /^DRIVER"(.*)"/) {
+			detect_devices::matching_driver__regexp($p);
+		    } elsif (($p) = /^TYPE"(.*)"/) {
+			detect_devices::matching_type($p);
+		    } else {
+			$rpmsrate_flags_chosen->{$_};
+		    }
+		};
+	    } @$known_flags;
+	    $ok ? 'TRUE' : @$user_flags ? join('||', @$user_flags) : 'FALSE';
+	} @flags;
 
 	$p->set_rate($rates->{$_});
-	$p->set_rflags(@flags, @more_flags);
+	$p->set_rflags(member('FALSE', @flags) ? 'FALSE' : @flags);
     }
     $packages->{needToCopy} = $need_to_copy;
 }
@@ -747,8 +747,7 @@ sub computeGroupSize {
 		map { "$_&&$n" } @l;
 	    } split('\|\|');
 	}
-	#- HACK, remove LOCALES & CHARSET, too costly
-	grep { !/LOCALES|CHARSET/ } @l;
+	@l;
     }
     sub or_clean {
 	my (@l) = map { [ sort split('&&') ] } @_ or return '';
@@ -768,7 +767,7 @@ sub computeGroupSize {
 
     foreach my $p (@{$packages->{depslist}}) {
 	my @flags = $p->rflags;
-	next if !$p->rate || $p->rate < $min_level;
+	next if !$p->rate || $p->rate < $min_level || @flags == 1 && $flags[0] eq 'FALSE';
 
 	my $flags = join("\t", @flags = or_ify(@flags));
 	$group{$p->name} = ($memo{$flags} ||= or_clean(@flags));
