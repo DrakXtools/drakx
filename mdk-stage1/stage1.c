@@ -174,17 +174,16 @@ static void expert_third_party_modules(void)
 }
 
 
-static void handle_pcmcia(void)
+static void handle_pcmcia(char ** pcmcia_adapter)
 {
 #ifdef ENABLE_PCMCIA
-	char * pcmcia_adapter;
-	pcmcia_adapter = pcmcia_probe();
-	if (!pcmcia_adapter) {
+	*pcmcia_adapter = pcmcia_probe();
+	if (!*pcmcia_adapter) {
 		log_message("no pcmcia adapter found");
 		return;
 	}
 	my_insmod("pcmcia_core", ANY_DRIVER_TYPE, NULL);
-	my_insmod(pcmcia_adapter, ANY_DRIVER_TYPE, NULL);
+	my_insmod(*pcmcia_adapter, ANY_DRIVER_TYPE, NULL);
 	my_insmod("ds", ANY_DRIVER_TYPE, NULL);
 	
         /* call to cardmgr takes time, let's use the wait message */
@@ -267,6 +266,7 @@ int main(int argc, char **argv, char **env)
 	enum return_type ret;
 	char ** argptr;
 	char * stage2_args[30];
+	char * pcmcia_adapter = NULL;
 
 	if (getpid() > 50)
 		set_param(MODE_TESTING);
@@ -282,7 +282,7 @@ int main(int argc, char **argv, char **env)
 	if (IS_EXPERT)
 		expert_third_party_modules();
 
-	handle_pcmcia();
+	handle_pcmcia(&pcmcia_adapter);
 
 	ret = method_select_and_prepare();
 
@@ -315,6 +315,10 @@ int main(int argc, char **argv, char **env)
 	*argptr++ = "/usr/bin/runinstall2";
 	*argptr++ = "--method";
 	*argptr++ = method_name;
+	if (pcmcia_adapter) {
+		*argptr++ = "--pcmcia";
+		*argptr++ = pcmcia_adapter;
+	}
 	*argptr++ = NULL;
 
 	execve(stage2_args[0], stage2_args, grab_env());
