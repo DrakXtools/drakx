@@ -964,7 +964,7 @@ sub write_yaboot {
     }
     my $f = "$::prefix/etc/yaboot.conf";
     log::l("writing yaboot config to $f");
-    rename $f, "$f.old";
+    renamef($f, "$f.old");
     output($f, map { "$_\n" } @conf);
 }
 
@@ -1093,7 +1093,7 @@ sub write_lilo {
     my $f = arch() =~ /ia64/ ? "$::prefix/boot/efi/elilo.conf" : "$::prefix/etc/lilo.conf";
 
     log::l("writing lilo config to $f");
-    rename $f, "$f.old";
+    renamef($f, "$f.old");
     output_with_perm($f, $bootloader->{password} ? 0600 : 0644, map { "$_\n" } @conf);
 }
 
@@ -1177,7 +1177,7 @@ sub read_grub_device_map() {
 sub write_grub_device_map {
     my ($legacy_floppies, $sorted_hds) = @_;
     my $f = "$::prefix/boot/grub/device.map";
-    rename $f, "$f.old";
+    renamef($f, "$f.old");
     output($f,
 	   (map_index { "(fd$::i) /dev/$_->{device}\n" } @$legacy_floppies),
 	   (map_index { "(hd$::i) /dev/$_->{device}\n" } @$sorted_hds));
@@ -1273,14 +1273,14 @@ sub write_grub {
 	}
 	my $f = "$::prefix/boot/grub/menu.lst";
 	log::l("writing grub config to $f");
-	rename $f, "$f.old";
+	renamef($f, "$f.old");
 	output($f, map { "$_\n" } @conf);
     }
     {
 	my $f = "$::prefix/boot/grub/install.sh";
 	my $dev = device_string2grub($bootloader->{boot}, \@legacy_floppies, \@sorted_hds);
 	my ($stage1, $stage2, $menu_lst) = map { $file2grub->("/boot/grub/$_") } qw(stage1 stage2 menu.lst);
-	rename $f, "$f.old";
+	renamef($f, "$f.old");
 	output_with_perm("$::prefix/boot/grub/install.sh", 0755,
 "grub --device-map=/boot/grub/device.map --batch <<EOF
 install $stage1 d $dev $stage2 p $menu_lst
@@ -1369,7 +1369,7 @@ sub update_for_renumbered_partitions {
 
     foreach (values %configs) {
 	if ($_->{new} ne $_->{orig}) {
-	    rename "$::prefix/$_->{file}", "$::prefix/$_->{file}.old";
+	    renamef("$::prefix/$_->{file}", "$::prefix/$_->{file}.old");
 	    output("$::prefix/$_->{file}", $_->{new});
 	}
     }
