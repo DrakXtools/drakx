@@ -9,14 +9,20 @@ my $machine_ident = cat_('/var/lib/machine_ident');
 my $sysconf = "/home/.sysconf/$machine_ident";
 
 foreach my $dir (@ARGV) {
-    foreach (glob_("$dir/*")) {
+    my $destdir = "/home/.sysconf/$machine_ident";
+    my @etcfiles = glob_("$dir/*");
+    foreach (@etcfiles) {
         next if $_ eq '/etc/sudoers';  #- /etc/sudoers can't be a link
         if (-f && !-l) {
-            my $dest = "/home/.sysconf/$machine_ident$_";
+            my $dest = "$destdir$_";
             mkdir_p(dirname($dest));  #- case of newly created directories
             logit("restoring broken symlink $_ -> $dest");
             system("mv $_ $dest 2>/dev/null");
             symlink($dest, $_);
         }
+    }
+    foreach (difference2([ grep { -f && s/^\Q$destdir\E// } glob_("$destdir$dir/*") ], [ @etcfiles ])) {
+        logit("removing $destdir$_ because of deleted $_");
+        unlink "$destdir$_";
     }
 }
