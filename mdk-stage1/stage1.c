@@ -616,8 +616,8 @@ int main(int argc __attribute__ ((unused)), char **argv __attribute__ ((unused))
         if (IS_RECOVERY && streq(get_auto_value("method"), "cdrom")) {
                 if (!process_recovery())
                         method_select_and_prepare();
-#endif
         } else
+#endif
                 method_select_and_prepare();
 
 	if (!IS_RAMDISK)
