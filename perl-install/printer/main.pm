@@ -654,6 +654,9 @@ sub read_cups_printer_list {
 sub get_cups_remote_queues {
     my ($printer) = @_;
 
+    # This function reads in a list of all remote printers which the local 
+    # CUPS daemon knows due to broadcasting of remote servers or 
+    # "BrowsePoll" entries in the local /etc/cups/cupsd.conf/
     map {
 	join('!', if_($::expert, N("CUPS")), N("Remote Printers"), $_);
     } map {
