@@ -435,7 +435,7 @@ sub install_urpmi {
 	close LIST;
 
 	$name =~ s/(\s)/\\$1/g; $dir =~ s/(\s)/\\$1/g; #- necessary to change protect white char, for urpmi >= 1.40
-	$dir .= " with ../base/$_->{hdlist}" if $method =~ /ftp|http/;
+	$dir .= " with ../base/$_->{hdlist}";
 	"$name $dir\n";
     } values %$mediums;
     eval { output "$prefix/etc/urpmi/urpmi.cfg", @cfg };
