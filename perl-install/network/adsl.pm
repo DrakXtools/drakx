@@ -221,7 +221,8 @@ user "$adsl->{login}"
                                              "/sbin/route del default",
                                              $modems{$adsl_device}{start},
                                              # /usr/sbin/pppd call adsl
-                                             $modems{$adsl_device}{server}{$adsl_type} || "/usr/sbin/pppd file /etc/ppp/peers/adsl",
+                                             #$modems{$adsl_device}{server}{$adsl_type} ||
+					     "/usr/sbin/pppd file /etc/ppp/peers/adsl",
                                              $ppp_options{$adsl_type}{connect}
                                             ),
                          $ppp_options{$adsl_type}{disconnect},
