@@ -40,7 +40,7 @@ $::isInstall and die "Not supported during install.\n";
 
 local $_ = join '', @ARGV;
 
-$::Wizard_pix_up = "wiz_drakgw.png";
+$::Wizard_pix_up = "drakvpn.png";
 $::direct = /-direct/;
 
 my ($kernel_version) = c::kernel_version() =~ /(...)/;

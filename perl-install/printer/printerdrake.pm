@@ -3988,7 +3988,7 @@ sub add_printer {
     if ((!$::isInstall) &&
 	$in->isa('interactive::gtk')) {
 	# Enter wizard mode
-	$::Wizard_pix_up = "wiz_printerdrake.png";
+	$::Wizard_pix_up = "printerdrake.png";
 	$::Wizard_title = N("Add a new printer");
 	$::isWizard = 1;
 	# Wizard welcome screen
