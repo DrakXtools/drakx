@@ -441,7 +441,7 @@ Consoles 1,3,4,7 may also contain interesting information";
     substInFile { s/^cdwriter\n//; $_ .= "cdwriter\n" if eof } "$msec/group.conf" if -d $msec;
 
     my $pkg = pkgs::packageByName($o->{packages}, 'urpmi');
-    if ($pkg && pkgs::packageFlagSelected($pkg)) {
+    if ($pkg && pkgs::packageSelectedOrInstalled($pkg)) {
 	install_any::install_urpmi($o->{prefix}, 
 				   $::oem ? 'cdrom' : $o->{method}, #- HACK
 				   $o->{packages}[2]);
