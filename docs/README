@@ -109,7 +109,7 @@ rebooting. ``rpm -qa'' works for example.
 - alt-F3: a lot of interesting things. Be carefull, some ``ERROR'' messages are
 not interesting.
 - alt-F4: kernel's place. aka the output of dmesg.
-- alt-F5: the graphical install lives there (may switch to console 7 one day :)
+- alt-F7: the graphical install lives there (may switch to console 7 one day :)
 
 - command "bug" puts on floppy lots of interesting stuff.
 - /tmp/ddebug.log: same (or nearly the same) as alt-F3
@@ -158,7 +158,7 @@ used is getting big, and costs a lot in memory
 | http  | ramdisk | ramdisk
 | hd    | ramdisk | live if Mandrake/mdkinst/usr/bin/runinstall2 is a link,
 |       |         |   ramdisk otherwise
-| cdrom | ramdisk | live if memory < 40MB, ramdisk otherwise
+| cdrom | ramdisk | live if memory < 52MB, ramdisk otherwise
 
 When i say live, it means that the install1 stage will *mount* the
 Mandrake/mdkinst and use it that way.
