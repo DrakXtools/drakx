@@ -322,7 +322,7 @@ sub probeSerialDevices {
     print STDERR "Please wait while probing serial ports...\n";
     #- start probing all serial ports... really faster than before ...
     #- ... but still take some time :-)
-    local *F; open F, "$ENV{LD_LOADER} serial_probe 2>/dev/null |";
+    local *F; open F, "$ENV{LD_LOADER} serial_probe |";
     local $_;
     my %current = (); while (<F>) {
 	$serialprobe{$current{DEVICE}} = { %current } and %current = () if /^\s*$/ && $current{DEVICE};
