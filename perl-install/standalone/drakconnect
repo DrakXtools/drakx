@@ -578,7 +578,7 @@ sub populate_notebook {
     my ($notebook, $gui) = @_;
     foreach ('TCP/IP', 'Account', 'Wireless', 'Modem', 'Options', 'Information') {
 	!$gui->{sheet}{$_} and next;
-	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new(N($_)));
+	$notebook->append_page($gui->{sheet}{$_}, Gtk2::Label->new(translate($_)));
     }
 }
 
