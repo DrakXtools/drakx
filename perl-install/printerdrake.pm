@@ -393,7 +393,52 @@ In case of doubt, select \"Remote CUPS server\"."),
 							      );
 		    $printer->{TYPE} = $printer::printer_type{$printer->{str_type}};
 		}
-		$printer->{TYPE} eq 'CUPS' and return; #- exit printer configuration.
+		if ($printer->{TYPE} eq 'CUPS') {
+		    #- hack to handle cups remote server printing,
+		    #- first read /etc/cups/cupsd.conf for variable BrowsePoll address:port
+		    printer::poll_ppd_base(); #- make sure /etc/cups/cupsd.conf is generated before if any.
+		    my @cupsd_conf = printer::read_cupsd_conf();
+		    my ($server, $port);
+
+		    foreach (@cupsd_conf) {
+			/^\s*BrowsePoll\s+(\S+)/ and $server = $1, last;
+		    }
+		    $server =~ /([^:]*):(.*)/ and ($server, $port) = ($1, $2);
+
+		    #- then ask user for this combination
+		    #- and rewrite /etc/cups/cupsd.conf according to new settings.
+		    #- there are no other point where such information is written in this file.
+		    if ($in->ask_from_entries_refH(_("Remote CUPS server"),
+_("With a remote CUPS server, you do not have to configure
+any printer here; printers will be automatically detected
+unless you have a server on a different network, in this
+later case, you have to give the CUPS server IP address
+and optionally the port number."), [
+_("CUPS server IP") => \$server,
+_("Port") => \$port ],
+						   complete => sub {
+						       unless (network::is_ip($server)) {
+							   $in->ask_warn('', _("IP address should be in format 1.2.3.4"));
+							   return (1,0);
+						       }
+						       if ($port !~ /^\d*$/) {
+							   $in->ask_warn('', _("Port number should be numeric"));
+							   return (1,1);
+						       }
+						       return 0;
+						   },
+						   )) {
+			$server && $port and $server = "$server:$port";
+			if ($server) {
+			    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/BrowsePoll $server/ and undef $server } @cupsd_conf;
+			    $server and push @cupsd_conf, "\nBrowsePoll $server\n";
+			} else {
+			    @cupsd_conf = map { s/^\s*BrowsePoll\s+(\S+)/\#BrowsePoll $1/ } @cupsd_conf;
+			}
+		        printer::write_cupsd_conf(@cupsd_conf);
+		    }
+		    return; #- exit printer configuration, here is another hack for simplification.
+		}
 		$in->set_help('configurePrinterLocal') if $::isInstall;
 		$in->ask_from_entries_refH([_("Select Printer Connection"), _("Ok"),
 					    $::beginner || !$printer->{configured}{$printer->{QUEUE}} ? () : _("Remove queue")],
