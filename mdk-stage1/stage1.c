@@ -430,6 +430,7 @@ int mandrake_move_post(void)
         char rootdev[] = "0x0100"; 
         int boot__real_is_symlink_to_raw = 0;
         int always__real_is_symlink_to_raw = 0;
+        int totem__real_is_symlink_to_raw = 0;
         int main__real_is_symlink_to_raw = 0;
 
         if (handle_clp(IMAGE_LOCATION "/live_tree_boot.clp", IMAGE_LOCATION "/live_tree_boot/usr/bin/runstage2.pl",
@@ -440,6 +441,11 @@ int mandrake_move_post(void)
         if (handle_clp(IMAGE_LOCATION "/live_tree_always.clp", IMAGE_LOCATION "/live_tree_always/bin/bash",
                        IMAGE_LOCATION "/live_tree_always", ALWAYS_LOCATION,
                        &always__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_always.clp") != RETURN_OK)
+                return RETURN_ERROR;
+
+        if (handle_clp(IMAGE_LOCATION "/live_tree_totem.clp", IMAGE_LOCATION "/live_tree_totem/usr/bin/totem",
+                       IMAGE_LOCATION "/live_tree_totem", TOTEM_LOCATION,
+                       &totem__real_is_symlink_to_raw, SLASH_LOCATION "/live_tree_totem.clp") != RETURN_OK)
                 return RETURN_ERROR;
 
         if (handle_clp(IMAGE_LOCATION "/live_tree.clp", IMAGE_LOCATION "/live_tree/etc/fstab",
@@ -459,6 +465,10 @@ int mandrake_move_post(void)
                         return RETURN_ERROR;
         }
         fclose(f);
+        
+        // hardcoded :(
+        if (scall(symlink("/image_totem/usr", SLASH_LOCATION "/usr"), "symlink"))
+                return RETURN_ERROR;
 
         // need to create the few devices needed to start up stage2 in a decent manner, we can't symlink or they will keep CD busy
         // we need only the ones before mounting /dev as devfs
@@ -488,6 +498,13 @@ int mandrake_move_post(void)
                 if (scall(unlink(ALWAYS_LOCATION), "unlink"))
                         return RETURN_ERROR;
                 if (scall(symlink(RAW_LOCATION_REL "/live_tree_always", ALWAYS_LOCATION), "symlink"))
+                        return RETURN_ERROR;
+        }
+
+        if (totem__real_is_symlink_to_raw) {
+                if (scall(unlink(TOTEM_LOCATION), "unlink"))
+                        return RETURN_ERROR;
+                if (scall(symlink(RAW_LOCATION_REL "/live_tree_totem", TOTEM_LOCATION), "symlink"))
                         return RETURN_ERROR;
         }
 
