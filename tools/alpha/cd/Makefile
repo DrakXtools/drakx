@@ -1,5 +1,5 @@
 install:
-	cp -f README $(ROOTDEST)
+	cp -f README README.milo $(ROOTDEST)
 	install -d $(ROOTDEST)/etc
 	cp -f aboot.cnf $(ROOTDEST)/etc
 

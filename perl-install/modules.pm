@@ -171,6 +171,7 @@ arch() !~ /^sparc/ ? (
 ) : (),
   "isofs" => "iso9660",
   "ide-cd" => "ide-cd",
+  "sr_mod" => "SCSI CDROM support",
   "cdrom" => "cdrom",
 }],
 [ 'sound', {
