@@ -49,6 +49,8 @@ my $rc_firewall_drakgw = "/etc/rc.d/rc.firewall.inet_sharing";
 my $rc_firewall_24 = "/etc/rc.d/rc.firewall.inet_sharing-2.4";
 my $masq_file = "/etc/shorewall/masq";
 my $dhcpd_conf = "/etc/dhcpd.conf";
+my $squid_conf = "/etc/squid/squid.conf";
+my $squid_port = network::network::read_squid_conf()->{http_port}[0] ||= "3128";
 my $cups_conf = "/etc/cups/cupsd.conf";
 
 my $in = 'interactive'->vnew('su');
@@ -76,6 +78,7 @@ sub start_daemons () {
         }
     }
     system("/etc/rc.d/init.d/dhcpd status >/dev/null") == 0 and sys("/etc/rc.d/init.d/dhcpd stop");
+    system("/etc/rc.d/init.d/squid status >/dev/null") == 0 and sys("/etc/rc.d/init.d/squid stop");
     system("/etc/rc.d/init.d/named status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/named stop");
 
     my $netscripts = '/etc/sysconfig/network-scripts';
@@ -85,18 +88,18 @@ sub start_daemons () {
 
     sys("/etc/init.d/shorewall restart >/dev/null");
 
-    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'shorewall';
+    sys("/etc/rc.d/init.d/$_ start >/dev/null"), sys("/sbin/chkconfig --level 345 $_ on") foreach 'named', 'dhcpd', 'squid', 'shorewall';
     sys("/etc/rc.d/init.d/cups start >/dev/null") if $cups_used;
 }
 
 sub stop_daemons () {
     return if $::testing;
     log::explanations("Stopping daemons");
-    foreach (qw(dhcpd named)) {
+    foreach (qw(dhcpd squid named)) {
 	system("/etc/rc.d/init.d/$_ status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/$_ stop");
     }
-    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall clear >/dev/null");
-    sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd';
+    system("/etc/rc.d/init.d/shorewall status >/dev/null 2>/dev/null") == 0 and sys("/etc/rc.d/init.d/shorewall stop >/dev/null");
+    sys("/sbin/chkconfig --level 345 $_ off") foreach 'named', 'dhcpd', 'squid';
 }
 
 my $wait_configuring;
@@ -111,7 +114,7 @@ sub fatal_quit ($) {
 my ($kernel_version) = c::kernel_version() =~ /(...)/;
 log::l("[drakgw] kernel_version $kernel_version");
 
-$kernel_version >= 2.4 or fatal_quit(N("Sorry, we support only 2.4 kernels."));
+$kernel_version >= 2.4 or fatal_quit(N("Sorry, we support only 2.4 and above kernels."));
 
 begin:
 
@@ -133,9 +136,14 @@ What would you like to do?"),
 		my $_wait_disabl = $in->wait_message('', N("Disabling servers..."));
 		stop_daemons();
 	    }
-	    foreach ($dhcpd_conf, $masq_file) {
+	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
 		if (-f $_) { rename($_, "$_.drakgwdisable") or die "Could not rename $_ to $_.drakgwdisable" };
 	    }
+			print "remove rules entries\n";
+			substInFile {
+				s/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\n//;
+				s/ACCEPT\tfw\tnet\ttcp\twww\n//;
+			} "$prefix/etc/shorewall/rules";
 	    sys("/etc/init.d/shorewall restart >/dev/null");
 	    log::l("[drakgw] Disabled");
 	    $::Wizard_finished = 1;
@@ -153,8 +161,7 @@ It's currently disabled.
 What would you like to do?"),
 				   [ N_("enable"), N_("reconfigure"), N_("dismiss") ]);
 	if ($r eq "enable") {
-        if (!$::testing) {
-	    foreach ($dhcpd_conf, $masq_file) {
+	    foreach ($dhcpd_conf, $squid_conf, $masq_file) {
 		rename($_, "$_.old") if -f $_;
 		rename("$_.drakgwdisable", $_) or die "Could not find configuration. Please reconfigure.";
 	    };
@@ -264,6 +271,8 @@ my $end_range = network::network::read_dhcpd_conf()->{dynamic_bootp}[1] ||= "253
 my $default_lease = network::network::read_dhcpd_conf()->{max_lease_time}[0] ||= "21600";
 my $max_lease = network::network::read_dhcpd_conf()->{default_lease_time}[0] ||= "43200";
 my $internal_domain_name = network::network::read_dhcpd_conf()->{domain_name}[0] ||= network::network::read_resolv_conf_raw()->{search}[0] ||= "homeland.net";
+my $squid_cache_size = network::network::read_squid_conf()->{cache_size}[1] ||= "100";
+my $squid_admin_mail = network::network::read_squid_conf()->{admin_mail}[0] ||= "admin\@mydomain.com";
 
 my $reconf_dhcp_server_intf = 1;
 
@@ -393,7 +402,11 @@ put_in_hash($shorewall ||= {}, {
     masquerade => { interface => $device, subnet => "$lan_address.0/$netmask" },
 });
 
-network::shorewall::write($shorewall) if !$::testing;
+network::shorewall::write($shorewall);
+print "add rules entries\n";
+substInFile {
+	s/#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/REDIRECT\tmasq\t$squid_port\ttcp\twww\t\-\nACCEPT\tfw\tnet\ttcp\twww\n#LAST LINE -- ADD YOUR ENTRIES BEFORE THIS ONE -- DO NOT REMOVE/;
+} "$prefix/etc/shorewall/rules";
 
 #- be sure that FORWARD_IPV4 is enabled in /etc/sysconfig/network
 
@@ -430,6 +443,60 @@ my $update_dhcp = '/usr/sbin/update_dhcp.pl';
 log::explanations("Update network interfaces list for dhcpd server");
 substInFile { s/^INTERFACES\n//; $_ .= qq(INTERFACES="$device"\n) if eof } $sysconf_dhcpd if !$::testing;
 
+#- setup the transparent SQUID Proxy Cache server
+
+log::explanations("Configuring a Transparent Squid Proxy Cache server on $lan_address.0");
+renamef($squid_conf, "$squid_conf.old");
+output($squid_conf, qq(
+http_port $squid_port
+hierarchy_stoplist cgi-bin ?
+acl QUERY urlpath_regex cgi-bin \\?
+no_cache deny QUERY
+cache_dir diskd /var/spool/squid $squid_cache_size 16 256
+cache_store_log none
+auth_param basic children 5
+auth_param basic realm Squid proxy-caching web server
+auth_param basic credentialsttl 2 hours
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern .               0       20%     4320
+half_closed_clients off
+acl all src 0.0.0.0/0.0.0.0
+acl manager proto cache_object
+acl localhost src 127.0.0.1/255.255.255.255
+acl to_localhost dst 127.0.0.0/8
+acl SSL_ports port 443 563
+acl Safe_ports port 80          # http
+acl Safe_ports port 21          # ftp
+acl Safe_ports port 443 563     # https, snews
+acl Safe_ports port 70          # gopher
+acl Safe_ports port 210         # wais
+acl Safe_ports port 1025-65535  # unregistered ports
+acl Safe_ports port 280         # http-mgmt
+acl Safe_ports port 488         # gss-http
+acl Safe_ports port 591         # filemaker
+acl Safe_ports port 777         # multiling http
+acl CONNECT method CONNECT
+http_access allow manager localhost
+http_access deny manager
+http_access deny !Safe_ports
+http_access deny CONNECT !SSL_ports
+http_access deny to_localhost
+acl mynetwork src $lan_address.0/$netmask
+http_access allow mynetwork
+http_access allow localhost
+http_reply_access allow all
+icp_access allow all
+httpd_accel_host virtual
+httpd_accel_with_proxy on
+httpd_accel_uses_host_header on
+append_domain .$internal_domain_name
+err_html_text $squid_admin_mail
+deny_info ERR_CUSTOM_ACCESS_DENIED all
+memory_pools off
+coredump_dir /var/spool/squid
+ie_refresh on
+));
 
 #- Set up /etc/cups/cupsd.conf to make the broadcasting of the printer info
 #- working correctly: 
@@ -518,7 +585,8 @@ $::Wizard_finished = 1;
 
 $in->ask_okcancel(N("Congratulations!"), 
 N("Everything has been configured.
-You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP)."));
+You may now share Internet connection with other computers on your Local Area Network, using automatic network configuration (DHCP) and
+ a Transparent Proxy Cache server (SQUID)."));
 
 
 log::l("[drakgw] Installation complete, exiting");
