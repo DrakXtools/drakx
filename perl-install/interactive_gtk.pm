@@ -272,7 +272,7 @@ sub ask_from_entries_refW {
 		my $f = $e->{icon2f}->($_[0]);
 		$e->{icon} = -e $f ?
 		  new Gtk::Pixmap(gtkcreate_xpm($mainw->{window}, $f)) :
-		    new Gtk::Label(translate($_[0]));
+		    new Gtk::Label(may_apply($e->{format}, $_[0]));
 		$w->add($e->{icon});
 		$e->{icon}->show;
 	    };
@@ -376,16 +376,20 @@ sub ask_from_entries_refW {
     $set_advanced->(0);
     (@widgets ? $widgets[0]{w} : $common->{focus_cancel} ? $mainw->{cancel} : $mainw->{ok})->grab_focus();
 
-    $mainw->main(sub {
-        $get_all->();
-        my ($error, $focus) = $common->{callbacks}{complete}->();
+    my $check = sub {
+	my ($f) = @_;
+	sub {
+	    $get_all->();
+	    my ($error, $focus) = $f->();
 	
-	if ($error) {
-	    $set_all->();
-	    $widgets[$focus || 0]{w}->grab_focus();
+	    if ($error) {
+		$set_all->();
+		$widgets[$focus || 0]{w}->grab_focus();
+	    }
+	    !$error;
 	}
-	!$error;
-    });
+    };
+    $mainw->main(map { $check->($common->{callbacks}{$_}) } 'complete', 'canceled');
 }
 
 
