@@ -587,6 +587,12 @@ If only some CDs are missing, unselect them, then click Ok."),
 }
 
 #------------------------------------------------------------------------------
+sub beforeInstallPackages($) {
+    my ($o) = @_;
+    my $w = $o->wait_message('', $o->{isUpgrade} ? _("Rebuilding package database") : _("Opening package database"));
+    $o->SUPER::beforeInstallPackages($o);
+}
+
 sub installPackages {
     my ($o, $packages) = @_;
     my ($current, $total) = 0;
