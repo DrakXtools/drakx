@@ -91,7 +91,9 @@ sub errorOpeningFile($) {
 	while ($max > 0 && askChangeMedium($::o->{method}, $asked_medium)) {
 	    $current_medium = $asked_medium;
 	    eval { fs::mount($cdrom, "/tmp/image", "iso9660", 'readonly') };
-	    my $getFile = getFile($file); $getFile and return $getFile;
+	    my $getFile = getFile($file); 
+	    $getFile and $::o->copy_advertising;
+	    $getFile and return $getFile;
 	    $current_medium = 'unknown'; #- don't know what CD is inserted now.
 	    ejectCdrom($cdrom);
 	    --$max;

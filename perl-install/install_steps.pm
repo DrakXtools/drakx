@@ -272,6 +272,7 @@ sub choosePackages {
     $availableCorrected;
 }
 
+sub copy_advertising {}
 sub beforeInstallPackages {
     my ($o) = @_;
 

@@ -467,6 +467,27 @@ sub choosePackagesTree {
 }
 
 #------------------------------------------------------------------------------
+sub beforeInstallPackages {
+    my ($o) = @_;    
+    $o->SUPER::beforeInstallPackages;
+    $o->copy_advertising;
+}
+sub copy_advertising {
+    my ($o) = @_;
+
+    my $f = install_any::getFile('Mandrake/share/advertising/list');
+    if (my @files = <$f>) {
+	my $dir = "$o->{prefix}/tmp/drakx-images";
+	mkdir $dir;
+	unlink glob_("$dir/*");
+	foreach (@files) {
+	    chomp;
+	    install_any::getAndSaveFile("Mandrake/share/advertising/$_", "$dir/$_");
+	}
+    }
+}
+
+#------------------------------------------------------------------------------
 sub installPackages {
     my ($o, $packages) = @_;
 
@@ -479,28 +500,30 @@ sub installPackages {
     my ($msg, $msg_time_remaining, $msg_time_total) = map { new Gtk::Label($_) } '', (_("Estimating")) x 2;
     my ($progress, $progress_total) = map { new Gtk::ProgressBar } (1..2);
     gtkadd($w->{window}, my $box = new Gtk::VBox(0,10));
-    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.8, 70),
-#			   $msg, $progress,
+    $box->pack_end(gtkshow(gtkpack(gtkset_usize(new Gtk::VBox(0,5), $::windowwidth * 0.8, 0),
+			   $msg, $progress,
 			   create_packtable({},
 					    [_("Time remaining "), $msg_time_remaining],
 #					    [_("Total time "), $msg_time_total],
 					   ),
-#			   $text,
+			   $text,
 			   $progress_total,
 			   gtkadd(create_hbox(),
 				  my $cancel = new Gtk::Button(_("Cancel"))),
-			  )), 1, 1, 0);
+			  )), 0, 1, 0);
     $w->sync;
     $msg->set(_("Please wait, preparing installation"));
     gtkset_mousecursor_normal($cancel->window);
     $cancel->signal_connect(clicked => sub { $pkgs::cancel_install = 1 });
 
-    my ($i_image, $i);
-    my $nb_images = 6;
-
-    my $dir = "$o->{prefix}/tmp/drakx-images"; mkdir $dir;
-    install_any::getAndSaveFile("Mandrake/mdkinst$ENV{SHARE_PATH}/ad-$_.png", "$dir/ad-$_.png") 
-      foreach 0 .. $nb_images-1; 
+    my ($change_time, $i);
+    my @images = glob_("$o->{prefix}/tmp/drakx-images/*");
+    if (@images) {
+	log::l("hiding");
+	$msg->hide;
+	$progress->hide;
+	$text->hide;
+    }
 
     my $oldInstallCallback = \&pkgs::installCallback;
     local *pkgs::installCallback = sub {
@@ -520,11 +543,9 @@ sub installPackages {
 	    $last_size = c::headerGetEntry(pkgs::packageHeader($p), 'size');
 	    $text->set((split /\n/, c::headerGetEntry(pkgs::packageHeader($p), 'summary'))[0] || '');
 
-	    $i++;
-	    my $old_i_image = $i_image;
-	    $i_image = int($i / $nb * $nb_images) % $nb_images;
-	    if ($old_i_image ne $i_image) {
-		my $f = "$dir/ad-$i_image.png";
+	    if (@images && time() - $change_time > 20) {
+		$change_time = time();
+                my $f = $images[$i++ % @images];
 		log::l("advertising $f");
 		gtkdestroy($advertising);
 		gtkpack($box, $advertising = gtkpng($f));
