@@ -1,5 +1,65 @@
 2001/08/18  Pixel  <pixel@mandrakesoft.com>
 
+	* my_gtk.pm (n_line_size): bigger spacing for 'various'
+	enhance look, fix ask_fileW
+
+	* fs.pm: basic nfs/smb handling in diskdrake
+	fixes and function prototype removing
+	(write_fstab): add notail for reiserfs partitions in any case
+	cleanup mounting options parsing
+
+	* diskdrake.pm: basic nfs/smb handling in diskdrake
+	nicer mount options code (for autofs and supermount)
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+	cleanup mounting options parsing
+
+	* raid.pm: update the raid size as it should be
+
+	* diskdrake_interactive.pm: basic nfs/smb handling in diskdrake
+	less verbose resize_reiserfs
+	update the raid size as it should be
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+
+	* fsedit.pm: basic nfs/smb handling in diskdrake
+	update the raid size as it should be
+
+	* network/tools.pm: fix typo
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+
+	* partition_table.pm: fixes and function prototype removing
+
+	* install_steps_interactive.pm, standalone/drakautoinst, proxy.pm,
+	install_interactive.pm, network/ethernet.pm, interactive_http.pm,
+	printerdrake.pm, Xconfigurator.pm, network/netconnect.pm,
+	network/network.pm, interactive_newt.pm, network/modem.pm: big renaming
+	of ask_from_entries_refH in ask_from and ask_from_entries_refH_powered
+	in ask_from_
+
+	* standalone/diskdrake: basic nfs/smb handling in diskdrake
+
+	* any.pm: fixes and function prototype removing
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+
+	* interactive_gtk.pm: fix bug in box's height use
+	better radiobox keyboard handling
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+	enhance look, fix ask_fileW
+
+	* interactive.pm: readd the sorting based on size when no sorting is
+	precised
+	big renaming of ask_from_entries_refH in ask_from and
+	ask_from_entries_refH_powered in ask_from_
+
+	* install_steps.pm: oops, i inverted devfs=nomount and devfs=mount
+	do not use devfs with root software raid
+
+2001/08/18  Pixel  <pixel@mandrakesoft.com>
+
 	* install_steps_interactive.pm: fix pass $all_hds->{hds} instead of
 	$all_hds
 
