@@ -339,7 +339,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Sat Nov  8 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.3-5mdk
 - drakconnect:
-  o fix lan always marked as detected even
+  o fix lan always marked as detected even when no detection was performed or
+    when there's no ethernet devices
   o list acx100_pci as a wireless network cards driver so that one can
     set wireless parameters for it (#6312)
 - harddrake2: 
@@ -425,13 +426,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 - drakbackup: all users overrides individual selection in wizard
   (#5916) (stew)
 - drakconnect:
-   o fix #425, #1881: wireless adapters settings were lost when
-     altering network configuration when not from wizard mode
-   o when steping back in wizard, do not overwrite first card
-	parameters with last one's (#3276)
-   o fix expert mode (lost checkboxes states when "expert mode" option
-     is checked)
-   o blacklist bcm4400 for network hotplugging
+  o fix #425, #1881: wireless adapters settings were lost when
+    altering network configuration when not from wizard mode
+  o when steping back in wizard, do not overwrite first card
+    parameters with last one's (#3276)
+  o fix expert mode (lost checkboxes states when "expert mode" option
+    is checked)
+  o blacklist bcm4400 for network hotplugging
 - drakfont:
   o fix ttf conversion (#5088)
   o log more explanations
@@ -692,8 +693,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o try to be more user friendly:
     * if no error, display a success message, then exit
     * on error, instead of displaying the raw exit code that has no
-	 meaning for the end user, display in red the log message of
-	 mkbootdisk
+      meaning for the end user, display in red the log message of mkbootdisk
     * remove insane expert button and so called expert frame
 
 - drakpxe: match new pxe dhcp.conf configuration file (francois)
@@ -1315,7 +1315,7 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o diskdrake: 
     * discrimate hpfs and ntfs
     * more precise message when formatting / fsck'ing / mounting
-	 partitions
+      partitions
     * hide passwords for smb mount points
   o XFdrake: fix #707
 - drakperm: first gtk+2 port fixes, still more to come (pouly & me)
@@ -1585,15 +1585,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Fri Sep 20 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-51mdk
 - printerdrake: various fixes (till)
 - drabug:
-	o fix spurious '1' file creation
-	o don't print error messages when a program isn't found
+  o fix spurious '1' file creation
+  o don't print error messages when a program isn't found
 
 * Tue Sep 17 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-50mdk
 - draksec:
-	o add ignore option to pull-down list
-	o remove not anymore used libsafe option
-	o save items
-	o reread already set item
+  o add ignore option to pull-down list
+  o remove not anymore used libsafe option
+  o save items
+  o reread already set item
 
 * Tue Sep 17 2002 Warly <warly@mandrakesoft.com> 1.1.9-49mdk
 - printerdrake fix for webfetch
@@ -1643,13 +1643,13 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
   o list --test in -h|--help
   o enhanced draksound :
     * blacklist cs46xx and cs4281 drivers : we won't unload these
- 	 drivers since they're know to oopses the kernel but just warn
- 	 the user
+      drivers since they're know to oopses the kernel but just warn
+      the user
     * chroot aware - can be used in drakx
     * workaround alsaconf's aliases
     * add an help button that describe ALSA and OSS
     * display current driver, its type (OSS or ALSA), and the default
-  	 driver for the card
+      driver for the card
     * if there's no (usb|pci) sound card, print a note about sndconfig
       for isa pnp cards
 
@@ -1687,8 +1687,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Tue Sep  3 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-30mdk
 - ugtk:
-	o better fix for glib warning that don't make drakx feel mad
-	o make icons more transparent when selected in mcc
+  o better fix for glib warning that don't make drakx feel mad
+  o make icons more transparent when selected in mcc
 
 * Mon Sep  2 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-29mdk
 - harddrake:
@@ -1721,9 +1721,9 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Thu Aug 29 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-26mdk
 - harddrake: 
-	o quit button really work in embedded mode
-	o move so called eide raid controllers from unknown to ata
-	  controllers
+  o quit button really work in embedded mode
+  o move so called eide raid controllers from unknown to ata
+    controllers
 - logdrake: add a scrollbar when embedded in mcc
 
 * Thu Aug 29 2002 Guillaume Cottenceau <gc@mandrakesoft.com> 1.1.9-25mdk
@@ -1786,15 +1786,15 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 
 * Fri Aug  9 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.9-9mdk
 - harddrake:
-	o module configuration window:
-		* read current options
-		* don't display ranges, we cannot really know when a range
-            is needed and so display them in wrong cases
-		* read & parse modules.conf only when configuring the
-            module, not on each click in the tree
-		* don't display ranges, we cannot really know when a range
-       	  is needed and so display them in wrong cases (kill code,
-       	  enable us to simplify modparm::parameters after
+  o module configuration window:
+    * read current options
+    * don't display ranges, we cannot really know when a range
+      is needed and so display them in wrong cases
+    * read & parse modules.conf only when configuring the module,
+      not on each click in the tree
+    * don't display ranges, we cannot really know when a range is needed 
+      and so display them in wrong cases (kill code, enable us to simplify
+      modparm::parameters after
 
 * Fri Aug  9 2002 Pixel <pixel@mandrakesoft.com> 1.1.9-8mdk
 - snapshot
