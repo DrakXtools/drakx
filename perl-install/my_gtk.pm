@@ -95,13 +95,14 @@ sub new {
 	$::WizardTable->attach($o->{window}, 0, 2, 1, 2, [-fill, -expand], [-fill, -expand], 0, 0);
     }
 
-    $::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug->child } or return $o;
-    $o->{window} = new Gtk::HBox(0,0);
-    $o->{rwindow} = $o->{window};
-    $::Plug ||= new Gtk::Plug ($::XID);
-    $::Plug->show;
-    flush();
-    $::Plug->add($o->{window});
+    if ($::isEmbedded && !$my_gtk::pop_it && !eval { $::Plug->child }) {
+	$o->{window} = new Gtk::HBox(0,0);
+	$o->{rwindow} = $o->{window};
+	$::Plug ||= new Gtk::Plug ($::XID);
+	$::Plug->show;
+	flush();
+	$::Plug->add($o->{window});
+    }
     $::CCPID and kill "USR2", $::CCPID;
     $o;
 }
