@@ -5,15 +5,10 @@
 
 use MDK::Common;
 
-my @probelines = cat_('probe.c');
-my $status = 0;
-foreach (@probelines) {
-    if ($status == 0) {
-	/^pci_id_t pci_id\[\] = {/ and $status = 1;
-    } elsif ($status == 1) {
+foreach (cat_('probe.c')) {
+    if (/^pci_id_t pci_id\[\] = {/ ... /^};/) {
 	/^\s*{\s*0x([\da-f]+),\s*0x([\da-f]+),\s*"([^"]*)",\s*"([^"]*)"\s*}/
 	  and push @probes, { vendor => $1, device => $2, tag => $3, name => $4, vd => "$1$2" };
-	/^};/ and last;
     }
 }
 
