@@ -533,6 +533,7 @@ killall pppd
                                        );
                         my $adsl_device = find { $adsl_devices{$_} eq $ntf_name } keys %adsl_devices;
                         print "package: $ntf_name => $adsl_device => $packages{$adsl_device}\n";
+                        $netconnect::need_restart_network = member($adsl_device qw(speedtouch eci);
                         $in->do_pkgs->install($packages{$adsl_device}) if $packages{$adsl_device};
                         return 'adsl_protocol';
                     },
