@@ -102,6 +102,25 @@ void initIMPS2() {
 
 void log_message(const char * s, ...) {}
 
+SV * iconv_(char* s, char* from_charset, char* to_charset) {
+  iconv_t cd = iconv_open(to_charset, from_charset);
+  char* retval = s;
+  if (cd != (iconv_t) (-1)) {
+      size_t s_len = strlen(retval);
+      char *buf = alloca(3 * s_len + 10); /* 10 for safety, it should not be needed */
+      {
+	  char *ptr = buf;
+	  size_t ptr_len = 3 * s_len + 10;
+	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
+	      *ptr = 0;
+	      retval = buf;
+	  }
+      }
+      iconv_close(cd);
+  }
+  return newSVpv(retval, 0);
+}
+
 ';
 
 print '
@@ -217,9 +236,22 @@ bindtextdomain(domainname, dirname)
    char * dirname
 
 char *
+bind_textdomain_codeset(domainname, codeset)
+   char * domainname
+   char * codeset
+
+SV *
 dgettext(domainname, msgid)
    char * domainname
    char * msgid
+
+   CODE:
+   /* always convert to UTF8, because perl will fail to do it correctly during install (in gtk2-perl) */
+   RETVAL = iconv_(dgettext(domainname, msgid), nl_langinfo(CODESET), "UTF-8");
+   SvUTF8_on(RETVAL);
+
+   OUTPUT:
+   RETVAL
 
 int
 KTYP(x)
@@ -496,27 +528,13 @@ setPromVars(linuxAlias, bootDevice)
   char *linuxAlias
   char *bootDevice
 
-char *
+SV *
 iconv(s, from_charset, to_charset)
   char *s
   char *from_charset
   char *to_charset
   CODE:
-  iconv_t cd = iconv_open(to_charset, from_charset);
-  RETVAL = s;
-  if (cd != (iconv_t) (-1)) {
-      size_t s_len = strlen(RETVAL);
-      char *buf = alloca(3 * s_len + 10); /* 10 for safety, it should not be needed */
-      {
-	  char *ptr = buf;
-	  size_t ptr_len = 3 * s_len + 10;
-	  if ((iconv(cd, &s, &s_len, &ptr, &ptr_len)) != (size_t) (-1)) {
-	      *ptr = 0;
-	      RETVAL = buf;
-	  }
-      }
-      iconv_close(cd);
-  }
+  RETVAL = iconv_(s, from_charset, to_charset);
   OUTPUT:
   RETVAL
 
