@@ -855,13 +855,13 @@ sub suggest_mount_point {
     my ($e) = @_;
 
     my $name = $e->{media_type};
-    if (member($name, 'hd', 'fd')) {
+    if (member($e->{media_type}, 'hd', 'fd')) {
 	if (exists $e->{usb_driver}) {
 	    return usb2removable($e) || 'removable';
 	}
 	if (isZipDrive($e)) {
 	    $name = 'zip';
-	} elsif ($name eq 'fd') {
+	} elsif ($e->{media_type} eq 'fd') {
 	    $name = 'floppy';
 	} else {
 	    log::l("suggest_mount_point: don't know what to with hd $e->{device}");
