@@ -170,7 +170,7 @@ sub mount_all($;$) {
 
     #- order mount by alphabetical ordre, that way / < /home < /home/httpd...
     foreach (sort { ($a->{mntpoint} || '') cmp ($b->{mntpoint} || '') } @$fstab) {
-	mount_part($_, $prefix) if ($_->{mntpoint} || isSwap($_));
+	mount_part($_, $prefix) if $_->{mntpoint};
     }
 }
 

@@ -172,6 +172,34 @@ sub write {
     }
 }
 
+sub load_po($) {
+    my ($lang) = @_;
+    my ($s, $from, $to, $state);
+
+    $s .= "package po::I18N;\n";
+    $s .= "\%$lang = (";
+
+    my $f; -e ($f = "$_/po/$lang.po") and last foreach @INC;    
+    local *F; open F, $f or return;
+    foreach (<F>) {
+	/^msgstr/ and $state = 1;
+	/^msgid/ and $state = 2;
+
+	if (/^(#|$)/ && $state != 3) {
+	    $state = 3;
+	    $s .= qq("$from" => "$to",\n) if $from;
+	    $from = $to = '';
+	}
+	$to .= (/"(.*)"/)[0] if $state == 1;
+	$from .= (/"(.*)"/)[0] if $state == 2;
+    }
+    $s .= ");";
+    no strict "vars";
+    eval $s;
+    !$@;
+}
+
+
 #-sub load_font {
 #-    my ($charset) = @_;
 #-    my $fontFile = "lat0-sun16";

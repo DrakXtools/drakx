@@ -10,7 +10,7 @@ use vars qw(@ISA);
 #-######################################################################################
 #- misc imports
 #-######################################################################################
-use common qw(:common :functional);
+use common qw(:common :file :functional);
 use partition_table qw(:types);
 use install_steps;
 use pci_probing::main;
@@ -120,9 +120,9 @@ sub choosePartitionsToFormat($$) {
 
     $o->SUPER::choosePartitionsToFormat($fstab);
 
-    my @l = grep { $_->{mntpoint} && isExt2($_) || isSwap($_) && !$::beginner } @$fstab;
+    my @l = grep { $_->{mntpoint} && !($::beginner && isSwap($_)) } @$fstab;
     $o->ask_many_from_list_ref('', _("Choose the partitions you want to format"),
-			       [ map { $_->{mntpoint} || type2name($_->{type}) . " ($_->{device})" } @l ],
+			       [ map { isSwap($_) ? type2name($_->{type}) . " ($_->{device})" : $_->{mntpoint} } @l ],
 			       [ map { \$_->{toFormat} } @l ]) or die "cancel";
 }
 
@@ -529,27 +529,32 @@ failures. Would you like to create a bootdisk for your system?"), !$o->{mkbootdi
 }
 
 #------------------------------------------------------------------------------
+sub setupBootloaderBefore {
+    my ($o) = @_;
+    my $w = $o->wait_message('', _("Preparing bootloader"));
+    $o->SUPER::setupBootloaderBefore($o);
+}
+
 sub setupBootloader {
     my ($o, $more) = @_;
-    my $b = $o->{bootloader} ||= {};
+    my $b = $o->{bootloader};
 
     if ($::beginner && !$more) {
 	my @l = (__("First sector of drive"), __("First sector of boot partition"));
 
-	$b->{onmbr} =
+	my $boot = $o->{hds}[0]{device};
+	my $onmbr = "/dev/$boot" eq $b->{boot};
+	$b->{boot} = "/dev/$boot" if !$onmbr &&
 	  $o->ask_from_list_(_("Lilo Installation"),
 			     _("Where do you want to install the bootloader?"),
-			     \@l,
-			     $l[!lilo::suggest_onmbr($o->{hds})]
-			    ) eq $l[0] unless $::beginner && $b->{onmbr};
-	
-
+			     \@l, $l[!$onmbr]) eq $l[0];
     } else {
 	$::expert and $o->ask_yesorno('', _("Do you want to use lilo?")) || return;
     
 	my @l = (
-_("Boot device") => { val => \$b->{boot}, list => [ map{ $_->{device} } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
+_("Boot device") => { val => \$b->{boot}, list => [ map { "/dev/$_->{device}" } @{$o->{hds}}, @{$o->{fstab}} ], not_edit => !$::expert },
 _("Linear (needed for some SCSI drives)") => { val => \$b->{linear}, type => "bool", text => _("linear") },
+_("Compact") => { val => \$b->{compact}, type => "bool", text => _("compact") },
 _("Delay before choosing default choice") => \$b->{timeout},
 _("Video mode") => { val => \$b->{vga}, list => [ keys %lilo::vga_modes ], not_edit => $::beginner },
 _("Password") => { val => \$b->{password}, hidden => 1 },
@@ -570,17 +575,51 @@ _("Restrict command line options") => { val => \$b->{restricted}, type => "bool"
 	$b->{vga} = $lilo::vga_modes{$b->{vga}} || $b->{vga};
     }
 
-    unless ($::beginner && !$more) {
+    until ($::beginner && !$more) {
+	my $c = $o->ask_from_list_('', 
+_("Here are the following entries in lilo
+You can add some more or change the existent ones."),
+		[ (map_each{ "$::b->{label} ($::a)" . ($b->{default} eq $::b->{label} && "  *") } %{$b->{entries}}), __("Add"), __("Done") ],
+	);
+	$c eq "Done" and last;
+
+	if ($c eq "Add") { }
+
+	my ($name) = $c =~ /\((.*?)\)/;
+	my $e = $b->{entries}{$name};
+	my $default = $e->{label} eq $b->{default};
+	    
+	my @l;
+	if ($e->{type} eq "image") { 
+	    @l = (
+_("Image") => { val => \$name, list => [ eval { glob_("/boot/vmlinuz*") } ] },
+_("Root") => { val => \$e->{root}, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Append") => \$e->{append},
+_("Initrd") => { val => \$e->{initrd}, list => [ eval { glob_("/boot/initrd*") } ] },
+_("Read-write") => { val => \$e->{'read-write'}, type => 'bool' }
+	    );
+	    @l = @l[0..3] if $::beginner;
+	} else {
+	    @l = ( 
+_("Root") => { val => \$name, list => [ map { "/dev/$_->{device}" } @{$o->{fstab}} ], not_edit => !$::expert },
+_("Unsafe") => { val => \$e->{unsafe}, type => 'bool' }
+	    );
+	    @l = @l[0..1] if $::beginner;
+	}
+	@l = (
+_("Label") => \$e->{label},
+@l,
+_("Default") => { val => \$default, type => 'bool' },
+	);
+
 	$o->ask_from_entries_ref('',
-_("The boot manager Mandrake uses can boot other
-operating systems as well. You need to tell me
-what partitions you would like to be able to boot
-and what label you want to use for each of them."),
-				 [ keys %{$b->{entries}} ],
-				 [ map { \$_->{label} } values %{$b->{entries}} ],
-				);
+				 _(""),
+				 [ grep_index { even($::i) } @l ],
+				 [ grep_index {  odd($::i) } @l ],
+				 ) or return;
+
+	$b->{default} = $default && $e->{label};
     }
-    my $w = $o->wait_message('', _("Installing bootloader"));
     $o->SUPER::setupBootloader;
 }
 

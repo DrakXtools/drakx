@@ -7,7 +7,7 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $printable_chars $sizeof_int $bitof_int
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
     common     => [ qw(__ even odd min max sqr sum sign product bool listlength bool2text to_int to_float ikeys member divide is_empty_array_ref is_empty_hash_ref add2hash add2hash_ set_new set_add round round_up round_down first second top uniq translate untranslate warp_text formatAlaTeX) ],
-    functional => [ qw(fold_left compose map_index grep_index map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
+    functional => [ qw(fold_left compose map_index grep_index map_each grep_each map_tab_hash mapn mapn_ difference2 before_leaving catch_cdie cdie) ],
     file       => [ qw(dirname basename touch all glob_ cat_ chop_ mode) ],
     system     => [ qw(sync makedev unmakedev psizeof strcpy gettimeofday syscall_ crypt_ getVarsFromSh setVarsInSh) ],
     constant   => [ qw($printable_chars $sizeof_int $bitof_int $SECTORSIZE) ],
@@ -101,6 +101,20 @@ sub grep_index(&@) {
     my $f = shift;
     my $v; local $::i = 0;
     grep { $v = &$f($::i); $::i++; $v } @_;
+}
+sub map_each(&%) {
+    my ($f, %h) = @_;
+    my @l;
+    local ($::a, $::b);
+    while (($::a, $::b) = each %h) { push @l, &$f($::a, $::b) }
+    @l;
+}
+sub grep_each(&%) {
+    my ($f, %h) = @_;
+    my %l;
+    local ($::a, $::b);
+    while (($::a, $::b) = each %h) { $l{$::a} = $::b if &$f($::a, $::b) }
+    %l;
 }
 
 #- pseudo-array-hash :)
@@ -216,11 +230,9 @@ sub unmakedev { $_[0] >> 8, $_[0] & 0xff }
 sub translate {
     my ($s) = @_;
     my ($lang) = substr($ENV{LC_ALL} || $ENV{LANGUAGE} || $ENV{LC_MESSAGES} || $ENV{LANG} || '', 0, 2);
-    unless (defined $po::I18N::{$lang}) {
-	local $@;
-	local $SIG{__DIE__} = 'none';
-	eval { require "po/$lang.pm"; };
-    }
+
+    require 'lang.pm';
+    lang::load_po ($lang) unless defined $po::I18N::{$lang}; #- the space if needed to mislead perl2fcalls (as lang is not included here)
     $po::I18N::{$lang} or return $s;
     my $l = *{$po::I18N::{$lang}};
     $l->{$s} || $s;

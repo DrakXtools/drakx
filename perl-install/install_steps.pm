@@ -108,16 +108,15 @@ sub doPartitionDisks($$) {
 sub rebootNeeded($) {
     my ($o) = @_;
     log::l("Rebooting...");
-    exit "true";
+    exec "true";
 }
 
 sub choosePartitionsToFormat($$) {
     my ($o, $fstab) = @_;
 
-    foreach (@$fstab) {
-	$_->{toFormat} = ($_->{mntpoint} && isExt2($_) || isSwap($_)) &&
-	  ($_->{notFormatted} || $o->{partitioning}{autoformat});
-    }
+    $_->{mntpoint} = "swap" foreach grep { isSwap($_) } @$fstab;
+    $_->{toFormat} = $_->{mntpoint} &&
+      ($_->{notFormatted} || $o->{partitioning}{autoformat}) foreach @$fstab;
 }
 
 sub formatPartitions {
@@ -281,10 +280,16 @@ sub createBootdisk($) {
 }
 
 #------------------------------------------------------------------------------
+sub setupBootloaderBefore {
+    my ($o) = @_;
+    add2hash($o->{bootloader} ||= {}, lilo::read("$o->{prefix}/etc/lilo.conf"));
+    lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+    $o->{bootloader}{keytable} ||= keyboard::kmap($o->{keyboard});
+}
+
 sub setupBootloader($) {
     my ($o) = @_;
     return if $::g_auto_install;
-    $o->{bootloader}{keytable} = keyboard::kmap($o->{keyboard}) if $o->{bootloader}{keytable} eq "1";
     lilo::install($o->{prefix}, $o->{bootloader});
 }
 

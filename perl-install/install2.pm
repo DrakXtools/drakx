@@ -52,7 +52,7 @@ my @installSteps = (
   setRootPassword    => [ __("Set root password"), 1, 1, "formatPartitions" ],
   addUser            => [ __("Add a user"), 1, 1, "doInstallStep" ],
   createBootdisk     => [ __("Create bootdisk"), 1, 0, "doInstallStep" ],
-  setupBootloader    => [ __("Install bootloader"), 1, 1],#, "doInstallStep" ],
+  setupBootloader    => [ __("Install bootloader"), 1, 1, "doInstallStep" ],
   configureX         => [ __("Configure X"), 1, 0, "formatPartitions" ],
   exitInstall        => [ __("Exit install"), 0, 0 ],
 );
@@ -354,8 +354,7 @@ sub createBootdisk {
 
 #------------------------------------------------------------------------------
 sub setupBootloader {
-    add2hash($o->{bootloader} ||= {}, lilo::read("$o->{prefix}/etc/lilo.conf"));
-    lilo::suggest($o->{prefix}, $o->{bootloader}, $o->{hds}, $o->{fstab}, install_any::kernelVersion());
+    $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] > 1);
 }
 #------------------------------------------------------------------------------
@@ -404,7 +403,7 @@ sub main {
     log::ld("extra log messages are enabled");
 
     #-really needed ??
-    spawnSync();
+    #-spawnSync();
     eval { spawnShell() };
 
     $o->{prefix} = $::testing ? "/tmp/test-perl-install" : "/mnt";
@@ -413,7 +412,7 @@ sub main {
     mkdir $o->{root}, 0755;
 
     #-  make sure we don't pick up any gunk from the outside world
-    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin";
+    $ENV{PATH} = "/usr/bin:/bin:/sbin:/usr/sbin:/usr/X11R6/bin:$o->{prefix}/sbin:$o->{prefix}/bin:$o->{prefix}/usr/sbin:$o->{prefix}/usr/bin:$o->{prefix}/usr/X11R6/bin" unless $::g_auto_install;
     $ENV{LD_LIBRARY_PATH} = "";
 
     if ($::auto_install) {

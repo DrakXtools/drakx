@@ -1,7 +1,7 @@
 VERSION     = 2.2.10-BOOT                                                                             
 SUDO        = sudo
 SO_FILES    = c/blib/arch/auto/c/c.so                                                                 
-PMS         = *.pm c/*.pm resize_fat/*.pm po/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake
+PMS         = *.pm c/*.pm resize_fat/*.pm pci_probing/*.pm commands install2 diskdrake XFdrake g_auto_install
 ROOTDEST    = /export
 DEST        = $(ROOTDEST)/Mandrake/mdkinst
 STAGE2      = $(ROOTDEST)/Mandrake/base/mdkinst_stage2
@@ -89,10 +89,14 @@ install_pms: all
 	mv -f $(DESTREP4PMS)/c/c.pm $(DESTREP4PMS)
 
 	cp *.rc $(DESTREP4PMS)
+	install -d $(DESTREP4PMS)/po
+	cp po/*.po* $(DESTREP4PMS)/po
 	ln -sf perl-install/install2 $(DEST)/usr/bin
 	ln -sf perl-install/commands $(DEST)/usr/bin
 	chmod a+x $(DESTREP4PMS)/install2
 	chmod a+x $(DESTREP4PMS)/commands
+	chmod a+x $(DESTREP4PMS)/XFdrake
+	chmod a+x $(DESTREP4PMS)/g_auto_install
 
 	cp -af */blib/arch/auto $(DESTREP4PMS)
 	find $(DESTREP4PMS) -name "*.so" | xargs strip

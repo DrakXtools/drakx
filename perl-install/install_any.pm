@@ -47,7 +47,7 @@ sub getFile($) {
 }
 
 sub kernelVersion {
-    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") or $::testing && "2.2.testversion" or die "I couldn't find the kernel package!";
+    local $_ = readlink("$::o->{prefix}/boot/vmlinuz") || $::testing && "vmlinuz-2.2.testversion" or die "I couldn't find the kernel package!";
     first(/vmlinuz-(.*)/);
 }
 
@@ -60,7 +60,6 @@ sub getNextStep {
 
 sub spawnSync {
     return if $::o->{localInstall} || $::testing;
-
     fork and return;
     while (1) { sleep(30); sync(); }
 }

@@ -1,15 +1,11 @@
 PMSFILES = $(shell find .. -name "*.pm" | grep -v "^../po" | grep -v "^../c/")
 PMSCFILES = $(PMSFILES:%=%_.c)
 POFILES = $(shell ls *.po)
-FROMPOFILES = $(POFILES:%.po=%.pm)
 
-all: $(FROMPOFILES)
+all: $(POFILES)
 
 clean:
-	rm -f empty.po $(FROMPOFILES) $(POFILES:%=%t) $(PMSCFILES)
-
-$(FROMPOFILES): %.pm: %.po
-	./po2perl $< > $@
+	rm -f empty.po $(POFILES:%=%t) $(PMSCFILES)
 
 $(POFILES): panoramix.pot
 	cp -f $@ $@t

@@ -393,6 +393,8 @@ sub unpack_ {
 }
 
 sub insmod {
+    my ($h) = getopts(\@_, qw(h));
+    $h || @_ == 0 and die "usage: insmod <module> [options]\n";
     my $name = shift;
     my $f = "/tmp/$name.o";
     require 'run_program.pm';
@@ -400,6 +402,15 @@ sub insmod {
     -r $f or die "can't find module $name";
     run_program::run(["insmod_", "insmod"], $f, @_) or die("insmod $name failed");
     unlink $f;
+}
+
+sub modprobe {
+    my ($h) = getopts(\@_, qw(h));
+    $h || @_ == 0 and die "usage: modprobe <module> [options]\n";
+    my $name = shift;
+    require 'modules.pm';
+    modules::load_deps("/modules/modules.dep");
+    modules::load($name, '', @_);
 }
 
 sub route {
@@ -457,6 +468,18 @@ $dev, $size, $used, $free, $use, $mntpoint
 	}
 	write DF if $size;
     }
+}
+
+sub kill {
+    my $signal = 15;
+    @_ or die "usage: kill [-<signal>] pids\n";
+    $signal = (shift, $1)[1] if $_[0] =~ /^-(.*)/;
+    kill $signal, @_ or die "kill failed: $!\n";
+}
+
+sub lspci {
+    require 'pci_probing/main.pm';
+    print join "\n", pci_probing::main::list (), '';
 }
 
 #-######################################################################################
