@@ -142,7 +142,7 @@ sub write_fstab {
 	  $_->{device} eq 'none' || member($_->{type}, qw(nfs smbfs)) ? 
 	      $_->{device} : 
 	  isLoopback($_) ? 
-	      ($_->{mntpoint} eq '/' ? "/lib/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
+	      ($_->{mntpoint} eq '/' ? "/initrd/loopfs" : "$_->{loopback_device}{mntpoint}") . $_->{loopback_file} :
 	  do {
 	      my $dir = $_->{device} =~ m|^/| ? '' : '/dev/';
 	      eval { devices::make("$prefix$dir$_->{device}") };
@@ -151,7 +151,7 @@ sub write_fstab {
 
 	my $real_mntpoint = $_->{mntpoint} || ${{ '/tmp/hdimage' => '/mnt/hd' }}{$_->{real_mntpoint}};
 	mkdir("$prefix/$real_mntpoint", 0755);
-	my $mntpoint = loopback::carryRootLoopback($_) ? '/lib/initrd/loopfs' : $real_mntpoint;
+	my $mntpoint = loopback::carryRootLoopback($_) ? '/initrd/loopfs' : $real_mntpoint;
 
 	my ($freq, $passno) =
 	  exists $_->{freq} ?
@@ -662,7 +662,7 @@ sub mount_part {
 		eval { modules::load('loop') };
 		$dev = $part->{real_device} = devices::set_loop($part->{device}) || die;
 	    } elsif (loopback::carryRootLoopback($part)) {
-		$mntpoint = "/lib/initrd/loopfs";
+		$mntpoint = "/initrd/loopfs";
 	    }
 	    mount($dev, $mntpoint, type2fs($part), $rdonly);
 	    rmdir "$mntpoint/lost+found";
@@ -680,7 +680,7 @@ sub umount_part {
 	if (isSwap($part)) {
 	    swap::swapoff($part->{device});
 	} elsif (loopback::carryRootLoopback($part)) {
-	    umount("/lib/initrd/loopfs");
+	    umount("/initrd/loopfs");
 	} else {
 	    umount(($prefix || '') . $part->{mntpoint} || devices::make($part->{device}));
 	    c::del_loop(delete $part->{real_device}) if isLoopback($part);

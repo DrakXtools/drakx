@@ -50,13 +50,13 @@ sub carryRootCreateSymlink {
     unless (-e $mntpoint) {
 	eval { mkdir_p(dirname($mntpoint)) };
 	#- do non-relative link for install, should be changed to relative link before rebooting
-	symlink "/lib/initrd/loopfs", $mntpoint;
+	symlink "/initrd/loopfs", $mntpoint;
 
-	mkdir_p("/lib/initrd/loopfs/lnx4win/boot");
-	symlink "/lib/initrd/loopfs/lnx4win/boot", "$prefix/boot";
+	mkdir_p("/initrd/loopfs/lnx4win/boot");
+	symlink "/initrd/loopfs/lnx4win/boot", "$prefix/boot";
     }
     #- indicate kernel to keep initrd
-    mkdir "$prefix/lib/initrd", 0755;
+    mkdir "$prefix/initrd", 0755;
 }
 
 

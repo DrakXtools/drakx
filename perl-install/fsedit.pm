@@ -341,7 +341,7 @@ sub file2part {
     unless ($file =~ s/^$prefix//) {
 	my ($part) = grep { loopback::carryRootLoopback($_) } @$fstab or die;
 	log::l("found $part->{mntpoint}");
-	$file =~ s|/lib/initrd/loopfs|$part->{mntpoint}|;
+	$file =~ s|/initrd/loopfs|$part->{mntpoint}|;
     }
     foreach (@$fstab) {
 	my $m = $_->{mntpoint};

@@ -392,7 +392,7 @@ wait %d seconds for default boot.
 	     silo => to_bool(arch() =~ /sparc/),
 	     lilo => to_bool(arch() !~ /sparc|ppc/) && !isLoopback(fsedit::get_root($fstab)),
 	     grub => to_bool(arch() !~ /sparc|ppc/ && !isRAID(fsedit::get_root($fstab))),
-	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/lib/initrd/loopfs/lnx4win",
+	     loadlin => to_bool(arch() !~ /sparc|ppc/) && -e "/initrd/loopfs/lnx4win",
 	    );
     unless ($lilo->{methods}) {
 	$lilo->{methods} ||= { map { $_ => 1 } grep { $l{$_} } keys %l };
@@ -905,7 +905,7 @@ sub install_loadlin {
     #install_loadlin_config_sys($lilo, $windrive, $label, $cmd);
     #install_loadlin_desktop($lilo, $windrive);
 
-    output "/lib/initrd/loopfs/lnx4win/linux.bat", unix2dos(
+    output "/initrd/loopfs/lnx4win/linux.bat", unix2dos(
 '@echo off
 echo Mandrake Linux
 smartdrv /C
