@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2000-08-29 21:14+0200\n"
+"POT-Creation-Date: 2000-08-29 23:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,7 +140,7 @@ msgid ""
 "You can switch if off if you want, you'll hear a beep when it's over"
 msgstr ""
 
-#: ../../Xconfigurator.pm_.c:504 ../../printerdrake.pm_.c:168
+#: ../../Xconfigurator.pm_.c:504 ../../printerdrake.pm_.c:167
 msgid "Resolution"
 msgstr ""
 
@@ -482,12 +482,16 @@ msgstr ""
 msgid "Delay before booting default image"
 msgstr ""
 
-#: ../../any.pm_.c:128 ../../netconnect.pm_.c:482 ../../printerdrake.pm_.c:85
-#: ../../printerdrake.pm_.c:110 ../../standalone/adduserdrake_.c:42
+#: ../../any.pm_.c:128 ../../install_steps_interactive.pm_.c:682
+#: ../../install_steps_interactive.pm_.c:733 ../../netconnect.pm_.c:482
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:110
+#: ../../standalone/adduserdrake_.c:42
 msgid "Password"
 msgstr ""
 
-#: ../../any.pm_.c:129 ../../standalone/adduserdrake_.c:43
+#: ../../any.pm_.c:129 ../../install_steps_interactive.pm_.c:683
+#: ../../install_steps_interactive.pm_.c:734
+#: ../../standalone/adduserdrake_.c:43
 msgid "Password (again)"
 msgstr ""
 
@@ -508,11 +512,15 @@ msgid ""
 "Option ``Restrict command line options'' is of no use without a password"
 msgstr ""
 
-#: ../../any.pm_.c:140 ../../standalone/adduserdrake_.c:56
+#: ../../any.pm_.c:140 ../../install_steps_interactive.pm_.c:692
+#: ../../install_steps_interactive.pm_.c:747
+#: ../../standalone/adduserdrake_.c:56
 msgid "Please try again"
 msgstr ""
 
-#: ../../any.pm_.c:140 ../../standalone/adduserdrake_.c:56
+#: ../../any.pm_.c:140 ../../install_steps_interactive.pm_.c:692
+#: ../../install_steps_interactive.pm_.c:747
+#: ../../standalone/adduserdrake_.c:56
 msgid "The passwords do not match"
 msgstr ""
 
@@ -522,12 +530,13 @@ msgid ""
 "You can add some more or change the existing ones."
 msgstr ""
 
-#: ../../any.pm_.c:159 ../../printerdrake.pm_.c:245
+#: ../../any.pm_.c:159 ../../printerdrake.pm_.c:244
 #: ../../standalone/rpmdrake_.c:302
 msgid "Add"
 msgstr ""
 
-#: ../../any.pm_.c:159 ../../diskdrake.pm_.c:44 ../../printerdrake.pm_.c:245
+#: ../../any.pm_.c:159 ../../diskdrake.pm_.c:44
+#: ../../install_steps_interactive.pm_.c:727 ../../printerdrake.pm_.c:244
 #: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr ""
@@ -585,11 +594,11 @@ msgid "Default"
 msgstr ""
 
 #: ../../any.pm_.c:213 ../../install_steps_gtk.pm_.c:580
-#: ../../interactive.pm_.c:74 ../../interactive.pm_.c:84
-#: ../../interactive.pm_.c:234 ../../interactive_newt.pm_.c:49
-#: ../../interactive_newt.pm_.c:98 ../../interactive_stdio.pm_.c:27
-#: ../../my_gtk.pm_.c:204 ../../my_gtk.pm_.c:463 ../../my_gtk.pm_.c:638
-#: ../../printerdrake.pm_.c:272
+#: ../../install_steps_interactive.pm_.c:680 ../../interactive.pm_.c:74
+#: ../../interactive.pm_.c:84 ../../interactive.pm_.c:234
+#: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:204
+#: ../../my_gtk.pm_.c:463 ../../my_gtk.pm_.c:638 ../../printerdrake.pm_.c:271
 msgid "Ok"
 msgstr ""
 
@@ -821,8 +830,9 @@ msgid "Be careful: this operation is dangerous."
 msgstr ""
 
 #: ../../diskdrake.pm_.c:200 ../../install_steps.pm_.c:75
-#: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
-#: ../../standalone/rpmdrake_.c:304
+#: ../../install_steps_interactive.pm_.c:42
+#: ../../install_steps_interactive.pm_.c:212 ../../standalone/diskdrake_.c:60
+#: ../../standalone/rpmdrake_.c:294 ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr ""
 
@@ -1055,7 +1065,7 @@ msgstr ""
 msgid "Formatting loopback file %s"
 msgstr ""
 
-#: ../../diskdrake.pm_.c:516
+#: ../../diskdrake.pm_.c:516 ../../install_steps_interactive.pm_.c:298
 #, c-format
 msgid "Formatting partition %s"
 msgstr ""
@@ -1830,7 +1840,7 @@ msgstr ""
 msgid "Choose your keyboard"
 msgstr ""
 
-#: ../../install2.pm_.c:48
+#: ../../install2.pm_.c:48 ../../install_steps_interactive.pm_.c:368
 msgid "Miscellaneous"
 msgstr ""
 
@@ -1870,7 +1880,8 @@ msgstr ""
 msgid "Configure printer"
 msgstr ""
 
-#: ../../install2.pm_.c:58
+#: ../../install2.pm_.c:58 ../../install_steps_interactive.pm_.c:680
+#: ../../install_steps_interactive.pm_.c:681
 msgid "Set root password"
 msgstr ""
 
@@ -2167,7 +2178,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr ""
 
-#: ../../install_steps.pm_.c:755
+#: ../../install_steps.pm_.c:644
 msgid "No floppy drive available"
 msgstr ""
 
@@ -2206,11 +2217,12 @@ msgid "Info"
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:272
-#: ../../standalone/rpmdrake_.c:161
+#: ../../install_steps_interactive.pm_.c:126 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:439
+#: ../../install_steps_interactive.pm_.c:438
 msgid "Installing"
 msgstr ""
 
@@ -2227,6 +2239,7 @@ msgid "Total time "
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:457
+#: ../../install_steps_interactive.pm_.c:438
 msgid "Preparing installation"
 msgstr ""
 
@@ -2245,6 +2258,7 @@ msgid "There was an error ordering packages:"
 msgstr ""
 
 #: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:938
 msgid "Use existing configuration for X11?"
 msgstr ""
 
@@ -2387,6 +2401,701 @@ msgstr ""
 
 #: ../../install_steps_gtk.pm_.c:518
 msgid "There was an error installing packages:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:42
+msgid "An error occurred"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:58
+msgid "Please, choose a language to use."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:74
+#: ../../standalone/keyboarddrake_.c:22
+msgid "Keyboard"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:75
+msgid "Please, choose your keyboard layout."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:84
+msgid "You can choose other languages that will be available after install"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:93
+#: ../../install_steps_interactive.pm_.c:137
+msgid "Install Class"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:93
+msgid "Which installation class do you want?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:95
+msgid "Install/Upgrade"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:95
+msgid "Is this an install or an upgrade?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:104
+msgid "Recommended"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:106
+#: ../../install_steps_interactive.pm_.c:121
+msgid "Customized"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:107
+#: ../../install_steps_interactive.pm_.c:121
+msgid "Expert"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:116
+msgid ""
+"Are you sure you are an expert? \n"
+"You will be allowed to make powerful but dangerous things here.\n"
+"\n"
+"You will be asked questions such as: ``Use shadow file for passwords?'',\n"
+"are you ready to answer that kind of questions?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:126
+msgid "Upgrade"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:132
+msgid "Normal"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:133
+msgid "Development"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:134
+msgid "Server"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:138
+msgid "Which usage is your system used for ?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:152
+msgid "Please, choose the type of your mouse."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:159 ../../standalone/mousedrake_.c:38
+msgid "Mouse Port"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:160
+msgid "Please choose on which serial port your mouse is connected to."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:178
+msgid "Configuring IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:178
+msgid "IDE"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:189
+msgid "no available partitions"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:196
+msgid "Choose the mount points"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:213
+#, c-format
+msgid ""
+"I can't read your partition table, it's too corrupted for me :(\n"
+"I'll try to go on blanking bad partitions and ALL DATA will be lost\n"
+"(%s)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:222
+msgid ""
+"DiskDrake failed to read correctly the partition table.\n"
+"Continue at your own risk!"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:230
+msgid "Root Partition"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:231
+msgid "What is the root partition (/) of your system?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:244
+msgid "The DrakX Partitioning wizard found the following solutions:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:247
+#, c-format
+msgid "Partitioning failed: %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:255
+msgid "You need to reboot for the partition table modifications to take place"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:281
+msgid "Choose the partitions you want to format"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:285
+msgid "Check bad blocks?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:293
+msgid "Formatting partitions"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:297
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:300
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:306
+msgid "Looking for available packages"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:312
+msgid "Finding packages to upgrade"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:329
+msgid "Your system has not enough space left for installation or upgrade"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:344
+#, c-format
+msgid "Complete (%dMB)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:344
+#, c-format
+msgid "Minimum (%dMB)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:344
+#, c-format
+msgid "Recommanded (%dMB)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:367
+msgid "Package Group Selection"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:370
+msgid "Individual package selection"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:416
+msgid ""
+"If you have all the CDs in the list below, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:419
+#, c-format
+msgid "Cd-Rom labeled \"%s\""
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:447
+msgid ""
+"Installing package %s\n"
+"%d%%"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:456
+msgid "Post-install configuration"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:466
+msgid "Keep the current IP configuration"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:467
+msgid "Reconfigure network now"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:468
+msgid "Do not set up networking"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:471
+#: ../../install_steps_interactive.pm_.c:476
+msgid "Network Configuration"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:472
+msgid "Local networking has already been configured. Do you want to:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:477
+msgid "Do you want to configure a local network for your system?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:483
+msgid "no network card found"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:501
+#: ../../install_steps_interactive.pm_.c:555
+msgid "Configuring network"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:502
+msgid ""
+"Please enter your host name if you know it.\n"
+"Some DHCP servers require the hostname to work.\n"
+"Your host name should be a fully-qualified host name,\n"
+"such as ``mybox.mylab.myco.com''."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:506
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Host name:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:525
+#: ../../install_steps_interactive.pm_.c:526
+#, c-format
+msgid "Configuring network device %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:527
+msgid ""
+"Please enter the IP configuration for this machine.\n"
+"Each item should be entered as an IP address in dotted-decimal\n"
+"notation (for example, 1.2.3.4)."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "Automatic IP"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "IP address:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "Netmask:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:531
+msgid "(bootp/dhcp)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:537 ../../printerdrake.pm_.c:89
+msgid "IP address should be in format 1.2.3.4"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:556
+msgid ""
+"Please enter your host name.\n"
+"Your host name should be a fully-qualified host name,\n"
+"such as ``mybox.mylab.myco.com''.\n"
+"You may also enter the IP address of the gateway if you have one"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "DNS server:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Gateway device:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Gateway:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:576
+msgid ""
+"You have now the possibility to download software aimed for encryption.\n"
+"\n"
+"WARNING:\n"
+"\n"
+"Due to different general requirements applicable to these software and "
+"imposed\n"
+"by various jurisdictions, customer and/or end user of theses software "
+"should\n"
+"ensure that the laws of his/their jurisdiction allow him/them to download, "
+"stock\n"
+"and/or use these software.\n"
+"\n"
+"In addition customer and/or end user shall particularly be aware to not "
+"infringe\n"
+"the laws of his/their jurisdiction. Should customer and/or end user not\n"
+"respect the provision of these applicable laws, he/they will incure serious\n"
+"sanctions.\n"
+"\n"
+"In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
+"liable\n"
+"for special, indirect or incidental damages whatsoever (including, but not\n"
+"limited to loss of profits, business interruption, loss of commercial data "
+"and\n"
+"other pecuniary losses, and eventual liabilities and indemnification to be "
+"paid\n"
+"pursuant to a court decision) arising out of use, possession, or the sole\n"
+"downloading of these software, to which customer and/or end user could\n"
+"eventually have access after having sign up the present agreement.\n"
+"\n"
+"\n"
+"For any queries relating to these agreement, please contact \n"
+"Mandrakesoft, Inc.\n"
+"2400 N. Lincoln Avenue Suite 243\n"
+"Altadena California 91001\n"
+"USA"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:607
+msgid "Choose a mirror from which to get the packages"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:615
+msgid "Contacting the mirror to get the list of available packages"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:619
+msgid "Please choose the packages you want to install."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:632
+msgid "Which is your timezone?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:633
+msgid "Is your hardware clock set to GMT?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:680
+msgid "No password"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:685
+msgid "Use shadow file"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:685
+msgid "shadow"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:686
+msgid "MD5"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:686
+msgid "Use MD5 passwords"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:688
+msgid "Use NIS"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:688
+msgid "yellow pages"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:694
+#, c-format
+msgid "This password is too simple (must be at least %d characters long)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:701
+msgid "Authentification NIS"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:702
+msgid "NIS Domain"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:702
+msgid "NIS Server"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:727
+#: ../../standalone/adduserdrake_.c:36
+msgid "Accept user"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:727
+#: ../../standalone/adduserdrake_.c:36
+msgid "Add user"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:728
+#: ../../standalone/adduserdrake_.c:37
+#, c-format
+msgid "(already added %s)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:728
+#: ../../standalone/adduserdrake_.c:37
+#, c-format
+msgid ""
+"Enter a user\n"
+"%s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:730
+#: ../../standalone/adduserdrake_.c:39
+msgid "Real name"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:731 ../../printerdrake.pm_.c:84
+#: ../../printerdrake.pm_.c:109 ../../standalone/adduserdrake_.c:40
+msgid "User name"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:736
+#: ../../standalone/adduserdrake_.c:45
+msgid "Shell"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:738
+#: ../../standalone/adduserdrake_.c:47
+msgid "Icon"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:748
+#: ../../standalone/adduserdrake_.c:57
+msgid "This password is too simple"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:749
+#: ../../standalone/adduserdrake_.c:58
+msgid "Please give a user name"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:750
+#: ../../standalone/adduserdrake_.c:59
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:751
+#: ../../standalone/adduserdrake_.c:60
+msgid "This user name is already added"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:776
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"SILO on your system, or another operating system removes SILO, or SILO "
+"doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures.\n"
+"\n"
+"If you want to create a bootdisk for your system, insert a floppy in the "
+"first\n"
+"drive and press \"Ok\"."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:792
+msgid "First floppy drive"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:793
+msgid "Second floppy drive"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:794
+msgid "Skip"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:799
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures. Would you like to create a bootdisk for your system?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:808
+msgid "Sorry, no floppy drive available"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:811
+msgid "Choose the floppy drive you want to use to make the bootdisk"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:817
+#, c-format
+msgid "Insert a floppy in drive %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:820
+msgid "Creating bootdisk"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:827
+msgid "Preparing bootloader"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:835
+msgid "Do you want to use aboot?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:838
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:847
+msgid "Installation of bootloader failed. The following error occured:"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:862
+msgid "Proxies configuration"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:863
+msgid "HTTP proxy"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:864
+msgid "FTP proxy"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:870
+msgid "Proxy should be http://..."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:871
+msgid "Proxy should be ftp://..."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:881 ../../standalone/draksec_.c:20
+msgid "Welcome To Crackers"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:882 ../../standalone/draksec_.c:21
+msgid "Poor"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:883 ../../standalone/draksec_.c:22
+msgid "Low"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:884 ../../standalone/draksec_.c:23
+msgid "Medium"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:885 ../../standalone/draksec_.c:24
+msgid "High"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:886 ../../standalone/draksec_.c:25
+msgid "Paranoid"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:899
+msgid "Miscellaneous questions"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:900
+msgid "(may cause data corruption)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:900
+msgid "Use hard drive optimisations?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:901 ../../standalone/draksec_.c:46
+msgid "Choose security level"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:902
+#, c-format
+msgid "Precise RAM size if needed (found %d MB)"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:904
+msgid "Removable media automounting"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:906
+msgid "Clean /tmp at each boot"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:909
+msgid "Enable multi profiles"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:911
+msgid "Enable num lock at startup"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:914
+msgid "Give the ram size in MB"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:916
+msgid "Can't use supermount in high security level"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:918
+msgid ""
+"beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
+"If you want to be root, you have to login as a user and then use \"su\".\n"
+"More generally, do not expect to use your machine for anything but as a "
+"server.\n"
+"You have been warned."
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:923
+msgid ""
+"Be carefull, having numlock enabled causes a lot of keystrokes to\n"
+"give digits instead of normal letters (eg: pressing `p' gives `6')"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:944
+msgid ""
+"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+"By default, the 4.0 server is used unless your card is not supported.\n"
+"\n"
+"Do you want to keep XFree 3.3?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:975
+msgid "Do you want to generate an auto install floppy for linux replication?"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:977
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr ""
+
+#: ../../install_steps_interactive.pm_.c:991
+msgid "Creating auto install floppy"
 msgstr ""
 
 #: ../../install_steps_newt.pm_.c:22
@@ -3283,17 +3992,8 @@ msgstr ""
 msgid "Share name"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:109
-#: ../../standalone/adduserdrake_.c:40
-msgid "User name"
-msgstr ""
-
 #: ../../printerdrake.pm_.c:86
 msgid "Workgroup"
-msgstr ""
-
-#: ../../printerdrake.pm_.c:89
-msgid "IP address should be in format 1.2.3.4"
 msgstr ""
 
 #: ../../printerdrake.pm_.c:102
@@ -3328,75 +4028,75 @@ msgstr ""
 msgid "Yes, print both test pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:131
+#: ../../printerdrake.pm_.c:130
 msgid "Configure Printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:132
+#: ../../printerdrake.pm_.c:131
 msgid "What type of printer do you have?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:164
+#: ../../printerdrake.pm_.c:163
 msgid "Printer options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:165
+#: ../../printerdrake.pm_.c:164
 msgid "Paper Size"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:166
+#: ../../printerdrake.pm_.c:165
 msgid "Eject page after job?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:171
+#: ../../printerdrake.pm_.c:170
 msgid "Uniprint driver options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:172
+#: ../../printerdrake.pm_.c:171
 msgid "Color depth options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:174
+#: ../../printerdrake.pm_.c:173
 msgid "Print text as PostScript?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:175
+#: ../../printerdrake.pm_.c:174
 msgid "Reverse page order"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:177
+#: ../../printerdrake.pm_.c:176
 msgid "Fix stair-stepping text?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:180
+#: ../../printerdrake.pm_.c:179
 msgid "Number of pages per output pages"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:181
+#: ../../printerdrake.pm_.c:180
 msgid "Right/Left margins in points (1/72 of inch)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:182
+#: ../../printerdrake.pm_.c:181
 msgid "Top/Bottom margins in points (1/72 of inch)"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:185
+#: ../../printerdrake.pm_.c:184
 msgid "Extra GhostScript options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:188
+#: ../../printerdrake.pm_.c:187
 msgid "Extra Text options"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:199
+#: ../../printerdrake.pm_.c:198
 msgid "Do you want to test printing?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:210
+#: ../../printerdrake.pm_.c:209
 msgid "Printing test page(s)..."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:218
+#: ../../printerdrake.pm_.c:217
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
@@ -3407,40 +4107,40 @@ msgid ""
 "Does it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:222
+#: ../../printerdrake.pm_.c:221
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
 "This may take a little time before printer start.\n"
 "Does it work properly?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:238
+#: ../../printerdrake.pm_.c:237
 msgid "Printer"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:239
+#: ../../printerdrake.pm_.c:238
 msgid "Would you like to configure a printer?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:243
+#: ../../printerdrake.pm_.c:242
 msgid ""
 "Here are the following print queues.\n"
 "You can add some more or change the existing ones."
 msgstr ""
 
-#: ../../printerdrake.pm_.c:266 ../../printerdrake.pm_.c:272
+#: ../../printerdrake.pm_.c:265 ../../printerdrake.pm_.c:271
 msgid "Select Printer Connection"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:267
+#: ../../printerdrake.pm_.c:266
 msgid "How is the printer connected?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:272
+#: ../../printerdrake.pm_.c:271
 msgid "Remove queue"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:273
+#: ../../printerdrake.pm_.c:272
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
@@ -3448,15 +4148,15 @@ msgid ""
 "connected?"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:276
+#: ../../printerdrake.pm_.c:275
 msgid "Name of queue"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:277
+#: ../../printerdrake.pm_.c:276
 msgid "Spool directory"
 msgstr ""
 
-#: ../../printerdrake.pm_.c:278
+#: ../../printerdrake.pm_.c:277
 msgid "Printer Connection"
 msgstr ""
 
@@ -3645,55 +4345,6 @@ msgstr ""
 msgid "Choose which services should be automatically started at boot time"
 msgstr ""
 
-#: ../../standalone/adduserdrake_.c:36
-msgid "Accept user"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:36
-msgid "Add user"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:37
-#, c-format
-msgid "(already added %s)"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:37
-#, c-format
-msgid ""
-"Enter a user\n"
-"%s"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:39
-msgid "Real name"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:45
-msgid "Shell"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:47
-msgid "Icon"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:57
-msgid "This password is too simple"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:58
-msgid "Please give a user name"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:59
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr ""
-
-#: ../../standalone/adduserdrake_.c:60
-msgid "This user name is already added"
-msgstr ""
-
 #: ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -3847,30 +4498,6 @@ msgstr ""
 msgid "Everything has been configured.\n"
 msgstr ""
 
-#: ../../standalone/draksec_.c:20
-msgid "Welcome To Crackers"
-msgstr ""
-
-#: ../../standalone/draksec_.c:21
-msgid "Poor"
-msgstr ""
-
-#: ../../standalone/draksec_.c:22
-msgid "Low"
-msgstr ""
-
-#: ../../standalone/draksec_.c:23
-msgid "Medium"
-msgstr ""
-
-#: ../../standalone/draksec_.c:24
-msgid "High"
-msgstr ""
-
-#: ../../standalone/draksec_.c:25
-msgid "Paranoid"
-msgstr ""
-
 #: ../../standalone/draksec_.c:28
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
@@ -3910,20 +4537,12 @@ msgid ""
 "Security features are at their maximum."
 msgstr ""
 
-#: ../../standalone/draksec_.c:46
-msgid "Choose security level"
-msgstr ""
-
 #: ../../standalone/draksec_.c:49
 msgid "Setting security level"
 msgstr ""
 
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
-msgstr ""
-
-#: ../../standalone/keyboarddrake_.c:22
-msgid "Keyboard"
 msgstr ""
 
 #: ../../standalone/keyboarddrake_.c:23
@@ -3940,10 +4559,6 @@ msgstr ""
 
 #: ../../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
-msgstr ""
-
-#: ../../standalone/mousedrake_.c:38
-msgid "Mouse Port"
 msgstr ""
 
 #: ../../standalone/mousedrake_.c:39

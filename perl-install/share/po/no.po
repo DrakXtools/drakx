@@ -1,11 +1,11 @@
 # Translation file of Mandrake graphic install
 # Copyright (C) 1999 Mandrakesoft
-# Terje Bjerkelia <terje@bjerkelia.com>, 1999
+# Terje Bjerkelia <terje@bjerkelia.com>, 1999-2000
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: DrakX VERSION\n"
-"POT-Creation-Date: 2000-08-29 21:14+0200\n"
+"POT-Creation-Date: 2000-08-29 23:38+0200\n"
 "PO-Revision-Date: 1999-08-25 11:07+0200\n"
 "Last-Translator: Terje Bjerkelia <terje@bjerkelia.com>\n"
 "Language-Team: norwegian\n"
@@ -156,7 +156,7 @@ msgstr ""
 "Skjermen din vil blinke...\n"
 "Du kan slå av hvis du vil, du vil høre et bipp når det er ferdig"
 
-#: ../../Xconfigurator.pm_.c:504 ../../printerdrake.pm_.c:168
+#: ../../Xconfigurator.pm_.c:504 ../../printerdrake.pm_.c:167
 msgid "Resolution"
 msgstr "Oppløsning"
 
@@ -507,12 +507,16 @@ msgstr "Skjermmodus"
 msgid "Delay before booting default image"
 msgstr "Forsinkelse før oppstart av standard bilde"
 
-#: ../../any.pm_.c:128 ../../netconnect.pm_.c:482 ../../printerdrake.pm_.c:85
-#: ../../printerdrake.pm_.c:110 ../../standalone/adduserdrake_.c:42
+#: ../../any.pm_.c:128 ../../install_steps_interactive.pm_.c:682
+#: ../../install_steps_interactive.pm_.c:733 ../../netconnect.pm_.c:482
+#: ../../printerdrake.pm_.c:85 ../../printerdrake.pm_.c:110
+#: ../../standalone/adduserdrake_.c:42
 msgid "Password"
 msgstr "Passord"
 
-#: ../../any.pm_.c:129 ../../standalone/adduserdrake_.c:43
+#: ../../any.pm_.c:129 ../../install_steps_interactive.pm_.c:683
+#: ../../install_steps_interactive.pm_.c:734
+#: ../../standalone/adduserdrake_.c:43
 msgid "Password (again)"
 msgstr "Passord (igjen)"
 
@@ -534,11 +538,15 @@ msgid ""
 msgstr ""
 "Opsjon ``Begrense kommandolinje-opsjoner'' kan ikke brukes uten et passord"
 
-#: ../../any.pm_.c:140 ../../standalone/adduserdrake_.c:56
+#: ../../any.pm_.c:140 ../../install_steps_interactive.pm_.c:692
+#: ../../install_steps_interactive.pm_.c:747
+#: ../../standalone/adduserdrake_.c:56
 msgid "Please try again"
 msgstr "Vennligst prøv igjen"
 
-#: ../../any.pm_.c:140 ../../standalone/adduserdrake_.c:56
+#: ../../any.pm_.c:140 ../../install_steps_interactive.pm_.c:692
+#: ../../install_steps_interactive.pm_.c:747
+#: ../../standalone/adduserdrake_.c:56
 msgid "The passwords do not match"
 msgstr "Passordene stemmer ikke overens"
 
@@ -550,12 +558,13 @@ msgstr ""
 "Her er de forskjellige oppføringene.\n"
 "Du kan legge til flere eller endre de eksisterende."
 
-#: ../../any.pm_.c:159 ../../printerdrake.pm_.c:245
+#: ../../any.pm_.c:159 ../../printerdrake.pm_.c:244
 #: ../../standalone/rpmdrake_.c:302
 msgid "Add"
 msgstr "Legg til"
 
-#: ../../any.pm_.c:159 ../../diskdrake.pm_.c:44 ../../printerdrake.pm_.c:245
+#: ../../any.pm_.c:159 ../../diskdrake.pm_.c:44
+#: ../../install_steps_interactive.pm_.c:727 ../../printerdrake.pm_.c:244
 #: ../../standalone/adduserdrake_.c:36
 msgid "Done"
 msgstr "Ferdig"
@@ -613,11 +622,11 @@ msgid "Default"
 msgstr "Standard"
 
 #: ../../any.pm_.c:213 ../../install_steps_gtk.pm_.c:580
-#: ../../interactive.pm_.c:74 ../../interactive.pm_.c:84
-#: ../../interactive.pm_.c:234 ../../interactive_newt.pm_.c:49
-#: ../../interactive_newt.pm_.c:98 ../../interactive_stdio.pm_.c:27
-#: ../../my_gtk.pm_.c:204 ../../my_gtk.pm_.c:463 ../../my_gtk.pm_.c:638
-#: ../../printerdrake.pm_.c:272
+#: ../../install_steps_interactive.pm_.c:680 ../../interactive.pm_.c:74
+#: ../../interactive.pm_.c:84 ../../interactive.pm_.c:234
+#: ../../interactive_newt.pm_.c:49 ../../interactive_newt.pm_.c:98
+#: ../../interactive_stdio.pm_.c:27 ../../my_gtk.pm_.c:204
+#: ../../my_gtk.pm_.c:463 ../../my_gtk.pm_.c:638 ../../printerdrake.pm_.c:271
 msgid "Ok"
 msgstr "Ok"
 
@@ -911,8 +920,9 @@ msgstr "Vær forsiktig: denne operasjonen er farlig."
 
 # #: ../install_steps_interactive.pm_.c:37
 #: ../../diskdrake.pm_.c:200 ../../install_steps.pm_.c:75
-#: ../../standalone/diskdrake_.c:60 ../../standalone/rpmdrake_.c:294
-#: ../../standalone/rpmdrake_.c:304
+#: ../../install_steps_interactive.pm_.c:42
+#: ../../install_steps_interactive.pm_.c:212 ../../standalone/diskdrake_.c:60
+#: ../../standalone/rpmdrake_.c:294 ../../standalone/rpmdrake_.c:304
 msgid "Error"
 msgstr "Feil"
 
@@ -1166,7 +1176,7 @@ msgstr "Formatering"
 msgid "Formatting loopback file %s"
 msgstr "Formaterer loopback-fil %s"
 
-#: ../../diskdrake.pm_.c:516
+#: ../../diskdrake.pm_.c:516 ../../install_steps_interactive.pm_.c:298
 #, c-format
 msgid "Formatting partition %s"
 msgstr "Formaterer partisjon %s"
@@ -2334,7 +2344,7 @@ msgstr "Konfigurer mus"
 msgid "Choose your keyboard"
 msgstr "Velg tastatur"
 
-#: ../../install2.pm_.c:48
+#: ../../install2.pm_.c:48 ../../install_steps_interactive.pm_.c:368
 msgid "Miscellaneous"
 msgstr "Forskjellig"
 
@@ -2374,7 +2384,8 @@ msgstr "Konfigurer tjenester"
 msgid "Configure printer"
 msgstr "Konfigurer skriver"
 
-#: ../../install2.pm_.c:58
+#: ../../install2.pm_.c:58 ../../install_steps_interactive.pm_.c:680
+#: ../../install_steps_interactive.pm_.c:681
 msgid "Set root password"
 msgstr "Sett root-passord"
 
@@ -2561,8 +2572,8 @@ msgid ""
 "You can now partition %s.\n"
 "When you are done, don't forget to save using `w'"
 msgstr ""
-"Du kan nå partisjonere din %s harddisk\n"
-"Når du er ferdig glem ikke å lagre med `w'"
+"Du kan nå partisjonere %s.\n"
+"Når du er ferdig ikke glem å lagre med `w'"
 
 #: ../../install_interactive.pm_.c:167
 #, c-format
@@ -2712,7 +2723,7 @@ msgstr ""
 msgid "Welcome to %s"
 msgstr "Velkommen til %s"
 
-#: ../../install_steps.pm_.c:755
+#: ../../install_steps.pm_.c:644
 msgid "No floppy drive available"
 msgstr "Ingen diskettstasjon tilgjengelig"
 
@@ -2751,11 +2762,12 @@ msgid "Info"
 msgstr "Info"
 
 #: ../../install_steps_graphical.pm_.c:473 ../../install_steps_gtk.pm_.c:272
-#: ../../standalone/rpmdrake_.c:161
+#: ../../install_steps_interactive.pm_.c:126 ../../standalone/rpmdrake_.c:161
 msgid "Install"
 msgstr "Installer"
 
 #: ../../install_steps_graphical.pm_.c:492 ../../install_steps_gtk.pm_.c:439
+#: ../../install_steps_interactive.pm_.c:438
 msgid "Installing"
 msgstr "Installerer"
 
@@ -2772,6 +2784,7 @@ msgid "Total time "
 msgstr "Total tid "
 
 #: ../../install_steps_graphical.pm_.c:507 ../../install_steps_gtk.pm_.c:457
+#: ../../install_steps_interactive.pm_.c:438
 msgid "Preparing installation"
 msgstr "Forbereder installasjon"
 
@@ -2790,6 +2803,7 @@ msgid "There was an error ordering packages:"
 msgstr "Det var en feil ved endring av pakkenes rekkefølge:"
 
 #: ../../install_steps_graphical.pm_.c:577
+#: ../../install_steps_interactive.pm_.c:938
 msgid "Use existing configuration for X11?"
 msgstr "Bruke eksisterende konfigurasjon for X11?"
 
@@ -2958,6 +2972,805 @@ msgstr ""
 msgid "There was an error installing packages:"
 msgstr "Det var en feil ved installering av pakkene:"
 
+#: ../../install_steps_interactive.pm_.c:42
+msgid "An error occurred"
+msgstr "En feil oppsto"
+
+#: ../../install_steps_interactive.pm_.c:58
+msgid "Please, choose a language to use."
+msgstr "Vennligst velg språk som skal brukes."
+
+#: ../../install_steps_interactive.pm_.c:74
+#: ../../standalone/keyboarddrake_.c:22
+msgid "Keyboard"
+msgstr "Tastatur"
+
+#: ../../install_steps_interactive.pm_.c:75
+msgid "Please, choose your keyboard layout."
+msgstr "Vennligst velg tastatur-oppsettet ditt."
+
+#: ../../install_steps_interactive.pm_.c:84
+msgid "You can choose other languages that will be available after install"
+msgstr "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
+
+#: ../../install_steps_interactive.pm_.c:93
+#: ../../install_steps_interactive.pm_.c:137
+msgid "Install Class"
+msgstr "Installeringsklasse"
+
+#: ../../install_steps_interactive.pm_.c:93
+msgid "Which installation class do you want?"
+msgstr "Hvilken installasjonsklasse ønsker du?"
+
+#: ../../install_steps_interactive.pm_.c:95
+msgid "Install/Upgrade"
+msgstr "Installer/Oppgrader"
+
+#: ../../install_steps_interactive.pm_.c:95
+msgid "Is this an install or an upgrade?"
+msgstr "Er dette en installering eller en oppgradering?"
+
+#: ../../install_steps_interactive.pm_.c:104
+msgid "Recommended"
+msgstr "Anbefalt"
+
+#: ../../install_steps_interactive.pm_.c:106
+#: ../../install_steps_interactive.pm_.c:121
+msgid "Customized"
+msgstr "Egendefinert"
+
+#: ../../install_steps_interactive.pm_.c:107
+#: ../../install_steps_interactive.pm_.c:121
+msgid "Expert"
+msgstr "Ekspert"
+
+#: ../../install_steps_interactive.pm_.c:116
+msgid ""
+"Are you sure you are an expert? \n"
+"You will be allowed to make powerful but dangerous things here.\n"
+"\n"
+"You will be asked questions such as: ``Use shadow file for passwords?'',\n"
+"are you ready to answer that kind of questions?"
+msgstr ""
+"Er du sikker på at du er en ekspert? \n"
+"Du får tilgang til å gjøre kraftige, men farlige ting her."
+
+#: ../../install_steps_interactive.pm_.c:126
+msgid "Upgrade"
+msgstr "Oppgrader"
+
+#: ../../install_steps_interactive.pm_.c:132
+msgid "Normal"
+msgstr "Normal"
+
+#: ../../install_steps_interactive.pm_.c:133
+msgid "Development"
+msgstr "Utvikling"
+
+#: ../../install_steps_interactive.pm_.c:134
+msgid "Server"
+msgstr "Tjener"
+
+#: ../../install_steps_interactive.pm_.c:138
+msgid "Which usage is your system used for ?"
+msgstr "Hva slags bruk er systemet ditt brukt til?"
+
+#: ../../install_steps_interactive.pm_.c:152
+msgid "Please, choose the type of your mouse."
+msgstr "Vennligst velg din musetype."
+
+#: ../../install_steps_interactive.pm_.c:159 ../../standalone/mousedrake_.c:38
+msgid "Mouse Port"
+msgstr "Museport"
+
+#: ../../install_steps_interactive.pm_.c:160
+msgid "Please choose on which serial port your mouse is connected to."
+msgstr "Vennligst velg hvilken serieport musen din koblet til."
+
+#: ../../install_steps_interactive.pm_.c:178
+msgid "Configuring IDE"
+msgstr "Konfigurerer IDE"
+
+#: ../../install_steps_interactive.pm_.c:178
+msgid "IDE"
+msgstr "IDE"
+
+#: ../../install_steps_interactive.pm_.c:189
+msgid "no available partitions"
+msgstr "ingen tilgjengelige partisjoner"
+
+#: ../../install_steps_interactive.pm_.c:196
+msgid "Choose the mount points"
+msgstr "Velg monteringspunktene"
+
+#: ../../install_steps_interactive.pm_.c:213
+#, c-format
+msgid ""
+"I can't read your partition table, it's too corrupted for me :(\n"
+"I'll try to go on blanking bad partitions and ALL DATA will be lost\n"
+"(%s)"
+msgstr ""
+"Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
+"Jeg vil førsøke å blanke ut dårlige partisjoner, ALLE DATA vil gå tapt\n"
+"(%s)"
+
+#: ../../install_steps_interactive.pm_.c:222
+msgid ""
+"DiskDrake failed to read correctly the partition table.\n"
+"Continue at your own risk!"
+msgstr ""
+"DiskDrake klarte ikke å lese partisjonstabellen korrekt.\n"
+"Fortsett på eget ansvar!"
+
+#: ../../install_steps_interactive.pm_.c:230
+msgid "Root Partition"
+msgstr "Root-partisjon"
+
+#: ../../install_steps_interactive.pm_.c:231
+msgid "What is the root partition (/) of your system?"
+msgstr "Hva er root-partisjonen (/) på systemet ditt?"
+
+#: ../../install_steps_interactive.pm_.c:244
+msgid "The DrakX Partitioning wizard found the following solutions:"
+msgstr "DrakX partisjonsveiviseren fant disse løsningene:"
+
+#: ../../install_steps_interactive.pm_.c:247
+#, c-format
+msgid "Partitioning failed: %s"
+msgstr "Partisjonering feilet: %s"
+
+#: ../../install_steps_interactive.pm_.c:255
+msgid "You need to reboot for the partition table modifications to take place"
+msgstr ""
+"Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen\n"
+"skal tre i kraft"
+
+#: ../../install_steps_interactive.pm_.c:281
+msgid "Choose the partitions you want to format"
+msgstr "Velg de partisjonene du ønsker å formatere"
+
+#: ../../install_steps_interactive.pm_.c:285
+msgid "Check bad blocks?"
+msgstr "Sjekke dårlige blokker?"
+
+#: ../../install_steps_interactive.pm_.c:293
+msgid "Formatting partitions"
+msgstr "Formaterer partisjoner"
+
+#: ../../install_steps_interactive.pm_.c:297
+#, c-format
+msgid "Creating and formatting file %s"
+msgstr "Oppretter og formaterer fil %s"
+
+#: ../../install_steps_interactive.pm_.c:300
+msgid "Not enough swap to fulfill installation, please add some"
+msgstr ""
+"Ikke nok vekslingsplass til å fullføre installasjonen, vennligst legg til mer"
+
+#: ../../install_steps_interactive.pm_.c:306
+msgid "Looking for available packages"
+msgstr "Ser etter tilgjengelige pakker"
+
+#: ../../install_steps_interactive.pm_.c:312
+msgid "Finding packages to upgrade"
+msgstr "Finner pakker å oppgradere"
+
+#: ../../install_steps_interactive.pm_.c:329
+msgid "Your system has not enough space left for installation or upgrade"
+msgstr "Systemet ditt har ikke nok plass for installasjon eller oppgradering"
+
+#: ../../install_steps_interactive.pm_.c:344
+#, fuzzy, c-format
+msgid "Complete (%dMB)"
+msgstr "Normal (%dMB)"
+
+#: ../../install_steps_interactive.pm_.c:344
+#, fuzzy, c-format
+msgid "Minimum (%dMB)"
+msgstr "Full(%dMB)"
+
+#: ../../install_steps_interactive.pm_.c:344
+#, fuzzy, c-format
+msgid "Recommanded (%dMB)"
+msgstr "Anbefalt"
+
+#: ../../install_steps_interactive.pm_.c:367
+msgid "Package Group Selection"
+msgstr "Valg pakkegruppe"
+
+#: ../../install_steps_interactive.pm_.c:370
+msgid "Individual package selection"
+msgstr "Individuelt pakkevalg"
+
+#: ../../install_steps_interactive.pm_.c:416
+msgid ""
+"If you have all the CDs in the list below, click Ok.\n"
+"If you have none of those CDs, click Cancel.\n"
+"If only some CDs are missing, unselect them, then click Ok."
+msgstr ""
+"Hvis du har alle CDene i listen nedenfor, klikk Ok.\n"
+"Hvis du ikke har noen av CDene, klikk Avbryt.\n"
+"Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
+
+#: ../../install_steps_interactive.pm_.c:419
+#, c-format
+msgid "Cd-Rom labeled \"%s\""
+msgstr "CD-ROM merket \"%s\""
+
+#: ../../install_steps_interactive.pm_.c:447
+msgid ""
+"Installing package %s\n"
+"%d%%"
+msgstr ""
+"Installerer pakke %s\n"
+"%d%%"
+
+#: ../../install_steps_interactive.pm_.c:456
+msgid "Post-install configuration"
+msgstr "Konfigurasjon postinstallering"
+
+#: ../../install_steps_interactive.pm_.c:466
+msgid "Keep the current IP configuration"
+msgstr "Behold nåværende IP-konfigurasjon"
+
+#: ../../install_steps_interactive.pm_.c:467
+msgid "Reconfigure network now"
+msgstr "Rekonfigurer nettverket nå"
+
+#: ../../install_steps_interactive.pm_.c:468
+#, fuzzy
+msgid "Do not set up networking"
+msgstr "Konfigurer nettverk"
+
+#: ../../install_steps_interactive.pm_.c:471
+#: ../../install_steps_interactive.pm_.c:476
+msgid "Network Configuration"
+msgstr "Nettverkskonfigurasjon"
+
+#: ../../install_steps_interactive.pm_.c:472
+msgid "Local networking has already been configured. Do you want to:"
+msgstr "Lokalt nettverk har allerede blitt konfigurert. Vil du:"
+
+#: ../../install_steps_interactive.pm_.c:477
+msgid "Do you want to configure a local network for your system?"
+msgstr "Vil du konfigurere lokalt LAN-nettverk for systemet ditt?"
+
+#: ../../install_steps_interactive.pm_.c:483
+msgid "no network card found"
+msgstr "ingen nettverkskort funnet"
+
+#: ../../install_steps_interactive.pm_.c:501
+#: ../../install_steps_interactive.pm_.c:555
+msgid "Configuring network"
+msgstr "Konfigurerer nettverk"
+
+#: ../../install_steps_interactive.pm_.c:502
+msgid ""
+"Please enter your host name if you know it.\n"
+"Some DHCP servers require the hostname to work.\n"
+"Your host name should be a fully-qualified host name,\n"
+"such as ``mybox.mylab.myco.com''."
+msgstr ""
+"Vennligst entre vertsnavnet ditt hvis du vet det.\n"
+"Noen DHCP tjenere trenger vertsnavnet for å virke.\n"
+"Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
+"som ``minboks.mittlab.mittfirma.no''."
+
+#: ../../install_steps_interactive.pm_.c:506
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Host name:"
+msgstr "Vertsnavn:"
+
+#: ../../install_steps_interactive.pm_.c:525
+#: ../../install_steps_interactive.pm_.c:526
+#, c-format
+msgid "Configuring network device %s"
+msgstr "Konfigurerer nettverksenhet %s"
+
+#: ../../install_steps_interactive.pm_.c:527
+msgid ""
+"Please enter the IP configuration for this machine.\n"
+"Each item should be entered as an IP address in dotted-decimal\n"
+"notation (for example, 1.2.3.4)."
+msgstr ""
+"Vennligst entre IP-konfigurasjonen for denne maskinen.\n"
+"Hvert element bør entres som en IP-adresse i punkt-desimal\n"
+"notasjon (f.eks, 1.2.3.4)."
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "Automatic IP"
+msgstr "Automatisk IP"
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "IP address:"
+msgstr "IP-adresse:"
+
+#: ../../install_steps_interactive.pm_.c:530
+msgid "Netmask:"
+msgstr "Nettmaske:"
+
+#: ../../install_steps_interactive.pm_.c:531
+msgid "(bootp/dhcp)"
+msgstr "(bootp/dhcp)"
+
+#: ../../install_steps_interactive.pm_.c:537 ../../printerdrake.pm_.c:89
+msgid "IP address should be in format 1.2.3.4"
+msgstr "IP-adresse bør være i format 1.2.3.4"
+
+#: ../../install_steps_interactive.pm_.c:556
+msgid ""
+"Please enter your host name.\n"
+"Your host name should be a fully-qualified host name,\n"
+"such as ``mybox.mylab.myco.com''.\n"
+"You may also enter the IP address of the gateway if you have one"
+msgstr ""
+"Vennligst entre vertsnavnet ditt.\n"
+"Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
+"så som ``minboks.mittlab.mittfirma.no''.\n"
+"Du kan også entre IP-adressen til gateway'en hvis du har en"
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "DNS server:"
+msgstr "DNS-tjener:"
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Gateway device:"
+msgstr "Gateway-enhet:"
+
+#: ../../install_steps_interactive.pm_.c:560
+msgid "Gateway:"
+msgstr "Gateway:"
+
+#: ../../install_steps_interactive.pm_.c:576
+msgid ""
+"You have now the possibility to download software aimed for encryption.\n"
+"\n"
+"WARNING:\n"
+"\n"
+"Due to different general requirements applicable to these software and "
+"imposed\n"
+"by various jurisdictions, customer and/or end user of theses software "
+"should\n"
+"ensure that the laws of his/their jurisdiction allow him/them to download, "
+"stock\n"
+"and/or use these software.\n"
+"\n"
+"In addition customer and/or end user shall particularly be aware to not "
+"infringe\n"
+"the laws of his/their jurisdiction. Should customer and/or end user not\n"
+"respect the provision of these applicable laws, he/they will incure serious\n"
+"sanctions.\n"
+"\n"
+"In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
+"liable\n"
+"for special, indirect or incidental damages whatsoever (including, but not\n"
+"limited to loss of profits, business interruption, loss of commercial data "
+"and\n"
+"other pecuniary losses, and eventual liabilities and indemnification to be "
+"paid\n"
+"pursuant to a court decision) arising out of use, possession, or the sole\n"
+"downloading of these software, to which customer and/or end user could\n"
+"eventually have access after having sign up the present agreement.\n"
+"\n"
+"\n"
+"For any queries relating to these agreement, please contact \n"
+"Mandrakesoft, Inc.\n"
+"2400 N. Lincoln Avenue Suite 243\n"
+"Altadena California 91001\n"
+"USA"
+msgstr ""
+"Du har nå mulighet til å laste ned programvare for kryptering.\n"
+"\n"
+"ADVARSEL:\n"
+"\n"
+"Pga. forskjellige krav som er tillagt denne programvaren og pålagt av "
+"forskjellige\n"
+"myndigheter, bør kunde og/eller sluttbruker av denne programvaren forsikre "
+"seg\n"
+"om at lovene i sin/deres jurisdiksjon tillater han/dem å laste ned, ha i "
+"besittelse\n"
+"og/eller bruke denne programvaren.\n"
+"\n"
+"I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å ikke "
+"bryte\n"
+"lovene i sin/deres jurisdiksjon. Skulle kunde og/eller sluttbruker ikke\n"
+"respektere bestemmelsene av disse lovene, vil han/de pådra seg alvorlige\n"
+"sanksjoner.\n"
+"\n"
+"Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter "
+"og/eller\n"
+"leverandører bli holdt ansvarlige for særskilte, indirekte eller tilfeldige\n"
+"skader uansett hva som enn skulle (inkludert, men ikke begrenset til tap av "
+"fortjeneste,\n"
+"forretningsavbrudd, tap av kommersiell data og andre pengemessige tap, og "
+"endelige\n"
+"ansvarsforhold og erstatninger som skal betales ifølge en rettslig\n"
+"avgjørelse) oppstå ut av bruk, besittelse, eller ene og alene nedlastingen\n"
+"av denne programvaren, som kunde og/eller sluttbruker til slutt kan ha\n"
+"tilgang til etter å ha sagt seg enig i og undertegnet fremviste avtale.\n"
+"\n"
+"For spørsmål angående denne avtalen, vennligst kontakt \n"
+"Mandrakesoft, Inc.\n"
+"2400 N. Lincoln Avenue Suite 243\n"
+"Altadena California 91001\n"
+"USA"
+
+#: ../../install_steps_interactive.pm_.c:607
+msgid "Choose a mirror from which to get the packages"
+msgstr "Velg et speil som pakkene kan hentes fra"
+
+#: ../../install_steps_interactive.pm_.c:615
+msgid "Contacting the mirror to get the list of available packages"
+msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
+
+#: ../../install_steps_interactive.pm_.c:619
+msgid "Please choose the packages you want to install."
+msgstr "Vennligst velg pakkene du ønsker å installere."
+
+#: ../../install_steps_interactive.pm_.c:632
+#, fuzzy
+msgid "Which is your timezone?"
+msgstr "Hva slags bruk er systemet ditt brukt til?"
+
+#: ../../install_steps_interactive.pm_.c:633
+msgid "Is your hardware clock set to GMT?"
+msgstr "Er maskinvareklokken din satt til GMT?"
+
+#: ../../install_steps_interactive.pm_.c:680
+msgid "No password"
+msgstr "Intet passord"
+
+#: ../../install_steps_interactive.pm_.c:685
+msgid "Use shadow file"
+msgstr "Bruk skyggefil"
+
+#: ../../install_steps_interactive.pm_.c:685
+msgid "shadow"
+msgstr "skygge"
+
+#: ../../install_steps_interactive.pm_.c:686
+msgid "MD5"
+msgstr "MD5"
+
+#: ../../install_steps_interactive.pm_.c:686
+msgid "Use MD5 passwords"
+msgstr "Bruk MD5 passord"
+
+#: ../../install_steps_interactive.pm_.c:688
+msgid "Use NIS"
+msgstr "Bruk NIS"
+
+#: ../../install_steps_interactive.pm_.c:688
+msgid "yellow pages"
+msgstr "gule sider"
+
+#: ../../install_steps_interactive.pm_.c:694
+#, c-format
+msgid "This password is too simple (must be at least %d characters long)"
+msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
+
+#: ../../install_steps_interactive.pm_.c:701
+msgid "Authentification NIS"
+msgstr "Autentifikasjon NIS"
+
+#: ../../install_steps_interactive.pm_.c:702
+msgid "NIS Domain"
+msgstr "NIS-domene"
+
+#: ../../install_steps_interactive.pm_.c:702
+msgid "NIS Server"
+msgstr "NIS-tjener"
+
+#: ../../install_steps_interactive.pm_.c:727
+#: ../../standalone/adduserdrake_.c:36
+msgid "Accept user"
+msgstr "Godta bruker"
+
+#: ../../install_steps_interactive.pm_.c:727
+#: ../../standalone/adduserdrake_.c:36
+msgid "Add user"
+msgstr "Legg til bruker"
+
+#: ../../install_steps_interactive.pm_.c:728
+#: ../../standalone/adduserdrake_.c:37
+#, c-format
+msgid "(already added %s)"
+msgstr "(allerede lagt til %s)"
+
+#: ../../install_steps_interactive.pm_.c:728
+#: ../../standalone/adduserdrake_.c:37
+#, c-format
+msgid ""
+"Enter a user\n"
+"%s"
+msgstr ""
+"Entre en bruker\n"
+"%s"
+
+#: ../../install_steps_interactive.pm_.c:730
+#: ../../standalone/adduserdrake_.c:39
+msgid "Real name"
+msgstr "Virkelig navn"
+
+#: ../../install_steps_interactive.pm_.c:731 ../../printerdrake.pm_.c:84
+#: ../../printerdrake.pm_.c:109 ../../standalone/adduserdrake_.c:40
+msgid "User name"
+msgstr "Brukernavn"
+
+#: ../../install_steps_interactive.pm_.c:736
+#: ../../standalone/adduserdrake_.c:45
+msgid "Shell"
+msgstr "Skall"
+
+#: ../../install_steps_interactive.pm_.c:738
+#: ../../standalone/adduserdrake_.c:47
+msgid "Icon"
+msgstr "Ikon"
+
+#: ../../install_steps_interactive.pm_.c:748
+#: ../../standalone/adduserdrake_.c:57
+msgid "This password is too simple"
+msgstr "Dette passordet er for enkelt"
+
+#: ../../install_steps_interactive.pm_.c:749
+#: ../../standalone/adduserdrake_.c:58
+msgid "Please give a user name"
+msgstr "Vennligst oppgi et brukernavn"
+
+#: ../../install_steps_interactive.pm_.c:750
+#: ../../standalone/adduserdrake_.c:59
+msgid ""
+"The user name must contain only lower cased letters, numbers, `-' and `_'"
+msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
+
+#: ../../install_steps_interactive.pm_.c:751
+#: ../../standalone/adduserdrake_.c:60
+msgid "This user name is already added"
+msgstr "Denne brukeren er allerede lagt til"
+
+#: ../../install_steps_interactive.pm_.c:776
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"SILO on your system, or another operating system removes SILO, or SILO "
+"doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures.\n"
+"\n"
+"If you want to create a bootdisk for your system, insert a floppy in the "
+"first\n"
+"drive and press \"Ok\"."
+msgstr ""
+"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
+"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
+"ikke ønsker\n"
+"å installere SILO på systemet ditt, eller et annet operativsystem fjerner "
+"SILO,\n"
+"eller at SILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
+"oppstartsdiskett\n"
+"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
+"lettere gjenopprette\n"
+"etter systemsvikt.\n"
+"Hvis du ønsker du å opprette en oppstartsdiskett for systemet ditt, sett inn "
+"en diskett\n"
+"i den første stasjonen og trykk \"Ok\"."
+
+#: ../../install_steps_interactive.pm_.c:792
+msgid "First floppy drive"
+msgstr "Første diskettstasjon"
+
+#: ../../install_steps_interactive.pm_.c:793
+msgid "Second floppy drive"
+msgstr "Andre diskettstasjon"
+
+#: ../../install_steps_interactive.pm_.c:794
+msgid "Skip"
+msgstr "Dropp"
+
+#: ../../install_steps_interactive.pm_.c:799
+msgid ""
+"A custom bootdisk provides a way of booting into your Linux system without\n"
+"depending on the normal bootloader. This is useful if you don't want to "
+"install\n"
+"LILO (or grub) on your system, or another operating system removes LILO, or "
+"LILO doesn't\n"
+"work with your hardware configuration. A custom bootdisk can also be used "
+"with\n"
+"the Mandrake rescue image, making it much easier to recover from severe "
+"system\n"
+"failures. Would you like to create a bootdisk for your system?"
+msgstr ""
+"En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
+"å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
+"ikke ønsker\n"
+"å installere LILO (eller grub) på systemet ditt, eller et annet "
+"operativsystem fjerner LILO,\n"
+"eller at LILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
+"oppstartsdiskett\n"
+"kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
+"lettere gjenopprette\n"
+"etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
+"ditt?"
+
+#: ../../install_steps_interactive.pm_.c:808
+msgid "Sorry, no floppy drive available"
+msgstr "Beklager, ingen diskettstasjon tilgjengelig"
+
+#: ../../install_steps_interactive.pm_.c:811
+msgid "Choose the floppy drive you want to use to make the bootdisk"
+msgstr "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
+
+#: ../../install_steps_interactive.pm_.c:817
+#, c-format
+msgid "Insert a floppy in drive %s"
+msgstr "Sett inn en diskett i stasjon %s"
+
+#: ../../install_steps_interactive.pm_.c:820
+msgid "Creating bootdisk"
+msgstr "Oppretter oppstartdiskett"
+
+#: ../../install_steps_interactive.pm_.c:827
+msgid "Preparing bootloader"
+msgstr "Klargjør oppstartslaster"
+
+#: ../../install_steps_interactive.pm_.c:835
+msgid "Do you want to use aboot?"
+msgstr "Ønsker du å bruke aboot?"
+
+#: ../../install_steps_interactive.pm_.c:838
+msgid ""
+"Error installing aboot, \n"
+"try to force installation even if that destroys the first partition?"
+msgstr ""
+"Feil ved installasjon av aboot, \n"
+"prøve å installere selv om det ødelegger den første partisjonen?"
+
+#: ../../install_steps_interactive.pm_.c:847
+msgid "Installation of bootloader failed. The following error occured:"
+msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
+
+#: ../../install_steps_interactive.pm_.c:862
+#, fuzzy
+msgid "Proxies configuration"
+msgstr "Konfigurasjon postinstallering"
+
+#: ../../install_steps_interactive.pm_.c:863
+msgid "HTTP proxy"
+msgstr "HTTP-proxy"
+
+#: ../../install_steps_interactive.pm_.c:864
+msgid "FTP proxy"
+msgstr "FTP-proxy"
+
+#: ../../install_steps_interactive.pm_.c:870
+msgid "Proxy should be http://..."
+msgstr "Proxy burde være http://..."
+
+#: ../../install_steps_interactive.pm_.c:871
+msgid "Proxy should be ftp://..."
+msgstr "Proxy burde være ftp://..."
+
+#: ../../install_steps_interactive.pm_.c:881 ../../standalone/draksec_.c:20
+msgid "Welcome To Crackers"
+msgstr "Velkommen til Crackers"
+
+#: ../../install_steps_interactive.pm_.c:882 ../../standalone/draksec_.c:21
+msgid "Poor"
+msgstr "Dårlig"
+
+#: ../../install_steps_interactive.pm_.c:883 ../../standalone/draksec_.c:22
+msgid "Low"
+msgstr "Lav"
+
+#: ../../install_steps_interactive.pm_.c:884 ../../standalone/draksec_.c:23
+msgid "Medium"
+msgstr "Medium"
+
+#: ../../install_steps_interactive.pm_.c:885 ../../standalone/draksec_.c:24
+msgid "High"
+msgstr "Høy"
+
+#: ../../install_steps_interactive.pm_.c:886 ../../standalone/draksec_.c:25
+msgid "Paranoid"
+msgstr "Paranoid"
+
+#: ../../install_steps_interactive.pm_.c:899
+msgid "Miscellaneous questions"
+msgstr "Forskjellige spørsmål"
+
+#: ../../install_steps_interactive.pm_.c:900
+msgid "(may cause data corruption)"
+msgstr "(kan forårsake korrupsjon av data)"
+
+#: ../../install_steps_interactive.pm_.c:900
+msgid "Use hard drive optimisations?"
+msgstr "Bruk harddisk-optimisering?"
+
+#: ../../install_steps_interactive.pm_.c:901 ../../standalone/draksec_.c:46
+msgid "Choose security level"
+msgstr "Velg sikkerhetsnivå"
+
+#: ../../install_steps_interactive.pm_.c:902
+#, c-format
+msgid "Precise RAM size if needed (found %d MB)"
+msgstr "Presiser RAM-størrelse hvis det trengs (funnet %d MB)"
+
+#: ../../install_steps_interactive.pm_.c:904
+msgid "Removable media automounting"
+msgstr "Fjernbart media automontering"
+
+#: ../../install_steps_interactive.pm_.c:906
+msgid "Clean /tmp at each boot"
+msgstr "Tøm /tmp ved hver oppstart"
+
+#: ../../install_steps_interactive.pm_.c:909
+msgid "Enable multi profiles"
+msgstr "Slå på multiprofiler"
+
+#: ../../install_steps_interactive.pm_.c:911
+msgid "Enable num lock at startup"
+msgstr "Slå på num lock ved oppstart"
+
+#: ../../install_steps_interactive.pm_.c:914
+msgid "Give the ram size in MB"
+msgstr "Oppgi ram-størrelsen i MB"
+
+#: ../../install_steps_interactive.pm_.c:916
+msgid "Can't use supermount in high security level"
+msgstr "Kan ikke bruke supermount i høyt sikkerhetsnivå"
+
+#: ../../install_steps_interactive.pm_.c:918
+msgid ""
+"beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
+"If you want to be root, you have to login as a user and then use \"su\".\n"
+"More generally, do not expect to use your machine for anything but as a "
+"server.\n"
+"You have been warned."
+msgstr ""
+"Merk: I DETTE SIKKERHETSNIVÅET ER ROOT INNLOGG VED KONSOLL IKKE TILLATT!\n"
+"Hvis du ønsker å være root må du logge inn som bruker for så å bruke "
+"\"su\".\n"
+"Mere generelt, ikke forvent å bruke maskinen din til annet enn en tjener.\n"
+"Du har blitt advart."
+
+#: ../../install_steps_interactive.pm_.c:923
+msgid ""
+"Be carefull, having numlock enabled causes a lot of keystrokes to\n"
+"give digits instead of normal letters (eg: pressing `p' gives `6')"
+msgstr ""
+"Vær forsiktig, å ha numlock slått på forårsaker at mange av tastene\n"
+"gir tall istedenfor vanlige bokstaver (f.eks: `p' gir `6')"
+
+#: ../../install_steps_interactive.pm_.c:944
+msgid ""
+"DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
+"By default, the 4.0 server is used unless your card is not supported.\n"
+"\n"
+"Do you want to keep XFree 3.3?"
+msgstr ""
+"DrakX vil generere konfigurasjonsfiler for både XFree 3.3 og XFree 4.0.\n"
+"Som standard vil 4.0 tjeneren bli brukt hvis kortet ditt er støttet.\n"
+"\n"
+"Ønsker du å beholde XFree 3.3?"
+
+#: ../../install_steps_interactive.pm_.c:975
+msgid "Do you want to generate an auto install floppy for linux replication?"
+msgstr ""
+"Ønsker du å generere en auto installeringsdiskett for linux replikasjon?"
+
+#: ../../install_steps_interactive.pm_.c:977
+#, c-format
+msgid "Insert a blank floppy in drive %s"
+msgstr "Sett inn en tom diskett i stasjon %s"
+
+#: ../../install_steps_interactive.pm_.c:991
+msgid "Creating auto install floppy"
+msgstr "Oppretter diskett for autoinstallasjon"
+
 #: ../../install_steps_newt.pm_.c:22
 #, c-format
 msgid "Linux-Mandrake Installation %s"
@@ -3056,11 +3869,11 @@ msgstr "Armensk (phonétic)"
 
 #: ../../keyboard.pm_.c:126
 msgid "Azerbaidjani (latin)"
-msgstr ""
+msgstr "Azerbaidjansk (latin)"
 
 #: ../../keyboard.pm_.c:127
 msgid "Azerbaidjani (cyrillic)"
-msgstr ""
+msgstr "Azerbaidjansk (cyrillic)"
 
 #: ../../keyboard.pm_.c:128
 msgid "Belgian"
@@ -3072,7 +3885,7 @@ msgstr "Bulgarisk"
 
 #: ../../keyboard.pm_.c:130
 msgid "Brazilian (ABNT-2)"
-msgstr "Brasiliansk"
+msgstr "Brasiliansk (ABNT-2)"
 
 #: ../../keyboard.pm_.c:131
 msgid "Belarusian"
@@ -3135,9 +3948,8 @@ msgid "Israeli (Phonetic)"
 msgstr "Israelsk (Phonetic)"
 
 #: ../../keyboard.pm_.c:151
-#, fuzzy
 msgid "Iranian"
-msgstr "Ukrainsk"
+msgstr "Iransk"
 
 #: ../../keyboard.pm_.c:152
 msgid "Icelandic"
@@ -3396,51 +4208,50 @@ msgid "Is this correct?"
 msgstr "Er dette riktig?"
 
 #: ../../netconnect.pm_.c:88
-#, fuzzy
 msgid "Internet configuration"
-msgstr "Proxy-konfigurasjon"
+msgstr "Internett-konfigurasjon"
 
 #: ../../netconnect.pm_.c:89
-#, fuzzy
 msgid "Do you want to try to connect to the internet now?"
-msgstr "Vil du teste konfigurasjonen?"
+msgstr "Vil du prøve å koble opp mot Internett nå?"
 
 #: ../../netconnect.pm_.c:123 ../../netconnect.pm_.c:143
 #: ../../netconnect.pm_.c:197 ../../netconnect.pm_.c:217
 #: ../../netconnect.pm_.c:229 ../../netconnect.pm_.c:241
-#, fuzzy
 msgid "ISDN Configuration"
-msgstr "Konfigurasjon"
+msgstr "ISDN-konfigurasjon"
 
 #: ../../netconnect.pm_.c:124
 msgid ""
 "Select your provider.\n"
 " If it's not in the list, choose Unlisted"
 msgstr ""
+"Velg din tilbyder.\n"
+" Hvis den ikke er i listen, velg ikke i listen"
 
 #: ../../netconnect.pm_.c:144
 msgid "Please fill or check the field below"
-msgstr ""
+msgstr "Vennnligst fyll eller merk feltet under"
 
 #: ../../netconnect.pm_.c:146
 msgid "Card IRQ"
-msgstr ""
+msgstr "Kort IRQ"
 
 #: ../../netconnect.pm_.c:147
 msgid "Card mem (DMA)"
-msgstr ""
+msgstr "Kort mem (DMA)"
 
 #: ../../netconnect.pm_.c:148
 msgid "Card IO"
-msgstr ""
+msgstr "Kort IO"
 
 #: ../../netconnect.pm_.c:149
 msgid "Card IO_0"
-msgstr ""
+msgstr "Kort IO_0"
 
 #: ../../netconnect.pm_.c:150
 msgid "Card IO_1"
-msgstr ""
+msgstr "Kort IO_1"
 
 #: ../../netconnect.pm_.c:151 ../../netconnect.pm_.c:479
 msgid "Connection name"
@@ -3448,81 +4259,71 @@ msgstr "Navn tilknytning"
 
 #: ../../netconnect.pm_.c:152
 msgid "Your personnal phone number"
-msgstr ""
+msgstr "Ditt telefonnummer"
 
 #: ../../netconnect.pm_.c:153
 msgid "Provider name (ex provider.net)"
-msgstr ""
+msgstr "Navn tilbyder (f.eks. tilbyder.net)"
 
 #: ../../netconnect.pm_.c:154
-#, fuzzy
 msgid "Provider phone number"
-msgstr "Telefonnummer"
+msgstr "Telefonnummer tilbyder"
 
 #: ../../netconnect.pm_.c:155
 msgid "Provider dns 1"
-msgstr ""
+msgstr "Tilbyder dns 1"
 
 #: ../../netconnect.pm_.c:156
 msgid "Provider dns 2"
-msgstr ""
+msgstr "Tilbyder dns 2"
 
 #: ../../netconnect.pm_.c:157
-#, fuzzy
 msgid "Dialing mode"
-msgstr "Oppringt med modem"
+msgstr "Oppringningsmodus"
 
 #: ../../netconnect.pm_.c:158
-#, fuzzy
 msgid "Account Login"
-msgstr "Monteringspunkt"
+msgstr "Logg inn"
 
 #: ../../netconnect.pm_.c:159
-#, fuzzy
 msgid "Account Password"
 msgstr "Passord"
 
 #: ../../netconnect.pm_.c:160
-#, fuzzy
 msgid "Confirm Password"
-msgstr "Passord"
+msgstr "Bekreft passord"
 
 #: ../../netconnect.pm_.c:190
-#, fuzzy
 msgid "Germany (1TR6)"
-msgstr "Tysk"
+msgstr "Tyskland (1TR6)"
 
 #: ../../netconnect.pm_.c:192
 msgid "Europe (EDSS1)"
-msgstr ""
+msgstr "Europa (EDSS1)"
 
 #: ../../netconnect.pm_.c:194
 msgid "Rest of the world - no D-Channel (leased lines)"
-msgstr ""
+msgstr "Resten av verden - ingen D-kanal (leid linje)"
 
 #: ../../netconnect.pm_.c:198
-#, fuzzy
 msgid "Which protocol do you want to use ?"
-msgstr "Hvilken partisjonstype ønsker du å forandre størrelse på?"
+msgstr "Hvilken protokoll ønsker du å bruke?"
 
 #: ../../netconnect.pm_.c:209
-#, fuzzy
 msgid "ISA / PCMCIA"
-msgstr "PCMCIA"
+msgstr "ISA / PCMCIA"
 
 #: ../../netconnect.pm_.c:211
-#, fuzzy
 msgid "PCI"
-msgstr "PCMCIA"
+msgstr "PCI"
 
 #: ../../netconnect.pm_.c:213
 msgid "I don't know"
-msgstr ""
+msgstr "Jeg vet ikke"
 
 #: ../../netconnect.pm_.c:218
-#, fuzzy
 msgid "What kind of card do you have?"
-msgstr "Hva slags type skriver har du?"
+msgstr "Hva slags kort har du?"
 
 #: ../../netconnect.pm_.c:224
 #, fuzzy
@@ -3531,7 +4332,7 @@ msgstr "Fortsette likevel?"
 
 #: ../../netconnect.pm_.c:226
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: ../../netconnect.pm_.c:230
 msgid ""
@@ -3542,12 +4343,10 @@ msgid ""
 msgstr ""
 
 #: ../../netconnect.pm_.c:242
-#, fuzzy
 msgid "Which is your ISDN card ?"
-msgstr "Hvilken er din tidsone?"
+msgstr "Hvilket er ditt ISDN-kort?"
 
 #: ../../netconnect.pm_.c:280
-#, fuzzy
 msgid "I have found an ISDN Card:\n"
 msgstr "Jeg har funnet et ISDN-kort:\n"
 
@@ -3564,14 +4363,12 @@ msgid "No ISDN PCI card found. Please select one on the next screen."
 msgstr "Ingen ISDN PCI-kort funnet. Vennligst velg et i neste skjermbilde."
 
 #: ../../netconnect.pm_.c:407
-#, fuzzy
 msgid "ISDN configuration"
-msgstr "Konfigurasjon"
+msgstr "ISDN-konfigurasjon"
 
 #: ../../netconnect.pm_.c:408
-#, fuzzy
 msgid "Do you want to start your connection at boot?"
-msgstr "Ønsker du å bruke aboot?"
+msgstr "Ønsker du å starte tilkoblingen din ved oppstart?"
 
 #: ../../netconnect.pm_.c:462
 msgid "Try to find a modem?"
@@ -3586,7 +4383,6 @@ msgid "Dialup options"
 msgstr "Opsjoner oppringt"
 
 #: ../../netconnect.pm_.c:480
-#, fuzzy
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -3627,95 +4423,87 @@ msgid "Second DNS Server"
 msgstr "Andre DNS-tjener"
 
 #: ../../netconnect.pm_.c:497
-#, fuzzy
 msgid "Connect to internet"
-msgstr "Navn tilknytning"
+msgstr "Koble opp mot Internett"
 
 #: ../../netconnect.pm_.c:499
 msgid "Disconnect from internet"
-msgstr ""
+msgstr "Koble ned fra Internett"
 
 #: ../../netconnect.pm_.c:501
-#, fuzzy
 msgid "Configure internet connexion"
-msgstr "Konfigurer nettverk"
+msgstr "Konfigurer Internett-tilkobling"
 
 #: ../../netconnect.pm_.c:504
-#, fuzzy
 msgid "Internet connection & configuration"
-msgstr "Deling av Internett tilkobling"
+msgstr "Internett tilkobling & konfigurasjon"
 
 #: ../../netconnect.pm_.c:505
-#, fuzzy
 msgid "What do you wish to do?"
 msgstr "Hva ønsker du å gjøre?"
 
 #: ../../netconnect.pm_.c:520
 msgid "Connect to internet with a normal modem"
-msgstr ""
+msgstr "Koble opp mot Internett med vanlig modem"
 
 #: ../../netconnect.pm_.c:522
 msgid "Connect to internet using ISDN"
-msgstr ""
+msgstr "Koble opp mot Internett med ISDN"
 
 #: ../../netconnect.pm_.c:524
 msgid "Connect to internet using DSL (or ADSL)"
-msgstr ""
+msgstr "Koble opp mot Internett med DSL (eller ADSL)"
 
 #: ../../netconnect.pm_.c:526
 msgid "Connect to internet using Cable"
-msgstr ""
+msgstr "Koble opp mot Internett med kabel"
 
 #: ../../netconnect.pm_.c:528
-#, fuzzy
 msgid "Do not connect to internet"
-msgstr "Ikke sett opp nettverk"
+msgstr "Ikke koble opp mot Internett"
 
 #: ../../netconnect.pm_.c:531 ../../netconnect.pm_.c:554
 #: ../../netconnect.pm_.c:573 ../../netconnect.pm_.c:591
 #: ../../netconnect.pm_.c:602
 msgid "Connect to the Internet"
-msgstr ""
+msgstr "Koble opp mot Internett"
 
 #: ../../netconnect.pm_.c:532
-#, fuzzy
 msgid "How do you want to connect to the Internet?"
-msgstr "Hvilken disk vil du flytte til?"
+msgstr "Hvordan vil du koble opp mot Internett?"
 
 #: ../../netconnect.pm_.c:549
 msgid "Internal ISDN card"
-msgstr ""
+msgstr "Internt ISDN-kort"
 
 #: ../../netconnect.pm_.c:551
 msgid "External modem"
-msgstr ""
+msgstr "Eksternt modem"
 
 #: ../../netconnect.pm_.c:555
-#, fuzzy
 msgid "What kind is your ISDN connection?"
-msgstr "Hvilken serieport er musen din koblet til?"
+msgstr "Hva slags type er ISDN-tilknytningen din?"
 
 #: ../../netconnect.pm_.c:574
 msgid "Have you been provided with a hostname?"
-msgstr ""
+msgstr "Har du et vertsnavn?"
 
 #: ../../netconnect.pm_.c:586
-#, fuzzy
 msgid "France"
-msgstr "Avbryt"
+msgstr "Frankrike"
 
 #: ../../netconnect.pm_.c:588
 msgid "Other countries"
-msgstr ""
+msgstr "Andre land"
 
 #: ../../netconnect.pm_.c:592
 msgid "On which country are you located ?"
-msgstr ""
+msgstr "I hvilket land er du ?"
 
 #: ../../netconnect.pm_.c:603
 msgid ""
 "If your adsl modem is an alcatel one, choose pptp alcatel. Otherwise, pppoe."
-msgstr ""
+msgstr "Hvis adsl modemet ditt er alcatel, velg pptp alcatel. ellers, pppoe."
 
 #: ../../partition_table.pm_.c:542
 msgid "Extended partition not supported on this platform"
@@ -3896,18 +4684,9 @@ msgstr "SMB-tjener IP"
 msgid "Share name"
 msgstr "Navn deling"
 
-#: ../../printerdrake.pm_.c:84 ../../printerdrake.pm_.c:109
-#: ../../standalone/adduserdrake_.c:40
-msgid "User name"
-msgstr "Brukernavn"
-
 #: ../../printerdrake.pm_.c:86
 msgid "Workgroup"
 msgstr "Arbeidsgruppe"
-
-#: ../../printerdrake.pm_.c:89
-msgid "IP address should be in format 1.2.3.4"
-msgstr "IP-adresse bør være i format 1.2.3.4"
 
 #: ../../printerdrake.pm_.c:102
 msgid "NetWare Printer Options"
@@ -3945,75 +4724,75 @@ msgstr "Ja, skriv PostScript testside"
 msgid "Yes, print both test pages"
 msgstr "Ja, skriv begge testsidene"
 
-#: ../../printerdrake.pm_.c:131
+#: ../../printerdrake.pm_.c:130
 msgid "Configure Printer"
 msgstr "Konfigurer skriver"
 
-#: ../../printerdrake.pm_.c:132
+#: ../../printerdrake.pm_.c:131
 msgid "What type of printer do you have?"
 msgstr "Hva slags type skriver har du?"
 
-#: ../../printerdrake.pm_.c:164
+#: ../../printerdrake.pm_.c:163
 msgid "Printer options"
 msgstr "Opsjoner for skriver"
 
-#: ../../printerdrake.pm_.c:165
+#: ../../printerdrake.pm_.c:164
 msgid "Paper Size"
 msgstr "Papirstørrelse"
 
-#: ../../printerdrake.pm_.c:166
+#: ../../printerdrake.pm_.c:165
 msgid "Eject page after job?"
 msgstr "Kjør ut side etter jobb?"
 
-#: ../../printerdrake.pm_.c:171
+#: ../../printerdrake.pm_.c:170
 msgid "Uniprint driver options"
 msgstr "Opsjoner uniprint-driver"
 
-#: ../../printerdrake.pm_.c:172
+#: ../../printerdrake.pm_.c:171
 msgid "Color depth options"
 msgstr "Opsjoner fargedybde"
 
-#: ../../printerdrake.pm_.c:174
+#: ../../printerdrake.pm_.c:173
 msgid "Print text as PostScript?"
 msgstr "Skrive ut tekst som PostScript?"
 
-#: ../../printerdrake.pm_.c:175
+#: ../../printerdrake.pm_.c:174
 msgid "Reverse page order"
 msgstr "Reversere siderekkefølge"
 
-#: ../../printerdrake.pm_.c:177
+#: ../../printerdrake.pm_.c:176
 msgid "Fix stair-stepping text?"
 msgstr "Fikse trappestegs-tekst?"
 
-#: ../../printerdrake.pm_.c:180
+#: ../../printerdrake.pm_.c:179
 msgid "Number of pages per output pages"
 msgstr "Nummer av sider pr. sider ut"
 
-#: ../../printerdrake.pm_.c:181
+#: ../../printerdrake.pm_.c:180
 msgid "Right/Left margins in points (1/72 of inch)"
 msgstr "Høyre/venstre marginer i punkter (1/72 av inch)"
 
-#: ../../printerdrake.pm_.c:182
+#: ../../printerdrake.pm_.c:181
 msgid "Top/Bottom margins in points (1/72 of inch)"
 msgstr "Topp/bunn marginer i punkter (1/72 av inch)"
 
-#: ../../printerdrake.pm_.c:185
+#: ../../printerdrake.pm_.c:184
 msgid "Extra GhostScript options"
 msgstr "Ekstra GhostScript opsjoner"
 
-#: ../../printerdrake.pm_.c:188
+#: ../../printerdrake.pm_.c:187
 msgid "Extra Text options"
 msgstr "Ekstra tekstopsjoner"
 
-#: ../../printerdrake.pm_.c:199
+#: ../../printerdrake.pm_.c:198
 msgid "Do you want to test printing?"
 msgstr "Vil du teste utskrift?"
 
-#: ../../printerdrake.pm_.c:210
+#: ../../printerdrake.pm_.c:209
 msgid "Printing test page(s)..."
 msgstr "Skriver ut testside(r)..."
 
-#: ../../printerdrake.pm_.c:218
+#: ../../printerdrake.pm_.c:217
 #, c-format
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
@@ -4030,7 +4809,7 @@ msgstr ""
 "\n"
 "Virker det ordentlig?"
 
-#: ../../printerdrake.pm_.c:222
+#: ../../printerdrake.pm_.c:221
 msgid ""
 "Test page(s) have been sent to the printer daemon.\n"
 "This may take a little time before printer start.\n"
@@ -4040,15 +4819,15 @@ msgstr ""
 "Det kan ta litt tid før skriveren starter.\n"
 "Virker det ordentlig?"
 
-#: ../../printerdrake.pm_.c:238
+#: ../../printerdrake.pm_.c:237
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../../printerdrake.pm_.c:239
+#: ../../printerdrake.pm_.c:238
 msgid "Would you like to configure a printer?"
 msgstr "Ønsker du å konfigurere en skriver?"
 
-#: ../../printerdrake.pm_.c:243
+#: ../../printerdrake.pm_.c:242
 msgid ""
 "Here are the following print queues.\n"
 "You can add some more or change the existing ones."
@@ -4056,19 +4835,19 @@ msgstr ""
 "Her er følgende skriverkø.\n"
 "Du kan legge til flere eller endre de eksisterende."
 
-#: ../../printerdrake.pm_.c:266 ../../printerdrake.pm_.c:272
+#: ../../printerdrake.pm_.c:265 ../../printerdrake.pm_.c:271
 msgid "Select Printer Connection"
 msgstr "Velg skrivertilkobling"
 
-#: ../../printerdrake.pm_.c:267
+#: ../../printerdrake.pm_.c:266
 msgid "How is the printer connected?"
 msgstr "Hvordan er skriveren tilkoblet?"
 
-#: ../../printerdrake.pm_.c:272
+#: ../../printerdrake.pm_.c:271
 msgid "Remove queue"
 msgstr "Fjern kø"
 
-#: ../../printerdrake.pm_.c:273
+#: ../../printerdrake.pm_.c:272
 msgid ""
 "Every print queue (which print jobs are directed to) needs a\n"
 "name (often lp) and a spool directory associated with it. What\n"
@@ -4079,15 +4858,15 @@ msgstr ""
 "(ofte lp) og en spolingskatalog direkte assosiert med denne. Hvilket\n"
 "navn og katalog skal brukes for denne køen og hvordan er skriveren tilkoblet?"
 
-#: ../../printerdrake.pm_.c:276
+#: ../../printerdrake.pm_.c:275
 msgid "Name of queue"
 msgstr "Køens navn"
 
-#: ../../printerdrake.pm_.c:277
+#: ../../printerdrake.pm_.c:276
 msgid "Spool directory"
 msgstr "Spolingskatalog"
 
-#: ../../printerdrake.pm_.c:278
+#: ../../printerdrake.pm_.c:277
 msgid "Printer Connection"
 msgstr "Skrivertilkobling"
 
@@ -4338,57 +5117,6 @@ msgstr ""
 msgid "Choose which services should be automatically started at boot time"
 msgstr "Velg hvilke tjenester som skal startes automatisk ved oppstart"
 
-#: ../../standalone/adduserdrake_.c:36
-msgid "Accept user"
-msgstr "Godta bruker"
-
-#: ../../standalone/adduserdrake_.c:36
-msgid "Add user"
-msgstr "Legg til bruker"
-
-#: ../../standalone/adduserdrake_.c:37
-#, c-format
-msgid "(already added %s)"
-msgstr "(allerede lagt til %s)"
-
-#: ../../standalone/adduserdrake_.c:37
-#, c-format
-msgid ""
-"Enter a user\n"
-"%s"
-msgstr ""
-"Entre en bruker\n"
-"%s"
-
-#: ../../standalone/adduserdrake_.c:39
-msgid "Real name"
-msgstr "Virkelig navn"
-
-#: ../../standalone/adduserdrake_.c:45
-msgid "Shell"
-msgstr "Skall"
-
-#: ../../standalone/adduserdrake_.c:47
-msgid "Icon"
-msgstr "Ikon"
-
-#: ../../standalone/adduserdrake_.c:57
-msgid "This password is too simple"
-msgstr "Dette passordet er for enkelt"
-
-#: ../../standalone/adduserdrake_.c:58
-msgid "Please give a user name"
-msgstr "Vennligst oppgi et brukernavn"
-
-#: ../../standalone/adduserdrake_.c:59
-msgid ""
-"The user name must contain only lower cased letters, numbers, `-' and `_'"
-msgstr "Brukernavnet kan kun inneholde små bokstaver, tall, `-' og `_'"
-
-#: ../../standalone/adduserdrake_.c:60
-msgid "This user name is already added"
-msgstr "Denne brukeren er allerede lagt til"
-
 #: ../../standalone/diskdrake_.c:61
 msgid ""
 "I can't read your partition table, it's too corrupted for me :(\n"
@@ -4560,30 +5288,6 @@ msgstr "Alt er konfigurert!"
 msgid "Everything has been configured.\n"
 msgstr "Alt har blitt konfigurert.\n"
 
-#: ../../standalone/draksec_.c:20
-msgid "Welcome To Crackers"
-msgstr "Velkommen til Crackers"
-
-#: ../../standalone/draksec_.c:21
-msgid "Poor"
-msgstr "Dårlig"
-
-#: ../../standalone/draksec_.c:22
-msgid "Low"
-msgstr "Lav"
-
-#: ../../standalone/draksec_.c:23
-msgid "Medium"
-msgstr "Medium"
-
-#: ../../standalone/draksec_.c:24
-msgid "High"
-msgstr "Høy"
-
-#: ../../standalone/draksec_.c:25
-msgid "Paranoid"
-msgstr "Paranoid"
-
 #: ../../standalone/draksec_.c:28
 msgid ""
 "This level is to be used with care. It makes your system more easy to use,\n"
@@ -4637,10 +5341,6 @@ msgstr ""
 "Vi tar funksjonene for nivå 4, men nå er systemet fullstendig stengt.\n"
 "Sikkerhetsfunksjonene er nå på maksimum."
 
-#: ../../standalone/draksec_.c:46
-msgid "Choose security level"
-msgstr "Velg sikkerhetsnivå"
-
 #: ../../standalone/draksec_.c:49
 msgid "Setting security level"
 msgstr "Setter sikkerhetsnivå"
@@ -4648,10 +5348,6 @@ msgstr "Setter sikkerhetsnivå"
 #: ../../standalone/drakxconf_.c:21
 msgid "Choose the tool you want to use"
 msgstr "Velg verktøyet du ønsker å bruke"
-
-#: ../../standalone/keyboarddrake_.c:22
-msgid "Keyboard"
-msgstr "Tastatur"
 
 #: ../../standalone/keyboarddrake_.c:23
 msgid "What is your keyboard layout?"
@@ -4668,10 +5364,6 @@ msgstr "ingen serie_usb funnet\n"
 #: ../../standalone/mousedrake_.c:35
 msgid "Emulate third button?"
 msgstr "Emulere tredje knapp?"
-
-#: ../../standalone/mousedrake_.c:38
-msgid "Mouse Port"
-msgstr "Museport"
 
 #: ../../standalone/mousedrake_.c:39
 msgid "Which serial port is your mouse connected to?"
@@ -4824,7 +5516,7 @@ msgid ""
 "rpmdrake is currently in ``low memory'' mode.\n"
 "I'm going to relaunch rpmdrake to allow searching files"
 msgstr ""
-"rpmdrake er for øyeblikket i ``lavt minne'' modus.\n"
+"rpmdrake er for øyeblikket i ``lite minne'' modus.\n"
 "Jeg vil starte rpmdrake på nytt for å muliggjøre søk etter filer"
 
 #: ../../standalone/rpmdrake_.c:253
@@ -4886,13 +5578,24 @@ msgstr "Finner tillatelser"
 msgid "Finding leaves takes some time"
 msgstr "Finne tillatelser vil ta litt tid"
 
-#, fuzzy
 #~ msgid "Configure my card"
-#~ msgstr "Konfigurer X"
+#~ msgstr "Konfigurer kortet mitt"
 
-#, fuzzy
-#~ msgid "pptp alcatel"
-#~ msgstr "Automatisk allokering"
+#~ msgid ""
+#~ "\n"
+#~ "I recommend that you abort, and then launch this internet wizard after "
+#~ "installation.It will then be able to setup ISA or PCMCIA cards easier.\n"
+#~ "\n"
+#~ "But, if you know the irq, dma, io of your card, you can still configure your "
+#~ "card."
+#~ msgstr ""
+#~ "\n"
+#~ "Jeg anbefaler at du avbryter, for så å starte denne Internett-hjelperen "
+#~ "etter installasjonen. Den vil da kunne sette opp ISA eller PCMCIA kort "
+#~ "lettere.\n"
+#~ "\n"
+#~ "Men, hvis du vet irq, dma og io for kortet ditt, kan du konfigurere kortet "
+#~ "ditt nå."
 
 #~ msgid "Try to find PCMCIA cards?"
 #~ msgstr "Prøve å finne PCMCIA kort?"
@@ -4900,214 +5603,8 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ msgid "Try to find %s devices?"
 #~ msgstr "Prøve å finne %s enheter?"
 
-#~ msgid "An error occurred"
-#~ msgstr "En feil oppsto"
-
-#~ msgid "Please, choose a language to use."
-#~ msgstr "Vennligst velg språk som skal brukes."
-
-#~ msgid "Please, choose your keyboard layout."
-#~ msgstr "Vennligst velg tastatur-oppsettet ditt."
-
-#~ msgid "You can choose other languages that will be available after install"
-#~ msgstr ""
-#~ "Du kan velge andre språk som vil være tilgjengelige etter installasjon"
-
-#~ msgid "Install Class"
-#~ msgstr "Installeringsklasse"
-
-#~ msgid "Which installation class do you want?"
-#~ msgstr "Hvilken installasjonsklasse ønsker du?"
-
-#~ msgid "Install/Upgrade"
-#~ msgstr "Installer/Oppgrader"
-
-#~ msgid "Is this an install or an upgrade?"
-#~ msgstr "Er dette en installering eller en oppgradering?"
-
-#~ msgid "Recommended"
-#~ msgstr "Anbefalt"
-
-#~ msgid "Customized"
-#~ msgstr "Egendefinert"
-
-#~ msgid "Expert"
-#~ msgstr "Ekspert"
-
-#~ msgid ""
-#~ "Are you sure you are an expert? \n"
-#~ "You will be allowed to make powerful but dangerous things here.\n"
-#~ "\n"
-#~ "You will be asked questions such as: ``Use shadow file for passwords?'',\n"
-#~ "are you ready to answer that kind of questions?"
-#~ msgstr ""
-#~ "Er du sikker på at du er en ekspert? \n"
-#~ "Du får tilgang til å gjøre kraftige, men farlige ting her."
-
-#~ msgid "Upgrade"
-#~ msgstr "Oppgrader"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Development"
-#~ msgstr "Utvikling"
-
-#~ msgid "Server"
-#~ msgstr "Tjener"
-
-#~ msgid "Which usage is your system used for ?"
-#~ msgstr "Hva slags bruk er systemet ditt brukt til?"
-
-#~ msgid "Please, choose the type of your mouse."
-#~ msgstr "Vennligst velg din musetype."
-
-#~ msgid "Please choose on which serial port your mouse is connected to."
-#~ msgstr "Vennligst velg hvilken serieport musen din koblet til."
-
-#~ msgid "Configuring IDE"
-#~ msgstr "Konfigurerer IDE"
-
-#~ msgid "IDE"
-#~ msgstr "IDE"
-
-#~ msgid "no available partitions"
-#~ msgstr "ingen tilgjengelige partisjoner"
-
-#~ msgid "Choose the mount points"
-#~ msgstr "Velg monteringspunktene"
-
-#~ msgid ""
-#~ "I can't read your partition table, it's too corrupted for me :(\n"
-#~ "I'll try to go on blanking bad partitions and ALL DATA will be lost\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Jeg kan ikke lese partisjonstabellen din, den er for ødelagt for meg :(\n"
-#~ "Jeg vil førsøke å blanke ut dårlige partisjoner, ALLE DATA vil gå tapt\n"
-#~ "(%s)"
-
-#~ msgid ""
-#~ "DiskDrake failed to read correctly the partition table.\n"
-#~ "Continue at your own risk!"
-#~ msgstr ""
-#~ "DiskDrake klarte ikke å lese partisjonstabellen korrekt.\n"
-#~ "Fortsett på eget ansvar!"
-
-#~ msgid "Root Partition"
-#~ msgstr "Root-partisjon"
-
-#~ msgid "What is the root partition (/) of your system?"
-#~ msgstr "Hva er root-partisjonen (/) på systemet ditt?"
-
-#~ msgid "The DrakX Partitioning wizard found the following solutions:"
-#~ msgstr "DrakX partisjonsveiviseren fant disse løsningene:"
-
-#~ msgid "Partitioning failed: %s"
-#~ msgstr "Partisjonering feilet: %s"
-
-#~ msgid ""
-#~ "You need to reboot for the partition table modifications to take place"
-#~ msgstr ""
-#~ "Du må starte maskinen på nytt for at modifiseringene av partisjonstabellen\n"
-#~ "skal tre i kraft"
-
-#~ msgid "Choose the partitions you want to format"
-#~ msgstr "Velg de partisjonene du ønsker å formatere"
-
-#~ msgid "Check bad blocks?"
-#~ msgstr "Sjekke dårlige blokker?"
-
-#~ msgid "Formatting partitions"
-#~ msgstr "Formaterer partisjoner"
-
-#~ msgid "Creating and formatting file %s"
-#~ msgstr "Oppretter og formaterer fil %s"
-
-#~ msgid "Not enough swap to fulfill installation, please add some"
-#~ msgstr ""
-#~ "Ikke nok vekslingsplass til å fullføre installasjonen, vennligst legg til mer"
-
-#~ msgid "Looking for available packages"
-#~ msgstr "Ser etter tilgjengelige pakker"
-
-#~ msgid "Finding packages to upgrade"
-#~ msgstr "Finner pakker å oppgradere"
-
-#~ msgid "Your system has not enough space left for installation or upgrade"
-#~ msgstr ""
-#~ "Systemet ditt har ikke nok plass for installasjon eller oppgradering"
-
-#~ msgid "Full (%dMB)"
-#~ msgstr "Full(%dMB)"
-
-#~ msgid "Normal (%dMB)"
-#~ msgstr "Normal (%dMB)"
-
 #~ msgid "Small(%dMB)"
 #~ msgstr "Liten(%dMB)"
-
-#~ msgid "Package Group Selection"
-#~ msgstr "Valg pakkegruppe"
-
-#~ msgid "Individual package selection"
-#~ msgstr "Individuelt pakkevalg"
-
-#~ msgid ""
-#~ "If you have all the CDs in the list below, click Ok.\n"
-#~ "If you have none of those CDs, click Cancel.\n"
-#~ "If only some CDs are missing, unselect them, then click Ok."
-#~ msgstr ""
-#~ "Hvis du har alle CDene i listen nedenfor, klikk Ok.\n"
-#~ "Hvis du ikke har noen av CDene, klikk Avbryt.\n"
-#~ "Hvis bare noen av CDene mangler, fjern disse, klikk så Ok."
-
-#~ msgid "Cd-Rom labeled \"%s\""
-#~ msgstr "CD-ROM merket \"%s\""
-
-#~ msgid ""
-#~ "Installing package %s\n"
-#~ "%d%%"
-#~ msgstr ""
-#~ "Installerer pakke %s\n"
-#~ "%d%%"
-
-#~ msgid "Post-install configuration"
-#~ msgstr "Konfigurasjon postinstallering"
-
-#~ msgid "Keep the current IP configuration"
-#~ msgstr "Behold nåværende IP-konfigurasjon"
-
-#~ msgid "Reconfigure network now"
-#~ msgstr "Rekonfigurer nettverket nå"
-
-#~ msgid "Network Configuration"
-#~ msgstr "Nettverkskonfigurasjon"
-
-#~ msgid "Local networking has already been configured. Do you want to:"
-#~ msgstr "Lokalt nettverk har allerede blitt konfigurert. Vil du:"
-
-#~ msgid "Do you want to configure a local network for your system?"
-#~ msgstr "Vil du konfigurere lokalt LAN-nettverk for systemet ditt?"
-
-#~ msgid "no network card found"
-#~ msgstr "ingen nettverkskort funnet"
-
-#~ msgid "Configuring network"
-#~ msgstr "Konfigurerer nettverk"
-
-#~ msgid ""
-#~ "Please enter your host name if you know it.\n"
-#~ "Some DHCP servers require the hostname to work.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''."
-#~ msgstr ""
-#~ "Vennligst entre vertsnavnet ditt hvis du vet det.\n"
-#~ "Noen DHCP tjenere trenger vertsnavnet for å virke.\n"
-#~ "Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
-#~ "som ``minboks.mittlab.mittfirma.no''."
-
-#~ msgid "Host name:"
-#~ msgstr "Vertsnavn:"
 
 #~ msgid "Modem Configuration"
 #~ msgstr "Modem-konfigurasjon"
@@ -5119,343 +5616,8 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ msgid "Do you want to configure a ISDN connection for your system?"
 #~ msgstr "Vil du konfigurere en ISDN oppkobling for systemet ditt?"
 
-#~ msgid "Configuring network device %s"
-#~ msgstr "Konfigurerer nettverksenhet %s"
-
-#~ msgid ""
-#~ "Please enter the IP configuration for this machine.\n"
-#~ "Each item should be entered as an IP address in dotted-decimal\n"
-#~ "notation (for example, 1.2.3.4)."
-#~ msgstr ""
-#~ "Vennligst entre IP-konfigurasjonen for denne maskinen.\n"
-#~ "Hvert element bør entres som en IP-adresse i punkt-desimal\n"
-#~ "notasjon (f.eks, 1.2.3.4)."
-
-#~ msgid "Automatic IP"
-#~ msgstr "Automatisk IP"
-
-#~ msgid "IP address:"
-#~ msgstr "IP-adresse:"
-
-#~ msgid "Netmask:"
-#~ msgstr "Nettmaske:"
-
-#~ msgid "(bootp/dhcp)"
-#~ msgstr "(bootp/dhcp)"
-
-#~ msgid ""
-#~ "Please enter your host name.\n"
-#~ "Your host name should be a fully-qualified host name,\n"
-#~ "such as ``mybox.mylab.myco.com''.\n"
-#~ "You may also enter the IP address of the gateway if you have one"
-#~ msgstr ""
-#~ "Vennligst entre vertsnavnet ditt.\n"
-#~ "Vertsnavnet ditt bør være et full-kvalifisert vertsnavn,\n"
-#~ "så som ``minboks.mittlab.mittfirma.no''.\n"
-#~ "Du kan også entre IP-adressen til gateway'en hvis du har en"
-
-#~ msgid "DNS server:"
-#~ msgstr "DNS-tjener:"
-
-#~ msgid "Gateway device:"
-#~ msgstr "Gateway-enhet:"
-
-#~ msgid "Gateway:"
-#~ msgstr "Gateway:"
-
-#~ msgid ""
-#~ "You have now the possibility to download software aimed for encryption.\n"
-#~ "\n"
-#~ "WARNING:\n"
-#~ "\n"
-#~ "Due to different general requirements applicable to these software and "
-#~ "imposed\n"
-#~ "by various jurisdictions, customer and/or end user of theses software "
-#~ "should\n"
-#~ "ensure that the laws of his/their jurisdiction allow him/them to download, "
-#~ "stock\n"
-#~ "and/or use these software.\n"
-#~ "\n"
-#~ "In addition customer and/or end user shall particularly be aware to not "
-#~ "infringe\n"
-#~ "the laws of his/their jurisdiction. Should customer and/or end user not\n"
-#~ "respect the provision of these applicable laws, he/they will incure serious\n"
-#~ "sanctions.\n"
-#~ "\n"
-#~ "In no event shall Mandrakesoft nor its manufacturers and/or suppliers be "
-#~ "liable\n"
-#~ "for special, indirect or incidental damages whatsoever (including, but not\n"
-#~ "limited to loss of profits, business interruption, loss of commercial data "
-#~ "and\n"
-#~ "other pecuniary losses, and eventual liabilities and indemnification to be "
-#~ "paid\n"
-#~ "pursuant to a court decision) arising out of use, possession, or the sole\n"
-#~ "downloading of these software, to which customer and/or end user could\n"
-#~ "eventually have access after having sign up the present agreement.\n"
-#~ "\n"
-#~ "\n"
-#~ "For any queries relating to these agreement, please contact \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-#~ msgstr ""
-#~ "Du har nå mulighet til å laste ned programvare for kryptering.\n"
-#~ "\n"
-#~ "ADVARSEL:\n"
-#~ "\n"
-#~ "Pga. forskjellige krav som er tillagt denne programvaren og pålagt av "
-#~ "forskjellige\n"
-#~ "myndigheter, bør kunde og/eller sluttbruker av denne programvaren forsikre "
-#~ "seg\n"
-#~ "om at lovene i sin/deres jurisdiksjon tillater han/dem å laste ned, ha i "
-#~ "besittelse\n"
-#~ "og/eller bruke denne programvaren.\n"
-#~ "\n"
-#~ "I tillegg skal kunde og/eller sluttbruker spesielt være oppmerksom på å ikke "
-#~ "bryte\n"
-#~ "lovene i sin/deres jurisdiksjon. Skulle kunde og/eller sluttbruker ikke\n"
-#~ "respektere bestemmelsene av disse lovene, vil han/de pådra seg alvorlige\n"
-#~ "sanksjoner.\n"
-#~ "\n"
-#~ "Under ingen omstendighet skal Mandrakesoft og eller ikke sine produsenter "
-#~ "og/eller\n"
-#~ "leverandører bli holdt ansvarlige for særskilte, indirekte eller tilfeldige\n"
-#~ "skader uansett hva som enn skulle (inkludert, men ikke begrenset til tap av "
-#~ "fortjeneste,\n"
-#~ "forretningsavbrudd, tap av kommersiell data og andre pengemessige tap, og "
-#~ "endelige\n"
-#~ "ansvarsforhold og erstatninger som skal betales ifølge en rettslig\n"
-#~ "avgjørelse) oppstå ut av bruk, besittelse, eller ene og alene nedlastingen\n"
-#~ "av denne programvaren, som kunde og/eller sluttbruker til slutt kan ha\n"
-#~ "tilgang til etter å ha sagt seg enig i og undertegnet fremviste avtale.\n"
-#~ "\n"
-#~ "For spørsmål angående denne avtalen, vennligst kontakt \n"
-#~ "Mandrakesoft, Inc.\n"
-#~ "2400 N. Lincoln Avenue Suite 243\n"
-#~ "Altadena California 91001\n"
-#~ "USA"
-
-#~ msgid "Choose a mirror from which to get the packages"
-#~ msgstr "Velg et speil som pakkene kan hentes fra"
-
-#~ msgid "Contacting the mirror to get the list of available packages"
-#~ msgstr "Kontakter speilet for å få en liste over tilgjengelige pakker"
-
-#~ msgid "Please choose the packages you want to install."
-#~ msgstr "Vennligst velg pakkene du ønsker å installere."
-
-#~ msgid "Is your hardware clock set to GMT?"
-#~ msgstr "Er maskinvareklokken din satt til GMT?"
-
-#~ msgid "No password"
-#~ msgstr "Intet passord"
-
-#~ msgid "Use shadow file"
-#~ msgstr "Bruk skyggefil"
-
-#~ msgid "shadow"
-#~ msgstr "skygge"
-
-#~ msgid "MD5"
-#~ msgstr "MD5"
-
-#~ msgid "Use MD5 passwords"
-#~ msgstr "Bruk MD5 passord"
-
-#~ msgid "Use NIS"
-#~ msgstr "Bruk NIS"
-
-#~ msgid "yellow pages"
-#~ msgstr "gule sider"
-
-#~ msgid "This password is too simple (must be at least %d characters long)"
-#~ msgstr "Dette passordet er for enkelt (må være minst %d tegn langt)"
-
-#~ msgid "Authentification NIS"
-#~ msgstr "Autentifikasjon NIS"
-
-#~ msgid "NIS Domain"
-#~ msgstr "NIS-domene"
-
-#~ msgid "NIS Server"
-#~ msgstr "NIS-tjener"
-
-#~ msgid ""
-#~ "A custom bootdisk provides a way of booting into your Linux system without\n"
-#~ "depending on the normal bootloader. This is useful if you don't want to "
-#~ "install\n"
-#~ "SILO on your system, or another operating system removes SILO, or SILO "
-#~ "doesn't\n"
-#~ "work with your hardware configuration. A custom bootdisk can also be used "
-#~ "with\n"
-#~ "the Mandrake rescue image, making it much easier to recover from severe "
-#~ "system\n"
-#~ "failures.\n"
-#~ "\n"
-#~ "If you want to create a bootdisk for your system, insert a floppy in the "
-#~ "first\n"
-#~ "drive and press \"Ok\"."
-#~ msgstr ""
-#~ "En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
-#~ "å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
-#~ "ikke ønsker\n"
-#~ "å installere SILO på systemet ditt, eller et annet operativsystem fjerner "
-#~ "SILO,\n"
-#~ "eller at SILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
-#~ "oppstartsdiskett\n"
-#~ "kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
-#~ "lettere gjenopprette\n"
-#~ "etter systemsvikt.\n"
-#~ "Hvis du ønsker du å opprette en oppstartsdiskett for systemet ditt, sett inn "
-#~ "en diskett\n"
-#~ "i den første stasjonen og trykk \"Ok\"."
-
-#~ msgid "First floppy drive"
-#~ msgstr "Første diskettstasjon"
-
-#~ msgid "Second floppy drive"
-#~ msgstr "Andre diskettstasjon"
-
-#~ msgid "Skip"
-#~ msgstr "Dropp"
-
-#~ msgid ""
-#~ "A custom bootdisk provides a way of booting into your Linux system without\n"
-#~ "depending on the normal bootloader. This is useful if you don't want to "
-#~ "install\n"
-#~ "LILO (or grub) on your system, or another operating system removes LILO, or "
-#~ "LILO doesn't\n"
-#~ "work with your hardware configuration. A custom bootdisk can also be used "
-#~ "with\n"
-#~ "the Mandrake rescue image, making it much easier to recover from severe "
-#~ "system\n"
-#~ "failures. Would you like to create a bootdisk for your system?"
-#~ msgstr ""
-#~ "En egendefinert oppstartsdiskett er en måte å starte Linux-systemet på uten\n"
-#~ "å være avhengig av den vanlige oppstartslasteren. Dette er nyttig hvis du "
-#~ "ikke ønsker\n"
-#~ "å installere LILO (eller grub) på systemet ditt, eller et annet "
-#~ "operativsystem fjerner LILO,\n"
-#~ "eller at LILO ikke virker med din maskinvarekonfigurasjon. En egendefinert "
-#~ "oppstartsdiskett\n"
-#~ "kan også brukes sammen med Mandrake's redningsbilde, som gjør det mye "
-#~ "lettere gjenopprette\n"
-#~ "etter systemsvikt. Ønsker du å opprette en oppstartsdiskett for systemet "
-#~ "ditt?"
-
-#~ msgid "Sorry, no floppy drive available"
-#~ msgstr "Beklager, ingen diskettstasjon tilgjengelig"
-
-#~ msgid "Choose the floppy drive you want to use to make the bootdisk"
-#~ msgstr ""
-#~ "Velg diskettstasjonen du ønsker å bruke for å lage oppstartsdisketten"
-
-#~ msgid "Insert a floppy in drive %s"
-#~ msgstr "Sett inn en diskett i stasjon %s"
-
-#~ msgid "Creating bootdisk"
-#~ msgstr "Oppretter oppstartdiskett"
-
-#~ msgid "Preparing bootloader"
-#~ msgstr "Klargjør oppstartslaster"
-
-#~ msgid ""
-#~ "Error installing aboot, \n"
-#~ "try to force installation even if that destroys the first partition?"
-#~ msgstr ""
-#~ "Feil ved installasjon av aboot, \n"
-#~ "prøve å installere selv om det ødelegger den første partisjonen?"
-
-#~ msgid "Installation of bootloader failed. The following error occured:"
-#~ msgstr "Installasjon av oppstartslaster mislykket. Følgende feil oppsto:"
-
-#~ msgid "HTTP proxy"
-#~ msgstr "HTTP-proxy"
-
-#~ msgid "FTP proxy"
-#~ msgstr "FTP-proxy"
-
-#~ msgid "Proxy should be http://..."
-#~ msgstr "Proxy burde være http://..."
-
-#~ msgid "Proxy should be ftp://..."
-#~ msgstr "Proxy burde være ftp://..."
-
-#~ msgid "Miscellaneous questions"
-#~ msgstr "Forskjellige spørsmål"
-
-#~ msgid "(may cause data corruption)"
-#~ msgstr "(kan forårsake korrupsjon av data)"
-
-#~ msgid "Use hard drive optimisations?"
-#~ msgstr "Bruk harddisk-optimisering?"
-
-#~ msgid "Precise RAM size if needed (found %d MB)"
-#~ msgstr "Presiser RAM-størrelse hvis det trengs (funnet %d MB)"
-
-#~ msgid "Removable media automounting"
-#~ msgstr "Fjernbart media automontering"
-
-#~ msgid "Clean /tmp at each boot"
-#~ msgstr "Tøm /tmp ved hver oppstart"
-
-#~ msgid "Enable multi profiles"
-#~ msgstr "Slå på multiprofiler"
-
-#~ msgid "Enable num lock at startup"
-#~ msgstr "Slå på num lock ved oppstart"
-
-#~ msgid "Give the ram size in MB"
-#~ msgstr "Oppgi ram-størrelsen i MB"
-
-#~ msgid "Can't use supermount in high security level"
-#~ msgstr "Kan ikke bruke supermount i høyt sikkerhetsnivå"
-
-#~ msgid ""
-#~ "beware: IN THIS SECURITY LEVEL, ROOT LOGIN AT CONSOLE IS NOT ALLOWED!\n"
-#~ "If you want to be root, you have to login as a user and then use \"su\".\n"
-#~ "More generally, do not expect to use your machine for anything but as a "
-#~ "server.\n"
-#~ "You have been warned."
-#~ msgstr ""
-#~ "Merk: I DETTE SIKKERHETSNIVÅET ER ROOT INNLOGG VED KONSOLL IKKE TILLATT!\n"
-#~ "Hvis du ønsker å være root må du logge inn som bruker for så å bruke "
-#~ "\"su\".\n"
-#~ "Mere generelt, ikke forvent å bruke maskinen din til annet enn en tjener.\n"
-#~ "Du har blitt advart."
-
-#~ msgid ""
-#~ "Be carefull, having numlock enabled causes a lot of keystrokes to\n"
-#~ "give digits instead of normal letters (eg: pressing `p' gives `6')"
-#~ msgstr ""
-#~ "Vær forsiktig, å ha numlock slått på forårsaker at mange av tastene\n"
-#~ "gir tall istedenfor vanlige bokstaver (f.eks: `p' gir `6')"
-
-#~ msgid ""
-#~ "DrakX will generate config files for both XFree 3.3 and XFree 4.0.\n"
-#~ "By default, the 4.0 server is used unless your card is not supported.\n"
-#~ "\n"
-#~ "Do you want to keep XFree 3.3?"
-#~ msgstr ""
-#~ "DrakX vil generere konfigurasjonsfiler for både XFree 3.3 og XFree 4.0.\n"
-#~ "Som standard vil 4.0 tjeneren bli brukt hvis kortet ditt er støttet.\n"
-#~ "\n"
-#~ "Ønsker du å beholde XFree 3.3?"
-
 #~ msgid "Try to find PCI devices?"
 #~ msgstr "Prøve å finne PCI-enheter?"
-
-#~ msgid ""
-#~ "Do you want to generate an auto install floppy for linux replication?"
-#~ msgstr ""
-#~ "Ønsker du å generere en auto installeringsdiskett for linux replikasjon?"
-
-#~ msgid "Insert a blank floppy in drive %s"
-#~ msgstr "Sett inn en tom diskett i stasjon %s"
-
-#~ msgid "Creating auto install floppy"
-#~ msgstr "Oppretter diskett for autoinstallasjon"
 
 #~ msgid "Searching root partition."
 #~ msgstr "Søker root-partisjon."
@@ -5538,9 +5700,6 @@ msgstr "Finne tillatelser vil ta litt tid"
 #~ "For aa laste en av disse, skriv inn navnet og trykk <ENTER>\n"
 #~ "eller vent %d sekunder for standard oppstart.\n"
 #~ "\n"
-
-#~ msgid "Do you want to use SILO?"
-#~ msgstr "Ønsker du å bruke SILO?"
 
 #~ msgid "SILO main options"
 #~ msgstr "SILO hovedopsjoner"
