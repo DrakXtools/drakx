@@ -1,3 +1,301 @@
+2003/08/14  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po, share/po/eu.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/be.po, share/po/et.po,
+	share/po/pl.po, share/po/tr.po, share/po/ca.po, share/po/uk.po,
+	share/po/it.po, share/po/is.po, share/po/th.po, share/po/mt.po,
+	share/po/id.po, share/po/fi.po, share/po/el.po, share/po/wa.po,
+	share/po/lt.po, share/po/ar.po, share/po/bg.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/nl.po, share/po/pt.po, share/po/fa.po,
+	share/po/sl.po, share/po/de.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/sr@Latn.po, share/po/he.po, share/po/hr.po, share/po/gl.po,
+	share/po/nb.po, share/po/da.po, share/po/fr.po, share/po/cs.po,
+	share/po/bs.po, share/po/sk.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sq.po, share/po/hu.po, share/po/ga.po, share/po/tg.po,
+	share/po/ta.po, share/po/sr.po, share/po/ko.po, share/po/ro.po,
+	share/po/es.po, share/po/uz.po, share/po/az.po, share/po/af.po,
+	share/po/lv.po: updated Turkish file
+
+2003/08/14  Pixel  <pixel at mandrakesoft.com>
+
+	* c/stuff.xs.pl: in floppy_info(), check ioctl success and use
+	FDPOLLDRVSTAT (copied from kudzu code)
+
+2003/08/14  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: start user definable crontab entry - sorry
+	translators, new strings :(
+
+2003/08/13  Damien Chaumette  <dchaumette at mandrakesoft.com>
+
+	* standalone/drakconnect: fix mcc lan changes (fix at least #4088)
+
+2003/08/13  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/13  François Pons  <fpons at mandrakesoft.com>
+
+	* rescue/list.i386: updated with xfs_progs.
+
+	* pkgs.pm: added log for checking deselection (check deadlock unless gtk
+	are doing them).
+	workaround for rpmdb problems of opening Conflictname and Triggername
+	files.
+
+	* share/list.i386: updated with newer xfs_progs.
+
+	* standalone/drakpxe: fixed to match new pxe dhcp.conf configuration file.
+
+	* install_any.pm: fixed to build an inflexion point in list file (so that
+	urpmi can found it).
+	generate a list file if a macro is used (and only in this case).
+	fixed with_hdlist possibly incorrect.
+	added tiny support for arch dependant directory.
+
+2003/08/13  gbeauchesne
+
+	* Makefile: Use bash in stage2 on IA-64
+
+	* mdk-stage1/Makefile: Fix merge from amd64-branch
+
+	* rescue/list.x86_64, rescue/list: Merge with amd64-branch (rpm libdir is
+	always /usr/lib/rpm, update lists)
+
+2003/08/13  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po,
+	install_steps_interactive.pm, share/po/eu.po, share/po/zh_CN.po,
+	share/po/vi.po, share/po/be.po, standalone/drakbackup, share/po/et.po,
+	share/po/pl.po, share/po/tr.po, share/po/ca.po, share/po/uk.po,
+	share/po/it.po, share/po/is.po, share/po/th.po, share/po/mt.po,
+	share/po/id.po, share/po/fi.po, share/po/el.po, share/po/wa.po,
+	share/po/lt.po, share/po/ar.po, share/po/bg.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/nl.po, share/po/pt.po, share/po/fa.po,
+	share/po/sl.po, share/po/br.po, share/po/de.po, share/po/uz@Cyrl.po,
+	share/po/ja.po, share/po/sr@Latn.po, share/po/he.po, share/po/hr.po,
+	share/po/gl.po, share/po/nb.po, share/po/da.po, share/po/fr.po,
+	share/po/cs.po, share/po/bs.po, share/po/sk.po, share/po/sv.po,
+	share/po/sq.po, share/po/hu.po, share/po/ga.po, share/po/tg.po,
+	share/po/ta.po, share/po/sr.po, share/po/ko.po, share/po/ro.po,
+	share/po/es.po, standalone/drakboot, share/po/uz.po, share/po/az.po,
+	share/po/af.po, share/po/lv.po: some english typo fixes thx to Arpad
+	Biro
+
+	* mdk-stage1/probing.c: full pci probe can't be run with fopen/fread
+	because we might read too many bytes. this was the reason for freezes on
+	some boxes from drakx, that may impact stage1 also, so better change
+	that.
+
+2003/08/13  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* keyboard.pm: corrected typo
+
+	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po, share/po/eu.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/be.po, share/po/et.po,
+	share/po/pl.po, share/po/tr.po, share/po/ca.po, share/po/uk.po,
+	share/po/it.po, share/po/is.po, share/po/th.po, share/po/mt.po,
+	share/po/id.po, share/po/fi.po, share/po/el.po, share/po/wa.po,
+	share/po/lt.po, share/po/ar.po, share/po/bg.po, share/po/ru.po,
+	share/po/pt_BR.po, share/po/nl.po, share/po/pt.po, share/po/fa.po,
+	share/po/sl.po, share/po/de.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/sr@Latn.po, share/po/he.po, share/po/hr.po, share/po/gl.po,
+	share/po/nb.po, share/po/da.po, share/po/fr.po, share/po/cs.po,
+	share/po/bs.po, share/po/sk.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/sq.po, share/po/hu.po, share/po/ga.po, share/po/tg.po,
+	share/po/ta.po, share/po/sr.po, share/po/ko.po, share/po/ro.po,
+	share/po/es.po, share/po/uz.po, share/po/az.po, share/po/af.po,
+	share/po/lv.po: updated pot file
+	updated pot file
+
+	* harddrake/sound.pm: fixed typo
+
+2003/08/12  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* drakxtools.spec: drakxtools depends on gurpmi (do_pkgs->install for
+	example)
+
+2003/08/12  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/he.po: updated Hebrew file
+
+	* share/po/cs.po: updated Czech file
+	updated Czech file
+
+2003/08/12  Pixel  <pixel at mandrakesoft.com>
+
+	* share/gen_locales.sh: by the way, gen_locales.sh makes an error because
+	/usr/X11R6/lib/X11/locale/common doesn't exist anymore. It used to
+	contain
+	ximcp.so.2 xlcDef.so.2 xlcUTF8Load.so.2
+	          xlibi18n.so.2 xlocale.so.2 xomGeneric.so.2
+	in mdk9.0, but mdk9.1 install was without it and it was ok...
+
+	* diskdrake/smbnfs_gtk.pm: do pop the "do you want to install samba?"
+	(otherwise when cancel is pressed,
+	drakconf thinks the install exited abnormally since no window was
+	embedded
+	whereas "diskdrake --smb" is normally embedded)
+
+	* lang.pm: > During the installation when one chooses Uzbek (latin) as a
+	language the next
+	> installation stage comes in English. However, DrakX creates
+	> /usr/share/locale_special/uz/LC_MESSAGES/libDrakX.mo and
+	> /usr/share/locale/uz/LC_* files.
+	this comes from during_install__l2charset() returning UNICODE which is
+	not recognised.
+
+2003/08/12  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: medias -> media
+	Mb -> MB [Bug 4381]
+
+2003/08/11  François Pons  <fpons at mandrakesoft.com>
+
+	* share/rpmsrate: added bash-completion in TERMINALS section.
+
+2003/08/11  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po, share/po/eu.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/be.po, share/po/pl.po,
+	share/po/tr.po, share/po/ca.po, share/po/uk.po, share/po/it.po,
+	share/po/is.po, share/po/th.po, share/po/mt.po, share/po/id.po,
+	share/po/fi.po, share/po/el.po, share/po/wa.po, share/po/lt.po,
+	share/po/ar.po, share/po/bg.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/nl.po, share/po/pt.po, share/po/fa.po, share/po/sl.po,
+	share/po/de.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/sr@Latn.po, share/po/he.po, share/po/hr.po, share/po/gl.po,
+	share/po/da.po, share/po/fr.po, share/po/cs.po, share/po/bs.po,
+	share/po/sk.po, share/po/DrakX.pot, share/po/sv.po, share/po/sq.po,
+	share/po/ga.po, share/po/tg.po, share/po/ta.po, share/po/sr.po,
+	share/po/ko.po, share/po/ro.po, share/po/es.po, share/po/uz.po,
+	share/po/az.po, share/po/af.po, share/po/lv.po: updated pot file
+
+	* share/po/et.po, share/po/nb.po, share/po/hu.po: updated Estonian,
+	Hungarian and Norvegian files
+	updated pot file
+
+2003/08/11  Pixel  <pixel at mandrakesoft.com>
+
+	* standalone/XFdrake: more newbie-friendly message:
+	"You need to log out and back in again for changes to take effect"
+	instead of "Please relog into %s to activate the changes"
+	(as suggested on cooker, thanks!)
+
+	* install2.pm: when any::setupBootloader_simple() fail, use
+	any::setupBootloader() afterwards
+
+	* install_steps_interactive.pm: when any::setupBootloader_simple() fail,
+	use any::setupBootloader() afterwards
+	perl_checker compliance
+
+	* .perl_checker: why were c, pkgs and URPM::Resolve excluded? i don't
+	know, but that's much
+	better when perl_checker can see them
+
+	* security/msec.pm, ugtk2.pm, scanner.pm, security/l10n.pm,
+	install_gtk.pm, services.pm: perl_checker compliance
+
+	* lvm.pm: fix typo (fix bug #4239)
+
+	* bootloader.pm: perl_checker compliance
+	sanitize_ver() can fail and return ''
+
+2003/08/11  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Search for files to restore.
+	Fix looping signal_connect in catalog restore.
+	GUI fixes - Fabrice FACORAT.
+
+2003/08/10  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/bg.po: updated Bulgarian file
+
+2003/08/10  Pixel  <pixel at mandrakesoft.com>
+
+	* install_any.pm, install_steps_interactive.pm, standalone/adduserdrake,
+	any.pm: use $::prefix instead of passing $prefix to functions
+
+	* install_steps.pm: use $::prefix instead of passing $prefix to functions
+	since we wrote the password in /etc/passwd, we must convert to shadow
+
+	* interactive/gtk.pm, diskdrake/hd_gtk.pm: use
+	Gtk2::Button->new_with_label instead of Gtk2::Button->new for some
+	widgets otherwise underscores become underlines (bug #4678)
+
+	* network/netconnect.pm: perl_checker compliance
+	replace "Press \"Forward\" to continue" with "Press \"%s\" to continue"
+	(bug #4564)
+
+2003/08/09  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated Swedish file
+
+	* share/po/fa.po: updated Farsi file
+
+2003/08/08  Guillaume Cottenceau  <gc at mandrakesoft.com>
+
+	* ugtk2.pm: add gtkset_alignment
+
+2003/08/08  keld
+
+	* share/po/da.po: Updates
+	soft/control-center/po/da.po soft/ftw/po/da.po
+	soft/mdkhtmlbrowser/po/da.po soft/rpmdrake/po/da.po
+	soft/urpmi/po/da.po soft/userdrake2/po/da.po
+	gi/perl-install/share/po/da.po
+
+2003/08/08  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/cy.po, share/po/zh_TW.po, share/po/eo.po, share/po/eu.po,
+	share/po/zh_CN.po, share/po/vi.po, share/po/be.po, share/po/pl.po,
+	share/po/tr.po, share/po/ca.po, share/po/uk.po, share/po/it.po,
+	share/po/is.po, share/po/th.po, share/po/mt.po, share/po/id.po,
+	share/po/fi.po, share/po/el.po, share/po/wa.po, share/po/lt.po,
+	share/po/ar.po, share/po/bg.po, share/po/ru.po, share/po/pt_BR.po,
+	share/po/nl.po, share/po/pt.po, share/po/fa.po, share/po/sl.po,
+	share/po/de.po, share/po/uz@Cyrl.po, share/po/ja.po,
+	share/po/sr@Latn.po, share/po/he.po, share/po/hr.po, share/po/gl.po,
+	share/po/nb.po, share/po/da.po, share/po/fr.po, share/po/cs.po,
+	share/po/bs.po, share/po/sk.po, share/po/DrakX.pot, share/po/sv.po,
+	share/po/hu.po, share/po/ga.po, share/po/tg.po, share/po/ta.po,
+	share/po/sr.po, share/po/ko.po, share/po/ro.po, share/po/es.po,
+	share/po/uz.po, share/po/az.po, share/po/af.po, share/po/lv.po: updated
+	pot file
+
+	* share/po/et.po: updated Estonian file
+	updated pot file
+
+	* share/po/sq.po: updated Albanian file
+	updated pot file
+
+2003/08/07  Fabian Mandelbaum  <fabman at 2vias.com.ar>
+
+	* share/po/es.po: Updated Spanish translations
+
+2003/08/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/sv.po: updated Hebrew and Swedish files
+
+	* share/po/de.po: Small fix (too long string)
+
+	* share/po/he.po: updated Hebrew file
+	updated Hebrew and Swedish files
+
+2003/08/07  Pixel  <pixel at mandrakesoft.com>
+
+	* drakxtools.spec: 
+	  - drakxservices: xinetd services have a special treatment
+	  - localedrake: fix the "zh_TW with country China" case
+	  - no more stock icons
+
+2003/08/07  Stew Benedict  <sbenedict at mandrakesoft.com>
+
+	* standalone/drakbackup: Fix removed users code (thanks gc).  Enable
+	.backupignore.
+	Clean up spastic progress bar. Add more info in "View Config"
+	Deal with users that are deleted from the system [Bug 4541].
+
 2003/08/07  Pablo Saratxaga  <pablo at mandrakesoft.com>
 
 	* share/po/sv.po, share/po/he.po: updated Hebrew and Swedish files
@@ -18421,7 +18719,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.816 2003/08/05 14:27:20 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.817 2003/08/07 01:00:02 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
