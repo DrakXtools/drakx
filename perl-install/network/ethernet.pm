@@ -185,7 +185,7 @@ want to use the default host name."),
 		      }
 		     ) or goto configureNetwork_step_1;
     } else {
-	configureNetworkNet($in, $netc, $last ||= {}, @l) or goto configureNetwork_step_1;
+    configureNetworkNet($in, $netc, $intf, @l) or goto configureNetwork_step_1;
     }
     network::network::miscellaneous_choose($in, $::o->{miscellaneous} ||= {}) or goto configureNetwork_step_2;
     1;
