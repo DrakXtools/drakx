@@ -239,6 +239,7 @@ my $where_cd = 0;
 my $where_tape = 0;
 my $cd_time = 650;
 my $when_space;
+my $custom_cron = 0;
 my $cd_with_install_boot = 0;
 my $cd_device = '';
 my $host_name = '';
@@ -268,6 +269,7 @@ my $good_restore_path = 1;
 my $max_space = 1000.0;
 my @no_devices = translate("No devices found");
 my %help;
+my $time_string = "* * * * *";
 
 foreach (@ARGV) {
 
@@ -308,6 +310,7 @@ sub setup_tooltips() {
 		'backupignore' => N("Files or wildcards listed in a .backupignore file at the top of a directory tree will not be backed up."),
 		'delete_files' => N("For backups to other media, files are still created on the hard drive, then moved to the other media.  Enabling this option will remove the hard drive tar files after the backup."),
 		'dir_or_module' => N("Some protocols, like rsync, may be configured at the server end.  Rather than using a directory path, you would use the 'module' name for the service path."),
+		'when_space' => N("Custom allows you to specify your own day and time.  The other options use run-parts in /etc/crontab."),
 	);
 }
 
@@ -667,7 +670,11 @@ sub read_cron_files() {
 	    	last;
 		}
     }
-    !$daemon_found and $backup_daemon = 0; 
+	if ($when_space ne "custom") {
+    	!$daemon_found and $backup_daemon = 0;
+	} else {
+		$custom_cron = 1;
+	} 
 }
 
 sub save_cron_files() {
@@ -683,9 +690,13 @@ sub save_cron_files() {
 		foreach (qw(hourly daily weekly monthly)) {
 	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
 		}
-		output_p("/etc/cron.$when_space/drakbackup",  @cron_file);
-		system("chmod +x /etc/cron.$when_space/drakbackup");
-    } else {
+		if ($when_space ne "custom") {
+			output_p("/etc/cron.$when_space/drakbackup",  @cron_file);
+			system("chmod +x /etc/cron.$when_space/drakbackup");
+    	} else {
+		
+		}
+	} else {
 		foreach (qw(hourly daily weekly monthly)) {
 	    	-f "/etc/cron.$_/drakbackup" and rm_rf("/etc/cron.$_/drakbackup");
 		}
@@ -724,7 +735,7 @@ sub read_conf_file() {
 			if (/^USE_TAPE/)       { $where_tape = 1 }
 			if (/^TAPE_NOREWIND/)  { $tape_norewind = 1 }
 			if (/^CD_TIME/)        { s/^CD_TIME=//gi; $cd_time = $_ }
-			if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_ }
+			if (/^DAEMON_TIME_SPACE/) { s/^DAEMON_TIME_SPACE=//gi; $when_space = $_; $backup_daemon = 1 }
 			if (/^CD_WITH_INSTALL_BOOT/) { $cd_with_install_boot = 1 }
 			if (/^CD_DEVICE/)      { s/^CD_DEVICE=//gi; $cd_device = $_ }
 			if (/^HOST_NAME/)      { s/^HOST_NAME=//gi; $host_name = $_ } 
@@ -849,7 +860,7 @@ sub ftp_client() {
 		$ftp->put($_, undef, undef);
 		$interactive and progress($pbar, $plabel, 0.5, $_);
 		$interactive and $pbar->set_text($_);
-		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progress"));
+		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progess"));
     }
     $ftp->quit; 
     return 0;
@@ -922,7 +933,7 @@ sub do_expect {
 		
 		my $exp = Expect->spawn($exp_command) or $in->ask_warn('', N("ERROR: Cannot spawn %s.", $exp_command));
 
-		$interactive and progress($pbar3, $plabel3, 1/@send_files, N("Total progress"));
+		$interactive and progress($pbar3, $plabel3, 1/@send_files, N("Total progess"));
 		$interactive and $stext->set_text($_);
 	
 		#- run scp, look for some common errors and try to track successful progress for GUI
@@ -978,7 +989,7 @@ sub ssh_client() {
 		close TMP;
 		$log_buff .= "\n";
 		$interactive and progress($pbar, $plabel, 0.5, "Done...");
-		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progress"));
+		$interactive and progress($pbar3, $plabel3, 1/@file_list_to_send_by_ftp, N("Total progess"));
     }
     return 0;
 }
@@ -2396,7 +2407,11 @@ sub advanced_where_hd {
 				# seems to be the easiest way to avoid the widgets fighting over values
 				# and getting grabage in $max_value
 				destroy_widget();
-				advanced_where_hd();
+				if ($previous_function) {
+					advanced_where_hd(\&$previous_function);
+				} else {
+					advanced_where_hd();
+				}
 			}
 		});
     if ($previous_function) { 
@@ -2464,29 +2479,50 @@ sub advanced_where() {
     $up_box->show_all;
 }
 
-#- 7/7/2002 - S.Benedict reworked when - drop all the checkboxes and use a list
-#- chances that we want to do backups via multiple media in cron are slim
 sub advanced_when() {
     my $box_when;
-#   $daemon_media = '';
+	my $allow_custom = $backup_daemon && $custom_cron; 
     my $combo_when_space = new Gtk2::OptionMenu();
     my %trans = (N("hourly") => 'hourly',
 		 N("daily") => 'daily',
 		 N("weekly") => 'weekly',
-		 N("monthly") => 'monthly');
+		 N("monthly") => 'monthly',
+		 N("custom") => 'custom');
     my %trans2 = ('hourly' => N("hourly"),
 		  'daily' => N("daily"),
 		  'weekly' => N("weekly"),
-		  'monthly' => N("monthly"));
-    $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"));    
+		  'monthly' => N("monthly"),
+		  'custom' => N("custom"));
+    $combo_when_space->set_popdown_strings(N("hourly"), N("daily"), N("weekly"), N("monthly"), N("custom"));    
+	set_help_tip($combo_when_space, 'when_space');
 
+	#- custom setup - let user specify month, day of month, day of week, hour, minute
+	my $combo_month_when = new Gtk2::OptionMenu();
+	$combo_month_when->set_popdown_strings("*", N("January"), N("February"), N("March"),
+		N("April"), N("May"), N("June"), N("July"), N("August"), N("September"),
+		N("October"), N("November"), N("December"));
+	my $combo_day_when = new Gtk2::OptionMenu();
+	$combo_day_when->set_popdown_strings("*", (1..31));
+	my $combo_weekday_when = new Gtk2::OptionMenu();
+	$combo_weekday_when->set_popdown_strings("*", N("Sunday"), N("Monday"), N("Tuesday"), 
+		N("Wednesday"), N("Thursday"), N("Friday"), N("Saturday"));
+	my $combo_hour_when = new Gtk2::OptionMenu();
+	$combo_hour_when->set_popdown_strings("*", (0..23));
+	my $combo_minute_when = new Gtk2::OptionMenu();
+	$combo_minute_when->set_popdown_strings("*", (0..59));
+	
+	my $entry_crontab = new Gtk2::Entry();
+	gtkset_editable($entry_crontab, 0);
+	
+#	my $button_apply = new Gtk2::Button(N("Apply"));
+	
 	#- drop down list of possible media - default to config value
     my $entry_media_type = new Gtk2::OptionMenu();
     $entry_media_type->set_popdown_strings(@media_types, @net_methods);
 	$entry_media_type->entry->set_text($daemon_media);
 	
     gtkpack($advanced_box,
-		$box_when = gtkpack_(new Gtk2::VBox(0, 15),
+		$box_when = gtkpack_(new Gtk2::VBox(0, 10),
 			0, gtkpack_(new Gtk2::HBox(0,10),
 				1, new Gtk2::HBox(0,10),
 				1, gtkcreate_img("ic82-when-40"),
@@ -2495,21 +2531,52 @@ sub advanced_when() {
 			),
 			0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the time \ninterval between each backup")),  $backup_daemon),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the time interval between each backup")),  $backup_daemon),
 				1, new Gtk2::HBox(0,10),
 				0, gtkset_sensitive($combo_when_space, $backup_daemon),
 			),
-			0, new Gtk2::HBox(0,10),
+			0, new Gtk2::HSeparator,
 			0, gtkpack_(new Gtk2::HBox(0,10),
-				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the\nmedia for backup.")), $backup_daemon),
+				0, gtkset_sensitive(new Gtk2::Label(N("Custom setup/crontab entry:")), $allow_custom),
+				1, gtkset_sensitive($entry_crontab, $allow_custom),
+			),
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					0, gtkset_sensitive(new Gtk2::Label(N("Minute")), $allow_custom),
+					0, gtkset_sensitive($combo_minute_when, $allow_custom),
+				),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					0, gtkset_sensitive(new Gtk2::Label(N("Hour")), $allow_custom),
+					0, gtkset_sensitive($combo_hour_when, $allow_custom),
+				),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					0, gtkset_sensitive(new Gtk2::Label(N("Day")), $allow_custom),
+					0, gtkset_sensitive($combo_day_when, $allow_custom),
+				),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					0, gtkset_sensitive(new Gtk2::Label(N("Month")), $allow_custom),			
+					0, gtkset_sensitive($combo_month_when, $allow_custom),
+				),
+				1, gtkpack_(new Gtk2::VBox(0,10),
+					0, gtkset_sensitive(new Gtk2::Label(N("Weekday")), $allow_custom),
+					0, gtkset_sensitive($combo_weekday_when, $allow_custom),
+				),
+#				1,gtkpack_(new Gtk2::VBox(0,10),
+#					0, new Gtk2::HBox(0,10),
+#					0, gtkset_sensitive($button_apply, $allow_custom),	
+#				),
+			),
+			0, new Gtk2::HSeparator,
+			0, gtkpack_(new Gtk2::HBox(0,10),
+				0, gtkset_sensitive(new Gtk2::Label(N("Please choose the media for backup.")), $backup_daemon),
 				1, new Gtk2::HBox(0,10),
 				0, gtkpack_(new Gtk2::VBox(0,10),
 					0, gtkset_sensitive($entry_media_type, $backup_daemon),
 				),
 			),
 			0, new Gtk2::HSeparator,
-			1, gtkset_sensitive(new Gtk2::Label(N("Please be sure that the cron daemon is included in your services. 
-\nNote that currently all 'net' media also use the hard drive.")),  $backup_daemon),
+			0, gtkset_sensitive(new Gtk2::Label(N("Please be sure that the cron daemon is included in your services.")), $backup_daemon), 
+			0, gtkset_sensitive(new Gtk2::Label(N("Note that currently all 'net' media also use the hard drive.")),  $backup_daemon),
 		),
 	);
 
@@ -2519,7 +2586,25 @@ sub advanced_when() {
 		advanced_when();
     });
     $combo_when_space->entry->set_text($trans2{$when_space});
-    $combo_when_space->entry->signal_connect('changed', sub { $when_space = $trans{$combo_when_space->entry->get_text} });
+    $combo_when_space->entry->signal_connect('changed', sub { 
+		$when_space = $trans{$combo_when_space->entry->get_text}; 
+		$custom_cron = $when_space eq "custom" ? 1 : 0;
+		destroy_widget();
+		advanced_when();		
+	});
+	if ($custom_cron) {
+		my $exec_string = "/export USER=root; usr/sbin/drakbackup --daemon > /dev/null 2>&1";
+		$entry_crontab->set_text("$time_string $exec_string")
+	}
+	
+	$combo_month_when->entry->signal_connect('changed', sub {
+#		my @time_list = split($time_string);
+		
+		$time_string = join(" ", $combo_month_when->get_history, "* * * *");
+		destroy_widget();
+		advanced_when();				
+	});
+	
 	$entry_media_type->entry->signal_connect('changed', sub { 
 		$daemon_media = $entry_media_type->entry->get_text;
 	});
