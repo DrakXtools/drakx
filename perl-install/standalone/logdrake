@@ -212,7 +212,15 @@ gtkadd($window,
 					 createScrolledWindow($log_text)
 					)) : (1, $log_text),
 		if_(!$::isExplain, 0, gtkadd (gtkset_border_width(gtkset_layout(new Gtk::HButtonBox,-end), 5),
-			   if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => \&alert_config)),
+					      if_ (!$::isFile, gtksignal_connect(new Gtk::Button (_("Mail/SMS alert")), clicked => sub {eval {alert_config()};  
+																	if ($@ =~ /wizcancel/) {
+																	        $::Wizard_no_previous = 1;
+																		$::Wizard_no_cancel = 1;
+																		#$::Wizard_finished = 1;
+#																	        undef $::isWizard;
+																		$::WizardWindow->destroy if defined $::WizardWindow;
+																		undef $::WizardWindow;
+}; })),
 			   gtksignal_connect(new Gtk::Button (_("Save")), clicked => \&save),
 			   gtksignal_connect(new Gtk::Button ($::isEmbedded ? _("Cancel") : _("Quit")), clicked => \&quit)
 			  )
@@ -377,6 +385,7 @@ sub log_output {
 
 sub alert_config {
 
+    $::isWizard = 1;
     $::Wizard_pix_up = "wiz_drakgw.png";    # FIXME
     $::Wizard_title = _("Mail/SMS alert");
 
@@ -391,7 +400,7 @@ my $r= "*** ". chomp_(`date`) . " ***\n";
     $load=3;
 
   begin:
-    $::isWizard = 1;
+    $::Wizard_finished = 0;
     $::Wizard_no_previous = 1;
     $in->ask_okcancel(_("Mail/SMS alert configuration"),
                       _("Welcome to the mail/SMS configuration utility.\n\nHere, you'll be able to set up the alert system.\n"),
@@ -433,6 +442,8 @@ my ($load) = split ' ', first(cat_("/proc/loadavg"));
 $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
     
   step_output:
+    $::Wizard_no_previous = 1;
+    $::Wizard_finished = 1;
     $in->ask_from(_("alert configuration"),
 		  _("Configure the way the system will alert you"),
 		  [
@@ -449,7 +460,10 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 print $r;
 # EOF@;
     print $cron;
-    $in->exit(0);
+    undef $::isWizard; 
+    $::WizardWindow->destroy if defined $::WizardWindow;
+    undef $::WizardWindow;
+
 }
 
 
@@ -516,6 +530,9 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.13  2002/03/05 06:56:27  yduret
+# mail alert: use eval {} to catch wizcancel
+#
 # Revision 1.12  2002/02/20 10:50:37  damien
 # cosmetic change, mcc compliance
 #
