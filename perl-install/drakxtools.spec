@@ -1,12 +1,12 @@
 Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Name:    drakxtools
 Version: 10
-Release: 21mdk
+Release: 22mdk
 Url: http://www.mandrakelinux.com/en/drakx.php3
 Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
-Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.022-1mdk, perl-Glib >= 1.020-3mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi, mandrake-doc-common >= 9.2-5mdk
+Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 1.023-3mdk, perl-Glib >= 1.020-3mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.10, gurpmi, mandrake-doc-common >= 9.2-5mdk
 Requires: foomatic-db-engine
 %ifarch sparc sparc64 %{ix86} x86_64 amd64
 Requires: mkbootdisk
@@ -317,6 +317,48 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 %config(noreplace) %_sysconfdir/logrotate.d/drakxtools-http
 
 %changelog
+* Thu Mar 11 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-22mdk
+- fix imm & ppa managment on kernel 2.6 (pixel)
+- no entry in fstab for zips (now cleanly done by hotplug) (pixel)
+- drakbackup (stew):
+  o fix crash on first wizard run (#8654)
+  o deal with mixture of formats on restore
+  o do not save host passwd when user requests not to (#8700)
+  o fix issue with first incremental pass not using base as
+    comparison
+  o support for plain tar (#8676)
+- drakconnect wizard:
+  o start to handle bewan ADSL modems
+  o port old ISDN wizard upon new wizard layer
+- drakfirewall, drakgw: network card name rather than just ethX in device list
+  (florin and me)
+- drakgw (florin):
+  o add some tests for the REDIRECT squid rules
+  o fix previous button on first step (anthill #386)
+  o fix "sharing already configured" #8669 (florin)
+  o fix the proxy REDIRECT shorewall rule,
+  o fix the disable, enable functions
+  o fix the shorewall interfaces configuration
+  o really enable the proxy squid
+- draksplash: make it works again
+- drakTermServ (stew):
+  o add gdm user if needed
+  o autologin warning
+  o copy server X keyboard config to client
+  o default kernel version
+  o default thin client setup
+  o do not destroy "fat" client inittab
+  o use std banner
+- drakgw: fix previous button on first step (anthill #387)
+- harddrake2: fix ISDN cards detection
+- keyboardrake: list jp106 keyboard too (pablo)
+- logdrake: searching speedup (#8412)
+- printerdrake (till):
+  o let URIs listed by "lpinfo -v" be shown in the dialog for entering
+    a URI manually
+  o make first dialog be somewhat clearer
+- XFdrake: catch exception (#8726) (pixel)
+
 * Wed Mar  3 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 10-21mdk
 - drakconnect: add australia in adsl providers db (#5056)
 - support cryptoloop and aes when using encryption on kernel 2.6 (pixel)
