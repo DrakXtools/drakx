@@ -290,7 +290,7 @@ our @tree =
       icon => "ide_hd.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /STORAGE_(IDE|OTHER)/ || $_->{driver} eq '3w-xxxx' } @devices) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
@@ -299,7 +299,7 @@ our @tree =
       icon => "ide_hd.png",
       configurator => "",
       detector => sub { f(grep { $_->{driver} =~ /^sata/ } @devices) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
@@ -330,7 +330,7 @@ our @tree =
       icon => "scsi.png",
       configurator => "",
       detector => sub { f(grep { $_->{media_type} =~ /STORAGE_SCSI/ || $_->{driver} eq 'megaraid' } @devices) },
-      checked_on_boot => 0,
+      checked_on_boot => 1,
      },
 
      {
