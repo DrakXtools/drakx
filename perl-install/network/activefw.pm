@@ -55,103 +55,64 @@ sub dispatch {
     $o->{bus}{connection}->dispatch;
 }
 
-sub get_mode {
-    my ($o) = @_;
-    my $mode;
+sub call_method {
+    my ($o, $method, @args) = @_;
+    my @ret;
     eval {
-        $mode = $o->{daemon}->GetMode;
+        @ret = $o->{daemon}->$method(@args);
     };
     if ($@) {
-        print "(GetMode) exception: $@\n";
+        print "($method) exception: $@\n";
         $o->dispatch;
         return;
     }
-    $mode;
+    @ret;
+}
+
+sub get_mode {
+    my ($o) = @_;
+    $o->call_method('GetMode');
 }
 
 sub blacklist {
     my ($o, $seq, $blacklist) = @_;
-    eval {
-        $o->{daemon}->Blacklist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
-                                Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
-    };
-    if ($@) {
-        print "(Blacklist) exception: $@\n";
-        $o->dispatch;
-    }
+    $o->call_method('Blacklist',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $seq),
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $blacklist));
 }
 
 sub unblacklist {
     my ($o, $addr) = @_;
-    eval {
-        $o->{daemon}->UnBlacklist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
-    };
-    if ($@) {
-        print "(UnBlacklist) exception: $@\n";
-        $o->dispatch;
-    }
+    $o->call_method('UnBlacklist',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
 
 sub whitelist {
     my ($o, $addr) = @_;
-    eval {
-        $o->{daemon}->Whitelist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
-    };
-    if ($@) {
-        print "(Whitelist) exception: $@\n";
-        $o->dispatch;
-    }
+    $o->call_method('Whitelist',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
 
 sub unwhitelist {
     my ($o, $addr) = @_;
-    eval {
-        $o->{daemon}->UnWhitelist(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
-    };
-    if ($@) {
-        print "(UnWhitelist) exception: $@\n";
-        $o->dispatch;
-    }
+    $o->call_method('UnWhitelist',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $addr));
 }
 
 sub set_interactive {
     my ($o, $mode) = @_;
-    print "setting new IDS mode: $mode\n";
-    eval {
-        $o->{daemon}->SetMode(Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
-    };
-    if ($@) {
-        print "(SetMode) exception: $@\n";
-        $o->dispatch;
-    }
+    $o->call_method('SetMode',
+                    Net::DBus::Binding::Value->new(&Net::DBus::Binding::Message::TYPE_UINT32, $mode));
 }
 
 sub get_blacklist {
     my ($o) = @_;
-    my @blacklist;
-    eval {
-        @blacklist = $o->{daemon}->GetBlacklist;
-    };
-    if ($@) {
-        print "(GetBlacklist) exception: $@\n";
-        $o->dispatch;
-        return;
-    }
-    @blacklist;
+    $o->call_method('GetBlacklist');
 }
 
 sub get_whitelist {
     my ($o) = @_;
-    my @whitelist;
-    eval {
-        @whitelist = $o->{daemon}->GetWhitelist;
-    };
-    if ($@) {
-        print "(GetWhitelist) exception: $@\n";
-        $o->dispatch;
-        return;
-    }
-    @whitelist;
+    $o->call_method('GetWhitelist');
 }
 
 sub format_date {
