@@ -191,7 +191,7 @@ I'll try to go on blanking bad partitions")) unless $o->{partitioning}{readonly}
 
     $o->ask_warn('', 
 _("DiskDrake failed to read correctly the partition table.
-Continue at your own risk!")) if !$ok2 && $ok;
+Continue at your own risk!")) if !$ok2 && $ok && !$o->{partitioning}{readonly};
 
     $ok2;
 }

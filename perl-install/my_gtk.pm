@@ -2,7 +2,7 @@ package my_gtk;
 
 use diagnostics;
 use strict;
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border);
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $border @grabbed);
 
 @ISA = qw(Exporter);
 %EXPORT_TAGS = (
@@ -18,7 +18,6 @@ use c;
 use common qw(:common :functional);
 
 my $forgetTime = 1000; #- in milli-seconds
-my @grabbed;
 $border = 5;
 
 1;
@@ -33,6 +32,10 @@ sub new {
     my $o = bless { %opts }, $type;
     $o->_create_window($title);
     push @interactive::objects, $o unless $opts{no_interactive_objects};
+
+    top(@grabbed)->grab_remove if @grabbed;
+    push(@grabbed, $o->{rwindow}), $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
+
     $o;
 }
 sub main($;$) {
@@ -50,8 +53,6 @@ sub show($) {
     my ($o) = @_;
     $o->{window}->show;
     $o->{rwindow}->show;
-    top(@grabbed)->grab_remove if @grabbed;
-    push(@grabbed, $o->{rwindow}), $o->{rwindow}->grab_add if $my_gtk::grab || $o->{grab};
 }
 sub destroy($) {
     my ($o) = @_;

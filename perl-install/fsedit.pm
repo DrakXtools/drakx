@@ -367,7 +367,7 @@ sub verifyHds {
     if ($readonly && !$ok) {
 	log::l("using /proc/partitions as diskdrake failed :(");
 	foreach my $hd (@$hds) {
-	    $hd->{primary} = [ grep { $hd->{device} eq $_->{rootDevice} } @parts ];
+	    $hd->{primary} = { normal => [ grep { $hd->{device} eq $_->{rootDevice} } @parts ] };
 	    delete $hd->{extended};
 	}
     }
