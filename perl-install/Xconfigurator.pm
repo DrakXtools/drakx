@@ -133,7 +133,7 @@ sub readMonitorsDB {
 
 sub keepOnlyLegalModes {
     my ($card, $monitor) = @_;
-    my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 99999));
+    my $mem = 1024 * ($card->{memory} || ($card->{server} eq 'FBDev' ? 2048 : 32768)); #- limit to 2048x1536x64
     my $hsync = max(split(/[,-]/, $monitor->{hsyncrange}));
 
     while (my ($depth, $res) = each %{$card->{depth}}) {
@@ -836,7 +836,13 @@ sub resolutionsConfiguration {
 
     $auto or ($depth, $wres) = chooseResolutions($card, $depth, $wres) or return;
 
-    unless ($wres) {
+    #- if nothing has been found for wres,
+    #- try to find if memory used by mode found match the memory available
+    #- card, if this is the case for a relatively low resolution ( < 1024 ),
+    #- there could be a problem.
+    #- memory in KB is approximated by $wres*$dpeth/14 which is little less
+    #- than memory really used, (correct factor is 13.65333 for w/h ratio of 1.33333).
+    if (!$wres || $auto && ($wres < 1024 && ($card->{memory} / ($wres * $depth / 14)) > 2)) {
 	delete $card->{depth};
 	return resolutionsConfiguration($o);
     }
