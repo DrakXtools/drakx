@@ -108,7 +108,7 @@ LDFLAGS_STAGE1 = -static
 endif
 
 
-BINS = init stage1-full # stage1-cdrom stage1-network
+BINS = init stage1-full stage1-cdrom stage1-network
 
 
 #ifeq (i386, $(ARCH))
@@ -142,23 +142,23 @@ init: $(INITOBJS)
 	$(CC) $(LDFLAGS_INIT) -o $@ $(INITOBJS)
 	strip -s $@
 
-stage1-cdrom: dirs $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
+stage1-cdrom: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-CDROM) $(STAGE1OBJS_UTILS)
 	strip -s $@
 
-stage1-network: dirs $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS)
+stage1-network: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-NETWORK) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
 	strip -s $@
 
-stage1-disk: dirs $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
+stage1-disk: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-DISK) $(STAGE1OBJS_UTILS)
 	strip -s $@
 
-stage1-pcmcia: dirs $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
+stage1-pcmcia: $(STAGE1_OWN_LIBS) $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS-PCMIA) $(STAGE1OBJS_UTILS)
 	strip -s $@
 
-stage1-full: dirs $(STAGE1OBJS) $(STAGE1OBJS_UTILS)
+stage1-full: $(STAGE1_OWN_LIBS) $(STAGE1OBJS) $(STAGE1OBJS_UTILS)
 	$(CC) $(LDFLAGS_STAGE1) -o $@ $(STAGE1OBJS) $(STAGE1OBJS_UTILS) $(STAGE1_NETWORK_LIBS)
 	strip -s $@
 

@@ -43,6 +43,8 @@ static enum return_type try_with_device(char *dev_name)
 
 	if (my_mount(device_fullname, "/tmp/image", "iso9660") == -1) {
 		enum return_type results;
+		unset_param(MODE_AUTOMATIC); /* we are in a fallback mode */
+
 		results = ask_yes_no("I can't access a CDROM disc in your drive.\nRetry?");
 		if (results == RETURN_OK)
 			return try_with_device(dev_name);

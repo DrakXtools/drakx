@@ -46,13 +46,13 @@ rm -rf modules ; install -d modules
     perl -pi -e 's/((plip|ppa|imm): parport)/$1 parport_pc/' modules.dep
     ls *.o               | packdrake -b9s modules.cz 400000
     ls *.o               | cpio --quiet -H crc -o | bzip2 -9> modules.cpio.bz2
-    ls $NETWORK_MODULES  | cpio --quiet -H crc -o | gzip -9 > network_modules.cgz
-    ls $CDROM_MODULES    | cpio --quiet -H crc -o | gzip -9 > cdrom_modules.cgz	
-    ls $HD_MODULES       | cpio --quiet -H crc -o | gzip -9 > hd_modules.cgz     
-    ls $HDREISER_MODULES| cpio --quiet -H crc -o | gzip -9 > hdreiser_modules.cgz
-    ls $PCMCIA_MODULES   | cpio --quiet -H crc -o | gzip -9 > pcmcia_modules.cgz
-    ls $BIG_MODULES      | cpio --quiet -H crc -o | gzip -9 > other_modules.cgz
-    ls $ALL_MODULES      | cpio --quiet -H crc -o | gzip -9 > all_modules.cgz
+    ../mdk-stage1/mar/mar -c network_modules.mar  $NETWORK_MODULES
+    ../mdk-stage1/mar/mar -c cdrom_modules.mar    $CDROM_MODULES
+    ../mdk-stage1/mar/mar -c hd_modules.mar       $HD_MODULES
+    ../mdk-stage1/mar/mar -c hdreiser_modules.mar $HDREISER_MODULES
+    ../mdk-stage1/mar/mar -c pcmcia_modules.mar   $PCMCIA_MODULES
+    ../mdk-stage1/mar/mar -c other_modules.mar    $BIG_MODULES
+    ../mdk-stage1/mar/mar -c all_modules.mar      $ALL_MODULES
 [ "$ARCH" == "i386" ] && {
     cp $PCMCIA_INSTALLMODULES ../install_pcmcia_modules/
 }

@@ -9,7 +9,7 @@ my $corporate = $ENV{CORPORATE} && " corporate"; #- use this for building a corp
 
 ($img, $type) = @ARGV;
 
-$instdir = "install";
+$instdir = "mdk-stage1";
 $mnt = "/tmp/drakx_mnt";
 $mke2fs = "/sbin/mke2fs -q -m 0 -F -s 1";
 
@@ -25,24 +25,24 @@ _ "$sudo mkdir $mnt" unless -e $mnt;
 _ "$sudo mkdir ${mnt}2" unless -e "${mnt}2";
 
 $install = $ {{
-    all => "full-install",
-    other => "full-install",
-    blank => "full-install",
-    live => "full-install",
-    tftp => "full-install",
-    tftprd => "full-install",
-    pcmcia => "full-install",
-    network => "install",
-    cdrom => "local-install",
-    hd => "local-install",
-    hdreiser => "local-install",
-    live64 => "full-install",
-    tftp64 => "full-install",
-    tftprd64 => "full-install",
-    pcmcia64 => "full-install",
-    network64 => "install",
-    cdrom64 => "local-install",
-    hd64 => "local-install",
+    all => "stage1-full",
+    other => "stage1-full",
+    blank => "stage1-full",
+    live => "stage1-full",
+    tftp => "stage1-full",
+    tftprd => "stage1-full",
+    pcmcia => "stage1-full",
+    network => "stage1-network",
+    cdrom => "stage1-cdrom",
+    hd => "stage1-disk",
+    hdreiser => "stage1-disk",
+    live64 => "stage1-full",
+    tftp64 => "stage1-full",
+    tftprd64 => "stage1-full",
+    pcmcia64 => "stage1-full",
+    network64 => "stage1-network",
+    cdrom64 => "stage1-cdrom",
+    hd64 => "stage1-disk",
 }}{$type} or die;
 
 $img =~ /rdz$/ ? initrd($mnt, $img) : $::{"boot_img_$arch"}->($mnt, $img);
@@ -53,7 +53,7 @@ sub initrd {
     my ($mnt, $img) = @_;
     my ($ltype, $I) = $type =~ /(.*?)(64)/; $ltype ||= $type;
     my $tmp = "$ENV{HOME}/tmp/initrd";
-    my $tar = "$instdir/install1.tar.bz2";
+    my $tar = "$instdir/stage1-data/stage1.tar.bz2";
 
     __ "$sudo umount $tmp $mnt 2>/dev/null";
     _ "dd if=/dev/zero of=$tmp bs=1k count=" . ($type eq "all" ? 4000 : 2000);
@@ -61,18 +61,18 @@ sub initrd {
     _ "$sudo mount -t ext2 $tmp $mnt -o loop";
 
     _ "$sudo tar xyC $mnt -f $tar";
-    install_s("$instdir/installinit/init", "$mnt/sbin");
-    install_s("$instdir/$install", "$mnt/sbin/install");
+    install_s("$instdir/init", "$mnt/sbin");
+    install_s("$instdir/$install", "$mnt/sbin/stage1");
 
     my $ftype = $type =~ /^(all)$/ ? "pcmcia" : $type;
-    if ($ftype eq "pcmcia") {
-	unlink "$mnt/sbin/sh";
-	_ "$sudo cp -a tools/$arch/sh $mnt/sbin";
-	_ "$sudo cp -a /etc/pcmcia $mnt/etc";
-	_ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
-    }
-    _ "$sudo cp -f install_${ftype}_modules/* $mnt/modules/" if -d "install_${ftype}_modules";
-    _ "$sudo cp -f modules$I/${ltype}_modules.cgz $mnt/modules/modules$I.cgz" if $type !~ /blank/;
+#    if ($ftype eq "pcmcia") {
+#	 unlink "$mnt/sbin/sh";
+#	 _ "$sudo cp -a tools/$arch/sh $mnt/sbin";
+#	 _ "$sudo cp -a /etc/pcmcia $mnt/etc";
+#	 _ "$sudo patch -p0 -d $mnt/etc < $instdir/pcmcia_config.patch";
+#    }
+#    _ "$sudo cp -f install_${ftype}_modules/* $mnt/modules/" if -d "install_${ftype}_modules";
+    _ "$sudo cp -f modules$I/${ltype}_modules.mar $mnt/modules/modules$I.mar" if $type !~ /blank/;
     _ "$sudo cp -f modules$I/modules.dep $mnt/modules/";
     _ "$sudo umount $mnt";
 
@@ -89,11 +89,11 @@ sub boot_img_i386 {
 
     __ "$sudo umount $mnt 2>/dev/null";
     if ($type eq "hd") {
-	_ "bunzip2 -c $instdir/installinit/msgboot.img.bz2 > $img";
+	_ "bunzip2 -c $instdir/init-data/msgboot.img.bz2 > $img";
     } elsif ($type eq "all") {
-	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo-2880.img.bz2 > $img";
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo-2880.img.bz2 > $img";
     } else {
-	_ "bunzip2 -c $instdir/installinit/msgboot-graphicallogo.img.bz2 > $img";
+	_ "bunzip2 -c $instdir/init-data/msgboot-graphicallogo.img.bz2 > $img";
     }
     _ "$sudo mount -t msdos -o umask=0 $img $mnt -o loop";
     _ "cat vmlinuz > $mnt/vmlinuz" if $type !~ /blank/;
@@ -110,40 +110,40 @@ F1 help.msg
 F2 boot.msg
 label linux
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=788
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=788
 label vgalo
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=785
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=785
 label vgahi
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype vga=791
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga=791
 label vga16
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype vga16
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype vga16
 label text
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype text
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype text
 label patch
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype patch vga=788
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype patch vga=788
 label expert
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype expert vga=788
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype expert vga=788
 label rescue
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype rescue rw
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype rescue rw
 label lnx4win
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype lnx4win vga=788
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype lnx4win vga=788
 label preinst
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=all.rdz cdrom rescue oem rw
+  append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
 label oem
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=all.rdz cdrom rescue oem rw
+  append ramdisk_size=32000 initrd=all.rdz automatic=method:cdrom rescue oem rw
 label auto
   kernel vmlinuz
-  append ramdisk_size=32000 initrd=$type.rdz $ftype auto_install=Mandrake/base/auto_inst.cfg.pl
+  append ramdisk_size=32000 initrd=$type.rdz automatic=method:$ftype auto_install=Mandrake/base/auto_inst.cfg.pl
 label all
   kernel vmlinuz
   append ramdisk_size=32000 initrd=$type.rdz pcmcia vga=788

@@ -1,9 +1,9 @@
 ARCH := $(patsubst i%86,i386,$(shell uname -m))
 ARCH := $(patsubst sparc%,sparc,$(ARCH))
 
-RELEASE_BOOT_IMG = hd.img hdreiser.img cdrom.img network.img
+RELEASE_BOOT_IMG = cdrom.img network.img # hd.img hdreiser.img 
 ifeq (i386,$(ARCH))
-RELEASE_BOOT_IMG += pcmcia.img blank.img all.img other.img
+RELEASE_BOOT_IMG += all.img blank.img other.img # pcmcia.img
 endif
 ifeq (sparc,$(ARCH))
 BOOT_IMG = live.img tftp.img tftprd.img live64.img tftp64.img tftprd64.img
@@ -12,8 +12,8 @@ endif
 BOOT_IMG += $(RELEASE_BOOT_IMG)
 
 BOOT_RDZ = $(BOOT_IMG:%.img=%.rdz)
-BINS = install/install install/full-install install/local-install install/installinit/init
-DIRS = tools install install/installinit perl-install
+BINS = mdk-stage1/init mdk-stage1/stage1-full mdk-stage1/stage1-cdrom mdk-stage1/stage1-network
+DIRS = tools mdk-stage1
 
 ROOTDEST = /export
 UPLOAD_DEST_ = ~/cooker
@@ -39,12 +39,15 @@ build: $(BOOT_IMG)
 autoboot:
 ifeq (i386,$(ARCH))
 	install -d $(ROOTDEST)/boot
-	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
+#	cp -f vmlinuz {hd,cdrom,pcmcia,network,all,other}.rdz $(ROOTDEST)/boot
+	cp -f vmlinuz {cdrom,network,all,other}.rdz $(ROOTDEST)/boot
 	/usr/sbin/rdev -v $(ROOTDEST)/boot/vmlinuz 788
 endif
 
 dirs:
-	for i in $(DIRS); do make -C $$i; done
+	@for n in . $(DIRS); do \
+		[ "$$n" = "." ] || make -C $$n ;\
+	done
 
 rescue: modules
 	make -C $@
@@ -71,7 +74,6 @@ $(BOOT_IMG:%=%f): %f: %
 
 clean:
 	rm -rf $(BOOT_IMG) $(BOOT_RDZ) $(BINS) modules modules64 install_pcmcia_modules vmlinu* System*.map
-	rm -rf install/*/sbin/install install/*/sbin/init
 	for i in $(DIRS) rescue; do make -C $$i clean; done
 	find . -name "*~" -o -name ".#*" | xargs rm -f
 
@@ -92,7 +94,7 @@ upload: clean install
 
 	perl -pe 'exit if /  DrakX </' perl-install/ChangeLog | tools/mailchangelog
 	tools/addchangelog perl-install/ChangeLog 'snapshot uploaded'
-#	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
+	cvs commit perl-install/ChangeLog # otherwise i always have a conflict :-(
 
 upload_sparc:
 	touch /tmp/mdkinst_done
