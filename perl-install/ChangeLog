@@ -1,3 +1,389 @@
+2004/08/27  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: melo
+
+2004/08/27  Laurent Montel  <lmontel at mandrakesoft.com>
+
+	* share/rpmsrate: Don't install kdeutils-klaptop all the time
+	just when we detect a laptop
+
+2004/08/27  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install2.pm: read modules configuration file from stage1 as modules_conf
+	file, but
+	get an object of the proper type by using modules::any_conf::vnew
+
+2004/08/27  Olivier Thauvin  <thauvin at aerov.jussieu.fr>
+
+	* Xconfig/xfree.pm: 
+	  - add dell D800 specific modeline and resolution
+
+2004/08/27  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/nb.po, share/po/cs.po: updated Czech and BokmÃ¥l po files
+
+2004/08/27  Rafael Garcia-Suarez <rgarciasuarez at mandrakesoft.com>
+
+	* install_any.pm: Support for multiple supplementary media
+
+	* share/rpmsrate: Remove duplicated entries with complex flags from the
+	rpmsrate
+
+2004/08/27  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* standalone/drakboot (lilo_choice) fix canceling first step
+
+	* detect_devices.pm (matching_driver) introduce it in order to factorize
+	some tests
+	add __regexp suffix to matching_desc() and  matching_driver()
+	(getModem) report modems supported by ALSA too
+
+	* standalone/localedrake: do not complain on wizcancel
+	no need to check first step return value since we're covered by both
+	Wizard_no_previous and die('wizcancel')
+	remove useless label "the_end"
+	inline select_language()
+	make it looks and behave like a wizard for GUI sanity (previously
+	cancel on second step resulted in step backward rather than exit...)
+
+	* share/rpmsrate: sort a few entries
+
+	* standalone/logdrake (insert_text_n_scroll) fix displaying only last
+	parsed file
+
+	* lang.pm: space cleanup for lord perl_checker
+	(IM2packages)
+	  - alter prototype: directly take a locale hash
+	  - get lang from locale hash
+	  - use it to install needed packages depending on locale (instead of
+	only generic ones depending on IM)
+
+	* Xconfig/card.pm, pkgs.pm, common.pm, install_steps.pm, bootloader.pm,
+	install_any.pm: add __regexp suffix to matching_desc() and
+	matching_driver()
+
+	* drakxtools.spec: 10.1-0.15mdk
+
+2004/08/26  Arkadiusz Lipiec  <alipiec at elka.pw.edu.pl>
+
+	* share/po/pl.po: Updated 95%
+	Updated partially
+
+2004/08/26  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: Finish to add french translation from Marketing team
+	(DrakX ads)
+
+2004/08/26  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* tools/ddcprobe/vbe.c, tools/ddcprobe/Makefile: Some arrangements for
+	IA-64
+	PowerPC arrangements from Christiaan Welvaart
+
+	* tools/ddcprobe/of.c: PowerPC arrangements from Christiaan Welvaart
+
+	* tools/ddcprobe/ddcxinfos.c: Some arrangements for IA-64
+
+2004/08/26  José JORGE <jjorge at free.fr>
+
+	* share/po/pt.po: josÃ© melo
+
+2004/08/26  Olivier Blin <oblin at mandrakesoft.com>
+
+	* install_steps_gtk.pm: define and use $o->{mouse}{alternate_install} if
+	detected mouse can't be used during install
+
+	* network/netconnect.pm: adsl devices need network restart if they're
+	*not* in the adsl devices list
+
+	* install_steps.pm (doPartitionDisksBefore) umount /sys and /proc/bus/usb
+	in chroot
+
+	* Xconfig/xfree.pm (set_synaptics) quote decimal values so that
+	write_XF86Config doesn't
+	write commas instead of dots
+
+	* mouse.pm: i sux
+	define and use $o->{mouse}{alternate_install} if detected mouse can't be
+	used during install
+	(set_xfree_conf) don't create crappy auxmouse if there is none
+	(detect) do not return unusable synaptics driver at beginning of install
+
+2004/08/26  Pablo Saratxaga  <pablo at mandrakesoft.com>
+
+	* share/po/tg.po, share/po/fa.po, share/po/nb.po, share/po/bn.po,
+	share/po/uz.po, share/po/ru.po, share/po/wa.po, share/po/pt_BR.po,
+	share/po/sl.po, share/po/hi.po, share/po/af.po, share/po/et.po,
+	share/po/pt.po, share/po/vi.po, share/po/fr.po, share/po/nl.po,
+	share/po/it.po, share/po/uk.po, share/po/eu.po, share/po/es.po,
+	share/po/tl.po, share/po/pl.po, share/po/de.po, share/po/fi.po,
+	share/po/cy.po, share/po/da.po, share/po/ca.po, share/po/ar.po,
+	share/po/uz@Latn.po: updated Estonian and Spanish files; retrieved some
+	more old strings
+
+2004/08/26  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: complete 10.1-0.14mdk's changelog
+	add bug reference in 10.1-0.11mdk's changelog
+	10.1-0.9mdk
+
+	* share/po/fr.po: minor update
+	typo fix
+	update
+
+	* share/po/bn.po, share/po/ms.po, share/po/sk.po, share/po/gl.po,
+	share/po/pt_BR.po, share/po/th.po, share/po/et.po, share/po/ja.po,
+	share/po/hr.po, share/po/be.po, share/po/ko.po, share/po/DrakX.pot,
+	share/po/sv.po, share/po/sr.po, share/po/pl.po, share/po/fi.po,
+	share/po/he.po, share/po/ca.po, share/po/da.po, share/po/ar.po,
+	share/po/ltg.po, share/po/nb.po, share/po/ky.po, share/po/uz.po,
+	share/po/ro.po, share/advertising/18.pl, share/po/zh_TW.po,
+	share/po/zh_CN.po, share/po/sr@Latn.po, share/po/sq.po, share/po/it.po,
+	share/po/eu.po, share/po/es.po, share/po/lv.po, share/po/hu.po,
+	share/po/fa.po, share/po/id.po, share/po/ru.po, share/po/br.po,
+	share/po/sl.po, share/po/nn.po, share/po/tr.po, share/po/mt.po,
+	share/po/ga.po, share/po/mn.po, share/po/uk.po, share/po/am.po,
+	share/po/lt.po, share/po/cy.po, share/po/tg.po, share/po/bs.po,
+	share/po/fur.po, share/po/mk.po, share/po/wa.po, share/po/is.po,
+	share/po/hi.po, share/po/af.po, share/po/az.po, share/po/pt.po,
+	share/po/vi.po, share/po/ta.po, share/po/nl.po, share/po/de.po,
+	share/po/tl.po, share/po/eo.po, share/po/el.po, share/po/bg.po,
+	share/po/cs.po, share/po/uz@Latn.po: typo fix
+
+2004/08/25  David Baudens  <baudens at mandrakesoft.com>
+
+	* share/po/fr.po: DrakX ads: begin to add french translations from
+	Marketing team
+
+	* share/advertising/24.png, share/advertising/07.png,
+	share/advertising/26.png, share/advertising/16.png,
+	share/advertising/11.png, share/advertising/02.png,
+	share/advertising/23.png, share/advertising/15.png,
+	share/advertising/03.png, share/advertising/14.png,
+	share/advertising/25.png, share/advertising/19.png,
+	share/advertising/13-a.png, share/advertising/10.png,
+	share/advertising/04.png, share/advertising/27.png,
+	share/advertising/18.png, share/advertising/28.png,
+	share/advertising/13-b.png, share/advertising/22.png,
+	share/advertising/09.png, share/advertising/29.png,
+	share/advertising/30.png, share/advertising/06.png,
+	share/advertising/17.png, share/advertising/05.png,
+	share/advertising/21.png, share/advertising/20.png,
+	share/advertising/08.png, share/advertising/12.png: Images for 10.1
+
+2004/08/25  Funda Wang <fundawang at linux.net.cn>
+
+	* standalone/drakedm: Mandrake -> Mandrakelinux. Mark DM entries as
+	translatable.
+
+2004/08/25  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
+
+	* tools/ddcprobe/vbe.c, tools/ddcprobe/vbe.h: Extensive rewrite and
+	cleanups to use the new int10 interface. Plus add
+	some 64-bit fixes and a last-resort means to get VBE/EDID information
+	from special -BOOT kernel during early boot.
+
+	* Xconfig/monitor.pm: Parse XFree86.log in last resort in case we have not
+	got any valuable
+	information at this stage from ddcxinfos.
+
+	* crypto.pm: Always prefer 64-bit packages for updates on biarch
+	platforms.
+
+	* tools/ddcprobe/ddcxinfos.c: Some cleanups
+	Extensive rewrite and cleanups to use the new int10 interface. Plus add
+	some 64-bit fixes and a last-resort means to get VBE/EDID information
+	from special -BOOT kernel during early boot.
+
+	* share/list.x86_64: i18n stuff at install time, probably make it common
+	with /LIB/
+
+	* tools/ddcprobe/x86emu/include/x86emu.h,
+	tools/ddcprobe/x86emu/include/x86emu/fpu_regs.h,
+	tools/ddcprobe/x86emu/include/x86emu/regs.h,
+	tools/ddcprobe/x86emu/include/x86emu/types.h: Add remaining x86 CPU
+	emulator bits
+
+	* partition_table.pm: add XFS to x86_64 known FS
+
+	* Xconfig/card.pm: handle lib64 drivers on x86-64
+
+	* install_steps_gtk.pm: default to 75dpi in order to get anti-aliased
+	fonts
+
+	* drakxtools.spec: update changelog dates to please rpm + add some
+	highlights to please titi
+	enough amd64 changes merged
+
+	* tools/ddcprobe/x86emu/x86emu/prim_asm.h, tools/ddcprobe/x86emu/sys.c,
+	tools/ddcprobe/x86emu/x86emu/fpu.h, tools/ddcprobe/x86emu/prim_ops.c,
+	tools/ddcprobe/x86emu/ops.c, tools/ddcprobe/x86emu/debug.c,
+	tools/ddcprobe/x86emu/x86emu/x86emui.h,
+	tools/ddcprobe/x86emu/x86emu/decode.h, tools/ddcprobe/x86emu/validate.c,
+	tools/ddcprobe/x86emu/x86emu/prim_ops.h, tools/ddcprobe/x86emu/decode.c,
+	tools/ddcprobe/x86emu/x86emu/debug.h, tools/ddcprobe/x86emu/fpu.c,
+	tools/ddcprobe/x86emu/LICENSE, tools/ddcprobe/x86emu/Makefile,
+	tools/ddcprobe/x86emu/x86emu/ops.h, tools/ddcprobe/x86emu/ops2.c: Add
+	x86 CPU emulator for BIOS int10 emulation on non x86 arches.
+
+	* tools/ddcprobe/minifind.h, tools/ddcprobe/of.c,
+	tools/ddcprobe/minifind.c: Get EDID block from OF (kudzu)
+
+	* c/smp.c: fix smp detection on x86_64
+
+	* Makefile: Handle PCMCIA on x86-64 too. Fix libs glob for live tree.
+	Don't ship with
+	"cdcom" modules archives in netinstallable trees.
+
+	* tools/ddcprobe/int10/vbios.h, tools/ddcprobe/int10/pci.h,
+	tools/ddcprobe/int10/Makefile, tools/ddcprobe/int10/i10_v86.c,
+	tools/ddcprobe/int10/i10_int.c, tools/ddcprobe/int10/i10_vbios.c,
+	tools/ddcprobe/int10/v86bios.h, tools/ddcprobe/int10/emu_vm86.c,
+	tools/ddcprobe/int10/i10_pci.c, tools/ddcprobe/int10/i10_io.c,
+	tools/ddcprobe/int10/vm86_struct.h, tools/ddcprobe/int10/README,
+	tools/ddcprobe/int10/AsmMacros.h: VGA softbootloader for Linux, uses an
+	x86 CPU emulator on non x86 arches.
+
+	* tools/ddcprobe/Makefile: Some cleanups
+	Raw merge from Kudzu for PPC. Christian, can you get something of it?
+	Only use VBE parsing code on x86 and x86_64.
+	Extensive rewrite and cleanups to use the new int10 interface. Plus add
+	some 64-bit fixes and a last-resort means to get VBE/EDID information
+	from special -BOOT kernel during early boot.
+
+	* install_steps.pm: handle nolapic, idle=poll, ide=nodma boot options
+
+2004/08/25  Olivier Blin <oblin at mandrakesoft.com>
+
+	* network/adsl_consts.pm: fix Titi sux hard (add missing comma and spaces,
+	remove spurious
+	nameserver word)
+
+	* network/tools.pm: add missing spaces
+	add get_interface_type to guess interface type
+
+	* standalone/net_applet: avoid grep to grep itself, use perl
+
+	* install_any.pm: set TV flag when a TV card is detected to install
+	appropriate packages
+
+	* any.pm (selectCountry) fix Pixel broke country selection (bug 10938)
+
+	* standalone/service_harddrake: killer feature: restore bootsplash mode
+	don't abort miserably if configurator is code
+	fix typo
+
+	* standalone/drakconnect: use exists
+	(manage) use network::tools::get_interface_type instead of
+	/etc/sysconfig/drakconnect in order to avoid to recognize ppp0 as both
+	modem and adsl (bug 10772)
+
+	* tools/i386/netboot/davicom/stage2, tools/i386/netboot/grub,
+	tools/i386/netboot/via_rhine/pxegrub, tools/i386/netboot/natsemi/nbgrub,
+	tools/i386/netboot/davicom/nbgrub, tools/i386/netboot/cs89x0/stage2,
+	tools/i386/netboot/cs89x0/pxegrub, tools/i386/netboot/via_rhine/stage2,
+	tools/i386/netboot/davicom/pxegrub, tools/i386/netboot/natsemi/stage2,
+	tools/i386/netboot/via_rhine/nbgrub, tools/i386/netboot/davicom/stage1,
+	tools/i386/netboot/cs89x0/nbgrub, tools/i386/netboot/cs89x0/stage1,
+	tools/i386/netboot/via_rhine/stage1, tools/i386/netboot/natsemi/pxegrub,
+	tools/i386/netboot/natsemi/stage1: add new drivers, upgrade to grub-0.95
+
+	* tools/i386/netboot/ni5010/stage1, tools/i386/netboot/tiara/pxegrub,
+	tools/i386/netboot/3c507/pxegrub, tools/i386/netboot/lance/nbgrub,
+	tools/i386/netboot/otulip/nbgrub, tools/i386/netboot/tulip/pxegrub,
+	tools/i386/netboot/ni5210/pxegrub, tools/i386/netboot/sis900/stage1,
+	tools/i386/netboot/otulip/stage1, tools/i386/netboot/ni6510/stage2,
+	tools/i386/netboot/eepro100/stage2, tools/i386/netboot/3c503/stage1,
+	tools/i386/netboot/w89c840/stage1, tools/i386/netboot/ni5010/nbgrub,
+	tools/i386/netboot/smc9000/stage2, tools/i386/netboot/ns8390/pxegrub,
+	tools/i386/netboot/lance/stage1, tools/i386/netboot/tulip/stage2,
+	tools/i386/netboot/ni5210/stage1, tools/i386/netboot/rtl8139/stage2,
+	tools/i386/netboot/ne/stage1, tools/i386/netboot/rtl8139/nbgrub,
+	tools/i386/netboot/sis900/nbgrub, tools/i386/netboot/3c509/nbgrub,
+	tools/i386/netboot/eepro/stage1, tools/i386/netboot/lance/stage2,
+	tools/i386/netboot/otulip/stage2, tools/i386/netboot/ni5010/pxegrub,
+	tools/i386/netboot/ns8390/stage2, tools/i386/netboot/wd/nbgrub,
+	tools/i386/netboot/ne/pxegrub, tools/i386/netboot/depca/stage2,
+	tools/i386/netboot/tulip/nbgrub, tools/i386/netboot/lance/pxegrub,
+	tools/i386/netboot/tiara/stage1, tools/i386/netboot/epic100/pxegrub,
+	tools/i386/netboot/ni6510/pxegrub, tools/i386/netboot/3c90x/stage1,
+	tools/i386/netboot/3c507/nbgrub, tools/i386/netboot/3c529/stage2,
+	tools/i386/netboot/epic100/nbgrub, tools/i386/netboot/wd/stage2,
+	tools/i386/netboot/3c507/stage1, tools/i386/netboot/3c595/stage2,
+	tools/i386/netboot/3c529/stage1, tools/i386/netboot/depca/pxegrub,
+	tools/i386/netboot/ne2100/stage2, tools/i386/netboot/exos205/stage1,
+	tools/i386/netboot/w89c840/pxegrub, tools/i386/netboot/sk_g16/pxegrub,
+	tools/i386/netboot/3c509/stage1, tools/i386/netboot/eepro/stage2,
+	tools/i386/netboot/rtl8139/pxegrub, tools/i386/netboot/3c595/pxegrub,
+	tools/i386/netboot/smc9000/stage1, tools/i386/netboot/w89c840/nbgrub,
+	tools/i386/netboot/3c503/nbgrub, tools/i386/netboot/ne/stage2,
+	tools/i386/netboot/sk_g16/stage2, tools/i386/netboot/exos205/nbgrub,
+	tools/i386/netboot/tulip/stage1, tools/i386/netboot/wd/stage1,
+	tools/i386/netboot/3c503/pxegrub, tools/i386/netboot/3c529/nbgrub,
+	tools/i386/netboot/ni6510/stage1, tools/i386/netboot/depca/nbgrub,
+	tools/i386/netboot/3c503/stage2, tools/i386/netboot/ni5010/stage2,
+	tools/i386/netboot/sis900/stage2, tools/i386/netboot/eepro/pxegrub,
+	tools/i386/netboot/3c90x/nbgrub, tools/i386/netboot/ni6510/nbgrub,
+	tools/i386/netboot/epic100/stage1, tools/i386/netboot/ne2100/pxegrub,
+	tools/i386/netboot/rtl8139/stage1, tools/i386/netboot/tiara/nbgrub,
+	tools/i386/netboot/ns8390/stage1, tools/i386/netboot/3c90x/pxegrub,
+	tools/i386/netboot/3c595/stage1, tools/i386/netboot/ni5210/nbgrub,
+	tools/i386/netboot/depca/stage1, tools/i386/netboot/3c509/pxegrub,
+	tools/i386/netboot/ne2100/stage1, tools/i386/netboot/sk_g16/stage1,
+	tools/i386/netboot/eepro100/nbgrub, tools/i386/netboot/tiara/stage2,
+	tools/i386/netboot/eepro100/stage1, tools/i386/netboot/ns8390/nbgrub,
+	tools/i386/netboot/ni5210/stage2, tools/i386/netboot/eepro100/pxegrub,
+	tools/i386/netboot/3c507/stage2, tools/i386/netboot/3c509/stage2,
+	tools/i386/netboot/3c90x/stage2, tools/i386/netboot/3c595/nbgrub,
+	tools/i386/netboot/epic100/stage2, tools/i386/netboot/otulip/pxegrub,
+	tools/i386/netboot/eepro/nbgrub, tools/i386/netboot/3c529/pxegrub,
+	tools/i386/netboot/exos205/pxegrub, tools/i386/netboot/ne2100/nbgrub,
+	tools/i386/netboot/w89c840/stage2, tools/i386/netboot/smc9000/pxegrub,
+	tools/i386/netboot/wd/pxegrub, tools/i386/netboot/sis900/pxegrub,
+	tools/i386/netboot/exos205/stage2, tools/i386/netboot/sk_g16/nbgrub,
+	tools/i386/netboot/ne/nbgrub, tools/i386/netboot/smc9000/nbgrub: upgrade
+	to grub-0.95
+
+	* tools/i386/netboot/make_boot_network: warn if driver not available,
+	print available drivers
+
+	* tools/i386/netboot/makeImages: use grub-0.95
+	don't be a bastard, keep CVS directory
+
+	* tools/i386/netboot/stage1.via-rhine, tools/i386/netboot/stage1.3c59x,
+	tools/i386/netboot/stage2.3c59x, tools/i386/netboot/stage2.tulip,
+	tools/i386/netboot/stage1.tulip, tools/i386/netboot/stage2.rtl8139,
+	tools/i386/netboot/stage2.3c90x, tools/i386/netboot/stage1.eepro100,
+	tools/i386/netboot/stage2.via-rhine, tools/i386/netboot/stage1.rtl8139,
+	tools/i386/netboot/stage1.3c90x, tools/i386/netboot/stage2.eepro100:
+	delete obsolete files
+
+2004/08/25  Till Kamppeter  <till at mandrakesoft.com>
+
+	* printer/data.pm, printer/printerdrake.pm: 
+	  - Moved initial package installation by printerdrake into
+	"install_spooler()" function, so all package installation done by
+	printerdrake (except printer/queue-type-specific, as HPOJ) is done in
+	one step.
+	  - First changes for daemonless CUPS client support.
+
+2004/08/25  Thierry Vignaud  <tvignaud at mandrakesoft.com>
+
+	* drakxtools.spec: 10.1-0.13mdk
+	merge in lost 10-34.3.100mdk's changelog
+
+	* ugtk2.pm (create_packtable) fix cuted ads at install time
+
+	* network/adsl_consts.pm: fix siol's vci (hexa formated)
+
+	* Makefile.config: add listsupportedprinters
+
+	* standalone/service_harddrake: rename loop variable in order to prevent
+	trainee to be confused
+	support inline configuators
+	run proper program :-)
+	just go on if --force is passed
+
 2004/08/25  Gwenole Beauchesne  <gbeauchesne at mandrakesoft.com>
 
 	* tools/ddcprobe/vbe.c, tools/ddcprobe/vbe.h, tools/ddcprobe/Makefile,
@@ -36248,7 +36634,7 @@
 
 	* Makefile.config: remove dir security
 
-	* proxy.pm: add $Id: ChangeLog,v 1.951 2004/08/19 12:56:34 prigaux Exp $
+	* proxy.pm: add $Id: ChangeLog,v 1.952 2004/08/25 06:58:12 prigaux Exp $
 
 	* interactive/gtk.pm: use my_gtk {isWizard} and {isEmbedded} which are
 	more accurate than
