@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
-"POT-Creation-Date: 2003-03-09 13:01+0100\n"
+"POT-Creation-Date: 2003-03-12 14:29+0100\n"
 "PO-Revision-Date: 2003-03-02 23:19+0100\n"
 "Last-Translator: Arkadiusz Lipiec <alipiec@elka.pw.edu.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -10958,11 +10958,6 @@ msgstr "Zmień system drukowania"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "Printer sharing"
-msgstr "Współdzielenie drukarek"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
 msgid "CUPS configuration"
 msgstr "Konfiguracja CUPS"
 
@@ -11393,12 +11388,12 @@ msgstr "Drukowanie/Skanowanie/Karty foto na \"%s\""
 #, c-format
 msgid ""
 "To know about the options available for the current printer read either the "
-"list shown below or click on the \"Print option list\" button.%s%s\n"
+"list shown below or click on the \"Print option list\" button.%s%s%s\n"
 "\n"
 msgstr ""
 "Aby dowiedzieć się jakie opcje są dostępne dla bieżącej drukarki można je "
 "znaleźć na poniższej liście lub po kliknięciu przycisku \"Wydrukuj listę "
-"opcji\".%s%s\n"
+"opcji\".%s%s%s\n"
 "\n"
 
 #: ../../printer/printerdrake.pm:1
@@ -11647,49 +11642,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid ""
-"Your printer belongs to the group of GDI laser printers (winprinters) sold "
-"by different manufacturers which uses the Zenographics ZJ-stream raster "
-"format for the data sent to the printer. The driver for these printers is "
-"still in a very early development stage and so it will perhaps not always "
-"work properly. Especially it is possible that the printer only works when "
-"you choose the A4 paper size.\n"
-"\n"
-"Some of these printers, as the HP LaserJet 1000, for which this driver was "
-"originally created, need their firmware to be uploaded to them after they "
-"are turned on. In the case of the HP LaserJet 1000 you have to search the "
-"printer's Windows driver CD or your Windows partition for the file "
-"\"sihp1000.img\" and upload the file to the printer with one of the "
-"following commands:\n"
-"\n"
-"     lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"The first command can be given by any normal user, the second must be given "
-"as root. After having done so you can print normally.\n"
-msgstr ""
-"Twoja drukarka należy do grupy sprzedawanych przez różnych producentów "
-"drukarek laserowych GDI, które używają formatu rastrowego Zenographics ZJ-"
-"stream do wysyłaniadanych do drukarki. Sterowniki do tych drukarek są ciągle "
-"w bardzo wczesnej fazie rozwoju i nie zawsze działają prawidło. Możliwe jest "
-"że drukarka będzie działać tylko, jeśliwybierzesz jako rozmiar papieru A4.\n"
-"\n"
-"Niektóre z tych drukarek, np. HP LaserJet 1000, dla której stworzono "
-"oryginalny sterownik, potrzebują wysłania firmware po ich włączeniu. W "
-"przypadku HP LaserJet 1000należy na płycie ze sterownikami dla Windows "
-"odnaleźć plik \"sihp1000.img\" i wysłać go do drukarki jednym z poleceń:\n"
-"\n"
-"lpr -o raw sihp1000.img\n"
-"     cat sihp1000.img > /dev/usb/lp0\n"
-"\n"
-"Pierwsza komenda może być wykonana z poziomu zwykłego użytkownika, do "
-"drugiej konieczne są uprawnienia roota. Po zrobieniu tego można normalnie "
-"drukować.\n"
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "GDI Laser Printer using the Zenographics ZJ-Stream Format"
-msgstr "Drukarak laserowa GDI używająca  formatu Zenographics ZJ-Stream"
+msgid "Firmware-Upload for HP LaserJet 1000"
+msgstr "Firmware-Upload dla HP LaserJet 1000"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -11875,6 +11829,11 @@ msgstr "Udostępnianie portu drukarki dla systemu CUPS..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "Checking device and configuring HPOJ..."
+msgstr "Sprawdzanie urządzenia i konfigurowanie HPOJ..."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Photo memory card access on your HP multi-function device"
 msgstr "Dostęp do karty pamięci urządzenia wielofunkcyjnego HP"
 
@@ -11892,11 +11851,6 @@ msgstr "Instalowanie pakietów mtools..."
 #, c-format
 msgid "Installing SANE packages..."
 msgstr "Instalowanie pakietów SANE..."
-
-#: ../../printer/printerdrake.pm:1
-#, c-format
-msgid "Checking device and configuring HPOJ..."
-msgstr "Sprawdzanie urządzenia i konfigurowanie HPOJ..."
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -12781,6 +12735,11 @@ msgstr "Brakuje adresu IP serwera!"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
+msgid "If no port is given, 631 will be taken as default."
+msgstr "Jeśli nie podano żadnego portu, port 631 będzie portem domyślnym."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
 msgid "Enter IP address and port of the host whose printers you want to use."
 msgstr "Podaj adres IP i port komputera, którego chcesz używać."
 
@@ -12910,6 +12869,31 @@ msgstr "Automatyczne poprawianie konfiguracji CUPS"
 #: ../../printer/printerdrake.pm:1
 #, c-format
 msgid ""
+"Turning on this allows to print plain text files in japanese language. Only "
+"use this function if you really want to print text in japanese, if it is "
+"activated you cannot print accentuated characters in latin fonts any more "
+"and you will not be able to adjust the margins, the character size, etc. "
+"This setting only affects printers defined on this machine. If you want to "
+"print japanese text on a printer set up on a remote machine, you have to "
+"activate this function on that remote machine."
+msgstr ""
+"Włączenie tej funkcji umożliwia wydruk zwykłych plików tekstowych w języku "
+"japońskim. Należy jej używać tylko, jeśli naprawdę istnieje potrzeba "
+"drukowania tekstów w języku japońskim. Jeśli funkcja ta zostanie włączona, "
+"nie będzie można drukować znaków akcentowanych łacińskich czcionek oraz "
+"dopasowywać marginesów, wielkości czcionek, itd. Te ustawienia będą miały "
+"wpływ jedynia na drukarki zdefiniowane na tym komputerze. Jeśli chcesz "
+"drukować teksty w języku japońskim na drukarce skonfigurowanej na zdalnym "
+"komputerze, należy na nim aktywować tą funkcję."
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid "Japanese text printing mode"
+msgstr "Japoński tryb drukowania tekstu"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
 "To get access to printers on remote CUPS servers in your local network you "
 "only need to turn on the \"Automatically find available printers on remote "
 "machines\" option; the CUPS servers inform your machine automatically about "
@@ -12984,8 +12968,8 @@ msgstr ""
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
-msgid "CUPS printer sharing configuration"
-msgstr "Konfiguracja współdzielenia drukarki CUPS "
+msgid "CUPS printer configuration"
+msgstr "Konfiguracja drukarki CUPS"
 
 #: ../../printer/printerdrake.pm:1
 #, c-format
@@ -13013,6 +12997,26 @@ msgstr "W jaki sposób jest podłączona drukarka?"
 #, c-format
 msgid "Select Printer Connection"
 msgstr "Wybierz sposób podłączenia drukarki"
+
+#: ../../printer/printerdrake.pm:1
+#, c-format
+msgid ""
+"The HP LaserJet 1000 needs its firmware to be uploaded after being turned "
+"on. Download the Windows driver package from the HP web site (the firmware "
+"on the printer's CD does not work) and extract the firmware file from it by "
+"uncompresing the self-extracting '.exe' file with the 'unzip' utility and "
+"searching for the 'sihp1000.img' file. Copy this file into the '/etc/"
+"printer' directory. There it will be found by the automatic uploader script "
+"and uploaded whenever the printer is connected and turned on.\n"
+msgstr ""
+"Drukarka HP LaserJet 1000 potrzebuje swojego oprogramowania firmware, "
+"które musi zostać załadowane przed włączeniem. Pobierz pakiet sterowników "
+"dla Windows ze strony www HP (firmware na płytach CD dołączonych do drukarki "
+"nie działa) oraz rozpakuj pobrany plik samorozpakowującego się archiwum zip "
+"używając narzędzia \"unzip\". Następnie znajdź plik \"sihp1000.img\". "
+"Skopiuj ten plik do katalogu \"/etc/printer\". Tam będzie on widoczny dla "
+"skryptu automatycznego ładowania oraz ładowany podczas podłączania drukarki "
+"i jej uruchamiania.\n"
 
 #: ../../security/help.pm:1
 #, c-format
@@ -14653,11 +14657,6 @@ msgid ""
 msgstr ""
 "Nie znaleziono pliku konfiguracyjnego \n"
 "kliknij przycisk Druid lub Zaawansowane."
-
-#: ../../standalone/drakbackup:1
-#, c-format
-msgid "%s"
-msgstr "%s"
 
 #: ../../standalone/drakbackup:1
 #, c-format
@@ -19673,179 +19672,30 @@ msgid "NFS server, SMB server, Proxy server, ssh server"
 msgstr "Serwery NFS, SMB, SSH, oraz serwer pośredniczący"
 
 #: ../../share/compssUsers:999
-msgid "Office"
-msgstr "Biuro"
+msgid "Audio station"
+msgstr "Stacja audio"
 
 #: ../../share/compssUsers:999
-msgid "Set of tools for mail, news, web, file transfer, and chat"
-msgstr "Zestawy narzędzi dla poczty, WWW, przesyłania plików i chat"
+msgid "Sound playing/editing programs"
+msgstr "Programy do odtwarzania/edycji dźwięków"
 
 #: ../../share/compssUsers:999
-msgid "Games"
-msgstr "Gry"
+msgid "Video station"
+msgstr "Stacja wideo"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Graphics"
-msgstr "Multimedia - Grafika"
+msgid "Video playing programs"
+msgstr "Programy do odtwarzania filmów wideo"
 
 #: ../../share/compssUsers:999
-msgid "Graphics programs such as The Gimp"
-msgstr "Programy graficzne, np. Gimp"
+msgid "Graphic station"
+msgstr "Stacja graficzna"
 
 #: ../../share/compssUsers:999
-msgid "Multimedia - Sound"
-msgstr "Multimedia - Dźwięk"
+msgid "Graphics programs"
+msgstr "Programy graficzne"
 
 #: ../../share/compssUsers:999
-msgid "Audio-related tools: mp3 or midi players, mixers, etc"
-msgstr "Dźwięk: odtwarzacze mp3 i midi, miksery, itp."
-
-#: ../../share/compssUsers:999
-msgid "Multimedia - Video"
-msgstr "Multimedia - Video"
-
-#: ../../share/compssUsers:999
-msgid "Video players and editors"
-msgstr "Odtwarzacze i edytory video"
-
-#: ../../share/compssUsers:999
-msgid "Multimedia - CD Burning"
-msgstr "Multimedia - Nagrywanie płyt CD"
-
-#: ../../share/compssUsers:999
-msgid "Tools to create and burn CD's"
-msgstr "Narzędzia do tworzenia i nagrywania CD"
-
-#: ../../share/compssUsers:999
-msgid "More Graphical Desktops (Gnome, IceWM)"
-msgstr "Więcej pulpitów graficznych (Gnome, IceWM)"
-
-#: ../../share/compssUsers:999
-msgid "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, etc"
-msgstr "Gnome, Icewm, Window Maker, Enlightenment, Fvwm, itp."
-
-#: ../../share/compssUsers:999
-msgid "Personal Information Management"
-msgstr "Zarządzanie osobistymi informacjami"
-
-#: ../../share/compssUsers:999
-msgid "Tools for your Palm Pilot or your Visor"
-msgstr "Narzędzia do Palm Pilota lub Visior"
-
-#: ../../share/compssUsers:999
-msgid "Personal Finance"
-msgstr "Finanse osobiste"
-
-#: ../../share/compssUsers:999
-msgid "Programs to manage your finances, such as gnucash"
-msgstr "Programy do zarządzania finansami, np gnucash"
-
-#~ msgid "no network card found"
-#~ msgstr "nie znaleziono karty sieciowej"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.1 has selected the best software for you. Surf the Web "
-#~ "and view animations with Mozilla and Konqueror, or read your mail and "
-#~ "handle your personal information with Evolution and Kmail"
-#~ msgstr ""
-#~ "Mandrake Linux 9.1 dostarcza najlepsze oprogramowanie, umożliwiając  "
-#~ "dostęp do wszystkiego co oferuje Internet: przeglądanie sieci i oglądanie "
-#~ "animacji za pomocą Mozilli, Konquerora, zarządzanie informacjami "
-#~ "osobistymi przy użyciu Evolution oraz Kmail"
-
-#~ msgid "Get the most from the Internet"
-#~ msgstr "Pobierz wzystko z internetu"
-
-#~ msgid "Push multimedia to its limits!"
-#~ msgstr "Korzystaj z multimediów bez ograniczeń!"
-
-#~ msgid "Discover the most up-to-date graphical and multimedia tools!"
-#~ msgstr "Odkryj nabardziej aktualne programy graficzne i multimedialne!"
-
-#~ msgid ""
-#~ "Mandrake Linux 9.1 provides the best Open Source games - arcade, action, "
-#~ "strategy, ..."
-#~ msgstr ""
-#~ "Mandrake Linux 9.1 dostarcza najlepsze gry Open Source - logiczne, "
-#~ "przygodowe, karciane, sportowe, strategiczne, ..."
-
-#~ msgid ""
-#~ "Mandrake Linux 9.1 provides a powerful tool to fully customize and "
-#~ "configure your machine"
-#~ msgstr ""
-#~ "Mandrake Linux 9.1 dostarcza silne narzędzie do konfiguracji komputera."
-
-#~ msgid "User interfaces"
-#~ msgstr "Interfejsy użytkownika"
-
-#~ msgid ""
-#~ "Use the full power of the GNU gcc 3 compiler as well as the best Open "
-#~ "Source development environments"
-#~ msgstr ""
-#~ "Mandrake Linux to niezwykle wydajna platforma programistyczna. Odkryj "
-#~ "siłę kompilatora GNU gcc 3 oraz środowisk tworzenia oprogramowania Open "
-#~ "Source."
-
-#~ msgid "Development simplified"
-#~ msgstr "Programowanie"
-
-#~ msgid ""
-#~ "This firewall product includes network features that allow you to fulfill "
-#~ "all your security needs"
-#~ msgstr ""
-#~ "Ta zapora sieciowa posiada unikalne cechy w pełni zaspokajające twoje "
-#~ "potrzeby w zakresie bezpieczeństwa sieciowego"
-
-#~ msgid ""
-#~ "The MandrakeSecurity range includes the Multi Network Firewall product (M."
-#~ "N.F.)"
-#~ msgstr ""
-#~ "W skład produktów z serii MandrakeSecurity wchodzi Multi Network Firewall "
-#~ "(M.N.F.)"
-
-#~ msgid "Strategic partners"
-#~ msgstr "Partnerzy strategiczni"
-
-#~ msgid ""
-#~ "Whether you choose to teach yourself online or via our network of "
-#~ "training partners, the Linux-Campus catalogue prepares you for the "
-#~ "acknowledged LPI certification program (worldwide professional technical "
-#~ "certification)"
-#~ msgstr ""
-#~ "Niezależnie czy zdobywasz wiedzę samodzielnie online, czy też przez sieć "
-#~ "partnerów szkoleniowych, zestaw szkoleń Linux-Campus przygotują cię do "
-#~ "potwierdzenia twojej wiedzy przez program certyfikacji LPI (światowy "
-#~ "profesjonalny system certyfikacji)"
-
-#~ msgid "Certify yourself on Linux"
-#~ msgstr "Certyfikuj się z Linuksa"
-
-#~ msgid ""
-#~ "The training program has been created to respond to the needs of both end "
-#~ "users and experts (Network and System administrators)"
-#~ msgstr ""
-#~ "Program szkoleń został utworzony w odpowiedzi na potrzeby zarówno "
-#~ "użytkowników jak i ekspertów (administratorów sieci i systemów "
-#~ "komputerowych)"
-
-#~ msgid "Discover MandrakeSoft's training catalogue Linux-Campus"
-#~ msgstr "Odkryj Linux-Campus - zestaw szkoleń MandrakeSoft "
-
-#~ msgid ""
-#~ "MandrakeClub and Mandrake Corporate Club were created for business and "
-#~ "private users of Mandrake Linux who would like to directly support their "
-#~ "favorite Linux distribution while also receiving special privileges. If "
-#~ "you enjoy our products, if your company benefits from our products to "
-#~ "gain a competititve edge, if you want to support Mandrake Linux "
-#~ "development, join MandrakeClub!"
-#~ msgstr ""
-#~ "Klub Mandrake oraz Korporacyjny Klub Mandrake zostały utworzone dla "
-#~ "biznesu oraz indywidualnych użytkowników Linuksa Mandrake, którzy "
-#~ "potrzebują bezpośredniegowsparacia technicznego dla ich ulubionej "
-#~ "dystrybucji Linuksa oraz otrzymują specjalne przywileje. Jeśli podoba Ci "
-#~ "się nasz produkt, jeśli twoja firma zyskuje korzystając z niego, "
-#~ "zwiększając swoją kokurencyjność, jeśli chcesz wesprzeć tworzenie Linuksa "
-#~ "Mandrake, przyłącz się do Klubu Mandrake!"
-
-#~ msgid "Discover MandrakeClub and Mandrake Corporate Club"
-#~ msgstr "Odkryj Klub Mandrake oraz Korporacyjny Klub Mandrake"
+msgid "Set of tools to read and send mail and news and to browse the Web"
+msgstr "Zbiór narzędzi do czytania i przesyłania maili oraz wiadomości "
+"grup dyskusyjnych oraz do przeglądania sieci"
