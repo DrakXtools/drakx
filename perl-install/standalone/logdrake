@@ -58,6 +58,7 @@ use Data::Dumper;
 $::isInstall and die "Not supported during install.\n";
 
 my $in = 'interactive'->vnew('su', 'default');
+my $cron_hourly = "/etc/cron.hourly/logdrake_service";
 
 if ($::isEmbedded) {
   print "EMBED\n";
@@ -433,10 +434,9 @@ my $initdir = "/etc/init.d";
 		  ]) or goto begin;
 
     $cron .= "#- check services\n";
-    for (keys %$service) {
-#	$cron .= $l->{ $_ }[2]."\n" if (${ $_ }); 
-	if(!-e "/var/lock/subsys/$_") { $r .= "Service $_ ($service->{ $_ } is not running\n" };
-	$cron .= "$r" if ${ $_ }; # take a look at this, don't know what is done here   
+    foreach (@installed_d) {
+	if(!-e "/var/lock/subsys/$_") { $r .= "Service $_ ($service->{$_} is not running\n" };
+#	$cron .= "$r" if ${ $_ }; # take a look at this, don't know what is done here   
     }
 
   step_load:
@@ -462,11 +462,10 @@ $r .= "Load is huge: $load\n" if ($load >@ . "$load);\n\n";
 		   { label => "email", val => \$email, disabled => sub { !$mail } },
 		   #{ label => "smtp", val => \$smtp, disabled => sub { !$mail } },
 		   { label => "" },
-		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have smsend set up (works only for some countries)" },
-		   { label => "smssend output", val => \$smssend , disabled => sub { !$sms } },
+#		   { label => "sms output", val => \$sms, type => "bool", text => "You need to have smsend set up (works only for some countries)" },
+	#	   { label => "smssend output", val => \$smssend , disabled => sub { !$sms } },
 		  ]) or goto step_load;
 
-#output("/etc/cron.hourly/logdrake_alert.pl", ($cron));
     $cron .= q@#- report it@;
     if ($mail) { 
 	$cron .= q!
@@ -479,10 +478,16 @@ To: ), "$email\n";
 print F $r;
 
 # EOF!;
-    } elsif ($sms) {
-	$in->do_pkgs->install('smssend');
-	$cron .= q!system(smssend !, $smssend, q! chomp_(`date`));
-    }
+	output "$cron_hourly", $cron;
+	chmod 0755, $cron_hourly;
+    } 
+    
+    print ("whole cron is ****** $cron *******\n");
+    
+#elsif ($sms) {
+    #$in->do_pkgs->install('smssend');
+    #	$cron .= q!system(smssend !, $smssend, q!chomp_(`date`));
+#}
 
     undef $::isWizard; 
     $::WizardWindow->destroy if defined $::WizardWindow;
@@ -503,18 +508,13 @@ sub save {
     output($yy,$log_text->get_chars(0,$log_text->get_length()));
 }
 
-sub print_hello {
-  print "mcdtg !\n";
-}
-
 sub get_main_menu {
-  my ($window) = @_;
-
-  my $accel_group = new Gtk::AccelGroup();
-  my $item_factory = new Gtk::ItemFactory('Gtk::MenuBar', '<main>', $accel_group);
-  $item_factory->create_items(@menu_items);
-  $window->add_accel_group($accel_group);
-  return ($item_factory->get_widget('<main>'));
+    my ($window) = @_;
+    my $accel_group = new Gtk::AccelGroup();
+    my $item_factory = new Gtk::ItemFactory('Gtk::MenuBar', '<main>', $accel_group);
+    $item_factory->create_items(@menu_items);
+    $window->add_accel_group($accel_group);
+    return ($item_factory->get_widget('<main>'));
 }
 
 sub create_dialog {
@@ -554,6 +554,14 @@ sub destroy_window {
 
 # log
 # $Log$
+# Revision 1.20  2002/08/02 17:10:01  daouda
+# - disable sms alerts (free sms site too complicated to
+#   handle). Postponed
+# - mail service should work now
+# - clean up code
+# - give the correct right to cron file to work correctly
+# - fix titi mess
+#
 # Revision 1.19  2002/08/01 17:24:58  tvignaud
 # perl_checker fixes
 #
