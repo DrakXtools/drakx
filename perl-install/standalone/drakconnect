@@ -40,6 +40,7 @@ use network::isdn;
 use network::adsl;
 use MDK::Common::Globals "network", qw($in);
 use POSIX ":sys_wait_h";
+use Storable qw(store retrieve);
 
 my ($netcnx, $netc, $intf)  = ({}, {}, {});
 #my @conx_type = ('modem', 'isdn_internal', 'isdn_external', 'adsl', 'cable', 'lan');
