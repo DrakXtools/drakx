@@ -33,7 +33,7 @@ arch() =~ /^sparc/ ? (
   "acenic" => "AceNIC Gigabit Ethernet",
   "pcnet32" => "AMD PC/Net 32",
   "82596" => "Apricot 82596",
-#  "atp" => "ATP", # builtin the kernel
+  "atp" => "ATP", # builtin the kernel
   "e2100" => "Cabletron E2100",
   "tlan" => "Compaq Netelligent",
   "cs89x0" => "CS89x0",
@@ -41,7 +41,7 @@ arch() =~ /^sparc/ ? (
   "de620" => "D-Link DE-620 pocket adapter",
   "dgrs" => "Digi International RightSwitch",
   "depca" => "Digital DEPCA and EtherWORKS",
-#******(missing-2.4)    "ewrk3" => "Digital EtherWORKS 3",
+  "ewrk3" => "Digital EtherWORKS 3",
   "old_tulip" => "Digital 21040/21041/21140 (old Tulip driver)",
   "tulip" => "Digital 21040/21041/21140 (Tulip)",
   "eth16i" => "ICL EtherTeam 16i",
@@ -53,17 +53,14 @@ arch() =~ /^sparc/ ? (
   "hp" => "HP LAN/AnyLan",
   "hp-plus" => "HP PCLAN/plus",
   "lance" => "Lance",
-#******(missing-2.4)    "lne390" => "Mylex LNE390",
   "ne" => "NE2000 and compatible",
   "ne2k-pci" => "NE2000 PCI",
-#******(missing-2.4)  "ne3210" => "NE3210",
   "ni5010" => "NI 5010",
   "ni52" => "NI 5210",
   "ni65" => "NI 6510",
-#******(missing-2.4)   "es3210" => "Racal-Interlan ES3210",
   "rcpci" => "Red Creek Hardware VPN",
   "epic100" => "SMC 83c170 EPIC/100",
-#******(missing-2.4)  "sktr" => "Syskonnect Token ring adaptor",
+# -token ring-    "sktr" => "Syskonnect Token ring adaptor",
   "smc9194" => "SMC 9000 series",
   "smc-ultra" => "SMC Ultra",
 #******(missing-2.4)    "smc-ultra32" => "SMC Ultra 32",
@@ -74,13 +71,11 @@ arch() =~ /^sparc/ ? (
 #******(missing-2.4)  "z85230" => "Z85x30",
 
   "dmfe" => "dmfe",
-#******(missing-2.4)  "fmv18x" => "fmv18x",
-#******(missing-2.4)    "ibmtr" => "Token Ring Tropic",
-#******(missing-2.4)    "olympic" => "olympic",
+# -token ring-    "ibmtr" => "Token Ring Tropic",
+# -token ring-    "olympic" => "olympic",
   "plip" => "PLIP (parallel port)",
 #******(missing-2.4)  "rl100a" => "rl100a",
   "sb1000" => "sb1000",
-#******(missing-2.4)  "sbni" => "sbni",
   "sis900" => "sis900",
   "sk98lin" => "Syskonnect (Schneider & Koch)|Gigabit Ethernet",
 ),
@@ -155,9 +150,9 @@ arch() =~ /^sparc/ ? (
   "pluto" => "Sun SparcSTORAGE Array SCSI", #- name it "fc4:soc:pluto" ?
 ) : arch() =~ /alpha/ ? () : (
   "DAC960" => "Mylex DAC960",
-#******(missing-2.4)  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
+  "dpt_i2o" => "Distributed Tech SmartCache/Raid I-V Controller",
   "megaraid" => "AMI MegaRAID",
-#******(missing-2.4)  "aacraid" => "AACxxx Raid Controller",
+  "aacraid" => "AACxxx Raid Controller",
   "cciss" => "Compaq Smart Array 5300 Controller",
   "cpqarray" => "Compaq Smart-2/P RAID Controller",
   "gdth" => "ICP Disk Array Controller",
@@ -333,8 +328,8 @@ my %type_aliases = (
 
 my @skip_big_modules_on_stage1 = 
 qw(
-sk98lin
 ); #******(missing-2.4)  dpt_i2o aztcd gscd isp16 mcd mcdx optcd cm206 sjcd cdu31a
+#sk98lin
 #acenic 
 #BusLogic seagate fdomain g_NCR5380 tmscsim
 #gdth eata eata_pio eata_dma
