@@ -12,7 +12,7 @@ use devices;
 #-INTERN CONSTANT
 #-#####################################################################################
 
-my @background;
+my @background = qw(0.28 0.38 0.66);  #- default is the mandrake blue background
 
 #- if we're running for the doc team, we want screenshots with
 #- a good B&W contrast: we'll override values of our theme
@@ -56,15 +56,15 @@ widget "*logo*" style "background-logo"
 sub load_rc {
     my ($o, $name) = @_;
 
-    if (my $f = find { -r $_ } map { "$_/$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
-
+    if (my $f = -r $name ? $name
+                         : find { -r $_ } map { "$_/themes-$name.rc" } ("share", $ENV{SHARE_PATH}, dirname(__FILE__))) {
 	my @contents = cat_($f);
 	$o->{doc} and push @contents, $theme_overriding_for_doc;
 
 	Gtk2::Rc->parse_string(join("\n", @contents));
 	foreach (@contents) {
 	    if (/style\s+"background"/ .. /^\s*$/) {
-		@background = map { $_ * 256 * 257 } split ',', $1 if /NORMAL.*\{(.*)\}/;
+		@background = split ',', $1 if /NORMAL.*\{(.*)\}/;
 	    }
 	}
     }
@@ -95,17 +95,17 @@ widget "*" style "default-font"
 #------------------------------------------------------------------------------
 sub default_theme {
     my ($o) = @_;
+    $::move ? '/usr/share/themes/Galaxy/gtk-2.0/gtkrc' :
     $o->{meta_class} eq 'firewall' ? 'mdk-Firewall' : 
-      $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
+    $o->{simple_themes} || $o->{vga16} ? 'blue' : 'galaxy';
 }
 
 sub install_theme {
     my ($o) = @_;
 
-    $o->{theme} ||= default_theme($o);
-    load_rc($o, "themes-$o->{theme}");
+    load_rc($o, $o->{theme} ||= default_theme($o));
     load_font($o);
-    gtkset_background(@background) unless $::live; #- || testing;
+    gtkset_background(map { $_ * 256 * 257 } @background) unless $::live; #- || testing;
 }
 
 #------------------------------------------------------------------------------
