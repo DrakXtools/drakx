@@ -498,15 +498,15 @@ sub display_error {
     my $error_box;
     $$central_widget->destroy;
     gtkpack($font_box,
-	    $error_box = gtkpack_(new Gtk2::VBox(0, 0), 1,
-				  new Gtk2::Label($message), 0,
-				  gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					 gtksignal_connect(new Gtk2::Button(N("OK")),
-							   clicked => sub { $$central_widget->destroy; create_fontsel() }
-							  ),
-					),
-				 )
-	   );
+            $error_box = gtkpack_(new Gtk2::VBox(0, 0), 
+                                  1, new Gtk2::Label($message), 
+                                  0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                            gtksignal_connect(new Gtk2::Button(N("OK")),
+                                                              clicked => sub { $$central_widget->destroy; create_fontsel() }
+                                                             ),
+                                           ),
+                                 )
+           );
     $central_widget = \$error_box;
 }
 
@@ -524,51 +524,52 @@ sub interactive_mode() {
     my $disable = sub { my ($b) = @_; $button->{$_}->set_sensitive($_ ne $b) foreach keys %$button };
 
     gtkadd($window1->{window},
-	   gtkpack_(new Gtk2::VBox(0, 2), if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 1,
-		    gtkpack_(new Gtk2::HBox(0, 2), 1,
-			     gtkpack_(new Gtk2::VBox(0, 2), 1,
-				      gtkpack($font_box = new Gtk2::VBox(0, 5), $font_sel = new Gtk2::FontSelection,), 1,
-				      gtkpack_(new Gtk2::HBox(0, 2), 0,
-					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect($button->{windows} = new Gtk2::Button(N("Get Windows Fonts")),
-									clicked => sub {
-									    $disable->('windows');
-									    $$central_widget->destroy;
-									    $windows = 1;
-									    appli_choice();
-									}),
-						      gtksignal_connect($button->{uninstall} = new Gtk2::Button(N("Uninstall Fonts")),
-									clicked => sub {
-									    $disable->('uninstall');
-									    $$central_widget->destroy;
-									    uninstall();
-									}),
-						     ), 0,
-					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect($button->{adv_option} = new Gtk2::Button(N("Advanced Options")),
-									clicked => sub {
-									    $disable->('adv_option');
-									    $$central_widget->destroy;
-									    $windows = 0;
-									    advanced_install();
-									}),
-						      gtksignal_connect($button->{font_list} = new Gtk2::Button(N("Font List")),
-									clicked => sub {
-									    $disable->('font_list');
-									    $$central_widget->destroy;
-									    create_fontsel();
-									}),
-						     ), 1,
-					       new Gtk2::HBox(0, 2), 0,
-					       gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
-						      gtksignal_connect(new Gtk2::Button(N("About")), clicked => \&help),
-						      gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { Gtk2->main_quit }),
-						     ),
-					      ),
-				     ),
-			    ),
-		   ),
-	  );
+	   gtkpack_(new Gtk2::VBox(0, 2), 
+                 if_(!$::isEmbedded, 0, gtkcreate_img("drakfont.620x57")), 
+                 1, gtkpack_(new Gtk2::HBox(0, 2), 
+                             1, gtkpack_(new Gtk2::VBox(0, 2), 
+                                         1, gtkpack($font_box = new Gtk2::VBox(0, 5), $font_sel = new Gtk2::FontSelection,),
+                                         1, gtkpack_(new Gtk2::HBox(0, 2),
+                                                     0, gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
+                                                               gtksignal_connect($button->{windows} = new Gtk2::Button(N("Get Windows Fonts")),
+                                                                                 clicked => sub {
+                                                                                     $disable->('windows');
+                                                                                     $$central_widget->destroy;
+                                                                                     $windows = 1;
+                                                                                     appli_choice();
+                                                                                 }),
+                                                               gtksignal_connect($button->{uninstall} = new Gtk2::Button(N("Uninstall Fonts")),
+                                                                                 clicked => sub {
+                                                                                     $disable->('uninstall');
+                                                                                     $$central_widget->destroy;
+                                                                                     uninstall();
+                                                                                 }),
+                                                              ), 
+                                                     0, gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
+                                                               gtksignal_connect($button->{adv_option} = new Gtk2::Button(N("Advanced Options")),
+                                                                                 clicked => sub {
+                                                                                     $disable->('adv_option');
+                                                                                     $$central_widget->destroy;
+                                                                                     $windows = 0;
+                                                                                     advanced_install();
+                                                                                 }),
+                                                               gtksignal_connect($button->{font_list} = new Gtk2::Button(N("Font List")),
+                                                                                 clicked => sub {
+                                                                                     $disable->('font_list');
+                                                                                     $$central_widget->destroy;
+                                                                                     create_fontsel();
+                                                                                 }),
+                                                              ), 
+                                                     1, new Gtk2::HBox(0, 2), 
+                                                     0, gtkadd(gtkset_layout(new Gtk2::VButtonBox, 'end'),
+                                                               gtksignal_connect(new Gtk2::Button(N("About")), clicked => \&help),
+                                                               gtksignal_connect(Gtk2::Button->new(N("Close")), clicked => sub { Gtk2->main_quit }),
+                                                              ),
+                                                    ),
+                                        ),
+                            ),
+                ),
+          );
 
     $central_widget = \$font_sel;
     $disable->('font_list');
@@ -584,16 +585,16 @@ sub text_view {
     my ($text) = @_;
     my $box;
     gtkpack($font_box,
-	    $box = gtkpack_(new Gtk2::VBox(0,10), 1,
-			    gtkpack_(new Gtk2::HBox(0,0), 1,
-				     create_scrolled_window(gtktext_insert(new Gtk2::TextView, [ [ $text ] ]))
-				    ), 0, 
-			    gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				   gtksignal_connect(new Gtk2::Button(N("OK")), 
-						     clicked => sub { $$central_widget->destroy }),
-				  ),
-			   )
-	   );
+            $box = gtkpack_(new Gtk2::VBox(0,10), 
+                            1, gtkpack(new Gtk2::HBox(0,0), 
+                                       create_scrolled_window(gtktext_insert(new Gtk2::TextView, [ [ $text ] ]))
+                                      ), 
+                            0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                      gtksignal_connect(new Gtk2::Button(N("OK")), 
+                                                        clicked => sub { $$central_widget->destroy }),
+                                     ),
+                           )
+           );
     $central_widget = \$box;
     $font_box->show_all;
 }
@@ -635,62 +636,62 @@ sub appli_choice() {
     my $choice_box;
     my $text = new Gtk2::TextView;
     gtkpack($font_box,
-	    $choice_box = gtkpack_(new Gtk2::HBox(0, 10), 0,
-				   new Gtk2::VBox(0, 10), 0,
-				   new Gtk2::VBox(0, 10), 1,
-				   gtkpack_(new Gtk2::VBox(0, 10), 1,
-					    gtkpack_(new Gtk2::VBox(0, 10), 1,
-						     gtkpack(new Gtk2::HBox(0, 10), 
-							     new Gtk2::HBox(0, 10),
-							     N("Choose the applications that will support the fonts:"),
-							     new Gtk2::HBox(0, 10),
-							    ), 0,
-						     new Gtk2::HBox(0, 10), 0, 
-						     gtkpack_(new Gtk2::HBox(0, 10), 0,
-							      N("Ghostscript"), 1,
-							      new Gtk2::HBox(0, 10), 0,
-							      my $check11 = new Gtk2::CheckButton(),
-							     ), 0,
-						     gtkpack_(new Gtk2::HBox(0, 10), 0,
-							      N("StarOffice"), 1,
-							      new Gtk2::HBox(0, 10), 0,
-							      my $check22 = new Gtk2::CheckButton(),
-							     ), 0,
-						     gtkpack_(new Gtk2::HBox(0, 10), 0,
-							      N("Abiword"), 1,
-							      new Gtk2::HBox(0, 10), 0,
-							      my $check33 = new Gtk2::CheckButton(),
-							     ), 0,
-						     gtkpack_(new Gtk2::HBox(0, 10), 0,
-							      N("Generic Printers"), 1,
-							      new Gtk2::HBox(0, 10), 0,
-							      my $check44 = new Gtk2::CheckButton(),
-							     ),
-						    ), 0,
-					    gtkpack_(new Gtk2::HBox(0, 10), 1,
-						     gtktext_insert(gtkset_editable($text, 0),
-								    [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
-								   ), 0,
-						     new Gtk2::VBox(0, 10),
-						    ), 0,
-					    gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-						   gtksignal_connect(new Gtk2::Button(N("OK")),
-								     clicked => sub {
-									 $$central_widget->destroy;
-									 import_status();
-								     }),
-						   gtksignal_connect(new Gtk2::Button(N("Cancel")),
-								     clicked => sub {
-									 @install = ();
-									 $$central_widget->destroy;
-									 create_fontsel();
-								     }),
-						  ),
-					   ), 0,
-				   new Gtk2::VBox(0, 10), 0,
-				   new Gtk2::VBox(0, 10),
-				  ),
-	   );
+            $choice_box = gtkpack_(new Gtk2::HBox(0, 10), 
+                                   0, new Gtk2::VBox(0, 10), 
+                                   0, new Gtk2::VBox(0, 10), 
+                                   1, gtkpack_(new Gtk2::VBox(0, 10), 
+                                               1, gtkpack_(new Gtk2::VBox(0, 10), 
+                                                           1, gtkpack(new Gtk2::HBox(0, 10), 
+                                                                      new Gtk2::HBox(0, 10),
+                                                                      N("Choose the applications that will support the fonts:"),
+                                                                      new Gtk2::HBox(0, 10),
+                                                                     ), 
+                                                           0, new Gtk2::HBox(0, 10), 
+                                                           0, gtkpack_(new Gtk2::HBox(0, 10), 
+                                                                       0, N("Ghostscript"), 
+                                                                       1, new Gtk2::HBox(0, 10), 
+                                                                       0, my $check11 = new Gtk2::CheckButton(),
+                                                                      ), 
+                                                           0, gtkpack_(new Gtk2::HBox(0, 10), 
+                                                                       0, N("StarOffice"), 
+                                                                       1, new Gtk2::HBox(0, 10), 
+                                                                       0, my $check22 = new Gtk2::CheckButton(),
+                                                                      ), 
+                                                           0, gtkpack_(new Gtk2::HBox(0, 10), 
+                                                                       0, N("Abiword"), 
+                                                                       1, new Gtk2::HBox(0, 10), 
+                                                                       0, my $check33 = new Gtk2::CheckButton(),
+                                                                      ), 
+                                                           0, gtkpack_(new Gtk2::HBox(0, 10), 
+                                                                       0, N("Generic Printers"), 
+                                                                       1, new Gtk2::HBox(0, 10), 
+                                                                       0, my $check44 = new Gtk2::CheckButton(),
+                                                                      ),
+                                                          ), 
+                                               0, gtkpack_(new Gtk2::HBox(0, 10), 
+                                                           1, gtktext_insert(gtkset_editable($text, 0),
+                                                                             [ [ N("Before installing any fonts, be sure that you have the right to use and install them on your system.\n\n-You can install the fonts the normal way. In rare cases, bogus fonts may hang up your X Server.") ] ]
+                                                                            ), 
+                                                           0, new Gtk2::VBox(0, 10),
+                                                          ), 
+                                               0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                                         gtksignal_connect(new Gtk2::Button(N("OK")),
+                                                                           clicked => sub {
+                                                                               $$central_widget->destroy;
+                                                                               import_status();
+                                                                           }),
+                                                         gtksignal_connect(new Gtk2::Button(N("Cancel")),
+                                                                           clicked => sub {
+                                                                               @install = ();
+                                                                               $$central_widget->destroy;
+                                                                               create_fontsel();
+                                                                           }),
+                                                        ),
+                                              ), 
+                                   0, new Gtk2::VBox(0, 10), 
+                                   0, new Gtk2::VBox(0, 10),
+                                  ),
+           );
     foreach ([ $check11, \$gs ], [ $check22, \$so ], [ $check33, \$abi ], [ $check44, \$printer ]) {
         my $ref = $_->[1];
         gtksignal_connect(gtkset_active($_->[0], $$ref), toggled => sub { $$ref = $$ref ? 0 : 1 });
@@ -745,21 +746,21 @@ sub advanced_install() {
     $list->set_rules_hint(1);
 
     gtkpack($font_box,
-	    $adv_box = gtkpack_(new Gtk2::VBox(0, 10), 1,
-				gtkpack_(new Gtk2::HBox(0, 4), 1, create_scrolled_window($list),), 0,
-				gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-				       gtksignal_connect(new Gtk2::Button(N("Add")), clicked => sub { font_choice() }),
-				       gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => \&list_remove),
-				       gtksignal_connect(new Gtk2::Button(N("Install List")), 
-							 clicked => sub {
-							     if (@install) {
- 								 $$central_widget->destroy;
- 								 appli_choice();
-							     }
-							 })
-				      )
-			       )
-	   );
+            $adv_box = gtkpack_(new Gtk2::VBox(0, 10), 
+                                1, gtkpack_(new Gtk2::HBox(0, 4), 1, create_scrolled_window($list),), 
+                                0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                          gtksignal_connect(new Gtk2::Button(N("Add")), clicked => \&font_choice),
+                                          gtksignal_connect(new Gtk2::Button(N("Remove Selected")), clicked => \&list_remove),
+                                          gtksignal_connect(new Gtk2::Button(N("Install List")), 
+                                                            clicked => sub {
+                                                                if (@install) {
+                                                                    $$central_widget->destroy;
+                                                                    appli_choice();
+                                                                }
+                                                            })
+                                         )
+                               )
+           );
     $central_widget = \$adv_box;
     $adv_box->show_all;
 }
@@ -786,21 +787,21 @@ sub show_list_to_remove() {
     $model->append_set(undef, [ 0 => $_ ]) foreach @uninstall;
 
     gtkpack($font_box,
-	    $show_box = gtkpack_(new Gtk2::VBox(0, 10), 1,
-				 gtkpack_(new Gtk2::HBox(0, 4), 1, create_scrolled_window($list)), 0,
-				 gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					gtksignal_connect(new Gtk2::Button(N("click here if you are sure.")),
-							  clicked => sub {
-							      $$central_widget->destroy;
-							      import_status_uninstall();
-							  }),
-					gtksignal_connect(new Gtk2::Button(N("here if no.")),
-							  clicked =>
-							  sub { $$central_widget->destroy; create_fontsel() }
-							 ),
-				       ),
-				)
-	   );
+            $show_box = gtkpack_(new Gtk2::VBox(0, 10), 
+                                 1, gtkpack_(new Gtk2::HBox(0, 4), 1, create_scrolled_window($list)), 
+                                 0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                           gtksignal_connect(new Gtk2::Button(N("click here if you are sure.")),
+                                                             clicked => sub {
+                                                                 $$central_widget->destroy;
+                                                                 import_status_uninstall();
+                                                             }),
+                                           gtksignal_connect(new Gtk2::Button(N("here if no.")),
+                                                             clicked =>
+                                                             sub { $$central_widget->destroy; create_fontsel() }
+                                                            ),
+                                          ),
+                                )
+           );
     $central_widget = \$show_box;
     $show_box->show_all;
 }
@@ -831,22 +832,22 @@ sub uninstall() { #- TODO : add item to right list with gtksignal_connect
     $right_list->set_rules_hint(1);
 
     gtkpack($font_box,
-	    $uninst_box = gtkpack_(new Gtk2::VBox(0, 10), 1,
-				   gtkpack_(new Gtk2::HBox(0, 4), 1,
-					    create_scrolled_window($left_list), #1,
-					    #create_scrolled_window($right_list)
-					   ), 0,
-				   gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
-					  gtksignal_connect(new Gtk2::Button(N("Unselected All")),
-							    clicked => sub { $left_list->get_selection->unselect_all }
-							   ),
-					  gtksignal_connect(new Gtk2::Button(N("Selected All")),
-							    clicked => sub { $left_list->get_selection->select_all }
-							   ),
-					  gtksignal_connect(new Gtk2::Button(N("Remove List")), clicked => sub { list_to_remove() }),
-					 ),
-				  )
-	   );
+            $uninst_box = gtkpack_(new Gtk2::VBox(0, 10), 
+                                   1, gtkpack_(new Gtk2::HBox(0, 4), 
+                                               1, create_scrolled_window($left_list),
+                                               #1, create_scrolled_window($right_list)
+                                              ), 
+                                   0, gtkadd(gtkset_layout(new Gtk2::HButtonBox, 'spread'),
+                                             gtksignal_connect(new Gtk2::Button(N("Unselected All")),
+                                                               clicked => sub { $left_list->get_selection->unselect_all }
+                                                              ),
+                                             gtksignal_connect(new Gtk2::Button(N("Selected All")),
+                                                               clicked => sub { $left_list->get_selection->select_all }
+                                                              ),
+                                             gtksignal_connect(new Gtk2::Button(N("Remove List")), clicked => sub { list_to_remove() }),
+                                            ),
+                                  )
+           );
     $central_widget = \$uninst_box;
     $uninst_box->show_all;
 }
