@@ -532,7 +532,6 @@ sub setPackages {
 
     require pkgs;
     if (!$o->{packages} || is_empty_array_ref($o->{packages}{depslist})) {
-	my $cdrom;
 	($o->{packages}, my $suppl_method) = pkgs::psUsingHdlists($o, $o->{method});
 
 	1 while
