@@ -262,10 +262,11 @@ sub hasUltra66 {
 }
 
 sub whatParport() {
-    my @res =();
+    my @res = ();
     foreach (0..3) {
 	my $elem = {};
-	local *F; open F, "/proc/parport/$_/autoprobe" or next;
+	local *F;
+	open F, "/proc/parport/$_/autoprobe" or open F, "/proc/sys/dev/parport/parport$_/autoprobe" or next;
 	local $_;
 	while (<F>) { $elem->{$1} = $2 if /(.*):(.*);/ }
 	push @res, { port => "/dev/lp$_", val => $elem};
