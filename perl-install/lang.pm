@@ -79,7 +79,7 @@ my %languages = my @languages = (
 'hi_IN.UTF-8' => [ 'Hindi',		'unicode', 'hi', 'hi:en_IN:en_GB', 'UTF-8' ],
 'hr_HR' => [ 'Croatian',		'iso-8859-2', 'hr', 'hr' ],
 'hu_HU' => [ 'Hungarian', 		'iso-8859-2', 'hu', 'hu' ],
-'hy_AM.UTF-8' => [ 'Armenian',     'utf_hy',     'hy', 'hy', 'UTF-8' ],
+'hy_AM.UTF-8' => [ 'Armenian',     'armscii-8',     'hy', 'hy', 'UTF-8' ],
 #'ia_XX' => [ 'Interlingua',		'unicode',     'ia', 'ia' ],
 #- 'in' was the old code for indonesian language; by putting LANGUAGE=id:in_ID
 #- we catch the few catalog files still using the wrong code
@@ -90,7 +90,7 @@ my %languages = my @languages = (
 #-'iu_CA' => [ 'Inuktitut', 		'utf_iu',  'iu', 'iu' ],
 'ja_JP' => [ 'Japanese',		'jisx0208',   'ja', 'ja_JP.ujis:ja' ],
 'ja_JP.UTF-8' => [ 'Japanese (UTF-8)',	'jisx0208',     'ja', 'ja_JP.ujis:ja', 'UTF-8' ],
-'ka_GE.UTF-8' => [ 'Georgian',  		'utf_ka',     'ka', 'ka', 'UTF-8' ],
+'ka_GE.UTF-8' => [ 'Georgian',  		'georgian-ps',     'ka', 'ka', 'UTF-8' ],
 #-'kl_GL' => [ 'Greenlandic (inuit)',	'iso-8859-1', 'kl', 'kl' ],
 'ko_KR' => [ 'Korean',           'ksc5601',    'ko', 'ko' ],
 'ko_KR.UTF-8' => [ 'Korean (UTF-8)',       'ksc5601',     'ko', 'ko', 'UTF-8' ],
@@ -135,17 +135,17 @@ my %languages = my @languages = (
 #'ta_IN.UTF-8' => [ 'Tamil (UTF-8)',	'iso-8859-1',      'ta', 'ta', 'UTF-8' ],
 'ta_IN' => [ 'Tamil (TSCII)',		'tscii',      'ta', 'ta' ],
 'ta_IN.UTF-8' => [ 'Tamil (UTF-8)',	'unicode',     'ta', 'ta' ],
-'tg_TJ.UTF-8' => [ 'Tajik',		'utf_koi8-k',    'tg', 'tg', 'UTF-8' ],
+'tg_TJ.UTF-8' => [ 'Tajik',		'koi8-k',    'tg', 'tg', 'UTF-8' ],
 'th_TH' => [ 'Thai|TIS-620',            'tis620',     'th', 'th' ],
 'th_TH.UTF-8' => [ 'Thai (UTF-8)',         'tis620',     'th', 'th', 'UTF-8' ],
 'tr_TR' => [ 'Turkish',	 		'iso-8859-9', 'tr', 'tr' ],
-#-'tt_RU.UTF-8' => [ 'Tatar',		'utf_koi8-k',  'tt', 'tt' ],
+#-'tt_RU.UTF-8' => [ 'Tatar',		'koi8-k',  'tt', 'tt' ],
 #-'ur_PK' => [ 'Urdu',			'cp1256',     'ur', 'ur' ],  
 'uk_UA' => [ 'Ukrainian|KOI8-U', 	'koi8-u',     'uk', 'uk_UA:uk' ],
 'uk_UA.CP1251' => [ 'Ukrainian|CP1251',	'cp1251',     'uk', 'uk_UA:uk' ],
 'uk_UA.UTF-8' => [ 'Ukrainian|UTF-8',	'cp1251',   'uk', 'uk_UA:uk', 'UTF-8' ],
 'uz_UZ' => [ 'Uzbek',			'iso-8859-1', 'uz', 'uz' ],
-'vi_VN.UTF-8' => [ 'Vietnamese',  'utf_vi',   'vi', 'vi', 'UTF-8' ],
+'vi_VN.UTF-8' => [ 'Vietnamese',  'tcvn',   'vi', 'vi', 'UTF-8' ],
 'wa_BE' => [ 'Walon',     		'iso-8859-15', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
 #- NOTE: 'zh' must be in the LANGUAGE list, it is not used for translations
@@ -256,7 +256,7 @@ sub std  { std2($_[0], $_[1] || 10), std2($_[0],  8) }
 #- [4]: codepage parameter for mount (none if utf8)
 #- [5]: X11 fontset (for DrakX)
 my %charsets = (
-  "utf_hy"  => [ "arm8",		undef,	"armscii-8",
+  "armscii-8"  => [ "arm8",		undef,	"armscii-8",
 	 undef,	undef, std_("armscii-8") ],
 #- chinese needs special console driver for text mode
   "Big5"       => [ undef,		undef,		undef,
@@ -303,9 +303,9 @@ my %charsets = (
 	"koi8-r", "866", sub { std("microsoft-cp1251", @_) } ],
   "koi8-u"     => [ "UniCyr_8x16",	undef,		"koi8-u",
 	"koi8-u", "866", sub { std("microsoft-cp1251", @_) } ],
-  "utf_ka"      => [ "t_geors",		undef,	undef,
+  "georgian-ps"      => [ "t_geors",		undef,	undef,
 	"utf8",  undef, "-*-*-*-*-*-*-*-*-*-*-*-*-georgian-academy" ],
-  "utf_koi8-k"     => [ "koi8-k",		undef,	undef,
+  "koi8-k"     => [ "koi8-k",		undef,	undef,
 	"utf8", undef, std("koi8-k") ],
   "cp1251"     => [ "UniCyr_8x16",	undef,		"cp1251",
 	"cp1251", "866", sub { std("microsoft-cp1251", @_) } ],
@@ -325,7 +325,7 @@ my %charsets = (
 	"tis-620", "874", std2("tis620.2533-1",12) ],
 #-  "tcvn"       => [ "tcvn8x16",		undef,		"tcvn",
 #-	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
-  "utf_vi"     => [ "tcvn8x16",	undef,	"viscii",
+  "tcvn"     => [ "tcvn8x16",	undef,	"viscii",
 	undef, undef, std2("tcvn-5712", 13), std2("tcvn-5712", 10) ],
 #- Tamil uses pseudo iso-8859-1 fonts
   "tscii" => [ "tamil",		undef,		"tscii-0",
