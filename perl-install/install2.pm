@@ -76,8 +76,8 @@ $o = $::o = {
 
 sub installStepsCall {
     my ($o, $auto, $fun, @args) = @_;
-    eval($auto ? "install_steps::$fun".'($o, @args)' : '$o->'."$fun".'(@args)');
-    #- TODO check $@ (when the method doesn't exist for example) ? I fail to do that
+    $fun = "install_steps::$fun" if $auto;
+    $o->$fun(@args);
 }
 
 #-######################################################################################
@@ -167,8 +167,8 @@ sub formatPartitions {
     my ($clicked, $ent_number, $auto) = @_;
 
     $o->{steps}{choosePackages}{done} = 0;
-    installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) unless $o->{isUpgrade};
-    installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) unless $::testing;
+    installStepsCall($o, $auto, 'choosePartitionsToFormat', $o->{fstab}) if !$o->{isUpgrade};
+    installStepsCall($o, $auto, 'formatMountPartitions', $o->{fstab}) if !$::testing;
 
     mkdir "$o->{prefix}/$_", 0755 foreach 
       qw(dev etc etc/profile.d etc/rpm etc/sysconfig etc/sysconfig/console 
@@ -328,12 +328,13 @@ sub exitInstall {
 #-######################################################################################
 sub main {
     $SIG{__DIE__} = sub { chomp(my $err = $_[0]); log::l("warning: $err") };
-    $SIG{SEGV} = sub { my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
-		       $o->ask_warn('', $msg);
-		       setVirtual(1);
-		       require install_steps_auto_install;
-		       install_steps_auto_install::errorInStep();
-		   };
+    $SIG{SEGV} = sub { 
+	my $msg = "segmentation fault: seems like memory is missing as the install crashes"; print "$msg\n"; log::l($msg);
+	$o->ask_warn('', $msg);
+	setVirtual(1);
+	require install_steps_auto_install;
+	install_steps_auto_install_non_interactive::errorInStep ();
+    };
     $ENV{PERL_BADLANG} = 1;
     umask 022;
 
@@ -454,7 +455,7 @@ sub main {
 		undef $::auto_install;
 	    } else {
 		print "Error using auto_install\n$@\n";
-		install_steps_auto_install::errorInStep();
+		install_steps_auto_install_non_interactive::errorInStep ();
 	    }
 	} else {
 	    log::l("auto install config file loaded successfully");

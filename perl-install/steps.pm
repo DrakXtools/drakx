@@ -24,7 +24,6 @@ use common;
   setRootPassword    => [ __("Set root password"), 1, 1, '', "installPackages", 'rootpasswd' ],
   addUser            => [ __("Add a user"), 1, 1, '', "installPackages", 'user' ],
   configureNetwork   => [ __("Configure networking"), 1, 1, '', "formatPartitions", 'network' ],
-#-  installCrypto      => [ __("Cryptographic"), 1, 1, '!$::expert', "configureNetwork" ],
   summary            => [ __("Summary"), 1, 0, '', "installPackages", 'default' ],
   configureServices  => [ __("Configure services"), 1, 1, '!$::expert', "installPackages", 'services' ],
 if_((arch() !~ /alpha/) && (arch() !~ /ppc/),

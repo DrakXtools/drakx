@@ -2,20 +2,15 @@ package install_steps_auto_install; # $Id$
 
 use diagnostics;
 use strict;
-use lang;
 use vars qw(@ISA $graphical @graphical_steps);
 
 @ISA = qw(install_steps);
-
-use modules;
-
 
 #-######################################################################################
 #- misc imports
 #-######################################################################################
 use common;
 use install_steps;
-use log;
 
 sub new {
     my ($type, $o) = @_;
@@ -31,19 +26,45 @@ sub new {
 
 	@ISA = ($interactiveClass, @ISA);
 
-	#- remove our non-interactive stuff
-	eval "undef *$_" foreach qw(configureNetwork enteringStep ask_warn wait_message errorInStep installPackages);
-
-	my $f = $o->{steps}{first};
-	do {
-	    member($f, @{$o->{interactiveSteps}}) ? $o->{steps}{$f}{noauto} = 1 : $o->{steps}{$f}{auto} = 1;
-	} while ($f = $o->{steps}{$f}{next});
+	for (my $f = $o->{steps}{first}; $f; $f = $o->{steps}{$f}{next}) {
+	    my $auto_name = member($f, @{$o->{interactiveSteps}}) ? 'noauto' : 'auto';
+	    $o->{steps}{$f}{$auto_name} = 1;
+	}
 
 	goto &{$::{$interactiveClass . "::"}{new}};
     } else {
-	(bless {}, ref $type || $type)->SUPER::new($o);
+	@ISA = ('install_steps_auto_install_non_interactive', @ISA);
+	(bless {}, ref $type || $type)->install_steps::new($o);
     }
 }
+
+
+sub exitInstall {
+    my ($o, $alldone) = @_;
+    return if $o->{autoExitInstall};
+
+    if ($o->{interactive}) {
+	(bless $o, "install_steps_$o->{interactive}")->exitInstall($alldone);
+    } else {
+	install_steps::exitInstall($o);
+	print "\a";
+	print "Auto installation complete (the postInstall is not done yet though)\n";
+	print "Press <Enter> to reboot\n";
+	<STDIN>;
+    }
+}
+
+
+#-######################################################################################
+#- install_steps_auto_install_non_interactive package
+#-######################################################################################
+package install_steps_auto_install_non_interactive;
+
+use install_steps;
+use lang;
+use modules;
+use common;
+use log;
 
 sub configureNetwork {
     my ($o) = @_;
@@ -54,7 +75,7 @@ sub configureNetwork {
 sub enteringStep {
     my ($o, $step) = @_;
     print _("Entering step `%s'\n", translate($o->{steps}{$step}{text}));
-    $o->SUPER::enteringStep($step);
+    $o->install_steps::enteringStep($step);
 }
 
 sub ask_warn {
@@ -77,28 +98,13 @@ sub errorInStep {
 #-######################################################################################
 sub selectLanguage {
     my ($o) = @_;
-    $o->SUPER::selectLanguage;
+    $o->install_steps::selectLanguage;
     lang::load_console_font($o->{lang});
 }
 
 sub installPackages {
     my ($o, $packages) = @_;
     catch_cdie { $o->install_steps::installPackages($packages) } sub { print "$@\n"; 1 }
-}
-
-sub exitInstall {
-    my ($o, $alldone) = @_;
-    return if $o->{autoExitInstall};
-
-    if ($o->{interactive}) {
-	(bless $o, "install_steps_$o->{interactive}")->exitInstall($alldone);
-    } else {
-	install_steps::exitInstall($o);
-	print "\a";
-	print "Auto installation complete (the postInstall is not done yet though)\n";
-	print "Press <Enter> to reboot\n";
-	<STDIN>;
-    }
 }
 
 1;
