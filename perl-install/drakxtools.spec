@@ -7,6 +7,7 @@ Source0: %name-%version.tar.bz2
 License: GPL
 Group: System/Configuration/Other
 Requires: %{name}-newt = %version-%release, perl-Gtk2 >= 0.95-6mdk, /usr/X11R6/bin/xtest, font-tools, usermode >= 1.63-5mdk, perl-MDK-Common >= 1.1.2-2mdk, gurpmi
+Requires: foomatic-db-engine
 Conflicts: drakconf < 9.1-14mdk
 Conflicts: rpmdrake < 2.1-29mdk
 Conflicts: mandrake_doc-drakxtools-en < 9.2, mandrake_doc-drakxtools-es < 9.2, mandrake_doc-drakxtools-fr < 9.2
@@ -175,7 +176,7 @@ dirs1="usr/lib/libDrakX usr/share/libDrakX"
 (cd $RPM_BUILD_ROOT ; find $dirs1 usr/bin usr/sbin ! -type d -printf "/%%p\n")|egrep -v 'bin/.*harddrake' > %{name}.list
 (cd $RPM_BUILD_ROOT ; find $dirs1 -type d -printf "%%%%dir /%%p\n") >> %{name}.list
 
-perl -ni -e '/XFdrake|bootlook|drakbackup|drakfont|gtk|icons|logdrake|net_monitor|pixmaps/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
+perl -ni -e '/drakbackup|drakfont|gtk|icons|logdrake|net_monitor|pixmaps|printer|XFdrake/ ? print STDERR $_ : print' %{name}.list 2> %{name}-gtk.list
 perl -ni -e '/http/ ? print STDERR $_ : print' %{name}.list 2> %{name}-http.list
 
 #mdk menu entry
