@@ -72,7 +72,9 @@ foreach my $img (@images) {
 	    system("/bin/cp -f move/isolinux/* $tftpboot/move 2>/dev/null");
 	}
     } elsif ($img =~ /boot.iso/) {
-	boot_iso($img);
+	boot_iso($img, 0);
+    } elsif ($img =~ /bootcdrom.iso/) {
+	boot_iso($img, 1);
     } elsif ($img =~ /drivers/) {
 	drivers($type, $I, "$img-$_") foreach @kernels;
 	rename("$img-$main", $img);
@@ -784,10 +786,14 @@ EOF
 }
 
 sub boot_iso {
-    my ($iso) = @_;
+    my ($iso, $bootcdrom) = @_;
 
     my $cfg = cat_('isolinux/isolinux.cfg') or die 'isolinux missing';
-    $cfg =~ s/automatic=method:\w+,?//gm;
+    if ($bootcdrom) {
+	$cfg =~ s/(automatic=method:\w+)/changedisk $1/gm;
+    } else {
+	$cfg =~ s/(automatic=method:\w+)//gm;
+    }
 
     eval { rm_rf('.boot_iso') };
     mkdir_p('.boot_iso/isolinux');
