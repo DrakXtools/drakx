@@ -360,6 +360,10 @@ sub ask_from_entries_refW {
 	    } else {
 		($w, $set) = create_clist($e, $may_go_to_next, $changed);
 	    }
+	    if (@$l == 1) {
+		#- i'm the only one, double click means accepting
+		$w->signal_connect(button_press_event => sub { if ($_[1]{type} =~ /^2/) { $mainw->{retval} = 1; Gtk->main_quit } });
+	    }
 	    if (@{$e->{list}} > 4) {
 		$has_scroll = 1;
 		$expand = 1;
