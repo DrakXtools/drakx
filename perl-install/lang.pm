@@ -51,22 +51,22 @@ my %languages = (
 );
 
 my %charsets = (
-  "armscii-8"  => [ "arm8.fnt",			"armscii8",
+  "armscii-8"  => [ "arm8",			"armscii8",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-*helv*-medium-r-normal--14-*-*-*-*-armscii-8" ],
 #- chinese needs special console driver for text mode
   "Big5"       => [ "?????",                    "????",
         "*-helvetica-medium-r-normal--14-*-*-*-*-*-iso8859-1," .
         "-taipei-*-medium-r-normal--16-*-*-*-*-*-big5-0" ],
-  "iso-8859-1" => [ "lat0-sun16.psf",		"iso15",
+  "iso-8859-1" => [ "lat0-sun16",		"iso15",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1" ],
-  "iso-8859-2" => [ "lat2-sun16.psf",		"iso02",
+  "iso-8859-2" => [ "lat2-sun16",		"iso02",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-2" ],
   "iso-8859-3" => [ "iso03.f16",		"iso03",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-3" ],
-  "iso-8859-4" => [ "lat4u-16.psf",		"iso04",
+  "iso-8859-4" => [ "lat4u-16",		        "iso04",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-4" ],
   "iso-8859-5" => [ "iso05.f16",		"iso05",
@@ -85,10 +85,10 @@ my %charsets = (
   "iso-8859-8" => [ "iso08.f16",		"iso08",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-8" ],
-  "iso-8859-9" => [ "lat5-16.psf",		"iso09",
+  "iso-8859-9" => [ "lat5-16",		        "iso09",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-9" ],
-  "iso-8859-15" => [ "lat0-sun16.psf",		"iso15",
+  "iso-8859-15" => [ "lat0-sun16",		"iso15",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-15" ],
 #- japanese needs special console driver for text mode [kon2]
@@ -96,20 +96,20 @@ my %charsets = (
         "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
         "-*-*-medium-r-normal--14-*-*-*-*-*-jisx0208.*-0," .
         "-*-*-medium-r-normal--14-*-*-*-*-*-jisx0201.*-0" ],
-  "koi8-r"     => [ "Cyr_a8x16.psf",		"koi2alt",
+  "koi8-r"     => [ "Cyr_a8x16",		"koi2alt",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-koi8-r" ],
-  "koi8-u"     => [ "ruscii_8x16.psf",		"koi2alt",
+  "koi8-u"     => [ "ruscii_8x16",		"koi2alt",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-koi8-u" ],
 #- korean needs special console driver for text mode
   "ksc5601"    => [ "?????",                    "?????",
         "*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
         "-*-*-medium-*-*--14-*-*-*-*-*-ksc5601.1987-*" ],
-  "tcvn"       => [ "tcvn8x16.psf",		"tcvn",
+  "tcvn"       => [ "tcvn8x16",		        "tcvn",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-tcvn-5712" ],
-  "viscii"     => [ "viscii10-8x16.psf",	"viscii",
+  "viscii"     => [ "viscii10-8x16",	        "viscii",
 	"*-helvetica-medium-r-normal--14-*-*-*-*-iso8859-1," .
 	"*-helvetica-medium-r-normal--14-*-*-*-*-viscii1.1-1" ],
 );
@@ -165,7 +165,7 @@ sub write {
 
 	    my $p = "$prefix/usr/lib/kbd";
 	    commands::cp("-f",
-		     "$p/consolefonts/$c->[0].gz",
+		     "$p/consolefonts/$c->[0].psf.gz",
 		     glob_("$p/consoletrans/$c->[1]*"),
 		     "$prefix/etc/sysconfig/console");
 	}
