@@ -323,7 +323,7 @@ int delete_module(const char *);
 /* this is the previous behavior, but it does result in
    insmod.c being broken on anything except i386 */
 
-#define MATCH_MACHINE(x)  (x == EM_386 || x == EM_486)
+#define MATCH_MACHINE(x)  (x == EM_386)
 #define SHT_RELM	SHT_REL
 #define Elf32_RelM	Elf32_Rel
 
