@@ -1,6 +1,6 @@
 package network::ethernet; # $Id$
 
-
+use c;
 use network::network;
 use modules;
 use modules::interactive;
@@ -38,6 +38,13 @@ qq(
     }
     $::isStandalone and modules::write_conf();
     1;
+}
+
+
+sub mapIntfToDevice {
+    my ($interface) = @_;
+    my ($bus, $slot, $func) = map { hex($_) } (c::getHwIDs("eth0") =~ /([0-9a-f])+:([0-9a-f])+\.([0-9a-f]+)/);
+    grep { $_->{pci_bus} == $bus && $_->{pci_device} == $slot } detect_devices::probeall();
 }
 
 
