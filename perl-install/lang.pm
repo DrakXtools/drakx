@@ -463,109 +463,116 @@ sub getLANGUAGE {
 					locale_to_main_locale($lang)));
 }
 
+
+my %im_xim_program =
+  (
+   chinput => {
+               'zh_CN' => '"chinput -gb"',
+               'zh_CN.UTF-8' => '"chinput -gb"',
+               'zh_HK' => '"chinput -big5"',
+               'zh_HK.UTF-8' => '"chinput -big5"',
+               'zh_SG' => '"chinput -gb"',
+               'zh_SG.UTF-8' => '"chinput -gb"',
+               'zh_TW' => '"chinput -big5"',
+               'zh_TW.UTF-8' => '"chinput -big5"',
+              },
+   xcin => {
+            'zh_TW' => {
+                        XMODIFIERS => '"@im=xcin-zh_TW"',
+                       },
+           },
+  );
+
+my %gtkqt_im =
+  (
+   ami => {
+           XIM => 'Ami',
+           #- NOTE: there are several possible versions of ami, for the different
+           #- desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
+           #- be the xinitrc script, XIM section, that will choose the right one 
+           #- XIM_PROGRAM => 'ami',
+           XMODIFIERS => '"@im=Ami"',
+           GTK_IM_MODULE => 'xim',
+          },
+   chinput => {
+               GTK_IM_MODULE => 'xim',
+               XIM => 'xcin',
+               XMODIFIERS => '"@im=Chinput"',
+               },
+   fctix => {
+             XIM => 'fcitx',
+             XIM_PROGRAM => 'fcitx',
+             XMODIFIERS => '"@im=fcitx"',
+            },
+   scim => {
+            GTK_IM_MODULE => 'scimuim-xim',
+            XIM_PROGRAM => 'scim -d',
+            XMODIFIERS => '"@im=SCIM"',
+           },
+   uim => {
+           GTK_IM_MODULE => 'uim-anthy',
+           XIM => 'uim-anthy',
+           XIM_PROGRAM => 'uim-xim',
+           XMODIFIERS => '"@im=uim-anthy"',
+          },
+   xcin => {
+            XIM => 'xcin',
+            XIM_PROGRAM => 'xcin',
+            GTK_IM_MODULE => 'xim',
+           },
+
+);
+           
+
 my %xim = (
 #- xcin only works with 'zh_TW', 'zh_TW.Big5', 'zh_CN', 'zh_CN.GB2312'
 #- all other locale names, in particular 'zh_HK' or 'zh_TW.UTF-8'
 #- are unknown to it. So chinput is used for all but 'zh_TW'
   'zh_TW' => { 
  	ENC => 'big5',
- 	XIM => 'xcin',
- 	XIM_PROGRAM => 'xcin',
- 	XMODIFIERS => '"@im=xcin-zh_TW"',
-	GTK_IM_MODULE => 'xim',
  	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_TW.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -big5"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN' => {
 	ENC => 'gb',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -gb"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_CN.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -gb"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_SG' => {
 	ENC => 'gb',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -gb"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_SG.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -gb"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_HK' => {
 	ENC => 'big5',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -big5"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'zh_HK.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'Chinput',
-	XIM_PROGRAM => '"chinput -big5"',
-	XMODIFIERS => '"@im=Chinput"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko_KR' => {
 	ENC => 'kr',
-	XIM => 'Ami',
-	#- NOTE: there are several possible versions of ami, for the different
-	#- desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
-	#- be the xinitrc script, XIM section, that will choose the right one 
-	#- XIM_PROGRAM => 'ami',
-	XMODIFIERS => '"@im=Ami"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ko_KR.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'Ami',
-	#- NOTE: there are several possible versions of ami, for the different
-	#- desktops (kde, gnome, etc). So XIM_PROGRAM isn't defined; it will
-	#- be the xinitrc script, XIM section, that will choose the right one 
-	#- XIM_PROGRAM => 'ami',
-	XMODIFIERS => '"@im=Ami"',
-	GTK_IM_MODULE => 'xim',
 	CONSOLE_NOT_LOCALIZED => 'yes',
   },
   'ja_JP' => {
 	ENC => 'eucj',
-	XIM => 'uim-anthy',
-	XIM_PROGRAM => 'uim-xim',
-	XMODIFIERS => '"@im=uim-anthy"',
-	GTK_IM_MODULE => 'uim-anthy',
   },
   'ja_JP.UTF-8' => {
 	ENC => 'utf8',
-	XIM => 'uim-anthy',
-	XIM_PROGRAM => 'uim-xim',
-	XMODIFIERS => '"@im=uim-anthy"',
-	GTK_IM_MODULE => 'uim-anthy',
   },
   #- XFree86 has an internal XIM for Thai that enables syntax checking etc.
   #- 'Passthroug' is no check at all, 'BasicCheck' accepts bad sequences
@@ -581,6 +588,18 @@ my %xim = (
 #-	XIM_PROGRAM => 'xvnkb',
 #-  },
 );
+
+sub set_default_im {
+    my ($im, @langs) = @_;
+    add2hash($xim{$_}, $gtkqt_im{$im}) foreach @langs;
+    add2hash($xim{$_}, { XIM_PROGRAM => $im_xim_program{$im}{$_} }) foreach @langs;
+}
+
+# CJK default input methods:
+set_default_im('ami',   qw(ko_KR ko_KR.UTF-8));
+set_default_im('scim',  qw(ja_JP ja_JP.UTF-8));
+set_default_im('fctix', qw(zh_CN zh_CN.UTF-8 zh_HK zh_HK.UTF-8 zh_SG zh_SG.UTF-8 zh_TW zh_TW.UTF-8));
+
 
 #- [0]: console font name
 #- [1]: sfm map for console font (if needed)
