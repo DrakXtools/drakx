@@ -921,7 +921,7 @@ sub config_dvd {
     #- can't have both a devfs and a non-devfs config
     #- the /etc/sysconfig/rawdevices solution gives errors with devfs
 
-    my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms__faking_ide_scsi() or return;
+    my @dvds = grep { detect_devices::isDvdDrive($_) } detect_devices::cdroms() or return;
 
     log::l("configuring DVD: " . join(" ", map { $_->{device} } @dvds));
     #- create /dev/dvd symlink

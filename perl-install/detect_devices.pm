@@ -50,48 +50,6 @@ sub zips()        {
     } raw_zips();
 }
 
-sub faking_ide_scsi() { !$::isStandalone && !$::move && c::kernel_version() =~ /^\Q2.4/ }
-
-sub cdroms__faking_ide_scsi() { grep { $_->{media_type} eq 'cdrom' } cdroms_and_zips__faking_ide_scsi() }
-sub cdroms_and_zips__faking_ide_scsi() {
-    my @l = grep { $_->{media_type} eq 'cdrom' } get();
-
-    if (my @l_need_fake = grep { faking_ide_scsi() && $_->{bus} eq 'ide' && !($_->{media_type} eq 'cdrom' && !isBurner($_)) } @l) {
-	require modules;
-	modules::add_probeall('scsi_hostadapter', 'ide-scsi');
-
-	my $nb_cdrom = 1 + max(-1, map { $_->{device} =~ /scd(\d+)/ } @l);
-	my $nb_zip = 1 + max(-1, map { if_($_->{device} =~ /sd(\w+)/, ord($1) - ord('a')) } getSCSI());
-	my $scsi_hostadapters = modules::get_probeall('scsi_hostadapter');
-	my $devfs_host = find_index { $_ eq 'ide-scsi' } @$scsi_hostadapters;
-	my $devfs_id = 0;
-
-	foreach my $e (@l_need_fake) {
-	    $e->{devfs_prefix} = sprintf('scsi/host%d/bus0/target%d/lun0', $devfs_host, $devfs_id++);
-	    my $faked;
-	    if ($e->{media_type} eq 'cdrom') {
-		$faked = "scd" . $nb_cdrom++;
-		log::l("IDEBurner: $e->{device} => $faked and $e->{devfs_prefix}");
-	    } else {
-		$faked = "sd" . chr(ord('a') + $nb_zip++);
-		log::l("IDE Zip: $e->{device} => $faked and $e->{devfs_prefix}");
-	    }
-	    if ($::move) {
-		#- make it use ide-scsi *now*, not after reboot
-		output("/proc/ide/$e->{device}/settings", 'ide_scsi:1');
-		output("/proc/ide/$e->{device}/driver", 'ide-scsi');
-	    }
-	    $e->{device} = $faked;
-	}
-	get_devfs_devices(@l_need_fake);
-    }
-    foreach (@l) {
-	$_->{device} .= 4 if $_->{media_type} ne 'cdrom';
-	$_->{devfs_device} = $_->{devfs_prefix} . '/' . ($_->{media_type} eq 'cdrom' ? 'cd' : 'part4');
-    }
-    @l;
-}
-
 sub floppies() {
     require modules;
     eval { modules::load("floppy") };
@@ -111,7 +69,7 @@ sub floppy() { first(floppies_dev()) }
 #- example ls120, model = "LS-120 SLIM 02 UHD Floppy"
 
 sub removables() {
-    floppies(), cdroms_and_zips__faking_ide_scsi();
+    floppies(), cdroms(), zips();
 }
 
 sub get_sys_cdrom_info {
