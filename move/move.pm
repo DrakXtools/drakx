@@ -105,9 +105,6 @@ sub init {
 
     -d '/lib/modules/' . c::kernel_version() or warn("ERROR: kernel package " . c::kernel_version() . " not installed\n"), c::_exit(1);
 
-    modules::load_category('multimedia/sound');
-    run_program::run('service', 'sound', 'start');
-
     system('sysctl -w kernel.hotplug="/bin/true"');
     modules::load_category('bus/usb'); 
     eval { modules::load('usb-storage', 'sd_mod') };
@@ -328,6 +325,9 @@ sub install2::configMove {
         run_program::run('/sbin/service', 'network', 'restart');
     }
     install_steps_interactive::summaryBefore($o);
+
+    modules::load_category('multimedia/sound');
+    run_program::run('service', 'sound', 'start');
 
     require install_any;
     install_any::write_fstab($o);
