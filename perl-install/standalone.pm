@@ -10,7 +10,7 @@ if ($::isInstall) {
     require 'log.pm';
     log::l('ERROR: use standalone made during install :-(');
     require common;
-    log::l('backtrace: ' . common::backtrace());
+    log::l('backtrace: ' . backtrace());
 }
 $::isStandalone = 1;
 
