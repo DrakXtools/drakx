@@ -983,17 +983,10 @@ sub use_root_part {
 
 sub getHds {
     my ($o, $in) = @_;
-    my $try_scsi = !$::expert;
 
   getHds: 
     my $all_hds = fsedit::get_hds($o->{partitioning}, $in);
     my $hds = $all_hds->{hds};
-
-    if (is_empty_array_ref($hds) && $try_scsi) {
-	$try_scsi = 0;
-	$o->setupSCSI; #- ask for an unautodetected scsi card
-	goto getHds;
-    }
 
     if (is_empty_array_ref($hds)) { #- no way
 	die N("An error occurred - no valid devices were found on which to create new filesystems. Please check your hardware for the cause of this problem");
