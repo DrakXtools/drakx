@@ -991,6 +991,7 @@ sub exitInstall {
     my ($o) = @_;
     eval { 
 	my $report = '/root/drakx/report.bug';
+	unlink $report, "$report.gz";
 	output "$o->{prefix}$report", install_any::report_bug($o->{prefix});
 	run_program::rooted($o->{prefix}, 'gzip', $report);
     };
