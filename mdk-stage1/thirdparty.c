@@ -32,7 +32,7 @@
 #define THIRDPARTY_MOUNT_LOCATION "/tmp/thirdparty"
 #define THIRDPARTY_DIRECTORY "/install/thirdparty"
 
-static enum return_type third_party_choose_device(char ** device)
+static enum return_type third_party_choose_device(char ** device, int probe_only)
 {
 	char ** medias, ** medias_models;
 	char ** ptr, ** ptr_models;
@@ -76,6 +76,17 @@ static enum return_type third_party_choose_device(char ** device)
 		return RETURN_BACK;
 	}
 
+	if (probe_only) {
+#ifndef DISABLE_DISK
+		free(disk_medias);
+		free(disk_medias_models);
+#endif
+#ifndef DISABLE_CDROM
+		free(cdrom_medias);
+		free(cdrom_medias_models);
+#endif
+		return RETURN_OK;
+	}
 
 	ptr = medias = malloc((count + 1) * sizeof(char *));
 	ptr_models =medias_models = malloc((count + 1) * sizeof(char *));
@@ -161,7 +172,7 @@ static enum return_type third_party_choose_device(char ** device)
 static enum return_type thirdparty_mount_device(char * device)
 {
         log_message("third party: trying to mount device %s", device);
-	if (!try_mount(device, THIRDPARTY_MOUNT_LOCATION)) {
+	if (try_mount(device, THIRDPARTY_MOUNT_LOCATION) != 0) {
 		stg1_error_message("I can't mount the selected device (%s).", device);
 		return RETURN_ERROR;
 	}
@@ -256,13 +267,14 @@ void thirdparty_load_modules(void)
 	device = NULL;
 	if (IS_AUTOMATIC) {
 		device = get_auto_value("thirdparty");
+		third_party_choose_device(NULL, 1); /* probe only to create devices */
 		log_message("third party: trying automatic device %s", device);
 		if (thirdparty_mount_device(device) != RETURN_OK)
 			device = NULL;
 	}
 
 	while (!device || streq(device, "")) {
-		results = third_party_choose_device(&device);
+		results = third_party_choose_device(&device, 0);
 		if (results == RETURN_BACK)
 			return;
 		if (thirdparty_mount_device(device) != RETURN_OK)
