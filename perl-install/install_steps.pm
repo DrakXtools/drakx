@@ -126,6 +126,12 @@ sub selectKeyboard {
     addToBeDone {
 	keyboard::write($o->{keyboard});
     } 'installPackages' if !$::g_auto_install && (!$o->{isUpgrade} || !$o->{keyboard}{unsafe});
+
+    if ($o->{raw_X}) {
+	require Xconfig::default;
+	Xconfig::default::config_keyboard($o->{raw_X}, $o->{keyboard});
+	$o->{raw_X}->write;
+    }
 }
 #------------------------------------------------------------------------------
 sub acceptLicense {}
