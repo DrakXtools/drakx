@@ -813,10 +813,19 @@ Modifying the fields below will override this configuration."),
                     type => "yesorno",
                     post => sub {
                         my ($res) = @_;
-                        die 'wizcancel' if !$res;
-                        return "lan_protocol";
+                        return $res ? "lan_protocol" : "alrd_end";
                     }
                    },
+
+
+                   alrd_end => 
+                   {
+                    name => N("Congratulations, the network and Internet configuration is finished.
+
+"),
+                           end => 1,
+                   },
+
 
                    lan_protocol =>
                    {
