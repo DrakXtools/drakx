@@ -42,7 +42,7 @@ sub ask_connect_now {
 	{
 	    my $w = $in->wait_message('', _("Testing your connection..."), 1);
 	    connect_backend();
-	    sleep 5;
+	    sleep 10;
 	    my $netc = {};
 	    $up=connected();
 	}
