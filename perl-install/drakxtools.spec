@@ -27,7 +27,7 @@ Summary: The drakxtools (XFdrake, diskdrake, keyboarddrake, mousedrake...)
 Group: System/Configuration/Other
 Requires: perl-base >= 5.600-29mdk, urpmi, modutils >= 2.3.11, ldetect-lst >= 0.1.2-32mdk, usermode-consoleonly >= 1.44-4mdk
 Obsoletes: diskdrake setuptool
-Obsoletes: Xconfigurator mouseconfig kbdconfig printtool
+Obsoletes: Xconfigurator mouseconfig kbdconfig printtool 
 Provides: diskdrake setuptool Xconfigurator mouseconfig kbdconfig printtool
 
 %package http
@@ -38,9 +38,16 @@ Requires: %{name}-newt = %{version}-%{release}, perl-Net_SSLeay, perl-Authen-PAM
 %package -n harddrake
 Summary: Main Hardware Configuration/Information Tool
 Group: System/Configuration/Hardware
+Requires: %{name}-newt = %{version}-%{release}
+Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+
+%package -n harddrake-ui
+Summary: Main Hardware Configuration/Information Tool
+Group: System/Configuration/Hardware
 Requires: %{name} = %{version}-%{release}
-Obsoletes: kudzu, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
-Provides: kudzu, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Obsoletes: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
+Provides: kudzu, kudzu-devel, libdetect0, libdetect0-devel, libdetect-lst, libdetect-lst-devel, detect, detect-lst
 
 %description
 Contains XFdrake, diskdrake, keyboarddrake, lspcidrake, mousedrake,
@@ -147,18 +154,19 @@ for i in /usr/X11R6/bin/Xconfigurator %{_sbindir}/kbdconfig %{_sbindir}/mousecon
     if [ -L $i ]; then %{__rm} -f $i; fi
 done
 
-
 %post http
 %_post_service drakxtools_http
 
 %preun http
 %_preun_service drakxtools_http
 
-
 %post -n harddrake
+%_initrddir/harddrake
+
+%post -n harddrake-ui
 %update_menus
 
-%postun -n harddrake
+%postun -n harddrake-ui
 %clean_menus
 
 
@@ -176,8 +184,11 @@ done
 
 %files -n harddrake
 %defattr(-,root,root)
-%_sbindir/harddrake2
 %config(noreplace) %_initrddir/harddrake
+
+%files -n harddrake-ui
+%defattr(-,root,root)
+%_sbindir/harddrake2
 %_datadir/pixmaps/harddrake2
 %_menudir/harddrake
 
@@ -193,7 +204,10 @@ done
 %changelog 
 * Mon Jul  8 2002 tve <tv@vador.mandrakesoft.com> 1.1.8-2mdk
 - harddrake2 :
-  o obsoletes/provides libdetect-lst, libdetect-lst-devel, detect, detect-lst
+  o split package between harddrake and harddrake-ui to minimize the
+    harddrake service dependancies
+  o obsoletes/provides libdetect-lst, libdetect-lst-devel, detect,
+    detect-lst, kudzu-devel
   o cache detect_devices::probeall(1) so that hw probe is run once
   o enhanced help
   o mice:
@@ -201,6 +215,15 @@ done
 	* delete qw(MOUSETYPE XMOUSETYPE unsafe)
   o eide devices: split up info field into vendor and model fields
   o complete help
+  o skip configuration on firt run
+  o don't restart harddrake on install
+  o center the main window
+  o remove drakx decorations
+  o don't display "run config tool" button if no configurator
+    availlable
+  o skip hw classes without configurator (which'll have a configurator
+    after porting updfstab)
+
 
 * Mon Jul 08 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.1.8-1mdk
 - snapshot
