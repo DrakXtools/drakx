@@ -39,12 +39,6 @@
 #           cvs if version control of /etc directory
 #           cdrecord & mkisofs
 #           
-#  cdrw: /sys/dev/cdrom/info
-#        /scsi/host0/bus0/target4/lun0
-#
-#  tar --use-compress-prog=bzip2 xf foo.tar.bz2
-
-
 
 use Gtk;
 use lib qw(/usr/lib/libDrakX );
@@ -56,7 +50,8 @@ use strict;
 
 my $in = 'interactive'->vnew('', 'default');
 $::isEmbedded = ($::XID, $::CCPID) = "@ARGV" =~ /--embedded (\w+) (\w+)/;
-!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+#!$::isEmbedded && $in->isa('interactive_gtk') and $::isWizard=1;
+
 
 if ("@ARGV" =~ /--help|-h/) {
     print q(Backup and monitoring application
@@ -151,6 +146,9 @@ foreach (@ARGV) {
     $mode == 1 and push @list_arg, $_;
 }
 
+if ($mdk_cc) { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
+	   } else { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode_my(); }
+
 sub debug {
     print "SYS_FILES: $_ \n" foreach (@sys_files);
     print "HOME_FILES: $_ \n" foreach (@user_list);
@@ -200,9 +198,12 @@ sub save_conf_file {
     $backup_sys_cvs or push @cfg_list, "NO_SYS_CVS\n" ;
     $option_replace and push @cfg_list, "OPTION_REPLACE\n" ;
     $backup_sys or push @cfg_list,  "NO_SYS_FILES\n";
-    if ($comp_mode) {	push @cfg_list, "OPTION_COMP=TAR.BZ2\n"; } 
-    else { push @cfg_list, "OPTION_COMP=TAR.GZ\n"; }
-    output_p( $cfg_file, @cfg_list);
+    if ($comp_mode) {
+	push @cfg_list, "OPTION_COMP=TAR.BZ2\n"
+    } else {
+	push @cfg_list, "OPTION_COMP=TAR.GZ\n"
+    }
+    output_p($cfg_file, @cfg_list);
     save_cron_files();
 }
 
@@ -278,9 +279,6 @@ sub read_conf_file {
     $DEBUG and debug; 
 }
 
-if ($mdk_cc) { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode();
-	   } else { $build_floppy || $build_cd || $default || @list_arg || $conf_file ? backend_mod() : interactive_mode_my(); }
-
 sub backend_mod {
 
 }
@@ -324,26 +322,15 @@ sub return_path {
 }
 
 sub build_backup_files {
-
-#tar --use-compress-prog=bzip2 xf foo.tar.bz2
-
     -d  $save_path or mkdir_p($save_path);
     my $path_name;
-    my $tar_cmd;
-    my $tar_ext;
     my @list_other_;
-    if ($comp_mode) { $tar_cmd = "tar cv --use-compress-program /usr/bin/bzip2 "; $tar_ext = "tar.bz2" }
-    else { $tar_cmd = "tar cvz "; $tar_ext = "tar.gz"}
-    if ( $option_replace ) { 
-	$comp_mode and system("cd $save_path &&  rm -f *.tar.gz");  
-	$comp_mode or  system("cd $save_path &&  rm -f *.tar.bz2");  
-    }
     if ($where_hd) {
 	print "backup_sys @sys_files\n";
-	$backup_sys and system("$tar_cmd -f $save_path/backup_sys.$tar_ext @sys_files");
+	$backup_sys and system("tar cvfz $save_path/backup_sys.tar.gz @sys_files");
 	print "backup_other @list_other\n";
 	if (@list_other) {
-	    system("$tar_cmd -f $save_path/backup_other.$tar_ext @list_other");
+	    system("tar cvfz $save_path/backup_other.tar.gz @list_other");
 	    foreach (@list_other) {
 		push @list_other_, $_ . "\n";
 	    }
@@ -353,8 +340,8 @@ sub build_backup_files {
 	    foreach (@user_list) {
 		$path_name = return_path($_);
 		print "path of user: $path_name\n";
-		$what_no_browser or system("$tar_cmd  -f $save_path/backup_user_$_.$tar_ext $path_name");
-		$what_no_browser and system("$tar_cmd --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.$tar_ext $path_name");
+		$what_no_browser or system("tar cvfz $save_path/backup_user_$_.tar.gz $path_name");
+		$what_no_browser and system("tar cvz --exclude NewCache --exclude Cache --exclude cache -f $save_path/backup_user_$_.tar.gz $path_name | grep cahe");
 	    }
 	}
     }
@@ -385,8 +372,8 @@ sub interactive_mode {
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
 
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and bzip2 "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gzip"),   }
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
 	
     if ($cfg_file_exist) { 
 	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n\n");
@@ -525,69 +512,35 @@ sub advanced {
     my $choice_what_sys;
     read_conf_file();
     
-    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("../pixmaps/backup_net.png");
-    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("../pixmaps/backup_hd.png");
-    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("../pixmaps/backup_time.png");
-    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("../pixmaps/user.png");
-    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("../pixmaps/bootloader.png");
-    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("../pixmaps/net_u.png");
-    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("../pixmaps/backup_options.png");
-    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("../pixmaps/hd.png");
-    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("../pixmaps/net.png");
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("../pixmaps/cdrom.png");
+#*    my ($pix_net_map, $pix_net_mask) = gtkcreate_png("backup_net.png");
+#*    my ($pix_hd_map, $pix_hd_mask) = gtkcreate_png("backup_hd.png");
+    my ($pix_time_map, $pix_time_mask) = gtkcreate_png("backup_time.png");
+#*    my ($pix_user_map, $pix_user_mask) = gtkcreate_png("user.png");
+#*    my ($pix_sys_map, $pix_sys_mask) = gtkcreate_png("bootloader.png");
+#*    my ($pix_other_map, $pix_other_mask) = gtkcreate_png("net_u.png");
+    my ($pix_options_map, $pix_options_mask) = gtkcreate_png("backup_options.png");
+#*    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd.png");
+#*    my ($pix_net2_map, $pix_net2_mask) = gtkcreate_png("net.png");
+#*    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom.png");
 
-    my $label_what = gtkpack(new Gtk::VBox( 0, 2),
-			 new Gtk::Pixmap($pix_hd_map, $pix_hd_mask),
-			 _("What backup.")
-			 );
-    my $label_where = gtkpack(new Gtk::VBox( 0, 2),
-			 new Gtk::Pixmap($pix_net_map, $pix_net_mask),
-			 _("Where backup.")
-			 );
-    my $label_when = gtkpack(new Gtk::VBox( 0, 2),
-			 new Gtk::Pixmap($pix_time_map, $pix_time_mask),
-			 _("When backup.")
-			 );
-
-    my $label_options = gtkpack(new Gtk::VBox( 0, 2),
-			 new Gtk::Pixmap($pix_options_map, $pix_options_mask),
-			 _("Options")
-			 );
-
-    my $label_what_sys = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_sys_map, $pix_sys_mask),
-			 _("System", " ")
-			 );
-    my $label_what_user = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_user_map, $pix_user_mask),
-			 _("Users", " ")
-			 );
-
-    my $label_what_other = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_other_map, $pix_other_mask),
-			 _("Other", " ")
-			 ); 
-
-    my $label_where_net = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_net2_map, $pix_net2_mask),
-			 _(" Network ")
-			 );
-
-    my $label_where_cd = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_cd_map, $pix_cd_mask),
-			 _(" CDROM\nDVDROM ")
-			 );
-
-    my $label_where_hd = gtkpack(new Gtk::HBox( 0, 2),
-			 new Gtk::Pixmap($pix_hd2_map, $pix_hd2_mask),
-			 _(" Hard Drive\n NFS ")
-			 );
+my ($label_what, $label_where, $label_when, $label_options, $label_what_sys, $label_what_user, $label_what_other, $label_where_net, $label_where_cd, $label_where_hd) = map { gtkpack($_->[2] ? new Gtk::VBox(0, 2) : new Gtk::HBox(0, 2), gtkpng($_->[0]), $_->[1]) }
+      (['backup_hd', _('What backup.'), 1],
+       ['backup_net', _('Where backup.'), 1],
+       ['backup_time', _("When backup."), 1],
+       ['backup_options', _("Options"), 1],
+       ['bootloader', _('System'), 0],
+       ['user', _('Users'), 0],
+       ['net_u', _('Other'), 0],
+       ['net', _('Network'), 0],
+       ['cdrom', _('CDROM\nDVDROM'), 0],
+       ['hd', _('Hard Drive\n NFS'), 0],
+      );
 
     my $box_what_sys =  gtkpack_(new Gtk::VBox(0,1),
 				 1, _("\nPlease check all options that you need.\n"),
 				 1, _("This options can backup and restore all files on your /etc directory.\n"),
-				 0, my $check_what_sys = new Gtk::CheckButton( _(" Backup your System files. (~ 2Mo)")),
-				 0, my $check_what_cvs = new Gtk::CheckButton( _(" Need to restore any versions.(~ 10Mo)") ),
+				 0, my $check_what_sys = new Gtk::CheckButton( _("Backup your System files. (~ 2Mo)")),
+				 0, my $check_what_cvs = new Gtk::CheckButton( _("Need to restore any versions.(~ 10Mo)") ),
 				 0, _("With this option you will be able to restore any version\n of your /etc directory."),
 				 1, " ",
 				 );
@@ -643,6 +596,7 @@ sub advanced {
     my $box_where_net =  gtkpack_(new Gtk::VBox(0,1),
 				  0, new Gtk::HSeparator,
 				  0, my $check_where_net = new Gtk::CheckButton( _(" Use Network to backup") ),
+#				  0, my $check_where_net_daemon = new Gtk::CheckButton( _(" Use Network with daemon") ),
 				  0, new Gtk::HSeparator,
 				  0, gtkpack_(new Gtk::HBox(0,10),
 					      1, _("please choose your protocol"),
@@ -694,7 +648,7 @@ sub advanced {
     my $box_where_hd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_hd = new Gtk::CheckButton( _(" Use Hard Disk to backup") ),
-
+#				 0, my $check_where_hd_daemon = new Gtk::CheckButton( _(" Use Hard Disk with daemon") ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     0, _(" "),
@@ -724,7 +678,7 @@ sub advanced {
     my $box_where_cd =  gtkpack_(new Gtk::VBox(0,1),
 				 0, new Gtk::HSeparator,
 				 0, my $check_where_cd = new Gtk::CheckButton( _(" Use CD/DVDROM to backup") ),
-
+#				 0, my $check_where_cd_daemon = new Gtk::CheckButton( _(" Use CD/DVDROM with daemon") ),
 				 0, new Gtk::HSeparator,
 				 0, gtkpack_(new Gtk::HBox(0,10),
 					     1, _("please choose your CD space"),
@@ -904,6 +858,8 @@ sub find_backup_to_restore {
 }
 
 sub do_cron {
+
+
 }
 
 sub do_restore_backend {
@@ -911,7 +867,6 @@ sub do_restore_backend {
     $restore_sys   and system("cd / && tar xvfz $save_path/backup_sys.tar.gz ");
     $restore_other and system("cd / && tar xvfz $save_path/backup_other.tar.gz ");
 
-# decomp:  bzcat nomdufichier.tar.bz2 | tar xv
 }
 
 sub do_restore {
@@ -927,6 +882,14 @@ sub do_restore {
 					       ),
 				   1, new Gtk::VBox(0,10),
 				   0, gtkpack_(new Gtk::HBox(0,10),
+					       0, gtksignal_connect(new Gtk::Button(_("     Previous   ")), clicked => sub { 
+						   ${$central_widget}->destroy();
+						   restore_step2();				
+					       }),
+					       1,  new Gtk::VBox(0,10),
+					       0,  gtksignal_connect(new Gtk::Button(_("     Next   ")), clicked => sub { 
+						   ${$central_widget}->destroy();
+					       }),
 					       ),
 				   ),
 	    );
@@ -1090,9 +1053,9 @@ sub restore_step2 {
 sub restore {
     my $retore_box;
     my $retore_box3;
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left2.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot2.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left2.png");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot2.png");
     my $check_restore_sys;
     my $check_restore_user;
     my $check_restore_other;
@@ -1102,9 +1065,9 @@ sub restore {
     if ($other_backuped || $sys_backuped || @user_backuped) {
 	gtkpack($up_box,
 	      $retore_box = gtkpack_(new Gtk::VBox(0,1),
-		0, new Gtk::Pixmap($pix_u_map, $pix_u_mask),
+		0, gtkpng('backup_title'),
 		1, gtkpack_(new Gtk::HBox(0, 0),
-		     0, new Gtk::Pixmap($pix_l_map, $pix_l_mask), 
+		     0, gtkpng('backup_left2'),
 		     1, gtkadd(new Gtk::Frame(_("Restoration Step.")),
 			       $retore_box2 = gtkpack(new Gtk::VBox(0,10),
 				   $retore_box3 = gtkpack_(new Gtk::VBox(0,10),
@@ -1121,7 +1084,7 @@ sub restore {
 						 ),
 				      1, new Gtk::HBox(0,10),
 						       ),),),),
-		      0, new Gtk::Pixmap($pix_r_map, $pix_r_mask),
+		      0, gtkpng('backup_bot2'),
 		      0, new Gtk::HSeparator,
 		      0, gtkpack_(new Gtk::HBox(0, 0),
 				  1, gtkpack_(new Gtk::HButtonBox,	
@@ -1192,16 +1155,16 @@ sub interactive_mode_my {
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
     
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
-    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("../pixmaps/backup_bot.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left.png");
+    my ($pix_r_map, $pix_r_mask) = gtkcreate_png("backup_bot.png");
     
     read_conf_file();    
     $backup_sys or $box_cgf_state_sys = _("Do not include System Files");    
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and bzip2 "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gzip"),   }
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and bzip"),   }
     if ($cfg_file_exist) { my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
 			   $box_cfg_state =  gtkpack(new Gtk::VBox( 0, 0),
 						     gtkset_justify( $label_cfg_file , 'left'),
@@ -1269,12 +1232,12 @@ sub after_adv {
     $window1->set_position(1);
     $window1->set_title(_("Drakbackup"));
     
-    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("../pixmaps/backup_title.png");
-    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("../pixmaps/backup_left.png");
-    my ($pix_b_map, $pix_b_mask) = gtkcreate_png("../pixmaps/backup_bot2.png");
-    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("../pixmaps/cdrom.png");
-    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("../pixmaps/hd.png");
-    my ($pix_quit_map, $pix_quit_mask) = gtkcreate_png("../pixmaps/quit.png");
+    my ($pix_u_map, $pix_u_mask) = gtkcreate_png("backup_title.png");
+    my ($pix_l_map, $pix_l_mask) = gtkcreate_png("backup_left.png");
+    my ($pix_b_map, $pix_b_mask) = gtkcreate_png("backup_bot2.png");
+    my ($pix_cd_map, $pix_cd_mask) = gtkcreate_png("cdrom.png");
+    my ($pix_hd2_map, $pix_hd2_mask) = gtkcreate_png("hd.png");
+    my ($pix_quit_map, $pix_quit_mask) = gtkcreate_png("quit.png");
     
     my $button_burn_cd = new Gtk::Button();
     $button_burn_cd->add( gtkpack(new Gtk::HBox( 0, 2),
@@ -1302,8 +1265,8 @@ sub after_adv {
     if ($option_replace) { $box_cgf_state_replace = _("Replace backups (do not update)"),
     } else { $box_cgf_state_replace = _("Update backups (do not replace)"),  }
     
-    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and bzip2 "),
-    } else { $box_cgf_state_comp = _("Backups use tar and gzip"),   }
+    if ($comp_mode) { $box_cgf_state_comp = _("Backups use tar and gunzip "),
+    } else { $box_cgf_state_comp = _("Backups use tar and gunzip"),   }
     
     if ($cfg_file_exist) { 
 	my $label_cfg_file = new Gtk::Label _("Backup Sources: \n-System Files: @sys_files \n-Users Files: @user_list\n-Other Files to backup: @list_other\nPath to save backups: $save_path\nOptions:\n$box_cgf_state_replace\n$box_cgf_state_comp\n$box_cgf_state_sys\n");
