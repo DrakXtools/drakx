@@ -22,7 +22,7 @@ my %languages = (
   'af'  => [ 'Afrikaans',		'iso-8859-1', 'af', 'af:en_ZA' ],
   'ar'  => [ 'Arabic',			'iso-8859-6', 'ar', 'ar' ],
   'az'  => [ 'Azeri (latin)',		'iso-8859-9e','az', 'az:tr' ],
-  'a3'  => [ 'Azeri (cyrillic)',	'koi8-c',     'a3', 'a3' ],
+#-'a3'  => [ 'Azeri (cyrillic)',	'koi8-c',     'a3', 'a3' ],
 'be_BY.CP1251' => [ 'Belarussian',	'cp1251',     'be', 'be:be_BY.CP1251:ru_RU.CP1251' ],
 #- provide aliases for some not very standard names used in po files...
 'bg_BG' => [ 'Bulgarian',		'cp1251',     'bg', 'bg:bg.CP1251:bg_BG.CP1251' ],
@@ -90,8 +90,9 @@ my %languages = (
   'sl'  => [ 'Slovenian',		'iso-8859-2', 'sl', 'sl' ],
   'sp'  => [ 'Serbian (Cyrillic)',	'iso-8859-5', 'sp', 'sp:sr' ],
   'sr'  => [ 'Serbian (Latin)',		'iso-8859-2', 'sr', 'sr' ],
-'sv@traditionell' => [ 'Swedish (traditional sorting [V = W])','iso-8859-1', 'sv', 'sv' ],
-'sv@ny' => [ 'Swedish (new sorting [V != W])','iso-8859-1', 'sv', 'sv' ],
+#-'sv@traditionell' => [ 'Swedish (traditional sorting [V = W])','iso-8859-1', 'sv', 'sv' ],
+#-'sv@ny' => [ 'Swedish (new sorting [V != W])','iso-8859-1', 'sv', 'sv' ],
+  'sv'  => [ 'Swedish','iso-8859-1', 'sv', 'sv' ],
 #-'ta'	=> [ 'Tamil',			'tscii-0',    'ta', 'ta' ],
   'tg'	=> [ 'Tajik',			'koi8-c',     'tg', 'tg' ],
   'th'  => [ 'Thai',                    'tis620',     'th', 'th' ],
@@ -105,7 +106,7 @@ my %languages = (
 				        'vi_VN.viscii:vi_VN.tcvn-viscii1.1-1:vi' ],
   'wa'  => [ 'Walon',     		'iso-8859-1', 'wa', 'wa:fr_BE:fr' ],
 #-'yi'	=> [ 'Yiddish',			'cp1255',     'yi', 'yi' ],
-'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh' ],
+'zh_TW.Big5' => [ 'Chinese (Big5)',     'Big5', 'zh_TW.Big5', 'zh_TW.Big5:zh_TW.big5:zh_TW:zh' ],
 'zh_CN' => [ 'Chinese (GuoBiao)',	'gb2312', 'zh_CN.GB2312', 'zh_CN.GB2312:zh_CN.gb2312:zh_CN:zh' ],
 );
 
@@ -255,6 +256,8 @@ my %charsets = (
 	"-*-*-*-*-*-*-*-*-*-*-*-*-isiri-3342" ],
   "tscii-0" => [ "tamil",		undef,		"trivial.trans",
 	"-*-*-*-*-*-*-*-*-*-*-*-*-tscii-0" ],
+  "unicode" => [ undef,			undef,		"trivial.trans",
+	"-*-*-*-*-*-*-*-*-*-*-*-*-iso10646-1" ],
 );
 
 #-######################################################################################
@@ -279,6 +282,7 @@ sub set {
 
 	    eval { commands::rm("-r", "$ENV{SHARE_PATH}/locale") };
 	    require 'run_program.pm';
+	    run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", "UTF-8");
 	    run_program::run("packdrake", "-x", "$ENV{SHARE_PATH}/locale.cz2", "$ENV{SHARE_PATH}/locale", $languages{$lang}[2]);
 	}
 
