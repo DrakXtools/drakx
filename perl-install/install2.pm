@@ -92,7 +92,7 @@ sub selectLanguage {
 
 sub acceptLicense {
     my ($_clicked, $_ent_number, $auto) = @_;
-    installStepsCall($o, $auto, 'acceptLicense');
+    installStepsCall($o, $auto, 'acceptLicense') if !$o->{useless_thing_accepted};
 }
 
 #------------------------------------------------------------------------------
