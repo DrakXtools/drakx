@@ -68,6 +68,8 @@ sub save_help {
 package help;
 use common;
 
+1;
+
 # IMPORTANT: Don't edit this File - It is automatically generated 
 #            from the manuals !!! 
 #            Write a mail to <documentation@mandrakesoft.com> if
