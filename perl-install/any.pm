@@ -411,7 +411,7 @@ sub get_autologin() {
 }
 
 sub set_autologin {
-    my ($user, $desktop) = @_;
+    my ($user, $wm) = @_;
     my $autologin = bool2text($user);
 
     #- Configure KDM / MDKKDM
@@ -426,18 +426,35 @@ sub set_autologin {
 	AutomaticLogin => $user,
     )) };
   
-    if ($user) {
-	my %l = getVarsFromSh("$::prefix/etc/sysconfig/desktop");
-	$l{DESKTOP} = $desktop;
-	setVarsInSh("$::prefix/etc/sysconfig/desktop", \%l);
-	log::l("cat $::prefix/etc/sysconfig/desktop ($desktop):\n", cat_("$::prefix/etc/sysconfig/desktop"));
-    }
     my $xdm_autologin_cfg = "$::prefix/etc/sysconfig/autologin";
-    if (member($desktop, 'KDE', 'GNOME')) {
+    if (member($wm, 'KDE', 'GNOME')) {
 	unlink $xdm_autologin_cfg;
     } else {
 	setVarsInShMode($xdm_autologin_cfg, 0644,
 			{ USER => $user, AUTOLOGIN => bool2yesno($user), EXEC => '/usr/X11R6/bin/startx.autologin' });
+    }
+
+    if ($user) {
+	my $home = (getpwnam($user))[7];
+	set_window_manager($home, $wm);
+    }
+}
+sub set_window_manager {
+    my ($home, $wm) = @_;
+    my $p_home = "$::prefix$home";
+
+    #- for KDM
+    output("$p_home/.wmrc", "$wm\n");
+
+    #- for GDM
+    mkdir_p("$p_home/.gnome2");
+    update_gnomekderc("$p_home/.gnome2/gdm", 'session', last => $wm);
+
+    #- for startx
+    {
+	my %l = getVarsFromSh("$p_home/.desktop");
+	$l{DESKTOP} = $wm;
+	setVarsInSh("$p_home/.desktop", \%l);
     }
 }
 
