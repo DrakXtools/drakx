@@ -384,6 +384,11 @@ sub getModem() {
 sub getSpeedtouch() {
     grep { $_->{description} eq 'Alcatel|USB ADSL Modem (Speed Touch)' } probeall();
 }
+
+sub getBewan() {
+    grep { $_->{description} eq 'Bewan Systems\|PCI ADSL Modem|BEWAN ADSL USB' } probeall();
+    
+}
 sub getSagem() {
     grep { member($_->{driver}, qw(adiusbadsl eagle-usb)) } probeall();
 }
