@@ -439,7 +439,7 @@ sub alert_config() {
                                 },
                         },
               };
-    $w->process($wiz);
+    $w->process($wiz, $in);
     
     $options{SERVICES} = join ':', grep { $services_to_check{$_} } sort keys %services_to_check;
 
