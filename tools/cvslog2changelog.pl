@@ -79,5 +79,6 @@ BEGIN {
 	      'warly'   => 'Warly  <warly@mandrakesoft.com>',
 	      'jgotti'  => 'Jonathan Gotti  <jgotti@mandrakesoft.com>',
 	      'fcrozat' => 'Frederic Crozat  <fcrozat@mandrakesoft.com>',
+	      'baudens' => 'David Baudens  <baudens@mandrakesoft.com>',
 	     );
 }
