@@ -117,12 +117,15 @@ sub write_interface_conf {
 
     my @ip = split '\.', $intf->{IPADDR};
     my @mask = split '\.', $intf->{NETMASK};
+    my $hwaddr = -e $prefix/sbin/ip ? `LC_ALL= LANG= $prefix/sbin/ip -o link show $intf` : undef;
+    if ($hwaddr) { chomp $hwaddr; $hwaddr =~ s/.*link\/ether\s([0-9a-z:]+)\s.*/$1/; }
     add2hash($intf, {
 		     BROADCAST => join('.', mapn { int $_[0] | ~int $_[1] & 255 } \@ip, \@mask),
 		     NETWORK   => join('.', mapn { int $_[0] &      $_[1]       } \@ip, \@mask),
 		     ONBOOT => bool2yesno(!member($intf->{DEVICE}, map { $_->{device} } detect_devices::probeall())),
+		     HWADDR => $hwaddr
 		    });
-    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT), ($intf->{wireless_eth}) ? qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV) : ());
+    setVarsInSh($file, $intf, qw(DEVICE BOOTPROTO IPADDR NETMASK NETWORK BROADCAST ONBOOT HWADDR), ($intf->{wireless_eth}) ? qw(WIRELESS_MODE WIRELESS_ESSID WIRELESS_NWID WIRELESS_FREQ WIRELESS_SENS WIRELESS_RATE WIRELESS_ENC_KEY WIRELESS_RTS WIRELESS_FRAG WIRELESS_IWCONFIG WIRELESS_IWSPY WIRELESS_IWPRIV) : ());
 }
 
 sub add2hosts {
