@@ -729,11 +729,10 @@ sub Resize {
     my $adjust = sub {
 	my ($write_partitions) = @_;
 
-	partition_table::will_tell_kernel($hd, resize => $part);
-
 	if (isLVM($hd)) {
 	    lvm::lv_resize($part, $oldsize);
 	} else {
+	    partition_table::will_tell_kernel($hd, resize => $part);
 	    partition_table::adjust_local_extended($hd, $part);
 	    partition_table::adjust_main_extended($hd);
 	    write_partitions($in, $hd) or return if $write_partitions && %nice_resize;
