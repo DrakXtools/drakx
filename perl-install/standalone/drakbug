@@ -154,7 +154,7 @@ gtkadd(
                          ),
                   gtkpack(new Gtk2::HSeparator),
                   gtkpack_(Gtk2::HBox->new(0,0),
-                           0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("$ENV{BROWSER} $help_url &") }),
+                           0, gtksignal_connect(Gtk2::Button->new(N("Help")), clicked => sub { system("drakhelp --id drakbug &") }),
                            1, Gtk2::Label->new(""),
                            0, gtksignal_connect(Gtk2::Button->new(N("Report")), clicked => sub {
 						   		if ($stable_release == 0) { 
