@@ -293,8 +293,8 @@ sub install_server {
     }
 
     my %proprietary_Driver2 = (
-	nvidia => [ 'NVIDIA_kernel', 'NVIDIA_GLX' ], #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
-	fglrx => [ 'ATI_kernel', 'ATI_GLX' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
+	nvidia => [ 'nvidia-kernel', 'nvidia' ], #- using NVIDIA driver (TNT, TN2 and GeForce cards only).
+	fglrx => [ 'ati-kernel', 'ati' ], #- using ATI fglrx driver (Radeon, Fire GL cards only).
     );
     if (my $rpms_needed = $proprietary_Driver2{$card->{Driver2}}) {
 	if (my $proprietary_packages = $do_pkgs->check_kernel_module_packages($rpms_needed->[0], $rpms_needed->[1])) {
