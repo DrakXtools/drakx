@@ -185,8 +185,7 @@ sub errorOpeningFile($) {
 }
 sub getFile {
     my ($f, $o_method, $o_altroot) = @_;
-    my $current_method = $o_method eq 'local' ? ''
-	: (($asked_medium ? $::o->{packages}{mediums}{$asked_medium}{method} : '') || $::o->{method});
+    my $current_method = ($asked_medium ? $::o->{packages}{mediums}{$asked_medium}{method} : '') || $::o->{method};
     log::l("getFile $f:$o_method ($asked_medium:$current_method)");
     my $rel = relGetFile($f);
     do {
@@ -217,7 +216,7 @@ sub getFile {
 sub getAndSaveFile {
     my ($file, $local) = @_ == 1 ? ("install/stage2/live$_[0]", $_[0]) : @_;
     local $/ = \ (16 * 1024);
-    my $f = ref($file) ? $file : getFile($file, 'local') or return;
+    my $f = ref($file) ? $file : getFile($file) or return;
     open(my $F, ">$local") or log::l("getAndSaveFile(opening $local): $!"), return;
     local $_;
     while (<$f>) { syswrite($F, $_) or die("getAndSaveFile($local): $!") }
