@@ -1101,7 +1101,9 @@ sub summary {
 	},
 	clicked => sub { 
 	    require network::drakfirewall;
-	    network::drakfirewall::main($o, $o->{security} <= 3);
+	    if (my @rc = network::drakfirewall::main($o, $o->{security} <= 3)) {
+		$o->{firewall_ports} = !$rc[0] && $rc[1];
+	    }
 	},
     } if detect_devices::getNet();
 

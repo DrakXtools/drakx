@@ -658,6 +658,21 @@ sub configureNetwork {
 	$o->{netcnx}{type} = 'lan';
 	$o->{netcnx}{$_} = $o->{netc}{$_} foreach qw(NET_DEVICE NET_INTERFACE);
     }
+
+    configure_firewall($o) if !$o->{isUpgrade};
+}
+
+sub configure_firewall {
+    my ($o) = @_;
+
+    if (!exists $o->{firewall_ports} && $o->{security} >= 3) {
+	require network::drakfirewall;
+	$o->{firewall_ports} = network::drakfirewall::default_ports($o->do_pkgs);
+    }
+    if ($o->{firewall_ports}) {
+	require network::drakfirewall;
+	network::drakfirewall::set_ports($o->do_pkgs, 0, $o->{firewall_ports});
+    }
 }
 
 #------------------------------------------------------------------------------
