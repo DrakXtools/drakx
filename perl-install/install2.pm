@@ -185,9 +185,6 @@ sub formatPartitions {
     devices::make("$o->{prefix}/dev/null");
     chmod 0666, "$o->{prefix}/dev/null";
 
-    #- TEMPORARY WORKAROUND (gc) try to workaround mkinitrd failed problems [mkinitrd called sometimes but I don't know where from :-(]
-    eval { modules::load("loop") };
-
     common::screenshot_dir__and_move();
 
     any::rotate_logs($o->{prefix});
