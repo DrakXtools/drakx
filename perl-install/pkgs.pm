@@ -1022,6 +1022,7 @@ sub install($$$;$$) {
 	$total += packageSize($pkg);
     }
 
+    log::l("pkgs::install $prefix");
     eval { fs::mount("/proc", "$prefix/proc", "proc", 0) } unless -e "$prefix/proc/cpuinfo";
 
     log::l("reading /usr/lib/rpm/rpmrc");

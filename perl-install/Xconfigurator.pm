@@ -1126,7 +1126,7 @@ sub main {
 	if ($::isStandalone && $0 =~ /Xdrakres/) {
 	    my $found;
 	    foreach (@window_managers) {
-		if (`pidof $_` > 0) {
+		if (`pidof "$_"` > 0) {
 		    if ($in->ask_okcancel('', _("Please relog into %s to activate the changes", ucfirst $_), 1)) {
 			system("kwmcom logout") if /kwm/;
 			system("dcop kdesktop default logout") if /kwin/;
@@ -1138,8 +1138,8 @@ sub main {
 			c::setsid();
 		        exec qw(perl -e), q{
                           my $wm = shift;
-  		          for (my $nb = 30; $nb && `pidof $wm` > 0; $nb--) { sleep 1 }
-  		          system("killall X") unless `pidof $wm` > 0;
+  		          for (my $nb = 30; $nb && `pidof "$wm"` > 0; $nb--) { sleep 1 }
+  		          system("killall X") unless `pidof "$wm"` > 0;
   		        }, $_;
 		    }
 		    $found = 1; last;

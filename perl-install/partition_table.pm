@@ -22,8 +22,8 @@ use partition_table_mac;
 use log;
 
 
-@important_types = ('Linux native', 'Linux swap', 'Win98 FAT32');
-@important_types2 = (arch() =~ /i.86/ ? 'ReiserFS' : (), 'Linux RAID');
+@important_types = ('Linux native', arch() =~ /i.86/ ? 'ReiserFS' : (), 'Linux swap', 'Win98 FAT32');
+@important_types2 = ('Linux RAID');
 
 @fields2save = qw(primary extended totalsectors isDirty needKernelReread);
 

@@ -93,10 +93,11 @@ sub getinfoFromXF86Config {
 	}
     }
     #- get the default resolution according the the current file.
-    my @depth = keys %{$o->{card}{depth}};
-    $o->{resolution_wanted} ||=
-      ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][0]) . "x" .
-	($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][1]);
+    if (my @depth = keys %{$o->{card}{depth}}) {
+	$o->{resolution_wanted} ||=
+	  ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][0]) . "x" .
+	    ($o->{card}{depth}{$o->{default_depth} || $depth[0]}[0][1]);
+    }
     $o;
 }
 
