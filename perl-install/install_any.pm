@@ -211,7 +211,7 @@ sub getNextStep {
 sub spawnShell {
     return if $::o->{localInstall} || $::testing;
 
-    -x "/bin/sh" or die "cannot open shell - /usr/bin/sh doesn't exist";
+    -x "/bin/sh" or die "cannot open shell - /bin/sh doesn't exist";
 
     fork and return;
 
