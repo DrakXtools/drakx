@@ -81,7 +81,7 @@ sub ask_info2 {
 		   if__($cnx->{phone_out}, { label => _("Provider phone number"), val => \$cnx->{phone_out} }),
 		   if__($netc->{dnsServer2}, { label => _("Provider dns 1 (optional)"), val => \$netc->{dnsServer2} }),
 		   if__($netc->{dnsServer3}, { label => _("Provider dns 2 (optional)"), val => \$netc->{dnsServer3} }),
-		   if__($netc->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'] }),
+		   if__($cnx->{vpivci}, { label => _("Choose your country"), val => \$netc->{vpivci}, list => ['Netherlands', 'France', 'Belgium', 'Italy', 'UK'] }),
 		   if__($cnx->{dialing_mode}, { label => _("Dialing mode"), val => \$cnx->{dialing_mode},list=>["auto","manual"]}),
 		   if__($cnx->{speed}, { label => _("Connection speed"), val => \$cnx->{speed}, list => ["64 Kb/s", "128 Kb/s"]}),
 		   if__($cnx->{huptimeout}, { label => _("Connection timeout (in sec)"), val => \$cnx->{huptimeout} }),

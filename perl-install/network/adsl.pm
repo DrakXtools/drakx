@@ -115,6 +115,7 @@ qq{noauth
 noipdefault
 pty "/usr/bin/pppoa2 -vpi $1 -vci $2"
 sync
+kdebug 1
 noaccomp
 nopcomp
 noccp
