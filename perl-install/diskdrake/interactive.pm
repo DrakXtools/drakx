@@ -268,6 +268,11 @@ sub Done {
 	$::expert or die;
 	$in->ask_okcancel('', [ formatError($err), N("Continue anyway?") ]) or return;
     }
+    if (my $part = find { $_->{mntpoint} && !maybeFormatted($_) } fs::get::fstab($all_hds)) {
+	$in->ask_okcancel('', N("You should format partition %s.
+Otherwise no entry for mount point %s will be written in fstab.
+Quit anyway?", $part->{device}, $part->{mntpoint})) or return;	
+    }
     foreach (@{$all_hds->{hds}}) {
 	if (!write_partitions($in, $_, 'skip_check_rebootNeeded')) {
 	    return if !$::isStandalone;
