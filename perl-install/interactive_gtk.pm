@@ -636,7 +636,7 @@ sub ask_browse_tree_info_refW {
     foreach my $ic (@{$common->{icons} || []}) {
 	push @toolbar, ( $ic->{icon} => [ $ic->{help}, sub {
 					     if ($ic->{code}) {
-						 my $w = $ic->{wait_msg} && $o->wait_message('', $ic->{wait_msg});
+						 my $w = $ic->{wait_message} && $o->wait_message('', $ic->{wait_message});
 						 $ic->{code}();
 						 $add_nodes->($common->{state}{flat});
 					     }
