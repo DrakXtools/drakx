@@ -109,7 +109,7 @@ sub xmouse2xId {
     my ($id) = @_;
     $id = 'BusMouse' if $id eq 'MouseMan';
     $id = 'IMPS/2' if $id eq 'ExplorerPS/2' && $::isInstall;
-    my $i; map_index { $_ eq $id and $i = $::i } @xmousetypes; $i;
+    find_index { $_ eq $id } @xmousetypes;
 }
 
 my %mouse_btn_keymap = (
