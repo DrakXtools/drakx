@@ -315,6 +315,8 @@ file /etc/sysconfig/harddrake2/previous_hw | fgrep -q perl && %_datadir/harddrak
 * Wed May 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.3mdk
 - drakboot, drakconnect, harddrake2, printerdrake: misc cleaning
 - drakconnect: fix #853 (check ip) (poulpy)
+- printerdrake: fix #1342 (english rephrasing)
+- requires: fix #3485
 
 * Tue May 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 9.2-0.2mdk
 - printerdrake: misc bug fixes
