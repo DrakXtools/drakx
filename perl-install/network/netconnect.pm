@@ -258,7 +258,7 @@ sub real_main {
                              (map {
                                  my ($dstruct, $field, $item) = @$_;
                                  $item->{val} = \$dstruct->{$field};
-                                 if__($dstruct->{$field}, $item);
+                                 if__(exists $dstruct->{$field}, $item);
                              } ([ $netcnx, "irq", { label => N("Card IRQ") } ],
                                 [ $netcnx, "mem", { label => N("Card mem (DMA)") } ],
                                 [ $netcnx, "io",  { label => N("Card IO") } ],
