@@ -208,12 +208,12 @@ sub key_parts {
 
     return () if $key_disabled;
 
-    my @keys = grep { $_->{usb_media_type} && index($_->{usb_media_type}, 'Mass Storage|') == 0 && $_->{media_type} eq 'hd' } @{$o->{all_hds}{hds}};
+    my @keys = grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{hds}};
     map_index { 
 	$_->{mntpoint} = $::i ? "/mnt/key$::i" : '/home';
 	$_->{options} = $key_mountopts;
         $_;
-    } fsedit::get_fstab(@keys);
+    } (fsedit::get_fstab(@keys), grep { detect_devices::isKeyUsb($_) } @{$o->{all_hds}{raw_hds}});
 }
     
 sub key_mount {
@@ -473,6 +473,7 @@ sub install_TrueFS_in_home {
         run_program::run('chown', '-R', "$user.$user", $dir);
         run_program::run('chown', '-R', "$user.$user", $cache);
 
+	$ENV{XAUTHORITY} = "$dir/.Xauthority";
 	$ENV{ICEAUTHORITY} = "$dir/.ICEauthority";
     }
 }
