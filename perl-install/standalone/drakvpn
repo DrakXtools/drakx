@@ -328,7 +328,7 @@ You can now :\n
   - commit the changes
 
 What would you like to do ?\n", $ipsec_conf),
-		[ N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
+		[ N_("_:display here is a verb\nDisplay"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 my $existing_section = "";
 
@@ -336,17 +336,17 @@ my $existing_section = "";
 
 step_display_ipsec_conf:
 
-if ($d eq "display $ipsec_conf" || $d eq "Display") {
+if ($d eq "display $ipsec_conf" || $d eq "_:display here is a verb\nDisplay") {
 	my $ipsec_exists = 0;
 	foreach my $key (keys %$ipsec) {
 		$ipsec_exists = 1 if  $ipsec->{$key};
 	};
 	if ($ipsec_exists) {
-		$in->ask_okcancel(N("Display configuration"),
+		$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
 		network::ipsec::display_ipsec_conf($ipsec,$kernel_version));
 		goto step_configure_ipsec_conf;
 	} else {
-$in->ask_okcancel(N("Display configuration"),
+$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
 N("The %s file does not exist.\n
 This must be a new configuration.\n
 You'll have to go back and choose 'add'.\n", $ipsec_conf));
@@ -689,15 +689,14 @@ You can now :
   - edit \t\t\t (modify parameters of an existing section)
   - remove \t\t (remove an existing section)
   - commit \t\t (writes the changes to the real file)"),
-		[ #-PO: here "display" is a verb, not a noun
-           N_("Display"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
+		[ N_("_:display here is a verb\nDisplay"), N_("Add"), N_("Edit"), N_("Remove"), N_("Commit") ]) or goto step_configuration;
 
 
 #- display $racoon_conf -------------------------
 
 step_display_racoon_conf:
 
-if ($d eq "Display") {
+if ($d eq "_:display here is a verb\nDisplay") {
 
 	my $racoon_exists = 0;
 	foreach my $key (keys %$racoon) {
@@ -705,11 +704,11 @@ if ($d eq "Display") {
 	};
 
 	if ($racoon_exists) {
-		$in->ask_okcancel(N("Display configuration"),
+		$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
 		network::ipsec::display_racoon_conf($racoon));
 		goto step_configure_racoon_conf;
 	} else {
-$in->ask_okcancel(N("Display configuration"),
+$in->ask_okcancel(N("_:display here is a verb\nDisplay configuration"),
 N("The %s file does not exist\n
 This must be a new configuration.\n
 You'll have to go back and choose configure.\n", $racoon_conf));
