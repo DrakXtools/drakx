@@ -38,6 +38,7 @@ use security::l10n;
 #/^-?-(\S+)$/ and $options{$1} = 1 foreach @ARGV;
 
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/draksec-mdk.png";
 my ($w, %fields);
 
 ############################    I18N     ###################################

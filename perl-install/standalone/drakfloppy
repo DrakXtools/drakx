@@ -32,6 +32,7 @@ use common;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use detect_devices;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakfloppy-mdk.png";
 require_root_capability();
 
 my $window = ugtk2->new('drakfloppy');

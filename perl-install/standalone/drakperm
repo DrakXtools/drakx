@@ -8,6 +8,7 @@ use standalone;
 use common;
 use ugtk2 qw(:helpers :wrappers :create);
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakperm-mdk.png";
 require_root_capability();
 local $_ = join '', @ARGV;
 

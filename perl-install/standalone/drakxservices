@@ -10,6 +10,7 @@ use interactive;
 use services;
 use log;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/service-mdk.png";
 my $in = 'interactive'->vnew('su');
 begin:
 my $l = services::ask($in);

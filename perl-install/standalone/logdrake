@@ -29,6 +29,7 @@ use interactive;
 use ugtk2 qw(:create :dialogs :helpers :wrappers);
 use vars qw(*F);
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/logdrake-mdk.png";
 my $in = 'interactive'->vnew('su');
 
 my ($isExplain, $Explain, $isFile, $File, $isWord, $Word);

@@ -20,6 +20,8 @@ my $timer;
 my $first = 1;
 my $its_reset = 0;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/time-mdk.png";
+
 #my $conffile = '/etc/sysconfig/ntpclock';
 my $ntpfile = '/etc/ntp.conf';
 my $ntpdlock = '/var/lock/subsys/ntpd';

@@ -23,6 +23,8 @@ use standalone;     #- warning, standalone must be loaded very first, for 'expla
 use interactive;
 use network::drakfirewall;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/firewall-mdk.png";
+
 my $in = 'interactive'->vnew('su');
 
 network::drakfirewall::main($in, undef);

@@ -25,6 +25,8 @@ use any;
 use interactive;
 use services;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakedm-mdk.png";
+
 my $in = 'interactive'->vnew('su');
 
 my $cfg_file = '/etc/sysconfig/desktop';

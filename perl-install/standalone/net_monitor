@@ -34,6 +34,8 @@ use network::tools;
 use MDK::Common::Globals "network", qw($in);
 use POSIX;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/net_monitor-mdk.png";
+
 if ("@ARGV" =~ /--status/) { print connected(); exit(0) }
 my $force = "@ARGV" =~ /--force/;
 my $quiet = "@ARGV" =~ /--quiet/;

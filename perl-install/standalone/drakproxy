@@ -26,6 +26,7 @@ use network::network;
 use any;
 use common;
 
+$ugtk2::wm_icon = "/usr/share/mcc/themes/default/drakproxy-mdk.png";
 my $u = { getVarsFromSh('/etc/profile.d/proxy.sh') };
 my $in = 'interactive'->vnew('su');
 network::network::miscellaneous_choose($in, $u);
