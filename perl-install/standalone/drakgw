@@ -22,10 +22,12 @@ use c;
 
 local $_ = join '', @ARGV;
 
-/-h/ and die "usage: drakgw [--expert]\n";
+/-h/ and die "usage: drakgw [--version]\n";
 /-v/ and die 'version: $Id$ '."\n";
 
-$::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^TYPE="?expert/m; #"
+# $::expert = /-expert/ || cat_("/etc/sysconfig/system") =~ /^CLASS="?expert/m; #"
+# $::expert and print "Running in expert mode.\n" and sleep 1;
+
 $::isStandalone = 1;
 
 my $in = vnew interactive('su');
@@ -33,7 +35,7 @@ my $in = vnew interactive('su');
 
 my $sysconf_network = "/etc/sysconfig/network";
 my $conf_linuxconf = "/etc/conf.linuxconf";
-my $rc_firewall = "/etc/rc.d/rc.firewall";
+my $rc_firewall = "/etc/rc.d/rc.firewall.inet_sharing";
 my $dhcpd_conf = "/etc/dhcpd.conf";
 
 
@@ -44,7 +46,7 @@ sub start_daemons()
     grep(/is running/, `/etc/rc.d/init.d/dhcpd status`) and ((system("/etc/rc.d/init.d/dhcpd stop") == 0) or die "Could not stop the dhcp server");
     grep(/Connection refused/, `/etc/rc.d/init.d/named status 2>&1`) or ((system("/etc/rc.d/init.d/named stop") == 0) or die "Could not stop the named server");
     (system("/etc/rc.d/init.d/network restart") == 0) or die "Could not restart the network";
-    (system("/etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
+    (system("sh /etc/rc.d/rc.firewall") == 0) or die "Could not start the firewall script";
     (system("/etc/rc.d/init.d/named start") == 0) or die "Could not start the caching nameserver";
     (system("/sbin/chkconfig --level 345 named on") == 0) or die "Could not chkconfig named";
     (system("/etc/rc.d/init.d/dhcpd start") == 0) or die "Could not start the dhcp server";
@@ -139,13 +141,17 @@ $in->ask_okcancel(_("Internet Connection Sharing"),
 #($#pci_ethernet_cards == -1) and $in->ask_warn('', _("No PCI network ethernet devices found!")) and $in->exit(0);
 #
 ##  push @pci_ethernet_cards, [ "NETWORK_ETHERNET", "Fake ne2000", "ne2k" ];
-#
-#my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg*`;
-#
+
+my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg*`;
+
 #my @active_devices = `/sbin/ifconfig | grep ^[a-z] | awk '{print \$1}'`; chop @active_devices;
 
 my %aliased_devices; (/^alias\s+(eth[0-9])\s+(\S+)/) and ($aliased_devices{$1} = $2) foreach (`cat /etc/modules.conf`);
-my @all_cards = map { "Interface $_ (using module $aliased_devices{$_})" } (keys %aliased_devices);
+my @cards_to_ignore = (); #= @{netconnect::configured_devices};
+log::l("Information from netconnect: ignoring card $_\n") foreach (@cards_to_ignore);
+my @all_cards;
+foreach my $dev (keys %aliased_devices)
+  { grep(/$dev/,@cards_to_ignore) or (push @all_cards, "Interface $dev (using module $aliased_devices{$dev})") };
 
  
 #  print "pci_detection: "; print ">".$_->[2]."< " foreach (@pci_ethernet_cards);
@@ -178,19 +184,19 @@ my $interface;
 if ($#all_cards == -1)
 {
     $in->ask_warn(_("No network adapter on your system!"), 
-		  _("No ethernet network adapter is currently configured on your system. Please run the hardware configuration tool."));
+		  _("No ethernet network adapter has been detected on your system. Please run the hardware configuration tool."));
     $in->exit(0);
 }
 elsif ($#all_cards == 0)
 {
     $interface = $all_cards[0];
-    $in->ask_okcancel(_("Network interface"),
-		      _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
+#    $::expert and $in->ask_okcancel(_("Network interface"),
+#				    _("There is only one configured network adapter on your system:\n\n$interface\n\nWould you like to setup your Local Area Network with that adapter?"), 1) or $in->exit(0);
 }
 else
 {
     $interface = $in->ask_from_list(_("Choose the network interface"),
-				    _("Please choose what network adapter will be connected\nto your Local Area Network."),
+				    _("Please choose what network adapter will be connected to your Local Area Network."),
 				    \@all_cards,
 				    );
     defined $interface or $in->exit(0);
@@ -198,21 +204,22 @@ else
 $interface =~ /(eth[0-9]+)/ or die("Internal error");
 my $device = $1;
 
+grep(/$device/, @configured_devices) and
+    ($in->ask_okcancel('', _("Warning, the network adapter is already configured.\nWould you like to reconfigure?")) or $in->exit(0));
+
 
 #- setup the address for the LAN
 
-my $lan_address = "192.168.0.0";
-$::expert and ($lan_address = $in->ask_from_entry(_("Local Area Network specification"),
-						  _("You may now decide which class C network to use.\n"),
-						  _("Network:"), $lan_address,
-						 ) or $in->exit(0));
-($lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/) or die "Invalid network.\n";
-$lan_address = $1;
+my $full_lan_address = "192.168.0.0";
+#$::expert and ($full_lan_address = $in->ask_from_entry(_("Local Area Network specification"),
+#						       _("You may now decide which class C network to use.\n"),
+#						       _("Network:"), $full_lan_address,
+#						       ) or $in->exit(0));
+($full_lan_address =~ /^([0-9]+\.[0-9]+\.[0-9]+)\.0$/) or die "Invalid network.\n";
+my $lan_address = $1;
 
 
 #- test for potential conflict with other networks
-
-my @configured_devices = map { /ifcfg-(\S+)/; $1 } `ls /etc/sysconfig/network-scripts/ifcfg-*`;
 
 foreach (@configured_devices)
 {
@@ -222,21 +229,27 @@ foreach (@configured_devices)
 	my $ifcfg = "/etc/sysconfig/network-scripts/ifcfg-$_";
 	open IFCFG, "$ifcfg" or die "Can't open $ifcfg";
 	my @ifcfg_content = <IFCFG>;
-	grep(/$lan_address/, @ifcfg_content) and $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and $in->exit(0);
+	grep(/$lan_address/, @ifcfg_content) and
+	    $in->ask_warn('', _("Potential LAN address conflict found in current config of $_!\n")) and $in->exit(0);
 	close IFCFG;
     }
 }
 
 
+#- test for potential conflict with previous firewall config
+
+my @chain_rules;
+(-f "/etc/sysconfig/ipchains" or ((-x "/sbin/ipchains") and (@chain_rules = `/sbin/ipchains -L`) and ($#chain_rules > 2)))
+    and ($in->ask_okcancel(_("Firewalling configuration detected!"),
+			   _("Warning! An existing firewalling configuration has been detected. You may need some manual fix after installation. Proceed?"), 1) or $in->exit(0));
+
+
 #- ask for confirmation
-
-$in->ask_okcancel(_("Internet Connection Sharing - setup of $device"),
-		  _("The following interface is about to be configured:\n\n$interface\n\n".
-		    "It will be setup on a Local Area Network ($lan_address.0); additionnally, IP forwarding ".
-		    "and masquerading will be enabled, together with a DHCP server.\n".
-		    "You will then be able to connect other computers to this network, with automatic ".
-		    "DHCP configuration."), 1) or $in->exit(0);
-
+#
+#$in->ask_okcancel(_("Internet Connection Sharing - setup"),
+#		  _("The local network is about to be configured.\n") .
+#		    "You will then be able to connect other computers to this network, with automatic ".
+#		    "DHCP configuration."), 1) or $in->exit(0);
 
 
 #- **********************************
@@ -267,6 +280,30 @@ close IFCFG;
 my $f = "/sbin/ipchains";
 -e $f or system("urpmi --auto ipchains");
 -e $f or ($in->ask_warn('', _("Could not install ipchains RPM with urpmi.")) and $in->exit(0));
+
+if (-f "/etc/rc.d/rc.firewall")
+{
+    local *RCFIREWALL;
+    open RCFIREWALL, "/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
+    my @rcfirewall_content = <RCFIREWALL>;
+    close RCFIREWALL;
+    grep(/\/etc\/rc\.d\/rc\.firewall\.inet_sharing/, @rcfirewall_content) or push @rcfirewall_content, "# Added by drakgw\n[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing\n";
+    open RCFIREWALL, ">/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
+    print RCFIREWALL @rcfirewall_content;
+    close RCFIREWALL;
+}
+else
+{
+    local *RCFIREWALL; open RCFIREWALL, ">/etc/rc.d/rc.firewall" or die "Can't open /etc/rc.d/rc.firewall";
+    print RCFIREWALL <<EOF;
+#!/bin/sh
+#
+# Automatically generated by drakgw
+
+[ -x /etc/rc.d/rc.firewall.inet_sharing ] && /etc/rc.d/rc.firewall.inet_sharing
+EOF
+    chmod 0700, "/etc/rc.d/rc.firewall";
+}
 
 -f $rc_firewall and rename($rc_firewall, "$rc_firewall.old");
 local *RCFIREWALL; open RCFIREWALL, ">$rc_firewall" or die "Can't open $rc_firewall";
@@ -448,11 +485,7 @@ start_daemons();
 
 undef $wait_configuring;
 
--f "/etc/sysconfig/ipchains" and $in->ask_warn(_("Firewalling configuration detected.!"),
-					       _("Warning! An existing firewalling configuration has been detected.\n".
-						 "It will probably override forwarding and masquerading configuration, please fix."));
-
-$in->ask_warn(_("Everything configured!"), 
+$in->ask_warn(_("Congratulations!"), 
 	      _("Everything has been configured.\n".
 		"You may now share Internet connection with other computers on your Local Area Network, ".
 		"using automatic network configuration (DHCP)."));
