@@ -338,6 +338,8 @@ sub make_menuentry {
 	    my $number = $1;
 	    $connection = N(", multi-function device on parallel port #%s",
 			    $number);
+	} elsif ($ptaldevice =~ /^mlc:par:/) {
+	    $connection = N(", multi-function device on a parallel port");
 	} elsif ($ptaldevice =~ /^mlc:usb:/) {
 	    $connection = N(", multi-function device on USB");
 	} elsif ($ptaldevice =~ /^hpjd:/) {
@@ -387,6 +389,8 @@ sub connectionstr {
 	    my $number = $1;
 	    $connection = N("Multi-function device on parallel port #%s",
 			    $number);
+	} elsif ($ptaldevice =~ /^mlc:par:/) {
+	    $connection = N("Multi-function device on a parallel port");
 	} elsif ($ptaldevice =~ /^mlc:usb:/) {
 	    $connection = N("Multi-function device on USB");
 	} elsif ($ptaldevice =~ /^hpjd:/) {
