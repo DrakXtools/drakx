@@ -507,13 +507,6 @@ sub read_printer_db(;$) {
 
     #- Load CUPS driver database if CUPS is used as spooler
     if ($spooler && $spooler eq "cups" && $::expert) {
-
-	#&$install('cups-drivers') unless $::testing;
-	#my $w;
-	#if ($in) {
-	#    $w = $in->wait_message(N("CUPS starting"),
-	#			   N("Reading CUPS drivers database..."));
-	#}
         poll_ppd_base();
     }
 
@@ -1421,124 +1414,129 @@ sub get_direct_uri {
     @direct_uri;
 }
 
+sub ppd_entry_str {
+    my ($mf, $descr, $lang) = @_;
+    my ($model, $driver);
+    if ($descr) {
+	# Apply the beautifying rules of poll_ppd_base
+	if ($descr =~ /Foomatic \+ Postscript/) {
+	    $descr =~ s/Foomatic \+ Postscript/PostScript/;
+	} elsif ($descr =~ /Foomatic/) {
+	    $descr =~ s/Foomatic/GhostScript/;
+	} elsif ($descr =~ /CUPS\+GIMP-print/) {
+	    $descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/;
+	} elsif ($descr =~ /Series CUPS/) {
+	    $descr =~ s/Series CUPS/Series, CUPS/;
+	} elsif ($descr !~ /(PostScript|GhostScript|CUPS|Foomatic)/i) {
+	    $descr .= ", PostScript";
+	}
+	# Split model and driver
+	$descr =~ s/\s*Series//i;
+	$descr =~ s/\((.*?(PostScript|PS.*).*?)\)/$1/i;
+	if (($descr =~ /^([^,]+[^,\s])\s*(\(v?\d\d\d\d\.\d\d\d\).*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s+(PS.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*(PostScript.*)$/i) ||
+	    ($descr =~ /^([^,]+[^,\s])\s*(v\d+\.\d+.*)$/i) ||
+	    ($descr =~ /^([^,]+),\s*(.+)$/)) {
+	    $model = $1;
+	    $driver = $2;
+	    $model =~ s/[\-\s,]+$//;
+	    $driver =~ s/\b(PS|PostScript\b)/PostScript/gi;
+	    $driver =~ s/(PostScript)(.*)(PostScript)/$1$2/i;
+	    $driver =~ 
+	      s/^\s*(\(v?\d\d\d\d\.\d\d\d\)|v\d+\.\d+)([,\s]*)(.*)/$3$2$1/i;
+	    $driver =~ s/,\s*\(/ \(/g;
+	    $driver =~ s/[\-\s,]+$//;
+	    $driver =~ s/^[\-\s,]+//;
+	    $driver =~ s/\s+/ /g;
+	    if ($driver !~ /[a-z]/i) {
+		$driver = "PostScript " . $driver;
+		$driver =~ s/ $//;
+	    }
+	} else {
+	    # Some PPDs do not have the ", <driver>" part.
+	    $model = $descr;
+	    $driver = "PostScript";
+	}
+    }
+    # Rename Canon "BJC XXXX" models into "BJC-XXXX" so that the 
+    # models do not appear twice
+    if ($mf eq "CANON") {
+	$model =~ s/BJC\s+/BJC-/;
+    }
+    # Remove manufacturer's name from the beginning of the model
+    # name
+    $model =~ s/^$mf[\s\-]+// if $mf;
+    # Clean some manufacturer's names
+    $mf =~ s/^HEWLETT[\s\-]*PACKARD/HP/i;
+    $mf =~ s/^SEIKO[\s\-]*EPSON/EPSON/i;
+    $mf =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
+    $mf =~ s/^CITOH/C.ITOH/i;
+    $mf =~ s/^OKI([\s\-]*DATA|)/OKIDATA/i;
+    # Put out the resulting description string
+    uc($mf) . '|' . $model . '|' . $driver .
+      ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
+}
+
 sub get_descr_from_ppd {
     my ($printer) = @_;
     my %ppd;
 
     #- if there is no ppd, this means this is a raw queue.
     eval {
-	   local $_;
-	   foreach (cat_("$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd")) {
-		  # "OTHERS|Generic PostScript printer|PostScript (en)";
-		  /^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and do { $ppd{$1} = $2; next };
-		  /^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and do { $ppd{$1} = $2; next };
-	   }
+	local $_;
+	foreach (cat_("$::prefix/etc/cups/ppd/$printer->{OLD_QUEUE}.ppd")) {
+	    # "OTHERS|Generic PostScript printer|PostScript (en)";
+	    /^\*([^\s:]*)\s*:\s*\"([^\"]*)\"/ and
+		do { $ppd{$1} = $2; next };
+	    /^\*([^\s:]*)\s*:\s*([^\s\"]*)/   and
+		do { $ppd{$1} = $2; next };
+	}
     } or return "|" . N("Unknown model");
 
     my $descr = ($ppd{NickName} || $ppd{ShortNickName} || $ppd{ModelName});
-    # Apply the beautifying rules of poll_ppd_base
-    if ($descr =~ /Foomatic \+ Postscript/) {
-	$descr =~ s/Foomatic \+ Postscript/PostScript/;
-    } elsif ($descr =~ /Foomatic/) {
-	$descr =~ s/Foomatic/GhostScript/;
-    } elsif ($descr =~ /CUPS\+GIMP-print/) {
-	$descr =~ s/CUPS\+GIMP-print/CUPS \+ GIMP-Print/;
-    } elsif ($descr =~ /Series CUPS/) {
-	$descr =~ s/Series CUPS/Series, CUPS/;
-    } elsif (!(uc($descr) =~ /POSTSCRIPT/)) {
-	$descr .= ", PostScript";
-    }
-
-    # Split the $descr into model and driver
-    my $model;
-    my $driver;
-    if ($descr =~ /^([^,]+), (.*)$/) {
-	$model = $1;
-	$driver = $2;
-    } else {
-	# Some PPDs do not have the ", <driver>" part.
-	$model = $descr;
-	$driver = "PostScript";
-    }
     my $make = $ppd{Manufacturer};
     my $lang = $ppd{LanguageVersion};
-
-    # Remove manufacturer's name from the beginning of the model name
-    $model = s/^$make[\s\-]+// if $make;
-
-    # Put out the resulting description string
-    uc($make) . '|' . $model . '|' . $driver .
-      ($lang && " (" . lc(substr($lang, 0, 2)) . ")");
+    return ppd_entry_str($make, $descr, $lang);
 }
 
 sub poll_ppd_base {
-    #- before trying to poll the ppd database available to cups, we have to make sure
-    #- the file /etc/cups/ppds.dat is no more modified.
-    #- if cups continue to modify it (because it reads the ppd files available), the
-    #- poll_ppd_base program simply cores :-)
-    run_program::rooted($::prefix, "ifconfig lo 127.0.0.1"); #- else cups will not be happy! and ifup lo don't run ?
+    #- Before trying to poll the ppd database available to cups, we have 
+    #- to make sure the file /etc/cups/ppds.dat is no more modified.
+    #- If cups continue to modify it (because it reads the ppd files 
+    #- available), the poll_ppd_base program simply cores :-)
+    # else cups will not be happy! and ifup lo don't run ?
+    run_program::rooted($::prefix, "ifconfig lo 127.0.0.1");
     printer::services::start_not_running_service("cups");
     my $driversthere = scalar(keys %thedb);
     foreach (1..60) {
-	local *PPDS; open PPDS, ($::testing ? $::prefix : "chroot $::prefix/ ") . "/usr/bin/poll_ppd_base -a |";
+	local *PPDS; open PPDS, ($::testing ? $::prefix :
+				 "chroot $::prefix/ ") . 
+				 "/usr/bin/poll_ppd_base -a |";
 	local $_;
 	while (<PPDS>) {
 	    chomp;
 	    my ($ppd, $mf, $descr, $lang) = split /\|/;
 	    if ($ppd eq "raw") { next }
-	    my ($model, $driver);
-	    if ($descr) {
-		$descr =~ s/\s*Series//i;
-		$descr =~ s/\((.*?(PostScript|PS).*?)\)/$1/i;
-		if (($descr =~ /^([^,]+[^,\s])\s+(PS.*)$/i) ||
-		    ($descr =~ /^([^,]+[^,\s])\s*(PostScript.*)$/i) ||
-		    ($descr =~ 
-		     /^([^,]+[^,\s])\s*(\(\d\d\d\d\.\d\d\d\).*)$/i) ||
-		    ($descr =~ 
-		     /^([^,]+[^,\s])\s*(v\d+\.\d+.*)$/i) ||
-		    ($descr =~ /^([^,]+), (.*)$/)) {
-		    $model = $1;
-		    $driver = $2;
-		    $model =~ s/[\-\s,]+$//;
-		    $driver =~
-			s/\b(PS|PostScript\b)/PostScript/gi;
-		    $driver =~
-			s/(PostScript)(.*)(PostScript)/$1$2/i;
-		    $driver =~ 
-			s/^\s*(\(\d\d\d\d\.\d\d\d\)|v\d+\.\d+)([,\s]*)(.*)/$3$2$1/;
-		    $driver =~ s/[\-\s,]+$//;
-		    $driver =~ s/^[\-\s,]+//;
-		    if ($driver !~ /[a-z]/i) {
-			$driver = "PostScript " . $driver;
-			$driver =~ s/ $//;
-		    }
-		} else {
-		    # Some PPDs do not have the ", <driver>" part.
-		    $model = $descr;
-		    $driver = "PostScript";
-		}
-	    }
-	    # Rename Canon "BJC XXXX" models into "BJC-XXXX" so that the models
-	    # do not appear twice
-	    if ($mf eq "CANON") {
-		$model =~ s/BJC\s+/BJC-/;
-	    }
 	    $ppd && $mf && $descr and do {
-		my $key = "$mf|$model|$driver" . ($lang && " ($lang)");
-		$key =~ s/^KYOCERA[\s\-]*MITA/KYOCERA/i;
+		my $key = ppd_entry_str($mf, $descr, $lang);
+		$key =~ /^[^\|]\|([^\|])\|([^\|])\|/;
+		my ($model, $driver) = ($1, $2);
 	        $thedb{$key}{ppd} = $ppd;
-		$thedb{$key}{driver} = $driver;
 		$thedb{$key}{make} = $mf;
 		$thedb{$key}{model} = $model;
+		$thedb{$key}{driver} = $driver;
 	    }
 	}
 	close PPDS;
 	scalar(keys %thedb) - $driversthere > 5 and last;
-	#- we have to try again running the program, wait here a little before.
+	#- we have to try again running the program, wait here a little 
+	#- before.
 	sleep 1; 
     }
 
-    #scalar(keys %descr_to_ppd) > 5 or die "unable to connect to cups server";
+    #scalar(keys %descr_to_ppd) > 5 or 
+    #  die "unable to connect to cups server";
 
 }
 
@@ -1622,10 +1620,11 @@ sub configure_queue($) {
     # Check whether a USB printer is configured and activate USB printing if so
     my $useUSB = 0;
     foreach (values %{$printer->{configured}}) {
-	$useUSB ||= $_->{queuedata}{connect} =~ /usb/ || 
-	    $_->{DeviceURI} =~ /usb/;
+	$useUSB ||= (($_->{queuedata}{connect} =~ /usb/i) || 
+	    ($_->{DeviceURI} =~ /usb/i));
     }
-    $useUSB ||= $printer->{currentqueue}{queue}{queuedata}{connect} =~ /usb/;
+    $useUSB ||= ($printer->{currentqueue}{queue}{queuedata}{connect} =~ 
+	/usb/i);
     if ($useUSB) {
 	my $f = "$::prefix/etc/sysconfig/usb";
 	my %usb = getVarsFromSh($f);
