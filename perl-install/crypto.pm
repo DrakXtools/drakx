@@ -8,7 +8,7 @@ use common;
 use log;
 use ftp;
 
-my %url2lang = (
+my %url2land = (
 		fr => _("France"),
 		cr => _("Costa Rica"),
 		be => _("Belgium"),
@@ -17,6 +17,17 @@ my %url2lang = (
 		gr => _("Grece"),
 		no => _("Norway"),
 		se => _("Sweden"),
+	       );
+
+my %land2tzs = (
+		_("France") => [ 'Europe/Paris', 'Europe/Brussels', 'Europe/Berlin' ],
+		_("Belgium") => [ 'Europe/Brussels', 'Europe/Paris', 'Europe/Berlin' ],
+		_("Czech Republic") => [ 'Europe/Prague', 'Europe/Berlin' ],
+		_("Germany") => [ 'Europe/Berlin', 'Europe/Prague' ],
+		_("Grece") => [ 'Europe/Athens', 'Europe/Prague' ],
+		_("Norway") => [ 'Europe/Oslo', 'Europe/Stockholm' ],
+		_("Sweden") => [ 'Europe/Stockholm', 'Europe/Oslo' ],
+		_("United States") => [ 'America/New_York', 'Canada/Atlantic', 'Asia/Tokyo', 'Australia/Sydney', 'Europe/Paris' ],
 	       );
 
 my %static_mirrors = (
@@ -44,12 +55,12 @@ sub mirrors {
 	    my ($arch, $url, $dir) = m|updates([^:]*):ftp://([^/]*)(/\S*)| or next;
 	    MDK::Common::System::compat_arch($arch) or
 		log::l("ignoring updates from $url because of incompatible arch: $arch"), next;
-	    my $lang = _("United States");
-	    foreach (keys %url2lang) {
+	    my $land = _("United States");
+	    foreach (keys %url2land) {
 		my $qu = quotemeta $_;
-		$url =~ /\.$qu(?:\..*)?$/ and $lang = $url2lang{$_};
+		$url =~ /\.$qu(?:\..*)?$/ and $land = $url2land{$_};
 	    }
-	    $mirrors{$url} = [ $lang, $dir ];
+	    $mirrors{$url} = [ $land, $dir ];
 	}
 	http::getFile('/XXX'); #- close connection.
 
@@ -57,6 +68,30 @@ sub mirrors {
 	add2hash(\%mirrors, \%static_mirrors);
     }
     keys %mirrors;
+}
+
+sub bestMirror {
+    my ($string) = @_;
+    my %mirror2value;
+
+    foreach my $url (mirrors()) {
+	my $value = 0;
+	my $cvalue = mirrors();
+
+	$mirror2value{$url} ||= 1 + $cvalue;
+	foreach (@{$land2tzs{$mirrors{$url}[0]} || []}) {
+	    $_ eq $string and $mirror2value{$url} > $value and $mirror2value{$url} = $value;
+	    (split '/')[0] eq (split '/', $string)[0] and $mirror2value{$url} > $cvalue and $mirror2value{$url} = $cvalue;
+	    ++$value;
+	}
+    }
+    my ($min_value) = sort { $a <=> $b } values %mirror2value;
+
+    my @possible = grep { $mirror2value{$_} == $min_value } keys %mirror2value;
+    push @possible, grep { $mirror2value{$_} == $min_value } keys %mirror2value;
+    push @possible, grep { $mirror2value{$_} == 1 + $min_value } keys %mirror2value;
+
+    $possible[rand @possible];
 }
 
 #sub dir { $mirrors{$_[0]}[1] . '/' . $::VERSION }
