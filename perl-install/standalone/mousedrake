@@ -40,7 +40,7 @@ $mouse->{device} = mouse::serial_ports_names2dev(
 			   [ mouse::serial_ports_names() ])) if $mouse->{device} eq "ttyS";
 
 mouse::write('', $mouse);
-modules::write_conf("/etc/conf.modules") if $mouse->{device} eq "usbmouse" && !$::testing;
+modules::write_conf('') if $mouse->{device} eq "usbmouse" && !$::testing;
 
 my $f = "/etc/X11/XF86Config";
 my $g = "/etc/X11/XF86Config-4";

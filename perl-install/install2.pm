@@ -482,7 +482,7 @@ sub addUser {
 #------------------------------------------------------------------------------
 #-PADTODO
 sub createBootdisk {
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
 
     $o->createBootdisk($_[1] == 1);
 }
@@ -491,7 +491,7 @@ sub createBootdisk {
 sub setupBootloader {
     return if $::g_auto_install;
 
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
 
     $o->setupBootloaderBefore if $_[1] == 1;
     $o->setupBootloader($_[1] - 1);
@@ -505,7 +505,7 @@ sub configureX {
 
     #- done here and also at the end of install2.pm, just in case...
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
 
     $o->setupXfree if pkgs::packageFlagInstalled(pkgs::packageByName($o->{packages}, 'XFree86')) || $clicked;
 }
@@ -728,7 +728,7 @@ sub main {
     install_any::ejectCdrom();
 
     fs::write($o->{prefix}, $o->{fstab}, $o->{manualFstab}, $o->{useSupermount});
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
 
     #- to ensure linuxconf doesn't cry against those files being in the future
     foreach ('/etc/conf.modules', '/etc/crontab', '/etc/sysconfig/mouse', '/etc/X11/fs/config') {

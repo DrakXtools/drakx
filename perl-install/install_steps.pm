@@ -25,7 +25,7 @@ use any;
 use fs;
 
 @filesToSaveForUpgrade = qw(
-/etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules
+/etc/ld.so.conf /etc/fstab /etc/hosts /etc/conf.modules /etc/modules.conf
 );
 
 
@@ -965,7 +965,7 @@ sub upNetwork {
 	symlinkf("$o->{prefix}/etc/$_", "/etc/$_");
     }
 
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
     if ($o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::up_it($o->{prefix}, $o->{intf});
     } elsif (!$pppAvoided && $o->{modem} && !$o->{modem}{isUp}) {
@@ -983,7 +983,7 @@ sub upNetwork {
 sub downNetwork {
     my ($o, $pppOnly) = @_;
 
-    modules::write_conf("$o->{prefix}/etc/conf.modules");
+    modules::write_conf($o->{prefix});
     if (!$pppOnly && $o->{intf} && $o->{netc}{NETWORKING} ne 'false') {
 	network::down_it($o->{prefix}, $o->{intf});
     } elsif ($o->{modem} && $o->{modem}{isUp}) {

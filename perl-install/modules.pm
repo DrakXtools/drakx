@@ -487,7 +487,10 @@ sub read_conf($;$) {
 }
 
 sub write_conf {
-    my ($file) = @_;
+    my ($prefix) = @_;
+    my $file = "$prefix/etc/modules.conf";
+
+    rename "$prefix/etc/conf.modules", $file; #- make the switch to new name if needed
 
     #- remove the post-install supermount stuff. We may have to add some more
     substInFile { $_ = '' if /^post-install supermount/ } $file;
