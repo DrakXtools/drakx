@@ -62,7 +62,6 @@ $::isEmbedded && ref($in) =~ /gtk/ or goto dd;
 
 require ugtk2;
 ugtk2->import(qw(:helpers :wrappers :create));
-my $expert_mode = 0;
 network::netconnect::read_net_conf('', $netcnx, $netc);
 modules::load_category('net');
 my @all_cards = network::ethernet::conf_network_card_backend($netc, $intf);
@@ -157,9 +156,6 @@ $int_connect->signal_connect(clicked => sub {
     update2();
 });
 
-my $button_internet = gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
-                                clicked => sub { configure_net('', $netcnx, $netc, $intf) });
-
 my $tree_model = Gtk2::TreeStore->new("Gtk2::Gdk::Pixbuf", map { "Glib::String" } 2..6);
 my $list = Gtk2::TreeView->new_with_model($tree_model);
 $list->append_column(Gtk2::TreeViewColumn->new_with_attributes(undef, Gtk2::CellRendererPixbuf->new, 'pixbuf' => 0));
@@ -176,8 +172,6 @@ $list->signal_connect(button_press_event => sub {
 
 
 build_list();
-
-my $button_lan = gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")), clicked => \&configure_lan);
 
 my ($bbox0, $label_host, $int_state, $button_expert);
 
@@ -206,7 +200,8 @@ $window1->{window}->add(
                                                                            5),
                                                     0, $warning_label1,
                                                     0, gtkpack(Gtk2::HButtonBox->new,
-                                                               $button_internet,
+                                                               gtksignal_connect(Gtk2::Button->new(N("Configure Internet Access...")),
+                                                                                 clicked => sub { configure_net('', $netcnx, $netc, $intf) }),
                                                                $int_connect,
                                                               ),
                                                     )
@@ -216,15 +211,12 @@ $window1->{window}->add(
                                                     0, $list,
                                                     0, new Gtk2::HBox(0,0),
                                                     0, gtkpack_(new Gtk2::HBox(0, 0),
-                                                                0, $button_lan),
+                                                                0, gtksignal_connect(Gtk2::Button->new(N("Configure Local Area Network...")),
+                                                                                     clicked => \&configure_lan),
+                                                               ),
                                                     )
                                            ),
                                  0, gtkadd(Gtk2::HButtonBox->new,
-                                           $button_expert = gtksignal_connect(new Gtk2::CheckButton(N("Expert Mode")),
-                                                                              clicked => sub {
-                                                                                  $expert_mode = $button_expert->get_active;
-                                                                                  $_->set_sensitive($expert_mode) foreach $button_internet, $button_lan;
-                                                                              }),
                                            gtksignal_connect(Gtk2::Button->new(N("Launch the wizard")),
                                                              clicked => sub {
                                                                  system("drakconnect&");
@@ -262,8 +254,6 @@ $window1->{window}->add(
                         );
 
 
-$button_expert->set_active($expert_mode);
-
 $combo1->signal_connect(realize => sub {
                             $combo1->entry->signal_connect(changed => sub {
                                                                #connected() and disconnect_backend();
@@ -276,7 +266,6 @@ $combo1->signal_connect(realize => sub {
 });
 
 $window1->{rwindow}->show_all;
-$_->set_sensitive(0) foreach $button_internet, $button_lan;
 gtkflush();
 my $tag = Glib::Timeout->add(4000, \&update2);
 $window1->main;
